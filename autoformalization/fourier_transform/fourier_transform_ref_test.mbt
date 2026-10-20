@@ -80809,871 +80809,871 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|4 basis elements and 0 critical pairs
       #|Generating HOL version of proof
       #|Autoformalization/fourier_transform quotations (2067):
-      #|  fourier (f:real->complex) (y:real) =\n    (Cx(&1) / Cx(sqrt(&2 * pi))) *\n    integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))
-      #|  fourier_kernel (y:real) (x:real) = cexp(--(ii * Cx y * Cx x))
-      #|  (\\x. cexp(--(ii * Cx y * Cx(drop x))) * (c * f(drop x))) =\n      (\\x. c * (cexp(--(ii * Cx y * Cx(drop x))) * f(drop x)))
-      #|  integral (:real^1)\n             (\\x. cexp(--(ii * Cx y * Cx(drop x))) * (c * f(drop x))) =\n    c * integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))
-      #|  forall f c y.\n        (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n        integrable_on (:real^1)\n        ==> fourier (\\x. c * f x) y = c * fourier f y
-      #|  (\\x. cexp(--(ii * Cx y * Cx(drop x))) * (f(drop x) + g(drop x))) =\n      (\\x. (cexp(--(ii * Cx y * Cx(drop x))) * f(drop x)) +\n           (cexp(--(ii * Cx y * Cx(drop x))) * g(drop x)))
-      #|  integral (:real^1)\n             (\\x. cexp(--(ii * Cx y * Cx(drop x))) * (f(drop x) + g(drop x))) =\n    integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x)) +\n    integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * g(drop x))
-      #|  forall f g y.\n        (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n        integrable_on (:real^1) /\\\n        (\\x. cexp(--(ii * Cx y * Cx(drop x))) * g(drop x))\n        integrable_on (:real^1)\n        ==> fourier (\\x. f x + g x) y = fourier f y + fourier g y
-      #|  forall y. fourier (\\x. Cx(&0)) y = Cx(&0)
-      #|  IMAGE (\\x:real^1. lift c + x) (:real^1) = (:real^1)
-      #|  lift c
-      #|  (:real^1)
-      #|  \\x:real^1. (G:real->complex)(drop x)
-      #|  forall G:real->complex c.\n     integral (:real^1) (\\x. G(c + drop x)) =\n     integral (:real^1) (\\x. G(drop x))
-      #|  cexp(--(ii * Cx y * Cx(drop x - c))) =\n                  cexp(ii * Cx c * Cx y) *\n                  cexp(--(ii * Cx y * Cx(drop x)))
-      #|  forall x:real^1. cexp(--(ii * Cx y * Cx(drop x - c))) * f(drop x) =\n               cexp(ii * Cx c * Cx y) *\n               (cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))
-      #|  forall c x:real. (c + x) - c = x
-      #|  integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x + c)) =\n    integral (:real^1)\n      (\\x. (\\u. cexp(--(ii * Cx y * Cx(u - c))) * (f:real->complex)\n                u)(c + drop x))
-      #|  integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x + c)) =\n    cexp(ii * Cx c * Cx y) *\n    integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))
-      #|  forall f c y.\n        (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n        integrable_on (:real^1)\n   ==> fourier (\\x. f(x + c)) y = cexp(ii * Cx c * Cx y) * fourier f y
-      #|  x:real^1
-      #|  forall f c y. fourier (\\x. cexp(ii * Cx c * Cx x) * f x) y = fourier f (y - c)
-      #|  --(ii * Cx y * Cx x) = ii * Cx(--(y * x))
-      #|  forall y x. norm(cexp(--(ii * Cx y * Cx x))) = &1
-      #|  x:real^1
-      #|  norm(Cx(&1) / Cx(sqrt(&2 * pi))) = &1 / sqrt(&2 * pi)
-      #|  forall f y.\n        (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n        integrable_on (:real^1) /\\\n        (\\x. lift(norm(f(drop x)))) integrable_on (:real^1)\n   ==> norm(fourier f y) <=\n       (&1 / sqrt(&2 * pi)) *\n       drop(integral (:real^1) (\\x. lift(norm(f(drop x)))))
-      #|  IMAGE (--) (:real^1) = (:real^1)
-      #|  (:real^1)
-      #|  \\x:real^1. (G:real->complex)(drop x)
-      #|  forall G:real->complex.\n     integral (:real^1) (\\x. G(--(drop x))) =\n     integral (:real^1) (\\x. G(drop x))
-      #|  integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(--drop x)) =\n    integral (:real^1)\n      (\\x. (\\u. cexp(ii * Cx y * Cx u) * (f:real->complex) u)(--(drop x)))
-      #|  forall f y. fourier (\\x. f(--x)) y = fourier f (--y)
-      #|  &0 < c ==> abs c = c
-      #|  c % z:real^1
-      #|  z:real^1
-      #|  IMAGE (\\x:real^1. inv c % x) (:real^1) = (:real^1)
-      #|  vec 0:real^1
-      #|  c:real
-      #|  (:real^1)
-      #|  integral (:real^1) (\\x:real^1. (G:real->complex)(drop x))
-      #|  \\x:real^1. (G:real->complex)(drop x)
-      #|  forall G:real->complex c. &0 < c /\\ (\\x. G(drop x)) integrable_on (:real^1)\n   ==> integral (:real^1) (\\x. G(c * drop x)) =\n       (&1 / c) % integral (:real^1) (\\x. G(drop x))
-      #|  z:complex
-      #|  integral (:real^1)\n                     (\\x. cexp(--(ii * Cx (y/c) * Cx(drop x))) *\n                          (f:real->complex)(drop x))
-      #|  Cx(y / c) * Cx c = Cx y
-      #|  integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(c * drop x)) =\n    integral (:real^1)\n      (\\x. (\\u. cexp(--(ii * Cx (y/c) * Cx u)) * (f:real->complex)\n                u)(c * drop x))
-      #|  forall f c y.\n        &0 < c /\\\n        (\\x. cexp(--(ii * Cx (y/c) * Cx(drop x))) * f(drop x))\n        integrable_on (:real^1)\n   ==> fourier (\\x. f(c * x)) y = Cx(&1 / c) * fourier f (y / c)
-      #|  ii * Cx a * Cx x = (ii * Cx x) * Cx a
-      #|  forall x:real yy y. (yy ---> y) sequentially\n   ==> ((\\k. --(ii * Cx (yy k) * Cx x)) --> --(ii * Cx y * Cx x))\n       sequentially
-      #|  \\k. --(ii * Cx ((yy:num->real) k) * Cx x)
-      #|  --(ii * Cx y * Cx x)
+      #|  (fourier : ((Real) -> Cart[Real, Tybit0[Unit]], Real) -> Cart[Real, Tybit0[Unit]])((f : (Real) -> Cart[Real, Tybit0[Unit]]), (y : Real)) == Cx(real_of_num(1)) / Cx(sqrt(real_of_num(2) * pi)) * integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)))
+      #|  (fourier_kernel : (Real, Real) -> Cart[Real, Tybit0[Unit]])((y : Real), (x : Real)) == cexp(-(ii * (Cx(y) * Cx(x))))
+      #|  ((x : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(x))))) * ((c : Cart[Real, Tybit0[Unit]]) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)))) == ((x : Cart[Real, Unit]) => c * (cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x))))
+      #|  integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(x))))) * ((c : Cart[Real, Tybit0[Unit]]) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)))) == c * integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)), UNIV) \226\134\146 fourier((x : Real) => c * f(x), y) == c * fourier(f, y)
+      #|  ((x : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(x))))) * ((f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)) + (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)))) == ((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)) + cexp(-(ii * (Cx(y) * Cx(drop(x))))) * g(drop(x)))
+      #|  integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(x))))) * ((f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)) + (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)))) == integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x))) + integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * g(drop(x)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)), UNIV) && integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * g(drop(x)), UNIV) \226\134\146 fourier((x : Real) => f(x) + g(x), y) == fourier(f, y) + fourier(g, y)
+      #|  \226\136\128 y : Real, fourier((x : Real) => Cx(real_of_num(0)), y) == Cx(real_of_num(0))
+      #|  IMAGE((x : Cart[Real, Unit]) => lift((c : Real)) + x, UNIV) == UNIV
+      #|  lift((c : Real))
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (x : Cart[Real, Unit]) => (G : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x))
+      #|  \226\136\128 G : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Real, integral(UNIV, (x : Cart[Real, Unit]) => G(c + drop(x))) == integral(UNIV, (x : Cart[Real, Unit]) => G(drop(x)))
+      #|  cexp(-(ii * (Cx((y : Real)) * Cx(drop((x : Cart[Real, Unit])) - (c : Real))))) == cexp(ii * (Cx(c) * Cx(y))) * cexp(-(ii * (Cx(y) * Cx(drop(x)))))
+      #|  \226\136\128 x : Cart[Real, Unit], cexp(-(ii * (Cx((y : Real)) * Cx(drop(x) - (c : Real))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)) == cexp(ii * (Cx(c) * Cx(y))) * (cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)))
+      #|  \226\136\128 c : Real, \226\136\128 x : Real, c + x - c == x
+      #|  integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(x))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x) + (c : Real))) == integral(UNIV, (x : Cart[Real, Unit]) => ((u : Real) => cexp(-(ii * (Cx(y) * Cx(u - c)))) * f(u))(c + drop(x)))
+      #|  integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(x))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x) + (c : Real))) == cexp(ii * (Cx(c) * Cx(y))) * integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Real, \226\136\128 y : Real, integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)), UNIV) \226\134\146 fourier((x : Real) => f(x + c), y) == cexp(ii * (Cx(c) * Cx(y))) * fourier(f, y)
+      #|  (x : Cart[Real, Unit])
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Real, \226\136\128 y : Real, fourier((x : Real) => cexp(ii * (Cx(c) * Cx(x))) * f(x), y) == fourier(f, y - c)
+      #|  -(ii * (Cx((y : Real)) * Cx((x : Real)))) == ii * Cx(-(y * x))
+      #|  \226\136\128 y : Real, \226\136\128 x : Real, norm(cexp(-(ii * (Cx(y) * Cx(x))))) == real_of_num(1)
+      #|  (x : Cart[Real, Unit])
+      #|  norm(Cx(real_of_num(1)) / Cx(sqrt(real_of_num(2) * pi))) == real_of_num(1) / sqrt(real_of_num(2) * pi)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)), UNIV) && integrable_on((x : Cart[Real, Unit]) => lift(norm(f(drop(x)))), UNIV) \226\134\146 norm(fourier(f, y)) <= real_of_num(1) / sqrt(real_of_num(2) * pi) * drop(integral(UNIV, (x : Cart[Real, Unit]) => lift(norm(f(drop(x))))))
+      #|  (IMAGE : ((Cart[Real, Unit]) -> Cart[Real, Unit], (Cart[Real, Unit]) -> Bool, Cart[Real, Unit]) -> Bool)((op_minus_minus : (Cart[Real, Unit]) -> Cart[Real, Unit]), (UNIV : (Cart[Real, Unit]) -> Bool)) == (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (x : Cart[Real, Unit]) => (G : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x))
+      #|  \226\136\128 G : (Real) -> Cart[Real, Tybit0[Unit]], integral(UNIV, (x : Cart[Real, Unit]) => G(-drop(x))) == integral(UNIV, (x : Cart[Real, Unit]) => G(drop(x)))
+      #|  integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(x))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(-drop(x))) == integral(UNIV, (x : Cart[Real, Unit]) => ((u : Real) => cexp(ii * (Cx(y) * Cx(u))) * f(u))(-drop(x)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, fourier((x : Real) => f(-x), y) == fourier(f, -y)
+      #|  real_of_num(0) < (c : Real) \226\134\146 abs(c) == c
+      #|  op_pct((c : Real), (z : Cart[Real, Unit]))
+      #|  (z : Cart[Real, Unit])
+      #|  IMAGE((x : Cart[Real, Unit]) => op_pct(inv((c : Real)), x), UNIV) == UNIV
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (c : Real)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  integral(UNIV, (x : Cart[Real, Unit]) => (G : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)))
+      #|  (x : Cart[Real, Unit]) => (G : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x))
+      #|  \226\136\128 G : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Real, real_of_num(0) < c && integrable_on((x : Cart[Real, Unit]) => G(drop(x)), UNIV) \226\134\146 integral(UNIV, (x : Cart[Real, Unit]) => G(c * drop(x))) == op_pct(real_of_num(1) / c, integral(UNIV, (x : Cart[Real, Unit]) => G(drop(x))))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real) / (c : Real)) * Cx(drop(x))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)))
+      #|  Cx((y : Real) / (c : Real)) * Cx(c) == Cx(y)
+      #|  integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(x))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])((c : Real) * drop(x))) == integral(UNIV, (x : Cart[Real, Unit]) => ((u : Real) => cexp(-(ii * (Cx(y / c) * Cx(u)))) * f(u))(c * drop(x)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Real, \226\136\128 y : Real, real_of_num(0) < c && integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y / c) * Cx(drop(x))))) * f(drop(x)), UNIV) \226\134\146 fourier((x : Real) => f(c * x), y) == Cx(real_of_num(1) / c) * fourier(f, y / c)
+      #|  ii * (Cx((a : Real)) * Cx((x : Real))) == ii * Cx(x) * Cx(a)
+      #|  \226\136\128 x : Real, \226\136\128 yy : (Num) -> Real, \226\136\128 y : Real, op_minus_minus_minus_gt(yy, y, sequentially) \226\134\146 op_minus_minus_gt((k : Num) => -(ii * (Cx(yy(k)) * Cx(x))), -(ii * (Cx(y) * Cx(x))), sequentially)
+      #|  (k : Num) => -(ii * (Cx((yy : (Num) -> Real)(k)) * Cx((x : Real))))
+      #|  -(ii * (Cx((y : Real)) * Cx((x : Real))))
       #|  cexp
-      #|  forall x:real yy y. (yy ---> y) sequentially\n   ==> ((\\k. cexp(--(ii * Cx (yy k) * Cx x))) -->\n        cexp(--(ii * Cx y * Cx x))) sequentially
-      #|  a * b = b * a
-      #|  --(ii * Cx (yy(k:num)) * Cx(drop(x:real^1))) =\n                      ii * Cx(--(yy k * drop x))
-      #|  norm(cexp(--(ii * Cx (yy(k:num)) * Cx(drop(x:real^1))))) = &1
-      #|  (:real^1)
-      #|  \\x. lift(norm((f:real->complex)(drop x)))
-      #|  \\x. cexp(--(ii * Cx y * Cx(drop x))) * (f:real->complex)(drop x)
-      #|  \\k x. cexp(--(ii * Cx ((yy:num->real) k) * Cx(drop x))) *\n           (f:real->complex)(drop x)
-      #|  forall f y. (forall y'. (\\x. cexp(--(ii * Cx y' * Cx(drop x))) * f(drop x))\n               integrable_on (:real^1)) /\\\n         (\\x. lift(norm(f(drop x)))) integrable_on (:real^1)\n   ==> forall yy. (yy ---> y) sequentially\n       ==> ((\\k. integral (:real^1)\n                          (\\x. cexp(--(ii * Cx (yy k) * Cx(drop x))) *\n                               f(drop x)))\n            --> integral (:real^1)\n                         (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x)))\n           sequentially
-      #|  y:real
-      #|  f:real->complex
-      #|  yy:num->real
-      #|  forall f y. (forall y'. (\\x. cexp(--(ii * Cx y' * Cx(drop x))) * f(drop x))\n               integrable_on (:real^1)) /\\\n         (\\x. lift(norm(f(drop x)))) integrable_on (:real^1)\n   ==> forall yy. (yy ---> y) sequentially\n       ==> ((\\k. fourier f (yy k)) --> fourier f y) sequentially
-      #|  ~(ii * Cx b = Cx(&0))
-      #|  forall b y. ~(b = &0)\n     ==> ((\\y. cexp(ii * Cx b * Cx(drop y)) / (ii * Cx b))\n          has_vector_derivative\n          cexp(ii * Cx b * Cx(drop y))) (at y)
+      #|  \226\136\128 x : Real, \226\136\128 yy : (Num) -> Real, \226\136\128 y : Real, op_minus_minus_minus_gt(yy, y, sequentially) \226\134\146 op_minus_minus_gt((k : Num) => cexp(-(ii * (Cx(yy(k)) * Cx(x)))), cexp(-(ii * (Cx(y) * Cx(x)))), sequentially)
+      #|  (a : Cart[Real, Tybit0[Unit]]) * (b : Cart[Real, Tybit0[Unit]]) == b * a
+      #|  -(ii * (Cx((yy : (Num) -> Real)((k : Num))) * Cx(drop((x : Cart[Real, Unit]))))) == ii * Cx(-(yy(k) * drop(x)))
+      #|  norm(cexp(-(ii * (Cx((yy : (Num) -> Real)((k : Num))) * Cx(drop((x : Cart[Real, Unit]))))))) == real_of_num(1)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (x : Cart[Real, Unit]) => lift(norm((f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x))))
+      #|  (x : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(x))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x))
+      #|  (k : Num) => (x : Cart[Real, Unit]) => cexp(-(ii * (Cx((yy : (Num) -> Real)(k)) * Cx(drop(x))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, (\226\136\128 y' : Real, integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y') * Cx(drop(x))))) * f(drop(x)), UNIV)) && integrable_on((x : Cart[Real, Unit]) => lift(norm(f(drop(x)))), UNIV) \226\134\146 (\226\136\128 yy : (Num) -> Real, op_minus_minus_minus_gt(yy, y, sequentially) \226\134\146 op_minus_minus_gt((k : Num) => integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx(yy(k)) * Cx(drop(x))))) * f(drop(x))), integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x))), sequentially))
+      #|  (y : Real)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (yy : (Num) -> Real)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, (\226\136\128 y' : Real, integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y') * Cx(drop(x))))) * f(drop(x)), UNIV)) && integrable_on((x : Cart[Real, Unit]) => lift(norm(f(drop(x)))), UNIV) \226\134\146 (\226\136\128 yy : (Num) -> Real, op_minus_minus_minus_gt(yy, y, sequentially) \226\134\146 op_minus_minus_gt((k : Num) => fourier(f, yy(k)), fourier(f, y), sequentially))
+      #|  !(ii * Cx((b : Real)) == Cx(real_of_num(0)))
+      #|  \226\136\128 b : Real, \226\136\128 y : Cart[Real, Unit], !(b == real_of_num(0)) \226\134\146 has_vector_derivative((y : Cart[Real, Unit]) => cexp(ii * (Cx(b) * Cx(drop(y)))) / (ii * Cx(b)), cexp(ii * (Cx(b) * Cx(drop(y)))), at(y))
       #|  (f has_complex_derivative f') net
-      #|  ii * Cx(&2) * Q * inv ii = Cx(&2) * Q
-      #|  (P + ii * Q) - (P + ii * --Q) = ii * (Cx(&2) * Q)
-      #|  forall P Q w. ~(w = Cx(&0))\n     ==> (P + ii * Q) / (ii * w) - (P + ii * (--Q)) / (ii * w) =\n         Cx(&2) * Q / w
-      #|  Cx b
-      #|  Cx(sin(a*b))
-      #|  Cx(cos(a*b))
-      #|  ii * Cx b * Cx a = ii * Cx(a * b) /\\\n                ii * Cx b * Cx(--a) = ii * Cx(--(a * b))
-      #|  forall a b. ~(b = &0)\n     ==> cexp(ii * Cx b * Cx a) / (ii * Cx b) -\n         cexp(ii * Cx b * Cx(--a)) / (ii * Cx b) =\n         Cx(&2 * sin(a * b) / b)
-      #|  lift a
-      #|  lift(--a)
-      #|  \\y. cexp(ii * Cx b * Cx(drop y))
-      #|  \\y. cexp(ii * Cx b * Cx(drop y)) / (ii * Cx b)
-      #|  forall a b. &0 <= a /\\ ~(b = &0)\n     ==> integral (interval[lift(--a), lift a])\n                  (\\y. cexp(ii * Cx b * Cx(drop y))) =\n         Cx(&2 * sin(a * b) / b)
-      #|  sinc x = if x = &0 then &1 else sin x / x
-      #|  x':real
-      #|  abs x
-      #|  \\x. sin x / x
-      #|  &1
-      #|  \\x. sin x / x
-      #|  sinc(&0) = &1
-      #|  x = &0
-      #|  forall x. sinc real_continuous atreal x
-      #|  forall s. sinc real_continuous_on s
-      #|  forall a b. sinc real_integrable_on real_interval[a,b]
-      #|  (\\t. sinc(c * t)) = sinc o (\\t. c * t)
-      #|  forall c a b. (\\t. sinc(c * t)) real_integrable_on real_interval[a,b]
-      #|  ~(c = &0) /\\ ~(x = &0) ==> sin (c * x) / x = c * sin (c * x) / (c * x)
-      #|  {&0}
-      #|  \\t. c * sinc(c * t)
-      #|  forall c a b. &0 < c ==> (\\t. sin(c * t) / t) real_integrable_on\n   real_interval[a,b]
-      #|  c:real
-      #|  c:real
-      #|  b:real
-      #|  a:real
-      #|  \\x:real. --(inv x)
+      #|  ii * (Cx(real_of_num(2)) * ((Q : Cart[Real, Tybit0[Unit]]) * inv(ii))) == Cx(real_of_num(2)) * Q
+      #|  (P : Cart[Real, Tybit0[Unit]]) + ii * (Q : Cart[Real, Tybit0[Unit]]) - (P + ii * -Q) == ii * (Cx(real_of_num(2)) * Q)
+      #|  \226\136\128 P : Cart[Real, Tybit0[Unit]], \226\136\128 Q : Cart[Real, Tybit0[Unit]], \226\136\128 w : Cart[Real, Tybit0[Unit]], !(w == Cx(real_of_num(0))) \226\134\146 (P + ii * Q) / (ii * w) - (P + ii * -Q) / (ii * w) == Cx(real_of_num(2)) * (Q / w)
+      #|  Cx((b : Real))
+      #|  Cx(sin((a : Real) * (b : Real)))
+      #|  Cx(cos((a : Real) * (b : Real)))
+      #|  ii * (Cx((b : Real)) * Cx((a : Real))) == ii * Cx(a * b) && ii * (Cx(b) * Cx(-a)) == ii * Cx(-(a * b))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, !(b == real_of_num(0)) \226\134\146 cexp(ii * (Cx(b) * Cx(a))) / (ii * Cx(b)) - cexp(ii * (Cx(b) * Cx(-a))) / (ii * Cx(b)) == Cx(real_of_num(2) * (sin(a * b) / b))
+      #|  lift((a : Real))
+      #|  lift(-(a : Real))
+      #|  (y : Cart[Real, Unit]) => cexp(ii * (Cx((b : Real)) * Cx(drop(y))))
+      #|  (y : Cart[Real, Unit]) => cexp(ii * (Cx((b : Real)) * Cx(drop(y)))) / (ii * Cx(b))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) <= a && !(b == real_of_num(0)) \226\134\146 integral(interval([(lift(-a), lift(a))]), (y : Cart[Real, Unit]) => cexp(ii * (Cx(b) * Cx(drop(y))))) == Cx(real_of_num(2) * (sin(a * b) / b))
+      #|  (sinc : (Real) -> Real)((x : Real)) == (if x == real_of_num(0) { real_of_num(1) } else { sin(x) / x })
+      #|  (x' : Real)
+      #|  abs((x : Real))
+      #|  (x : Real) => sin(x) / x
+      #|  real_of_num(1)
+      #|  (x : Real) => sin(x) / x
+      #|  sinc(real_of_num(0)) == real_of_num(1)
+      #|  (x : Real) == real_of_num(0)
+      #|  \226\136\128 x : Real, real_continuous(sinc, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, real_continuous_on(sinc, s)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on(sinc, real_interval([(a, b)]))
+      #|  ((t : Real) => sinc((c : Real) * t)) == o(sinc, (t : Real) => c * t)
+      #|  \226\136\128 c : Real, \226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on((t : Real) => sinc(c * t), real_interval([(a, b)]))
+      #|  !((c : Real) == real_of_num(0)) && !((x : Real) == real_of_num(0)) \226\134\146 sin(c * x) / x == c * (sin(c * x) / (c * x))
+      #|  {real_of_num(0)}
+      #|  (t : Real) => (c : Real) * sinc(c * t)
+      #|  \226\136\128 c : Real, \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < c \226\134\146 real_integrable_on((t : Real) => sin(c * t) / t, real_interval([(a, b)]))
+      #|  (c : Real)
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => -inv(x)
       #|  sin
-      #|  forall a b. &0 < a /\\ a <= b\n   ==> ?c. c IN real_interval[a,b] /\\\n           real_integral (real_interval[a,b]) (\\x. --(inv x) * sin x) =\n           --(inv a) * real_integral (real_interval[a,c]) sin +\n           --(inv b) * real_integral (real_interval[c,b]) sin
-      #|  --cos c - --cos a = cos a - cos c
-      #|  c:real
-      #|  a:real
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < a && a <= b \226\134\146 (\226\136\131 c : Real, IN(c, real_interval([(a, b)])) && real_integral(real_interval([(a, b)]), (x : Real) => -inv(x) * sin(x)) == -inv(a) * real_integral(real_interval([(a, c)]), sin) + -inv(b) * real_integral(real_interval([(c, b)]), sin))
+      #|  -cos((c : Real)) - -cos((a : Real)) == cos(a) - cos(c)
+      #|  (c : Real)
+      #|  (a : Real)
       #|  sin
-      #|  \\x. --(cos x)
-      #|  forall a c. a <= c ==> real_integral (real_interval[a,c]) sin = cos a - cos c
-      #|  forall a b. &0 < a ==> (\\x. sin x / x) real_integrable_on real_interval[a,b]
-      #|  (\\x. --(inv x) * sin x) = (\\x. --(sin x / x))
-      #|  forall a b. &0 < a\n   ==> real_integral (real_interval[a,b]) (\\x. --(inv x) * sin x) =\n       --(real_integral (real_interval[a,b]) (\\x. sin x / x))
-      #|  abs i = i
-      #|  abs i * &2
-      #|  forall i d:real. &0 < i /\\ abs d <= &2 ==> abs(i * d) <= &2 * i
-      #|  abs u <= &2 * inv a /\\ abs v <= &2 * inv b ==> abs(u + v) <= &2 * inv a +\n     &2 * inv b
-      #|  c:real
-      #|  b:real
-      #|  a:real
-      #|  &0 < inv a /\\ &0 < inv b
-      #|  real_integral (real_interval[a,b]) (\\x. sin x / x) =\n                inv a * (cos a - cos c) + inv b * (cos c - cos b)
-      #|  b:real
-      #|  c:real
-      #|  c:real
-      #|  a:real
-      #|  b:real
-      #|  a:real
-      #|  c:real
-      #|  b:real
-      #|  a:real
-      #|  forall a b. &0 < a /\\ a <= b\n   ==> abs(real_integral (real_interval[a,b]) (\\x. sin x / x)) <= &2 * inv a +\n     &2 * inv b
-      #|  real_interval[a:real,b]
-      #|  {&0}
-      #|  \\x. sin x / x
+      #|  (x : Real) => -cos(x)
+      #|  \226\136\128 a : Real, \226\136\128 c : Real, a <= c \226\134\146 real_integral(real_interval([(a, c)]), sin) == cos(a) - cos(c)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < a \226\134\146 real_integrable_on((x : Real) => sin(x) / x, real_interval([(a, b)]))
+      #|  ((x : Real) => -inv(x) * sin(x)) == ((x : Real) => -(sin(x) / x))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < a \226\134\146 real_integral(real_interval([(a, b)]), (x : Real) => -inv(x) * sin(x)) == -real_integral(real_interval([(a, b)]), (x : Real) => sin(x) / x)
+      #|  abs((i : Real)) == i
+      #|  abs((i : Real)) * real_of_num(2)
+      #|  \226\136\128 i : Real, \226\136\128 d : Real, real_of_num(0) < i && abs(d) <= real_of_num(2) \226\134\146 abs(i * d) <= real_of_num(2) * i
+      #|  abs((u : Real)) <= real_of_num(2) * inv((a : Real)) && abs((v : Real)) <= real_of_num(2) * inv((b : Real)) \226\134\146 abs(u + v) <= real_of_num(2) * inv(a) + real_of_num(2) * inv(b)
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  real_of_num(0) < inv((a : Real)) && real_of_num(0) < inv((b : Real))
+      #|  real_integral(real_interval([((a : Real), (b : Real))]), (x : Real) => sin(x) / x) == inv(a) * (cos(a) - cos((c : Real))) + inv(b) * (cos(c) - cos(b))
+      #|  (b : Real)
+      #|  (c : Real)
+      #|  (c : Real)
+      #|  (a : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < a && a <= b \226\134\146 abs(real_integral(real_interval([(a, b)]), (x : Real) => sin(x) / x)) <= real_of_num(2) * inv(a) + real_of_num(2) * inv(b)
+      #|  real_interval([((a : Real), (b : Real))])
+      #|  {real_of_num(0)}
+      #|  (x : Real) => sin(x) / x
       #|  sinc
-      #|  forall a b. (\\x. sin x / x) real_integrable_on real_interval[a,b]
-      #|  ~(c = &0) ==> inv c * --(c * p) = --p
-      #|  ~(c = &0) ==> inv c * (c * p) = p
-      #|  &0 <= inv c
-      #|  ~(c = &0) /\\ &0 <= c * p
-      #|  forall c p. &0 < c /\\ &0 <= p\n     ==> IMAGE (\\x. inv c * x) (real_interval[--(c*p),c*p]) =\n       real_interval[--p,p]
-      #|  ~(c = &0) /\\ ~(x = &0) ==> sin (c * x) / x = c * sin (c * x) / (c * x)
-      #|  {&0}
-      #|  \\x. c * sin (c * x) / (c * x)
-      #|  inv(abs c) = inv c
-      #|  c * inv(abs c) *\n     real_integral (real_interval[--(c*p),c*p]) (\\x. sin x / x) =\n     real_integral (real_interval[--(c*p),c*p]) (\\x. sin x / x)
-      #|  c:real
-      #|  c:real
-      #|  c*p:real
-      #|  --(c*p):real
-      #|  real_integral (real_interval[--(c*p),c*p]) (\\x. sin x / x)
-      #|  \\x. sin x / x
-      #|  forall c p. &0 < c /\\ &0 <= p\n     ==> real_integral (real_interval[--(c*p), c*p]) (\\x. sin x / x) =\n         real_integral (real_interval[--p,p]) (\\t. sin(c * t) / t)
-      #|  &0 <= --(sin u) ==> sin u <= &0
-      #|  s <= &0 ==> abs s = --s
-      #|  ~(&0 <= u) ==> abs u = --u
-      #|  &0 <= u ==> abs u = u
-      #|  &0 <= u
-      #|  forall u. abs u <= pi ==> abs(sin u) = sin(abs u)
-      #|  abs(sin(t / &2)) = sin(abs(t / &2))
-      #|  forall t. &1 <= abs t /\\ abs t <= pi ==> sin(&1 / &2) <= abs(sin(t / &2))
-      #|  n:real
-      #|  n:real
-      #|  x / &2
-      #|  sin(x / &2) = &0
-      #|  x:real
-      #|  IMAGE (\\n. &2 * n * pi) integer
-      #|  inv x = &1 / x
-      #|  (\\t. inv t - inv(&2 * sin(t / &2))) real_measurable_on\n   real_interval[--pi,pi]
-      #|  inv(&2 * sin(&1 / &2))
-      #|  abs(inv(&2 * sin(t / &2))) <= inv(sin(&1 / &2))
-      #|  abs(inv t) <= &1
-      #|  &0 < sin(&1 / &2)
-      #|  sin(&1 / &2) <= abs(sin(t / &2))
-      #|  t / &2
-      #|  ~(t = &0) /\\ ~(sin(t / &2) = &0)\n      ==> inv t - inv(&2 * sin(t / &2)) =\n          --(&1 / &2) * (inv(sin(t / &2)) - inv(t / &2))
-      #|  t / &2
-      #|  ~(sin(t / &2) = &0)
-      #|  abs t <= &1
-      #|  inv(&0) - inv(&2 * sin(&0 / &2)) = &0
-      #|  t = &0
-      #|  &0 <= &2 * inv(sin(&1 / &2))
-      #|  forall t. t IN real_interval[--pi,pi]\n       ==> abs(inv t - inv(&2 * sin(t / &2))) <= &2 + &2 * inv(sin(&1 / &2))
-      #|  x:real
-      #|  &0
-      #|  &2 + &2 * inv(sin(&1 / &2)) + &1
-      #|  (\\t. (inv t - inv(&2 * sin(t / &2))) * &1) absolutely_real_integrable_on\n    real_interval[--pi,pi]
-      #|  (\\t. inv t - inv(&2 * sin(t / &2))) absolutely_real_integrable_on\n   real_interval[--pi,pi]
-      #|  &1
-      #|  forall n. (\\t. sin((&n + &1 / &2) * t) * (inv t - inv(&2 * sin(t / &2))))\n       real_integrable_on real_interval[--pi,pi]
-      #|  n:num
-      #|  {&0}
-      #|  dirichlet_kernel n
-      #|  forall n. (\\t. sin((&n + &1 / &2) * t) / (&2 * sin(t / &2)))\n       real_integrable_on real_interval[--pi,pi]
-      #|  real_interval[--pi,pi]
-      #|  n:num
-      #|  \\x:real. &1
-      #|  forall n. real_integral (real_interval[--pi,pi])\n         (\\t. sin((&n + &1 / &2) * t) / (&2 * sin(t / &2))) = pi
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on((x : Real) => sin(x) / x, real_interval([(a, b)]))
+      #|  !((c : Real) == real_of_num(0)) \226\134\146 inv(c) * -(c * (p : Real)) == -p
+      #|  !((c : Real) == real_of_num(0)) \226\134\146 inv(c) * (c * (p : Real)) == p
+      #|  real_of_num(0) <= inv((c : Real))
+      #|  !((c : Real) == real_of_num(0)) && real_of_num(0) <= c * (p : Real)
+      #|  \226\136\128 c : Real, \226\136\128 p : Real, real_of_num(0) < c && real_of_num(0) <= p \226\134\146 IMAGE((x : Real) => inv(c) * x, real_interval([(-(c * p), c * p)])) == real_interval([(-p, p)])
+      #|  !((c : Real) == real_of_num(0)) && !((x : Real) == real_of_num(0)) \226\134\146 sin(c * x) / x == c * (sin(c * x) / (c * x))
+      #|  {real_of_num(0)}
+      #|  (x : Real) => (c : Real) * (sin(c * x) / (c * x))
+      #|  inv(abs((c : Real))) == inv(c)
+      #|  (c : Real) * (inv(abs(c)) * real_integral(real_interval([(-(c * (p : Real)), c * p)]), (x : Real) => sin(x) / x)) == real_integral(real_interval([(-(c * p), c * p)]), (x : Real) => sin(x) / x)
+      #|  (c : Real)
+      #|  (c : Real)
+      #|  (c : Real) * (p : Real)
+      #|  -((c : Real) * (p : Real))
+      #|  real_integral(real_interval([(-((c : Real) * (p : Real)), c * p)]), (x : Real) => sin(x) / x)
+      #|  (x : Real) => sin(x) / x
+      #|  \226\136\128 c : Real, \226\136\128 p : Real, real_of_num(0) < c && real_of_num(0) <= p \226\134\146 real_integral(real_interval([(-(c * p), c * p)]), (x : Real) => sin(x) / x) == real_integral(real_interval([(-p, p)]), (t : Real) => sin(c * t) / t)
+      #|  real_of_num(0) <= -sin((u : Real)) \226\134\146 sin(u) <= real_of_num(0)
+      #|  (s : Real) <= real_of_num(0) \226\134\146 abs(s) == -s
+      #|  !(real_of_num(0) <= (u : Real)) \226\134\146 abs(u) == -u
+      #|  real_of_num(0) <= (u : Real) \226\134\146 abs(u) == u
+      #|  real_of_num(0) <= (u : Real)
+      #|  \226\136\128 u : Real, abs(u) <= pi \226\134\146 abs(sin(u)) == sin(abs(u))
+      #|  abs(sin((t : Real) / real_of_num(2))) == sin(abs(t / real_of_num(2)))
+      #|  \226\136\128 t : Real, real_of_num(1) <= abs(t) && abs(t) <= pi \226\134\146 sin(real_of_num(1) / real_of_num(2)) <= abs(sin(t / real_of_num(2)))
+      #|  (n : Real)
+      #|  (n : Real)
+      #|  (x : Real) / real_of_num(2)
+      #|  sin((x : Real) / real_of_num(2)) == real_of_num(0)
+      #|  (x : Real)
+      #|  IMAGE((n : Real) => real_of_num(2) * (n * pi), integer)
+      #|  inv((x : Real)) == real_of_num(1) / x
+      #|  real_measurable_on((t : Real) => inv(t) - inv(real_of_num(2) * sin(t / real_of_num(2))), real_interval([(-pi, pi)]))
+      #|  inv(real_of_num(2) * sin(real_of_num(1) / real_of_num(2)))
+      #|  abs(inv(real_of_num(2) * sin((t : Real) / real_of_num(2)))) <= inv(sin(real_of_num(1) / real_of_num(2)))
+      #|  abs(inv((t : Real))) <= real_of_num(1)
+      #|  real_of_num(0) < sin(real_of_num(1) / real_of_num(2))
+      #|  sin(real_of_num(1) / real_of_num(2)) <= abs(sin((t : Real) / real_of_num(2)))
+      #|  (t : Real) / real_of_num(2)
+      #|  !((t : Real) == real_of_num(0)) && !(sin(t / real_of_num(2)) == real_of_num(0)) \226\134\146 inv(t) - inv(real_of_num(2) * sin(t / real_of_num(2))) == -(real_of_num(1) / real_of_num(2)) * (inv(sin(t / real_of_num(2))) - inv(t / real_of_num(2)))
+      #|  (t : Real) / real_of_num(2)
+      #|  !(sin((t : Real) / real_of_num(2)) == real_of_num(0))
+      #|  abs((t : Real)) <= real_of_num(1)
+      #|  inv(real_of_num(0)) - inv(real_of_num(2) * sin(real_of_num(0) / real_of_num(2))) == real_of_num(0)
+      #|  (t : Real) == real_of_num(0)
+      #|  real_of_num(0) <= real_of_num(2) * inv(sin(real_of_num(1) / real_of_num(2)))
+      #|  \226\136\128 t : Real, IN(t, real_interval([(-pi, pi)])) \226\134\146 abs(inv(t) - inv(real_of_num(2) * sin(t / real_of_num(2)))) <= real_of_num(2) + real_of_num(2) * inv(sin(real_of_num(1) / real_of_num(2)))
+      #|  (x : Real)
+      #|  real_of_num(0)
+      #|  real_of_num(2) + (real_of_num(2) * inv(sin(real_of_num(1) / real_of_num(2))) + real_of_num(1))
+      #|  absolutely_real_integrable_on((t : Real) => (inv(t) - inv(real_of_num(2) * sin(t / real_of_num(2)))) * real_of_num(1), real_interval([(-pi, pi)]))
+      #|  absolutely_real_integrable_on((t : Real) => inv(t) - inv(real_of_num(2) * sin(t / real_of_num(2))), real_interval([(-pi, pi)]))
+      #|  real_of_num(1)
+      #|  \226\136\128 n : Num, real_integrable_on((t : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * t) * (inv(t) - inv(real_of_num(2) * sin(t / real_of_num(2)))), real_interval([(-pi, pi)]))
+      #|  (n : Num)
+      #|  {real_of_num(0)}
+      #|  dirichlet_kernel((n : Num))
+      #|  \226\136\128 n : Num, real_integrable_on((t : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * t) / (real_of_num(2) * sin(t / real_of_num(2))), real_interval([(-pi, pi)]))
+      #|  real_interval([(-pi, pi)])
+      #|  (n : Num)
+      #|  (x : Real) => real_of_num(1)
+      #|  \226\136\128 n : Num, real_integral(real_interval([(-pi, pi)]), (t : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * t) / (real_of_num(2) * sin(t / real_of_num(2)))) == pi
       #|  pi
-      #|  &0
-      #|  \\n:num. pi
-      #|  \\n. real_integral (real_interval[--pi,pi])\n          (\\t. sin((&n + &1 / &2) * t) * (inv t - inv(&2 * sin(t / &2))))
+      #|  real_of_num(0)
+      #|  (n : Num) => pi
+      #|  (n : Num) => real_integral(real_interval([(-pi, pi)]), (t : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * t) * (inv(t) - inv(real_of_num(2) * sin(t / real_of_num(2)))))
       #|  sequentially
-      #|  forall s a b:real. s * (a - b) + s * b = s * a
-      #|  t:real
-      #|  real_integral (real_interval[--pi,pi])\n                    (\\t. sin((&n + &1 / &2) * t) / t) =\n      real_integral (real_interval[--pi,pi])\n        (\\t. sin((&n + &1 / &2) * t) * (inv t - inv(&2 * sin(t / &2))) +\n             sin((&n + &1 / &2) * t) / (&2 * sin(t / &2)))
-      #|  forall n. real_integral (real_interval[--pi,pi])\n                      (\\t. sin((&n + &1 / &2) * t) / t) =\n        real_integral (real_interval[--pi,pi])\n          (\\t. sin((&n + &1 / &2) * t) * (inv t - inv(&2 * sin(t / &2)))) + pi
-      #|  ((\\n. real_integral (real_interval[--pi,pi])\n                       (\\t. sin((&n + &1 / &2) * t) / t))\n    ---> pi) sequentially
-      #|  a:real
-      #|  &0:real
-      #|  \\x. sin x / x
-      #|  forall a. real_integral (real_interval[--a,&0]) (\\x. sin x / x) =\n       real_integral (real_interval[&0,a]) (\\x. sin x / x)
-      #|  &0 <= a ==> --a <= &0
-      #|  &0:real
-      #|  a:real
-      #|  --a:real
-      #|  \\x. sin x / x
-      #|  forall a. &0 <= a\n       ==> real_integral (real_interval[--a,a]) (\\x. sin x / x) =\n           &2 * real_integral (real_interval[&0,a]) (\\x. sin x / x)
-      #|  &1 / &2
-      #|  forall n. real_integral\n         (real_interval[--((&n + &1 / &2) * pi), (&n + &1 / &2) * pi])\n         (\\x. sin x / x) =\n       real_integral (real_interval[--pi,pi])\n                     (\\t. sin((&n + &1 / &2) * t) / t)
-      #|  ((\\n. real_integral\n           (real_interval[--((&n + &1 / &2) * pi), (&n + &1 / &2) * pi])\n           (\\x. sin x / x)) ---> pi) sequentially
-      #|  &8 / b = &2 * (&2 * inv b + &2 * inv b)
-      #|  inv a <= inv b
-      #|  a:real
-      #|  b:real
-      #|  b:real
-      #|  a:real
-      #|  &0:real
-      #|  \\x. sin x / x
-      #|  real_integral (real_interval[&0,a]) (\\x. sin x / x) -\n    real_integral (real_interval[&0,b]) (\\x. sin x / x) =\n    real_integral (real_interval[b,a]) (\\x. sin x / x)
-      #|  &0 <= a /\\ &0 <= b
-      #|  forall a b. &0 < b /\\ b <= a\n   ==> abs(real_integral (real_interval[--a,a]) (\\x. sin x / x) -\n           real_integral (real_interval[--b,b]) (\\x. sin x / x)) <= &8 / b
-      #|  &2 * x - &2 * y = &2 * (x - y)
-      #|  &16 <= b * e
-      #|  &8 / b <= e / &2
-      #|  &(N1+N2) + &1 / &2
-      #|  &N2
-      #|  &16 / e <= b
-      #|  N1 + N2:num
-      #|  b:real
-      #|  x:real
-      #|  &0 < b
-      #|  b = (&(N1 + N2) + &1 / &2) * pi
-      #|  x:real
-      #|  (&(N1 + N2) + &1 / &2) * pi
-      #|  N2:num
-      #|  &16 / e
-      #|  N1:num
-      #|  e / &2
-      #|  e:real
-      #|  ((\\a. real_integral (real_interval[--a,a]) (\\x. sin x / x)) ---> pi)\n   at_posinfinity
-      #|  a:real
-      #|  &0 <= a
-      #|  a:real
-      #|  abs B + &1
-      #|  B:real
-      #|  e:real
-      #|  ((\\a. real_integral (real_interval[&0,a]) (\\x. sin x / x)) ---> pi / &2)\n   at_posinfinity
-      #|  (b:real) * a
-      #|  forall x. x >= B\n      ==> abs (real_integral (real_interval [--x,x]) (\\x. sin x / x) - pi)\n          < e
-      #|  a:real
-      #|  b:real
-      #|  real_integral (real_interval[--a,a]) (\\t. sin(b * t) / t) =\n    real_integral (real_interval[--(b * a), b * a]) (\\x. sin x / x)
-      #|  b:real
-      #|  a:real
-      #|  (abs B + &1) / b
-      #|  abs B + &1
-      #|  (b:real) * a >= B
-      #|  (abs B + &1) / b
-      #|  &0 <= a
-      #|  a:real
-      #|  (abs B + &1) / b
-      #|  B:real
-      #|  e:real
-      #|  forall b. &0 < b\n   ==> ((\\a. real_integral (real_interval[--a,a]) (\\t. sin(b * t) / t)) --->\n        pi)\n       at_posinfinity
-      #|  t:real
-      #|  real_interval[--a,a]
-      #|  \\t. sin(--b * t) / t
-      #|  forall b a. b < &0\n     ==> real_integral (real_interval[--a,a]) (\\t. sin(b * t) / t) =\n         --(real_integral (real_interval[--a,a]) (\\t. sin(--b * t) / t))
-      #|  b < &0 ==> ~(&0 < b)
-      #|  &0 < b \\/ b < &0 \\/ b = &0
-      #|  forall b. ((\\a. real_integral (real_interval[--a,a]) (\\t. sin(b * t) / t)) --->\n        (if &0 < b then pi else if b < &0 then --pi else &0)) at_posinfinity
-      #|  lift o (\\u. H(u + c)) o drop =\n                (\\x. (lift o H o drop)(lift c + x))
-      #|  forall H c i. ((\\u. H(u + c)) has_real_integral i) (:real) <=>\n           (H has_real_integral i) (:real)
-      #|  forall H c. (\\u. H(u + c)) real_integrable_on (:real) <=>\n         H real_integrable_on (:real)
-      #|  forall H c. real_integral (:real) (\\u. H(u + c)) = real_integral (:real) H
-      #|  lift o (\\u. H(u + c)) o drop =\n                (\\x. (lift o H o drop)(lift c + x))
-      #|  forall H c. (\\u. H(u + c)) absolutely_real_integrable_on (:real) <=>\n         H absolutely_real_integrable_on (:real)
-      #|  forall H c. H absolutely_real_integrable_on (:real)\n     ==> (\\u. abs(H(u + c) - H u)) real_integrable_on (:real)
-      #|  x:real^1
-      #|  drop(a:real^1)
-      #|  H:real->real
-      #|  a:real^1
-      #|  (\\a. integral (:real^1) (\\x. lift(abs(H(drop(a + x)) - H(drop x))))) =\n    (\\x. lift(real_integral (:real) (\\u. abs(H(u + drop x) - H u))))
-      #|  forall H. H absolutely_real_integrable_on (:real)\n   ==> ((\\c. real_integral (:real) (\\u. abs(H(u + c) - H u))) ---> &0)\n       (atreal(&0))
-      #|  &1
-      #|  forall H a. H absolutely_real_integrable_on (:real)\n     ==> (\\u. H u * sin(a * u)) absolutely_real_integrable_on (:real)
-      #|  x - pi = --pi + x
-      #|  forall x. sin(x - pi) = --sin x
-      #|  u - pi / a = u + (--(pi / a))
-      #|  a * (pi / a) = pi
-      #|  a * (u - pi / a) = (a * u) - pi
-      #|  u + --(pi / a) = u - pi / a
-      #|  u:real
-      #|  (\\u. H (u + --(pi / a)) * sin (a * (u + --(pi / a)))) =\n    (\\u. --(H(u - pi / a) * sin(a * u)))
-      #|  --(pi / a)
-      #|  \\u. H(u) * sin(a * u)
-      #|  forall H a. ~(a = &0) /\\ H absolutely_real_integrable_on (:real)\n     ==> real_integral (:real) (\\u. H u * sin(a * u)) =\n         --(real_integral (:real) (\\u. H(u - pi / a) * sin(a * u)))
-      #|  u - pi / a = u + --(pi / a)
-      #|  real_integral (:real) (\\u. (H u - H(u - pi / a)) * sin(a * u)) =\n    real_integral (:real) (\\u. H u * sin(a * u)) -\n    real_integral (:real) (\\u. H(u - pi / a) * sin(a * u))
-      #|  a:real
-      #|  H:real->real
-      #|  forall H a. ~(a = &0) /\\ H absolutely_real_integrable_on (:real)\n   ==> &2 * real_integral (:real) (\\u. H u * sin(a * u)) =\n       real_integral (:real) (\\u. (H u - H(u - pi / a)) * sin(a * u))
-      #|  u:real
-      #|  u - pi / a = u + --(pi / a)
-      #|  (\\u. H u - H(u - pi / a)) absolutely_real_integrable_on (:real)
-      #|  forall H a. H absolutely_real_integrable_on (:real)\n   ==> abs(real_integral (:real) (\\u. (H u - H(u - pi / a)) * sin(a * u))) <=\n       real_integral (:real) (\\u. abs(H u - H(u - pi / a)))
-      #|  u + --(pi / a) = u - pi / a
-      #|  u:real
-      #|  real_integral (:real) (\\u. abs(H u - H(u - pi / a))) =\n    real_integral (:real) (\\u. abs(H (u + --(pi / a)) - H u))
-      #|  a:real
-      #|  H:real->real
-      #|  a:real
-      #|  H:real->real
-      #|  &0 < p ==> abs p = p
-      #|  &0 < pi / a
-      #|  --(pi / a)
-      #|  d * (pi / d + &1)
-      #|  pi / a < d
-      #|  &0 < pi / d
-      #|  &0 < a
-      #|  a:real
-      #|  pi / d + &1
-      #|  d:real
-      #|  e:real
-      #|  e:real
-      #|  forall H. H absolutely_real_integrable_on (:real)\n   ==> ((\\a. real_integral (:real) (\\u. H u * sin(a * u))) ---> &0)\n       at_posinfinity
-      #|  {z:real^(1,1)finite_sum | drop(fstcart z) IN real_interval[--a,a]} =\n    (interval[lift(--a), lift a]) PCROSS (:real^1)
-      #|  forall a. lebesgue_measurable\n        {z:real^(1,1)finite_sum | drop(fstcart z) IN real_interval[--a,a]}
-      #|  (\\z:real^(1,1)finite_sum. cexp(ii * Cx x * Cx(drop(fstcart z)))) =\n    cexp o (\\z. (ii * Cx x) * Cx(drop(fstcart z)))
-      #|  forall x. (\\z:real^(1,1)finite_sum. cexp(ii * Cx x * Cx(drop(fstcart z))))\n       continuous_on (:real^(1,1)finite_sum)
-      #|  (\\z:real^(1,1)finite_sum.\n        cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z))))) =\n    cexp o (\\z. --(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z))))
-      #|  (\\z:real^(1,1)finite_sum.\n        cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))))\n   continuous_on (:real^(1,1)finite_sum)
-      #|  \\z. (f:real->complex)(drop z)
+      #|  \226\136\128 s : Real, \226\136\128 a : Real, \226\136\128 b : Real, s * (a - b) + s * b == s * a
+      #|  (t : Real)
+      #|  real_integral(real_interval([(-pi, pi)]), (t : Real) => sin((real_of_num((n : Num)) + real_of_num(1) / real_of_num(2)) * t) / t) == real_integral(real_interval([(-pi, pi)]), (t : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * t) * (inv(t) - inv(real_of_num(2) * sin(t / real_of_num(2)))) + sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * t) / (real_of_num(2) * sin(t / real_of_num(2))))
+      #|  \226\136\128 n : Num, real_integral(real_interval([(-pi, pi)]), (t : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * t) / t) == real_integral(real_interval([(-pi, pi)]), (t : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * t) * (inv(t) - inv(real_of_num(2) * sin(t / real_of_num(2))))) + pi
+      #|  op_minus_minus_minus_gt((n : Num) => real_integral(real_interval([(-pi, pi)]), (t : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * t) / t), pi, sequentially)
+      #|  (a : Real)
+      #|  real_of_num(0)
+      #|  (x : Real) => sin(x) / x
+      #|  \226\136\128 a : Real, real_integral(real_interval([(-a, real_of_num(0))]), (x : Real) => sin(x) / x) == real_integral(real_interval([(real_of_num(0), a)]), (x : Real) => sin(x) / x)
+      #|  real_of_num(0) <= (a : Real) \226\134\146 -a <= real_of_num(0)
+      #|  real_of_num(0)
+      #|  (a : Real)
+      #|  -(a : Real)
+      #|  (x : Real) => sin(x) / x
+      #|  \226\136\128 a : Real, real_of_num(0) <= a \226\134\146 real_integral(real_interval([(-a, a)]), (x : Real) => sin(x) / x) == real_of_num(2) * real_integral(real_interval([(real_of_num(0), a)]), (x : Real) => sin(x) / x)
+      #|  real_of_num(1) / real_of_num(2)
+      #|  \226\136\128 n : Num, real_integral(real_interval([(-((real_of_num(n) + real_of_num(1) / real_of_num(2)) * pi), (real_of_num(n) + real_of_num(1) / real_of_num(2)) * pi)]), (x : Real) => sin(x) / x) == real_integral(real_interval([(-pi, pi)]), (t : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * t) / t)
+      #|  op_minus_minus_minus_gt((n : Num) => real_integral(real_interval([(-((real_of_num(n) + real_of_num(1) / real_of_num(2)) * pi), (real_of_num(n) + real_of_num(1) / real_of_num(2)) * pi)]), (x : Real) => sin(x) / x), pi, sequentially)
+      #|  real_of_num(8) / (b : Real) == real_of_num(2) * (real_of_num(2) * inv(b) + real_of_num(2) * inv(b))
+      #|  inv((a : Real)) <= inv((b : Real))
+      #|  (a : Real)
+      #|  (b : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  real_of_num(0)
+      #|  (x : Real) => sin(x) / x
+      #|  real_integral(real_interval([(real_of_num(0), (a : Real))]), (x : Real) => sin(x) / x) - real_integral(real_interval([(real_of_num(0), (b : Real))]), (x : Real) => sin(x) / x) == real_integral(real_interval([(b, a)]), (x : Real) => sin(x) / x)
+      #|  real_of_num(0) <= (a : Real) && real_of_num(0) <= (b : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < b && b <= a \226\134\146 abs(real_integral(real_interval([(-a, a)]), (x : Real) => sin(x) / x) - real_integral(real_interval([(-b, b)]), (x : Real) => sin(x) / x)) <= real_of_num(8) / b
+      #|  real_of_num(2) * (x : Real) - real_of_num(2) * (y : Real) == real_of_num(2) * (x - y)
+      #|  real_of_num(16) <= (b : Real) * (e : Real)
+      #|  real_of_num(8) / (b : Real) <= (e : Real) / real_of_num(2)
+      #|  real_of_num((N1 : Num) + (N2 : Num)) + real_of_num(1) / real_of_num(2)
+      #|  real_of_num((N2 : Num))
+      #|  real_of_num(16) / (e : Real) <= (b : Real)
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (b : Real)
+      #|  (x : Real)
+      #|  real_of_num(0) < (b : Real)
+      #|  (b : Real) == (real_of_num((N1 : Num) + (N2 : Num)) + real_of_num(1) / real_of_num(2)) * pi
+      #|  (x : Real)
+      #|  (real_of_num((N1 : Num) + (N2 : Num)) + real_of_num(1) / real_of_num(2)) * pi
+      #|  (N2 : Num)
+      #|  real_of_num(16) / (e : Real)
+      #|  (N1 : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((a : Real) => real_integral(real_interval([(-a, a)]), (x : Real) => sin(x) / x), pi, at_posinfinity)
+      #|  (a : Real)
+      #|  real_of_num(0) <= (a : Real)
+      #|  (a : Real)
+      #|  abs((B : Real)) + real_of_num(1)
+      #|  (B : Real)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((a : Real) => real_integral(real_interval([(real_of_num(0), a)]), (x : Real) => sin(x) / x), pi / real_of_num(2), at_posinfinity)
+      #|  (b : Real) * (a : Real)
+      #|  \226\136\128 x : Real, x >= (B : Real) \226\134\146 abs(real_integral(real_interval([(-x, x)]), (x : Real) => sin(x) / x) - pi) < (e : Real)
+      #|  (a : Real)
+      #|  (b : Real)
+      #|  real_integral(real_interval([(-(a : Real), a)]), (t : Real) => sin((b : Real) * t) / t) == real_integral(real_interval([(-(b * a), b * a)]), (x : Real) => sin(x) / x)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (abs((B : Real)) + real_of_num(1)) / (b : Real)
+      #|  abs((B : Real)) + real_of_num(1)
+      #|  (b : Real) * (a : Real) >= (B : Real)
+      #|  (abs((B : Real)) + real_of_num(1)) / (b : Real)
+      #|  real_of_num(0) <= (a : Real)
+      #|  (a : Real)
+      #|  (abs((B : Real)) + real_of_num(1)) / (b : Real)
+      #|  (B : Real)
+      #|  (e : Real)
+      #|  \226\136\128 b : Real, real_of_num(0) < b \226\134\146 op_minus_minus_minus_gt((a : Real) => real_integral(real_interval([(-a, a)]), (t : Real) => sin(b * t) / t), pi, at_posinfinity)
+      #|  (t : Real)
+      #|  real_interval([(-(a : Real), a)])
+      #|  (t : Real) => sin(-(b : Real) * t) / t
+      #|  \226\136\128 b : Real, \226\136\128 a : Real, b < real_of_num(0) \226\134\146 real_integral(real_interval([(-a, a)]), (t : Real) => sin(b * t) / t) == -real_integral(real_interval([(-a, a)]), (t : Real) => sin(-b * t) / t)
+      #|  (b : Real) < real_of_num(0) \226\134\146 !(real_of_num(0) < b)
+      #|  real_of_num(0) < (b : Real) || b < real_of_num(0) || b == real_of_num(0)
+      #|  \226\136\128 b : Real, op_minus_minus_minus_gt((a : Real) => real_integral(real_interval([(-a, a)]), (t : Real) => sin(b * t) / t), if real_of_num(0) < b { pi } else { if b < real_of_num(0) { -pi } else { real_of_num(0) } }, at_posinfinity)
+      #|  o(lift, o((u : Real) => (H : (Real) -> Real)(u + (c : Real)), drop)) == ((x : Cart[Real, Unit]) => o(lift, o(H, drop), lift(c) + x))
+      #|  \226\136\128 H : (Real) -> Real, \226\136\128 c : Real, \226\136\128 i : Real, has_real_integral((u : Real) => H(u + c), i, UNIV) == has_real_integral(H, i, UNIV)
+      #|  \226\136\128 H : (Real) -> Real, \226\136\128 c : Real, real_integrable_on((u : Real) => H(u + c), UNIV) == real_integrable_on(H, UNIV)
+      #|  \226\136\128 H : (Real) -> Real, \226\136\128 c : Real, real_integral(UNIV, (u : Real) => H(u + c)) == real_integral(UNIV, H)
+      #|  o(lift, o((u : Real) => (H : (Real) -> Real)(u + (c : Real)), drop)) == ((x : Cart[Real, Unit]) => o(lift, o(H, drop), lift(c) + x))
+      #|  \226\136\128 H : (Real) -> Real, \226\136\128 c : Real, absolutely_real_integrable_on((u : Real) => H(u + c), UNIV) == absolutely_real_integrable_on(H, UNIV)
+      #|  \226\136\128 H : (Real) -> Real, \226\136\128 c : Real, absolutely_real_integrable_on(H, UNIV) \226\134\146 real_integrable_on((u : Real) => abs(H(u + c) - H(u)), UNIV)
+      #|  (x : Cart[Real, Unit])
+      #|  drop((a : Cart[Real, Unit]))
+      #|  (H : (Real) -> Real)
+      #|  (a : Cart[Real, Unit])
+      #|  ((a : Cart[Real, Unit]) => integral(UNIV, (x : Cart[Real, Unit]) => lift(abs((H : (Real) -> Real)(drop(a + x)) - H(drop(x)))))) == ((x : Cart[Real, Unit]) => lift(real_integral(UNIV, (u : Real) => abs(H(u + drop(x)) - H(u)))))
+      #|  \226\136\128 H : (Real) -> Real, absolutely_real_integrable_on(H, UNIV) \226\134\146 op_minus_minus_minus_gt((c : Real) => real_integral(UNIV, (u : Real) => abs(H(u + c) - H(u))), real_of_num(0), atreal(real_of_num(0)))
+      #|  real_of_num(1)
+      #|  \226\136\128 H : (Real) -> Real, \226\136\128 a : Real, absolutely_real_integrable_on(H, UNIV) \226\134\146 absolutely_real_integrable_on((u : Real) => H(u) * sin(a * u), UNIV)
+      #|  (x : Real) - pi == -pi + x
+      #|  \226\136\128 x : Real, sin(x - pi) == -sin(x)
+      #|  (u : Real) - pi / (a : Real) == u + -(pi / a)
+      #|  (a : Real) * (pi / a) == pi
+      #|  (a : Real) * ((u : Real) - pi / a) == a * u - pi
+      #|  (u : Real) + -(pi / (a : Real)) == u - pi / a
+      #|  (u : Real)
+      #|  ((u : Real) => (H : (Real) -> Real)(u + -(pi / (a : Real))) * sin(a * (u + -(pi / a)))) == ((u : Real) => -(H(u - pi / a) * sin(a * u)))
+      #|  -(pi / (a : Real))
+      #|  (u : Real) => (H : (Real) -> Real)(u) * sin((a : Real) * u)
+      #|  \226\136\128 H : (Real) -> Real, \226\136\128 a : Real, !(a == real_of_num(0)) && absolutely_real_integrable_on(H, UNIV) \226\134\146 real_integral(UNIV, (u : Real) => H(u) * sin(a * u)) == -real_integral(UNIV, (u : Real) => H(u - pi / a) * sin(a * u))
+      #|  (u : Real) - pi / (a : Real) == u + -(pi / a)
+      #|  real_integral(UNIV, (u : Real) => ((H : (Real) -> Real)(u) - H(u - pi / (a : Real))) * sin(a * u)) == real_integral(UNIV, (u : Real) => H(u) * sin(a * u)) - real_integral(UNIV, (u : Real) => H(u - pi / a) * sin(a * u))
+      #|  (a : Real)
+      #|  (H : (Real) -> Real)
+      #|  \226\136\128 H : (Real) -> Real, \226\136\128 a : Real, !(a == real_of_num(0)) && absolutely_real_integrable_on(H, UNIV) \226\134\146 real_of_num(2) * real_integral(UNIV, (u : Real) => H(u) * sin(a * u)) == real_integral(UNIV, (u : Real) => (H(u) - H(u - pi / a)) * sin(a * u))
+      #|  (u : Real)
+      #|  (u : Real) - pi / (a : Real) == u + -(pi / a)
+      #|  absolutely_real_integrable_on((u : Real) => (H : (Real) -> Real)(u) - H(u - pi / (a : Real)), UNIV)
+      #|  \226\136\128 H : (Real) -> Real, \226\136\128 a : Real, absolutely_real_integrable_on(H, UNIV) \226\134\146 abs(real_integral(UNIV, (u : Real) => (H(u) - H(u - pi / a)) * sin(a * u))) <= real_integral(UNIV, (u : Real) => abs(H(u) - H(u - pi / a)))
+      #|  (u : Real) + -(pi / (a : Real)) == u - pi / a
+      #|  (u : Real)
+      #|  real_integral(UNIV, (u : Real) => abs((H : (Real) -> Real)(u) - H(u - pi / (a : Real)))) == real_integral(UNIV, (u : Real) => abs(H(u + -(pi / a)) - H(u)))
+      #|  (a : Real)
+      #|  (H : (Real) -> Real)
+      #|  (a : Real)
+      #|  (H : (Real) -> Real)
+      #|  real_of_num(0) < (p : Real) \226\134\146 abs(p) == p
+      #|  real_of_num(0) < pi / (a : Real)
+      #|  -(pi / (a : Real))
+      #|  (d : Real) * (pi / d + real_of_num(1))
+      #|  pi / (a : Real) < (d : Real)
+      #|  real_of_num(0) < pi / (d : Real)
+      #|  real_of_num(0) < (a : Real)
+      #|  (a : Real)
+      #|  pi / (d : Real) + real_of_num(1)
+      #|  (d : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 H : (Real) -> Real, absolutely_real_integrable_on(H, UNIV) \226\134\146 op_minus_minus_minus_gt((a : Real) => real_integral(UNIV, (u : Real) => H(u) * sin(a * u)), real_of_num(0), at_posinfinity)
+      #|  {(z : Cart[Real, Finite_sum[Unit, Unit]]) | IN(drop(fstcart(z)), real_interval([(-(a : Real), a)]))} == PCROSS(interval([(lift(-a), lift(a))]), UNIV)
+      #|  \226\136\128 a : Real, lebesgue_measurable({(z : Cart[Real, Finite_sum[Unit, Unit]]) | IN(drop(fstcart(z)), real_interval([(-a, a)]))})
+      #|  ((z : Cart[Real, Finite_sum[Unit, Unit]]) => cexp(ii * (Cx((x : Real)) * Cx(drop(fstcart(z)))))) == o(cexp, (z : Cart[Real, Finite_sum[Unit, Unit]]) => ii * Cx(x) * Cx(drop(fstcart(z))))
+      #|  \226\136\128 x : Real, continuous_on((z : Cart[Real, Finite_sum[Unit, Unit]]) => cexp(ii * (Cx(x) * Cx(drop(fstcart(z))))), UNIV)
+      #|  ((z : Cart[Real, Finite_sum[Unit, Unit]]) => cexp(-(ii * (Cx(drop(fstcart(z))) * Cx(drop(sndcart(z))))))) == o(cexp, (z : Cart[Real, Finite_sum[Unit, Unit]]) => -(ii * (Cx(drop(fstcart(z))) * Cx(drop(sndcart(z))))))
+      #|  continuous_on((z : Cart[Real, Finite_sum[Unit, Unit]]) => cexp(-(ii * (Cx(drop(fstcart(z))) * Cx(drop(sndcart(z)))))), UNIV)
+      #|  (z : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
       #|  :N
       #|  :1
       #|  :M
       #|  :1
-      #|  forall(f:real->complex) a x.\n     (\\z. f(drop z)) measurable_on (:real^1)\n     ==> (\\z:real^(1,1)finite_sum.\n            if drop(fstcart z) IN real_interval[--a,a]\n            then cexp(ii * Cx x * Cx(drop(fstcart z))) *\n                 cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n                 f(drop(sndcart z))\n            else vec 0) measurable_on (:real^(1,1)finite_sum)
-      #|  ii * Cx x * Cx y = ii * Cx(x * y)
-      #|  norm(cexp(ii * Cx x * Cx y)) = &1 /\\\n    norm(cexp(--(ii * Cx y * Cx t))) = &1
-      #|  forall x y t (f:real->complex).\n     norm(cexp(ii * Cx x * Cx y) * cexp(--(ii * Cx y * Cx t)) * f t) =\n     norm(f t)
-      #|  --(ii * Cx d * Cx(drop y)) = ii * Cx(--(d * drop y))
-      #|  y:real^1
-      #|  &1
-      #|  (\\y:real^1. cexp(--(ii * Cx d * Cx(drop y)))) =\n                  cexp o (\\y. --((ii * Cx d) * Cx(drop y)))
-      #|  (:real^1)
-      #|  \\y:real^1. (f:real->complex)(drop y)
-      #|  \\y:real^1. cexp(--(ii * Cx d * Cx(drop y)))
-      #|  ( * ):complex->complex->complex
-      #|  forall(f:real->complex) d.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\y. cexp(--(ii * Cx d * Cx(drop y))) * f(drop y))\n         absolutely_integrable_on (:real^1)
-      #|  drop(x0:real^1) IN real_interval[--a,a]
-      #|  forall(f:real->complex) a x x0.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\y. if drop(fstcart(pastecart (x0:real^1) y)) IN real_interval[--a,a]\n              then cexp(ii * Cx x * Cx(drop(fstcart(pastecart x0 y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x0 y))) *\n                            Cx(drop(sndcart(pastecart x0 y))))) *\n                   f(drop(sndcart(pastecart x0 y)))\n              else vec 0) absolutely_integrable_on (:real^1)
-      #|  forall(f:real->complex) a x x0.\n     integral (:real^1) (\\y. lift(norm(\n         if drop(fstcart(pastecart (x0:real^1) y)) IN real_interval[--a,a]\n         then cexp(ii * Cx x * Cx(drop(fstcart(pastecart x0 y)))) *\n              cexp(--(ii * Cx(drop(fstcart(pastecart x0 y))) *\n                       Cx(drop(sndcart(pastecart x0 y))))) *\n              f(drop(sndcart(pastecart x0 y)))\n         else vec 0))) =\n     (if drop x0 IN real_interval[--a,a]\n      then integral (:real^1) (\\y. lift(norm(f(drop y)))) else vec 0)
-      #|  (if drop x0 IN real_interval[--a,a] then (C:real^1) else vec 0) =\n    (if x0 IN interval[lift(--a), lift a] then C else vec 0)
-      #|  forall a (C:real^1).\n        (\\x0:real^1. if drop x0 IN real_interval[--a,a] then C else vec 0)\n        integrable_on (:real^1)
-      #|  {x | ~((\\y. (if drop(fstcart(pastecart (x:real^1) y)) IN\n                       real_interval[--a,a]\n                   then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                        cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                                 Cx(drop(sndcart(pastecart x y))))) *\n                        f(drop(sndcart(pastecart x y)))\n                   else vec 0)) absolutely_integrable_on (:real^1))} = {}
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, \226\136\128 x : Real, measurable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 measurable_on((z : Cart[Real, Finite_sum[Unit, Unit]]) => if IN(drop(fstcart(z)), real_interval([(-a, a)])) { cexp(ii * (Cx(x) * Cx(drop(fstcart(z))))) * (cexp(-(ii * (Cx(drop(fstcart(z))) * Cx(drop(sndcart(z)))))) * f(drop(sndcart(z)))) } else { vec(0) }, UNIV)
+      #|  ii * (Cx((x : Real)) * Cx((y : Real))) == ii * Cx(x * y)
+      #|  norm(cexp(ii * (Cx((x : Real)) * Cx((y : Real))))) == real_of_num(1) && norm(cexp(-(ii * (Cx(y) * Cx((t : Real)))))) == real_of_num(1)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 t : Real, \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], norm(cexp(ii * (Cx(x) * Cx(y))) * (cexp(-(ii * (Cx(y) * Cx(t)))) * f(t))) == norm(f(t))
+      #|  -(ii * (Cx((d : Real)) * Cx(drop((y : Cart[Real, Unit]))))) == ii * Cx(-(d * drop(y)))
+      #|  (y : Cart[Real, Unit])
+      #|  real_of_num(1)
+      #|  ((y : Cart[Real, Unit]) => cexp(-(ii * (Cx((d : Real)) * Cx(drop(y)))))) == o(cexp, (y : Cart[Real, Unit]) => -(ii * Cx(d) * Cx(drop(y))))
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (y : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(y))
+      #|  (y : Cart[Real, Unit]) => cexp(-(ii * (Cx((d : Real)) * Cx(drop(y)))))
+      #|  op_star
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 d : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 absolutely_integrable_on((y : Cart[Real, Unit]) => cexp(-(ii * (Cx(d) * Cx(drop(y))))) * f(drop(y)), UNIV)
+      #|  IN(drop((x0 : Cart[Real, Unit])), real_interval([(-(a : Real), a)]))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 x0 : Cart[Real, Unit], absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 absolutely_integrable_on((y : Cart[Real, Unit]) => if IN(drop(fstcart(pastecart(x0, y))), real_interval([(-a, a)])) { cexp(ii * (Cx(x) * Cx(drop(fstcart(pastecart(x0, y)))))) * (cexp(-(ii * (Cx(drop(fstcart(pastecart(x0, y)))) * Cx(drop(sndcart(pastecart(x0, y))))))) * f(drop(sndcart(pastecart(x0, y))))) } else { vec(0) }, UNIV)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 x0 : Cart[Real, Unit], integral(UNIV, (y : Cart[Real, Unit]) => lift(norm(if IN(drop(fstcart(pastecart(x0, y))), real_interval([(-a, a)])) { cexp(ii * (Cx(x) * Cx(drop(fstcart(pastecart(x0, y)))))) * (cexp(-(ii * (Cx(drop(fstcart(pastecart(x0, y)))) * Cx(drop(sndcart(pastecart(x0, y))))))) * f(drop(sndcart(pastecart(x0, y))))) } else { vec(0) }))) == (if IN(drop(x0), real_interval([(-a, a)])) { integral(UNIV, (y : Cart[Real, Unit]) => lift(norm(f(drop(y))))) } else { vec(0) })
+      #|  (if IN(drop((x0 : Cart[Real, Unit])), real_interval([(-(a : Real), a)])) { (C : Cart[Real, Unit]) } else { vec(0) }) == (if IN(x0, interval([(lift(-a), lift(a))])) { C } else { vec(0) })
+      #|  \226\136\128 a : Real, \226\136\128 C : Cart[Real, Unit], integrable_on((x0 : Cart[Real, Unit]) => if IN(drop(x0), real_interval([(-a, a)])) { C } else { vec(0) }, UNIV)
+      #|  {(x : Cart[Real, Unit]) | !absolutely_integrable_on((y : Cart[Real, Unit]) => if IN(drop(fstcart(pastecart(x, y))), real_interval([(-(a : Real), a)])) { cexp(ii * (Cx((w : Real)) * Cx(drop(fstcart(pastecart(x, y)))))) * (cexp(-(ii * (Cx(drop(fstcart(pastecart(x, y)))) * Cx(drop(sndcart(pastecart(x, y))))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(sndcart(pastecart(x, y))))) } else { vec(0) }, UNIV)} == {}
       #|  :N
       #|  :1
       #|  :M
       #|  :1
-      #|  \\z:real^(1,1)finite_sum.\n       if drop(fstcart z) IN real_interval[--a,a]\n       then cexp(ii * Cx w * Cx(drop(fstcart z))) *\n            cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n            f(drop(sndcart z))\n       else vec 0
-      #|  forall(f:real->complex) a w.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z:real^(1,1)finite_sum.\n            if drop(fstcart z) IN real_interval[--a,a]\n            then cexp(ii * Cx w * Cx(drop(fstcart z))) *\n                 cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n                 f(drop(sndcart z))\n            else vec 0) absolutely_integrable_on (:real^(1,1)finite_sum)
+      #|  (z : Cart[Real, Finite_sum[Unit, Unit]]) => if IN(drop(fstcart(z)), real_interval([(-(a : Real), a)])) { cexp(ii * (Cx((w : Real)) * Cx(drop(fstcart(z))))) * (cexp(-(ii * (Cx(drop(fstcart(z))) * Cx(drop(sndcart(z)))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(sndcart(z)))) } else { vec(0) }
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, \226\136\128 w : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 absolutely_integrable_on((z : Cart[Real, Finite_sum[Unit, Unit]]) => if IN(drop(fstcart(z)), real_interval([(-a, a)])) { cexp(ii * (Cx(w) * Cx(drop(fstcart(z))))) * (cexp(-(ii * (Cx(drop(fstcart(z))) * Cx(drop(sndcart(z)))))) * f(drop(sndcart(z)))) } else { vec(0) }, UNIV)
       #|  :N
       #|  :1
       #|  :M
       #|  :1
-      #|  \\z:real^(1,1)finite_sum.\n       if drop(fstcart z) IN real_interval[--a,a]\n       then cexp(ii * Cx w * Cx(drop(fstcart z))) *\n            cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n            f(drop(sndcart z))\n       else vec 0
-      #|  forall(f:real->complex) a w.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^1)\n           (\\x. integral (:real^1) (\\y.\n              if drop(fstcart(pastecart (x:real^1) y)) IN real_interval[--a,a]\n              then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                            Cx(drop(sndcart(pastecart x y))))) *\n                   f(drop(sndcart(pastecart x y)))\n              else vec 0)) =\n         integral (:real^1)\n           (\\y. integral (:real^1) (\\x.\n              if drop(fstcart(pastecart (x:real^1) y)) IN real_interval[--a,a]\n              then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                            Cx(drop(sndcart(pastecart x y))))) *\n                   f(drop(sndcart(pastecart x y)))\n              else vec 0))
-      #|  ~(z = Cx(&0)) ==> z * Cx(&1)/z = Cx(&1)
-      #|  Cx(sqrt(&2 * pi)) * Cx(&1) / Cx(sqrt(&2 * pi)) = Cx(&1)
-      #|  forall(f:real->complex) x0.\n     integral (:real^1)\n       (\\y. cexp(--(ii * Cx(drop x0) * Cx(drop y))) * f(drop y)) =\n     Cx(sqrt(&2 * pi)) * fourier f (drop x0)
-      #|  forall w t x. cexp(ii * Cx w * Cx x) * cexp(--(ii * Cx x * Cx t)) =\n           cexp(ii * Cx(w - t) * Cx x)
-      #|  (\\x:real^1. cexp(ii * Cx b * Cx(drop x))) =\n                cexp o (\\x. (ii * Cx b) * Cx(drop x))
-      #|  (\\x:real^1. if drop x IN real_interval[--a,a]\n                then cexp(ii * Cx b * Cx(drop x)) else vec 0) =\n    (\\x. if x IN interval[lift(--a), lift a]\n         then cexp(ii * Cx b * Cx(drop x)) else vec 0)
-      #|  forall a b. (\\x:real^1. if drop x IN real_interval[--a,a]\n                     then cexp(ii * Cx b * Cx(drop x)) else vec 0)\n         integrable_on (:real^1)
-      #|  (\\x:real^1. if drop x IN real_interval[--a,a]\n                then cexp(ii * Cx b * Cx(drop x)) else vec 0) =\n    (\\x. if x IN interval[lift(--a), lift a]\n         then cexp(ii * Cx b * Cx(drop x)) else vec 0)
-      #|  forall a b. &0 <= a /\\ ~(b = &0)\n   ==> integral (:real^1) (\\x. if drop x IN real_interval[--a,a]\n                               then cexp(ii * Cx b * Cx(drop x)) else vec 0) =\n       Cx(&2 * sin(a * b) / b)
-      #|  forall x. (if drop x IN real_interval[--a,a]\n         then cexp(ii * Cx(w - t) * Cx(drop x)) * f t else vec 0) =\n        (if drop x IN real_interval[--a,a]\n         then cexp(ii * Cx(w - t) * Cx(drop x)) else vec 0) *\n        (f:real->complex) t
-      #|  forall(f:real->complex) a w t y. &0 <= a /\\ ~(w - t = &0)\n   ==> integral (:real^1)\n         (\\x. if drop(fstcart(pastecart (x:real^1) (y:real^1))) IN\n                 real_interval[--a,a]\n              then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x y))) * Cx t)) * f t\n              else vec 0) =\n       Cx(&2 * sin((w - t) * a) / (w - t)) * f t
-      #|  cexp(ii * Cx w * Cx(drop(x:real^1)))
-      #|  (:real^1)
-      #|  \\y:real^1. cexp(--(ii * Cx(drop(x:real^1)) * Cx(drop y))) *\n                             (f:real->complex)(drop y)
-      #|  forall(f:real->complex) a w x.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^1)\n           (\\y. if drop(fstcart(pastecart (x:real^1) (y:real^1))) IN\n                   real_interval[--a,a]\n                then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                     cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                              Cx(drop(sndcart(pastecart x y))))) *\n                     f(drop(sndcart(pastecart x y)))\n                else vec 0) =\n         (if drop x IN real_interval[--a,a]\n          then cexp(ii * Cx w * Cx(drop x)) * Cx(sqrt(&2 * pi)) *\n               fourier f (drop x)\n          else vec 0)
-      #|  (\\x. if drop x IN real_interval[--a,a]\n         then cexp(ii * Cx w * Cx(drop x)) * Cx(sqrt(&2 * pi)) *\n              fourier f (drop x)\n         else vec 0) =\n    (\\x:real^1. if x IN interval[lift(--a),lift a]\n         then cexp(ii * Cx w * Cx(drop x)) * Cx(sqrt(&2 * pi)) *\n              fourier f (drop x)\n         else vec 0)
-      #|  forall(f:real->complex) a w.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^1)\n           (\\x. integral (:real^1) (\\y.\n              if drop(fstcart(pastecart (x:real^1) y)) IN real_interval[--a,a]\n              then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                            Cx(drop(sndcart(pastecart x y))))) *\n                   f(drop(sndcart(pastecart x y)))\n              else vec 0)) =\n         integral (interval[lift(--a), lift a])\n           (\\y. cexp(ii * Cx w * Cx(drop y)) * Cx(sqrt(&2 * pi)) *\n                fourier f (drop y))
-      #|  ~(y = lift w)
-      #|  y:real^1
-      #|  drop(y:real^1)
-      #|  w:real
-      #|  a:real
-      #|  f:real->complex
-      #|  y:real^1
-      #|  {lift w}
-      #|  forall(f:real->complex) a w.\n     &0 <= a\n     ==> integral (:real^1)\n           (\\y. integral (:real^1) (\\x.\n              if drop(fstcart(pastecart (x:real^1) y)) IN real_interval[--a,a]\n              then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                            Cx(drop(sndcart(pastecart x y))))) *\n                   f(drop(sndcart(pastecart x y)))\n              else vec 0)) =\n         integral (:real^1)\n           (\\y. Cx(&2 * sin((w - drop y) * a) / (w - drop y)) * f(drop y))
-      #|  w:real
-      #|  a:real
-      #|  f:real->complex
-      #|  w:real
-      #|  a:real
-      #|  f:real->complex
-      #|  forall(f:real->complex) a w.\n     &0 <= a /\\ (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (interval[lift(--a), lift a])\n           (\\y. cexp(ii * Cx w * Cx(drop y)) * Cx(sqrt(&2 * pi)) *\n                fourier f (drop y)) =\n         integral (:real^1)\n           (\\y. Cx(&2 * sin((w - drop y) * a) / (w - drop y)) * f(drop y))
-      #|  (\\u:real^1. lift(sin(a * drop u))) =\n                lift o (\\t. sin(a * t)) o drop
-      #|  forall a. (\\u:real^1. Cx(sin(a * drop u))) continuous_on (:real^1)
-      #|  a * drop(x:real^1)
-      #|  &1
-      #|  (:real^1)
-      #|  \\u:real^1. (H:real->complex)(drop u)
-      #|  \\u:real^1. Cx(sin(a * drop u))
-      #|  ( * ):complex->complex->complex
-      #|  forall(H:real->complex) a. (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\u. Cx(sin(a * drop u)) * H(drop u)) integrable_on (:real^1)
-      #|  forall(H:real->complex). (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\u. Re(H u)) absolutely_real_integrable_on (:real)
-      #|  forall(H:real->complex). (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\u. Im(H u)) absolutely_real_integrable_on (:real)
-      #|  \\u. Cx(sin(a * drop u)) * (H:real->complex)(drop u)
-      #|  k:num
+      #|  (z : Cart[Real, Finite_sum[Unit, Unit]]) => if IN(drop(fstcart(z)), real_interval([(-(a : Real), a)])) { cexp(ii * (Cx((w : Real)) * Cx(drop(fstcart(z))))) * (cexp(-(ii * (Cx(drop(fstcart(z))) * Cx(drop(sndcart(z)))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(sndcart(z)))) } else { vec(0) }
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, \226\136\128 w : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 integral(UNIV, (x : Cart[Real, Unit]) => integral(UNIV, (y : Cart[Real, Unit]) => if IN(drop(fstcart(pastecart(x, y))), real_interval([(-a, a)])) { cexp(ii * (Cx(w) * Cx(drop(fstcart(pastecart(x, y)))))) * (cexp(-(ii * (Cx(drop(fstcart(pastecart(x, y)))) * Cx(drop(sndcart(pastecart(x, y))))))) * f(drop(sndcart(pastecart(x, y))))) } else { vec(0) })) == integral(UNIV, (y : Cart[Real, Unit]) => integral(UNIV, (x : Cart[Real, Unit]) => if IN(drop(fstcart(pastecart(x, y))), real_interval([(-a, a)])) { cexp(ii * (Cx(w) * Cx(drop(fstcart(pastecart(x, y)))))) * (cexp(-(ii * (Cx(drop(fstcart(pastecart(x, y)))) * Cx(drop(sndcart(pastecart(x, y))))))) * f(drop(sndcart(pastecart(x, y))))) } else { vec(0) }))
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 z * (Cx(real_of_num(1)) / z) == Cx(real_of_num(1))
+      #|  Cx(sqrt(real_of_num(2) * pi)) * (Cx(real_of_num(1)) / Cx(sqrt(real_of_num(2) * pi))) == Cx(real_of_num(1))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x0 : Cart[Real, Unit], integral(UNIV, (y : Cart[Real, Unit]) => cexp(-(ii * (Cx(drop(x0)) * Cx(drop(y))))) * f(drop(y))) == Cx(sqrt(real_of_num(2) * pi)) * fourier(f, drop(x0))
+      #|  \226\136\128 w : Real, \226\136\128 t : Real, \226\136\128 x : Real, cexp(ii * (Cx(w) * Cx(x))) * cexp(-(ii * (Cx(x) * Cx(t)))) == cexp(ii * (Cx(w - t) * Cx(x)))
+      #|  ((x : Cart[Real, Unit]) => cexp(ii * (Cx((b : Real)) * Cx(drop(x))))) == o(cexp, (x : Cart[Real, Unit]) => ii * Cx(b) * Cx(drop(x)))
+      #|  ((x : Cart[Real, Unit]) => if IN(drop(x), real_interval([(-(a : Real), a)])) { cexp(ii * (Cx((b : Real)) * Cx(drop(x)))) } else { vec(0) }) == ((x : Cart[Real, Unit]) => if IN(x, interval([(lift(-a), lift(a))])) { cexp(ii * (Cx(b) * Cx(drop(x)))) } else { vec(0) })
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, integrable_on((x : Cart[Real, Unit]) => if IN(drop(x), real_interval([(-a, a)])) { cexp(ii * (Cx(b) * Cx(drop(x)))) } else { vec(0) }, UNIV)
+      #|  ((x : Cart[Real, Unit]) => if IN(drop(x), real_interval([(-(a : Real), a)])) { cexp(ii * (Cx((b : Real)) * Cx(drop(x)))) } else { vec(0) }) == ((x : Cart[Real, Unit]) => if IN(x, interval([(lift(-a), lift(a))])) { cexp(ii * (Cx(b) * Cx(drop(x)))) } else { vec(0) })
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) <= a && !(b == real_of_num(0)) \226\134\146 integral(UNIV, (x : Cart[Real, Unit]) => if IN(drop(x), real_interval([(-a, a)])) { cexp(ii * (Cx(b) * Cx(drop(x)))) } else { vec(0) }) == Cx(real_of_num(2) * (sin(a * b) / b))
+      #|  \226\136\128 x : Cart[Real, Unit], (if IN(drop(x), real_interval([(-(a : Real), a)])) { cexp(ii * (Cx((w : Real) - (t : Real)) * Cx(drop(x)))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(t) } else { vec(0) }) == (if IN(drop(x), real_interval([(-a, a)])) { cexp(ii * (Cx(w - t) * Cx(drop(x)))) } else { vec(0) }) * f(t)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, \226\136\128 w : Real, \226\136\128 t : Real, \226\136\128 y : Cart[Real, Unit], real_of_num(0) <= a && !(w - t == real_of_num(0)) \226\134\146 integral(UNIV, (x : Cart[Real, Unit]) => if IN(drop(fstcart(pastecart(x, y))), real_interval([(-a, a)])) { cexp(ii * (Cx(w) * Cx(drop(fstcart(pastecart(x, y)))))) * (cexp(-(ii * (Cx(drop(fstcart(pastecart(x, y)))) * Cx(t)))) * f(t)) } else { vec(0) }) == Cx(real_of_num(2) * (sin((w - t) * a) / (w - t))) * f(t)
+      #|  cexp(ii * (Cx((w : Real)) * Cx(drop((x : Cart[Real, Unit])))))
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (y : Cart[Real, Unit]) => cexp(-(ii * (Cx(drop((x : Cart[Real, Unit]))) * Cx(drop(y))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(y))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, \226\136\128 w : Real, \226\136\128 x : Cart[Real, Unit], absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 integral(UNIV, (y : Cart[Real, Unit]) => if IN(drop(fstcart(pastecart(x, y))), real_interval([(-a, a)])) { cexp(ii * (Cx(w) * Cx(drop(fstcart(pastecart(x, y)))))) * (cexp(-(ii * (Cx(drop(fstcart(pastecart(x, y)))) * Cx(drop(sndcart(pastecart(x, y))))))) * f(drop(sndcart(pastecart(x, y))))) } else { vec(0) }) == (if IN(drop(x), real_interval([(-a, a)])) { cexp(ii * (Cx(w) * Cx(drop(x)))) * (Cx(sqrt(real_of_num(2) * pi)) * fourier(f, drop(x))) } else { vec(0) })
+      #|  ((x : Cart[Real, Unit]) => if IN(drop(x), real_interval([(-(a : Real), a)])) { cexp(ii * (Cx((w : Real)) * Cx(drop(x)))) * (Cx(sqrt(real_of_num(2) * pi)) * fourier((f : (Real) -> Cart[Real, Tybit0[Unit]]), drop(x))) } else { vec(0) }) == ((x : Cart[Real, Unit]) => if IN(x, interval([(lift(-a), lift(a))])) { cexp(ii * (Cx(w) * Cx(drop(x)))) * (Cx(sqrt(real_of_num(2) * pi)) * fourier(f, drop(x))) } else { vec(0) })
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, \226\136\128 w : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 integral(UNIV, (x : Cart[Real, Unit]) => integral(UNIV, (y : Cart[Real, Unit]) => if IN(drop(fstcart(pastecart(x, y))), real_interval([(-a, a)])) { cexp(ii * (Cx(w) * Cx(drop(fstcart(pastecart(x, y)))))) * (cexp(-(ii * (Cx(drop(fstcart(pastecart(x, y)))) * Cx(drop(sndcart(pastecart(x, y))))))) * f(drop(sndcart(pastecart(x, y))))) } else { vec(0) })) == integral(interval([(lift(-a), lift(a))]), (y : Cart[Real, Unit]) => cexp(ii * (Cx(w) * Cx(drop(y)))) * (Cx(sqrt(real_of_num(2) * pi)) * fourier(f, drop(y))))
+      #|  !((y : Cart[Real, Unit]) == lift((w : Real)))
+      #|  (y : Cart[Real, Unit])
+      #|  drop((y : Cart[Real, Unit]))
+      #|  (w : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, Unit])
+      #|  {lift((w : Real))}
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, \226\136\128 w : Real, real_of_num(0) <= a \226\134\146 integral(UNIV, (y : Cart[Real, Unit]) => integral(UNIV, (x : Cart[Real, Unit]) => if IN(drop(fstcart(pastecart(x, y))), real_interval([(-a, a)])) { cexp(ii * (Cx(w) * Cx(drop(fstcart(pastecart(x, y)))))) * (cexp(-(ii * (Cx(drop(fstcart(pastecart(x, y)))) * Cx(drop(sndcart(pastecart(x, y))))))) * f(drop(sndcart(pastecart(x, y))))) } else { vec(0) })) == integral(UNIV, (y : Cart[Real, Unit]) => Cx(real_of_num(2) * (sin((w - drop(y)) * a) / (w - drop(y)))) * f(drop(y)))
+      #|  (w : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (w : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, \226\136\128 w : Real, real_of_num(0) <= a && absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 integral(interval([(lift(-a), lift(a))]), (y : Cart[Real, Unit]) => cexp(ii * (Cx(w) * Cx(drop(y)))) * (Cx(sqrt(real_of_num(2) * pi)) * fourier(f, drop(y)))) == integral(UNIV, (y : Cart[Real, Unit]) => Cx(real_of_num(2) * (sin((w - drop(y)) * a) / (w - drop(y)))) * f(drop(y)))
+      #|  ((u : Cart[Real, Unit]) => lift(sin((a : Real) * drop(u)))) == o(lift, o((t : Real) => sin(a * t), drop))
+      #|  \226\136\128 a : Real, continuous_on((u : Cart[Real, Unit]) => Cx(sin(a * drop(u))), UNIV)
+      #|  (a : Real) * drop((x : Cart[Real, Unit]))
+      #|  real_of_num(1)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (u : Cart[Real, Unit]) => (H : (Real) -> Cart[Real, Tybit0[Unit]])(drop(u))
+      #|  (u : Cart[Real, Unit]) => Cx(sin((a : Real) * drop(u)))
+      #|  op_star
+      #|  \226\136\128 H : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => H(drop(z)), UNIV) \226\134\146 integrable_on((u : Cart[Real, Unit]) => Cx(sin(a * drop(u))) * H(drop(u)), UNIV)
+      #|  \226\136\128 H : (Real) -> Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => H(drop(z)), UNIV) \226\134\146 absolutely_real_integrable_on((u : Real) => Re(H(u)), UNIV)
+      #|  \226\136\128 H : (Real) -> Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => H(drop(z)), UNIV) \226\134\146 absolutely_real_integrable_on((u : Real) => Im(H(u)), UNIV)
+      #|  (u : Cart[Real, Unit]) => Cx(sin((a : Real) * drop(u))) * (H : (Real) -> Cart[Real, Tybit0[Unit]])(drop(u))
+      #|  (k : Num)
       #|  1
-      #|  s:real^1->bool
-      #|  (:real^1)
-      #|  (\\u. Re((H:real->complex) u) * sin(a * u)) real_integrable_on (:real)
-      #|  forall(H:real->complex) a. (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n   ==> (integral (:real^1) (\\u. Cx(sin(a * drop u)) * H(drop u)))$1 =\n       real_integral (:real) (\\u. Re(H u) * sin(a * u))
-      #|  \\u. Cx(sin(a * drop u)) * (H:real->complex)(drop u)
-      #|  k:num
+      #|  (s : (Cart[Real, Unit]) -> Bool)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  real_integrable_on((u : Real) => Re((H : (Real) -> Cart[Real, Tybit0[Unit]])(u)) * sin((a : Real) * u), UNIV)
+      #|  \226\136\128 H : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => H(drop(z)), UNIV) \226\134\146 op_dollar(integral(UNIV, (u : Cart[Real, Unit]) => Cx(sin(a * drop(u))) * H(drop(u))), 1) == real_integral(UNIV, (u : Real) => Re(H(u)) * sin(a * u))
+      #|  (u : Cart[Real, Unit]) => Cx(sin((a : Real) * drop(u))) * (H : (Real) -> Cart[Real, Tybit0[Unit]])(drop(u))
+      #|  (k : Num)
       #|  2
-      #|  s:real^1->bool
-      #|  (:real^1)
-      #|  (\\u. Im((H:real->complex) u) * sin(a * u)) real_integrable_on (:real)
-      #|  forall(H:real->complex) a. (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n   ==> (integral (:real^1) (\\u. Cx(sin(a * drop u)) * H(drop u)))$2 =\n       real_integral (:real) (\\u. Im(H u) * sin(a * u))
-      #|  forall(H:real->complex).\n     (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n     ==> ((\\a. integral (:real^1) (\\u. Cx(sin(a * drop u)) * H(drop u))) -->\n       vec 0)\n         at_posinfinity
-      #|  &1
-      #|  a:real
-      #|  a:real
-      #|  &1
-      #|  \\a. real_integral (real_interval[--a,a]) (\\x. sin x / x)
-      #|  ((\\a. real_integral (real_interval[--(&1),&1]) (\\u. sin(a * u) / u)) --->\n   pi)\n   at_posinfinity
-      #|  --z + lift x:real^1
-      #|  z:real^1
-      #|  IMAGE (\\z:real^1. inv(--(&1)) % z + --(inv(--(&1)) % lift x)) (:real^1) =\n    (:real^1)
-      #|  ~(--(&1) = &0)
-      #|  lift x
-      #|  --(&1)
-      #|  (:real^1)
-      #|  \\z:real^1. (f:real->complex)(drop z)
-      #|  forall(f:real->complex) x. (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\z. f(x - drop z)) absolutely_integrable_on (:real^1)
-      #|  ~(v = &0)
-      #|  &2 * K = &2 * inv v * (K * v)
-      #|  forall v n K:real. &0 < v /\\ n <= K * v ==> &2 * inv v * n <= &2 * K
-      #|  \\x:real. x
-      #|  (\\z:real^1. lift(&2 * inv(drop z))) = lift o (\\u. &2 * inv u) o drop
-      #|  (\\z:real^1. Cx(&2 * inv(drop z))) = (\\w. Cx(drop w)) o (\\z. lift(&2 *\n    inv(drop z)))
-      #|  (\\z:real^1. Cx(&2 * inv(drop z))) measurable_on (:real^1)
-      #|  {z:real^1 | abs(drop z) <= &1} = interval[lift(--(&1)), lift(&1)]
-      #|  lebesgue_measurable {z:real^1 | abs(drop z) <= &1}
-      #|  forall(f:real->complex) x. (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\z. Cx(&2 * inv(drop z)) *\n            (f(x - drop z) - (if abs(drop z) <= &1 then f x else vec 0)))\n       measurable_on (:real^1)
-      #|  (\\z:real^1. lift(c * (if abs(drop z) <= r then &1 else &0))) =\n    (\\z. if z IN interval[lift(--r), lift r] then lift c else vec 0)
-      #|  forall c r. (\\z:real^1. lift(c * (if abs(drop z) <= r then &1 else &0)))\n   integrable_on (:real^1)
-      #|  forall(f:real->complex) x K d. (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\z:real^1. lift(&2 * K * (if abs(drop z) <= d then &1 else &0)) +\n                   lift(&2 / d * norm(f(x - drop z))) +\n                   lift(&2 / d * norm(f x) * (if abs(drop z) <= &1 then &1 else\n                     &0)))\n       integrable_on (:real^1)
-      #|  forall u (w:complex). norm(Cx(&2 * inv u) * w) = &2 * inv(abs u) * norm w
-      #|  &0 <= t2 /\\ &0 <= t3 ==> &2 * K <= &2 * K + t2 +\n      t3
-      #|  K:real
-      #|  norm((f:real->complex)(x - u) - f x)
-      #|  abs u
-      #|  &2 * K
-      #|  abs u <= &1
-      #|  forall(f:real->complex) x K d u.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\ ~(u = &0) /\\ abs u <= d /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v)\n     ==> &2 * inv(abs u) * norm(f(x - u) - (if abs u <= &1 then f x else vec\n       0))\n         <= &2 * K * (if abs u <= d then &1 else &0) +\n            &2 / d * norm(f(x - u)) +\n            &2 / d * norm(f x) * (if abs u <= &1 then &1 else &0)
-      #|  &2 / d * (norm((f:real->complex)(x - u)) + norm(if abs u <= &1\n    then f x else vec 0))
-      #|  &2 * inv(abs u) <= &2 / d
-      #|  (&2 * inv(abs u)) *\n              (norm((f:real->complex)(x - u)) + norm(if abs u <= &1 then f x\n                else vec 0))
-      #|  forall(f:real->complex) x K d u.\n     &0 < d /\\ ~(u = &0) /\\ ~(abs u <= d)\n     ==> &2 * inv(abs u) * norm(f(x - u) - (if abs u <= &1 then f x else vec\n       0))\n         <= &2 * K * (if abs u <= d then &1 else &0) +\n            &2 / d * norm(f(x - u)) +\n            &2 / d * norm(f x) * (if abs u <= &1 then &1 else &0)
+      #|  (s : (Cart[Real, Unit]) -> Bool)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  real_integrable_on((u : Real) => Im((H : (Real) -> Cart[Real, Tybit0[Unit]])(u)) * sin((a : Real) * u), UNIV)
+      #|  \226\136\128 H : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => H(drop(z)), UNIV) \226\134\146 op_dollar(integral(UNIV, (u : Cart[Real, Unit]) => Cx(sin(a * drop(u))) * H(drop(u))), 2) == real_integral(UNIV, (u : Real) => Im(H(u)) * sin(a * u))
+      #|  \226\136\128 H : (Real) -> Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => H(drop(z)), UNIV) \226\134\146 op_minus_minus_gt((a : Real) => integral(UNIV, (u : Cart[Real, Unit]) => Cx(sin(a * drop(u))) * H(drop(u))), vec(0), at_posinfinity)
+      #|  real_of_num(1)
+      #|  (a : Real)
+      #|  (a : Real)
+      #|  real_of_num(1)
+      #|  (a : Real) => real_integral(real_interval([(-a, a)]), (x : Real) => sin(x) / x)
+      #|  op_minus_minus_minus_gt((a : Real) => real_integral(real_interval([(-real_of_num(1), real_of_num(1))]), (u : Real) => sin(a * u) / u), pi, at_posinfinity)
+      #|  -(z : Cart[Real, Unit]) + lift((x : Real))
+      #|  (z : Cart[Real, Unit])
+      #|  IMAGE((z : Cart[Real, Unit]) => op_pct(inv(-real_of_num(1)), z) + -op_pct(inv(-real_of_num(1)), lift((x : Real))), UNIV) == UNIV
+      #|  !(-real_of_num(1) == real_of_num(0))
+      #|  lift((x : Real))
+      #|  -real_of_num(1)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (z : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 absolutely_integrable_on((z : Cart[Real, Unit]) => f(x - drop(z)), UNIV)
+      #|  !((v : Real) == real_of_num(0))
+      #|  real_of_num(2) * (K : Real) == real_of_num(2) * (inv((v : Real)) * (K * v))
+      #|  \226\136\128 v : Real, \226\136\128 n : Real, \226\136\128 K : Real, real_of_num(0) < v && n <= K * v \226\134\146 real_of_num(2) * (inv(v) * n) <= real_of_num(2) * K
+      #|  (x : Real) => x
+      #|  ((z : Cart[Real, Unit]) => lift(real_of_num(2) * inv(drop(z)))) == o(lift, o((u : Real) => real_of_num(2) * inv(u), drop))
+      #|  ((z : Cart[Real, Unit]) => Cx(real_of_num(2) * inv(drop(z)))) == o((w : Cart[Real, Unit]) => Cx(drop(w)), (z : Cart[Real, Unit]) => lift(real_of_num(2) * inv(drop(z))))
+      #|  measurable_on((z : Cart[Real, Unit]) => Cx(real_of_num(2) * inv(drop(z))), UNIV)
+      #|  {(z : Cart[Real, Unit]) | abs(drop(z)) <= real_of_num(1)} == interval([(lift(-real_of_num(1)), lift(real_of_num(1)))])
+      #|  lebesgue_measurable({(z : Cart[Real, Unit]) | abs(drop(z)) <= real_of_num(1)})
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 measurable_on((z : Cart[Real, Unit]) => Cx(real_of_num(2) * inv(drop(z))) * (f(x - drop(z)) - (if abs(drop(z)) <= real_of_num(1) { f(x) } else { vec(0) })), UNIV)
+      #|  ((z : Cart[Real, Unit]) => lift((c : Real) * (if abs(drop(z)) <= (r : Real) { real_of_num(1) } else { real_of_num(0) }))) == ((z : Cart[Real, Unit]) => if IN(z, interval([(lift(-r), lift(r))])) { lift(c) } else { vec(0) })
+      #|  \226\136\128 c : Real, \226\136\128 r : Real, integrable_on((z : Cart[Real, Unit]) => lift(c * (if abs(drop(z)) <= r { real_of_num(1) } else { real_of_num(0) })), UNIV)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 K : Real, \226\136\128 d : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 integrable_on((z : Cart[Real, Unit]) => lift(real_of_num(2) * (K * (if abs(drop(z)) <= d { real_of_num(1) } else { real_of_num(0) }))) + (lift(real_of_num(2) / d * norm(f(x - drop(z)))) + lift(real_of_num(2) / d * (norm(f(x)) * (if abs(drop(z)) <= real_of_num(1) { real_of_num(1) } else { real_of_num(0) })))), UNIV)
+      #|  \226\136\128 u : Real, \226\136\128 w : Cart[Real, Tybit0[Unit]], norm(Cx(real_of_num(2) * inv(u)) * w) == real_of_num(2) * (inv(abs(u)) * norm(w))
+      #|  real_of_num(0) <= (t2 : Real) && real_of_num(0) <= (t3 : Real) \226\134\146 real_of_num(2) * (K : Real) <= real_of_num(2) * K + (t2 + t3)
+      #|  (K : Real)
+      #|  norm((f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real) - (u : Real)) - f(x))
+      #|  abs((u : Real))
+      #|  real_of_num(2) * (K : Real)
+      #|  abs((u : Real)) <= real_of_num(1)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 K : Real, \226\136\128 d : Real, \226\136\128 u : Real, real_of_num(0) < d && d <= real_of_num(1) && real_of_num(0) <= K && !(u == real_of_num(0)) && abs(u) <= d && (\226\136\128 v : Real, abs(v) <= d \226\134\146 norm(f(x - v) - f(x)) <= K * abs(v)) \226\134\146 real_of_num(2) * (inv(abs(u)) * norm(f(x - u) - (if abs(u) <= real_of_num(1) { f(x) } else { vec(0) }))) <= real_of_num(2) * (K * (if abs(u) <= d { real_of_num(1) } else { real_of_num(0) })) + (real_of_num(2) / d * norm(f(x - u)) + real_of_num(2) / d * (norm(f(x)) * (if abs(u) <= real_of_num(1) { real_of_num(1) } else { real_of_num(0) })))
+      #|  real_of_num(2) / (d : Real) * (norm((f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real) - (u : Real))) + norm(if abs(u) <= real_of_num(1) { f(x) } else { vec(0) }))
+      #|  real_of_num(2) * inv(abs((u : Real))) <= real_of_num(2) / (d : Real)
+      #|  real_of_num(2) * inv(abs((u : Real))) * (norm((f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real) - u)) + norm(if abs(u) <= real_of_num(1) { f(x) } else { vec(0) }))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 K : Real, \226\136\128 d : Real, \226\136\128 u : Real, real_of_num(0) < d && !(u == real_of_num(0)) && !(abs(u) <= d) \226\134\146 real_of_num(2) * (inv(abs(u)) * norm(f(x - u) - (if abs(u) <= real_of_num(1) { f(x) } else { vec(0) }))) <= real_of_num(2) * (K * (if abs(u) <= d { real_of_num(1) } else { real_of_num(0) })) + (real_of_num(2) / d * norm(f(x - u)) + real_of_num(2) / d * (norm(f(x)) * (if abs(u) <= real_of_num(1) { real_of_num(1) } else { real_of_num(0) })))
       #|  :real
       #|  :real
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  u:real
-      #|  d:real
-      #|  K:real
-      #|  x:real
-      #|  f:real->complex
-      #|  u:real
-      #|  d:real
-      #|  K:real
-      #|  x:real
-      #|  f:real->complex
-      #|  abs u <= d
-      #|  u = &0
-      #|  forall(f:real->complex) x K d u.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v)\n     ==> norm(Cx(&2 * inv u) * (f(x - u) - (if abs u <= &1 then f x else vec\n       0)))\n         <= &2 * K * (if abs u <= d then &1 else &0) +\n            &2 / d * norm(f(x - u)) +\n            &2 / d * norm(f x) * (if abs u <= &1 then &1 else &0)
-      #|  \\z:real^1. lift(&2 * K * (if abs(drop z) <= d then &1 else &0)) +\n               lift(&2 / d * norm((f:real->complex)(x - drop z))) +\n               lift(&2 / d * norm(f x) * (if abs(drop z) <= &1 then &1 else\n                 &0))
-      #|  forall(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z. Cx(&2 * inv(drop z)) *\n              (f(x - drop z) - (if abs(drop z) <= &1 then f x else vec 0)))\n         absolutely_integrable_on (:real^1)
-      #|  d:real
-      #|  K:real
-      #|  x:real
-      #|  f:real->complex
-      #|  \\u. Cx(&2 * inv u) *\n                    ((f:real->complex)(x - u) - (if abs u <= &1 then f x else\n                      vec 0))
-      #|  forall(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> ((\\a. integral (:real^1)\n                (\\u. Cx(sin(a * drop u)) *\n                     (Cx(&2 * inv(drop u)) *\n                      (f(x - drop u) - (if abs(drop u) <= &1 then f x else vec\n                        0)))))\n          --> vec 0) at_posinfinity
-      #|  c:real^1
-      #|  (:real^1)
-      #|  H:real^1->real^N
-      #|  (c:real^1) + --x = c - x
-      #|  (:real^1)
-      #|  \\x:real^1. (H:real^1->real^N)(c + x)
-      #|  forall(H:real^1->real^N) c.\n     integral (:real^1) (\\u. H(c - u)) = integral (:real^1) H
-      #|  (x:real) - (x - u) = u
-      #|  lift x
-      #|  \\y. Cx (&2 * sin ((x - drop y) * a) / (x - drop y)) *\n          (f:real->complex) (drop y)
-      #|  forall(f:real->complex) x a.\n     integral (:real^1)\n       (\\y. Cx (&2 * sin ((x - drop y) * a) / (x - drop y)) * f (drop y)) =\n     integral (:real^1)\n       (\\u. Cx (&2 * sin (a * drop u) / drop u) * f (x - drop u))
-      #|  forall(f:real->complex) x a u:real^1.\n     Cx (&2 * sin (a * drop u) / drop u) * f (x - drop u) =\n     Cx (sin (a * drop u)) *\n       (Cx (&2 * inv (drop u)) *\n        (f (x - drop u) - (if abs (drop u) <= &1 then f x else vec 0))) +\n     Cx (sin (a * drop u)) *\n       (Cx (&2 * inv (drop u)) *\n        (if abs (drop u) <= &1 then f x else vec 0))
-      #|  (\\z. Cx(drop z)):real^1->complex
-      #|  IMAGE lift s
-      #|  lift(real_integral s (g:real->real))
-      #|  lift o (g:real->real) o drop
-      #|  forall(g:real->real) s.\n     g real_integrable_on s\n     ==> integral (IMAGE lift s) (\\u. Cx(g(drop u))) =\n         Cx(real_integral s g)
-      #|  lift(y:real)
-      #|  IMAGE lift s
-      #|  (\\z. Cx(drop z)):real^1->complex
-      #|  lift o (g:real->real) o drop
-      #|  y:real
-      #|  forall(g:real->real) s.\n     g real_integrable_on s\n     ==> (\\u. Cx(g(drop u))) integrable_on (IMAGE lift s)
-      #|  forall A B c P:bool. A * (B * (if P then c else vec 0)) =\n                  (if P then A * (B * c) else vec 0)
-      #|  forall(fx:complex) a u:real^1.\n     Cx (sin (a * drop u)) * (Cx (&2 * inv (drop u)) * fx) =\n     fx * Cx(&2 * sin (a * drop u) / drop u)
-      #|  real_interval[-- &1,&1]
-      #|  \\u:real. &2 * sin(a * u) / u
-      #|  (\\u:real. &2 * sin(a * u) / u) real_integrable_on real_interval[-- &1,&1]
-      #|  forall u:real^1. abs(drop u) <= &1 <=> u IN interval[lift(-- &1),lift(&1)]
-      #|  forall(f:real->complex) x a.\n     &0 < a\n     ==> integral (:real^1)\n           (\\u. Cx (sin (a * drop u)) *\n                (Cx (&2 * inv (drop u)) *\n                 (if abs (drop u) <= &1 then f x else vec 0))) =\n         f x *\n         Cx(real_integral (real_interval[-- &1,&1]) (\\u. &2 * sin(a * u) /\n           u))
-      #|  (\\u. sin(c * u) / u) = (\\u. --(sin(--c * u) / u))
-      #|  c = &0 \\/ &0 < c \\/ &0 < --c
-      #|  forall a b c:real. (\\u. sin(c * u) / u) real_integrable_on real_interval[a,b]
-      #|  forall a. real_integral (real_interval[-- &1,&1]) (\\u. &2 * sin(a * u) / u) =\n          &2 * real_integral (real_interval[-- &1,&1]) (\\u. sin(a * u) / u)
-      #|  a:real
-      #|  &1
-      #|  \\a. (f:real->complex) x *\n        Cx(real_integral (real_interval[-- &1,&1]) (\\u. &2 * sin(a * u) / u))
-      #|  forall(f:real->complex) x.\n     ((\\a. integral (:real^1)\n             (\\u. Cx (sin (a * drop u)) *\n                  (Cx (&2 * inv (drop u)) *\n                   (if abs (drop u) <= &1 then f x else vec 0))))\n      --> f x * Cx(&2 * pi)) at_posinfinity
-      #|  forall u:real^1. abs(drop u) <= &1 <=> u IN interval[lift(-- &1),lift(&1)]
-      #|  forall(f:real->complex) x a.\n     (\\u. Cx (sin (a * drop u)) *\n          (Cx (&2 * inv (drop u)) *\n           (if abs (drop u) <= &1 then f x else vec 0))) integrable_on\n             (:real^1)
-      #|  d:real
-      #|  K:real
-      #|  x:real
-      #|  f:real->complex
-      #|  d:real
-      #|  K:real
-      #|  x:real
-      #|  f:real->complex
-      #|  a:real
-      #|  \\u. Cx (&2 * inv u) *\n            ((f:real->complex)(x - u) - (if abs u <= &1 then f x else vec 0))
-      #|  forall a. integral (:real^1)\n         (\\u. Cx (sin (a * drop u)) *\n              (Cx (&2 * inv (drop u)) *\n               (f (x - drop u) - (if abs (drop u) <= &1 then f x else vec 0)))\n                 +\n              Cx (sin (a * drop u)) *\n              (Cx (&2 * inv (drop u)) *\n               (if abs (drop u) <= &1 then f x else vec 0))) =\n        integral (:real^1)\n          (\\u. Cx (sin (a * drop u)) *\n               (Cx (&2 * inv (drop u)) *\n                (f (x - drop u) - (if abs (drop u) <= &1 then f x else vec\n                  0)))) +\n        integral (:real^1)\n          (\\u. Cx (sin (a * drop u)) *\n               (Cx (&2 * inv (drop u)) *\n                (if abs (drop u) <= &1 then f x else vec 0)))
-      #|  forall(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> ((\\a. integral (:real^1)\n                (\\u. Cx (&2 * sin (a * drop u) / drop u) * f (x - drop u)))\n          --> f x * Cx(&2 * pi)) at_posinfinity
-      #|  d:real
-      #|  K:real
-      #|  x:real
-      #|  f:real->complex
-      #|  a >= &0 ==> &0 <= a
-      #|  x:real
-      #|  a:real
-      #|  f:real->complex
-      #|  a:real
-      #|  &0
-      #|  \\a. integral (:real^1)\n          (\\u. Cx (&2 * sin (a * drop u) / drop u) * (f:real->complex) (x -\n            drop u))
-      #|  forall(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> ((\\a. integral (interval[lift(--a),lift a])\n                (\\y. cexp(ii * Cx x * Cx(drop y)) * Cx(sqrt(&2 * pi)) *\n                     fourier f (drop y)))\n          --> f x * Cx(&2 * pi)) at_posinfinity
-      #|  \\k:num. drop(xx k)
-      #|  drop aa
-      #|  f:real->complex
-      #|  aa:real^1
-      #|  xx:num->real^1
-      #|  forall(f:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z. fourier f (drop z)) continuous_on (:real^1)
-      #|  (:real^1)
-      #|  interval[lift(--a),lift a]
-      #|  \\y:real^1. y
-      #|  forall(f:real->complex) x a.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier f (drop y))\n         integrable_on interval[lift(--a),lift a]
-      #|  &0 < sqrt(&2 * pi)
-      #|  &2 * pi
-      #|  Cx(inv(&2 * pi)) * Cx(sqrt(&2 * pi)) = Cx(inv(sqrt(&2 * pi)))
-      #|  inv(&2 * pi) * (&2 * pi) = &1
-      #|  ic * (fx * tp) = (ic * tp) * fx
-      #|  forall fx. Cx(inv(&2 * pi)) * (fx * Cx(&2 * pi)) = fx
-      #|  Cx(inv(&2 * pi))
-      #|  cexp e * Cx s * ff = Cx s * (cexp e * ff)
-      #|  forall a. integral (interval[lift(--a),lift a])\n          (\\y. cexp(ii * Cx x * Cx(drop y)) * Cx(sqrt(&2 * pi)) *\n               (fourier:(real->complex)->real->complex) f (drop y)) =\n        Cx(sqrt(&2 * pi)) *\n        integral (interval[lift(--a),lift a])\n          (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier f (drop y))
-      #|  d:real
-      #|  K:real
-      #|  x:real
-      #|  f:real->complex
-      #|  forall(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> ((\\a. Cx(inv(sqrt(&2 * pi))) *\n               integral (interval[lift(--a),lift a])\n                 (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier f (drop y)))\n          --> f x) at_posinfinity
-      #|  lift a
-      #|  lift(--a)
-      #|  a:real
-      #|  B:real
-      #|  B:real
-      #|  e:real
-      #|  e:real
-      #|  forall(g:real^1->complex).\n     g integrable_on (:real^1)\n     ==> ((\\a. integral (interval[lift(--a),lift a]) g) --> integral (:real^1)\n       g)\n         at_posinfinity
-      #|  --x:real
-      #|  fourier (f:real->complex)
-      #|  y:real^1
-      #|  \\y. cexp(--(ii * Cx(--x) * Cx(drop y))) *\n        (fourier:(real->complex)->real->complex) f (drop y)
-      #|  forall(f:real->complex) x.\n     (\\z. fourier f (drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier f (drop y))\n         integrable_on (:real^1)
-      #|  d:real
-      #|  K:real
-      #|  \\a. Cx(inv(sqrt(&2 * pi))) *\n        integral (interval[lift(--a),lift a])\n          (\\y. cexp(ii * Cx x * Cx(drop y)) *\n               (fourier:(real->complex)->real->complex) f (drop y))
+      #|  (u : Real)
+      #|  (d : Real)
+      #|  (K : Real)
+      #|  (x : Real)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (u : Real)
+      #|  (d : Real)
+      #|  (K : Real)
+      #|  (x : Real)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  abs((u : Real)) <= (d : Real)
+      #|  (u : Real) == real_of_num(0)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 K : Real, \226\136\128 d : Real, \226\136\128 u : Real, real_of_num(0) < d && d <= real_of_num(1) && real_of_num(0) <= K && (\226\136\128 v : Real, abs(v) <= d \226\134\146 norm(f(x - v) - f(x)) <= K * abs(v)) \226\134\146 norm(Cx(real_of_num(2) * inv(u)) * (f(x - u) - (if abs(u) <= real_of_num(1) { f(x) } else { vec(0) }))) <= real_of_num(2) * (K * (if abs(u) <= d { real_of_num(1) } else { real_of_num(0) })) + (real_of_num(2) / d * norm(f(x - u)) + real_of_num(2) / d * (norm(f(x)) * (if abs(u) <= real_of_num(1) { real_of_num(1) } else { real_of_num(0) })))
+      #|  (z : Cart[Real, Unit]) => lift(real_of_num(2) * ((K : Real) * (if abs(drop(z)) <= (d : Real) { real_of_num(1) } else { real_of_num(0) }))) + (lift(real_of_num(2) / d * norm((f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real) - drop(z)))) + lift(real_of_num(2) / d * (norm(f(x)) * (if abs(drop(z)) <= real_of_num(1) { real_of_num(1) } else { real_of_num(0) }))))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 K : Real, \226\136\128 d : Real, real_of_num(0) < d && d <= real_of_num(1) && real_of_num(0) <= K && (\226\136\128 v : Real, abs(v) <= d \226\134\146 norm(f(x - v) - f(x)) <= K * abs(v)) && absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 absolutely_integrable_on((z : Cart[Real, Unit]) => Cx(real_of_num(2) * inv(drop(z))) * (f(x - drop(z)) - (if abs(drop(z)) <= real_of_num(1) { f(x) } else { vec(0) })), UNIV)
+      #|  (d : Real)
+      #|  (K : Real)
+      #|  (x : Real)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (u : Real) => Cx(real_of_num(2) * inv(u)) * ((f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real) - u) - (if abs(u) <= real_of_num(1) { f(x) } else { vec(0) }))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 K : Real, \226\136\128 d : Real, real_of_num(0) < d && d <= real_of_num(1) && real_of_num(0) <= K && (\226\136\128 v : Real, abs(v) <= d \226\134\146 norm(f(x - v) - f(x)) <= K * abs(v)) && absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 op_minus_minus_gt((a : Real) => integral(UNIV, (u : Cart[Real, Unit]) => Cx(sin(a * drop(u))) * (Cx(real_of_num(2) * inv(drop(u))) * (f(x - drop(u)) - (if abs(drop(u)) <= real_of_num(1) { f(x) } else { vec(0) })))), vec(0), at_posinfinity)
+      #|  (c : Cart[Real, Unit])
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (H : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  (c : Cart[Real, Unit]) + -(x : Cart[Real, Unit]) == c - x
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (x : Cart[Real, Unit]) => (H : (Cart[Real, Unit]) -> Cart[Real, N])((c : Cart[Real, Unit]) + x)
+      #|  \226\136\128 H : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 c : Cart[Real, Unit], integral(UNIV, (u : Cart[Real, Unit]) => H(c - u)) == integral(UNIV, H)
+      #|  (x : Real) - (x - (u : Real)) == u
+      #|  lift((x : Real))
+      #|  (y : Cart[Real, Unit]) => Cx(real_of_num(2) * (sin(((x : Real) - drop(y)) * (a : Real)) / (x - drop(y)))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(y))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 a : Real, integral(UNIV, (y : Cart[Real, Unit]) => Cx(real_of_num(2) * (sin((x - drop(y)) * a) / (x - drop(y)))) * f(drop(y))) == integral(UNIV, (u : Cart[Real, Unit]) => Cx(real_of_num(2) * (sin(a * drop(u)) / drop(u))) * f(x - drop(u)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 a : Real, \226\136\128 u : Cart[Real, Unit], Cx(real_of_num(2) * (sin(a * drop(u)) / drop(u))) * f(x - drop(u)) == Cx(sin(a * drop(u))) * (Cx(real_of_num(2) * inv(drop(u))) * (f(x - drop(u)) - (if abs(drop(u)) <= real_of_num(1) { f(x) } else { vec(0) }))) + Cx(sin(a * drop(u))) * (Cx(real_of_num(2) * inv(drop(u))) * (if abs(drop(u)) <= real_of_num(1) { f(x) } else { vec(0) }))
+      #|  (z : Cart[Real, Unit]) => Cx(drop(z))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  lift(real_integral((s : (Real) -> Bool), (g : (Real) -> Real)))
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(g, s) \226\134\146 integral(IMAGE(lift, s), (u : Cart[Real, Unit]) => Cx(g(drop(u)))) == Cx(real_integral(s, g))
+      #|  lift((y : Real))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  (z : Cart[Real, Unit]) => Cx(drop(z))
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  (y : Real)
+      #|  \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(g, s) \226\134\146 integrable_on((u : Cart[Real, Unit]) => Cx(g(drop(u))), IMAGE(lift, s))
+      #|  \226\136\128 A : Cart[Real, Tybit0[Unit]], \226\136\128 B : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 P : Bool, A * (B * (if P { c } else { vec(0) })) == (if P { A * (B * c) } else { vec(0) })
+      #|  \226\136\128 fx : Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, \226\136\128 u : Cart[Real, Unit], Cx(sin(a * drop(u))) * (Cx(real_of_num(2) * inv(drop(u))) * fx) == fx * Cx(real_of_num(2) * (sin(a * drop(u)) / drop(u)))
+      #|  real_interval([(-real_of_num(1), real_of_num(1))])
+      #|  (u : Real) => real_of_num(2) * (sin((a : Real) * u) / u)
+      #|  real_integrable_on((u : Real) => real_of_num(2) * (sin((a : Real) * u) / u), real_interval([(-real_of_num(1), real_of_num(1))]))
+      #|  \226\136\128 u : Cart[Real, Unit], (abs(drop(u)) <= real_of_num(1)) == IN(u, interval([(lift(-real_of_num(1)), lift(real_of_num(1)))]))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 a : Real, real_of_num(0) < a \226\134\146 integral(UNIV, (u : Cart[Real, Unit]) => Cx(sin(a * drop(u))) * (Cx(real_of_num(2) * inv(drop(u))) * (if abs(drop(u)) <= real_of_num(1) { f(x) } else { vec(0) }))) == f(x) * Cx(real_integral(real_interval([(-real_of_num(1), real_of_num(1))]), (u : Real) => real_of_num(2) * (sin(a * u) / u)))
+      #|  ((u : Real) => sin((c : Real) * u) / u) == ((u : Real) => -(sin(-c * u) / u))
+      #|  (c : Real) == real_of_num(0) || real_of_num(0) < c || real_of_num(0) < -c
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, real_integrable_on((u : Real) => sin(c * u) / u, real_interval([(a, b)]))
+      #|  \226\136\128 a : Real, real_integral(real_interval([(-real_of_num(1), real_of_num(1))]), (u : Real) => real_of_num(2) * (sin(a * u) / u)) == real_of_num(2) * real_integral(real_interval([(-real_of_num(1), real_of_num(1))]), (u : Real) => sin(a * u) / u)
+      #|  (a : Real)
+      #|  real_of_num(1)
+      #|  (a : Real) => (f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real)) * Cx(real_integral(real_interval([(-real_of_num(1), real_of_num(1))]), (u : Real) => real_of_num(2) * (sin(a * u) / u)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, op_minus_minus_gt((a : Real) => integral(UNIV, (u : Cart[Real, Unit]) => Cx(sin(a * drop(u))) * (Cx(real_of_num(2) * inv(drop(u))) * (if abs(drop(u)) <= real_of_num(1) { f(x) } else { vec(0) }))), f(x) * Cx(real_of_num(2) * pi), at_posinfinity)
+      #|  \226\136\128 u : Cart[Real, Unit], (abs(drop(u)) <= real_of_num(1)) == IN(u, interval([(lift(-real_of_num(1)), lift(real_of_num(1)))]))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 a : Real, integrable_on((u : Cart[Real, Unit]) => Cx(sin(a * drop(u))) * (Cx(real_of_num(2) * inv(drop(u))) * (if abs(drop(u)) <= real_of_num(1) { f(x) } else { vec(0) })), UNIV)
+      #|  (d : Real)
+      #|  (K : Real)
+      #|  (x : Real)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Real)
+      #|  (K : Real)
+      #|  (x : Real)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (a : Real)
+      #|  (u : Real) => Cx(real_of_num(2) * inv(u)) * ((f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real) - u) - (if abs(u) <= real_of_num(1) { f(x) } else { vec(0) }))
+      #|  \226\136\128 a : Real, integral(UNIV, (u : Cart[Real, Unit]) => Cx(sin(a * drop(u))) * (Cx(real_of_num(2) * inv(drop(u))) * ((f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real) - drop(u)) - (if abs(drop(u)) <= real_of_num(1) { f(x) } else { vec(0) }))) + Cx(sin(a * drop(u))) * (Cx(real_of_num(2) * inv(drop(u))) * (if abs(drop(u)) <= real_of_num(1) { f(x) } else { vec(0) }))) == integral(UNIV, (u : Cart[Real, Unit]) => Cx(sin(a * drop(u))) * (Cx(real_of_num(2) * inv(drop(u))) * (f(x - drop(u)) - (if abs(drop(u)) <= real_of_num(1) { f(x) } else { vec(0) })))) + integral(UNIV, (u : Cart[Real, Unit]) => Cx(sin(a * drop(u))) * (Cx(real_of_num(2) * inv(drop(u))) * (if abs(drop(u)) <= real_of_num(1) { f(x) } else { vec(0) })))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 K : Real, \226\136\128 d : Real, real_of_num(0) < d && d <= real_of_num(1) && real_of_num(0) <= K && (\226\136\128 v : Real, abs(v) <= d \226\134\146 norm(f(x - v) - f(x)) <= K * abs(v)) && absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 op_minus_minus_gt((a : Real) => integral(UNIV, (u : Cart[Real, Unit]) => Cx(real_of_num(2) * (sin(a * drop(u)) / drop(u))) * f(x - drop(u))), f(x) * Cx(real_of_num(2) * pi), at_posinfinity)
+      #|  (d : Real)
+      #|  (K : Real)
+      #|  (x : Real)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (a : Real) >= real_of_num(0) \226\134\146 real_of_num(0) <= a
+      #|  (x : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (a : Real)
+      #|  real_of_num(0)
+      #|  (a : Real) => integral(UNIV, (u : Cart[Real, Unit]) => Cx(real_of_num(2) * (sin(a * drop(u)) / drop(u))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real) - drop(u)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 K : Real, \226\136\128 d : Real, real_of_num(0) < d && d <= real_of_num(1) && real_of_num(0) <= K && (\226\136\128 v : Real, abs(v) <= d \226\134\146 norm(f(x - v) - f(x)) <= K * abs(v)) && absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 op_minus_minus_gt((a : Real) => integral(interval([(lift(-a), lift(a))]), (y : Cart[Real, Unit]) => cexp(ii * (Cx(x) * Cx(drop(y)))) * (Cx(sqrt(real_of_num(2) * pi)) * fourier(f, drop(y)))), f(x) * Cx(real_of_num(2) * pi), at_posinfinity)
+      #|  (k : Num) => drop((xx : (Num) -> Cart[Real, Unit])(k))
+      #|  drop((aa : Cart[Real, Unit]))
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (aa : Cart[Real, Unit])
+      #|  (xx : (Num) -> Cart[Real, Unit])
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 continuous_on((z : Cart[Real, Unit]) => fourier(f, drop(z)), UNIV)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  interval([(lift(-(a : Real)), lift(a))])
+      #|  (y : Cart[Real, Unit]) => y
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 a : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 integrable_on((y : Cart[Real, Unit]) => cexp(ii * (Cx(x) * Cx(drop(y)))) * fourier(f, drop(y)), interval([(lift(-a), lift(a))]))
+      #|  real_of_num(0) < sqrt(real_of_num(2) * pi)
+      #|  real_of_num(2) * pi
+      #|  Cx(inv(real_of_num(2) * pi)) * Cx(sqrt(real_of_num(2) * pi)) == Cx(inv(sqrt(real_of_num(2) * pi)))
+      #|  inv(real_of_num(2) * pi) * (real_of_num(2) * pi) == real_of_num(1)
+      #|  (ic : Cart[Real, Tybit0[Unit]]) * ((fx : Cart[Real, Tybit0[Unit]]) * (tp : Cart[Real, Tybit0[Unit]])) == ic * tp * fx
+      #|  \226\136\128 fx : Cart[Real, Tybit0[Unit]], Cx(inv(real_of_num(2) * pi)) * (fx * Cx(real_of_num(2) * pi)) == fx
+      #|  Cx(inv(real_of_num(2) * pi))
+      #|  cexp((e : Cart[Real, Tybit0[Unit]])) * (Cx((s : Real)) * (ff : Cart[Real, Tybit0[Unit]])) == Cx(s) * (cexp(e) * ff)
+      #|  \226\136\128 a : Real, integral(interval([(lift(-a), lift(a))]), (y : Cart[Real, Unit]) => cexp(ii * (Cx((x : Real)) * Cx(drop(y)))) * (Cx(sqrt(real_of_num(2) * pi)) * fourier((f : (Real) -> Cart[Real, Tybit0[Unit]]), drop(y)))) == Cx(sqrt(real_of_num(2) * pi)) * integral(interval([(lift(-a), lift(a))]), (y : Cart[Real, Unit]) => cexp(ii * (Cx(x) * Cx(drop(y)))) * fourier(f, drop(y)))
+      #|  (d : Real)
+      #|  (K : Real)
+      #|  (x : Real)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 K : Real, \226\136\128 d : Real, real_of_num(0) < d && d <= real_of_num(1) && real_of_num(0) <= K && (\226\136\128 v : Real, abs(v) <= d \226\134\146 norm(f(x - v) - f(x)) <= K * abs(v)) && absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 op_minus_minus_gt((a : Real) => Cx(inv(sqrt(real_of_num(2) * pi))) * integral(interval([(lift(-a), lift(a))]), (y : Cart[Real, Unit]) => cexp(ii * (Cx(x) * Cx(drop(y)))) * fourier(f, drop(y))), f(x), at_posinfinity)
+      #|  lift((a : Real))
+      #|  lift(-(a : Real))
+      #|  (a : Real)
+      #|  (B : Real)
+      #|  (B : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], integrable_on(g, UNIV) \226\134\146 op_minus_minus_gt((a : Real) => integral(interval([(lift(-a), lift(a))]), g), integral(UNIV, g), at_posinfinity)
+      #|  -(x : Real)
+      #|  fourier((f : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  (y : Cart[Real, Unit])
+      #|  (y : Cart[Real, Unit]) => cexp(-(ii * (Cx(-(x : Real)) * Cx(drop(y))))) * fourier((f : (Real) -> Cart[Real, Tybit0[Unit]]), drop(y))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => fourier(f, drop(z)), UNIV) \226\134\146 integrable_on((y : Cart[Real, Unit]) => cexp(ii * (Cx(x) * Cx(drop(y)))) * fourier(f, drop(y)), UNIV)
+      #|  (d : Real)
+      #|  (K : Real)
+      #|  (a : Real) => Cx(inv(sqrt(real_of_num(2) * pi))) * integral(interval([(lift(-a), lift(a))]), (y : Cart[Real, Unit]) => cexp(ii * (Cx((x : Real)) * Cx(drop(y)))) * fourier((f : (Real) -> Cart[Real, Tybit0[Unit]]), drop(y)))
       #|  at_posinfinity
-      #|  forall(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. fourier f (drop z)) absolutely_integrable_on (:real^1)\n     ==> Cx(inv(sqrt(&2 * pi))) *\n         integral (:real^1)\n           (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier f (drop y)) =\n         f x
-      #|  forall(f:real^1->real^N) d e net.\n     d = e ==> (f has_vector_derivative d) net ==> (f has_vector_derivative e)\n       net
-      #|  forall(f:real->real) d e net.\n     d = e ==> (f has_real_derivative d) net ==> (f has_real_derivative e)\n       net
-      #|  &2 * M < (N - B) * P
-      #|  forall M N B P:real. &0 <= M /\\ &0 < P /\\ (&2 * M) / P < N - B\n     ==> M < (N - B) * P
-      #|  M < (N - B) * (norm(L:complex) / &2)
-      #|  norm(fz - L) < norm L / &2 ==> norm L / &2 <= norm fz
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 K : Real, \226\136\128 d : Real, real_of_num(0) < d && d <= real_of_num(1) && real_of_num(0) <= K && (\226\136\128 v : Real, abs(v) <= d \226\134\146 norm(f(x - v) - f(x)) <= K * abs(v)) && absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) && absolutely_integrable_on((z : Cart[Real, Unit]) => fourier(f, drop(z)), UNIV) \226\134\146 Cx(inv(sqrt(real_of_num(2) * pi))) * integral(UNIV, (y : Cart[Real, Unit]) => cexp(ii * (Cx(x) * Cx(drop(y)))) * fourier(f, drop(y))) == f(x)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 d : Cart[Real, N], \226\136\128 e : Cart[Real, N], \226\136\128 net : Net[Cart[Real, Unit]], d == e \226\134\146 has_vector_derivative(f, d, net) \226\134\146 has_vector_derivative(f, e, net)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 d : Real, \226\136\128 e : Real, \226\136\128 net : Net[Real], d == e \226\134\146 has_real_derivative(f, d, net) \226\134\146 has_real_derivative(f, e, net)
+      #|  real_of_num(2) * (M : Real) < ((N : Real) - (B : Real)) * (P : Real)
+      #|  \226\136\128 M : Real, \226\136\128 N : Real, \226\136\128 B : Real, \226\136\128 P : Real, real_of_num(0) <= M && real_of_num(0) < P && real_of_num(2) * M / P < N - B \226\134\146 M < (N - B) * P
+      #|  (M : Real) < ((N : Real) - (B : Real)) * (norm((L : Cart[Real, Tybit0[Unit]])) / real_of_num(2))
+      #|  norm((fz : Cart[Real, Tybit0[Unit]]) - (L : Cart[Real, Tybit0[Unit]])) < norm(L) / real_of_num(2) \226\134\146 norm(L) / real_of_num(2) <= norm(fz)
       #|  :real
       #|  :real
-      #|  z:real^1
-      #|  (:real^1)
-      #|  interval[lift B,lift N]
-      #|  g:real^1->real^1
-      #|  \\z:real^1. lift(norm(L:complex) / &2)
-      #|  (N - B) * (norm(L:complex) / &2) <=\n    drop(integral (interval[lift B,lift N]) (g:real^1->real^1))
-      #|  z:real^1
-      #|  (:real^1)
-      #|  drop(integral (interval[lift B,lift N]) (g:real^1->real^1)) <= M
-      #|  B <= N
-      #|  N = &n:real
-      #|  n:num
-      #|  B + (&2 * M) / (norm(L:complex) / &2) + &1
-      #|  &0 <= (&2 * M) / (norm(L:complex) / &2)
-      #|  &0 < norm(L:complex) / &2
-      #|  &0 <= M
-      #|  M = drop(integral (:real^1) (g:real^1->real^1))
-      #|  (g:real^1->real^1) integrable_on (:real^1)
-      #|  g = \\z:real^1. lift(norm((f:real->complex)(drop z)))
-      #|  B:real
-      #|  norm(L:complex) / &2
-      #|  ~(&0 < n) /\\ &0 <= n ==> n = &0
-      #|  forall(f:real->complex) L.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (f --> L) at_posinfinity\n     ==> L = vec 0
-      #|  forall y a:real^1.\n     ((\\z. cexp(--(ii * Cx y * Cx(drop z)))) has_vector_derivative\n      (--(ii * Cx y) * cexp(--(ii * Cx y * Cx(drop a))))) (at a)
+      #|  (z : Cart[Real, Unit])
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  interval([(lift((B : Real)), lift((N : Real)))])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  (z : Cart[Real, Unit]) => lift(norm((L : Cart[Real, Tybit0[Unit]])) / real_of_num(2))
+      #|  ((N : Real) - (B : Real)) * (norm((L : Cart[Real, Tybit0[Unit]])) / real_of_num(2)) <= drop(integral(interval([(lift(B), lift(N))]), (g : (Cart[Real, Unit]) -> Cart[Real, Unit])))
+      #|  (z : Cart[Real, Unit])
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  drop(integral(interval([(lift((B : Real)), lift((N : Real)))]), (g : (Cart[Real, Unit]) -> Cart[Real, Unit]))) <= (M : Real)
+      #|  (B : Real) <= (N : Real)
+      #|  (N : Real) == real_of_num((n : Num))
+      #|  (n : Num)
+      #|  (B : Real) + (real_of_num(2) * (M : Real) / (norm((L : Cart[Real, Tybit0[Unit]])) / real_of_num(2)) + real_of_num(1))
+      #|  real_of_num(0) <= real_of_num(2) * (M : Real) / (norm((L : Cart[Real, Tybit0[Unit]])) / real_of_num(2))
+      #|  real_of_num(0) < norm((L : Cart[Real, Tybit0[Unit]])) / real_of_num(2)
+      #|  real_of_num(0) <= (M : Real)
+      #|  (M : Real) == drop(integral(UNIV, (g : (Cart[Real, Unit]) -> Cart[Real, Unit])))
+      #|  integrable_on((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), UNIV)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Unit]) == ((z : Cart[Real, Unit]) => lift(norm((f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z)))))
+      #|  (B : Real)
+      #|  norm((L : Cart[Real, Tybit0[Unit]])) / real_of_num(2)
+      #|  !(real_of_num(0) < (n : Real)) && real_of_num(0) <= n \226\134\146 n == real_of_num(0)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 L : Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) && op_minus_minus_gt(f, L, at_posinfinity) \226\134\146 L == vec(0)
+      #|  \226\136\128 y : Real, \226\136\128 a : Cart[Real, Unit], has_vector_derivative((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))), -(ii * Cx(y)) * cexp(-(ii * (Cx(y) * Cx(drop(a))))), at(a))
       #|  (f has_complex_derivative f') net
-      #|  drop(x:real^1)
-      #|  (ffp:real->complex)(drop x)
-      #|  x:real^1
-      #|  forall(ff:real->complex) (ffp:real->complex).\n     (forall x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x)))\n     ==> (\\z. ff(drop z)) continuous_on (:real^1)
-      #|  ffp:real->complex
-      #|  (:real^1)
-      #|  interval[lift(--a),lift a]
-      #|  \\z:real^1. z
-      #|  forall(ff:real->complex) (ffp:real->complex) y a.\n     (forall x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x)))\n     ==> (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))\n         integrable_on interval[lift(--a),lift a]
-      #|  forall A B C D:complex. A = B - C /\\ A = D ==> C = B + --D
-      #|  ffp:real->complex
-      #|  forall(ff:real->complex) (ffp:real->complex) y a.\n     (forall x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x)))\n     ==> integral (interval[lift(--a),lift a])\n          (\\z. (--(ii * Cx y) * cexp(--(ii * Cx y * Cx(drop z)))) * ff(drop z))\n            =\n         --(ii * Cx y) * integral (interval[lift(--a),lift a])\n          (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))
-      #|  a:real
-      #|  y:real
-      #|  ffp:real->complex
-      #|  ff:real->complex
-      #|  b - (b - z) = z
-      #|  drop(x:real^1)
-      #|  (cexp(--(ii * Cx y * Cx a)) * ff a -\n      cexp(--(ii * Cx y * Cx(--a))) * ff(--a)) -\n     integral (interval[lift(--a),lift a])\n       (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop z))
-      #|  lift a
-      #|  lift(--a)
-      #|  \\z:real^1. (ffp:real->complex)(drop z)
-      #|  \\z:real^1. --(ii * Cx y) * cexp(--(ii * Cx y * Cx(drop z)))
-      #|  \\z:real^1. (ff:real->complex)(drop z)
-      #|  \\z:real^1. cexp(--(ii * Cx y * Cx(drop z)))
-      #|  ( * ):complex->complex->complex
-      #|  forall(ff:real->complex) (ffp:real->complex) y a.\n     &0 <= a /\\\n     (forall x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x))) /\\\n     (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop z))\n        integrable_on interval[lift(--a),lift a]\n     ==> integral (interval[lift(--a),lift a])\n           (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop z)) =\n         (cexp(--(ii * Cx y * Cx a)) * ff a -\n          cexp(--(ii * Cx y * Cx(--a))) * ff(--a)) +\n         (ii * Cx y) *\n         integral (interval[lift(--a),lift a])\n           (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))
-      #|  &1
-      #|  forall(ff:real->complex) y.\n     (ff --> vec 0) at_posinfinity\n     ==> ((\\a. cexp(--(ii * Cx y * Cx a)) * ff a) --> vec 0) at_posinfinity
-      #|  &1
-      #|  forall(ff:real->complex) y.\n     ((\\a. ff(--a)) --> vec 0) at_posinfinity\n     ==> ((\\a. cexp(--(ii * Cx y * Cx(--a))) * ff(--a)) --> vec 0)\n       at_posinfinity
-      #|  vec 0:complex = vec 0 - vec 0
-      #|  (:real^1)
-      #|  a:real
-      #|  &0
-      #|  (ii * Cx y) *\n     integral (:real^1) (\\z. cexp(--(ii * Cx y * Cx(drop z))) *\n       (ff:real->complex)(drop z))
-      #|  \\a. integral (interval[lift(--a),lift a])\n           (\\z. cexp(--(ii * Cx y * Cx(drop z))) * (ffp:real->complex)(drop\n             z))
-      #|  \\a. (cexp(--(ii * Cx y * Cx a)) * (ff:real->complex) a -\n          cexp(--(ii * Cx y * Cx(--a))) * ff(--a)) +\n         (ii * Cx y) *\n         integral (interval[lift(--a),lift a])\n           (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))
+      #|  drop((x : Cart[Real, Unit]))
+      #|  (ffp : (Real) -> Cart[Real, Tybit0[Unit]])(drop((x : Cart[Real, Unit])))
+      #|  (x : Cart[Real, Unit])
+      #|  \226\136\128 ff : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 ffp : (Real) -> Cart[Real, Tybit0[Unit]], (\226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => ff(drop(z)), ffp(x), at(lift(x)))) \226\134\146 continuous_on((z : Cart[Real, Unit]) => ff(drop(z)), UNIV)
+      #|  (ffp : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  interval([(lift(-(a : Real)), lift(a))])
+      #|  (z : Cart[Real, Unit]) => z
+      #|  \226\136\128 ff : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 ffp : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, \226\136\128 a : Real, (\226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => ff(drop(z)), ffp(x), at(lift(x)))) \226\134\146 integrable_on((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ff(drop(z)), interval([(lift(-a), lift(a))]))
+      #|  \226\136\128 A : Cart[Real, Tybit0[Unit]], \226\136\128 B : Cart[Real, Tybit0[Unit]], \226\136\128 C : Cart[Real, Tybit0[Unit]], \226\136\128 D : Cart[Real, Tybit0[Unit]], A == B - C && A == D \226\134\146 C == B + -D
+      #|  (ffp : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 ff : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 ffp : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, \226\136\128 a : Real, (\226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => ff(drop(z)), ffp(x), at(lift(x)))) \226\134\146 integral(interval([(lift(-a), lift(a))]), (z : Cart[Real, Unit]) => -(ii * Cx(y)) * cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ff(drop(z))) == -(ii * Cx(y)) * integral(interval([(lift(-a), lift(a))]), (z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ff(drop(z)))
+      #|  (a : Real)
+      #|  (y : Real)
+      #|  (ffp : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (ff : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]]) - (b - (z : Cart[Real, Tybit0[Unit]])) == z
+      #|  drop((x : Cart[Real, Unit]))
+      #|  cexp(-(ii * (Cx((y : Real)) * Cx((a : Real))))) * (ff : (Real) -> Cart[Real, Tybit0[Unit]])(a) - cexp(-(ii * (Cx(y) * Cx(-a)))) * ff(-a) - integral(interval([(lift(-a), lift(a))]), (z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * (ffp : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z)))
+      #|  lift((a : Real))
+      #|  lift(-(a : Real))
+      #|  (z : Cart[Real, Unit]) => (ffp : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
+      #|  (z : Cart[Real, Unit]) => -(ii * Cx((y : Real))) * cexp(-(ii * (Cx(y) * Cx(drop(z)))))
+      #|  (z : Cart[Real, Unit]) => (ff : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
+      #|  (z : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(z)))))
+      #|  op_star
+      #|  \226\136\128 ff : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 ffp : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, \226\136\128 a : Real, real_of_num(0) <= a && (\226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => ff(drop(z)), ffp(x), at(lift(x)))) && integrable_on((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ffp(drop(z)), interval([(lift(-a), lift(a))])) \226\134\146 integral(interval([(lift(-a), lift(a))]), (z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ffp(drop(z))) == cexp(-(ii * (Cx(y) * Cx(a)))) * ff(a) - cexp(-(ii * (Cx(y) * Cx(-a)))) * ff(-a) + ii * Cx(y) * integral(interval([(lift(-a), lift(a))]), (z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ff(drop(z)))
+      #|  real_of_num(1)
+      #|  \226\136\128 ff : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, op_minus_minus_gt(ff, vec(0), at_posinfinity) \226\134\146 op_minus_minus_gt((a : Real) => cexp(-(ii * (Cx(y) * Cx(a)))) * ff(a), vec(0), at_posinfinity)
+      #|  real_of_num(1)
+      #|  \226\136\128 ff : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, op_minus_minus_gt((a : Real) => ff(-a), vec(0), at_posinfinity) \226\134\146 op_minus_minus_gt((a : Real) => cexp(-(ii * (Cx(y) * Cx(-a)))) * ff(-a), vec(0), at_posinfinity)
+      #|  vec(0) == vec(0) - vec(0)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (a : Real)
+      #|  real_of_num(0)
+      #|  ii * Cx((y : Real)) * integral(UNIV, (z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * (ff : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z)))
+      #|  (a : Real) => integral(interval([(lift(-a), lift(a))]), (z : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(z))))) * (ffp : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z)))
+      #|  (a : Real) => cexp(-(ii * (Cx((y : Real)) * Cx(a)))) * (ff : (Real) -> Cart[Real, Tybit0[Unit]])(a) - cexp(-(ii * (Cx(y) * Cx(-a)))) * ff(-a) + ii * Cx(y) * integral(interval([(lift(-a), lift(a))]), (z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ff(drop(z)))
       #|  at_posinfinity
-      #|  \\a. integral (interval[lift(--a),lift a])\n          (\\z. cexp(--(ii * Cx y * Cx(drop z))) * (ffp:real->complex)(drop z))
+      #|  (a : Real) => integral(interval([(lift(-a), lift(a))]), (z : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(z))))) * (ffp : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z)))
       #|  at_posinfinity
-      #|  forall(ff:real->complex) (ffp:real->complex) y.\n     (forall x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x))) /\\\n     (ff --> vec 0) at_posinfinity /\\\n     ((\\a. ff(--a)) --> vec 0) at_posinfinity /\\\n     (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop z))\n        absolutely_integrable_on (:real^1) /\\\n     (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))\n        absolutely_integrable_on (:real^1)\n     ==> integral (:real^1) (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop\n       z)) =\n         (ii * Cx y) *\n         integral (:real^1) (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop\n           z))
-      #|  forall c e w:complex. c * (e * w) = e * (c * w)
-      #|  y:real
-      #|  ffp:real->complex
-      #|  ff:real->complex
-      #|  forall(ff:real->complex) (ffp:real->complex) y.\n     (forall x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x))) /\\\n     (ff --> vec 0) at_posinfinity /\\\n     ((\\a. ff(--a)) --> vec 0) at_posinfinity /\\\n     (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop z))\n        absolutely_integrable_on (:real^1) /\\\n     (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))\n        absolutely_integrable_on (:real^1)\n     ==> fourier ffp y = (ii * Cx y) * fourier ff y
-      #|  &2 * atn a = atn a - atn(--a)
-      #|  forall a. &0 <= a\n       ==> real_integral (real_interval[--a,a]) (\\y. inv(&1 + y pow 2)) = &2 *\n         atn a
-      #|  &k:real
-      #|  abs y <= k <=> --k <= y /\\ y <= k
-      #|  (\\y. if abs y <= &k then inv(&1 + y pow 2) else &0) =\n        (\\y. if y IN real_interval[-- &k, &k] then inv(&1 + y pow 2) else &0)
-      #|  real_integral (:real) (\\y. if abs y <= &k then inv(&1 + y pow 2) else &0)\n       =\n      &2 * atn(&k)
-      #|  k:num
+      #|  \226\136\128 ff : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 ffp : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, (\226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => ff(drop(z)), ffp(x), at(lift(x)))) && op_minus_minus_gt(ff, vec(0), at_posinfinity) && op_minus_minus_gt((a : Real) => ff(-a), vec(0), at_posinfinity) && absolutely_integrable_on((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ffp(drop(z)), UNIV) && absolutely_integrable_on((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ff(drop(z)), UNIV) \226\134\146 integral(UNIV, (z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ffp(drop(z))) == ii * Cx(y) * integral(UNIV, (z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ff(drop(z)))
+      #|  \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 e : Cart[Real, Tybit0[Unit]], \226\136\128 w : Cart[Real, Tybit0[Unit]], c * (e * w) == e * (c * w)
+      #|  (y : Real)
+      #|  (ffp : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (ff : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 ff : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 ffp : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, (\226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => ff(drop(z)), ffp(x), at(lift(x)))) && op_minus_minus_gt(ff, vec(0), at_posinfinity) && op_minus_minus_gt((a : Real) => ff(-a), vec(0), at_posinfinity) && absolutely_integrable_on((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ffp(drop(z)), UNIV) && absolutely_integrable_on((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ff(drop(z)), UNIV) \226\134\146 fourier(ffp, y) == ii * Cx(y) * fourier(ff, y)
+      #|  real_of_num(2) * atn((a : Real)) == atn(a) - atn(-a)
+      #|  \226\136\128 a : Real, real_of_num(0) <= a \226\134\146 real_integral(real_interval([(-a, a)]), (y : Real) => inv(real_of_num(1) + pow(y, 2))) == real_of_num(2) * atn(a)
+      #|  real_of_num((k : Num))
+      #|  (abs((y : Real)) <= (k : Real)) == (-k <= y && y <= k)
+      #|  ((y : Real) => if abs(y) <= real_of_num((k : Num)) { inv(real_of_num(1) + pow(y, 2)) } else { real_of_num(0) }) == ((y : Real) => if IN(y, real_interval([(-real_of_num(k), real_of_num(k))])) { inv(real_of_num(1) + pow(y, 2)) } else { real_of_num(0) })
+      #|  real_integral(UNIV, (y : Real) => if abs(y) <= real_of_num((k : Num)) { inv(real_of_num(1) + pow(y, 2)) } else { real_of_num(0) }) == real_of_num(2) * atn(real_of_num(k))
+      #|  (k : Num)
       #|  pi
-      #|  &N:real
-      #|  abs x <= &n
-      #|  n:num
-      #|  N:num
-      #|  N:num
-      #|  abs x
-      #|  x:real
-      #|  &0 <= inv(&1 + x pow 2)
-      #|  w:real
-      #|  w:real
-      #|  abs y <= k <=> --k <= y /\\ y <= k
-      #|  (\\y. if abs y <= &k then inv(&1 + y pow 2) else &0) =\n      (\\y. if y IN real_interval[-- &k, &k] then inv(&1 + y pow 2) else &0)
-      #|  (:real)
-      #|  \\y. inv(&1 + y pow 2)
-      #|  \\k y. if abs y <= &k then inv(&1 + y pow 2) else &0
-      #|  (\\y. inv(&1 + y pow 2)) real_integrable_on (:real)
-      #|  (ii * Cx y) * (ii * Cx y) = (ii * ii) * Cx(y pow 2)
-      #|  forall y. (ii * Cx y) * (ii * Cx y) = --(Cx(y pow 2))
-      #|  y:real
-      #|  &0 < &1 + y pow 2
-      #|  y:real
-      #|  norm(--(Cx(y pow 2)) * w) = y pow 2 * norm w
-      #|  forall(w:complex) y K.\n     norm w <= K /\\ norm(--(Cx(y pow 2)) * w) <= K\n     ==> norm w <= (&2 * K) * inv(&1 + y pow 2)
-      #|  &1 / sqrt(&2 * pi) *\n              drop(integral (:real^1) (\\x. lift(norm((f:real->complex)(drop\n                x)))))
-      #|  forall(f:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> ?K. forall y. norm(fourier f y) <= K
-      #|  (\\y. (&2 * K) * inv(&1 + y pow 2)) real_integrable_on (:real)
-      #|  forall K. (\\z:real^1. lift((&2 * K) * inv(&1 + drop z pow 2))) integrable_on\n   (:real^1)
-      #|  K2:real
-      #|  drop(z:real^1)
-      #|  K1:real
-      #|  z:real^1
-      #|  \\z:real^1. lift((&2 * (abs K1 + abs K2)) * inv(&1 + drop z pow\n    2))
-      #|  K2:real
-      #|  f'':real->complex
-      #|  K1:real
-      #|  f:real->complex
-      #|  fourier f' y = (ii * Cx y) * fourier f y /\\\n      fourier f'' y = (ii * Cx y) * fourier f' y
-      #|  forall y. fourier f'' y = --(Cx(y pow 2)) * fourier f y
-      #|  forall(g:real->complex) y.\n        (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n        ==> (\\z. cexp(--(ii * Cx y * Cx(drop z))) * g(drop z))\n            absolutely_integrable_on (:real^1)
-      #|  forall(f:real->complex) (f':real->complex) (f'':real->complex).\n     (forall x. ((\\z. f(drop z)) has_vector_derivative (f' x)) (at(lift x))) /\\\n     (forall x. ((\\z. f'(drop z)) has_vector_derivative (f'' x)) (at(lift x))) /\\\n     (f --> vec 0) at_posinfinity /\\ ((\\a. f(--a)) --> vec 0) at_posinfinity /\\\n     (f' --> vec 0) at_posinfinity /\\ ((\\a. f'(--a)) --> vec 0) at_posinfinity\n       /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. f'(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. f''(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z. fourier f (drop z)) absolutely_integrable_on (:real^1)
-      #|  schwartz (h:real->complex) <=>\n    ?d:num->real->complex.\n        d 0 = h /\\\n        (forall n x. ((\\z. d n (drop z)) has_vector_derivative (d (SUC n) x))\n          (at(lift x))) /\\\n        (forall k m. ?B. forall x. abs(x) pow k * norm(d m x) <= B)
-      #|  x:real
-      #|  &0 < &1 + x pow 2
-      #|  x:real
-      #|  forall(g:real->complex) B0 B2 x.\n     (forall x. abs(x) pow 0 * norm(g x) <= B0) /\\\n     (forall x. abs(x) pow 2 * norm(g x) <= B2)\n     ==> norm(g x) <= (B0 + B2) * inv(&1 + x pow 2)
-      #|  drop z
-      #|  forall x. abs(x) pow 2 * norm((d:num->real->complex) 0 x) <= B2
-      #|  x:real
-      #|  forall x. abs(x) pow 0 * norm((d:num->real->complex) 0 x) <= B0
-      #|  x:real
-      #|  x:real
-      #|  (abs B0 + abs B2) * inv(&1 + drop z pow 2)
-      #|  z:real^1
-      #|  (d:num->real->complex)(SUC 0)
-      #|  \\z:real^1. lift((&2 * (abs B0 + abs B2)) * inv(&1 + drop z pow 2))
+      #|  real_of_num((N : Num))
+      #|  abs((x : Real)) <= real_of_num((n : Num))
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  abs((x : Real))
+      #|  (x : Real)
+      #|  real_of_num(0) <= inv(real_of_num(1) + pow((x : Real), 2))
+      #|  (w : Real)
+      #|  (w : Real)
+      #|  (abs((y : Real)) <= (k : Real)) == (-k <= y && y <= k)
+      #|  ((y : Real) => if abs(y) <= real_of_num((k : Num)) { inv(real_of_num(1) + pow(y, 2)) } else { real_of_num(0) }) == ((y : Real) => if IN(y, real_interval([(-real_of_num(k), real_of_num(k))])) { inv(real_of_num(1) + pow(y, 2)) } else { real_of_num(0) })
+      #|  (UNIV : (Real) -> Bool)
+      #|  (y : Real) => inv(real_of_num(1) + pow(y, 2))
+      #|  (k : Num) => (y : Real) => if abs(y) <= real_of_num(k) { inv(real_of_num(1) + pow(y, 2)) } else { real_of_num(0) }
+      #|  real_integrable_on((y : Real) => inv(real_of_num(1) + pow(y, 2)), UNIV)
+      #|  ii * Cx((y : Real)) * (ii * Cx(y)) == ii * ii * Cx(pow(y, 2))
+      #|  \226\136\128 y : Real, ii * Cx(y) * (ii * Cx(y)) == -Cx(pow(y, 2))
+      #|  (y : Real)
+      #|  real_of_num(0) < real_of_num(1) + pow((y : Real), 2)
+      #|  (y : Real)
+      #|  norm(-Cx(pow((y : Real), 2)) * (w : Cart[Real, Tybit0[Unit]])) == pow(y, 2) * norm(w)
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, \226\136\128 K : Real, norm(w) <= K && norm(-Cx(pow(y, 2)) * w) <= K \226\134\146 norm(w) <= real_of_num(2) * K * inv(real_of_num(1) + pow(y, 2))
+      #|  real_of_num(1) / sqrt(real_of_num(2) * pi) * drop(integral(UNIV, (x : Cart[Real, Unit]) => lift(norm((f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x))))))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 (\226\136\131 K : Real, \226\136\128 y : Real, norm(fourier(f, y)) <= K)
+      #|  real_integrable_on((y : Real) => real_of_num(2) * (K : Real) * inv(real_of_num(1) + pow(y, 2)), UNIV)
+      #|  \226\136\128 K : Real, integrable_on((z : Cart[Real, Unit]) => lift(real_of_num(2) * K * inv(real_of_num(1) + pow(drop(z), 2))), UNIV)
+      #|  (K2 : Real)
+      #|  drop((z : Cart[Real, Unit]))
+      #|  (K1 : Real)
+      #|  (z : Cart[Real, Unit])
+      #|  (z : Cart[Real, Unit]) => lift(real_of_num(2) * (abs((K1 : Real)) + abs((K2 : Real))) * inv(real_of_num(1) + pow(drop(z), 2)))
+      #|  (K2 : Real)
+      #|  (f'' : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (K1 : Real)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  fourier((f' : (Real) -> Cart[Real, Tybit0[Unit]]), (y : Real)) == ii * Cx(y) * fourier((f : (Real) -> Cart[Real, Tybit0[Unit]]), y) && fourier((f'' : (Real) -> Cart[Real, Tybit0[Unit]]), y) == ii * Cx(y) * fourier(f', y)
+      #|  \226\136\128 y : Real, fourier((f'' : (Real) -> Cart[Real, Tybit0[Unit]]), y) == -Cx(pow(y, 2)) * fourier((f : (Real) -> Cart[Real, Tybit0[Unit]]), y)
+      #|  \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => g(drop(z)), UNIV) \226\134\146 absolutely_integrable_on((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * g(drop(z)), UNIV)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 f' : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 f'' : (Real) -> Cart[Real, Tybit0[Unit]], (\226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => f(drop(z)), f'(x), at(lift(x)))) && (\226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => f'(drop(z)), f''(x), at(lift(x)))) && op_minus_minus_gt(f, vec(0), at_posinfinity) && op_minus_minus_gt((a : Real) => f(-a), vec(0), at_posinfinity) && op_minus_minus_gt(f', vec(0), at_posinfinity) && op_minus_minus_gt((a : Real) => f'(-a), vec(0), at_posinfinity) && absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) && absolutely_integrable_on((z : Cart[Real, Unit]) => f'(drop(z)), UNIV) && absolutely_integrable_on((z : Cart[Real, Unit]) => f''(drop(z)), UNIV) \226\134\146 absolutely_integrable_on((z : Cart[Real, Unit]) => fourier(f, drop(z)), UNIV)
+      #|  (schwartz : ((Real) -> Cart[Real, Tybit0[Unit]]) -> Bool)((h : (Real) -> Cart[Real, Tybit0[Unit]])) == (\226\136\131 d : (Num, Real) -> Cart[Real, Tybit0[Unit]], d(0) == h && (\226\136\128 n : Num, \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => d(n, drop(z)), d(SUC(n), x), at(lift(x)))) && (\226\136\128 k : Num, \226\136\128 m : Num, \226\136\131 B : Real, \226\136\128 x : Real, pow(abs(x), k) * norm(d(m, x)) <= B))
+      #|  (x : Real)
+      #|  real_of_num(0) < real_of_num(1) + pow((x : Real), 2)
+      #|  (x : Real)
+      #|  \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 B0 : Real, \226\136\128 B2 : Real, \226\136\128 x : Real, (\226\136\128 x : Real, pow(abs(x), 0) * norm(g(x)) <= B0) && (\226\136\128 x : Real, pow(abs(x), 2) * norm(g(x)) <= B2) \226\134\146 norm(g(x)) <= (B0 + B2) * inv(real_of_num(1) + pow(x, 2))
+      #|  drop((z : Cart[Real, Unit]))
+      #|  \226\136\128 x : Real, pow(abs(x), 2) * norm((d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(0, x)) <= (B2 : Real)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, pow(abs(x), 0) * norm((d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(0, x)) <= (B0 : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (abs((B0 : Real)) + abs((B2 : Real))) * inv(real_of_num(1) + pow(drop((z : Cart[Real, Unit])), 2))
+      #|  (z : Cart[Real, Unit])
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC(0))
+      #|  (z : Cart[Real, Unit]) => lift(real_of_num(2) * (abs((B0 : Real)) + abs((B2 : Real))) * inv(real_of_num(1) + pow(drop(z), 2)))
       #|  0
       #|  2
-      #|  B2:real
+      #|  (B2 : Real)
       #|  0
       #|  0
-      #|  B0:real
-      #|  forall(h:real->complex). schwartz h\n     ==> (\\z. h(drop z)) absolutely_integrable_on (:real^1)
-      #|  lift w
-      #|  lift u
-      #|  forall x. abs(x) pow 0 * norm((d:num->real->complex)(SUC 0) x) <= B
-      #|  drop x
-      #|  drop x
+      #|  (B0 : Real)
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 absolutely_integrable_on((z : Cart[Real, Unit]) => h(drop(z)), UNIV)
+      #|  lift((w : Real))
+      #|  lift((u : Real))
+      #|  \226\136\128 x : Real, pow(abs(x), 0) * norm((d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC(0), x)) <= (B : Real)
+      #|  drop((x : Cart[Real, Unit]))
+      #|  drop((x : Cart[Real, Unit]))
       #|  0
-      #|  abs B
-      #|  (:real^1)
-      #|  \\z:real^1. (d:num->real->complex) (SUC 0) (drop z)
-      #|  \\z:real^1. (d:num->real->complex) 0 (drop z)
-      #|  w:real
-      #|  u:real
-      #|  abs B
-      #|  SUC 0
+      #|  abs((B : Real))
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (z : Cart[Real, Unit]) => (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC(0), drop(z))
+      #|  (z : Cart[Real, Unit]) => (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(0, drop(z))
+      #|  (w : Real)
+      #|  (u : Real)
+      #|  abs((B : Real))
+      #|  SUC(0)
       #|  0
-      #|  B:real
-      #|  forall(h:real->complex). schwartz h\n     ==> ?K. &0 <= K /\\ forall u w. norm(h u - h w) <= K * abs(u - w)
-      #|  abs B + &1 <= x * e
-      #|  x * n <= B
-      #|  forall B:real. B <= abs B
-      #|  B:real
-      #|  x * n < x * e
-      #|  e:real
-      #|  x:real
-      #|  abs B + &1
-      #|  abs B + &1 <= x * e
-      #|  forall x e B n:real. &0 < e /\\ &0 < x /\\ &0 <= n /\\ x * n <= B /\\ (abs B + &1) / e\n   <= x\n                 ==> n < e
-      #|  &0 < x ==> abs x = x
-      #|  SUC 0 = 1
-      #|  x:real
-      #|  (abs B + &1) / e
-      #|  &0 < x
-      #|  B:real
-      #|  x:real
-      #|  x:real
-      #|  (abs B + &1) / e
-      #|  e:real
+      #|  (B : Real)
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 (\226\136\131 K : Real, real_of_num(0) <= K && (\226\136\128 u : Real, \226\136\128 w : Real, norm(h(u) - h(w)) <= K * abs(u - w)))
+      #|  abs((B : Real)) + real_of_num(1) <= (x : Real) * (e : Real)
+      #|  (x : Real) * (n : Real) <= (B : Real)
+      #|  \226\136\128 B : Real, B <= abs(B)
+      #|  (B : Real)
+      #|  (x : Real) * (n : Real) < x * (e : Real)
+      #|  (e : Real)
+      #|  (x : Real)
+      #|  abs((B : Real)) + real_of_num(1)
+      #|  abs((B : Real)) + real_of_num(1) <= (x : Real) * (e : Real)
+      #|  \226\136\128 x : Real, \226\136\128 e : Real, \226\136\128 B : Real, \226\136\128 n : Real, real_of_num(0) < e && real_of_num(0) < x && real_of_num(0) <= n && x * n <= B && (abs(B) + real_of_num(1)) / e <= x \226\134\146 n < e
+      #|  real_of_num(0) < (x : Real) \226\134\146 abs(x) == x
+      #|  SUC(0) == 1
+      #|  (x : Real)
+      #|  (abs((B : Real)) + real_of_num(1)) / (e : Real)
+      #|  real_of_num(0) < (x : Real)
+      #|  (B : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (abs((B : Real)) + real_of_num(1)) / (e : Real)
+      #|  (e : Real)
       #|  0
-      #|  SUC 0
-      #|  B:real
-      #|  forall(h:real->complex). schwartz h ==> (h --> vec 0) at_posinfinity
-      #|  &0 < x ==> abs x = x
-      #|  SUC 0 = 1
-      #|  --x:real
-      #|  (abs B + &1) / e
-      #|  &0 < x
-      #|  B:real
-      #|  x:real
-      #|  x:real
-      #|  (abs B + &1) / e
-      #|  e:real
+      #|  SUC(0)
+      #|  (B : Real)
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 op_minus_minus_gt(h, vec(0), at_posinfinity)
+      #|  real_of_num(0) < (x : Real) \226\134\146 abs(x) == x
+      #|  SUC(0) == 1
+      #|  -(x : Real)
+      #|  (abs((B : Real)) + real_of_num(1)) / (e : Real)
+      #|  real_of_num(0) < (x : Real)
+      #|  (B : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (abs((B : Real)) + real_of_num(1)) / (e : Real)
+      #|  (e : Real)
       #|  0
-      #|  SUC 0
-      #|  B:real
-      #|  forall(h:real->complex). schwartz h ==> ((\\a. h(--a)) --> vec 0) at_posinfinity
-      #|  SUC 0 = 1
-      #|  \\n. (d:num->real->complex)(SUC n)
-      #|  forall(d:num->real->complex).\n     (forall n x. ((\\z. d n (drop z)) has_vector_derivative (d (SUC n) x)) (at(lift\n       x))) /\\\n     (forall k m. ?B. forall x. abs(x) pow k * norm(d m x) <= B)\n     ==> schwartz (d 1)
-      #|  SUC m
-      #|  k:num
-      #|  SUC 1 = 2
-      #|  (d:num->real->complex) 2 = (\\n. d(SUC n)) 1
-      #|  SUC(SUC 0) = 2
-      #|  schwartz ((d:num->real->complex) (SUC(SUC 0)))
-      #|  SUC 0 = 1
-      #|  schwartz ((d:num->real->complex) (SUC 0))
-      #|  (d:num->real->complex)(SUC(SUC 0))
-      #|  (d:num->real->complex)(SUC 0)
-      #|  d:num->real->complex
-      #|  forall(h:real->complex). schwartz h\n     ==> (\\z. fourier h (drop z)) absolutely_integrable_on (:real^1)
-      #|  x:real
-      #|  SUC n
-      #|  x:real
-      #|  SUC n
-      #|  x:real
-      #|  SUC n
-      #|  SUC m
-      #|  k:num
-      #|  SUC m
-      #|  k:num
-      #|  abs((x - v) - x) = abs v
-      #|  x:real
-      #|  x - v:real
-      #|  v:real
-      #|  &1
-      #|  K:real
-      #|  K:real
-      #|  forall(h:real->complex) x. schwartz h\n     ==> Cx(inv(sqrt(&2 * pi))) *\n         integral (:real^1) (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier h (drop\n           y)) =\n         h x
-      #|  i = 1
-      #|  forall a:real. forall v:real^1. a % v = drop v % lift a
-      #|  forall x:real^1. integral (:real^1)\n          (\\y. lift(norm(f(drop x) *\n                        cexp(--(ii * Cx(drop x) * Cx(drop y))) * g(drop y)))) =\n          norm(f(drop x)) % integral (:real^1) (\\y. lift(norm(g(drop y))))
-      #|  x:real^1
-      #|  {x:real^1 | ~((\\y. f(drop x) *\n                     cexp(--(ii * Cx(drop x) * Cx(drop y))) * g(drop y))\n                    absolutely_integrable_on (:real^1))} = {}
-      #|  \\w:real^1. (g:real->complex)(drop w)
+      #|  SUC(0)
+      #|  (B : Real)
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 op_minus_minus_gt((a : Real) => h(-a), vec(0), at_posinfinity)
+      #|  SUC(0) == 1
+      #|  (n : Num) => (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC(n))
+      #|  \226\136\128 d : (Num, Real) -> Cart[Real, Tybit0[Unit]], (\226\136\128 n : Num, \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => d(n, drop(z)), d(SUC(n), x), at(lift(x)))) && (\226\136\128 k : Num, \226\136\128 m : Num, \226\136\131 B : Real, \226\136\128 x : Real, pow(abs(x), k) * norm(d(m, x)) <= B) \226\134\146 schwartz(d(1))
+      #|  SUC((m : Num))
+      #|  (k : Num)
+      #|  SUC(1) == 2
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(2) == ((n : Num) => d(SUC(n)))(1)
+      #|  SUC(SUC(0)) == 2
+      #|  schwartz((d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC(SUC(0))))
+      #|  SUC(0) == 1
+      #|  schwartz((d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC(0)))
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC(SUC(0)))
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC(0))
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 absolutely_integrable_on((z : Cart[Real, Unit]) => fourier(h, drop(z)), UNIV)
+      #|  (x : Real)
+      #|  SUC((n : Num))
+      #|  (x : Real)
+      #|  SUC((n : Num))
+      #|  (x : Real)
+      #|  SUC((n : Num))
+      #|  SUC((m : Num))
+      #|  (k : Num)
+      #|  SUC((m : Num))
+      #|  (k : Num)
+      #|  abs((x : Real) - (v : Real) - x) == abs(v)
+      #|  (x : Real)
+      #|  (x : Real) - (v : Real)
+      #|  (v : Real)
+      #|  real_of_num(1)
+      #|  (K : Real)
+      #|  (K : Real)
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, schwartz(h) \226\134\146 Cx(inv(sqrt(real_of_num(2) * pi))) * integral(UNIV, (y : Cart[Real, Unit]) => cexp(ii * (Cx(x) * Cx(drop(y)))) * fourier(h, drop(y))) == h(x)
+      #|  (i : Num) == 1
+      #|  \226\136\128 a : Real, \226\136\128 v : Cart[Real, Unit], op_pct(a, v) == op_pct(drop(v), lift(a))
+      #|  \226\136\128 x : Cart[Real, Unit], integral(UNIV, (y : Cart[Real, Unit]) => lift(norm((f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)) * (cexp(-(ii * (Cx(drop(x)) * Cx(drop(y))))) * (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(y)))))) == op_pct(norm(f(drop(x))), integral(UNIV, (y : Cart[Real, Unit]) => lift(norm(g(drop(y))))))
+      #|  (x : Cart[Real, Unit])
+      #|  {(x : Cart[Real, Unit]) | !absolutely_integrable_on((y : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)) * (cexp(-(ii * (Cx(drop(x)) * Cx(drop(y))))) * (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(y))), UNIV)} == {}
+      #|  (w : Cart[Real, Unit]) => (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(w))
       #|  :P
       #|  :2
       #|  :N
       #|  :1
       #|  :M
       #|  :1
-      #|  \\w:real^1. (f:real->complex)(drop w)
+      #|  (w : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(w))
       #|  :P
       #|  :2
       #|  :N
@@ -81684,1198 +81684,1198 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|  :1
       #|  :M
       #|  :1
-      #|  \\z:real^(1,1)finite_sum. f(drop(fstcart z)) *\n       cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n         g(drop(sndcart z))
-      #|  (\\z. (f:real->complex)(drop z)) absolutely_integrable_on\n      (:real^1)
-      #|  (\\x:real^1. lift(norm((f:real->complex)(drop x))))\n     integrable_on (:real^1)
-      #|  (\\z. (g:real->complex)(drop z)) absolutely_integrable_on\n      (:real^1)
-      #|  (\\x:real^1. lift(norm((g:real->complex)(drop x))))\n     integrable_on (:real^1)
-      #|  forall(f:real->complex) (g:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z:real^(1,1)finite_sum.\n            f(drop(fstcart z)) *\n            cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n            g(drop(sndcart z))) absolutely_integrable_on\n              (:real^(1,1)finite_sum)
-      #|  ~(s = Cx(&0)) ==> s * Cx(&1) / s = Cx(&1)
-      #|  Cx(sqrt(&2 * pi)) * Cx(&1) / Cx(sqrt(&2 * pi)) = Cx(&1)
-      #|  forall(g:real->complex) x.\n     integral (:real^1) (\\y. cexp(--(ii * Cx x * Cx(drop y))) * g(drop y)) =\n     Cx(sqrt(&2 * pi)) * fourier g x
-      #|  forall(g:real->complex) c x.\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^1) (\\y. c * cexp(--(ii * Cx x * Cx(drop y))) * g(drop\n       y)) =\n         c * Cx(sqrt(&2 * pi)) * fourier g x
-      #|  K:real
-      #|  K:real
-      #|  (:real^1)
-      #|  \\z:real^1. (f:real->complex)(drop z)
-      #|  \\z:real^1. fourier g (drop z)
-      #|  ( * ):complex->complex->complex
-      #|  forall(f:real->complex) (g:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z. f(drop z) * fourier g (drop z)) absolutely_integrable_on\n       (:real^1)
-      #|  (f * s) * gh = s * (f * gh)
+      #|  (z : Cart[Real, Finite_sum[Unit, Unit]]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(fstcart(z))) * (cexp(-(ii * (Cx(drop(fstcart(z))) * Cx(drop(sndcart(z)))))) * (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(sndcart(z))))
+      #|  absolutely_integrable_on((z : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z)), UNIV)
+      #|  integrable_on((x : Cart[Real, Unit]) => lift(norm((f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)))), UNIV)
+      #|  absolutely_integrable_on((z : Cart[Real, Unit]) => (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z)), UNIV)
+      #|  integrable_on((x : Cart[Real, Unit]) => lift(norm((g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)))), UNIV)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) && absolutely_integrable_on((z : Cart[Real, Unit]) => g(drop(z)), UNIV) \226\134\146 absolutely_integrable_on((z : Cart[Real, Finite_sum[Unit, Unit]]) => f(drop(fstcart(z))) * (cexp(-(ii * (Cx(drop(fstcart(z))) * Cx(drop(sndcart(z)))))) * g(drop(sndcart(z)))), UNIV)
+      #|  !((s : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 s * (Cx(real_of_num(1)) / s) == Cx(real_of_num(1))
+      #|  Cx(sqrt(real_of_num(2) * pi)) * (Cx(real_of_num(1)) / Cx(sqrt(real_of_num(2) * pi))) == Cx(real_of_num(1))
+      #|  \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, integral(UNIV, (y : Cart[Real, Unit]) => cexp(-(ii * (Cx(x) * Cx(drop(y))))) * g(drop(y))) == Cx(sqrt(real_of_num(2) * pi)) * fourier(g, x)
+      #|  \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => g(drop(z)), UNIV) \226\134\146 integral(UNIV, (y : Cart[Real, Unit]) => c * (cexp(-(ii * (Cx(x) * Cx(drop(y))))) * g(drop(y)))) == c * (Cx(sqrt(real_of_num(2) * pi)) * fourier(g, x))
+      #|  (K : Real)
+      #|  (K : Real)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (z : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
+      #|  (z : Cart[Real, Unit]) => fourier((g : (Real) -> Cart[Real, Tybit0[Unit]]), drop(z))
+      #|  op_star
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) && absolutely_integrable_on((z : Cart[Real, Unit]) => g(drop(z)), UNIV) \226\134\146 absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)) * fourier(g, drop(z)), UNIV)
+      #|  (f : Cart[Real, Tybit0[Unit]]) * (s : Cart[Real, Tybit0[Unit]]) * (gh : Cart[Real, Tybit0[Unit]]) == s * (f * gh)
       #|  :N
       #|  :1
       #|  :M
       #|  :1
-      #|  \\z:real^(1,1)finite_sum. f(drop(fstcart z)) *\n       cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n         g(drop(sndcart z))
-      #|  forall(f:real->complex) (g:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^(1,1)finite_sum)\n           (\\z. f(drop(fstcart z)) *\n                cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n                g(drop(sndcart z))) =\n         Cx(sqrt(&2 * pi)) *\n         integral (:real^1) (\\z. f(drop z) * fourier g (drop z))
-      #|  (g * s) * fh = s * (g * fh)
-      #|  ii * Cx(drop x) * Cx(drop y) = ii * Cx(drop y) * Cx(drop x)
-      #|  forall y:real^1. integral (:real^1)\n        (\\x. f(drop x) * cexp(--(ii * Cx(drop x) * Cx(drop y))) * g(drop y)) =\n        integral (:real^1)\n        (\\x. g(drop y) * cexp(--(ii * Cx(drop y) * Cx(drop x))) * f(drop x))
+      #|  (z : Cart[Real, Finite_sum[Unit, Unit]]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(fstcart(z))) * (cexp(-(ii * (Cx(drop(fstcart(z))) * Cx(drop(sndcart(z)))))) * (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(sndcart(z))))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) && absolutely_integrable_on((z : Cart[Real, Unit]) => g(drop(z)), UNIV) \226\134\146 integral(UNIV, (z : Cart[Real, Finite_sum[Unit, Unit]]) => f(drop(fstcart(z))) * (cexp(-(ii * (Cx(drop(fstcart(z))) * Cx(drop(sndcart(z)))))) * g(drop(sndcart(z))))) == Cx(sqrt(real_of_num(2) * pi)) * integral(UNIV, (z : Cart[Real, Unit]) => f(drop(z)) * fourier(g, drop(z)))
+      #|  (g : Cart[Real, Tybit0[Unit]]) * (s : Cart[Real, Tybit0[Unit]]) * (fh : Cart[Real, Tybit0[Unit]]) == s * (g * fh)
+      #|  ii * (Cx(drop((x : Cart[Real, Unit]))) * Cx(drop((y : Cart[Real, Unit])))) == ii * (Cx(drop(y)) * Cx(drop(x)))
+      #|  \226\136\128 y : Cart[Real, Unit], integral(UNIV, (x : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)) * (cexp(-(ii * (Cx(drop(x)) * Cx(drop(y))))) * (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(y)))) == integral(UNIV, (x : Cart[Real, Unit]) => g(drop(y)) * (cexp(-(ii * (Cx(drop(y)) * Cx(drop(x))))) * f(drop(x))))
       #|  :N
       #|  :1
       #|  :M
       #|  :1
-      #|  \\z:real^(1,1)finite_sum. f(drop(fstcart z)) *\n       cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n         g(drop(sndcart z))
-      #|  forall(f:real->complex) (g:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^(1,1)finite_sum)\n           (\\z. f(drop(fstcart z)) *\n                cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n                g(drop(sndcart z))) =\n         Cx(sqrt(&2 * pi)) *\n         integral (:real^1) (\\z. g(drop z) * fourier f (drop z))
-      #|  ~(Cx(sqrt(&2 * pi)) = Cx(&0))
-      #|  g:real->complex
-      #|  f:real->complex
-      #|  g:real->complex
-      #|  f:real->complex
-      #|  forall(f:real->complex) (g:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^1) (\\z. f(drop z) * fourier g (drop z)) =\n         integral (:real^1) (\\z. fourier f (drop z) * g(drop z))
-      #|  (a - b) / &2
-      #|  cexp(ii * Cx a) - cexp(ii * Cx b) =\n    cexp(ii * Cx b) * (cexp(ii * Cx(a - b)) - Cx(&1))
-      #|  forall a b:real. norm(cexp(ii * Cx a) - cexp(ii * Cx b)) <= abs(a - b)
-      #|  Cx x
-      #|  forall x. ((\\n. x pow n / &(FACT n)) real_sums exp x) (from 0)
-      #|  s = e ==> t <= s ==> t <= e
-      #|  exp x
-      #|  {k:num}
-      #|  from 0
-      #|  \\n. x pow n / &(FACT n)
-      #|  forall x k. &0 <= x ==> x pow k / &(FACT k) <= exp x
-      #|  ((\\x. inv x) ---> &0) at_posinfinity
-      #|  ~(e = &0) /\\ ~(x = &0) ==>\n     (p * inv e) * (e * x) = p * x /\\ (f * inv x) * (e * x) = e * f
-      #|  e * x:real
-      #|  ~(e = &0) /\\ ~(x = &0)
-      #|  forall p x e f. &0 < x /\\ &0 < e /\\ p * x <= e * f ==> p * inv e <= f * inv x
-      #|  &0 < &(FACT(n+1))
-      #|  n+1
-      #|  x:real
-      #|  &0 < exp x
-      #|  &0 < x
-      #|  x:real
-      #|  &1
-      #|  \\x. &(FACT(n+1)) * inv x
-      #|  forall n. ((\\x. x pow n / exp x) ---> &0) at_posinfinity
-      #|  n:num
-      #|  forall n. ((\\t. t pow n * exp(--t)) ---> &0) at_posinfinity
-      #|  a = b ==> a <= b
-      #|  inv(inv(t pow N) * inv(&(FACT N)))
-      #|  inv(exp(inv t)) <= &(FACT N) * t pow N
-      #|  &0 < t pow N /\\ &0 < &(FACT N)
-      #|  &0 < exp(inv t)
-      #|  N:num
-      #|  inv t:real
-      #|  forall N t. &0 < t ==> exp(--(inv t)) <= &(FACT N) * t pow N
-      #|  (C2:real) * t pow N2
-      #|  (C1:real) * t pow N1
-      #|  abs(f(lift t):real) <= C1 * t pow (MAX N1 N2) /\\\n                abs(g(lift t):real) <= C2 * t pow (MAX N1 N2)
-      #|  t:real
-      #|  MAX N1 N2
-      #|  C1 + C2:real
-      #|  forall(f:real^1->real) g C1 N1 C2 N2.\n     &0 <= C1 /\\ (forall t. &1 <= t ==> abs(f(lift t)) <= C1 * t pow N1) /\\\n     &0 <= C2 /\\ (forall t. &1 <= t ==> abs(g(lift t)) <= C2 * t pow N2)\n     ==> ?C N. &0 <= C /\\\n               forall t. &1 <= t ==> abs(f(lift t) + g(lift t)) <= C * t pow N
-      #|  a = b ==> a <= b
-      #|  (C1 * t pow N1) * (C2 * t pow N2):real
-      #|  t:real
-      #|  N1 + N2:num
-      #|  C1 * C2:real
-      #|  forall(f:real^1->real) g C1 N1 C2 N2.\n     &0 <= C1 /\\ (forall t. &1 <= t ==> abs(f(lift t)) <= C1 * t pow N1) /\\\n     &0 <= C2 /\\ (forall t. &1 <= t ==> abs(g(lift t)) <= C2 * t pow N2)\n     ==> ?C N. &0 <= C /\\\n               forall t. &1 <= t ==> abs(f(lift t) * g(lift t)) <= C * t pow N
-      #|  N2:num
-      #|  C2:real
-      #|  N1:num
-      #|  C1:real
-      #|  N2:num
-      #|  C2:real
-      #|  N1:num
-      #|  C1:real
-      #|  g:real^1->real
-      #|  f:real^1->real
-      #|  N2:num
-      #|  C2:real
-      #|  N1:num
-      #|  C1:real
-      #|  N2:num
-      #|  C2:real
-      #|  N1:num
-      #|  C1:real
-      #|  g:real^1->real
-      #|  f:real^1->real
+      #|  (z : Cart[Real, Finite_sum[Unit, Unit]]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(fstcart(z))) * (cexp(-(ii * (Cx(drop(fstcart(z))) * Cx(drop(sndcart(z)))))) * (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(sndcart(z))))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) && absolutely_integrable_on((z : Cart[Real, Unit]) => g(drop(z)), UNIV) \226\134\146 integral(UNIV, (z : Cart[Real, Finite_sum[Unit, Unit]]) => f(drop(fstcart(z))) * (cexp(-(ii * (Cx(drop(fstcart(z))) * Cx(drop(sndcart(z)))))) * g(drop(sndcart(z))))) == Cx(sqrt(real_of_num(2) * pi)) * integral(UNIV, (z : Cart[Real, Unit]) => g(drop(z)) * fourier(f, drop(z)))
+      #|  !(Cx(sqrt(real_of_num(2) * pi)) == Cx(real_of_num(0)))
+      #|  (g : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (g : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) && absolutely_integrable_on((z : Cart[Real, Unit]) => g(drop(z)), UNIV) \226\134\146 integral(UNIV, (z : Cart[Real, Unit]) => f(drop(z)) * fourier(g, drop(z))) == integral(UNIV, (z : Cart[Real, Unit]) => fourier(f, drop(z)) * g(drop(z)))
+      #|  ((a : Real) - (b : Real)) / real_of_num(2)
+      #|  cexp(ii * Cx((a : Real))) - cexp(ii * Cx((b : Real))) == cexp(ii * Cx(b)) * (cexp(ii * Cx(a - b)) - Cx(real_of_num(1)))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, norm(cexp(ii * Cx(a)) - cexp(ii * Cx(b))) <= abs(a - b)
+      #|  Cx((x : Real))
+      #|  \226\136\128 x : Real, real_sums((n : Num) => pow(x, n) / real_of_num(FACT(n)), exp(x), from(0))
+      #|  (s : Real) == (e : Real) \226\134\146 (t : Real) <= s \226\134\146 t <= e
+      #|  exp((x : Real))
+      #|  {(k : Num)}
+      #|  from(0)
+      #|  (n : Num) => pow((x : Real), n) / real_of_num(FACT(n))
+      #|  \226\136\128 x : Real, \226\136\128 k : Num, real_of_num(0) <= x \226\134\146 pow(x, k) / real_of_num(FACT(k)) <= exp(x)
+      #|  op_minus_minus_minus_gt((x : Real) => inv(x), real_of_num(0), at_posinfinity)
+      #|  !((e : Real) == real_of_num(0)) && !((x : Real) == real_of_num(0)) \226\134\146 (p : Real) * inv(e) * (e * x) == p * x && (f : Real) * inv(x) * (e * x) == e * f
+      #|  (e : Real) * (x : Real)
+      #|  !((e : Real) == real_of_num(0)) && !((x : Real) == real_of_num(0))
+      #|  \226\136\128 p : Real, \226\136\128 x : Real, \226\136\128 e : Real, \226\136\128 f : Real, real_of_num(0) < x && real_of_num(0) < e && p * x <= e * f \226\134\146 p * inv(e) <= f * inv(x)
+      #|  real_of_num(0) < real_of_num(FACT((n : Num) + 1))
+      #|  (n : Num) + 1
+      #|  (x : Real)
+      #|  real_of_num(0) < exp((x : Real))
+      #|  real_of_num(0) < (x : Real)
+      #|  (x : Real)
+      #|  real_of_num(1)
+      #|  (x : Real) => real_of_num(FACT((n : Num) + 1)) * inv(x)
+      #|  \226\136\128 n : Num, op_minus_minus_minus_gt((x : Real) => pow(x, n) / exp(x), real_of_num(0), at_posinfinity)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, op_minus_minus_minus_gt((t : Real) => pow(t, n) * exp(-t), real_of_num(0), at_posinfinity)
+      #|  (a : Real) == (b : Real) \226\134\146 a <= b
+      #|  inv(inv(pow((t : Real), (N : Num))) * inv(real_of_num(FACT(N))))
+      #|  inv(exp(inv((t : Real)))) <= real_of_num(FACT((N : Num))) * pow(t, N)
+      #|  real_of_num(0) < pow((t : Real), (N : Num)) && real_of_num(0) < real_of_num(FACT(N))
+      #|  real_of_num(0) < exp(inv((t : Real)))
+      #|  (N : Num)
+      #|  inv((t : Real))
+      #|  \226\136\128 N : Num, \226\136\128 t : Real, real_of_num(0) < t \226\134\146 exp(-inv(t)) <= real_of_num(FACT(N)) * pow(t, N)
+      #|  (C2 : Real) * pow((t : Real), (N2 : Num))
+      #|  (C1 : Real) * pow((t : Real), (N1 : Num))
+      #|  abs((f : (Cart[Real, Unit]) -> Real)(lift((t : Real)))) <= (C1 : Real) * pow(t, MAX((N1 : Num), (N2 : Num))) && abs((g : (Cart[Real, Unit]) -> Real)(lift(t))) <= (C2 : Real) * pow(t, MAX(N1, N2))
+      #|  (t : Real)
+      #|  MAX((N1 : Num), (N2 : Num))
+      #|  (C1 : Real) + (C2 : Real)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Real, \226\136\128 g : (Cart[Real, Unit]) -> Real, \226\136\128 C1 : Real, \226\136\128 N1 : Num, \226\136\128 C2 : Real, \226\136\128 N2 : Num, real_of_num(0) <= C1 && (\226\136\128 t : Real, real_of_num(1) <= t \226\134\146 abs(f(lift(t))) <= C1 * pow(t, N1)) && real_of_num(0) <= C2 && (\226\136\128 t : Real, real_of_num(1) <= t \226\134\146 abs(g(lift(t))) <= C2 * pow(t, N2)) \226\134\146 (\226\136\131 C : Real, \226\136\131 N : Num, real_of_num(0) <= C && (\226\136\128 t : Real, real_of_num(1) <= t \226\134\146 abs(f(lift(t)) + g(lift(t))) <= C * pow(t, N)))
+      #|  (a : Real) == (b : Real) \226\134\146 a <= b
+      #|  (C1 : Real) * pow((t : Real), (N1 : Num)) * ((C2 : Real) * pow(t, (N2 : Num)))
+      #|  (t : Real)
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (C1 : Real) * (C2 : Real)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Real, \226\136\128 g : (Cart[Real, Unit]) -> Real, \226\136\128 C1 : Real, \226\136\128 N1 : Num, \226\136\128 C2 : Real, \226\136\128 N2 : Num, real_of_num(0) <= C1 && (\226\136\128 t : Real, real_of_num(1) <= t \226\134\146 abs(f(lift(t))) <= C1 * pow(t, N1)) && real_of_num(0) <= C2 && (\226\136\128 t : Real, real_of_num(1) <= t \226\134\146 abs(g(lift(t))) <= C2 * pow(t, N2)) \226\134\146 (\226\136\131 C : Real, \226\136\131 N : Num, real_of_num(0) <= C && (\226\136\128 t : Real, real_of_num(1) <= t \226\134\146 abs(f(lift(t)) * g(lift(t))) <= C * pow(t, N)))
+      #|  (N2 : Num)
+      #|  (C2 : Real)
+      #|  (N1 : Num)
+      #|  (C1 : Real)
+      #|  (N2 : Num)
+      #|  (C2 : Real)
+      #|  (N1 : Num)
+      #|  (C1 : Real)
+      #|  (g : (Cart[Real, Unit]) -> Real)
+      #|  (f : (Cart[Real, Unit]) -> Real)
+      #|  (N2 : Num)
+      #|  (C2 : Real)
+      #|  (N1 : Num)
+      #|  (C1 : Real)
+      #|  (N2 : Num)
+      #|  (C2 : Real)
+      #|  (N1 : Num)
+      #|  (C1 : Real)
+      #|  (g : (Cart[Real, Unit]) -> Real)
+      #|  (f : (Cart[Real, Unit]) -> Real)
       #|  0
-      #|  abs c
-      #|  c:real
+      #|  abs((c : Real))
+      #|  (c : Real)
       #|  1
-      #|  &1
-      #|  forall p:real^1->real. real_polynomial_function p\n     ==> ?C N. &0 <= C /\\ forall t. &1 <= t ==> abs(p(lift t)) <= C * t pow N
-      #|  abs(exp(--t)) = exp(--t)
-      #|  t:real
-      #|  &1
-      #|  \\t. C * (t pow N * exp(--t))
-      #|  N:num
-      #|  C:real
-      #|  forall p:real^1->real. real_polynomial_function p\n     ==> ((\\t. p(lift t) * exp(--t)) ---> &0) at_posinfinity
-      #|  x:real
-      #|  abs(x) > R
-      #|  x:real
-      #|  max (g(x0:real)) (&0)
-      #|  x0:real
-      #|  real_interval[--R,R]
-      #|  g:real->real
-      #|  forall g:real->real R.\n     &0 <= R /\\ g real_continuous_on real_interval[--R,R] /\\\n     (forall x. abs(x) > R ==> g x = &0) /\\ (forall x. &0 <= g x)\n     ==> ?B. forall x. g x <= B
-      #|  \\z. (dm:real->complex)(drop z)
-      #|  at(lift x)
-      #|  x:real
-      #|  forall(dm:real->complex) dm1 s.\n     (forall x. ((\\z. dm(drop z)) has_vector_derivative (dm1 x)) (at(lift x)))\n     ==> (\\x. norm(dm x)) real_continuous_on s
-      #|  (d:num->real->complex) m x = Cx(&0)
-      #|  (d:num->real->complex)(SUC m)
-      #|  real_interval[--R,R]
-      #|  \\x:real. x
-      #|  real_interval[--R,R]
-      #|  k:num
-      #|  \\x:real. abs x
-      #|  R:real
-      #|  m:num
-      #|  k:num
-      #|  d:num->real->complex
-      #|  forall d:num->real->complex. forall R.\n     &0 <= R /\\\n     (forall n x. ((\\z. d n(drop z)) has_vector_derivative (d(SUC n) x))(at(lift x)))\n       /\\\n     (forall m x. abs(x) > R ==> d m x = Cx(&0))\n     ==> schwartz (d 0)
-      #|  x:real
-      #|  &1
-      #|  \\x:real. x
-      #|  ((P:real->real) o inv has_real_derivative (P1(inv x) * (--(inv(x pow 2)))))\n    (atreal x)
-      #|  ~(x = &0)
-      #|  forall(P:real->real) P1 x.\n     &0 < x /\\ (forall y. (P has_real_derivative P1 y) (atreal y))\n     ==> ((\\x. P(inv x)) has_real_derivative (--(inv(x pow 2)) * P1(inv x)))\n         (atreal x)
-      #|  forall x. &0 < x\n     ==> ((\\x. exp(--(inv x))) has_real_derivative (exp(--(inv x)) * inv(x pow\n       2)))\n         (atreal x)
-      #|  x:real
-      #|  x:real
-      #|  P1:real->real
-      #|  P:real->real
-      #|  ((\\x. (P:real->real)(inv x) * exp(--(inv x))) has_real_derivative\n     ((P(inv x)) * (exp(--(inv x)) * inv(x pow 2)) +\n      (--(inv(x pow 2)) * P1(inv x)) * exp(--(inv x)))) (atreal x)
-      #|  ~(x = &0)
-      #|  forall(P:real->real) P1 x.\n     &0 < x /\\ (forall y. (P has_real_derivative P1 y) (atreal y))\n     ==> ((\\x. P(inv x) * exp(--(inv x))) has_real_derivative\n          (inv(x pow 2) * (P(inv x) - P1(inv x)) * exp(--(inv x))))\n         (atreal x)
-      #|  f = g /\\ a = b\n     ==> (f has_derivative a) net ==> (g has_derivative b) net
-      #|  Cx(&1)
-      #|  forall g:real->real. forall g' x.\n     (g has_real_derivative g') (atreal x)\n     ==> ((\\z. Cx(g(drop z))) has_vector_derivative (Cx g')) (at(lift x))
-      #|  forall c a ff b:real. (c * a) * (ff * b) = (c * ff) * (a * b)
-      #|  forall c a ff b x:real. a * b = x ==> (c * a) * (ff * b) = (c * ff) * x
-      #|  ~(x = &0) ==> inv(x pow K) * (x pow K * x) = x
-      #|  a = b ==> a <= b
-      #|  (C * inv x pow K) * (&(FACT(K+1)) * x pow (K+1))
-      #|  x:real
-      #|  K+1
-      #|  (C * inv x pow K) * exp(--(inv x))
-      #|  abs(exp(--(inv x))) = exp(--(inv x))
-      #|  inv(x:real)
-      #|  forall(Q:real->real) C K x.\n     &0 <= C /\\ (forall t. &1 <= t ==> abs((\\z:real^1. Q(drop z))(lift t)) <= C * t\n       pow K) /\\\n     &0 < x /\\ x < &1 /\\ &1 <= inv x\n     ==> abs(Q(inv x) * exp(--(inv x))) <= (C * &(FACT(K+1))) * x
-      #|  c:real
-      #|  \\x:real. x
-      #|  atreal(&0) within s
-      #|  forall c s. ((\\x:real. c * x) ---> &0) (atreal(&0) within s)
-      #|  x:real
-      #|  K:num
-      #|  C:real
-      #|  Q:real->real
-      #|  x:real
-      #|  &1
-      #|  \\x:real. (C * &(FACT(K+1))) * x
-      #|  K:num
-      #|  C:real
-      #|  forall Q:real->real. real_polynomial_function (\\z:real^1. Q(drop z))\n     ==> ((\\x. Q(inv x) * exp(--(inv x))) ---> &0)\n         (atreal(&0) within {x | &0 < x})
-      #|  cphi (x:real) = if &0 < x then Cx(exp(--(inv x))) else Cx(&0)
-      #|  bumpP (f:real->complex) <=>\n    ?Q:real->real. real_polynomial_function (\\z:real^1. Q(drop z)) /\\\n                   (forall x. &0 < x ==> f x = Cx(Q(inv x) * exp(--(inv x)))) /\\\n                   (forall x. x <= &0 ==> f x = Cx(&0))
-      #|  t:real^1->bool
-      #|  s:real^1->bool
-      #|  forall f:real^1->real^N f' a s t.\n     (f has_vector_derivative f') (at a within s) /\\\n     (f has_vector_derivative f') (at a within t) /\\\n     s UNION t = (:real^1)\n     ==> (f has_vector_derivative f') (at a)
-      #|  z:real^1
-      #|  &1
-      #|  \\z:real^1. vec 0:complex
-      #|  forall f:real->complex. bumpP f\n     ==> ((\\z. f(drop z)) has_vector_derivative (Cx(&0)))\n         (at(lift(&0)) within {z | drop z <= &0})
-      #|  drop = \\z:real^1. z$1
-      #|  real_polynomial_function (drop:real^1->real)
-      #|  drop z
-      #|  z:real^1
-      #|  {z:real^1 | &0 <= drop z} DELETE lift(&0) = IMAGE lift {x | &0 < x}
-      #|  &0 < drop x'
-      #|  forall(f:real->complex) Q x'.\n     (forall x. &0 < x ==> f x = Cx(Q(inv x) * exp(--(inv x)))) /\\\n     x' IN {z | &0 <= drop z} /\\ &0 < dist(x',lift(&0)) /\\ dist(x',lift(&0)) <\n       &1\n     ==> Cx (inv (drop x') * Q (inv (drop x')) * exp (--inv (drop x'))) =\n         inv (drop (x' - lift (&0))) % f (drop x')
-      #|  \\u:real. u * Q u
-      #|  forall Q:real->real. real_polynomial_function (\\z:real^1. Q(drop z))\n     ==> ((\\y. Cx(inv(drop y) * Q(inv(drop y)) * exp(--(inv(drop y))))) -->\n       Cx(&0))\n         (at(lift(&0)) within {z | &0 <= drop z})
-      #|  &1
-      #|  \\y:real^1. Cx(inv(drop y) * (Q(inv(drop y)) * exp(--(inv(drop\n    y)))))
-      #|  (f:real->complex)(&0) = Cx(&0)
-      #|  forall f:real->complex. bumpP f\n     ==> ((\\z. f(drop z)) has_vector_derivative (Cx(&0)))\n         (at(lift(&0)) within {z | &0 <= drop z})
-      #|  {z:real^1 | &0 <= drop z}
-      #|  {z:real^1 | drop z <= &0}
-      #|  forall f:real->complex. bumpP f\n     ==> ((\\z. f(drop z)) has_vector_derivative (Cx(&0))) (at(lift(&0)))
-      #|  x:real
-      #|  Q1:real->real
-      #|  Q:real->real
-      #|  x:real
-      #|  inv(x pow 2) * (Q(inv x) - Q1(inv x)) * exp(--(inv x))
-      #|  \\w. Q(inv w) * exp(--(inv w))
-      #|  forall(Q:real->real) Q1 x.\n     (forall y. (Q has_real_derivative Q1 y) (atreal y)) /\\ &0 < x\n     ==> ((\\z. Cx(Q(inv(drop z)) * exp(--(inv(drop z))))) has_vector_derivative\n          (Cx(inv(x pow 2) * (Q(inv x) - Q1(inv x)) * exp(--(inv x)))))\n         (at(lift x))
-      #|  z:real^1
-      #|  x:real
-      #|  \\z. Cx(Q(inv(drop z)) * exp(--(inv(drop z))))
-      #|  forall(f:real->complex) Q Q1 x.\n     (forall x. &0 < x ==> f x = Cx(Q(inv x) * exp(--(inv x)))) /\\\n     (forall y. (Q has_real_derivative Q1 y) (atreal y)) /\\ &0 < x\n     ==> ((\\z. f(drop z)) has_vector_derivative\n          (Cx(inv(x pow 2) * (Q(inv x) - Q1(inv x)) * exp(--(inv x)))))\n         (at(lift x))
-      #|  z:real^1
-      #|  --x:real
-      #|  \\z:real^1. vec 0:complex
-      #|  forall(f:real->complex) x.\n     (forall y. y <= &0 ==> f y = Cx(&0)) /\\ x < &0\n     ==> ((\\z. f(drop z)) has_vector_derivative (Cx(&0))) (at(lift x))
-      #|  (Cx((inv x pow 2 * (Q(inv x) - Q1(inv x))) * exp(--(inv x)))):complex =\n        Cx(inv(x pow 2) * (Q(inv x) - Q1(inv x)) * exp(--(inv x)))
-      #|  Q:real->real
-      #|  ~(&0 < x)
-      #|  x < &0 \\/ x = &0 \\/ &0 < x
-      #|  forall(f:real->complex) Q Q1 x.\n     (forall x. &0 < x ==> f x = Cx(Q(inv x) * exp(--(inv x)))) /\\\n     (forall x. x <= &0 ==> f x = Cx(&0)) /\\\n     (forall y. (Q has_real_derivative Q1 y) (atreal y)) /\\\n     real_polynomial_function (\\z:real^1. Q(drop z))\n     ==> ((\\z. f(drop z)) has_vector_derivative\n          (if &0 < x\n           then Cx((inv x pow 2 * (Q(inv x) - Q1(inv x))) * exp(--(inv x)))\n           else Cx(&0)))\n         (at(lift x))
-      #|  \\u:real. u pow 2 * (Q u - Q1 u)
-      #|  \\x. if &0 < x\n        then Cx((inv x pow 2 * (Q(inv x) - Q1(inv x))) * exp(--(inv x)))\n        else Cx(&0)
-      #|  real_polynomial_function (\\z:real^1. Q1 (drop z))
-      #|  y:real
-      #|  y:real
-      #|  forall y. ((Q:real->real) has_real_derivative (Q1 y)) (atreal y)
-      #|  Q1 = \\u:real. (Q1c:real^1->real)(lift u)
-      #|  Q1c:real^1->real
-      #|  forall f:real->complex. bumpP f\n     ==> ?g. bumpP g /\\\n             (forall x. ((\\z. f(drop z)) has_vector_derivative (g x)) (at(lift x)))
-      #|  \\u:real. &1
-      #|  bumpP cphi
+      #|  real_of_num(1)
+      #|  \226\136\128 p : (Cart[Real, Unit]) -> Real, real_polynomial_function(p) \226\134\146 (\226\136\131 C : Real, \226\136\131 N : Num, real_of_num(0) <= C && (\226\136\128 t : Real, real_of_num(1) <= t \226\134\146 abs(p(lift(t))) <= C * pow(t, N)))
+      #|  abs(exp(-(t : Real))) == exp(-t)
+      #|  (t : Real)
+      #|  real_of_num(1)
+      #|  (t : Real) => (C : Real) * (pow(t, (N : Num)) * exp(-t))
+      #|  (N : Num)
+      #|  (C : Real)
+      #|  \226\136\128 p : (Cart[Real, Unit]) -> Real, real_polynomial_function(p) \226\134\146 op_minus_minus_minus_gt((t : Real) => p(lift(t)) * exp(-t), real_of_num(0), at_posinfinity)
+      #|  (x : Real)
+      #|  abs((x : Real)) > (R : Real)
+      #|  (x : Real)
+      #|  max((g : (Real) -> Real)((x0 : Real)), real_of_num(0))
+      #|  (x0 : Real)
+      #|  real_interval([(-(R : Real), R)])
+      #|  (g : (Real) -> Real)
+      #|  \226\136\128 g : (Real) -> Real, \226\136\128 R : Real, real_of_num(0) <= R && real_continuous_on(g, real_interval([(-R, R)])) && (\226\136\128 x : Real, abs(x) > R \226\134\146 g(x) == real_of_num(0)) && (\226\136\128 x : Real, real_of_num(0) <= g(x)) \226\134\146 (\226\136\131 B : Real, \226\136\128 x : Real, g(x) <= B)
+      #|  (z : Cart[Real, Unit]) => (dm : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
+      #|  at(lift((x : Real)))
+      #|  (x : Real)
+      #|  \226\136\128 dm : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 dm1 : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => dm(drop(z)), dm1(x), at(lift(x)))) \226\134\146 real_continuous_on((x : Real) => norm(dm(x)), s)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])((m : Num), (x : Real)) == Cx(real_of_num(0))
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC((m : Num)))
+      #|  real_interval([(-(R : Real), R)])
+      #|  (x : Real) => x
+      #|  real_interval([(-(R : Real), R)])
+      #|  (k : Num)
+      #|  (x : Real) => abs(x)
+      #|  (R : Real)
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 d : (Num, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 R : Real, real_of_num(0) <= R && (\226\136\128 n : Num, \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => d(n, drop(z)), d(SUC(n), x), at(lift(x)))) && (\226\136\128 m : Num, \226\136\128 x : Real, abs(x) > R \226\134\146 d(m, x) == Cx(real_of_num(0))) \226\134\146 schwartz(d(0))
+      #|  (x : Real)
+      #|  real_of_num(1)
+      #|  (x : Real) => x
+      #|  has_real_derivative(o((P : (Real) -> Real), inv), (P1 : (Real) -> Real)(inv((x : Real))) * -inv(pow(x, 2)), atreal(x))
+      #|  !((x : Real) == real_of_num(0))
+      #|  \226\136\128 P : (Real) -> Real, \226\136\128 P1 : (Real) -> Real, \226\136\128 x : Real, real_of_num(0) < x && (\226\136\128 y : Real, has_real_derivative(P, P1(y), atreal(y))) \226\134\146 has_real_derivative((x : Real) => P(inv(x)), -inv(pow(x, 2)) * P1(inv(x)), atreal(x))
+      #|  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 has_real_derivative((x : Real) => exp(-inv(x)), exp(-inv(x)) * inv(pow(x, 2)), atreal(x))
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (P1 : (Real) -> Real)
+      #|  (P : (Real) -> Real)
+      #|  has_real_derivative((x : Real) => (P : (Real) -> Real)(inv(x)) * exp(-inv(x)), P(inv((x : Real))) * (exp(-inv(x)) * inv(pow(x, 2))) + -inv(pow(x, 2)) * (P1 : (Real) -> Real)(inv(x)) * exp(-inv(x)), atreal(x))
+      #|  !((x : Real) == real_of_num(0))
+      #|  \226\136\128 P : (Real) -> Real, \226\136\128 P1 : (Real) -> Real, \226\136\128 x : Real, real_of_num(0) < x && (\226\136\128 y : Real, has_real_derivative(P, P1(y), atreal(y))) \226\134\146 has_real_derivative((x : Real) => P(inv(x)) * exp(-inv(x)), inv(pow(x, 2)) * ((P(inv(x)) - P1(inv(x))) * exp(-inv(x))), atreal(x))
+      #|  (f : (Cart[Real, _]) -> Cart[Real, _]) == (g : (Cart[Real, _]) -> Cart[Real, _]) && (a : (Cart[Real, _]) -> Cart[Real, _]) == (b : (Cart[Real, _]) -> Cart[Real, _]) \226\134\146 has_derivative(f, a, (net : Net[Cart[Real, _]])) \226\134\146 has_derivative(g, b, net)
+      #|  Cx(real_of_num(1))
+      #|  \226\136\128 g : (Real) -> Real, \226\136\128 g' : Real, \226\136\128 x : Real, has_real_derivative(g, g', atreal(x)) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => Cx(g(drop(z))), Cx(g'), at(lift(x)))
+      #|  \226\136\128 c : Real, \226\136\128 a : Real, \226\136\128 ff : Real, \226\136\128 b : Real, c * a * (ff * b) == c * ff * (a * b)
+      #|  \226\136\128 c : Real, \226\136\128 a : Real, \226\136\128 ff : Real, \226\136\128 b : Real, \226\136\128 x : Real, a * b == x \226\134\146 c * a * (ff * b) == c * ff * x
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 inv(pow(x, (K : Num))) * (pow(x, K) * x) == x
+      #|  (a : Real) == (b : Real) \226\134\146 a <= b
+      #|  (C : Real) * pow(inv((x : Real)), (K : Num)) * (real_of_num(FACT(K + 1)) * pow(x, K + 1))
+      #|  (x : Real)
+      #|  (K : Num) + 1
+      #|  (C : Real) * pow(inv((x : Real)), (K : Num)) * exp(-inv(x))
+      #|  abs(exp(-inv((x : Real)))) == exp(-inv(x))
+      #|  inv((x : Real))
+      #|  \226\136\128 Q : (Real) -> Real, \226\136\128 C : Real, \226\136\128 K : Num, \226\136\128 x : Real, real_of_num(0) <= C && (\226\136\128 t : Real, real_of_num(1) <= t \226\134\146 abs(((z : Cart[Real, Unit]) => Q(drop(z)))(lift(t))) <= C * pow(t, K)) && real_of_num(0) < x && x < real_of_num(1) && real_of_num(1) <= inv(x) \226\134\146 abs(Q(inv(x)) * exp(-inv(x))) <= C * real_of_num(FACT(K + 1)) * x
+      #|  (c : Real)
+      #|  (x : Real) => x
+      #|  within(atreal(real_of_num(0)), (s : (Real) -> Bool))
+      #|  \226\136\128 c : Real, \226\136\128 s : (Real) -> Bool, op_minus_minus_minus_gt((x : Real) => c * x, real_of_num(0), within(atreal(real_of_num(0)), s))
+      #|  (x : Real)
+      #|  (K : Num)
+      #|  (C : Real)
+      #|  (Q : (Real) -> Real)
+      #|  (x : Real)
+      #|  real_of_num(1)
+      #|  (x : Real) => (C : Real) * real_of_num(FACT((K : Num) + 1)) * x
+      #|  (K : Num)
+      #|  (C : Real)
+      #|  \226\136\128 Q : (Real) -> Real, real_polynomial_function((z : Cart[Real, Unit]) => Q(drop(z))) \226\134\146 op_minus_minus_minus_gt((x : Real) => Q(inv(x)) * exp(-inv(x)), real_of_num(0), within(atreal(real_of_num(0)), {(x : Real) | real_of_num(0) < x}))
+      #|  (cphi : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real)) == (if real_of_num(0) < x { Cx(exp(-inv(x))) } else { Cx(real_of_num(0)) })
+      #|  (bumpP : ((Real) -> Cart[Real, Tybit0[Unit]]) -> Bool)((f : (Real) -> Cart[Real, Tybit0[Unit]])) == (\226\136\131 Q : (Real) -> Real, real_polynomial_function((z : Cart[Real, Unit]) => Q(drop(z))) && (\226\136\128 x : Real, real_of_num(0) < x \226\134\146 f(x) == Cx(Q(inv(x)) * exp(-inv(x)))) && (\226\136\128 x : Real, x <= real_of_num(0) \226\134\146 f(x) == Cx(real_of_num(0))))
+      #|  (t : (Cart[Real, Unit]) -> Bool)
+      #|  (s : (Cart[Real, Unit]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 t : (Cart[Real, Unit]) -> Bool, has_vector_derivative(f, f', within(at(a), s)) && has_vector_derivative(f, f', within(at(a), t)) && UNION(s, t) == UNIV \226\134\146 has_vector_derivative(f, f', at(a))
+      #|  (z : Cart[Real, Unit])
+      #|  real_of_num(1)
+      #|  (z : Cart[Real, Unit]) => (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], bumpP(f) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => f(drop(z)), Cx(real_of_num(0)), within(at(lift(real_of_num(0))), {(z : Cart[Real, Unit]) | drop(z) <= real_of_num(0)}))
+      #|  drop == ((z : Cart[Real, Unit]) => op_dollar(z, 1))
+      #|  real_polynomial_function(drop)
+      #|  drop((z : Cart[Real, Unit]))
+      #|  (z : Cart[Real, Unit])
+      #|  DELETE({(z : Cart[Real, Unit]) | real_of_num(0) <= drop(z)}, lift(real_of_num(0))) == IMAGE(lift, {(x : Real) | real_of_num(0) < x})
+      #|  real_of_num(0) < drop((x' : Cart[Real, Unit]))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 Q : (Real) -> Real, \226\136\128 x' : Cart[Real, Unit], (\226\136\128 x : Real, real_of_num(0) < x \226\134\146 f(x) == Cx(Q(inv(x)) * exp(-inv(x)))) && IN(x', {(z : Cart[Real, Unit]) | real_of_num(0) <= drop(z)}) && real_of_num(0) < dist((x', lift(real_of_num(0)))) && dist((x', lift(real_of_num(0)))) < real_of_num(1) \226\134\146 Cx(inv(drop(x')) * (Q(inv(drop(x'))) * exp(-inv(drop(x'))))) == op_pct(inv(drop(x' - lift(real_of_num(0)))), f(drop(x')))
+      #|  (u : Real) => u * (Q : (Real) -> Real)(u)
+      #|  \226\136\128 Q : (Real) -> Real, real_polynomial_function((z : Cart[Real, Unit]) => Q(drop(z))) \226\134\146 op_minus_minus_gt((y : Cart[Real, Unit]) => Cx(inv(drop(y)) * (Q(inv(drop(y))) * exp(-inv(drop(y))))), Cx(real_of_num(0)), within(at(lift(real_of_num(0))), {(z : Cart[Real, Unit]) | real_of_num(0) <= drop(z)}))
+      #|  real_of_num(1)
+      #|  (y : Cart[Real, Unit]) => Cx(inv(drop(y)) * ((Q : (Real) -> Real)(inv(drop(y))) * exp(-inv(drop(y)))))
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])(real_of_num(0)) == Cx(real_of_num(0))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], bumpP(f) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => f(drop(z)), Cx(real_of_num(0)), within(at(lift(real_of_num(0))), {(z : Cart[Real, Unit]) | real_of_num(0) <= drop(z)}))
+      #|  {(z : Cart[Real, Unit]) | real_of_num(0) <= drop(z)}
+      #|  {(z : Cart[Real, Unit]) | drop(z) <= real_of_num(0)}
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], bumpP(f) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => f(drop(z)), Cx(real_of_num(0)), at(lift(real_of_num(0))))
+      #|  (x : Real)
+      #|  (Q1 : (Real) -> Real)
+      #|  (Q : (Real) -> Real)
+      #|  (x : Real)
+      #|  inv(pow((x : Real), 2)) * (((Q : (Real) -> Real)(inv(x)) - (Q1 : (Real) -> Real)(inv(x))) * exp(-inv(x)))
+      #|  (w : Real) => (Q : (Real) -> Real)(inv(w)) * exp(-inv(w))
+      #|  \226\136\128 Q : (Real) -> Real, \226\136\128 Q1 : (Real) -> Real, \226\136\128 x : Real, (\226\136\128 y : Real, has_real_derivative(Q, Q1(y), atreal(y))) && real_of_num(0) < x \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => Cx(Q(inv(drop(z))) * exp(-inv(drop(z)))), Cx(inv(pow(x, 2)) * ((Q(inv(x)) - Q1(inv(x))) * exp(-inv(x)))), at(lift(x)))
+      #|  (z : Cart[Real, Unit])
+      #|  (x : Real)
+      #|  (z : Cart[Real, Unit]) => Cx((Q : (Real) -> Real)(inv(drop(z))) * exp(-inv(drop(z))))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 Q : (Real) -> Real, \226\136\128 Q1 : (Real) -> Real, \226\136\128 x : Real, (\226\136\128 x : Real, real_of_num(0) < x \226\134\146 f(x) == Cx(Q(inv(x)) * exp(-inv(x)))) && (\226\136\128 y : Real, has_real_derivative(Q, Q1(y), atreal(y))) && real_of_num(0) < x \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => f(drop(z)), Cx(inv(pow(x, 2)) * ((Q(inv(x)) - Q1(inv(x))) * exp(-inv(x)))), at(lift(x)))
+      #|  (z : Cart[Real, Unit])
+      #|  -(x : Real)
+      #|  (z : Cart[Real, Unit]) => (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, (\226\136\128 y : Real, y <= real_of_num(0) \226\134\146 f(y) == Cx(real_of_num(0))) && x < real_of_num(0) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => f(drop(z)), Cx(real_of_num(0)), at(lift(x)))
+      #|  Cx(pow(inv((x : Real)), 2) * ((Q : (Real) -> Real)(inv(x)) - (Q1 : (Real) -> Real)(inv(x))) * exp(-inv(x))) == Cx(inv(pow(x, 2)) * ((Q(inv(x)) - Q1(inv(x))) * exp(-inv(x))))
+      #|  (Q : (Real) -> Real)
+      #|  !(real_of_num(0) < (x : Real))
+      #|  (x : Real) < real_of_num(0) || x == real_of_num(0) || real_of_num(0) < x
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 Q : (Real) -> Real, \226\136\128 Q1 : (Real) -> Real, \226\136\128 x : Real, (\226\136\128 x : Real, real_of_num(0) < x \226\134\146 f(x) == Cx(Q(inv(x)) * exp(-inv(x)))) && (\226\136\128 x : Real, x <= real_of_num(0) \226\134\146 f(x) == Cx(real_of_num(0))) && (\226\136\128 y : Real, has_real_derivative(Q, Q1(y), atreal(y))) && real_polynomial_function((z : Cart[Real, Unit]) => Q(drop(z))) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => f(drop(z)), if real_of_num(0) < x { Cx(pow(inv(x), 2) * (Q(inv(x)) - Q1(inv(x))) * exp(-inv(x))) } else { Cx(real_of_num(0)) }, at(lift(x)))
+      #|  (u : Real) => pow(u, 2) * ((Q : (Real) -> Real)(u) - (Q1 : (Real) -> Real)(u))
+      #|  (x : Real) => if real_of_num(0) < x { Cx(pow(inv(x), 2) * ((Q : (Real) -> Real)(inv(x)) - (Q1 : (Real) -> Real)(inv(x))) * exp(-inv(x))) } else { Cx(real_of_num(0)) }
+      #|  real_polynomial_function((z : Cart[Real, Unit]) => (Q1 : (Real) -> Real)(drop(z)))
+      #|  (y : Real)
+      #|  (y : Real)
+      #|  \226\136\128 y : Real, has_real_derivative((Q : (Real) -> Real), (Q1 : (Real) -> Real)(y), atreal(y))
+      #|  (Q1 : (Real) -> Real) == ((u : Real) => (Q1c : (Cart[Real, Unit]) -> Real)(lift(u)))
+      #|  (Q1c : (Cart[Real, Unit]) -> Real)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], bumpP(f) \226\134\146 (\226\136\131 g : (Real) -> Cart[Real, Tybit0[Unit]], bumpP(g) && (\226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => f(drop(z)), g(x), at(lift(x)))))
+      #|  (u : Real) => real_of_num(1)
+      #|  bumpP(cphi)
       #|  cphi
-      #|  \\(n:num) (f:real->complex) (g:real->complex).\n        forall x. ((\\z. f(drop z)) has_vector_derivative (g x)) (at(lift x))
-      #|  \\(n:num) (f:real->complex). bumpP f
-      #|  ?d:num->real->complex.\n     d 0 = cphi /\\\n     (forall n. bumpP (d n)) /\\\n     (forall n x. ((\\z. d n (drop z)) has_vector_derivative (d(SUC n) x)) (at(lift\n       x)))
-      #|  lift x
-      #|  b':complex
-      #|  a':complex
-      #|  \\z. (b:real->complex)(drop z)
-      #|  \\z. (a:real->complex)(drop z)
-      #|  ( * ):complex->complex->complex
-      #|  forall(a:real->complex) b a' b' x.\n     ((\\z. a(drop z)) has_vector_derivative a') (at(lift x)) /\\\n     ((\\z. b(drop z)) has_vector_derivative b') (at(lift x))\n     ==> ((\\z. a(drop z) * b(drop z)) has_vector_derivative\n          (a(x) * b' + a' * b(x))) (at(lift x))
-      #|  x:real^1
-      #|  f':num->complex
-      #|  f:num->real^1->complex
-      #|  t:num->bool
-      #|  a:num
-      #|  forall s. FINITE s ==> forall(f:num->real^1->complex) f' x.\n     (forall i. i IN s ==> ((f i) has_vector_derivative (f' i)) (at x))\n     ==> ((\\z. vsum s (\\i. f i z)) has_vector_derivative (vsum s f')) (at x)
-      #|  1 <= SUC(SUC n)
-      #|  1 <= SUC n
-      #|  forall(g:num->complex) n. vsum(0..n)(\\k. g(SUC k)) = vsum(1..SUC n) g
-      #|  k:num
-      #|  n:num
-      #|  \\k. Cx(&(binom(SUC n,k))) * (C:num->complex) k
-      #|  0 <= SUC n
-      #|  forall(C:num->complex) n.\n     vsum(0..SUC n)(\\k. Cx(&(binom(SUC n,k))) * C k) =\n     C 0 + vsum(0..n)(\\k. Cx(&(binom(n,SUC k)) + &(binom(n,k))) * C(SUC k))
-      #|  1 <= SUC n
-      #|  binom(n,SUC n) = 0
-      #|  0 <= n:num
-      #|  n:num
-      #|  \\k. Cx(&(binom(n,k))) * (B:num->complex) k
-      #|  forall(B:num->complex) n.\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) * B k) =\n     B 0 + vsum(0..n)(\\k. Cx(&(binom(n,SUC k))) * B(SUC k))
-      #|  vsum(0..n)(\\k. Cx(&(binom(n,SUC k)) + &(binom(n,k))) * (B:num->complex)(SUC\n     k)) =\n    vsum(0..n)(\\k. Cx(&(binom(n,SUC k))) * B(SUC k)) +\n    vsum(0..n)(\\k. Cx(&(binom(n,k))) * B(SUC k))
-      #|  forall(B:num->complex) n.\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) * B k) +\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) * B (SUC k)) =\n     vsum(0..SUC n)(\\k. Cx(&(binom(SUC n,k))) * B k)
-      #|  x:real
-      #|  a':complex
-      #|  Cx(&0)
-      #|  a:real->complex
-      #|  \\u:real. c:complex
-      #|  forall c (a:real->complex) a' x.\n     ((\\z. a(drop z)) has_vector_derivative a') (at(lift x))\n     ==> ((\\z. c * a(drop z)) has_vector_derivative (c * a')) (at(lift x))
-      #|  i <= n ==> SUC(n - i) = SUC n - i
-      #|  i:num
-      #|  forall(A:num->num->complex) n.\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) * A k (SUC(n-k))) =\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) * A k (SUC n - k))
-      #|  x:real
-      #|  (e:num->real->complex)(SUC(n-k)) x
-      #|  (d:num->real->complex)(SUC k) x
-      #|  (e:num->real->complex)(n-k)
-      #|  (d:num->real->complex) k
-      #|  forall(d:num->real->complex) e n k x.\n     (forall m y. ((\\z. d m(drop z)) has_vector_derivative (d(SUC m) y))(at(lift y)))\n       /\\\n     (forall m y. ((\\z. e m(drop z)) has_vector_derivative (e(SUC m) y))(at(lift y)))\n     ==> ((\\z. Cx(&(binom(n,k))) * d k (drop z) * e (n-k)(drop z))\n          has_vector_derivative\n          (Cx(&(binom(n,k))) * (d k x * e(SUC(n-k)) x + d(SUC k) x * e(n-k)\n            x)))\n         (at(lift x))
-      #|  k:num
-      #|  a = a' /\\ b = b' /\\ c = c'\n     ==> (a' + b' = c') ==> (a + b = c)
-      #|  n:num
-      #|  \\k. (d:num->real->complex) k x * (e:num->real->complex) (SUC n\n    - k) x
-      #|  \\k j. (d:num->real->complex) k x *\n    (e:num->real->complex) j x
-      #|  forall(d:num->real->complex) e n x.\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) *\n                    (d k x * e(SUC(n-k)) x + d(SUC k) x * e(n-k) x)) =\n     vsum(0..SUC n)(\\k. Cx(&(binom(SUC n,k))) * d k x * e (SUC n-k) x)
-      #|  n:num
-      #|  lift x
-      #|  \\k. Cx(&(binom(n,k))) * ((d:num->real->complex) k x * e(SUC(n-k)) x +\n                              d(SUC k) x * e(n-k) x)
-      #|  \\k z. Cx(&(binom(n,k))) * (d:num->real->complex) k (drop z) * e (n-k)(drop\n     z)
-      #|  0..n
-      #|  forall(d:num->real->complex) e n x.\n     (forall m y. ((\\z. d m(drop z)) has_vector_derivative (d(SUC m) y))(at(lift y)))\n       /\\\n     (forall m y. ((\\z. e m(drop z)) has_vector_derivative (e(SUC m) y))(at(lift y)))\n     ==> ((\\z. vsum(0..n)(\\k. Cx(&(binom(n,k))) * d k (drop z) * e (n-k)(drop\n       z)))\n          has_vector_derivative\n          (vsum(0..SUC n)(\\k. Cx(&(binom(SUC n,k))) * d k x * e (SUC n-k) x)))\n         (at(lift x))
-      #|  \\n x. vsum(0..n)(\\k. Cx(&(binom(n,k))) * (d:num->real->complex) k\n    x * e (n-k) x)
-      #|  forall(d:num->real->complex) e.\n     (forall m y. ((\\z. d m(drop z)) has_vector_derivative (d(SUC m) y))(at(lift y)))\n       /\\\n     (forall m y. ((\\z. e m(drop z)) has_vector_derivative (e(SUC m) y))(at(lift y)))\n     ==> ?p:num->real->complex.\n           (forall x. p 0 x = d 0 x * e 0 x) /\\\n           (forall n y. ((\\z. p n(drop z)) has_vector_derivative (p(SUC n)\n             y))(at(lift y)))
-      #|  (lift s):real^1 = vec 0 + s % vec 1
-      #|  (\\z:real^1. lift(c + s * drop z)) = (\\z:real^1. lift c + s % z)
-      #|  forall c s x. ((\\z:real^1. lift(c + s * drop z)) has_vector_derivative (lift s))\n   (at(lift x))
-      #|  lift x
-      #|  g':complex
-      #|  lift s
-      #|  \\w:real^1. (g:real->complex)(drop w)
-      #|  \\z:real^1. lift(c + s * drop z)
-      #|  forall(g:real->complex) g' c s x.\n     ((\\z. g(drop z)) has_vector_derivative g') (at(lift(c + s * x)))\n     ==> ((\\z. g(c + s * drop z)) has_vector_derivative (s % g')) (at(lift\n       x))
-      #|  y:real
-      #|  s:real
-      #|  c:real
-      #|  Cx s pow m * (d:num->real->complex)(SUC m)(c + s * y)
-      #|  \\w. Cx s pow m * (d:num->real->complex) m w
-      #|  forall(d:num->real->complex) c s.\n     (forall m y. ((\\z. d m(drop z)) has_vector_derivative (d(SUC m) y))(at(lift y)))\n     ==> (forall m y. ((\\z. (\\n x. Cx s pow n * d n (c + s * x)) m (drop z))\n                 has_vector_derivative\n                 ((\\n x. Cx s pow n * d n (c + s * x)) (SUC m) y))(at(lift\n                   y)))
-      #|  &1 + -- &1 * x = &1 - x
-      #|  p:num->real->complex
-      #|  p:num->real->complex
-      #|  \\n x. Cx(-- &1) pow n * (d:num->real->complex) n (&1 + -- &1\n                   * x)
-      #|  \\n x. Cx(&1) pow n * (d:num->real->complex) n (&1 + &1 * x)
-      #|  -- &1
-      #|  &1
-      #|  d:num->real->complex
-      #|  &1
-      #|  &1
-      #|  d:num->real->complex
-      #|  d:num->real->complex
-      #|  ?p:num->real->complex.\n     (forall x. p 0 x = cphi(&1 + x) * cphi(&1 - x)) /\\\n     (forall n y. ((\\z. p n(drop z)) has_vector_derivative (p(SUC n) y))(at(lift\n       y)))
-      #|  z:real^1
-      #|  abs x - R
-      #|  \\z:real^1. vec 0:complex
-      #|  Cx(&0)
-      #|  (p:num->real->complex)(SUC n) x
-      #|  lift x
-      #|  \\z. (p:num->real->complex) n (drop z)
-      #|  x:real
-      #|  forall(p:num->real->complex) R.\n     &0 <= R /\\ (forall x. R < abs x ==> p 0 x = Cx(&0)) /\\\n     (forall n y. ((\\z. p n(drop z)) has_vector_derivative (p(SUC n) y))(at(lift y)))\n     ==> forall n x. R < abs x ==> p n x = Cx(&0)
-      #|  x:real
-      #|  &1
-      #|  p:num->real->complex
-      #|  &1
-      #|  (\\x. cphi(&1 + x) * cphi(&1 - x)) = (p:num->real->complex) 0
-      #|  p:num->real->complex
-      #|  schwartz (\\x. cphi(&1 + x) * cphi(&1 - x))
-      #|  yy:num->real^1
-      #|  forall(g:real->complex) g' y0 yy.\n     ((\\z. g(drop z)) has_vector_derivative g') (at(lift y0)) /\\\n     (forall n. ~(yy n = lift y0)) /\\ (yy --> lift y0) sequentially\n     ==> ((\\n. inv(drop(yy n) - y0) % (g(drop(yy n)) - g y0)) --> g')\n       sequentially
-      #|  lift b
-      #|  lift a
-      #|  w:real^1
-      #|  B:real
-      #|  (:real^1)
-      #|  \\z. (g':real->complex)(drop z)
-      #|  \\z. (g:real->complex)(drop z)
-      #|  forall(g:real->complex) g' B a b.\n     (forall y. ((\\z. g(drop z)) has_vector_derivative (g' y)) (at(lift y))) /\\\n     (forall y. norm(g' y) <= B)\n     ==> norm(g a - g b) <= B * abs(a - b)
-      #|  ~(d = &0) ==> inv(abs d) * (dmx * abs d) =\n      dmx
-      #|  inv(abs(drop(yy(n:num)) - y0)) * ((dm:real->real) x *\n    abs(drop(yy(n:num)) - y0))
-      #|  y0:real
-      #|  drop(yy(n:num))
-      #|  (dm:real->real)(x:real)
-      #|  \\y. (gg:real->real->complex) y x
-      #|  \\t. (ff:real->real->complex) t x
-      #|  ~((yy:num->real^1) n = lift y0)
-      #|  ~(drop(yy(n:num)) - y0 = &0)
-      #|  forall(ff:real->real->complex) gg dm y0 (yy:num->real^1) n (x:real).\n     (forall y (x:real). ((\\z. ff (drop z) x) has_vector_derivative (gg y x))\n       (at(lift y))) /\\\n     (forall y (x:real). norm(gg y x) <= dm x) /\\ ~(yy n = lift y0)\n     ==> norm(inv(drop(yy n) - y0) % (ff (drop(yy n)) x - ff y0 x)) <= dm x
-      #|  forall(ff:real->real->complex) a b c.\n     (\\x:real^1. ff a (drop x)) absolutely_integrable_on (:real^1) /\\\n     (\\x:real^1. ff b (drop x)) absolutely_integrable_on (:real^1)\n     ==> c % (integral (:real^1) (\\x. ff a (drop x)) -\n              integral (:real^1) (\\x. ff b (drop x))) =\n         integral (:real^1) (\\x. c % (ff a (drop x) - ff b (drop x)))
-      #|  yy:num->real^1
-      #|  y0:real
-      #|  (gg:real->real->complex) y0 (drop x)
-      #|  \\t. (ff:real->real->complex) t (drop x)
-      #|  x:real^1
-      #|  gg:real->real->complex
-      #|  (:real^1)
-      #|  \\x:real^1. lift(dm(drop x))
-      #|  \\x:real^1. (gg:real->real->complex) y0 (drop x)
-      #|  \\n x:real^1. inv(drop(yy(n:num)) - y0) % (ff (drop(yy n)) (drop x) - ff y0\n     (drop x)):complex
-      #|  forall(ff:real->real->complex) gg dm y0 (yy:num->real^1).\n     (forall y (x:real). ((\\z. ff (drop z) x) has_vector_derivative (gg y x))\n       (at(lift y))) /\\\n     (forall y. (\\x:real^1. ff y (drop x)) absolutely_integrable_on (:real^1)) /\\\n     (\\x:real^1. gg y0 (drop x)) absolutely_integrable_on (:real^1) /\\\n     (forall y (x:real). norm(gg y x) <= dm x) /\\\n     (\\x:real^1. lift(dm(drop x))) absolutely_integrable_on (:real^1) /\\\n     (forall n. ~(yy n = lift y0)) /\\ (yy --> lift y0) sequentially\n     ==> ((\\n. integral (:real^1)\n                 (\\x. inv(drop(yy n) - y0) % (ff (drop(yy n)) (drop x) - ff y0\n                   (drop x))))\n          --> integral (:real^1) (\\x. gg y0 (drop x))) sequentially
-      #|  dm:real->real
-      #|  forall n. inv(drop(yy(n:num) - lift y0)) %\n        (integral (:real^1) (\\x. ff (drop(yy n)) (drop x)) -\n         integral (:real^1) (\\x. ff (drop(lift y0)) (drop x))) =\n        integral (:real^1) (\\x. inv(drop(yy n) - y0) %\n                                (ff (drop(yy n)) (drop x) - ff y0 (drop x)))
-      #|  yy:num->real^1
-      #|  forall(ff:real->real->complex) gg dm y0.\n     (forall y (x:real). ((\\z. ff (drop z) x) has_vector_derivative (gg y x))\n       (at(lift y))) /\\\n     (forall y. (\\x:real^1. ff y (drop x)) absolutely_integrable_on (:real^1)) /\\\n     (\\x:real^1. gg y0 (drop x)) absolutely_integrable_on (:real^1) /\\\n     (forall y (x:real). norm(gg y x) <= dm x) /\\\n     (\\x:real^1. lift(dm(drop x))) absolutely_integrable_on (:real^1)\n     ==> ((\\z. integral (:real^1) (\\x. ff (drop z) (drop x)))\n       has_vector_derivative\n          (integral (:real^1) (\\x. gg y0 (drop x)))) (at(lift y0))
-      #|  forall(x:real) a:real^1.\n     ((\\z. cexp(--(ii * Cx(drop z) * Cx x))) has_vector_derivative\n      (--(ii * Cx x) * cexp(--(ii * Cx(drop a) * Cx x)))) (at a)
+      #|  (n : Num) => (f : (Real) -> Cart[Real, Tybit0[Unit]]) => (g : (Real) -> Cart[Real, Tybit0[Unit]]) => \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => f(drop(z)), g(x), at(lift(x)))
+      #|  (n : Num) => (f : (Real) -> Cart[Real, Tybit0[Unit]]) => bumpP(f)
+      #|  \226\136\131 d : (Num, Real) -> Cart[Real, Tybit0[Unit]], d(0) == cphi && (\226\136\128 n : Num, bumpP(d(n))) && (\226\136\128 n : Num, \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => d(n, drop(z)), d(SUC(n), x), at(lift(x))))
+      #|  lift((x : Real))
+      #|  (b' : Cart[Real, Tybit0[Unit]])
+      #|  (a' : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Unit]) => (b : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
+      #|  (z : Cart[Real, Unit]) => (a : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
+      #|  op_star
+      #|  \226\136\128 a : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 b : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a' : Cart[Real, Tybit0[Unit]], \226\136\128 b' : Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => a(drop(z)), a', at(lift(x))) && has_vector_derivative((z : Cart[Real, Unit]) => b(drop(z)), b', at(lift(x))) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => a(drop(z)) * b(drop(z)), a(x) * b' + a' * b(x), at(lift(x)))
+      #|  (x : Cart[Real, Unit])
+      #|  (f' : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (t : (Num) -> Bool)
+      #|  (a : Num)
+      #|  \226\136\128 s : (Num) -> Bool, FINITE(s) \226\134\146 (\226\136\128 f : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 f' : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Unit], (\226\136\128 i : Num, IN(i, s) \226\134\146 has_vector_derivative(f(i), f'(i), at(x))) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => vsum(s, (i : Num) => f(i, z)), vsum(s, f'), at(x)))
+      #|  1 <= SUC(SUC((n : Num)))
+      #|  1 <= SUC((n : Num))
+      #|  \226\136\128 g : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, vsum(op_dot_dot(0, n), (k : Num) => g(SUC(k))) == vsum(op_dot_dot(1, SUC(n)), g)
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  (k : Num) => Cx(real_of_num(binom((SUC((n : Num)), k)))) * (C : (Num) -> Cart[Real, Tybit0[Unit]])(k)
+      #|  0 <= SUC((n : Num))
+      #|  \226\136\128 C : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, vsum(op_dot_dot(0, SUC(n)), (k : Num) => Cx(real_of_num(binom((SUC(n), k)))) * C(k)) == C(0) + vsum(op_dot_dot(0, n), (k : Num) => Cx(real_of_num(binom((n, SUC(k)))) + real_of_num(binom((n, k)))) * C(SUC(k)))
+      #|  1 <= SUC((n : Num))
+      #|  binom(((n : Num), SUC(n))) == 0
+      #|  0 <= (n : Num)
+      #|  (n : Num)
+      #|  (k : Num) => Cx(real_of_num(binom(((n : Num), k)))) * (B : (Num) -> Cart[Real, Tybit0[Unit]])(k)
+      #|  \226\136\128 B : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, vsum(op_dot_dot(0, n), (k : Num) => Cx(real_of_num(binom((n, k)))) * B(k)) == B(0) + vsum(op_dot_dot(0, n), (k : Num) => Cx(real_of_num(binom((n, SUC(k))))) * B(SUC(k)))
+      #|  vsum(op_dot_dot(0, (n : Num)), (k : Num) => Cx(real_of_num(binom((n, SUC(k)))) + real_of_num(binom((n, k)))) * (B : (Num) -> Cart[Real, Tybit0[Unit]])(SUC(k))) == vsum(op_dot_dot(0, n), (k : Num) => Cx(real_of_num(binom((n, SUC(k))))) * B(SUC(k))) + vsum(op_dot_dot(0, n), (k : Num) => Cx(real_of_num(binom((n, k)))) * B(SUC(k)))
+      #|  \226\136\128 B : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, vsum(op_dot_dot(0, n), (k : Num) => Cx(real_of_num(binom((n, k)))) * B(k)) + vsum(op_dot_dot(0, n), (k : Num) => Cx(real_of_num(binom((n, k)))) * B(SUC(k))) == vsum(op_dot_dot(0, SUC(n)), (k : Num) => Cx(real_of_num(binom((SUC(n), k)))) * B(k))
+      #|  (x : Real)
+      #|  (a' : Cart[Real, Tybit0[Unit]])
+      #|  Cx(real_of_num(0))
+      #|  (a : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (u : Real) => (c : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 a : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a' : Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => a(drop(z)), a', at(lift(x))) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => c * a(drop(z)), c * a', at(lift(x)))
+      #|  (i : Num) <= (n : Num) \226\134\146 SUC(n - i) == SUC(n) - i
+      #|  (i : Num)
+      #|  \226\136\128 A : (Num, Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, vsum(op_dot_dot(0, n), (k : Num) => Cx(real_of_num(binom((n, k)))) * A(k, SUC(n - k))) == vsum(op_dot_dot(0, n), (k : Num) => Cx(real_of_num(binom((n, k)))) * A(k, SUC(n) - k))
+      #|  (x : Real)
+      #|  (e : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC((n : Num) - (k : Num)), (x : Real))
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC((k : Num)), (x : Real))
+      #|  (e : (Num, Real) -> Cart[Real, Tybit0[Unit]])((n : Num) - (k : Num))
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])((k : Num))
+      #|  \226\136\128 d : (Num, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 e : (Num, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, \226\136\128 k : Num, \226\136\128 x : Real, (\226\136\128 m : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => d(m, drop(z)), d(SUC(m), y), at(lift(y)))) && (\226\136\128 m : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => e(m, drop(z)), e(SUC(m), y), at(lift(y)))) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => Cx(real_of_num(binom((n, k)))) * (d(k, drop(z)) * e(n - k, drop(z))), Cx(real_of_num(binom((n, k)))) * (d(k, x) * e(SUC(n - k), x) + d(SUC(k), x) * e(n - k, x)), at(lift(x)))
+      #|  (k : Num)
+      #|  (a : Cart[Real, Tybit0[Unit]]) == (a' : Cart[Real, Tybit0[Unit]]) && (b : Cart[Real, Tybit0[Unit]]) == (b' : Cart[Real, Tybit0[Unit]]) && (c : Cart[Real, Tybit0[Unit]]) == (c' : Cart[Real, Tybit0[Unit]]) \226\134\146 a' + b' == c' \226\134\146 a + b == c
+      #|  (n : Num)
+      #|  (k : Num) => (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(k, (x : Real)) * (e : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC((n : Num)) - k, x)
+      #|  (k : Num) => (j : Num) => (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(k, (x : Real)) * (e : (Num, Real) -> Cart[Real, Tybit0[Unit]])(j, x)
+      #|  \226\136\128 d : (Num, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 e : (Num, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, \226\136\128 x : Real, vsum(op_dot_dot(0, n), (k : Num) => Cx(real_of_num(binom((n, k)))) * (d(k, x) * e(SUC(n - k), x) + d(SUC(k), x) * e(n - k, x))) == vsum(op_dot_dot(0, SUC(n)), (k : Num) => Cx(real_of_num(binom((SUC(n), k)))) * (d(k, x) * e(SUC(n) - k, x)))
+      #|  (n : Num)
+      #|  lift((x : Real))
+      #|  (k : Num) => Cx(real_of_num(binom(((n : Num), k)))) * ((d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(k, (x : Real)) * (e : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC(n - k), x) + d(SUC(k), x) * e(n - k, x))
+      #|  (k : Num) => (z : Cart[Real, Unit]) => Cx(real_of_num(binom(((n : Num), k)))) * ((d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(k, drop(z)) * (e : (Num, Real) -> Cart[Real, Tybit0[Unit]])(n - k, drop(z)))
+      #|  op_dot_dot(0, (n : Num))
+      #|  \226\136\128 d : (Num, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 e : (Num, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, \226\136\128 x : Real, (\226\136\128 m : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => d(m, drop(z)), d(SUC(m), y), at(lift(y)))) && (\226\136\128 m : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => e(m, drop(z)), e(SUC(m), y), at(lift(y)))) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => vsum(op_dot_dot(0, n), (k : Num) => Cx(real_of_num(binom((n, k)))) * (d(k, drop(z)) * e(n - k, drop(z)))), vsum(op_dot_dot(0, SUC(n)), (k : Num) => Cx(real_of_num(binom((SUC(n), k)))) * (d(k, x) * e(SUC(n) - k, x))), at(lift(x)))
+      #|  (n : Num) => (x : Real) => vsum(op_dot_dot(0, n), (k : Num) => Cx(real_of_num(binom((n, k)))) * ((d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(k, x) * (e : (Num, Real) -> Cart[Real, Tybit0[Unit]])(n - k, x)))
+      #|  \226\136\128 d : (Num, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 e : (Num, Real) -> Cart[Real, Tybit0[Unit]], (\226\136\128 m : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => d(m, drop(z)), d(SUC(m), y), at(lift(y)))) && (\226\136\128 m : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => e(m, drop(z)), e(SUC(m), y), at(lift(y)))) \226\134\146 (\226\136\131 p : (Num, Real) -> Cart[Real, Tybit0[Unit]], (\226\136\128 x : Real, p(0, x) == d(0, x) * e(0, x)) && (\226\136\128 n : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => p(n, drop(z)), p(SUC(n), y), at(lift(y)))))
+      #|  lift((s : Real)) == vec(0) + op_pct(s, vec(1))
+      #|  ((z : Cart[Real, Unit]) => lift((c : Real) + (s : Real) * drop(z))) == ((z : Cart[Real, Unit]) => lift(c) + op_pct(s, z))
+      #|  \226\136\128 c : Real, \226\136\128 s : Real, \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => lift(c + s * drop(z)), lift(s), at(lift(x)))
+      #|  lift((x : Real))
+      #|  (g' : Cart[Real, Tybit0[Unit]])
+      #|  lift((s : Real))
+      #|  (w : Cart[Real, Unit]) => (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(w))
+      #|  (z : Cart[Real, Unit]) => lift((c : Real) + (s : Real) * drop(z))
+      #|  \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g' : Cart[Real, Tybit0[Unit]], \226\136\128 c : Real, \226\136\128 s : Real, \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => g(drop(z)), g', at(lift(c + s * x))) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => g(c + s * drop(z)), op_pct(s, g'), at(lift(x)))
+      #|  (y : Real)
+      #|  (s : Real)
+      #|  (c : Real)
+      #|  pow(Cx((s : Real)), (m : Num)) * (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC(m), (c : Real) + s * (y : Real))
+      #|  (w : Real) => pow(Cx((s : Real)), (m : Num)) * (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(m, w)
+      #|  \226\136\128 d : (Num, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Real, \226\136\128 s : Real, (\226\136\128 m : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => d(m, drop(z)), d(SUC(m), y), at(lift(y)))) \226\134\146 (\226\136\128 m : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => ((n : Num) => (x : Real) => pow(Cx(s), n) * d(n, c + s * x))(m, drop(z)), ((n : Num) => (x : Real) => pow(Cx(s), n) * d(n, c + s * x))(SUC(m), y), at(lift(y))))
+      #|  real_of_num(1) + -real_of_num(1) * (x : Real) == real_of_num(1) - x
+      #|  (p : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (p : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (n : Num) => (x : Real) => pow(Cx(-real_of_num(1)), n) * (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(n, real_of_num(1) + -real_of_num(1) * x)
+      #|  (n : Num) => (x : Real) => pow(Cx(real_of_num(1)), n) * (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(n, real_of_num(1) + real_of_num(1) * x)
+      #|  -real_of_num(1)
+      #|  real_of_num(1)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(1)
+      #|  real_of_num(1)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\131 p : (Num, Real) -> Cart[Real, Tybit0[Unit]], (\226\136\128 x : Real, p(0, x) == cphi(real_of_num(1) + x) * cphi(real_of_num(1) - x)) && (\226\136\128 n : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => p(n, drop(z)), p(SUC(n), y), at(lift(y))))
+      #|  (z : Cart[Real, Unit])
+      #|  abs((x : Real)) - (R : Real)
+      #|  (z : Cart[Real, Unit]) => (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0)
+      #|  Cx(real_of_num(0))
+      #|  (p : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC((n : Num)), (x : Real))
+      #|  lift((x : Real))
+      #|  (z : Cart[Real, Unit]) => (p : (Num, Real) -> Cart[Real, Tybit0[Unit]])((n : Num), drop(z))
+      #|  (x : Real)
+      #|  \226\136\128 p : (Num, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 R : Real, real_of_num(0) <= R && (\226\136\128 x : Real, R < abs(x) \226\134\146 p(0, x) == Cx(real_of_num(0))) && (\226\136\128 n : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => p(n, drop(z)), p(SUC(n), y), at(lift(y)))) \226\134\146 (\226\136\128 n : Num, \226\136\128 x : Real, R < abs(x) \226\134\146 p(n, x) == Cx(real_of_num(0)))
+      #|  (x : Real)
+      #|  real_of_num(1)
+      #|  (p : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(1)
+      #|  ((x : Real) => cphi(real_of_num(1) + x) * cphi(real_of_num(1) - x)) == (p : (Num, Real) -> Cart[Real, Tybit0[Unit]])(0)
+      #|  (p : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  schwartz((x : Real) => cphi(real_of_num(1) + x) * cphi(real_of_num(1) - x))
+      #|  (yy : (Num) -> Cart[Real, Unit])
+      #|  \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g' : Cart[Real, Tybit0[Unit]], \226\136\128 y0 : Real, \226\136\128 yy : (Num) -> Cart[Real, Unit], has_vector_derivative((z : Cart[Real, Unit]) => g(drop(z)), g', at(lift(y0))) && (\226\136\128 n : Num, !(yy(n) == lift(y0))) && op_minus_minus_gt(yy, lift(y0), sequentially) \226\134\146 op_minus_minus_gt((n : Num) => op_pct(inv(drop(yy(n)) - y0), g(drop(yy(n))) - g(y0)), g', sequentially)
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  (w : Cart[Real, Unit])
+      #|  (B : Real)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (z : Cart[Real, Unit]) => (g' : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
+      #|  (z : Cart[Real, Unit]) => (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
+      #|  \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g' : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 B : Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => g(drop(z)), g'(y), at(lift(y)))) && (\226\136\128 y : Real, norm(g'(y)) <= B) \226\134\146 norm(g(a) - g(b)) <= B * abs(a - b)
+      #|  !((d : Real) == real_of_num(0)) \226\134\146 inv(abs(d)) * ((dmx : Real) * abs(d)) == dmx
+      #|  inv(abs(drop((yy : (Num) -> Cart[Real, Unit])((n : Num))) - (y0 : Real))) * ((dm : (Real) -> Real)((x : Real)) * abs(drop(yy(n)) - y0))
+      #|  (y0 : Real)
+      #|  drop((yy : (Num) -> Cart[Real, Unit])((n : Num)))
+      #|  (dm : (Real) -> Real)((x : Real))
+      #|  (y : Real) => (gg : (Real, Real) -> Cart[Real, Tybit0[Unit]])(y, (x : Real))
+      #|  (t : Real) => (ff : (Real, Real) -> Cart[Real, Tybit0[Unit]])(t, (x : Real))
+      #|  !((yy : (Num) -> Cart[Real, Unit])((n : Num)) == lift((y0 : Real)))
+      #|  !(drop((yy : (Num) -> Cart[Real, Unit])((n : Num))) - (y0 : Real) == real_of_num(0))
+      #|  \226\136\128 ff : (Real, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 gg : (Real, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 dm : (Real) -> Real, \226\136\128 y0 : Real, \226\136\128 yy : (Num) -> Cart[Real, Unit], \226\136\128 n : Num, \226\136\128 x : Real, (\226\136\128 y : Real, \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => ff(drop(z), x), gg(y, x), at(lift(y)))) && (\226\136\128 y : Real, \226\136\128 x : Real, norm(gg(y, x)) <= dm(x)) && !(yy(n) == lift(y0)) \226\134\146 norm(op_pct(inv(drop(yy(n)) - y0), ff(drop(yy(n)), x) - ff(y0, x))) <= dm(x)
+      #|  \226\136\128 ff : (Real, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, absolutely_integrable_on((x : Cart[Real, Unit]) => ff(a, drop(x)), UNIV) && absolutely_integrable_on((x : Cart[Real, Unit]) => ff(b, drop(x)), UNIV) \226\134\146 op_pct(c, integral(UNIV, (x : Cart[Real, Unit]) => ff(a, drop(x))) - integral(UNIV, (x : Cart[Real, Unit]) => ff(b, drop(x)))) == integral(UNIV, (x : Cart[Real, Unit]) => op_pct(c, ff(a, drop(x)) - ff(b, drop(x))))
+      #|  (yy : (Num) -> Cart[Real, Unit])
+      #|  (y0 : Real)
+      #|  (gg : (Real, Real) -> Cart[Real, Tybit0[Unit]])((y0 : Real), drop((x : Cart[Real, Unit])))
+      #|  (t : Real) => (ff : (Real, Real) -> Cart[Real, Tybit0[Unit]])(t, drop((x : Cart[Real, Unit])))
+      #|  (x : Cart[Real, Unit])
+      #|  (gg : (Real, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (x : Cart[Real, Unit]) => lift((dm : (Real) -> Real)(drop(x)))
+      #|  (x : Cart[Real, Unit]) => (gg : (Real, Real) -> Cart[Real, Tybit0[Unit]])((y0 : Real), drop(x))
+      #|  (n : Num) => (x : Cart[Real, Unit]) => op_pct(inv(drop((yy : (Num) -> Cart[Real, Unit])(n)) - (y0 : Real)), (ff : (Real, Real) -> Cart[Real, Tybit0[Unit]])(drop(yy(n)), drop(x)) - ff(y0, drop(x)))
+      #|  \226\136\128 ff : (Real, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 gg : (Real, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 dm : (Real) -> Real, \226\136\128 y0 : Real, \226\136\128 yy : (Num) -> Cart[Real, Unit], (\226\136\128 y : Real, \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => ff(drop(z), x), gg(y, x), at(lift(y)))) && (\226\136\128 y : Real, absolutely_integrable_on((x : Cart[Real, Unit]) => ff(y, drop(x)), UNIV)) && absolutely_integrable_on((x : Cart[Real, Unit]) => gg(y0, drop(x)), UNIV) && (\226\136\128 y : Real, \226\136\128 x : Real, norm(gg(y, x)) <= dm(x)) && absolutely_integrable_on((x : Cart[Real, Unit]) => lift(dm(drop(x))), UNIV) && (\226\136\128 n : Num, !(yy(n) == lift(y0))) && op_minus_minus_gt(yy, lift(y0), sequentially) \226\134\146 op_minus_minus_gt((n : Num) => integral(UNIV, (x : Cart[Real, Unit]) => op_pct(inv(drop(yy(n)) - y0), ff(drop(yy(n)), drop(x)) - ff(y0, drop(x)))), integral(UNIV, (x : Cart[Real, Unit]) => gg(y0, drop(x))), sequentially)
+      #|  (dm : (Real) -> Real)
+      #|  \226\136\128 n : Num, op_pct(inv(drop((yy : (Num) -> Cart[Real, Unit])(n) - lift((y0 : Real)))), integral(UNIV, (x : Cart[Real, Unit]) => (ff : (Real, Real) -> Cart[Real, Tybit0[Unit]])(drop(yy(n)), drop(x))) - integral(UNIV, (x : Cart[Real, Unit]) => ff(drop(lift(y0)), drop(x)))) == integral(UNIV, (x : Cart[Real, Unit]) => op_pct(inv(drop(yy(n)) - y0), ff(drop(yy(n)), drop(x)) - ff(y0, drop(x))))
+      #|  (yy : (Num) -> Cart[Real, Unit])
+      #|  \226\136\128 ff : (Real, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 gg : (Real, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 dm : (Real) -> Real, \226\136\128 y0 : Real, (\226\136\128 y : Real, \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => ff(drop(z), x), gg(y, x), at(lift(y)))) && (\226\136\128 y : Real, absolutely_integrable_on((x : Cart[Real, Unit]) => ff(y, drop(x)), UNIV)) && absolutely_integrable_on((x : Cart[Real, Unit]) => gg(y0, drop(x)), UNIV) && (\226\136\128 y : Real, \226\136\128 x : Real, norm(gg(y, x)) <= dm(x)) && absolutely_integrable_on((x : Cart[Real, Unit]) => lift(dm(drop(x))), UNIV) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => integral(UNIV, (x : Cart[Real, Unit]) => ff(drop(z), drop(x))), integral(UNIV, (x : Cart[Real, Unit]) => gg(y0, drop(x))), at(lift(y0)))
+      #|  \226\136\128 x : Real, \226\136\128 a : Cart[Real, Unit], has_vector_derivative((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(drop(z)) * Cx(x)))), -(ii * Cx(x)) * cexp(-(ii * (Cx(drop(a)) * Cx(x)))), at(a))
       #|  (f has_complex_derivative f') net
-      #|  lift y
-      #|  x:real
-      #|  lift y
-      #|  Cx(&0)
-      #|  --(ii * Cx x) * cexp(--(ii * Cx y * Cx x))
-      #|  \\z:real^1. (f:real->complex) x
-      #|  \\z. cexp(--(ii * Cx(drop z) * Cx x))
-      #|  ( * ):complex->complex->complex
-      #|  forall(f:real->complex) (x:real) y.\n     ((\\z. cexp(--(ii * Cx(drop z) * Cx x)) * f x) has_vector_derivative\n      (--(ii * Cx x) * cexp(--(ii * Cx y * Cx x)) * f x)) (at(lift y))
-      #|  forall(f:real->complex) (x:real) y.\n     norm(--(ii * Cx x) * cexp(--(ii * Cx y * Cx x)) * f x) <= norm(Cx x * f\n       x)
-      #|  f = g ==> f absolutely_integrable_on s ==> g\n    absolutely_integrable_on s
-      #|  --ii
-      #|  y0:real
-      #|  \\t. Cx t * (f:real->complex) t
-      #|  forall(f:real->complex) y0.\n     (\\x:real^1. Cx(drop x) * f(drop x)) absolutely_integrable_on (:real^1)\n     ==> (\\x:real^1. --(ii * Cx(drop x)) * cexp(--(ii * Cx y0 * Cx(drop x))) *\n       f(drop x))\n         absolutely_integrable_on (:real^1)
-      #|  y0:real
-      #|  \\x. norm(Cx x * (f:real->complex) x)
-      #|  \\y x. --(ii * Cx x) * cexp(--(ii * Cx y * Cx x)) * (f:real->complex) x
-      #|  \\y x. cexp(--(ii * Cx y * Cx x)) * (f:real->complex) x
-      #|  forall(f:real->complex) y0.\n     (forall y. (\\x:real^1. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n       absolutely_integrable_on (:real^1)) /\\\n     (\\x:real^1. Cx(drop x) * f(drop x)) absolutely_integrable_on (:real^1)\n     ==> ((\\z. integral (:real^1) (\\x. cexp(--(ii * Cx(drop z) * Cx(drop x))) *\n       f(drop x)))\n          has_vector_derivative\n          (integral (:real^1) (\\x. --(ii * Cx(drop x)) * cexp(--(ii * Cx y0 *\n            Cx(drop x))) * f(drop x))))\n         (at(lift y0))
-      #|  y0:real
-      #|  \\t. Cx t * (f:real->complex) t
-      #|  integral (:real^1) (\\x. --(ii * Cx(drop x)) * cexp(--(ii * Cx y0 * Cx(drop\n     x))) * f(drop x)) =\n    --ii * integral (:real^1) (\\x. cexp(--(ii * Cx y0 * Cx(drop x))) * (Cx(drop\n      x) * f(drop x)))
-      #|  forall(f:real->complex) y0.\n     (\\x:real^1. Cx(drop x) * f(drop x)) absolutely_integrable_on (:real^1)\n     ==> Cx(&1) / Cx(sqrt(&2 * pi)) *\n         integral (:real^1) (\\x. --(ii * Cx(drop x)) * cexp(--(ii * Cx y0 *\n           Cx(drop x))) * f(drop x)) =\n         --ii * fourier (\\x. Cx x * f x) y0
-      #|  --ii * fourier (\\x. Cx x * (f:real->complex) x) y0 =\n    Cx(&1) / Cx(sqrt(&2 * pi)) *\n    integral (:real^1) (\\x. --(ii * Cx(drop x)) * cexp(--(ii * Cx y0 * Cx(drop\n      x))) * f(drop x))
-      #|  forall(f:real->complex) y0.\n     (forall y. (\\x:real^1. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n       absolutely_integrable_on (:real^1)) /\\\n     (\\x:real^1. Cx(drop x) * f(drop x)) absolutely_integrable_on (:real^1)\n     ==> ((\\z. fourier f (drop z)) has_vector_derivative\n          (--ii * fourier (\\x. Cx x * f x) y0)) (at(lift y0))
+      #|  lift((y : Real))
+      #|  (x : Real)
+      #|  lift((y : Real))
+      #|  Cx(real_of_num(0))
+      #|  -(ii * Cx((x : Real))) * cexp(-(ii * (Cx((y : Real)) * Cx(x))))
+      #|  (z : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real))
+      #|  (z : Cart[Real, Unit]) => cexp(-(ii * (Cx(drop(z)) * Cx((x : Real)))))
+      #|  op_star
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(drop(z)) * Cx(x)))) * f(x), -(ii * Cx(x)) * (cexp(-(ii * (Cx(y) * Cx(x)))) * f(x)), at(lift(y)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 y : Real, norm(-(ii * Cx(x)) * (cexp(-(ii * (Cx(y) * Cx(x)))) * f(x))) <= norm(Cx(x) * f(x))
+      #|  (f : (Cart[Real, _]) -> Cart[Real, _]) == (g : (Cart[Real, _]) -> Cart[Real, _]) \226\134\146 absolutely_integrable_on(f, (s : (Cart[Real, _]) -> Bool)) \226\134\146 absolutely_integrable_on(g, s)
+      #|  -ii
+      #|  (y0 : Real)
+      #|  (t : Real) => Cx(t) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(t)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y0 : Real, absolutely_integrable_on((x : Cart[Real, Unit]) => Cx(drop(x)) * f(drop(x)), UNIV) \226\134\146 absolutely_integrable_on((x : Cart[Real, Unit]) => -(ii * Cx(drop(x))) * (cexp(-(ii * (Cx(y0) * Cx(drop(x))))) * f(drop(x))), UNIV)
+      #|  (y0 : Real)
+      #|  (x : Real) => norm(Cx(x) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(x))
+      #|  (y : Real) => (x : Real) => -(ii * Cx(x)) * (cexp(-(ii * (Cx(y) * Cx(x)))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(x))
+      #|  (y : Real) => (x : Real) => cexp(-(ii * (Cx(y) * Cx(x)))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(x)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y0 : Real, (\226\136\128 y : Real, absolutely_integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)), UNIV)) && absolutely_integrable_on((x : Cart[Real, Unit]) => Cx(drop(x)) * f(drop(x)), UNIV) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx(drop(z)) * Cx(drop(x))))) * f(drop(x))), integral(UNIV, (x : Cart[Real, Unit]) => -(ii * Cx(drop(x))) * (cexp(-(ii * (Cx(y0) * Cx(drop(x))))) * f(drop(x)))), at(lift(y0)))
+      #|  (y0 : Real)
+      #|  (t : Real) => Cx(t) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(t)
+      #|  integral(UNIV, (x : Cart[Real, Unit]) => -(ii * Cx(drop(x))) * (cexp(-(ii * (Cx((y0 : Real)) * Cx(drop(x))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)))) == -ii * integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y0) * Cx(drop(x))))) * (Cx(drop(x)) * f(drop(x))))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y0 : Real, absolutely_integrable_on((x : Cart[Real, Unit]) => Cx(drop(x)) * f(drop(x)), UNIV) \226\134\146 Cx(real_of_num(1)) / Cx(sqrt(real_of_num(2) * pi)) * integral(UNIV, (x : Cart[Real, Unit]) => -(ii * Cx(drop(x))) * (cexp(-(ii * (Cx(y0) * Cx(drop(x))))) * f(drop(x)))) == -ii * fourier((x : Real) => Cx(x) * f(x), y0)
+      #|  -ii * fourier((x : Real) => Cx(x) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(x), (y0 : Real)) == Cx(real_of_num(1)) / Cx(sqrt(real_of_num(2) * pi)) * integral(UNIV, (x : Cart[Real, Unit]) => -(ii * Cx(drop(x))) * (cexp(-(ii * (Cx(y0) * Cx(drop(x))))) * f(drop(x))))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y0 : Real, (\226\136\128 y : Real, absolutely_integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)), UNIV)) && absolutely_integrable_on((x : Cart[Real, Unit]) => Cx(drop(x)) * f(drop(x)), UNIV) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => fourier(f, drop(z)), -ii * fourier((x : Real) => Cx(x) * f(x), y0), at(lift(y0)))
       #|  cnj
-      #|  (:real^1)
-      #|  \\x. cexp(--(ii * Cx y * Cx(drop x))) *\n      (f:real->complex)(drop x)
-      #|  forall(f:real->complex) y.\n     (\\x:real^1. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x)) integrable_on\n       (:real^1)\n     ==> cnj(fourier f y) =\n         Cx(&1)/Cx(sqrt(&2*pi)) *\n         integral (:real^1) (\\x. cexp(ii * Cx y * Cx(drop x)) * cnj(f(drop\n           x)))
-      #|  forall(f:real->complex) y. fourier f (--y) =\n     Cx(&1)/Cx(sqrt(&2*pi)) * integral (:real^1) (\\x. cexp(ii * Cx y * Cx(drop\n       x)) * f(drop x))
-      #|  z:real
-      #|  f:real->complex
-      #|  z:real
-      #|  \\x. cnj((f:real->complex) x)
-      #|  forall(f:real->complex) z.\n     (\\x:real^1. cexp(--(ii * Cx z * Cx(drop x))) * f(drop x)) integrable_on\n       (:real^1)\n     ==> fourier (\\x. cnj(f(--x))) z = cnj(fourier f z)
-      #|  z:real
-      #|  h:real->complex
-      #|  z:real
-      #|  fourier(h:real->complex)
-      #|  forall(h:real->complex) z. schwartz h ==> fourier (fourier h) (--z) = h z
-      #|  IMAGE (--) (:real^1) = (:real^1)
-      #|  (\\z:real^1. cnj(h(--(drop z)))) = cnj o (\\z:real^1. h(drop(--z)))
-      #|  forall(h:real->complex). (\\z:real^1. h(drop z)) absolutely_integrable_on\n   (:real^1)\n     ==> (\\z:real^1. cnj(h(--(drop z)))) absolutely_integrable_on (:real^1)
-      #|  forall(h:real->complex) z. (\\x:real^1. h(drop x)) absolutely_integrable_on\n   (:real^1)\n     ==> (\\x:real^1. cexp(--(ii * Cx z * Cx(drop x))) * h(drop x))\n       integrable_on (:real^1)
-      #|  \\t. (h:real->complex) t * cnj(h t)
-      #|  z:real^1
-      #|  integral (:real^1) (\\z. fourier (fourier h) (drop z) *\n     cnj((h:real->complex)(--(drop z)))) =\n    integral (:real^1) (\\z. h(--(drop z)) * cnj(h(--(drop z))))
-      #|  z:real^1
-      #|  integral (:real^1) (\\z. fourier h (drop z) * fourier (\\x.\n     cnj((h:real->complex)(--x))) (drop z)) =\n    integral (:real^1) (\\z. fourier h (drop z) * cnj(fourier h (drop z)))
-      #|  \\x. cnj((h:real->complex)(--x))
-      #|  fourier(h:real->complex)
-      #|  forall(h:real->complex). schwartz h\n     ==> integral (:real^1) (\\z. fourier h (drop z) * cnj(fourier h (drop z)))\n       =\n         integral (:real^1) (\\z. h(drop z) * cnj(h(drop z)))
-      #|  forall s p (a:real^M->real^N) b.\n     lnorm s p (\\x. a x - b x) = lnorm s p (\\x. b x - a x)
-      #|  i = 1
-      #|  (:real^M)
-      #|  (\\x:real^M. lift (norm (if x IN t then (f:real^M->real^N) x else vec 0)\n       rpow p)) =\n      (\\x. if x IN t then lift(norm(f x) rpow p) else vec 0)
-      #|  forall(f:real^M->real^N) t p.\n     &0 < p /\\ f IN lspace (:real^M) p /\\ lebesgue_measurable t\n     ==> (\\x. if x IN t then f x else vec 0) IN lspace (:real^M) p
-      #|  &N:real
-      #|  norm(x:real^M) < &n
-      #|  n:num
-      #|  N + 1
-      #|  N:num
-      #|  norm(x:real^M)
-      #|  x:real^M
-      #|  {}:real^M->bool
-      #|  p:real
-      #|  (:real^M)
-      #|  f:real^M->real^N
-      #|  f:real^M->real^N
-      #|  \\n:num. \\x:real^M. if x IN ball(vec 0,&n) then (f:real^M->real^N) x else\n     vec 0
-      #|  (\\n. lnorm (:real^M) p\n         (\\x. (f:real^M->real^N) x - (if x IN ball(vec 0,&n) then f x else vec\n           0))) =\n    (\\n. lnorm (:real^M) p\n         (\\x. (if x IN ball(vec 0,&n) then f x else vec 0) - f x))
-      #|  forall(f:real^M->real^N) p.\n     &0 < p /\\ f IN lspace (:real^M) p\n     ==> ((\\n. lnorm (:real^M) p\n              (\\x. f x - (if x IN ball(vec 0,&n) then f x else vec 0))) --->\n                &0)\n         sequentially
-      #|  &0 <= lnorm (:real^M) p\n          (\\x. (f:real^M->real^N) x - (if x IN ball(vec 0,&N) then f x else vec\n            0))
-      #|  x:real^M
-      #|  &N:real
-      #|  \\x:real^M. if x IN ball(vec 0,&N) then (f:real^M->real^N) x else\n    vec 0
-      #|  N:num
-      #|  N:num
-      #|  e:real
-      #|  p:real
-      #|  f:real^M->real^N
-      #|  forall(f:real^M->real^N) p e.\n     &0 < p /\\ f IN lspace (:real^M) p /\\ &0 < e\n     ==> ?g R. g IN lspace (:real^M) p /\\\n               (forall x. R < norm x ==> g x = vec 0) /\\\n               lnorm (:real^M) p (\\x. f x - g x) < e
-      #|  rphi (x:real) = if &0 < x then exp(--(inv x)) else &0
-      #|  rpsi (x:real) = rphi(&1 + x) * rphi(&1 - x)
-      #|  forall x. cphi x = Cx(rphi x)
-      #|  forall x. cphi(&1 + x) * cphi(&1 - x) = Cx(rpsi x)
-      #|  forall x. &0 <= rpsi x
-      #|  forall x. &1 < abs x ==> rpsi x = &0
-      #|  SUC 0 = 1
-      #|  drop(x:real^1)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (x : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(x))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)), UNIV) \226\134\146 cnj(fourier(f, y)) == Cx(real_of_num(1)) / Cx(sqrt(real_of_num(2) * pi)) * integral(UNIV, (x : Cart[Real, Unit]) => cexp(ii * (Cx(y) * Cx(drop(x)))) * cnj(f(drop(x))))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, fourier(f, -y) == Cx(real_of_num(1)) / Cx(sqrt(real_of_num(2) * pi)) * integral(UNIV, (x : Cart[Real, Unit]) => cexp(ii * (Cx(y) * Cx(drop(x)))) * f(drop(x)))
+      #|  (z : Real)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (z : Real)
+      #|  (x : Real) => cnj((f : (Real) -> Cart[Real, Tybit0[Unit]])(x))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Real, integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(z) * Cx(drop(x))))) * f(drop(x)), UNIV) \226\134\146 fourier((x : Real) => cnj(f(-x)), z) == cnj(fourier(f, z))
+      #|  (z : Real)
+      #|  (h : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (z : Real)
+      #|  fourier((h : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Real, schwartz(h) \226\134\146 fourier(fourier(h), -z) == h(z)
+      #|  (IMAGE : ((Cart[Real, Unit]) -> Cart[Real, Unit], (Cart[Real, Unit]) -> Bool, Cart[Real, Unit]) -> Bool)((op_minus_minus : (Cart[Real, Unit]) -> Cart[Real, Unit]), (UNIV : (Cart[Real, Unit]) -> Bool)) == (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  ((z : Cart[Real, Unit]) => cnj((h : (Real) -> Cart[Real, Tybit0[Unit]])(-drop(z)))) == o(cnj, (z : Cart[Real, Unit]) => h(drop(-z)))
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => h(drop(z)), UNIV) \226\134\146 absolutely_integrable_on((z : Cart[Real, Unit]) => cnj(h(-drop(z))), UNIV)
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Real, absolutely_integrable_on((x : Cart[Real, Unit]) => h(drop(x)), UNIV) \226\134\146 integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(z) * Cx(drop(x))))) * h(drop(x)), UNIV)
+      #|  (t : Real) => (h : (Real) -> Cart[Real, Tybit0[Unit]])(t) * cnj(h(t))
+      #|  (z : Cart[Real, Unit])
+      #|  integral(UNIV, (z : Cart[Real, Unit]) => fourier(fourier((h : (Real) -> Cart[Real, Tybit0[Unit]])), drop(z)) * cnj(h(-drop(z)))) == integral(UNIV, (z : Cart[Real, Unit]) => h(-drop(z)) * cnj(h(-drop(z))))
+      #|  (z : Cart[Real, Unit])
+      #|  integral(UNIV, (z : Cart[Real, Unit]) => fourier((h : (Real) -> Cart[Real, Tybit0[Unit]]), drop(z)) * fourier((x : Real) => cnj(h(-x)), drop(z))) == integral(UNIV, (z : Cart[Real, Unit]) => fourier(h, drop(z)) * cnj(fourier(h, drop(z))))
+      #|  (x : Real) => cnj((h : (Real) -> Cart[Real, Tybit0[Unit]])(-x))
+      #|  fourier((h : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 integral(UNIV, (z : Cart[Real, Unit]) => fourier(h, drop(z)) * cnj(fourier(h, drop(z)))) == integral(UNIV, (z : Cart[Real, Unit]) => h(drop(z)) * cnj(h(drop(z))))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 a : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 b : (Cart[Real, M]) -> Cart[Real, N], lnorm(s, p, (x : Cart[Real, M]) => a(x) - b(x)) == lnorm(s, p, (x : Cart[Real, M]) => b(x) - a(x))
+      #|  (i : Num) == 1
+      #|  (UNIV : (Cart[Real, M]) -> Bool)
+      #|  ((x : Cart[Real, M]) => lift(rpow(norm(if IN(x, (t : (Cart[Real, M]) -> Bool)) { (f : (Cart[Real, M]) -> Cart[Real, N])(x) } else { vec(0) }), (p : Real)))) == ((x : Cart[Real, M]) => if IN(x, t) { lift(rpow(norm(f(x)), p)) } else { vec(0) })
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, real_of_num(0) < p && IN(f, lspace(UNIV, p)) && lebesgue_measurable(t) \226\134\146 IN((x : Cart[Real, M]) => if IN(x, t) { f(x) } else { vec(0) }, lspace(UNIV, p))
+      #|  real_of_num((N : Num))
+      #|  norm((x : Cart[Real, M])) < real_of_num((n : Num))
+      #|  (n : Num)
+      #|  (N : Num) + 1
+      #|  (N : Num)
+      #|  norm((x : Cart[Real, M]))
+      #|  (x : Cart[Real, M])
+      #|  ({} : (Cart[Real, M]) -> Bool)
+      #|  (p : Real)
+      #|  (UNIV : (Cart[Real, M]) -> Bool)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (n : Num) => (x : Cart[Real, M]) => if IN(x, ball((vec(0), real_of_num(n)))) { (f : (Cart[Real, M]) -> Cart[Real, N])(x) } else { vec(0) }
+      #|  ((n : Num) => lnorm(UNIV, (p : Real), (x : Cart[Real, M]) => (f : (Cart[Real, M]) -> Cart[Real, N])(x) - (if IN(x, ball((vec(0), real_of_num(n)))) { f(x) } else { vec(0) }))) == ((n : Num) => lnorm(UNIV, p, (x : Cart[Real, M]) => (if IN(x, ball((vec(0), real_of_num(n)))) { f(x) } else { vec(0) }) - f(x)))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 p : Real, real_of_num(0) < p && IN(f, lspace(UNIV, p)) \226\134\146 op_minus_minus_minus_gt((n : Num) => lnorm(UNIV, p, (x : Cart[Real, M]) => f(x) - (if IN(x, ball((vec(0), real_of_num(n)))) { f(x) } else { vec(0) })), real_of_num(0), sequentially)
+      #|  real_of_num(0) <= lnorm(UNIV, (p : Real), (x : Cart[Real, M]) => (f : (Cart[Real, M]) -> Cart[Real, N])(x) - (if IN(x, ball((vec(0), real_of_num((N : Num))))) { f(x) } else { vec(0) }))
+      #|  (x : Cart[Real, M])
+      #|  real_of_num((N : Num))
+      #|  (x : Cart[Real, M]) => if IN(x, ball((vec(0), real_of_num((N : Num))))) { (f : (Cart[Real, M]) -> Cart[Real, N])(x) } else { vec(0) }
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (p : Real)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 p : Real, \226\136\128 e : Real, real_of_num(0) < p && IN(f, lspace(UNIV, p)) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\131 R : Real, IN(g, lspace(UNIV, p)) && (\226\136\128 x : Cart[Real, M], R < norm(x) \226\134\146 g(x) == vec(0)) && lnorm(UNIV, p, (x : Cart[Real, M]) => f(x) - g(x)) < e)
+      #|  (rphi : (Real) -> Real)((x : Real)) == (if real_of_num(0) < x { exp(-inv(x)) } else { real_of_num(0) })
+      #|  (rpsi : (Real) -> Real)((x : Real)) == rphi(real_of_num(1) + x) * rphi(real_of_num(1) - x)
+      #|  \226\136\128 x : Real, cphi(x) == Cx(rphi(x))
+      #|  \226\136\128 x : Real, cphi(real_of_num(1) + x) * cphi(real_of_num(1) - x) == Cx(rpsi(x))
+      #|  \226\136\128 x : Real, real_of_num(0) <= rpsi(x)
+      #|  \226\136\128 x : Real, real_of_num(1) < abs(x) \226\134\146 rpsi(x) == real_of_num(0)
+      #|  SUC(0) == 1
+      #|  drop((x : Cart[Real, Unit]))
       #|  0
-      #|  \\h. drop h % (p:num->real->complex) 1 (drop x)
-      #|  x:real^1
-      #|  (\\z:real^1. Cx(rpsi(drop z))) = (\\z. (p:num->real->complex) 0 (drop z))
-      #|  p:num->real->complex
-      #|  (\\z:real^1. Cx(rpsi(drop z))) continuous_on (:real^1)
-      #|  rpsi real_continuous_on (:real)
-      #|  (:real)
-      #|  x:real
-      #|  real_interval[-- &1, &1]
-      #|  rpsi real_integrable_on (:real)
-      #|  (:real)
-      #|  rpsi real_integrable_on real_interval[-- &1 / &2, &1 / &2]
-      #|  &2 = inv(&1 / &2)
-      #|  exp(-- &4) = exp(-- &2) * exp(-- &2)
-      #|  &0 < &1 + x /\\ &0 < &1 - x
-      #|  x:real
-      #|  forall x. x IN real_interval[-- &1 / &2, &1 / &2] ==> exp(-- &4) <= rpsi x
-      #|  -- &4
-      #|  -- &1 / &2 <= &1 / &2
-      #|  real_integral (real_interval[-- &1 / &2, &1 / &2]) (\\x.\n        exp(-- &4))
-      #|  exp(-- &4) <= real_integral (real_interval[-- &1 / &2, &1 / &2]) rpsi /\\\n    real_integral (real_interval[-- &1 / &2, &1 / &2]) rpsi <=\n    real_integral (:real) rpsi
-      #|  &0 < real_integral (:real) rpsi
-      #|  forall x. x <= -- &1 ==> rpsi x = &0
-      #|  rtheta (t:real) = inv(real_integral (:real) rpsi) *\n                     real_integral (real_interval[-- &2, t]) rpsi
-      #|  rtheta = \\t. inv(real_integral (:real) rpsi) * real_integral\n   (real_interval[-- &2, t]) rpsi
-      #|  (:real)
-      #|  forall t. rpsi real_integrable_on real_interval[-- &2, t]
-      #|  x:real
-      #|  real_integral (real_interval[-- &2, t]) rpsi = &0
-      #|  forall t. t <= -- &1 ==> rtheta t = &0
-      #|  t:real
-      #|  (:real)
-      #|  t + &1
-      #|  -- &2
+      #|  (h : Cart[Real, Unit]) => op_pct(drop(h), (p : (Num, Real) -> Cart[Real, Tybit0[Unit]])(1, drop((x : Cart[Real, Unit]))))
+      #|  (x : Cart[Real, Unit])
+      #|  ((z : Cart[Real, Unit]) => Cx(rpsi(drop(z)))) == ((z : Cart[Real, Unit]) => (p : (Num, Real) -> Cart[Real, Tybit0[Unit]])(0, drop(z)))
+      #|  (p : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  continuous_on((z : Cart[Real, Unit]) => Cx(rpsi(drop(z))), UNIV)
+      #|  real_continuous_on(rpsi, UNIV)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (x : Real)
+      #|  real_interval([(-real_of_num(1), real_of_num(1))])
+      #|  real_integrable_on(rpsi, UNIV)
+      #|  (UNIV : (Real) -> Bool)
+      #|  real_integrable_on(rpsi, real_interval([(-real_of_num(1) / real_of_num(2), real_of_num(1) / real_of_num(2))]))
+      #|  real_of_num(2) == inv(real_of_num(1) / real_of_num(2))
+      #|  exp(-real_of_num(4)) == exp(-real_of_num(2)) * exp(-real_of_num(2))
+      #|  real_of_num(0) < real_of_num(1) + (x : Real) && real_of_num(0) < real_of_num(1) - x
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, IN(x, real_interval([(-real_of_num(1) / real_of_num(2), real_of_num(1) / real_of_num(2))])) \226\134\146 exp(-real_of_num(4)) <= rpsi(x)
+      #|  -real_of_num(4)
+      #|  -real_of_num(1) / real_of_num(2) <= real_of_num(1) / real_of_num(2)
+      #|  real_integral(real_interval([(-real_of_num(1) / real_of_num(2), real_of_num(1) / real_of_num(2))]), (x : Real) => exp(-real_of_num(4)))
+      #|  exp(-real_of_num(4)) <= real_integral(real_interval([(-real_of_num(1) / real_of_num(2), real_of_num(1) / real_of_num(2))]), rpsi) && real_integral(real_interval([(-real_of_num(1) / real_of_num(2), real_of_num(1) / real_of_num(2))]), rpsi) <= real_integral(UNIV, rpsi)
+      #|  real_of_num(0) < real_integral(UNIV, rpsi)
+      #|  \226\136\128 x : Real, x <= -real_of_num(1) \226\134\146 rpsi(x) == real_of_num(0)
+      #|  (rtheta : (Real) -> Real)((t : Real)) == inv(real_integral(UNIV, rpsi)) * real_integral(real_interval([(-real_of_num(2), t)]), rpsi)
+      #|  rtheta == ((t : Real) => inv(real_integral(UNIV, rpsi)) * real_integral(real_interval([(-real_of_num(2), t)]), rpsi))
+      #|  (UNIV : (Real) -> Bool)
+      #|  \226\136\128 t : Real, real_integrable_on(rpsi, real_interval([(-real_of_num(2), t)]))
+      #|  (x : Real)
+      #|  real_integral(real_interval([(-real_of_num(2), (t : Real))]), rpsi) == real_of_num(0)
+      #|  \226\136\128 t : Real, t <= -real_of_num(1) \226\134\146 rtheta(t) == real_of_num(0)
+      #|  (t : Real)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (t : Real) + real_of_num(1)
+      #|  -real_of_num(2)
       #|  rpsi
-      #|  real_interval[-- &2, t + &1]
-      #|  real_interval(-- &2, t + &1)
-      #|  t:real
-      #|  rpsi t
-      #|  \\u. real_integral (real_interval [-- &2,u]) rpsi
-      #|  forall t. -- &2 < t\n       ==> (rtheta has_real_derivative (inv(real_integral (:real) rpsi) * rpsi\n         t))\n           (atreal t)
-      #|  x:real
-      #|  -- &1 - t
-      #|  \\t:real. &0
-      #|  rpsi t = &0
-      #|  inv(real_integral (:real) rpsi) * rpsi t = &0
-      #|  forall t. t < -- &1\n       ==> (rtheta has_real_derivative (inv(real_integral (:real) rpsi) * rpsi\n         t))\n           (atreal t)
-      #|  t < -- &1 \\/ -- &2 < t
-      #|  forall t. (rtheta has_real_derivative (inv(real_integral (:real) rpsi) * rpsi t))\n       (atreal t)
-      #|  x:real
-      #|  real_interval[-- &2, t]
-      #|  real_integral (real_interval[-- &2, t]) rpsi = real_integral (:real) rpsi
-      #|  forall t. &1 <= t ==> rtheta t = &1
-      #|  inv(real_integral (:real) rpsi) * real_integral (real_interval[-- &2, t])\n       rpsi <=\n      inv(real_integral (:real) rpsi) * real_integral (:real) rpsi
-      #|  &0 <= real_integral (real_interval[-- &2, t]) rpsi /\\\n                real_integral (real_interval[-- &2, t]) rpsi <= real_integral\n                  (:real) rpsi
-      #|  &0 < real_integral (:real) rpsi
-      #|  forall t. &0 <= rtheta t /\\ rtheta t <= &1
-      #|  p n = (p:num->real->complex)(SUC(n - 1))
-      #|  n = 0
-      #|  y:real
-      #|  n:num
-      #|  \\n. if n = 0 then (\\x. Cx(rtheta x))\n        else (\\x. Cx(inv(real_integral (:real) rpsi)) *\n          (p:num->real->complex)(n - 1) x)
-      #|  p:num->real->complex
-      #|  ?d:num->real->complex.\n     d 0 = (\\x. Cx(rtheta x)) /\\\n     (forall n y. ((\\z. d n(drop z)) has_vector_derivative (d(SUC n) y))(at(lift\n       y)))
-      #|  eta (R:real) (x:real) = rtheta(x + (R + &1)) * rtheta((R + &1) - x)
-      #|  rtheta((R + &1) - x) = &0
-      #|  rtheta(x + (R + &1)) = &0
-      #|  x < &0 \\/ &0 <= x
-      #|  forall R x. &0 <= R /\\ R + &2 < abs x ==> eta R x = &0
-      #|  rtheta(x + (R + &1)) = &1 /\\ rtheta((R + &1) - x) = &1
-      #|  forall R x. abs x <= R ==> eta R x = &1
-      #|  rtheta(x + (R + &1)) * &1
-      #|  (R + &1) - x
-      #|  x + (R + &1)
-      #|  forall R x. &0 <= eta R x /\\ eta R x <= &1
-      #|  (R + &1) + -- &1 * x = (R + &1) - x
-      #|  (R + &1) + &1 * x = x + R + &1
-      #|  x:real
-      #|  q:num->real->complex
-      #|  q:num->real->complex
-      #|  \\n x. Cx(-- &1) pow n * (d:num->real->complex) n ((R + &1) + -- &1 * x)
-      #|  \\n x. Cx(&1) pow n * (d:num->real->complex) n ((R + &1) + &1 * x)
-      #|  -- &1
-      #|  R + &1
-      #|  d:num->real->complex
-      #|  &1
-      #|  R + &1
-      #|  d:num->real->complex
-      #|  d:num->real->complex
-      #|  forall R. ?q:num->real->complex.\n        q 0 = (\\x. Cx(rtheta(x + (R + &1))) * Cx(rtheta((R + &1) - x))) /\\\n        (forall n y. ((\\z. q n(drop z)) has_vector_derivative (q(SUC n) y))(at(lift\n          y)))
-      #|  q:num->real->complex
-      #|  R:real
-      #|  q:num->real->complex
-      #|  forall R. ?q:num->real->complex.\n        q 0 = (\\x. Cx(eta R x)) /\\\n        (forall n y. ((\\z. q n(drop z)) has_vector_derivative (q(SUC n) y))(at(lift\n          y)))
-      #|  \\n:num. \\x:real. (f:num->real^1->real^2) n (lift x)
-      #|  f:num->real^1->real^2
-      #|  P:real^1->real^2
-      #|  \\(n:num) (Q:real^1->real^2) (Q':real^1->real^2).\n        forall x. (Q has_vector_derivative (Q' x)) (at x)
-      #|  \\(n:num) (Q:real^1->real^2). vector_polynomial_function Q
-      #|  forall P:real^1->real^2. vector_polynomial_function P\n     ==> ?e:num->real->complex.\n           e 0 = (\\x. P(lift x)) /\\\n           (forall n y. ((\\z. e n(drop z)) has_vector_derivative (e(SUC n)\n             y))(at(lift y)))
-      #|  eta R x = &0
-      #|  x:real
-      #|  R + &2
-      #|  (\\x. Cx (eta R x) * P(lift x)) = (s:num->real->complex) 0
-      #|  s:num->real->complex
-      #|  en:num->real->complex
-      #|  q:num->real->complex
-      #|  en:num->real->complex
-      #|  R:real
-      #|  q:num->real->complex
-      #|  forall R (P:real^1->real^2). &0 <= R /\\ vector_polynomial_function P\n     ==> schwartz (\\x. Cx(eta R x) * P(lift x))
-      #|  SUC 0 = 1
-      #|  drop(x:real^1)
+      #|  real_interval([(-real_of_num(2), (t : Real) + real_of_num(1))])
+      #|  real_interval((-real_of_num(2), (t : Real) + real_of_num(1)))
+      #|  (t : Real)
+      #|  rpsi((t : Real))
+      #|  (u : Real) => real_integral(real_interval([(-real_of_num(2), u)]), rpsi)
+      #|  \226\136\128 t : Real, -real_of_num(2) < t \226\134\146 has_real_derivative(rtheta, inv(real_integral(UNIV, rpsi)) * rpsi(t), atreal(t))
+      #|  (x : Real)
+      #|  -real_of_num(1) - (t : Real)
+      #|  (t : Real) => real_of_num(0)
+      #|  rpsi((t : Real)) == real_of_num(0)
+      #|  inv(real_integral(UNIV, rpsi)) * rpsi((t : Real)) == real_of_num(0)
+      #|  \226\136\128 t : Real, t < -real_of_num(1) \226\134\146 has_real_derivative(rtheta, inv(real_integral(UNIV, rpsi)) * rpsi(t), atreal(t))
+      #|  (t : Real) < -real_of_num(1) || -real_of_num(2) < t
+      #|  \226\136\128 t : Real, has_real_derivative(rtheta, inv(real_integral(UNIV, rpsi)) * rpsi(t), atreal(t))
+      #|  (x : Real)
+      #|  real_interval([(-real_of_num(2), (t : Real))])
+      #|  real_integral(real_interval([(-real_of_num(2), (t : Real))]), rpsi) == real_integral(UNIV, rpsi)
+      #|  \226\136\128 t : Real, real_of_num(1) <= t \226\134\146 rtheta(t) == real_of_num(1)
+      #|  inv(real_integral(UNIV, rpsi)) * real_integral(real_interval([(-real_of_num(2), (t : Real))]), rpsi) <= inv(real_integral(UNIV, rpsi)) * real_integral(UNIV, rpsi)
+      #|  real_of_num(0) <= real_integral(real_interval([(-real_of_num(2), (t : Real))]), rpsi) && real_integral(real_interval([(-real_of_num(2), t)]), rpsi) <= real_integral(UNIV, rpsi)
+      #|  real_of_num(0) < real_integral(UNIV, rpsi)
+      #|  \226\136\128 t : Real, real_of_num(0) <= rtheta(t) && rtheta(t) <= real_of_num(1)
+      #|  (p : (Num, Real) -> Cart[Real, Tybit0[Unit]])((n : Num)) == p(SUC(n - 1))
+      #|  (n : Num) == 0
+      #|  (y : Real)
+      #|  (n : Num)
+      #|  (n : Num) => if n == 0 { (x : Real) => Cx(rtheta(x)) } else { (x : Real) => Cx(inv(real_integral(UNIV, rpsi))) * (p : (Num, Real) -> Cart[Real, Tybit0[Unit]])(n - 1, x) }
+      #|  (p : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\131 d : (Num, Real) -> Cart[Real, Tybit0[Unit]], d(0) == ((x : Real) => Cx(rtheta(x))) && (\226\136\128 n : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => d(n, drop(z)), d(SUC(n), y), at(lift(y))))
+      #|  (eta : (Real, Real) -> Real)((R : Real), (x : Real)) == rtheta(x + (R + real_of_num(1))) * rtheta(R + real_of_num(1) - x)
+      #|  rtheta((R : Real) + real_of_num(1) - (x : Real)) == real_of_num(0)
+      #|  rtheta((x : Real) + ((R : Real) + real_of_num(1))) == real_of_num(0)
+      #|  (x : Real) < real_of_num(0) || real_of_num(0) <= x
+      #|  \226\136\128 R : Real, \226\136\128 x : Real, real_of_num(0) <= R && R + real_of_num(2) < abs(x) \226\134\146 eta(R, x) == real_of_num(0)
+      #|  rtheta((x : Real) + ((R : Real) + real_of_num(1))) == real_of_num(1) && rtheta(R + real_of_num(1) - x) == real_of_num(1)
+      #|  \226\136\128 R : Real, \226\136\128 x : Real, abs(x) <= R \226\134\146 eta(R, x) == real_of_num(1)
+      #|  rtheta((x : Real) + ((R : Real) + real_of_num(1))) * real_of_num(1)
+      #|  (R : Real) + real_of_num(1) - (x : Real)
+      #|  (x : Real) + ((R : Real) + real_of_num(1))
+      #|  \226\136\128 R : Real, \226\136\128 x : Real, real_of_num(0) <= eta(R, x) && eta(R, x) <= real_of_num(1)
+      #|  (R : Real) + real_of_num(1) + -real_of_num(1) * (x : Real) == R + real_of_num(1) - x
+      #|  (R : Real) + real_of_num(1) + real_of_num(1) * (x : Real) == x + (R + real_of_num(1))
+      #|  (x : Real)
+      #|  (q : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (q : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (n : Num) => (x : Real) => pow(Cx(-real_of_num(1)), n) * (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(n, (R : Real) + real_of_num(1) + -real_of_num(1) * x)
+      #|  (n : Num) => (x : Real) => pow(Cx(real_of_num(1)), n) * (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(n, (R : Real) + real_of_num(1) + real_of_num(1) * x)
+      #|  -real_of_num(1)
+      #|  (R : Real) + real_of_num(1)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(1)
+      #|  (R : Real) + real_of_num(1)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 R : Real, \226\136\131 q : (Num, Real) -> Cart[Real, Tybit0[Unit]], q(0) == ((x : Real) => Cx(rtheta(x + (R + real_of_num(1)))) * Cx(rtheta(R + real_of_num(1) - x))) && (\226\136\128 n : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => q(n, drop(z)), q(SUC(n), y), at(lift(y))))
+      #|  (q : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (R : Real)
+      #|  (q : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 R : Real, \226\136\131 q : (Num, Real) -> Cart[Real, Tybit0[Unit]], q(0) == ((x : Real) => Cx(eta(R, x))) && (\226\136\128 n : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => q(n, drop(z)), q(SUC(n), y), at(lift(y))))
+      #|  (n : Num) => (x : Real) => (f : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(n, lift(x))
+      #|  (f : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (P : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (n : Num) => (Q : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]) => (Q' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]) => \226\136\128 x : Cart[Real, Unit], has_vector_derivative(Q, Q'(x), at(x))
+      #|  (n : Num) => (Q : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]) => vector_polynomial_function(Q)
+      #|  \226\136\128 P : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], vector_polynomial_function(P) \226\134\146 (\226\136\131 e : (Num, Real) -> Cart[Real, Tybit0[Unit]], e(0) == ((x : Real) => P(lift(x))) && (\226\136\128 n : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => e(n, drop(z)), e(SUC(n), y), at(lift(y)))))
+      #|  eta((R : Real), (x : Real)) == real_of_num(0)
+      #|  (x : Real)
+      #|  (R : Real) + real_of_num(2)
+      #|  ((x : Real) => Cx(eta((R : Real), x)) * (P : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(lift(x))) == (s : (Num, Real) -> Cart[Real, Tybit0[Unit]])(0)
+      #|  (s : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (en : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (q : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (en : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (R : Real)
+      #|  (q : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 R : Real, \226\136\128 P : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], real_of_num(0) <= R && vector_polynomial_function(P) \226\134\146 schwartz((x : Real) => Cx(eta(R, x)) * P(lift(x)))
+      #|  SUC(0) == 1
+      #|  drop((x : Cart[Real, Unit]))
       #|  0
-      #|  \\h'. drop h' % (d:num->real->complex) 1 (drop x)
-      #|  x:real^1
-      #|  forall h:real->complex. schwartz h ==> (\\z:real^1. h(drop z)) continuous_on\n   (:real^1)
-      #|  x:real
-      #|  x:real
-      #|  B:real
-      #|  B:real
+      #|  (h' : Cart[Real, Unit]) => op_pct(drop(h'), (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(1, drop((x : Cart[Real, Unit]))))
+      #|  (x : Cart[Real, Unit])
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 continuous_on((z : Cart[Real, Unit]) => h(drop(z)), UNIV)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (B : Real)
+      #|  (B : Real)
       #|  0
       #|  0
-      #|  forall h:real->complex. schwartz h ==> ?B. forall x. norm(h x) <= B
-      #|  norm((h:real->complex)(drop z)) pow 2 =\n       norm(h(drop z)) * norm(h(drop z))
-      #|  z:real^1
-      #|  \\z:real^1. B % lift(norm((h:real->complex)(drop z)))
-      #|  (\\z:real^1. (h:real->complex)(drop z)) measurable_on (:real^1)
-      #|  B:real
-      #|  forall h:real->complex. schwartz h ==> (\\z:real^1. h(drop z)) IN lspace (:real^1)\n   (&2)
-      #|  x:real^1
-      #|  s:real^1->bool
-      #|  \\x:real^1. lift(norm((phi:real^1->real^2) x) rpow p)
-      #|  forall(phi:real^1->real^2) s p.\n     &0 < p /\\ (forall x. ~(x IN s) ==> phi x = vec 0)\n     ==> lnorm (:real^1) p phi = lnorm s p phi
-      #|  drop x
-      #|  abs R
-      #|  x:real^1
-      #|  (:real^1)
-      #|  &0 <= &2
-      #|  &0 <= &2
-      #|  x:real^1
-      #|  (\\x:real^1. Cx(eta (abs R) (drop x)) * ((g:real^1->real^2) x - P x)) =\n      (\\x. g x - Cx(eta (abs R) (drop x)) * P x)
-      #|  (:real^1)
-      #|  &0 <= &2
-      #|  {}:real^1->bool
-      #|  lnorm s (&2) (\\x. (g:real^1->real^2) x - P x)
-      #|  eta (abs R) (drop x) = &0
-      #|  x:real^1
-      #|  &0 < &2
-      #|  lnorm (:real^1) (&2) (\\x. Cx(eta (abs R) (drop x)) * ((g:real^1->real^2) x\n     - P x)) =\n    lnorm s (&2) (\\x. Cx(eta (abs R) (drop x)) * ((g:real^1->real^2) x - P x))
-      #|  x:real^1
-      #|  (\\x. (g:real^1->real^2) x - Cx(eta (abs R) (drop x)) * P x) =\n    (\\x. Cx(eta (abs R) (drop x)) * ((g:real^1->real^2) x - P x))
-      #|  a < e / &2 /\\ b <= e / &2 ==> a + b < e
-      #|  &0 <= &2
-      #|  &0 <= &2
-      #|  &1 <= &2
-      #|  (\\x. f x - Cx(eta (abs R) (drop x)) * (P:real^1->real^2) x) =\n      (\\x. (\\x. f x - g x) x + (\\x. g x - Cx(eta (abs R) (drop x)) * P x) x)
-      #|  lnorm (:real^1) (&2) (\\x. f x - (g:real^1->real^2) x) +\n              lnorm (:real^1) (&2) (\\x. (g:real^1->real^2) x -\n                                        Cx(eta (abs R) (drop x)) * P x)
-      #|  (\\x:real^1. Cx(eta (abs R) (drop x)) * (P:real^1->real^2) x) =\n      (\\z:real^1. (\\x. Cx(eta (abs R) x) * P(lift x))(drop z))
-      #|  (\\x:real^1. Cx(eta (abs R) (drop x)) * (P:real^1->real^2) x) IN lspace\n     (:real^1) (&2)
-      #|  (g:real^1->real^2) x = vec 0
-      #|  eta (abs R) (drop x) = &1
-      #|  norm(x:real^1) <= abs R
-      #|  x:real^1
-      #|  forall x:real^1. Cx(eta (abs R) (drop x)) * (g:real^1->real^2) x = g x
-      #|  \\x. Cx(eta (abs R) x) * (P:real^1->real^2)(lift x)
-      #|  P:real^1->real^2
-      #|  (:real^1)
-      #|  &1 <= &2
-      #|  e / &2
-      #|  &2
-      #|  s:real^1->bool
-      #|  g:real^1->real^2
-      #|  bounded s /\\ measurable s /\\ lebesgue_measurable(s:real^1->bool)
-      #|  s = interval[lift(--(abs R + &2)), lift(abs R + &2)]
-      #|  R:real
-      #|  g:real^1->real^2
-      #|  &0 < &2
-      #|  e / &2
-      #|  &2
-      #|  f:real^1->real^2
-      #|  forall f:real^1->real^2. f IN lspace (:real^1) (&2)\n     ==> forall e. &0 < e\n             ==> ?h. schwartz h /\\\n                     lnorm (:real^1) (&2) (\\x. f x - (\\z. h(drop z)) x) < e
-      #|  abs x pow k * norm((d:num->real->complex) m x) +\n                abs x pow k * norm((e:num->real->complex) m x)
-      #|  x:real
-      #|  B1 + B2:real
-      #|  B2:real
-      #|  B1:real
-      #|  m:num
-      #|  k:num
-      #|  m:num
-      #|  k:num
-      #|  m:num
-      #|  k:num
-      #|  \\n:num. \\x:real. (d:num->real->complex) n x +\n    (e:num->real->complex) n x
-      #|  e:num->real->complex
-      #|  d:num->real->complex
-      #|  forall h1 h2:real->complex. schwartz h1 /\\ schwartz h2 ==> schwartz (\\x. h1 x + h2\n   x)
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 (\226\136\131 B : Real, \226\136\128 x : Real, norm(h(x)) <= B)
+      #|  pow(norm((h : (Real) -> Cart[Real, Tybit0[Unit]])(drop((z : Cart[Real, Unit])))), 2) == norm(h(drop(z))) * norm(h(drop(z)))
+      #|  (z : Cart[Real, Unit])
+      #|  (z : Cart[Real, Unit]) => op_pct((B : Real), lift(norm((h : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z)))))
+      #|  measurable_on((z : Cart[Real, Unit]) => (h : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z)), UNIV)
+      #|  (B : Real)
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 IN((z : Cart[Real, Unit]) => h(drop(z)), lspace(UNIV, real_of_num(2)))
+      #|  (x : Cart[Real, Unit])
+      #|  (s : (Cart[Real, Unit]) -> Bool)
+      #|  (x : Cart[Real, Unit]) => lift(rpow(norm((phi : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)), (p : Real)))
+      #|  \226\136\128 phi : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 p : Real, real_of_num(0) < p && (\226\136\128 x : Cart[Real, Unit], !IN(x, s) \226\134\146 phi(x) == vec(0)) \226\134\146 lnorm(UNIV, p, phi) == lnorm(s, p, phi)
+      #|  drop((x : Cart[Real, Unit]))
+      #|  abs((R : Real))
+      #|  (x : Cart[Real, Unit])
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  real_of_num(0) <= real_of_num(2)
+      #|  real_of_num(0) <= real_of_num(2)
+      #|  (x : Cart[Real, Unit])
+      #|  ((x : Cart[Real, Unit]) => Cx(eta(abs((R : Real)), drop(x))) * ((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x) - (P : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x))) == ((x : Cart[Real, Unit]) => g(x) - Cx(eta(abs(R), drop(x))) * P(x))
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  real_of_num(0) <= real_of_num(2)
+      #|  ({} : (Cart[Real, Unit]) -> Bool)
+      #|  lnorm((s : (Cart[Real, Unit]) -> Bool), real_of_num(2), (x : Cart[Real, Unit]) => (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x) - (P : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x))
+      #|  eta(abs((R : Real)), drop((x : Cart[Real, Unit]))) == real_of_num(0)
+      #|  (x : Cart[Real, Unit])
+      #|  real_of_num(0) < real_of_num(2)
+      #|  lnorm(UNIV, real_of_num(2), (x : Cart[Real, Unit]) => Cx(eta(abs((R : Real)), drop(x))) * ((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x) - (P : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x))) == lnorm((s : (Cart[Real, Unit]) -> Bool), real_of_num(2), (x : Cart[Real, Unit]) => Cx(eta(abs(R), drop(x))) * (g(x) - P(x)))
+      #|  (x : Cart[Real, Unit])
+      #|  ((x : Cart[Real, Unit]) => (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x) - Cx(eta(abs((R : Real)), drop(x))) * (P : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)) == ((x : Cart[Real, Unit]) => Cx(eta(abs(R), drop(x))) * (g(x) - P(x)))
+      #|  (a : Real) < (e : Real) / real_of_num(2) && (b : Real) <= e / real_of_num(2) \226\134\146 a + b < e
+      #|  real_of_num(0) <= real_of_num(2)
+      #|  real_of_num(0) <= real_of_num(2)
+      #|  real_of_num(1) <= real_of_num(2)
+      #|  ((x : Cart[Real, Unit]) => (f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x) - Cx(eta(abs((R : Real)), drop(x))) * (P : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)) == ((x : Cart[Real, Unit]) => ((x : Cart[Real, Unit]) => f(x) - (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x))(x) + ((x : Cart[Real, Unit]) => g(x) - Cx(eta(abs(R), drop(x))) * P(x))(x))
+      #|  lnorm(UNIV, real_of_num(2), (x : Cart[Real, Unit]) => (f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x) - (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)) + lnorm(UNIV, real_of_num(2), (x : Cart[Real, Unit]) => g(x) - Cx(eta(abs((R : Real)), drop(x))) * (P : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x))
+      #|  ((x : Cart[Real, Unit]) => Cx(eta(abs((R : Real)), drop(x))) * (P : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)) == ((z : Cart[Real, Unit]) => ((x : Real) => Cx(eta(abs(R), x)) * P(lift(x)))(drop(z)))
+      #|  IN((x : Cart[Real, Unit]) => Cx(eta(abs((R : Real)), drop(x))) * (P : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x), lspace(UNIV, real_of_num(2)))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, Unit])) == vec(0)
+      #|  eta(abs((R : Real)), drop((x : Cart[Real, Unit]))) == real_of_num(1)
+      #|  norm((x : Cart[Real, Unit])) <= abs((R : Real))
+      #|  (x : Cart[Real, Unit])
+      #|  \226\136\128 x : Cart[Real, Unit], Cx(eta(abs((R : Real)), drop(x))) * (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x) == g(x)
+      #|  (x : Real) => Cx(eta(abs((R : Real)), x)) * (P : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(lift(x))
+      #|  (P : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  real_of_num(1) <= real_of_num(2)
+      #|  (e : Real) / real_of_num(2)
+      #|  real_of_num(2)
+      #|  (s : (Cart[Real, Unit]) -> Bool)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  bounded((s : (Cart[Real, Unit]) -> Bool)) && measurable(s) && lebesgue_measurable(s)
+      #|  (s : (Cart[Real, Unit]) -> Bool) == interval([(lift(-(abs((R : Real)) + real_of_num(2))), lift(abs(R) + real_of_num(2)))])
+      #|  (R : Real)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(0) < real_of_num(2)
+      #|  (e : Real) / real_of_num(2)
+      #|  real_of_num(2)
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], IN(f, lspace(UNIV, real_of_num(2))) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) && lnorm(UNIV, real_of_num(2), (x : Cart[Real, Unit]) => f(x) - ((z : Cart[Real, Unit]) => h(drop(z)))(x)) < e))
+      #|  pow(abs((x : Real)), (k : Num)) * norm((d : (Num, Real) -> Cart[Real, Tybit0[Unit]])((m : Num), x)) + pow(abs(x), k) * norm((e : (Num, Real) -> Cart[Real, Tybit0[Unit]])(m, x))
+      #|  (x : Real)
+      #|  (B1 : Real) + (B2 : Real)
+      #|  (B2 : Real)
+      #|  (B1 : Real)
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (n : Num) => (x : Real) => (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(n, x) + (e : (Num, Real) -> Cart[Real, Tybit0[Unit]])(n, x)
+      #|  (e : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 h1 : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 h2 : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h1) && schwartz(h2) \226\134\146 schwartz((x : Real) => h1(x) + h2(x))
       #|  :real
       #|  :real
-      #|  B:real
-      #|  m:num
-      #|  k:num
-      #|  m:num
-      #|  k:num
-      #|  \\n:num. \\x:real. --((d:num->real->complex) n x)
-      #|  d:num->real->complex
-      #|  forall h:real->complex. schwartz h ==> schwartz (\\x. --(h x))
-      #|  (\\x. h1 x - h2 x) = (\\x:real. h1 x + (\\x. --(h2 x)) x)
-      #|  forall h1 h2:real->complex. schwartz h1 /\\ schwartz h2 ==> schwartz (\\x. h1 x - h2\n   x)
-      #|  norm(fourier f (drop z)) pow 2 =\n                  norm(fourier f (drop z)) * norm(fourier f (drop z))
-      #|  z:real^1
-      #|  \\z:real^1. K % lift(norm(fourier f (drop z)))
-      #|  (\\z:real^1. fourier f (drop z)) measurable_on (:real^1)
-      #|  K:real
-      #|  forall f:real->complex. schwartz f ==> (\\z. fourier f (drop z)) IN lspace\n   (:real^1) (&2)
+      #|  (B : Real)
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (n : Num) => (x : Real) => -(d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(n, x)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 schwartz((x : Real) => -h(x))
+      #|  ((x : Real) => (h1 : (Real) -> Cart[Real, Tybit0[Unit]])(x) - (h2 : (Real) -> Cart[Real, Tybit0[Unit]])(x)) == ((x : Real) => h1(x) + ((x : Real) => -h2(x))(x))
+      #|  \226\136\128 h1 : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 h2 : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h1) && schwartz(h2) \226\134\146 schwartz((x : Real) => h1(x) - h2(x))
+      #|  pow(norm(fourier((f : (Real) -> Cart[Real, Tybit0[Unit]]), drop((z : Cart[Real, Unit])))), 2) == norm(fourier(f, drop(z))) * norm(fourier(f, drop(z)))
+      #|  (z : Cart[Real, Unit])
+      #|  (z : Cart[Real, Unit]) => op_pct((K : Real), lift(norm(fourier((f : (Real) -> Cart[Real, Tybit0[Unit]]), drop(z)))))
+      #|  measurable_on((z : Cart[Real, Unit]) => fourier((f : (Real) -> Cart[Real, Tybit0[Unit]]), drop(z)), UNIV)
+      #|  (K : Real)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(f) \226\134\146 IN((z : Cart[Real, Unit]) => fourier(f, drop(z)), lspace(UNIV, real_of_num(2)))
       #|  2
-      #|  (\\z:real^1. (h:real->complex) (drop z)) IN lspace (:real^1) (&2) /\\\n    (\\z:real^1. fourier (h:real->complex) (drop z)) IN lspace (:real^1) (&2)
-      #|  forall h:real->complex. schwartz h\n     ==> lnorm (:real^1) (&2) (\\z. fourier h (drop z)) =\n         lnorm (:real^1) (&2) (\\z. h (drop z))
-      #|  forall h:real->complex y. schwartz h\n     ==> (\\x. cexp(--(ii * Cx y * Cx(drop x))) * h(drop x)) integrable_on\n       (:real^1)
-      #|  fourier (\\x. --Cx(&1) * h2 x) y = --Cx(&1) * fourier h2 y
+      #|  IN((z : Cart[Real, Unit]) => (h : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z)), lspace(UNIV, real_of_num(2))) && IN((z : Cart[Real, Unit]) => fourier(h, drop(z)), lspace(UNIV, real_of_num(2)))
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 lnorm(UNIV, real_of_num(2), (z : Cart[Real, Unit]) => fourier(h, drop(z))) == lnorm(UNIV, real_of_num(2), (z : Cart[Real, Unit]) => h(drop(z)))
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, schwartz(h) \226\134\146 integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * h(drop(x)), UNIV)
+      #|  fourier((x : Real) => -Cx(real_of_num(1)) * (h2 : (Real) -> Cart[Real, Tybit0[Unit]])(x), (y : Real)) == -Cx(real_of_num(1)) * fourier(h2, y)
       #|  (\\x. cexp(--(ii * Cx y * Cx(drop x))) * (\\x. --Cx(&1) * h2 x)(drop x))\n         =\n        (\\x. --Cx(&1) * (\\x. cexp(--(ii * Cx y * Cx(drop x))) * h2(drop x)) x)
-      #|  (\\x. h1 x - h2 x) = (\\x:real. h1 x + (\\x. --Cx(&1) * h2 x) x)
-      #|  forall h1 h2:real->complex. schwartz h1 /\\ schwartz h2\n     ==> forall y. fourier (\\x. h1 x - h2 x) y = fourier h1 y - fourier h2 y
-      #|  &0 <= &2
-      #|  &1 <= &2
-      #|  (\\x. (a:real^M->real^N) x - c x) =\n                (\\x. (\\x. a x - b x) x + (\\x. b x - c x) x)
-      #|  forall s (a:real^M->real^N) b c.\n        a IN lspace s (&2) /\\ b IN lspace s (&2) /\\ c IN lspace s (&2)\n        ==> lnorm s (&2) (\\x. a x - c x) <=\n            lnorm s (&2) (\\x. a x - b x) + lnorm s (&2) (\\x. b x - c x)
-      #|  l = m ==> m <= r ==> l <= r
-      #|  lnorm s (&2) (\\x. (b:real^M->real^N) x - a x) =\n                    lnorm s (&2) (\\x. a x - b x)
-      #|  &0 <= &2
-      #|  &1 <= &2
-      #|  \\x. (b:real^M->real^N) x - a x
-      #|  a:real^M->real^N
-      #|  &2
-      #|  s:real^M->bool
-      #|  l = m ==> m <= r ==> l <= r
-      #|  &0 <= &2
-      #|  &1 <= &2
-      #|  \\x. (a:real^M->real^N) x - b x
-      #|  b:real^M->real^N
-      #|  &2
-      #|  s:real^M->bool
-      #|  lnorm s (&2) (a:real^M->real^N) <= lnorm s (&2) b + lnorm s (&2) (\\x. a x\n    - b x) /\\\n                lnorm s (&2) (b:real^M->real^N) <= lnorm s (&2) a + lnorm s\n                  (&2) (\\x. a x - b x)
-      #|  forall s (a:real^M->real^N) b.\n        a IN lspace s (&2) /\\ b IN lspace s (&2)\n        ==> abs(lnorm s (&2) a - lnorm s (&2) b) <= lnorm s (&2) (\\x. a x - b\n          x)
-      #|  \\x. (a:real->complex) x - b x
-      #|  (\\z. fourier a (drop z) - fourier b (drop z)) =\n    (\\z. fourier (\\x. a x - b x) (drop z))
-      #|  b:real->complex
-      #|  a:real->complex
-      #|  forall a b:real->complex. schwartz a /\\ schwartz b\n     ==> lnorm (:real^1) (&2) (\\z. fourier a (drop z) - fourier b (drop z)) =\n         lnorm (:real^1) (&2) (\\z. a (drop z) - b (drop z))
+      #|  ((x : Real) => (h1 : (Real) -> Cart[Real, Tybit0[Unit]])(x) - (h2 : (Real) -> Cart[Real, Tybit0[Unit]])(x)) == ((x : Real) => h1(x) + ((x : Real) => -Cx(real_of_num(1)) * h2(x))(x))
+      #|  \226\136\128 h1 : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 h2 : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h1) && schwartz(h2) \226\134\146 (\226\136\128 y : Real, fourier((x : Real) => h1(x) - h2(x), y) == fourier(h1, y) - fourier(h2, y))
+      #|  real_of_num(0) <= real_of_num(2)
+      #|  real_of_num(1) <= real_of_num(2)
+      #|  ((x : Cart[Real, M]) => (a : (Cart[Real, M]) -> Cart[Real, N])(x) - (c : (Cart[Real, M]) -> Cart[Real, N])(x)) == ((x : Cart[Real, M]) => ((x : Cart[Real, M]) => a(x) - (b : (Cart[Real, M]) -> Cart[Real, N])(x))(x) + ((x : Cart[Real, M]) => b(x) - c(x))(x))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 a : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 b : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 c : (Cart[Real, M]) -> Cart[Real, N], IN(a, lspace(s, real_of_num(2))) && IN(b, lspace(s, real_of_num(2))) && IN(c, lspace(s, real_of_num(2))) \226\134\146 lnorm(s, real_of_num(2), (x : Cart[Real, M]) => a(x) - c(x)) <= lnorm(s, real_of_num(2), (x : Cart[Real, M]) => a(x) - b(x)) + lnorm(s, real_of_num(2), (x : Cart[Real, M]) => b(x) - c(x))
+      #|  (l : Real) == (m : Real) \226\134\146 m <= (r : Real) \226\134\146 l <= r
+      #|  lnorm((s : (Cart[Real, M]) -> Bool), real_of_num(2), (x : Cart[Real, M]) => (b : (Cart[Real, M]) -> Cart[Real, N])(x) - (a : (Cart[Real, M]) -> Cart[Real, N])(x)) == lnorm(s, real_of_num(2), (x : Cart[Real, M]) => a(x) - b(x))
+      #|  real_of_num(0) <= real_of_num(2)
+      #|  real_of_num(1) <= real_of_num(2)
+      #|  (x : Cart[Real, M]) => (b : (Cart[Real, M]) -> Cart[Real, N])(x) - (a : (Cart[Real, M]) -> Cart[Real, N])(x)
+      #|  (a : (Cart[Real, M]) -> Cart[Real, N])
+      #|  real_of_num(2)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (l : Real) == (m : Real) \226\134\146 m <= (r : Real) \226\134\146 l <= r
+      #|  real_of_num(0) <= real_of_num(2)
+      #|  real_of_num(1) <= real_of_num(2)
+      #|  (x : Cart[Real, M]) => (a : (Cart[Real, M]) -> Cart[Real, N])(x) - (b : (Cart[Real, M]) -> Cart[Real, N])(x)
+      #|  (b : (Cart[Real, M]) -> Cart[Real, N])
+      #|  real_of_num(2)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  lnorm((s : (Cart[Real, M]) -> Bool), real_of_num(2), (a : (Cart[Real, M]) -> Cart[Real, N])) <= lnorm(s, real_of_num(2), (b : (Cart[Real, M]) -> Cart[Real, N])) + lnorm(s, real_of_num(2), (x : Cart[Real, M]) => a(x) - b(x)) && lnorm(s, real_of_num(2), b) <= lnorm(s, real_of_num(2), a) + lnorm(s, real_of_num(2), (x : Cart[Real, M]) => a(x) - b(x))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 a : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 b : (Cart[Real, M]) -> Cart[Real, N], IN(a, lspace(s, real_of_num(2))) && IN(b, lspace(s, real_of_num(2))) \226\134\146 abs(lnorm(s, real_of_num(2), a) - lnorm(s, real_of_num(2), b)) <= lnorm(s, real_of_num(2), (x : Cart[Real, M]) => a(x) - b(x))
+      #|  (x : Real) => (a : (Real) -> Cart[Real, Tybit0[Unit]])(x) - (b : (Real) -> Cart[Real, Tybit0[Unit]])(x)
+      #|  ((z : Cart[Real, Unit]) => fourier((a : (Real) -> Cart[Real, Tybit0[Unit]]), drop(z)) - fourier((b : (Real) -> Cart[Real, Tybit0[Unit]]), drop(z))) == ((z : Cart[Real, Unit]) => fourier((x : Real) => a(x) - b(x), drop(z)))
+      #|  (b : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (a : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 a : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 b : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(a) && schwartz(b) \226\134\146 lnorm(UNIV, real_of_num(2), (z : Cart[Real, Unit]) => fourier(a, drop(z)) - fourier(b, drop(z))) == lnorm(UNIV, real_of_num(2), (z : Cart[Real, Unit]) => a(drop(z)) - b(drop(z)))
       #|  fn:num->real->complex
-      #|  &0 <= &n ==> &0 < &n + &1
-      #|  inv(&n + &1)
-      #|  n:num
+      #|  real_of_num(0) <= real_of_num((n : Num)) \226\134\146 real_of_num(0) < real_of_num(n) + real_of_num(1)
+      #|  inv(real_of_num((n : Num)) + real_of_num(1))
+      #|  (n : Num)
       #|  forall f:real^1->real^2. f IN lspace (:real^1) (&2)\n     ==> ?fn:num->real->complex.\n           (forall n. schwartz (fn n)) /\\\n           (forall n. lnorm (:real^1) (&2) (\\z. f z - fn n (drop z)) < inv(&n +\n             &1))
-      #|  abs(a - b:real)
-      #|  ~(&0 < abs(a - b)) ==> a = b
-      #|  forall a b:real. (forall e. &0 < e ==> abs(a - b) < e) ==> a = b
-      #|  c:real
-      #|  lnorm (:real^1) (&2) (g:real^1->complex)
-      #|  \\n. lnorm (:real^1) (&2) ((gn:num->real^1->complex) n)
+      #|  abs((a : Real) - (b : Real))
+      #|  !(real_of_num(0) < abs((a : Real) - (b : Real))) \226\134\146 a == b
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 abs(a - b) < e) \226\134\146 a == b
+      #|  (c : Real)
+      #|  lnorm(UNIV, real_of_num(2), (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (n : Num) => lnorm(UNIV, real_of_num(2), (gn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(n))
       #|  sequentially
-      #|  g:real^1->complex
-      #|  (gn:num->real^1->complex) n
-      #|  (:real^1)
-      #|  lnorm (:real^1) (&2) (\\x. (gn:num->real^1->complex) n x - g x)
-      #|  n:num
-      #|  N:num
-      #|  N:num
-      #|  e:real
-      #|  e:real
-      #|  ((\\n. lnorm (:real^1) (&2) ((gn:num->real^1->complex) n))\n     ---> lnorm (:real^1) (&2) (g:real^1->complex)) sequentially
-      #|  forall(gn:num->real^1->complex) g c.\n     (forall n. gn n IN lspace (:real^1) (&2)) /\\ g IN lspace (:real^1) (&2) /\\\n     (forall e. &0 < e ==> ?N. forall n. n >= N\n          ==> lnorm (:real^1) (&2) (\\x. gn n x - g x) < e) /\\\n     ((\\n. lnorm (:real^1) (&2) (gn n)) ---> c) sequentially\n     ==> lnorm (:real^1) (&2) g = c
-      #|  \\t. (f:real->complex) t * cnj(g t)
-      #|  z:real^1
-      #|  integral (:real^1) (\\z. fourier (fourier f) (drop z) * (\\x.\n     cnj((g:real->complex)(--x))) (drop z)) =\n    integral (:real^1) (\\z. f(--(drop z)) * cnj(g(--(drop z))))
-      #|  z:real^1
-      #|  integral (:real^1) (\\z. fourier f (drop z) * fourier (\\x.\n     cnj((g:real->complex)(--x))) (drop z)) =\n    integral (:real^1) (\\z. fourier f (drop z) * cnj(fourier g (drop z)))
-      #|  \\x. cnj((g:real->complex)(--x))
-      #|  fourier(f:real->complex)
-      #|  forall(f:real->complex) (g:real->complex). schwartz f /\\ schwartz g\n     ==> integral (:real^1) (\\z. f(drop z) * cnj(g(drop z))) =\n         integral (:real^1) (\\z. fourier f (drop z) * cnj(fourier g (drop\n           z)))
-      #|  schwartz(g:real->complex)
-      #|  schwartz(f:real->complex)
-      #|  schwartz(f:real->complex)
-      #|  schwartz(f:real->complex)
-      #|  n + m:num
-      #|  k:num
-      #|  m:num
-      #|  k:num
-      #|  \\j. (d:num->real->complex)(n + j)
-      #|  n:num
-      #|  d:num->real->complex
-      #|  d:num->real->complex
-      #|  forall h:real->complex. schwartz h\n     ==> ?d. d 0 = h /\\ (forall n. schwartz (d n)) /\\\n             (forall n x. ((\\z. d n(drop z)) has_vector_derivative d(SUC n)\n               x)(at(lift x)))
-      #|  lift x
-      #|  \\z. (d:num->real->complex) 0 (drop z)
-      #|  x:real
-      #|  h' = (d:num->real->complex) 1
-      #|  SUC 0 = 1
-      #|  x:real
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (gn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((n : Num))
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  lnorm(UNIV, real_of_num(2), (x : Cart[Real, Unit]) => (gn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((n : Num), x) - (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x))
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((n : Num) => lnorm(UNIV, real_of_num(2), (gn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(n)), lnorm(UNIV, real_of_num(2), (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), sequentially)
+      #|  \226\136\128 gn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Real, (\226\136\128 n : Num, IN(gn(n), lspace(UNIV, real_of_num(2)))) && IN(g, lspace(UNIV, real_of_num(2))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, n >= N \226\134\146 lnorm(UNIV, real_of_num(2), (x : Cart[Real, Unit]) => gn(n, x) - g(x)) < e)) && op_minus_minus_minus_gt((n : Num) => lnorm(UNIV, real_of_num(2), gn(n)), c, sequentially) \226\134\146 lnorm(UNIV, real_of_num(2), g) == c
+      #|  (t : Real) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(t) * cnj((g : (Real) -> Cart[Real, Tybit0[Unit]])(t))
+      #|  (z : Cart[Real, Unit])
+      #|  integral(UNIV, (z : Cart[Real, Unit]) => fourier(fourier((f : (Real) -> Cart[Real, Tybit0[Unit]])), drop(z)) * ((x : Real) => cnj((g : (Real) -> Cart[Real, Tybit0[Unit]])(-x)))(drop(z))) == integral(UNIV, (z : Cart[Real, Unit]) => f(-drop(z)) * cnj(g(-drop(z))))
+      #|  (z : Cart[Real, Unit])
+      #|  integral(UNIV, (z : Cart[Real, Unit]) => fourier((f : (Real) -> Cart[Real, Tybit0[Unit]]), drop(z)) * fourier((x : Real) => cnj((g : (Real) -> Cart[Real, Tybit0[Unit]])(-x)), drop(z))) == integral(UNIV, (z : Cart[Real, Unit]) => fourier(f, drop(z)) * cnj(fourier(g, drop(z))))
+      #|  (x : Real) => cnj((g : (Real) -> Cart[Real, Tybit0[Unit]])(-x))
+      #|  fourier((f : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(f) && schwartz(g) \226\134\146 integral(UNIV, (z : Cart[Real, Unit]) => f(drop(z)) * cnj(g(drop(z)))) == integral(UNIV, (z : Cart[Real, Unit]) => fourier(f, drop(z)) * cnj(fourier(g, drop(z))))
+      #|  schwartz((g : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  schwartz((f : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  schwartz((f : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  schwartz((f : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  (n : Num) + (m : Num)
+      #|  (k : Num)
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (j : Num) => (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])((n : Num) + j)
+      #|  (n : Num)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 (\226\136\131 d : (Num, Real) -> Cart[Real, Tybit0[Unit]], d(0) == h && (\226\136\128 n : Num, schwartz(d(n))) && (\226\136\128 n : Num, \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => d(n, drop(z)), d(SUC(n), x), at(lift(x)))))
+      #|  lift((x : Real))
+      #|  (z : Cart[Real, Unit]) => (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(0, drop(z))
+      #|  (x : Real)
+      #|  (h' : (Real) -> Cart[Real, Tybit0[Unit]]) == (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(1)
+      #|  SUC(0) == 1
+      #|  (x : Real)
       #|  0
-      #|  forall x. ((\\z. (d:num->real->complex) 0 (drop z)) has_vector_derivative d 1\n    x)(at(lift x))
-      #|  d:num->real->complex
-      #|  forall h h':real->complex.\n     schwartz h /\\ (forall x. ((\\z. h(drop z)) has_vector_derivative h' x)(at(lift\n       x)))\n     ==> schwartz h'
-      #|  x:real
-      #|  &1
-      #|  \\t:real. t
-      #|  lift x
-      #|  a':complex
-      #|  Cx(&1)
-      #|  \\z:real^1. (a:real->complex)(drop z)
-      #|  \\z:real^1. Cx(drop z)
-      #|  ( * ):complex->complex->complex
-      #|  forall(a:real->complex) a' x.\n     ((\\z. a(drop z)) has_vector_derivative a') (at(lift x))\n     ==> ((\\z. Cx(drop z) * a(drop z)) has_vector_derivative\n          (a x + Cx x * a')) (at(lift x))
-      #|  (d:num->real->complex) m = d(SUC(m-1))
-      #|  forall(d:num->real->complex) m x.\n     ~(m = 0) /\\\n     (forall n x. ((\\z. d n(drop z)) has_vector_derivative d(SUC n) x)(at(lift x)))\n     ==> ((\\z. Cx(&m) * d(m-1)(drop z)) has_vector_derivative Cx(&m) * d m\n       x)(at(lift x))
-      #|  m = 0
-      #|  Cx x * d(SUC m) x + Cx(&(SUC m)) * (d:num->real->complex) m x =\n    ((d:num->real->complex) m x + Cx x * d(SUC m) x) + Cx(&m) * d m x
-      #|  x:real
-      #|  m:num
-      #|  forall(d:num->real->complex).\n     (forall n x. ((\\z. d n(drop z)) has_vector_derivative d(SUC n) x)(at(lift x)))\n     ==> forall m x. ((\\z. Cx(drop z) * d m (drop z) + Cx(&m) * d(m-1)(drop z))\n                has_vector_derivative\n                (Cx x * d(SUC m) x + Cx(&(SUC m)) * d((SUC m)-1) x))(at(lift\n                  x))
-      #|  &m * (abs x pow k * norm((d:num->real->complex)(m-1) x))
-      #|  abs x pow (SUC k) * norm((d:num->real->complex) m x)
-      #|  norm(Cx x * (d:num->real->complex) m x) + norm(Cx(&m) *\n          d(m-1) x)
-      #|  abs x * norm((d:num->real->complex) m x) + &m * norm(d(m-1) x)
-      #|  norm(Cx x * (d:num->real->complex) m x + Cx(&m) * d(m-1) x)
-      #|  abs x pow k
-      #|  abs x pow k * (abs x * norm((d:num->real->complex) m x) +\n                               &m * norm(d(m-1) x))
-      #|  x:real
-      #|  B1 + &m * B2:real
-      #|  m - 1
-      #|  k:num
-      #|  B2:real
-      #|  m:num
-      #|  SUC k
-      #|  B1:real
-      #|  m:num
-      #|  k:num
-      #|  \\m. \\x. Cx x * (d:num->real->complex) m x + Cx(&m) * d(m-1) x
-      #|  d:num->real->complex
-      #|  forall h:real->complex. schwartz h ==> schwartz (\\x. Cx x * h x)
-      #|  g:real->complex
-      #|  forall g:real->complex y0. schwartz g\n     ==> ((\\z. fourier g (drop z)) has_vector_derivative\n          (--ii * fourier (\\x. Cx x * g x) y0)) (at(lift y0))
-      #|  h:real->complex
-      #|  schwartz (h':real->complex)
-      #|  forall(h:real->complex) h' y. schwartz h /\\\n     (forall x. ((\\z. h(drop z)) has_vector_derivative (h' x)) (at(lift x)))\n     ==> fourier h' y = (ii * Cx y) * fourier h y
-      #|  gg:num->real->complex
-      #|  \\t. Cx t * (f:real->complex) t
-      #|  f:real->complex
-      #|  g:real->complex
-      #|  \\(n:num) (f:real->complex) (f':real->complex). f' = (\\t. Cx t * f t)
-      #|  \\(n:num) (f:real->complex). schwartz f
-      #|  forall g:real->complex. schwartz g\n     ==> ?gg. gg 0 = g /\\ (forall n. schwartz(gg n)) /\\\n              (forall n. gg(SUC n) = (\\t. Cx t * gg n t))
-      #|  y:real
-      #|  (gg:num->real->complex) n
-      #|  (--ii) pow SUC n * fourier ((gg:num->real->complex)(SUC n)) y =\n      (--ii) pow n * (--ii * fourier (\\t. Cx t * gg n t) y)
-      #|  \\n. \\y. (--ii) pow n * fourier ((gg:num->real->complex) n) y
-      #|  gg:num->real->complex
-      #|  forall g:real->complex. schwartz g\n     ==> ?D. D 0 = (\\y. fourier g y) /\\\n             (forall n y. ((\\z. D n (drop z)) has_vector_derivative D(SUC n)\n               y)(at(lift y)))
-      #|  &0 < x ==> abs x = x
-      #|  e:real
-      #|  &0 < x /\\ inv e < x
-      #|  x:real
-      #|  inv e + &1:real
-      #|  e:real
-      #|  ((\\x:real. inv(abs x)) ---> &0) at_posinfinity
-      #|  vec 0:real^1 = B % vec 0
-      #|  forall B. ((\\x. lift(B * inv(abs x))) --> vec 0) at_posinfinity
-      #|  x:real
-      #|  &0 < abs x
-      #|  x:real
-      #|  &1
-      #|  \\x. B * inv(abs x)
+      #|  \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(0, drop(z)), d(1, x), at(lift(x)))
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 h' : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) && (\226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => h(drop(z)), h'(x), at(lift(x)))) \226\134\146 schwartz(h')
+      #|  (x : Real)
+      #|  real_of_num(1)
+      #|  (t : Real) => t
+      #|  lift((x : Real))
+      #|  (a' : Cart[Real, Tybit0[Unit]])
+      #|  Cx(real_of_num(1))
+      #|  (z : Cart[Real, Unit]) => (a : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
+      #|  (z : Cart[Real, Unit]) => Cx(drop(z))
+      #|  op_star
+      #|  \226\136\128 a : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a' : Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => a(drop(z)), a', at(lift(x))) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => Cx(drop(z)) * a(drop(z)), a(x) + Cx(x) * a', at(lift(x)))
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])((m : Num)) == d(SUC(m - 1))
+      #|  \226\136\128 d : (Num, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 x : Real, !(m == 0) && (\226\136\128 n : Num, \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => d(n, drop(z)), d(SUC(n), x), at(lift(x)))) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => Cx(real_of_num(m)) * d(m - 1, drop(z)), Cx(real_of_num(m)) * d(m, x), at(lift(x)))
+      #|  (m : Num) == 0
+      #|  Cx((x : Real)) * (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC((m : Num)), x) + Cx(real_of_num(SUC(m))) * d(m, x) == d(m, x) + Cx(x) * d(SUC(m), x) + Cx(real_of_num(m)) * d(m, x)
+      #|  (x : Real)
+      #|  (m : Num)
+      #|  \226\136\128 d : (Num, Real) -> Cart[Real, Tybit0[Unit]], (\226\136\128 n : Num, \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => d(n, drop(z)), d(SUC(n), x), at(lift(x)))) \226\134\146 (\226\136\128 m : Num, \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => Cx(drop(z)) * d(m, drop(z)) + Cx(real_of_num(m)) * d(m - 1, drop(z)), Cx(x) * d(SUC(m), x) + Cx(real_of_num(SUC(m))) * d(SUC(m) - 1, x), at(lift(x))))
+      #|  real_of_num((m : Num)) * (pow(abs((x : Real)), (k : Num)) * norm((d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(m - 1, x)))
+      #|  pow(abs((x : Real)), SUC((k : Num))) * norm((d : (Num, Real) -> Cart[Real, Tybit0[Unit]])((m : Num), x))
+      #|  norm(Cx((x : Real)) * (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])((m : Num), x)) + norm(Cx(real_of_num(m)) * d(m - 1, x))
+      #|  abs((x : Real)) * norm((d : (Num, Real) -> Cart[Real, Tybit0[Unit]])((m : Num), x)) + real_of_num(m) * norm(d(m - 1, x))
+      #|  norm(Cx((x : Real)) * (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])((m : Num), x) + Cx(real_of_num(m)) * d(m - 1, x))
+      #|  pow(abs((x : Real)), (k : Num))
+      #|  pow(abs((x : Real)), (k : Num)) * (abs(x) * norm((d : (Num, Real) -> Cart[Real, Tybit0[Unit]])((m : Num), x)) + real_of_num(m) * norm(d(m - 1, x)))
+      #|  (x : Real)
+      #|  (B1 : Real) + real_of_num((m : Num)) * (B2 : Real)
+      #|  (m : Num) - 1
+      #|  (k : Num)
+      #|  (B2 : Real)
+      #|  (m : Num)
+      #|  SUC((k : Num))
+      #|  (B1 : Real)
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (m : Num) => (x : Real) => Cx(x) * (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(m, x) + Cx(real_of_num(m)) * d(m - 1, x)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 schwartz((x : Real) => Cx(x) * h(x))
+      #|  (g : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y0 : Real, schwartz(g) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => fourier(g, drop(z)), -ii * fourier((x : Real) => Cx(x) * g(x), y0), at(lift(y0)))
+      #|  (h : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  schwartz((h' : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 h' : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, schwartz(h) && (\226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => h(drop(z)), h'(x), at(lift(x)))) \226\134\146 fourier(h', y) == ii * Cx(y) * fourier(h, y)
+      #|  (gg : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (t : Real) => Cx(t) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(t)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (g : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (n : Num) => (f : (Real) -> Cart[Real, Tybit0[Unit]]) => (f' : (Real) -> Cart[Real, Tybit0[Unit]]) => f' == ((t : Real) => Cx(t) * f(t))
+      #|  (n : Num) => (f : (Real) -> Cart[Real, Tybit0[Unit]]) => schwartz(f)
+      #|  \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(g) \226\134\146 (\226\136\131 gg : (Num, Real) -> Cart[Real, Tybit0[Unit]], gg(0) == g && (\226\136\128 n : Num, schwartz(gg(n))) && (\226\136\128 n : Num, gg(SUC(n)) == ((t : Real) => Cx(t) * gg(n, t))))
+      #|  (y : Real)
+      #|  (gg : (Num, Real) -> Cart[Real, Tybit0[Unit]])((n : Num))
+      #|  pow(-ii, SUC((n : Num))) * fourier((gg : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC(n)), (y : Real)) == pow(-ii, n) * (-ii * fourier((t : Real) => Cx(t) * gg(n, t), y))
+      #|  (n : Num) => (y : Real) => pow(-ii, n) * fourier((gg : (Num, Real) -> Cart[Real, Tybit0[Unit]])(n), y)
+      #|  (gg : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(g) \226\134\146 (\226\136\131 D : (Num, Real) -> Cart[Real, Tybit0[Unit]], D(0) == ((y : Real) => fourier(g, y)) && (\226\136\128 n : Num, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => D(n, drop(z)), D(SUC(n), y), at(lift(y)))))
+      #|  real_of_num(0) < (x : Real) \226\134\146 abs(x) == x
+      #|  (e : Real)
+      #|  real_of_num(0) < (x : Real) && inv((e : Real)) < x
+      #|  (x : Real)
+      #|  inv((e : Real)) + real_of_num(1)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((x : Real) => inv(abs(x)), real_of_num(0), at_posinfinity)
+      #|  (vec : (Num) -> Cart[Real, Unit])(0) == (op_pct : (Real, Cart[Real, Unit]) -> Cart[Real, Unit])((B : Real), (vec : (Num) -> Cart[Real, Unit])(0))
+      #|  \226\136\128 B : Real, op_minus_minus_gt((x : Real) => lift(B * inv(abs(x))), vec(0), at_posinfinity)
+      #|  (x : Real)
+      #|  real_of_num(0) < abs((x : Real))
+      #|  (x : Real)
+      #|  real_of_num(1)
+      #|  (x : Real) => (B : Real) * inv(abs(x))
       #|  0
       #|  1
-      #|  B:real
-      #|  d:num->real->complex
-      #|  forall h:real->complex. schwartz h ==> (h --> vec 0) at_posinfinity
-      #|  --x:real
-      #|  abs x = abs(--x)
-      #|  x:real
-      #|  B:real
-      #|  m:num
-      #|  k:num
-      #|  B:real
-      #|  &0 + -- &1 * x = --x
-      #|  m:num
-      #|  k:num
-      #|  -- &1
-      #|  &0
-      #|  d:num->real->complex
-      #|  &0 + -- &1 * x = --x
-      #|  \\n:num. \\x. Cx(-- &1) pow n * (d:num->real->complex) n (&0 + --\n    &1 * x)
-      #|  d:num->real->complex
-      #|  forall h:real->complex. schwartz h ==> schwartz (\\x. h(--x))
-      #|  \\x. (h:real->complex)(--x)
-      #|  forall h:real->complex. schwartz h ==> ((\\a. h(--a)) --> vec 0) at_posinfinity
-      #|  forall h:real->complex y. schwartz h\n     ==> (\\x. cexp(--(ii * Cx y * Cx(drop x))) * h(drop x))\n       absolutely_integrable_on (:real^1)
-      #|  SUC 0 = 1
-      #|  x:real
+      #|  (B : Real)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 op_minus_minus_gt(h, vec(0), at_posinfinity)
+      #|  -(x : Real)
+      #|  abs((x : Real)) == abs(-x)
+      #|  (x : Real)
+      #|  (B : Real)
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (B : Real)
+      #|  real_of_num(0) + -real_of_num(1) * (x : Real) == -x
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  -real_of_num(1)
+      #|  real_of_num(0)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(0) + -real_of_num(1) * (x : Real) == -x
+      #|  (n : Num) => (x : Real) => pow(Cx(-real_of_num(1)), n) * (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(n, real_of_num(0) + -real_of_num(1) * x)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 schwartz((x : Real) => h(-x))
+      #|  (x : Real) => (h : (Real) -> Cart[Real, Tybit0[Unit]])(-x)
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 op_minus_minus_gt((a : Real) => h(-a), vec(0), at_posinfinity)
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, schwartz(h) \226\134\146 absolutely_integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * h(drop(x)), UNIV)
+      #|  SUC(0) == 1
+      #|  (x : Real)
       #|  0
-      #|  x:real
-      #|  y:real
-      #|  (d:num->real->complex) 1
-      #|  d:num->real->complex
-      #|  forall h:real->complex. schwartz h\n     ==> ?hp. schwartz hp /\\ forall y. fourier hp y = (ii * Cx y) * fourier h y
-      #|  (d:num->real->complex) 0 = h
-      #|  (d:num->real->complex) 0 = h
-      #|  (d:num->real->complex) 0 = h
-      #|  a = b ==> b <= B ==> a <= B
-      #|  y:real
-      #|  B:real
-      #|  hp:real->complex
-      #|  hp:real->complex
-      #|  forall k. forall h:real->complex. schwartz h\n       ==> ?B. forall y. abs y pow k * norm(fourier h y) <= B
-      #|  x:real
-      #|  B:real
-      #|  (gg:num->real->complex) m
-      #|  k:num
-      #|  m:num
-      #|  k:num
-      #|  x:real
-      #|  (gg:num->real->complex) n
-      #|  (--ii) pow SUC n * fourier ((gg:num->real->complex)(SUC n)) x =\n      (--ii) pow n * (--ii * fourier (\\t. Cx t * gg n t) x)
-      #|  \\n. \\y. (--ii) pow n * fourier ((gg:num->real->complex) n) y
-      #|  gg:num->real->complex
-      #|  forall g:real->complex. schwartz g ==> schwartz (fourier g)
-      #|  (:real^1)
-      #|  \\z:real^1. cnj(fourier h (drop z))
-      #|  f:real^1->complex
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(1)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 (\226\136\131 hp : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(hp) && (\226\136\128 y : Real, fourier(hp, y) == ii * Cx(y) * fourier(h, y)))
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(0) == (h : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(0) == (h : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(0) == (h : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (a : Real) == (b : Real) \226\134\146 b <= (B : Real) \226\134\146 a <= B
+      #|  (y : Real)
+      #|  (B : Real)
+      #|  (hp : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (hp : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 k : Num, \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 (\226\136\131 B : Real, \226\136\128 y : Real, pow(abs(y), k) * norm(fourier(h, y)) <= B)
+      #|  (x : Real)
+      #|  (B : Real)
+      #|  (gg : (Num, Real) -> Cart[Real, Tybit0[Unit]])((m : Num))
+      #|  (k : Num)
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (x : Real)
+      #|  (gg : (Num, Real) -> Cart[Real, Tybit0[Unit]])((n : Num))
+      #|  pow(-ii, SUC((n : Num))) * fourier((gg : (Num, Real) -> Cart[Real, Tybit0[Unit]])(SUC(n)), (x : Real)) == pow(-ii, n) * (-ii * fourier((t : Real) => Cx(t) * gg(n, t), x))
+      #|  (n : Num) => (y : Real) => pow(-ii, n) * fourier((gg : (Num, Real) -> Cart[Real, Tybit0[Unit]])(n), y)
+      #|  (gg : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(g) \226\134\146 schwartz(fourier(g))
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (z : Cart[Real, Unit]) => cnj(fourier((h : (Real) -> Cart[Real, Tybit0[Unit]]), drop(z)))
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
       #|  \\n. \\z:real^1. (fn:num->real->complex) n (drop z)
-      #|  integral (:real^1) (\\z. f z * fourier h (drop z)) =\n    lproduct (:real^1) (f:real^1->complex) (\\z. cnj(fourier h (drop z)))
+      #|  integral(UNIV, (z : Cart[Real, Unit]) => (f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(z) * fourier((h : (Real) -> Cart[Real, Tybit0[Unit]]), drop(z))) == lproduct(UNIV, f, (z : Cart[Real, Unit]) => cnj(fourier(h, drop(z))))
       #|  (\\n. integral (:real^1) (\\z. (fn:num->real->complex) n (drop z) * fourier h\n     (drop z))) =\n    (\\n. lproduct (:real^1) (\\z. (fn:num->real->complex) n (drop z))\n                            (\\z. cnj(fourier h (drop z))))
-      #|  (\\z:real^1. cnj(fourier h (drop z))) IN lspace (:real^1) (&2)
-      #|  schwartz (fourier h)
-      #|  h:real->complex
+      #|  IN((z : Cart[Real, Unit]) => cnj(fourier((h : (Real) -> Cart[Real, Tybit0[Unit]]), drop(z))), lspace(UNIV, real_of_num(2)))
+      #|  schwartz(fourier((h : (Real) -> Cart[Real, Tybit0[Unit]])))
+      #|  (h : (Real) -> Cart[Real, Tybit0[Unit]])
       #|  (fn:num->real->complex) n
       #|  forall n. integral (:real^1) (\\z. (gn:num->real^1->complex) n z * h(drop z)) =\n        integral (:real^1) (\\z. (fn:num->real->complex) n (drop z) * fourier h\n          (drop z))
-      #|  forall a:real^1->complex. integral (:real^1) (\\z. a z * h(drop z)) =\n                          lproduct (:real^1) a (\\z. cnj(h(drop z)))
-      #|  (\\z:real^1. cnj(h(drop z))) IN lspace (:real^1) (&2)
-      #|  \\n. integral (:real^1) (\\z. (gn:num->real^1->complex) n z *\n    h(drop z))
+      #|  \226\136\128 a : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], integral(UNIV, (z : Cart[Real, Unit]) => a(z) * (h : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))) == lproduct(UNIV, a, (z : Cart[Real, Unit]) => cnj(h(drop(z))))
+      #|  IN((z : Cart[Real, Unit]) => cnj((h : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))), lspace(UNIV, real_of_num(2)))
+      #|  (n : Num) => integral(UNIV, (z : Cart[Real, Unit]) => (gn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(n, z) * (h : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z)))
       #|  sequentially
-      #|  h:real->complex
-      #|  gn:num->real^1->complex
-      #|  f:real^1->complex
+      #|  (h : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (gn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
       #|  \\z:real^1. (fn:num->real->complex) n (drop z)
-      #|  (:real^1)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
       #|  lnorm (:real^1) (&2)\n      (\\z. (\\z:real^1. (fn:num->real->complex) n (drop z)) z - f z)
-      #|  n:num
-      #|  N:num
-      #|  N:num
-      #|  e:real
-      #|  e:real
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (e : Real)
       #|  (\\n. lnorm (:real^1) (&2) ((gn:num->real^1->complex) n)) =\n      (\\n. lnorm (:real^1) (&2) (\\z. (fn:num->real->complex) n (drop z)))
-      #|  ((\\n. lnorm (:real^1) (&2) ((gn:num->real^1->complex) n))\n     ---> lnorm (:real^1) (&2) (f:real^1->complex)) sequentially
+      #|  op_minus_minus_minus_gt((n : Num) => lnorm(UNIV, real_of_num(2), (gn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(n)), lnorm(UNIV, real_of_num(2), (f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), sequentially)
       #|  forall n. lnorm (:real^1) (&2) ((gn:num->real^1->complex) n) =\n        lnorm (:real^1) (&2) (\\z. (fn:num->real->complex) n (drop z))
-      #|  g:real^1->complex
-      #|  g:real^1->complex
-      #|  &1 <= &2
-      #|  (:real^1)
-      #|  &2
-      #|  gn:num->real^1->complex
-      #|  inv(&N)
-      #|  inv(&n + &1)
-      #|  inv(&N)
-      #|  inv(&m + &1)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(1) <= real_of_num(2)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  real_of_num(2)
+      #|  (gn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  inv(real_of_num((N : Num)))
+      #|  inv(real_of_num((n : Num)) + real_of_num(1))
+      #|  inv(real_of_num((N : Num)))
+      #|  inv(real_of_num((m : Num)) + real_of_num(1))
       #|  lnorm (:real^1) (&2) (\\z. (fn:num->real->complex) m (drop z) - f z) =\n                    lnorm (:real^1) (&2) (\\z. f z - fn m (drop z))
-      #|  e / &2 + e / &2
+      #|  (e : Real) / real_of_num(2) + e / real_of_num(2)
       #|  lnorm (:real^1) (&2) (\\z. (fn:num->real->complex) m (drop z) -\n      f z) +\n                lnorm (:real^1) (&2) (\\z. f z - fn n (drop z))
-      #|  N:num
-      #|  N:num
-      #|  e / &2
-      #|  e:real
-      #|  forall e. &0 < e ==> ?N. forall m n. m >= N /\\ n >= N\n        ==> lnorm (:real^1) (&2) (\\z. (gn:num->real^1->complex) m z - gn n z) <\n          e
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  (e : Real)
+      #|  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 m : Num, \226\136\128 n : Num, m >= N && n >= N \226\134\146 lnorm(UNIV, real_of_num(2), (z : Cart[Real, Unit]) => (gn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(m, z) - gn(n, z)) < e)
       #|  forall m n. lnorm (:real^1) (&2) (\\z. (gn:num->real^1->complex) m z - gn n z) =\n          lnorm (:real^1) (&2) (\\z. (fn:num->real->complex) m (drop z) - fn n\n            (drop z))
-      #|  inv(&N)
-      #|  inv(&n + &1)
+      #|  inv(real_of_num((N : Num)))
+      #|  inv(real_of_num((n : Num)) + real_of_num(1))
       #|  lnorm (:real^1) (&2) (\\z. (fn:num->real->complex) n (drop z) - f z) =\n                  lnorm (:real^1) (&2) (\\z. f z - fn n (drop z))
-      #|  n:num
-      #|  N:num
-      #|  N:num
-      #|  e:real
-      #|  e:real
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (e : Real)
       #|  forall e. &0 < e ==> ?N. forall n. n >= N\n        ==> lnorm (:real^1) (&2) (\\z. (fn:num->real->complex) n (drop z) - f z)\n          < e
       #|  forall n. (\\z:real^1. (fn:num->real->complex) n (drop z))\n         IN lspace (:real^1) (&2)
-      #|  forall n. (gn:num->real^1->complex) n IN lspace (:real^1) (&2)
+      #|  \226\136\128 n : Num, IN((gn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(n), lspace(UNIV, real_of_num(2)))
       #|  gn = \\n. \\z:real^1. fourier ((fn:num->real->complex) n) (drop z)
       #|  fn:num->real->complex
-      #|  forall f:real^1->complex. f IN lspace (:real^1) (&2)\n     ==> ?g:real^1->complex. g IN lspace (:real^1) (&2) /\\\n             lnorm (:real^1) (&2) g = lnorm (:real^1) (&2) f /\\\n             (forall h. schwartz h\n                  ==> integral (:real^1) (\\z. g z * h(drop z)) =\n                      integral (:real^1) (\\z. f z * fourier h (drop z)))
-      #|  c % x + b:real^1
-      #|  x:real^1
-      #|  forall c:real b:real^1. ~(c = &0)\n     ==> IMAGE (\\x. inv c % x + --(inv c % b)) (:real^1) = (:real^1)
-      #|  b:real^1
-      #|  c:real
-      #|  (:real^1)
-      #|  integral (:real^1) (ff:real^1->real^N)
-      #|  ff:real^1->real^N
-      #|  forall(ff:real^1->real^N) c b. ~(c = &0) /\\ ff integrable_on (:real^1)\n     ==> integral (:real^1) (\\x. ff(c % x + b)) = inv(abs c) % integral\n       (:real^1) ff
-      #|  b:real^1
-      #|  c:real
-      #|  (:real^1)
-      #|  integral (:real^1) (ff:real^1->real^N)
-      #|  ff:real^1->real^N
-      #|  forall(ff:real^1->real^N) c b. ~(c = &0) /\\ ff integrable_on (:real^1)\n     ==> (\\x. ff(c % x + b)) integrable_on (:real^1)
-      #|  &0 <= x ==> y <= x + y
-      #|  C <= t ==> max C t = t
-      #|  &0 <= y ==> x <= x + y
-      #|  t <= C ==> max C t = C
-      #|  t <= C \\/ C <= t
-      #|  forall C t k. &0 <= C /\\ &0 <= t ==> (max C t) pow k <= C pow k + t pow k
-      #|  (C:real) pow k + t pow k
-      #|  (max C t) pow k
-      #|  &2 pow k
-      #|  k:num
-      #|  t:real
-      #|  C:real
-      #|  (&2 * max C t) pow k
-      #|  forall C t k. &0 <= C /\\ &0 <= t\n     ==> (C + t) pow k <= &2 pow k * (C pow k + t pow k)
-      #|  (abs(c + s * x) + abs c) pow k
-      #|  &2 pow k * (abs(c + s * x) pow k + abs c pow k)
-      #|  abs((c + s * x) - c) pow k
-      #|  inv(abs s) pow k
-      #|  ~(s = &0)
-      #|  abs x = inv(abs s) * abs((c + s * x) - c)
-      #|  forall s c k x. ~(s = &0)\n     ==> abs x pow k <= inv(abs s pow k) * (&2 pow k * (abs(c + s * x) pow k +\n       abs c pow k))
-      #|  B0:real
-      #|  N:real
-      #|  abs c pow k
-      #|  Bk + abs c pow k * B0
-      #|  (abs(c + s * x) pow k + abs c pow k) * N
-      #|  &2 pow k
-      #|  &2 pow k * (Bk + abs c pow k * B0)
-      #|  &2 pow k * (abs(c + s * x) pow k + abs c pow k) * N
-      #|  inv(abs s pow k)
-      #|  N:real
-      #|  inv(abs s pow k) * (&2 pow k * (abs(c + s * x) pow k + abs c pow k))
-      #|  abs x pow k
-      #|  (inv(abs s pow k) * (&2 pow k * (abs(c + s * x) pow k + abs c pow\n    k))) * N
-      #|  forall s c k x N B0 Bk.\n     ~(s = &0) /\\ &0 <= N /\\\n     abs(c + s * x) pow k * N <= Bk /\\ N <= B0\n     ==> abs x pow k * N <=\n         inv(abs s pow k) * (&2 pow k * (Bk + abs c pow k * B0))
-      #|  x = y ==> a <= x ==> a <= y
-      #|  inv(abs s pow k) * (&2 pow k * (Bk + abs c pow k * B0))
-      #|  abs x pow k * norm((d:num->real->complex) m (c + s * x))
-      #|  abs s pow m
-      #|  ak * (asm * n):real = asm * (ak * n)
-      #|  x:real
-      #|  abs s pow m * (inv(abs s pow k) * (&2 pow k * (Bk + abs c pow k\n      * B0)))
-      #|  m:num
-      #|  k:num
-      #|  Bk:real
-      #|  m:num
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], IN(f, lspace(UNIV, real_of_num(2))) \226\134\146 (\226\136\131 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], IN(g, lspace(UNIV, real_of_num(2))) && lnorm(UNIV, real_of_num(2), g) == lnorm(UNIV, real_of_num(2), f) && (\226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 integral(UNIV, (z : Cart[Real, Unit]) => g(z) * h(drop(z))) == integral(UNIV, (z : Cart[Real, Unit]) => f(z) * fourier(h, drop(z)))))
+      #|  op_pct((c : Real), (x : Cart[Real, Unit])) + (b : Cart[Real, Unit])
+      #|  (x : Cart[Real, Unit])
+      #|  \226\136\128 c : Real, \226\136\128 b : Cart[Real, Unit], !(c == real_of_num(0)) \226\134\146 IMAGE((x : Cart[Real, Unit]) => op_pct(inv(c), x) + -op_pct(inv(c), b), UNIV) == UNIV
+      #|  (b : Cart[Real, Unit])
+      #|  (c : Real)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  integral(UNIV, (ff : (Cart[Real, Unit]) -> Cart[Real, N]))
+      #|  (ff : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  \226\136\128 ff : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 c : Real, \226\136\128 b : Cart[Real, Unit], !(c == real_of_num(0)) && integrable_on(ff, UNIV) \226\134\146 integral(UNIV, (x : Cart[Real, Unit]) => ff(op_pct(c, x) + b)) == op_pct(inv(abs(c)), integral(UNIV, ff))
+      #|  (b : Cart[Real, Unit])
+      #|  (c : Real)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  integral(UNIV, (ff : (Cart[Real, Unit]) -> Cart[Real, N]))
+      #|  (ff : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  \226\136\128 ff : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 c : Real, \226\136\128 b : Cart[Real, Unit], !(c == real_of_num(0)) && integrable_on(ff, UNIV) \226\134\146 integrable_on((x : Cart[Real, Unit]) => ff(op_pct(c, x) + b), UNIV)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 (y : Real) <= x + y
+      #|  (C : Real) <= (t : Real) \226\134\146 max(C, t) == t
+      #|  real_of_num(0) <= (y : Real) \226\134\146 (x : Real) <= x + y
+      #|  (t : Real) <= (C : Real) \226\134\146 max(C, t) == C
+      #|  (t : Real) <= (C : Real) || C <= t
+      #|  \226\136\128 C : Real, \226\136\128 t : Real, \226\136\128 k : Num, real_of_num(0) <= C && real_of_num(0) <= t \226\134\146 pow(max(C, t), k) <= pow(C, k) + pow(t, k)
+      #|  pow((C : Real), (k : Num)) + pow((t : Real), k)
+      #|  pow(max((C : Real), (t : Real)), (k : Num))
+      #|  pow(real_of_num(2), (k : Num))
+      #|  (k : Num)
+      #|  (t : Real)
+      #|  (C : Real)
+      #|  pow(real_of_num(2) * max((C : Real), (t : Real)), (k : Num))
+      #|  \226\136\128 C : Real, \226\136\128 t : Real, \226\136\128 k : Num, real_of_num(0) <= C && real_of_num(0) <= t \226\134\146 pow(C + t, k) <= pow(real_of_num(2), k) * (pow(C, k) + pow(t, k))
+      #|  pow(abs((c : Real) + (s : Real) * (x : Real)) + abs(c), (k : Num))
+      #|  pow(real_of_num(2), (k : Num)) * (pow(abs((c : Real) + (s : Real) * (x : Real)), k) + pow(abs(c), k))
+      #|  pow(abs((c : Real) + (s : Real) * (x : Real) - c), (k : Num))
+      #|  pow(inv(abs((s : Real))), (k : Num))
+      #|  !((s : Real) == real_of_num(0))
+      #|  abs((x : Real)) == inv(abs((s : Real))) * abs((c : Real) + s * x - c)
+      #|  \226\136\128 s : Real, \226\136\128 c : Real, \226\136\128 k : Num, \226\136\128 x : Real, !(s == real_of_num(0)) \226\134\146 pow(abs(x), k) <= inv(pow(abs(s), k)) * (pow(real_of_num(2), k) * (pow(abs(c + s * x), k) + pow(abs(c), k)))
+      #|  (B0 : Real)
+      #|  (N : Real)
+      #|  pow(abs((c : Real)), (k : Num))
+      #|  (Bk : Real) + pow(abs((c : Real)), (k : Num)) * (B0 : Real)
+      #|  (pow(abs((c : Real) + (s : Real) * (x : Real)), (k : Num)) + pow(abs(c), k)) * (N : Real)
+      #|  pow(real_of_num(2), (k : Num))
+      #|  pow(real_of_num(2), (k : Num)) * ((Bk : Real) + pow(abs((c : Real)), k) * (B0 : Real))
+      #|  pow(real_of_num(2), (k : Num)) * ((pow(abs((c : Real) + (s : Real) * (x : Real)), k) + pow(abs(c), k)) * (N : Real))
+      #|  inv(pow(abs((s : Real)), (k : Num)))
+      #|  (N : Real)
+      #|  inv(pow(abs((s : Real)), (k : Num))) * (pow(real_of_num(2), k) * (pow(abs((c : Real) + s * (x : Real)), k) + pow(abs(c), k)))
+      #|  pow(abs((x : Real)), (k : Num))
+      #|  inv(pow(abs((s : Real)), (k : Num))) * (pow(real_of_num(2), k) * (pow(abs((c : Real) + s * (x : Real)), k) + pow(abs(c), k))) * (N : Real)
+      #|  \226\136\128 s : Real, \226\136\128 c : Real, \226\136\128 k : Num, \226\136\128 x : Real, \226\136\128 N : Real, \226\136\128 B0 : Real, \226\136\128 Bk : Real, !(s == real_of_num(0)) && real_of_num(0) <= N && pow(abs(c + s * x), k) * N <= Bk && N <= B0 \226\134\146 pow(abs(x), k) * N <= inv(pow(abs(s), k)) * (pow(real_of_num(2), k) * (Bk + pow(abs(c), k) * B0))
+      #|  (x : Real) == (y : Real) \226\134\146 (a : Real) <= x \226\134\146 a <= y
+      #|  inv(pow(abs((s : Real)), (k : Num))) * (pow(real_of_num(2), k) * ((Bk : Real) + pow(abs((c : Real)), k) * (B0 : Real)))
+      #|  pow(abs((x : Real)), (k : Num)) * norm((d : (Num, Real) -> Cart[Real, Tybit0[Unit]])((m : Num), (c : Real) + (s : Real) * x))
+      #|  pow(abs((s : Real)), (m : Num))
+      #|  (ak : Real) * ((asm : Real) * (n : Real)) == asm * (ak * n)
+      #|  (x : Real)
+      #|  pow(abs((s : Real)), (m : Num)) * (inv(pow(abs(s), (k : Num))) * (pow(real_of_num(2), k) * ((Bk : Real) + pow(abs((c : Real)), k) * (B0 : Real))))
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (Bk : Real)
+      #|  (m : Num)
       #|  0
-      #|  B0:real
-      #|  m:num
-      #|  k:num
-      #|  s:real
-      #|  c:real
-      #|  d:num->real->complex
-      #|  \\n:num. \\x. Cx s pow n * (d:num->real->complex) n (c + s * x)
-      #|  d:num->real->complex
-      #|  forall phi:real->complex s c. schwartz phi /\\ ~(s = &0)\n     ==> schwartz (\\x. phi(c + s * x))
-      #|  B:real
-      #|  abs x pow k * norm((d:num->real->complex) m x)
-      #|  norm(c:complex)
-      #|  forall a b cc:real. a * b * cc = b * (a *\n      cc)
-      #|  x:real
-      #|  norm(c:complex) * B
-      #|  m:num
-      #|  k:num
-      #|  B:real
-      #|  \\n x. c * (d:num->real->complex) n x
-      #|  d:num->real->complex
-      #|  forall(h:real->complex) c. schwartz h ==> schwartz (\\x. c * h x)
-      #|  y:real
-      #|  phi:real->complex
-      #|  y:real
-      #|  fourier(phi:real->complex)
-      #|  forall phi:real->complex. schwartz phi\n     ==> (forall y. fourier (\\x. fourier phi (--x)) y = phi y)
-      #|  (\\u. (psi:real->complex)(u + b)) = (\\u. psi(b + &1 * u))
-      #|  x:real
-      #|  b:real
-      #|  psi:real->complex
-      #|  x:real
-      #|  (\\x. cexp(ii * Cx b * Cx x) * (phi:real->complex) x) = fourier (\\u. psi(u +\n     b))
-      #|  forall x. fourier (psi:real->complex) x = phi x
-      #|  schwartz (psi:real->complex)
-      #|  psi = \\x. fourier (phi:real->complex) (--x)
-      #|  forall phi:real->complex b. schwartz phi\n     ==> schwartz (\\x. cexp(ii * Cx b * Cx x) * phi x)
-      #|  (\\x. (phi:real->complex)(mJ * (x - a))) = (\\x. phi(--(mJ * a) + mJ * x))
-      #|  forall(phi:real->complex) mJ a b. schwartz phi /\\ ~(mJ = &0)\n     ==> schwartz (\\x. cexp(ii * Cx b * Cx x) * phi(mJ * (x - a)))
-      #|  ~(sqrt mJ = &0)
-      #|  mJ = sqrt mJ * sqrt mJ
-      #|  mJ = sqrt mJ * sqrt mJ
-      #|  ~(sqrt mJ = &0)
-      #|  forall mJ. &0 < mJ ==> sqrt mJ * (&1 / mJ) = &1 / sqrt mJ
-      #|  drop z
-      #|  z:real^1
-      #|  (\\z. fourier (f:real->complex) (drop z) * cnj(fourier (g:real->complex)\n     (drop z))) =\n    (\\z:real^1. Cx(&0))
-      #|  forall(f:real->complex) (g:real->complex). schwartz f /\\ schwartz g /\\\n     (forall u. fourier f u = Cx(&0) \\/ fourier g u = Cx(&0))\n     ==> integral (:real^1) (\\z. f(drop z) * cnj(g(drop z))) = Cx(&0)
-      #|  convol (f:real->complex) (g:real->complex) (x:real) =\n    integral (:real^1) (\\t. f(x - drop t) * g(drop t))
-      #|  schwartz (g:real->complex)
-      #|  t:real^1
-      #|  B:real
-      #|  schwartz (\\u.\n        (f:real->complex)(x - u))
-      #|  x + -- &1 * u = x - u
-      #|  ~(-- &1 = &0)
-      #|  x:real
-      #|  -- &1:real
-      #|  f:real->complex
-      #|  ?B. forall u. norm((f:real->complex)(x - u)) <= B
-      #|  schwartz (\\u. (f:real->complex)(x -\n      u))
-      #|  ~(-- &1 = &0)
-      #|  x + -- &1 * u = x - u
-      #|  x:real
-      #|  -- &1:real
-      #|  f:real->complex
-      #|  schwartz (\\u. (f:real->complex)(x - u))
-      #|  (:real^1)
-      #|  \\t:real^1. (g:real->complex)(drop t)
-      #|  \\t:real^1. (f:real->complex)(x - drop t)
-      #|  ( * ):complex->complex->complex
-      #|  forall(f:real->complex) g x. schwartz f /\\ schwartz g\n     ==> (\\t. f(x - drop t) * g(drop t)) absolutely_integrable_on (:real^1)
-      #|  forall(f:real->complex) g x. schwartz f /\\ schwartz g\n     ==> (\\t. f(x - drop t) * g(drop t)) integrable_on (:real^1)
-      #|  t:real^1
-      #|  x:real
-      #|  g:real->complex
-      #|  f:real->complex
-      #|  forall(f:real->complex) g x. schwartz f /\\ schwartz g\n     ==> norm(convol f g x)\n         <= drop(integral (:real^1) (\\t. lift(norm(f(x - drop t)) * norm(g(drop\n           t)))))
-      #|  y - a:real^N
-      #|  y:real^N
-      #|  forall a:real^N. IMAGE (\\x. a + x) (:real^N) = (:real^N)
-      #|  a:real^1
-      #|  (:real^1)
-      #|  \\x:real^1. lift(norm((f:real^1->complex) x))
-      #|  forall(f:real^1->complex) a.\n     integral (:real^1) (\\x. lift(norm(f(a + x)))) =\n     integral (:real^1) (\\x. lift(norm(f x)))
-      #|  forall(f:real->complex) w. schwartz f\n     ==> (\\u. cexp(--(ii * Cx w * Cx(drop u))) * f(drop u))\n       absolutely_integrable_on (:real^1)
-      #|  forall a b c p q:complex. a * b = c ==> (a * p) * (b * q) = c * (p * q)
-      #|  drop(x:real^1)
-      #|  g:real->complex
-      #|  f:real->complex
-      #|  (\\y:real^1. (f:real->complex)(drop x - drop y) * g(drop y)) integrable_on\n     (:real^1)
-      #|  y:real^1
-      #|  integral (:real^1)\n     (\\y. cexp(--(ii * Cx w * Cx(drop x))) *\n          ((f:real->complex)(drop x - drop y) * (g:real->complex)(drop y)))
-      #|  forall(f:real->complex) g w x:real^1. schwartz f /\\ schwartz g\n    ==> integral (:real^1) (\\y. (\\u. cexp(--(ii * Cx w * Cx(drop u))) * f(drop\n      u)) (x - y) *\n                                (\\u. cexp(--(ii * Cx w * Cx(drop u))) * g(drop\n                                  u)) y) =\n        cexp(--(ii * Cx w * Cx(drop x))) * convol f g (drop x)
-      #|  \\u:real^1. cexp(--(ii * Cx w * Cx(drop u))) * (g:real->complex)(drop u)
-      #|  \\u:real^1. cexp(--(ii * Cx w * Cx(drop u))) * (f:real->complex)(drop u)
-      #|  ( * ):complex->complex->complex
-      #|  x:real^1
-      #|  integral (:real^1) (\\x. cexp(--(ii * Cx w * Cx(drop x))) * convol f g (drop\n     x)) =\n    integral (:real^1)\n      (\\x. integral (:real^1)\n        (\\y. (\\u. cexp(--(ii * Cx w * Cx(drop u))) * (f:real->complex)(drop u))\n          (x - y) *\n             (\\u. cexp(--(ii * Cx w * Cx(drop u))) * (g:real->complex)(drop u))\n               y))
-      #|  forall(f:real->complex) g w. schwartz f /\\ schwartz g\n     ==> fourier (convol f g) w = Cx(sqrt(&2 * pi)) * fourier f w * fourier g\n       w
-      #|  v:real^1
-      #|  B:real
-      #|  B:real
-      #|  schwartz (g:real->complex)
-      #|  forall g:real->complex. schwartz g\n     ==> (\\v. g(drop v)) measurable_on (:real^1) /\\ bounded (IMAGE (\\v. g(drop\n       v)) (:real^1))
-      #|  schwartz\n      (g:real->complex)
-      #|  schwartz\n      (g:real->complex)
-      #|  schwartz (f:real->complex)
-      #|  y:real^1
-      #|  x:real^1
-      #|  (\\x. convol f g (drop x)) =\n    (\\x. integral (:real^1) (\\y. (\\v. (f:real->complex)(drop v)) (x - y) *\n                                 (\\v. (g:real->complex)(drop v)) y))
-      #|  forall(f:real->complex) g. schwartz f /\\ schwartz g\n     ==> (\\x. convol f g (drop x)) continuous_on (:real^1)
-      #|  (\\t. lift((Kf * abs(u - w)) * norm((g:real->complex)(drop t)))) =\n      (\\t. (Kf * abs(u - w)) % lift(norm((g:real->complex)(drop t))))
-      #|  Kf * abs(u - w) * n = (Kf * abs(u - w)) * n
-      #|  abs((u - drop t) - (w - drop t)) = abs(u - w)
-      #|  t:real^1
-      #|  (\\t. lift((Kf * abs(u - w)) * norm((g:real->complex)(drop t)))) =\n        (\\t. (Kf * abs(u - w)) % lift(norm((g:real->complex)(drop t))))
-      #|  Kf * abs(u - w) * n = (Kf * abs(u - w)) * n
-      #|  (:real^1)
-      #|  \\t. (f:real->complex)(w - drop t) * g(drop t)
-      #|  \\t. (f:real->complex)(u - drop t) * g(drop t)
-      #|  drop(integral (:real^1) (\\t. lift(Kf * abs(u - w) *\n    norm((g:real->complex)(drop t)))))
-      #|  (:real^1)
-      #|  \\t. (f:real->complex)(w - drop t) * g(drop t)
-      #|  \\t. (f:real->complex)(u - drop t) * g(drop t)
-      #|  w:real
-      #|  u:real
-      #|  Kf * Ng:real
-      #|  &0 <= Ng
-      #|  Ng = drop(integral (:real^1) (\\t.\n    lift(norm((g:real->complex)(drop t)))))
-      #|  g:real->complex
-      #|  (\\t. lift(norm((g:real->complex)(drop t)))) integrable_on (:real^1)
-      #|  Kf:real
-      #|  f:real->complex
-      #|  forall(f:real->complex) g. schwartz f /\\ schwartz g\n     ==> ?K. &0 <= K /\\\n             forall u w. norm(convol f g u - convol f g w) <= K * abs(u - w)
-      #|  drop z
-      #|  g:real->complex
-      #|  f:real->complex
-      #|  z:real^1
-      #|  g:real->complex
-      #|  f:real->complex
-      #|  \\z. lift(norm((g:real->complex)(drop z)))
-      #|  \\z. lift(norm((f:real->complex)(drop z)))
-      #|  \\x y. lift(drop x * drop y)
-      #|  \\z. integral (:real^1)\n          (\\t. lift(norm((f:real->complex)(drop z - drop t)) *\n                    norm((g:real->complex)(drop t))))
-      #|  forall(f:real->complex) g. schwartz f /\\ schwartz g\n     ==> (\\z. convol f g (drop z)) absolutely_integrable_on (:real^1)
-      #|  Cx(inv(sqrt(&2 * pi))) * Cx(sqrt(&2 * pi)) = Cx(&1)
-      #|  a * s * b = s * a * b
-      #|  integral (:real^1)\n      (\\y. cexp(ii * Cx x * Cx(drop y)) * Cx(sqrt(&2 * pi)) * fourier gtm (drop\n        y)) =\n    Cx(sqrt(&2 * pi)) * II
-      #|  II = integral (:real^1)\n     (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier gtm (drop y))
-      #|  x:real
-      #|  gtm:real->complex
-      #|  (\\z. fourier (convol cf cg) (drop z)) =\n        (\\z. Cx(sqrt(&2 * pi)) * fourier gtm (drop z))
-      #|  abs((x - v) - x) = abs v
-      #|  v:real
-      #|  &1
-      #|  Kc:real
-      #|  x:real
-      #|  convol cf cg
-      #|  Kc:real
-      #|  cg:real->complex
-      #|  cf:real->complex
-      #|  forall(cf:real->complex) cg (gtm:real->complex).\n     schwartz cf /\\ schwartz cg /\\ schwartz gtm /\\\n     (forall w. fourier (convol cf cg) w = Cx(sqrt(&2 * pi)) * fourier gtm w)\n     ==> forall x. convol cf cg x = Cx(sqrt(&2 * pi)) * gtm x
-      #|  forall u w. norm(convol cf cg u - convol cf cg w) <= Kc * abs(u\n              - w)
-      #|  x:real
-      #|  x - v:real
+      #|  (B0 : Real)
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (s : Real)
+      #|  (c : Real)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (n : Num) => (x : Real) => pow(Cx((s : Real)), n) * (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(n, (c : Real) + s * x)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 phi : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : Real, \226\136\128 c : Real, schwartz(phi) && !(s == real_of_num(0)) \226\134\146 schwartz((x : Real) => phi(c + s * x))
+      #|  (B : Real)
+      #|  pow(abs((x : Real)), (k : Num)) * norm((d : (Num, Real) -> Cart[Real, Tybit0[Unit]])((m : Num), x))
+      #|  norm((c : Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 cc : Real, a * (b * cc) == b * (a * cc)
+      #|  (x : Real)
+      #|  norm((c : Cart[Real, Tybit0[Unit]])) * (B : Real)
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (B : Real)
+      #|  (n : Num) => (x : Real) => (c : Cart[Real, Tybit0[Unit]]) * (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])(n, x)
+      #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 schwartz((x : Real) => c * h(x))
+      #|  (y : Real)
+      #|  (phi : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (y : Real)
+      #|  fourier((phi : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\128 phi : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(phi) \226\134\146 (\226\136\128 y : Real, fourier((x : Real) => fourier(phi, -x), y) == phi(y))
+      #|  ((u : Real) => (psi : (Real) -> Cart[Real, Tybit0[Unit]])(u + (b : Real))) == ((u : Real) => psi(b + real_of_num(1) * u))
+      #|  (x : Real)
+      #|  (b : Real)
+      #|  (psi : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (x : Real)
+      #|  ((x : Real) => cexp(ii * (Cx((b : Real)) * Cx(x))) * (phi : (Real) -> Cart[Real, Tybit0[Unit]])(x)) == fourier((u : Real) => (psi : (Real) -> Cart[Real, Tybit0[Unit]])(u + b))
+      #|  \226\136\128 x : Real, fourier((psi : (Real) -> Cart[Real, Tybit0[Unit]]), x) == (phi : (Real) -> Cart[Real, Tybit0[Unit]])(x)
+      #|  schwartz((psi : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  (psi : (Real) -> Cart[Real, Tybit0[Unit]]) == ((x : Real) => fourier((phi : (Real) -> Cart[Real, Tybit0[Unit]]), -x))
+      #|  \226\136\128 phi : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 b : Real, schwartz(phi) \226\134\146 schwartz((x : Real) => cexp(ii * (Cx(b) * Cx(x))) * phi(x))
+      #|  ((x : Real) => (phi : (Real) -> Cart[Real, Tybit0[Unit]])((mJ : Real) * (x - (a : Real)))) == ((x : Real) => phi(-(mJ * a) + mJ * x))
+      #|  \226\136\128 phi : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 mJ : Real, \226\136\128 a : Real, \226\136\128 b : Real, schwartz(phi) && !(mJ == real_of_num(0)) \226\134\146 schwartz((x : Real) => cexp(ii * (Cx(b) * Cx(x))) * phi(mJ * (x - a)))
+      #|  !(sqrt((mJ : Real)) == real_of_num(0))
+      #|  (mJ : Real) == sqrt(mJ) * sqrt(mJ)
+      #|  (mJ : Real) == sqrt(mJ) * sqrt(mJ)
+      #|  !(sqrt((mJ : Real)) == real_of_num(0))
+      #|  \226\136\128 mJ : Real, real_of_num(0) < mJ \226\134\146 sqrt(mJ) * (real_of_num(1) / mJ) == real_of_num(1) / sqrt(mJ)
+      #|  drop((z : Cart[Real, Unit]))
+      #|  (z : Cart[Real, Unit])
+      #|  ((z : Cart[Real, Unit]) => fourier((f : (Real) -> Cart[Real, Tybit0[Unit]]), drop(z)) * cnj(fourier((g : (Real) -> Cart[Real, Tybit0[Unit]]), drop(z)))) == ((z : Cart[Real, Unit]) => Cx(real_of_num(0)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(f) && schwartz(g) && (\226\136\128 u : Real, fourier(f, u) == Cx(real_of_num(0)) || fourier(g, u) == Cx(real_of_num(0))) \226\134\146 integral(UNIV, (z : Cart[Real, Unit]) => f(drop(z)) * cnj(g(drop(z)))) == Cx(real_of_num(0))
+      #|  (convol : ((Real) -> Cart[Real, Tybit0[Unit]], (Real) -> Cart[Real, Tybit0[Unit]], Real) -> Cart[Real, Tybit0[Unit]])((f : (Real) -> Cart[Real, Tybit0[Unit]]), (g : (Real) -> Cart[Real, Tybit0[Unit]]), (x : Real)) == integral(UNIV, (t : Cart[Real, Unit]) => f(x - drop(t)) * g(drop(t)))
+      #|  schwartz((g : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  (t : Cart[Real, Unit])
+      #|  (B : Real)
+      #|  schwartz((u : Real) => (f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real) - u))
+      #|  (x : Real) + -real_of_num(1) * (u : Real) == x - u
+      #|  !(-real_of_num(1) == real_of_num(0))
+      #|  (x : Real)
+      #|  -real_of_num(1)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\131 B : Real, \226\136\128 u : Real, norm((f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real) - u)) <= B
+      #|  schwartz((u : Real) => (f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real) - u))
+      #|  !(-real_of_num(1) == real_of_num(0))
+      #|  (x : Real) + -real_of_num(1) * (u : Real) == x - u
+      #|  (x : Real)
+      #|  -real_of_num(1)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  schwartz((u : Real) => (f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real) - u))
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (t : Cart[Real, Unit]) => (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(t))
+      #|  (t : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real) - drop(t))
+      #|  op_star
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, schwartz(f) && schwartz(g) \226\134\146 absolutely_integrable_on((t : Cart[Real, Unit]) => f(x - drop(t)) * g(drop(t)), UNIV)
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, schwartz(f) && schwartz(g) \226\134\146 integrable_on((t : Cart[Real, Unit]) => f(x - drop(t)) * g(drop(t)), UNIV)
+      #|  (t : Cart[Real, Unit])
+      #|  (x : Real)
+      #|  (g : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, schwartz(f) && schwartz(g) \226\134\146 norm(convol(f, g, x)) <= drop(integral(UNIV, (t : Cart[Real, Unit]) => lift(norm(f(x - drop(t))) * norm(g(drop(t))))))
+      #|  (y : Cart[Real, N]) - (a : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  \226\136\128 a : Cart[Real, N], IMAGE((x : Cart[Real, N]) => a + x, UNIV) == UNIV
+      #|  (a : Cart[Real, Unit])
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (x : Cart[Real, Unit]) => lift(norm((f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Unit], integral(UNIV, (x : Cart[Real, Unit]) => lift(norm(f(a + x)))) == integral(UNIV, (x : Cart[Real, Unit]) => lift(norm(f(x))))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 w : Real, schwartz(f) \226\134\146 absolutely_integrable_on((u : Cart[Real, Unit]) => cexp(-(ii * (Cx(w) * Cx(drop(u))))) * f(drop(u)), UNIV)
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 p : Cart[Real, Tybit0[Unit]], \226\136\128 q : Cart[Real, Tybit0[Unit]], a * b == c \226\134\146 a * p * (b * q) == c * (p * q)
+      #|  drop((x : Cart[Real, Unit]))
+      #|  (g : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  integrable_on((y : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop((x : Cart[Real, Unit])) - drop(y)) * (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(y)), UNIV)
+      #|  (y : Cart[Real, Unit])
+      #|  integral(UNIV, (y : Cart[Real, Unit]) => cexp(-(ii * (Cx((w : Real)) * Cx(drop((x : Cart[Real, Unit])))))) * ((f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x) - drop(y)) * (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(y))))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 w : Real, \226\136\128 x : Cart[Real, Unit], schwartz(f) && schwartz(g) \226\134\146 integral(UNIV, (y : Cart[Real, Unit]) => ((u : Cart[Real, Unit]) => cexp(-(ii * (Cx(w) * Cx(drop(u))))) * f(drop(u)))(x - y) * ((u : Cart[Real, Unit]) => cexp(-(ii * (Cx(w) * Cx(drop(u))))) * g(drop(u)))(y)) == cexp(-(ii * (Cx(w) * Cx(drop(x))))) * convol(f, g, drop(x))
+      #|  (u : Cart[Real, Unit]) => cexp(-(ii * (Cx((w : Real)) * Cx(drop(u))))) * (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(u))
+      #|  (u : Cart[Real, Unit]) => cexp(-(ii * (Cx((w : Real)) * Cx(drop(u))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(u))
+      #|  op_star
+      #|  (x : Cart[Real, Unit])
+      #|  integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx((w : Real)) * Cx(drop(x))))) * convol((f : (Real) -> Cart[Real, Tybit0[Unit]]), (g : (Real) -> Cart[Real, Tybit0[Unit]]), drop(x))) == integral(UNIV, (x : Cart[Real, Unit]) => integral(UNIV, (y : Cart[Real, Unit]) => ((u : Cart[Real, Unit]) => cexp(-(ii * (Cx(w) * Cx(drop(u))))) * f(drop(u)))(x - y) * ((u : Cart[Real, Unit]) => cexp(-(ii * (Cx(w) * Cx(drop(u))))) * g(drop(u)))(y)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 w : Real, schwartz(f) && schwartz(g) \226\134\146 fourier(convol(f, g), w) == Cx(sqrt(real_of_num(2) * pi)) * (fourier(f, w) * fourier(g, w))
+      #|  (v : Cart[Real, Unit])
+      #|  (B : Real)
+      #|  (B : Real)
+      #|  schwartz((g : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(g) \226\134\146 measurable_on((v : Cart[Real, Unit]) => g(drop(v)), UNIV) && bounded(IMAGE((v : Cart[Real, Unit]) => g(drop(v)), UNIV))
+      #|  schwartz((g : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  schwartz((g : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  schwartz((f : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  (y : Cart[Real, Unit])
+      #|  (x : Cart[Real, Unit])
+      #|  ((x : Cart[Real, Unit]) => convol((f : (Real) -> Cart[Real, Tybit0[Unit]]), (g : (Real) -> Cart[Real, Tybit0[Unit]]), drop(x))) == ((x : Cart[Real, Unit]) => integral(UNIV, (y : Cart[Real, Unit]) => ((v : Cart[Real, Unit]) => f(drop(v)))(x - y) * ((v : Cart[Real, Unit]) => g(drop(v)))(y)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(f) && schwartz(g) \226\134\146 continuous_on((x : Cart[Real, Unit]) => convol(f, g, drop(x)), UNIV)
+      #|  ((t : Cart[Real, Unit]) => lift((Kf : Real) * abs((u : Real) - (w : Real)) * norm((g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(t))))) == ((t : Cart[Real, Unit]) => op_pct(Kf * abs(u - w), lift(norm(g(drop(t))))))
+      #|  (Kf : Real) * (abs((u : Real) - (w : Real)) * (n : Real)) == Kf * abs(u - w) * n
+      #|  abs((u : Real) - drop((t : Cart[Real, Unit])) - ((w : Real) - drop(t))) == abs(u - w)
+      #|  (t : Cart[Real, Unit])
+      #|  ((t : Cart[Real, Unit]) => lift((Kf : Real) * abs((u : Real) - (w : Real)) * norm((g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(t))))) == ((t : Cart[Real, Unit]) => op_pct(Kf * abs(u - w), lift(norm(g(drop(t))))))
+      #|  (Kf : Real) * (abs((u : Real) - (w : Real)) * (n : Real)) == Kf * abs(u - w) * n
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (t : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])((w : Real) - drop(t)) * (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(t))
+      #|  (t : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])((u : Real) - drop(t)) * (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(t))
+      #|  drop(integral(UNIV, (t : Cart[Real, Unit]) => lift((Kf : Real) * (abs((u : Real) - (w : Real)) * norm((g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(t)))))))
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (t : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])((w : Real) - drop(t)) * (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(t))
+      #|  (t : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])((u : Real) - drop(t)) * (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(t))
+      #|  (w : Real)
+      #|  (u : Real)
+      #|  (Kf : Real) * (Ng : Real)
+      #|  real_of_num(0) <= (Ng : Real)
+      #|  (Ng : Real) == drop(integral(UNIV, (t : Cart[Real, Unit]) => lift(norm((g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(t))))))
+      #|  (g : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  integrable_on((t : Cart[Real, Unit]) => lift(norm((g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(t)))), UNIV)
+      #|  (Kf : Real)
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(f) && schwartz(g) \226\134\146 (\226\136\131 K : Real, real_of_num(0) <= K && (\226\136\128 u : Real, \226\136\128 w : Real, norm(convol(f, g, u) - convol(f, g, w)) <= K * abs(u - w)))
+      #|  drop((z : Cart[Real, Unit]))
+      #|  (g : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Unit])
+      #|  (g : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Unit]) => lift(norm((g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))))
+      #|  (z : Cart[Real, Unit]) => lift(norm((f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))))
+      #|  (x : Cart[Real, Unit]) => (y : Cart[Real, Unit]) => lift(drop(x) * drop(y))
+      #|  (z : Cart[Real, Unit]) => integral(UNIV, (t : Cart[Real, Unit]) => lift(norm((f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z) - drop(t))) * norm((g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(t)))))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(f) && schwartz(g) \226\134\146 absolutely_integrable_on((z : Cart[Real, Unit]) => convol(f, g, drop(z)), UNIV)
+      #|  Cx(inv(sqrt(real_of_num(2) * pi))) * Cx(sqrt(real_of_num(2) * pi)) == Cx(real_of_num(1))
+      #|  (a : Cart[Real, Tybit0[Unit]]) * ((s : Cart[Real, Tybit0[Unit]]) * (b : Cart[Real, Tybit0[Unit]])) == s * (a * b)
+      #|  integral(UNIV, (y : Cart[Real, Unit]) => cexp(ii * (Cx((x : Real)) * Cx(drop(y)))) * (Cx(sqrt(real_of_num(2) * pi)) * fourier((gtm : (Real) -> Cart[Real, Tybit0[Unit]]), drop(y)))) == Cx(sqrt(real_of_num(2) * pi)) * (II : Cart[Real, Tybit0[Unit]])
+      #|  (II : Cart[Real, Tybit0[Unit]]) == integral(UNIV, (y : Cart[Real, Unit]) => cexp(ii * (Cx((x : Real)) * Cx(drop(y)))) * fourier((gtm : (Real) -> Cart[Real, Tybit0[Unit]]), drop(y)))
+      #|  (x : Real)
+      #|  (gtm : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  ((z : Cart[Real, Unit]) => fourier(convol((cf : (Real) -> Cart[Real, Tybit0[Unit]]), (cg : (Real) -> Cart[Real, Tybit0[Unit]])), drop(z))) == ((z : Cart[Real, Unit]) => Cx(sqrt(real_of_num(2) * pi)) * fourier((gtm : (Real) -> Cart[Real, Tybit0[Unit]]), drop(z)))
+      #|  abs((x : Real) - (v : Real) - x) == abs(v)
+      #|  (v : Real)
+      #|  real_of_num(1)
+      #|  (Kc : Real)
+      #|  (x : Real)
+      #|  convol((cf : (Real) -> Cart[Real, Tybit0[Unit]]), (cg : (Real) -> Cart[Real, Tybit0[Unit]]))
+      #|  (Kc : Real)
+      #|  (cg : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  (cf : (Real) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 cf : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 cg : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 gtm : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(cf) && schwartz(cg) && schwartz(gtm) && (\226\136\128 w : Real, fourier(convol(cf, cg), w) == Cx(sqrt(real_of_num(2) * pi)) * fourier(gtm, w)) \226\134\146 (\226\136\128 x : Real, convol(cf, cg, x) == Cx(sqrt(real_of_num(2) * pi)) * gtm(x))
+      #|  \226\136\128 u : Real, \226\136\128 w : Real, norm(convol((cf : (Real) -> Cart[Real, Tybit0[Unit]]), (cg : (Real) -> Cart[Real, Tybit0[Unit]]), u) - convol(cf, cg, w)) <= (Kc : Real) * abs(u - w)
+      #|  (x : Real)
+      #|  (x : Real) - (v : Real)
       #|fourier =  |- (#forall:fun(fun(real,bool),bool) (\y:real. (#forall:fun(fun(fun(real,cart(real,tybit0(1))),bool),bool) (\f:fun(real,cart(real,tybit0(1))). ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) ((#fourier:fun(fun(real,cart(real,tybit0(1))),fun(real,cart(real,tybit0(1)))) f:fun(real,cart(real,tybit0(1)))) y:real)) ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) ((#complex_div:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#Cx:fun(real,cart(real,tybit0(1))) (#sqrt:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) #pi:real))))) ((#integral:fun(fun(cart(real,1),bool),fun(fun(cart(real,1),cart(real,tybit0(1))),cart(real,tybit0(1)))) #UNIV:fun(cart(real,1),bool)) (\x:cart(real,1). ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) (#vector_neg:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) #ii:cart(real,tybit0(1))) ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#Cx:fun(real,cart(real,tybit0(1))) y:real)) (#Cx:fun(real,cart(real,tybit0(1))) (#drop:fun(cart(real,1),real) x:cart(real,1)))))))) (f:fun(real,cart(real,tybit0(1))) (#drop:fun(cart(real,1),real) x:cart(real,1))))))))))))
       #|fourier_kernel =  |- (#forall:fun(fun(real,bool),bool) (\y:real. (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) ((#fourier_kernel:fun(real,fun(real,cart(real,tybit0(1)))) y:real) x:real)) (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) (#vector_neg:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) #ii:cart(real,tybit0(1))) ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#Cx:fun(real,cart(real,tybit0(1))) y:real)) (#Cx:fun(real,cart(real,tybit0(1))) x:real))))))))))
       #|FOURIER_LMUL =  |- (#forall:fun(fun(fun(real,cart(real,tybit0(1))),bool),bool) (\f:fun(real,cart(real,tybit0(1))). (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\c:cart(real,tybit0(1)). (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#integrable_on:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(fun(cart(real,1),bool),bool)) (\x:cart(real,1). ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) (#vector_neg:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) #ii:cart(real,tybit0(1))) ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#Cx:fun(real,cart(real,tybit0(1))) y:real)) (#Cx:fun(real,cart(real,tybit0(1))) (#drop:fun(cart(real,1),real) x:cart(real,1)))))))) (f:fun(real,cart(real,tybit0(1))) (#drop:fun(cart(real,1),real) x:cart(real,1)))))) #UNIV:fun(cart(real,1),bool))) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) ((#fourier:fun(fun(real,cart(real,tybit0(1))),fun(real,cart(real,tybit0(1)))) (\x:real. ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) c:cart(real,tybit0(1))) (f:fun(real,cart(real,tybit0(1))) x:real)))) y:real)) ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) c:cart(real,tybit0(1))) ((#fourier:fun(fun(real,cart(real,tybit0(1))),fun(real,cart(real,tybit0(1)))) f:fun(real,cart(real,tybit0(1)))) y:real))))))))))
