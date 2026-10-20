@@ -74588,16 +74588,16 @@ Generating HOL version of proof
 0..0..2..5..13..26..61..108..solved at 177
 0..0..0..2..5..solved at 10
 Quaternions/qanal quotations (139):
-  vector_neg:quat->quat
-  vector_add:quat->quat->quat
-  vector_sub:quat->quat->quat
-  quat_mul:quat->quat->quat
-  quat_pow:quat->num->quat
-  quat_inv:quat->quat
-  quat_Re:quat->real
-  quat_ii:quat
-  quat_cnj:quat->quat
-  quat_real:quat->bool
+  (op_minus_minus : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])
+  (op_plus : (Cart[Real, Tybit0[Tybit0[Unit]]], Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])
+  (op_minus : (Cart[Real, Tybit0[Tybit0[Unit]]], Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])
+  (quat_mul : (Cart[Real, Tybit0[Tybit0[Unit]]], Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])
+  (quat_pow : (Cart[Real, Tybit0[Tybit0[Unit]]], Num) -> Cart[Real, Tybit0[Tybit0[Unit]]])
+  (quat_inv : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])
+  (quat_Re : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Real)
+  (quat_ii : Cart[Real, Tybit0[Tybit0[Unit]]])
+  (quat_cnj : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])
+  (quat_real : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool)
   \226\136\128 q : Cart[Real, Tybit0[Tybit0[Unit]]], pow(norm(q), 2) == Re(cnj(q) * q)
   \226\136\128 x : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 n : Num, inv(pow(x, n)) == pow(inv(x), n)
   \226\136\128 x : Cart[Real, Tybit0[Tybit0[Unit]]], Re(x) == real_of_num(0) \226\134\146 pow(x, 2) == -pow(Hx(norm(x)), 2)
@@ -74724,7 +74724,7 @@ Quaternions/qanal quotations (139):
   \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Unit], \226\136\128 s : (Cart[Real, N]) -> Bool, continuous_on(f, s) \226\134\146 continuous_on((x : Cart[Real, N]) => Hx(drop(f(x))), s)
   \226\136\128 f : (A) -> Real, continuous((x : A) => Hx(f(x)), (net : Net[A])) == continuous((x : A) => lift(f(x)), net)
   \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, continuous_on((x : Cart[Real, N]) => Hx(f(x)), s) == continuous_on((x : Cart[Real, N]) => lift(f(x)), s)
-  linear(o(Hx, Re)) && linear(o(Hx, Im1)) && linear(o(Hx, Im2)) && linear(o(Hx, Im3))
+  (linear : ((Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool)((o : ((Real) -> Cart[Real, Tybit0[Tybit0[Unit]]], (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Real, Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])(Hx, Re)) && (linear : ((Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool)((o : ((Real) -> Cart[Real, Tybit0[Tybit0[Unit]]], (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Real, Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])(Hx, Im1)) && (linear : ((Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool)((o : ((Real) -> Cart[Real, Tybit0[Tybit0[Unit]]], (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Real, Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])(Hx, Im2)) && (linear : ((Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool)((o : ((Real) -> Cart[Real, Tybit0[Tybit0[Unit]]], (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Real, Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])(Hx, Im3))
   (\226\136\128 q : Cart[Real, Tybit0[Tybit0[Unit]]], continuous(o(Hx, Re), at(q))) && (\226\136\128 q : Cart[Real, Tybit0[Tybit0[Unit]]], continuous(o(Hx, Im1), at(q))) && (\226\136\128 q : Cart[Real, Tybit0[Tybit0[Unit]]], continuous(o(Hx, Im2), at(q))) && (\226\136\128 q : Cart[Real, Tybit0[Tybit0[Unit]]], continuous(o(Hx, Im3), at(q)))
   (\226\136\128 s : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool, continuous_on(o(Hx, Re), s)) && (\226\136\128 s : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool, continuous_on(o(Hx, Im1), s)) && (\226\136\128 s : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool, continuous_on(o(Hx, Im2), s)) && (\226\136\128 s : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool, continuous_on(o(Hx, Im3), s))
 QUAT_SQNORM_MUL =  |- (#forall:fun(fun(cart(real,tybit0(tybit0(1))),bool),bool) (\q:cart(real,tybit0(tybit0(1))). ((#=:fun(real,fun(real,bool)) ((#real_pow:fun(real,fun(num,real)) (#vector_norm:fun(cart(real,tybit0(tybit0(1))),real) q:cart(real,tybit0(tybit0(1))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#quat_Re:fun(cart(real,tybit0(tybit0(1))),real) ((#quat_mul:fun(cart(real,tybit0(tybit0(1))),fun(cart(real,tybit0(tybit0(1))),cart(real,tybit0(tybit0(1))))) (#quat_cnj:fun(cart(real,tybit0(tybit0(1))),cart(real,tybit0(tybit0(1)))) q:cart(real,tybit0(tybit0(1))))) q:cart(real,tybit0(tybit0(1))))))))
