@@ -4,7 +4,7 @@
 /// t_thm
 fn step_1() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([]))
-  t_thm_c.set(@tactics.prove(@parser.parse_term("forall set:real->bool. (forall x. set x ==> T)"), t1))
+  t_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ set : (Real) -> Bool, ∀ x : Real, set(x) → true"), t1))
 }
 
 ///|
@@ -20,7 +20,7 @@ pub fn t_thm() -> @kernel.Thm {
 /// f_thm
 fn step_2() -> Unit raise {
   let t2 = @meson.meson_tac(@list.List([]))
-  f_thm_c.set(@tactics.prove(@parser.parse_term("forall set:real->bool. ~(?x. set x /\\ F)"), t2))
+  f_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ set : (Real) -> Bool, !(∃ x : Real, set(x) && false)"), t2))
 }
 
 ///|
@@ -36,7 +36,7 @@ pub fn f_thm() -> @kernel.Thm {
 /// neg_thm_p
 fn step_3() -> Unit raise {
   let t3 = @meson.meson_tac(@list.List([]))
-  neg_thm_p_c.set(@tactics.prove(@parser.parse_term("forall P set. (forall x. set x ==> P x) ==> (~ ?x. set x /\\ ~ P x)"), t3))
+  neg_thm_p_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ set : (_) -> Bool, (∀ x : _, set(x) → P(x)) → !(∃ x : _, set(x) && !P(x))"), t3))
 }
 
 ///|
@@ -52,7 +52,7 @@ pub fn neg_thm_p() -> @kernel.Thm {
 /// neg_thm_n
 fn step_4() -> Unit raise {
   let t4 = @meson.meson_tac(@list.List([]))
-  neg_thm_n_c.set(@tactics.prove(@parser.parse_term("forall P set. (~ ?x. set x /\\ P x) ==> (forall x. set x ==> ~ P x)"), t4))
+  neg_thm_n_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ set : (_) -> Bool, !(∃ x : _, set(x) && P(x)) → (∀ x : _, set(x) → !P(x))"), t4))
 }
 
 ///|
@@ -68,7 +68,7 @@ pub fn neg_thm_n() -> @kernel.Thm {
 /// and_thm_pp
 fn step_5() -> Unit raise {
   let t5 = @meson.meson_tac(@list.List([]))
-  and_thm_pp_c.set(@tactics.prove(@parser.parse_term("forall P Q set. (?x. set x) ==> (forall x. set x ==> P x) ==> (forall x. set x ==> Q x) ==>\n        (forall x. set x ==> (P x /\\ Q x))"), t5))
+  and_thm_pp_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ Q : (_) -> Bool, ∀ set : (_) -> Bool, (∃ x : _, set(x)) → (∀ x : _, set(x) → P(x)) → (∀ x : _, set(x) → Q(x)) → (∀ x : _, set(x) → P(x) && Q(x))"), t5))
 }
 
 ///|
@@ -84,7 +84,7 @@ pub fn and_thm_pp() -> @kernel.Thm {
 /// and_thm_pn
 fn step_6() -> Unit raise {
   let t6 = @meson.meson_tac(@list.List([]))
-  and_thm_pn_c.set(@tactics.prove(@parser.parse_term("forall P Q set. (?x. set x) ==> (forall x. set x ==> P x) ==>\n     (~ ?x. set x /\\ Q x) ==> (~ ?x. set x /\\ P x /\\ Q x)"), t6))
+  and_thm_pn_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ Q : (_) -> Bool, ∀ set : (_) -> Bool, (∃ x : _, set(x)) → (∀ x : _, set(x) → P(x)) → !(∃ x : _, set(x) && Q(x)) → !(∃ x : _, set(x) && P(x) && Q(x))"), t6))
 }
 
 ///|
@@ -100,7 +100,7 @@ pub fn and_thm_pn() -> @kernel.Thm {
 /// and_thm_np
 fn step_7() -> Unit raise {
   let t7 = @meson.meson_tac(@list.List([]))
-  and_thm_np_c.set(@tactics.prove(@parser.parse_term("forall P Q set. (?x. set x) ==> (~ ?x. set x /\\ P x) ==>\n          (forall x. set x ==> Q x) ==> (~ ?x. set x /\\ P x /\\ Q x)"), t7))
+  and_thm_np_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ Q : (_) -> Bool, ∀ set : (_) -> Bool, (∃ x : _, set(x)) → !(∃ x : _, set(x) && P(x)) → (∀ x : _, set(x) → Q(x)) → !(∃ x : _, set(x) && P(x) && Q(x))"), t7))
 }
 
 ///|
@@ -116,7 +116,7 @@ pub fn and_thm_np() -> @kernel.Thm {
 /// and_thm_nn
 fn step_8() -> Unit raise {
   let t8 = @meson.meson_tac(@list.List([]))
-  and_thm_nn_c.set(@tactics.prove(@parser.parse_term("forall P Q set. (?x. set x) ==> (~ ?x. set x /\\ P x) ==>\n    (~ ?x. set x /\\ Q x) ==> (~ ?x. set x /\\ P x /\\ Q x)"), t8))
+  and_thm_nn_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ Q : (_) -> Bool, ∀ set : (_) -> Bool, (∃ x : _, set(x)) → !(∃ x : _, set(x) && P(x)) → !(∃ x : _, set(x) && Q(x)) → !(∃ x : _, set(x) && P(x) && Q(x))"), t8))
 }
 
 ///|
@@ -132,7 +132,7 @@ pub fn and_thm_nn() -> @kernel.Thm {
 /// or_thm_p
 fn step_9() -> Unit raise {
   let t9 = @meson.meson_tac(@list.List([]))
-  or_thm_p_c.set(@tactics.prove(@parser.parse_term("forall P Q set. (?x. set x) ==> (forall x. set x ==> P x) ==> (forall x. set x ==> (P x \\/ Q x))"), t9))
+  or_thm_p_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ Q : (_) -> Bool, ∀ set : (_) -> Bool, (∃ x : _, set(x)) → (∀ x : _, set(x) → P(x)) → (∀ x : _, set(x) → P(x) || Q(x))"), t9))
 }
 
 ///|
@@ -148,7 +148,7 @@ pub fn or_thm_p() -> @kernel.Thm {
 /// or_thm_q
 fn step_10() -> Unit raise {
   let t10 = @meson.meson_tac(@list.List([]))
-  or_thm_q_c.set(@tactics.prove(@parser.parse_term("forall P Q set. (?x. set x) ==> (forall x. set x ==> Q x) ==> (forall x. set x ==> (P x \\/ Q x))"), t10))
+  or_thm_q_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ Q : (_) -> Bool, ∀ set : (_) -> Bool, (∃ x : _, set(x)) → (∀ x : _, set(x) → Q(x)) → (∀ x : _, set(x) → P(x) || Q(x))"), t10))
 }
 
 ///|
@@ -164,7 +164,7 @@ pub fn or_thm_q() -> @kernel.Thm {
 /// or_thm_nn
 fn step_11() -> Unit raise {
   let t11 = @meson.meson_tac(@list.List([]))
-  or_thm_nn_c.set(@tactics.prove(@parser.parse_term("forall P Q set. (?x. set x) ==> (~ ?x. set x /\\ P x) ==>\n          (~ ?x. set x /\\ Q x) ==> (~ ?x. set x /\\ (P x \\/ Q x))"), t11))
+  or_thm_nn_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ Q : (_) -> Bool, ∀ set : (_) -> Bool, (∃ x : _, set(x)) → !(∃ x : _, set(x) && P(x)) → !(∃ x : _, set(x) && Q(x)) → !(∃ x : _, set(x) && (P(x) || Q(x)))"), t11))
 }
 
 ///|
@@ -180,7 +180,7 @@ pub fn or_thm_nn() -> @kernel.Thm {
 /// imp_thm_pp
 fn step_12() -> Unit raise {
   let t12 = @meson.meson_tac(@list.List([]))
-  imp_thm_pp_c.set(@tactics.prove(@parser.parse_term("forall P Q set. (?x. set x) ==> (forall x. set x ==> Q x) ==>\n        (forall x. set x ==> (P x ==> Q x))"), t12))
+  imp_thm_pp_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ Q : (_) -> Bool, ∀ set : (_) -> Bool, (∃ x : _, set(x)) → (∀ x : _, set(x) → Q(x)) → (∀ x : _, set(x) → P(x) → Q(x))"), t12))
 }
 
 ///|
@@ -196,7 +196,7 @@ pub fn imp_thm_pp() -> @kernel.Thm {
 /// imp_thm_pn
 fn step_13() -> Unit raise {
   let t13 = @meson.meson_tac(@list.List([]))
-  imp_thm_pn_c.set(@tactics.prove(@parser.parse_term("forall P Q set. (?x. set x) ==> (forall x. set x ==> P x) ==>\n        (~ ?x. set x /\\ Q x) ==> (~ ?x. set x /\\ (P x ==> Q x))"), t13))
+  imp_thm_pn_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ Q : (_) -> Bool, ∀ set : (_) -> Bool, (∃ x : _, set(x)) → (∀ x : _, set(x) → P(x)) → !(∃ x : _, set(x) && Q(x)) → !(∃ x : _, set(x) && (P(x) → Q(x)))"), t13))
 }
 
 ///|
@@ -212,7 +212,7 @@ pub fn imp_thm_pn() -> @kernel.Thm {
 /// imp_thm_n
 fn step_14() -> Unit raise {
   let t14 = @meson.meson_tac(@list.List([]))
-  imp_thm_n_c.set(@tactics.prove(@parser.parse_term("forall P Q set. (?x. set x) ==> (~ ?x. set x /\\ P x) ==>\n     (forall x. set x ==> (P x ==> Q x))"), t14))
+  imp_thm_n_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ Q : (_) -> Bool, ∀ set : (_) -> Bool, (∃ x : _, set(x)) → !(∃ x : _, set(x) && P(x)) → (∀ x : _, set(x) → P(x) → Q(x))"), t14))
 }
 
 ///|
@@ -228,7 +228,7 @@ pub fn imp_thm_n() -> @kernel.Thm {
 /// iff_thm_pp
 fn step_15() -> Unit raise {
   let t15 = @meson.meson_tac(@list.List([]))
-  iff_thm_pp_c.set(@tactics.prove(@parser.parse_term("forall P Q set. (?x. set x) ==> (forall x. set x ==> P x) ==> (forall x. set x ==> Q x) ==>\n        (forall x. set x ==> (P x <=> Q x))"), t15))
+  iff_thm_pp_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ Q : (_) -> Bool, ∀ set : (_) -> Bool, (∃ x : _, set(x)) → (∀ x : _, set(x) → P(x)) → (∀ x : _, set(x) → Q(x)) → (∀ x : _, set(x) → P(x) == Q(x))"), t15))
 }
 
 ///|
@@ -244,7 +244,7 @@ pub fn iff_thm_pp() -> @kernel.Thm {
 /// iff_thm_pn
 fn step_16() -> Unit raise {
   let t16 = @meson.meson_tac(@list.List([]))
-  iff_thm_pn_c.set(@tactics.prove(@parser.parse_term("forall P Q set. (?x. set x) ==> (forall x. set x ==> P x) ==>\n     (~ ?x. set x /\\ Q x) ==> (~ ?x. set x /\\ (P x <=> Q x))"), t16))
+  iff_thm_pn_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ Q : (_) -> Bool, ∀ set : (_) -> Bool, (∃ x : _, set(x)) → (∀ x : _, set(x) → P(x)) → !(∃ x : _, set(x) && Q(x)) → !(∃ x : _, set(x) && P(x) == Q(x))"), t16))
 }
 
 ///|
@@ -260,7 +260,7 @@ pub fn iff_thm_pn() -> @kernel.Thm {
 /// iff_thm_np
 fn step_17() -> Unit raise {
   let t17 = @meson.meson_tac(@list.List([]))
-  iff_thm_np_c.set(@tactics.prove(@parser.parse_term("forall P Q set. (?x. set x) ==> (~ ?x. set x /\\ P x) ==>\n          (forall x. set x ==> Q x) ==> (~ ?x. set x /\\ (P x <=> Q x))"), t17))
+  iff_thm_np_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ Q : (_) -> Bool, ∀ set : (_) -> Bool, (∃ x : _, set(x)) → !(∃ x : _, set(x) && P(x)) → (∀ x : _, set(x) → Q(x)) → !(∃ x : _, set(x) && P(x) == Q(x))"), t17))
 }
 
 ///|
@@ -276,7 +276,7 @@ pub fn iff_thm_np() -> @kernel.Thm {
 /// iff_thm_nn
 fn step_18() -> Unit raise {
   let t18 = @meson.meson_tac(@list.List([]))
-  iff_thm_nn_c.set(@tactics.prove(@parser.parse_term("forall P Q set. (?x. set x) ==> (~ ?x. set x /\\ P x) ==>\n    (~ ?x. set x /\\ Q x) ==> (forall x. set x ==> (P x <=> Q x))"), t18))
+  iff_thm_nn_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ Q : (_) -> Bool, ∀ set : (_) -> Bool, (∃ x : _, set(x)) → !(∃ x : _, set(x) && P(x)) → !(∃ x : _, set(x) && Q(x)) → (∀ x : _, set(x) → P(x) == Q(x))"), t18))
 }
 
 ///|
@@ -292,7 +292,7 @@ pub fn iff_thm_nn() -> @kernel.Thm {
 /// eq_lt_thm
 fn step_19() -> Unit raise {
   let t19 = @meson.meson_tac(@list.List([@analysis.real_lt_le()]))
-  eq_lt_thm_c.set(@tactics.prove(@parser.parse_term("forall P set. (forall x. set x ==> (P x = &0)) ==> ~ ?x. set x /\\ P x < &0"), t19))
+  eq_lt_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Real, ∀ set : (_) -> Bool, (∀ x : _, set(x) → P(x) == real_of_num(0)) → !(∃ x : _, set(x) && P(x) < real_of_num(0))"), t19))
 }
 
 ///|
@@ -308,7 +308,7 @@ pub fn eq_lt_thm() -> @kernel.Thm {
 /// gt_lt_thm
 fn step_20() -> Unit raise {
   let t20 = @meson.meson_tac(@list.List([@realax.real_gt(), @realarith.real_lt_refl(), @realarith.real_lt_trans()]))
-  gt_lt_thm_c.set(@tactics.prove(@parser.parse_term("forall P set. (forall x. set x ==> (P x > &0)) ==> ~ ?x. set x /\\ P x < &0"), t20))
+  gt_lt_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Real, ∀ set : (_) -> Bool, (∀ x : _, set(x) → P(x) > real_of_num(0)) → !(∃ x : _, set(x) && P(x) < real_of_num(0))"), t20))
 }
 
 ///|
@@ -324,7 +324,7 @@ pub fn gt_lt_thm() -> @kernel.Thm {
 /// lt_eq_thm
 fn step_21() -> Unit raise {
   let t21 = @meson.meson_tac(@list.List([@analysis.real_lt_le()]))
-  lt_eq_thm_c.set(@tactics.prove(@parser.parse_term("forall P set. (forall x. set x ==> (P x < &0)) ==> ~ ?x. set x /\\ (P x = &0)"), t21))
+  lt_eq_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Real, ∀ set : (_) -> Bool, (∀ x : _, set(x) → P(x) < real_of_num(0)) → !(∃ x : _, set(x) && P(x) == real_of_num(0))"), t21))
 }
 
 ///|
@@ -340,7 +340,7 @@ pub fn lt_eq_thm() -> @kernel.Thm {
 /// gt_eq_thm
 fn step_22() -> Unit raise {
   let t22 = @meson.meson_tac(@list.List([@realax.real_gt(), @analysis.real_lt_le()]))
-  gt_eq_thm_c.set(@tactics.prove(@parser.parse_term("forall P set. (forall x. set x ==> (P x > &0)) ==> ~ ?x. set x /\\ (P x = &0)"), t22))
+  gt_eq_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Real, ∀ set : (_) -> Bool, (∀ x : _, set(x) → P(x) > real_of_num(0)) → !(∃ x : _, set(x) && P(x) == real_of_num(0))"), t22))
 }
 
 ///|
@@ -356,7 +356,7 @@ pub fn gt_eq_thm() -> @kernel.Thm {
 /// eq_gt_thm
 fn step_23() -> Unit raise {
   let t23 = @meson.meson_tac(@list.List([@realax.real_gt(), @analysis.real_lt_le()]))
-  eq_gt_thm_c.set(@tactics.prove(@parser.parse_term("forall P set. (forall x. set x ==> (P x = &0)) ==> ~ ?x. set x /\\ (P x > &0)"), t23))
+  eq_gt_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Real, ∀ set : (_) -> Bool, (∀ x : _, set(x) → P(x) == real_of_num(0)) → !(∃ x : _, set(x) && P(x) > real_of_num(0))"), t23))
 }
 
 ///|
@@ -372,7 +372,7 @@ pub fn eq_gt_thm() -> @kernel.Thm {
 /// lt_gt_thm
 fn step_24() -> Unit raise {
   let t24 = @meson.meson_tac(@list.List([@realax.real_gt(), @analysis.real_lt_le(), @realarith.real_lt_trans()]))
-  lt_gt_thm_c.set(@tactics.prove(@parser.parse_term("forall P set. (forall x. set x ==> (P x < &0)) ==> ~ ?x. set x /\\ (P x > &0)"), t24))
+  lt_gt_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Real, ∀ set : (_) -> Bool, (∀ x : _, set(x) → P(x) < real_of_num(0)) → !(∃ x : _, set(x) && P(x) > real_of_num(0))"), t24))
 }
 
 ///|
@@ -388,7 +388,7 @@ pub fn lt_gt_thm() -> @kernel.Thm {
 /// lt_le_thm
 fn step_25() -> Unit raise {
   let t25 = @meson.meson_tac(@list.List([@realax.real_gt(), @analysis.real_lt_le(), @realarith.real_lt_trans()]))
-  lt_le_thm_c.set(@tactics.prove(@parser.parse_term("forall P set. (forall x. set x ==> (P x < &0)) ==> forall x. set x ==> (P x <= &0)"), t25))
+  lt_le_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Real, ∀ set : (_) -> Bool, (∀ x : _, set(x) → P(x) < real_of_num(0)) → (∀ x : _, set(x) → P(x) <= real_of_num(0))"), t25))
 }
 
 ///|
@@ -404,7 +404,7 @@ pub fn lt_le_thm() -> @kernel.Thm {
 /// eq_le_thm
 fn step_26() -> Unit raise {
   let t26 = @meson.meson_tac(@list.List([@realax.real_gt(), @analysis.real_lt_le(), @realarith.real_lt_trans(), @analysis.real_le()]))
-  eq_le_thm_c.set(@tactics.prove(@parser.parse_term("forall P set. (forall x. set x ==> (P x = &0)) ==> (forall x. set x ==> (P x <= &0))"), t26))
+  eq_le_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Real, ∀ set : (_) -> Bool, (∀ x : _, set(x) → P(x) == real_of_num(0)) → (∀ x : _, set(x) → P(x) <= real_of_num(0))"), t26))
 }
 
 ///|
@@ -420,7 +420,7 @@ pub fn eq_le_thm() -> @kernel.Thm {
 /// gt_le_thm
 fn step_27() -> Unit raise {
   let t27 = @meson.meson_tac(@list.List([@realax.real_gt(), @analysis.real_lt_le(), @realarith.real_lt_trans(), @analysis.real_le()]))
-  gt_le_thm_c.set(@tactics.prove(@parser.parse_term("forall P set. (forall x. set x ==> (P x > &0)) ==> ~ ?x. set x /\\ (P x <= &0)"), t27))
+  gt_le_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Real, ∀ set : (_) -> Bool, (∀ x : _, set(x) → P(x) > real_of_num(0)) → !(∃ x : _, set(x) && P(x) <= real_of_num(0))"), t27))
 }
 
 ///|
@@ -436,7 +436,7 @@ pub fn gt_le_thm() -> @kernel.Thm {
 /// lt_ge_thm
 fn step_28() -> Unit raise {
   let t28 = @meson.meson_tac(@list.List([@realax.real_gt(), @analysis.real_lt_le(), @realarith.real_lt_trans(), @realax.real_ge()]))
-  lt_ge_thm_c.set(@tactics.prove(@parser.parse_term("forall P set. (forall x. set x ==> (P x < &0)) ==> ~ ?x. set x /\\ (P x >= &0)"), t28))
+  lt_ge_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Real, ∀ set : (_) -> Bool, (∀ x : _, set(x) → P(x) < real_of_num(0)) → !(∃ x : _, set(x) && P(x) >= real_of_num(0))"), t28))
 }
 
 ///|
@@ -452,7 +452,7 @@ pub fn lt_ge_thm() -> @kernel.Thm {
 /// eq_ge_thm
 fn step_29() -> Unit raise {
   let t29 = @meson.meson_tac(@list.List([@realax.real_gt(), @analysis.real_lt_le(), @realarith.real_lt_trans(), @realax.real_ge(), @analysis.real_le()]))
-  eq_ge_thm_c.set(@tactics.prove(@parser.parse_term("forall P set. (forall x. set x ==> (P x = &0)) ==> (forall x. set x ==> (P x >= &0))"), t29))
+  eq_ge_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Real, ∀ set : (_) -> Bool, (∀ x : _, set(x) → P(x) == real_of_num(0)) → (∀ x : _, set(x) → P(x) >= real_of_num(0))"), t29))
 }
 
 ///|
@@ -468,7 +468,7 @@ pub fn eq_ge_thm() -> @kernel.Thm {
 /// gt_ge_thm
 fn step_30() -> Unit raise {
   let t30 = @meson.meson_tac(@list.List([@realax.real_gt(), @analysis.real_lt_le(), @realarith.real_lt_trans(), @realax.real_ge(), @analysis.real_le()]))
-  gt_ge_thm_c.set(@tactics.prove(@parser.parse_term("forall P set. (forall x. set x ==> (P x > &0)) ==> (forall x. set x ==> (P x >= &0))"), t30))
+  gt_ge_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Real, ∀ set : (_) -> Bool, (∀ x : _, set(x) → P(x) > real_of_num(0)) → (∀ x : _, set(x) → P(x) >= real_of_num(0))"), t30))
 }
 
 ///|
@@ -484,7 +484,7 @@ pub fn gt_ge_thm() -> @kernel.Thm {
 /// NOT_EXISTS_CONJ_THM
 fn step_31() -> Unit raise {
   let t31 = @list.List([@meson.meson_tac(@list.List([]))])
-  not_exists_conj_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("~(?x. P x /\\ Q x) ==> (forall x. P x ==> ~Q x)"), t31))
+  not_exists_conj_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("!(∃ x : _, (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)) → (∀ x : _, P(x) → !Q(x))"), t31))
 }
 
 ///|
@@ -500,7 +500,7 @@ pub fn not_exists_conj_thm() -> @kernel.Thm {
 /// testform_itlem
 fn step_32() -> Unit raise {
   let t32 = @list.List([@meson.meson_tac(@list.List([]))])
-  testform_itlem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("(forall x. P x ==> ~Q x) ==> (forall x. P2 x ==> ~Q x) ==> (forall x. P x \\/ P2 x ==> ~ Q x)"), t32))
+  testform_itlem_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("(∀ x : _, (P : (_) -> Bool)(x) → !(Q : (_) -> Bool)(x)) → (∀ x : _, (P2 : (_) -> Bool)(x) → !Q(x)) → (∀ x : _, P(x) || P2(x) → !Q(x))"), t32))
 }
 
 ///|
