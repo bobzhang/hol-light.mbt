@@ -3,7 +3,7 @@
 ///|
 /// negativef
 fn step_1() -> Unit raise {
-  negativef_c.set(@pair.new_definition(@parser.parse_term("negativef p = ?q. p = q --> False")))
+  negativef_c.set(@pair.new_definition(@term_syntax.parse_term("(negativef : (Form) -> Bool)((p : Form)) == (∃ q : Form, p == op_minus_minus_gt(q, False))")))
 }
 
 ///|
@@ -18,7 +18,7 @@ pub fn negativef() -> @kernel.Thm {
 ///|
 /// negatef
 fn step_2() -> Unit raise {
-  negatef_c.set(@pair.new_definition(@parser.parse_term("negatef p = if negativef p then @q. p = q --> False else p --> False")))
+  negatef_c.set(@pair.new_definition(@term_syntax.parse_term("(negatef : (Form) -> Form)((p : Form)) == (if negativef(p) { select((q : Form) => p == op_minus_minus_gt(q, False)) } else { op_minus_minus_gt(p, False) })")))
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn negatef() -> @kernel.Thm {
 /// axiom_addimp
 fn step_3() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_addimp_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- p --> (q --> p)"), t1))
+  axiom_addimp_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, p)))"), t1))
 }
 
 ///|
@@ -50,7 +50,7 @@ pub fn axiom_addimp() -> @kernel.Thm {
 /// axiom_distribimp
 fn step_4() -> Unit raise {
   let t2 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_distribimp_c.set(@tactics.prove(@parser.parse_term("forall A p q r. A |-- (p --> q --> r) --> (p --> q) --> (p --> r)"), t2))
+  axiom_distribimp_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, ∀ r : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, op_minus_minus_gt(q, r)), op_minus_minus_gt(op_minus_minus_gt(p, q), op_minus_minus_gt(p, r))))"), t2))
 }
 
 ///|
@@ -66,7 +66,7 @@ pub fn axiom_distribimp() -> @kernel.Thm {
 /// axiom_doubleneg
 fn step_5() -> Unit raise {
   let t3 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_doubleneg_c.set(@tactics.prove(@parser.parse_term("forall A p. A |-- ((p --> False) --> False) --> p"), t3))
+  axiom_doubleneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(op_minus_minus_gt(p, False), False), p))"), t3))
 }
 
 ///|
@@ -82,7 +82,7 @@ pub fn axiom_doubleneg() -> @kernel.Thm {
 /// axiom_allimp
 fn step_6() -> Unit raise {
   let t4 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_allimp_c.set(@tactics.prove(@parser.parse_term("forall A x p q. A |-- (!!x (p --> q)) --> (!!x p) --> (!!x q)"), t4))
+  axiom_allimp_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, op_minus_minus_gt(p, q)), op_minus_minus_gt(op_bang_bang(x, p), op_bang_bang(x, q))))"), t4))
 }
 
 ///|
@@ -98,7 +98,7 @@ pub fn axiom_allimp() -> @kernel.Thm {
 /// axiom_impall
 fn step_7() -> Unit raise {
   let t5 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_impall_c.set(@tactics.prove(@parser.parse_term("forall A x p. ~(x IN FV p) ==> A |-- p --> !!x p"), t5))
+  axiom_impall_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ p : Form, !IN(x, FV(p)) → op_bar_minus_minus(A, op_minus_minus_gt(p, op_bang_bang(x, p)))"), t5))
 }
 
 ///|
@@ -114,7 +114,7 @@ pub fn axiom_impall() -> @kernel.Thm {
 /// axiom_existseq
 fn step_8() -> Unit raise {
   let t6 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_existseq_c.set(@tactics.prove(@parser.parse_term("forall A x t. ~(x IN FVT t) ==> A |-- ??x (V x === t)"), t6))
+  axiom_existseq_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ t : Term, !IN(x, FVT(t)) → op_bar_minus_minus(A, op_q_q(x, op_eq_eq_eq(V(x), t)))"), t6))
 }
 
 ///|
@@ -130,7 +130,7 @@ pub fn axiom_existseq() -> @kernel.Thm {
 /// axiom_eqrefl
 fn step_9() -> Unit raise {
   let t7 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_eqrefl_c.set(@tactics.prove(@parser.parse_term("forall A t. A |-- t === t"), t7))
+  axiom_eqrefl_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ t : Term, op_bar_minus_minus(A, op_eq_eq_eq(t, t))"), t7))
 }
 
 ///|
@@ -146,7 +146,7 @@ pub fn axiom_eqrefl() -> @kernel.Thm {
 /// axiom_funcong
 fn step_10() -> Unit raise {
   let t8 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_funcong_c.set(@tactics.prove(@parser.parse_term("(forall A s t. A |-- s === t --> Suc s === Suc t) /\\\n   (forall A s t u v. A |-- s === t --> u === v --> s ++ u === t ++ v) /\\\n   (forall A s t u v. A |-- s === t --> u === v --> s ** u === t ** v)"), t8))
+  axiom_funcong_c.set(@tactics.prove(@term_syntax.parse_term("(∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_eq_eq_eq(Suc(s), Suc(t))))) && (∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, ∀ u : Term, ∀ v : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(u, v), op_eq_eq_eq(op_plus_plus(s, u), op_plus_plus(t, v)))))) && (∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, ∀ u : Term, ∀ v : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(u, v), op_eq_eq_eq(op_star_star(s, u), op_star_star(t, v))))))"), t8))
 }
 
 ///|
@@ -162,7 +162,7 @@ pub fn axiom_funcong() -> @kernel.Thm {
 /// axiom_predcong
 fn step_11() -> Unit raise {
   let t9 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_predcong_c.set(@tactics.prove(@parser.parse_term("(forall A s t u v. A |-- s === t --> u === v --> s === u --> t === v) /\\\n   (forall A s t u v. A |-- s === t --> u === v --> s << u --> t << v) /\\\n   (forall A s t u v. A |-- s === t --> u === v --> s <<= u --> t <<= v)"), t9))
+  axiom_predcong_c.set(@tactics.prove(@term_syntax.parse_term("(∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, ∀ u : Term, ∀ v : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(u, v), op_minus_minus_gt(op_eq_eq_eq(s, u), op_eq_eq_eq(t, v)))))) && (∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, ∀ u : Term, ∀ v : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(u, v), op_minus_minus_gt(op_lt_lt(s, u), op_lt_lt(t, v)))))) && (∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, ∀ u : Term, ∀ v : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(u, v), op_minus_minus_gt(op_lt_lt_eq(s, u), op_lt_lt_eq(t, v))))))"), t9))
 }
 
 ///|
@@ -178,7 +178,7 @@ pub fn axiom_predcong() -> @kernel.Thm {
 /// axiom_iffimp1
 fn step_12() -> Unit raise {
   let t10 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_iffimp1_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- (p <-> q) --> p --> q"), t10))
+  axiom_iffimp1_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_lt_minus_gt(p, q), op_minus_minus_gt(p, q)))"), t10))
 }
 
 ///|
@@ -194,7 +194,7 @@ pub fn axiom_iffimp1() -> @kernel.Thm {
 /// axiom_iffimp2
 fn step_13() -> Unit raise {
   let t11 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_iffimp2_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- (p <-> q) --> q --> p"), t11))
+  axiom_iffimp2_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_lt_minus_gt(p, q), op_minus_minus_gt(q, p)))"), t11))
 }
 
 ///|
@@ -210,7 +210,7 @@ pub fn axiom_iffimp2() -> @kernel.Thm {
 /// axiom_impiff
 fn step_14() -> Unit raise {
   let t12 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_impiff_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- (p --> q) --> (q --> p) --> (p <-> q)"), t12))
+  axiom_impiff_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, q), op_minus_minus_gt(op_minus_minus_gt(q, p), op_lt_minus_gt(p, q))))"), t12))
 }
 
 ///|
@@ -226,7 +226,7 @@ pub fn axiom_impiff() -> @kernel.Thm {
 /// axiom_true
 fn step_15() -> Unit raise {
   let t13 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_true_c.set(@tactics.prove(@parser.parse_term("A |-- True <-> (False --> False)"), t13))
+  axiom_true_c.set(@tactics.prove(@term_syntax.parse_term("op_bar_minus_minus((A : (Form) -> Bool), op_lt_minus_gt(True, op_minus_minus_gt(False, False)))"), t13))
 }
 
 ///|
@@ -242,7 +242,7 @@ pub fn axiom_true() -> @kernel.Thm {
 /// axiom_not
 fn step_16() -> Unit raise {
   let t14 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_not_c.set(@tactics.prove(@parser.parse_term("forall A p. A |-- Not p <-> (p --> False)"), t14))
+  axiom_not_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, op_bar_minus_minus(A, op_lt_minus_gt(Not(p), op_minus_minus_gt(p, False)))"), t14))
 }
 
 ///|
@@ -258,7 +258,7 @@ pub fn axiom_not() -> @kernel.Thm {
 /// axiom_and
 fn step_17() -> Unit raise {
   let t15 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_and_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- (p && q) <-> (p --> q --> False) --> False"), t15))
+  axiom_and_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_lt_minus_gt(op_amp_amp(p, q), op_minus_minus_gt(op_minus_minus_gt(p, op_minus_minus_gt(q, False)), False)))"), t15))
 }
 
 ///|
@@ -274,7 +274,7 @@ pub fn axiom_and() -> @kernel.Thm {
 /// axiom_or
 fn step_18() -> Unit raise {
   let t16 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_or_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- (p || q) <-> Not(Not p && Not q)"), t16))
+  axiom_or_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_lt_minus_gt(op_bar_bar(p, q), Not(op_amp_amp(Not(p), Not(q)))))"), t16))
 }
 
 ///|
@@ -290,7 +290,7 @@ pub fn axiom_or() -> @kernel.Thm {
 /// axiom_exists
 fn step_19() -> Unit raise {
   let t17 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  axiom_exists_c.set(@tactics.prove(@parser.parse_term("forall A x p. A |-- (??x p) <-> Not(!!x (Not p))"), t17))
+  axiom_exists_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ p : Form, op_bar_minus_minus(A, op_lt_minus_gt(op_q_q(x, p), Not(op_bang_bang(x, Not(p)))))"), t17))
 }
 
 ///|
@@ -306,7 +306,7 @@ pub fn axiom_exists() -> @kernel.Thm {
 /// assume
 fn step_20() -> Unit raise {
   let t18 = @meson.meson_tac(@list.List([@fol.proves_rules()]))
-  assume_c.set(@tactics.prove(@parser.parse_term("forall A p. p IN A ==> A |-- p"), t18))
+  assume_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, IN(p, A) → op_bar_minus_minus(A, p)"), t18))
 }
 
 ///|
@@ -322,7 +322,7 @@ pub fn assume_() -> @kernel.Thm {
 /// modusponens
 fn step_21() -> Unit raise {
   let t19 = @meson.meson_tac(@list.List([@fol.proves_rules()]))
-  modusponens_c.set(@tactics.prove(@parser.parse_term("forall A p. A |-- (p --> q) /\\ A |-- p ==> A |-- q"), t19))
+  modusponens_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, (q : Form))) && op_bar_minus_minus(A, p) → op_bar_minus_minus(A, q)"), t19))
 }
 
 ///|
@@ -338,7 +338,7 @@ pub fn modusponens() -> @kernel.Thm {
 /// gen
 fn step_22() -> Unit raise {
   let t20 = @meson.meson_tac(@list.List([@fol.proves_rules()]))
-  gen_c.set(@tactics.prove(@parser.parse_term("forall A p x. A |-- p ==> A |-- !!x p"), t20))
+  gen_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ x : Num, op_bar_minus_minus(A, p) → op_bar_minus_minus(A, op_bang_bang(x, p))"), t20))
 }
 
 ///|
@@ -354,7 +354,7 @@ pub fn gen() -> @kernel.Thm {
 /// iff_imp1
 fn step_23() -> Unit raise {
   let t21 = @meson.meson_tac(@list.List([modusponens(), axiom_iffimp1()]))
-  iff_imp1_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- p <-> q ==> A |-- p --> q"), t21))
+  iff_imp1_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_lt_minus_gt(p, q)) → op_bar_minus_minus(A, op_minus_minus_gt(p, q))"), t21))
 }
 
 ///|
@@ -370,7 +370,7 @@ pub fn iff_imp1() -> @kernel.Thm {
 /// iff_imp2
 fn step_24() -> Unit raise {
   let t22 = @meson.meson_tac(@list.List([modusponens(), axiom_iffimp2()]))
-  iff_imp2_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- p <-> q ==> A |-- q --> p"), t22))
+  iff_imp2_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_lt_minus_gt(p, q)) → op_bar_minus_minus(A, op_minus_minus_gt(q, p))"), t22))
 }
 
 ///|
@@ -386,7 +386,7 @@ pub fn iff_imp2() -> @kernel.Thm {
 /// imp_antisym
 fn step_25() -> Unit raise {
   let t23 = @meson.meson_tac(@list.List([modusponens(), axiom_impiff()]))
-  imp_antisym_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- p --> q /\\ A |-- q --> p ==> A |-- p <-> q"), t23))
+  imp_antisym_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, q)) && op_bar_minus_minus(A, op_minus_minus_gt(q, p)) → op_bar_minus_minus(A, op_lt_minus_gt(p, q))"), t23))
 }
 
 ///|
@@ -402,7 +402,7 @@ pub fn imp_antisym() -> @kernel.Thm {
 /// add_assum
 fn step_26() -> Unit raise {
   let t24 = @meson.meson_tac(@list.List([modusponens(), axiom_addimp()]))
-  add_assum_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- q ==> A |-- p --> q"), t24))
+  add_assum_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, q) → op_bar_minus_minus(A, op_minus_minus_gt(p, q))"), t24))
 }
 
 ///|
@@ -418,7 +418,7 @@ pub fn add_assum() -> @kernel.Thm {
 /// imp_refl
 fn step_27() -> Unit raise {
   let t25 = @meson.meson_tac(@list.List([modusponens(), axiom_distribimp(), axiom_addimp()]))
-  imp_refl_c.set(@tactics.prove(@parser.parse_term("forall A p. A |-- p --> p"), t25))
+  imp_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, p))"), t25))
 }
 
 ///|
@@ -434,7 +434,7 @@ pub fn imp_refl() -> @kernel.Thm {
 /// imp_add_assum
 fn step_28() -> Unit raise {
   let t26 = @meson.meson_tac(@list.List([modusponens(), axiom_distribimp(), add_assum()]))
-  imp_add_assum_c.set(@tactics.prove(@parser.parse_term("forall A p q r. A |-- q --> r ==> A |-- (p --> q) --> (p --> r)"), t26))
+  imp_add_assum_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, ∀ r : Form, op_bar_minus_minus(A, op_minus_minus_gt(q, r)) → op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, q), op_minus_minus_gt(p, r)))"), t26))
 }
 
 ///|
@@ -450,7 +450,7 @@ pub fn imp_add_assum() -> @kernel.Thm {
 /// imp_unduplicate
 fn step_29() -> Unit raise {
   let t27 = @meson.meson_tac(@list.List([modusponens(), axiom_distribimp(), imp_refl()]))
-  imp_unduplicate_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- p --> p --> q ==> A |-- p --> q"), t27))
+  imp_unduplicate_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(p, q))) → op_bar_minus_minus(A, op_minus_minus_gt(p, q))"), t27))
 }
 
 ///|
@@ -466,7 +466,7 @@ pub fn imp_unduplicate() -> @kernel.Thm {
 /// imp_trans
 fn step_30() -> Unit raise {
   let t28 = @meson.meson_tac(@list.List([modusponens(), imp_add_assum()]))
-  imp_trans_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- p --> q /\\ A |-- q --> r ==> A |-- p --> r"), t28))
+  imp_trans_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, q)) && op_bar_minus_minus(A, op_minus_minus_gt(q, (r : Form))) → op_bar_minus_minus(A, op_minus_minus_gt(p, r))"), t28))
 }
 
 ///|
@@ -482,7 +482,7 @@ pub fn imp_trans() -> @kernel.Thm {
 /// imp_swap
 fn step_31() -> Unit raise {
   let t29 = @meson.meson_tac(@list.List([imp_trans(), axiom_addimp(), modusponens(), axiom_distribimp()]))
-  imp_swap_c.set(@tactics.prove(@parser.parse_term("forall A p q r. A |-- p --> q --> r ==> A |-- q --> p --> r"), t29))
+  imp_swap_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, ∀ r : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, r))) → op_bar_minus_minus(A, op_minus_minus_gt(q, op_minus_minus_gt(p, r)))"), t29))
 }
 
 ///|
@@ -498,7 +498,7 @@ pub fn imp_swap() -> @kernel.Thm {
 /// imp_trans_chain_2
 fn step_32() -> Unit raise {
   let t30 = @meson.asm_meson_tac(@list.List([imp_trans(), imp_swap(), imp_unduplicate()]))
-  imp_trans_chain_2_c.set(@tactics.prove(@parser.parse_term("forall A p q1 q2 r. A |-- p --> q1 /\\ A |-- p --> q2 /\\ A |-- q1 --> q2 --> r\n                 ==> A |-- p --> r"), t30))
+  imp_trans_chain_2_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q1 : Form, ∀ q2 : Form, ∀ r : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, q1)) && op_bar_minus_minus(A, op_minus_minus_gt(p, q2)) && op_bar_minus_minus(A, op_minus_minus_gt(q1, op_minus_minus_gt(q2, r))) → op_bar_minus_minus(A, op_minus_minus_gt(p, r))"), t30))
 }
 
 ///|
@@ -514,7 +514,7 @@ pub fn imp_trans_chain_2() -> @kernel.Thm {
 /// imp_trans_th
 fn step_33() -> Unit raise {
   let t31 = @meson.meson_tac(@list.List([imp_trans(), axiom_addimp(), axiom_distribimp()]))
-  imp_trans_th_c.set(@tactics.prove(@parser.parse_term("forall A p q r. A |-- (q --> r) --> (p --> q) --> (p --> r)"), t31))
+  imp_trans_th_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, ∀ r : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(q, r), op_minus_minus_gt(op_minus_minus_gt(p, q), op_minus_minus_gt(p, r))))"), t31))
 }
 
 ///|
@@ -530,7 +530,7 @@ pub fn imp_trans_th() -> @kernel.Thm {
 /// imp_add_concl
 fn step_34() -> Unit raise {
   let t32 = @meson.meson_tac(@list.List([modusponens(), imp_swap(), imp_trans_th()]))
-  imp_add_concl_c.set(@tactics.prove(@parser.parse_term("forall A p q r. A |-- p --> q ==> A |-- (q --> r) --> (p --> r)"), t32))
+  imp_add_concl_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, ∀ r : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, q)) → op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(q, r), op_minus_minus_gt(p, r)))"), t32))
 }
 
 ///|
@@ -546,7 +546,7 @@ pub fn imp_add_concl() -> @kernel.Thm {
 /// imp_trans2
 fn step_35() -> Unit raise {
   let t33 = @meson.meson_tac(@list.List([imp_add_assum(), modusponens(), imp_trans_th()]))
-  imp_trans2_c.set(@tactics.prove(@parser.parse_term("forall A p q r s. A |-- p --> q --> r /\\ A |-- r --> s ==> A |-- p --> q --> s"), t33))
+  imp_trans2_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, ∀ r : Form, ∀ s : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, r))) && op_bar_minus_minus(A, op_minus_minus_gt(r, s)) → op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, s)))"), t33))
 }
 
 ///|
@@ -562,7 +562,7 @@ pub fn imp_trans2() -> @kernel.Thm {
 /// imp_swap_th
 fn step_36() -> Unit raise {
   let t34 = @meson.meson_tac(@list.List([imp_trans(), axiom_distribimp(), imp_add_concl(), axiom_addimp()]))
-  imp_swap_th_c.set(@tactics.prove(@parser.parse_term("forall A p q r. A |-- (p --> q --> r) --> (q --> p --> r)"), t34))
+  imp_swap_th_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, ∀ r : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, op_minus_minus_gt(q, r)), op_minus_minus_gt(q, op_minus_minus_gt(p, r))))"), t34))
 }
 
 ///|
@@ -578,7 +578,7 @@ pub fn imp_swap_th() -> @kernel.Thm {
 /// contrapos
 fn step_37() -> Unit raise {
   let t35 = @meson.meson_tac(@list.List([imp_trans(), iff_imp1(), axiom_not(), imp_add_concl(), iff_imp2()]))
-  contrapos_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- p --> q ==> A |-- Not q --> Not p"), t35))
+  contrapos_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, q)) → op_bar_minus_minus(A, op_minus_minus_gt(Not(q), Not(p)))"), t35))
 }
 
 ///|
@@ -594,7 +594,7 @@ pub fn contrapos() -> @kernel.Thm {
 /// imp_truefalse
 fn step_38() -> Unit raise {
   let t36 = @meson.meson_tac(@list.List([imp_trans(), imp_trans_th(), imp_swap_th()]))
-  imp_truefalse_c.set(@tactics.prove(@parser.parse_term("forall p q. A |-- (q --> False) --> p --> (p --> q) --> False"), t36))
+  imp_truefalse_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Form, ∀ q : Form, op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(op_minus_minus_gt(q, False), op_minus_minus_gt(p, op_minus_minus_gt(op_minus_minus_gt(p, q), False))))"), t36))
 }
 
 ///|
@@ -610,7 +610,7 @@ pub fn imp_truefalse() -> @kernel.Thm {
 /// imp_insert
 fn step_39() -> Unit raise {
   let t37 = @meson.meson_tac(@list.List([imp_trans(), axiom_addimp()]))
-  imp_insert_c.set(@tactics.prove(@parser.parse_term("forall A p q r. A |-- p --> r ==> A |-- p --> q --> r"), t37))
+  imp_insert_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, ∀ r : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, r)) → op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, r)))"), t37))
 }
 
 ///|
@@ -626,7 +626,7 @@ pub fn imp_insert() -> @kernel.Thm {
 /// imp_mono_th
 fn step_40() -> Unit raise {
   let t38 = @meson.meson_tac(@list.List([imp_trans(), imp_swap(), imp_trans_th()]))
-  imp_mono_th_c.set(@tactics.prove(@parser.parse_term("A |-- (p' --> p) --> (q --> q') --> (p --> q) --> (p' --> q')"), t38))
+  imp_mono_th_c.set(@tactics.prove(@term_syntax.parse_term("op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(op_minus_minus_gt((p' : Form), (p : Form)), op_minus_minus_gt(op_minus_minus_gt((q : Form), (q' : Form)), op_minus_minus_gt(op_minus_minus_gt(p, q), op_minus_minus_gt(p', q')))))"), t38))
 }
 
 ///|
@@ -642,7 +642,7 @@ pub fn imp_mono_th() -> @kernel.Thm {
 /// ex_falso
 fn step_41() -> Unit raise {
   let t39 = @meson.meson_tac(@list.List([imp_trans(), axiom_addimp(), axiom_doubleneg()]))
-  ex_falso_c.set(@tactics.prove(@parser.parse_term("forall A p. A |-- False --> p"), t39))
+  ex_falso_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, op_bar_minus_minus(A, op_minus_minus_gt(False, p))"), t39))
 }
 
 ///|
@@ -658,7 +658,7 @@ pub fn ex_falso() -> @kernel.Thm {
 /// imp_contr
 fn step_42() -> Unit raise {
   let t40 = @meson.meson_tac(@list.List([imp_add_assum(), ex_falso()]))
-  imp_contr_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- (p --> False) --> (p --> r)"), t40))
+  imp_contr_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : _, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, False), op_minus_minus_gt(p, (r : Form))))"), t40))
 }
 
 ///|
@@ -678,7 +678,7 @@ fn step_43() -> Unit raise {
   let t42 = @tactics.pop_assum(@tactics.strip_assume_tac)
   let t41 = @simp.rewrite_tac(@list.List([negatef(), negativef()]))
   let t45 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t41), @class.cond_cases_tac), t42), t43), t44)
-  imp_contrf_c.set(@tactics.prove(@parser.parse_term("forall A p r. A |-- p --> negatef p --> r"), t45))
+  imp_contrf_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ r : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(negatef(p), r)))"), t45))
 }
 
 ///|
@@ -694,7 +694,7 @@ pub fn imp_contrf() -> @kernel.Thm {
 /// contrad
 fn step_44() -> Unit raise {
   let t46 = @meson.meson_tac(@list.List([modusponens(), axiom_distribimp(), imp_refl(), axiom_doubleneg()]))
-  contrad_c.set(@tactics.prove(@parser.parse_term("forall A p. A |-- (p --> False) --> p ==> A |-- p"), t46))
+  contrad_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, False), p)) → op_bar_minus_minus(A, p)"), t46))
 }
 
 ///|
@@ -710,7 +710,7 @@ pub fn contrad() -> @kernel.Thm {
 /// bool_cases
 fn step_45() -> Unit raise {
   let t47 = @meson.meson_tac(@list.List([contrad(), imp_trans(), imp_add_concl()]))
-  bool_cases_c.set(@tactics.prove(@parser.parse_term("forall p q. A |-- p --> q /\\ A |-- (p --> False) --> q ==> A |-- q"), t47))
+  bool_cases_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Form, ∀ q : Form, op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(p, q)) && op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, False), q)) → op_bar_minus_minus(A, q)"), t47))
 }
 
 ///|
@@ -726,7 +726,7 @@ pub fn bool_cases() -> @kernel.Thm {
 /// imp_false_rule
 fn step_46() -> Unit raise {
   let t48 = @meson.meson_tac(@list.List([imp_add_concl(), imp_add_assum(), ex_falso(), axiom_addimp(), imp_swap(), imp_trans(), axiom_doubleneg(), imp_unduplicate()]))
-  imp_false_rule_c.set(@tactics.prove(@parser.parse_term("forall p q r. A |-- (q --> False) --> p --> r\n           ==> A |-- ((p --> q) --> False) --> r"), t48))
+  imp_false_rule_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Form, ∀ q : Form, ∀ r : Form, op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(op_minus_minus_gt(q, False), op_minus_minus_gt(p, r))) → op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(op_minus_minus_gt(p, q), False), r))"), t48))
 }
 
 ///|
@@ -742,7 +742,7 @@ pub fn imp_false_rule() -> @kernel.Thm {
 /// imp_true_rule
 fn step_47() -> Unit raise {
   let t49 = @meson.meson_tac(@list.List([imp_insert(), imp_swap(), modusponens(), imp_trans_th(), bool_cases()]))
-  imp_true_rule_c.set(@tactics.prove(@parser.parse_term("forall A p q r. A |-- (p --> False) --> r /\\ A |-- q --> r\n             ==> A |-- (p --> q) --> r"), t49))
+  imp_true_rule_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, ∀ r : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, False), r)) && op_bar_minus_minus(A, op_minus_minus_gt(q, r)) → op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, q), r))"), t49))
 }
 
 ///|
@@ -758,7 +758,7 @@ pub fn imp_true_rule() -> @kernel.Thm {
 /// truth
 fn step_48() -> Unit raise {
   let t50 = @meson.meson_tac(@list.List([modusponens(), axiom_true(), imp_refl(), iff_imp2()]))
-  truth_c.set(@tactics.prove(@parser.parse_term("forall A. A |-- True"), t50))
+  truth_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, op_bar_minus_minus(A, True)"), t50))
 }
 
 ///|
@@ -774,7 +774,7 @@ pub fn truth() -> @kernel.Thm {
 /// and_left
 fn step_49() -> Unit raise {
   let t51 = @meson.meson_tac(@list.List([imp_add_assum(), axiom_addimp(), imp_trans(), imp_add_concl(), axiom_doubleneg(), imp_trans(), iff_imp1(), axiom_and()]))
-  and_left_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- p && q --> p"), t51))
+  and_left_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_amp_amp(p, q), p))"), t51))
 }
 
 ///|
@@ -790,7 +790,7 @@ pub fn and_left() -> @kernel.Thm {
 /// and_right
 fn step_50() -> Unit raise {
   let t52 = @meson.meson_tac(@list.List([axiom_addimp(), imp_trans(), imp_add_concl(), axiom_doubleneg(), iff_imp1(), axiom_and()]))
-  and_right_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- p && q --> q"), t52))
+  and_right_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_amp_amp(p, q), q))"), t52))
 }
 
 ///|
@@ -806,7 +806,7 @@ pub fn and_right() -> @kernel.Thm {
 /// and_pair
 fn step_51() -> Unit raise {
   let t53 = @meson.meson_tac(@list.List([iff_imp2(), axiom_and(), imp_swap_th(), imp_add_assum(), imp_trans2(), modusponens(), imp_swap(), imp_refl()]))
-  and_pair_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- p --> q --> p && q"), t53))
+  and_pair_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, op_amp_amp(p, q))))"), t53))
 }
 
 ///|
@@ -822,7 +822,7 @@ pub fn and_pair() -> @kernel.Thm {
 /// META_AND
 fn step_52() -> Unit raise {
   let t54 = @meson.meson_tac(@list.List([and_left(), and_right(), and_pair(), modusponens()]))
-  meta_and_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- p && q <=> A |-- p /\\ A |-- q"), t54))
+  meta_and_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_amp_amp(p, q)) == (op_bar_minus_minus(A, p) && op_bar_minus_minus(A, q))"), t54))
 }
 
 ///|
@@ -838,7 +838,7 @@ pub fn meta_and() -> @kernel.Thm {
 /// shunt
 fn step_53() -> Unit raise {
   let t55 = @meson.meson_tac(@list.List([modusponens(), imp_add_assum(), and_pair()]))
-  shunt_c.set(@tactics.prove(@parser.parse_term("forall A p q r. A |-- p && q --> r ==> A |-- p --> q --> r"), t55))
+  shunt_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, ∀ r : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_amp_amp(p, q), r)) → op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, r)))"), t55))
 }
 
 ///|
@@ -854,7 +854,7 @@ pub fn shunt() -> @kernel.Thm {
 /// ante_conj
 fn step_54() -> Unit raise {
   let t56 = @meson.meson_tac(@list.List([imp_trans_chain_2(), and_left(), and_right()]))
-  ante_conj_c.set(@tactics.prove(@parser.parse_term("forall A p q r. A |-- p --> q --> r ==> A |-- p && q --> r"), t56))
+  ante_conj_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, ∀ r : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, r))) → op_bar_minus_minus(A, op_minus_minus_gt(op_amp_amp(p, q), r))"), t56))
 }
 
 ///|
@@ -870,7 +870,7 @@ pub fn ante_conj() -> @kernel.Thm {
 /// not_not_false
 fn step_55() -> Unit raise {
   let t57 = @meson.meson_tac(@list.List([imp_antisym(), axiom_doubleneg(), imp_swap(), imp_refl()]))
-  not_not_false_c.set(@tactics.prove(@parser.parse_term("forall A p. A |-- (p --> False) --> False <-> p"), t57))
+  not_not_false_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, op_bar_minus_minus(A, op_lt_minus_gt(op_minus_minus_gt(op_minus_minus_gt(p, False), False), p))"), t57))
 }
 
 ///|
@@ -886,7 +886,7 @@ pub fn not_not_false() -> @kernel.Thm {
 /// iff_sym
 fn step_56() -> Unit raise {
   let t58 = @meson.meson_tac(@list.List([iff_imp1(), iff_imp2(), imp_antisym()]))
-  iff_sym_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- p <-> q <=> A |-- q <-> p"), t58))
+  iff_sym_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_lt_minus_gt(p, q)) == op_bar_minus_minus(A, op_lt_minus_gt(q, p))"), t58))
 }
 
 ///|
@@ -902,7 +902,7 @@ pub fn iff_sym() -> @kernel.Thm {
 /// iff_trans
 fn step_57() -> Unit raise {
   let t59 = @meson.meson_tac(@list.List([iff_imp1(), iff_imp2(), imp_trans(), imp_antisym()]))
-  iff_trans_c.set(@tactics.prove(@parser.parse_term("forall A p q r. A |-- p <-> q /\\ A |-- q <-> r ==> A |-- p <-> r"), t59))
+  iff_trans_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, ∀ r : Form, op_bar_minus_minus(A, op_lt_minus_gt(p, q)) && op_bar_minus_minus(A, op_lt_minus_gt(q, r)) → op_bar_minus_minus(A, op_lt_minus_gt(p, r))"), t59))
 }
 
 ///|
@@ -918,7 +918,7 @@ pub fn iff_trans() -> @kernel.Thm {
 /// not_not
 fn step_58() -> Unit raise {
   let t60 = @meson.meson_tac(@list.List([iff_trans(), not_not_false(), axiom_not(), imp_antisym(), imp_add_concl(), iff_imp1(), iff_imp2()]))
-  not_not_c.set(@tactics.prove(@parser.parse_term("forall A p. A |-- Not(Not p) <-> p"), t60))
+  not_not_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, op_bar_minus_minus(A, op_lt_minus_gt(Not(Not(p)), p))"), t60))
 }
 
 ///|
@@ -934,7 +934,7 @@ pub fn not_not() -> @kernel.Thm {
 /// contrapos_eq
 fn step_59() -> Unit raise {
   let t61 = @meson.meson_tac(@list.List([contrapos(), not_not(), iff_imp1(), iff_imp2(), imp_trans()]))
-  contrapos_eq_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- Not p --> Not q <=> A |-- q --> p"), t61))
+  contrapos_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(Not(p), Not(q))) == op_bar_minus_minus(A, op_minus_minus_gt(q, p))"), t61))
 }
 
 ///|
@@ -950,7 +950,7 @@ pub fn contrapos_eq() -> @kernel.Thm {
 /// or_left
 fn step_60() -> Unit raise {
   let t62 = @meson.meson_tac(@list.List([imp_trans(), not_not(), iff_imp2(), and_right(), contrapos(), axiom_or()]))
-  or_left_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- q --> p || q"), t62))
+  or_left_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(q, op_bar_bar(p, q)))"), t62))
 }
 
 ///|
@@ -966,7 +966,7 @@ pub fn or_left() -> @kernel.Thm {
 /// or_right
 fn step_61() -> Unit raise {
   let t63 = @meson.meson_tac(@list.List([imp_trans(), not_not(), iff_imp2(), and_left(), contrapos(), axiom_or()]))
-  or_right_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- p --> p || q"), t63))
+  or_right_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_bar_bar(p, q)))"), t63))
 }
 
 ///|
@@ -984,7 +984,7 @@ fn step_62() -> Unit raise {
   let t65 = @meson.meson_tac(@list.List([imp_trans(), imp_trans_chain_2(), and_pair(), contrapos_eq(), not_not(), axiom_or(), iff_imp1(), iff_imp2(), imp_trans()]))
   let t64 = @simp.once_rewrite_tac(@list.List([@equal.gsym(contrapos_eq())]))
   let t66 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t64), t65)
-  ante_disj_c.set(@tactics.prove(@parser.parse_term("forall A p q r. A |-- p --> r /\\ A |-- q --> r\n             ==> A |-- p || q --> r"), t66))
+  ante_disj_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, ∀ r : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, r)) && op_bar_minus_minus(A, op_minus_minus_gt(q, r)) → op_bar_minus_minus(A, op_minus_minus_gt(op_bar_bar(p, q), r))"), t66))
 }
 
 ///|
@@ -1000,7 +1000,7 @@ pub fn ante_disj() -> @kernel.Thm {
 /// iff_def
 fn step_63() -> Unit raise {
   let t67 = @meson.meson_tac(@list.List([imp_antisym(), imp_trans_chain_2(), axiom_iffimp1(), axiom_iffimp2(), and_pair(), axiom_impiff(), imp_trans_chain_2(), and_left(), and_right()]))
-  iff_def_c.set(@tactics.prove(@parser.parse_term("forall A p q. A |-- (p <-> q) <-> (p --> q) && (q --> p)"), t67))
+  iff_def_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_lt_minus_gt(op_lt_minus_gt(p, q), op_amp_amp(op_minus_minus_gt(p, q), op_minus_minus_gt(q, p))))"), t67))
 }
 
 ///|
@@ -1016,7 +1016,7 @@ pub fn iff_def() -> @kernel.Thm {
 /// iff_refl
 fn step_64() -> Unit raise {
   let t68 = @meson.meson_tac(@list.List([imp_antisym(), imp_refl()]))
-  iff_refl_c.set(@tactics.prove(@parser.parse_term("forall A p. A |-- p <-> p"), t68))
+  iff_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, op_bar_minus_minus(A, op_lt_minus_gt(p, p))"), t68))
 }
 
 ///|
@@ -1032,7 +1032,7 @@ pub fn iff_refl() -> @kernel.Thm {
 /// eq_sym
 fn step_65() -> Unit raise {
   let t69 = @meson.meson_tac(@list.List([axiom_eqrefl(), modusponens(), imp_swap(), axiom_predcong()]))
-  eq_sym_c.set(@tactics.prove(@parser.parse_term("forall A s t. A |-- s === t --> t === s"), t69))
+  eq_sym_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_eq_eq_eq(t, s)))"), t69))
 }
 
 ///|
@@ -1058,7 +1058,7 @@ fn step_66() -> Unit raise {
   let t71 = @simp.rewrite_tac(@list.List([@fol.termsubst()]))
   let t70 = @tactics.match_mp_tac(@fol.term_induct())
   let t80 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @tactics.gen_tac), @tactics.gen_tac), t70), t71), t72), t79)
-  icongruence_general_c.set(@tactics.prove(@parser.parse_term("forall A p x s t tm.\n     A |-- s === t -->\n           termsubst ((x |-> s) v) tm === termsubst ((x |-> t) v) tm"), t80))
+  icongruence_general_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : _, ∀ x : Num, ∀ s : Term, ∀ t : Term, ∀ tm : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_eq_eq_eq(termsubst(op_bar_minus_gt(x, s, (v : (Num) -> Term)), tm), termsubst(op_bar_minus_gt(x, t, v), tm))))"), t80))
 }
 
 ///|
@@ -1074,7 +1074,7 @@ pub fn icongruence_general() -> @kernel.Thm {
 /// icongruence
 fn step_67() -> Unit raise {
   let t81 = @simp.rewrite_tac(@list.List([@fol.assign(), icongruence_general()]))
-  icongruence_c.set(@tactics.prove(@parser.parse_term("forall A x s t tm.\n     A |-- s === t --> termsubst (x |=> s) tm === termsubst (x |=> t) tm"), t81))
+  icongruence_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ s : Term, ∀ t : Term, ∀ tm : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_eq_eq_eq(termsubst(op_bar_eq_gt(x, s), tm), termsubst(op_bar_eq_gt(x, t), tm))))"), t81))
 }
 
 ///|
@@ -1090,7 +1090,7 @@ pub fn icongruence() -> @kernel.Thm {
 /// icongruence_var
 fn step_68() -> Unit raise {
   let t82 = @meson.meson_tac(@list.List([icongruence(), @fol.termsubst_triv(), @fol.assign_triv()]))
-  icongruence_var_c.set(@tactics.prove(@parser.parse_term("forall A x t tm.\n     A |-- V x === t --> tm === termsubst (x |=> t) tm"), t82))
+  icongruence_var_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ t : Term, ∀ tm : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(V(x), t), op_eq_eq_eq(tm, termsubst(op_bar_eq_gt(x, t), tm))))"), t82))
 }
 
 ///|
@@ -1106,7 +1106,7 @@ pub fn icongruence_var() -> @kernel.Thm {
 /// gen_right
 fn step_69() -> Unit raise {
   let t83 = @meson.meson_tac(@list.List([axiom_allimp(), modusponens(), gen(), imp_trans(), axiom_impall()]))
-  gen_right_c.set(@tactics.prove(@parser.parse_term("forall A x p q. ~(x IN FV(p)) /\\ A |-- p --> q\n             ==> A |-- p --> !!x q"), t83))
+  gen_right_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ p : Form, ∀ q : Form, !IN(x, FV(p)) && op_bar_minus_minus(A, op_minus_minus_gt(p, q)) → op_bar_minus_minus(A, op_minus_minus_gt(p, op_bang_bang(x, q)))"), t83))
 }
 
 ///|
@@ -1122,7 +1122,7 @@ pub fn gen_right() -> @kernel.Thm {
 /// genimp
 fn step_70() -> Unit raise {
   let t84 = @meson.meson_tac(@list.List([modusponens(), axiom_allimp(), gen()]))
-  genimp_c.set(@tactics.prove(@parser.parse_term("forall x p q. A |-- p --> q ==> A |-- (!!x p) --> (!!x q)"), t84))
+  genimp_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Num, ∀ p : Form, ∀ q : Form, op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(p, q)) → op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), op_bang_bang(x, q)))"), t84))
 }
 
 ///|
@@ -1138,7 +1138,7 @@ pub fn genimp() -> @kernel.Thm {
 /// eximp
 fn step_71() -> Unit raise {
   let t85 = @meson.meson_tac(@list.List([contrapos(), genimp(), contrapos(), imp_trans(), iff_imp1(), iff_imp2(), axiom_exists()]))
-  eximp_c.set(@tactics.prove(@parser.parse_term("forall x p q. A |-- p --> q ==> A |-- (??x p) --> (??x q)"), t85))
+  eximp_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Num, ∀ p : Form, ∀ q : Form, op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(p, q)) → op_bar_minus_minus(A, op_minus_minus_gt(op_q_q(x, p), op_q_q(x, q)))"), t85))
 }
 
 ///|
@@ -1155,14 +1155,14 @@ pub fn eximp() -> @kernel.Thm {
 fn step_72() -> Unit raise {
   let t103 = @meson.asm_meson_tac(@list.List([imp_trans(), imp_swap(), axiom_doubleneg()]))
   let t102 = @list.List([@meson.asm_meson_tac(@list.List([modusponens(), iff_imp1(), axiom_exists(), axiom_not(), imp_trans_th()])), @tactics.all_tac])
-  let t101 = @tactics.subgoal_then(@parser.parse_term("A |-- ((q --> False) --> !!x (Not(p --> q)))\n                      --> (q --> False) --> False"), fn(x98 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t101 = @tactics.subgoal_then(@term_syntax.parse_term("op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(op_minus_minus_gt(op_minus_minus_gt((q : Form), False), op_bang_bang((x : Num), Not(op_minus_minus_gt((p : Form), q)))), op_minus_minus_gt(op_minus_minus_gt(q, False), False)))"), fn(x98 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s99 = @tactics.assume_tac(x98)
     fn(x100 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s99(x100)
     }
   })
   let t97 = @list.List([@meson.asm_meson_tac(@list.List([imp_trans(), axiom_allimp()])), @tactics.all_tac])
-  let t96 = @tactics.subgoal_then(@parser.parse_term("A |-- (q --> False) --> !!x p --> !!x (Not(p --> q))"), fn(x93 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t96 = @tactics.subgoal_then(@term_syntax.parse_term("op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(op_minus_minus_gt((q : Form), False), op_minus_minus_gt(op_bang_bang((x : Num), (p : Form)), op_bang_bang(x, Not(op_minus_minus_gt(p, q))))))"), fn(x93 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s94 = @tactics.assume_tac(x93)
     fn(x95 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s94(x95)
@@ -1171,14 +1171,14 @@ fn step_72() -> Unit raise {
   let t91 = @meson.asm_meson_tac(@list.List([iff_imp2(), axiom_not(), imp_trans2(), imp_truefalse()]))
   let t90 = @simp.asm_rewrite_tac(@list.List([@fol.fv(), @sets.in_union(), @sets.not_in_empty()]))
   let t92 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(gen_right()), t90), t91), @tactics.all_tac])
-  let t89 = @tactics.subgoal_then(@parser.parse_term("A |-- (q --> False) --> !!x (p --> Not(p --> q))"), fn(x86 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t89 = @tactics.subgoal_then(@term_syntax.parse_term("op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(op_minus_minus_gt((q : Form), False), op_bang_bang((x : Num), op_minus_minus_gt((p : Form), Not(op_minus_minus_gt(p, q))))))"), fn(x86 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s87 = @tactics.assume_tac(x86)
     fn(x88 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s87(x88)
     }
   })
   let t104 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t89), t92), t96), t97), t101), t102), t103)
-  exists_imp_c.set(@tactics.prove(@parser.parse_term("forall A x p q. A |-- ??x (p --> q) /\\ ~(x IN FV(q)) ==> A |-- (!!x p) --> q"), t104))
+  exists_imp_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_q_q(x, op_minus_minus_gt(p, q))) && !IN(x, FV(q)) → op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), q))"), t104))
 }
 
 ///|
@@ -1194,7 +1194,7 @@ pub fn exists_imp() -> @kernel.Thm {
 /// subspec
 fn step_73() -> Unit raise {
   let t105 = @meson.meson_tac(@list.List([exists_imp(), modusponens(), eximp(), axiom_existseq()]))
-  subspec_c.set(@tactics.prove(@parser.parse_term("forall A x t p q. ~(x IN FVT(t)) /\\ ~(x IN FV(q)) /\\ A |-- V x === t --> p --> q\n               ==> A |-- (!!x p) --> q"), t105))
+  subspec_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ t : Term, ∀ p : Form, ∀ q : Form, !IN(x, FVT(t)) && !IN(x, FV(q)) && op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(V(x), t), op_minus_minus_gt(p, q))) → op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), q))"), t105))
 }
 
 ///|
@@ -1210,7 +1210,7 @@ pub fn subspec() -> @kernel.Thm {
 /// subalpha
 fn step_74() -> Unit raise {
   let t117 = @simp.asm_rewrite_tac(@list.List([@fol.fvt(), @sets.in_sing()]))
-  let t116 = @tactics.exists_tac(@parser.parse_term("V y"))
+  let t116 = @tactics.exists_tac(@term_syntax.parse_term("V((y : Num))"))
   let t115 = @tactics.match_mp_tac(subspec())
   let t114 = @simp.asm_rewrite_tac(@list.List([@fol.fv(), @sets.in_delete()]))
   let t113 = @tactics.match_mp_tac(gen_right())
@@ -1222,9 +1222,9 @@ fn step_74() -> Unit raise {
     }
   }), t111), @tactics.all_tac])
   let t107 = @simp.asm_rewrite_tac(@list.List([]))
-  let t106 = @class.asm_cases_tac(@parser.parse_term("x = y:num"))
+  let t106 = @class.asm_cases_tac(@term_syntax.parse_term("(x : Num) == (y : Num)"))
   let t118 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t106), t107), @tactics.strip_tac), t112), t113), t114), t115), t116), t117)
-  subalpha_c.set(@tactics.prove(@parser.parse_term("forall A x y p q. ((x = y) \\/ ~(x IN FV(q)) /\\ ~(y IN FV(p))) /\\\n               A |-- V x === V y --> p --> q\n               ==> A |-- (!!x p) --> (!!y q)"), t118))
+  subalpha_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ y : Num, ∀ p : Form, ∀ q : Form, (x == y || !IN(x, FV(q)) && !IN(y, FV(p))) && op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(V(x), V(y)), op_minus_minus_gt(p, q))) → op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), op_bang_bang(y, q)))"), t118))
 }
 
 ///|
@@ -1239,7 +1239,7 @@ pub fn subalpha() -> @kernel.Thm {
 ///|
 /// complexity
 fn step_75() -> Unit raise {
-  let t119 = @parser.parse_term("(complexity False = 1) /\\\n   (complexity True = 1) /\\\n   (forall s t. complexity (s === t) = 1) /\\\n   (forall s t. complexity (s << t) = 1) /\\\n   (forall s t. complexity (s <<= t) = 1) /\\\n   (forall p. complexity (Not p) = complexity p + 3) /\\\n   (forall p q. complexity (p && q) = complexity p + complexity q + 6) /\\\n   (forall p q. complexity (p || q) = complexity p + complexity q + 16) /\\\n   (forall p q. complexity (p --> q) = complexity p + complexity q + 1) /\\\n   (forall p q. complexity (p <-> q) = 2 * (complexity p + complexity q) + 9) /\\\n   (forall x p. complexity (!!x p) = complexity p + 1) /\\\n   (forall x p. complexity (??x p) = complexity p + 8)")
+  let t119 = @term_syntax.parse_term("(complexity : (Form) -> Num)(False) == 1 && complexity(True) == 1 && (∀ s : Term, ∀ t : Term, complexity(op_eq_eq_eq(s, t)) == 1) && (∀ s : Term, ∀ t : Term, complexity(op_lt_lt(s, t)) == 1) && (∀ s : Term, ∀ t : Term, complexity(op_lt_lt_eq(s, t)) == 1) && (∀ p : Form, complexity(Not(p)) == complexity(p) + 3) && (∀ p : Form, ∀ q : Form, complexity(op_amp_amp(p, q)) == complexity(p) + (complexity(q) + 6)) && (∀ p : Form, ∀ q : Form, complexity(op_bar_bar(p, q)) == complexity(p) + (complexity(q) + 16)) && (∀ p : Form, ∀ q : Form, complexity(op_minus_minus_gt(p, q)) == complexity(p) + (complexity(q) + 1)) && (∀ p : Form, ∀ q : Form, complexity(op_lt_minus_gt(p, q)) == 2 * (complexity(p) + complexity(q)) + 9) && (∀ x : Num, ∀ p : Form, complexity(op_bang_bang(x, p)) == complexity(p) + 1) && (∀ x : Num, ∀ p : Form, complexity(op_q_q(x, p)) == complexity(p) + 8)")
   complexity_c.set(@recursion.new_recursive_definition(@fol.form_recursion())(t119))
 }
 
@@ -1257,7 +1257,7 @@ pub fn complexity() -> @kernel.Thm {
 fn step_76() -> Unit raise {
   let t120 = @simp.simp_tac(@list.List([@fol.formsubst(), complexity(), @pair.let_def(), @pair.let_end_def()]))
   let t121 = @tactics.then_tac(@tactics.match_mp_tac(@fol.form_induct()), t120)
-  complexity_formsubst_c.set(@tactics.prove(@parser.parse_term("forall p i. complexity(formsubst i p) = complexity p"), t121))
+  complexity_formsubst_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Form, ∀ i : (Num) -> Term, complexity(formsubst(i, p)) == complexity(p)"), t121))
 }
 
 ///|
@@ -1274,24 +1274,24 @@ pub fn complexity_formsubst() -> @kernel.Thm {
 fn step_77() -> Unit raise {
   let t296 = @simp.asm_rewrite_tac(@list.List([@fol.valmod(), @fol.fvt(), @sets.in_sing()]))
   let t295 = @simp.asm_rewrite_tac(@list.List([@fol.valmod_basic(), @fol.fvt(), @sets.in_sing()]))
-  let t294 = @class.asm_cases_tac(@parser.parse_term("w:num = u"))
-  let t293 = @tactics.x_gen_tac(@parser.parse_term("w:num"))
+  let t294 = @class.asm_cases_tac(@term_syntax.parse_term("(w : Num) == (u : Num)"))
+  let t293 = @tactics.x_gen_tac(@term_syntax.parse_term("(w : Num)"))
   let t292 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t291 = @tactics.match_mp_tac(@theorems.mono_not())
   let t290 = @simp.asm_rewrite_tac(@list.List([@fol.formsubst_fv(), @fol.fv(), @sets.in_elim_thm(), @sets.in_delete()]))
-  let t287 = @tactics.undisch_tac(@parser.parse_term("~(y IN FV (formsubst ((v |-> t) i) (!! u p)))"))
+  let t287 = @tactics.undisch_tac(@term_syntax.parse_term("!IN((y : Num), FV(formsubst(op_bar_minus_gt((v : Num), (t : Term), (i : (Num) -> Term)), op_bang_bang((u : Num), (p : Form)))))"))
   let t286 = @simp.asm_rewrite_tac(@list.List([]))
-  let t288 = @tactics.then_tac(@tactics.then_tac(@class.asm_cases_tac(@parser.parse_term("z:num = y")), t286), t287)
-  let t285 = @tactics.undisch_tac(@parser.parse_term("~(x IN FV (formsubst ((v |-> s) i) (!! u p)))"))
+  let t288 = @tactics.then_tac(@tactics.then_tac(@class.asm_cases_tac(@term_syntax.parse_term("(z : Num) == (y : Num)")), t286), t287)
+  let t285 = @tactics.undisch_tac(@term_syntax.parse_term("!IN((x : Num), FV(formsubst(op_bar_minus_gt((v : Num), (s : Term), (i : (Num) -> Term)), op_bang_bang((u : Num), (p : Form)))))"))
   let t284 = @simp.asm_rewrite_tac(@list.List([]))
-  let t289 = @list.List([@tactics.then_tac(@tactics.then_tac(@class.asm_cases_tac(@parser.parse_term("z:num = x")), t284), t285), t288])
+  let t289 = @list.List([@tactics.then_tac(@tactics.then_tac(@class.asm_cases_tac(@term_syntax.parse_term("(z : Num) == (x : Num)")), t284), t285), t288])
   let t283 = @simp.asm_simp_tac(@list.List([@arith.le_refl()]))
   let t282 = @tactics.match_mp_tac(subalpha())
   let t281 = @simp.asm_rewrite_tac(@list.List([]))
-  let t280 = @tactics.exists_tac(@parser.parse_term("z:num"))
+  let t280 = @tactics.exists_tac(@term_syntax.parse_term("(z : Num)"))
   let t279 = @simp.rewrite_tac(@list.List([@sets.in_union(), @class.de_morgan_thm()]))
   let t274 = @simp.rewrite_tac(@list.List([@sets.finite_union(), @fol.fv_finite(), @fol.fvt_finite()]))
-  let t273 = @tactics.mp_tac(@bool.spec(@parser.parse_term("FVT(s) UNION FVT(t) UNION\n    FV(formsubst ((u |-> V x) ((v |-> s) i)) p) UNION\n    FV(formsubst ((u |-> V y) ((v |-> t) i)) p)"), @fol.variant_finite()))
+  let t273 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("UNION(FVT((s : Term)), UNION(FVT((t : Term)), UNION(FV(formsubst(op_bar_minus_gt((u : Num), V((x : Num)), op_bar_minus_gt((v : Num), s, (i : (Num) -> Term))), (p : Form))), FV(formsubst(op_bar_minus_gt(u, V((y : Num)), op_bar_minus_gt(v, t, i)), p)))))"), @fol.variant_finite()))
   let t271 = @meson.asm_meson_tac(@list.List([imp_mono_th(), modusponens()]))
   let t270 = @tactics.first_assum(fn(x268 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th_1 = x268
@@ -1299,12 +1299,12 @@ fn step_77() -> Unit raise {
   })
   let t266 = @simp.asm_simp_tac(@list.List([complexity(), @arith.le_refl(), @fol.fv(), @sets.in_union(), gen_right()]))
   let t265 = @simp.rewrite_tac(@list.List([axiom_allimp()]))
-  let t264 = @tactics.exists_tac(@parser.parse_term("!!z (formsubst ((v |-> s) ((u |-> V z) i)) p\n                       --> formsubst ((v |-> t) ((u |-> V z) i)) p)"))
+  let t264 = @tactics.exists_tac(@term_syntax.parse_term("op_bang_bang((z : Num), op_minus_minus_gt(formsubst(op_bar_minus_gt((v : Num), (s : Term), op_bar_minus_gt((u : Num), V(z), (i : (Num) -> Term))), (p : Form)), formsubst(op_bar_minus_gt(v, (t : Term), op_bar_minus_gt(u, V(z), i)), p)))"))
   let t267 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(imp_trans()), t264), t265), t266), @tactics.all_tac])
-  let t263 = @tactics.exists_tac(@parser.parse_term("(!!z (formsubst ((v |-> s) ((u |-> V z) i)) p))\n                     --> (!!z (formsubst ((v |-> t) ((u |-> V z) i)) p))"))
+  let t263 = @tactics.exists_tac(@term_syntax.parse_term("op_minus_minus_gt(op_bang_bang((z : Num), formsubst(op_bar_minus_gt((v : Num), (s : Term), op_bar_minus_gt((u : Num), V(z), (i : (Num) -> Term))), (p : Form))), op_bang_bang(z, formsubst(op_bar_minus_gt(v, (t : Term), op_bar_minus_gt(u, V(z), i)), p)))"))
   let t262 = @tactics.match_mp_tac(imp_trans())
-  let t272 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("z:num"))(@tactics.strip_assume_tac)), t262), t263), @tactics.conj_tac), t267), t270), t271)])
-  let t261 = @tactics.subgoal_then(@parser.parse_term("?z. ~(z IN FVT s) /\\ ~(z IN FVT t) /\\\n        A |-- !!x (formsubst ((u |-> V x) ((v |-> s) i)) p)\n              --> !!z (formsubst ((u |-> V z) ((v |-> s) i)) p) /\\\n        A |-- !!z (formsubst ((u |-> V z) ((v |-> t) i)) p)\n              --> !!y (formsubst ((u |-> V y) ((v |-> t) i)) p)"), fn(x258 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t272 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_then(@tactics.x_choose_then(@term_syntax.parse_term("(z : Num)"))(@tactics.strip_assume_tac)), t262), t263), @tactics.conj_tac), t267), t270), t271)])
+  let t261 = @tactics.subgoal_then(@term_syntax.parse_term("∃ z : Num, !IN(z, FVT((s : Term))) && !IN(z, FVT((t : Term))) && op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(op_bang_bang((x : Num), formsubst(op_bar_minus_gt((u : Num), V(x), op_bar_minus_gt((v : Num), s, (i : (Num) -> Term))), (p : Form))), op_bang_bang(z, formsubst(op_bar_minus_gt(u, V(z), op_bar_minus_gt(v, s, i)), p)))) && op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(z, formsubst(op_bar_minus_gt(u, V(z), op_bar_minus_gt(v, t, i)), p)), op_bang_bang((y : Num), formsubst(op_bar_minus_gt(u, V(y), op_bar_minus_gt(v, t, i)), p))))"), fn(x258 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s259 = @tactics.mp_tac(x258)
     fn(x260 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s259(x260)
@@ -1312,20 +1312,20 @@ fn step_77() -> Unit raise {
   })
   let t256 = @simp.asm_rewrite_tac(@list.List([@fol.valmod(), @fol.fvt(), @sets.in_sing()]))
   let t255 = @simp.asm_rewrite_tac(@list.List([@fol.valmod_basic(), @fol.fvt(), @sets.in_sing()]))
-  let t254 = @class.asm_cases_tac(@parser.parse_term("w:num = u"))
-  let t253 = @tactics.x_gen_tac(@parser.parse_term("w:num"))
+  let t254 = @class.asm_cases_tac(@term_syntax.parse_term("(w : Num) == (u : Num)"))
+  let t253 = @tactics.x_gen_tac(@term_syntax.parse_term("(w : Num)"))
   let t252 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t251 = @tactics.match_mp_tac(@theorems.mono_not())
   let t250 = @simp.asm_rewrite_tac(@list.List([@fol.formsubst_fv(), @fol.fv(), @sets.in_elim_thm(), @sets.in_delete()]))
-  let t248 = @tactics.undisch_tac(@parser.parse_term("~(y IN FV (formsubst ((v |-> t) i) (!! u p)))"))
-  let t249 = @list.List([@tactics.undisch_tac(@parser.parse_term("~(x IN FV (formsubst ((v |-> s) i) (!! u p)))")), t248])
+  let t248 = @tactics.undisch_tac(@term_syntax.parse_term("!IN((y : Num), FV(formsubst(op_bar_minus_gt((v : Num), (t : Term), (i : (Num) -> Term)), op_bang_bang((u : Num), (p : Form)))))"))
+  let t249 = @list.List([@tactics.undisch_tac(@term_syntax.parse_term("!IN((x : Num), FV(formsubst(op_bar_minus_gt((v : Num), (s : Term), (i : (Num) -> Term)), op_bang_bang((u : Num), (p : Form)))))")), t248])
   let t247 = @simp.asm_rewrite_tac(@list.List([]))
-  let t246 = @class.asm_cases_tac(@parser.parse_term("y:num = x"))
+  let t246 = @class.asm_cases_tac(@term_syntax.parse_term("(y : Num) == (x : Num)"))
   let t245 = @simp.asm_simp_tac(@list.List([@arith.le_refl()]))
   let t244 = @tactics.match_mp_tac(subalpha())
   let t243 = @tactics.match_mp_tac(add_assum())
   let t257 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@fol.valmod_valmod_basic()])), t243), t244), t245), t246), t247), @tactics.conj_tac), t249), t250), t251), t252), t253), t254), t255), t256), @tactics.all_tac])
-  let t242 = @class.asm_cases_tac(@parser.parse_term("v:num = u"))
+  let t242 = @class.asm_cases_tac(@term_syntax.parse_term("(v : Num) == (u : Num)"))
   let t239 = @meson.meson_tac(@list.List([@fol.fvt(), @sets.in_sing()]))
   let t238 = @simp.rewrite_tac(@list.List([@fol.valmod()]))
   let t237 = @simp.rewrite_tac(@list.List([@sets.subset(), @fol.formsubst_fv(), @sets.in_elim_thm(), @fol.fv(), @sets.in_delete()]))
@@ -1338,27 +1338,27 @@ fn step_77() -> Unit raise {
       s233(x234)
     }
   }, @list.List(["x", "y"])), @tactics.conj_tac), t240), @tactics.all_tac])
-  let t231 = @tactics.subgoal_then(@parser.parse_term("~(x IN FV(formsubst ((v |-> s) i) (!!u p))) /\\\n                ~(y IN FV(formsubst ((v |-> t) i) (!!u p)))"), @tactics.strip_assume_tac)
+  let t231 = @tactics.subgoal_then(@term_syntax.parse_term("!IN((x : Num), FV(formsubst(op_bar_minus_gt((v : Num), (s : Term), (i : (Num) -> Term)), op_bang_bang((u : Num), (p : Form))))) && !IN((y : Num), FV(formsubst(op_bar_minus_gt(v, (t : Term), i), op_bang_bang(u, p))))"), @tactics.strip_assume_tac)
   let t230 = @simp.rewrite_tac(@list.List([@pair.let_def(), @pair.let_end_def()]))
-  let t228 = @parser.parse_term("y = if ?y. y IN FV (!! u p) /\\ u IN FVT ((v |-> t) i y)\n         then VARIANT (FV (formsubst ((u |-> V u) ((v |-> t) i)) p))\n         else u")
-  let t229 = @tactics.map_every(@simp.abbrev_tac, @list.List([@parser.parse_term("x = if ?y. y IN FV (!! u p) /\\ u IN FVT ((v |-> s) i y)\n         then VARIANT (FV (formsubst ((u |-> V u) ((v |-> s) i)) p))\n         else u"), t228]))
-  let t224 = @parser.parse_term("t:term")
-  let t225 = @parser.parse_term("s:term")
-  let t226 = @parser.parse_term("i:num->term")
-  let t227 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("v:num"), t226, t225, t224]))
-  let t223 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("a < b + 1 <=> a <= b"))]))
+  let t228 = @term_syntax.parse_term("(y : Num) == (if (∃ y : Num, IN(y, FV(op_bang_bang((u : Num), (p : Form)))) && IN(u, FVT(op_bar_minus_gt((v : Num), (t : Term), (i : (Num) -> Term), y)))) { VARIANT(FV(formsubst(op_bar_minus_gt(u, V(u), op_bar_minus_gt(v, t, i)), p))) } else { u })")
+  let t229 = @tactics.map_every(@simp.abbrev_tac, @list.List([@term_syntax.parse_term("(x : Num) == (if (∃ y : Num, IN(y, FV(op_bang_bang((u : Num), (p : Form)))) && IN(u, FVT(op_bar_minus_gt((v : Num), (s : Term), (i : (Num) -> Term), y)))) { VARIANT(FV(formsubst(op_bar_minus_gt(u, V(u), op_bar_minus_gt(v, s, i)), p))) } else { u })"), t228]))
+  let t224 = @term_syntax.parse_term("(t : Term)")
+  let t225 = @term_syntax.parse_term("(s : Term)")
+  let t226 = @term_syntax.parse_term("(i : (Num) -> Term)")
+  let t227 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(v : Num)"), t226, t225, t224]))
+  let t223 = @simp.rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("((a : Num) < (b : Num) + 1) == (a <= b)"))]))
   let t222 = @tactics.disch_then(fn(x221 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
   })
-  let t219 = @parser.parse_term("p:form")
-  let t220 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("u:num"), t219]))
+  let t219 = @term_syntax.parse_term("(p : Form)")
+  let t220 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(u : Num)"), t219]))
   let t207 = @meson.asm_meson_tac(@list.List([axiom_exists(), iff_imp1(), iff_imp2(), imp_swap(), imp_trans(), imp_trans2()]))
   let t206 = @tactics.repeat_tac(@pair.let_tac)
   let t205 = @simp.rewrite_tac(@list.List([@fol.fv()]))
   let t204 = @tactics.repeat_tac(@tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_forall()), @tactics.gen_tac))
   let t203 = @simp.rewrite_tac(@list.List([@fol.formsubst()]))
   let t202 = @simp.rewrite_tac(@list.List([complexity()]))
-  let t198 = @parser.parse_term("Not(!!x (Not p))")
+  let t198 = @term_syntax.parse_term("Not(op_bang_bang((x : Num), Not((p : Form))))")
   let t201 = @tactics.disch_then(fn(x200 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x195 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s196 = @tactics.mp_tac(x195)
@@ -1370,12 +1370,12 @@ fn step_77() -> Unit raise {
   let t194 = @tactics.disch_then(fn(x193 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
   })
-  let t192 = @parser.parse_term("p:form")
-  let t208 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:num"), t192])), t194), t201), t202), @tactics.ants_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t203), t204), t205), t206), t207)
+  let t192 = @term_syntax.parse_term("(p : Form)")
+  let t208 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : Num)"), t192])), t194), t201), t202), @tactics.ants_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t203), t204), t205), t206), t207)
   let t191 = @meson.meson_tac(@list.List([iff_def(), iff_imp1(), iff_imp2(), imp_swap(), imp_trans(), imp_trans2()]))
   let t190 = @simp.rewrite_tac(@list.List([@fol.formsubst()]))
   let t189 = @simp.rewrite_tac(@list.List([complexity()]))
-  let t185 = @parser.parse_term("(p --> q) && (q --> p)")
+  let t185 = @term_syntax.parse_term("op_amp_amp(op_minus_minus_gt((p : Form), (q : Form)), op_minus_minus_gt(q, p))")
   let t188 = @tactics.disch_then(fn(x187 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x182 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s183 = @tactics.mp_tac(x182)
@@ -1387,24 +1387,24 @@ fn step_77() -> Unit raise {
   let t181 = @tactics.disch_then(fn(x180 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
   })
-  let t179 = @parser.parse_term("q:form")
-  let t209 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("p:form"), t179])), t181), t188), t189), @tactics.ants_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t190), t191)
+  let t179 = @term_syntax.parse_term("(q : Form)")
+  let t209 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(p : Form)"), t179])), t181), t188), t189), @tactics.ants_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t190), t191)
   let t178 = @meson.meson_tac(@list.List([imp_mono_th(), eq_sym(), imp_trans(), imp_trans_chain_2()]))
-  let t177 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("p < p + q + 1 /\\ q < p + q + 1"))]))
+  let t177 = @simp.rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(p : Num) < p + ((q : Num) + 1) && q < p + (q + 1)"))]))
   let t176 = @tactics.disch_then(fn(x173 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x173
-    let t175 = @tactics.mp_tac(@bool.spec(@parser.parse_term("q:form"), th))
-    @tactics.then_tac(@tactics.mp_tac(@bool.spec(@parser.parse_term("p:form"), th)), t175)
+    let t175 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(q : Form)"), th))
+    @tactics.then_tac(@tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(p : Form)"), th)), t175)
   })
   let t172 = @tactics.disch_then(fn(x171 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
   })
-  let t170 = @parser.parse_term("q:form")
-  let t210 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("p:form"), t170])), t172), t176), t177), t178)
+  let t170 = @term_syntax.parse_term("(q : Form)")
+  let t210 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(p : Form)"), t170])), t172), t176), t177), t178)
   let t169 = @meson.meson_tac(@list.List([axiom_or(), iff_imp1(), iff_imp2(), imp_swap(), imp_trans(), imp_trans2()]))
   let t168 = @simp.rewrite_tac(@list.List([@fol.formsubst()]))
   let t167 = @simp.rewrite_tac(@list.List([complexity()]))
-  let t163 = @parser.parse_term("Not(Not p && Not q)")
+  let t163 = @term_syntax.parse_term("Not(op_amp_amp(Not((p : Form)), Not((q : Form))))")
   let t166 = @tactics.disch_then(fn(x165 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x160 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s161 = @tactics.mp_tac(x160)
@@ -1416,12 +1416,12 @@ fn step_77() -> Unit raise {
   let t159 = @tactics.disch_then(fn(x158 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
   })
-  let t157 = @parser.parse_term("q:form")
-  let t211 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("p:form"), t157])), t159), t166), t167), @tactics.ants_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t168), t169)
+  let t157 = @term_syntax.parse_term("(q : Form)")
+  let t211 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(p : Form)"), t157])), t159), t166), t167), @tactics.ants_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t168), t169)
   let t156 = @meson.meson_tac(@list.List([axiom_and(), iff_imp1(), iff_imp2(), imp_swap(), imp_trans(), imp_trans2()]))
   let t155 = @simp.rewrite_tac(@list.List([@fol.formsubst()]))
   let t154 = @simp.rewrite_tac(@list.List([complexity()]))
-  let t150 = @parser.parse_term("(p --> q --> False) --> False")
+  let t150 = @term_syntax.parse_term("op_minus_minus_gt(op_minus_minus_gt((p : Form), op_minus_minus_gt((q : Form), False)), False)")
   let t153 = @tactics.disch_then(fn(x152 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x147 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s148 = @tactics.mp_tac(x147)
@@ -1433,12 +1433,12 @@ fn step_77() -> Unit raise {
   let t146 = @tactics.disch_then(fn(x145 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
   })
-  let t144 = @parser.parse_term("q:form")
-  let t212 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("p:form"), t144])), t146), t153), t154), @tactics.ants_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t155), t156)
+  let t144 = @term_syntax.parse_term("(q : Form)")
+  let t212 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(p : Form)"), t144])), t146), t153), t154), @tactics.ants_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t155), t156)
   let t143 = @meson.meson_tac(@list.List([axiom_not(), iff_imp1(), iff_imp2(), imp_swap(), imp_trans(), imp_trans2()]))
   let t142 = @simp.rewrite_tac(@list.List([@fol.formsubst()]))
   let t141 = @simp.rewrite_tac(@list.List([complexity()]))
-  let t137 = @parser.parse_term("p --> False")
+  let t137 = @term_syntax.parse_term("op_minus_minus_gt((p : Form), False)")
   let t140 = @tactics.disch_then(fn(x139 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x134 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s135 = @tactics.mp_tac(x134)
@@ -1450,7 +1450,7 @@ fn step_77() -> Unit raise {
   let t133 = @tactics.disch_then(fn(x132 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
   })
-  let t213 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("p:form")), t133), t140), t141), @tactics.ants_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t142), t143)
+  let t213 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(p : Form)")), t133), t140), t141), @tactics.ants_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t142), t143)
   let t214 = @meson.meson_tac(@list.List([imp_trans_chain_2(), axiom_predcong(), icongruence_general()]))
   let t215 = @meson.meson_tac(@list.List([imp_trans_chain_2(), axiom_predcong(), icongruence_general()]))
   let t216 = @meson.meson_tac(@list.List([imp_trans_chain_2(), axiom_predcong(), icongruence_general()]))
@@ -1459,23 +1459,23 @@ fn step_77() -> Unit raise {
   let t131 = @tactics.repeat_tac(@tactics.conj_tac)
   let t130 = @simp.rewrite_tac(@list.List([@fol.formsubst(), complexity()]))
   let t129 = @tactics.match_mp_tac(@fol.form_induct())
-  let t127 = @parser.parse_term("p:form")
-  let t128 = @tactics.spec_tac(@parser.parse_term("p:form"), t127)
+  let t127 = @term_syntax.parse_term("(p : Form)")
+  let t128 = @tactics.spec_tac(@term_syntax.parse_term("(p : Form)"), t127)
   let t126 = @tactics.pop_assum(fn(x123 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s124 = @tactics.mp_tac(x123)
     fn(x125 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s124(x125)
     }
   })
-  let t122 = @wf.wf_induct_tac(@parser.parse_term("complexity p"))
+  let t122 = @wf.wf_induct_tac(@term_syntax.parse_term("complexity((p : Form))"))
   let t297 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t122), t126), t128), t129), t130), t131), t218), t220), t222), t223), @tactics.disch_tac), t227), t229), t230), t231), t241), t242), t257), t261), t272), t273), t274), fn(x278 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     (fn(x275 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let (_, w) = x275
       let t277 = @equal.lhand(@kernel.rand(@equal.lhand(w)))
-      @simp.abbrev_tac(@kernel.mk_comb(@parser.parse_term("(=) (z:num)"), t277))
+      @simp.abbrev_tac(@kernel.mk_comb(@term_syntax.parse_term("op_eq((z : Num))"), t277))
     })(x278)(x278)
   }), t279), @tactics.strip_tac), t280), t281), @tactics.conj_tac), t282), t283), t289), t290), t291), t292), t293), t294), t295), t296)
-  isubst_general_c.set(@tactics.prove(@parser.parse_term("forall A p x v s t. A |-- s === t\n                       --> formsubst ((x |-> s) v) p\n                           --> formsubst ((x |-> t) v) p"), t297))
+  isubst_general_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ x : Num, ∀ v : (Num) -> Term, ∀ s : Term, ∀ t : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(formsubst(op_bar_minus_gt(x, s, v), p), formsubst(op_bar_minus_gt(x, t, v), p))))"), t297))
 }
 
 ///|
@@ -1491,7 +1491,7 @@ pub fn isubst_general() -> @kernel.Thm {
 /// isubst
 fn step_78() -> Unit raise {
   let t298 = @simp.rewrite_tac(@list.List([@fol.assign(), isubst_general()]))
-  isubst_c.set(@tactics.prove(@parser.parse_term("forall A p x s t. A |-- s === t\n                     --> formsubst (x |=> s) p --> formsubst (x |=> t) p"), t298))
+  isubst_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ x : Num, ∀ s : Term, ∀ t : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(formsubst(op_bar_eq_gt(x, s), p), formsubst(op_bar_eq_gt(x, t), p))))"), t298))
 }
 
 ///|
@@ -1507,7 +1507,7 @@ pub fn isubst() -> @kernel.Thm {
 /// isubst_var
 fn step_79() -> Unit raise {
   let t299 = @meson.meson_tac(@list.List([@fol.formsubst_triv(), @fol.assign_triv(), isubst()]))
-  isubst_var_c.set(@tactics.prove(@parser.parse_term("forall A p x t. A |-- V x === t --> p --> formsubst (x |=> t) p"), t299))
+  isubst_var_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ x : Num, ∀ t : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(V(x), t), op_minus_minus_gt(p, formsubst(op_bar_eq_gt(x, t), p))))"), t299))
 }
 
 ///|
@@ -1527,7 +1527,7 @@ fn step_80() -> Unit raise {
   let t301 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([isubst_var()]))])
   let t300 = @tactics.match_mp_tac(subalpha())
   let t304 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t300), @tactics.conj_tac), t301), t302), t303)
-  alpha_c.set(@tactics.prove(@parser.parse_term("forall A x z p. ~(z IN FV p) ==> A |-- (!!x p) --> !!z (formsubst (x |=> V z) p)"), t304))
+  alpha_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ z : Num, ∀ p : Form, !IN(z, FV(p)) → op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), op_bang_bang(z, formsubst(op_bar_eq_gt(x, V(z)), p))))"), t304))
 }
 
 ///|
@@ -1542,7 +1542,7 @@ pub fn alpha() -> @kernel.Thm {
 ///|
 /// VARS
 fn step_81() -> Unit raise {
-  let t305 = @parser.parse_term("(VARS False = {}) /\\\n  (VARS True = {}) /\\\n  (VARS (s === t) = FVT s UNION FVT t) /\\\n  (VARS (s << t) = FVT s UNION FVT t) /\\\n  (VARS (s <<= t) = FVT s UNION FVT t) /\\\n  (VARS (Not p) = VARS p) /\\\n  (VARS (p && q) = VARS p UNION VARS q) /\\\n  (VARS (p || q) = VARS p UNION VARS q) /\\\n  (VARS (p --> q) = VARS p UNION VARS q) /\\\n  (VARS (p <-> q) = VARS p UNION VARS q) /\\\n  (VARS (!! x p) = x INSERT VARS p) /\\\n  (VARS (?? x p) = x INSERT VARS p)")
+  let t305 = @term_syntax.parse_term("(VARS : (Form, Num) -> Bool)(False) == {} && VARS(True) == {} && VARS(op_eq_eq_eq((s : Term), (t : Term))) == UNION(FVT(s), FVT(t)) && VARS(op_lt_lt(s, t)) == UNION(FVT(s), FVT(t)) && VARS(op_lt_lt_eq(s, t)) == UNION(FVT(s), FVT(t)) && VARS(Not((p : Form))) == VARS(p) && VARS(op_amp_amp(p, (q : Form))) == UNION(VARS(p), VARS(q)) && VARS(op_bar_bar(p, q)) == UNION(VARS(p), VARS(q)) && VARS(op_minus_minus_gt(p, q)) == UNION(VARS(p), VARS(q)) && VARS(op_lt_minus_gt(p, q)) == UNION(VARS(p), VARS(q)) && VARS(op_bang_bang((x : Num), p)) == INSERT(x, VARS(p)) && VARS(op_q_q(x, p)) == INSERT(x, VARS(p))")
   vars_c.set(@recursion.new_recursive_definition(@fol.form_recursion())(t305))
 }
 
@@ -1560,7 +1560,7 @@ pub fn vars() -> @kernel.Thm {
 fn step_82() -> Unit raise {
   let t306 = @simp.asm_simp_tac(@list.List([vars(), @sets.finite_rules(), @fol.fvt_finite(), @sets.finite_union(), @sets.finite_delete()]))
   let t307 = @tactics.then_tac(@tactics.match_mp_tac(@fol.form_induct()), t306)
-  vars_finite_c.set(@tactics.prove(@parser.parse_term("forall p. FINITE(VARS p)"), t307))
+  vars_finite_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Form, FINITE(VARS(p))"), t307))
 }
 
 ///|
@@ -1580,7 +1580,7 @@ fn step_83() -> Unit raise {
   let t309 = @simp.rewrite_tac(@list.List([@fol.fv(), vars()]))
   let t308 = @tactics.match_mp_tac(@fol.form_induct())
   let t312 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.subset()])), t308), t309), t310), t311)
-  fv_subset_vars_c.set(@tactics.prove(@parser.parse_term("forall p. FV(p) SUBSET VARS(p)"), t312))
+  fv_subset_vars_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Form, SUBSET(FV(p), VARS(p))"), t312))
 }
 
 ///|
@@ -1599,7 +1599,7 @@ fn step_84() -> Unit raise {
   let t314 = @simp.rewrite_tac(@list.List([@fol.termsubst(), @fol.assign_v1(), @fol.valmod(), @fol.fvt(), @sets.in_sing(), @sets.in_union()]))
   let t313 = @tactics.match_mp_tac(@fol.term_induct())
   let t316 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @tactics.gen_tac), t313), t314), t315)
-  termsubst_twice_general_c.set(@tactics.prove(@parser.parse_term("forall x z t v s. ~(z IN FVT s)\n               ==> (termsubst ((x |-> t) v) s =\n                    termsubst ((z |-> t) v) (termsubst (x |=> V z) s))"), t316))
+  termsubst_twice_general_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Num, ∀ z : Num, ∀ t : Term, ∀ v : (Num) -> Term, ∀ s : Term, !IN(z, FVT(s)) → termsubst(op_bar_minus_gt(x, t, v), s) == termsubst(op_bar_minus_gt(z, t, v), termsubst(op_bar_eq_gt(x, V(z)), s))"), t316))
 }
 
 ///|
@@ -1615,7 +1615,7 @@ pub fn termsubst_twice_general() -> @kernel.Thm {
 /// TERMSUBST_TWICE
 fn step_85() -> Unit raise {
   let t317 = @meson.meson_tac(@list.List([@fol.assign(), termsubst_twice_general()]))
-  termsubst_twice_c.set(@tactics.prove(@parser.parse_term("forall x z t s. ~(z IN FVT s)\n             ==> (termsubst (x |=> t) s =\n                  termsubst (z |=> t) (termsubst (x |=> V z) s))"), t317))
+  termsubst_twice_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Num, ∀ z : Num, ∀ t : Term, ∀ s : Term, !IN(z, FVT(s)) → termsubst(op_bar_eq_gt(x, t), s) == termsubst(op_bar_eq_gt(z, t), termsubst(op_bar_eq_gt(x, V(z)), s))"), t317))
 }
 
 ///|
@@ -1633,11 +1633,11 @@ fn step_86() -> Unit raise {
   let t394 = @meson.asm_meson_tac(@list.List([@fol.safe_for()]))
   let t393 = @simp.asm_rewrite_tac(@list.List([]))
   let t392 = @simp.rewrite_tac(@list.List([@fol.valmod_v1()]))
-  let t391 = @tactics.x_gen_tac(@parser.parse_term("w:num"))
+  let t391 = @tactics.x_gen_tac(@term_syntax.parse_term("(w : Num)"))
   let t390 = @tactics.match_mp_tac(@fol.termsubst_eq())
   let t389 = @simp.asm_rewrite_tac(@list.List([@fol.termsubst(), @fol.valmod_v1()]))
   let t388 = @simp.rewrite_tac(@list.List([@fol.valmod_v1(), @trivia.o_thm()]))
-  let t387 = @tactics.x_gen_tac(@parser.parse_term("y:num"))
+  let t387 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : Num)"))
   let t386 = @tactics.match_mp_tac(@fol.formsubst_eq())
   let t385 = @tactics.disch_then(fn(x382 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s383 = @tactics.subst1_tac(x382)
@@ -1668,23 +1668,23 @@ fn step_86() -> Unit raise {
       })(x379)(x379)
     }
   })
-  let t364 = @simp.abbrev_tac(@parser.parse_term("z = VARIANT\n       {x' | ?y. y IN FV p /\\ x' IN FVT ((x |-> V x) (termsubst j o i) y)}"))
+  let t364 = @simp.abbrev_tac(@term_syntax.parse_term("(z : Num) == VARIANT({(x' : Num) | ∃ y : Num, IN(y, FV((p : Form))) && IN(x', FVT(op_bar_minus_gt((x : Num), V(x), o(termsubst((j : (Num) -> Term)), (i : (Num) -> Term)), y)))})"))
   let t363 = @meson.asm_meson_tac(@list.List([@fol.safe_for()]))
   let t362 = @simp.rewrite_tac(@list.List([@trivia.o_thm(), @fol.termsubst_fvt(), @sets.in_elim_thm()]))
   let t361 = @simp.asm_rewrite_tac(@list.List([@fol.valmod_v1(), @fol.fvt(), @sets.in_sing(), @theorems.unwind_thm2()]))
   let t360 = @simp.asm_rewrite_tac(@list.List([]))
-  let t359 = @class.asm_cases_tac(@parser.parse_term("y:num = x"))
+  let t359 = @class.asm_cases_tac(@term_syntax.parse_term("(y : Num) == (x : Num)"))
   let t358 = @simp.asm_rewrite_tac(@list.List([]))
-  let t357 = @class.asm_cases_tac(@parser.parse_term("y IN FV p"))
-  let t356 = @tactics.x_gen_tac(@parser.parse_term("y:num"))
+  let t357 = @class.asm_cases_tac(@term_syntax.parse_term("IN((y : Num), FV((p : Form)))"))
+  let t356 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : Num)"))
   let t355 = @simp.gen_rewrite_tac(fn(x354 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x354
   }, @list.List([@class.fun_eq_thm()]))
   let t353 = @simp.once_rewrite_tac(@list.List([@theorems.swap_exists_thm()]))
   let t352 = @simp.rewrite_tac(@list.List([@theorems.left_and_exists_thm()]))
-  let t351 = @tactics.x_gen_tac(@parser.parse_term("z:num"))
+  let t351 = @tactics.x_gen_tac(@term_syntax.parse_term("(z : Num)"))
   let t365 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_thm()])), t351), t352), t353), @tactics.ap_term_tac), t355), t356), t357), t358), t359), t360), t361), t362), t363), t364])
-  let t366 = @list.List([@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("{x' | ?y. (?y'. y' IN FV p /\\ y IN FVT ((x |-> V x) i y')) /\\\n                x' IN FVT ((x |-> V x) j y)} =\n      {x' | ?y. y IN FV p /\\ x' IN FVT ((x |-> V x) (termsubst j o i) y)}"), fn(x349 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t366 = @list.List([@tactics.thenl(@tactics.subgoal_then(@term_syntax.parse_term("{(x' : Num) | ∃ y : Num, (∃ y' : Num, IN(y', FV((p : Form))) && IN(y, FVT(op_bar_minus_gt((x : Num), V(x), (i : (Num) -> Term), y')))) && IN(x', FVT(op_bar_minus_gt(x, V(x), (j : (Num) -> Term), y)))} == {(x' : Num) | ∃ y : Num, IN(y, FV(p)) && IN(x', FVT(op_bar_minus_gt(x, V(x), o(termsubst(j), i), y)))}"), fn(x349 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th_1 = x349
     @simp.rewrite_tac(@list.List([th_1]))
   }), t365), @tactics.all_tac])
@@ -1693,38 +1693,38 @@ fn step_86() -> Unit raise {
   let t345 = @meson.asm_meson_tac(@list.List([@fol.safe_for()]))
   let t344 = @simp.asm_rewrite_tac(@list.List([@fol.valmod_v1()]))
   let t343 = @simp.asm_rewrite_tac(@list.List([]))
-  let t342 = @class.asm_cases_tac(@parser.parse_term("x IN FVT(j(z:num))"))
-  let t341 = @tactics.x_gen_tac(@parser.parse_term("z:num"))
+  let t342 = @class.asm_cases_tac(@term_syntax.parse_term("IN((x : Num), FVT((j : (Num) -> Term)((z : Num))))"))
+  let t341 = @tactics.x_gen_tac(@term_syntax.parse_term("(z : Num)"))
   let t340 = @simp.gen_rewrite_tac(fn(x339 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x339
   }, @list.List([@class.fun_eq_thm()]))
   let t337 = @meson.meson_tac(@list.List([]))
   let t338 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@fol.valmod_v1(), @fol.fvt(), @sets.in_sing()])), t337), @tactics.all_tac])
   let t336 = @simp.asm_rewrite_tac(@list.List([]))
-  let t335 = @class.asm_cases_tac(@parser.parse_term("y:num = x"))
+  let t335 = @class.asm_cases_tac(@term_syntax.parse_term("(y : Num) == (x : Num)"))
   let t334 = @simp.asm_rewrite_tac(@list.List([]))
-  let t333 = @class.asm_cases_tac(@parser.parse_term("y IN FV p"))
-  let t332 = @tactics.x_gen_tac(@parser.parse_term("y:num"))
+  let t333 = @class.asm_cases_tac(@term_syntax.parse_term("IN((y : Num), FV((p : Form)))"))
+  let t332 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : Num)"))
   let t331 = @simp.gen_rewrite_tac(fn(x330 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x330
   }, @list.List([@class.fun_eq_thm()]))
   let t329 = @simp.once_rewrite_tac(@list.List([@theorems.swap_exists_thm()]))
   let t346 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.left_and_exists_thm()])), t329), @tactics.ap_term_tac), t331), t332), t333), t334), t335), t336), t338), @tactics.ap_term_tac), t340), t341), t342), t343), t344), t345), @tactics.all_tac])
-  let t367 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("(?y. ((?y'. y' IN FV p /\\ y IN FVT ((x |-> V x) i y')) /\\ ~(y = x)) /\\\n          x IN FVT (j y)) <=>\n    (?y. (y IN FV p /\\ ~(y = x)) /\\\n         (?y'. y' IN FVT (i y) /\\ x IN FVT (j y')))"), fn(x327 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t367 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@term_syntax.parse_term("(∃ y : Num, ((∃ y' : Num, IN(y', FV((p : Form))) && IN(y, FVT(op_bar_minus_gt((x : Num), V(x), (i : (Num) -> Term), y')))) && !(y == x)) && IN(x, FVT((j : (Num) -> Term)(y)))) == (∃ y : Num, (IN(y, FV(p)) && !(y == x)) && (∃ y' : Num, IN(y', FVT(i(y))) && IN(x, FVT(j(y')))))"), fn(x327 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x327
     @simp.rewrite_tac(@list.List([th]))
   }), t346), t347), @class.cond_cases_tac), t348), t366)
   let t326 = @simp.rewrite_tac(@list.List([@fol.fv(), @fol.formsubst_fv(), @fol.termsubst_fvt(), @trivia.o_thm(), @sets.in_elim_thm(), @sets.in_delete()]))
-  let t324 = @parser.parse_term("j:num->term")
-  let t325 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("i:num->term"), t324]))
-  let t322 = @parser.parse_term("p:form")
-  let t323 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:num"), t322]))
+  let t324 = @term_syntax.parse_term("(j : (Num) -> Term)")
+  let t325 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(i : (Num) -> Term)"), t324]))
+  let t322 = @term_syntax.parse_term("(p : Form)")
+  let t323 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : Num)"), t322]))
   let t321 = @simp.simp_tac(@list.List([]))
   let t320 = @simp.rewrite_tac(@list.List([@fol.formsubst(), @fol.termsubst_termsubst()]))
   let t319 = @simp.simp_tac(@list.List([@fol.formsubst_safe_for()]))
-  let t318 = @simp.rewrite_tac(@list.List([vars(), @sets.forall_in_insert(), @sets.in_union(), @sets.not_in_empty(), @theorems.forall_and_thm(), @class.taut(@parser.parse_term("p \\/ q ==> r <=> (p ==> r) /\\ (q ==> r)"))]))
+  let t318 = @simp.rewrite_tac(@list.List([vars(), @sets.forall_in_insert(), @sets.in_union(), @sets.not_in_empty(), @theorems.forall_and_thm(), @class.taut(@term_syntax.parse_term("((p : Bool) || (q : Bool) → (r : Bool)) == ((p → r) && (q → r))"))]))
   let t395 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@fol.form_induct()), t318), t319), t320), t321), @tactics.conj_tac), t323), @tactics.strip_tac), t325), @tactics.strip_tac), t326), t367), @tactics.ap_term_tac), t380), t381), t385), t386), t387), @tactics.disch_tac), t388), @class.cond_cases_tac), t389), t390), t391), t392), @class.cond_cases_tac), t393), t394)
-  formsubst_twice_general_c.set(@tactics.prove(@parser.parse_term("forall p i j.\n        (forall x. x IN VARS p ==> safe_for x i)\n        ==> formsubst j (formsubst i p) = formsubst (termsubst j o i) p"), t395))
+  formsubst_twice_general_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Form, ∀ i : (Num) -> Term, ∀ j : (Num) -> Term, (∀ x : Num, IN(x, VARS(p)) → safe_for(x, i)) → formsubst(j, formsubst(i, p)) == formsubst(o(termsubst(j), i), p)"), t395))
 }
 
 ///|
@@ -1771,7 +1771,7 @@ fn step_87() -> Unit raise {
       })(x404))
     })(x405)(x405)
   }), t406), @tactics.ants_tac), t411), t412), t413), t414), @class.cond_cases_tac), t415), t416)
-  formsubst_twice_c.set(@tactics.prove(@parser.parse_term("forall z p x t. ~(z IN VARS p)\n             ==> (formsubst (z |=> t) (formsubst (x |=> V z) p) =\n                  formsubst (x |=> t) p)"), t417))
+  formsubst_twice_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Num, ∀ p : Form, ∀ x : Num, ∀ t : Term, !IN(z, VARS(p)) → formsubst(op_bar_eq_gt(z, t), formsubst(op_bar_eq_gt(x, V(z)), p)) == formsubst(op_bar_eq_gt(x, t), p)"), t417))
 }
 
 ///|
@@ -1789,10 +1789,10 @@ fn step_88() -> Unit raise {
   let t422 = @meson.asm_meson_tac(@list.List([@fol.fvt(), @sets.in_sing()]))
   let t421 = @simp.asm_rewrite_tac(@list.List([@fol.formsubst_fv(), @sets.in_elim_thm(), @fol.assign_v1()]))
   let t420 = @simp.asm_rewrite_tac(@list.List([isubst_var()]))
-  let t419 = @tactics.exists_tac(@parser.parse_term("t:term"))
+  let t419 = @tactics.exists_tac(@term_syntax.parse_term("(t : Term)"))
   let t418 = @tactics.match_mp_tac(subspec())
   let t423 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t418), t419), t420), t421), t422)
-  ispec_lemma_c.set(@tactics.prove(@parser.parse_term("forall A x p t. ~(x IN FVT(t)) ==> A |-- !!x p --> formsubst (x |=> t) p"), t423))
+  ispec_lemma_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ p : Form, ∀ t : Term, !IN(x, FVT(t)) → op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), formsubst(op_bar_eq_gt(x, t), p)))"), t423))
 }
 
 ///|
@@ -1813,7 +1813,7 @@ fn step_89() -> Unit raise {
   let t438 = @simp.expand_tac("z")
   let t436 = @tactics.match_mp_tac(ispec_lemma())
   let t437 = @list.List([@tactics.match_mp_tac(@equal.gsym(formsubst_twice())), t436])
-  let t442 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("formsubst (x |=> t) p =\n      formsubst (z |=> t) (formsubst (x |=> V z) p)"), fn(x433 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t442 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@term_syntax.parse_term("formsubst(op_bar_eq_gt((x : Num), (t : Term)), (p : Form)) == formsubst(op_bar_eq_gt((z : Num), t), formsubst(op_bar_eq_gt(x, V(z)), p))"), fn(x433 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s434 = @tactics.subst1_tac(x433)
     fn(x435 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s434(x435)
@@ -1824,13 +1824,13 @@ fn step_89() -> Unit raise {
   let t430 = @tactics.match_mp_tac(@fol.not_in_variant())
   let t429 = @simp.expand_tac("z")
   let t443 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(alpha()), t429), t430), t431), t432), t442])
-  let t428 = @tactics.exists_tac(@parser.parse_term("!!z (formsubst (x |=> V z) p)"))
+  let t428 = @tactics.exists_tac(@term_syntax.parse_term("op_bang_bang((z : Num), formsubst(op_bar_eq_gt((x : Num), V(z)), (p : Form)))"))
   let t427 = @tactics.match_mp_tac(imp_trans())
-  let t426 = @simp.abbrev_tac(@parser.parse_term("z = VARIANT (FVT t UNION VARS p)"))
+  let t426 = @simp.abbrev_tac(@term_syntax.parse_term("(z : Num) == VARIANT(UNION(FVT((t : Term)), VARS((p : Form))))"))
   let t425 = @simp.asm_simp_tac(@list.List([ispec_lemma()]))
-  let t424 = @class.asm_cases_tac(@parser.parse_term("x IN FVT(t)"))
+  let t424 = @class.asm_cases_tac(@term_syntax.parse_term("IN((x : Num), FVT((t : Term)))"))
   let t444 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t424), t425), t426), t427), t428), @tactics.conj_tac), t443)
-  ispec_c.set(@tactics.prove(@parser.parse_term("forall A x p t. A |-- !!x p --> formsubst (x |=> t) p"), t444))
+  ispec_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ p : Form, ∀ t : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), formsubst(op_bar_eq_gt(x, t), p)))"), t444))
 }
 
 ///|
@@ -1846,7 +1846,7 @@ pub fn ispec() -> @kernel.Thm {
 /// spec
 fn step_90() -> Unit raise {
   let t445 = @meson.meson_tac(@list.List([ispec(), modusponens()]))
-  spec_c.set(@tactics.prove(@parser.parse_term("forall A x p t. A |-- !!x p ==> A |-- formsubst (x |=> t) p"), t445))
+  spec_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ p : Form, ∀ t : Term, op_bar_minus_minus(A, op_bang_bang(x, p)) → op_bar_minus_minus(A, formsubst(op_bar_eq_gt(x, t), p))"), t445))
 }
 
 ///|
@@ -1863,7 +1863,7 @@ pub fn spec() -> @kernel.Thm {
 fn step_91() -> Unit raise {
   let t455 = @simp.simp_tac(@list.List([@fol.assign_triv(), @fol.formsubst_trivial()]))
   let t452 = @drule.match_mp(spec())
-  let t449 = @parser.parse_term("V x")
+  let t449 = @term_syntax.parse_term("V((x : Num))")
   let t454 = @tactics.disch_then(fn(x453 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x451 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       (fn(x446 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1875,7 +1875,7 @@ fn step_91() -> Unit raise {
     })(t452(x453))
   })
   let t456 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t454), t455)
-  spec_var_c.set(@tactics.prove(@parser.parse_term("forall A x p. A |-- !!x p ==> A |-- p"), t456))
+  spec_var_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ p : Form, op_bar_minus_minus(A, op_bang_bang(x, p)) → op_bar_minus_minus(A, p)"), t456))
 }
 
 ///|
@@ -1892,14 +1892,14 @@ pub fn spec_var() -> @kernel.Thm {
 fn step_92() -> Unit raise {
   let t512 = @meson.asm_meson_tac(@list.List([axiom_existseq()]))
   let t511 = @simp.simp_tac(@list.List([eximp(), isubst_general()]))
-  let t510 = @tactics.exists_tac(@parser.parse_term("??x (V x === v x)"))
+  let t510 = @tactics.exists_tac(@term_syntax.parse_term("op_q_q((x : Num), op_eq_eq_eq(V(x), (v : (Num) -> Term)(x)))"))
   let t509 = @tactics.match_mp_tac(modusponens())
   let t507 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t508 = @list.List([@tactics.all_tac, @tactics.then_tac(@simp.rewrite_tac(@list.List([@fol.formsubst_fv(), @sets.in_elim_thm(), @class.not_exists_thm(), @fol.valmod_v1()])), t507)])
   let t506 = @tactics.match_mp_tac(exists_imp())
   let t505 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@theorems.imp_conj()]))(modusponens()))
   let t502 = @drule.match_mp(gen())
-  let t499 = @parser.parse_term("x:num")
+  let t499 = @term_syntax.parse_term("(x : Num)")
   let t504 = @tactics.disch_then(fn(x503 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x501 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       (fn(x496 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1911,7 +1911,7 @@ fn step_92() -> Unit raise {
     })(t502(x503))
   })
   let t495 = @list.List([@simp.simp_tac(@list.List([@fol.valmod_trivial()])), @tactics.all_tac])
-  let t494 = @tactics.subgoal_then(@parser.parse_term("formsubst v p = formsubst ((x |-> v x) v) p"), fn(x491 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t494 = @tactics.subgoal_then(@term_syntax.parse_term("formsubst((v : (Num) -> Term), (p : Form)) == formsubst(op_bar_minus_gt((x : Num), v(x), v), p)"), fn(x491 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s492 = @tactics.subst1_tac(x491)
     fn(x493 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s492(x493)
@@ -1923,15 +1923,15 @@ fn step_92() -> Unit raise {
   let t490 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t487), @class.cond_cases_tac), t488), t489), @tactics.all_tac])
   let t483 = @meson.asm_meson_tac(@list.List([]))
   let t482 = @simp.asm_rewrite_tac(@list.List([@fol.valmod_v1(), @sets.in_elim_thm()]))
-  let t484 = @tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("x:num")), t482), t483)
+  let t484 = @tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("(x : Num)")), t482), t483)
   let t481 = @meson.asm_meson_tac(@list.List([]))
   let t485 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.subset(), @fol.valmod_v1(), @sets.in_elim_thm()])), t481), t484])
   let t480 = @simp.rewrite_tac(@list.List([@sets.psubset_alt()]))
   let t479 = @simp.simp_tac(@list.List([@sets.finite_restrict(), @fol.fv_finite()]))
   let t486 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.card_psubset()), t479), t480), @tactics.conj_tac), t485), @tactics.all_tac])
   let t478 = @simp.asm_rewrite_tac(@list.List([]))
-  let t473 = @parser.parse_term("(x |-> V x) v")
-  let t474 = @list.List([@parser.parse_term("p:form"), t473])
+  let t473 = @term_syntax.parse_term("op_bar_minus_gt((x : Num), V(x), (v : (Num) -> Term))")
+  let t474 = @list.List([@term_syntax.parse_term("(p : Form)"), t473])
   let t477 = @tactics.first_x_assum(fn(x476 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x470 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s471 = @tactics.mp_tac(x470)
@@ -1941,7 +1941,7 @@ fn step_92() -> Unit raise {
     })(((x475 : @kernel.Thm) => @bool.specl(t474, x475))(x476))
   })
   let t469 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t468 = @tactics.x_gen_tac(@parser.parse_term("x:num"))
+  let t468 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : Num)"))
   let t467 = @simp.rewrite_tac(@list.List([@class.not_imp(), @theorems.left_imp_exists_thm()]))
   let t464 = @simp.gen_rewrite_rule(fn(x463 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x463
@@ -1955,17 +1955,17 @@ fn step_92() -> Unit raise {
     })(t464(x465))
   })
   let t459 = @simp.asm_simp_tac(@list.List([@fol.formsubst_trivial()]))
-  let t458 = @class.asm_cases_tac(@parser.parse_term("forall x. x IN FV p ==> v x = V x"))
-  let t457 = @wf.wf_induct_tac(@parser.parse_term("CARD {x | x IN FV(p) /\\ ~(v x = V x)}"))
+  let t458 = @class.asm_cases_tac(@term_syntax.parse_term("∀ x : Num, IN(x, FV((p : Form))) → (v : (Num) -> Term)(x) == V(x)"))
+  let t457 = @wf.wf_induct_tac(@term_syntax.parse_term("CARD({(x : Num) | IN(x, FV((p : Form))) && !((v : (Num) -> Term)(x) == V(x))})"))
   let t513 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t457), t458), t459), t466), t467), t468), t469), t477), t478), @tactics.ants_tac), t486), @tactics.ants_tac), t490), t494), t495), t504), t505), t506), @tactics.conj_tac), t508), t509), t510), t511), t512)
-  let lemma = @tactics.prove(@parser.parse_term("forall A p v. (forall x y. x IN FV p /\\ y IN FV p /\\ x IN FVT(v y)\n                    ==> x = y /\\ v x = V x) /\\\n             A |-- p\n             ==> A |-- formsubst v p"), t513)
-  let t558 = @meson.asm_meson_tac(@list.List([@int.arith_rule(@parser.parse_term("x < n /\\ y < n ==> ~(x = y + n)")), fv_subset_vars(), @sets.subset()]))
+  let lemma = @tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ v : (Num) -> Term, (∀ x : Num, ∀ y : Num, IN(x, FV(p)) && IN(y, FV(p)) && IN(x, FVT(v(y))) → x == y && v(x) == V(x)) && op_bar_minus_minus(A, p) → op_bar_minus_minus(A, formsubst(v, p))"), t513)
+  let t558 = @meson.asm_meson_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(x : Num) < (n : Num) && (y : Num) < n → !(x == y + n)")), fv_subset_vars(), @sets.subset()]))
   let t557 = @simp.rewrite_tac(@list.List([@fol.fvt(), @sets.in_sing()]))
   let t559 = @tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(lemma), t557), t558)
   let t556 = @meson.asm_meson_tac(@list.List([]))
   let t555 = @list.List([@int.arith_tac, @simp.rewrite_tac(@list.List([@fol.formsubst_fv(), @sets.in_elim_thm()]))])
-  let t554 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("~p /\\ q ==> (r \\/ q ==> p) ==> s")))
-  let t550 = @parser.parse_term("x + n:num")
+  let t554 = @tactics.match_mp_tac(@class.taut(@term_syntax.parse_term("!(p : Bool) && (q : Bool) → ((r : Bool) || q → p) → (s : Bool)")))
+  let t550 = @term_syntax.parse_term("(x : Num) + (n : Num)")
   let t553 = @tactics.first_x_assum(fn(x552 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x547 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s548 = @tactics.mp_tac(x547)
@@ -1975,11 +1975,11 @@ fn step_92() -> Unit raise {
     })(((x551 : @kernel.Thm) => @bool.spec(t550, x551))(x552))
   })
   let t546 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t545 = @tactics.x_gen_tac(@parser.parse_term("y:num"))
+  let t545 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : Num)"))
   let t544 = @simp.rewrite_tac(@list.List([@arith.add_sub(), @fol.fvt()]))
-  let t543 = @tactics.x_gen_tac(@parser.parse_term("x:num"))
+  let t543 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : Num)"))
   let t542 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm(), @sets.forall_in_image()]))
-  let t541 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{x | ?y. y IN s /\\ x = f y} = IMAGE f s"))]))
+  let t541 = @simp.rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("{(x : _) | ∃ y : _, IN(y, (s : (_) -> Bool)) && x == (f : (_) -> _)(y)} == IMAGE(f, s)"))]))
   let t560 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@fol.formsubst_fv(), @fol.fvt(), @sets.in_sing()])), t541), t542), t543), @tactics.disch_tac), t544), t545), t546), t553), t554), @tactics.conj_tac), t555), t556), t559])
   let t540 = @simp.rewrite_tac(@list.List([@fol.fvt()]))
   let t561 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(lemma), t540), @tactics.conj_tac), t560)
@@ -1990,7 +1990,7 @@ fn step_92() -> Unit raise {
       s535(x536)
     }
   }), t537)
-  let t539 = @list.List([@meson.asm_meson_tac(@list.List([@int.arith_rule(@parser.parse_term("~(x + n:num < n)"))])), t538])
+  let t539 = @list.List([@meson.asm_meson_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("!((x : Num) + (n : Num) < n)"))])), t538])
   let t533 = @simp.rewrite_tac(@list.List([@fol.safe_for(), @fol.fvt(), @sets.in_sing()]))
   let t527 = @drule.part_match(fn(x526 : @kernel.Term) -> @kernel.Term raise {
     @equal.lhs(@kernel.rand(x526))
@@ -2011,7 +2011,7 @@ fn step_92() -> Unit raise {
       })(x531))
     })(x532)(x532)
   }, t533), @tactics.ants_tac), t539), t561])
-  let t522 = @tactics.subgoal_then(@parser.parse_term("formsubst v p =\n    formsubst (\\i. v(i - n)) (formsubst (\\i. V(i + n)) p)"), fn(x519 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t522 = @tactics.subgoal_then(@term_syntax.parse_term("formsubst((v : (Num) -> Term), (p : Form)) == formsubst((i : Num) => v(i - (n : Num)), formsubst((i : Num) => V(i + n), p))"), fn(x519 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s520 = @tactics.subst1_tac(x519)
     fn(x521 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s520(x521)
@@ -2020,10 +2020,10 @@ fn step_92() -> Unit raise {
   let t517 = @simp.rewrite_tac(@list.List([@sets.finite_union(), vars_finite(), @fol.fv_finite()]))
   let t516 = @tactics.match_mp_tac(@fol.setmax_member())
   let t515 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.in_union()), @arith.lt_suc_le()]))
-  let t518 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("SUC(SETMAX(VARS p UNION FV(formsubst v p)))")), t515), t516), t517), @tactics.all_tac])
-  let t514 = @tactics.subgoal_then(@parser.parse_term("?n. forall x. x IN VARS p \\/ x IN FV(formsubst v p) ==> x < n"), @tactics.strip_assume_tac)
+  let t518 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("SUC(SETMAX(UNION(VARS((p : Form)), FV(formsubst((v : (Num) -> Term), p)))))")), t515), t516), t517), @tactics.all_tac])
+  let t514 = @tactics.subgoal_then(@term_syntax.parse_term("∃ n : Num, ∀ x : Num, IN(x, VARS((p : Form))) || IN(x, FV(formsubst((v : (Num) -> Term), p))) → x < n"), @tactics.strip_assume_tac)
   let t563 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t514), t518), t522), t562)
-  instantiation_c.set(@tactics.prove(@parser.parse_term("forall A v p. A |-- p ==> A |-- formsubst v p"), t563))
+  instantiation_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ v : (Num) -> Term, ∀ p : Form, op_bar_minus_minus(A, p) → op_bar_minus_minus(A, formsubst(v, p))"), t563))
 }
 
 ///|
@@ -2042,7 +2042,7 @@ fn step_93() -> Unit raise {
   let t565 = @tactics.match_mp_tac(@fol.proves_induct())
   let t564 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()]))
   let t567 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t564), @tactics.disch_tac), t565), t566)
-  proves_mono_c.set(@tactics.prove(@parser.parse_term("forall A B p. A SUBSET B /\\ A |-- p ==> B |-- p"), t567))
+  proves_mono_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ B : (Form) -> Bool, ∀ p : Form, SUBSET(A, B) && op_bar_minus_minus(A, p) → op_bar_minus_minus(B, p)"), t567))
 }
 
 ///|
@@ -2061,12 +2061,12 @@ fn step_94() -> Unit raise {
   let t574 = @meson.meson_tac(@list.List([modusponens(), axiom_distribimp()]))
   let t572 = @meson.meson_tac(@list.List([@fol.proves_rules(), add_assum(), imp_refl()]))
   let t575 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_insert()])), t572), t574, t573])
-  let t571 = @tactics.x_gen_tac(@parser.parse_term("r:form"))
+  let t571 = @tactics.x_gen_tac(@term_syntax.parse_term("(r : Form)"))
   let t570 = @tactics.repeat_tac(@tactics.conj_tac)
   let t569 = @tactics.match_mp_tac(@fol.proves_induct())
   let t568 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()]))
   let t576 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.once_rewrite_tac(@list.List([@theorems.conj_sym()]))), t568), @tactics.gen_tac), @tactics.disch_tac), t569), t570), t571), t575)
-  deduction_lemma_c.set(@tactics.prove(@parser.parse_term("forall A p q. p INSERT A |-- q /\\ closed p ==> A |-- p --> q"), t576))
+  deduction_lemma_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(INSERT(p, A), q) && closed(p) → op_bar_minus_minus(A, op_minus_minus_gt(p, q))"), t576))
 }
 
 ///|
@@ -2082,7 +2082,7 @@ pub fn deduction_lemma() -> @kernel.Thm {
 /// DEDUCTION
 fn step_95() -> Unit raise {
   let t577 = @meson.meson_tac(@list.List([deduction_lemma(), modusponens(), @sets.in_insert(), @fol.proves_rules(), proves_mono(), @sets.subset()]))
-  deduction_c.set(@tactics.prove(@parser.parse_term("forall A p q. closed p ==> (A |-- p --> q <=> p INSERT A |-- q)"), t577))
+  deduction_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, closed(p) → op_bar_minus_minus(A, op_minus_minus_gt(p, q)) == op_bar_minus_minus(INSERT(p, A), q)"), t577))
 }
 
 ///|
@@ -2098,7 +2098,7 @@ pub fn deduction() -> @kernel.Thm {
 /// eq_trans
 fn step_96() -> Unit raise {
   let t578 = @meson.meson_tac(@list.List([axiom_predcong(), modusponens(), imp_swap(), axiom_eqrefl(), imp_trans(), eq_sym()]))
-  eq_trans_c.set(@tactics.prove(@parser.parse_term("forall A s t u. A |-- s === t --> t === u --> s === u"), t578))
+  eq_trans_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, ∀ u : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(t, u), op_eq_eq_eq(s, u))))"), t578))
 }
 
 ///|
@@ -2114,7 +2114,7 @@ pub fn eq_trans() -> @kernel.Thm {
 /// spec_right
 fn step_97() -> Unit raise {
   let t579 = @meson.meson_tac(@list.List([imp_trans(), ispec()]))
-  spec_right_c.set(@tactics.prove(@parser.parse_term("forall A p q x. A |-- p --> !!x q ==> A |-- p --> formsubst (x |=> t) q"), t579))
+  spec_right_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ p : Form, ∀ q : Form, ∀ x : Num, op_bar_minus_minus(A, op_minus_minus_gt(p, op_bang_bang(x, q))) → op_bar_minus_minus(A, op_minus_minus_gt(p, formsubst(op_bar_eq_gt(x, (t : Term)), q)))"), t579))
 }
 
 ///|
@@ -2130,7 +2130,7 @@ pub fn spec_right() -> @kernel.Thm {
 /// eq_trans_rule
 fn step_98() -> Unit raise {
   let t580 = @meson.meson_tac(@list.List([modusponens(), eq_trans()]))
-  eq_trans_rule_c.set(@tactics.prove(@parser.parse_term("forall A s t u. A |-- s === t /\\ A |-- t === u ==> A |-- s === u"), t580))
+  eq_trans_rule_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, ∀ u : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) && op_bar_minus_minus(A, op_eq_eq_eq(t, u)) → op_bar_minus_minus(A, op_eq_eq_eq(s, u))"), t580))
 }
 
 ///|
@@ -2146,7 +2146,7 @@ pub fn eq_trans_rule() -> @kernel.Thm {
 /// eq_sym_rule
 fn step_99() -> Unit raise {
   let t581 = @meson.meson_tac(@list.List([modusponens(), eq_sym()]))
-  eq_sym_rule_c.set(@tactics.prove(@parser.parse_term("forall A s t. A |-- s === t <=> A |-- t === s"), t581))
+  eq_sym_rule_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) == op_bar_minus_minus(A, op_eq_eq_eq(t, s))"), t581))
 }
 
 ///|
@@ -2162,7 +2162,7 @@ pub fn eq_sym_rule() -> @kernel.Thm {
 /// allimp
 fn step_100() -> Unit raise {
   let t582 = @meson.meson_tac(@list.List([axiom_allimp(), modusponens(), gen()]))
-  allimp_c.set(@tactics.prove(@parser.parse_term("forall A x p q. A |-- p --> q ==> A |-- !!x p --> !!x q"), t582))
+  allimp_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, q)) → op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), op_bang_bang(x, q)))"), t582))
 }
 
 ///|
@@ -2178,7 +2178,7 @@ pub fn allimp() -> @kernel.Thm {
 /// alliff
 fn step_101() -> Unit raise {
   let t583 = @meson.meson_tac(@list.List([allimp(), iff_imp1(), iff_imp2(), imp_antisym()]))
-  alliff_c.set(@tactics.prove(@parser.parse_term("forall A x p q. A |-- p <-> q ==> A |-- !!x p <-> !!x q"), t583))
+  alliff_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_lt_minus_gt(p, q)) → op_bar_minus_minus(A, op_lt_minus_gt(op_bang_bang(x, p), op_bang_bang(x, q)))"), t583))
 }
 
 ///|
@@ -2194,7 +2194,7 @@ pub fn alliff() -> @kernel.Thm {
 /// exiff
 fn step_102() -> Unit raise {
   let t584 = @meson.meson_tac(@list.List([eximp(), iff_imp1(), iff_imp2(), imp_antisym()]))
-  exiff_c.set(@tactics.prove(@parser.parse_term("forall A x p q. A |-- p <-> q ==> A |-- ??x p <-> ??x q"), t584))
+  exiff_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_lt_minus_gt(p, q)) → op_bar_minus_minus(A, op_lt_minus_gt(op_q_q(x, p), op_q_q(x, q)))"), t584))
 }
 
 ///|
@@ -2210,7 +2210,7 @@ pub fn exiff() -> @kernel.Thm {
 /// cong_suc
 fn step_103() -> Unit raise {
   let t585 = @meson.meson_tac(@list.List([modusponens(), axiom_funcong()]))
-  cong_suc_c.set(@tactics.prove(@parser.parse_term("forall A s t. A |-- s === t ==> A |-- Suc s === Suc t"), t585))
+  cong_suc_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) → op_bar_minus_minus(A, op_eq_eq_eq(Suc(s), Suc(t)))"), t585))
 }
 
 ///|
@@ -2226,7 +2226,7 @@ pub fn cong_suc() -> @kernel.Thm {
 /// cong_add
 fn step_104() -> Unit raise {
   let t586 = @meson.meson_tac(@list.List([modusponens(), axiom_funcong()]))
-  cong_add_c.set(@tactics.prove(@parser.parse_term("forall A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s ++ u === t ++ v"), t586))
+  cong_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, ∀ u : Term, ∀ v : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) && op_bar_minus_minus(A, op_eq_eq_eq(u, v)) → op_bar_minus_minus(A, op_eq_eq_eq(op_plus_plus(s, u), op_plus_plus(t, v)))"), t586))
 }
 
 ///|
@@ -2242,7 +2242,7 @@ pub fn cong_add() -> @kernel.Thm {
 /// cong_mul
 fn step_105() -> Unit raise {
   let t587 = @meson.meson_tac(@list.List([modusponens(), axiom_funcong()]))
-  cong_mul_c.set(@tactics.prove(@parser.parse_term("forall A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s ** u === t ** v"), t587))
+  cong_mul_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, ∀ u : Term, ∀ v : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) && op_bar_minus_minus(A, op_eq_eq_eq(u, v)) → op_bar_minus_minus(A, op_eq_eq_eq(op_star_star(s, u), op_star_star(t, v)))"), t587))
 }
 
 ///|
@@ -2260,7 +2260,7 @@ fn step_106() -> Unit raise {
   let t589 = @meson.asm_meson_tac(@list.List([modusponens(), axiom_predcong(), eq_sym()]))
   let t588 = @tactics.match_mp_tac(imp_antisym())
   let t590 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t588), t589)
-  cong_eq_c.set(@tactics.prove(@parser.parse_term("forall A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s === u <-> t === v"), t590))
+  cong_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, ∀ u : Term, ∀ v : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) && op_bar_minus_minus(A, op_eq_eq_eq(u, v)) → op_bar_minus_minus(A, op_lt_minus_gt(op_eq_eq_eq(s, u), op_eq_eq_eq(t, v)))"), t590))
 }
 
 ///|
@@ -2278,7 +2278,7 @@ fn step_107() -> Unit raise {
   let t592 = @meson.asm_meson_tac(@list.List([modusponens(), axiom_predcong(), eq_sym()]))
   let t591 = @tactics.match_mp_tac(imp_antisym())
   let t593 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t591), t592)
-  cong_le_c.set(@tactics.prove(@parser.parse_term("forall A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s <<= u <-> t <<= v"), t593))
+  cong_le_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, ∀ u : Term, ∀ v : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) && op_bar_minus_minus(A, op_eq_eq_eq(u, v)) → op_bar_minus_minus(A, op_lt_minus_gt(op_lt_lt_eq(s, u), op_lt_lt_eq(t, v)))"), t593))
 }
 
 ///|
@@ -2296,7 +2296,7 @@ fn step_108() -> Unit raise {
   let t595 = @meson.asm_meson_tac(@list.List([modusponens(), axiom_predcong(), eq_sym()]))
   let t594 = @tactics.match_mp_tac(imp_antisym())
   let t596 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t594), t595)
-  cong_lt_c.set(@tactics.prove(@parser.parse_term("forall A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s << u <-> t << v"), t596))
+  cong_lt_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ s : Term, ∀ t : Term, ∀ u : Term, ∀ v : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) && op_bar_minus_minus(A, op_eq_eq_eq(u, v)) → op_bar_minus_minus(A, op_lt_minus_gt(op_lt_lt(s, u), op_lt_lt(t, v)))"), t596))
 }
 
 ///|
@@ -2314,13 +2314,13 @@ fn step_109() -> Unit raise {
   let t604 = @meson.meson_tac(@list.List([not_not(), iff_imp2()]))
   let t603 = @simp.rewrite_tac(@list.List([@fol.formsubst()]))
   let t602 = @simp.rewrite_tac(@list.List([contrapos_eq(), ispec()]))
-  let t600 = @parser.parse_term("Not(formsubst (x |=> t) (Not p))")
+  let t600 = @term_syntax.parse_term("Not(formsubst(op_bar_eq_gt((x : Num), (t : Term)), Not((p : Form))))")
   let t601 = @tactics.trans_tac(imp_trans())(t600)
   let t599 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([axiom_exists(), iff_imp2()]))])
-  let t597 = @parser.parse_term("Not(!!x (Not p))")
+  let t597 = @term_syntax.parse_term("Not(op_bang_bang((x : Num), Not((p : Form))))")
   let t598 = @tactics.trans_tac(imp_trans())(t597)
   let t605 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t598), @tactics.conj_tac), t599), t601), t602), t603), t604)
-  iexists_c.set(@tactics.prove(@parser.parse_term("forall A x t p. A |-- formsubst (x |=> t) p --> ??x p"), t605))
+  iexists_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ t : Term, ∀ p : Form, op_bar_minus_minus(A, op_minus_minus_gt(formsubst(op_bar_eq_gt(x, t), p), op_q_q(x, p)))"), t605))
 }
 
 ///|
@@ -2336,7 +2336,7 @@ pub fn iexists() -> @kernel.Thm {
 /// exists_intro
 fn step_110() -> Unit raise {
   let t606 = @meson.meson_tac(@list.List([iexists(), modusponens()]))
-  exists_intro_c.set(@tactics.prove(@parser.parse_term("forall A x t p. A |-- formsubst (x |=> t) p ==> A |-- ??x p"), t606))
+  exists_intro_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ t : Term, ∀ p : Form, op_bar_minus_minus(A, formsubst(op_bar_eq_gt(x, t), p)) → op_bar_minus_minus(A, op_q_q(x, p))"), t606))
 }
 
 ///|
@@ -2353,13 +2353,13 @@ pub fn exists_intro() -> @kernel.Thm {
 fn step_111() -> Unit raise {
   let t613 = @meson.meson_tac(@list.List([axiom_exists(), iff_imp1()]))
   let t612 = @simp.asm_simp_tac(@list.List([contrapos_eq(), axiom_impall(), @fol.fv()]))
-  let t610 = @parser.parse_term("Not(!!x (Not p))")
+  let t610 = @term_syntax.parse_term("Not(op_bang_bang((x : Num), Not((p : Form))))")
   let t611 = @tactics.trans_tac(imp_trans())(t610)
   let t609 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([not_not(), iff_imp1()]))])
-  let t607 = @parser.parse_term("Not(Not p)")
+  let t607 = @term_syntax.parse_term("Not(Not((p : Form)))")
   let t608 = @tactics.trans_tac(imp_trans())(t607)
   let t614 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t608), @tactics.conj_tac), t609), t611), t612), t613)
-  impex_c.set(@tactics.prove(@parser.parse_term("forall A x p. ~(x IN FV p) ==> A |-- (??x p) --> p"), t614))
+  impex_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ p : Form, !IN(x, FV(p)) → op_bar_minus_minus(A, op_minus_minus_gt(op_q_q(x, p), p))"), t614))
 }
 
 ///|
@@ -2377,7 +2377,7 @@ fn step_112() -> Unit raise {
   let t631 = @simp.asm_simp_tac(@list.List([impex()]))
   let t630 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@theorems.imp_conj_alt()]))(imp_trans()))
   let t627 = @drule.match_mp(eximp())
-  let t624 = @parser.parse_term("x:num")
+  let t624 = @term_syntax.parse_term("(x : Num)")
   let t629 = @tactics.disch_then(fn(x628 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x626 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       (fn(x621 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -2398,7 +2398,7 @@ fn step_112() -> Unit raise {
     })(t618(x619))
   })
   let t632 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t620), t629), t630), t631)
-  ichoose_c.set(@tactics.prove(@parser.parse_term("forall A x p q. A |-- !!x (p --> q) /\\ ~(x IN FV q) ==> A |-- (??x p) --> q"), t632))
+  ichoose_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (Form) -> Bool, ∀ x : Num, ∀ p : Form, ∀ q : Form, op_bar_minus_minus(A, op_bang_bang(x, op_minus_minus_gt(p, q))) && !IN(x, FV(q)) → op_bar_minus_minus(A, op_minus_minus_gt(op_q_q(x, p), q))"), t632))
 }
 
 ///|
@@ -2414,7 +2414,7 @@ pub fn ichoose() -> @kernel.Thm {
 /// eq_trans_imp
 fn step_113() -> Unit raise {
   let t633 = @meson.meson_tac(@list.List([axiom_predcong(), modusponens()]))
-  eq_trans_imp_c.set(@tactics.prove(@parser.parse_term("A |-- s === s' /\\ A |-- t === t' ==> A |-- s === t --> s' === t'"), t633))
+  eq_trans_imp_c.set(@tactics.prove(@term_syntax.parse_term("op_bar_minus_minus((A : (Form) -> Bool), op_eq_eq_eq((s : Term), (s' : Term))) && op_bar_minus_minus(A, op_eq_eq_eq((t : Term), (t' : Term))) → op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_eq_eq_eq(s', t')))"), t633))
 }
 
 ///|
@@ -2512,7 +2512,7 @@ pub fn valmod_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// TERMSUBST_NUMERAL
 fn step_116() -> Unit raise {
   let t645 = @simp.simp_tac(@list.List([@fol.termsubst_trivial(), @fol.fvt_numeral(), @sets.not_in_empty()]))
-  termsubst_numeral_c.set(@tactics.prove(@parser.parse_term("forall v n. termsubst v (numeral n) = numeral n"), t645))
+  termsubst_numeral_c.set(@tactics.prove(@term_syntax.parse_term("∀ v : (Num) -> Term, ∀ n : Num, termsubst(v, numeral(n)) == numeral(n)"), t645))
 }
 
 ///|
