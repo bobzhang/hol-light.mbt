@@ -82791,3677 +82791,3677 @@ test "Multivariate/realanalysis matches Multivariate/realanalysis.ml" {
       #|0..0..1..solved at 5
       #|0..0..solved at 2
       #|Multivariate/realanalysis quotations (4427):
-      #|  forall s. real_open s <=> open(IMAGE lift s)
-      #|  forall s. real_closed s <=> closed(IMAGE lift s)
-      #|  real_bounded s <=> bounded(IMAGE lift s)
-      #|  &0 < &1 + abs(y) /\\ (x <= y ==> x < &1 + abs(y))
-      #|  forall s. real_bounded s <=> ?b. &0 < b /\\ forall x. x IN s ==> abs(x) < b
-      #|  forall s t. real_bounded t /\\ s SUBSET t ==> real_bounded s
-      #|  forall s t. real_bounded(s UNION t) <=> real_bounded s /\\ real_bounded t
-      #|  x:real
-      #|  x:real
-      #|  b + &1
-      #|  b:real
-      #|  s:real->bool
-      #|  forall s. real_bounded s ==> ?a. s SUBSET real_interval(--a,a)
-      #|  forall s. real_bounded s ==> ?a b. s SUBSET real_interval(a,b)
-      #|  forall s. real_bounded s ==> ?a. s SUBSET real_interval[--a,a]
-      #|  forall s. real_bounded s ==> ?a b. s SUBSET real_interval[a,b]
-      #|  euclidean:(real^1)topology
+      #|  \226\136\128 s : (Real) -> Bool, real_open(s) == open(IMAGE(lift, s))
+      #|  \226\136\128 s : (Real) -> Bool, real_closed(s) == closed(IMAGE(lift, s))
+      #|  real_bounded((s : (Real) -> Bool)) == bounded(IMAGE(lift, s))
+      #|  real_of_num(0) < real_of_num(1) + abs((y : Real)) && ((x : Real) <= y \226\134\146 x < real_of_num(1) + abs(y))
+      #|  \226\136\128 s : (Real) -> Bool, real_bounded(s) == (\226\136\131 b : Real, real_of_num(0) < b && (\226\136\128 x : Real, IN(x, s) \226\134\146 abs(x) < b))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_bounded(t) && SUBSET(s, t) \226\134\146 real_bounded(s)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_bounded(UNION(s, t)) == (real_bounded(s) && real_bounded(t))
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (b : Real) + real_of_num(1)
+      #|  (b : Real)
+      #|  (s : (Real) -> Bool)
+      #|  \226\136\128 s : (Real) -> Bool, real_bounded(s) \226\134\146 (\226\136\131 a : Real, SUBSET(s, real_interval((-a, a))))
+      #|  \226\136\128 s : (Real) -> Bool, real_bounded(s) \226\134\146 (\226\136\131 a : Real, \226\136\131 b : Real, SUBSET(s, real_interval((a, b))))
+      #|  \226\136\128 s : (Real) -> Bool, real_bounded(s) \226\134\146 (\226\136\131 a : Real, SUBSET(s, real_interval([(-a, a)])))
+      #|  \226\136\128 s : (Real) -> Bool, real_bounded(s) \226\134\146 (\226\136\131 a : Real, \226\136\131 b : Real, SUBSET(s, real_interval([(a, b)])))
+      #|  (euclidean : Topology[Cart[Real, Unit]])
       #|  euclideanreal
-      #|  forall s. real_compact s <=> compact(IMAGE lift s)
-      #|  (f ---> l) net <=> forall e. &0 < e ==> eventually (\\x. abs(f(x) - l) < e) net
-      #|  reallim net f = @l. (f ---> l) net
-      #|  (s ---> l) = ((lift o s) --> lift l)
-      #|  (s --> l) = (drop o s ---> drop l)
-      #|  (s ---> l) = ((Cx o s) --> Cx(l))
-      #|  forall net f l. trivial_limit net ==> (f ---> l) net
-      #|  forall net f l l'.\n         ~trivial_limit net /\\ (f ---> l) net /\\ (f ---> l') net ==> l = l'
-      #|  forall net a. ((\\x. a) ---> a) net
-      #|  forall f l c. (f ---> l) net ==> ((\\x. c * f x) ---> c * l) net
-      #|  forall f l c. (f ---> l) net ==> ((\\x. f x * c) ---> l * c) net
-      #|  inv c:real
-      #|  forall net f l c.\n        ~(c = &0) ==> (((\\x. c * f x) ---> c * l) net <=> (f ---> l) net)
-      #|  forall net f l c.\n        ~(c = &0) ==> (((\\x. f x * c) ---> l * c) net <=> (f ---> l) net)
-      #|  forall net f l. (f ---> l) net ==> ((\\x. --(f x)) ---> --l) net
-      #|  forall net f l. ((\\x. --(f x)) ---> --l) net <=> (f ---> l) net
-      #|  forall net:(A)net f g l m.\n    (f ---> l) net /\\ (g ---> m) net ==> ((\\x. f(x) + g(x)) ---> l + m) net
-      #|  forall net:(A)net f g l m.\n    (f ---> l) net /\\ (g ---> m) net ==> ((\\x. f(x) - g(x)) ---> l - m) net
-      #|  forall net:(A)net f g l m.\n    (f ---> l) net /\\ (g ---> m) net ==> ((\\x. f(x) * g(x)) ---> l * m) net
-      #|  forall net f l.\n         (f ---> l) net /\\ ~(l = &0) ==> ((\\x. inv(f x)) ---> inv l) net
-      #|  forall net:(A)net f g l m.\n    (f ---> l) net /\\ (g ---> m) net /\\ ~(m = &0)\n    ==> ((\\x. f(x) / g(x)) ---> l / m) net
-      #|  e:real
-      #|  forall net f l. (f ---> l) net ==> ((\\x. abs(f x)) ---> abs l) net
-      #|  forall net f l n. (f ---> l) net ==> ((\\x. f x pow n) ---> l pow n) net
-      #|  max x y = inv(&2) * ((x + y) + abs(x - y))
-      #|  forall net:(A)net f g l m.\n    (f ---> l) net /\\ (g ---> m) net\n    ==> ((\\x. max (f x) (g x)) ---> max l m) net
-      #|  min x y = inv(&2) * ((x + y) - abs(x - y))
-      #|  forall net:(A)net f g l m.\n    (f ---> l) net /\\ (g ---> m) net\n    ==> ((\\x. min (f x) (g x)) ---> min l m) net
-      #|  forall net f l. (f ---> l) net <=> ((\\x. f(x) - l) ---> &0) net
-      #|  forall net:(A)net f g.\n    (f ---> &0) net /\\ (g ---> &0) net ==> ((\\x. f(x) + g(x)) ---> &0) net
-      #|  c:real
-      #|  forall net f c. (f ---> &0) net ==> ((\\x. c * f x) ---> &0) net
-      #|  c:real
-      #|  forall net f c. (f ---> &0) net ==> ((\\x. f x * c) ---> &0) net
-      #|  n:num
-      #|  forall net f n. (f ---> &0) net /\\ ~(n = 0) ==> ((\\x. f x pow n) ---> &0) net
-      #|  forall net f c.\n        ~(c = &0) ==> (((\\x. c * f x) ---> &0) net <=> (f ---> &0) net)
-      #|  forall net f c.\n        ~(c = &0) ==> (((\\x. f x * c) ---> &0) net <=> (f ---> &0) net)
-      #|  --x = --(&1) * x
-      #|  forall net f. ((\\x. --(f x)) ---> &0) net <=> (f ---> &0) net
-      #|  forall net:(A)net f g.\n    (f ---> &0) net /\\ (g ---> &0) net ==> ((\\x. f(x) - g(x)) ---> &0) net
-      #|  forall net f l. (f --> l) net ==> ((Re o f) ---> Re l) net
-      #|  forall net f l. (f --> l) net ==> ((Im o f) ---> Im l) net
-      #|  forall net f g l.\n        eventually (\\x. f x = g x) net /\\ (f ---> l) net ==> (g ---> l) net
-      #|  forall net f g l.\n        ((\\x. f x - g x) ---> &0) net /\\ (f ---> l) net ==> (g ---> l) net
-      #|  forall net f:A->real g l.\n     ((\\x. f x - g x) ---> &0) net ==> ((f ---> l) net <=> (g ---> l) net)
-      #|  forall f l k. (f ---> l) sequentially ==> ((\\i. f (i + k)) ---> l) sequentially
-      #|  k:num
-      #|  forall f l k. ((\\i. f (i + k)) ---> l) sequentially ==> (f ---> l) sequentially
-      #|  &0 < e
-      #|  e:real
-      #|  forall f g h a.\n        eventually (\\n. f(n) <= g(n)) net /\\ (f ---> a) net /\\\n        eventually (\\n. g(n) <= h(n)) net /\\ (h ---> a) net\n        ==> (g ---> a) net
-      #|  forall s l. (s ---> l) sequentially ==> real_bounded (IMAGE s (:num))
-      #|  forall net f. ((\\x. abs(f x)) ---> &0) net <=> (f ---> &0) net
-      #|  forall f:real^N->real l a s.\n        (f ---> l) (at a within s) <=>\n           forall e. &0 < e ==> ?d. &0 < d /\\\n                              forall x. x IN s /\\ &0 < dist(x,a) /\\ dist(x,a) <= d\n                                   ==> abs(f(x) - l) < e
-      #|  forall f:real^N->real l a s.\n      (f ---> l) (at a within s) <=>\n        forall e. &0 < e\n            ==> ?d. &0 < d /\\\n                    forall x. x IN s /\\ &0 < dist(x,a) /\\ dist(x,a) < d\n                    ==> abs(f(x) - l) < e
-      #|  forall f l a:real^N.\n      (f ---> l) (at a) <=>\n              forall e. &0 < e\n                  ==> ?d. &0 < d /\\ forall x. &0 < dist(x,a) /\\ dist(x,a) < d\n                          ==> abs(f(x) - l) < e
-      #|  forall f l. (f ---> l) at_infinity <=>\n               forall e. &0 < e ==> ?b. forall x. norm(x) >= b ==> abs(f(x) - l) < e
-      #|  forall f l. (f ---> l) at_infinity <=> ((f o inv) ---> l) (at(Cx(&0)))
-      #|  forall s l. (s ---> l) sequentially <=>\n          forall e. &0 < e ==> ?N. forall n. N <= n ==> abs(s(n) - l) < e
-      #|  abs(x - x) = &0
-      #|  forall net f l. eventually (\\x. f x = l) net ==> (f ---> l) net
-      #|  forall net f:A->real^N.\n        (f --> l) net <=>\n        forall i. 1 <= i /\\ i <= dimindex(:N) ==> ((\\x. (f x)$i) ---> l$i) net
-      #|  lift o (f:A->real)
-      #|  net:A net
-      #|  forall(net:A net) f l b.\n        (f ---> l) net /\\\n        ~trivial_limit net /\\\n        eventually (\\x. f x <= b) net\n        ==> l <= b
-      #|  \\a:A. --(f a:real)
-      #|  net:A net
-      #|  forall(net:A net) f l b.\n        (f ---> l) net /\\\n        ~trivial_limit net /\\\n        eventually (\\x. b <= f x) net\n        ==> b <= l
-      #|  forall net f g l m.\n           (f ---> l) net /\\ (g ---> m) net /\\\n           ~trivial_limit net /\\\n           eventually (\\x. f x <= g x) net\n           ==> l <= m
-      #|  forall net:(A net) c d. ((\\x. c) ---> d) net <=> trivial_limit net \\/ c = d
-      #|  forall net f:A->B->real l s.\n        FINITE s /\\ (forall i. i IN s ==> ((f i) ---> (l i)) net)\n        ==> ((\\x. sum s (\\i. f i x)) ---> sum s l) net
-      #|  forall net f:A->B->real s.\n        FINITE s /\\ (forall a. a IN s ==> ((\\x. f x a) ---> &0) net)\n        ==> ((\\x. sum s (f x)) ---> &0) net
-      #|  g:A->real
-      #|  forall net:(A)net f g.\n        eventually (\\x. abs(f x) <= g x) net /\\ (g ---> &0) net\n        ==> (f ---> &0) net
-      #|  forall s. real_bounded(IMAGE s (:num)) /\\\n       ((forall n. s n <= s(SUC n)) \\/ (forall n. s(SUC n) <= s n))\n       ==> ?l. (s ---> l) sequentially
-      #|  (c - l) / &2
-      #|  forall net f l c. (f ---> l) net /\\ l < c ==> eventually (\\x:A. f x < c) net
-      #|  (l - c) / &2
-      #|  forall net f l c. (f ---> l) net /\\ c < l ==> eventually (\\x:A. c < f x) net
-      #|  FINITE (s:num->bool)
-      #|  forall f l s. (f ---> l) sequentially ==> (f ---> l) (sequentially within s)
-      #|  (f real_sums l) s <=> ((\\n. sum (s INTER (0..n)) f) ---> l) sequentially
-      #|  real_infsum s f = @l. (f real_sums l) s
-      #|  real_summable s f = ?l. (f real_sums l) s
-      #|  (f real_sums l) = ((lift o f) sums (lift l))
-      #|  forall f l s. (f sums l) s ==> ((Re o f) real_sums (Re l)) s
-      #|  forall f l s. (f sums l) s ==> ((Im o f) real_sums (Im l)) s
-      #|  forall f l s. (f real_sums l) s <=> ((Cx o f) sums (Cx l)) s
-      #|  real_summable s f <=> summable s (lift o f)
-      #|  s:num->bool
-      #|  Cx o (f:num->real)
-      #|  Cx(Re l) = l
-      #|  Re l
-      #|  l:complex
-      #|  real_summable s f <=> summable s (Cx o f)
-      #|  (?l. (f real_sums l) s) <=>\n   (forall e. &0 < e ==> ?N. forall m n. m >= N ==> abs(sum(s INTER (m..n)) f) < e)
-      #|  forall f s. real_summable s f <=>\n         forall e. &0 < e\n             ==> ?N. forall m n. m >= N ==> abs(sum(s INTER (m..n)) f) < e
-      #|  forall f l s. (f real_sums l) s ==> real_summable s f
-      #|  forall f s. (f real_sums (real_infsum s f)) s <=> real_summable s f
-      #|  forall f s. real_summable s f ==> real_infsum s f = Re(infsum s (Cx o f))
-      #|  forall f l k. (f real_sums l) (from k) = ((\\n. sum(k..n) f) ---> l) sequentially
-      #|  forall f l l' s. (f real_sums l) s /\\ (f real_sums l') s ==> l = l'
-      #|  forall f l s. (f real_sums l) s ==> real_infsum s f = l
-      #|  s INTER (0..m) = s
-      #|  m:num
-      #|  n:num
-      #|  e:real
-      #|  n:num
-      #|  forall f s. FINITE s ==> (f real_sums (sum s f)) s
-      #|  forall k f. FINITE k ==> real_summable k f
-      #|  forall f g k. (?N. forall n. N <= n /\\ n IN k ==> f n = g n)\n           ==> (real_summable k f <=> real_summable k g)
-      #|  forall f g k. (?N. forall n. N <= n /\\ n IN k ==> f n = g n) /\\ real_summable k f\n           ==> real_summable k g
-      #|  forall f s t. FINITE((s DIFF t) UNION (t DIFF s))\n           ==> (real_summable s f <=> real_summable t f)
-      #|  forall f s t. FINITE((s DIFF t) UNION (t DIFF s)) /\\ real_summable s f\n           ==> real_summable t f
-      #|  0..(m+n)
-      #|  forall f m n. real_summable (from m) f ==> real_summable (from n) f
-      #|  forall n m f. real_summable (from m) f <=> real_summable (from n) f
-      #|  forall s x. real_summable s x\n         ==> forall e. &0 < e\n                 ==> eventually (\\n. n IN s ==> abs(x n) < e) sequentially
-      #|  forall f:num->real k.\n       real_summable k f\n       ==> ((\\n. if n IN k then f(n) else &0) ---> &0) sequentially
-      #|  forall f:num->real k. real_summable k f ==> real_bounded (IMAGE f k)
-      #|  forall f:num->real k.\n       real_summable (from k) f ==> real_bounded { sum(k..n) f | n IN (:num) }
-      #|  forall s. ((\\n. &0) real_sums (&0)) s
-      #|  forall x x0 y y0 s.\n     (x real_sums x0) s /\\ (y real_sums y0) s\n     ==> ((\\n. x n + y n) real_sums (x0 + y0)) s
-      #|  forall x x0 y y0 s.\n     (x real_sums x0) s /\\ (y real_sums y0) s\n     ==> ((\\n. x n - y n) real_sums (x0 - y0)) s
-      #|  forall x x0 c s. (x real_sums x0) s ==> ((\\n. c * x n) real_sums (c * x0)) s
-      #|  forall x x0 c s. (x real_sums x0) s ==> ((\\n. x n * c) real_sums (x0 * c)) s
-      #|  forall x x0 s. (x real_sums x0) s ==> ((\\n. --(x n)) real_sums (--x0)) s
-      #|  forall f g k. (forall x. x IN k ==> f x = g x)\n           ==> ((f real_sums l) k <=> (g real_sums l) k)
-      #|  forall f g k. (forall x. x IN k ==> f x = g x) /\\ (f real_sums l) k\n           ==> (g real_sums l) k
-      #|  sum (k INTER (0..n)) (f:num->real) = sum(s INTER k) f
-      #|  n:num
-      #|  N:num
-      #|  \\x:num. x
-      #|  forall f s k.\n     FINITE (s INTER k) /\\ (forall x. ~(x IN s INTER k) ==> f x = &0)\n     ==> (f real_sums sum(s INTER k) f) k
-      #|  k:num
-      #|  \\n. (f:num->real) k - f(n + 1)
-      #|  forall f k. (f ---> &0) sequentially\n         ==> ((\\n. f(n) - f(n + 1)) real_sums f(k)) (from k)
-      #|  forall f. (f real_sums &0) {}
-      #|  sum s f = sum t f /\\ sum t f = sum t g\n                        ==> sum s f = sum t g
-      #|  forall f k l:real.\n        ((\\n. if n IN k then f(n) else &0) real_sums l) (:num) <=>\n        (f real_sums l) k
-      #|  s INTER k = s:num->bool
-      #|  forall f l k s. FINITE s /\\ s SUBSET k /\\ (forall x. ~(x IN s) ==> f x = &0) /\\\n             sum s f = l ==> (f real_sums l) k
-      #|  N + k:num <= n ==> N <= n + k
-      #|  N + k:num <= n ==> n = (n - k) + k /\\ N <= n - k
-      #|  forall k a l n.\n     ((\\x. a(x + k)) real_sums l) (from n) <=> (a real_sums l) (from(n + k))
-      #|  forall f l n.\n    (f real_sums l) (from n) <=>\n    ((\\i. if EVEN i then f(i DIV 2) else &0) real_sums l) (from (2 * n))
-      #|  forall f l n.\n    (f real_sums l) (from n) <=>\n    ((\\i. if ODD i then f(i DIV 2) else &0) real_sums l) (from (2 * n + 1))
-      #|  forall f s. real_summable s f ==> real_infsum s f = drop(infsum s (lift o f))
-      #|  forall f s n.\n        (forall i. i IN s ==> &0 <= f i) /\\ real_summable s f\n        ==> sum (s INTER (0..n)) f <= real_infsum s f
-      #|  sum (s INTER (0..n)) f
-      #|  n:num
-      #|  \\n:num. n
-      #|  forall f s t. FINITE t /\\ t SUBSET s /\\\n           (forall i. i IN s ==> &0 <= f i) /\\ real_summable s f\n           ==> sum t f <= real_infsum s f
-      #|  forall f l n. (f real_sums l) (from n) ==> (f ---> &0) sequentially
-      #|  lift o (g:num->real)
-      #|  lift o (f:num->real)
-      #|  x = drop(lift x)
-      #|  forall f g s y z.\n        (f real_sums y) s /\\ (g real_sums z) s /\\\n        (forall i. i IN s ==> f(i) <= g(i))\n        ==> y <= z
-      #|  lift o (f:num->real)
-      #|  forall f s y.\n        (f real_sums y) s /\\ (forall i. i IN s ==> &0 <= f(i))\n        ==> &0 <= y
-      #|  lift o (f:num->real)
-      #|  forall f g s a b.\n        (f real_sums a) s /\\ (g real_sums b) s /\\\n        (forall i. i IN s ==> abs(f i) <= g i)\n        ==> abs(a) <= b
-      #|  lift o (g:num->real)
-      #|  forall f g s a.\n        (g real_sums a) s /\\ (forall i. i IN s ==> abs(f i) <= g i)\n        ==> ?l. (f real_sums l) s /\\ abs(l) <= a
-      #|  lift b
-      #|  lift a
-      #|  lift o (y:num->real)
-      #|  lift o (x:num->real)
-      #|  \\x y:real^1. drop x % y
-      #|  forall x y a b.\n        (x real_sums a) (from 0) /\\ (y real_sums b) (from 0) /\\\n        (real_summable (from 0) (\\n. abs(x n)) \\/\n         real_summable (from 0) (\\n. abs(y n)))\n        ==> ((\\n. sum(0..n) (\\i. x i * y(n - i))) real_sums (a * b))\n            (from 0)
-      #|  lift c
-      #|  lift b
-      #|  lift a
-      #|  lift o (y:num->real)
-      #|  lift o (x:num->real)
-      #|  \\x y:real^1. drop x % y
-      #|  forall x y a b c.\n        (x real_sums a) (from 0) /\\ (y real_sums b) (from 0) /\\\n        ((\\n. sum (0..n) (\\i. x i * y(n - i))) real_sums c) (from 0)\n        ==> a * b = c
-      #|  forall s. real_summable s (\\n. &0)
-      #|  forall x y s. real_summable s x /\\ real_summable s y\n           ==> real_summable s (\\n. x n + y n)
-      #|  forall x y s. real_summable s x /\\ real_summable s y\n           ==> real_summable s (\\n. x n - y n)
-      #|  forall s x c. real_summable s x ==> real_summable s (\\n. c * x n)
-      #|  forall s x c. real_summable s x ==> real_summable s (\\n. x n * c)
-      #|  forall x s. real_summable s x ==> real_summable s (\\n. --(x n))
-      #|  forall f g k. (forall x. x IN k ==> f x = g x)\n           ==> (real_summable k f <=> real_summable k g)
-      #|  forall f g k. (forall x. x IN k ==> f x = g x) /\\ real_summable k f\n           ==> real_summable k g
-      #|  forall x s t l.\n        s SUBSET t /\\\n        ((\\i. if i IN s then x i else &0) real_sums l) t\n        ==> (x real_sums l) s
-      #|  forall x s t.\n        s SUBSET t /\\\n        real_summable t (\\i. if i IN s then x i else &0)\n        ==> real_summable s x
-      #|  &0
-      #|  forall f. real_summable {} f
-      #|  forall f k.\n        real_summable (:num) (\\n. if n IN k then f(n) else &0) <=>\n        real_summable k f
-      #|  (x:num) IN t
-      #|  (x:num) IN s
-      #|  x:num
-      #|  x:num
-      #|  f:num->real
-      #|  forall f t s l.\n        t SUBSET s /\\ FINITE t /\\ (f real_sums l) s\n        ==> (f real_sums (l - sum t f)) (s DIFF t)
-      #|  (x:num) IN t
-      #|  (x:num) IN s
-      #|  x:num
-      #|  f:num->real
-      #|  s:num->bool
-      #|  forall f s t l.\n        FINITE t /\\ (f real_sums l) s\n        ==> (f real_sums (l + sum (t DIFF s) f)) (s UNION t)
-      #|  from n = from m DIFF (m..(n-1))
-      #|  forall f l m n.\n        (f real_sums l) (from m) /\\ m < n\n        ==> (f real_sums (l - sum(m..(n-1)) f)) (from n)
-      #|  l:real
-      #|  n..m-1
-      #|  from m
-      #|  f:num->real
-      #|  forall f l m n.\n        (f real_sums l) (from m) /\\ n < m\n        ==> (f real_sums (l + sum(n..m-1) f)) (from n)
-      #|  forall f n.\n      real_summable (from n) f <=>\n      real_summable (from (2 * n)) (\\i. if EVEN i then f(i DIV 2) else &0)
-      #|  forall f n.\n      real_summable (from n) f <=>\n      real_summable (from (2 * n + 1)) (\\i. if ODD i then f(i DIV 2) else &0)
-      #|  real_infsum s (\\i. &0) = &0
-      #|  forall x y s. real_summable s x /\\ real_summable s y\n           ==> real_infsum s (\\i. x i + y i) =\n               real_infsum s x + real_infsum s y
-      #|  forall x y s. real_summable s x /\\ real_summable s y\n           ==> real_infsum s (\\i. x i - y i) =\n               real_infsum s x - real_infsum s y
-      #|  forall s x c. real_summable s x\n           ==> real_infsum s (\\n. c * x n) = c * real_infsum s x
-      #|  forall s x c. real_summable s x\n           ==> real_infsum s (\\n. x n * c) = real_infsum s x * c
-      #|  forall s x. real_summable s x\n         ==> real_infsum s (\\n. --(x n)) = --(real_infsum s x)
-      #|  forall f g k. real_summable k f /\\ real_summable k g /\\\n           (forall x. x IN k ==> f x = g x)\n           ==> real_infsum k f = real_infsum k g
-      #|  real_summable k a
-      #|  k:num->bool
-      #|  a:num->real
-      #|  forall k a. real_infsum (:num) (\\n. if n IN k then a n else &0) =\n         real_infsum k a
-      #|  forall f n.\n        real_infsum (from n) f =\n        real_infsum (from (2 * n)) (\\i. if EVEN i then f(i DIV 2) else &0)
-      #|  forall f n.\n        real_infsum (from n) f =\n        real_infsum (from (2 * n + 1)) (\\i. if ODD i then f(i DIV 2) else &0)
-      #|  drop o (l:A->real^1)
-      #|  l:A->real^1
-      #|  lift o (l:A->real)
-      #|  l:A->real
-      #|  k:num->bool
-      #|  \\x:A n:num. lift(f x n)
-      #|  P:A->bool
-      #|  forall P:A->bool f k.\n        (?l. forall e. &0 < e\n                 ==> ?N. forall n x. N <= n /\\ P x\n                               ==> abs(sum(k INTER (0..n)) (f x) -\n                                        l x) < e) <=>\n        (forall e. &0 < e ==> ?N. forall m n x. N <= m /\\ P x\n                                    ==> abs(sum(k INTER (m..n)) (f x)) < e)
-      #|  g:num->real
-      #|  forall f g s. (?l. (g real_sums l) s) /\\\n           (?N. forall n. n >= N /\\ n IN s ==> abs(f n) <= g n)\n           ==> ?l. (f real_sums l) s
-      #|  forall f g s. real_summable s g /\\\n           (?N. forall n. n >= N /\\ n IN s ==> abs(f n) <= g n)\n           ==> real_summable s f
-      #|  N1 + N2:num <= m ==> N2 <= m
-      #|  N1 + N2:num <= m /\\ m <= x ==> N1 <= x
-      #|  x <= a ==> x <= abs(a)
-      #|  abs (sum (s INTER (m .. n)) g)
-      #|  x:A
-      #|  n:num
-      #|  m:num
-      #|  N1 + N2:num
-      #|  N2:num
-      #|  e:real
-      #|  N1:num
-      #|  forall f g P s. (?l. (g real_sums l) s) /\\\n             (?N. forall n x. N <= n /\\ n IN s /\\ P x ==> abs(f x n) <= g n)\n             ==> ?l:A->real.\n                    forall e. &0 < e\n                        ==> ?N. forall n x. N <= n /\\ P x\n                                      ==> abs(sum(s INTER (0..n)) (f x) -\n                                               l x) < e
-      #|  abs x <= x <=> &0 <= x
+      #|  \226\136\128 s : (Real) -> Bool, real_compact(s) == compact(IMAGE(lift, s))
+      #|  op_minus_minus_minus_gt((f : (_) -> Real), (l : Real), (net : Net[_])) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((x : _) => abs(f(x) - l) < e, net))
+      #|  reallim((net : Net[_]), (f : (_) -> Real)) == select((l : Real) => op_minus_minus_minus_gt(f, l, net))
+      #|  op_minus_minus_minus_gt((s : (_) -> Real), (l : Real)) == op_minus_minus_gt(o(lift, s), lift(l))
+      #|  op_minus_minus_gt((s : (_) -> Cart[Real, Unit]), (l : Cart[Real, Unit])) == op_minus_minus_minus_gt(o(drop, s), drop(l))
+      #|  op_minus_minus_minus_gt((s : (_) -> Real), (l : Real)) == op_minus_minus_gt(o(Cx, s), Cx(l))
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 l : Real, trivial_limit(net) \226\134\146 op_minus_minus_minus_gt(f, l, net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 l : Real, \226\136\128 l' : Real, !trivial_limit(net) && op_minus_minus_minus_gt(f, l, net) && op_minus_minus_minus_gt(f, l', net) \226\134\146 l == l'
+      #|  \226\136\128 net : Net[_], \226\136\128 a : Real, op_minus_minus_minus_gt((x : _) => a, a, net)
+      #|  \226\136\128 f : (_) -> Real, \226\136\128 l : Real, \226\136\128 c : Real, op_minus_minus_minus_gt(f, l, (net : Net[_])) \226\134\146 op_minus_minus_minus_gt((x : _) => c * f(x), c * l, net)
+      #|  \226\136\128 f : (_) -> Real, \226\136\128 l : Real, \226\136\128 c : Real, op_minus_minus_minus_gt(f, l, (net : Net[_])) \226\134\146 op_minus_minus_minus_gt((x : _) => f(x) * c, l * c, net)
+      #|  inv((c : Real))
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 l : Real, \226\136\128 c : Real, !(c == real_of_num(0)) \226\134\146 op_minus_minus_minus_gt((x : _) => c * f(x), c * l, net) == op_minus_minus_minus_gt(f, l, net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 l : Real, \226\136\128 c : Real, !(c == real_of_num(0)) \226\134\146 op_minus_minus_minus_gt((x : _) => f(x) * c, l * c, net) == op_minus_minus_minus_gt(f, l, net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(f, l, net) \226\134\146 op_minus_minus_minus_gt((x : _) => -f(x), -l, net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt((x : _) => -f(x), -l, net) == op_minus_minus_minus_gt(f, l, net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 l : Real, \226\136\128 m : Real, op_minus_minus_minus_gt(f, l, net) && op_minus_minus_minus_gt(g, m, net) \226\134\146 op_minus_minus_minus_gt((x : A) => f(x) + g(x), l + m, net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 l : Real, \226\136\128 m : Real, op_minus_minus_minus_gt(f, l, net) && op_minus_minus_minus_gt(g, m, net) \226\134\146 op_minus_minus_minus_gt((x : A) => f(x) - g(x), l - m, net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 l : Real, \226\136\128 m : Real, op_minus_minus_minus_gt(f, l, net) && op_minus_minus_minus_gt(g, m, net) \226\134\146 op_minus_minus_minus_gt((x : A) => f(x) * g(x), l * m, net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(f, l, net) && !(l == real_of_num(0)) \226\134\146 op_minus_minus_minus_gt((x : _) => inv(f(x)), inv(l), net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 l : Real, \226\136\128 m : Real, op_minus_minus_minus_gt(f, l, net) && op_minus_minus_minus_gt(g, m, net) && !(m == real_of_num(0)) \226\134\146 op_minus_minus_minus_gt((x : A) => f(x) / g(x), l / m, net)
+      #|  (e : Real)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(f, l, net) \226\134\146 op_minus_minus_minus_gt((x : _) => abs(f(x)), abs(l), net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 l : Real, \226\136\128 n : Num, op_minus_minus_minus_gt(f, l, net) \226\134\146 op_minus_minus_minus_gt((x : _) => pow(f(x), n), pow(l, n), net)
+      #|  max((x : Real), (y : Real)) == inv(real_of_num(2)) * (x + y + abs(x - y))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 l : Real, \226\136\128 m : Real, op_minus_minus_minus_gt(f, l, net) && op_minus_minus_minus_gt(g, m, net) \226\134\146 op_minus_minus_minus_gt((x : A) => max(f(x), g(x)), max(l, m), net)
+      #|  min((x : Real), (y : Real)) == inv(real_of_num(2)) * (x + y - abs(x - y))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 l : Real, \226\136\128 m : Real, op_minus_minus_minus_gt(f, l, net) && op_minus_minus_minus_gt(g, m, net) \226\134\146 op_minus_minus_minus_gt((x : A) => min(f(x), g(x)), min(l, m), net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(f, l, net) == op_minus_minus_minus_gt((x : _) => f(x) - l, real_of_num(0), net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, op_minus_minus_minus_gt(f, real_of_num(0), net) && op_minus_minus_minus_gt(g, real_of_num(0), net) \226\134\146 op_minus_minus_minus_gt((x : A) => f(x) + g(x), real_of_num(0), net)
+      #|  (c : Real)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 c : Real, op_minus_minus_minus_gt(f, real_of_num(0), net) \226\134\146 op_minus_minus_minus_gt((x : _) => c * f(x), real_of_num(0), net)
+      #|  (c : Real)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 c : Real, op_minus_minus_minus_gt(f, real_of_num(0), net) \226\134\146 op_minus_minus_minus_gt((x : _) => f(x) * c, real_of_num(0), net)
+      #|  (n : Num)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 n : Num, op_minus_minus_minus_gt(f, real_of_num(0), net) && !(n == 0) \226\134\146 op_minus_minus_minus_gt((x : _) => pow(f(x), n), real_of_num(0), net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 c : Real, !(c == real_of_num(0)) \226\134\146 op_minus_minus_minus_gt((x : _) => c * f(x), real_of_num(0), net) == op_minus_minus_minus_gt(f, real_of_num(0), net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 c : Real, !(c == real_of_num(0)) \226\134\146 op_minus_minus_minus_gt((x : _) => f(x) * c, real_of_num(0), net) == op_minus_minus_minus_gt(f, real_of_num(0), net)
+      #|  -(x : Real) == -real_of_num(1) * x
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, op_minus_minus_minus_gt((x : _) => -f(x), real_of_num(0), net) == op_minus_minus_minus_gt(f, real_of_num(0), net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, op_minus_minus_minus_gt(f, real_of_num(0), net) && op_minus_minus_minus_gt(g, real_of_num(0), net) \226\134\146 op_minus_minus_minus_gt((x : A) => f(x) - g(x), real_of_num(0), net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 l : Cart[Real, Tybit0[Unit]], op_minus_minus_gt(f, l, net) \226\134\146 op_minus_minus_minus_gt(o(Re, f), Re(l), net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 l : Cart[Real, Tybit0[Unit]], op_minus_minus_gt(f, l, net) \226\134\146 op_minus_minus_minus_gt(o(Im, f), Im(l), net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 g : (_) -> Real, \226\136\128 l : Real, eventually((x : _) => f(x) == g(x), net) && op_minus_minus_minus_gt(f, l, net) \226\134\146 op_minus_minus_minus_gt(g, l, net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 g : (_) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt((x : _) => f(x) - g(x), real_of_num(0), net) && op_minus_minus_minus_gt(f, l, net) \226\134\146 op_minus_minus_minus_gt(g, l, net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt((x : A) => f(x) - g(x), real_of_num(0), net) \226\134\146 op_minus_minus_minus_gt(f, l, net) == op_minus_minus_minus_gt(g, l, net)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, \226\136\128 k : Num, op_minus_minus_minus_gt(f, l, sequentially) \226\134\146 op_minus_minus_minus_gt((i : Num) => f(i + k), l, sequentially)
+      #|  (k : Num)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, \226\136\128 k : Num, op_minus_minus_minus_gt((i : Num) => f(i + k), l, sequentially) \226\134\146 op_minus_minus_minus_gt(f, l, sequentially)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 f : (_) -> Real, \226\136\128 g : (_) -> Real, \226\136\128 h : (_) -> Real, \226\136\128 a : Real, eventually((n : _) => f(n) <= g(n), (net : Net[_])) && op_minus_minus_minus_gt(f, a, net) && eventually((n : _) => g(n) <= h(n), net) && op_minus_minus_minus_gt(h, a, net) \226\134\146 op_minus_minus_minus_gt(g, a, net)
+      #|  \226\136\128 s : (Num) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(s, l, sequentially) \226\134\146 real_bounded(IMAGE(s, UNIV))
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, op_minus_minus_minus_gt((x : _) => abs(f(x)), real_of_num(0), net) == op_minus_minus_minus_gt(f, real_of_num(0), net)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, op_minus_minus_minus_gt(f, l, within(at(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, N], IN(x, s) && real_of_num(0) < dist((x, a)) && dist((x, a)) <= d \226\134\146 abs(f(x) - l) < e)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, op_minus_minus_minus_gt(f, l, within(at(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, N], IN(x, s) && real_of_num(0) < dist((x, a)) && dist((x, a)) < d \226\134\146 abs(f(x) - l) < e)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], op_minus_minus_minus_gt(f, l, at(a)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, N], real_of_num(0) < dist((x, a)) && dist((x, a)) < d \226\134\146 abs(f(x) - l) < e)))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(f, l, at_infinity) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 b : Real, \226\136\128 x : Cart[Real, _], norm(x) >= b \226\134\146 abs(f(x) - l) < e))
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(f, l, at_infinity) == op_minus_minus_minus_gt(o(f, inv), l, at(Cx(real_of_num(0))))
+      #|  \226\136\128 s : (Num) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(s, l, sequentially) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 abs(s(n) - l) < e))
+      #|  abs((x : Real) - x) == real_of_num(0)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 l : Real, eventually((x : _) => f(x) == l, net) \226\134\146 op_minus_minus_minus_gt(f, l, net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, N], (op_minus_minus_gt : ((A) -> Cart[Real, N], Cart[Real, N], Net[A]) -> Bool)(f, (l : Cart[Real, N]), net) == (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_minus_minus_minus_gt : ((A) -> Real, Real, Net[A]) -> Bool)((x : A) => (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i), (op_dollar : (Cart[Real, N], Num) -> Real)(l, i), net))
+      #|  o(lift, (f : (A) -> Real))
+      #|  (net : Net[A])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 l : Real, \226\136\128 b : Real, op_minus_minus_minus_gt(f, l, net) && !trivial_limit(net) && eventually((x : A) => f(x) <= b, net) \226\134\146 l <= b
+      #|  (a : A) => -(f : (A) -> Real)(a)
+      #|  (net : Net[A])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 l : Real, \226\136\128 b : Real, op_minus_minus_minus_gt(f, l, net) && !trivial_limit(net) && eventually((x : A) => b <= f(x), net) \226\134\146 b <= l
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 g : (_) -> Real, \226\136\128 l : Real, \226\136\128 m : Real, op_minus_minus_minus_gt(f, l, net) && op_minus_minus_minus_gt(g, m, net) && !trivial_limit(net) && eventually((x : _) => f(x) <= g(x), net) \226\134\146 l <= m
+      #|  \226\136\128 net : Net[A], \226\136\128 c : Real, \226\136\128 d : Real, op_minus_minus_minus_gt((x : A) => c, d, net) == (trivial_limit(net) || c == d)
+      #|  \226\136\128 net : Net[B], \226\136\128 f : (A, B) -> Real, \226\136\128 l : (A) -> Real, \226\136\128 s : (A) -> Bool, FINITE(s) && (\226\136\128 i : A, IN(i, s) \226\134\146 op_minus_minus_minus_gt(f(i), l(i), net)) \226\134\146 op_minus_minus_minus_gt((x : B) => sum(s, (i : A) => f(i, x)), sum(s, l), net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A, B) -> Real, \226\136\128 s : (B) -> Bool, FINITE(s) && (\226\136\128 a : B, IN(a, s) \226\134\146 op_minus_minus_minus_gt((x : A) => f(x, a), real_of_num(0), net)) \226\134\146 op_minus_minus_minus_gt((x : A) => sum(s, f(x)), real_of_num(0), net)
+      #|  (g : (A) -> Real)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, eventually((x : A) => abs(f(x)) <= g(x), net) && op_minus_minus_minus_gt(g, real_of_num(0), net) \226\134\146 op_minus_minus_minus_gt(f, real_of_num(0), net)
+      #|  \226\136\128 s : (Num) -> Real, real_bounded(IMAGE(s, UNIV)) && ((\226\136\128 n : Num, s(n) <= s(SUC(n))) || (\226\136\128 n : Num, s(SUC(n)) <= s(n))) \226\134\146 (\226\136\131 l : Real, op_minus_minus_minus_gt(s, l, sequentially))
+      #|  ((c : Real) - (l : Real)) / real_of_num(2)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 l : Real, \226\136\128 c : Real, op_minus_minus_minus_gt(f, l, net) && l < c \226\134\146 eventually((x : A) => f(x) < c, net)
+      #|  ((l : Real) - (c : Real)) / real_of_num(2)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 l : Real, \226\136\128 c : Real, op_minus_minus_minus_gt(f, l, net) && c < l \226\134\146 eventually((x : A) => c < f(x), net)
+      #|  FINITE((s : (Num) -> Bool))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, \226\136\128 s : (Num) -> Bool, op_minus_minus_minus_gt(f, l, sequentially) \226\134\146 op_minus_minus_minus_gt(f, l, within(sequentially, s))
+      #|  real_sums((f : (Num) -> Real), (l : Real), (s : (Num) -> Bool)) == op_minus_minus_minus_gt((n : Num) => sum(INTER(s, op_dot_dot(0, n)), f), l, sequentially)
+      #|  real_infsum((s : (Num) -> Bool), (f : (Num) -> Real)) == select((l : Real) => real_sums(f, l, s))
+      #|  real_summable((s : (Num) -> Bool), (f : (Num) -> Real)) == (\226\136\131 l : Real, real_sums(f, l, s))
+      #|  real_sums((f : (Num) -> Real), (l : Real)) == sums(o(lift, f), lift(l))
+      #|  \226\136\128 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 l : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Num) -> Bool, sums(f, l, s) \226\134\146 real_sums(o(Re, f), Re(l), s)
+      #|  \226\136\128 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 l : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Num) -> Bool, sums(f, l, s) \226\134\146 real_sums(o(Im, f), Im(l), s)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, \226\136\128 s : (Num) -> Bool, real_sums(f, l, s) == sums(o(Cx, f), Cx(l), s)
+      #|  real_summable((s : (Num) -> Bool), (f : (Num) -> Real)) == summable(s, o(lift, f))
+      #|  (s : (Num) -> Bool)
+      #|  o(Cx, (f : (Num) -> Real))
+      #|  Cx(Re((l : Cart[Real, Tybit0[Unit]]))) == l
+      #|  Re((l : Cart[Real, Tybit0[Unit]]))
+      #|  (l : Cart[Real, Tybit0[Unit]])
+      #|  real_summable((s : (Num) -> Bool), (f : (Num) -> Real)) == summable(s, o(Cx, f))
+      #|  (\226\136\131 l : Real, real_sums((f : (Num) -> Real), l, (s : (Num) -> Bool))) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 m : Num, \226\136\128 n : Num, m >= N \226\134\146 abs(sum(INTER(s, op_dot_dot(m, n)), f)) < e))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 s : (Num) -> Bool, real_summable(s, f) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 m : Num, \226\136\128 n : Num, m >= N \226\134\146 abs(sum(INTER(s, op_dot_dot(m, n)), f)) < e))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, \226\136\128 s : (Num) -> Bool, real_sums(f, l, s) \226\134\146 real_summable(s, f)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 s : (Num) -> Bool, real_sums(f, real_infsum(s, f), s) == real_summable(s, f)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 s : (Num) -> Bool, real_summable(s, f) \226\134\146 real_infsum(s, f) == Re(infsum(s, o(Cx, f)))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, \226\136\128 k : Num, real_sums(f, l, from(k)) == op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(k, n), f), l, sequentially)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, \226\136\128 l' : Real, \226\136\128 s : (Num) -> Bool, real_sums(f, l, s) && real_sums(f, l', s) \226\134\146 l == l'
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, \226\136\128 s : (Num) -> Bool, real_sums(f, l, s) \226\134\146 real_infsum(s, f) == l
+      #|  INTER((s : (Num) -> Bool), op_dot_dot(0, (m : Num))) == s
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (e : Real)
+      #|  (n : Num)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 s : (Num) -> Bool, FINITE(s) \226\134\146 real_sums(f, sum(s, f), s)
+      #|  \226\136\128 k : (Num) -> Bool, \226\136\128 f : (Num) -> Real, FINITE(k) \226\134\146 real_summable(k, f)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 k : (Num) -> Bool, (\226\136\131 N : Num, \226\136\128 n : Num, N <= n && IN(n, k) \226\134\146 f(n) == g(n)) \226\134\146 real_summable(k, f) == real_summable(k, g)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 k : (Num) -> Bool, (\226\136\131 N : Num, \226\136\128 n : Num, N <= n && IN(n, k) \226\134\146 f(n) == g(n)) && real_summable(k, f) \226\134\146 real_summable(k, g)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, FINITE(UNION(DIFF(s, t), DIFF(t, s))) \226\134\146 real_summable(s, f) == real_summable(t, f)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, FINITE(UNION(DIFF(s, t), DIFF(t, s))) && real_summable(s, f) \226\134\146 real_summable(t, f)
+      #|  op_dot_dot(0, (m : Num) + (n : Num))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, real_summable(from(m), f) \226\134\146 real_summable(from(n), f)
+      #|  \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 f : (Num) -> Real, real_summable(from(m), f) == real_summable(from(n), f)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 x : (Num) -> Real, real_summable(s, x) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((n : Num) => IN(n, s) \226\134\146 abs(x(n)) < e, sequentially))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 k : (Num) -> Bool, real_summable(k, f) \226\134\146 op_minus_minus_minus_gt((n : Num) => if IN(n, k) { f(n) } else { real_of_num(0) }, real_of_num(0), sequentially)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 k : (Num) -> Bool, real_summable(k, f) \226\134\146 real_bounded(IMAGE(f, k))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 k : Num, real_summable(from(k), f) \226\134\146 real_bounded({sum(op_dot_dot(k, (n : Num)), f) | IN(n, UNIV)})
+      #|  \226\136\128 s : (Num) -> Bool, real_sums((n : Num) => real_of_num(0), real_of_num(0), s)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 x0 : Real, \226\136\128 y : (Num) -> Real, \226\136\128 y0 : Real, \226\136\128 s : (Num) -> Bool, real_sums(x, x0, s) && real_sums(y, y0, s) \226\134\146 real_sums((n : Num) => x(n) + y(n), x0 + y0, s)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 x0 : Real, \226\136\128 y : (Num) -> Real, \226\136\128 y0 : Real, \226\136\128 s : (Num) -> Bool, real_sums(x, x0, s) && real_sums(y, y0, s) \226\134\146 real_sums((n : Num) => x(n) - y(n), x0 - y0, s)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 x0 : Real, \226\136\128 c : Real, \226\136\128 s : (Num) -> Bool, real_sums(x, x0, s) \226\134\146 real_sums((n : Num) => c * x(n), c * x0, s)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 x0 : Real, \226\136\128 c : Real, \226\136\128 s : (Num) -> Bool, real_sums(x, x0, s) \226\134\146 real_sums((n : Num) => x(n) * c, x0 * c, s)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 x0 : Real, \226\136\128 s : (Num) -> Bool, real_sums(x, x0, s) \226\134\146 real_sums((n : Num) => -x(n), -x0, s)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 k : (Num) -> Bool, (\226\136\128 x : Num, IN(x, k) \226\134\146 f(x) == g(x)) \226\134\146 real_sums(f, (l : Real), k) == real_sums(g, l, k)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 k : (Num) -> Bool, (\226\136\128 x : Num, IN(x, k) \226\134\146 f(x) == g(x)) && real_sums(f, (l : Real), k) \226\134\146 real_sums(g, l, k)
+      #|  sum(INTER((k : (Num) -> Bool), op_dot_dot(0, (n : Num))), (f : (Num) -> Real)) == sum(INTER((s : (Num) -> Bool), k), f)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (x : Num) => x
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 k : (Num) -> Bool, FINITE(INTER(s, k)) && (\226\136\128 x : Num, !IN(x, INTER(s, k)) \226\134\146 f(x) == real_of_num(0)) \226\134\146 real_sums(f, sum(INTER(s, k), f), k)
+      #|  (k : Num)
+      #|  (n : Num) => (f : (Num) -> Real)((k : Num)) - f(n + 1)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 k : Num, op_minus_minus_minus_gt(f, real_of_num(0), sequentially) \226\134\146 real_sums((n : Num) => f(n) - f(n + 1), f(k), from(k))
+      #|  \226\136\128 f : (Num) -> Real, real_sums(f, real_of_num(0), {})
+      #|  sum((s : (_) -> Bool), (f : (_) -> Real)) == sum((t : (_) -> Bool), f) && sum(t, f) == sum(t, (g : (_) -> Real)) \226\134\146 sum(s, f) == sum(t, g)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 k : (Num) -> Bool, \226\136\128 l : Real, real_sums((n : Num) => if IN(n, k) { f(n) } else { real_of_num(0) }, l, UNIV) == real_sums(f, l, k)
+      #|  INTER((s : (Num) -> Bool), (k : (Num) -> Bool)) == s
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, \226\136\128 k : (Num) -> Bool, \226\136\128 s : (Num) -> Bool, FINITE(s) && SUBSET(s, k) && (\226\136\128 x : Num, !IN(x, s) \226\134\146 f(x) == real_of_num(0)) && sum(s, f) == l \226\134\146 real_sums(f, l, k)
+      #|  (N : Num) + (k : Num) <= (n : Num) \226\134\146 N <= n + k
+      #|  (N : Num) + (k : Num) <= (n : Num) \226\134\146 n == n - k + k && N <= n - k
+      #|  \226\136\128 k : Num, \226\136\128 a : (Num) -> Real, \226\136\128 l : Real, \226\136\128 n : Num, real_sums((x : Num) => a(x + k), l, from(n)) == real_sums(a, l, from(n + k))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, \226\136\128 n : Num, real_sums(f, l, from(n)) == real_sums((i : Num) => if EVEN(i) { f(DIV(i, 2)) } else { real_of_num(0) }, l, from(2 * n))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, \226\136\128 n : Num, real_sums(f, l, from(n)) == real_sums((i : Num) => if ODD(i) { f(DIV(i, 2)) } else { real_of_num(0) }, l, from(2 * n + 1))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 s : (Num) -> Bool, real_summable(s, f) \226\134\146 real_infsum(s, f) == drop(infsum(s, o(lift, f)))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 n : Num, (\226\136\128 i : Num, IN(i, s) \226\134\146 real_of_num(0) <= f(i)) && real_summable(s, f) \226\134\146 sum(INTER(s, op_dot_dot(0, n)), f) <= real_infsum(s, f)
+      #|  sum(INTER((s : (Num) -> Bool), op_dot_dot(0, (n : Num))), (f : (Num) -> Real))
+      #|  (n : Num)
+      #|  (n : Num) => n
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, FINITE(t) && SUBSET(t, s) && (\226\136\128 i : Num, IN(i, s) \226\134\146 real_of_num(0) <= f(i)) && real_summable(s, f) \226\134\146 sum(t, f) <= real_infsum(s, f)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, \226\136\128 n : Num, real_sums(f, l, from(n)) \226\134\146 op_minus_minus_minus_gt(f, real_of_num(0), sequentially)
+      #|  o(lift, (g : (Num) -> Real))
+      #|  o(lift, (f : (Num) -> Real))
+      #|  (x : Real) == drop(lift(x))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 y : Real, \226\136\128 z : Real, real_sums(f, y, s) && real_sums(g, z, s) && (\226\136\128 i : Num, IN(i, s) \226\134\146 f(i) <= g(i)) \226\134\146 y <= z
+      #|  o(lift, (f : (Num) -> Real))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 y : Real, real_sums(f, y, s) && (\226\136\128 i : Num, IN(i, s) \226\134\146 real_of_num(0) <= f(i)) \226\134\146 real_of_num(0) <= y
+      #|  o(lift, (f : (Num) -> Real))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 a : Real, \226\136\128 b : Real, real_sums(f, a, s) && real_sums(g, b, s) && (\226\136\128 i : Num, IN(i, s) \226\134\146 abs(f(i)) <= g(i)) \226\134\146 abs(a) <= b
+      #|  o(lift, (g : (Num) -> Real))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 a : Real, real_sums(g, a, s) && (\226\136\128 i : Num, IN(i, s) \226\134\146 abs(f(i)) <= g(i)) \226\134\146 (\226\136\131 l : Real, real_sums(f, l, s) && abs(l) <= a)
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o(lift, (y : (Num) -> Real))
+      #|  o(lift, (x : (Num) -> Real))
+      #|  (x : Cart[Real, Unit]) => (y : Cart[Real, Unit]) => op_pct(drop(x), y)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_sums(x, a, from(0)) && real_sums(y, b, from(0)) && (real_summable(from(0), (n : Num) => abs(x(n))) || real_summable(from(0), (n : Num) => abs(y(n)))) \226\134\146 real_sums((n : Num) => sum(op_dot_dot(0, n), (i : Num) => x(i) * y(n - i)), a * b, from(0))
+      #|  lift((c : Real))
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o(lift, (y : (Num) -> Real))
+      #|  o(lift, (x : (Num) -> Real))
+      #|  (x : Cart[Real, Unit]) => (y : Cart[Real, Unit]) => op_pct(drop(x), y)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, real_sums(x, a, from(0)) && real_sums(y, b, from(0)) && real_sums((n : Num) => sum(op_dot_dot(0, n), (i : Num) => x(i) * y(n - i)), c, from(0)) \226\134\146 a * b == c
+      #|  \226\136\128 s : (Num) -> Bool, real_summable(s, (n : Num) => real_of_num(0))
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, \226\136\128 s : (Num) -> Bool, real_summable(s, x) && real_summable(s, y) \226\134\146 real_summable(s, (n : Num) => x(n) + y(n))
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, \226\136\128 s : (Num) -> Bool, real_summable(s, x) && real_summable(s, y) \226\134\146 real_summable(s, (n : Num) => x(n) - y(n))
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 x : (Num) -> Real, \226\136\128 c : Real, real_summable(s, x) \226\134\146 real_summable(s, (n : Num) => c * x(n))
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 x : (Num) -> Real, \226\136\128 c : Real, real_summable(s, x) \226\134\146 real_summable(s, (n : Num) => x(n) * c)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 s : (Num) -> Bool, real_summable(s, x) \226\134\146 real_summable(s, (n : Num) => -x(n))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 k : (Num) -> Bool, (\226\136\128 x : Num, IN(x, k) \226\134\146 f(x) == g(x)) \226\134\146 real_summable(k, f) == real_summable(k, g)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 k : (Num) -> Bool, (\226\136\128 x : Num, IN(x, k) \226\134\146 f(x) == g(x)) && real_summable(k, f) \226\134\146 real_summable(k, g)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, \226\136\128 l : Real, SUBSET(s, t) && real_sums((i : Num) => if IN(i, s) { x(i) } else { real_of_num(0) }, l, t) \226\134\146 real_sums(x, l, s)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, SUBSET(s, t) && real_summable(t, (i : Num) => if IN(i, s) { x(i) } else { real_of_num(0) }) \226\134\146 real_summable(s, x)
+      #|  real_of_num(0)
+      #|  \226\136\128 f : (Num) -> Real, real_summable({}, f)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 k : (Num) -> Bool, real_summable(UNIV, (n : Num) => if IN(n, k) { f(n) } else { real_of_num(0) }) == real_summable(k, f)
+      #|  IN((x : Num), (t : (Num) -> Bool))
+      #|  IN((x : Num), (s : (Num) -> Bool))
+      #|  (x : Num)
+      #|  (x : Num)
+      #|  (f : (Num) -> Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 t : (Num) -> Bool, \226\136\128 s : (Num) -> Bool, \226\136\128 l : Real, SUBSET(t, s) && FINITE(t) && real_sums(f, l, s) \226\134\146 real_sums(f, l - sum(t, f), DIFF(s, t))
+      #|  IN((x : Num), (t : (Num) -> Bool))
+      #|  IN((x : Num), (s : (Num) -> Bool))
+      #|  (x : Num)
+      #|  (f : (Num) -> Real)
+      #|  (s : (Num) -> Bool)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, \226\136\128 l : Real, FINITE(t) && real_sums(f, l, s) \226\134\146 real_sums(f, l + sum(DIFF(t, s), f), UNION(s, t))
+      #|  from((n : Num)) == DIFF(from((m : Num)), op_dot_dot(m, n - 1))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, \226\136\128 m : Num, \226\136\128 n : Num, real_sums(f, l, from(m)) && m < n \226\134\146 real_sums(f, l - sum(op_dot_dot(m, n - 1), f), from(n))
+      #|  (l : Real)
+      #|  op_dot_dot((n : Num), (m : Num) - 1)
+      #|  from((m : Num))
+      #|  (f : (Num) -> Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, \226\136\128 m : Num, \226\136\128 n : Num, real_sums(f, l, from(m)) && n < m \226\134\146 real_sums(f, l + sum(op_dot_dot(n, m - 1), f), from(n))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 n : Num, real_summable(from(n), f) == real_summable(from(2 * n), (i : Num) => if EVEN(i) { f(DIV(i, 2)) } else { real_of_num(0) })
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 n : Num, real_summable(from(n), f) == real_summable(from(2 * n + 1), (i : Num) => if ODD(i) { f(DIV(i, 2)) } else { real_of_num(0) })
+      #|  real_infsum((s : (Num) -> Bool), (i : Num) => real_of_num(0)) == real_of_num(0)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, \226\136\128 s : (Num) -> Bool, real_summable(s, x) && real_summable(s, y) \226\134\146 real_infsum(s, (i : Num) => x(i) + y(i)) == real_infsum(s, x) + real_infsum(s, y)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, \226\136\128 s : (Num) -> Bool, real_summable(s, x) && real_summable(s, y) \226\134\146 real_infsum(s, (i : Num) => x(i) - y(i)) == real_infsum(s, x) - real_infsum(s, y)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 x : (Num) -> Real, \226\136\128 c : Real, real_summable(s, x) \226\134\146 real_infsum(s, (n : Num) => c * x(n)) == c * real_infsum(s, x)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 x : (Num) -> Real, \226\136\128 c : Real, real_summable(s, x) \226\134\146 real_infsum(s, (n : Num) => x(n) * c) == real_infsum(s, x) * c
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 x : (Num) -> Real, real_summable(s, x) \226\134\146 real_infsum(s, (n : Num) => -x(n)) == -real_infsum(s, x)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 k : (Num) -> Bool, real_summable(k, f) && real_summable(k, g) && (\226\136\128 x : Num, IN(x, k) \226\134\146 f(x) == g(x)) \226\134\146 real_infsum(k, f) == real_infsum(k, g)
+      #|  real_summable((k : (Num) -> Bool), (a : (Num) -> Real))
+      #|  (k : (Num) -> Bool)
+      #|  (a : (Num) -> Real)
+      #|  \226\136\128 k : (Num) -> Bool, \226\136\128 a : (Num) -> Real, real_infsum(UNIV, (n : Num) => if IN(n, k) { a(n) } else { real_of_num(0) }) == real_infsum(k, a)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 n : Num, real_infsum(from(n), f) == real_infsum(from(2 * n), (i : Num) => if EVEN(i) { f(DIV(i, 2)) } else { real_of_num(0) })
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 n : Num, real_infsum(from(n), f) == real_infsum(from(2 * n + 1), (i : Num) => if ODD(i) { f(DIV(i, 2)) } else { real_of_num(0) })
+      #|  o(drop, (l : (A) -> Cart[Real, Unit]))
+      #|  (l : (A) -> Cart[Real, Unit])
+      #|  o(lift, (l : (A) -> Real))
+      #|  (l : (A) -> Real)
+      #|  (k : (Num) -> Bool)
+      #|  (x : A) => (n : Num) => lift((f : (A, Num) -> Real)(x, n))
+      #|  (P : (A) -> Bool)
+      #|  \226\136\128 P : (A) -> Bool, \226\136\128 f : (A, Num) -> Real, \226\136\128 k : (Num) -> Bool, (\226\136\131 l : (A) -> Real, \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : A, N <= n && P(x) \226\134\146 abs(sum(INTER(k, op_dot_dot(0, n)), f(x)) - l(x)) < e)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 x : A, N <= m && P(x) \226\134\146 abs(sum(INTER(k, op_dot_dot(m, n)), f(x))) < e))
+      #|  (g : (Num) -> Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 s : (Num) -> Bool, (\226\136\131 l : Real, real_sums(g, l, s)) && (\226\136\131 N : Num, \226\136\128 n : Num, n >= N && IN(n, s) \226\134\146 abs(f(n)) <= g(n)) \226\134\146 (\226\136\131 l : Real, real_sums(f, l, s))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 s : (Num) -> Bool, real_summable(s, g) && (\226\136\131 N : Num, \226\136\128 n : Num, n >= N && IN(n, s) \226\134\146 abs(f(n)) <= g(n)) \226\134\146 real_summable(s, f)
+      #|  (N1 : Num) + (N2 : Num) <= (m : Num) \226\134\146 N2 <= m
+      #|  (N1 : Num) + (N2 : Num) <= (m : Num) && m <= (x : Num) \226\134\146 N1 <= x
+      #|  (x : Real) <= (a : Real) \226\134\146 x <= abs(a)
+      #|  abs(sum(INTER((s : (Num) -> Bool), op_dot_dot((m : Num), (n : Num))), (g : (Num) -> Real)))
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (N2 : Num)
+      #|  (e : Real)
+      #|  (N1 : Num)
+      #|  \226\136\128 f : (A, Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 P : (A) -> Bool, \226\136\128 s : (Num) -> Bool, (\226\136\131 l : Real, real_sums(g, l, s)) && (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : A, N <= n && IN(n, s) && P(x) \226\134\146 abs(f(x, n)) <= g(n)) \226\134\146 (\226\136\131 l : (A) -> Real, \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : A, N <= n && P(x) \226\134\146 abs(sum(INTER(s, op_dot_dot(0, n)), f(x)) - l(x)) < e))
+      #|  (abs((x : Real)) <= x) == (real_of_num(0) <= x)
       #|  0
-      #|  f:num->real
-      #|  t:num->bool
-      #|  forall s t f. (forall x. x IN t ==> &0 <= f x) /\\ real_summable t f /\\ s SUBSET t\n           ==> real_summable s f
-      #|  forall c a s N.\n      c < &1 /\\\n      (forall n. n >= N ==> abs(a(SUC n)) <= c * abs(a(n)))\n      ==> ?l:real. (a real_sums l) s
-      #|  IMAGE f {g x y | P x /\\ Q y} = {f(g x y) | P x /\\ Q y}
-      #|  IMAGE f {g x | P x} = {f(g x) | P x}
-      #|  forall f:num->real k.\n        real_bounded { sum(k..n) f | n IN (:num) }\n        ==> real_bounded { sum(m..n) f | m IN (:num) /\\ n IN (:num) }
-      #|  {lift(f x) | P x} = IMAGE lift {f x | P x}
-      #|  m:num
-      #|  N:num
-      #|  forall f:num->real g N k m.\n        real_bounded { sum (m..n) f | n IN (:num)} /\\\n        (forall n. N <= n ==> g(n + 1) <= g(n)) /\\\n        (g ---> &0) sequentially\n        ==> real_summable (from k) (\\n. g(n) * f(n))
-      #|  \\n:num. abs(x n)
-      #|  forall x:num->real k. real_summable k (\\n. abs(x n)) ==> real_summable k x
-      #|  \\n:num. norm(f n:real^N)
-      #|  forall s f:num->real^N. real_summable s (\\n. norm(f n)) ==> summable s f
-      #|  Cx x
-      #|  n:num
-      #|  forall n x. abs(x) < &1\n         ==> ((\\k. x pow k) real_sums (x pow n / (&1 - x))) (from n)
-      #|  k:num->bool
-      #|  Cx x
-      #|  forall x k. abs(x) < &1 ==> real_summable k (\\n. x pow n)
-      #|  Cx x
+      #|  (f : (Num) -> Real)
+      #|  (t : (Num) -> Bool)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, \226\136\128 f : (Num) -> Real, (\226\136\128 x : Num, IN(x, t) \226\134\146 real_of_num(0) <= f(x)) && real_summable(t, f) && SUBSET(s, t) \226\134\146 real_summable(s, f)
+      #|  \226\136\128 c : Real, \226\136\128 a : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 N : Num, c < real_of_num(1) && (\226\136\128 n : Num, n >= N \226\134\146 abs(a(SUC(n))) <= c * abs(a(n))) \226\134\146 (\226\136\131 l : Real, real_sums(a, l, s))
+      #|  IMAGE((f : (_) -> _), {(g : (_, _) -> _)((x : _), (y : _)) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(y)}) == {f(g((x : _), (y : _))) | P(x) && Q(y)}
+      #|  IMAGE((f : (_) -> _), {(g : (_) -> _)((x : _)) | (P : (_) -> Bool)(x)}) == {f(g((x : _))) | P(x)}
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 k : Num, real_bounded({sum(op_dot_dot(k, (n : Num)), f) | IN(n, UNIV)}) \226\134\146 real_bounded({sum(op_dot_dot((m : Num), (n : Num)), f) | IN(m, UNIV) && IN(n, UNIV)})
+      #|  {lift((f : (_) -> Real)((x : _))) | (P : (_) -> Bool)(x)} == IMAGE(lift, {f((x : _)) | P(x)})
+      #|  (m : Num)
+      #|  (N : Num)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 N : Num, \226\136\128 k : Num, \226\136\128 m : Num, real_bounded({sum(op_dot_dot(m, (n : Num)), f) | IN(n, UNIV)}) && (\226\136\128 n : Num, N <= n \226\134\146 g(n + 1) <= g(n)) && op_minus_minus_minus_gt(g, real_of_num(0), sequentially) \226\134\146 real_summable(from(k), (n : Num) => g(n) * f(n))
+      #|  (n : Num) => abs((x : (Num) -> Real)(n))
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 k : (Num) -> Bool, real_summable(k, (n : Num) => abs(x(n))) \226\134\146 real_summable(k, x)
+      #|  (n : Num) => norm((f : (Num) -> Cart[Real, N])(n))
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 f : (Num) -> Cart[Real, N], real_summable(s, (n : Num) => norm(f(n))) \226\134\146 summable(s, f)
+      #|  Cx((x : Real))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 real_sums((k : Num) => pow(x, k), pow(x, n) / (real_of_num(1) - x), from(n))
+      #|  (k : (Num) -> Bool)
+      #|  Cx((x : Real))
+      #|  \226\136\128 x : Real, \226\136\128 k : (Num) -> Bool, abs(x) < real_of_num(1) \226\134\146 real_summable(k, (n : Num) => pow(x, n))
+      #|  Cx((x : Real))
       #|  1
       #|  1
-      #|  forall n x. &1 < x ==> real_summable (from n) (\\k. inv(&k rpow x))
-      #|  forall n m. 2 <= m ==> real_summable (from n) (\\k. inv(&k pow m))
-      #|  forall a M r r0.\n        &0 <= r /\\ r < r0 /\\\n        (forall n. n IN k ==> abs(a n) * r0 pow n <= M)\n        ==> real_summable k (\\n. abs(a(n)) * r pow n)
-      #|  Cx z
-      #|  forall a k w z.\n        real_summable k (\\n. a(n) * z pow n) /\\ abs(w) < abs(z)\n        ==> real_summable k (\\n. abs(a(n) * w pow n))
-      #|  Cx z
-      #|  forall a k w z.\n        real_summable k (\\n. a(n) * z pow n) /\\ abs(w) < abs(z)\n        ==> real_summable k (\\n. abs(a n) * w pow n)
-      #|  a * b:real
-      #|  a:real
-      #|  b:real
-      #|  real_summable (from 0) y
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, real_of_num(1) < x \226\134\146 real_summable(from(n), (k : Num) => inv(rpow(real_of_num(k), x)))
+      #|  \226\136\128 n : Num, \226\136\128 m : Num, 2 <= m \226\134\146 real_summable(from(n), (k : Num) => inv(pow(real_of_num(k), m)))
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 M : Real, \226\136\128 r : Real, \226\136\128 r0 : Real, real_of_num(0) <= r && r < r0 && (\226\136\128 n : Num, IN(n, (k : (Num) -> Bool)) \226\134\146 abs(a(n)) * pow(r0, n) <= M) \226\134\146 real_summable(k, (n : Num) => abs(a(n)) * pow(r, n))
+      #|  Cx((z : Real))
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 k : (Num) -> Bool, \226\136\128 w : Real, \226\136\128 z : Real, real_summable(k, (n : Num) => a(n) * pow(z, n)) && abs(w) < abs(z) \226\134\146 real_summable(k, (n : Num) => abs(a(n) * pow(w, n)))
+      #|  Cx((z : Real))
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 k : (Num) -> Bool, \226\136\128 w : Real, \226\136\128 z : Real, real_summable(k, (n : Num) => a(n) * pow(z, n)) && abs(w) < abs(z) \226\134\146 real_summable(k, (n : Num) => abs(a(n)) * pow(w, n))
+      #|  (a : Real) * (b : Real)
+      #|  (a : Real)
+      #|  (b : Real)
+      #|  real_summable(from(0), (y : (Num) -> Real))
       #|  0
-      #|  forall x y m n p.\n        real_summable (from m) (\\n. abs(x n)) /\\\n        real_summable (from n) y\n        ==> real_summable (from p) (\\n. sum(0..n) (\\i. x i * y(n - i)))
-      #|  a * b:real
-      #|  b:real
-      #|  a:real
-      #|  real_summable (from 0) x
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, real_summable(from(m), (n : Num) => abs(x(n))) && real_summable(from(n), y) \226\134\146 real_summable(from(p), (n : Num) => sum(op_dot_dot(0, n), (i : Num) => x(i) * y(n - i)))
+      #|  (a : Real) * (b : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  real_summable(from(0), (x : (Num) -> Real))
       #|  0
-      #|  forall x y m n p.\n        real_summable (from m) x /\\\n        real_summable (from n) (\\n. abs(y n))\n        ==> real_summable (from p) (\\n. sum(0..n) (\\i. x i * y(n - i)))
-      #|  atreal a = atpointof euclideanreal a
-      #|  forall a. netfilter (atreal a) = { u | real_open u /\\ a IN u}
-      #|  forall a. netlimit(atreal a) = a
-      #|  forall a s. netlimit (atreal a within s) = a
-      #|  forall x. atreal x within (:real) = atreal x
-      #|  forall a p. eventually p (atreal a) <=>\n         ?d. &0 < d /\\ forall x. &0 < abs(x - a) /\\ abs(x - a) < d ==> p(x)
-      #|  a + d / &2
-      #|  d:real
-      #|  a:real
-      #|  forall a. ~(trivial_limit (atreal a))
-      #|  forall s a p.\n     eventually p (atreal a within s) <=>\n      ?d. &0 < d /\\ forall x. x IN s /\\ &0 < abs(x - a) /\\ abs(x - a) < d ==> p(x)
-      #|  a /\\ b /\\ c ==> d <=> c ==> a /\\ b ==> d
-      #|  forall s a p.\n     eventually p (atreal a within s) <=>\n        ?d. &0 < d /\\\n            forall x. x IN s /\\ &0 < abs(x - a) /\\ abs(x - a) <= d ==> p(x)
-      #|  forall f:real->real^N l a s.\n        (f --> l) (atreal a within s) <=>\n           forall e. &0 < e ==> ?d. &0 < d /\\\n                              forall x. x IN s /\\ &0 < abs(x - a) /\\ abs(x - a) <= d\n                                   ==> dist(f(x),l) < e
-      #|  forall f:real->real^N l a s.\n      (f --> l) (atreal a within s) <=>\n        forall e. &0 < e\n            ==> ?d. &0 < d /\\\n                    forall x. x IN s /\\ &0 < abs(x - a) /\\ abs(x - a) < d\n                    ==> dist(f(x),l) < e
-      #|  forall f l:real^N a.\n      (f --> l) (atreal a) <=>\n              forall e. &0 < e\n                  ==> ?d. &0 < d /\\ forall x. &0 < abs(x - a) /\\ abs(x - a) < d\n                          ==> dist(f(x),l) < e
-      #|  forall f l a s.\n        (f ---> l) (atreal a within s) <=>\n           forall e. &0 < e ==> ?d. &0 < d /\\\n                              forall x. x IN s /\\ &0 < abs(x - a) /\\ abs(x - a) <= d\n                                   ==> abs(f(x) - l) < e
-      #|  forall f l a s.\n      (f ---> l) (atreal a within s) <=>\n        forall e. &0 < e\n            ==> ?d. &0 < d /\\\n                    forall x. x IN s /\\ &0 < abs(x - a) /\\ abs(x - a) < d\n                    ==> abs(f(x) - l) < e
-      #|  forall f l a.\n      (f ---> l) (atreal a) <=>\n              forall e. &0 < e\n                  ==> ?d. &0 < d /\\ forall x. &0 < abs(x - a) /\\ abs(x - a) < d\n                          ==> abs(f(x) - l) < e
-      #|  forall f l. (f ---> l) at_posinfinity <=>\n               forall e. &0 < e ==> ?b. forall x. x >= b ==> abs(f(x) - l) < e
-      #|  forall f l. (f ---> l) at_neginfinity <=>\n               forall e. &0 < e ==> ?b. forall x. x <= b ==> abs(f(x) - l) < e
-      #|  forall f l a s. (f --> l) (atreal a) ==> (f --> l) (atreal a within s)
-      #|  forall f l a s. (f ---> l) (at a) ==> (f ---> l) (at a within s)
-      #|  forall f l a s. (f ---> l) (atreal a) ==> (f ---> l) (atreal a within s)
-      #|  forall f l a s t. (f ---> l) (at a within s) /\\ t SUBSET s\n               ==> (f ---> l) (at a within t)
-      #|  forall f l a s t. (f ---> l) (atreal a within s) /\\ t SUBSET s\n               ==> (f ---> l) (atreal a within t)
-      #|  forall f l a s t. (f --> l) (atreal a within s) /\\ t SUBSET s\n               ==> (f --> l) (atreal a within t)
-      #|  ((\\x. x) ---> a) (atreal a)
-      #|  forall a. ((\\x. x) ---> a) (atreal a within s)
-      #|  min d k:real
-      #|  k:real
-      #|  e:real
-      #|  e:real
-      #|  d:real
-      #|  forall f a s t.\n        eventually (\\x. x IN s <=> x IN t) (atreal a)\n        ==> ((f --> l) (atreal a within s) <=> (f --> l) (atreal a within t))
-      #|  min d k:real
-      #|  k:real
-      #|  e:real
-      #|  e:real
-      #|  d:real
-      #|  forall f a s t.\n        eventually (\\x. x IN s <=> x IN t) (at a)\n        ==> ((f ---> l) (at a within s) <=> (f ---> l) (at a within t))
-      #|  min d k:real
-      #|  k:real
-      #|  e:real
-      #|  e:real
-      #|  d:real
-      #|  forall f a s t.\n        eventually (\\x. x IN s <=> x IN t) (atreal a)\n        ==> ((f ---> l) (atreal a within s) <=>\n             (f ---> l) (atreal a within t))
-      #|  forall f l a s t.\n        eventually (\\x. x IN t ==> x IN s) (at a) /\\ (f ---> l) (at a within s)\n        ==> (f ---> l) (at a within t)
-      #|  min d k:real
-      #|  k:real
-      #|  e:real
-      #|  e:real
-      #|  d:real
-      #|  forall f l a s t.\n        eventually (\\x. x IN t ==> x IN s) (atreal a) /\\\n        (f --> l) (atreal a within s)\n        ==> (f --> l) (atreal a within t)
-      #|  forall f l a s t.\n        eventually (\\x. x IN t ==> x IN s) (atreal a) /\\\n        (f ---> l) (atreal a within s)\n        ==> (f ---> l) (atreal a within t)
-      #|  &0 < abs(x - y) <=> ~(x = y)
-      #|  abs(x - y) = &0 <=> x = y
-      #|  (f:A->real) x = y
-      #|  x:A
-      #|  d:real
-      #|  d:real
-      #|  &0 < e
-      #|  e:real
-      #|  forall net:A net f g s y z.\n    (f ---> y) net /\\\n    eventually (\\w. f w IN s /\\ (f w = y ==> g y = z)) net /\\\n    (g ---> z) (atreal y within s)\n    ==> ((g o f) ---> z) net
-      #|  z:real
-      #|  y:real
-      #|  (:real)
-      #|  g:real->real
-      #|  f:A->real
-      #|  net:A net
-      #|  forall net:A net f g y z.\n    (f ---> y) net /\\\n    eventually (\\w. f w = y ==> g y = z) net /\\\n    (g ---> z) (atreal y)\n    ==> ((g o f) ---> z) net
-      #|  abs b <= abs a /\\ a <= &0 ==> u <= v /\\ s <= b ==> a + s <= &0
-      #|  abs b <= abs a /\\ &0 <= a ==> b <= s /\\ u <= v ==> &0 <= a + s
-      #|  x + y <= x <=> y <= &0
-      #|  m + 1
-      #|  SUC(m + n) = (m + 1) + n
-      #|  m:num
-      #|  m <= SUC(m + n)
-      #|  (forall m n:num. n < m ==> P m n) /\\ (forall n m. P m (m + n)) ==> forall m n. P m n
-      #|  forall a. (forall n. abs(a(SUC n)) <= abs(a n)) /\\\n       (forall n. EVEN n ==> &0 <= a n) /\\ (forall n. ODD n ==> a n <= &0)\n       ==> forall m n. (EVEN m ==> &0 <= sum(m..n) a /\\ sum(m..n) a <= a(m)) /\\\n                 (ODD m ==> a(m) <= sum(m..n) a /\\ sum(m..n) a <= &0)
-      #|  EVEN m
-      #|  forall a. (forall n. abs(a(SUC n)) <= abs(a n)) /\\\n       (forall n. EVEN n ==> &0 <= a n) /\\ (forall n. ODD n ==> a n <= &0)\n       ==> forall m n. abs(sum(m..n) a) <= abs(a m)
-      #|  abs(a(MAX m n))
-      #|  p:num
-      #|  n:num
-      #|  N:num
-      #|  e:real
-      #|  e:real
-      #|  forall a m. (forall n. abs(a(SUC n)) <= abs(a n)) /\\\n         (forall n. EVEN n ==> &0 <= a n) /\\ (forall n. ODD n ==> a n <= &0) /\\\n         (a ---> &0) sequentially\n         ==> real_summable (from m) a
-      #|  ~(p /\\ q /\\ r) <=> p ==> ~(q /\\ r)
-      #|  trivial_limit(atreal x within s) <=>\n        trivial_limit(at (lift x) within (IMAGE lift s))
-      #|  (forall x. ~(x IN s INTER IMAGE f t /\\ P x /\\ Q x)) <=>\n    (forall x. x IN t ==> ~(f x IN s /\\ P(f x) /\\ Q(f x)))
-      #|  trivial_limit(atreal x within s) <=>\n        trivial_limit(at (Cx x) within (real INTER IMAGE Cx s))
-      #|  Cx x IN IMAGE Cx s <=> x IN s
-      #|  x IN real INTER s <=> real x /\\ x IN s
-      #|  (f --> a) (atreal x within s) <=>\n   ((f o Re) --> a) (at(Cx x) within (real INTER IMAGE Cx s))
-      #|  (f --> a) (atreal x) <=> ((f o Re) --> a) (at (Cx x) within real)
-      #|  (f --> a) (atreal x within s) <=>\n        ((f o drop) --> a) (at (lift x) within (IMAGE lift s))
-      #|  (f --> a) (atreal x) <=> ((f o drop) --> a) (at (lift x))
-      #|  (f ---> a) (atreal x within s) <=>\n        ((f o drop) ---> a) (at (lift x) within (IMAGE lift s))
-      #|  (f ---> a) (atreal x) <=> ((f o drop) ---> a) (at (lift x))
-      #|  forall f:real^N->real l a s.\n        a IN s /\\ open s\n        ==> ((f ---> l) (at a within s) <=> (f ---> l) (at a))
-      #|  forall f:real->real^N l a s.\n        a IN s /\\ real_open s\n        ==> ((f --> l) (atreal a within s) <=> (f --> l) (atreal a))
-      #|  forall f l a s.\n        a IN s /\\ real_open s\n        ==> ((f ---> l) (atreal a within s) <=> (f ---> l) (atreal a))
-      #|  forall f l a. (f --> l) (atreal a) <=> ((\\x. f (a + x)) --> l) (atreal (&0))
-      #|  forall f l a. (f ---> l) (at a) <=> ((\\x. f (a + x)) ---> l) (at (vec 0))
-      #|  forall f l a. (f ---> l) (atreal a) <=> ((\\x. f (a + x)) ---> l) (atreal (&0))
-      #|  (forall x. ~(x = a) ==> f x = g x)\n   ==> (((\\x. f x) --> l) (atreal a within s) <=>\n        ((g --> l) (atreal a within s)))
-      #|  (forall x. ~(x = a) ==> f x = g x)\n   ==> (((\\x. f x) --> l) (atreal a) <=> ((g --> l) (atreal a)))
-      #|  (forall x. ~(x = a) ==> f x = g x)\n   ==> (((\\x. f x) ---> l) (at a within s) <=> ((g ---> l) (at a within s)))
-      #|  (forall x. ~(x = a) ==> f x = g x)\n   ==> (((\\x. f x) ---> l) (at a) <=> ((g ---> l) (at a)))
-      #|  (forall x. ~(x = a) ==> f x = g x)\n   ==> (((\\x. f x) ---> l) (atreal a within s) <=>\n        ((g ---> l) (atreal a within s)))
-      #|  (forall x. ~(x = a) ==> f x = g x)\n   ==> (((\\x. f x) ---> l) (atreal a) <=> ((g ---> l) (atreal a)))
-      #|  \\n. vsum(s INTER (0..n)) (Cx o a)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, real_summable(from(m), x) && real_summable(from(n), (n : Num) => abs(y(n))) \226\134\146 real_summable(from(p), (n : Num) => sum(op_dot_dot(0, n), (i : Num) => x(i) * y(n - i)))
+      #|  (atreal : (Real) -> Net[Real])((a : Real)) == atpointof(euclideanreal, a)
+      #|  \226\136\128 a : Real, netfilter(atreal(a)) == {(u : (Real) -> Bool) | real_open(u) && IN(a, u)}
+      #|  \226\136\128 a : Real, netlimit(atreal(a)) == a
+      #|  \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, netlimit(within(atreal(a), s)) == a
+      #|  \226\136\128 x : Real, within(atreal(x), UNIV) == atreal(x)
+      #|  \226\136\128 a : Real, \226\136\128 p : (Real) -> Bool, eventually(p, atreal(a)) == (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, real_of_num(0) < abs(x - a) && abs(x - a) < d \226\134\146 p(x)))
+      #|  (a : Real) + (d : Real) / real_of_num(2)
+      #|  (d : Real)
+      #|  (a : Real)
+      #|  \226\136\128 a : Real, !trivial_limit(atreal(a))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, \226\136\128 p : (Real) -> Bool, eventually(p, within(atreal(a), s)) == (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, IN(x, s) && real_of_num(0) < abs(x - a) && abs(x - a) < d \226\134\146 p(x)))
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (c \226\134\146 a && b \226\134\146 d)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, \226\136\128 p : (Real) -> Bool, eventually(p, within(atreal(a), s)) == (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, IN(x, s) && real_of_num(0) < abs(x - a) && abs(x - a) <= d \226\134\146 p(x)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, N], \226\136\128 l : Cart[Real, N], \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, op_minus_minus_gt(f, l, within(atreal(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, IN(x, s) && real_of_num(0) < abs(x - a) && abs(x - a) <= d \226\134\146 dist((f(x), l)) < e)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, N], \226\136\128 l : Cart[Real, N], \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, op_minus_minus_gt(f, l, within(atreal(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, IN(x, s) && real_of_num(0) < abs(x - a) && abs(x - a) < d \226\134\146 dist((f(x), l)) < e)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, N], \226\136\128 l : Cart[Real, N], \226\136\128 a : Real, op_minus_minus_gt(f, l, atreal(a)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, real_of_num(0) < abs(x - a) && abs(x - a) < d \226\134\146 dist((f(x), l)) < e)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, op_minus_minus_minus_gt(f, l, within(atreal(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, IN(x, s) && real_of_num(0) < abs(x - a) && abs(x - a) <= d \226\134\146 abs(f(x) - l) < e)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, op_minus_minus_minus_gt(f, l, within(atreal(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, IN(x, s) && real_of_num(0) < abs(x - a) && abs(x - a) < d \226\134\146 abs(f(x) - l) < e)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, \226\136\128 a : Real, op_minus_minus_minus_gt(f, l, atreal(a)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, real_of_num(0) < abs(x - a) && abs(x - a) < d \226\134\146 abs(f(x) - l) < e)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(f, l, at_posinfinity) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 b : Real, \226\136\128 x : Real, x >= b \226\134\146 abs(f(x) - l) < e))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(f, l, at_neginfinity) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 b : Real, \226\136\128 x : Real, x <= b \226\134\146 abs(f(x) - l) < e))
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 l : Cart[Real, _], \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, op_minus_minus_gt(f, l, atreal(a)) \226\134\146 op_minus_minus_gt(f, l, within(atreal(a), s))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, op_minus_minus_minus_gt(f, l, at(a)) \226\134\146 op_minus_minus_minus_gt(f, l, within(at(a), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, op_minus_minus_minus_gt(f, l, atreal(a)) \226\134\146 op_minus_minus_minus_gt(f, l, within(atreal(a), s))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, op_minus_minus_minus_gt(f, l, within(at(a), s)) && SUBSET(t, s) \226\134\146 op_minus_minus_minus_gt(f, l, within(at(a), t))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, op_minus_minus_minus_gt(f, l, within(atreal(a), s)) && SUBSET(t, s) \226\134\146 op_minus_minus_minus_gt(f, l, within(atreal(a), t))
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 l : Cart[Real, _], \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, op_minus_minus_gt(f, l, within(atreal(a), s)) && SUBSET(t, s) \226\134\146 op_minus_minus_gt(f, l, within(atreal(a), t))
+      #|  op_minus_minus_minus_gt((x : Real) => x, (a : Real), atreal(a))
+      #|  \226\136\128 a : Real, op_minus_minus_minus_gt((x : Real) => x, a, within(atreal(a), (s : (Real) -> Bool)))
+      #|  min((d : Real), (k : Real))
+      #|  (k : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (d : Real)
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, eventually((x : Real) => IN(x, s) == IN(x, t), atreal(a)) \226\134\146 op_minus_minus_gt(f, (l : Cart[Real, _]), within(atreal(a), s)) == op_minus_minus_gt(f, l, within(atreal(a), t))
+      #|  min((d : Real), (k : Real))
+      #|  (k : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (d : Real)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, eventually((x : Cart[Real, _]) => IN(x, s) == IN(x, t), at(a)) \226\134\146 op_minus_minus_minus_gt(f, (l : Real), within(at(a), s)) == op_minus_minus_minus_gt(f, l, within(at(a), t))
+      #|  min((d : Real), (k : Real))
+      #|  (k : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (d : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, eventually((x : Real) => IN(x, s) == IN(x, t), atreal(a)) \226\134\146 op_minus_minus_minus_gt(f, (l : Real), within(atreal(a), s)) == op_minus_minus_minus_gt(f, l, within(atreal(a), t))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, eventually((x : Cart[Real, _]) => IN(x, t) \226\134\146 IN(x, s), at(a)) && op_minus_minus_minus_gt(f, l, within(at(a), s)) \226\134\146 op_minus_minus_minus_gt(f, l, within(at(a), t))
+      #|  min((d : Real), (k : Real))
+      #|  (k : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (d : Real)
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 l : Cart[Real, _], \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, eventually((x : Real) => IN(x, t) \226\134\146 IN(x, s), atreal(a)) && op_minus_minus_gt(f, l, within(atreal(a), s)) \226\134\146 op_minus_minus_gt(f, l, within(atreal(a), t))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, eventually((x : Real) => IN(x, t) \226\134\146 IN(x, s), atreal(a)) && op_minus_minus_minus_gt(f, l, within(atreal(a), s)) \226\134\146 op_minus_minus_minus_gt(f, l, within(atreal(a), t))
+      #|  (real_of_num(0) < abs((x : Real) - (y : Real))) == !(x == y)
+      #|  (abs((x : Real) - (y : Real)) == real_of_num(0)) == (x == y)
+      #|  (f : (A) -> Real)((x : A)) == (y : Real)
+      #|  (x : A)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 y : Real, \226\136\128 z : Real, op_minus_minus_minus_gt(f, y, net) && eventually((w : A) => IN(f(w), s) && (f(w) == y \226\134\146 g(y) == z), net) && op_minus_minus_minus_gt(g, z, within(atreal(y), s)) \226\134\146 op_minus_minus_minus_gt(o(g, f), z, net)
+      #|  (z : Real)
+      #|  (y : Real)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (g : (Real) -> Real)
+      #|  (f : (A) -> Real)
+      #|  (net : Net[A])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 y : Real, \226\136\128 z : Real, op_minus_minus_minus_gt(f, y, net) && eventually((w : A) => f(w) == y \226\134\146 g(y) == z, net) && op_minus_minus_minus_gt(g, z, atreal(y)) \226\134\146 op_minus_minus_minus_gt(o(g, f), z, net)
+      #|  abs((b : Real)) <= abs((a : Real)) && a <= real_of_num(0) \226\134\146 (u : Real) <= (v : Real) && (s : Real) <= b \226\134\146 a + s <= real_of_num(0)
+      #|  abs((b : Real)) <= abs((a : Real)) && real_of_num(0) <= a \226\134\146 b <= (s : Real) && (u : Real) <= (v : Real) \226\134\146 real_of_num(0) <= a + s
+      #|  ((x : Real) + (y : Real) <= x) == (y <= real_of_num(0))
+      #|  (m : Num) + 1
+      #|  SUC((m : Num) + (n : Num)) == m + 1 + n
+      #|  (m : Num)
+      #|  (m : Num) <= SUC(m + (n : Num))
+      #|  (\226\136\128 m : Num, \226\136\128 n : Num, n < m \226\134\146 (P : (Num, Num) -> Bool)(m, n)) && (\226\136\128 n : Num, \226\136\128 m : Num, P(m, m + n)) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, P(m, n))
+      #|  \226\136\128 a : (Num) -> Real, (\226\136\128 n : Num, abs(a(SUC(n))) <= abs(a(n))) && (\226\136\128 n : Num, EVEN(n) \226\134\146 real_of_num(0) <= a(n)) && (\226\136\128 n : Num, ODD(n) \226\134\146 a(n) <= real_of_num(0)) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, (EVEN(m) \226\134\146 real_of_num(0) <= sum(op_dot_dot(m, n), a) && sum(op_dot_dot(m, n), a) <= a(m)) && (ODD(m) \226\134\146 a(m) <= sum(op_dot_dot(m, n), a) && sum(op_dot_dot(m, n), a) <= real_of_num(0)))
+      #|  EVEN((m : Num))
+      #|  \226\136\128 a : (Num) -> Real, (\226\136\128 n : Num, abs(a(SUC(n))) <= abs(a(n))) && (\226\136\128 n : Num, EVEN(n) \226\134\146 real_of_num(0) <= a(n)) && (\226\136\128 n : Num, ODD(n) \226\134\146 a(n) <= real_of_num(0)) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, abs(sum(op_dot_dot(m, n), a)) <= abs(a(m)))
+      #|  abs((a : (Num) -> Real)(MAX((m : Num), (n : Num))))
+      #|  (p : Num)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 m : Num, (\226\136\128 n : Num, abs(a(SUC(n))) <= abs(a(n))) && (\226\136\128 n : Num, EVEN(n) \226\134\146 real_of_num(0) <= a(n)) && (\226\136\128 n : Num, ODD(n) \226\134\146 a(n) <= real_of_num(0)) && op_minus_minus_minus_gt(a, real_of_num(0), sequentially) \226\134\146 real_summable(from(m), a)
+      #|  !((p : Bool) && (q : Bool) && (r : Bool)) == (p \226\134\146 !(q && r))
+      #|  trivial_limit(within(atreal((x : Real)), (s : (Real) -> Bool))) == trivial_limit(within(at(lift(x)), IMAGE(lift, s)))
+      #|  (\226\136\128 x : _, !(IN(x, INTER((s : (_) -> Bool), IMAGE((f : (_) -> _), (t : (_) -> Bool)))) && (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x))) == (\226\136\128 x : _, IN(x, t) \226\134\146 !(IN(f(x), s) && P(f(x)) && Q(f(x))))
+      #|  trivial_limit(within(atreal((x : Real)), (s : (Real) -> Bool))) == trivial_limit(within(at(Cx(x)), INTER(real, IMAGE(Cx, s))))
+      #|  IN(Cx((x : Real)), IMAGE(Cx, (s : (Real) -> Bool))) == IN(x, s)
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), INTER(real, (s : (Cart[Real, Tybit0[Unit]]) -> Bool))) == (real(x) && IN(x, s))
+      #|  op_minus_minus_gt((f : (Real) -> Cart[Real, _]), (a : Cart[Real, _]), within(atreal((x : Real)), (s : (Real) -> Bool))) == op_minus_minus_gt(o(f, Re), a, within(at(Cx(x)), INTER(real, IMAGE(Cx, s))))
+      #|  op_minus_minus_gt((f : (Real) -> Cart[Real, _]), (a : Cart[Real, _]), atreal((x : Real))) == op_minus_minus_gt(o(f, Re), a, within(at(Cx(x)), real))
+      #|  op_minus_minus_gt((f : (Real) -> Cart[Real, _]), (a : Cart[Real, _]), within(atreal((x : Real)), (s : (Real) -> Bool))) == op_minus_minus_gt(o(f, drop), a, within(at(lift(x)), IMAGE(lift, s)))
+      #|  op_minus_minus_gt((f : (Real) -> Cart[Real, _]), (a : Cart[Real, _]), atreal((x : Real))) == op_minus_minus_gt(o(f, drop), a, at(lift(x)))
+      #|  op_minus_minus_minus_gt((f : (Real) -> Real), (a : Real), within(atreal((x : Real)), (s : (Real) -> Bool))) == op_minus_minus_minus_gt(o(f, drop), a, within(at(lift(x)), IMAGE(lift, s)))
+      #|  op_minus_minus_minus_gt((f : (Real) -> Real), (a : Real), atreal((x : Real))) == op_minus_minus_minus_gt(o(f, drop), a, at(lift(x)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, IN(a, s) && open(s) \226\134\146 op_minus_minus_minus_gt(f, l, within(at(a), s)) == op_minus_minus_minus_gt(f, l, at(a))
+      #|  \226\136\128 f : (Real) -> Cart[Real, N], \226\136\128 l : Cart[Real, N], \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, IN(a, s) && real_open(s) \226\134\146 op_minus_minus_gt(f, l, within(atreal(a), s)) == op_minus_minus_gt(f, l, atreal(a))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, IN(a, s) && real_open(s) \226\134\146 op_minus_minus_minus_gt(f, l, within(atreal(a), s)) == op_minus_minus_minus_gt(f, l, atreal(a))
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 l : Cart[Real, _], \226\136\128 a : Real, op_minus_minus_gt(f, l, atreal(a)) == op_minus_minus_gt((x : Real) => f(a + x), l, atreal(real_of_num(0)))
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, Tybit0[Unit]], op_minus_minus_minus_gt(f, l, at(a)) == op_minus_minus_minus_gt((x : Cart[Real, Tybit0[Unit]]) => f(a + x), l, at(vec(0)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, \226\136\128 a : Real, op_minus_minus_minus_gt(f, l, atreal(a)) == op_minus_minus_minus_gt((x : Real) => f(a + x), l, atreal(real_of_num(0)))
+      #|  (\226\136\128 x : Real, !(x == (a : Real)) \226\134\146 (f : (Real) -> Cart[Real, _])(x) == (g : (Real) -> Cart[Real, _])(x)) \226\134\146 op_minus_minus_gt((x : Real) => f(x), (l : Cart[Real, _]), within(atreal(a), (s : (Real) -> Bool))) == op_minus_minus_gt(g, l, within(atreal(a), s))
+      #|  (\226\136\128 x : Real, !(x == (a : Real)) \226\134\146 (f : (Real) -> Cart[Real, _])(x) == (g : (Real) -> Cart[Real, _])(x)) \226\134\146 op_minus_minus_gt((x : Real) => f(x), (l : Cart[Real, _]), atreal(a)) == op_minus_minus_gt(g, l, atreal(a))
+      #|  (\226\136\128 x : Cart[Real, _], !(x == (a : Cart[Real, _])) \226\134\146 (f : (Cart[Real, _]) -> Real)(x) == (g : (Cart[Real, _]) -> Real)(x)) \226\134\146 op_minus_minus_minus_gt((x : Cart[Real, _]) => f(x), (l : Real), within(at(a), (s : (Cart[Real, _]) -> Bool))) == op_minus_minus_minus_gt(g, l, within(at(a), s))
+      #|  (\226\136\128 x : Cart[Real, _], !(x == (a : Cart[Real, _])) \226\134\146 (f : (Cart[Real, _]) -> Real)(x) == (g : (Cart[Real, _]) -> Real)(x)) \226\134\146 op_minus_minus_minus_gt((x : Cart[Real, _]) => f(x), (l : Real), at(a)) == op_minus_minus_minus_gt(g, l, at(a))
+      #|  (\226\136\128 x : Real, !(x == (a : Real)) \226\134\146 (f : (Real) -> Real)(x) == (g : (Real) -> Real)(x)) \226\134\146 op_minus_minus_minus_gt((x : Real) => f(x), (l : Real), within(atreal(a), (s : (Real) -> Bool))) == op_minus_minus_minus_gt(g, l, within(atreal(a), s))
+      #|  (\226\136\128 x : Real, !(x == (a : Real)) \226\134\146 (f : (Real) -> Real)(x) == (g : (Real) -> Real)(x)) \226\134\146 op_minus_minus_minus_gt((x : Real) => f(x), (l : Real), atreal(a)) == op_minus_minus_minus_gt(g, l, atreal(a))
+      #|  (n : Num) => vsum(INTER((s : (Num) -> Bool), op_dot_dot(0, n)), o(Cx, (a : (Num) -> Real)))
       #|  sequentially
-      #|  b = a ==> norm(x - a) < e ==> norm(x - b) < e
+      #|  (b : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]]) \226\134\146 norm((x : Cart[Real, Tybit0[Unit]]) - a) < (e : Real) \226\134\146 norm(x - b) < e
       #|  :real
       #|  :real
-      #|  Cx r
-      #|  abs(r) < &1
-      #|  r <= &1 ==> (&0 < abs(r - &1) <=> r < &1)
-      #|  r:real
-      #|  min d (&1)
-      #|  d:real
-      #|  &0 < e
-      #|  e:real
-      #|  \\n. vsum(s INTER (0..n)) (\\i. Cx(a i) * Cx r pow i)
+      #|  Cx((r : Real))
+      #|  abs((r : Real)) < real_of_num(1)
+      #|  (r : Real) <= real_of_num(1) \226\134\146 (real_of_num(0) < abs(r - real_of_num(1))) == (r < real_of_num(1))
+      #|  (r : Real)
+      #|  min((d : Real), real_of_num(1))
+      #|  (d : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  (n : Num) => vsum(INTER((s : (Num) -> Bool), op_dot_dot(0, n)), (i : Num) => Cx((a : (Num) -> Real)(i)) * pow(Cx((r : Real)), i))
       #|  sequentially
-      #|  abs(r) < &1
-      #|  r <= &1 ==> (&0 < abs(r - &1) <=> r < &1)
-      #|  r:real
-      #|  &1
-      #|  \\z. infsum s (\\i. (Cx o a) i * z pow i)
-      #|  Cx r
-      #|  r:real
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  Cx o (a:num->real)
-      #|  s:num->bool
-      #|  &1
-      #|  forall s a. real_summable s a\n         ==> (forall r. abs(r) < &1 ==> real_summable s (\\i. a i * r pow i)) /\\\n             ((\\r. real_infsum s  (\\i. a i * r pow i)) ---> real_infsum s a)\n             (atreal (&1) within {z | z <= &1})
-      #|  f real_continuous net <=> (f ---> f(netlimit net)) net
-      #|  forall f net. trivial_limit net ==> f real_continuous net
-      #|  trivial_limit(at(x:real^N) within s)
-      #|  forall f x:real^N s.\n        f real_continuous (at x within s) <=>\n                (f ---> f(x)) (at x within s)
-      #|  forall f x. f real_continuous (at x) <=> (f ---> f(x)) (at x)
-      #|  trivial_limit(atreal x within s)
-      #|  forall f x s. f real_continuous (atreal x within s) <=>\n                (f ---> f(x)) (atreal x within s)
-      #|  forall f x. f real_continuous (atreal x) <=> (f ---> f(x)) (atreal x)
-      #|  trivial_limit(atreal x within s)
-      #|  forall f x s. f continuous (atreal x within s) <=>\n                 (f --> f(x)) (atreal x within s)
-      #|  forall f x. f continuous (atreal x) <=> (f --> f(x)) (atreal x)
-      #|  abs(x - x) = &0
-      #|  &0 < e
-      #|  e:real
-      #|  f real_continuous (at x within s) <=>\n        forall e. &0 < e\n            ==> ?d. &0 < d /\\\n                    (forall x'. x' IN s /\\ dist(x',x) < d ==> abs(f x' - f x) < e)
-      #|  f real_continuous (at x) <=>\n        forall e. &0 < e\n            ==> ?d. &0 < d /\\\n                    (forall x'. dist(x',x) < d ==> abs(f x' - f x) < e)
-      #|  abs(x - x) = &0
-      #|  &0 < e
-      #|  e:real
-      #|  &0 < abs(x - y) <=> ~(x = y)
-      #|  f real_continuous (atreal x within s) <=>\n        forall e. &0 < e\n            ==> ?d. &0 < d /\\\n                    (forall x'. x' IN s /\\ abs(x' - x) < d ==> abs(f x' - f x) < e)
-      #|  f real_continuous (atreal x) <=>\n        forall e. &0 < e\n            ==> ?d. &0 < d /\\\n                    (forall x'. abs(x' - x) < d ==> abs(f x' - f x) < e)
-      #|  forall f s x. f real_continuous (at x)\n           ==> f real_continuous (at x within s)
-      #|  forall f s x. f real_continuous (atreal x)\n           ==> f real_continuous (atreal x within s)
-      #|  forall f s t. f real_continuous (atreal x within s) /\\ t SUBSET s\n             ==> f real_continuous (atreal x within t)
-      #|  forall f s t. f real_continuous (at x within s) /\\ t SUBSET s\n             ==> f real_continuous (at x within t)
-      #|  forall f s t. f continuous (atreal x within s) /\\ t SUBSET s\n             ==> f continuous (atreal x within t)
-      #|  &0 < d
-      #|  d:real
-      #|  &0 < e
-      #|  e:real
-      #|  &0 < abs(x - y) <=> ~(x = y)
-      #|  f continuous (atreal x within s) <=>\n        forall e. &0 < e\n            ==> ?d. &0 < d /\\\n                    (forall x'. x' IN s /\\ abs(x' - x) < d ==> dist(f x',f x) < e)
-      #|  f continuous (atreal x) <=>\n        forall e. &0 < e\n            ==> ?d. &0 < d /\\\n                    (forall x'. abs(x' - x) < d ==> dist(f x',f x) < e)
-      #|  forall f x s. f continuous (atreal x) ==> f continuous (atreal x within s)
-      #|  forall x. Cx continuous (atreal x)
-      #|  forall s x. Cx continuous (atreal x within s)
-      #|  min d e:real
-      #|  e:real
-      #|  k:real
-      #|  k:real
-      #|  forall f g s:real^N->bool x d.\n           &0 < d /\\\n           x IN s /\\\n           (forall x'. x' IN s /\\ dist(x',x) < d ==> f x' = g x') /\\\n           f real_continuous at x within s\n           ==> g real_continuous at x within s
-      #|  abs(x - x) = &0
-      #|  min d e:real
-      #|  e:real
-      #|  k:real
-      #|  k:real
-      #|  forall f g s x d.\n           &0 < d /\\\n           x IN s /\\\n           (forall x'. x' IN s /\\ abs(x' - x) < d ==> f x' = g x') /\\\n           f real_continuous atreal x within s\n           ==> g real_continuous atreal x within s
-      #|  (:real^N)
-      #|  forall f g x:real^N d.\n           &0 < d /\\\n           (forall x'. dist(x',x) < d ==> f x' = g x') /\\\n           f real_continuous at x\n           ==> g real_continuous at x
-      #|  (:real)
-      #|  forall f g x d.\n        &0 < d /\\\n        (forall x'. abs(x' - x) < d ==> f x' = g x') /\\\n        f real_continuous (atreal x)\n        ==> g real_continuous (atreal x)
-      #|  forall net c. (\\x. c) real_continuous net
-      #|  forall f c net. f real_continuous net ==> (\\x. c * f(x)) real_continuous net
-      #|  forall f c net. f real_continuous net ==> (\\x. f(x) * c) real_continuous net
-      #|  forall f net. f real_continuous net ==> (\\x. --(f x)) real_continuous net
-      #|  forall f g net. f real_continuous net /\\ g real_continuous net\n           ==> (\\x. f(x) + g(x)) real_continuous net
-      #|  forall f g net. f real_continuous net /\\ g real_continuous net\n           ==> (\\x. f(x) - g(x)) real_continuous net
-      #|  forall net f g.\n     f real_continuous net /\\ g real_continuous net\n     ==> (\\x. f(x) * g(x)) real_continuous net
-      #|  forall net f.\n    f real_continuous net /\\ ~(f(netlimit net) = &0)\n    ==> (\\x. inv(f x)) real_continuous net
-      #|  forall net f g.\n    f real_continuous net /\\ g real_continuous net /\\ ~(g(netlimit net) = &0)\n    ==> (\\x. f(x) / g(x)) real_continuous net
-      #|  forall net f n. f real_continuous net ==> (\\x. f(x) pow n) real_continuous net
-      #|  forall net f. f real_continuous net ==> (\\x. abs(f(x))) real_continuous net
-      #|  forall f g net. f real_continuous net /\\ g real_continuous net\n           ==> (\\x. max (f x) (g x)) real_continuous net
-      #|  forall f g net. f real_continuous net /\\ g real_continuous net\n           ==> (\\x. min (f x) (g x)) real_continuous net
-      #|  forall x s. (\\x. x) real_continuous (atreal x within s)
-      #|  forall x. (\\x. x) real_continuous (atreal x)
-      #|  forall f s a. f real_continuous (at a within s) /\\ ~(f a = &0)\n           ==> (\\x. inv(f x)) real_continuous (at a within s)
-      #|  forall f a. f real_continuous (at a) /\\ ~(f a = &0)\n         ==> (\\x. inv(f x)) real_continuous (at a)
-      #|  forall f s a. f real_continuous (atreal a within s) /\\ ~(f a = &0)\n           ==> (\\x. inv(f x)) real_continuous (atreal a within s)
-      #|  forall f a. f real_continuous (atreal a) /\\ ~(f a = &0)\n         ==> (\\x. inv(f x)) real_continuous (atreal a)
-      #|  forall f s a. f real_continuous (at a within s) /\\\n           g real_continuous (at a within s) /\\ ~(g a = &0)\n           ==> (\\x. f x / g x) real_continuous (at a within s)
-      #|  forall f a. f real_continuous (at a) /\\\n         g real_continuous (at a) /\\ ~(g a = &0)\n         ==> (\\x. f x / g x) real_continuous (at a)
-      #|  forall f s a. f real_continuous (atreal a within s) /\\\n           g real_continuous (atreal a within s) /\\ ~(g a = &0)\n           ==> (\\x. f x / g x) real_continuous (atreal a within s)
-      #|  forall f a. f real_continuous (atreal a) /\\\n         g real_continuous (atreal a) /\\ ~(g a = &0)\n         ==> (\\x. f x / g x) real_continuous (atreal a)
-      #|  e:real
-      #|  forall f g x s. f real_continuous (atreal x within s) /\\\n             g real_continuous (atreal (f x) within IMAGE f s)\n             ==> (g o f) real_continuous (atreal x within s)
-      #|  e:real
-      #|  forall f g x. f real_continuous (atreal x) /\\ g real_continuous (atreal (f x))\n           ==> (g o f) real_continuous (atreal x)
-      #|  e:real
-      #|  forall f g x s. f real_continuous (at x within s) /\\\n             g real_continuous (atreal (f x) within IMAGE f s)\n             ==> (g o f) real_continuous (at x within s)
-      #|  forall f g x. f real_continuous (at x) /\\\n           g real_continuous (atreal (f x) within IMAGE f (:real^N))\n           ==> (g o f) real_continuous (at x)
-      #|  e:real
-      #|  forall f g x s. f continuous (at x within s) /\\\n             g real_continuous (at (f x) within IMAGE f s)\n             ==> (g o f) real_continuous (at x within s)
-      #|  forall f g x. f continuous (at x) /\\\n           g real_continuous (at (f x) within IMAGE f (:real^N))\n           ==> (g o f) real_continuous (at x)
-      #|  e:real
-      #|  forall f g x s. f continuous (atreal x within s) /\\\n             g real_continuous (at (f x) within IMAGE f s)\n             ==> (g o f) real_continuous (atreal x within s)
-      #|  forall f g x. f continuous (atreal x) /\\\n           g real_continuous (at (f x) within IMAGE f (:real))\n           ==> (g o f) real_continuous (atreal x)
-      #|  e:real
-      #|  forall f g x s. f real_continuous (atreal x within s) /\\\n             g continuous (atreal (f x) within IMAGE f s)\n             ==> (g o f) continuous (atreal x within s)
-      #|  forall f g x. f real_continuous (atreal x) /\\\n           g continuous (atreal (f x) within IMAGE f (:real))\n           ==> (g o f) continuous (atreal x)
-      #|  e:real
-      #|  forall f g x s. f continuous (atreal x within s) /\\\n             g continuous (at (f x) within IMAGE f s)\n             ==> (g o f) continuous (atreal x within s)
-      #|  forall f g x. f continuous (atreal x) /\\\n           g continuous (at (f x) within IMAGE f (:real))\n           ==> (g o f) continuous (atreal x)
-      #|  e:real
-      #|  forall f g x s. f real_continuous (at x within s) /\\\n             g continuous (atreal (f x) within IMAGE f s)\n             ==> (g o f) continuous (at x within s)
-      #|  forall f g x. f real_continuous (at x) /\\\n           g continuous (atreal (f x) within IMAGE f (:real^M))\n           ==> (g o f) continuous (at x)
-      #|  f real_continuous_on s <=>\n        forall x. x IN s ==> forall e. &0 < e\n                           ==> ?d. &0 < d /\\\n                                   forall x'. x' IN s /\\ abs(x' - x) < d\n                                        ==> abs(f(x') - f(x)) < e
-      #|  forall f s. f real_continuous_on s <=>\n              forall x. x IN s ==> f real_continuous (atreal x within s)
-      #|  forall f s t. f real_continuous_on s /\\ t SUBSET s ==> f real_continuous_on t
-      #|  forall f g s. f real_continuous_on s /\\ g real_continuous_on (IMAGE f s)\n           ==> (g o f) real_continuous_on s
-      #|  forall f s. f real_continuous_on s <=>\n          (lift o f o drop) continuous_on (IMAGE lift s)
-      #|  forall s c. (\\x. c) real_continuous_on s
-      #|  forall s. (\\x. x) real_continuous_on s
-      #|  forall f c s. f real_continuous_on s ==> (\\x. c * f(x)) real_continuous_on s
-      #|  forall f c s. f real_continuous_on s ==> (\\x. f(x) * c) real_continuous_on s
-      #|  forall f s. f real_continuous_on s\n         ==> (\\x. --(f x)) real_continuous_on s
-      #|  forall f g s. f real_continuous_on s /\\ g real_continuous_on s\n           ==> (\\x. f(x) + g(x)) real_continuous_on s
-      #|  forall f g s. f real_continuous_on s /\\ g real_continuous_on s\n           ==> (\\x. f(x) - g(x)) real_continuous_on s
-      #|  forall f g s. f real_continuous_on s /\\ g real_continuous_on s\n           ==> (\\x. f(x) * g(x)) real_continuous_on s
-      #|  forall f n s. f real_continuous_on s\n           ==> (\\x. f(x) pow n) real_continuous_on s
-      #|  forall f s. f real_continuous_on s /\\  (forall x. x IN s ==> ~(f x = &0))\n         ==> (\\x. inv(f x)) real_continuous_on s
-      #|  forall f g s.\n        f real_continuous_on s /\\\n        g real_continuous_on s /\\\n        (forall x. x IN s ==> ~(g x = &0))\n        ==> (\\x. f x / g x) real_continuous_on s
-      #|  forall f s. f real_continuous_on s ==> (\\x. abs(f x)) real_continuous_on s
-      #|  max a b = inv(&2) * (a + b + abs(b - a))
-      #|  forall f g s. f real_continuous_on s /\\ g real_continuous_on s\n           ==> (\\x. max (f x) (g x)) real_continuous_on s
-      #|  min a b = --(max (--a) (--b))
-      #|  forall f g s. f real_continuous_on s /\\ g real_continuous_on s\n           ==> (\\x. min (f x) (g x)) real_continuous_on s
-      #|  forall f g s. (forall x. x IN s ==> f(x) = g(x)) /\\ f real_continuous_on s\n           ==> g real_continuous_on s
-      #|  forall f s t.\n         real_closed s /\\ real_closed t /\\\n         f real_continuous_on s /\\ f real_continuous_on t\n         ==> f real_continuous_on (s UNION t)
-      #|  forall f s t.\n         real_open s /\\ real_open t /\\\n         f real_continuous_on s /\\ f real_continuous_on t\n         ==> f real_continuous_on (s UNION t)
-      #|  g:real->real
-      #|  f:real->real
-      #|  forall P f g s t.\n        real_closed s /\\ real_closed t /\\\n        f real_continuous_on s /\\ g real_continuous_on t /\\\n        (forall x. x IN s /\\ ~P x \\/ x IN t /\\ P x ==> f x = g x)\n        ==> (\\x. if P x then f x else g x) real_continuous_on (s UNION t)
-      #|  g:real->real
-      #|  f:real->real
-      #|  forall P f g s t.\n        real_open s /\\ real_open t /\\\n        f real_continuous_on s /\\ g real_continuous_on t /\\\n        (forall x. x IN s /\\ ~P x \\/ x IN t /\\ P x ==> f x = g x)\n        ==> (\\x. if P x then f x else g x) real_continuous_on (s UNION t)
-      #|  forall net f s.\n     FINITE s /\\ (forall a. a IN s ==> f a real_continuous net)\n     ==> (\\x. sum s (\\a. f a x)) real_continuous net
-      #|  forall net f s.\n     FINITE s /\\ (forall a. a IN s ==> f a real_continuous net)\n     ==> (\\x. product s (\\a. f a x)) real_continuous net
-      #|  forall t f s.\n         FINITE s /\\ (forall a. a IN s ==> f a real_continuous_on t)\n         ==> (\\x. sum s (\\a. f a x)) real_continuous_on t
-      #|  forall t f s.\n         FINITE s /\\ (forall a. a IN s ==> f a real_continuous_on t)\n         ==> (\\x. product s (\\a. f a x)) real_continuous_on t
-      #|  forall f net g l.\n        f continuous (atreal l) /\\ (g ---> l) net\n        ==> ((\\x. f(g x)) --> f l) net
-      #|  forall f net g l.\n        f real_continuous (at l) /\\ (g --> l) net\n        ==> ((\\x. f(g x)) ---> f l) net
-      #|  forall f net g l.\n        f real_continuous (atreal l) /\\ (g ---> l) net\n        ==> ((\\x. f(g x)) ---> f l) net
-      #|  forall f s. real_open s\n         ==> (f real_continuous_on s <=>\n              forall x. x IN s ==> f real_continuous atreal x)
-      #|  IMAGE lift s
-      #|  (f:real->real) o drop
-      #|  forall f s. real_compact s /\\ ~(s = {}) /\\ f real_continuous_on s\n         ==> ?x. x IN s /\\ (forall y. y IN s ==> f y <= f x)
-      #|  IMAGE lift s
-      #|  (f:real->real) o drop
-      #|  forall f s. real_compact s /\\ ~(s = {}) /\\ f real_continuous_on s\n         ==> ?x. x IN s /\\ (forall y. y IN s ==> f x <= f y)
-      #|  b:real^1
-      #|  a:real^1
-      #|  forall g h a b.\n        a < b /\\\n        g real_continuous_on real_interval[a,b] /\\\n        h real_continuous_on real_interval[a,b] /\\\n        (forall x. x IN real_interval(a,b) ==> g x = h x)\n        ==> (forall x. x IN real_interval[a,b] ==> g x = h x)
-      #|  f real_uniformly_continuous_on s <=>\n        forall e. &0 < e\n            ==> ?d. &0 < d /\\\n                    forall x x'. x IN s /\\ x' IN s /\\ abs(x' - x) < d\n                           ==> abs(f x' - f x) < e
-      #|  forall f s. f real_uniformly_continuous_on s <=>\n          (lift o f o drop) uniformly_continuous_on (IMAGE lift s)
-      #|  forall f s. f real_uniformly_continuous_on s ==> f real_continuous_on s
-      #|  forall f s. f real_uniformly_continuous_on s <=>\n                forall x y. (forall n. x(n) IN s) /\\ (forall n. y(n) IN s) /\\\n                      ((\\n. x(n) - y(n)) ---> &0) sequentially\n                      ==> ((\\n. f(x(n)) - f(y(n))) ---> &0) sequentially
-      #|  forall f s t. f real_uniformly_continuous_on s /\\ t SUBSET s\n           ==> f real_uniformly_continuous_on t
-      #|  IMAGE lift (IMAGE f s) = IMAGE (lift o f o drop) (IMAGE lift s)
-      #|  forall f g s. f real_uniformly_continuous_on s /\\\n           g real_uniformly_continuous_on (IMAGE f s)\n           ==> (g o f) real_uniformly_continuous_on s
-      #|  forall s c. (\\x. c) real_uniformly_continuous_on s
-      #|  forall f c s. f real_uniformly_continuous_on s\n           ==> (\\x. c * f(x)) real_uniformly_continuous_on s
-      #|  forall f c s. f real_uniformly_continuous_on s\n           ==> (\\x. f(x) * c) real_uniformly_continuous_on s
-      #|  forall s. (\\x. x) real_uniformly_continuous_on s
-      #|  --x = -- &1 * x
-      #|  forall f s. f real_uniformly_continuous_on s\n         ==> (\\x. --(f x)) real_uniformly_continuous_on s
-      #|  forall f g s. f real_uniformly_continuous_on s /\\\n           g real_uniformly_continuous_on s\n           ==> (\\x. f(x) + g(x)) real_uniformly_continuous_on s
-      #|  forall f g s. f real_uniformly_continuous_on s /\\\n           g real_uniformly_continuous_on s\n           ==> (\\x. f(x) - g(x)) real_uniformly_continuous_on s
-      #|  forall t f s.\n         FINITE s /\\ (forall a. a IN s ==> f a real_uniformly_continuous_on t)\n         ==> (\\x. sum s (\\a. f a x)) real_uniformly_continuous_on t
-      #|  forall f s. f real_continuous_on s /\\ real_compact s\n         ==> f real_uniformly_continuous_on s
-      #|  forall f s. f real_continuous_on s /\\ real_compact s\n         ==> real_compact (IMAGE f s)
-      #|  IMAGE lift s
-      #|  lift o g o drop
-      #|  \\n:num. lift o f n o drop
-      #|  forall f g s.\n        real_compact s /\\ (forall n. (f n) real_continuous_on s) /\\\n        g real_continuous_on s /\\\n        (forall x. x IN s ==> ((\\n. (f n x)) ---> g x) sequentially) /\\\n        (forall n x. x IN s ==> f n x <= f (n + 1) x)\n        ==> forall e. &0 < e\n                ==> eventually (\\n. forall x. x IN s ==> abs(f n x - g x) < e)\n                               sequentially
-      #|  forall net f:A->real^N.\n        f continuous net <=>\n        forall i. 1 <= i /\\ i <= dimindex(:N)\n            ==> (\\x. (f x)$i) real_continuous net
-      #|  \\z:complex. z
-      #|  at(z:complex)
-      #|  forall z. Re real_continuous (at z) /\\ Im real_continuous (at z)
-      #|  forall s z. Re real_continuous (at z within s) /\\\n         Im real_continuous (at z within s)
-      #|  e:real
-      #|  e:real
-      #|  forall z. norm real_continuous (at z)
+      #|  abs((r : Real)) < real_of_num(1)
+      #|  (r : Real) <= real_of_num(1) \226\134\146 (real_of_num(0) < abs(r - real_of_num(1))) == (r < real_of_num(1))
+      #|  (r : Real)
+      #|  real_of_num(1)
+      #|  (z : Cart[Real, Tybit0[Unit]]) => infsum((s : (Num) -> Bool), (i : Num) => o(Cx, (a : (Num) -> Real), i) * pow(z, i))
+      #|  Cx((r : Real))
+      #|  (r : Real)
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  o(Cx, (a : (Num) -> Real))
+      #|  (s : (Num) -> Bool)
+      #|  real_of_num(1)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 a : (Num) -> Real, real_summable(s, a) \226\134\146 (\226\136\128 r : Real, abs(r) < real_of_num(1) \226\134\146 real_summable(s, (i : Num) => a(i) * pow(r, i))) && op_minus_minus_minus_gt((r : Real) => real_infsum(s, (i : Num) => a(i) * pow(r, i)), real_infsum(s, a), within(atreal(real_of_num(1)), {(z : Real) | z <= real_of_num(1)}))
+      #|  (real_continuous : ((_) -> Real, Net[_]) -> Bool)((f : (_) -> Real), (net : Net[_])) == op_minus_minus_minus_gt(f, f(netlimit(net)), net)
+      #|  \226\136\128 f : (_) -> Real, \226\136\128 net : Net[_], trivial_limit(net) \226\134\146 real_continuous(f, net)
+      #|  trivial_limit(within(at((x : Cart[Real, N])), (s : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 x : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, real_continuous(f, within(at(x), s)) == op_minus_minus_minus_gt(f, f(x), within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 x : Cart[Real, _], real_continuous(f, at(x)) == op_minus_minus_minus_gt(f, f(x), at(x))
+      #|  trivial_limit(within(atreal((x : Real)), (s : (Real) -> Bool)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, real_continuous(f, within(atreal(x), s)) == op_minus_minus_minus_gt(f, f(x), within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, real_continuous(f, atreal(x)) == op_minus_minus_minus_gt(f, f(x), atreal(x))
+      #|  trivial_limit(within(atreal((x : Real)), (s : (Real) -> Bool)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, continuous(f, within(atreal(x), s)) == op_minus_minus_gt(f, f(x), within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 x : Real, continuous(f, atreal(x)) == op_minus_minus_gt(f, f(x), atreal(x))
+      #|  abs((x : Real) - x) == real_of_num(0)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  real_continuous((f : (Cart[Real, _]) -> Real), within(at((x : Cart[Real, _])), (s : (Cart[Real, _]) -> Bool))) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, _], IN(x', s) && dist((x', x)) < d \226\134\146 abs(f(x') - f(x)) < e)))
+      #|  real_continuous((f : (Cart[Real, _]) -> Real), at((x : Cart[Real, _]))) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, _], dist((x', x)) < d \226\134\146 abs(f(x') - f(x)) < e)))
+      #|  abs((x : Real) - x) == real_of_num(0)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  (real_of_num(0) < abs((x : Real) - (y : Real))) == !(x == y)
+      #|  real_continuous((f : (Real) -> Real), within(atreal((x : Real)), (s : (Real) -> Bool))) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Real, IN(x', s) && abs(x' - x) < d \226\134\146 abs(f(x') - f(x)) < e)))
+      #|  real_continuous((f : (Real) -> Real), atreal((x : Real))) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Real, abs(x' - x) < d \226\134\146 abs(f(x') - f(x)) < e)))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 x : Cart[Real, _], real_continuous(f, at(x)) \226\134\146 real_continuous(f, within(at(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_continuous(f, atreal(x)) \226\134\146 real_continuous(f, within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_continuous(f, within(atreal((x : Real)), s)) && SUBSET(t, s) \226\134\146 real_continuous(f, within(atreal(x), t))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, real_continuous(f, within(at((x : Cart[Real, _])), s)) && SUBSET(t, s) \226\134\146 real_continuous(f, within(at(x), t))
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, continuous(f, within(atreal((x : Real)), s)) && SUBSET(t, s) \226\134\146 continuous(f, within(atreal(x), t))
+      #|  real_of_num(0) < (d : Real)
+      #|  (d : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  (real_of_num(0) < abs((x : Real) - (y : Real))) == !(x == y)
+      #|  continuous((f : (Real) -> Cart[Real, _]), within(atreal((x : Real)), (s : (Real) -> Bool))) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Real, IN(x', s) && abs(x' - x) < d \226\134\146 dist((f(x'), f(x))) < e)))
+      #|  continuous((f : (Real) -> Cart[Real, _]), atreal((x : Real))) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Real, abs(x' - x) < d \226\134\146 dist((f(x'), f(x))) < e)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, continuous(f, atreal(x)) \226\134\146 continuous(f, within(atreal(x), s))
+      #|  \226\136\128 x : Real, continuous(Cx, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, continuous(Cx, within(atreal(x), s))
+      #|  min((d : Real), (e : Real))
+      #|  (e : Real)
+      #|  (k : Real)
+      #|  (k : Real)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, N], IN(x', s) && dist((x', x)) < d \226\134\146 f(x') == g(x')) && real_continuous(f, within(at(x), s)) \226\134\146 real_continuous(g, within(at(x), s))
+      #|  abs((x : Real) - x) == real_of_num(0)
+      #|  min((d : Real), (e : Real))
+      #|  (e : Real)
+      #|  (k : Real)
+      #|  (k : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Real, IN(x', s) && abs(x' - x) < d \226\134\146 f(x') == g(x')) && real_continuous(f, within(atreal(x), s)) \226\134\146 real_continuous(g, within(atreal(x), s))
+      #|  (UNIV : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, \226\136\128 x : Cart[Real, N], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, N], dist((x', x)) < d \226\134\146 f(x') == g(x')) && real_continuous(f, at(x)) \226\134\146 real_continuous(g, at(x))
+      #|  (UNIV : (Real) -> Bool)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 x : Real, \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Real, abs(x' - x) < d \226\134\146 f(x') == g(x')) && real_continuous(f, atreal(x)) \226\134\146 real_continuous(g, atreal(x))
+      #|  \226\136\128 net : Net[_], \226\136\128 c : Real, real_continuous((x : _) => c, net)
+      #|  \226\136\128 f : (_) -> Real, \226\136\128 c : Real, \226\136\128 net : Net[_], real_continuous(f, net) \226\134\146 real_continuous((x : _) => c * f(x), net)
+      #|  \226\136\128 f : (_) -> Real, \226\136\128 c : Real, \226\136\128 net : Net[_], real_continuous(f, net) \226\134\146 real_continuous((x : _) => f(x) * c, net)
+      #|  \226\136\128 f : (_) -> Real, \226\136\128 net : Net[_], real_continuous(f, net) \226\134\146 real_continuous((x : _) => -f(x), net)
+      #|  \226\136\128 f : (_) -> Real, \226\136\128 g : (_) -> Real, \226\136\128 net : Net[_], real_continuous(f, net) && real_continuous(g, net) \226\134\146 real_continuous((x : _) => f(x) + g(x), net)
+      #|  \226\136\128 f : (_) -> Real, \226\136\128 g : (_) -> Real, \226\136\128 net : Net[_], real_continuous(f, net) && real_continuous(g, net) \226\134\146 real_continuous((x : _) => f(x) - g(x), net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 g : (_) -> Real, real_continuous(f, net) && real_continuous(g, net) \226\134\146 real_continuous((x : _) => f(x) * g(x), net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, real_continuous(f, net) && !(f(netlimit(net)) == real_of_num(0)) \226\134\146 real_continuous((x : _) => inv(f(x)), net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 g : (_) -> Real, real_continuous(f, net) && real_continuous(g, net) && !(g(netlimit(net)) == real_of_num(0)) \226\134\146 real_continuous((x : _) => f(x) / g(x), net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 n : Num, real_continuous(f, net) \226\134\146 real_continuous((x : _) => pow(f(x), n), net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, real_continuous(f, net) \226\134\146 real_continuous((x : _) => abs(f(x)), net)
+      #|  \226\136\128 f : (_) -> Real, \226\136\128 g : (_) -> Real, \226\136\128 net : Net[_], real_continuous(f, net) && real_continuous(g, net) \226\134\146 real_continuous((x : _) => max(f(x), g(x)), net)
+      #|  \226\136\128 f : (_) -> Real, \226\136\128 g : (_) -> Real, \226\136\128 net : Net[_], real_continuous(f, net) && real_continuous(g, net) \226\134\146 real_continuous((x : _) => min(f(x), g(x)), net)
+      #|  \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, real_continuous((x : Real) => x, within(atreal(x), s))
+      #|  \226\136\128 x : Real, real_continuous((x : Real) => x, atreal(x))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 a : Cart[Real, _], real_continuous(f, within(at(a), s)) && !(f(a) == real_of_num(0)) \226\134\146 real_continuous((x : Cart[Real, _]) => inv(f(x)), within(at(a), s))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 a : Cart[Real, _], real_continuous(f, at(a)) && !(f(a) == real_of_num(0)) \226\134\146 real_continuous((x : Cart[Real, _]) => inv(f(x)), at(a))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, real_continuous(f, within(atreal(a), s)) && !(f(a) == real_of_num(0)) \226\134\146 real_continuous((x : Real) => inv(f(x)), within(atreal(a), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, real_continuous(f, atreal(a)) && !(f(a) == real_of_num(0)) \226\134\146 real_continuous((x : Real) => inv(f(x)), atreal(a))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 a : Cart[Real, _], real_continuous(f, within(at(a), s)) && real_continuous((g : (Cart[Real, _]) -> Real), within(at(a), s)) && !(g(a) == real_of_num(0)) \226\134\146 real_continuous((x : Cart[Real, _]) => f(x) / g(x), within(at(a), s))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 a : Cart[Real, _], real_continuous(f, at(a)) && real_continuous((g : (Cart[Real, _]) -> Real), at(a)) && !(g(a) == real_of_num(0)) \226\134\146 real_continuous((x : Cart[Real, _]) => f(x) / g(x), at(a))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, real_continuous(f, within(atreal(a), s)) && real_continuous((g : (Real) -> Real), within(atreal(a), s)) && !(g(a) == real_of_num(0)) \226\134\146 real_continuous((x : Real) => f(x) / g(x), within(atreal(a), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, real_continuous(f, atreal(a)) && real_continuous((g : (Real) -> Real), atreal(a)) && !(g(a) == real_of_num(0)) \226\134\146 real_continuous((x : Real) => f(x) / g(x), atreal(a))
+      #|  (e : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, real_continuous(f, within(atreal(x), s)) && real_continuous(g, within(atreal(f(x)), IMAGE(f, s))) \226\134\146 real_continuous(o(g, f), within(atreal(x), s))
+      #|  (e : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 x : Real, real_continuous(f, atreal(x)) && real_continuous(g, atreal(f(x))) \226\134\146 real_continuous(o(g, f), atreal(x))
+      #|  (e : Real)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 x : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, real_continuous(f, within(at(x), s)) && real_continuous(g, within(atreal(f(x)), IMAGE(f, s))) \226\134\146 real_continuous(o(g, f), within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 x : Cart[Real, N], real_continuous(f, at(x)) && real_continuous(g, within(atreal(f(x)), IMAGE(f, UNIV))) \226\134\146 real_continuous(o(g, f), at(x))
+      #|  (e : Real)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Real, \226\136\128 x : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, continuous(f, within(at(x), s)) && real_continuous(g, within(at(f(x)), IMAGE(f, s))) \226\134\146 real_continuous(o(g, f), within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Real, \226\136\128 x : Cart[Real, N], continuous(f, at(x)) && real_continuous(g, within(at(f(x)), IMAGE(f, UNIV))) \226\134\146 real_continuous(o(g, f), at(x))
+      #|  (e : Real)
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, continuous(f, within(atreal(x), s)) && real_continuous(g, within(at(f(x)), IMAGE(f, s))) \226\134\146 real_continuous(o(g, f), within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Real, \226\136\128 x : Real, continuous(f, atreal(x)) && real_continuous(g, within(at(f(x)), IMAGE(f, UNIV))) \226\134\146 real_continuous(o(g, f), atreal(x))
+      #|  (e : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Cart[Real, _], \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, real_continuous(f, within(atreal(x), s)) && continuous(g, within(atreal(f(x)), IMAGE(f, s))) \226\134\146 continuous(o(g, f), within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Cart[Real, _], \226\136\128 x : Real, real_continuous(f, atreal(x)) && continuous(g, within(atreal(f(x)), IMAGE(f, UNIV))) \226\134\146 continuous(o(g, f), atreal(x))
+      #|  (e : Real)
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, continuous(f, within(atreal(x), s)) && continuous(g, within(at(f(x)), IMAGE(f, s))) \226\134\146 continuous(o(g, f), within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Real, continuous(f, atreal(x)) && continuous(g, within(at(f(x)), IMAGE(f, UNIV))) \226\134\146 continuous(o(g, f), atreal(x))
+      #|  (e : Real)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 g : (Real) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, real_continuous(f, within(at(x), s)) && continuous(g, within(atreal(f(x)), IMAGE(f, s))) \226\134\146 continuous(o(g, f), within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Real, \226\136\128 g : (Real) -> Cart[Real, _], \226\136\128 x : Cart[Real, M], real_continuous(f, at(x)) && continuous(g, within(atreal(f(x)), IMAGE(f, UNIV))) \226\134\146 continuous(o(g, f), at(x))
+      #|  (real_continuous_on : ((Real) -> Real, (Real) -> Bool) -> Bool)((f : (Real) -> Real), (s : (Real) -> Bool)) == (\226\136\128 x : Real, IN(x, s) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Real, IN(x', s) && abs(x' - x) < d \226\134\146 abs(f(x') - f(x)) < e))))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) == (\226\136\128 x : Real, IN(x, s) \226\134\146 real_continuous(f, within(atreal(x), s)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_continuous_on(f, s) && SUBSET(t, s) \226\134\146 real_continuous_on(f, t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) && real_continuous_on(g, IMAGE(f, s)) \226\134\146 real_continuous_on(o(g, f), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) == continuous_on(o(lift, o(f, drop)), IMAGE(lift, s))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, real_continuous_on((x : Real) => c, s)
+      #|  \226\136\128 s : (Real) -> Bool, real_continuous_on((x : Real) => x, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 c : Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) \226\134\146 real_continuous_on((x : Real) => c * f(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 c : Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) \226\134\146 real_continuous_on((x : Real) => f(x) * c, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) \226\134\146 real_continuous_on((x : Real) => -f(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) && real_continuous_on(g, s) \226\134\146 real_continuous_on((x : Real) => f(x) + g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) && real_continuous_on(g, s) \226\134\146 real_continuous_on((x : Real) => f(x) - g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) && real_continuous_on(g, s) \226\134\146 real_continuous_on((x : Real) => f(x) * g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) \226\134\146 real_continuous_on((x : Real) => pow(f(x), n), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 !(f(x) == real_of_num(0))) \226\134\146 real_continuous_on((x : Real) => inv(f(x)), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) && real_continuous_on(g, s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 !(g(x) == real_of_num(0))) \226\134\146 real_continuous_on((x : Real) => f(x) / g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) \226\134\146 real_continuous_on((x : Real) => abs(f(x)), s)
+      #|  max((a : Real), (b : Real)) == inv(real_of_num(2)) * (a + (b + abs(b - a)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) && real_continuous_on(g, s) \226\134\146 real_continuous_on((x : Real) => max(f(x), g(x)), s)
+      #|  min((a : Real), (b : Real)) == -max(-a, -b)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) && real_continuous_on(g, s) \226\134\146 real_continuous_on((x : Real) => min(f(x), g(x)), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == g(x)) && real_continuous_on(f, s) \226\134\146 real_continuous_on(g, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_closed(s) && real_closed(t) && real_continuous_on(f, s) && real_continuous_on(f, t) \226\134\146 real_continuous_on(f, UNION(s, t))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_open(s) && real_open(t) && real_continuous_on(f, s) && real_continuous_on(f, t) \226\134\146 real_continuous_on(f, UNION(s, t))
+      #|  (g : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 P : (Real) -> Bool, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_closed(s) && real_closed(t) && real_continuous_on(f, s) && real_continuous_on(g, t) && (\226\136\128 x : Real, IN(x, s) && !P(x) || IN(x, t) && P(x) \226\134\146 f(x) == g(x)) \226\134\146 real_continuous_on((x : Real) => if P(x) { f(x) } else { g(x) }, UNION(s, t))
+      #|  (g : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 P : (Real) -> Bool, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_open(s) && real_open(t) && real_continuous_on(f, s) && real_continuous_on(g, t) && (\226\136\128 x : Real, IN(x, s) && !P(x) || IN(x, t) && P(x) \226\134\146 f(x) == g(x)) \226\134\146 real_continuous_on((x : Real) => if P(x) { f(x) } else { g(x) }, UNION(s, t))
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_, _) -> Real, \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 a : _, IN(a, s) \226\134\146 real_continuous(f(a), net)) \226\134\146 real_continuous((x : _) => sum(s, (a : _) => f(a, x)), net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_, _) -> Real, \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 a : _, IN(a, s) \226\134\146 real_continuous(f(a), net)) \226\134\146 real_continuous((x : _) => product(s, (a : _) => f(a, x)), net)
+      #|  \226\136\128 t : (Real) -> Bool, \226\136\128 f : (_, Real) -> Real, \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 a : _, IN(a, s) \226\134\146 real_continuous_on(f(a), t)) \226\134\146 real_continuous_on((x : Real) => sum(s, (a : _) => f(a, x)), t)
+      #|  \226\136\128 t : (Real) -> Bool, \226\136\128 f : (_, Real) -> Real, \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 a : _, IN(a, s) \226\134\146 real_continuous_on(f(a), t)) \226\134\146 real_continuous_on((x : Real) => product(s, (a : _) => f(a, x)), t)
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 net : Net[_], \226\136\128 g : (_) -> Real, \226\136\128 l : Real, continuous(f, atreal(l)) && op_minus_minus_minus_gt(g, l, net) \226\134\146 op_minus_minus_gt((x : _) => f(g(x)), f(l), net)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 net : Net[_], \226\136\128 g : (_) -> Cart[Real, _], \226\136\128 l : Cart[Real, _], real_continuous(f, at(l)) && op_minus_minus_gt(g, l, net) \226\134\146 op_minus_minus_minus_gt((x : _) => f(g(x)), f(l), net)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 net : Net[_], \226\136\128 g : (_) -> Real, \226\136\128 l : Real, real_continuous(f, atreal(l)) && op_minus_minus_minus_gt(g, l, net) \226\134\146 op_minus_minus_minus_gt((x : _) => f(g(x)), f(l), net)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_open(s) \226\134\146 real_continuous_on(f, s) == (\226\136\128 x : Real, IN(x, s) \226\134\146 real_continuous(f, atreal(x)))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o((f : (Real) -> Real), drop)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_compact(s) && !(s == {}) && real_continuous_on(f, s) \226\134\146 (\226\136\131 x : Real, IN(x, s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 f(y) <= f(x)))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o((f : (Real) -> Real), drop)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_compact(s) && !(s == {}) && real_continuous_on(f, s) \226\134\146 (\226\136\131 x : Real, IN(x, s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 f(x) <= f(y)))
+      #|  (b : Cart[Real, Unit])
+      #|  (a : Cart[Real, Unit])
+      #|  \226\136\128 g : (Real) -> Real, \226\136\128 h : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a < b && real_continuous_on(g, real_interval([(a, b)])) && real_continuous_on(h, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval((a, b))) \226\134\146 g(x) == h(x)) \226\134\146 (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 g(x) == h(x))
+      #|  (real_uniformly_continuous_on : ((Real) -> Real, (Real) -> Bool) -> Bool)((f : (Real) -> Real), (s : (Real) -> Bool)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, \226\136\128 x' : Real, IN(x, s) && IN(x', s) && abs(x' - x) < d \226\134\146 abs(f(x') - f(x)) < e)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_uniformly_continuous_on(f, s) == uniformly_continuous_on(o(lift, o(f, drop)), IMAGE(lift, s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_uniformly_continuous_on(f, s) \226\134\146 real_continuous_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_uniformly_continuous_on(f, s) == (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, (\226\136\128 n : Num, IN(x(n), s)) && (\226\136\128 n : Num, IN(y(n), s)) && op_minus_minus_minus_gt((n : Num) => x(n) - y(n), real_of_num(0), sequentially) \226\134\146 op_minus_minus_minus_gt((n : Num) => f(x(n)) - f(y(n)), real_of_num(0), sequentially))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_uniformly_continuous_on(f, s) && SUBSET(t, s) \226\134\146 real_uniformly_continuous_on(f, t)
+      #|  IMAGE(lift, IMAGE((f : (Real) -> Real), (s : (Real) -> Bool))) == IMAGE(o(lift, o(f, drop)), IMAGE(lift, s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_uniformly_continuous_on(f, s) && real_uniformly_continuous_on(g, IMAGE(f, s)) \226\134\146 real_uniformly_continuous_on(o(g, f), s)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, real_uniformly_continuous_on((x : Real) => c, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 c : Real, \226\136\128 s : (Real) -> Bool, real_uniformly_continuous_on(f, s) \226\134\146 real_uniformly_continuous_on((x : Real) => c * f(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 c : Real, \226\136\128 s : (Real) -> Bool, real_uniformly_continuous_on(f, s) \226\134\146 real_uniformly_continuous_on((x : Real) => f(x) * c, s)
+      #|  \226\136\128 s : (Real) -> Bool, real_uniformly_continuous_on((x : Real) => x, s)
+      #|  -(x : Real) == -real_of_num(1) * x
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_uniformly_continuous_on(f, s) \226\134\146 real_uniformly_continuous_on((x : Real) => -f(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_uniformly_continuous_on(f, s) && real_uniformly_continuous_on(g, s) \226\134\146 real_uniformly_continuous_on((x : Real) => f(x) + g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_uniformly_continuous_on(f, s) && real_uniformly_continuous_on(g, s) \226\134\146 real_uniformly_continuous_on((x : Real) => f(x) - g(x), s)
+      #|  \226\136\128 t : (Real) -> Bool, \226\136\128 f : (_, Real) -> Real, \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 a : _, IN(a, s) \226\134\146 real_uniformly_continuous_on(f(a), t)) \226\134\146 real_uniformly_continuous_on((x : Real) => sum(s, (a : _) => f(a, x)), t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) && real_compact(s) \226\134\146 real_uniformly_continuous_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) && real_compact(s) \226\134\146 real_compact(IMAGE(f, s))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  (n : Num) => o(lift, o((f : (Num, Real) -> Real)(n), drop))
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_compact(s) && (\226\136\128 n : Num, real_continuous_on(f(n), s)) && real_continuous_on(g, s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 op_minus_minus_minus_gt((n : Num) => f(n, x), g(x), sequentially)) && (\226\136\128 n : Num, \226\136\128 x : Real, IN(x, s) \226\134\146 f(n, x) <= f(n + 1, x)) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((n : Num) => \226\136\128 x : Real, IN(x, s) \226\134\146 abs(f(n, x) - g(x)) < e, sequentially))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, N], (continuous : ((A) -> Cart[Real, N], Net[A]) -> Bool)(f, net) == (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (real_continuous : ((A) -> Real, Net[A]) -> Bool)((x : A) => (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i), net))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => z
+      #|  at((z : Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], real_continuous(Re, at(z)) && real_continuous(Im, at(z))
+      #|  \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 z : Cart[Real, Tybit0[Unit]], real_continuous(Re, within(at(z), s)) && real_continuous(Im, within(at(z), s))
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 z : Cart[Real, _], real_continuous(norm, at(z))
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  forall s z. norm real_continuous (at z within s)
-      #|  e:real
-      #|  e:real
-      #|  forall a z. (\\x. dist(a,x)) real_continuous (at z)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 z : Cart[Real, _], real_continuous(norm, within(at(z), s))
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 a : Cart[Real, _], \226\136\128 z : Cart[Real, _], real_continuous((x : Cart[Real, _]) => dist((a, x)), at(z))
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  forall a s z. (\\x. dist(a,x)) real_continuous (at z within s)
-      #|  (f has_real_derivative f') net <=>\n        ((\\x. inv(x - netlimit net) *\n              (f x - (f(netlimit net) + f' * (x - netlimit net))))\n         ---> &0) net
-      #|  f real_differentiable net <=> ?f'. (f has_real_derivative f') net
-      #|  real_derivative f x = @f'. (f has_real_derivative f') (atreal x)
-      #|  higher_real_derivative 0 f = f /\\\n  (forall n. higher_real_derivative (SUC n) f =\n                real_derivative (higher_real_derivative n f))
+      #|  \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 z : Cart[Real, _], real_continuous((x : Cart[Real, _]) => dist((a, x)), within(at(z), s))
+      #|  (has_real_derivative : ((Real) -> Real, Real, Net[Real]) -> Bool)((f : (Real) -> Real), (f' : Real), (net : Net[Real])) == op_minus_minus_minus_gt((x : Real) => inv(x - netlimit(net)) * (f(x) - (f(netlimit(net)) + f' * (x - netlimit(net)))), real_of_num(0), net)
+      #|  (real_differentiable : ((Real) -> Real, Net[Real]) -> Bool)((f : (Real) -> Real), (net : Net[Real])) == (\226\136\131 f' : Real, has_real_derivative(f, f', net))
+      #|  (real_derivative : ((Real) -> Real, Real) -> Real)((f : (Real) -> Real), (x : Real)) == select((f' : Real) => has_real_derivative(f, f', atreal(x)))
+      #|  (higher_real_derivative : (Num, (Real) -> Real, Real) -> Real)(0, (f : (Real) -> Real)) == f && (\226\136\128 n : Num, higher_real_derivative(SUC(n), f) == real_derivative(higher_real_derivative(n, f)))
       #|  :P
       #|  :P
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  f real_differentiable_on s <=>\n     forall x. x IN s ==> ?f'. (f has_real_derivative f') (atreal x within s)
-      #|  &0 < abs(x - a) ==> (fy - fa) / (x - a) - f' =\n                        inv(x - a) * (fy - (fa + f' * (x - a)))
-      #|  trivial_limit(atreal a within s)
-      #|  (f has_real_derivative f') (atreal a within s) <=>\n           ((\\x. (f x - f a) / (x - a)) ---> f') (atreal a within s)
-      #|  (f has_real_derivative f') (atreal a) <=>\n           ((\\x. (f x - f a) / (x - a)) ---> f') (atreal a)
-      #|  &0 < abs(y - x)\n    ==> fy - (fx + f' * (y - x)) = (y - x) * ((fy - fx) / (y - x) - f')
-      #|  dist(x,vec 0) = norm x
+      #|  (real_differentiable_on : ((Real) -> Real, (Real) -> Bool) -> Bool)((f : (Real) -> Real), (s : (Real) -> Bool)) == (\226\136\128 x : Real, IN(x, s) \226\134\146 (\226\136\131 f' : Real, has_real_derivative(f, f', within(atreal(x), s))))
+      #|  real_of_num(0) < abs((x : Real) - (a : Real)) \226\134\146 ((fy : Real) - (fa : Real)) / (x - a) - (f' : Real) == inv(x - a) * (fy - (fa + f' * (x - a)))
+      #|  trivial_limit(within(atreal((a : Real)), (s : (Real) -> Bool)))
+      #|  has_real_derivative((f : (Real) -> Real), (f' : Real), within(atreal((a : Real)), (s : (Real) -> Bool))) == op_minus_minus_minus_gt((x : Real) => (f(x) - f(a)) / (x - a), f', within(atreal(a), s))
+      #|  has_real_derivative((f : (Real) -> Real), (f' : Real), atreal((a : Real))) == op_minus_minus_minus_gt((x : Real) => (f(x) - f(a)) / (x - a), f', atreal(a))
+      #|  real_of_num(0) < abs((y : Real) - (x : Real)) \226\134\146 (fy : Real) - ((fx : Real) + (f' : Real) * (y - x)) == (y - x) * ((fy - fx) / (y - x) - f')
+      #|  dist(((x : Cart[Real, _]), vec(0))) == norm(x)
       #|  :real
       #|  :real
-      #|  (f has_real_derivative f') (atreal x within s) <=>\n        ((lift o f o drop) has_derivative (\\x. f' % x))\n        (at (lift x) within (IMAGE lift s))
-      #|  (f has_real_derivative f') (atreal x) <=>\n        ((lift o f o drop) has_derivative (\\x. f' % x)) (at (lift x))
-      #|  (f has_real_derivative f') (atreal x within s) <=>\n        ((lift o f o drop) has_vector_derivative (lift f'))\n        (at (lift x) within (IMAGE lift s))
-      #|  (f has_real_derivative f') (atreal x) <=>\n        ((lift o f o drop) has_vector_derivative (lift f')) (at (lift x))
-      #|  forall f x. f real_differentiable (atreal x) <=>\n         (lift o f o drop) differentiable (at(lift x))
-      #|  forall f x s.\n        f real_differentiable (atreal x within s) <=>\n        (lift o f o drop) differentiable (at(lift x) within IMAGE lift s)
-      #|  forall f s. f real_differentiable_on s <=>\n         (lift o f o drop) differentiable_on (IMAGE lift s)
-      #|  (f has_real_derivative f') (atreal a within s) <=>\n        ((Cx o f o Re) has_complex_derivative (Cx f'))\n                (at (Cx a) within {z | real z /\\ Re z IN s})
-      #|  (f has_real_derivative f') (atreal a) <=>\n       ((Cx o f o Re) has_complex_derivative (Cx f')) (at (Cx a) within real)
-      #|  forall f s. f real_differentiable_on s <=>\n         forall x. x IN s ==> f real_differentiable (atreal x within s)
-      #|  forall f s. real_open s\n         ==> (f real_differentiable_on s <=>\n              forall x. x IN s ==> ?f'. (f has_real_derivative f') (atreal x))
-      #|  forall f s x. f real_differentiable_on s /\\ x IN s\n           ==> f real_differentiable (atreal x within s)
-      #|  forall f s x. f real_differentiable_on s /\\ real_open s /\\ x IN s\n           ==> f real_differentiable (atreal x)
-      #|  Re w
-      #|  w:complex
-      #|  d:real
-      #|  h:complex->complex
-      #|  forall f g h s d.\n        &0 < d /\\ x IN s /\\\n        (h has_complex_derivative Cx(g))\n        (at (Cx x) within {z | real z /\\ Re(z) IN s}) /\\\n        (forall y. y IN s /\\ abs(y - x) < d ==>  h(Cx y) = Cx(f y))\n        ==> (f has_real_derivative g) (atreal x within s)
-      #|  {x | r x} = r
-      #|  d:real
-      #|  h:complex->complex
-      #|  forall f g h d.\n        &0 < d /\\\n        (h has_complex_derivative Cx(g)) (at (Cx x) within real) /\\\n        (forall y. abs(y - x) < d ==>  h(Cx y) = Cx(f y))\n        ==> (f has_real_derivative g) (atreal x)
-      #|  &1
-      #|  h:complex->complex
-      #|  forall f g h s.\n        x IN s /\\\n        (h has_complex_derivative Cx(g))\n        (at (Cx x) within {z | real z /\\ Re(z) IN s}) /\\\n        (forall y. y IN s ==>  h(Cx y) = Cx(f y))\n        ==> (f has_real_derivative g) (atreal x within s)
-      #|  {x | r x} = r
-      #|  h:complex->complex
-      #|  forall f g h.\n        (h has_complex_derivative Cx(g)) (at (Cx x) within real) /\\\n        (forall y. h(Cx y) = Cx(f y))\n        ==> (f has_real_derivative g) (atreal x)
-      #|  &1
-      #|  \\y. ((f:complex->complex) y - f (Cx x)) / (y - Cx x)
-      #|  at (Cx x) within real
-      #|  real f'
+      #|  has_real_derivative((f : (Real) -> Real), (f' : Real), within(atreal((x : Real)), (s : (Real) -> Bool))) == has_derivative(o(lift, o(f, drop)), (x : Cart[Real, Unit]) => op_pct(f', x), within(at(lift(x)), IMAGE(lift, s)))
+      #|  has_real_derivative((f : (Real) -> Real), (f' : Real), atreal((x : Real))) == has_derivative(o(lift, o(f, drop)), (x : Cart[Real, Unit]) => op_pct(f', x), at(lift(x)))
+      #|  has_real_derivative((f : (Real) -> Real), (f' : Real), within(atreal((x : Real)), (s : (Real) -> Bool))) == has_vector_derivative(o(lift, o(f, drop)), lift(f'), within(at(lift(x)), IMAGE(lift, s)))
+      #|  has_real_derivative((f : (Real) -> Real), (f' : Real), atreal((x : Real))) == has_vector_derivative(o(lift, o(f, drop)), lift(f'), at(lift(x)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, real_differentiable(f, atreal(x)) == differentiable(o(lift, o(f, drop)), at(lift(x)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, real_differentiable(f, within(atreal(x), s)) == differentiable(o(lift, o(f, drop)), within(at(lift(x)), IMAGE(lift, s)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_differentiable_on(f, s) == differentiable_on(o(lift, o(f, drop)), IMAGE(lift, s))
+      #|  has_real_derivative((f : (Real) -> Real), (f' : Real), within(atreal((a : Real)), (s : (Real) -> Bool))) == has_complex_derivative(o(Cx, o(f, Re)), Cx(f'), within(at(Cx(a)), {(z : Cart[Real, Tybit0[Unit]]) | real(z) && IN(Re(z), s)}))
+      #|  has_real_derivative((f : (Real) -> Real), (f' : Real), atreal((a : Real))) == has_complex_derivative(o(Cx, o(f, Re)), Cx(f'), within(at(Cx(a)), real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_differentiable_on(f, s) == (\226\136\128 x : Real, IN(x, s) \226\134\146 real_differentiable(f, within(atreal(x), s)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_open(s) \226\134\146 real_differentiable_on(f, s) == (\226\136\128 x : Real, IN(x, s) \226\134\146 (\226\136\131 f' : Real, has_real_derivative(f, f', atreal(x))))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_differentiable_on(f, s) && IN(x, s) \226\134\146 real_differentiable(f, within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_differentiable_on(f, s) && real_open(s) && IN(x, s) \226\134\146 real_differentiable(f, atreal(x))
+      #|  Re((w : Cart[Real, Tybit0[Unit]]))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (d : Real)
+      #|  (h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : Real, \226\136\128 h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Real) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN((x : Real), s) && has_complex_derivative(h, Cx(g), within(at(Cx(x)), {(z : Cart[Real, Tybit0[Unit]]) | real(z) && IN(Re(z), s)})) && (\226\136\128 y : Real, IN(y, s) && abs(y - x) < d \226\134\146 h(Cx(y)) == Cx(f(y))) \226\134\146 has_real_derivative(f, g, within(atreal(x), s))
+      #|  {(x : _) | (r : (_) -> Bool)(x)} == r
+      #|  (d : Real)
+      #|  (h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : Real, \226\136\128 h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 d : Real, real_of_num(0) < d && has_complex_derivative(h, Cx(g), within(at(Cx((x : Real))), real)) && (\226\136\128 y : Real, abs(y - x) < d \226\134\146 h(Cx(y)) == Cx(f(y))) \226\134\146 has_real_derivative(f, g, atreal(x))
+      #|  real_of_num(1)
+      #|  (h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : Real, \226\136\128 h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Real) -> Bool, IN((x : Real), s) && has_complex_derivative(h, Cx(g), within(at(Cx(x)), {(z : Cart[Real, Tybit0[Unit]]) | real(z) && IN(Re(z), s)})) && (\226\136\128 y : Real, IN(y, s) \226\134\146 h(Cx(y)) == Cx(f(y))) \226\134\146 has_real_derivative(f, g, within(atreal(x), s))
+      #|  {(x : _) | (r : (_) -> Bool)(x)} == r
+      #|  (h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : Real, \226\136\128 h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], has_complex_derivative(h, Cx(g), within(at(Cx((x : Real))), real)) && (\226\136\128 y : Real, h(Cx(y)) == Cx(f(y))) \226\134\146 has_real_derivative(f, g, atreal(x))
+      #|  real_of_num(1)
+      #|  (y : Cart[Real, Tybit0[Unit]]) => ((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(y) - f(Cx((x : Real)))) / (y - Cx(x))
+      #|  within(at(Cx((x : Real))), real)
+      #|  real((f' : Cart[Real, Tybit0[Unit]]))
       #|  real
-      #|  f:complex->complex
-      #|  forall f f' x.\n        (f has_complex_derivative f') (at (Cx x)) /\\\n        (forall z. real z ==> real(f z))\n        ==> ((Re o f o Cx) has_real_derivative (Re f')) (atreal x)
-      #|  forall f x. f complex_differentiable at (Cx x) /\\\n         (forall z. real z ==> real(f z))\n         ==> (Re o f o Cx) real_differentiable (atreal x)
-      #|  ~(w = z) ==> x - (x * (w - z)) / (w - z) = &0
-      #|  (z + a) - (z + b * (w - w)):real = a
-      #|  \\w. if w = z then f':real else (f(w) - f(z)) / (w - z)
-      #|  w' - z':real = a <=> w' = z' + a
-      #|  forall f f' z.\n        (f has_real_derivative f') (atreal z) <=>\n        ?g. (forall w. f(w) - f(z) = g(w) * (w - z)) /\\\n            g real_continuous atreal z /\\ g(z) = f'
-      #|  ~(w = z) ==> x - (x * (w - z)) / (w - z) = &0
-      #|  (z + a) - (z + b * (w - w)):real = a
-      #|  \\w. if w = z then f':real else (f(w) - f(z)) / (w - z)
-      #|  w' - z':real = a <=> w' = z' + a
-      #|  forall f f' z s.\n        (f has_real_derivative f') (atreal z within s) <=>\n        ?g. (forall w. f(w) - f(z) = g(w) * (w - z)) /\\\n            g real_continuous (atreal z within s) /\\ g(z) = f'
-      #|  forall f z. f real_differentiable atreal z <=>\n         ?g. (forall w. f(w) - f(z) = g(w) * (w - z)) /\\ g real_continuous atreal z
-      #|  forall f z s.\n      f real_differentiable (atreal z within s) <=>\n      ?g. (forall w. f(w) - f(z) = g(w) * (w - z)) /\\\n          g real_continuous (atreal z within s)
-      #|  forall s. is_realinterval s <=> convex(IMAGE lift s)
-      #|  forall s. is_realinterval s <=> connected(IMAGE lift s)
-      #|  forall s x. is_realinterval s /\\ x IN s\n         ==> (trivial_limit(atreal x within s) <=> s = {x})
-      #|  forall s. is_realinterval s <=>\n        s = {} \\/\n        s = (:real) \\/\n        (?a. s = {x | a < x}) \\/\n        (?a. s = {x | a <= x}) \\/\n        (?b. s = {x | x <= b}) \\/\n        (?b. s = {x | x < b}) \\/\n        (?a b. s = {x | a < x /\\ x < b}) \\/\n        (?a b. s = {x | a < x /\\ x <= b}) \\/\n        (?a b. s = {x | a <= x /\\ x < b}) \\/\n        (?a b. s = {x | a <= x /\\ x <= b})
-      #|  is_realinterval {} /\\\n   is_realinterval (:real) /\\\n   (forall a. is_realinterval {x | a < x}) /\\\n   (forall a. is_realinterval {x | a <= x}) /\\\n   (forall b. is_realinterval {x | x < b}) /\\\n   (forall b. is_realinterval {x | x <= b}) /\\\n   (forall a b. is_realinterval {x | a < x /\\ x < b}) /\\\n   (forall a b. is_realinterval {x | a < x /\\ x <= b}) /\\\n   (forall a b. is_realinterval {x | a <= x /\\ x < b}) /\\\n   (forall a b. is_realinterval {x | a <= x /\\ x <= b})
-      #|  forall s. is_realinterval s <=>\n       forall x y u v. x IN s /\\ y IN s /\\ &0 <= u /\\ &0 <= v /\\ u + v = &1\n                 ==> (u * x + v * y) IN s
-      #|  forall s. is_realinterval s <=>\n       forall x y u. x IN s /\\ y IN s /\\ &0 <= u /\\ u <= &1\n                 ==> ((&1 - u) * x + u * y) IN s
-      #|  (x + y) / &2 = inv(&2) * x + inv(&2) * y
-      #|  forall s x y. is_realinterval s /\\ x IN s /\\ y IN s ==> ((x + y) / &2) IN s
-      #|  IMAGE (\\x. x) s = s
-      #|  lift o Re
-      #|  Cx o drop
-      #|  forall s. is_realinterval s <=> convex {z | real z /\\ Re z IN s}
-      #|  forall a b m c.\n         IMAGE (\\x. m * x + c) (real_interval[a,b]) =\n         (if real_interval[a,b] = {}\n          then {}\n          else if &0 <= m\n               then real_interval[m * a + c,m * b + c]\n               else real_interval[m * b + c,m * a + c])
-      #|  m * x = m * x + &0
-      #|  forall a b m.\n         IMAGE (\\x. m * x) (real_interval[a,b]) =\n         (if real_interval[a,b] = {}\n          then {}\n          else if &0 <= m\n               then real_interval[m * a,m * b]\n               else real_interval[m * b,m * a])
-      #|  c + x:real = y <=> x = y - c
-      #|  (forall c a b. real_interval[c + a,c + b] =\n            IMAGE (\\x. c + x) (real_interval[a,b])) /\\\n   (forall c a b. real_interval(c + a,c + b) =\n            IMAGE (\\x. c + x) (real_interval(a,b)))
-      #|  f real_continuous net <=> (Cx o f) continuous net
-      #|  f real_continuous net <=> (lift o f) continuous net
-      #|  f real_continuous (atreal x) <=> (lift o f o drop) continuous (at(lift x))
-      #|  f real_continuous (atreal x within s) <=>\n   (lift o f o drop) continuous (at(lift x) within IMAGE lift s)
-      #|  trivial_limit(at(Cx x) within (real INTER IMAGE Cx s))
-      #|  f real_continuous (atreal x within s) <=>\n       (Cx o f o Re) continuous (at (Cx x) within (real INTER IMAGE Cx s))
-      #|  trivial_limit(at(Cx x) within real)
-      #|  f real_continuous (atreal x) <=>\n       (Cx o f o Re) continuous (at (Cx x) within real)
-      #|  forall f x s. f continuous (atreal x within s) <=>\n           (f o drop) continuous (at (lift x) within IMAGE lift s)
-      #|  forall f x. f continuous (atreal x) <=> (f o drop) continuous (at (lift x))
-      #|  forall f x s. f real_continuous (atreal x within s) <=>\n           (f o drop) real_continuous (at (lift x) within IMAGE lift s)
-      #|  forall f x. f real_continuous (atreal x) <=>\n         (f o drop) real_continuous (at (lift x))
-      #|  forall f f' x s. (f has_real_derivative f') (atreal x within s)\n              ==> f real_continuous (atreal x within s)
-      #|  forall f x s. f real_differentiable (atreal x within s)\n           ==> f real_continuous (atreal x within s)
-      #|  forall f f' x. (f has_real_derivative f') (atreal x)\n            ==> f real_continuous (atreal x)
-      #|  forall f x. f real_differentiable atreal x ==> f real_continuous atreal x
-      #|  forall f s. f real_differentiable_on s ==> f real_continuous_on s
-      #|  forall i a. 1 <= i /\\ i <= dimindex(:N)\n         ==> (\\x:real^N. x$i) real_continuous at a
-      #|  forall a z f:real^N->real.\n    f real_continuous at (a + z) <=> (\\x. f(a + x)) real_continuous at z
-      #|  forall h:real^N->real^N z f:real^N->real.\n        linear h /\\ (forall x. norm(h x) = norm x)\n        ==> (f real_continuous at (h z) <=> (\\x. f(h x)) real_continuous at z)
-      #|  forall z. ~(real z /\\ &0 <= Re z) ==> Arg real_continuous (at z)
-      #|  forall f a s t. eventually (\\x. x IN t ==> x IN s) (at a) /\\\n             f real_continuous (at a within s)\n             ==> f real_continuous (at a within t)
-      #|  forall f a s t. eventually (\\x. x IN t ==> x IN s) (atreal a) /\\\n             f continuous (atreal a within s)\n             ==> f continuous (atreal a within t)
-      #|  forall f a s t. eventually (\\x. x IN t ==> x IN s) (atreal a) /\\\n             f real_continuous (atreal a within s)\n             ==> f real_continuous (atreal a within t)
-      #|  forall f s t x. (f has_real_derivative f') (atreal x within s) /\\ t SUBSET s\n             ==> (f has_real_derivative f') (atreal x within t)
-      #|  forall f s t. f real_differentiable_on s /\\ t SUBSET s\n           ==> f real_differentiable_on t
-      #|  forall f s t. f real_differentiable (atreal x within s) /\\ t SUBSET s\n           ==> f real_differentiable (atreal x within t)
-      #|  forall f f' x s. (f has_real_derivative f') (atreal x)\n              ==> (f has_real_derivative f') (atreal x within s)
-      #|  forall f f' a s.\n         a IN s /\\ real_open s\n         ==> ((f has_real_derivative f') (atreal a within s) <=>\n              (f has_real_derivative f') (atreal a))
-      #|  forall f s z. f real_differentiable (atreal z)\n           ==> f real_differentiable (atreal z within s)
-      #|  dist(a,b) < d ==> z <= norm(a - b) ==> z < d
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 f' : Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, has_complex_derivative(f, f', at(Cx(x))) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], real(z) \226\134\146 real(f(z))) \226\134\146 has_real_derivative(o(Re, o(f, Cx)), Re(f'), atreal(x))
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, complex_differentiable(f, at(Cx(x))) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], real(z) \226\134\146 real(f(z))) \226\134\146 real_differentiable(o(Re, o(f, Cx)), atreal(x))
+      #|  !((w : Real) == (z : Real)) \226\134\146 (x : Real) - x * (w - z) / (w - z) == real_of_num(0)
+      #|  (z : Real) + (a : Real) - (z + (b : Real) * ((w : Real) - w)) == a
+      #|  (w : Real) => if w == (z : Real) { (f' : Real) } else { ((f : (Real) -> Real)(w) - f(z)) / (w - z) }
+      #|  ((w' : Real) - (z' : Real) == (a : Real)) == (w' == z' + a)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 z : Real, has_real_derivative(f, f', atreal(z)) == (\226\136\131 g : (Real) -> Real, (\226\136\128 w : Real, f(w) - f(z) == g(w) * (w - z)) && real_continuous(g, atreal(z)) && g(z) == f')
+      #|  !((w : Real) == (z : Real)) \226\134\146 (x : Real) - x * (w - z) / (w - z) == real_of_num(0)
+      #|  (z : Real) + (a : Real) - (z + (b : Real) * ((w : Real) - w)) == a
+      #|  (w : Real) => if w == (z : Real) { (f' : Real) } else { ((f : (Real) -> Real)(w) - f(z)) / (w - z) }
+      #|  ((w' : Real) - (z' : Real) == (a : Real)) == (w' == z' + a)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 z : Real, \226\136\128 s : (Real) -> Bool, has_real_derivative(f, f', within(atreal(z), s)) == (\226\136\131 g : (Real) -> Real, (\226\136\128 w : Real, f(w) - f(z) == g(w) * (w - z)) && real_continuous(g, within(atreal(z), s)) && g(z) == f')
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 z : Real, real_differentiable(f, atreal(z)) == (\226\136\131 g : (Real) -> Real, (\226\136\128 w : Real, f(w) - f(z) == g(w) * (w - z)) && real_continuous(g, atreal(z)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 z : Real, \226\136\128 s : (Real) -> Bool, real_differentiable(f, within(atreal(z), s)) == (\226\136\131 g : (Real) -> Real, (\226\136\128 w : Real, f(w) - f(z) == g(w) * (w - z)) && real_continuous(g, within(atreal(z), s)))
+      #|  \226\136\128 s : (Real) -> Bool, is_realinterval(s) == convex(IMAGE(lift, s))
+      #|  \226\136\128 s : (Real) -> Bool, is_realinterval(s) == connected(IMAGE(lift, s))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, is_realinterval(s) && IN(x, s) \226\134\146 trivial_limit(within(atreal(x), s)) == (s == {x})
+      #|  \226\136\128 s : (Real) -> Bool, is_realinterval(s) == (s == {} || s == UNIV || (\226\136\131 a : Real, s == {(x : Real) | a < x}) || (\226\136\131 a : Real, s == {(x : Real) | a <= x}) || (\226\136\131 b : Real, s == {(x : Real) | x <= b}) || (\226\136\131 b : Real, s == {(x : Real) | x < b}) || (\226\136\131 a : Real, \226\136\131 b : Real, s == {(x : Real) | a < x && x < b}) || (\226\136\131 a : Real, \226\136\131 b : Real, s == {(x : Real) | a < x && x <= b}) || (\226\136\131 a : Real, \226\136\131 b : Real, s == {(x : Real) | a <= x && x < b}) || (\226\136\131 a : Real, \226\136\131 b : Real, s == {(x : Real) | a <= x && x <= b}))
+      #|  is_realinterval({}) && is_realinterval(UNIV) && (\226\136\128 a : Real, is_realinterval({(x : Real) | a < x})) && (\226\136\128 a : Real, is_realinterval({(x : Real) | a <= x})) && (\226\136\128 b : Real, is_realinterval({(x : Real) | x < b})) && (\226\136\128 b : Real, is_realinterval({(x : Real) | x <= b})) && (\226\136\128 a : Real, \226\136\128 b : Real, is_realinterval({(x : Real) | a < x && x < b})) && (\226\136\128 a : Real, \226\136\128 b : Real, is_realinterval({(x : Real) | a < x && x <= b})) && (\226\136\128 a : Real, \226\136\128 b : Real, is_realinterval({(x : Real) | a <= x && x < b})) && (\226\136\128 a : Real, \226\136\128 b : Real, is_realinterval({(x : Real) | a <= x && x <= b}))
+      #|  \226\136\128 s : (Real) -> Bool, is_realinterval(s) == (\226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 u : Real, \226\136\128 v : Real, IN(x, s) && IN(y, s) && real_of_num(0) <= u && real_of_num(0) <= v && u + v == real_of_num(1) \226\134\146 IN(u * x + v * y, s))
+      #|  \226\136\128 s : (Real) -> Bool, is_realinterval(s) == (\226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 u : Real, IN(x, s) && IN(y, s) && real_of_num(0) <= u && u <= real_of_num(1) \226\134\146 IN((real_of_num(1) - u) * x + u * y, s))
+      #|  ((x : Real) + (y : Real)) / real_of_num(2) == inv(real_of_num(2)) * x + inv(real_of_num(2)) * y
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, \226\136\128 y : Real, is_realinterval(s) && IN(x, s) && IN(y, s) \226\134\146 IN((x + y) / real_of_num(2), s)
+      #|  IMAGE((x : _) => x, (s : (_) -> Bool)) == s
+      #|  o(lift, Re)
+      #|  o(Cx, drop)
+      #|  \226\136\128 s : (Real) -> Bool, is_realinterval(s) == convex({(z : Cart[Real, Tybit0[Unit]]) | real(z) && IN(Re(z), s)})
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Real, \226\136\128 c : Real, IMAGE((x : Real) => m * x + c, real_interval([(a, b)])) == (if real_interval([(a, b)]) == {} { {} } else { if real_of_num(0) <= m { real_interval([(m * a + c, m * b + c)]) } else { real_interval([(m * b + c, m * a + c)]) } })
+      #|  (m : Real) * (x : Real) == m * x + real_of_num(0)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Real, IMAGE((x : Real) => m * x, real_interval([(a, b)])) == (if real_interval([(a, b)]) == {} { {} } else { if real_of_num(0) <= m { real_interval([(m * a, m * b)]) } else { real_interval([(m * b, m * a)]) } })
+      #|  ((c : Real) + (x : Real) == (y : Real)) == (x == y - c)
+      #|  (\226\136\128 c : Real, \226\136\128 a : Real, \226\136\128 b : Real, real_interval([(c + a, c + b)]) == IMAGE((x : Real) => c + x, real_interval([(a, b)]))) && (\226\136\128 c : Real, \226\136\128 a : Real, \226\136\128 b : Real, real_interval((c + a, c + b)) == IMAGE((x : Real) => c + x, real_interval((a, b))))
+      #|  real_continuous((f : (_) -> Real), (net : Net[_])) == continuous(o(Cx, f), net)
+      #|  real_continuous((f : (_) -> Real), (net : Net[_])) == continuous(o(lift, f), net)
+      #|  real_continuous((f : (Real) -> Real), atreal((x : Real))) == continuous(o(lift, o(f, drop)), at(lift(x)))
+      #|  real_continuous((f : (Real) -> Real), within(atreal((x : Real)), (s : (Real) -> Bool))) == continuous(o(lift, o(f, drop)), within(at(lift(x)), IMAGE(lift, s)))
+      #|  trivial_limit(within(at(Cx((x : Real))), INTER(real, IMAGE(Cx, (s : (Real) -> Bool)))))
+      #|  real_continuous((f : (Real) -> Real), within(atreal((x : Real)), (s : (Real) -> Bool))) == continuous(o(Cx, o(f, Re)), within(at(Cx(x)), INTER(real, IMAGE(Cx, s))))
+      #|  trivial_limit(within(at(Cx((x : Real))), real))
+      #|  real_continuous((f : (Real) -> Real), atreal((x : Real))) == continuous(o(Cx, o(f, Re)), within(at(Cx(x)), real))
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, continuous(f, within(atreal(x), s)) == continuous(o(f, drop), within(at(lift(x)), IMAGE(lift, s)))
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 x : Real, continuous(f, atreal(x)) == continuous(o(f, drop), at(lift(x)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, real_continuous(f, within(atreal(x), s)) == real_continuous(o(f, drop), within(at(lift(x)), IMAGE(lift, s)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, real_continuous(f, atreal(x)) == real_continuous(o(f, drop), at(lift(x)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, has_real_derivative(f, f', within(atreal(x), s)) \226\134\146 real_continuous(f, within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, real_differentiable(f, within(atreal(x), s)) \226\134\146 real_continuous(f, within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 x : Real, has_real_derivative(f, f', atreal(x)) \226\134\146 real_continuous(f, atreal(x))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, real_differentiable(f, atreal(x)) \226\134\146 real_continuous(f, atreal(x))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_differentiable_on(f, s) \226\134\146 real_continuous_on(f, s)
+      #|  \226\136\128 i : Num, \226\136\128 a : Cart[Real, N], 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (real_continuous : ((Cart[Real, N]) -> Real, Net[Cart[Real, N]]) -> Bool)((x : Cart[Real, N]) => (op_dollar : (Cart[Real, N], Num) -> Real)(x, i), (at : (Cart[Real, N]) -> Net[Cart[Real, N]])(a))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 z : Cart[Real, N], \226\136\128 f : (Cart[Real, N]) -> Real, real_continuous(f, at(a + z)) == real_continuous((x : Cart[Real, N]) => f(a + x), at(z))
+      #|  \226\136\128 h : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 z : Cart[Real, N], \226\136\128 f : (Cart[Real, N]) -> Real, linear(h) && (\226\136\128 x : Cart[Real, N], norm(h(x)) == norm(x)) \226\134\146 real_continuous(f, at(h(z))) == real_continuous((x : Cart[Real, N]) => f(h(x)), at(z))
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], !(real(z) && real_of_num(0) <= Re(z)) \226\134\146 real_continuous(Arg, at(z))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, eventually((x : Cart[Real, _]) => IN(x, t) \226\134\146 IN(x, s), at(a)) && real_continuous(f, within(at(a), s)) \226\134\146 real_continuous(f, within(at(a), t))
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, eventually((x : Real) => IN(x, t) \226\134\146 IN(x, s), atreal(a)) && continuous(f, within(atreal(a), s)) \226\134\146 continuous(f, within(atreal(a), t))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, eventually((x : Real) => IN(x, t) \226\134\146 IN(x, s), atreal(a)) && real_continuous(f, within(atreal(a), s)) \226\134\146 real_continuous(f, within(atreal(a), t))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 x : Real, has_real_derivative(f, (f' : Real), within(atreal(x), s)) && SUBSET(t, s) \226\134\146 has_real_derivative(f, f', within(atreal(x), t))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_differentiable_on(f, s) && SUBSET(t, s) \226\134\146 real_differentiable_on(f, t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_differentiable(f, within(atreal((x : Real)), s)) && SUBSET(t, s) \226\134\146 real_differentiable(f, within(atreal(x), t))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, has_real_derivative(f, f', atreal(x)) \226\134\146 has_real_derivative(f, f', within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, IN(a, s) && real_open(s) \226\134\146 has_real_derivative(f, f', within(atreal(a), s)) == has_real_derivative(f, f', atreal(a))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 z : Real, real_differentiable(f, atreal(z)) \226\134\146 real_differentiable(f, within(atreal(z), s))
+      #|  dist(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))) < (d : Real) \226\134\146 (z : Real) <= norm(a - b) \226\134\146 z < d
       #|  :real
-      #|  d:real
-      #|  a /\\ b /\\ c /\\ d ==> e <=> a /\\ b /\\ c ==> d ==> e
-      #|  forall f f' g x s d.\n       &0 < d /\\ x IN s /\\\n       (forall x'. x' IN s /\\ abs(x' - x) < d ==> f x' = g x') /\\\n       (f has_real_derivative f') (atreal x within s)\n       ==> (g has_real_derivative f') (atreal x within s)
-      #|  forall f f' g x d.\n       &0 < d /\\ (forall x'. abs(x' - x) < d ==> f x' = g x') /\\\n       (f has_real_derivative f') (atreal x)\n       ==> (g has_real_derivative f') (atreal x)
-      #|  {z | real z /\\ Re z IN s}
-      #|  Cx o f o Re
-      #|  forall f s.\n        is_realinterval s /\\\n        (forall x. x IN s ==> (f has_real_derivative (&0)) (atreal x within s))\n        ==> ?c. forall x. x IN s ==> f(x) = c
-      #|  forall f s c a.\n        is_realinterval s /\\ a IN s /\\ f a = c /\\\n        (forall x. x IN s ==> (f has_real_derivative (&0)) (atreal x within s))\n        ==> forall x. x IN s ==> f(x) = c
-      #|  Cx o (g o f) o Re = (Cx o g o Re) o (Cx o f o Re)
-      #|  forall f g f' g' x s.\n        (f has_real_derivative f') (atreal x within s) /\\\n        (g has_real_derivative g') (atreal (f x) within (IMAGE f s))\n        ==> ((g o f) has_real_derivative (g' * f'))(atreal x within s)
-      #|  forall f g f' g' x.\n        (f has_real_derivative f') (atreal x) /\\\n        (g has_real_derivative g') (atreal (f x))\n        ==> ((g o f) has_real_derivative (g' * f')) (atreal x)
-      #|  forall P f g.\n        (forall x. P x ==> (g has_real_derivative g'(x)) (atreal x))\n        ==> (forall x s. (f has_real_derivative f') (atreal x within s) /\\ P(f x)\n                   ==> ((\\x. g(f x)) has_real_derivative f' * g'(f x))\n                       (atreal x within s)) /\\\n            (forall x. (f has_real_derivative f') (atreal x) /\\ P(f x)\n                 ==> ((\\x. g(f x)) has_real_derivative f' * g'(f x))\n                     (atreal x))
-      #|  \\x:real. T
-      #|  forall f g. (forall x. (g has_real_derivative g'(x)) (atreal x))\n         ==> (forall x s. (f has_real_derivative f') (atreal x within s)\n                    ==> ((\\x. g(f x)) has_real_derivative f' * g'(f x))\n                        (atreal x within s)) /\\\n             (forall x. (f has_real_derivative f') (atreal x)\n                  ==> ((\\x. g(f x)) has_real_derivative f' * g'(f x))\n                      (atreal x))
-      #|  vec 1:real^1
-      #|  forall f z f' f''.\n        (f has_real_derivative f') (atreal z) /\\\n        (f has_real_derivative f'') (atreal z)\n        ==> f' = f''
-      #|  forall f f' x. (f has_real_derivative f') (atreal x)\n            ==> real_derivative f x = f'
-      #|  forall f x. (f has_real_derivative (real_derivative f x)) (atreal x) <=>\n         f real_differentiable atreal x
-      #|  forall f f' c x s.\n        (f has_real_derivative f') (atreal x within s)\n        ==> ((\\x. c * f(x)) has_real_derivative (c * f')) (atreal x within s)
-      #|  forall f f' c x.\n        (f has_real_derivative f') (atreal x)\n        ==> ((\\x. c * f(x)) has_real_derivative (c * f')) (atreal x)
-      #|  forall f f' c x s.\n        (f has_real_derivative f') (atreal x within s)\n        ==> ((\\x. f(x) * c) has_real_derivative (f' * c)) (atreal x within s)
-      #|  forall f f' c x.\n        (f has_real_derivative f') (atreal x)\n        ==> ((\\x. f(x) * c) has_real_derivative (f' * c)) (atreal x)
-      #|  forall f f' c x s.\n        (f has_real_derivative f') (atreal x within s)\n        ==> ((\\x. f(x) / c) has_real_derivative (f' / c)) (atreal x within s)
-      #|  forall f f' c x.\n        (f has_real_derivative f') (atreal x)\n        ==> ((\\x. f(x) / c) has_real_derivative (f' / c)) (atreal x)
-      #|  x - (a + &1 * (x - a)) = &0
-      #|  forall net. ((\\x. x) has_real_derivative &1) net
-      #|  forall c net. ((\\x. c) has_real_derivative &0) net
-      #|  a * (--b - (--c + --d * e:real)) = --(a * (b - (c + d * e)))
-      #|  forall f f' net. (f has_real_derivative f') net\n            ==> ((\\x. --(f(x))) has_real_derivative (--f')) net
-      #|  (fx - (fa + f' * (x - a))) + (gx - (ga + g' * (x - a))):real =\n    (fx + gx) - ((fa + ga) + (f' + g') * (x - a))
-      #|  forall f f' g g' net.\n        (f has_real_derivative f') net /\\ (g has_real_derivative g') net\n        ==> ((\\x. f(x) + g(x)) has_real_derivative (f' + g')) net
-      #|  forall f f' g g' net.\n        (f has_real_derivative f') net /\\ (g has_real_derivative g') net\n        ==> ((\\x. f(x) - g(x)) has_real_derivative (f' - g')) net
-      #|  forall f f' g g' x s.\n        (f has_real_derivative f') (atreal x within s) /\\\n        (g has_real_derivative g') (atreal x within s)\n        ==> ((\\x. f(x) * g(x)) has_real_derivative\n             (f(x) * g' + f' * g(x))) (atreal x within s)
-      #|  forall f f' g g' x.\n        (f has_real_derivative f') (atreal x) /\\\n        (g has_real_derivative g') (atreal x)\n        ==> ((\\x. f(x) * g(x)) has_real_derivative\n             (f(x) * g' + f' * g(x))) (atreal x)
-      #|  n:num
-      #|  forall f f' x s n. (f has_real_derivative f') (atreal x within s)\n                ==> ((\\x. f(x) pow n) has_real_derivative\n                     (&n * f(x) pow (n - 1) * f')) (atreal x within s)
-      #|  forall f f' x n. (f has_real_derivative f') (atreal x)\n              ==> ((\\x. f(x) pow n) has_real_derivative\n                   (&n * f(x) pow (n - 1) * f')) (atreal x)
-      #|  inv:complex->complex
-      #|  forall x. ~(x = &0)\n         ==> ((inv) has_real_derivative (--inv(x pow 2))) (atreal x)
-      #|  ~(g = &0) ==> --f / g pow 2 = --inv(g pow 2) * f
-      #|  forall f f' x s. (f has_real_derivative f') (atreal x within s) /\\\n              ~(f x = &0)\n              ==> ((\\x. inv(f(x))) has_real_derivative (--f' / f(x) pow 2))\n                  (atreal x within s)
-      #|  forall f f' x. (f has_real_derivative f') (atreal x) /\\\n            ~(f x = &0)\n            ==> ((\\x. inv(f(x))) has_real_derivative (--f' / f(x) pow 2))\n                (atreal x)
-      #|  (f has_real_derivative f') (atreal x within s)
-      #|  forall f f' g g' x s.\n        (f has_real_derivative f') (atreal x within s) /\\\n        (g has_real_derivative g') (atreal x within s) /\\\n        ~(g(x) = &0)\n        ==> ((\\x. f(x) / g(x)) has_real_derivative\n             (f' * g(x) - f(x) * g') / g(x) pow 2) (atreal x within s)
-      #|  forall f f' g g' x.\n        (f has_real_derivative f') (atreal x) /\\\n        (g has_real_derivative g') (atreal x) /\\\n        ~(g(x) = &0)\n        ==> ((\\x. f(x) / g(x)) has_real_derivative\n             (f' * g(x) - f(x) * g') / g(x) pow 2) (atreal x)
-      #|  forall f net s.\n         FINITE s /\\ (forall a. a IN s ==> (f a has_real_derivative f' a) net)\n         ==> ((\\x. sum s (\\a. f a x)) has_real_derivative (sum s f'))\n             net
-      #|  forall c net. (\\z. c) real_differentiable net
-      #|  forall net. (\\z. z) real_differentiable net
-      #|  forall f net.\n        f real_differentiable net\n        ==> (\\z. --(f z)) real_differentiable net
-      #|  forall f g net.\n        f real_differentiable net /\\\n        g real_differentiable net\n        ==> (\\z. f z + g z) real_differentiable net
-      #|  forall f g net.\n        f real_differentiable net /\\\n        g real_differentiable net\n        ==> (\\z. f z - g z) real_differentiable net
-      #|  forall f z s.\n        f real_differentiable (atreal z within s) /\\ ~(f z = &0)\n        ==> (\\z. inv(f z)) real_differentiable (atreal z within s)
-      #|  forall f g z s.\n        f real_differentiable (atreal z within s) /\\\n        g real_differentiable (atreal z within s)\n        ==> (\\z. f z * g z) real_differentiable (atreal z within s)
-      #|  forall f g z s.\n        f real_differentiable (atreal z within s) /\\\n        g real_differentiable (atreal z within s) /\\\n        ~(g z = &0)\n        ==> (\\z. f z / g z) real_differentiable (atreal z within s)
-      #|  forall f n z s.\n        f real_differentiable (atreal z within s)\n        ==> (\\z. f z pow n) real_differentiable (atreal z within s)
-      #|  forall f g x s d.\n        &0 < d /\\\n        x IN s /\\\n        (forall x'. x' IN s /\\ abs(x' - x) < d ==> f x' = g x') /\\\n        f real_differentiable (atreal x within s)\n        ==> g real_differentiable (atreal x within s)
-      #|  &1
-      #|  f:real->real
-      #|  forall f g s. (forall x. x IN s ==> f x = g x) /\\ f real_differentiable_on s\n           ==> g real_differentiable_on s
-      #|  forall f g s. (forall x. x IN s ==> f x = g x)\n           ==> (f real_differentiable_on s <=> g real_differentiable_on s)
-      #|  forall f z.\n        f real_differentiable atreal z /\\ ~(f z = &0)\n        ==> (\\z. inv(f z)) real_differentiable atreal z
-      #|  forall f g z.\n        f real_differentiable atreal z /\\\n        g real_differentiable atreal z\n        ==> (\\z. f z * g z) real_differentiable atreal z
-      #|  forall f g z.\n        f real_differentiable atreal z /\\\n        g real_differentiable atreal z /\\\n        ~(g z = &0)\n        ==> (\\z. f z / g z) real_differentiable atreal z
-      #|  forall f n z.\n        f real_differentiable atreal z\n        ==> (\\z. f z pow n) real_differentiable atreal z
-      #|  forall f g x d.\n        &0 < d /\\\n        (forall x'. abs(x' - x) < d ==> f x' = g x') /\\\n        f real_differentiable atreal x\n        ==> g real_differentiable atreal x
-      #|  forall f g x s.\n         f real_differentiable (atreal x within s) /\\\n         g real_differentiable (atreal (f x) within IMAGE f s)\n         ==> (g o f) real_differentiable (atreal x within s)
-      #|  forall f g x.\n         f real_differentiable (atreal x) /\\\n         g real_differentiable (atreal (f x))\n         ==> (g o f) real_differentiable (atreal x)
-      #|  forall c s. (\\z. c) real_differentiable_on s
-      #|  forall s. (\\z. z) real_differentiable_on s
-      #|  forall f g s. f real_differentiable_on s /\\ g real_differentiable_on (IMAGE f s)\n           ==> (g o f) real_differentiable_on s
-      #|  forall f s. f real_differentiable_on s ==> (\\z. --(f z)) real_differentiable_on s
-      #|  forall f g s.\n        f real_differentiable_on s /\\ g real_differentiable_on s\n        ==> (\\z. f z + g z) real_differentiable_on s
-      #|  forall f g s.\n        f real_differentiable_on s /\\ g real_differentiable_on s\n        ==> (\\z. f z - g z) real_differentiable_on s
-      #|  forall f g s.\n        f real_differentiable_on s /\\ g real_differentiable_on s\n        ==> (\\z. f z * g z) real_differentiable_on s
-      #|  forall f s. f real_differentiable_on s /\\ (forall z. z IN s ==> ~(f z = &0))\n         ==> (\\z. inv(f z)) real_differentiable_on s
-      #|  forall f g s.\n        f real_differentiable_on s /\\ g real_differentiable_on s /\\\n        (forall z. z IN s ==> ~(g z = &0))\n        ==> (\\z. f z / g z) real_differentiable_on s
-      #|  forall f s n. f real_differentiable_on s\n           ==> (\\z. (f z) pow n) real_differentiable_on s
-      #|  forall f s k. FINITE k /\\ (forall a. a IN k ==> (f a) real_differentiable_on s)\n           ==> (\\x. sum k (\\a. f a x)) real_differentiable_on s
+      #|  (d : Real)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) \226\134\146 (e : Bool)) == (a && b && c \226\134\146 d \226\134\146 e)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 g : (Real) -> Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Real, IN(x', s) && abs(x' - x) < d \226\134\146 f(x') == g(x')) && has_real_derivative(f, f', within(atreal(x), s)) \226\134\146 has_real_derivative(g, f', within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 g : (Real) -> Real, \226\136\128 x : Real, \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Real, abs(x' - x) < d \226\134\146 f(x') == g(x')) && has_real_derivative(f, f', atreal(x)) \226\134\146 has_real_derivative(g, f', atreal(x))
+      #|  {(z : Cart[Real, Tybit0[Unit]]) | real(z) && IN(Re(z), (s : (Real) -> Bool))}
+      #|  o(Cx, o((f : (Real) -> Real), Re))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 has_real_derivative(f, real_of_num(0), within(atreal(x), s))) \226\134\146 (\226\136\131 c : Real, \226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == c)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, \226\136\128 a : Real, is_realinterval(s) && IN(a, s) && f(a) == c && (\226\136\128 x : Real, IN(x, s) \226\134\146 has_real_derivative(f, real_of_num(0), within(atreal(x), s))) \226\134\146 (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == c)
+      #|  o(Cx, o(o((g : (Real) -> Real), (f : (Real) -> Real)), Re)) == o(o(Cx, o(g, Re)), o(Cx, o(f, Re)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 g' : Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, has_real_derivative(f, f', within(atreal(x), s)) && has_real_derivative(g, g', within(atreal(f(x)), IMAGE(f, s))) \226\134\146 has_real_derivative(o(g, f), g' * f', within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 g' : Real, \226\136\128 x : Real, has_real_derivative(f, f', atreal(x)) && has_real_derivative(g, g', atreal(f(x))) \226\134\146 has_real_derivative(o(g, f), g' * f', atreal(x))
+      #|  \226\136\128 P : (Real) -> Bool, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, (\226\136\128 x : Real, P(x) \226\134\146 has_real_derivative(g, (g' : (Real) -> Real)(x), atreal(x))) \226\134\146 (\226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, has_real_derivative(f, (f' : Real), within(atreal(x), s)) && P(f(x)) \226\134\146 has_real_derivative((x : Real) => g(f(x)), f' * g'(f(x)), within(atreal(x), s))) && (\226\136\128 x : Real, has_real_derivative(f, f', atreal(x)) && P(f(x)) \226\134\146 has_real_derivative((x : Real) => g(f(x)), f' * g'(f(x)), atreal(x)))
+      #|  (x : Real) => true
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, (\226\136\128 x : Real, has_real_derivative(g, (g' : (Real) -> Real)(x), atreal(x))) \226\134\146 (\226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, has_real_derivative(f, (f' : Real), within(atreal(x), s)) \226\134\146 has_real_derivative((x : Real) => g(f(x)), f' * g'(f(x)), within(atreal(x), s))) && (\226\136\128 x : Real, has_real_derivative(f, f', atreal(x)) \226\134\146 has_real_derivative((x : Real) => g(f(x)), f' * g'(f(x)), atreal(x)))
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 z : Real, \226\136\128 f' : Real, \226\136\128 f'' : Real, has_real_derivative(f, f', atreal(z)) && has_real_derivative(f, f'', atreal(z)) \226\134\146 f' == f''
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 x : Real, has_real_derivative(f, f', atreal(x)) \226\134\146 real_derivative(f, x) == f'
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, has_real_derivative(f, real_derivative(f, x), atreal(x)) == real_differentiable(f, atreal(x))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 c : Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, has_real_derivative(f, f', within(atreal(x), s)) \226\134\146 has_real_derivative((x : Real) => c * f(x), c * f', within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 c : Real, \226\136\128 x : Real, has_real_derivative(f, f', atreal(x)) \226\134\146 has_real_derivative((x : Real) => c * f(x), c * f', atreal(x))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 c : Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, has_real_derivative(f, f', within(atreal(x), s)) \226\134\146 has_real_derivative((x : Real) => f(x) * c, f' * c, within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 c : Real, \226\136\128 x : Real, has_real_derivative(f, f', atreal(x)) \226\134\146 has_real_derivative((x : Real) => f(x) * c, f' * c, atreal(x))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 c : Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, has_real_derivative(f, f', within(atreal(x), s)) \226\134\146 has_real_derivative((x : Real) => f(x) / c, f' / c, within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 c : Real, \226\136\128 x : Real, has_real_derivative(f, f', atreal(x)) \226\134\146 has_real_derivative((x : Real) => f(x) / c, f' / c, atreal(x))
+      #|  (x : Real) - ((a : Real) + real_of_num(1) * (x - a)) == real_of_num(0)
+      #|  \226\136\128 net : Net[Real], has_real_derivative((x : Real) => x, real_of_num(1), net)
+      #|  \226\136\128 c : Real, \226\136\128 net : Net[Real], has_real_derivative((x : Real) => c, real_of_num(0), net)
+      #|  (a : Real) * (-(b : Real) - (-(c : Real) + -(d : Real) * (e : Real))) == -(a * (b - (c + d * e)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 net : Net[Real], has_real_derivative(f, f', net) \226\134\146 has_real_derivative((x : Real) => -f(x), -f', net)
+      #|  (fx : Real) - ((fa : Real) + (f' : Real) * ((x : Real) - (a : Real))) + ((gx : Real) - ((ga : Real) + (g' : Real) * (x - a))) == fx + gx - (fa + ga + (f' + g') * (x - a))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 g : (Real) -> Real, \226\136\128 g' : Real, \226\136\128 net : Net[Real], has_real_derivative(f, f', net) && has_real_derivative(g, g', net) \226\134\146 has_real_derivative((x : Real) => f(x) + g(x), f' + g', net)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 g : (Real) -> Real, \226\136\128 g' : Real, \226\136\128 net : Net[Real], has_real_derivative(f, f', net) && has_real_derivative(g, g', net) \226\134\146 has_real_derivative((x : Real) => f(x) - g(x), f' - g', net)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 g : (Real) -> Real, \226\136\128 g' : Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, has_real_derivative(f, f', within(atreal(x), s)) && has_real_derivative(g, g', within(atreal(x), s)) \226\134\146 has_real_derivative((x : Real) => f(x) * g(x), f(x) * g' + f' * g(x), within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 g : (Real) -> Real, \226\136\128 g' : Real, \226\136\128 x : Real, has_real_derivative(f, f', atreal(x)) && has_real_derivative(g, g', atreal(x)) \226\134\146 has_real_derivative((x : Real) => f(x) * g(x), f(x) * g' + f' * g(x), atreal(x))
+      #|  (n : Num)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 n : Num, has_real_derivative(f, f', within(atreal(x), s)) \226\134\146 has_real_derivative((x : Real) => pow(f(x), n), real_of_num(n) * (pow(f(x), n - 1) * f'), within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 x : Real, \226\136\128 n : Num, has_real_derivative(f, f', atreal(x)) \226\134\146 has_real_derivative((x : Real) => pow(f(x), n), real_of_num(n) * (pow(f(x), n - 1) * f'), atreal(x))
+      #|  inv
+      #|  \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 has_real_derivative(inv, -inv(pow(x, 2)), atreal(x))
+      #|  !((g : Real) == real_of_num(0)) \226\134\146 -(f : Real) / pow(g, 2) == -inv(pow(g, 2)) * f
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, has_real_derivative(f, f', within(atreal(x), s)) && !(f(x) == real_of_num(0)) \226\134\146 has_real_derivative((x : Real) => inv(f(x)), -f' / pow(f(x), 2), within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 x : Real, has_real_derivative(f, f', atreal(x)) && !(f(x) == real_of_num(0)) \226\134\146 has_real_derivative((x : Real) => inv(f(x)), -f' / pow(f(x), 2), atreal(x))
+      #|  has_real_derivative((f : (Real) -> Real), (f' : Real), within(atreal((x : Real)), (s : (Real) -> Bool)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 g : (Real) -> Real, \226\136\128 g' : Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, has_real_derivative(f, f', within(atreal(x), s)) && has_real_derivative(g, g', within(atreal(x), s)) && !(g(x) == real_of_num(0)) \226\134\146 has_real_derivative((x : Real) => f(x) / g(x), (f' * g(x) - f(x) * g') / pow(g(x), 2), within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 g : (Real) -> Real, \226\136\128 g' : Real, \226\136\128 x : Real, has_real_derivative(f, f', atreal(x)) && has_real_derivative(g, g', atreal(x)) && !(g(x) == real_of_num(0)) \226\134\146 has_real_derivative((x : Real) => f(x) / g(x), (f' * g(x) - f(x) * g') / pow(g(x), 2), atreal(x))
+      #|  \226\136\128 f : (_, Real) -> Real, \226\136\128 net : Net[Real], \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 a : _, IN(a, s) \226\134\146 has_real_derivative(f(a), (f' : (_) -> Real)(a), net)) \226\134\146 has_real_derivative((x : Real) => sum(s, (a : _) => f(a, x)), sum(s, f'), net)
+      #|  \226\136\128 c : Real, \226\136\128 net : Net[Real], real_differentiable((z : Real) => c, net)
+      #|  \226\136\128 net : Net[Real], real_differentiable((z : Real) => z, net)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 net : Net[Real], real_differentiable(f, net) \226\134\146 real_differentiable((z : Real) => -f(z), net)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 net : Net[Real], real_differentiable(f, net) && real_differentiable(g, net) \226\134\146 real_differentiable((z : Real) => f(z) + g(z), net)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 net : Net[Real], real_differentiable(f, net) && real_differentiable(g, net) \226\134\146 real_differentiable((z : Real) => f(z) - g(z), net)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 z : Real, \226\136\128 s : (Real) -> Bool, real_differentiable(f, within(atreal(z), s)) && !(f(z) == real_of_num(0)) \226\134\146 real_differentiable((z : Real) => inv(f(z)), within(atreal(z), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 z : Real, \226\136\128 s : (Real) -> Bool, real_differentiable(f, within(atreal(z), s)) && real_differentiable(g, within(atreal(z), s)) \226\134\146 real_differentiable((z : Real) => f(z) * g(z), within(atreal(z), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 z : Real, \226\136\128 s : (Real) -> Bool, real_differentiable(f, within(atreal(z), s)) && real_differentiable(g, within(atreal(z), s)) && !(g(z) == real_of_num(0)) \226\134\146 real_differentiable((z : Real) => f(z) / g(z), within(atreal(z), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 z : Real, \226\136\128 s : (Real) -> Bool, real_differentiable(f, within(atreal(z), s)) \226\134\146 real_differentiable((z : Real) => pow(f(z), n), within(atreal(z), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Real, IN(x', s) && abs(x' - x) < d \226\134\146 f(x') == g(x')) && real_differentiable(f, within(atreal(x), s)) \226\134\146 real_differentiable(g, within(atreal(x), s))
+      #|  real_of_num(1)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == g(x)) && real_differentiable_on(f, s) \226\134\146 real_differentiable_on(g, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == g(x)) \226\134\146 real_differentiable_on(f, s) == real_differentiable_on(g, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 z : Real, real_differentiable(f, atreal(z)) && !(f(z) == real_of_num(0)) \226\134\146 real_differentiable((z : Real) => inv(f(z)), atreal(z))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 z : Real, real_differentiable(f, atreal(z)) && real_differentiable(g, atreal(z)) \226\134\146 real_differentiable((z : Real) => f(z) * g(z), atreal(z))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 z : Real, real_differentiable(f, atreal(z)) && real_differentiable(g, atreal(z)) && !(g(z) == real_of_num(0)) \226\134\146 real_differentiable((z : Real) => f(z) / g(z), atreal(z))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 z : Real, real_differentiable(f, atreal(z)) \226\134\146 real_differentiable((z : Real) => pow(f(z), n), atreal(z))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 x : Real, \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Real, abs(x' - x) < d \226\134\146 f(x') == g(x')) && real_differentiable(f, atreal(x)) \226\134\146 real_differentiable(g, atreal(x))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, real_differentiable(f, within(atreal(x), s)) && real_differentiable(g, within(atreal(f(x)), IMAGE(f, s))) \226\134\146 real_differentiable(o(g, f), within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 x : Real, real_differentiable(f, atreal(x)) && real_differentiable(g, atreal(f(x))) \226\134\146 real_differentiable(o(g, f), atreal(x))
+      #|  \226\136\128 c : Real, \226\136\128 s : (Real) -> Bool, real_differentiable_on((z : Real) => c, s)
+      #|  \226\136\128 s : (Real) -> Bool, real_differentiable_on((z : Real) => z, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_differentiable_on(f, s) && real_differentiable_on(g, IMAGE(f, s)) \226\134\146 real_differentiable_on(o(g, f), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_differentiable_on(f, s) \226\134\146 real_differentiable_on((z : Real) => -f(z), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_differentiable_on(f, s) && real_differentiable_on(g, s) \226\134\146 real_differentiable_on((z : Real) => f(z) + g(z), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_differentiable_on(f, s) && real_differentiable_on(g, s) \226\134\146 real_differentiable_on((z : Real) => f(z) - g(z), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_differentiable_on(f, s) && real_differentiable_on(g, s) \226\134\146 real_differentiable_on((z : Real) => f(z) * g(z), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_differentiable_on(f, s) && (\226\136\128 z : Real, IN(z, s) \226\134\146 !(f(z) == real_of_num(0))) \226\134\146 real_differentiable_on((z : Real) => inv(f(z)), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_differentiable_on(f, s) && real_differentiable_on(g, s) && (\226\136\128 z : Real, IN(z, s) \226\134\146 !(g(z) == real_of_num(0))) \226\134\146 real_differentiable_on((z : Real) => f(z) / g(z), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 n : Num, real_differentiable_on(f, s) \226\134\146 real_differentiable_on((z : Real) => pow(f(z), n), s)
+      #|  \226\136\128 f : (_, Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 k : (_) -> Bool, FINITE(k) && (\226\136\128 a : _, IN(a, k) \226\134\146 real_differentiable_on(f(a), s)) \226\134\146 real_differentiable_on((x : Real) => sum(k, (a : _) => f(a, x)), s)
       #|  cexp
-      #|  forall x. (exp has_real_derivative exp(x)) (atreal x)
-      #|  forall x. exp real_differentiable (atreal x)
-      #|  forall s x. exp real_differentiable (atreal x within s)
-      #|  forall x. exp real_continuous (atreal x)
-      #|  forall s x. exp real_continuous (atreal x within s)
-      #|  forall s. exp real_continuous_on s
+      #|  \226\136\128 x : Real, has_real_derivative(exp, exp(x), atreal(x))
+      #|  \226\136\128 x : Real, real_differentiable(exp, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_differentiable(exp, within(atreal(x), s))
+      #|  \226\136\128 x : Real, real_continuous(exp, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_continuous(exp, within(atreal(x), s))
+      #|  \226\136\128 s : (Real) -> Bool, real_continuous_on(exp, s)
       #|  csin
-      #|  forall x. (sin has_real_derivative cos(x)) (atreal x)
-      #|  forall x. sin real_differentiable (atreal x)
-      #|  forall s x. sin real_differentiable (atreal x within s)
-      #|  forall x. sin real_continuous (atreal x)
-      #|  forall s x. sin real_continuous (atreal x within s)
-      #|  forall s. sin real_continuous_on s
+      #|  \226\136\128 x : Real, has_real_derivative(sin, cos(x), atreal(x))
+      #|  \226\136\128 x : Real, real_differentiable(sin, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_differentiable(sin, within(atreal(x), s))
+      #|  \226\136\128 x : Real, real_continuous(sin, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_continuous(sin, within(atreal(x), s))
+      #|  \226\136\128 s : (Real) -> Bool, real_continuous_on(sin, s)
       #|  ccos
-      #|  forall x. (cos has_real_derivative --sin(x)) (atreal x)
-      #|  forall x. cos real_differentiable (atreal x)
-      #|  forall s x. cos real_differentiable (atreal x within s)
-      #|  forall x. cos real_continuous (atreal x)
-      #|  forall s x. cos real_continuous (atreal x within s)
-      #|  forall s. cos real_continuous_on s
+      #|  \226\136\128 x : Real, has_real_derivative(cos, -sin(x), atreal(x))
+      #|  \226\136\128 x : Real, real_differentiable(cos, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_differentiable(cos, within(atreal(x), s))
+      #|  \226\136\128 x : Real, real_continuous(cos, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_continuous(cos, within(atreal(x), s))
+      #|  \226\136\128 s : (Real) -> Bool, real_continuous_on(cos, s)
       #|  ctan
-      #|  forall x. ~(cos x = &0)\n       ==> (tan has_real_derivative inv(cos(x) pow 2)) (atreal x)
-      #|  forall x. ~(cos x = &0) ==> tan real_differentiable (atreal x)
-      #|  forall s x. ~(cos x = &0) ==> tan real_differentiable (atreal x within s)
-      #|  forall x. ~(cos x = &0) ==> tan real_continuous (atreal x)
-      #|  forall s x. ~(cos x = &0) ==> tan real_continuous (atreal x within s)
-      #|  forall s. (forall x. x IN s ==> ~(cos x = &0)) ==> tan real_continuous_on s
-      #|  x:real
+      #|  \226\136\128 x : Real, !(cos(x) == real_of_num(0)) \226\134\146 has_real_derivative(tan, inv(pow(cos(x), 2)), atreal(x))
+      #|  \226\136\128 x : Real, !(cos(x) == real_of_num(0)) \226\134\146 real_differentiable(tan, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, !(cos(x) == real_of_num(0)) \226\134\146 real_differentiable(tan, within(atreal(x), s))
+      #|  \226\136\128 x : Real, !(cos(x) == real_of_num(0)) \226\134\146 real_continuous(tan, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, !(cos(x) == real_of_num(0)) \226\134\146 real_continuous(tan, within(atreal(x), s))
+      #|  \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 !(cos(x) == real_of_num(0))) \226\134\146 real_continuous_on(tan, s)
+      #|  (x : Real)
       #|  clog
-      #|  forall x. &0 < x ==> (log has_real_derivative inv(x)) (atreal x)
-      #|  forall x. &0 < x ==> log real_differentiable (atreal x)
-      #|  forall s x. &0 < x ==> log real_differentiable (atreal x within s)
-      #|  forall x. &0 < x ==> log real_continuous (atreal x)
-      #|  forall s x. &0 < x ==> log real_continuous (atreal x within s)
-      #|  forall s. (forall x. x IN s ==> &0 < x) ==> log real_continuous_on s
-      #|  x:real
+      #|  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 has_real_derivative(log, inv(x), atreal(x))
+      #|  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 real_differentiable(log, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_of_num(0) < x \226\134\146 real_differentiable(log, within(atreal(x), s))
+      #|  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 real_continuous(log, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_of_num(0) < x \226\134\146 real_continuous(log, within(atreal(x), s))
+      #|  \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 real_of_num(0) < x) \226\134\146 real_continuous_on(log, s)
+      #|  (x : Real)
       #|  csqrt
-      #|  forall x. &0 < x ==> (sqrt has_real_derivative inv(&2 * sqrt x)) (atreal x)
-      #|  forall x. &0 < x ==> sqrt real_differentiable (atreal x)
-      #|  forall s x. &0 < x ==> sqrt real_differentiable (atreal x within s)
-      #|  forall x. sqrt real_continuous (atreal x)
-      #|  forall s x. sqrt real_continuous (atreal x within s)
-      #|  forall f s a:real^N.\n        f real_continuous (at a within s)\n        ==> (\\x. sqrt(f x)) real_continuous (at a within s)
-      #|  forall f a:real^N.\n        f real_continuous (at a)\n        ==> (\\x. sqrt(f x)) real_continuous (at a)
-      #|  forall f s a. (\\x. lift(f x)) continuous (atreal a within s)\n           ==> (\\x. lift(sqrt(f x))) continuous (atreal a within s)
-      #|  a:real
-      #|  (:real)
-      #|  f:real->real
-      #|  forall f a. (\\x. lift(f x)) continuous (atreal a)\n         ==> (\\x. lift(sqrt(f x))) continuous (atreal a)
-      #|  forall f s a. f real_continuous (atreal a within s)\n           ==> (\\x. sqrt(f x)) real_continuous (atreal a within s)
-      #|  forall f a. f real_continuous (atreal a)\n         ==> (\\x. sqrt(f x)) real_continuous (atreal a)
-      #|  forall s. sqrt real_continuous_on s
+      #|  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 has_real_derivative(sqrt, inv(real_of_num(2) * sqrt(x)), atreal(x))
+      #|  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 real_differentiable(sqrt, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_of_num(0) < x \226\134\146 real_differentiable(sqrt, within(atreal(x), s))
+      #|  \226\136\128 x : Real, real_continuous(sqrt, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_continuous(sqrt, within(atreal(x), s))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], real_continuous(f, within(at(a), s)) \226\134\146 real_continuous((x : Cart[Real, N]) => sqrt(f(x)), within(at(a), s))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 a : Cart[Real, N], real_continuous(f, at(a)) \226\134\146 real_continuous((x : Cart[Real, N]) => sqrt(f(x)), at(a))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, continuous((x : Real) => lift(f(x)), within(atreal(a), s)) \226\134\146 continuous((x : Real) => lift(sqrt(f(x))), within(atreal(a), s))
+      #|  (a : Real)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, continuous((x : Real) => lift(f(x)), atreal(a)) \226\134\146 continuous((x : Real) => lift(sqrt(f(x))), atreal(a))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, real_continuous(f, within(atreal(a), s)) \226\134\146 real_continuous((x : Real) => sqrt(f(x)), within(atreal(a), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, real_continuous(f, atreal(a)) \226\134\146 real_continuous((x : Real) => sqrt(f(x)), atreal(a))
+      #|  \226\136\128 s : (Real) -> Bool, real_continuous_on(sqrt, s)
       #|  catn
-      #|  forall x. (atn has_real_derivative inv(&1 + x pow 2)) (atreal x)
-      #|  forall x. atn real_differentiable (atreal x)
-      #|  forall s x. atn real_differentiable (atreal x within s)
-      #|  forall x. atn real_continuous (atreal x)
-      #|  forall s x. atn real_continuous (atreal x within s)
-      #|  forall s. atn real_continuous_on s
-      #|  &1 - abs x
+      #|  \226\136\128 x : Real, has_real_derivative(atn, inv(real_of_num(1) + pow(x, 2)), atreal(x))
+      #|  \226\136\128 x : Real, real_differentiable(atn, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_differentiable(atn, within(atreal(x), s))
+      #|  \226\136\128 x : Real, real_continuous(atn, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_continuous(atn, within(atreal(x), s))
+      #|  \226\136\128 s : (Real) -> Bool, real_continuous_on(atn, s)
+      #|  real_of_num(1) - abs((x : Real))
       #|  casn
-      #|  forall x. abs(x) < &1 ==> (asn has_real_derivative inv(cos(asn x))) (atreal x)
-      #|  forall x. abs(x) < &1\n       ==> (asn has_real_derivative inv(sqrt(&1 - x pow 2))) (atreal x)
-      #|  forall x. abs(x) < &1 ==> asn real_differentiable (atreal x)
-      #|  forall s x. abs(x) < &1 ==> asn real_differentiable (atreal x within s)
-      #|  forall x. abs(x) < &1 ==> asn real_continuous (atreal x)
-      #|  forall s x. abs(x) < &1 ==> asn real_continuous (atreal x within s)
-      #|  &1 - abs x
+      #|  \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 has_real_derivative(asn, inv(cos(asn(x))), atreal(x))
+      #|  \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 has_real_derivative(asn, inv(sqrt(real_of_num(1) - pow(x, 2))), atreal(x))
+      #|  \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 real_differentiable(asn, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 real_differentiable(asn, within(atreal(x), s))
+      #|  \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 real_continuous(asn, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 real_continuous(asn, within(atreal(x), s))
+      #|  real_of_num(1) - abs((x : Real))
       #|  cacs
-      #|  forall x. abs(x) < &1 ==> (acs has_real_derivative --inv(sin(acs x))) (atreal x)
-      #|  forall x. abs(x) < &1\n       ==> (acs has_real_derivative --inv(sqrt(&1 - x pow 2))) (atreal x)
-      #|  forall x. abs(x) < &1 ==> acs real_differentiable (atreal x)
-      #|  forall s x. abs(x) < &1 ==> acs real_differentiable (atreal x within s)
-      #|  forall x. abs(x) < &1 ==> acs real_continuous (atreal x)
-      #|  forall s x. abs(x) < &1 ==> acs real_continuous (atreal x within s)
-      #|  norm(a:real^N) pow 2
-      #|  (\\x:real^N. lift(sqrt(x dot x))) =\n    (lift o sqrt o drop) o (\\x. lift(x dot x))
-      #|  forall a:real^N. ~(a = vec 0) ==> (\\x. lift(norm x)) differentiable (at a)
-      #|  forall s:real^N->bool. ~(vec 0 IN s) ==> (\\x. lift(norm x)) differentiable_on s
-      #|  (forall x y. f x = f y ==> x = y) /\\ ~(x IN s)\n        ==> ~(f x IN t INTER IMAGE f s)
-      #|  real INTER IMAGE Cx {t | abs t <= &1} =\n                    real INTER cball(Cx(&0),&1)
-      #|  real INTER {z | real z /\\ P z} = {z | real z /\\ P z}
-      #|  &1
+      #|  \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 has_real_derivative(acs, -inv(sin(acs(x))), atreal(x))
+      #|  \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 has_real_derivative(acs, -inv(sqrt(real_of_num(1) - pow(x, 2))), atreal(x))
+      #|  \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 real_differentiable(acs, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 real_differentiable(acs, within(atreal(x), s))
+      #|  \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 real_continuous(acs, atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 real_continuous(acs, within(atreal(x), s))
+      #|  pow(norm((a : Cart[Real, N])), 2)
+      #|  ((x : Cart[Real, N]) => lift(sqrt(dot(x, x)))) == o(o(lift, o(sqrt, drop)), (x : Cart[Real, N]) => lift(dot(x, x)))
+      #|  \226\136\128 a : Cart[Real, N], !(a == vec(0)) \226\134\146 differentiable((x : Cart[Real, N]) => lift(norm(x)), at(a))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, !IN(vec(0), s) \226\134\146 differentiable_on((x : Cart[Real, N]) => lift(norm(x)), s)
+      #|  (\226\136\128 x : _, \226\136\128 y : _, (f : (_) -> _)(x) == f(y) \226\134\146 x == y) && !IN((x : _), (s : (_) -> Bool)) \226\134\146 !IN(f(x), INTER((t : (_) -> Bool), IMAGE(f, s)))
+      #|  INTER(real, IMAGE(Cx, {(t : Real) | abs(t) <= real_of_num(1)})) == INTER(real, cball((Cx(real_of_num(0)), real_of_num(1))))
+      #|  INTER(real, {(z : Cart[Real, Tybit0[Unit]]) | real(z) && (P : (Cart[Real, Tybit0[Unit]]) -> Bool)(z)}) == {(z : Cart[Real, Tybit0[Unit]]) | real(z) && P(z)}
+      #|  real_of_num(1)
       #|  casn
-      #|  x IN {t | abs(t) <= &1}
-      #|  forall x. asn real_continuous (atreal x within {t | abs(t) <= &1})
-      #|  {x | abs(x) <= &1}
-      #|  forall s. (forall x. x IN s ==> abs(x) <= &1) ==> asn real_continuous_on s
-      #|  (forall x y. f x = f y ==> x = y) /\\ ~(x IN s)\n        ==> ~(f x IN t INTER IMAGE f s)
-      #|  real INTER IMAGE Cx {t | abs t <= &1} =\n                    real INTER cball(Cx(&0),&1)
-      #|  real INTER {z | real z /\\ P z} = {z | real z /\\ P z}
-      #|  &1
+      #|  IN((x : Real), {(t : Real) | abs(t) <= real_of_num(1)})
+      #|  \226\136\128 x : Real, real_continuous(asn, within(atreal(x), {(t : Real) | abs(t) <= real_of_num(1)}))
+      #|  {(x : Real) | abs(x) <= real_of_num(1)}
+      #|  \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 abs(x) <= real_of_num(1)) \226\134\146 real_continuous_on(asn, s)
+      #|  (\226\136\128 x : _, \226\136\128 y : _, (f : (_) -> _)(x) == f(y) \226\134\146 x == y) && !IN((x : _), (s : (_) -> Bool)) \226\134\146 !IN(f(x), INTER((t : (_) -> Bool), IMAGE(f, s)))
+      #|  INTER(real, IMAGE(Cx, {(t : Real) | abs(t) <= real_of_num(1)})) == INTER(real, cball((Cx(real_of_num(0)), real_of_num(1))))
+      #|  INTER(real, {(z : Cart[Real, Tybit0[Unit]]) | real(z) && (P : (Cart[Real, Tybit0[Unit]]) -> Bool)(z)}) == {(z : Cart[Real, Tybit0[Unit]]) | real(z) && P(z)}
+      #|  real_of_num(1)
       #|  cacs
-      #|  x IN {t | abs(t) <= &1}
-      #|  forall x. acs real_continuous (atreal x within {t | abs(t) <= &1})
-      #|  {x | abs(x) <= &1}
-      #|  forall s. (forall x. x IN s ==> abs(x) <= &1) ==> acs real_continuous_on s
-      #|  (f has_real_derivative f') net <=>\n     ((\\x. f x) has_real_derivative f') net
-      #|  (f has_real_derivative f') net
-      #|  (f has_real_derivative f') net\n    ==> f' = g'\n        ==> (f has_real_derivative g') net
-      #|  forall a. ((\\n. inv(&n + a)) ---> &0) sequentially
-      #|  ((\\n. inv(&n)) ---> &0) sequentially
+      #|  IN((x : Real), {(t : Real) | abs(t) <= real_of_num(1)})
+      #|  \226\136\128 x : Real, real_continuous(acs, within(atreal(x), {(t : Real) | abs(t) <= real_of_num(1)}))
+      #|  {(x : Real) | abs(x) <= real_of_num(1)}
+      #|  \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 abs(x) <= real_of_num(1)) \226\134\146 real_continuous_on(acs, s)
+      #|  has_real_derivative((f : (Real) -> Real), (f' : Real), (net : Net[Real])) == has_real_derivative((x : Real) => f(x), f', net)
+      #|  has_real_derivative((f : (Real) -> Real), (f' : Real), (net : Net[Real]))
+      #|  has_real_derivative((f : (Real) -> Real), (f' : Real), (net : Net[Real])) \226\134\146 f' == (g' : Real) \226\134\146 has_real_derivative(f, g', net)
+      #|  \226\136\128 a : Real, op_minus_minus_minus_gt((n : Num) => inv(real_of_num(n) + a), real_of_num(0), sequentially)
+      #|  op_minus_minus_minus_gt((n : Num) => inv(real_of_num(n)), real_of_num(0), sequentially)
       #|  1
-      #|  \\n. inv(&n pow 1)
-      #|  forall k. 1 <= k ==> ((\\n. inv(&n pow k)) ---> &0) sequentially
-      #|  1 <= n ==> 0 < n
+      #|  (n : Num) => inv(pow(real_of_num(n), 1))
+      #|  \226\136\128 k : Num, 1 <= k \226\134\146 op_minus_minus_minus_gt((n : Num) => inv(pow(real_of_num(n), k)), real_of_num(0), sequentially)
+      #|  1 <= (n : Num) \226\134\146 0 < n
       #|  1
-      #|  ((\\n. log(&n) / &n) ---> &0) sequentially
-      #|  1 <= n ==> 0 < n
+      #|  op_minus_minus_minus_gt((n : Num) => log(real_of_num(n)) / real_of_num(n), real_of_num(0), sequentially)
+      #|  1 <= (n : Num) \226\134\146 0 < n
       #|  1
-      #|  ((\\n. inv(log(&n))) ---> &0) sequentially
-      #|  forall z. abs(z) < &1 ==> ((\\n. z pow n) ---> &0) sequentially
-      #|  Cx x
-      #|  &0 < x
-      #|  x = &0
-      #|  x:real
-      #|  &0 < d
-      #|  d:real
-      #|  &0 < e
-      #|  e:real
-      #|  ((\\x. x * log x) ---> &0) (atreal(&0) within {x | &0 <= x})
+      #|  op_minus_minus_minus_gt((n : Num) => inv(log(real_of_num(n))), real_of_num(0), sequentially)
+      #|  \226\136\128 z : Real, abs(z) < real_of_num(1) \226\134\146 op_minus_minus_minus_gt((n : Num) => pow(z, n), real_of_num(0), sequentially)
+      #|  Cx((x : Real))
+      #|  real_of_num(0) < (x : Real)
+      #|  (x : Real) == real_of_num(0)
+      #|  (x : Real)
+      #|  real_of_num(0) < (d : Real)
+      #|  (d : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((x : Real) => x * log(x), real_of_num(0), within(atreal(real_of_num(0)), {(x : Real) | real_of_num(0) <= x}))
       #|  1
-      #|  \\n. exp(log(&n) / &n)
-      #|  ((\\n. root n (&n)) ---> &1) sequentially
-      #|  ((\\x. sin x / x) ---> &1) (atreal (&0))
+      #|  (n : Num) => exp(log(real_of_num(n)) / real_of_num(n))
+      #|  op_minus_minus_minus_gt((n : Num) => root(n, real_of_num(n)), real_of_num(1), sequentially)
+      #|  op_minus_minus_minus_gt((x : Real) => sin(x) / x, real_of_num(1), atreal(real_of_num(0)))
       #|  log
       #|  exp
-      #|  l:real
-      #|  (f ---> l) (net:A net)
-      #|  \\x:A. &0 < f x
-      #|  \\x:A. exp(g x * log(f x))
-      #|  forall net:A net f g l m.\n        (f ---> l) net /\\ (g ---> m) net /\\ &0 < l\n        ==> ((\\x. (f x) rpow (g x)) ---> l rpow m) net
-      #|  forall f g s a:real^N.\n        f real_continuous (at a within s) /\\\n        g real_continuous (at a within s) /\\\n        &0 < f a\n        ==> (\\x. (f x) rpow (g x)) real_continuous (at a within s)
-      #|  &0 < x ==> (abs(y - x) < x <=> &0 < y /\\ y < &2 * x)
-      #|  x:real
-      #|  \\x. exp(y * log x)
-      #|  forall x y.\n    &0 < x\n    ==> ((\\x. x rpow y) has_real_derivative y * x rpow (y - &1)) (atreal x)
-      #|  y:real
-      #|  y:real
-      #|  forall a x. &0 < a\n         ==> ((\\x. a rpow x) has_real_derivative log(a) * a rpow x)\n              (atreal x)
-      #|  a:real
-      #|  ~(&0 < z) /\\ ~(z = &0)
-      #|  z:real
-      #|  &0 < --x ==> &0 < abs x
-      #|  \\x. exp(y * log(--x))
-      #|  \\x. --(exp(y * log(--x)))
-      #|  ?m n. ODD m /\\ ODD n /\\ abs y = &m / &n
-      #|  &0 < z
-      #|  z:real
-      #|  &0 < x ==> &0 < abs x
-      #|  \\x. exp(y * log x)
-      #|  abs x
-      #|  ~(x = &0) <=> &0 < x \\/ &0 < --x
-      #|  forall x y. ~(x = &0) ==> (\\x. x rpow y) real_differentiable atreal x
-      #|  forall a x. &0 < a ==> (\\x. a rpow x) real_differentiable (atreal x)
-      #|  e rpow inv y rpow y
-      #|  z:real
-      #|  e rpow inv(y)
-      #|  e:real
-      #|  x = &0
-      #|  y = &0
-      #|  forall x y. (x = &0 ==> &0 <= y)\n         ==> (\\x. x rpow y) real_continuous (atreal x)
-      #|  forall s x y. (x = &0 ==> &0 <= y)\n           ==> (\\x. x rpow y) real_continuous (atreal x within s)
-      #|  forall s y. (&0 IN s ==> &0 <= y) ==> (\\x. x rpow y) real_continuous_on s
-      #|  forall a x. &0 < a ==> (\\x. a rpow x) real_continuous (atreal x)
-      #|  \\x. x rpow n
-      #|  forall net f l n.\n        (f ---> l) net /\\ (l = &0 ==> &0 <= n)\n        ==> ((\\x. f x rpow n) ---> l rpow n) net
-      #|  (\\x. x rpow (inv(&n))) o abs
-      #|  forall net f n.\n        ~(n = 0)\n        ==> (((\\x. f x pow n) ---> &0) net <=> (f ---> &0) net)
-      #|  forall net f n.\n        ~(n = 0)\n        ==> (((\\x. f x pow n) --> Cx(&0)) net <=> (f --> Cx(&0)) net)
-      #|  lift o (\\x. x rpow p) o drop
-      #|  forall net p x:A->real.\n        ((lift o x) --> vec 0) net /\\ &0 < p\n        ==> ((\\i. lift(x(i) rpow p)) --> vec 0) net
-      #|  x:real
-      #|  y - (y - x):real = x
-      #|  y:real
-      #|  &0 < x + &1 - y <=> y < x + &1
-      #|  min (frac x) (floor x + &1 - x)
-      #|  \\y. y - floor x
-      #|  forall x. ~(integer x) ==> (frac has_real_derivative (&1)) (atreal x)
-      #|  forall x. ~(integer x) ==> frac real_differentiable (atreal x)
-      #|  forall p x. polynomial_function p ==> p real_differentiable atreal x
-      #|  forall p s x. polynomial_function p ==> p real_differentiable atreal x within s
-      #|  forall p s. polynomial_function p ==> p real_differentiable_on s
-      #|  forall p x. polynomial_function p ==> p real_continuous atreal x
-      #|  forall p s x. polynomial_function p ==> p real_continuous atreal x within s
-      #|  forall p s. polynomial_function p ==> p real_continuous_on s
+      #|  (l : Real)
+      #|  op_minus_minus_minus_gt((f : (A) -> Real), (l : Real), (net : Net[A]))
+      #|  (x : A) => real_of_num(0) < (f : (A) -> Real)(x)
+      #|  (x : A) => exp((g : (A) -> Real)(x) * log((f : (A) -> Real)(x)))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 l : Real, \226\136\128 m : Real, op_minus_minus_minus_gt(f, l, net) && op_minus_minus_minus_gt(g, m, net) && real_of_num(0) < l \226\134\146 op_minus_minus_minus_gt((x : A) => rpow(f(x), g(x)), rpow(l, m), net)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], real_continuous(f, within(at(a), s)) && real_continuous(g, within(at(a), s)) && real_of_num(0) < f(a) \226\134\146 real_continuous((x : Cart[Real, N]) => rpow(f(x), g(x)), within(at(a), s))
+      #|  real_of_num(0) < (x : Real) \226\134\146 (abs((y : Real) - x) < x) == (real_of_num(0) < y && y < real_of_num(2) * x)
+      #|  (x : Real)
+      #|  (x : Real) => exp((y : Real) * log(x))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) < x \226\134\146 has_real_derivative((x : Real) => rpow(x, y), y * rpow(x, y - real_of_num(1)), atreal(x))
+      #|  (y : Real)
+      #|  (y : Real)
+      #|  \226\136\128 a : Real, \226\136\128 x : Real, real_of_num(0) < a \226\134\146 has_real_derivative((x : Real) => rpow(a, x), log(a) * rpow(a, x), atreal(x))
+      #|  (a : Real)
+      #|  !(real_of_num(0) < (z : Real)) && !(z == real_of_num(0))
+      #|  (z : Real)
+      #|  real_of_num(0) < -(x : Real) \226\134\146 real_of_num(0) < abs(x)
+      #|  (x : Real) => exp((y : Real) * log(-x))
+      #|  (x : Real) => -exp((y : Real) * log(-x))
+      #|  \226\136\131 m : Num, \226\136\131 n : Num, ODD(m) && ODD(n) && abs((y : Real)) == real_of_num(m) / real_of_num(n)
+      #|  real_of_num(0) < (z : Real)
+      #|  (z : Real)
+      #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) < abs(x)
+      #|  (x : Real) => exp((y : Real) * log(x))
+      #|  abs((x : Real))
+      #|  !((x : Real) == real_of_num(0)) == (real_of_num(0) < x || real_of_num(0) < -x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, !(x == real_of_num(0)) \226\134\146 real_differentiable((x : Real) => rpow(x, y), atreal(x))
+      #|  \226\136\128 a : Real, \226\136\128 x : Real, real_of_num(0) < a \226\134\146 real_differentiable((x : Real) => rpow(a, x), atreal(x))
+      #|  rpow(rpow((e : Real), inv((y : Real))), y)
+      #|  (z : Real)
+      #|  rpow((e : Real), inv((y : Real)))
+      #|  (e : Real)
+      #|  (x : Real) == real_of_num(0)
+      #|  (y : Real) == real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (x == real_of_num(0) \226\134\146 real_of_num(0) <= y) \226\134\146 real_continuous((x : Real) => rpow(x, y), atreal(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, \226\136\128 y : Real, (x == real_of_num(0) \226\134\146 real_of_num(0) <= y) \226\134\146 real_continuous((x : Real) => rpow(x, y), within(atreal(x), s))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 y : Real, (IN(real_of_num(0), s) \226\134\146 real_of_num(0) <= y) \226\134\146 real_continuous_on((x : Real) => rpow(x, y), s)
+      #|  \226\136\128 a : Real, \226\136\128 x : Real, real_of_num(0) < a \226\134\146 real_continuous((x : Real) => rpow(a, x), atreal(x))
+      #|  (x : Real) => rpow(x, (n : Real))
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 l : Real, \226\136\128 n : Real, op_minus_minus_minus_gt(f, l, net) && (l == real_of_num(0) \226\134\146 real_of_num(0) <= n) \226\134\146 op_minus_minus_minus_gt((x : _) => rpow(f(x), n), rpow(l, n), net)
+      #|  o((x : Real) => rpow(x, inv(real_of_num((n : Num)))), abs)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 n : Num, !(n == 0) \226\134\146 op_minus_minus_minus_gt((x : _) => pow(f(x), n), real_of_num(0), net) == op_minus_minus_minus_gt(f, real_of_num(0), net)
+      #|  \226\136\128 net : Net[_], \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, !(n == 0) \226\134\146 op_minus_minus_gt((x : _) => pow(f(x), n), Cx(real_of_num(0)), net) == op_minus_minus_gt(f, Cx(real_of_num(0)), net)
+      #|  o(lift, o((x : Real) => rpow(x, (p : Real)), drop))
+      #|  \226\136\128 net : Net[A], \226\136\128 p : Real, \226\136\128 x : (A) -> Real, op_minus_minus_gt(o(lift, x), vec(0), net) && real_of_num(0) < p \226\134\146 op_minus_minus_gt((i : A) => lift(rpow(x(i), p)), vec(0), net)
+      #|  (x : Real)
+      #|  (y : Real) - (y - (x : Real)) == x
+      #|  (y : Real)
+      #|  (real_of_num(0) < (x : Real) + (real_of_num(1) - (y : Real))) == (y < x + real_of_num(1))
+      #|  min(frac((x : Real)), floor(x) + (real_of_num(1) - x))
+      #|  (y : Real) => y - floor((x : Real))
+      #|  \226\136\128 x : Real, !integer(x) \226\134\146 has_real_derivative(frac, real_of_num(1), atreal(x))
+      #|  \226\136\128 x : Real, !integer(x) \226\134\146 real_differentiable(frac, atreal(x))
+      #|  \226\136\128 p : (Real) -> Real, \226\136\128 x : Real, polynomial_function(p) \226\134\146 real_differentiable(p, atreal(x))
+      #|  \226\136\128 p : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, polynomial_function(p) \226\134\146 real_differentiable(p, within(atreal(x), s))
+      #|  \226\136\128 p : (Real) -> Real, \226\136\128 s : (Real) -> Bool, polynomial_function(p) \226\134\146 real_differentiable_on(p, s)
+      #|  \226\136\128 p : (Real) -> Real, \226\136\128 x : Real, polynomial_function(p) \226\134\146 real_continuous(p, atreal(x))
+      #|  \226\136\128 p : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, polynomial_function(p) \226\134\146 real_continuous(p, within(atreal(x), s))
+      #|  \226\136\128 p : (Real) -> Real, \226\136\128 s : (Real) -> Bool, polynomial_function(p) \226\134\146 real_continuous_on(p, s)
       #|  1
-      #|  y:real
-      #|  lift b
-      #|  lift a
-      #|  lift o f o drop
-      #|  forall f a b y.\n        a <= b /\\ f real_continuous_on real_interval[a,b] /\\\n        f a <= y /\\ y <= f b\n        ==> ?x. x IN real_interval [a,b] /\\ f x = y
+      #|  (y : Real)
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 y : Real, a <= b && real_continuous_on(f, real_interval([(a, b)])) && f(a) <= y && y <= f(b) \226\134\146 (\226\136\131 x : Real, IN(x, real_interval([(a, b)])) && f(x) == y)
       #|  1
-      #|  y:real
-      #|  lift b
-      #|  lift a
-      #|  lift o f o drop
-      #|  forall f a b y.\n        a <= b /\\ f real_continuous_on real_interval[a,b] /\\\n        f b <= y /\\ y <= f a\n        ==> ?x. x IN real_interval [a,b] /\\ f x = y
-      #|  forall s. f real_continuous_on s /\\ is_realinterval s\n       ==> is_realinterval(IMAGE f s)
-      #|  b:real
-      #|  e:real
-      #|  interval[lift a,lift b]
-      #|  lift a
-      #|  \\x:real^1. f' % x
-      #|  lift o f o drop
-      #|  forall f f' a b e.\n        a < b /\\ &0 < e /\\\n        (f has_real_derivative f') (atreal a within real_interval[a,b]) /\\\n        (forall x. x IN real_interval[a,b] /\\ abs(x - a) < e ==> f a <= f x)\n        ==> &0 <= f'
-      #|  f * ba <= &0 <=> &0 <= --f * ba
-      #|  b:real
-      #|  e:real
-      #|  interval[lift a,lift b]
-      #|  lift a
-      #|  \\x:real^1. f' % x
-      #|  lift o f o drop
-      #|  forall f f' a b e.\n        a < b /\\ &0 < e /\\\n        (f has_real_derivative f') (atreal a within real_interval[a,b]) /\\\n        (forall x. x IN real_interval[a,b] /\\ abs(x - a) < e ==> f x <= f a)\n        ==> f' <= &0
-      #|  f * (a - b) <= &0 <=> &0 <= f * (b - a)
-      #|  a:real
-      #|  e:real
-      #|  interval[lift a,lift b]
-      #|  lift b
-      #|  \\x:real^1. f' % x
-      #|  lift o f o drop
-      #|  forall f f' a b e.\n        a < b /\\ &0 < e /\\\n        (f has_real_derivative f') (atreal b within real_interval[a,b]) /\\\n        (forall x. x IN real_interval[a,b] /\\ abs(x - b) < e ==> f x <= f b)\n        ==> &0 <= f'
-      #|  &0 <= f * (a - b) <=> &0 <= --f * (b - a)
-      #|  a:real
-      #|  e:real
-      #|  interval[lift a,lift b]
-      #|  lift b
-      #|  \\x:real^1. f' % x
-      #|  lift o f o drop
-      #|  forall f f' a b e.\n        a < b /\\ &0 < e /\\\n        (f has_real_derivative f') (atreal b within real_interval[a,b]) /\\\n        (forall x. x IN real_interval[a,b] /\\ abs(x - b) < e ==> f b <= f x)\n        ==> f' <= &0
-      #|  vec 1:real^1
-      #|  IMAGE lift s
-      #|  lift x
-      #|  \\x:real^1. f' % x
-      #|  lift o f o drop
-      #|  forall f f' x s.\n        x IN s /\\ real_open s /\\\n        (f has_real_derivative f') (atreal x) /\\\n        ((forall y. y IN s ==> f y <= f x) \\/ (forall y. y IN s ==> f x <= f y))\n        ==> f' = &0
-      #|  lift(&1)
-      #|  t:real^1
-      #|  t:real^1
-      #|  t:real^1
-      #|  lift b
-      #|  lift a
-      #|  \\x:real^1 h:real^1. f'(drop x) % h
-      #|  lift o f o drop
-      #|  forall f f' a b.\n        a < b /\\ f a = f b /\\\n        f real_continuous_on real_interval[a,b] /\\\n        (forall x. x IN real_interval(a,b)\n             ==> (f has_real_derivative f'(x)) (atreal x))\n        ==> ?x. x IN real_interval(a,b) /\\ f'(x) = &0
-      #|  a < b
-      #|  a < b ==> (fx - fba / (b - a) = &0 <=> fba = fx * (b - a))
-      #|  b:real
-      #|  a:real
-      #|  (\\x. f'(x) - (f b - f a) / (b - a)):real->real
-      #|  \\x:real. f(x) - (f b - f a) / (b - a) * x
-      #|  forall f f' a b.\n        a < b /\\\n        f real_continuous_on real_interval[a,b] /\\\n        (forall x. x IN real_interval(a,b)\n             ==> (f has_real_derivative f'(x)) (atreal x))\n        ==> ?x. x IN real_interval(a,b) /\\ f(b) - f(a) = f'(x) * (b - a)
-      #|  forall f f' a b.\n        a < b /\\\n        (forall x. x IN real_interval[a,b]\n             ==> (f has_real_derivative f'(x))\n                 (atreal x within real_interval[a,b]))\n        ==> ?x. x IN real_interval(a,b) /\\ f(b) - f(a) = f'(x) * (b - a)
-      #|  b:real = a
-      #|  forall f f' a b.\n        a <= b /\\\n        (forall x. x IN real_interval[a,b]\n             ==> (f has_real_derivative f'(x))\n                 (atreal x within real_interval[a,b]))\n        ==> ?x. x IN real_interval[a,b] /\\ f(b) - f(a) = f'(x) * (b - a)
-      #|  a - a = b * (c - d) <=> b = &0 \\/ c = d
-      #|  forall f f' a b.\n        a < b /\\ f a = f b /\\\n        (forall x. x IN real_interval[a,b]\n             ==> (f has_real_derivative f'(x))\n                 (atreal x within real_interval[a,b]))\n        ==> ?x. x IN real_interval(a,b) /\\ f'(x) = &0
-      #|  a < b
-      #|  b:real
-      #|  a:real
-      #|  \\x. (f':real->real)(x) * (g(b:real) - g(a)) - g'(x) * (f(b) - f(a))
-      #|  \\x. (f:real->real)(x) * (g(b:real) - g(a)) - g(x) * (f(b) - f(a))
-      #|  forall f g f' g' a b.\n           a < b /\\\n           f real_continuous_on real_interval[a,b] /\\\n           g real_continuous_on real_interval[a,b] /\\\n           (forall x. x IN real_interval(a,b)\n                ==> (f has_real_derivative f' x) (atreal x) /\\\n                    (g has_real_derivative g' x) (atreal x))\n           ==> ?x. x IN real_interval(a,b) /\\\n                   (f b - f a) * g'(x) = (g b - g a) * f'(x)
-      #|  abs(x - c)
-      #|  a /\\ b /\\ c ==> d <=> a /\\ b ==> c ==> d
-      #|  x:real
-      #|  x:real
-      #|  &0 < abs(x - c) ==> ~(x = c)
-      #|  d:real
-      #|  l:real
-      #|  c:real
-      #|  g':real->real
-      #|  f':real->real
-      #|  \\x:real. if x = c then &0 else g(x)
-      #|  \\x:real. if x = c then &0 else f(x)
-      #|  f * g' = g * f' /\\ ~(g = &0) /\\ ~(g' = &0) ==> f / g = f' / g'
-      #|  c:real
-      #|  x:real
-      #|  g':real->real
-      #|  f':real->real
-      #|  g:real->real
-      #|  f:real->real
-      #|  x:real
-      #|  c:real
-      #|  g':real->real
-      #|  f':real->real
-      #|  g:real->real
-      #|  f:real->real
-      #|  c < x \\/ x < c
-      #|  ?y. &0 < abs(y - c) /\\ abs(y - c) < abs(x - c) /\\\n          (f:real->real) x / g x = f' y / g' y
-      #|  x:real
-      #|  min d k:real
-      #|  k:real
-      #|  &0 < e
-      #|  e:real
-      #|  ((\\x. f' x / g' x) ---> l) (atreal c)
-      #|  y:real
-      #|  c:real
-      #|  x:real
-      #|  g':real->real
-      #|  g:real->real
-      #|  x:real
-      #|  c:real
-      #|  g':real->real
-      #|  g:real->real
-      #|  c < x \\/ x < c
-      #|  forall x.  &0 < abs(x - c) /\\ abs(x - c) < d ==> ~(g x = &0)
-      #|  x = c \\/ &0 < abs(x - c)
-      #|  x:real
-      #|  (forall x. abs(x - c) < d ==> f real_continuous atreal x) /\\\n      (forall x. abs(x - c) < d ==> g real_continuous atreal x)
-      #|  a ==> b /\\ c <=> (a ==> b) /\\ (a ==> c)
-      #|  forall f g f' g' c l d.\n        &0 < d /\\\n        (forall x. &0 < abs(x - c) /\\ abs(x - c) < d\n             ==> (f has_real_derivative f'(x)) (atreal x) /\\\n                 (g has_real_derivative g'(x)) (atreal x) /\\\n                 ~(g'(x) = &0)) /\\\n        f(c) = &0 /\\ g(c) = &0 /\\\n        (f ---> &0) (atreal c) /\\ (g ---> &0) (atreal c) /\\\n        ((\\x. f'(x) / g'(x)) ---> l) (atreal c)\n        ==> ((\\x. f(x) / g(x)) ---> l) (atreal c)
-      #|  forall f g f' g' c l d.\n        &0 < d /\\\n        (forall x. &0 < abs(x - c) /\\ abs(x - c) < d\n             ==> (f has_real_derivative f'(x)) (atreal x) /\\\n                 (g has_real_derivative g'(x)) (atreal x) /\\\n                 ~(g'(x) = &0)) /\\\n        (f ---> &0) (atreal c) /\\ (g ---> &0) (atreal c) /\\\n        ((\\x. f'(x) / g'(x)) ---> l) (atreal c)\n        ==> ((\\x. f(x) / g(x)) ---> l) (atreal c)
-      #|  real_interval[a,b]
-      #|  (f has_real_derivative f' x) (atreal x within real_interval(a,b))
-      #|  ~q /\\ p ==> (p ==> q) ==> r
-      #|  &1
-      #|  b:real
-      #|  a:real
-      #|  (f':real->real) b - t:real
-      #|  \\x:real. f x - t * x
-      #|  x:real = b
-      #|  ~q /\\ p ==> (p ==> q) ==> r
-      #|  &1
-      #|  b:real
-      #|  a:real
-      #|  (f':real->real) a - t:real
-      #|  \\x:real. f x - t * x
-      #|  x:real = a
-      #|  real_interval(a,b)
-      #|  x:real
-      #|  (f':real->real) x - t:real
-      #|  \\x:real. f x - t * x
-      #|  x:real
-      #|  real_interval[a,b]
-      #|  \\x:real. f x - t * x
-      #|  a < b
-      #|  b:real = a
-      #|  (f':real->real) b = t
-      #|  (f':real->real) a = t
-      #|  forall f f' a b.\n   a <= b /\\\n   (forall x. x IN real_interval[a,b]\n        ==> (f has_real_derivative f'(x)) (atreal x within real_interval[a,b]))\n   ==> forall t. f'(a) <= t /\\ t <= f'(b)\n           ==> ?x. x IN real_interval[a,b] /\\ f' x = t
-      #|  --t:real
-      #|  b:real
-      #|  a:real
-      #|  \\x. --((f':real->real) x)
-      #|  \\x. --((f:real->real) x)
-      #|  forall f f' a b.\n   a <= b /\\\n   (forall x. x IN real_interval[a,b]\n        ==> (f has_real_derivative f'(x)) (atreal x within real_interval[a,b]))\n   ==> forall t. f'(b) <= t /\\ t <= f'(a)\n           ==> ?x. x IN real_interval[a,b] /\\ f' x = t
-      #|  IMAGE lift t
-      #|  \\x:real^1. f' % x
-      #|  lift o f o drop
-      #|  forall f g f' t y.\n        (f has_real_derivative f') (atreal (g y)) /\\\n        ~(f' = &0) /\\\n        g real_continuous atreal y /\\\n        real_open t /\\\n        y IN t /\\\n        (forall z. z IN t ==> f (g z) = z)\n        ==> (g has_real_derivative inv(f')) (atreal y)
-      #|  IMAGE lift s
-      #|  \\x:real^1. f' % x
-      #|  lift o f o drop
-      #|  forall f g f' s x.\n         real_open s /\\\n         x IN s /\\\n         f real_continuous_on s /\\\n         (forall x. x IN s ==> g (f x) = x) /\\\n         (f has_real_derivative f') (atreal x) /\\\n         ~(f' = &0)\n         ==> (g has_real_derivative inv(f')) (atreal (f x))
-      #|  IMAGE lift s
-      #|  \\x:real^1. f' % x
-      #|  lift o f o drop
-      #|  forall f g f' s y.\n        real_open s /\\ (g y) IN s /\\ f real_continuous_on s /\\\n        (forall x. x IN s ==> (g(f(x)) = x)) /\\\n        (f has_real_derivative f') (atreal (g y)) /\\ ~(f' = &0) /\\\n        f(g y) = y\n        ==> (g has_real_derivative inv(f')) (atreal y)
-      #|  (f:A->real has_limsup l) net <=>\n   trivial_limit net \\/\n   {b | eventually (\\x. f x <= b) net} has_inf l
-      #|  (f:A->real has_liminf l) net <=>\n   trivial_limit net \\/\n   {b | eventually (\\x. b <= f x ) net} has_sup l
-      #|  forall b. eventually (\\x:A. g x <= b) net <=> eventually (\\x. f x <= b) net
-      #|  trivial_limit (net:A net)
-      #|  forall net f g l. eventually (\\x:A. f x = g x) net /\\ (f has_limsup l) net\n               ==> (g has_limsup l) net
-      #|  forall net f l b. ~trivial_limit net /\\ (f has_limsup l) net /\\ l < b\n               ==> eventually (\\x:A. f x < b) net
-      #|  (c - l) / &2
-      #|  (l + c) / &2
-      #|  &1
-      #|  l + &1
-      #|  trivial_limit (net:A net)
-      #|  forall net f:A->real l. (f ---> l) net ==> (f has_limsup l) net
-      #|  l + &1
-      #|  trivial_limit (net:A net)
-      #|  forall net f l. (f has_limsup l) net ==> ?b. eventually (\\x:A. f x <= b) net
-      #|  {b | eventually (\\x:A. f x <= b) net}
-      #|  l <= c
-      #|  forall net f l c.\n     ~trivial_limit net /\\ (f has_limsup l) net /\\ c < l\n     ==> ~eventually (\\x:A. f x <= c) net
-      #|  (l + c) / &2
-      #|  l + &1
-      #|  (\\x:A. f x < c)
-      #|  trivial_limit (net:A net)
-      #|  forall net f l. (f has_limsup l) net <=>\n             trivial_limit net \\/\n             (forall c. l < c ==> eventually (\\x:A. f x <= c) net) /\\\n             (forall c. c < l ==> ~eventually (\\x:A. f x <= c) net)
-      #|  c:real
-      #|  b:real
-      #|  trivial_limit (net:A net)
-      #|  l - &1
-      #|  l - &1
-      #|  l < l + &1
-      #|  trivial_limit (net:A net)
-      #|  forall net f. (?l. (f has_limsup l) net) <=>\n           trivial_limit net \\/\n           (?b. eventually (\\x:A. f x <= b) net) /\\\n           (?c. ~eventually (\\x. f x <= c) net)
-      #|  \\x:A. f x <= g x /\\ g x < c
-      #|  eventually (\\x:A. f x <= c) net
-      #|  eventually (\\x:A. g x < c) net
-      #|  forall net f g l m.\n     (f has_limsup l) net /\\\n     (g has_limsup m) net /\\\n     ~trivial_limit net /\\\n     eventually (\\x:A. f x <= g x) net\n     ==> l <= m
-      #|  \\x:A. b:real
-      #|  f:A->real
-      #|  net:A net
-      #|  forall net f b l. eventually (\\x:A. f x <= b) net /\\\n               (f has_limsup l) net /\\\n               ~trivial_limit net\n               ==> l <= b
-      #|  forall a l. (a has_limsup l) sequentially <=>\n         (forall c. l < c ==> ?N. forall n. N <= n ==> a n <= c) /\\\n         (forall c. c < l ==> forall N. ?n. N <= n /\\ c < a n)
-      #|  FINITE (k:num->bool)
-      #|  forall a l k. (a has_limsup l) (sequentially within k) <=>\n           FINITE k \\/\n           (forall c. l < c ==> (?N. forall n. n IN k /\\ N <= n ==> a n <= c)) /\\\n           (forall c. c < l ==> (forall N. ?n. n IN k /\\ N <= n /\\ c < a n))
-      #|  l + e / &2
-      #|  M:num
-      #|  l + e / &2
-      #|  f (M:num):real
-      #|  n:num
-      #|  N:num
-      #|  l - e:real
-      #|  l + e / &2
-      #|  forall f l. (f has_limsup l) sequentially\n         ==> ((\\n. sup {f m | m >= n}) ---> l) sequentially
-      #|  m:num
-      #|  l - (l - c):real = c
-      #|  MAX N M
-      #|  b:real
-      #|  c:real
-      #|  {f k:real | k >= MAX N M}
-      #|  l - c:real
-      #|  n:num
-      #|  sup {f k | k >= n:num}
-      #|  l + c - l:real = c
-      #|  N:num
-      #|  c - l:real
-      #|  forall f l. (f has_limsup l) sequentially <=>\n         (?b. forall n. f n <= b) /\\\n         ((\\n. sup {f k | k >= n}) ---> l) sequentially
-      #|  forall f l a:real^N.\n     (f has_limsup l) (at a) <=>\n     (forall c. l < c ==> ?r. &0 < r /\\\n                        forall x. &0 < dist(x,a) /\\ dist(x,a) < r ==> f x <= c) /\\\n     (forall c r. &0 < r /\\ c < l\n            ==> ?x. &0 < dist(x,a) /\\ dist(x,a) < r /\\ c < f x)
-      #|  l + (c - l) / &2 = (c + l) / &2
-      #|  x:real^N
-      #|  x:real^N
-      #|  b0:real
-      #|  sup {f y:real | &0 < dist (y:real^N,a) /\\ dist (y,a) <= dist (x,a)}
-      #|  min r0 d
-      #|  l < c ==> &0 < (c - l) / &2
-      #|  (c - l) / &2
-      #|  (c + l) / &2
-      #|  dist(a+v,a:real^N) = norm v
+      #|  (y : Real)
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 y : Real, a <= b && real_continuous_on(f, real_interval([(a, b)])) && f(b) <= y && y <= f(a) \226\134\146 (\226\136\131 x : Real, IN(x, real_interval([(a, b)])) && f(x) == y)
+      #|  \226\136\128 s : (Real) -> Bool, real_continuous_on((f : (Real) -> Real), s) && is_realinterval(s) \226\134\146 is_realinterval(IMAGE(f, s))
+      #|  (b : Real)
+      #|  (e : Real)
+      #|  interval([(lift((a : Real)), lift((b : Real)))])
+      #|  lift((a : Real))
+      #|  (x : Cart[Real, Unit]) => op_pct((f' : Real), x)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 e : Real, a < b && real_of_num(0) < e && has_real_derivative(f, f', within(atreal(a), real_interval([(a, b)]))) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) && abs(x - a) < e \226\134\146 f(a) <= f(x)) \226\134\146 real_of_num(0) <= f'
+      #|  ((f : Real) * (ba : Real) <= real_of_num(0)) == (real_of_num(0) <= -f * ba)
+      #|  (b : Real)
+      #|  (e : Real)
+      #|  interval([(lift((a : Real)), lift((b : Real)))])
+      #|  lift((a : Real))
+      #|  (x : Cart[Real, Unit]) => op_pct((f' : Real), x)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 e : Real, a < b && real_of_num(0) < e && has_real_derivative(f, f', within(atreal(a), real_interval([(a, b)]))) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) && abs(x - a) < e \226\134\146 f(x) <= f(a)) \226\134\146 f' <= real_of_num(0)
+      #|  ((f : Real) * ((a : Real) - (b : Real)) <= real_of_num(0)) == (real_of_num(0) <= f * (b - a))
+      #|  (a : Real)
+      #|  (e : Real)
+      #|  interval([(lift((a : Real)), lift((b : Real)))])
+      #|  lift((b : Real))
+      #|  (x : Cart[Real, Unit]) => op_pct((f' : Real), x)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 e : Real, a < b && real_of_num(0) < e && has_real_derivative(f, f', within(atreal(b), real_interval([(a, b)]))) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) && abs(x - b) < e \226\134\146 f(x) <= f(b)) \226\134\146 real_of_num(0) <= f'
+      #|  (real_of_num(0) <= (f : Real) * ((a : Real) - (b : Real))) == (real_of_num(0) <= -f * (b - a))
+      #|  (a : Real)
+      #|  (e : Real)
+      #|  interval([(lift((a : Real)), lift((b : Real)))])
+      #|  lift((b : Real))
+      #|  (x : Cart[Real, Unit]) => op_pct((f' : Real), x)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 e : Real, a < b && real_of_num(0) < e && has_real_derivative(f, f', within(atreal(b), real_interval([(a, b)]))) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) && abs(x - b) < e \226\134\146 f(b) <= f(x)) \226\134\146 f' <= real_of_num(0)
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  lift((x : Real))
+      #|  (x : Cart[Real, Unit]) => op_pct((f' : Real), x)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, IN(x, s) && real_open(s) && has_real_derivative(f, f', atreal(x)) && ((\226\136\128 y : Real, IN(y, s) \226\134\146 f(y) <= f(x)) || (\226\136\128 y : Real, IN(y, s) \226\134\146 f(x) <= f(y))) \226\134\146 f' == real_of_num(0)
+      #|  lift(real_of_num(1))
+      #|  (t : Cart[Real, Unit])
+      #|  (t : Cart[Real, Unit])
+      #|  (t : Cart[Real, Unit])
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  (x : Cart[Real, Unit]) => (h : Cart[Real, Unit]) => op_pct((f' : (Real) -> Real)(drop(x)), h)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a < b && f(a) == f(b) && real_continuous_on(f, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval((a, b))) \226\134\146 has_real_derivative(f, f'(x), atreal(x))) \226\134\146 (\226\136\131 x : Real, IN(x, real_interval((a, b))) && f'(x) == real_of_num(0))
+      #|  (a : Real) < (b : Real)
+      #|  (a : Real) < (b : Real) \226\134\146 ((fx : Real) - (fba : Real) / (b - a) == real_of_num(0)) == (fba == fx * (b - a))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => (f' : (Real) -> Real)(x) - ((f : (Real) -> Real)((b : Real)) - f((a : Real))) / (b - a)
+      #|  (x : Real) => (f : (Real) -> Real)(x) - (f((b : Real)) - f((a : Real))) / (b - a) * x
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a < b && real_continuous_on(f, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval((a, b))) \226\134\146 has_real_derivative(f, f'(x), atreal(x))) \226\134\146 (\226\136\131 x : Real, IN(x, real_interval((a, b))) && f(b) - f(a) == f'(x) * (b - a))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a < b && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), real_interval([(a, b)])))) \226\134\146 (\226\136\131 x : Real, IN(x, real_interval((a, b))) && f(b) - f(a) == f'(x) * (b - a))
+      #|  (b : Real) == (a : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a <= b && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), real_interval([(a, b)])))) \226\134\146 (\226\136\131 x : Real, IN(x, real_interval([(a, b)])) && f(b) - f(a) == f'(x) * (b - a))
+      #|  ((a : Real) - a == (b : Real) * ((c : Real) - (d : Real))) == (b == real_of_num(0) || c == d)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a < b && f(a) == f(b) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), real_interval([(a, b)])))) \226\134\146 (\226\136\131 x : Real, IN(x, real_interval((a, b))) && f'(x) == real_of_num(0))
+      #|  (a : Real) < (b : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => (f' : (Real) -> Real)(x) * ((g : (Real) -> Real)((b : Real)) - g((a : Real))) - (g' : (Real) -> Real)(x) * ((f : (Real) -> Real)(b) - f(a))
+      #|  (x : Real) => (f : (Real) -> Real)(x) * ((g : (Real) -> Real)((b : Real)) - g((a : Real))) - g(x) * (f(b) - f(a))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a < b && real_continuous_on(f, real_interval([(a, b)])) && real_continuous_on(g, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval((a, b))) \226\134\146 has_real_derivative(f, f'(x), atreal(x)) && has_real_derivative(g, g'(x), atreal(x))) \226\134\146 (\226\136\131 x : Real, IN(x, real_interval((a, b))) && (f(b) - f(a)) * g'(x) == (g(b) - g(a)) * f'(x))
+      #|  abs((x : Real) - (c : Real))
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (a && b \226\134\146 c \226\134\146 d)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  real_of_num(0) < abs((x : Real) - (c : Real)) \226\134\146 !(x == c)
+      #|  (d : Real)
+      #|  (l : Real)
+      #|  (c : Real)
+      #|  (g' : (Real) -> Real)
+      #|  (f' : (Real) -> Real)
+      #|  (x : Real) => if x == (c : Real) { real_of_num(0) } else { (g : (Real) -> Real)(x) }
+      #|  (x : Real) => if x == (c : Real) { real_of_num(0) } else { (f : (Real) -> Real)(x) }
+      #|  (f : Real) * (g' : Real) == (g : Real) * (f' : Real) && !(g == real_of_num(0)) && !(g' == real_of_num(0)) \226\134\146 f / g == f' / g'
+      #|  (c : Real)
+      #|  (x : Real)
+      #|  (g' : (Real) -> Real)
+      #|  (f' : (Real) -> Real)
+      #|  (g : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (x : Real)
+      #|  (c : Real)
+      #|  (g' : (Real) -> Real)
+      #|  (f' : (Real) -> Real)
+      #|  (g : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (c : Real) < (x : Real) || x < c
+      #|  \226\136\131 y : Real, real_of_num(0) < abs(y - (c : Real)) && abs(y - c) < abs((x : Real) - c) && (f : (Real) -> Real)(x) / (g : (Real) -> Real)(x) == (f' : (Real) -> Real)(y) / (g' : (Real) -> Real)(y)
+      #|  (x : Real)
+      #|  min((d : Real), (k : Real))
+      #|  (k : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((x : Real) => (f' : (Real) -> Real)(x) / (g' : (Real) -> Real)(x), (l : Real), atreal((c : Real)))
+      #|  (y : Real)
+      #|  (c : Real)
+      #|  (x : Real)
+      #|  (g' : (Real) -> Real)
+      #|  (g : (Real) -> Real)
+      #|  (x : Real)
+      #|  (c : Real)
+      #|  (g' : (Real) -> Real)
+      #|  (g : (Real) -> Real)
+      #|  (c : Real) < (x : Real) || x < c
+      #|  \226\136\128 x : Real, real_of_num(0) < abs(x - (c : Real)) && abs(x - c) < (d : Real) \226\134\146 !((g : (Real) -> Real)(x) == real_of_num(0))
+      #|  (x : Real) == (c : Real) || real_of_num(0) < abs(x - c)
+      #|  (x : Real)
+      #|  (\226\136\128 x : Real, abs(x - (c : Real)) < (d : Real) \226\134\146 real_continuous((f : (Real) -> Real), atreal(x))) && (\226\136\128 x : Real, abs(x - c) < d \226\134\146 real_continuous((g : (Real) -> Real), atreal(x)))
+      #|  ((a : Bool) \226\134\146 (b : Bool) && (c : Bool)) == ((a \226\134\146 b) && (a \226\134\146 c))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 c : Real, \226\136\128 l : Real, \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, real_of_num(0) < abs(x - c) && abs(x - c) < d \226\134\146 has_real_derivative(f, f'(x), atreal(x)) && has_real_derivative(g, g'(x), atreal(x)) && !(g'(x) == real_of_num(0))) && f(c) == real_of_num(0) && g(c) == real_of_num(0) && op_minus_minus_minus_gt(f, real_of_num(0), atreal(c)) && op_minus_minus_minus_gt(g, real_of_num(0), atreal(c)) && op_minus_minus_minus_gt((x : Real) => f'(x) / g'(x), l, atreal(c)) \226\134\146 op_minus_minus_minus_gt((x : Real) => f(x) / g(x), l, atreal(c))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 c : Real, \226\136\128 l : Real, \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, real_of_num(0) < abs(x - c) && abs(x - c) < d \226\134\146 has_real_derivative(f, f'(x), atreal(x)) && has_real_derivative(g, g'(x), atreal(x)) && !(g'(x) == real_of_num(0))) && op_minus_minus_minus_gt(f, real_of_num(0), atreal(c)) && op_minus_minus_minus_gt(g, real_of_num(0), atreal(c)) && op_minus_minus_minus_gt((x : Real) => f'(x) / g'(x), l, atreal(c)) \226\134\146 op_minus_minus_minus_gt((x : Real) => f(x) / g(x), l, atreal(c))
+      #|  real_interval([((a : Real), (b : Real))])
+      #|  has_real_derivative((f : (Real) -> Real), (f' : (Real) -> Real)((x : Real)), within(atreal(x), real_interval(((a : Real), (b : Real)))))
+      #|  !(q : Bool) && (p : Bool) \226\134\146 (p \226\134\146 q) \226\134\146 (r : Bool)
+      #|  real_of_num(1)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f' : (Real) -> Real)((b : Real)) - (t : Real)
+      #|  (x : Real) => (f : (Real) -> Real)(x) - (t : Real) * x
+      #|  (x : Real) == (b : Real)
+      #|  !(q : Bool) && (p : Bool) \226\134\146 (p \226\134\146 q) \226\134\146 (r : Bool)
+      #|  real_of_num(1)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f' : (Real) -> Real)((a : Real)) - (t : Real)
+      #|  (x : Real) => (f : (Real) -> Real)(x) - (t : Real) * x
+      #|  (x : Real) == (a : Real)
+      #|  real_interval(((a : Real), (b : Real)))
+      #|  (x : Real)
+      #|  (f' : (Real) -> Real)((x : Real)) - (t : Real)
+      #|  (x : Real) => (f : (Real) -> Real)(x) - (t : Real) * x
+      #|  (x : Real)
+      #|  real_interval([((a : Real), (b : Real))])
+      #|  (x : Real) => (f : (Real) -> Real)(x) - (t : Real) * x
+      #|  (a : Real) < (b : Real)
+      #|  (b : Real) == (a : Real)
+      #|  (f' : (Real) -> Real)((b : Real)) == (t : Real)
+      #|  (f' : (Real) -> Real)((a : Real)) == (t : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a <= b && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), real_interval([(a, b)])))) \226\134\146 (\226\136\128 t : Real, f'(a) <= t && t <= f'(b) \226\134\146 (\226\136\131 x : Real, IN(x, real_interval([(a, b)])) && f'(x) == t))
+      #|  -(t : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => -(f' : (Real) -> Real)(x)
+      #|  (x : Real) => -(f : (Real) -> Real)(x)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a <= b && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), real_interval([(a, b)])))) \226\134\146 (\226\136\128 t : Real, f'(b) <= t && t <= f'(a) \226\134\146 (\226\136\131 x : Real, IN(x, real_interval([(a, b)])) && f'(x) == t))
+      #|  IMAGE(lift, (t : (Real) -> Bool))
+      #|  (x : Cart[Real, Unit]) => op_pct((f' : Real), x)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 t : (Real) -> Bool, \226\136\128 y : Real, has_real_derivative(f, f', atreal(g(y))) && !(f' == real_of_num(0)) && real_continuous(g, atreal(y)) && real_open(t) && IN(y, t) && (\226\136\128 z : Real, IN(z, t) \226\134\146 f(g(z)) == z) \226\134\146 has_real_derivative(g, inv(f'), atreal(y))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  (x : Cart[Real, Unit]) => op_pct((f' : Real), x)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_open(s) && IN(x, s) && real_continuous_on(f, s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 g(f(x)) == x) && has_real_derivative(f, f', atreal(x)) && !(f' == real_of_num(0)) \226\134\146 has_real_derivative(g, inv(f'), atreal(f(x)))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  (x : Cart[Real, Unit]) => op_pct((f' : Real), x)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 y : Real, real_open(s) && IN(g(y), s) && real_continuous_on(f, s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 g(f(x)) == x) && has_real_derivative(f, f', atreal(g(y))) && !(f' == real_of_num(0)) && f(g(y)) == y \226\134\146 has_real_derivative(g, inv(f'), atreal(y))
+      #|  (has_limsup : ((A) -> Real, Real, Net[A]) -> Bool)((f : (A) -> Real), (l : Real), (net : Net[A])) == (trivial_limit(net) || has_inf({(b : Real) | eventually((x : A) => f(x) <= b, net)}, l))
+      #|  (has_liminf : ((A) -> Real, Real, Net[A]) -> Bool)((f : (A) -> Real), (l : Real), (net : Net[A])) == (trivial_limit(net) || has_sup({(b : Real) | eventually((x : A) => b <= f(x), net)}, l))
+      #|  \226\136\128 b : Real, eventually((x : A) => (g : (A) -> Real)(x) <= b, (net : Net[A])) == eventually((x : A) => (f : (A) -> Real)(x) <= b, net)
+      #|  trivial_limit((net : Net[A]))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 l : Real, eventually((x : A) => f(x) == g(x), net) && has_limsup(f, l, net) \226\134\146 has_limsup(g, l, net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 l : Real, \226\136\128 b : Real, !trivial_limit(net) && has_limsup(f, l, net) && l < b \226\134\146 eventually((x : A) => f(x) < b, net)
+      #|  ((c : Real) - (l : Real)) / real_of_num(2)
+      #|  ((l : Real) + (c : Real)) / real_of_num(2)
+      #|  real_of_num(1)
+      #|  (l : Real) + real_of_num(1)
+      #|  trivial_limit((net : Net[A]))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(f, l, net) \226\134\146 has_limsup(f, l, net)
+      #|  (l : Real) + real_of_num(1)
+      #|  trivial_limit((net : Net[A]))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 l : Real, has_limsup(f, l, net) \226\134\146 (\226\136\131 b : Real, eventually((x : A) => f(x) <= b, net))
+      #|  {(b : Real) | eventually((x : A) => (f : (A) -> Real)(x) <= b, (net : Net[A]))}
+      #|  (l : Real) <= (c : Real)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 l : Real, \226\136\128 c : Real, !trivial_limit(net) && has_limsup(f, l, net) && c < l \226\134\146 !eventually((x : A) => f(x) <= c, net)
+      #|  ((l : Real) + (c : Real)) / real_of_num(2)
+      #|  (l : Real) + real_of_num(1)
+      #|  (x : A) => (f : (A) -> Real)(x) < (c : Real)
+      #|  trivial_limit((net : Net[A]))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 l : Real, has_limsup(f, l, net) == (trivial_limit(net) || (\226\136\128 c : Real, l < c \226\134\146 eventually((x : A) => f(x) <= c, net)) && (\226\136\128 c : Real, c < l \226\134\146 !eventually((x : A) => f(x) <= c, net)))
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  trivial_limit((net : Net[A]))
+      #|  (l : Real) - real_of_num(1)
+      #|  (l : Real) - real_of_num(1)
+      #|  (l : Real) < l + real_of_num(1)
+      #|  trivial_limit((net : Net[A]))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, (\226\136\131 l : Real, has_limsup(f, l, net)) == (trivial_limit(net) || (\226\136\131 b : Real, eventually((x : A) => f(x) <= b, net)) && (\226\136\131 c : Real, !eventually((x : A) => f(x) <= c, net)))
+      #|  (x : A) => (f : (A) -> Real)(x) <= (g : (A) -> Real)(x) && g(x) < (c : Real)
+      #|  eventually((x : A) => (f : (A) -> Real)(x) <= (c : Real), (net : Net[A]))
+      #|  eventually((x : A) => (g : (A) -> Real)(x) < (c : Real), (net : Net[A]))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 l : Real, \226\136\128 m : Real, has_limsup(f, l, net) && has_limsup(g, m, net) && !trivial_limit(net) && eventually((x : A) => f(x) <= g(x), net) \226\134\146 l <= m
+      #|  (x : A) => (b : Real)
+      #|  (f : (A) -> Real)
+      #|  (net : Net[A])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 b : Real, \226\136\128 l : Real, eventually((x : A) => f(x) <= b, net) && has_limsup(f, l, net) && !trivial_limit(net) \226\134\146 l <= b
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 l : Real, has_limsup(a, l, sequentially) == ((\226\136\128 c : Real, l < c \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 a(n) <= c)) && (\226\136\128 c : Real, c < l \226\134\146 (\226\136\128 N : Num, \226\136\131 n : Num, N <= n && c < a(n))))
+      #|  FINITE((k : (Num) -> Bool))
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 l : Real, \226\136\128 k : (Num) -> Bool, has_limsup(a, l, within(sequentially, k)) == (FINITE(k) || (\226\136\128 c : Real, l < c \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, IN(n, k) && N <= n \226\134\146 a(n) <= c)) && (\226\136\128 c : Real, c < l \226\134\146 (\226\136\128 N : Num, \226\136\131 n : Num, IN(n, k) && N <= n && c < a(n))))
+      #|  (l : Real) + (e : Real) / real_of_num(2)
+      #|  (M : Num)
+      #|  (l : Real) + (e : Real) / real_of_num(2)
+      #|  (f : (Num) -> Real)((M : Num))
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (l : Real) - (e : Real)
+      #|  (l : Real) + (e : Real) / real_of_num(2)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, has_limsup(f, l, sequentially) \226\134\146 op_minus_minus_minus_gt((n : Num) => sup({f((m : Num)) | m >= n}), l, sequentially)
+      #|  (m : Num)
+      #|  (l : Real) - (l - (c : Real)) == c
+      #|  MAX((N : Num), (M : Num))
+      #|  (b : Real)
+      #|  (c : Real)
+      #|  {(f : (Num) -> Real)((k : Num)) | k >= MAX((N : Num), (M : Num))}
+      #|  (l : Real) - (c : Real)
+      #|  (n : Num)
+      #|  sup({(f : (Num) -> Real)((k : Num)) | k >= (n : Num)})
+      #|  (l : Real) + ((c : Real) - l) == c
+      #|  (N : Num)
+      #|  (c : Real) - (l : Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, has_limsup(f, l, sequentially) == ((\226\136\131 b : Real, \226\136\128 n : Num, f(n) <= b) && op_minus_minus_minus_gt((n : Num) => sup({f((k : Num)) | k >= n}), l, sequentially))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], has_limsup(f, l, at(a)) == ((\226\136\128 c : Real, l < c \226\134\146 (\226\136\131 r : Real, real_of_num(0) < r && (\226\136\128 x : Cart[Real, N], real_of_num(0) < dist((x, a)) && dist((x, a)) < r \226\134\146 f(x) <= c))) && (\226\136\128 c : Real, \226\136\128 r : Real, real_of_num(0) < r && c < l \226\134\146 (\226\136\131 x : Cart[Real, N], real_of_num(0) < dist((x, a)) && dist((x, a)) < r && c < f(x))))
+      #|  (l : Real) + ((c : Real) - l) / real_of_num(2) == (c + l) / real_of_num(2)
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (b0 : Real)
+      #|  sup({(f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) | real_of_num(0) < dist((y, (a : Cart[Real, N]))) && dist((y, a)) <= dist(((x : Cart[Real, N]), a))})
+      #|  min((r0 : Real), (d : Real))
+      #|  (l : Real) < (c : Real) \226\134\146 real_of_num(0) < (c - l) / real_of_num(2)
+      #|  ((c : Real) - (l : Real)) / real_of_num(2)
+      #|  ((c : Real) + (l : Real)) / real_of_num(2)
+      #|  dist(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
       #|  :real
       #|  :real
-      #|  dist(a+v,a:real^N) = norm v
+      #|  dist(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
       #|  :real
       #|  :real
-      #|  x:real^N
-      #|  f (x:real^N):real
-      #|  sup {f y | &0 < dist (y,a:real^N) /\\ dist (y,a) <= dist (x,a)}
-      #|  b:real < b
-      #|  dist(a+v,a:real^N) = norm v
+      #|  (x : Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))
+      #|  sup({(f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) | real_of_num(0) < dist((y, (a : Cart[Real, N]))) && dist((y, a)) <= dist(((x : Cart[Real, N]), a))})
+      #|  (b : Real) < b
+      #|  dist(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
       #|  :real
       #|  :real
-      #|  x:real^N
-      #|  x:real^N = a + (r1 / &2) % basis 1
-      #|  r1:real = min r d
-      #|  l - (l - b):real = b
-      #|  l - b:real
-      #|  r0:real
-      #|  b0:real
-      #|  dist (inv(&2) % (x + a),a:real^N) = inv(&2) * dist(x,a)
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N]) == (a : Cart[Real, N]) + op_pct((r1 : Real) / real_of_num(2), basis(1))
+      #|  (r1 : Real) == min((r : Real), (d : Real))
+      #|  (l : Real) - (l - (b : Real)) == b
+      #|  (l : Real) - (b : Real)
+      #|  (r0 : Real)
+      #|  (b0 : Real)
+      #|  dist((op_pct(inv(real_of_num(2)), (x : Cart[Real, N]) + (a : Cart[Real, N])), a)) == inv(real_of_num(2)) * dist((x, a))
       #|  :real
       #|  :real
-      #|  y:real^N
-      #|  f (y:real^N):real
-      #|  y:real^N = inv (&2) % (x + a)
-      #|  c:real
-      #|  y:real^N
-      #|  c:real
-      #|  f (y:real^N):real
-      #|  dist(x:real^N,a)
-      #|  &0 < e ==> ~(l <= l - e)
-      #|  l - e:real
-      #|  d:real
-      #|  l + e:real
-      #|  r:real
-      #|  c:real
-      #|  l < l + &1
-      #|  forall f l a:real^N.\n     (f has_limsup l) (at a) <=>\n     (?b r. &0 < r /\\ (forall x. &0 < dist(x,a) /\\ dist(x,a) < r ==> f x <= b)) /\\\n     ((\\x. sup{f y | &0 < dist(y,a) /\\ dist(y,a) <= dist(x,a)}) ---> l)\n     (at a)
-      #|  x:real
-      #|  d:real
-      #|  c - a * b:real
-      #|  (\\x. (a + x) * (b + x)) real_continuous atreal (&0)
-      #|  forall a b c. a * b < c\n             ==> ?d. &0 < d /\\ forall x. abs x < d ==> (a + x) * (b + x) < c
-      #|  x:real
-      #|  d:real
-      #|  a * b - c:real
-      #|  (\\x. (a + x) * (b + x)) real_continuous atreal (&0)
-      #|  forall a b c. c < a * b\n             ==> ?d. &0 < d /\\ forall x. abs x < d ==> c < (a + x) * (b + x)
-      #|  -- r / &2
-      #|  c:real
-      #|  f(x:A) * g x:real
-      #|  b - r / &2
-      #|  r / &2
-      #|  a - r / &2
-      #|  r = min b d / &2
-      #|  g:A->real
-      #|  net:A net
-      #|  &0 <= b
-      #|  &0 < b
-      #|  f (x:A) * g x:real
-      #|  eventually (\\x:A. &0 <= c) net
-      #|  &0 <= c
-      #|  b = &0
-      #|  (a + d / &2) * (b + d / &2)
-      #|  a + d / &2
-      #|  d / &2
-      #|  trivial_limit (net:A net)
-      #|  forall net f g a b. (f has_limsup a) net /\\\n                 (g ---> b) net /\\\n                 eventually (\\x:A. &0 <= f x) net /\\\n                 eventually (\\x:A. &0 <= g x) net\n                 ==> ((\\x. f x * g x) has_limsup a * b) net
-      #|  forall net f g a b. (f ---> a) net /\\\n                 (g has_limsup b) net /\\\n                 eventually (\\x:A. &0 <= f x) net /\\\n                 eventually (\\x:A. &0 <= g x) net\n                 ==> ((\\x. f x * g x) has_limsup a * b) net
-      #|  b:real
-      #|  &0
-      #|  f:num->real
-      #|  (\\n:num. &0)
-      #|  sequentially within k
-      #|  forall f b k. (f has_limsup b) (sequentially within k)  /\\ (forall x. &0 <= f x) /\\\n            ~(FINITE k)\n            ==> &0 <= b
-      #|  forall b. eventually (\\x:A. b <= g x) net <=> eventually (\\x. b <= f x) net
-      #|  trivial_limit (net:A net)
-      #|  forall net f g l. eventually (\\x:A. f x = g x) net /\\ (f has_liminf l) net\n               ==> (g has_liminf l) net
-      #|  forall net f l b. ~trivial_limit net /\\ (f has_liminf l) net /\\ b < l\n               ==> eventually (\\x:A. b < f x) net
-      #|  (l - c) / &2
-      #|  (l + c) / &2
-      #|  &1
-      #|  l - &1
-      #|  trivial_limit (net:A net)
-      #|  forall net f:A->real l. (f ---> l) net ==> (f has_liminf l) net
-      #|  l - &1
-      #|  trivial_limit (net:A net)
-      #|  forall net f l. (f has_liminf l) net ==> ?b. eventually (\\x:A. b <= f x) net
-      #|  {b | eventually (\\x:A. b <= f x) net}
-      #|  c <= l
-      #|  forall net f l c.\n     ~trivial_limit net /\\ (f has_liminf l) net /\\ l < c\n     ==> ~eventually (\\x:A. c <= f x) net
-      #|  (c + l) / &2
-      #|  l - &1
-      #|  (\\x:A. c < f x)
-      #|  trivial_limit (net:A net)
-      #|  forall net f l. (f has_liminf l) net <=>\n             trivial_limit net \\/\n             (forall c. c < l ==> eventually (\\x:A. c <= f x) net) /\\\n             (forall c. l < c ==> ~eventually (\\x:A. c <= f x) net)
-      #|  c:real
-      #|  b:real
-      #|  trivial_limit (net:A net)
-      #|  l + &1
-      #|  l + &1
-      #|  l - &1 < l
-      #|  trivial_limit (net:A net)
-      #|  forall net f. (?l. (f has_liminf l) net) <=>\n           trivial_limit net \\/\n           (?b. eventually (\\x:A. b <= f x) net) /\\\n           (?c. ~eventually (\\x. c <= f x) net)
-      #|  \\x:A. c < f x /\\ f x <= g x
-      #|  eventually (\\x:A. c <= g x) net
-      #|  eventually (\\x:A. c < f x) net
-      #|  forall net f g l m.\n     (f has_liminf l) net /\\\n     (g has_liminf m) net /\\\n     ~trivial_limit net /\\\n     eventually (\\x:A. f x <= g x) net\n     ==> l <= m
-      #|  f:A->real
-      #|  \\x:A. b:real
-      #|  net:A net
-      #|  forall net f b l. eventually (\\x:A. b <= f x) net /\\\n               (f has_liminf l) net /\\\n               ~trivial_limit net\n               ==> b <= l
-      #|  forall a l. (a has_liminf l) sequentially <=>\n         (forall c. c < l ==> ?N. forall n. N <= n ==> c <= a n) /\\\n         (forall c. l < c ==> forall N. ?n. N <= n /\\ a n < c)
-      #|  FINITE (k:num->bool)
-      #|  forall a l k. (a has_liminf l) (sequentially within k) <=>\n           FINITE k \\/\n           (forall c. c < l ==> (?N. forall n. n IN k /\\ N <= n ==> c <= a n)) /\\\n           (forall c. l < c ==> (forall N. ?n. n IN k /\\ N <= n /\\ a n < c))
-      #|  M:num
-      #|  l - e / &2
-      #|  f (M:num):real
-      #|  l - e / &2
-      #|  n:num
-      #|  N:num
-      #|  l + e:real
-      #|  l - e / &2
-      #|  forall f l. (f has_liminf l) sequentially\n         ==> ((\\n. inf {f m | m >= n}) ---> l) sequentially
-      #|  m:num
-      #|  l + (c - l):real = c
-      #|  MAX N M
-      #|  b:real
-      #|  c:real
-      #|  {f k:real | k >= MAX N M}
-      #|  c - l:real
-      #|  n:num
-      #|  inf {f k | k >= n:num}
-      #|  l - (l - c):real = c
-      #|  N:num
-      #|  l - c:real
-      #|  forall f l. (f has_liminf l) sequentially <=>\n         (?b. forall n. b <= f n) /\\\n         ((\\n. inf {f k | k >= n}) ---> l) sequentially
-      #|  forall f l a:real^N.\n     (f has_liminf l) (at a) <=>\n     (forall c. c < l ==> ?r. &0 < r /\\\n                        forall x. &0 < dist(x,a) /\\ dist(x,a) < r ==> c <= f x) /\\\n     (forall c r. &0 < r /\\ l < c\n            ==> ?x. &0 < dist(x,a) /\\ dist(x,a) < r /\\ f x < c)
-      #|  l - (l - c) / &2 = (c + l) / &2
-      #|  x:real^N
-      #|  x:real^N
-      #|  b0:real
-      #|  inf {f y:real | &0 < dist (y:real^N,a) /\\ dist (y,a) <= dist (x,a)}
-      #|  min r0 d
-      #|  c < l ==> &0 < (l - c) / &2
-      #|  (l - c) / &2
-      #|  (c + l) / &2
-      #|  dist(a+v,a:real^N) = norm v
+      #|  (y : Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))
+      #|  (y : Cart[Real, N]) == op_pct(inv(real_of_num(2)), (x : Cart[Real, N]) + (a : Cart[Real, N]))
+      #|  (c : Real)
+      #|  (y : Cart[Real, N])
+      #|  (c : Real)
+      #|  (f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))
+      #|  dist(((x : Cart[Real, N]), (a : Cart[Real, N])))
+      #|  real_of_num(0) < (e : Real) \226\134\146 !((l : Real) <= l - e)
+      #|  (l : Real) - (e : Real)
+      #|  (d : Real)
+      #|  (l : Real) + (e : Real)
+      #|  (r : Real)
+      #|  (c : Real)
+      #|  (l : Real) < l + real_of_num(1)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], has_limsup(f, l, at(a)) == ((\226\136\131 b : Real, \226\136\131 r : Real, real_of_num(0) < r && (\226\136\128 x : Cart[Real, N], real_of_num(0) < dist((x, a)) && dist((x, a)) < r \226\134\146 f(x) <= b)) && op_minus_minus_minus_gt((x : Cart[Real, N]) => sup({f((y : Cart[Real, N])) | real_of_num(0) < dist((y, a)) && dist((y, a)) <= dist((x, a))}), l, at(a)))
+      #|  (x : Real)
+      #|  (d : Real)
+      #|  (c : Real) - (a : Real) * (b : Real)
+      #|  real_continuous((x : Real) => ((a : Real) + x) * ((b : Real) + x), atreal(real_of_num(0)))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, a * b < c \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, abs(x) < d \226\134\146 (a + x) * (b + x) < c))
+      #|  (x : Real)
+      #|  (d : Real)
+      #|  (a : Real) * (b : Real) - (c : Real)
+      #|  real_continuous((x : Real) => ((a : Real) + x) * ((b : Real) + x), atreal(real_of_num(0)))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, c < a * b \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, abs(x) < d \226\134\146 c < (a + x) * (b + x)))
+      #|  -(r : Real) / real_of_num(2)
+      #|  (c : Real)
+      #|  (f : (A) -> Real)((x : A)) * (g : (A) -> Real)(x)
+      #|  (b : Real) - (r : Real) / real_of_num(2)
+      #|  (r : Real) / real_of_num(2)
+      #|  (a : Real) - (r : Real) / real_of_num(2)
+      #|  (r : Real) == min((b : Real), (d : Real)) / real_of_num(2)
+      #|  (g : (A) -> Real)
+      #|  (net : Net[A])
+      #|  real_of_num(0) <= (b : Real)
+      #|  real_of_num(0) < (b : Real)
+      #|  (f : (A) -> Real)((x : A)) * (g : (A) -> Real)(x)
+      #|  eventually((x : A) => real_of_num(0) <= (c : Real), (net : Net[A]))
+      #|  real_of_num(0) <= (c : Real)
+      #|  (b : Real) == real_of_num(0)
+      #|  ((a : Real) + (d : Real) / real_of_num(2)) * ((b : Real) + d / real_of_num(2))
+      #|  (a : Real) + (d : Real) / real_of_num(2)
+      #|  (d : Real) / real_of_num(2)
+      #|  trivial_limit((net : Net[A]))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, has_limsup(f, a, net) && op_minus_minus_minus_gt(g, b, net) && eventually((x : A) => real_of_num(0) <= f(x), net) && eventually((x : A) => real_of_num(0) <= g(x), net) \226\134\146 has_limsup((x : A) => f(x) * g(x), a * b, net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, op_minus_minus_minus_gt(f, a, net) && has_limsup(g, b, net) && eventually((x : A) => real_of_num(0) <= f(x), net) && eventually((x : A) => real_of_num(0) <= g(x), net) \226\134\146 has_limsup((x : A) => f(x) * g(x), a * b, net)
+      #|  (b : Real)
+      #|  real_of_num(0)
+      #|  (f : (Num) -> Real)
+      #|  (n : Num) => real_of_num(0)
+      #|  within(sequentially, (k : (Num) -> Bool))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 b : Real, \226\136\128 k : (Num) -> Bool, has_limsup(f, b, within(sequentially, k)) && (\226\136\128 x : Num, real_of_num(0) <= f(x)) && !FINITE(k) \226\134\146 real_of_num(0) <= b
+      #|  \226\136\128 b : Real, eventually((x : A) => b <= (g : (A) -> Real)(x), (net : Net[A])) == eventually((x : A) => b <= (f : (A) -> Real)(x), net)
+      #|  trivial_limit((net : Net[A]))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 l : Real, eventually((x : A) => f(x) == g(x), net) && has_liminf(f, l, net) \226\134\146 has_liminf(g, l, net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 l : Real, \226\136\128 b : Real, !trivial_limit(net) && has_liminf(f, l, net) && b < l \226\134\146 eventually((x : A) => b < f(x), net)
+      #|  ((l : Real) - (c : Real)) / real_of_num(2)
+      #|  ((l : Real) + (c : Real)) / real_of_num(2)
+      #|  real_of_num(1)
+      #|  (l : Real) - real_of_num(1)
+      #|  trivial_limit((net : Net[A]))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(f, l, net) \226\134\146 has_liminf(f, l, net)
+      #|  (l : Real) - real_of_num(1)
+      #|  trivial_limit((net : Net[A]))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 l : Real, has_liminf(f, l, net) \226\134\146 (\226\136\131 b : Real, eventually((x : A) => b <= f(x), net))
+      #|  {(b : Real) | eventually((x : A) => b <= (f : (A) -> Real)(x), (net : Net[A]))}
+      #|  (c : Real) <= (l : Real)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 l : Real, \226\136\128 c : Real, !trivial_limit(net) && has_liminf(f, l, net) && l < c \226\134\146 !eventually((x : A) => c <= f(x), net)
+      #|  ((c : Real) + (l : Real)) / real_of_num(2)
+      #|  (l : Real) - real_of_num(1)
+      #|  (x : A) => (c : Real) < (f : (A) -> Real)(x)
+      #|  trivial_limit((net : Net[A]))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 l : Real, has_liminf(f, l, net) == (trivial_limit(net) || (\226\136\128 c : Real, c < l \226\134\146 eventually((x : A) => c <= f(x), net)) && (\226\136\128 c : Real, l < c \226\134\146 !eventually((x : A) => c <= f(x), net)))
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  trivial_limit((net : Net[A]))
+      #|  (l : Real) + real_of_num(1)
+      #|  (l : Real) + real_of_num(1)
+      #|  (l : Real) - real_of_num(1) < l
+      #|  trivial_limit((net : Net[A]))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, (\226\136\131 l : Real, has_liminf(f, l, net)) == (trivial_limit(net) || (\226\136\131 b : Real, eventually((x : A) => b <= f(x), net)) && (\226\136\131 c : Real, !eventually((x : A) => c <= f(x), net)))
+      #|  (x : A) => (c : Real) < (f : (A) -> Real)(x) && f(x) <= (g : (A) -> Real)(x)
+      #|  eventually((x : A) => (c : Real) <= (g : (A) -> Real)(x), (net : Net[A]))
+      #|  eventually((x : A) => (c : Real) < (f : (A) -> Real)(x), (net : Net[A]))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 l : Real, \226\136\128 m : Real, has_liminf(f, l, net) && has_liminf(g, m, net) && !trivial_limit(net) && eventually((x : A) => f(x) <= g(x), net) \226\134\146 l <= m
+      #|  (f : (A) -> Real)
+      #|  (x : A) => (b : Real)
+      #|  (net : Net[A])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 b : Real, \226\136\128 l : Real, eventually((x : A) => b <= f(x), net) && has_liminf(f, l, net) && !trivial_limit(net) \226\134\146 b <= l
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 l : Real, has_liminf(a, l, sequentially) == ((\226\136\128 c : Real, c < l \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 c <= a(n))) && (\226\136\128 c : Real, l < c \226\134\146 (\226\136\128 N : Num, \226\136\131 n : Num, N <= n && a(n) < c)))
+      #|  FINITE((k : (Num) -> Bool))
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 l : Real, \226\136\128 k : (Num) -> Bool, has_liminf(a, l, within(sequentially, k)) == (FINITE(k) || (\226\136\128 c : Real, c < l \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, IN(n, k) && N <= n \226\134\146 c <= a(n))) && (\226\136\128 c : Real, l < c \226\134\146 (\226\136\128 N : Num, \226\136\131 n : Num, IN(n, k) && N <= n && a(n) < c)))
+      #|  (M : Num)
+      #|  (l : Real) - (e : Real) / real_of_num(2)
+      #|  (f : (Num) -> Real)((M : Num))
+      #|  (l : Real) - (e : Real) / real_of_num(2)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (l : Real) + (e : Real)
+      #|  (l : Real) - (e : Real) / real_of_num(2)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, has_liminf(f, l, sequentially) \226\134\146 op_minus_minus_minus_gt((n : Num) => inf({f((m : Num)) | m >= n}), l, sequentially)
+      #|  (m : Num)
+      #|  (l : Real) + ((c : Real) - l) == c
+      #|  MAX((N : Num), (M : Num))
+      #|  (b : Real)
+      #|  (c : Real)
+      #|  {(f : (Num) -> Real)((k : Num)) | k >= MAX((N : Num), (M : Num))}
+      #|  (c : Real) - (l : Real)
+      #|  (n : Num)
+      #|  inf({(f : (Num) -> Real)((k : Num)) | k >= (n : Num)})
+      #|  (l : Real) - (l - (c : Real)) == c
+      #|  (N : Num)
+      #|  (l : Real) - (c : Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, has_liminf(f, l, sequentially) == ((\226\136\131 b : Real, \226\136\128 n : Num, b <= f(n)) && op_minus_minus_minus_gt((n : Num) => inf({f((k : Num)) | k >= n}), l, sequentially))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], has_liminf(f, l, at(a)) == ((\226\136\128 c : Real, c < l \226\134\146 (\226\136\131 r : Real, real_of_num(0) < r && (\226\136\128 x : Cart[Real, N], real_of_num(0) < dist((x, a)) && dist((x, a)) < r \226\134\146 c <= f(x)))) && (\226\136\128 c : Real, \226\136\128 r : Real, real_of_num(0) < r && l < c \226\134\146 (\226\136\131 x : Cart[Real, N], real_of_num(0) < dist((x, a)) && dist((x, a)) < r && f(x) < c)))
+      #|  (l : Real) - (l - (c : Real)) / real_of_num(2) == (c + l) / real_of_num(2)
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (b0 : Real)
+      #|  inf({(f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) | real_of_num(0) < dist((y, (a : Cart[Real, N]))) && dist((y, a)) <= dist(((x : Cart[Real, N]), a))})
+      #|  min((r0 : Real), (d : Real))
+      #|  (c : Real) < (l : Real) \226\134\146 real_of_num(0) < (l - c) / real_of_num(2)
+      #|  ((l : Real) - (c : Real)) / real_of_num(2)
+      #|  ((c : Real) + (l : Real)) / real_of_num(2)
+      #|  dist(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
       #|  :real
       #|  :real
-      #|  dist(a+v,a:real^N) = norm v
+      #|  dist(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
       #|  :real
       #|  :real
-      #|  x:real^N
-      #|  f (x:real^N):real
-      #|  inf {f y | &0 < dist (y,a:real^N) /\\ dist (y,a) <= dist (x,a)}
-      #|  b < b
-      #|  dist(a+v,a:real^N) = norm v
+      #|  (x : Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))
+      #|  inf({(f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) | real_of_num(0) < dist((y, (a : Cart[Real, N]))) && dist((y, a)) <= dist(((x : Cart[Real, N]), a))})
+      #|  (b : Real) < b
+      #|  dist(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
       #|  :real
       #|  :real
-      #|  x:real^N
-      #|  x:real^N = a + (r1 / &2) % basis 1
-      #|  r1 = min r d
-      #|  l + (b - l):real = b
-      #|  b - l:real
-      #|  r0:real
-      #|  b0:real
-      #|  dist (inv(&2) % (x + a),a:real^N) = inv(&2) * dist(x,a)
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N]) == (a : Cart[Real, N]) + op_pct((r1 : Real) / real_of_num(2), basis(1))
+      #|  (r1 : Real) == min((r : Real), (d : Real))
+      #|  (l : Real) + ((b : Real) - l) == b
+      #|  (b : Real) - (l : Real)
+      #|  (r0 : Real)
+      #|  (b0 : Real)
+      #|  dist((op_pct(inv(real_of_num(2)), (x : Cart[Real, N]) + (a : Cart[Real, N])), a)) == inv(real_of_num(2)) * dist((x, a))
       #|  :real
       #|  :real
-      #|  y:real^N
-      #|  f (y:real^N):real
-      #|  y:real^N = inv (&2) % (x + a)
-      #|  c:real
-      #|  y:real^N
-      #|  c:real
-      #|  f (y:real^N):real
-      #|  dist(x:real^N,a)
-      #|  &0 < e ==> ~(l + e <= l)
-      #|  l + e:real
-      #|  d:real
-      #|  l - e:real
-      #|  r:real
-      #|  c:real
-      #|  l - &1 < l
-      #|  forall f l a:real^N.\n     (f has_liminf l) (at a) <=>\n     (?b r. &0 < r /\\ (forall x. &0 < dist(x,a) /\\ dist(x,a) < r ==> b <= f x)) /\\\n     ((\\x. inf{f y | &0 < dist(y,a) /\\ dist(y,a) <= dist(x,a)}) ---> l)\n     (at a)
-      #|  a n = root n (a n) pow n
-      #|  N + 1
-      #|  \\n. (b + (&1 - b) * inv (&2)) pow n
-      #|  b:real
-      #|  eventually (\\n. root n (a n) < b + (&1 - b) * inv(&2))\n                (sequentially within k)
-      #|  a:num
-      #|  a:num
-      #|  ?a:num. a IN k
-      #|  \\n. root n (a n)
-      #|  \\n:num. &0
-      #|  sequentially within k
-      #|  &0 <= b
-      #|  FINITE (k:num->bool)
-      #|  forall a b k. (forall n. n IN k ==> &0 <= a n) /\\ b < &1 /\\\n           ((\\n. root n (a n)) has_limsup b) (sequentially within k)\n           ==> real_summable k a
-      #|  b:real
-      #|  forall a:num->real^N b k.\n     ((\\n. root n (norm (a n))) has_limsup b) (sequentially within k) /\\ b < &1\n     ==> summable k a
+      #|  (y : Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))
+      #|  (y : Cart[Real, N]) == op_pct(inv(real_of_num(2)), (x : Cart[Real, N]) + (a : Cart[Real, N]))
+      #|  (c : Real)
+      #|  (y : Cart[Real, N])
+      #|  (c : Real)
+      #|  (f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))
+      #|  dist(((x : Cart[Real, N]), (a : Cart[Real, N])))
+      #|  real_of_num(0) < (e : Real) \226\134\146 !((l : Real) + e <= l)
+      #|  (l : Real) + (e : Real)
+      #|  (d : Real)
+      #|  (l : Real) - (e : Real)
+      #|  (r : Real)
+      #|  (c : Real)
+      #|  (l : Real) - real_of_num(1) < l
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], has_liminf(f, l, at(a)) == ((\226\136\131 b : Real, \226\136\131 r : Real, real_of_num(0) < r && (\226\136\128 x : Cart[Real, N], real_of_num(0) < dist((x, a)) && dist((x, a)) < r \226\134\146 b <= f(x))) && op_minus_minus_minus_gt((x : Cart[Real, N]) => inf({f((y : Cart[Real, N])) | real_of_num(0) < dist((y, a)) && dist((y, a)) <= dist((x, a))}), l, at(a)))
+      #|  (a : (Num) -> Real)((n : Num)) == pow(root(n, a(n)), n)
+      #|  (N : Num) + 1
+      #|  (n : Num) => pow((b : Real) + (real_of_num(1) - b) * inv(real_of_num(2)), n)
+      #|  (b : Real)
+      #|  eventually((n : Num) => root(n, (a : (Num) -> Real)(n)) < (b : Real) + (real_of_num(1) - b) * inv(real_of_num(2)), within(sequentially, (k : (Num) -> Bool)))
+      #|  (a : Num)
+      #|  (a : Num)
+      #|  \226\136\131 a : Num, IN(a, (k : (Num) -> Bool))
+      #|  (n : Num) => root(n, (a : (Num) -> Real)(n))
+      #|  (n : Num) => real_of_num(0)
+      #|  within(sequentially, (k : (Num) -> Bool))
+      #|  real_of_num(0) <= (b : Real)
+      #|  FINITE((k : (Num) -> Bool))
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 b : Real, \226\136\128 k : (Num) -> Bool, (\226\136\128 n : Num, IN(n, k) \226\134\146 real_of_num(0) <= a(n)) && b < real_of_num(1) && has_limsup((n : Num) => root(n, a(n)), b, within(sequentially, k)) \226\134\146 real_summable(k, a)
+      #|  (b : Real)
+      #|  \226\136\128 a : (Num) -> Cart[Real, N], \226\136\128 b : Real, \226\136\128 k : (Num) -> Bool, has_limsup((n : Num) => root(n, norm(a(n))), b, within(sequentially, k)) && b < real_of_num(1) \226\134\146 summable(k, a)
       #|  1
-      #|  b:real * norm (z:complex)
-      #|  FINITE (k:num->bool)
-      #|  forall a k b z:complex.\n     ((\\n. root n (norm (a n))) has_limsup b) (sequentially within k) /\\\n     b * norm z < &1\n     ==> real_summable k (\\n. norm (a n * z pow n))
-      #|  b:real
-      #|  forall a k b z:complex.\n     ((\\n. root n (norm (a n))) has_limsup b) (sequentially within k) /\\\n     b * norm z < &1\n     ==> summable k (\\n. a n * z pow n)
-      #|  &1 = &1 - &0
-      #|  forall f:num->real a. (f ---> a) = (f ---> a rpow &1)
-      #|  &0 < &n
-      #|  2 <= n ==> 1 <= n
-      #|  2 <= n ==> ~(n = 0)
+      #|  (b : Real) * norm((z : Cart[Real, Tybit0[Unit]]))
+      #|  FINITE((k : (Num) -> Bool))
+      #|  \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 k : (Num) -> Bool, \226\136\128 b : Real, \226\136\128 z : Cart[Real, Tybit0[Unit]], has_limsup((n : Num) => root(n, norm(a(n))), b, within(sequentially, k)) && b * norm(z) < real_of_num(1) \226\134\146 real_summable(k, (n : Num) => norm(a(n) * pow(z, n)))
+      #|  (b : Real)
+      #|  \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 k : (Num) -> Bool, \226\136\128 b : Real, \226\136\128 z : Cart[Real, Tybit0[Unit]], has_limsup((n : Num) => root(n, norm(a(n))), b, within(sequentially, k)) && b * norm(z) < real_of_num(1) \226\134\146 summable(k, (n : Num) => a(n) * pow(z, n))
+      #|  real_of_num(1) == real_of_num(1) - real_of_num(0)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, op_minus_minus_minus_gt(f, a) == op_minus_minus_minus_gt(f, rpow(a, real_of_num(1)))
+      #|  real_of_num(0) < real_of_num((n : Num))
+      #|  2 <= (n : Num) \226\134\146 1 <= n
+      #|  2 <= (n : Num) \226\134\146 !(n == 0)
       #|  2
-      #|  \\n:num. norm(z:complex) rpow (&1 - inv(&n))
-      #|  forall x:real. &0 <= x <=> x = &0 \\/ &0 < x
-      #|  &0 < norm(z:complex)
-      #|  2 <= n ==> ~(n - 1 = 0)
+      #|  (n : Num) => rpow(norm((z : Cart[Real, Tybit0[Unit]])), real_of_num(1) - inv(real_of_num(n)))
+      #|  \226\136\128 x : Real, (real_of_num(0) <= x) == (x == real_of_num(0) || real_of_num(0) < x)
+      #|  real_of_num(0) < norm((z : Cart[Real, Tybit0[Unit]]))
+      #|  2 <= (n : Num) \226\134\146 !(n - 1 == 0)
       #|  2
-      #|  \\n:num. &0
-      #|  norm(z:complex) = &0
-      #|  b * norm(z:complex)
-      #|  FINITE (k:num->bool)
-      #|  forall z a k b.\n     ((\\n. root n (norm (a n))) has_limsup b) (sequentially within k) /\\\n     b * norm z < &1\n     ==> real_summable k (\\n. norm (Cx(&n) * a n * z pow (n - 1)))
-      #|  forall z a k b.\n      ((\\n. root n (norm (a n))) has_limsup b) (sequentially within k) /\\\n      b * norm z < &1\n      ==> summable k (\\n. Cx(&n) * a n * z pow (n - 1))
-      #|  Cx x
-      #|  b:real
-      #|  k:num->bool
-      #|  \\n:num. Cx(a n)
-      #|  forall a k b x.\n     ((\\n. root n (abs (a n))) has_limsup b) (sequentially within k) /\\\n     b * abs x < &1\n     ==> real_summable k (\\n. abs (a n * x pow n))
-      #|  b:real
-      #|  forall a k b x.\n     ((\\n. root n (abs (a n))) has_limsup b) (sequentially within k) /\\\n     b * abs x < &1\n     ==> real_summable k (\\n. a n * x pow n)
-      #|  b:real
-      #|  k:num->bool
-      #|  \\n:num. Cx(a n)
-      #|  Cx x
-      #|  forall x a k b.\n     ((\\n. root n (abs (a n))) has_limsup b) (sequentially within k) /\\\n     b * abs x < &1\n     ==> real_summable k (\\n. abs (&n * a n * x pow (n - 1)))
-      #|  forall x a k b.\n      ((\\n. root n (abs (a n))) has_limsup b) (sequentially within k) /\\\n      b * abs x < &1\n      ==> real_summable k (\\n. &n * a n * x pow (n - 1))
+      #|  (n : Num) => real_of_num(0)
+      #|  norm((z : Cart[Real, Tybit0[Unit]])) == real_of_num(0)
+      #|  (b : Real) * norm((z : Cart[Real, Tybit0[Unit]]))
+      #|  FINITE((k : (Num) -> Bool))
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 k : (Num) -> Bool, \226\136\128 b : Real, has_limsup((n : Num) => root(n, norm(a(n))), b, within(sequentially, k)) && b * norm(z) < real_of_num(1) \226\134\146 real_summable(k, (n : Num) => norm(Cx(real_of_num(n)) * (a(n) * pow(z, n - 1))))
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 k : (Num) -> Bool, \226\136\128 b : Real, has_limsup((n : Num) => root(n, norm(a(n))), b, within(sequentially, k)) && b * norm(z) < real_of_num(1) \226\134\146 summable(k, (n : Num) => Cx(real_of_num(n)) * (a(n) * pow(z, n - 1)))
+      #|  Cx((x : Real))
+      #|  (b : Real)
+      #|  (k : (Num) -> Bool)
+      #|  (n : Num) => Cx((a : (Num) -> Real)(n))
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 k : (Num) -> Bool, \226\136\128 b : Real, \226\136\128 x : Real, has_limsup((n : Num) => root(n, abs(a(n))), b, within(sequentially, k)) && b * abs(x) < real_of_num(1) \226\134\146 real_summable(k, (n : Num) => abs(a(n) * pow(x, n)))
+      #|  (b : Real)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 k : (Num) -> Bool, \226\136\128 b : Real, \226\136\128 x : Real, has_limsup((n : Num) => root(n, abs(a(n))), b, within(sequentially, k)) && b * abs(x) < real_of_num(1) \226\134\146 real_summable(k, (n : Num) => a(n) * pow(x, n))
+      #|  (b : Real)
+      #|  (k : (Num) -> Bool)
+      #|  (n : Num) => Cx((a : (Num) -> Real)(n))
+      #|  Cx((x : Real))
+      #|  \226\136\128 x : Real, \226\136\128 a : (Num) -> Real, \226\136\128 k : (Num) -> Bool, \226\136\128 b : Real, has_limsup((n : Num) => root(n, abs(a(n))), b, within(sequentially, k)) && b * abs(x) < real_of_num(1) \226\134\146 real_summable(k, (n : Num) => abs(real_of_num(n) * (a(n) * pow(x, n - 1))))
+      #|  \226\136\128 x : Real, \226\136\128 a : (Num) -> Real, \226\136\128 k : (Num) -> Bool, \226\136\128 b : Real, has_limsup((n : Num) => root(n, abs(a(n))), b, within(sequentially, k)) && b * abs(x) < real_of_num(1) \226\134\146 real_summable(k, (n : Num) => real_of_num(n) * (a(n) * pow(x, n - 1)))
       #|  0
-      #|  b:real
-      #|  k:num->bool
-      #|  \\z:complex. z IN s
-      #|  \\n. norm(a n:complex) * r pow n
-      #|  \\z:complex n. a n * z pow n
-      #|  b:real
-      #|  s:complex->bool
-      #|  N:num
-      #|  x:num IN k
-      #|  k INTER (0..n) = k
-      #|  N:num
-      #|  \\z:complex. vsum k (\\i. a i * z pow i)
-      #|  FINITE (k:num->bool)
-      #|  forall a b s k.\n     ((\\n. root n (norm (a n))) has_limsup b) (sequentially within k) /\\\n     compact s /\\\n     (forall z:complex. z IN s ==> b * norm z < &1)\n     ==> ?l. forall e. &0 < e\n                 ==> ?N. forall n z. N <= n /\\ z IN s\n                         ==> dist(vsum (k INTER (0..n)) (\\i. a i * z pow i),\n                                  l z) < e
+      #|  (b : Real)
+      #|  (k : (Num) -> Bool)
+      #|  (z : Cart[Real, Tybit0[Unit]]) => IN(z, (s : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (n : Num) => norm((a : (Num) -> Cart[Real, Tybit0[Unit]])(n)) * pow((r : Real), n)
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (n : Num) => (a : (Num) -> Cart[Real, Tybit0[Unit]])(n) * pow(z, n)
+      #|  (b : Real)
+      #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  (N : Num)
+      #|  IN((x : Num), (k : (Num) -> Bool))
+      #|  INTER((k : (Num) -> Bool), op_dot_dot(0, (n : Num))) == k
+      #|  (N : Num)
+      #|  (z : Cart[Real, Tybit0[Unit]]) => vsum((k : (Num) -> Bool), (i : Num) => (a : (Num) -> Cart[Real, Tybit0[Unit]])(i) * pow(z, i))
+      #|  FINITE((k : (Num) -> Bool))
+      #|  \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 b : Real, \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 k : (Num) -> Bool, has_limsup((n : Num) => root(n, norm(a(n))), b, within(sequentially, k)) && compact(s) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 b * norm(z) < real_of_num(1)) \226\134\146 (\226\136\131 l : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 z : Cart[Real, Tybit0[Unit]], N <= n && IN(z, s) \226\134\146 dist((vsum(INTER(k, op_dot_dot(0, n)), (i : Num) => a(i) * pow(z, i)), l(z))) < e))
       #|  0
-      #|  b:real
-      #|  k:num->bool
-      #|  \\z:complex. z IN s
-      #|  \\n. &n * norm(a n:complex) * r pow (n - 1)
-      #|  \\z:complex n. Cx(&n) * a n * z pow (n - 1)
-      #|  ?r. &0 < r /\\ b * r < &1 /\\ (forall z:complex. z IN s ==> norm z < r)
-      #|  N:num
-      #|  x:num IN k
-      #|  k INTER (0..n) = k
-      #|  N:num
-      #|  \\z. vsum k (\\i. Cx (&i) * a i * z pow (i - 1))
-      #|  FINITE (k:num->bool)
-      #|  forall a b s k.\n     ((\\n. root n (norm (a n))) has_limsup b) (sequentially within k) /\\\n     compact s /\\\n     (forall z. z IN s ==> b * norm z < &1)\n     ==> ?l. forall e. &0 < e\n                 ==> ?N. forall n z.\n                       N <= n /\\ z IN s\n                       ==> dist(vsum (k INTER (0..n))\n                                     (\\i. Cx(&i) * a i * z pow (i - 1)),\n                                l z) < e
-      #|  x:real
-      #|  norm (lift x) < r
+      #|  (b : Real)
+      #|  (k : (Num) -> Bool)
+      #|  (z : Cart[Real, Tybit0[Unit]]) => IN(z, (s : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (n : Num) => real_of_num(n) * (norm((a : (Num) -> Cart[Real, Tybit0[Unit]])(n)) * pow((r : Real), n - 1))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (n : Num) => Cx(real_of_num(n)) * ((a : (Num) -> Cart[Real, Tybit0[Unit]])(n) * pow(z, n - 1))
+      #|  \226\136\131 r : Real, real_of_num(0) < r && (b : Real) * r < real_of_num(1) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) \226\134\146 norm(z) < r)
+      #|  (N : Num)
+      #|  IN((x : Num), (k : (Num) -> Bool))
+      #|  INTER((k : (Num) -> Bool), op_dot_dot(0, (n : Num))) == k
+      #|  (N : Num)
+      #|  (z : Cart[Real, Tybit0[Unit]]) => vsum((k : (Num) -> Bool), (i : Num) => Cx(real_of_num(i)) * ((a : (Num) -> Cart[Real, Tybit0[Unit]])(i) * pow(z, i - 1)))
+      #|  FINITE((k : (Num) -> Bool))
+      #|  \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 b : Real, \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 k : (Num) -> Bool, has_limsup((n : Num) => root(n, norm(a(n))), b, within(sequentially, k)) && compact(s) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 b * norm(z) < real_of_num(1)) \226\134\146 (\226\136\131 l : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 z : Cart[Real, Tybit0[Unit]], N <= n && IN(z, s) \226\134\146 dist((vsum(INTER(k, op_dot_dot(0, n)), (i : Num) => Cx(real_of_num(i)) * (a(i) * pow(z, i - 1))), l(z))) < e))
+      #|  (x : Real)
+      #|  norm(lift((x : Real))) < (r : Real)
       #|  0
-      #|  b:real
-      #|  (\\x:real. drop (l x))
-      #|  k:num->bool
-      #|  \\x:real. x IN s
-      #|  \\n. abs(a n:real) * r pow n
-      #|  \\x:real n. lift (a n * x pow n)
-      #|  b:real
-      #|  IMAGE lift (s:real->bool)
-      #|  N:num
-      #|  x':num IN k
-      #|  k INTER (0..n) = k
-      #|  N:num
-      #|  \\x:real. sum k (\\i. a i * x pow i)
-      #|  FINITE (k:num->bool)
-      #|  forall a b s k.\n     ((\\n. root n (abs (a n))) has_limsup b) (sequentially within k) /\\\n     real_compact s /\\\n     (forall x:real. x IN s ==> b * abs x < &1)\n     ==> ?l. forall e. &0 < e\n                 ==> ?N. forall n x. N <= n /\\ x IN s\n                         ==> abs(sum (k INTER (0..n)) (\\i. a i * x pow i) -\n                                  l x) < e
-      #|  x:real
-      #|  norm (lift x) < r
+      #|  (b : Real)
+      #|  (x : Real) => drop((l : (Real) -> Cart[Real, Unit])(x))
+      #|  (k : (Num) -> Bool)
+      #|  (x : Real) => IN(x, (s : (Real) -> Bool))
+      #|  (n : Num) => abs((a : (Num) -> Real)(n)) * pow((r : Real), n)
+      #|  (x : Real) => (n : Num) => lift((a : (Num) -> Real)(n) * pow(x, n))
+      #|  (b : Real)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  (N : Num)
+      #|  IN((x' : Num), (k : (Num) -> Bool))
+      #|  INTER((k : (Num) -> Bool), op_dot_dot(0, (n : Num))) == k
+      #|  (N : Num)
+      #|  (x : Real) => sum((k : (Num) -> Bool), (i : Num) => (a : (Num) -> Real)(i) * pow(x, i))
+      #|  FINITE((k : (Num) -> Bool))
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 b : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 k : (Num) -> Bool, has_limsup((n : Num) => root(n, abs(a(n))), b, within(sequentially, k)) && real_compact(s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 b * abs(x) < real_of_num(1)) \226\134\146 (\226\136\131 l : (Real) -> Real, \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : Real, N <= n && IN(x, s) \226\134\146 abs(sum(INTER(k, op_dot_dot(0, n)), (i : Num) => a(i) * pow(x, i)) - l(x)) < e))
+      #|  (x : Real)
+      #|  norm(lift((x : Real))) < (r : Real)
       #|  0
-      #|  b:real
-      #|  (\\x:real. drop (l x))
-      #|  k:num->bool
-      #|  \\x:real. x IN s
-      #|  \\n. &n * abs(a n:real) * r pow (n - 1)
-      #|  \\x:real n. lift (&n * a n * x pow (n - 1))
-      #|  b:real
-      #|  IMAGE lift (s:real->bool)
-      #|  N:num
-      #|  x':num IN k
-      #|  k INTER (0..n) = k
-      #|  N:num
-      #|  \\x. sum k (\\i. &i * a i * x pow (i - 1))
-      #|  FINITE (k:num->bool)
-      #|  forall a b s k.\n     ((\\n. root n (abs (a n))) has_limsup b) (sequentially within k) /\\\n     real_compact s /\\\n     (forall x. x IN s ==> b * abs x < &1)\n     ==> ?l. forall e. &0 < e\n                 ==> ?N. forall n x.\n                       N <= n /\\ x IN s\n                       ==> abs(sum (k INTER (0..n))\n                                     (\\i. &i * a i * x pow (i - 1)) -\n                                l x) < e
-      #|  drop o g o lift
-      #|  g:real^1->real^1
-      #|  \\x:real^1 h:real^1. g' (drop x) % h
-      #|  \\n:num x:real^1 h:real^1. f' n (drop x) % h
-      #|  \\n:num. lift o f n o drop
-      #|  IMAGE lift s
-      #|  forall s f f' g'.\n         is_realinterval s /\\\n         (forall n x. x IN s\n                ==> (f n has_real_derivative f' n x) (atreal x within s)) /\\\n         (forall e. &0 < e\n              ==> ?N. forall n x. n >= N /\\ x IN s ==> abs(f' n x - g' x) <= e) /\\\n         (?x l. x IN s /\\ ((\\n. f n x) ---> l) sequentially)\n         ==> ?g. forall x. x IN s\n                     ==> ((\\n. f n x) ---> g x) sequentially /\\\n                         (g has_real_derivative g' x) (atreal x within s)
-      #|  \\n:num x:real. sum(k INTER (0..n)) (\\n. f' n x):real
-      #|  forall s f f' g' k.\n         is_realinterval s /\\\n         (forall n x. x IN s\n                ==> (f n has_real_derivative f' n x) (atreal x within s)) /\\\n         (forall e. &0 < e\n              ==> ?N. forall n x. n >= N /\\ x IN s\n                            ==> abs(sum (k INTER (0..n)) (\\i. f' i x) - g' x)\n                                    <= e) /\\\n         (?x l. x IN s /\\ ((\\n. f n x) real_sums l) k)\n         ==> ?g. forall x. x IN s\n                     ==> ((\\n. f n x) real_sums g x) k /\\\n                         (g has_real_derivative g' x) (atreal x within s)
-      #|  \\h:real^1. f' (v:real) % h
-      #|  v:real
-      #|  B:real
-      #|  IMAGE lift s
-      #|  \\x h:real^1. f' (drop x) % h
-      #|  lift o f o drop
-      #|  forall f f' s B.\n        is_realinterval s /\\\n        (forall x. x IN s ==> (f has_real_derivative f'(x)) (atreal x within s) /\\\n                        abs(f' x) <= B)\n        ==> forall x y. x IN s /\\ y IN s ==> abs(f x - f y) <= B * abs(x - y)
-      #|  ~(&(FACT n) = &0)
-      #|  x:real = t
-      #|  a * x / f - B * k * x = &0 ==> (B * k - a / f) * x = &0
-      #|  a * b / c:real = a / c * b
-      #|  t:real
-      #|  ~(n = 0) ==> n - 1 + 1 = n
-      #|  a * --b + c:real = c - a * b
-      #|  --((&n + &1) / (&n + &1)) * x = --x
-      #|  --(n * x) * (inv n * inv y):real =\n                            --(n / n) * x / y
+      #|  (b : Real)
+      #|  (x : Real) => drop((l : (Real) -> Cart[Real, Unit])(x))
+      #|  (k : (Num) -> Bool)
+      #|  (x : Real) => IN(x, (s : (Real) -> Bool))
+      #|  (n : Num) => real_of_num(n) * (abs((a : (Num) -> Real)(n)) * pow((r : Real), n - 1))
+      #|  (x : Real) => (n : Num) => lift(real_of_num(n) * ((a : (Num) -> Real)(n) * pow(x, n - 1)))
+      #|  (b : Real)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  (N : Num)
+      #|  IN((x' : Num), (k : (Num) -> Bool))
+      #|  INTER((k : (Num) -> Bool), op_dot_dot(0, (n : Num))) == k
+      #|  (N : Num)
+      #|  (x : Real) => sum((k : (Num) -> Bool), (i : Num) => real_of_num(i) * ((a : (Num) -> Real)(i) * pow(x, i - 1)))
+      #|  FINITE((k : (Num) -> Bool))
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 b : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 k : (Num) -> Bool, has_limsup((n : Num) => root(n, abs(a(n))), b, within(sequentially, k)) && real_compact(s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 b * abs(x) < real_of_num(1)) \226\134\146 (\226\136\131 l : (Real) -> Real, \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : Real, N <= n && IN(x, s) \226\134\146 abs(sum(INTER(k, op_dot_dot(0, n)), (i : Num) => real_of_num(i) * (a(i) * pow(x, i - 1))) - l(x)) < e))
+      #|  o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  (x : Cart[Real, Unit]) => (h : Cart[Real, Unit]) => op_pct((g' : (Real) -> Real)(drop(x)), h)
+      #|  (n : Num) => (x : Cart[Real, Unit]) => (h : Cart[Real, Unit]) => op_pct((f' : (Num, Real) -> Real)(n, drop(x)), h)
+      #|  (n : Num) => o(lift, o((f : (Num, Real) -> Real)(n), drop))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Num, Real) -> Real, \226\136\128 f' : (Num, Real) -> Real, \226\136\128 g' : (Real) -> Real, is_realinterval(s) && (\226\136\128 n : Num, \226\136\128 x : Real, IN(x, s) \226\134\146 has_real_derivative(f(n), f'(n, x), within(atreal(x), s))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : Real, n >= N && IN(x, s) \226\134\146 abs(f'(n, x) - g'(x)) <= e)) && (\226\136\131 x : Real, \226\136\131 l : Real, IN(x, s) && op_minus_minus_minus_gt((n : Num) => f(n, x), l, sequentially)) \226\134\146 (\226\136\131 g : (Real) -> Real, \226\136\128 x : Real, IN(x, s) \226\134\146 op_minus_minus_minus_gt((n : Num) => f(n, x), g(x), sequentially) && has_real_derivative(g, g'(x), within(atreal(x), s)))
+      #|  (n : Num) => (x : Real) => sum(INTER((k : (Num) -> Bool), op_dot_dot(0, n)), (n : Num) => (f' : (Num, Real) -> Real)(n, x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Num, Real) -> Real, \226\136\128 f' : (Num, Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 k : (Num) -> Bool, is_realinterval(s) && (\226\136\128 n : Num, \226\136\128 x : Real, IN(x, s) \226\134\146 has_real_derivative(f(n), f'(n, x), within(atreal(x), s))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : Real, n >= N && IN(x, s) \226\134\146 abs(sum(INTER(k, op_dot_dot(0, n)), (i : Num) => f'(i, x)) - g'(x)) <= e)) && (\226\136\131 x : Real, \226\136\131 l : Real, IN(x, s) && real_sums((n : Num) => f(n, x), l, k)) \226\134\146 (\226\136\131 g : (Real) -> Real, \226\136\128 x : Real, IN(x, s) \226\134\146 real_sums((n : Num) => f(n, x), g(x), k) && has_real_derivative(g, g'(x), within(atreal(x), s)))
+      #|  (h : Cart[Real, Unit]) => op_pct((f' : (Real) -> Real)((v : Real)), h)
+      #|  (v : Real)
+      #|  (B : Real)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  (x : Cart[Real, Unit]) => (h : Cart[Real, Unit]) => op_pct((f' : (Real) -> Real)(drop(x)), h)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 B : Real, is_realinterval(s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), s)) && abs(f'(x)) <= B) \226\134\146 (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) \226\134\146 abs(f(x) - f(y)) <= B * abs(x - y))
+      #|  !(real_of_num(FACT((n : Num))) == real_of_num(0))
+      #|  (x : Real) == (t : Real)
+      #|  (a : Real) * ((x : Real) / (f : Real)) - (B : Real) * ((k : Real) * x) == real_of_num(0) \226\134\146 (B * k - a / f) * x == real_of_num(0)
+      #|  (a : Real) * ((b : Real) / (c : Real)) == a / c * b
+      #|  (t : Real)
+      #|  !((n : Num) == 0) \226\134\146 n - 1 + 1 == n
+      #|  (a : Real) * -(b : Real) + (c : Real) == c - a * b
+      #|  -((real_of_num((n : Num)) + real_of_num(1)) / (real_of_num(n) + real_of_num(1))) * (x : Real) == -x
+      #|  -((n : Real) * (x : Real)) * (inv(n) * inv((y : Real))) == -(n / n) * (x / y)
       #|  1
-      #|  f:num->real
-      #|  n = 0
-      #|  m:num
-      #|  sum (0..n) (\\i. f i t * --(&i * (x - t) pow (i - 1)) / &(FACT i) +\n                                f (i + 1) t * (x - t) pow i / &(FACT i))
-      #|  forall g'. f' = g' /\\ (f has_real_derivative g') net\n           ==> (f has_real_derivative f') net
-      #|  t:real
-      #|  1 <= i ==> ~(i = 0)
-      #|  x = (x + y) + &0 <=> y = &0
-      #|  x:real
-      #|  a:real
-      #|  \\t. (f (n + 1) t * (x - t) pow n / &(FACT n)) -\n                     B * &(n + 1) * (x - t) pow n
-      #|  \\t. sum(0..n) (\\i. f i t * (x - t) pow i / &(FACT i)) +\n                     B * (x - t) pow (n + 1)
-      #|  ~(x = &0) ==> a + (y - a) / x * x = y
-      #|  a + (y - a) / x * x:real = y ==> ?b. a + b * x = y
-      #|  ?B. sum (0..n) (\\i. f i a * (x - a) pow i / &(FACT i)) +\n        B * (x - a) pow (n + 1) = f 0 x
-      #|  forall f a x n.\n    a < x /\\\n    (forall i t. t IN real_interval[a,x] /\\ i <= n\n           ==> ((f i) has_real_derivative f (i + 1) t)\n               (atreal t within real_interval[a,x]))\n    ==> ?t. t IN real_interval(a,x) /\\\n            f 0 x =\n              sum (0..n) (\\i. f i a * (x - a) pow i / &(FACT i)) +\n              f (n + 1) t * (x - a) pow (n + 1) / &(FACT(n + 1))
-      #|  x:real = --y <=> --x = y
-      #|  IMAGE (--) (real_interval[--a,--x]) = real_interval[x,a]
-      #|  y pow 1 * x:real = x * y
-      #|  t:real
-      #|  m:num
-      #|  --a < t /\\ t < --x <=> x < --t /\\ --t < a
-      #|  -- &1 * (--x - --a) = x - a
-      #|  (x * y) * z / w:real = y * (x * z) / w
-      #|  n:num
-      #|    --x:real
-      #|  --a:real
-      #|  \\n x. (-- &1) pow n * (f:num->real->real) n (--x)
-      #|  (?x:real. P x) <=> (?x. P(--x))
-      #|  forall f a x n.\n    x < a /\\\n    (forall i t. t IN real_interval[x,a] /\\ i <= n\n           ==> ((f i) has_real_derivative f (i + 1) t)\n               (atreal t within real_interval[x,a]))\n    ==> ?t. t IN real_interval(x,a) /\\\n            f 0 x =\n              sum (0..n) (\\i. f i a * (x - a) pow i / &(FACT i)) +\n              f (n + 1) t * (x - a) pow (n + 1) / &(FACT(n + 1))
-      #|  t:real
-      #|  s:real->bool
-      #|  t:real
-      #|  m:num
-      #|  real_interval[z,w] SUBSET s
-      #|  n:num
-      #|  z:real
-      #|  w:real
-      #|  f:num->real->real
-      #|  real_interval[w,z] SUBSET s
-      #|  n:num
-      #|  z:real
-      #|  w:real
-      #|  f:num->real->real
-      #|  y = &0 ==> abs(x - (x * &1 * &1 + y)) <= &0
-      #|  w = z \\/ w < z \\/ z < w
-      #|  forall f n s B.\n    is_realinterval s /\\\n    (forall i x. x IN s /\\ i <= n\n           ==> ((f i) has_real_derivative f (i + 1) x) (atreal x within s)) /\\\n    (forall x. x IN s ==> abs(f (n + 1) x) <= B)\n    ==> forall w z. w IN s /\\ z IN s\n              ==> abs(f 0 z -\n                      sum (0..n) (\\i. f i w * (z - w) pow i / &(FACT i)))\n                  <= B * abs(z - w) pow (n + 1) / &(FACT(n + 1))
-      #|  t:real
-      #|  real_interval[&m,&n + &1]
-      #|  k < k + 1
-      #|  &(k + 1)
-      #|  &k
-      #|  f:real->real
-      #|  g:real->real
-      #|  k:num
-      #|  sum(m..n) (\\k. g(&(k + 1)) - g(&k))
-      #|  forall f g m n.\n      m <= n /\\\n      (forall x. x IN real_interval[&m,&n + &1]\n           ==> (g has_real_derivative f(x))\n               (atreal x within real_interval[&m,&n + &1])) /\\\n      (forall x y. &m <= x /\\ x <= y /\\ y <= &n + &1 ==> f x <= f y)\n      ==> sum(m..n) (\\k. f(&k)) <= g(&n + &1) - g(&m)
-      #|  a * (x - (x - &1)) = a
-      #|  t:real
-      #|  (a + &1) - &1 = a
-      #|  real_interval[&m - &1,&n]
-      #|  k - &1 < k
-      #|  &k
-      #|  &k - &1
-      #|  f:real->real
-      #|  g:real->real
-      #|  k:num
-      #|  (x + &1) - &1 = x
-      #|  sum(m..n) (\\k. g(&(k + 1) - &1) - g(&k - &1))
-      #|  forall f g m n.\n      m <= n /\\\n      (forall x. x IN real_interval[&m - &1,&n]\n           ==> (g has_real_derivative f(x))\n               (atreal x within real_interval[&m - &1,&n])) /\\\n      (forall x y. &m - &1 <= x /\\ x <= y /\\ y <= &n ==> f y <= f x)\n      ==> sum(m..n) (\\k. f(&k)) <= g(&n) - g(&m - &1)
-      #|  --x - --y:real = --(x - y)
-      #|  n:num
-      #|  m:num
-      #|  \\z. --((g:real->real) z)
-      #|  \\z. --((f:real->real) z)
-      #|  forall f g m n.\n      m <= n /\\\n      (forall x. x IN real_interval[&m - &1,&n]\n           ==> (g has_real_derivative f(x))\n               (atreal x within real_interval[&m - &1,&n])) /\\\n      (forall x y. &m - &1 <= x /\\ x <= y /\\ y <= &n ==> f x <= f y)\n      ==> g(&n) - g(&m - &1) <= sum(m..n) (\\k. f(&k))
-      #|  --x - --y:real = --(x - y)
-      #|  n:num
-      #|  m:num
-      #|  \\z. --((g:real->real) z)
-      #|  \\z. --((f:real->real) z)
-      #|  forall f g m n.\n      m <= n /\\\n      (forall x. x IN real_interval[&m,&n + &1]\n           ==> (g has_real_derivative f(x))\n               (atreal x within  real_interval[&m,&n + &1])) /\\\n      (forall x y. &m <= x /\\ x <= y /\\ y <= &n + &1 ==> f y <= f x)\n      ==> g(&n + &1) - g(&m) <= sum(m..n) (\\k. f(&k))
-      #|  real_interval[&m - &1,&n + &1]
-      #|  forall f g m n.\n         m <= n /\\\n         (forall x. x IN real_interval[&m - &1,&n + &1]\n              ==> (g has_real_derivative f x)\n                  (atreal x within real_interval[&m - &1,&n + &1])) /\\\n         (forall x y. &m - &1 <= x /\\ x <= y /\\ y <= &n + &1 ==> f x <= f y)\n         ==> g(&n) - g(&m - &1) <= sum(m..n) (\\k. f(&k)) /\\\n             sum (m..n) (\\k. f(&k)) <= g(&n + &1) - g(&m)
-      #|  real_interval[&m - &1,&n + &1]
-      #|  forall f g m n.\n      m <= n /\\\n      (forall x. x IN real_interval[&m - &1,&n + &1]\n           ==> (g has_real_derivative f(x))\n               (atreal x within real_interval[&m - &1,&n + &1])) /\\\n      (forall x y. &m - &1 <= x /\\ x <= y /\\ y <= &n + &1 ==> f y <= f x)\n      ==> g(&n + &1) - g(&m) <= sum(m..n) (\\k. f(&k)) /\\\n          sum(m..n) (\\k. f(&k)) <= g(&n) - g(&m - &1)
-      #|  forall f:real^1->real^N g:real^1->real^1 g' s b.\n        lebesgue_measurable s /\\\n        (forall x y. x IN s /\\ y IN s /\\ g x = g y ==> x = y) /\\\n        (forall x. x IN IMAGE drop s\n             ==> ((drop o g o lift) has_real_derivative g' x)\n                 (atreal x within IMAGE drop s))\n        ==> ((\\x. abs(g'(drop x)) % f(g x)) absolutely_integrable_on s /\\\n             integral s (\\x. abs(g'(drop x)) % f(g x)) = b <=>\n             f absolutely_integrable_on IMAGE g s /\\\n             integral (IMAGE g s) f = b)
-      #|  forall f:real^1->real^N g:real^1->real^1 g' s b.\n        lebesgue_measurable s /\\\n        (forall x y. x IN s /\\ y IN s /\\ g x = g y ==> x = y) /\\\n        (forall x. x IN IMAGE drop s\n             ==> ((drop o g o lift) has_real_derivative g' x)\n                 (atreal x within IMAGE drop s))\n        ==> (f absolutely_integrable_on IMAGE g s <=>\n             (\\x. abs(g'(drop x)) % f(g x)) absolutely_integrable_on s)
-      #|  forall f l. (f ---> l) at_posinfinity ==> ((\\n. f(&n)) ---> l) sequentially
-      #|  &2 / d <= z ==> &0 < &2 / d ==> inv d < abs z
-      #|  a <= z ==> &0 < a ==> &0 < abs z
-      #|  inv(z):real
-      #|  z:real
-      #|  &2 / d
-      #|  d:real
-      #|  e:real
-      #|  e:real
-      #|  forall f l. ((\\x. f(&1 / x)) --> l) (atreal (&0)) ==> (f --> l) at_posinfinity
-      #|  z <= --(&2 / d) ==> &0 < &2 / d ==> inv d < abs z
-      #|  z <= --a ==> &0 < a ==> &0 < abs z
-      #|  inv(z):real
-      #|  z:real
-      #|  --(&2 / d)
-      #|  d:real
-      #|  e:real
-      #|  e:real
-      #|  forall f l. ((\\x. f(&1 / x)) --> l) (atreal (&0)) ==> (f --> l) at_neginfinity
-      #|  forall f l. ((\\x. f(&1 / x)) ---> l) (atreal (&0)) ==> (f ---> l) at_posinfinity
-      #|  forall f l. ((\\x. f(&1 / x)) ---> l) (atreal (&0)) ==> (f ---> l) at_neginfinity
-      #|  closed_real_segment[a,b] = {(&1 - u) * a + u * b | &0 <= u /\\ u <= &1}
-      #|  open_real_segment(a,b) = closed_real_segment[a,b] DIFF {a,b}
+      #|  (f : (Num) -> Real)
+      #|  (n : Num) == 0
+      #|  (m : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (i : Num) => (f : (Num, Real) -> Real)(i, (t : Real)) * (-(real_of_num(i) * pow((x : Real) - t, i - 1)) / real_of_num(FACT(i))) + f(i + 1, t) * (pow(x - t, i) / real_of_num(FACT(i))))
+      #|  \226\136\128 g' : Real, (f' : Real) == g' && has_real_derivative((f : (Real) -> Real), g', (net : Net[Real])) \226\134\146 has_real_derivative(f, f', net)
+      #|  (t : Real)
+      #|  1 <= (i : Num) \226\134\146 !(i == 0)
+      #|  ((x : Real) == x + (y : Real) + real_of_num(0)) == (y == real_of_num(0))
+      #|  (x : Real)
+      #|  (a : Real)
+      #|  (t : Real) => (f : (Num, Real) -> Real)((n : Num) + 1, t) * (pow((x : Real) - t, n) / real_of_num(FACT(n))) - (B : Real) * (real_of_num(n + 1) * pow(x - t, n))
+      #|  (t : Real) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (f : (Num, Real) -> Real)(i, t) * (pow((x : Real) - t, i) / real_of_num(FACT(i)))) + (B : Real) * pow(x - t, n + 1)
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 (a : Real) + ((y : Real) - a) / x * x == y
+      #|  (a : Real) + ((y : Real) - a) / (x : Real) * x == y \226\134\146 (\226\136\131 b : Real, a + b * x == y)
+      #|  \226\136\131 B : Real, sum(op_dot_dot(0, (n : Num)), (i : Num) => (f : (Num, Real) -> Real)(i, (a : Real)) * (pow((x : Real) - a, i) / real_of_num(FACT(i)))) + B * pow(x - a, n + 1) == f(0, x)
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 n : Num, a < x && (\226\136\128 i : Num, \226\136\128 t : Real, IN(t, real_interval([(a, x)])) && i <= n \226\134\146 has_real_derivative(f(i), f(i + 1, t), within(atreal(t), real_interval([(a, x)])))) \226\134\146 (\226\136\131 t : Real, IN(t, real_interval((a, x))) && f(0, x) == sum(op_dot_dot(0, n), (i : Num) => f(i, a) * (pow(x - a, i) / real_of_num(FACT(i)))) + f(n + 1, t) * (pow(x - a, n + 1) / real_of_num(FACT(n + 1))))
+      #|  ((x : Real) == -(y : Real)) == (-x == y)
+      #|  IMAGE(op_minus_minus, real_interval([(-(a : Real), -(x : Real))])) == real_interval([(x, a)])
+      #|  pow((y : Real), 1) * (x : Real) == x * y
+      #|  (t : Real)
+      #|  (m : Num)
+      #|  (-(a : Real) < (t : Real) && t < -(x : Real)) == (x < -t && -t < a)
+      #|  -real_of_num(1) * (-(x : Real) - -(a : Real)) == x - a
+      #|  (x : Real) * (y : Real) * ((z : Real) / (w : Real)) == y * (x * z / w)
+      #|  (n : Num)
+      #|  -(x : Real)
+      #|  -(a : Real)
+      #|  (n : Num) => (x : Real) => pow(-real_of_num(1), n) * (f : (Num, Real) -> Real)(n, -x)
+      #|  (\226\136\131 x : Real, (P : (Real) -> Bool)(x)) == (\226\136\131 x : Real, P(-x))
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 n : Num, x < a && (\226\136\128 i : Num, \226\136\128 t : Real, IN(t, real_interval([(x, a)])) && i <= n \226\134\146 has_real_derivative(f(i), f(i + 1, t), within(atreal(t), real_interval([(x, a)])))) \226\134\146 (\226\136\131 t : Real, IN(t, real_interval((x, a))) && f(0, x) == sum(op_dot_dot(0, n), (i : Num) => f(i, a) * (pow(x - a, i) / real_of_num(FACT(i)))) + f(n + 1, t) * (pow(x - a, n + 1) / real_of_num(FACT(n + 1))))
+      #|  (t : Real)
+      #|  (s : (Real) -> Bool)
+      #|  (t : Real)
+      #|  (m : Num)
+      #|  SUBSET(real_interval([((z : Real), (w : Real))]), (s : (Real) -> Bool))
+      #|  (n : Num)
+      #|  (z : Real)
+      #|  (w : Real)
+      #|  (f : (Num, Real) -> Real)
+      #|  SUBSET(real_interval([((w : Real), (z : Real))]), (s : (Real) -> Bool))
+      #|  (n : Num)
+      #|  (z : Real)
+      #|  (w : Real)
+      #|  (f : (Num, Real) -> Real)
+      #|  (y : Real) == real_of_num(0) \226\134\146 abs((x : Real) - (x * (real_of_num(1) * real_of_num(1)) + y)) <= real_of_num(0)
+      #|  (w : Real) == (z : Real) || w < z || z < w
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 n : Num, \226\136\128 s : (Real) -> Bool, \226\136\128 B : Real, is_realinterval(s) && (\226\136\128 i : Num, \226\136\128 x : Real, IN(x, s) && i <= n \226\134\146 has_real_derivative(f(i), f(i + 1, x), within(atreal(x), s))) && (\226\136\128 x : Real, IN(x, s) \226\134\146 abs(f(n + 1, x)) <= B) \226\134\146 (\226\136\128 w : Real, \226\136\128 z : Real, IN(w, s) && IN(z, s) \226\134\146 abs(f(0, z) - sum(op_dot_dot(0, n), (i : Num) => f(i, w) * (pow(z - w, i) / real_of_num(FACT(i))))) <= B * (pow(abs(z - w), n + 1) / real_of_num(FACT(n + 1))))
+      #|  (t : Real)
+      #|  real_interval([(real_of_num((m : Num)), real_of_num((n : Num)) + real_of_num(1))])
+      #|  (k : Num) < k + 1
+      #|  real_of_num((k : Num) + 1)
+      #|  real_of_num((k : Num))
+      #|  (f : (Real) -> Real)
+      #|  (g : (Real) -> Real)
+      #|  (k : Num)
+      #|  sum(op_dot_dot((m : Num), (n : Num)), (k : Num) => (g : (Real) -> Real)(real_of_num(k + 1)) - g(real_of_num(k)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n && (\226\136\128 x : Real, IN(x, real_interval([(real_of_num(m), real_of_num(n) + real_of_num(1))])) \226\134\146 has_real_derivative(g, f(x), within(atreal(x), real_interval([(real_of_num(m), real_of_num(n) + real_of_num(1))])))) && (\226\136\128 x : Real, \226\136\128 y : Real, real_of_num(m) <= x && x <= y && y <= real_of_num(n) + real_of_num(1) \226\134\146 f(x) <= f(y)) \226\134\146 sum(op_dot_dot(m, n), (k : Num) => f(real_of_num(k))) <= g(real_of_num(n) + real_of_num(1)) - g(real_of_num(m))
+      #|  (a : Real) * ((x : Real) - (x - real_of_num(1))) == a
+      #|  (t : Real)
+      #|  (a : Real) + real_of_num(1) - real_of_num(1) == a
+      #|  real_interval([(real_of_num((m : Num)) - real_of_num(1), real_of_num((n : Num)))])
+      #|  (k : Real) - real_of_num(1) < k
+      #|  real_of_num((k : Num))
+      #|  real_of_num((k : Num)) - real_of_num(1)
+      #|  (f : (Real) -> Real)
+      #|  (g : (Real) -> Real)
+      #|  (k : Num)
+      #|  (x : Real) + real_of_num(1) - real_of_num(1) == x
+      #|  sum(op_dot_dot((m : Num), (n : Num)), (k : Num) => (g : (Real) -> Real)(real_of_num(k + 1) - real_of_num(1)) - g(real_of_num(k) - real_of_num(1)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n && (\226\136\128 x : Real, IN(x, real_interval([(real_of_num(m) - real_of_num(1), real_of_num(n))])) \226\134\146 has_real_derivative(g, f(x), within(atreal(x), real_interval([(real_of_num(m) - real_of_num(1), real_of_num(n))])))) && (\226\136\128 x : Real, \226\136\128 y : Real, real_of_num(m) - real_of_num(1) <= x && x <= y && y <= real_of_num(n) \226\134\146 f(y) <= f(x)) \226\134\146 sum(op_dot_dot(m, n), (k : Num) => f(real_of_num(k))) <= g(real_of_num(n)) - g(real_of_num(m) - real_of_num(1))
+      #|  -(x : Real) - -(y : Real) == -(x - y)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (z : Real) => -(g : (Real) -> Real)(z)
+      #|  (z : Real) => -(f : (Real) -> Real)(z)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n && (\226\136\128 x : Real, IN(x, real_interval([(real_of_num(m) - real_of_num(1), real_of_num(n))])) \226\134\146 has_real_derivative(g, f(x), within(atreal(x), real_interval([(real_of_num(m) - real_of_num(1), real_of_num(n))])))) && (\226\136\128 x : Real, \226\136\128 y : Real, real_of_num(m) - real_of_num(1) <= x && x <= y && y <= real_of_num(n) \226\134\146 f(x) <= f(y)) \226\134\146 g(real_of_num(n)) - g(real_of_num(m) - real_of_num(1)) <= sum(op_dot_dot(m, n), (k : Num) => f(real_of_num(k)))
+      #|  -(x : Real) - -(y : Real) == -(x - y)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (z : Real) => -(g : (Real) -> Real)(z)
+      #|  (z : Real) => -(f : (Real) -> Real)(z)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n && (\226\136\128 x : Real, IN(x, real_interval([(real_of_num(m), real_of_num(n) + real_of_num(1))])) \226\134\146 has_real_derivative(g, f(x), within(atreal(x), real_interval([(real_of_num(m), real_of_num(n) + real_of_num(1))])))) && (\226\136\128 x : Real, \226\136\128 y : Real, real_of_num(m) <= x && x <= y && y <= real_of_num(n) + real_of_num(1) \226\134\146 f(y) <= f(x)) \226\134\146 g(real_of_num(n) + real_of_num(1)) - g(real_of_num(m)) <= sum(op_dot_dot(m, n), (k : Num) => f(real_of_num(k)))
+      #|  real_interval([(real_of_num((m : Num)) - real_of_num(1), real_of_num((n : Num)) + real_of_num(1))])
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n && (\226\136\128 x : Real, IN(x, real_interval([(real_of_num(m) - real_of_num(1), real_of_num(n) + real_of_num(1))])) \226\134\146 has_real_derivative(g, f(x), within(atreal(x), real_interval([(real_of_num(m) - real_of_num(1), real_of_num(n) + real_of_num(1))])))) && (\226\136\128 x : Real, \226\136\128 y : Real, real_of_num(m) - real_of_num(1) <= x && x <= y && y <= real_of_num(n) + real_of_num(1) \226\134\146 f(x) <= f(y)) \226\134\146 g(real_of_num(n)) - g(real_of_num(m) - real_of_num(1)) <= sum(op_dot_dot(m, n), (k : Num) => f(real_of_num(k))) && sum(op_dot_dot(m, n), (k : Num) => f(real_of_num(k))) <= g(real_of_num(n) + real_of_num(1)) - g(real_of_num(m))
+      #|  real_interval([(real_of_num((m : Num)) - real_of_num(1), real_of_num((n : Num)) + real_of_num(1))])
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n && (\226\136\128 x : Real, IN(x, real_interval([(real_of_num(m) - real_of_num(1), real_of_num(n) + real_of_num(1))])) \226\134\146 has_real_derivative(g, f(x), within(atreal(x), real_interval([(real_of_num(m) - real_of_num(1), real_of_num(n) + real_of_num(1))])))) && (\226\136\128 x : Real, \226\136\128 y : Real, real_of_num(m) - real_of_num(1) <= x && x <= y && y <= real_of_num(n) + real_of_num(1) \226\134\146 f(y) <= f(x)) \226\134\146 g(real_of_num(n) + real_of_num(1)) - g(real_of_num(m)) <= sum(op_dot_dot(m, n), (k : Num) => f(real_of_num(k))) && sum(op_dot_dot(m, n), (k : Num) => f(real_of_num(k))) <= g(real_of_num(n)) - g(real_of_num(m) - real_of_num(1))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 g' : (Real) -> Real, \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 b : Cart[Real, N], lebesgue_measurable(s) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, s) && IN(y, s) && g(x) == g(y) \226\134\146 x == y) && (\226\136\128 x : Real, IN(x, IMAGE(drop, s)) \226\134\146 has_real_derivative(o(drop, o(g, lift)), g'(x), within(atreal(x), IMAGE(drop, s)))) \226\134\146 (absolutely_integrable_on((x : Cart[Real, Unit]) => op_pct(abs(g'(drop(x))), f(g(x))), s) && integral(s, (x : Cart[Real, Unit]) => op_pct(abs(g'(drop(x))), f(g(x)))) == b) == (absolutely_integrable_on(f, IMAGE(g, s)) && integral(IMAGE(g, s), f) == b)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 g' : (Real) -> Real, \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 b : _, lebesgue_measurable(s) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, s) && IN(y, s) && g(x) == g(y) \226\134\146 x == y) && (\226\136\128 x : Real, IN(x, IMAGE(drop, s)) \226\134\146 has_real_derivative(o(drop, o(g, lift)), g'(x), within(atreal(x), IMAGE(drop, s)))) \226\134\146 absolutely_integrable_on(f, IMAGE(g, s)) == absolutely_integrable_on((x : Cart[Real, Unit]) => op_pct(abs(g'(drop(x))), f(g(x))), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(f, l, at_posinfinity) \226\134\146 op_minus_minus_minus_gt((n : Num) => f(real_of_num(n)), l, sequentially)
+      #|  real_of_num(2) / (d : Real) <= (z : Real) \226\134\146 real_of_num(0) < real_of_num(2) / d \226\134\146 inv(d) < abs(z)
+      #|  (a : Real) <= (z : Real) \226\134\146 real_of_num(0) < a \226\134\146 real_of_num(0) < abs(z)
+      #|  inv((z : Real))
+      #|  (z : Real)
+      #|  real_of_num(2) / (d : Real)
+      #|  (d : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 l : Cart[Real, _], op_minus_minus_gt((x : Real) => f(real_of_num(1) / x), l, atreal(real_of_num(0))) \226\134\146 op_minus_minus_gt(f, l, at_posinfinity)
+      #|  (z : Real) <= -(real_of_num(2) / (d : Real)) \226\134\146 real_of_num(0) < real_of_num(2) / d \226\134\146 inv(d) < abs(z)
+      #|  (z : Real) <= -(a : Real) \226\134\146 real_of_num(0) < a \226\134\146 real_of_num(0) < abs(z)
+      #|  inv((z : Real))
+      #|  (z : Real)
+      #|  -(real_of_num(2) / (d : Real))
+      #|  (d : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 l : Cart[Real, _], op_minus_minus_gt((x : Real) => f(real_of_num(1) / x), l, atreal(real_of_num(0))) \226\134\146 op_minus_minus_gt(f, l, at_neginfinity)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt((x : Real) => f(real_of_num(1) / x), l, atreal(real_of_num(0))) \226\134\146 op_minus_minus_minus_gt(f, l, at_posinfinity)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt((x : Real) => f(real_of_num(1) / x), l, atreal(real_of_num(0))) \226\134\146 op_minus_minus_minus_gt(f, l, at_neginfinity)
+      #|  (closed_real_segment : (List[(Real, Real)], Real) -> Bool)([((a : Real), (b : Real))]) == {(real_of_num(1) - (u : Real)) * a + u * b | real_of_num(0) <= u && u <= real_of_num(1)}
+      #|  (open_real_segment : ((Real, Real), Real) -> Bool)(((a : Real), (b : Real))) == DIFF(closed_real_segment([(a, b)]), {a, b})
       #|  :A
       #|  open_real_segment
       #|  closed_real_segment
-      #|  real_segment[a,b] = {(&1 - u) * a + u * b | &0 <= u /\\ u <= &1} /\\\n   real_segment(a,b) = real_segment[a,b] DIFF {a,b}
-      #|  (forall a b. real_segment[a,b] = IMAGE drop (segment[lift a,lift b])) /\\\n   (forall a b. real_segment(a,b) = IMAGE drop (segment(lift a,lift b)))
-      #|  (forall a b. segment[a,b] = IMAGE lift (real_segment[drop a,drop b])) /\\\n   (forall a b. segment(a,b) = IMAGE lift (real_segment(drop a,drop b)))
-      #|  (forall a b. IMAGE lift (real_segment[a,b]) = segment[lift a,lift b]) /\\\n   (forall a b. IMAGE lift (real_segment(a,b)) = segment(lift a,lift b))
-      #|  (forall a b. real_segment[a,b] =\n          if a <= b then real_interval[a,b] else real_interval[b,a]) /\\\n   (forall a b. real_segment(a,b) =\n          if a <= b then real_interval(a,b) else real_interval(b,a))
-      #|  s = {} ==> s SUBSET t
-      #|  (forall a b. real_interval[a,b] SUBSET real_segment[a,b]) /\\\n   (forall a b. real_interval(a,b) SUBSET real_segment(a,b))
-      #|  forall f s.\n        f real_continuous_on s /\\ is_realinterval s\n        ==> ((forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) <=>\n             (forall x y. x IN s /\\ y IN s /\\ x < y ==> f x < f y) \\/\n             (forall x y. x IN s /\\ y IN s /\\ x < y ==> f y < f x))
-      #|  forall a b. a IN real_segment[a,b] /\\ b IN real_segment[a,b]
-      #|  forall s. is_realinterval s <=>\n       forall a b. a IN s /\\ b IN s ==> real_segment[a,b] SUBSET s
-      #|  forall s. is_realinterval s <=>\n       forall a b. real_segment [a,b] SUBSET s <=> a IN s /\\ b IN s
-      #|  forall s a b. is_realinterval s\n           ==> (real_segment [a,b] SUBSET s <=> a IN s /\\ b IN s)
-      #|  (forall a b. is_realinterval(real_segment[a,b])) /\\\n   (forall a b. is_realinterval(real_segment(a,b)))
-      #|  (forall a b x. x IN real_segment[a,b] <=> a <= x /\\ x <= b \\/ b <= x /\\ x <= a) /\\\n   (forall a b x. x IN real_segment(a,b) <=> a < x /\\ x < b \\/ b < x /\\ x < a)
-      #|  floor x = y
-      #|  integer y
-      #|  y:real
-      #|  floor(f(x:real))
-      #|  x:real
-      #|  floor x
-      #|  f:real->real
-      #|  forall f s. is_realinterval s /\\\n         f real_continuous_on s /\\\n         (forall x y. x IN s /\\ y IN s /\\ x <= y ==> f x <= f y) /\\\n         (forall x. x IN s /\\ integer(f x) ==> integer x)\n         ==> forall x. floor x IN s /\\ x IN s ==> floor(f(floor x)) = floor(f x)
-      #|  (f:real->real) real_convex_on s <=>\n        forall x y u v. x IN s /\\ y IN s /\\ &0 <= u /\\ &0 <= v /\\ (u + v = &1)\n                  ==> f(u * x + v * y) <= u * f(x) + v * f(y)
-      #|  forall f. f real_convex_on {}
-      #|  forall f s. f real_convex_on s <=> (f o drop) convex_on (IMAGE lift s)
-      #|  forall f g s.\n         is_realinterval s /\\ (forall x. x IN s ==> f x = g x) /\\ f real_convex_on s\n         ==> g real_convex_on s
-      #|  forall f a. f real_convex_on {a}
-      #|  forall f s t. f real_convex_on t /\\ s SUBSET t ==> f real_convex_on s
-      #|  forall s c. (\\x. c) real_convex_on s
-      #|  forall s f g. f real_convex_on s /\\ g real_convex_on s\n           ==> (\\x. f(x) + g(x)) real_convex_on s
-      #|  forall s c f. &0 <= c /\\ f real_convex_on s ==> (\\x. c * f(x)) real_convex_on s
-      #|  forall s c f. &0 <= c /\\ f real_convex_on s ==> (\\x. f(x) * c) real_convex_on s
-      #|  forall t f:A->real->real s.\n         FINITE s /\\ (forall a. a IN s ==> f a real_convex_on t)\n         ==> (\\x. sum s (\\a. f a x)) real_convex_on t
-      #|  forall f g s:real^N->bool t.\n        f convex_on s /\\ g real_convex_on t /\\\n        convex s /\\ is_realinterval t /\\ IMAGE f s SUBSET t /\\\n        (forall x y. x IN t /\\ y IN t /\\ x <= y ==> g x <= g y)\n        ==> (g o f) convex_on s
-      #|  t:real->bool
-      #|  forall f g s t.\n        f real_convex_on s /\\ g real_convex_on t /\\\n        is_realinterval s /\\ is_realinterval t /\\ IMAGE f s SUBSET t /\\\n        (forall x y. x IN t /\\ y IN t /\\ x <= y ==> g x <= g y)\n       ==> (g o f) real_convex_on s
-      #|  forall f s x y. f real_convex_on s /\\\n             x IN s /\\ y IN s /\\ &0 <= u /\\ &0 <= v /\\ u + v = &1\n             ==> f(u * x + v * y) <= max (f(x)) (f(y))
-      #|  forall f s a b x.\n        f real_convex_on s /\\ a IN s /\\ b IN s /\\ x IN real_segment[a,b]\n        ==> f x <= max (f a) (f b)
-      #|  a IN s ==> ~(s = {})
-      #|  real_segment[a,b]
-      #|  forall f a b x.\n        f real_convex_on real_interval[a,b] /\\ x IN real_interval[a,b]\n        ==> f x <= max (f a) (f b)
-      #|  x:real^1
-      #|  IMAGE lift t
-      #|  IMAGE lift s
-      #|  (f:real->real) o drop
-      #|  forall f s t x.\n       f real_convex_on s /\\ x IN t /\\ real_open t /\\ t SUBSET s /\\\n       (forall y. y IN t ==> f(x) <= f(y))\n       ==> forall y. y IN s ==> f(x) <= f(y)
-      #|  forall s a. (\\x. abs(a - x)) real_convex_on s
-      #|  drop o (x:num->real^1)
-      #|  x:num->real^1
-      #|  lift o (x:num->real)
-      #|  x:num->real
-      #|  u:num->real
-      #|  k:num
-      #|  forall f s. is_realinterval s\n         ==> (f real_convex_on s <=>\n                forall k u x.\n                   (forall i:num. 1 <= i /\\ i <= k ==> &0 <= u(i) /\\ x(i) IN s) /\\\n                   (sum (1..k) u = &1)\n                   ==> f(sum (1..k) (\\i. u(i) * x(i)))\n                           <= sum (1..k) (\\i. u(i) * f(x(i))))
-      #|  \\i:A. lift(x i)
-      #|  u:A->real
-      #|  k:A->bool
-      #|  forall f s k:A->bool u x.\n        f real_convex_on s /\\ is_realinterval s /\\ FINITE k /\\\n        (forall i. i IN k ==> &0 <= u i /\\ x i IN s) /\\ sum k u = &1\n        ==> f(sum k (\\i. u i * x i)) <= sum k (\\i. u i * f(x i))
-      #|  forall f s. real_open s /\\ f real_convex_on s ==> f real_continuous_on s
-      #|  forall f s. f real_convex_on s <=>\n          forall a b x. a IN s /\\ b IN s /\\ x IN real_segment[a,b]\n                  ==> (f x - f a) * abs(b - a) <= (f b - f a) * abs(x - a)
-      #|  forall f s. f real_convex_on s <=>\n          forall a b x. a IN s /\\ b IN s /\\ x IN real_segment[a,b]\n                  ==> (f b - f a) * abs(b - x) <= (f b - f x) * abs(b - a)
-      #|  forall f s.\n      f real_convex_on s <=>\n        forall a b x. a IN s /\\ b IN s /\\ x IN real_segment(a,b)\n                ==> (f x - f a) / abs(x - a) <= (f b - f a) / abs(b - a)
-      #|  forall f s.\n      f real_convex_on s <=>\n        forall a b x. a IN s /\\ b IN s /\\ x IN real_segment(a,b)\n                ==> (f b - f a) / abs(b - a) <= (f b - f x) / abs(b - x)
-      #|  \\x. lift(drop(f % x))
-      #|  forall f f' s x y.\n        f real_convex_on s /\\ real_segment[x,y] SUBSET s /\\\n        (f has_real_derivative f') (atreal x within s)\n        ==> f' * (y - x) <= f y - f x
-      #|  \\x. lift(drop(f % x))
-      #|  forall f f' s x y.\n        f real_convex_on s /\\ real_segment[x,y] SUBSET s /\\\n        (f has_real_derivative f') (atreal y within s)\n        ==> f y - f x <= f' * (y - x)
-      #|  \\x. lift(drop(f % x))
+      #|  real_segment([((a : Real), (b : Real))]) == {(real_of_num(1) - (u : Real)) * a + u * b | real_of_num(0) <= u && u <= real_of_num(1)} && real_segment((a, b)) == DIFF(real_segment([(a, b)]), {a, b})
+      #|  (\226\136\128 a : Real, \226\136\128 b : Real, real_segment([(a, b)]) == IMAGE(drop, segment([(lift(a), lift(b))]))) && (\226\136\128 a : Real, \226\136\128 b : Real, real_segment((a, b)) == IMAGE(drop, segment((lift(a), lift(b)))))
+      #|  (\226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], segment([(a, b)]) == IMAGE(lift, real_segment([(drop(a), drop(b))]))) && (\226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], segment((a, b)) == IMAGE(lift, real_segment((drop(a), drop(b)))))
+      #|  (\226\136\128 a : Real, \226\136\128 b : Real, IMAGE(lift, real_segment([(a, b)])) == segment([(lift(a), lift(b))])) && (\226\136\128 a : Real, \226\136\128 b : Real, IMAGE(lift, real_segment((a, b))) == segment((lift(a), lift(b))))
+      #|  (\226\136\128 a : Real, \226\136\128 b : Real, real_segment([(a, b)]) == (if a <= b { real_interval([(a, b)]) } else { real_interval([(b, a)]) })) && (\226\136\128 a : Real, \226\136\128 b : Real, real_segment((a, b)) == (if a <= b { real_interval((a, b)) } else { real_interval((b, a)) }))
+      #|  (s : (_) -> Bool) == {} \226\134\146 SUBSET(s, (t : (_) -> Bool))
+      #|  (\226\136\128 a : Real, \226\136\128 b : Real, SUBSET(real_interval([(a, b)]), real_segment([(a, b)]))) && (\226\136\128 a : Real, \226\136\128 b : Real, SUBSET(real_interval((a, b)), real_segment((a, b))))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) && is_realinterval(s) \226\134\146 (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) && f(x) == f(y) \226\134\146 x == y) == ((\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) && x < y \226\134\146 f(x) < f(y)) || (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) && x < y \226\134\146 f(y) < f(x)))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, IN(a, real_segment([(a, b)])) && IN(b, real_segment([(a, b)]))
+      #|  \226\136\128 s : (Real) -> Bool, is_realinterval(s) == (\226\136\128 a : Real, \226\136\128 b : Real, IN(a, s) && IN(b, s) \226\134\146 SUBSET(real_segment([(a, b)]), s))
+      #|  \226\136\128 s : (Real) -> Bool, is_realinterval(s) == (\226\136\128 a : Real, \226\136\128 b : Real, SUBSET(real_segment([(a, b)]), s) == (IN(a, s) && IN(b, s)))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, \226\136\128 b : Real, is_realinterval(s) \226\134\146 SUBSET(real_segment([(a, b)]), s) == (IN(a, s) && IN(b, s))
+      #|  (\226\136\128 a : Real, \226\136\128 b : Real, is_realinterval(real_segment([(a, b)]))) && (\226\136\128 a : Real, \226\136\128 b : Real, is_realinterval(real_segment((a, b))))
+      #|  (\226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Real, IN(x, real_segment([(a, b)])) == (a <= x && x <= b || b <= x && x <= a)) && (\226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Real, IN(x, real_segment((a, b))) == (a < x && x < b || b < x && x < a))
+      #|  floor((x : Real)) == (y : Real)
+      #|  integer((y : Real))
+      #|  (y : Real)
+      #|  floor((f : (Real) -> Real)((x : Real)))
+      #|  (x : Real)
+      #|  floor((x : Real))
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && real_continuous_on(f, s) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) && x <= y \226\134\146 f(x) <= f(y)) && (\226\136\128 x : Real, IN(x, s) && integer(f(x)) \226\134\146 integer(x)) \226\134\146 (\226\136\128 x : Real, IN(floor(x), s) && IN(x, s) \226\134\146 floor(f(floor(x))) == floor(f(x)))
+      #|  (real_convex_on : ((Real) -> Real, (Real) -> Bool) -> Bool)((f : (Real) -> Real), (s : (Real) -> Bool)) == (\226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 u : Real, \226\136\128 v : Real, IN(x, s) && IN(y, s) && real_of_num(0) <= u && real_of_num(0) <= v && u + v == real_of_num(1) \226\134\146 f(u * x + v * y) <= u * f(x) + v * f(y))
+      #|  \226\136\128 f : (Real) -> Real, real_convex_on(f, {})
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_convex_on(f, s) == convex_on(o(f, drop), IMAGE(lift, s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == g(x)) && real_convex_on(f, s) \226\134\146 real_convex_on(g, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, real_convex_on(f, {a})
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_convex_on(f, t) && SUBSET(s, t) \226\134\146 real_convex_on(f, s)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, real_convex_on((x : Real) => c, s)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, real_convex_on(f, s) && real_convex_on(g, s) \226\134\146 real_convex_on((x : Real) => f(x) + g(x), s)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, \226\136\128 f : (Real) -> Real, real_of_num(0) <= c && real_convex_on(f, s) \226\134\146 real_convex_on((x : Real) => c * f(x), s)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, \226\136\128 f : (Real) -> Real, real_of_num(0) <= c && real_convex_on(f, s) \226\134\146 real_convex_on((x : Real) => f(x) * c, s)
+      #|  \226\136\128 t : (Real) -> Bool, \226\136\128 f : (A, Real) -> Real, \226\136\128 s : (A) -> Bool, FINITE(s) && (\226\136\128 a : A, IN(a, s) \226\134\146 real_convex_on(f(a), t)) \226\134\146 real_convex_on((x : Real) => sum(s, (a : A) => f(a, x)), t)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Real) -> Bool, convex_on(f, s) && real_convex_on(g, t) && convex(s) && is_realinterval(t) && SUBSET(IMAGE(f, s), t) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, t) && IN(y, t) && x <= y \226\134\146 g(x) <= g(y)) \226\134\146 convex_on(o(g, f), s)
+      #|  (t : (Real) -> Bool)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_convex_on(f, s) && real_convex_on(g, t) && is_realinterval(s) && is_realinterval(t) && SUBSET(IMAGE(f, s), t) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, t) && IN(y, t) && x <= y \226\134\146 g(x) <= g(y)) \226\134\146 real_convex_on(o(g, f), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, \226\136\128 y : Real, real_convex_on(f, s) && IN(x, s) && IN(y, s) && real_of_num(0) <= (u : Real) && real_of_num(0) <= (v : Real) && u + v == real_of_num(1) \226\134\146 f(u * x + v * y) <= max(f(x), f(y))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Real, real_convex_on(f, s) && IN(a, s) && IN(b, s) && IN(x, real_segment([(a, b)])) \226\134\146 f(x) <= max(f(a), f(b))
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 !(s == {})
+      #|  real_segment([((a : Real), (b : Real))])
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Real, real_convex_on(f, real_interval([(a, b)])) && IN(x, real_interval([(a, b)])) \226\134\146 f(x) <= max(f(a), f(b))
+      #|  (x : Cart[Real, Unit])
+      #|  IMAGE(lift, (t : (Real) -> Bool))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o((f : (Real) -> Real), drop)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 x : Real, real_convex_on(f, s) && IN(x, t) && real_open(t) && SUBSET(t, s) && (\226\136\128 y : Real, IN(y, t) \226\134\146 f(x) <= f(y)) \226\134\146 (\226\136\128 y : Real, IN(y, s) \226\134\146 f(x) <= f(y))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, real_convex_on((x : Real) => abs(a - x), s)
+      #|  o(drop, (x : (Num) -> Cart[Real, Unit]))
+      #|  (x : (Num) -> Cart[Real, Unit])
+      #|  o(lift, (x : (Num) -> Real))
+      #|  (x : (Num) -> Real)
+      #|  (u : (Num) -> Real)
+      #|  (k : Num)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) \226\134\146 real_convex_on(f, s) == (\226\136\128 k : Num, \226\136\128 u : (Num) -> Real, \226\136\128 x : (Num) -> Real, (\226\136\128 i : Num, 1 <= i && i <= k \226\134\146 real_of_num(0) <= u(i) && IN(x(i), s)) && sum(op_dot_dot(1, k), u) == real_of_num(1) \226\134\146 f(sum(op_dot_dot(1, k), (i : Num) => u(i) * x(i))) <= sum(op_dot_dot(1, k), (i : Num) => u(i) * f(x(i))))
+      #|  (i : A) => lift((x : (A) -> Real)(i))
+      #|  (u : (A) -> Real)
+      #|  (k : (A) -> Bool)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 k : (A) -> Bool, \226\136\128 u : (A) -> Real, \226\136\128 x : (A) -> Real, real_convex_on(f, s) && is_realinterval(s) && FINITE(k) && (\226\136\128 i : A, IN(i, k) \226\134\146 real_of_num(0) <= u(i) && IN(x(i), s)) && sum(k, u) == real_of_num(1) \226\134\146 f(sum(k, (i : A) => u(i) * x(i))) <= sum(k, (i : A) => u(i) * f(x(i)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_open(s) && real_convex_on(f, s) \226\134\146 real_continuous_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_convex_on(f, s) == (\226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Real, IN(a, s) && IN(b, s) && IN(x, real_segment([(a, b)])) \226\134\146 (f(x) - f(a)) * abs(b - a) <= (f(b) - f(a)) * abs(x - a))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_convex_on(f, s) == (\226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Real, IN(a, s) && IN(b, s) && IN(x, real_segment([(a, b)])) \226\134\146 (f(b) - f(a)) * abs(b - x) <= (f(b) - f(x)) * abs(b - a))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_convex_on(f, s) == (\226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Real, IN(a, s) && IN(b, s) && IN(x, real_segment((a, b))) \226\134\146 (f(x) - f(a)) / abs(x - a) <= (f(b) - f(a)) / abs(b - a))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_convex_on(f, s) == (\226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Real, IN(a, s) && IN(b, s) && IN(x, real_segment((a, b))) \226\134\146 (f(b) - f(a)) / abs(b - a) <= (f(b) - f(x)) / abs(b - x))
+      #|  (x : Cart[Real, Unit]) => lift(drop(op_pct((f : Real), x)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, \226\136\128 y : Real, real_convex_on(f, s) && SUBSET(real_segment([(x, y)]), s) && has_real_derivative(f, f', within(atreal(x), s)) \226\134\146 f' * (y - x) <= f(y) - f(x)
+      #|  (x : Cart[Real, Unit]) => lift(drop(op_pct((f : Real), x)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, \226\136\128 y : Real, real_convex_on(f, s) && SUBSET(real_segment([(x, y)]), s) && has_real_derivative(f, f', within(atreal(y), s)) \226\134\146 f(y) - f(x) <= f' * (y - x)
+      #|  (x : Cart[Real, Unit]) => lift(drop(op_pct((f : Real), x)))
       #|  forall f f'x f'y s x y.\n        f real_convex_on s /\\ real_segment[x,y] SUBSET s /\\\n        (f has_real_derivative f'x) (atreal x within s) /\\\n        (f has_real_derivative f'y) (atreal y within s)\n        ==> f'x * (y - x) <= f'y * (y - x)
-      #|  y:real
-      #|  x:real
-      #|  s:real->bool
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (s : (Real) -> Bool)
       #|  f'y:real
       #|  f'x:real
-      #|  f:real->real
+      #|  (f : (Real) -> Real)
       #|  forall f f'x f'y s x y.\n        f real_convex_on s /\\ real_interval[x,y] SUBSET s /\\\n        (f has_real_derivative f'x) (atreal x within s) /\\\n        (f has_real_derivative f'y) (atreal y within s) /\\\n        x < y\n        ==> f'x <= f'y
-      #|  lift o (\\x. drop(f % x))
-      #|  forall f f' s.\n        is_realinterval s /\\\n        (forall x. x IN s ==> (f has_real_derivative f'(x)) (atreal x within s))\n        ==> (f real_convex_on s <=>\n             forall x y. x IN s /\\ y IN s ==> f'(x) * (y - x) <= f y - f x)
-      #|  lift o (\\x. drop(f % x))
-      #|  forall f f' s.\n        is_realinterval s /\\\n        (forall x. x IN s ==> (f has_real_derivative f'(x)) (atreal x within s))\n        ==> (f real_convex_on s <=>\n             forall x y. x IN s /\\ y IN s ==> f y - f x <= f'(y) * (y - x))
-      #|  lift o (\\x. drop(f % x))
-      #|  forall f f' s.\n        is_realinterval s /\\\n        (forall x. x IN s ==> (f has_real_derivative f'(x)) (atreal x within s))\n        ==> (f real_convex_on s <=>\n             forall x y. x IN s /\\ y IN s ==> f'(x) * (y - x) <= f'(y) * (y - x))
-      #|  a * (y - x) <= b * (y - x) <=> b * (x - y) <= a * (x - y)
-      #|  x:real = y
-      #|  x:real
-      #|  y:real
-      #|  y:real
-      #|  x:real
-      #|  x <= y \\/ y <= x
-      #|  x:real = y
-      #|  y:real
-      #|  x:real
-      #|  y:real
-      #|  x:real
-      #|  forall f f' s.\n        is_realinterval s /\\\n        (forall x. x IN s ==> (f has_real_derivative f'(x)) (atreal x within s))\n        ==> (f real_convex_on s <=>\n             forall x y. x IN s /\\ y IN s /\\ x <= y ==> f'(x) <= f'(y))
-      #|  z:real
-      #|  s:real->bool
-      #|  z:real
-      #|  b:real
-      #|  a:real
-      #|  f':real->real
-      #|  f:real->real
-      #|  b:real
-      #|  a:real
-      #|  real_interval[a,b] SUBSET s
-      #|  forall f f' s a b.\n        is_realinterval s /\\\n        (forall x. x IN s ==> (f has_real_derivative f'(x)) (atreal x within s)) /\\\n        (forall x. x IN s ==> &0 <= f'(x)) /\\\n        a IN s /\\ b IN s /\\ a <= b\n        ==> f(a) <= f(b)
-      #|  ~(y:real = x) ==> x < y \\/ y < x
-      #|  &0 < abs(y - x) <=> ~(y = x)
-      #|  y:real
-      #|  &1
-      #|  \\y:real. (f y - f x) / (y - x)
-      #|  atreal x within s
-      #|  x:real
-      #|  forall f f' s. is_realinterval s /\\ ~(?a. s = {a}) /\\\n           (forall x. x IN s ==> (f has_real_derivative f'(x)) (atreal x within s))\n           ==> ((forall x. x IN s ==> &0 <= f'(x)) <=>\n                (forall x y. x IN s /\\ y IN s /\\ x <= y ==> f(x) <= f(y)))
-      #|  b:real
-      #|  a:real
-      #|  f':real->real
-      #|  f:real->real
-      #|  forall f f' a b.\n        (forall x. x IN real_interval[a,b]\n             ==> (f has_real_derivative f'(x))\n\n                 (atreal x within real_interval[a,b])) /\\\n        (forall x. x IN real_interval(a,b) ==> &0 < f'(x)) /\\\n        a < b\n        ==> f(a) < f(b)
-      #|  forall x y. x IN s /\\ y IN s /\\ x <= y ==> (f':real->real)(x) <= f'(y)
-      #|  forall f f' f'' s.\n        is_realinterval s /\\ ~(?a. s = {a}) /\\\n        (forall x. x IN s ==> (f has_real_derivative f'(x)) (atreal x within s)) /\\\n        (forall x. x IN s ==> (f' has_real_derivative f''(x)) (atreal x within s))\n        ==> (f real_convex_on s <=> forall x. x IN s ==> &0 <= f''(x))
-      #|  forall s f. f real_convex_on s <=>\n         forall x y u v.\n                x IN s /\\ y IN s /\\ x < y /\\ &0 <= u /\\ &0 <= v /\\ u + v = &1\n                ==> f (u * x + v * y) <= u * f x + v * f y
-      #|  &0 IN s /\\ &1 IN s /\\ ~(&1 = &0) ==> ~(?a. s = {a})
-      #|  (:real)
+      #|  o(lift, (x : Cart[Real, Unit]) => drop(op_pct((f : Real), x)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), s))) \226\134\146 real_convex_on(f, s) == (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) \226\134\146 f'(x) * (y - x) <= f(y) - f(x))
+      #|  o(lift, (x : Cart[Real, Unit]) => drop(op_pct((f : Real), x)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), s))) \226\134\146 real_convex_on(f, s) == (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) \226\134\146 f(y) - f(x) <= f'(y) * (y - x))
+      #|  o(lift, (x : Cart[Real, Unit]) => drop(op_pct((f : Real), x)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), s))) \226\134\146 real_convex_on(f, s) == (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) \226\134\146 f'(x) * (y - x) <= f'(y) * (y - x))
+      #|  ((a : Real) * ((y : Real) - (x : Real)) <= (b : Real) * (y - x)) == (b * (x - y) <= a * (x - y))
+      #|  (x : Real) == (y : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (x : Real) <= (y : Real) || y <= x
+      #|  (x : Real) == (y : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), s))) \226\134\146 real_convex_on(f, s) == (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) && x <= y \226\134\146 f'(x) <= f'(y))
+      #|  (z : Real)
+      #|  (s : (Real) -> Bool)
+      #|  (z : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f' : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  SUBSET(real_interval([((a : Real), (b : Real))]), (s : (Real) -> Bool))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, \226\136\128 b : Real, is_realinterval(s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), s))) && (\226\136\128 x : Real, IN(x, s) \226\134\146 real_of_num(0) <= f'(x)) && IN(a, s) && IN(b, s) && a <= b \226\134\146 f(a) <= f(b)
+      #|  !((y : Real) == (x : Real)) \226\134\146 x < y || y < x
+      #|  (real_of_num(0) < abs((y : Real) - (x : Real))) == !(y == x)
+      #|  (y : Real)
+      #|  real_of_num(1)
+      #|  (y : Real) => ((f : (Real) -> Real)(y) - f((x : Real))) / (y - x)
+      #|  within(atreal((x : Real)), (s : (Real) -> Bool))
+      #|  (x : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && !(\226\136\131 a : Real, s == {a}) && (\226\136\128 x : Real, IN(x, s) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), s))) \226\134\146 (\226\136\128 x : Real, IN(x, s) \226\134\146 real_of_num(0) <= f'(x)) == (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) && x <= y \226\134\146 f(x) <= f(y))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f' : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), real_interval([(a, b)])))) && (\226\136\128 x : Real, IN(x, real_interval((a, b))) \226\134\146 real_of_num(0) < f'(x)) && a < b \226\134\146 f(a) < f(b)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, IN(x, (s : (Real) -> Bool)) && IN(y, s) && x <= y \226\134\146 (f' : (Real) -> Real)(x) <= f'(y)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 f'' : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && !(\226\136\131 a : Real, s == {a}) && (\226\136\128 x : Real, IN(x, s) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), s))) && (\226\136\128 x : Real, IN(x, s) \226\134\146 has_real_derivative(f', f''(x), within(atreal(x), s))) \226\134\146 real_convex_on(f, s) == (\226\136\128 x : Real, IN(x, s) \226\134\146 real_of_num(0) <= f''(x))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Real) -> Real, real_convex_on(f, s) == (\226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 u : Real, \226\136\128 v : Real, IN(x, s) && IN(y, s) && x < y && real_of_num(0) <= u && real_of_num(0) <= v && u + v == real_of_num(1) \226\134\146 f(u * x + v * y) <= u * f(x) + v * f(y))
+      #|  IN(real_of_num(0), (s : (Real) -> Bool)) && IN(real_of_num(1), s) && !(real_of_num(1) == real_of_num(0)) \226\134\146 !(\226\136\131 a : Real, s == {a})
+      #|  (UNIV : (Real) -> Bool)
       #|  exp
       #|  exp
       #|  exp
-      #|  (:real)
-      #|  forall s. exp real_convex_on s
-      #|  a * l <= b * l <=> --l * b <= --l * a
-      #|  exp(&1 * log v)
-      #|  &1 <= t ==> ~(t = &0)
-      #|  v = &0
-      #|  &1 <= t ==> ~(t = &0)
-      #|  x = &0
-      #|  x:real
-      #|  t - &1 - &1 = t - &2
-      #|  &1 IN s /\\ &2 IN s /\\ ~(&1 = &2) ==> ~(?a. s = {a})
-      #|  {x | &0 < x}
-      #|  \\x. t * (t - &1) * x rpow (t - &2)
-      #|  \\x. t * x rpow (t - &1)
-      #|  \\x. x rpow t
-      #|  (\\x. x rpow t) real_convex_on {x | &0 < x}
-      #|  {x | &0 <= x}
-      #|  forall s t. s SUBSET {x | &0 <= x} /\\ &1 <= t\n         ==> (\\x. x rpow t) real_convex_on s
-      #|  t - &1 - &1 = t - &2
-      #|  &2:real
-      #|  &1:real
-      #|  s = {x} ==> forall a b. ~(a = b) /\\ a IN s /\\ b IN s ==> F
-      #|  t * (t - &1) * x = x * --t * (&1 - t)
-      #|  x:real
-      #|  r /\\ p ==> (p ==> (q <=> r)) ==> q
-      #|  {x | &0 < x}
-      #|  \\v. t * (t - &1) * v rpow (t - &2)
-      #|  \\v. t * v rpow (t - &1)
-      #|  \\v. v rpow t
-      #|  forall s t. s SUBSET {x | &0 < x} /\\ t <= &0\n         ==> (\\x. x rpow t) real_convex_on s
-      #|  {x:real | &0 < x}
-      #|  t:real <= &0
-      #|  t:real
-      #|  &0:real
-      #|  forall s t. s SUBSET {x | &0 < x} /\\ integer t\n         ==> (\\x. x rpow t) real_convex_on s
-      #|  -- &1:real
-      #|  s:real->bool
-      #|  forall s. s SUBSET {x | &0 < x} ==> inv real_convex_on s
-      #|  {x:real | &0 <= x}
-      #|  n = 0
-      #|  forall f:real^N->real s n.\n        f convex_on s /\\ convex s /\\ (forall x. x IN s ==> &0 <= f x)\n        ==> (\\x. (f x) pow n) convex_on s
-      #|  {x:real | &0 <= x}
-      #|  n = 0
-      #|  forall f s n.\n        f real_convex_on s /\\ is_realinterval s /\\ (forall x. x IN s ==> &0 <= f x)\n        ==> (\\x. (f x) pow n) real_convex_on s
-      #|  &0 < a ==> &0 < a + &1 /\\ ~(a + &1 = a)
-      #|  {x | &0 < x}
-      #|  \\x:real. inv(x pow 2)
-      #|  \\x:real. --inv(x)
-      #|  \\x. --log x
-      #|  forall s. s SUBSET {x | &0 < x} ==> (\\x. --log x) real_convex_on s
-      #|  inv(&2) * x = x / &2
-      #|  forall f s. f real_continuous_on s /\\ is_realinterval s /\\\n         (forall x y. x IN s /\\ y IN s ==> f ((x + y) / &2) <= (f x + f y) / &2)\n         ==> f real_convex_on s
-      #|  x:A->real
-      #|  a:A->real
-      #|  k:A->bool
-      #|  {x | &0 < x}
-      #|  \\x. --log x
-      #|  k:A->bool = {}
-      #|  forall a x k:A->bool.\n          FINITE k /\\ sum k a = &1 /\\ (forall i. i IN k ==> &0 < a i /\\ &0 < x i)\n          ==> product k (\\i. x i rpow a i) <= sum k (\\i. a i * x i)
-      #|  &0 <= y /\\ x = &0 ==> x <= y
-      #|  ?i:A. i IN k /\\ x i = &0
-      #|  forall a x k:A->bool.\n          FINITE k /\\ sum k a = &1 /\\ (forall i. i IN k ==> &0 < a i /\\ &0 <= x i)\n          ==> product k (\\i. x i rpow a i) <= sum k (\\i. a i * x i)
-      #|  product {i:A | i IN k /\\ ~(a i = &0)} (\\i. x i rpow a i)\n    <= sum {i:A | i IN k /\\ ~(a i = &0)} (\\i. a i * x i)
-      #|  forall a x k:A->bool.\n        FINITE k /\\ sum k a = &1 /\\ (forall i. i IN k ==> &0 <= a i /\\ &0 <= x i)\n        ==> product k (\\i. x i rpow a i) <= sum k (\\i. a i * x i)
-      #|  k:A->bool
-      #|  x:A->real
-      #|  \\i:A. &1 / &n
-      #|  forall k:A->bool x n.\n        k HAS_SIZE n /\\ ~(n = 0) /\\ (forall i. i IN k ==> &0 <= x(i))\n        ==> product k (\\i. x(i) rpow (&1 / &n)) <= sum k (\\i. x(i) / &n)
-      #|  inv(x) = &1 / x
-      #|  forall k:A->bool x n.\n        k HAS_SIZE n /\\ ~(n = 0) /\\ (forall i. i IN k ==> &0 <= x(i))\n        ==> root n (product k x) <= sum k x / &n
-      #|  ~(1 = 0)
-      #|  x / &2 + y / &2 = (x + y) / &2
-      #|  s HAS_SIZE 2 
+      #|  (UNIV : (Real) -> Bool)
+      #|  \226\136\128 s : (Real) -> Bool, real_convex_on(exp, s)
+      #|  ((a : Real) * (l : Real) <= (b : Real) * l) == (-l * b <= -l * a)
+      #|  exp(real_of_num(1) * log((v : Real)))
+      #|  real_of_num(1) <= (t : Real) \226\134\146 !(t == real_of_num(0))
+      #|  (v : Real) == real_of_num(0)
+      #|  real_of_num(1) <= (t : Real) \226\134\146 !(t == real_of_num(0))
+      #|  (x : Real) == real_of_num(0)
+      #|  (x : Real)
+      #|  (t : Real) - real_of_num(1) - real_of_num(1) == t - real_of_num(2)
+      #|  IN(real_of_num(1), (s : (Real) -> Bool)) && IN(real_of_num(2), s) && !(real_of_num(1) == real_of_num(2)) \226\134\146 !(\226\136\131 a : Real, s == {a})
+      #|  {(x : Real) | real_of_num(0) < x}
+      #|  (x : Real) => (t : Real) * ((t - real_of_num(1)) * rpow(x, t - real_of_num(2)))
+      #|  (x : Real) => (t : Real) * rpow(x, t - real_of_num(1))
+      #|  (x : Real) => rpow(x, (t : Real))
+      #|  real_convex_on((x : Real) => rpow(x, (t : Real)), {(x : Real) | real_of_num(0) < x})
+      #|  {(x : Real) | real_of_num(0) <= x}
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : Real, SUBSET(s, {(x : Real) | real_of_num(0) <= x}) && real_of_num(1) <= t \226\134\146 real_convex_on((x : Real) => rpow(x, t), s)
+      #|  (t : Real) - real_of_num(1) - real_of_num(1) == t - real_of_num(2)
+      #|  real_of_num(2)
+      #|  real_of_num(1)
+      #|  (s : (_) -> Bool) == {(x : _)} \226\134\146 (\226\136\128 a : _, \226\136\128 b : _, !(a == b) && IN(a, s) && IN(b, s) \226\134\146 false)
+      #|  (t : Real) * ((t - real_of_num(1)) * (x : Real)) == x * (-t * (real_of_num(1) - t))
+      #|  (x : Real)
+      #|  (r : Bool) && (p : Bool) \226\134\146 (p \226\134\146 (q : Bool) == r) \226\134\146 q
+      #|  {(x : Real) | real_of_num(0) < x}
+      #|  (v : Real) => (t : Real) * ((t - real_of_num(1)) * rpow(v, t - real_of_num(2)))
+      #|  (v : Real) => (t : Real) * rpow(v, t - real_of_num(1))
+      #|  (v : Real) => rpow(v, (t : Real))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : Real, SUBSET(s, {(x : Real) | real_of_num(0) < x}) && t <= real_of_num(0) \226\134\146 real_convex_on((x : Real) => rpow(x, t), s)
+      #|  {(x : Real) | real_of_num(0) < x}
+      #|  (t : Real) <= real_of_num(0)
+      #|  (t : Real)
+      #|  real_of_num(0)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : Real, SUBSET(s, {(x : Real) | real_of_num(0) < x}) && integer(t) \226\134\146 real_convex_on((x : Real) => rpow(x, t), s)
+      #|  -real_of_num(1)
+      #|  (s : (Real) -> Bool)
+      #|  \226\136\128 s : (Real) -> Bool, SUBSET(s, {(x : Real) | real_of_num(0) < x}) \226\134\146 real_convex_on(inv, s)
+      #|  {(x : Real) | real_of_num(0) <= x}
+      #|  (n : Num) == 0
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 n : Num, convex_on(f, s) && convex(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 real_of_num(0) <= f(x)) \226\134\146 convex_on((x : Cart[Real, N]) => pow(f(x), n), s)
+      #|  {(x : Real) | real_of_num(0) <= x}
+      #|  (n : Num) == 0
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 n : Num, real_convex_on(f, s) && is_realinterval(s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 real_of_num(0) <= f(x)) \226\134\146 real_convex_on((x : Real) => pow(f(x), n), s)
+      #|  real_of_num(0) < (a : Real) \226\134\146 real_of_num(0) < a + real_of_num(1) && !(a + real_of_num(1) == a)
+      #|  {(x : Real) | real_of_num(0) < x}
+      #|  (x : Real) => inv(pow(x, 2))
+      #|  (x : Real) => -inv(x)
+      #|  (x : Real) => -log(x)
+      #|  \226\136\128 s : (Real) -> Bool, SUBSET(s, {(x : Real) | real_of_num(0) < x}) \226\134\146 real_convex_on((x : Real) => -log(x), s)
+      #|  inv(real_of_num(2)) * (x : Real) == x / real_of_num(2)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) && is_realinterval(s) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) \226\134\146 f((x + y) / real_of_num(2)) <= (f(x) + f(y)) / real_of_num(2)) \226\134\146 real_convex_on(f, s)
+      #|  (x : (A) -> Real)
+      #|  (a : (A) -> Real)
+      #|  (k : (A) -> Bool)
+      #|  {(x : Real) | real_of_num(0) < x}
+      #|  (x : Real) => -log(x)
+      #|  (k : (A) -> Bool) == {}
+      #|  \226\136\128 a : (A) -> Real, \226\136\128 x : (A) -> Real, \226\136\128 k : (A) -> Bool, FINITE(k) && sum(k, a) == real_of_num(1) && (\226\136\128 i : A, IN(i, k) \226\134\146 real_of_num(0) < a(i) && real_of_num(0) < x(i)) \226\134\146 product(k, (i : A) => rpow(x(i), a(i))) <= sum(k, (i : A) => a(i) * x(i))
+      #|  real_of_num(0) <= (y : Real) && (x : Real) == real_of_num(0) \226\134\146 x <= y
+      #|  \226\136\131 i : A, IN(i, (k : (A) -> Bool)) && (x : (A) -> Real)(i) == real_of_num(0)
+      #|  \226\136\128 a : (A) -> Real, \226\136\128 x : (A) -> Real, \226\136\128 k : (A) -> Bool, FINITE(k) && sum(k, a) == real_of_num(1) && (\226\136\128 i : A, IN(i, k) \226\134\146 real_of_num(0) < a(i) && real_of_num(0) <= x(i)) \226\134\146 product(k, (i : A) => rpow(x(i), a(i))) <= sum(k, (i : A) => a(i) * x(i))
+      #|  product({(i : A) | IN(i, (k : (A) -> Bool)) && !((a : (A) -> Real)(i) == real_of_num(0))}, (i : A) => rpow((x : (A) -> Real)(i), a(i))) <= sum({(i : A) | IN(i, k) && !(a(i) == real_of_num(0))}, (i : A) => a(i) * x(i))
+      #|  \226\136\128 a : (A) -> Real, \226\136\128 x : (A) -> Real, \226\136\128 k : (A) -> Bool, FINITE(k) && sum(k, a) == real_of_num(1) && (\226\136\128 i : A, IN(i, k) \226\134\146 real_of_num(0) <= a(i) && real_of_num(0) <= x(i)) \226\134\146 product(k, (i : A) => rpow(x(i), a(i))) <= sum(k, (i : A) => a(i) * x(i))
+      #|  (k : (A) -> Bool)
+      #|  (x : (A) -> Real)
+      #|  (i : A) => real_of_num(1) / real_of_num((n : Num))
+      #|  \226\136\128 k : (A) -> Bool, \226\136\128 x : (A) -> Real, \226\136\128 n : Num, HAS_SIZE(k, n) && !(n == 0) && (\226\136\128 i : A, IN(i, k) \226\134\146 real_of_num(0) <= x(i)) \226\134\146 product(k, (i : A) => rpow(x(i), real_of_num(1) / real_of_num(n))) <= sum(k, (i : A) => x(i) / real_of_num(n))
+      #|  inv((x : Real)) == real_of_num(1) / x
+      #|  \226\136\128 k : (A) -> Bool, \226\136\128 x : (A) -> Real, \226\136\128 n : Num, HAS_SIZE(k, n) && !(n == 0) && (\226\136\128 i : A, IN(i, k) \226\134\146 real_of_num(0) <= x(i)) \226\134\146 root(n, product(k, x)) <= sum(k, x) / real_of_num(n)
+      #|  !(1 == 0)
+      #|  (x : Real) / real_of_num(2) + (y : Real) / real_of_num(2) == (x + y) / real_of_num(2)
+      #|  HAS_SIZE((s : (_) -> Bool), 2)
       #|  2
-      #|  \\n. if n = 0 then (x:real) else y
-      #|  {0,1}
-      #|  forall x y. &0 <= x /\\ &0 <= y ==> sqrt(x * y) <= (x + y) / &2
-      #|  root n (product (k:A->bool) x) pow n
-      #|  forall k:A->bool x n.\n        k HAS_SIZE n /\\ ~(n = 0) /\\ (forall i. i IN k ==> &0 <= x(i))\n        ==> product k x <= (sum k x / &n) pow n
-      #|  0..SUC 0
-      #|  \\i. if i = 0 then x:real else y
-      #|  \\i. if i = 0 then u:real else v
-      #|  forall x y u v.\n        &0 <= x /\\ &0 <= y /\\ &0 <= u /\\ &0 <= v /\\ u + v = &1\n        ==> x rpow u * y rpow v <= u * x + v * y
-      #|  inv q:real
-      #|  inv p:real
-      #|  b rpow q
-      #|  a rpow p
-      #|  forall a b p q. &0 <= a /\\ &0 <= b /\\ &0 < p /\\ &0 < q /\\ inv(p) + inv(q) = &1\n             ==> a * b <= a rpow p / p + b rpow q / q
-      #|  i:A
-      #|  (a:A->real) i = &0
-      #|  i:A
-      #|  s = &1 ==> p = s ==> p <= &1
-      #|  sum k (\\i:A. a i * (x i / (x i + y i))) +\n    sum k (\\i. a i * (y i / (x i + y i)))
-      #|  (x + y) / z:real = x / z + y / z
-      #|  x = &0 /\\ y = &0 /\\ z = &0 ==> x + y <= z
-      #|  &0 <= x /\\ &0 <= y ==> (x + y = &0 <=> x = &0 /\\ y = &0)
-      #|  p /\\ q <=> ~(p ==> ~q)
-      #|  &0 <= x <=> x = &0 \\/ &0 < x
-      #|  &0 <= product (k:A->bool) (\\i. (x i + y i) rpow a i)
-      #|  forall k:A->bool a x y.\n        FINITE k /\\ sum k a = &1 /\\\n        (forall i. i IN k ==> &0 <= a i /\\ &0 <= x i /\\ &0 <= y i)\n        ==> product k (\\i. x i rpow a i) + product k (\\i. y i rpow a i)\n            <= product k (\\i. (x i + y i) rpow a i)
-      #|  z:real
-      #|  &0
-      #|  \\x. log(a) pow 2 * x * a rpow x
-      #|  \\x. a rpow x * (log a * x - &1) + &1
-      #|  l * a * z - (a - &1) = a * (l * z - &1) + &1
-      #|  &0 < x ==> x pow 2 * (a * b / x - c / x pow 2) = a * b * x - c
-      #|  (z:real) pow 2
-      #|  &0 < z
-      #|  z:real
-      #|  y:real
-      #|  x:real
-      #|  \\x. log a * a rpow x / x - (a rpow x - &1) / x pow 2
-      #|  \\x. (a rpow x - &1) / x
-      #|  forall a x y. &0 < a /\\ ~(a = &1) /\\ &0 < x /\\ x < y\n           ==> (a rpow x - &1) / x < (a rpow y - &1) / y
-      #|  a = &1
-      #|  x:real = y
-      #|  forall a x y. &0 < a /\\ &0 < x /\\ x <= y\n           ==> (a rpow x - &1) / x <= (a rpow y - &1) / y
-      #|  &0 < r ==> (inv r * s) * r = s
-      #|  x < y ==> forall z. &0 <= x /\\ &0 < z ==> x rpow z < y rpow z
-      #|  r:real
-      #|  --x < a - &1 <=> &1 - x < a
-      #|  (&1 - x / s - &1) / r = --(x / r) / s
-      #|  a - x = a <=> x = &0
-      #|  s:real
-      #|  r:real
-      #|  (&1 - x / s) rpow (inv r)
-      #|  &0 < &1 - x / s
-      #|  &0 < s
-      #|  forall x r s. &0 < r /\\ r < s /\\ ~(x = &0) /\\ x < r\n           ==> (&1 - x / r) rpow r < (&1 - x / s) rpow s
-      #|  &1 <= &1 - x / y <=> &0 <= --x / y
-      #|  F ==> p
-      #|  r = &0
-      #|  &0 < s
-      #|  r:real = x
-      #|  r:real = s
-      #|  x = &0
-      #|  forall x r s. &0 <= r /\\ r <= s /\\ x <= r\n           ==> (&1 - x / r) rpow r <= (&1 - x / s) rpow s
-      #|  ~(e = &0) ==> e + inv e - &2 = (e - &1) pow 2 / e
-      #|  x:real
-      #|  ~(&1 = &0)
-      #|  (:real)
-      #|  \\x. exp x + exp(--x) - &2
-      #|  \\x. exp x - exp(--x) - &2 * x
-      #|  &0
-      #|  forall a b. a <= b\n          ==> exp a - inv(exp a) - &2 * a <= exp b - inv(exp b) - &2 * b
-      #|  forall x. &0 <= x ==> x <= (exp x - inv(exp x)) / &2
-      #|  ~(&0 <= x) ==> &0 <= --x
-      #|  (exp(--x) - inv(exp(--x))) / &2
-      #|  --((a - b) / &2) = (b - a) / &2
-      #|  ~(&0 <= x) /\\ --x <= --y ==> abs x <= abs y
-      #|  &0 <= x /\\ x <= y ==> abs x <= abs y
-      #|  &0 <= x
-      #|  forall x. abs x <= abs((exp x - inv(exp x)) / &2)
-      #|  f log_convex_on (s:real^N->bool) <=>\n        (forall x y u v. x IN s /\\ y IN s /\\ &0 <= u /\\ &0 <= v /\\ u + v = &1\n                   ==> &0 <= f(u % x + v % y) /\\\n                       f(u % x + v % y) <= f(x) rpow u * f(y) rpow v)
-      #|  forall f:real^N->real. f log_convex_on {}
-      #|  forall f s t. f log_convex_on t /\\ s SUBSET t ==> f log_convex_on s
-      #|  forall f g s:real^N->bool.\n         convex s /\\ (forall x. x IN s ==> f x = g x) /\\ f log_convex_on s\n         ==> g log_convex_on s
-      #|  &1
-      #|  &0
-      #|  x:real^N
-      #|  x:real^N
-      #|  forall f s x:real^N.\n        f log_convex_on s /\\ x IN s ==> &0 <= f x
-      #|  forall f s:real^N->bool.\n        convex s\n        ==> (f log_convex_on s <=>\n             (forall x. x IN s ==> &0 <= f x) /\\\n             forall x y u v. x IN s /\\ y IN s /\\ &0 <= u /\\ &0 <= v /\\ u + v = &1\n                       ==> f(u % x + v % y) <= f(x) rpow u * f(y) rpow v)
-      #|  forall f s:real^N->bool.\n        convex s /\\ (forall x. x IN s ==> &0 < f x)\n        ==> (f log_convex_on s <=> (log o f) convex_on s)
-      #|  v:real
-      #|  u:real
-      #|  y:real^N
-      #|  x:real^N
-      #|  v:real
-      #|  u:real
-      #|  y:real^N
-      #|  x:real^N
-      #|  forall f s:real^N->bool. f log_convex_on s ==> f convex_on s
-      #|  \\i. if i = 0 then (g:real^N->real) x else g y
-      #|  \\i. if i = 0 then (f:real^N->real) x else f y
-      #|  \\i. if i = 0 then u:real else v
-      #|  0..SUC 0
-      #|  v:real
-      #|  u:real
-      #|  y:real^N
-      #|  x:real^N
-      #|  forall f g s:real^N->bool.\n        f log_convex_on s /\\ g log_convex_on s\n        ==> (\\x. f x + g x) log_convex_on s
-      #|  (a * b) * (c * d):real = (a * c) * (b * d)
-      #|  forall f g s:real^N->bool.\n        f log_convex_on s /\\ g log_convex_on s\n        ==> (\\x. f x * g x) log_convex_on s
-      #|  x <= y / &2 <=> &2 * x <= y
-      #|  y:real^N
-      #|  x:real^N
-      #|  lift o log o (f:real^N->real) =\n                  (lift o log o drop) o (lift o f)
-      #|  forall f s:real^N->bool.\n        (lift o f) continuous_on s /\\ convex s /\\\n        (forall x. x IN s ==> &0 < f x) /\\\n        (forall x y. x IN s /\\ y IN s ==> f(midpoint(x,y)) pow 2 <= f(x) * f(y))\n        ==> f log_convex_on s
-      #|  forall s a. &0 <= a ==> (\\x. a) log_convex_on s
-      #|  \\x:real^N. (f:real^N->real) a
-      #|  forall f a:real^N. f log_convex_on {a} <=> &0 <= f a
-      #|  forall f s k. FINITE k /\\ (forall i. i IN k ==> (\\x. f x i) log_convex_on s)\n           ==> (\\x. product k (f x)) log_convex_on s
-      #|  (f:real->real) real_log_convex_on s <=>\n        (forall x y u v. x IN s /\\ y IN s /\\ &0 <= u /\\ &0 <= v /\\ u + v = &1\n                   ==> &0 <= f(u * x + v * y) /\\\n                       f(u * x + v * y) <= f(x) rpow u * f(y) rpow v)
-      #|  forall f. f real_log_convex_on {}
-      #|  forall f s t. f real_log_convex_on t /\\ s SUBSET t ==> f real_log_convex_on s
-      #|  forall f s. f real_log_convex_on s <=> (f o drop) log_convex_on (IMAGE lift s)
-      #|  forall f g s.\n         is_realinterval s /\\ (forall x. x IN s ==> f x = g x) /\\\n         f real_log_convex_on s\n         ==> g real_log_convex_on s
-      #|  forall f a. f real_log_convex_on {a} <=> &0 <= f a
-      #|  forall f s x.\n        f real_log_convex_on s /\\ x IN s ==> &0 <= f x
-      #|  forall f s.\n        is_realinterval s\n        ==> (f real_log_convex_on s <=>\n             (forall x. x IN s ==> &0 <= f x) /\\\n             forall x y u v. x IN s /\\ y IN s /\\ &0 <= u /\\ &0 <= v /\\ u + v = &1\n                       ==> f(u * x + v * y) <= f(x) rpow u * f(y) rpow v)
-      #|  forall f s:real->bool.\n        is_realinterval s /\\ (forall x. x IN s ==> &0 < f x)\n        ==> (f real_log_convex_on s <=> (log o f) real_convex_on s)
-      #|  v:real
-      #|  u:real
-      #|  y:real
-      #|  x:real
-      #|  v:real
-      #|  u:real
-      #|  y:real
-      #|  x:real
-      #|  forall f s:real->bool. f real_log_convex_on s ==> f real_convex_on s
-      #|  \\i. if i = 0 then (g:real->real) x else g y
-      #|  \\i. if i = 0 then (f:real->real) x else f y
-      #|  \\i. if i = 0 then u:real else v
-      #|  0..SUC 0
-      #|  v:real
-      #|  u:real
-      #|  y:real
-      #|  x:real
-      #|  forall f g s:real->bool.\n        f real_log_convex_on s /\\ g real_log_convex_on s\n        ==> (\\x. f x + g x) real_log_convex_on s
-      #|  (a * b) * (c * d):real = (a * c) * (b * d)
-      #|  forall f g s:real->bool.\n        f real_log_convex_on s /\\ g real_log_convex_on s\n        ==> (\\x. f x * g x) real_log_convex_on s
-      #|  x <= y / &2 <=> &2 * x <= y
-      #|  y:real
-      #|  x:real
-      #|  forall f s:real->bool.\n        f real_continuous_on s /\\ is_realinterval s /\\\n        (forall x. x IN s ==> &0 < f x) /\\\n        (forall x y. x IN s /\\ y IN s ==> f((x + y) / &2) pow 2 <= f(x) * f(y))\n        ==> f real_log_convex_on s
-      #|  forall s a. &0 <= a ==> (\\x. a) real_log_convex_on s
-      #|  forall f s k. FINITE k /\\ (forall i. i IN k ==> (\\x. f x i) real_log_convex_on s)\n           ==> (\\x. product k (f x)) real_log_convex_on s
-      #|  forall s a. &0 < a ==> (\\x. a rpow x) real_log_convex_on s
-      #|  &0
-      #|  &1
-      #|  y:real
-      #|  y:real
-      #|  &0
-      #|  &1
-      #|  x:real
-      #|  x:real
-      #|  \\x. x rpow y
-      #|  \\i. (f:A->real->real) i x rpow u * f i y rpow v -\n                    f i (u * x + v * y)
-      #|  \\i. (f:A->real->real) i (u * x + v * y)
-      #|  net:A net
-      #|  forall net:A net f g s.\n       ~(trivial_limit net) /\\\n       (forall x y u v. x IN s /\\ y IN s /\\ &0 <= u /\\ &0 <= v /\\ u + v = &1\n                  ==> ((\\i. f i (u * x + v * y)) ---> g(u * x + v * y)) net) /\\\n       eventually (\\i. (f i) real_log_convex_on s) net\n       ==> g real_log_convex_on s
-      #|  (f has_real_integral y) s <=>\n        ((lift o f o drop) has_integral (lift y)) (IMAGE lift s)
-      #|  f real_integrable_on i <=> ?y. (f has_real_integral y) i
-      #|  real_integral i f = @y. (f has_real_integral y) i
-      #|  real_negligible s <=> negligible (IMAGE lift s)
-      #|  f absolutely_real_integrable_on s <=>\n        f real_integrable_on s /\\ (\\x. abs(f x)) real_integrable_on s
-      #|  s has_real_measure m <=> ((\\x. &1) has_real_integral m) s
-      #|  real_measurable s <=> ?m. s has_real_measure m
-      #|  real_measure s = @m. s has_real_measure m
-      #|  (f has_real_integral y) (real_interval[a,b]) <=>\n   ((lift o f o drop) has_integral (lift y)) (interval[lift a,lift b])
-      #|  forall f i. f real_integrable_on i\n         ==> (f has_real_integral (real_integral i f)) i
-      #|  forall f i s. (f has_real_integral i) s ==> f real_integrable_on s
-      #|  forall f s. f real_integrable_on s <=>\n         (f has_real_integral (real_integral s f)) s
-      #|  forall f i k1 k2.\n        (f has_real_integral k1) i /\\ (f has_real_integral k2) i ==> k1 = k2
-      #|  forall f y k.\n      (f has_real_integral y) k ==> real_integral k f = y
-      #|  forall f i s.\n        (f has_real_integral i) s <=>\n        f real_integrable_on s /\\ real_integral s f = i
-      #|  forall s f y. f real_integrable_on s\n           ==> (real_integral s f = y <=> (f has_real_integral y) s)
-      #|  f real_integrable_on s <=>\n        (lift o f o drop) integrable_on (IMAGE lift s)
-      #|  f absolutely_real_integrable_on s <=>\n        (lift o f o drop) absolutely_integrable_on (IMAGE lift s)
-      #|  f real_integrable_on s\n   ==> real_integral s f = drop(integral (IMAGE lift s) (lift o f o drop))
-      #|  real_interval(--B,B) SUBSET real_interval[a,b]
-      #|  b:real
-      #|  a:real
-      #|  &0 < B
-      #|  B:real
-      #|  &0 < e
-      #|  e:real
-      #|  (p ==> (q <=> q')) ==> (p /\\ q <=> p /\\ q')
-      #|  forall f s i.\n         (f has_real_integral i) s <=>\n         (forall a b. (\\x. if x IN s then f x else &0) real_integrable_on\n                real_interval [a,b]) /\\\n         (forall e. &0 < e\n              ==> (?B. &0 < B /\\\n                       (forall a b.\n                            real_interval(--B,B) SUBSET real_interval[a,b]\n                            ==> abs\n                                (real_integral (real_interval[a,b])\n                                 (\\x. if x IN s then f x else &0) -\n                                 i) < e)))
-      #|  forall f s. (forall x. x IN s ==> f(x) = &0) ==> (f has_real_integral &0) s
-      #|  forall s. ((\\x. &0) has_real_integral &0) s
-      #|  forall i s. ((\\x. &0) has_real_integral i) s <=> i = &0
-      #|  forall f:real->real y s h:real->real.\n        (f has_real_integral y) s /\\ linear(lift o h o drop)\n        ==> ((h o f) has_real_integral h(y)) s
-      #|  c:real
-      #|  forall(f:real->real) k s c.\n        (f has_real_integral k) s\n        ==> ((\\x. c * f(x)) has_real_integral (c * k)) s
-      #|  forall(f:real->real) k s c.\n        (f has_real_integral k) s\n        ==> ((\\x. f(x) * c) has_real_integral (k * c)) s
-      #|  forall f k s. (f has_real_integral k) s\n           ==> ((\\x. --(f x)) has_real_integral (--k)) s
-      #|  forall f:real->real g k l s.\n        (f has_real_integral k) s /\\ (g has_real_integral l) s\n        ==> ((\\x. f(x) + g(x)) has_real_integral (k + l)) s
-      #|  forall f:real->real g k l s.\n        (f has_real_integral k) s /\\ (g has_real_integral l) s\n        ==> ((\\x. f(x) - g(x)) has_real_integral (k - l)) s
-      #|  forall s. real_integral s (\\x. &0) = &0
-      #|  forall f:real->real g s.\n        f real_integrable_on s /\\ g real_integrable_on s\n        ==> real_integral s (\\x. f x + g x) =\n            real_integral s f + real_integral s g
-      #|  forall f:real->real c s.\n        f real_integrable_on s\n        ==> real_integral s (\\x. c * f(x)) = c * real_integral s f
-      #|  forall f:real->real c s.\n        f real_integrable_on s\n        ==> real_integral s (\\x. f(x) * c) = real_integral s f * c
-      #|  forall f:real->real s.\n        f real_integrable_on s\n        ==> real_integral s (\\x. --f(x)) = --real_integral s f
-      #|  forall f:real->real g s.\n        f real_integrable_on s /\\ g real_integrable_on s\n        ==> real_integral s (\\x. f x - g x) =\n            real_integral s f - real_integral s g
-      #|  forall s. (\\x. &0) real_integrable_on s
-      #|  forall f:real->real g s.\n        f real_integrable_on s /\\ g real_integrable_on s\n        ==> (\\x. f x + g x) real_integrable_on s
-      #|  forall f:real->real c s.\n        f real_integrable_on s\n        ==> (\\x. c * f(x)) real_integrable_on s
-      #|  forall f:real->real c s.\n        f real_integrable_on s\n        ==> (\\x. f(x) * c) real_integrable_on s
-      #|  inv c:real
-      #|  c = &0
-      #|  forall f s c.\n        (\\x. c * f x) real_integrable_on s <=>\n        c = &0 \\/ f real_integrable_on s
-      #|  forall f s c.\n        (\\x. f x * c) real_integrable_on s <=>\n        c = &0 \\/ f real_integrable_on s
-      #|  forall f:real->real s.\n        f real_integrable_on s ==> (\\x. --f(x)) real_integrable_on s
-      #|  forall f s. (\\x. --f x) real_integrable_on s <=> f real_integrable_on s
-      #|  forall f:real->real g s.\n        f real_integrable_on s /\\ g real_integrable_on s\n        ==> (\\x. f x - g x) real_integrable_on s
-      #|  forall f h s. f real_integrable_on s /\\\n           linear(lift o h o drop) ==> (h o f) real_integrable_on s
-      #|  s:real->bool
-      #|  (h:real->real) o (f:real->real)
-      #|  forall f:real->real s h:real->real.\n        f real_integrable_on s /\\ linear(lift o h o drop)\n        ==> real_integral s (h o f) = h(real_integral s f)
-      #|  forall f:A->real->real s t.\n        FINITE t /\\\n        (forall a. a IN t ==> ((f a) has_real_integral (i a)) s)\n        ==> ((\\x. sum t (\\a. f a x)) has_real_integral (sum t i)) s
-      #|  forall f:A->real->real s t.\n        FINITE t /\\\n        (forall a. a IN t ==> (f a) real_integrable_on s)\n        ==> real_integral s (\\x. sum t (\\a. f a x)) =\n                sum t (\\a. real_integral s (f a))
-      #|  forall f:A->real->real s t.\n        FINITE t /\\\n        (forall a. a IN t ==> (f a) real_integrable_on s)\n        ==>  (\\x. sum t (\\a. f a x)) real_integrable_on s
-      #|  x - (x - y:real) = y
-      #|  forall f:real->real g k s.\n        (forall x. x IN s ==> (f(x) = g(x))) /\\\n        (f has_real_integral k) s\n        ==> (g has_real_integral k) s
-      #|  forall f:real->real g s.\n        (forall x. x IN s ==> (f(x) = g(x))) /\\\n        f real_integrable_on s\n        ==> g real_integrable_on s
-      #|  forall f:real->real g k s.\n        (forall x. x IN s ==> (f(x) = g(x)))\n        ==> ((f has_real_integral k) s <=> (g has_real_integral k) s)
-      #|  IMAGE (\\x. x) s = s
-      #|  forall f:real->real a b.\n    b <= a ==> (f has_real_integral &0) (real_interval[a,b])
-      #|  forall f a b i. b <= a\n             ==> ((f has_real_integral i) (real_interval[a,b]) <=> i = &0)
-      #|  forall f a b. b <= a\n           ==> real_integral(real_interval[a,b]) f = &0
-      #|  forall f a b. b <= a\n           ==> f real_integrable_on real_interval[a,b]
-      #|  forall f. (f has_real_integral &0) {}
-      #|  forall f i. (f has_real_integral i) {} <=> i = &0
-      #|  forall f. f real_integrable_on {}
-      #|  forall f. real_integral {} f = &0
-      #|  forall f a. (f has_real_integral &0) (real_interval[a,a])
-      #|  forall f a. f real_integrable_on real_interval[a,a]
-      #|  forall f a. real_integral (real_interval[a,a]) f = &0
-      #|  lift c
-      #|  lift b
-      #|  lift a
-      #|  forall a b c.\n        a <= b\n        ==> ((\\x. c) has_real_integral (c * (b - a))) (real_interval[a,b])
-      #|  forall a b c. (\\x. c) real_integrable_on real_interval[a,b]
-      #|  forall a b c.\n        a <= b\n        ==> real_integral (real_interval [a,b]) (\\x. c) = c * (b - a)
-      #|  lift o f o drop
-      #|  forall f:real->real a b i B.\n        &0 <= B /\\ a <= b /\\\n        (f has_real_integral i) (real_interval[a,b]) /\\\n        (forall x. x IN real_interval[a,b] ==> abs(f x) <= B)\n        ==> abs i <= B * (b - a)
-      #|  IMAGE lift s
-      #|  lift o g o drop
-      #|  lift o f o drop
-      #|  forall f g s i j.\n        (f has_real_integral i) s /\\ (g has_real_integral j) s /\\\n        (forall x. x IN s ==> f x <= g x)\n        ==> i <= j
-      #|  forall f:real->real g:real->real s.\n        f real_integrable_on s /\\ g real_integrable_on s /\\\n        (forall x. x IN s ==> f x <= g x)\n        ==> real_integral s f <= real_integral s g
-      #|  i:real
-      #|  &0:real
-      #|  s:real->bool
-      #|  f:real->real
-      #|  (\\x. &0):real->real
-      #|  forall f:real->real s i.\n        (f has_real_integral i) s /\\\n        (forall x. x IN s ==> &0 <= f x)\n        ==> &0 <= i
-      #|  forall f:real->real s.\n        f real_integrable_on s /\\\n        (forall x. x IN s ==> &0 <= f x)\n        ==> &0 <= real_integral s f
-      #|  &0:real
-      #|  i:real
-      #|  s:real->bool
-      #|  (\\x. &0):real->real
-      #|  f:real->real
-      #|  forall f:real->real s i.\n        (f has_real_integral i) s /\\\n        (forall x. x IN s ==> f x <= &0)\n        ==> i <= &0
-      #|  i:real
-      #|  B * (b - a):real
-      #|  real_interval[a,b]
-      #|  f:real->real
-      #|  (\\x. B):real->real
-      #|  forall f:real->real a b i.\n        a <= b /\\\n        (f has_real_integral i) (real_interval[a,b]) /\\\n        (forall x. x IN real_interval[a,b] ==> B <= f(x))\n        ==> B * (b - a) <= i
-      #|  B * (b - a):real
-      #|  i:real
-      #|  real_interval[a,b]
-      #|  (\\x. B):real->real
-      #|  f:real->real
-      #|  forall f:real->real a b i.\n        a <= b /\\\n        (f has_real_integral i) (real_interval[a,b]) /\\\n        (forall x. x IN real_interval[a,b] ==> f(x) <= B)\n        ==> i <= B * (b - a)
-      #|  f:real->real
-      #|  forall f:real->real a b.\n        a <= b /\\\n        f real_integrable_on real_interval[a,b] /\\\n        (forall x. x IN real_interval[a,b] ==> B <= f(x))\n        ==> B * (b - a) <= real_integral(real_interval[a,b]) f
-      #|  f:real->real
-      #|  forall f:real->real a b.\n        a <= b /\\\n        f real_integrable_on real_interval[a,b] /\\\n        (forall x. x IN real_interval[a,b] ==> f(x) <= B)\n        ==> real_integral(real_interval[a,b]) f <= B * (b - a)
-      #|  lift o g o drop
-      #|  g:real->real
-      #|  e:real
-      #|  e:real
-      #|  forall f a b. (forall e. &0 < e\n                ==> ?g. (forall x. x IN real_interval[a,b] ==> abs(f x - g x) <= e) /\\\n                        g real_integrable_on real_interval[a,b] )\n           ==> f real_integrable_on real_interval[a,b]
-      #|  IMAGE lift s
-      #|  forall f s t.\n        real_negligible s /\\ (forall x. x IN (t DIFF s) ==> f x = &0)\n        ==> (f has_real_integral (&0)) t
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  forall f g s t y.\n        real_negligible s /\\ (forall x. x IN (t DIFF s) ==> g x = f x) /\\\n        (f has_real_integral y) t\n        ==> (g has_real_integral y) t
-      #|  s:real->bool
-      #|  g:real->real
-      #|  f:real->real
-      #|  forall f g s t y.\n        real_negligible s /\\ (forall x. x IN (t DIFF s) ==> g x = f x)\n        ==> ((f has_real_integral y) t <=> (g has_real_integral y) t)
-      #|  forall f g s t.\n        real_negligible s /\\ (forall x. x IN (t DIFF s) ==> g x = f x)\n        ==> f real_integrable_on t ==> g real_integrable_on  t
-      #|  forall f g s t.\n         real_negligible s /\\ (forall x. x IN t DIFF s ==> g x = f x)\n         ==> (f real_integrable_on t <=> g real_integrable_on t)
-      #|  forall f:real->real g s t.\n        real_negligible s /\\ (forall x. x IN (t DIFF s) ==> g x = f x)\n        ==> real_integral t f = real_integral t g
-      #|  IMAGE lift s
-      #|  forall s:real->bool t:real->bool.\n        real_negligible s /\\ t SUBSET s ==> real_negligible t
-      #|  s:real->bool
-      #|  forall s t:real->bool. real_negligible s ==> real_negligible(s DIFF t)
-      #|  forall s t. real_negligible s \\/ real_negligible t ==> real_negligible(s INTER t)
-      #|  forall s t:real->bool.\n       real_negligible s /\\ real_negligible t ==> real_negligible (s UNION t)
-      #|  forall s t:real->bool.\n        real_negligible (s UNION t) <=> real_negligible s /\\ real_negligible t
-      #|  forall a:real. real_negligible {a}
-      #|  forall a:real s. real_negligible(a INSERT s) <=> real_negligible s
-      #|  real_negligible {}
-      #|  forall s. FINITE s ==> real_negligible s
-      #|  forall s. FINITE s /\\ (forall t. t IN s ==> real_negligible t)\n       ==> real_negligible(UNIONS s)
-      #|  forall s. real_open s /\\ ~(s = {}) ==> ~real_negligible s
-      #|  forall f:real->real g s t y.\n        FINITE s /\\ (forall x. x IN (t DIFF s) ==> g x = f x) /\\\n        (f has_real_integral y) t\n        ==> (g has_real_integral y) t
-      #|  forall f:real->real g s y.\n        FINITE s /\\ (forall x. x IN (t DIFF s) ==> g x = f x)\n        ==> ((f has_real_integral y) t <=> (g has_real_integral y) t)
-      #|  forall f:real->real g s.\n        FINITE s /\\ (forall x. x IN (t DIFF s) ==> g x = f x)\n        ==> f real_integrable_on t\n            ==> g real_integrable_on  t
-      #|  {(a:real),b}
-      #|  forall a b:real. real_negligible(real_interval[a,b] DIFF real_interval(a,b))
-      #|  real_interval[a:real,b] DIFF real_interval(a,b)
-      #|  a /\\ b /\\ c ==> d <=> a /\\ b ==> c ==> d
-      #|  forall f:real->real g a b y.\n        (forall x. x IN real_interval(a,b) ==> g x = f x) /\\\n        (f has_real_integral y) (real_interval[a,b])\n        ==> (g has_real_integral y) (real_interval[a,b])
-      #|  forall f:real->real g a b y.\n        (forall x. x IN real_interval(a,b) ==> g x = f x)\n        ==> ((f has_real_integral y) (real_interval[a,b]) <=>\n             (g has_real_integral y) (real_interval[a,b]))
-      #|  forall f:real->real g a b.\n        (forall x. x IN real_interval(a,b) ==> g x = f x)\n        ==> f real_integrable_on (real_interval[a,b])\n            ==> g real_integrable_on  (real_interval[a,b])
-      #|  {}:real->bool
-      #|  forall f g s.\n        (forall x. x IN s ==> f x = g x) ==> real_integral s f = real_integral s g
-      #|  real_integral s (\\x. &0)
-      #|  forall f s. (forall x. x IN s ==> f x = &0) ==> real_integral s f = &0
-      #|  forall f a b.\n        f real_continuous_on real_interval[a,b]\n        ==> f real_integrable_on real_interval[a,b]
-      #|  forall f f' a b.\n        a <= b /\\\n        (forall x. x IN real_interval[a,b]\n             ==> (f has_real_derivative f'(x))\n                 (atreal x within real_interval[a,b]))\n        ==> (f' has_real_integral (f(b) - f(a))) (real_interval[a,b])
-      #|  lift b
-      #|  lift a
-      #|  forall f:real->real a b c d.\n        f real_integrable_on real_interval[a,b] /\\\n        real_interval[c,d] SUBSET real_interval[a,b]\n        ==> f real_integrable_on real_interval[c,d]
-      #|  lift c
-      #|  forall f i j a b c.\n        a <= c /\\ c <= b /\\\n        (f has_real_integral i) (real_interval[a,c]) /\\\n        (f has_real_integral j) (real_interval[c,b])\n        ==> (f has_real_integral (i + j)) (real_interval[a,b])
-      #|  b:real
-      #|  a:real
-      #|  c:real
-      #|  forall f a b c.\n        a <= c /\\ c <= b /\\ f real_integrable_on (real_interval[a,b])\n        ==> real_integral(real_interval[a,c]) f +\n            real_integral(real_interval[c,b]) f =\n            real_integral(real_interval[a,b]) f
-      #|  forall f a b c.\n        a <= c /\\ c <= b /\\\n        f real_integrable_on real_interval[a,c] /\\\n        f real_integrable_on real_interval[c,b]\n        ==> f real_integrable_on real_interval[a,b]
-      #|  y:real^1
-      #|  y:real^1
-      #|  d:real
-      #|  x:real
-      #|  x:real
-      #|  forall f:real->real a b.\n        (forall x. x IN real_interval[a,b]\n             ==> ?d. &0 < d /\\\n                     forall u v. x IN real_interval[u,v] /\\\n                           (forall y. y IN real_interval[u,v]\n                                ==> abs(y - x) < d /\\ y IN real_interval[a,b])\n                           ==> f real_integrable_on real_interval[u,v])\n        ==> f real_integrable_on real_interval[a,b]
-      #|  b:real
-      #|  a:real
-      #|  IMAGE (\\x. x) s = s
-      #|  y:real^1
-      #|  &1
-      #|  a /\\ b /\\ c /\\ d ==> e <=> a /\\ b /\\ c ==> d ==> e
-      #|  forall f a b x.\n        f real_integrable_on real_interval[a,b] /\\ x IN real_interval[a,b] /\\\n        f real_continuous (atreal x within real_interval[a,b])\n        ==> ((\\u. real_integral(real_interval[a,u]) f)\n                   has_real_derivative f(x))\n                 (atreal x within real_interval[a,b])
-      #|  forall f:real->real a b.\n     f real_continuous_on real_interval[a,b]\n     ==> forall x. x IN real_interval[a,b]\n             ==> ((\\u. real_integral(real_interval[a,u]) f)\n                  has_real_derivative f(x))\n                 (atreal x within real_interval[a,b])
-      #|  forall f a b.\n     (f real_continuous_on real_interval[a,b])\n     ==> ?g. forall x. x IN real_interval[a,b]\n                 ==> (g has_real_derivative f(x))\n                     (atreal x within real_interval[a,b])
-      #|  real_interval[a:real,b]
-      #|  x:real
-      #|  g:real->real
-      #|  forall f a b.\n     (f real_continuous_on real_interval[a,b])\n     ==> ?g. forall u v. u IN real_interval[a,b] /\\\n                   v IN real_interval[a,b] /\\ u <= v\n                   ==> (f has_real_integral (g(v) - g(u)))\n                       (real_interval[u,v])
-      #|  lift c
-      #|  forall f:real->real i a b m c.\n        (f has_real_integral i) (real_interval[a,b]) /\\ ~(m = &0)\n        ==> ((\\x. f(m * x + c)) has_real_integral (inv(abs(m)) * i))\n            (IMAGE (\\x. inv m * (x - c)) (real_interval[a,b]))
-      #|  forall f a b m c.\n        f real_integrable_on real_interval[a,b] /\\ ~(m = &0)\n        ==> (\\x. f(m * x + c)) real_integrable_on\n            (IMAGE (\\x. inv m * (x - c)) (real_interval[a,b]))
-      #|  &0
-      #|  forall f:real->real i a b m.\n        (f has_real_integral i) (real_interval[a,b]) /\\ ~(m = &0)\n        ==> ((\\x. f(m * x)) has_real_integral (inv(abs(m)) * i))\n            (IMAGE (\\x. inv m * x) (real_interval[a,b]))
-      #|  forall f a b m.\n        f real_integrable_on real_interval[a,b] /\\ ~(m = &0)\n        ==> (\\x. f(m * x)) real_integrable_on\n            (IMAGE (\\x. inv m * x) (real_interval[a,b]))
-      #|  forall f:real->real i a b.\n     (f has_real_integral i) (real_interval[a,b])\n     ==> ((\\x. f(--x)) has_real_integral i) (real_interval[--b,--a])
-      #|  forall f:real->real i a b.\n     ((\\x. f(--x)) has_real_integral i) (real_interval[--b,--a]) <=>\n     (f has_real_integral i) (real_interval[a,b])
-      #|  forall f:real->real a b.\n     (\\x. f(--x)) real_integrable_on (real_interval[--b,--a]) <=>\n     f real_integrable_on (real_interval[a,b])
-      #|  forall f:real->real a b.\n     real_integral (real_interval[--b,--a]) (\\x. f(--x)) =\n     real_integral (real_interval[a,b]) f
-      #|  forall f i s. ((\\x. f(--x)) has_real_integral i) s <=>\n           (f has_real_integral i) (IMAGE (--) s)
-      #|  forall f s. (\\x. f(--x)) real_integrable_on s <=>\n         f real_integrable_on (IMAGE (--) s)
-      #|  forall f s. real_integral s (\\x. f(--x)) = real_integral (IMAGE (--) s) f
-      #|  forall f:real->real f' a b.\n        a <= b /\\ f real_continuous_on real_interval[a,b] /\\\n        (forall x. x IN real_interval(a,b)\n             ==> (f has_real_derivative f'(x)) (atreal x))\n        ==> (f' has_real_integral (f(b) - f(a))) (real_interval[a,b])
+      #|  (n : Num) => if n == 0 { (x : Real) } else { (y : Real) }
+      #|  {0, 1}
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && real_of_num(0) <= y \226\134\146 sqrt(x * y) <= (x + y) / real_of_num(2)
+      #|  pow(root((n : Num), product((k : (A) -> Bool), (x : (A) -> Real))), n)
+      #|  \226\136\128 k : (A) -> Bool, \226\136\128 x : (A) -> Real, \226\136\128 n : Num, HAS_SIZE(k, n) && !(n == 0) && (\226\136\128 i : A, IN(i, k) \226\134\146 real_of_num(0) <= x(i)) \226\134\146 product(k, x) <= pow(sum(k, x) / real_of_num(n), n)
+      #|  op_dot_dot(0, SUC(0))
+      #|  (i : Num) => if i == 0 { (x : Real) } else { (y : Real) }
+      #|  (i : Num) => if i == 0 { (u : Real) } else { (v : Real) }
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 u : Real, \226\136\128 v : Real, real_of_num(0) <= x && real_of_num(0) <= y && real_of_num(0) <= u && real_of_num(0) <= v && u + v == real_of_num(1) \226\134\146 rpow(x, u) * rpow(y, v) <= u * x + v * y
+      #|  inv((q : Real))
+      #|  inv((p : Real))
+      #|  rpow((b : Real), (q : Real))
+      #|  rpow((a : Real), (p : Real))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 p : Real, \226\136\128 q : Real, real_of_num(0) <= a && real_of_num(0) <= b && real_of_num(0) < p && real_of_num(0) < q && inv(p) + inv(q) == real_of_num(1) \226\134\146 a * b <= rpow(a, p) / p + rpow(b, q) / q
+      #|  (i : A)
+      #|  (a : (A) -> Real)((i : A)) == real_of_num(0)
+      #|  (i : A)
+      #|  (s : Real) == real_of_num(1) \226\134\146 (p : Real) == s \226\134\146 p <= real_of_num(1)
+      #|  sum((k : (A) -> Bool), (i : A) => (a : (A) -> Real)(i) * ((x : (A) -> Real)(i) / (x(i) + (y : (A) -> Real)(i)))) + sum(k, (i : A) => a(i) * (y(i) / (x(i) + y(i))))
+      #|  ((x : Real) + (y : Real)) / (z : Real) == x / z + y / z
+      #|  (x : Real) == real_of_num(0) && (y : Real) == real_of_num(0) && (z : Real) == real_of_num(0) \226\134\146 x + y <= z
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 (x + y == real_of_num(0)) == (x == real_of_num(0) && y == real_of_num(0))
+      #|  ((p : Bool) && (q : Bool)) == !(p \226\134\146 !q)
+      #|  (real_of_num(0) <= (x : Real)) == (x == real_of_num(0) || real_of_num(0) < x)
+      #|  real_of_num(0) <= product((k : (A) -> Bool), (i : A) => rpow((x : (A) -> Real)(i) + (y : (A) -> Real)(i), (a : (A) -> Real)(i)))
+      #|  \226\136\128 k : (A) -> Bool, \226\136\128 a : (A) -> Real, \226\136\128 x : (A) -> Real, \226\136\128 y : (A) -> Real, FINITE(k) && sum(k, a) == real_of_num(1) && (\226\136\128 i : A, IN(i, k) \226\134\146 real_of_num(0) <= a(i) && real_of_num(0) <= x(i) && real_of_num(0) <= y(i)) \226\134\146 product(k, (i : A) => rpow(x(i), a(i))) + product(k, (i : A) => rpow(y(i), a(i))) <= product(k, (i : A) => rpow(x(i) + y(i), a(i)))
+      #|  (z : Real)
+      #|  real_of_num(0)
+      #|  (x : Real) => pow(log((a : Real)), 2) * (x * rpow(a, x))
+      #|  (x : Real) => rpow((a : Real), x) * (log(a) * x - real_of_num(1)) + real_of_num(1)
+      #|  (l : Real) * ((a : Real) * (z : Real)) - (a - real_of_num(1)) == a * (l * z - real_of_num(1)) + real_of_num(1)
+      #|  real_of_num(0) < (x : Real) \226\134\146 pow(x, 2) * ((a : Real) * ((b : Real) / x) - (c : Real) / pow(x, 2)) == a * (b * x) - c
+      #|  pow((z : Real), 2)
+      #|  real_of_num(0) < (z : Real)
+      #|  (z : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (x : Real) => log((a : Real)) * (rpow(a, x) / x) - (rpow(a, x) - real_of_num(1)) / pow(x, 2)
+      #|  (x : Real) => (rpow((a : Real), x) - real_of_num(1)) / x
+      #|  \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) < a && !(a == real_of_num(1)) && real_of_num(0) < x && x < y \226\134\146 (rpow(a, x) - real_of_num(1)) / x < (rpow(a, y) - real_of_num(1)) / y
+      #|  (a : Real) == real_of_num(1)
+      #|  (x : Real) == (y : Real)
+      #|  \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) < a && real_of_num(0) < x && x <= y \226\134\146 (rpow(a, x) - real_of_num(1)) / x <= (rpow(a, y) - real_of_num(1)) / y
+      #|  real_of_num(0) < (r : Real) \226\134\146 inv(r) * (s : Real) * r == s
+      #|  (x : Real) < (y : Real) \226\134\146 (\226\136\128 z : Real, real_of_num(0) <= x && real_of_num(0) < z \226\134\146 rpow(x, z) < rpow(y, z))
+      #|  (r : Real)
+      #|  (-(x : Real) < (a : Real) - real_of_num(1)) == (real_of_num(1) - x < a)
+      #|  (real_of_num(1) - (x : Real) / (s : Real) - real_of_num(1)) / (r : Real) == -(x / r) / s
+      #|  ((a : Real) - (x : Real) == a) == (x == real_of_num(0))
+      #|  (s : Real)
+      #|  (r : Real)
+      #|  rpow(real_of_num(1) - (x : Real) / (s : Real), inv((r : Real)))
+      #|  real_of_num(0) < real_of_num(1) - (x : Real) / (s : Real)
+      #|  real_of_num(0) < (s : Real)
+      #|  \226\136\128 x : Real, \226\136\128 r : Real, \226\136\128 s : Real, real_of_num(0) < r && r < s && !(x == real_of_num(0)) && x < r \226\134\146 rpow(real_of_num(1) - x / r, r) < rpow(real_of_num(1) - x / s, s)
+      #|  (real_of_num(1) <= real_of_num(1) - (x : Real) / (y : Real)) == (real_of_num(0) <= -x / y)
+      #|  false \226\134\146 (p : Bool)
+      #|  (r : Real) == real_of_num(0)
+      #|  real_of_num(0) < (s : Real)
+      #|  (r : Real) == (x : Real)
+      #|  (r : Real) == (s : Real)
+      #|  (x : Real) == real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 r : Real, \226\136\128 s : Real, real_of_num(0) <= r && r <= s && x <= r \226\134\146 rpow(real_of_num(1) - x / r, r) <= rpow(real_of_num(1) - x / s, s)
+      #|  !((e : Real) == real_of_num(0)) \226\134\146 e + (inv(e) - real_of_num(2)) == pow(e - real_of_num(1), 2) / e
+      #|  (x : Real)
+      #|  !(real_of_num(1) == real_of_num(0))
+      #|  (UNIV : (Real) -> Bool)
+      #|  (x : Real) => exp(x) + (exp(-x) - real_of_num(2))
+      #|  (x : Real) => exp(x) - exp(-x) - real_of_num(2) * x
+      #|  real_of_num(0)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, a <= b \226\134\146 exp(a) - inv(exp(a)) - real_of_num(2) * a <= exp(b) - inv(exp(b)) - real_of_num(2) * b
+      #|  \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 x <= (exp(x) - inv(exp(x))) / real_of_num(2)
+      #|  !(real_of_num(0) <= (x : Real)) \226\134\146 real_of_num(0) <= -x
+      #|  (exp(-(x : Real)) - inv(exp(-x))) / real_of_num(2)
+      #|  -(((a : Real) - (b : Real)) / real_of_num(2)) == (b - a) / real_of_num(2)
+      #|  !(real_of_num(0) <= (x : Real)) && -x <= -(y : Real) \226\134\146 abs(x) <= abs(y)
+      #|  real_of_num(0) <= (x : Real) && x <= (y : Real) \226\134\146 abs(x) <= abs(y)
+      #|  real_of_num(0) <= (x : Real)
+      #|  \226\136\128 x : Real, abs(x) <= abs((exp(x) - inv(exp(x))) / real_of_num(2))
+      #|  (log_convex_on : ((Cart[Real, N]) -> Real, (Cart[Real, N]) -> Bool) -> Bool)((f : (Cart[Real, N]) -> Real), (s : (Cart[Real, N]) -> Bool)) == (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 u : Real, \226\136\128 v : Real, IN(x, s) && IN(y, s) && real_of_num(0) <= u && real_of_num(0) <= v && u + v == real_of_num(1) \226\134\146 real_of_num(0) <= f(op_pct(u, x) + op_pct(v, y)) && f(op_pct(u, x) + op_pct(v, y)) <= rpow(f(x), u) * rpow(f(y), v))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, log_convex_on(f, {})
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, log_convex_on(f, t) && SUBSET(s, t) \226\134\146 log_convex_on(f, s)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 f(x) == g(x)) && log_convex_on(f, s) \226\134\146 log_convex_on(g, s)
+      #|  real_of_num(1)
+      #|  real_of_num(0)
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], log_convex_on(f, s) && IN(x, s) \226\134\146 real_of_num(0) <= f(x)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) \226\134\146 log_convex_on(f, s) == ((\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 real_of_num(0) <= f(x)) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 u : Real, \226\136\128 v : Real, IN(x, s) && IN(y, s) && real_of_num(0) <= u && real_of_num(0) <= v && u + v == real_of_num(1) \226\134\146 f(op_pct(u, x) + op_pct(v, y)) <= rpow(f(x), u) * rpow(f(y), v)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 real_of_num(0) < f(x)) \226\134\146 log_convex_on(f, s) == convex_on(o(log, f), s)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, log_convex_on(f, s) \226\134\146 convex_on(f, s)
+      #|  (i : Num) => if i == 0 { (g : (Cart[Real, N]) -> Real)((x : Cart[Real, N])) } else { g((y : Cart[Real, N])) }
+      #|  (i : Num) => if i == 0 { (f : (Cart[Real, N]) -> Real)((x : Cart[Real, N])) } else { f((y : Cart[Real, N])) }
+      #|  (i : Num) => if i == 0 { (u : Real) } else { (v : Real) }
+      #|  op_dot_dot(0, SUC(0))
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, log_convex_on(f, s) && log_convex_on(g, s) \226\134\146 log_convex_on((x : Cart[Real, N]) => f(x) + g(x), s)
+      #|  (a : Real) * (b : Real) * ((c : Real) * (d : Real)) == a * c * (b * d)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, log_convex_on(f, s) && log_convex_on(g, s) \226\134\146 log_convex_on((x : Cart[Real, N]) => f(x) * g(x), s)
+      #|  ((x : Real) <= (y : Real) / real_of_num(2)) == (real_of_num(2) * x <= y)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  o(lift, o(log, (f : (Cart[Real, N]) -> Real))) == o(o(lift, o(log, drop)), o(lift, f))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, continuous_on(o(lift, f), s) && convex(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 real_of_num(0) < f(x)) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) \226\134\146 pow(f(midpoint((x, y))), 2) <= f(x) * f(y)) \226\134\146 log_convex_on(f, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 a : Real, real_of_num(0) <= a \226\134\146 log_convex_on((x : Cart[Real, _]) => a, s)
+      #|  (x : Cart[Real, N]) => (f : (Cart[Real, N]) -> Real)((a : Cart[Real, N]))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 a : Cart[Real, N], log_convex_on(f, {a}) == (real_of_num(0) <= f(a))
+      #|  \226\136\128 f : (Cart[Real, _], _) -> Real, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 k : (_) -> Bool, FINITE(k) && (\226\136\128 i : _, IN(i, k) \226\134\146 log_convex_on((x : Cart[Real, _]) => f(x, i), s)) \226\134\146 log_convex_on((x : Cart[Real, _]) => product(k, f(x)), s)
+      #|  (real_log_convex_on : ((Real) -> Real, (Real) -> Bool) -> Bool)((f : (Real) -> Real), (s : (Real) -> Bool)) == (\226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 u : Real, \226\136\128 v : Real, IN(x, s) && IN(y, s) && real_of_num(0) <= u && real_of_num(0) <= v && u + v == real_of_num(1) \226\134\146 real_of_num(0) <= f(u * x + v * y) && f(u * x + v * y) <= rpow(f(x), u) * rpow(f(y), v))
+      #|  \226\136\128 f : (Real) -> Real, real_log_convex_on(f, {})
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_log_convex_on(f, t) && SUBSET(s, t) \226\134\146 real_log_convex_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_log_convex_on(f, s) == log_convex_on(o(f, drop), IMAGE(lift, s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == g(x)) && real_log_convex_on(f, s) \226\134\146 real_log_convex_on(g, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, real_log_convex_on(f, {a}) == (real_of_num(0) <= f(a))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, real_log_convex_on(f, s) && IN(x, s) \226\134\146 real_of_num(0) <= f(x)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) \226\134\146 real_log_convex_on(f, s) == ((\226\136\128 x : Real, IN(x, s) \226\134\146 real_of_num(0) <= f(x)) && (\226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 u : Real, \226\136\128 v : Real, IN(x, s) && IN(y, s) && real_of_num(0) <= u && real_of_num(0) <= v && u + v == real_of_num(1) \226\134\146 f(u * x + v * y) <= rpow(f(x), u) * rpow(f(y), v)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 real_of_num(0) < f(x)) \226\134\146 real_log_convex_on(f, s) == real_convex_on(o(log, f), s)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_log_convex_on(f, s) \226\134\146 real_convex_on(f, s)
+      #|  (i : Num) => if i == 0 { (g : (Real) -> Real)((x : Real)) } else { g((y : Real)) }
+      #|  (i : Num) => if i == 0 { (f : (Real) -> Real)((x : Real)) } else { f((y : Real)) }
+      #|  (i : Num) => if i == 0 { (u : Real) } else { (v : Real) }
+      #|  op_dot_dot(0, SUC(0))
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_log_convex_on(f, s) && real_log_convex_on(g, s) \226\134\146 real_log_convex_on((x : Real) => f(x) + g(x), s)
+      #|  (a : Real) * (b : Real) * ((c : Real) * (d : Real)) == a * c * (b * d)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_log_convex_on(f, s) && real_log_convex_on(g, s) \226\134\146 real_log_convex_on((x : Real) => f(x) * g(x), s)
+      #|  ((x : Real) <= (y : Real) / real_of_num(2)) == (real_of_num(2) * x <= y)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) && is_realinterval(s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 real_of_num(0) < f(x)) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) \226\134\146 pow(f((x + y) / real_of_num(2)), 2) <= f(x) * f(y)) \226\134\146 real_log_convex_on(f, s)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, real_of_num(0) <= a \226\134\146 real_log_convex_on((x : Real) => a, s)
+      #|  \226\136\128 f : (Real, _) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 k : (_) -> Bool, FINITE(k) && (\226\136\128 i : _, IN(i, k) \226\134\146 real_log_convex_on((x : Real) => f(x, i), s)) \226\134\146 real_log_convex_on((x : Real) => product(k, f(x)), s)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, real_of_num(0) < a \226\134\146 real_log_convex_on((x : Real) => rpow(a, x), s)
+      #|  real_of_num(0)
+      #|  real_of_num(1)
+      #|  (y : Real)
+      #|  (y : Real)
+      #|  real_of_num(0)
+      #|  real_of_num(1)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (x : Real) => rpow(x, (y : Real))
+      #|  (i : A) => rpow((f : (A, Real) -> Real)(i, (x : Real)), (u : Real)) * rpow(f(i, (y : Real)), (v : Real)) - f(i, u * x + v * y)
+      #|  (i : A) => (f : (A, Real) -> Real)(i, (u : Real) * (x : Real) + (v : Real) * (y : Real))
+      #|  (net : Net[A])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A, Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, !trivial_limit(net) && (\226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 u : Real, \226\136\128 v : Real, IN(x, s) && IN(y, s) && real_of_num(0) <= u && real_of_num(0) <= v && u + v == real_of_num(1) \226\134\146 op_minus_minus_minus_gt((i : A) => f(i, u * x + v * y), g(u * x + v * y), net)) && eventually((i : A) => real_log_convex_on(f(i), s), net) \226\134\146 real_log_convex_on(g, s)
+      #|  (has_real_integral : ((Real) -> Real, Real, (Real) -> Bool) -> Bool)((f : (Real) -> Real), (y : Real), (s : (Real) -> Bool)) == has_integral(o(lift, o(f, drop)), lift(y), IMAGE(lift, s))
+      #|  (real_integrable_on : ((Real) -> Real, (Real) -> Bool) -> Bool)((f : (Real) -> Real), (i : (Real) -> Bool)) == (\226\136\131 y : Real, has_real_integral(f, y, i))
+      #|  (real_integral : ((Real) -> Bool, (Real) -> Real) -> Real)((i : (Real) -> Bool), (f : (Real) -> Real)) == select((y : Real) => has_real_integral(f, y, i))
+      #|  (real_negligible : ((Real) -> Bool) -> Bool)((s : (Real) -> Bool)) == negligible(IMAGE(lift, s))
+      #|  (absolutely_real_integrable_on : ((Real) -> Real, (Real) -> Bool) -> Bool)((f : (Real) -> Real), (s : (Real) -> Bool)) == (real_integrable_on(f, s) && real_integrable_on((x : Real) => abs(f(x)), s))
+      #|  (has_real_measure : ((Real) -> Bool, Real) -> Bool)((s : (Real) -> Bool), (m : Real)) == has_real_integral((x : Real) => real_of_num(1), m, s)
+      #|  (real_measurable : ((Real) -> Bool) -> Bool)((s : (Real) -> Bool)) == (\226\136\131 m : Real, has_real_measure(s, m))
+      #|  (real_measure : ((Real) -> Bool) -> Real)((s : (Real) -> Bool)) == select((m : Real) => has_real_measure(s, m))
+      #|  has_real_integral((f : (Real) -> Real), (y : Real), real_interval([((a : Real), (b : Real))])) == has_integral(o(lift, o(f, drop)), lift(y), interval([(lift(a), lift(b))]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : (Real) -> Bool, real_integrable_on(f, i) \226\134\146 has_real_integral(f, real_integral(i, f), i)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, \226\136\128 s : (Real) -> Bool, has_real_integral(f, i, s) \226\134\146 real_integrable_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) == has_real_integral(f, real_integral(s, f), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : (Real) -> Bool, \226\136\128 k1 : Real, \226\136\128 k2 : Real, has_real_integral(f, k1, i) && has_real_integral(f, k2, i) \226\134\146 k1 == k2
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 y : Real, \226\136\128 k : (Real) -> Bool, has_real_integral(f, y, k) \226\134\146 real_integral(k, f) == y
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, \226\136\128 s : (Real) -> Bool, has_real_integral(f, i, s) == (real_integrable_on(f, s) && real_integral(s, f) == i)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Real) -> Real, \226\136\128 y : Real, real_integrable_on(f, s) \226\134\146 (real_integral(s, f) == y) == has_real_integral(f, y, s)
+      #|  real_integrable_on((f : (Real) -> Real), (s : (Real) -> Bool)) == integrable_on(o(lift, o(f, drop)), IMAGE(lift, s))
+      #|  absolutely_real_integrable_on((f : (Real) -> Real), (s : (Real) -> Bool)) == absolutely_integrable_on(o(lift, o(f, drop)), IMAGE(lift, s))
+      #|  real_integrable_on((f : (Real) -> Real), (s : (Real) -> Bool)) \226\134\146 real_integral(s, f) == drop(integral(IMAGE(lift, s), o(lift, o(f, drop))))
+      #|  SUBSET(real_interval((-(B : Real), B)), real_interval([((a : Real), (b : Real))]))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  real_of_num(0) < (B : Real)
+      #|  (B : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  ((p : Bool) \226\134\146 (q : Bool) == (q' : Bool)) \226\134\146 (p && q) == (p && q')
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 i : Real, has_real_integral(f, i, s) == ((\226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on((x : Real) => if IN(x, s) { f(x) } else { real_of_num(0) }, real_interval([(a, b)]))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 a : Real, \226\136\128 b : Real, SUBSET(real_interval((-B, B)), real_interval([(a, b)])) \226\134\146 abs(real_integral(real_interval([(a, b)]), (x : Real) => if IN(x, s) { f(x) } else { real_of_num(0) }) - i) < e))))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == real_of_num(0)) \226\134\146 has_real_integral(f, real_of_num(0), s)
+      #|  \226\136\128 s : (Real) -> Bool, has_real_integral((x : Real) => real_of_num(0), real_of_num(0), s)
+      #|  \226\136\128 i : Real, \226\136\128 s : (Real) -> Bool, has_real_integral((x : Real) => real_of_num(0), i, s) == (i == real_of_num(0))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 y : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 h : (Real) -> Real, has_real_integral(f, y, s) && linear(o(lift, o(h, drop))) \226\134\146 has_real_integral(o(h, f), h(y), s)
+      #|  (c : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 k : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, has_real_integral(f, k, s) \226\134\146 has_real_integral((x : Real) => c * f(x), c * k, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 k : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, has_real_integral(f, k, s) \226\134\146 has_real_integral((x : Real) => f(x) * c, k * c, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 k : Real, \226\136\128 s : (Real) -> Bool, has_real_integral(f, k, s) \226\134\146 has_real_integral((x : Real) => -f(x), -k, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 k : Real, \226\136\128 l : Real, \226\136\128 s : (Real) -> Bool, has_real_integral(f, k, s) && has_real_integral(g, l, s) \226\134\146 has_real_integral((x : Real) => f(x) + g(x), k + l, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 k : Real, \226\136\128 l : Real, \226\136\128 s : (Real) -> Bool, has_real_integral(f, k, s) && has_real_integral(g, l, s) \226\134\146 has_real_integral((x : Real) => f(x) - g(x), k - l, s)
+      #|  \226\136\128 s : (Real) -> Bool, real_integral(s, (x : Real) => real_of_num(0)) == real_of_num(0)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) && real_integrable_on(g, s) \226\134\146 real_integral(s, (x : Real) => f(x) + g(x)) == real_integral(s, f) + real_integral(s, g)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 c : Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) \226\134\146 real_integral(s, (x : Real) => c * f(x)) == c * real_integral(s, f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 c : Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) \226\134\146 real_integral(s, (x : Real) => f(x) * c) == real_integral(s, f) * c
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) \226\134\146 real_integral(s, (x : Real) => -f(x)) == -real_integral(s, f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) && real_integrable_on(g, s) \226\134\146 real_integral(s, (x : Real) => f(x) - g(x)) == real_integral(s, f) - real_integral(s, g)
+      #|  \226\136\128 s : (Real) -> Bool, real_integrable_on((x : Real) => real_of_num(0), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) && real_integrable_on(g, s) \226\134\146 real_integrable_on((x : Real) => f(x) + g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 c : Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) \226\134\146 real_integrable_on((x : Real) => c * f(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 c : Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) \226\134\146 real_integrable_on((x : Real) => f(x) * c, s)
+      #|  inv((c : Real))
+      #|  (c : Real) == real_of_num(0)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, real_integrable_on((x : Real) => c * f(x), s) == (c == real_of_num(0) || real_integrable_on(f, s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, real_integrable_on((x : Real) => f(x) * c, s) == (c == real_of_num(0) || real_integrable_on(f, s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) \226\134\146 real_integrable_on((x : Real) => -f(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on((x : Real) => -f(x), s) == real_integrable_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) && real_integrable_on(g, s) \226\134\146 real_integrable_on((x : Real) => f(x) - g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 h : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) && linear(o(lift, o(h, drop))) \226\134\146 real_integrable_on(o(h, f), s)
+      #|  (s : (Real) -> Bool)
+      #|  o((h : (Real) -> Real), (f : (Real) -> Real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 h : (Real) -> Real, real_integrable_on(f, s) && linear(o(lift, o(h, drop))) \226\134\146 real_integral(s, o(h, f)) == h(real_integral(s, f))
+      #|  \226\136\128 f : (A, Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (A) -> Bool, FINITE(t) && (\226\136\128 a : A, IN(a, t) \226\134\146 has_real_integral(f(a), (i : (A) -> Real)(a), s)) \226\134\146 has_real_integral((x : Real) => sum(t, (a : A) => f(a, x)), sum(t, i), s)
+      #|  \226\136\128 f : (A, Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (A) -> Bool, FINITE(t) && (\226\136\128 a : A, IN(a, t) \226\134\146 real_integrable_on(f(a), s)) \226\134\146 real_integral(s, (x : Real) => sum(t, (a : A) => f(a, x))) == sum(t, (a : A) => real_integral(s, f(a)))
+      #|  \226\136\128 f : (A, Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (A) -> Bool, FINITE(t) && (\226\136\128 a : A, IN(a, t) \226\134\146 real_integrable_on(f(a), s)) \226\134\146 real_integrable_on((x : Real) => sum(t, (a : A) => f(a, x)), s)
+      #|  (x : Real) - (x - (y : Real)) == y
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 k : Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == g(x)) && has_real_integral(f, k, s) \226\134\146 has_real_integral(g, k, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == g(x)) && real_integrable_on(f, s) \226\134\146 real_integrable_on(g, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 k : Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == g(x)) \226\134\146 has_real_integral(f, k, s) == has_real_integral(g, k, s)
+      #|  IMAGE((x : _) => x, (s : (_) -> Bool)) == s
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, b <= a \226\134\146 has_real_integral(f, real_of_num(0), real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 i : Real, b <= a \226\134\146 has_real_integral(f, i, real_interval([(a, b)])) == (i == real_of_num(0))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, b <= a \226\134\146 real_integral(real_interval([(a, b)]), f) == real_of_num(0)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, b <= a \226\134\146 real_integrable_on(f, real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, has_real_integral(f, real_of_num(0), {})
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, has_real_integral(f, i, {}) == (i == real_of_num(0))
+      #|  \226\136\128 f : (Real) -> Real, real_integrable_on(f, {})
+      #|  \226\136\128 f : (Real) -> Real, real_integral({}, f) == real_of_num(0)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, has_real_integral(f, real_of_num(0), real_interval([(a, a)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, real_integrable_on(f, real_interval([(a, a)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, real_integral(real_interval([(a, a)]), f) == real_of_num(0)
+      #|  lift((c : Real))
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, a <= b \226\134\146 has_real_integral((x : Real) => c, c * (b - a), real_interval([(a, b)]))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, real_integrable_on((x : Real) => c, real_interval([(a, b)]))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, a <= b \226\134\146 real_integral(real_interval([(a, b)]), (x : Real) => c) == c * (b - a)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 i : Real, \226\136\128 B : Real, real_of_num(0) <= B && a <= b && has_real_integral(f, i, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 abs(f(x)) <= B) \226\134\146 abs(i) <= B * (b - a)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 i : Real, \226\136\128 j : Real, has_real_integral(f, i, s) && has_real_integral(g, j, s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) <= g(x)) \226\134\146 i <= j
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) && real_integrable_on(g, s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) <= g(x)) \226\134\146 real_integral(s, f) <= real_integral(s, g)
+      #|  (i : Real)
+      #|  real_of_num(0)
+      #|  (s : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
+      #|  (x : Real) => real_of_num(0)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 i : Real, has_real_integral(f, i, s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 real_of_num(0) <= f(x)) \226\134\146 real_of_num(0) <= i
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 real_of_num(0) <= f(x)) \226\134\146 real_of_num(0) <= real_integral(s, f)
+      #|  real_of_num(0)
+      #|  (i : Real)
+      #|  (s : (Real) -> Bool)
+      #|  (x : Real) => real_of_num(0)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 i : Real, has_real_integral(f, i, s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) <= real_of_num(0)) \226\134\146 i <= real_of_num(0)
+      #|  (i : Real)
+      #|  (B : Real) * ((b : Real) - (a : Real))
+      #|  real_interval([((a : Real), (b : Real))])
+      #|  (f : (Real) -> Real)
+      #|  (x : Real) => (B : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 i : Real, a <= b && has_real_integral(f, i, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 (B : Real) <= f(x)) \226\134\146 B * (b - a) <= i
+      #|  (B : Real) * ((b : Real) - (a : Real))
+      #|  (i : Real)
+      #|  real_interval([((a : Real), (b : Real))])
+      #|  (x : Real) => (B : Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 i : Real, a <= b && has_real_integral(f, i, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 f(x) <= (B : Real)) \226\134\146 i <= B * (b - a)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a <= b && real_integrable_on(f, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 (B : Real) <= f(x)) \226\134\146 B * (b - a) <= real_integral(real_interval([(a, b)]), f)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a <= b && real_integrable_on(f, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 f(x) <= (B : Real)) \226\134\146 real_integral(real_interval([(a, b)]), f) <= B * (b - a)
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  (g : (Real) -> Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 g : (Real) -> Real, (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 abs(f(x) - g(x)) <= e) && real_integrable_on(g, real_interval([(a, b)])))) \226\134\146 real_integrable_on(f, real_interval([(a, b)]))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_negligible(s) && (\226\136\128 x : Real, IN(x, DIFF(t, s)) \226\134\146 f(x) == real_of_num(0)) \226\134\146 has_real_integral(f, real_of_num(0), t)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 y : Real, real_negligible(s) && (\226\136\128 x : Real, IN(x, DIFF(t, s)) \226\134\146 g(x) == f(x)) && has_real_integral(f, y, t) \226\134\146 has_real_integral(g, y, t)
+      #|  (s : (Real) -> Bool)
+      #|  (g : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 y : Real, real_negligible(s) && (\226\136\128 x : Real, IN(x, DIFF(t, s)) \226\134\146 g(x) == f(x)) \226\134\146 has_real_integral(f, y, t) == has_real_integral(g, y, t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_negligible(s) && (\226\136\128 x : Real, IN(x, DIFF(t, s)) \226\134\146 g(x) == f(x)) \226\134\146 real_integrable_on(f, t) \226\134\146 real_integrable_on(g, t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_negligible(s) && (\226\136\128 x : Real, IN(x, DIFF(t, s)) \226\134\146 g(x) == f(x)) \226\134\146 real_integrable_on(f, t) == real_integrable_on(g, t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_negligible(s) && (\226\136\128 x : Real, IN(x, DIFF(t, s)) \226\134\146 g(x) == f(x)) \226\134\146 real_integral(t, f) == real_integral(t, g)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_negligible(s) && SUBSET(t, s) \226\134\146 real_negligible(t)
+      #|  (s : (Real) -> Bool)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_negligible(s) \226\134\146 real_negligible(DIFF(s, t))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_negligible(s) || real_negligible(t) \226\134\146 real_negligible(INTER(s, t))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_negligible(s) && real_negligible(t) \226\134\146 real_negligible(UNION(s, t))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_negligible(UNION(s, t)) == (real_negligible(s) && real_negligible(t))
+      #|  \226\136\128 a : Real, real_negligible({a})
+      #|  \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, real_negligible(INSERT(a, s)) == real_negligible(s)
+      #|  real_negligible({})
+      #|  \226\136\128 s : (Real) -> Bool, FINITE(s) \226\134\146 real_negligible(s)
+      #|  \226\136\128 s : ((Real) -> Bool) -> Bool, FINITE(s) && (\226\136\128 t : (Real) -> Bool, IN(t, s) \226\134\146 real_negligible(t)) \226\134\146 real_negligible(UNIONS(s))
+      #|  \226\136\128 s : (Real) -> Bool, real_open(s) && !(s == {}) \226\134\146 !real_negligible(s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 y : Real, FINITE(s) && (\226\136\128 x : Real, IN(x, DIFF(t, s)) \226\134\146 g(x) == f(x)) && has_real_integral(f, y, t) \226\134\146 has_real_integral(g, y, t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 y : Real, FINITE(s) && (\226\136\128 x : Real, IN(x, DIFF((t : (Real) -> Bool), s)) \226\134\146 g(x) == f(x)) \226\134\146 has_real_integral(f, y, t) == has_real_integral(g, y, t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, FINITE(s) && (\226\136\128 x : Real, IN(x, DIFF((t : (Real) -> Bool), s)) \226\134\146 g(x) == f(x)) \226\134\146 real_integrable_on(f, t) \226\134\146 real_integrable_on(g, t)
+      #|  {(a : Real), (b : Real)}
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_negligible(DIFF(real_interval([(a, b)]), real_interval((a, b))))
+      #|  DIFF(real_interval([((a : Real), (b : Real))]), real_interval((a, b)))
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (a && b \226\134\146 c \226\134\146 d)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 y : Real, (\226\136\128 x : Real, IN(x, real_interval((a, b))) \226\134\146 g(x) == f(x)) && has_real_integral(f, y, real_interval([(a, b)])) \226\134\146 has_real_integral(g, y, real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 y : Real, (\226\136\128 x : Real, IN(x, real_interval((a, b))) \226\134\146 g(x) == f(x)) \226\134\146 has_real_integral(f, y, real_interval([(a, b)])) == has_real_integral(g, y, real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 x : Real, IN(x, real_interval((a, b))) \226\134\146 g(x) == f(x)) \226\134\146 real_integrable_on(f, real_interval([(a, b)])) \226\134\146 real_integrable_on(g, real_interval([(a, b)]))
+      #|  ({} : (Real) -> Bool)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == g(x)) \226\134\146 real_integral(s, f) == real_integral(s, g)
+      #|  real_integral((s : (Real) -> Bool), (x : Real) => real_of_num(0))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == real_of_num(0)) \226\134\146 real_integral(s, f) == real_of_num(0)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_continuous_on(f, real_interval([(a, b)])) \226\134\146 real_integrable_on(f, real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a <= b && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), real_interval([(a, b)])))) \226\134\146 has_real_integral(f', f(b) - f(a), real_interval([(a, b)]))
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, real_integrable_on(f, real_interval([(a, b)])) && SUBSET(real_interval([(c, d)]), real_interval([(a, b)])) \226\134\146 real_integrable_on(f, real_interval([(c, d)]))
+      #|  lift((c : Real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, \226\136\128 j : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, a <= c && c <= b && has_real_integral(f, i, real_interval([(a, c)])) && has_real_integral(f, j, real_interval([(c, b)])) \226\134\146 has_real_integral(f, i + j, real_interval([(a, b)]))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (c : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, a <= c && c <= b && real_integrable_on(f, real_interval([(a, b)])) \226\134\146 real_integral(real_interval([(a, c)]), f) + real_integral(real_interval([(c, b)]), f) == real_integral(real_interval([(a, b)]), f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, a <= c && c <= b && real_integrable_on(f, real_interval([(a, c)])) && real_integrable_on(f, real_interval([(c, b)])) \226\134\146 real_integrable_on(f, real_interval([(a, b)]))
+      #|  (y : Cart[Real, Unit])
+      #|  (y : Cart[Real, Unit])
+      #|  (d : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 u : Real, \226\136\128 v : Real, IN(x, real_interval([(u, v)])) && (\226\136\128 y : Real, IN(y, real_interval([(u, v)])) \226\134\146 abs(y - x) < d && IN(y, real_interval([(a, b)]))) \226\134\146 real_integrable_on(f, real_interval([(u, v)]))))) \226\134\146 real_integrable_on(f, real_interval([(a, b)]))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  IMAGE((x : _) => x, (s : (_) -> Bool)) == s
+      #|  (y : Cart[Real, Unit])
+      #|  real_of_num(1)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) \226\134\146 (e : Bool)) == (a && b && c \226\134\146 d \226\134\146 e)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Real, real_integrable_on(f, real_interval([(a, b)])) && IN(x, real_interval([(a, b)])) && real_continuous(f, within(atreal(x), real_interval([(a, b)]))) \226\134\146 has_real_derivative((u : Real) => real_integral(real_interval([(a, u)]), f), f(x), within(atreal(x), real_interval([(a, b)])))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_continuous_on(f, real_interval([(a, b)])) \226\134\146 (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_derivative((u : Real) => real_integral(real_interval([(a, u)]), f), f(x), within(atreal(x), real_interval([(a, b)]))))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_continuous_on(f, real_interval([(a, b)])) \226\134\146 (\226\136\131 g : (Real) -> Real, \226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_derivative(g, f(x), within(atreal(x), real_interval([(a, b)]))))
+      #|  real_interval([((a : Real), (b : Real))])
+      #|  (x : Real)
+      #|  (g : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_continuous_on(f, real_interval([(a, b)])) \226\134\146 (\226\136\131 g : (Real) -> Real, \226\136\128 u : Real, \226\136\128 v : Real, IN(u, real_interval([(a, b)])) && IN(v, real_interval([(a, b)])) && u <= v \226\134\146 has_real_integral(f, g(v) - g(u), real_interval([(u, v)])))
+      #|  lift((c : Real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Real, \226\136\128 c : Real, has_real_integral(f, i, real_interval([(a, b)])) && !(m == real_of_num(0)) \226\134\146 has_real_integral((x : Real) => f(m * x + c), inv(abs(m)) * i, IMAGE((x : Real) => inv(m) * (x - c), real_interval([(a, b)])))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Real, \226\136\128 c : Real, real_integrable_on(f, real_interval([(a, b)])) && !(m == real_of_num(0)) \226\134\146 real_integrable_on((x : Real) => f(m * x + c), IMAGE((x : Real) => inv(m) * (x - c), real_interval([(a, b)])))
+      #|  real_of_num(0)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Real, has_real_integral(f, i, real_interval([(a, b)])) && !(m == real_of_num(0)) \226\134\146 has_real_integral((x : Real) => f(m * x), inv(abs(m)) * i, IMAGE((x : Real) => inv(m) * x, real_interval([(a, b)])))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Real, real_integrable_on(f, real_interval([(a, b)])) && !(m == real_of_num(0)) \226\134\146 real_integrable_on((x : Real) => f(m * x), IMAGE((x : Real) => inv(m) * x, real_interval([(a, b)])))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, \226\136\128 a : Real, \226\136\128 b : Real, has_real_integral(f, i, real_interval([(a, b)])) \226\134\146 has_real_integral((x : Real) => f(-x), i, real_interval([(-b, -a)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, \226\136\128 a : Real, \226\136\128 b : Real, has_real_integral((x : Real) => f(-x), i, real_interval([(-b, -a)])) == has_real_integral(f, i, real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on((x : Real) => f(-x), real_interval([(-b, -a)])) == real_integrable_on(f, real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_integral(real_interval([(-b, -a)]), (x : Real) => f(-x)) == real_integral(real_interval([(a, b)]), f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, \226\136\128 s : (Real) -> Bool, has_real_integral((x : Real) => f(-x), i, s) == has_real_integral(f, i, IMAGE(op_minus_minus, s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on((x : Real) => f(-x), s) == real_integrable_on(f, IMAGE(op_minus_minus, s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integral(s, (x : Real) => f(-x)) == real_integral(IMAGE(op_minus_minus, s), f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a <= b && real_continuous_on(f, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval((a, b))) \226\134\146 has_real_derivative(f, f'(x), atreal(x))) \226\134\146 has_real_integral(f', f(b) - f(a), real_interval([(a, b)]))
       #|  drop
-      #|  COUNTABLE s <=> COUNTABLE(IMAGE lift s)
-      #|  forall x. drop x IN s <=> x IN IMAGE lift s
-      #|  forall f f' s a b.\n        COUNTABLE s /\\\n        a <= b /\\ f real_continuous_on real_interval[a,b] /\\\n        (forall x. x IN real_interval(a,b) DIFF s\n             ==> (f has_real_derivative f'(x)) (atreal x))\n        ==> (f' has_real_integral (f(b) - f(a))) (real_interval[a,b])
-      #|  s:real->bool
-      #|  forall f f' s a b.\n        COUNTABLE s /\\\n        a <= b /\\ f real_continuous_on real_interval[a,b] /\\\n        (forall x. x IN real_interval[a,b] DIFF s\n             ==> (f has_real_derivative f'(x)) (atreal x))\n        ==> (f' has_real_integral (f(b) - f(a))) (real_interval[a,b])
-      #|  b:real
-      #|  a:real
-      #|  forall f:real->real a b.\n        f real_integrable_on real_interval[a,b]\n        ==> (\\x. real_integral (real_interval[a,x]) f)\n            real_continuous_on real_interval[a,b]
-      #|  b:real
-      #|  a:real
-      #|  forall f:real->real a b.\n        f real_integrable_on real_interval[a,b]\n        ==> (\\x. real_integral (real_interval[x,b]) f)\n            real_continuous_on real_interval[a,b]
-      #|  lift y
-      #|  IMAGE lift k
-      #|  lift b
-      #|  lift a
-      #|  lift o f o drop
-      #|  forall f:real->real a b k y.\n        COUNTABLE k /\\ f real_continuous_on real_interval[a,b] /\\ f a = y /\\\n        (forall x. x IN (real_interval[a,b] DIFF k)\n             ==> (f has_real_derivative &0)\n                 (atreal x within real_interval[a,b]))\n        ==> forall x. x IN real_interval[a,b] ==> f x = y
-      #|  lift y
-      #|  lift c
-      #|  IMAGE lift k
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  forall f:real->real s k c y.\n      is_realinterval s /\\ COUNTABLE k /\\ f real_continuous_on s /\\\n      c IN s /\\ f c = y /\\\n      (forall x. x IN (s DIFF k) ==> (f has_real_derivative &0) (atreal x within s))\n      ==> forall x. x IN s ==> f x = y
-      #|  b:real
-      #|  a:real
-      #|  y:real
-      #|  &1
-      #|  a /\\ b /\\ c /\\ d ==> e <=> a /\\ b /\\ c ==> d ==> e
-      #|  x:real
-      #|  x:real
-      #|  IMAGE drop k
-      #|  k:real^1->bool
-      #|  lift b
-      #|  lift a
-      #|  lift o f o drop
-      #|  forall f a b.\n        f real_integrable_on real_interval[a,b]\n        ==> ?k. real_negligible k /\\\n                forall x. x IN real_interval[a,b] DIFF k\n                    ==> ((\\x. real_integral(real_interval[a,x]) f)\n                         has_real_derivative\n                         f(x)) (atreal x within real_interval[a,b])
-      #|  lift b
-      #|  lift a
-      #|  lift o f' o drop
-      #|  lift o f o drop
-      #|  forall f f' a b.\n        f' absolutely_real_integrable_on real_interval[a,b] /\\\n        (forall x. x IN real_interval[a,b]\n             ==> (f' has_real_integral f x - f a) (real_interval [a,x]))\n        ==> ?s. real_negligible s /\\\n                forall x. x IN real_interval [a,b] DIFF s\n                    ==> (f has_real_derivative f' x) (atreal x)
-      #|  lift i
-      #|  IMAGE lift t
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  forall f:real->real s t.\n        s SUBSET t\n        ==> (((\\x. if x IN s then f x else &0) has_real_integral i) t <=>\n             (f has_real_integral i) s)
-      #|  forall f:real->real s i.\n        ((\\x. if x IN s then f x else &0) has_real_integral i) (:real) <=>\n         (f has_real_integral i) s
-      #|  s DIFF t UNION t DIFF s:real->bool
-      #|  forall f s t y.\n        real_negligible(s DIFF t UNION t DIFF s)\n        ==> ((f has_real_integral y) s <=> (f has_real_integral y) t)
-      #|  forall f s t y.\n        real_negligible(s DIFF t UNION t DIFF s) /\\\n        (f has_real_integral y) s\n        ==> (f has_real_integral y) t
-      #|  forall f s t.\n        real_negligible(s DIFF t UNION t DIFF s)\n        ==> f real_integrable_on s ==> f real_integrable_on t
-      #|  forall f s t.\n        real_negligible(s DIFF t UNION t DIFF s)\n        ==> (f real_integrable_on s <=> f real_integrable_on t)
-      #|  forall f s t.\n        real_negligible(s DIFF t UNION t DIFF s)\n        ==> real_integral s f = real_integral t f
-      #|  forall f a b y. (f has_real_integral y) (real_interval(a,b)) <=>\n             (f has_real_integral y) (real_interval[a,b])
-      #|  forall f a b. f real_integrable_on real_interval(a,b) <=>\n           f real_integrable_on real_interval[a,b]
-      #|  forall f a b. real_integral(real_interval(a,b)) f =\n           real_integral(real_interval[a,b]) f
-      #|  forall f s t.\n        (forall x. ~(x IN s) ==> f x = &0) /\\ s SUBSET t /\\ (f has_real_integral i) s\n        ==> (f has_real_integral i) t
-      #|  forall f s t.\n        (forall x. ~(x IN s) ==> f x = &0) /\\ s SUBSET t /\\ f real_integrable_on s\n        ==> f real_integrable_on t
-      #|  forall f s. (\\x. if x IN s then f x else &0) real_integrable_on (:real) <=>\n         f real_integrable_on s
-      #|  forall f s.\n     real_integral (:real) (\\x. if x IN s then f x else &0) =\n     real_integral s f
-      #|  forall f s t.\n        s SUBSET t\n        ==> real_integral t (\\x. if x IN s then f x else &0) =\n            real_integral s f
-      #|  forall f s t.\n        ((\\x. if x IN s then f x else &0) has_real_integral i) t <=>\n        (f has_real_integral i) (s INTER t)
-      #|  forall f s t.\n        real_integral t (\\x. if x IN s then f x else &0) =\n        real_integral (s INTER t) f
-      #|  forall f s t.\n        (\\x. if x IN s then f x else &0) real_integrable_on t <=>\n        f real_integrable_on (s INTER t)
-      #|  forall s. real_negligible s <=>\n         forall a b:real. real_negligible(s INTER real_interval[a,b])
-      #|  x:real
-      #|  (:real)
-      #|  \\x:real. if x IN t then f(x) else &0
-      #|  \\x:real. if x IN s then f(x) else &0
-      #|  forall f:real->real s t i j.\n        s SUBSET t /\\ (f has_real_integral i) s /\\ (f has_real_integral j) t /\\\n        (forall x. x IN t ==> &0 <= f x)\n        ==> i <= j
-      #|  forall f:real->real s t.\n        s SUBSET t /\\ f real_integrable_on s /\\ f real_integrable_on t /\\\n        (forall x. x IN t ==> &0 <= f(x))\n        ==> real_integral s f <= real_integral t f
-      #|  IMAGE lift s
-      #|  forall f:real->real s a b.\n        f real_integrable_on s /\\ real_interval[a,b] SUBSET s\n        ==> f real_integrable_on real_interval[a,b]
-      #|  forall f s t. f real_integrable_on s /\\ t SUBSET s /\\ is_realinterval t\n           ==> f real_integrable_on t
-      #|  j:real^1
-      #|  i:real^1
-      #|  lift o h o drop
-      #|  lift o g o drop
-      #|  j:real^1
-      #|  i:real^1
-      #|  h:real->real
-      #|  g:real->real
-      #|  e:real
-      #|  e:real
-      #|  forall f s.\n        (forall e. &0 < e\n             ==> ?g h i j. (g has_real_integral i) s /\\\n                           (h has_real_integral j) s /\\\n                           abs(i - j) < e /\\\n                           forall x. x IN s ==> g x <= f x /\\ f x <= h x)\n        ==> f real_integrable_on s
-      #|  s:real->bool
-      #|  f:real->real
-      #|  (\\x. &0):real->real
-      #|  g:real->real
-      #|  f:real->real
-      #|  &0:real
-      #|  &0:real
-      #|  g:real->real
-      #|  (\\x. &0):real->real
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  forall f g s. (forall x. x IN s ==> &0 <= f x /\\ f x <= g x) /\\\n           (g has_real_integral &0) s\n           ==> (f has_real_integral &0) s
-      #|  forall f i j s t.\n        (f has_real_integral i) s /\\ (f has_real_integral j) t /\\\n        real_negligible(s INTER t)\n        ==> (f has_real_integral (i + j)) (s UNION t)
-      #|  (forall x y. f x = f y <=> x = y)\n    ==> (IMAGE f s = IMAGE f t <=> s = t) /\\\n        (IMAGE f s INTER IMAGE f t = IMAGE f (s INTER t))
-      #|  IMAGE (IMAGE lift) t
-      #|  \\s. lift(i(IMAGE drop s))
-      #|  lift o f o drop
-      #|  forall f:real->real i t.\n        FINITE t /\\\n        (forall s. s IN t ==> (f has_real_integral (i s)) s) /\\\n        (forall s s'. s IN t /\\ s' IN t /\\ ~(s = s') ==> real_negligible(s INTER s'))\n        ==> (f has_real_integral (sum t i)) (UNIONS t)
-      #|  d':real
-      #|  c':real
-      #|  d':real
-      #|  c':real
-      #|  k:real
-      #|  e:real
-      #|  lift d
-      #|  lift c
-      #|  lift b
-      #|  lift a
-      #|  lift o f o drop
-      #|  forall f a b c d e.\n        f real_integrable_on real_interval[a,b] /\\\n        c IN real_interval[a,b] /\\\n        d IN real_interval[a,b] /\\\n        &0 < e\n        ==> ?k. &0 < k /\\\n                forall c' d'. c' IN real_interval[a,b] /\\\n                        d' IN real_interval[a,b] /\\\n                        abs(c' - c) <= k /\\ abs(d' - d) <= k\n                      ==> abs(real_integral (real_interval[c',d']) f -\n                              real_integral (real_interval[c,d]) f) < e
-      #|  B:real
-      #|  B:real
-      #|  forall k:num. real_integral s (f k) =\n            drop(integral (IMAGE lift s) (lift o f k o drop))
-      #|  IMAGE lift s
-      #|  lift o g o drop
-      #|  \\n x. lift(f (n:num) (drop x))
-      #|  forall f:num->real->real g s.\n        (forall k. (f k) real_integrable_on s) /\\\n        (forall k x. x IN s ==> f k x <= f (SUC k) x) /\\\n        (forall x. x IN s ==> ((\\k. f k x) ---> g x) sequentially) /\\\n        real_bounded {real_integral s (f k) | k IN (:num)}\n        ==> g real_integrable_on s /\\\n            ((\\k. real_integral s (f k)) ---> real_integral s g) sequentially
-      #|  B:real
-      #|  B:real
-      #|  forall k:num. real_integral s (f k) =\n            drop(integral (IMAGE lift s) (lift o f k o drop))
-      #|  IMAGE lift s
-      #|  lift o g o drop
-      #|  \\n x. lift(f (n:num) (drop x))
-      #|  forall f:num->real->real g s.\n        (forall k. (f k) real_integrable_on s) /\\\n        (forall k x. x IN s ==> f (SUC k) x <= f k x) /\\\n        (forall x. x IN s ==> ((\\k. f k x) ---> g x) sequentially) /\\\n        real_bounded {real_integral s (f k) | k IN (:num)}\n        ==> g real_integrable_on s /\\\n            ((\\k. real_integral s (f k)) ---> real_integral s g) sequentially
-      #|  IMAGE drop k
-      #|  drop o g o lift
-      #|  k:real^1->bool
-      #|  g:real^1->real^1
-      #|  B:real
-      #|  B:real
-      #|  forall k:num. real_integral s (f k) =\n            drop(integral (IMAGE lift s) (lift o f k o drop))
-      #|  IMAGE lift s
-      #|  \\n x. lift(f (n:num) (drop x))
+      #|  COUNTABLE((s : (Real) -> Bool)) == COUNTABLE(IMAGE(lift, s))
+      #|  \226\136\128 x : Cart[Real, Unit], IN(drop(x), (s : (Real) -> Bool)) == IN(x, IMAGE(lift, s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, \226\136\128 b : Real, COUNTABLE(s) && a <= b && real_continuous_on(f, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, DIFF(real_interval((a, b)), s)) \226\134\146 has_real_derivative(f, f'(x), atreal(x))) \226\134\146 has_real_integral(f', f(b) - f(a), real_interval([(a, b)]))
+      #|  (s : (Real) -> Bool)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, \226\136\128 b : Real, COUNTABLE(s) && a <= b && real_continuous_on(f, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, DIFF(real_interval([(a, b)]), s)) \226\134\146 has_real_derivative(f, f'(x), atreal(x))) \226\134\146 has_real_integral(f', f(b) - f(a), real_interval([(a, b)]))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on(f, real_interval([(a, b)])) \226\134\146 real_continuous_on((x : Real) => real_integral(real_interval([(a, x)]), f), real_interval([(a, b)]))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on(f, real_interval([(a, b)])) \226\134\146 real_continuous_on((x : Real) => real_integral(real_interval([(x, b)]), f), real_interval([(a, b)]))
+      #|  lift((y : Real))
+      #|  IMAGE(lift, (k : (Real) -> Bool))
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 k : (Real) -> Bool, \226\136\128 y : Real, COUNTABLE(k) && real_continuous_on(f, real_interval([(a, b)])) && f(a) == y && (\226\136\128 x : Real, IN(x, DIFF(real_interval([(a, b)]), k)) \226\134\146 has_real_derivative(f, real_of_num(0), within(atreal(x), real_interval([(a, b)])))) \226\134\146 (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 f(x) == y)
+      #|  lift((y : Real))
+      #|  lift((c : Real))
+      #|  IMAGE(lift, (k : (Real) -> Bool))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 k : (Real) -> Bool, \226\136\128 c : Real, \226\136\128 y : Real, is_realinterval(s) && COUNTABLE(k) && real_continuous_on(f, s) && IN(c, s) && f(c) == y && (\226\136\128 x : Real, IN(x, DIFF(s, k)) \226\134\146 has_real_derivative(f, real_of_num(0), within(atreal(x), s))) \226\134\146 (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == y)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (y : Real)
+      #|  real_of_num(1)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) \226\134\146 (e : Bool)) == (a && b && c \226\134\146 d \226\134\146 e)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  IMAGE(drop, (k : (Cart[Real, Unit]) -> Bool))
+      #|  (k : (Cart[Real, Unit]) -> Bool)
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on(f, real_interval([(a, b)])) \226\134\146 (\226\136\131 k : (Real) -> Bool, real_negligible(k) && (\226\136\128 x : Real, IN(x, DIFF(real_interval([(a, b)]), k)) \226\134\146 has_real_derivative((x : Real) => real_integral(real_interval([(a, x)]), f), f(x), within(atreal(x), real_interval([(a, b)])))))
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o(lift, o((f' : (Real) -> Real), drop))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, absolutely_real_integrable_on(f', real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_integral(f', f(x) - f(a), real_interval([(a, x)]))) \226\134\146 (\226\136\131 s : (Real) -> Bool, real_negligible(s) && (\226\136\128 x : Real, IN(x, DIFF(real_interval([(a, b)]), s)) \226\134\146 has_real_derivative(f, f'(x), atreal(x))))
+      #|  lift((i : Real))
+      #|  IMAGE(lift, (t : (Real) -> Bool))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, SUBSET(s, t) \226\134\146 has_real_integral((x : Real) => if IN(x, s) { f(x) } else { real_of_num(0) }, (i : Real), t) == has_real_integral(f, i, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 i : Real, has_real_integral((x : Real) => if IN(x, s) { f(x) } else { real_of_num(0) }, i, UNIV) == has_real_integral(f, i, s)
+      #|  UNION(DIFF((s : (Real) -> Bool), (t : (Real) -> Bool)), DIFF(t, s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 y : Real, real_negligible(UNION(DIFF(s, t), DIFF(t, s))) \226\134\146 has_real_integral(f, y, s) == has_real_integral(f, y, t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 y : Real, real_negligible(UNION(DIFF(s, t), DIFF(t, s))) && has_real_integral(f, y, s) \226\134\146 has_real_integral(f, y, t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_negligible(UNION(DIFF(s, t), DIFF(t, s))) \226\134\146 real_integrable_on(f, s) \226\134\146 real_integrable_on(f, t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_negligible(UNION(DIFF(s, t), DIFF(t, s))) \226\134\146 real_integrable_on(f, s) == real_integrable_on(f, t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_negligible(UNION(DIFF(s, t), DIFF(t, s))) \226\134\146 real_integral(s, f) == real_integral(t, f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 y : Real, has_real_integral(f, y, real_interval((a, b))) == has_real_integral(f, y, real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on(f, real_interval((a, b))) == real_integrable_on(f, real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_integral(real_interval((a, b)), f) == real_integral(real_interval([(a, b)]), f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, (\226\136\128 x : Real, !IN(x, s) \226\134\146 f(x) == real_of_num(0)) && SUBSET(s, t) && has_real_integral(f, (i : Real), s) \226\134\146 has_real_integral(f, i, t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, (\226\136\128 x : Real, !IN(x, s) \226\134\146 f(x) == real_of_num(0)) && SUBSET(s, t) && real_integrable_on(f, s) \226\134\146 real_integrable_on(f, t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on((x : Real) => if IN(x, s) { f(x) } else { real_of_num(0) }, UNIV) == real_integrable_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integral(UNIV, (x : Real) => if IN(x, s) { f(x) } else { real_of_num(0) }) == real_integral(s, f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, SUBSET(s, t) \226\134\146 real_integral(t, (x : Real) => if IN(x, s) { f(x) } else { real_of_num(0) }) == real_integral(s, f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, has_real_integral((x : Real) => if IN(x, s) { f(x) } else { real_of_num(0) }, (i : Real), t) == has_real_integral(f, i, INTER(s, t))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_integral(t, (x : Real) => if IN(x, s) { f(x) } else { real_of_num(0) }) == real_integral(INTER(s, t), f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_integrable_on((x : Real) => if IN(x, s) { f(x) } else { real_of_num(0) }, t) == real_integrable_on(f, INTER(s, t))
+      #|  \226\136\128 s : (Real) -> Bool, real_negligible(s) == (\226\136\128 a : Real, \226\136\128 b : Real, real_negligible(INTER(s, real_interval([(a, b)]))))
+      #|  (x : Real)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (x : Real) => if IN(x, (t : (Real) -> Bool)) { (f : (Real) -> Real)(x) } else { real_of_num(0) }
+      #|  (x : Real) => if IN(x, (s : (Real) -> Bool)) { (f : (Real) -> Real)(x) } else { real_of_num(0) }
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 i : Real, \226\136\128 j : Real, SUBSET(s, t) && has_real_integral(f, i, s) && has_real_integral(f, j, t) && (\226\136\128 x : Real, IN(x, t) \226\134\146 real_of_num(0) <= f(x)) \226\134\146 i <= j
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, SUBSET(s, t) && real_integrable_on(f, s) && real_integrable_on(f, t) && (\226\136\128 x : Real, IN(x, t) \226\134\146 real_of_num(0) <= f(x)) \226\134\146 real_integral(s, f) <= real_integral(t, f)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on(f, s) && SUBSET(real_interval([(a, b)]), s) \226\134\146 real_integrable_on(f, real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_integrable_on(f, s) && SUBSET(t, s) && is_realinterval(t) \226\134\146 real_integrable_on(f, t)
+      #|  (j : Cart[Real, Unit])
+      #|  (i : Cart[Real, Unit])
+      #|  o(lift, o((h : (Real) -> Real), drop))
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  (j : Cart[Real, Unit])
+      #|  (i : Cart[Real, Unit])
+      #|  (h : (Real) -> Real)
+      #|  (g : (Real) -> Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 g : (Real) -> Real, \226\136\131 h : (Real) -> Real, \226\136\131 i : Real, \226\136\131 j : Real, has_real_integral(g, i, s) && has_real_integral(h, j, s) && abs(i - j) < e && (\226\136\128 x : Real, IN(x, s) \226\134\146 g(x) <= f(x) && f(x) <= h(x)))) \226\134\146 real_integrable_on(f, s)
+      #|  (s : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
+      #|  (x : Real) => real_of_num(0)
+      #|  (g : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  real_of_num(0)
+      #|  real_of_num(0)
+      #|  (g : (Real) -> Real)
+      #|  (x : Real) => real_of_num(0)
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 real_of_num(0) <= f(x) && f(x) <= g(x)) && has_real_integral(g, real_of_num(0), s) \226\134\146 has_real_integral(f, real_of_num(0), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, \226\136\128 j : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, has_real_integral(f, i, s) && has_real_integral(f, j, t) && real_negligible(INTER(s, t)) \226\134\146 has_real_integral(f, i + j, UNION(s, t))
+      #|  (\226\136\128 x : _, \226\136\128 y : _, ((f : (_) -> _)(x) == f(y)) == (x == y)) \226\134\146 (IMAGE(f, (s : (_) -> Bool)) == IMAGE(f, (t : (_) -> Bool))) == (s == t) && INTER(IMAGE(f, s), IMAGE(f, t)) == IMAGE(f, INTER(s, t))
+      #|  IMAGE(IMAGE(lift), (t : ((Real) -> Bool) -> Bool))
+      #|  (s : (Cart[Real, Unit]) -> Bool) => lift((i : ((Real) -> Bool) -> Real)(IMAGE(drop, s)))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : ((Real) -> Bool) -> Real, \226\136\128 t : ((Real) -> Bool) -> Bool, FINITE(t) && (\226\136\128 s : (Real) -> Bool, IN(s, t) \226\134\146 has_real_integral(f, i(s), s)) && (\226\136\128 s : (Real) -> Bool, \226\136\128 s' : (Real) -> Bool, IN(s, t) && IN(s', t) && !(s == s') \226\134\146 real_negligible(INTER(s, s'))) \226\134\146 has_real_integral(f, sum(t, i), UNIONS(t))
+      #|  (d' : Real)
+      #|  (c' : Real)
+      #|  (d' : Real)
+      #|  (c' : Real)
+      #|  (k : Real)
+      #|  (e : Real)
+      #|  lift((d : Real))
+      #|  lift((c : Real))
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, \226\136\128 e : Real, real_integrable_on(f, real_interval([(a, b)])) && IN(c, real_interval([(a, b)])) && IN(d, real_interval([(a, b)])) && real_of_num(0) < e \226\134\146 (\226\136\131 k : Real, real_of_num(0) < k && (\226\136\128 c' : Real, \226\136\128 d' : Real, IN(c', real_interval([(a, b)])) && IN(d', real_interval([(a, b)])) && abs(c' - c) <= k && abs(d' - d) <= k \226\134\146 abs(real_integral(real_interval([(c', d')]), f) - real_integral(real_interval([(c, d)]), f)) < e))
+      #|  (B : Real)
+      #|  (B : Real)
+      #|  \226\136\128 k : Num, real_integral((s : (Real) -> Bool), (f : (Num, Real) -> Real)(k)) == drop(integral(IMAGE(lift, s), o(lift, o(f(k), drop))))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  (n : Num) => (x : Cart[Real, Unit]) => lift((f : (Num, Real) -> Real)(n, drop(x)))
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 k : Num, real_integrable_on(f(k), s)) && (\226\136\128 k : Num, \226\136\128 x : Real, IN(x, s) \226\134\146 f(k, x) <= f(SUC(k), x)) && (\226\136\128 x : Real, IN(x, s) \226\134\146 op_minus_minus_minus_gt((k : Num) => f(k, x), g(x), sequentially)) && real_bounded({real_integral(s, f((k : Num))) | IN(k, UNIV)}) \226\134\146 real_integrable_on(g, s) && op_minus_minus_minus_gt((k : Num) => real_integral(s, f(k)), real_integral(s, g), sequentially)
+      #|  (B : Real)
+      #|  (B : Real)
+      #|  \226\136\128 k : Num, real_integral((s : (Real) -> Bool), (f : (Num, Real) -> Real)(k)) == drop(integral(IMAGE(lift, s), o(lift, o(f(k), drop))))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  (n : Num) => (x : Cart[Real, Unit]) => lift((f : (Num, Real) -> Real)(n, drop(x)))
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 k : Num, real_integrable_on(f(k), s)) && (\226\136\128 k : Num, \226\136\128 x : Real, IN(x, s) \226\134\146 f(SUC(k), x) <= f(k, x)) && (\226\136\128 x : Real, IN(x, s) \226\134\146 op_minus_minus_minus_gt((k : Num) => f(k, x), g(x), sequentially)) && real_bounded({real_integral(s, f((k : Num))) | IN(k, UNIV)}) \226\134\146 real_integrable_on(g, s) && op_minus_minus_minus_gt((k : Num) => real_integral(s, f(k)), real_integral(s, g), sequentially)
+      #|  IMAGE(drop, (k : (Cart[Real, Unit]) -> Bool))
+      #|  o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
+      #|  (k : (Cart[Real, Unit]) -> Bool)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  (B : Real)
+      #|  (B : Real)
+      #|  \226\136\128 k : Num, real_integral((s : (Real) -> Bool), (f : (Num, Real) -> Real)(k)) == drop(integral(IMAGE(lift, s), o(lift, o(f(k), drop))))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  (n : Num) => (x : Cart[Real, Unit]) => lift((f : (Num, Real) -> Real)(n, drop(x)))
       #|  forall f s. (forall k. (f k) real_integrable_on s) /\\\n         (forall k x. x IN s ==> f k x <= f (SUC k) x) /\\\n         real_bounded {real_integral s (f k) | k IN (:num)}\n         ==> ?g k. real_negligible k /\\\n                   forall x. x IN (s DIFF k) ==> ((\\k. f k x) ---> g x) sequentially
-      #|  IMAGE drop k
-      #|  drop o g o lift
-      #|  k:real^1->bool
-      #|  g:real^1->real^1
-      #|  B:real
-      #|  B:real
-      #|  forall k:num. real_integral s (f k) =\n            drop(integral (IMAGE lift s) (lift o f k o drop))
-      #|  IMAGE lift s
-      #|  \\n x. lift(f (n:num) (drop x))
+      #|  IMAGE(drop, (k : (Cart[Real, Unit]) -> Bool))
+      #|  o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
+      #|  (k : (Cart[Real, Unit]) -> Bool)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  (B : Real)
+      #|  (B : Real)
+      #|  \226\136\128 k : Num, real_integral((s : (Real) -> Bool), (f : (Num, Real) -> Real)(k)) == drop(integral(IMAGE(lift, s), o(lift, o(f(k), drop))))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  (n : Num) => (x : Cart[Real, Unit]) => lift((f : (Num, Real) -> Real)(n, drop(x)))
       #|  forall f s. (forall k. (f k) real_integrable_on s) /\\\n         (forall k x. x IN s ==> f (SUC k) x <= f k x) /\\\n         real_bounded {real_integral s (f k) | k IN (:num)}\n         ==> ?g k. real_negligible k /\\\n                   forall x. x IN (s DIFF k) ==> ((\\k. f k x) ---> g x) sequentially
-      #|  real_integral s (drop o g o lift) =\n            drop(integral (IMAGE lift s) (lift o (drop o g o lift) o drop))
-      #|  IMAGE drop k
-      #|  drop o g o lift
-      #|  k:real^1->bool
-      #|  g:real^1->real^1
-      #|  B:real
-      #|  B:real
-      #|  forall k:num. real_integral s (f k) =\n            drop(integral (IMAGE lift s) (lift o f k o drop))
-      #|  IMAGE lift s
-      #|  \\n x. lift(f (n:num) (drop x))
+      #|  real_integral((s : (Real) -> Bool), o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))) == drop(integral(IMAGE(lift, s), o(lift, o(o(drop, o(g, lift)), drop))))
+      #|  IMAGE(drop, (k : (Cart[Real, Unit]) -> Bool))
+      #|  o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
+      #|  (k : (Cart[Real, Unit]) -> Bool)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  (B : Real)
+      #|  (B : Real)
+      #|  \226\136\128 k : Num, real_integral((s : (Real) -> Bool), (f : (Num, Real) -> Real)(k)) == drop(integral(IMAGE(lift, s), o(lift, o(f(k), drop))))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  (n : Num) => (x : Cart[Real, Unit]) => lift((f : (Num, Real) -> Real)(n, drop(x)))
       #|  forall f s.\n     (forall k. (f k) real_integrable_on s) /\\\n     (forall k x. x IN s ==> f k x <= f (SUC k) x) /\\\n     real_bounded {real_integral s (f k) | k IN (:num)}\n     ==> ?g k. real_negligible k /\\\n               (forall x. x IN (s DIFF k) ==> ((\\k. f k x) ---> g x) sequentially) /\\\n               g real_integrable_on s /\\\n               ((\\k. real_integral s (f k)) ---> real_integral s g)\n               sequentially
-      #|  real_integral s (drop o g o lift) =\n            drop(integral (IMAGE lift s) (lift o (drop o g o lift) o drop))
-      #|  IMAGE drop k
-      #|  drop o g o lift
-      #|  k:real^1->bool
-      #|  g:real^1->real^1
-      #|  B:real
-      #|  B:real
-      #|  forall k:num. real_integral s (f k) =\n            drop(integral (IMAGE lift s) (lift o f k o drop))
-      #|  IMAGE lift s
-      #|  \\n x. lift(f (n:num) (drop x))
+      #|  real_integral((s : (Real) -> Bool), o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))) == drop(integral(IMAGE(lift, s), o(lift, o(o(drop, o(g, lift)), drop))))
+      #|  IMAGE(drop, (k : (Cart[Real, Unit]) -> Bool))
+      #|  o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
+      #|  (k : (Cart[Real, Unit]) -> Bool)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  (B : Real)
+      #|  (B : Real)
+      #|  \226\136\128 k : Num, real_integral((s : (Real) -> Bool), (f : (Num, Real) -> Real)(k)) == drop(integral(IMAGE(lift, s), o(lift, o(f(k), drop))))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  (n : Num) => (x : Cart[Real, Unit]) => lift((f : (Num, Real) -> Real)(n, drop(x)))
       #|  forall f s.\n     (forall k. (f k) real_integrable_on s) /\\\n     (forall k x. x IN s ==> f (SUC k) x <= f k x) /\\\n     real_bounded {real_integral s (f k) | k IN (:num)}\n     ==> ?g k. real_negligible k /\\\n               (forall x. x IN (s DIFF k) ==> ((\\k. f k x) ---> g x) sequentially) /\\\n               g real_integrable_on s /\\\n               ((\\k. real_integral s (f k)) ---> real_integral s g)\n               sequentially
-      #|  forall f:real->real g s.\n        f real_integrable_on s /\\ g real_integrable_on s /\\\n        (forall x. x IN s ==> abs(f x) <= g x)\n        ==> abs(real_integral s f) <= real_integral s g
-      #|  forall f:real->real s.\n        f absolutely_real_integrable_on s\n        ==> abs(real_integral s f) <= real_integral s (\\x. abs(f x))
-      #|  forall f. f absolutely_real_integrable_on {}
-      #|  forall s. (\\x. &0) absolutely_real_integrable_on s
-      #|  forall a b c. (\\x. c) absolutely_real_integrable_on real_interval[a,b]
-      #|  forall f s c. f absolutely_real_integrable_on s\n           ==> (\\x. c * f(x)) absolutely_real_integrable_on s
-      #|  forall f s c. f absolutely_real_integrable_on s\n           ==> (\\x. f(x) * c) absolutely_real_integrable_on s
-      #|  forall f s. f absolutely_real_integrable_on s\n         ==> (\\x. --f(x)) absolutely_real_integrable_on s
-      #|  forall f s. f absolutely_real_integrable_on s\n         ==> (\\x. abs(f x)) absolutely_real_integrable_on s
-      #|  forall f:real->real s a b.\n        f absolutely_real_integrable_on s /\\ real_interval[a,b] SUBSET s\n        ==> f absolutely_real_integrable_on real_interval[a,b]
-      #|  forall f s. (\\x. if x IN s then f x else &0)\n              absolutely_real_integrable_on (:real) <=>\n         f absolutely_real_integrable_on s
-      #|  forall f:real->real g s.\n        f absolutely_real_integrable_on s /\\\n        g absolutely_real_integrable_on s\n        ==> (\\x. f(x) + g(x)) absolutely_real_integrable_on s
-      #|  forall f:real->real g s.\n        f absolutely_real_integrable_on s /\\\n        g absolutely_real_integrable_on s\n        ==> (\\x. f(x) - g(x)) absolutely_real_integrable_on s
-      #|  forall f h s.\n        f absolutely_real_integrable_on s /\\ linear(lift o h o drop)\n        ==> (h o f) absolutely_real_integrable_on s
-      #|  forall f:A->real->real s t.\n        FINITE t /\\\n        (forall a. a IN t ==> (f a) absolutely_real_integrable_on s)\n        ==>  (\\x. sum t (\\a. f a x)) absolutely_real_integrable_on s
-      #|  max a b = &1 / &2 * ((a + b) + abs(a - b))
-      #|  forall f:real->real g:real->real s.\n        f absolutely_real_integrable_on s /\\ g absolutely_real_integrable_on s\n        ==> (\\x. max (f x) (g x))\n            absolutely_real_integrable_on s
-      #|  min a b = &1 / &2 * ((a + b) - abs(a - b))
-      #|  forall f:real->real g:real->real s.\n        f absolutely_real_integrable_on s /\\ g absolutely_real_integrable_on s\n        ==> (\\x. min (f x) (g x))\n            absolutely_real_integrable_on s
-      #|  forall f s. f absolutely_real_integrable_on s ==> f real_integrable_on s
-      #|  forall f a b.\n        f real_continuous_on real_interval[a,b]\n        ==> f absolutely_real_integrable_on real_interval[a,b]
-      #|  f:real->real
-      #|  forall f s.\n        (forall x. x IN s ==> &0 <= f(x)) /\\\n        f real_integrable_on s\n        ==> f absolutely_real_integrable_on s
-      #|  lift o g o drop
-      #|  forall f:real->real g s.\n        (forall x. x IN s ==> abs(f x) <= g x) /\\\n        f real_integrable_on s /\\ g real_integrable_on s\n        ==> f absolutely_real_integrable_on s
-      #|  \\x:real. abs(g x)
-      #|  forall f:real->real g:real->real s.\n        (forall x. x IN s ==> abs(f x) <= abs(g x)) /\\\n        f real_integrable_on s /\\ g absolutely_real_integrable_on s\n        ==> f absolutely_real_integrable_on s
-      #|  lift o g o drop
-      #|  forall f:real->real g:real->real s.\n        (forall x. x IN s ==> f x <= g x) /\\\n        f real_integrable_on s /\\ g absolutely_real_integrable_on s\n        ==> g absolutely_real_integrable_on s
-      #|  lift o f o drop
-      #|  forall f:real->real g:real->real s.\n        (forall x. x IN s ==> f x <= g x) /\\\n        f absolutely_real_integrable_on s /\\ g real_integrable_on s\n        ==> g absolutely_real_integrable_on s
-      #|  k:A->bool = {}
-      #|  k:A->bool
-      #|  a:A
-      #|  forall fs s:real->bool k:A->bool.\n        FINITE k /\\ ~(k = {}) /\\\n        (forall i. i IN k ==> (\\x. fs x i) absolutely_real_integrable_on s)\n        ==> (\\x. inf (IMAGE (fs x) k)) absolutely_real_integrable_on s
-      #|  k:A->bool = {}
-      #|  k:A->bool
-      #|  a:A
-      #|  forall fs s:real->bool k:A->bool.\n        FINITE k /\\ ~(k = {}) /\\\n        (forall i. i IN k ==> (\\x. fs x i) absolutely_real_integrable_on s)\n        ==> (\\x. sup (IMAGE (fs x) k)) absolutely_real_integrable_on s
-      #|  forall k:num. real_integral s (f k) =\n            drop(integral (IMAGE lift s) (lift o f k o drop))
-      #|  IMAGE lift s
-      #|  lift o h o drop
-      #|  lift o g o drop
-      #|  \\n x. lift(f (n:num) (drop x))
-      #|  forall f:num->real->real g h s.\n        (forall k. (f k) real_integrable_on s) /\\ h real_integrable_on s /\\\n        (forall k x. x IN s ==> abs(f k x) <= h x) /\\\n        (forall x. x IN s ==> ((\\k. f k x) ---> g x) sequentially)\n        ==> g real_integrable_on s /\\\n            ((\\k. real_integral s (f k)) ---> real_integral s g) sequentially
-      #|  forall s m. s has_real_measure m <=> (IMAGE lift s) has_measure m
-      #|  forall s. real_measurable s <=> measurable(IMAGE lift s)
-      #|  forall s. real_measure s = measure (IMAGE lift s)
-      #|  forall s. real_measurable s <=> s has_real_measure (real_measure s)
-      #|  forall s m1 m2. s has_real_measure m1 /\\ s has_real_measure m2 ==> m1 = m2
-      #|  forall s m. s has_real_measure m ==> real_measure s = m
-      #|  forall s m. s has_real_measure m <=> real_measurable s /\\ real_measure s = m
-      #|  forall s m. s has_real_measure m ==> real_measurable s
-      #|  forall s m. s has_real_measure m <=>\n              ((\\x. if x IN s then &1 else &0) has_real_integral m) (:real)
-      #|  forall s. real_measurable s <=> (\\x. &1) real_integrable_on s
-      #|  real_measurable s <=>\n    (\\x. if x IN s then &1 else &0) real_integrable_on UNIV
-      #|  forall s. real_measurable s ==> real_measure s = real_integral s (\\x. &1)
-      #|  forall s. real_measurable s\n       ==> real_measure s =\n           real_integral UNIV (\\x. if x IN s then &1 else &0)
-      #|  forall s. real_measurable s ==> real_integral s (\\x. &1) = real_measure s
-      #|  forall s. real_measurable s\n       ==> real_integral UNIV (\\x. if x IN s then &1 else &0) =\n           real_measure s
-      #|  (forall a b. real_interval[a,b] has_real_measure (max (b - a) (&0))) /\\\n   (forall a b. real_interval(a,b) has_real_measure (max (b - a) (&0)))
-      #|  (forall a b. real_measurable (real_interval[a,b])) /\\\n   (forall a b. real_measurable (real_interval(a,b)))
-      #|  (forall a b. real_measure(real_interval[a,b]) = max (b - a) (&0)) /\\\n   (forall a b. real_measure(real_interval(a,b)) = max (b - a) (&0))
-      #|  (forall a b. real_measurable(real_segment[a,b])) /\\\n   (forall a b. real_measurable(real_segment(a,b)))
-      #|  (forall a b. real_measure(real_segment[a,b]) = abs(b - a)) /\\\n   (forall a b. real_measure(real_segment(a,b)) = abs(b - a))
-      #|  forall s t. real_measurable s /\\ real_measurable t\n         ==> real_measurable (s INTER t)
-      #|  forall s t. real_measurable s /\\ real_measurable t\n         ==> real_measurable (s UNION t)
-      #|  forall s1 s2 m1 m2. s1 has_real_measure m1 /\\ s2 has_real_measure m2 /\\\n                 DISJOINT s1 s2\n                 ==> (s1 UNION s2) has_real_measure (m1 + m2)
-      #|  forall s t. real_measurable s /\\ real_measurable t /\\ DISJOINT s t\n         ==> real_measure(s UNION t) = real_measure s + real_measure t
-      #|  forall m s. s has_real_measure m ==> &0 <= m
-      #|  forall s. real_measurable s ==> &0 <= real_measure s
-      #|  IMAGE lift s2
-      #|  IMAGE lift s1
-      #|  forall s1 s2 m1 m2.\n        s1 has_real_measure m1 /\\ s2 has_real_measure m2 /\\ s1 SUBSET s2\n        ==> m1 <= m2
-      #|  forall s t. real_measurable s /\\ real_measurable t /\\ s SUBSET t\n         ==> real_measure s <= real_measure t
-      #|  forall s. s has_real_measure &0 <=> real_negligible s
-      #|  forall s. real_negligible s ==> real_measure s = &0
-      #|  {} has_real_measure &0
-      #|  real_measure {} = &0
-      #|  real_measurable {}
-      #|  forall s. real_measurable s ==> (real_measure s = &0 <=> real_negligible s)
-      #|  forall s. real_measurable s ==> (&0 < real_measure s <=> ~real_negligible s)
-      #|  (forall a b. real_negligible(real_interval[a,b]) <=> real_interval(a,b) = {}) /\\\n   (forall a b. real_negligible(real_interval(a,b)) <=> real_interval(a,b) = {})
-      #|  forall f. FINITE f /\\ (forall s. s IN f ==> real_measurable s)\n       ==> real_measurable (UNIONS f)
-      #|  forall s1 s2 m1 m2.\n        s1 has_real_measure m1 /\\ s2 has_real_measure m2 /\\ s2 SUBSET s1\n        ==> (s1 DIFF s2) has_real_measure (m1 - m2)
-      #|  forall s t. real_measurable s /\\ real_measurable t\n         ==> real_measurable (s DIFF t)
-      #|  forall s t. real_measurable s /\\ real_measurable t /\\ t SUBSET s\n         ==> real_measure(s DIFF t) = real_measure s - real_measure t
-      #|  forall s t m.\n        s has_real_measure m /\\ real_negligible t\n        ==> (s UNION t) has_real_measure m
-      #|  forall s t m.\n        s has_real_measure m /\\ real_negligible t\n        ==> (s DIFF t) has_real_measure m
-      #|  forall s t m.\n     real_negligible t\n     ==> ((s UNION t) has_real_measure m <=> s has_real_measure m)
-      #|  forall s t m.\n     real_negligible t\n     ==> ((s DIFF t) has_real_measure m <=> s has_real_measure m)
-      #|  IMAGE lift t
-      #|  IMAGE lift s
-      #|  forall s s' t m. s has_real_measure m /\\ real_negligible t /\\\n              s UNION t = s' UNION t\n              ==> s' has_real_measure m
-      #|  forall s s' t. real_negligible t /\\ s UNION t = s' UNION t\n            ==> (s has_real_measure m <=> s' has_real_measure m)
-      #|  forall s s' t. real_measurable s /\\ real_negligible t /\\ s UNION t = s' UNION t\n            ==> real_measurable s'
-      #|  forall s1 s2 m1 m2.\n        s1 has_real_measure m1 /\\ s2 has_real_measure m2 /\\\n        real_negligible(s1 INTER s2)\n        ==> (s1 UNION s2) has_real_measure (m1 + m2)
-      #|  forall s t. real_measurable s /\\ real_measurable t /\\ real_negligible(s INTER t)\n         ==> real_measure(s UNION t) = real_measure s + real_measure t
-      #|  (s DIFF t) UNION (t DIFF s):real->bool
-      #|  s:real->bool
-      #|  forall s t m.\n        s has_real_measure m /\\\n        real_negligible((s DIFF t) UNION (t DIFF s))\n        ==> t has_real_measure m
-      #|  forall s t. real_measurable s /\\ real_negligible((s DIFF t) UNION (t DIFF s))\n         ==> real_measurable t
-      #|  forall s t. (real_measurable s \\/ real_measurable t) /\\\n         real_negligible((s DIFF t) UNION (t DIFF s))\n         ==> real_measure s = real_measure t
-      #|  f:(real->bool)->bool
-      #|  s:real->bool
-      #|  forall m f. FINITE f /\\\n         (forall s. s IN f ==> s has_real_measure (m s)) /\\\n         (forall s t. s IN f /\\ t IN f /\\ ~(s = t) ==> real_negligible(s INTER t))\n         ==> (UNIONS f) has_real_measure (sum f m)
-      #|  forall m f. FINITE f /\\\n         (forall s. s IN f ==> s has_real_measure (m s)) /\\\n         (forall s t. s IN f /\\ t IN f /\\ ~(s = t) ==> real_negligible(s INTER t))\n         ==> real_measure(UNIONS f) = sum f m
-      #|  forall m f. FINITE f /\\\n         (forall s. s IN f ==> s has_real_measure (m s)) /\\\n         (forall s t. s IN f /\\ t IN f /\\ ~(s = t) ==> DISJOINT s t)\n         ==> (UNIONS f) has_real_measure (sum f m)
-      #|  forall m f:(real->bool)->bool.\n        FINITE f /\\\n        (forall s. s IN f ==> s has_real_measure (m s)) /\\\n        (forall s t. s IN f /\\ t IN f /\\ ~(s = t) ==> DISJOINT s t)\n        ==> real_measure(UNIONS f) = sum f m
-      #|  y:A
-      #|  x:A
-      #|  y:A
-      #|  x:A
-      #|  sum s (\\x. real_measure(f x)) =\n    sum (IMAGE (f:A->real->bool) s) real_measure
-      #|  forall f:A->(real->bool) s.\n        FINITE s /\\\n        (forall x. x IN s ==> real_measurable(f x)) /\\\n        (forall x y. x IN s /\\ y IN s /\\ ~(x = y)\n               ==> real_negligible((f x) INTER (f y)))\n        ==> (UNIONS (IMAGE f s)) has_real_measure\n            (sum s (\\x. real_measure(f x)))
-      #|  forall f:A->real->bool s.\n        FINITE s /\\\n        (forall x. x IN s ==> real_measurable(f x)) /\\\n        (forall x y. x IN s /\\ y IN s /\\ ~(x = y)\n               ==> real_negligible((f x) INTER (f y)))\n        ==> real_measure(UNIONS (IMAGE f s)) = sum s (\\x. real_measure(f x))
-      #|  forall f:A->real->bool s.\n        FINITE s /\\\n        (forall x. x IN s ==> real_measurable(f x)) /\\\n        (forall x y. x IN s /\\ y IN s /\\ ~(x = y) ==> DISJOINT (f x) (f y))\n        ==> (UNIONS (IMAGE f s)) has_real_measure\n            (sum s (\\x. real_measure(f x)))
-      #|  forall f:A->real->bool s.\n        FINITE s /\\\n        (forall x. x IN s ==> real_measurable(f x)) /\\\n        (forall x y. x IN s /\\ y IN s /\\ ~(x = y) ==> DISJOINT (f x) (f y))\n        ==> real_measure(UNIONS (IMAGE f s)) = sum s (\\x. real_measure(f x))
-      #|  a /\\ ~(a /\\ b) <=> a /\\ ~b
-      #|  {x | x IN s /\\ ~((f:A->real->bool) x = {})}
-      #|  f:A->real->bool
-      #|  forall f:A->real->bool s.\n        FINITE {x | x IN s /\\ ~(f x = {})} /\\\n        (forall x. x IN s ==> real_measurable(f x)) /\\\n        (forall x y. x IN s /\\ y IN s /\\ ~(x = y)\n               ==> real_negligible((f x) INTER (f y)))\n        ==> (UNIONS (IMAGE f s)) has_real_measure\n            (sum s (\\x. real_measure(f x)))
-      #|  forall f:A->real->bool s.\n        FINITE {x | x IN s /\\ ~(f x = {})} /\\\n        (forall x. x IN s ==> real_measurable(f x)) /\\\n        (forall x y. x IN s /\\ y IN s /\\ ~(x = y)\n               ==> real_negligible((f x) INTER (f y)))\n        ==> real_measure(UNIONS (IMAGE f s)) = sum s (\\x. real_measure(f x))
-      #|  forall f:A->real->bool s.\n        FINITE {x | x IN s /\\ ~(f x = {})} /\\\n        (forall x. x IN s ==> real_measurable(f x)) /\\\n        (forall x y. x IN s /\\ y IN s /\\ ~(x = y) ==> DISJOINT (f x) (f y))\n        ==> (UNIONS (IMAGE f s)) has_real_measure\n            (sum s (\\x. real_measure(f x)))
-      #|  forall f:A->real->bool s.\n        FINITE {x | x IN s /\\ ~(f x = {})} /\\\n        (forall x. x IN s ==> real_measurable(f x)) /\\\n        (forall x y. x IN s /\\ y IN s /\\ ~(x = y) ==> DISJOINT (f x) (f y))\n        ==> real_measure(UNIONS (IMAGE f s)) = sum s (\\x. real_measure(f x))
-      #|  real_measure((t DIFF s) UNION (s INTER t):real->bool)
-      #|  real_measure((s DIFF t) UNION (s INTER t):real->bool)
-      #|  (s DIFF t) UNION (t DIFF s):real->bool
-      #|  s INTER t:real->bool
-      #|  t DIFF s:real->bool
-      #|  s DIFF t:real->bool
-      #|  a + b - c:real = c + (a - c) + (b - c)
-      #|  s UNION t = (s INTER t) UNION (s DIFF t) UNION (t DIFF s)
-      #|  forall s t. real_measurable s /\\ real_measurable t\n         ==> real_measure(s UNION t) =\n             real_measure(s) + real_measure(t) - real_measure(s INTER t)
-      #|  a + b - c <= a + b <=> &0 <= c
-      #|  forall s t. real_measurable s /\\ real_measurable t\n         ==> real_measure(s UNION t) <= real_measure s + real_measure t
-      #|  real_measure(s) + real_measure(UNIONS f)
-      #|  f:(real->bool)->bool
-      #|  s:real->bool
-      #|  forall f. FINITE f /\\ (forall s. s IN f ==> real_measurable s)\n       ==> real_measure(UNIONS f) <= sum f (\\s. real_measure s)
-      #|  sum (IMAGE s (f:A->bool)) (\\k:real->bool. real_measure k)
-      #|  forall f:A->bool s:A->(real->bool).\n        FINITE f /\\ (forall a. a IN f ==> real_measurable(s a))\n        ==> real_measure(UNIONS (IMAGE s f)) <= sum f (\\a. real_measure(s a))
-      #|  forall s. real_negligible s <=>\n       forall e. &0 < e\n           ==> ?t. s SUBSET t /\\ real_measurable t /\\ real_measure t < e
-      #|  forall s. real_negligible s <=>\n       forall e. &0 < e\n           ==> ?t. s SUBSET t /\\ real_measurable t /\\ real_measure t <= e
-      #|  real_measure(u:real->bool)
-      #|  real_measure(t:real->bool)
-      #|  (\\x. if x IN u then &1 else &0):real->real
-      #|  (\\x. if x IN t then &1 else &0):real->real
-      #|  u:real->bool
-      #|  t:real->bool
-      #|  e:real
-      #|  e:real
-      #|  s:real->bool
-      #|  forall s. real_measurable s <=>\n                forall e. &0 < e\n                    ==> ?t u. t SUBSET s /\\ s SUBSET u /\\\n                              real_measurable t /\\ real_measurable u /\\\n                              abs(real_measure t - real_measure u) < e
-      #|  m - real_measure(s:real->bool)
-      #|  real_measure(s:real->bool) - m
-      #|  ~(&0 < x - y) /\\ ~(&0 < y - x) ==> x = y
-      #|  &0 < e /\\ t <= u /\\ m - e / &2 < t /\\ u < m + e / &2\n                          ==> abs(t - u) < e
-      #|  e / &2
-      #|  e / &2
-      #|  e:real
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  s:real->bool
-      #|  forall s m. s has_real_measure m <=>\n                (forall e. &0 < e ==> ?t. t SUBSET s /\\ real_measurable t /\\\n                                    m - e < real_measure t) /\\\n                (forall e. &0 < e ==> ?u. s SUBSET u /\\ real_measurable u /\\\n                                    real_measure u < m + e)
-      #|  &0 < e <=> &0 < e / &2
-      #|  &0 < e /\\ u <= m + e / &2 ==> u < m + e
-      #|  &0 < e /\\ m - e / &2 <= t ==> m - e < t
-      #|  forall s:real->bool m.\n        s has_real_measure m <=>\n                (forall e. &0 < e ==> ?t. t SUBSET s /\\ real_measurable t /\\\n                                    m - e <= real_measure t) /\\\n                (forall e. &0 < e ==> ?u. s SUBSET u /\\ real_measurable u /\\\n                                    real_measure u <= m + e)
-      #|  lift c
-      #|  m:real
-      #|  forall s m c y. s has_real_measure y\n             ==> (IMAGE (\\x. m * x + c) s) has_real_measure abs(m) * y
-      #|  abs m * x + &0 = abs m * x
-      #|  m * x = m * x + &0
-      #|  forall s m y. s has_real_measure y\n           ==> (IMAGE (\\x. m * x) s) has_real_measure abs(m) * y
-      #|  m = abs(&1) * m
-      #|  a + x = &1 * x + a
-      #|  forall s m a. s has_real_measure m ==> (IMAGE (\\x. a + x) s) has_real_measure m
-      #|  forall s a. real_negligible s ==> real_negligible (IMAGE (\\x. a + x) s)
-      #|  --a + a + b:real = b
-      #|  --a:real
-      #|  forall s m. (IMAGE (\\x. a + x) s) has_real_measure m <=> s has_real_measure m
-      #|  forall s a. real_negligible (IMAGE (\\x. a + x) s) ==> real_negligible s
-      #|  forall s a. real_negligible (IMAGE (\\x. a + x) s) <=> real_negligible s
-      #|  forall s. real_measurable (IMAGE (\\x. a + x) s) <=> real_measurable s
-      #|  forall s. real_measurable s\n       ==> real_measure(IMAGE (\\x. a + x) s) = real_measure s
-      #|  inv(c:real)
-      #|  forall s m c. ~(c = &0)\n           ==> ((IMAGE (\\x. c * x) s) has_real_measure (abs(c) * m) <=>\n                s has_real_measure m)
-      #|  forall s c. real_measurable s ==> real_measurable (IMAGE (\\x. c * x) s)
-      #|  inv c:real
-      #|  forall s c. ~(c = &0)\n         ==> (real_measurable (IMAGE (\\x. c * x) s) <=> real_measurable s)
-      #|  forall s. real_measurable s\n       ==> real_measure(IMAGE (\\x. c * x) s) = abs(c) * real_measure s
-      #|  {IMAGE f (s n) | P n} = IMAGE (IMAGE f) {s n | P n}
-      #|  B:real
-      #|  IMAGE lift o (s:num->real->bool)
-      #|  forall s B. (forall n. real_measurable(s n)) /\\\n         (forall n. real_measure(s n) <= B) /\\\n         (forall n. s(n) SUBSET s(SUC n))\n         ==> real_measurable(UNIONS { s(n) | n IN (:num) }) /\\\n             ((\\n. real_measure(s n))\n                   ---> real_measure(UNIONS { s(n) | n IN (:num) }))\n             sequentially
-      #|  forall s B. (forall n. real_measurable(s n)) /\\\n         (forall n. real_measure(s n) <= B) /\\\n         (forall n. s(n) SUBSET s(SUC n))\n         ==> real_measurable(UNIONS { s(n) | n IN (:num) })
-      #|  x:real
-      #|  UNIONS {UNIONS (IMAGE s (0..n)) | n IN (:num)}:real->bool =\n    UNIONS (IMAGE s (:num))
-      #|  forall n. (UNIONS (IMAGE s (0..n)):real->bool) has_real_measure\n        (sum(0..n) (\\k. real_measure(s k)))
-      #|  B:real
-      #|  \\n. UNIONS (IMAGE s (0..n)):real->bool
-      #|  forall s:num->real->bool B.\n        (forall n. real_measurable(s n)) /\\\n        (forall m n. ~(m = n) ==> real_negligible(s m INTER s n)) /\\\n        (forall n. sum (0..n) (\\k. real_measure(s k)) <= B)\n        ==> real_measurable(UNIONS { s(n) | n IN (:num) }) /\\\n            ((\\n. real_measure(s n)) real_sums\n             real_measure(UNIONS { s(n) | n IN (:num) })) (from 0)
-      #|  n:num
-      #|  n:num
-      #|  from 0
-      #|  (\\k. &0):num->real
-      #|  &0
-      #|  s:num->real->bool
-      #|  forall s:num->real->bool.\n        (forall n. real_negligible(s n))\n        ==> real_negligible(UNIONS {s(n) | n IN (:num)})
-      #|  x:real
-      #|  UNIONS {UNIONS (IMAGE s (0..n)) | n IN (:num)}:real->bool =\n    UNIONS (IMAGE s (:num))
-      #|  B:real
-      #|  \\n. UNIONS (IMAGE s (0..n)):real->bool
-      #|  forall s:num->real->bool B.\n        (forall n. real_measurable(s n)) /\\\n        (forall n. real_measure(UNIONS {s k | k <= n}) <= B)\n        ==> real_measurable(UNIONS { s(n) | n IN (:num) })
-      #|  {IMAGE f (s n) | P n} = IMAGE (IMAGE f) {s n | P n}
-      #|  IMAGE lift o (s:num->real->bool)
-      #|  forall s. (forall n. real_measurable(s n)) /\\\n       (forall m n. ~(m = n) ==> real_negligible(s m INTER s n)) /\\\n       real_bounded(UNIONS { s(n) | n IN (:num) })\n       ==> real_measurable(UNIONS { s(n) | n IN (:num) }) /\\\n           ((\\n. real_measure(s n)) real_sums\n            real_measure(UNIONS { s(n) | n IN (:num) })) (from 0)
-      #|  sum(0..n) (\\k. real_measure(s k:real->bool))
-      #|  n:num
-      #|  B:real
-      #|  forall s B. (forall n. real_measurable(s n)) /\\\n         (forall n. sum (0..n) (\\k. real_measure(s k)) <= B)\n         ==> real_measurable(UNIONS { s(n) | n IN (:num) })
-      #|  IMAGE f {g x | x IN s} = {f(g x) | x IN s}
-      #|  forall s. (forall n. real_measurable(s n)) /\\\n       real_bounded(UNIONS { s(n) | n IN (:num) })\n       ==> real_measurable(UNIONS { s(n) | n IN (:num) })
-      #|  real_measure(s 0:real->bool)
-      #|  INTERS { s(n):real->bool | n IN (:num) } =\n                s 0 DIFF (UNIONS {s 0 DIFF s n | n IN (:num)})
-      #|  forall s. (forall n. real_measurable(s n))\n       ==> real_measurable(INTERS { s(n) | n IN (:num) })
-      #|  forall s. COUNTABLE s ==> real_negligible s
-      #|  forall s. real_compact s ==> real_measurable s
-      #|  forall s. real_bounded s /\\ real_open s ==> real_measurable s
-      #|  n - 1
-      #|  n:num
-      #|  x:real
-      #|  &0 = (&n + &1) * &0
-      #|  &0 <= x /\\ a <= abs x ==> a <= x
-      #|  &0 < &n + &1
-      #|  x:real
-      #|  \\x:real. if x IN s then (&n + &1) * f(x) else &0
-      #|  n:num
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) && real_integrable_on(g, s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 abs(f(x)) <= g(x)) \226\134\146 abs(real_integral(s, f)) <= real_integral(s, g)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, absolutely_real_integrable_on(f, s) \226\134\146 abs(real_integral(s, f)) <= real_integral(s, (x : Real) => abs(f(x)))
+      #|  \226\136\128 f : (Real) -> Real, absolutely_real_integrable_on(f, {})
+      #|  \226\136\128 s : (Real) -> Bool, absolutely_real_integrable_on((x : Real) => real_of_num(0), s)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, absolutely_real_integrable_on((x : Real) => c, real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, absolutely_real_integrable_on(f, s) \226\134\146 absolutely_real_integrable_on((x : Real) => c * f(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, absolutely_real_integrable_on(f, s) \226\134\146 absolutely_real_integrable_on((x : Real) => f(x) * c, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, absolutely_real_integrable_on(f, s) \226\134\146 absolutely_real_integrable_on((x : Real) => -f(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, absolutely_real_integrable_on(f, s) \226\134\146 absolutely_real_integrable_on((x : Real) => abs(f(x)), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, \226\136\128 b : Real, absolutely_real_integrable_on(f, s) && SUBSET(real_interval([(a, b)]), s) \226\134\146 absolutely_real_integrable_on(f, real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, absolutely_real_integrable_on((x : Real) => if IN(x, s) { f(x) } else { real_of_num(0) }, UNIV) == absolutely_real_integrable_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, absolutely_real_integrable_on(f, s) && absolutely_real_integrable_on(g, s) \226\134\146 absolutely_real_integrable_on((x : Real) => f(x) + g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, absolutely_real_integrable_on(f, s) && absolutely_real_integrable_on(g, s) \226\134\146 absolutely_real_integrable_on((x : Real) => f(x) - g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 h : (Real) -> Real, \226\136\128 s : (Real) -> Bool, absolutely_real_integrable_on(f, s) && linear(o(lift, o(h, drop))) \226\134\146 absolutely_real_integrable_on(o(h, f), s)
+      #|  \226\136\128 f : (A, Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (A) -> Bool, FINITE(t) && (\226\136\128 a : A, IN(a, t) \226\134\146 absolutely_real_integrable_on(f(a), s)) \226\134\146 absolutely_real_integrable_on((x : Real) => sum(t, (a : A) => f(a, x)), s)
+      #|  max((a : Real), (b : Real)) == real_of_num(1) / real_of_num(2) * (a + b + abs(a - b))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, absolutely_real_integrable_on(f, s) && absolutely_real_integrable_on(g, s) \226\134\146 absolutely_real_integrable_on((x : Real) => max(f(x), g(x)), s)
+      #|  min((a : Real), (b : Real)) == real_of_num(1) / real_of_num(2) * (a + b - abs(a - b))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, absolutely_real_integrable_on(f, s) && absolutely_real_integrable_on(g, s) \226\134\146 absolutely_real_integrable_on((x : Real) => min(f(x), g(x)), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, absolutely_real_integrable_on(f, s) \226\134\146 real_integrable_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_continuous_on(f, real_interval([(a, b)])) \226\134\146 absolutely_real_integrable_on(f, real_interval([(a, b)]))
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 real_of_num(0) <= f(x)) && real_integrable_on(f, s) \226\134\146 absolutely_real_integrable_on(f, s)
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 abs(f(x)) <= g(x)) && real_integrable_on(f, s) && real_integrable_on(g, s) \226\134\146 absolutely_real_integrable_on(f, s)
+      #|  (x : Real) => abs((g : (Real) -> Real)(x))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 abs(f(x)) <= abs(g(x))) && real_integrable_on(f, s) && absolutely_real_integrable_on(g, s) \226\134\146 absolutely_real_integrable_on(f, s)
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) <= g(x)) && real_integrable_on(f, s) && absolutely_real_integrable_on(g, s) \226\134\146 absolutely_real_integrable_on(g, s)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) <= g(x)) && absolutely_real_integrable_on(f, s) && real_integrable_on(g, s) \226\134\146 absolutely_real_integrable_on(g, s)
+      #|  (k : (A) -> Bool) == {}
+      #|  (k : (A) -> Bool)
+      #|  (a : A)
+      #|  \226\136\128 fs : (Real, A) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 k : (A) -> Bool, FINITE(k) && !(k == {}) && (\226\136\128 i : A, IN(i, k) \226\134\146 absolutely_real_integrable_on((x : Real) => fs(x, i), s)) \226\134\146 absolutely_real_integrable_on((x : Real) => inf(IMAGE(fs(x), k)), s)
+      #|  (k : (A) -> Bool) == {}
+      #|  (k : (A) -> Bool)
+      #|  (a : A)
+      #|  \226\136\128 fs : (Real, A) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 k : (A) -> Bool, FINITE(k) && !(k == {}) && (\226\136\128 i : A, IN(i, k) \226\134\146 absolutely_real_integrable_on((x : Real) => fs(x, i), s)) \226\134\146 absolutely_real_integrable_on((x : Real) => sup(IMAGE(fs(x), k)), s)
+      #|  \226\136\128 k : Num, real_integral((s : (Real) -> Bool), (f : (Num, Real) -> Real)(k)) == drop(integral(IMAGE(lift, s), o(lift, o(f(k), drop))))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((h : (Real) -> Real), drop))
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  (n : Num) => (x : Cart[Real, Unit]) => lift((f : (Num, Real) -> Real)(n, drop(x)))
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 h : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 k : Num, real_integrable_on(f(k), s)) && real_integrable_on(h, s) && (\226\136\128 k : Num, \226\136\128 x : Real, IN(x, s) \226\134\146 abs(f(k, x)) <= h(x)) && (\226\136\128 x : Real, IN(x, s) \226\134\146 op_minus_minus_minus_gt((k : Num) => f(k, x), g(x), sequentially)) \226\134\146 real_integrable_on(g, s) && op_minus_minus_minus_gt((k : Num) => real_integral(s, f(k)), real_integral(s, g), sequentially)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 m : Real, has_real_measure(s, m) == has_measure(IMAGE(lift, s), m)
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(s) == measurable(IMAGE(lift, s))
+      #|  \226\136\128 s : (Real) -> Bool, real_measure(s) == measure(IMAGE(lift, s))
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(s) == has_real_measure(s, real_measure(s))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 m1 : Real, \226\136\128 m2 : Real, has_real_measure(s, m1) && has_real_measure(s, m2) \226\134\146 m1 == m2
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 m : Real, has_real_measure(s, m) \226\134\146 real_measure(s) == m
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 m : Real, has_real_measure(s, m) == (real_measurable(s) && real_measure(s) == m)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 m : Real, has_real_measure(s, m) \226\134\146 real_measurable(s)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 m : Real, has_real_measure(s, m) == has_real_integral((x : Real) => if IN(x, s) { real_of_num(1) } else { real_of_num(0) }, m, UNIV)
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(s) == real_integrable_on((x : Real) => real_of_num(1), s)
+      #|  real_measurable((s : (Real) -> Bool)) == real_integrable_on((x : Real) => if IN(x, s) { real_of_num(1) } else { real_of_num(0) }, UNIV)
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(s) \226\134\146 real_measure(s) == real_integral(s, (x : Real) => real_of_num(1))
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(s) \226\134\146 real_measure(s) == real_integral(UNIV, (x : Real) => if IN(x, s) { real_of_num(1) } else { real_of_num(0) })
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(s) \226\134\146 real_integral(s, (x : Real) => real_of_num(1)) == real_measure(s)
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(s) \226\134\146 real_integral(UNIV, (x : Real) => if IN(x, s) { real_of_num(1) } else { real_of_num(0) }) == real_measure(s)
+      #|  (\226\136\128 a : Real, \226\136\128 b : Real, has_real_measure(real_interval([(a, b)]), max(b - a, real_of_num(0)))) && (\226\136\128 a : Real, \226\136\128 b : Real, has_real_measure(real_interval((a, b)), max(b - a, real_of_num(0))))
+      #|  (\226\136\128 a : Real, \226\136\128 b : Real, real_measurable(real_interval([(a, b)]))) && (\226\136\128 a : Real, \226\136\128 b : Real, real_measurable(real_interval((a, b))))
+      #|  (\226\136\128 a : Real, \226\136\128 b : Real, real_measure(real_interval([(a, b)])) == max(b - a, real_of_num(0))) && (\226\136\128 a : Real, \226\136\128 b : Real, real_measure(real_interval((a, b))) == max(b - a, real_of_num(0)))
+      #|  (\226\136\128 a : Real, \226\136\128 b : Real, real_measurable(real_segment([(a, b)]))) && (\226\136\128 a : Real, \226\136\128 b : Real, real_measurable(real_segment((a, b))))
+      #|  (\226\136\128 a : Real, \226\136\128 b : Real, real_measure(real_segment([(a, b)])) == abs(b - a)) && (\226\136\128 a : Real, \226\136\128 b : Real, real_measure(real_segment((a, b))) == abs(b - a))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_measurable(s) && real_measurable(t) \226\134\146 real_measurable(INTER(s, t))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_measurable(s) && real_measurable(t) \226\134\146 real_measurable(UNION(s, t))
+      #|  \226\136\128 s1 : (Real) -> Bool, \226\136\128 s2 : (Real) -> Bool, \226\136\128 m1 : Real, \226\136\128 m2 : Real, has_real_measure(s1, m1) && has_real_measure(s2, m2) && DISJOINT(s1, s2) \226\134\146 has_real_measure(UNION(s1, s2), m1 + m2)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_measurable(s) && real_measurable(t) && DISJOINT(s, t) \226\134\146 real_measure(UNION(s, t)) == real_measure(s) + real_measure(t)
+      #|  \226\136\128 m : Real, \226\136\128 s : (Real) -> Bool, has_real_measure(s, m) \226\134\146 real_of_num(0) <= m
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(s) \226\134\146 real_of_num(0) <= real_measure(s)
+      #|  IMAGE(lift, (s2 : (Real) -> Bool))
+      #|  IMAGE(lift, (s1 : (Real) -> Bool))
+      #|  \226\136\128 s1 : (Real) -> Bool, \226\136\128 s2 : (Real) -> Bool, \226\136\128 m1 : Real, \226\136\128 m2 : Real, has_real_measure(s1, m1) && has_real_measure(s2, m2) && SUBSET(s1, s2) \226\134\146 m1 <= m2
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_measurable(s) && real_measurable(t) && SUBSET(s, t) \226\134\146 real_measure(s) <= real_measure(t)
+      #|  \226\136\128 s : (Real) -> Bool, has_real_measure(s, real_of_num(0)) == real_negligible(s)
+      #|  \226\136\128 s : (Real) -> Bool, real_negligible(s) \226\134\146 real_measure(s) == real_of_num(0)
+      #|  has_real_measure({}, real_of_num(0))
+      #|  real_measure({}) == real_of_num(0)
+      #|  real_measurable({})
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(s) \226\134\146 (real_measure(s) == real_of_num(0)) == real_negligible(s)
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(s) \226\134\146 (real_of_num(0) < real_measure(s)) == !real_negligible(s)
+      #|  (\226\136\128 a : Real, \226\136\128 b : Real, real_negligible(real_interval([(a, b)])) == (real_interval((a, b)) == {})) && (\226\136\128 a : Real, \226\136\128 b : Real, real_negligible(real_interval((a, b))) == (real_interval((a, b)) == {}))
+      #|  \226\136\128 f : ((Real) -> Bool) -> Bool, FINITE(f) && (\226\136\128 s : (Real) -> Bool, IN(s, f) \226\134\146 real_measurable(s)) \226\134\146 real_measurable(UNIONS(f))
+      #|  \226\136\128 s1 : (Real) -> Bool, \226\136\128 s2 : (Real) -> Bool, \226\136\128 m1 : Real, \226\136\128 m2 : Real, has_real_measure(s1, m1) && has_real_measure(s2, m2) && SUBSET(s2, s1) \226\134\146 has_real_measure(DIFF(s1, s2), m1 - m2)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_measurable(s) && real_measurable(t) \226\134\146 real_measurable(DIFF(s, t))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_measurable(s) && real_measurable(t) && SUBSET(t, s) \226\134\146 real_measure(DIFF(s, t)) == real_measure(s) - real_measure(t)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 m : Real, has_real_measure(s, m) && real_negligible(t) \226\134\146 has_real_measure(UNION(s, t), m)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 m : Real, has_real_measure(s, m) && real_negligible(t) \226\134\146 has_real_measure(DIFF(s, t), m)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 m : Real, real_negligible(t) \226\134\146 has_real_measure(UNION(s, t), m) == has_real_measure(s, m)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 m : Real, real_negligible(t) \226\134\146 has_real_measure(DIFF(s, t), m) == has_real_measure(s, m)
+      #|  IMAGE(lift, (t : (Real) -> Bool))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 s' : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 m : Real, has_real_measure(s, m) && real_negligible(t) && UNION(s, t) == UNION(s', t) \226\134\146 has_real_measure(s', m)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 s' : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_negligible(t) && UNION(s, t) == UNION(s', t) \226\134\146 has_real_measure(s, (m : Real)) == has_real_measure(s', m)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 s' : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_measurable(s) && real_negligible(t) && UNION(s, t) == UNION(s', t) \226\134\146 real_measurable(s')
+      #|  \226\136\128 s1 : (Real) -> Bool, \226\136\128 s2 : (Real) -> Bool, \226\136\128 m1 : Real, \226\136\128 m2 : Real, has_real_measure(s1, m1) && has_real_measure(s2, m2) && real_negligible(INTER(s1, s2)) \226\134\146 has_real_measure(UNION(s1, s2), m1 + m2)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_measurable(s) && real_measurable(t) && real_negligible(INTER(s, t)) \226\134\146 real_measure(UNION(s, t)) == real_measure(s) + real_measure(t)
+      #|  UNION(DIFF((s : (Real) -> Bool), (t : (Real) -> Bool)), DIFF(t, s))
+      #|  (s : (Real) -> Bool)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 m : Real, has_real_measure(s, m) && real_negligible(UNION(DIFF(s, t), DIFF(t, s))) \226\134\146 has_real_measure(t, m)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_measurable(s) && real_negligible(UNION(DIFF(s, t), DIFF(t, s))) \226\134\146 real_measurable(t)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, (real_measurable(s) || real_measurable(t)) && real_negligible(UNION(DIFF(s, t), DIFF(t, s))) \226\134\146 real_measure(s) == real_measure(t)
+      #|  (f : ((Real) -> Bool) -> Bool)
+      #|  (s : (Real) -> Bool)
+      #|  \226\136\128 m : ((Real) -> Bool) -> Real, \226\136\128 f : ((Real) -> Bool) -> Bool, FINITE(f) && (\226\136\128 s : (Real) -> Bool, IN(s, f) \226\134\146 has_real_measure(s, m(s))) && (\226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, IN(s, f) && IN(t, f) && !(s == t) \226\134\146 real_negligible(INTER(s, t))) \226\134\146 has_real_measure(UNIONS(f), sum(f, m))
+      #|  \226\136\128 m : ((Real) -> Bool) -> Real, \226\136\128 f : ((Real) -> Bool) -> Bool, FINITE(f) && (\226\136\128 s : (Real) -> Bool, IN(s, f) \226\134\146 has_real_measure(s, m(s))) && (\226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, IN(s, f) && IN(t, f) && !(s == t) \226\134\146 real_negligible(INTER(s, t))) \226\134\146 real_measure(UNIONS(f)) == sum(f, m)
+      #|  \226\136\128 m : ((Real) -> Bool) -> Real, \226\136\128 f : ((Real) -> Bool) -> Bool, FINITE(f) && (\226\136\128 s : (Real) -> Bool, IN(s, f) \226\134\146 has_real_measure(s, m(s))) && (\226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, IN(s, f) && IN(t, f) && !(s == t) \226\134\146 DISJOINT(s, t)) \226\134\146 has_real_measure(UNIONS(f), sum(f, m))
+      #|  \226\136\128 m : ((Real) -> Bool) -> Real, \226\136\128 f : ((Real) -> Bool) -> Bool, FINITE(f) && (\226\136\128 s : (Real) -> Bool, IN(s, f) \226\134\146 has_real_measure(s, m(s))) && (\226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, IN(s, f) && IN(t, f) && !(s == t) \226\134\146 DISJOINT(s, t)) \226\134\146 real_measure(UNIONS(f)) == sum(f, m)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (y : A)
+      #|  (x : A)
+      #|  sum((s : (A) -> Bool), (x : A) => real_measure((f : (A, Real) -> Bool)(x))) == sum(IMAGE(f, s), real_measure)
+      #|  \226\136\128 f : (A, Real) -> Bool, \226\136\128 s : (A) -> Bool, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 real_measurable(f(x))) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && !(x == y) \226\134\146 real_negligible(INTER(f(x), f(y)))) \226\134\146 has_real_measure(UNIONS(IMAGE(f, s)), sum(s, (x : A) => real_measure(f(x))))
+      #|  \226\136\128 f : (A, Real) -> Bool, \226\136\128 s : (A) -> Bool, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 real_measurable(f(x))) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && !(x == y) \226\134\146 real_negligible(INTER(f(x), f(y)))) \226\134\146 real_measure(UNIONS(IMAGE(f, s))) == sum(s, (x : A) => real_measure(f(x)))
+      #|  \226\136\128 f : (A, Real) -> Bool, \226\136\128 s : (A) -> Bool, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 real_measurable(f(x))) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && !(x == y) \226\134\146 DISJOINT(f(x), f(y))) \226\134\146 has_real_measure(UNIONS(IMAGE(f, s)), sum(s, (x : A) => real_measure(f(x))))
+      #|  \226\136\128 f : (A, Real) -> Bool, \226\136\128 s : (A) -> Bool, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 real_measurable(f(x))) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && !(x == y) \226\134\146 DISJOINT(f(x), f(y))) \226\134\146 real_measure(UNIONS(IMAGE(f, s))) == sum(s, (x : A) => real_measure(f(x)))
+      #|  ((a : Bool) && !(a && (b : Bool))) == (a && !b)
+      #|  {(x : A) | IN(x, (s : (A) -> Bool)) && !((f : (A, Real) -> Bool)(x) == {})}
+      #|  (f : (A, Real) -> Bool)
+      #|  \226\136\128 f : (A, Real) -> Bool, \226\136\128 s : (A) -> Bool, FINITE({(x : A) | IN(x, s) && !(f(x) == {})}) && (\226\136\128 x : A, IN(x, s) \226\134\146 real_measurable(f(x))) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && !(x == y) \226\134\146 real_negligible(INTER(f(x), f(y)))) \226\134\146 has_real_measure(UNIONS(IMAGE(f, s)), sum(s, (x : A) => real_measure(f(x))))
+      #|  \226\136\128 f : (A, Real) -> Bool, \226\136\128 s : (A) -> Bool, FINITE({(x : A) | IN(x, s) && !(f(x) == {})}) && (\226\136\128 x : A, IN(x, s) \226\134\146 real_measurable(f(x))) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && !(x == y) \226\134\146 real_negligible(INTER(f(x), f(y)))) \226\134\146 real_measure(UNIONS(IMAGE(f, s))) == sum(s, (x : A) => real_measure(f(x)))
+      #|  \226\136\128 f : (A, Real) -> Bool, \226\136\128 s : (A) -> Bool, FINITE({(x : A) | IN(x, s) && !(f(x) == {})}) && (\226\136\128 x : A, IN(x, s) \226\134\146 real_measurable(f(x))) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && !(x == y) \226\134\146 DISJOINT(f(x), f(y))) \226\134\146 has_real_measure(UNIONS(IMAGE(f, s)), sum(s, (x : A) => real_measure(f(x))))
+      #|  \226\136\128 f : (A, Real) -> Bool, \226\136\128 s : (A) -> Bool, FINITE({(x : A) | IN(x, s) && !(f(x) == {})}) && (\226\136\128 x : A, IN(x, s) \226\134\146 real_measurable(f(x))) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && !(x == y) \226\134\146 DISJOINT(f(x), f(y))) \226\134\146 real_measure(UNIONS(IMAGE(f, s))) == sum(s, (x : A) => real_measure(f(x)))
+      #|  real_measure(UNION(DIFF((t : (Real) -> Bool), (s : (Real) -> Bool)), INTER(s, t)))
+      #|  real_measure(UNION(DIFF((s : (Real) -> Bool), (t : (Real) -> Bool)), INTER(s, t)))
+      #|  UNION(DIFF((s : (Real) -> Bool), (t : (Real) -> Bool)), DIFF(t, s))
+      #|  INTER((s : (Real) -> Bool), (t : (Real) -> Bool))
+      #|  DIFF((t : (Real) -> Bool), (s : (Real) -> Bool))
+      #|  DIFF((s : (Real) -> Bool), (t : (Real) -> Bool))
+      #|  (a : Real) + ((b : Real) - (c : Real)) == c + (a - c + (b - c))
+      #|  UNION((s : (_) -> Bool), (t : (_) -> Bool)) == UNION(INTER(s, t), UNION(DIFF(s, t), DIFF(t, s)))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_measurable(s) && real_measurable(t) \226\134\146 real_measure(UNION(s, t)) == real_measure(s) + (real_measure(t) - real_measure(INTER(s, t)))
+      #|  ((a : Real) + ((b : Real) - (c : Real)) <= a + b) == (real_of_num(0) <= c)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_measurable(s) && real_measurable(t) \226\134\146 real_measure(UNION(s, t)) <= real_measure(s) + real_measure(t)
+      #|  real_measure((s : (Real) -> Bool)) + real_measure(UNIONS((f : ((Real) -> Bool) -> Bool)))
+      #|  (f : ((Real) -> Bool) -> Bool)
+      #|  (s : (Real) -> Bool)
+      #|  \226\136\128 f : ((Real) -> Bool) -> Bool, FINITE(f) && (\226\136\128 s : (Real) -> Bool, IN(s, f) \226\134\146 real_measurable(s)) \226\134\146 real_measure(UNIONS(f)) <= sum(f, (s : (Real) -> Bool) => real_measure(s))
+      #|  sum(IMAGE((s : (A, Real) -> Bool), (f : (A) -> Bool)), (k : (Real) -> Bool) => real_measure(k))
+      #|  \226\136\128 f : (A) -> Bool, \226\136\128 s : (A, Real) -> Bool, FINITE(f) && (\226\136\128 a : A, IN(a, f) \226\134\146 real_measurable(s(a))) \226\134\146 real_measure(UNIONS(IMAGE(s, f))) <= sum(f, (a : A) => real_measure(s(a)))
+      #|  \226\136\128 s : (Real) -> Bool, real_negligible(s) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 t : (Real) -> Bool, SUBSET(s, t) && real_measurable(t) && real_measure(t) < e))
+      #|  \226\136\128 s : (Real) -> Bool, real_negligible(s) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 t : (Real) -> Bool, SUBSET(s, t) && real_measurable(t) && real_measure(t) <= e))
+      #|  real_measure((u : (Real) -> Bool))
+      #|  real_measure((t : (Real) -> Bool))
+      #|  (x : Real) => if IN(x, (u : (Real) -> Bool)) { real_of_num(1) } else { real_of_num(0) }
+      #|  (x : Real) => if IN(x, (t : (Real) -> Bool)) { real_of_num(1) } else { real_of_num(0) }
+      #|  (u : (Real) -> Bool)
+      #|  (t : (Real) -> Bool)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (s : (Real) -> Bool)
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(s) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 t : (Real) -> Bool, \226\136\131 u : (Real) -> Bool, SUBSET(t, s) && SUBSET(s, u) && real_measurable(t) && real_measurable(u) && abs(real_measure(t) - real_measure(u)) < e))
+      #|  (m : Real) - real_measure((s : (Real) -> Bool))
+      #|  real_measure((s : (Real) -> Bool)) - (m : Real)
+      #|  !(real_of_num(0) < (x : Real) - (y : Real)) && !(real_of_num(0) < y - x) \226\134\146 x == y
+      #|  real_of_num(0) < (e : Real) && (t : Real) <= (u : Real) && (m : Real) - e / real_of_num(2) < t && u < m + e / real_of_num(2) \226\134\146 abs(t - u) < e
+      #|  (e : Real) / real_of_num(2)
+      #|  (e : Real) / real_of_num(2)
+      #|  (e : Real)
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  (s : (Real) -> Bool)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 m : Real, has_real_measure(s, m) == ((\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 t : (Real) -> Bool, SUBSET(t, s) && real_measurable(t) && m - e < real_measure(t))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 u : (Real) -> Bool, SUBSET(s, u) && real_measurable(u) && real_measure(u) < m + e)))
+      #|  (real_of_num(0) < (e : Real)) == (real_of_num(0) < e / real_of_num(2))
+      #|  real_of_num(0) < (e : Real) && (u : Real) <= (m : Real) + e / real_of_num(2) \226\134\146 u < m + e
+      #|  real_of_num(0) < (e : Real) && (m : Real) - e / real_of_num(2) <= (t : Real) \226\134\146 m - e < t
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 m : Real, has_real_measure(s, m) == ((\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 t : (Real) -> Bool, SUBSET(t, s) && real_measurable(t) && m - e <= real_measure(t))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 u : (Real) -> Bool, SUBSET(s, u) && real_measurable(u) && real_measure(u) <= m + e)))
+      #|  lift((c : Real))
+      #|  (m : Real)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 m : Real, \226\136\128 c : Real, \226\136\128 y : Real, has_real_measure(s, y) \226\134\146 has_real_measure(IMAGE((x : Real) => m * x + c, s), abs(m) * y)
+      #|  abs((m : Real)) * (x : Real) + real_of_num(0) == abs(m) * x
+      #|  (m : Real) * (x : Real) == m * x + real_of_num(0)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 m : Real, \226\136\128 y : Real, has_real_measure(s, y) \226\134\146 has_real_measure(IMAGE((x : Real) => m * x, s), abs(m) * y)
+      #|  (m : Real) == abs(real_of_num(1)) * m
+      #|  (a : Real) + (x : Real) == real_of_num(1) * x + a
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 m : Real, \226\136\128 a : Real, has_real_measure(s, m) \226\134\146 has_real_measure(IMAGE((x : Real) => a + x, s), m)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, real_negligible(s) \226\134\146 real_negligible(IMAGE((x : Real) => a + x, s))
+      #|  -(a : Real) + (a + (b : Real)) == b
+      #|  -(a : Real)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 m : Real, has_real_measure(IMAGE((x : Real) => (a : Real) + x, s), m) == has_real_measure(s, m)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, real_negligible(IMAGE((x : Real) => a + x, s)) \226\134\146 real_negligible(s)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, real_negligible(IMAGE((x : Real) => a + x, s)) == real_negligible(s)
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(IMAGE((x : Real) => (a : Real) + x, s)) == real_measurable(s)
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(s) \226\134\146 real_measure(IMAGE((x : Real) => (a : Real) + x, s)) == real_measure(s)
+      #|  inv((c : Real))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 m : Real, \226\136\128 c : Real, !(c == real_of_num(0)) \226\134\146 has_real_measure(IMAGE((x : Real) => c * x, s), abs(c) * m) == has_real_measure(s, m)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, real_measurable(s) \226\134\146 real_measurable(IMAGE((x : Real) => c * x, s))
+      #|  inv((c : Real))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, !(c == real_of_num(0)) \226\134\146 real_measurable(IMAGE((x : Real) => c * x, s)) == real_measurable(s)
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(s) \226\134\146 real_measure(IMAGE((x : Real) => (c : Real) * x, s)) == abs(c) * real_measure(s)
+      #|  {IMAGE((f : (_) -> _), (s : (_, _) -> Bool)((n : _))) | (P : (_) -> Bool)(n)} == IMAGE(IMAGE(f), {s((n : _)) | P(n)})
+      #|  (B : Real)
+      #|  o(IMAGE(lift), (s : (Num, Real) -> Bool))
+      #|  \226\136\128 s : (Num, Real) -> Bool, \226\136\128 B : Real, (\226\136\128 n : Num, real_measurable(s(n))) && (\226\136\128 n : Num, real_measure(s(n)) <= B) && (\226\136\128 n : Num, SUBSET(s(n), s(SUC(n)))) \226\134\146 real_measurable(UNIONS({s((n : Num)) | IN(n, UNIV)})) && op_minus_minus_minus_gt((n : Num) => real_measure(s(n)), real_measure(UNIONS({s((n : Num)) | IN(n, UNIV)})), sequentially)
+      #|  \226\136\128 s : (Num, Real) -> Bool, \226\136\128 B : Real, (\226\136\128 n : Num, real_measurable(s(n))) && (\226\136\128 n : Num, real_measure(s(n)) <= B) && (\226\136\128 n : Num, SUBSET(s(n), s(SUC(n)))) \226\134\146 real_measurable(UNIONS({s((n : Num)) | IN(n, UNIV)}))
+      #|  (x : Real)
+      #|  UNIONS({UNIONS(IMAGE((s : (Num, Real) -> Bool), op_dot_dot(0, (n : Num)))) | IN(n, UNIV)}) == UNIONS(IMAGE(s, UNIV))
+      #|  \226\136\128 n : Num, has_real_measure(UNIONS(IMAGE((s : (Num, Real) -> Bool), op_dot_dot(0, n))), sum(op_dot_dot(0, n), (k : Num) => real_measure(s(k))))
+      #|  (B : Real)
+      #|  (n : Num) => UNIONS(IMAGE((s : (Num, Real) -> Bool), op_dot_dot(0, n)))
+      #|  \226\136\128 s : (Num, Real) -> Bool, \226\136\128 B : Real, (\226\136\128 n : Num, real_measurable(s(n))) && (\226\136\128 m : Num, \226\136\128 n : Num, !(m == n) \226\134\146 real_negligible(INTER(s(m), s(n)))) && (\226\136\128 n : Num, sum(op_dot_dot(0, n), (k : Num) => real_measure(s(k))) <= B) \226\134\146 real_measurable(UNIONS({s((n : Num)) | IN(n, UNIV)})) && real_sums((n : Num) => real_measure(s(n)), real_measure(UNIONS({s((n : Num)) | IN(n, UNIV)})), from(0))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  from(0)
+      #|  (k : Num) => real_of_num(0)
+      #|  real_of_num(0)
+      #|  (s : (Num, Real) -> Bool)
+      #|  \226\136\128 s : (Num, Real) -> Bool, (\226\136\128 n : Num, real_negligible(s(n))) \226\134\146 real_negligible(UNIONS({s((n : Num)) | IN(n, UNIV)}))
+      #|  (x : Real)
+      #|  UNIONS({UNIONS(IMAGE((s : (Num, Real) -> Bool), op_dot_dot(0, (n : Num)))) | IN(n, UNIV)}) == UNIONS(IMAGE(s, UNIV))
+      #|  (B : Real)
+      #|  (n : Num) => UNIONS(IMAGE((s : (Num, Real) -> Bool), op_dot_dot(0, n)))
+      #|  \226\136\128 s : (Num, Real) -> Bool, \226\136\128 B : Real, (\226\136\128 n : Num, real_measurable(s(n))) && (\226\136\128 n : Num, real_measure(UNIONS({s((k : Num)) | k <= n})) <= B) \226\134\146 real_measurable(UNIONS({s((n : Num)) | IN(n, UNIV)}))
+      #|  {IMAGE((f : (_) -> _), (s : (_, _) -> Bool)((n : _))) | (P : (_) -> Bool)(n)} == IMAGE(IMAGE(f), {s((n : _)) | P(n)})
+      #|  o(IMAGE(lift), (s : (Num, Real) -> Bool))
+      #|  \226\136\128 s : (Num, Real) -> Bool, (\226\136\128 n : Num, real_measurable(s(n))) && (\226\136\128 m : Num, \226\136\128 n : Num, !(m == n) \226\134\146 real_negligible(INTER(s(m), s(n)))) && real_bounded(UNIONS({s((n : Num)) | IN(n, UNIV)})) \226\134\146 real_measurable(UNIONS({s((n : Num)) | IN(n, UNIV)})) && real_sums((n : Num) => real_measure(s(n)), real_measure(UNIONS({s((n : Num)) | IN(n, UNIV)})), from(0))
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_measure((s : (Num, Real) -> Bool)(k)))
+      #|  (n : Num)
+      #|  (B : Real)
+      #|  \226\136\128 s : (Num, Real) -> Bool, \226\136\128 B : Real, (\226\136\128 n : Num, real_measurable(s(n))) && (\226\136\128 n : Num, sum(op_dot_dot(0, n), (k : Num) => real_measure(s(k))) <= B) \226\134\146 real_measurable(UNIONS({s((n : Num)) | IN(n, UNIV)}))
+      #|  IMAGE((f : (_) -> _), {(g : (_) -> _)((x : _)) | IN(x, (s : (_) -> Bool))}) == {f(g((x : _))) | IN(x, s)}
+      #|  \226\136\128 s : (Num, Real) -> Bool, (\226\136\128 n : Num, real_measurable(s(n))) && real_bounded(UNIONS({s((n : Num)) | IN(n, UNIV)})) \226\134\146 real_measurable(UNIONS({s((n : Num)) | IN(n, UNIV)}))
+      #|  real_measure((s : (Num, Real) -> Bool)(0))
+      #|  INTERS({(s : (Num, Real) -> Bool)((n : Num)) | IN(n, UNIV)}) == DIFF(s(0), UNIONS({DIFF(s(0), s((n : Num))) | IN(n, UNIV)}))
+      #|  \226\136\128 s : (Num, Real) -> Bool, (\226\136\128 n : Num, real_measurable(s(n))) \226\134\146 real_measurable(INTERS({s((n : Num)) | IN(n, UNIV)}))
+      #|  \226\136\128 s : (Real) -> Bool, COUNTABLE(s) \226\134\146 real_negligible(s)
+      #|  \226\136\128 s : (Real) -> Bool, real_compact(s) \226\134\146 real_measurable(s)
+      #|  \226\136\128 s : (Real) -> Bool, real_bounded(s) && real_open(s) \226\134\146 real_measurable(s)
+      #|  (n : Num) - 1
+      #|  (n : Num)
+      #|  (x : Real)
+      #|  real_of_num(0) == (real_of_num((n : Num)) + real_of_num(1)) * real_of_num(0)
+      #|  real_of_num(0) <= (x : Real) && (a : Real) <= abs(x) \226\134\146 a <= x
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+      #|  (x : Real)
+      #|  (x : Real) => if IN(x, (s : (Real) -> Bool)) { (real_of_num((n : Num)) + real_of_num(1)) * (f : (Real) -> Real)(x) } else { real_of_num(0) }
+      #|  (n : Num)
       #|  UNIONS {{x:real | x IN s /\\ abs(f x) >= &1 / (&n + &1)} |\n            n IN (:num)}
-      #|  {x | x IN s /\\ ~((f:real->real) x = &0)}
-      #|  forall f s. (forall x. x IN s ==> &0 <= f(x))\n         ==> ((f has_real_integral &0) s <=>\n              real_negligible {x | x IN s /\\ ~(f x = &0)})
-      #|  (lambda i. (z:real^2)$i):real^(1,1)finite_sum
-      #|  z:real^2
-      #|  (\\x. lambda i. x$i):real^(1,1)finite_sum->real^2
-      #|  m:real
-      #|  lift o f o drop
-      #|  forall f m. (forall x. &0 <= f x)\n         ==> ((f has_real_integral m) (:real) <=>\n              {z:real^2 | &0 <= z$2 /\\ z$2 <= f(z$1)} has_measure m)
-      #|  {z:real^2 | z$2 = &0}
-      #|  m:real
-      #|  \\x. if x IN s then (f:real->real) x else &0
-      #|  forall f s m.\n      (forall x. x IN s ==> &0 <= f x)\n      ==> ((f has_real_integral m) s <=>\n           {z:real^2 | z$1 IN s /\\ &0 <= z$2 /\\ z$2 <= f(z$1)} has_measure m)
-      #|  b - a - (b - a - y):real = y
-      #|  b:real
-      #|  a:real
-      #|  c:real->bool
-      #|  \\x. (f:real->real)(x) * g'(x) + f'(x) * g(x)
-      #|  \\x. (f:real->real)(x) * g(x)
-      #|  forall f g f' g' a b c.\n        a <= b /\\ COUNTABLE c /\\\n        (\\x. f x * g x) real_continuous_on real_interval[a,b] /\\\n        (forall x. x IN real_interval(a,b) DIFF c\n             ==> (f has_real_derivative f'(x)) (atreal x) /\\\n                 (g has_real_derivative g'(x)) (atreal x)) /\\\n        ((\\x. f(x) * g'(x)) has_real_integral ((f b * g b - f a * g a) - y))\n            (real_interval[a,b])\n        ==> ((\\x. f'(x) * g(x)) has_real_integral y) (real_interval[a,b])
-      #|  b - a - (b - a - y):real = y
-      #|  b:real
-      #|  a:real
-      #|  \\x. (f:real->real)(x) * g'(x) + f'(x) * g(x)
-      #|  \\x. (f:real->real)(x) * g(x)
-      #|  forall f g f' g' a b.\n        a <= b /\\\n        (forall x. x IN real_interval[a,b]\n             ==> (f has_real_derivative f'(x))\n                    (atreal x within real_interval[a,b]) /\\\n                 (g has_real_derivative g'(x))\n                    (atreal x within real_interval[a,b])) /\\\n        ((\\x. f(x) * g'(x)) has_real_integral ((f b * g b - f a * g a) - y))\n            (real_interval[a,b])\n        ==> ((\\x. f'(x) * g(x)) has_real_integral y) (real_interval[a,b])
-      #|  b - a - ((b - a) - y):real = y
-      #|  c:real->bool
-      #|  g':real->real
-      #|  f:real->real
-      #|  ((f:real->real) b * g b - f a * g a) - y
-      #|  y:real
-      #|  b <= a \\/ a <= b
-      #|  forall f g f' g' a b c.\n        COUNTABLE c /\\\n        (\\x. f x * g x) real_continuous_on real_interval[a,b] /\\\n        (forall x. x IN real_interval(a,b) DIFF c\n             ==> (f has_real_derivative f'(x)) (atreal x) /\\\n                 (g has_real_derivative g'(x)) (atreal x)) /\\\n        (\\x. f(x) * g'(x)) real_integrable_on real_interval[a,b]\n        ==> (\\x. f'(x) * g(x)) real_integrable_on real_interval[a,b]
-      #|  forall f g f' g' a b c.\n        COUNTABLE c /\\\n        (\\x. f x * g x) real_continuous_on real_interval[a,b] /\\\n        (forall x. x IN real_interval(a,b) DIFF c\n             ==> (f has_real_derivative f'(x)) (atreal x) /\\\n                 (g has_real_derivative g'(x)) (atreal x))\n        ==> ((\\x. f(x) * g'(x)) real_integrable_on real_interval[a,b] <=>\n             (\\x. f'(x) * g(x)) real_integrable_on real_interval[a,b])
-      #|  bilinear (\\x y. lift(drop x * drop y))
-      #|  forall f  g f' g' a b.\n        a <= b /\\\n        f' absolutely_real_integrable_on real_interval[a,b] /\\\n        g' absolutely_real_integrable_on real_interval[a,b] /\\\n        (forall x. x IN real_interval[a,b]\n             ==> (f' has_real_integral f(x)) (real_interval[a,x])) /\\\n        (forall x. x IN real_interval[a,b]\n             ==> (g' has_real_integral g(x)) (real_interval[a,x]))\n        ==> (\\x. f x * g' x) absolutely_real_integrable_on\n                real_interval[a,b] /\\\n            (\\x. f' x * g x) absolutely_real_integrable_on\n                real_interval[a,b] /\\\n            real_integral (real_interval[a,b]) (\\x. f x * g' x) +\n            real_integral (real_interval[a,b]) (\\x. f' x * g x) =\n            f b * g b - f a * g a
-      #|  bilinear (\\x y. lift(drop x * drop y))
-      #|  forall f g f' g' a b.\n        a <= b /\\\n        (f' absolutely_real_integrable_on real_interval[a,b] /\\\n         forall x. x IN real_interval[a,b]\n             ==> (f' has_real_integral f(x) - f(a)) (real_interval[a,x])) /\\\n        (g' absolutely_real_integrable_on real_interval[a,b] /\\\n         forall x. x IN real_interval[a,b]\n             ==> (g' has_real_integral g(x) - g(a)) (real_interval[a,x]))\n        ==> (\\x. f x * g' x +  f' x * g x) absolutely_real_integrable_on\n            real_interval[a,b] /\\\n            forall x. x IN real_interval[a,b]\n             ==> ((\\x. f x * g' x +  f' x * g x) has_real_integral\n                  (f x * g x - f a * g a)) (real_interval[a,x])
-      #|  forall f a b.\n        (forall c d. real_interval[c,d] SUBSET real_interval(a,b)\n               ==> f absolutely_real_integrable_on real_interval[c,d]) /\\\n        real_bounded { real_integral (real_interval[c,d]) (\\x. abs(f x)) |\n                       real_interval[c,d] SUBSET real_interval(a,b)}\n        ==> f absolutely_real_integrable_on real_interval[a,b]
-      #|  z + w:real = y ==> y - z = w
-      #|  real_interval(a,b)
-      #|  (g:real->real) x
-      #|  d:real
-      #|  c:real
-      #|  f:real->real
-      #|  (ff o g has_real_derivative f (g x:real) * g' x)\n                    (atreal x within real_interval[a,b])
-      #|  x:real
-      #|  real_interval [c,d]
-      #|  b:real
-      #|  a:real
-      #|  k:real->bool
-      #|  \\x:real. (f:real->real)(g x) * g'(x)
-      #|  (ff:real->real) o (g:real->real)
-      #|  ff = \\x. real_integral (real_interval[c,x]) f
-      #|  forall f g g' a b c d k.\n        COUNTABLE k /\\\n        f real_integrable_on real_interval[c,d] /\\\n        g real_continuous_on real_interval[a,b] /\\\n        IMAGE g (real_interval[a,b]) SUBSET real_interval[c,d] /\\\n        (forall x. x IN real_interval[a,b] DIFF k\n                  ==> (g has_real_derivative g'(x))\n                       (atreal x within real_interval[a,b]) /\\\n                      f real_continuous\n                        (atreal(g x)) within real_interval[c,d]) /\\\n        a <= b /\\ c <= d /\\ g a <= g b\n        ==> ((\\x. f(g x) * g'(x)) has_real_integral\n             real_integral (real_interval[g a,g b]) f) (real_interval[a,b])
-      #|  (g:real->real) x
-      #|  (h o (g:real->real) has_real_derivative f(g x) * g' x)\n        (atreal x within real_interval[a,b])
-      #|  x:real
-      #|  (c <= ga /\\ ga <= d) /\\ (c <= gb /\\ gb <= d) /\\ ga <= gb\n      ==> c <= ga /\\ ga <= gb /\\ gb <= d
-      #|  x IN s ==> s SUBSET t ==> x IN t
-      #|  x:real
-      #|  x:real
-      #|  (g:real->real) b
-      #|  (g:real->real) a
-      #|  f:real->real
-      #|  h:real->real
-      #|  b:real
-      #|  a:real
-      #|  k:real->bool
-      #|  \\x:real. (f:real->real)(g x) * g' x
-      #|  (h:real->real) o (g:real->real)
-      #|  h = \\u. real_integral (real_interval[c,u]) f
-      #|  d:real
-      #|  c:real
-      #|  f:real->real
-      #|  forall f g g' a b c d k.\n        COUNTABLE k /\\\n        f real_continuous_on real_interval[c,d] /\\\n        g real_continuous_on real_interval[a,b] /\\\n        IMAGE g (real_interval[a,b]) SUBSET real_interval[c,d] /\\\n        (forall x. x IN real_interval[a,b] DIFF k\n                  ==> (g has_real_derivative g'(x)) (atreal x)) /\\\n        a <= b /\\ c <= d /\\ g a <= g b\n        ==> ((\\x. f(g x) * g'(x)) has_real_integral\n             real_integral (real_interval[g a,g b]) f) (real_interval[a,b])
-      #|  forall f g g' a b c d k.\n        COUNTABLE k /\\\n        f real_continuous_on real_interval[c,d] /\\\n        g real_continuous_on real_interval[a,b] /\\\n        IMAGE g (real_interval[a,b]) SUBSET real_interval[c,d] /\\\n        (forall x. x IN real_interval[a,b] DIFF k\n                  ==> (g has_real_derivative g'(x)) (atreal x)) /\\\n        a <= b /\\ c <= d /\\ g a <= g b\n        ==> real_integral (real_interval[a,b]) (\\x. f(g x) * g'(x)) =\n            real_integral (real_interval[g a,g b]) f
-      #|  (g:real->real) x
-      #|  x:real
-      #|  (c <= ga /\\ ga <= d) /\\ (c <= gb /\\ gb <= d) /\\ ga <= gb\n      ==> c <= ga /\\ ga <= gb /\\ gb <= d
-      #|  x IN s ==> s SUBSET t ==> x IN t
-      #|  x:real
-      #|  x:real
-      #|  (g:real->real) b
-      #|  (g:real->real) a
-      #|  f:real->real
-      #|  h:real->real
-      #|  b:real
-      #|  a:real
-      #|  \\x:real. (f:real->real)(g x) * g' x
-      #|  (h:real->real) o (g:real->real)
-      #|  h = \\u. real_integral (real_interval[c,u]) f
-      #|  forall f g g' a b c d.\n        f real_continuous_on real_interval[c,d] /\\\n        (forall x. x IN real_interval[a,b]\n                  ==> (g has_real_derivative g'(x))\n                      (atreal x within real_interval[a,b])) /\\\n        IMAGE g (real_interval[a,b]) SUBSET real_interval[c,d] /\\\n        a <= b /\\ c <= d /\\ g a <= g b\n        ==> ((\\x. f(g x) * g'(x)) has_real_integral\n             real_integral (real_interval[g a,g b]) f) (real_interval[a,b])
-      #|  forall f g g' a b c d.\n        f real_continuous_on real_interval[c,d] /\\\n        (forall x. x IN real_interval[a,b]\n                  ==> (g has_real_derivative g'(x))\n                      (atreal x within real_interval[a,b])) /\\\n        IMAGE g (real_interval[a,b]) SUBSET real_interval[c,d] /\\\n        a <= b /\\ c <= d /\\ g a <= g b\n        ==> real_integral (real_interval[a,b]) (\\x. f(g x) * g'(x)) =\n            real_integral (real_interval[g a,g b]) f
-      #|  slice k t s = IMAGE (dropout k) (s INTER {x | x$k = t})
-      #|  forall s:real^N->bool y:real^M.\n        dimindex(:M) + 1 = dimindex(:N) /\\ 1 <= k /\\ k <= dimindex(:N)\n        ==> (y IN slice k t s <=> pushin k t y IN s)
-      #|  i:num
-      #|  i:num
-      #|  x:real^N
-      #|  forall k t a b:real^N.\n        1 <= k /\\ k <= dimindex(:N)\n        ==> interval[a,b] INTER {x | x$k = t} =\n                if a$k <= t /\\ t <= b$k\n                then interval[(lambda i. if i = k then t else a$i),\n                              (lambda i. if i = k then t else b$i)]\n                else {}
-      #|  1 <= i + 1
-      #|  forall i. i <= dimindex(:M) ==> i <= dimindex(:N) /\\ i + 1 <= dimindex(:N)
-      #|  a = a' /\\ b = b' ==> interval[a,b] = interval[a',b']
-      #|  forall k a b t. dimindex(:M) + 1 = dimindex(:N) /\\\n             1 <= k /\\ k <= dimindex(:N)\n             ==> slice k t (interval[a,b]) =\n                 if a$k <= t /\\ t <= b$k\n                 then interval[(dropout k:real^N->real^M) a,dropout k b]\n                 else {}
-      #|  (forall x y. x IN a /\\ y IN a /\\ f x = f y ==> x = y)\n    ==> IMAGE f ((s INTER a) DIFF (t INTER a)) =\n        IMAGE f (s INTER a) DIFF IMAGE f (t INTER a)
-      #|  (s DIFF t) INTER u = (s INTER u) DIFF (t INTER u)
-      #|  forall k a s t.\n        dimindex(:M) + 1 = dimindex(:N) /\\ 1 <= k /\\ k <= dimindex(:N)\n        ==> (slice k a:(real^N->bool)->(real^M->bool)) (s DIFF t) =\n             (slice k a s) DIFF (slice k a t)
-      #|  (pushin k a:real^M->real^N) y
-      #|  y:real^M
-      #|  forall k a. dimindex(:M) + 1 = dimindex(:N) /\\ 1 <= k /\\ k <= dimindex(:N)\n        ==> slice k a (:real^N) = (:real^M)
-      #|  forall k a. slice k a {} = {}
-      #|  forall s t k a. s SUBSET t ==> slice k a s SUBSET slice k a t
-      #|  forall s k a. slice k a (UNIONS s) = UNIONS (IMAGE (slice k a) s)
-      #|  (s UNION t) INTER u = (s INTER u) UNION (t INTER u)
-      #|  forall k a s t.\n        dimindex(:M) + 1 = dimindex(:N) /\\ 1 <= k /\\ k <= dimindex(:N)\n        ==> (slice k a:(real^N->bool)->(real^M->bool)) (s UNION t) =\n             (slice k a s) UNION (slice k a t)
-      #|  (forall x y. x IN u /\\ y IN u /\\ f x = f y ==> x = y)\n     ==> IMAGE f ((s INTER t) INTER u) =\n         IMAGE f (s INTER u) INTER IMAGE f (t INTER u)
-      #|  forall k a s t.\n        dimindex(:M) + 1 = dimindex(:N) /\\ 1 <= k /\\ k <= dimindex(:N)\n        ==> (slice k a:(real^N->bool)->(real^M->bool)) (s INTER t) =\n             (slice k a s) INTER (slice k a t)
-      #|  forall k t s. dimindex(:M) < dimindex(:N) /\\ convex s\n           ==> convex((slice k t:(real^N->bool)->(real^M->bool)) s)
-      #|  forall k t s. dimindex(:M) < dimindex(:N) /\\ compact s\n           ==> compact((slice k t:(real^N->bool)->(real^M->bool)) s)
-      #|  k:num
-      #|  IMAGE f t SUBSET u ==> IMAGE f (s INTER t) SUBSET u
-      #|  x - t % b:real^N = --(t % b) + x
-      #|  m + 1 = n ==> m < n
-      #|  {x:real^N | x$k = &0}
-      #|  ~(i < k) ==> ~(i + 1 = k)
-      #|  i:num < k ==> ~(i = k)
-      #|  1 <= i + 1
-      #|  forall i. i <= dimindex(:M) ==> i <= dimindex(:N) /\\ i + 1 <= dimindex(:N)
-      #|  closed(IMAGE (dropout k:real^N->real^M)\n                 (IMAGE (\\x. x - t % basis k)\n                        (s INTER {x | x$k = t})))
-      #|  forall k t s. dimindex(:M) + 1 = dimindex(:N) /\\ 1 <= k /\\ k <= dimindex(:N) /\\\n           closed s\n           ==> closed((slice k t:(real^N->bool)->(real^M->bool)) s)
-      #|  closed(slice k t ((:real^N) DIFF s):real^M->bool)
-      #|  forall k t s. dimindex(:M) + 1 = dimindex(:N) /\\ 1 <= k /\\ k <= dimindex(:N) /\\\n           open s\n           ==> open((slice k t:(real^N->bool)->(real^M->bool)) s)
-      #|  (slice k t:(real^N->bool)->(real^M->bool)) (interval[a,b])
-      #|  b:real^N
-      #|  a:real^N
-      #|  forall k t s. dimindex(:M) + 1 = dimindex(:N) /\\ 1 <= k /\\ k <= dimindex(:N) /\\\n           bounded s\n           ==> bounded((slice k t:(real^N->bool)->(real^M->bool)) s)
-      #|  y:real^M = dropout k (pushin k t y:real^N)
-      #|  a = t * k + b\n      ==> (xx + (yy + t * t) - &2 * a <= r pow 2 <=>\n           xx - k * k + yy - &2 * b <= r pow 2 - (t - k) pow 2)
-      #|  (x - y:real^N) dot (x - y) = x dot x + y dot y - &2 * x dot y
-      #|  abs(x) <= r ==> abs(x) <= abs(r)
-      #|  y:real^M
-      #|  abs(x) <= r ==> &0 <= r
-      #|  ~(a <= r) ==> a <= b ==> b <= r ==> F
-      #|  y:real^N
-      #|  forall k t x r.\n        dimindex(:M) + 1 = dimindex(:N) /\\ 1 <= k /\\ k <= dimindex(:N)\n        ==> (slice k t:(real^N->bool)->(real^M->bool)) (cball(x,r)) =\n                if abs(t - x$k) <= r\n                then cball(dropout k x,sqrt(r pow 2 - (t - x$k) pow 2))\n                else {}
-      #|  y:real^M = dropout k (pushin k t y:real^N)
-      #|  a = t * k + b\n      ==> (xx + (yy + t * t) - &2 * a < r pow 2 <=>\n           xx - k * k + yy - &2 * b < r pow 2 - (t - k) pow 2)
-      #|  (x - y:real^N) dot (x - y) = x dot x + y dot y - &2 * x dot y
-      #|  abs(x) < r ==> abs(x) < abs(r)
-      #|  y:real^M
-      #|  abs(x) < r ==> &0 < r
-      #|  ~(a < r) ==> a <= b ==> b < r ==> F
-      #|  y:real^N
-      #|  forall k t x r.\n        dimindex(:M) + 1 = dimindex(:N) /\\ 1 <= k /\\ k <= dimindex(:N)\n        ==> (slice k t:(real^N->bool)->(real^M->bool)) (ball(x,r)) =\n                if abs(t - x$k) < r\n                then ball(dropout k x,sqrt(r pow 2 - (t - x$k) pow 2))\n                else {}
-      #|  DISJOINT s t <=> forall x. ~(x IN s /\\ x IN t)
-      #|  DISJOINT s (IMAGE f t) <=> forall x. x IN t ==> ~(f x IN s)
-      #|  dimindex(:M)
-      #|  k - 1
+      #|  {(x : Real) | IN(x, (s : (Real) -> Bool)) && !((f : (Real) -> Real)(x) == real_of_num(0))}
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 real_of_num(0) <= f(x)) \226\134\146 has_real_integral(f, real_of_num(0), s) == real_negligible({(x : Real) | IN(x, s) && !(f(x) == real_of_num(0))})
+      #|  (lambda : ((Num) -> Real) -> Cart[Real, Finite_sum[Unit, Unit]])((i : Num) => (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)((z : Cart[Real, Tybit0[Unit]]), i))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Finite_sum[Unit, Unit]]) => (lambda : ((Num) -> Real) -> Cart[Real, Tybit0[Unit]])((i : Num) => (op_dollar : (Cart[Real, Finite_sum[Unit, Unit]], Num) -> Real)(x, i))
+      #|  (m : Real)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 m : Real, (\226\136\128 x : Real, real_of_num(0) <= f(x)) \226\134\146 has_real_integral(f, m, UNIV) == has_measure({(z : Cart[Real, Tybit0[Unit]]) | real_of_num(0) <= op_dollar(z, 2) && op_dollar(z, 2) <= f(op_dollar(z, 1))}, m)
+      #|  {(z : Cart[Real, Tybit0[Unit]]) | op_dollar(z, 2) == real_of_num(0)}
+      #|  (m : Real)
+      #|  (x : Real) => if IN(x, (s : (Real) -> Bool)) { (f : (Real) -> Real)(x) } else { real_of_num(0) }
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 m : Real, (\226\136\128 x : Real, IN(x, s) \226\134\146 real_of_num(0) <= f(x)) \226\134\146 has_real_integral(f, m, s) == has_measure({(z : Cart[Real, Tybit0[Unit]]) | IN(op_dollar(z, 1), s) && real_of_num(0) <= op_dollar(z, 2) && op_dollar(z, 2) <= f(op_dollar(z, 1))}, m)
+      #|  (b : Real) - (a : Real) - (b - a - (y : Real)) == y
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (c : (Real) -> Bool)
+      #|  (x : Real) => (f : (Real) -> Real)(x) * (g' : (Real) -> Real)(x) + (f' : (Real) -> Real)(x) * (g : (Real) -> Real)(x)
+      #|  (x : Real) => (f : (Real) -> Real)(x) * (g : (Real) -> Real)(x)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : (Real) -> Bool, a <= b && COUNTABLE(c) && real_continuous_on((x : Real) => f(x) * g(x), real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, DIFF(real_interval((a, b)), c)) \226\134\146 has_real_derivative(f, f'(x), atreal(x)) && has_real_derivative(g, g'(x), atreal(x))) && has_real_integral((x : Real) => f(x) * g'(x), f(b) * g(b) - f(a) * g(a) - (y : Real), real_interval([(a, b)])) \226\134\146 has_real_integral((x : Real) => f'(x) * g(x), y, real_interval([(a, b)]))
+      #|  (b : Real) - (a : Real) - (b - a - (y : Real)) == y
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => (f : (Real) -> Real)(x) * (g' : (Real) -> Real)(x) + (f' : (Real) -> Real)(x) * (g : (Real) -> Real)(x)
+      #|  (x : Real) => (f : (Real) -> Real)(x) * (g : (Real) -> Real)(x)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a <= b && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), real_interval([(a, b)]))) && has_real_derivative(g, g'(x), within(atreal(x), real_interval([(a, b)])))) && has_real_integral((x : Real) => f(x) * g'(x), f(b) * g(b) - f(a) * g(a) - (y : Real), real_interval([(a, b)])) \226\134\146 has_real_integral((x : Real) => f'(x) * g(x), y, real_interval([(a, b)]))
+      #|  (b : Real) - (a : Real) - (b - a - (y : Real)) == y
+      #|  (c : (Real) -> Bool)
+      #|  (g' : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (f : (Real) -> Real)((b : Real)) * (g : (Real) -> Real)(b) - f((a : Real)) * g(a) - (y : Real)
+      #|  (y : Real)
+      #|  (b : Real) <= (a : Real) || a <= b
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : (Real) -> Bool, COUNTABLE(c) && real_continuous_on((x : Real) => f(x) * g(x), real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, DIFF(real_interval((a, b)), c)) \226\134\146 has_real_derivative(f, f'(x), atreal(x)) && has_real_derivative(g, g'(x), atreal(x))) && real_integrable_on((x : Real) => f(x) * g'(x), real_interval([(a, b)])) \226\134\146 real_integrable_on((x : Real) => f'(x) * g(x), real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : (Real) -> Bool, COUNTABLE(c) && real_continuous_on((x : Real) => f(x) * g(x), real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, DIFF(real_interval((a, b)), c)) \226\134\146 has_real_derivative(f, f'(x), atreal(x)) && has_real_derivative(g, g'(x), atreal(x))) \226\134\146 real_integrable_on((x : Real) => f(x) * g'(x), real_interval([(a, b)])) == real_integrable_on((x : Real) => f'(x) * g(x), real_interval([(a, b)]))
+      #|  bilinear((x : Cart[Real, Unit]) => (y : Cart[Real, Unit]) => lift(drop(x) * drop(y)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a <= b && absolutely_real_integrable_on(f', real_interval([(a, b)])) && absolutely_real_integrable_on(g', real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_integral(f', f(x), real_interval([(a, x)]))) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_integral(g', g(x), real_interval([(a, x)]))) \226\134\146 absolutely_real_integrable_on((x : Real) => f(x) * g'(x), real_interval([(a, b)])) && absolutely_real_integrable_on((x : Real) => f'(x) * g(x), real_interval([(a, b)])) && real_integral(real_interval([(a, b)]), (x : Real) => f(x) * g'(x)) + real_integral(real_interval([(a, b)]), (x : Real) => f'(x) * g(x)) == f(b) * g(b) - f(a) * g(a)
+      #|  bilinear((x : Cart[Real, Unit]) => (y : Cart[Real, Unit]) => lift(drop(x) * drop(y)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a <= b && (absolutely_real_integrable_on(f', real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_integral(f', f(x) - f(a), real_interval([(a, x)])))) && absolutely_real_integrable_on(g', real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_integral(g', g(x) - g(a), real_interval([(a, x)]))) \226\134\146 absolutely_real_integrable_on((x : Real) => f(x) * g'(x) + f'(x) * g(x), real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_integral((x : Real) => f(x) * g'(x) + f'(x) * g(x), f(x) * g(x) - f(a) * g(a), real_interval([(a, x)])))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 c : Real, \226\136\128 d : Real, SUBSET(real_interval([(c, d)]), real_interval((a, b))) \226\134\146 absolutely_real_integrable_on(f, real_interval([(c, d)]))) && real_bounded({real_integral(real_interval([((c : Real), (d : Real))]), (x : Real) => abs(f(x))) | SUBSET(real_interval([(c, d)]), real_interval((a, b)))}) \226\134\146 absolutely_real_integrable_on(f, real_interval([(a, b)]))
+      #|  (z : Real) + (w : Real) == (y : Real) \226\134\146 y - z == w
+      #|  real_interval(((a : Real), (b : Real)))
+      #|  (g : (Real) -> Real)((x : Real))
+      #|  (d : Real)
+      #|  (c : Real)
+      #|  (f : (Real) -> Real)
+      #|  has_real_derivative(o((ff : (Real) -> Real), (g : (Real) -> Real)), (f : (Real) -> Real)(g((x : Real))) * (g' : (Real) -> Real)(x), within(atreal(x), real_interval([((a : Real), (b : Real))])))
+      #|  (x : Real)
+      #|  real_interval([((c : Real), (d : Real))])
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (k : (Real) -> Bool)
+      #|  (x : Real) => (f : (Real) -> Real)((g : (Real) -> Real)(x)) * (g' : (Real) -> Real)(x)
+      #|  o((ff : (Real) -> Real), (g : (Real) -> Real))
+      #|  (ff : (Real) -> Real) == ((x : Real) => real_integral(real_interval([((c : Real), x)]), (f : (Real) -> Real)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, \226\136\128 k : (Real) -> Bool, COUNTABLE(k) && real_integrable_on(f, real_interval([(c, d)])) && real_continuous_on(g, real_interval([(a, b)])) && SUBSET(IMAGE(g, real_interval([(a, b)])), real_interval([(c, d)])) && (\226\136\128 x : Real, IN(x, DIFF(real_interval([(a, b)]), k)) \226\134\146 has_real_derivative(g, g'(x), within(atreal(x), real_interval([(a, b)]))) && real_continuous(f, within(atreal(g(x)), real_interval([(c, d)])))) && a <= b && c <= d && g(a) <= g(b) \226\134\146 has_real_integral((x : Real) => f(g(x)) * g'(x), real_integral(real_interval([(g(a), g(b))]), f), real_interval([(a, b)]))
+      #|  (g : (Real) -> Real)((x : Real))
+      #|  has_real_derivative(o((h : (Real) -> Real), (g : (Real) -> Real)), (f : (Real) -> Real)(g((x : Real))) * (g' : (Real) -> Real)(x), within(atreal(x), real_interval([((a : Real), (b : Real))])))
+      #|  (x : Real)
+      #|  ((c : Real) <= (ga : Real) && ga <= (d : Real)) && (c <= (gb : Real) && gb <= d) && ga <= gb \226\134\146 c <= ga && ga <= gb && gb <= d
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (g : (Real) -> Real)((b : Real))
+      #|  (g : (Real) -> Real)((a : Real))
+      #|  (f : (Real) -> Real)
+      #|  (h : (Real) -> Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (k : (Real) -> Bool)
+      #|  (x : Real) => (f : (Real) -> Real)((g : (Real) -> Real)(x)) * (g' : (Real) -> Real)(x)
+      #|  o((h : (Real) -> Real), (g : (Real) -> Real))
+      #|  (h : (Real) -> Real) == ((u : Real) => real_integral(real_interval([((c : Real), u)]), (f : (Real) -> Real)))
+      #|  (d : Real)
+      #|  (c : Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, \226\136\128 k : (Real) -> Bool, COUNTABLE(k) && real_continuous_on(f, real_interval([(c, d)])) && real_continuous_on(g, real_interval([(a, b)])) && SUBSET(IMAGE(g, real_interval([(a, b)])), real_interval([(c, d)])) && (\226\136\128 x : Real, IN(x, DIFF(real_interval([(a, b)]), k)) \226\134\146 has_real_derivative(g, g'(x), atreal(x))) && a <= b && c <= d && g(a) <= g(b) \226\134\146 has_real_integral((x : Real) => f(g(x)) * g'(x), real_integral(real_interval([(g(a), g(b))]), f), real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, \226\136\128 k : (Real) -> Bool, COUNTABLE(k) && real_continuous_on(f, real_interval([(c, d)])) && real_continuous_on(g, real_interval([(a, b)])) && SUBSET(IMAGE(g, real_interval([(a, b)])), real_interval([(c, d)])) && (\226\136\128 x : Real, IN(x, DIFF(real_interval([(a, b)]), k)) \226\134\146 has_real_derivative(g, g'(x), atreal(x))) && a <= b && c <= d && g(a) <= g(b) \226\134\146 real_integral(real_interval([(a, b)]), (x : Real) => f(g(x)) * g'(x)) == real_integral(real_interval([(g(a), g(b))]), f)
+      #|  (g : (Real) -> Real)((x : Real))
+      #|  (x : Real)
+      #|  ((c : Real) <= (ga : Real) && ga <= (d : Real)) && (c <= (gb : Real) && gb <= d) && ga <= gb \226\134\146 c <= ga && ga <= gb && gb <= d
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (g : (Real) -> Real)((b : Real))
+      #|  (g : (Real) -> Real)((a : Real))
+      #|  (f : (Real) -> Real)
+      #|  (h : (Real) -> Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => (f : (Real) -> Real)((g : (Real) -> Real)(x)) * (g' : (Real) -> Real)(x)
+      #|  o((h : (Real) -> Real), (g : (Real) -> Real))
+      #|  (h : (Real) -> Real) == ((u : Real) => real_integral(real_interval([((c : Real), u)]), (f : (Real) -> Real)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, real_continuous_on(f, real_interval([(c, d)])) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_derivative(g, g'(x), within(atreal(x), real_interval([(a, b)])))) && SUBSET(IMAGE(g, real_interval([(a, b)])), real_interval([(c, d)])) && a <= b && c <= d && g(a) <= g(b) \226\134\146 has_real_integral((x : Real) => f(g(x)) * g'(x), real_integral(real_interval([(g(a), g(b))]), f), real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, real_continuous_on(f, real_interval([(c, d)])) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_derivative(g, g'(x), within(atreal(x), real_interval([(a, b)])))) && SUBSET(IMAGE(g, real_interval([(a, b)])), real_interval([(c, d)])) && a <= b && c <= d && g(a) <= g(b) \226\134\146 real_integral(real_interval([(a, b)]), (x : Real) => f(g(x)) * g'(x)) == real_integral(real_interval([(g(a), g(b))]), f)
+      #|  (slice : (Num, Real, (Cart[Real, _]) -> Bool, Cart[Real, _]) -> Bool)((k : Num), (t : Real), (s : (Cart[Real, _]) -> Bool)) == IMAGE(dropout(k), INTER(s, {(x : Cart[Real, _]) | op_dollar(x, k) == t}))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 y : Cart[Real, M], (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= (k : Num) && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(y, (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, (t : Real), s)) == (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)((pushin : (Num, Real, Cart[Real, M]) -> Cart[Real, N])(k, t, y), s)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 k : Num, \226\136\128 t : Real, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)]), {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) == t}) == (if (op_dollar : (Cart[Real, N], Num) -> Real)(a, k) <= t && t <= (op_dollar : (Cart[Real, N], Num) -> Real)(b, k) { (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([((lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if i == k { t } else { (op_dollar : (Cart[Real, N], Num) -> Real)(a, i) }), (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if i == k { t } else { (op_dollar : (Cart[Real, N], Num) -> Real)(b, i) }))]) } else { ({} : (Cart[Real, N]) -> Bool) })
+      #|  1 <= (i : Num) + 1
+      #|  \226\136\128 i : Num, i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && i + 1 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  (a : Cart[Real, _]) == (a' : Cart[Real, _]) && (b : Cart[Real, _]) == (b' : Cart[Real, _]) \226\134\146 interval([(a, b)]) == interval([(a', b')])
+      #|  \226\136\128 k : Num, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 t : Real, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)])) == (if (op_dollar : (Cart[Real, N], Num) -> Real)(a, k) <= t && t <= (op_dollar : (Cart[Real, N], Num) -> Real)(b, k) { (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([((dropout : (Num, Cart[Real, N]) -> Cart[Real, M])(k, a), (dropout : (Num, Cart[Real, N]) -> Cart[Real, M])(k, b))]) } else { ({} : (Cart[Real, M]) -> Bool) })
+      #|  (\226\136\128 x : _, \226\136\128 y : _, IN(x, (a : (_) -> Bool)) && IN(y, a) && (f : (_) -> _)(x) == f(y) \226\134\146 x == y) \226\134\146 IMAGE(f, DIFF(INTER((s : (_) -> Bool), a), INTER((t : (_) -> Bool), a))) == DIFF(IMAGE(f, INTER(s, a)), IMAGE(f, INTER(t, a)))
+      #|  INTER(DIFF((s : (_) -> Bool), (t : (_) -> Bool)), (u : (_) -> Bool)) == DIFF(INTER(s, u), INTER(t, u))
+      #|  \226\136\128 k : Num, \226\136\128 a : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, a, (DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, t)) == (DIFF : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, a, s), (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, a, t))
+      #|  (pushin : (Num, Real, Cart[Real, M]) -> Cart[Real, N])((k : Num), (a : Real), (y : Cart[Real, M]))
+      #|  (y : Cart[Real, M])
+      #|  \226\136\128 k : Num, \226\136\128 a : Real, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, a, (UNIV : (Cart[Real, N]) -> Bool)) == (UNIV : (Cart[Real, M]) -> Bool)
+      #|  \226\136\128 k : Num, \226\136\128 a : Real, (slice : (Num, Real, (Cart[Real, _]) -> Bool, Cart[Real, _]) -> Bool)(k, a, ({} : (Cart[Real, _]) -> Bool)) == ({} : (Cart[Real, _]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, \226\136\128 k : Num, \226\136\128 a : Real, SUBSET(s, t) \226\134\146 (SUBSET : ((Cart[Real, _]) -> Bool, (Cart[Real, _]) -> Bool) -> Bool)((slice : (Num, Real, (Cart[Real, _]) -> Bool, Cart[Real, _]) -> Bool)(k, a, s), (slice : (Num, Real, (Cart[Real, _]) -> Bool, Cart[Real, _]) -> Bool)(k, a, t))
+      #|  \226\136\128 s : ((Cart[Real, _]) -> Bool) -> Bool, \226\136\128 k : Num, \226\136\128 a : Real, (slice : (Num, Real, (Cart[Real, _]) -> Bool, Cart[Real, _]) -> Bool)(k, a, UNIONS(s)) == (UNIONS : (((Cart[Real, _]) -> Bool) -> Bool, Cart[Real, _]) -> Bool)((IMAGE : (((Cart[Real, _]) -> Bool, Cart[Real, _]) -> Bool, ((Cart[Real, _]) -> Bool) -> Bool, (Cart[Real, _]) -> Bool) -> Bool)((slice : (Num, Real, (Cart[Real, _]) -> Bool, Cart[Real, _]) -> Bool)(k, a), s))
+      #|  INTER(UNION((s : (_) -> Bool), (t : (_) -> Bool)), (u : (_) -> Bool)) == UNION(INTER(s, u), INTER(t, u))
+      #|  \226\136\128 k : Num, \226\136\128 a : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, a, (UNION : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, t)) == (UNION : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, a, s), (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, a, t))
+      #|  (\226\136\128 x : _, \226\136\128 y : _, IN(x, (u : (_) -> Bool)) && IN(y, u) && (f : (_) -> _)(x) == f(y) \226\134\146 x == y) \226\134\146 IMAGE(f, INTER(INTER((s : (_) -> Bool), (t : (_) -> Bool)), u)) == INTER(IMAGE(f, INTER(s, u)), IMAGE(f, INTER(t, u)))
+      #|  \226\136\128 k : Num, \226\136\128 a : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, a, (INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, t)) == (INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, a, s), (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, a, t))
+      #|  \226\136\128 k : Num, \226\136\128 t : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) < (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (convex : ((Cart[Real, N]) -> Bool) -> Bool)(s) \226\134\146 (convex : ((Cart[Real, M]) -> Bool) -> Bool)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s))
+      #|  \226\136\128 k : Num, \226\136\128 t : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) < (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (compact : ((Cart[Real, N]) -> Bool) -> Bool)(s) \226\134\146 (compact : ((Cart[Real, M]) -> Bool) -> Bool)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s))
+      #|  (k : Num)
+      #|  SUBSET(IMAGE((f : (_) -> _), (t : (_) -> Bool)), (u : (_) -> Bool)) \226\134\146 SUBSET(IMAGE(f, INTER((s : (_) -> Bool), t)), u)
+      #|  (x : Cart[Real, N]) - op_pct((t : Real), (b : Cart[Real, N])) == -op_pct(t, b) + x
+      #|  (m : Num) + 1 == (n : Num) \226\134\146 m < n
+      #|  {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) == real_of_num(0)}
+      #|  !((i : Num) < (k : Num)) \226\134\146 !(i + 1 == k)
+      #|  (i : Num) < (k : Num) \226\134\146 !(i == k)
+      #|  1 <= (i : Num) + 1
+      #|  \226\136\128 i : Num, i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && i + 1 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  (closed : ((Cart[Real, M]) -> Bool) -> Bool)((IMAGE : ((Cart[Real, N]) -> Cart[Real, M], (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)((dropout : (Num, Cart[Real, N]) -> Cart[Real, M])((k : Num)), IMAGE((x : Cart[Real, N]) => x - op_pct((t : Real), basis(k)), INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, k) == t}))))
+      #|  \226\136\128 k : Num, \226\136\128 t : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (closed : ((Cart[Real, N]) -> Bool) -> Bool)(s) \226\134\146 (closed : ((Cart[Real, M]) -> Bool) -> Bool)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s))
+      #|  (closed : ((Cart[Real, M]) -> Bool) -> Bool)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)((k : Num), (t : Real), DIFF(UNIV, (s : (Cart[Real, N]) -> Bool))))
+      #|  \226\136\128 k : Num, \226\136\128 t : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (open : ((Cart[Real, N]) -> Bool) -> Bool)(s) \226\134\146 (open : ((Cart[Real, M]) -> Bool) -> Bool)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s))
+      #|  (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)((k : Num), (t : Real), interval([((a : Cart[Real, N]), (b : Cart[Real, N]))]))
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 k : Num, \226\136\128 t : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (bounded : ((Cart[Real, N]) -> Bool) -> Bool)(s) \226\134\146 (bounded : ((Cart[Real, M]) -> Bool) -> Bool)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s))
+      #|  (y : Cart[Real, M]) == (dropout : (Num, Cart[Real, N]) -> Cart[Real, M])((k : Num), (pushin : (Num, Real, Cart[Real, M]) -> Cart[Real, N])(k, (t : Real), y))
+      #|  (a : Real) == (t : Real) * (k : Real) + (b : Real) \226\134\146 ((xx : Real) + ((yy : Real) + t * t - real_of_num(2) * a) <= pow((r : Real), 2)) == (xx - k * k + (yy - real_of_num(2) * b) <= pow(r, 2) - pow(t - k, 2))
+      #|  dot((x : Cart[Real, N]) - (y : Cart[Real, N]), x - y) == dot(x, x) + (dot(y, y) - real_of_num(2) * dot(x, y))
+      #|  abs((x : Real)) <= (r : Real) \226\134\146 abs(x) <= abs(r)
+      #|  (y : Cart[Real, M])
+      #|  abs((x : Real)) <= (r : Real) \226\134\146 real_of_num(0) <= r
+      #|  !((a : Real) <= (r : Real)) \226\134\146 a <= (b : Real) \226\134\146 b <= r \226\134\146 false
+      #|  (y : Cart[Real, N])
+      #|  \226\136\128 k : Num, \226\136\128 t : Real, \226\136\128 x : Cart[Real, N], \226\136\128 r : Real, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, (cball : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)((x, r))) == (if abs(t - (op_dollar : (Cart[Real, N], Num) -> Real)(x, k)) <= r { (cball : ((Cart[Real, M], Real), Cart[Real, M]) -> Bool)(((dropout : (Num, Cart[Real, N]) -> Cart[Real, M])(k, x), sqrt(pow(r, 2) - pow(t - (op_dollar : (Cart[Real, N], Num) -> Real)(x, k), 2)))) } else { ({} : (Cart[Real, M]) -> Bool) })
+      #|  (y : Cart[Real, M]) == (dropout : (Num, Cart[Real, N]) -> Cart[Real, M])((k : Num), (pushin : (Num, Real, Cart[Real, M]) -> Cart[Real, N])(k, (t : Real), y))
+      #|  (a : Real) == (t : Real) * (k : Real) + (b : Real) \226\134\146 ((xx : Real) + ((yy : Real) + t * t - real_of_num(2) * a) < pow((r : Real), 2)) == (xx - k * k + (yy - real_of_num(2) * b) < pow(r, 2) - pow(t - k, 2))
+      #|  dot((x : Cart[Real, N]) - (y : Cart[Real, N]), x - y) == dot(x, x) + (dot(y, y) - real_of_num(2) * dot(x, y))
+      #|  abs((x : Real)) < (r : Real) \226\134\146 abs(x) < abs(r)
+      #|  (y : Cart[Real, M])
+      #|  abs((x : Real)) < (r : Real) \226\134\146 real_of_num(0) < r
+      #|  !((a : Real) < (r : Real)) \226\134\146 a <= (b : Real) \226\134\146 b < r \226\134\146 false
+      #|  (y : Cart[Real, N])
+      #|  \226\136\128 k : Num, \226\136\128 t : Real, \226\136\128 x : Cart[Real, N], \226\136\128 r : Real, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, (ball : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)((x, r))) == (if abs(t - (op_dollar : (Cart[Real, N], Num) -> Real)(x, k)) < r { (ball : ((Cart[Real, M], Real), Cart[Real, M]) -> Bool)(((dropout : (Num, Cart[Real, N]) -> Cart[Real, M])(k, x), sqrt(pow(r, 2) - pow(t - (op_dollar : (Cart[Real, N], Num) -> Real)(x, k), 2)))) } else { ({} : (Cart[Real, M]) -> Bool) })
+      #|  DISJOINT((s : (_) -> Bool), (t : (_) -> Bool)) == (\226\136\128 x : _, !(IN(x, s) && IN(x, t)))
+      #|  DISJOINT((s : (_) -> Bool), IMAGE((f : (_) -> _), (t : (_) -> Bool))) == (\226\136\128 x : _, IN(x, t) \226\134\146 !IN(f(x), s))
+      #|  (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool))
+      #|  (k : Num) - 1
       #|  1
-      #|  1 <= k ==> ~(k <= k - 1)
-      #|  s UNION (x INSERT t) = x INSERT (s UNION t)
-      #|  1 <= k\n      ==> (x = y + 1 /\\ k <= y /\\ y <= n <=>\n           y = x - 1 /\\ k + 1 <= x /\\ x <= n + 1)
-      #|  1..dimindex(:N) =\n                (1..(k-1)) UNION\n                (k INSERT (IMAGE (\\x. x + 1) (k..dimindex(:M))))
-      #|  i - 1
-      #|  i:num
-      #|  i:num < k
-      #|  i:num = k
-      #|  i <= dimindex(:N)
-      #|  i:num
-      #|  (p <=> p') /\\ x = x'\n    ==> (if p then x else y) = (if p' then x' else y)
-      #|  content(interval[a:real^N,b]) =\n    content(interval[dropout k a:real^M,dropout k b]) * (b$k - a$k)
-      #|  forall k a b:real^N.\n        dimindex(:M) + 1 = dimindex(:N) /\\\n        1 <= k /\\ k <= dimindex(:N) /\\\n        a$k <= b$k\n        ==> ((\\t. measure (slice k t (interval[a,b]) :real^M->bool))\n             has_real_integral\n             (measure(interval[a,b]))) (:real)
-      #|  UNIONS {if n IN s then f n else {} | n IN (:num)} =\n     UNIONS (IMAGE f s)
-      #|  (?c d. (f:num->real^N->bool) i = interval[c,d]) /\\\n                 (?c d. (f:num->real^N->bool) j = interval[c,d])
-      #|  interior(s) SUBSET s\n       ==> (interior s DIFF s) UNION (s DIFF interior s) =\n           s DIFF interior s
-      #|  negligible(interior((f:num->real^N->bool) i) INTER\n                            interior(f j))
-      #|  j:num
-      #|  i:num
-      #|  f:num->real^N->bool
-      #|  d:(real^N->bool)->bool
-      #|  P(k - 1) \\/ P(k + 1) ==> ?i. P i
-      #|  ?j. 1 <= j /\\ j <= dimindex(:N) /\\ ~(j = k)
-      #|  k <= dimindex(:N)
-      #|  1 <= k
-      #|  (lambda i. if i = k then &1 else &0):real^N
-      #|  (lambda i. if i = k then &0 else &1):real^N
-      #|  i:num
-      #|  \\k. if k IN 1..CARD(d:(real^N->bool)->bool) then f k\n                    else ({}:real^N->bool)
-      #|  f:num->real^N->bool
-      #|  FINITE(d:(real^N->bool)->bool)
-      #|  d:(real^N->bool)->bool
-      #|  forall s a b e.\n        2 <= dimindex(:N) /\\ 1 <= k /\\ k <= dimindex(:N) /\\\n        measurable s /\\ s SUBSET interval[a,b] /\\ &0 < e\n        ==> ?f:num->real^N->bool.\n              (forall i. (f i) SUBSET interval[a,b] /\\\n                   ?c d. c$k <= d$k /\\ f i = interval[c,d]) /\\\n              (forall i j. ~(i = j) ==> negligible(f i INTER f j)) /\\\n              s SUBSET UNIONS {f n | n IN (:num)} /\\\n              measurable(UNIONS {f n | n IN (:num)}) /\\\n              measure(UNIONS {f n | n IN (:num)}) <= measure s + e
-      #|  t:real->bool
-      #|  t:real->bool
-      #|  B:real
-      #|  forall k:num. f k real_integrable_on s
-      #|  g real_integrable_on (s DIFF t) /\\\n    ((\\k. real_integral (s DIFF t) (f k)) ---> real_integral (s DIFF t) g)\n    sequentially
-      #|  forall f:num->real->real g s.\n        (forall k. (f k) real_integrable_on s) /\\\n        (forall k x. x IN s ==> f k x <= f (SUC k) x) /\\\n        (?t. real_negligible t /\\\n             forall x. x IN (s DIFF t) ==> ((\\k. f k x) ---> g x) sequentially) /\\\n        real_bounded {real_integral s (f k) | k IN (:num)}\n        ==> g real_integrable_on s /\\\n            ((\\k. real_integral s (f k)) ---> real_integral s g) sequentially
-      #|  ?u v. u$k <= v$k /\\\n                          (d:num->real^N->bool) j = interval[u,v]
-      #|  j:num
-      #|  measure(interval[u:real^N,v])
-      #|  ?u v. u$k <= v$k /\\\n                          (d:num->real^N->bool) j = interval[u,v]
-      #|  j:num
-      #|  i:num
-      #|  interval[a:real^N,b]
-      #|  d:num->(real^N->bool)
-      #|  \\n. real_integral (:real)\n       (\\t. sum (0..n) (\\m. measure((slice k t:(real^N->bool)->real^M->bool)\n\n                         (d m))))
+      #|  1 <= (k : Num) \226\134\146 !(k <= k - 1)
+      #|  UNION((s : (_) -> Bool), INSERT((x : _), (t : (_) -> Bool))) == INSERT(x, UNION(s, t))
+      #|  1 <= (k : Num) \226\134\146 ((x : Num) == (y : Num) + 1 && k <= y && y <= (n : Num)) == (y == x - 1 && k + 1 <= x && x <= n + 1)
+      #|  op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) == UNION(op_dot_dot(1, (k : Num) - 1), INSERT(k, IMAGE((x : Num) => x + 1, op_dot_dot(k, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool))))))
+      #|  (i : Num) - 1
+      #|  (i : Num)
+      #|  (i : Num) < (k : Num)
+      #|  (i : Num) == (k : Num)
+      #|  (i : Num) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  (i : Num)
+      #|  (p : Bool) == (p' : Bool) && (x : _) == (x' : _) \226\134\146 (if p { x } else { (y : _) }) == (if p' { x' } else { y })
+      #|  content(interval([((a : Cart[Real, N]), (b : Cart[Real, N]))])) == (content : ((Cart[Real, M]) -> Bool) -> Real)((interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([((dropout : (Num, Cart[Real, N]) -> Cart[Real, M])((k : Num), a), (dropout : (Num, Cart[Real, N]) -> Cart[Real, M])(k, b))])) * (op_dollar(b, k) - op_dollar(a, k))
+      #|  \226\136\128 k : Num, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (op_dollar : (Cart[Real, N], Num) -> Real)(a, k) <= (op_dollar : (Cart[Real, N], Num) -> Real)(b, k) \226\134\146 has_real_integral((t : Real) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)]))), (measure : ((Cart[Real, N]) -> Bool) -> Real)((interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)])), (UNIV : (Real) -> Bool))
+      #|  UNIONS({if IN((n : Num), (s : (Num) -> Bool)) { (f : (Num, _) -> Bool)(n) } else { {} } | IN(n, UNIV)}) == UNIONS(IMAGE(f, s))
+      #|  (\226\136\131 c : Cart[Real, N], \226\136\131 d : Cart[Real, N], (f : (Num, Cart[Real, N]) -> Bool)((i : Num)) == interval([(c, d)])) && (\226\136\131 c : Cart[Real, N], \226\136\131 d : Cart[Real, N], f((j : Num)) == interval([(c, d)]))
+      #|  SUBSET(interior((s : (Cart[Real, _]) -> Bool)), s) \226\134\146 UNION(DIFF(interior(s), s), DIFF(s, interior(s))) == DIFF(s, interior(s))
+      #|  negligible(INTER(interior((f : (Num, Cart[Real, N]) -> Bool)((i : Num))), interior(f((j : Num)))))
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (f : (Num, Cart[Real, N]) -> Bool)
+      #|  (d : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (P : (Num) -> Bool)((k : Num) - 1) || P(k + 1) \226\134\146 (\226\136\131 i : Num, P(i))
+      #|  \226\136\131 j : Num, 1 <= j && j <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && !(j == (k : Num))
+      #|  (k : Num) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  1 <= (k : Num)
+      #|  (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if i == (k : Num) { real_of_num(1) } else { real_of_num(0) })
+      #|  (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if i == (k : Num) { real_of_num(0) } else { real_of_num(1) })
+      #|  (i : Num)
+      #|  (k : Num) => if IN(k, op_dot_dot(1, CARD((d : ((Cart[Real, N]) -> Bool) -> Bool)))) { (f : (Num, Cart[Real, N]) -> Bool)(k) } else { {} }
+      #|  (f : (Num, Cart[Real, N]) -> Bool)
+      #|  FINITE((d : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (d : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 e : Real, 2 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= (k : Num) && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (measurable : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(s, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)])) && real_of_num(0) < e \226\134\146 (\226\136\131 f : (Num, Cart[Real, N]) -> Bool, (\226\136\128 i : Num, (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(f(i), (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)])) && (\226\136\131 c : Cart[Real, N], \226\136\131 d : Cart[Real, N], (op_dollar : (Cart[Real, N], Num) -> Real)(c, k) <= (op_dollar : (Cart[Real, N], Num) -> Real)(d, k) && f(i) == (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(c, d)]))) && (\226\136\128 i : Num, \226\136\128 j : Num, !(i == j) \226\134\146 (negligible : ((Cart[Real, N]) -> Bool) -> Bool)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(f(i), f(j)))) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(s, (UNIONS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)({f((n : Num)) | (IN : (Num, (Num) -> Bool) -> Bool)(n, (UNIV : (Num) -> Bool))})) && (measurable : ((Cart[Real, N]) -> Bool) -> Bool)((UNIONS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)({f((n : Num)) | (IN : (Num, (Num) -> Bool) -> Bool)(n, (UNIV : (Num) -> Bool))})) && (measure : ((Cart[Real, N]) -> Bool) -> Real)((UNIONS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)({f((n : Num)) | (IN : (Num, (Num) -> Bool) -> Bool)(n, (UNIV : (Num) -> Bool))})) <= (measure : ((Cart[Real, N]) -> Bool) -> Real)(s) + e)
+      #|  (t : (Real) -> Bool)
+      #|  (t : (Real) -> Bool)
+      #|  (B : Real)
+      #|  \226\136\128 k : Num, real_integrable_on((f : (Num, Real) -> Real)(k), (s : (Real) -> Bool))
+      #|  real_integrable_on((g : (Real) -> Real), DIFF((s : (Real) -> Bool), (t : (Real) -> Bool))) && op_minus_minus_minus_gt((k : Num) => real_integral(DIFF(s, t), (f : (Num, Real) -> Real)(k)), real_integral(DIFF(s, t), g), sequentially)
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 k : Num, real_integrable_on(f(k), s)) && (\226\136\128 k : Num, \226\136\128 x : Real, IN(x, s) \226\134\146 f(k, x) <= f(SUC(k), x)) && (\226\136\131 t : (Real) -> Bool, real_negligible(t) && (\226\136\128 x : Real, IN(x, DIFF(s, t)) \226\134\146 op_minus_minus_minus_gt((k : Num) => f(k, x), g(x), sequentially))) && real_bounded({real_integral(s, f((k : Num))) | IN(k, UNIV)}) \226\134\146 real_integrable_on(g, s) && op_minus_minus_minus_gt((k : Num) => real_integral(s, f(k)), real_integral(s, g), sequentially)
+      #|  \226\136\131 u : Cart[Real, N], \226\136\131 v : Cart[Real, N], op_dollar(u, (k : Num)) <= op_dollar(v, k) && (d : (Num, Cart[Real, N]) -> Bool)((j : Num)) == interval([(u, v)])
+      #|  (j : Num)
+      #|  measure(interval([((u : Cart[Real, N]), (v : Cart[Real, N]))]))
+      #|  \226\136\131 u : Cart[Real, N], \226\136\131 v : Cart[Real, N], op_dollar(u, (k : Num)) <= op_dollar(v, k) && (d : (Num, Cart[Real, N]) -> Bool)((j : Num)) == interval([(u, v)])
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  interval([((a : Cart[Real, N]), (b : Cart[Real, N]))])
+      #|  (d : (Num, Cart[Real, N]) -> Bool)
+      #|  (n : Num) => real_integral(UNIV, (t : Real) => sum(op_dot_dot(0, n), (m : Num) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)((k : Num), t, (d : (Num, Cart[Real, N]) -> Bool)(m)))))
       #|  sequentially
-      #|  (slice k t:(real^N->bool)->real^M->bool) (interval[a,b])
-      #|  t:real
-      #|  real_integral (:real)\n        (\\t. measure ((slice k t :(real^N->bool)->real^M->bool)\n                      (UNIONS {d n | n IN (:num)})))
-      #|  k < l ==> ~(l - 1 < k)
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  l - 1
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  l:num
-      #|  ~(l:num = k) ==> l < k \\/ k < l
-      #|  ~(l:num = k)
-      #|  l:num
-      #|  a /\\ b /\\ c <=> ~(a /\\ b ==> ~c)
-      #|  v:real^N
-      #|  u:real^N
-      #|  x:real^N
-      #|  w:real^N
-      #|  ~((d:num->real^N->bool) j = {})
-      #|  (d:num->real^N->bool) j = {}
-      #|  ~((d:num->real^N->bool) i = {})
-      #|  (d:num->real^N->bool) i = {}
-      #|  j:num
-      #|  i:num
-      #|  j:num
-      #|  i:num
-      #|  (slice k t:(real^N->bool)->real^M->bool) (interval[a,b])
-      #|  \\n:num. (slice k t:(real^N->bool)->real^M->bool)\n                          (d n)
-      #|  t:real
-      #|  (IMAGE (\\i. (interval_lowerbound(d i):real^N)$k) (:num)) UNION\n      (IMAGE (\\i. (interval_upperbound(d i):real^N)$k) (:num))
-      #|  &0 <= x /\\ x <= a ==> abs x <= a
-      #|  ?u v. u$k <= v$k /\\\n                            (d:num->real^N->bool) j = interval[u,v]
-      #|  j:num
-      #|  abs(sum(0..i) (\\m. measure(d m:real^N->bool)))
-      #|  measure(interval[u:real^N,v])
-      #|  ?u v. u$k <= v$k /\\\n                            (d:num->real^N->bool) j = interval[u,v]
-      #|  j:num
-      #|  i:num
-      #|  measure(interval[a:real^N,b])
-      #|  v:real^N
-      #|  u:real^N
-      #|  k:num
-      #|  v:real^N
-      #|  u:real^N
-      #|  j:num
-      #|  j:num
-      #|  i:num
-      #|  (:real)
-      #|  \\t. measure((slice k t:(real^N->bool)->real^M->bool)\n                   (UNIONS {d n | n IN (:num)}))
-      #|  \\n t. sum(0..n)\n           (\\m. measure((slice k t:(real^N->bool)->real^M->bool)\n                       (d m)))
-      #|  measure(UNIONS {d n | n IN (:num)}:real^N->bool)
-      #|  n:num
-      #|  n:num
-      #|  t:real
-      #|  forall t n:num. measurable((slice k t:(real^N->bool)->real^M->bool)\n                                     (d n))
-      #|  d:num->(real^N->bool)
-      #|  1 <= dimindex(:M)
-      #|  e:real
-      #|  b:real^N
-      #|  a:real^N
-      #|  s:real^N->bool
-      #|  b:real^N
-      #|  a:real^N
-      #|  forall k s:real^N->bool e.\n        &0 < e /\\\n        dimindex(:M) + 1 = dimindex(:N) /\\\n        1 <= k /\\ k <= dimindex(:N) /\\\n        bounded s /\\ measurable s /\\\n        (forall t. measurable(slice k t s:real^M->bool)) /\\\n        (\\t. measure (slice k t s:real^M->bool)) real_integrable_on (:real)\n        ==> real_integral(:real) (\\t. measure (slice k t s :real^M->bool))\n                <= measure s + e
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  i:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  i:num
-      #|  j:num
-      #|  i:num
-      #|  b:real^N
-      #|  a:real^N
-      #|  k:num
-      #|  t:real
-      #|  forall t. measure(slice k t (interval[a:real^N,b]) DIFF\n                slice k t (s:real^N->bool) :real^M->bool) =\n        measure(slice k t (interval[a:real^N,b]):real^M->bool) -\n        measure(slice k t s :real^M->bool)
-      #|  t:real
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  e / &2
-      #|  interval[a:real^N,b] DIFF s
-      #|  k:num
-      #|  e / &2
-      #|  s:real^N->bool
-      #|  k:num
-      #|  e:real
-      #|  (forall e. x - y = e ==> ~(&0 < e)) ==> ~(&0 < x - y)
-      #|  ~(&0 < b - a) /\\ ~(&0 < a - b) ==> a:real = b
-      #|  ~(interval[a:real^N,b] = {})
-      #|  b:real^N
-      #|  a:real^N
-      #|  s:real^N->bool = {}
-      #|  forall k s:real^N->bool.\n        dimindex(:M) + 1 = dimindex(:N) /\\\n        1 <= k /\\ k <= dimindex(:N) /\\\n        bounded s /\\\n        measurable s /\\\n        (forall t. measurable(slice k t s :real^M->bool)) /\\\n        (\\t. measure (slice k t s :real^M->bool)) real_integrable_on (:real)\n        ==> measure s =\n              real_integral(:real)(\\t. measure (slice k t s :real^M->bool))
-      #|  real_integral (:real)\n                 (\\t. measure (slice k t (s:real^N->bool) :real^M->bool))
-      #|  forall k s:real^N->bool.\n        dimindex(:M) + 1 = dimindex(:N) /\\\n        1 <= k /\\ k <= dimindex(:N) /\\\n        bounded s /\\\n        measurable s /\\\n        (forall t. measurable(slice k t s :real^M->bool)) /\\\n        ((\\t. measure (slice k t s :real^M->bool)) has_real_integral B) (:real)\n        ==> measure s = B
-      #|  k:num
-      #|  forall k s:real^N->bool.\n        dimindex(:M) + 1 = dimindex(:N) /\\\n        1 <= k /\\ k <= dimindex(:N) /\\\n        compact s /\\\n        ((\\t. measure (slice k t s :real^M->bool)) has_real_integral B) (:real)\n        ==> measurable s /\\ measure s = B
-      #|  forall k s:real^N->bool.\n        dimindex(:M) + 1 = dimindex(:N) /\\\n        1 <= k /\\ k <= dimindex(:N) /\\\n        compact s /\\\n        ((\\t. measure (slice k t s :real^M->bool)) has_real_integral B) (:real)\n        ==> measure s = B
-      #|  k:num
-      #|  forall k s:real^N->bool.\n        dimindex(:M) + 1 = dimindex(:N) /\\\n        1 <= k /\\ k <= dimindex(:N) /\\\n        bounded s /\\ convex s /\\\n        ((\\t. measure (slice k t s :real^M->bool)) has_real_integral B) (:real)\n        ==> measurable s /\\ measure s = B
-      #|  forall k s:real^N->bool.\n        dimindex(:M) + 1 = dimindex(:N) /\\\n        1 <= k /\\ k <= dimindex(:N) /\\\n        bounded s /\\ convex s /\\\n        ((\\t. measure (slice k t s :real^M->bool)) has_real_integral B) (:real)\n        ==> measure s = B
-      #|  k:num
-      #|  forall k s:real^N->bool.\n        dimindex(:M) + 1 = dimindex(:N) /\\\n        1 <= k /\\ k <= dimindex(:N) /\\\n        bounded s /\\ open s /\\\n        ((\\t. measure (slice k t s :real^M->bool)) has_real_integral B) (:real)\n        ==> measurable s /\\ measure s = B
-      #|  forall k s:real^N->bool.\n        dimindex(:M) + 1 = dimindex(:N) /\\\n        1 <= k /\\ k <= dimindex(:N) /\\\n        bounded s /\\ open s /\\\n        ((\\t. measure (slice k t s :real^M->bool)) has_real_integral B) (:real)\n        ==> measure s = B
-      #|  IMAGE lift s
-      #|  forall s. real_open s /\\ ~(s = {}) ==> ?x. rational x /\\ x IN s
-      #|  {x:real | P x}
-      #|  forall P. real_open {x | P x} /\\ (?x. P x) ==> ?x. rational x /\\ P x
-      #|  forall s. real_open s ==> ((?x. rational x /\\ x IN s) <=> (?x. x IN s))
-      #|  forall P. real_open {x | P x} ==> ((?x. rational x /\\ P x) <=> (?x. P x))
-      #|  a:real^N
-      #|  { inv(&2 pow n) % x:real^M |n,x|\n       forall i. 1 <= i /\\ i <= dimindex(:M) ==> integer(x$i) }
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N a.\n     f continuous_on (:real^M) /\\\n     (forall x. (forall i. 1 <= i /\\ i <= dimindex(:M) ==> integer(x$i)) ==> f(x) = a) /\\\n     (forall x. f(x) = a ==> f(inv(&2) % x) = a)\n     ==> forall x. f(x) = a
-      #|  inv(&2) * x = x / &2
-      #|  lift a
-      #|  lift o f o drop
-      #|  forall f a.\n     f real_continuous_on (:real) /\\\n     (forall x. integer(x) ==> f(x) = a) /\\\n     (forall x. f(x) = a ==> f(x / &2) = a)\n     ==> forall x. f(x) = a
-      #|  lift o f o drop
-      #|  forall f. f real_continuous_on (:real) /\\\n       (forall x y. f(x + y) = f(x) + f(y))\n       ==> forall a x. f(a * x) = a * f(x)
-      #|  x:real
-      #|  &0 < e /\\ x = y ==> abs(x - y) < e
-      #|  min (x - floor x) ((floor x + &1) - x)
-      #|  e:real
-      #|  forall x. ~(integer x) ==> floor real_continuous (atreal x)
-      #|  forall x. ~(integer x) ==> frac real_continuous (atreal x)
-      #|  floor y = floor x - &1
-      #|  floor y = floor x
-      #|  x <= y \\/ y < x
-      #|  y:real
-      #|  min (&1) (min d1 d2)
-      #|  d2:real
-      #|  d1:real
-      #|  e:real
-      #|  e:real
-      #|  min d (min (frac x) (&1 - frac x))
-      #|  d:real
-      #|  &0 < e
-      #|  e:real
-      #|  frac x
-      #|  integer x
-      #|  x:real
-      #|  f real_continuous_on real_interval[&0,&1]
-      #|  forall f. f real_continuous_on real_interval[&0,&1] /\\ f(&1) = f(&0)\n       ==> (f o frac) real_continuous_on (:real)
-      #|  &0
-      #|  &1
-      #|  a < b ==> ((x + b - a) - a) / (b - a) = &1 + (x - a) / (b - a)
-      #|  a:real < b
-      #|  frac((x - a) / (b - a)) = (x - a) / (b - a)
-      #|  x:real = b
-      #|  x:real
-      #|  a + (b - a) * x <= b <=> &0 <= (b - a) * (&1 - x)
-      #|  (:real)
-      #|  (f:real->real) o (\\y. a + (b - a) * y) o frac o\n                (\\x. (x - a) / (b - a))
-      #|  \\x:real. (f:real->real) a
-      #|  b:real <= a \\/ a < b
-      #|  forall f a b.\n        f real_continuous_on real_interval[a,b] /\\ f(a) = f(b)\n        ==> ?g. g real_continuous_on (:real) /\\\n                (forall x. x IN real_interval[a,b] ==> g(x) = f(x)) /\\\n                (forall x. g(x + (b - a)) = g x)
-      #|  floor x = &0
-      #|  x = &1
-      #|  y:real
-      #|  x:real
-      #|  f(a + b) = f a + f b /\\ f(c + d) = f(c) + f(d) /\\ a + b = c + d\n      ==> (f:real->real)(a) + f(b) = f(c) + f(d)
-      #|  x < &1 /\\ y < &1 ==> (x + y) - &1 <= &1
-      #|  ~(x + y < &1) ==> &0 <= (x + y) - &1
-      #|  t / &2
-      #|  t / &2
-      #|  forall t. &0 <= t /\\ t <= &1 ==> f(t) / &2 = f(t / &2)
-      #|  f1 * ((x + y) + &1) + g = (f1 * x + z) + f1 * y + h <=>\n      f1 / &2 + g / &2 = z / &2 + h / &2
-      #|  (f1 * (x - &1) + f) - (f1 * x + &0) =\n                                f - f1
-      #|  floor y = floor x - &1
-      #|  (a + x) - (a + &0) = x - &0
-      #|  floor y = floor x
-      #|  x <= y \\/ y < x
-      #|  y:real
-      #|  min (&1) (min d1 d2)
-      #|  d2:real
-      #|  d1:real
-      #|  e:real
-      #|  e:real
-      #|  min d (min (frac x) (&1 - frac x))
-      #|  d:real
-      #|  &0 < e
-      #|  e:real
-      #|  frac x
-      #|  integer x
-      #|  x:real
-      #|  f real_continuous_on real_interval[&0,&1]
-      #|  \\x. f(&1) * floor(x) + f(frac x)
-      #|  &0
-      #|  &0
-      #|  f(&0) = &0
-      #|  forall f. f real_continuous_on real_interval[&0,&1] /\\\n       (forall x y. &0 <= x /\\ &0 <= y /\\ x + y <= &1\n              ==> f(x + y) = f(x) + f(y))\n       ==> ?g.  g real_continuous_on (:real) /\\\n                (forall x y. g(x + y) = g(x) + g(y)) /\\\n                (forall x. x IN real_interval[&0,&1] ==> g x = f x)
-      #|  &0
-      #|  &1
-      #|  &0 < b ==> abs b * x = x * b
-      #|  d / b:real
-      #|  d:real
-      #|  e:real
-      #|  e:real
-      #|  b * x + b * y <= b <=> &0 <= b * (&1 - (x + y))
-      #|  a * x / b:real = (a * x) / b
-      #|  &0 < b ==> b * a * x / b = a * x
-      #|  a:real
-      #|  (\\x. f(b * x)):real->real
-      #|  &0
-      #|  &0
-      #|  a <= x /\\ x <= a /\\ a <= y /\\ y <= a <=> x = a /\\ y = a
-      #|  b < &0 \\/ b = &0 \\/ &0 < b
-      #|  (f:real->real)(x + (y - x)) = f(x) + f(y - x)
-      #|  (f:real->real)(y + (x - y)) = f(y) + f(x - y)
-      #|  y = x \\/ y < x \\/ x < y
-      #|  y:real
-      #|  d:real
-      #|  d:real
-      #|  e:real
-      #|  e:real
-      #|  x:real
-      #|  g:real->real
-      #|  g:real->real
-      #|  f:real->real
-      #|  forall f. f real_continuous_on real_interval[&0,&1] /\\\n          (forall x y. &0 <= x /\\ &0 <= y /\\ x + y <= &1 ==> f(x + y) = f(x) + f(y))\n          ==> forall a x. &0 <= x /\\ x <= &1 /\\ &0 <= a * x /\\ a * x <= &1\n                    ==> f(a * x) = a * f(x)
-      #|  forall f. (f ---> &0) (atreal (&0) within {x | &0 <= x}) /\\\n        (forall x y. &0 <= x /\\ &0 <= y /\\ x + y <= &1 ==> f(x + y) = f(x) + f(y))\n        ==> forall a x. &0 <= x /\\ x <= &1 /\\ &0 <= a * x /\\ a * x <= &1\n                  ==> f(a * x) = a * f(x)
-      #|  forall f b. (f ---> &0) (atreal (&0) within {x | &0 <= x}) /\\\n         (forall x y. &0 <= x /\\ &0 <= y /\\ x + y <= b ==> f(x + y) = f(x) + f(y))\n         ==> forall a x. &0 <= x /\\ x <= b /\\\n                   &0 <= a * x /\\ a * x <= b\n                   ==> f(a * x) = a * f(x)
-      #|  x / b:real
-      #|  x:real
-      #|  forall s e. ~(negligible s) /\\ &0 < e\n         ==> ?x y:real^N. x IN s /\\ y IN s /\\ ~(x = y) /\\ norm(x - y) < e
-      #|  {lift(f x y) | P x y} = IMAGE lift {f x y | P x y}
-      #|  {g x y | x IN IMAGE f s /\\ y IN IMAGE f t} =\n                        {g (f x) (f y) | x IN s /\\ y IN t}
-      #|  d:real
-      #|  forall s. real_measurable s /\\ &0 < real_measure s\n       ==> ?d. &0 < d /\\\n               real_interval(--d,d) SUBSET {x - y | x IN s /\\ y IN s}
-      #|  bernstein n k x = &(binom(n,k)) * x pow k * (&1 - x) pow (n - k)
-      #|  forall n k x. &0 <= x /\\ x <= &1 ==> &0 <= bernstein n k x
-      #|  forall n. sum (0..n) (\\k. bernstein n k x) = &1
-      #|  k = 0 \\/ k = 1 \\/ 1 <= k /\\ 2 + k - 2 = k
-      #|  ((((k * k1) * b) * xk) * y) * x2:real =\n                            k * k1 * b * y * (x2 * xk)
-      #|  k:num
-      #|  n = 0
-      #|  &1 - x
-      #|  x:real
-      #|  sum(0..n) (\\k. &k * (&k - &1) * bernstein n k x) = &n * (&n - &1) * x pow 2
-      #|  k = 0 \\/ SUC(k - 1) = k
-      #|  (k * b * xk * y) * x:real = k * b * (x * xk) * y
-      #|  k:num
-      #|  &1 - x
-      #|  x:real
-      #|  sum(0..n) (\\k. &k * bernstein n k x) = &n * x
-      #|  (a - b) pow 2 * x =\n    a * (a - &1) * x + (&1 - &2 * b) * a * x + b * b * x
-      #|  n - 1 - 1 = n - 2
-      #|  x:real
-      #|  \\x. sum(0..n) (\\k. &k * &(binom(n,k)) * x pow (k - 1) * y pow (n - k))
-      #|  forall x y. sum(0..n)\n        (\\k. &k * &(k - 1) * &(binom(n,k)) * x pow (k - 2) * y pow (n - k)) =\n          &n * &(n - 1) * (x + y) pow (n - 2)
-      #|  x:real
-      #|  \\x. sum(0..n) (\\k. &(binom(n,k)) * x pow k * y pow (n - k))
-      #|  forall x y. sum(0..n) (\\k. &k * &(binom(n,k)) * x pow (k - 1) * y pow (n - k)) =\n          &n * (x + y) pow (n - 1)
-      #|  forall x y. sum(0..n) (\\k. &(binom(n,k)) * x pow k * y pow (n - k)) =\n           (x + y) pow n
-      #|  forall n x. sum(0..n) (\\k. (&k - &n * x) pow 2 * bernstein n k x) =\n         &n * x * (&1 - x)
-      #|  x < e ==> y <= x ==> y < e
-      #|  &0 < e /\\ k < e / &4 ==> x <= e / &2 + k ==> x < e
-      #|  x:real
-      #|  n:num
-      #|  x:real
-      #|  n:num
-      #|  N:num
-      #|  (x * &2 * m) * i = (&2 * m) * (i * x)
-      #|  (e / &4 * d pow 2) / (&2 * M)
-      #|  &n * x <= &n <=> &n * x <= &n * &1 * &1
-      #|  (x - y:real) pow 2 = (y - x) pow 2
-      #|  &0 < n ==> n * (x - k * inv n) = n * x - k
-      #|  &0 < n ==> n pow 2 * inv(n) = n
-      #|  &n pow 2
-      #|  abs(x) <= M /\\ abs(y) <= M /\\ M * &1 <= M * b / d\n          ==> abs(x - y) <= &2 * M / d * b
-      #|  &0 < e /\\ x <= d ==> x <= e / &2 + d
-      #|  &0 <= &2 * x <=> &0 <= x
-      #|  x < e /\\ &0 <= d ==> x <= e + d
-      #|  abs(x - &k / &n) < d \\/ d <= abs(x - &k / &n)
-      #|  &0 <= &k / &n /\\ &k / &n <= &1
-      #|  k:num
-      #|  sum(0..n) (\\k. (e / &2 + &2 * M / d pow 2 * (x - &k / &n) pow 2) *\n                     bernstein n k x)
-      #|  &0 <= x ==> abs x = x
-      #|  a <= b ==> x <= a ==> x <= b
-      #|  abs(sum(0..n) (\\k. (f x - f(&k / &n)) * bernstein n k x))
-      #|  forall n x. 0 < n /\\ &0 <= x /\\ x <= &1\n          ==> abs(f x - sum(0..n) (\\k. f(&k / &n) * bernstein n k x))\n                <= e / &2 + (&2 * M) / (d pow 2 * &n)
-      #|  d:real
-      #|  e / &2
-      #|  f real_uniformly_continuous_on real_interval[&0,&1]
-      #|  M:real
-      #|  real_bounded(IMAGE f (real_interval[&0,&1]))
-      #|  forall f e.\n      f real_continuous_on real_interval[&0,&1] /\\ &0 < e\n      ==> ?N. forall n x. N <= n /\\ x IN real_interval[&0,&1]\n                    ==> abs(f x -\n                            sum(0..n) (\\k. f(&k / &n) * bernstein n k x)) < e
-      #|  x:real^N
-      #|  s SUBSET {y:real^N | ?x:real^N. x IN t /\\ y IN H x}
-      #|  abs(f - s) < e <=> f - e < s /\\ s < f + e
-      #|  ~(t:real^N->bool = {})
-      #|  x:real^N
-      #|  IMAGE (f1:real^N->real^N->real) t
-      #|  \\z:real^N. sup {f1 (x:real^N) z | x IN t}
-      #|  t:real^N->bool
-      #|  a /\\ b /\\ c <=> b /\\ a /\\ c
-      #|  x < y + e <=> x - y < e
-      #|  x - y < z <=> x - z < y
-      #|  {x:real^1 | x$1 < e}
-      #|  s:real^N->bool
-      #|  lift o (\\z:real^N. f z - f1 (x:real^N) z)
-      #|  x:real^N
-      #|  {(H:real^N->real^N->bool) x | x IN s}
-      #|  x - e < x <=> &0 < e
-      #|  forall x:real^N. x IN s ==> x IN (H x)
-      #|  H = \\x:real^N. {z:real^N | z IN s /\\ f z - e < f1 x z}
-      #|  f1:real^N->real^N->real
-      #|  y:real^N
-      #|  s SUBSET {y:real^N | ?z:real^N. z IN t /\\ y IN G (x:real^N) z}
-      #|  y:real^N
-      #|  ~(t:real^N->bool = {})
-      #|  IMAGE (\\y z. (f2:real^N->real^N->real^N->real) x y z) t
-      #|  x = min x x
-      #|  \\z:real^N. inf {f2 (x:real^N) (y:real^N) z | y IN t}
-      #|  t:real^N->bool
-      #|  a /\\ b /\\ c <=> b /\\ a /\\ c
-      #|  x < y + e <=> x - y < e
-      #|  {x:real^1 | x$1 < e}
-      #|  s:real^N->bool
-      #|  lift o (\\z:real^N. f2 (x:real^N) (w:real^N) z - f z)
-      #|  w:real^N
-      #|  {(G:real^N->real^N->real^N->bool) x y | y IN s}
-      #|  forall x. x IN s ==> ?f1. A(f1) /\\ f1 x = f x /\\\n                        forall y:real^N. y IN s ==> f1 y < f y + e
-      #|  forall x y:real^N. x IN s /\\ y IN s ==> x IN G x y /\\ y IN G x y
-      #|  G = \\x y.\n    {z | z IN s /\\ (f2:real^N->real^N->real^N->real) x y z < f(z) + e}
-      #|  f2:real^N->real^N->real^N->real
-      #|  ~((h:real^N->real) x = h y)
-      #|  \\z. (f y - f x) / (h y - h x) * (h:real^N->real)(z) +\n                      (f x - (f y - f x) / (h y - h x) * h(x))
-      #|  ?h:real^N->real. A(h) /\\ ~(h x = h y)
-      #|  \\z:real^N. (f:real^N->real) x
-      #|  y:real^N = x
-      #|  forall x y. x IN s /\\ y IN s\n          ==> ?h:real^N->real. A(h) /\\ h(x) = f(x) /\\ h(y) = f(y)
-      #|  e:real
-      #|  f:real^N->real
-      #|  abs(f - h) < e / &2 /\\ abs(h - g) < e / &2 ==> abs(f - g) < e
-      #|  e / &2
-      #|  h:real^N->real
-      #|  e / &2
-      #|  f:real^N->real
-      #|  e:real
-      #|  f:real^N->real
-      #|  forall f:real^N->real e.\n      C(f) /\\ &0 < e ==> ?g. A(g) /\\ forall x. x IN s ==> abs(f x - g x) < e
-      #|  t:(real^N->real)->bool = {}
-      #|  t:(real^N->real)->bool
-      #|  f:real^N->real
-      #|  forall t. FINITE t /\\ (forall f. f IN t ==> A(f)) ==> A(\\x:real^N. inf {f(x) | f IN t})
-      #|  t:(real^N->real)->bool = {}
-      #|  t:(real^N->real)->bool
-      #|  f:real^N->real
-      #|  forall t. FINITE t /\\ (forall f. f IN t ==> A(f)) ==> A(\\x:real^N. sup {f(x) | f IN t})
-      #|  min a b = -- &1 * (max(-- &1 * a) (-- &1 * b))
-      #|  forall f:real^N->real g. A(f) /\\ A(g) ==> A(\\x. min (f x) (g x))
-      #|  max a b = inv(&2) * (a + b + abs(a + -- &1 * b))
-      #|  forall f:real^N->real g. A(f) /\\ A(g) ==> A(\\x. max (f x) (g x))
-      #|  (f:real^N->real) x
-      #|  forall f. abs(f) <= &1 / &4 /\\ abs(f - p) < &1 / &4\n            ==> &0 <= &1 / &2 + p /\\ &1 / &2 + p <= &1
-      #|  x = (&1 / &2 + x) - &1 / &2
-      #|  \\x. abs(abs x - a) < e
-      #|  p:real^N->real
-      #|  forall p. abs(abs(p x) - s) < e / &2 /\\\n            abs(f x - p x) < e / &2\n            ==> abs(abs(f x) - s) < e
-      #|  forall f:real^N->real k. P(f) ==> P(\\x. f(x) pow k)
-      #|  &1 - (&1 / &2 + p) = &1 / &2 + -- &1 * p
-      #|  forall m k. P(\\x:real^N. bernstein m k (&1 / &2 + p x))
-      #|  forall m c z. P(\\x:real^N.\n            sum(0..m) (\\k. c k * bernstein (z m) k (&1 / &2 + p x)))
-      #|  \\x:real^N. sum(0..n) (\\k. abs(&k / &n - &1 / &2) *\n                                          bernstein n k (&1 / &2 + p x))
-      #|  n:num
-      #|  n:num
-      #|  abs(x - y) < d ==> abs(abs(x - a) - abs(y - a)) < d
-      #|  e / &2
-      #|  \\x. abs(x - &1 / &2)
-      #|  p:real^N->real
-      #|  (a ==> b /\\ c) <=> (a ==> b) /\\ (a ==> c)
-      #|  min (e / &2) (&1 / &4)
-      #|  abs(x - y) < d ==> abs(abs x - abs y) < d
-      #|  f:real^N->real
-      #|  &0 < B ==> ~(&4 * B = &0)
-      #|  &0 < B ==> abs(B) = B
-      #|  &0 < B ==> abs(B) = B
-      #|  A(\\x:real^N. (&4 * B) * abs(inv(&4 * B) * f x)):bool
-      #|  B:real
-      #|  real_bounded(IMAGE (f:real^N->real) s)
-      #|  forall f. A(f) /\\ (forall x. x IN s ==> abs(f x) <= &1 / &4)\n                      ==> A(\\x:real^N. abs(f x))
-      #|  forall f. A(f) ==> A(\\x:real^N. abs(f x))
-      #|  y:real^N
-      #|  x:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  forall x y. x IN s /\\ y IN s /\\ ~(x = y)\n          ==> ?f:real^N->real. A(f) /\\ ~(f x = f y)
-      #|  (g:real^N->real) x
-      #|  forall g. abs(g) < Bg /\\ abs(g - g') < e ==> abs(g') < Bg + e
-      #|  abs a < c /\\ abs b < d ==> abs(a + b) < c + d
-      #|  a = e / &2 /\\ b = e / &2 ==> e = a + b
-      #|  e = Bf * e / &2 / Bf +\n                      (Bg + e / &2 / Bf) * e / &2 / (Bg + e / &2 / Bf)
-      #|  x:real^N
-      #|  f * g - f' * g':real = f * (g - g') + g' * (f - f')
-      #|  (\\x. f'(x) * g'(x)):real^N->real
-      #|  f':real^N->real
-      #|  e / &2 / (Bg + e / &2 / Bf)
-      #|  g':real^N->real
-      #|  e / &2 / Bf
-      #|  e:real
-      #|  Bg:real
-      #|  Bf:real
-      #|  real_bounded(IMAGE (f:real^N->real) s) /\\\n      real_bounded(IMAGE (g:real^N->real) s)
-      #|  g:real^N->real
-      #|  f:real^N->real
-      #|  forall f g:real^N->real. A(f) /\\ A(g) ==> A(\\x. f x * g x)
-      #|  forall f:real^N->real. C(f) ==> real_bounded(IMAGE f s)
-      #|  forall f:real^N->real. A(f) ==> C(f)
-      #|  abs(f - f') < e / &2 /\\ abs(g - g') < e / &2\n      ==> abs((f + g) - (f' + g')) < e
-      #|  (\\x. f' x + g' x):real^N->real
-      #|  f':real^N->real
-      #|  g':real^N->real
-      #|  e / &2
-      #|  g:real^N->real
-      #|  f:real^N->real
-      #|  forall f g:real^N->real. A(f) /\\ A(g) ==> A(\\x. f x + g x)
-      #|  (\\x. c):real^N->real
-      #|  e:real
-      #|  c:real
-      #|  forall c:real. A(\\x:real^N. c)
-      #|  forall f:real^N->real. C(f) ==> A(f)
-      #|  A = \\f. C f /\\\n             forall e. &0 < e\n               ==> ?g. P(g) /\\ forall x:real^N. x IN s ==> abs(f x - g x) < e
-      #|  C = \\f. forall x:real^N. x IN s ==> f real_continuous at x within s
-      #|  forall(P:(real^N->real)->bool) (s:real^N->bool).\n        compact s /\\\n        (forall c. P(\\x. c)) /\\\n        (forall f g. P(f) /\\ P(g) ==> P(\\x. f x + g x)) /\\\n        (forall f g. P(f) /\\ P(g) ==> P(\\x. f x * g x)) /\\\n        (forall x y. x IN s /\\ y IN s /\\ ~(x = y)\n               ==> ?f. (forall x. x IN s ==> f real_continuous (at x within s)) /\\\n                       P(f) /\\ ~(f x = f y))\n        ==> forall f e. (forall x. x IN s ==> f real_continuous (at x within s)) /\\ &0 < e\n                  ==> ?g. P(g) /\\ forall x. x IN s ==> abs(f x - g x) < e
-      #|  e:real
-      #|  y:real^N
-      #|  x:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  forall(P:(real^N->real)->bool) (s:real^N->bool).\n        compact s /\\\n        (forall f. P(f) ==> forall x. x IN s ==> f real_continuous (at x within s)) /\\\n        (forall c. P(\\x. c)) /\\\n        (forall f g. P(f) /\\ P(g) ==> P(\\x. f x + g x)) /\\\n        (forall f g. P(f) /\\ P(g) ==> P(\\x. f x * g x)) /\\\n        (forall x y. x IN s /\\ y IN s /\\ ~(x = y) ==> ?f. P(f) /\\ ~(f x = f y))\n        ==> forall f e. (forall x. x IN s ==> f real_continuous (at x within s)) /\\ &0 < e\n                  ==> ?g. P(g) /\\ forall x. x IN s ==> abs(f x - g x) < e
-      #|  (g:real^1->real) o lift
-      #|  g:real^1->real
-      #|  e:real
-      #|  f real_continuous_on s
-      #|  (f:real->real) o drop
-      #|  g real_continuous_on s
-      #|  (g:real->real) o drop
-      #|  g:real->real
-      #|  y:real
-      #|  x:real
-      #|  y:real
-      #|  x:real
-      #|  IMAGE lift s
-      #|  \\f. (P:(real->real)->bool)(f o lift)
-      #|  forall P s. real_compact s /\\\n         (forall c. P (\\x. c)) /\\\n         (forall f g. P f /\\ P g ==> P (\\x. f x + g x)) /\\\n         (forall f g. P f /\\ P g ==> P (\\x. f x * g x)) /\\\n         (forall x y. x IN s /\\ y IN s /\\ ~(x = y)\n                ==> ?f. f real_continuous_on s /\\ P f /\\ ~(f x = f y))\n         ==> forall f e. f real_continuous_on s /\\ &0 < e\n                   ==> ?g. P g /\\ forall x. x IN s ==> abs(f x - g x) < e
-      #|  y:real
-      #|  x:real
-      #|  y:real
-      #|  x:real
-      #|  forall P s. real_compact s /\\\n         (forall f. P f ==> f real_continuous_on s) /\\\n         (forall c. P (\\x. c)) /\\\n         (forall f g. P f /\\ P g ==> P (\\x. f x + g x)) /\\\n         (forall f g. P f /\\ P g ==> P (\\x. f x * g x)) /\\\n         (forall x y. x IN s /\\ y IN s /\\ ~(x = y) ==> ?f. P f /\\ ~(f x = f y))\n         ==> forall f e. f real_continuous_on s /\\ &0 < e\n                   ==> ?g. P g /\\ forall x. x IN s ==> abs(f x - g x) < e
-      #|  norm(x1 - x2) < e / &2 /\\ norm(y1 - y2) < e / &2\n      ==> norm((x1 + y1) - (x2 + y2)) < e
+      #|  (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)((k : Num), (t : Real), interval([((a : Cart[Real, N]), (b : Cart[Real, N]))]))
+      #|  (t : Real)
+      #|  real_integral(UNIV, (t : Real) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)((k : Num), t, UNIONS({(d : (Num, Cart[Real, N]) -> Bool)((n : Num)) | IN(n, UNIV)}))))
+      #|  (k : Num) < (l : Num) \226\134\146 !(l - 1 < k)
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  (l : Num) - 1
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  (l : Num)
+      #|  !((l : Num) == (k : Num)) \226\134\146 l < k || k < l
+      #|  !((l : Num) == (k : Num))
+      #|  (l : Num)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool)) == !(a && b \226\134\146 !c)
+      #|  (v : Cart[Real, N])
+      #|  (u : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (w : Cart[Real, N])
+      #|  !((d : (Num, Cart[Real, N]) -> Bool)((j : Num)) == {})
+      #|  (d : (Num, Cart[Real, N]) -> Bool)((j : Num)) == {}
+      #|  !((d : (Num, Cart[Real, N]) -> Bool)((i : Num)) == {})
+      #|  (d : (Num, Cart[Real, N]) -> Bool)((i : Num)) == {}
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)((k : Num), (t : Real), interval([((a : Cart[Real, N]), (b : Cart[Real, N]))]))
+      #|  (n : Num) => (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)((k : Num), (t : Real), (d : (Num, Cart[Real, N]) -> Bool)(n))
+      #|  (t : Real)
+      #|  UNION(IMAGE((i : Num) => op_dollar(interval_lowerbound((d : (Num, Cart[Real, N]) -> Bool)(i)), (k : Num)), UNIV), IMAGE((i : Num) => op_dollar(interval_upperbound(d(i)), k), UNIV))
+      #|  real_of_num(0) <= (x : Real) && x <= (a : Real) \226\134\146 abs(x) <= a
+      #|  \226\136\131 u : Cart[Real, N], \226\136\131 v : Cart[Real, N], op_dollar(u, (k : Num)) <= op_dollar(v, k) && (d : (Num, Cart[Real, N]) -> Bool)((j : Num)) == interval([(u, v)])
+      #|  (j : Num)
+      #|  abs(sum(op_dot_dot(0, (i : Num)), (m : Num) => measure((d : (Num, Cart[Real, N]) -> Bool)(m))))
+      #|  measure(interval([((u : Cart[Real, N]), (v : Cart[Real, N]))]))
+      #|  \226\136\131 u : Cart[Real, N], \226\136\131 v : Cart[Real, N], op_dollar(u, (k : Num)) <= op_dollar(v, k) && (d : (Num, Cart[Real, N]) -> Bool)((j : Num)) == interval([(u, v)])
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  measure(interval([((a : Cart[Real, N]), (b : Cart[Real, N]))]))
+      #|  (v : Cart[Real, N])
+      #|  (u : Cart[Real, N])
+      #|  (k : Num)
+      #|  (v : Cart[Real, N])
+      #|  (u : Cart[Real, N])
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (t : Real) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)((k : Num), t, UNIONS({(d : (Num, Cart[Real, N]) -> Bool)((n : Num)) | IN(n, UNIV)})))
+      #|  (n : Num) => (t : Real) => sum(op_dot_dot(0, n), (m : Num) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)((k : Num), t, (d : (Num, Cart[Real, N]) -> Bool)(m))))
+      #|  measure(UNIONS({(d : (Num, Cart[Real, N]) -> Bool)((n : Num)) | IN(n, UNIV)}))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (t : Real)
+      #|  \226\136\128 t : Real, \226\136\128 n : Num, (measurable : ((Cart[Real, M]) -> Bool) -> Bool)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)((k : Num), t, (d : (Num, Cart[Real, N]) -> Bool)(n)))
+      #|  (d : (Num, Cart[Real, N]) -> Bool)
+      #|  1 <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool))
+      #|  (e : Real)
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 k : Num, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 e : Real, real_of_num(0) < e && (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (bounded : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (measurable : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (\226\136\128 t : Real, (measurable : ((Cart[Real, M]) -> Bool) -> Bool)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s))) && real_integrable_on((t : Real) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s)), (UNIV : (Real) -> Bool)) \226\134\146 real_integral((UNIV : (Real) -> Bool), (t : Real) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s))) <= (measure : ((Cart[Real, N]) -> Bool) -> Real)(s) + e
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (k : Num)
+      #|  (t : Real)
+      #|  \226\136\128 t : Real, (measure : ((Cart[Real, M]) -> Bool) -> Real)((DIFF : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)((k : Num), t, interval([((a : Cart[Real, N]), (b : Cart[Real, N]))])), (slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, (s : (Cart[Real, N]) -> Bool)))) == (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, interval([(a, b)]))) - (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s))
+      #|  (t : Real)
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  (e : Real) / real_of_num(2)
+      #|  DIFF(interval([((a : Cart[Real, N]), (b : Cart[Real, N]))]), (s : (Cart[Real, N]) -> Bool))
+      #|  (k : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (k : Num)
+      #|  (e : Real)
+      #|  (\226\136\128 e : Real, (x : Real) - (y : Real) == e \226\134\146 !(real_of_num(0) < e)) \226\134\146 !(real_of_num(0) < x - y)
+      #|  !(real_of_num(0) < (b : Real) - (a : Real)) && !(real_of_num(0) < a - b) \226\134\146 a == b
+      #|  !(interval([((a : Cart[Real, N]), (b : Cart[Real, N]))]) == {})
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 k : Num, \226\136\128 s : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (bounded : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (measurable : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (\226\136\128 t : Real, (measurable : ((Cart[Real, M]) -> Bool) -> Bool)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s))) && real_integrable_on((t : Real) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s)), (UNIV : (Real) -> Bool)) \226\134\146 (measure : ((Cart[Real, N]) -> Bool) -> Real)(s) == real_integral((UNIV : (Real) -> Bool), (t : Real) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s)))
+      #|  real_integral(UNIV, (t : Real) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)((k : Num), t, (s : (Cart[Real, N]) -> Bool))))
+      #|  \226\136\128 k : Num, \226\136\128 s : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (bounded : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (measurable : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (\226\136\128 t : Real, (measurable : ((Cart[Real, M]) -> Bool) -> Bool)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s))) && has_real_integral((t : Real) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s)), (B : Real), (UNIV : (Real) -> Bool)) \226\134\146 (measure : ((Cart[Real, N]) -> Bool) -> Real)(s) == B
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, \226\136\128 s : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (compact : ((Cart[Real, N]) -> Bool) -> Bool)(s) && has_real_integral((t : Real) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s)), (B : Real), (UNIV : (Real) -> Bool)) \226\134\146 (measurable : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (measure : ((Cart[Real, N]) -> Bool) -> Real)(s) == B
+      #|  \226\136\128 k : Num, \226\136\128 s : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (compact : ((Cart[Real, N]) -> Bool) -> Bool)(s) && has_real_integral((t : Real) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s)), (B : Real), (UNIV : (Real) -> Bool)) \226\134\146 (measure : ((Cart[Real, N]) -> Bool) -> Real)(s) == B
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, \226\136\128 s : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (bounded : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (convex : ((Cart[Real, N]) -> Bool) -> Bool)(s) && has_real_integral((t : Real) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s)), (B : Real), (UNIV : (Real) -> Bool)) \226\134\146 (measurable : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (measure : ((Cart[Real, N]) -> Bool) -> Real)(s) == B
+      #|  \226\136\128 k : Num, \226\136\128 s : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (bounded : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (convex : ((Cart[Real, N]) -> Bool) -> Bool)(s) && has_real_integral((t : Real) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s)), (B : Real), (UNIV : (Real) -> Bool)) \226\134\146 (measure : ((Cart[Real, N]) -> Bool) -> Real)(s) == B
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, \226\136\128 s : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (bounded : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (open : ((Cart[Real, N]) -> Bool) -> Bool)(s) && has_real_integral((t : Real) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s)), (B : Real), (UNIV : (Real) -> Bool)) \226\134\146 (measurable : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (measure : ((Cart[Real, N]) -> Bool) -> Real)(s) == B
+      #|  \226\136\128 k : Num, \226\136\128 s : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (bounded : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (open : ((Cart[Real, N]) -> Bool) -> Bool)(s) && has_real_integral((t : Real) => (measure : ((Cart[Real, M]) -> Bool) -> Real)((slice : (Num, Real, (Cart[Real, N]) -> Bool, Cart[Real, M]) -> Bool)(k, t, s)), (B : Real), (UNIV : (Real) -> Bool)) \226\134\146 (measure : ((Cart[Real, N]) -> Bool) -> Real)(s) == B
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  \226\136\128 s : (Real) -> Bool, real_open(s) && !(s == {}) \226\134\146 (\226\136\131 x : Real, rational(x) && IN(x, s))
+      #|  {(x : Real) | (P : (Real) -> Bool)(x)}
+      #|  \226\136\128 P : (Real) -> Bool, real_open({(x : Real) | P(x)}) && (\226\136\131 x : Real, P(x)) \226\134\146 (\226\136\131 x : Real, rational(x) && P(x))
+      #|  \226\136\128 s : (Real) -> Bool, real_open(s) \226\134\146 (\226\136\131 x : Real, rational(x) && IN(x, s)) == (\226\136\131 x : Real, IN(x, s))
+      #|  \226\136\128 P : (Real) -> Bool, real_open({(x : Real) | P(x)}) \226\134\146 (\226\136\131 x : Real, rational(x) && P(x)) == (\226\136\131 x : Real, P(x))
+      #|  (a : Cart[Real, N])
+      #|  {(op_pct : (Real, Cart[Real, M]) -> Cart[Real, M])(inv(pow(real_of_num(2), n)), x) | n : Num, x : Cart[Real, M] | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 integer((op_dollar : (Cart[Real, M], Num) -> Real)(x, i))}
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, N], (continuous_on : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Bool) -> Bool)(f, (UNIV : (Cart[Real, M]) -> Bool)) && (\226\136\128 x : Cart[Real, M], (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 integer((op_dollar : (Cart[Real, M], Num) -> Real)(x, i))) \226\134\146 f(x) == a) && (\226\136\128 x : Cart[Real, M], f(x) == a \226\134\146 f((op_pct : (Real, Cart[Real, M]) -> Cart[Real, M])(inv(real_of_num(2)), x)) == a) \226\134\146 (\226\136\128 x : Cart[Real, M], f(x) == a)
+      #|  inv(real_of_num(2)) * (x : Real) == x / real_of_num(2)
+      #|  lift((a : Real))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, real_continuous_on(f, UNIV) && (\226\136\128 x : Real, integer(x) \226\134\146 f(x) == a) && (\226\136\128 x : Real, f(x) == a \226\134\146 f(x / real_of_num(2)) == a) \226\134\146 (\226\136\128 x : Real, f(x) == a)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, real_continuous_on(f, UNIV) && (\226\136\128 x : Real, \226\136\128 y : Real, f(x + y) == f(x) + f(y)) \226\134\146 (\226\136\128 a : Real, \226\136\128 x : Real, f(a * x) == a * f(x))
+      #|  (x : Real)
+      #|  real_of_num(0) < (e : Real) && (x : Real) == (y : Real) \226\134\146 abs(x - y) < e
+      #|  min((x : Real) - floor(x), floor(x) + real_of_num(1) - x)
+      #|  (e : Real)
+      #|  \226\136\128 x : Real, !integer(x) \226\134\146 real_continuous(floor, atreal(x))
+      #|  \226\136\128 x : Real, !integer(x) \226\134\146 real_continuous(frac, atreal(x))
+      #|  floor((y : Real)) == floor((x : Real)) - real_of_num(1)
+      #|  floor((y : Real)) == floor((x : Real))
+      #|  (x : Real) <= (y : Real) || y < x
+      #|  (y : Real)
+      #|  min(real_of_num(1), min((d1 : Real), (d2 : Real)))
+      #|  (d2 : Real)
+      #|  (d1 : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  min((d : Real), min(frac((x : Real)), real_of_num(1) - frac(x)))
+      #|  (d : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  frac((x : Real))
+      #|  integer((x : Real))
+      #|  (x : Real)
+      #|  real_continuous_on((f : (Real) -> Real), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  \226\136\128 f : (Real) -> Real, real_continuous_on(f, real_interval([(real_of_num(0), real_of_num(1))])) && f(real_of_num(1)) == f(real_of_num(0)) \226\134\146 real_continuous_on(o(f, frac), UNIV)
+      #|  real_of_num(0)
+      #|  real_of_num(1)
+      #|  (a : Real) < (b : Real) \226\134\146 ((x : Real) + (b - a) - a) / (b - a) == real_of_num(1) + (x - a) / (b - a)
+      #|  (a : Real) < (b : Real)
+      #|  frac(((x : Real) - (a : Real)) / ((b : Real) - a)) == (x - a) / (b - a)
+      #|  (x : Real) == (b : Real)
+      #|  (x : Real)
+      #|  ((a : Real) + ((b : Real) - a) * (x : Real) <= b) == (real_of_num(0) <= (b - a) * (real_of_num(1) - x))
+      #|  (UNIV : (Real) -> Bool)
+      #|  o((f : (Real) -> Real), o((y : Real) => (a : Real) + ((b : Real) - a) * y, o(frac, (x : Real) => (x - a) / (b - a))))
+      #|  (x : Real) => (f : (Real) -> Real)((a : Real))
+      #|  (b : Real) <= (a : Real) || a < b
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_continuous_on(f, real_interval([(a, b)])) && f(a) == f(b) \226\134\146 (\226\136\131 g : (Real) -> Real, real_continuous_on(g, UNIV) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 g(x) == f(x)) && (\226\136\128 x : Real, g(x + (b - a)) == g(x)))
+      #|  floor((x : Real)) == real_of_num(0)
+      #|  (x : Real) == real_of_num(1)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (f : (Real) -> Real)((a : Real) + (b : Real)) == f(a) + f(b) && f((c : Real) + (d : Real)) == f(c) + f(d) && a + b == c + d \226\134\146 f(a) + f(b) == f(c) + f(d)
+      #|  (x : Real) < real_of_num(1) && (y : Real) < real_of_num(1) \226\134\146 x + y - real_of_num(1) <= real_of_num(1)
+      #|  !((x : Real) + (y : Real) < real_of_num(1)) \226\134\146 real_of_num(0) <= x + y - real_of_num(1)
+      #|  (t : Real) / real_of_num(2)
+      #|  (t : Real) / real_of_num(2)
+      #|  \226\136\128 t : Real, real_of_num(0) <= t && t <= real_of_num(1) \226\134\146 (f : (Real) -> Real)(t) / real_of_num(2) == f(t / real_of_num(2))
+      #|  ((f1 : Real) * ((x : Real) + (y : Real) + real_of_num(1)) + (g : Real) == f1 * x + (z : Real) + (f1 * y + (h : Real))) == (f1 / real_of_num(2) + g / real_of_num(2) == z / real_of_num(2) + h / real_of_num(2))
+      #|  (f1 : Real) * ((x : Real) - real_of_num(1)) + (f : Real) - (f1 * x + real_of_num(0)) == f - f1
+      #|  floor((y : Real)) == floor((x : Real)) - real_of_num(1)
+      #|  (a : Real) + (x : Real) - (a + real_of_num(0)) == x - real_of_num(0)
+      #|  floor((y : Real)) == floor((x : Real))
+      #|  (x : Real) <= (y : Real) || y < x
+      #|  (y : Real)
+      #|  min(real_of_num(1), min((d1 : Real), (d2 : Real)))
+      #|  (d2 : Real)
+      #|  (d1 : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  min((d : Real), min(frac((x : Real)), real_of_num(1) - frac(x)))
+      #|  (d : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  frac((x : Real))
+      #|  integer((x : Real))
+      #|  (x : Real)
+      #|  real_continuous_on((f : (Real) -> Real), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  (x : Real) => (f : (Real) -> Real)(real_of_num(1)) * floor(x) + f(frac(x))
+      #|  real_of_num(0)
+      #|  real_of_num(0)
+      #|  (f : (Real) -> Real)(real_of_num(0)) == real_of_num(0)
+      #|  \226\136\128 f : (Real) -> Real, real_continuous_on(f, real_interval([(real_of_num(0), real_of_num(1))])) && (\226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && real_of_num(0) <= y && x + y <= real_of_num(1) \226\134\146 f(x + y) == f(x) + f(y)) \226\134\146 (\226\136\131 g : (Real) -> Real, real_continuous_on(g, UNIV) && (\226\136\128 x : Real, \226\136\128 y : Real, g(x + y) == g(x) + g(y)) && (\226\136\128 x : Real, IN(x, real_interval([(real_of_num(0), real_of_num(1))])) \226\134\146 g(x) == f(x)))
+      #|  real_of_num(0)
+      #|  real_of_num(1)
+      #|  real_of_num(0) < (b : Real) \226\134\146 abs(b) * (x : Real) == x * b
+      #|  (d : Real) / (b : Real)
+      #|  (d : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  ((b : Real) * (x : Real) + b * (y : Real) <= b) == (real_of_num(0) <= b * (real_of_num(1) - (x + y)))
+      #|  (a : Real) * ((x : Real) / (b : Real)) == a * x / b
+      #|  real_of_num(0) < (b : Real) \226\134\146 b * ((a : Real) * ((x : Real) / b)) == a * x
+      #|  (a : Real)
+      #|  (x : Real) => (f : (Real) -> Real)((b : Real) * x)
+      #|  real_of_num(0)
+      #|  real_of_num(0)
+      #|  ((a : Real) <= (x : Real) && x <= a && a <= (y : Real) && y <= a) == (x == a && y == a)
+      #|  (b : Real) < real_of_num(0) || b == real_of_num(0) || real_of_num(0) < b
+      #|  (f : (Real) -> Real)((x : Real) + ((y : Real) - x)) == f(x) + f(y - x)
+      #|  (f : (Real) -> Real)((y : Real) + ((x : Real) - y)) == f(y) + f(x - y)
+      #|  (y : Real) == (x : Real) || y < x || x < y
+      #|  (y : Real)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (x : Real)
+      #|  (g : (Real) -> Real)
+      #|  (g : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, real_continuous_on(f, real_interval([(real_of_num(0), real_of_num(1))])) && (\226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && real_of_num(0) <= y && x + y <= real_of_num(1) \226\134\146 f(x + y) == f(x) + f(y)) \226\134\146 (\226\136\128 a : Real, \226\136\128 x : Real, real_of_num(0) <= x && x <= real_of_num(1) && real_of_num(0) <= a * x && a * x <= real_of_num(1) \226\134\146 f(a * x) == a * f(x))
+      #|  \226\136\128 f : (Real) -> Real, op_minus_minus_minus_gt(f, real_of_num(0), within(atreal(real_of_num(0)), {(x : Real) | real_of_num(0) <= x})) && (\226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && real_of_num(0) <= y && x + y <= real_of_num(1) \226\134\146 f(x + y) == f(x) + f(y)) \226\134\146 (\226\136\128 a : Real, \226\136\128 x : Real, real_of_num(0) <= x && x <= real_of_num(1) && real_of_num(0) <= a * x && a * x <= real_of_num(1) \226\134\146 f(a * x) == a * f(x))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 b : Real, op_minus_minus_minus_gt(f, real_of_num(0), within(atreal(real_of_num(0)), {(x : Real) | real_of_num(0) <= x})) && (\226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && real_of_num(0) <= y && x + y <= b \226\134\146 f(x + y) == f(x) + f(y)) \226\134\146 (\226\136\128 a : Real, \226\136\128 x : Real, real_of_num(0) <= x && x <= b && real_of_num(0) <= a * x && a * x <= b \226\134\146 f(a * x) == a * f(x))
+      #|  (x : Real) / (b : Real)
+      #|  (x : Real)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 e : Real, !negligible(s) && real_of_num(0) < e \226\134\146 (\226\136\131 x : Cart[Real, N], \226\136\131 y : Cart[Real, N], IN(x, s) && IN(y, s) && !(x == y) && norm(x - y) < e)
+      #|  {lift((f : (_, _) -> Real)((x : _), (y : _))) | (P : (_, _) -> Bool)(x, y)} == IMAGE(lift, {f((x : _), (y : _)) | P(x, y)})
+      #|  {(g : (_, _) -> _)((x : _), (y : _)) | IN(x, IMAGE((f : (_) -> _), (s : (_) -> Bool))) && IN(y, IMAGE(f, (t : (_) -> Bool)))} == {g(f((x : _)), f((y : _))) | IN(x, s) && IN(y, t)}
+      #|  (d : Real)
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(s) && real_of_num(0) < real_measure(s) \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && SUBSET(real_interval((-d, d)), {(x : Real) - (y : Real) | IN(x, s) && IN(y, s)}))
+      #|  (bernstein : (Num, Num, Real) -> Real)((n : Num), (k : Num), (x : Real)) == real_of_num(binom((n, k))) * (pow(x, k) * pow(real_of_num(1) - x, n - k))
+      #|  \226\136\128 n : Num, \226\136\128 k : Num, \226\136\128 x : Real, real_of_num(0) <= x && x <= real_of_num(1) \226\134\146 real_of_num(0) <= bernstein(n, k, x)
+      #|  \226\136\128 n : Num, sum(op_dot_dot(0, n), (k : Num) => bernstein(n, k, (x : Real))) == real_of_num(1)
+      #|  (k : Num) == 0 || k == 1 || 1 <= k && 2 + (k - 2) == k
+      #|  (k : Real) * (k1 : Real) * (b : Real) * (xk : Real) * (y : Real) * (x2 : Real) == k * (k1 * (b * (y * (x2 * xk))))
+      #|  (k : Num)
+      #|  (n : Num) == 0
+      #|  real_of_num(1) - (x : Real)
+      #|  (x : Real)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(k) * ((real_of_num(k) - real_of_num(1)) * bernstein(n, k, (x : Real)))) == real_of_num(n) * ((real_of_num(n) - real_of_num(1)) * pow(x, 2))
+      #|  (k : Num) == 0 || SUC(k - 1) == k
+      #|  (k : Real) * ((b : Real) * ((xk : Real) * (y : Real))) * (x : Real) == k * (b * (x * xk * y))
+      #|  (k : Num)
+      #|  real_of_num(1) - (x : Real)
+      #|  (x : Real)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(k) * bernstein(n, k, (x : Real))) == real_of_num(n) * x
+      #|  pow((a : Real) - (b : Real), 2) * (x : Real) == a * ((a - real_of_num(1)) * x) + ((real_of_num(1) - real_of_num(2) * b) * (a * x) + b * (b * x))
+      #|  (n : Num) - 1 - 1 == n - 2
+      #|  (x : Real)
+      #|  (x : Real) => sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(k) * (real_of_num(binom((n, k))) * (pow(x, k - 1) * pow((y : Real), n - k))))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(k) * (real_of_num(k - 1) * (real_of_num(binom((n, k))) * (pow(x, k - 2) * pow(y, n - k))))) == real_of_num(n) * (real_of_num(n - 1) * pow(x + y, n - 2))
+      #|  (x : Real)
+      #|  (x : Real) => sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, k))) * (pow(x, k) * pow((y : Real), n - k)))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(k) * (real_of_num(binom((n, k))) * (pow(x, k - 1) * pow(y, n - k)))) == real_of_num(n) * pow(x + y, n - 1)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, k))) * (pow(x, k) * pow(y, n - k))) == pow(x + y, n)
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, sum(op_dot_dot(0, n), (k : Num) => pow(real_of_num(k) - real_of_num(n) * x, 2) * bernstein(n, k, x)) == real_of_num(n) * (x * (real_of_num(1) - x))
+      #|  (x : Real) < (e : Real) \226\134\146 (y : Real) <= x \226\134\146 y < e
+      #|  real_of_num(0) < (e : Real) && (k : Real) < e / real_of_num(4) \226\134\146 (x : Real) <= e / real_of_num(2) + k \226\134\146 x < e
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (x : Real) * (real_of_num(2) * (m : Real)) * (i : Real) == real_of_num(2) * m * (i * x)
+      #|  (e : Real) / real_of_num(4) * pow((d : Real), 2) / (real_of_num(2) * (M : Real))
+      #|  (real_of_num((n : Num)) * (x : Real) <= real_of_num(n)) == (real_of_num(n) * x <= real_of_num(n) * (real_of_num(1) * real_of_num(1)))
+      #|  pow((x : Real) - (y : Real), 2) == pow(y - x, 2)
+      #|  real_of_num(0) < (n : Real) \226\134\146 n * ((x : Real) - (k : Real) * inv(n)) == n * x - k
+      #|  real_of_num(0) < (n : Real) \226\134\146 pow(n, 2) * inv(n) == n
+      #|  pow(real_of_num((n : Num)), 2)
+      #|  abs((x : Real)) <= (M : Real) && abs((y : Real)) <= M && M * real_of_num(1) <= M * ((b : Real) / (d : Real)) \226\134\146 abs(x - y) <= real_of_num(2) * (M / d * b)
+      #|  real_of_num(0) < (e : Real) && (x : Real) <= (d : Real) \226\134\146 x <= e / real_of_num(2) + d
+      #|  (real_of_num(0) <= real_of_num(2) * (x : Real)) == (real_of_num(0) <= x)
+      #|  (x : Real) < (e : Real) && real_of_num(0) <= (d : Real) \226\134\146 x <= e + d
+      #|  abs((x : Real) - real_of_num((k : Num)) / real_of_num((n : Num))) < (d : Real) || d <= abs(x - real_of_num(k) / real_of_num(n))
+      #|  real_of_num(0) <= real_of_num((k : Num)) / real_of_num((n : Num)) && real_of_num(k) / real_of_num(n) <= real_of_num(1)
+      #|  (k : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => ((e : Real) / real_of_num(2) + real_of_num(2) * ((M : Real) / pow((d : Real), 2) * pow((x : Real) - real_of_num(k) / real_of_num(n), 2))) * bernstein(n, k, x))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+      #|  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+      #|  abs(sum(op_dot_dot(0, (n : Num)), (k : Num) => ((f : (Real) -> Real)((x : Real)) - f(real_of_num(k) / real_of_num(n))) * bernstein(n, k, x)))
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, 0 < n && real_of_num(0) <= x && x <= real_of_num(1) \226\134\146 abs((f : (Real) -> Real)(x) - sum(op_dot_dot(0, n), (k : Num) => f(real_of_num(k) / real_of_num(n)) * bernstein(n, k, x))) <= (e : Real) / real_of_num(2) + real_of_num(2) * (M : Real) / (pow((d : Real), 2) * real_of_num(n))
+      #|  (d : Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  real_uniformly_continuous_on((f : (Real) -> Real), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  (M : Real)
+      #|  real_bounded(IMAGE((f : (Real) -> Real), real_interval([(real_of_num(0), real_of_num(1))])))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 e : Real, real_continuous_on(f, real_interval([(real_of_num(0), real_of_num(1))])) && real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : Real, N <= n && IN(x, real_interval([(real_of_num(0), real_of_num(1))])) \226\134\146 abs(f(x) - sum(op_dot_dot(0, n), (k : Num) => f(real_of_num(k) / real_of_num(n)) * bernstein(n, k, x))) < e)
+      #|  (x : Cart[Real, N])
+      #|  SUBSET((s : (Cart[Real, N]) -> Bool), {(y : Cart[Real, N]) | \226\136\131 x : Cart[Real, N], IN(x, (t : (Cart[Real, N]) -> Bool)) && IN(y, (H : (Cart[Real, N], Cart[Real, N]) -> Bool)(x))})
+      #|  (abs((f : Real) - (s : Real)) < (e : Real)) == (f - e < s && s < f + e)
+      #|  !((t : (Cart[Real, N]) -> Bool) == {})
+      #|  (x : Cart[Real, N])
+      #|  IMAGE((f1 : (Cart[Real, N], Cart[Real, N]) -> Real), (t : (Cart[Real, N]) -> Bool))
+      #|  (z : Cart[Real, N]) => sup({(f1 : (Cart[Real, N], Cart[Real, N]) -> Real)((x : Cart[Real, N]), z) | IN(x, (t : (Cart[Real, N]) -> Bool))})
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool)) == (b && a && c)
+      #|  ((x : Real) < (y : Real) + (e : Real)) == (x - y < e)
+      #|  ((x : Real) - (y : Real) < (z : Real)) == (x - z < y)
+      #|  {(x : Cart[Real, Unit]) | op_dollar(x, 1) < (e : Real)}
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  o(lift, (z : Cart[Real, N]) => (f : (Cart[Real, N]) -> Real)(z) - (f1 : (Cart[Real, N], Cart[Real, N]) -> Real)((x : Cart[Real, N]), z))
+      #|  (x : Cart[Real, N])
+      #|  {(H : (Cart[Real, N], Cart[Real, N]) -> Bool)((x : Cart[Real, N])) | IN(x, (s : (Cart[Real, N]) -> Bool))}
+      #|  ((x : Real) - (e : Real) < x) == (real_of_num(0) < e)
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 IN(x, (H : (Cart[Real, N], Cart[Real, N]) -> Bool)(x))
+      #|  (H : (Cart[Real, N], Cart[Real, N]) -> Bool) == ((x : Cart[Real, N]) => {(z : Cart[Real, N]) | IN(z, (s : (Cart[Real, N]) -> Bool)) && (f : (Cart[Real, N]) -> Real)(z) - (e : Real) < (f1 : (Cart[Real, N], Cart[Real, N]) -> Real)(x, z)})
+      #|  (f1 : (Cart[Real, N], Cart[Real, N]) -> Real)
+      #|  (y : Cart[Real, N])
+      #|  SUBSET((s : (Cart[Real, N]) -> Bool), {(y : Cart[Real, N]) | \226\136\131 z : Cart[Real, N], IN(z, (t : (Cart[Real, N]) -> Bool)) && IN(y, (G : (Cart[Real, N], Cart[Real, N], Cart[Real, N]) -> Bool)((x : Cart[Real, N]), z))})
+      #|  (y : Cart[Real, N])
+      #|  !((t : (Cart[Real, N]) -> Bool) == {})
+      #|  IMAGE((y : Cart[Real, N]) => (z : Cart[Real, N]) => (f2 : (Cart[Real, N], Cart[Real, N], Cart[Real, N]) -> Real)((x : Cart[Real, N]), y, z), (t : (Cart[Real, N]) -> Bool))
+      #|  (x : Real) == min(x, x)
+      #|  (z : Cart[Real, N]) => inf({(f2 : (Cart[Real, N], Cart[Real, N], Cart[Real, N]) -> Real)((x : Cart[Real, N]), (y : Cart[Real, N]), z) | IN(y, (t : (Cart[Real, N]) -> Bool))})
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool)) == (b && a && c)
+      #|  ((x : Real) < (y : Real) + (e : Real)) == (x - y < e)
+      #|  {(x : Cart[Real, Unit]) | op_dollar(x, 1) < (e : Real)}
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  o(lift, (z : Cart[Real, N]) => (f2 : (Cart[Real, N], Cart[Real, N], Cart[Real, N]) -> Real)((x : Cart[Real, N]), (w : Cart[Real, N]), z) - (f : (Cart[Real, N]) -> Real)(z))
+      #|  (w : Cart[Real, N])
+      #|  {(G : (Cart[Real, N], Cart[Real, N], Cart[Real, N]) -> Bool)((x : Cart[Real, N]), (y : Cart[Real, N])) | IN(y, (s : (Cart[Real, N]) -> Bool))}
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 (\226\136\131 f1 : (Cart[Real, N]) -> Real, (A : ((Cart[Real, N]) -> Real) -> Bool)(f1) && f1(x) == (f : (Cart[Real, N]) -> Real)(x) && (\226\136\128 y : Cart[Real, N], IN(y, s) \226\134\146 f1(y) < f(y) + (e : Real)))
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, s) \226\134\146 IN(x, (G : (Cart[Real, N], Cart[Real, N], Cart[Real, N]) -> Bool)(x, y)) && IN(y, G(x, y))
+      #|  (G : (Cart[Real, N], Cart[Real, N], Cart[Real, N]) -> Bool) == ((x : Cart[Real, N]) => (y : Cart[Real, N]) => {(z : Cart[Real, N]) | IN(z, (s : (Cart[Real, N]) -> Bool)) && (f2 : (Cart[Real, N], Cart[Real, N], Cart[Real, N]) -> Real)(x, y, z) < (f : (Cart[Real, N]) -> Real)(z) + (e : Real)})
+      #|  (f2 : (Cart[Real, N], Cart[Real, N], Cart[Real, N]) -> Real)
+      #|  !((h : (Cart[Real, N]) -> Real)((x : Cart[Real, N])) == h((y : Cart[Real, N])))
+      #|  (z : Cart[Real, N]) => ((f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) - f((x : Cart[Real, N]))) / ((h : (Cart[Real, N]) -> Real)(y) - h(x)) * h(z) + (f(x) - (f(y) - f(x)) / (h(y) - h(x)) * h(x))
+      #|  \226\136\131 h : (Cart[Real, N]) -> Real, (A : ((Cart[Real, N]) -> Real) -> Bool)(h) && !(h((x : Cart[Real, N])) == h((y : Cart[Real, N])))
+      #|  (z : Cart[Real, N]) => (f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))
+      #|  (y : Cart[Real, N]) == (x : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, s) \226\134\146 (\226\136\131 h : (Cart[Real, N]) -> Real, (A : ((Cart[Real, N]) -> Real) -> Bool)(h) && h(x) == (f : (Cart[Real, N]) -> Real)(x) && h(y) == f(y))
+      #|  (e : Real)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  abs((f : Real) - (h : Real)) < (e : Real) / real_of_num(2) && abs(h - (g : Real)) < e / real_of_num(2) \226\134\146 abs(f - g) < e
+      #|  (e : Real) / real_of_num(2)
+      #|  (h : (Cart[Real, N]) -> Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  (e : Real)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 e : Real, (C : ((Cart[Real, N]) -> Real) -> Bool)(f) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Cart[Real, N]) -> Real, (A : ((Cart[Real, N]) -> Real) -> Bool)(g) && (\226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 abs(f(x) - g(x)) < e))
+      #|  (t : ((Cart[Real, N]) -> Real) -> Bool) == {}
+      #|  (t : ((Cart[Real, N]) -> Real) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  \226\136\128 t : ((Cart[Real, N]) -> Real) -> Bool, FINITE(t) && (\226\136\128 f : (Cart[Real, N]) -> Real, IN(f, t) \226\134\146 (A : ((Cart[Real, N]) -> Real) -> Bool)(f)) \226\134\146 A((x : Cart[Real, N]) => inf({(f : (Cart[Real, N]) -> Real)(x) | IN(f, t)}))
+      #|  (t : ((Cart[Real, N]) -> Real) -> Bool) == {}
+      #|  (t : ((Cart[Real, N]) -> Real) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  \226\136\128 t : ((Cart[Real, N]) -> Real) -> Bool, FINITE(t) && (\226\136\128 f : (Cart[Real, N]) -> Real, IN(f, t) \226\134\146 (A : ((Cart[Real, N]) -> Real) -> Bool)(f)) \226\134\146 A((x : Cart[Real, N]) => sup({(f : (Cart[Real, N]) -> Real)(x) | IN(f, t)}))
+      #|  min((a : Real), (b : Real)) == -real_of_num(1) * max(-real_of_num(1) * a, -real_of_num(1) * b)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, (A : ((Cart[Real, N]) -> Real) -> Bool)(f) && A(g) \226\134\146 A((x : Cart[Real, N]) => min(f(x), g(x)))
+      #|  max((a : Real), (b : Real)) == inv(real_of_num(2)) * (a + (b + abs(a + -real_of_num(1) * b)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, (A : ((Cart[Real, N]) -> Real) -> Bool)(f) && A(g) \226\134\146 A((x : Cart[Real, N]) => max(f(x), g(x)))
+      #|  (f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))
+      #|  \226\136\128 f : Real, abs(f) <= real_of_num(1) / real_of_num(4) && abs(f - (p : Real)) < real_of_num(1) / real_of_num(4) \226\134\146 real_of_num(0) <= real_of_num(1) / real_of_num(2) + p && real_of_num(1) / real_of_num(2) + p <= real_of_num(1)
+      #|  (x : Real) == real_of_num(1) / real_of_num(2) + x - real_of_num(1) / real_of_num(2)
+      #|  (x : Real) => abs(abs(x) - (a : Real)) < (e : Real)
+      #|  (p : (Cart[Real, N]) -> Real)
+      #|  \226\136\128 p : (_) -> Real, abs(abs(p((x : _))) - (s : Real)) < (e : Real) / real_of_num(2) && abs((f : (_) -> Real)(x) - p(x)) < e / real_of_num(2) \226\134\146 abs(abs(f(x)) - s) < e
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 k : Num, (P : ((Cart[Real, N]) -> Real) -> Bool)(f) \226\134\146 P((x : Cart[Real, N]) => pow(f(x), k))
+      #|  real_of_num(1) - (real_of_num(1) / real_of_num(2) + (p : Real)) == real_of_num(1) / real_of_num(2) + -real_of_num(1) * p
+      #|  \226\136\128 m : Num, \226\136\128 k : Num, (P : ((Cart[Real, N]) -> Real) -> Bool)((x : Cart[Real, N]) => bernstein(m, k, real_of_num(1) / real_of_num(2) + (p : (Cart[Real, N]) -> Real)(x)))
+      #|  \226\136\128 m : Num, \226\136\128 c : (Num) -> Real, \226\136\128 z : (Num) -> Num, (P : ((Cart[Real, N]) -> Real) -> Bool)((x : Cart[Real, N]) => sum(op_dot_dot(0, m), (k : Num) => c(k) * bernstein(z(m), k, real_of_num(1) / real_of_num(2) + (p : (Cart[Real, N]) -> Real)(x))))
+      #|  (x : Cart[Real, N]) => sum(op_dot_dot(0, (n : Num)), (k : Num) => abs(real_of_num(k) / real_of_num(n) - real_of_num(1) / real_of_num(2)) * bernstein(n, k, real_of_num(1) / real_of_num(2) + (p : (Cart[Real, N]) -> Real)(x)))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  abs((x : Real) - (y : Real)) < (d : Real) \226\134\146 abs(abs(x - (a : Real)) - abs(y - a)) < d
+      #|  (e : Real) / real_of_num(2)
+      #|  (x : Real) => abs(x - real_of_num(1) / real_of_num(2))
+      #|  (p : (Cart[Real, N]) -> Real)
+      #|  ((a : Bool) \226\134\146 (b : Bool) && (c : Bool)) == ((a \226\134\146 b) && (a \226\134\146 c))
+      #|  min((e : Real) / real_of_num(2), real_of_num(1) / real_of_num(4))
+      #|  abs((x : Real) - (y : Real)) < (d : Real) \226\134\146 abs(abs(x) - abs(y)) < d
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  real_of_num(0) < (B : Real) \226\134\146 !(real_of_num(4) * B == real_of_num(0))
+      #|  real_of_num(0) < (B : Real) \226\134\146 abs(B) == B
+      #|  real_of_num(0) < (B : Real) \226\134\146 abs(B) == B
+      #|  (A : ((Cart[Real, N]) -> Real) -> Bool)((x : Cart[Real, N]) => real_of_num(4) * (B : Real) * abs(inv(real_of_num(4) * B) * (f : (Cart[Real, N]) -> Real)(x)))
+      #|  (B : Real)
+      #|  real_bounded(IMAGE((f : (Cart[Real, N]) -> Real), (s : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, (A : ((Cart[Real, N]) -> Real) -> Bool)(f) && (\226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 abs(f(x)) <= real_of_num(1) / real_of_num(4)) \226\134\146 A((x : Cart[Real, N]) => abs(f(x)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, (A : ((Cart[Real, N]) -> Real) -> Bool)(f) \226\134\146 A((x : Cart[Real, N]) => abs(f(x)))
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, s) && !(x == y) \226\134\146 (\226\136\131 f : (Cart[Real, N]) -> Real, (A : ((Cart[Real, N]) -> Real) -> Bool)(f) && !(f(x) == f(y)))
+      #|  (g : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))
+      #|  \226\136\128 g : Real, abs(g) < (Bg : Real) && abs(g - (g' : Real)) < (e : Real) \226\134\146 abs(g') < Bg + e
+      #|  abs((a : Real)) < (c : Real) && abs((b : Real)) < (d : Real) \226\134\146 abs(a + b) < c + d
+      #|  (a : Real) == (e : Real) / real_of_num(2) && (b : Real) == e / real_of_num(2) \226\134\146 e == a + b
+      #|  (e : Real) == (Bf : Real) * (e / real_of_num(2) / Bf) + ((Bg : Real) + e / real_of_num(2) / Bf) * (e / real_of_num(2) / (Bg + e / real_of_num(2) / Bf))
+      #|  (x : Cart[Real, N])
+      #|  (f : Real) * (g : Real) - (f' : Real) * (g' : Real) == f * (g - g') + g' * (f - f')
+      #|  (x : Cart[Real, N]) => (f' : (Cart[Real, N]) -> Real)(x) * (g' : (Cart[Real, N]) -> Real)(x)
+      #|  (f' : (Cart[Real, N]) -> Real)
+      #|  (e : Real) / real_of_num(2) / ((Bg : Real) + e / real_of_num(2) / (Bf : Real))
+      #|  (g' : (Cart[Real, N]) -> Real)
+      #|  (e : Real) / real_of_num(2) / (Bf : Real)
+      #|  (e : Real)
+      #|  (Bg : Real)
+      #|  (Bf : Real)
+      #|  real_bounded(IMAGE((f : (Cart[Real, N]) -> Real), (s : (Cart[Real, N]) -> Bool))) && real_bounded(IMAGE((g : (Cart[Real, N]) -> Real), s))
+      #|  (g : (Cart[Real, N]) -> Real)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, (A : ((Cart[Real, N]) -> Real) -> Bool)(f) && A(g) \226\134\146 A((x : Cart[Real, N]) => f(x) * g(x))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, (C : ((Cart[Real, N]) -> Real) -> Bool)(f) \226\134\146 real_bounded(IMAGE(f, (s : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, (A : ((Cart[Real, N]) -> Real) -> Bool)(f) \226\134\146 (C : ((Cart[Real, N]) -> Real) -> Bool)(f)
+      #|  abs((f : Real) - (f' : Real)) < (e : Real) / real_of_num(2) && abs((g : Real) - (g' : Real)) < e / real_of_num(2) \226\134\146 abs(f + g - (f' + g')) < e
+      #|  (x : Cart[Real, N]) => (f' : (Cart[Real, N]) -> Real)(x) + (g' : (Cart[Real, N]) -> Real)(x)
+      #|  (f' : (Cart[Real, N]) -> Real)
+      #|  (g' : (Cart[Real, N]) -> Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  (g : (Cart[Real, N]) -> Real)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, (A : ((Cart[Real, N]) -> Real) -> Bool)(f) && A(g) \226\134\146 A((x : Cart[Real, N]) => f(x) + g(x))
+      #|  (x : Cart[Real, N]) => (c : Real)
+      #|  (e : Real)
+      #|  (c : Real)
+      #|  \226\136\128 c : Real, (A : ((Cart[Real, N]) -> Real) -> Bool)((x : Cart[Real, N]) => c)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, (C : ((Cart[Real, N]) -> Real) -> Bool)(f) \226\134\146 (A : ((Cart[Real, N]) -> Real) -> Bool)(f)
+      #|  (A : ((Cart[Real, N]) -> Real) -> Bool) == ((f : (Cart[Real, N]) -> Real) => (C : ((Cart[Real, N]) -> Real) -> Bool)(f) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 g : (Cart[Real, N]) -> Real, (P : ((Cart[Real, N]) -> Real) -> Bool)(g) && (\226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 abs(f(x) - g(x)) < e))))
+      #|  (C : ((Cart[Real, N]) -> Real) -> Bool) == ((f : (Cart[Real, N]) -> Real) => \226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 real_continuous(f, within(at(x), s)))
+      #|  \226\136\128 P : ((Cart[Real, N]) -> Real) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) && (\226\136\128 c : Real, P((x : Cart[Real, N]) => c)) && (\226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, P(f) && P(g) \226\134\146 P((x : Cart[Real, N]) => f(x) + g(x))) && (\226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, P(f) && P(g) \226\134\146 P((x : Cart[Real, N]) => f(x) * g(x))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) && !(x == y) \226\134\146 (\226\136\131 f : (Cart[Real, N]) -> Real, (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 real_continuous(f, within(at(x), s))) && P(f) && !(f(x) == f(y)))) \226\134\146 (\226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 e : Real, (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 real_continuous(f, within(at(x), s))) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Cart[Real, N]) -> Real, P(g) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 abs(f(x) - g(x)) < e)))
+      #|  (e : Real)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 P : ((Cart[Real, N]) -> Real) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) && (\226\136\128 f : (Cart[Real, N]) -> Real, P(f) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 real_continuous(f, within(at(x), s)))) && (\226\136\128 c : Real, P((x : Cart[Real, N]) => c)) && (\226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, P(f) && P(g) \226\134\146 P((x : Cart[Real, N]) => f(x) + g(x))) && (\226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, P(f) && P(g) \226\134\146 P((x : Cart[Real, N]) => f(x) * g(x))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) && !(x == y) \226\134\146 (\226\136\131 f : (Cart[Real, N]) -> Real, P(f) && !(f(x) == f(y)))) \226\134\146 (\226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 e : Real, (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 real_continuous(f, within(at(x), s))) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Cart[Real, N]) -> Real, P(g) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 abs(f(x) - g(x)) < e)))
+      #|  o((g : (Cart[Real, Unit]) -> Real), lift)
+      #|  (g : (Cart[Real, Unit]) -> Real)
+      #|  (e : Real)
+      #|  real_continuous_on((f : (Real) -> Real), (s : (Real) -> Bool))
+      #|  o((f : (Real) -> Real), drop)
+      #|  real_continuous_on((g : (Real) -> Real), (s : (Real) -> Bool))
+      #|  o((g : (Real) -> Real), drop)
+      #|  (g : (Real) -> Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  (f : (Cart[Real, Unit]) -> Real) => (P : ((Real) -> Real) -> Bool)(o(f, lift))
+      #|  \226\136\128 P : ((Real) -> Real) -> Bool, \226\136\128 s : (Real) -> Bool, real_compact(s) && (\226\136\128 c : Real, P((x : Real) => c)) && (\226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, P(f) && P(g) \226\134\146 P((x : Real) => f(x) + g(x))) && (\226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, P(f) && P(g) \226\134\146 P((x : Real) => f(x) * g(x))) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) && !(x == y) \226\134\146 (\226\136\131 f : (Real) -> Real, real_continuous_on(f, s) && P(f) && !(f(x) == f(y)))) \226\134\146 (\226\136\128 f : (Real) -> Real, \226\136\128 e : Real, real_continuous_on(f, s) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Real) -> Real, P(g) && (\226\136\128 x : Real, IN(x, s) \226\134\146 abs(f(x) - g(x)) < e)))
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  \226\136\128 P : ((Real) -> Real) -> Bool, \226\136\128 s : (Real) -> Bool, real_compact(s) && (\226\136\128 f : (Real) -> Real, P(f) \226\134\146 real_continuous_on(f, s)) && (\226\136\128 c : Real, P((x : Real) => c)) && (\226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, P(f) && P(g) \226\134\146 P((x : Real) => f(x) + g(x))) && (\226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, P(f) && P(g) \226\134\146 P((x : Real) => f(x) * g(x))) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) && !(x == y) \226\134\146 (\226\136\131 f : (Real) -> Real, P(f) && !(f(x) == f(y)))) \226\134\146 (\226\136\128 f : (Real) -> Real, \226\136\128 e : Real, real_continuous_on(f, s) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Real) -> Real, P(g) && (\226\136\128 x : Real, IN(x, s) \226\134\146 abs(f(x) - g(x)) < e)))
+      #|  norm((x1 : Cart[Real, Tybit0[Unit]]) - (x2 : Cart[Real, Tybit0[Unit]])) < (e : Real) / real_of_num(2) && norm((y1 : Cart[Real, Tybit0[Unit]]) - (y2 : Cart[Real, Tybit0[Unit]])) < e / real_of_num(2) \226\134\146 norm(x1 + y1 - (x2 + y2)) < e
       #|  :real
       #|  :real
-      #|  x:real^N
-      #|  \\x:real^N. Cx(Re(h x)) + ii * Cx(Re(g x))
-      #|  h:real^N->complex
-      #|  g:real^N->complex
-      #|  e / &2
-      #|  a:real^N
-      #|  (p1 /\\ p2) /\\ (q1 /\\ q2 ==> r)\n                       ==> (p1 ==> q1) ==> (p2 ==> q2) ==> r
-      #|  e:real
-      #|  f:real^N->complex
-      #|  a:real^N
-      #|  \\x:real^N. Cx(Im(f x))
-      #|  \\x:real^N. Im(f x)
-      #|  f:real^N->complex
-      #|  \\x:real^N. Re(f x)
-      #|  f:real^N->complex
-      #|  y:real^N
-      #|  x:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  \\x:real^N. Cx(Re(f x)) * Cx(Re(g x))
-      #|  g:real^N->complex
-      #|  f:real^N->complex
-      #|  (\\x. f x + g x):real^N->complex
-      #|  g:real^N->complex
-      #|  f:real^N->complex
-      #|  \\x:real^N. Cx(c)
-      #|  c:real
-      #|  s:real^N->bool
-      #|  \\x. x IN {Re o f | P (f:real^N->complex)}
-      #|  x - y = x + --Cx(&1) * y /\\ x / Cx(&2) = inv(Cx(&2)) * x
-      #|  forall f. P f ==> P(\\x:real^N. Cx(Im(f x)))
-      #|  x / Cx(&2) = inv(Cx(&2)) * x
-      #|  forall f. P f ==> P(\\x:real^N. Cx(Re(f x)))
-      #|  forall P s. compact s /\\\n         (forall c. P (\\x. c)) /\\\n         (forall f. P f ==> P(\\x. cnj(f x))) /\\\n         (forall f g. P f /\\ P g ==> P (\\x. f x + g x)) /\\\n         (forall f g. P f /\\ P g ==> P (\\x. f x * g x)) /\\\n         (forall x y. x IN s /\\ y IN s /\\ ~(x = y)\n                ==> ?f. P f /\\ f continuous_on s /\\ ~(f x = f y))\n         ==> forall f:real^N->complex e.\n                f continuous_on s /\\ &0 < e\n                ==> ?g. P g /\\ forall x. x IN s ==> norm(f x - g x) < e
-      #|  Im o (f:real^N->complex)
-      #|  Re o (f:real^N->complex)
-      #|  y:real^N
-      #|  x:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  forall P s. compact s /\\\n         (forall f. P f ==> f continuous_on s) /\\\n         (forall c. P (\\x. c)) /\\\n         (forall f. P f ==> P(\\x. cnj(f x))) /\\\n         (forall f g. P f /\\ P g ==> P (\\x. f x + g x)) /\\\n         (forall f g. P f /\\ P g ==> P (\\x. f x * g x)) /\\\n         (forall x y. x IN s /\\ y IN s /\\ ~(x = y) ==> ?f. P f /\\ ~(f x = f y))\n         ==> forall f:real^N->complex e.\n                f continuous_on s /\\ &0 < e\n                ==> ?g. P g /\\ forall x. x IN s ==> norm(f x - g x) < e
-      #|  (forall i. 1 <= i /\\ i <= dimindex(:N)\n       ==> real_polynomial_function(\\x:real^N. x$i)) /\\\n  (forall c. real_polynomial_function(\\x:real^N. c)) /\\\n  (forall f g. real_polynomial_function f /\\ real_polynomial_function g\n         ==> real_polynomial_function(\\x:real^N. f x + g x)) /\\\n  (forall f g. real_polynomial_function f /\\ real_polynomial_function g\n         ==> real_polynomial_function(\\x:real^N. f x * g x))
-      #|  forall f g. real_polynomial_function f /\\ real_polynomial_function g\n         ==> real_polynomial_function(\\x. f x + g x)
-      #|  forall f g. real_polynomial_function f /\\ real_polynomial_function g\n         ==> real_polynomial_function(\\x. f x * g x)
-      #|  --x:real = --(&1) * x
-      #|  (forall x. n(n x) = x) /\\ (forall x. P x ==> P(n x)) ==> (forall x. P(n x) <=> P x)
-      #|  forall f:real^N->real.\n        real_polynomial_function(\\x. --(f x)) <=> real_polynomial_function f
-      #|  forall f g:real^N->real.\n        real_polynomial_function f /\\ real_polynomial_function g\n        ==> real_polynomial_function (\\x. f x - g x)
-      #|  forall f s. FINITE s /\\\n         (forall a. a IN s ==> real_polynomial_function(\\x. f x a))\n         ==> real_polynomial_function (\\x. sum s (f x))
-      #|  forall f s. FINITE s /\\\n         (forall a. a IN s ==> real_polynomial_function(\\x. f x a))\n         ==> real_polynomial_function (\\x. product s (f x))
-      #|  forall p n. real_polynomial_function p\n         ==> real_polynomial_function(\\x. p(x) pow n)
-      #|  forall p. real_polynomial_function p ==> polynomial_function(p o lift)
-      #|  forall p. polynomial_function p ==> real_polynomial_function(p o drop)
-      #|  (forall p. polynomial_function (p o lift) <=> real_polynomial_function p) /\\\n   (forall p. real_polynomial_function(p o drop) <=> polynomial_function p)
-      #|  \\k. if k IN s then (a:num^N->real) k else &0
-      #|  a:num^N->real
-      #|  s:num^N->bool
-      #|  {k:num^N | ~(a k = &0)}
-      #|  a:num^N->real
-      #|  (r ==> q) /\\ (p ==> r) /\\ (q ==> p) ==> (p <=> q) /\\ (p <=> r)
-      #|  (forall f:real^N->real.\n        (?a:num^N->real.\n          FINITE {k | ~(a k = &0)} /\\\n          f = \\x. sum (:num^N)\n                   (\\k. a(k) * product(1..dimindex(:N)) (\\i. x$i pow k$i))) <=>\n        (?(s:num^N->bool) a.\n            FINITE s /\\\n            f = \\x. sum s\n                  (\\k. a(k) * product(1..dimindex(:N)) (\\i. x$i pow k$i)))) /\\\n     (forall f:real^N->real.\n        (?a:num^N->real.\n          FINITE {k | ~(a k = &0)} /\\\n          f = \\x. sum (:num^N)\n                   (\\k. a(k) * product(1..dimindex(:N)) (\\i. x$i pow k$i))) <=>\n        (?(s:num^N->bool) a.\n            FINITE s /\\ (forall k. k IN s ==> ~(a k = &0)) /\\\n            f = \\x. sum s\n                    (\\k. a(k) * product(1..dimindex(:N)) (\\i. x$i pow k$i))))
-      #|  p1 * p2:real = p ==> (a * p1) * (b * p2) = (a * b) * p
-      #|  s = t /\\ (forall x. x IN t ==> f x = g x) ==> sum s f = sum t g
-      #|  m:num^N
-      #|  x IN IMAGE f s <=> ~({y | y IN s /\\ f y = x} = {})
-      #|  IMAGE ((\\(k,l). lambda i. k$i + l$i):num^N#num^N->num^N)\n                        {k,l | k IN s /\\ l IN t}
-      #|  \\m:num^N. sum {(k:num^N,l:num^N) | k IN s /\\ l IN t /\\\n                                                   (lambda i. k$i + l$i) = m}\n                              (\\(k,l). (a:num^N->real) k * b l)
-      #|  (:num^N)
-      #|  {k,l | (k:num^N) IN s /\\ (l:num^N) IN t}
-      #|  g:num^N#num^N->real
-      #|  (\\(k,l). lambda i. k$i + l$i):num^N#num^N->num^N
-      #|  g:num^N#num^N->real
-      #|  b:num^N->real
-      #|  t:num^N->bool
-      #|  a:num^N->real
-      #|  s:num^N->bool
-      #|  FINITE {k | P k} /\\ {k | P k /\\ Q k} SUBSET {k | P k}\n          ==> FINITE {k | P k /\\ Q k}
-      #|  {k:num^N | ~(a k = &0)} UNION {k:num^N | ~(b k = &0)}
-      #|  (\\k. a k + b k):num^N->real
-      #|  b:num^N->real
-      #|  a:num^N->real
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  (\\k. c):num^N->real
-      #|  {(lambda i. 0):num^N}
-      #|  c:real
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  \\k:num^N. &1
-      #|  {(lambda i. if i = j then 1 else 0):num^N}
-      #|  j:num
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  a:num^N->real
-      #|  s:num^N->bool
-      #|  (p <=> q) <=> (q ==> p) /\\ (p ==> q)
-      #|  forall f:real^N->real.\n          real_polynomial_function f <=>\n          ?a:num^N->real.\n            FINITE {k | ~(a k = &0)} /\\\n            f = \\x. sum (:num^N)\n                     (\\k. a(k) * product(1..dimindex(:N)) (\\i. x$i pow k$i))
-      #|  s = {} ==> sum s f = &0
-      #|  forall f:real^N->real.\n        real_polynomial_function f <=>\n        ?(s:num^N->bool) a.\n          FINITE s /\\\n          f = \\x. sum s\n                   (\\k. a(k) * product(1..dimindex(:N)) (\\i. x$i pow k$i))
-      #|  forall f:real^N->real.\n        real_polynomial_function f <=>\n        ?(s:num^N->bool) a.\n            FINITE s /\\ (forall k. k IN s ==> ~(a k = &0)) /\\\n            f = \\x. sum s\n                    (\\k. a(k) * product(1..dimindex(:N)) (\\i. x$i pow k$i))
-      #|  forall f x:real^N.\n        real_polynomial_function f ==> f real_continuous at x
-      #|  \\x:real^N. x$i
-      #|  i:num
-      #|  y:real^N
-      #|  x:real^N
-      #|  forall f:real^N->real s e.\n        compact s /\\\n        (forall x. x IN s ==> f real_continuous at x within s) /\\\n        &0 < e\n        ==> ?g. real_polynomial_function g /\\\n                forall x. x IN s ==> abs(f x - g x) < e
-      #|  \\x:real. x
-      #|  forall f s e.\n        real_compact s /\\ f real_continuous_on s /\\ &0 < e\n        ==> ?g. polynomial_function g /\\\n                forall x. x IN s ==> abs(f x - g x) < e
-      #|  vector_polynomial_function (f:real^M->real^N) <=>\n        forall i. 1 <= i /\\ i <= dimindex(:N)\n            ==> real_polynomial_function(\\x. f(x)$i)
-      #|  forall f. real_polynomial_function(drop o f) <=> vector_polynomial_function f
-      #|  forall f. vector_polynomial_function(lift o f) <=> real_polynomial_function f
-      #|  forall c. vector_polynomial_function(\\x. c)
-      #|  vector_polynomial_function(\\x. x)
-      #|  forall f:real^M->real^N i.\n        1 <= i /\\ i <= dimindex(:N) /\\ vector_polynomial_function f\n        ==> vector_polynomial_function(\\x. lift(f x$i))
-      #|  forall f g:real^M->real^N.\n        vector_polynomial_function f /\\ vector_polynomial_function g\n        ==> vector_polynomial_function (\\x. f x + g x)
-      #|  forall f g:real^M->real^N.\n        vector_polynomial_function(lift o f) /\\ vector_polynomial_function g\n        ==> vector_polynomial_function (\\x. f x % g x)
-      #|  forall f:real^M->real^N c.\n        vector_polynomial_function f\n        ==> vector_polynomial_function (\\x. c % f x)
-      #|  --x:real^N = --(&1) % x
-      #|  forall f:real^M->real^N.\n        vector_polynomial_function f\n        ==> vector_polynomial_function (\\x. --(f x))
-      #|  forall f g:real^M->real^N.\n        vector_polynomial_function f /\\ vector_polynomial_function g\n        ==> vector_polynomial_function (\\x. f x - g x)
-      #|  forall f:real^M->A->real^N s.\n        FINITE s /\\ (forall i. i IN s ==> vector_polynomial_function (\\x. f x i))\n        ==> vector_polynomial_function (\\x. vsum s (f x))
-      #|  forall f:real^M->real^N g.\n        vector_polynomial_function f /\\ real_polynomial_function g\n        ==> real_polynomial_function(g o f)
-      #|  forall f:real^M->real^N g:real^N->real^P.\n        vector_polynomial_function f /\\ vector_polynomial_function g\n        ==> vector_polynomial_function(g o f)
-      #|  f:real^M->real^N = (f o (--)) o (--)
-      #|  forall f:real^M->real^N.\n        vector_polynomial_function (\\x. f(--x)) <=>\n        vector_polynomial_function f
-      #|  k:num
-      #|  i:num
-      #|  i:num
-      #|  s = t /\\ (forall x. x IN t ==> f x = g x)\n                                  ==> sum s f = sum t g
-      #|  k:num
-      #|  0..m+n
-      #|  {i,j | i IN 0..m /\\ j IN 0..n}
-      #|  \\(i,j). (a i * drop x pow i) * (b j * drop x pow j)
-      #|  \\(i:num,j). i + j
-      #|  x:real^1
-      #|  m + n:num
-      #|  \\k. sum {x | x IN {i,j | i IN 0..m /\\ j IN 0..n} /\\\n                               FST x + SND x = k}\n                          (\\(i,j). a i * b j)
-      #|  MAX m n
-      #|  \\i:num. (if i <= m then a i else &0) + (if i <= n then b i else &0)
-      #|  n:num
-      #|  b:num->real
-      #|  m:num
-      #|  a:num->real
-      #|  g:real^1->real
-      #|  f:real^1->real
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N]) => Cx(Re((h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x))) + ii * Cx(Re((g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x)))
+      #|  (h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (e : Real) / real_of_num(2)
+      #|  (a : Cart[Real, N])
+      #|  ((p1 : Bool) && (p2 : Bool)) && ((q1 : Bool) && (q2 : Bool) \226\134\146 (r : Bool)) \226\134\146 (p1 \226\134\146 q1) \226\134\146 (p2 \226\134\146 q2) \226\134\146 r
+      #|  (e : Real)
+      #|  (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, N])
+      #|  (x : Cart[Real, N]) => Cx(Im((f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x)))
+      #|  (x : Cart[Real, N]) => Im((f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, N]) => Re((f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N]) => Cx(Re((f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x))) * Cx(Re((g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x)))
+      #|  (g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, N]) => (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x) + (g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, N]) => Cx((c : Real))
+      #|  (c : Real)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (x : (Cart[Real, N]) -> Real) => IN(x, {o(Re, (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])) | (P : ((Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]) -> Bool)(f)})
+      #|  (x : Cart[Real, Tybit0[Unit]]) - (y : Cart[Real, Tybit0[Unit]]) == x + -Cx(real_of_num(1)) * y && x / Cx(real_of_num(2)) == inv(Cx(real_of_num(2))) * x
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], (P : ((Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]) -> Bool)(f) \226\134\146 P((x : Cart[Real, N]) => Cx(Im(f(x))))
+      #|  (x : Cart[Real, Tybit0[Unit]]) / Cx(real_of_num(2)) == inv(Cx(real_of_num(2))) * x
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], (P : ((Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]) -> Bool)(f) \226\134\146 P((x : Cart[Real, N]) => Cx(Re(f(x))))
+      #|  \226\136\128 P : ((Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) && (\226\136\128 c : Cart[Real, Tybit0[Unit]], P((x : Cart[Real, N]) => c)) && (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], P(f) \226\134\146 P((x : Cart[Real, N]) => cnj(f(x)))) && (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], P(f) && P(g) \226\134\146 P((x : Cart[Real, N]) => f(x) + g(x))) && (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], P(f) && P(g) \226\134\146 P((x : Cart[Real, N]) => f(x) * g(x))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) && !(x == y) \226\134\146 (\226\136\131 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], P(f) && continuous_on(f, s) && !(f(x) == f(y)))) \226\134\146 (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, continuous_on(f, s) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], P(g) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 norm(f(x) - g(x)) < e)))
+      #|  o(Im, (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]))
+      #|  o(Re, (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 P : ((Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) && (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], P(f) \226\134\146 continuous_on(f, s)) && (\226\136\128 c : Cart[Real, Tybit0[Unit]], P((x : Cart[Real, N]) => c)) && (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], P(f) \226\134\146 P((x : Cart[Real, N]) => cnj(f(x)))) && (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], P(f) && P(g) \226\134\146 P((x : Cart[Real, N]) => f(x) + g(x))) && (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], P(f) && P(g) \226\134\146 P((x : Cart[Real, N]) => f(x) * g(x))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) && !(x == y) \226\134\146 (\226\136\131 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], P(f) && !(f(x) == f(y)))) \226\134\146 (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, continuous_on(f, s) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], P(g) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 norm(f(x) - g(x)) < e)))
+      #|  (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (real_polynomial_function : ((Cart[Real, N]) -> Real) -> Bool)((x : Cart[Real, N]) => (op_dollar : (Cart[Real, N], Num) -> Real)(x, i))) && (\226\136\128 c : Real, real_polynomial_function((x : Cart[Real, N]) => c)) && (\226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, real_polynomial_function(f) && real_polynomial_function(g) \226\134\146 real_polynomial_function((x : Cart[Real, N]) => f(x) + g(x))) && (\226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, real_polynomial_function(f) && real_polynomial_function(g) \226\134\146 real_polynomial_function((x : Cart[Real, N]) => f(x) * g(x)))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 g : (Cart[Real, _]) -> Real, real_polynomial_function(f) && real_polynomial_function(g) \226\134\146 real_polynomial_function((x : Cart[Real, _]) => f(x) + g(x))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 g : (Cart[Real, _]) -> Real, real_polynomial_function(f) && real_polynomial_function(g) \226\134\146 real_polynomial_function((x : Cart[Real, _]) => f(x) * g(x))
+      #|  -(x : Real) == -real_of_num(1) * x
+      #|  (\226\136\128 x : _, (n : (_) -> _)(n(x)) == x) && (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 P(n(x))) \226\134\146 (\226\136\128 x : _, P(n(x)) == P(x))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, real_polynomial_function((x : Cart[Real, N]) => -f(x)) == real_polynomial_function(f)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, real_polynomial_function(f) && real_polynomial_function(g) \226\134\146 real_polynomial_function((x : Cart[Real, N]) => f(x) - g(x))
+      #|  \226\136\128 f : (Cart[Real, _], _) -> Real, \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 a : _, IN(a, s) \226\134\146 real_polynomial_function((x : Cart[Real, _]) => f(x, a))) \226\134\146 real_polynomial_function((x : Cart[Real, _]) => sum(s, f(x)))
+      #|  \226\136\128 f : (Cart[Real, _], _) -> Real, \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 a : _, IN(a, s) \226\134\146 real_polynomial_function((x : Cart[Real, _]) => f(x, a))) \226\134\146 real_polynomial_function((x : Cart[Real, _]) => product(s, f(x)))
+      #|  \226\136\128 p : (Cart[Real, _]) -> Real, \226\136\128 n : Num, real_polynomial_function(p) \226\134\146 real_polynomial_function((x : Cart[Real, _]) => pow(p(x), n))
+      #|  \226\136\128 p : (Cart[Real, Unit]) -> Real, real_polynomial_function(p) \226\134\146 polynomial_function(o(p, lift))
+      #|  \226\136\128 p : (Real) -> Real, polynomial_function(p) \226\134\146 real_polynomial_function(o(p, drop))
+      #|  (\226\136\128 p : (Cart[Real, Unit]) -> Real, polynomial_function(o(p, lift)) == real_polynomial_function(p)) && (\226\136\128 p : (Real) -> Real, real_polynomial_function(o(p, drop)) == polynomial_function(p))
+      #|  (k : Cart[Num, N]) => if IN(k, (s : (Cart[Num, N]) -> Bool)) { (a : (Cart[Num, N]) -> Real)(k) } else { real_of_num(0) }
+      #|  (a : (Cart[Num, N]) -> Real)
+      #|  (s : (Cart[Num, N]) -> Bool)
+      #|  {(k : Cart[Num, N]) | !((a : (Cart[Num, N]) -> Real)(k) == real_of_num(0))}
+      #|  (a : (Cart[Num, N]) -> Real)
+      #|  ((r : Bool) \226\134\146 (q : Bool)) && ((p : Bool) \226\134\146 r) && (q \226\134\146 p) \226\134\146 p == q && p == r
+      #|  (\226\136\128 f : (Cart[Real, N]) -> Real, (\226\136\131 a : (Cart[Num, N]) -> Real, (FINITE : ((Cart[Num, N]) -> Bool) -> Bool)({(k : Cart[Num, N]) | !(a(k) == real_of_num(0))}) && f == ((x : Cart[Real, N]) => (sum : ((Cart[Num, N]) -> Bool, (Cart[Num, N]) -> Real) -> Real)((UNIV : (Cart[Num, N]) -> Bool), (k : Cart[Num, N]) => a(k) * (product : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => pow((op_dollar : (Cart[Real, N], Num) -> Real)(x, i), (op_dollar : (Cart[Num, N], Num) -> Num)(k, i)))))) == (\226\136\131 s : (Cart[Num, N]) -> Bool, \226\136\131 a : (Cart[Num, N]) -> Real, (FINITE : ((Cart[Num, N]) -> Bool) -> Bool)(s) && f == ((x : Cart[Real, N]) => (sum : ((Cart[Num, N]) -> Bool, (Cart[Num, N]) -> Real) -> Real)(s, (k : Cart[Num, N]) => a(k) * (product : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => pow((op_dollar : (Cart[Real, N], Num) -> Real)(x, i), (op_dollar : (Cart[Num, N], Num) -> Num)(k, i))))))) && (\226\136\128 f : (Cart[Real, N]) -> Real, (\226\136\131 a : (Cart[Num, N]) -> Real, (FINITE : ((Cart[Num, N]) -> Bool) -> Bool)({(k : Cart[Num, N]) | !(a(k) == real_of_num(0))}) && f == ((x : Cart[Real, N]) => (sum : ((Cart[Num, N]) -> Bool, (Cart[Num, N]) -> Real) -> Real)((UNIV : (Cart[Num, N]) -> Bool), (k : Cart[Num, N]) => a(k) * (product : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => pow((op_dollar : (Cart[Real, N], Num) -> Real)(x, i), (op_dollar : (Cart[Num, N], Num) -> Num)(k, i)))))) == (\226\136\131 s : (Cart[Num, N]) -> Bool, \226\136\131 a : (Cart[Num, N]) -> Real, (FINITE : ((Cart[Num, N]) -> Bool) -> Bool)(s) && (\226\136\128 k : Cart[Num, N], (IN : (Cart[Num, N], (Cart[Num, N]) -> Bool) -> Bool)(k, s) \226\134\146 !(a(k) == real_of_num(0))) && f == ((x : Cart[Real, N]) => (sum : ((Cart[Num, N]) -> Bool, (Cart[Num, N]) -> Real) -> Real)(s, (k : Cart[Num, N]) => a(k) * (product : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => pow((op_dollar : (Cart[Real, N], Num) -> Real)(x, i), (op_dollar : (Cart[Num, N], Num) -> Num)(k, i)))))))
+      #|  (p1 : Real) * (p2 : Real) == (p : Real) \226\134\146 (a : Real) * p1 * ((b : Real) * p2) == a * b * p
+      #|  (s : (_) -> Bool) == (t : (_) -> Bool) && (\226\136\128 x : _, IN(x, t) \226\134\146 (f : (_) -> Real)(x) == (g : (_) -> Real)(x)) \226\134\146 sum(s, f) == sum(t, g)
+      #|  (m : Cart[Num, N])
+      #|  IN((x : _), IMAGE((f : (_) -> _), (s : (_) -> Bool))) == !({(y : _) | IN(y, s) && f(y) == x} == {})
+      #|  IMAGE(GABS((f : ((Cart[Num, N], Cart[Num, N])) -> Cart[Num, N]) => \226\136\128 k : Cart[Num, N], \226\136\128 l : Cart[Num, N], GEQ(f((k, l)), lambda((i : Num) => op_dollar(k, i) + op_dollar(l, i)))), {((k : Cart[Num, N]), (l : Cart[Num, N])) | IN(k, (s : (Cart[Num, N]) -> Bool)) && IN(l, (t : (Cart[Num, N]) -> Bool))})
+      #|  (m : Cart[Num, N]) => sum({((k : Cart[Num, N]), (l : Cart[Num, N])) | IN(k, (s : (Cart[Num, N]) -> Bool)) && IN(l, (t : (Cart[Num, N]) -> Bool)) && lambda((i : Num) => op_dollar(k, i) + op_dollar(l, i)) == m}, GABS((f : ((Cart[Num, N], Cart[Num, N])) -> Real) => \226\136\128 k : Cart[Num, N], \226\136\128 l : Cart[Num, N], GEQ(f((k, l)), (a : (Cart[Num, N]) -> Real)(k) * (b : (Cart[Num, N]) -> Real)(l))))
+      #|  (UNIV : (Cart[Num, N]) -> Bool)
+      #|  {((k : Cart[Num, N]), (l : Cart[Num, N])) | IN(k, (s : (Cart[Num, N]) -> Bool)) && IN(l, (t : (Cart[Num, N]) -> Bool))}
+      #|  (g : ((Cart[Num, N], Cart[Num, N])) -> Real)
+      #|  GABS((f : ((Cart[Num, N], Cart[Num, N])) -> Cart[Num, N]) => \226\136\128 k : Cart[Num, N], \226\136\128 l : Cart[Num, N], GEQ(f((k, l)), lambda((i : Num) => op_dollar(k, i) + op_dollar(l, i))))
+      #|  (g : ((Cart[Num, N], Cart[Num, N])) -> Real)
+      #|  (b : (Cart[Num, N]) -> Real)
+      #|  (t : (Cart[Num, N]) -> Bool)
+      #|  (a : (Cart[Num, N]) -> Real)
+      #|  (s : (Cart[Num, N]) -> Bool)
+      #|  FINITE({(k : _) | (P : (_) -> Bool)(k)}) && SUBSET({(k : _) | P(k) && (Q : (_) -> Bool)(k)}, {(k : _) | P(k)}) \226\134\146 FINITE({(k : _) | P(k) && Q(k)})
+      #|  UNION({(k : Cart[Num, N]) | !((a : (Cart[Num, N]) -> Real)(k) == real_of_num(0))}, {(k : Cart[Num, N]) | !((b : (Cart[Num, N]) -> Real)(k) == real_of_num(0))})
+      #|  (k : Cart[Num, N]) => (a : (Cart[Num, N]) -> Real)(k) + (b : (Cart[Num, N]) -> Real)(k)
+      #|  (b : (Cart[Num, N]) -> Real)
+      #|  (a : (Cart[Num, N]) -> Real)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (k : Cart[Num, N]) => (c : Real)
+      #|  {(lambda : ((Num) -> Num) -> Cart[Num, N])((i : Num) => 0)}
+      #|  (c : Real)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (k : Cart[Num, N]) => real_of_num(1)
+      #|  {(lambda : ((Num) -> Num) -> Cart[Num, N])((i : Num) => if i == (j : Num) { 1 } else { 0 })}
+      #|  (j : Num)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (a : (Cart[Num, N]) -> Real)
+      #|  (s : (Cart[Num, N]) -> Bool)
+      #|  ((p : Bool) == (q : Bool)) == ((q \226\134\146 p) && (p \226\134\146 q))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, (real_polynomial_function : ((Cart[Real, N]) -> Real) -> Bool)(f) == (\226\136\131 a : (Cart[Num, N]) -> Real, (FINITE : ((Cart[Num, N]) -> Bool) -> Bool)({(k : Cart[Num, N]) | !(a(k) == real_of_num(0))}) && f == ((x : Cart[Real, N]) => (sum : ((Cart[Num, N]) -> Bool, (Cart[Num, N]) -> Real) -> Real)((UNIV : (Cart[Num, N]) -> Bool), (k : Cart[Num, N]) => a(k) * (product : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => pow((op_dollar : (Cart[Real, N], Num) -> Real)(x, i), (op_dollar : (Cart[Num, N], Num) -> Num)(k, i))))))
+      #|  (s : (_) -> Bool) == {} \226\134\146 sum(s, (f : (_) -> Real)) == real_of_num(0)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, (real_polynomial_function : ((Cart[Real, N]) -> Real) -> Bool)(f) == (\226\136\131 s : (Cart[Num, N]) -> Bool, \226\136\131 a : (Cart[Num, N]) -> Real, (FINITE : ((Cart[Num, N]) -> Bool) -> Bool)(s) && f == ((x : Cart[Real, N]) => (sum : ((Cart[Num, N]) -> Bool, (Cart[Num, N]) -> Real) -> Real)(s, (k : Cart[Num, N]) => a(k) * (product : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => pow((op_dollar : (Cart[Real, N], Num) -> Real)(x, i), (op_dollar : (Cart[Num, N], Num) -> Num)(k, i))))))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, (real_polynomial_function : ((Cart[Real, N]) -> Real) -> Bool)(f) == (\226\136\131 s : (Cart[Num, N]) -> Bool, \226\136\131 a : (Cart[Num, N]) -> Real, (FINITE : ((Cart[Num, N]) -> Bool) -> Bool)(s) && (\226\136\128 k : Cart[Num, N], (IN : (Cart[Num, N], (Cart[Num, N]) -> Bool) -> Bool)(k, s) \226\134\146 !(a(k) == real_of_num(0))) && f == ((x : Cart[Real, N]) => (sum : ((Cart[Num, N]) -> Bool, (Cart[Num, N]) -> Real) -> Real)(s, (k : Cart[Num, N]) => a(k) * (product : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => pow((op_dollar : (Cart[Real, N], Num) -> Real)(x, i), (op_dollar : (Cart[Num, N], Num) -> Num)(k, i))))))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 x : Cart[Real, N], real_polynomial_function(f) \226\134\146 real_continuous(f, at(x))
+      #|  (x : Cart[Real, N]) => op_dollar(x, (i : Num))
+      #|  (i : Num)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 e : Real, compact(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 real_continuous(f, within(at(x), s))) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Cart[Real, N]) -> Real, real_polynomial_function(g) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 abs(f(x) - g(x)) < e))
+      #|  (x : Real) => x
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 e : Real, real_compact(s) && real_continuous_on(f, s) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Real) -> Real, polynomial_function(g) && (\226\136\128 x : Real, IN(x, s) \226\134\146 abs(f(x) - g(x)) < e))
+      #|  (vector_polynomial_function : ((Cart[Real, M]) -> Cart[Real, N]) -> Bool)((f : (Cart[Real, M]) -> Cart[Real, N])) == (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (real_polynomial_function : ((Cart[Real, M]) -> Real) -> Bool)((x : Cart[Real, M]) => (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i)))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, Unit], real_polynomial_function(o(drop, f)) == vector_polynomial_function(f)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, vector_polynomial_function(o(lift, f)) == real_polynomial_function(f)
+      #|  \226\136\128 c : Cart[Real, _], vector_polynomial_function((x : Cart[Real, _]) => c)
+      #|  vector_polynomial_function((x : Cart[Real, _]) => x)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (vector_polynomial_function : ((Cart[Real, M]) -> Cart[Real, N]) -> Bool)(f) \226\134\146 (vector_polynomial_function : ((Cart[Real, M]) -> Cart[Real, Unit]) -> Bool)((x : Cart[Real, M]) => lift((op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i)))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], vector_polynomial_function(f) && vector_polynomial_function(g) \226\134\146 vector_polynomial_function((x : Cart[Real, M]) => f(x) + g(x))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Real, \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], vector_polynomial_function(o(lift, f)) && vector_polynomial_function(g) \226\134\146 vector_polynomial_function((x : Cart[Real, M]) => op_pct(f(x), g(x)))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 c : Real, vector_polynomial_function(f) \226\134\146 vector_polynomial_function((x : Cart[Real, M]) => op_pct(c, f(x)))
+      #|  -(x : Cart[Real, N]) == op_pct(-real_of_num(1), x)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], vector_polynomial_function(f) \226\134\146 vector_polynomial_function((x : Cart[Real, M]) => -f(x))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], vector_polynomial_function(f) && vector_polynomial_function(g) \226\134\146 vector_polynomial_function((x : Cart[Real, M]) => f(x) - g(x))
+      #|  \226\136\128 f : (Cart[Real, M], A) -> Cart[Real, N], \226\136\128 s : (A) -> Bool, FINITE(s) && (\226\136\128 i : A, IN(i, s) \226\134\146 vector_polynomial_function((x : Cart[Real, M]) => f(x, i))) \226\134\146 vector_polynomial_function((x : Cart[Real, M]) => vsum(s, f(x)))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Real, vector_polynomial_function(f) && real_polynomial_function(g) \226\134\146 real_polynomial_function(o(g, f))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, P], vector_polynomial_function(f) && vector_polynomial_function(g) \226\134\146 vector_polynomial_function(o(g, f))
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N]) == o(o(f, op_minus_minus), op_minus_minus)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], vector_polynomial_function((x : Cart[Real, M]) => f(-x)) == vector_polynomial_function(f)
+      #|  (k : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (s : (_) -> Bool) == (t : (_) -> Bool) && (\226\136\128 x : _, IN(x, t) \226\134\146 (f : (_) -> Real)(x) == (g : (_) -> Real)(x)) \226\134\146 sum(s, f) == sum(t, g)
+      #|  (k : Num)
+      #|  op_dot_dot(0, (m : Num) + (n : Num))
+      #|  {((i : Num), (j : Num)) | IN(i, op_dot_dot(0, (m : Num))) && IN(j, op_dot_dot(0, (n : Num)))}
+      #|  GABS((f : ((Num, Num)) -> Real) => \226\136\128 i : Num, \226\136\128 j : Num, GEQ(f((i, j)), (a : (Num) -> Real)(i) * pow(drop((x : Cart[Real, Unit])), i) * ((b : (Num) -> Real)(j) * pow(drop(x), j))))
+      #|  GABS((f : ((Num, Num)) -> Num) => \226\136\128 i : Num, \226\136\128 j : Num, GEQ(f((i, j)), i + j))
+      #|  (x : Cart[Real, Unit])
+      #|  (m : Num) + (n : Num)
+      #|  (k : Num) => sum({(x : (Num, Num)) | IN(x, {((i : Num), (j : Num)) | IN(i, op_dot_dot(0, (m : Num))) && IN(j, op_dot_dot(0, (n : Num)))}) && FST(x) + SND(x) == k}, GABS((f : ((Num, Num)) -> Real) => \226\136\128 i : Num, \226\136\128 j : Num, GEQ(f((i, j)), (a : (Num) -> Real)(i) * (b : (Num) -> Real)(j))))
+      #|  MAX((m : Num), (n : Num))
+      #|  (i : Num) => (if i <= (m : Num) { (a : (Num) -> Real)(i) } else { real_of_num(0) }) + (if i <= (n : Num) { (b : (Num) -> Real)(i) } else { real_of_num(0) })
+      #|  (n : Num)
+      #|  (b : (Num) -> Real)
+      #|  (m : Num)
+      #|  (a : (Num) -> Real)
+      #|  (g : (Cart[Real, Unit]) -> Real)
+      #|  (f : (Cart[Real, Unit]) -> Real)
       #|  0
-      #|  (\\i. c):num->real
-      #|  c:real
+      #|  (i : Num) => (c : Real)
+      #|  (c : Real)
       #|  1
-      #|  \\i. if i = 1 then &1 else &0
-      #|  (p <=> q) <=> (p ==> q) /\\ (q ==> p)
-      #|  forall f. real_polynomial_function f <=>\n       ?a n. f = \\x. sum(0..n) (\\i. a i * drop x pow i)
-      #|  forall f:real^M->real^N x.\n        vector_polynomial_function f ==> f continuous at x
-      #|  forall f:real^M->real^N s.\n        vector_polynomial_function f ==> f continuous_on s
-      #|  \\x. (f:real^1->real) x * g' x + f' x * g x
-      #|  \\x. (f':real^1->real) x + g' x
-      #|  g':real^1->real
-      #|  f':real^1->real
-      #|  g:real^1->real
-      #|  f:real^1->real
-      #|  \\x:real^1. &0
-      #|  c:real
-      #|  \\x:real^1. &1
-      #|  forall p:real^1->real.\n        real_polynomial_function p\n        ==> ?p'. real_polynomial_function p' /\\\n                 forall x. ((p o lift) has_real_derivative (p'(lift x))) (atreal x)
-      #|  x:real^1
-      #|  i:num
-      #|  i:num
-      #|  x:real^1
-      #|  (\\x. lambda i. (q:num->real^1->real) i x):real^1->real^N
-      #|  q:num->real^1->real
-      #|  i:num
-      #|  i:num
-      #|  forall i. 1 <= i /\\ i <= dimindex(:N)\n        ==> ?q. real_polynomial_function q /\\\n                (forall x. ((\\x. lift(((p x):real^N)$i)) has_vector_derivative\n                      lift(q x)) (at x))
-      #|  forall p:real^1->real^N.\n        vector_polynomial_function p\n        ==> ?p'. vector_polynomial_function p' /\\\n                 forall x. (p has_vector_derivative p'(x)) (at x)
-      #|  x:real^M
-      #|  (\\x. lambda i. g i x):real^M->real^N
-      #|  g:num->real^M->real
-      #|  forall i. 1 <= i /\\ i <= dimindex(:N)\n        ==> ?g. real_polynomial_function g /\\\n                forall x. x IN s ==> abs((f:real^M->real^N) x$i - g x) <\n                               e / &(dimindex(:N))
-      #|  forall f:real^M->real^N s e.\n        compact s /\\ f continuous_on s /\\ &0 < e\n        ==> ?g. vector_polynomial_function g /\\\n                forall x. x IN s ==> norm(f x - g x) < e
-      #|  p ==> q /\\ r <=> p ==> q /\\ (q ==> r)
-      #|  p /\\ q /\\ r <=> q /\\ p /\\ r
-      #|  \\n:num. n
-      #|  vsum(IMAGE b (1..n)) (\\v. (v dot f x) % v) = (f:real^M->real^N) x
-      #|  x:real^M
-      #|  x:real^M
-      #|  (\\x. vsum(1..n) (\\i. (g x:real^N)$i % b i)):real^M->real^N
-      #|  g:real^M->real^N
-      #|  e:real
-      #|  s:real^M->bool
-      #|  (\\x. lambda i. (f x:real^N) dot (b i)):real^M->real^N
-      #|  t:real^N->bool
-      #|  dim(t:real^N->bool) = n
-      #|  b:num->real^N
-      #|  n = CARD(bas:real^N->bool)
-      #|  FINITE(bas:real^N->bool)
-      #|  bas:real^N->bool
-      #|  forall f:real^M->real^N s e t.\n        compact s /\\ f continuous_on s /\\ &0 < e /\\\n        subspace t /\\ IMAGE f s SUBSET t\n        ==> ?g. vector_polynomial_function g /\\ IMAGE g s SUBSET t /\\\n                forall x. x IN s ==> norm(f x - g x) < e
-      #|  \\x:real^N. a + x
-      #|  a - (b + c):real^N = a - c - b
-      #|  (\\x. g x + a):real^M->real^N
-      #|  g:real^M->real^N
-      #|  \\x:real^N. x - a
-      #|  u:real^N->bool
-      #|  e:real
-      #|  s:real^M->bool
-      #|  (\\x. f x - a):real^M->real^N
-      #|  u:real^N->bool
-      #|  a:real^N
-      #|  t:real^N->bool
-      #|  t:real^N->bool = {}
-      #|  forall f:real^M->real^N s e t.\n        compact s /\\ f continuous_on s /\\ &0 < e /\\\n        affine t /\\ IMAGE f s SUBSET t\n        ==> ?g. vector_polynomial_function g /\\ IMAGE g s SUBSET t /\\\n                forall x. x IN s ==> norm(f x - g x) < e
-      #|  forall g:real^1->real^N. vector_polynomial_function g ==> path g
-      #|  p:real^1->real
-      #|  \\x. (p:real^1->real^N) x$i
-      #|  i:num
-      #|  forall p:real^1->real^N. vector_polynomial_function p ==> rectifiable_path p
-      #|  norm(x - a) < e / &4 /\\ norm b < e / &4 /\\ norm c <= &1 * e / &4 /\\\n        norm d <= &1 * e / &4\n      ==> norm((a + b + c - d) - x:real^N) < e
+      #|  (i : Num) => if i == 1 { real_of_num(1) } else { real_of_num(0) }
+      #|  ((p : Bool) == (q : Bool)) == ((p \226\134\146 q) && (q \226\134\146 p))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Real, real_polynomial_function(f) == (\226\136\131 a : (Num) -> Real, \226\136\131 n : Num, f == ((x : Cart[Real, Unit]) => sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(drop(x), i))))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], vector_polynomial_function(f) \226\134\146 continuous(f, at(x))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, vector_polynomial_function(f) \226\134\146 continuous_on(f, s)
+      #|  (x : Cart[Real, Unit]) => (f : (Cart[Real, Unit]) -> Real)(x) * (g' : (Cart[Real, Unit]) -> Real)(x) + (f' : (Cart[Real, Unit]) -> Real)(x) * (g : (Cart[Real, Unit]) -> Real)(x)
+      #|  (x : Cart[Real, Unit]) => (f' : (Cart[Real, Unit]) -> Real)(x) + (g' : (Cart[Real, Unit]) -> Real)(x)
+      #|  (g' : (Cart[Real, Unit]) -> Real)
+      #|  (f' : (Cart[Real, Unit]) -> Real)
+      #|  (g : (Cart[Real, Unit]) -> Real)
+      #|  (f : (Cart[Real, Unit]) -> Real)
+      #|  (x : Cart[Real, Unit]) => real_of_num(0)
+      #|  (c : Real)
+      #|  (x : Cart[Real, Unit]) => real_of_num(1)
+      #|  \226\136\128 p : (Cart[Real, Unit]) -> Real, real_polynomial_function(p) \226\134\146 (\226\136\131 p' : (Cart[Real, Unit]) -> Real, real_polynomial_function(p') && (\226\136\128 x : Real, has_real_derivative(o(p, lift), p'(lift(x)), atreal(x))))
+      #|  (x : Cart[Real, Unit])
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (x : Cart[Real, Unit])
+      #|  (x : Cart[Real, Unit]) => (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => (q : (Num, Cart[Real, Unit]) -> Real)(i, x))
+      #|  (q : (Num, Cart[Real, Unit]) -> Real)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (\226\136\131 q : (Cart[Real, Unit]) -> Real, (real_polynomial_function : ((Cart[Real, Unit]) -> Real) -> Bool)(q) && (\226\136\128 x : Cart[Real, Unit], (has_vector_derivative : ((Cart[Real, Unit]) -> Cart[Real, Unit], Cart[Real, Unit], Net[Cart[Real, Unit]]) -> Bool)((x : Cart[Real, Unit]) => lift((op_dollar : (Cart[Real, N], Num) -> Real)((p : (Cart[Real, Unit]) -> Cart[Real, N])(x), i)), lift(q(x)), (at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(x))))
+      #|  \226\136\128 p : (Cart[Real, Unit]) -> Cart[Real, N], vector_polynomial_function(p) \226\134\146 (\226\136\131 p' : (Cart[Real, Unit]) -> Cart[Real, N], vector_polynomial_function(p') && (\226\136\128 x : Cart[Real, Unit], has_vector_derivative(p, p'(x), at(x))))
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M]) => (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => (g : (Num, Cart[Real, M]) -> Real)(i, x))
+      #|  (g : (Num, Cart[Real, M]) -> Real)
+      #|  \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Real, (real_polynomial_function : ((Cart[Real, M]) -> Real) -> Bool)(g) && (\226\136\128 x : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, (s : (Cart[Real, M]) -> Bool)) \226\134\146 abs((op_dollar : (Cart[Real, N], Num) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x), i) - g(x)) < (e : Real) / real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 e : Real, compact(s) && continuous_on(f, s) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], vector_polynomial_function(g) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 norm(f(x) - g(x)) < e))
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == (p \226\134\146 q && (q \226\134\146 r))
+      #|  ((p : Bool) && (q : Bool) && (r : Bool)) == (q && p && r)
+      #|  (n : Num) => n
+      #|  vsum(IMAGE((b : (Num) -> Cart[Real, N]), op_dot_dot(1, (n : Num))), (v : Cart[Real, N]) => op_pct(dot(v, (f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M]))), v)) == f(x)
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M]) => vsum(op_dot_dot(1, (n : Num)), (i : Num) => op_pct(op_dollar((g : (Cart[Real, M]) -> Cart[Real, N])(x), i), (b : (Num) -> Cart[Real, N])(i)))
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (e : Real)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (x : Cart[Real, M]) => (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => (dot : (Cart[Real, N], Cart[Real, N]) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x), (b : (Num) -> Cart[Real, N])(i)))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  dim((t : (Cart[Real, N]) -> Bool)) == (n : Num)
+      #|  (b : (Num) -> Cart[Real, N])
+      #|  (n : Num) == CARD((bas : (Cart[Real, N]) -> Bool))
+      #|  FINITE((bas : (Cart[Real, N]) -> Bool))
+      #|  (bas : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 e : Real, \226\136\128 t : (Cart[Real, N]) -> Bool, compact(s) && continuous_on(f, s) && real_of_num(0) < e && subspace(t) && SUBSET(IMAGE(f, s), t) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], vector_polynomial_function(g) && SUBSET(IMAGE(g, s), t) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 norm(f(x) - g(x)) < e))
+      #|  (x : Cart[Real, N]) => (a : Cart[Real, N]) + x
+      #|  (a : Cart[Real, N]) - ((b : Cart[Real, N]) + (c : Cart[Real, N])) == a - c - b
+      #|  (x : Cart[Real, M]) => (g : (Cart[Real, M]) -> Cart[Real, N])(x) + (a : Cart[Real, N])
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (x : Cart[Real, N]) => x - (a : Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (e : Real)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (x : Cart[Real, M]) => (f : (Cart[Real, M]) -> Cart[Real, N])(x) - (a : Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 e : Real, \226\136\128 t : (Cart[Real, N]) -> Bool, compact(s) && continuous_on(f, s) && real_of_num(0) < e && affine(t) && SUBSET(IMAGE(f, s), t) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], vector_polynomial_function(g) && SUBSET(IMAGE(g, s), t) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 norm(f(x) - g(x)) < e))
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], vector_polynomial_function(g) \226\134\146 path(g)
+      #|  (p : (Cart[Real, Unit]) -> Real)
+      #|  (x : Cart[Real, Unit]) => op_dollar((p : (Cart[Real, Unit]) -> Cart[Real, N])(x), (i : Num))
+      #|  (i : Num)
+      #|  \226\136\128 p : (Cart[Real, Unit]) -> Cart[Real, N], vector_polynomial_function(p) \226\134\146 rectifiable_path(p)
+      #|  norm((x : Cart[Real, N]) - (a : Cart[Real, N])) < (e : Real) / real_of_num(4) && norm((b : Cart[Real, N])) < e / real_of_num(4) && norm((c : Cart[Real, N])) <= real_of_num(1) * (e / real_of_num(4)) && norm((d : Cart[Real, N])) <= real_of_num(1) * (e / real_of_num(4)) \226\134\146 norm(a + (b + (c - d)) - x) < e
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  \\t. (q:real^1->real^N)(t) + (g(vec 0:real^1) - q(vec 0)) +\n                drop t % ((g(vec 1) - q(vec 1)) - (g(vec 0) - q(vec 0)))
-      #|  q:real^1->real^N
-      #|  &0 < x / &4 <=> &0 < x
-      #|  e / &4
-      #|  interval[vec 0:real^1,vec 1]
-      #|  g:real^1->real^N
-      #|  forall g:real^1->real^N e.\n        path g /\\ &0 < e\n        ==> ?p. vector_polynomial_function p /\\\n                pathstart p = pathstart g /\\\n                pathfinish p = pathfinish g /\\\n                forall t. t IN interval[vec 0,vec 1] ==> norm(p t - g t) < e
-      #|  q:real^1->real^N
-      #|  e:real
-      #|  p:real^1->real^N
-      #|  (w IN (UNIV DIFF s) ==> p) ==> (~p ==> w IN s)
-      #|  w:real^N
-      #|  z:real^N
-      #|  &0 < x <=> &0 <= x /\\ ~(x = &0)
-      #|  setdist(path_image p,(:real^N) DIFF s)
-      #|  s = (:real^N)
-      #|  ?e. &0 < e /\\ forall x. x IN path_image p ==> ball(x:real^N,e) SUBSET s
-      #|  p:real^1->real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  path_connected(s:real^N->bool)
-      #|  forall s:real^N->bool.\n        open s /\\ connected s\n        ==> forall x y. x IN s /\\ y IN s\n                  ==> ?g. vector_polynomial_function g /\\\n                          path_image g SUBSET s /\\\n                          pathstart g = x /\\\n                          pathfinish g = y
-      #|  norm x <= B /\\ norm a <= B ==> norm(x - a:real^N) <= &2 * B
+      #|  (t : Cart[Real, Unit]) => (q : (Cart[Real, Unit]) -> Cart[Real, N])(t) + ((g : (Cart[Real, Unit]) -> Cart[Real, N])(vec(0)) - q(vec(0)) + op_pct(drop(t), g(vec(1)) - q(vec(1)) - (g(vec(0)) - q(vec(0)))))
+      #|  (q : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  (real_of_num(0) < (x : Real) / real_of_num(4)) == (real_of_num(0) < x)
+      #|  (e : Real) / real_of_num(4)
+      #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 e : Real, path(g) && real_of_num(0) < e \226\134\146 (\226\136\131 p : (Cart[Real, Unit]) -> Cart[Real, N], vector_polynomial_function(p) && pathstart(p) == pathstart(g) && pathfinish(p) == pathfinish(g) && (\226\136\128 t : Cart[Real, Unit], IN(t, interval([(vec(0), vec(1))])) \226\134\146 norm(p(t) - g(t)) < e))
+      #|  (q : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  (e : Real)
+      #|  (p : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  (IN((w : _), DIFF(UNIV, (s : (_) -> Bool))) \226\134\146 (p : Bool)) \226\134\146 !p \226\134\146 IN(w, s)
+      #|  (w : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (real_of_num(0) < (x : Real)) == (real_of_num(0) <= x && !(x == real_of_num(0)))
+      #|  setdist((path_image((p : (Cart[Real, Unit]) -> Cart[Real, N])), DIFF(UNIV, (s : (Cart[Real, N]) -> Bool))))
+      #|  (s : (Cart[Real, N]) -> Bool) == UNIV
+      #|  \226\136\131 e : Real, real_of_num(0) < e && (\226\136\128 x : Cart[Real, N], IN(x, path_image((p : (Cart[Real, Unit]) -> Cart[Real, N]))) \226\134\146 SUBSET(ball((x, e)), (s : (Cart[Real, N]) -> Bool)))
+      #|  (p : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  path_connected((s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, open(s) && connected(s) \226\134\146 (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) \226\134\146 (\226\136\131 g : (Cart[Real, Unit]) -> Cart[Real, N], vector_polynomial_function(g) && SUBSET(path_image(g), s) && pathstart(g) == x && pathfinish(g) == y))
+      #|  norm((x : Cart[Real, N])) <= (B : Real) && norm((a : Cart[Real, N])) <= B \226\134\146 norm(x - a) <= real_of_num(2) * B
       #|  :real
       #|  :real
-      #|  abs(g x - g a) <= C * norm(x - a) /\\\n        C * norm(x - a:real^N) <= C * B ==> abs(g x) <= abs(g a) + C * B
-      #|  (a * b) * c:real = (a * c) * b
-      #|  abs((f - f') * g) <= a * n /\\ abs((g - g') * f') <= b * n\n        ==> abs(f * g - f' * g') <= (a + b) * n
-      #|  &0 < x ==> &0 < abs a + x
-      #|  B1 * (abs(g(a:real^N)) + B2 * &2 * B) +\n                B2 * (abs(f a) + B1 * &2 * B)
-      #|  B:real
-      #|  a:real^N
-      #|  abs(f - f') <= B1 * n /\\ abs(g - g') <= B2 * n\n      ==> abs((f + g) - (f' + g')) <= (B1 + B2) * n
-      #|  B1 + B2:real
-      #|  B2:real
-      #|  B1:real
-      #|  g:real^N->real
-      #|  f:real^N->real
-      #|  &1
-      #|  &1
-      #|  s:real^N->bool = {}
-      #|  bounded(s:real^N->bool)
-      #|  forall f:real^N->real s.\n        real_polynomial_function f /\\ bounded s\n        ==> ?B. &0 < B /\\\n                forall x y. x IN s /\\ y IN s ==> abs(f x - f y) <= B * norm(x - y)
-      #|  x <= y ==> x <= norm(a:real^N) + y
+      #|  abs((g : (Cart[Real, N]) -> Real)((x : Cart[Real, N])) - g((a : Cart[Real, N]))) <= (C : Real) * norm(x - a) && C * norm(x - a) <= C * (B : Real) \226\134\146 abs(g(x)) <= abs(g(a)) + C * B
+      #|  (a : Real) * (b : Real) * (c : Real) == a * c * b
+      #|  abs(((f : Real) - (f' : Real)) * (g : Real)) <= (a : Real) * (n : Real) && abs((g - (g' : Real)) * f') <= (b : Real) * n \226\134\146 abs(f * g - f' * g') <= (a + b) * n
+      #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) < abs((a : Real)) + x
+      #|  (B1 : Real) * (abs((g : (Cart[Real, N]) -> Real)((a : Cart[Real, N]))) + (B2 : Real) * (real_of_num(2) * (B : Real))) + B2 * (abs((f : (Cart[Real, N]) -> Real)(a)) + B1 * (real_of_num(2) * B))
+      #|  (B : Real)
+      #|  (a : Cart[Real, N])
+      #|  abs((f : Real) - (f' : Real)) <= (B1 : Real) * (n : Real) && abs((g : Real) - (g' : Real)) <= (B2 : Real) * n \226\134\146 abs(f + g - (f' + g')) <= (B1 + B2) * n
+      #|  (B1 : Real) + (B2 : Real)
+      #|  (B2 : Real)
+      #|  (B1 : Real)
+      #|  (g : (Cart[Real, N]) -> Real)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  real_of_num(1)
+      #|  real_of_num(1)
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  bounded((s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, real_polynomial_function(f) && bounded(s) \226\134\146 (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) \226\134\146 abs(f(x) - f(y)) <= B * norm(x - y)))
+      #|  (x : Real) <= (y : Real) \226\134\146 x <= norm((a : Cart[Real, N])) + y
       #|  :real
-      #|  &0 <= x ==> &0 < &1 + x
-      #|  &1 + sum(1..dimindex(:N)) (\\i. (b:real^N)$i)
-      #|  ?b. forall i. 1 <= i /\\ i <= dimindex(:N)\n            ==> &0 < (b:real^N)$i /\\\n                forall x y. x IN s /\\ y IN s\n                      ==> abs((f:real^M->real^N) x$i - f y$i) <=\n                          b$i * norm(x - y)
-      #|  forall f:real^M->real^N s.\n        vector_polynomial_function f /\\ bounded s\n        ==> ?B. &0 < B /\\\n                forall x y. x IN s /\\ y IN s ==> norm(f x - f y) <= B * norm(x - y)
-      #|  forall f:real^N->real a.\n        real_polynomial_function f ==> (lift o f) differentiable (at a)
-      #|  forall f:real^N->real s.\n        real_polynomial_function f ==> (lift o f) differentiable_on s
-      #|  forall f:real^M->real^N a.\n        vector_polynomial_function f ==> f differentiable (at a)
-      #|  forall f:real^M->real^N s.\n        vector_polynomial_function f ==> f differentiable_on s
-      #|  forall f c. real_polynomial_function f ==> closed {x | f x = c}
-      #|  negligible {x | INFINITE {a | P a x}}\n     ==> negligible {x | ~negligible {lift a | P a x}}
-      #|  j:num
-      #|  forall k:num. {x | forall i:num. i <= m ==> P i x} SUBSET {x | P k x} /\\\n              negligible {x | P k x}\n             ==> negligible {x:real^N | forall i:num. i <= m ==> P i x}
-      #|  j:num
-      #|  x:real^N
-      #|  ~(?y. y IN s /\\ ~P y) <=> forall i. i IN s ==> P i
-      #|  i <= n ==> ~(i = SUC n)
-      #|  1 <= SUC n
-      #|  SUC n <= dimindex(:N) /\\\n                  forall i. i <= n ==> i <= dimindex(:N)
-      #|  SUC n
-      #|  0..m
-      #|  s:(num->num)->bool
-      #|  g:(num->num)->real
-      #|  \\k. (k: num->num) (SUC n)
-      #|  g:(num->num)->real
-      #|  m:num
-      #|  s:(num->num)->bool
-      #|  \\k. (k: num->num) (SUC n)
-      #|  1 <= SUC n
-      #|  closed {x:real^N | sum s (\\k. a(k) * product (1..SUC n)\n                                                   (\\i. x$i pow (k i))) = &0}
-      #|  a:(num->num)->real
-      #|  s:(num->num)->bool
-      #|  {x | P} = if P then UNIV else {}
-      #|  forall n s a.\n          n <= dimindex(:N) /\\ FINITE s /\\\n          ~(forall x:real^N. sum s\n              (\\k. a(k) * product(1..n) (\\i. x$i pow (k i))) = &0)\n          ==> negligible {x:real^N | sum s\n                               (\\k. a(k) * product(1..n) (\\i. x$i pow (k i))) =\n                          &0}
-      #|  (a:num^N->real) o (\\k. lambda i. k i)
-      #|  IMAGE (\\x:num^N i. x$i) s
-      #|  dimindex(:N)
-      #|  a:num^N->real
-      #|  s:num^N->bool
-      #|  forall f:real^N->real.\n          real_polynomial_function f /\\ ~(forall x. f x = &0)\n          ==> negligible {x | f x = &0}
-      #|  forall f c. real_polynomial_function f /\\ ~(forall x. f x = c)\n         ==> negligible {x | f x = c}
-      #|  forall f c. real_polynomial_function f /\\ ~(forall x. f x = c)\n         ==> interior {x:real^N | f(x) = c} = {}
-      #|  forall f c. real_polynomial_function f /\\ ~(forall x. f x = c)\n         ==> interior(closure {x:real^N | f(x) = c}) = {}
-      #|  (forall x. bernoulli 0 x = &1) /\\\n  (forall n x. bernoulli (n + 1) x =\n          x pow (n + 1) -\n          sum(0..n) (\\k. &(binom(n+2,k)) * bernoulli k x) / (&n + &2))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) < real_of_num(1) + x
+      #|  real_of_num(1) + (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)((b : Cart[Real, N]), i))
+      #|  \226\136\131 b : Cart[Real, N], \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 real_of_num(0) < (op_dollar : (Cart[Real, N], Num) -> Real)(b, i) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, (s : (Cart[Real, M]) -> Bool)) && (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(y, s) \226\134\146 abs((op_dollar : (Cart[Real, N], Num) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x), i) - (op_dollar : (Cart[Real, N], Num) -> Real)(f(y), i)) <= (op_dollar : (Cart[Real, N], Num) -> Real)(b, i) * (norm : (Cart[Real, M]) -> Real)(x - y))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, vector_polynomial_function(f) && bounded(s) \226\134\146 (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], IN(x, s) && IN(y, s) \226\134\146 norm(f(x) - f(y)) <= B * norm(x - y)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 a : Cart[Real, N], real_polynomial_function(f) \226\134\146 differentiable(o(lift, f), at(a))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, real_polynomial_function(f) \226\134\146 differentiable_on(o(lift, f), s)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], vector_polynomial_function(f) \226\134\146 differentiable(f, at(a))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, vector_polynomial_function(f) \226\134\146 differentiable_on(f, s)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 c : Real, real_polynomial_function(f) \226\134\146 closed({(x : Cart[Real, _]) | f(x) == c})
+      #|  negligible({(x : Cart[Real, _]) | INFINITE({(a : Real) | (P : (Real, Cart[Real, _]) -> Bool)(a, x)})}) \226\134\146 negligible({(x : Cart[Real, _]) | !negligible({lift((a : Real)) | P(a, x)})})
+      #|  (j : Num)
+      #|  \226\136\128 k : Num, SUBSET({(x : Cart[Real, N]) | \226\136\128 i : Num, i <= (m : Num) \226\134\146 (P : (Num, Cart[Real, N]) -> Bool)(i, x)}, {(x : Cart[Real, N]) | P(k, x)}) && negligible({(x : Cart[Real, N]) | P(k, x)}) \226\134\146 negligible({(x : Cart[Real, N]) | \226\136\128 i : Num, i <= m \226\134\146 P(i, x)})
+      #|  (j : Num)
+      #|  (x : Cart[Real, N])
+      #|  !(\226\136\131 y : _, IN(y, (s : (_) -> Bool)) && !(P : (_) -> Bool)(y)) == (\226\136\128 i : _, IN(i, s) \226\134\146 P(i))
+      #|  (i : Num) <= (n : Num) \226\134\146 !(i == SUC(n))
+      #|  1 <= SUC((n : Num))
+      #|  SUC((n : Num)) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (\226\136\128 i : Num, i <= n \226\134\146 i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))
+      #|  SUC((n : Num))
+      #|  op_dot_dot(0, (m : Num))
+      #|  (s : ((Num) -> Num) -> Bool)
+      #|  (g : ((Num) -> Num) -> Real)
+      #|  (k : (Num) -> Num) => k(SUC((n : Num)))
+      #|  (g : ((Num) -> Num) -> Real)
+      #|  (m : Num)
+      #|  (s : ((Num) -> Num) -> Bool)
+      #|  (k : (Num) -> Num) => k(SUC((n : Num)))
+      #|  1 <= SUC((n : Num))
+      #|  closed({(x : Cart[Real, N]) | sum((s : ((Num) -> Num) -> Bool), (k : (Num) -> Num) => (a : ((Num) -> Num) -> Real)(k) * product(op_dot_dot(1, SUC((n : Num))), (i : Num) => pow(op_dollar(x, i), k(i)))) == real_of_num(0)})
+      #|  (a : ((Num) -> Num) -> Real)
+      #|  (s : ((Num) -> Num) -> Bool)
+      #|  {(x : _) | (P : Bool)} == (if P { UNIV } else { {} })
+      #|  \226\136\128 n : Num, \226\136\128 s : ((Num) -> Num) -> Bool, \226\136\128 a : ((Num) -> Num) -> Real, n <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (FINITE : (((Num) -> Num) -> Bool) -> Bool)(s) && !(\226\136\128 x : Cart[Real, N], (sum : (((Num) -> Num) -> Bool, ((Num) -> Num) -> Real) -> Real)(s, (k : (Num) -> Num) => a(k) * (product : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, n), (i : Num) => pow((op_dollar : (Cart[Real, N], Num) -> Real)(x, i), k(i)))) == real_of_num(0)) \226\134\146 (negligible : ((Cart[Real, N]) -> Bool) -> Bool)({(x : Cart[Real, N]) | (sum : (((Num) -> Num) -> Bool, ((Num) -> Num) -> Real) -> Real)(s, (k : (Num) -> Num) => a(k) * (product : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, n), (i : Num) => pow((op_dollar : (Cart[Real, N], Num) -> Real)(x, i), k(i)))) == real_of_num(0)})
+      #|  o((a : (Cart[Num, N]) -> Real), (k : (Num) -> Num) => lambda((i : Num) => k(i)))
+      #|  IMAGE((x : Cart[Num, N]) => (i : Num) => op_dollar(x, i), (s : (Cart[Num, N]) -> Bool))
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  (a : (Cart[Num, N]) -> Real)
+      #|  (s : (Cart[Num, N]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, real_polynomial_function(f) && !(\226\136\128 x : Cart[Real, N], f(x) == real_of_num(0)) \226\134\146 negligible({(x : Cart[Real, N]) | f(x) == real_of_num(0)})
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 c : Real, real_polynomial_function(f) && !(\226\136\128 x : Cart[Real, _], f(x) == c) \226\134\146 negligible({(x : Cart[Real, _]) | f(x) == c})
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 c : Real, real_polynomial_function(f) && !(\226\136\128 x : Cart[Real, N], f(x) == c) \226\134\146 interior({(x : Cart[Real, N]) | f(x) == c}) == {}
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 c : Real, real_polynomial_function(f) && !(\226\136\128 x : Cart[Real, N], f(x) == c) \226\134\146 interior(closure({(x : Cart[Real, N]) | f(x) == c})) == {}
+      #|  (\226\136\128 x : Real, (bernoulli : (Num, Real) -> Real)(0, x) == real_of_num(1)) && (\226\136\128 n : Num, \226\136\128 x : Real, bernoulli(n + 1, x) == pow(x, n + 1) - sum(op_dot_dot(0, n), (k : Num) => real_of_num(binom((n + 2, k))) * bernoulli(k, x)) / (real_of_num(n) + real_of_num(2)))
       #|  :P
       #|  :P
       #|  :P
@@ -86472,752 +86472,752 @@ test "Multivariate/realanalysis matches Multivariate/realanalysis.ml" {
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  bernoulli
-      #|  (forall n. P n) <=> P 0 /\\ (forall n. P(SUC n))
-      #|  (n + 1) + 1 = n + 2
-      #|  (forall n x. sum (0..n) (\\k. &(binom(n,k)) * B k x) - B n x =\n            &n * x pow (n - 1)) <=>\n     (forall x. B 0 x = &1) /\\\n     (forall n x. B (n + 1) x =\n            x pow (n + 1) -\n            sum(0..n) (\\k. &(binom(n+2,k)) * B k x) / (&n + &2))
-      #|  m < n + 1 <=> m <= n
-      #|  n = 0
-      #|  (if p \\/ q then x else y) = if q then x else if p then x else y
-      #|  i - 1 = 0 <=> i = 0 \\/ i = 1
-      #|  x + &1 = &1 + x
-      #|  &1
-      #|  x:real
-      #|  n:num
-      #|  \\n. bernoulli n (&0)
-      #|  forall n x. sum(0..n) (\\k. &(binom(n,k)) *\n                         sum (0..k)\n                             (\\l. &(binom(k,l)) *\n                                  bernoulli l (&0) * x pow (k - l))) -\n   sum(0..n) (\\k. &(binom(n,k)) * bernoulli k (&0) * x pow (n - k)) =\n   &n * x pow (n - 1)
-      #|  (forall n x. sum(0..n) (\\k. &(binom(n,k)) * bernoulli k x) - bernoulli n x =\n          &n * x pow (n - 1)) /\\\n   (forall n x. bernoulli n x =\n          sum(0..n) (\\k. &(binom(n,k)) * bernoulli k (&0) * x pow (n - k)))
-      #|  x:real
-      #|  SUC n
-      #|  forall n x. sum(0..n) (\\k. &(binom(n+1,k)) * bernoulli k x) =\n         (&n + &1) * x pow n
-      #|  forall n x y. bernoulli n (x + y) =\n           sum(0..n) (\\k. &(binom(n,k)) * bernoulli k x * y pow (n - k))
-      #|  bernoulli 0 (&0) = &1 /\\\n  (forall n. bernoulli (n + 1) (&0) =\n       --sum(0..n) (\\k. &(binom(n+2,k)) * bernoulli k (&0)) / (&n + &2))
-      #|  SUC n = 1 <=> n = 0
-      #|  forall n. sum (0..n) (\\k. &(binom (n,k)) * bernoulli k (&0)) - bernoulli n (&0) =\n       if n = 1 then &1 else &0
-      #|  forall n. sum(0..n) (\\k. &(binom(n+1,k)) * bernoulli k (&0)) =\n       if n = 0 then &1 else &0
-      #|  forall n x. bernoulli n (x + &1) - bernoulli n x = &n * x pow (n - 1)
-      #|  n = 0
-      #|  x = y + &1 <=> x - y = &1
-      #|  forall n. bernoulli n (&1) =\n       if n = 1 then bernoulli n (&0) + &1 else bernoulli n (&0)
-      #|  x = y / (&m + &1) <=> (&m + &1) * x = y
-      #|  forall m n. sum(0..n) (\\k. &k pow m) =\n         (bernoulli (m + 1) (&n + &1) - bernoulli (m + 1) (&0)) / (&m + &1)
-      #|  k:num <= n
-      #|  k <= n ==> ~(k = n + 1) /\\ (n + 1) - k - 1 = n - k /\\ k <= n + 1
-      #|  k:num
-      #|  forall n x. ((bernoulli n) has_real_derivative (&n * bernoulli (n - 1) x))\n         (atreal x)
-      #|  n:num
-      #|  forall n s. (bernoulli n) real_differentiable_on s
-      #|  forall n s. (bernoulli n) real_continuous_on s
-      #|  n = 0
-      #|  n + 1 = 1 <=> n = 0
-      #|  &1
-      #|  &0
-      #|  bernoulli n
-      #|  \\x. bernoulli (n + 1) x / (&n + &1)
-      #|  forall n. ((bernoulli n) has_real_integral (if n = 0 then &1 else &0))\n       (real_interval[&0,&1])
-      #|  forall n. polynomial_function(bernoulli n)
-      #|  if n = 0 then &1 else &0
-      #|  x = x * (&1 - &0)
-      #|  real_interval[&0,&1]
-      #|  \\x. p x - bernoulli n x
-      #|  x:real
-      #|  p - b:real = p' - b' <=> p' - p = b' - b
-      #|  IMAGE (&) (:num)
-      #|  ~p /\\ (q ==> r) ==> (p <=> ~q) ==> r
-      #|  p(&0) - bernoulli n (&0)
-      #|  \\x. p x - bernoulli n x
-      #|  forall p n. polynomial_function p /\\\n         (forall x. p(x + &1) - p(x) = &n * x pow (n - 1)) /\\\n         (real_integral (real_interval[&0,&1]) p = if n = 0 then &1 else &0)\n         ==> p = bernoulli n
-      #|  &2 * x + &2 * y = &0 <=> y + x = &0
-      #|  &1 / &2 * x + &0 = x / &2
-      #|  &1 / &2 * x + &1 / &2 = (x + &1) / &2
-      #|  &2 pow n / &2
-      #|  &0
-      #|  inv(&2)
-      #|  inv(&2)
-      #|  inv(&2)
-      #|  m * (x - c):real = m * x + m * --c
-      #|  (bernoulli n) real_integrable_on real_interval[&0,&1 / &2] /\\\n      (bernoulli n) real_integrable_on real_interval[&1 / &2,&1]
-      #|  ~(n = 0) ==> SUC(n - 1) = n
-      #|  b = &1 ==> a * b * c = a * c
-      #|  n = 0
-      #|  a / b * c * d / e:real = c * (a / b / e) * d
-      #|  a * (x + y) - a * (y + z):real = a * (x - z)
-      #|  ((x + &1) + &1) / &2 = x / &2 + &1
-      #|  &0 < p ==> (x = &2 / p * y <=> p / &2 * x = y)
-      #|  n = 0
-      #|  forall n x. bernoulli n ((x + &1) / &2) + bernoulli n (x / &2) =\n         &2 / &2 pow n * bernoulli n x
-      #|  a + b:real = c * a <=> b = (c - &1) * a
-      #|  &1
-      #|  n:num
-      #|  forall n. bernoulli n (&1 / &2) = (&2 / &2 pow n - &1) * bernoulli n (&0)
-      #|  n:num
-      #|  ~(~p <=> q) <=> (p <=> q)
-      #|  k <= n ==> ~(n + 1 <= k)
-      #|  --(&1) pow 1 * p = q * r ==> --(b * k * p) = q * b * r * k
-      #|  k:num
-      #|  --s' = s ==> s = b - (s' + b * &1)
-      #|  --(&1)
-      #|  x:real
-      #|  SUC n
-      #|  z pow 2 = &1 /\\ z * x = y ==> z * y = x
-      #|  &1 - x = --(&1) * (x - &1)
-      #|  x - a + a:real = x
-      #|  x - &1
-      #|  n + 1
-      #|  --(&1) pow n * (bernoulli (n + 1) x - bernoulli (n + 1) (x - &1))
-      #|  n:num
-      #|  forall n. sum(0..n) (\\k. &(binom(n + 1,k)) *\n                       (bernoulli k (&1 - x) - --(&1) pow k * bernoulli k x)) =\n        &0
-      #|  forall n x. bernoulli n (&1 - x) = --(&1) pow n * bernoulli n x
-      #|  SUC n
-      #|  &0 = &1 - &1
-      #|  forall n. bernoulli n (&1) = --(&1) pow n * bernoulli n (&0)
-      #|  n:num
-      #|  n:num
-      #|  forall n. ODD n /\\ ~(n = 1) ==> bernoulli n (&0) = &0
-      #|  v:real
-      #|  u:real
-      #|  v:real
-      #|  &1 / &2
-      #|  x:real
-      #|  bernoulli (2 * SUC n)
-      #|  \\x. bernoulli (2 * SUC n + 1) x / (&2 * &n + &3)
-      #|  u:real
-      #|  x:real
-      #|  &0
-      #|  bernoulli (2 * SUC n)
-      #|  \\x. bernoulli (2 * SUC n + 1) x / (&2 * &n + &3)
-      #|  x:real
-      #|  z:real
-      #|  2 * SUC n - 1 = 2 * n + 1
-      #|  y:real
-      #|  x:real
-      #|  bernoulli (2 * n + 1)
-      #|  \\x. bernoulli (2 * SUC n) x / (&2 * &n + &2)
-      #|  y:real
-      #|  x:real
-      #|  q /\\ (q ==> p) ==> p /\\ q
-      #|  (forall n x. x IN real_interval(&0,&1 / &2)\n            ==> ~(bernoulli (2 * n + 1) x = &0)) /\\\n     (forall n x y. x IN real_interval(&0,&1 / &2) /\\\n              y IN real_interval(&0,&1 / &2) /\\\n              bernoulli (2 * n) x = &0 /\\ bernoulli (2 * n) y = &0\n              ==> x = y)
-      #|  m:num
-      #|  m:num
-      #|  ~(2 * m = 0)
-      #|  2 * (n - 2) DIV 2 + 1 = n - 1
-      #|  &1 - z
-      #|  (n - 2) DIV 2
-      #|  z:real
-      #|  (n - 2) DIV 2
-      #|  &0 < z /\\ z < &1 / &2 \\/ &1 / &2 < z /\\ z < &1
-      #|  &2 pow 1 <= x ==> &2 <= x
-      #|  &0 <= x /\\ x <= &1 ==> abs(x - &1) <= &1
-      #|  abs(bernoulli n (&1 / &2))
-      #|  forall z. x <= z /\\ z <= &1 * y ==> x <= y
-      #|  z = &1 / &2
-      #|  y:real
-      #|  y:real
-      #|  &0 <= bernoulli n z
-      #|  real_interval(&0,&1)
-      #|  z:real
-      #|  &n * bernoulli (n - 1) z
-      #|  bernoulli n
-      #|  z = &1
-      #|  z = &0
-      #|  z:real
-      #|  real_interval[&0,&1]
-      #|  \\x. abs(bernoulli n x)
-      #|  n = 0
-      #|  forall n x. EVEN n /\\ x IN real_interval[&0,&1]\n         ==> abs(bernoulli n x) <= abs(bernoulli n (&0))
-      #|  k:num <= n ==> n - (n - k) = k
-      #|  \\k:num. n - k
-      #|  abs x <= abs(&0) <=> x = &0
-      #|  x:real
-      #|  n:num
-      #|  x:real
-      #|  real_interval[&0,&1]
-      #|  n:num
-      #|  q /\\ ~p ==> (p <=> q) ==> r
-      #|  \\k. &(binom(n,n - k)) * bernoulli (n - k) (&0)
-      #|  n:num
-      #|  n:num
-      #|  bernoulli 1 (&0)
-      #|  n = 1
-      #|  forall n. bernoulli n (&0) = &0 <=> ODD n /\\ ~(n = 1)
-      #|  a * (x - &0) = x * a
-      #|  real_integral (real_interval [&0,x])\n                           (\\x. abs(bernoulli (2 * m) (&0)))
-      #|  abs(&2 * &n + &1) = &2 * &n + &1
-      #|  2 * m <= 1 <=> m = 0
-      #|  (x + &1) / &2 <= &1 <=> x <= &1
-      #|  i = b / (&2 * &m + &1) - &0 / (&2 * &m + &1) <=>\n            b = (&2 * &m + &1) * i
-      #|  2 * m + 1 = 1 <=> m = 0
-      #|  x:real
-      #|  &0
-      #|  bernoulli (2 * m)
-      #|  \\x. bernoulli (2 * m + 1) x / &(2 * m + 1)
-      #|  m = 0
-      #|  (x + &1) + &1 = x + &2
-      #|  SUC(2 * m) DIV 2 = m
-      #|  &1 - x
-      #|  x <= &1 / &2
-      #|  \\x. x IN real_interval[&0,&1 / &2]
-      #|  forall Q. ((forall x. P x /\\ Q x ==> R x) ==> (forall x. P x ==> R x)) /\\\n          (forall x. P x /\\ Q x ==> R x)\n          ==> forall x. P x ==> R x
-      #|  x:real
-      #|  x:real
-      #|  y <= max x y
-      #|  &1 * y <= max x (&1) * y /\\ a <= y ==> a <= max x (&1) * y
-      #|  (2 * m) DIV 2 = m
-      #|  m:num
-      #|  n:num
-      #|  forall n x. x IN real_interval[&0,&1]\n         ==> abs(bernoulli n x)\n             <= max (&n / &2) (&1) * abs(bernoulli (2 * n DIV 2) (&0))
-      #|  real_compact (IMAGE (bernoulli n) (real_interval[&0,&1]))
-      #|  (:real)
-      #|  n:num
-      #|  IMAGE lift integer
-      #|  (\\x. lift(bernoulli n (frac (drop x)))) =\n      (lift o bernoulli n o drop) o (lift o frac o drop)
-      #|  (:real^1)
-      #|  \\x. if x IN s then (f:real^1->real^N) x else vec 0
-      #|  \\x:real^1. lift(bernoulli n (frac (drop x)))
-      #|  \\x y:real^N. drop(x) % y
-      #|  forall f:real^1->real^N s n.\n        f absolutely_integrable_on s\n        ==> (\\x. bernoulli n (frac(drop x)) % f x)\n            absolutely_integrable_on s
-      #|  x - (x - &n) = &n
-      #|  x:real
-      #|  {&n + &1}
-      #|  forall t. g real_integrable_on s /\\ real_negligible t /\\\n          (forall x. x IN s DIFF t ==> f x = g x)\n          ==>  (f has_real_integral (real_integral s g)) s
-      #|  x <= x + &1
-      #|  x <= x + &1
-      #|  &n
-      #|  0 < n
-      #|  m:num = n
-      #|  forall f k m n.\n          f real_continuous_on real_interval[&m,&n] /\\ m < n\n          ==> ((\\x. bernoulli k (frac x) * f x) has_real_integral\n               sum(m..n-1) (\\j. real_integral (real_interval[&j,&j + &1])\n                                             (\\x. bernoulli k (x - &j) * f x)))\n              (real_interval[&m,&n])
+      #|  (\226\136\128 n : Num, (P : (Num) -> Bool)(n)) == (P(0) && (\226\136\128 n : Num, P(SUC(n))))
+      #|  (n : Num) + 1 + 1 == n + 2
+      #|  (\226\136\128 n : Num, \226\136\128 x : Real, sum(op_dot_dot(0, n), (k : Num) => real_of_num(binom((n, k))) * (B : (Num, Real) -> Real)(k, x)) - B(n, x) == real_of_num(n) * pow(x, n - 1)) == ((\226\136\128 x : Real, B(0, x) == real_of_num(1)) && (\226\136\128 n : Num, \226\136\128 x : Real, B(n + 1, x) == pow(x, n + 1) - sum(op_dot_dot(0, n), (k : Num) => real_of_num(binom((n + 2, k))) * B(k, x)) / (real_of_num(n) + real_of_num(2))))
+      #|  ((m : Num) < (n : Num) + 1) == (m <= n)
+      #|  (n : Num) == 0
+      #|  (if (p : Bool) || (q : Bool) { (x : _) } else { (y : _) }) == (if q { x } else { if p { x } else { y } })
+      #|  ((i : Num) - 1 == 0) == (i == 0 || i == 1)
+      #|  (x : Real) + real_of_num(1) == real_of_num(1) + x
+      #|  real_of_num(1)
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (n : Num) => bernoulli(n, real_of_num(0))
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, sum(op_dot_dot(0, n), (k : Num) => real_of_num(binom((n, k))) * sum(op_dot_dot(0, k), (l : Num) => real_of_num(binom((k, l))) * (bernoulli(l, real_of_num(0)) * pow(x, k - l)))) - sum(op_dot_dot(0, n), (k : Num) => real_of_num(binom((n, k))) * (bernoulli(k, real_of_num(0)) * pow(x, n - k))) == real_of_num(n) * pow(x, n - 1)
+      #|  (\226\136\128 n : Num, \226\136\128 x : Real, sum(op_dot_dot(0, n), (k : Num) => real_of_num(binom((n, k))) * bernoulli(k, x)) - bernoulli(n, x) == real_of_num(n) * pow(x, n - 1)) && (\226\136\128 n : Num, \226\136\128 x : Real, bernoulli(n, x) == sum(op_dot_dot(0, n), (k : Num) => real_of_num(binom((n, k))) * (bernoulli(k, real_of_num(0)) * pow(x, n - k))))
+      #|  (x : Real)
+      #|  SUC((n : Num))
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, sum(op_dot_dot(0, n), (k : Num) => real_of_num(binom((n + 1, k))) * bernoulli(k, x)) == (real_of_num(n) + real_of_num(1)) * pow(x, n)
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, \226\136\128 y : Real, bernoulli(n, x + y) == sum(op_dot_dot(0, n), (k : Num) => real_of_num(binom((n, k))) * (bernoulli(k, x) * pow(y, n - k)))
+      #|  bernoulli(0, real_of_num(0)) == real_of_num(1) && (\226\136\128 n : Num, bernoulli(n + 1, real_of_num(0)) == -sum(op_dot_dot(0, n), (k : Num) => real_of_num(binom((n + 2, k))) * bernoulli(k, real_of_num(0))) / (real_of_num(n) + real_of_num(2)))
+      #|  (SUC((n : Num)) == 1) == (n == 0)
+      #|  \226\136\128 n : Num, sum(op_dot_dot(0, n), (k : Num) => real_of_num(binom((n, k))) * bernoulli(k, real_of_num(0))) - bernoulli(n, real_of_num(0)) == (if n == 1 { real_of_num(1) } else { real_of_num(0) })
+      #|  \226\136\128 n : Num, sum(op_dot_dot(0, n), (k : Num) => real_of_num(binom((n + 1, k))) * bernoulli(k, real_of_num(0))) == (if n == 0 { real_of_num(1) } else { real_of_num(0) })
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, bernoulli(n, x + real_of_num(1)) - bernoulli(n, x) == real_of_num(n) * pow(x, n - 1)
+      #|  (n : Num) == 0
+      #|  ((x : Real) == (y : Real) + real_of_num(1)) == (x - y == real_of_num(1))
+      #|  \226\136\128 n : Num, bernoulli(n, real_of_num(1)) == (if n == 1 { bernoulli(n, real_of_num(0)) + real_of_num(1) } else { bernoulli(n, real_of_num(0)) })
+      #|  ((x : Real) == (y : Real) / (real_of_num((m : Num)) + real_of_num(1))) == ((real_of_num(m) + real_of_num(1)) * x == y)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, sum(op_dot_dot(0, n), (k : Num) => pow(real_of_num(k), m)) == (bernoulli(m + 1, real_of_num(n) + real_of_num(1)) - bernoulli(m + 1, real_of_num(0))) / (real_of_num(m) + real_of_num(1))
+      #|  (k : Num) <= (n : Num)
+      #|  (k : Num) <= (n : Num) \226\134\146 !(k == n + 1) && n + 1 - k - 1 == n - k && k <= n + 1
+      #|  (k : Num)
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, has_real_derivative(bernoulli(n), real_of_num(n) * bernoulli(n - 1, x), atreal(x))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 s : (Real) -> Bool, real_differentiable_on(bernoulli(n), s)
+      #|  \226\136\128 n : Num, \226\136\128 s : (Real) -> Bool, real_continuous_on(bernoulli(n), s)
+      #|  (n : Num) == 0
+      #|  ((n : Num) + 1 == 1) == (n == 0)
+      #|  real_of_num(1)
+      #|  real_of_num(0)
+      #|  bernoulli((n : Num))
+      #|  (x : Real) => bernoulli((n : Num) + 1, x) / (real_of_num(n) + real_of_num(1))
+      #|  \226\136\128 n : Num, has_real_integral(bernoulli(n), if n == 0 { real_of_num(1) } else { real_of_num(0) }, real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  \226\136\128 n : Num, polynomial_function(bernoulli(n))
+      #|  if (n : Num) == 0 { real_of_num(1) } else { real_of_num(0) }
+      #|  (x : Real) == x * (real_of_num(1) - real_of_num(0))
+      #|  real_interval([(real_of_num(0), real_of_num(1))])
+      #|  (x : Real) => (p : (Real) -> Real)(x) - bernoulli((n : Num), x)
+      #|  (x : Real)
+      #|  ((p : Real) - (b : Real) == (p' : Real) - (b' : Real)) == (p' - p == b' - b)
+      #|  IMAGE(real_of_num, UNIV)
+      #|  !(p : Bool) && ((q : Bool) \226\134\146 (r : Bool)) \226\134\146 p == !q \226\134\146 r
+      #|  (p : (Real) -> Real)(real_of_num(0)) - bernoulli((n : Num), real_of_num(0))
+      #|  (x : Real) => (p : (Real) -> Real)(x) - bernoulli((n : Num), x)
+      #|  \226\136\128 p : (Real) -> Real, \226\136\128 n : Num, polynomial_function(p) && (\226\136\128 x : Real, p(x + real_of_num(1)) - p(x) == real_of_num(n) * pow(x, n - 1)) && real_integral(real_interval([(real_of_num(0), real_of_num(1))]), p) == (if n == 0 { real_of_num(1) } else { real_of_num(0) }) \226\134\146 p == bernoulli(n)
+      #|  (real_of_num(2) * (x : Real) + real_of_num(2) * (y : Real) == real_of_num(0)) == (y + x == real_of_num(0))
+      #|  real_of_num(1) / real_of_num(2) * (x : Real) + real_of_num(0) == x / real_of_num(2)
+      #|  real_of_num(1) / real_of_num(2) * (x : Real) + real_of_num(1) / real_of_num(2) == (x + real_of_num(1)) / real_of_num(2)
+      #|  pow(real_of_num(2), (n : Num)) / real_of_num(2)
+      #|  real_of_num(0)
+      #|  inv(real_of_num(2))
+      #|  inv(real_of_num(2))
+      #|  inv(real_of_num(2))
+      #|  (m : Real) * ((x : Real) - (c : Real)) == m * x + m * -c
+      #|  real_integrable_on(bernoulli((n : Num)), real_interval([(real_of_num(0), real_of_num(1) / real_of_num(2))])) && real_integrable_on(bernoulli(n), real_interval([(real_of_num(1) / real_of_num(2), real_of_num(1))]))
+      #|  !((n : Num) == 0) \226\134\146 SUC(n - 1) == n
+      #|  (b : Real) == real_of_num(1) \226\134\146 (a : Real) * (b * (c : Real)) == a * c
+      #|  (n : Num) == 0
+      #|  (a : Real) / (b : Real) * ((c : Real) * ((d : Real) / (e : Real))) == c * (a / b / e * d)
+      #|  (a : Real) * ((x : Real) + (y : Real)) - a * (y + (z : Real)) == a * (x - z)
+      #|  ((x : Real) + real_of_num(1) + real_of_num(1)) / real_of_num(2) == x / real_of_num(2) + real_of_num(1)
+      #|  real_of_num(0) < (p : Real) \226\134\146 ((x : Real) == real_of_num(2) / p * (y : Real)) == (p / real_of_num(2) * x == y)
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, bernoulli(n, (x + real_of_num(1)) / real_of_num(2)) + bernoulli(n, x / real_of_num(2)) == real_of_num(2) / pow(real_of_num(2), n) * bernoulli(n, x)
+      #|  ((a : Real) + (b : Real) == (c : Real) * a) == (b == (c - real_of_num(1)) * a)
+      #|  real_of_num(1)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, bernoulli(n, real_of_num(1) / real_of_num(2)) == (real_of_num(2) / pow(real_of_num(2), n) - real_of_num(1)) * bernoulli(n, real_of_num(0))
+      #|  (n : Num)
+      #|  !(!(p : Bool) == (q : Bool)) == (p == q)
+      #|  (k : Num) <= (n : Num) \226\134\146 !(n + 1 <= k)
+      #|  pow(-real_of_num(1), 1) * (p : Real) == (q : Real) * (r : Real) \226\134\146 -((b : Real) * ((k : Real) * p)) == q * (b * (r * k))
+      #|  (k : Num)
+      #|  -(s' : Real) == (s : Real) \226\134\146 s == (b : Real) - (s' + b * real_of_num(1))
+      #|  -real_of_num(1)
+      #|  (x : Real)
+      #|  SUC((n : Num))
+      #|  pow((z : Real), 2) == real_of_num(1) && z * (x : Real) == (y : Real) \226\134\146 z * y == x
+      #|  real_of_num(1) - (x : Real) == -real_of_num(1) * (x - real_of_num(1))
+      #|  (x : Real) - (a : Real) + a == x
+      #|  (x : Real) - real_of_num(1)
+      #|  (n : Num) + 1
+      #|  pow(-real_of_num(1), (n : Num)) * (bernoulli(n + 1, (x : Real)) - bernoulli(n + 1, x - real_of_num(1)))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, sum(op_dot_dot(0, n), (k : Num) => real_of_num(binom((n + 1, k))) * (bernoulli(k, real_of_num(1) - (x : Real)) - pow(-real_of_num(1), k) * bernoulli(k, x))) == real_of_num(0)
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, bernoulli(n, real_of_num(1) - x) == pow(-real_of_num(1), n) * bernoulli(n, x)
+      #|  SUC((n : Num))
+      #|  real_of_num(0) == real_of_num(1) - real_of_num(1)
+      #|  \226\136\128 n : Num, bernoulli(n, real_of_num(1)) == pow(-real_of_num(1), n) * bernoulli(n, real_of_num(0))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, ODD(n) && !(n == 1) \226\134\146 bernoulli(n, real_of_num(0)) == real_of_num(0)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (v : Real)
+      #|  real_of_num(1) / real_of_num(2)
+      #|  (x : Real)
+      #|  bernoulli(2 * SUC((n : Num)))
+      #|  (x : Real) => bernoulli(2 * SUC((n : Num)) + 1, x) / (real_of_num(2) * real_of_num(n) + real_of_num(3))
+      #|  (u : Real)
+      #|  (x : Real)
+      #|  real_of_num(0)
+      #|  bernoulli(2 * SUC((n : Num)))
+      #|  (x : Real) => bernoulli(2 * SUC((n : Num)) + 1, x) / (real_of_num(2) * real_of_num(n) + real_of_num(3))
+      #|  (x : Real)
+      #|  (z : Real)
+      #|  2 * SUC((n : Num)) - 1 == 2 * n + 1
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  bernoulli(2 * (n : Num) + 1)
+      #|  (x : Real) => bernoulli(2 * SUC((n : Num)), x) / (real_of_num(2) * real_of_num(n) + real_of_num(2))
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (q : Bool) && (q \226\134\146 (p : Bool)) \226\134\146 p && q
+      #|  (\226\136\128 n : Num, \226\136\128 x : Real, IN(x, real_interval((real_of_num(0), real_of_num(1) / real_of_num(2)))) \226\134\146 !(bernoulli(2 * n + 1, x) == real_of_num(0))) && (\226\136\128 n : Num, \226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval((real_of_num(0), real_of_num(1) / real_of_num(2)))) && IN(y, real_interval((real_of_num(0), real_of_num(1) / real_of_num(2)))) && bernoulli(2 * n, x) == real_of_num(0) && bernoulli(2 * n, y) == real_of_num(0) \226\134\146 x == y)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  !(2 * (m : Num) == 0)
+      #|  2 * DIV((n : Num) - 2, 2) + 1 == n - 1
+      #|  real_of_num(1) - (z : Real)
+      #|  DIV((n : Num) - 2, 2)
+      #|  (z : Real)
+      #|  DIV((n : Num) - 2, 2)
+      #|  real_of_num(0) < (z : Real) && z < real_of_num(1) / real_of_num(2) || real_of_num(1) / real_of_num(2) < z && z < real_of_num(1)
+      #|  pow(real_of_num(2), 1) <= (x : Real) \226\134\146 real_of_num(2) <= x
+      #|  real_of_num(0) <= (x : Real) && x <= real_of_num(1) \226\134\146 abs(x - real_of_num(1)) <= real_of_num(1)
+      #|  abs(bernoulli((n : Num), real_of_num(1) / real_of_num(2)))
+      #|  \226\136\128 z : Real, (x : Real) <= z && z <= real_of_num(1) * (y : Real) \226\134\146 x <= y
+      #|  (z : Real) == real_of_num(1) / real_of_num(2)
+      #|  (y : Real)
+      #|  (y : Real)
+      #|  real_of_num(0) <= bernoulli((n : Num), (z : Real))
+      #|  real_interval((real_of_num(0), real_of_num(1)))
+      #|  (z : Real)
+      #|  real_of_num((n : Num)) * bernoulli(n - 1, (z : Real))
+      #|  bernoulli((n : Num))
+      #|  (z : Real) == real_of_num(1)
+      #|  (z : Real) == real_of_num(0)
+      #|  (z : Real)
+      #|  real_interval([(real_of_num(0), real_of_num(1))])
+      #|  (x : Real) => abs(bernoulli((n : Num), x))
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, EVEN(n) && IN(x, real_interval([(real_of_num(0), real_of_num(1))])) \226\134\146 abs(bernoulli(n, x)) <= abs(bernoulli(n, real_of_num(0)))
+      #|  (k : Num) <= (n : Num) \226\134\146 n - (n - k) == k
+      #|  (k : Num) => (n : Num) - k
+      #|  (abs((x : Real)) <= abs(real_of_num(0))) == (x == real_of_num(0))
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (x : Real)
+      #|  real_interval([(real_of_num(0), real_of_num(1))])
+      #|  (n : Num)
+      #|  (q : Bool) && !(p : Bool) \226\134\146 p == q \226\134\146 (r : Bool)
+      #|  (k : Num) => real_of_num(binom(((n : Num), n - k))) * bernoulli(n - k, real_of_num(0))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  bernoulli(1, real_of_num(0))
+      #|  (n : Num) == 1
+      #|  \226\136\128 n : Num, (bernoulli(n, real_of_num(0)) == real_of_num(0)) == (ODD(n) && !(n == 1))
+      #|  (a : Real) * ((x : Real) - real_of_num(0)) == x * a
+      #|  real_integral(real_interval([(real_of_num(0), (x : Real))]), (x : Real) => abs(bernoulli(2 * (m : Num), real_of_num(0))))
+      #|  abs(real_of_num(2) * real_of_num((n : Num)) + real_of_num(1)) == real_of_num(2) * real_of_num(n) + real_of_num(1)
+      #|  (2 * (m : Num) <= 1) == (m == 0)
+      #|  (((x : Real) + real_of_num(1)) / real_of_num(2) <= real_of_num(1)) == (x <= real_of_num(1))
+      #|  ((i : Real) == (b : Real) / (real_of_num(2) * real_of_num((m : Num)) + real_of_num(1)) - real_of_num(0) / (real_of_num(2) * real_of_num(m) + real_of_num(1))) == (b == (real_of_num(2) * real_of_num(m) + real_of_num(1)) * i)
+      #|  (2 * (m : Num) + 1 == 1) == (m == 0)
+      #|  (x : Real)
+      #|  real_of_num(0)
+      #|  bernoulli(2 * (m : Num))
+      #|  (x : Real) => bernoulli(2 * (m : Num) + 1, x) / real_of_num(2 * m + 1)
+      #|  (m : Num) == 0
+      #|  (x : Real) + real_of_num(1) + real_of_num(1) == x + real_of_num(2)
+      #|  DIV(SUC(2 * (m : Num)), 2) == m
+      #|  real_of_num(1) - (x : Real)
+      #|  (x : Real) <= real_of_num(1) / real_of_num(2)
+      #|  (x : Real) => IN(x, real_interval([(real_of_num(0), real_of_num(1) / real_of_num(2))]))
+      #|  \226\136\128 Q : (_) -> Bool, ((\226\136\128 x : _, (P : (_) -> Bool)(x) && Q(x) \226\134\146 (R : (_) -> Bool)(x)) \226\134\146 (\226\136\128 x : _, P(x) \226\134\146 R(x))) && (\226\136\128 x : _, P(x) && Q(x) \226\134\146 R(x)) \226\134\146 (\226\136\128 x : _, P(x) \226\134\146 R(x))
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (y : Real) <= max((x : Real), y)
+      #|  real_of_num(1) * (y : Real) <= max((x : Real), real_of_num(1)) * y && (a : Real) <= y \226\134\146 a <= max(x, real_of_num(1)) * y
+      #|  DIV(2 * (m : Num), 2) == m
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, IN(x, real_interval([(real_of_num(0), real_of_num(1))])) \226\134\146 abs(bernoulli(n, x)) <= max(real_of_num(n) / real_of_num(2), real_of_num(1)) * abs(bernoulli(2 * DIV(n, 2), real_of_num(0)))
+      #|  real_compact(IMAGE(bernoulli((n : Num)), real_interval([(real_of_num(0), real_of_num(1))])))
+      #|  (UNIV : (Real) -> Bool)
+      #|  (n : Num)
+      #|  IMAGE(lift, integer)
+      #|  ((x : Cart[Real, Unit]) => lift(bernoulli((n : Num), frac(drop(x))))) == o(o(lift, o(bernoulli(n), drop)), o(lift, o(frac, drop)))
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (x : Cart[Real, Unit]) => if IN(x, (s : (Cart[Real, Unit]) -> Bool)) { (f : (Cart[Real, Unit]) -> Cart[Real, N])(x) } else { vec(0) }
+      #|  (x : Cart[Real, Unit]) => lift(bernoulli((n : Num), frac(drop(x))))
+      #|  (x : Cart[Real, Unit]) => (y : Cart[Real, N]) => op_pct(drop(x), y)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 n : Num, absolutely_integrable_on(f, s) \226\134\146 absolutely_integrable_on((x : Cart[Real, Unit]) => op_pct(bernoulli(n, frac(drop(x))), f(x)), s)
+      #|  (x : Real) - (x - real_of_num((n : Num))) == real_of_num(n)
+      #|  (x : Real)
+      #|  {real_of_num((n : Num)) + real_of_num(1)}
+      #|  \226\136\128 t : (Real) -> Bool, real_integrable_on((g : (Real) -> Real), (s : (Real) -> Bool)) && real_negligible(t) && (\226\136\128 x : Real, IN(x, DIFF(s, t)) \226\134\146 (f : (Real) -> Real)(x) == g(x)) \226\134\146 has_real_integral(f, real_integral(s, g), s)
+      #|  (x : Real) <= x + real_of_num(1)
+      #|  (x : Real) <= x + real_of_num(1)
+      #|  real_of_num((n : Num))
+      #|  0 < (n : Num)
+      #|  (m : Num) == (n : Num)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 k : Num, \226\136\128 m : Num, \226\136\128 n : Num, real_continuous_on(f, real_interval([(real_of_num(m), real_of_num(n))])) && m < n \226\134\146 has_real_integral((x : Real) => bernoulli(k, frac(x)) * f(x), sum(op_dot_dot(m, n - 1), (j : Num) => real_integral(real_interval([(real_of_num(j), real_of_num(j) + real_of_num(1))]), (x : Real) => bernoulli(k, x - real_of_num(j)) * f(x))), real_interval([(real_of_num(m), real_of_num(n))]))
       #|  1
-      #|  k = 0
-      #|  b * f1 - b * f0 - ((b * (f1 - f0) + &0) - w) = w
-      #|  (b + &1) * f1 - b * f0 - ((b * (f1 - f0) + f1) - w):real = w
-      #|  k = 0
-      #|  k + 1 = 1 <=> k = 0
-      #|  x IN s ==> s SUBSET t ==> x IN t
-      #|  x:real
-      #|  x:real
-      #|  \\x. (&k + &1) * bernoulli k (x - &j)
-      #|  f:real->real
-      #|  j:num
-      #|  sum(m..n-1)\n          (\\j. (bernoulli (k + 1) (&0) * (f (&j + &1) - f (&j)) +\n                (if k = 0 then f (&j + &1) else &0)) -\n               (&k + &1) *\n               real_integral (real_interval[&j,&j + &1])\n                             (\\x. bernoulli k (x - &j) * f x))
-      #|  f real_continuous_on real_interval[&m,&n]
-      #|  forall f f' k m n.\n          m < n /\\\n          (forall x. x IN real_interval[&m,&n]\n               ==> (f has_real_derivative f' x)\n                   (atreal x within real_interval[&m,&n])) /\\\n          f' real_continuous_on real_interval[&m,&n]\n          ==> real_integral (real_interval[&m,&n])\n                            (\\x. bernoulli (k + 1) (frac x) * f' x) =\n              (bernoulli (k + 1) (&0) * (f(&n) - f(&m)) +\n               (if k = 0 then sum(m+1..n) (\\i. f(&i)) else &0)) -\n              (&k + &1) *\n              real_integral (real_interval[&m,&n])\n                            (\\x. bernoulli k (frac x) * f x)
-      #|  SUC(2 * p + 1) <= 2 * p + 3
-      #|  SUC(2 * p + 1) + 1 <= 2 * p + 3
-      #|  n:num
-      #|  m:num
-      #|  SUC(2 * p + 1)
-      #|  (f:num->real->real) (SUC(2 * p + 1) + 1)
-      #|  (f:num->real->real) (SUC(2 * p + 1))
+      #|  (k : Num) == 0
+      #|  (b : Real) * (f1 : Real) - b * (f0 : Real) - (b * (f1 - f0) + real_of_num(0) - (w : Real)) == w
+      #|  ((b : Real) + real_of_num(1)) * (f1 : Real) - b * (f0 : Real) - (b * (f1 - f0) + f1 - (w : Real)) == w
+      #|  (k : Num) == 0
+      #|  ((k : Num) + 1 == 1) == (k == 0)
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (x : Real) => (real_of_num((k : Num)) + real_of_num(1)) * bernoulli(k, x - real_of_num((j : Num)))
+      #|  (f : (Real) -> Real)
+      #|  (j : Num)
+      #|  sum(op_dot_dot((m : Num), (n : Num) - 1), (j : Num) => bernoulli((k : Num) + 1, real_of_num(0)) * ((f : (Real) -> Real)(real_of_num(j) + real_of_num(1)) - f(real_of_num(j))) + (if k == 0 { f(real_of_num(j) + real_of_num(1)) } else { real_of_num(0) }) - (real_of_num(k) + real_of_num(1)) * real_integral(real_interval([(real_of_num(j), real_of_num(j) + real_of_num(1))]), (x : Real) => bernoulli(k, x - real_of_num(j)) * f(x)))
+      #|  real_continuous_on((f : (Real) -> Real), real_interval([(real_of_num((m : Num)), real_of_num((n : Num)))]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 k : Num, \226\136\128 m : Num, \226\136\128 n : Num, m < n && (\226\136\128 x : Real, IN(x, real_interval([(real_of_num(m), real_of_num(n))])) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), real_interval([(real_of_num(m), real_of_num(n))])))) && real_continuous_on(f', real_interval([(real_of_num(m), real_of_num(n))])) \226\134\146 real_integral(real_interval([(real_of_num(m), real_of_num(n))]), (x : Real) => bernoulli(k + 1, frac(x)) * f'(x)) == bernoulli(k + 1, real_of_num(0)) * (f(real_of_num(n)) - f(real_of_num(m))) + (if k == 0 { sum(op_dot_dot(m + 1, n), (i : Num) => f(real_of_num(i))) } else { real_of_num(0) }) - (real_of_num(k) + real_of_num(1)) * real_integral(real_interval([(real_of_num(m), real_of_num(n))]), (x : Real) => bernoulli(k, frac(x)) * f(x))
+      #|  SUC(2 * (p : Num) + 1) <= 2 * p + 3
+      #|  SUC(2 * (p : Num) + 1) + 1 <= 2 * p + 3
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  SUC(2 * (p : Num) + 1)
+      #|  (f : (Num, Real) -> Real)(SUC(2 * (p : Num) + 1) + 1)
+      #|  (f : (Num, Real) -> Real)(SUC(2 * (p : Num) + 1))
       #|  ~(t = &0) /\\\n    i2 = &0 - (&2 * &p + &3) * i1\n    ==> (b * (fn - fm) - i1) / (&2 * &p + &2) / t =\n        b / (((&2 * &p + &1) + &1) * t) * (fn - fm) +\n        i2 / ((((&2 * &p + &1) + &1) + &1) * ((&2 * &p + &1) + &1) * t)
-      #|  SUC(2 * p + 1) + 1 = SUC(SUC(2 * p + 1))
-      #|  2 * SUC p = SUC(2 * p + 1)
-      #|  (2 * p + 1) + 1 = 2 * SUC p
-      #|  2 * SUC p - 1 = 2 * p + 1
-      #|  x = y - ((&2 * &p + &1) + &1) * z <=> z = (y - x) / (&2 * &p + &2)
-      #|  2 * p + 1 <= 2 * p + 3
-      #|  (2 * p + 1) + 1 <= 2 * p + 3
-      #|  n:num
-      #|  m:num
-      #|  2 * p + 1
-      #|  (f:num->real->real) ((2 * p + 1) + 1)
-      #|  (f:num->real->real) (2 * p + 1)
-      #|  1 <= SUC n
-      #|  k <= 2 * p + 1 ==> k <= 2 * p + 3
-      #|  2 * SUC p + 1 = 2 * p + 3
-      #|  p:num
-      #|  p:num
-      #|  i' = r ==> i' = (-- &1 / &2 * (n - m) + s) - i\n               ==> m + s = i + (m + n) / &2 + r
-      #|  bernoulli 1 (&0)
-      #|  0 + 1 <= 2 * p + 1
-      #|  n:num
-      #|  m:num
+      #|  SUC(2 * (p : Num) + 1) + 1 == SUC(SUC(2 * p + 1))
+      #|  2 * SUC((p : Num)) == SUC(2 * p + 1)
+      #|  2 * (p : Num) + 1 + 1 == 2 * SUC(p)
+      #|  2 * SUC((p : Num)) - 1 == 2 * p + 1
+      #|  ((x : Real) == (y : Real) - (real_of_num(2) * real_of_num((p : Num)) + real_of_num(1) + real_of_num(1)) * (z : Real)) == (z == (y - x) / (real_of_num(2) * real_of_num(p) + real_of_num(2)))
+      #|  2 * (p : Num) + 1 <= 2 * p + 3
+      #|  2 * (p : Num) + 1 + 1 <= 2 * p + 3
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  2 * (p : Num) + 1
+      #|  (f : (Num, Real) -> Real)(2 * (p : Num) + 1 + 1)
+      #|  (f : (Num, Real) -> Real)(2 * (p : Num) + 1)
+      #|  1 <= SUC((n : Num))
+      #|  (k : Num) <= 2 * (p : Num) + 1 \226\134\146 k <= 2 * p + 3
+      #|  2 * SUC((p : Num)) + 1 == 2 * p + 3
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (i' : Real) == (r : Real) \226\134\146 i' == -real_of_num(1) / real_of_num(2) * ((n : Real) - (m : Real)) + (s : Real) - (i : Real) \226\134\146 m + s == i + ((m + n) / real_of_num(2) + r)
+      #|  bernoulli(1, real_of_num(0))
+      #|  0 + 1 <= 2 * (p : Num) + 1
+      #|  (n : Num)
+      #|  (m : Num)
       #|  0
-      #|  (f:num->real->real) (0 + 1)
-      #|  (f:num->real->real) 0
-      #|  forall k:num.  k <= 2 * p + 1\n             ==> (f k) real_differentiable_on real_interval[&m,&n]
-      #|  n:num
-      #|  m:num
-      #|  2 * p + 1
-      #|  f (2 * p + 1):real->real
-      #|  (x + x) / &2 = x
-      #|  m:num <= n ==> m = n \\/ m < n
-      #|  forall f m n p.\n    m <= n /\\\n    (forall k x. k <= 2 * p + 1 /\\ x IN real_interval[&m,&n]\n           ==> ((f k) has_real_derivative f (k + 1) x)\n               (atreal x within real_interval [&m,&n]))\n    ==> (\\x. bernoulli (2 * p + 1) (frac x) * f (2 * p + 1) x)\n        real_integrable_on real_interval[&m,&n] /\\\n        sum(m..n) (\\i. f 0 (&i)) =\n        real_integral (real_interval [&m,&n]) (f 0) +\n        (f 0 (&m) + f 0 (&n)) / &2 +\n        sum (1..p) (\\k. bernoulli (2 * k) (&0) / &(FACT(2 * k)) *\n                        (f (2 * k - 1) (&n) - f (2 * k - 1) (&m))) +\n        real_integral (real_interval [&m,&n])\n                      (\\x. bernoulli (2 * p + 1) (frac x) * f (2 * p + 1) x) /\n        &(FACT(2 * p + 1))
-      #|  1 <= k ==> SUC(2 * k - 1) = 2 * k
-      #|  SUC(2 * p) + 1 = 2 * p + 2
-      #|  &n
-      #|  &m
-      #|  f (0 + 1):real->real
-      #|  f 0:real->real
-      #|  SUC(2 * p) + 1 = 2 * p + 2
-      #|  SUC(k + 1) = SUC k + 1
-      #|  k <= 2 * p + 1 ==> SUC k <= 2 * p + 2
-      #|  p:num
-      #|  n:num
-      #|  m:num
-      #|  \\n. (f:num->real->real)(SUC n)
-      #|  forall f m n p.\n     m <= n /\\\n     (forall k x. k <= 2 * p + 2 /\\ x IN real_interval[&m,&n]\n            ==> ((f k) has_real_derivative f (k + 1) x)\n                (atreal x within real_interval [&m,&n]))\n     ==> ((\\x. bernoulli (2 * p + 1) (frac x) * f (2 * p + 2) x)\n          real_integrable_on real_interval[&m,&n]) /\\\n         sum(m..n) (\\i. f 1 (&i)) =\n         (f 0 (&n) - f 0 (&m)) +\n         (f 1 (&m) + f 1 (&n)) / &2 +\n         sum (1..p) (\\k. bernoulli (2 * k) (&0) / &(FACT(2 * k)) *\n                         (f (2 * k) (&n) - f (2 * k) (&m))) +\n         real_integral (real_interval [&m,&n])\n                       (\\x. bernoulli (2 * p + 1) (frac x) * f (2 * p + 2) x) /\n         &(FACT(2 * p + 1))
-      #|  Cx y
-      #|  y:real
-      #|  d:real
-      #|  &0 < e
-      #|  e:real
-      #|  ((f has_complex_derivative f') (at (Cx x))\n      ==> ((Re o f o Cx) has_real_derivative (Re f')) (atreal x)) /\\\n     ((f has_complex_derivative f') (at (Cx x))\n      ==> ((Im o f o Cx) has_real_derivative (Im f')) (atreal x))
-      #|  f integrable_on interval[lift a,lift b]\n     ==> Re(integral (interval[lift a,lift b]) f) =\n         real_integral (real_interval[a,b]) (\\x. Re(f(lift x))) /\\\n         Im(integral (interval[lift a,lift b]) f) =\n         real_integral (real_interval[a,b]) (\\x. Im(f(lift x)))
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  p:num
-      #|  n:num
-      #|  m:num
-      #|  \\n:num. (Re o f n o Cx)
-      #|  \\n:num. (Im o f n o Cx)
-      #|  forall f m n p.\n     m <= n /\\\n     (forall k x. k <= 2 * p + 2 /\\ &m <= x /\\ x <= &n\n            ==> ((f k) has_complex_derivative f (k + 1) (Cx x)) (at(Cx x)))\n     ==> (\\x. Cx(bernoulli (2 * p + 1) (frac(drop x))) *\n                       f (2 * p + 2) (Cx(drop x)))\n         integrable_on interval[lift(&m),lift(&n)] /\\\n         vsum(m..n) (\\i. f 1 (Cx(&i))) =\n         (f 0 (Cx(&n)) - f 0 (Cx(&m))) +\n         (f 1 (Cx(&m)) + f 1 (Cx(&n))) / Cx(&2) +\n         vsum (1..p) (\\k. Cx(bernoulli (2 * k) (&0) / &(FACT(2 * k))) *\n                          (f (2 * k) (Cx(&n)) - f (2 * k) (Cx(&m)))) +\n         integral (interval[lift(&m),lift(&n)])\n                  (\\x. Cx(bernoulli (2 * p + 1) (frac(drop x))) *\n                       f (2 * p + 2) (Cx(drop x))) /\n         Cx(&(FACT(2 * p + 1)))
-      #|  real = {z | real z}
-      #|  negligible real
-      #|  forall f g:real^N->complex s.\n         f measurable_on s /\\ g measurable_on s\n         ==> (\\x. f x * g x) measurable_on s
-      #|  x < y ==> z <= x ==> z <= y
-      #|  dist(g,f) < norm(f) / &2 ==> norm(f) / &2 <= norm g
+      #|  (f : (Num, Real) -> Real)(0 + 1)
+      #|  (f : (Num, Real) -> Real)(0)
+      #|  \226\136\128 k : Num, k <= 2 * (p : Num) + 1 \226\134\146 real_differentiable_on((f : (Num, Real) -> Real)(k), real_interval([(real_of_num((m : Num)), real_of_num((n : Num)))]))
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  2 * (p : Num) + 1
+      #|  (f : (Num, Real) -> Real)(2 * (p : Num) + 1)
+      #|  ((x : Real) + x) / real_of_num(2) == x
+      #|  (m : Num) <= (n : Num) \226\134\146 m == n || m < n
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m <= n && (\226\136\128 k : Num, \226\136\128 x : Real, k <= 2 * p + 1 && IN(x, real_interval([(real_of_num(m), real_of_num(n))])) \226\134\146 has_real_derivative(f(k), f(k + 1, x), within(atreal(x), real_interval([(real_of_num(m), real_of_num(n))])))) \226\134\146 real_integrable_on((x : Real) => bernoulli(2 * p + 1, frac(x)) * f(2 * p + 1, x), real_interval([(real_of_num(m), real_of_num(n))])) && sum(op_dot_dot(m, n), (i : Num) => f(0, real_of_num(i))) == real_integral(real_interval([(real_of_num(m), real_of_num(n))]), f(0)) + ((f(0, real_of_num(m)) + f(0, real_of_num(n))) / real_of_num(2) + (sum(op_dot_dot(1, p), (k : Num) => bernoulli(2 * k, real_of_num(0)) / real_of_num(FACT(2 * k)) * (f(2 * k - 1, real_of_num(n)) - f(2 * k - 1, real_of_num(m)))) + real_integral(real_interval([(real_of_num(m), real_of_num(n))]), (x : Real) => bernoulli(2 * p + 1, frac(x)) * f(2 * p + 1, x)) / real_of_num(FACT(2 * p + 1))))
+      #|  1 <= (k : Num) \226\134\146 SUC(2 * k - 1) == 2 * k
+      #|  SUC(2 * (p : Num)) + 1 == 2 * p + 2
+      #|  real_of_num((n : Num))
+      #|  real_of_num((m : Num))
+      #|  (f : (Num, Real) -> Real)(0 + 1)
+      #|  (f : (Num, Real) -> Real)(0)
+      #|  SUC(2 * (p : Num)) + 1 == 2 * p + 2
+      #|  SUC((k : Num) + 1) == SUC(k) + 1
+      #|  (k : Num) <= 2 * (p : Num) + 1 \226\134\146 SUC(k) <= 2 * p + 2
+      #|  (p : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (n : Num) => (f : (Num, Real) -> Real)(SUC(n))
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m <= n && (\226\136\128 k : Num, \226\136\128 x : Real, k <= 2 * p + 2 && IN(x, real_interval([(real_of_num(m), real_of_num(n))])) \226\134\146 has_real_derivative(f(k), f(k + 1, x), within(atreal(x), real_interval([(real_of_num(m), real_of_num(n))])))) \226\134\146 real_integrable_on((x : Real) => bernoulli(2 * p + 1, frac(x)) * f(2 * p + 2, x), real_interval([(real_of_num(m), real_of_num(n))])) && sum(op_dot_dot(m, n), (i : Num) => f(1, real_of_num(i))) == f(0, real_of_num(n)) - f(0, real_of_num(m)) + ((f(1, real_of_num(m)) + f(1, real_of_num(n))) / real_of_num(2) + (sum(op_dot_dot(1, p), (k : Num) => bernoulli(2 * k, real_of_num(0)) / real_of_num(FACT(2 * k)) * (f(2 * k, real_of_num(n)) - f(2 * k, real_of_num(m)))) + real_integral(real_interval([(real_of_num(m), real_of_num(n))]), (x : Real) => bernoulli(2 * p + 1, frac(x)) * f(2 * p + 2, x)) / real_of_num(FACT(2 * p + 1))))
+      #|  Cx((y : Real))
+      #|  (y : Real)
+      #|  (d : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  (has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), at(Cx((x : Real)))) \226\134\146 has_real_derivative(o(Re, o(f, Cx)), Re(f'), atreal(x))) && (has_complex_derivative(f, f', at(Cx(x))) \226\134\146 has_real_derivative(o(Im, o(f, Cx)), Im(f'), atreal(x)))
+      #|  integrable_on((f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval([(lift((a : Real)), lift((b : Real)))])) \226\134\146 Re(integral(interval([(lift(a), lift(b))]), f)) == real_integral(real_interval([(a, b)]), (x : Real) => Re(f(lift(x)))) && Im(integral(interval([(lift(a), lift(b))]), f)) == real_integral(real_interval([(a, b)]), (x : Real) => Im(f(lift(x))))
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (p : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (n : Num) => o(Re, o((f : (Num, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(n), Cx))
+      #|  (n : Num) => o(Im, o((f : (Num, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(n), Cx))
+      #|  \226\136\128 f : (Num, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m <= n && (\226\136\128 k : Num, \226\136\128 x : Real, k <= 2 * p + 2 && real_of_num(m) <= x && x <= real_of_num(n) \226\134\146 has_complex_derivative(f(k), f(k + 1, Cx(x)), at(Cx(x)))) \226\134\146 integrable_on((x : Cart[Real, Unit]) => Cx(bernoulli(2 * p + 1, frac(drop(x)))) * f(2 * p + 2, Cx(drop(x))), interval([(lift(real_of_num(m)), lift(real_of_num(n)))])) && vsum(op_dot_dot(m, n), (i : Num) => f(1, Cx(real_of_num(i)))) == f(0, Cx(real_of_num(n))) - f(0, Cx(real_of_num(m))) + ((f(1, Cx(real_of_num(m))) + f(1, Cx(real_of_num(n)))) / Cx(real_of_num(2)) + (vsum(op_dot_dot(1, p), (k : Num) => Cx(bernoulli(2 * k, real_of_num(0)) / real_of_num(FACT(2 * k))) * (f(2 * k, Cx(real_of_num(n))) - f(2 * k, Cx(real_of_num(m))))) + integral(interval([(lift(real_of_num(m)), lift(real_of_num(n)))]), (x : Cart[Real, Unit]) => Cx(bernoulli(2 * p + 1, frac(drop(x)))) * f(2 * p + 2, Cx(drop(x)))) / Cx(real_of_num(FACT(2 * p + 1)))))
+      #|  real == {(z : Cart[Real, Tybit0[Unit]]) | real(z)}
+      #|  negligible(real)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, N]) -> Bool, measurable_on(f, s) && measurable_on(g, s) \226\134\146 measurable_on((x : Cart[Real, N]) => f(x) * g(x), s)
+      #|  (x : Real) < (y : Real) \226\134\146 (z : Real) <= x \226\134\146 z <= y
+      #|  dist(((g : Cart[Real, _]), (f : Cart[Real, _]))) < norm(f) / real_of_num(2) \226\134\146 norm(f) / real_of_num(2) <= norm(g)
       #|  :real
       #|  :real
-      #|  n:num
-      #|  n:num
-      #|  N1 + N2 + 1
-      #|  N2:num
-      #|  norm((f:real^N->complex) x) / &2
-      #|  N1:num
-      #|  norm((f:real^N->complex) x) / &2
-      #|  x:real^N
-      #|  &0 < norm((f:real^N->complex) x)
-      #|  \\n. inv((g:num->real^N->complex) n x)
-      #|  x:real^N
-      #|  h:num->real^N->complex
-      #|  n:num
-      #|  forall n. ?h. h continuous_on (:real^N) /\\\n            forall x. x IN {x | g n x IN (:complex) DIFF ball(Cx(&0),inv(&n + &1))}\n                ==> (h:real^N->complex) x = inv(g n x)
-      #|  k UNION {x:real^N | f x = Cx(&0)}
-      #|  g:num->real^N->complex
-      #|  k:real^N->bool
-      #|  forall f:real^N->real^2.\n     f measurable_on (:real^N) /\\ negligible {x | f x = Cx(&0)}\n     ==> (\\x. inv(f x)) measurable_on (:real^N)
-      #|  forall f g:real^N->complex.\n        f measurable_on (:real^N) /\\ g measurable_on (:real^N) /\\\n        negligible {x | g(x) = Cx(&0)}\n        ==> (\\x. f(x) / g(x)) measurable_on (:real^N)
-      #|  forall f g:real^N->complex s.\n        f measurable_on s /\\ g measurable_on (:real^N) /\\\n        negligible {x | g(x) = Cx(&0)}\n        ==> (\\x. f(x) / g(x)) measurable_on s
-      #|  k:A->bool = {}
-      #|  k:A->bool
-      #|  a:A
-      #|  forall f:A->real^N->complex s t.\n         FINITE t /\\ (t = {} ==> lebesgue_measurable s) /\\\n         (forall i. i IN t ==> f i measurable_on s)\n         ==> (\\x. cproduct t (\\i. f i x)) measurable_on s
-      #|  (z:complex) IN UNIV DIFF (r:complex->bool) <=> ~(r z)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (N1 : Num) + ((N2 : Num) + 1)
+      #|  (N2 : Num)
+      #|  norm((f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, N]))) / real_of_num(2)
+      #|  (N1 : Num)
+      #|  norm((f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, N]))) / real_of_num(2)
+      #|  (x : Cart[Real, N])
+      #|  real_of_num(0) < norm((f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, N])))
+      #|  (n : Num) => inv((g : (Num, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(n, (x : Cart[Real, N])))
+      #|  (x : Cart[Real, N])
+      #|  (h : (Num, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\131 h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], continuous_on(h, UNIV) && (\226\136\128 x : Cart[Real, N], IN(x, {(x : Cart[Real, N]) | IN((g : (Num, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(n, x), DIFF(UNIV, ball((Cx(real_of_num(0)), inv(real_of_num(n) + real_of_num(1))))))}) \226\134\146 h(x) == inv(g(n, x)))
+      #|  UNION((k : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x) == Cx(real_of_num(0))})
+      #|  (g : (Num, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], measurable_on(f, UNIV) && negligible({(x : Cart[Real, N]) | f(x) == Cx(real_of_num(0))}) \226\134\146 measurable_on((x : Cart[Real, N]) => inv(f(x)), UNIV)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], measurable_on(f, UNIV) && measurable_on(g, UNIV) && negligible({(x : Cart[Real, N]) | g(x) == Cx(real_of_num(0))}) \226\134\146 measurable_on((x : Cart[Real, N]) => f(x) / g(x), UNIV)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, N]) -> Bool, measurable_on(f, s) && measurable_on(g, UNIV) && negligible({(x : Cart[Real, N]) | g(x) == Cx(real_of_num(0))}) \226\134\146 measurable_on((x : Cart[Real, N]) => f(x) / g(x), s)
+      #|  (k : (A) -> Bool) == {}
+      #|  (k : (A) -> Bool)
+      #|  (a : A)
+      #|  \226\136\128 f : (A, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (A) -> Bool, FINITE(t) && (t == {} \226\134\146 lebesgue_measurable(s)) && (\226\136\128 i : A, IN(i, t) \226\134\146 measurable_on(f(i), s)) \226\134\146 measurable_on((x : Cart[Real, N]) => cproduct(t, (i : A) => f(i, x)), s)
+      #|  IN((z : Cart[Real, Tybit0[Unit]]), DIFF(UNIV, (r : (Cart[Real, Tybit0[Unit]]) -> Bool))) == !r(z)
       #|  real
-      #|  (:complex)
-      #|  forall s. lebesgue_measurable s ==> clog measurable_on s
-      #|  (:complex)
-      #|  forall s w. lebesgue_measurable s ==> (\\z. z cpow w) measurable_on s
-      #|  f real_measurable_on s <=>\n        (lift o f o drop) measurable_on (IMAGE lift s)
-      #|  real_lebesgue_measurable s <=>\n      (\\x. if x IN s then &1 else &0) real_measurable_on (:real)
-      #|  (\\x.  if x IN s then f(x) else &0) real_measurable_on (:real) <=>\n   f real_measurable_on s
-      #|  forall s. real_lebesgue_measurable s <=> lebesgue_measurable (IMAGE lift s)
-      #|  lift o g o drop
-      #|  forall f g s.\n        f real_measurable_on s /\\\n        g real_integrable_on s /\\\n        (forall x. x IN s ==> abs(f x) <= g x)\n        ==> f real_integrable_on s
-      #|  k:real->bool
-      #|  g:real->real
-      #|  \\x. if x IN k then abs(f x) else (g:real->real) x
-      #|  forall f g s k.\n      f real_measurable_on s /\\ g real_integrable_on s /\\ real_negligible k /\\\n      (forall x. x IN s DIFF k ==> abs(f x) <= g x)\n      ==> f real_integrable_on s
-      #|  lift o g o drop
-      #|  forall f g s.\n        f real_measurable_on s /\\\n        g real_integrable_on s /\\\n        (forall x. x IN s ==> abs(f x) <= g x)\n        ==> f absolutely_real_integrable_on s
-      #|  forall f. (forall a b. f real_integrable_on real_interval[a,b])\n       ==> f real_measurable_on (:real)
-      #|  forall f:real->real s.\n        f real_integrable_on s ==> f real_measurable_on s
-      #|  \\x. abs((f:real->real) x)
-      #|  (a ==> b) /\\ (b /\\ c ==> a) ==> (a /\\ c <=> b /\\ c)
-      #|  forall f s. f absolutely_real_integrable_on s <=>\n         f real_measurable_on s /\\ (\\x. abs(f x)) real_integrable_on s
-      #|  forall f s. f real_continuous_on s /\\ real_closed s ==> f real_measurable_on s
-      #|  forall f g. f real_measurable_on (:real) /\\ g real_continuous_on (:real)\n         ==> (g o f) real_measurable_on (:real)
-      #|  a /\\ b /\\ c ==> d <=> c ==> a /\\ b ==> d
-      #|  forall f:real->real g:real->real s.\n        f real_measurable_on s /\\ g real_continuous_on (:real) /\\ g(&0) = &0\n        ==> (g o f) real_measurable_on s
-      #|  lift b
-      #|  lift a
-      #|  lift o g o drop
-      #|  lift o f o drop
-      #|  forall f:real->real g:real->real a b.\n        f real_measurable_on (:real) /\\\n        (forall x. f(x) IN real_interval(a,b)) /\\\n        g real_continuous_on real_interval(a,b)\n        ==> (g o f) real_measurable_on (:real)
-      #|  IMAGE lift s
-      #|  lift o g o drop
-      #|  lift o f o drop
-      #|  forall f:real->real g:real->real s.\n        real_closed s /\\\n        f real_measurable_on (:real) /\\\n        (forall x. f(x) IN s) /\\\n        g real_continuous_on s\n        ==> (g o f) real_measurable_on (:real)
-      #|  IMAGE lift t
-      #|  IMAGE lift s
-      #|  lift o g o drop
-      #|  lift o f o drop
-      #|  forall f:real->real g:real->real s t.\n        real_closed s /\\\n        f real_measurable_on t /\\\n        (forall x. f(x) IN s) /\\\n        g real_continuous_on s /\\\n        &0 IN s /\\ g(&0) = &0\n        ==> (g o f) real_measurable_on t
-      #|  forall f. f real_continuous_on (:real) ==> f real_measurable_on (:real)
-      #|  forall k:real. (\\x. k) real_measurable_on (:real)
-      #|  forall s. (\\x. &0) real_measurable_on s
-      #|  c:real
-      #|  forall c f s. f real_measurable_on s ==> (\\x. c * f x) real_measurable_on s
-      #|  forall c f s. f real_measurable_on s ==> (\\x. f x * c) real_measurable_on s
-      #|  forall f s. f real_measurable_on s ==> (\\x. --(f x)) real_measurable_on s
-      #|  forall f s. (\\x. --(f x)) real_measurable_on s <=> f real_measurable_on s
-      #|  forall f s. f real_measurable_on s ==> (\\x. abs(f x)) real_measurable_on s
-      #|  forall f g s. f real_measurable_on s /\\ g real_measurable_on s\n           ==> (\\x. f x + g x) real_measurable_on s
-      #|  forall f g s.\n        f real_measurable_on s /\\ g real_measurable_on s\n        ==> (\\x. f x - g x) real_measurable_on s
-      #|  forall f g s.\n        f real_measurable_on s /\\ g real_measurable_on s\n        ==> (\\x. max (f x) (g x)) real_measurable_on s
-      #|  forall f g s.\n        f real_measurable_on s /\\ g real_measurable_on s\n        ==> (\\x. min (f x) (g x)) real_measurable_on s
-      #|  forall f g s.\n        f real_measurable_on s /\\ g real_measurable_on s\n        ==> (\\x. f x * g x) real_measurable_on s
-      #|  forall f:real->real s t.\n        real_negligible (s DIFF t UNION t DIFF s)\n        ==> f real_measurable_on s\n            ==> f real_measurable_on t
-      #|  forall f s. f real_measurable_on (:real) /\\\n         real_lebesgue_measurable s\n         ==> (\\x. if x IN s then f(x) else &0) real_measurable_on (:real)
-      #|  (forall x. drop(lift x) = x)\n            ==> IMAGE lift s DIFF IMAGE lift t = IMAGE lift (s DIFF t)
-      #|  IMAGE lift k
-      #|  \\n:num. lift o f n o drop
-      #|  forall f g s k.\n        (forall n. (f n) real_measurable_on s) /\\\n        real_negligible k /\\\n        (forall x. x IN s DIFF k ==> ((\\n. f n x) ---> g x) sequentially)\n        ==> g real_measurable_on s
-      #|  \\x. B * abs((g:real->real) x)
-      #|  B:real
-      #|  forall f g s. f real_measurable_on s /\\ real_bounded (IMAGE f s) /\\\n           g absolutely_real_integrable_on s\n           ==> (\\x. f x * g x) absolutely_real_integrable_on s
-      #|  forall f s. f real_measurable_on s <=>\n         (Cx o f o drop) measurable_on (IMAGE lift s)
-      #|  forall f. f real_measurable_on (:real) /\\ real_negligible {x | f x = &0}\n       ==> (\\x. inv(f x)) real_measurable_on (:real)
-      #|  forall f g. f real_measurable_on s /\\ g real_measurable_on (:real) /\\\n         real_negligible {x | g(x) = &0}\n         ==> (\\x. f(x) / g(x)) real_measurable_on s
-      #|  (\\x. f x rpow r) = (\\x. x rpow r) o (f:real->real)
-      #|  forall f r s. f real_measurable_on s /\\ &0 < r\n           ==> (\\x. f x rpow r) real_measurable_on s
-      #|  (\\x:real^N. lift(f x rpow y)) =\n    (lift o (\\w. w rpow y) o drop) o (\\x. lift(f x))
-      #|  forall f:real^N->real s y.\n        (\\x. lift(f x)) measurable_on s /\\ &0 < y\n        ==> (\\x. lift(f x rpow y)) measurable_on s
-      #|  forall s. real_measurable s ==> real_lebesgue_measurable s
-      #|  real_lebesgue_measurable {}
-      #|  real_lebesgue_measurable (:real)
-      #|  forall s. real_compact s ==> real_lebesgue_measurable s
-      #|  (forall a b. real_lebesgue_measurable(real_interval[a,b])) /\\\n   (forall a b. real_lebesgue_measurable(real_interval(a,b)))
-      #|  forall s t. real_lebesgue_measurable s /\\ real_lebesgue_measurable t\n         ==> real_lebesgue_measurable(s INTER t)
-      #|  forall s t:real->bool.\n        real_lebesgue_measurable s /\\ real_lebesgue_measurable t\n        ==> real_lebesgue_measurable(s UNION t)
-      #|  forall s. real_lebesgue_measurable((:real) DIFF s) <=>\n       real_lebesgue_measurable s
-      #|  s DIFF t = s INTER (UNIV DIFF t)
-      #|  forall s t:real->bool.\n        real_lebesgue_measurable s /\\ real_lebesgue_measurable t\n        ==> real_lebesgue_measurable(s DIFF t)
-      #|  forall s. real_lebesgue_measurable s <=>\n       forall a b. real_lebesgue_measurable(s INTER real_interval[a,b])
-      #|  forall s. real_closed s ==> real_lebesgue_measurable s
-      #|  forall s. real_open s ==> real_lebesgue_measurable s
-      #|  forall f. FINITE f /\\ (forall s. s IN f ==> real_lebesgue_measurable s)\n       ==> real_lebesgue_measurable (UNIONS f)
-      #|  forall s:num->real->bool.\n        (forall n. real_lebesgue_measurable(s n))\n        ==> real_lebesgue_measurable(UNIONS {s n | n IN (:num)})
-      #|  f:(real->bool)->bool
-      #|  f:(real->bool)->bool = {}
-      #|  forall f:(real->bool)->bool.\n        COUNTABLE f /\\ (forall s. s IN f ==> real_lebesgue_measurable s)\n        ==> real_lebesgue_measurable (UNIONS f)
-      #|  forall f:(real->bool)->bool.\n        COUNTABLE f /\\ (forall s. s IN f ==> real_lebesgue_measurable s)\n        ==> real_lebesgue_measurable (INTERS f)
-      #|  forall s:num->real->bool.\n        (forall n. real_lebesgue_measurable(s n))\n        ==> real_lebesgue_measurable(INTERS {s n | n IN (:num)})
-      #|  forall f:(real->bool)->bool.\n        FINITE f /\\ (forall s. s IN f ==> real_lebesgue_measurable s)\n        ==> real_lebesgue_measurable (INTERS f)
-      #|  forall s. real_bounded s ==> (real_lebesgue_measurable s <=> real_measurable s)
-      #|  forall f s t. s SUBSET t /\\ f real_measurable_on t /\\\n           real_lebesgue_measurable s\n           ==> f real_measurable_on s
-      #|  forall f s t. s SUBSET t /\\ f real_measurable_on t /\\ real_measurable s\n           ==> f real_measurable_on s
-      #|  forall f s. f real_continuous_on s /\\ real_closed s ==> f real_measurable_on s
-      #|  forall f s m.\n        f real_continuous_on s DIFF m /\\\n        real_lebesgue_measurable s /\\\n        real_negligible m\n        ==> f real_measurable_on s
-      #|  forall x. (if x IN s then if P x then f x else g x else &0) =\n        (if x IN {x | P x} then if x IN s then f x else &0 else &0) +\n        (if x IN (:real) DIFF {x | P x}\n         then if x IN s then g x else &0 else &0)
-      #|  forall P f g s.\n        real_lebesgue_measurable {x | P x} /\\\n        f real_measurable_on s /\\ g real_measurable_on s\n        ==> (\\x. if P x then f x else g x) real_measurable_on s
-      #|  forall f. f real_measurable_on (:real) <=>\n        forall a. real_lebesgue_measurable {x | f(x) < a}
-      #|  forall f. f real_measurable_on (:real) <=>\n        forall a. real_lebesgue_measurable {x | f(x) <= a}
-      #|  forall f. f real_measurable_on (:real) <=>\n        forall a. real_lebesgue_measurable {x | f(x) > a}
-      #|  forall f. f real_measurable_on (:real) <=>\n        forall a. real_lebesgue_measurable {x | f(x) >= a}
-      #|  forall f. f real_measurable_on (:real) <=>\n       forall a b. real_lebesgue_measurable {x | f(x) IN real_interval(a,b)}
-      #|  forall f. f real_measurable_on (:real) <=>\n       forall a b. real_lebesgue_measurable {x | f(x) IN real_interval[a,b]}
-      #|  IMAGE drop t
-      #|  t:real^1->bool
-      #|  IMAGE lift t
-      #|  t:real->bool
-      #|  forall f. f real_measurable_on (:real) <=>\n       forall t. real_open t ==> real_lebesgue_measurable {x | f(x) IN t}
-      #|  IMAGE drop t
-      #|  t:real^1->bool
-      #|  IMAGE lift t
-      #|  t:real->bool
-      #|  forall f. f real_measurable_on (:real) <=>\n       forall t. real_closed t ==> real_lebesgue_measurable {x | f(x) IN t}
-      #|  drop x
-      #|  x:real^1
-      #|  \\n:num. lift o g n o drop
-      #|  g:num->real->real
-      #|  lift x
-      #|  x:real
-      #|  \\n:num. drop o g n o lift
-      #|  g:num->real^1->real^1
-      #|  forall f. f real_measurable_on (:real) <=>\n       ?g. (forall n. (g n) real_measurable_on (:real)) /\\\n           (forall n. FINITE(IMAGE (g n) (:real))) /\\\n           (forall x. ((\\n. g n x) ---> f x) sequentially)
-      #|  forall f t. f real_measurable_on (:real) /\\ real_open t\n         ==> real_lebesgue_measurable {x | f(x) IN t}
-      #|  forall f t. f real_measurable_on (:real) /\\ real_closed t\n         ==> real_lebesgue_measurable {x | f(x) IN t}
-      #|  &0 <= x /\\ x <= a /\\ &0 <= y /\\ y <= a ==> abs(x - y) <= a
-      #|  s = {} ==> negligible s
-      #|  x + z = y /\\ &0 <= z ==> abs(x - y) = z
-      #|  abs(measure(s INTER interval [u,v]) - measure s) =\n          measure(s DIFF interval[u:real^N,v])
-      #|  y < e ==> x <= y ==> x < e
-      #|  abs(nub - nua) < e / &2\n          ==> abs(mub - mua) < e / &2\n              ==> abs((mub + nub) - (mua + nua)) < e
-      #|  s = {} ==> negligible s
-      #|  forall b. measure(s INTER {x:real^N | x$i <= b}) =\n            measure((s INTER interval[u,v]) INTER {x | x$i <= b}) +\n            measure((s DIFF interval[u,v]) INTER {x | x$i <= b})
-      #|  forall b. integral\n           (interval[u:real^N,\n                     (lambda j. if j = i then min (v$i) b else (v:real^N)$j)])\n           (indicator s) =\n          lift(measure(s INTER interval[u,v] INTER {x | x$i <= b}))
-      #|  j:num
-      #|  sum(1..dimindex(:N)) (\\j. if j = i then d pow 2 else &0)
-      #|  j:num
-      #|  j:num
-      #|  (lambda j. if j = i then min ((v:real^N)$i) b else v$j):real^N
-      #|  u:real^N
-      #|  b:real
-      #|  min d (min (a - (u:real^N)$i) ((v:real^N)$i - a))
-      #|  d:real
-      #|  j:num
-      #|  j:num
-      #|  (if P then if Q then x else y else y) =\n      (if P /\\ Q then x else y)
-      #|  e / &2
-      #|  (lambda j. if j = i then min ((v:real^N)$i) a else v$j):real^N
-      #|  u:real^N
-      #|  v:real^N
-      #|  u:real^N
-      #|  indicator(s:real^N->bool)
-      #|  (lambda j. max (a + &1) ((v:real^N)$j)):real^N
-      #|  (lambda j. min (a - &1) ((u:real^N)$j)):real^N
-      #|  v:real^N
-      #|  u:real^N
-      #|  ball(vec 0:real^N,B)
-      #|  B:real
-      #|  e / &2
-      #|  s:real^N->bool
-      #|  ?u v:real^N. abs(measure(s INTER interval[u,v]) - measure s) < e / &2 /\\\n                 ~(interval(u,v) = {}) /\\ u$i < a /\\ a < v$i
-      #|  e:real
-      #|  forall(s:real^N->bool) a i.\n        measurable s /\\ 1 <= i /\\ i <= dimindex(:N)\n        ==> (\\a. measure(s INTER {x | x$i <= a})) real_continuous atreal a
-      #|  c:real
-      #|  lift b
-      #|  lift a
-      #|  (g:real->real) o drop
-      #|  lift o f o drop
-      #|  forall f g a b.\n        ~(real_interval[a,b] = {}) /\\\n        f real_integrable_on real_interval[a,b] /\\\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> g x <= g y)\n        ==> ?c. c IN real_interval[a,b] /\\\n                ((\\x. g x * f x) has_real_integral\n                 (g(a) * real_integral (real_interval[a,c]) f +\n                  g(b) * real_integral (real_interval[c,b]) f))\n                (real_interval[a,b])
-      #|  c:real
-      #|  forall f g a b.\n        ~(real_interval[a,b] = {}) /\\\n        f real_integrable_on real_interval[a,b] /\\\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> g x <= g y)\n        ==> ?c. c IN real_interval[a,b] /\\\n                real_integral (real_interval[a,b]) (\\x. g x * f x) =\n                 g(a) * real_integral (real_interval[a,c]) f +\n                 g(b) * real_integral (real_interval[c,b]) f
-      #|  c:real
-      #|  v:real
-      #|  u:real
-      #|  lift b
-      #|  lift a
-      #|  (g:real->real) o drop
-      #|  lift o f o drop
-      #|  forall f g a b u v.\n        ~(real_interval[a,b] = {}) /\\\n        f real_integrable_on real_interval[a,b] /\\\n        (forall x. x IN real_interval(a,b) ==> u <= g x /\\ g x <= v) /\\\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> g x <= g y)\n        ==> ?c. c IN real_interval[a,b] /\\\n                ((\\x. g x * f x) has_real_integral\n                 (u * real_integral (real_interval[a,c]) f +\n                  v * real_integral (real_interval[c,b]) f))\n                (real_interval[a,b])
-      #|  c:real
-      #|  forall f g a b u v.\n        ~(real_interval[a,b] = {}) /\\\n        f real_integrable_on real_interval[a,b] /\\\n        (forall x. x IN real_interval(a,b) ==> u <= g x /\\ g x <= v) /\\\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> g x <= g y)\n        ==> ?c. c IN real_interval[a,b] /\\\n                real_integral (real_interval[a,b]) (\\x. g x * f x) =\n                 u * real_integral (real_interval[a,c]) f +\n                 v * real_integral (real_interval[c,b]) f
-      #|  c:real
-      #|  lift b
-      #|  lift a
-      #|  (g:real->real) o drop
-      #|  lift o f o drop
-      #|  forall f g a b.\n        ~(real_interval[a,b] = {}) /\\\n        f real_integrable_on real_interval[a,b] /\\\n        (forall x. x IN real_interval[a,b] ==> &0 <= g x) /\\\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> g x <= g y)\n        ==> ?c. c IN real_interval[a,b] /\\\n                ((\\x. g x * f x) has_real_integral\n                 (g(b) * real_integral (real_interval[c,b]) f))\n                (real_interval[a,b])
-      #|  c:real
-      #|  forall f g a b.\n        ~(real_interval[a,b] = {}) /\\\n        f real_integrable_on real_interval[a,b] /\\\n        (forall x. x IN real_interval[a,b] ==> &0 <= g x) /\\\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> g x <= g y)\n        ==> ?c. c IN real_interval[a,b] /\\\n                real_integral (real_interval[a,b]) (\\x. g x * f x) =\n                g(b) * real_integral (real_interval[c,b]) f
-      #|  lift b
-      #|  lift a
-      #|  (g:real->real) o drop
-      #|  lift o f o drop
-      #|  forall f g a b.\n        f real_integrable_on real_interval[a,b] /\\\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> g(x) <= g(y))\n        ==> (\\x. g(x) * f(x)) real_integrable_on real_interval[a,b]
-      #|  B:real
-      #|  (g:real->real) o drop
-      #|  lift o f o drop
-      #|  forall f g B.\n        f real_integrable_on (:real) /\\\n        (forall x y. x <= y ==> g x <= g y) /\\\n        (forall x. abs(g x) <= B)\n         ==> (\\x. g x * f x) real_integrable_on (:real)
-      #|  lift b
-      #|  lift a
-      #|  lift o f o drop
-      #|  forall f a b.\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> f(x) <= f(y))\n        ==> f real_integrable_on real_interval[a,b]
-      #|  lift b
-      #|  lift a
-      #|  (g:real->real) o drop
-      #|  lift o f o drop
-      #|  forall f g a b.\n        f real_integrable_on real_interval[a,b] /\\\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> g(y) <= g(x))\n        ==> (\\x. g(x) * f(x)) real_integrable_on real_interval[a,b]
-      #|  B:real
-      #|  (g:real->real) o drop
-      #|  lift o f o drop
-      #|  forall f g B.\n        f real_integrable_on (:real) /\\\n        (forall x y. x <= y ==> g y <= g x) /\\\n        (forall x. abs(g x) <= B)\n         ==> (\\x. g x * f x) real_integrable_on (:real)
-      #|  lift b
-      #|  lift a
-      #|  lift o f o drop
-      #|  forall f a b.\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> f(y) <= f(x))\n        ==> f real_integrable_on real_interval[a,b]
-      #|  (f:real->real) s <= y
-      #|  (forall x. (f:real->real) x <= y <=> x < s) \\/\n     (forall x. (f:real->real) x <= y <=> x <= s)
-      #|  s = sup {x | (f:real->real) x <= y}
-      #|  {x | (f:real->real) x <= y}
-      #|  {x | (f:real->real) x <= y} = {} \\/\n              {x | (f:real->real) x <= y} = UNIV \\/\n              ?a b. f a <= y /\\ ~(f b <= y)
-      #|  y:real
-      #|  forall f. (forall x y. x <= y ==> f x <= f y) ==> f real_measurable_on (:real)
-      #|  (:real)
-      #|  g real_measurable_on real_interval[a,b]
-      #|  g = \\x. if x < a then f(a)\n                      else if b < x then f(b)\n                      else (f:real->real) x
-      #|  real_interval[a,b] = {}
-      #|  forall f a b. (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n                  ==> f x <= f y)\n           ==> f real_measurable_on real_interval[a,b]
-      #|  forall f. (forall x y. x <= y ==> f y <= f x) ==> f real_measurable_on (:real)
-      #|  forall f a b. (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n                  ==> f y <= f x)\n           ==> f real_measurable_on real_interval[a,b]
-      #|  a <= x /\\ x <= b ==> abs x <= abs a + abs b
-      #|  abs((f:real->real) a) + abs((f:real->real) b)
-      #|  forall f g a b.\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> f x <= f y) /\\\n        g absolutely_real_integrable_on real_interval[a,b]\n        ==> (\\x. f x * g x) absolutely_real_integrable_on real_interval[a,b]
-      #|  forall f a b. (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n                  ==> f x <= f y)\n           ==> f absolutely_real_integrable_on real_interval[a,b]
-      #|  b <= x /\\ x <= a ==> abs x <= abs a + abs b
-      #|  abs((f:real->real) a) + abs((f:real->real) b)
-      #|  forall f g a b.\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> f y <= f x) /\\\n        g absolutely_real_integrable_on real_interval[a,b]\n        ==> (\\x. f x * g x) absolutely_real_integrable_on real_interval[a,b]
-      #|  forall f a b. (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n                  ==> f y <= f x)\n           ==> f absolutely_real_integrable_on real_interval[a,b]
-      #|  f has_bounded_real_variation_on s <=>\n  (lift o f o drop) has_bounded_variation_on (IMAGE lift s)
-      #|  real_variation s f = vector_variation (IMAGE lift s) (lift o f o drop)
-      #|  forall f g s.\n        (forall x. x IN s ==> f x = g x) /\\ f has_bounded_real_variation_on s\n\n\n        ==> g has_bounded_real_variation_on s
-      #|  forall f s t. f has_bounded_real_variation_on s /\\ t SUBSET s\n           ==> f has_bounded_real_variation_on t
-      #|  forall f c s. f has_bounded_real_variation_on s\n           ==> (\\x. c * f x) has_bounded_real_variation_on s
-      #|  forall f c s. f has_bounded_real_variation_on s\n           ==> (\\x. f x * c) has_bounded_real_variation_on s
-      #|  forall f s. f has_bounded_real_variation_on s\n         ==> (\\x. --f x) has_bounded_real_variation_on s
-      #|  forall f g s. f has_bounded_real_variation_on s /\\\n           g has_bounded_real_variation_on s\n           ==> (\\x. f x + g x) has_bounded_real_variation_on s
-      #|  forall f g s. f has_bounded_real_variation_on s /\\\n           g has_bounded_real_variation_on s\n           ==> (\\x. f x - g x) has_bounded_real_variation_on s
-      #|  forall f a b. b <= a ==> f has_bounded_real_variation_on real_interval[a,b]
-      #|  forall f. f has_bounded_real_variation_on {}
-      #|  forall f s. f has_bounded_real_variation_on s\n         ==> (\\x. abs(f x)) has_bounded_real_variation_on s
-      #|  forall f g s. f has_bounded_real_variation_on s /\\\n           g has_bounded_real_variation_on s\n           ==> (\\x. max (f x) (g x)) has_bounded_real_variation_on s
-      #|  forall f g s. f has_bounded_real_variation_on s /\\\n           g has_bounded_real_variation_on s\n           ==> (\\x. min (f x) (g x)) has_bounded_real_variation_on s
-      #|  forall f a b. f has_bounded_real_variation_on real_interval[a,b]\n           ==> real_bounded(IMAGE f (real_interval[a,b]))
-      #|  forall f g s.\n        f has_bounded_real_variation_on s /\\\n        g has_bounded_real_variation_on s /\\\n        is_realinterval s\n        ==> (\\x. f x * g x) has_bounded_real_variation_on s
-      #|  forall f s. f has_bounded_real_variation_on s ==> &0 <= real_variation s f
-      #|  lift b
-      #|  lift a
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  forall f s a b.\n        f has_bounded_real_variation_on s /\\ real_segment[a,b] SUBSET s\n        ==> abs(f b - f a) <= real_variation s f
-      #|  abs x <= a ==> x <= a
-      #|  forall f s a b.\n        f has_bounded_real_variation_on s /\\ real_segment[a,b] SUBSET s\n        ==> f b - f a <= real_variation s f
-      #|  forall f s t. f has_bounded_real_variation_on s /\\ t SUBSET s\n           ==> real_variation t f <= real_variation s f
-      #|  forall f s. real_variation s (\\x. --(f x)) = real_variation s f
-      #|  forall f g s. f has_bounded_real_variation_on s /\\\n           g has_bounded_real_variation_on s\n           ==> real_variation s (\\x. f x + g x)\n               <= real_variation s f + real_variation s g
-      #|  lift c
-      #|  lift b
-      #|  lift a
-      #|  lift o f o drop
-      #|  forall f a b c.\n        a <= c /\\ c <= b\n        ==> (f has_bounded_real_variation_on real_interval[a,b] <=>\n             f has_bounded_real_variation_on real_interval[a,c] /\\\n             f has_bounded_real_variation_on real_interval[c,b])
-      #|  lift c
-      #|  lift b
-      #|  lift a
-      #|  lift o f o drop
-      #|  forall f a b c.\n        a <= c /\\ c <= b /\\\n        f has_bounded_real_variation_on real_interval[a,b]\n        ==> real_variation (real_interval[a,c]) f +\n            real_variation (real_interval[c,b]) f =\n            real_variation (real_interval[a,b]) f
-      #|  lift d
-      #|  lift c
-      #|  lift b
-      #|  lift a
-      #|  lift o f o drop
-      #|  forall f a b c d.\n        f has_bounded_real_variation_on real_interval[a,b] /\\\n        real_interval[c,d] SUBSET real_interval[a,b] /\\\n        ~(real_interval[c,d] = {})\n        ==> real_variation (real_interval[c,d]) f - (f d - f c) <=\n            real_variation (real_interval[a,b]) f - (f b - f a)
-      #|  forall f a b.\n      (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n             ==> f x <= f y)\n      ==> f has_bounded_real_variation_on real_interval[a,b]
-      #|  lift b
-      #|  lift a
-      #|  lift o f o drop
-      #|  forall f a b.\n        ~(real_interval[a,b] = {}) /\\\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> f x <= f y)\n        ==> real_variation (real_interval[a,b]) f = f b - f a
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  lift c
-      #|  m:real
-      #|  forall m c f s.\n        (\\x. f (m * x + c)) has_bounded_real_variation_on\n\n\n        IMAGE (\\x. inv m * x + --(inv m * c)) s <=>\n        m = &0 \\/ f has_bounded_real_variation_on s
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  lift c
-      #|  m:real
-      #|  forall m c f s.\n        real_variation (IMAGE (\\x. inv m * x + --(inv m * c)) s)\n                       (\\x. f (m * x + c)) =\n        if m = &0 then &0 else real_variation s f
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  lift c
-      #|  m:real
-      #|  forall m c f s.\n        (\\x. f (m * x + c)) has_bounded_real_variation_on s <=>\n        m = &0 \\/ f has_bounded_real_variation_on IMAGE (\\x. m * x + c) s
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  lift c
-      #|  m:real
-      #|  forall m c f s.\n        real_variation s (\\x. f (m * x + c)) =\n        if m = &0 then &0 else real_variation (IMAGE (\\x. m * x + c) s) f
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  lift a
-      #|  forall a f s.\n      (\\x. f(a + x)) has_bounded_real_variation_on (IMAGE (\\x. --a + x) s) <=>\n      f has_bounded_real_variation_on s
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  lift a
-      #|  forall a f s. real_variation (IMAGE (\\x. --a + x) s) (\\x. f(a + x)) =\n           real_variation s f
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  lift a
-      #|  forall a f s. (\\x. f(a + x)) has_bounded_real_variation_on s <=>\n           f has_bounded_real_variation_on (IMAGE (\\x. a + x) s)
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  lift a
-      #|  forall a f s. real_variation s (\\x. f(a + x)) =\n           real_variation (IMAGE (\\x. a + x) s) f
-      #|  forall a f u v.\n        (\\x. f(a + x)) has_bounded_real_variation_on real_interval[u,v] <=>\n        f has_bounded_real_variation_on real_interval[a+u,a+v]
-      #|  forall a f u v.\n        real_variation (real_interval[u,v]) (\\x. f(a + x)) =\n        real_variation (real_interval[a+u,a+v]) f
-      #|  forall f s a. f has_bounded_real_variation_on s\n           ==> (\\x. f(a + x)) has_bounded_real_variation_on\n               (IMAGE (\\x. --a + x) s)
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  forall f s. (\\x. f(--x)) has_bounded_real_variation_on (IMAGE (--) s) <=>\n         f has_bounded_real_variation_on s
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  forall f s. real_variation (IMAGE (--) s) (\\x. f(--x)) =\n         real_variation s f
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  forall f s. (\\x. f(--x)) has_bounded_real_variation_on s <=>\n         f has_bounded_real_variation_on (IMAGE (--) s)
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  forall f s. real_variation s (\\x. f(--x)) =\n         real_variation (IMAGE (--) s) f
-      #|  forall f u v. (\\x. f(--x)) has_bounded_real_variation_on real_interval[u,v] <=>\n           f has_bounded_real_variation_on real_interval[--v,--u]
-      #|  forall f u v. real_variation (real_interval[u,v]) (\\x. f(--x)) =\n           real_variation (real_interval[--v,--u]) f
-      #|  lift o h o drop
-      #|  lift o g o drop
-      #|  h:real->real
-      #|  g:real->real
-      #|  drop o h o lift
-      #|  drop o g o lift
-      #|  h:real^1->real^1
-      #|  g:real^1->real^1
-      #|  forall f a b.\n     f has_bounded_real_variation_on real_interval[a,b] <=>\n     ?g h. (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n                  ==> g x <= g y) /\\\n           (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n                  ==> h x <= h y) /\\\n           (forall x. f x = g x - h x)
-      #|  lift o h o drop
-      #|  lift o g o drop
-      #|  h:real->real
-      #|  g:real->real
-      #|  drop o h o lift
-      #|  drop o g o lift
-      #|  h:real^1->real^1
-      #|  g:real^1->real^1
-      #|  forall f a b.\n     f has_bounded_real_variation_on real_interval[a,b] <=>\n     ?g h. (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x < y\n                  ==> g x < g y) /\\\n           (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x < y\n                  ==> h x < h y) /\\\n           (forall x. f x = g x - h x)
-      #|  lift b
-      #|  forall f a b c.\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> f x <= f y) /\\\n        c IN real_interval[a,b]\n       ==> ?l. (f ---> l) (atreal c within real_interval[a,c])
-      #|  lift b
-      #|  forall f a b c.\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> f y <= f x) /\\\n        c IN real_interval[a,b]\n        ==> ?l. (f ---> l) (atreal c within real_interval[a,c])
-      #|  lift a
-      #|  forall f a b c.\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> f x <= f y) /\\\n        c IN real_interval[a,b]\n       ==> ?l. (f ---> l) (atreal c within real_interval[c,b])
-      #|  lift a
-      #|  forall f a b c.\n        (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n               ==> f y <= f x) /\\\n        c IN real_interval[a,b]\n        ==> ?l. (f ---> l) (atreal c within real_interval[c,b])
-      #|  lift b
-      #|  forall f a b c.\n        f has_bounded_real_variation_on real_interval[a,b] /\\\n        c IN real_interval[a,b]\n        ==> ?l. (f ---> l) (atreal c within real_interval[a,c])
-      #|  lift a
-      #|  forall f a b c.\n        f has_bounded_real_variation_on real_interval[a,b] /\\\n        c IN real_interval[a,b]\n        ==> ?l. (f ---> l) (atreal c within real_interval[c,b])
-      #|  lift b
-      #|  forall f a b c.\n        f has_bounded_real_variation_on real_interval[a,b] /\\\n        c IN real_interval[a,b]\n        ==> ((\\x. real_variation(real_interval[a,x]) f)\n             real_continuous (atreal c within real_interval[a,c]) <=>\n            f real_continuous (atreal c within real_interval[a,c]))
-      #|  forall f a b c.\n        f has_bounded_real_variation_on real_interval[a,b] /\\\n        c IN real_interval[a,b]\n        ==> ((\\x. real_variation(real_interval[a,x]) f)\n             real_continuous (atreal c within real_interval[c,b]) <=>\n            f real_continuous (atreal c within real_interval[c,b]))
-      #|  forall f a b c.\n        f has_bounded_real_variation_on real_interval[a,b] /\\\n        c IN real_interval[a,b]\n        ==> ((\\x. real_variation(real_interval[a,x]) f)\n             real_continuous (atreal c within real_interval[a,b]) <=>\n            f real_continuous (atreal c within real_interval[a,b]))
-      #|  x:real
-      #|  b:real
-      #|  a:real
-      #|  f:real->real
-      #|  x:real
-      #|  b:real
-      #|  a:real
-      #|  f:real->real
-      #|  x:real
-      #|  b:real
-      #|  a:real
-      #|  f:real->real
-      #|  x:real
-      #|  b:real
-      #|  a:real
-      #|  f:real->real
-      #|  x:real
-      #|  b:real
-      #|  a:real
-      #|  f:real->real
-      #|  x:real
-      #|  b:real
-      #|  a:real
-      #|  f:real->real
-      #|  (f:real->real) a
-      #|  forall x. a - (b - x) <= c - (d - x) ==> a - b <= c - d
-      #|  (f:real->real) a
-      #|  forall x. a - (b - x) <= c - (d - x) ==> a - b <= c - d
-      #|  (x + l) - (x + l - f):real = f
-      #|  \\x. x + real_variation (real_interval[a,x]) f - f x
-      #|  \\x. x + real_variation (real_interval[a,x]) f
-      #|  forall f a b.\n     f has_bounded_real_variation_on real_interval[a,b]\n     ==> ?g h.\n          (forall x. f x = g x - h x) /\\\n          (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n                 ==> g x <= g y) /\\\n          (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x <= y\n                 ==> h x <= h y) /\\\n          (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x < y\n                 ==> g x < g y) /\\\n          (forall x y. x IN real_interval[a,b] /\\ y IN real_interval[a,b] /\\ x < y\n                 ==> h x < h y) /\\\n          (forall x. x IN real_interval[a,b] /\\\n               f real_continuous (atreal x within real_interval[a,x])\n               ==> g real_continuous (atreal x within real_interval[a,x]) /\\\n                   h real_continuous (atreal x within real_interval[a,x])) /\\\n          (forall x. x IN real_interval[a,b] /\\\n               f real_continuous (atreal x within real_interval[x,b])\n               ==> g real_continuous (atreal x within real_interval[x,b]) /\\\n                   h real_continuous (atreal x within real_interval[x,b])) /\\\n          (forall x. x IN real_interval[a,b] /\\\n               f real_continuous (atreal x within real_interval[a,b])\n               ==> g real_continuous (atreal x within real_interval[a,b]) /\\\n                   h real_continuous (atreal x within real_interval[a,b]))
+      #|  (UNIV : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, lebesgue_measurable(s) \226\134\146 measurable_on(clog, s)
+      #|  (UNIV : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 w : Cart[Real, Tybit0[Unit]], lebesgue_measurable(s) \226\134\146 measurable_on((z : Cart[Real, Tybit0[Unit]]) => cpow(z, w), s)
+      #|  (real_measurable_on : ((Real) -> Real, (Real) -> Bool) -> Bool)((f : (Real) -> Real), (s : (Real) -> Bool)) == measurable_on(o(lift, o(f, drop)), IMAGE(lift, s))
+      #|  (real_lebesgue_measurable : ((Real) -> Bool) -> Bool)((s : (Real) -> Bool)) == real_measurable_on((x : Real) => if IN(x, s) { real_of_num(1) } else { real_of_num(0) }, UNIV)
+      #|  real_measurable_on((x : Real) => if IN(x, (s : (Real) -> Bool)) { (f : (Real) -> Real)(x) } else { real_of_num(0) }, UNIV) == real_measurable_on(f, s)
+      #|  \226\136\128 s : (Real) -> Bool, real_lebesgue_measurable(s) == lebesgue_measurable(IMAGE(lift, s))
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, s) && real_integrable_on(g, s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 abs(f(x)) <= g(x)) \226\134\146 real_integrable_on(f, s)
+      #|  (k : (Real) -> Bool)
+      #|  (g : (Real) -> Real)
+      #|  (x : Real) => if IN(x, (k : (Real) -> Bool)) { abs((f : (Real) -> Real)(x)) } else { (g : (Real) -> Real)(x) }
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 k : (Real) -> Bool, real_measurable_on(f, s) && real_integrable_on(g, s) && real_negligible(k) && (\226\136\128 x : Real, IN(x, DIFF(s, k)) \226\134\146 abs(f(x)) <= g(x)) \226\134\146 real_integrable_on(f, s)
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, s) && real_integrable_on(g, s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 abs(f(x)) <= g(x)) \226\134\146 absolutely_real_integrable_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, (\226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on(f, real_interval([(a, b)]))) \226\134\146 real_measurable_on(f, UNIV)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) \226\134\146 real_measurable_on(f, s)
+      #|  (x : Real) => abs((f : (Real) -> Real)(x))
+      #|  ((a : Bool) \226\134\146 (b : Bool)) && (b && (c : Bool) \226\134\146 a) \226\134\146 (a && c) == (b && c)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, absolutely_real_integrable_on(f, s) == (real_measurable_on(f, s) && real_integrable_on((x : Real) => abs(f(x)), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) && real_closed(s) \226\134\146 real_measurable_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, real_measurable_on(f, UNIV) && real_continuous_on(g, UNIV) \226\134\146 real_measurable_on(o(g, f), UNIV)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (c \226\134\146 a && b \226\134\146 d)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, s) && real_continuous_on(g, UNIV) && g(real_of_num(0)) == real_of_num(0) \226\134\146 real_measurable_on(o(g, f), s)
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_measurable_on(f, UNIV) && (\226\136\128 x : Real, IN(f(x), real_interval((a, b)))) && real_continuous_on(g, real_interval((a, b))) \226\134\146 real_measurable_on(o(g, f), UNIV)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_closed(s) && real_measurable_on(f, UNIV) && (\226\136\128 x : Real, IN(f(x), s)) && real_continuous_on(g, s) \226\134\146 real_measurable_on(o(g, f), UNIV)
+      #|  IMAGE(lift, (t : (Real) -> Bool))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_closed(s) && real_measurable_on(f, t) && (\226\136\128 x : Real, IN(f(x), s)) && real_continuous_on(g, s) && IN(real_of_num(0), s) && g(real_of_num(0)) == real_of_num(0) \226\134\146 real_measurable_on(o(g, f), t)
+      #|  \226\136\128 f : (Real) -> Real, real_continuous_on(f, UNIV) \226\134\146 real_measurable_on(f, UNIV)
+      #|  \226\136\128 k : Real, real_measurable_on((x : Real) => k, UNIV)
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable_on((x : Real) => real_of_num(0), s)
+      #|  (c : Real)
+      #|  \226\136\128 c : Real, \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, s) \226\134\146 real_measurable_on((x : Real) => c * f(x), s)
+      #|  \226\136\128 c : Real, \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, s) \226\134\146 real_measurable_on((x : Real) => f(x) * c, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, s) \226\134\146 real_measurable_on((x : Real) => -f(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on((x : Real) => -f(x), s) == real_measurable_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, s) \226\134\146 real_measurable_on((x : Real) => abs(f(x)), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, s) && real_measurable_on(g, s) \226\134\146 real_measurable_on((x : Real) => f(x) + g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, s) && real_measurable_on(g, s) \226\134\146 real_measurable_on((x : Real) => f(x) - g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, s) && real_measurable_on(g, s) \226\134\146 real_measurable_on((x : Real) => max(f(x), g(x)), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, s) && real_measurable_on(g, s) \226\134\146 real_measurable_on((x : Real) => min(f(x), g(x)), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, s) && real_measurable_on(g, s) \226\134\146 real_measurable_on((x : Real) => f(x) * g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_negligible(UNION(DIFF(s, t), DIFF(t, s))) \226\134\146 real_measurable_on(f, s) \226\134\146 real_measurable_on(f, t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, UNIV) && real_lebesgue_measurable(s) \226\134\146 real_measurable_on((x : Real) => if IN(x, s) { f(x) } else { real_of_num(0) }, UNIV)
+      #|  (\226\136\128 x : Real, drop(lift(x)) == x) \226\134\146 DIFF(IMAGE(lift, (s : (Real) -> Bool)), IMAGE(lift, (t : (Real) -> Bool))) == IMAGE(lift, DIFF(s, t))
+      #|  IMAGE(lift, (k : (Real) -> Bool))
+      #|  (n : Num) => o(lift, o((f : (Num, Real) -> Real)(n), drop))
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 k : (Real) -> Bool, (\226\136\128 n : Num, real_measurable_on(f(n), s)) && real_negligible(k) && (\226\136\128 x : Real, IN(x, DIFF(s, k)) \226\134\146 op_minus_minus_minus_gt((n : Num) => f(n, x), g(x), sequentially)) \226\134\146 real_measurable_on(g, s)
+      #|  (x : Real) => (B : Real) * abs((g : (Real) -> Real)(x))
+      #|  (B : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, s) && real_bounded(IMAGE(f, s)) && absolutely_real_integrable_on(g, s) \226\134\146 absolutely_real_integrable_on((x : Real) => f(x) * g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, s) == measurable_on(o(Cx, o(f, drop)), IMAGE(lift, s))
+      #|  \226\136\128 f : (Real) -> Real, real_measurable_on(f, UNIV) && real_negligible({(x : Real) | f(x) == real_of_num(0)}) \226\134\146 real_measurable_on((x : Real) => inv(f(x)), UNIV)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, real_measurable_on(f, (s : (Real) -> Bool)) && real_measurable_on(g, UNIV) && real_negligible({(x : Real) | g(x) == real_of_num(0)}) \226\134\146 real_measurable_on((x : Real) => f(x) / g(x), s)
+      #|  ((x : Real) => rpow((f : (Real) -> Real)(x), (r : Real))) == o((x : Real) => rpow(x, r), f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 r : Real, \226\136\128 s : (Real) -> Bool, real_measurable_on(f, s) && real_of_num(0) < r \226\134\146 real_measurable_on((x : Real) => rpow(f(x), r), s)
+      #|  ((x : Cart[Real, N]) => lift(rpow((f : (Cart[Real, N]) -> Real)(x), (y : Real)))) == o(o(lift, o((w : Real) => rpow(w, y), drop)), (x : Cart[Real, N]) => lift(f(x)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 y : Real, measurable_on((x : Cart[Real, N]) => lift(f(x)), s) && real_of_num(0) < y \226\134\146 measurable_on((x : Cart[Real, N]) => lift(rpow(f(x), y)), s)
+      #|  \226\136\128 s : (Real) -> Bool, real_measurable(s) \226\134\146 real_lebesgue_measurable(s)
+      #|  real_lebesgue_measurable({})
+      #|  real_lebesgue_measurable(UNIV)
+      #|  \226\136\128 s : (Real) -> Bool, real_compact(s) \226\134\146 real_lebesgue_measurable(s)
+      #|  (\226\136\128 a : Real, \226\136\128 b : Real, real_lebesgue_measurable(real_interval([(a, b)]))) && (\226\136\128 a : Real, \226\136\128 b : Real, real_lebesgue_measurable(real_interval((a, b))))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_lebesgue_measurable(s) && real_lebesgue_measurable(t) \226\134\146 real_lebesgue_measurable(INTER(s, t))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_lebesgue_measurable(s) && real_lebesgue_measurable(t) \226\134\146 real_lebesgue_measurable(UNION(s, t))
+      #|  \226\136\128 s : (Real) -> Bool, real_lebesgue_measurable(DIFF(UNIV, s)) == real_lebesgue_measurable(s)
+      #|  DIFF((s : (_) -> Bool), (t : (_) -> Bool)) == INTER(s, DIFF(UNIV, t))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, real_lebesgue_measurable(s) && real_lebesgue_measurable(t) \226\134\146 real_lebesgue_measurable(DIFF(s, t))
+      #|  \226\136\128 s : (Real) -> Bool, real_lebesgue_measurable(s) == (\226\136\128 a : Real, \226\136\128 b : Real, real_lebesgue_measurable(INTER(s, real_interval([(a, b)]))))
+      #|  \226\136\128 s : (Real) -> Bool, real_closed(s) \226\134\146 real_lebesgue_measurable(s)
+      #|  \226\136\128 s : (Real) -> Bool, real_open(s) \226\134\146 real_lebesgue_measurable(s)
+      #|  \226\136\128 f : ((Real) -> Bool) -> Bool, FINITE(f) && (\226\136\128 s : (Real) -> Bool, IN(s, f) \226\134\146 real_lebesgue_measurable(s)) \226\134\146 real_lebesgue_measurable(UNIONS(f))
+      #|  \226\136\128 s : (Num, Real) -> Bool, (\226\136\128 n : Num, real_lebesgue_measurable(s(n))) \226\134\146 real_lebesgue_measurable(UNIONS({s((n : Num)) | IN(n, UNIV)}))
+      #|  (f : ((Real) -> Bool) -> Bool)
+      #|  (f : ((Real) -> Bool) -> Bool) == {}
+      #|  \226\136\128 f : ((Real) -> Bool) -> Bool, COUNTABLE(f) && (\226\136\128 s : (Real) -> Bool, IN(s, f) \226\134\146 real_lebesgue_measurable(s)) \226\134\146 real_lebesgue_measurable(UNIONS(f))
+      #|  \226\136\128 f : ((Real) -> Bool) -> Bool, COUNTABLE(f) && (\226\136\128 s : (Real) -> Bool, IN(s, f) \226\134\146 real_lebesgue_measurable(s)) \226\134\146 real_lebesgue_measurable(INTERS(f))
+      #|  \226\136\128 s : (Num, Real) -> Bool, (\226\136\128 n : Num, real_lebesgue_measurable(s(n))) \226\134\146 real_lebesgue_measurable(INTERS({s((n : Num)) | IN(n, UNIV)}))
+      #|  \226\136\128 f : ((Real) -> Bool) -> Bool, FINITE(f) && (\226\136\128 s : (Real) -> Bool, IN(s, f) \226\134\146 real_lebesgue_measurable(s)) \226\134\146 real_lebesgue_measurable(INTERS(f))
+      #|  \226\136\128 s : (Real) -> Bool, real_bounded(s) \226\134\146 real_lebesgue_measurable(s) == real_measurable(s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, SUBSET(s, t) && real_measurable_on(f, t) && real_lebesgue_measurable(s) \226\134\146 real_measurable_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, SUBSET(s, t) && real_measurable_on(f, t) && real_measurable(s) \226\134\146 real_measurable_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) && real_closed(s) \226\134\146 real_measurable_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 m : (Real) -> Bool, real_continuous_on(f, DIFF(s, m)) && real_lebesgue_measurable(s) && real_negligible(m) \226\134\146 real_measurable_on(f, s)
+      #|  \226\136\128 x : Real, (if IN(x, (s : (Real) -> Bool)) { if (P : (Real) -> Bool)(x) { (f : (Real) -> Real)(x) } else { (g : (Real) -> Real)(x) } } else { real_of_num(0) }) == (if IN(x, {(x : Real) | P(x)}) { if IN(x, s) { f(x) } else { real_of_num(0) } } else { real_of_num(0) }) + (if IN(x, DIFF(UNIV, {(x : Real) | P(x)})) { if IN(x, s) { g(x) } else { real_of_num(0) } } else { real_of_num(0) })
+      #|  \226\136\128 P : (Real) -> Bool, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_lebesgue_measurable({(x : Real) | P(x)}) && real_measurable_on(f, s) && real_measurable_on(g, s) \226\134\146 real_measurable_on((x : Real) => if P(x) { f(x) } else { g(x) }, s)
+      #|  \226\136\128 f : (Real) -> Real, real_measurable_on(f, UNIV) == (\226\136\128 a : Real, real_lebesgue_measurable({(x : Real) | f(x) < a}))
+      #|  \226\136\128 f : (Real) -> Real, real_measurable_on(f, UNIV) == (\226\136\128 a : Real, real_lebesgue_measurable({(x : Real) | f(x) <= a}))
+      #|  \226\136\128 f : (Real) -> Real, real_measurable_on(f, UNIV) == (\226\136\128 a : Real, real_lebesgue_measurable({(x : Real) | f(x) > a}))
+      #|  \226\136\128 f : (Real) -> Real, real_measurable_on(f, UNIV) == (\226\136\128 a : Real, real_lebesgue_measurable({(x : Real) | f(x) >= a}))
+      #|  \226\136\128 f : (Real) -> Real, real_measurable_on(f, UNIV) == (\226\136\128 a : Real, \226\136\128 b : Real, real_lebesgue_measurable({(x : Real) | IN(f(x), real_interval((a, b)))}))
+      #|  \226\136\128 f : (Real) -> Real, real_measurable_on(f, UNIV) == (\226\136\128 a : Real, \226\136\128 b : Real, real_lebesgue_measurable({(x : Real) | IN(f(x), real_interval([(a, b)]))}))
+      #|  IMAGE(drop, (t : (Cart[Real, Unit]) -> Bool))
+      #|  (t : (Cart[Real, Unit]) -> Bool)
+      #|  IMAGE(lift, (t : (Real) -> Bool))
+      #|  (t : (Real) -> Bool)
+      #|  \226\136\128 f : (Real) -> Real, real_measurable_on(f, UNIV) == (\226\136\128 t : (Real) -> Bool, real_open(t) \226\134\146 real_lebesgue_measurable({(x : Real) | IN(f(x), t)}))
+      #|  IMAGE(drop, (t : (Cart[Real, Unit]) -> Bool))
+      #|  (t : (Cart[Real, Unit]) -> Bool)
+      #|  IMAGE(lift, (t : (Real) -> Bool))
+      #|  (t : (Real) -> Bool)
+      #|  \226\136\128 f : (Real) -> Real, real_measurable_on(f, UNIV) == (\226\136\128 t : (Real) -> Bool, real_closed(t) \226\134\146 real_lebesgue_measurable({(x : Real) | IN(f(x), t)}))
+      #|  drop((x : Cart[Real, Unit]))
+      #|  (x : Cart[Real, Unit])
+      #|  (n : Num) => o(lift, o((g : (Num, Real) -> Real)(n), drop))
+      #|  (g : (Num, Real) -> Real)
+      #|  lift((x : Real))
+      #|  (x : Real)
+      #|  (n : Num) => o(drop, o((g : (Num, Cart[Real, Unit]) -> Cart[Real, Unit])(n), lift))
+      #|  (g : (Num, Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  \226\136\128 f : (Real) -> Real, real_measurable_on(f, UNIV) == (\226\136\131 g : (Num, Real) -> Real, (\226\136\128 n : Num, real_measurable_on(g(n), UNIV)) && (\226\136\128 n : Num, FINITE(IMAGE(g(n), UNIV))) && (\226\136\128 x : Real, op_minus_minus_minus_gt((n : Num) => g(n, x), f(x), sequentially)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 t : (Real) -> Bool, real_measurable_on(f, UNIV) && real_open(t) \226\134\146 real_lebesgue_measurable({(x : Real) | IN(f(x), t)})
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 t : (Real) -> Bool, real_measurable_on(f, UNIV) && real_closed(t) \226\134\146 real_lebesgue_measurable({(x : Real) | IN(f(x), t)})
+      #|  real_of_num(0) <= (x : Real) && x <= (a : Real) && real_of_num(0) <= (y : Real) && y <= a \226\134\146 abs(x - y) <= a
+      #|  (s : (Cart[Real, _]) -> Bool) == {} \226\134\146 negligible(s)
+      #|  (x : Real) + (z : Real) == (y : Real) && real_of_num(0) <= z \226\134\146 abs(x - y) == z
+      #|  abs(measure(INTER((s : (Cart[Real, N]) -> Bool), interval([((u : Cart[Real, N]), (v : Cart[Real, N]))]))) - measure(s)) == measure(DIFF(s, interval([(u, v)])))
+      #|  (y : Real) < (e : Real) \226\134\146 (x : Real) <= y \226\134\146 x < e
+      #|  abs((nub : Real) - (nua : Real)) < (e : Real) / real_of_num(2) \226\134\146 abs((mub : Real) - (mua : Real)) < e / real_of_num(2) \226\134\146 abs(mub + nub - (mua + nua)) < e
+      #|  (s : (Cart[Real, _]) -> Bool) == {} \226\134\146 negligible(s)
+      #|  \226\136\128 b : Real, measure(INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (i : Num)) <= b})) == measure(INTER(INTER(s, interval([((u : Cart[Real, N]), (v : Cart[Real, N]))])), {(x : Cart[Real, N]) | op_dollar(x, i) <= b})) + measure(INTER(DIFF(s, interval([(u, v)])), {(x : Cart[Real, N]) | op_dollar(x, i) <= b}))
+      #|  \226\136\128 b : Real, integral(interval([((u : Cart[Real, N]), lambda((j : Num) => if j == (i : Num) { min(op_dollar((v : Cart[Real, N]), i), b) } else { op_dollar(v, j) }))]), indicator((s : (Cart[Real, N]) -> Bool))) == lift(measure(INTER(s, INTER(interval([(u, v)]), {(x : Cart[Real, N]) | op_dollar(x, i) <= b}))))
+      #|  (j : Num)
+      #|  sum(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (j : Num) => if j == (i : Num) { pow((d : Real), 2) } else { real_of_num(0) })
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (lambda : ((Num) -> Real) -> Cart[Real, N])((j : Num) => if j == (i : Num) { min((op_dollar : (Cart[Real, N], Num) -> Real)((v : Cart[Real, N]), i), (b : Real)) } else { (op_dollar : (Cart[Real, N], Num) -> Real)(v, j) })
+      #|  (u : Cart[Real, N])
+      #|  (b : Real)
+      #|  min((d : Real), min((a : Real) - op_dollar((u : Cart[Real, N]), (i : Num)), op_dollar((v : Cart[Real, N]), i) - a))
+      #|  (d : Real)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (if (P : Bool) { if (Q : Bool) { (x : _) } else { (y : _) } } else { y }) == (if P && Q { x } else { y })
+      #|  (e : Real) / real_of_num(2)
+      #|  (lambda : ((Num) -> Real) -> Cart[Real, N])((j : Num) => if j == (i : Num) { min((op_dollar : (Cart[Real, N], Num) -> Real)((v : Cart[Real, N]), i), (a : Real)) } else { (op_dollar : (Cart[Real, N], Num) -> Real)(v, j) })
+      #|  (u : Cart[Real, N])
+      #|  (v : Cart[Real, N])
+      #|  (u : Cart[Real, N])
+      #|  indicator((s : (Cart[Real, N]) -> Bool))
+      #|  (lambda : ((Num) -> Real) -> Cart[Real, N])((j : Num) => max((a : Real) + real_of_num(1), (op_dollar : (Cart[Real, N], Num) -> Real)((v : Cart[Real, N]), j)))
+      #|  (lambda : ((Num) -> Real) -> Cart[Real, N])((j : Num) => min((a : Real) - real_of_num(1), (op_dollar : (Cart[Real, N], Num) -> Real)((u : Cart[Real, N]), j)))
+      #|  (v : Cart[Real, N])
+      #|  (u : Cart[Real, N])
+      #|  (ball : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), (B : Real)))
+      #|  (B : Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\131 u : Cart[Real, N], \226\136\131 v : Cart[Real, N], abs(measure(INTER((s : (Cart[Real, N]) -> Bool), interval([(u, v)]))) - measure(s)) < (e : Real) / real_of_num(2) && !(interval((u, v)) == {}) && op_dollar(u, (i : Num)) < (a : Real) && a < op_dollar(v, i)
+      #|  (e : Real)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Real, \226\136\128 i : Num, (measurable : ((Cart[Real, N]) -> Bool) -> Bool)(s) && 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (real_continuous : ((Real) -> Real, Net[Real]) -> Bool)((a : Real) => (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) <= a})), atreal(a))
+      #|  (c : Real)
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o((g : (Real) -> Real), drop)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, !(real_interval([(a, b)]) == {}) && real_integrable_on(f, real_interval([(a, b)])) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 g(x) <= g(y)) \226\134\146 (\226\136\131 c : Real, IN(c, real_interval([(a, b)])) && has_real_integral((x : Real) => g(x) * f(x), g(a) * real_integral(real_interval([(a, c)]), f) + g(b) * real_integral(real_interval([(c, b)]), f), real_interval([(a, b)])))
+      #|  (c : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, !(real_interval([(a, b)]) == {}) && real_integrable_on(f, real_interval([(a, b)])) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 g(x) <= g(y)) \226\134\146 (\226\136\131 c : Real, IN(c, real_interval([(a, b)])) && real_integral(real_interval([(a, b)]), (x : Real) => g(x) * f(x)) == g(a) * real_integral(real_interval([(a, c)]), f) + g(b) * real_integral(real_interval([(c, b)]), f))
+      #|  (c : Real)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o((g : (Real) -> Real), drop)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 u : Real, \226\136\128 v : Real, !(real_interval([(a, b)]) == {}) && real_integrable_on(f, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval((a, b))) \226\134\146 u <= g(x) && g(x) <= v) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 g(x) <= g(y)) \226\134\146 (\226\136\131 c : Real, IN(c, real_interval([(a, b)])) && has_real_integral((x : Real) => g(x) * f(x), u * real_integral(real_interval([(a, c)]), f) + v * real_integral(real_interval([(c, b)]), f), real_interval([(a, b)])))
+      #|  (c : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 u : Real, \226\136\128 v : Real, !(real_interval([(a, b)]) == {}) && real_integrable_on(f, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval((a, b))) \226\134\146 u <= g(x) && g(x) <= v) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 g(x) <= g(y)) \226\134\146 (\226\136\131 c : Real, IN(c, real_interval([(a, b)])) && real_integral(real_interval([(a, b)]), (x : Real) => g(x) * f(x)) == u * real_integral(real_interval([(a, c)]), f) + v * real_integral(real_interval([(c, b)]), f))
+      #|  (c : Real)
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o((g : (Real) -> Real), drop)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, !(real_interval([(a, b)]) == {}) && real_integrable_on(f, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 real_of_num(0) <= g(x)) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 g(x) <= g(y)) \226\134\146 (\226\136\131 c : Real, IN(c, real_interval([(a, b)])) && has_real_integral((x : Real) => g(x) * f(x), g(b) * real_integral(real_interval([(c, b)]), f), real_interval([(a, b)])))
+      #|  (c : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, !(real_interval([(a, b)]) == {}) && real_integrable_on(f, real_interval([(a, b)])) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 real_of_num(0) <= g(x)) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 g(x) <= g(y)) \226\134\146 (\226\136\131 c : Real, IN(c, real_interval([(a, b)])) && real_integral(real_interval([(a, b)]), (x : Real) => g(x) * f(x)) == g(b) * real_integral(real_interval([(c, b)]), f))
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o((g : (Real) -> Real), drop)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on(f, real_interval([(a, b)])) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 g(x) <= g(y)) \226\134\146 real_integrable_on((x : Real) => g(x) * f(x), real_interval([(a, b)]))
+      #|  (B : Real)
+      #|  o((g : (Real) -> Real), drop)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 B : Real, real_integrable_on(f, UNIV) && (\226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 g(x) <= g(y)) && (\226\136\128 x : Real, abs(g(x)) <= B) \226\134\146 real_integrable_on((x : Real) => g(x) * f(x), UNIV)
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 f(x) <= f(y)) \226\134\146 real_integrable_on(f, real_interval([(a, b)]))
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o((g : (Real) -> Real), drop)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on(f, real_interval([(a, b)])) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 g(y) <= g(x)) \226\134\146 real_integrable_on((x : Real) => g(x) * f(x), real_interval([(a, b)]))
+      #|  (B : Real)
+      #|  o((g : (Real) -> Real), drop)
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 B : Real, real_integrable_on(f, UNIV) && (\226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 g(y) <= g(x)) && (\226\136\128 x : Real, abs(g(x)) <= B) \226\134\146 real_integrable_on((x : Real) => g(x) * f(x), UNIV)
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 f(y) <= f(x)) \226\134\146 real_integrable_on(f, real_interval([(a, b)]))
+      #|  (f : (Real) -> Real)((s : Real)) <= (y : Real)
+      #|  (\226\136\128 x : Real, ((f : (Real) -> Real)(x) <= (y : Real)) == (x < (s : Real))) || (\226\136\128 x : Real, (f(x) <= y) == (x <= s))
+      #|  (s : Real) == sup({(x : Real) | (f : (Real) -> Real)(x) <= (y : Real)})
+      #|  {(x : Real) | (f : (Real) -> Real)(x) <= (y : Real)}
+      #|  {(x : Real) | (f : (Real) -> Real)(x) <= (y : Real)} == {} || {(x : Real) | f(x) <= y} == UNIV || (\226\136\131 a : Real, \226\136\131 b : Real, f(a) <= y && !(f(b) <= y))
+      #|  (y : Real)
+      #|  \226\136\128 f : (Real) -> Real, (\226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 f(x) <= f(y)) \226\134\146 real_measurable_on(f, UNIV)
+      #|  (UNIV : (Real) -> Bool)
+      #|  real_measurable_on((g : (Real) -> Real), real_interval([((a : Real), (b : Real))]))
+      #|  (g : (Real) -> Real) == ((x : Real) => if x < (a : Real) { (f : (Real) -> Real)(a) } else { if (b : Real) < x { f(b) } else { f(x) } })
+      #|  real_interval([((a : Real), (b : Real))]) == {}
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 f(x) <= f(y)) \226\134\146 real_measurable_on(f, real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, (\226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 f(y) <= f(x)) \226\134\146 real_measurable_on(f, UNIV)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 f(y) <= f(x)) \226\134\146 real_measurable_on(f, real_interval([(a, b)]))
+      #|  (a : Real) <= (x : Real) && x <= (b : Real) \226\134\146 abs(x) <= abs(a) + abs(b)
+      #|  abs((f : (Real) -> Real)((a : Real))) + abs(f((b : Real)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 f(x) <= f(y)) && absolutely_real_integrable_on(g, real_interval([(a, b)])) \226\134\146 absolutely_real_integrable_on((x : Real) => f(x) * g(x), real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 f(x) <= f(y)) \226\134\146 absolutely_real_integrable_on(f, real_interval([(a, b)]))
+      #|  (b : Real) <= (x : Real) && x <= (a : Real) \226\134\146 abs(x) <= abs(a) + abs(b)
+      #|  abs((f : (Real) -> Real)((a : Real))) + abs(f((b : Real)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 f(y) <= f(x)) && absolutely_real_integrable_on(g, real_interval([(a, b)])) \226\134\146 absolutely_real_integrable_on((x : Real) => f(x) * g(x), real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 f(y) <= f(x)) \226\134\146 absolutely_real_integrable_on(f, real_interval([(a, b)]))
+      #|  (has_bounded_real_variation_on : ((Real) -> Real, (Real) -> Bool) -> Bool)((f : (Real) -> Real), (s : (Real) -> Bool)) == has_bounded_variation_on(o(lift, o(f, drop)), IMAGE(lift, s))
+      #|  (real_variation : ((Real) -> Bool, (Real) -> Real) -> Real)((s : (Real) -> Bool), (f : (Real) -> Real)) == vector_variation(IMAGE(lift, s), o(lift, o(f, drop)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == g(x)) && has_bounded_real_variation_on(f, s) \226\134\146 has_bounded_real_variation_on(g, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, has_bounded_real_variation_on(f, s) && SUBSET(t, s) \226\134\146 has_bounded_real_variation_on(f, t)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 c : Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on(f, s) \226\134\146 has_bounded_real_variation_on((x : Real) => c * f(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 c : Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on(f, s) \226\134\146 has_bounded_real_variation_on((x : Real) => f(x) * c, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on(f, s) \226\134\146 has_bounded_real_variation_on((x : Real) => -f(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on(f, s) && has_bounded_real_variation_on(g, s) \226\134\146 has_bounded_real_variation_on((x : Real) => f(x) + g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on(f, s) && has_bounded_real_variation_on(g, s) \226\134\146 has_bounded_real_variation_on((x : Real) => f(x) - g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, b <= a \226\134\146 has_bounded_real_variation_on(f, real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, has_bounded_real_variation_on(f, {})
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on(f, s) \226\134\146 has_bounded_real_variation_on((x : Real) => abs(f(x)), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on(f, s) && has_bounded_real_variation_on(g, s) \226\134\146 has_bounded_real_variation_on((x : Real) => max(f(x), g(x)), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on(f, s) && has_bounded_real_variation_on(g, s) \226\134\146 has_bounded_real_variation_on((x : Real) => min(f(x), g(x)), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, has_bounded_real_variation_on(f, real_interval([(a, b)])) \226\134\146 real_bounded(IMAGE(f, real_interval([(a, b)])))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on(f, s) && has_bounded_real_variation_on(g, s) && is_realinterval(s) \226\134\146 has_bounded_real_variation_on((x : Real) => f(x) * g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on(f, s) \226\134\146 real_of_num(0) <= real_variation(s, f)
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, \226\136\128 b : Real, has_bounded_real_variation_on(f, s) && SUBSET(real_segment([(a, b)]), s) \226\134\146 abs(f(b) - f(a)) <= real_variation(s, f)
+      #|  abs((x : Real)) <= (a : Real) \226\134\146 x <= a
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, \226\136\128 b : Real, has_bounded_real_variation_on(f, s) && SUBSET(real_segment([(a, b)]), s) \226\134\146 f(b) - f(a) <= real_variation(s, f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, has_bounded_real_variation_on(f, s) && SUBSET(t, s) \226\134\146 real_variation(t, f) <= real_variation(s, f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_variation(s, (x : Real) => -f(x)) == real_variation(s, f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on(f, s) && has_bounded_real_variation_on(g, s) \226\134\146 real_variation(s, (x : Real) => f(x) + g(x)) <= real_variation(s, f) + real_variation(s, g)
+      #|  lift((c : Real))
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, a <= c && c <= b \226\134\146 has_bounded_real_variation_on(f, real_interval([(a, b)])) == (has_bounded_real_variation_on(f, real_interval([(a, c)])) && has_bounded_real_variation_on(f, real_interval([(c, b)])))
+      #|  lift((c : Real))
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, a <= c && c <= b && has_bounded_real_variation_on(f, real_interval([(a, b)])) \226\134\146 real_variation(real_interval([(a, c)]), f) + real_variation(real_interval([(c, b)]), f) == real_variation(real_interval([(a, b)]), f)
+      #|  lift((d : Real))
+      #|  lift((c : Real))
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, has_bounded_real_variation_on(f, real_interval([(a, b)])) && SUBSET(real_interval([(c, d)]), real_interval([(a, b)])) && !(real_interval([(c, d)]) == {}) \226\134\146 real_variation(real_interval([(c, d)]), f) - (f(d) - f(c)) <= real_variation(real_interval([(a, b)]), f) - (f(b) - f(a))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 f(x) <= f(y)) \226\134\146 has_bounded_real_variation_on(f, real_interval([(a, b)]))
+      #|  lift((b : Real))
+      #|  lift((a : Real))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, !(real_interval([(a, b)]) == {}) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 f(x) <= f(y)) \226\134\146 real_variation(real_interval([(a, b)]), f) == f(b) - f(a)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  lift((c : Real))
+      #|  (m : Real)
+      #|  \226\136\128 m : Real, \226\136\128 c : Real, \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on((x : Real) => f(m * x + c), IMAGE((x : Real) => inv(m) * x + -(inv(m) * c), s)) == (m == real_of_num(0) || has_bounded_real_variation_on(f, s))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  lift((c : Real))
+      #|  (m : Real)
+      #|  \226\136\128 m : Real, \226\136\128 c : Real, \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_variation(IMAGE((x : Real) => inv(m) * x + -(inv(m) * c), s), (x : Real) => f(m * x + c)) == (if m == real_of_num(0) { real_of_num(0) } else { real_variation(s, f) })
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  lift((c : Real))
+      #|  (m : Real)
+      #|  \226\136\128 m : Real, \226\136\128 c : Real, \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on((x : Real) => f(m * x + c), s) == (m == real_of_num(0) || has_bounded_real_variation_on(f, IMAGE((x : Real) => m * x + c, s)))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  lift((c : Real))
+      #|  (m : Real)
+      #|  \226\136\128 m : Real, \226\136\128 c : Real, \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_variation(s, (x : Real) => f(m * x + c)) == (if m == real_of_num(0) { real_of_num(0) } else { real_variation(IMAGE((x : Real) => m * x + c, s), f) })
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  lift((a : Real))
+      #|  \226\136\128 a : Real, \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on((x : Real) => f(a + x), IMAGE((x : Real) => -a + x, s)) == has_bounded_real_variation_on(f, s)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  lift((a : Real))
+      #|  \226\136\128 a : Real, \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_variation(IMAGE((x : Real) => -a + x, s), (x : Real) => f(a + x)) == real_variation(s, f)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  lift((a : Real))
+      #|  \226\136\128 a : Real, \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on((x : Real) => f(a + x), s) == has_bounded_real_variation_on(f, IMAGE((x : Real) => a + x, s))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  lift((a : Real))
+      #|  \226\136\128 a : Real, \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_variation(s, (x : Real) => f(a + x)) == real_variation(IMAGE((x : Real) => a + x, s), f)
+      #|  \226\136\128 a : Real, \226\136\128 f : (Real) -> Real, \226\136\128 u : Real, \226\136\128 v : Real, has_bounded_real_variation_on((x : Real) => f(a + x), real_interval([(u, v)])) == has_bounded_real_variation_on(f, real_interval([(a + u, a + v)]))
+      #|  \226\136\128 a : Real, \226\136\128 f : (Real) -> Real, \226\136\128 u : Real, \226\136\128 v : Real, real_variation(real_interval([(u, v)]), (x : Real) => f(a + x)) == real_variation(real_interval([(a + u, a + v)]), f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, has_bounded_real_variation_on(f, s) \226\134\146 has_bounded_real_variation_on((x : Real) => f(a + x), IMAGE((x : Real) => -a + x, s))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on((x : Real) => f(-x), IMAGE(op_minus_minus, s)) == has_bounded_real_variation_on(f, s)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_variation(IMAGE(op_minus_minus, s), (x : Real) => f(-x)) == real_variation(s, f)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on((x : Real) => f(-x), s) == has_bounded_real_variation_on(f, IMAGE(op_minus_minus, s))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_variation(s, (x : Real) => f(-x)) == real_variation(IMAGE(op_minus_minus, s), f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 u : Real, \226\136\128 v : Real, has_bounded_real_variation_on((x : Real) => f(-x), real_interval([(u, v)])) == has_bounded_real_variation_on(f, real_interval([(-v, -u)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 u : Real, \226\136\128 v : Real, real_variation(real_interval([(u, v)]), (x : Real) => f(-x)) == real_variation(real_interval([(-v, -u)]), f)
+      #|  o(lift, o((h : (Real) -> Real), drop))
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  (h : (Real) -> Real)
+      #|  (g : (Real) -> Real)
+      #|  o(drop, o((h : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
+      #|  o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, has_bounded_real_variation_on(f, real_interval([(a, b)])) == (\226\136\131 g : (Real) -> Real, \226\136\131 h : (Real) -> Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 g(x) <= g(y)) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 h(x) <= h(y)) && (\226\136\128 x : Real, f(x) == g(x) - h(x)))
+      #|  o(lift, o((h : (Real) -> Real), drop))
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  (h : (Real) -> Real)
+      #|  (g : (Real) -> Real)
+      #|  o(drop, o((h : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
+      #|  o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, has_bounded_real_variation_on(f, real_interval([(a, b)])) == (\226\136\131 g : (Real) -> Real, \226\136\131 h : (Real) -> Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x < y \226\134\146 g(x) < g(y)) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x < y \226\134\146 h(x) < h(y)) && (\226\136\128 x : Real, f(x) == g(x) - h(x)))
+      #|  lift((b : Real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 f(x) <= f(y)) && IN(c, real_interval([(a, b)])) \226\134\146 (\226\136\131 l : Real, op_minus_minus_minus_gt(f, l, within(atreal(c), real_interval([(a, c)]))))
+      #|  lift((b : Real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 f(y) <= f(x)) && IN(c, real_interval([(a, b)])) \226\134\146 (\226\136\131 l : Real, op_minus_minus_minus_gt(f, l, within(atreal(c), real_interval([(a, c)]))))
+      #|  lift((a : Real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 f(x) <= f(y)) && IN(c, real_interval([(a, b)])) \226\134\146 (\226\136\131 l : Real, op_minus_minus_minus_gt(f, l, within(atreal(c), real_interval([(c, b)]))))
+      #|  lift((a : Real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 f(y) <= f(x)) && IN(c, real_interval([(a, b)])) \226\134\146 (\226\136\131 l : Real, op_minus_minus_minus_gt(f, l, within(atreal(c), real_interval([(c, b)]))))
+      #|  lift((b : Real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, has_bounded_real_variation_on(f, real_interval([(a, b)])) && IN(c, real_interval([(a, b)])) \226\134\146 (\226\136\131 l : Real, op_minus_minus_minus_gt(f, l, within(atreal(c), real_interval([(a, c)]))))
+      #|  lift((a : Real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, has_bounded_real_variation_on(f, real_interval([(a, b)])) && IN(c, real_interval([(a, b)])) \226\134\146 (\226\136\131 l : Real, op_minus_minus_minus_gt(f, l, within(atreal(c), real_interval([(c, b)]))))
+      #|  lift((b : Real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, has_bounded_real_variation_on(f, real_interval([(a, b)])) && IN(c, real_interval([(a, b)])) \226\134\146 real_continuous((x : Real) => real_variation(real_interval([(a, x)]), f), within(atreal(c), real_interval([(a, c)]))) == real_continuous(f, within(atreal(c), real_interval([(a, c)])))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, has_bounded_real_variation_on(f, real_interval([(a, b)])) && IN(c, real_interval([(a, b)])) \226\134\146 real_continuous((x : Real) => real_variation(real_interval([(a, x)]), f), within(atreal(c), real_interval([(c, b)]))) == real_continuous(f, within(atreal(c), real_interval([(c, b)])))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, has_bounded_real_variation_on(f, real_interval([(a, b)])) && IN(c, real_interval([(a, b)])) \226\134\146 real_continuous((x : Real) => real_variation(real_interval([(a, x)]), f), within(atreal(c), real_interval([(a, b)]))) == real_continuous(f, within(atreal(c), real_interval([(a, b)])))
+      #|  (x : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
+      #|  (x : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
+      #|  (x : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
+      #|  (x : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
+      #|  (x : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
+      #|  (x : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
+      #|  (f : (Real) -> Real)((a : Real))
+      #|  \226\136\128 x : Real, (a : Real) - ((b : Real) - x) <= (c : Real) - ((d : Real) - x) \226\134\146 a - b <= c - d
+      #|  (f : (Real) -> Real)((a : Real))
+      #|  \226\136\128 x : Real, (a : Real) - ((b : Real) - x) <= (c : Real) - ((d : Real) - x) \226\134\146 a - b <= c - d
+      #|  (x : Real) + (l : Real) - (x + (l - (f : Real))) == f
+      #|  (x : Real) => x + (real_variation(real_interval([((a : Real), x)]), (f : (Real) -> Real)) - f(x))
+      #|  (x : Real) => x + real_variation(real_interval([((a : Real), x)]), (f : (Real) -> Real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, has_bounded_real_variation_on(f, real_interval([(a, b)])) \226\134\146 (\226\136\131 g : (Real) -> Real, \226\136\131 h : (Real) -> Real, (\226\136\128 x : Real, f(x) == g(x) - h(x)) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 g(x) <= g(y)) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x <= y \226\134\146 h(x) <= h(y)) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x < y \226\134\146 g(x) < g(y)) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(a, b)])) && IN(y, real_interval([(a, b)])) && x < y \226\134\146 h(x) < h(y)) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) && real_continuous(f, within(atreal(x), real_interval([(a, x)]))) \226\134\146 real_continuous(g, within(atreal(x), real_interval([(a, x)]))) && real_continuous(h, within(atreal(x), real_interval([(a, x)])))) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) && real_continuous(f, within(atreal(x), real_interval([(x, b)]))) \226\134\146 real_continuous(g, within(atreal(x), real_interval([(x, b)]))) && real_continuous(h, within(atreal(x), real_interval([(x, b)])))) && (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) && real_continuous(f, within(atreal(x), real_interval([(a, b)]))) \226\134\146 real_continuous(g, within(atreal(x), real_interval([(a, b)]))) && real_continuous(h, within(atreal(x), real_interval([(a, b)])))))
       #|  drop
-      #|  forall f s. f has_bounded_real_variation_on s /\\ is_realinterval s\n           ==> COUNTABLE {x | x IN s /\\ ~(f real_continuous atreal x)}
-      #|  forall f g a b.\n        f real_integrable_on real_interval[a,b] /\\\n        g has_bounded_real_variation_on real_interval[a,b]\n        ==> (\\x. g x * f x) real_integrable_on real_interval[a,b]
-      #|  forall f s. is_realinterval s /\\ f has_bounded_real_variation_on s\n           ==> real_negligible\n                 {x | x IN s /\\ ~(f real_differentiable atreal x)}
-      #|  {x | x IN s /\\ ~(f real_differentiable atreal x)}
-      #|  forall f s. is_realinterval s /\\ f has_bounded_real_variation_on s\n         ==> ?t. t SUBSET s /\\ real_negligible t /\\\n                 forall x. x IN s DIFF t ==> f real_differentiable atreal x
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  forall f s. is_realinterval s /\\\n         (forall x y. x IN s /\\ y IN s /\\ x <= y ==> f x <= f y)\n         ==> real_negligible\n                 {x | x IN s /\\ ~(f real_differentiable atreal x)}
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  forall f s. is_realinterval s /\\\n         (forall x y. x IN s /\\ y IN s /\\ x <= y ==> f y <= f x)\n         ==> real_negligible\n                 {x | x IN s /\\ ~(f real_differentiable atreal x)}
-      #|  forall s:real^N->bool.\n      lebesgue_measurable s\n      ==> ?k. negligible k /\\\n              forall x. ~(x IN k)\n                  ==> ((\\e. measure(s INTER cball(x,e)) / measure(cball(x,e)))\n                       ---> (if x IN s then &1 else &0))\n                      (atreal(&0) within {e | &0 < e})
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, has_bounded_real_variation_on(f, s) && is_realinterval(s) \226\134\146 COUNTABLE({(x : Real) | IN(x, s) && !real_continuous(f, atreal(x))})
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on(f, real_interval([(a, b)])) && has_bounded_real_variation_on(g, real_interval([(a, b)])) \226\134\146 real_integrable_on((x : Real) => g(x) * f(x), real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && has_bounded_real_variation_on(f, s) \226\134\146 real_negligible({(x : Real) | IN(x, s) && !real_differentiable(f, atreal(x))})
+      #|  {(x : Real) | IN(x, (s : (Real) -> Bool)) && !real_differentiable((f : (Real) -> Real), atreal(x))}
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && has_bounded_real_variation_on(f, s) \226\134\146 (\226\136\131 t : (Real) -> Bool, SUBSET(t, s) && real_negligible(t) && (\226\136\128 x : Real, IN(x, DIFF(s, t)) \226\134\146 real_differentiable(f, atreal(x))))
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) && x <= y \226\134\146 f(x) <= f(y)) \226\134\146 real_negligible({(x : Real) | IN(x, s) && !real_differentiable(f, atreal(x))})
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) && x <= y \226\134\146 f(y) <= f(x)) \226\134\146 real_negligible({(x : Real) | IN(x, s) && !real_differentiable(f, atreal(x))})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, lebesgue_measurable(s) \226\134\146 (\226\136\131 k : (Cart[Real, N]) -> Bool, negligible(k) && (\226\136\128 x : Cart[Real, N], !IN(x, k) \226\134\146 op_minus_minus_minus_gt((e : Real) => measure(INTER(s, cball((x, e)))) / measure(cball((x, e))), if IN(x, s) { real_of_num(1) } else { real_of_num(0) }, within(atreal(real_of_num(0)), {(e : Real) | real_of_num(0) < e}))))
       #|REAL_OPEN =  |- (#forall:fun(fun(fun(real,bool),bool),bool) (\s:fun(real,bool). ((#=:fun(bool,fun(bool,bool)) (#real_open:fun(fun(real,bool),bool) s:fun(real,bool))) (#open:fun(fun(cart(real,1),bool),bool) ((#IMAGE:fun(fun(real,cart(real,1)),fun(fun(real,bool),fun(cart(real,1),bool))) #lift:fun(real,cart(real,1))) s:fun(real,bool))))))
       #|REAL_CLOSED =  |- (#forall:fun(fun(fun(real,bool),bool),bool) (\s:fun(real,bool). ((#=:fun(bool,fun(bool,bool)) (#real_closed:fun(fun(real,bool),bool) s:fun(real,bool))) (#closed:fun(fun(cart(real,1),bool),bool) ((#IMAGE:fun(fun(real,cart(real,1)),fun(fun(real,bool),fun(cart(real,1),bool))) #lift:fun(real,cart(real,1))) s:fun(real,bool))))))
       #|REAL_BOUNDED =  |- ((#=:fun(bool,fun(bool,bool)) (#real_bounded:fun(fun(real,bool),bool) s:fun(real,bool))) (#bounded:fun(fun(cart(real,1),bool),bool) ((#IMAGE:fun(fun(real,cart(real,1)),fun(fun(real,bool),fun(cart(real,1),bool))) #lift:fun(real,cart(real,1))) s:fun(real,bool))))
