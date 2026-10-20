@@ -6555,7 +6555,7 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  (y : Real) + (x : Real)
       #|  real_of_num(0) < (y : Real) + (x : Real) || y + x <= real_of_num(0)
       #|  ((a : Real) <= (b : Real)) == (real_of_num(0) <= b - a)
-      #|  op_star
+      #|  real_mul
       #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && real_of_num(0) <= y && x * x <= y * y \226\134\146 x <= y
       #|  (x : Num) <= (M : Num) \226\134\146 x <= M + (u : Num)
       #|  (i : Num) == (n : Num)
@@ -6640,12 +6640,12 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  \226\136\128 y : B, \226\136\131 u : A, IN(y, (b : (B) -> Bool)) \226\134\146 IN(u, (a : (A) -> Bool)) && (f : (A) -> B)(u) == y
       #|  \226\136\128 a : (A) -> Bool, \226\136\128 b : (B) -> Bool, \226\136\128 f : (A) -> B, SURJ(f, a, b) \226\134\146 (\226\136\131 g : (B) -> A, INJ(g, b, a))
       #|  (x : (A) -> Bool)
-      #|  (exists : ((_) -> Bool) -> Bool)
+      #|  (op_q : ((_) -> Bool) -> Bool)
       #|  (IN : (_, (_) -> Bool) -> Bool)
       #|  (c : A)
       #|  (t : (A) -> Bool)
       #|  DIFF((X : (A) -> Bool), (t : (A) -> Bool))
-      #|  (exists : ((_) -> Bool) -> Bool)
+      #|  (op_q : ((_) -> Bool) -> Bool)
       #|  (c : A)
       #|  \226\136\128 X : (A) -> Bool, \226\136\128 V : ((A) -> Bool) -> Bool, DIFF(X, INTERS(V)) == UNIONS(IMAGE(DIFF(X), V))
       #|  \226\136\128 X : ((A) -> Bool) -> Bool, \226\136\128 A : (A) -> Bool, IN(A, X) \226\134\146 SUBSET(INTERS(X), A)
@@ -6658,7 +6658,7 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  \226\136\128 f : (A) -> B, \226\136\128 X : (A) -> Bool, \226\136\128 Y : (B) -> Bool, SUBSET(Y, IMAGE(f, X)) \226\134\146 (\226\136\131 Z : (A) -> Bool, SUBSET(Z, X) && Y == IMAGE(f, Z))
       #|  (y : B)
       #|  INTER((A : (A) -> Bool), (u : (A) -> Bool))
-      #|  (exists : ((_) -> Bool) -> Bool)
+      #|  (op_q : ((_) -> Bool) -> Bool)
       #|  (y : A)
       #|  (y : A)
       #|  SUBSET((C : (A) -> Bool), (B : (A) -> Bool)) && SUBSET(C, (A : (A) -> Bool)) && SUBSET(INTER(A, B), C) \226\134\146 INTER(B, A) == C
@@ -6979,80 +6979,80 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  euclid'euclid_plus:(num->real)->(num->real)->(num->real)
       #|  :A -> B -> B
       #|  (euclid_scale : (Real, (Num) -> Real, Num) -> Real)((t : Real), (f : (Num) -> Real)) == ((i : Num) => t * f(i))
-      #|  euclid_scale
+      #|  op_euclid_prime_euclid_us_scale
       #|  (euclid_neg : ((Num) -> Real, Num) -> Real)((f : (Num) -> Real)) == ((i : Num) => -f(i))
-      #|  euclid_neg
+      #|  op_euclid_prime_euclid_us_neg
       #|  euclid'euclid_minus:(num->real)->(num->real)->(num->real)
       #|  (euclid_plus : ((Num) -> Real, (Num) -> Real, Num) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == ((i : Num) => f(i) + g(i))
       #|  (euclid : (Num, (Num) -> Real) -> Bool)((n : Num), (v : (Num) -> Real)) == (\226\136\128 m : Num, n <= m \226\134\146 v(m) == real_of_num(0))
-      #|  (euclidean : ((Num) -> Real) -> Bool)((v : (Num) -> Real)) == (\226\136\131 n : Num, euclid(n, v))
+      #|  (euclidean : ((Num) -> Real) -> Bool)((v : (Num) -> Real)) == (\226\136\131 n : Num, op_euclid_prime_euclid(n, v))
       #|  (euclid_minus : ((Num) -> Real, (Num) -> Real, Num) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == ((i : Num) => f(i) - g(i))
       #|  (euclid0 : (Num) -> Real) == ((i : Num) => real_of_num(0))
       #|  (coord : (Num, (Num) -> Real) -> Real)((i : Num), (f : (Num) -> Real)) == f(i)
-      #|  (dot : ((Num) -> Real, (Num) -> Real) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == LET((n : Num) => LET_END(sum((0, n), (i : Num) => f(i) * g(i))), min_num((m : Num) => euclid(m, f) && euclid(m, g)))
-      #|  (norm : ((Num) -> Real) -> Real)((f : (Num) -> Real)) == sqrt(dot(f, f))
-      #|  (d_euclid : ((Num) -> Real, (Num) -> Real) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == norm(euclid_minus(f, g))
+      #|  (dot : ((Num) -> Real, (Num) -> Real) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == LET((n : Num) => LET_END(sum((0, n), (i : Num) => f(i) * g(i))), min_num((m : Num) => op_euclid_prime_euclid(m, f) && op_euclid_prime_euclid(m, g)))
+      #|  norm f = sqrt(dot f f)
+      #|  (d_euclid : ((Num) -> Real, (Num) -> Real) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == op_euclid_prime_norm(f - g)
       #|  \\(n,m) f. (sm:num->num->(num->(num->real))->(num->real)) n m f
-      #|  (\226\136\128 f : (Num, Num) -> Real, \226\136\128 n : Num, (sm : (Num, Num, (Num, Num) -> Real, Num) -> Real)(n, 0, f) == ((n : Num) => real_of_num(0))) && (\226\136\128 f : (Num, Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, sm(n, SUC(m), f) == euclid_plus(sm(n, m, f), f(n + m)))
-      #|  \226\136\131 sum_vector : ((Num, Num), (Num, Num) -> Real, Num) -> Real, (\226\136\128 f : (Num, Num) -> Real, \226\136\128 n : Num, sum_vector((n, 0), f) == ((n : Num) => real_of_num(0))) && (\226\136\128 f : (Num, Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, sum_vector((n, SUC(m)), f) == euclid_plus(sum_vector((n, m), f), f(n + m)))
-      #|  (mk_segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(u : (Num) -> Real) | \226\136\131 a : Real, real_of_num(0) <= a && a <= real_of_num(1) && u == euclid_plus(euclid_scale(a, x), euclid_scale(real_of_num(1) - a, y))}
-      #|  (mk_open_segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(u : (Num) -> Real) | \226\136\131 a : Real, real_of_num(0) < a && a < real_of_num(1) && u == euclid_plus(euclid_scale(a, x), euclid_scale(real_of_num(1) - a, y))}
-      #|  (convex : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, S(x) && S(y) \226\134\146 SUBSET(mk_segment(x, y), S))
-      #|  (convex_hull : (((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | \226\136\131 f : (Num, Num) -> Real, \226\136\131 alpha : (Num) -> Real, \226\136\131 m : Num, (\226\136\128 n : Num, n < m \226\134\146 S(f(n))) && sum((0, m), alpha) == real_of_num(1) && (\226\136\128 n : Num, n < m \226\134\146 real_of_num(0) <= alpha(n)) && u == sum_vector((0, m), (n : Num) => euclid_scale(alpha(n), f(n)))}
-      #|  (affine_hull : (((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | \226\136\131 f : (Num, Num) -> Real, \226\136\131 alpha : (Num) -> Real, \226\136\131 m : Num, (\226\136\128 n : Num, n < m \226\134\146 S(f(n))) && sum((0, m), alpha) == real_of_num(1) && u == sum_vector((0, m), (n : Num) => euclid_scale(alpha(n), f(n)))}
-      #|  (mk_line : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(z : (Num) -> Real) | \226\136\131 t : Real, z == euclid_plus(euclid_scale(t, x), euclid_scale(real_of_num(1) - t, y))}
-      #|  (affine : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, S(x) && S(y) \226\134\146 SUBSET(mk_line(x, y), S))
+      #|  (\226\136\128 f : (Num, Num) -> Real, \226\136\128 n : Num, (sm : (Num, Num, (Num, Num) -> Real, Num) -> Real)(n, 0, f) == ((n : Num) => real_of_num(0))) && (\226\136\128 f : (Num, Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, sm(n, SUC(m), f) == sm(n, m, f) + f(n + m))
+      #|  \226\136\131 sum_vector : ((Num, Num), (Num, Num) -> Real, Num) -> Real, (\226\136\128 f : (Num, Num) -> Real, \226\136\128 n : Num, sum_vector((n, 0), f) == ((n : Num) => real_of_num(0))) && (\226\136\128 f : (Num, Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, sum_vector((n, SUC(m)), f) == sum_vector((n, m), f) + f(n + m))
+      #|  (mk_segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(u : (Num) -> Real) | \226\136\131 a : Real, real_of_num(0) <= a && a <= real_of_num(1) && u == op_euclid_prime_euclid_us_scale(a, x) + op_euclid_prime_euclid_us_scale(real_of_num(1) - a, y)}
+      #|  (mk_open_segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(u : (Num) -> Real) | \226\136\131 a : Real, real_of_num(0) < a && a < real_of_num(1) && u == op_euclid_prime_euclid_us_scale(a, x) + op_euclid_prime_euclid_us_scale(real_of_num(1) - a, y)}
+      #|  (convex : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, S(x) && S(y) \226\134\146 SUBSET(op_euclid_prime_mk_us_segment(x, y), S))
+      #|  (convex_hull : (((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | \226\136\131 f : (Num, Num) -> Real, \226\136\131 alpha : (Num) -> Real, \226\136\131 m : Num, (\226\136\128 n : Num, n < m \226\134\146 S(f(n))) && sum((0, m), alpha) == real_of_num(1) && (\226\136\128 n : Num, n < m \226\134\146 real_of_num(0) <= alpha(n)) && u == sum_vector((0, m), (n : Num) => op_euclid_prime_euclid_us_scale(alpha(n), f(n)))}
+      #|  (affine_hull : (((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | \226\136\131 f : (Num, Num) -> Real, \226\136\131 alpha : (Num) -> Real, \226\136\131 m : Num, (\226\136\128 n : Num, n < m \226\134\146 S(f(n))) && sum((0, m), alpha) == real_of_num(1) && u == sum_vector((0, m), (n : Num) => op_euclid_prime_euclid_us_scale(alpha(n), f(n)))}
+      #|  (mk_line : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(z : (Num) -> Real) | \226\136\131 t : Real, z == op_euclid_prime_euclid_us_scale(t, x) + op_euclid_prime_euclid_us_scale(real_of_num(1) - t, y)}
+      #|  (affine : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, S(x) && S(y) \226\134\146 SUBSET(op_euclid_prime_mk_us_line(x, y), S))
       #|  affine_dim n S <=>\n    (?T. (T HAS_SIZE (SUC n)) /\\ (affine_hull T = affine_hull S)) /\\\n    (forall T m. (T HAS_SIZE (SUC m)) /\\ (m < n) ==> ~(affine_hull T = affine_hull S))
-      #|  (collinear : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\131 n : Num, affine_dim(n, S) && n < 2)
-      #|  (coplanar : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\131 n : Num, affine_dim(n, S) && n < 3)
-      #|  (line : (((Num) -> Real) -> Bool) -> Bool)((L : ((Num) -> Real) -> Bool)) == (affine(L) && affine_dim(1, L))
-      #|  (plane : (((Num) -> Real) -> Bool) -> Bool)((P : ((Num) -> Real) -> Bool)) == (affine(P) && affine_dim(2, P))
-      #|  (space : (((Num) -> Real) -> Bool) -> Bool)((R : ((Num) -> Real) -> Bool)) == (affine(R) && affine_dim(3, R))
-      #|  (mk_open_half_set : (((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((L : ((Num) -> Real) -> Bool), (S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | \226\136\131 t : Real, \226\136\131 v : (Num) -> Real, \226\136\131 c : (Num) -> Real, L(v) && S(c) && real_of_num(0) < t && u == euclid_plus(euclid_scale(t, euclid_minus(c, v)), euclid_scale(real_of_num(1) - t, v))}
-      #|  (mk_half_set : (((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((L : ((Num) -> Real) -> Bool), (S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | \226\136\131 t : Real, \226\136\131 v : (Num) -> Real, \226\136\131 c : (Num) -> Real, L(v) && S(c) && real_of_num(0) <= t && u == euclid_plus(euclid_scale(t, euclid_minus(c, v)), euclid_scale(real_of_num(1) - t, v))}
-      #|  (mk_angle : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real), (z : (Num) -> Real)) == UNION(mk_half_set({x}, {y}), mk_half_set({x}, {z}))
-      #|  (mk_signed_angle : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> (((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool))((x : (Num) -> Real), (y : (Num) -> Real), (z : (Num) -> Real)) == (mk_half_set({x}, {y}), mk_half_set({x}, {z}))
-      #|  (mk_convex_cone : ((Num) -> Real, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((v : (Num) -> Real), (S : ((Num) -> Real) -> Bool)) == mk_half_set({v}, convex_hull(S))
-      #|  (packing : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, S(x) && S(y) && d_euclid(x, y) < real_of_num(2) \226\134\146 x == y)
-      #|  (saturated_packing : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (packing(S) && (\226\136\128 z : (Num) -> Real, affine_hull(S, z) \226\134\146 (\226\136\131 x : (Num) -> Real, S(x) && d_euclid(x, z) < real_of_num(2))))
+      #|  (collinear : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\131 n : Num, op_euclid_prime_affine_us_dim(n, S) && n < 2)
+      #|  (coplanar : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\131 n : Num, op_euclid_prime_affine_us_dim(n, S) && n < 3)
+      #|  (line : (((Num) -> Real) -> Bool) -> Bool)((L : ((Num) -> Real) -> Bool)) == (op_euclid_prime_affine(L) && op_euclid_prime_affine_us_dim(1, L))
+      #|  (plane : (((Num) -> Real) -> Bool) -> Bool)((P : ((Num) -> Real) -> Bool)) == (op_euclid_prime_affine(P) && op_euclid_prime_affine_us_dim(2, P))
+      #|  (space : (((Num) -> Real) -> Bool) -> Bool)((R : ((Num) -> Real) -> Bool)) == (op_euclid_prime_affine(R) && op_euclid_prime_affine_us_dim(3, R))
+      #|  (mk_open_half_set : (((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((L : ((Num) -> Real) -> Bool), (S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | \226\136\131 t : Real, \226\136\131 v : (Num) -> Real, \226\136\131 c : (Num) -> Real, L(v) && S(c) && real_of_num(0) < t && u == op_euclid_prime_euclid_us_scale(t, c - v) + op_euclid_prime_euclid_us_scale(real_of_num(1) - t, v)}
+      #|  (mk_half_set : (((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((L : ((Num) -> Real) -> Bool), (S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | \226\136\131 t : Real, \226\136\131 v : (Num) -> Real, \226\136\131 c : (Num) -> Real, L(v) && S(c) && real_of_num(0) <= t && u == op_euclid_prime_euclid_us_scale(t, c - v) + op_euclid_prime_euclid_us_scale(real_of_num(1) - t, v)}
+      #|  (mk_angle : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real), (z : (Num) -> Real)) == UNION(op_euclid_prime_mk_us_half_us_set({x}, {y}), op_euclid_prime_mk_us_half_us_set({x}, {z}))
+      #|  (mk_signed_angle : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> (((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool))((x : (Num) -> Real), (y : (Num) -> Real), (z : (Num) -> Real)) == (op_euclid_prime_mk_us_half_us_set({x}, {y}), op_euclid_prime_mk_us_half_us_set({x}, {z}))
+      #|  (mk_convex_cone : ((Num) -> Real, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((v : (Num) -> Real), (S : ((Num) -> Real) -> Bool)) == op_euclid_prime_mk_us_half_us_set({v}, op_euclid_prime_convex_us_hull(S))
+      #|  (packing : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, S(x) && S(y) && op_euclid_prime_d_us_euclid(x, y) < real_of_num(2) \226\134\146 x == y)
+      #|  (saturated_packing : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (op_euclid_prime_packing(S) && (\226\136\128 z : (Num) -> Real, op_euclid_prime_affine_us_hull(S, z) \226\134\146 (\226\136\131 x : (Num) -> Real, S(x) && op_euclid_prime_d_us_euclid(x, z) < real_of_num(2))))
       #|  (cross_product3 : ((Num) -> Real, (Num) -> Real, Num) -> Real)((v1 : (Num) -> Real), (v2 : (Num) -> Real)) == LET((x1 : Real) => (x2 : Real) => (x3 : Real) => LET_END(LET((y1 : Real) => (y2 : Real) => (y3 : Real) => LET_END((k : Num) => if k == 0 { x2 * y3 - x3 * y2 } else { if k == 1 { x3 * y1 - x1 * y3 } else { if k == 2 { x1 * y2 - x2 * y1 } else { real_of_num(0) } } }), v2(0), v2(1), v2(2))), v1(0), v1(1), v1(2))
-      #|  (triple_product : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Real)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == dot(v1, cross_product3(v2, v3))
-      #|  (mk_triangle : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == UNION(mk_segment(v1, v2), UNION(mk_segment(v2, v3), mk_segment(v3, v1)))
-      #|  (mk_interior_triangle : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == INTER(mk_open_half_set(mk_line(v1, v2), {v3}), INTER(mk_open_half_set(mk_line(v2, v3), {v1}), mk_open_half_set(mk_line(v3, v1), {v2})))
-      #|  (mk_triangular_region : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == UNION(mk_triangle(v1, v2, v3), mk_interior_triangle(v1, v2, v3))
-      #|  \226\136\128 L : ((Num) -> Real) -> Bool, \226\136\128 S : ((Num) -> Real) -> Bool, convex(mk_half_set(L, S))
-      #|  \226\136\128 L : ((Num) -> Real) -> Bool, \226\136\128 S : ((Num) -> Real) -> Bool, convex(mk_open_half_set(L, S))
-      #|  \226\136\128 S : ((Num) -> Real) -> Bool, affine_dim(0, S) == SING(S)
-      #|  \226\136\128 S : ((Num) -> Real) -> Bool, convex(convex_hull(S))
+      #|  triple_product v1 v2 v3 =\n        dot v1 (cross_product3 v2 v3)
+      #|  (mk_triangle : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == UNION(op_euclid_prime_mk_us_segment(v1, v2), UNION(op_euclid_prime_mk_us_segment(v2, v3), op_euclid_prime_mk_us_segment(v3, v1)))
+      #|  (mk_interior_triangle : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == INTER(op_euclid_prime_mk_us_open_us_half_us_set(op_euclid_prime_mk_us_line(v1, v2), {v3}), INTER(op_euclid_prime_mk_us_open_us_half_us_set(op_euclid_prime_mk_us_line(v2, v3), {v1}), op_euclid_prime_mk_us_open_us_half_us_set(op_euclid_prime_mk_us_line(v3, v1), {v2})))
+      #|  (mk_triangular_region : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == UNION(op_euclid_prime_mk_us_triangle(v1, v2, v3), op_euclid_prime_mk_us_interior_us_triangle(v1, v2, v3))
+      #|  \226\136\128 L : ((Num) -> Real) -> Bool, \226\136\128 S : ((Num) -> Real) -> Bool, op_euclid_prime_convex(op_euclid_prime_mk_us_half_us_set(L, S))
+      #|  \226\136\128 L : ((Num) -> Real) -> Bool, \226\136\128 S : ((Num) -> Real) -> Bool, op_euclid_prime_convex(op_euclid_prime_mk_us_open_us_half_us_set(L, S))
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, op_euclid_prime_affine_us_dim(0, S) == SING(S)
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, op_euclid_prime_convex(op_euclid_prime_convex_us_hull(S))
       #|  forall S T. (convex T) /\\ (S SUBSET T) ==>\n     (convex_hull S) SUBSET T
-      #|  \226\136\128 S : ((Num) -> Real) -> Bool, affine(affine_hull(S))
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, op_euclid_prime_affine(op_euclid_prime_affine_us_hull(S))
       #|  forall S T. (affine T) /\\ (S SUBSET T) ==>\n     (affine_hull S) SUBSET T
-      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, !(x == y) \226\134\146 affine_dim(1, mk_line(x, y))
-      #|  \226\136\128 S : ((Num) -> Real) -> Bool, affine_hull(S) == affine_hull(convex_hull(S))
-      #|  \226\136\128 S : ((Num) -> Real) -> Bool, convex_hull(S) == convex_hull(convex_hull(S))
-      #|  \226\136\128 n : Num, affine_dim(n, euclid(n))
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, !(x == y) \226\134\146 op_euclid_prime_affine_us_dim(1, op_euclid_prime_mk_us_line(x, y))
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, op_euclid_prime_affine_us_hull(S) == op_euclid_prime_affine_us_hull(op_euclid_prime_convex_us_hull(S))
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, op_euclid_prime_convex_us_hull(S) == op_euclid_prime_convex_us_hull(op_euclid_prime_convex_us_hull(S))
+      #|  \226\136\128 n : Num, op_euclid_prime_affine_us_dim(n, op_euclid_prime_euclid(n))
       #|  forall m n T S.\n  (affine_dim m T) /\\ (affine_dim n S) /\\ (T SUBSET S) ==> (m <= n)
-      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, !(x == y) \226\134\146 existsunique((L : ((Num) -> Real) -> Bool) => L(x) && L(y) && line(L))
-      #|  \226\136\128 L : ((Num) -> Real) -> Bool, line(L) \226\134\146 (\226\136\131 f : ((Num) -> Real) -> Real, BIJ(f, L, UNIV) && (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, L(x) && L(y) \226\134\146 d_euclid(x, y) == abs(f(x) - f(y))))
-      #|  \226\136\128 n : Num, affine_dim(n, (P : ((Num) -> Real) -> Bool)) \226\134\146 (\226\136\131 S : ((Num) -> Real) -> Bool, SUBSET(S, P) && HAS_SIZE(S, n) && affine_dim(n, S))
-      #|  \226\136\128 P : ((Num) -> Real) -> Bool, \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, plane(P) && P(x) && P(y) \226\134\146 SUBSET(mk_line(x, y), P)
-      #|  \226\136\128 S : ((Num) -> Real) -> Bool, HAS_SIZE(S, 3) \226\134\146 (\226\136\131 P : ((Num) -> Real) -> Bool, plane(P) && SUBSET(S, P))
-      #|  \226\136\128 S : ((Num) -> Real) -> Bool, HAS_SIZE(S, 3) \226\134\146 collinear(S) || existsunique((P : ((Num) -> Real) -> Bool) => plane(P) && SUBSET(S, P))
-      #|  \226\136\128 P : ((Num) -> Real) -> Bool, \226\136\128 Q : ((Num) -> Real) -> Bool, plane(P) && plane(Q) \226\134\146 INTER(P, Q) == {} || line(INTER(P, Q)) || P == Q
-      #|  \226\136\128 P : ((Num) -> Real) -> Bool, \226\136\128 L : ((Num) -> Real) -> Bool, plane(P) && line(L) && SUBSET(L, P) \226\134\146 (\226\136\131 A : ((Num) -> Real) -> Bool, \226\136\131 B : ((Num) -> Real) -> Bool, INTER(A, B) == {} && INTER(A, L) == {} && INTER(B, L) == {} && UNION(L, UNION(A, B)) == P && (\226\136\128 c : (Num) -> Real, \226\136\128 u : ((Num) -> Real) -> Bool, P(c) && u == mk_open_half_set(L, {c}) \226\134\146 u == A || u == B || u == L) && (\226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, A(a) && B(b) \226\134\146 !(INTER((segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)(a, b), L) == {})))
-      #|  \226\136\128 R : ((Num) -> Real) -> Bool, \226\136\128 P : ((Num) -> Real) -> Bool, space(R) && plane(P) && SUBSET(P, R) \226\134\146 (\226\136\131 A : ((Num) -> Real) -> Bool, \226\136\131 B : ((Num) -> Real) -> Bool, INTER(A, B) == (EMRTY : ((Num) -> Real) -> Bool) && INTER(A, P) == EMRTY && INTER(B, P) == EMRTY && UNION(P, UNION(A, B)) == R && (\226\136\128 c : (Num) -> Real, \226\136\128 u : ((Num) -> Real) -> Bool, R(c) && u == mk_open_half_set(P, {c}) \226\134\146 u == A || u == B || u == P) && (\226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, A(a) && B(b) \226\134\146 !(INTER((segment : ((Num) -> Real, (Num) -> Real, _) -> Bool)(a, b), (L : (_) -> Bool)) == {})))
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, !(x == y) \226\134\146 existsunique((L : ((Num) -> Real) -> Bool) => L(x) && L(y) && op_euclid_prime_line(L))
+      #|  \226\136\128 L : ((Num) -> Real) -> Bool, op_euclid_prime_line(L) \226\134\146 (\226\136\131 f : ((Num) -> Real) -> Real, BIJ(f, L, UNIV) && (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, L(x) && L(y) \226\134\146 op_euclid_prime_d_us_euclid(x, y) == abs(f(x) - f(y))))
+      #|  \226\136\128 n : Num, op_euclid_prime_affine_us_dim(n, (P : ((Num) -> Real) -> Bool)) \226\134\146 (\226\136\131 S : ((Num) -> Real) -> Bool, SUBSET(S, P) && HAS_SIZE(S, n) && op_euclid_prime_affine_us_dim(n, S))
+      #|  \226\136\128 P : ((Num) -> Real) -> Bool, \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, op_euclid_prime_plane(P) && P(x) && P(y) \226\134\146 SUBSET(op_euclid_prime_mk_us_line(x, y), P)
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, HAS_SIZE(S, 3) \226\134\146 (\226\136\131 P : ((Num) -> Real) -> Bool, op_euclid_prime_plane(P) && SUBSET(S, P))
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, HAS_SIZE(S, 3) \226\134\146 op_euclid_prime_collinear(S) || existsunique((P : ((Num) -> Real) -> Bool) => op_euclid_prime_plane(P) && SUBSET(S, P))
+      #|  \226\136\128 P : ((Num) -> Real) -> Bool, \226\136\128 Q : ((Num) -> Real) -> Bool, op_euclid_prime_plane(P) && op_euclid_prime_plane(Q) \226\134\146 INTER(P, Q) == {} || op_euclid_prime_line(INTER(P, Q)) || P == Q
+      #|  \226\136\128 P : ((Num) -> Real) -> Bool, \226\136\128 L : ((Num) -> Real) -> Bool, op_euclid_prime_plane(P) && op_euclid_prime_line(L) && SUBSET(L, P) \226\134\146 (\226\136\131 A : ((Num) -> Real) -> Bool, \226\136\131 B : ((Num) -> Real) -> Bool, INTER(A, B) == {} && INTER(A, L) == {} && INTER(B, L) == {} && UNION(L, UNION(A, B)) == P && (\226\136\128 c : (Num) -> Real, \226\136\128 u : ((Num) -> Real) -> Bool, P(c) && u == op_euclid_prime_mk_us_open_us_half_us_set(L, {c}) \226\134\146 u == A || u == B || u == L) && (\226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, A(a) && B(b) \226\134\146 !(INTER((segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)(a, b), L) == {})))
+      #|  \226\136\128 R : ((Num) -> Real) -> Bool, \226\136\128 P : ((Num) -> Real) -> Bool, op_euclid_prime_space(R) && op_euclid_prime_plane(P) && SUBSET(P, R) \226\134\146 (\226\136\131 A : ((Num) -> Real) -> Bool, \226\136\131 B : ((Num) -> Real) -> Bool, INTER(A, B) == (EMRTY : ((Num) -> Real) -> Bool) && INTER(A, P) == EMRTY && INTER(B, P) == EMRTY && UNION(P, UNION(A, B)) == R && (\226\136\128 c : (Num) -> Real, \226\136\128 u : ((Num) -> Real) -> Bool, R(c) && u == op_euclid_prime_mk_us_open_us_half_us_set(P, {c}) \226\134\146 u == A || u == B || u == P) && (\226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, A(a) && B(b) \226\134\146 !(INTER((segment : ((Num) -> Real, (Num) -> Real, _) -> Bool)(a, b), (L : (_) -> Bool)) == {})))
       #|  (metric_space : (((A) -> Bool, (A, A) -> Real)) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == (\226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : A, X(x) && X(y) && X(z) \226\134\146 real_of_num(0) <= d(x, y) && (real_of_num(0) == d(x, y)) == (x == y) && d(x, y) == d(y, x) && d(x, z) <= d(x, y) + d(y, z))
-      #|  (set_translate : ((Num) -> Real, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((v : (Num) -> Real), (X : ((Num) -> Real) -> Bool)) == {(z : (Num) -> Real) | \226\136\131 x : (Num) -> Real, X(x) && z == euclid_plus(v, x)}
-      #|  (set_scale : (Real, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((r : Real), (X : ((Num) -> Real) -> Bool)) == {(z : (Num) -> Real) | \226\136\131 x : (Num) -> Real, X(x) && z == euclid_scale(r, x)}
+      #|  (set_translate : ((Num) -> Real, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((v : (Num) -> Real), (X : ((Num) -> Real) -> Bool)) == {(z : (Num) -> Real) | \226\136\131 x : (Num) -> Real, X(x) && z == v + x}
+      #|  (set_scale : (Real, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((r : Real), (X : ((Num) -> Real) -> Bool)) == {(z : (Num) -> Real) | \226\136\131 x : (Num) -> Real, X(x) && z == op_euclid_prime_euclid_us_scale(r, x)}
       #|  (mk_rectangle : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((a : (Num) -> Real), (b : (Num) -> Real)) == {(z : (Num) -> Real) | \226\136\128 i : Num, a(i) <= z(i) && z(i) < b(i)}
       #|  (one_vec : (Num, Num) -> Real)((n : Num)) == ((i : Num) => if i < n { real_of_num(1) } else { real_of_num(0) })
-      #|  (mk_cube : (Num, Num, (Num) -> Int, (Num) -> Real) -> Bool)((n : Num), (k : Num), (v : (Num) -> Int)) == LET((r : Real) => LET_END(LET((vv : (Num) -> Real) => LET_END(mk_rectangle(euclid_scale(r, vv), euclid_scale(r, euclid_plus(vv, one_vec(n))))), (i : Num) => real_of_int(v(i)))), twopow(-int_of_num(k)))
-      #|  (inner_cube : (Num, Num, ((Num) -> Real) -> Bool, (Num) -> Int) -> Bool)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == {(v : (Num) -> Int) | SUBSET(mk_cube(n, k, v), A) && (\226\136\128 i : Num, n < i \226\134\146 int_of_num(0) == v(i))}
-      #|  (outer_cube : (Num, Num, ((Num) -> Real) -> Bool, (Num) -> Int) -> Bool)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == {(v : (Num) -> Int) | !(INTER(mk_cube(n, k, v), A) == {}) && (\226\136\128 i : Num, n < i \226\134\146 int_of_num(0) == v(i))}
-      #|  (inner_vol : (Num, Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == real_of_num(CARD(inner_cube(n, k, A))) * twopow(-int_of_num(n * k))
-      #|  (outer_vol : (Num, Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == real_of_num(CARD(outer_cube(n, k, A))) * twopow(-int_of_num(n * k))
+      #|  (mk_cube : (Num, Num, (Num) -> Int, (Num) -> Real) -> Bool)((n : Num), (k : Num), (v : (Num) -> Int)) == LET((r : Real) => LET_END(LET((vv : (Num) -> Real) => LET_END(op_euclid_prime_mk_us_rectangle(op_euclid_prime_euclid_us_scale(r, vv), op_euclid_prime_euclid_us_scale(r, vv + op_euclid_prime_one_us_vec(n)))), (i : Num) => real_of_int(v(i)))), twopow(-int_of_num(k)))
+      #|  (inner_cube : (Num, Num, ((Num) -> Real) -> Bool, (Num) -> Int) -> Bool)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == {(v : (Num) -> Int) | SUBSET(op_euclid_prime_mk_us_cube(n, k, v), A) && (\226\136\128 i : Num, n < i \226\134\146 int_of_num(0) == v(i))}
+      #|  (outer_cube : (Num, Num, ((Num) -> Real) -> Bool, (Num) -> Int) -> Bool)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == {(v : (Num) -> Int) | !(INTER(op_euclid_prime_mk_us_cube(n, k, v), A) == {}) && (\226\136\128 i : Num, n < i \226\134\146 int_of_num(0) == v(i))}
+      #|  (inner_vol : (Num, Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == real_of_num(CARD(op_euclid_prime_inner_us_cube(n, k, A))) * twopow(-int_of_num(n * k))
+      #|  (outer_vol : (Num, Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == real_of_num(CARD(op_euclid_prime_outer_us_cube(n, k, A))) * twopow(-int_of_num(n * k))
       #|  (euclid_bounded : (((Num) -> Real) -> Bool) -> Bool)((A : ((Num) -> Real) -> Bool)) == (\226\136\131 R : Real, \226\136\128 x : (Num) -> Real, \226\136\128 i : Num, A(x) \226\134\146 x(i) < R)
-      #|  (vol : (Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (A : ((Num) -> Real) -> Bool)) == lim((k : Num) => outer_vol(n, k, A))
+      #|  (vol : (Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (A : ((Num) -> Real) -> Bool)) == lim((k : Num) => op_euclid_prime_outer_us_vol(n, k, A))
       #|  (+):num->(num->num)
       #|  (-):num->(num->num)
       #|  ( * ):num->(num->num)
@@ -7122,7 +7122,7 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, real_of_num(0) < z && y <= x \226\134\146 z * y <= z * x
       #|  abs(real_of_num((n : Num))) == real_of_num(n)
       #|  (a : Real) * (b : Real) == b * a
-      #|  \226\136\128 k : Num, abs(pi_fun(k)) <= pi_bound_fun(k)
+      #|  \226\136\128 k : Num, abs(op_trig_prime_pi_us_fun(k)) <= op_trig_prime_pi_us_bound_us_fun(k)
       #|  abs(real_of_num(1) / real_of_num(16)) < real_of_num(1)
       #|  \226\136\128 k : Num, sums((n : Num) => inv(pow(real_of_num(16), k)) * inv(pow(real_of_num(16), n)), inv(pow(real_of_num(16), k)) * (real_of_num(16) / real_of_num(15)))
       #|  (b : Real) * ((a : Real) * (c : Real)) == b * real_of_num(1) \226\134\146 a * b * c == b
@@ -7131,13 +7131,13 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  sums((n : Num) => real_of_num(15) / real_of_num(16) * (pow(inv(real_of_num(16)), (k : Num)) * inv(pow(real_of_num(16), n))), real_of_num(15) / real_of_num(16) * (inv(pow(real_of_num(16), k)) * (real_of_num(16) / real_of_num(15))))
       #|  0 < (k : Num) \226\134\146 !((n : Num) + k == 0)
       #|  (n : Num)
-      #|  ((n : Num) => pi_bound_fun(n + (k : Num))) == ((n : Num) => real_of_num(15) / real_of_num(16) * (pow(inv(real_of_num(16)), k) * inv(pow(real_of_num(16), n))))
-      #|  \226\136\128 k : Num, 0 < k \226\134\146 sums((n : Num) => pi_bound_fun(n + k), inv(pow(real_of_num(16), k)))
-      #|  suminf((n : Num) => pi_bound_fun(n + (k : Num))) == inv(pow(real_of_num(16), k))
-      #|  pi_bound_fun
-      #|  pi_fun
+      #|  ((n : Num) => op_trig_prime_pi_us_bound_us_fun(n + (k : Num))) == ((n : Num) => real_of_num(15) / real_of_num(16) * (pow(inv(real_of_num(16)), k) * inv(pow(real_of_num(16), n))))
+      #|  \226\136\128 k : Num, 0 < k \226\134\146 sums((n : Num) => op_trig_prime_pi_us_bound_us_fun(n + k), inv(pow(real_of_num(16), k)))
+      #|  suminf((n : Num) => op_trig_prime_pi_us_bound_us_fun(n + (k : Num))) == inv(pow(real_of_num(16), k))
+      #|  op_trig_prime_pi_us_bound_us_fun
+      #|  op_trig_prime_pi_us_fun
       #|  pi
-      #|  \226\136\128 k : Num, 0 < k \226\134\146 abs(pi - sum((0, k), pi_fun)) <= inv(pow(real_of_num(16), k))
+      #|  \226\136\128 k : Num, 0 < k \226\134\146 abs(pi - sum((0, k), op_trig_prime_pi_us_fun)) <= inv(pow(real_of_num(16), k))
       #|  (k : Num)
       #|  EXP(2, 4)
       #|  \226\136\128 n : Num, inv(pow(real_of_num(16), n)) == twopow(-int_of_num(4 * n))
