@@ -3,7 +3,7 @@
 ///|
 /// Formal_ineqs/lib/ssrnat.hl:8
 fn step_1() -> Unit raise {
-  @preterm.overload_interface("+", @parser.parse_term("XOR"))
+  @preterm.overload_interface("+", @term_syntax.parse_term("op_plus"))
 }
 
 ///|
@@ -16,7 +16,7 @@ fn step_2() -> Unit raise {
 /// succnK
 fn step_3() -> Unit raise {
   let t1 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  succnk_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("SUC n - 1 = n"), t1))
+  succnk_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("SUC((n : Num)) - 1 == n"), t1))
 }
 
 ///|
@@ -32,7 +32,7 @@ pub fn succnk() -> @kernel.Thm {
 /// succn_inj
 fn step_4() -> Unit raise {
   let t2 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  succn_inj_c.set(@sections.section_proof(@list.List(["n", "m"]), @parser.parse_term("SUC n = SUC m ==> n = m"), t2))
+  succn_inj_c.set(@sections.section_proof(@list.List(["n", "m"]), @term_syntax.parse_term("SUC((n : Num)) == SUC((m : Num)) → n == m"), t2))
 }
 
 ///|
@@ -48,7 +48,7 @@ pub fn succn_inj() -> @kernel.Thm {
 /// eqSS
 fn step_5() -> Unit raise {
   let t3 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  eqss_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(SUC m = SUC n) = (m = n)"), t3))
+  eqss_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(SUC((m : Num)) == SUC((n : Num))) == (m == n)"), t3))
 }
 
 ///|
@@ -64,7 +64,7 @@ pub fn eqss() -> @kernel.Thm {
 /// add0n
 fn step_6() -> Unit raise {
   let t4 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  add0n_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("0 + n = n"), t4))
+  add0n_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("0 + (n : Num) == n"), t4))
 }
 
 ///|
@@ -80,7 +80,7 @@ pub fn add0n() -> @kernel.Thm {
 /// addSn
 fn step_7() -> Unit raise {
   let t5 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  addsn_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("SUC m + n = SUC (m + n)"), t5))
+  addsn_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("SUC((m : Num)) + (n : Num) == SUC(m + n)"), t5))
 }
 
 ///|
@@ -96,7 +96,7 @@ pub fn addsn() -> @kernel.Thm {
 /// add1n
 fn step_8() -> Unit raise {
   let t6 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  add1n_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("1 + n = SUC n"), t6))
+  add1n_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("1 + (n : Num) == SUC(n)"), t6))
 }
 
 ///|
@@ -112,7 +112,7 @@ pub fn add1n() -> @kernel.Thm {
 /// addn0
 fn step_9() -> Unit raise {
   let t7 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  addn0_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("n + 0 = n"), t7))
+  addn0_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("(n : Num) + 0 == n"), t7))
 }
 
 ///|
@@ -128,7 +128,7 @@ pub fn addn0() -> @kernel.Thm {
 /// addnS
 fn step_10() -> Unit raise {
   let t8 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  addns_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m + SUC n = SUC (m + n)"), t8))
+  addns_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(m : Num) + SUC((n : Num)) == SUC(m + n)"), t8))
 }
 
 ///|
@@ -144,7 +144,7 @@ pub fn addns() -> @kernel.Thm {
 /// addSnnS
 fn step_11() -> Unit raise {
   let t9 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  addsnns_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("SUC m + n = m + SUC n"), t9))
+  addsnns_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("SUC((m : Num)) + (n : Num) == m + SUC(n)"), t9))
 }
 
 ///|
@@ -160,7 +160,7 @@ pub fn addsnns() -> @kernel.Thm {
 /// addnCA
 fn step_12() -> Unit raise {
   let t10 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  addnca_c.set(@sections.section_proof(@list.List(["m", "n", "p"]), @parser.parse_term("m + (n + p) = n + (m + p)"), t10))
+  addnca_c.set(@sections.section_proof(@list.List(["m", "n", "p"]), @term_syntax.parse_term("(m : Num) + ((n : Num) + (p : Num)) == n + (m + p)"), t10))
 }
 
 ///|
@@ -200,7 +200,7 @@ fn step_13() -> Unit raise {
       }, x18)
     }, x19)
   })((x25 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t24, x25)), (x31 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnCA", @list.List([addnca()])), t30, x31)), (x37 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn0", @list.List([addn0()])), t36, x37)), @ssreflect.done_tac)])
-  addnc_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m + n = n + m"), t38))
+  addnc_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(m : Num) + (n : Num) == n + m"), t38))
 }
 
 ///|
@@ -226,7 +226,7 @@ fn step_14() -> Unit raise {
     }
   })
   let t51 = @list.List([@tactics.then_tac(@tactics.then_tac((x44 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnC", @list.List([addnc()])), t43, x44), (x50 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add1n", @list.List([add1n()])), t49, x50)), @ssreflect.done_tac)])
-  addn1_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("n + 1 = SUC n"), t51))
+  addn1_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("(n : Num) + 1 == SUC(n)"), t51))
 }
 
 ///|
@@ -251,14 +251,14 @@ fn step_15() -> Unit raise {
       ((x59 : @kernel.Thm, x60 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x59, x60))(x61, x62)
     }
   })
-  let t52 = @list.List([@parser.parse_term("m + p")])
+  let t52 = @list.List([@term_syntax.parse_term("(m : Num) + (p : Num)")])
   let t57 = @ssreflect.thm_tac(fn(x55 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x56 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x53 : @kernel.Thm, x54 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t52, x53, x54))(x55, x56)
     }
   })
   let t71 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x58 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnC", @list.List([addnc()])), t57, x58), (x64 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnCA", @list.List([addnca()])), t63, x64)), (x70 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnC", @list.List([addnc()])), t69, x70)), @ssreflect.done_tac)])
-  addna_c.set(@sections.section_proof(@list.List(["n", "m", "p"]), @parser.parse_term("n + (m + p) = (n + m) + p"), t71))
+  addna_c.set(@sections.section_proof(@list.List(["n", "m", "p"]), @term_syntax.parse_term("(n : Num) + ((m : Num) + (p : Num)) == n + m + p"), t71))
 }
 
 ///|
@@ -273,7 +273,7 @@ pub fn addna() -> @kernel.Thm {
 ///|
 /// addnAC
 fn step_16() -> Unit raise {
-  let t79 = @list.List([@parser.parse_term("p + m")])
+  let t79 = @list.List([@term_syntax.parse_term("(p : Num) + (m : Num)")])
   let t84 = @ssreflect.thm_tac(fn(x82 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x83 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x80 : @kernel.Thm, x81 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t79, x80, x81))(x82, x83)
@@ -285,7 +285,7 @@ fn step_16() -> Unit raise {
     }
   })
   let t86 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x78 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnA", @list.List([addna()])), (x77 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t76, x77), x78)), (x85 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnC", @list.List([addnc()])), t84, x85)), @ssreflect.done_tac)])
-  addnac_c.set(@sections.section_proof(@list.List(["m", "n", "p"]), @parser.parse_term("(n + m) + p = (n + p) + m"), t86))
+  addnac_c.set(@sections.section_proof(@list.List(["m", "n", "p"]), @term_syntax.parse_term("(n : Num) + (m : Num) + (p : Num) == n + p + m"), t86))
 }
 
 ///|
@@ -301,7 +301,7 @@ pub fn addnac() -> @kernel.Thm {
 /// addn_eq0
 fn step_17() -> Unit raise {
   let t87 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  addn_eq0_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(m + n = 0) <=> (m = 0) /\\ (n = 0)"), t87))
+  addn_eq0_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("((m : Num) + (n : Num) == 0) == (m == 0 && n == 0)"), t87))
 }
 
 ///|
@@ -317,7 +317,7 @@ pub fn addn_eq0() -> @kernel.Thm {
 /// eqn_addl
 fn step_18() -> Unit raise {
   let t88 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  eqn_addl_c.set(@sections.section_proof(@list.List(["p", "m", "n"]), @parser.parse_term("(p + m = p + n) <=> (m = n)"), t88))
+  eqn_addl_c.set(@sections.section_proof(@list.List(["p", "m", "n"]), @term_syntax.parse_term("((p : Num) + (m : Num) == p + (n : Num)) == (m == n)"), t88))
 }
 
 ///|
@@ -333,7 +333,7 @@ pub fn eqn_addl() -> @kernel.Thm {
 /// eqn_addr
 fn step_19() -> Unit raise {
   let t89 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  eqn_addr_c.set(@sections.section_proof(@list.List(["p", "m", "n"]), @parser.parse_term("(m + p = n + p) = (m = n)"), t89))
+  eqn_addr_c.set(@sections.section_proof(@list.List(["p", "m", "n"]), @term_syntax.parse_term("((m : Num) + (p : Num) == (n : Num) + p) == (m == n)"), t89))
 }
 
 ///|
@@ -364,7 +364,7 @@ fn step_20() -> Unit raise {
     }, x98)
   })((x104 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t103, x104))
   let t106 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["Heq"]))), t105), @ssreflect.done_tac)])
-  addni_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("m + n1 = m + n2 ==> n1 = n2"), t106))
+  addni_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("(m : Num) + (n1 : Num) == m + (n2 : Num) → n1 == n2"), t106))
 }
 
 ///|
@@ -390,14 +390,14 @@ fn step_21() -> Unit raise {
     }, x124)
   })((x125 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x125)), @tactics.beta_tac), @ssreflect.done_tac)
   let t115 = @ssreflect.move_(@list.List(["Heq"]))
-  let t107 = @list.List([@parser.parse_term("_1 + m")])
+  let t107 = @list.List([@term_syntax.parse_term("(_1 : Num) + (m : Num)")])
   let t112 = @ssreflect.thm_tac(fn(x110 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x111 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x108 : @kernel.Thm, x109 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t107, x108, x109))(x110, x111)
     }
   })
   let t127 = @list.List([@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x114 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnC", @list.List([addnc()])), (x113 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t112, x113), x114)), t115), t126])
-  addin_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("n1 + m = n2 + m ==> n1 = n2"), t127))
+  addin_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("(n1 : Num) + (m : Num) == (n2 : Num) + m → n1 == n2"), t127))
 }
 
 ///|
@@ -413,7 +413,7 @@ pub fn addin() -> @kernel.Thm {
 /// sub0n
 fn step_22() -> Unit raise {
   let t128 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  sub0n_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("0 - n = 0"), t128))
+  sub0n_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("0 - (n : Num) == 0"), t128))
 }
 
 ///|
@@ -429,7 +429,7 @@ pub fn sub0n() -> @kernel.Thm {
 /// subn0
 fn step_23() -> Unit raise {
   let t129 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  subn0_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("n - 0 = n"), t129))
+  subn0_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("(n : Num) - 0 == n"), t129))
 }
 
 ///|
@@ -445,7 +445,7 @@ pub fn subn0() -> @kernel.Thm {
 /// subnn
 fn step_24() -> Unit raise {
   let t130 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  subnn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n - n = 0"), t130))
+  subnn_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, n - n == 0"), t130))
 }
 
 ///|
@@ -461,7 +461,7 @@ pub fn subnn() -> @kernel.Thm {
 /// subSS
 fn step_25() -> Unit raise {
   let t131 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  subss_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n m. SUC m - SUC n = m - n"), t131))
+  subss_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, ∀ m : Num, SUC(m) - SUC(n) == m - n"), t131))
 }
 
 ///|
@@ -477,7 +477,7 @@ pub fn subss() -> @kernel.Thm {
 /// subn_add2l
 fn step_26() -> Unit raise {
   let t132 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  subn_add2l_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. (p + m) - (p + n) = m - n"), t132))
+  subn_add2l_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ p : Num, ∀ m : Num, ∀ n : Num, p + m - (p + n) == m - n"), t132))
 }
 
 ///|
@@ -497,7 +497,7 @@ fn step_27() -> Unit raise {
       ((x143 : @kernel.Thm, x144 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x143, x144))(x145, x146)
     }
   })
-  let t135 = @list.List([@parser.parse_term("_1 + p")])
+  let t135 = @list.List([@term_syntax.parse_term("(_1 : Num) + (p : Num)")])
   let t140 = @ssreflect.thm_tac(fn(x138 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x139 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x136 : @kernel.Thm, x137 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t135, x136, x137))(x138, x139)
@@ -507,7 +507,7 @@ fn step_27() -> Unit raise {
   let t134 = @ssreflect.move_(@list.List(["n"]))
   let t133 = @ssreflect.move_(@list.List(["m"]))
   let t150 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["p"]))), t133), t134), t149])
-  subn_add2r_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. (m + p) - (n + p) = m - n"), t150))
+  subn_add2r_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ p : Num, ∀ m : Num, ∀ n : Num, m + p - (n + p) == m - n"), t150))
 }
 
 ///|
@@ -532,7 +532,7 @@ fn step_28() -> Unit raise {
       ((x159 : @kernel.Thm, x160 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x159, x160))(x161, x162)
     }
   })
-  let t151 = @list.List([@parser.parse_term("n")])
+  let t151 = @list.List([@term_syntax.parse_term("(n : _)")])
   let t156 = @ssreflect.thm_tac(fn(x154 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x155 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x152 : @kernel.Thm, x153 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([2L]), t151, x152, x153))(x154, x155)
@@ -540,7 +540,7 @@ fn step_28() -> Unit raise {
   })
   let t171 = @tactics.then_tac(@tactics.then_tac((x158 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn0", @list.List([addn0()])), (x157 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t156, x157), x158), (x164 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subn_add2l", @list.List([subn_add2l()])), t163, x164)), (x170 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subn0", @list.List([subn0()])), t169, x170))
   let t172 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t171), @ssreflect.done_tac)])
-  addkn_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("forall x. (n + x) - n = x"), t172))
+  addkn_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("∀ x : Num, (n : Num) + x - n == x"), t172))
 }
 
 ///|
@@ -576,7 +576,7 @@ fn step_29() -> Unit raise {
   })), (x192 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addKn", @list.List([addkn()])), t191, x192))
   let t173 = @ssreflect.move_(@list.List(["m"]))
   let t194 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["n"]))), t173), t193), @ssreflect.done_tac)])
-  addnk_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n x. (x + n) - n = x"), t194))
+  addnk_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, ∀ x : Num, x + n - n == x"), t194))
 }
 
 ///|
@@ -602,7 +602,7 @@ fn step_30() -> Unit raise {
     }
   })
   let t208 = @list.List([@tactics.then_tac(@tactics.then_tac((x201 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add1n", @list.List([add1n()])), (x200 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t199, x200), x201), (x207 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnK", @list.List([addnk()])), t206, x207)), @ssreflect.done_tac)])
-  subsnn_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("SUC n - n = 1"), t208))
+  subsnn_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("SUC((n : Num)) - n == 1"), t208))
 }
 
 ///|
@@ -618,7 +618,7 @@ pub fn subsnn() -> @kernel.Thm {
 /// subn_sub
 fn step_31() -> Unit raise {
   let t209 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  subn_sub_c.set(@sections.section_proof(@list.List(["m", "n", "p"]), @parser.parse_term("(n - m) - p = n - (m + p)"), t209))
+  subn_sub_c.set(@sections.section_proof(@list.List(["m", "n", "p"]), @term_syntax.parse_term("(n : Num) - (m : Num) - (p : Num) == n - (m + p)"), t209))
 }
 
 ///|
@@ -647,7 +647,7 @@ fn step_32() -> Unit raise {
   let t211 = @ssreflect.move_(@list.List(["p"]))
   let t210 = @ssreflect.move_(@list.List(["n"]))
   let t225 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t210), t211), t224), @ssreflect.done_tac)])
-  subnac_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. (m - n) - p = (m - p) - n"), t225))
+  subnac_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, m - n - p == m - p - n"), t225))
 }
 
 ///|
@@ -675,7 +675,7 @@ fn step_33() -> Unit raise {
   let t239 = @tactics.then_tac((x232 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subn_sub", @list.List([subn_sub()])), t231, x232), (x238 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn1", @list.List([addn1()])), t237, x238))
   let t226 = @ssreflect.move_(@list.List(["n"]))
   let t240 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t226), t239), @ssreflect.done_tac)])
-  predn_sub_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (m - n) - 1 = m - SUC n"), t240))
+  predn_sub_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m - n - 1 == m - SUC(n)"), t240))
 }
 
 ///|
@@ -701,7 +701,7 @@ fn step_34() -> Unit raise {
     }
   })
   let t253 = @list.List([@tactics.then_tac(@tactics.then_tac((x246 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("predn_sub", @list.List([predn_sub()])), t245, x246), (x252 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subSS", @list.List([subss()])), t251, x252)), @ssreflect.done_tac)])
-  predn_subs_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (SUC m - n) - 1 = m - n"), t253))
+  predn_subs_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, SUC(m) - n - 1 == m - n"), t253))
 }
 
 ///|
@@ -717,7 +717,7 @@ pub fn predn_subs() -> @kernel.Thm {
 /// ltnS
 fn step_35() -> Unit raise {
   let t254 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  ltns_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (m < SUC n) = (m <= n)"), t254))
+  ltns_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, (m < SUC(n)) == (m <= n)"), t254))
 }
 
 ///|
@@ -733,7 +733,7 @@ pub fn ltns() -> @kernel.Thm {
 /// leq0n
 fn step_36() -> Unit raise {
   let t255 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leq0n_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. 0 <= n"), t255))
+  leq0n_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, 0 <= n"), t255))
 }
 
 ///|
@@ -749,7 +749,7 @@ pub fn leq0n() -> @kernel.Thm {
 /// ltn0Sn
 fn step_37() -> Unit raise {
   let t256 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  ltn0sn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. 0 < SUC n"), t256))
+  ltn0sn_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, 0 < SUC(n)"), t256))
 }
 
 ///|
@@ -765,7 +765,7 @@ pub fn ltn0sn() -> @kernel.Thm {
 /// ltn0
 fn step_38() -> Unit raise {
   let t257 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  ltn0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n < 0 <=> F"), t257))
+  ltn0_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, (n < 0) == false"), t257))
 }
 
 ///|
@@ -781,7 +781,7 @@ pub fn ltn0() -> @kernel.Thm {
 /// leqnn
 fn step_39() -> Unit raise {
   let t258 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leqnn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n <= n"), t258))
+  leqnn_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, n <= n"), t258))
 }
 
 ///|
@@ -797,7 +797,7 @@ pub fn leqnn() -> @kernel.Thm {
 /// ltnSn
 fn step_40() -> Unit raise {
   let t259 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  ltnsn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n < SUC n"), t259))
+  ltnsn_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, n < SUC(n)"), t259))
 }
 
 ///|
@@ -829,7 +829,7 @@ fn step_41() -> Unit raise {
   }))
   let t260 = @ssreflect.move_(@list.List(["n"]))
   let t275 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t260), t268), (x274 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqnn", @list.List([leqnn()])), t273, x274)), @ssreflect.done_tac)])
-  eq_leq_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m = n ==> m <= n"), t275))
+  eq_leq_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m == n → m <= n"), t275))
 }
 
 ///|
@@ -845,7 +845,7 @@ pub fn eq_leq() -> @kernel.Thm {
 /// leqnSn
 fn step_42() -> Unit raise {
   let t276 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leqnsn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n <= SUC n"), t276))
+  leqnsn_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, n <= SUC(n)"), t276))
 }
 
 ///|
@@ -861,7 +861,7 @@ pub fn leqnsn() -> @kernel.Thm {
 /// leq_pred
 fn step_43() -> Unit raise {
   let t277 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leq_pred_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n - 1 <= n"), t277))
+  leq_pred_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, n - 1 <= n"), t277))
 }
 
 ///|
@@ -877,7 +877,7 @@ pub fn leq_pred() -> @kernel.Thm {
 /// leqSpred
 fn step_44() -> Unit raise {
   let t278 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leqspred_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n <= SUC (n - 1)"), t278))
+  leqspred_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, n <= SUC(n - 1)"), t278))
 }
 
 ///|
@@ -893,7 +893,7 @@ pub fn leqspred() -> @kernel.Thm {
 /// ltn_predK
 fn step_45() -> Unit raise {
   let t279 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  ltn_predk_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m < n ==> SUC (n - 1) = n"), t279))
+  ltn_predk_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m < n → SUC(n - 1) == n"), t279))
 }
 
 ///|
@@ -914,7 +914,7 @@ fn step_46() -> Unit raise {
       let fst_arg = x283
       (fn(x285 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_1 = x285
-        arg_tac_1(@ssreflect.ArgType::Arg_term(@parser.parse_term("0")))
+        arg_tac_1(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("0")))
       })(fn(x287 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg = x287
         (x289 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac, fst_arg, snd_arg, x289)
@@ -923,7 +923,7 @@ fn step_46() -> Unit raise {
   })((x291 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x291)), @ssreflect.exact_tac)
   let t280 = @ssreflect.move_(@list.List(["H"]))
   let t293 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["n"]))), t280), t292)])
-  prednk_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. 0 < n ==> SUC (n - 1) = n"), t293))
+  prednk_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, 0 < n → SUC(n - 1) == n"), t293))
 }
 
 ///|
@@ -939,7 +939,7 @@ pub fn prednk() -> @kernel.Thm {
 /// leqNgt
 fn step_47() -> Unit raise {
   let t294 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leqngt_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (m <= n) <=> ~(n < m)"), t294))
+  leqngt_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, (m <= n) == !(n < m)"), t294))
 }
 
 ///|
@@ -961,7 +961,7 @@ fn step_48() -> Unit raise {
   })
   let t295 = @ssreflect.move_(@list.List(["n"]))
   let t302 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t295), (x301 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqNgt", @list.List([leqngt()])), t300, x301)), @ssreflect.done_tac)])
-  ltnnge_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (m < n) = ~(n <= m)"), t302))
+  ltnnge_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, (m < n) == !(n <= m)"), t302))
 }
 
 ///|
@@ -988,7 +988,7 @@ fn step_49() -> Unit raise {
   })
   let t315 = @tactics.then_tac((x308 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltnNge", @list.List([ltnnge()])), t307, x308), (x314 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqnn", @list.List([leqnn()])), t313, x314))
   let t316 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["n"]))), t315), @ssreflect.done_tac)])
-  ltnn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n < n <=> F"), t316))
+  ltnn_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, (n < n) == false"), t316))
 }
 
 ///|
@@ -1004,7 +1004,7 @@ pub fn ltnn() -> @kernel.Thm {
 /// leqn0
 fn step_50() -> Unit raise {
   let t317 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leqn0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. (n <= 0) = (n = 0)"), t317))
+  leqn0_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, (n <= 0) == (n == 0)"), t317))
 }
 
 ///|
@@ -1020,7 +1020,7 @@ pub fn leqn0() -> @kernel.Thm {
 /// lt0n
 fn step_51() -> Unit raise {
   let t318 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  lt0n_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. (0 < n) = ~(n = 0)"), t318))
+  lt0n_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, (0 < n) == !(n == 0)"), t318))
 }
 
 ///|
@@ -1036,7 +1036,7 @@ pub fn lt0n() -> @kernel.Thm {
 /// lt0n_neq0
 fn step_52() -> Unit raise {
   let t319 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  lt0n_neq0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. 0 < n ==> ~(n = 0)"), t319))
+  lt0n_neq0_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, 0 < n → !(n == 0)"), t319))
 }
 
 ///|
@@ -1052,7 +1052,7 @@ pub fn lt0n_neq0() -> @kernel.Thm {
 /// eqn0Ngt
 fn step_53() -> Unit raise {
   let t320 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  eqn0ngt_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. (n = 0) = ~(0 < n)"), t320))
+  eqn0ngt_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, (n == 0) == !(0 < n)"), t320))
 }
 
 ///|
@@ -1068,7 +1068,7 @@ pub fn eqn0ngt() -> @kernel.Thm {
 /// neq0_lt0n
 fn step_54() -> Unit raise {
   let t321 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  neq0_lt0n_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. (n = 0) = F ==> 0 < n"), t321))
+  neq0_lt0n_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, (n == 0) == false → 0 < n"), t321))
 }
 
 ///|
@@ -1084,7 +1084,7 @@ pub fn neq0_lt0n() -> @kernel.Thm {
 /// eqn_leq
 fn step_55() -> Unit raise {
   let t322 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  eqn_leq_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (m = n) = (m <= n /\\ n <= m)"), t322))
+  eqn_leq_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, (m == n) == (m <= n && n <= m)"), t322))
 }
 
 ///|
@@ -1106,7 +1106,7 @@ fn step_56() -> Unit raise {
   })
   let t323 = @ssreflect.move_(@list.List(["n"]))
   let t331 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t323), (x330 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_leq", @list.List([eqn_leq()])), (x329 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t328, x329), x330)), @ssreflect.done_tac)])
-  anti_leq_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n /\\ n <= m ==> m = n"), t331))
+  anti_leq_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m <= n && n <= m → m == n"), t331))
 }
 
 ///|
@@ -1145,7 +1145,7 @@ fn step_57() -> Unit raise {
   let t359 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x338 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_leq", @list.List([eqn_leq()])), t337, x338), (x344 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("negb_and", @list.List([@ssrbool.negb_and()])), t343, x344)), (x350 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("orbC", @list.List([@ssrbool.orbc()])), t349, x350)), t358), @ssreflect.done_tac)
   let t332 = @ssreflect.move_(@list.List(["n"]))
   let t360 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t332), t359])
-  neq_ltn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. ~(m = n) <=> (m < n) \\/ (n < m)"), t360))
+  neq_ltn_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, !(m == n) == (m < n || n < m)"), t360))
 }
 
 ///|
@@ -1161,7 +1161,7 @@ pub fn neq_ltn() -> @kernel.Thm {
 /// leq_eqVlt
 fn step_58() -> Unit raise {
   let t361 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leq_eqvlt_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(m <= n) <=> (m = n) \\/ (m < n)"), t361))
+  leq_eqvlt_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("((m : Num) <= (n : Num)) == (m == n || m < n)"), t361))
 }
 
 ///|
@@ -1177,7 +1177,7 @@ pub fn leq_eqvlt() -> @kernel.Thm {
 /// eq_sym
 fn step_59() -> Unit raise {
   let t364 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x363 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("EQ_SYM_EQ", @list.List([@theorems.eq_sym_eq()])), (x362 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x362), x363), @ssreflect.clear_assumption("EQ_SYM_EQ")), @tactics.beta_tac), @ssreflect.done_tac)])
-  eq_sym_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall x y:A. x = y <=> y = x"), t364))
+  eq_sym_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ x : A, ∀ y : A, (x == y) == (y == x)"), t364))
 }
 
 ///|
@@ -1192,7 +1192,7 @@ pub fn eq_sym() -> @kernel.Thm {
 ///|
 /// ltn_neqAle
 fn step_60() -> Unit raise {
-  let t391 = @list.List([@parser.parse_term("n = m")])
+  let t391 = @list.List([@term_syntax.parse_term("(n : _) == (m : _)")])
   let t396 = @ssreflect.thm_tac(fn(x394 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x395 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x392 : @kernel.Thm, x393 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t391, x392, x393))(x394, x395)
@@ -1221,7 +1221,7 @@ fn step_60() -> Unit raise {
   let t398 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x371 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltnNge", @list.List([ltnnge()])), t370, x371), (x377 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_eqVlt", @list.List([leq_eqvlt()])), t376, x377)), (x383 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("negb_or", @list.List([@ssrbool.negb_or()])), t382, x383)), (x390 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqNgt", @list.List([leqngt()])), (x389 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t388, x389), x390)), (x397 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eq_sym", @list.List([eq_sym()])), t396, x397)), @ssreflect.done_tac)
   let t365 = @ssreflect.move_(@list.List(["n"]))
   let t399 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t365), t398])
-  ltn_neqale_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (m < n) <=> ~(m = n) /\\ (m <= n)"), t399))
+  ltn_neqale_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, (m < n) == (!(m == n) && m <= n)"), t399))
 }
 
 ///|
@@ -1237,7 +1237,7 @@ pub fn ltn_neqale() -> @kernel.Thm {
 /// leq_trans
 fn step_61() -> Unit raise {
   let t400 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leq_trans_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n m p. m <= n ==> n <= p ==> m <= p"), t400))
+  leq_trans_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, ∀ m : Num, ∀ p : Num, m <= n → n <= p → m <= p"), t400))
 }
 
 ///|
@@ -1253,7 +1253,7 @@ pub fn leq_trans() -> @kernel.Thm {
 /// ltE
 fn step_62() -> Unit raise {
   let t401 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  lte_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n m. n < m <=> SUC n <= m"), t401))
+  lte_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, ∀ m : Num, (n < m) == (SUC(n) <= m)"), t401))
 }
 
 ///|
@@ -1269,7 +1269,7 @@ pub fn lte() -> @kernel.Thm {
 /// leqSS
 fn step_63() -> Unit raise {
   let t402 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leqss_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n m. SUC n <= SUC m <=> n <= m"), t402))
+  leqss_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, ∀ m : Num, (SUC(n) <= SUC(m)) == (n <= m)"), t402))
 }
 
 ///|
@@ -1305,7 +1305,7 @@ fn step_64() -> Unit raise {
   let t404 = @ssreflect.move_(@list.List(["p"]))
   let t403 = @ssreflect.move_(@list.List(["m"]))
   let t425 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["n"]))), t403), t404), t405), t424])
-  leq_ltn_trans_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n m p. m <= n ==> n < p ==> m < p"), t425))
+  leq_ltn_trans_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, ∀ m : Num, ∀ p : Num, m <= n → n < p → m < p"), t425))
 }
 
 ///|
@@ -1321,7 +1321,7 @@ pub fn leq_ltn_trans() -> @kernel.Thm {
 /// ltn_leq_trans
 fn step_65() -> Unit raise {
   let t426 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  ltn_leq_trans_c.set(@sections.section_proof(@list.List(["n", "m", "p"]), @parser.parse_term("m < n ==> n <= p ==> m < p"), t426))
+  ltn_leq_trans_c.set(@sections.section_proof(@list.List(["n", "m", "p"]), @term_syntax.parse_term("(m : Num) < (n : Num) → n <= (p : Num) → m < p"), t426))
 }
 
 ///|
@@ -1354,7 +1354,7 @@ fn step_66() -> Unit raise {
   })
   let t427 = @ssreflect.move_(@list.List(["n"]))
   let t446 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t427), (x433 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltE", @list.List([lte()])), t432, x433)), t439), (x445 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqnSn", @list.List([leqnsn()])), t444, x445)), @ssreflect.done_tac)])
-  ltnw_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m < n ==> m <= n"), t446))
+  ltnw_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m < n → m <= n"), t446))
 }
 
 ///|
@@ -1389,7 +1389,7 @@ fn step_67() -> Unit raise {
   let t448 = @ssreflect.move_(@list.List(["le_mn"]))
   let t447 = @ssreflect.move_(@list.List(["n"]))
   let t468 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t447), t448), t454), t467), @ssreflect.done_tac)])
-  leqw_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n ==> m <= SUC n"), t468))
+  leqw_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m <= n → m <= SUC(n)"), t468))
 }
 
 ///|
@@ -1434,7 +1434,7 @@ fn step_68() -> Unit raise {
   let t470 = @ssreflect.move_(@list.List(["p"]))
   let t469 = @ssreflect.move_(@list.List(["m"]))
   let t500 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["n"]))), t469), t470), t471), t499, t498])
-  ltn_trans_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n m p. m < n ==> n < p ==> m < p"), t500))
+  ltn_trans_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, ∀ m : Num, ∀ p : Num, m < n → n < p → m < p"), t500))
 }
 
 ///|
@@ -1450,7 +1450,7 @@ pub fn ltn_trans() -> @kernel.Thm {
 /// geqE
 fn step_69() -> Unit raise {
   let t501 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  geqe_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m >= n <=> n <= m"), t501))
+  geqe_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, (m >= n) == (n <= m)"), t501))
 }
 
 ///|
@@ -1465,7 +1465,7 @@ pub fn geqe() -> @kernel.Thm {
 ///|
 /// gtE
 fn step_70() -> Unit raise {
-  gte_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m > n <=> n < m"), @list.List([@ssreflect.arith_tac])))
+  gte_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("((m : Num) > (n : Num)) == (n < m)"), @list.List([@ssreflect.arith_tac])))
 }
 
 ///|
@@ -1493,7 +1493,7 @@ fn step_71() -> Unit raise {
     }
   })
   let t520 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x508 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("implyNb", @list.List([@ssrbool.implynb()])), (x507 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t506, x507), x508), (x515 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltnNge", @list.List([ltnnge()])), (x514 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t513, x514), x515)), t516), t519), @ssreflect.done_tac)])
-  leq_total_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(m <= n) \\/ (n <= m)"), t520))
+  leq_total_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(m : Num) <= (n : Num) || n <= m"), t520))
 }
 
 ///|
@@ -1509,7 +1509,7 @@ pub fn leq_total() -> @kernel.Thm {
 /// leqP
 fn step_72() -> Unit raise {
   let t521 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leqp_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m <= n \\/ n < m"), t521))
+  leqp_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(m : Num) <= (n : Num) || n < m"), t521))
 }
 
 ///|
@@ -1525,7 +1525,7 @@ pub fn leqp() -> @kernel.Thm {
 /// ltnP
 fn step_73() -> Unit raise {
   let t522 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  ltnp_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m < n \\/ n <= m"), t522))
+  ltnp_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(m : Num) < (n : Num) || n <= m"), t522))
 }
 
 ///|
@@ -1541,7 +1541,7 @@ pub fn ltnp() -> @kernel.Thm {
 /// posnP
 fn step_74() -> Unit raise {
   let t523 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  posnp_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("n = 0 \\/ 0 < n"), t523))
+  posnp_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("(n : Num) == 0 || 0 < n"), t523))
 }
 
 ///|
@@ -1557,7 +1557,7 @@ pub fn posnp() -> @kernel.Thm {
 /// ltngtP
 fn step_75() -> Unit raise {
   let t524 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  ltngtp_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m < n \\/ n < m \\/ m = n"), t524))
+  ltngtp_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(m : Num) < (n : Num) || n < m || m == n"), t524))
 }
 
 ///|
@@ -1573,7 +1573,7 @@ pub fn ltngtp() -> @kernel.Thm {
 /// leq_add2l
 fn step_76() -> Unit raise {
   let t525 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leq_add2l_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. (p + m <= p + n) = (m <= n)"), t525))
+  leq_add2l_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ p : Num, ∀ m : Num, ∀ n : Num, (p + m <= p + n) == (m <= n)"), t525))
 }
 
 ///|
@@ -1607,7 +1607,7 @@ fn step_77() -> Unit raise {
   let t527 = @ssreflect.move_(@list.List(["n"]))
   let t526 = @ssreflect.move_(@list.List(["m"]))
   let t548 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["p"]))), t526), t527), t547])
-  ltn_add2l_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. (p + m < p + n) = (m < n)"), t548))
+  ltn_add2l_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ p : Num, ∀ m : Num, ∀ n : Num, (p + m < p + n) == (m < n)"), t548))
 }
 
 ///|
@@ -1642,7 +1642,7 @@ fn step_78() -> Unit raise {
       }, x556)
     }, x557)
   })((x563 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t562, x563))), (x569 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_add2l", @list.List([leq_add2l()])), t568, x569)), @ssreflect.done_tac)])
-  leq_add2r_c.set(@sections.section_proof(@list.List(["p", "m", "n"]), @parser.parse_term("(m + p <= n + p) = (m <= n)"), t570))
+  leq_add2r_c.set(@sections.section_proof(@list.List(["p", "m", "n"]), @term_syntax.parse_term("((m : Num) + (p : Num) <= (n : Num) + p) == (m <= n)"), t570))
 }
 
 ///|
@@ -1676,7 +1676,7 @@ fn step_79() -> Unit raise {
   let t572 = @ssreflect.move_(@list.List(["n"]))
   let t571 = @ssreflect.move_(@list.List(["m"]))
   let t593 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["p"]))), t571), t572), t592])
-  ltn_add2r_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. (m + p < n + p) = (m < n)"), t593))
+  ltn_add2r_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ p : Num, ∀ m : Num, ∀ n : Num, (m + p < n + p) == (m < n)"), t593))
 }
 
 ///|
@@ -1707,7 +1707,7 @@ fn step_80() -> Unit raise {
       let fst_arg = x601
       (fn(x603 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_1 = x603
-        arg_tac_1(@ssreflect.ArgType::Arg_term(@parser.parse_term("m1 + n2")))
+        arg_tac_1(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(m1 : Num) + (n2 : Num)")))
       })(fn(x605 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg = x605
         (x607 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac, fst_arg, snd_arg, x607)
@@ -1724,7 +1724,7 @@ fn step_80() -> Unit raise {
   let t595 = @ssreflect.move_(@list.List(["n1"]))
   let t594 = @ssreflect.move_(@list.List(["m2"]))
   let t626 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m1"]))), t594), t595), t596), t597), t598), t625])
-  leq_add_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m1 m2 n1 n2. m1 <= n1 ==> m2 <= n2 ==> m1 + m2 <= n1 + n2"), t626))
+  leq_add_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m1 : Num, ∀ m2 : Num, ∀ n1 : Num, ∀ n2 : Num, m1 <= n1 → m2 <= n2 → m1 + m2 <= n1 + n2"), t626))
 }
 
 ///|
@@ -1749,7 +1749,7 @@ fn step_81() -> Unit raise {
       ((x636 : @kernel.Thm, x637 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x636, x637))(x638, x639)
     }
   })
-  let t628 = @list.List([@parser.parse_term("n")])
+  let t628 = @list.List([@term_syntax.parse_term("(n : _)")])
   let t633 = @ssreflect.thm_tac(fn(x631 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x632 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x629 : @kernel.Thm, x630 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([1L]), t628, x629, x630))(x631, x632)
@@ -1758,7 +1758,7 @@ fn step_81() -> Unit raise {
   let t648 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x635 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn0", @list.List([addn0()])), (x634 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t633, x634), x635), (x641 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_add2l", @list.List([leq_add2l()])), t640, x641)), (x647 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq0n", @list.List([leq0n()])), t646, x647)), @ssreflect.done_tac)
   let t627 = @ssreflect.move_(@list.List(["n"]))
   let t649 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t627), t648])
-  leq_addr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. n <= n + m"), t649))
+  leq_addr_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, n <= n + m"), t649))
 }
 
 ///|
@@ -1784,7 +1784,7 @@ fn step_82() -> Unit raise {
     }
   })
   let t662 = @list.List([@tactics.then_tac(@tactics.then_tac((x655 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnC", @list.List([addnc()])), t654, x655), (x661 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_addr", @list.List([leq_addr()])), t660, x661)), @ssreflect.done_tac)])
-  leq_addl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. n <= m + n"), t662))
+  leq_addl_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, n <= m + n"), t662))
 }
 
 ///|
@@ -1830,7 +1830,7 @@ fn step_83() -> Unit raise {
     }
   })
   let t692 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x668 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltE", @list.List([lte()])), t667, x668)), t685), (x691 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_addr", @list.List([leq_addr()])), t690, x691))])
-  ltn_addr_c.set(@sections.section_proof(@list.List(["m", "n", "p"]), @parser.parse_term("m < n ==> m < n + p"), t692))
+  ltn_addr_c.set(@sections.section_proof(@list.List(["m", "n", "p"]), @term_syntax.parse_term("(m : Num) < (n : Num) → m < n + (p : Num)"), t692))
 }
 
 ///|
@@ -1846,7 +1846,7 @@ pub fn ltn_addr() -> @kernel.Thm {
 /// ltn_addl
 fn step_84() -> Unit raise {
   let t693 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  ltn_addl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. m < n ==> m < p + n"), t693))
+  ltn_addl_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, m < n → m < p + n"), t693))
 }
 
 ///|
@@ -1879,7 +1879,7 @@ fn step_85() -> Unit raise {
   let t714 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x700 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("lt0n", @list.List([lt0n()])), t699, x700)), (x707 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("negb_and", @list.List([@ssrbool.negb_and()])), (x706 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t705, x706), x707)), (x713 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn_eq0", @list.List([addn_eq0()])), t712, x713)), @ssreflect.done_tac)
   let t694 = @ssreflect.move_(@list.List(["n"]))
   let t715 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t694), t714])
-  addn_gt0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (0 < m + n) <=> (0 < m) \\/ (0 < n)"), t715))
+  addn_gt0_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, (0 < m + n) == (0 < m || 0 < n)"), t715))
 }
 
 ///|
@@ -1895,7 +1895,7 @@ pub fn addn_gt0() -> @kernel.Thm {
 /// subn_gt0
 fn step_86() -> Unit raise {
   let t716 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  subn_gt0_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(0 < n - m) = (m < n)"), t716))
+  subn_gt0_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(0 < (n : Num) - (m : Num)) == (m < n)"), t716))
 }
 
 ///|
@@ -1911,7 +1911,7 @@ pub fn subn_gt0() -> @kernel.Thm {
 /// subn_eq0
 fn step_87() -> Unit raise {
   let t717 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  subn_eq0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (m - n = 0) = (m <= n)"), t717))
+  subn_eq0_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, (m - n == 0) == (m <= n)"), t717))
 }
 
 ///|
@@ -1927,7 +1927,7 @@ pub fn subn_eq0() -> @kernel.Thm {
 /// leqE
 fn step_88() -> Unit raise {
   let t718 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leqe_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n <=> m - n = 0"), t718))
+  leqe_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, (m <= n) == (m - n == 0)"), t718))
 }
 
 ///|
@@ -1961,7 +1961,7 @@ fn step_89() -> Unit raise {
   let t720 = @ssreflect.move_(@list.List(["p"]))
   let t719 = @ssreflect.move_(@list.List(["n"]))
   let t742 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t719), t720), t741])
-  leq_sub_add_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. (m - n <= p) = (m <= n + p)"), t742))
+  leq_sub_add_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, (m - n <= p) == (m <= n + p)"), t742))
 }
 
 ///|
@@ -1987,7 +1987,7 @@ fn step_90() -> Unit raise {
     }
   })
   let t755 = @list.List([@tactics.then_tac(@tactics.then_tac((x748 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_sub_add", @list.List([leq_sub_add()])), t747, x748), (x754 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_addl", @list.List([leq_addl()])), t753, x754)), @ssreflect.done_tac)])
-  leq_subr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. n - m <= n"), t755))
+  leq_subr_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, n - m <= n"), t755))
 }
 
 ///|
@@ -2003,7 +2003,7 @@ pub fn leq_subr() -> @kernel.Thm {
 /// subnKC
 fn step_91() -> Unit raise {
   let t756 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  subnkc_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n ==> m + (n - m) = n"), t756))
+  subnkc_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m <= n → m + (n - m) == n"), t756))
 }
 
 ///|
@@ -2025,7 +2025,7 @@ fn step_92() -> Unit raise {
     }
   })
   let t766 = @list.List([@tactics.then_tac(@tactics.then_tac((x762 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnC", @list.List([addnc()])), t761, x762), t765), @ssreflect.done_tac)])
-  subnk_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n ==> (n - m) + m = n"), t766))
+  subnk_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m <= n → n - m + m == n"), t766))
 }
 
 ///|
@@ -2069,7 +2069,7 @@ fn step_93() -> Unit raise {
   let t768 = @ssreflect.move_(@list.List(["p"]))
   let t767 = @ssreflect.move_(@list.List(["n"]))
   let t798 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t767), t768), t769), t797])
-  addn_suba_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. p <= n ==> m + (n - p) = (m + n) - p"), t798))
+  addn_suba_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, p <= n → m + (n - p) == m + n - p"), t798))
 }
 
 ///|
@@ -2108,7 +2108,7 @@ fn step_94() -> Unit raise {
   let t800 = @ssreflect.move_(@list.List(["p"]))
   let t799 = @ssreflect.move_(@list.List(["n"]))
   let t824 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t799), t800), t801), t823])
-  subn_suba_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. p <= n ==> m - (n - p) = (m + p) - n"), t824))
+  subn_suba_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, p <= n → m - (n - p) == m + p - n"), t824))
 }
 
 ///|
@@ -2158,7 +2158,7 @@ fn step_95() -> Unit raise {
   }), @tactics.beta_tac), t848), (x854 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addKn", @list.List([addkn()])), t853, x854)), @ssreflect.done_tac)
   let t825 = @ssreflect.move_(@list.List(["n"]))
   let t856 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t825), t855])
-  subkn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n ==> n - (n - m) = m"), t856))
+  subkn_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m <= n → n - (n - m) == m"), t856))
 }
 
 ///|
@@ -2198,7 +2198,7 @@ fn step_96() -> Unit raise {
         let fst_arg = x869
         (fn(x871 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
           let arg_tac_1 = x871
-          arg_tac_1(@ssreflect.ArgType::Arg_term(@parser.parse_term("1")))
+          arg_tac_1(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("1")))
         })(fn(x873 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
           let snd_arg = x873
           (x875 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac, fst_arg, snd_arg, x875)
@@ -2219,7 +2219,7 @@ fn step_96() -> Unit raise {
   let t899 = @tactics.then_tac((x864 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add1n", @list.List([add1n()])), (x863 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t862, x863), x864), t891)
   let t857 = @ssreflect.move_(@list.List(["n"]))
   let t900 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t857), t899, t898])
-  leq_subs_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n ==> SUC n - m = SUC (n - m)"), t900))
+  leq_subs_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m <= n → SUC(n) - m == SUC(n - m)"), t900))
 }
 
 ///|
@@ -2255,7 +2255,7 @@ fn step_97() -> Unit raise {
   let t902 = @ssreflect.move_(@list.List(["lt_mn"]))
   let t901 = @ssreflect.move_(@list.List(["n"]))
   let t926 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t901), t902), t925), @ssreflect.done_tac)])
-  ltn_subs_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m < n ==> n - m = SUC (n - SUC m)"), t926))
+  ltn_subs_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m < n → n - m == SUC(n - SUC(m))"), t926))
 }
 
 ///|
@@ -2304,7 +2304,7 @@ fn step_98() -> Unit raise {
   let t928 = @ssreflect.move_(@list.List(["n"]))
   let t927 = @ssreflect.move_(@list.List(["m"]))
   let t964 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["p"]))), t927), t928), t929), t963])
-  leq_sub2r_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. m <= n ==> m - p <= n - p"), t964))
+  leq_sub2r_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ p : Num, ∀ m : Num, ∀ n : Num, m <= n → m - p <= n - p"), t964))
 }
 
 ///|
@@ -2352,7 +2352,7 @@ fn step_99() -> Unit raise {
       let fst_arg = x969
       (fn(x971 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_1 = x971
-        arg_tac_1(@ssreflect.ArgType::Arg_term(@parser.parse_term("p - m")))
+        arg_tac_1(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(p : Num) - (m : Num)")))
       })(fn(x973 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg = x973
         (x975 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac, fst_arg, snd_arg, x975)
@@ -2362,7 +2362,7 @@ fn step_99() -> Unit raise {
   let t966 = @ssreflect.move_(@list.List(["n"]))
   let t965 = @ssreflect.move_(@list.List(["m"]))
   let t1010 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["p"]))), t965), t966), t989), t1009])
-  leq_sub2l_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. m <= n ==> p - n <= p - m"), t1010))
+  leq_sub2l_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ p : Num, ∀ m : Num, ∀ n : Num, m <= n → p - n <= p - m"), t1010))
 }
 
 ///|
@@ -2419,7 +2419,7 @@ fn step_100() -> Unit raise {
   let t1012 = @ssreflect.move_(@list.List(["n1"]))
   let t1011 = @ssreflect.move_(@list.List(["m2"]))
   let t1050 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m1"]))), t1011), t1012), t1013), t1049])
-  leq_sub2_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m1 m2 n1 n2. m1 <= m2 ==> n2 <= n1 ==> m1 - n1 <= m2 - n2"), t1050))
+  leq_sub2_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m1 : Num, ∀ m2 : Num, ∀ n1 : Num, ∀ n2 : Num, m1 <= m2 → n2 <= n1 → m1 - n1 <= m2 - n2"), t1050))
 }
 
 ///|
@@ -2447,7 +2447,7 @@ fn step_101() -> Unit raise {
         let fst_arg = x1086
         (fn(x1088 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
           let arg_tac_1 = x1088
-          arg_tac_1(@ssreflect.ArgType::Arg_term(@parser.parse_term("SUC p")))
+          arg_tac_1(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("SUC((p : Num))")))
         })(fn(x1090 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
           let snd_arg = x1090
           (x1092 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac, fst_arg, snd_arg, x1092)
@@ -2494,7 +2494,7 @@ fn step_101() -> Unit raise {
   let t1052 = @ssreflect.move_(@list.List(["n"]))
   let t1051 = @ssreflect.move_(@list.List(["m"]))
   let t1106 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["p"]))), t1051), t1052), t1105, t1104])
-  ltn_sub2r_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. p < n ==> m < n ==> m - p < n - p"), t1106))
+  ltn_sub2r_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ p : Num, ∀ m : Num, ∀ n : Num, p < n → m < n → m - p < n - p"), t1106))
 }
 
 ///|
@@ -2561,7 +2561,7 @@ fn step_102() -> Unit raise {
   let t1108 = @ssreflect.move_(@list.List(["n"]))
   let t1107 = @ssreflect.move_(@list.List(["m"]))
   let t1155 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["p"]))), t1107), t1108), t1154, t1153])
-  ltn_sub2l_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. m < p ==> m < n ==> p - n < p - m"), t1155))
+  ltn_sub2l_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ p : Num, ∀ m : Num, ∀ n : Num, m < p → m < n → p - n < p - m"), t1155))
 }
 
 ///|
@@ -2590,7 +2590,7 @@ fn step_103() -> Unit raise {
   let t1157 = @ssreflect.move_(@list.List(["p"]))
   let t1156 = @ssreflect.move_(@list.List(["n"]))
   let t1171 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t1156), t1157), t1170])
-  ltn_add_sub_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. (m + n < p) = (n < p - m)"), t1171))
+  ltn_add_sub_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, (m + n < p) == (n < p - m)"), t1171))
 }
 
 ///|
@@ -2605,7 +2605,7 @@ pub fn ltn_add_sub() -> @kernel.Thm {
 ///|
 /// maxn
 fn step_104() -> Unit raise {
-  maxn_c.set(@pair.new_definition(@parser.parse_term("maxn m n = if m < n then n else m")))
+  maxn_c.set(@pair.new_definition(@term_syntax.parse_term("(maxn : (Num, Num) -> Num)((m : Num), (n : Num)) == (if m < n { n } else { m })")))
 }
 
 ///|
@@ -2620,7 +2620,7 @@ pub fn maxn() -> @kernel.Thm {
 ///|
 /// minn
 fn step_105() -> Unit raise {
-  minn_c.set(@pair.new_definition(@parser.parse_term("minn m n = if m < n then m else n")))
+  minn_c.set(@pair.new_definition(@term_syntax.parse_term("(minn : (Num, Num) -> Num)((m : Num), (n : Num)) == (if m < n { m } else { n })")))
 }
 
 ///|
@@ -2641,7 +2641,7 @@ fn step_106() -> Unit raise {
     }
   })
   let t1178 = @list.List([@tactics.then_tac(@tactics.then_tac((x1177 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn", @list.List([maxn()])), t1176, x1177), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  max0n_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. maxn 0 n = n"), t1178))
+  max0n_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, maxn(0, n) == n"), t1178))
 }
 
 ///|
@@ -2662,7 +2662,7 @@ fn step_107() -> Unit raise {
     }
   })
   let t1185 = @list.List([@tactics.then_tac(@tactics.then_tac((x1184 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn", @list.List([maxn()])), t1183, x1184), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  maxn0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. maxn n 0 = n"), t1185))
+  maxn0_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, maxn(n, 0) == n"), t1185))
 }
 
 ///|
@@ -2683,7 +2683,7 @@ fn step_108() -> Unit raise {
     }
   })
   let t1192 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x1191 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn", @list.List([maxn()])), t1190, x1191)), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  maxnc_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. maxn m n = maxn n m"), t1192))
+  maxnc_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, maxn(m, n) == maxn(n, m)"), t1192))
 }
 
 ///|
@@ -2704,7 +2704,7 @@ fn step_109() -> Unit raise {
     }
   })
   let t1199 = @list.List([@tactics.then_tac(@tactics.then_tac((x1198 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn", @list.List([maxn()])), t1197, x1198), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  maxnl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. n <= m ==> maxn m n = m"), t1199))
+  maxnl_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, n <= m → maxn(m, n) == m"), t1199))
 }
 
 ///|
@@ -2725,7 +2725,7 @@ fn step_110() -> Unit raise {
     }
   })
   let t1206 = @list.List([@tactics.then_tac(@tactics.then_tac((x1205 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn", @list.List([maxn()])), t1204, x1205), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  maxnr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n ==> maxn m n = n"), t1206))
+  maxnr_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m <= n → maxn(m, n) == n"), t1206))
 }
 
 ///|
@@ -2746,7 +2746,7 @@ fn step_111() -> Unit raise {
     }
   })
   let t1213 = @list.List([@tactics.then_tac(@tactics.then_tac((x1212 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn", @list.List([maxn()])), t1211, x1212), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  add_sub_maxn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m + (n - m) = maxn m n"), t1213))
+  add_sub_maxn_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m + (n - m) == maxn(m, n)"), t1213))
 }
 
 ///|
@@ -2793,7 +2793,7 @@ fn step_112() -> Unit raise {
   let t1215 = @ssreflect.move_(@list.List(["p"]))
   let t1214 = @ssreflect.move_(@list.List(["n"]))
   let t1253 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t1214), t1215), t1252])
-  maxnac_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. maxn (maxn m n) p = maxn (maxn m p) n"), t1253))
+  maxnac_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, maxn(maxn(m, n), p) == maxn(maxn(m, p), n)"), t1253))
 }
 
 ///|
@@ -2813,7 +2813,7 @@ fn step_113() -> Unit raise {
       ((x1263 : @kernel.Thm, x1264 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x1263, x1264))(x1265, x1266)
     }
   })
-  let t1256 = @list.List([@parser.parse_term("maxn m _1")])
+  let t1256 = @list.List([@term_syntax.parse_term("maxn((m : Num), (_1 : Num))")])
   let t1261 = @ssreflect.thm_tac(fn(x1259 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x1260 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x1257 : @kernel.Thm, x1258 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t1256, x1257, x1258))(x1259, x1260)
@@ -2823,7 +2823,7 @@ fn step_113() -> Unit raise {
   let t1255 = @ssreflect.move_(@list.List(["p"]))
   let t1254 = @ssreflect.move_(@list.List(["n"]))
   let t1270 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t1254), t1255), t1269])
-  maxna_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. maxn m (maxn n p) = maxn (maxn m n) p"), t1270))
+  maxna_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, maxn(m, maxn(n, p)) == maxn(maxn(m, n), p)"), t1270))
 }
 
 ///|
@@ -2838,7 +2838,7 @@ pub fn maxna() -> @kernel.Thm {
 ///|
 /// maxnCA
 fn step_114() -> Unit raise {
-  let t1279 = @list.List([@parser.parse_term("maxn m _1")])
+  let t1279 = @list.List([@term_syntax.parse_term("maxn((m : Num), (_1 : Num))")])
   let t1284 = @ssreflect.thm_tac(fn(x1282 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x1283 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x1280 : @kernel.Thm, x1281 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t1279, x1280, x1281))(x1282, x1283)
@@ -2853,7 +2853,7 @@ fn step_114() -> Unit raise {
   let t1272 = @ssreflect.move_(@list.List(["p"]))
   let t1271 = @ssreflect.move_(@list.List(["n"]))
   let t1287 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t1271), t1272), t1286), @ssreflect.done_tac)])
-  maxnca_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. maxn m (maxn n p) = maxn n (maxn m p)"), t1287))
+  maxnca_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, maxn(m, maxn(n, p)) == maxn(n, maxn(m, p))"), t1287))
 }
 
 ///|
@@ -2883,7 +2883,7 @@ fn step_115() -> Unit raise {
       ((x1303 : @kernel.Thm, x1304 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x1303, x1304))(x1305, x1306)
     }
   })
-  let t1295 = @list.List([@parser.parse_term("n")])
+  let t1295 = @list.List([@term_syntax.parse_term("(n : _)")])
   let t1300 = @ssreflect.thm_tac(fn(x1298 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x1299 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x1296 : @kernel.Thm, x1297 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([2L]), t1295, x1296, x1297))(x1298, x1299)
@@ -2897,7 +2897,7 @@ fn step_115() -> Unit raise {
   let t1322 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x1294 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxnC", @list.List([maxnc()])), t1293, x1294), (x1302 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn0", @list.List([addn0()])), (x1301 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t1300, x1301), x1302)), (x1309 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add_sub_maxn", @list.List([add_sub_maxn()])), (x1308 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t1307, x1308), x1309)), (x1315 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_addl", @list.List([eqn_addl()])), t1314, x1315)), (x1321 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqE", @list.List([leqe()])), t1320, x1321)), @ssreflect.done_tac)
   let t1288 = @ssreflect.move_(@list.List(["n"]))
   let t1323 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t1288), t1322])
-  eqn_maxr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (maxn m n = n) = (m <= n)"), t1323))
+  eqn_maxr_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, (maxn(m, n) == n) == (m <= n)"), t1323))
 }
 
 ///|
@@ -2927,7 +2927,7 @@ fn step_116() -> Unit raise {
       ((x1333 : @kernel.Thm, x1334 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x1333, x1334))(x1335, x1336)
     }
   })
-  let t1325 = @list.List([@parser.parse_term("m")])
+  let t1325 = @list.List([@term_syntax.parse_term("(m : _)")])
   let t1330 = @ssreflect.thm_tac(fn(x1328 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x1329 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x1326 : @kernel.Thm, x1327 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([2L]), t1325, x1326, x1327))(x1328, x1329)
@@ -2936,7 +2936,7 @@ fn step_116() -> Unit raise {
   let t1352 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x1332 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn0", @list.List([addn0()])), (x1331 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t1330, x1331), x1332), (x1339 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add_sub_maxn", @list.List([add_sub_maxn()])), (x1338 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t1337, x1338), x1339)), (x1345 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_addl", @list.List([eqn_addl()])), t1344, x1345)), (x1351 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqE", @list.List([leqe()])), t1350, x1351)), @ssreflect.done_tac)
   let t1324 = @ssreflect.move_(@list.List(["n"]))
   let t1353 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t1324), t1352])
-  eqn_maxl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (maxn m n = m) = (n <= m)"), t1353))
+  eqn_maxl_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, (maxn(m, n) == m) == (n <= m)"), t1353))
 }
 
 ///|
@@ -2964,7 +2964,7 @@ fn step_117() -> Unit raise {
   })
   let t1367 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x1359 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxnl", @list.List([maxnl()])), t1358, x1359), t1360), (x1366 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqnn", @list.List([leqnn()])), t1365, x1366)), @ssreflect.done_tac)
   let t1368 = @list.List([@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["n"]))), t1367])
-  maxnn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. maxn n n = n"), t1368))
+  maxnn_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ n : Num, maxn(n, n) == n"), t1368))
 }
 
 ///|
@@ -3021,7 +3021,7 @@ fn step_118() -> Unit raise {
       let fst_arg_2 = x1436
       (fn(x1438 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_4 = x1438
-        arg_tac_4(@ssreflect.ArgType::Arg_term(@parser.parse_term("m <= n1")))
+        arg_tac_4(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(m : Num) <= (n1 : Num)")))
       })(fn(x1440 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg_2 = x1440
         (x1442 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac_3, fst_arg_2, snd_arg_2, x1442)
@@ -3081,18 +3081,18 @@ fn step_118() -> Unit raise {
       }, x1394)
     })
   })((x1395 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x1395)), @ssreflect.case), t1396))(t1409), (x1415 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("le_n21", @list.List([])), t1414, x1415)), @ssreflect.done_tac)
-  let t1371 = @parser.parse_term("n2")
-  let t1372 = @list.List([@parser.parse_term("n1"), t1371])
+  let t1371 = @term_syntax.parse_term("(n2 : _)")
+  let t1372 = @list.List([@term_syntax.parse_term("(n1 : _)"), t1371])
   let t1373 = @ssreflect.move_(@list.List(["le_n21"]))
   let t1479 = @list.List([(fn(x1369 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x1369
-    arg_tac(@ssreflect.ArgType::Arg_term(@parser.parse_term("n2 <= n1")))
+    arg_tac(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(n2 : Num) <= (n1 : Num)")))
   })(@ssreflect.term_tac(fn(x1376 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x1377 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x1374 : @kernel.Term, x1375 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.wlog_tac(t1373, t1372, x1374, x1375))(x1376, x1377)
     }
   })), t1478, t1477, t1476, t1475])
-  leq_maxr_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("(m <= maxn n1 n2) <=> (m <= n1) \\/ (m <= n2)"), t1479))
+  leq_maxr_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("((m : Num) <= maxn((n1 : Num), (n2 : Num))) == (m <= n1 || m <= n2)"), t1479))
 }
 
 ///|
@@ -3140,7 +3140,7 @@ fn step_119() -> Unit raise {
     }
   })
   let t1520 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x1485 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqNgt", @list.List([leqngt()])), t1484, x1485), (x1491 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltE", @list.List([lte()])), t1490, x1491)), (x1497 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_maxr", @list.List([leq_maxr()])), t1496, x1497)), (x1503 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("negb_or", @list.List([@ssrbool.negb_or()])), t1502, x1503)), t1511), t1519), @ssreflect.done_tac)])
-  leq_maxl_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("(maxn n1 n2 <= m) <=> (n1 <= m) /\\ (n2 <= m)"), t1520))
+  leq_maxl_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("(maxn((n1 : Num), (n2 : Num)) <= (m : Num)) == (n1 <= m && n2 <= m)"), t1520))
 }
 
 ///|
@@ -3174,7 +3174,7 @@ fn step_120() -> Unit raise {
   let t1522 = @ssreflect.move_(@list.List(["n"]))
   let t1521 = @ssreflect.move_(@list.List(["m2"]))
   let t1543 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m1"]))), t1521), t1522), t1542), @ssreflect.done_tac)])
-  addn_maxl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m1 m2 n. (maxn m1 m2) + n = maxn (m1 + n) (m2 + n)"), t1543))
+  addn_maxl_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m1 : Num, ∀ m2 : Num, ∀ n : Num, maxn(m1, m2) + n == maxn(m1 + n, m2 + n)"), t1543))
 }
 
 ///|
@@ -3194,7 +3194,7 @@ fn step_121() -> Unit raise {
       ((x1553 : @kernel.Thm, x1554 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x1553, x1554))(x1555, x1556)
     }
   })
-  let t1546 = @list.List([@parser.parse_term("m + _1")])
+  let t1546 = @list.List([@term_syntax.parse_term("(m : Num) + (_1 : Num)")])
   let t1551 = @ssreflect.thm_tac(fn(x1549 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x1550 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x1547 : @kernel.Thm, x1548 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t1546, x1547, x1548))(x1549, x1550)
@@ -3204,7 +3204,7 @@ fn step_121() -> Unit raise {
   let t1545 = @ssreflect.move_(@list.List(["n2"]))
   let t1544 = @ssreflect.move_(@list.List(["n1"]))
   let t1560 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t1544), t1545), t1559), @ssreflect.done_tac)])
-  addn_maxr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n1 n2. m + maxn n1 n2 = maxn (m + n1) (m + n2)"), t1560))
+  addn_maxr_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n1 : Num, ∀ n2 : Num, m + maxn(n1, n2) == maxn(m + n1, m + n2)"), t1560))
 }
 
 ///|
@@ -3225,7 +3225,7 @@ fn step_122() -> Unit raise {
     }
   })
   let t1567 = @list.List([@tactics.then_tac(@tactics.then_tac((x1566 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minn", @list.List([minn()])), t1565, x1566), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  min0n_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("minn 0 n = 0"), t1567))
+  min0n_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("minn(0, (n : Num)) == 0"), t1567))
 }
 
 ///|
@@ -3246,7 +3246,7 @@ fn step_123() -> Unit raise {
     }
   })
   let t1574 = @list.List([@tactics.then_tac(@tactics.then_tac((x1573 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minn", @list.List([minn()])), t1572, x1573), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  minn0_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("minn n 0 = 0"), t1574))
+  minn0_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("minn((n : Num), 0) == 0"), t1574))
 }
 
 ///|
@@ -3267,7 +3267,7 @@ fn step_124() -> Unit raise {
     }
   })
   let t1581 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x1580 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minn", @list.List([minn()])), t1579, x1580)), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  minnc_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("minn m n = minn n m"), t1581))
+  minnc_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("minn((m : Num), (n : Num)) == minn(n, m)"), t1581))
 }
 
 ///|
@@ -3288,7 +3288,7 @@ fn step_125() -> Unit raise {
     }
   })
   let t1588 = @list.List([@tactics.then_tac(@tactics.then_tac((x1587 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minn", @list.List([minn()])), t1586, x1587), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  minnr_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("n <= m ==> minn m n = n"), t1588))
+  minnr_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(n : Num) <= (m : Num) → minn(m, n) == n"), t1588))
 }
 
 ///|
@@ -3318,7 +3318,7 @@ fn step_126() -> Unit raise {
     }, x1594))
     (x1596 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minnr", @list.List([minnr()])), t1595, x1596)
   }), @tactics.beta_tac), (x1602 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minnC", @list.List([minnc()])), t1601, x1602)), @ssreflect.done_tac)])
-  minnl_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m <= n ==> minn m n = m"), t1603))
+  minnl_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(m : Num) <= (n : Num) → minn(m, n) == m"), t1603))
 }
 
 ///|
@@ -3344,7 +3344,7 @@ fn step_127() -> Unit raise {
     }
   })
   let t1616 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x1609 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minn", @list.List([minn()])), t1608, x1609), (x1615 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn", @list.List([maxn()])), t1614, x1615)), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  addn_min_max_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("minn m n + maxn m n = m + n"), t1616))
+  addn_min_max_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("minn((m : Num), (n : Num)) + maxn(m, n) == m + n"), t1616))
 }
 
 ///|
@@ -3370,7 +3370,7 @@ fn step_128() -> Unit raise {
     }
   })
   let t1630 = @list.List([@tactics.then_tac(@tactics.then_tac((x1623 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn_min_max", @list.List([addn_min_max()])), (x1622 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t1621, x1622), x1623), (x1629 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnK", @list.List([addnk()])), t1628, x1629)), @ssreflect.done_tac)])
-  minn_to_maxn_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("minn m n = (m + n) - maxn m n"), t1630))
+  minn_to_maxn_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("minn((m : Num), (n : Num)) == m + n - maxn(m, n)"), t1630))
 }
 
 ///|
@@ -3406,7 +3406,7 @@ fn step_129() -> Unit raise {
     }
   })
   let t1656 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x1636 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minnC", @list.List([minnc()])), t1635, x1636), (x1642 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minn_to_maxn", @list.List([minn_to_maxn()])), t1641, x1642)), (x1649 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add_sub_maxn", @list.List([add_sub_maxn()])), (x1648 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t1647, x1648), x1649)), (x1655 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subn_add2l", @list.List([subn_add2l()])), t1654, x1655)), @ssreflect.done_tac)])
-  sub_sub_minn_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m - (m - n) = minn m n"), t1656))
+  sub_sub_minn_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(m : Num) - (m - (n : Num)) == minn(m, n)"), t1656))
 }
 
 ///|
@@ -3421,7 +3421,7 @@ pub fn sub_sub_minn() -> @kernel.Thm {
 ///|
 /// minnCA
 fn step_130() -> Unit raise {
-  let t1741 = @list.List([@parser.parse_term("m2 + m1")])
+  let t1741 = @list.List([@term_syntax.parse_term("(m2 : Num) + (m1 : Num)")])
   let t1746 = @ssreflect.thm_tac(fn(x1744 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x1745 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x1742 : @kernel.Thm, x1743 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t1741, x1742, x1743))(x1744, x1745)
@@ -3461,7 +3461,7 @@ fn step_130() -> Unit raise {
     }
   })
   let t1708 = @ssreflect.repeat_tactic(1L, 9L, (x1707 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnA", @list.List([addna()])), (x1706 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t1705, x1706), x1707))
-  let t1693 = @list.List([@parser.parse_term("(m2 + _1) - _2")])
+  let t1693 = @list.List([@term_syntax.parse_term("(m2 : Num) + (_1 : Num) - (_2 : Num)")])
   let t1698 = @ssreflect.thm_tac(fn(x1696 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x1697 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x1694 : @kernel.Thm, x1695 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t1693, x1694, x1695))(x1696, x1697)
@@ -3473,7 +3473,7 @@ fn step_130() -> Unit raise {
       let fst_arg_1 = x1685
       (fn(x1687 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_3 = x1687
-        arg_tac_3(@ssreflect.ArgType::Arg_term(@parser.parse_term("maxn m1 m3")))
+        arg_tac_3(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("maxn((m1 : Num), (m3 : Num))")))
       })(fn(x1689 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg_1 = x1689
         (x1691 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac_2, fst_arg_1, snd_arg_1, x1691)
@@ -3491,14 +3491,14 @@ fn step_130() -> Unit raise {
       let fst_arg = x1669
       (fn(x1671 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_1 = x1671
-        arg_tac_1(@ssreflect.ArgType::Arg_term(@parser.parse_term("maxn m2 m3")))
+        arg_tac_1(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("maxn((m2 : Num), (m3 : Num))")))
       })(fn(x1673 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg = x1673
         (x1675 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac, fst_arg, snd_arg, x1675)
       })
     }, x1676)
   })((x1682 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t1681, x1682)), t1700), t1708)
-  let t1659 = @list.List([@parser.parse_term("minn _1 (minn _2 _3)")])
+  let t1659 = @list.List([@term_syntax.parse_term("minn((_1 : Num), minn((_2 : Num), (_3 : Num)))")])
   let t1664 = @ssreflect.thm_tac(fn(x1662 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x1663 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x1660 : @kernel.Thm, x1661 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t1659, x1660, x1661))(x1662, x1663)
@@ -3508,7 +3508,7 @@ fn step_130() -> Unit raise {
   let t1658 = @ssreflect.move_(@list.List(["m3"]))
   let t1657 = @ssreflect.move_(@list.List(["m2"]))
   let t1750 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m1"]))), t1657), t1658), t1666), t1749, t1748])
-  minnca_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m1 m2 m3. minn m1 (minn m2 m3) = minn m2 (minn m1 m3)"), t1750))
+  minnca_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m1 : Num, ∀ m2 : Num, ∀ m3 : Num, minn(m1, minn(m2, m3)) == minn(m2, minn(m1, m3))"), t1750))
 }
 
 ///|
@@ -3533,7 +3533,7 @@ fn step_131() -> Unit raise {
       ((x1760 : @kernel.Thm, x1761 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x1760, x1761))(x1762, x1763)
     }
   })
-  let t1753 = @list.List([@parser.parse_term("minn m2 _1")])
+  let t1753 = @list.List([@term_syntax.parse_term("minn((m2 : Num), (_1 : Num))")])
   let t1758 = @ssreflect.thm_tac(fn(x1756 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x1757 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x1754 : @kernel.Thm, x1755 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t1753, x1754, x1755))(x1756, x1757)
@@ -3543,7 +3543,7 @@ fn step_131() -> Unit raise {
   let t1752 = @ssreflect.move_(@list.List(["m3"]))
   let t1751 = @ssreflect.move_(@list.List(["m2"]))
   let t1773 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m1"]))), t1751), t1752), t1772])
-  minna_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m1 m2 m3. minn m1 (minn m2 m3) = minn (minn m1 m2) m3"), t1773))
+  minna_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m1 : Num, ∀ m2 : Num, ∀ m3 : Num, minn(m1, minn(m2, m3)) == minn(minn(m1, m2), m3)"), t1773))
 }
 
 ///|
@@ -3574,7 +3574,7 @@ fn step_132() -> Unit raise {
     }
   })
   let t1792 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x1779 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minnC", @list.List([minnc()])), t1778, x1779), (x1785 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minnCA", @list.List([minnca()])), t1784, x1785)), (x1791 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minnA", @list.List([minna()])), t1790, x1791)), @ssreflect.done_tac)])
-  minnac_c.set(@sections.section_proof(@list.List(["m1", "m2", "m3"]), @parser.parse_term("minn (minn m1 m2) m3 = minn (minn m1 m3) m2"), t1792))
+  minnac_c.set(@sections.section_proof(@list.List(["m1", "m2", "m3"]), @term_syntax.parse_term("minn(minn((m1 : Num), (m2 : Num)), (m3 : Num)) == minn(minn(m1, m3), m2)"), t1792))
 }
 
 ///|
@@ -3599,7 +3599,7 @@ fn step_133() -> Unit raise {
       ((x1835 : @kernel.Thm, x1836 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x1835, x1836))(x1837, x1838)
     }
   })
-  let t1828 = @list.List([@parser.parse_term("m = _1")])
+  let t1828 = @list.List([@term_syntax.parse_term("(m : _) == (_1 : _)")])
   let t1833 = @ssreflect.thm_tac(fn(x1831 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x1832 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x1829 : @kernel.Thm, x1830 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t1828, x1829, x1830))(x1831, x1832)
@@ -3615,7 +3615,7 @@ fn step_133() -> Unit raise {
       ((x1816 : @kernel.Thm, x1817 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x1816, x1817))(x1818, x1819)
     }
   })
-  let t1808 = @list.List([@parser.parse_term("n + m")])
+  let t1808 = @list.List([@term_syntax.parse_term("(n : Num) + (m : Num)")])
   let t1813 = @ssreflect.thm_tac(fn(x1811 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x1812 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x1809 : @kernel.Thm, x1810 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t1808, x1809, x1810))(x1811, x1812)
@@ -3637,7 +3637,7 @@ fn step_133() -> Unit raise {
       }, x1800)
     }, x1801)
   })((x1807 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t1806, x1807)), t1847])
-  eqn_minr_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(minn m n = n) = (n <= m)"), t1848))
+  eqn_minr_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(minn((m : Num), (n : Num)) == n) == (n <= m)"), t1848))
 }
 
 ///|
@@ -3667,7 +3667,7 @@ fn step_134() -> Unit raise {
       ((x1871 : @kernel.Thm, x1872 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x1871, x1872))(x1873, x1874)
     }
   })
-  let t1864 = @list.List([@parser.parse_term("_1 = m + n")])
+  let t1864 = @list.List([@term_syntax.parse_term("(_1 : Num) == (m : Num) + (n : Num)")])
   let t1869 = @ssreflect.thm_tac(fn(x1867 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x1868 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x1865 : @kernel.Thm, x1866 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t1864, x1865, x1866))(x1867, x1868)
@@ -3688,7 +3688,7 @@ fn step_134() -> Unit raise {
       }, x1856)
     }, x1857)
   })((x1863 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t1862, x1863)), (x1870 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eq_sym", @list.List([eq_sym()])), t1869, x1870)), (x1877 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn_min_max", @list.List([addn_min_max()])), (x1876 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t1875, x1876), x1877)), (x1883 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_addl", @list.List([eqn_addl()])), t1882, x1883)), (x1889 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_maxr", @list.List([eqn_maxr()])), t1888, x1889)), @ssreflect.done_tac)])
-  eqn_minl_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(minn m n = m) = (m <= n)"), t1890))
+  eqn_minl_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(minn((m : Num), (n : Num)) == m) == (m <= n)"), t1890))
 }
 
 ///|
@@ -3715,7 +3715,7 @@ fn step_135() -> Unit raise {
     }
   })
   let t1904 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x1896 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minnr", @list.List([minnr()])), t1895, x1896), t1897), (x1903 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqnn", @list.List([leqnn()])), t1902, x1903)), @ssreflect.done_tac)])
-  minnn_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("minn n n = n"), t1904))
+  minnn_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("minn((n : Num), n) == n"), t1904))
 }
 
 ///|
@@ -3736,7 +3736,7 @@ fn step_136() -> Unit raise {
     }
   })
   let t1911 = @list.List([@tactics.then_tac(@tactics.then_tac((x1910 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minn", @list.List([minn()])), t1909, x1910), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  leq_minr_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("(m <= minn n1 n2) <=> (m <= n1) /\\ (m <= n2)"), t1911))
+  leq_minr_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("((m : Num) <= minn((n1 : Num), (n2 : Num))) == (m <= n1 && m <= n2)"), t1911))
 }
 
 ///|
@@ -3784,7 +3784,7 @@ fn step_137() -> Unit raise {
     }
   })
   let t1952 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x1917 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqNgt", @list.List([leqngt()])), t1916, x1917), (x1923 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltE", @list.List([lte()])), t1922, x1923)), (x1929 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_minr", @list.List([leq_minr()])), t1928, x1929)), t1937), (x1943 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("negb_and", @list.List([@ssrbool.negb_and()])), t1942, x1943)), t1951), @ssreflect.done_tac)])
-  leq_minl_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("(minn n1 n2 <= m) <=> (n1 <= m) \\/ (n2 <= m)"), t1952))
+  leq_minl_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("(minn((n1 : Num), (n2 : Num)) <= (m : Num)) == (n1 <= m || n2 <= m)"), t1952))
 }
 
 ///|
@@ -3815,7 +3815,7 @@ fn step_138() -> Unit raise {
       ((x2003 : @kernel.Thm, x2004 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x2003, x2004))(x2005, x2006)
     }
   })
-  let t1996 = @list.List([@parser.parse_term("_1 + n")])
+  let t1996 = @list.List([@term_syntax.parse_term("(_1 : Num) + (n : Num)")])
   let t2001 = @ssreflect.thm_tac(fn(x1999 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x2000 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x1997 : @kernel.Thm, x1998 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t1996, x1997, x1998))(x1999, x2000)
@@ -3860,7 +3860,7 @@ fn step_138() -> Unit raise {
   let t1954 = @ssreflect.move_(@list.List(["n"]))
   let t1953 = @ssreflect.move_(@list.List(["m2"]))
   let t2024 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m1"]))), t1953), t1954), t1986), t2023])
-  addn_minl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m1 m2 n. (minn m1 m2) + n = minn (m1 + n) (m2 + n)"), t2024))
+  addn_minl_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m1 : Num, ∀ m2 : Num, ∀ n : Num, minn(m1, m2) + n == minn(m1 + n, m2 + n)"), t2024))
 }
 
 ///|
@@ -3880,7 +3880,7 @@ fn step_139() -> Unit raise {
       ((x2041 : @kernel.Thm, x2042 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x2041, x2042))(x2043, x2044)
     }
   })
-  let t2036 = @list.List([@parser.parse_term("m + _1")])
+  let t2036 = @list.List([@term_syntax.parse_term("(m : Num) + (_1 : Num)")])
   let t2047 = @tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (fn(x2027 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x2027
     (x2035 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnC", @list.List([addnc()])), fn(x2029 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -3898,7 +3898,7 @@ fn step_139() -> Unit raise {
   let t2026 = @ssreflect.move_(@list.List(["n2"]))
   let t2025 = @ssreflect.move_(@list.List(["n1"]))
   let t2048 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t2025), t2026), t2047])
-  addn_minr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n1 n2. m + minn n1 n2 = minn (m + n1) (m + n2)"), t2048))
+  addn_minr_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n1 : Num, ∀ n2 : Num, m + minn(n1, n2) == minn(m + n1, m + n2)"), t2048))
 }
 
 ///|
@@ -3930,7 +3930,7 @@ fn step_140() -> Unit raise {
     }
   })
   let t2068 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x2054 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minnr", @list.List([minnr()])), t2053, x2054), t2055), (x2061 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_maxr", @list.List([leq_maxr()])), t2060, x2061)), (x2067 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqnn", @list.List([leqnn()])), t2066, x2067)), @ssreflect.done_tac)])
-  maxnk_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("minn (maxn m n) m = m"), t2068))
+  maxnk_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("minn(maxn((m : Num), (n : Num)), m) == m"), t2068))
 }
 
 ///|
@@ -3961,7 +3961,7 @@ fn step_141() -> Unit raise {
     }
   })
   let t2087 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x2074 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minnC", @list.List([minnc()])), t2073, x2074), (x2080 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxnC", @list.List([maxnc()])), t2079, x2080)), (x2086 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxnK", @list.List([maxnk()])), t2085, x2086)), @ssreflect.done_tac)])
-  maxkn_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("minn n (maxn m n) = n"), t2087))
+  maxkn_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("minn((n : Num), maxn((m : Num), n)) == n"), t2087))
 }
 
 ///|
@@ -3993,7 +3993,7 @@ fn step_142() -> Unit raise {
     }
   })
   let t2107 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x2093 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxnr", @list.List([maxnr()])), t2092, x2093), t2094), (x2100 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_minl", @list.List([leq_minl()])), t2099, x2100)), (x2106 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqnn", @list.List([leqnn()])), t2105, x2106)), @ssreflect.done_tac)])
-  minnk_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("maxn (minn m n) m = m"), t2107))
+  minnk_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("maxn(minn((m : Num), (n : Num)), m) == m"), t2107))
 }
 
 ///|
@@ -4024,7 +4024,7 @@ fn step_143() -> Unit raise {
     }
   })
   let t2126 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x2113 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minnC", @list.List([minnc()])), t2112, x2113), (x2119 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxnC", @list.List([maxnc()])), t2118, x2119)), (x2125 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minnK", @list.List([minnk()])), t2124, x2125)), @ssreflect.done_tac)])
-  minkn_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("maxn n (minn m n) = n"), t2126))
+  minkn_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("maxn((n : Num), minn((m : Num), n)) == n"), t2126))
 }
 
 ///|
@@ -4051,7 +4051,7 @@ fn step_144() -> Unit raise {
     }
   })
   let t2140 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x2132 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn", @list.List([maxn()])), t2131, x2132)), t2139), @ssreflect.arith_tac)])
-  maxn_minl_c.set(@sections.section_proof(@list.List(["m1", "m2", "n"]), @parser.parse_term("maxn (minn m1 m2) n = minn (maxn m1 n) (maxn m2 n)"), t2140))
+  maxn_minl_c.set(@sections.section_proof(@list.List(["m1", "m2", "n"]), @term_syntax.parse_term("maxn(minn((m1 : Num), (m2 : Num)), (n : Num)) == minn(maxn(m1, n), maxn(m2, n))"), t2140))
 }
 
 ///|
@@ -4071,7 +4071,7 @@ fn step_145() -> Unit raise {
       ((x2155 : @kernel.Thm, x2156 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x2155, x2156))(x2157, x2158)
     }
   })
-  let t2150 = @list.List([@parser.parse_term("maxn m _1")])
+  let t2150 = @list.List([@term_syntax.parse_term("maxn((m : Num), (_1 : Num))")])
   let t2161 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (fn(x2141 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x2141
     (x2149 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxnC", @list.List([maxnc()])), fn(x2143 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -4086,7 +4086,7 @@ fn step_145() -> Unit raise {
       ((x2151 : @kernel.Thm, x2152 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t2150, x2151, x2152))(x2153, x2154)
     }
   }))), (x2160 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn_minl", @list.List([maxn_minl()])), t2159, x2160)), @ssreflect.done_tac)])
-  maxn_minr_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("maxn m (minn n1 n2) = minn (maxn m n1) (maxn m n2)"), t2161))
+  maxn_minr_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("maxn((m : Num), minn((n1 : Num), (n2 : Num))) == minn(maxn(m, n1), maxn(m, n2))"), t2161))
 }
 
 ///|
@@ -4107,7 +4107,7 @@ fn step_146() -> Unit raise {
     }
   })
   let t2203 = @ssreflect.repeat_tactic(1L, 9L, (x2202 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxnK", @list.List([maxnk()])), t2201, x2202))
-  let t2190 = @list.List([@parser.parse_term("maxn _1 n")])
+  let t2190 = @list.List([@term_syntax.parse_term("maxn((_1 : Num), (n : Num))")])
   let t2195 = @ssreflect.thm_tac(fn(x2193 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x2194 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x2191 : @kernel.Thm, x2192 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t2190, x2191, x2192))(x2193, x2194)
@@ -4138,7 +4138,7 @@ fn step_146() -> Unit raise {
   let t2163 = @ssreflect.move_(@list.List(["n"]))
   let t2162 = @ssreflect.move_(@list.List(["m2"]))
   let t2205 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m1"]))), t2162), t2163), t2204), @ssreflect.done_tac)])
-  minn_maxl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m1 m2 n. minn (maxn m1 m2) n = maxn (minn m1 n) (minn m2 n)"), t2205))
+  minn_maxl_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m1 : Num, ∀ m2 : Num, ∀ n : Num, minn(maxn(m1, m2), n) == maxn(minn(m1, n), minn(m2, n))"), t2205))
 }
 
 ///|
@@ -4158,7 +4158,7 @@ fn step_147() -> Unit raise {
       ((x2222 : @kernel.Thm, x2223 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x2222, x2223))(x2224, x2225)
     }
   })
-  let t2217 = @list.List([@parser.parse_term("minn m _1")])
+  let t2217 = @list.List([@term_syntax.parse_term("minn((m : Num), (_1 : Num))")])
   let t2228 = @tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (fn(x2208 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x2208
     (x2216 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minnC", @list.List([minnc()])), fn(x2210 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -4176,7 +4176,7 @@ fn step_147() -> Unit raise {
   let t2207 = @ssreflect.move_(@list.List(["n2"]))
   let t2206 = @ssreflect.move_(@list.List(["n1"]))
   let t2229 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t2206), t2207), t2228])
-  minn_maxr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n1 n2. minn m (maxn n1 n2) = maxn (minn m n1) (minn m n2)"), t2229))
+  minn_maxr_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n1 : Num, ∀ n2 : Num, minn(m, maxn(n1, n2)) == maxn(minn(m, n1), minn(m, n2))"), t2229))
 }
 
 ///|
@@ -4211,7 +4211,7 @@ fn step_150() -> Unit raise {
 ///|
 /// iter
 fn step_151() -> Unit raise {
-  iter_c.set(@define.define_(@parser.parse_term("iter (SUC n) f (x:A) = f (iter n f x) /\\ iter 0 f x = x")))
+  iter_c.set(@define.define_(@term_syntax.parse_term("(iter : (Num, (A) -> A, A) -> A)(SUC((n : Num)), (f : (A) -> A), (x : A)) == f(iter(n, f, x)) && iter(0, f, x) == x")))
 }
 
 ///|
@@ -4226,7 +4226,7 @@ pub fn iter() -> @kernel.Thm {
 ///|
 /// iteri
 fn step_152() -> Unit raise {
-  iteri_c.set(@define.define_(@parser.parse_term("iteri (SUC n) f (x:A) = f n (iteri n f x) /\\ iteri 0 f x = x")))
+  iteri_c.set(@define.define_(@term_syntax.parse_term("(iteri : (Num, (Num, A) -> A, A) -> A)(SUC((n : Num)), (f : (Num, A) -> A), (x : A)) == f(n, iteri(n, f, x)) && iteri(0, f, x) == x")))
 }
 
 ///|
@@ -4258,7 +4258,7 @@ fn step_153() -> Unit raise {
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg)]))
   }, x2234)), t2235), t2245)
   let t2247 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x2231 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x2230 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x2230), x2231), @ssreflect.clear_assumption("n")), @ssreflect.elim), t2246), @ssreflect.done_tac)])
-  itersr_c.set(@sections.section_proof(@list.List(["n", "f", "x"]), @parser.parse_term("iter (SUC n) f (x : A) = iter n f (f x)"), t2247))
+  itersr_c.set(@sections.section_proof(@list.List(["n", "f", "x"]), @term_syntax.parse_term("iter(SUC((n : Num)), (f : (A) -> A), (x : A)) == iter(n, f, f(x))"), t2247))
 }
 
 ///|
@@ -4277,7 +4277,7 @@ fn step_154() -> Unit raise {
     let arg = x2248
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg)]))
   }, x2250), @ssreflect.done_tac)])
-  iters_c.set(@sections.section_proof(@list.List(["n", "f", "x"]), @parser.parse_term("iter (SUC n) f (x:A) = f (iter n f x)"), t2251))
+  iters_c.set(@sections.section_proof(@list.List(["n", "f", "x"]), @term_syntax.parse_term("iter(SUC((n : Num)), (f : (A) -> A), (x : A)) == f(iter(n, f, x))"), t2251))
 }
 
 ///|
@@ -4321,7 +4321,7 @@ fn step_155() -> Unit raise {
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg_2)]))
   }, x2263)), t2264), t2274)
   let t2282 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x2253 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x2252 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x2252), x2253), @ssreflect.clear_assumption("n")), @ssreflect.elim), t2275), (x2281 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("iterS", @list.List([iters()])), t2280, x2281)), @ssreflect.done_tac)])
-  iter_add_c.set(@sections.section_proof(@list.List(["n", "m", "f", "x"]), @parser.parse_term("iter (n + m) f (x:A) = iter n f (iter m f x)"), t2282))
+  iter_add_c.set(@sections.section_proof(@list.List(["n", "m", "f", "x"]), @term_syntax.parse_term("iter((n : Num) + (m : Num), (f : (A) -> A), (x : A)) == iter(n, f, iter(m, f, x))"), t2282))
 }
 
 ///|
@@ -4340,7 +4340,7 @@ fn step_156() -> Unit raise {
     let arg = x2283
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg)]))
   }, x2285), @ssreflect.done_tac)])
-  iteris_c.set(@sections.section_proof(@list.List(["n", "f", "x"]), @parser.parse_term("iteri (SUC n) f x = f n (iteri n f (x:A))"), t2286))
+  iteris_c.set(@sections.section_proof(@list.List(["n", "f", "x"]), @term_syntax.parse_term("iteri(SUC((n : Num)), (f : (Num, A) -> A), (x : A)) == f(n, iteri(n, f, x))"), t2286))
 }
 
 ///|
@@ -4422,7 +4422,7 @@ fn step_161() -> Unit raise {
 /// mul0n
 fn step_162() -> Unit raise {
   let t2287 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  mul0n_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("0 * n = 0"), t2287))
+  mul0n_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("0 * (n : Num) == 0"), t2287))
 }
 
 ///|
@@ -4438,7 +4438,7 @@ pub fn mul0n() -> @kernel.Thm {
 /// muln0
 fn step_163() -> Unit raise {
   let t2288 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  muln0_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("n * 0 = 0"), t2288))
+  muln0_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("(n : Num) * 0 == 0"), t2288))
 }
 
 ///|
@@ -4454,7 +4454,7 @@ pub fn muln0() -> @kernel.Thm {
 /// mul1n
 fn step_164() -> Unit raise {
   let t2289 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  mul1n_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("1 * n = n"), t2289))
+  mul1n_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("1 * (n : Num) == n"), t2289))
 }
 
 ///|
@@ -4469,7 +4469,7 @@ pub fn mul1n() -> @kernel.Thm {
 ///|
 /// mulSn
 fn step_165() -> Unit raise {
-  mulsn_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("SUC m * n = n + m * n"), @list.List([@ssreflect.arith_tac])))
+  mulsn_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("SUC((m : Num)) * (n : Num) == n + m * n"), @list.List([@ssreflect.arith_tac])))
 }
 
 ///|
@@ -4484,7 +4484,7 @@ pub fn mulsn() -> @kernel.Thm {
 ///|
 /// mulSnr
 fn step_166() -> Unit raise {
-  mulsnr_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("SUC m * n = m * n + n"), @list.List([@ssreflect.arith_tac])))
+  mulsnr_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("SUC((m : Num)) * (n : Num) == m * n + n"), @list.List([@ssreflect.arith_tac])))
 }
 
 ///|
@@ -4541,7 +4541,7 @@ fn step_167() -> Unit raise {
   })
   let t2307 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(0L, 10L, (x2297 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mul0n", @list.List([mul0n()])), t2296, x2297)), t2304), t2305), t2306)
   let t2336 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x2291 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("m", @list.List([])), (x2290 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x2290), x2291), @ssreflect.clear_assumption("m")), @ssreflect.elim), t2307), t2335])
-  mulns_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m * SUC n = m + m * n"), t2336))
+  mulns_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(m : Num) * SUC((n : Num)) == m + m * n"), t2336))
 }
 
 ///|
@@ -4567,7 +4567,7 @@ fn step_168() -> Unit raise {
     }
   })
   let t2349 = @list.List([@tactics.then_tac(@tactics.then_tac((x2342 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnC", @list.List([addnc()])), t2341, x2342), (x2348 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnS", @list.List([mulns()])), t2347, x2348)), @ssreflect.done_tac)])
-  mulnsr_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m * SUC n = m * n + m"), t2349))
+  mulnsr_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(m : Num) * SUC((n : Num)) == m * n + m"), t2349))
 }
 
 ///|
@@ -4599,13 +4599,13 @@ fn step_169() -> Unit raise {
   })
   let t2374 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((fn(x2350 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x2350
-    arg_tac(@ssreflect.ArgType::Arg_theorem(@int.arith_rule(@parser.parse_term("1 = SUC 0"))))
+    arg_tac(@ssreflect.ArgType::Arg_theorem(@int.arith_rule(@term_syntax.parse_term("1 == SUC(0)"))))
   })(@ssreflect.thm_tac(fn(x2354 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x2355 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x2352 : @kernel.Thm, x2353 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x2352, x2353))(x2354, x2355)
     }
   })), (x2361 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnSr", @list.List([mulnsr()])), t2360, x2361)), (x2367 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("muln0", @list.List([muln0()])), t2366, x2367)), (x2373 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add0n", @list.List([add0n()])), t2372, x2373)), @ssreflect.done_tac)])
-  muln1_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("n * 1 = n"), t2374))
+  muln1_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("(n : Num) * 1 == n"), t2374))
 }
 
 ///|
@@ -4658,7 +4658,7 @@ fn step_170() -> Unit raise {
   let t2415 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x2377 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("m", @list.List([])), (x2376 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x2376), x2377), @ssreflect.clear_assumption("m")), @ssreflect.elim), t2378), t2414), @ssreflect.done_tac)
   let t2375 = @ssreflect.move_(@list.List(["n"]))
   let t2416 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t2375), t2415])
-  mulnc_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m * n = n * m"), t2416))
+  mulnc_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m * n == n * m"), t2416))
 }
 
 ///|
@@ -4714,7 +4714,7 @@ fn step_171() -> Unit raise {
   let t2419 = @ssreflect.move_(@list.List(["IHm"]))
   let t2420 = @list.List([@tactics.all_tac, @tactics.then_tac(@ssreflect.move_(@list.List(["m1"])), t2419)])
   let t2469 = @list.List([@ssreflect.thenl_first(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x2418 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("m1", @list.List([])), (x2417 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x2417), x2418), @ssreflect.clear_assumption("m1")), @ssreflect.elim), t2420))(t2434), t2468])
-  muln_addl_c.set(@sections.section_proof(@list.List(["m1", "m2", "n"]), @parser.parse_term("(m1 + m2) * n = m1 * n + m2 * n"), t2469))
+  muln_addl_c.set(@sections.section_proof(@list.List(["m1", "m2", "n"]), @term_syntax.parse_term("((m1 : Num) + (m2 : Num)) * (n : Num) == m1 * n + m2 * n"), t2469))
 }
 
 ///|
@@ -4734,14 +4734,14 @@ fn step_172() -> Unit raise {
       ((x2477 : @kernel.Thm, x2478 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x2477, x2478))(x2479, x2480)
     }
   })
-  let t2470 = @list.List([@parser.parse_term("m * _1")])
+  let t2470 = @list.List([@term_syntax.parse_term("(m : Num) * (_1 : Num)")])
   let t2475 = @ssreflect.thm_tac(fn(x2473 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x2474 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x2471 : @kernel.Thm, x2472 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t2470, x2471, x2472))(x2473, x2474)
     }
   })
   let t2483 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x2476 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnC", @list.List([mulnc()])), t2475, x2476)), (x2482 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("muln_addl", @list.List([muln_addl()])), t2481, x2482)), @ssreflect.done_tac)])
-  muln_addr_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("m * (n1 + n2) = m * n1 + m * n2"), t2483))
+  muln_addr_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("(m : Num) * ((n1 : Num) + (n2 : Num)) == m * n1 + m * n2"), t2483))
 }
 
 ///|
@@ -4823,7 +4823,7 @@ fn step_173() -> Unit raise {
   let t2485 = @tactics.thenl(@ssreflect.case, @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["n'"]))]))
   let t2484 = @ssreflect.move_(@list.List(["n"]))
   let t2558 = @list.List([@ssreflect.thenl_first(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t2484), t2485))(t2498), t2557, t2556])
-  muln_subl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. (m - n) * p = m * p - n * p"), t2558))
+  muln_subl_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, (m - n) * p == m * p - n * p"), t2558))
 }
 
 ///|
@@ -4843,7 +4843,7 @@ fn step_174() -> Unit raise {
       ((x2568 : @kernel.Thm, x2569 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x2568, x2569))(x2570, x2571)
     }
   })
-  let t2561 = @list.List([@parser.parse_term("m * _1")])
+  let t2561 = @list.List([@term_syntax.parse_term("(m : Num) * (_1 : Num)")])
   let t2566 = @ssreflect.thm_tac(fn(x2564 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x2565 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x2562 : @kernel.Thm, x2563 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t2561, x2562, x2563))(x2564, x2565)
@@ -4853,7 +4853,7 @@ fn step_174() -> Unit raise {
   let t2560 = @ssreflect.move_(@list.List(["p"]))
   let t2559 = @ssreflect.move_(@list.List(["n"]))
   let t2575 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t2559), t2560), t2574), @ssreflect.done_tac)])
-  muln_subr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. m * (n - p) = m * n - m * p"), t2575))
+  muln_subr_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, m * (n - p) == m * n - m * p"), t2575))
 }
 
 ///|
@@ -4900,7 +4900,7 @@ fn step_175() -> Unit raise {
   let t2577 = @ssreflect.move_(@list.List(["p"]))
   let t2576 = @ssreflect.move_(@list.List(["n"]))
   let t2610 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t2576), t2577), t2609, t2608])
-  mulna_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. m * (n * p) = (m * n) * p"), t2610))
+  mulna_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, m * (n * p) == m * n * p"), t2610))
 }
 
 ///|
@@ -4915,7 +4915,7 @@ pub fn mulna() -> @kernel.Thm {
 ///|
 /// mulnCA
 fn step_176() -> Unit raise {
-  let t2626 = @list.List([@parser.parse_term("m * _1")])
+  let t2626 = @list.List([@term_syntax.parse_term("(m : Num) * (_1 : Num)")])
   let t2631 = (fn(x2617 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x2617
     (x2625 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnC", @list.List([mulnc()])), fn(x2619 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -4936,7 +4936,7 @@ fn step_176() -> Unit raise {
     }
   })
   let t2632 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x2616 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnA", @list.List([mulna()])), t2615, x2616)), t2631), @ssreflect.done_tac)])
-  mulnca_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("m * (n1 * n2) = n1 * (m * n2)"), t2632))
+  mulnca_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("(m : Num) * ((n1 : Num) * (n2 : Num)) == n1 * (m * n2)"), t2632))
 }
 
 ///|
@@ -4951,7 +4951,7 @@ pub fn mulnca() -> @kernel.Thm {
 ///|
 /// mulnAC
 fn step_177() -> Unit raise {
-  let t2640 = @list.List([@parser.parse_term("p * _1")])
+  let t2640 = @list.List([@term_syntax.parse_term("(p : Num) * (_1 : Num)")])
   let t2645 = @ssreflect.thm_tac(fn(x2643 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x2644 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x2641 : @kernel.Thm, x2642 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t2640, x2641, x2642))(x2643, x2644)
@@ -4963,7 +4963,7 @@ fn step_177() -> Unit raise {
     }
   })
   let t2647 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x2639 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnA", @list.List([mulna()])), (x2638 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t2637, x2638), x2639)), (x2646 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnC", @list.List([mulnc()])), t2645, x2646)), @ssreflect.done_tac)])
-  mulnac_c.set(@sections.section_proof(@list.List(["m", "n", "p"]), @parser.parse_term("(n * m) * p = (n * p) * m"), t2647))
+  mulnac_c.set(@sections.section_proof(@list.List(["m", "n", "p"]), @term_syntax.parse_term("(n : Num) * (m : Num) * (p : Num) == n * p * m"), t2647))
 }
 
 ///|
@@ -4998,7 +4998,7 @@ fn step_178() -> Unit raise {
   let t2653 = @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["m"]))])
   let t2652 = @ssreflect.clear_assumption("m")
   let t2670 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x2649 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x2648 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x2648), x2649), @ssreflect.clear_assumption("n")), (x2651 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("m", @list.List([])), (x2650 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x2650), x2651)), t2652), @ssreflect.case), t2653), t2654), t2669), @ssreflect.arith_tac)])
-  muln_eq0_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(m * n = 0) <=> (m = 0) \\/ (n = 0)"), t2670))
+  muln_eq0_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("((m : Num) * (n : Num) == 0) == (m == 0 || n == 0)"), t2670))
 }
 
 ///|
@@ -5017,7 +5017,7 @@ fn step_179() -> Unit raise {
   let t2676 = @list.List([@tactics.all_tac, @tactics.thenl(@ssreflect.case, @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["m"]))]))])
   let t2675 = @ssreflect.clear_assumption("m")
   let t2678 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x2672 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x2671 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x2671), x2672), @ssreflect.clear_assumption("n")), (x2674 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("m", @list.List([])), (x2673 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x2673), x2674)), t2675), @ssreflect.case), t2676), t2677), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  eqn_mul1_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(m * n = 1) <=> (m = 1) /\\ (n = 1)"), t2678))
+  eqn_mul1_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("((m : Num) * (n : Num) == 1) == (m == 1 && n == 1)"), t2678))
 }
 
 ///|
@@ -5036,7 +5036,7 @@ fn step_180() -> Unit raise {
   let t2684 = @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["m"]))])
   let t2683 = @ssreflect.clear_assumption("m")
   let t2686 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x2680 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x2679 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x2679), x2680), @ssreflect.clear_assumption("n")), (x2682 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("m", @list.List([])), (x2681 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x2681), x2682)), t2683), @ssreflect.case), t2684), t2685), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  muln_gt0_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(0 < m * n) <=> (0 < m) /\\ (0 < n)"), t2686))
+  muln_gt0_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(0 < (m : Num) * (n : Num)) == (0 < m && 0 < n)"), t2686))
 }
 
 ///|
@@ -5083,7 +5083,7 @@ fn step_181() -> Unit raise {
     }, x2692))
     (x2694 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("prednK", @list.List([prednk()])), t2693, x2694)
   }), @tactics.beta_tac), t2704), t2717), @ssreflect.done_tac)])
-  leq_pmull_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("0 < n ==> m <= n * m"), t2718))
+  leq_pmull_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("0 < (n : Num) → (m : Num) <= n * m"), t2718))
 }
 
 ///|
@@ -5121,7 +5121,7 @@ fn step_182() -> Unit raise {
       }
     }, x2733)))
   }), @tactics.beta_tac), (x2739 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnC", @list.List([mulnc()])), t2738, x2739)), @ssreflect.done_tac)])
-  leq_pmulr_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("0 < n ==> m <= m * n"), t2740))
+  leq_pmulr_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("0 < (n : Num) → (m : Num) <= m * n"), t2740))
 }
 
 ///|
@@ -5157,7 +5157,7 @@ fn step_183() -> Unit raise {
     }
   })
   let t2767 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x2746 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqE", @list.List([leqe()])), t2745, x2746), (x2753 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("muln_subr", @list.List([muln_subr()])), (x2752 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t2751, x2752), x2753)), (x2759 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("muln_eq0", @list.List([muln_eq0()])), t2758, x2759)), (x2766 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqE", @list.List([leqe()])), (x2765 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t2764, x2765), x2766)), @ssreflect.done_tac)])
-  leq_mul2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("(m * n1 <= m * n2) <=> (m = 0) \\/ (n1 <= n2)"), t2767))
+  leq_mul2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("((m : Num) * (n1 : Num) <= m * (n2 : Num)) == (m == 0 || n1 <= n2)"), t2767))
 }
 
 ///|
@@ -5177,7 +5177,7 @@ fn step_184() -> Unit raise {
       ((x2784 : @kernel.Thm, x2785 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x2784, x2785))(x2786, x2787)
     }
   })
-  let t2777 = @list.List([@parser.parse_term("_1 * m")])
+  let t2777 = @list.List([@term_syntax.parse_term("(_1 : Num) * (m : Num)")])
   let t2782 = @ssreflect.thm_tac(fn(x2780 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x2781 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x2778 : @kernel.Thm, x2779 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t2777, x2778, x2779))(x2780, x2781)
@@ -5193,7 +5193,7 @@ fn step_184() -> Unit raise {
       }, x2775)
     }, x2776)
   })((x2783 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t2782, x2783))), (x2789 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_mul2l", @list.List([leq_mul2l()])), t2788, x2789)), @ssreflect.done_tac)])
-  leq_mul2r_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("(n1 * m <= n2 * m) <=> (m = 0) \\/ (n1 <= n2)"), t2790))
+  leq_mul2r_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("((n1 : Num) * (m : Num) <= (n2 : Num) * m) == (m == 0 || n1 <= n2)"), t2790))
 }
 
 ///|
@@ -5246,7 +5246,7 @@ fn step_185() -> Unit raise {
           let fst_arg = x2798
           (fn(x2800 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
             let arg_tac_3 = x2800
-            arg_tac_3(@ssreflect.ArgType::Arg_term(@parser.parse_term("m1 * n2")))
+            arg_tac_3(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(m1 : Num) * (n2 : Num)")))
           })(fn(x2802 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
             let snd_arg = x2802
             (x2804 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac_2, fst_arg, snd_arg, x2804)
@@ -5256,7 +5256,7 @@ fn step_185() -> Unit raise {
         let fst_arg_1 = x2806
         (fn(x2808 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
           let arg_tac_4 = x2808
-          arg_tac_4(@ssreflect.ArgType::Arg_term(@parser.parse_term("m1 * m2")))
+          arg_tac_4(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(m1 : Num) * (m2 : Num)")))
         })(fn(x2810 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
           let snd_arg_1 = x2810
           (x2812 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac_1, fst_arg_1, snd_arg_1, x2812)
@@ -5266,7 +5266,7 @@ fn step_185() -> Unit raise {
       let fst_arg_2 = x2813
       (fn(x2815 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_5 = x2815
-        arg_tac_5(@ssreflect.ArgType::Arg_term(@parser.parse_term("n1 * n2")))
+        arg_tac_5(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(n1 : Num) * (n2 : Num)")))
       })(fn(x2817 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg_2 = x2817
         (x2819 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac, fst_arg_2, snd_arg_2, x2819)
@@ -5275,7 +5275,7 @@ fn step_185() -> Unit raise {
   })((x2820 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x2820)), @tactics.beta_tac)
   let t2791 = @ssreflect.move_(@list.List(["le_mn2"]))
   let t2852 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["le_mn1"]))), t2791), t2851, t2850, t2849, t2848])
-  leq_mul_c.set(@sections.section_proof(@list.List(["m1", "m2", "n1", "n2"]), @parser.parse_term("m1 <= n1 ==> m2 <= n2 ==> m1 * m2 <= n1 * n2"), t2852))
+  leq_mul_c.set(@sections.section_proof(@list.List(["m1", "m2", "n1", "n2"]), @term_syntax.parse_term("(m1 : Num) <= (n1 : Num) → (m2 : Num) <= (n2 : Num) → m1 * m2 <= n1 * n2"), t2852))
 }
 
 ///|
@@ -5312,7 +5312,7 @@ fn step_186() -> Unit raise {
     }
   })
   let t2880 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x2858 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_leq", @list.List([eqn_leq()])), t2857, x2858), t2865), (x2872 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("orb_andr", @list.List([@ssrbool.orb_andr()])), (x2871 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t2870, x2871), x2872)), (x2879 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_leq", @list.List([eqn_leq()])), (x2878 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t2877, x2878), x2879)), @ssreflect.done_tac)])
-  eqn_mul2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("(m * n1 = m * n2) <=> (m = 0) \\/ (n1 = n2)"), t2880))
+  eqn_mul2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("((m : Num) * (n1 : Num) == m * (n2 : Num)) == (m == 0 || n1 == n2)"), t2880))
 }
 
 ///|
@@ -5349,7 +5349,7 @@ fn step_187() -> Unit raise {
     }
   })
   let t2908 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x2886 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_leq", @list.List([eqn_leq()])), t2885, x2886), t2893), (x2900 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("orb_andr", @list.List([@ssrbool.orb_andr()])), (x2899 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t2898, x2899), x2900)), (x2907 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_leq", @list.List([eqn_leq()])), (x2906 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t2905, x2906), x2907)), @ssreflect.done_tac)])
-  eqn_mul2r_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("(n1 * m = n2 * m) <=> (m = 0) \\/ (n1 = n2)"), t2908))
+  eqn_mul2r_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("((n1 : Num) * (m : Num) == (n2 : Num) * m) == (m == 0 || n1 == n2)"), t2908))
 }
 
 ///|
@@ -5397,7 +5397,7 @@ fn step_188() -> Unit raise {
     }, x2914))
     (x2916 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("prednK", @list.List([prednk()])), t2915, x2916)
   }), @tactics.beta_tac), t2926), (x2932 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_mul2l", @list.List([leq_mul2l()])), t2931, x2932)), t2939), @ssreflect.done_tac)])
-  leq_pmul2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("0 < m ==> ((m * n1 <= m * n2) <=> (n1 <= n2))"), t2940))
+  leq_pmul2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("0 < (m : Num) → (m * (n1 : Num) <= m * (n2 : Num)) == (n1 <= n2)"), t2940))
 }
 
 ///|
@@ -5445,7 +5445,7 @@ fn step_189() -> Unit raise {
     }, x2946))
     (x2948 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("prednK", @list.List([prednk()])), t2947, x2948)
   }), @tactics.beta_tac), t2958), (x2964 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_mul2r", @list.List([leq_mul2r()])), t2963, x2964)), t2971), @ssreflect.done_tac)])
-  leq_pmul2r_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("0 < m ==> ((n1 * m <= n2 * m) <=> (n1 <= n2))"), t2972))
+  leq_pmul2r_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("0 < (m : Num) → ((n1 : Num) * m <= (n2 : Num) * m) == (n1 <= n2)"), t2972))
 }
 
 ///|
@@ -5493,7 +5493,7 @@ fn step_190() -> Unit raise {
     }, x2978))
     (x2980 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("prednK", @list.List([prednk()])), t2979, x2980)
   }), @tactics.beta_tac), t2990), (x2996 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_mul2l", @list.List([eqn_mul2l()])), t2995, x2996)), t3003), @ssreflect.done_tac)])
-  eqn_pmul2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("0 < m ==> ((m * n1 = m * n2) <=> (n1 = n2))"), t3004))
+  eqn_pmul2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("0 < (m : Num) → (m * (n1 : Num) == m * (n2 : Num)) == (n1 == n2)"), t3004))
 }
 
 ///|
@@ -5541,7 +5541,7 @@ fn step_191() -> Unit raise {
     }, x3010))
     (x3012 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("prednK", @list.List([prednk()])), t3011, x3012)
   }), @tactics.beta_tac), t3022), (x3028 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_mul2r", @list.List([eqn_mul2r()])), t3027, x3028)), t3035), @ssreflect.done_tac)])
-  eqn_pmul2r_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("0 < m ==> ((n1 * m = n2 * m) <=> (n1 = n2))"), t3036))
+  eqn_pmul2r_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("0 < (m : Num) → ((n1 : Num) * m == (n2 : Num) * m) == (n1 == n2)"), t3036))
 }
 
 ///|
@@ -5578,7 +5578,7 @@ fn step_192() -> Unit raise {
     }
   })
   let t3062 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x3042 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("lt0n", @list.List([lt0n()])), t3041, x3042), t3049), (x3055 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_mul2l", @list.List([leq_mul2l()])), t3054, x3055)), (x3061 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("negb_or", @list.List([@ssrbool.negb_or()])), t3060, x3061)), @ssreflect.done_tac)])
-  ltn_mul2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("(m * n1 < m * n2) <=> (0 < m) /\\ (n1 < n2)"), t3062))
+  ltn_mul2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("((m : Num) * (n1 : Num) < m * (n2 : Num)) == (0 < m && n1 < n2)"), t3062))
 }
 
 ///|
@@ -5615,7 +5615,7 @@ fn step_193() -> Unit raise {
     }
   })
   let t3088 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x3068 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("lt0n", @list.List([lt0n()])), t3067, x3068), t3075), (x3081 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_mul2r", @list.List([leq_mul2r()])), t3080, x3081)), (x3087 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("negb_or", @list.List([@ssrbool.negb_or()])), t3086, x3087)), @ssreflect.done_tac)])
-  ltn_mul2r_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("(n1 * m < n2 * m) <=> (0 < m) /\\ (n1 < n2)"), t3088))
+  ltn_mul2r_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("((n1 : Num) * (m : Num) < (n2 : Num) * m) == (0 < m && n1 < n2)"), t3088))
 }
 
 ///|
@@ -5667,7 +5667,7 @@ fn step_194() -> Unit raise {
     }, x3094))
     (x3096 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("prednK", @list.List([prednk()])), t3095, x3096)
   }), @tactics.beta_tac), t3106), t3125), @ssreflect.done_tac)])
-  ltn_pmul2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("0 < m ==> ((m * n1 < m * n2) <=> (n1 < n2))"), t3126))
+  ltn_pmul2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("0 < (m : Num) → (m * (n1 : Num) < m * (n2 : Num)) == (n1 < n2)"), t3126))
 }
 
 ///|
@@ -5714,7 +5714,7 @@ fn step_195() -> Unit raise {
     }, x3132))
     (x3134 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("prednK", @list.List([prednk()])), t3133, x3134)
   }), @tactics.beta_tac), t3144), t3157), @ssreflect.done_tac)])
-  ltn_pmul2r_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("0 < m ==> (n1 * m < n2 * m <=> n1 < n2)"), t3158))
+  ltn_pmul2r_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("0 < (m : Num) → ((n1 : Num) * m < (n2 : Num) * m) == (n1 < n2)"), t3158))
 }
 
 ///|
@@ -5734,7 +5734,7 @@ fn step_196() -> Unit raise {
       ((x3168 : @kernel.Thm, x3169 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x3168, x3169))(x3170, x3171)
     }
   })
-  let t3160 = @list.List([@parser.parse_term("m")])
+  let t3160 = @list.List([@term_syntax.parse_term("(m : _)")])
   let t3165 = @ssreflect.thm_tac(fn(x3163 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x3164 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x3161 : @kernel.Thm, x3162 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([1L]), t3160, x3161, x3162))(x3163, x3164)
@@ -5743,7 +5743,7 @@ fn step_196() -> Unit raise {
   let t3174 = @tactics.then_tac((x3167 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mul1n", @list.List([mul1n()])), (x3166 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t3165, x3166), x3167), (x3173 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltn_pmul2r", @list.List([ltn_pmul2r()])), t3172, x3173))
   let t3159 = @ssreflect.move_(@list.List(["m_gt0"]))
   let t3175 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["lt1n"]))), t3159), t3174), @ssreflect.done_tac)])
-  ltn_pmull_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("1 < n ==> 0 < m ==> m < n * m"), t3175))
+  ltn_pmull_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("1 < (n : Num) → 0 < (m : Num) → m < n * m"), t3175))
 }
 
 ///|
@@ -5771,7 +5771,7 @@ fn step_197() -> Unit raise {
   let t3189 = @tactics.then_tac((x3182 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnC", @list.List([mulnc()])), t3181, x3182), (x3188 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltn_Pmull", @list.List([ltn_pmull()])), t3187, x3188))
   let t3176 = @ssreflect.move_(@list.List(["m_gt0"]))
   let t3190 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["lt1n"]))), t3176), t3189), @ssreflect.done_tac)])
-  ltn_pmulr_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("1 < n ==> 0 < m ==> m < m * n"), t3190))
+  ltn_pmulr_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("1 < (n : Num) → 0 < (m : Num) → m < m * n"), t3190))
 }
 
 ///|
@@ -5825,7 +5825,7 @@ fn step_198() -> Unit raise {
           let fst_arg = x3198
           (fn(x3200 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
             let arg_tac_3 = x3200
-            arg_tac_3(@ssreflect.ArgType::Arg_term(@parser.parse_term("m1 * n2")))
+            arg_tac_3(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(m1 : Num) * (n2 : Num)")))
           })(fn(x3202 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
             let snd_arg = x3202
             (x3204 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac_2, fst_arg, snd_arg, x3204)
@@ -5835,7 +5835,7 @@ fn step_198() -> Unit raise {
         let fst_arg_1 = x3206
         (fn(x3208 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
           let arg_tac_4 = x3208
-          arg_tac_4(@ssreflect.ArgType::Arg_term(@parser.parse_term("m1 * m2")))
+          arg_tac_4(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(m1 : Num) * (m2 : Num)")))
         })(fn(x3210 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
           let snd_arg_1 = x3210
           (x3212 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac_1, fst_arg_1, snd_arg_1, x3212)
@@ -5845,7 +5845,7 @@ fn step_198() -> Unit raise {
       let fst_arg_2 = x3213
       (fn(x3215 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_5 = x3215
-        arg_tac_5(@ssreflect.ArgType::Arg_term(@parser.parse_term("n1 * n2")))
+        arg_tac_5(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(n1 : Num) * (n2 : Num)")))
       })(fn(x3217 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg_2 = x3217
         (x3219 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac, fst_arg_2, snd_arg_2, x3219)
@@ -5854,7 +5854,7 @@ fn step_198() -> Unit raise {
   })((x3220 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x3220)), @tactics.beta_tac)
   let t3191 = @ssreflect.move_(@list.List(["lt_mn2"]))
   let t3255 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["lt_mn1"]))), t3191), t3254, @tactics.ants_tac, t3253, t3252, t3251, t3250])
-  ltn_mul_c.set(@sections.section_proof(@list.List(["m1", "m2", "n1", "n2"]), @parser.parse_term("m1 < n1 ==> m2 < n2 ==> m1 * m2 < n1 * n2"), t3255))
+  ltn_mul_c.set(@sections.section_proof(@list.List(["m1", "m2", "n1", "n2"]), @term_syntax.parse_term("(m1 : Num) < (n1 : Num) → (m2 : Num) < (n2 : Num) → m1 * m2 < n1 * n2"), t3255))
 }
 
 ///|
@@ -5880,7 +5880,7 @@ fn step_199() -> Unit raise {
       ((x3285 : @kernel.Thm, x3286 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x3285, x3286))(x3287, x3288)
     }
   })
-  let t3278 = @list.List([@parser.parse_term("SUC n * _1")])
+  let t3278 = @list.List([@term_syntax.parse_term("SUC((n : Num)) * (_1 : Num)")])
   let t3283 = @ssreflect.thm_tac(fn(x3281 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x3282 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x3279 : @kernel.Thm, x3280 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t3278, x3279, x3280))(x3281, x3282)
@@ -5905,7 +5905,7 @@ fn step_199() -> Unit raise {
   let t3271 = @tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x3264 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mul0n", @list.List([mul0n()])), t3263, x3264)), (x3270 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxnn", @list.List([maxnn()])), t3269, x3270)), @ssreflect.done_tac)
   let t3258 = @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["n"]))])
   let t3299 = @list.List([@ssreflect.thenl_first(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x3257 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("m", @list.List([])), (x3256 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x3256), x3257), @ssreflect.clear_assumption("m")), @ssreflect.case), t3258))(t3271), t3298])
-  maxn_mulr_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("m * maxn n1 n2 = maxn (m * n1) (m * n2)"), t3299))
+  maxn_mulr_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("(m : Num) * maxn((n1 : Num), (n2 : Num)) == maxn(m * n1, m * n2)"), t3299))
 }
 
 ///|
@@ -5925,7 +5925,7 @@ fn step_200() -> Unit raise {
       ((x3316 : @kernel.Thm, x3317 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x3316, x3317))(x3318, x3319)
     }
   })
-  let t3309 = @list.List([@parser.parse_term("_1 * n")])
+  let t3309 = @list.List([@term_syntax.parse_term("(_1 : Num) * (n : Num)")])
   let t3314 = @ssreflect.thm_tac(fn(x3312 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x3313 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x3310 : @kernel.Thm, x3311 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t3309, x3310, x3311))(x3312, x3313)
@@ -5941,7 +5941,7 @@ fn step_200() -> Unit raise {
       }, x3307)
     }, x3308)
   })((x3315 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t3314, x3315))), (x3321 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn_mulr", @list.List([maxn_mulr()])), t3320, x3321)), @ssreflect.done_tac)])
-  maxn_mull_c.set(@sections.section_proof(@list.List(["m1", "m2", "n"]), @parser.parse_term("maxn m1 m2 * n = maxn (m1 * n) (m2 * n)"), t3322))
+  maxn_mull_c.set(@sections.section_proof(@list.List(["m1", "m2", "n"]), @term_syntax.parse_term("maxn((m1 : Num), (m2 : Num)) * (n : Num) == maxn(m1 * n, m2 * n)"), t3322))
 }
 
 ///|
@@ -5967,7 +5967,7 @@ fn step_201() -> Unit raise {
       ((x3358 : @kernel.Thm, x3359 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x3358, x3359))(x3360, x3361)
     }
   })
-  let t3351 = @list.List([@parser.parse_term("SUC n * _1")])
+  let t3351 = @list.List([@term_syntax.parse_term("SUC((n : Num)) * (_1 : Num)")])
   let t3356 = @ssreflect.thm_tac(fn(x3354 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x3355 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x3352 : @kernel.Thm, x3353 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t3351, x3352, x3353))(x3354, x3355)
@@ -5997,7 +5997,7 @@ fn step_201() -> Unit raise {
   let t3344 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x3331 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mul0n", @list.List([mul0n()])), t3330, x3331)), (x3337 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minn", @list.List([minn()])), t3336, x3337)), (x3343 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("if_same", @list.List([@ssrbool.if_same_v1()])), t3342, x3343)), @ssreflect.done_tac)
   let t3325 = @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["n"]))])
   let t3372 = @list.List([@ssreflect.thenl_first(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x3324 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("m", @list.List([])), (x3323 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x3323), x3324), @ssreflect.clear_assumption("m")), @ssreflect.case), t3325))(t3344), t3371])
-  minn_mulr_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("m * minn n1 n2 = minn (m * n1) (m * n2)"), t3372))
+  minn_mulr_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("(m : Num) * minn((n1 : Num), (n2 : Num)) == minn(m * n1, m * n2)"), t3372))
 }
 
 ///|
@@ -6017,7 +6017,7 @@ fn step_202() -> Unit raise {
       ((x3389 : @kernel.Thm, x3390 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x3389, x3390))(x3391, x3392)
     }
   })
-  let t3382 = @list.List([@parser.parse_term("_1 * n")])
+  let t3382 = @list.List([@term_syntax.parse_term("(_1 : Num) * (n : Num)")])
   let t3387 = @ssreflect.thm_tac(fn(x3385 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x3386 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x3383 : @kernel.Thm, x3384 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t3382, x3383, x3384))(x3385, x3386)
@@ -6033,7 +6033,7 @@ fn step_202() -> Unit raise {
       }, x3380)
     }, x3381)
   })((x3388 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t3387, x3388))), (x3394 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("minn_mulr", @list.List([minn_mulr()])), t3393, x3394)), @ssreflect.done_tac)])
-  minn_mull_c.set(@sections.section_proof(@list.List(["m1", "m2", "n"]), @parser.parse_term("minn m1 m2 * n = minn (m1 * n) (m2 * n)"), t3395))
+  minn_mull_c.set(@sections.section_proof(@list.List(["m1", "m2", "n"]), @term_syntax.parse_term("minn((m1 : Num), (m2 : Num)) * (n : Num) == minn(m1 * n, m2 * n)"), t3395))
 }
 
 ///|
@@ -6054,7 +6054,7 @@ fn step_203() -> Unit raise {
 ///|
 /// Formal_ineqs/lib/ssrnat.hl:1404
 fn step_204() -> Unit raise {
-  @preterm.override_interface("^", @parser.parse_term("EXP"))
+  @preterm.override_interface("^", @term_syntax.parse_term("EXP"))
 }
 
 ///|
@@ -6064,7 +6064,7 @@ fn step_205() -> Unit raise {
     let arg = x3396
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg)]))
   }, x3398), @ssreflect.done_tac)])
-  expn0_c.set(@sections.section_proof(@list.List(["m"]), @parser.parse_term("m ^ 0 = 1"), t3399))
+  expn0_c.set(@sections.section_proof(@list.List(["m"]), @term_syntax.parse_term("EXP((m : Num), 0) == 1"), t3399))
 }
 
 ///|
@@ -6083,7 +6083,7 @@ fn step_206() -> Unit raise {
     let arg = x3400
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg)]))
   }, x3402), @ssreflect.done_tac)])
-  expn1_c.set(@sections.section_proof(@list.List(["m"]), @parser.parse_term("m ^ 1 = m"), t3403))
+  expn1_c.set(@sections.section_proof(@list.List(["m"]), @term_syntax.parse_term("EXP((m : Num), 1) == m"), t3403))
 }
 
 ///|
@@ -6102,7 +6102,7 @@ fn step_207() -> Unit raise {
     let arg = x3404
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg)]))
   }, x3406), @ssreflect.done_tac)])
-  expns_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m ^ SUC n = m * m ^ n"), t3407))
+  expns_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("EXP((m : Num), SUC((n : Num))) == m * EXP(m, n)"), t3407))
 }
 
 ///|
@@ -6128,7 +6128,7 @@ fn step_208() -> Unit raise {
     }
   })
   let t3420 = @list.List([@tactics.then_tac(@tactics.then_tac((x3413 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnC", @list.List([mulnc()])), t3412, x3413), (x3419 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("expnS", @list.List([expns()])), t3418, x3419)), @ssreflect.done_tac)])
-  expnsr_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m ^ SUC n = m ^ n * m"), t3420))
+  expnsr_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("EXP((m : Num), SUC((n : Num))) == EXP(m, n) * m"), t3420))
 }
 
 ///|
@@ -6162,7 +6162,7 @@ fn step_209() -> Unit raise {
   let t3430 = @tactics.then_tac((x3429 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("LT_REFL", @list.List([@arith.lt_refl()])), t3428, x3429), @ssreflect.done_tac)
   let t3423 = @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["n"]))])
   let t3444 = @list.List([@ssreflect.thenl_first(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x3422 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x3421 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x3421), x3422), @ssreflect.clear_assumption("n")), @ssreflect.case), t3423))(t3430), t3443])
-  exp0n_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("0 < n ==> 0 ^ n = 0"), t3444))
+  exp0n_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("0 < (n : Num) → EXP(0, n) == 0"), t3444))
 }
 
 ///|
@@ -6194,7 +6194,7 @@ fn step_210() -> Unit raise {
     }
   })
   let t3466 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x3446 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x3445 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x3445), x3446), @ssreflect.clear_assumption("n")), @ssreflect.elim), @list.List([(x3452 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("expn0", @list.List([expn0()])), t3451, x3452), t3465])), @ssreflect.done_tac)])
-  exp1n_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("1 ^ n = 1"), t3466))
+  exp1n_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("EXP(1, (n : Num)) == 1"), t3466))
 }
 
 ///|
@@ -6253,7 +6253,7 @@ fn step_211() -> Unit raise {
   let t3469 = @ssreflect.move_(@list.List(["IHn"]))
   let t3470 = @list.List([@tactics.all_tac, @tactics.then_tac(@ssreflect.move_(@list.List(["n1"])), t3469)])
   let t3519 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x3468 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n1", @list.List([])), (x3467 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x3467), x3468), @ssreflect.clear_assumption("n1")), @ssreflect.elim), t3470), t3505), t3518])
-  expn_add_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("m ^ (n1 + n2) = m ^ n1 * m ^ n2"), t3519))
+  expn_add_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("EXP((m : Num), (n1 : Num) + (n2 : Num)) == EXP(m, n1) * EXP(m, n2)"), t3519))
 }
 
 ///|
@@ -6268,7 +6268,7 @@ pub fn expn_add() -> @kernel.Thm {
 ///|
 /// expn_mull
 fn step_212() -> Unit raise {
-  let t3557 = @list.List([@parser.parse_term("m2 * _1")])
+  let t3557 = @list.List([@term_syntax.parse_term("(m2 : Num) * (_1 : Num)")])
   let t3562 = @ssreflect.thm_tac(fn(x3560 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x3561 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x3558 : @kernel.Thm, x3559 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t3557, x3558, x3559))(x3560, x3561)
@@ -6305,7 +6305,7 @@ fn step_212() -> Unit raise {
   let t3522 = @ssreflect.move_(@list.List(["IHn"]))
   let t3523 = @list.List([@tactics.all_tac, @tactics.then_tac(@ssreflect.move_(@list.List(["n"])), t3522)])
   let t3565 = @list.List([@ssreflect.thenl_first(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x3521 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x3520 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x3520), x3521), @ssreflect.clear_assumption("n")), @ssreflect.elim), t3523))(t3536), t3564])
-  expn_mull_c.set(@sections.section_proof(@list.List(["m1", "m2", "n"]), @parser.parse_term("(m1 * m2) ^ n = m1 ^ n * m2 ^ n"), t3565))
+  expn_mull_c.set(@sections.section_proof(@list.List(["m1", "m2", "n"]), @term_syntax.parse_term("EXP((m1 : Num) * (m2 : Num), (n : Num)) == EXP(m1, n) * EXP(m2, n)"), t3565))
 }
 
 ///|
@@ -6370,7 +6370,7 @@ fn step_213() -> Unit raise {
   let t3568 = @ssreflect.move_(@list.List(["IHn"]))
   let t3569 = @list.List([@tactics.all_tac, @tactics.then_tac(@ssreflect.move_(@list.List(["n1"])), t3568)])
   let t3626 = @list.List([@ssreflect.thenl_first(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x3567 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n1", @list.List([])), (x3566 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x3566), x3567), @ssreflect.clear_assumption("n1")), @ssreflect.elim), t3569))(t3594), t3625])
-  expn_mulr_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("m ^ (n1 * n2) = (m ^ n1) ^ n2"), t3626))
+  expn_mulr_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("EXP((m : Num), (n1 : Num) * (n2 : Num)) == EXP(EXP(m, n1), n2)"), t3626))
 }
 
 ///|
@@ -6434,7 +6434,7 @@ fn step_214() -> Unit raise {
   let t3634 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac((x3631 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x3630 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x3630), x3631), @ssreflect.clear_assumption("n")), @ssreflect.elim), t3633)
   let t3629 = @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["m"]))])
   let t3687 = @list.List([@ssreflect.thenl_first(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x3628 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("m", @list.List([])), (x3627 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x3627), x3628), @ssreflect.clear_assumption("m")), @ssreflect.case), t3629), t3634))(t3641), t3686, t3685, t3684])
-  expn_gt0_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(0 < m ^ n) <=> (0 < m) \\/ (n = 0)"), t3687))
+  expn_gt0_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(0 < EXP((m : Num), (n : Num))) == (0 < m || n == 0)"), t3687))
 }
 
 ///|
@@ -6470,7 +6470,7 @@ fn step_215() -> Unit raise {
     }
   })
   let t3713 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x3693 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn0Ngt", @list.List([eqn0ngt()])), t3692, x3693)), (x3699 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("expn_gt0", @list.List([expn_gt0()])), t3698, x3699)), (x3705 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("negb_or", @list.List([@ssrbool.negb_or()])), t3704, x3705)), (x3712 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("lt0n", @list.List([lt0n()])), (x3711 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t3710, x3711), x3712)), @ssreflect.done_tac)])
-  expn_eq0_c.set(@sections.section_proof(@list.List(["m", "e"]), @parser.parse_term("(m ^ e = 0) <=> (m = 0) /\\ (0 < e)"), t3713))
+  expn_eq0_c.set(@sections.section_proof(@list.List(["m", "e"]), @term_syntax.parse_term("(EXP((m : Num), (e : Num)) == 0) == (m == 0 && 0 < e)"), t3713))
 }
 
 ///|
@@ -6573,7 +6573,7 @@ fn step_216() -> Unit raise {
   let t3716 = @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["n"]))])
   let t3717 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac((x3715 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x3714 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x3714), x3715), @ssreflect.clear_assumption("n")), @ssreflect.elim), t3716)
   let t3809 = @list.List([@ssreflect.thenl_first(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m_gt1"]))), t3717))(t3724), t3808, t3807, t3806, t3805])
-  ltn_expl_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("1 < m ==> n < m ^ n"), t3809))
+  ltn_expl_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("1 < (m : Num) → (n : Num) < EXP(m, n)"), t3809))
 }
 
 ///|
@@ -6724,7 +6724,7 @@ fn step_217() -> Unit raise {
   let t3814 = @ssreflect.clear_assumption("n1")
   let t3817 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x3811 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n2", @list.List([])), (x3810 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x3810), x3811), @ssreflect.clear_assumption("n2")), (x3813 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n1", @list.List([])), (x3812 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x3812), x3813)), t3814), @ssreflect.elim), t3816)
   let t3827 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m_gt1"]))), t3817), t3818), t3826)
-  leq_exp2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("1 < m ==> (m ^ n1 <= m ^ n2 <=> n1 <= n2)"), @list.List([(x3828 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.thenl_rot((-1L), t3827, x3828), t3979, t3978, t3977, t3976, t3975, t3974])))
+  leq_exp2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("1 < (m : Num) → (EXP(m, (n1 : Num)) <= EXP(m, (n2 : Num))) == (n1 <= n2)"), @list.List([(x3828 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.thenl_rot((-1L), t3827, x3828), t3979, t3978, t3977, t3976, t3975, t3974])))
 }
 
 ///|
@@ -6751,7 +6751,7 @@ fn step_218() -> Unit raise {
   })
   let t3992 = @tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x3985 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltnNge", @list.List([ltnnge()])), t3984, x3985)), (x3991 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_exp2l", @list.List([leq_exp2l()])), t3990, x3991))
   let t3993 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m_gt1"]))), t3992), @ssreflect.done_tac)])
-  ltn_exp2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("1 < m ==> (m ^ n1 < m ^ n2 <=> n1 < n2)"), t3993))
+  ltn_exp2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("1 < (m : Num) → (EXP(m, (n1 : Num)) < EXP(m, (n2 : Num))) == (n1 < n2)"), t3993))
 }
 
 ///|
@@ -6779,7 +6779,7 @@ fn step_219() -> Unit raise {
   })
   let t4007 = @tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x3999 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_leq", @list.List([eqn_leq()])), t3998, x3999)), t4006)
   let t4008 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m_gt1"]))), t4007), @ssreflect.done_tac)])
-  eqn_exp2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("1 < m ==> (m ^ n1 = m ^ n2 <=> n1 = n2)"), t4008))
+  eqn_exp2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("1 < (m : Num) → (EXP(m, (n1 : Num)) == EXP(m, (n2 : Num))) == (n1 == n2)"), t4008))
 }
 
 ///|
@@ -6802,7 +6802,7 @@ fn step_220() -> Unit raise {
   let t4010 = @ssreflect.move_(@list.List(["e2"]))
   let t4009 = @ssreflect.move_(@list.List(["e1"]))
   let t4017 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m_gt1"]))), t4009), t4010), (x4016 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_exp2l", @list.List([eqn_exp2l()])), t4015, x4016)), @ssreflect.done_tac)])
-  expni_c.set(@sections.section_proof(@list.List(["m"]), @parser.parse_term("1 < m ==> forall e1 e2. m ^ e1 = m ^ e2 ==> e1 = e2"), t4017))
+  expni_c.set(@sections.section_proof(@list.List(["m"]), @term_syntax.parse_term("1 < (m : Num) → (∀ e1 : Num, ∀ e2 : Num, EXP(m, e1) == EXP(m, e2) → e1 == e2)"), t4017))
 }
 
 ///|
@@ -6850,7 +6850,7 @@ fn step_221() -> Unit raise {
   let t4028 = @tactics.then_tac(@ssreflect.repeat_tactic(0L, 10L, (x4026 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltn0", @list.List([ltn0()])), t4025, x4026)), t4027)
   let t4020 = @list.List([@tactics.all_tac, @tactics.thenl(@ssreflect.case, @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["m"]))]))])
   let t4058 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x4019 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("m", @list.List([])), (x4018 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4018), x4019), @ssreflect.clear_assumption("m")), @ssreflect.case), t4020), t4028), t4057), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  leq_pexp2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("0 < m ==> n1 <= n2 ==> m ^ n1 <= m ^ n2"), t4058))
+  leq_pexp2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("0 < (m : Num) → (n1 : Num) <= (n2 : Num) → EXP(m, n1) <= EXP(m, n2)"), t4058))
 }
 
 ///|
@@ -6891,7 +6891,7 @@ fn step_222() -> Unit raise {
   let t4069 = @tactics.then_tac(@ssreflect.repeat_tactic(0L, 10L, (x4067 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltn0", @list.List([ltn0()])), t4066, x4067)), t4068)
   let t4061 = @list.List([@tactics.all_tac, @tactics.thenl(@ssreflect.case, @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["m"]))]))])
   let t4091 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x4060 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("m", @list.List([])), (x4059 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4059), x4060), @ssreflect.clear_assumption("m")), @ssreflect.case), t4061), t4069), t4090), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  ltn_pexp2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @parser.parse_term("0 < m ==> m ^ n1 < m ^ n2 ==> n1 < n2"), t4091))
+  ltn_pexp2l_c.set(@sections.section_proof(@list.List(["m", "n1", "n2"]), @term_syntax.parse_term("0 < (m : Num) → EXP(m, (n1 : Num)) < EXP(m, (n2 : Num)) → n1 < n2"), t4091))
 }
 
 ///|
@@ -6993,7 +6993,7 @@ fn step_223() -> Unit raise {
   let t4197 = @tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x4098 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltnNge", @list.List([ltnnge()])), t4097, x4098)), t4105)
   let t4092 = @tactics.thenl(@ssreflect.split_tac, @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["ltmn"]))]))
   let t4198 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["e_gt0"]))), t4092), t4197, t4196, t4195, t4194, t4193])
-  ltn_exp2r_c.set(@sections.section_proof(@list.List(["m", "n", "e"]), @parser.parse_term("0 < e ==> (m ^ e < n ^ e <=> m < n)"), t4198))
+  ltn_exp2r_c.set(@sections.section_proof(@list.List(["m", "n", "e"]), @term_syntax.parse_term("0 < (e : Num) → (EXP((m : Num), e) < EXP((n : Num), e)) == (m < n)"), t4198))
 }
 
 ///|
@@ -7026,7 +7026,7 @@ fn step_224() -> Unit raise {
   })
   let t4219 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x4204 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqNgt", @list.List([leqngt()])), t4203, x4204), (x4210 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltn_exp2r", @list.List([ltn_exp2r()])), t4209, x4210)), t4211), (x4218 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqNgt", @list.List([leqngt()])), (x4217 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t4216, x4217), x4218))
   let t4220 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["e_gt0"]))), t4219), @ssreflect.done_tac)])
-  leq_exp2r_c.set(@sections.section_proof(@list.List(["m", "n", "e"]), @parser.parse_term("0 < e ==> (m ^ e <= n ^ e <=> m <= n)"), t4220))
+  leq_exp2r_c.set(@sections.section_proof(@list.List(["m", "n", "e"]), @term_syntax.parse_term("0 < (e : Num) → (EXP((m : Num), e) <= EXP((n : Num), e)) == (m <= n)"), t4220))
 }
 
 ///|
@@ -7054,7 +7054,7 @@ fn step_225() -> Unit raise {
   })
   let t4234 = @tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x4226 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_leq", @list.List([eqn_leq()])), t4225, x4226)), t4233)
   let t4235 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["e_gt0"]))), t4234), @ssreflect.done_tac)])
-  eqn_exp2r_c.set(@sections.section_proof(@list.List(["m", "n", "e"]), @parser.parse_term("0 < e ==> (m ^ e = n ^ e <=> m = n)"), t4235))
+  eqn_exp2r_c.set(@sections.section_proof(@list.List(["m", "n", "e"]), @term_syntax.parse_term("0 < (e : Num) → (EXP((m : Num), e) == EXP((n : Num), e)) == (m == n)"), t4235))
 }
 
 ///|
@@ -7077,7 +7077,7 @@ fn step_226() -> Unit raise {
   let t4237 = @ssreflect.move_(@list.List(["n"]))
   let t4236 = @ssreflect.move_(@list.List(["m"]))
   let t4244 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["e_gt0"]))), t4236), t4237), (x4243 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_exp2r", @list.List([eqn_exp2r()])), t4242, x4243)), @ssreflect.done_tac)])
-  expin_c.set(@sections.section_proof(@list.List(["e"]), @parser.parse_term("0 < e ==> forall m n. m ^ e = n ^ e ==> m = n"), t4244))
+  expin_c.set(@sections.section_proof(@list.List(["e"]), @term_syntax.parse_term("0 < (e : Num) → (∀ m : Num, ∀ n : Num, EXP(m, e) == EXP(n, e) → m == n)"), t4244))
 }
 
 ///|
@@ -7096,7 +7096,7 @@ fn step_227() -> Unit raise {
     let arg = x4245
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg)]))
   }, x4247), @ssreflect.done_tac)])
-  fact0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("FACT 0 = 1"), t4248))
+  fact0_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("FACT(0) == 1"), t4248))
 }
 
 ///|
@@ -7115,7 +7115,7 @@ fn step_228() -> Unit raise {
     let arg = x4249
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg)]))
   }, x4251), @ssreflect.done_tac)])
-  facts_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("FACT (SUC n)  = (SUC n) * FACT n"), t4252))
+  facts_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("FACT(SUC((n : Num))) == SUC(n) * FACT(n)"), t4252))
 }
 
 ///|
@@ -7139,7 +7139,7 @@ fn step_229() -> Unit raise {
   }, x4261)))
   let t4255 = @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["n"]))])
   let t4263 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x4254 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x4253 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4253), x4254), @ssreflect.clear_assumption("n")), @ssreflect.elim), t4255), t4262), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  fact_gt0_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("0 < FACT n"), t4263))
+  fact_gt0_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("0 < FACT((n : Num))"), t4263))
 }
 
 ///|
@@ -7154,7 +7154,7 @@ pub fn fact_gt0() -> @kernel.Thm {
 ///|
 /// odd
 fn step_230() -> Unit raise {
-  odd_c.set(@kernel.new_basic_definition(@parser.parse_term("odd = ODD")))
+  odd_c.set(@kernel.new_basic_definition(@term_syntax.parse_term("(odd : (Num) -> Bool) == ODD")))
 }
 
 ///|
@@ -7179,7 +7179,7 @@ fn step_231() -> Unit raise {
     }
   })
   let t4274 = @list.List([@tactics.then_tac(@tactics.then_tac((x4269 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("odd", @list.List([odd()])), t4268, x4269), t4273), @ssreflect.done_tac)])
-  odd0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("odd 0 = F"), t4274))
+  odd0_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("odd(0) == false"), t4274))
 }
 
 ///|
@@ -7201,7 +7201,7 @@ fn step_232() -> Unit raise {
     let arg_1 = x4278
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg_1)]))
   }, x4280)), @ssreflect.done_tac)])
-  odds_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("odd (SUC n) = ~odd n"), t4281))
+  odds_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("odd(SUC((n : Num))) == !odd(n)"), t4281))
 }
 
 ///|
@@ -7232,7 +7232,7 @@ fn step_233() -> Unit raise {
     }
   })
   let t4300 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x4287 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ONE", @list.List([@arith.one()])), t4286, x4287), (x4293 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("oddS", @list.List([odds()])), t4292, x4293)), (x4299 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("odd0", @list.List([odd0()])), t4298, x4299)), @ssreflect.done_tac)])
-  odd1_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("odd 1 = T"), t4300))
+  odd1_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("odd(1) == true"), t4300))
 }
 
 ///|
@@ -7298,7 +7298,7 @@ fn step_234() -> Unit raise {
   let t4303 = @ssreflect.move_(@list.List(["IHn"]))
   let t4304 = @list.List([@tactics.all_tac, @tactics.then_tac(@ssreflect.move_(@list.List(["m"])), t4303)])
   let t4363 = @list.List([@ssreflect.thenl_first(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x4302 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("m", @list.List([])), (x4301 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4301), x4302), @ssreflect.clear_assumption("m")), @ssreflect.elim), t4304))(t4323), t4362])
-  odd_add_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("odd (m + n) = odd m + odd n"), t4363))
+  odd_add_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("odd((m : Num) + (n : Num)) == odd(m) + odd(n)"), t4363))
 }
 
 ///|
@@ -7341,7 +7341,7 @@ fn step_235() -> Unit raise {
       let fst_arg = x4366
       (fn(x4368 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_1 = x4368
-        arg_tac_1(@ssreflect.ArgType::Arg_term(@parser.parse_term("odd n")))
+        arg_tac_1(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("odd((n : Num))")))
       })(fn(x4370 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg = x4370
         (x4372 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac, fst_arg, snd_arg, x4372)
@@ -7349,7 +7349,7 @@ fn step_235() -> Unit raise {
     }, x4373)
   })((x4374 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4374)), t4377)
   let t4400 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["le_nm"]))), t4378), t4399), @ssreflect.done_tac)])
-  odd_sub_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("n <= m ==> odd (m - n) = odd m + odd n"), t4400))
+  odd_sub_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(n : Num) <= (m : Num) → odd(m - n) == odd(m) + odd(n)"), t4400))
 }
 
 ///|
@@ -7399,7 +7399,7 @@ fn step_236() -> Unit raise {
   })), (x4428 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("oddm", @list.List([])), t4427, x4428)), (x4434 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addFb", @list.List([@ssrbool.addfb()])), t4433, x4434)), @ssreflect.done_tac)
   let t4401 = @ssreflect.move_(@list.List(["lt_im"]))
   let t4436 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["oddm"]))), t4401), t4435])
-  odd_opp_c.set(@sections.section_proof(@list.List(["i", "m"]), @parser.parse_term("odd m = F ==> i < m ==> odd (m - i) = odd i"), t4436))
+  odd_opp_c.set(@sections.section_proof(@list.List(["i", "m"]), @term_syntax.parse_term("odd((m : Num)) == false → (i : Num) < m → odd(m - i) == odd(i)"), t4436))
 }
 
 ///|
@@ -7469,7 +7469,7 @@ fn step_237() -> Unit raise {
   let t4439 = @ssreflect.move_(@list.List(["IHm"]))
   let t4440 = @list.List([@tactics.all_tac, @tactics.then_tac(@ssreflect.move_(@list.List(["m"])), t4439)])
   let t4505 = @list.List([@ssreflect.thenl_first(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x4438 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("m", @list.List([])), (x4437 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4437), x4438), @ssreflect.clear_assumption("m")), @ssreflect.elim), t4440))(t4459), t4504])
-  odd_mul_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("odd (m * n) <=> odd m /\\ odd n"), t4505))
+  odd_mul_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("odd((m : Num) * (n : Num)) == (odd(m) && odd(n))"), t4505))
 }
 
 ///|
@@ -7491,7 +7491,7 @@ fn step_238() -> Unit raise {
   let t4576 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x4567 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("IHn", @list.List([])), (x4566 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4566), x4567), @ssreflect.clear_assumption("IHn")), (x4569 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b_def", @list.List([])), (x4568 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4568), x4569)), t4570), @tactics.beta_tac), t4571), t4572)
   let t4577 = (fn(x4560 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac_1 = x4560
-    arg_tac_1(@ssreflect.ArgType::Arg_term(@parser.parse_term("odd m")))
+    arg_tac_1(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("odd((m : Num))")))
   })(@ssreflect.term_tac(fn(x4564 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x4565 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x4562 : @kernel.Term, x4563 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.set_tac("b", x4562, x4563))(x4564, x4565)
@@ -7504,7 +7504,7 @@ fn step_238() -> Unit raise {
   })
   let t4553 = (fn(x4547 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x4547
-    arg_tac(@ssreflect.ArgType::Arg_theorem(@int.arith_rule(@parser.parse_term("SUC n = 0 <=> F"))))
+    arg_tac(@ssreflect.ArgType::Arg_theorem(@int.arith_rule(@term_syntax.parse_term("(SUC((n : Num)) == 0) == false"))))
   })(@ssreflect.thm_tac(fn(x4551 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x4552 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x4549 : @kernel.Thm, x4550 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x4549, x4550))(x4551, x4552)
@@ -7545,7 +7545,7 @@ fn step_238() -> Unit raise {
   let t4508 = @ssreflect.move_(@list.List(["IHn"]))
   let t4509 = @list.List([@tactics.all_tac, @tactics.then_tac(@ssreflect.move_(@list.List(["n"])), t4508)])
   let t4579 = @list.List([@ssreflect.thenl_first(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x4507 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x4506 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4506), x4507), @ssreflect.clear_assumption("n")), @ssreflect.elim), t4509))(t4522), t4578, t4577, t4576, t4575])
-  odd_exp_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("odd (m ^ n) <=> (n = 0) \\/ odd m"), t4579))
+  odd_exp_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("odd(EXP((m : Num), (n : Num))) == (n == 0 || odd(m))"), t4579))
 }
 
 ///|
@@ -7560,7 +7560,7 @@ pub fn odd_exp() -> @kernel.Thm {
 ///|
 /// double
 fn step_239() -> Unit raise {
-  double_c.set(@define.define_(@parser.parse_term("double 0 = 0 /\\ (forall n. double (SUC n) = SUC (SUC (double n)))")))
+  double_c.set(@define.define_(@term_syntax.parse_term("(double : (Num) -> Num)(0) == 0 && (∀ n : Num, double(SUC(n)) == SUC(SUC(double(n))))")))
 }
 
 ///|
@@ -7579,7 +7579,7 @@ fn step_240() -> Unit raise {
     let arg = x4580
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg)]))
   }, x4582), @ssreflect.done_tac)])
-  double0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("double 0 = 0"), t4583))
+  double0_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("double(0) == 0"), t4583))
 }
 
 ///|
@@ -7598,7 +7598,7 @@ fn step_241() -> Unit raise {
     let arg = x4584
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg)]))
   }, x4586), @ssreflect.done_tac)])
-  doubles_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("double (SUC n) = SUC (SUC (double n))"), t4587))
+  doubles_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("double(SUC((n : Num))) == SUC(SUC(double(n)))"), t4587))
 }
 
 ///|
@@ -7648,7 +7648,7 @@ fn step_242() -> Unit raise {
   let t4590 = @ssreflect.move_(@list.List(["IHn"]))
   let t4591 = @list.List([@tactics.all_tac, @tactics.then_tac(@ssreflect.move_(@list.List(["n"])), t4590)])
   let t4630 = @list.List([@ssreflect.thenl_first(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x4589 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x4588 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4588), x4589), @ssreflect.clear_assumption("n")), @ssreflect.elim), t4591))(t4604), t4629])
-  addnn_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("n + n = double n"), t4630))
+  addnn_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("(n : Num) + n == double(n)"), t4630))
 }
 
 ///|
@@ -7680,13 +7680,13 @@ fn step_243() -> Unit raise {
   })
   let t4655 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((fn(x4631 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x4631
-    arg_tac(@ssreflect.ArgType::Arg_theorem(@int.arith_rule(@parser.parse_term("2 = SUC 1"))))
+    arg_tac(@ssreflect.ArgType::Arg_theorem(@int.arith_rule(@term_syntax.parse_term("2 == SUC(1)"))))
   })(@ssreflect.thm_tac(fn(x4635 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x4636 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x4633 : @kernel.Thm, x4634 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x4633, x4634))(x4635, x4636)
     }
   })), (x4642 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulSn", @list.List([mulsn()])), t4641, x4642)), (x4648 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mul1n", @list.List([mul1n()])), t4647, x4648)), (x4654 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnn", @list.List([addnn()])), t4653, x4654)), @ssreflect.done_tac)])
-  mul2n_c.set(@sections.section_proof(@list.List(["m"]), @parser.parse_term("2 * m = double m"), t4655))
+  mul2n_c.set(@sections.section_proof(@list.List(["m"]), @term_syntax.parse_term("2 * (m : Num) == double(m)"), t4655))
 }
 
 ///|
@@ -7712,7 +7712,7 @@ fn step_244() -> Unit raise {
     }
   })
   let t4668 = @list.List([@tactics.then_tac(@tactics.then_tac((x4661 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnC", @list.List([mulnc()])), t4660, x4661), (x4667 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mul2n", @list.List([mul2n()])), t4666, x4667)), @ssreflect.done_tac)])
-  muln2_c.set(@sections.section_proof(@list.List(["m"]), @parser.parse_term("m * 2 = double m"), t4668))
+  muln2_c.set(@sections.section_proof(@list.List(["m"]), @term_syntax.parse_term("(m : Num) * 2 == double(m)"), t4668))
 }
 
 ///|
@@ -7727,7 +7727,7 @@ pub fn muln2() -> @kernel.Thm {
 ///|
 /// double_add
 fn step_245() -> Unit raise {
-  let t4693 = @list.List([@parser.parse_term("n + _1")])
+  let t4693 = @list.List([@term_syntax.parse_term("(n : Num) + (_1 : Num)")])
   let t4698 = (fn(x4684 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x4684
     (x4692 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnCA", @list.List([addnca()])), fn(x4686 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -7754,7 +7754,7 @@ fn step_245() -> Unit raise {
     }
   })
   let t4699 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x4675 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnn", @list.List([addnn()])), (x4674 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t4673, x4674), x4675)), t4683), t4698), @ssreflect.done_tac)])
-  double_add_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("double (m + n) = double m + double n"), t4699))
+  double_add_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("double((m : Num) + (n : Num)) == double(m) + double(n)"), t4699))
 }
 
 ///|
@@ -7822,7 +7822,7 @@ fn step_246() -> Unit raise {
   let t4706 = @list.List([@tactics.all_tac, @tactics.then_tac(@ssreflect.move_(@list.List(["m"])), t4705)])
   let t4704 = @ssreflect.clear_assumption("m")
   let t4764 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x4701 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x4700 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4700), x4701), @ssreflect.clear_assumption("n")), (x4703 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("m", @list.List([])), (x4702 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4702), x4703)), t4704), @ssreflect.elim), t4706), t4707), t4743), t4763])
-  double_sub_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("double (m - n) = double m - double n"), t4764))
+  double_sub_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("double((m : Num) - (n : Num)) == double(m) - double(n)"), t4764))
 }
 
 ///|
@@ -7845,7 +7845,7 @@ fn step_247() -> Unit raise {
   let t4781 = @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["n"]))])
   let t4782 = @tactics.thenl(@tactics.then_tac((fn(x4778 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x4778
-    arg_tac(@ssreflect.ArgType::Arg_term(@parser.parse_term("m - n")))
+    arg_tac(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(m : Num) - (n : Num)")))
   })((x4780 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4780)), @ssreflect.case), t4781)
   let t4775 = @ssreflect.thm_tac(fn(x4773 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x4774 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -7858,7 +7858,7 @@ fn step_247() -> Unit raise {
     }
   })
   let t4789 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x4770 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqE", @list.List([leqe()])), t4769, x4770)), (x4777 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("double_sub", @list.List([double_sub()])), (x4776 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t4775, x4776), x4777)), t4782), (x4788 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("double", @list.List([double()])), t4787, x4788)), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  leq_double_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(double m <= double n <=> m <= n)"), t4789))
+  leq_double_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(double((m : Num)) <= double((n : Num))) == (m <= n)"), t4789))
 }
 
 ///|
@@ -7884,7 +7884,7 @@ fn step_248() -> Unit raise {
     }
   })
   let t4802 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(2L, 0L, (x4795 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltnNge", @list.List([ltnnge()])), t4794, x4795)), (x4801 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_double", @list.List([leq_double()])), t4800, x4801)), @ssreflect.done_tac)])
-  ltn_double_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(double m < double n) = (m < n)"), t4802))
+  ltn_double_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(double((m : Num)) < double((n : Num))) == (m < n)"), t4802))
 }
 
 ///|
@@ -7905,7 +7905,7 @@ fn step_249() -> Unit raise {
     }
   })
   let t4810 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x4809 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("muln2", @list.List([muln2()])), (x4808 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t4807, x4808), x4809)), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  ltn_sdouble_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(SUC (double m) < double n) = (m < n)"), t4810))
+  ltn_sdouble_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(SUC(double((m : Num))) < double((n : Num))) == (m < n)"), t4810))
 }
 
 ///|
@@ -7936,7 +7936,7 @@ fn step_250() -> Unit raise {
     }
   })
   let t4830 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x4816 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqNgt", @list.List([leqngt()])), t4815, x4816), (x4822 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltn_Sdouble", @list.List([ltn_sdouble()])), t4821, x4822)), (x4829 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqNgt", @list.List([leqngt()])), (x4828 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t4827, x4828), x4829)), @ssreflect.done_tac)])
-  leq_sdouble_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(double m <= SUC (double n)) = (m <= n)"), t4830))
+  leq_sdouble_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(double((m : Num)) <= SUC(double((n : Num)))) == (m <= n)"), t4830))
 }
 
 ///|
@@ -7967,7 +7967,7 @@ fn step_251() -> Unit raise {
     }
   })
   let t4850 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x4837 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnn", @list.List([addnn()])), (x4836 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t4835, x4836), x4837), (x4843 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("odd_add", @list.List([odd_add()])), t4842, x4843)), (x4849 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addbb", @list.List([@ssrbool.addbb()])), t4848, x4849)), @ssreflect.done_tac)])
-  odd_double_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("odd (double n) = F"), t4850))
+  odd_double_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("odd(double((n : Num))) == false"), t4850))
 }
 
 ///|
@@ -7996,7 +7996,7 @@ fn step_252() -> Unit raise {
   let t4867 = @tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(0L, 10L, (x4859 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("double0", @list.List([double0()])), t4858, x4859)), t4860), (x4866 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("doubleS", @list.List([doubles()])), t4865, x4866))
   let t4853 = @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["n"]))])
   let t4868 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x4852 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x4851 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4851), x4852), @ssreflect.clear_assumption("n")), @ssreflect.case), t4853), t4867), @ssreflect.arith_tac)])
-  double_gt0_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("(0 < double n) = (0 < n)"), t4868))
+  double_gt0_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("(0 < double((n : Num))) == (0 < n)"), t4868))
 }
 
 ///|
@@ -8025,7 +8025,7 @@ fn step_253() -> Unit raise {
   let t4885 = @tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(0L, 10L, (x4877 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("double0", @list.List([double0()])), t4876, x4877)), t4878), (x4884 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("doubleS", @list.List([doubles()])), t4883, x4884))
   let t4871 = @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["n"]))])
   let t4886 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x4870 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x4869 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4869), x4870), @ssreflect.clear_assumption("n")), @ssreflect.case), t4871), t4885), @ssreflect.arith_tac)])
-  double_eq0_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("(double n = 0) = (n = 0)"), t4886))
+  double_eq0_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("(double((n : Num)) == 0) == (n == 0)"), t4886))
 }
 
 ///|
@@ -8051,7 +8051,7 @@ fn step_254() -> Unit raise {
     }
   })
   let t4900 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x4893 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mul2n", @list.List([mul2n()])), (x4892 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t4891, x4892), x4893)), (x4899 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnA", @list.List([mulna()])), t4898, x4899)), @ssreflect.done_tac)])
-  double_mull_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("double (m * n) = double m * n"), t4900))
+  double_mull_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("double((m : Num) * (n : Num)) == double(m) * n"), t4900))
 }
 
 ///|
@@ -8077,7 +8077,7 @@ fn step_255() -> Unit raise {
     }
   })
   let t4914 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x4907 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("muln2", @list.List([muln2()])), (x4906 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t4905, x4906), x4907)), (x4913 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnA", @list.List([mulna()])), t4912, x4913)), @ssreflect.done_tac)])
-  double_mulr_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("double (m * n) = m * double n"), t4914))
+  double_mulr_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("double((m : Num) * (n : Num)) == m * double(n)"), t4914))
 }
 
 ///|
@@ -8092,7 +8092,7 @@ pub fn double_mulr() -> @kernel.Thm {
 ///|
 /// half_def
 fn step_256() -> Unit raise {
-  half_def_c.set(@define.define_(@parser.parse_term("HALF 0 = (0, 0) /\\\n        forall n. HALF (SUC n) = (SND (HALF n), SUC (FST (HALF n)))")))
+  half_def_c.set(@define.define_(@term_syntax.parse_term("(HALF : (Num) -> (Num, Num))(0) == (0, 0) && (∀ n : Num, HALF(SUC(n)) == (SND(HALF(n)), SUC(FST(HALF(n)))))")))
 }
 
 ///|
@@ -8107,7 +8107,7 @@ pub fn half_def() -> @kernel.Thm {
 ///|
 /// half
 fn step_257() -> Unit raise {
-  half_c.set(@kernel.new_basic_definition(@parser.parse_term("half = FST o HALF")))
+  half_c.set(@kernel.new_basic_definition(@term_syntax.parse_term("(half : (Num) -> Num) == o(FST, HALF)")))
 }
 
 ///|
@@ -8122,7 +8122,7 @@ pub fn half() -> @kernel.Thm {
 ///|
 /// uphalf
 fn step_258() -> Unit raise {
-  uphalf_c.set(@kernel.new_basic_definition(@parser.parse_term("uphalf = SND o HALF")))
+  uphalf_c.set(@kernel.new_basic_definition(@term_syntax.parse_term("(uphalf : (Num) -> Num) == o(SND, HALF)")))
 }
 
 ///|
@@ -8147,7 +8147,7 @@ fn step_259() -> Unit raise {
     let arg_2 = x4921
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg_2)]))
   }, x4923)), @ssreflect.done_tac)])
-  half0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("half 0 = 0"), t4924))
+  half0_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("half(0) == 0"), t4924))
 }
 
 ///|
@@ -8172,7 +8172,7 @@ fn step_260() -> Unit raise {
     let arg_2 = x4931
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg_2)]))
   }, x4933)), @ssreflect.done_tac)])
-  uphalf0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("uphalf 0 = 0"), t4934))
+  uphalf0_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("uphalf(0) == 0"), t4934))
 }
 
 ///|
@@ -8200,7 +8200,7 @@ fn step_261() -> Unit raise {
     let arg_3 = x4944
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg_3)]))
   }, x4946)), @ssreflect.done_tac)])
-  halfs_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("half (SUC n) = uphalf n"), t4947))
+  halfs_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("half(SUC((n : Num))) == uphalf(n)"), t4947))
 }
 
 ///|
@@ -8228,7 +8228,7 @@ fn step_262() -> Unit raise {
     let arg_3 = x4957
     @simp.once_rewrite_tac(@list.List([@ssreflect.get_arg_thm(arg_3)]))
   }, x4959)), @ssreflect.done_tac)])
-  uphalfs_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("uphalf (SUC n) = SUC (half n)"), t4960))
+  uphalfs_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("uphalf(SUC((n : Num))) == SUC(half(n))"), t4960))
 }
 
 ///|
@@ -8282,7 +8282,7 @@ fn step_263() -> Unit raise {
   let t4976 = @tactics.then_tac(@tactics.then_tac((x4969 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("double0", @list.List([double0()])), t4968, x4969), (x4975 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("half0", @list.List([half0()])), t4974, x4975)), @ssreflect.done_tac)
   let t4963 = @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["n"]))])
   let t5004 = @list.List([@ssreflect.thenl_first(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x4962 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("x", @list.List([])), (x4961 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x4961), x4962), @ssreflect.clear_assumption("x")), @ssreflect.elim), t4963))(t4976), t5003])
-  doublek_c.set(@sections.section_proof(@list.List(["x"]), @parser.parse_term("half (double x) = x"), t5004))
+  doublek_c.set(@sections.section_proof(@list.List(["x"]), @term_syntax.parse_term("half(double((x : Num))) == x"), t5004))
 }
 
 ///|
@@ -8322,13 +8322,13 @@ fn step_265() -> Unit raise {
       ((x5025 : @kernel.Thm, x5026 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x5025, x5026))(x5027, x5028)
     }
   }))
-  let t5014 = @list.List([@parser.parse_term("n")])
+  let t5014 = @list.List([@term_syntax.parse_term("(n : _)")])
   let t5019 = @ssreflect.thm_tac(fn(x5017 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x5018 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x5015 : @kernel.Thm, x5016 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([2L]), t5014, x5015, x5016))(x5017, x5018)
     }
   })
-  let t5006 = @list.List([@parser.parse_term("m")])
+  let t5006 = @list.List([@term_syntax.parse_term("(m : _)")])
   let t5011 = @ssreflect.thm_tac(fn(x5009 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x5010 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x5007 : @kernel.Thm, x5008 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([2L]), t5006, x5007, x5008))(x5009, x5010)
@@ -8337,7 +8337,7 @@ fn step_265() -> Unit raise {
   let t5030 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x5013 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("doubleK", @list.List([doublek()])), (x5012 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t5011, x5012), x5013), (x5021 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("doubleK", @list.List([doublek()])), (x5020 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t5019, x5020), x5021)), t5029), @ssreflect.done_tac)
   let t5005 = @ssreflect.move_(@list.List(["n"]))
   let t5031 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t5005), t5030])
-  double_inj_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. double m = double n ==> m = n"), t5031))
+  double_inj_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("∀ m : Num, ∀ n : Num, double(m) == double(n) → m == n"), t5031))
 }
 
 ///|
@@ -8391,7 +8391,7 @@ fn step_266() -> Unit raise {
   let t5047 = @tactics.then_tac(@tactics.then_tac((x5040 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("double0", @list.List([double0()])), t5039, x5040), (x5046 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("uphalf0", @list.List([uphalf0()])), t5045, x5046)), @ssreflect.done_tac)
   let t5034 = @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["n"]))])
   let t5075 = @list.List([@ssreflect.thenl_first(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x5033 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x5032 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x5032), x5033), @ssreflect.clear_assumption("n")), @ssreflect.elim), t5034))(t5047), t5074])
-  uphalf_double_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("uphalf (double n) = n"), t5075))
+  uphalf_double_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("uphalf(double((n : Num))) == n"), t5075))
 }
 
 ///|
@@ -8428,7 +8428,7 @@ fn step_267() -> Unit raise {
   })), (x5156 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add1n", @list.List([add1n()])), t5155, x5156))
   let t5158 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((fn(x5135 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x5135
-    arg_tac(@ssreflect.ArgType::Arg_term(@parser.parse_term("odd n")))
+    arg_tac(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("odd((n : Num))")))
   })((x5137 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x5137)), @ssreflect.case), @ssreflect.simp_tac), t5157), @ssreflect.done_tac)
   let t5133 = @ssreflect.thm_tac(fn(x5131 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x5132 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -8480,7 +8480,7 @@ fn step_267() -> Unit raise {
   let t5078 = @ssreflect.move_(@list.List(["IHn"]))
   let t5079 = @list.List([@tactics.all_tac, @tactics.then_tac(@ssreflect.move_(@list.List(["n"])), t5078)])
   let t5160 = @list.List([@ssreflect.thenl_first(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x5077 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x5076 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x5076), x5077), @ssreflect.clear_assumption("n")), @ssreflect.elim), t5079))(t5104), t5159, t5158])
-  uphalf_half_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("uphalf n = (if odd n then 1 else 0) + half n"), t5160))
+  uphalf_half_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("uphalf((n : Num)) == (if odd(n) { 1 } else { 0 }) + half(n)"), t5160))
 }
 
 ///|
@@ -8540,7 +8540,7 @@ fn step_268() -> Unit raise {
   let t5277 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(0L, 10L, (x5232 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("double0", @list.List([double0()])), t5231, x5232)), (x5238 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add0n", @list.List([add0n()])), t5237, x5238)), (x5244 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add1n", @list.List([add1n()])), t5243, x5244)), t5245), (x5251 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ONE", @list.List([@arith.one()])), t5250, x5251)), (x5257 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("doubleS", @list.List([doubles()])), t5256, x5257)), t5264), (x5270 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("double0", @list.List([double0()])), t5269, x5270)), (x5276 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add0n", @list.List([add0n()])), t5275, x5276))
   let t5278 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((fn(x5224 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x5224
-    arg_tac(@ssreflect.ArgType::Arg_term(@parser.parse_term("odd n")))
+    arg_tac(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("odd((n : Num))")))
   })((x5226 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x5226)), @ssreflect.case), @ssreflect.simp_tac), t5277), @ssreflect.done_tac)
   let t5223 = @ssreflect.move_(@list.List(["_"]))
   let t5279 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x5222 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("IHn", @list.List([])), (x5221 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x5221), x5222), @ssreflect.clear_assumption("IHn")), @tactics.beta_tac), t5223)
@@ -8594,7 +8594,7 @@ fn step_268() -> Unit raise {
   let t5163 = @ssreflect.move_(@list.List(["IHn"]))
   let t5164 = @list.List([@tactics.all_tac, @tactics.then_tac(@ssreflect.move_(@list.List(["n"])), t5163)])
   let t5281 = @list.List([@ssreflect.thenl_first(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x5162 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x5161 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x5161), x5162), @ssreflect.clear_assumption("n")), @ssreflect.elim), t5164))(t5189), t5280, t5279, t5278])
-  odd_double_half_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("(if odd n then 1 else 0) + double (half n) = n"), t5281))
+  odd_double_half_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("(if odd((n : Num)) { 1 } else { 0 }) + double(half(n)) == n"), t5281))
 }
 
 ///|
@@ -8643,7 +8643,7 @@ fn step_269() -> Unit raise {
   })
   let t5318 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.simp_tac, @ssreflect.repeat_tactic(0L, 10L, (x5289 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add0n", @list.List([add0n()])), t5288, x5289))), t5296), t5303), t5317)
   let t5319 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x5283 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x5282 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x5282), x5283), @ssreflect.clear_assumption("b")), @ssreflect.case), t5318), @ssreflect.done_tac)])
-  half_bit_double_c.set(@sections.section_proof(@list.List(["n", "b"]), @parser.parse_term("half ((if b then 1 else 0) + double n) = n"), t5319))
+  half_bit_double_c.set(@sections.section_proof(@list.List(["n", "b"]), @term_syntax.parse_term("half((if (b : Bool) { 1 } else { 0 }) + double((n : Num))) == n"), t5319))
 }
 
 ///|
@@ -8715,7 +8715,7 @@ fn step_270() -> Unit raise {
       ((x5342 : @kernel.Thm, x5343 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x5342, x5343))(x5344, x5345)
     }
   })
-  let t5334 = @list.List([@parser.parse_term("m")])
+  let t5334 = @list.List([@term_syntax.parse_term("(m : _)")])
   let t5339 = @ssreflect.thm_tac(fn(x5337 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x5338 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x5335 : @kernel.Thm, x5336 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([1L]), t5334, x5335, x5336))(x5337, x5338)
@@ -8726,14 +8726,14 @@ fn step_270() -> Unit raise {
       ((x5328 : @kernel.Thm, x5329 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x5328, x5329))(x5330, x5331)
     }
   })
-  let t5320 = @list.List([@parser.parse_term("n")])
+  let t5320 = @list.List([@term_syntax.parse_term("(n : _)")])
   let t5325 = @ssreflect.thm_tac(fn(x5323 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x5324 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x5321 : @kernel.Thm, x5322 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([1L]), t5320, x5321, x5322))(x5323, x5324)
     }
   })
   let t5410 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x5327 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("odd_double_half", @list.List([odd_double_half()])), (x5326 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t5325, x5326), x5327), (x5333 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnCA", @list.List([addnca()])), t5332, x5333)), (x5341 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("odd_double_half", @list.List([odd_double_half()])), (x5340 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t5339, x5340), x5341)), (x5348 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnA", @list.List([addna()])), (x5347 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t5346, x5347), x5348)), (x5355 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("double_add", @list.List([double_add()])), (x5354 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t5353, x5354), x5355)), t5409, t5408])
-  half_add_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("half (m + n) = (if odd m /\\ odd n then 1 else 0) + (half m + half n)"), t5410))
+  half_add_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("half((m : Num) + (n : Num)) == (if odd(m) && odd(n) { 1 } else { 0 }) + (half(m) + half(n))"), t5410))
 }
 
 ///|
@@ -8785,7 +8785,7 @@ fn step_271() -> Unit raise {
     }, x5416))
     (x5418 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subnK", @list.List([subnk()])), t5417, x5418)
   }), @tactics.beta_tac), t5428), t5447), @ssreflect.done_tac)])
-  half_leq_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m <= n ==> half m <= half n"), t5448))
+  half_leq_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(m : Num) <= (n : Num) → half(m) <= half(n)"), t5448))
 }
 
 ///|
@@ -8826,7 +8826,7 @@ fn step_272() -> Unit raise {
   let t5479 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(0L, 10L, (x5457 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("halfS", @list.List([halfs()])), t5456, x5457)), t5464), t5471), t5478)
   let t5451 = @list.List([@tactics.all_tac, @tactics.then_tac(@ssreflect.case, @tactics.all_tac)])
   let t5480 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x5450 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x5449 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x5449), x5450), @ssreflect.clear_assumption("n")), @ssreflect.case), t5451), t5479), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  half_gt0_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("(0 < half n) = (1 < n)"), t5480))
+  half_gt0_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("(0 < half((n : Num))) == (1 < n)"), t5480))
 }
 
 ///|
@@ -8859,13 +8859,13 @@ fn step_273() -> Unit raise {
   let t5493 = @ssreflect.repeat_tactic(1L, 9L, (x5492 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("expnS", @list.List([expns()])), t5491, x5492))
   let t5506 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((fn(x5481 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x5481
-    arg_tac(@ssreflect.ArgType::Arg_theorem(@int.arith_rule(@parser.parse_term("2 = SUC (SUC 0)"))))
+    arg_tac(@ssreflect.ArgType::Arg_theorem(@int.arith_rule(@term_syntax.parse_term("2 == SUC(SUC(0))"))))
   })(@ssreflect.thm_tac(fn(x5485 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x5486 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x5483 : @kernel.Thm, x5484 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x5483, x5484))(x5485, x5486)
     }
   })), t5493), (x5499 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("expn0", @list.List([expn0()])), t5498, x5499)), (x5505 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("muln1", @list.List([muln1()])), t5504, x5505)), @ssreflect.done_tac)])
-  mulnn_c.set(@sections.section_proof(@list.List(["m"]), @parser.parse_term("m * m = m ^ 2"), t5506))
+  mulnn_c.set(@sections.section_proof(@list.List(["m"]), @term_syntax.parse_term("(m : Num) * m == EXP(m, 2)"), t5506))
 }
 
 ///|
@@ -8943,7 +8943,7 @@ fn step_274() -> Unit raise {
     }
   })
   let t5580 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x5513 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnn", @list.List([mulnn()])), (x5512 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t5511, x5512), x5513)), (x5519 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mul2n", @list.List([mul2n()])), t5518, x5519)), (x5525 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("muln_addr", @list.List([muln_addr()])), t5524, x5525)), t5532), t5546), t5554), t5579])
-  sqrn_add_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(m + n) ^ 2 = (m ^ 2 + n ^ 2) + 2 * (m * n)"), t5580))
+  sqrn_add_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("EXP((m : Num) + (n : Num), 2) == EXP(m, 2) + EXP(n, 2) + 2 * (m * n)"), t5580))
 }
 
 ///|
@@ -8973,7 +8973,7 @@ fn step_275() -> Unit raise {
       ((x5651 : @kernel.Thm, x5652 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x5651, x5652))(x5653, x5654)
     }
   })
-  let t5643 = @list.List([@parser.parse_term("n EXP 2")])
+  let t5643 = @list.List([@term_syntax.parse_term("EXP((n : Num), 2)")])
   let t5648 = @ssreflect.thm_tac(fn(x5646 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x5647 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x5644 : @kernel.Thm, x5645 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t5643, x5644, x5645))(x5646, x5647)
@@ -9032,7 +9032,7 @@ fn step_275() -> Unit raise {
     }, x5586))
     (x5588 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subnK", @list.List([subnk()])), t5587, x5588)
   }), @tactics.beta_tac), t5589), t5671, t5670])
-  sqrn_sub_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("n <= m ==> (m - n) ^ 2 = (m ^ 2 + n ^ 2) - 2 * (m * n)"), t5672))
+  sqrn_sub_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(n : Num) <= (m : Num) → EXP(m - n, 2) == EXP(m, 2) + EXP(n, 2) - 2 * (m * n)"), t5672))
 }
 
 ///|
@@ -9085,14 +9085,14 @@ fn step_276() -> Unit raise {
   })
   let t5706 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((fn(x5673 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x5673
-    arg_tac(@ssreflect.ArgType::Arg_theorem(@int.arith_rule(@parser.parse_term("4 = 2 * 2"))))
+    arg_tac(@ssreflect.ArgType::Arg_theorem(@int.arith_rule(@term_syntax.parse_term("4 == 2 * 2"))))
   })(@ssreflect.thm_tac(fn(x5677 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x5678 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x5675 : @kernel.Thm, x5676 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x5675, x5676))(x5677, x5678)
     }
   })), (x5685 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnA", @list.List([mulna()])), (x5684 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t5683, x5684), x5685)), (x5691 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mul2n", @list.List([mul2n()])), t5690, x5691)), (x5698 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnn", @list.List([addnn()])), (x5697 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t5696, x5697), x5698)), (x5705 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subn_sub", @list.List([subn_sub()])), (x5704 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t5703, x5704), x5705))
   let t5726 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["le_nm"]))), t5706), t5725])
-  sqrn_add_sub_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("n <= m ==> (m + n) ^ 2 - 4 * (m * n) = (m - n) ^ 2"), t5726))
+  sqrn_add_sub_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(n : Num) <= (m : Num) → EXP(m + n, 2) - 4 * (m * n) == EXP(m - n, 2)"), t5726))
 }
 
 ///|
@@ -9149,7 +9149,7 @@ fn step_277() -> Unit raise {
     }
   })
   let t5773 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x5732 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("muln_subl", @list.List([muln_subl()])), t5731, x5732), t5739), (x5745 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnC", @list.List([addnc()])), t5744, x5745)), t5759), (x5765 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subn_add2l", @list.List([subn_add2l()])), t5764, x5765)), t5772), @ssreflect.done_tac)])
-  subn_sqr_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m ^ 2 - n ^ 2 = (m - n) * (m + n)"), t5773))
+  subn_sqr_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("EXP((m : Num), 2) - EXP((n : Num), 2) == (m - n) * (m + n)"), t5773))
 }
 
 ///|
@@ -9171,7 +9171,7 @@ fn step_278() -> Unit raise {
     }
   })
   let t5781 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x5779 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltn_exp2r", @list.List([ltn_exp2r()])), t5778, x5779), t5780), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  ltn_sqr_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(m ^ 2 < n ^ 2) = (m < n)"), t5781))
+  ltn_sqr_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(EXP((m : Num), 2) < EXP((n : Num), 2)) == (m < n)"), t5781))
 }
 
 ///|
@@ -9193,7 +9193,7 @@ fn step_279() -> Unit raise {
     }
   })
   let t5789 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x5787 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_exp2r", @list.List([leq_exp2r()])), t5786, x5787), t5788), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  leq_sqr_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(m ^ 2 <= n ^ 2) = (m <= n)"), t5789))
+  leq_sqr_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(EXP((m : Num), 2) <= EXP((n : Num), 2)) == (m <= n)"), t5789))
 }
 
 ///|
@@ -9230,14 +9230,14 @@ fn step_280() -> Unit raise {
       let fst_arg = x5792
       (fn(x5794 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_1 = x5794
-        arg_tac_1(@ssreflect.ArgType::Arg_term(@parser.parse_term("0")))
+        arg_tac_1(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("0")))
       })(fn(x5796 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg = x5796
         (x5798 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac, fst_arg, snd_arg, x5798)
       })
     }, x5799)
   })((x5800 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x5800)), @tactics.beta_tac), (x5806 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("exp0n", @list.List([exp0n()])), t5805, x5806)))(t5807), t5815])
-  sqrn_gt0_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("(0 < n ^ 2) = (0 < n)"), t5816))
+  sqrn_gt0_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("(0 < EXP((n : Num), 2)) == (0 < n)"), t5816))
 }
 
 ///|
@@ -9259,7 +9259,7 @@ fn step_281() -> Unit raise {
     }
   })
   let t5824 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x5822 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_exp2r", @list.List([eqn_exp2r()])), t5821, x5822), t5823), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  eqn_sqr_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(m ^ 2 = n ^ 2) = (m = n)"), t5824))
+  eqn_sqr_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(EXP((m : Num), 2) == EXP((n : Num), 2)) == (m == n)"), t5824))
 }
 
 ///|
@@ -9295,7 +9295,7 @@ fn step_282() -> Unit raise {
       let fst_arg = x5827
       (fn(x5829 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_1 = x5829
-        arg_tac_1(@ssreflect.ArgType::Arg_theorem(@int.arith_rule(@parser.parse_term("0 < 2"))))
+        arg_tac_1(@ssreflect.ArgType::Arg_theorem(@int.arith_rule(@term_syntax.parse_term("0 < 2"))))
       })(fn(x5831 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg = x5831
         (x5833 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac, fst_arg, snd_arg, x5833)
@@ -9303,7 +9303,7 @@ fn step_282() -> Unit raise {
     }, x5834)
   })((x5835 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x5835)), @tactics.beta_tac), t5836)
   let t5852 = @list.List([@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["eq"]))), t5851, t5850])
-  sqrn_inj_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m ^ 2 = n ^ 2 ==> m = n"), t5852))
+  sqrn_inj_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("EXP((m : Num), 2) == EXP((n : Num), 2) → m == n"), t5852))
 }
 
 ///|
@@ -9318,7 +9318,7 @@ pub fn sqrn_inj() -> @kernel.Thm {
 ///|
 /// leqif
 fn step_283() -> Unit raise {
-  leqif_c.set(@pair.new_definition(@parser.parse_term("forall m n c. leqif m n c <=> (m <= n /\\ ((m = n) <=> c))")))
+  leqif_c.set(@pair.new_definition(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ c : Bool, (leqif : (Num, Num, Bool) -> Bool)(m, n, c) == (m <= n && (m == n) == c)")))
 }
 
 ///|
@@ -9351,7 +9351,7 @@ fn step_284() -> Unit raise {
     }
   })
   let t5877 = @list.List([@ssreflect.thenl_first(@tactics.then_tac(@tactics.then_tac((x5858 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltn_neqAle", @list.List([ltn_neqale()])), t5857, x5858), (x5864 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqif", @list.List([leqif()])), t5863, x5864)), @ssreflect.split_tac))(t5867), t5876])
-  leqifp_c.set(@sections.section_proof(@list.List(["m", "n", "c"]), @parser.parse_term("leqif m n c <=> if c then m = n else m < n"), t5877))
+  leqifp_c.set(@sections.section_proof(@list.List(["m", "n", "c"]), @term_syntax.parse_term("leqif((m : Num), (n : Num), (c : Bool)) == (if c { m == n } else { m < n })"), t5877))
 }
 
 ///|
@@ -9372,7 +9372,7 @@ fn step_285() -> Unit raise {
     }
   })
   let t5884 = @list.List([@tactics.then_tac(@tactics.then_tac((x5883 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqif", @list.List([leqif()])), t5882, x5883), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  leqif_imp_le_c.set(@sections.section_proof(@list.List(["m", "n", "c"]), @parser.parse_term("leqif m n c ==> m <= n"), t5884))
+  leqif_imp_le_c.set(@sections.section_proof(@list.List(["m", "n", "c"]), @term_syntax.parse_term("leqif((m : Num), (n : Num), (c : Bool)) → m <= n"), t5884))
 }
 
 ///|
@@ -9393,7 +9393,7 @@ fn step_286() -> Unit raise {
     }
   })
   let t5891 = @list.List([@tactics.then_tac(@tactics.then_tac((x5890 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqif", @list.List([leqif()])), t5889, x5890), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  leqif_imp_eq_c.set(@sections.section_proof(@list.List(["m", "n", "c"]), @parser.parse_term("leqif m n c ==> (m = n <=> c)"), t5891))
+  leqif_imp_eq_c.set(@sections.section_proof(@list.List(["m", "n", "c"]), @term_syntax.parse_term("leqif((m : Num), (n : Num), (c : Bool)) → (m == n) == c"), t5891))
 }
 
 ///|
@@ -9419,7 +9419,7 @@ fn step_287() -> Unit raise {
     }
   })
   let t5904 = @list.List([@tactics.then_tac(@tactics.then_tac((x5897 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqif", @list.List([leqif()])), t5896, x5897), (x5903 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqnn", @list.List([leqnn()])), t5902, x5903)), @ssreflect.done_tac)])
-  leqif_refl_c.set(@sections.section_proof(@list.List(["m", "c"]), @parser.parse_term("(leqif m m c) <=> c"), t5904))
+  leqif_refl_c.set(@sections.section_proof(@list.List(["m", "c"]), @term_syntax.parse_term("leqif((m : Num), m, (c : Bool)) == c"), t5904))
 }
 
 ///|
@@ -9472,7 +9472,7 @@ fn step_288() -> Unit raise {
     }
   })
   let t5950 = @list.List([@ssreflect.repeat_tactic(1L, 9L, (x5910 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqifP", @list.List([leqifp()])), t5909, x5910)), t5949, t5948])
-  leqif_trans_c.set(@sections.section_proof(@list.List(["m1", "m2", "m3", "c1", "c2"]), @parser.parse_term("leqif m1 m2 c1 ==> leqif m2 m3 c2 ==> leqif m1 m3 (c1 /\\ c2)"), t5950))
+  leqif_trans_c.set(@sections.section_proof(@list.List(["m1", "m2", "m3", "c1", "c2"]), @term_syntax.parse_term("leqif((m1 : Num), (m2 : Num), (c1 : Bool)) → leqif(m2, (m3 : Num), (c2 : Bool)) → leqif(m1, m3, c1 && c2)"), t5950))
 }
 
 ///|
@@ -9515,7 +9515,7 @@ fn step_289() -> Unit raise {
   let t5952 = @ssreflect.move_(@list.List(["n"]))
   let t5951 = @ssreflect.move_(@list.List(["m"]))
   let t5982 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["f_mono"]))), t5951), t5952), t5953), t5981])
-  monotone_leqif_c.set(@sections.section_proof(@list.List(["f"]), @parser.parse_term("(forall m n. f m <= f n <=> m <= n) ==>\n  forall m n c. (leqif (f m) (f n) c) <=> (leqif m n c)"), t5982))
+  monotone_leqif_c.set(@sections.section_proof(@list.List(["f"]), @term_syntax.parse_term("(∀ m : Num, ∀ n : Num, ((f : (Num) -> Num)(m) <= f(n)) == (m <= n)) → (∀ m : Num, ∀ n : Num, ∀ c : Bool, leqif(f(m), f(n), c) == leqif(m, n, c))"), t5982))
 }
 
 ///|
@@ -9548,7 +9548,7 @@ fn step_290() -> Unit raise {
     }
   })
   let t6003 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["lemn"]))), (x5988 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqif", @list.List([leqif()])), t5987, x5988)), t5989), (x5995 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_leq", @list.List([eqn_leq()])), t5994, x5995)), t6002])
-  leqif_geq_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m <= n ==> leqif m n (n <= m)"), t6003))
+  leqif_geq_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(m : Num) <= (n : Num) → leqif(m, n, n <= m)"), t6003))
 }
 
 ///|
@@ -9569,7 +9569,7 @@ fn step_291() -> Unit raise {
     }
   })
   let t6010 = @list.List([@tactics.then_tac((x6009 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqif", @list.List([leqif()])), t6008, x6009), @ssreflect.done_tac)])
-  leqif_eq_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m <= n ==> leqif m n (m = n)"), t6010))
+  leqif_eq_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(m : Num) <= (n : Num) → leqif(m, n, m == n)"), t6010))
 }
 
 ///|
@@ -9602,7 +9602,7 @@ fn step_292() -> Unit raise {
     }
   })
   let t6031 = @list.List([@tactics.then_tac(@tactics.then_tac((x6016 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqif", @list.List([leqif()])), t6015, x6016), t6017), (x6023 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_leq", @list.List([eqn_leq()])), t6022, x6023)), t6030])
-  geq_leqif_c.set(@sections.section_proof(@list.List(["a", "b", "C"]), @parser.parse_term("leqif a b C ==> ((b <= a) <=> C)"), t6031))
+  geq_leqif_c.set(@sections.section_proof(@list.List(["a", "b", "C"]), @term_syntax.parse_term("leqif((a : Num), (b : Num), (C : Bool)) → (b <= a) == C"), t6031))
 }
 
 ///|
@@ -9638,7 +9638,7 @@ fn step_293() -> Unit raise {
   })
   let t6052 = @tactics.then_tac(@tactics.then_tac((x6037 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltnNge", @list.List([ltnnge()])), t6036, x6037), t6051), @ssreflect.done_tac)
   let t6053 = @list.List([@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["le_ab"]))), t6052])
-  ltn_leqif_c.set(@sections.section_proof(@list.List(["a", "b", "C"]), @parser.parse_term("leqif a b C ==> (a < b <=> ~ C)"), t6053))
+  ltn_leqif_c.set(@sections.section_proof(@list.List(["a", "b", "C"]), @term_syntax.parse_term("leqif((a : Num), (b : Num), (C : Bool)) → (a < b) == !C"), t6053))
 }
 
 ///|
@@ -9703,7 +9703,7 @@ fn step_294() -> Unit raise {
       })
     }, x6070)
   })((x6076 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t6075, x6076)), t6077), t6104, t6103])
-  leqif_add_c.set(@sections.section_proof(@list.List(["m1", "n1", "c1", "m2", "n2", "c2"]), @parser.parse_term("leqif m1 n1 c1 ==> leqif m2 n2 c2 ==> leqif (m1 + m2) (n1 + n2) (c1 /\\ c2)"), t6105))
+  leqif_add_c.set(@sections.section_proof(@list.List(["m1", "n1", "c1", "m2", "n2", "c2"]), @term_syntax.parse_term("leqif((m1 : Num), (n1 : Num), (c1 : Bool)) → leqif((m2 : Num), (n2 : Num), (c2 : Bool)) → leqif(m1 + m2, n1 + n2, c1 && c2)"), t6105))
 }
 
 ///|
@@ -9746,7 +9746,7 @@ fn step_295() -> Unit raise {
   let t6410 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x6385 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_leq", @list.List([eqn_leq()])), t6384, x6385), (x6391 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqNgt", @list.List([leqngt()])), t6390, x6391)), (x6397 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("muln_gt0", @list.List([muln_gt0()])), t6396, x6397)), (x6403 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n1_gt0", @list.List([])), t6402, x6403)), (x6409 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n2_gt0", @list.List([])), t6408, x6409)), @ssreflect.done_tac)
   let t6411 = @tactics.then_tac(@tactics.then_tac((fn(x6377 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac_5 = x6377
-    arg_tac_5(@ssreflect.ArgType::Arg_term(@parser.parse_term("c1 /\\ c2")))
+    arg_tac_5(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(c1 : Bool) && (c2 : Bool)")))
   })((x6379 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x6379)), @ssreflect.case), @ssreflect.simp_tac)
   let t6374 = @ssreflect.thm_tac(fn(x6372 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x6373 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -9991,7 +9991,7 @@ fn step_295() -> Unit raise {
       let fst_arg = x6109
       (fn(x6111 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_1 = x6111
-        arg_tac_1(@ssreflect.ArgType::Arg_term(@parser.parse_term("n1 * n2")))
+        arg_tac_1(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(n1 : Num) * (n2 : Num)")))
       })(fn(x6113 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg = x6113
         (x6115 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac, fst_arg, snd_arg, x6115)
@@ -10000,7 +10000,7 @@ fn step_295() -> Unit raise {
   })((x6117 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x6117)), @ssreflect.case), t6118)
   let t6106 = @ssreflect.move_(@list.List(["le2"]))
   let t6425 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["le1"]))), t6106), t6424, t6423, t6422, t6421, t6420, t6419, t6418, t6417, t6416, t6415, t6414, t6413, t6412, t6411, t6410])
-  leqif_mul_c.set(@sections.section_proof(@list.List(["m1", "n1", "c1", "m2", "n2", "c2"]), @parser.parse_term("leqif m1 n1 c1 ==> leqif m2 n2 c2 ==>\n          leqif (m1 * m2) (n1 * n2) (n1 * n2 = 0 \\/ (c1 /\\ c2))"), t6425))
+  leqif_mul_c.set(@sections.section_proof(@list.List(["m1", "n1", "c1", "m2", "n2", "c2"]), @term_syntax.parse_term("leqif((m1 : Num), (n1 : Num), (c1 : Bool)) → leqif((m2 : Num), (n2 : Num), (c2 : Bool)) → leqif(m1 * m2, n1 * n2, n1 * n2 == 0 || c1 && c2)"), t6425))
 }
 
 ///|
@@ -10084,7 +10084,7 @@ fn step_296() -> Unit raise {
       let fst_arg_3 = x6499
       (fn(x6501 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_5 = x6501
-        arg_tac_5(@ssreflect.ArgType::Arg_term(@parser.parse_term("m = n")))
+        arg_tac_5(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(m : _) == (n : _)")))
       })(fn(x6503 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg_3 = x6503
         (x6505 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac_4, fst_arg_3, snd_arg_3, x6505)
@@ -10114,7 +10114,7 @@ fn step_296() -> Unit raise {
   })
   let t6582 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x6476 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("le_nm", @list.List([])), (x6475 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x6475), x6476), @ssreflect.clear_assumption("le_nm")), t6479), t6490), @ssreflect.done_tac)
   let t6473 = @ssreflect.move_(@list.List(["mn"]))
-  let t6466 = @list.List([@parser.parse_term("m * _1")])
+  let t6466 = @list.List([@term_syntax.parse_term("(m : Num) * (_1 : Num)")])
   let t6471 = @ssreflect.thm_tac(fn(x6469 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x6470 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x6467 : @kernel.Thm, x6468 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), t6466, x6467, x6468))(x6469, x6470)
@@ -10151,18 +10151,18 @@ fn step_296() -> Unit raise {
       }, x6451)
     })
   })((x6452 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x6452)), @ssreflect.case), t6453), t6474)
-  let t6428 = @parser.parse_term("n")
-  let t6429 = @list.List([@parser.parse_term("m"), t6428])
+  let t6428 = @term_syntax.parse_term("(n : _)")
+  let t6429 = @list.List([@term_syntax.parse_term("(m : _)"), t6428])
   let t6430 = @ssreflect.move_(@list.List(["le_nm"]))
   let t6584 = @list.List([(fn(x6426 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x6426
-    arg_tac(@ssreflect.ArgType::Arg_term(@parser.parse_term("n <= m")))
+    arg_tac(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(n : Num) <= (m : Num)")))
   })(@ssreflect.term_tac(fn(x6433 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x6434 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x6431 : @kernel.Term, x6432 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.wlog_tac(t6430, t6429, x6431, x6432))(x6433, x6434)
     }
   })), t6583, t6582, t6581, (x6496 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqifP", @list.List([leqifp()])), t6495, x6496), t6580, t6579])
-  nat_cauchy_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("leqif (2 * (m * n)) (m ^ 2 + n ^ 2) (m = n)"), t6584))
+  nat_cauchy_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("leqif(2 * ((m : Num) * (n : Num)), EXP(m, 2) + EXP(n, 2), m == n)"), t6584))
 }
 
 ///|
@@ -10289,13 +10289,13 @@ fn step_297() -> Unit raise {
   })
   let t6708 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((fn(x6585 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x6585
-    arg_tac(@ssreflect.ArgType::Arg_theorem(@int.arith_rule(@parser.parse_term("4 = 2 * 2"))))
+    arg_tac(@ssreflect.ArgType::Arg_theorem(@int.arith_rule(@term_syntax.parse_term("4 == 2 * 2"))))
   })(@ssreflect.thm_tac(fn(x6589 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x6590 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x6587 : @kernel.Thm, x6588 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x6587, x6588))(x6589, x6590)
     }
   })), (x6597 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mulnA", @list.List([mulna()])), (x6596 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t6595, x6596), x6597)), (x6603 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("mul2n", @list.List([mul2n()])), t6602, x6603)), (x6610 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnn", @list.List([addnn()])), (x6609 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t6608, x6609), x6610)), (x6616 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("sqrn_add", @list.List([sqrn_add()])), t6615, x6616)), (x6622 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqifP", @list.List([leqifp()])), t6621, x6622)), t6707, t6706])
-  nat_agm2_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("leqif (4 * (m * n)) ((m + n) ^ 2) (m = n)"), t6708))
+  nat_agm2_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("leqif(4 * ((m : Num) * (n : Num)), EXP(m + n, 2), m == n)"), t6708))
 }
 
 ///|
@@ -10310,7 +10310,7 @@ pub fn nat_agm2() -> @kernel.Thm {
 ///|
 /// distn
 fn step_298() -> Unit raise {
-  distn_c.set(@pair.new_definition(@parser.parse_term("forall m n. distn m n = (m - n) + (n - m)")))
+  distn_c.set(@pair.new_definition(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, (distn : (Num, Num) -> Num)(m, n) == m - n + (n - m)")))
 }
 
 ///|
@@ -10336,7 +10336,7 @@ fn step_299() -> Unit raise {
     }
   })
   let t6721 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x6714 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("distn", @list.List([distn()])), t6713, x6714)), (x6720 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnC", @list.List([addnc()])), t6719, x6720)), @ssreflect.done_tac)])
-  distnc_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("distn m n = distn n m"), t6721))
+  distnc_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("distn((m : Num), (n : Num)) == distn(n, m)"), t6721))
 }
 
 ///|
@@ -10363,7 +10363,7 @@ fn step_300() -> Unit raise {
     }
   })
   let t6735 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x6727 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("distn", @list.List([distn()])), t6726, x6727)), t6734), @ssreflect.done_tac)])
-  distn_add2l_c.set(@sections.section_proof(@list.List(["d", "m", "n"]), @parser.parse_term("distn (d + m) (d + n) = distn m n"), t6735))
+  distn_add2l_c.set(@sections.section_proof(@list.List(["d", "m", "n"]), @term_syntax.parse_term("distn((d : Num) + (m : Num), d + (n : Num)) == distn(m, n)"), t6735))
 }
 
 ///|
@@ -10390,7 +10390,7 @@ fn step_301() -> Unit raise {
     }
   })
   let t6749 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x6741 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("distn", @list.List([distn()])), t6740, x6741)), t6748), @ssreflect.done_tac)])
-  distn_add2r_c.set(@sections.section_proof(@list.List(["d", "m", "n"]), @parser.parse_term("distn (m + d) (n + d) = distn m n"), t6749))
+  distn_add2r_c.set(@sections.section_proof(@list.List(["d", "m", "n"]), @term_syntax.parse_term("distn((m : Num) + (d : Num), (n : Num) + d) == distn(m, n)"), t6749))
 }
 
 ///|
@@ -10458,7 +10458,7 @@ fn step_302() -> Unit raise {
   })
   let t6800 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x6755 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("distn", @list.List([distn()])), t6754, x6755), t6793), (x6799 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add0n", @list.List([add0n()])), t6798, x6799)), @ssreflect.done_tac)
   let t6801 = @list.List([@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["le_m_n"]))), t6800])
-  distner_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("m <= n ==> distn m n = n - m"), t6801))
+  distner_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(m : Num) <= (n : Num) → distn(m, n) == n - m"), t6801))
 }
 
 ///|
@@ -10485,7 +10485,7 @@ fn step_303() -> Unit raise {
   })
   let t6814 = @tactics.then_tac((x6807 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("distnC", @list.List([distnc()])), t6806, x6807), (x6813 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("distnEr", @list.List([distner()])), t6812, x6813))
   let t6815 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["le_n_m"]))), t6814), @ssreflect.done_tac)])
-  distnel_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("n <= m ==> distn m n = m - n"), t6815))
+  distnel_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(n : Num) <= (m : Num) → distn(m, n) == m - n"), t6815))
 }
 
 ///|
@@ -10524,7 +10524,7 @@ fn step_304() -> Unit raise {
   let t6844 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x6824 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("distn", @list.List([distn()])), t6823, x6824), (x6830 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("sub0n", @list.List([sub0n()])), t6829, x6830)), t6837), (x6843 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add0n", @list.List([add0n()])), t6842, x6843))
   let t6818 = @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["m"]))])
   let t6845 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x6817 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("n", @list.List([])), (x6816 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x6816), x6817), @ssreflect.clear_assumption("n")), @ssreflect.case), t6818), t6844), @ssreflect.done_tac)])
-  dist0n_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("distn 0 n = n"), t6845))
+  dist0n_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("distn(0, (n : Num)) == n"), t6845))
 }
 
 ///|
@@ -10550,7 +10550,7 @@ fn step_305() -> Unit raise {
     }
   })
   let t6858 = @list.List([@tactics.then_tac(@tactics.then_tac((x6851 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("distnC", @list.List([distnc()])), t6850, x6851), (x6857 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("dist0n", @list.List([dist0n()])), t6856, x6857)), @ssreflect.done_tac)])
-  distn0_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("distn n 0 = n"), t6858))
+  distn0_c.set(@sections.section_proof(@list.List(["n"]), @term_syntax.parse_term("distn((n : Num), 0) == n"), t6858))
 }
 
 ///|
@@ -10581,7 +10581,7 @@ fn step_306() -> Unit raise {
     }
   })
   let t6877 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x6864 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("distn", @list.List([distn()])), t6863, x6864)), (x6870 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subnn", @list.List([subnn()])), t6869, x6870)), (x6876 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn0", @list.List([addn0()])), t6875, x6876)), @ssreflect.done_tac)])
-  distnn_c.set(@sections.section_proof(@list.List(["m"]), @parser.parse_term("distn m m = 0"), t6877))
+  distnn_c.set(@sections.section_proof(@list.List(["m"]), @term_syntax.parse_term("distn((m : Num), m) == 0"), t6877))
 }
 
 ///|
@@ -10618,7 +10618,7 @@ fn step_307() -> Unit raise {
     }
   })
   let t6904 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x6883 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("distn", @list.List([distn()])), t6882, x6883), (x6889 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn_eq0", @list.List([addn_eq0()])), t6888, x6889)), t6896), (x6903 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_leq", @list.List([eqn_leq()])), (x6902 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t6901, x6902), x6903)), @ssreflect.done_tac)])
-  distn_eq0_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(distn m n = 0) <=> (m = n)"), t6904))
+  distn_eq0_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(distn((m : Num), (n : Num)) == 0) == (m == n)"), t6904))
 }
 
 ///|
@@ -10666,7 +10666,7 @@ fn step_308() -> Unit raise {
         let fst_arg_1 = x6918
         (fn(x6920 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
           let arg_tac_3 = x6920
-          arg_tac_3(@ssreflect.ArgType::Arg_term(@parser.parse_term("0")))
+          arg_tac_3(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("0")))
         })(fn(x6922 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
           let snd_arg_1 = x6922
           (x6924 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac_1, fst_arg_1, snd_arg_1, x6924)
@@ -10676,14 +10676,14 @@ fn step_308() -> Unit raise {
       let fst_arg_2 = x6925
       (fn(x6927 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_4 = x6927
-        arg_tac_4(@ssreflect.ArgType::Arg_term(@parser.parse_term("1")))
+        arg_tac_4(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("1")))
       })(fn(x6929 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg_2 = x6929
         (x6931 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac, fst_arg_2, snd_arg_2, x6931)
       })
     })
   })((x6932 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x6932)), @tactics.beta_tac), t6951), @ssreflect.done_tac)])
-  distns_c.set(@sections.section_proof(@list.List(["m"]), @parser.parse_term("distn m (SUC m) = 1"), t6952))
+  distns_c.set(@sections.section_proof(@list.List(["m"]), @term_syntax.parse_term("distn((m : Num), SUC(m)) == 1"), t6952))
 }
 
 ///|
@@ -10709,7 +10709,7 @@ fn step_309() -> Unit raise {
     }
   })
   let t6965 = @list.List([@tactics.then_tac(@tactics.then_tac((x6958 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("distnC", @list.List([distnc()])), t6957, x6958), (x6964 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("distnS", @list.List([distns()])), t6963, x6964)), @ssreflect.done_tac)])
-  distsn_c.set(@sections.section_proof(@list.List(["m"]), @parser.parse_term("distn (SUC m) m = 1"), t6965))
+  distsn_c.set(@sections.section_proof(@list.List(["m"]), @term_syntax.parse_term("distn(SUC((m : Num)), m) == 1"), t6965))
 }
 
 ///|
@@ -10832,7 +10832,7 @@ fn step_310() -> Unit raise {
       }, x6982)
     })
   })((x6983 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x6983)), @ssreflect.case), t6985), t7084, t7083])
-  distn_eq1_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(distn m n = 1) <=> (if m < n then SUC m = n else m = SUC n)"), t7085))
+  distn_eq1_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("(distn((m : Num), (n : Num)) == 1) == (if m < n { SUC(m) == n } else { m == SUC(n) })"), t7085))
 }
 
 ///|
@@ -11041,7 +11041,7 @@ fn step_311() -> Unit raise {
       let fst_arg_3 = x7169
       (fn(x7171 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_5 = x7171
-        arg_tac_5(@ssreflect.ArgType::Arg_term(@parser.parse_term("m <= n /\\ n <= p")))
+        arg_tac_5(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(m : Num) <= (n : Num) && n <= (p : Num)")))
       })(fn(x7173 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg_3 = x7173
         (x7175 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac_4, fst_arg_3, snd_arg_3, x7175)
@@ -11124,13 +11124,13 @@ fn step_311() -> Unit raise {
   let t7088 = @ssreflect.move_(@list.List(["IH"]))
   let t7093 = (fn(x7086 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x7086
-    arg_tac(@ssreflect.ArgType::Arg_term(@parser.parse_term("forall m p. m <= p ==> leqif (distn m p) (distn m n + distn n p) (m <= n /\\ n <= p \\/ p <= n /\\ n <= m)")))
+    arg_tac(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("∀ m : Num, ∀ p : Num, m <= p → leqif(distn(m, p), distn(m, (n : Num)) + distn(n, p), m <= n && n <= p || p <= n && n <= m)")))
   })(@ssreflect.term_tac(fn(x7091 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x7092 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x7089 : @kernel.Term, x7090 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.have_gen_tac(@list.List([]), t7088, x7089, x7090))(x7091, x7092)
     }
   }))
-  leqif_add_distn_c.set(@sections.section_proof(@list.List(["m", "n", "p"]), @parser.parse_term("leqif (distn m p) (distn m n + distn n p) ((m <= n /\\ n <= p) \\/ (p <= n /\\ n <= m))"), @list.List([(x7094 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.thenl_rot(1L, t7093, x7094), t7396, t7395, t7394, t7393, t7392, t7391, t7390, t7389, t7388, t7387, t7386])))
+  leqif_add_distn_c.set(@sections.section_proof(@list.List(["m", "n", "p"]), @term_syntax.parse_term("leqif(distn((m : Num), (p : Num)), distn(m, (n : Num)) + distn(n, p), m <= n && n <= p || p <= n && n <= m)"), @list.List([(x7094 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.thenl_rot(1L, t7093, x7094), t7396, t7395, t7394, t7393, t7392, t7391, t7390, t7389, t7388, t7387, t7386])))
 }
 
 ///|
@@ -11182,7 +11182,7 @@ fn step_312() -> Unit raise {
       })
     }, x7429)
   })((x7430 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x7430)), @tactics.beta_tac), @ssreflect.done_tac)])
-  leq_add_distn_c.set(@sections.section_proof(@list.List(["m", "n", "p"]), @parser.parse_term("distn m p <= distn m n + distn n p"), t7431))
+  leq_add_distn_c.set(@sections.section_proof(@list.List(["m", "n", "p"]), @term_syntax.parse_term("distn((m : Num), (p : Num)) <= distn(m, (n : Num)) + distn(n, p)"), t7431))
 }
 
 ///|
@@ -11274,7 +11274,7 @@ fn step_313() -> Unit raise {
       let fst_arg_2 = x7471
       (fn(x7473 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let arg_tac_4 = x7473
-        arg_tac_4(@ssreflect.ArgType::Arg_term(@parser.parse_term("n EXP 2")))
+        arg_tac_4(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("EXP((n : Num), 2)")))
       })(fn(x7475 : @ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let snd_arg_2 = x7475
         (x7477 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.combine_args_then(arg_tac_3, fst_arg_2, snd_arg_2, x7477)
@@ -11315,18 +11315,18 @@ fn step_313() -> Unit raise {
       }, x7457)
     })
   })((x7458 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x7458)), @ssreflect.case), t7467), t7468)
-  let t7434 = @parser.parse_term("n")
-  let t7435 = @list.List([@parser.parse_term("m"), t7434])
+  let t7434 = @term_syntax.parse_term("(n : _)")
+  let t7435 = @list.List([@term_syntax.parse_term("(m : _)"), t7434])
   let t7436 = @ssreflect.move_(@list.List(["le_nm"]))
   let t7558 = @list.List([(fn(x7432 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x7432
-    arg_tac(@ssreflect.ArgType::Arg_term(@parser.parse_term("n <= m")))
+    arg_tac(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("(n : Num) <= (m : Num)")))
   })(@ssreflect.term_tac(fn(x7439 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x7440 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x7437 : @kernel.Term, x7438 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.wlog_tac(t7436, t7435, x7437, x7438))(x7439, x7440)
     }
   })), t7557, t7556, t7555])
-  sqrn_distn_c.set(@sections.section_proof(@list.List(["m", "n"]), @parser.parse_term("(distn m n) ^ 2 + 2 * (m * n) = m ^ 2 + n ^ 2"), t7558))
+  sqrn_distn_c.set(@sections.section_proof(@list.List(["m", "n"]), @term_syntax.parse_term("EXP(distn((m : Num), (n : Num)), 2) + 2 * (m * n) == EXP(m, 2) + EXP(n, 2)"), t7558))
 }
 
 ///|
