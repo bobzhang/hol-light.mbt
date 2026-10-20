@@ -17,192 +17,192 @@ Warning: inventing type variables
 Warning: inventing type variables
 Warning: inventing type variables
 Formal_ineqs/lib/ssrnat quotations (413):
-  XOR
-  SUC n - 1 = n
-  SUC n = SUC m ==> n = m
-  (SUC m = SUC n) = (m = n)
-  0 + n = n
-  SUC m + n = SUC (m + n)
-  1 + n = SUC n
-  n + 0 = n
-  m + SUC n = SUC (m + n)
-  SUC m + n = m + SUC n
-  m + (n + p) = n + (m + p)
-  m + n = n + m
-  n + 1 = SUC n
-  m + p
-  n + (m + p) = (n + m) + p
-  p + m
-  (n + m) + p = (n + p) + m
-  (m + n = 0) <=> (m = 0) /\\ (n = 0)
-  (p + m = p + n) <=> (m = n)
-  (m + p = n + p) = (m = n)
-  m + n1 = m + n2 ==> n1 = n2
-  _1 + m
-  n1 + m = n2 + m ==> n1 = n2
-  0 - n = 0
-  n - 0 = n
-  forall n. n - n = 0
-  forall n m. SUC m - SUC n = m - n
-  forall p m n. (p + m) - (p + n) = m - n
-  _1 + p
-  forall p m n. (m + p) - (n + p) = m - n
-  n
-  forall x. (n + x) - n = x
-  forall n x. (x + n) - n = x
-  SUC n - n = 1
-  (n - m) - p = n - (m + p)
-  forall m n p. (m - n) - p = (m - p) - n
-  forall m n. (m - n) - 1 = m - SUC n
-  forall m n. (SUC m - n) - 1 = m - n
-  forall m n. (m < SUC n) = (m <= n)
-  forall n. 0 <= n
-  forall n. 0 < SUC n
-  forall n. n < 0 <=> F
-  forall n. n <= n
-  forall n. n < SUC n
-  forall m n. m = n ==> m <= n
-  forall n. n <= SUC n
-  forall n. n - 1 <= n
-  forall n. n <= SUC (n - 1)
-  forall m n. m < n ==> SUC (n - 1) = n
-  forall n. 0 < n ==> SUC (n - 1) = n
+  op_plus
+  SUC((n : Num)) - 1 == n
+  SUC((n : Num)) == SUC((m : Num)) \226\134\146 n == m
+  (SUC((m : Num)) == SUC((n : Num))) == (m == n)
+  0 + (n : Num) == n
+  SUC((m : Num)) + (n : Num) == SUC(m + n)
+  1 + (n : Num) == SUC(n)
+  (n : Num) + 0 == n
+  (m : Num) + SUC((n : Num)) == SUC(m + n)
+  SUC((m : Num)) + (n : Num) == m + SUC(n)
+  (m : Num) + ((n : Num) + (p : Num)) == n + (m + p)
+  (m : Num) + (n : Num) == n + m
+  (n : Num) + 1 == SUC(n)
+  (m : Num) + (p : Num)
+  (n : Num) + ((m : Num) + (p : Num)) == n + m + p
+  (p : Num) + (m : Num)
+  (n : Num) + (m : Num) + (p : Num) == n + p + m
+  ((m : Num) + (n : Num) == 0) == (m == 0 && n == 0)
+  ((p : Num) + (m : Num) == p + (n : Num)) == (m == n)
+  ((m : Num) + (p : Num) == (n : Num) + p) == (m == n)
+  (m : Num) + (n1 : Num) == m + (n2 : Num) \226\134\146 n1 == n2
+  (_1 : Num) + (m : Num)
+  (n1 : Num) + (m : Num) == (n2 : Num) + m \226\134\146 n1 == n2
+  0 - (n : Num) == 0
+  (n : Num) - 0 == n
+  \226\136\128 n : Num, n - n == 0
+  \226\136\128 n : Num, \226\136\128 m : Num, SUC(m) - SUC(n) == m - n
+  \226\136\128 p : Num, \226\136\128 m : Num, \226\136\128 n : Num, p + m - (p + n) == m - n
+  (_1 : Num) + (p : Num)
+  \226\136\128 p : Num, \226\136\128 m : Num, \226\136\128 n : Num, m + p - (n + p) == m - n
+  (n : _)
+  \226\136\128 x : Num, (n : Num) + x - n == x
+  \226\136\128 n : Num, \226\136\128 x : Num, x + n - n == x
+  SUC((n : Num)) - n == 1
+  (n : Num) - (m : Num) - (p : Num) == n - (m + p)
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m - n - p == m - p - n
+  \226\136\128 m : Num, \226\136\128 n : Num, m - n - 1 == m - SUC(n)
+  \226\136\128 m : Num, \226\136\128 n : Num, SUC(m) - n - 1 == m - n
+  \226\136\128 m : Num, \226\136\128 n : Num, (m < SUC(n)) == (m <= n)
+  \226\136\128 n : Num, 0 <= n
+  \226\136\128 n : Num, 0 < SUC(n)
+  \226\136\128 n : Num, (n < 0) == false
+  \226\136\128 n : Num, n <= n
+  \226\136\128 n : Num, n < SUC(n)
+  \226\136\128 m : Num, \226\136\128 n : Num, m == n \226\134\146 m <= n
+  \226\136\128 n : Num, n <= SUC(n)
+  \226\136\128 n : Num, n - 1 <= n
+  \226\136\128 n : Num, n <= SUC(n - 1)
+  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 SUC(n - 1) == n
+  \226\136\128 n : Num, 0 < n \226\134\146 SUC(n - 1) == n
   0
-  forall m n. (m <= n) <=> ~(n < m)
-  forall m n. (m < n) = ~(n <= m)
-  forall n. n < n <=> F
-  forall n. (n <= 0) = (n = 0)
-  forall n. (0 < n) = ~(n = 0)
-  forall n. 0 < n ==> ~(n = 0)
-  forall n. (n = 0) = ~(0 < n)
-  forall n. (n = 0) = F ==> 0 < n
-  forall m n. (m = n) = (m <= n /\\ n <= m)
-  forall m n. m <= n /\\ n <= m ==> m = n
-  forall m n. ~(m = n) <=> (m < n) \\/ (n < m)
-  (m <= n) <=> (m = n) \\/ (m < n)
-  forall x y:A. x = y <=> y = x
-  n = m
-  forall m n. (m < n) <=> ~(m = n) /\\ (m <= n)
-  forall n m p. m <= n ==> n <= p ==> m <= p
-  forall n m. n < m <=> SUC n <= m
-  forall n m. SUC n <= SUC m <=> n <= m
-  forall n m p. m <= n ==> n < p ==> m < p
-  m < n ==> n <= p ==> m < p
-  forall m n. m < n ==> m <= n
-  forall m n. m <= n ==> m <= SUC n
-  forall n m p. m < n ==> n < p ==> m < p
-  forall m n. m >= n <=> n <= m
-  m > n <=> n < m
-  (m <= n) \\/ (n <= m)
-  m <= n \\/ n < m
-  m < n \\/ n <= m
-  n = 0 \\/ 0 < n
-  m < n \\/ n < m \\/ m = n
-  forall p m n. (p + m <= p + n) = (m <= n)
-  forall p m n. (p + m < p + n) = (m < n)
-  (m + p <= n + p) = (m <= n)
-  forall p m n. (m + p < n + p) = (m < n)
-  forall m1 m2 n1 n2. m1 <= n1 ==> m2 <= n2 ==> m1 + m2 <= n1 + n2
-  m1 + n2
-  n
-  forall m n. n <= n + m
-  forall m n. n <= m + n
-  m < n ==> m < n + p
-  forall m n p. m < n ==> m < p + n
-  forall m n. (0 < m + n) <=> (0 < m) \\/ (0 < n)
-  (0 < n - m) = (m < n)
-  forall m n. (m - n = 0) = (m <= n)
-  forall m n. m <= n <=> m - n = 0
-  forall m n p. (m - n <= p) = (m <= n + p)
-  forall m n. n - m <= n
-  forall m n. m <= n ==> m + (n - m) = n
-  forall m n. m <= n ==> (n - m) + m = n
-  forall m n p. p <= n ==> m + (n - p) = (m + n) - p
-  forall m n p. p <= n ==> m - (n - p) = (m + p) - n
-  forall m n. m <= n ==> n - (n - m) = m
-  forall m n. m <= n ==> SUC n - m = SUC (n - m)
+  \226\136\128 m : Num, \226\136\128 n : Num, (m <= n) == !(n < m)
+  \226\136\128 m : Num, \226\136\128 n : Num, (m < n) == !(n <= m)
+  \226\136\128 n : Num, (n < n) == false
+  \226\136\128 n : Num, (n <= 0) == (n == 0)
+  \226\136\128 n : Num, (0 < n) == !(n == 0)
+  \226\136\128 n : Num, 0 < n \226\134\146 !(n == 0)
+  \226\136\128 n : Num, (n == 0) == !(0 < n)
+  \226\136\128 n : Num, (n == 0) == false \226\134\146 0 < n
+  \226\136\128 m : Num, \226\136\128 n : Num, (m == n) == (m <= n && n <= m)
+  \226\136\128 m : Num, \226\136\128 n : Num, m <= n && n <= m \226\134\146 m == n
+  \226\136\128 m : Num, \226\136\128 n : Num, !(m == n) == (m < n || n < m)
+  ((m : Num) <= (n : Num)) == (m == n || m < n)
+  \226\136\128 x : A, \226\136\128 y : A, (x == y) == (y == x)
+  (n : _) == (m : _)
+  \226\136\128 m : Num, \226\136\128 n : Num, (m < n) == (!(m == n) && m <= n)
+  \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 p : Num, m <= n \226\134\146 n <= p \226\134\146 m <= p
+  \226\136\128 n : Num, \226\136\128 m : Num, (n < m) == (SUC(n) <= m)
+  \226\136\128 n : Num, \226\136\128 m : Num, (SUC(n) <= SUC(m)) == (n <= m)
+  \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 p : Num, m <= n \226\134\146 n < p \226\134\146 m < p
+  (m : Num) < (n : Num) \226\134\146 n <= (p : Num) \226\134\146 m < p
+  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 m <= n
+  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 m <= SUC(n)
+  \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 p : Num, m < n \226\134\146 n < p \226\134\146 m < p
+  \226\136\128 m : Num, \226\136\128 n : Num, (m >= n) == (n <= m)
+  ((m : Num) > (n : Num)) == (n < m)
+  (m : Num) <= (n : Num) || n <= m
+  (m : Num) <= (n : Num) || n < m
+  (m : Num) < (n : Num) || n <= m
+  (n : Num) == 0 || 0 < n
+  (m : Num) < (n : Num) || n < m || m == n
+  \226\136\128 p : Num, \226\136\128 m : Num, \226\136\128 n : Num, (p + m <= p + n) == (m <= n)
+  \226\136\128 p : Num, \226\136\128 m : Num, \226\136\128 n : Num, (p + m < p + n) == (m < n)
+  ((m : Num) + (p : Num) <= (n : Num) + p) == (m <= n)
+  \226\136\128 p : Num, \226\136\128 m : Num, \226\136\128 n : Num, (m + p < n + p) == (m < n)
+  \226\136\128 m1 : Num, \226\136\128 m2 : Num, \226\136\128 n1 : Num, \226\136\128 n2 : Num, m1 <= n1 \226\134\146 m2 <= n2 \226\134\146 m1 + m2 <= n1 + n2
+  (m1 : Num) + (n2 : Num)
+  (n : _)
+  \226\136\128 m : Num, \226\136\128 n : Num, n <= n + m
+  \226\136\128 m : Num, \226\136\128 n : Num, n <= m + n
+  (m : Num) < (n : Num) \226\134\146 m < n + (p : Num)
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m < n \226\134\146 m < p + n
+  \226\136\128 m : Num, \226\136\128 n : Num, (0 < m + n) == (0 < m || 0 < n)
+  (0 < (n : Num) - (m : Num)) == (m < n)
+  \226\136\128 m : Num, \226\136\128 n : Num, (m - n == 0) == (m <= n)
+  \226\136\128 m : Num, \226\136\128 n : Num, (m <= n) == (m - n == 0)
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m - n <= p) == (m <= n + p)
+  \226\136\128 m : Num, \226\136\128 n : Num, n - m <= n
+  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 m + (n - m) == n
+  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 n - m + m == n
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, p <= n \226\134\146 m + (n - p) == m + n - p
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, p <= n \226\134\146 m - (n - p) == m + p - n
+  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 n - (n - m) == m
+  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUC(n) - m == SUC(n - m)
   1
-  forall m n. m < n ==> n - m = SUC (n - SUC m)
-  forall p m n. m <= n ==> m - p <= n - p
-  forall p m n. m <= n ==> p - n <= p - m
-  p - m
-  forall m1 m2 n1 n2. m1 <= m2 ==> n2 <= n1 ==> m1 - n1 <= m2 - n2
-  forall p m n. p < n ==> m < n ==> m - p < n - p
-  SUC p
-  forall p m n. m < p ==> m < n ==> p - n < p - m
-  forall m n p. (m + n < p) = (n < p - m)
-  maxn m n = if m < n then n else m
-  minn m n = if m < n then m else n
-  forall n. maxn 0 n = n
-  forall n. maxn n 0 = n
-  forall m n. maxn m n = maxn n m
-  forall m n. n <= m ==> maxn m n = m
-  forall m n. m <= n ==> maxn m n = n
-  forall m n. m + (n - m) = maxn m n
-  forall m n p. maxn (maxn m n) p = maxn (maxn m p) n
-  maxn m _1
-  forall m n p. maxn m (maxn n p) = maxn (maxn m n) p
-  maxn m _1
-  forall m n p. maxn m (maxn n p) = maxn n (maxn m p)
-  n
-  forall m n. (maxn m n = n) = (m <= n)
-  m
-  forall m n. (maxn m n = m) = (n <= m)
-  forall n. maxn n n = n
-  n2
-  n1
-  n2 <= n1
-  (m <= maxn n1 n2) <=> (m <= n1) \\/ (m <= n2)
-  m <= n1
-  (maxn n1 n2 <= m) <=> (n1 <= m) /\\ (n2 <= m)
-  forall m1 m2 n. (maxn m1 m2) + n = maxn (m1 + n) (m2 + n)
-  m + _1
-  forall m n1 n2. m + maxn n1 n2 = maxn (m + n1) (m + n2)
-  minn 0 n = 0
-  minn n 0 = 0
-  minn m n = minn n m
-  n <= m ==> minn m n = n
-  m <= n ==> minn m n = m
-  minn m n + maxn m n = m + n
-  minn m n = (m + n) - maxn m n
-  m - (m - n) = minn m n
-  m2 + m1
-  (m2 + _1) - _2
-  minn _1 (minn _2 _3)
-  forall m1 m2 m3. minn m1 (minn m2 m3) = minn m2 (minn m1 m3)
-  maxn m2 m3
-  maxn m1 m3
-  minn m2 _1
-  forall m1 m2 m3. minn m1 (minn m2 m3) = minn (minn m1 m2) m3
-  minn (minn m1 m2) m3 = minn (minn m1 m3) m2
-  m = _1
-  n + m
-  (minn m n = n) = (n <= m)
-  _1 = m + n
-  (minn m n = m) = (m <= n)
-  minn n n = n
-  (m <= minn n1 n2) <=> (m <= n1) /\\ (m <= n2)
-  (minn n1 n2 <= m) <=> (n1 <= m) \\/ (n2 <= m)
-  _1 + n
-  forall m1 m2 n. (minn m1 m2) + n = minn (m1 + n) (m2 + n)
-  m + _1
-  forall m n1 n2. m + minn n1 n2 = minn (m + n1) (m + n2)
-  minn (maxn m n) m = m
-  minn n (maxn m n) = n
-  maxn (minn m n) m = m
-  maxn n (minn m n) = n
-  maxn (minn m1 m2) n = minn (maxn m1 n) (maxn m2 n)
-  maxn m _1
-  maxn m (minn n1 n2) = minn (maxn m n1) (maxn m n2)
-  maxn _1 n
-  forall m1 m2 n. minn (maxn m1 m2) n = maxn (minn m1 n) (minn m2 n)
-  minn m _1
-  forall m n1 n2. minn m (maxn n1 n2) = maxn (minn m n1) (minn m n2)
+  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 n - m == SUC(n - SUC(m))
+  \226\136\128 p : Num, \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 m - p <= n - p
+  \226\136\128 p : Num, \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 p - n <= p - m
+  (p : Num) - (m : Num)
+  \226\136\128 m1 : Num, \226\136\128 m2 : Num, \226\136\128 n1 : Num, \226\136\128 n2 : Num, m1 <= m2 \226\134\146 n2 <= n1 \226\134\146 m1 - n1 <= m2 - n2
+  \226\136\128 p : Num, \226\136\128 m : Num, \226\136\128 n : Num, p < n \226\134\146 m < n \226\134\146 m - p < n - p
+  SUC((p : Num))
+  \226\136\128 p : Num, \226\136\128 m : Num, \226\136\128 n : Num, m < p \226\134\146 m < n \226\134\146 p - n < p - m
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m + n < p) == (n < p - m)
+  (maxn : (Num, Num) -> Num)((m : Num), (n : Num)) == (if m < n { n } else { m })
+  (minn : (Num, Num) -> Num)((m : Num), (n : Num)) == (if m < n { m } else { n })
+  \226\136\128 n : Num, maxn(0, n) == n
+  \226\136\128 n : Num, maxn(n, 0) == n
+  \226\136\128 m : Num, \226\136\128 n : Num, maxn(m, n) == maxn(n, m)
+  \226\136\128 m : Num, \226\136\128 n : Num, n <= m \226\134\146 maxn(m, n) == m
+  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 maxn(m, n) == n
+  \226\136\128 m : Num, \226\136\128 n : Num, m + (n - m) == maxn(m, n)
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, maxn(maxn(m, n), p) == maxn(maxn(m, p), n)
+  maxn((m : Num), (_1 : Num))
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, maxn(m, maxn(n, p)) == maxn(maxn(m, n), p)
+  maxn((m : Num), (_1 : Num))
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, maxn(m, maxn(n, p)) == maxn(n, maxn(m, p))
+  (n : _)
+  \226\136\128 m : Num, \226\136\128 n : Num, (maxn(m, n) == n) == (m <= n)
+  (m : _)
+  \226\136\128 m : Num, \226\136\128 n : Num, (maxn(m, n) == m) == (n <= m)
+  \226\136\128 n : Num, maxn(n, n) == n
+  (n2 : _)
+  (n1 : _)
+  (n2 : Num) <= (n1 : Num)
+  ((m : Num) <= maxn((n1 : Num), (n2 : Num))) == (m <= n1 || m <= n2)
+  (m : Num) <= (n1 : Num)
+  (maxn((n1 : Num), (n2 : Num)) <= (m : Num)) == (n1 <= m && n2 <= m)
+  \226\136\128 m1 : Num, \226\136\128 m2 : Num, \226\136\128 n : Num, maxn(m1, m2) + n == maxn(m1 + n, m2 + n)
+  (m : Num) + (_1 : Num)
+  \226\136\128 m : Num, \226\136\128 n1 : Num, \226\136\128 n2 : Num, m + maxn(n1, n2) == maxn(m + n1, m + n2)
+  minn(0, (n : Num)) == 0
+  minn((n : Num), 0) == 0
+  minn((m : Num), (n : Num)) == minn(n, m)
+  (n : Num) <= (m : Num) \226\134\146 minn(m, n) == n
+  (m : Num) <= (n : Num) \226\134\146 minn(m, n) == m
+  minn((m : Num), (n : Num)) + maxn(m, n) == m + n
+  minn((m : Num), (n : Num)) == m + n - maxn(m, n)
+  (m : Num) - (m - (n : Num)) == minn(m, n)
+  (m2 : Num) + (m1 : Num)
+  (m2 : Num) + (_1 : Num) - (_2 : Num)
+  minn((_1 : Num), minn((_2 : Num), (_3 : Num)))
+  \226\136\128 m1 : Num, \226\136\128 m2 : Num, \226\136\128 m3 : Num, minn(m1, minn(m2, m3)) == minn(m2, minn(m1, m3))
+  maxn((m2 : Num), (m3 : Num))
+  maxn((m1 : Num), (m3 : Num))
+  minn((m2 : Num), (_1 : Num))
+  \226\136\128 m1 : Num, \226\136\128 m2 : Num, \226\136\128 m3 : Num, minn(m1, minn(m2, m3)) == minn(minn(m1, m2), m3)
+  minn(minn((m1 : Num), (m2 : Num)), (m3 : Num)) == minn(minn(m1, m3), m2)
+  (m : _) == (_1 : _)
+  (n : Num) + (m : Num)
+  (minn((m : Num), (n : Num)) == n) == (n <= m)
+  (_1 : Num) == (m : Num) + (n : Num)
+  (minn((m : Num), (n : Num)) == m) == (m <= n)
+  minn((n : Num), n) == n
+  ((m : Num) <= minn((n1 : Num), (n2 : Num))) == (m <= n1 && m <= n2)
+  (minn((n1 : Num), (n2 : Num)) <= (m : Num)) == (n1 <= m || n2 <= m)
+  (_1 : Num) + (n : Num)
+  \226\136\128 m1 : Num, \226\136\128 m2 : Num, \226\136\128 n : Num, minn(m1, m2) + n == minn(m1 + n, m2 + n)
+  (m : Num) + (_1 : Num)
+  \226\136\128 m : Num, \226\136\128 n1 : Num, \226\136\128 n2 : Num, m + minn(n1, n2) == minn(m + n1, m + n2)
+  minn(maxn((m : Num), (n : Num)), m) == m
+  minn((n : Num), maxn((m : Num), n)) == n
+  maxn(minn((m : Num), (n : Num)), m) == m
+  maxn((n : Num), minn((m : Num), n)) == n
+  maxn(minn((m1 : Num), (m2 : Num)), (n : Num)) == minn(maxn(m1, n), maxn(m2, n))
+  maxn((m : Num), (_1 : Num))
+  maxn((m : Num), minn((n1 : Num), (n2 : Num))) == minn(maxn(m, n1), maxn(m, n2))
+  maxn((_1 : Num), (n : Num))
+  \226\136\128 m1 : Num, \226\136\128 m2 : Num, \226\136\128 n : Num, minn(maxn(m1, m2), n) == maxn(minn(m1, n), minn(m2, n))
+  minn((m : Num), (_1 : Num))
+  \226\136\128 m : Num, \226\136\128 n1 : Num, \226\136\128 n2 : Num, minn(m, maxn(n1, n2)) == maxn(minn(m, n1), minn(m, n2))
   :num
   :num
   :A
   :A
-  iter (SUC n) f (x:A) = f (iter n f x) /\\ iter 0 f x = x
+  (iter : (Num, (A) -> A, A) -> A)(SUC((n : Num)), (f : (A) -> A), (x : A)) == f(iter(n, f, x)) && iter(0, f, x) == x
   :P
   :P
   \\n. n + 1
@@ -210,7 +210,7 @@ Formal_ineqs/lib/ssrnat quotations (413):
   \\n. n + 1
   \\n. n + 1
   \\n. n + 1
-  iteri (SUC n) f (x:A) = f n (iteri n f x) /\\ iteri 0 f x = x
+  (iteri : (Num, (Num, A) -> A, A) -> A)(SUC((n : Num)), (f : (Num, A) -> A), (x : A)) == f(n, iteri(n, f, x)) && iteri(0, f, x) == x
   :P
   :P
   \\n. n + 1
@@ -218,218 +218,218 @@ Formal_ineqs/lib/ssrnat quotations (413):
   \\n. n + 1
   \\n. n + 1
   \\n. n + 1
-  iter (SUC n) f (x : A) = iter n f (f x)
-  iter (SUC n) f (x:A) = f (iter n f x)
-  iter (n + m) f (x:A) = iter n f (iter m f x)
-  iteri (SUC n) f x = f n (iteri n f (x:A))
-  0 * n = 0
-  n * 0 = 0
-  1 * n = n
-  SUC m * n = n + m * n
-  SUC m * n = m * n + n
-  m * SUC n = m + m * n
-  m * SUC n = m * n + m
-  1 = SUC 0
-  n * 1 = n
-  forall m n. m * n = n * m
-  (m1 + m2) * n = m1 * n + m2 * n
-  m * _1
-  m * (n1 + n2) = m * n1 + m * n2
-  forall m n p. (m - n) * p = m * p - n * p
-  m * _1
-  forall m n p. m * (n - p) = m * n - m * p
-  forall m n p. m * (n * p) = (m * n) * p
-  m * _1
-  m * (n1 * n2) = n1 * (m * n2)
-  p * _1
-  (n * m) * p = (n * p) * m
-  (m * n = 0) <=> (m = 0) \\/ (n = 0)
-  (m * n = 1) <=> (m = 1) /\\ (n = 1)
-  (0 < m * n) <=> (0 < m) /\\ (0 < n)
-  0 < n ==> m <= n * m
-  0 < n ==> m <= m * n
-  (m * n1 <= m * n2) <=> (m = 0) \\/ (n1 <= n2)
-  _1 * m
-  (n1 * m <= n2 * m) <=> (m = 0) \\/ (n1 <= n2)
-  m1 <= n1 ==> m2 <= n2 ==> m1 * m2 <= n1 * n2
-  m1 * n2
-  m1 * m2
-  n1 * n2
-  (m * n1 = m * n2) <=> (m = 0) \\/ (n1 = n2)
-  (n1 * m = n2 * m) <=> (m = 0) \\/ (n1 = n2)
-  0 < m ==> ((m * n1 <= m * n2) <=> (n1 <= n2))
-  0 < m ==> ((n1 * m <= n2 * m) <=> (n1 <= n2))
-  0 < m ==> ((m * n1 = m * n2) <=> (n1 = n2))
-  0 < m ==> ((n1 * m = n2 * m) <=> (n1 = n2))
-  (m * n1 < m * n2) <=> (0 < m) /\\ (n1 < n2)
-  (n1 * m < n2 * m) <=> (0 < m) /\\ (n1 < n2)
-  0 < m ==> ((m * n1 < m * n2) <=> (n1 < n2))
-  0 < m ==> (n1 * m < n2 * m <=> n1 < n2)
-  m
-  1 < n ==> 0 < m ==> m < n * m
-  1 < n ==> 0 < m ==> m < m * n
-  m1 < n1 ==> m2 < n2 ==> m1 * m2 < n1 * n2
-  m1 * n2
-  m1 * m2
-  n1 * n2
-  SUC n * _1
-  m * maxn n1 n2 = maxn (m * n1) (m * n2)
-  _1 * n
-  maxn m1 m2 * n = maxn (m1 * n) (m2 * n)
-  SUC n * _1
-  m * minn n1 n2 = minn (m * n1) (m * n2)
-  _1 * n
-  minn m1 m2 * n = minn (m1 * n) (m2 * n)
+  iter(SUC((n : Num)), (f : (A) -> A), (x : A)) == iter(n, f, f(x))
+  iter(SUC((n : Num)), (f : (A) -> A), (x : A)) == f(iter(n, f, x))
+  iter((n : Num) + (m : Num), (f : (A) -> A), (x : A)) == iter(n, f, iter(m, f, x))
+  iteri(SUC((n : Num)), (f : (Num, A) -> A), (x : A)) == f(n, iteri(n, f, x))
+  0 * (n : Num) == 0
+  (n : Num) * 0 == 0
+  1 * (n : Num) == n
+  SUC((m : Num)) * (n : Num) == n + m * n
+  SUC((m : Num)) * (n : Num) == m * n + n
+  (m : Num) * SUC((n : Num)) == m + m * n
+  (m : Num) * SUC((n : Num)) == m * n + m
+  1 == SUC(0)
+  (n : Num) * 1 == n
+  \226\136\128 m : Num, \226\136\128 n : Num, m * n == n * m
+  ((m1 : Num) + (m2 : Num)) * (n : Num) == m1 * n + m2 * n
+  (m : Num) * (_1 : Num)
+  (m : Num) * ((n1 : Num) + (n2 : Num)) == m * n1 + m * n2
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m - n) * p == m * p - n * p
+  (m : Num) * (_1 : Num)
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m * (n - p) == m * n - m * p
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m * (n * p) == m * n * p
+  (m : Num) * (_1 : Num)
+  (m : Num) * ((n1 : Num) * (n2 : Num)) == n1 * (m * n2)
+  (p : Num) * (_1 : Num)
+  (n : Num) * (m : Num) * (p : Num) == n * p * m
+  ((m : Num) * (n : Num) == 0) == (m == 0 || n == 0)
+  ((m : Num) * (n : Num) == 1) == (m == 1 && n == 1)
+  (0 < (m : Num) * (n : Num)) == (0 < m && 0 < n)
+  0 < (n : Num) \226\134\146 (m : Num) <= n * m
+  0 < (n : Num) \226\134\146 (m : Num) <= m * n
+  ((m : Num) * (n1 : Num) <= m * (n2 : Num)) == (m == 0 || n1 <= n2)
+  (_1 : Num) * (m : Num)
+  ((n1 : Num) * (m : Num) <= (n2 : Num) * m) == (m == 0 || n1 <= n2)
+  (m1 : Num) <= (n1 : Num) \226\134\146 (m2 : Num) <= (n2 : Num) \226\134\146 m1 * m2 <= n1 * n2
+  (m1 : Num) * (n2 : Num)
+  (m1 : Num) * (m2 : Num)
+  (n1 : Num) * (n2 : Num)
+  ((m : Num) * (n1 : Num) == m * (n2 : Num)) == (m == 0 || n1 == n2)
+  ((n1 : Num) * (m : Num) == (n2 : Num) * m) == (m == 0 || n1 == n2)
+  0 < (m : Num) \226\134\146 (m * (n1 : Num) <= m * (n2 : Num)) == (n1 <= n2)
+  0 < (m : Num) \226\134\146 ((n1 : Num) * m <= (n2 : Num) * m) == (n1 <= n2)
+  0 < (m : Num) \226\134\146 (m * (n1 : Num) == m * (n2 : Num)) == (n1 == n2)
+  0 < (m : Num) \226\134\146 ((n1 : Num) * m == (n2 : Num) * m) == (n1 == n2)
+  ((m : Num) * (n1 : Num) < m * (n2 : Num)) == (0 < m && n1 < n2)
+  ((n1 : Num) * (m : Num) < (n2 : Num) * m) == (0 < m && n1 < n2)
+  0 < (m : Num) \226\134\146 (m * (n1 : Num) < m * (n2 : Num)) == (n1 < n2)
+  0 < (m : Num) \226\134\146 ((n1 : Num) * m < (n2 : Num) * m) == (n1 < n2)
+  (m : _)
+  1 < (n : Num) \226\134\146 0 < (m : Num) \226\134\146 m < n * m
+  1 < (n : Num) \226\134\146 0 < (m : Num) \226\134\146 m < m * n
+  (m1 : Num) < (n1 : Num) \226\134\146 (m2 : Num) < (n2 : Num) \226\134\146 m1 * m2 < n1 * n2
+  (m1 : Num) * (n2 : Num)
+  (m1 : Num) * (m2 : Num)
+  (n1 : Num) * (n2 : Num)
+  SUC((n : Num)) * (_1 : Num)
+  (m : Num) * maxn((n1 : Num), (n2 : Num)) == maxn(m * n1, m * n2)
+  (_1 : Num) * (n : Num)
+  maxn((m1 : Num), (m2 : Num)) * (n : Num) == maxn(m1 * n, m2 * n)
+  SUC((n : Num)) * (_1 : Num)
+  (m : Num) * minn((n1 : Num), (n2 : Num)) == minn(m * n1, m * n2)
+  (_1 : Num) * (n : Num)
+  minn((m1 : Num), (m2 : Num)) * (n : Num) == minn(m1 * n, m2 * n)
   EXP
-  m ^ 0 = 1
-  m ^ 1 = m
-  m ^ SUC n = m * m ^ n
-  m ^ SUC n = m ^ n * m
-  0 < n ==> 0 ^ n = 0
+  EXP((m : Num), 0) == 1
+  EXP((m : Num), 1) == m
+  EXP((m : Num), SUC((n : Num))) == m * EXP(m, n)
+  EXP((m : Num), SUC((n : Num))) == EXP(m, n) * m
+  0 < (n : Num) \226\134\146 EXP(0, n) == 0
   ~P <=> (P <=> F)
-  1 ^ n = 1
-  m ^ (n1 + n2) = m ^ n1 * m ^ n2
-  m2 * _1
-  (m1 * m2) ^ n = m1 ^ n * m2 ^ n
-  m ^ (n1 * n2) = (m ^ n1) ^ n2
-  (0 < m ^ n) <=> (0 < m) \\/ (n = 0)
-  (m ^ e = 0) <=> (m = 0) /\\ (0 < e)
-  1 < m ==> n < m ^ n
-  1 < m ==> (m ^ n1 <= m ^ n2 <=> n1 <= n2)
-  1 < m ==> (m ^ n1 < m ^ n2 <=> n1 < n2)
-  1 < m ==> (m ^ n1 = m ^ n2 <=> n1 = n2)
-  1 < m ==> forall e1 e2. m ^ e1 = m ^ e2 ==> e1 = e2
-  0 < m ==> n1 <= n2 ==> m ^ n1 <= m ^ n2
-  0 < m ==> m ^ n1 < m ^ n2 ==> n1 < n2
-  0 < e ==> (m ^ e < n ^ e <=> m < n)
-  0 < e ==> (m ^ e <= n ^ e <=> m <= n)
-  0 < e ==> (m ^ e = n ^ e <=> m = n)
-  0 < e ==> forall m n. m ^ e = n ^ e ==> m = n
-  FACT 0 = 1
-  FACT (SUC n)  = (SUC n) * FACT n
-  0 < FACT n
-  odd = ODD
-  odd 0 = F
-  odd (SUC n) = ~odd n
-  odd 1 = T
-  odd (m + n) = odd m + odd n
-  n <= m ==> odd (m - n) = odd m + odd n
-  odd n
-  odd m = F ==> i < m ==> odd (m - i) = odd i
-  odd (m * n) <=> odd m /\\ odd n
-  odd m
-  SUC n = 0 <=> F
-  odd (m ^ n) <=> (n = 0) \\/ odd m
-  double 0 = 0 /\\ (forall n. double (SUC n) = SUC (SUC (double n)))
+  EXP(1, (n : Num)) == 1
+  EXP((m : Num), (n1 : Num) + (n2 : Num)) == EXP(m, n1) * EXP(m, n2)
+  (m2 : Num) * (_1 : Num)
+  EXP((m1 : Num) * (m2 : Num), (n : Num)) == EXP(m1, n) * EXP(m2, n)
+  EXP((m : Num), (n1 : Num) * (n2 : Num)) == EXP(EXP(m, n1), n2)
+  (0 < EXP((m : Num), (n : Num))) == (0 < m || n == 0)
+  (EXP((m : Num), (e : Num)) == 0) == (m == 0 && 0 < e)
+  1 < (m : Num) \226\134\146 (n : Num) < EXP(m, n)
+  1 < (m : Num) \226\134\146 (EXP(m, (n1 : Num)) <= EXP(m, (n2 : Num))) == (n1 <= n2)
+  1 < (m : Num) \226\134\146 (EXP(m, (n1 : Num)) < EXP(m, (n2 : Num))) == (n1 < n2)
+  1 < (m : Num) \226\134\146 (EXP(m, (n1 : Num)) == EXP(m, (n2 : Num))) == (n1 == n2)
+  1 < (m : Num) \226\134\146 (\226\136\128 e1 : Num, \226\136\128 e2 : Num, EXP(m, e1) == EXP(m, e2) \226\134\146 e1 == e2)
+  0 < (m : Num) \226\134\146 (n1 : Num) <= (n2 : Num) \226\134\146 EXP(m, n1) <= EXP(m, n2)
+  0 < (m : Num) \226\134\146 EXP(m, (n1 : Num)) < EXP(m, (n2 : Num)) \226\134\146 n1 < n2
+  0 < (e : Num) \226\134\146 (EXP((m : Num), e) < EXP((n : Num), e)) == (m < n)
+  0 < (e : Num) \226\134\146 (EXP((m : Num), e) <= EXP((n : Num), e)) == (m <= n)
+  0 < (e : Num) \226\134\146 (EXP((m : Num), e) == EXP((n : Num), e)) == (m == n)
+  0 < (e : Num) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, EXP(m, e) == EXP(n, e) \226\134\146 m == n)
+  FACT(0) == 1
+  FACT(SUC((n : Num))) == SUC(n) * FACT(n)
+  0 < FACT((n : Num))
+  (odd : (Num) -> Bool) == ODD
+  odd(0) == false
+  odd(SUC((n : Num))) == !odd(n)
+  odd(1) == true
+  odd((m : Num) + (n : Num)) == odd(m) + odd(n)
+  (n : Num) <= (m : Num) \226\134\146 odd(m - n) == odd(m) + odd(n)
+  odd((n : Num))
+  odd((m : Num)) == false \226\134\146 (i : Num) < m \226\134\146 odd(m - i) == odd(i)
+  odd((m : Num) * (n : Num)) == (odd(m) && odd(n))
+  odd((m : Num))
+  (SUC((n : Num)) == 0) == false
+  odd(EXP((m : Num), (n : Num))) == (n == 0 || odd(m))
+  (double : (Num) -> Num)(0) == 0 && (\226\136\128 n : Num, double(SUC(n)) == SUC(SUC(double(n))))
   \\n. n + 1
-  double 0 = 0
-  double (SUC n) = SUC (SUC (double n))
-  n + n = double n
-  2 = SUC 1
-  2 * m = double m
-  m * 2 = double m
-  n + _1
-  double (m + n) = double m + double n
-  double (m - n) = double m - double n
-  m - n
-  (double m <= double n <=> m <= n)
-  (double m < double n) = (m < n)
-  (SUC (double m) < double n) = (m < n)
-  (double m <= SUC (double n)) = (m <= n)
-  odd (double n) = F
-  (0 < double n) = (0 < n)
-  (double n = 0) = (n = 0)
-  double (m * n) = double m * n
-  double (m * n) = m * double n
-  HALF 0 = (0, 0) /\\\n        forall n. HALF (SUC n) = (SND (HALF n), SUC (FST (HALF n)))
+  double(0) == 0
+  double(SUC((n : Num))) == SUC(SUC(double(n)))
+  (n : Num) + n == double(n)
+  2 == SUC(1)
+  2 * (m : Num) == double(m)
+  (m : Num) * 2 == double(m)
+  (n : Num) + (_1 : Num)
+  double((m : Num) + (n : Num)) == double(m) + double(n)
+  double((m : Num) - (n : Num)) == double(m) - double(n)
+  (m : Num) - (n : Num)
+  (double((m : Num)) <= double((n : Num))) == (m <= n)
+  (double((m : Num)) < double((n : Num))) == (m < n)
+  (SUC(double((m : Num))) < double((n : Num))) == (m < n)
+  (double((m : Num)) <= SUC(double((n : Num)))) == (m <= n)
+  odd(double((n : Num))) == false
+  (0 < double((n : Num))) == (0 < n)
+  (double((n : Num)) == 0) == (n == 0)
+  double((m : Num) * (n : Num)) == double(m) * n
+  double((m : Num) * (n : Num)) == m * double(n)
+  (HALF : (Num) -> (Num, Num))(0) == (0, 0) && (\226\136\128 n : Num, HALF(SUC(n)) == (SND(HALF(n)), SUC(FST(HALF(n)))))
   \\n. n + 1
-  half = FST o HALF
-  uphalf = SND o HALF
-  half 0 = 0
-  uphalf 0 = 0
-  half (SUC n) = uphalf n
-  uphalf (SUC n) = SUC (half n)
-  half (double x) = x
-  n
-  m
-  forall m n. double m = double n ==> m = n
-  uphalf (double n) = n
-  odd n
-  uphalf n = (if odd n then 1 else 0) + half n
-  odd n
-  (if odd n then 1 else 0) + double (half n) = n
-  half ((if b then 1 else 0) + double n) = n
+  (half : (Num) -> Num) == o(FST, HALF)
+  (uphalf : (Num) -> Num) == o(SND, HALF)
+  half(0) == 0
+  uphalf(0) == 0
+  half(SUC((n : Num))) == uphalf(n)
+  uphalf(SUC((n : Num))) == SUC(half(n))
+  half(double((x : Num))) == x
+  (n : _)
+  (m : _)
+  \226\136\128 m : Num, \226\136\128 n : Num, double(m) == double(n) \226\134\146 m == n
+  uphalf(double((n : Num))) == n
+  odd((n : Num))
+  uphalf((n : Num)) == (if odd(n) { 1 } else { 0 }) + half(n)
+  odd((n : Num))
+  (if odd((n : Num)) { 1 } else { 0 }) + double(half(n)) == n
+  half((if (b : Bool) { 1 } else { 0 }) + double((n : Num))) == n
   odd _
-  m
-  n
-  half (m + n) = (if odd m /\\ odd n then 1 else 0) + (half m + half n)
-  m <= n ==> half m <= half n
-  (0 < half n) = (1 < n)
-  2 = SUC (SUC 0)
-  m * m = m ^ 2
-  (m + n) ^ 2 = (m ^ 2 + n ^ 2) + 2 * (m * n)
-  n EXP 2
-  n <= m ==> (m - n) ^ 2 = (m ^ 2 + n ^ 2) - 2 * (m * n)
-  4 = 2 * 2
-  n <= m ==> (m + n) ^ 2 - 4 * (m * n) = (m - n) ^ 2
-  m ^ 2 - n ^ 2 = (m - n) * (m + n)
-  (m ^ 2 < n ^ 2) = (m < n)
-  (m ^ 2 <= n ^ 2) = (m <= n)
-  (0 < n ^ 2) = (0 < n)
+  (m : _)
+  (n : _)
+  half((m : Num) + (n : Num)) == (if odd(m) && odd(n) { 1 } else { 0 }) + (half(m) + half(n))
+  (m : Num) <= (n : Num) \226\134\146 half(m) <= half(n)
+  (0 < half((n : Num))) == (1 < n)
+  2 == SUC(SUC(0))
+  (m : Num) * m == EXP(m, 2)
+  EXP((m : Num) + (n : Num), 2) == EXP(m, 2) + EXP(n, 2) + 2 * (m * n)
+  EXP((n : Num), 2)
+  (n : Num) <= (m : Num) \226\134\146 EXP(m - n, 2) == EXP(m, 2) + EXP(n, 2) - 2 * (m * n)
+  4 == 2 * 2
+  (n : Num) <= (m : Num) \226\134\146 EXP(m + n, 2) - 4 * (m * n) == EXP(m - n, 2)
+  EXP((m : Num), 2) - EXP((n : Num), 2) == (m - n) * (m + n)
+  (EXP((m : Num), 2) < EXP((n : Num), 2)) == (m < n)
+  (EXP((m : Num), 2) <= EXP((n : Num), 2)) == (m <= n)
+  (0 < EXP((n : Num), 2)) == (0 < n)
   0
-  (m ^ 2 = n ^ 2) = (m = n)
-  m ^ 2 = n ^ 2 ==> m = n
+  (EXP((m : Num), 2) == EXP((n : Num), 2)) == (m == n)
+  EXP((m : Num), 2) == EXP((n : Num), 2) \226\134\146 m == n
   0 < 2
-  forall m n c. leqif m n c <=> (m <= n /\\ ((m = n) <=> c))
-  leqif m n c <=> if c then m = n else m < n
-  leqif m n c ==> m <= n
-  leqif m n c ==> (m = n <=> c)
-  (leqif m m c) <=> c
-  leqif m1 m2 c1 ==> leqif m2 m3 c2 ==> leqif m1 m3 (c1 /\\ c2)
-  (forall m n. f m <= f n <=> m <= n) ==>\n  forall m n c. (leqif (f m) (f n) c) <=> (leqif m n c)
-  m <= n ==> leqif m n (n <= m)
-  m <= n ==> leqif m n (m = n)
-  leqif a b C ==> ((b <= a) <=> C)
-  leqif a b C ==> (a < b <=> ~ C)
-  leqif m1 n1 c1 ==> leqif m2 n2 c2 ==> leqif (m1 + m2) (n1 + n2) (c1 /\\ c2)
-  c1 /\\ c2
-  leqif m1 n1 c1 ==> leqif m2 n2 c2 ==>\n          leqif (m1 * m2) (n1 * n2) (n1 * n2 = 0 \\/ (c1 /\\ c2))
-  n1 * n2
-  m * _1
-  n
-  m
-  n <= m
-  leqif (2 * (m * n)) (m ^ 2 + n ^ 2) (m = n)
-  m = n
-  4 = 2 * 2
-  leqif (4 * (m * n)) ((m + n) ^ 2) (m = n)
-  forall m n. distn m n = (m - n) + (n - m)
-  distn m n = distn n m
-  distn (d + m) (d + n) = distn m n
-  distn (m + d) (n + d) = distn m n
-  m <= n ==> distn m n = n - m
-  n <= m ==> distn m n = m - n
-  distn 0 n = n
-  distn n 0 = n
-  distn m m = 0
-  (distn m n = 0) <=> (m = n)
-  distn m (SUC m) = 1
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 c : Bool, (leqif : (Num, Num, Bool) -> Bool)(m, n, c) == (m <= n && (m == n) == c)
+  leqif((m : Num), (n : Num), (c : Bool)) == (if c { m == n } else { m < n })
+  leqif((m : Num), (n : Num), (c : Bool)) \226\134\146 m <= n
+  leqif((m : Num), (n : Num), (c : Bool)) \226\134\146 (m == n) == c
+  leqif((m : Num), m, (c : Bool)) == c
+  leqif((m1 : Num), (m2 : Num), (c1 : Bool)) \226\134\146 leqif(m2, (m3 : Num), (c2 : Bool)) \226\134\146 leqif(m1, m3, c1 && c2)
+  (\226\136\128 m : Num, \226\136\128 n : Num, ((f : (Num) -> Num)(m) <= f(n)) == (m <= n)) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 c : Bool, leqif(f(m), f(n), c) == leqif(m, n, c))
+  (m : Num) <= (n : Num) \226\134\146 leqif(m, n, n <= m)
+  (m : Num) <= (n : Num) \226\134\146 leqif(m, n, m == n)
+  leqif((a : Num), (b : Num), (C : Bool)) \226\134\146 (b <= a) == C
+  leqif((a : Num), (b : Num), (C : Bool)) \226\134\146 (a < b) == !C
+  leqif((m1 : Num), (n1 : Num), (c1 : Bool)) \226\134\146 leqif((m2 : Num), (n2 : Num), (c2 : Bool)) \226\134\146 leqif(m1 + m2, n1 + n2, c1 && c2)
+  (c1 : Bool) && (c2 : Bool)
+  leqif((m1 : Num), (n1 : Num), (c1 : Bool)) \226\134\146 leqif((m2 : Num), (n2 : Num), (c2 : Bool)) \226\134\146 leqif(m1 * m2, n1 * n2, n1 * n2 == 0 || c1 && c2)
+  (n1 : Num) * (n2 : Num)
+  (m : Num) * (_1 : Num)
+  (n : _)
+  (m : _)
+  (n : Num) <= (m : Num)
+  leqif(2 * ((m : Num) * (n : Num)), EXP(m, 2) + EXP(n, 2), m == n)
+  (m : _) == (n : _)
+  4 == 2 * 2
+  leqif(4 * ((m : Num) * (n : Num)), EXP(m + n, 2), m == n)
+  \226\136\128 m : Num, \226\136\128 n : Num, (distn : (Num, Num) -> Num)(m, n) == m - n + (n - m)
+  distn((m : Num), (n : Num)) == distn(n, m)
+  distn((d : Num) + (m : Num), d + (n : Num)) == distn(m, n)
+  distn((m : Num) + (d : Num), (n : Num) + d) == distn(m, n)
+  (m : Num) <= (n : Num) \226\134\146 distn(m, n) == n - m
+  (n : Num) <= (m : Num) \226\134\146 distn(m, n) == m - n
+  distn(0, (n : Num)) == n
+  distn((n : Num), 0) == n
+  distn((m : Num), m) == 0
+  (distn((m : Num), (n : Num)) == 0) == (m == n)
+  distn((m : Num), SUC(m)) == 1
   0
   1
-  distn (SUC m) m = 1
+  distn(SUC((m : Num)), m) == 1
   _ = 1
-  (distn m n = 1) <=> (if m < n then SUC m = n else m = SUC n)
+  (distn((m : Num), (n : Num)) == 1) == (if m < n { SUC(m) == n } else { m == SUC(n) })
   distn p _
   distn n _
-  forall m p. m <= p ==> leqif (distn m p) (distn m n + distn n p) (m <= n /\\ n <= p \\/ p <= n /\\ n <= m)
-  leqif (distn m p) (distn m n + distn n p) ((m <= n /\\ n <= p) \\/ (p <= n /\\ n <= m))
-  m <= n /\\ n <= p
-  distn m p <= distn m n + distn n p
-  n
-  m
-  n <= m
-  (distn m n) ^ 2 + 2 * (m * n) = m ^ 2 + n ^ 2
-  n EXP 2
+  \226\136\128 m : Num, \226\136\128 p : Num, m <= p \226\134\146 leqif(distn(m, p), distn(m, (n : Num)) + distn(n, p), m <= n && n <= p || p <= n && n <= m)
+  leqif(distn((m : Num), (p : Num)), distn(m, (n : Num)) + distn(n, p), m <= n && n <= p || p <= n && n <= m)
+  (m : Num) <= (n : Num) && n <= (p : Num)
+  distn((m : Num), (p : Num)) <= distn(m, (n : Num)) + distn(n, p)
+  (n : _)
+  (m : _)
+  (n : Num) <= (m : Num)
+  EXP(distn((m : Num), (n : Num)), 2) + 2 * (m * n) == EXP(m, 2) + EXP(n, 2)
+  EXP((n : Num), 2)
 Ssrnat.succnK =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) (#SUC:fun(num,num) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)))
 Ssrnat.succn_inj =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#SUC:fun(num,num) n:num)) (#SUC:fun(num,num) m:num))) ((#=:fun(num,fun(num,bool)) n:num) m:num))))))
 Ssrnat.eqSS =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) (#SUC:fun(num,num) n:num))) ((#=:fun(num,fun(num,bool)) m:num) n:num))))))
