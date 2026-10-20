@@ -88246,868 +88246,868 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|0..0..1..2..3..7..12..solved at 23
       #|0..0..1..2..5..9..15..26..solved at 44
       #|100/isoperimetric quotations (862):
-      #|  forall g:real^1->real^2.\n        simple_path g /\\ pathfinish g = pathstart g /\\\n        convex(inside(path_image g))\n        ==> convex hull (path_image g) = closure(inside(path_image g))
-      #|  forall g:real^1->real^2.\n        simple_path g /\\ pathfinish g = pathstart g /\\\n        convex(inside(path_image g))\n        ==> frontier(convex hull (path_image g)) = path_image g
-      #|  ~(inside(path_image g):real^2->bool = {})
-      #|  t = s <=> s SUBSET t /\\ ~(s PSUBSET t)
-      #|  forall g:real^1->real^2.\n        simple_path g /\\\n        pathfinish g = pathstart g /\\\n        path_image g SUBSET frontier (convex hull path_image g)\n        ==> frontier (convex hull path_image g) = path_image g
-      #|  abs x <= x <=> &0 <= x
-      #|  &2
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  forall f s. real_measurable s /\\\n         f real_measurable_on s /\\\n         (\\x. f x pow 2) real_integrable_on s\n         ==> (real_integral s f) pow 2\n             <= real_measure s * real_integral s (\\x. f x pow 2)
-      #|  x:real
-      #|  x:real
-      #|  a:real
-      #|  c1:real
-      #|  &2 * pi - a = --a + &2 * pi
-      #|  real_integral(real_interval[&0,a]) f =\n      real_integral(real_interval[&0,a]) (\\x. c1 * sin(x - a)) /\\\n      real_integral(real_interval[a,a+pi]) f =\n      real_integral(real_interval[a,a+pi]) (\\x. c2 * sin(x - a)) /\\\n      real_integral(real_interval[a+pi,&2*pi]) f =\n      real_integral(real_interval[a+pi,&2*pi]) (\\x. c1 * sin(x - a))
-      #|  (f has_real_integral &0) (real_interval[&0,&2 * pi])
-      #|  real_integral(real_interval[&0,a]) f +\n      real_integral(real_interval[a,a+pi]) f +\n      real_integral(real_interval[a+pi,&2*pi]) f = &0
-      #|  c2:real = c1:real
-      #|  a - b:real = --b + a
-      #|  f(&2 * pi) = c3 * sin(&2 * pi - a) /\\ f(&0) = c1 * sin(&0 - a) /\\\n    f(&2 * pi) = f(&0) /\\ sin(&2 * pi - a) = sin(&0 - a) /\\\n    ~(sin(&0 - a) = &0)\n    ==> c3 = c1
-      #|  c3:real
-      #|  c2:real
-      #|  c1:real
-      #|  x - a = (x - (a + pi)) + pi
-      #|  p1 /\\ p2 /\\ p3 /\\ (q1 /\\ q2 /\\ q3 ==> r)\n    ==> (p1 ==> q1) ==> (p2 ==> q2) ==> (p3 ==> q3) ==> r
-      #|  x:real
-      #|  x:real
-      #|  &0:real
-      #|  c1:real
-      #|  real_integral(real_interval[&0,pi]) f =\n        real_integral(real_interval[&0,pi]) (\\x. c1 * sin(x)) /\\\n        real_integral(real_interval[pi,&2*pi]) f =\n        real_integral(real_interval[pi,&2*pi]) (\\x. c2 * sin(x))
-      #|  (f has_real_integral &0) (real_interval[&0,&2 * pi])
-      #|  real_integral(real_interval[&0,pi]) f +\n        real_integral(real_interval[pi,&2*pi]) f = &0
-      #|  c2:real = c1:real
-      #|  c2:real
-      #|  c1:real
-      #|  x - pi
-      #|  x:real
-      #|  p1 /\\ p2 /\\ (q1 /\\ q2 ==> r)\n      ==> (p1 ==> q1) ==> (p2 ==> q2) ==> r
-      #|  a = &0
-      #|  w:real
-      #|  v:real
-      #|  u:real
-      #|  \\x. c * sin(x - a)
-      #|  \\x. --(c * cos(x - a))
-      #|  forall u v c. u <= v\n            ==> real_integral(real_interval[u,v]) (\\x. c * sin(x - a)) =\n                c * (cos(u - a) - cos(v - a))
-      #|  z:real
-      #|  x / x' = y / y' <=> &0 = y * inv y' - x * inv x'
-      #|  y:real
-      #|  w:real
-      #|  z:real
-      #|  w:real
-      #|  x:real
-      #|  z:real
-      #|  &0:real
-      #|  f':real->real
-      #|  (f' has_real_integral f x - f(&0)) (real_interval[&0,x]) /\\\n          (f' has_real_integral f z - f(&0)) (real_interval[&0,z])
-      #|  z:real
-      #|  y:real
-      #|  x:real
-      #|  \\x. --(cos(x - a) / sin(x - a) pow 2)
-      #|  f':real->real
-      #|  \\x. inv(sin(x - a))
-      #|  f:real->real
-      #|  y:real
-      #|  x:real
-      #|  (?c. forall u. P u ==> f u = c) <=> (forall u v. P u /\\ P v ==> f u = f v)
-      #|  ~(y = &0) ==> (x = c * y <=> x / y = c)
-      #|  w:real
-      #|  ?c. forall x. u < x /\\ x < v ==> f x = c * sin (x - a)
-      #|  v:real
-      #|  u:real
-      #|  forall u v. &0 <= u /\\ u < v /\\ v <= &2 * pi /\\\n          (forall x. u < x /\\ x < v ==> ~(sin(x - a) = &0))\n          ==> ?c. forall x. u <= x /\\ x <= v ==> f(x) = c * sin(x - a)
-      #|  (f:real->real) a = &0
-      #|  i':real = i
-      #|  &2 * (f:real->real) a
-      #|  (f has_real_integral &0) (real_interval [&0,&2 * pi])
-      #|  x' pow 2 - x pow 2 - (x' pow 2 - (x - a) pow 2 - b):real =\n    (a pow 2 + b) - (&2 * a) * x
-      #|  p ==> q ==> r <=> p /\\ q ==> p /\\ q ==> r
-      #|  i:real
-      #|  i':real
-      #|  (\\x. f' x pow 2) real_integrable_on real_interval[&0,&2 * pi]
-      #|  (\\x. f x pow 2) real_integrable_on real_interval[&0,&2 * pi]
-      #|  &2 * pi - a = &0 - a + &2 * pi
-      #|  (a1 - a0) + (a2 - a1) + (a3 - a2):real = a3 - a0
-      #|  p /\\ q /\\ r /\\ s ==> t <=>\n                        r /\\ s ==> p /\\ q ==> t
-      #|  p /\\ q /\\ r /\\ s ==> t <=>\n                        r /\\ s ==> p /\\ q ==> t
-      #|  x - a = (x - (a + pi)) + pi
-      #|  p1 /\\ p2 /\\ p3 /\\ (q1 /\\ q2 /\\ q3 ==> r)\n    ==> (p1 ==> q1) ==> (p2 ==> q2) ==> (p3 ==> q3) ==> r
-      #|  x:real
-      #|  (c + d) / &2
-      #|  x:real
-      #|  &1
-      #|  (IN) ((c + d) / &2)
-      #|  p /\\ q /\\ r ==> s <=> q ==> p /\\ r ==> s
-      #|  d:real
-      #|  (\\x. real_integral(real_interval[(c + d) / &2,x]) g' -\n             (g x - g((c + d) / &2)))\n         real_continuous_on (real_interval [(c + d) / &2,d])
-      #|  (c + d) / &2
-      #|  x:real
-      #|  x:real
-      #|  &1
-      #|  (IN) ((c + d) / &2)
-      #|  p /\\ q /\\ r ==> s <=> q ==> p /\\ r ==> s
-      #|  c:real
-      #|  (\\x. real_integral(real_interval[x,(c + d) / &2]) g' -\n             (g ((c + d) / &2) - g x))\n         real_continuous_on (real_interval [c,(c + d) / &2])
-      #|  (g:real->real) d - g c =\n      (g((c + d) / &2) - g c) + (g d - g((c + d) / &2))
-      #|  real_integral (real_interval[c,(c+d) / &2]) g' +\n      real_integral (real_interval[(c+d) / &2,d]) g'
-      #|  c:real < d
-      #|  c:real = d
-      #|  abs(x) <= a /\\ abs(y) <= a ==> abs(x - y) <= &2 * a
-      #|  (g' has_real_integral g v - g u) (real_interval[u,v])
-      #|  x <= x' /\\ abs(g) <= &2 * abs b\n        ==> &2 * x - g <= &2 * abs(abs b + x')
-      #|  &0 <= x /\\ &0 <= y /\\ &0 <= z\n          ==> abs(x - y - z) <= &2 * x - (x - y - z)
-      #|  real_integral (real_interval [u,v]) (\\x. &2 * f' x pow 2 - g' x)
-      #|  &0 <= x /\\ x <= y ==> abs x <= y
-      #|  (\\x. f' x pow 2) absolutely_real_integrable_on\n         real_interval[u,v] /\\\n         (\\x. (f x - f a) pow 2) absolutely_real_integrable_on\n         real_interval[u,v] /\\\n         g' absolutely_real_integrable_on real_interval[u,v]
-      #|  abs(&0):real <= &2 * abs x
-      #|  v:real
-      #|  u:real
-      #|  &2 * abs(abs((g:real->real) w) +\n                 real_integral (real_interval[&0,&2 * pi])\n                               (\\x. f' x pow 2))
-      #|  w:real
-      #|  real_interval[&0,&2 * pi]
-      #|  \\x. abs((g:real->real) x)
-      #|  \\x. (f':real->real) x pow 2 - (f x - f a) pow 2 - g' x
-      #|  v:real
-      #|  u:real
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  v:real
-      #|  u:real
-      #|  v:real
-      #|  u:real
-      #|  forall u v. real_interval[u,v] SUBSET real_interval(c,d)\n              ==> g' real_integrable_on real_interval[u,v]
-      #|  (\\x. f' x pow 2) absolutely_real_integrable_on\n        real_interval[&0,&2 * pi] /\\\n        (\\x. (f x - f a) pow 2) absolutely_real_integrable_on\n        real_interval[&0,&2 * pi]
-      #|  g' absolutely_real_integrable_on real_interval[c,d]
-      #|  forall c d. c <= d /\\\n          real_interval[c,d] SUBSET real_interval[&0,&2 * pi] /\\\n          (forall x. x IN real_interval(c,d) ==> ~(sin(x - a) = &0))\n          ==> (g' has_real_integral g d - g c) (real_interval[c,d])
-      #|  c:real
-      #|  x:real
-      #|  x:real
-      #|  c:real
-      #|  x:real
-      #|  d:real
-      #|  e:real
-      #|  c:real
-      #|  c:real
-      #|  &2 * pi
-      #|  &0:real
-      #|  \\x. (f':real->real) x pow 2
-      #|  e:real
-      #|  &0 = &0 * abs(inv(&1))
-      #|  real_segment[c,x]
-      #|  f':real->real
-      #|  x + z:real = y ==> abs(x - y) <= abs z
-      #|  y + z:real = x ==> abs(x - y) <= abs z
-      #|  (real_integral (real_segment[c,x]) f') pow 2
-      #|  (f' has_real_integral f c - f(&0)) (real_interval [&0,c]) /\\\n          (f' has_real_integral f x - f(&0)) (real_interval [&0,x])
-      #|  (real_integral (real_interval[&0,x]) f' -\n                   real_integral (real_interval[&0,c]) f') pow 2
-      #|  x:real
-      #|  &1:real
-      #|  \\x. real_integral (real_segment[c,x]) (\\x. f' x pow 2) *\n          abs((x - c) / sin(x - c))
-      #|  c - a:real
-      #|  x - a:real = (x - c) + (c - a)
-      #|  &0 < abs(c - a) /\\ abs(c - a) < pi \\/\n          &0 < abs(--(c - a) + pi) /\\ abs(--(c - a) + pi) < pi
-      #|  (~p ==> F) ==> p
-      #|  c = a \\/ c = a + pi \\/ a = &0 /\\ c = &2 * pi
-      #|  x:real
-      #|  &1:real
-      #|  \\x. abs((f x - f c) pow 2 * inv(sin(x - c)))
-      #|  sin(c - a) = &0
-      #|  c:real
-      #|  g real_continuous_on real_interval[&0,&2 * pi]
-      #|  x - a:real
-      #|  x:real
-      #|  x:real
-      #|  d:real
-      #|  y - a:real
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  y:real
-      #|  x:real
-      #|  d:real
-      #|  (q ==> p) /\\ q ==> p /\\ q
-      #|  (f' has_real_integral f c - f(&0)) (real_interval [&0,c]) /\\\n          (f' has_real_integral f x - f(&0)) (real_interval [&0,x])
-      #|  c:real
-      #|  x:real
-      #|  &0:real
-      #|  f':real->real
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  x:real
-      #|  x - a - (c - a):real = x - c
-      #|  &2 * a * b = a * b + b * a
-      #|  d:real
-      #|  c:real
-      #|  \\x. --(inv(sin(x - a) pow 2))
-      #|  \\x. &2 * ((f:real->real) x - f a) * f' x
-      #|  \\x. inv(tan(x - a))
-      #|  \\x. ((f:real->real) x - f a) pow 2
-      #|  forall c d. c <= d /\\\n          real_interval[c,d] SUBSET real_interval[&0,&2 * pi] /\\\n          (forall x. x IN real_interval[c,d] ==> ~(sin(x - a) = &0))\n          ==> (g' has_real_integral g d - g c) (real_interval[c,d])
-      #|  g' = \\x. f'(x) pow 2 - (f(x) - f(a)) pow 2 -\n              (f'(x) - (f(x) - f(a)) / tan(x - a)) pow 2
-      #|  g = \\x. (f(x) - f(a)) pow 2 / tan(x - a)
-      #|  a < pi <=> a <= pi /\\ ~(a = pi)
-      #|  &0:real
-      #|  a = pi
-      #|  a:real
-      #|  (q1 \\/ q2) /\\ p /\\ (r ==> s)\n      ==> (p /\\ q1 ==> r) ==> (p /\\ q2 ==> r) ==> s
-      #|  a - b <= &0 <=> a <= b
-      #|  &0
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], simple_path(g) && pathfinish(g) == pathstart(g) && convex(inside(path_image(g))) \226\134\146 hull(convex, path_image(g)) == closure(inside(path_image(g)))
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], simple_path(g) && pathfinish(g) == pathstart(g) && convex(inside(path_image(g))) \226\134\146 frontier(hull(convex, path_image(g))) == path_image(g)
+      #|  !(inside(path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))) == {})
+      #|  ((t : (_) -> Bool) == (s : (_) -> Bool)) == (SUBSET(s, t) && !PSUBSET(s, t))
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], simple_path(g) && pathfinish(g) == pathstart(g) && SUBSET(path_image(g), frontier(hull(convex, path_image(g)))) \226\134\146 frontier(hull(convex, path_image(g))) == path_image(g)
+      #|  (abs((x : Real)) <= x) == (real_of_num(0) <= x)
+      #|  real_of_num(2)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable(s) && real_measurable_on(f, s) && real_integrable_on((x : Real) => pow(f(x), 2), s) \226\134\146 pow(real_integral(s, f), 2) <= real_measure(s) * real_integral(s, (x : Real) => pow(f(x), 2))
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (a : Real)
+      #|  (c1 : Real)
+      #|  real_of_num(2) * pi - (a : Real) == -a + real_of_num(2) * pi
+      #|  real_integral(real_interval([(real_of_num(0), (a : Real))]), (f : (Real) -> Real)) == real_integral(real_interval([(real_of_num(0), a)]), (x : Real) => (c1 : Real) * sin(x - a)) && real_integral(real_interval([(a, a + pi)]), f) == real_integral(real_interval([(a, a + pi)]), (x : Real) => (c2 : Real) * sin(x - a)) && real_integral(real_interval([(a + pi, real_of_num(2) * pi)]), f) == real_integral(real_interval([(a + pi, real_of_num(2) * pi)]), (x : Real) => c1 * sin(x - a))
+      #|  has_real_integral((f : (Real) -> Real), real_of_num(0), real_interval([(real_of_num(0), real_of_num(2) * pi)]))
+      #|  real_integral(real_interval([(real_of_num(0), (a : Real))]), (f : (Real) -> Real)) + (real_integral(real_interval([(a, a + pi)]), f) + real_integral(real_interval([(a + pi, real_of_num(2) * pi)]), f)) == real_of_num(0)
+      #|  (c2 : Real) == (c1 : Real)
+      #|  (a : Real) - (b : Real) == -b + a
+      #|  (f : (Real) -> Real)(real_of_num(2) * pi) == (c3 : Real) * sin(real_of_num(2) * pi - (a : Real)) && f(real_of_num(0)) == (c1 : Real) * sin(real_of_num(0) - a) && f(real_of_num(2) * pi) == f(real_of_num(0)) && sin(real_of_num(2) * pi - a) == sin(real_of_num(0) - a) && !(sin(real_of_num(0) - a) == real_of_num(0)) \226\134\146 c3 == c1
+      #|  (c3 : Real)
+      #|  (c2 : Real)
+      #|  (c1 : Real)
+      #|  (x : Real) - (a : Real) == x - (a + pi) + pi
+      #|  (p1 : Bool) && (p2 : Bool) && (p3 : Bool) && ((q1 : Bool) && (q2 : Bool) && (q3 : Bool) \226\134\146 (r : Bool)) \226\134\146 (p1 \226\134\146 q1) \226\134\146 (p2 \226\134\146 q2) \226\134\146 (p3 \226\134\146 q3) \226\134\146 r
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  real_of_num(0)
+      #|  (c1 : Real)
+      #|  real_integral(real_interval([(real_of_num(0), pi)]), (f : (Real) -> Real)) == real_integral(real_interval([(real_of_num(0), pi)]), (x : Real) => (c1 : Real) * sin(x)) && real_integral(real_interval([(pi, real_of_num(2) * pi)]), f) == real_integral(real_interval([(pi, real_of_num(2) * pi)]), (x : Real) => (c2 : Real) * sin(x))
+      #|  has_real_integral((f : (Real) -> Real), real_of_num(0), real_interval([(real_of_num(0), real_of_num(2) * pi)]))
+      #|  real_integral(real_interval([(real_of_num(0), pi)]), (f : (Real) -> Real)) + real_integral(real_interval([(pi, real_of_num(2) * pi)]), f) == real_of_num(0)
+      #|  (c2 : Real) == (c1 : Real)
+      #|  (c2 : Real)
+      #|  (c1 : Real)
+      #|  (x : Real) - pi
+      #|  (x : Real)
+      #|  (p1 : Bool) && (p2 : Bool) && ((q1 : Bool) && (q2 : Bool) \226\134\146 (r : Bool)) \226\134\146 (p1 \226\134\146 q1) \226\134\146 (p2 \226\134\146 q2) \226\134\146 r
+      #|  (a : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (x : Real) => (c : Real) * sin(x - (a : Real))
+      #|  (x : Real) => -((c : Real) * cos(x - (a : Real)))
+      #|  \226\136\128 u : Real, \226\136\128 v : Real, \226\136\128 c : Real, u <= v \226\134\146 real_integral(real_interval([(u, v)]), (x : Real) => c * sin(x - (a : Real))) == c * (cos(u - a) - cos(v - a))
+      #|  (z : Real)
+      #|  ((x : Real) / (x' : Real) == (y : Real) / (y' : Real)) == (real_of_num(0) == y * inv(y') - x * inv(x'))
+      #|  (y : Real)
+      #|  (w : Real)
+      #|  (z : Real)
+      #|  (w : Real)
+      #|  (x : Real)
+      #|  (z : Real)
+      #|  real_of_num(0)
+      #|  (f' : (Real) -> Real)
+      #|  has_real_integral((f' : (Real) -> Real), (f : (Real) -> Real)((x : Real)) - f(real_of_num(0)), real_interval([(real_of_num(0), x)])) && has_real_integral(f', f((z : Real)) - f(real_of_num(0)), real_interval([(real_of_num(0), z)]))
+      #|  (z : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (x : Real) => -(cos(x - (a : Real)) / pow(sin(x - a), 2))
+      #|  (f' : (Real) -> Real)
+      #|  (x : Real) => inv(sin(x - (a : Real)))
+      #|  (f : (Real) -> Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (\226\136\131 c : _, \226\136\128 u : _, (P : (_) -> Bool)(u) \226\134\146 (f : (_) -> _)(u) == c) == (\226\136\128 u : _, \226\136\128 v : _, P(u) && P(v) \226\134\146 f(u) == f(v))
+      #|  !((y : Real) == real_of_num(0)) \226\134\146 ((x : Real) == (c : Real) * y) == (x / y == c)
+      #|  (w : Real)
+      #|  \226\136\131 c : Real, \226\136\128 x : Real, (u : Real) < x && x < (v : Real) \226\134\146 (f : (Real) -> Real)(x) == c * sin(x - (a : Real))
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  \226\136\128 u : Real, \226\136\128 v : Real, real_of_num(0) <= u && u < v && v <= real_of_num(2) * pi && (\226\136\128 x : Real, u < x && x < v \226\134\146 !(sin(x - (a : Real)) == real_of_num(0))) \226\134\146 (\226\136\131 c : Real, \226\136\128 x : Real, u <= x && x <= v \226\134\146 (f : (Real) -> Real)(x) == c * sin(x - a))
+      #|  (f : (Real) -> Real)((a : Real)) == real_of_num(0)
+      #|  (i' : Real) == (i : Real)
+      #|  real_of_num(2) * (f : (Real) -> Real)((a : Real))
+      #|  has_real_integral((f : (Real) -> Real), real_of_num(0), real_interval([(real_of_num(0), real_of_num(2) * pi)]))
+      #|  pow((x' : Real), 2) - pow((x : Real), 2) - (pow(x', 2) - pow(x - (a : Real), 2) - (b : Real)) == pow(a, 2) + b - real_of_num(2) * a * x
+      #|  ((p : Bool) \226\134\146 (q : Bool) \226\134\146 (r : Bool)) == (p && q \226\134\146 p && q \226\134\146 r)
+      #|  (i : Real)
+      #|  (i' : Real)
+      #|  real_integrable_on((x : Real) => pow((f' : (Real) -> Real)(x), 2), real_interval([(real_of_num(0), real_of_num(2) * pi)]))
+      #|  real_integrable_on((x : Real) => pow((f : (Real) -> Real)(x), 2), real_interval([(real_of_num(0), real_of_num(2) * pi)]))
+      #|  real_of_num(2) * pi - (a : Real) == real_of_num(0) - a + real_of_num(2) * pi
+      #|  (a1 : Real) - (a0 : Real) + ((a2 : Real) - a1 + ((a3 : Real) - a2)) == a3 - a0
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) && (s : Bool) \226\134\146 (t : Bool)) == (r && s \226\134\146 p && q \226\134\146 t)
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) && (s : Bool) \226\134\146 (t : Bool)) == (r && s \226\134\146 p && q \226\134\146 t)
+      #|  (x : Real) - (a : Real) == x - (a + pi) + pi
+      #|  (p1 : Bool) && (p2 : Bool) && (p3 : Bool) && ((q1 : Bool) && (q2 : Bool) && (q3 : Bool) \226\134\146 (r : Bool)) \226\134\146 (p1 \226\134\146 q1) \226\134\146 (p2 \226\134\146 q2) \226\134\146 (p3 \226\134\146 q3) \226\134\146 r
+      #|  (x : Real)
+      #|  ((c : Real) + (d : Real)) / real_of_num(2)
+      #|  (x : Real)
+      #|  real_of_num(1)
+      #|  IN(((c : Real) + (d : Real)) / real_of_num(2))
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (q \226\134\146 p && r \226\134\146 s)
+      #|  (d : Real)
+      #|  real_continuous_on((x : Real) => real_integral(real_interval([(((c : Real) + (d : Real)) / real_of_num(2), x)]), (g' : (Real) -> Real)) - ((g : (Real) -> Real)(x) - g((c + d) / real_of_num(2))), real_interval([((c + d) / real_of_num(2), d)]))
+      #|  ((c : Real) + (d : Real)) / real_of_num(2)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  real_of_num(1)
+      #|  IN(((c : Real) + (d : Real)) / real_of_num(2))
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (q \226\134\146 p && r \226\134\146 s)
+      #|  (c : Real)
+      #|  real_continuous_on((x : Real) => real_integral(real_interval([(x, ((c : Real) + (d : Real)) / real_of_num(2))]), (g' : (Real) -> Real)) - ((g : (Real) -> Real)((c + d) / real_of_num(2)) - g(x)), real_interval([(c, (c + d) / real_of_num(2))]))
+      #|  (g : (Real) -> Real)((d : Real)) - g((c : Real)) == g((c + d) / real_of_num(2)) - g(c) + (g(d) - g((c + d) / real_of_num(2)))
+      #|  real_integral(real_interval([((c : Real), (c + (d : Real)) / real_of_num(2))]), (g' : (Real) -> Real)) + real_integral(real_interval([((c + d) / real_of_num(2), d)]), g')
+      #|  (c : Real) < (d : Real)
+      #|  (c : Real) == (d : Real)
+      #|  abs((x : Real)) <= (a : Real) && abs((y : Real)) <= a \226\134\146 abs(x - y) <= real_of_num(2) * a
+      #|  has_real_integral((g' : (Real) -> Real), (g : (Real) -> Real)((v : Real)) - g((u : Real)), real_interval([(u, v)]))
+      #|  (x : Real) <= (x' : Real) && abs((g : Real)) <= real_of_num(2) * abs((b : Real)) \226\134\146 real_of_num(2) * x - g <= real_of_num(2) * abs(abs(b) + x')
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) && real_of_num(0) <= (z : Real) \226\134\146 abs(x - y - z) <= real_of_num(2) * x - (x - y - z)
+      #|  real_integral(real_interval([((u : Real), (v : Real))]), (x : Real) => real_of_num(2) * pow((f' : (Real) -> Real)(x), 2) - (g' : (Real) -> Real)(x))
+      #|  real_of_num(0) <= (x : Real) && x <= (y : Real) \226\134\146 abs(x) <= y
+      #|  absolutely_real_integrable_on((x : Real) => pow((f' : (Real) -> Real)(x), 2), real_interval([((u : Real), (v : Real))])) && absolutely_real_integrable_on((x : Real) => pow((f : (Real) -> Real)(x) - f((a : Real)), 2), real_interval([(u, v)])) && absolutely_real_integrable_on((g' : (Real) -> Real), real_interval([(u, v)]))
+      #|  abs(real_of_num(0)) <= real_of_num(2) * abs((x : Real))
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  real_of_num(2) * abs(abs((g : (Real) -> Real)((w : Real))) + real_integral(real_interval([(real_of_num(0), real_of_num(2) * pi)]), (x : Real) => pow((f' : (Real) -> Real)(x), 2)))
+      #|  (w : Real)
+      #|  real_interval([(real_of_num(0), real_of_num(2) * pi)])
+      #|  (x : Real) => abs((g : (Real) -> Real)(x))
+      #|  (x : Real) => pow((f' : (Real) -> Real)(x), 2) - pow((f : (Real) -> Real)(x) - f((a : Real)), 2) - (g' : (Real) -> Real)(x)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  \226\136\128 u : Real, \226\136\128 v : Real, SUBSET(real_interval([(u, v)]), real_interval(((c : Real), (d : Real)))) \226\134\146 real_integrable_on((g' : (Real) -> Real), real_interval([(u, v)]))
+      #|  absolutely_real_integrable_on((x : Real) => pow((f' : (Real) -> Real)(x), 2), real_interval([(real_of_num(0), real_of_num(2) * pi)])) && absolutely_real_integrable_on((x : Real) => pow((f : (Real) -> Real)(x) - f((a : Real)), 2), real_interval([(real_of_num(0), real_of_num(2) * pi)]))
+      #|  absolutely_real_integrable_on((g' : (Real) -> Real), real_interval([((c : Real), (d : Real))]))
+      #|  \226\136\128 c : Real, \226\136\128 d : Real, c <= d && SUBSET(real_interval([(c, d)]), real_interval([(real_of_num(0), real_of_num(2) * pi)])) && (\226\136\128 x : Real, IN(x, real_interval((c, d))) \226\134\146 !(sin(x - (a : Real)) == real_of_num(0))) \226\134\146 has_real_integral((g' : (Real) -> Real), (g : (Real) -> Real)(d) - g(c), real_interval([(c, d)]))
+      #|  (c : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (c : Real)
+      #|  (x : Real)
+      #|  (d : Real)
+      #|  (e : Real)
+      #|  (c : Real)
+      #|  (c : Real)
+      #|  real_of_num(2) * pi
+      #|  real_of_num(0)
+      #|  (x : Real) => pow((f' : (Real) -> Real)(x), 2)
+      #|  (e : Real)
+      #|  real_of_num(0) == real_of_num(0) * abs(inv(real_of_num(1)))
+      #|  real_segment([((c : Real), (x : Real))])
+      #|  (f' : (Real) -> Real)
+      #|  (x : Real) + (z : Real) == (y : Real) \226\134\146 abs(x - y) <= abs(z)
+      #|  (y : Real) + (z : Real) == (x : Real) \226\134\146 abs(x - y) <= abs(z)
+      #|  pow(real_integral(real_segment([((c : Real), (x : Real))]), (f' : (Real) -> Real)), 2)
+      #|  has_real_integral((f' : (Real) -> Real), (f : (Real) -> Real)((c : Real)) - f(real_of_num(0)), real_interval([(real_of_num(0), c)])) && has_real_integral(f', f((x : Real)) - f(real_of_num(0)), real_interval([(real_of_num(0), x)]))
+      #|  pow(real_integral(real_interval([(real_of_num(0), (x : Real))]), (f' : (Real) -> Real)) - real_integral(real_interval([(real_of_num(0), (c : Real))]), f'), 2)
+      #|  (x : Real)
+      #|  real_of_num(1)
+      #|  (x : Real) => real_integral(real_segment([((c : Real), x)]), (x : Real) => pow((f' : (Real) -> Real)(x), 2)) * abs((x - c) / sin(x - c))
+      #|  (c : Real) - (a : Real)
+      #|  (x : Real) - (a : Real) == x - (c : Real) + (c - a)
+      #|  real_of_num(0) < abs((c : Real) - (a : Real)) && abs(c - a) < pi || real_of_num(0) < abs(-(c - a) + pi) && abs(-(c - a) + pi) < pi
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  (c : Real) == (a : Real) || c == a + pi || a == real_of_num(0) && c == real_of_num(2) * pi
+      #|  (x : Real)
+      #|  real_of_num(1)
+      #|  (x : Real) => abs(pow((f : (Real) -> Real)(x) - f((c : Real)), 2) * inv(sin(x - c)))
+      #|  sin((c : Real) - (a : Real)) == real_of_num(0)
+      #|  (c : Real)
+      #|  real_continuous_on((g : (Real) -> Real), real_interval([(real_of_num(0), real_of_num(2) * pi)]))
+      #|  (x : Real) - (a : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (d : Real)
+      #|  (y : Real) - (a : Real)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (d : Real)
+      #|  ((q : Bool) \226\134\146 (p : Bool)) && q \226\134\146 p && q
+      #|  has_real_integral((f' : (Real) -> Real), (f : (Real) -> Real)((c : Real)) - f(real_of_num(0)), real_interval([(real_of_num(0), c)])) && has_real_integral(f', f((x : Real)) - f(real_of_num(0)), real_interval([(real_of_num(0), x)]))
+      #|  (c : Real)
+      #|  (x : Real)
+      #|  real_of_num(0)
+      #|  (f' : (Real) -> Real)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (x : Real)
+      #|  (x : Real) - (a : Real) - ((c : Real) - a) == x - c
+      #|  real_of_num(2) * ((a : Real) * (b : Real)) == a * b + b * a
+      #|  (d : Real)
+      #|  (c : Real)
+      #|  (x : Real) => -inv(pow(sin(x - (a : Real)), 2))
+      #|  (x : Real) => real_of_num(2) * (((f : (Real) -> Real)(x) - f((a : Real))) * (f' : (Real) -> Real)(x))
+      #|  (x : Real) => inv(tan(x - (a : Real)))
+      #|  (x : Real) => pow((f : (Real) -> Real)(x) - f((a : Real)), 2)
+      #|  \226\136\128 c : Real, \226\136\128 d : Real, c <= d && SUBSET(real_interval([(c, d)]), real_interval([(real_of_num(0), real_of_num(2) * pi)])) && (\226\136\128 x : Real, IN(x, real_interval([(c, d)])) \226\134\146 !(sin(x - (a : Real)) == real_of_num(0))) \226\134\146 has_real_integral((g' : (Real) -> Real), (g : (Real) -> Real)(d) - g(c), real_interval([(c, d)]))
+      #|  (g' : (Real) -> Real) == ((x : Real) => pow((f' : (Real) -> Real)(x), 2) - pow((f : (Real) -> Real)(x) - f((a : Real)), 2) - pow(f'(x) - (f(x) - f(a)) / tan(x - a), 2))
+      #|  (g : (Real) -> Real) == ((x : Real) => pow((f : (Real) -> Real)(x) - f((a : Real)), 2) / tan(x - a))
+      #|  ((a : Real) < pi) == (a <= pi && !(a == pi))
+      #|  real_of_num(0)
+      #|  (a : Real) == pi
+      #|  (a : Real)
+      #|  ((q1 : Bool) || (q2 : Bool)) && (p : Bool) && ((r : Bool) \226\134\146 (s : Bool)) \226\134\146 (p && q1 \226\134\146 r) \226\134\146 (p && q2 \226\134\146 r) \226\134\146 s
+      #|  ((a : Real) - (b : Real) <= real_of_num(0)) == (a <= b)
+      #|  real_of_num(0)
       #|  pi
-      #|  &0
-      #|  \\x. (f:real->real)(x + pi) - f x
-      #|  &0
+      #|  real_of_num(0)
+      #|  (x : Real) => (f : (Real) -> Real)(x + pi) - f(x)
+      #|  real_of_num(0)
       #|  pi
-      #|  &0
-      #|  \\x. (f:real->real)(x + pi) - f x
-      #|  ?a. &0 <= a /\\ a < pi /\\ f (a + pi):real = f(a)
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  \\x. real_integral (real_interval [&0,x]) f' + f(&0)
-      #|  f real_continuous_on real_interval[&0,&2 * pi]
-      #|  &1 + (f':real->real) x
-      #|  &1 - (f':real->real) x
-      #|  x:real
-      #|  \\x. &1 + (f':real->real) x pow 2
-      #|  f' absolutely_real_integrable_on real_interval[&0,&2 * pi]
-      #|  &2 * pi
-      #|  f' real_integrable_on real_interval[&0,&2 * pi]
-      #|  forall f f'.\n        (forall x. x IN real_interval[&0,&2 * pi]\n             ==> (f' has_real_integral (f x - f(&0))) (real_interval[&0,x])) /\\\n        f(&2 * pi) = f(&0) /\\\n        (f has_real_integral &0) (real_interval[&0,&2 * pi]) /\\\n        (\\x. f'(x) pow 2) real_integrable_on real_interval[&0,&2 * pi]\n        ==> (\\x. f(x) pow 2) real_integrable_on real_interval[&0,&2 * pi] /\\\n            real_integral (real_interval[&0,&2 * pi]) (\\x. f(x) pow 2) <=\n            real_integral (real_interval[&0,&2 * pi]) (\\x. f'(x) pow 2) /\\\n            (real_integral (real_interval[&0,&2 * pi]) (\\x. f(x) pow 2) =\n             real_integral (real_interval[&0,&2 * pi]) (\\x. f'(x) pow 2)\n             ==> ?c a. forall x. x IN real_interval[&0,&2 * pi]\n                           ==> f x = c * sin(x - a))
-      #|  a:real
-      #|  &0:real
-      #|  a + pi
-      #|  a:real
-      #|  &2 * pi
-      #|  a + pi
+      #|  real_of_num(0)
+      #|  (x : Real) => (f : (Real) -> Real)(x + pi) - f(x)
+      #|  \226\136\131 a : Real, real_of_num(0) <= a && a < pi && (f : (Real) -> Real)(a + pi) == f(a)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (x : Real) => real_integral(real_interval([(real_of_num(0), x)]), (f' : (Real) -> Real)) + (f : (Real) -> Real)(real_of_num(0))
+      #|  real_continuous_on((f : (Real) -> Real), real_interval([(real_of_num(0), real_of_num(2) * pi)]))
+      #|  real_of_num(1) + (f' : (Real) -> Real)((x : Real))
+      #|  real_of_num(1) - (f' : (Real) -> Real)((x : Real))
+      #|  (x : Real)
+      #|  (x : Real) => real_of_num(1) + pow((f' : (Real) -> Real)(x), 2)
+      #|  absolutely_real_integrable_on((f' : (Real) -> Real), real_interval([(real_of_num(0), real_of_num(2) * pi)]))
+      #|  real_of_num(2) * pi
+      #|  real_integrable_on((f' : (Real) -> Real), real_interval([(real_of_num(0), real_of_num(2) * pi)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, (\226\136\128 x : Real, IN(x, real_interval([(real_of_num(0), real_of_num(2) * pi)])) \226\134\146 has_real_integral(f', f(x) - f(real_of_num(0)), real_interval([(real_of_num(0), x)]))) && f(real_of_num(2) * pi) == f(real_of_num(0)) && has_real_integral(f, real_of_num(0), real_interval([(real_of_num(0), real_of_num(2) * pi)])) && real_integrable_on((x : Real) => pow(f'(x), 2), real_interval([(real_of_num(0), real_of_num(2) * pi)])) \226\134\146 real_integrable_on((x : Real) => pow(f(x), 2), real_interval([(real_of_num(0), real_of_num(2) * pi)])) && real_integral(real_interval([(real_of_num(0), real_of_num(2) * pi)]), (x : Real) => pow(f(x), 2)) <= real_integral(real_interval([(real_of_num(0), real_of_num(2) * pi)]), (x : Real) => pow(f'(x), 2)) && (real_integral(real_interval([(real_of_num(0), real_of_num(2) * pi)]), (x : Real) => pow(f(x), 2)) == real_integral(real_interval([(real_of_num(0), real_of_num(2) * pi)]), (x : Real) => pow(f'(x), 2)) \226\134\146 (\226\136\131 c : Real, \226\136\131 a : Real, \226\136\128 x : Real, IN(x, real_interval([(real_of_num(0), real_of_num(2) * pi)])) \226\134\146 f(x) == c * sin(x - a)))
+      #|  (a : Real)
+      #|  real_of_num(0)
+      #|  (a : Real) + pi
+      #|  (a : Real)
+      #|  real_of_num(2) * pi
+      #|  (a : Real) + pi
       #|  pi
-      #|  &0:real
-      #|  &2 * pi
+      #|  real_of_num(0)
+      #|  real_of_num(2) * pi
       #|  pi
-      #|  c1:real
-      #|  pi:real
-      #|  &0:real
-      #|  c1:real
-      #|  pi:real
-      #|  &0:real
-      #|  c1:real
-      #|  pi:real
-      #|  &0:real
-      #|  c2:real
-      #|  &2 * pi
+      #|  (c1 : Real)
       #|  pi
-      #|  a:real
-      #|  &0:real
-      #|  a + pi
-      #|  a:real
-      #|  &2 * pi
-      #|  a + pi
-      #|  c1:real
-      #|  a:real
-      #|  &0:real
-      #|  c1:real
-      #|  a:real
-      #|  &0:real
-      #|  c1:real
-      #|  a:real
-      #|  &0:real
-      #|  c1:real
-      #|  a:real
-      #|  &0:real
-      #|  c1:real
-      #|  a:real
-      #|  &0:real
-      #|  c2:real
-      #|  a + pi
-      #|  a:real
-      #|  c1:real
-      #|  &2 * pi
-      #|  a + pi
-      #|  &2 * pi * x <= &2 * pi <=> pi * x <= pi * &1
-      #|  &0 < pi ==> inv(&2 * pi) * &2 * pi * x = x
-      #|  a:real
-      #|  c:real
-      #|  &0 < z ==> (x / z = y / z <=> x = y)
-      #|  &0 < &2 * x <=> &0 < x
-      #|  y:real
-      #|  (\\x. f' x pow 2) real_integrable_on real_interval[&0,&1]
-      #|  (\\x. f x pow 2) real_integrable_on real_interval[&0,&1]
-      #|  real_integral (real_interval [&0,&2 * pi])\n                  (\\x. f (inv (&2 * pi) * x) pow 2) =\n    real_integral (real_interval [&0,&1]) (\\x. (&2 * pi * f x) pow 2) /\n    (&2 * pi) /\\\n    real_integral (real_interval [&0,&2 * pi])\n                  (\\x. (inv (&2 * pi) * f' (inv (&2 * pi) * x)) pow 2) =\n    real_integral (real_interval [&0,&1]) (\\x. f' x pow 2) / (&2 * pi)
-      #|  &0 < &2 * x <=> &0 < x
-      #|  &0 < t ==> inv t * t * x = x
-      #|  &2 * pi
-      #|  (p ==> p') /\\ (p' ==> q ==> q') ==> (p /\\ q ==> p' /\\ q')
-      #|  inv(&2 * pi)
-      #|  inv(&2 * pi)
-      #|  (f:real->real) (&1) = f (&0)
-      #|  inv x * y:real = y / x
-      #|  &0 < &2 * x <=> &0 < x
-      #|  inv(&2 * pi)
-      #|  &0 < &2 * x <=> &0 < x
-      #|  x / (&2 * pi)
-      #|  forall x. x = inv(&2 * pi) * &2 * pi * x
-      #|  x:real
-      #|  (\\x. inv(&2 * pi) * f'(inv(&2 * pi) * x)):real->real
-      #|  (\\x. f(inv(&2 * pi) * x)):real->real
-      #|  forall f f'.\n      (forall x. x IN real_interval[&0,&1]\n           ==> (f' has_real_integral (f x - f(&0))) (real_interval[&0,x])) /\\\n      f(&1) = f(&0) /\\\n      (f has_real_integral &0) (real_interval[&0,&1]) /\\\n      (\\x. f'(x) pow 2) real_integrable_on real_interval[&0,&1]\n      ==> (\\x. f(x) pow 2) real_integrable_on real_interval[&0,&1] /\\\n          real_integral (real_interval[&0,&1]) (\\x. (&2 * pi * f(x)) pow 2) <=\n          real_integral (real_interval[&0,&1]) (\\x. f'(x) pow 2) /\\\n          (real_integral (real_interval[&0,&1]) (\\x. (&2 * pi * f(x)) pow 2) =\n           real_integral (real_interval[&0,&1]) (\\x. f'(x) pow 2)\n           ==> ?c a. forall x. x IN real_interval[&0,&1]\n                         ==> f x = c * sin(&2 * pi * x - a))
-      #|  inv(&2 * pi)
-      #|  inv(&2 * pi)
-      #|  &2 * pi * x
-      #|  x:real
-      #|  x:real^1
-      #|  g:real^1->real^2
-      #|  x:real^1
-      #|  u:real^1->bool
-      #|  g:real^1->real^2
-      #|  forall(g:real^1->real^2) g' u a.\n        simple_path g /\\ pathstart g = a /\\ pathfinish g = a /\\\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        negligible u /\\\n        (forall t. t IN interval[vec 0,vec 1] DIFF u\n             ==> (g has_vector_derivative g'(t)) (at t))\n        ==> (\\t. lift(g'(t)$1 * g(t)$2)) integrable_on\n            interval[vec 0,vec 1] /\\\n            norm(integral (interval[vec 0,vec 1])\n                          (\\t. lift(g'(t)$1 * g(t)$2))) =\n            measure(inside(path_image g))
-      #|  abs C:real
-      #|  z:real^2
-      #|  sphere(z:real^2,abs C)
-      #|  ~(inside(path_image g):real^2->bool = {})
-      #|  z:real^2 = vector[sgn * C * cos A; &0]
-      #|  (sgn:real) pow 2 = &1
-      #|  &2 * pi * drop x - A
-      #|  x:real^1
-      #|  s SUBSET t /\\ ~(s PSUBSET t) ==> s = t
-      #|  abs C:real
-      #|  vector[sgn * C * cos A; &0]:real^2
-      #|  ((\\x. &2 * pi * sgn * C * sin (&2 * pi * x - A))\n       has_real_integral\n       (--sgn * C * cos (&2 * pi * drop x - A) -\n        --sgn * C * cos (&2 * pi * &0 - A))) (real_interval[&0,drop x])
+      #|  real_of_num(0)
+      #|  (c1 : Real)
+      #|  pi
+      #|  real_of_num(0)
+      #|  (c1 : Real)
+      #|  pi
+      #|  real_of_num(0)
+      #|  (c2 : Real)
+      #|  real_of_num(2) * pi
+      #|  pi
+      #|  (a : Real)
+      #|  real_of_num(0)
+      #|  (a : Real) + pi
+      #|  (a : Real)
+      #|  real_of_num(2) * pi
+      #|  (a : Real) + pi
+      #|  (c1 : Real)
+      #|  (a : Real)
+      #|  real_of_num(0)
+      #|  (c1 : Real)
+      #|  (a : Real)
+      #|  real_of_num(0)
+      #|  (c1 : Real)
+      #|  (a : Real)
+      #|  real_of_num(0)
+      #|  (c1 : Real)
+      #|  (a : Real)
+      #|  real_of_num(0)
+      #|  (c1 : Real)
+      #|  (a : Real)
+      #|  real_of_num(0)
+      #|  (c2 : Real)
+      #|  (a : Real) + pi
+      #|  (a : Real)
+      #|  (c1 : Real)
+      #|  real_of_num(2) * pi
+      #|  (a : Real) + pi
+      #|  (real_of_num(2) * (pi * (x : Real)) <= real_of_num(2) * pi) == (pi * x <= pi * real_of_num(1))
+      #|  real_of_num(0) < pi \226\134\146 inv(real_of_num(2) * pi) * (real_of_num(2) * (pi * (x : Real))) == x
+      #|  (a : Real)
+      #|  (c : Real)
+      #|  real_of_num(0) < (z : Real) \226\134\146 ((x : Real) / z == (y : Real) / z) == (x == y)
+      #|  (real_of_num(0) < real_of_num(2) * (x : Real)) == (real_of_num(0) < x)
+      #|  (y : Real)
+      #|  real_integrable_on((x : Real) => pow((f' : (Real) -> Real)(x), 2), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  real_integrable_on((x : Real) => pow((f : (Real) -> Real)(x), 2), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  real_integral(real_interval([(real_of_num(0), real_of_num(2) * pi)]), (x : Real) => pow((f : (Real) -> Real)(inv(real_of_num(2) * pi) * x), 2)) == real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (x : Real) => pow(real_of_num(2) * (pi * f(x)), 2)) / (real_of_num(2) * pi) && real_integral(real_interval([(real_of_num(0), real_of_num(2) * pi)]), (x : Real) => pow(inv(real_of_num(2) * pi) * (f' : (Real) -> Real)(inv(real_of_num(2) * pi) * x), 2)) == real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (x : Real) => pow(f'(x), 2)) / (real_of_num(2) * pi)
+      #|  (real_of_num(0) < real_of_num(2) * (x : Real)) == (real_of_num(0) < x)
+      #|  real_of_num(0) < (t : Real) \226\134\146 inv(t) * (t * (x : Real)) == x
+      #|  real_of_num(2) * pi
+      #|  ((p : Bool) \226\134\146 (p' : Bool)) && (p' \226\134\146 (q : Bool) \226\134\146 (q' : Bool)) \226\134\146 p && q \226\134\146 p' && q'
+      #|  inv(real_of_num(2) * pi)
+      #|  inv(real_of_num(2) * pi)
+      #|  (f : (Real) -> Real)(real_of_num(1)) == f(real_of_num(0))
+      #|  inv((x : Real)) * (y : Real) == y / x
+      #|  (real_of_num(0) < real_of_num(2) * (x : Real)) == (real_of_num(0) < x)
+      #|  inv(real_of_num(2) * pi)
+      #|  (real_of_num(0) < real_of_num(2) * (x : Real)) == (real_of_num(0) < x)
+      #|  (x : Real) / (real_of_num(2) * pi)
+      #|  \226\136\128 x : Real, x == inv(real_of_num(2) * pi) * (real_of_num(2) * (pi * x))
+      #|  (x : Real)
+      #|  (x : Real) => inv(real_of_num(2) * pi) * (f' : (Real) -> Real)(inv(real_of_num(2) * pi) * x)
+      #|  (x : Real) => (f : (Real) -> Real)(inv(real_of_num(2) * pi) * x)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, (\226\136\128 x : Real, IN(x, real_interval([(real_of_num(0), real_of_num(1))])) \226\134\146 has_real_integral(f', f(x) - f(real_of_num(0)), real_interval([(real_of_num(0), x)]))) && f(real_of_num(1)) == f(real_of_num(0)) && has_real_integral(f, real_of_num(0), real_interval([(real_of_num(0), real_of_num(1))])) && real_integrable_on((x : Real) => pow(f'(x), 2), real_interval([(real_of_num(0), real_of_num(1))])) \226\134\146 real_integrable_on((x : Real) => pow(f(x), 2), real_interval([(real_of_num(0), real_of_num(1))])) && real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (x : Real) => pow(real_of_num(2) * (pi * f(x)), 2)) <= real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (x : Real) => pow(f'(x), 2)) && (real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (x : Real) => pow(real_of_num(2) * (pi * f(x)), 2)) == real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (x : Real) => pow(f'(x), 2)) \226\134\146 (\226\136\131 c : Real, \226\136\131 a : Real, \226\136\128 x : Real, IN(x, real_interval([(real_of_num(0), real_of_num(1))])) \226\134\146 f(x) == c * sin(real_of_num(2) * (pi * x) - a)))
+      #|  inv(real_of_num(2) * pi)
+      #|  inv(real_of_num(2) * pi)
+      #|  real_of_num(2) * (pi * (x : Real))
+      #|  (x : Real)
+      #|  (x : Cart[Real, Unit])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Unit])
+      #|  (u : (Cart[Real, Unit]) -> Bool)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 u : (Cart[Real, Unit]) -> Bool, \226\136\128 a : Cart[Real, Tybit0[Unit]], simple_path(g) && pathstart(g) == a && pathfinish(g) == a && absolutely_continuous_on(g, interval([(vec(0), vec(1))])) && negligible(u) && (\226\136\128 t : Cart[Real, Unit], IN(t, DIFF(interval([(vec(0), vec(1))]), u)) \226\134\146 has_vector_derivative(g, g'(t), at(t))) \226\134\146 integrable_on((t : Cart[Real, Unit]) => lift(op_dollar(g'(t), 1) * op_dollar(g(t), 2)), interval([(vec(0), vec(1))])) && norm(integral(interval([(vec(0), vec(1))]), (t : Cart[Real, Unit]) => lift(op_dollar(g'(t), 1) * op_dollar(g(t), 2)))) == measure(inside(path_image(g)))
+      #|  abs((C : Real))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  sphere(((z : Cart[Real, Tybit0[Unit]]), abs((C : Real))))
+      #|  !(inside(path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))) == {})
+      #|  (z : Cart[Real, Tybit0[Unit]]) == vector([(sgn : Real) * ((C : Real) * cos((A : Real))), real_of_num(0)])
+      #|  pow((sgn : Real), 2) == real_of_num(1)
+      #|  real_of_num(2) * (pi * drop((x : Cart[Real, Unit]))) - (A : Real)
+      #|  (x : Cart[Real, Unit])
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) && !PSUBSET(s, t) \226\134\146 s == t
+      #|  abs((C : Real))
+      #|  (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(sgn : Real) * ((C : Real) * cos((A : Real))), real_of_num(0)])
+      #|  has_real_integral((x : Real) => real_of_num(2) * (pi * ((sgn : Real) * ((C : Real) * sin(real_of_num(2) * (pi * x) - (A : Real))))), -sgn * (C * cos(real_of_num(2) * (pi * drop((x : Cart[Real, Unit]))) - A)) - -sgn * (C * cos(real_of_num(2) * (pi * real_of_num(0)) - A)), real_interval([(real_of_num(0), drop(x))]))
       #|  1
-      #|  (g':real^1->real^2) absolutely_integrable_on interval[vec 0,x] /\\\n        integral (interval [vec 0,x]) g' = g x - a
-      #|  y:real^1
-      #|  negligible t ==> P t ==> ?s. negligible s /\\ P s
-      #|  interval[vec 0:real^1,x]
-      #|  \\x. lift((g':real^1->real^2) x$1 -\n               &2 * pi * sgn * C * sin(&2 * pi * drop x - A))
-      #|  x:real^1
-      #|  forall x. x IN interval[vec 0,vec 1]\n        ==> (g:real^1->real^2)x$1 =\n            --sgn * C * (cos(&2 * pi * drop x - A) - cos A)
-      #|  A:real
-      #|  C:real
-      #|  p /\\ ~q <=> ~(p ==> q)
-      #|  drop w = &0
-      #|  (f has_integral y) s
-      #|  drop w = &0
-      #|  d:real = &0
-      #|  &0 <= x /\\ &0 <= y ==> (x + y:real = &0 <=> x = &0 /\\ y = &0)
-      #|  L pow 2 - measure(inside(path_image g:real^2->bool)) * &4 * pi =\n    d + drop w
-      #|  d = L pow 2 -\n        measure(inside(path_image g:real^2->bool)) * &4 * pi - drop w
-      #|  (a + b) - b:real^N = a
-      #|  (f has_integral y) s
-      #|  w:real^1
-      #|  (\\x. lift((g':real^1->real^2)x$2 pow 2 -\n              (&2 * pi * (g:real^1->real^2)x$2) pow 2))\n     integrable_on interval[vec 0,vec 1]
-      #|  (g':real^1->real^2) absolutely_integrable_on interval[vec 0,vec 1]
-      #|  \\x. lift(norm((g':real^1->real^2) x) pow 2)
-      #|  p /\\ (p /\\ q ==> r ==> s) ==> (p ==> q /\\ (q ==> r)) ==> s
-      #|  y:real^1
+      #|  absolutely_integrable_on((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval([(vec(0), (x : Cart[Real, Unit]))])) && integral(interval([(vec(0), x)]), g') == (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x) - (a : Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, Unit])
+      #|  negligible((t : (Cart[Real, _]) -> Bool)) \226\134\146 (P : ((Cart[Real, _]) -> Bool) -> Bool)(t) \226\134\146 (\226\136\131 s : (Cart[Real, _]) -> Bool, negligible(s) && P(s))
+      #|  interval([(vec(0), (x : Cart[Real, Unit]))])
+      #|  (x : Cart[Real, Unit]) => lift(op_dollar((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x), 1) - real_of_num(2) * (pi * ((sgn : Real) * ((C : Real) * sin(real_of_num(2) * (pi * drop(x)) - (A : Real))))))
+      #|  (x : Cart[Real, Unit])
+      #|  \226\136\128 x : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) \226\134\146 op_dollar((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x), 1) == -(sgn : Real) * ((C : Real) * (cos(real_of_num(2) * (pi * drop(x)) - (A : Real)) - cos(A)))
+      #|  (A : Real)
+      #|  (C : Real)
+      #|  ((p : Bool) && !(q : Bool)) == !(p \226\134\146 q)
+      #|  drop((w : Cart[Real, Unit])) == real_of_num(0)
+      #|  has_integral((f : (Cart[Real, _]) -> Cart[Real, _]), (y : Cart[Real, _]), (s : (Cart[Real, _]) -> Bool))
+      #|  drop((w : Cart[Real, Unit])) == real_of_num(0)
+      #|  (d : Real) == real_of_num(0)
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 (x + y == real_of_num(0)) == (x == real_of_num(0) && y == real_of_num(0))
+      #|  pow((L : Real), 2) - measure(inside(path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))) * (real_of_num(4) * pi) == (d : Real) + drop((w : Cart[Real, Unit]))
+      #|  (d : Real) == pow((L : Real), 2) - measure(inside(path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))) * (real_of_num(4) * pi) - drop((w : Cart[Real, Unit]))
+      #|  (a : Cart[Real, N]) + (b : Cart[Real, N]) - b == a
+      #|  has_integral((f : (Cart[Real, _]) -> Cart[Real, _]), (y : Cart[Real, _]), (s : (Cart[Real, _]) -> Bool))
+      #|  (w : Cart[Real, Unit])
+      #|  integrable_on((x : Cart[Real, Unit]) => lift(pow(op_dollar((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x), 2), 2) - pow(real_of_num(2) * (pi * op_dollar((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x), 2)), 2)), interval([(vec(0), vec(1))]))
+      #|  absolutely_integrable_on((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval([(vec(0), vec(1))]))
+      #|  (x : Cart[Real, Unit]) => lift(pow(norm((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)), 2))
+      #|  (p : Bool) && (p && (q : Bool) \226\134\146 (r : Bool) \226\134\146 (s : Bool)) \226\134\146 (p \226\134\146 q && (q \226\134\146 r)) \226\134\146 s
+      #|  (y : Cart[Real, Unit])
       #|  2
-      #|  g:real^1->real^2
-      #|  x:real^1
-      #|  vec 0:real^1
-      #|  s:real^1->bool
-      #|  \\x. lift((g':real^1->real^2) x$2)
-      #|  \\x. lift((g:real^1->real^2) x$2)
-      #|  x:real^1
-      #|  g:real^1->real^2
-      #|  g:real^1->real^2
-      #|  drop x = drop y <=> drop y - drop x = &0
-      #|  drop x <= drop y <=> &0 <= drop y - drop x
-      #|  (p ==> q /\\ r) <=> p ==> q /\\ (q ==> r)
-      #|  \\x. (g':real^1->real^2)(lift x)$2
-      #|  \\x. (g:real^1->real^2)(lift x)$2
-      #|  inside(path_image g):real^2->bool = {}
-      #|  x * &4 * pi = &4 * pi * x
-      #|  s pow 2 = &1\n         ==> (x' - &2 * pi * s * y) pow 2 + (y' pow 2 - (&2 * pi * y) pow 2) =\n             (x' pow 2 + y' pow 2) - &4 * pi * s * x' * y
-      #|  ((\\x. lift(((g':real^1->real^2) x$1 -\n                &2 * pi * sgn * (g:real^1->real^2)(x)$2) pow 2 +\n               (g'(x)$2 pow 2 - (&2 * pi * g(x)$2) pow 2)))\n     has_integral lift(L pow 2 - measure (inside (path_image g)) * &4 * pi))\n    (interval[vec 0,vec 1])
-      #|  &0 < z ==> (x = y / (&4 * z) <=> y - x * &4 * z = &0)
-      #|  &0:real < &4 * x <=> &0 < x
-      #|  --(&1):real
-      #|  &1:real
-      #|  ?sgn. sgn pow 2 = &1 /\\\n          ((\\x. lift((g':real^1->real^2)(x)$1 * g(x)$2)) has_integral\n           sgn % lift(measure(inside(path_image(g:real^1->real^2)))))\n          (interval[vec 0,vec 1])
-      #|  b - a:real^N = c ==> b = a + c
-      #|  a:real^2
-      #|  s:real^1->bool
-      #|  (\\t. lift(g'(t)$1 * (g:real^1->real^2)(t)$2)) integrable_on\n    interval[vec 0,vec 1] /\\\n    norm(integral (interval[vec 0,vec 1])\n                  (\\t. lift((g':real^1->real^2)(t)$1 * g(t)$2))) =\n    measure(inside(path_image g))
-      #|  s UNION {x | (x IN interval[vec 0,vec 1] /\\ ~(x IN s)) /\\\n                    ~(norm ((g':real^1->real^2) x) = L)}
-      #|  x - y:real = &0 <=> y = x
-      #|  vec 0 = content(interval[vec 0:real^1,vec 1]) % lift L - lift L
-      #|  s:real^1->bool
-      #|  interval[vec 0:real^1,vec 1]
-      #|  ((\\x. lift(L - norm((g':real^1->real^2) x))) has_integral (vec 0))\n       (interval[vec 0,vec 1] DIFF s)
-      #|  &0 < l ==> abs l = l
-      #|  integral (interval[vec 0,vec 1]) (\\x:real^1. lift(L pow 2))
-      #|  integral (interval[vec 0,vec 1])\n             (\\x. lift(norm((g':real^1->real^2) x) pow 2)) =\n    lift(L pow 2)
-      #|  &0 < l ==> abs l = l
-      #|  s:real^1->bool
-      #|  \\x:real^1. lift(L pow 2)
-      #|  (\\x. lift(norm((g':real^1->real^2) x) pow 2))\n    absolutely_integrable_on interval[vec 0,vec 1]
-      #|  &0 < l ==> abs l = l
-      #|  interior:(real^1->bool)->real^1->bool
-      #|  interval[vec 0:real^1,vec 1]
-      #|  x:real^1
-      #|  \\x:real^1. L % x
-      #|  g:real^1->real^2
-      #|  &0 < l ==> abs l = l
-      #|  L = norm(lift L)
-      #|  forall x. x IN interval[vec 0,vec 1] /\\ ~(x IN s)\n        ==> norm((g':real^1->real^2) x) <= L
-      #|  s:real^1->bool
-      #|  x:real^1
-      #|  vec 0:real^1
-      #|  g':real^1->real^2
-      #|  g:real^1->real^2
-      #|  x:real^1
-      #|  vec 0:real^1
-      #|  g:real^1->real^2
-      #|  x:real^1
-      #|  forall x. x IN interval[vec 0,vec 1]\n        ==> (\\x. lift(norm((g':real^1->real^2) x))) absolutely_integrable_on\n            interval[vec 0,x] /\\\n            integral (interval[vec 0,x]) (\\x. lift(norm(g' x))) =\n            L % x
-      #|  vec 1:real^1
-      #|  vec 0:real^1
-      #|  g':real^1->real^2
-      #|  g:real^1->real^2
-      #|  forall t. t IN interval[vec 0,vec 1]\n        ==> (g':real^1->real^2) absolutely_integrable_on interval[vec 0,t] /\\\n            integral (interval[vec 0,t]) g' = g t - a
-      #|  \\x. vector_derivative (g:real^1->real^2) (at x)
-      #|  ?g':real^1->real^2.\n        forall x. x IN interval[vec 0,vec 1] /\\ ~(x IN s)\n            ==> (g has_vector_derivative g' x) (at x)
-      #|  s = {x | x IN interval[vec 0,vec 1] /\\\n              ~((g:real^1->real^2) differentiable at x)}
-      #|  (g:real^1->real^2) absolutely_continuous_on interval[vec 0,vec 1]
-      #|  --lift av
-      #|  vec 1:real^1
-      #|  vec 0:real^1
-      #|  g:real^1->real^2
-      #|  L:real
-      #|  av:real
-      #|  a:real^2
-      #|  baseline:real
-      #|  b:real^2
-      #|  origin:real^2
-      #|  origin:real^2
-      #|  (origin:real^2)$1 = (a:real^2)$1 /\\\n                (origin:real^2)$2 = av
-      #|  origin:real^2 = vector[(a:real^2)$1;av]
-      #|  av:real
-      #|  L:real
-      #|  (\\t. lift((g2:real^1->real^2)(t)$2)) integrable_on interval[vec 0,vec 1]
-      #|  g1:real^1->real^2
-      #|  g2:real^1->real^2
-      #|  g1:real^1->real^2
-      #|  (t:real^1) IN interval[vec 0,vec 1]
-      #|  g0:real^1->real^2
-      #|  path_image g0 = path_image g1 /\\\n    rectifiable_path g1 /\\\n    simple_path g1 /\\\n    pathstart g1 = a /\\\n    pathfinish g1 :real^2 = a /\\\n    convex(inside(path_image g1)) /\\\n    path_length g1 = L
-      #|  g1:real^1->real^2 = shiftpath t g0
-      #|  t:real^1
-      #|  (a:real^2) IN path_image g0
-      #|  INFINITE:(real^2->bool)->bool
-      #|  norm(a - a:real^2) = d ==> d = &0
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Unit])
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (s : (Cart[Real, Unit]) -> Bool)
+      #|  (x : Cart[Real, Unit]) => lift(op_dollar((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x), 2))
+      #|  (x : Cart[Real, Unit]) => lift(op_dollar((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x), 2))
+      #|  (x : Cart[Real, Unit])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (drop((x : Cart[Real, Unit])) == drop((y : Cart[Real, Unit]))) == (drop(y) - drop(x) == real_of_num(0))
+      #|  (drop((x : Cart[Real, Unit])) <= drop((y : Cart[Real, Unit]))) == (real_of_num(0) <= drop(y) - drop(x))
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == (p \226\134\146 q && (q \226\134\146 r))
+      #|  (x : Real) => op_dollar((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(lift(x)), 2)
+      #|  (x : Real) => op_dollar((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(lift(x)), 2)
+      #|  inside(path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))) == {}
+      #|  (x : Real) * (real_of_num(4) * pi) == real_of_num(4) * (pi * x)
+      #|  pow((s : Real), 2) == real_of_num(1) \226\134\146 pow((x' : Real) - real_of_num(2) * (pi * (s * (y : Real))), 2) + (pow((y' : Real), 2) - pow(real_of_num(2) * (pi * y), 2)) == pow(x', 2) + pow(y', 2) - real_of_num(4) * (pi * (s * (x' * y)))
+      #|  has_integral((x : Cart[Real, Unit]) => lift(pow(op_dollar((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x), 1) - real_of_num(2) * (pi * ((sgn : Real) * op_dollar((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x), 2))), 2) + (pow(op_dollar(g'(x), 2), 2) - pow(real_of_num(2) * (pi * op_dollar(g(x), 2)), 2))), lift(pow((L : Real), 2) - measure(inside(path_image(g))) * (real_of_num(4) * pi)), interval([(vec(0), vec(1))]))
+      #|  real_of_num(0) < (z : Real) \226\134\146 ((x : Real) == (y : Real) / (real_of_num(4) * z)) == (y - x * (real_of_num(4) * z) == real_of_num(0))
+      #|  (real_of_num(0) < real_of_num(4) * (x : Real)) == (real_of_num(0) < x)
+      #|  -real_of_num(1)
+      #|  real_of_num(1)
+      #|  \226\136\131 sgn : Real, pow(sgn, 2) == real_of_num(1) && has_integral((x : Cart[Real, Unit]) => lift(op_dollar((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x), 1) * op_dollar((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x), 2)), op_pct(sgn, lift(measure(inside(path_image(g))))), interval([(vec(0), vec(1))]))
+      #|  (b : Cart[Real, N]) - (a : Cart[Real, N]) == (c : Cart[Real, N]) \226\134\146 b == a + c
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (s : (Cart[Real, Unit]) -> Bool)
+      #|  integrable_on((t : Cart[Real, Unit]) => lift(op_dollar((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t), 1) * op_dollar((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t), 2)), interval([(vec(0), vec(1))])) && norm(integral(interval([(vec(0), vec(1))]), (t : Cart[Real, Unit]) => lift(op_dollar(g'(t), 1) * op_dollar(g(t), 2)))) == measure(inside(path_image(g)))
+      #|  UNION((s : (Cart[Real, Unit]) -> Bool), {(x : Cart[Real, Unit]) | (IN(x, interval([(vec(0), vec(1))])) && !IN(x, s)) && !(norm((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)) == (L : Real))})
+      #|  ((x : Real) - (y : Real) == real_of_num(0)) == (y == x)
+      #|  (vec : (Num) -> Cart[Real, Unit])(0) == (op_pct : (Real, Cart[Real, Unit]) -> Cart[Real, Unit])((content : ((Cart[Real, Unit]) -> Bool) -> Real)((interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])), lift((L : Real))) - lift(L)
+      #|  (s : (Cart[Real, Unit]) -> Bool)
+      #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
+      #|  has_integral((x : Cart[Real, Unit]) => lift((L : Real) - norm((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x))), vec(0), DIFF(interval([(vec(0), vec(1))]), (s : (Cart[Real, Unit]) -> Bool)))
+      #|  real_of_num(0) < (l : Real) \226\134\146 abs(l) == l
+      #|  integral(interval([(vec(0), vec(1))]), (x : Cart[Real, Unit]) => lift(pow((L : Real), 2)))
+      #|  integral(interval([(vec(0), vec(1))]), (x : Cart[Real, Unit]) => lift(pow(norm((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)), 2))) == lift(pow((L : Real), 2))
+      #|  real_of_num(0) < (l : Real) \226\134\146 abs(l) == l
+      #|  (s : (Cart[Real, Unit]) -> Bool)
+      #|  (x : Cart[Real, Unit]) => lift(pow((L : Real), 2))
+      #|  absolutely_integrable_on((x : Cart[Real, Unit]) => lift(pow(norm((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)), 2)), interval([(vec(0), vec(1))]))
+      #|  real_of_num(0) < (l : Real) \226\134\146 abs(l) == l
+      #|  (interior : ((Cart[Real, Unit]) -> Bool, Cart[Real, Unit]) -> Bool)
+      #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
+      #|  (x : Cart[Real, Unit])
+      #|  (x : Cart[Real, Unit]) => op_pct((L : Real), x)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(0) < (l : Real) \226\134\146 abs(l) == l
+      #|  (L : Real) == norm(lift(L))
+      #|  \226\136\128 x : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && !IN(x, (s : (Cart[Real, Unit]) -> Bool)) \226\134\146 norm((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)) <= (L : Real)
+      #|  (s : (Cart[Real, Unit]) -> Bool)
+      #|  (x : Cart[Real, Unit])
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Unit])
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Unit])
+      #|  \226\136\128 x : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) \226\134\146 absolutely_integrable_on((x : Cart[Real, Unit]) => lift(norm((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x))), interval([(vec(0), x)])) && integral(interval([(vec(0), x)]), (x : Cart[Real, Unit]) => lift(norm(g'(x)))) == op_pct((L : Real), x)
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 t : Cart[Real, Unit], IN(t, interval([(vec(0), vec(1))])) \226\134\146 absolutely_integrable_on((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval([(vec(0), t)])) && integral(interval([(vec(0), t)]), g') == (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t) - (a : Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Unit]) => vector_derivative((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), at(x))
+      #|  \226\136\131 g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && !IN(x, (s : (Cart[Real, Unit]) -> Bool)) \226\134\146 has_vector_derivative((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), g'(x), at(x))
+      #|  (s : (Cart[Real, Unit]) -> Bool) == {(x : Cart[Real, Unit]) | IN(x, interval([(vec(0), vec(1))])) && !differentiable((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), at(x))}
+      #|  absolutely_continuous_on((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval([(vec(0), vec(1))]))
+      #|  -lift((av : Real))
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (L : Real)
+      #|  (av : Real)
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (baseline : Real)
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (origin : Cart[Real, Tybit0[Unit]])
+      #|  (origin : Cart[Real, Tybit0[Unit]])
+      #|  op_dollar((origin : Cart[Real, Tybit0[Unit]]), 1) == op_dollar((a : Cart[Real, Tybit0[Unit]]), 1) && op_dollar(origin, 2) == (av : Real)
+      #|  (origin : Cart[Real, Tybit0[Unit]]) == vector([op_dollar((a : Cart[Real, Tybit0[Unit]]), 1), (av : Real)])
+      #|  (av : Real)
+      #|  (L : Real)
+      #|  integrable_on((t : Cart[Real, Unit]) => lift(op_dollar((g2 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t), 2)), interval([(vec(0), vec(1))]))
+      #|  (g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g2 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  IN((t : Cart[Real, Unit]), interval([(vec(0), vec(1))]))
+      #|  (g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) == path_image((g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) && rectifiable_path(g1) && simple_path(g1) && pathstart(g1) == (a : Cart[Real, Tybit0[Unit]]) && pathfinish(g1) == a && convex(inside(path_image(g1))) && path_length(g1) == (L : Real)
+      #|  (g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]) == shiftpath((t : Cart[Real, Unit]), (g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (t : Cart[Real, Unit])
+      #|  IN((a : Cart[Real, Tybit0[Unit]]), path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
+      #|  (INFINITE : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)
+      #|  norm((a : Cart[Real, Tybit0[Unit]]) - a) == (d : Real) \226\134\146 d == real_of_num(0)
       #|  :real
       #|  :real
-      #|  b - a:real^2 = &0 % c ==> b = a
-      #|  &0 <= b <=> b = &0 \\/ &0 < b
-      #|  baseline:real
-      #|  baseline:real^2
-      #|  baseline:real^2 = b - a
-      #|  b:real^2
-      #|  a:real^2
-      #|  path_image g0:real^2->bool
-      #|  g0:real^1->real^2
-      #|  g0:real^1->real^2
-      #|  L:real
-      #|  forall L g:real^1->real^2.\n        rectifiable_path g /\\\n        simple_path g /\\\n        pathfinish g = pathstart g /\\\n        convex(inside(path_image g)) /\\\n        path_length g = L\n        ==> measure(inside(path_image g)) <= L pow 2 / (&4 * pi) /\\\n            (measure(inside(path_image g)) =  L pow 2 / (&4 * pi)\n             ==> ?a r. path_image g = sphere(a,r))
-      #|  s pow 2 = &1 ==> x * &4 * pi = &4 * pi * s * s * x
-      #|  s pow 2 = &1 ==> x * &4 * pi = &4 * pi * s * s * x
-      #|  convex hull\n       (IMAGE (g:real^1->real^2)\n              (interval[vec 0,vec 1] DIFF interval(a,b)))
-      #|  segment[(g:real^1->real^2) a,g b]
-      #|  IMAGE g (interval [vec 0,vec 1] DIFF interval (a,b)) UNION\n                IMAGE (h:real^1->real^2) (interval(a,b))
-      #|  IMAGE g i SUBSET j ==> c IN i ==> g c IN j
-      #|  s SUBSET t ==> ~(x IN t) ==> ~(x IN s)
-      #|  (g:real^1->real^2) c
-      #|  forall c:real^N. (norm(c - a) <= v /\\ norm(b - c) <= w) /\\\n                 ~(dist(a,b) = dist(a,c) + dist(c,b))\n                 ==> ~(norm(b - a) = v + w)
-      #|  :real
-      #|  :real
-      #|  :real
+      #|  (b : Cart[Real, Tybit0[Unit]]) - (a : Cart[Real, Tybit0[Unit]]) == op_pct(real_of_num(0), (c : Cart[Real, Tybit0[Unit]])) \226\134\146 b == a
+      #|  (real_of_num(0) <= (b : Real)) == (b == real_of_num(0) || real_of_num(0) < b)
+      #|  (baseline : Real)
+      #|  (baseline : Cart[Real, Tybit0[Unit]])
+      #|  (baseline : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]]) - (a : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (L : Real)
+      #|  \226\136\128 L : Real, \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], rectifiable_path(g) && simple_path(g) && pathfinish(g) == pathstart(g) && convex(inside(path_image(g))) && path_length(g) == L \226\134\146 measure(inside(path_image(g))) <= pow(L, 2) / (real_of_num(4) * pi) && (measure(inside(path_image(g))) == pow(L, 2) / (real_of_num(4) * pi) \226\134\146 (\226\136\131 a : Cart[Real, Tybit0[Unit]], \226\136\131 r : Real, path_image(g) == sphere((a, r))))
+      #|  pow((s : Real), 2) == real_of_num(1) \226\134\146 (x : Real) * (real_of_num(4) * pi) == real_of_num(4) * (pi * (s * (s * x)))
+      #|  pow((s : Real), 2) == real_of_num(1) \226\134\146 (x : Real) * (real_of_num(4) * pi) == real_of_num(4) * (pi * (s * (s * x)))
+      #|  hull(convex, IMAGE((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), DIFF(interval([(vec(0), vec(1))]), interval(((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))))))
+      #|  segment([((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit])), g((b : Cart[Real, Unit])))])
+      #|  UNION(IMAGE((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), DIFF(interval([(vec(0), vec(1))]), interval(((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))))), IMAGE((h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval((a, b))))
+      #|  SUBSET(IMAGE((g : (_) -> _), (i : (_) -> Bool)), (j : (_) -> Bool)) \226\134\146 IN((c : _), i) \226\134\146 IN(g(c), j)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !IN((x : _), t) \226\134\146 !IN(x, s)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((c : Cart[Real, Unit]))
+      #|  \226\136\128 c : Cart[Real, N], (norm(c - (a : Cart[Real, N])) <= (v : Real) && norm((b : Cart[Real, N]) - c) <= (w : Real)) && !(dist((a, b)) == dist((a, c)) + dist((c, b))) \226\134\146 !(norm(b - a) == v + w)
       #|  :real
       #|  :real
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  drop a < drop c /\\ drop c < drop b
-      #|  c:real^1
-      #|  b:real^1
-      #|  a:real^1
-      #|  g:real^1->real^2
-      #|  c:real^1 = midpoint(a,b)
-      #|  interval[vec 0:real^1,vec 1]
-      #|  (g:real^1->real^2) has_bounded_variation_on interval[a,b]
-      #|  a < b ==> inv(b - a) * (b - a) = &1
-      #|  a < b ==> ~(b < a)
-      #|  c % (x - a):real^N = --(c % a) + c % x
-      #|  a < b ==> (b - a) / (b - a) = &1
-      #|  (a - a) / b = &0
-      #|  t:real^1
-      #|  vector_variation (interval[a,b])\n                       (\\t. g a + (drop t - drop a) / (drop b - drop a) %\n                                  ((g:real^1->real^2) b - g a))
-      #|  a:real = b /\\ c < d ==> c + a < d + b
-      #|  interval[vec 0:real^1,vec 1]
-      #|  b:real^1
-      #|  vec 1:real^1
-      #|  a:real^1
-      #|  f:real^1->real^2
-      #|  f:real^1->real^2
-      #|  a:real = b /\\ c < d ==> a + c < b + d
-      #|  a:real^1
-      #|  vec 1:real^1
-      #|  vec 0:real^1
-      #|  f:real^1->real^2
-      #|  f:real^1->real^2
-      #|  (a * b) * c:real = b * a * c
-      #|  a / b * c:real = (a * c) / b
-      #|  a < b\n      ==> (x - a) / (b - a) - (y - a) / (b - a) = (x - y) / (b - a)
-      #|  (a + x % c) - (a + y % c):real^N = (x - y) % c
-      #|  a < b ==> (b - a) / (b - a) = &1
-      #|  (a - a) / b = &0
-      #|  forall t. t IN interval[a,b]\n          ==> (h:real^1->real^2) t =\n              g a + (drop t - drop a) / (drop b - drop a) % (g b - g a)
-      #|  b:real^1
-      #|  a:real^1
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  ~(a:real^1 = b)
-      #|  ~(~(x IN {b,a}) /\\ x IN t UNION {a,b})\n        ==> ~(a IN t) /\\ ~(b IN t) ==> ~(x IN t)
-      #|  (g:real^1->real^2) x = h x
-      #|  (g:real^1->real^2) x
-      #|  (path_image g1 DIFF {(g:real^1->real^2) b, g a}) INTER path_image d0 =\n         {}
-      #|  IMAGE f s = t ==> forall x. x IN s ==> f x IN t
-      #|  x:real^1
-      #|  IMAGE (g:real^1->real^2) (interval [vec 0,vec 1] DIFF interval (a,b)) =\n        path_image g1
-      #|  y:real^1
-      #|  x:real^1
-      #|  a < b ==> ((x - a) / (b - a) = (y - a) / (b - a) <=> x = y)
-      #|  a + x:real^N = a + y <=> x = y
-      #|  simple_path(g:real^1->real^2)
-      #|  \\x:real^1. x IN interval(a,b)
-      #|  forall Q. (forall x y. P x y <=> P y x) /\\\n          (forall x y. ~Q x /\\ ~Q y ==> P x y) /\\\n          (forall x y. Q x /\\ Q y ==> P x y) /\\\n          (forall x y. ~Q x /\\ Q y ==> P x y)\n      ==> forall x y. P x y
-      #|  (r ==> p) /\\ q /\\ r /\\ s ==> p /\\ q /\\ r /\\ s
-      #|  IMAGE h (interval[a,b]) = segment[(g:real^1->real^2) a,g b]
-      #|  (h:real^1->real^2) a = g a /\\ h b = g b
-      #|  drop a < drop b
-      #|  (&1 - a) % x + a % y:real^N = x + a % (y - x)
-      #|  t:real^1
-      #|  (forall x. f x = g x) ==> IMAGE f s = IMAGE g s
-      #|  b:real^1
-      #|  a:real^1
-      #|  (\\x. if x IN s then f x else g x) = h\n      ==> IMAGE f s = t\n          ==> IMAGE h s = t
-      #|  IMAGE h (interval(a,b)) = segment((g:real^1->real^2) a,g b)
-      #|  pathstart h:real^2 = pathstart g /\\ pathfinish h = pathfinish g
-      #|  h:real^1->real^2
-      #|  h = \\t. if t IN interval(a,b)\n            then g(a) + (drop t - drop a) / (drop b - drop a) % (g b - g a)\n            else (g:real^1->real^2) t
-      #|  path_image d0 = segment[(g:real^1->real^2) a,g b]
-      #|  interior(convex hull (path_image d1)) SUBSET\n      interior(convex hull (segment[(g:real^1->real^2) a,g b]))
-      #|  path_image d0 SUBSET segment[(g:real^1->real^2) a,g b] \\/\n    path_image(reversepath d1) SUBSET segment[(g:real^1->real^2) a,g b]
-      #|  s INTER h' = {} /\\ h UNION h' = UNIV ==> ~(d SUBSET h)\n          ==> ~(h' INTER (d DIFF s) = {})
-      #|  ~(path_image d1 SUBSET {x:real^2 | &0 <= x$2})
-      #|  ~(path_image d1 SUBSET {x:real^2 | x$2 <= &0})
-      #|  s SUBSET t ==> s DIFF f SUBSET t
-      #|  z IN s ==> s SUBSET t ==> z IN t
-      #|  z IN i ==> z IN c ==> ~(c SUBSET a DIFF i)
-      #|  w:real^2
-      #|  (g:real^1->real^2) b
-      #|  (g:real^1->real^2) a
-      #|  convex hull (path_image g):real^2->bool
-      #|  &0 < x \\/ x < &0 <=> ~(x = &0)
-      #|  w:real^2
-      #|  {x:real^2 | x$2 < &0}
-      #|  {x:real^2 | &0 < x$2}
-      #|  d1:real^1->real^2
-      #|  convex:(real^2->bool)->bool
-      #|  ~(path_image d1 SUBSET {x:real^2 | &0 <= x$2}) /\\\n      ~(path_image d1 SUBSET {x:real^2 | x$2 <= &0})
-      #|  z:real^2
-      #|  (g:real^1->real^2) b
-      #|  (g:real^1->real^2) a
-      #|  (g:real^1->real^2) b = gb % basis 1
-      #|  (g:real^1->real^2) a = vec 0
-      #|  (g:real^1->real^2) a $2 = &0 /\\\n      (g:real^1->real^2) b $2 = &0
-      #|  gb:real^2
-      #|  ga:real^2
-      #|  gb = (g:real^1->real^2) b
-      #|  ga = (g:real^1->real^2) a
-      #|  z:real^2
-      #|  (forall x. x IN s ==> x IN t /\\ ~P x) <=>\n      s SUBSET t /\\ (forall x. x IN s ==> ~P x)
-      #|  segment[(g:real^1->real^2) a,g b] SUBSET\n    frontier(convex hull (path_image g))
-      #|  IMAGE (g:real^1->real^2) (interval [a,b]) = path_image g0
-      #|  d UNION d' = g ==> g INTER s SUBSET a ==> d INTER s SUBSET a
-      #|  s INTER t SUBSET a /\\ s INTER u SUBSET a\n          ==> (u UNION t) INTER s SUBSET a
-      #|  {(g:real^1->real^2) a,g b}
-      #|  s INTER t SUBSET u ==> s INTER (t UNION u) SUBSET u
-      #|  s SUBSET c ==> s DIFF (s INTER (c DIFF i)) SUBSET i
-      #|  s = t ==> s SUBSET t
-      #|  convex hull ((path_image g0 UNION path_image g1) INTER\n                   (path_image d0 UNION path_image d1)):real^2->bool
-      #|  path_image d:real^2->bool = frontier (convex hull path_image g)
-      #|  convex hull (path_image d1):real^2->bool = convex hull (path_image g)
-      #|  reversepath d0:real^1->real^2
-      #|  reversepath d1:real^1->real^2
-      #|  d1:real^1->real^2
-      #|  d0:real^1->real^2
-      #|  (~(s INTER (t UNION u) = {}) ==> s INTER (v UNION w) = {})\n      ==> s INTER t = {} \\/ s INTER v = {}
-      #|  b:real^1
-      #|  a:real^1
-      #|  IMAGE (g:real^1->real^2) (interval [a,b]) = path_image g0
-      #|  f UNION e = d ==> d INTER g SUBSET s ==> e INTER g SUBSET s
-      #|  e UNION f = d ==> d INTER g SUBSET s ==> e INTER g SUBSET s
-      #|  reversepath d1 ++ reversepath g0:real^1->real^2
-      #|  d0 ++ reversepath g0:real^1->real^2
-      #|  s SUBSET f ==> s SUBSET t UNION f
-      #|  p SUBSET c ==> c INTER i = {} ==> ~(z IN i INTER p)
-      #|  inside(path_image d1 UNION path_image g0):real^2->bool
-      #|  inside(path_image d0 UNION path_image g0):real^2->bool
-      #|  inside(path_image d0 UNION path_image g0):real^2->bool
-      #|  inside(path_image d1 UNION path_image g0):real^2->bool
-      #|  i INTER j = {}\n        ==> ~(z IN s INTER t) /\\ ~(z IN s INTER j) /\\ ~(z IN t INTER i)\n            ==> ~(z IN s UNION i /\\ z IN t UNION j)
-      #|  z:real^2
-      #|  (s INTER t) INTER (s INTER u) = {} <=>\n        forall x. x IN s ==> ~(x IN t INTER u)
-      #|  i UNION j UNION p = k\n        ==> ~(z IN p) /\\ z IN f UNION k\n            ==> z IN f UNION i UNION j
-      #|  (s UNION t) UNION (u UNION v) = (s UNION u) UNION (t UNION v)
-      #|  z:real^2
-      #|  s SUBSET t UNION u\n        ==> s SUBSET (s INTER t) UNION (s INTER u)
-      #|  b:real^1
-      #|  a:real^1
-      #|  IMAGE (g:real^1->real^2) (interval [a,b]) = path_image g0
-      #|  f UNION e = d\n           ==> d INTER g SUBSET s ==> e INTER g SUBSET s
-      #|  e UNION f = d\n           ==> d INTER g SUBSET s ==> e INTER g SUBSET s
-      #|  reversepath d1 ++ reversepath g0:real^1->real^2
-      #|  d0 ++ reversepath g0:real^1->real^2
-      #|  s SUBSET f ==> s SUBSET t UNION f
-      #|  p SUBSET c ==> c INTER i = {} ==> ~(z IN i INTER p)
-      #|  inside(path_image d1 UNION path_image g0):real^2->bool
-      #|  inside(path_image d0 UNION path_image g0):real^2->bool
-      #|  inside(path_image d0 UNION path_image g0):real^2->bool
-      #|  inside(path_image d1 UNION path_image g0):real^2->bool
-      #|  i INTER j = {}\n          ==> ~(z IN s INTER t) /\\ ~(z IN s INTER j) /\\ ~(z IN t INTER i)\n              ==> ~(z IN s UNION i /\\ z IN t UNION j)
-      #|  i UNION j UNION p = k\n          ==> ~(z IN p) /\\ z IN f UNION k\n              ==> z IN f UNION i UNION j
-      #|  z IN s UNION t \\/ z IN u UNION v <=>\n          z IN (s UNION u) UNION (t UNION v)
-      #|  (~p <=> q) <=> (p \\/ q) /\\ ~(p /\\ q)
-      #|  z:real^2
-      #|  (~p <=> q) <=> ~q <=> p
-      #|  (forall x. x IN s ==> (~(x IN u) <=> x IN t))\n        ==> s DIFF u = s INTER t
-      #|  g0 INTER g1 = {a,b}\n        ==> (g1 DIFF {b,a}) DIFF (i UNION d1 UNION g0) =\n            (g1 DIFF {b,a}) DIFF (d1 UNION i)
-      #|  b:real^1
-      #|  a:real^1
-      #|  IMAGE (g:real^1->real^2) (interval [a,b]) = path_image g0
-      #|  f UNION e = d\n           ==> d INTER g SUBSET s ==> e INTER g SUBSET s
-      #|  e UNION f = d\n           ==> d INTER g SUBSET s ==> e INTER g SUBSET s
-      #|  d0 ++ reversepath g0:real^1->real^2
-      #|  reversepath d1 ++ reversepath g0:real^1->real^2
-      #|  (path_image g1 DIFF {(g:real^1->real^2) b, g a}) DIFF\n      closure(inside(path_image d1 UNION path_image g0)) =\n      (path_image g1 DIFF {(g:real^1->real^2) b, g a}) INTER\n      (path_image d0 UNION inside(path_image d0 UNION path_image g0)) /\\\n      (path_image g1 DIFF {(g:real^1->real^2) b, g a}) DIFF\n      closure(inside(path_image d0 UNION path_image g0)) =\n      (path_image g1 DIFF {(g:real^1->real^2) b, g a}) INTER\n      (path_image d1 UNION inside(path_image d1 UNION path_image g0))
-      #|  ~(p /\\ q) <=> p ==> ~q
-      #|  (path_image(g1:real^1->real^2) DIFF {g(b:real^1),g a}) DIFF\n       closure(inside(path_image d0 UNION path_image g0))
-      #|  (path_image(g1:real^1->real^2) DIFF {g(b:real^1),g a}) DIFF\n       closure(inside(path_image d1 UNION path_image g0))
-      #|  g1:real^1->real^2
-      #|  (s DIFF t) INTER t = {}
-      #|  IMAGE g i SUBSET n\n        ==> g a IN d0 /\\ g b IN d0 /\\ g a IN d1 /\\ g b IN d1 /\\\n            ~(i = {}) /\\ (d0 UNION d1) INTER n = {}\n            ==> d0 INTER IMAGE g (i UNION {a,b}) = {g a,g b} /\\\n                d1 INTER IMAGE g (i UNION {a,b}) = {g a,g b} /\\\n                ~(IMAGE g (i UNION {a,b}) INTER n = {})
-      #|  b:real^1
-      #|  a:real^1
-      #|  IMAGE (g:real^1->real^2) (interval[a,b]) = path_image g0
-      #|  (g:real^1->real^2) b
-      #|  (g:real^1->real^2) a
-      #|  g0:real^1->real^2
-      #|  reversepath d1:real^1->real^2
-      #|  d0:real^1->real^2
-      #|  d1:real^1->real^2
-      #|  d0:real^1->real^2
-      #|  (g:real^1->real^2) b
-      #|  (g:real^1->real^2) a
-      #|  d:real^1->real^2
-      #|  ?d0 d1.\n      arc d0 /\\\n      arc d1 /\\\n      pathstart d0 = g a /\\\n      pathfinish d0 = g b /\\\n      pathstart d1 = g b /\\\n      pathfinish d1 = g a /\\\n      path_image d0 INTER path_image d1 = {(g:real^1->real^2) a, g b} /\\\n      path_image d0 UNION path_image d1 = path_image d /\\\n      inside (path_image d0 UNION path_image g0) INTER\n      inside (path_image d1 UNION path_image g0) = {} /\\\n      inside (path_image d0 UNION path_image g0) UNION\n      inside (path_image d1 UNION path_image g0) UNION\n      path_image g0 DIFF {g a, g b} =\n      interior (convex hull path_image g) /\\\n      (path_image g1 DIFF {g b, g a}) INTER path_image d0 = {}
-      #|  d:real^1->real^2
-      #|  convex hull (path_image g):real^2->bool
-      #|  g1:real^1->real^2
-      #|  g0:real^1->real^2
-      #|  b:real^1
-      #|  a:real^1
-      #|  g:real^1->real^2
-      #|  IMAGE f t SUBSET u\n        ==> IMAGE f s DIFF IMAGE f (s DIFF t) SUBSET u
-      #|  c = b /\\ b = a ==> b = a /\\ c = a
-      #|  convex hull (IMAGE (g:real^1->real^2)\n                  (interval[vec 0,vec 1] DIFF interval(a,b))) =\n    convex hull (path_image g) /\\\n    convex hull (segment[(g:real^1->real^2) a,g b] UNION\n                 IMAGE g (interval[vec 0,vec 1] DIFF interval(a,b))) =\n    convex hull (path_image g)
-      #|  convex hull path_image g:real^2->bool = convex hull IMAGE g {a, b}
-      #|  ~(interior(convex hull path_image g):real^2->bool = {})
-      #|  drop a < drop b
-      #|  b:real^1
-      #|  a:real^1
-      #|  (g:real^1->real^2) a = g b
-      #|  ~(interior(convex hull (path_image g)):real^2->bool = {})
-      #|  s SUBSET convex hull s /\\ t SUBSET s ==> t SUBSET convex hull s
-      #|  s SUBSET closure s /\\ u SUBSET s\n      ==> u SUBSET closure s DIFF interior s UNION interior s
-      #|  s INTER f = {} ==> s SUBSET f UNION i ==> s SUBSET i
-      #|  IMAGE (g:real^1->real^2) (interval(a,b)) SUBSET\n    interior(convex hull (path_image g))
-      #|  interval(a:real^1,b) = {}
-      #|  forall g:real^1->real^2 a b L.\n        simple_path g /\\ pathfinish g = pathstart g /\\\n        (forall x y. x IN interval [vec 0,vec 1] /\\\n               y IN interval [vec 0,vec 1]\n               ==> dist(g x,g y) <= L * dist(x,y)) /\\\n        drop a < drop b /\\\n        a IN interval[vec 0,vec 1] /\\ b IN interval[vec 0,vec 1] /\\\n        g(a) IN frontier(convex hull (path_image g)) /\\\n        g(b) IN frontier(convex hull (path_image g)) /\\\n        IMAGE g (interval(a,b)) INTER frontier(convex hull (path_image g)) = {}\n        ==> ?h. simple_path h /\\\n                pathstart h = pathstart g /\\ pathfinish h = pathstart g /\\\n                (forall x y. x IN interval [vec 0,vec 1] /\\\n                       y IN interval [vec 0,vec 1]\n                       ==> dist(h x,h y) <= L * dist(x,y)) /\\\n                path_length h < path_length g /\\\n                convex hull (path_image h) = convex hull (path_image g) /\\\n                (forall x. ~(x IN interval(a,b)) ==> h x = g x) /\\\n                IMAGE h (interval[a,b]) SUBSET\n                frontier(convex hull (path_image g))
-      #|  g:real^1->real^2
-      #|  h:real^1->real^2
-      #|  g:real^1->real^2
-      #|  h:real^1->real^2
-      #|  n:num
-      #|  n:num
-      #|  x:real^1
-      #|  x:real^1
-      #|  (forall x. x IN k DIFF j ==> h x = g x)\n      ==> IMAGE g (k DIFF j) SUBSET IMAGE h k
-      #|  x:real^1
-      #|  (forall x. x IN k /\\ x IN j ==> ~(g x IN t))\n      ==> DISJOINT (IMAGE g k DIFF IMAGE g (k DIFF j)) t
-      #|  p SUBSET c /\\ DISJOINT (p DIFF q) f\n      ==> p DIFF q SUBSET c DIFF f
-      #|  s = t ==> s SUBSET t
-      #|  convex hull IMAGE (g:real^1->real^2)\n    (interval[vec 0,vec 1] DIFF UNIONS {interval(a n,b n) | n IN (:num)})
-      #|  convex hull path_image g =\n      convex hull path_image((f:num->real^1->real^2) n)
-      #|  n:num
-      #|  n:num
-      #|  x:real^1
-      #|  x:real^1
-      #|  c = {k n | n IN (:num)}\n          ==> ~(?n. x IN k n) /\\ (~(g(x) IN t) ==> x IN UNIONS c)\n              ==> g x IN t
-      #|  (f:num->real^1->real^2) n x = g x
-      #|  n:num
-      #|  n:num
-      #|  x:real^1
-      #|  n:num
-      #|  N + SUC n
-      #|  N:num
-      #|  x:real^1
-      #|  n:num
-      #|  ?n. x IN interval((a:num->real^1) n,b n)
-      #|  x:real^1
-      #|  (p ==> q) /\\ p ==> p /\\ q
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  n:num
-      #|  n:num
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  n:num
-      #|  n:num
-      #|  y:real^1
-      #|  x:real^1
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  n:num
-      #|  n:num
-      #|  forall x y. x IN interval[vec 0,vec 1] /\\ y IN interval[vec 0,vec 1]\n          ==> dist((h:real^1->real^2) x,h y) <= L * dist(x,y)
-      #|  h:real^1->real^2
-      #|  n:num
-      #|  (forall d:num. P(n + d)) ==> (forall m. n <= m ==> P m)
-      #|  n + 1
-      #|  (f:num->real^1->real^2) (n + 1) x
-      #|  n:num
-      #|  (g:real^1->real^2) x
-      #|  (x:real^1) IN UNIONS {interval (a n,b n) | n IN (:num)}
-      #|  (x:real^1) IN interval[vec 0,vec 1]
-      #|  x:real^1
-      #|  forall x. ?y. x IN interval[vec 0,vec 1]\n            ==> eventually (\\n. (f:num->real^1->real^2) n x = y) sequentially
-      #|  f:num->real^1->real^2
-      #|  (forall m. m < n ==> ~(k n SUBSET k m))\n         ==> x IN k n /\\\n            (forall s t. s IN {k n | n IN (:num)} /\\\n                       t IN {k n | n IN (:num)} /\\\n                       ~(s = t)\n                       ==> DISJOINT s t)\n            ==> ~(forall m. m < n ==> ~(x IN k m)) ==> p
-      #|  x IN interval((a:num->real^1) n,b n)
-      #|  x:real^1
-      #|  (forall m. m < n ==> ~(k n SUBSET k m))\n          ==> (x IN UNIONS {k m | m < n}) /\\\n              (forall s t. s IN {k n | n IN (:num)} /\\\n                     t IN {k n | n IN (:num)} /\\\n                     ~(s = t)\n                     ==> DISJOINT s t)\n              ==> ~(x IN k n)
-      #|  (f:real^1->real^2) x = h x
-      #|  x:real^1
-      #|  IMAGE f c SUBSET t\n        ==> i SUBSET c ==> forall x. x IN i ==> f x IN t
-      #|  {f x | x = a \\/ P x} = (f a) INSERT {f x | P x}
-      #|  f:real^1->real^2
-      #|  s = {k n | n IN (:num)}\n        ==> IMAGE g (UNIONS s) INTER f = {}\n            ==> IMAGE g (k n) INTER f = {}
-      #|  (forall x. x IN s ==> h x = g x)\n        ==> IMAGE g s INTER k = j\n            ==> IMAGE h s INTER k = j
-      #|  (forall m. m < n ==> ~(k n SUBSET k m))\n        ==> x IN k n /\\\n            (forall s t. s IN {k n | n IN (:num)} /\\\n                   t IN {k n | n IN (:num)} /\\\n                   ~(s = t)\n                   ==> DISJOINT s t)\n            ==> ~(?m. m < n /\\ x IN k m)
-      #|  forall x. x IN interval(a(n:num),b n) ==> (h:real^1->real^2) x = g x
-      #|  s = {i n | n IN (:num)} ==> ~(x IN UNIONS s)\n        ==> ~(x IN UNIONS {i n | P n})
-      #|  (h:real^1->real^2)(a(n:num)) = g(a n) /\\\n      (h:real^1->real^2)(b(n:num)) = g(b n)
-      #|  L:real
-      #|  (b:num->real^1) n
-      #|  (a:num->real^1) n
-      #|  h:real^1->real^2
-      #|  ~(p /\\ q) <=> p ==> ~q
-      #|  h:real^1->real^2
-      #|  UNIONS {interval(a m:real^1,b m) | m < SUC n} =\n        UNIONS {interval(a m:real^1,b m) | m < n}
-      #|  interval(a n,b n) = {} \\/\n      ?m. m:num < n /\\\n          interval(a(n):real^1,b(n)) SUBSET interval(a m,b m)
-      #|  h:real^1->real^2
-      #|  n:num
-      #|  g:real^1->real^2
-      #|  ?h. (forall n. simple_path (h n) /\\\n             rectifiable_path (h n) /\\\n             pathstart (h n) = pathstart g /\\\n             pathfinish (h n) = pathfinish g /\\\n             convex hull path_image (h n) = convex hull path_image g /\\\n             (forall x y.\n                x IN interval [vec 0,vec 1] /\\ y IN interval [vec 0,vec 1]\n                ==> dist (h n x,h n y) <= L * dist (x,y)) /\\\n             (forall x.\n                x IN UNIONS {interval (a m,b m) | m < n}\n                ==> h n x IN frontier (convex hull path_image g)) /\\\n             (forall x. ~(x IN UNIONS {interval (a m,b m) | m < n})\n                  ==> h n x = g x)) /\\\n        (forall n x. ~(x IN interval(a n,b n) /\\\n                 forall m. m < n ==> ~(x IN interval(a m,b m)))\n               ==> (h:num->real^1->real^2)(SUC n) x = h n x)
-      #|  interval((a:num->real^1) n,b n)
-      #|  x INSERT s = s <=> x IN s
-      #|  q /\\ ~s /\\ r /\\ (~t ==> p) ==> (p ==> q ==> r ==> s) ==> t
-      #|  (b:num->real^1) n INSERT interval(a n,b n)
-      #|  (a:num->real^1) n INSERT interval(a n,b n)
-      #|  interval((a:num->real^1) n,b n)
-      #|  s:real^1->bool
-      #|  n:num
-      #|  (p /\\ q) /\\ (p /\\ q ==> r) ==> p /\\ q /\\ r
-      #|  forall n. closure(interval((a:num->real^1) n,b n)) SUBSET interval[vec 0,vec 1]
-      #|  s = IMAGE q UNIV\n        ==> (forall c. c IN s ==> c SUBSET t) ==> q n SUBSET t
-      #|  forall n. interval((a:num->real^1) n,b n) SUBSET s
-      #|  s = IMAGE q UNIV\n        ==> (forall c. c IN s ==> ~(c = {})) ==> forall n. ~(q n = {})
-      #|  forall n. drop((a:num->real^1) n) < drop(b n)
-      #|  b:num->real^1
-      #|  a:num->real^1
-      #|  s = IMAGE q UNIV\n          ==> UNIONS s SUBSET t\n              ==> q n SUBSET t
-      #|  s = IMAGE q UNIV ==> ~(a IN UNIONS s) ==> ~(a IN q n)
-      #|  (~(a IN t) /\\ ~(b IN t)) /\\ t SUBSET s\n            ==> t SUBSET s DIFF {a,b}
-      #|  interval[vec 0:real^1,vec 1]
-      #|  s:real^1->bool
-      #|  interval[vec 0:real^1,vec 1]
-      #|  interval(vec 0:real^1,vec 1)
-      #|  s = IMAGE q UNIV\n            ==> (forall x. x IN s ==> connected x) ==> connected(q n)
-      #|  interior((q:num->real^1->bool) n)
-      #|  b:real^1
-      #|  a:real^1
-      #|  interval[vec 0:real^1,vec 1]
-      #|  s = IMAGE q UNIV\n            ==> (forall x. x IN s ==> connected x) ==> connected(q n)
-      #|  closure((q:num->real^1->bool) n)
-      #|  n:num
-      #|  forall n:num. ?a b:real^1. q n = interval(a,b)
-      #|  q:num->real^1->bool
-      #|  components(s:real^1->bool)
-      #|  interval[vec 0:real^1,vec 1]
-      #|  COUNTABLE(components(s:real^1->bool))
-      #|  {t | t IN k /\\ g t IN UNIV DIFF f} = {}\n        ==> IMAGE g k SUBSET f
-      #|  s:real^1->bool = {}
-      #|  s:real^1->bool = {}
-      #|  s =\n        {t | t IN interval[vec 0,vec 1] /\\\n             (g:real^1->real^2) t IN\n             (:real^2) DIFF frontier(convex hull (path_image g))}
-      #|  open_in (subtopology euclidean (interval[vec 0,vec 1]))\n              {t | t IN interval[vec 0,vec 1] /\\\n                   (g:real^1->real^2) t IN\n                   (:real^2) DIFF frontier(convex hull (path_image g))}
-      #|  ?a b. (forall n. a n IN interval[vec 0,vec 1]) /\\\n          (forall n. b n IN interval[vec 0,vec 1]) /\\\n          (forall n:num. drop(a n) <= drop(b n)) /\\\n          (forall n. g(a n) IN frontier(convex hull (path_image g))) /\\\n          (forall n. g(b n) IN frontier(convex hull (path_image g))) /\\\n          components\n            {t | t IN interval[vec 0,vec 1] /\\\n                 (g:real^1->real^2) t IN\n                 (:real^2) DIFF frontier(convex hull (path_image g))} =\n          {interval(a n,b n) | n IN (:num)}
-      #|  g:real^1->real^2
-      #|  (path_image g:real^2->bool) SUBSET frontier(convex hull path_image g)
-      #|  g:real^1->real^2
-      #|  g':real^1->real^2
-      #|  &0 <= L /\\\n    path_length g' = L /\\\n    simple_path(g':real^1->real^2) /\\\n    rectifiable_path(g':real^1->real^2) /\\\n    pathfinish g' = pathstart g' /\\\n    pathstart g' IN frontier(convex hull (path_image g')) /\\\n    (forall x y. x IN interval[vec 0,vec 1] /\\ y IN interval[vec 0,vec 1]\n           ==> dist(g' x,g' y) <= L * dist(x,y))
-      #|  g':real^1->real^2
-      #|  g:real^1->real^2
-      #|  L = path_length(g:real^1->real^2)
-      #|  shiftpath t (g:real^1->real^2)
-      #|  t:real^1
-      #|  {}:real^2->bool
-      #|  path_image g:real^2->bool
-      #|  forall g:real^1->real^2.\n        rectifiable_path g /\\\n        simple_path g /\\\n        pathfinish g = pathstart g /\\\n        pathstart g IN frontier(convex hull (path_image g))\n        ==> ?h:real^1->real^2.\n                rectifiable_path h /\\\n                simple_path h /\\\n                pathfinish h = pathstart h /\\\n                path_length h <= path_length g /\\\n                convex hull (path_image h) = convex hull (path_image g) /\\\n                path_image h = frontier(convex hull (path_image g))
-      #|  forall g:real^1->real^2.\n        rectifiable_path g /\\\n        simple_path g /\\\n        pathfinish g = pathstart g\n        ==> ?h:real^1->real^2.\n                rectifiable_path h /\\\n                simple_path h /\\\n                pathfinish h = pathstart h /\\\n                path_length h <= path_length g /\\\n                convex hull (path_image h) = convex hull (path_image g) /\\\n                path_image h = frontier(convex hull (path_image g))
-      #|  x:real^1
-      #|  y:real^1
-      #|  x:real^1
-      #|  y:real^1
-      #|  vec 1:real^1
-      #|  vec 0:real^1
-      #|  dist(x:real^2,y) < e / &2
-      #|  ball(x:real^2,e)
-      #|  b SUBSET t ==> s INTER t = {} ==> DISJOINT b s
-      #|  DISJOINT s v /\\ t SUBSET u ==> s INTER t SUBSET u DIFF v
-      #|  min d (e / &2)
-      #|  d:real
-      #|  y:real^2
-      #|  path_image g:real^2->bool
-      #|  y:real^2
-      #|  e / &2
-      #|  x:real^2
-      #|  g:real^1->real^2
-      #|  e:real
-      #|  x:real^2
-      #|  ~p ==> p ==> F
-      #|  g:real^1->real^2
-      #|  p SUBSET c /\\ ~(p SUBSET f) ==> ~(p INTER (c DIFF f) = {})
-      #|  ~(path_image g INTER interior(convex hull path_image g):real^2->bool = {})
-      #|  h:real^1->real^2
-      #|  g:real^1->real^2
-      #|  forall g:real^1->real^2.\n        rectifiable_path g /\\\n        simple_path g /\\\n        pathfinish g = pathstart g /\\\n        ~convex(inside(path_image g))\n        ==> ?h:real^1->real^2.\n                rectifiable_path h /\\\n                simple_path h /\\\n                pathfinish h = pathstart h /\\\n                path_length h <= path_length g /\\\n                convex hull path_image h = convex hull path_image g /\\\n                path_image h = frontier (convex hull path_image g) /\\\n                measure(inside(path_image g)) < measure(inside(path_image h))
       #|  :real
       #|  :real
-      #|  &0 <= x /\\ x <= y ==> abs x <= abs y
-      #|  &0 < &4 * x <=> &0 < x
-      #|  g:real < h /\\ m <= l ==> h <= m ==> g < l
-      #|  (p ==> q /\\ ~r) ==> (p /\\ s ==> q /\\ (r ==> t))
-      #|  h:real^1->real^2
-      #|  path_length(h:real^1->real^2)
-      #|  h:real^1->real^2
-      #|  g:real^1->real^2
-      #|  convex(inside(path_image g):real^2->bool)
-      #|  forall L g:real^1->real^2.\n        rectifiable_path g /\\\n        simple_path g /\\\n        pathfinish g = pathstart g /\\\n        path_length g = L\n        ==> measure(inside(path_image g)) <= L pow 2 / (&4 * pi) /\\\n            (measure(inside(path_image g)) =  L pow 2 / (&4 * pi)\n             ==> ?a r. path_image g = sphere(a,r))
+      #|  :real
+      #|  drop((a : Cart[Real, Unit])) < drop((c : Cart[Real, Unit])) && drop(c) < drop((b : Cart[Real, Unit]))
+      #|  (c : Cart[Real, Unit])
+      #|  (b : Cart[Real, Unit])
+      #|  (a : Cart[Real, Unit])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Unit]) == midpoint(((a : Cart[Real, Unit]), (b : Cart[Real, Unit])))
+      #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
+      #|  has_bounded_variation_on((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))]))
+      #|  (a : Real) < (b : Real) \226\134\146 inv(b - a) * (b - a) == real_of_num(1)
+      #|  (a : Real) < (b : Real) \226\134\146 !(b < a)
+      #|  op_pct((c : Real), (x : Cart[Real, N]) - (a : Cart[Real, N])) == -op_pct(c, a) + op_pct(c, x)
+      #|  (a : Real) < (b : Real) \226\134\146 (b - a) / (b - a) == real_of_num(1)
+      #|  ((a : Real) - a) / (b : Real) == real_of_num(0)
+      #|  (t : Cart[Real, Unit])
+      #|  vector_variation(interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))]), (t : Cart[Real, Unit]) => (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(a) + op_pct((drop(t) - drop(a)) / (drop(b) - drop(a)), g(b) - g(a)))
+      #|  (a : Real) == (b : Real) && (c : Real) < (d : Real) \226\134\146 c + a < d + b
+      #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
+      #|  (b : Cart[Real, Unit])
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  (a : Cart[Real, Unit])
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (a : Real) == (b : Real) && (c : Real) < (d : Real) \226\134\146 a + c < b + d
+      #|  (a : Cart[Real, Unit])
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (a : Real) * (b : Real) * (c : Real) == b * (a * c)
+      #|  (a : Real) / (b : Real) * (c : Real) == a * c / b
+      #|  (a : Real) < (b : Real) \226\134\146 ((x : Real) - a) / (b - a) - ((y : Real) - a) / (b - a) == (x - y) / (b - a)
+      #|  (a : Cart[Real, N]) + op_pct((x : Real), (c : Cart[Real, N])) - (a + op_pct((y : Real), c)) == op_pct(x - y, c)
+      #|  (a : Real) < (b : Real) \226\134\146 (b - a) / (b - a) == real_of_num(1)
+      #|  ((a : Real) - a) / (b : Real) == real_of_num(0)
+      #|  \226\136\128 t : Cart[Real, Unit], IN(t, interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))])) \226\134\146 (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t) == (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(a) + op_pct((drop(t) - drop(a)) / (drop(b) - drop(a)), g(b) - g(a))
+      #|  (b : Cart[Real, Unit])
+      #|  (a : Cart[Real, Unit])
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  !((a : Cart[Real, Unit]) == (b : Cart[Real, Unit]))
+      #|  !(!IN((x : _), {(b : _), (a : _)}) && IN(x, UNION((t : (_) -> Bool), {a, b}))) \226\134\146 !IN(a, t) && !IN(b, t) \226\134\146 !IN(x, t)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, Unit])) == (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, Unit]))
+      #|  INTER(DIFF(path_image((g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), {(g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Unit])), g((a : Cart[Real, Unit]))}), path_image((d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))) == {}
+      #|  IMAGE((f : (_) -> _), (s : (_) -> Bool)) == (t : (_) -> Bool) \226\134\146 (\226\136\128 x : _, IN(x, s) \226\134\146 IN(f(x), t))
+      #|  (x : Cart[Real, Unit])
+      #|  IMAGE((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), DIFF(interval([(vec(0), vec(1))]), interval(((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))))) == path_image((g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (y : Cart[Real, Unit])
+      #|  (x : Cart[Real, Unit])
+      #|  (a : Real) < (b : Real) \226\134\146 (((x : Real) - a) / (b - a) == ((y : Real) - a) / (b - a)) == (x == y)
+      #|  ((a : Cart[Real, N]) + (x : Cart[Real, N]) == a + (y : Cart[Real, N])) == (x == y)
+      #|  simple_path((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (x : Cart[Real, Unit]) => IN(x, interval(((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))))
+      #|  \226\136\128 Q : (_) -> Bool, (\226\136\128 x : _, \226\136\128 y : _, (P : (_, _) -> Bool)(x, y) == P(y, x)) && (\226\136\128 x : _, \226\136\128 y : _, !Q(x) && !Q(y) \226\134\146 P(x, y)) && (\226\136\128 x : _, \226\136\128 y : _, Q(x) && Q(y) \226\134\146 P(x, y)) && (\226\136\128 x : _, \226\136\128 y : _, !Q(x) && Q(y) \226\134\146 P(x, y)) \226\134\146 (\226\136\128 x : _, \226\136\128 y : _, P(x, y))
+      #|  ((r : Bool) \226\134\146 (p : Bool)) && (q : Bool) && r && (s : Bool) \226\134\146 p && q && r && s
+      #|  IMAGE((h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))])) == segment([((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(a), g(b))])
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit])) == (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(a) && h((b : Cart[Real, Unit])) == g(b)
+      #|  drop((a : Cart[Real, Unit])) < drop((b : Cart[Real, Unit]))
+      #|  op_pct(real_of_num(1) - (a : Real), (x : Cart[Real, N])) + op_pct(a, (y : Cart[Real, N])) == x + op_pct(a, y - x)
+      #|  (t : Cart[Real, Unit])
+      #|  (\226\136\128 x : _, (f : (_) -> _)(x) == (g : (_) -> _)(x)) \226\134\146 IMAGE(f, (s : (_) -> Bool)) == IMAGE(g, s)
+      #|  (b : Cart[Real, Unit])
+      #|  (a : Cart[Real, Unit])
+      #|  ((x : _) => if IN(x, (s : (_) -> Bool)) { (f : (_) -> _)(x) } else { (g : (_) -> _)(x) }) == (h : (_) -> _) \226\134\146 IMAGE(f, s) == (t : (_) -> Bool) \226\134\146 IMAGE(h, s) == t
+      #|  IMAGE((h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval(((a : Cart[Real, Unit]), (b : Cart[Real, Unit])))) == segment(((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(a), g(b)))
+      #|  pathstart((h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) == pathstart((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) && pathfinish(h) == pathfinish(g)
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]) == ((t : Cart[Real, Unit]) => if IN(t, interval(((a : Cart[Real, Unit]), (b : Cart[Real, Unit])))) { (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(a) + op_pct((drop(t) - drop(a)) / (drop(b) - drop(a)), g(b) - g(a)) } else { g(t) })
+      #|  path_image((d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) == segment([((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit])), g((b : Cart[Real, Unit])))])
+      #|  SUBSET(interior(hull(convex, path_image((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))), interior(hull(convex, segment([((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit])), g((b : Cart[Real, Unit])))]))))
+      #|  SUBSET(path_image((d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), segment([((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit])), g((b : Cart[Real, Unit])))])) || SUBSET(path_image(reversepath((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))), segment([(g(a), g(b))]))
+      #|  INTER((s : (_) -> Bool), (h' : (_) -> Bool)) == {} && UNION((h : (_) -> Bool), h') == UNIV \226\134\146 !SUBSET((d : (_) -> Bool), h) \226\134\146 !(INTER(h', DIFF(d, s)) == {})
+      #|  !SUBSET(path_image((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), {(x : Cart[Real, Tybit0[Unit]]) | real_of_num(0) <= op_dollar(x, 2)})
+      #|  !SUBSET(path_image((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), {(x : Cart[Real, Tybit0[Unit]]) | op_dollar(x, 2) <= real_of_num(0)})
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(DIFF(s, (f : (_) -> Bool)), t)
+      #|  IN((z : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(z, t)
+      #|  IN((z : _), (i : (_) -> Bool)) \226\134\146 IN(z, (c : (_) -> Bool)) \226\134\146 !SUBSET(c, DIFF((a : (_) -> Bool), i))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Unit]))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit]))
+      #|  hull(convex, path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
+      #|  (real_of_num(0) < (x : Real) || x < real_of_num(0)) == !(x == real_of_num(0))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  {(x : Cart[Real, Tybit0[Unit]]) | op_dollar(x, 2) < real_of_num(0)}
+      #|  {(x : Cart[Real, Tybit0[Unit]]) | real_of_num(0) < op_dollar(x, 2)}
+      #|  (d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (convex : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)
+      #|  !SUBSET(path_image((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), {(x : Cart[Real, Tybit0[Unit]]) | real_of_num(0) <= op_dollar(x, 2)}) && !SUBSET(path_image(d1), {(x : Cart[Real, Tybit0[Unit]]) | op_dollar(x, 2) <= real_of_num(0)})
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Unit]))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit]))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Unit])) == op_pct((gb : Real), basis(1))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit])) == vec(0)
+      #|  op_dollar((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit])), 2) == real_of_num(0) && op_dollar(g((b : Cart[Real, Unit])), 2) == real_of_num(0)
+      #|  (gb : Cart[Real, Tybit0[Unit]])
+      #|  (ga : Cart[Real, Tybit0[Unit]])
+      #|  (gb : Cart[Real, Tybit0[Unit]]) == (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Unit]))
+      #|  (ga : Cart[Real, Tybit0[Unit]]) == (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit]))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 IN(x, (t : (_) -> Bool)) && !(P : (_) -> Bool)(x)) == (SUBSET(s, t) && (\226\136\128 x : _, IN(x, s) \226\134\146 !P(x)))
+      #|  SUBSET(segment([((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit])), g((b : Cart[Real, Unit])))]), frontier(hull(convex, path_image(g))))
+      #|  IMAGE((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))])) == path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  UNION((d : (_) -> Bool), (d' : (_) -> Bool)) == (g : (_) -> Bool) \226\134\146 SUBSET(INTER(g, (s : (_) -> Bool)), (a : (_) -> Bool)) \226\134\146 SUBSET(INTER(d, s), a)
+      #|  SUBSET(INTER((s : (_) -> Bool), (t : (_) -> Bool)), (a : (_) -> Bool)) && SUBSET(INTER(s, (u : (_) -> Bool)), a) \226\134\146 SUBSET(INTER(UNION(u, t), s), a)
+      #|  {(g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit])), g((b : Cart[Real, Unit]))}
+      #|  SUBSET(INTER((s : (_) -> Bool), (t : (_) -> Bool)), (u : (_) -> Bool)) \226\134\146 SUBSET(INTER(s, UNION(t, u)), u)
+      #|  SUBSET((s : (_) -> Bool), (c : (_) -> Bool)) \226\134\146 SUBSET(DIFF(s, INTER(s, DIFF(c, (i : (_) -> Bool)))), i)
+      #|  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 SUBSET(s, t)
+      #|  hull(convex, INTER(UNION(path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), path_image((g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))), UNION(path_image((d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), path_image((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))))
+      #|  path_image((d : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) == frontier(hull(convex, path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))))
+      #|  hull(convex, path_image((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))) == hull(convex, path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
+      #|  reversepath((d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  reversepath((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (!(INTER((s : (_) -> Bool), UNION((t : (_) -> Bool), (u : (_) -> Bool))) == {}) \226\134\146 INTER(s, UNION((v : (_) -> Bool), (w : (_) -> Bool))) == {}) \226\134\146 INTER(s, t) == {} || INTER(s, v) == {}
+      #|  (b : Cart[Real, Unit])
+      #|  (a : Cart[Real, Unit])
+      #|  IMAGE((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))])) == path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  UNION((f : (_) -> Bool), (e : (_) -> Bool)) == (d : (_) -> Bool) \226\134\146 SUBSET(INTER(d, (g : (_) -> Bool)), (s : (_) -> Bool)) \226\134\146 SUBSET(INTER(e, g), s)
+      #|  UNION((e : (_) -> Bool), (f : (_) -> Bool)) == (d : (_) -> Bool) \226\134\146 SUBSET(INTER(d, (g : (_) -> Bool)), (s : (_) -> Bool)) \226\134\146 SUBSET(INTER(e, g), s)
+      #|  op_plus_plus(reversepath((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), reversepath((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
+      #|  op_plus_plus((d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), reversepath((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
+      #|  SUBSET((s : (_) -> Bool), (f : (_) -> Bool)) \226\134\146 SUBSET(s, UNION((t : (_) -> Bool), f))
+      #|  SUBSET((p : (_) -> Bool), (c : (_) -> Bool)) \226\134\146 INTER(c, (i : (_) -> Bool)) == {} \226\134\146 !IN((z : _), INTER(i, p))
+      #|  inside(UNION(path_image((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))))
+      #|  inside(UNION(path_image((d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))))
+      #|  inside(UNION(path_image((d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))))
+      #|  inside(UNION(path_image((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))))
+      #|  INTER((i : (_) -> Bool), (j : (_) -> Bool)) == {} \226\134\146 !IN((z : _), INTER((s : (_) -> Bool), (t : (_) -> Bool))) && !IN(z, INTER(s, j)) && !IN(z, INTER(t, i)) \226\134\146 !(IN(z, UNION(s, i)) && IN(z, UNION(t, j)))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (INTER(INTER((s : (_) -> Bool), (t : (_) -> Bool)), INTER(s, (u : (_) -> Bool))) == {}) == (\226\136\128 x : _, IN(x, s) \226\134\146 !IN(x, INTER(t, u)))
+      #|  UNION((i : (_) -> Bool), UNION((j : (_) -> Bool), (p : (_) -> Bool))) == (k : (_) -> Bool) \226\134\146 !IN((z : _), p) && IN(z, UNION((f : (_) -> Bool), k)) \226\134\146 IN(z, UNION(f, UNION(i, j)))
+      #|  UNION(UNION((s : (_) -> Bool), (t : (_) -> Bool)), UNION((u : (_) -> Bool), (v : (_) -> Bool))) == UNION(UNION(s, u), UNION(t, v))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  SUBSET((s : (_) -> Bool), UNION((t : (_) -> Bool), (u : (_) -> Bool))) \226\134\146 SUBSET(s, UNION(INTER(s, t), INTER(s, u)))
+      #|  (b : Cart[Real, Unit])
+      #|  (a : Cart[Real, Unit])
+      #|  IMAGE((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))])) == path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  UNION((f : (_) -> Bool), (e : (_) -> Bool)) == (d : (_) -> Bool) \226\134\146 SUBSET(INTER(d, (g : (_) -> Bool)), (s : (_) -> Bool)) \226\134\146 SUBSET(INTER(e, g), s)
+      #|  UNION((e : (_) -> Bool), (f : (_) -> Bool)) == (d : (_) -> Bool) \226\134\146 SUBSET(INTER(d, (g : (_) -> Bool)), (s : (_) -> Bool)) \226\134\146 SUBSET(INTER(e, g), s)
+      #|  op_plus_plus(reversepath((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), reversepath((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
+      #|  op_plus_plus((d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), reversepath((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
+      #|  SUBSET((s : (_) -> Bool), (f : (_) -> Bool)) \226\134\146 SUBSET(s, UNION((t : (_) -> Bool), f))
+      #|  SUBSET((p : (_) -> Bool), (c : (_) -> Bool)) \226\134\146 INTER(c, (i : (_) -> Bool)) == {} \226\134\146 !IN((z : _), INTER(i, p))
+      #|  inside(UNION(path_image((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))))
+      #|  inside(UNION(path_image((d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))))
+      #|  inside(UNION(path_image((d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))))
+      #|  inside(UNION(path_image((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))))
+      #|  INTER((i : (_) -> Bool), (j : (_) -> Bool)) == {} \226\134\146 !IN((z : _), INTER((s : (_) -> Bool), (t : (_) -> Bool))) && !IN(z, INTER(s, j)) && !IN(z, INTER(t, i)) \226\134\146 !(IN(z, UNION(s, i)) && IN(z, UNION(t, j)))
+      #|  UNION((i : (_) -> Bool), UNION((j : (_) -> Bool), (p : (_) -> Bool))) == (k : (_) -> Bool) \226\134\146 !IN((z : _), p) && IN(z, UNION((f : (_) -> Bool), k)) \226\134\146 IN(z, UNION(f, UNION(i, j)))
+      #|  (IN((z : _), UNION((s : (_) -> Bool), (t : (_) -> Bool))) || IN(z, UNION((u : (_) -> Bool), (v : (_) -> Bool)))) == IN(z, UNION(UNION(s, u), UNION(t, v)))
+      #|  (!(p : Bool) == (q : Bool)) == ((p || q) && !(p && q))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (!(p : Bool) == (q : Bool)) == (!q == p)
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 !IN(x, (u : (_) -> Bool)) == IN(x, (t : (_) -> Bool))) \226\134\146 DIFF(s, u) == INTER(s, t)
+      #|  INTER((g0 : (_) -> Bool), (g1 : (_) -> Bool)) == {(a : _), (b : _)} \226\134\146 DIFF(DIFF(g1, {b, a}), UNION((i : (_) -> Bool), UNION((d1 : (_) -> Bool), g0))) == DIFF(DIFF(g1, {b, a}), UNION(d1, i))
+      #|  (b : Cart[Real, Unit])
+      #|  (a : Cart[Real, Unit])
+      #|  IMAGE((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))])) == path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  UNION((f : (_) -> Bool), (e : (_) -> Bool)) == (d : (_) -> Bool) \226\134\146 SUBSET(INTER(d, (g : (_) -> Bool)), (s : (_) -> Bool)) \226\134\146 SUBSET(INTER(e, g), s)
+      #|  UNION((e : (_) -> Bool), (f : (_) -> Bool)) == (d : (_) -> Bool) \226\134\146 SUBSET(INTER(d, (g : (_) -> Bool)), (s : (_) -> Bool)) \226\134\146 SUBSET(INTER(e, g), s)
+      #|  op_plus_plus((d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), reversepath((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
+      #|  op_plus_plus(reversepath((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), reversepath((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
+      #|  DIFF(DIFF(path_image((g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), {(g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Unit])), g((a : Cart[Real, Unit]))}), closure(inside(UNION(path_image((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))))) == INTER(DIFF(path_image(g1), {g(b), g(a)}), UNION(path_image((d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), inside(UNION(path_image(d0), path_image(g0))))) && DIFF(DIFF(path_image(g1), {g(b), g(a)}), closure(inside(UNION(path_image(d0), path_image(g0))))) == INTER(DIFF(path_image(g1), {g(b), g(a)}), UNION(path_image(d1), inside(UNION(path_image(d1), path_image(g0)))))
+      #|  !((p : Bool) && (q : Bool)) == (p \226\134\146 !q)
+      #|  DIFF(DIFF(path_image((g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), {(g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Unit])), g((a : Cart[Real, Unit]))}), closure(inside(UNION(path_image((d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))))))
+      #|  DIFF(DIFF(path_image((g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), {(g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Unit])), g((a : Cart[Real, Unit]))}), closure(inside(UNION(path_image((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))))))
+      #|  (g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  INTER(DIFF((s : (_) -> Bool), (t : (_) -> Bool)), t) == {}
+      #|  SUBSET(IMAGE((g : (_) -> _), (i : (_) -> Bool)), (n : (_) -> Bool)) \226\134\146 IN(g((a : _)), (d0 : (_) -> Bool)) && IN(g((b : _)), d0) && IN(g(a), (d1 : (_) -> Bool)) && IN(g(b), d1) && !(i == {}) && INTER(UNION(d0, d1), n) == {} \226\134\146 INTER(d0, IMAGE(g, UNION(i, {a, b}))) == {g(a), g(b)} && INTER(d1, IMAGE(g, UNION(i, {a, b}))) == {g(a), g(b)} && !(INTER(IMAGE(g, UNION(i, {a, b})), n) == {})
+      #|  (b : Cart[Real, Unit])
+      #|  (a : Cart[Real, Unit])
+      #|  IMAGE((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))])) == path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Unit]))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit]))
+      #|  (g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  reversepath((d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Unit]))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit]))
+      #|  (d : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\131 d0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\131 d1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], arc(d0) && arc(d1) && pathstart(d0) == (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit])) && pathfinish(d0) == g((b : Cart[Real, Unit])) && pathstart(d1) == g(b) && pathfinish(d1) == g(a) && INTER(path_image(d0), path_image(d1)) == {g(a), g(b)} && UNION(path_image(d0), path_image(d1)) == path_image((d : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) && INTER(inside(UNION(path_image(d0), path_image((g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))), inside(UNION(path_image(d1), path_image(g0)))) == {} && UNION(inside(UNION(path_image(d0), path_image(g0))), UNION(inside(UNION(path_image(d1), path_image(g0))), DIFF(path_image(g0), {g(a), g(b)}))) == interior(hull(convex, path_image(g))) && INTER(DIFF(path_image((g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), {g(b), g(a)}), path_image(d0)) == {}
+      #|  (d : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  hull(convex, path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
+      #|  (g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g0 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Unit])
+      #|  (a : Cart[Real, Unit])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  SUBSET(IMAGE((f : (_) -> _), (t : (_) -> Bool)), (u : (_) -> Bool)) \226\134\146 SUBSET(DIFF(IMAGE(f, (s : (_) -> Bool)), IMAGE(f, DIFF(s, t))), u)
+      #|  (c : _) == (b : _) && b == (a : _) \226\134\146 b == a && c == a
+      #|  hull(convex, IMAGE((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), DIFF(interval([(vec(0), vec(1))]), interval(((a : Cart[Real, Unit]), (b : Cart[Real, Unit])))))) == hull(convex, path_image(g)) && hull(convex, UNION(segment([(g(a), g(b))]), IMAGE(g, DIFF(interval([(vec(0), vec(1))]), interval((a, b)))))) == hull(convex, path_image(g))
+      #|  hull(convex, path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))) == hull(convex, IMAGE(g, {(a : Cart[Real, Unit]), (b : Cart[Real, Unit])}))
+      #|  !(interior(hull(convex, path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))) == {})
+      #|  drop((a : Cart[Real, Unit])) < drop((b : Cart[Real, Unit]))
+      #|  (b : Cart[Real, Unit])
+      #|  (a : Cart[Real, Unit])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit])) == g((b : Cart[Real, Unit]))
+      #|  !(interior(hull(convex, path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))) == {})
+      #|  SUBSET((s : (Cart[Real, _]) -> Bool), hull(convex, s)) && SUBSET((t : (Cart[Real, _]) -> Bool), s) \226\134\146 SUBSET(t, hull(convex, s))
+      #|  SUBSET((s : (Cart[Real, _]) -> Bool), closure(s)) && SUBSET((u : (Cart[Real, _]) -> Bool), s) \226\134\146 SUBSET(u, UNION(DIFF(closure(s), interior(s)), interior(s)))
+      #|  INTER((s : (_) -> Bool), (f : (_) -> Bool)) == {} \226\134\146 SUBSET(s, UNION(f, (i : (_) -> Bool))) \226\134\146 SUBSET(s, i)
+      #|  SUBSET(IMAGE((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval(((a : Cart[Real, Unit]), (b : Cart[Real, Unit])))), interior(hull(convex, path_image(g))))
+      #|  interval(((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))) == {}
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], \226\136\128 L : Real, simple_path(g) && pathfinish(g) == pathstart(g) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 dist((g(x), g(y))) <= L * dist((x, y))) && drop(a) < drop(b) && IN(a, interval([(vec(0), vec(1))])) && IN(b, interval([(vec(0), vec(1))])) && IN(g(a), frontier(hull(convex, path_image(g)))) && IN(g(b), frontier(hull(convex, path_image(g)))) && INTER(IMAGE(g, interval((a, b))), frontier(hull(convex, path_image(g)))) == {} \226\134\146 (\226\136\131 h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], simple_path(h) && pathstart(h) == pathstart(g) && pathfinish(h) == pathstart(g) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 dist((h(x), h(y))) <= L * dist((x, y))) && path_length(h) < path_length(g) && hull(convex, path_image(h)) == hull(convex, path_image(g)) && (\226\136\128 x : Cart[Real, Unit], !IN(x, interval((a, b))) \226\134\146 h(x) == g(x)) && SUBSET(IMAGE(h, interval([(a, b)])), frontier(hull(convex, path_image(g)))))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (x : Cart[Real, Unit])
+      #|  (x : Cart[Real, Unit])
+      #|  (\226\136\128 x : _, IN(x, DIFF((k : (_) -> Bool), (j : (_) -> Bool))) \226\134\146 (h : (_) -> _)(x) == (g : (_) -> _)(x)) \226\134\146 SUBSET(IMAGE(g, DIFF(k, j)), IMAGE(h, k))
+      #|  (x : Cart[Real, Unit])
+      #|  (\226\136\128 x : _, IN(x, (k : (_) -> Bool)) && IN(x, (j : (_) -> Bool)) \226\134\146 !IN((g : (_) -> _)(x), (t : (_) -> Bool))) \226\134\146 DISJOINT(DIFF(IMAGE(g, k), IMAGE(g, DIFF(k, j))), t)
+      #|  SUBSET((p : (_) -> Bool), (c : (_) -> Bool)) && DISJOINT(DIFF(p, (q : (_) -> Bool)), (f : (_) -> Bool)) \226\134\146 SUBSET(DIFF(p, q), DIFF(c, f))
+      #|  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 SUBSET(s, t)
+      #|  hull(convex, IMAGE((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), DIFF(interval([(vec(0), vec(1))]), UNIONS({interval(((a : (Num) -> Cart[Real, Unit])((n : Num)), (b : (Num) -> Cart[Real, Unit])(n))) | IN(n, UNIV)}))))
+      #|  hull(convex, path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))) == hull(convex, path_image((f : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((n : Num))))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (x : Cart[Real, Unit])
+      #|  (x : Cart[Real, Unit])
+      #|  (c : ((_) -> Bool) -> Bool) == {(k : (Num, _) -> Bool)((n : Num)) | IN(n, UNIV)} \226\134\146 !(\226\136\131 n : Num, IN((x : _), k(n))) && (!IN((g : (_) -> _)(x), (t : (_) -> Bool)) \226\134\146 IN(x, UNIONS(c))) \226\134\146 IN(g(x), t)
+      #|  (f : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((n : Num), (x : Cart[Real, Unit])) == (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (x : Cart[Real, Unit])
+      #|  (n : Num)
+      #|  (N : Num) + SUC((n : Num))
+      #|  (N : Num)
+      #|  (x : Cart[Real, Unit])
+      #|  (n : Num)
+      #|  \226\136\131 n : Num, IN((x : Cart[Real, Unit]), interval(((a : (Num) -> Cart[Real, Unit])(n), (b : (Num) -> Cart[Real, Unit])(n))))
+      #|  (x : Cart[Real, Unit])
+      #|  ((p : Bool) \226\134\146 (q : Bool)) && p \226\134\146 p && q
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (y : Cart[Real, Unit])
+      #|  (x : Cart[Real, Unit])
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 dist(((h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x), h(y))) <= (L : Real) * dist((x, y))
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
+      #|  (\226\136\128 d : Num, (P : (Num) -> Bool)((n : Num) + d)) \226\134\146 (\226\136\128 m : Num, n <= m \226\134\146 P(m))
+      #|  (n : Num) + 1
+      #|  (f : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((n : Num) + 1, (x : Cart[Real, Unit]))
+      #|  (n : Num)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, Unit]))
+      #|  IN((x : Cart[Real, Unit]), UNIONS({interval(((a : (Num) -> Cart[Real, Unit])((n : Num)), (b : (Num) -> Cart[Real, Unit])(n))) | IN(n, UNIV)}))
+      #|  IN((x : Cart[Real, Unit]), interval([(vec(0), vec(1))]))
+      #|  (x : Cart[Real, Unit])
+      #|  \226\136\128 x : Cart[Real, Unit], \226\136\131 y : Cart[Real, Tybit0[Unit]], IN(x, interval([(vec(0), vec(1))])) \226\134\146 eventually((n : Num) => (f : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(n, x) == y, sequentially)
+      #|  (f : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (\226\136\128 m : Num, m < (n : Num) \226\134\146 !SUBSET((k : (Num, _) -> Bool)(n), k(m))) \226\134\146 IN((x : _), k(n)) && (\226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, IN(s, {k((n : Num)) | IN(n, UNIV)}) && IN(t, {k((n : Num)) | IN(n, UNIV)}) && !(s == t) \226\134\146 DISJOINT(s, t)) \226\134\146 !(\226\136\128 m : Num, m < n \226\134\146 !IN(x, k(m))) \226\134\146 (p : Bool)
+      #|  IN((x : Cart[Real, Unit]), interval(((a : (Num) -> Cart[Real, Unit])((n : Num)), (b : (Num) -> Cart[Real, Unit])(n))))
+      #|  (x : Cart[Real, Unit])
+      #|  (\226\136\128 m : Num, m < (n : Num) \226\134\146 !SUBSET((k : (Num, _) -> Bool)(n), k(m))) \226\134\146 IN((x : _), UNIONS({k((m : Num)) | m < n})) && (\226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, IN(s, {k((n : Num)) | IN(n, UNIV)}) && IN(t, {k((n : Num)) | IN(n, UNIV)}) && !(s == t) \226\134\146 DISJOINT(s, t)) \226\134\146 !IN(x, k(n))
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, Unit])) == (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)
+      #|  (x : Cart[Real, Unit])
+      #|  SUBSET(IMAGE((f : (_) -> _), (c : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 SUBSET((i : (_) -> Bool), c) \226\134\146 (\226\136\128 x : _, IN(x, i) \226\134\146 IN(f(x), t))
+      #|  {(f : (_) -> _)((x : _)) | x == (a : _) || (P : (_) -> Bool)(x)} == INSERT(f(a), {f((x : _)) | P(x)})
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (s : ((_) -> Bool) -> Bool) == {(k : (Num, _) -> Bool)((n : Num)) | IN(n, UNIV)} \226\134\146 INTER(IMAGE((g : (_) -> _), UNIONS(s)), (f : (_) -> Bool)) == {} \226\134\146 INTER(IMAGE(g, k((n : Num))), f) == {}
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (h : (_) -> _)(x) == (g : (_) -> _)(x)) \226\134\146 INTER(IMAGE(g, s), (k : (_) -> Bool)) == (j : (_) -> Bool) \226\134\146 INTER(IMAGE(h, s), k) == j
+      #|  (\226\136\128 m : Num, m < (n : Num) \226\134\146 !SUBSET((k : (Num, _) -> Bool)(n), k(m))) \226\134\146 IN((x : _), k(n)) && (\226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, IN(s, {k((n : Num)) | IN(n, UNIV)}) && IN(t, {k((n : Num)) | IN(n, UNIV)}) && !(s == t) \226\134\146 DISJOINT(s, t)) \226\134\146 !(\226\136\131 m : Num, m < n && IN(x, k(m)))
+      #|  \226\136\128 x : Cart[Real, Unit], IN(x, interval(((a : (Num) -> Cart[Real, Unit])((n : Num)), (b : (Num) -> Cart[Real, Unit])(n)))) \226\134\146 (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x) == (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)
+      #|  (s : ((_) -> Bool) -> Bool) == {(i : (Num, _) -> Bool)((n : Num)) | IN(n, UNIV)} \226\134\146 !IN((x : _), UNIONS(s)) \226\134\146 !IN(x, UNIONS({i((n : Num)) | (P : (Num) -> Bool)(n)}))
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : (Num) -> Cart[Real, Unit])((n : Num))) == (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(a(n)) && h((b : (Num) -> Cart[Real, Unit])(n)) == g(b(n))
+      #|  (L : Real)
+      #|  (b : (Num) -> Cart[Real, Unit])((n : Num))
+      #|  (a : (Num) -> Cart[Real, Unit])((n : Num))
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  !((p : Bool) && (q : Bool)) == (p \226\134\146 !q)
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  UNIONS({interval(((a : (Num) -> Cart[Real, Unit])((m : Num)), (b : (Num) -> Cart[Real, Unit])(m))) | m < SUC((n : Num))}) == UNIONS({interval((a((m : Num)), b(m))) | m < n})
+      #|  interval(((a : (Num) -> Cart[Real, Unit])((n : Num)), (b : (Num) -> Cart[Real, Unit])(n))) == {} || (\226\136\131 m : Num, m < n && SUBSET(interval((a(n), b(n))), interval((a(m), b(m)))))
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\131 h : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], (\226\136\128 n : Num, simple_path(h(n)) && rectifiable_path(h(n)) && pathstart(h(n)) == pathstart((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) && pathfinish(h(n)) == pathfinish(g) && hull(convex, path_image(h(n))) == hull(convex, path_image(g)) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 dist((h(n, x), h(n, y))) <= (L : Real) * dist((x, y))) && (\226\136\128 x : Cart[Real, Unit], IN(x, UNIONS({interval(((a : (Num) -> Cart[Real, Unit])((m : Num)), (b : (Num) -> Cart[Real, Unit])(m))) | m < n})) \226\134\146 IN(h(n, x), frontier(hull(convex, path_image(g))))) && (\226\136\128 x : Cart[Real, Unit], !IN(x, UNIONS({interval((a((m : Num)), b(m))) | m < n})) \226\134\146 h(n, x) == g(x))) && (\226\136\128 n : Num, \226\136\128 x : Cart[Real, Unit], !(IN(x, interval((a(n), b(n)))) && (\226\136\128 m : Num, m < n \226\134\146 !IN(x, interval((a(m), b(m)))))) \226\134\146 h(SUC(n), x) == h(n, x))
+      #|  interval(((a : (Num) -> Cart[Real, Unit])((n : Num)), (b : (Num) -> Cart[Real, Unit])(n)))
+      #|  (INSERT((x : _), (s : (_) -> Bool)) == s) == IN(x, s)
+      #|  (q : Bool) && !(s : Bool) && (r : Bool) && (!(t : Bool) \226\134\146 (p : Bool)) \226\134\146 (p \226\134\146 q \226\134\146 r \226\134\146 s) \226\134\146 t
+      #|  INSERT((b : (Num) -> Cart[Real, Unit])((n : Num)), interval(((a : (Num) -> Cart[Real, Unit])(n), b(n))))
+      #|  INSERT((a : (Num) -> Cart[Real, Unit])((n : Num)), interval((a(n), (b : (Num) -> Cart[Real, Unit])(n))))
+      #|  interval(((a : (Num) -> Cart[Real, Unit])((n : Num)), (b : (Num) -> Cart[Real, Unit])(n)))
+      #|  (s : (Cart[Real, Unit]) -> Bool)
+      #|  (n : Num)
+      #|  ((p : Bool) && (q : Bool)) && (p && q \226\134\146 (r : Bool)) \226\134\146 p && q && r
+      #|  \226\136\128 n : Num, SUBSET(closure(interval(((a : (Num) -> Cart[Real, Unit])(n), (b : (Num) -> Cart[Real, Unit])(n)))), interval([(vec(0), vec(1))]))
+      #|  (s : ((_) -> Bool) -> Bool) == IMAGE((q : (_, _) -> Bool), UNIV) \226\134\146 (\226\136\128 c : (_) -> Bool, IN(c, s) \226\134\146 SUBSET(c, (t : (_) -> Bool))) \226\134\146 SUBSET(q((n : _)), t)
+      #|  \226\136\128 n : Num, SUBSET(interval(((a : (Num) -> Cart[Real, Unit])(n), (b : (Num) -> Cart[Real, Unit])(n))), (s : (Cart[Real, Unit]) -> Bool))
+      #|  (s : ((_) -> Bool) -> Bool) == IMAGE((q : (_, _) -> Bool), UNIV) \226\134\146 (\226\136\128 c : (_) -> Bool, IN(c, s) \226\134\146 !(c == {})) \226\134\146 (\226\136\128 n : _, !(q(n) == {}))
+      #|  \226\136\128 n : Num, drop((a : (Num) -> Cart[Real, Unit])(n)) < drop((b : (Num) -> Cart[Real, Unit])(n))
+      #|  (b : (Num) -> Cart[Real, Unit])
+      #|  (a : (Num) -> Cart[Real, Unit])
+      #|  (s : ((_) -> Bool) -> Bool) == IMAGE((q : (_, _) -> Bool), UNIV) \226\134\146 SUBSET(UNIONS(s), (t : (_) -> Bool)) \226\134\146 SUBSET(q((n : _)), t)
+      #|  (s : ((_) -> Bool) -> Bool) == IMAGE((q : (_, _) -> Bool), UNIV) \226\134\146 !IN((a : _), UNIONS(s)) \226\134\146 !IN(a, q((n : _)))
+      #|  (!IN((a : _), (t : (_) -> Bool)) && !IN((b : _), t)) && SUBSET(t, (s : (_) -> Bool)) \226\134\146 SUBSET(t, DIFF(s, {a, b}))
+      #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
+      #|  (s : (Cart[Real, Unit]) -> Bool)
+      #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
+      #|  (interval : ((Cart[Real, Unit], Cart[Real, Unit]), Cart[Real, Unit]) -> Bool)(((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1)))
+      #|  (s : ((Cart[Real, _]) -> Bool) -> Bool) == IMAGE((q : (_, Cart[Real, _]) -> Bool), UNIV) \226\134\146 (\226\136\128 x : (Cart[Real, _]) -> Bool, IN(x, s) \226\134\146 connected(x)) \226\134\146 connected(q((n : _)))
+      #|  interior((q : (Num, Cart[Real, Unit]) -> Bool)((n : Num)))
+      #|  (b : Cart[Real, Unit])
+      #|  (a : Cart[Real, Unit])
+      #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
+      #|  (s : ((Cart[Real, _]) -> Bool) -> Bool) == IMAGE((q : (_, Cart[Real, _]) -> Bool), UNIV) \226\134\146 (\226\136\128 x : (Cart[Real, _]) -> Bool, IN(x, s) \226\134\146 connected(x)) \226\134\146 connected(q((n : _)))
+      #|  closure((q : (Num, Cart[Real, Unit]) -> Bool)((n : Num)))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\131 a : Cart[Real, Unit], \226\136\131 b : Cart[Real, Unit], (q : (Num, Cart[Real, Unit]) -> Bool)(n) == interval((a, b))
+      #|  (q : (Num, Cart[Real, Unit]) -> Bool)
+      #|  components((s : (Cart[Real, Unit]) -> Bool))
+      #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
+      #|  COUNTABLE(components((s : (Cart[Real, Unit]) -> Bool)))
+      #|  {(t : _) | IN(t, (k : (_) -> Bool)) && IN((g : (_) -> _)(t), DIFF(UNIV, (f : (_) -> Bool)))} == {} \226\134\146 SUBSET(IMAGE(g, k), f)
+      #|  (s : (Cart[Real, Unit]) -> Bool) == {}
+      #|  (s : (Cart[Real, Unit]) -> Bool) == {}
+      #|  (s : (Cart[Real, Unit]) -> Bool) == {(t : Cart[Real, Unit]) | IN(t, interval([(vec(0), vec(1))])) && IN((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t), DIFF(UNIV, frontier(hull(convex, path_image(g)))))}
+      #|  open_in(subtopology(euclidean, interval([(vec(0), vec(1))])), {(t : Cart[Real, Unit]) | IN(t, interval([(vec(0), vec(1))])) && IN((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t), DIFF(UNIV, frontier(hull(convex, path_image(g)))))})
+      #|  \226\136\131 a : (Num) -> Cart[Real, Unit], \226\136\131 b : (Num) -> Cart[Real, Unit], (\226\136\128 n : Num, IN(a(n), interval([(vec(0), vec(1))]))) && (\226\136\128 n : Num, IN(b(n), interval([(vec(0), vec(1))]))) && (\226\136\128 n : Num, drop(a(n)) <= drop(b(n))) && (\226\136\128 n : Num, IN((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(a(n)), frontier(hull(convex, path_image(g))))) && (\226\136\128 n : Num, IN(g(b(n)), frontier(hull(convex, path_image(g))))) && components({(t : Cart[Real, Unit]) | IN(t, interval([(vec(0), vec(1))])) && IN(g(t), DIFF(UNIV, frontier(hull(convex, path_image(g)))))}) == {interval((a((n : Num)), b(n))) | IN(n, UNIV)}
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  SUBSET(path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), frontier(hull(convex, path_image(g))))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(0) <= (L : Real) && path_length((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) == L && simple_path(g') && rectifiable_path(g') && pathfinish(g') == pathstart(g') && IN(pathstart(g'), frontier(hull(convex, path_image(g')))) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 dist((g'(x), g'(y))) <= L * dist((x, y)))
+      #|  (g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (L : Real) == path_length((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  shiftpath((t : Cart[Real, Unit]), (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (t : Cart[Real, Unit])
+      #|  ({} : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], rectifiable_path(g) && simple_path(g) && pathfinish(g) == pathstart(g) && IN(pathstart(g), frontier(hull(convex, path_image(g)))) \226\134\146 (\226\136\131 h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], rectifiable_path(h) && simple_path(h) && pathfinish(h) == pathstart(h) && path_length(h) <= path_length(g) && hull(convex, path_image(h)) == hull(convex, path_image(g)) && path_image(h) == frontier(hull(convex, path_image(g))))
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], rectifiable_path(g) && simple_path(g) && pathfinish(g) == pathstart(g) \226\134\146 (\226\136\131 h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], rectifiable_path(h) && simple_path(h) && pathfinish(h) == pathstart(h) && path_length(h) <= path_length(g) && hull(convex, path_image(h)) == hull(convex, path_image(g)) && path_image(h) == frontier(hull(convex, path_image(g))))
+      #|  (x : Cart[Real, Unit])
+      #|  (y : Cart[Real, Unit])
+      #|  (x : Cart[Real, Unit])
+      #|  (y : Cart[Real, Unit])
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  dist(((x : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]]))) < (e : Real) / real_of_num(2)
+      #|  ball(((x : Cart[Real, Tybit0[Unit]]), (e : Real)))
+      #|  SUBSET((b : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 INTER((s : (_) -> Bool), t) == {} \226\134\146 DISJOINT(b, s)
+      #|  DISJOINT((s : (_) -> Bool), (v : (_) -> Bool)) && SUBSET((t : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 SUBSET(INTER(s, t), DIFF(u, v))
+      #|  min((d : Real), (e : Real) / real_of_num(2))
+      #|  (d : Real)
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (e : Real) / real_of_num(2)
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (e : Real)
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  !(p : Bool) \226\134\146 p \226\134\146 false
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  SUBSET((p : (_) -> Bool), (c : (_) -> Bool)) && !SUBSET(p, (f : (_) -> Bool)) \226\134\146 !(INTER(p, DIFF(c, f)) == {})
+      #|  !(INTER(path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), interior(hull(convex, path_image(g)))) == {})
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], rectifiable_path(g) && simple_path(g) && pathfinish(g) == pathstart(g) && !convex(inside(path_image(g))) \226\134\146 (\226\136\131 h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], rectifiable_path(h) && simple_path(h) && pathfinish(h) == pathstart(h) && path_length(h) <= path_length(g) && hull(convex, path_image(h)) == hull(convex, path_image(g)) && path_image(h) == frontier(hull(convex, path_image(g))) && measure(inside(path_image(g))) < measure(inside(path_image(h))))
+      #|  :real
+      #|  :real
+      #|  real_of_num(0) <= (x : Real) && x <= (y : Real) \226\134\146 abs(x) <= abs(y)
+      #|  (real_of_num(0) < real_of_num(4) * (x : Real)) == (real_of_num(0) < x)
+      #|  (g : Real) < (h : Real) && (m : Real) <= (l : Real) \226\134\146 h <= m \226\134\146 g < l
+      #|  ((p : Bool) \226\134\146 (q : Bool) && !(r : Bool)) \226\134\146 p && (s : Bool) \226\134\146 q && (r \226\134\146 (t : Bool))
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  path_length((h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  convex(inside(path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))))
+      #|  \226\136\128 L : Real, \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], rectifiable_path(g) && simple_path(g) && pathfinish(g) == pathstart(g) && path_length(g) == L \226\134\146 measure(inside(path_image(g))) <= pow(L, 2) / (real_of_num(4) * pi) && (measure(inside(path_image(g))) == pow(L, 2) / (real_of_num(4) * pi) \226\134\146 (\226\136\131 a : Cart[Real, Tybit0[Unit]], \226\136\131 r : Real, path_image(g) == sphere((a, r))))
       #|lemma1 =  |- (#forall:fun(fun(fun(cart(real,1),cart(real,tybit0(1))),bool),bool) (\g:fun(cart(real,1),cart(real,tybit0(1))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#simple_path:fun(fun(cart(real,1),cart(real,tybit0(1))),bool) g:fun(cart(real,1),cart(real,tybit0(1))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (#pathfinish:fun(fun(cart(real,1),cart(real,tybit0(1))),cart(real,tybit0(1))) g:fun(cart(real,1),cart(real,tybit0(1))))) (#pathstart:fun(fun(cart(real,1),cart(real,tybit0(1))),cart(real,tybit0(1))) g:fun(cart(real,1),cart(real,tybit0(1)))))) (#convex:fun(fun(cart(real,tybit0(1)),bool),bool) (#inside:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))))))) ((#=:fun(fun(cart(real,tybit0(1)),bool),fun(fun(cart(real,tybit0(1)),bool),bool)) ((#hull:fun(fun(fun(cart(real,tybit0(1)),bool),bool),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) #convex:fun(fun(cart(real,tybit0(1)),bool),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1)))))) (#closure:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) (#inside:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))))))))
       #|lemma2 =  |- (#forall:fun(fun(fun(cart(real,1),cart(real,tybit0(1))),bool),bool) (\g:fun(cart(real,1),cart(real,tybit0(1))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#simple_path:fun(fun(cart(real,1),cart(real,tybit0(1))),bool) g:fun(cart(real,1),cart(real,tybit0(1))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (#pathfinish:fun(fun(cart(real,1),cart(real,tybit0(1))),cart(real,tybit0(1))) g:fun(cart(real,1),cart(real,tybit0(1))))) (#pathstart:fun(fun(cart(real,1),cart(real,tybit0(1))),cart(real,tybit0(1))) g:fun(cart(real,1),cart(real,tybit0(1)))))) (#convex:fun(fun(cart(real,tybit0(1)),bool),bool) (#inside:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))))))) ((#=:fun(fun(cart(real,tybit0(1)),bool),fun(fun(cart(real,tybit0(1)),bool),bool)) (#frontier:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) ((#hull:fun(fun(fun(cart(real,tybit0(1)),bool),bool),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) #convex:fun(fun(cart(real,tybit0(1)),bool),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))))) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))))))
       #|lemma3 =  |- (#forall:fun(fun(fun(cart(real,1),cart(real,tybit0(1))),bool),bool) (\g:fun(cart(real,1),cart(real,tybit0(1))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#simple_path:fun(fun(cart(real,1),cart(real,tybit0(1))),bool) g:fun(cart(real,1),cart(real,tybit0(1))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (#pathfinish:fun(fun(cart(real,1),cart(real,tybit0(1))),cart(real,tybit0(1))) g:fun(cart(real,1),cart(real,tybit0(1))))) (#pathstart:fun(fun(cart(real,1),cart(real,tybit0(1))),cart(real,tybit0(1))) g:fun(cart(real,1),cart(real,tybit0(1)))))) ((#SUBSET:fun(fun(cart(real,tybit0(1)),bool),fun(fun(cart(real,tybit0(1)),bool),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))) (#frontier:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) ((#hull:fun(fun(fun(cart(real,tybit0(1)),bool),bool),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) #convex:fun(fun(cart(real,tybit0(1)),bool),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1)))))))))) ((#=:fun(fun(cart(real,tybit0(1)),bool),fun(fun(cart(real,tybit0(1)),bool),bool)) (#frontier:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) ((#hull:fun(fun(fun(cart(real,tybit0(1)),bool),bool),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) #convex:fun(fun(cart(real,tybit0(1)),bool),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))))) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))))))
