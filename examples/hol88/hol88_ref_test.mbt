@@ -5646,76 +5646,76 @@ test "Examples/hol88 matches Examples/hol88.ml" {
       #|Warning: inventing type variables
       #|0..0..1..2..solved at 6
       #|Examples/hol88 quotations (70):
-      #|  a:bool
-      #|  b:bool
-      #|  (a ==> b) ==> (~b ==> ~a)
-      #|  F
-      #|  P:A->bool
-      #|  x:A
-      #|  f:A->B
-      #|  g:A->B
-      #|  (forall x. (f:A->B) x = g x) ==> (f = g)
-      #|  forall P:A->bool. (?) P ==> P((GABS) P)
-      #|  forall t1 t2. t1 /\\ t2 ==> t1
-      #|  forall t1 t2. t1 /\\ t2 ==> t2
-      #|  forall t1 t2 t3. t1 ==> t2 ==> t3 <=> t1 /\\ t2 ==> t3
-      #|  forall t1 t2. t1 ==> t2 ==> t1 /\\ t2
-      #|  ~(T <=> F) /\\ ~(F <=> T)
-      #|  forall t1 t2. (t1 <=> t2) <=> t1 /\\ t2 \\/ ~t1 /\\ ~t2
-      #|  forall t1 t2. (t1 <=> t2) <=> (t1 ==> t2) /\\ (t2 ==> t1)
-      #|  forall t. F ==> t
-      #|  forall t. ~t ==> t ==> F
-      #|  forall t1 t2. t1 ==> t2 <=> ~t1 \\/ t2
-      #|  forall t. (t ==> F) ==> ~t
-      #|  forall t. t ==> F <=> (t <=> F)
-      #|  forall t1 t2 t3. t1 /\\ (t2 \\/ t3) <=> t1 /\\ t2 \\/ t1 /\\ t3
-      #|  forall t1 t2 t3. t1 \\/ t2 /\\ t3 <=> (t1 \\/ t2) /\\ (t1 \\/ t3)
-      #|  ~(t /\\ ~t)
-      #|  forall t. ~t ==> (t <=> F)
-      #|  forall t t1 t2. t1 \\/ t2 ==> (t1 ==> t) ==> (t2 ==> t) ==> t
-      #|  forall t1 t2. (t1 <=> t2 \\/ t1) <=> t2 ==> t1
-      #|  forall t1 t2. t1 ==> t1 \\/ t2
-      #|  forall t1 t2. t2 ==> t1 \\/ t2
-      #|  forall t1 t2 t3. (t2 \\/ t3) /\\ t1 <=> t2 /\\ t1 \\/ t3 /\\ t1
-      #|  forall t1 t2 t3. t2 /\\ t3 \\/ t1 <=> (t2 \\/ t1) /\\ (t3 \\/ t1)
-      #|  a:A = b
-      #|  b:A
-      #|  a:A
+      #|  (a : Bool)
+      #|  (b : Bool)
+      #|  ((a : Bool) \226\134\146 (b : Bool)) \226\134\146 !b \226\134\146 !a
+      #|  false
+      #|  (P : (A) -> Bool)
+      #|  (x : A)
+      #|  (f : (A) -> B)
+      #|  (g : (A) -> B)
+      #|  (\226\136\128 x : A, (f : (A) -> B)(x) == (g : (A) -> B)(x)) \226\134\146 f == g
+      #|  \226\136\128 P : (A) -> Bool, exists(P) \226\134\146 P(GABS(P))
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, t1 && t2 \226\134\146 t1
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, t1 && t2 \226\134\146 t2
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, \226\136\128 t3 : Bool, (t1 \226\134\146 t2 \226\134\146 t3) == (t1 && t2 \226\134\146 t3)
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, t1 \226\134\146 t2 \226\134\146 t1 && t2
+      #|  !(true == false) && !(false == true)
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, (t1 == t2) == (t1 && t2 || !t1 && !t2)
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, (t1 == t2) == ((t1 \226\134\146 t2) && (t2 \226\134\146 t1))
+      #|  \226\136\128 t : Bool, false \226\134\146 t
+      #|  \226\136\128 t : Bool, !t \226\134\146 t \226\134\146 false
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, (t1 \226\134\146 t2) == (!t1 || t2)
+      #|  \226\136\128 t : Bool, (t \226\134\146 false) \226\134\146 !t
+      #|  \226\136\128 t : Bool, (t \226\134\146 false) == (t == false)
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, \226\136\128 t3 : Bool, (t1 && (t2 || t3)) == (t1 && t2 || t1 && t3)
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, \226\136\128 t3 : Bool, (t1 || t2 && t3) == ((t1 || t2) && (t1 || t3))
+      #|  !((t : Bool) && !t)
+      #|  \226\136\128 t : Bool, !t \226\134\146 t == false
+      #|  \226\136\128 t : Bool, \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, t1 || t2 \226\134\146 (t1 \226\134\146 t) \226\134\146 (t2 \226\134\146 t) \226\134\146 t
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, (t1 == (t2 || t1)) == (t2 \226\134\146 t1)
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, t1 \226\134\146 t1 || t2
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, t2 \226\134\146 t1 || t2
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, \226\136\128 t3 : Bool, ((t2 || t3) && t1) == (t2 && t1 || t3 && t1)
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, \226\136\128 t3 : Bool, (t2 && t3 || t1) == ((t2 || t1) && (t3 || t1))
+      #|  (a : A) == (b : A)
+      #|  (b : A)
+      #|  (a : A)
       #|  :A
-      #|  forall t1 t2. t1 \\/ t2 ==> ~t1 ==> t2
-      #|  forall t1 t2. (t1 ==> t2) ==> ~t1 \\/ t2
-      #|  forall t t1 t2. (t ==> (t1 = t2)) ==> (t /\\ t1 <=> t /\\ t2)
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, t1 || t2 \226\134\146 !t1 \226\134\146 t2
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, (t1 \226\134\146 t2) \226\134\146 !t1 || t2
+      #|  \226\136\128 t : Bool, \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, (t \226\134\146 t1 == t2) \226\134\146 (t && t1) == (t && t2)
       #|  :bool
-      #|  b:bool
-      #|  b:bool
-      #|  T
-      #|  F
-      #|  T
-      #|  F
+      #|  (b : Bool)
+      #|  (b : Bool)
+      #|  true
+      #|  false
+      #|  true
+      #|  false
       #|  :A
       #|  :A
-      #|  T
-      #|  forall n. n < SUC n
-      #|  forall n. n <= SUC n
-      #|  forall m n. m < n ==> m < (SUC n)
-      #|  forall m. SUC m - 1 = m
-      #|  forall m n. m < m + SUC n
-      #|  forall n m. ~(SUC n <= m) <=> m <= n
-      #|  forall m n:num. (m = n) \\/ m < n \\/ n < m
-      #|  forall b c. c <= b ==> (forall a:num. a - (b - c) = (a + c) - b)
-      #|  forall m n:num. ~(m < n) /\\ ~(m = n) ==> n < m
-      #|  forall n m:num. (n - m) <= n
-      #|  forall m n:num. (m - n = m) = (m = 0) \\/ (n = 0)
-      #|  forall m n p:num. m <= (n - p) <=> (m + p) <= n \\/ m <= 0
-      #|  forall m n p:num. m >= (n - p) <=> (m + p) >= n
-      #|  forall m. (0 = m) \\/ 0 < m
-      #|  forall m n. m < n ==> (SUC m) <= n
-      #|  (forall m. 0 - m = 0) /\\\n    (forall m n. (SUC m) - n = (if m < n then 0 else SUC(m - n)))
-      #|  forall m i n. ((SUC n) * m) < ((SUC n) * i) <=> m < i
-      #|  forall m n p. m <= n ==> (m * p) <= (n * p)
-      #|  forall m n. 0 < m /\\ 0 < n ==> 0 < (m * n)
-      #|  forall s. FINITE s ==> (forall t. t SUBSET s ==> FINITE t)
-      #|  forall n. m <= SUC n <=> (m = SUC n) \\/ m <= n
+      #|  true
+      #|  \226\136\128 n : Num, n < SUC(n)
+      #|  \226\136\128 n : Num, n <= SUC(n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 m < SUC(n)
+      #|  \226\136\128 m : Num, SUC(m) - 1 == m
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < m + SUC(n)
+      #|  \226\136\128 n : Num, \226\136\128 m : Num, !(SUC(n) <= m) == (m <= n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m == n || m < n || n < m
+      #|  \226\136\128 b : Num, \226\136\128 c : Num, c <= b \226\134\146 (\226\136\128 a : Num, a - (b - c) == a + c - b)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, !(m < n) && !(m == n) \226\134\146 n < m
+      #|  \226\136\128 n : Num, \226\136\128 m : Num, n - m <= n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (m - n == m) == (m == 0) || n == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m <= n - p) == (m + p <= n || m <= 0)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m >= n - p) == (m + p >= n)
+      #|  \226\136\128 m : Num, 0 == m || 0 < m
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 SUC(m) <= n
+      #|  (\226\136\128 m : Num, 0 - m == 0) && (\226\136\128 m : Num, \226\136\128 n : Num, SUC(m) - n == (if m < n { 0 } else { SUC(m - n) }))
+      #|  \226\136\128 m : Num, \226\136\128 i : Num, \226\136\128 n : Num, (SUC(n) * m < SUC(n) * i) == (m < i)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m <= n \226\134\146 m * p <= n * p
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, 0 < m && 0 < n \226\134\146 0 < m * n
+      #|  \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 (\226\136\128 t : (_) -> Bool, SUBSET(t, s) \226\134\146 FINITE(t))
+      #|  \226\136\128 n : Num, ((m : Num) <= SUC(n)) == (m == SUC(n) || m <= n)
       #|AND1_THM =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t1:bool)))))
       #|AND2_THM =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t2:bool)))))
       #|AND_IMP_INTRO =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. (#forall:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t1:bool) ((#==>:fun(bool,fun(bool,bool)) t2:bool) t3:bool))) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t3:bool))))))))
