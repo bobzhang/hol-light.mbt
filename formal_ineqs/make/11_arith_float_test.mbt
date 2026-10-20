@@ -1154,7 +1154,7 @@ test "Formal_ineqs/arith/arith_float matches Formal_ineqs/arith/arith_float.ml" 
       #|  real_of_num(0)
       #|  (k : Num)
       #|  real_of_num
-      #|  pow
+      #|  real_pow
       #|  op_tilde
       #|  (a : Real) * (b : Real) * (c : Real) * ((d : Real) * ((e : Real) * (f : Real))) == b * f * (a * (c * (d * e)))
       #|  real_of_num(num_exp((n1 : Num), (e1 : Num))) * inv(real_of_num(num_exp((n2 : Num), (e2 : Num)))) == real_of_num((x : Num)) / real_of_num((y : Num)) * (real_of_num(num_exp(1, e1)) * inv(real_of_num(num_exp(1, e2 + (k : Num)))))
@@ -1172,7 +1172,7 @@ test "Formal_ineqs/arith/arith_float matches Formal_ineqs/arith/arith_float.ml" 
       #|  real_of_num(0)
       #|  (k : Num)
       #|  real_of_num
-      #|  pow
+      #|  real_pow
       #|  op_tilde
       #|  (a : Real) * (b : Real) * (c : Real) * ((d : Real) * ((e : Real) * (f : Real))) == b * f * (a * (c * (d * e)))
       #|  real_of_num(num_exp((n1 : Num), (e1 : Num))) * inv(real_of_num(num_exp((n2 : Num), (e2 : Num)))) == real_of_num((x : Num)) / real_of_num((y : Num)) * (real_of_num(num_exp(1, e1)) * inv(real_of_num(num_exp(1, e2 + (k : Num)))))
@@ -1189,7 +1189,7 @@ test "Formal_ineqs/arith/arith_float matches Formal_ineqs/arith/arith_float.ml" 
       #|  real_of_num(0)
       #|  (k : Num)
       #|  real_of_num
-      #|  pow
+      #|  real_pow
       #|  op_tilde
       #|  (a : Real) * (b : Real) * (c : Real) * ((d : Real) * ((e : Real) * (f : Real))) == b * f * (a * (c * (d * e)))
       #|  real_of_num(num_exp((n1 : Num), (e1 : Num))) * inv(real_of_num(num_exp((n2 : Num), (e2 : Num)))) == real_of_num((x : Num)) / real_of_num((y : Num)) * (real_of_num(num_exp(1, e1)) * inv(real_of_num(num_exp(1, e2 + (k : Num)))))
