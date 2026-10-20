@@ -7542,106 +7542,106 @@ Warning: inventing type variables
 0..0..1..solved at 5
 0..0..1..3..solved at 8
 Logic/fol_prop quotations (100):
-  (pholds v False <=> F) /\\\n   (pholds v (Atom p l) <=> v (Atom p l)) /\\\n   (pholds v (q --> r) <=> pholds v q ==> pholds v r) /\\\n   (pholds v (!!x q) <=> v (!!x q))
-  (pholds v False <=> F) /\\\n   (pholds v True <=> T) /\\\n   (pholds v (Atom p l) <=> v (Atom p l)) /\\\n   (pholds v (Not q) <=> ~(pholds v q)) /\\\n   (pholds v (q || r) <=> pholds v q \\/ pholds v r) /\\\n   (pholds v (q && r) <=> pholds v q /\\ pholds v r) /\\\n   (pholds v (q --> r) <=> pholds v q ==> pholds v r) /\\\n   (pholds v (q <-> r) <=> (pholds v q = pholds v r))
-  v psatisfies s <=> forall p. p IN s ==> pholds v p
-  psatisfiable s <=> ?v. forall p. p IN s ==> pholds v p
-  forall A B. psatisfiable A /\\ B SUBSET A ==> psatisfiable B
-  finsat A <=> forall B. B SUBSET A /\\ FINITE(B) ==> psatisfiable B
-  forall A B. finsat A /\\ B SUBSET A ==> finsat B
-  forall A B. psatisfiable A /\\ B SUBSET A ==> psatisfiable B
-  psatisfiable B ==> finsat B
-  v:form->bool
-  v:form->bool
-  v:form->bool
-  v:form->bool
-  B:form->bool
-  B:form->bool
-  finsat (UNIONS C :form->bool)
-  v1:form->bool
-  v2:form->bool
-  v2:form->bool
-  v1:form->bool
-  v2:form->bool
-  p:form
-  p:form INSERT W SUBSET UNIONS C
-  v1:form->bool
-  W:form->bool SUBSET (UNIONS C)
-  (p:form INSERT W) SUBSET (UNIONS C)
-  W:form->bool
-  p:form
-  forall B:form->bool. FINITE B ==> B SUBSET (UNIONS C)\n                               ==> ?U. U IN C /\\ B SUBSET U
-  A:form->bool SUBSET (UNIONS C)
-  u:form->bool
-  UNIONS (C:(form->bool)->bool)
-  A:form->bool
-  C:(form->bool)->bool = EMPTY
-  C:(form->bool)->bool
-  fld(\\B C. A SUBSET B /\\ B SUBSET C /\\ finsat(C)) =\n                 \\B. A SUBSET B /\\ finsat(B)
-  poset (\\B C. A SUBSET B /\\ B SUBSET C /\\ finsat(C))
-  \\B C. A SUBSET B /\\ B SUBSET C /\\ finsat(C)
-  forall A. finsat(A) ==> ?B. A SUBSET B /\\ finsat(B) /\\\n                         forall C. B SUBSET C /\\ finsat(C) ==> (C = B)
-  ~pholds v (Not q)
-  r:form
-  r:form
-  v:form->bool
-  p:form = q
-  q:form
-  v:form->bool
-  forall v. ?p. p IN C /\\ ~pholds v p
-  v:form->bool
-  ~(psatisfiable D)
-  ~(psatisfiable C)
-  (C DELETE p) UNION (D DELETE Not p)
-  D:form->bool
-  C:form->bool
-  p <=> ~ ~ p
-  finsat(B) ==> finsat(p INSERT B) \\/ finsat(Not p INSERT B)
-  finsat(B) /\\ (forall C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> forall p. p IN B \\/ Not(p) IN B
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  { p, (Not p) }
-  finsat B
-  (a \\/ b) /\\ ~(a /\\ b) ==> (b <=> ~a)
-  finsat(B) /\\ (forall C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> forall p. Not(p) IN B <=> ~(p IN B)
-  ~(psatisfiable A1)
-  forall v. (forall q. q IN A ==> pholds v q) ==> pholds v p
-  (A:form->bool) UNION (A1 DELETE p)
-  A1:form->bool
-  finsat B
-  {p:form}
-  finsat(B) /\\ (forall C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> forall p. p IN B <=> ?A. FINITE(A) /\\ A SUBSET B /\\\n                        forall v. (forall q. q IN A ==> pholds v q) ==> pholds v p
+  (pholds : ((Form) -> Bool, Form) -> Bool)((v : (Form) -> Bool), False) == false && pholds(v, Atom((p : Num), (l : List[Term]))) == v(Atom(p, l)) && pholds(v, op_minus_minus_gt((q : Form), (r : Form))) == (pholds(v, q) \226\134\146 pholds(v, r)) && pholds(v, op_bang_bang((x : Num), q)) == v(op_bang_bang(x, q))
+  pholds((v : (Form) -> Bool), False) == false && pholds(v, True) == true && pholds(v, Atom((p : Num), (l : List[Term]))) == v(Atom(p, l)) && pholds(v, Not((q : Form))) == !pholds(v, q) && pholds(v, op_bar_bar(q, (r : Form))) == (pholds(v, q) || pholds(v, r)) && pholds(v, op_amp_amp(q, r)) == (pholds(v, q) && pholds(v, r)) && pholds(v, op_minus_minus_gt(q, r)) == (pholds(v, q) \226\134\146 pholds(v, r)) && pholds(v, op_lt_minus_gt(q, r)) == (pholds(v, q) == pholds(v, r))
+  (psatisfies : ((Form) -> Bool, (Form) -> Bool) -> Bool)((v : (Form) -> Bool), (s : (Form) -> Bool)) == (\226\136\128 p : Form, IN(p, s) \226\134\146 pholds(v, p))
+  (psatisfiable : ((Form) -> Bool) -> Bool)((s : (Form) -> Bool)) == (\226\136\131 v : (Form) -> Bool, \226\136\128 p : Form, IN(p, s) \226\134\146 pholds(v, p))
+  \226\136\128 A : (Form) -> Bool, \226\136\128 B : (Form) -> Bool, psatisfiable(A) && SUBSET(B, A) \226\134\146 psatisfiable(B)
+  (finsat : ((Form) -> Bool) -> Bool)((A : (Form) -> Bool)) == (\226\136\128 B : (Form) -> Bool, SUBSET(B, A) && FINITE(B) \226\134\146 psatisfiable(B))
+  \226\136\128 A : (Form) -> Bool, \226\136\128 B : (Form) -> Bool, finsat(A) && SUBSET(B, A) \226\134\146 finsat(B)
+  \226\136\128 A : (Form) -> Bool, \226\136\128 B : (Form) -> Bool, psatisfiable(A) && SUBSET(B, A) \226\134\146 psatisfiable(B)
+  psatisfiable((B : (Form) -> Bool)) \226\134\146 finsat(B)
+  (v : (Form) -> Bool)
+  (v : (Form) -> Bool)
+  (v : (Form) -> Bool)
+  (v : (Form) -> Bool)
+  (B : (Form) -> Bool)
+  (B : (Form) -> Bool)
+  finsat(UNIONS((C : ((Form) -> Bool) -> Bool)))
+  (v1 : (Form) -> Bool)
+  (v2 : (Form) -> Bool)
+  (v2 : (Form) -> Bool)
+  (v1 : (Form) -> Bool)
+  (v2 : (Form) -> Bool)
+  (p : Form)
+  SUBSET(INSERT((p : Form), (W : (Form) -> Bool)), UNIONS((C : ((Form) -> Bool) -> Bool)))
+  (v1 : (Form) -> Bool)
+  SUBSET((W : (Form) -> Bool), UNIONS((C : ((Form) -> Bool) -> Bool)))
+  SUBSET(INSERT((p : Form), (W : (Form) -> Bool)), UNIONS((C : ((Form) -> Bool) -> Bool)))
+  (W : (Form) -> Bool)
+  (p : Form)
+  \226\136\128 B : (Form) -> Bool, FINITE(B) \226\134\146 SUBSET(B, UNIONS((C : ((Form) -> Bool) -> Bool))) \226\134\146 (\226\136\131 U : (Form) -> Bool, IN(U, C) && SUBSET(B, U))
+  SUBSET((A : (Form) -> Bool), UNIONS((C : ((Form) -> Bool) -> Bool)))
+  (u : (Form) -> Bool)
+  UNIONS((C : ((Form) -> Bool) -> Bool))
+  (A : (Form) -> Bool)
+  (C : ((Form) -> Bool) -> Bool) == {}
+  (C : ((Form) -> Bool) -> Bool)
+  fld((B : (Form) -> Bool) => (C : (Form) -> Bool) => SUBSET((A : (Form) -> Bool), B) && SUBSET(B, C) && finsat(C)) == ((B : (Form) -> Bool) => SUBSET(A, B) && finsat(B))
+  poset((B : (Form) -> Bool) => (C : (Form) -> Bool) => SUBSET((A : (Form) -> Bool), B) && SUBSET(B, C) && finsat(C))
+  (B : (Form) -> Bool) => (C : (Form) -> Bool) => SUBSET((A : (Form) -> Bool), B) && SUBSET(B, C) && finsat(C)
+  \226\136\128 A : (Form) -> Bool, finsat(A) \226\134\146 (\226\136\131 B : (Form) -> Bool, SUBSET(A, B) && finsat(B) && (\226\136\128 C : (Form) -> Bool, SUBSET(B, C) && finsat(C) \226\134\146 C == B))
+  !pholds((v : (Form) -> Bool), Not((q : Form)))
+  (r : Form)
+  (r : Form)
+  (v : (Form) -> Bool)
+  (p : Form) == (q : Form)
+  (q : Form)
+  (v : (Form) -> Bool)
+  \226\136\128 v : (Form) -> Bool, \226\136\131 p : Form, IN(p, (C : (Form) -> Bool)) && !pholds(v, p)
+  (v : (Form) -> Bool)
+  !psatisfiable((D : (Form) -> Bool))
+  !psatisfiable((C : (Form) -> Bool))
+  UNION(DELETE((C : (Form) -> Bool), (p : Form)), DELETE((D : (Form) -> Bool), Not(p)))
+  (D : (Form) -> Bool)
+  (C : (Form) -> Bool)
+  (p : Bool) == !!p
+  finsat((B : (Form) -> Bool)) \226\134\146 finsat(INSERT((p : Form), B)) || finsat(INSERT(Not(p), B))
+  finsat((B : (Form) -> Bool)) && (\226\136\128 C : (Form) -> Bool, SUBSET(B, C) && finsat(C) \226\134\146 C == B) \226\134\146 (\226\136\128 p : Form, IN(p, B) || IN(Not(p), B))
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  {(p : Form), Not(p)}
+  finsat((B : (Form) -> Bool))
+  ((a : Bool) || (b : Bool)) && !(a && b) \226\134\146 b == !a
+  finsat((B : (Form) -> Bool)) && (\226\136\128 C : (Form) -> Bool, SUBSET(B, C) && finsat(C) \226\134\146 C == B) \226\134\146 (\226\136\128 p : Form, IN(Not(p), B) == !IN(p, B))
+  !psatisfiable((A1 : (Form) -> Bool))
+  \226\136\128 v : (Form) -> Bool, (\226\136\128 q : Form, IN(q, (A : (Form) -> Bool)) \226\134\146 pholds(v, q)) \226\134\146 pholds(v, (p : Form))
+  UNION((A : (Form) -> Bool), DELETE((A1 : (Form) -> Bool), (p : Form)))
+  (A1 : (Form) -> Bool)
+  finsat((B : (Form) -> Bool))
+  {(p : Form)}
+  finsat((B : (Form) -> Bool)) && (\226\136\128 C : (Form) -> Bool, SUBSET(B, C) && finsat(C) \226\134\146 C == B) \226\134\146 (\226\136\128 p : Form, IN(p, B) == (\226\136\131 A : (Form) -> Bool, FINITE(A) && SUBSET(A, B) && (\226\136\128 v : (Form) -> Bool, (\226\136\128 q : Form, IN(q, A) \226\134\146 pholds(v, q)) \226\134\146 pholds(v, p))))
   {False}
-  finsat(B) /\\ (forall C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> ~(False IN B)
-  A:form->bool
-  p ==> q <=> ~p \\/ q
-  forall v. (forall q. q IN A1 ==> pholds v q) ==> pholds v (p --> q)
-  forall v. (forall q. q IN A2 ==> pholds v q) ==> pholds v p
-  (A1:form->bool) UNION A2
-  A2:form->bool
-  A1:form->bool
-  finsat(B) /\\ (forall C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> forall p q. (p --> q) IN B <=> p IN B ==> q IN B
-  forall r. pholds (\\p. p IN B) r <=> r IN B
-  \\p:form. p IN B
-  B:form->bool
-  finsat(A)
-  (forall B. FINITE(B) /\\ B SUBSET A\n        ==> ?d. forall r. r IN B ==> pholds(d) r)\n   ==> ?d. forall r. r IN A ==> pholds(d) r
-  B SUBSET {Not q | q IN A}
-  { r | Not r IN B }
-  B:form->bool
-  ~(?d. forall r. r IN { Not q | q IN A } ==> pholds(d) r)
-  forall A. (forall d. ?p. p IN A /\\ pholds d p)\n       ==> ?B. FINITE(B) /\\ B SUBSET A /\\ (forall d. ?p. p IN B /\\ pholds d p)
-  \\p:form. p IN s
-  CONS (q:form) ps
-  ps:form list
-  s:form->bool
-  q:form
-  [] :form list
-  forall A. FINITE(A) ==> ?ps. ALL (\\p. p IN A) ps /\\\n                          forall d. pholds(d) (ITLIST (||) ps False) <=>\n                              ?p. p IN A /\\ pholds d p
-  \\p:form. p IN B
-  ps:form list
-  ps:form list
-  B:form->bool
-  forall A. (forall d. ?p. p IN A /\\ pholds d p)\n       ==> ?ps. ALL (\\p. p IN A) ps /\\\n                forall d. pholds(d) (ITLIST (||) ps False)
+  finsat((B : (Form) -> Bool)) && (\226\136\128 C : (Form) -> Bool, SUBSET(B, C) && finsat(C) \226\134\146 C == B) \226\134\146 !IN(False, B)
+  (A : (Form) -> Bool)
+  ((p : Bool) \226\134\146 (q : Bool)) == (!p || q)
+  \226\136\128 v : (Form) -> Bool, (\226\136\128 q : Form, IN(q, (A1 : (Form) -> Bool)) \226\134\146 pholds(v, q)) \226\134\146 pholds(v, op_minus_minus_gt((p : Form), (q : Form)))
+  \226\136\128 v : (Form) -> Bool, (\226\136\128 q : Form, IN(q, (A2 : (Form) -> Bool)) \226\134\146 pholds(v, q)) \226\134\146 pholds(v, (p : Form))
+  UNION((A1 : (Form) -> Bool), (A2 : (Form) -> Bool))
+  (A2 : (Form) -> Bool)
+  (A1 : (Form) -> Bool)
+  finsat((B : (Form) -> Bool)) && (\226\136\128 C : (Form) -> Bool, SUBSET(B, C) && finsat(C) \226\134\146 C == B) \226\134\146 (\226\136\128 p : Form, \226\136\128 q : Form, IN(op_minus_minus_gt(p, q), B) == (IN(p, B) \226\134\146 IN(q, B)))
+  \226\136\128 r : Form, pholds((p : Form) => IN(p, (B : (Form) -> Bool)), r) == IN(r, B)
+  (p : Form) => IN(p, (B : (Form) -> Bool))
+  (B : (Form) -> Bool)
+  finsat((A : (Form) -> Bool))
+  (\226\136\128 B : (Form) -> Bool, FINITE(B) && SUBSET(B, (A : (Form) -> Bool)) \226\134\146 (\226\136\131 d : (Form) -> Bool, \226\136\128 r : Form, IN(r, B) \226\134\146 pholds(d, r))) \226\134\146 (\226\136\131 d : (Form) -> Bool, \226\136\128 r : Form, IN(r, A) \226\134\146 pholds(d, r))
+  SUBSET((B : (Form) -> Bool), {Not((q : Form)) | IN(q, (A : (Form) -> Bool))})
+  {(r : Form) | IN(Not(r), (B : (Form) -> Bool))}
+  (B : (Form) -> Bool)
+  !(\226\136\131 d : (Form) -> Bool, \226\136\128 r : Form, IN(r, {Not((q : Form)) | IN(q, (A : (Form) -> Bool))}) \226\134\146 pholds(d, r))
+  \226\136\128 A : (Form) -> Bool, (\226\136\128 d : (Form) -> Bool, \226\136\131 p : Form, IN(p, A) && pholds(d, p)) \226\134\146 (\226\136\131 B : (Form) -> Bool, FINITE(B) && SUBSET(B, A) && (\226\136\128 d : (Form) -> Bool, \226\136\131 p : Form, IN(p, B) && pholds(d, p)))
+  (p : Form) => IN(p, (s : (Form) -> Bool))
+  CONS((q : Form), (ps : List[Form]))
+  (ps : List[Form])
+  (s : (Form) -> Bool)
+  (q : Form)
+  (NIL : List[Form])
+  \226\136\128 A : (Form) -> Bool, FINITE(A) \226\134\146 (\226\136\131 ps : List[Form], ALL((p : Form) => IN(p, A), ps) && (\226\136\128 d : (Form) -> Bool, pholds(d, ITLIST(op_bar_bar, ps, False)) == (\226\136\131 p : Form, IN(p, A) && pholds(d, p))))
+  (p : Form) => IN(p, (B : (Form) -> Bool))
+  (ps : List[Form])
+  (ps : List[Form])
+  (B : (Form) -> Bool)
+  \226\136\128 A : (Form) -> Bool, (\226\136\128 d : (Form) -> Bool, \226\136\131 p : Form, IN(p, A) && pholds(d, p)) \226\134\146 (\226\136\131 ps : List[Form], ALL((p : Form) => IN(p, A), ps) && (\226\136\128 d : (Form) -> Bool, pholds(d, ITLIST(op_bar_bar, ps, False))))
 pholds =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) #False:form)) #F:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#Atom:fun(num,fun(list(term),form)) p:num) l:list(term)))) (v:fun(form,bool) ((#Atom:fun(num,fun(list(term),form)) p:num) l:list(term))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#-->:fun(form,fun(form,form)) q:form) r:form))) ((#==>:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) q:form)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) r:form)))) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#!!:fun(num,fun(form,form)) x:num) q:form))) (v:fun(form,bool) ((#!!:fun(num,fun(form,form)) x:num) q:form))))))
 PHOLDS =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) #False:form)) #F:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) #True:form)) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#Atom:fun(num,fun(list(term),form)) p:num) l:list(term)))) (v:fun(form,bool) ((#Atom:fun(num,fun(list(term),form)) p:num) l:list(term))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) (#Not:fun(form,form) q:form))) (#~:fun(bool,bool) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) q:form)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#||:fun(form,fun(form,form)) q:form) r:form))) ((#\/:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) q:form)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) r:form)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#&&:fun(form,fun(form,form)) q:form) r:form))) ((#/\:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) q:form)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) r:form)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#-->:fun(form,fun(form,form)) q:form) r:form))) ((#==>:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) q:form)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) r:form)))) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#<->:fun(form,fun(form,form)) q:form) r:form))) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) q:form)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) r:form))))))))))
 psatisfies =  |- (#forall:fun(fun(fun(form,bool),bool),bool) (\s:fun(form,bool). (#forall:fun(fun(fun(form,bool),bool),bool) (\v:fun(form,bool). ((#=:fun(bool,fun(bool,bool)) ((#psatisfies:fun(fun(form,bool),fun(fun(form,bool),bool)) v:fun(form,bool)) s:fun(form,bool))) (#forall:fun(fun(form,bool),bool) (\p:form. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(form,fun(fun(form,bool),bool)) p:form) s:fun(form,bool))) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) p:form)))))))))
