@@ -6175,2169 +6175,2169 @@ test "Library/analysis matches Library/analysis.ml" {
       #|0..0..2..5..9..14..35..90..164..solved at 180
       #|0..0..2..5..9..14..35..88..158..solved at 172
       #|Library/analysis quotations (2163):
-      #|  forall t. ~t ==> t ==> F
+      #|  \226\136\128 t : Bool, !t \226\134\146 t \226\134\146 false
       #|  forall t1 t2 t3. t1 /\\ (t2 \\/ t3) <=> t1 /\\ t2 \\/ t1 /\\ t3
       #|  forall t1 t2 t3. (t2 \\/ t3) /\\ t1 <=> t2 /\\ t1 \\/ t3 /\\ t1
-      #|  forall n. n < SUC n
-      #|  forall n. n <= SUC n
-      #|  forall m n. m < n ==> m < (SUC n)
-      #|  forall m. SUC m - 1 = m
-      #|  forall m n. m < m + SUC n
-      #|  forall n m. ~(SUC n <= m) <=> m <= n
-      #|  forall m n. (m = n) \\/ m < n \\/ n < m
-      #|  forall b c. c <= b ==> (forall a. a - (b - c) = (a + c) - b)
-      #|  forall m n. ~(m < n) /\\ ~(m = n) ==> n < m
-      #|  forall n m. (n - m) <= n
-      #|  forall m n. (m - n = m) <=> (m = 0) \\/ (n = 0)
-      #|  forall m n p. m <= (n - p) <=> (m + p) <= n \\/ m <= 0
-      #|  forall m n p. m >= (n - p) <=> (m + p) >= n
-      #|  forall m. (0 = m) \\/ 0 < m
-      #|  forall m n. m < n ==> (SUC m) <= n
+      #|  \226\136\128 n : Num, n < SUC(n)
+      #|  \226\136\128 n : Num, n <= SUC(n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 m < SUC(n)
+      #|  \226\136\128 m : Num, SUC(m) - 1 == m
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < m + SUC(n)
+      #|  \226\136\128 n : Num, \226\136\128 m : Num, !(SUC(n) <= m) == (m <= n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m == n || m < n || n < m
+      #|  \226\136\128 b : Num, \226\136\128 c : Num, c <= b \226\134\146 (\226\136\128 a : Num, a - (b - c) == a + c - b)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, !(m < n) && !(m == n) \226\134\146 n < m
+      #|  \226\136\128 n : Num, \226\136\128 m : Num, n - m <= n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (m - n == m) == (m == 0 || n == 0)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m <= n - p) == (m + p <= n || m <= 0)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m >= n - p) == (m + p >= n)
+      #|  \226\136\128 m : Num, 0 == m || 0 < m
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 SUC(m) <= n
       #|  (forall m. 0 - m = 0) /\\\n                 (forall m n. (SUC m) - n = (if m < n then 0 else SUC(m - n)))
-      #|  forall x y. x <= y <=> ~(y < x)
-      #|  ~(&1 = &0)
-      #|  forall x y z. y < z ==> x + y < x + z
-      #|  forall x. x * &1 = x
-      #|  forall x. ~(x = &0) ==> (x * (inv x) = &1)
-      #|  forall x y z. (x + y) * z = (x * z) + (y * z)
-      #|  (+) (-- x)
-      #|  forall x y z. (x + y = x + z) <=> (y = z)
-      #|  forall x y z. (x + z = y + z) <=> (x = y)
-      #|  forall x y. (x + y = y) <=> (x = &0)
-      #|  forall x y. (x + y = x) <=> (y = &0)
-      #|  y:real
-      #|  forall x y. (x + y = &0) <=> (x = --y)
-      #|  forall x y. (x + y = &0) <=> (y = --x)
-      #|  (a + b) + (c + d) = (a + c) + (b + d)
-      #|  forall x y. --(x + y) = (--x) + (--y)
-      #|  &0 * x
-      #|  &0 * x
-      #|  forall x. &0 * x = &0
-      #|  forall x. x * &0 = &0
-      #|  forall x y. --(x * y) = (--x) * y
-      #|  forall x y. --(x * y) = x * (--y)
-      #|  forall x. --(--x) = x
-      #|  forall x y. (--x) * (--y) = x * y
-      #|  --x
-      #|  forall x y z. (x + y) < (x + z) <=> y < z
-      #|  forall x y z. (x + z) < (y + z) <=> x < y
-      #|  forall x y. ~(x < y) <=> y <= x
-      #|  forall x y. ~(x < y /\\ y < x)
-      #|  forall x y. x < y ==> ~(y < x)
-      #|  forall x y. ~(x <= y) <=> y < x
-      #|  forall x y. x <= y \\/ y <= x
-      #|  forall x. x <= x
-      #|  y:real
-      #|  x:real
-      #|  forall x y. x <= y <=> x < y \\/ (x = y)
-      #|  ~(a /\\ ~a)
-      #|  forall x y. x < y <=> x <= y /\\ ~(x = y)
-      #|  forall x y. x < y ==> x <= y
-      #|  forall x y z. x < y /\\ y <= z ==> x < z
-      #|  y < z
-      #|  forall x y z. x <= y /\\ y <= z ==> x <= z
-      #|  x:real
-      #|  &0
-      #|  --x
-      #|  forall x. (--x) < &0 <=> &0 < x
-      #|  forall x. &0 < (--x) <=> x < &0
-      #|  forall x. (--x) <= &0 <=> &0 <= x
-      #|  forall x. &0 <= (--x) <=> x <= &0
-      #|  --x
-      #|  &0
-      #|  x:real
-      #|  forall x. (x = &0) \\/ (&0 < x) \\/ (&0 < --x)
-      #|  x:real
-      #|  forall x. &0 <= x \\/ &0 <= --x
-      #|  &0 = y
-      #|  &0 = x
-      #|  forall x y. &0 <= x /\\ &0 <= y ==> &0 <= (x * y)
-      #|  x:real
-      #|  forall x. &0 <= x * x
-      #|  &0 < &1
-      #|  forall x y z. (x + y) <= (x + z) <=> y <= z
-      #|  forall x y z. (x + z) <= (y + z) <=> x <= y
-      #|  w + z
-      #|  forall w x y z. w < x /\\ y < z ==> (w + y) < (x + z)
-      #|  forall x y. &0 < x /\\ &0 < y ==> &0 < (x + y)
-      #|  z:real
-      #|  x + (--z)
-      #|  y:real
-      #|  forall x y z. y < (x + (--z)) <=> (y + z) < x
-      #|  y:real
-      #|  z:real
-      #|  x + (-- y)
-      #|  forall x y z. (x + (--y)) < z <=> x < (z + y)
-      #|  forall x y. x <= y ==> x < (y + &1)
-      #|  forall x y. (x - y) + y = x
-      #|  forall x y. y + (x - y) = x
-      #|  forall x. x - x = &0
-      #|  (+)
-      #|  y:real
-      #|  forall x y. (x - y = &0) <=> (x = y)
-      #|  forall x. &0 <= x + x <=> &0 <= x
-      #|  x:real
-      #|  --x
-      #|  x:real
-      #|  forall x. (--x <= x) <=> (&0 <= x)
-      #|  x:real
-      #|  forall x. (x <= --x) <=> (x <= &0)
-      #|  (+) (--x)
-      #|  (+) x
-      #|  forall x. (--x = &0) <=> (x = &0)
-      #|  --(&0) = &0
-      #|  forall x y. --(x - y) = y - x
-      #|  y:real
-      #|  x - y
-      #|  &0
-      #|  forall x y. &0 < x - y <=> y < x
-      #|  y:real
-      #|  x - y
-      #|  &0
-      #|  forall x y. &0 <= (x - y) <=> y <= x
-      #|  x = &0
-      #|  (*) (inv x)
-      #|  forall x y z. (x * y = x * z) <=> (x = &0) \\/ (y = z)
-      #|  forall x y z. (x * z = y * z) <=> (z = &0) \\/ (x = y)
-      #|  forall x y z. x * (y - z) = (x * y) - (x * z)
-      #|  forall x y z. (x - y) * z = (x * z) - (y * z)
-      #|  forall x y. (--x = y) <=> (x = --y)
-      #|  forall x. --x = (--(&1)) * x
-      #|  (*)
-      #|  x:real
-      #|  forall x. ~(x = &0) ==> ~(inv x = &0)
-      #|  inv x
-      #|  x:real
-      #|  inv(inv x)
-      #|  inv x = &0
-      #|  forall x. ~(x = &0) ==> (inv (inv x) = x)
-      #|  forall x y. x < y ==> ~(x = y)
-      #|  &0 < x
-      #|  &0
-      #|  inv x
-      #|  forall x. &0 < x ==> &0 < inv x
-      #|  forall x y. &0 < x ==> (&0 < (x * y) <=> &0 < y)
-      #|  forall x y. &0 < y ==> (&0 < (x * y) <=> &0 < x)
-      #|  forall x y z. &0 < x ==> ((x * y) < (x * z) <=> y < z)
-      #|  forall x y z. &0 < z ==> ((x * z) < (y * z) <=> x < y)
-      #|  forall x y z. x < y /\\ &0 < z ==> (x * z) < (y * z)
-      #|  forall x y z. y < z  /\\ &0 < x ==> (x * y) < (x * z)
-      #|  (*) (inv x)
-      #|  x = &0
-      #|  forall x y. (x * y = &1) ==> (x = inv y)
-      #|  forall x y. (x * y = &1) ==> (y = inv x)
-      #|  forall x. ~(x = &0) ==> (--(inv x) = inv(--x))
-      #|  forall x. inv x = &1 / x
-      #|  forall n. &(SUC n) = &n + &1
-      #|  &n
-      #|  forall n. &0 <= &n
-      #|  m:num
-      #|  &n
-      #|  forall m n. &m <= &n <=> m <= n
-      #|  (~)
-      #|  forall m n. &m < &n <=> m < n
-      #|  (m = n) <=> m:num <= n /\\ n <= m
-      #|  forall m n. (&m = &n) <=> (m = n)
-      #|  forall m n. &m + &n = &(m + n)
-      #|  forall m n. &m * &n = &(m * n)
-      #|  inv(&1) = &1
-      #|  forall x. &0 / x = &0
-      #|  &n = &0
-      #|  forall n. ~(&n = &0) <=> (&0 < &n)
-      #|  forall n. ~(n = 0) ==> &0 < &n
-      #|  forall y z. &0 < z ==> (&0 < (y / z) <=> &0 < y)
-      #|  forall x y z. &0 < z ==> ((x / z) < (y / z) <=> x < y)
-      #|  forall n d. ~(n = 0) ==> (&0 < (d / &n) <=> &0 < d)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (x <= y) == !(y < x)
+      #|  !(real_of_num(1) == real_of_num(0))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, y < z \226\134\146 x + y < x + z
+      #|  \226\136\128 x : Real, x * real_of_num(1) == x
+      #|  \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 x * inv(x) == real_of_num(1)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x + y) * z == x * z + y * z
+      #|  op_plus(-(x : Real))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x + y == x + z) == (y == z)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x + z == y + z) == (x == y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (x + y == y) == (x == real_of_num(0))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (x + y == x) == (y == real_of_num(0))
+      #|  (y : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (x + y == real_of_num(0)) == (x == -y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (x + y == real_of_num(0)) == (y == -x)
+      #|  (a : Real) + (b : Real) + ((c : Real) + (d : Real)) == a + c + (b + d)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, -(x + y) == -x + -y
+      #|  real_of_num(0) * (x : Real)
+      #|  real_of_num(0) * (x : Real)
+      #|  \226\136\128 x : Real, real_of_num(0) * x == real_of_num(0)
+      #|  \226\136\128 x : Real, x * real_of_num(0) == real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, -(x * y) == -x * y
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, -(x * y) == x * -y
+      #|  \226\136\128 x : Real, --x == x
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, -x * -y == x * y
+      #|  -(x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x + y < x + z) == (y < z)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x + z < y + z) == (x < y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, !(x < y) == (y <= x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, !(x < y && y < x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x < y \226\134\146 !(y < x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, !(x <= y) == (y < x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x <= y || y <= x
+      #|  \226\136\128 x : Real, x <= x
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (x <= y) == (x < y || x == y)
+      #|  !((a : Bool) && !a)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (x < y) == (x <= y && !(x == y))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x < y \226\134\146 x <= y
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, x < y && y <= z \226\134\146 x < z
+      #|  (y : Real) < (z : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, x <= y && y <= z \226\134\146 x <= z
+      #|  (x : Real)
+      #|  real_of_num(0)
+      #|  -(x : Real)
+      #|  \226\136\128 x : Real, (-x < real_of_num(0)) == (real_of_num(0) < x)
+      #|  \226\136\128 x : Real, (real_of_num(0) < -x) == (x < real_of_num(0))
+      #|  \226\136\128 x : Real, (-x <= real_of_num(0)) == (real_of_num(0) <= x)
+      #|  \226\136\128 x : Real, (real_of_num(0) <= -x) == (x <= real_of_num(0))
+      #|  -(x : Real)
+      #|  real_of_num(0)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, x == real_of_num(0) || real_of_num(0) < x || real_of_num(0) < -x
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, real_of_num(0) <= x || real_of_num(0) <= -x
+      #|  real_of_num(0) == (y : Real)
+      #|  real_of_num(0) == (x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && real_of_num(0) <= y \226\134\146 real_of_num(0) <= x * y
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, real_of_num(0) <= x * x
+      #|  real_of_num(0) < real_of_num(1)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x + y <= x + z) == (y <= z)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x + z <= y + z) == (x <= y)
+      #|  (w : Real) + (z : Real)
+      #|  \226\136\128 w : Real, \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, w < x && y < z \226\134\146 w + y < x + z
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) < x && real_of_num(0) < y \226\134\146 real_of_num(0) < x + y
+      #|  (z : Real)
+      #|  (x : Real) + -(z : Real)
+      #|  (y : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (y < x + -z) == (y + z < x)
+      #|  (y : Real)
+      #|  (z : Real)
+      #|  (x : Real) + -(y : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x + -y < z) == (x < z + y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 x < y + real_of_num(1)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x - y + y == x
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, y + (x - y) == x
+      #|  \226\136\128 x : Real, x - x == real_of_num(0)
+      #|  op_plus
+      #|  (y : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (x - y == real_of_num(0)) == (x == y)
+      #|  \226\136\128 x : Real, (real_of_num(0) <= x + x) == (real_of_num(0) <= x)
+      #|  (x : Real)
+      #|  -(x : Real)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, (-x <= x) == (real_of_num(0) <= x)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, (x <= -x) == (x <= real_of_num(0))
+      #|  op_plus(-(x : Real))
+      #|  op_plus((x : Real))
+      #|  \226\136\128 x : Real, (-x == real_of_num(0)) == (x == real_of_num(0))
+      #|  -real_of_num(0) == real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, -(x - y) == y - x
+      #|  (y : Real)
+      #|  (x : Real) - (y : Real)
+      #|  real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (real_of_num(0) < x - y) == (y < x)
+      #|  (y : Real)
+      #|  (x : Real) - (y : Real)
+      #|  real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (real_of_num(0) <= x - y) == (y <= x)
+      #|  (x : Real) == real_of_num(0)
+      #|  op_star(inv((x : Real)))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x * y == x * z) == (x == real_of_num(0) || y == z)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x * z == y * z) == (z == real_of_num(0) || x == y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, x * (y - z) == x * y - x * z
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x - y) * z == x * z - y * z
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (-x == y) == (x == -y)
+      #|  \226\136\128 x : Real, -x == -real_of_num(1) * x
+      #|  op_star
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 !(inv(x) == real_of_num(0))
+      #|  inv((x : Real))
+      #|  (x : Real)
+      #|  inv(inv((x : Real)))
+      #|  inv((x : Real)) == real_of_num(0)
+      #|  \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 inv(inv(x)) == x
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x < y \226\134\146 !(x == y)
+      #|  real_of_num(0) < (x : Real)
+      #|  real_of_num(0)
+      #|  inv((x : Real))
+      #|  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 real_of_num(0) < inv(x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) < x \226\134\146 (real_of_num(0) < x * y) == (real_of_num(0) < y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) < y \226\134\146 (real_of_num(0) < x * y) == (real_of_num(0) < x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, real_of_num(0) < x \226\134\146 (x * y < x * z) == (y < z)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, real_of_num(0) < z \226\134\146 (x * z < y * z) == (x < y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, x < y && real_of_num(0) < z \226\134\146 x * z < y * z
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, y < z && real_of_num(0) < x \226\134\146 x * y < x * z
+      #|  op_star(inv((x : Real)))
+      #|  (x : Real) == real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x * y == real_of_num(1) \226\134\146 x == inv(y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x * y == real_of_num(1) \226\134\146 y == inv(x)
+      #|  \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 -inv(x) == inv(-x)
+      #|  \226\136\128 x : Real, inv(x) == real_of_num(1) / x
+      #|  \226\136\128 n : Num, real_of_num(SUC(n)) == real_of_num(n) + real_of_num(1)
+      #|  real_of_num((n : Num))
+      #|  \226\136\128 n : Num, real_of_num(0) <= real_of_num(n)
+      #|  (m : Num)
+      #|  real_of_num((n : Num))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (real_of_num(m) <= real_of_num(n)) == (m <= n)
+      #|  op_tilde
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (real_of_num(m) < real_of_num(n)) == (m < n)
+      #|  ((m : Num) == (n : Num)) == (m <= n && n <= m)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (real_of_num(m) == real_of_num(n)) == (m == n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, real_of_num(m) + real_of_num(n) == real_of_num(m + n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, real_of_num(m) * real_of_num(n) == real_of_num(m * n)
+      #|  inv(real_of_num(1)) == real_of_num(1)
+      #|  \226\136\128 x : Real, real_of_num(0) / x == real_of_num(0)
+      #|  real_of_num((n : Num)) == real_of_num(0)
+      #|  \226\136\128 n : Num, !(real_of_num(n) == real_of_num(0)) == (real_of_num(0) < real_of_num(n))
+      #|  \226\136\128 n : Num, !(n == 0) \226\134\146 real_of_num(0) < real_of_num(n)
+      #|  \226\136\128 y : Real, \226\136\128 z : Real, real_of_num(0) < z \226\134\146 (real_of_num(0) < y / z) == (real_of_num(0) < y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, real_of_num(0) < z \226\134\146 (x / z < y / z) == (x < y)
+      #|  \226\136\128 n : Num, \226\136\128 d : Real, !(n == 0) \226\134\146 (real_of_num(0) < d / real_of_num(n)) == (real_of_num(0) < d)
       #|  1
       #|  1
-      #|  1 < n
+      #|  1 < (n : Num)
       #|  1
-      #|  forall n d. 1 < n ==> (d < (&n * d) <=> &0 < d)
-      #|  1 < n
-      #|  n = 0
-      #|  forall n d. (1 < n) ==> ((d / &n) < d <=> &0 < d)
+      #|  \226\136\128 n : Num, \226\136\128 d : Real, 1 < n \226\134\146 (d < real_of_num(n) * d) == (real_of_num(0) < d)
+      #|  1 < (n : Num)
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, \226\136\128 d : Real, 1 < n \226\134\146 (d / real_of_num(n) < d) == (real_of_num(0) < d)
       #|  2
-      #|  forall d. &0 < (d / &2) <=> &0 < d
-      #|  forall d. (d / &2) < d <=> &0 < d
+      #|  \226\136\128 d : Real, (real_of_num(0) < d / real_of_num(2)) == (real_of_num(0) < d)
+      #|  \226\136\128 d : Real, (d / real_of_num(2) < d) == (real_of_num(0) < d)
       #|  2
-      #|  forall x. x + x = &2 * x
+      #|  \226\136\128 x : Real, x + x == real_of_num(2) * x
       #|  2
-      #|  forall x. (x / &2) + (x / &2) = x
-      #|  (a + b) + c = (c + a) + b
-      #|  forall x y. (x - y) - x = --y
-      #|  y:real
-      #|  z - y
-      #|  x:real
-      #|  forall x y z. (x + y) < z <=> x < (z - y)
-      #|  y:real
-      #|  z:real
-      #|  x - y
-      #|  forall x y z. (x - y) < z <=> x < z + y
-      #|  --z
-      #|  y:real
-      #|  x + z
-      #|  forall x y z. x < (y - z) <=> (x + z) < y
-      #|  forall x y z. x <= (y - z) <=> (x + z) <= y
-      #|  forall x y z. (x - y) <= z <=> x <= z + y
-      #|  x + y
-      #|  --y
-      #|  --x
-      #|  forall x y. --x < --y <=> y < x
-      #|  forall x y. --x <= --y <=> y <= x
-      #|  forall x. &0 - x = --x
-      #|  forall x. x - &0 = x
-      #|  forall w x y z. w < x /\\ y <= z ==> (w + y) < (x + z)
-      #|  &0
-      #|  forall x y. &0 < x /\\ &0 <= y ==> &0 < (x + y)
-      #|  x1:real
-      #|  (a + b) + (c + d) = (b + c) + (a + d)
+      #|  \226\136\128 x : Real, x / real_of_num(2) + x / real_of_num(2) == x
+      #|  (a : Real) + (b : Real) + (c : Real) == c + a + b
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x - y - x == -y
+      #|  (y : Real)
+      #|  (z : Real) - (y : Real)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x + y < z) == (x < z - y)
+      #|  (y : Real)
+      #|  (z : Real)
+      #|  (x : Real) - (y : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x - y < z) == (x < z + y)
+      #|  -(z : Real)
+      #|  (y : Real)
+      #|  (x : Real) + (z : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x < y - z) == (x + z < y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x <= y - z) == (x + z <= y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x - y <= z) == (x <= z + y)
+      #|  (x : Real) + (y : Real)
+      #|  -(y : Real)
+      #|  -(x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (-x < -y) == (y < x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (-x <= -y) == (y <= x)
+      #|  \226\136\128 x : Real, real_of_num(0) - x == -x
+      #|  \226\136\128 x : Real, x - real_of_num(0) == x
+      #|  \226\136\128 w : Real, \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, w < x && y <= z \226\134\146 w + y < x + z
+      #|  real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) < x && real_of_num(0) <= y \226\134\146 real_of_num(0) < x + y
+      #|  (x1 : Real)
+      #|  (a : Real) + (b : Real) + ((c : Real) + (d : Real)) == b + c + (a + d)
       #|  forall a b c d.\n    (a * b) - (c * d) = ((a * b) - (a * d)) + ((a * d) - (c * d))
       #|  forall x1 x2 y1 y2. &0 <= x1 /\\ &0 <= y1 /\\ x1 < x2 /\\ y1 < y2 ==>\n        (x1 * y1) < (x2 * y2)
-      #|  forall x y. (--x) - y = --(x + y)
-      #|  forall x y. x - (--y) = x + y
-      #|  forall x y. (--x) - (--y) = y - x
-      #|  (a + b) + (c + d) = (b + c) + (a + d)
-      #|  forall a b c. (a - b) + (b - c) = a - c
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, -x - y == -(x + y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x - -y == x + y
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, -x - -y == y - x
+      #|  (a : Real) + (b : Real) + ((c : Real) + (d : Real)) == b + c + (a + d)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, a - b + (b - c) == a - c
       #|  forall x y. ~(x = &0) /\\ ~(y = &0) ==>\n             (inv(x * y) = inv(x) * inv(y))
-      #|  forall x y z. &0 < x ==> ((x * y) <= (x * z) <=> y <= z)
-      #|  forall x y z. &0 < z ==> ((x * z) <= (y * z) <=> x <= y)
-      #|  inv(x * y) = inv(x) * inv(y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, real_of_num(0) < x \226\134\146 (x * y <= x * z) == (y <= z)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, real_of_num(0) < z \226\134\146 (x * z <= y * z) == (x <= y)
+      #|  inv((x : Real) * (y : Real)) == inv(x) * inv(y)
       #|  forall x y. ~(x = &0) /\\ ~(y = &0) ==>\n                (inv(x) - inv(y) = (y - x) / (x * y))
-      #|  forall x y. x - (x - y) = y
-      #|  x + d
-      #|  d:real
-      #|  forall x y. x < y ==> ?z. x < z /\\ z < y
-      #|  z:real
-      #|  y:real
-      #|  x:real
-      #|  forall x y z. ~(x = &0) ==> ((y = z) <=> (x * y = x * z))
-      #|  &0 = y2
-      #|  &0 <= y1
-      #|  y1 <= y2
-      #|  &0 = x2
-      #|  &0 <= x2
-      #|  x1:real = x2
-      #|  x2:real
-      #|  x1:real
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x - (x - y) == y
+      #|  (x : Real) + (d : Real)
+      #|  (d : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x < y \226\134\146 (\226\136\131 z : Real, x < z && z < y)
+      #|  (z : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, !(x == real_of_num(0)) \226\134\146 (y == z) == (x * y == x * z)
+      #|  real_of_num(0) == (y2 : Real)
+      #|  real_of_num(0) <= (y1 : Real)
+      #|  (y1 : Real) <= (y2 : Real)
+      #|  real_of_num(0) == (x2 : Real)
+      #|  real_of_num(0) <= (x2 : Real)
+      #|  (x1 : Real) == (x2 : Real)
+      #|  (x2 : Real)
+      #|  (x1 : Real)
       #|  forall x1 x2 y1 y2.\n    (& 0) <= x1 /\\ (& 0) <= y1 /\\ x1 <= x2 /\\ y1 <= y2 ==>\n    (x1 * y1) <= (x2 * y2)
-      #|  y = (y / x) * x
-      #|  (a = b) ==> a ==> b
-      #|  forall x y z. &0 < x /\\ y <= (z * x) ==> (y / x) <= z
-      #|  z = (z / x) * x
-      #|  forall x y z. &0 < x /\\ (y * x) <= z ==> y <= (z / x)
-      #|  x:real
-      #|  (x / y) * y = x
-      #|  x:real
-      #|  (x / y) < &1 <=> ((x / y) * y) < (&1 * y)
-      #|  forall x y. &0 <= x /\\ x < y ==> (x / y) < &1
-      #|  forall x y z. &0 <= x /\\ y <= z ==> (x * y) <= (x * z)
-      #|  forall x y z. &0 <= x /\\ y <= z ==> (y * x) <= (z * x)
-      #|  &1 < &1
-      #|  inv(inv x) = x
+      #|  (y : Real) == y / (x : Real) * x
+      #|  (a : Bool) == (b : Bool) \226\134\146 a \226\134\146 b
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, real_of_num(0) < x && y <= z * x \226\134\146 y / x <= z
+      #|  (z : Real) == z / (x : Real) * x
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, real_of_num(0) < x && y * x <= z \226\134\146 y <= z / x
+      #|  (x : Real)
+      #|  (x : Real) / (y : Real) * y == x
+      #|  (x : Real)
+      #|  ((x : Real) / (y : Real) < real_of_num(1)) == (x / y * y < real_of_num(1) * y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && x < y \226\134\146 x / y < real_of_num(1)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, real_of_num(0) <= x && y <= z \226\134\146 x * y <= x * z
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, real_of_num(0) <= x && y <= z \226\134\146 y * x <= z * x
+      #|  real_of_num(1) < real_of_num(1)
+      #|  inv(inv((x : Real))) == x
       #|  inv
-      #|  &0 < &0
-      #|  &1
-      #|  x:real
-      #|  &1
-      #|  inv(x)
-      #|  a <=> ~ ~a
-      #|  forall x. &0 < x /\\ x < &1 ==> &1 < inv(x)
-      #|  forall x. &0 < x ==> ~(x = &0)
-      #|  forall x y z. ~(z = &0) /\\ (x * z = y * z) ==> (x = y)
-      #|  forall x y z. ~(x = &0) /\\ (x * y = x * z) ==> (y = z)
-      #|  forall n. ~(&(FACT n) = &0)
-      #|  x:real
-      #|  forall x. &0 < (x * x) <=> ~(x = &0)
+      #|  real_of_num(0) < real_of_num(0)
+      #|  real_of_num(1)
+      #|  (x : Real)
+      #|  real_of_num(1)
+      #|  inv((x : Real))
+      #|  (a : Bool) == !!a
+      #|  \226\136\128 x : Real, real_of_num(0) < x && x < real_of_num(1) \226\134\146 real_of_num(1) < inv(x)
+      #|  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 !(x == real_of_num(0))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, !(z == real_of_num(0)) && x * z == y * z \226\134\146 x == y
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, !(x == real_of_num(0)) && x * y == x * z \226\134\146 y == z
+      #|  \226\136\128 n : Num, !(real_of_num(FACT(n)) == real_of_num(0))
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, (real_of_num(0) < x * x) == !(x == real_of_num(0))
       #|  forall x y. ((x * x) + (y * y) = &0) <=> (x = &0) /\\ (y = &0)
-      #|  forall x y. (--x = --y) <=> (x = y)
-      #|  (a * b) * (c * d) = (c * a) * (b * d)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (-x == -y) == (x == y)
+      #|  (a : Real) * (b : Real) * ((c : Real) * (d : Real)) == c * a * (b * d)
       #|  forall x z. ~(x = &0) /\\ ~(z = &0) ==> forall y. y / z = (x * y) / (x * z)
       #|  2
-      #|  forall a b. a <= b ==> a <= (a + b) / &2
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, a <= b \226\134\146 a <= (a + b) / real_of_num(2)
       #|  2
-      #|  forall a b. a <= b ==> ((a + b) / &2) <= b
-      #|  forall x. (abs(x) = &0) <=> (x = &0)
-      #|  abs(&0) = &0
-      #|  abs(&1) = &1
-      #|  x <= &0
-      #|  &0 <= x
-      #|  forall x. abs(--x) = abs(x)
-      #|  &0
-      #|  (x + y) < &0
-      #|  forall x y. abs(x + y) <= abs(x) + abs(y)
-      #|  x:real
-      #|  &0 <= x
-      #|  forall x. &0 <= abs(x)
-      #|  y:real
-      #|  &0 <= y
-      #|  x:real
-      #|  &0 <= x
-      #|  forall x y. abs(x * y) = abs(x) * abs(y)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, a <= b \226\134\146 (a + b) / real_of_num(2) <= b
+      #|  \226\136\128 x : Real, (abs(x) == real_of_num(0)) == (x == real_of_num(0))
+      #|  abs(real_of_num(0)) == real_of_num(0)
+      #|  abs(real_of_num(1)) == real_of_num(1)
+      #|  (x : Real) <= real_of_num(0)
+      #|  real_of_num(0) <= (x : Real)
+      #|  \226\136\128 x : Real, abs(-x) == abs(x)
+      #|  real_of_num(0)
+      #|  (x : Real) + (y : Real) < real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, abs(x + y) <= abs(x) + abs(y)
+      #|  (x : Real)
+      #|  real_of_num(0) <= (x : Real)
+      #|  \226\136\128 x : Real, real_of_num(0) <= abs(x)
+      #|  (y : Real)
+      #|  real_of_num(0) <= (y : Real)
+      #|  (x : Real)
+      #|  real_of_num(0) <= (x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, abs(x * y) == abs(x) * abs(y)
       #|  forall w x y z. abs(w) < y /\\ abs(x) < z ==> abs(w * x) < (y * z)
-      #|  forall x y. abs(x - y) = abs(y - x)
-      #|  ~a ==> b <=> b \\/ a
-      #|  forall x. ~(x = &0) <=> &0 < abs(x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, abs(x - y) == abs(y - x)
+      #|  (!(a : Bool) \226\134\146 (b : Bool)) == (b || a)
+      #|  \226\136\128 x : Real, !(x == real_of_num(0)) == (real_of_num(0) < abs(x))
       #|  1
-      #|  forall x. ~(x = &0) ==> (abs(inv x) = inv(abs(x)))
-      #|  forall x. abs(abs(x)) = abs(x)
-      #|  forall x. x <= abs(x)
+      #|  \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 abs(inv(x)) == inv(abs(x))
+      #|  \226\136\128 x : Real, abs(abs(x)) == abs(x)
+      #|  \226\136\128 x : Real, x <= abs(x)
       #|  2
-      #|  &0 <= x
-      #|  forall x. (abs(x) = x) <=> &0 <= x
-      #|  forall n. abs(&n) = &n
-      #|  x:real
-      #|  x:real
-      #|  y < (y + d)
-      #|  y:real
-      #|  y:real
-      #|  x < (x + d)
+      #|  real_of_num(0) <= (x : Real)
+      #|  \226\136\128 x : Real, (abs(x) == x) == (real_of_num(0) <= x)
+      #|  \226\136\128 n : Num, abs(real_of_num(n)) == real_of_num(n)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (y : Real) < y + (d : Real)
+      #|  (y : Real)
+      #|  (y : Real)
+      #|  (x : Real) < x + (d : Real)
       #|  forall x y d. &0 < d /\\ ((x - d) < y) /\\ (y < (x + d)) <=> abs(y - x) < d
-      #|  forall x y d. abs(x - y) < d ==> y < (x + d)
-      #|  forall x y. abs(x - y) < abs(y) ==> ~(x = &0)
-      #|  x = &0
-      #|  forall x. (x = &0) \\/ &0 < abs(x)
-      #|  x:real
-      #|  y:real
-      #|  x:real
-      #|  forall x y z. x < z /\\ (abs(y - x)) < (z - x) ==> y < z
-      #|  forall x y. abs(x - y) < y ==> &0 < x
-      #|  --y
-      #|  --x
-      #|  forall x y. abs(x - y) < --y ==> x < &0
-      #|  forall y. ~(y = &0) ==> forall x. abs(x / y) = abs(x) / abs(y)
-      #|  abs(x)
-      #|  abs(x) + abs(h)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 d : Real, abs(x - y) < d \226\134\146 y < x + d
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, abs(x - y) < abs(y) \226\134\146 !(x == real_of_num(0))
+      #|  (x : Real) == real_of_num(0)
+      #|  \226\136\128 x : Real, x == real_of_num(0) || real_of_num(0) < abs(x)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, x < z && abs(y - x) < z - x \226\134\146 y < z
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, abs(x - y) < y \226\134\146 real_of_num(0) < x
+      #|  -(y : Real)
+      #|  -(x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, abs(x - y) < -y \226\134\146 x < real_of_num(0)
+      #|  \226\136\128 y : Real, !(y == real_of_num(0)) \226\134\146 (\226\136\128 x : Real, abs(x / y) == abs(x) / abs(y))
+      #|  abs((x : Real))
+      #|  abs((x : Real)) + abs((h : Real))
       #|  forall x y h. abs(h) < (abs(y) - abs(x)) ==> abs(x + h) < abs(y)
-      #|  y:real
-      #|  x:real
-      #|  (abs(x - y) + abs(y)) - abs(y)
-      #|  forall x y. (abs(x) - abs(y)) <= abs(x - y)
-      #|  forall x y. abs(abs(x) - abs(y)) <= abs(x - y)
-      #|  (a + b) + (c + d) = (b + c) + (a + d)
-      #|  y0 - x0 = (y0 - y) + (y - x0)
-      #|  abs(y0 - y) + abs(y - x0)
-      #|  abs(y0 - x0) < ((y0 - x0) / &2) + ((y0 - x0) / &2)
-      #|  abs(x - x0)
-      #|  x - x0
-      #|  abs(x0 - y) < (y0 - x0) / &2
-      #|  a <=> ~ ~a
-      #|  y0 - y
-      #|  (y0 - x0) < (y0 - x0) / &2
-      #|  abs(y - y0) < (y0 - x0) / &2
-      #|  y0 - x0
-      #|  ~(y0 <= y)
-      #|  x0 - y
-      #|  y0 - x0
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  abs((x : Real) - (y : Real)) + abs(y) - abs(y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, abs(x) - abs(y) <= abs(x - y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, abs(abs(x) - abs(y)) <= abs(x - y)
+      #|  (a : Real) + (b : Real) + ((c : Real) + (d : Real)) == b + c + (a + d)
+      #|  (y0 : Real) - (x0 : Real) == y0 - (y : Real) + (y - x0)
+      #|  abs((y0 : Real) - (y : Real)) + abs(y - (x0 : Real))
+      #|  abs((y0 : Real) - (x0 : Real)) < (y0 - x0) / real_of_num(2) + (y0 - x0) / real_of_num(2)
+      #|  abs((x : Real) - (x0 : Real))
+      #|  (x : Real) - (x0 : Real)
+      #|  abs((x0 : Real) - (y : Real)) < ((y0 : Real) - x0) / real_of_num(2)
+      #|  (a : Bool) == !!a
+      #|  (y0 : Real) - (y : Real)
+      #|  (y0 : Real) - (x0 : Real) < (y0 - x0) / real_of_num(2)
+      #|  abs((y : Real) - (y0 : Real)) < (y0 - (x0 : Real)) / real_of_num(2)
+      #|  (y0 : Real) - (x0 : Real)
+      #|  !((y0 : Real) <= (y : Real))
+      #|  (x0 : Real) - (y : Real)
+      #|  (y0 : Real) - (x0 : Real)
       #|  (y0 + --x0) + (x0 + --y) = (--x0 + x0) + (y0 + --y)
-      #|  a = ~ ~a
-      #|  (y0 - x0) / &2
-      #|  y0 - x0
-      #|  x:real
-      #|  x0:real
-      #|  x < y0 /\\ x0 < y
+      #|  (a : Bool) == !!a
+      #|  ((y0 : Real) - (x0 : Real)) / real_of_num(2)
+      #|  (y0 : Real) - (x0 : Real)
+      #|  (x : Real)
+      #|  (x0 : Real)
+      #|  (x : Real) < (y0 : Real) && (x0 : Real) < (y : Real)
       #|  forall x0 x y0 y. x0 < y0 /\\ abs(x - x0) < (y0 - x0) / &2 /\\\n                          abs(y - y0) < (y0 - x0) / &2\n        ==> x < y
-      #|  --x
-      #|  (a <=> a /\\ b) <=> a ==> b
-      #|  x:real
-      #|  (a <=> b /\\ a) <=> a ==> b
-      #|  forall x k. abs(x) <= k <=> --k <= x /\\ x <= k
-      #|  forall n. &0 pow (SUC n) = &0
-      #|  n:num
-      #|  n:num
-      #|  forall c n. ~(c = &0) ==> ~(c pow n = &0)
-      #|  ~(c pow n = &0)
-      #|  c pow n
-      #|  c:real
-      #|  forall c n. ~(c = &0) ==> (inv(c pow n) = (inv c) pow n)
-      #|  forall c n. abs(c) pow n = abs(c pow n)
+      #|  -(x : Real)
+      #|  ((a : Bool) == (a && (b : Bool))) == (a \226\134\146 b)
+      #|  (x : Real)
+      #|  ((a : Bool) == ((b : Bool) && a)) == (a \226\134\146 b)
+      #|  \226\136\128 x : Real, \226\136\128 k : Real, (abs(x) <= k) == (-k <= x && x <= k)
+      #|  \226\136\128 n : Num, pow(real_of_num(0), SUC(n)) == real_of_num(0)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 c : Real, \226\136\128 n : Num, !(c == real_of_num(0)) \226\134\146 !(pow(c, n) == real_of_num(0))
+      #|  !(pow((c : Real), (n : Num)) == real_of_num(0))
+      #|  pow((c : Real), (n : Num))
+      #|  (c : Real)
+      #|  \226\136\128 c : Real, \226\136\128 n : Num, !(c == real_of_num(0)) \226\134\146 inv(pow(c, n)) == pow(inv(c), n)
+      #|  \226\136\128 c : Real, \226\136\128 n : Num, pow(abs(c), n) == abs(pow(c, n))
       #|  1
-      #|  &0 < (&1 + e)
-      #|  (&1 + e) * (&1 + (&n * e))
-      #|  forall e n. &0 < e ==> (&1 + (&n * e)) <= (&1 + e) pow n
-      #|  forall c m n. c pow (m + n) = (c pow m) * (c pow n)
+      #|  real_of_num(0) < real_of_num(1) + (e : Real)
+      #|  (real_of_num(1) + (e : Real)) * (real_of_num(1) + real_of_num((n : Num)) * e)
+      #|  \226\136\128 e : Real, \226\136\128 n : Num, real_of_num(0) < e \226\134\146 real_of_num(1) + real_of_num(n) * e <= pow(real_of_num(1) + e, n)
+      #|  \226\136\128 c : Real, \226\136\128 m : Num, \226\136\128 n : Num, pow(c, m + n) == pow(c, m) * pow(c, n)
       #|  1
-      #|  forall x. x pow 1 = x
+      #|  \226\136\128 x : Real, pow(x, 1) == x
       #|  2
-      #|  forall x. x pow 2 = x * x
-      #|  forall x n. &0 <= x ==> &0 <= (x pow n)
+      #|  \226\136\128 x : Real, pow(x, 2) == x * x
+      #|  \226\136\128 x : Real, \226\136\128 n : Num, real_of_num(0) <= x \226\134\146 real_of_num(0) <= pow(x, n)
       #|  forall n x y. &0 <= x /\\ x <= y ==> (x pow n) <= (y pow n)
-      #|  forall n. abs((--(&1)) pow n) = &1
-      #|  forall n x y. (x * y) pow n = (x pow n) * (y pow n)
-      #|  forall x. &0 <= x pow 2
-      #|  forall x. abs(x pow 2) = x pow 2
-      #|  forall x. &1 <= x ==> &1 <= (x pow 2)
-      #|  forall x. &1 < x ==> &1 < (x pow 2)
-      #|  forall x n. &0 < x ==> &0 < (x pow (SUC n))
+      #|  \226\136\128 n : Num, abs(pow(-real_of_num(1), n)) == real_of_num(1)
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, \226\136\128 y : Real, pow(x * y, n) == pow(x, n) * pow(y, n)
+      #|  \226\136\128 x : Real, real_of_num(0) <= pow(x, 2)
+      #|  \226\136\128 x : Real, abs(pow(x, 2)) == pow(x, 2)
+      #|  \226\136\128 x : Real, real_of_num(1) <= x \226\134\146 real_of_num(1) <= pow(x, 2)
+      #|  \226\136\128 x : Real, real_of_num(1) < x \226\134\146 real_of_num(1) < pow(x, 2)
+      #|  \226\136\128 x : Real, \226\136\128 n : Num, real_of_num(0) < x \226\134\146 real_of_num(0) < pow(x, SUC(n))
       #|  2
-      #|  forall n. &1 <= &2 pow n
-      #|  forall n. &n < &2 pow n
+      #|  \226\136\128 n : Num, real_of_num(1) <= pow(real_of_num(2), n)
+      #|  \226\136\128 n : Num, real_of_num(n) < pow(real_of_num(2), n)
       #|  1
       #|  2
       #|  1
       #|  2
-      #|  forall n. (--(&1)) pow (2 * n) = &1
-      #|  P:real->bool
+      #|  \226\136\128 n : Num, pow(-real_of_num(1), 2 * n) == real_of_num(1)
+      #|  (P : (Real) -> Bool)
       #|  forall P. (?x. P x) /\\ (?z. forall x. P x ==> x < z) ==>\n     (?s. forall y. (?x. P x /\\ y < x) <=> y < s)
       #|  sup s = @a. (forall x. x IN s ==> x <= a) /\\\n              (forall b. (forall x. x IN s ==> x <= b) ==> a <= b)
-      #|  sup P = @s. forall y. (?x. P x /\\ y < x) <=> y < s
+      #|  sup((P : (Real) -> Bool)) == select((s : Real) => \226\136\128 y : Real, (\226\136\131 x : Real, P(x) && y < x) == (y < s))
       #|  forall P. (?x. P x) /\\ (?z. forall x. P x ==> x < z) ==>\n          (forall y. (?x. P x /\\ y < x) <=> y < sup P)
-      #|  x:real
-      #|  x:real
-      #|  sup P
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  sup((P : (Real) -> Bool))
       #|  forall P. (?x. P x) /\\ (?z. forall x. P x ==> x < z) ==>\n          (forall y. P y ==> y <= sup P)
-      #|  z:real
-      #|  z + &1
-      #|  z:real
+      #|  (z : Real)
+      #|  (z : Real) + real_of_num(1)
+      #|  (z : Real)
       #|  forall P. (?x. P x) /\\ (?z. forall x. P x ==> x <= z) <=>\n       (?x. P x) /\\ (?z. forall x. P x ==> x < z)
       #|  forall P. (?x. P x) /\\ (?z. forall x. P x ==> x <= z) ==>\n           (forall y. (?x. P x /\\ y < x) <=> y < sup P)
       #|  forall P. (?x. P x) /\\ (?z. forall x. P x ==> x <= z) ==>\n          (forall y. P y ==> y <= sup P)
-      #|  (forall x. (?n. x = &n) ==> P x) <=> forall n. P(&n)
-      #|  ~(M <= M - &1)
-      #|  \\y. ?n. y = &n
-      #|  forall x. ?n. x <= &n
-      #|  n + 1
-      #|  (&n + &1) * x
-      #|  sup(\\z. ?n. z = &n * x)
-      #|  n:num
-      #|  z:real
-      #|  sup(\\z. ?n. z = &n * x) - x
-      #|  y:real
-      #|  n:num
-      #|  &n * x
-      #|  \\z. ?n. z = &n * x
-      #|  a <=> ~(~a)
-      #|  forall x. &0 < x ==> forall y. ?n. y < &n * x
-      #|  x < &0 * y
-      #|  n:num
-      #|  SUC(PRE n) = n
-      #|  PRE n
-      #|  PRE n
-      #|  n:num
-      #|  x:real
+      #|  (\226\136\128 x : Real, (\226\136\131 n : Num, x == real_of_num(n)) \226\134\146 (P : (Real) -> Bool)(x)) == (\226\136\128 n : Num, P(real_of_num(n)))
+      #|  !((M : Real) <= M - real_of_num(1))
+      #|  (y : Real) => \226\136\131 n : Num, y == real_of_num(n)
+      #|  \226\136\128 x : Real, \226\136\131 n : Num, x <= real_of_num(n)
+      #|  (n : Num) + 1
+      #|  (real_of_num((n : Num)) + real_of_num(1)) * (x : Real)
+      #|  sup((z : Real) => \226\136\131 n : Num, z == real_of_num(n) * (x : Real))
+      #|  (n : Num)
+      #|  (z : Real)
+      #|  sup((z : Real) => \226\136\131 n : Num, z == real_of_num(n) * (x : Real)) - x
+      #|  (y : Real)
+      #|  (n : Num)
+      #|  real_of_num((n : Num)) * (x : Real)
+      #|  (z : Real) => \226\136\131 n : Num, z == real_of_num(n) * (x : Real)
+      #|  (a : Bool) == !!a
+      #|  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 (\226\136\128 y : Real, \226\136\131 n : Num, y < real_of_num(n) * x)
+      #|  (x : Real) < real_of_num(0) * (y : Real)
+      #|  (n : Num)
+      #|  SUC(PRE((n : Num))) == n
+      #|  PRE((n : Num))
+      #|  PRE((n : Num))
+      #|  (n : Num)
+      #|  (x : Real)
       #|  forall y. &0 < y ==> forall x. &0 <= x ==>\n                        ?n. (&n * y) <= x /\\ x < (&(SUC n) * y)
       #|  &1 + (n + &1) * x <= (&1 + x) * (&1 + n * x) <=> &0 <= n * x * x
-      #|  &0 <= x ==> &0 <= &1 + x
-      #|  (&1 + x) * (&1 + &n * x)
-      #|  forall x n. &0 <= x ==> &1 + &n * x <= (&1 + x) pow n
-      #|  &1 < x ==> &0 <= x - &1
-      #|  x < y ==> x < &1 + y
-      #|  &1 + &n * (x - &1)
-      #|  n:num
-      #|  y:real
-      #|  x - &1
-      #|  forall x y. &1 < x ==> ?n. y < x pow n
-      #|  forall x. ?n. x < &2 pow n
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) <= real_of_num(1) + x
+      #|  (real_of_num(1) + (x : Real)) * (real_of_num(1) + real_of_num((n : Num)) * x)
+      #|  \226\136\128 x : Real, \226\136\128 n : Num, real_of_num(0) <= x \226\134\146 real_of_num(1) + real_of_num(n) * x <= pow(real_of_num(1) + x, n)
+      #|  real_of_num(1) < (x : Real) \226\134\146 real_of_num(0) <= x - real_of_num(1)
+      #|  (x : Real) < (y : Real) \226\134\146 x < real_of_num(1) + y
+      #|  real_of_num(1) + real_of_num((n : Num)) * ((x : Real) - real_of_num(1))
+      #|  (n : Num)
+      #|  (y : Real)
+      #|  (x : Real) - real_of_num(1)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(1) < x \226\134\146 (\226\136\131 n : Num, y < pow(x, n))
+      #|  \226\136\128 x : Real, \226\136\131 n : Num, x < pow(real_of_num(2), n)
       #|  :A->(B->real)->real
-      #|  sum:(A->bool)->(A->real)->real
-      #|  psum:(num#num)->(num->real)->real
+      #|  (sum : ((A) -> Bool, (A) -> Real) -> Real)
+      #|  (psum : ((Num, Num), (Num) -> Real) -> Real)
       #|  \\(n,m) f. (sm:num->num->(num->real)->real) n m f
       #|  (forall f n. sm n 0 f = &0) /\\\n     (forall f m n. sm  n (SUC m) f = sm n m f + f(n + m))
       #|  ?sum. (forall f n. sum(n,0) f = &0) /\\\n         (forall f m n. sum(n,SUC m) f = sum(n,m) f + f(n + m))
       #|  (sum(n,0) f = &0) /\\\n   (sum(n,SUC m) f = sum(n,m) f + f(n + m))
-      #|  m..m+n
+      #|  op_dot_dot((m : Num), m + (n : Num))
       #|  FINITE {i | m <= i /\\ i < m + n} /\\\n     {i | m <= i /\\ i < m + SUC n} =\n                (m + n) INSERT {i | m <= i /\\ i < m + n}
-      #|  {i | m <= i /\\ i < m + 0} = {}
+      #|  {(i : Num) | (m : Num) <= i && i < m + 0} == {}
       #|  forall f m n. sum(m,n) f = sum {i | m <= i /\\ i < m + n} f
       #|  forall f m n. ~(m = 0 /\\ n = 0) ==> sum(m,n) f = sum(m..(m+n)-1) f
-      #|  forall f n p. sum(0,n) f + sum(n,p) f = sum(0,n + p) f
-      #|  forall f m n. sum(m,n) f = sum(0,m + n) f - sum(0,m) f
-      #|  abs(sum(m,n) f) + abs(f(m + n))
-      #|  forall f m n. abs(sum(m,n) f) <= sum(m,n) (\\n. abs(f n))
-      #|  (n:num) + m
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 n : Num, \226\136\128 p : Num, sum((0, n), f) + sum((n, p), f) == sum((0, n + p), f)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, sum((m, n), f) == sum((0, m + n), f) - sum((0, m), f)
+      #|  abs(sum(((m : Num), (n : Num)), (f : (Num) -> Real))) + abs(f(m + n))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, abs(sum((m, n), f)) <= sum((m, n), (n : Num) => abs(f(n)))
+      #|  (n : Num) + (m : Num)
       #|  forall f g m n. (forall r. m <= r /\\ r < n + m ==> f(r) <= g(r))\n        ==> (sum(m,n) f <= sum(m,n) g)
       #|  forall f g m n. (forall r. m <= r /\\ r < (n + m) ==> (f(r) = g(r)))\n        ==> (sum(m,n) f = sum(m,n) g)
-      #|  forall f. (forall n. &0 <= f(n)) ==> forall m n. &0 <= sum(m,n) f
-      #|  n:num
-      #|  n:num
+      #|  \226\136\128 f : (Num) -> Real, (\226\136\128 n : Num, real_of_num(0) <= f(n)) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, real_of_num(0) <= sum((m, n), f))
+      #|  (n : Num)
+      #|  (n : Num)
       #|  forall f m n.\n     (forall n. m <= n ==> &0 <= f(n))\n     ==> &0 <= sum(m,n) f
-      #|  m:num
-      #|  m:num
+      #|  (m : Num)
+      #|  (m : Num)
       #|  forall f m n. abs(sum(m,n) (\\m. abs(f m))) = sum(m,n) (\\m. abs(f m))
-      #|  abs(sum(m,n) f) + abs(f(m + n))
-      #|  forall f m n. abs(sum(m,n) f) <= sum(m,n)(\\n. abs(f n))
-      #|  n:num
-      #|  n:num
-      #|  d:num
-      #|  n:num
-      #|  m:num
+      #|  abs(sum(((m : Num), (n : Num)), (f : (Num) -> Real))) + abs(f(m + n))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, abs(sum((m, n), f)) <= sum((m, n), (n : Num) => abs(f(n)))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (d : Num)
+      #|  (n : Num)
+      #|  (m : Num)
       #|  forall f N. (forall n. n >= N ==> (f(n) = &0)) ==>\n         (forall m n. m >= N ==> (sum(m,n) f = &0))
       #|  forall f g m n. sum(m,n) (\\n. f(n) + g(n)) = sum(m,n) f + sum(m,n) g
-      #|  forall f c m n. sum(m,n) (\\n. c * f(n)) = c * sum(m,n) f
-      #|  forall f n d. sum(n,d) (\\n. --(f n)) = --(sum(n,d) f)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 c : Real, \226\136\128 m : Num, \226\136\128 n : Num, sum((m, n), (n : Num) => c * f(n)) == c * sum((m, n), f)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 n : Num, \226\136\128 d : Num, sum((n, d), (n : Num) => -f(n)) == -sum((n, d), f)
       #|  forall f g m n. sum(m,n)(\\n. (f n) - (g n)) = sum(m,n) f - sum(m,n) g
       #|  forall f g m n. (forall p. m <= p /\\ p < (m + n) ==> (f p = g p))\n        ==> (sum(m,n) f = sum(m,n) g)
       #|  forall n f c. sum(0,n) f - (&n * c) = sum(0,n)(\\p. f(p) - c)
       #|  forall f K m n. (forall p. m <= p /\\ p < (m + n) ==> (f(p) <= K))\n        ==> (sum(m,n) f <= (&n * K))
       #|  forall n k f. sum(0,n)(\\m. sum(m * k,k) f) = sum(0,n * k) f
       #|  1
-      #|  forall f n. sum(n,1) f = f(n)
-      #|  forall f n. sum(n,2) f = f(n) + f(n + 1)
-      #|  n:num
-      #|  n:num
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 n : Num, sum((n, 1), f) == f(n)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 n : Num, sum((n, 2), f) == f(n) + f(n + 1)
+      #|  (n : Num)
+      #|  (n : Num)
       #|  forall f n k. sum(0,n)(\\m. f(m + k)) = sum(0,n + k) f - sum(0,k) f
-      #|  forall f m k n. sum(m + k,n) f = sum(m,n)(\\r. f(r + k))
-      #|  forall m n. sum(m,n)(\\r. &0) = &0
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 m : Num, \226\136\128 k : Num, \226\136\128 n : Num, sum((m + k, n), f) == sum((m, n), (r : Num) => f(r + k))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, sum((m, n), (r : Num) => real_of_num(0)) == real_of_num(0)
       #|  forall f n d. sum(n,d) (\\n. f(SUC n) - f(n)) = f(n + d) - f(n)
       #|  1
-      #|  n:num
-      #|  f:num->real
-      #|  f:num->real
-      #|  a * b * c = b * (a * c)
+      #|  (n : Num)
+      #|  (f : (Num) -> Real)
+      #|  (f : (Num) -> Real)
+      #|  (a : Real) * ((b : Real) * (c : Real)) == b * (a * c)
       #|  forall f n x. sum(0,SUC n)(\\i. f(i) * x pow i) =\n           f(0) + x * sum(0,n)(\\i. f(SUC i) * x pow i)
-      #|  forall c n. sum(0,n) (\\m. c) = &n * c
-      #|  forall f n p. sum(m,n) f + sum(m + n,p) f = sum(m,n + p) f
+      #|  \226\136\128 c : Real, \226\136\128 n : Num, sum((0, n), (m : Num) => c) == real_of_num(n) * c
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 n : Num, \226\136\128 p : Num, sum(((m : Num), n), f) + sum((m + n, p), f) == sum((m, n + p), f)
       #|  forall f m1 n1 m2 n2.\n        sum(m1,n1) (\\a. sum(m2,n2) (\\b. f a b)) =\n        sum(m2,n2) (\\b. sum(m1,n1) (\\a. f a b))
-      #|  sum(m,n) (\\r. &0)
+      #|  sum(((m : Num), (n : Num)), (r : Num) => real_of_num(0))
       #|  (forall r. m <= r /\\ r < m + n ==> (f(r) = &0)) ==> (sum(m,n) f = &0)
-      #|  (m + n) + p - n:num
-      #|  sum (m + n,p - n) f = &0
+      #|  (m : Num) + (n : Num) + ((p : Num) - n)
+      #|  sum(((m : Num) + (n : Num), (p : Num) - n), (f : (Num) -> Real)) == real_of_num(0)
       #|  forall m n p.\n      n <= p /\\ (forall r. m + n <= r /\\ r < m + p ==> (f(r) = &0))\n      ==> (sum(m,p) f = sum(m,n) f)
-      #|  (a - b = c - d) <=> (a - c = b - d)
+      #|  ((a : Real) - (b : Real) == (c : Real) - (d : Real)) == (a - c == b - d)
       #|  forall m n p.\n      n <= p /\\ (forall r. m + n <= r /\\ r < m + p ==> (f(r) = g(r)))\n      ==> (sum(m,p) f - sum(m,n) f = sum(m,p) g - sum(m,n) g)
       #|  sum
       #|  1
-      #|  sum(0,1) f = f 0
+      #|  sum((0, 1), (f : (Num) -> Real)) == f(0)
       #|  sum
       #|  1
-      #|  sum(0,1) f = f 0
-      #|  re_Union S = \\x:A. ?s. S s /\\ s x
-      #|  P re_union Q = \\x:A. P x \\/ Q x
-      #|  P re_intersect Q = \\x:A. P x /\\ Q x
-      #|  re_null = \\x:A. F
-      #|  re_universe = \\x:A. T
-      #|  P re_subset Q <=> forall x:A. P x ==> Q x
-      #|  re_compl S = \\x:A. ~(S x)
-      #|  forall S:A->bool. S re_subset S
-      #|  forall S:A->bool. forall x. S x <=> ~(re_compl S x)
-      #|  (a ==> b) /\\ (b ==> a) <=> (a <=> b)
+      #|  sum((0, 1), (f : (Num) -> Real)) == f(0)
+      #|  (re_Union : (((A) -> Bool) -> Bool, A) -> Bool)((S : ((A) -> Bool) -> Bool)) == ((x : A) => \226\136\131 s : (A) -> Bool, S(s) && s(x))
+      #|  (re_union : ((A) -> Bool, (A) -> Bool, A) -> Bool)((P : (A) -> Bool), (Q : (A) -> Bool)) == ((x : A) => P(x) || Q(x))
+      #|  (re_intersect : ((A) -> Bool, (A) -> Bool, A) -> Bool)((P : (A) -> Bool), (Q : (A) -> Bool)) == ((x : A) => P(x) && Q(x))
+      #|  (re_null : (A) -> Bool) == ((x : A) => false)
+      #|  (re_universe : (A) -> Bool) == ((x : A) => true)
+      #|  (re_subset : ((A) -> Bool, (A) -> Bool) -> Bool)((P : (A) -> Bool), (Q : (A) -> Bool)) == (\226\136\128 x : A, P(x) \226\134\146 Q(x))
+      #|  (re_compl : ((A) -> Bool, A) -> Bool)((S : (A) -> Bool)) == ((x : A) => !S(x))
+      #|  \226\136\128 S : (A) -> Bool, re_subset(S, S)
+      #|  \226\136\128 S : (A) -> Bool, \226\136\128 x : A, S(x) == !re_compl(S, x)
+      #|  (((a : Bool) \226\134\146 (b : Bool)) && (b \226\134\146 a)) == (a == b)
       #|  forall P:A->bool. forall Q. P re_subset Q /\\ Q re_subset P <=> (P = Q)
-      #|  x:A
-      #|  x:A
+      #|  (x : A)
+      #|  (x : A)
       #|  forall P:A->bool. forall Q R. P re_subset Q /\\ Q re_subset R ==> P re_subset R
       #|  forall L:(A->bool)->bool. istopology L <=>\n            L re_null /\\\n            L re_universe /\\\n     (forall a b. L a /\\ L b ==> L (a re_intersect b)) /\\\n       (forall P. P re_subset L ==> L (re_Union P))
-      #|  re_universe:(A->bool)->bool
-      #|  ?t:(A->bool)->bool. istopology t
+      #|  (re_universe : ((A) -> Bool) -> Bool)
+      #|  \226\136\131 t : ((A) -> Bool) -> Bool, istopology(t)
       #|  forall L:(A)topology. open(L) re_null /\\\n                   open(L) re_universe /\\\n            (forall x y. open(L) x /\\ open(L) y ==> open(L) (x re_intersect y)) /\\\n              (forall P. P re_subset (open L) ==> open(L) (re_Union P))
       #|  forall L:(A)topology. forall P. P re_subset (open L) ==> open(L) (re_Union P)
       #|  neigh(top)(N,(x:A)) = ?P. open(top) P /\\ P re_subset N /\\ P x
-      #|  S:A->bool
+      #|  (S : (A) -> Bool)
       #|  forall S top. forall x:A. open(top) S /\\ S x ==> neigh(top)(S,x)
-      #|  S:A->bool
-      #|  s:A->bool
+      #|  (S : (A) -> Bool)
+      #|  (s : (A) -> Bool)
       #|  forall S top. open(top) S <=>\n           (re_Union (\\P:A->bool. open(top) P /\\ P re_subset S) = S)
-      #|  P:A->bool
-      #|  P:A->bool
+      #|  (P : (A) -> Bool)
+      #|  (P : (A) -> Bool)
       #|  S = re_Union (\\P:A->bool. open(top) P /\\ P re_subset S)
-      #|  S:A->bool
+      #|  (S : (A) -> Bool)
       #|  forall S top. open(top) S <=>\n           forall x:A. S x ==> ?P. P x /\\ open(top) P /\\ P re_subset S
-      #|  N:A->bool
-      #|  P:A->bool
-      #|  P:A->bool
-      #|  N:A->bool
-      #|  S:A->bool
-      #|  S:A->bool
+      #|  (N : (A) -> Bool)
+      #|  (P : (A) -> Bool)
+      #|  (P : (A) -> Bool)
+      #|  (N : (A) -> Bool)
+      #|  (S : (A) -> Bool)
+      #|  (S : (A) -> Bool)
       #|  forall S top. open(top) S = forall x:A. S x ==> ?N. neigh(top)(N,x) /\\ N re_subset S
-      #|  closed(L:(A)topology) S = open(L)(re_compl S)
+      #|  (closed : (Topology[A], (A) -> Bool) -> Bool)((L : Topology[A]), (S : (A) -> Bool)) == open(L, re_compl(S))
       #|  limpt(top) x S <=>\n      forall N:A->bool. neigh(top)(N,x) ==> ?y. ~(x = y) /\\ S y /\\ N y
-      #|  (a <=> b \\/ a) <=> b ==> a
-      #|  a \\/ b \\/ ~c <=> c ==> a \\/ b
-      #|  (S:A->bool) x
-      #|  S:A->bool
-      #|  re_compl(S:A->bool)
-      #|  S:A->bool
+      #|  ((a : Bool) == ((b : Bool) || a)) == (b \226\134\146 a)
+      #|  ((a : Bool) || (b : Bool) || !(c : Bool)) == (c \226\134\146 a || b)
+      #|  (S : (A) -> Bool)((x : A))
+      #|  (S : (A) -> Bool)
+      #|  re_compl((S : (A) -> Bool))
+      #|  (S : (A) -> Bool)
       #|  forall top S. closed(top) S <=> (forall x:A. limpt(top) x S ==> S x)
       #|  ismet (m:A#A->real) <=> (forall x y. (m(x,y) = &0) <=> (x = y)) /\\\n                           (forall x y z. m(y,z) <= m(x,y) + m(x,z))
-      #|  x:A = y
-      #|  \\((x:A),(y:A)). if x = y then &0 else &1
-      #|  ?m:(A#A->real). ismet m
-      #|  forall m:(A)metric. ismet (mdist m)
-      #|  m:(A)metric
+      #|  (x : A) == (y : A)
+      #|  GABS((f : ((A, A)) -> Real) => \226\136\128 x : A, \226\136\128 y : A, GEQ(f((x, y)), if x == y { real_of_num(0) } else { real_of_num(1) }))
+      #|  \226\136\131 m : ((A, A)) -> Real, ismet(m)
+      #|  \226\136\128 m : Metric[A], ismet(mdist(m))
+      #|  (m : Metric[A])
       #|  forall m:(A)metric. forall x y. ((mdist m)(x,y) = &0) <=> (x = y)
-      #|  forall m:(A)metric. forall x. (mdist m)(x,x) = &0
-      #|  y:A
-      #|  y:A
-      #|  m:(A)metric
-      #|  y:A
-      #|  y:A
-      #|  x:A
-      #|  m:(A)metric
-      #|  forall m:(A)metric. forall x y. &0 <= (mdist m)(x,y)
-      #|  z:A
-      #|  y:A
-      #|  z:A
-      #|  z:A
-      #|  y:A
-      #|  m:(A)metric
-      #|  forall m:(A)metric. forall x y. (mdist m)(x,y) = (mdist m)(y,x)
-      #|  m:(A)metric
+      #|  \226\136\128 m : Metric[A], \226\136\128 x : A, mdist(m, (x, x)) == real_of_num(0)
+      #|  (y : A)
+      #|  (y : A)
+      #|  (m : Metric[A])
+      #|  (y : A)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (m : Metric[A])
+      #|  \226\136\128 m : Metric[A], \226\136\128 x : A, \226\136\128 y : A, real_of_num(0) <= mdist(m, (x, y))
+      #|  (z : A)
+      #|  (y : A)
+      #|  (z : A)
+      #|  (z : A)
+      #|  (y : A)
+      #|  (m : Metric[A])
+      #|  \226\136\128 m : Metric[A], \226\136\128 x : A, \226\136\128 y : A, mdist(m, (x, y)) == mdist(m, (y, x))
+      #|  (m : Metric[A])
       #|  forall m:(A)metric. forall x y z. (mdist m)(x,z) <= (mdist m)(x,y) + (mdist m)(y,z)
-      #|  ~a ==> b <=> b \\/ a
-      #|  y:A
-      #|  x:A
-      #|  m:(A)metric
-      #|  forall m:(A)metric. forall x y. ~(x = y) ==> &0 < (mdist m)(x,y)
+      #|  (!(a : Bool) \226\134\146 (b : Bool)) == (b || a)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (m : Metric[A])
+      #|  \226\136\128 m : Metric[A], \226\136\128 x : A, \226\136\128 y : A, !(x == y) \226\134\146 real_of_num(0) < mdist(m, (x, y))
       #|  forall m:(A)metric. mtop m =\n    topology(\\S. forall x. S x ==> ?e. &0 < e /\\ (forall y. (mdist m)(x,y) < e ==> S y))
-      #|  y:A->bool
-      #|  z:A
-      #|  e:real
-      #|  y:A->bool
-      #|  e2:real
-      #|  e1:real
-      #|  e2:real
-      #|  e2:real
-      #|  e1:real
-      #|  e2:real
-      #|  e1:real
-      #|  &1
+      #|  (y : (A) -> Bool)
+      #|  (z : A)
+      #|  (e : Real)
+      #|  (y : (A) -> Bool)
+      #|  (e2 : Real)
+      #|  (e1 : Real)
+      #|  (e2 : Real)
+      #|  (e2 : Real)
+      #|  (e1 : Real)
+      #|  (e2 : Real)
+      #|  (e1 : Real)
+      #|  real_of_num(1)
       #|  forall m:(A)metric. istopology\n    (\\S. forall x. S x ==> ?e. &0 < e /\\ (forall y. (mdist m)(x,y) < e ==> S y))
-      #|  x:A
-      #|  e:real
+      #|  (x : A)
+      #|  (e : Real)
       #|  forall m:(A)metric. open(mtop m) S <=>\n      (forall x. S x ==> ?e. &0 < e /\\ (forall y. (mdist m(x,y)) < e ==> S y))
       #|  forall m:(A)metric. forall x e. ball(m)(x,e) = \\y. (mdist m)(x,y) < e
-      #|  mdist(m)((x:A),z) + mdist(m)(z,y)
-      #|  y:A
-      #|  e - mdist(m:(A)metric)(x,z)
-      #|  z:A
+      #|  mdist((m : Metric[A]), ((x : A), (z : A))) + mdist(m, (z, (y : A)))
+      #|  (y : A)
+      #|  (e : Real) - mdist((m : Metric[A]), ((x : A), (z : A)))
+      #|  (z : A)
       #|  forall m:(A)metric. forall x e. &0 < e ==> open(mtop(m))(ball(m)(x,e))
-      #|  ball(m)((x:A),e)
+      #|  ball((m : Metric[A]), ((x : A), (e : Real)))
       #|  forall m:(A)metric. forall x e. &0 < e ==> neigh(mtop(m))(ball(m)(x,e),x)
-      #|  (P:A->bool) re_subset N
-      #|  y:A
-      #|  y:A
-      #|  y:A
-      #|  e:real
-      #|  e:real
-      #|  x:A
-      #|  P:A->bool
-      #|  ball(m)((x:A),e)
+      #|  re_subset((P : (A) -> Bool), (N : (A) -> Bool))
+      #|  (y : A)
+      #|  (y : A)
+      #|  (y : A)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (x : A)
+      #|  (P : (A) -> Bool)
+      #|  ball((m : Metric[A]), ((x : A), (e : Real)))
       #|  forall m:(A)metric. forall x S. limpt(mtop m) x S <=>\n      forall e. &0 < e ==> ?y. ~(x = y) /\\ S y /\\ (mdist m)(x,y) < e
-      #|  (a + b) + (c + d) = (d + a) + (c + b)
-      #|  z - y = (x - y) + (z - x)
-      #|  y:real
-      #|  x:real
-      #|  ismet (\\(x,y). abs(y - x))
-      #|  mr1 = metric(\\(x,y). abs(y - x))
-      #|  forall x y. (mdist mr1)(x,y) = abs(y - x)
-      #|  forall x d. (mdist mr1)(x,x+d) = abs(d)
-      #|  forall x d. (mdist mr1)(x,x-d) = abs(d)
-      #|  forall x d. &0 <= d ==> ((mdist mr1)(x,x+d) = d)
-      #|  forall x d. &0 <= d ==> ((mdist mr1)(x,x-d) = d)
-      #|  forall x d. &0 < d ==> ((mdist mr1)(x,x+d) = d)
-      #|  forall x d. &0 < d ==> ((mdist mr1)(x,x-d) = d)
+      #|  (a : Real) + (b : Real) + ((c : Real) + (d : Real)) == d + a + (c + b)
+      #|  (z : Real) - (y : Real) == (x : Real) - y + (z - x)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  ismet(GABS((f : ((Real, Real)) -> Real) => \226\136\128 x : Real, \226\136\128 y : Real, GEQ(f((x, y)), abs(y - x))))
+      #|  (mr1 : Metric[Real]) == metric(GABS((f : ((Real, Real)) -> Real) => \226\136\128 x : Real, \226\136\128 y : Real, GEQ(f((x, y)), abs(y - x))))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, mdist(mr1, (x, y)) == abs(y - x)
+      #|  \226\136\128 x : Real, \226\136\128 d : Real, mdist(mr1, (x, x + d)) == abs(d)
+      #|  \226\136\128 x : Real, \226\136\128 d : Real, mdist(mr1, (x, x - d)) == abs(d)
+      #|  \226\136\128 x : Real, \226\136\128 d : Real, real_of_num(0) <= d \226\134\146 mdist(mr1, (x, x + d)) == d
+      #|  \226\136\128 x : Real, \226\136\128 d : Real, real_of_num(0) <= d \226\134\146 mdist(mr1, (x, x - d)) == d
+      #|  \226\136\128 x : Real, \226\136\128 d : Real, real_of_num(0) < d \226\134\146 mdist(mr1, (x, x + d)) == d
+      #|  \226\136\128 x : Real, \226\136\128 d : Real, real_of_num(0) < d \226\134\146 mdist(mr1, (x, x - d)) == d
       #|  forall x y z. x < z /\\ (mdist mr1)(x,y) < (z - x) ==> y < z
-      #|  &0 <= (e / &2)
-      #|  x + (e / &2)
-      #|  e:real
-      #|  forall x. limpt(mtop mr1) x re_universe
+      #|  real_of_num(0) <= (e : Real) / real_of_num(2)
+      #|  (x : Real) + (e : Real) / real_of_num(2)
+      #|  (e : Real)
+      #|  \226\136\128 x : Real, limpt(mtop(mr1), x, re_universe)
       #|  dorder (g:A->A->bool) <=>\n     forall x y. g x x /\\ g y y ==> ?z. g z z /\\ (forall w. g w z ==> g w x /\\ g w y)
       #|  (s tends l)(top,g) <=>\n      forall N:A->bool. neigh(top)(N,l) ==>\n            ?n:B. g n n /\\ forall m:B. g m n ==> N(s m)
       #|  bounded((m:(A)metric),(g:B->B->bool)) f <=>\n      ?k x N. g N N /\\ (forall n. g n N ==> (mdist m)(f(n),x) < k)
       #|  tendsto((m:(A)metric),x) y z <=>\n      &0 < (mdist m)(x,y) /\\ (mdist m)(x,y) <= (mdist m)(x,z)
-      #|  (tends)
-      #|  m:A
-      #|  m:A
-      #|  n:A
-      #|  n:A
-      #|  (g:A->A->bool) N2 N2
-      #|  (g:A->A->bool) N1 N1
-      #|  N2:A
-      #|  N1:A
-      #|  N2:A
-      #|  N1:A
+      #|  (tends : ((_) -> _, _, (Topology[_], (_, _) -> Bool)) -> Bool)
+      #|  (m : A)
+      #|  (m : A)
+      #|  (n : A)
+      #|  (n : A)
+      #|  (g : (A, A) -> Bool)((N2 : A), N2)
+      #|  (g : (A, A) -> Bool)((N1 : A), N1)
+      #|  (N2 : A)
+      #|  (N1 : A)
+      #|  (N2 : A)
+      #|  (N1 : A)
       #|  forall g:A->A->bool.\n      dorder g ==>\n        forall P Q. (?n. g n n /\\ (forall m. g m n ==> P m)) /\\\n              (?n. g n n /\\ (forall m. g m n ==> Q m))\n                  ==> (?n. g n n /\\ (forall m. g m n ==> P m /\\ Q m))
-      #|  x:num
-      #|  y:num
-      #|  x:num
-      #|  y:num
-      #|  y:num
-      #|  x:num
-      #|  dorder ((>=) :num->num->bool)
-      #|  u:A
-      #|  v:A
-      #|  (mdist m)((x:A),u)
-      #|  (mdist m)((x:A),v)
-      #|  v:A
-      #|  u:A
-      #|  forall m:(A)metric. forall x. dorder(tendsto(m,x))
-      #|  (P:A->bool) re_subset N
-      #|  n:B
-      #|  n:B
-      #|  &0 < d
-      #|  d:real
-      #|  d:real
-      #|  x0:A
-      #|  open(mtop(d)) (P:A->bool)
-      #|  P:A->bool
-      #|  ball(d)((x0:A),e)
+      #|  (x : Num)
+      #|  (y : Num)
+      #|  (x : Num)
+      #|  (y : Num)
+      #|  (y : Num)
+      #|  (x : Num)
+      #|  (dorder : ((Num, Num) -> Bool) -> Bool)(op_gt_eq)
+      #|  (u : A)
+      #|  (v : A)
+      #|  mdist((m : Metric[A]), ((x : A), (u : A)))
+      #|  mdist((m : Metric[A]), ((x : A), (v : A)))
+      #|  (v : A)
+      #|  (u : A)
+      #|  \226\136\128 m : Metric[A], \226\136\128 x : A, dorder(tendsto((m, x)))
+      #|  re_subset((P : (A) -> Bool), (N : (A) -> Bool))
+      #|  (n : B)
+      #|  (n : B)
+      #|  real_of_num(0) < (d : Real)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  (x0 : A)
+      #|  open(mtop((d : Metric[A])), (P : (A) -> Bool))
+      #|  (P : (A) -> Bool)
+      #|  ball((d : Metric[A]), ((x0 : A), (e : Real)))
       #|  forall d g. forall x:B->A. forall x0. (x --> x0)(mtop(d),g) <=>\n     forall e. &0 < e ==> ?n. g n n /\\ forall m. g m n ==> mdist(d)(x(m),x0) < e
-      #|  N:B
-      #|  N:B
-      #|  mdist(d:(A)metric)(x0,x1) / &2
-      #|  (a ==> b) /\\ (a ==> c) <=> a ==> b /\\ c
+      #|  (N : B)
+      #|  (N : B)
+      #|  mdist((d : Metric[A]), ((x0 : A), (x1 : A))) / real_of_num(2)
+      #|  (((a : Bool) \226\134\146 (b : Bool)) && (a \226\134\146 (c : Bool))) == (a \226\134\146 b && c)
       #|  forall g d. dorder (g:B->B->bool) ==>\n      (x --> x0)(mtop(d),g) /\\ (x --> x1)(mtop(d),g) ==> (x0:A = x1)
       #|  forall d:(A)metric. forall x x0. (x --> x0)(mtop(d), (>=) :num->num->bool) <=>\n     forall e. &0 < e ==> ?N. forall n. n >= N ==> mdist(d)(x(n),x0) < e
-      #|  (mdist m1)((x0:A),y)
-      #|  x:A
-      #|  y:A
-      #|  y:A
-      #|  d:real
-      #|  limpt(mtop m1) (x0:A) re_universe
-      #|  d:real
-      #|  x:A
-      #|  x0:A
-      #|  m1:(A)metric
-      #|  (mdist m1)((x0:A),z)
-      #|  z:A
-      #|  &0 < e
+      #|  mdist((m1 : Metric[A]), ((x0 : A), (y : A)))
+      #|  (x : A)
+      #|  (y : A)
+      #|  (y : A)
+      #|  (d : Real)
+      #|  limpt(mtop((m1 : Metric[A])), (x0 : A), re_universe)
+      #|  (d : Real)
+      #|  (x : A)
+      #|  (x0 : A)
+      #|  (m1 : Metric[A])
+      #|  mdist((m1 : Metric[A]), ((x0 : A), (z : A)))
+      #|  (z : A)
+      #|  real_of_num(0) < (e : Real)
       #|  forall m1:(A)metric. forall m2:(B)metric. forall f x0 y0.\n      limpt(mtop m1) x0 re_universe ==>\n        ((f --> y0)(mtop(m2),tendsto(m1,x0)) <=>\n          forall e. &0 < e ==>\n            ?d. &0 < d /\\ forall x. &0 < (mdist m1)(x,x0) /\\ (mdist m1)(x,x0) <= d\n                ==> (mdist m2)(f(x),y0) < e)
-      #|  d / &2
-      #|  d / &2
-      #|  d:real
-      #|  d:real
+      #|  (d : Real) / real_of_num(2)
+      #|  (d : Real) / real_of_num(2)
+      #|  (d : Real)
+      #|  (d : Real)
       #|  forall m1:(A)metric. forall m2:(B)metric. forall f x0 y0.\n      limpt(mtop m1) x0 re_universe ==>\n        ((f --> y0)(mtop(m2),tendsto(m1,x0)) <=>\n          forall e. &0 < e ==>\n            ?d. &0 < d /\\ forall x. &0 < (mdist m1)(x,x0) /\\ (mdist m1)(x,x0) < d ==>\n              (mdist m2)(f(x),y0) < e)
-      #|  &0
-      #|  k:real
-      #|  abs((f:A->real) n - x) + abs(x)
-      #|  x:real
-      #|  (f:A->real) n
-      #|  abs(x) + k
-      #|  x:real
-      #|  k:real
+      #|  real_of_num(0)
+      #|  (k : Real)
+      #|  abs((f : (A) -> Real)((n : A)) - (x : Real)) + abs(x)
+      #|  (x : Real)
+      #|  (f : (A) -> Real)((n : A))
+      #|  abs((x : Real)) + (k : Real)
+      #|  (x : Real)
+      #|  (k : Real)
       #|  forall(g:A->A->bool) f. bounded(mr1,g) f <=>\n        ?k N. g N N /\\ (forall n. g n N ==> abs(f n) < k)
       #|  forall g:A->A->bool. forall x x0.\n      (x --> x0)(mtop(mr1),g) <=> ((\\n. x(n) - x0) --> &0)(mtop(mr1),g)
-      #|  N:A
-      #|  x0:real
-      #|  &1
-      #|  N:A
+      #|  (N : A)
+      #|  (x0 : Real)
+      #|  real_of_num(1)
+      #|  (N : A)
       #|  1
       #|  1
-      #|  &1
+      #|  real_of_num(1)
       #|  forall g:A->A->bool. forall x x0.\n      (x --> x0)(mtop(mr1),g) ==> bounded(mr1,g) x
-      #|  N:A
-      #|  N:A
-      #|  abs(x0)
+      #|  (N : A)
+      #|  (N : A)
+      #|  abs((x0 : Real))
       #|  forall g:A->A->bool. forall x x0.\n      (x --> x0)(mtop(mr1),g) /\\ ~(x0 = &0) ==>\n        ?N. g N N /\\ (forall n. g n N ==> ~(x n = &0))
-      #|  ~(x(n:A) = &0)
+      #|  !((x : (A) -> Real)((n : A)) == real_of_num(0))
       #|  2
-      #|  ~(abs(x0) = &0) /\\ ~(&2 = &0)
-      #|  (a * b) * (c * d) = (d * a) * (b * c)
-      #|  &2 / abs(x0) = inv(abs(x0) / &2)
-      #|  abs(x0) / &2
-      #|  &0 < abs(x(n:A))
-      #|  x(n:A):real
-      #|  x0:real
+      #|  !(abs((x0 : Real)) == real_of_num(0)) && !(real_of_num(2) == real_of_num(0))
+      #|  (a : Real) * (b : Real) * ((c : Real) * (d : Real)) == d * a * (b * c)
+      #|  real_of_num(2) / abs((x0 : Real)) == inv(abs(x0) / real_of_num(2))
+      #|  abs((x0 : Real)) / real_of_num(2)
+      #|  real_of_num(0) < abs((x : (A) -> Real)((n : A)))
+      #|  (x : (A) -> Real)((n : A))
+      #|  (x0 : Real)
       #|  abs
-      #|  abs(x0 - x(n:A)) + abs(x(n))
-      #|  abs(x(n:A))
-      #|  abs(x0) / &2
-      #|  abs(x0) / &2
-      #|  (abs(x0) / &2) < abs(x(n:A))
-      #|  n:A
-      #|  N:A
-      #|  &2 / abs(x0)
-      #|  N:A
-      #|  abs(x0) / &2
+      #|  abs((x0 : Real) - (x : (A) -> Real)((n : A))) + abs(x(n))
+      #|  abs((x : (A) -> Real)((n : A)))
+      #|  abs((x0 : Real)) / real_of_num(2)
+      #|  abs((x0 : Real)) / real_of_num(2)
+      #|  abs((x0 : Real)) / real_of_num(2) < abs((x : (A) -> Real)((n : A)))
+      #|  (n : A)
+      #|  (N : A)
+      #|  real_of_num(2) / abs((x0 : Real))
+      #|  (N : A)
+      #|  abs((x0 : Real)) / real_of_num(2)
       #|  forall g:A->A->bool. forall x x0.\n      (x --> x0)(mtop(mr1),g) /\\ ~(x0 = &0) ==>\n        bounded(mr1,g) (\\n. inv(x n))
-      #|  abs(x(m:A)) + abs(y(m:A))
-      #|  N:A
-      #|  N:A
-      #|  e / &2
-      #|  e:real
+      #|  abs((x : (A) -> Real)((m : A))) + abs((y : (A) -> Real)(m))
+      #|  (N : A)
+      #|  (N : A)
+      #|  (e : Real) / real_of_num(2)
+      #|  (e : Real)
       #|  forall g:A->A->bool. dorder g ==>\n        forall x y. (x --> &0)(mtop(mr1),g) /\\ (y --> &0)(mtop(mr1),g) ==>\n                ((\\n. x(n) + y(n)) --> &0)(mtop(mr1),g)
-      #|  &0 < &0
-      #|  e = k * (e / k)
-      #|  N:A
-      #|  N:A
-      #|  &0 < e / k
-      #|  abs(x(N:A))
-      #|  N:A
-      #|  N:A
-      #|  &0 < k
-      #|  e / k
-      #|  k:real
-      #|  e:real
+      #|  real_of_num(0) < real_of_num(0)
+      #|  (e : Real) == (k : Real) * (e / k)
+      #|  (N : A)
+      #|  (N : A)
+      #|  real_of_num(0) < (e : Real) / (k : Real)
+      #|  abs((x : (A) -> Real)((N : A)))
+      #|  (N : A)
+      #|  (N : A)
+      #|  real_of_num(0) < (k : Real)
+      #|  (e : Real) / (k : Real)
+      #|  (k : Real)
+      #|  (e : Real)
       #|  forall g:A->A->bool. dorder g ==>\n      forall x y. bounded(mr1,g) x /\\ (y --> &0)(mtop(mr1),g) ==>\n              ((\\n. x(n) * y(n)) --> &0)(mtop(mr1),g)
-      #|  &0 < abs k
-      #|  e = abs(k) * (e / abs(k))
-      #|  N:A
-      #|  N:A
-      #|  &0 < e / abs(k)
-      #|  e / abs(k)
-      #|  N:A
-      #|  N:A
+      #|  real_of_num(0) < abs((k : Real))
+      #|  (e : Real) == abs((k : Real)) * (e / abs(k))
+      #|  (N : A)
+      #|  (N : A)
+      #|  real_of_num(0) < (e : Real) / abs((k : Real))
+      #|  (e : Real) / abs((k : Real))
+      #|  (N : A)
+      #|  (N : A)
       #|  1
-      #|  &1
-      #|  k = &0
-      #|  e:real
+      #|  real_of_num(1)
+      #|  (k : Real) == real_of_num(0)
+      #|  (e : Real)
       #|  forall g:A->A->bool. forall k x.\n      (x --> &0)(mtop(mr1),g) ==> ((\\n. k * x(n)) --> &0)(mtop(mr1),g)
       #|  forall g:A->A->bool x x0 y y0.\n        dorder g\n        ==> (x --> x0)(mtop(mr1),g) /\\ (y --> y0)(mtop(mr1),g)\n            ==> ((\\n. x(n) + y(n)) --> (x0 + y0))(mtop(mr1),g)
       #|  forall g:A->A->bool x x0.\n        dorder g\n        ==> ((x --> x0)(mtop(mr1),g) <=>\n            ((\\n. --(x n)) --> --x0)(mtop(mr1),g))
-      #|  --(y(n:A))
-      #|  n:A
+      #|  -(y : (A) -> Real)((n : A))
+      #|  (n : A)
       #|  forall g:A->A->bool x x0 y y0.\n      dorder g\n      ==> (x --> x0)(mtop(mr1),g) /\\ (y --> y0)(mtop(mr1),g)\n          ==> ((\\n. x(n) - y(n)) --> (x0 - y0))(mtop(mr1),g)
-      #|  x0:real
-      #|  x(n:A) - x0
-      #|  y(n:A) - y0
-      #|  n:A
-      #|  (x(n:A) - x0) * y0
-      #|  n:A
-      #|  x(n:A) * (y(n) - y0)
-      #|  n:A
+      #|  (x0 : Real)
+      #|  (x : (A) -> Real)((n : A)) - (x0 : Real)
+      #|  (y : (A) -> Real)((n : A)) - (y0 : Real)
+      #|  (n : A)
+      #|  ((x : (A) -> Real)((n : A)) - (x0 : Real)) * (y0 : Real)
+      #|  (n : A)
+      #|  (x : (A) -> Real)((n : A)) * ((y : (A) -> Real)(n) - (y0 : Real))
+      #|  (n : A)
       #|  forall a b c d. (a * b) - (c * d) = (a * (b - d)) + ((a - c) * d)
       #|  forall g:A->A->bool x y x0 y0.\n        dorder g\n        ==> (x --> x0)(mtop(mr1),g) /\\ (y --> y0)(mtop(mr1),g)\n            ==> ((\\n. x(n) * y(n)) --> (x0 * y0))(mtop(mr1),g)
-      #|  &0 < abs(inv x0)
-      #|  a * (b * c) * (d * e) = e * b * (a * c * d)
+      #|  real_of_num(0) < abs(inv((x0 : Real)))
+      #|  (a : Real) * ((b : Real) * (c : Real) * ((d : Real) * (e : Real))) == e * (b * (a * (c * d)))
       #|  1
       #|  1
-      #|  &0 < k
-      #|  ~(x0 = &0)
-      #|  e = e * (abs(inv x0) * abs(x0)) * (inv k * k)
-      #|  ~(x(n:A) = &0)
-      #|  ~(x0 = &0)
+      #|  real_of_num(0) < (k : Real)
+      #|  !((x0 : Real) == real_of_num(0))
+      #|  (e : Real) == e * (abs(inv((x0 : Real))) * abs(x0) * (inv((k : Real)) * k))
+      #|  !((x : (A) -> Real)((n : A)) == real_of_num(0))
+      #|  !((x0 : Real) == real_of_num(0))
       #|  inv(x n) - inv x0 =\n                inv(x n) * inv x0 * (x0 - x(n:A))
-      #|  n:A
-      #|  N:A
-      #|  N:A
-      #|  &0 < e * abs(x0) * inv k
-      #|  abs(inv(x(N:A)))
-      #|  N:A
-      #|  N:A
-      #|  &0 < k
-      #|  e * abs(x0) * (inv k)
-      #|  e:real
-      #|  (x --> x0)(mtop mr1,(g:A->A->bool))
-      #|  k:real
+      #|  (n : A)
+      #|  (N : A)
+      #|  (N : A)
+      #|  real_of_num(0) < (e : Real) * (abs((x0 : Real)) * inv((k : Real)))
+      #|  abs(inv((x : (A) -> Real)((N : A))))
+      #|  (N : A)
+      #|  (N : A)
+      #|  real_of_num(0) < (k : Real)
+      #|  (e : Real) * (abs((x0 : Real)) * inv((k : Real)))
+      #|  (e : Real)
+      #|  tends((x : (A) -> Real), (x0 : Real), (mtop(mr1), (g : (A, A) -> Bool)))
+      #|  (k : Real)
       #|  forall g:A->A->bool x x0.\n        dorder g\n        ==> (x --> x0)(mtop(mr1),g) /\\ ~(x0 = &0)\n            ==> ((\\n. inv(x(n))) --> inv x0)(mtop(mr1),g)
-      #|  inv(y(n:A))
-      #|  n:A
+      #|  inv((y : (A) -> Real)((n : A)))
+      #|  (n : A)
       #|  forall g:A->A->bool x x0 y y0.\n       dorder g\n       ==> (x --> x0)(mtop(mr1),g) /\\\n           (y --> y0)(mtop(mr1),g) /\\ ~(y0 = &0)\n           ==> ((\\n. x(n) / y(n)) --> (x0 / y0))(mtop(mr1),g)
-      #|  mdist(mr1)(x(n:A),x0)
-      #|  n:A
-      #|  N:A
-      #|  N:A
-      #|  e:real
+      #|  mdist(mr1, ((x : (A) -> Real)((n : A)), (x0 : Real)))
+      #|  (n : A)
+      #|  (N : A)
+      #|  (N : A)
+      #|  (e : Real)
       #|  forall x x0. (x --> x0)(mtop(mr1),g) ==>\n               ((\\n:A. abs(x n)) --> abs(x0))(mtop(mr1),g)
-      #|  a < b + c ==> a < b + SUC c
-      #|  r:num
+      #|  (a : Num) < (b : Num) + (c : Num) \226\134\146 a < b + SUC(c)
+      #|  (r : Num)
       #|  forall g. dorder g /\\\n       ((\\x. &0) --> &0)(mtop(mr1),g)\n       ==> forall m n. (forall r. m <= r /\\ r < m + n ==> (f r --> l r)(mtop(mr1),g))\n                 ==> ((\\x. sum(m,n) (\\r. f r x)) --> sum(m,n) l)\n                     (mtop(mr1),g)
-      #|  x0:real
-      #|  y0:real
-      #|  N:A
-      #|  N:A
-      #|  (x0 - y0) / &2
-      #|  a <=> ~ ~a
+      #|  (x0 : Real)
+      #|  (y0 : Real)
+      #|  (N : A)
+      #|  (N : A)
+      #|  ((x0 : Real) - (y0 : Real)) / real_of_num(2)
+      #|  (a : Bool) == !!a
       #|  forall g:A->A->bool x x0 y y0.\n        dorder g\n        ==> (x --> x0)(mtop(mr1),g) /\\\n            (y --> y0)(mtop(mr1),g) /\\\n            (?N. g N N /\\ forall n. g n N ==> x(n) <= y(n))\n            ==> x0 <= y0
       #|  x tends_num_real x0 <=> (x tends x0)(mtop(mr1), (>=) :num->num->bool)
-      #|  (tends_num_real)
+      #|  tends_num_real
       #|  forall x x0. (x --> x0) <=>\n          forall e. &0 < e ==> ?N. forall n. n >= N ==> abs(x(n) - x0) < e
-      #|  forall k. (\\x. k) --> k
+      #|  \226\136\128 k : Real, tends_num_real((x : Num) => k, k)
       #|  forall x x0 y y0. x --> x0 /\\ y --> y0 ==> (\\n. x(n) + y(n)) --> (x0 + y0)
       #|  forall x x0 y y0. x --> x0 /\\ y --> y0 ==> (\\n. x(n) * y(n)) --> (x0 * y0)
-      #|  forall x x0. x --> x0 <=> (\\n. --(x n)) --> --x0
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 x0 : Real, tends_num_real(x, x0) == tends_num_real((n : Num) => -x(n), -x0)
       #|  forall x x0. x --> x0 /\\ ~(x0 = &0) ==> (\\n. inv(x n)) --> inv x0
       #|  forall x x0 y y0. x --> x0 /\\ y --> y0 ==> (\\n. x(n) - y(n)) --> (x0 - y0)
       #|  forall x x0 y y0. x --> x0 /\\ y --> y0 /\\ ~(y0 = &0) ==>\n                  (\\n. x(n) / y(n)) --> (x0 / y0)
-      #|  forall x x1 x2. x --> x1 /\\ x --> x2 ==> (x1 = x2)
-      #|  forall s l. s --> l <=> (\\n. s(n) - l) --> &0
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 x1 : Real, \226\136\128 x2 : Real, tends_num_real(x, x1) && tends_num_real(x, x2) \226\134\146 x1 == x2
+      #|  \226\136\128 s : (Num) -> Real, \226\136\128 l : Real, tends_num_real(s, l) == tends_num_real((n : Num) => s(n) - l, real_of_num(0))
       #|  forall f l m n.\n      (forall r. m <= r /\\ r < m + n ==> f r --> l r)\n      ==> (\\k. sum(m,n) (\\r. f r k)) --> sum(m,n) l
-      #|  M + N <= n:num ==> M <= n /\\ N <= n
+      #|  (M : Num) + (N : Num) <= (n : Num) \226\134\146 M <= n && N <= n
       #|  forall s t l N. (forall n. N <= n ==> (s n = t n)) /\\ s --> l ==> t --> l
-      #|  convergent f <=> ?l. f --> l
+      #|  (convergent : ((Num) -> Real) -> Bool)((f : (Num) -> Real)) == (\226\136\131 l : Real, tends_num_real(f, l))
       #|  cauchy f <=> forall e. &0 < e ==>\n        ?N:num. forall m n. m >= N /\\ n >= N ==> abs(f(m) - f(n)) < e
-      #|  lim f = @l. f --> l
-      #|  lim f
-      #|  forall f. convergent f <=> (f --> lim f)
+      #|  (lim : ((Num) -> Real) -> Real)((f : (Num) -> Real)) == select((l : Real) => tends_num_real(f, l))
+      #|  lim((f : (Num) -> Real))
+      #|  \226\136\128 f : (Num) -> Real, convergent(f) == tends_num_real(f, lim(f))
       #|  subseq (f:num->num) <=> forall m n. m < n ==> (f m) < (f n)
-      #|  f(m + (SUC p)):num
-      #|  p:num
-      #|  p:num
-      #|  p:num
-      #|  n:num
-      #|  forall f. subseq f <=> forall n. f(n) < f(SUC n)
+      #|  (f : (Num) -> Num)((m : Num) + SUC((p : Num)))
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (n : Num)
+      #|  \226\136\128 f : (Num) -> Num, subseq(f) == (\226\136\128 n : Num, f(n) < f(SUC(n)))
       #|  mono (f:num->real) <=>\n            (forall m n. m <= n ==> f(m) <= f(n)) \\/\n            (forall m n. m <= n ==> f(m) >= f(n))
-      #|  f(m + p:num):real
-      #|  p:num
-      #|  p:num
-      #|  p:num
-      #|  SUC n
-      #|  n:num
-      #|  n:num
-      #|  (a <=> c) /\\ (b <=> d) ==> (a \\/ b <=> c \\/ d)
+      #|  (f : (Num) -> Real)((m : Num) + (p : Num))
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  SUC((n : Num))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (a : Bool) == (c : Bool) && (b : Bool) == (d : Bool) \226\134\146 (a || b) == (c || d)
       #|  forall f. mono f <=> (forall n. f(SUC n) >= f(n)) \\/ (forall n. f(SUC n) <= f(n))
-      #|  k:real
-      #|  n:num
-      #|  k:real
-      #|  abs(s(N:num)) + &1
-      #|  abs(s(N:num))
-      #|  k:real
-      #|  k:real
-      #|  forall s N. ?k. forall n:num. n < N ==> abs(s n) < k
+      #|  (k : Real)
+      #|  (n : Num)
+      #|  (k : Real)
+      #|  abs((s : (Num) -> Real)((N : Num))) + real_of_num(1)
+      #|  abs((s : (Num) -> Real)((N : Num)))
+      #|  (k : Real)
+      #|  (k : Real)
+      #|  \226\136\128 s : (Num) -> Real, \226\136\128 N : Num, \226\136\131 k : Real, \226\136\128 n : Num, n < N \226\134\146 abs(s(n)) < k
       #|  0
-      #|  k:real
-      #|  k:real
-      #|  N:num
-      #|  n:num
-      #|  n:num
-      #|  k:real
-      #|  l:real
-      #|  l:real
-      #|  k:real
-      #|  l:real
-      #|  N:num
-      #|  s:num->real
-      #|  N:num
-      #|  k:real
+      #|  (k : Real)
+      #|  (k : Real)
+      #|  (N : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (k : Real)
+      #|  (l : Real)
+      #|  (l : Real)
+      #|  (k : Real)
+      #|  (l : Real)
+      #|  (N : Num)
+      #|  (s : (Num) -> Real)
+      #|  (N : Num)
+      #|  (k : Real)
       #|  forall s. bounded(mr1, (>=)) s <=> ?k. forall n:num. abs(s n) < k
-      #|  k:real
-      #|  &0 <= f(n:num)
-      #|  abs(k)
-      #|  K:real
-      #|  abs(K)
-      #|  abs(k) + abs(K)
-      #|  (abs(k) + abs(K)) + &1
+      #|  (k : Real)
+      #|  real_of_num(0) <= (f : (Num) -> Real)((n : Num))
+      #|  abs((k : Real))
+      #|  (K : Real)
+      #|  abs((K : Real))
+      #|  abs((k : Real)) + abs((K : Real))
+      #|  abs((k : Real)) + abs((K : Real)) + real_of_num(1)
       #|  forall f k K. (forall n:num. k <= f(n) /\\ f(n) <= K) ==> bounded(mr1, (>=)) f
-      #|  N:num
-      #|  N:num
-      #|  (f:num->real) N
-      #|  &1
-      #|  N:num
-      #|  &1
-      #|  forall f. cauchy f ==> bounded(mr1, (>=)) f
-      #|  --(sup(\\x. ?n:num. x = f(n)))
-      #|  (sup(\\x. ?n:num. x = f(n)))
-      #|  (f:num->real) m
-      #|  &0
-      #|  (f:num->real) n
-      #|  (sup(\\x. ?m:num. x = f(m)) - e) < f(m)
-      #|  m:num
-      #|  n:num
-      #|  n:num
-      #|  (f:num->real) n
-      #|  n:num
-      #|  ~(a /\\ b) <=> a ==> ~b
-      #|  sup(\\x. ?n:num. x = f(n))
-      #|  forall n. f(n) <= sup(\\x. ?n:num. x = f(n))
-      #|  n:num
-      #|  x:real
-      #|  sup(\\x. ?n:num. x = f(n)) - e
-      #|  e:real
-      #|  sup(\\x. ?n:num. x = f(n))
-      #|  abs(f(n:num))
-      #|  n:num
-      #|  k:real
-      #|  k:real
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (f : (Num) -> Real)((N : Num))
+      #|  real_of_num(1)
+      #|  (N : Num)
+      #|  real_of_num(1)
+      #|  \226\136\128 f : (Num) -> Real, cauchy(f) \226\134\146 bounded((mr1, op_gt_eq), f)
+      #|  -sup((x : Real) => \226\136\131 n : Num, x == (f : (Num) -> Real)(n))
+      #|  sup((x : Real) => \226\136\131 n : Num, x == (f : (Num) -> Real)(n))
+      #|  (f : (Num) -> Real)((m : Num))
+      #|  real_of_num(0)
+      #|  (f : (Num) -> Real)((n : Num))
+      #|  sup((x : Real) => \226\136\131 m : Num, x == (f : (Num) -> Real)(m)) - (e : Real) < f((m : Num))
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (f : (Num) -> Real)((n : Num))
+      #|  (n : Num)
+      #|  !((a : Bool) && (b : Bool)) == (a \226\134\146 !b)
+      #|  sup((x : Real) => \226\136\131 n : Num, x == (f : (Num) -> Real)(n))
+      #|  \226\136\128 n : Num, (f : (Num) -> Real)(n) <= sup((x : Real) => \226\136\131 n : Num, x == f(n))
+      #|  (n : Num)
+      #|  (x : Real)
+      #|  sup((x : Real) => \226\136\131 n : Num, x == (f : (Num) -> Real)(n)) - (e : Real)
+      #|  (e : Real)
+      #|  sup((x : Real) => \226\136\131 n : Num, x == (f : (Num) -> Real)(n))
+      #|  abs((f : (Num) -> Real)((n : Num)))
+      #|  (n : Num)
+      #|  (k : Real)
+      #|  (k : Real)
       #|  0
-      #|  f(0):real
-      #|  \\x:real. ?n:num. x = f(n)
+      #|  (f : (Num) -> Real)(0)
+      #|  (x : Real) => \226\136\131 n : Num, x == (f : (Num) -> Real)(n)
       #|  forall f. bounded(mr1, (>=)) f /\\ (forall m n. m >= n ==> f(m) >= f(n))\n           ==> convergent f
-      #|  l:real
-      #|  --l
-      #|  l:real
-      #|  forall f. convergent f <=> convergent (\\n. --(f n))
+      #|  (l : Real)
+      #|  -(l : Real)
+      #|  (l : Real)
+      #|  \226\136\128 f : (Num) -> Real, convergent(f) == convergent((n : Num) => -f(n))
       #|  forall f. bounded(mr1, (>=))(\\n:num. --(f n)) <=> bounded(mr1, (>=)) f
-      #|  forall f. bounded(mr1, (>=)) f /\\ mono f ==> convergent f
-      #|  f:num->num
-      #|  (f:num->num) n
-      #|  SUC n
-      #|  (f:num->num) n
-      #|  SUC N
-      #|  f(0) >= (SUC N)
+      #|  \226\136\128 f : (Num) -> Real, bounded((mr1, op_gt_eq), f) && mono(f) \226\134\146 convergent(f)
+      #|  (f : (Num) -> Num)
+      #|  (f : (Num) -> Num)((n : Num))
+      #|  SUC((n : Num))
+      #|  (f : (Num) -> Num)((n : Num))
+      #|  SUC((N : Num))
+      #|  (f : (Num) -> Num)(0) >= SUC((N : Num))
       #|  forall n. f(n) >= (SUC N) /\\\n           f(SUC n) > f(n) /\\ s(f n) < s(f(SUC n):num)
-      #|  \\x. \\n:num. @m:num. m > x /\\ s(x) < s(m)
-      #|  @m. m > (SUC N) /\\ s(SUC N) < s(m)
-      #|  f:num->num
-      #|  m:num
-      #|  m:num
-      #|  forall p. p >= SUC N ==> (?m. m > p /\\ s(p) < s(m))
-      #|  ~(a /\\ b) <=> a ==> ~b
-      #|  N:num
-      #|  forall q. f(SUC q):num >= f(q)
-      #|  q:num
-      #|  f(SUC q):num
-      #|  q:num
-      #|  q:num
-      #|  forall p q. p:num >= (f q) ==> s(p) <= s(f(q:num))
-      #|  f:num->num
-      #|  n:num
-      #|  n:num
+      #|  (x : Num) => (n : Num) => select((m : Num) => m > x && (s : (Num) -> Real)(x) < s(m))
+      #|  select((m : Num) => m > SUC((N : Num)) && (s : (Num) -> Real)(SUC(N)) < s(m))
+      #|  (f : (Num) -> Num)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  \226\136\128 p : Num, p >= SUC((N : Num)) \226\134\146 (\226\136\131 m : Num, m > p && (s : (Num) -> Real)(p) < s(m))
+      #|  !((a : Bool) && (b : Bool)) == (a \226\134\146 !b)
+      #|  (N : Num)
+      #|  \226\136\128 q : Num, (f : (Num) -> Num)(SUC(q)) >= f(q)
+      #|  (q : Num)
+      #|  (f : (Num) -> Num)(SUC((q : Num)))
+      #|  (q : Num)
+      #|  (q : Num)
+      #|  \226\136\128 p : Num, \226\136\128 q : Num, p >= (f : (Num) -> Num)(q) \226\134\146 (s : (Num) -> Real)(p) <= s(f(q))
+      #|  (f : (Num) -> Num)
+      #|  (n : Num)
+      #|  (n : Num)
       #|  \\x. \\n:num. @p:num. p > x /\\\n                       (forall m. m >= p ==> (s m) <= (s p))
-      #|  @p. p > 0 /\\ (forall m. m >= p ==> (s m) <= (s p))
-      #|  f:num->num
-      #|  forall n:num. ?p. p > n /\\ forall m. m >= p ==> s(m) <= s(p)
-      #|  forall s:num->real. ?f. subseq f /\\ mono(\\n.s(f n))
-      #|  (f:num->num) n
-      #|  n:num
+      #|  select((p : Num) => p > 0 && (\226\136\128 m : Num, m >= p \226\134\146 (s : (Num) -> Real)(m) <= s(p)))
+      #|  (f : (Num) -> Num)
+      #|  \226\136\128 n : Num, \226\136\131 p : Num, p > n && (\226\136\128 m : Num, m >= p \226\134\146 (s : (Num) -> Real)(m) <= s(p))
+      #|  \226\136\128 s : (Num) -> Real, \226\136\131 f : (Num) -> Num, subseq(f) && mono((n : Num) => s(f(n)))
+      #|  (f : (Num) -> Num)((n : Num))
+      #|  (n : Num)
       #|  0
-      #|  k:real
-      #|  k:real
+      #|  (k : Real)
+      #|  (k : Real)
       #|  forall s (f:num->num). bounded(mr1, (>=)) s ==> bounded(mr1, (>=)) (\\n. s(f n))
-      #|  subseq f
-      #|  SUC(f(n:num))
-      #|  forall f n. subseq f ==> n <= f(n)
-      #|  N1:num
-      #|  N1:num
-      #|  N2:num
-      #|  N2:num
-      #|  N1:num
-      #|  forall f. subseq f ==> forall N1 N2. ?n. n >= N1 /\\ f(n) >= N2
-      #|  e:real
-      #|  abs(f(m:num) - l) + abs(l - f(n))
-      #|  f(m:num) - f(n) = (f(m) - l) + (l - f(n))
-      #|  N:num
-      #|  N:num
-      #|  e / &2
-      #|  e:real
-      #|  l:real
-      #|  e:real
-      #|  abs(f(m:num) - f(g(n:num))) + abs(f(g n) - l)
-      #|  f(m:num) - l = (f(m) - f(g(n:num))) + (f(g n) - l)
-      #|  m:num
-      #|  g(n:num):num
-      #|  n:num
-      #|  forall n:num. n >= N1 ==> abs(f(g n:num) - l) < (e / &2)
-      #|  m:num
-      #|  N2:num
-      #|  n:num
-      #|  N2:num
-      #|  N1:num
-      #|  N2:num
-      #|  e / &2
-      #|  cauchy f
-      #|  N1:num
-      #|  e / &2
-      #|  (\\n. f(g(n):num)) --> l
-      #|  e:real
-      #|  l:real
-      #|  l:real
-      #|  convergent (\\n. f(g(n):num))
-      #|  bounded(mr1, (>=) :num->num->bool)(\\n. f(g(n):num))
-      #|  g:num->num
-      #|  f:num->real
-      #|  forall f. cauchy f <=> convergent f
+      #|  subseq((f : (Num) -> Num))
+      #|  SUC((f : (Num) -> Num)((n : Num)))
+      #|  \226\136\128 f : (Num) -> Num, \226\136\128 n : Num, subseq(f) \226\134\146 n <= f(n)
+      #|  (N1 : Num)
+      #|  (N1 : Num)
+      #|  (N2 : Num)
+      #|  (N2 : Num)
+      #|  (N1 : Num)
+      #|  \226\136\128 f : (Num) -> Num, subseq(f) \226\134\146 (\226\136\128 N1 : Num, \226\136\128 N2 : Num, \226\136\131 n : Num, n >= N1 && f(n) >= N2)
+      #|  (e : Real)
+      #|  abs((f : (Num) -> Real)((m : Num)) - (l : Real)) + abs(l - f((n : Num)))
+      #|  (f : (Num) -> Real)((m : Num)) - f((n : Num)) == f(m) - (l : Real) + (l - f(n))
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  (e : Real)
+      #|  (l : Real)
+      #|  (e : Real)
+      #|  abs((f : (Num) -> Real)((m : Num)) - f((g : (Num) -> Num)((n : Num)))) + abs(f(g(n)) - (l : Real))
+      #|  (f : (Num) -> Real)((m : Num)) - (l : Real) == f(m) - f((g : (Num) -> Num)((n : Num))) + (f(g(n)) - l)
+      #|  (m : Num)
+      #|  (g : (Num) -> Num)((n : Num))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, n >= (N1 : Num) \226\134\146 abs((f : (Num) -> Real)((g : (Num) -> Num)(n)) - (l : Real)) < (e : Real) / real_of_num(2)
+      #|  (m : Num)
+      #|  (N2 : Num)
+      #|  (n : Num)
+      #|  (N2 : Num)
+      #|  (N1 : Num)
+      #|  (N2 : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  cauchy((f : (Num) -> Real))
+      #|  (N1 : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  tends_num_real((n : Num) => (f : (Num) -> Real)((g : (Num) -> Num)(n)), (l : Real))
+      #|  (e : Real)
+      #|  (l : Real)
+      #|  (l : Real)
+      #|  convergent((n : Num) => (f : (Num) -> Real)((g : (Num) -> Num)(n)))
+      #|  bounded((mr1, op_gt_eq), (n : Num) => (f : (Num) -> Real)((g : (Num) -> Num)(n)))
+      #|  (g : (Num) -> Num)
+      #|  (f : (Num) -> Real)
+      #|  \226\136\128 f : (Num) -> Real, cauchy(f) == convergent(f)
       #|  (>=) :num->num->bool
       #|  forall f g l m. f --> l /\\ g --> m /\\ (?N. forall n. n >= N ==> f(n) <= g(n))\n        ==> l <= m
       #|  forall f g. f --> &0 /\\ (?N. forall n. n >= N ==> abs(g n) <= abs(f n))\n         ==> g --> &0
-      #|  n:num
-      #|  n:num
-      #|  SUC N
-      #|  SUC N
-      #|  n:num
-      #|  N:num
-      #|  N:num
-      #|  forall f l. f --> l <=> (\\n. f(SUC n)) --> l
-      #|  e:real
-      #|  e:real
-      #|  forall f. (\\n. abs(f n)) --> &0 <=> f --> &0
-      #|  forall f l. f --> l ==> (\\n. abs(f n)) --> abs(l)
-      #|  (f:num->real) n
-      #|  e = inv(inv e)
-      #|  ~(f(n:num) = &0)
-      #|  &0 < inv(f(n:num))
-      #|  inv e
-      #|  &0 < f(n:num)
-      #|  n:num
-      #|  N:num
-      #|  inv e
-      #|  N:num
-      #|  e:real
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  SUC((N : Num))
+      #|  SUC((N : Num))
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, tends_num_real(f, l) == tends_num_real((n : Num) => f(SUC(n)), l)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Num) -> Real, tends_num_real((n : Num) => abs(f(n)), real_of_num(0)) == tends_num_real(f, real_of_num(0))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, tends_num_real(f, l) \226\134\146 tends_num_real((n : Num) => abs(f(n)), abs(l))
+      #|  (f : (Num) -> Real)((n : Num))
+      #|  (e : Real) == inv(inv(e))
+      #|  !((f : (Num) -> Real)((n : Num)) == real_of_num(0))
+      #|  real_of_num(0) < inv((f : (Num) -> Real)((n : Num)))
+      #|  inv((e : Real))
+      #|  real_of_num(0) < (f : (Num) -> Real)((n : Num))
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  inv((e : Real))
+      #|  (N : Num)
+      #|  (e : Real)
       #|  forall f. (forall y. ?N. forall n. n >= N ==> f(n) > y)\n        ==> (\\n. inv(f n)) --> &0
-      #|  &0 < e
+      #|  real_of_num(0) < (e : Real)
       #|  1
-      #|  n:num
-      #|  n:num
+      #|  (n : Num)
+      #|  (n : Num)
       #|  1
-      #|  (&1 + (inv(abs c) - &1)) pow n
-      #|  &1 + (&n * (inv(abs c) - &1))
-      #|  &n * (inv(abs c) - &1)
-      #|  &N * (inv(abs c) - &1)
-      #|  y < (&n * (inv(abs c) - &1))
-      #|  n:num
-      #|  N:num
-      #|  y:real
-      #|  N:num
-      #|  inv(abs c) - &1
-      #|  &0 < inv(abs c) - &1
-      #|  ~(abs(c) = &0)
-      #|  y:real
-      #|  inv(abs(c) pow n)
-      #|  n:num
+      #|  pow(real_of_num(1) + (inv(abs((c : Real))) - real_of_num(1)), (n : Num))
+      #|  real_of_num(1) + real_of_num((n : Num)) * (inv(abs((c : Real))) - real_of_num(1))
+      #|  real_of_num((n : Num)) * (inv(abs((c : Real))) - real_of_num(1))
+      #|  real_of_num((N : Num)) * (inv(abs((c : Real))) - real_of_num(1))
+      #|  (y : Real) < real_of_num((n : Num)) * (inv(abs((c : Real))) - real_of_num(1))
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (y : Real)
+      #|  (N : Num)
+      #|  inv(abs((c : Real))) - real_of_num(1)
+      #|  real_of_num(0) < inv(abs((c : Real))) - real_of_num(1)
+      #|  !(abs((c : Real)) == real_of_num(0))
+      #|  (y : Real)
+      #|  inv(pow(abs((c : Real)), (n : Num)))
+      #|  (n : Num)
       #|  forall n. abs(c) pow n = inv(inv(abs(c) pow n))
-      #|  c:real
-      #|  forall c. abs(c) < &1 ==> (\\n. abs(c) pow n) --> &0
-      #|  forall c. abs(c) < &1 ==> (\\n. c pow n) --> &0
-      #|  N + 1 <= n
-      #|  &N * e
-      #|  N + 1 <= n
-      #|  &0 < &n
-      #|  n:num
-      #|  N + 1
-      #|  N:num
-      #|  abs a
-      #|  e:real
-      #|  forall a. (\\n. a / &n) --> &0
-      #|  1 * n <= a * n ==> n <= a * n + b
-      #|  forall a b n. ~(a = 0) ==> n <= a * n + b
+      #|  (c : Real)
+      #|  \226\136\128 c : Real, abs(c) < real_of_num(1) \226\134\146 tends_num_real((n : Num) => pow(abs(c), n), real_of_num(0))
+      #|  \226\136\128 c : Real, abs(c) < real_of_num(1) \226\134\146 tends_num_real((n : Num) => pow(c, n), real_of_num(0))
+      #|  (N : Num) + 1 <= (n : Num)
+      #|  real_of_num((N : Num)) * (e : Real)
+      #|  (N : Num) + 1 <= (n : Num)
+      #|  real_of_num(0) < real_of_num((n : Num))
+      #|  (n : Num)
+      #|  (N : Num) + 1
+      #|  (N : Num)
+      #|  abs((a : Real))
+      #|  (e : Real)
+      #|  \226\136\128 a : Real, tends_num_real((n : Num) => a / real_of_num(n), real_of_num(0))
+      #|  1 * (n : Num) <= (a : Num) * n \226\134\146 n <= a * n + (b : Num)
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 n : Num, !(a == 0) \226\134\146 n <= a * n + b
       #|  forall f l. f --> l ==> forall a b. ~(a = 0) ==> (\\n. f(a * n + b)) --> l
       #|  forall f l. (f --> l) ==> forall n. (\\i. f(i) pow n) --> l pow n
-      #|  g(p + m:num):real
-      #|  p:num
-      #|  p:num
-      #|  g(p + m:num):real
-      #|  forall p. g(p + m:num) < lim g
-      #|  p + m:num
-      #|  p:num
-      #|  lim g - g(m)
-      #|  g --> lim g
-      #|  a <=> ~ ~a
-      #|  m:num
-      #|  f(p + m:num):real
-      #|  p:num
-      #|  p:num
-      #|  f(p + m:num):real
-      #|  forall p. lim f <= f(p + m:num)
-      #|  p + m:num
-      #|  p:num
-      #|  f(m) - lim f
-      #|  f --> lim f
-      #|  a <=> ~ ~a
-      #|  m:num
-      #|  g:num->real
-      #|  f:num->real
-      #|  lim g
-      #|  lim f
-      #|  g:num->real
-      #|  f:num->real
-      #|  (g:num->real) n
-      #|  (f:num->real) m
-      #|  m:num
-      #|  SUC n
-      #|  (f:num->real) (SUC n)
-      #|  (g:num->real) 0
-      #|  (f:num->real) 0
-      #|  bounded((mr1), (>=) :num->num->bool) g
-      #|  g(m:num):real
-      #|  m:num
-      #|  SUC n
-      #|  g(SUC n):real
-      #|  (f:num->real) n
-      #|  (g:num->real) 0
-      #|  (f:num->real) 0
-      #|  bounded((mr1), (>=) :num->num->bool) f
-      #|  g:num->real
-      #|  f:num->real
+      #|  (g : (Num) -> Real)((p : Num) + (m : Num))
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (g : (Num) -> Real)((p : Num) + (m : Num))
+      #|  \226\136\128 p : Num, (g : (Num) -> Real)(p + (m : Num)) < lim(g)
+      #|  (p : Num) + (m : Num)
+      #|  (p : Num)
+      #|  lim((g : (Num) -> Real)) - g((m : Num))
+      #|  tends_num_real((g : (Num) -> Real), lim(g))
+      #|  (a : Bool) == !!a
+      #|  (m : Num)
+      #|  (f : (Num) -> Real)((p : Num) + (m : Num))
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (f : (Num) -> Real)((p : Num) + (m : Num))
+      #|  \226\136\128 p : Num, lim((f : (Num) -> Real)) <= f(p + (m : Num))
+      #|  (p : Num) + (m : Num)
+      #|  (p : Num)
+      #|  (f : (Num) -> Real)((m : Num)) - lim(f)
+      #|  tends_num_real((f : (Num) -> Real), lim(f))
+      #|  (a : Bool) == !!a
+      #|  (m : Num)
+      #|  (g : (Num) -> Real)
+      #|  (f : (Num) -> Real)
+      #|  lim((g : (Num) -> Real))
+      #|  lim((f : (Num) -> Real))
+      #|  (g : (Num) -> Real)
+      #|  (f : (Num) -> Real)
+      #|  (g : (Num) -> Real)((n : Num))
+      #|  (f : (Num) -> Real)((m : Num))
+      #|  (m : Num)
+      #|  SUC((n : Num))
+      #|  (f : (Num) -> Real)(SUC((n : Num)))
+      #|  (g : (Num) -> Real)(0)
+      #|  (f : (Num) -> Real)(0)
+      #|  bounded((mr1, op_gt_eq), (g : (Num) -> Real))
+      #|  (g : (Num) -> Real)((m : Num))
+      #|  (m : Num)
+      #|  SUC((n : Num))
+      #|  (g : (Num) -> Real)(SUC((n : Num)))
+      #|  (f : (Num) -> Real)((n : Num))
+      #|  (g : (Num) -> Real)(0)
+      #|  (f : (Num) -> Real)(0)
+      #|  bounded((mr1, op_gt_eq), (f : (Num) -> Real))
+      #|  (g : (Num) -> Real)
+      #|  (f : (Num) -> Real)
       #|  forall f g. (forall n. f(SUC n) >= f(n)) /\\\n         (forall n. g(SUC n) <= g(n)) /\\\n         (forall n. f(n) <= g(n)) ==>\n                ?l m. l <= m /\\ ((forall n. f(n) <= l) /\\ f --> l) /\\\n                                ((forall n. m <= g(n)) /\\ g --> m)
-      #|  (\\n. f(n) - g(n)) --> &0
-      #|  m:real
-      #|  g:num->real
-      #|  l:real
-      #|  f:num->real
-      #|  l:real = m
-      #|  l:real
-      #|  m:real
-      #|  l:real
+      #|  tends_num_real((n : Num) => (f : (Num) -> Real)(n) - (g : (Num) -> Real)(n), real_of_num(0))
+      #|  (m : Real)
+      #|  (g : (Num) -> Real)
+      #|  (l : Real)
+      #|  (f : (Num) -> Real)
+      #|  (l : Real) == (m : Real)
+      #|  (l : Real)
+      #|  (m : Real)
+      #|  (l : Real)
       #|  forall f g. (forall n. f(SUC n) >= f(n)) /\\\n         (forall n. g(SUC n) <= g(n)) /\\\n         (forall n. f(n) <= g(n)) /\\\n         (\\n. f(n) - g(n)) --> &0 ==>\n                ?l. ((forall n. f(n) <= l) /\\ f --> l) /\\\n                    ((forall n. l <= g(n)) /\\ g --> l)
-      #|  a + b + c + d = (d + a) + (c + b)
+      #|  (a : Real) + ((b : Real) + ((c : Real) + (d : Real))) == d + a + (c + b)
       #|  abs(FST(f(N1 + N2:num)) - l) +\n                abs(SND(f(N1 + N2:num)) - l)
-      #|  forall n. (SND(f n)) - (FST(f n)) = (b - a) / ((& 2) pow n)
-      #|  SND((f:num->real#real) (N1 + N2))
-      #|  FST((f:num->real#real) (N1 + N2))
-      #|  N2:num
-      #|  d / &2
-      #|  N1:num
-      #|  d / &2
-      #|  (\\n:num. FST(f n :real#real)) --> l
-      #|  (\\n:num. SND(f n :real#real)) --> l
-      #|  l:real
-      #|  d:real
-      #|  l:real
+      #|  \226\136\128 n : Num, SND((f : (Num) -> (Real, Real))(n)) - FST(f(n)) == ((b : Real) - (a : Real)) / pow(real_of_num(2), n)
+      #|  SND((f : (Num) -> (Real, Real))((N1 : Num) + (N2 : Num)))
+      #|  FST((f : (Num) -> (Real, Real))((N1 : Num) + (N2 : Num)))
+      #|  (N2 : Num)
+      #|  (d : Real) / real_of_num(2)
+      #|  (N1 : Num)
+      #|  (d : Real) / real_of_num(2)
+      #|  tends_num_real((n : Num) => FST((f : (Num) -> (Real, Real))(n)), (l : Real))
+      #|  tends_num_real((n : Num) => SND((f : (Num) -> (Real, Real))(n)), (l : Real))
+      #|  (l : Real)
+      #|  (d : Real)
+      #|  (l : Real)
       #|  2
       #|  2
-      #|  &0 < &2
-      #|  &0
-      #|  \\n. (inv (&2 pow n))
-      #|  b - a
-      #|  \\n:num. b - a
+      #|  real_of_num(0) < real_of_num(2)
+      #|  real_of_num(0)
+      #|  (n : Num) => inv(pow(real_of_num(2), n))
+      #|  (b : Real) - (a : Real)
+      #|  (n : Num) => (b : Real) - (a : Real)
       #|  2
-      #|  ~(&2 = &0)
+      #|  !(real_of_num(2) == real_of_num(0))
       #|  2
       #|  2
-      #|  ~(&2 = &0) /\\ ~(&2 pow n = &0)
-      #|  x:real
-      #|  forall x y z. (x + y) - (x + z) = y - z
+      #|  !(real_of_num(2) == real_of_num(0)) && !(pow(real_of_num(2), (n : Num)) == real_of_num(0))
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, x + y - (x + z) == y - z
       #|  2
-      #|  ~(&2 = &0)
-      #|  &2
-      #|  forall n. SND(f n) - FST(f n) = (b - a) / (&2 pow n)
-      #|  forall n. SND(f(SUC n) :real#real) <= SND(f n)
-      #|  (FST(f(n:num)) + SND(f(n))) / &2
-      #|  ~P(FST((f:num->real#real) n),SND(f n))
-      #|  forall n. ~P(FST((f:num->real#real) n),SND(f n))
-      #|  forall n. FST(f n :real#real) <= FST(f(SUC n))
-      #|  forall n:num. FST(f n) <= SND(f n)
-      #|  \\n:num. SND(f(n) :real#real)
-      #|  \\n:num. FST(f(n) :real#real)
+      #|  !(real_of_num(2) == real_of_num(0))
+      #|  real_of_num(2)
+      #|  \226\136\128 n : Num, SND((f : (Num) -> (Real, Real))(n)) - FST(f(n)) == ((b : Real) - (a : Real)) / pow(real_of_num(2), n)
+      #|  \226\136\128 n : Num, SND((f : (Num) -> (Real, Real))(SUC(n))) <= SND(f(n))
+      #|  (FST((f : (Num) -> (Real, Real))((n : Num))) + SND(f(n))) / real_of_num(2)
+      #|  !(P : ((Real, Real)) -> Bool)((FST((f : (Num) -> (Real, Real))((n : Num))), SND(f(n))))
+      #|  \226\136\128 n : Num, !(P : ((Real, Real)) -> Bool)((FST((f : (Num) -> (Real, Real))(n)), SND(f(n))))
+      #|  \226\136\128 n : Num, FST((f : (Num) -> (Real, Real))(n)) <= FST(f(SUC(n)))
+      #|  \226\136\128 n : Num, FST((f : (Num) -> (Real, Real))(n)) <= SND(f(n))
+      #|  (n : Num) => SND((f : (Num) -> (Real, Real))(n))
+      #|  (n : Num) => FST((f : (Num) -> (Real, Real))(n))
       #|  \\fn (n:num). if P(FST fn,(FST fn + SND fn)/ &2) then\n                        ((FST fn + SND fn)/ &2,SND fn) else\n                        (FST fn,(FST fn + SND fn)/ &2)
-      #|  (a:real,(b:real))
-      #|  f:num->real#real
-      #|  a <=> ~ ~a
+      #|  ((a : Real), (b : Real))
+      #|  (f : (Num) -> (Real, Real))
+      #|  (a : Bool) == !!a
       #|  forall P. (forall a b c. a <= b /\\ b <= c /\\ P(a,b) /\\ P(b,c) ==> P(a,c)) /\\\n       (forall x. ?d. &0 < d /\\ forall a b. a <= x /\\ x <= b /\\ (b - a) < d ==> P(a,b))\n      ==> forall a b. a <= b ==> P(a,b)
-      #|  \\(x:real,y:real). P x y :bool
+      #|  GABS((f : ((Real, Real)) -> Bool) => \226\136\128 x : Real, \226\136\128 y : Real, GEQ(f((x, y)), (P : (Real, Real) -> Bool)(x, y)))
       #|  forall P. (forall a b c. a <= b /\\ b <= c /\\ P a b /\\ P b c ==> P a c) /\\\n       (forall x. ?d. &0 < d /\\ (forall a b. a <= x /\\ x <= b /\\ b - a < d ==> P a b))\n       ==> forall a b. a <= b ==> P a b
-      #|  f sums s <=> (\\n. sum(0,n) f) --> s
-      #|  summable f <=> ?s. f sums s
-      #|  suminf f = @s. f sums s
-      #|  l:real
-      #|  forall f l. f sums l ==> summable f
-      #|  forall f. summable f ==> f sums (suminf f)
-      #|  \\n. sum(0,n) f
-      #|  x:real
-      #|  summable f
-      #|  forall f x. f sums x ==> (x = suminf f)
-      #|  forall f x y. f sums x /\\ f sums y ==> (x = y)
-      #|  &0
-      #|  d:num
-      #|  m:num
-      #|  n:num
-      #|  e:real
+      #|  (sums : ((Num) -> Real, Real) -> Bool)((f : (Num) -> Real), (s : Real)) == tends_num_real((n : Num) => sum((0, n), f), s)
+      #|  (summable : ((Num) -> Real) -> Bool)((f : (Num) -> Real)) == (\226\136\131 s : Real, sums(f, s))
+      #|  (suminf : ((Num) -> Real) -> Real)((f : (Num) -> Real)) == select((s : Real) => sums(f, s))
+      #|  (l : Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, sums(f, l) \226\134\146 summable(f)
+      #|  \226\136\128 f : (Num) -> Real, summable(f) \226\134\146 sums(f, suminf(f))
+      #|  (n : Num) => sum((0, n), (f : (Num) -> Real))
+      #|  (x : Real)
+      #|  summable((f : (Num) -> Real))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 x : Real, sums(f, x) \226\134\146 x == suminf(f)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 x : Real, \226\136\128 y : Real, sums(f, x) && sums(f, y) \226\134\146 x == y
+      #|  real_of_num(0)
+      #|  (d : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (e : Real)
       #|  forall f n. (forall m. n <= m ==> (f(m) = &0)) ==>\n        f sums (sum(0,n) f)
-      #|  d:num
-      #|  m:num
-      #|  n:num
-      #|  a /\\ b /\\ c ==> d <=> c ==> a /\\ b ==> d
-      #|  sum(0,n) f
+      #|  (d : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (c \226\134\146 a && b \226\134\146 d)
+      #|  sum((0, (n : Num)), (f : (Num) -> Real))
       #|  forall f n. summable f /\\ (forall m. n <= m ==> &0 <= f(m))\n        ==> sum(0,n) f <= suminf f
-      #|  SUC n
+      #|  SUC((n : Num))
       #|  1
-      #|  sum(0,n + 1) f
+      #|  sum((0, (n : Num) + 1), (f : (Num) -> Real))
       #|  forall f n. summable f /\\ (forall m. n <= m ==> &0 < f(m))\n        ==> sum(0,n) f < suminf f
-      #|  k:num
-      #|  0 < k
-      #|  n:num
-      #|  n:num
-      #|  N:num
-      #|  N:num
+      #|  (k : Num)
+      #|  0 < (k : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (N : Num)
       #|  forall f k. summable f /\\ 0 < k ==>\n          (\\n. sum(n * k,k) f) sums (suminf f)
-      #|  e:real
+      #|  (e : Real)
       #|  2
-      #|  1:num
-      #|  forall f. summable f ==> (\\n. sum(2 * n,2) f) sums (suminf f)
-      #|  n:num
-      #|  (a + b) + (c + d) = (b + d) + (a + c)
-      #|  n:num
-      #|  N:num
-      #|  N:num
-      #|  forall f. summable f ==> forall k. (\\n. f(n + k)) sums (suminf f - sum(0,k) f)
-      #|  a - (b + c) = a - b - c
-      #|  (N + k) + d = k + N + d:num
-      #|  d:num
-      #|  n:num
-      #|  N + k:num
-      #|  N:num
-      #|  (a ==> b ==> c) ==> (a ==> b) ==> (a ==> c)
-      #|  forall f k. summable(\\n. f(n + k)) ==>\n         f sums (sum(0,k) f) + suminf (\\n. f(n + k))
-      #|  suminf f + (f(n) + f(n + 1))
-      #|  suminf f <= sum(0,(2 * (SUC N)) + n) f
-      #|  sum(0,n) f + (f(n) + f(n + 1))
-      #|  sum(0,n + 2) f
-      #|  (suminf f + (f(n) + f(n + 1))) <=\n                              sum(0,(2 * (SUC N)) + n) f
-      #|  (a + (b + c)) + d:num = b + (a + (c + d))
-      #|  2
-      #|  (2 * (SUC N)) + n
       #|  1
-      #|  sum(0,(2 * M) + n) f
+      #|  forall f. summable f ==> (\\n. sum(2 * n,2) f) sums (suminf f)
+      #|  (n : Num)
+      #|  (a : Real) + (b : Real) + ((c : Real) + (d : Real)) == b + d + (a + c)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  forall f. summable f ==> forall k. (\\n. f(n + k)) sums (suminf f - sum(0,k) f)
+      #|  (a : Real) - ((b : Real) + (c : Real)) == a - b - c
+      #|  (N : Num) + (k : Num) + (d : Num) == k + (N + d)
+      #|  (d : Num)
+      #|  (n : Num)
+      #|  (N : Num) + (k : Num)
+      #|  (N : Num)
+      #|  ((a : Bool) \226\134\146 (b : Bool) \226\134\146 (c : Bool)) \226\134\146 (a \226\134\146 b) \226\134\146 a \226\134\146 c
+      #|  forall f k. summable(\\n. f(n + k)) ==>\n         f sums (sum(0,k) f) + suminf (\\n. f(n + k))
+      #|  suminf((f : (Num) -> Real)) + (f((n : Num)) + f(n + 1))
+      #|  suminf((f : (Num) -> Real)) <= sum((0, 2 * SUC((N : Num)) + (n : Num)), f)
+      #|  sum((0, (n : Num)), (f : (Num) -> Real)) + (f(n) + f(n + 1))
+      #|  sum((0, (n : Num) + 2), (f : (Num) -> Real))
+      #|  (suminf f + (f(n) + f(n + 1))) <=\n                              sum(0,(2 * (SUC N)) + n) f
+      #|  (a : Num) + ((b : Num) + (c : Num)) + (d : Num) == b + (a + (c + d))
+      #|  2
+      #|  2 * SUC((N : Num)) + (n : Num)
+      #|  1
+      #|  sum((0, 2 * (M : Num) + (n : Num)), (f : (Num) -> Real))
       #|  2
       #|  2
       #|  2
-      #|  M = SUC N
-      #|  N:num
-      #|  N:num
-      #|  sum(0,n + 2) f <= sum(0,(2 * (SUC N)) + n) f
-      #|  N:num
+      #|  (M : Num) == SUC((N : Num))
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  sum((0, (n : Num) + 2), (f : (Num) -> Real)) <= sum((0, 2 * SUC((N : Num)) + n), f)
+      #|  (N : Num)
       #|  0
-      #|  f(n) + f(n + 1)
+      #|  (f : (Num) -> Real)((n : Num)) + f(n + 1)
       #|  forall f n. summable f /\\\n         (forall d. &0 < (f(n + (2 * d))) +\n               f(n + ((2 * d) + 1)))\n        ==> sum(0,n) f < suminf f
-      #|  sum(0,n) y
-      #|  n:num
-      #|  sum(0,n) x
-      #|  n:num
+      #|  sum((0, (n : Num)), (y : (Num) -> Real))
+      #|  (n : Num)
+      #|  sum((0, (n : Num)), (x : (Num) -> Real))
+      #|  (n : Num)
       #|  forall x x0 y y0. x sums x0 /\\ y sums y0 ==> (\\n. x(n) + y(n)) sums (x0 + y0)
-      #|  (\\n. (\\n. c) n * (\\n. sum(0,n) x) n) --> c * x0
-      #|  forall x x0 c. x sums x0 ==> (\\n. c * x(n)) sums (c * x0)
-      #|  forall x x0. x sums x0 ==> (\\n. --(x n)) sums --x0
+      #|  tends_num_real((n : Num) => ((n : Num) => (c : Real))(n) * ((n : Num) => sum((0, n), (x : (Num) -> Real)))(n), c * (x0 : Real))
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 x0 : Real, \226\136\128 c : Real, sums(x, x0) \226\134\146 sums((n : Num) => c * x(n), c * x0)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 x0 : Real, sums(x, x0) \226\134\146 sums((n : Num) => -x(n), -x0)
       #|  forall x x0 y y0. x sums x0 /\\ y sums y0 ==> (\\n. x(n) - y(n)) sums (x0 - y0)
-      #|  forall x x0 c. x sums x0 ==> (\\n. x(n) / c) sums (x0 / c)
-      #|  p:num
-      #|  n:num
-      #|  m:num
-      #|  m:num
-      #|  N:num
-      #|  N:num
-      #|  ((a ==> b) <=> (a ==> c)) <=> a ==> (b <=> c)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 x0 : Real, \226\136\128 c : Real, sums(x, x0) \226\134\146 sums((n : Num) => x(n) / c, x0 / c)
+      #|  (p : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (((a : Bool) \226\134\146 (b : Bool)) == (a \226\134\146 (c : Bool))) == (a \226\134\146 b == c)
       #|  forall f. summable f <=>\n          forall e. &0 < e ==> ?N. forall m n. m >= N ==> abs(sum(m,n) f) < e
-      #|  SUC 0
-      #|  n:num
-      #|  n:num
-      #|  N:num
-      #|  N:num
-      #|  summable f
-      #|  e:real
-      #|  forall f. summable f ==> f --> &0
-      #|  N1 + N2:num
-      #|  abs(sum(m,n) g)
-      #|  N1 + N2:num
-      #|  m:num
-      #|  p:num
-      #|  sum(m,n) g
-      #|  sum(m,n)(\\k. abs(f k))
-      #|  N1 + N2:num
-      #|  N2:num
-      #|  e:real
-      #|  N1:num
+      #|  SUC(0)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  summable((f : (Num) -> Real))
+      #|  (e : Real)
+      #|  \226\136\128 f : (Num) -> Real, summable(f) \226\134\146 tends_num_real(f, real_of_num(0))
+      #|  (N1 : Num) + (N2 : Num)
+      #|  abs(sum(((m : Num), (n : Num)), (g : (Num) -> Real)))
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (m : Num)
+      #|  (p : Num)
+      #|  sum(((m : Num), (n : Num)), (g : (Num) -> Real))
+      #|  sum(((m : Num), (n : Num)), (k : Num) => abs((f : (Num) -> Real)(k)))
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (N2 : Num)
+      #|  (e : Real)
+      #|  (N1 : Num)
       #|  forall f g. (?N. forall n. n >= N ==> abs(f(n)) <= g(n)) /\\ summable g ==>\n            summable f
-      #|  forall n. abs(f(n)) = abs((\\k:num. abs(f k)) n)
+      #|  \226\136\128 n : Num, abs((f : (Num) -> Real)(n)) == abs(((k : Num) => abs(f(k)))(n))
       #|  forall f g. (?N. forall n. n >= N ==> abs(f(n)) <= g(n)) /\\ summable g ==>\n            summable (\\k. abs(f k))
       #|  0
-      #|  \\n. sum(0,n) g
-      #|  \\n. sum(0,n) f
+      #|  (n : Num) => sum((0, n), (g : (Num) -> Real))
+      #|  (n : Num) => sum((0, n), (f : (Num) -> Real))
       #|  forall f g. (forall n. f(n) <= g(n)) /\\ summable f /\\ summable g\n        ==> suminf f <= suminf g
-      #|  abs(f(n:num))
-      #|  n:num
-      #|  g:num->real
-      #|  summable f
+      #|  abs((f : (Num) -> Real)((n : Num)))
+      #|  (n : Num)
+      #|  (g : (Num) -> Real)
+      #|  summable((f : (Num) -> Real))
       #|  forall f g. (forall n. abs(f n) <= g(n)) /\\ summable g ==>\n                summable f /\\ suminf f <= suminf g
-      #|  sum(m,n)(\\m. abs(f m))
-      #|  N:num
-      #|  N:num
-      #|  e:real
-      #|  forall f. summable (\\n. abs(f n)) ==> summable f
-      #|  n:num
+      #|  sum(((m : Num), (n : Num)), (m : Num) => abs((f : (Num) -> Real)(m)))
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Num) -> Real, summable((n : Num) => abs(f(n))) \226\134\146 summable(f)
+      #|  (n : Num)
       #|  0
-      #|  \\n. sum(0,n)(\\n. abs(f n))
-      #|  \\n. abs(sum(0,n)f)
+      #|  (n : Num) => sum((0, n), (n : Num) => abs((f : (Num) -> Real)(n)))
+      #|  (n : Num) => abs(sum((0, n), (f : (Num) -> Real)))
       #|  forall f. summable(\\n. abs(f n)) ==> abs(suminf f) <= suminf(\\n. abs(f n))
-      #|  (a + b) + (c + d) = (c + b) + (d + a)
-      #|  forall p. (p / (x - &1)) * (x - &1) = p
-      #|  x - &1
-      #|  q:real
-      #|  p:real
-      #|  q:real
-      #|  p:real
-      #|  ~(x - &1 = &0)
+      #|  (a : Real) + (b : Real) + ((c : Real) + (d : Real)) == c + b + (d + a)
+      #|  \226\136\128 p : Real, p / ((x : Real) - real_of_num(1)) * (x - real_of_num(1)) == p
+      #|  (x : Real) - real_of_num(1)
+      #|  (q : Real)
+      #|  (p : Real)
+      #|  (q : Real)
+      #|  (p : Real)
+      #|  !((x : Real) - real_of_num(1) == real_of_num(0))
       #|  forall x. ~(x = &1) ==>\n        forall n. (sum(0,n) (\\n. x pow n) = ((x pow n) - &1) / (x - &1))
-      #|  (\\n. (\\n. &1) n - (\\n. x pow n) n) --> &1 - &0
+      #|  tends_num_real((n : Num) => ((n : Num) => real_of_num(1))(n) - ((n : Num) => pow((x : Real), n))(n), real_of_num(1) - real_of_num(0))
       #|  (\\n. (\\n. &1 - x pow n) n / (\\n. &1 - x) n) --> &1 / (&1 - x)
-      #|  ~(x - &1 = &0)
+      #|  !((x : Real) - real_of_num(1) == real_of_num(0))
       #|  x = &1
-      #|  forall x. abs(x) < &1 ==> (\\n. x pow n) sums inv(&1 - x)
-      #|  abs(y)
-      #|  --c
+      #|  \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 sums((n : Num) => pow(x, n), inv(real_of_num(1) - x))
+      #|  abs((y : Real))
+      #|  -(c : Real)
       #|  forall c x y. c <= &0 ==> abs(x) <= c * abs(y) ==> (x = &0)
-      #|  &0 < c
-      #|  (abs(f(N:num)) / (c pow N)) * inv(&1 - c)
-      #|  a * (b * c) = b * (a * c)
-      #|  c * abs(f(N + d:num))
-      #|  d:num
-      #|  d:num
-      #|  ~(c pow N = &0)
-      #|  (a * b) * (c * d) = (a * d) * (b * c)
-      #|  d:num
-      #|  n:num
-      #|  N:num
-      #|  \\n. (abs(f N) / c pow N) * (c pow n)
-      #|  SUC N
-      #|  n:num
-      #|  forall n. n >= (SUC N) ==> (f(n) = &0)
-      #|  forall n. n >= N ==> (f(SUC n) = &0)
-      #|  e:real
-      #|  &0
-      #|  c:real
+      #|  real_of_num(0) < (c : Real)
+      #|  abs((f : (Num) -> Real)((N : Num))) / pow((c : Real), N) * inv(real_of_num(1) - c)
+      #|  (a : Real) * ((b : Real) * (c : Real)) == b * (a * c)
+      #|  (c : Real) * abs((f : (Num) -> Real)((N : Num) + (d : Num)))
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  !(pow((c : Real), (N : Num)) == real_of_num(0))
+      #|  (a : Real) * (b : Real) * ((c : Real) * (d : Real)) == a * d * (b * c)
+      #|  (d : Num)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (n : Num) => abs((f : (Num) -> Real)((N : Num))) / pow((c : Real), N) * pow(c, n)
+      #|  SUC((N : Num))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, n >= SUC((N : Num)) \226\134\146 (f : (Num) -> Real)(n) == real_of_num(0)
+      #|  \226\136\128 n : Num, n >= (N : Num) \226\134\146 (f : (Num) -> Real)(SUC(n)) == real_of_num(0)
+      #|  (e : Real)
+      #|  real_of_num(0)
+      #|  (c : Real)
       #|  forall f c N. c < &1 /\\\n           (forall n. n >= N ==> abs(f(SUC n)) <= c * abs(f(n))) ==>\n       summable f
-      #|  \\r:num. b:real
-      #|  n:num
+      #|  (r : Num) => (b : Real)
+      #|  (n : Num)
       #|  forall f l n b.\n        f sums l /\\ (forall m. abs(sum(n,m) f) <= b)\n        ==> abs(l - sum(0,n) f) <= b
       #|  (f tends_real_real l)(x0) <=>\n        (f tends l)(mtop(mr1),tendsto(mr1,x0))
-      #|  (tends_real_real)
-      #|  x0:real
+      #|  tends_real_real
+      #|  (x0 : Real)
       #|  forall f y0 x0. (f --> y0)(x0) <=>\n        forall e. &0 < e ==>\n            ?d. &0 < d /\\ forall x. &0 < abs(x - x0) /\\ abs(x - x0) < d ==>\n                abs(f(x) - y0) < e
-      #|  z:real
-      #|  z:real
-      #|  e:real
-      #|  x:real
-      #|  forall k x. ((\\x. k) --> k)(x)
+      #|  (z : Real)
+      #|  (z : Real)
+      #|  (e : Real)
+      #|  (x : Real)
+      #|  \226\136\128 k : Real, \226\136\128 x : Real, tends_real_real((x : Real) => k, k, x)
       #|  forall f g l m. (f --> l)(x) /\\ (g --> m)(x) ==>\n      ((\\x. f(x) + g(x)) --> (l + m))(x)
       #|  forall f g l m. (f --> l)(x) /\\ (g --> m)(x) ==>\n      ((\\x. f(x) * g(x)) --> (l * m))(x)
-      #|  forall f l. (f --> l)(x) <=> ((\\x. --(f(x))) --> --l)(x)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, tends_real_real(f, l, (x : Real)) == tends_real_real((x : Real) => -f(x), -l, x)
       #|  forall f l. (f --> l)(x) /\\ ~(l = &0) ==>\n        ((\\x. inv(f(x))) --> inv l)(x)
       #|  forall f g l m. (f --> l)(x) /\\ (g --> m)(x) ==>\n      ((\\x. f(x) - g(x)) --> (l - m))(x)
       #|  forall f g l m. (f --> l)(x) /\\ (g --> m)(x) /\\ ~(m = &0) ==>\n      ((\\x. f(x) / g(x)) --> (l / m))(x)
-      #|  forall f l x. (f --> l)(x) <=> ((\\x. f(x) - l) --> &0)(x)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, \226\136\128 x : Real, tends_real_real(f, l, x) == tends_real_real((x : Real) => f(x) - l, real_of_num(0), x)
       #|  forall f l m n x.\n      (forall r. m <= r /\\ r < m + n ==> (f r --> l r)(x))\n      ==> ((\\x. sum(m,n) (\\r. f r x)) --> sum(m,n) l)(x)
-      #|  e:real
-      #|  e:real
-      #|  forall x0. ((\\x. x) --> x0)(x0)
-      #|  forall f l m x. (f --> l)(x) /\\ (f --> m)(x) ==> (l = m)
-      #|  (a ==> b <=> a ==> c) <=> a ==> (b <=> c)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 x0 : Real, tends_real_real((x : Real) => x, x0, x0)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, \226\136\128 m : Real, \226\136\128 x : Real, tends_real_real(f, l, x) && tends_real_real(f, m, x) \226\134\146 l == m
+      #|  (((a : Bool) \226\134\146 (b : Bool)) == (a \226\134\146 (c : Bool))) == (a \226\134\146 b == c)
       #|  forall f g l x0. (forall x. ~(x = x0) ==> (f x = g x)) ==>\n        ((f --> l)(x0) <=> (g --> l)(x0))
-      #|  b:real
-      #|  l:real
-      #|  (g:real->real) x
-      #|  (f:real->real) x
-      #|  abs(f(x:real) - g(x)) + abs(g(x) - l)
-      #|  (e / &2) + (e / &2)
-      #|  x:real
-      #|  b:real
-      #|  b:real
-      #|  d:real
-      #|  c:real
-      #|  c:real
-      #|  d:real
-      #|  e / &2
-      #|  e:real
+      #|  (b : Real)
+      #|  (l : Real)
+      #|  (g : (Real) -> Real)((x : Real))
+      #|  (f : (Real) -> Real)((x : Real))
+      #|  abs((f : (Real) -> Real)((x : Real)) - (g : (Real) -> Real)(x)) + abs(g(x) - (l : Real))
+      #|  (e : Real) / real_of_num(2) + e / real_of_num(2)
+      #|  (x : Real)
+      #|  (b : Real)
+      #|  (b : Real)
+      #|  (d : Real)
+      #|  (c : Real)
+      #|  (c : Real)
+      #|  (d : Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  (e : Real)
       #|  forall f g x0 l. ((\\x. f(x) - g(x)) --> &0)(x0) /\\ (g --> l)(x0)\n        ==> (f --> l)(x0)
       #|  (f diffl l)(x) <=> ((\\h. (f(x+h) - f(x)) / h) --> l)(&0)
-      #|  f contl x <=> ((\\h. f(x + h)) --> f(x))(&0)
-      #|  f differentiable x <=> ?l. (f diffl l)(x)
+      #|  (contl : ((Real) -> Real, Real) -> Bool)((f : (Real) -> Real), (x : Real)) == tends_real_real((h : Real) => f(x + h), f(x), real_of_num(0))
+      #|  (differentiable : ((Real) -> Real, Real) -> Bool)((f : (Real) -> Real), (x : Real)) == (\226\136\131 l : Real, diffl(f, l, x))
       #|  forall f l m x. (f diffl l)(x) /\\ (f diffl m)(x) ==> (l = m)
-      #|  e:real
-      #|  e:real
-      #|  l:real
-      #|  (f(x + h) - f(x)) / h
-      #|  h:real
-      #|  (\\h:real. h) h
-      #|  z:real
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (l : Real)
+      #|  ((f : (Real) -> Real)((x : Real) + (h : Real)) - f(x)) / h
+      #|  (h : Real)
+      #|  ((h : Real) => h)((h : Real))
+      #|  (z : Real)
       #|  ((\\h. f(x + h) - f(x)) --> &0)(&0) <=>\n                ((\\h. ((f(x + h) - f(x)) / h) * h) --> &0)(&0)
-      #|  forall f l x. (f diffl l)(x) ==> f contl x
-      #|  k:real
-      #|  d:real
-      #|  d:real
-      #|  (a ==> b <=> a ==> c) <=> a ==> (b <=> c)
-      #|  forall f x. f contl x <=> (f --> f(x))(x)
-      #|  forall x. (\\x. x) contl x
-      #|  forall x. (\\x. k) contl x
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, \226\136\128 x : Real, diffl(f, l, x) \226\134\146 contl(f, x)
+      #|  (k : Real)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  (((a : Bool) \226\134\146 (b : Bool)) == (a \226\134\146 (c : Bool))) == (a \226\134\146 b == c)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, contl(f, x) == tends_real_real(f, f(x), x)
+      #|  \226\136\128 x : Real, contl((x : Real) => x, x)
+      #|  \226\136\128 x : Real, contl((x : Real) => (k : Real), x)
       #|  forall x. f contl x /\\ g contl x ==> (\\x. f(x) + g(x)) contl x
       #|  forall x. f contl x /\\ g contl x ==> (\\x. f(x) * g(x)) contl x
-      #|  forall x. f contl x ==> (\\x. --(f(x))) contl x
+      #|  \226\136\128 x : Real, contl((f : (Real) -> Real), x) \226\134\146 contl((x : Real) => -f(x), x)
       #|  forall x. f contl x /\\ ~(f x = &0) ==> (\\x. inv(f(x))) contl x
       #|  forall x. f contl x /\\ g contl x ==> (\\x. f(x) - g(x)) contl x
       #|  forall x. f contl x /\\ g contl x /\\ ~(g x = &0) ==>\n        (\\x. f(x) / g(x)) contl x
-      #|  abs(a - b) < e ==> abs(abs a - abs b) < e
-      #|  forall f x. f contl x ==> (\\x. abs(f x)) contl x
-      #|  ~(&0 < abs(f(x + h) - f(x)))
-      #|  &0 < abs(f(x + h) - f(x))
-      #|  &0 < abs(f(x + h) - f(x))
-      #|  h:real
-      #|  c:real
-      #|  c:real
-      #|  d:real
-      #|  d:real
-      #|  e:real
+      #|  abs((a : Real) - (b : Real)) < (e : Real) \226\134\146 abs(abs(a) - abs(b)) < e
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, contl(f, x) \226\134\146 contl((x : Real) => abs(f(x)), x)
+      #|  !(real_of_num(0) < abs((f : (Real) -> Real)((x : Real) + (h : Real)) - f(x)))
+      #|  real_of_num(0) < abs((f : (Real) -> Real)((x : Real) + (h : Real)) - f(x))
+      #|  real_of_num(0) < abs((f : (Real) -> Real)((x : Real) + (h : Real)) - f(x))
+      #|  (h : Real)
+      #|  (c : Real)
+      #|  (c : Real)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  (e : Real)
       #|  forall f g x. f contl x /\\ g contl (f x) ==> (\\x. g(f x)) contl x
-      #|  y:real
-      #|  f(u:real) < f(x)
-      #|  v - u
-      #|  y < f(x:real)
-      #|  u - x
-      #|  y:real
-      #|  f(x:real) <= f(v)
-      #|  f(x:real) <= y
-      #|  v - u
-      #|  f(v:real) < y
-      #|  v - x
-      #|  y:real
-      #|  (f:real->real) x
-      #|  v:real
-      #|  u:real
-      #|  d:real
-      #|  d:real
-      #|  abs(y - f(x:real))
-      #|  forall x. a <= x /\\ x <= b ==> f contl x
-      #|  x:real
-      #|  forall x. ~(a <= x /\\ x <= b /\\ (f(x) = (y:real)))
-      #|  v:real
-      #|  u:real
-      #|  ~(a <= x /\\ x <= b)
-      #|  v:real
-      #|  u:real
-      #|  &1
-      #|  a <= x /\\ x <= b
-      #|  x:real
-      #|  u:real
-      #|  w:real
-      #|  (f:real->real) v
-      #|  y:real
-      #|  v <= w
-      #|  u <= v
-      #|  w:real
-      #|  v:real
-      #|  u:real
-      #|  b:real
-      #|  a:real
+      #|  (y : Real)
+      #|  (f : (Real) -> Real)((u : Real)) < f((x : Real))
+      #|  (v : Real) - (u : Real)
+      #|  (y : Real) < (f : (Real) -> Real)((x : Real))
+      #|  (u : Real) - (x : Real)
+      #|  (y : Real)
+      #|  (f : (Real) -> Real)((x : Real)) <= f((v : Real))
+      #|  (f : (Real) -> Real)((x : Real)) <= (y : Real)
+      #|  (v : Real) - (u : Real)
+      #|  (f : (Real) -> Real)((v : Real)) < (y : Real)
+      #|  (v : Real) - (x : Real)
+      #|  (y : Real)
+      #|  (f : (Real) -> Real)((x : Real))
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  abs((y : Real) - (f : (Real) -> Real)((x : Real)))
+      #|  \226\136\128 x : Real, (a : Real) <= x && x <= (b : Real) \226\134\146 contl((f : (Real) -> Real), x)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, !((a : Real) <= x && x <= (b : Real) && (f : (Real) -> Real)(x) == (y : Real))
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  !((a : Real) <= (x : Real) && x <= (b : Real))
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  real_of_num(1)
+      #|  (a : Real) <= (x : Real) && x <= (b : Real)
+      #|  (x : Real)
+      #|  (u : Real)
+      #|  (w : Real)
+      #|  (f : (Real) -> Real)((v : Real))
+      #|  (y : Real)
+      #|  (v : Real) <= (w : Real)
+      #|  (u : Real) <= (v : Real)
+      #|  (w : Real)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (b : Real)
+      #|  (a : Real)
       #|  \\(u,v). a <= u /\\ u <= v /\\ v <= b ==> ~(f(u) <= y /\\ y <= f(v))
       #|  forall f a b y. a <= b /\\\n             (f(a) <= y /\\ y <= f(b)) /\\\n             (forall x. a <= x /\\ x <= b ==> f contl x)\n        ==> (?x. a <= x /\\ x <= b /\\ (f(x) = y))
-      #|  --y
-      #|  b:real
-      #|  a:real
-      #|  \\x:real. --(f x)
+      #|  -(y : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => -(f : (Real) -> Real)(x)
       #|  forall f a b y. (a <= b) /\\ (f(b) <= y /\\ y <= f(a)) /\\\n             (forall x. a <= x /\\ x <= b ==> f contl x) ==>\n        ?x. a <= x /\\ x <= b /\\ (f(x) = y)
-      #|  forall k x. ((\\x. k) diffl &0)(x)
-      #|  (g(x + h) - g(x)) / h
-      #|  h:real
-      #|  (f(x + h) - f(x)) / h
-      #|  h:real
+      #|  \226\136\128 k : Real, \226\136\128 x : Real, diffl((x : Real) => k, real_of_num(0), x)
+      #|  ((g : (Real) -> Real)((x : Real) + (h : Real)) - g(x)) / h
+      #|  (h : Real)
+      #|  ((f : (Real) -> Real)((x : Real) + (h : Real)) - f(x)) / h
+      #|  (h : Real)
       #|  forall f g l m x. (f diffl l)(x) /\\ (g diffl m)(x) ==>\n                   ((\\x. f(x) + g(x)) diffl (l + m))(x)
-      #|  l:real
-      #|  g(x:real):real
-      #|  (f(x + h) - f(x)) / h
-      #|  f(x + h):real
-      #|  (g(x + h) - g(x)) / h
-      #|  h:real
-      #|  ((f(x + h) - f(x)) / h) * g(x)
-      #|  ((g(x + h) - g(x)) / h) * f(x + h)
-      #|  h:real
+      #|  (l : Real)
+      #|  (g : (Real) -> Real)((x : Real))
+      #|  ((f : (Real) -> Real)((x : Real) + (h : Real)) - f(x)) / h
+      #|  (f : (Real) -> Real)((x : Real) + (h : Real))
+      #|  ((g : (Real) -> Real)((x : Real) + (h : Real)) - g(x)) / h
+      #|  (h : Real)
+      #|  ((f : (Real) -> Real)((x : Real) + (h : Real)) - f(x)) / h * (g : (Real) -> Real)(x)
+      #|  ((g : (Real) -> Real)((x : Real) + (h : Real)) - g(x)) / h * (f : (Real) -> Real)(x + h)
+      #|  (h : Real)
       #|  forall a b c d e. ((a * b) + (c * d)) / e = ((b / e) * a) + ((c / e) * d)
-      #|  (a + b) + (c + d) = (b + c) + (a + d)
+      #|  (a : Real) + (b : Real) + ((c : Real) + (d : Real)) == b + c + (a + d)
       #|  forall a b c d. (a * b) - (c * d) = ((a * b) - (a * d)) + ((a * d) - (c * d))
       #|  forall f g l m x. (f diffl l)(x) /\\ (g diffl m)(x) ==>\n                  ((\\x. f(x) * g(x)) diffl ((l * g(x)) + (m * f(x))))(x)
-      #|  (a <=> b) ==> a ==> b
-      #|  x:real
-      #|  c:real
+      #|  (a : Bool) == (b : Bool) \226\134\146 a \226\134\146 b
+      #|  (x : Real)
+      #|  (c : Real)
       #|  forall f c l x. (f diffl l)(x) ==> ((\\x. c * f(x)) diffl (c * l))(x)
       #|  forall f l x. (f diffl l)(x) ==> ((\\x. --(f x)) diffl --l)(x)
       #|  forall f g l m x. (f diffl l)(x) /\\ (g diffl m)(x) ==>\n                   ((\\x. f(x) - g(x)) diffl (l - m))(x)
-      #|  g contl x
-      #|  g:real->real
-      #|  z:real
+      #|  contl((g : (Real) -> Real), (x : Real))
+      #|  (g : (Real) -> Real)
+      #|  (z : Real)
       #|  \\z. if z = x then l else (f(z) - f(x)) / (z - x)
       #|  forall f l x. (f diffl l)(x) <=>\n      ?g. (forall z. f(z) - f(x) = g(z) * (z - x)) /\\ g contl x /\\ (g(x) = l)
-      #|  z:real
-      #|  g' contl x
-      #|  f' contl (g(x:real))
-      #|  g contl x
+      #|  (z : Real)
+      #|  contl((g' : (Real) -> Real), (x : Real))
+      #|  contl((f' : (Real) -> Real), (g : (Real) -> Real)((x : Real)))
+      #|  contl((g : (Real) -> Real), (x : Real))
       #|  \\z. if z = x then l * m else (f(g(z):real) - f(g(x))) / (z - x)
-      #|  f':real->real
-      #|  g':real->real
+      #|  (f' : (Real) -> Real)
+      #|  (g' : (Real) -> Real)
       #|  forall f g l m x.\n     (f diffl l)(g x) /\\ (g diffl m)(x) ==> ((\\x. f(g x)) diffl (l * m))(x)
-      #|  &1
-      #|  e:real
-      #|  forall x. ((\\x. x) diffl &1)(x)
+      #|  real_of_num(1)
+      #|  (e : Real)
+      #|  \226\136\128 x : Real, diffl((x : Real) => x, real_of_num(1), x)
       #|  1
       #|  1
-      #|  n:num
-      #|  x:real
-      #|  x:real
-      #|  x:real
+      #|  (n : Num)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (x : Real)
       #|  forall n x. ((\\x. x pow n) diffl (&n * (x pow (n - 1))))(x)
-      #|  h:real
-      #|  x:real
-      #|  h:real
-      #|  x + h
-      #|  h:real
-      #|  inv(x)
-      #|  inv(x + h)
-      #|  h:real
-      #|  inv(x + h) * inv(x)
-      #|  h:real
-      #|  (--)
-      #|  ~(x = &0)
-      #|  (a * b) * (c * d) = (a * d) * (c * b)
-      #|  ~(x + h = &0)
-      #|  ~(x = &0)
-      #|  (a * b) * (c * d) = (c * b) * (d * a)
-      #|  abs(h) < abs(--h)
-      #|  ~(x + h = &0)
-      #|  &0
-      #|  h:real
-      #|  abs(x)
-      #|  e:real
-      #|  \\h. --(inv(x + h) * inv(x))
+      #|  (h : Real)
+      #|  (x : Real)
+      #|  (h : Real)
+      #|  (x : Real) + (h : Real)
+      #|  (h : Real)
+      #|  inv((x : Real))
+      #|  inv((x : Real) + (h : Real))
+      #|  (h : Real)
+      #|  inv((x : Real) + (h : Real)) * inv(x)
+      #|  (h : Real)
+      #|  op_minus_minus
+      #|  !((x : Real) == real_of_num(0))
+      #|  (a : Real) * (b : Real) * ((c : Real) * (d : Real)) == a * d * (c * b)
+      #|  !((x : Real) + (h : Real) == real_of_num(0))
+      #|  !((x : Real) == real_of_num(0))
+      #|  (a : Real) * (b : Real) * ((c : Real) * (d : Real)) == c * b * (d * a)
+      #|  abs((h : Real)) < abs(-h)
+      #|  !((x : Real) + (h : Real) == real_of_num(0))
+      #|  real_of_num(0)
+      #|  (h : Real)
+      #|  abs((x : Real))
+      #|  (e : Real)
+      #|  (h : Real) => -(inv((x : Real) + h) * inv(x))
       #|  forall x. ~(x = &0) ==> ((\\x. inv(x)) diffl (--(inv(x) pow 2)))(x)
-      #|  x * (x + h)
+      #|  (x : Real) * (x + (h : Real))
       #|  forall f l x. (f diffl l)(x) /\\ ~(f(x) = &0) ==>\n        ((\\x. inv(f x)) diffl --(l / (f(x) pow 2)))(x)
-      #|  (f diffl l)(x)
-      #|  x:real
-      #|  m:real
-      #|  g:real->real
+      #|  diffl((f : (Real) -> Real), (l : Real), (x : Real))
+      #|  (x : Real)
+      #|  (m : Real)
+      #|  (g : (Real) -> Real)
       #|  forall f g l m. (f diffl l)(x) /\\ (g diffl m)(x) /\\ ~(g(x) = &0) ==>\n    ((\\x. f(x) / g(x)) diffl (((l * g(x)) - (m * f(x))) / (g(x) pow 2)))(x)
-      #|  m + n:num
-      #|  n:num
-      #|  n:num
+      #|  (m : Num) + (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
       #|  forall f f' m n x. (forall r. m <= r /\\ r < (m + n)\n                 ==> ((\\x. f r x) diffl (f' r x))(x))\n     ==> ((\\x. sum(m,n)(\\n. f n x)) diffl (sum(m,n) (\\r. f' r x)))(x)
-      #|  v - z
-      #|  v - x
-      #|  v - u
-      #|  z:real = x
-      #|  abs(f(x:real)) + (abs(f(z) - f(x)))
-      #|  abs(f(z:real))
-      #|  (f:real->real) x
-      #|  f(z:real) - f(x)
-      #|  z - x
-      #|  z:real
-      #|  abs(f(x:real)) + &1
-      #|  v:real
-      #|  u:real
-      #|  d:real
-      #|  d:real
-      #|  &1
-      #|  x:real
-      #|  forall x. a <= x /\\ x <= b ==> f contl x
-      #|  v:real
-      #|  u:real
-      #|  ~(a <= x /\\ x <= b)
-      #|  v:real
-      #|  u:real
-      #|  &1
-      #|  a <= x /\\ x <= b
-      #|  x:real
-      #|  M2:real
-      #|  v:real
-      #|  x:real
-      #|  x:real
-      #|  M1:real
-      #|  M1:real
-      #|  v:real
-      #|  x:real
-      #|  x:real
-      #|  M2:real
-      #|  M2:real
-      #|  M1:real
-      #|  M2:real
-      #|  M1:real
-      #|  u:real
-      #|  a <= v
-      #|  w:real
-      #|  v <= b
-      #|  w:real
-      #|  v:real
-      #|  u:real
-      #|  b:real
-      #|  a:real
+      #|  (v : Real) - (z : Real)
+      #|  (v : Real) - (x : Real)
+      #|  (v : Real) - (u : Real)
+      #|  (z : Real) == (x : Real)
+      #|  abs((f : (Real) -> Real)((x : Real))) + abs(f((z : Real)) - f(x))
+      #|  abs((f : (Real) -> Real)((z : Real)))
+      #|  (f : (Real) -> Real)((x : Real))
+      #|  (f : (Real) -> Real)((z : Real)) - f((x : Real))
+      #|  (z : Real) - (x : Real)
+      #|  (z : Real)
+      #|  abs((f : (Real) -> Real)((x : Real))) + real_of_num(1)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  real_of_num(1)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, (a : Real) <= x && x <= (b : Real) \226\134\146 contl((f : (Real) -> Real), x)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  !((a : Real) <= (x : Real) && x <= (b : Real))
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  real_of_num(1)
+      #|  (a : Real) <= (x : Real) && x <= (b : Real)
+      #|  (x : Real)
+      #|  (M2 : Real)
+      #|  (v : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (M1 : Real)
+      #|  (M1 : Real)
+      #|  (v : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (M2 : Real)
+      #|  (M2 : Real)
+      #|  (M1 : Real)
+      #|  (M2 : Real)
+      #|  (M1 : Real)
+      #|  (u : Real)
+      #|  (a : Real) <= (v : Real)
+      #|  (w : Real)
+      #|  (v : Real) <= (b : Real)
+      #|  (w : Real)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (b : Real)
+      #|  (a : Real)
       #|  \\(u,v). a <= u /\\ u <= v /\\ v <= b ==>\n               ?M. forall x. u <= x /\\ x <= v ==> f x <= M
       #|  forall f a b. (a <= b /\\ forall x. a <= x /\\ x <= b ==> f contl x)\n        ==> ?M. forall x. a <= x /\\ x <= b ==> f(x) <= M
       #|  x <= m1 /\\ --x <= m2 ==> abs(x) <= abs(m2) + abs(m1)
-      #|  abs(M1) + abs(M2)
-      #|  M2:real
-      #|  M1:real
-      #|  b:real
-      #|  a:real
-      #|  \\x:real. --(f x)
-      #|  b:real
-      #|  a:real
-      #|  f:real->real
-      #|  ~(a <= b) ==> ~(a <= x /\\ x <= b)
-      #|  a <= b
+      #|  abs((M1 : Real)) + abs((M2 : Real))
+      #|  (M2 : Real)
+      #|  (M1 : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => -(f : (Real) -> Real)(x)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
+      #|  !((a : Real) <= (b : Real)) \226\134\146 !(a <= (x : Real) && x <= b)
+      #|  (a : Real) <= (b : Real)
       #|  forall f a b. (forall x. a <= x /\\ x <= b ==> f contl x)\n           ==> ?M. forall x. a <= x /\\ x <= b ==> abs(f(x)) <= M
-      #|  \\y:real. ?x. a <= x /\\ x <= b /\\ (y = f(x))
-      #|  x:real
-      #|  x:real
-      #|  y:real
-      #|  N:real
-      #|  x:real
-      #|  (f:real->real) x
+      #|  (y : Real) => \226\136\131 x : Real, (a : Real) <= x && x <= (b : Real) && y == (f : (Real) -> Real)(x)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (N : Real)
+      #|  (x : Real)
+      #|  (f : (Real) -> Real)((x : Real))
       #|  sup
-      #|  x:real
+      #|  (x : Real)
       #|  sup
-      #|  x:real
-      #|  y:real
-      #|  M:real
-      #|  M:real
-      #|  a:real
-      #|  (f:real->real) a
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (M : Real)
+      #|  (M : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)((a : Real))
       #|  forall f a b. (a <= b /\\ forall x. a <= x /\\ x <= b ==> f contl x)\n        ==> ?M. (forall x. a <= x /\\ x <= b ==> f(x) <= M) /\\\n                (forall N. N < M ==> ?x. a <= x /\\ x <= b /\\ N < f(x))
-      #|  x:real
-      #|  inv(M - f(a:real))
-      #|  k:real
-      #|  M - inv(k + &1)
-      #|  forall N. N < M ==> (?x. a <= x /\\ x <= b /\\ N < (f x))
-      #|  ~(M - f(x:real) = &0)
-      #|  forall x. a <= x /\\ x <= b ==> inv(k + &1) < (M - (f x))
+      #|  (x : Real)
+      #|  inv((M : Real) - (f : (Real) -> Real)((a : Real)))
+      #|  (k : Real)
+      #|  (M : Real) - inv((k : Real) + real_of_num(1))
+      #|  \226\136\128 N : Real, N < (M : Real) \226\134\146 (\226\136\131 x : Real, (a : Real) <= x && x <= (b : Real) && N < (f : (Real) -> Real)(x))
+      #|  !((M : Real) - (f : (Real) -> Real)((x : Real)) == real_of_num(0))
+      #|  \226\136\128 x : Real, (a : Real) <= x && x <= (b : Real) \226\134\146 inv((k : Real) + real_of_num(1)) < (M : Real) - (f : (Real) -> Real)(x)
       #|  forall x. a <= x /\\ x <= b ==>\n         inv(k + &1) < inv((\\x. inv(M - (f x))) x)
-      #|  k:real
+      #|  (k : Real)
       #|  forall x. a <= x /\\ x <= b ==> (\\x. inv(M - (f x))) x < (k + &1)
-      #|  forall x. a <= x /\\ x <= b ==> &0 < inv(M - f(x))
-      #|  k:real
+      #|  \226\136\128 x : Real, (a : Real) <= x && x <= (b : Real) \226\134\146 real_of_num(0) < inv((M : Real) - (f : (Real) -> Real)(x))
+      #|  (k : Real)
       #|  ?k. forall x. a <= x /\\ x <= b ==> (\\x. inv(M - (f x))) x <= k
-      #|  forall x. a <= x /\\ x <= b ==> (\\x. inv(M - f(x))) contl x
-      #|  forall x. a <= x /\\ x <= b ==> f(x) < M
-      #|  ~(a /\\ b /\\ c) <=> a /\\ b ==> ~c
-      #|  a <=> ~ ~a
-      #|  M:real
-      #|  M:real
+      #|  \226\136\128 x : Real, (a : Real) <= x && x <= (b : Real) \226\134\146 contl((x : Real) => inv((M : Real) - (f : (Real) -> Real)(x)), x)
+      #|  \226\136\128 x : Real, (a : Real) <= x && x <= (b : Real) \226\134\146 (f : (Real) -> Real)(x) < (M : Real)
+      #|  !((a : Bool) && (b : Bool) && (c : Bool)) == (a && b \226\134\146 !c)
+      #|  (a : Bool) == !!a
+      #|  (M : Real)
+      #|  (M : Real)
       #|  forall f a b. (a <= b /\\ forall x. a <= x /\\ x <= b ==> f contl x)\n        ==> ?M. (forall x. a <= x /\\ x <= b ==> f(x) <= M) /\\\n                (?x. a <= x /\\ x <= b /\\ (f(x) = M))
-      #|  --M
-      #|  M:real
-      #|  a <= b
-      #|  forall x. a <= x /\\ x <= b ==> (\\x. --(f x)) contl x
+      #|  -(M : Real)
+      #|  (M : Real)
+      #|  (a : Real) <= (b : Real)
+      #|  \226\136\128 x : Real, (a : Real) <= x && x <= (b : Real) \226\134\146 contl((x : Real) => -(f : (Real) -> Real)(x), x)
       #|  forall f a b. (a <= b /\\ forall x. a <= x /\\ x <= b ==> f contl x)\n        ==> ?M. (forall x. a <= x /\\ x <= b ==> M <= f(x)) /\\\n                (?x. a <= x /\\ x <= b /\\ (f(x) = M))
-      #|  x1:real
-      #|  x2:real
-      #|  x:real
-      #|  x:real
-      #|  y:real
-      #|  x1:real
-      #|  x2:real
-      #|  f:real->real
-      #|  x2:real
-      #|  x1:real
-      #|  x:real
-      #|  x:real
-      #|  y:real
-      #|  x2:real
-      #|  x1:real
-      #|  f:real->real
-      #|  x2:real
-      #|  x1:real
-      #|  M:real
-      #|  L:real
-      #|  x2:real
-      #|  M:real
-      #|  x1:real
-      #|  L:real
+      #|  (x1 : Real)
+      #|  (x2 : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (x1 : Real)
+      #|  (x2 : Real)
+      #|  (f : (Real) -> Real)
+      #|  (x2 : Real)
+      #|  (x1 : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (x2 : Real)
+      #|  (x1 : Real)
+      #|  (f : (Real) -> Real)
+      #|  (x2 : Real)
+      #|  (x1 : Real)
+      #|  (M : Real)
+      #|  (L : Real)
+      #|  (x2 : Real)
+      #|  (M : Real)
+      #|  (x1 : Real)
+      #|  (L : Real)
       #|  forall f a b. (a <= b /\\ forall x. a <= x /\\ x <= b ==>  f contl x)\n        ==> ?L M. (forall x. a <= x /\\ x <= b ==> L <= f(x) /\\ f(x) <= M) /\\\n                  forall y. L <= y /\\ y <= M ==> ?x. a <= x /\\ x <= b /\\ (f(x) = y)
-      #|  l:real
-      #|  d:real
-      #|  d:real
-      #|  l:real
+      #|  (l : Real)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  (l : Real)
       #|  forall f x l. (f diffl l)(x) /\\ &0 < l ==>\n      ?d. &0 < d /\\ forall h. &0 < h /\\ h < d ==> f(x) < f(x + h)
-      #|  l:real
-      #|  d:real
-      #|  d:real
-      #|  --l
+      #|  (l : Real)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  -(l : Real)
       #|  forall f x l. (f diffl l)(x) /\\ l < &0 ==>\n      ?d. &0 < d /\\ forall h. &0 < h /\\ h < d ==> f(x) < f(x - h)
-      #|  &0 <= d
-      #|  x + d
-      #|  d:real
-      #|  d:real
-      #|  e:real
-      #|  k:real
-      #|  e:real
-      #|  &0 < l
-      #|  &0 <= d
-      #|  x - d
-      #|  d:real
-      #|  d:real
-      #|  e:real
-      #|  k:real
-      #|  e:real
-      #|  l < &0
-      #|  &0
-      #|  l:real
-      #|  k:real
+      #|  real_of_num(0) <= (d : Real)
+      #|  (x : Real) + (d : Real)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  (e : Real)
+      #|  (k : Real)
+      #|  (e : Real)
+      #|  real_of_num(0) < (l : Real)
+      #|  real_of_num(0) <= (d : Real)
+      #|  (x : Real) - (d : Real)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  (e : Real)
+      #|  (k : Real)
+      #|  (e : Real)
+      #|  (l : Real) < real_of_num(0)
+      #|  real_of_num(0)
+      #|  (l : Real)
+      #|  (k : Real)
       #|  forall f x l. (f diffl l)(x) /\\\n           (?d. &0 < d /\\ (forall y. abs(x - y) < d ==> f(y) <= f(x))) ==> (l = &0)
-      #|  --l
-      #|  x:real
-      #|  \\x:real. --(f x)
+      #|  -(l : Real)
+      #|  (x : Real)
+      #|  (x : Real) => -(f : (Real) -> Real)(x)
       #|  forall f x l. (f diffl l)(x) /\\\n           (?d. &0 < d /\\ (forall y. abs(x - y) < d ==> f(x) <= f(y))) ==> (l = &0)
-      #|  d:real
-      #|  x:real
-      #|  f:real->real
-      #|  d:real
+      #|  (d : Real)
+      #|  (x : Real)
+      #|  (f : (Real) -> Real)
+      #|  (d : Real)
       #|  forall f x l. (f diffl l)(x) /\\\n         (?d. &0 < d /\\ (forall y. abs(x - y) < d ==> (f(y) = f(x)))) ==> (l = &0)
-      #|  (b - x) <= (x - a)
-      #|  x + x
-      #|  b:real
-      #|  (x - a) <= (b - x)
-      #|  x + x
-      #|  a:real
-      #|  x:real
-      #|  b - x
-      #|  x - a
-      #|  b - x
-      #|  x - a
+      #|  (b : Real) - (x : Real) <= x - (a : Real)
+      #|  (x : Real) + x
+      #|  (b : Real)
+      #|  (x : Real) - (a : Real) <= (b : Real) - x
+      #|  (x : Real) + x
+      #|  (a : Real)
+      #|  (x : Real)
+      #|  (b : Real) - (x : Real)
+      #|  (x : Real) - (a : Real)
+      #|  (b : Real) - (x : Real)
+      #|  (x : Real) - (a : Real)
       #|  forall a b x. a < x /\\ x < b ==>\n        ?d. &0 < d /\\ forall y. abs(x - y) < d ==> a < y /\\ y < b
-      #|  d:real
-      #|  d:real
+      #|  (d : Real)
+      #|  (d : Real)
       #|  forall a b x. a < x /\\ x < b ==>\n        ?d. &0 < d /\\ forall y. abs(x - y) < d ==> a <= y /\\ y <= b
-      #|  l:real
-      #|  d:real
+      #|  (l : Real)
+      #|  (d : Real)
       #|  ?l. (f diffl l)(x) /\\\n        (?d. &0 < d /\\ (forall y. abs(x - y) < d ==> (f(y) = f(x))))
-      #|  d:real
-      #|  a < x /\\ x < b
-      #|  x:real
-      #|  a < b
-      #|  x:real
-      #|  (f:real->real) b = m
-      #|  (f:real->real) b = M
-      #|  (f:real->real) a = f b
-      #|  f:real->real
-      #|  forall x. a <= x /\\ x <= b ==> (f(x):real = f(b))
-      #|  l:real
-      #|  y:real
-      #|  d:real
+      #|  (d : Real)
+      #|  (a : Real) < (x : Real) && x < (b : Real)
+      #|  (x : Real)
+      #|  (a : Real) < (b : Real)
+      #|  (x : Real)
+      #|  (f : (Real) -> Real)((b : Real)) == (m : Real)
+      #|  (f : (Real) -> Real)((b : Real)) == (M : Real)
+      #|  (f : (Real) -> Real)((a : Real)) == f((b : Real))
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 x : Real, (a : Real) <= x && x <= (b : Real) \226\134\146 (f : (Real) -> Real)(x) == f(b)
+      #|  (l : Real)
+      #|  (y : Real)
+      #|  (d : Real)
       #|  ?l. (f diffl l)(x2) /\\\n          ?d. &0 < d /\\ (forall y. abs(x2 - y) < d ==> f(x2) <= f(y))
-      #|  x2:real
-      #|  d:real
-      #|  a < x2 /\\ x2 < b
-      #|  l:real
-      #|  y:real
-      #|  d:real
+      #|  (x2 : Real)
+      #|  (d : Real)
+      #|  (a : Real) < (x2 : Real) && x2 < (b : Real)
+      #|  (l : Real)
+      #|  (y : Real)
+      #|  (d : Real)
       #|  ?l. (f diffl l)(x1) /\\\n          ?d. &0 < d /\\ (forall y. abs(x1 - y) < d ==> f(y) <= f(x1))
-      #|  x1:real
-      #|  d:real
-      #|  a < x1 /\\ x1 < b
-      #|  x2:real
-      #|  m:real
-      #|  b:real
-      #|  a:real
-      #|  f:real->real
-      #|  x1:real
-      #|  M:real
-      #|  b:real
-      #|  a:real
-      #|  f:real->real
+      #|  (x1 : Real)
+      #|  (d : Real)
+      #|  (a : Real) < (x1 : Real) && x1 < (b : Real)
+      #|  (x2 : Real)
+      #|  (m : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
+      #|  (x1 : Real)
+      #|  (M : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
       #|  forall f a b. a < b /\\\n           (f(a) = f(b)) /\\\n           (forall x. a <= x /\\ x <= b ==> f contl x) /\\\n           (forall x. a < x /\\ x < b ==> f differentiable x)\n        ==> ?z. a < z /\\ z < b /\\ (f diffl &0)(z)
-      #|  w + x + y + z = (y + w) + (x + z)
-      #|  b - a
-      #|  y:real
-      #|  x:real
-      #|  y:real
-      #|  x:real
-      #|  b:real = a
+      #|  (w : Real) + ((x : Real) + ((y : Real) + (z : Real))) == y + w + (x + z)
+      #|  (b : Real) - (a : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (b : Real) == (a : Real)
       #|  forall(f:real->real) a b.\n        (\\x. f(x) - (((f(b) - f(a)) / (b - a)) * x))(a) =\n        (\\x. f(x) - (((f(b) - f(a)) / (b - a)) * x))(b)
       #|  ((\\x. ((f(b) - f(a)) / (b - a)) * x ) diffl\n                      ((f(b) - f(a)) / (b - a)))(z)
-      #|  a < a
-      #|  z:real
-      #|  ((f(b) - f(a)) / (b - a))
-      #|  z:real
-      #|  l - ((f(b) - f(a)) / (b - a))
-      #|  l:real
-      #|  &1
-      #|  x:real
-      #|  b:real
-      #|  a:real
-      #|  \\x. f(x) - (((f(b) - f(a)) / (b - a)) * x)
+      #|  (a : Real) < a
+      #|  (z : Real)
+      #|  ((f : (Real) -> Real)((b : Real)) - f((a : Real))) / (b - a)
+      #|  (z : Real)
+      #|  (l : Real) - ((f : (Real) -> Real)((b : Real)) - f((a : Real))) / (b - a)
+      #|  (l : Real)
+      #|  real_of_num(1)
+      #|  (x : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => (f : (Real) -> Real)(x) - (f((b : Real)) - f((a : Real))) / (b - a) * x
       #|  forall f a b. a < b /\\\n           (forall x. a <= x /\\ x <= b ==> f contl x) /\\\n           (forall x. a < x /\\ x < b ==> f differentiable x)\n        ==> ?l z. a < z /\\ z < b /\\ (f diffl l)(z) /\\\n            (f(b) - f(a) = (b - a) * l)
       #|  ?l z. a < z /\\ z < b /\\ (f diffl l) z /\\ (f b - f a = (b - a) * l)
       #|  forall f f' a b.\n        a < b /\\ (forall x. a <= x /\\ x <= b ==> (f diffl f'(x))(x))\n        ==> ?z. a < z /\\ z < b /\\ (f b - f a = (b - a) * f'(z))
-      #|  (f diffl l)(x)
-      #|  a /\\ b /\\ c /\\ d <=> (a /\\ b) /\\ (c /\\ d)
-      #|  x:real
-      #|  l:real
-      #|  &0
-      #|  b:real
-      #|  a:real
-      #|  f:real->real
+      #|  diffl((f : (Real) -> Real), (l : Real), (x : Real))
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool)) == ((a && b) && c && d)
+      #|  (x : Real)
+      #|  (l : Real)
+      #|  real_of_num(0)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
       #|  forall f a b. a < b /\\\n           (forall x. a <= x /\\ x <= b ==> f contl x) /\\\n           (forall x. a < x /\\ x < b ==> (f diffl &0)(x))\n        ==> (f b = f a)
-      #|  x:real
-      #|  x:real
-      #|  z:real
-      #|  a <= x
-      #|  x:real
-      #|  a:real
-      #|  f:real->real
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (z : Real)
+      #|  (a : Real) <= (x : Real)
+      #|  (x : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
       #|  forall f a b. a < b /\\\n           (forall x. a <= x /\\ x <= b ==> f contl x) /\\\n           (forall x. a < x /\\ x < b ==> (f diffl &0)(x))\n        ==> forall x. a <= x /\\ x <= b ==> (f x = f a)
       #|  forall f a b. a < b /\\\n           (forall x. a <= x /\\ x <= b ==> (f diffl &0)(x))\n        ==> (f b = f a)
-      #|  y:real
-      #|  x:real
-      #|  &0
-      #|  forall x. f contl x
-      #|  forall f x y. (forall x. (f diffl &0)(x)) ==> (f(x) = f(y))
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  real_of_num(0)
+      #|  \226\136\128 x : Real, contl((f : (Real) -> Real), x)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, \226\136\128 y : Real, (\226\136\128 x : Real, diffl(f, real_of_num(0), x)) \226\134\146 f(x) == f(y)
       #|  forall x z d. (x - d) <= z /\\ z <= (x + d) <=> abs(z - x) <= d
-      #|  x:real
-      #|  g(f(x - d):real) = x - d
-      #|  g((f:real->real) z) = z
-      #|  g:real->real
-      #|  z:real
-      #|  z:real
-      #|  f(x - d):real
-      #|  x + d
-      #|  x:real
-      #|  f:real->real
-      #|  x:real
-      #|  g(f(x + d):real) = x + d
-      #|  g((f:real->real) z) = z
-      #|  g:real->real
-      #|  z:real
-      #|  z:real
-      #|  f(x + d):real
-      #|  x:real
-      #|  x - d
-      #|  f:real->real
-      #|  f(x + d):real
-      #|  f(x - d):real
+      #|  (x : Real)
+      #|  (g : (Real) -> Real)((f : (Real) -> Real)((x : Real) - (d : Real))) == x - d
+      #|  (g : (Real) -> Real)((f : (Real) -> Real)((z : Real))) == z
+      #|  (g : (Real) -> Real)
+      #|  (z : Real)
+      #|  (z : Real)
+      #|  (f : (Real) -> Real)((x : Real) - (d : Real))
+      #|  (x : Real) + (d : Real)
+      #|  (x : Real)
+      #|  (f : (Real) -> Real)
+      #|  (x : Real)
+      #|  (g : (Real) -> Real)((f : (Real) -> Real)((x : Real) + (d : Real))) == x + d
+      #|  (g : (Real) -> Real)((f : (Real) -> Real)((z : Real))) == z
+      #|  (g : (Real) -> Real)
+      #|  (z : Real)
+      #|  (z : Real)
+      #|  (f : (Real) -> Real)((x : Real) + (d : Real))
+      #|  (x : Real)
+      #|  (x : Real) - (d : Real)
+      #|  (f : (Real) -> Real)
+      #|  (f : (Real) -> Real)((x : Real) + (d : Real))
+      #|  (f : (Real) -> Real)((x : Real) - (d : Real))
       #|  forall f g x d. &0 < d /\\\n            (forall z. abs(z - x) <= d ==> (g(f(z)) = z)) /\\\n            (forall z. abs(z - x) <= d ==> f contl z) ==>\n     ~(forall z. abs(z - x) <= d ==> f(z) <= f(x))
-      #|  x + d
-      #|  x - d
-      #|  d:real
-      #|  x:real
-      #|  \\y. (g(--y):real)
-      #|  \\x:real. --(f x)
+      #|  (x : Real) + (d : Real)
+      #|  (x : Real) - (d : Real)
+      #|  (d : Real)
+      #|  (x : Real)
+      #|  (y : Real) => (g : (Real) -> Real)(-y)
+      #|  (x : Real) => -(f : (Real) -> Real)(x)
       #|  forall f g x d. &0 < d /\\\n            (forall z. abs(z - x) <= d ==> (g(f(z)) = z)) /\\\n            (forall z. abs(z - x) <= d ==> f contl z) ==>\n     ~(forall z. abs(z - x) <= d ==> f(x) <= f(z))
-      #|  f(x:real) + e
-      #|  f(x:real) + (M - f(x))
-      #|  f(x:real) - e
-      #|  abs(y - f(x:real)) <= e
-      #|  e:real
-      #|  e:real
-      #|  M - f(x:real)
-      #|  f(x:real) - L
-      #|  d:real
-      #|  x:real
-      #|  g:real->real
-      #|  f:real->real
-      #|  d:real
-      #|  x:real
-      #|  g:real->real
-      #|  f:real->real
-      #|  L < f(x:real) /\\ f(x:real) < M
-      #|  L <= f(x:real) /\\ f(x) <= M
-      #|  M:real
-      #|  L:real
-      #|  x + d
-      #|  x - d
-      #|  f:real->real
+      #|  (f : (Real) -> Real)((x : Real)) + (e : Real)
+      #|  (f : (Real) -> Real)((x : Real)) + ((M : Real) - f(x))
+      #|  (f : (Real) -> Real)((x : Real)) - (e : Real)
+      #|  abs((y : Real) - (f : (Real) -> Real)((x : Real))) <= (e : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (M : Real) - (f : (Real) -> Real)((x : Real))
+      #|  (f : (Real) -> Real)((x : Real)) - (L : Real)
+      #|  (d : Real)
+      #|  (x : Real)
+      #|  (g : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (d : Real)
+      #|  (x : Real)
+      #|  (g : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (L : Real) < (f : (Real) -> Real)((x : Real)) && f(x) < (M : Real)
+      #|  (L : Real) <= (f : (Real) -> Real)((x : Real)) && f(x) <= (M : Real)
+      #|  (M : Real)
+      #|  (L : Real)
+      #|  (x : Real) + (d : Real)
+      #|  (x : Real) - (d : Real)
+      #|  (f : (Real) -> Real)
       #|  forall f g x d.  &0 < d /\\\n            (forall z. abs(z - x) <= d ==> (g(f(z)) = z)) /\\\n            (forall z. abs(z - x) <= d ==> f contl z) ==>\n        ?e. &0 < e /\\\n            (forall y. abs(y - f(x)) <= e ==> ?z. abs(z - x) <= d /\\ (f z = y))
-      #|  (g((f:real->real)(z)) = z) /\\ (g(f(x)) = x)
-      #|  e:real
-      #|  h:real
-      #|  k:real
-      #|  k:real
-      #|  e:real
-      #|  x:real
-      #|  g:real->real
-      #|  f:real->real
-      #|  forall z. abs(z - x) <= d ==> (f contl z)
-      #|  forall z. abs(z - x) <= d ==> (g(f z :real) = z)
-      #|  e:real
-      #|  z:real
-      #|  forall z. abs(z - x) <= e ==> (f contl z)
-      #|  e:real
-      #|  z:real
-      #|  forall z. abs(z - x) <= e ==> (g(f z :real) = z)
-      #|  e:real
-      #|  d:real
-      #|  a:real
-      #|  a:real
+      #|  (g : (Real) -> Real)((f : (Real) -> Real)((z : Real))) == z && g(f((x : Real))) == x
+      #|  (e : Real)
+      #|  (h : Real)
+      #|  (k : Real)
+      #|  (k : Real)
+      #|  (e : Real)
+      #|  (x : Real)
+      #|  (g : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 z : Real, abs(z - (x : Real)) <= (d : Real) \226\134\146 contl((f : (Real) -> Real), z)
+      #|  \226\136\128 z : Real, abs(z - (x : Real)) <= (d : Real) \226\134\146 (g : (Real) -> Real)((f : (Real) -> Real)(z)) == z
+      #|  (e : Real)
+      #|  (z : Real)
+      #|  \226\136\128 z : Real, abs(z - (x : Real)) <= (e : Real) \226\134\146 contl((f : (Real) -> Real), z)
+      #|  (e : Real)
+      #|  (z : Real)
+      #|  \226\136\128 z : Real, abs(z - (x : Real)) <= (e : Real) \226\134\146 (g : (Real) -> Real)((f : (Real) -> Real)(z)) == z
+      #|  (e : Real)
+      #|  (d : Real)
+      #|  (a : Real)
+      #|  (a : Real)
       #|  forall f g x d. &0 < d /\\\n             (forall z. abs(z - x) <= d ==> (g(f(z)) = z)) /\\\n             (forall z. abs(z - x) <= d ==> f contl z)\n        ==> g contl (f x)
-      #|  z:real
-      #|  abs(h) <= k
-      #|  f(x:real) + h
-      #|  z:real
-      #|  abs(h) <= k
-      #|  f(x:real) + h
-      #|  z:real
-      #|  abs(h) <= k
-      #|  f(x:real) + h
-      #|  y:real
-      #|  e:real
-      #|  e:real
-      #|  abs(l)
-      #|  d:real
-      #|  (\\y. h(g(y:real):real)) contl (f(x:real))
-      #|  e:real
-      #|  y:real
-      #|  e:real
-      #|  e:real
-      #|  c:real
-      #|  b:real
-      #|  b:real
+      #|  (z : Real)
+      #|  abs((h : Real)) <= (k : Real)
+      #|  (f : (Real) -> Real)((x : Real)) + (h : Real)
+      #|  (z : Real)
+      #|  abs((h : Real)) <= (k : Real)
+      #|  (f : (Real) -> Real)((x : Real)) + (h : Real)
+      #|  (z : Real)
+      #|  abs((h : Real)) <= (k : Real)
+      #|  (f : (Real) -> Real)((x : Real)) + (h : Real)
+      #|  (y : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  abs((l : Real))
+      #|  (d : Real)
+      #|  contl((y : Real) => (h : (Real) -> Real)((g : (Real) -> Real)(y)), (f : (Real) -> Real)((x : Real)))
+      #|  (e : Real)
+      #|  (y : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  (b : Real)
       #|  ?e. &0 < e /\\\n         forall y. &0 < abs(y - f(x:real)) /\\ abs(y - f(x)) < e\n                    ==> ~((h:real->real)(g(y)) = &0)
-      #|  (f:real->real)(z) = y
-      #|  z:real
-      #|  y:real
-      #|  e:real
-      #|  e:real
-      #|  d:real
-      #|  x:real
-      #|  g:real->real
-      #|  f:real->real
-      #|  c:real
+      #|  (f : (Real) -> Real)((z : Real)) == (y : Real)
+      #|  (z : Real)
+      #|  (y : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (d : Real)
+      #|  (x : Real)
+      #|  (g : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (c : Real)
       #|  ?e. &0 < e /\\\n         forall y. &0 < abs(y - f(x:real)) /\\ abs(y - f(x)) < e ==> (f(g(y)) = y)
       #|  inv((h(g(y))) * (g(y:real) - x)) =\n      inv(h(g(y))) * inv(g(y) - x)
-      #|  f:real->real
-      #|  ~(g(y:real) - x = &0)
-      #|  &0 < k
-      #|  f((g:real->real)(y)) = y
-      #|  y - f(x) = h(g(y)) * (g(y) - x)
-      #|  y:real
-      #|  e:real
-      #|  k:real
+      #|  (f : (Real) -> Real)
+      #|  !((g : (Real) -> Real)((y : Real)) - (x : Real) == real_of_num(0))
+      #|  real_of_num(0) < (k : Real)
+      #|  (f : (Real) -> Real)((g : (Real) -> Real)((y : Real))) == y
+      #|  (y : Real) - (f : (Real) -> Real)((x : Real)) == (h : (Real) -> Real)((g : (Real) -> Real)(y)) * (g(y) - x)
+      #|  (y : Real)
+      #|  (e : Real)
+      #|  (k : Real)
       #|  ?e. &0 < e /\\\n                    forall y. &0 < abs(y - f(x:real)) /\\\n                        abs(y - f(x:real)) < e ==>\n                            (f(g(y)) = y) /\\ ~(h(g(y)) = &0)
-      #|  d:real
-      #|  (\\y:real. h(g(y):real)) contl (f(x:real))
-      #|  \\y. inv((\\y:real. h(g(y):real)) y)
-      #|  \\y:real. inv(h(g(y):real))
-      #|  g((f:real->real)(x)) = x
-      #|  z:real
+      #|  (d : Real)
+      #|  contl((y : Real) => (h : (Real) -> Real)((g : (Real) -> Real)(y)), (f : (Real) -> Real)((x : Real)))
+      #|  (y : Real) => inv(((y : Real) => (h : (Real) -> Real)((g : (Real) -> Real)(y)))(y))
+      #|  (y : Real) => inv((h : (Real) -> Real)((g : (Real) -> Real)(y)))
+      #|  (g : (Real) -> Real)((f : (Real) -> Real)((x : Real))) == x
+      #|  (z : Real)
       #|  \\y. if y = f(x) then\n    inv(h(g y)) else (g(y) - g(f(x:real))) / (y - f(x))
-      #|  h:real->real
-      #|  (f diffl l)(x)
+      #|  (h : (Real) -> Real)
+      #|  diffl((f : (Real) -> Real), (l : Real), (x : Real))
       #|  forall f g l x d. &0 < d /\\\n               (forall z. abs(z - x) <= d ==> (g(f(z)) = z)) /\\\n               (forall z. abs(z - x) <= d ==> f contl z) /\\\n               (f diffl l)(x) /\\\n               ~(l = &0)\n        ==> (g diffl (inv l))(f x)
-      #|  d / &2
-      #|  d / &2
+      #|  (d : Real) / real_of_num(2)
+      #|  (d : Real) / real_of_num(2)
       #|  forall f g l x d. &0 < d /\\\n               (forall z. abs(z - x) < d ==> (g(f(z)) = z)) /\\\n               (forall z. abs(z - x) < d ==> f contl z) /\\\n               (f diffl l)(x) /\\\n               ~(l = &0)\n        ==> (g diffl (inv l))(f x)
-      #|  e + a < z
-      #|  e + z < b
-      #|  e:real
-      #|  z:real
-      #|  f:real->real
-      #|  e:real
-      #|  b - z
-      #|  z - a
-      #|  a < z /\\ z < b
-      #|  e:real
-      #|  forall h. &0 < h /\\ h < d ==> w < f (b - h)
-      #|  e:real
-      #|  b - a
-      #|  d:real
-      #|  d:real
-      #|  (f':real->real) b
-      #|  b:real
-      #|  f:real->real
-      #|  z:real = b
-      #|  z:real = b
-      #|  e:real
-      #|  forall h. &0 < h /\\ h < d ==> w < f (a + h)
-      #|  e:real
-      #|  b - a
-      #|  d:real
-      #|  d:real
-      #|  (f':real->real) a
-      #|  a:real
-      #|  f:real->real
-      #|  z:real = a
-      #|  z:real = a
-      #|  z:real
-      #|  z:real
+      #|  (e : Real) + (a : Real) < (z : Real)
+      #|  (e : Real) + (z : Real) < (b : Real)
+      #|  (e : Real)
+      #|  (z : Real)
+      #|  (f : (Real) -> Real)
+      #|  (e : Real)
+      #|  (b : Real) - (z : Real)
+      #|  (z : Real) - (a : Real)
+      #|  (a : Real) < (z : Real) && z < (b : Real)
+      #|  (e : Real)
+      #|  \226\136\128 h : Real, real_of_num(0) < h && h < (d : Real) \226\134\146 (w : Real) < (f : (Real) -> Real)((b : Real) - h)
+      #|  (e : Real)
+      #|  (b : Real) - (a : Real)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  (f' : (Real) -> Real)((b : Real))
+      #|  (b : Real)
+      #|  (f : (Real) -> Real)
+      #|  (z : Real) == (b : Real)
+      #|  (z : Real) == (b : Real)
+      #|  (e : Real)
+      #|  \226\136\128 h : Real, real_of_num(0) < h && h < (d : Real) \226\134\146 (w : Real) < (f : (Real) -> Real)((a : Real) + h)
+      #|  (e : Real)
+      #|  (b : Real) - (a : Real)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  (f' : (Real) -> Real)((a : Real))
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
+      #|  (z : Real) == (a : Real)
+      #|  (z : Real) == (a : Real)
+      #|  (z : Real)
+      #|  (z : Real)
       #|  ?w. (forall x. a <= x /\\ x <= b ==> f x <= w) /\\\n                    (?x. a <= x /\\ x <= b /\\ (f x = w))
       #|  forall f f' a b.\n        a <= b /\\\n        (forall x. a <= x /\\ x <= b ==> (f diffl f'(x))(x)) /\\\n        f'(a) > &0 /\\ f'(b) < &0\n        ==> ?z. a < z /\\ z < b /\\ (f'(z) = &0)
-      #|  b:real
-      #|  a:real
-      #|  \\x:real. f'(x) - y
-      #|  \\x. f(x) - y * x
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => (f' : (Real) -> Real)(x) - (y : Real)
+      #|  (x : Real) => (f : (Real) -> Real)(x) - (y : Real) * x
       #|  forall f f' a b y.\n        a <= b /\\\n        (forall x. a <= x /\\ x <= b ==> (f diffl f'(x))(x)) /\\\n        f'(a) > y /\\ f'(b) < y\n        ==> ?z. a < z /\\ z < b /\\ (f'(z) = y)
-      #|  --y
-      #|  b:real
-      #|  a:real
-      #|  \\x:real. --(f' x)
-      #|  \\x:real. --(f x)
+      #|  -(y : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => -(f' : (Real) -> Real)(x)
+      #|  (x : Real) => -(f : (Real) -> Real)(x)
       #|  forall f f' a b y.\n        a <= b /\\\n        (forall x. a <= x /\\ x <= b ==> (f diffl f'(x))(x)) /\\\n        f'(a) < y /\\ f'(b) > y\n        ==> ?z. a < z /\\ z < b /\\ (f'(z) = y)
-      #|  M + N >= N:num
-      #|  e / &3
-      #|  (s:num->real->real) (M + N) x0
-      #|  (s:num->real->real) (M + N) x
+      #|  (M : Num) + (N : Num) >= N
+      #|  (e : Real) / real_of_num(3)
+      #|  (s : (Num, Real) -> Real)((M : Num) + (N : Num), (x0 : Real))
+      #|  (s : (Num, Real) -> Real)((M : Num) + (N : Num), (x : Real))
       #|  forall fx sx fx0 sx0 e3.\n        abs(sx - fx) < e3 /\\ abs(sx0 - fx0) < e3 /\\ abs(sx - sx0) < e3 /\\\n        (&3 * e3 = e)\n        ==> abs(fx - fx0) < e
-      #|  x:real
-      #|  d:real
-      #|  d2:real
-      #|  d1:real
-      #|  d2:real
-      #|  e / &3
-      #|  M + N:num
-      #|  d1:real
-      #|  N:num
-      #|  e / &3
-      #|  e:real
-      #|  M:num
+      #|  (x : Real)
+      #|  (d : Real)
+      #|  (d2 : Real)
+      #|  (d1 : Real)
+      #|  (d2 : Real)
+      #|  (e : Real) / real_of_num(3)
+      #|  (M : Num) + (N : Num)
+      #|  (d1 : Real)
+      #|  (N : Num)
+      #|  (e : Real) / real_of_num(3)
+      #|  (e : Real)
+      #|  (M : Num)
       #|  forall s f x0. (forall e. &0 < e\n                 ==> ?N d. &0 < d /\\\n                           forall x n. abs(x - x0) < d /\\ n >= N\n                                 ==> abs(s n x - f(x)) < e) /\\\n            (?N:num. forall n. n >= N ==> (s n) contl x0)\n            ==> f contl x0
-      #|  abs(x) < a ==> x < a
-      #|  r:num
-      #|  sum(n,m) g
-      #|  sum(n,m) (\\n. abs(s (x:real) n))
+      #|  abs((x : Real)) < (a : Real) \226\134\146 x < a
+      #|  (r : Num)
+      #|  sum(((n : Num), (m : Num)), (g : (Num) -> Real))
+      #|  sum(((n : Num), (m : Num)), (n : Num) => abs((s : (Real, Num) -> Real)((x : Real), n)))
       #|  abs(snm) < e2 /\\ (&2 * e2 = e)\n    ==> abs((sn + snm) - fx) < e2 ==> abs(sn - fx) < e
-      #|  m + n:num
-      #|  m:num
-      #|  e / &2
-      #|  x:real
-      #|  n >= M + N ==> n >= M /\\ n >= N:num
-      #|  n:num
-      #|  x:real
-      #|  M + N:num
-      #|  M:num
-      #|  e / &2
-      #|  e:real
-      #|  d:real
-      #|  f:real->real
-      #|  forall x. abs(x - x0) < d ==> ?y. (s x) sums y
+      #|  (m : Num) + (n : Num)
+      #|  (m : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  (x : Real)
+      #|  (n : Num) >= (M : Num) + (N : Num) \226\134\146 n >= M && n >= N
+      #|  (n : Num)
+      #|  (x : Real)
+      #|  (M : Num) + (N : Num)
+      #|  (M : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  (e : Real)
+      #|  (d : Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 x : Real, abs(x - (x0 : Real)) < (d : Real) \226\134\146 (\226\136\131 y : Real, sums((s : (Real, Num) -> Real)(x), y))
       #|  forall s x0 g.\n        (?N d. &0 < d /\\\n               forall n x. abs(x - x0) < d /\\ n >= N\n                     ==> abs(s x n) <= g n) /\\ summable g\n        ==> ?f d. &0 < d /\\\n                  forall e. &0 < e\n                      ==> ?N. forall x n. abs(x - x0) < d /\\ n >= N\n                                    ==> abs(sum(0,n) (s x) - f(x)) < e
       #|  forall s x0 g.\n        (?N d. &0 < d /\\\n               forall n x. abs(x - x0) < d /\\ n >= N\n                     ==> abs(s x n) <= g n) /\\ summable g\n        ==> ?f. forall e. &0 < e\n                    ==> ?N d. &0 < d /\\\n                              forall x n. abs(x - x0) < d /\\ n >= N\n                                    ==> abs(sum(0,n) (s x) - f(x)) < e
-      #|  abs(x - x) = &0
-      #|  (a ==> (b <=> c)) ==> ((a ==> b) <=> (a ==> c))
-      #|  &0 < abs(x - y) <=> ~(x = y)
+      #|  abs((x : Real) - x) == real_of_num(0)
+      #|  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a \226\134\146 b) == (a \226\134\146 c)
+      #|  (real_of_num(0) < abs((x : Real) - (y : Real))) == !(x == y)
       #|  forall f x. f contl x <=>\n         forall e. &0 < e ==> ?d. &0 < d /\\ forall x'. abs(x' - x) < d\n                            ==> abs(f(x') - f(x)) < e
       #|  forall f x l. f contl l /\\ x tends_num_real l\n\n           ==> (\\n. f(x n)) tends_num_real f(l)
-      #|  s:real
-      #|  s = sup (\\x. a <= x /\\ x <= b /\\ P x)
-      #|  x <= b ==> x < b + &1
-      #|  \\x. a <= x /\\ x <= b /\\ P x
+      #|  (s : Real)
+      #|  (s : Real) == sup((x : Real) => (a : Real) <= x && x <= (b : Real) && (P : (Real) -> Bool)(x))
+      #|  (x : Real) <= (b : Real) \226\134\146 x < b + real_of_num(1)
+      #|  (x : Real) => (a : Real) <= x && x <= (b : Real) && (P : (Real) -> Bool)(x)
       #|  forall P a b.\n        (?x. a <= x /\\ x <= b /\\ P x)\n        ==> ?s. a <= s /\\ s <= b /\\\n                forall y. y < s <=> (?x. a <= x /\\ x <= b /\\ P x /\\ y < x)
-      #|  t:real
-      #|  s:real
-      #|  forall x. a <= x /\\ x <= b ==> f contl x
-      #|  d:real
-      #|  b <= t
-      #|  t:real
-      #|  &0 < d ==> d <= d * &2
-      #|  d1 / &2
-      #|  d:real
-      #|  s + d / &2
-      #|  r:real
+      #|  (t : Real)
+      #|  (s : Real)
+      #|  \226\136\128 x : Real, (a : Real) <= x && x <= (b : Real) \226\134\146 contl((f : (Real) -> Real), x)
+      #|  (d : Real)
+      #|  (b : Real) <= (t : Real)
+      #|  (t : Real)
+      #|  real_of_num(0) < (d : Real) \226\134\146 d <= d * real_of_num(2)
+      #|  (d1 : Real) / real_of_num(2)
+      #|  (d : Real)
+      #|  (s : Real) + (d : Real) / real_of_num(2)
+      #|  (r : Real)
       #|  forall r t d d12.\n       ~(x <= r /\\ y <= r) /\\\n      abs(x - y) < d /\\\n      s - d12 < r /\\ t <= s + d /\\\n      x <= t /\\ y <= t /\\ &2 * d12 <= e /\\\n      &2 * d < e ==> abs(x - s) < e /\\ abs(y - s) < e
       #|  forall x y. abs(x - s) < d1 /\\ abs(y - s) < d1 ==> abs(f x - f y) < e
-      #|  x <= r /\\ y <= r
-      #|  y:real
-      #|  x:real
-      #|  d:real
-      #|  s < s + d <=> &0 < d
-      #|  s + d / &2
-      #|  d:real
-      #|  d1 / &2
-      #|  d2:real
-      #|  d2:real
-      #|  r:real
-      #|  x - y < x <=> &0 < y
-      #|  s - d1 / &2 < s
-      #|  &0 < abs(x - s) <=> ~(x = s)
-      #|  u:real = s
-      #|  u:real
-      #|  forall x. abs(x - s) < d1 ==> abs(f x - f s) < e / &2
-      #|  (f:real->real) s
+      #|  (x : Real) <= (r : Real) && (y : Real) <= r
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (d : Real)
+      #|  ((s : Real) < s + (d : Real)) == (real_of_num(0) < d)
+      #|  (s : Real) + (d : Real) / real_of_num(2)
+      #|  (d : Real)
+      #|  (d1 : Real) / real_of_num(2)
+      #|  (d2 : Real)
+      #|  (d2 : Real)
+      #|  (r : Real)
+      #|  ((x : Real) - (y : Real) < x) == (real_of_num(0) < y)
+      #|  (s : Real) - (d1 : Real) / real_of_num(2) < s
+      #|  (real_of_num(0) < abs((x : Real) - (s : Real))) == !(x == s)
+      #|  (u : Real) == (s : Real)
+      #|  (u : Real)
+      #|  \226\136\128 x : Real, abs(x - (s : Real)) < (d1 : Real) \226\134\146 abs((f : (Real) -> Real)(x) - f(s)) < (e : Real) / real_of_num(2)
+      #|  (f : (Real) -> Real)((s : Real))
       #|  forall a. abs(x - a) < e / &2 /\\ abs(y - a) < e / &2 /\\ (&2 * e / &2 = e)\n            ==> abs(x - y) < e
       #|  forall x y. abs(x - s) < d1 /\\ abs(y - s) < d1\n                        ==> abs(f(x) - f(y)) < e
-      #|  d < d * &2 <=> &0 < d
-      #|  &0 < d1 / &2 /\\ d1 / &2 < d1
-      #|  d1:real
-      #|  e / &2
-      #|  s:real
+      #|  ((d : Real) < d * real_of_num(2)) == (real_of_num(0) < d)
+      #|  real_of_num(0) < (d1 : Real) / real_of_num(2) && d1 / real_of_num(2) < d1
+      #|  (d1 : Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  (s : Real)
       #|  forall x. a <= x /\\ x <= b ==> f contl x
       #|  ?t. s < t /\\ ?d. &0 < d /\\\n                                 forall x y. a <= x /\\ x <= t /\\ a <= y /\\ y <= t /\\\n                                       abs(x - y) < d ==> abs(f(x) - f(y)) < e
-      #|  s:real
-      #|  abs(x - x) = &0
-      #|  &1
-      #|  a:real
-      #|  b:real
-      #|  a:real
+      #|  (s : Real)
+      #|  abs((x : Real) - x) == real_of_num(0)
+      #|  real_of_num(1)
+      #|  (a : Real)
+      #|  (b : Real)
+      #|  (a : Real)
       #|  \\c. ?d. &0 < d /\\\n                       forall x y. a <= x /\\ x <= c /\\\n                             a <= y /\\ y <= c /\\\n                             abs(x - y) < d\n                             ==> abs(f(x) - f(y)) < e
       #|  forall f a b. a <= b /\\ (forall x. a <= x /\\ x <= b ==> f contl x)\n           ==> forall e. &0 < e ==> ?d. &0 < d /\\\n                                  forall x y. a <= x /\\ x <= b /\\\n                                        a <= y /\\ y <= b /\\\n                                        abs(x - y) < d\n                                        ==> abs(f(x) - f(y)) < e
       #|  ~(a <= x) /\\ a <= y /\\ abs(x - y) < d /\\ d < d1\n      ==> abs(x - a) < d1 /\\ abs(y - a) < d1
-      #|  (f:real->real) a
+      #|  (f : (Real) -> Real)((a : Real))
       #|  forall a. abs(x - a) < e / &2 /\\ abs(y - a) < e / &2 /\\ (&2 * e / &2 = e)\n          ==> abs(x - y) < e
-      #|  a <= x
+      #|  (a : Real) <= (x : Real)
       #|  x <= b /\\ ~(y <= b) /\\ abs(x - y) < d /\\ d < d1\n      ==> abs(x - b) < d1 /\\ abs(y - b) < d1
-      #|  (f:real->real) b
+      #|  (f : (Real) -> Real)((b : Real))
       #|  forall a. abs(x - a) < e / &2 /\\ abs(y - a) < e / &2 /\\ (&2 * e / &2 = e)\n          ==> abs(x - y) < e
-      #|  y <= b
-      #|  d:real
-      #|  d:real
-      #|  d3:real
-      #|  d0:real
-      #|  d3:real
-      #|  e:real
-      #|  b:real
-      #|  a:real
-      #|  f:real->real
-      #|  d0:real
-      #|  d2:real
-      #|  d1:real
-      #|  d2:real
-      #|  e / &2
-      #|  d1:real
-      #|  e / &2
-      #|  a <= b
+      #|  (y : Real) <= (b : Real)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  (d3 : Real)
+      #|  (d0 : Real)
+      #|  (d3 : Real)
+      #|  (e : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
+      #|  (d0 : Real)
+      #|  (d2 : Real)
+      #|  (d1 : Real)
+      #|  (d2 : Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  (d1 : Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  (a : Real) <= (b : Real)
       #|  forall f a b. (forall x. a <= x /\\ x <= b ==> f contl x)\n           ==> forall e. &0 < e\n                   ==> ?d. &0 < d /\\\n                           forall x y. (a <= x /\\ x <= b \\/ a <= y /\\ y <= b) /\\\n                                 abs(x - y) < d\n                                 ==> abs(f(x) - f(y)) < e
-      #|  b:real
-      #|  b:real
-      #|  b:real
-      #|  a:real
+      #|  (b : Real)
+      #|  (b : Real)
+      #|  (b : Real)
+      #|  (a : Real)
       #|F_IMP =  |- (#forall:fun(fun(bool,bool),bool) (\t:bool. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) t:bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) #F:bool))))
       #|LEFT_AND_OVER_OR =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. (#forall:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t3:bool))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t3:bool)))))))))
       #|RIGHT_AND_OVER_OR =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. (#forall:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t3:bool)) t1:bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t2:bool) t1:bool)) ((#/\:fun(bool,fun(bool,bool)) t3:bool) t1:bool)))))))))
