@@ -15577,54 +15577,54 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|proving that 4001 is prime
       #|CPU time (user): <t>
       #|Library/pocklington quotations (854):
-      #|  x <= y ==> (y:num = x + d <=> y - x = d)
-      #|  (x == y) (mod &n) <=> &n divides (x - y)
+      #|  (x : Num) <= (y : Num) \226\134\146 (y == x + (d : Num)) == (y - x == d)
+      #|  op_eq_eq((x : Int), (y : Int), mod(int_of_num((n : Num)))) == divides(int_of_num(n), x - y)
       #|  forall x y n:num. (x == y) (mod n) /\\ y <= x ==> ?q. x = y + n * q
-      #|  x + y * 0 = x
-      #|  (x:num == y) (mod n) <=> (y == x) (mod n)
+      #|  (x : Num) + (y : Num) * 0 == x
+      #|  op_eq_eq((x : Num), (y : Num), mod((n : Num))) == op_eq_eq(y, x, mod(n))
       #|  a \\/ b ==> c ==> d <=> (c /\\ b) \\/ (c /\\ a) ==> d
-      #|  y:num
-      #|  x:num
+      #|  (y : Num)
+      #|  (x : Num)
       #|  forall x y n:num. (mod n) x y <=> ?q1 q2. x + n * q1 = y + n * q2
-      #|  ~(n = 0)
-      #|  ~(n = 0)
+      #|  !((n : Num) == 0)
+      #|  !((n : Num) == 0)
       #|  {m | 0 < m /\\ m < SUC n} = n INSERT {m | 0 < m /\\ m < n}
-      #|  {m | 0 < m /\\ m < SUC n} = EMPTY
-      #|  n = 0
-      #|  {m | 0 < m /\\ m < 0} = EMPTY
-      #|  forall n. { m | 0 < m /\\ m < n } HAS_SIZE (n - 1)
-      #|  forall x y. (x == y) (mod 0) <=> (x = y)
-      #|  forall x y. (x == y) (mod 1)
-      #|  EVEN b
-      #|  EVEN a
-      #|  forall a b. (a == b) (mod 2) <=> (EVEN a <=> EVEN b)
-      #|  forall a b. (a == b) (mod 2) <=> (ODD a <=> ODD b)
-      #|  forall x n. ((x == 0) (mod n) <=> n divides x)
+      #|  {(m : Num) | 0 < m && m < SUC((n : Num))} == {}
+      #|  (n : Num) == 0
+      #|  {(m : Num) | 0 < m && m < 0} == {}
+      #|  \226\136\128 n : Num, HAS_SIZE({(m : Num) | 0 < m && m < n}, n - 1)
+      #|  \226\136\128 x : Num, \226\136\128 y : Num, op_eq_eq(x, y, mod(0)) == (x == y)
+      #|  \226\136\128 x : Num, \226\136\128 y : Num, op_eq_eq(x, y, mod(1))
+      #|  EVEN((b : Num))
+      #|  EVEN((a : Num))
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, op_eq_eq(a, b, mod(2)) == (EVEN(a) == EVEN(b))
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, op_eq_eq(a, b, mod(2)) == (ODD(a) == ODD(b))
+      #|  \226\136\128 x : Num, \226\136\128 n : Num, op_eq_eq(x, 0, mod(n)) == divides(n, x)
       #|  forall x y n. (x == y) (mod n) <=>\n           if x <= y then (y - x == 0) (mod n)\n           else (x - y == 0) (mod n)
-      #|  (a == b) (mod n) <=> (a + 1 == b + 1) (mod n)
-      #|  n = 0
+      #|  op_eq_eq((a : Num), (b : Num), mod((n : Num))) == op_eq_eq(a + 1, b + 1, mod(n))
+      #|  (n : Num) == 0
       #|  forall a n. (a == n - 1) (mod n) <=> n = 0 /\\ a = 0 \\/ n divides (a + 1)
       #|  (p EXP 2 == 1 + 2 * n + 1) (mod p) <=> p divides (2 * (n + 1))
       #|  (n EXP 2 == m) (mod p) <=> ((n + 1) EXP 2 == m + 2 * n + 1) (mod p)
-      #|  p = 0
-      #|  forall p. ((p - 1) EXP 2 == 1) (mod p) <=> ~(p = 0)
+      #|  (p : Num) == 0
+      #|  \226\136\128 p : Num, op_eq_eq(EXP(p - 1, 2), 1, mod(p)) == !(p == 0)
       #|  x + a = y + b ==> x = (b - a) + y \\/ y = (a - b) + x
-      #|  q2:num
-      #|  q1:num
+      #|  (q2 : Num)
+      #|  (q1 : Num)
       #|  forall x y n. (x == y) (mod n) <=> (?q. x = q * n + y) \\/ (?q. y = q * n + x)
       #|  forall n a x:num. a < n ==> ((x == a) (mod n) <=> ?q. x = q * n + a)
       #|  forall a n x y. coprime(a,n) /\\ (a * x == a * y) (mod n) ==> (x == y) (mod n)
       #|  forall a n x y. coprime(a,n) /\\ (x * a == y * a) (mod n) ==> (x == y) (mod n)
-      #|  forall x n. (x == x) (mod n)
-      #|  forall a b n. a = b ==> (a == b) (mod n)
-      #|  forall x y n. (x == y) (mod n) <=> (y == x) (mod n)
+      #|  \226\136\128 x : Num, \226\136\128 n : Num, op_eq_eq(x, x, mod(n))
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 n : Num, a == b \226\134\146 op_eq_eq(a, b, mod(n))
+      #|  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 n : Num, op_eq_eq(x, y, mod(n)) == op_eq_eq(y, x, mod(n))
       #|  forall x y z n. (x == y) (mod n) /\\ (y == z) (mod n) ==> (x == z) (mod n)
       #|  forall x x' y y'.\n     (x == x') (mod n) /\\ (y == y') (mod n) ==> (x + y == x' + y') (mod n)
       #|  forall x x' y y'.\n     (x == x') (mod n) /\\ (y == y') (mod n) ==> (x * y == x' * y') (mod n)
       #|  forall n x y. (x == 1) (mod n) /\\ (y == 1) (mod n) ==> (x * y == 1) (mod n)
       #|  forall n k x y. (x == y) (mod n) ==> (x EXP k == y EXP k) (mod n)
-      #|  k:num
-      #|  forall x n k. (x == 1) (mod n) ==> (x EXP k == 1) (mod n)
+      #|  (k : Num)
+      #|  \226\136\128 x : Num, \226\136\128 n : Num, \226\136\128 k : Num, op_eq_eq(x, 1, mod(n)) \226\134\146 op_eq_eq(EXP(x, k), 1, mod(n))
       #|  (x + a = x' + a') /\\ (y + b = y' + b') /\\ y <= x /\\ y' <= x'\n    ==> ((x - y) + (a + b') = (x' - y') + (a' + b))
       #|  forall x x' y y'.\n     (x == x') (mod n) /\\ (y == y') (mod n) /\\ y <= x /\\ y' <= x'\n     ==> (x - y == x' - y') (mod n)
       #|  forall a n x y. coprime(a,n) ==> ((a * x == a * y) (mod n) <=> (x == y) (mod n))
@@ -15633,799 +15633,799 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  forall a n x y. (x + a == y + a) (mod n) <=> (x == y) (mod n)
       #|  forall a n x y. (x + a == y + a) (mod n) ==> (x == y) (mod n)
       #|  forall a n x y. (a + x == a + y) (mod n) ==> (x == y) (mod n)
-      #|  forall a n x. (a + x == a) (mod n) <=> (x == 0) (mod n)
-      #|  forall a n x. (x + a == a) (mod n) <=> (x == 0) (mod n)
-      #|  a = 0
+      #|  \226\136\128 a : Num, \226\136\128 n : Num, \226\136\128 x : Num, op_eq_eq(a + x, a, mod(n)) == op_eq_eq(x, 0, mod(n))
+      #|  \226\136\128 a : Num, \226\136\128 n : Num, \226\136\128 x : Num, op_eq_eq(x + a, a, mod(n)) == op_eq_eq(x, 0, mod(n))
+      #|  (a : Num) == 0
       #|  forall a x y n. (a * x == a * y) (mod (a * n)) <=> a = 0 \\/ (x == y) (mod n)
       #|  forall a x y n:num. (x == y) (mod n) ==> (a * x == a * y) (mod n)
       #|  forall x y a n:num. (x == y) (mod n) ==> (x * a == y * a) (mod n)
-      #|  n = 0
+      #|  (n : Num) == 0
       #|  forall x y n. x < n /\\ y < n /\\ (x == y) (mod n) ==> x = y
       #|  forall x y m n. (x == y) (mod m) /\\ n divides m ==> (x == y) (mod n)
-      #|  forall n x. (x == 0) (mod n) <=> n divides x
-      #|  x = 0
-      #|  (x + q1 = 1 + q2) ==> ~(x = 0) ==> (x - 1 = q2 - q1)
-      #|  forall n x. (x == 1) (mod n) ==> n divides (x - 1)
-      #|  (0 == a) (mod n) <=> n divides a
-      #|  x = 0
+      #|  \226\136\128 n : Num, \226\136\128 x : Num, op_eq_eq(x, 0, mod(n)) == divides(n, x)
+      #|  (x : Num) == 0
+      #|  (x : Num) + (q1 : Num) == 1 + (q2 : Num) \226\134\146 !(x == 0) \226\134\146 x - 1 == q2 - q1
+      #|  \226\136\128 n : Num, \226\136\128 x : Num, op_eq_eq(x, 1, mod(n)) \226\134\146 divides(n, x - 1)
+      #|  op_eq_eq(0, (a : Num), mod((n : Num))) == divides(n, a)
+      #|  (x : Num) == 0
       #|  forall n x. (x == 1) (mod n) <=> (x = 0 ==> n = 1) /\\ n divides (x - 1)
       #|  forall x y n. (x == y) (mod n) ==> (n divides x <=> n divides y)
       #|  forall x y n. (x == y) (mod n) ==> (coprime(n,x) <=> coprime(n,y))
-      #|  forall x y n. (x == y) (mod n) ==> gcd(n,x) = gcd(n,y)
-      #|  forall x y n. (x == y) (mod n) ==> gcd(x,n) = gcd(y,n)
+      #|  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 n : Num, op_eq_eq(x, y, mod(n)) \226\134\146 gcd((n, x)) == gcd((n, y))
+      #|  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 n : Num, op_eq_eq(x, y, mod(n)) \226\134\146 gcd((x, n)) == gcd((y, n))
       #|  0
-      #|  a DIV n
-      #|  a:num
-      #|  n = 0
-      #|  forall a n. (a MOD n == a) (mod n)
-      #|  a * b
-      #|  (x MOD (a * b) == x) (mod a)
+      #|  DIV((a : Num), (n : Num))
+      #|  (a : Num)
+      #|  (n : Num) == 0
+      #|  \226\136\128 a : Num, \226\136\128 n : Num, op_eq_eq(MOD(a, n), a, mod(n))
+      #|  (a : Num) * (b : Num)
+      #|  op_eq_eq(MOD((x : Num), (a : Num) * (b : Num)), x, mod(a))
       #|  forall a b x y. ((x MOD (a * b) == y) (mod a) <=> (x == y) (mod a))
-      #|  forall y. y < n ==> (x MOD n = y <=> (x == y) (mod n))
-      #|  n = 0
+      #|  \226\136\128 y : Num, y < (n : Num) \226\134\146 (MOD((x : Num), n) == y) == op_eq_eq(x, y, mod(n))
+      #|  (n : Num) == 0
       #|  forall m n p. m MOD n = p <=> ((n = 0 /\\ m = p) \\/ p < n) /\\ (m == p) (mod n)
       #|  forall m n a b.\n        ~(m = 0) /\\ (a == m * b) (mod (m * n)) ==> (a DIV m == b) (mod n)
-      #|  m = 0
+      #|  (m : Num) == 0
       #|  forall m n a b.\n        coprime(m,n) /\\ m divides a /\\ (a == m * b) (mod n)\n        ==> (a DIV m == b) (mod n)
-      #|  ~(x = 0) ==> (x + 1) - (x - 1) = 2
-      #|  x EXP 2 - 1 = (x - 1) * (x + 1)
-      #|  x = 0
-      #|  p = 1
-      #|  p = 0
-      #|  k = 0
+      #|  !((x : Num) == 0) \226\134\146 x + 1 - (x - 1) == 2
+      #|  EXP((x : Num), 2) - 1 == (x - 1) * (x + 1)
+      #|  (x : Num) == 0
+      #|  (p : Num) == 1
+      #|  (p : Num) == 0
+      #|  (k : Num) == 0
       #|  forall p k x.\n        prime p /\\ ~(p = 2)\n        ==> ((x EXP 2 == 1) (mod (p EXP k)) <=>\n             (x == 1) (mod (p EXP k)) \\/ (x == p EXP k - 1) (mod (p EXP k)))
-      #|  p:num
+      #|  (p : Num)
       #|  0
-      #|  x - (x + a):int = --a
-      #|  m = 0 \\/ 1 <= m
-      #|  x - y:int = n * --m ==> y = x + n * m
-      #|  m:num
-      #|  d:int
-      #|  d:int
-      #|  x = m * n + y <=> x - y:int = n * m
+      #|  (x : Int) - (x + (a : Int)) == -a
+      #|  (m : Num) == 0 || 1 <= m
+      #|  (x : Int) - (y : Int) == (n : Int) * -(m : Int) \226\134\146 y == x + n * m
+      #|  (m : Num)
+      #|  (d : Int)
+      #|  (d : Int)
+      #|  ((x : Int) == (m : Int) * (n : Int) + (y : Int)) == (x - y == n * m)
       #|  forall x y n. y < n ==> ((x == y) (mod n) <=> ?d. x = d * n + y)
-      #|  y <= x ==> (x = a + y <=> x - y = a)
+      #|  (y : Num) <= (x : Num) \226\134\146 (x == (a : Num) + y) == (x - y == a)
       #|  forall x y n. y <= x ==> ((x == y) (mod n) <=> ?q. x = q * n + y)
-      #|  ~(0 = 1 + a)
-      #|  a = 0 \\/ ~(a = 0) /\\ 1 <= a
-      #|  n = 0 \\/ n = 1 + (n - 1) * 1
-      #|  n = 1
+      #|  !(0 == 1 + (a : Num))
+      #|  (a : Num) == 0 || !(a == 0) && 1 <= a
+      #|  (n : Num) == 0 || n == 1 + (n - 1) * 1
+      #|  (n : Num) == 1
       #|  forall a n. (a == 1) (mod n) <=> a = 0 /\\ n = 1 \\/ ?m. a = 1 + m * n
-      #|  EVEN n <=> (n == 0) (mod 2)
-      #|  ODD n <=> (n == 1) (mod 2)
+      #|  EVEN((n : Num)) == op_eq_eq(n, 0, mod(2))
+      #|  ODD((n : Num)) == op_eq_eq(n, 1, mod(2))
       #|  (x == y) (mod n) <=>\n     if x <= y then n divides (y - x) else n divides (x - y)
-      #|  c * x:num
-      #|  y:num
-      #|  x:num
-      #|  n:num
-      #|  c:num
-      #|  a = 0
+      #|  (c : Num) * (x : Num)
+      #|  (y : Num)
+      #|  (x : Num)
+      #|  (n : Num)
+      #|  (c : Num)
+      #|  (a : Num) == 0
       #|  forall n a b. (?x. (a * x == b) (mod n)) <=> gcd(a,n) divides b
       #|  (x == y) (mod n) ==> (a * x == b) (mod n) ==> (a * y == b) (mod n)
-      #|  x:num
+      #|  (x : Num)
       #|  ~(n = 0) /\\ (forall y. P y ==> P(y MOD n))\n    ==> ((?y. y < n /\\ P y) <=> (?y. P y))
-      #|  n = 0
+      #|  (n : Num) == 0
       #|  forall n a b. (?x. x < n /\\ (a * x == b) (mod n)) <=>\n           ~(n = 0) /\\ gcd(a,n) divides b
-      #|  forall a b n. coprime(a,n) ==> ?x. (a * x == b) (mod n)
-      #|  a:num
-      #|  y MOD n
-      #|  y:num
-      #|  a * x:num
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  x MOD n
-      #|  x:num
-      #|  n:num
-      #|  b:num
-      #|  a:num
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 n : Num, coprime((a, n)) \226\134\146 (\226\136\131 x : Num, op_eq_eq(a * x, b, mod(n)))
+      #|  (a : Num)
+      #|  MOD((y : Num), (n : Num))
+      #|  (y : Num)
+      #|  (a : Num) * (x : Num)
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  MOD((x : Num), (n : Num))
+      #|  (x : Num)
+      #|  (n : Num)
+      #|  (b : Num)
+      #|  (a : Num)
       #|  forall a b n. coprime(a,n) /\\ ~(n = 0) ==> ?!x. x < n /\\ (a * x == b) (mod n)
-      #|  ~(p = 0) ==> 0 < p
-      #|  r = 0
-      #|  0 < r <=> ~(r = 0)
-      #|  r:num
-      #|  x = 1
-      #|  p:num
-      #|  x:num
-      #|  p:num
-      #|  a:num
-      #|  x:num
-      #|  1 < p <=> ~(p = 0) /\\ ~(p = 1)
-      #|  1 < p
-      #|  p = 0
+      #|  !((p : Num) == 0) \226\134\146 0 < p
+      #|  (r : Num) == 0
+      #|  (0 < (r : Num)) == !(r == 0)
+      #|  (r : Num)
+      #|  (x : Num) == 1
+      #|  (p : Num)
+      #|  (x : Num)
+      #|  (p : Num)
+      #|  (a : Num)
+      #|  (x : Num)
+      #|  (1 < (p : Num)) == (!(p == 0) && !(p == 1))
+      #|  1 < (p : Num)
+      #|  (p : Num) == 0
       #|  forall a p x. prime p /\\ coprime(p,a) /\\ 0 < x /\\ x < p\n           ==> ?!y. 0 < y /\\ y < p /\\ (x * y == a) (mod p)
       #|  forall p x. prime p /\\ 0 < x /\\ x < p\n         ==> ?!y. 0 < y /\\ y < p /\\ (x * y == 1) (mod p)
-      #|  b < n /\\ (i + 1) * n <= m * n ==> i * n + b < m * n
-      #|  (x * n + c:num == b) (mod n) <=> (c == b) (mod n)
-      #|  i:num
-      #|  x DIV n
-      #|  x:num
+      #|  (b : Num) < (n : Num) && ((i : Num) + 1) * n <= (m : Num) * n \226\134\146 i * n + b < m * n
+      #|  op_eq_eq((x : Num) * (n : Num) + (c : Num), (b : Num), mod(n)) == op_eq_eq(c, b, mod(n))
+      #|  (i : Num)
+      #|  DIV((x : Num), (n : Num))
+      #|  (x : Num)
       #|  {x | x < m * n /\\ (x == b) (mod n)} =\n    IMAGE (\\i. i * n + b MOD n) {i | i < m}
       #|  forall m n b. {x | x < m * n /\\ (x == b) (mod n)} HAS_SIZE\n           (if n = 0 then 0 else m)
-      #|  forall x:num. (a * x == a * z) (mod n) <=> (x == z) (mod d)
-      #|  d:num
-      #|  gcd(n:num,a) divides n
-      #|  z:num
-      #|  b:num
-      #|  a:num
-      #|  n:num
-      #|  {x | P x} = {} <=> ~(?x. P x)
-      #|  n = 0
-      #|  m = 0
+      #|  \226\136\128 x : Num, op_eq_eq((a : Num) * x, a * (z : Num), mod((n : Num))) == op_eq_eq(x, z, mod((d : Num)))
+      #|  (d : Num)
+      #|  divides(gcd(((n : Num), (a : Num))), n)
+      #|  (z : Num)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (n : Num)
+      #|  ({(x : _) | (P : (_) -> Bool)(x)} == {}) == !(\226\136\131 x : _, P(x))
+      #|  (n : Num) == 0
+      #|  (m : Num) == 0
       #|  forall m n a b.\n        {x | x < m * n /\\ (a * x == b) (mod n)} HAS_SIZE\n        (if ~(n = 0) /\\ gcd(n,a) divides b then m * gcd(n,a) else 0)
       #|  1
       #|  forall n a b. {x | x < n /\\ (a * x == b) (mod n)} HAS_SIZE\n           (if ~(n = 0) /\\ gcd(n,a) divides b then gcd(n,a) else 0)
       #|  coprime(a,b) /\\ (x == y) (mod a) /\\ (x == y) (mod b)\n   ==> (x == y) (mod (a * b))
-      #|  a * b
-      #|  x MOD (a * b)
-      #|  q2:num
-      #|  q1:num
-      #|  x:num
-      #|  n:num
-      #|  m:num
-      #|  b:num
-      #|  a:num
+      #|  (a : Num) * (b : Num)
+      #|  MOD((x : Num), (a : Num) * (b : Num))
+      #|  (q2 : Num)
+      #|  (q1 : Num)
+      #|  (x : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (b : Num)
+      #|  (a : Num)
       #|  forall a b m n.\n        coprime(a,b) /\\ ~(a = 0) /\\ ~(b = 0)\n        ==> ?!x. x < a * b /\\ (x == m) (mod a) /\\ (x == n) (mod b)
       #|  (forall x. P(x) ==> Q(x)) ==> (?!x. P x) ==> ?!x. Q(x) /\\ P(x)
-      #|  n:num
-      #|  m:num
-      #|  b:num
-      #|  a:num
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (b : Num)
+      #|  (a : Num)
       #|  forall a b m n.\n        coprime(a,b) /\\ ~(a = 0) /\\ ~(b = 0) /\\ coprime(m,a) /\\ coprime(n,b)\n        ==> ?!x. coprime(x,a * b) /\\ x < a * b /\\\n                 (x == m) (mod a) /\\ (x == n) (mod b)
-      #|  v:num
-      #|  u:num
-      #|  b:num
-      #|  a:num
-      #|  b = 0
-      #|  a = 0
+      #|  (v : Num)
+      #|  (u : Num)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (b : Num) == 0
+      #|  (a : Num) == 0
       #|  forall a b u v:num. coprime(a,b) ==> ?x. (x == u) (mod a) /\\ (x == v) (mod b)
       #|  forall a b x y.\n     coprime(a,b)\n     ==> ((x == y) (mod (a * b)) <=> (x == y) (mod a) /\\ (x == y) (mod b))
       #|  coprime(a,b)\n       ==> ((x == y) (mod (a * b)) <=>\n            (x == y) (mod a) /\\ (x == y) (mod b))
-      #|  a * b:num
-      #|  x MOD b
-      #|  x MOD a
-      #|  x:num
+      #|  (a : Num) * (b : Num)
+      #|  MOD((x : Num), (b : Num))
+      #|  MOD((x : Num), (a : Num))
+      #|  (x : Num)
       #|  \\(m,n). (f:num->num->num) m n
       #|  forall f. (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        IMAGE f s = t\n        ==> s HAS_SIZE p ==> t HAS_SIZE p
-      #|  f:num->num->num
-      #|  b:num
-      #|  a:num
-      #|  b = 0
-      #|  a = 0
+      #|  (f : (Num, Num) -> Num)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (b : Num) == 0
+      #|  (a : Num) == 0
       #|  forall P Q R a b m n.\n        coprime(a,b) /\\\n        (forall x. x < a * b ==> (R x <=> P (x MOD a) /\\ Q (x MOD b))) /\\\n        {x | x < a /\\ P x} HAS_SIZE m /\\ {x | x < b /\\ Q x} HAS_SIZE n\n        ==> {x | x < a * b /\\ R x} HAS_SIZE (m * n)
       #|  coprime(a:num,b)\n    ==> (coprime(a * b,x) <=> coprime(a,x) /\\ coprime(b,x))
-      #|  \\x:num. coprime(b,x) /\\ Q x
-      #|  \\x:num. coprime(a,x) /\\ P x
+      #|  (x : Num) => coprime(((b : Num), x)) && (Q : (Num) -> Bool)(x)
+      #|  (x : Num) => coprime(((a : Num), x)) && (P : (Num) -> Bool)(x)
       #|  forall P Q R a b m n.\n        coprime(a,b) /\\\n        (forall x. x < a * b ==> (R x <=> P (x MOD a) /\\ Q (x MOD b))) /\\\n        {x | x < a /\\ coprime(a,x) /\\ P x} HAS_SIZE m /\\\n        {x | x < b /\\ coprime(b,x) /\\ Q x} HAS_SIZE n\n        ==> {x | x < a * b /\\ coprime(a * b,x) /\\ R x} HAS_SIZE (m * n)
       #|  coprime(a,b)\n       ==> ((x == y) (mod (a * b)) <=>\n            (x == y) (mod a) /\\ (x == y) (mod b))
-      #|  \\x. (x EXP k == 1) (mod b)
-      #|  \\x. (x EXP k == 1) (mod a)
+      #|  (x : Num) => op_eq_eq(EXP(x, (k : Num)), 1, mod((b : Num)))
+      #|  (x : Num) => op_eq_eq(EXP(x, (k : Num)), 1, mod((a : Num)))
       #|  forall a b k m n.\n        coprime(a,b) /\\\n        {x | x < a /\\ (x EXP k == 1) (mod a)} HAS_SIZE m /\\\n        {x | x < b /\\ (x EXP k == 1) (mod b)} HAS_SIZE n\n        ==> {x | x < a * b /\\ (x EXP k == 1) (mod (a * b))} HAS_SIZE (m * n)
       #|  inverse_mod n x =\n    if n <= 1 then 1\n    else @y. y < n /\\ (x * y == gcd(n,x)) (mod n)
-      #|  2 <= n <=> ~(n <= 1)
-      #|  n <= 1 ==> n = 0 \\/ n = 1
-      #|  n <= 1
-      #|  x:num
-      #|  n:num
+      #|  (2 <= (n : Num)) == !(n <= 1)
+      #|  (n : Num) <= 1 \226\134\146 n == 0 || n == 1
+      #|  (n : Num) <= 1
+      #|  (x : Num)
+      #|  (n : Num)
       #|  (forall n x. inverse_mod n x < n <=> 2 <= n) /\\\n   (forall n x. (x * inverse_mod n x == gcd(n,x)) (mod n))
-      #|  forall n x. (inverse_mod n x * x == gcd(n,x)) (mod n)
+      #|  \226\136\128 n : Num, \226\136\128 x : Num, op_eq_eq(inverse_mod(n, x) * x, gcd((n, x)), mod(n))
       #|  forall n x. (x * inverse_mod n x == 1) (mod n) <=> coprime(n,x)
       #|  forall n x. (inverse_mod n x * x == 1) (mod n) <=> coprime(n,x)
       #|  forall n x. coprime(n,x) ==> (inverse_mod n x * x == 1) (mod n)
       #|  forall n x. coprime(n,x) ==> (x * inverse_mod n x == 1) (mod n)
-      #|  (a * x == 1) (mod n)
+      #|  op_eq_eq((a : Num) * (x : Num), 1, mod((n : Num)))
       #|  (a * x == 1) (mod n) /\\ (a * y == 1) (mod n) ==> (x == y) (mod n)
-      #|  n:num
+      #|  (n : Num)
       #|  ~(n = 1 /\\ x = 0) ==> ~(x = n) /\\ x <= n ==> ~(n = 1)
-      #|  (a * n == z) (mod n) <=> n divides z
-      #|  x:num = n
-      #|  n = 0
+      #|  op_eq_eq((a : Num) * (n : Num), (z : Num), mod(n)) == divides(n, z)
+      #|  (x : Num) == (n : Num)
+      #|  (n : Num) == 0
       #|  forall n a x.\n        (a * x == 1) (mod n) /\\ x <= n /\\ ~(n = 1 /\\ x = 0)\n        ==> inverse_mod n a = x
-      #|  ~(n <= 1) ==> 1 <= n
-      #|  n <= 1
-      #|  forall n. inverse_mod n 1 = 1
-      #|  (x:num == y) (mod n)
+      #|  !((n : Num) <= 1) \226\134\146 1 <= n
+      #|  (n : Num) <= 1
+      #|  \226\136\128 n : Num, inverse_mod(n, 1) == 1
+      #|  op_eq_eq((x : Num), (y : Num), mod((n : Num)))
       #|  forall n x y. (x == y) (mod n) ==> inverse_mod n x = inverse_mod n y
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  inverse_mod n x
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  inverse_mod((n : Num), (x : Num))
       #|  forall x'. (x * x' == 1) (mod n) /\\ (x' * x'' == 1) (mod n)\n         ==> (x'' == x) (mod n)
       #|  forall n x. coprime(n,x) ==> (inverse_mod n (inverse_mod n x) == x) (mod n)
       #|  forall n x. coprime(n,x) /\\ 1 <= x /\\ x <= n\n         ==> inverse_mod n (inverse_mod n x) = x
-      #|  (a * 0 == b) (mod n) <=> n divides b
-      #|  a:num
-      #|  n:num
-      #|  forall n a. ~(n divides a) ==> ~(inverse_mod n a = 0)
-      #|  coprime(n,a) ==> (n divides a <=> n divides 1)
-      #|  n = 1
-      #|  forall n a. coprime(n,a) ==> ~(inverse_mod n a = 0)
-      #|  forall n a. inverse_mod n a <= n <=> ~(n = 0)
+      #|  op_eq_eq((a : Num) * 0, (b : Num), mod((n : Num))) == divides(n, b)
+      #|  (a : Num)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 a : Num, !divides(n, a) \226\134\146 !(inverse_mod(n, a) == 0)
+      #|  coprime(((n : Num), (a : Num))) \226\134\146 divides(n, a) == divides(n, 1)
+      #|  (n : Num) == 1
+      #|  \226\136\128 n : Num, \226\136\128 a : Num, coprime((n, a)) \226\134\146 !(inverse_mod(n, a) == 0)
+      #|  \226\136\128 n : Num, \226\136\128 a : Num, (inverse_mod(n, a) <= n) == !(n == 0)
       #|  m * x <= m * n /\\ n * y <= n * m /\\ 2 * m * n <= q * m * n\n    ==> m * x + n * y = 1 + q * m * n ==> u:num = v
-      #|  q = 1
-      #|  n = 1
-      #|  m = 1
+      #|  (q : Num) == 1
+      #|  (n : Num) == 1
+      #|  (m : Num) == 1
       #|  a + b = 1 <=> a = 0 /\\ b = 1 \\/ a = 1 /\\ b = 0
-      #|  q = 0
-      #|  q:num
-      #|  n = 1
-      #|  m = 1
-      #|  (a + m * x == 1) (mod m) <=> (a == 1) (mod m)
-      #|  (m * x + a == 1) (mod m) <=> (a == 1) (mod m)
+      #|  (q : Num) == 0
+      #|  (q : Num)
+      #|  (n : Num) == 1
+      #|  (m : Num) == 1
+      #|  op_eq_eq((a : Num) + (m : Num) * (x : Num), 1, mod(m)) == op_eq_eq(a, 1, mod(m))
+      #|  op_eq_eq((m : Num) * (x : Num) + (a : Num), 1, mod(m)) == op_eq_eq(a, 1, mod(m))
       #|  (m * inverse_mod n m + n * inverse_mod m n == 1) (mod (m * n))
-      #|  n = 0
-      #|  m = 0
+      #|  (n : Num) == 0
+      #|  (m : Num) == 0
       #|  forall m n. coprime(m,n)\n         ==> m * inverse_mod n m + n * inverse_mod m n = m * n + 1
       #|  (inverse_mod 0 n = 1 /\\ inverse_mod 1 n = 1) /\\\n     (MAX 2 p <= n /\\ (m * p) MOD n = 1 ==> inverse_mod n m = p)
       #|  inverse_mod
-      #|  m:num
-      #|  n:num
-      #|  p:num
-      #|  squarefree n <=> forall m. m EXP 2 divides n ==> m = 1
-      #|  ~(1 = 0)
-      #|  ~squarefree 0
-      #|  squarefree 1
-      #|  forall n. squarefree n ==> ~(n = 0)
-      #|  (p:num) divides m
-      #|  m EXP 2 divides n
-      #|  p:num
-      #|  p:num
-      #|  m:num
-      #|  m = 1
-      #|  m:num
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (p : Num)
+      #|  (squarefree : (Num) -> Bool)((n : Num)) == (\226\136\128 m : Num, divides(EXP(m, 2), n) \226\134\146 m == 1)
+      #|  !(1 == 0)
+      #|  !squarefree(0)
+      #|  squarefree(1)
+      #|  \226\136\128 n : Num, squarefree(n) \226\134\146 !(n == 0)
+      #|  divides((p : Num), (m : Num))
+      #|  divides(EXP((m : Num), 2), (n : Num))
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (m : Num)
+      #|  (m : Num) == 1
+      #|  (m : Num)
       #|  (q ==> r) /\\ (p ==> q) /\\ (r ==> p)\n    ==> (p <=> q) /\\ (p <=> r)
-      #|  n:num
+      #|  (n : Num)
       #|  (forall n. squarefree n <=> forall p. prime p ==> ~(p EXP 2 divides n)) /\\\n   (forall n. squarefree n <=> forall p. prime p /\\ p divides n ==> ~(p EXP 2 divides n))
-      #|  ~(2 <= n) <=> n <= 1
-      #|  m = 1
-      #|  m:num
-      #|  p \\/ q ==> p <=> q ==> p
-      #|  ~(1 = 0)
-      #|  n = 0
-      #|  forall n. squarefree n <=> ~(n = 0) /\\ forall m. index m n <= 1
-      #|  ~(2 <= n) <=> n <= 1
-      #|  n = 0
+      #|  !(2 <= (n : Num)) == (n <= 1)
+      #|  (m : Num) == 1
+      #|  (m : Num)
+      #|  ((p : Bool) || (q : Bool) \226\134\146 p) == (q \226\134\146 p)
+      #|  !(1 == 0)
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, squarefree(n) == (!(n == 0) && (\226\136\128 m : Num, index(m, n) <= 1))
+      #|  !(2 <= (n : Num)) == (n <= 1)
+      #|  (n : Num) == 0
       #|  forall n. squarefree n <=>\n       ~(n = 0) /\\ forall p. prime p ==> index p n <= 1
       #|  (r ==> p) /\\ (q ==> r) /\\ (p ==> q)\n    ==> (p <=> q) /\\ (p <=> r)
-      #|  n:num
+      #|  (n : Num)
       #|  (forall n. squarefree n <=> forall a b. a * b = n ==> coprime(a,b)) /\\\n   (forall n. squarefree n <=> forall a b. a * b divides n ==> coprime(a,b))
-      #|  forall m n. squarefree n /\\ m divides n ==> squarefree m
-      #|  forall p. prime p ==> squarefree p
-      #|  coprime(m:num,n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, squarefree(n) && divides(m, n) \226\134\146 squarefree(m)
+      #|  \226\136\128 p : Num, prime(p) \226\134\146 squarefree(p)
+      #|  coprime(((m : Num), (n : Num)))
       #|  forall m n. squarefree(m * n) <=> coprime(m,n) /\\ squarefree m /\\ squarefree n
-      #|  n:num
-      #|  k = 1
-      #|  k = 0
-      #|  n = 1
+      #|  (n : Num)
+      #|  (k : Num) == 1
+      #|  (k : Num) == 0
+      #|  (n : Num) == 1
       #|  forall n k. squarefree(n EXP k) <=> n = 1 \\/ k = 0 \\/ squarefree n /\\ k = 1
-      #|  p ==> q ==> r <=> q ==> p ==> r
-      #|  (if p then 1 else 0) <= x <=> p ==> 1 <= x
-      #|  prime p
-      #|  p:num
-      #|  p:num
-      #|  n = 0
+      #|  ((p : Bool) \226\134\146 (q : Bool) \226\134\146 (r : Bool)) == (q \226\134\146 p \226\134\146 r)
+      #|  ((if (p : Bool) { 1 } else { 0 }) <= (x : Num)) == (p \226\134\146 1 <= x)
+      #|  prime((p : Num))
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (n : Num) == 0
       #|  forall q n. squarefree q\n         ==> (q divides n <=> forall p. prime p /\\ p divides q ==> p divides n)
       #|  forall n q x. squarefree q /\\ q divides x EXP n ==> q divides x
       #|  forall n q x. squarefree q /\\ ~(n = 0) ==> (q divides x EXP n <=> q divides x)
-      #|  r = 1 * r
-      #|  p * r:num
-      #|  r:num
-      #|  p:num
+      #|  (r : Num) == 1 * r
+      #|  (p : Num) * (r : Num)
+      #|  (r : Num)
+      #|  (p : Num)
       #|  ((p ==> q) /\\ (q ==> r)) /\\ (r ==> p) ==> (p <=> q) /\\ (p <=> r)
       #|  (forall n. squarefree n <=> ~(n = 0) /\\ forall m k. n divides m EXP k ==> n divides m) /\\\n   (forall n. squarefree n <=> ~(n = 0) /\\ forall m. n divides m EXP 2 ==> n divides m)
       #|  forall m n. squarefree m \\/ squarefree n ==> squarefree(gcd(m,n))
-      #|  p:num
-      #|  prime p
-      #|  p:num
-      #|  p \\/ q <=> ~p ==> q
-      #|  p \\/ q <=> ~p ==> q
+      #|  (p : Num)
+      #|  prime((p : Num))
+      #|  (p : Num)
+      #|  ((p : Bool) || (q : Bool)) == (!p \226\134\146 q)
+      #|  ((p : Bool) || (q : Bool)) == (!p \226\134\146 q)
       #|  2
-      #|  n = 0
-      #|  forall n. squarefree n <=> forall x. gcd(x EXP 2,n) divides x
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, squarefree(n) == (\226\136\128 x : Num, divides(gcd((EXP(x, 2), n)), x))
       #|  forall s. FINITE s\n       ==> (squarefree(nproduct s (\\n. n)) <=>\n            pairwise (\\a b. coprime(a,b)) s /\\ forall n. n IN s ==> squarefree n)
-      #|  n <= 1 <=> n = 0 \\/ n = 1
-      #|  p:num
-      #|  p:num
+      #|  ((n : Num) <= 1) == (n == 0 || n == 1)
+      #|  (p : Num)
+      #|  (p : Num)
       #|  forall n. squarefree n\n       ==> nproduct {p | prime p /\\ p divides n} (\\p. p) = n
-      #|  n = 0
+      #|  (n : Num) == 0
       #|  forall n. squarefree n <=>\n       ~(n = 0) /\\ nproduct {p | prime p /\\ p divides n} (\\p. p) = n
-      #|  p EXP (k DIV 2)
-      #|  p EXP (k MOD 2)
-      #|  k:num
-      #|  p:num
-      #|  na * nb:num
-      #|  ma * mb:num
-      #|  coprime(a:num,b)
-      #|  nb:num
-      #|  mb:num
-      #|  na:num
-      #|  ma:num
-      #|  b:num
-      #|  a:num
+      #|  EXP((p : Num), DIV((k : Num), 2))
+      #|  EXP((p : Num), MOD((k : Num), 2))
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  (na : Num) * (nb : Num)
+      #|  (ma : Num) * (mb : Num)
+      #|  coprime(((a : Num), (b : Num)))
+      #|  (nb : Num)
+      #|  (mb : Num)
+      #|  (na : Num)
+      #|  (ma : Num)
+      #|  (b : Num)
+      #|  (a : Num)
       #|  0
       #|  1
-      #|  forall n. ?m r. squarefree m /\\ m * r EXP 2 = n
+      #|  \226\136\128 n : Num, \226\136\131 m : Num, \226\136\131 r : Num, squarefree(m) && m * EXP(r, 2) == n
       #|  coprime(m:num,n)\n    ==> ((a == b) (mod (m * n)) <=>\n         (a == b) (mod m) /\\ (a == b) (mod n))
-      #|  squarefree n
-      #|  squarefree m
-      #|  n:num
-      #|  m:num
+      #|  squarefree((n : Num))
+      #|  squarefree((m : Num))
+      #|  (n : Num)
+      #|  (m : Num)
       #|  forall n a b. squarefree n /\\\n           (forall p. prime p /\\ p divides n ==> (a == b) (mod p))\n           ==> (a == b) (mod n)
       #|  forall n a b. squarefree n\n           ==> ((a == b) (mod n) <=>\n               forall p. prime p /\\ p divides n ==> (a == b) (mod p))
       #|  phi(n) = CARD { m | 0 < m /\\ m <= n /\\ coprime(m,n) }
-      #|  m = 0
-      #|  m:num
+      #|  (m : Num) == 0
+      #|  (m : Num)
       #|  ({m | 0 < m /\\ m <= n /\\ coprime (m,n)} = {1}) /\\\n      ({m | coprime (m,n) /\\ m < n} = {0})
-      #|  n = 1
-      #|  n = 0
-      #|  phi(n) = CARD { m | coprime(m,n) /\\ m < n}
-      #|  0..n
-      #|  forall n. FINITE {m | coprime(m,n) /\\ m < n}
+      #|  (n : Num) == 1
+      #|  (n : Num) == 0
+      #|  phi((n : Num)) == CARD({(m : Num) | coprime((m, n)) && m < n})
+      #|  op_dot_dot(0, (n : Num))
+      #|  \226\136\128 n : Num, FINITE({(m : Num) | coprime((m, n)) && m < n})
       #|  forall n. ~(n = 1) ==> (phi(n) = CARD {m | 0 < m /\\ m < n /\\ coprime(m,n)})
-      #|  forall n. phi(n) <= n
-      #|  n:num
-      #|  forall n. ~(n = 1) ==> phi(n) <= n - 1
+      #|  \226\136\128 n : Num, phi(n) <= n
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, !(n == 1) \226\134\146 phi(n) <= n - 1
       #|  0
-      #|  phi 0 = 0
-      #|  phi 1 = 1
-      #|  {b | b <= n}
-      #|  1 = CARD {1}
-      #|  forall n. 1 <= n ==> 1 <= phi(n)
+      #|  phi(0) == 0
+      #|  phi(1) == 1
+      #|  {(b : Num) | b <= (n : Num)}
+      #|  1 == CARD({1})
+      #|  \226\136\128 n : Num, 1 <= n \226\134\146 1 <= phi(n)
       #|  1 <= 2
-      #|  forall n. 2 <= n ==> 1 <= phi(n)
-      #|  {b | b <= n}
-      #|  3 <= n
-      #|  1 = n - (n - 1)
-      #|  n:num
-      #|  d:num
-      #|  3 <= n ==> 0 < n - 1 /\\ n - 1 <= n /\\ 1 <= n
-      #|  3 <= n ==> ~(1 = n - 1)
-      #|  2 = CARD {1,(n-1)}
-      #|  forall n. 3 <= n ==> 2 <= phi(n)
-      #|  n:num
-      #|  forall n. phi n = 0 <=> n = 0
+      #|  \226\136\128 n : Num, 2 <= n \226\134\146 1 <= phi(n)
+      #|  {(b : Num) | b <= (n : Num)}
+      #|  3 <= (n : Num)
+      #|  1 == (n : Num) - (n - 1)
+      #|  (n : Num)
+      #|  (d : Num)
+      #|  3 <= (n : Num) \226\134\146 0 < n - 1 && n - 1 <= n && 1 <= n
+      #|  3 <= (n : Num) \226\134\146 !(1 == n - 1)
+      #|  2 == CARD({1, (n : Num) - 1})
+      #|  \226\136\128 n : Num, 3 <= n \226\134\146 2 <= phi(n)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, (phi(n) == 0) == (n == 0)
       #|  {m | 0 < m /\\ m < n /\\ coprime (m,n)} = {m | 0 < m /\\ m < n}
-      #|  n:num
-      #|  n = 1
-      #|  n = 0
+      #|  (n : Num)
+      #|  (n : Num) == 1
+      #|  (n : Num) == 0
       #|  forall n. (phi n = n - 1) /\\ ~(n = 0) /\\ ~(n = 1) <=> prime n
-      #|  forall p. prime p ==> phi p = p - 1
-      #|  p * n < p * p EXP k
-      #|  n:num
-      #|  n:num
-      #|  x:num
-      #|  (a <=> b) <=> (a ==> b) /\\ (b ==> a)
+      #|  \226\136\128 p : Num, prime(p) \226\134\146 phi(p) == p - 1
+      #|  (p : Num) * (n : Num) < p * EXP(p, (k : Num))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (x : Num)
+      #|  ((a : Bool) == (b : Bool)) == ((a \226\134\146 b) && (b \226\134\146 a))
       #|  {m | p divides m /\\ m < p EXP (k + 1)} =\n                IMAGE (\\x. p * x) {m | m < p EXP k}
       #|  {n | ~(P n) /\\ Q n} = {n | Q n} DIFF {n | P n /\\ Q n}
       #|  forall p k. prime(p) ==> phi(p EXP (k + 1)) = p EXP (k + 1) - p EXP k
       #|  forall p k. prime p\n         ==> phi(p EXP k) = if k = 0 then 1 else p EXP k - p EXP (k - 1)
-      #|  ~(k = 0) ==> SUC(k - 1) = k
+      #|  !((k : Num) == 0) \226\134\146 SUC(k - 1) == k
       #|  forall p k. prime p\n         ==> phi(p EXP k) = if k = 0 then 1 else p EXP (k - 1) * (p - 1)
-      #|  phi 2 = 1
-      #|  n:num
-      #|  m:num
-      #|  b:num
-      #|  a:num
-      #|  n:num
-      #|  m:num
-      #|  pp:num#num
-      #|  \\p. p MOD a,p MOD b
-      #|  b = 0
-      #|  a = 0
-      #|  forall a b. coprime(a,b) ==> phi(a * b) = phi(a) * phi(b)
-      #|  k = 1
-      #|  ~(2 = 1)
-      #|  3 <= n <=> 1 < n /\\ ~(n = 2)
-      #|  forall n. 3 <= n ==> EVEN(phi n)
-      #|  ~(n = 0 \\/ 3 <= n) <=> n = 1 \\/ n = 2
-      #|  forall n. EVEN(phi n) <=> n = 0 \\/ 3 <= n
-      #|  forall n. ODD(phi n) <=> n = 1 \\/ n = 2
-      #|  k - 1 = 0 <=> k = 0 \\/ k = 1
-      #|  k - 1 <= k
+      #|  phi(2) == 1
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (pp : (Num, Num))
+      #|  (p : Num) => (MOD(p, (a : Num)), MOD(p, (b : Num)))
+      #|  (b : Num) == 0
+      #|  (a : Num) == 0
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, coprime((a, b)) \226\134\146 phi(a * b) == phi(a) * phi(b)
+      #|  (k : Num) == 1
+      #|  !(2 == 1)
+      #|  (3 <= (n : Num)) == (1 < n && !(n == 2))
+      #|  \226\136\128 n : Num, 3 <= n \226\134\146 EVEN(phi(n))
+      #|  !((n : Num) == 0 || 3 <= n) == (n == 1 || n == 2)
+      #|  \226\136\128 n : Num, EVEN(phi(n)) == (n == 0 || 3 <= n)
+      #|  \226\136\128 n : Num, ODD(phi(n)) == (n == 1 || n == 2)
+      #|  ((k : Num) - 1 == 0) == (k == 0 || k == 1)
+      #|  (k : Num) - 1 <= k
       #|  p EXP k - p EXP k1 = p EXP k - 1\n      ==> ~(p EXP k = 0) /\\ p EXP k1 <= p EXP k ==> p EXP k1 = 1
-      #|  k:num
-      #|  p:num
-      #|  ~(n = 0) /\\ m <= n - 1 ==> m + 1 <= n
-      #|  1 < n ==> ~(n = 0)
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  !((n : Num) == 0) && (m : Num) <= n - 1 \226\134\146 m + 1 <= n
+      #|  1 < (n : Num) \226\134\146 !(n == 0)
       #|  ~(m = 0 /\\ n = 0) /\\ (m + 1) * (n + 1) <= k ==> ~(m * n = k - 1)
-      #|  ~p ==> p ==> q
-      #|  n:num
-      #|  m:num
-      #|  n:num
-      #|  p:num
-      #|  1 < p
-      #|  p = 1
-      #|  p = 0
-      #|  forall p. phi p = p - 1 <=> p = 0 \\/ prime p
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (p : Num)
+      #|  1 < (p : Num)
+      #|  (p : Num) == 1
+      #|  (p : Num) == 0
+      #|  \226\136\128 p : Num, (phi(p) == p - 1) == (p == 0 || prime(p))
       #|  forall n. ~prime n /\\ ~(n = 0) /\\ ~(n = 1) ==> phi n < n - 1
-      #|  \\x y. (x == y) (mod n)
+      #|  (x : Num) => (y : Num) => op_eq_eq(x, y, mod((n : Num)))
       #|  forall s a:A->num n.\n        FINITE s /\\ ~(n = 0)\n        ==> (nproduct s (\\m. a(m) MOD n) == nproduct s a) (mod n)
       #|  forall s a c.\n        FINITE s\n        ==> nproduct s (\\m. c * a(m)) = c EXP (CARD s) * nproduct s a
       #|  ~(n = 0) ==> ((a * x MOD n == b) (mod n) <=> (a * x == b) (mod n))
-      #|  (k * m == 1) (mod n)
-      #|  \\x. (m * x) MOD n
-      #|  \\x. (k * x) MOD n
-      #|  ?m. (k * m == 1) (mod n)
-      #|  {x | F} = {}
-      #|  n = 0
+      #|  op_eq_eq((k : Num) * (m : Num), 1, mod((n : Num)))
+      #|  (x : Num) => MOD((m : Num) * x, (n : Num))
+      #|  (x : Num) => MOD((k : Num) * x, (n : Num))
+      #|  \226\136\131 m : Num, op_eq_eq((k : Num) * m, 1, mod((n : Num)))
+      #|  {(x : _) | false} == {}
+      #|  (n : Num) == 0
       #|  forall op f n k.\n        monoidal(op) /\\ coprime(k,n) /\\\n        (forall x y. (x == y) (mod n) ==> f x = f y)\n        ==> iterate op {d | coprime(d,n) /\\ d < n} (\\m. f(k * m)) =\n            iterate op {d | coprime(d,n) /\\ d < n} f
-      #|  1 <= x <=> ~(x = 0)
-      #|  d = 0
-      #|  d:num
-      #|  1 <= x <=> ~(x = 0)
-      #|  k:num
-      #|  n:num
-      #|  \\(n:num,k). n * k,n
-      #|  \\(n,d). d,n DIV d
+      #|  (1 <= (x : Num)) == !(x == 0)
+      #|  (d : Num) == 0
+      #|  (d : Num)
+      #|  (1 <= (x : Num)) == !(x == 0)
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  GABS((f : ((Num, Num)) -> (Num, Num)) => \226\136\128 n : Num, \226\136\128 k : Num, GEQ(f((n, k)), (n * k, n)))
+      #|  GABS((f : ((Num, Num)) -> (Num, Num)) => \226\136\128 n : Num, \226\136\128 d : Num, GEQ(f((n, d)), (d, DIV(n, d))))
       #|  forall op:A->A->A f x.\n        monoidal op\n        ==> iterate op (1..x) (\\n. iterate op {d | d divides n} (f n)) =\n            iterate op (1..x)\n                       (\\n. iterate op (1..(x DIV n)) (\\k. f (k * n) n))
-      #|  a:num
-      #|  n:num
-      #|  \\x. x MOD n
-      #|  ( * ):num->num->num
+      #|  (a : Num)
+      #|  (n : Num)
+      #|  (x : Num) => MOD(x, (n : Num))
+      #|  op_star
       #|  nproduct {m | coprime(m,n) /\\ m < n} (\\m. (a * m) MOD n)
-      #|  nproduct {m | coprime (m,n) /\\ m < n} (\\m. m)
-      #|  n = 0
-      #|  forall a n. coprime(a,n) ==> (a EXP (phi n) == 1) (mod n)
+      #|  nproduct({(m : Num) | coprime((m, (n : Num))) && m < n}, (m : Num) => m)
+      #|  (n : Num) == 0
+      #|  \226\136\128 a : Num, \226\136\128 n : Num, coprime((a, n)) \226\134\146 op_eq_eq(EXP(a, phi(n)), 1, mod(n))
       #|  forall a p. prime p /\\ coprime(a,p) ==> (a EXP (p - 1) == 1) (mod p)
-      #|  ~(m = 0)
-      #|  m = SUC(m - 1)
-      #|  a EXP m DIV n * n
-      #|  d divides (a EXP m) MOD n
-      #|  ~(n = 1)
-      #|  ~(n = 0)
+      #|  !((m : Num) == 0)
+      #|  (m : Num) == SUC(m - 1)
+      #|  DIV(EXP((a : Num), (m : Num)), (n : Num)) * n
+      #|  divides((d : Num), MOD(EXP((a : Num), (m : Num)), (n : Num)))
+      #|  !((n : Num) == 1)
+      #|  !((n : Num) == 0)
       #|  0
-      #|  1 MOD n = 1
-      #|  (a EXP m == 1) (mod n)
-      #|  d:num
-      #|  n = 1
-      #|  m = 0
-      #|  n = 0
+      #|  MOD(1, (n : Num)) == 1
+      #|  op_eq_eq(EXP((a : Num), (m : Num)), 1, mod((n : Num)))
+      #|  (d : Num)
+      #|  (n : Num) == 1
+      #|  (m : Num) == 0
+      #|  (n : Num) == 0
       #|  forall m n a. ~(m = 0) /\\ (a EXP m == 1) (mod n) ==> coprime(a,n)
-      #|  1 <= n ==> 0 < n
-      #|  a ==> ~(a /\\ b) ==> ~b
-      #|  2 <= n ==> ~(n - 1 = 0)
-      #|  n - 1
-      #|  coprime(a,n)
-      #|  phi n
-      #|  2 <= n ==> ~(n = 0) /\\ ~(n = 1)
+      #|  1 <= (n : Num) \226\134\146 0 < n
+      #|  (a : Bool) \226\134\146 !(a && (b : Bool)) \226\134\146 !b
+      #|  2 <= (n : Num) \226\134\146 !(n - 1 == 0)
+      #|  (n : Num) - 1
+      #|  coprime(((a : Num), (n : Num)))
+      #|  phi((n : Num))
+      #|  2 <= (n : Num) \226\134\146 !(n == 0) && !(n == 1)
       #|  forall a n. 2 <= n /\\\n         (a EXP (n - 1) == 1) (mod n) /\\\n         (forall m. 0 < m /\\ m < n - 1 ==> ~(a EXP m == 1) (mod n))\n         ==> prime(n)
-      #|  (MOD)
-      #|  n:num
-      #|  (EXP)
-      #|  r DIV p
-      #|  (a EXP m == 1) (mod n)
-      #|  p divides r
-      #|  ~(p = 0) ==> 0 < p
-      #|  p = 0
-      #|  prime p
+      #|  MOD
+      #|  (n : Num)
+      #|  EXP
+      #|  DIV((r : Num), (p : Num))
+      #|  op_eq_eq(EXP((a : Num), (m : Num)), 1, mod((n : Num)))
+      #|  divides((p : Num), (r : Num))
+      #|  !((p : Num) == 0) \226\134\146 0 < p
+      #|  (p : Num) == 0
+      #|  prime((p : Num))
       #|  0
-      #|  (m * r) DIV p = m * (r DIV p)
-      #|  p:num
+      #|  DIV((m : Num) * (r : Num), (p : Num)) == m * DIV(r, p)
+      #|  (p : Num)
       #|  forall p. prime p /\\ p divides m * r\n                   ==> ~(a EXP ((m * r) DIV p) == 1) (mod n)
-      #|  p:num
-      #|  m < m * r
-      #|  ~(r = 1)
-      #|  r:num
-      #|  ((a EXP m) MOD n) EXP ((n - 1) DIV m) MOD n
-      #|  (a EXP m == 1) (mod n)
-      #|  (a EXP (n - 1) == 1) (mod n)
-      #|  m:num
-      #|  a EXP ((n - 1) DIV m * m)
-      #|  m:num
-      #|  (n - 1) MOD m
-      #|  ~(0 < n) ==> (n = 0)
-      #|  m divides (n - 1)
-      #|  0 < n ==> ~(n = 0)
-      #|  m:num
-      #|  a ==> ~b <=> ~(a /\\ b)
-      #|  a:num
-      #|  2 <= n ==> ~(n = 0)
+      #|  (p : Num)
+      #|  (m : Num) < m * (r : Num)
+      #|  !((r : Num) == 1)
+      #|  (r : Num)
+      #|  MOD(EXP(MOD(EXP((a : Num), (m : Num)), (n : Num)), DIV(n - 1, m)), n)
+      #|  op_eq_eq(EXP((a : Num), (m : Num)), 1, mod((n : Num)))
+      #|  op_eq_eq(EXP((a : Num), (n : Num) - 1), 1, mod(n))
+      #|  (m : Num)
+      #|  EXP((a : Num), DIV((n : Num) - 1, (m : Num)) * m)
+      #|  (m : Num)
+      #|  MOD((n : Num) - 1, (m : Num))
+      #|  !(0 < (n : Num)) \226\134\146 n == 0
+      #|  divides((m : Num), (n : Num) - 1)
+      #|  0 < (n : Num) \226\134\146 !(n == 0)
+      #|  (m : Num)
+      #|  ((a : Bool) \226\134\146 !(b : Bool)) == !(a && b)
+      #|  (a : Num)
+      #|  2 <= (n : Num) \226\134\146 !(n == 0)
       #|  forall a n. 2 <= n /\\\n         (a EXP (n - 1) == 1) (mod n) /\\\n         (forall p. prime(p) /\\ p divides (n - 1)\n              ==> ~(a EXP ((n - 1) DIV p) == 1) (mod n))\n         ==> prime(n)
       #|  order n a = @d. forall k. (a EXP k == 1) (mod n) <=> d divides k
-      #|  forall x n. x EXP n = ITER n (\\y. x * y) (1)
+      #|  \226\136\128 x : Num, \226\136\128 n : Num, EXP(x, n) == ITER(n, (y : Num) => x * y, 1)
       #|  1
-      #|  \\x:num. a * x
-      #|  \\x y:num. (x == y) (mod n)
+      #|  (x : Num) => (a : Num) * x
+      #|  (x : Num) => (y : Num) => op_eq_eq(x, y, mod((n : Num)))
       #|  forall n a d. (a EXP d == 1) (mod n) <=> order(n) a divides d
-      #|  forall n a. (a EXP (order(n) a) == 1) (mod n)
+      #|  \226\136\128 n : Num, \226\136\128 a : Num, op_eq_eq(EXP(a, order(n, a)), 1, mod(n))
       #|  forall n a d. order n a = d <=> forall k. (a EXP k == 1) (mod n) <=> d divides k
       #|  forall n a m. 0 < m /\\ m < order(n) a ==> ~((a EXP m == 1) (mod n))
       #|  forall n a. (a EXP (order(n) a) == 1) (mod n) /\\\n         forall m. 0 < m /\\ m < order(n) a ==> ~((a EXP m == 1) (mod n))
-      #|  forall n. order n 1 = 1
-      #|  ~p ==> (q ==> p) ==> q ==> r
-      #|  m:num
-      #|  order n a
-      #|  a:num
-      #|  n:num
-      #|  ~(1 = 0)
-      #|  forall n a. order(n) a = 0 <=> ~coprime(n,a)
-      #|  forall n a. order n a = 1 <=> (a == 1) (mod n)
-      #|  1 divides n /\\ n divides n
+      #|  \226\136\128 n : Num, order(n, 1) == 1
+      #|  !(p : Bool) \226\134\146 ((q : Bool) \226\134\146 p) \226\134\146 q \226\134\146 (r : Bool)
+      #|  (m : Num)
+      #|  order((n : Num), (a : Num))
+      #|  (a : Num)
+      #|  (n : Num)
+      #|  !(1 == 0)
+      #|  \226\136\128 n : Num, \226\136\128 a : Num, (order(n, a) == 0) == !coprime((n, a))
+      #|  \226\136\128 n : Num, \226\136\128 a : Num, (order(n, a) == 1) == op_eq_eq(a, 1, mod(n))
+      #|  divides(1, (n : Num)) && divides(n, n)
       #|  forall n a p.\n        prime p\n        ==> (order n a = p <=> ~((a == 1) (mod n)) /\\ (a EXP p == 1) (mod n))
-      #|  forall n a b. (a == b) (mod n) ==> order n a = order n b
-      #|  forall p n. order p (n MOD p) = order p n
-      #|  n > 0 <=> ~(n = 0)
+      #|  \226\136\128 n : Num, \226\136\128 a : Num, \226\136\128 b : Num, op_eq_eq(a, b, mod(n)) \226\134\146 order(n, a) == order(n, b)
+      #|  \226\136\128 p : Num, \226\136\128 n : Num, order(p, MOD(n, p)) == order(p, n)
+      #|  ((n : Num) > 0) == !(n == 0)
       #|  forall n a. coprime(n,a)\n         ==> order(n) a > 0 /\\\n            (a EXP (order(n) a) == 1) (mod n) /\\\n            forall m. 0 < m /\\ m < order(n) a ==> ~((a EXP m == 1) (mod n))
-      #|  forall a n. coprime(n,a) ==> (order n a) divides (phi n)
-      #|  order n a = 0
-      #|  forall n. ~(n = 0) ==> order n a <= phi n
-      #|  (e + 0) + c = e + c
-      #|  e = e + 0
-      #|  c:num
+      #|  \226\136\128 a : Num, \226\136\128 n : Num, coprime((n, a)) \226\134\146 divides(order(n, a), phi(n))
+      #|  order((n : Num), (a : Num)) == 0
+      #|  \226\136\128 n : Num, !(n == 0) \226\134\146 order(n, (a : Num)) <= phi(n)
+      #|  (e : Num) + 0 + (c : Num) == e + c
+      #|  (e : Num) == e + 0
+      #|  (c : Num)
       #|  forall a n d e. coprime(n,a) /\\ e <= d\n              ==> ((a EXP d == a EXP e) (mod n) <=> (d == e) (mod (order n a)))
       #|  forall a n d e. coprime(n,a)\n             ==> ((a EXP d == a EXP e) (mod n) <=> (d == e) (mod (order n a)))
-      #|  (a EXP k == 1) (mod n)
-      #|  k:num
-      #|  a:num
-      #|  n:num
-      #|  order n a = 0
-      #|  k:num
-      #|  a:num
-      #|  n:num
-      #|  order n a
+      #|  op_eq_eq(EXP((a : Num), (k : Num)), 1, mod((n : Num)))
+      #|  (k : Num)
+      #|  (a : Num)
+      #|  (n : Num)
+      #|  order((n : Num), (a : Num)) == 0
+      #|  (k : Num)
+      #|  (a : Num)
+      #|  (n : Num)
+      #|  order((n : Num), (a : Num))
       #|  forall n a k. 0 < k /\\\n           (a EXP k == 1) (mod n) /\\\n           (forall m. 0 < m /\\ m < k ==> ~(a EXP m == 1) (mod n))\n           ==> order n a = k
       #|  coprime(m,n)\n    ==> ((x == y) (mod (m * n)) <=>\n         (x == y) (mod m) /\\ (x == y) (mod n))
       #|  forall m n a. coprime(m,n) ==> order (m * n) a = lcm(order m a,order n a)
-      #|  e:num
-      #|  d = 0
-      #|  d = gcd(order p a,k)
-      #|  gcd(order p a,k) divides order p a
-      #|  j:num
-      #|  order p a = 0
+      #|  (e : Num)
+      #|  (d : Num) == 0
+      #|  (d : Num) == gcd((order((p : Num), (a : Num)), (k : Num)))
+      #|  divides(gcd((order((p : Num), (a : Num)), (k : Num))), order(p, a))
+      #|  (j : Num)
+      #|  order((p : Num), (a : Num)) == 0
       #|  forall p a k. order p (a EXP k) =\n           if k = 0 then 1 else order p a DIV gcd(order p a,k)
       #|  forall p a k. ~(k = 0) /\\ k divides order p a\n           ==> order p (a EXP k) = order p a DIV k
       #|  (a * b == 1) (mod n) ==> ((a == 1) (mod n) <=> (b == 1) (mod n))
-      #|  k:num
-      #|  d:num
+      #|  (k : Num)
+      #|  (d : Num)
       #|  forall n a. coprime(n,a) ==> order n (inverse_mod n a) = order n a
       #|  forall p a b. order p (a * b) divides order p a * order p b
-      #|  (a == 1) (mod n) ==> (b == a * b) (mod n)
-      #|  (b == 1) (mod n) ==> (a == a * b) (mod n)
-      #|  (a * b) EXP (order p a * order p (a * b))
-      #|  (a * b) EXP (order p b * order p (a * b))
+      #|  op_eq_eq((a : Num), 1, mod((n : Num))) \226\134\146 op_eq_eq((b : Num), a * b, mod(n))
+      #|  op_eq_eq((b : Num), 1, mod((n : Num))) \226\134\146 op_eq_eq((a : Num), a * b, mod(n))
+      #|  EXP((a : Num) * (b : Num), order((p : Num), a) * order(p, a * b))
+      #|  EXP((a : Num) * (b : Num), order((p : Num), b) * order(p, a * b))
       #|  (a:num) divides (b * c) /\\ b divides (a * c) /\\ coprime(a,b)\n    ==> (a * b) divides c
       #|  forall p a b. coprime(order p a,order p b)\n           ==> order p (a * b) = order p a * order p b
-      #|  gcd(a * b:num,a) = a /\\ gcd(a * b,b) = b
-      #|  order p (a EXP m') = m /\\ order p (b EXP n') = n
-      #|  a EXP m' * b EXP n'
-      #|  n':num
-      #|  m':num
-      #|  n:num
-      #|  m:num
-      #|  order p b
-      #|  order p a
-      #|  order p b = 0
-      #|  order p a = 0
-      #|  forall p a b. ?c. order p c = lcm(order p a,order p b)
-      #|  a:num <= b ==> b <= a ==> a = b
-      #|  q MOD p
-      #|  q:num
-      #|  n:num
-      #|  m:num
-      #|  p:num
-      #|  m:num
-      #|  a <= b ==> ~(a = 0) ==> ~(b = 0)
+      #|  gcd(((a : Num) * (b : Num), a)) == a && gcd((a * b, b)) == b
+      #|  order((p : Num), EXP((a : Num), (m' : Num))) == (m : Num) && order(p, EXP((b : Num), (n' : Num))) == (n : Num)
+      #|  EXP((a : Num), (m' : Num)) * EXP((b : Num), (n' : Num))
+      #|  (n' : Num)
+      #|  (m' : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  order((p : Num), (b : Num))
+      #|  order((p : Num), (a : Num))
+      #|  order((p : Num), (b : Num)) == 0
+      #|  order((p : Num), (a : Num)) == 0
+      #|  \226\136\128 p : Num, \226\136\128 a : Num, \226\136\128 b : Num, \226\136\131 c : Num, order(p, c) == lcm((order(p, a), order(p, b)))
+      #|  (a : Num) <= (b : Num) \226\134\146 b <= a \226\134\146 a == b
+      #|  MOD((q : Num), (p : Num))
+      #|  (q : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (p : Num)
+      #|  (m : Num)
+      #|  (a : Num) <= (b : Num) \226\134\146 !(a == 0) \226\134\146 !(b == 0)
       #|  1
-      #|  n:num
-      #|  IMAGE f s x <=> x IN IMAGE f s
-      #|  IMAGE (order p) {k | k < p}
-      #|  p = 0
+      #|  (n : Num)
+      #|  IMAGE((f : (_) -> _), (s : (_) -> Bool), (x : _)) == IN(x, IMAGE(f, s))
+      #|  IMAGE(order((p : Num)), {(k : Num) | k < p})
+      #|  (p : Num) == 0
       #|  forall p. ~(p = 1)\n       ==> ?n. coprime(p,n) /\\\n               forall m. coprime(p,m) ==> order p m divides order p n
-      #|  a EXP l
-      #|  l:num
+      #|  EXP((a : Num), (l : Num))
+      #|  (l : Num)
       #|  1
       #|  forall n a k. coprime(n,a) /\\ coprime(k,phi n)\n           ==> ?x. (x EXP k == a) (mod n)
       #|  forall p a k. prime p /\\ ~(p divides a) /\\ coprime(k,p - 1)\n           ==> ?x. (x EXP k == a) (mod p)
       #|  (a:num == b) (mod d) ==> e divides d ==> (a == b) (mod e)
       #|  (a':num == a) (mod n) /\\ (b' == b) (mod n)\n    ==> (a' == b') (mod n) ==> (a == b) (mod n)
-      #|  (a EXP k EXP l == b EXP k EXP l) (mod n)
-      #|  ?l. (k * l == 1) (mod phi n)
+      #|  op_eq_eq(EXP(EXP((a : Num), (k : Num)), (l : Num)), EXP(EXP((b : Num), k), l), mod((n : Num)))
+      #|  \226\136\131 l : Num, op_eq_eq((k : Num) * l, 1, mod(phi((n : Num))))
       #|  forall n a b k.\n        coprime(k,phi n) /\\\n        coprime(n,a) /\\ coprime(n,b) /\\\n        (a EXP k == b EXP k) (mod n)\n        ==> (a == b) (mod n)
-      #|  forall n g. order n g = phi n ==> n = 0 \\/ coprime(n,g)
-      #|  h <= p - 1 /\\ g <= h ==> g = p - 1 ==> h = p - 1
-      #|  p = 1
-      #|  p = 0
-      #|  forall p g. order p g = p - 1 ==> p = 0 \\/ prime p
-      #|  {i:num | i < n}
+      #|  \226\136\128 n : Num, \226\136\128 g : Num, order(n, g) == phi(n) \226\134\146 n == 0 || coprime((n, g))
+      #|  (h : Num) <= (p : Num) - 1 && (g : Num) <= h \226\134\146 g == p - 1 \226\134\146 h == p - 1
+      #|  (p : Num) == 1
+      #|  (p : Num) == 0
+      #|  \226\136\128 p : Num, \226\136\128 g : Num, order(p, g) == p - 1 \226\134\146 p == 0 || prime(p)
+      #|  {(i : Num) | i < (n : Num)}
       #|  t SUBSET IMAGE f s <=> forall y. y IN t ==> ?x. x IN s /\\ f x = y
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  coprime(n:num,g)
-      #|  n = 0
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  coprime(((n : Num), (g : Num)))
+      #|  (n : Num) == 0
       #|  forall n g. order n g = phi n\n         ==> IMAGE (\\i. (g EXP i) MOD n) {i | i < phi n} =\n             {a | coprime(a,n) /\\ a < n}
-      #|  0 < a <=> ~(a = 0)
-      #|  a = 0
-      #|  a:num < p
-      #|  a:num
-      #|  g:num
-      #|  p:num
-      #|  p = 0
+      #|  (0 < (a : Num)) == !(a == 0)
+      #|  (a : Num) == 0
+      #|  (a : Num) < (p : Num)
+      #|  (a : Num)
+      #|  (g : Num)
+      #|  (p : Num)
+      #|  (p : Num) == 0
       #|  forall p g. order p g = p - 1\n         ==> IMAGE (\\i. (g EXP i) MOD p) {i | i < p - 1} =\n             {a | 0 < a /\\ a < p}
-      #|  a MOD n
+      #|  MOD((a : Num), (n : Num))
       #|  IMAGE f s = t ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
       #|  forall n g a. ~(n = 0) /\\ order n g = phi n /\\ coprime(a,n)\n           ==> ?m. m < phi n /\\ (a == g EXP m) (mod n)
-      #|  n = 0
+      #|  (n : Num) == 0
       #|  forall n g a. order n g = phi n /\\ coprime(a,n)\n           ==> ?m. (a == g EXP m) (mod n)
-      #|  0 < n <=> ~(n = 0)
-      #|  a MOD p
+      #|  (0 < (n : Num)) == !(n == 0)
+      #|  MOD((a : Num), (p : Num))
       #|  IMAGE f s = t ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
       #|  forall p g a. ~(p = 0) /\\ order p g = p - 1 /\\ coprime(a,p)\n           ==> ?m. m < p - 1 /\\ (a == g EXP m) (mod p)
-      #|  p = 0
+      #|  (p : Num) == 0
       #|  forall p g a. order p g = p - 1 /\\ coprime(a,p)\n           ==> ?m. (a == g EXP m) (mod p)
-      #|  e:num
-      #|  d:num
-      #|  d EXP 2 <= d * e \\/ e EXP 2 <= d * e
-      #|  e:num
-      #|  d divides n
-      #|  ~(n = 1)
-      #|  ~(n = 0)
-      #|  ~(n * n <= n) <=> n * 1 < n * n
-      #|  d EXP 2 <= n
-      #|  d = n:num
-      #|  d:num
+      #|  (e : Num)
+      #|  (d : Num)
+      #|  EXP((d : Num), 2) <= d * (e : Num) || EXP(e, 2) <= d * e
+      #|  (e : Num)
+      #|  divides((d : Num), (n : Num))
+      #|  !((n : Num) == 1)
+      #|  !((n : Num) == 0)
+      #|  !((n : Num) * n <= n) == (n * 1 < n * n)
+      #|  EXP((d : Num), 2) <= (n : Num)
+      #|  (d : Num) == (n : Num)
+      #|  (d : Num)
       #|  0
       #|  2
-      #|  ~a /\\ ~b ==> (a <=> b)
-      #|  n = 0
-      #|  n = 1
+      #|  !(a : Bool) && !(b : Bool) \226\134\146 a == b
+      #|  (n : Num) == 0
+      #|  (n : Num) == 1
       #|  forall n. prime(n) <=> ~(n = 1) /\\ forall d. d divides n /\\ d EXP 2 <= n ==> (d = 1)
       #|  2
-      #|  d EXP 2
-      #|  p:num
-      #|  p:num
-      #|  d = 1
-      #|  d:num
-      #|  n = 0
+      #|  EXP((d : Num), 2)
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (d : Num) == 1
+      #|  (d : Num)
+      #|  (n : Num) == 0
       #|  n = 1
       #|  forall n. prime n <=>\n       ~(n = 0) /\\ ~(n = 1) /\\ ~(?p. prime p /\\ p divides n /\\ p EXP 2 <= n)
-      #|  1 EXP t
-      #|  (d * t) * r = r * d * t
-      #|  p:num
-      #|  (a * p * b = p * c) <=> (p * a * b = p * c)
-      #|  order p (a EXP r) * P * t = P * s
-      #|  t:num
-      #|  P divides d
-      #|  ~(P = 0)
-      #|  s:num
-      #|  P divides q
-      #|  ~a ==> a ==> b
-      #|  P:num
-      #|  P divides q
-      #|  P:num
-      #|  d = 1
-      #|  d:num
-      #|  b:num
-      #|  p divides n
-      #|  (a EXP (n - 1) == 1) (mod n)
-      #|  (order p (a EXP r)) divides q
-      #|  ~(p divides 1)
-      #|  2 <= n ==> (n - 1 = SUC(n - 2))
-      #|  p divides (a EXP (n - 1))
-      #|  d = p:num
-      #|  d:num
-      #|  (a EXP (n - 1) == 1) (mod n)
+      #|  EXP(1, (t : Num))
+      #|  (d : Num) * (t : Num) * (r : Num) == r * (d * t)
+      #|  (p : Num)
+      #|  ((a : Num) * ((p : Num) * (b : Num)) == p * (c : Num)) == (p * (a * b) == p * c)
+      #|  order((p : Num), EXP((a : Num), (r : Num))) * ((P : Num) * (t : Num)) == P * (s : Num)
+      #|  (t : Num)
+      #|  divides((P : Num), (d : Num))
+      #|  !((P : Num) == 0)
+      #|  (s : Num)
+      #|  divides((P : Num), (q : Num))
+      #|  !(a : Bool) \226\134\146 a \226\134\146 (b : Bool)
+      #|  (P : Num)
+      #|  divides((P : Num), (q : Num))
+      #|  (P : Num)
+      #|  (d : Num) == 1
+      #|  (d : Num)
+      #|  (b : Num)
+      #|  divides((p : Num), (n : Num))
+      #|  op_eq_eq(EXP((a : Num), (n : Num) - 1), 1, mod(n))
+      #|  divides(order((p : Num), EXP((a : Num), (r : Num))), (q : Num))
+      #|  !divides((p : Num), 1)
+      #|  2 <= (n : Num) \226\134\146 n - 1 == SUC(n - 2)
+      #|  divides((p : Num), EXP((a : Num), (n : Num) - 1))
+      #|  (d : Num) == (p : Num)
+      #|  (d : Num)
+      #|  op_eq_eq(EXP((a : Num), (n : Num) - 1), 1, mod(n))
       #|  (p - 1 = q * d) ==> ~(p = 0) ==> (p + q * 0 = 1 + q * d)
-      #|  d:num
-      #|  phi p = p - 1
-      #|  coprime(a EXP r,p)
-      #|  order p (a EXP r) = q
+      #|  (d : Num)
+      #|  phi((p : Num)) == p - 1
+      #|  coprime((EXP((a : Num), (r : Num)), (p : Num)))
+      #|  order((p : Num), EXP((a : Num), (r : Num))) == (q : Num)
       #|  forall a n q r.\n        2 <= n /\\ (n - 1 = q * r) /\\\n        (a EXP (n - 1) == 1) (mod n) /\\\n        (forall p. prime(p) /\\ p divides q\n             ==> coprime(a EXP ((n - 1) DIV p) - 1,n))\n        ==> forall p. prime p /\\ p divides n ==> (p == 1) (mod q)
       #|  2
-      #|  p EXP 2 <= q EXP 2
-      #|  p:num
-      #|  r:num
-      #|  q:num
-      #|  n:num
-      #|  a:num
-      #|  p:num
-      #|  2 <= n ==> ~(n = 0) /\\ ~(n = 1)
+      #|  EXP((p : Num), 2) <= EXP((q : Num), 2)
+      #|  (p : Num)
+      #|  (r : Num)
+      #|  (q : Num)
+      #|  (n : Num)
+      #|  (a : Num)
+      #|  (p : Num)
+      #|  2 <= (n : Num) \226\134\146 !(n == 0) && !(n == 1)
       #|  forall a n q r.\n        2 <= n /\\ (n - 1 = q * r) /\\ n <= q EXP 2 /\\\n        (a EXP (n - 1) == 1) (mod n) /\\\n        (forall p. prime(p) /\\ p divides q\n             ==> coprime(a EXP ((n - 1) DIV p) - 1,n))\n        ==> prime(n)
-      #|  ~(p = 0)
-      #|  p = SUC(p - 1)
-      #|  ~(p = 0)
-      #|  d:num
-      #|  p divides q
-      #|  ~(2 <= 1)
-      #|  ~(n divides (a EXP (n - 1)))
-      #|  (a EXP ((q * r) DIV p) == b) (mod n)
-      #|  2 <= n
-      #|  2 <= n
-      #|  a = 0
-      #|  2 <= n ==> (n - 1 = SUC(n - 2))
-      #|  (a EXP (n - 1) == 1) (mod n)
-      #|  ~(a = 0)
-      #|  1 <= n <=> ~(n = 0)
-      #|  (a EXP ((q * r) DIV p) - 1 == b - 1) (mod n)
-      #|  b:num
-      #|  p:num
-      #|  p:num
-      #|  r:num
-      #|  q:num
-      #|  a:num
+      #|  !((p : Num) == 0)
+      #|  (p : Num) == SUC(p - 1)
+      #|  !((p : Num) == 0)
+      #|  (d : Num)
+      #|  divides((p : Num), (q : Num))
+      #|  !(2 <= 1)
+      #|  !divides((n : Num), EXP((a : Num), n - 1))
+      #|  op_eq_eq(EXP((a : Num), DIV((q : Num) * (r : Num), (p : Num))), (b : Num), mod((n : Num)))
+      #|  2 <= (n : Num)
+      #|  2 <= (n : Num)
+      #|  (a : Num) == 0
+      #|  2 <= (n : Num) \226\134\146 n - 1 == SUC(n - 2)
+      #|  op_eq_eq(EXP((a : Num), (n : Num) - 1), 1, mod(n))
+      #|  !((a : Num) == 0)
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  op_eq_eq(EXP((a : Num), DIV((q : Num) * (r : Num), (p : Num))) - 1, (b : Num) - 1, mod((n : Num)))
+      #|  (b : Num)
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (r : Num)
+      #|  (q : Num)
+      #|  (a : Num)
       #|  forall a n q r.\n        2 <= n /\\ (n - 1 = q * r) /\\ n <= q EXP 2 /\\\n        (a EXP (n - 1) == 1) (mod n) /\\\n        (forall p. prime(p) /\\ p divides q\n             ==> ?b. (a EXP ((n - 1) DIV p) == b) (mod n) /\\\n                     coprime(b - 1,n))\n        ==> prime(n)
       #|  primefact ps n <=> (ITLIST (*) ps 1 = n) /\\ forall p. MEM p ps ==> prime(p)
-      #|  CONS (p:num) ps
-      #|  ps:num list
-      #|  prime p
-      #|  ~(p = 0) /\\ ~(p = 1) ==> 1 < p
-      #|  1 < p
-      #|  n = 1 * n
-      #|  m = 0
-      #|  ~(p * m = 0)
-      #|  m:num
-      #|  m:num
-      #|  p divides n
-      #|  p:num
-      #|  []:num list
-      #|  n = 1
-      #|  n:num
-      #|  forall n. ~(n = 0) ==> ?ps. primefact ps n
-      #|  ps:num list
-      #|  ps:num list
+      #|  CONS((p : Num), (ps : List[Num]))
+      #|  (ps : List[Num])
+      #|  prime((p : Num))
+      #|  !((p : Num) == 0) && !(p == 1) \226\134\146 1 < p
+      #|  1 < (p : Num)
+      #|  (n : Num) == 1 * n
+      #|  (m : Num) == 0
+      #|  !((p : Num) * (m : Num) == 0)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  divides((p : Num), (n : Num))
+      #|  (p : Num)
+      #|  (NIL : List[Num])
+      #|  (n : Num) == 1
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, !(n == 0) \226\134\146 (\226\136\131 ps : List[Num], primefact(ps, n))
+      #|  (ps : List[Num])
+      #|  (ps : List[Num])
       #|  forall ps n. primefact ps n ==> forall p. prime p /\\ p divides n ==> MEM p ps
-      #|  ps:num list
-      #|  ps:num list
+      #|  (ps : List[Num])
+      #|  (ps : List[Num])
       #|  forall ps n. primefact ps n <=> (ITLIST (*) ps 1 = n) /\\ ALL prime ps
-      #|  ps:num list
-      #|  ps:num list
+      #|  (ps : List[Num])
+      #|  (ps : List[Num])
       #|  ALL (\\p. prime p /\\ ~(a EXP ((n - 1) DIV p) == 1) (mod n)) ps
-      #|  p:num
-      #|  \\p. prime p /\\ ~(a EXP ((n - 1) DIV p) == 1) (mod n)
-      #|  primefact ps (n - 1)
-      #|  a:num
+      #|  (p : Num)
+      #|  (p : Num) => prime(p) && !op_eq_eq(EXP((a : Num), DIV((n : Num) - 1, p)), 1, mod(n))
+      #|  primefact((ps : List[Num]), (n : Num) - 1)
+      #|  (a : Num)
       #|  2 <= n /\\\n   (a EXP (n - 1) == 1) (mod n) /\\\n   (ITLIST (*) ps 1 = n - 1) /\\\n   ALL (\\p. prime p /\\ ~(a EXP ((n - 1) DIV p) == 1) (mod n)) ps\n   ==> prime n
-      #|  2 <= n ==> ~(n = 0)
-      #|  ~(p = 0) ==> (p = SUC(p - 1))
-      #|  (MOD)
-      #|  n:num
-      #|  d:num
-      #|  p divides q
-      #|  q * r = n - 1
-      #|  (n - 1) DIV p * p = n - 1
-      #|  (EXP)
-      #|  p:num
-      #|  s:num
-      #|  2 <= n ==> ~(n = 0)
-      #|  2 <= n ==> ~(n = 0)
-      #|  a <= b /\\ ~(a = 0) ==> 1 <= a /\\ 1 <= b
-      #|  2 <= n ==> ~(n = 0)
-      #|  (p * d) * r = n - 1
-      #|  d:num
-      #|  p divides q
-      #|  q DIV p * r = (n - 1) DIV p
-      #|  ~(p = 0)
-      #|  (a ==> (b <=> c)) ==> a /\\ b ==> c
-      #|  p:num
+      #|  2 <= (n : Num) \226\134\146 !(n == 0)
+      #|  !((p : Num) == 0) \226\134\146 p == SUC(p - 1)
+      #|  MOD
+      #|  (n : Num)
+      #|  (d : Num)
+      #|  divides((p : Num), (q : Num))
+      #|  (q : Num) * (r : Num) == (n : Num) - 1
+      #|  DIV((n : Num) - 1, (p : Num)) * p == n - 1
+      #|  EXP
+      #|  (p : Num)
+      #|  (s : Num)
+      #|  2 <= (n : Num) \226\134\146 !(n == 0)
+      #|  2 <= (n : Num) \226\134\146 !(n == 0)
+      #|  (a : Num) <= (b : Num) && !(a == 0) \226\134\146 1 <= a && 1 <= b
+      #|  2 <= (n : Num) \226\134\146 !(n == 0)
+      #|  (p : Num) * (d : Num) * (r : Num) == (n : Num) - 1
+      #|  (d : Num)
+      #|  divides((p : Num), (q : Num))
+      #|  DIV((q : Num), (p : Num)) * (r : Num) == DIV((n : Num) - 1, p)
+      #|  !((p : Num) == 0)
+      #|  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 a && b \226\134\146 c
+      #|  (p : Num)
       #|  \\p. prime p /\\ coprime(a EXP (q DIV p * r) MOD n - 1,n)
-      #|  primefact ps q
-      #|  Q:num
+      #|  primefact((ps : List[Num]), (q : Num))
+      #|  (Q : Num)
       #|  0
-      #|  Q = a EXP (n - 1) DIV n
-      #|  2 <= n ==> ~(n = 0)
-      #|  n:num
-      #|  a EXP (n - 1)
-      #|  r:num
-      #|  q:num
-      #|  a:num
-      #|  2 <= n ==> ~(n = 0)
+      #|  (Q : Num) == DIV(EXP((a : Num), (n : Num) - 1), n)
+      #|  2 <= (n : Num) \226\134\146 !(n == 0)
+      #|  (n : Num)
+      #|  EXP((a : Num), (n : Num) - 1)
+      #|  (r : Num)
+      #|  (q : Num)
+      #|  (a : Num)
+      #|  2 <= (n : Num) \226\134\146 !(n == 0)
       #|  2 <= n /\\ (q * r = n - 1) /\\ n <= q * q\n   ==> ((a EXP r) MOD n = b)\n       ==> (ITLIST (*) ps 1 = q)\n           ==> ((b EXP q) MOD n = 1)\n               ==> ALL (\\p. prime p /\\\n                            coprime((b EXP (q DIV p)) MOD n - 1,n)) ps\n                   ==> prime n
-      #|  n:num
-      #|  a:num
-      #|  q:num
-      #|  r:num
-      #|  b:num
-      #|  ps:num list
-      #|  (a /\\ a /\\ b <=> a /\\ b) /\\ (a /\\ a <=> a)
-      #|  a /\\ T <=> a
-      #|  T /\\ p <=> p
-      #|  T /\\ p
-      #|  p /\\ T <=> p
-      #|  p /\\ T
-      #|  coprime(a,b)
-      #|  (a EXP b) MOD c
-      #|  a DIV b
-      #|  a - b
-      #|  ps:num list
-      #|  n:num
+      #|  (n : Num)
+      #|  (a : Num)
+      #|  (q : Num)
+      #|  (r : Num)
+      #|  (b : Num)
+      #|  (ps : List[Num])
+      #|  ((a : Bool) && a && (b : Bool)) == (a && b) && (a && a) == a
+      #|  ((a : Bool) && true) == a
+      #|  (true && (p : Bool)) == p
+      #|  true && (p : Bool)
+      #|  ((p : Bool) && true) == p
+      #|  (p : Bool) && true
+      #|  coprime(((a : Num), (b : Num)))
+      #|  MOD(EXP((a : Num), (b : Num)), (c : Num))
+      #|  DIV((a : Num), (b : Num))
+      #|  (a : Num) - (b : Num)
+      #|  (ps : List[Num])
+      #|  (n : Num)
       #|  ((m = 1) <=> F) ==> ((m = p) <=> F) ==> (m * n = p) ==> (prime(p) <=> F)
-      #|  m:num
-      #|  n:num
-      #|  p:num
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (p : Num)
       #|  prime
       #|  prime
       #|  65535
