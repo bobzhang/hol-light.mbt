@@ -83173,12 +83173,12 @@ test "Probability/martingale_convergence matches Probability/martingale_converge
       #|0..0..solved at 2
       #|0..0..1..2..solved at 6
       #|Probability/martingale_convergence quotations (5725):
-      #|  pos_part (x:real) = real_max x (&0)
-      #|  forall x. &0 <= pos_part x
-      #|  forall x. &0 <= x ==> pos_part x = x
-      #|  forall x. x <= &0 ==> pos_part x = &0
-      #|  forall x y. pos_part x <= y <=> x <= y /\\ &0 <= y
-      #|  (upcrossing_phase (f:num->real) a b 0 = (if f 0 <= a then 1 else 0)) /\\\n   (upcrossing_phase f a b (SUC k) =\n      if upcrossing_phase f a b k = 0 then\n        (if f (SUC k) <= a then 1 else 0)\n      else\n        (if f (SUC k) >= b then 0 else 1))
+      #|  (pos_part : (Real) -> Real)((x : Real)) == max(x, real_of_num(0))
+      #|  \226\136\128 x : Real, real_of_num(0) <= pos_part(x)
+      #|  \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 pos_part(x) == x
+      #|  \226\136\128 x : Real, x <= real_of_num(0) \226\134\146 pos_part(x) == real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (pos_part(x) <= y) == (x <= y && real_of_num(0) <= y)
+      #|  (upcrossing_phase : ((Num) -> Real, Real, Real, Num) -> Num)((f : (Num) -> Real), (a : Real), (b : Real), 0) == (if f(0) <= a { 1 } else { 0 }) && upcrossing_phase(f, a, b, SUC((k : Num))) == (if upcrossing_phase(f, a, b, k) == 0 { if f(SUC(k)) <= a { 1 } else { 0 } } else { if f(SUC(k)) >= b { 0 } else { 1 } })
       #|  :P
       #|  :P
       #|  :P
@@ -83190,7 +83190,7 @@ test "Probability/martingale_convergence matches Probability/martingale_converge
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  (upcrossing_count (f:num->real) a b 0 = 0) /\\\n   (upcrossing_count f a b (SUC k) =\n      upcrossing_count f a b k +\n      (if upcrossing_phase f a b k = 1 /\\ f (SUC k) >= b then 1 else 0))
+      #|  (upcrossing_count : ((Num) -> Real, Real, Real, Num) -> Num)((f : (Num) -> Real), (a : Real), (b : Real), 0) == 0 && upcrossing_count(f, a, b, SUC((k : Num))) == upcrossing_count(f, a, b, k) + (if upcrossing_phase(f, a, b, k) == 1 && f(SUC(k)) >= b { 1 } else { 0 })
       #|  :P
       #|  :P
       #|  :P
@@ -83201,7 +83201,7 @@ test "Probability/martingale_convergence matches Probability/martingale_converge
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  (downcrossing_phase (f:num->real) a b 0 = (if f 0 >= b then 1 else 0)) /\\\n   (downcrossing_phase f a b (SUC k) =\n      if downcrossing_phase f a b k = 0 then\n        (if f (SUC k) >= b then 1 else 0)\n      else\n        (if f (SUC k) <= a then 0 else 1))
+      #|  (downcrossing_phase : ((Num) -> Real, Real, Real, Num) -> Num)((f : (Num) -> Real), (a : Real), (b : Real), 0) == (if f(0) >= b { 1 } else { 0 }) && downcrossing_phase(f, a, b, SUC((k : Num))) == (if downcrossing_phase(f, a, b, k) == 0 { if f(SUC(k)) >= b { 1 } else { 0 } } else { if f(SUC(k)) <= a { 0 } else { 1 } })
       #|  :P
       #|  :P
       #|  :P
@@ -83213,7 +83213,7 @@ test "Probability/martingale_convergence matches Probability/martingale_converge
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  (downcrossing_count (f:num->real) a b 0 = 0) /\\\n   (downcrossing_count f a b (SUC k) =\n      downcrossing_count f a b k +\n      (if downcrossing_phase f a b k = 1 /\\ f (SUC k) <= a then 1 else 0))
+      #|  (downcrossing_count : ((Num) -> Real, Real, Real, Num) -> Num)((f : (Num) -> Real), (a : Real), (b : Real), 0) == 0 && downcrossing_count(f, a, b, SUC((k : Num))) == downcrossing_count(f, a, b, k) + (if downcrossing_phase(f, a, b, k) == 1 && f(SUC(k)) <= a { 1 } else { 0 })
       #|  :P
       #|  :P
       #|  :P
@@ -83224,26 +83224,26 @@ test "Probability/martingale_convergence matches Probability/martingale_converge
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  num_upcrossings (X:num->A->real) a b n (x:A) =\n   upcrossing_count (\\k. X k x) a b n
-      #|  forall f a b n. upcrossing_count f a b n <= upcrossing_count f a b (SUC n)
-      #|  m:num
-      #|  m:num
-      #|  n:num
-      #|  n:num
-      #|  forall f a b m n. m <= n ==> upcrossing_count f a b m <= upcrossing_count f a b n
-      #|  forall f a b n. upcrossing_phase f a b n = 0 \\/ upcrossing_phase f a b n = 1
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  f:num->real
-      #|  forall f:num->real a b n.\n     upcrossing_phase f a b (SUC n) = 1 <=>\n     (upcrossing_phase f a b n = 0 /\\ f (SUC n) <= a) \\/\n     (upcrossing_phase f a b n = 1 /\\ f (SUC n) < b)
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  f:num->real
-      #|  forall f:num->real a b n.\n     upcrossing_phase f a b (SUC n) = 0 <=>\n     (upcrossing_phase f a b n = 0 /\\ ~(f (SUC n) <= a)) \\/\n     (upcrossing_phase f a b n = 1 /\\ f (SUC n) >= b)
-      #|  upcrossing_bet (X:num->A->real) a b k (x:A) =\n   if upcrossing_phase (\\n. X n x) a b k = 1 then &1 else &0
-      #|  (bet_gain (f:num->real) a b 0 = &0) /\\\n   (bet_gain f a b (SUC n) = bet_gain f a b n +\n    (if upcrossing_phase f a b n = 1 then &1 else &0) * (f (SUC n) - f n))
+      #|  (num_upcrossings : ((Num, A) -> Real, Real, Real, Num, A) -> Num)((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), (x : A)) == upcrossing_count((k : Num) => X(k, x), a, b, n)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, upcrossing_count(f, a, b, n) <= upcrossing_count(f, a, b, SUC(n))
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 upcrossing_count(f, a, b, m) <= upcrossing_count(f, a, b, n)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, upcrossing_phase(f, a, b, n) == 0 || upcrossing_phase(f, a, b, n) == 1
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Num) -> Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, (upcrossing_phase(f, a, b, SUC(n)) == 1) == (upcrossing_phase(f, a, b, n) == 0 && f(SUC(n)) <= a || upcrossing_phase(f, a, b, n) == 1 && f(SUC(n)) < b)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Num) -> Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, (upcrossing_phase(f, a, b, SUC(n)) == 0) == (upcrossing_phase(f, a, b, n) == 0 && !(f(SUC(n)) <= a) || upcrossing_phase(f, a, b, n) == 1 && f(SUC(n)) >= b)
+      #|  (upcrossing_bet : ((Num, A) -> Real, Real, Real, Num, A) -> Real)((X : (Num, A) -> Real), (a : Real), (b : Real), (k : Num), (x : A)) == (if upcrossing_phase((n : Num) => X(n, x), a, b, k) == 1 { real_of_num(1) } else { real_of_num(0) })
+      #|  (bet_gain : ((Num) -> Real, Real, Real, Num) -> Real)((f : (Num) -> Real), (a : Real), (b : Real), 0) == real_of_num(0) && bet_gain(f, a, b, SUC((n : Num))) == bet_gain(f, a, b, n) + (if upcrossing_phase(f, a, b, n) == 1 { real_of_num(1) } else { real_of_num(0) }) * (f(SUC(n)) - f(n))
       #|  :P
       #|  :P
       #|  :P
@@ -83254,36 +83254,36 @@ test "Probability/martingale_convergence matches Probability/martingale_converge
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  upcrossing_phase f (&0) b (SUC n) = 1
-      #|  upcrossing_phase f (&0) b (SUC n) = 0
-      #|  (f:num->real) (SUC n) >= b
-      #|  SUC n
-      #|  upcrossing_phase f (&0) b (SUC n) = 1
-      #|  (f:num->real) (SUC n) <= &0
-      #|  (f:num->real) (SUC n) = &0
-      #|  SUC n
-      #|  b:real
-      #|  (&0):real
-      #|  f:num->real
-      #|  n:num
-      #|  b:real
-      #|  (&0):real
-      #|  f:num->real
+      #|  upcrossing_phase((f : (Num) -> Real), real_of_num(0), (b : Real), SUC((n : Num))) == 1
+      #|  upcrossing_phase((f : (Num) -> Real), real_of_num(0), (b : Real), SUC((n : Num))) == 0
+      #|  (f : (Num) -> Real)(SUC((n : Num))) >= (b : Real)
+      #|  SUC((n : Num))
+      #|  upcrossing_phase((f : (Num) -> Real), real_of_num(0), (b : Real), SUC((n : Num))) == 1
+      #|  (f : (Num) -> Real)(SUC((n : Num))) <= real_of_num(0)
+      #|  (f : (Num) -> Real)(SUC((n : Num))) == real_of_num(0)
+      #|  SUC((n : Num))
+      #|  (b : Real)
+      #|  real_of_num(0)
+      #|  (f : (Num) -> Real)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  real_of_num(0)
+      #|  (f : (Num) -> Real)
       #|  0
-      #|  upcrossing_phase f (&0) b 0 = 1
-      #|  (f:num->real) 0 <= &0
-      #|  (f:num->real) 0 = &0
+      #|  upcrossing_phase((f : (Num) -> Real), real_of_num(0), (b : Real), 0) == 1
+      #|  (f : (Num) -> Real)(0) <= real_of_num(0)
+      #|  (f : (Num) -> Real)(0) == real_of_num(0)
       #|  0
-      #|  b:real
-      #|  (&0):real
-      #|  f:num->real
-      #|  forall f:num->real b n.\n    &0 < b /\\ (forall k. &0 <= f k)\n    ==> b * &(upcrossing_count f (&0) b n) <=\n        bet_gain f (&0) b n -\n        f n * (if upcrossing_phase f (&0) b n = 1 then &1 else &0)
-      #|  &0 <= f n * (if upcrossing_phase f (&0) b n = 1\n                              then &1 else &0)
-      #|  n:num
-      #|  b:real
-      #|  f:num->real
-      #|  forall f:num->real b n.\n    &0 < b /\\ (forall k. &0 <= f k)\n    ==> b * &(upcrossing_count f (&0) b n) <= bet_gain f (&0) b n
-      #|  (not_bet_gain (f:num->real) a b 0 = &0) /\\\n   (not_bet_gain f a b (SUC n) = not_bet_gain f a b n +\n    (if upcrossing_phase f a b n = 0 then &1 else &0) * (f (SUC n) - f n))
+      #|  (b : Real)
+      #|  real_of_num(0)
+      #|  (f : (Num) -> Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 b : Real, \226\136\128 n : Num, real_of_num(0) < b && (\226\136\128 k : Num, real_of_num(0) <= f(k)) \226\134\146 b * real_of_num(upcrossing_count(f, real_of_num(0), b, n)) <= bet_gain(f, real_of_num(0), b, n) - f(n) * (if upcrossing_phase(f, real_of_num(0), b, n) == 1 { real_of_num(1) } else { real_of_num(0) })
+      #|  real_of_num(0) <= (f : (Num) -> Real)((n : Num)) * (if upcrossing_phase(f, real_of_num(0), (b : Real), n) == 1 { real_of_num(1) } else { real_of_num(0) })
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (f : (Num) -> Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 b : Real, \226\136\128 n : Num, real_of_num(0) < b && (\226\136\128 k : Num, real_of_num(0) <= f(k)) \226\134\146 b * real_of_num(upcrossing_count(f, real_of_num(0), b, n)) <= bet_gain(f, real_of_num(0), b, n)
+      #|  (not_bet_gain : ((Num) -> Real, Real, Real, Num) -> Real)((f : (Num) -> Real), (a : Real), (b : Real), 0) == real_of_num(0) && not_bet_gain(f, a, b, SUC((n : Num))) == not_bet_gain(f, a, b, n) + (if upcrossing_phase(f, a, b, n) == 0 { real_of_num(1) } else { real_of_num(0) }) * (f(SUC(n)) - f(n))
       #|  :P
       #|  :P
       #|  :P
@@ -83294,3614 +83294,3614 @@ test "Probability/martingale_convergence matches Probability/martingale_converge
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  f:num->real
-      #|  forall f:num->real a b n.\n    bet_gain f a b n + not_bet_gain f a b n = f n - f 0
-      #|  a < b ==> (real_max (x - a) (&0) >= b - a <=> x >= b)
-      #|  real_max (x - a) (&0) <= &0 <=> x <= a
-      #|  real_max (x - a) (&0) <= &0 <=> x <= a
-      #|  n:num
-      #|  n:num
-      #|  forall f:num->real a b n. a < b ==>\n    upcrossing_phase f a b n =\n    upcrossing_phase (\\k. pos_part (f k - a)) (&0) (b - a) n
-      #|  a < b ==> (real_max (x - a) (&0) >= b - a <=> x >= b)
-      #|  n:num
-      #|  n:num
-      #|  forall f:num->real a b n. a < b ==>\n    upcrossing_count f a b n =\n    upcrossing_count (\\k. pos_part (f k - a)) (&0) (b - a) n
-      #|  a < b ==> &0 < b - a
-      #|  n:num
-      #|  b - a:real
-      #|  \\k. pos_part((f:num->real) k - a)
-      #|  upcrossing_count (f:num->real) a b n =\n    upcrossing_count (\\k. pos_part (f k - a)) (&0) (b - a) n
-      #|  forall f:num->real a b n. a < b ==>\n    (b - a) * &(upcrossing_count f a b n) <=\n    bet_gain (\\k. pos_part (f k - a)) (&0) (b - a) n
-      #|  (\\x:A. pos_part ((X:A->real) x)) =\n                (\\x. inv(&2) * (X x + abs(X x)))
-      #|  forall p:A prob_space X.\n     simple_rv p X ==> simple_rv p (\\x. pos_part (X x))
-      #|  forall p:A prob_space X a.\n     simple_rv p X ==> simple_rv p (\\x. pos_part (X x - a))
-      #|  simple_expectation (p:A prob_space)\n    (\\x. (X:num->A->real) n x * indicator_fn (s:A->bool) x) <=\n    simple_expectation p (\\x. X (SUC n) x * indicator_fn s x)
-      #|  simple_expectation (p:A prob_space)\n       (\\x. (X:num->A->real) (SUC n) x * indicator_fn (s:A->bool) x -\n            c * indicator_fn s x) =\n     simple_expectation p (\\x. X (SUC n) x * indicator_fn s x) -\n     simple_expectation p (\\x. c * indicator_fn s x)
-      #|  simple_expectation (p:A prob_space)\n       (\\x. (X:num->A->real) n x * indicator_fn (s:A->bool) x -\n            c * indicator_fn s x) =\n     simple_expectation p (\\x. X n x * indicator_fn s x) -\n     simple_expectation p (\\x. c * indicator_fn s x)
-      #|  simple_rv (p:A prob_space)\n    (\\x. c * indicator_fn (s:A->bool) x)
-      #|  simple_rv (p:A prob_space) (\\x. (X:num->A->real) (SUC n) x *\n    indicator_fn (s:A->bool) x)
-      #|  simple_rv (p:A prob_space) (\\x. (X:num->A->real) n x *\n    indicator_fn (s:A->bool) x)
-      #|  x:A
-      #|  simple_expectation (p:A prob_space)\n       (\\x. ((X:num->A->real) (SUC n) x - c) * indicator_fn (s:A->bool) x) =\n     simple_expectation p\n       (\\x. X (SUC n) x * indicator_fn s x - c * indicator_fn s x)
-      #|  x:A
-      #|  simple_expectation (p:A prob_space)\n       (\\x. ((X:num->A->real) n x - c) * indicator_fn (s:A->bool) x) =\n     simple_expectation p\n       (\\x. X n x * indicator_fn s x - c * indicator_fn s x)
-      #|  (s:A->bool) IN prob_events (p:A prob_space)
-      #|  forall k. simple_rv (p:A prob_space) ((X:num->A->real) k)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) (c:real).\n     simple_submartingale p FF X ==>\n     forall(n:num) (s:A->bool). s IN FF n ==>\n       simple_expectation p (\\x. (X n x - c) * indicator_fn s x) <=\n       simple_expectation p (\\x. (X (SUC n) x - c) * indicator_fn s x)
-      #|  forall y a. pos_part(y - a) = (y - a) * (if a <= y then &1 else &0)
-      #|  a <= (X:num->A->real) n x
-      #|  (x:A) IN s
-      #|  x:A
-      #|  simple_submartingale (p:A prob_space)\n         (FF:num->(A->bool)->bool) (X:num->A->real)
-      #|  s_plus:A->bool
-      #|  n:num
-      #|  a:real
-      #|  simple_expectation (p:A prob_space)\n    (\\x. ((X:num->A->real) (SUC n) x - a) *\n         indicator_fn (s_plus:A->bool) x)
-      #|  simple_rv (p:A prob_space) (indicator_fn (s_plus:A->bool))
-      #|  (s_plus:A->bool) IN prob_events (p:A prob_space)
-      #|  (s_plus:A->bool) IN (FF:num->(A->bool)->bool) n
-      #|  x:A
-      #|  simple_expectation (p:A prob_space)\n       (\\x. pos_part ((X:num->A->real) n x - a) * indicator_fn s x) =\n     simple_expectation p\n       (\\x. (X n x - a) * indicator_fn (s_plus:A->bool) x)
-      #|  s_plus = (s:A->bool) INTER\n    {x:A | x IN prob_carrier p /\\ (X:num->A->real) n x >= a}
-      #|  simple_rv (p:A prob_space) (indicator_fn (s:A->bool))
-      #|  simple_rv (p:A prob_space)\n    (indicator_fn ((s:A->bool) INTER\n     {x:A | x IN prob_carrier p /\\ (X:num->A->real) n x >= a}))
-      #|  (s:A->bool) INTER\n     {x:A | x IN prob_carrier p /\\ (X:num->A->real) n x >= a} IN\n     prob_events (p:A prob_space)
-      #|  (s:A->bool) INTER\n     {x:A | x IN prob_carrier p /\\ (X:num->A->real) n x >= a} IN\n     (FF:num->(A->bool)->bool) n
-      #|  {x:A | x IN prob_carrier p /\\ (X:num->A->real) n x >= a} IN\n     (FF:num->(A->bool)->bool) n
-      #|  measurable_wrt (p:A prob_space) ((FF:num->(A->bool)->bool) n) (X n)
-      #|  (s:A->bool) IN prob_events (p:A prob_space)
-      #|  sigma_algebra ((FF:num->(A->bool)->bool) n)
-      #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) n)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  forall k. simple_rv (p:A prob_space) ((X:num->A->real) k)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) (a:real).\n     simple_submartingale p FF X ==>\n     forall(n:num) (s:A->bool). s IN FF n ==>\n       simple_expectation p (\\x. pos_part (X n x - a) * indicator_fn s x) <=\n       simple_expectation p (\\x. pos_part (X (SUC n) x - a) * indicator_fn s x)
-      #|  (x:A) IN prob_carrier (p:A prob_space)
-      #|  {x:A | x IN prob_carrier p /\\ X x < b} =\n     UNIONS G DIFF {x | x IN prob_carrier p /\\ X x >= b}
-      #|  UNIONS (G:(A->bool)->bool) = prob_carrier (p:A prob_space)
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  forall p:A prob_space G (X:A->real) b.\n     sub_sigma_algebra p G /\\ measurable_wrt p G X\n     ==> {x | x IN prob_carrier p /\\ X x < b} IN G
-      #|  {x:A | x IN prob_carrier p /\\\n              upcrossing_phase (\\k. (X:num->A->real) k x) a b (SUC n) = 0} =\n       ({x | x IN prob_carrier p /\\\n             upcrossing_phase (\\k. X k x) a b n = 0} INTER\n        {x | x IN prob_carrier p /\\ ~((X:num->A->real) (SUC n) x <= a)}) UNION\n       ({x | x IN prob_carrier p /\\\n             upcrossing_phase (\\k. X k x) a b n = 1} INTER\n        {x | x IN prob_carrier p /\\ X (SUC n) x >= b})
-      #|  {x:A | x IN prob_carrier p /\\\n              upcrossing_phase (\\k. (X:num->A->real) k x) a b (SUC n) = 1} =\n       ({x | x IN prob_carrier p /\\\n             upcrossing_phase (\\k. X k x) a b n = 0} INTER\n        {x | x IN prob_carrier p /\\ X (SUC n) x <= a}) UNION\n       ({x | x IN prob_carrier p /\\\n             upcrossing_phase (\\k. X k x) a b n = 1} INTER\n        {x | x IN prob_carrier p /\\ X (SUC n) x < b})
-      #|  (x:A) IN prob_carrier (p:A prob_space)
-      #|  UNIONS ((FF:num->(A->bool)->bool) (SUC n)) =\n       prob_carrier (p:A prob_space)
-      #|  {x:A | x IN prob_carrier p /\\ ~((X:num->A->real) (SUC n) x <= a)} =\n       UNIONS ((FF:num->(A->bool)->bool) (SUC n)) DIFF\n         {x | x IN prob_carrier p /\\ X (SUC n) x <= a}
-      #|  {x:A | x IN prob_carrier p /\\ ~((X:num->A->real) (SUC n) x <= a)} IN\n      FF (SUC n)
-      #|  {x:A | x IN prob_carrier p /\\ (X:num->A->real) (SUC n) x < b} IN\n      FF (SUC n)
-      #|  {x:A | x IN prob_carrier p /\\ (X:num->A->real) (SUC n) x >= b} IN\n      FF (SUC n)
-      #|  measurable_wrt (p:A prob_space) ((FF:num->(A->bool)->bool) (SUC n))\n              ((X:num->A->real) (SUC n))
-      #|  {x:A | x IN prob_carrier p /\\ (X:num->A->real) (SUC n) x <= a} IN\n      FF (SUC n)
-      #|  measurable_wrt (p:A prob_space)\n     ((FF:num->(A->bool)->bool) (SUC n)) ((X:num->A->real) (SUC n))
-      #|  {x:A | x IN prob_carrier p /\\\n             upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0} IN\n      FF (SUC n)
-      #|  {x:A | x IN prob_carrier p /\\\n             upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 1} IN\n      FF (SUC n)
-      #|  n <= SUC n
-      #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
-      #|  sigma_algebra ((FF:num->(A->bool)->bool) (SUC n))
-      #|  sub_sigma_algebra (p:A prob_space)\n     ((FF:num->(A->bool)->bool) (SUC n))
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Num) -> Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, bet_gain(f, a, b, n) + not_bet_gain(f, a, b, n) == f(n) - f(0)
+      #|  (a : Real) < (b : Real) \226\134\146 (max((x : Real) - a, real_of_num(0)) >= b - a) == (x >= b)
+      #|  (max((x : Real) - (a : Real), real_of_num(0)) <= real_of_num(0)) == (x <= a)
+      #|  (max((x : Real) - (a : Real), real_of_num(0)) <= real_of_num(0)) == (x <= a)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, a < b \226\134\146 upcrossing_phase(f, a, b, n) == upcrossing_phase((k : Num) => pos_part(f(k) - a), real_of_num(0), b - a, n)
+      #|  (a : Real) < (b : Real) \226\134\146 (max((x : Real) - a, real_of_num(0)) >= b - a) == (x >= b)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, a < b \226\134\146 upcrossing_count(f, a, b, n) == upcrossing_count((k : Num) => pos_part(f(k) - a), real_of_num(0), b - a, n)
+      #|  (a : Real) < (b : Real) \226\134\146 real_of_num(0) < b - a
+      #|  (n : Num)
+      #|  (b : Real) - (a : Real)
+      #|  (k : Num) => pos_part((f : (Num) -> Real)(k) - (a : Real))
+      #|  upcrossing_count((f : (Num) -> Real), (a : Real), (b : Real), (n : Num)) == upcrossing_count((k : Num) => pos_part(f(k) - a), real_of_num(0), b - a, n)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, a < b \226\134\146 (b - a) * real_of_num(upcrossing_count(f, a, b, n)) <= bet_gain((k : Num) => pos_part(f(k) - a), real_of_num(0), b - a, n)
+      #|  ((x : A) => pos_part((X : (A) -> Real)(x))) == ((x : A) => inv(real_of_num(2)) * (X(x) + abs(X(x))))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, simple_rv(p, X) \226\134\146 simple_rv(p, (x : A) => pos_part(X(x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, simple_rv(p, X) \226\134\146 simple_rv(p, (x : A) => pos_part(X(x) - a))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn((s : (A) -> Bool), x)) <= simple_expectation(p, (x : A) => X(SUC(n), x) * indicator_fn(s, x))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) * indicator_fn((s : (A) -> Bool), x) - (c : Real) * indicator_fn(s, x)) == simple_expectation(p, (x : A) => X(SUC(n), x) * indicator_fn(s, x)) - simple_expectation(p, (x : A) => c * indicator_fn(s, x))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn((s : (A) -> Bool), x) - (c : Real) * indicator_fn(s, x)) == simple_expectation(p, (x : A) => X(n, x) * indicator_fn(s, x)) - simple_expectation(p, (x : A) => c * indicator_fn(s, x))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => (c : Real) * indicator_fn((s : (A) -> Bool), x))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) * indicator_fn((s : (A) -> Bool), x))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn((s : (A) -> Bool), x))
+      #|  (x : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - (c : Real)) * indicator_fn((s : (A) -> Bool), x)) == simple_expectation(p, (x : A) => X(SUC(n), x) * indicator_fn(s, x) - c * indicator_fn(s, x))
+      #|  (x : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)((n : Num), x) - (c : Real)) * indicator_fn((s : (A) -> Bool), x)) == simple_expectation(p, (x : A) => X(n, x) * indicator_fn(s, x) - c * indicator_fn(s, x))
+      #|  IN((s : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  \226\136\128 k : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(k))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 c : Real, simple_submartingale(p, FF, X) \226\134\146 (\226\136\128 n : Num, \226\136\128 s : (A) -> Bool, IN(s, FF(n)) \226\134\146 simple_expectation(p, (x : A) => (X(n, x) - c) * indicator_fn(s, x)) <= simple_expectation(p, (x : A) => (X(SUC(n), x) - c) * indicator_fn(s, x)))
+      #|  \226\136\128 y : Real, \226\136\128 a : Real, pos_part(y - a) == (y - a) * (if a <= y { real_of_num(1) } else { real_of_num(0) })
+      #|  (a : Real) <= (X : (Num, A) -> Real)((n : Num), (x : A))
+      #|  IN((x : A), (s : (A) -> Bool))
+      #|  (x : A)
+      #|  simple_submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  (s_plus : (A) -> Bool)
+      #|  (n : Num)
+      #|  (a : Real)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - (a : Real)) * indicator_fn((s_plus : (A) -> Bool), x))
+      #|  simple_rv((p : Prob_space[A]), indicator_fn((s_plus : (A) -> Bool)))
+      #|  IN((s_plus : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  IN((s_plus : (A) -> Bool), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  (x : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)((n : Num), x) - (a : Real)) * indicator_fn((s : (A) -> Bool), x)) == simple_expectation(p, (x : A) => (X(n, x) - a) * indicator_fn((s_plus : (A) -> Bool), x))
+      #|  (s_plus : (A) -> Bool) == INTER((s : (A) -> Bool), {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((n : Num), x) >= (a : Real)})
+      #|  simple_rv((p : Prob_space[A]), indicator_fn((s : (A) -> Bool)))
+      #|  simple_rv((p : Prob_space[A]), indicator_fn(INTER((s : (A) -> Bool), {(x : A) | IN(x, prob_carrier(p)) && (X : (Num, A) -> Real)((n : Num), x) >= (a : Real)})))
+      #|  IN(INTER((s : (A) -> Bool), {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((n : Num), x) >= (a : Real)}), prob_events(p))
+      #|  IN(INTER((s : (A) -> Bool), {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((n : Num), x) >= (a : Real)}), (FF : (Num, (A) -> Bool) -> Bool)(n))
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((n : Num), x) >= (a : Real)}, (FF : (Num, (A) -> Bool) -> Bool)(n))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(n))
+      #|  IN((s : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  sigma_algebra((FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 k : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(k))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, simple_submartingale(p, FF, X) \226\134\146 (\226\136\128 n : Num, \226\136\128 s : (A) -> Bool, IN(s, FF(n)) \226\134\146 simple_expectation(p, (x : A) => pos_part(X(n, x) - a) * indicator_fn(s, x)) <= simple_expectation(p, (x : A) => pos_part(X(SUC(n), x) - a) * indicator_fn(s, x)))
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) < (b : Real)} == DIFF(UNIONS((G : ((A) -> Bool) -> Bool)), {(x : A) | IN(x, prob_carrier(p)) && X(x) >= b})
+      #|  UNIONS((G : ((A) -> Bool) -> Bool)) == prob_carrier((p : Prob_space[A]))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 b : Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && X(x) < b}, G)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), SUC((n : Num))) == 0} == UNION(INTER({(x : A) | IN(x, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, x), a, b, n) == 0}, {(x : A) | IN(x, prob_carrier(p)) && !(X(SUC(n), x) <= a)}), INTER({(x : A) | IN(x, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, x), a, b, n) == 1}, {(x : A) | IN(x, prob_carrier(p)) && X(SUC(n), x) >= b}))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), SUC((n : Num))) == 1} == UNION(INTER({(x : A) | IN(x, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, x), a, b, n) == 0}, {(x : A) | IN(x, prob_carrier(p)) && X(SUC(n), x) <= a}), INTER({(x : A) | IN(x, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, x), a, b, n) == 1}, {(x : A) | IN(x, prob_carrier(p)) && X(SUC(n), x) < b}))
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  UNIONS((FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num)))) == prob_carrier((p : Prob_space[A]))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !((X : (Num, A) -> Real)(SUC((n : Num)), x) <= (a : Real))} == DIFF(UNIONS((FF : (Num, (A) -> Bool) -> Bool)(SUC(n))), {(x : A) | IN(x, prob_carrier(p)) && X(SUC(n), x) <= a})
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !((X : (Num, A) -> Real)(SUC((n : Num)), x) <= (a : Real))}, (FF : (Num, (A) -> Bool) -> Bool)(SUC(n)))
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(SUC((n : Num)), x) < (b : Real)}, (FF : (Num, (A) -> Bool) -> Bool)(SUC(n)))
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(SUC((n : Num)), x) >= (b : Real)}, (FF : (Num, (A) -> Bool) -> Bool)(SUC(n)))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (X : (Num, A) -> Real)(SUC(n)))
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(SUC((n : Num)), x) <= (a : Real)}, (FF : (Num, (A) -> Bool) -> Bool)(SUC(n)))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (X : (Num, A) -> Real)(SUC(n)))
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 0}, (FF : (Num, (A) -> Bool) -> Bool)(SUC(n)))
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 1}, (FF : (Num, (A) -> Bool) -> Bool)(SUC(n)))
+      #|  (n : Num) <= SUC(n)
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), FF(SUC(n)))
+      #|  sigma_algebra((FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))))
       #|  0
-      #|  adapted (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real)
-      #|  (x:A) IN prob_carrier (p:A prob_space)
-      #|  UNIONS ((FF:num->(A->bool)->bool) 0) =\n       prob_carrier (p:A prob_space)
-      #|  {x:A | x IN prob_carrier p /\\\n              (if (X:num->A->real) 0 x <= a then 1 else 0) = 0} =\n       UNIONS ((FF:num->(A->bool)->bool) 0) DIFF\n         {x | x IN prob_carrier p /\\ X 0 x <= a}
-      #|  sigma_algebra ((FF:num->(A->bool)->bool) 0)
-      #|  sub_sigma_algebra (p:A prob_space)\n      ((FF:num->(A->bool)->bool) 0)
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  UNIONS((FF : (Num, (A) -> Bool) -> Bool)(0)) == prob_carrier((p : Prob_space[A]))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (if (X : (Num, A) -> Real)(0, x) <= (a : Real) { 1 } else { 0 }) == 0} == DIFF(UNIONS((FF : (Num, (A) -> Bool) -> Bool)(0)), {(x : A) | IN(x, prob_carrier(p)) && X(0, x) <= a})
+      #|  sigma_algebra((FF : (Num, (A) -> Bool) -> Bool)(0))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(0))
       #|  0
-      #|  adapted (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real)
-      #|  {x:A | x IN prob_carrier p /\\\n              (if (X:num->A->real) 0 x <= a then 1 else 0) = 1} =\n       {x | x IN prob_carrier p /\\ X 0 x <= a}
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b.\n     filtration p FF /\\ adapted p FF X ==>\n     forall n. {x | x IN prob_carrier p /\\\n              upcrossing_phase (\\k. X k x) a b n = 1} IN FF n /\\\n         {x | x IN prob_carrier p /\\\n              upcrossing_phase (\\k. X k x) a b n = 0} IN FF n
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  x:A
-      #|  indicator_fn\n    {x:A | x IN prob_carrier p /\\\n           upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0}
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b n.\n     filtration p FF /\\ adapted p FF X\n     ==> simple_rv p\n           (\\x. if upcrossing_phase (\\k. X k x) a b n = 0 then &1 else &0)
-      #|  {x:A | x IN prob_carrier p /\\\n               upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0}
-      #|  n:num
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  x:A
-      #|  \\x:A. pos_part((X:num->A->real) n x - a) *\n                indicator_fn\n                  {y:A | y IN prob_carrier p /\\\n                         upcrossing_phase (\\k. X k y) a b n = 0} x
-      #|  \\x:A. pos_part((X:num->A->real) (SUC n) x - a) *\n                indicator_fn\n                  {y:A | y IN prob_carrier p /\\\n                         upcrossing_phase (\\k. X k y) a b n = 0} x
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n         (\\x:A. pos_part((X:num->A->real) (SUC n) x - a) *\n                indicator_fn\n                  {y | y IN prob_carrier p /\\\n                       upcrossing_phase (\\k. X k y) a b n = 0} x) -\n        simple_expectation p\n         (\\x. pos_part(X n x - a) *\n              indicator_fn\n                {y | y IN prob_carrier p /\\\n                     upcrossing_phase (\\k. X k y) a b n = 0} x) =\n        simple_expectation p\n         (\\x. pos_part(X (SUC n) x - a) *\n              indicator_fn\n                {y | y IN prob_carrier p /\\\n                     upcrossing_phase (\\k. X k y) a b n = 0} x -\n              pos_part(X n x - a) *\n              indicator_fn\n                {y | y IN prob_carrier p /\\\n                     upcrossing_phase (\\k. X k y) a b n = 0} x)
-      #|  a:real
-      #|  (X:num->A->real) n
-      #|  p:A prob_space
-      #|  \\x:A. indicator_fn\n           {y:A | y IN prob_carrier p /\\\n                  upcrossing_phase (\\k. (X:num->A->real) k y) a b n = 0} x
-      #|  \\x:A. pos_part((X:num->A->real) n x - a)
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space)\n         (\\x:A. pos_part((X:num->A->real) n x - a) *\n                indicator_fn\n                  {y | y IN prob_carrier p /\\\n                       upcrossing_phase (\\k. X k y) a b n = 0} x)
-      #|  a:real
-      #|  (X:num->A->real) (SUC n)
-      #|  p:A prob_space
-      #|  \\x:A. indicator_fn\n           {y:A | y IN prob_carrier p /\\\n                  upcrossing_phase (\\k. (X:num->A->real) k y) a b n = 0} x
-      #|  \\x:A. pos_part((X:num->A->real) (SUC n) x - a)
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space)\n         (\\x:A. pos_part((X:num->A->real) (SUC n) x - a) *\n                indicator_fn\n                  {y | y IN prob_carrier p /\\\n                       upcrossing_phase (\\k. X k y) a b n = 0} x)
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. (if upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0\n               then &1 else &0) *\n              (pos_part(X (SUC n) x - a) - pos_part(X n x - a))) =\n       simple_expectation p\n         (\\x. pos_part(X (SUC n) x - a) *\n              indicator_fn\n                {y:A | y IN prob_carrier p /\\\n                       upcrossing_phase (\\k. X k y) a b n = 0} x) -\n       simple_expectation p\n         (\\x. pos_part(X n x - a) *\n              indicator_fn\n                {y:A | y IN prob_carrier p /\\\n                       upcrossing_phase (\\k. X k y) a b n = 0} x)
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  {x:A | x IN prob_carrier p /\\\n              upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0} IN\n       (FF:num->(A->bool)->bool) n
-      #|  \\x:A. (if upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0\n                then &1 else &0) *\n               (pos_part(X (SUC n) x - a) - pos_part(X n x - a))
-      #|  \\x:A. not_bet_gain (\\k. pos_part((X:num->A->real) k x - a))\n               (&0) (b - a) n
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. not_bet_gain (\\k. pos_part((X:num->A->real) k x - a))\n              (&0) (b - a) n +\n              (if upcrossing_phase (\\k. X k x) a b n = 0 then &1 else &0) *\n              (pos_part(X (SUC n) x - a) - pos_part(X n x - a))) =\n       simple_expectation p\n         (\\x. not_bet_gain (\\k. pos_part(X k x - a)) (&0) (b - a) n) +\n       simple_expectation p\n         (\\x. (if upcrossing_phase (\\k. X k x) a b n = 0 then &1 else &0) *\n              (pos_part(X (SUC n) x - a) - pos_part(X n x - a)))
-      #|  \\x:A. (if upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0\n               then &1 else &0) *\n              (pos_part(X (SUC n) x - a) - pos_part(X n x - a))
-      #|  \\x:A. not_bet_gain (\\k. pos_part((X:num->A->real) k x - a))\n              (&0) (b - a) n
-      #|  p:A prob_space
-      #|  \\x:A. pos_part((X:num->A->real) (SUC n) x - a) -\n              pos_part(X n x - a)
-      #|  \\x:A. if upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0\n               then &1 else &0
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space)\n      (\\x:A. if upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0\n             then &1 else &0)
-      #|  \\x:A. pos_part((X:num->A->real) n x - a)
-      #|  \\x:A. pos_part((X:num->A->real) (SUC n) x - a)
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space)\n      (\\x:A. pos_part((X:num->A->real) (SUC n) x - a) -\n             pos_part(X n x - a))
-      #|  a:real
-      #|  (X:num->A->real) n
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space)\n      (\\x:A. pos_part((X:num->A->real) n x - a))
-      #|  a:real
-      #|  (X:num->A->real) (SUC n)
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space)\n      (\\x:A. pos_part((X:num->A->real) (SUC n) x - a))
-      #|  simple_rv (p:A prob_space)\n     (\\x:A. (if upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0\n             then &1 else &0) *\n            (pos_part(X (SUC n) x - a) - pos_part(X n x - a)))
-      #|  forall x:A. upcrossing_phase (\\k. pos_part((X:num->A->real) k x - a))\n       (&0) (b - a) n = upcrossing_phase (\\k. X k x) a b n
-      #|  (\\x:A. not_bet_gain (\\k. pos_part((X:num->A->real) k x - a))\n       (&0) (b - a) (SUC n)) =\n      (\\x. not_bet_gain (\\k. pos_part(X k x - a)) (&0) (b - a) n +\n           (if upcrossing_phase (\\k. pos_part(X k x - a)) (&0) (b - a) n = 0\n            then &1 else &0) *\n           (pos_part(X (SUC n) x - a) - pos_part(X n x - a)))
-      #|  (\\x:A. not_bet_gain (\\k. pos_part((X:num->A->real) k x - a))\n     (&0) (b - a) 0) = (\\x. &0)
-      #|  forall k. simple_rv (p:A prob_space) ((X:num->A->real) k)
-      #|  adapted (p:A prob_space) (FF:num->(A->bool)->bool)\n    (X:num->A->real)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b.\n     simple_submartingale p FF X /\\ a < b ==>\n     forall n. simple_rv p\n           (\\x. not_bet_gain (\\k. pos_part(X k x - a)) (&0) (b - a) n) /\\\n         &0 <= simple_expectation p\n           (\\x. not_bet_gain (\\k. pos_part(X k x - a)) (&0) (b - a) n)
-      #|  x':A
-      #|  {(Y:A->real) x | x IN prob_carrier (p:A prob_space)} =\n      {X x | x IN prob_carrier p}
-      #|  x:A IN prob_carrier p
-      #|  {x:A | x IN prob_carrier p /\\ (Y:A->real) x <= v} =\n      {x | x IN prob_carrier p /\\ (X:A->real) x <= v}
-      #|  v:real
-      #|  forall p:A prob_space (X:A->real) (Y:A->real).\n     simple_rv p X /\\ (forall x. x IN prob_carrier p ==> X x = Y x)\n     ==> simple_rv p Y
-      #|  forall P. &(if P then 1 else 0) = if P then &1 else &0
-      #|  x:A
-      #|  indicator_fn (S:A->bool)
-      #|  \\x:A. &(num_upcrossings (X:num->A->real) a b n x)
-      #|  p:A prob_space
-      #|  \\x:A. &(num_upcrossings (X:num->A->real) a b n x) +\n                      indicator_fn (S:A->bool) x
-      #|  b:real
-      #|  (X:num->A->real) (SUC n)
-      #|  p:A prob_space
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  {x:A | x IN prob_carrier p /\\\n              upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 1 /\\\n              X (SUC n) x >= b} =\n       {x | x IN prob_carrier p /\\\n            upcrossing_phase (\\k. X k x) a b n = 1} INTER\n       {x | x IN prob_carrier p /\\ X (SUC n) x >= b}
-      #|  (S:A->bool) IN prob_events p
-      #|  S = {x:A | x IN prob_carrier p /\\\n                  upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 1 /\\\n                  X (SUC n) x >= b}
-      #|  x:A
-      #|  (\\x:A. &0)
-      #|  forall p:A prob_space FF (X:num->A->real) a b.\n     filtration p FF /\\ adapted p FF X /\\ (forall n. simple_rv p (X n))\n     ==> forall n. simple_rv p (\\x. &(num_upcrossings X a b n x))
-      #|  n:num
-      #|  b - a:real
-      #|  &0
-      #|  \\k:num. pos_part((X:num->A->real) k x - a)
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  \\k:num. (X:num->A->real) k x
-      #|  forall X:num->A->real a b n x.\n     a < b ==>\n     (b - a) * &(num_upcrossings X a b n x) +\n     not_bet_gain (\\k. pos_part(X k x - a)) (&0) (b - a) n +\n     pos_part(X 0 x - a)\n     <= pos_part(X n x - a)
-      #|  simple_expectation (p:A prob_space)\n      (\\x:A. (b - a) * &(num_upcrossings (X:num->A->real) a b n x) +\n       not_bet_gain (\\k. pos_part(X k x - a)) (&0) (b - a) n +\n       pos_part(X 0 x - a)) =\n     (b - a) * simple_expectation p (\\x. &(num_upcrossings X a b n x)) +\n     simple_expectation p\n       (\\x. not_bet_gain (\\k. pos_part(X k x - a)) (&0) (b - a) n) +\n     simple_expectation p (\\x. pos_part(X 0 x - a))
-      #|  x:A
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  x:A
-      #|  simple_expectation (p:A prob_space)\n      (\\x:A. (b - a) * &(num_upcrossings (X:num->A->real) a b n x) +\n       not_bet_gain (\\k. pos_part(X k x - a)) (&0) (b - a) n +\n       pos_part(X 0 x - a))\n     <= simple_expectation p (\\x. pos_part(X n x - a))
-      #|  x:A
-      #|  &0 <= simple_expectation (p:A prob_space)\n       (\\x:A. pos_part((X:num->A->real) 0 x - a))
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  simple_rv p (\\x:A. not_bet_gain (\\k. pos_part((X:num->A->real) k x - a))\n                         (&0) (b - a) n) /\\\n     &0 <= simple_expectation p\n       (\\x. not_bet_gain (\\k. pos_part(X k x - a)) (&0) (b - a) n)
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (if (X : (Num, A) -> Real)(0, x) <= (a : Real) { 1 } else { 0 }) == 1} == {(x : A) | IN(x, prob_carrier(p)) && X(0, x) <= a}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, filtration(p, FF) && adapted(p, FF, X) \226\134\146 (\226\136\128 n : Num, IN({(x : A) | IN(x, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, x), a, b, n) == 1}, FF(n)) && IN({(x : A) | IN(x, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, x), a, b, n) == 0}, FF(n)))
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (x : A)
+      #|  indicator_fn({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 0})
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, filtration(p, FF) && adapted(p, FF, X) \226\134\146 simple_rv(p, (x : A) => if upcrossing_phase((k : Num) => X(k, x), a, b, n) == 0 { real_of_num(1) } else { real_of_num(0) })
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 0}
+      #|  (n : Num)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (x : A)
+      #|  (x : A) => pos_part((X : (Num, A) -> Real)((n : Num), x) - (a : Real)) * indicator_fn({(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => X(k, y), a, (b : Real), n) == 0}, x)
+      #|  (x : A) => pos_part((X : (Num, A) -> Real)(SUC((n : Num)), x) - (a : Real)) * indicator_fn({(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => X(k, y), a, (b : Real), n) == 0}, x)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)(SUC((n : Num)), x) - (a : Real)) * indicator_fn({(y : A) | IN(y, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, y), a, (b : Real), n) == 0}, x)) - simple_expectation(p, (x : A) => pos_part(X(n, x) - a) * indicator_fn({(y : A) | IN(y, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, y), a, b, n) == 0}, x)) == simple_expectation(p, (x : A) => pos_part(X(SUC(n), x) - a) * indicator_fn({(y : A) | IN(y, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, y), a, b, n) == 0}, x) - pos_part(X(n, x) - a) * indicator_fn({(y : A) | IN(y, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, y), a, b, n) == 0}, x))
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  (x : A) => indicator_fn({(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, y), (a : Real), (b : Real), (n : Num)) == 0}, x)
+      #|  (x : A) => pos_part((X : (Num, A) -> Real)((n : Num), x) - (a : Real))
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)((n : Num), x) - (a : Real)) * indicator_fn({(y : A) | IN(y, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, y), a, (b : Real), n) == 0}, x))
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (p : Prob_space[A])
+      #|  (x : A) => indicator_fn({(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, y), (a : Real), (b : Real), (n : Num)) == 0}, x)
+      #|  (x : A) => pos_part((X : (Num, A) -> Real)(SUC((n : Num)), x) - (a : Real))
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)(SUC((n : Num)), x) - (a : Real)) * indicator_fn({(y : A) | IN(y, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, y), a, (b : Real), n) == 0}, x))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 0 { real_of_num(1) } else { real_of_num(0) }) * (pos_part(X(SUC(n), x) - a) - pos_part(X(n, x) - a))) == simple_expectation(p, (x : A) => pos_part(X(SUC(n), x) - a) * indicator_fn({(y : A) | IN(y, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, y), a, b, n) == 0}, x)) - simple_expectation(p, (x : A) => pos_part(X(n, x) - a) * indicator_fn({(y : A) | IN(y, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, y), a, b, n) == 0}, x))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 0}, (FF : (Num, (A) -> Bool) -> Bool)(n))
+      #|  (x : A) => (if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 0 { real_of_num(1) } else { real_of_num(0) }) * (pos_part(X(SUC(n), x) - a) - pos_part(X(n, x) - a))
+      #|  (x : A) => not_bet_gain((k : Num) => pos_part((X : (Num, A) -> Real)(k, x) - (a : Real)), real_of_num(0), (b : Real) - a, (n : Num))
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => not_bet_gain((k : Num) => pos_part((X : (Num, A) -> Real)(k, x) - (a : Real)), real_of_num(0), (b : Real) - a, (n : Num)) + (if upcrossing_phase((k : Num) => X(k, x), a, b, n) == 0 { real_of_num(1) } else { real_of_num(0) }) * (pos_part(X(SUC(n), x) - a) - pos_part(X(n, x) - a))) == simple_expectation(p, (x : A) => not_bet_gain((k : Num) => pos_part(X(k, x) - a), real_of_num(0), b - a, n)) + simple_expectation(p, (x : A) => (if upcrossing_phase((k : Num) => X(k, x), a, b, n) == 0 { real_of_num(1) } else { real_of_num(0) }) * (pos_part(X(SUC(n), x) - a) - pos_part(X(n, x) - a)))
+      #|  (x : A) => (if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 0 { real_of_num(1) } else { real_of_num(0) }) * (pos_part(X(SUC(n), x) - a) - pos_part(X(n, x) - a))
+      #|  (x : A) => not_bet_gain((k : Num) => pos_part((X : (Num, A) -> Real)(k, x) - (a : Real)), real_of_num(0), (b : Real) - a, (n : Num))
+      #|  (p : Prob_space[A])
+      #|  (x : A) => pos_part((X : (Num, A) -> Real)(SUC((n : Num)), x) - (a : Real)) - pos_part(X(n, x) - a)
+      #|  (x : A) => if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 0 { real_of_num(1) } else { real_of_num(0) }
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 0 { real_of_num(1) } else { real_of_num(0) })
+      #|  (x : A) => pos_part((X : (Num, A) -> Real)((n : Num), x) - (a : Real))
+      #|  (x : A) => pos_part((X : (Num, A) -> Real)(SUC((n : Num)), x) - (a : Real))
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)(SUC((n : Num)), x) - (a : Real)) - pos_part(X(n, x) - a))
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)((n : Num), x) - (a : Real)))
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)(SUC((n : Num)), x) - (a : Real)))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => (if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 0 { real_of_num(1) } else { real_of_num(0) }) * (pos_part(X(SUC(n), x) - a) - pos_part(X(n, x) - a)))
+      #|  \226\136\128 x : A, upcrossing_phase((k : Num) => pos_part((X : (Num, A) -> Real)(k, x) - (a : Real)), real_of_num(0), (b : Real) - a, (n : Num)) == upcrossing_phase((k : Num) => X(k, x), a, b, n)
+      #|  ((x : A) => not_bet_gain((k : Num) => pos_part((X : (Num, A) -> Real)(k, x) - (a : Real)), real_of_num(0), (b : Real) - a, SUC((n : Num)))) == ((x : A) => not_bet_gain((k : Num) => pos_part(X(k, x) - a), real_of_num(0), b - a, n) + (if upcrossing_phase((k : Num) => pos_part(X(k, x) - a), real_of_num(0), b - a, n) == 0 { real_of_num(1) } else { real_of_num(0) }) * (pos_part(X(SUC(n), x) - a) - pos_part(X(n, x) - a)))
+      #|  ((x : A) => not_bet_gain((k : Num) => pos_part((X : (Num, A) -> Real)(k, x) - (a : Real)), real_of_num(0), (b : Real) - a, 0)) == ((x : A) => real_of_num(0))
+      #|  \226\136\128 k : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(k))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, simple_submartingale(p, FF, X) && a < b \226\134\146 (\226\136\128 n : Num, simple_rv(p, (x : A) => not_bet_gain((k : Num) => pos_part(X(k, x) - a), real_of_num(0), b - a, n)) && real_of_num(0) <= simple_expectation(p, (x : A) => not_bet_gain((k : Num) => pos_part(X(k, x) - a), real_of_num(0), b - a, n)))
+      #|  (x' : A)
+      #|  {(Y : (A) -> Real)((x : A)) | IN(x, prob_carrier((p : Prob_space[A])))} == {(X : (A) -> Real)((x : A)) | IN(x, prob_carrier(p))}
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (Y : (A) -> Real)(x) <= (v : Real)} == {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) <= v}
+      #|  (v : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, simple_rv(p, X) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 X(x) == Y(x)) \226\134\146 simple_rv(p, Y)
+      #|  \226\136\128 P : Bool, real_of_num(if P { 1 } else { 0 }) == (if P { real_of_num(1) } else { real_of_num(0) })
+      #|  (x : A)
+      #|  indicator_fn((S : (A) -> Bool))
+      #|  (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x))
+      #|  (p : Prob_space[A])
+      #|  (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) + indicator_fn((S : (A) -> Bool), x)
+      #|  (b : Real)
+      #|  (X : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (p : Prob_space[A])
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 1 && X(SUC(n), x) >= b} == INTER({(x : A) | IN(x, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, x), a, b, n) == 1}, {(x : A) | IN(x, prob_carrier(p)) && X(SUC(n), x) >= b})
+      #|  IN((S : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (S : (A) -> Bool) == {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 1 && X(SUC(n), x) >= b}
+      #|  (x : A)
+      #|  (x : A) => real_of_num(0)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, filtration(p, FF) && adapted(p, FF, X) && (\226\136\128 n : Num, simple_rv(p, X(n))) \226\134\146 (\226\136\128 n : Num, simple_rv(p, (x : A) => real_of_num(num_upcrossings(X, a, b, n, x))))
+      #|  (n : Num)
+      #|  (b : Real) - (a : Real)
+      #|  real_of_num(0)
+      #|  (k : Num) => pos_part((X : (Num, A) -> Real)(k, (x : A)) - (a : Real))
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (k : Num) => (X : (Num, A) -> Real)(k, (x : A))
+      #|  \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, \226\136\128 x : A, a < b \226\134\146 (b - a) * real_of_num(num_upcrossings(X, a, b, n, x)) + (not_bet_gain((k : Num) => pos_part(X(k, x) - a), real_of_num(0), b - a, n) + pos_part(X(0, x) - a)) <= pos_part(X(n, x) - a)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((b : Real) - (a : Real)) * real_of_num(num_upcrossings((X : (Num, A) -> Real), a, b, (n : Num), x)) + (not_bet_gain((k : Num) => pos_part(X(k, x) - a), real_of_num(0), b - a, n) + pos_part(X(0, x) - a))) == (b - a) * simple_expectation(p, (x : A) => real_of_num(num_upcrossings(X, a, b, n, x))) + (simple_expectation(p, (x : A) => not_bet_gain((k : Num) => pos_part(X(k, x) - a), real_of_num(0), b - a, n)) + simple_expectation(p, (x : A) => pos_part(X(0, x) - a)))
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (x : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((b : Real) - (a : Real)) * real_of_num(num_upcrossings((X : (Num, A) -> Real), a, b, (n : Num), x)) + (not_bet_gain((k : Num) => pos_part(X(k, x) - a), real_of_num(0), b - a, n) + pos_part(X(0, x) - a))) <= simple_expectation(p, (x : A) => pos_part(X(n, x) - a))
+      #|  (x : A)
+      #|  real_of_num(0) <= simple_expectation((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)(0, x) - (a : Real)))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => not_bet_gain((k : Num) => pos_part((X : (Num, A) -> Real)(k, x) - (a : Real)), real_of_num(0), (b : Real) - a, (n : Num))) && real_of_num(0) <= simple_expectation(p, (x : A) => not_bet_gain((k : Num) => pos_part(X(k, x) - a), real_of_num(0), b - a, n))
       #|  0
-      #|  simple_rv p (\\x:A. pos_part((X:num->A->real) 0 x - a))
-      #|  n:num
-      #|  simple_rv p (\\x:A. pos_part((X:num->A->real) n x - a))
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  simple_rv p (\\x:A. &(num_upcrossings (X:num->A->real) a b n x))
-      #|  forall n. simple_rv (p:A prob_space) ((X:num->A->real) n)
-      #|  adapted (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b n.\n     simple_submartingale p FF X /\\ a < b ==>\n     (b - a) * simple_expectation p (\\x. &(num_upcrossings X a b n x))\n     <= simple_expectation p (\\x. pos_part(X n x - a))
-      #|  n:num
-      #|  forall x a M. abs(x) <= M ==> pos_part(x - a) <= M + abs(a)
-      #|  x:A
-      #|  n:num
-      #|  \\x:A. M + abs(a:real)
-      #|  \\x:A. pos_part((X:num->A->real) n x - a)
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space) (\\x. pos_part((X:num->A->real) n x - a))\n     <= M + abs(a)
-      #|  forall m:num. simple_rv (p:A prob_space) ((X:num->A->real) m)
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b n M.\n     simple_submartingale p FF X /\\ a < b /\\\n     (forall m x. x IN prob_carrier p ==> abs(X m x) <= M)\n     ==> (b - a) * simple_expectation p (\\x. &(num_upcrossings X a b n x))\n         <= M + abs(a)
-      #|  forall X:num->A->real a b m n x.\n     m <= n ==> num_upcrossings X a b m x <= num_upcrossings X a b n x
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  simple_rv p (\\x:A. &(num_upcrossings (X:num->A->real) a b n x))
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b n k.\n     filtration p FF /\\ adapted p FF X /\\ (forall m. simple_rv p (X m))\n     ==> {x | x IN prob_carrier p /\\\n              &(num_upcrossings X a b n x) >= &k}\n         IN prob_events p
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. &(num_upcrossings (X:num->A->real) a b n x)) / &k\n     <= (M + abs(a:real)) / ((b - a) * &k)
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. &(num_upcrossings (X:num->A->real) a b n x))\n     <= (M + abs(a:real)) / (b - a)
-      #|  M:real
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  (b - a) * simple_expectation (p:A prob_space)\n       (\\x:A. &(num_upcrossings (X:num->A->real) a b n x)) <= M + abs(a:real)
-      #|  &0 < b - a
-      #|  x:A
-      #|  prob p {x | x IN prob_carrier (p:A prob_space) /\\\n     &(num_upcrossings (X:num->A->real) a b n x) >= &k}\n     <= simple_expectation p (\\x. &(num_upcrossings X a b n x)) / &k
-      #|  &0 < &k
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  simple_rv p (\\x:A. &(num_upcrossings (X:num->A->real) a b n x))
-      #|  adapted (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) FF
-      #|  forall m:num. simple_rv (p:A prob_space) ((X:num->A->real) m)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b n M k.\n     simple_submartingale p FF X /\\ a < b /\\\n     (forall m x. x IN prob_carrier p ==> abs(X m x) <= M) /\\\n     0 < k\n     ==> prob p {x | x IN prob_carrier p /\\\n                     &(num_upcrossings X a b n x) >= &k}\n         <= (M + abs(a)) / ((b - a) * &k)
+      #|  simple_rv((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)(0, x) - (a : Real)))
+      #|  (n : Num)
+      #|  simple_rv((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)((n : Num), x) - (a : Real)))
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)))
+      #|  \226\136\128 n : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, simple_submartingale(p, FF, X) && a < b \226\134\146 (b - a) * simple_expectation(p, (x : A) => real_of_num(num_upcrossings(X, a, b, n, x))) <= simple_expectation(p, (x : A) => pos_part(X(n, x) - a))
+      #|  (n : Num)
+      #|  \226\136\128 x : Real, \226\136\128 a : Real, \226\136\128 M : Real, abs(x) <= M \226\134\146 pos_part(x - a) <= M + abs(a)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (x : A) => (M : Real) + abs((a : Real))
+      #|  (x : A) => pos_part((X : (Num, A) -> Real)((n : Num), x) - (a : Real))
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)((n : Num), x) - (a : Real))) <= (M : Real) + abs(a)
+      #|  \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, \226\136\128 M : Real, simple_submartingale(p, FF, X) && a < b && (\226\136\128 m : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(X(m, x)) <= M) \226\134\146 (b - a) * simple_expectation(p, (x : A) => real_of_num(num_upcrossings(X, a, b, n, x))) <= M + abs(a)
+      #|  \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 x : A, m <= n \226\134\146 num_upcrossings(X, a, b, m, x) <= num_upcrossings(X, a, b, n, x)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, \226\136\128 k : Num, filtration(p, FF) && adapted(p, FF, X) && (\226\136\128 m : Num, simple_rv(p, X(m))) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings(X, a, b, n, x)) >= real_of_num(k)}, prob_events(p))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x))) / real_of_num((k : Num)) <= ((M : Real) + abs(a)) / ((b - a) * real_of_num(k))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x))) <= ((M : Real) + abs(a)) / (b - a)
+      #|  (M : Real)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  ((b : Real) - (a : Real)) * simple_expectation((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), a, b, (n : Num), x))) <= (M : Real) + abs(a)
+      #|  real_of_num(0) < (b : Real) - (a : Real)
+      #|  (x : A)
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num((k : Num))}) <= simple_expectation(p, (x : A) => real_of_num(num_upcrossings(X, a, b, n, x))) / real_of_num(k)
+      #|  real_of_num(0) < real_of_num((k : Num))
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, \226\136\128 M : Real, \226\136\128 k : Num, simple_submartingale(p, FF, X) && a < b && (\226\136\128 m : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(X(m, x)) <= M) && 0 < k \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings(X, a, b, n, x)) >= real_of_num(k)}) <= (M + abs(a)) / ((b - a) * real_of_num(k))
       #|  0
-      #|  \\n. prob (p:A prob_space) ((A:num->A->bool) n)
+      #|  (n : Num) => prob((p : Prob_space[A]), (A : (Num, A) -> Bool)(n))
       #|  sequentially
-      #|  A:num->A->bool
-      #|  p:A prob_space
-      #|  forall p:A prob_space (A:num->A->bool) c.\n     (forall n. A n IN prob_events p) /\\\n     (forall n. A n SUBSET A (SUC n)) /\\\n     (forall n. prob p (A n) <= c)\n     ==> prob p (UNIONS {A n | n IN (:num)}) <= c
-      #|  k:num
-      #|  M:real
-      #|  m:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  m:num
-      #|  nn <= SUC nn
-      #|  x:A
-      #|  nn:num
-      #|  FF:num->(A->bool)->bool
-      #|  adapted (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) FF
-      #|  forall m:num. simple_rv (p:A prob_space) ((X:num->A->real) m)
+      #|  (A : (Num, A) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 A : (Num, A) -> Bool, \226\136\128 c : Real, (\226\136\128 n : Num, IN(A(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(A(n), A(SUC(n)))) && (\226\136\128 n : Num, prob(p, A(n)) <= c) \226\134\146 prob(p, UNIONS({A((n : Num)) | IN(n, UNIV)})) <= c
+      #|  (k : Num)
+      #|  (M : Real)
+      #|  (m : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (m : Num)
+      #|  (nn : Num) <= SUC(nn)
+      #|  (x : A)
+      #|  (nn : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
       #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b M.\n     simple_submartingale p FF X /\\ a < b /\\\n     (forall m x. x IN prob_carrier p ==> abs(X m x) <= M)\n     ==> forall k. 0 < k ==>\n         prob p (UNIONS {\n           {x | x IN prob_carrier p /\\ &(num_upcrossings X a b n x) >= &k}\n         | n IN (:num)}) <= (M + abs(a)) / ((b - a) * &k)
-      #|  ~(n = 0) ==> 0 < n
-      #|  c < &n * x
-      #|  SUC(n - 1) = n
-      #|  n - 1
-      #|  forall k:num. x <= c / &(SUC k)
-      #|  SUC 0 = 1
+      #|  !((n : Num) == 0) \226\134\146 0 < n
+      #|  (c : Real) < real_of_num((n : Num)) * (x : Real)
+      #|  SUC((n : Num) - 1) == n
+      #|  (n : Num) - 1
+      #|  \226\136\128 k : Num, (x : Real) <= (c : Real) / real_of_num(SUC(k))
+      #|  SUC(0) == 1
       #|  0
-      #|  forall k:num. x <= c / &(SUC k)
-      #|  c < &n * x
-      #|  ~(n = 0)
-      #|  n:num
-      #|  c:real
-      #|  x:real
-      #|  &0 < x
-      #|  x = &0
-      #|  forall x c. &0 <= x /\\ (forall k. x <= c / &(SUC k)) ==> x = &0
-      #|  nn:num
-      #|  nn:num
-      #|  k:num
-      #|  k:num
-      #|  x:A
-      #|  SUC j
-      #|  M:real
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  (M + abs(a:real)) / (b - a) / &(SUC j) =\n                     (M + abs a) / ((b - a) * &(SUC j))
-      #|  FF:num->(A->bool)->bool
-      #|  FF:num->(A->bool)->bool
+      #|  \226\136\128 k : Num, (x : Real) <= (c : Real) / real_of_num(SUC(k))
+      #|  (c : Real) < real_of_num((n : Num)) * (x : Real)
+      #|  !((n : Num) == 0)
+      #|  (n : Num)
+      #|  (c : Real)
+      #|  (x : Real)
+      #|  real_of_num(0) < (x : Real)
+      #|  (x : Real) == real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 c : Real, real_of_num(0) <= x && (\226\136\128 k : Num, x <= c / real_of_num(SUC(k))) \226\134\146 x == real_of_num(0)
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (x : A)
+      #|  SUC((j : Num))
+      #|  (M : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  ((M : Real) + abs((a : Real))) / ((b : Real) - a) / real_of_num(SUC((j : Num))) == (M + abs(a)) / ((b - a) * real_of_num(SUC(j)))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
       #|  prob (p:A prob_space) (UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_upcrossings (X:num->A->real) a b n x) >= &(SUC j)}\n       | n IN (:num)})
-      #|  j:num
-      #|  FF:num->(A->bool)->bool
-      #|  (M + abs(a:real)) / (b - a)
-      #|  FF:num->(A->bool)->bool
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  ((M : Real) + abs((a : Real))) / ((b : Real) - a)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
       #|  INTERS {UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_upcrossings (X:num->A->real) a b n x) >= &(SUC k)}\n     | n IN (:num)} | k IN (:num)}
-      #|  adapted (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) FF
-      #|  forall m:num. simple_rv (p:A prob_space) ((X:num->A->real) m)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b M.\n     simple_submartingale p FF X /\\ a < b /\\\n     (forall m x. x IN prob_carrier p ==> abs(X m x) <= M)\n     ==> almost_surely p\n           {x | ?B:num. forall n. num_upcrossings X a b n x <= B}
-      #|  forall f:num->real a b m. a < b /\\ f m <= a\n     ==> upcrossing_phase f a b m = 1
-      #|  1 = 1
-      #|  ~(0 = 1)
-      #|  ~(1 = 0)
-      #|  forall f:num->real a b m.\n     upcrossing_phase f a b m = 1\n     ==> (upcrossing_phase f a b (SUC m) = 0 <=> f (SUC m) >= b)
-      #|  forall f:num->real a b m.\n     upcrossing_phase f a b m = 1 /\\ f (SUC m) >= b\n     ==> upcrossing_count f a b (SUC m) = upcrossing_count f a b m + 1
-      #|  SUC m
-      #|  m:num
-      #|  b:real
-      #|  a:real
-      #|  f:num->real
-      #|  upcrossing_count (f:num->real) a b (SUC m) + 1
-      #|  upcrossing_count f a b (SUC m) =\n                   upcrossing_count (f:num->real) a b m + 1
-      #|  m:num
-      #|  b:real
-      #|  a:real
-      #|  f:num->real
-      #|  (f:num->real) (SUC m) >= b
-      #|  SUC m
-      #|  b:real
-      #|  a:real
-      #|  f:num->real
-      #|  m:num
-      #|  m:num
-      #|  b:real
-      #|  a:real
-      #|  f:num->real
-      #|  m:num
-      #|  forall f:num->real a b d m.\n     upcrossing_phase f a b m = 1 /\\ f (m + SUC d) >= b\n     ==> upcrossing_count f a b m + 1 <= upcrossing_count f a b (m + SUC d)
-      #|  m2 - m1 - 1
-      #|  d:num
-      #|  ?d. m2 = m1 + SUC d
-      #|  upcrossing_phase (f:num->real) a b m1 = 1
-      #|  forall f:num->real a b m1 m2.\n     a < b /\\ f m1 <= a /\\ f m2 >= b /\\ m1 < m2\n     ==> upcrossing_count f a b m1 + 1 <= upcrossing_count f a b m2
-      #|  upcrossing_count (f:num->real) a b n0 <=\n                    upcrossing_count f a b m1
-      #|  upcrossing_count (f:num->real) a b n0 + 1
-      #|  upcrossing_count (f:num->real) a b m1 + 1
-      #|  m2:num
-      #|  m2:num
-      #|  SUC m1
-      #|  m1:num
-      #|  SUC n0
-      #|  N:num
-      #|  N:num
-      #|  n0:num
-      #|  ?n0. B <= upcrossing_count (f:num->real) a b n0
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 M : Real, simple_submartingale(p, FF, X) && a < b && (\226\136\128 m : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(X(m, x)) <= M) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings(X, a, b, n, x) <= B})
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Num, a < b && f(m) <= a \226\134\146 upcrossing_phase(f, a, b, m) == 1
+      #|  1 == 1
+      #|  !(0 == 1)
+      #|  !(1 == 0)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Num, upcrossing_phase(f, a, b, m) == 1 \226\134\146 (upcrossing_phase(f, a, b, SUC(m)) == 0) == (f(SUC(m)) >= b)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Num, upcrossing_phase(f, a, b, m) == 1 && f(SUC(m)) >= b \226\134\146 upcrossing_count(f, a, b, SUC(m)) == upcrossing_count(f, a, b, m) + 1
+      #|  SUC((m : Num))
+      #|  (m : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Num) -> Real)
+      #|  upcrossing_count((f : (Num) -> Real), (a : Real), (b : Real), SUC((m : Num))) + 1
+      #|  upcrossing_count((f : (Num) -> Real), (a : Real), (b : Real), SUC((m : Num))) == upcrossing_count(f, a, b, m) + 1
+      #|  (m : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Num) -> Real)
+      #|  (f : (Num) -> Real)(SUC((m : Num))) >= (b : Real)
+      #|  SUC((m : Num))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Num) -> Real)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Num) -> Real)
+      #|  (m : Num)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 d : Num, \226\136\128 m : Num, upcrossing_phase(f, a, b, m) == 1 && f(m + SUC(d)) >= b \226\134\146 upcrossing_count(f, a, b, m) + 1 <= upcrossing_count(f, a, b, m + SUC(d))
+      #|  (m2 : Num) - (m1 : Num) - 1
+      #|  (d : Num)
+      #|  \226\136\131 d : Num, (m2 : Num) == (m1 : Num) + SUC(d)
+      #|  upcrossing_phase((f : (Num) -> Real), (a : Real), (b : Real), (m1 : Num)) == 1
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m1 : Num, \226\136\128 m2 : Num, a < b && f(m1) <= a && f(m2) >= b && m1 < m2 \226\134\146 upcrossing_count(f, a, b, m1) + 1 <= upcrossing_count(f, a, b, m2)
+      #|  upcrossing_count((f : (Num) -> Real), (a : Real), (b : Real), (n0 : Num)) <= upcrossing_count(f, a, b, (m1 : Num))
+      #|  upcrossing_count((f : (Num) -> Real), (a : Real), (b : Real), (n0 : Num)) + 1
+      #|  upcrossing_count((f : (Num) -> Real), (a : Real), (b : Real), (m1 : Num)) + 1
+      #|  (m2 : Num)
+      #|  (m2 : Num)
+      #|  SUC((m1 : Num))
+      #|  (m1 : Num)
+      #|  SUC((n0 : Num))
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (n0 : Num)
+      #|  \226\136\131 n0 : Num, (B : Num) <= upcrossing_count((f : (Num) -> Real), (a : Real), (b : Real), n0)
       #|  0
-      #|  forall f:num->real a b B.\n     a < b /\\\n     (forall N. ?m. N <= m /\\ f m <= a) /\\\n     (forall N. ?m. N <= m /\\ f m >= b)\n     ==> ?n. B <= upcrossing_count f a b n
-      #|  N:num
-      #|  (l + &2 * L) / &3
-      #|  N:num
-      #|  N:num
-      #|  (&2 * l + L) / &3
-      #|  N:num
-      #|  (l + &2 * L) / &3
-      #|  (&2 * l + L) / &3
-      #|  &0 < e /\\ f <= L + e / &2 /\\ L - e / &2 <= f\n       ==> abs(f - L) < e
-      #|  N1 + N2:num
-      #|  N2:num
-      #|  L - e / &2
-      #|  N1:num
-      #|  L + e / &2
-      #|  e:real
-      #|  L:real
-      #|  (L + &2 * l) / &3 <= (f:num->real) (N1 + N2)
-      #|  (f:num->real) (N1 + N2) <= (&2 * L + l) / &3
-      #|  N2:num
-      #|  (L + &2 * l) / &3
-      #|  N1:num
-      #|  (&2 * L + l) / &3
-      #|  l < (L:real)
-      #|  N:num
-      #|  N:num
-      #|  N:num
-      #|  M + &1
-      #|  abs(f:real) <= M ==> --M <= f
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 B : Num, a < b && (\226\136\128 N : Num, \226\136\131 m : Num, N <= m && f(m) <= a) && (\226\136\128 N : Num, \226\136\131 m : Num, N <= m && f(m) >= b) \226\134\146 (\226\136\131 n : Num, B <= upcrossing_count(f, a, b, n))
+      #|  (N : Num)
+      #|  ((l : Real) + real_of_num(2) * (L : Real)) / real_of_num(3)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (real_of_num(2) * (l : Real) + (L : Real)) / real_of_num(3)
+      #|  (N : Num)
+      #|  ((l : Real) + real_of_num(2) * (L : Real)) / real_of_num(3)
+      #|  (real_of_num(2) * (l : Real) + (L : Real)) / real_of_num(3)
+      #|  real_of_num(0) < (e : Real) && (f : Real) <= (L : Real) + e / real_of_num(2) && L - e / real_of_num(2) <= f \226\134\146 abs(f - L) < e
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (N2 : Num)
+      #|  (L : Real) - (e : Real) / real_of_num(2)
+      #|  (N1 : Num)
+      #|  (L : Real) + (e : Real) / real_of_num(2)
+      #|  (e : Real)
+      #|  (L : Real)
+      #|  ((L : Real) + real_of_num(2) * (l : Real)) / real_of_num(3) <= (f : (Num) -> Real)((N1 : Num) + (N2 : Num))
+      #|  (f : (Num) -> Real)((N1 : Num) + (N2 : Num)) <= (real_of_num(2) * (L : Real) + (l : Real)) / real_of_num(3)
+      #|  (N2 : Num)
+      #|  ((L : Real) + real_of_num(2) * (l : Real)) / real_of_num(3)
+      #|  (N1 : Num)
+      #|  (real_of_num(2) * (L : Real) + (l : Real)) / real_of_num(3)
+      #|  (l : Real) < (L : Real)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (M : Real) + real_of_num(1)
+      #|  abs((f : Real)) <= (M : Real) \226\134\146 -M <= f
       #|  0
-      #|  --M:real
-      #|  l:real
-      #|  ?l:real. ((f:num->real) has_liminf l) sequentially
-      #|  N:num
-      #|  N:num
-      #|  N:num
-      #|  --M - &1
-      #|  abs(f:real) <= M ==> f <= M
+      #|  -(M : Real)
+      #|  (l : Real)
+      #|  \226\136\131 l : Real, has_liminf((f : (Num) -> Real), l, sequentially)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  -(M : Real) - real_of_num(1)
+      #|  abs((f : Real)) <= (M : Real) \226\134\146 f <= M
       #|  0
-      #|  M:real
-      #|  L:real
-      #|  ?L:real. ((f:num->real) has_limsup L) sequentially
-      #|  forall(f:num->real) (M:real).\n     &0 <= M /\\ (forall n. abs(f n) <= M) /\\\n     ~(?L. forall e. &0 < e ==> ?N. forall n. N <= n ==> abs(f n - L) < e)\n     ==> ?a b. a < b /\\\n               (forall N. ?n. N <= n /\\ f n <= a) /\\\n               (forall N. ?n. N <= n /\\ f n >= b)
-      #|  n:num
-      #|  n:num
-      #|  SUC B
-      #|  q2:real
-      #|  q1:real
-      #|  f:num->real
-      #|  B:num
-      #|  q2:real
-      #|  q1:real
-      #|  n:num
-      #|  n:num
-      #|  N:num
-      #|  N:num
-      #|  forall N. ?n. N <= n /\\ (f:num->real) n >= q2
-      #|  n:num
-      #|  n:num
-      #|  N:num
-      #|  N:num
-      #|  forall N. ?n. N <= n /\\ (f:num->real) n <= q1
-      #|  q2:real
-      #|  b:real
-      #|  (a + b) / &2
-      #|  q1:real
-      #|  (a + b) / &2
-      #|  a:real
-      #|  b:real
-      #|  a:real
-      #|  abs((f:num->real) 0)
-      #|  M:real
-      #|  f:num->real
-      #|  (~p ==> F) ==> p
-      #|  forall(f:num->real) M.\n     (forall n. abs(f n) <= M) /\\\n     (forall a b. rational a /\\ rational b /\\ a < b\n            ==> ?B. forall n. upcrossing_count f a b n <= B)\n     ==> ?L. (f ---> L) sequentially
-      #|  &0
-      #|  ?g:num->real. rational = IMAGE g (:num)
-      #|  {}:A->bool
-      #|  forall p:A prob_space. almost_surely p (:A)
-      #|  n:num
-      #|  n:num
-      #|  B:num
-      #|  B:num
-      #|  NUMPAIR i j
-      #|  b:real
-      #|  ?j:num. (g:num->real) j = b
-      #|  a:real
-      #|  ?i:num. (g:num->real) i = a
-      #|  b:real
-      #|  a:real
-      #|  M:real
-      #|  \\n:num. (X:num->A->real) n x
-      #|  k:num
-      #|  {x:A | (g:num->real)(NUMFST (k:num)) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}
-      #|  k:num
-      #|  forall k. (g:num->real)(NUMFST k) < g(NUMSND k)\n          ==> ?B. forall n. num_upcrossings (X:num->A->real)\n                        (g(NUMFST k)) (g(NUMSND k)) n x <= B
-      #|  x:A
+      #|  (M : Real)
+      #|  (L : Real)
+      #|  \226\136\131 L : Real, has_limsup((f : (Num) -> Real), L, sequentially)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 M : Real, real_of_num(0) <= M && (\226\136\128 n : Num, abs(f(n)) <= M) && !(\226\136\131 L : Real, \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 abs(f(n) - L) < e)) \226\134\146 (\226\136\131 a : Real, \226\136\131 b : Real, a < b && (\226\136\128 N : Num, \226\136\131 n : Num, N <= n && f(n) <= a) && (\226\136\128 N : Num, \226\136\131 n : Num, N <= n && f(n) >= b))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  SUC((B : Num))
+      #|  (q2 : Real)
+      #|  (q1 : Real)
+      #|  (f : (Num) -> Real)
+      #|  (B : Num)
+      #|  (q2 : Real)
+      #|  (q1 : Real)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  \226\136\128 N : Num, \226\136\131 n : Num, N <= n && (f : (Num) -> Real)(n) >= (q2 : Real)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  \226\136\128 N : Num, \226\136\131 n : Num, N <= n && (f : (Num) -> Real)(n) <= (q1 : Real)
+      #|  (q2 : Real)
+      #|  (b : Real)
+      #|  ((a : Real) + (b : Real)) / real_of_num(2)
+      #|  (q1 : Real)
+      #|  ((a : Real) + (b : Real)) / real_of_num(2)
+      #|  (a : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  abs((f : (Num) -> Real)(0))
+      #|  (M : Real)
+      #|  (f : (Num) -> Real)
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 M : Real, (\226\136\128 n : Num, abs(f(n)) <= M) && (\226\136\128 a : Real, \226\136\128 b : Real, rational(a) && rational(b) && a < b \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, upcrossing_count(f, a, b, n) <= B)) \226\134\146 (\226\136\131 L : Real, op_minus_minus_minus_gt(f, L, sequentially))
+      #|  real_of_num(0)
+      #|  \226\136\131 g : (Num) -> Real, rational == IMAGE(g, UNIV)
+      #|  ({} : (A) -> Bool)
+      #|  \226\136\128 p : Prob_space[A], almost_surely(p, UNIV)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (B : Num)
+      #|  (B : Num)
+      #|  NUMPAIR((i : Num), (j : Num))
+      #|  (b : Real)
+      #|  \226\136\131 j : Num, (g : (Num) -> Real)(j) == (b : Real)
+      #|  (a : Real)
+      #|  \226\136\131 i : Num, (g : (Num) -> Real)(i) == (a : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (M : Real)
+      #|  (n : Num) => (X : (Num, A) -> Real)(n, (x : A))
+      #|  (k : Num)
+      #|  {(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)}
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, (g : (Num) -> Real)(NUMFST(k)) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, (x : A)) <= B)
+      #|  (x : A)
       #|  INTERS {{x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}\n             | k IN (:num)}
-      #|  {x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)} = (:A)
-      #|  M:real
-      #|  FF:num->(A->bool)->bool
-      #|  {x:A | ?B. forall n. num_upcrossings (X:num->A->real)\n                  ((g:num->real)(NUMFST k)) (g(NUMSND k)) n x <= B}
-      #|  (g:num->real)(NUMFST k) < g(NUMSND k)
-      #|  k:num
-      #|  forall k. almost_surely (p:A prob_space)\n       {x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}
-      #|  g:num->real
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) M.\n     simple_submartingale p FF X /\\\n     (forall m x. x IN prob_carrier p ==> abs(X m x) <= M)\n     ==> almost_surely p\n           {x | ?L. ((\\n. X n x) ---> L) sequentially}
-      #|  sigma_atom (G:(A->bool)->bool) (x:A) =\n   INTERS {b | b IN G /\\ x IN b}
-      #|  forall(G:(A->bool)->bool) (x:A). x IN UNIONS G ==> x IN sigma_atom G x
-      #|  forall(G:(A->bool)->bool) (x:A) (b:A->bool).\n     b IN G /\\ x IN b ==> sigma_atom G x SUBSET b
-      #|  forall(G:(A->bool)->bool) (x:A).\n     sigma_algebra G /\\ x IN UNIONS G\n     ==> sigma_atom G x SUBSET UNIONS G
-      #|  UNIONS G:A->bool
-      #|  G:(A->bool)->bool
-      #|  forall(G:(A->bool)->bool) (x:A).\n     sigma_algebra G /\\ FINITE G /\\ x IN UNIONS G\n     ==> sigma_atom G x IN G
-      #|  b:A->bool
-      #|  y:A
-      #|  sigma_atom G (x:A) SUBSET (UNIONS G DIFF b)
-      #|  (x:A) IN b
-      #|  (x:A) IN b
-      #|  b:A->bool
-      #|  b:A->bool
-      #|  (y:A) IN sigma_atom G x
-      #|  b:A->bool
-      #|  b:A->bool
-      #|  z:A
-      #|  forall(G:(A->bool)->bool) (x:A) (y:A).\n     sigma_algebra G /\\ x IN UNIONS G /\\ y IN sigma_atom G x\n     ==> sigma_atom G y = sigma_atom G x
-      #|  sigma_atom G (z:A) = sigma_atom G x
-      #|  z:A
-      #|  DISJOINT (sigma_atom G (x:A)) (sigma_atom G y)
-      #|  forall(G:(A->bool)->bool) (x:A) (y:A).\n     sigma_algebra G /\\ FINITE G /\\ x IN UNIONS G /\\ y IN UNIONS G\n     ==> sigma_atom G x = sigma_atom G y \\/\n         DISJOINT (sigma_atom G x) (sigma_atom G y)
-      #|  G:(A->bool)->bool
-      #|  forall(G:(A->bool)->bool).\n     sigma_algebra G /\\ FINITE G\n     ==> FINITE {sigma_atom G (x:A) | x | x IN UNIONS G}
-      #|  sigma_atom G (w:A) SUBSET s
-      #|  w:A
-      #|  t:A->bool
-      #|  s:A->bool
-      #|  z:A
-      #|  sigma_atom G (z:A)
-      #|  z:A
-      #|  forall(G:(A->bool)->bool) (s:A->bool).\n     sigma_algebra G /\\ s IN G\n     ==> s = UNIONS {sigma_atom G (x:A) | x | x IN s}
-      #|  simple_cond_exp (p:A prob_space) (G:(A->bool)->bool) (X:A->real) (x:A) =\n   if prob p (sigma_atom G x) = &0 then &0\n   else simple_expectation p (\\y. X y * indicator_fn (sigma_atom G x) y) /\n        prob p (sigma_atom G x)
-      #|  sigma_atom G (y:A) = sigma_atom G (x:A)
-      #|  forall p:A prob_space G (X:A->real) (x:A) (y:A).\n     sigma_algebra G /\\ x IN UNIONS G /\\ y IN sigma_atom G x\n     ==> simple_cond_exp p G X y = simple_cond_exp p G X x
-      #|  prob p (S:A->bool)
-      #|  &0 <= x /\\ x <= &0 ==> x = &0
-      #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x = v} INTER S\n     IN prob_events p
-      #|  (X:A->real) w * indicator_fn (S:A->bool) w = v
-      #|  (X:A->real) w * indicator_fn (S:A->bool) w = v
-      #|  (w:A) IN S
-      #|  (w:A) IN S
-      #|  w:A
-      #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x *\n      indicator_fn (S:A->bool) x = v} =\n     {x | x IN prob_carrier p /\\ X x = v} INTER S
-      #|  prob p {x:A | x IN prob_carrier p /\\\n      (X:A->real) x * indicator_fn S x = v} = &0
-      #|  v = &0
-      #|  v:real
-      #|  forall p:A prob_space (X:A->real) (S:A->bool).\n     simple_rv p X /\\ S IN prob_events p /\\ prob p S = &0\n     ==> simple_expectation p (\\x. X x * indicator_fn S x) = &0
-      #|  w:A
-      #|  sigma_atom G (w:A)
-      #|  w:A
-      #|  v:real
-      #|  IMAGE (\\(a:A->bool).\n    if prob (p:A prob_space) a = &0 then &0\n    else simple_expectation p (\\y. (X:A->real) y * indicator_fn a y) /\n         prob p a) {sigma_atom G (x:A) | x | x IN UNIONS G}
-      #|  UNIONS G = prob_carrier (p:A prob_space)
-      #|  forall p:A prob_space G (X:A->real).\n     sub_sigma_algebra p G /\\ FINITE G\n     ==> FINITE {simple_cond_exp p G X x | x | x IN prob_carrier p}
-      #|  {sigma_atom G (x:A) | x | x IN UNIONS G}
-      #|  w:A
-      #|  t:A->bool
-      #|  simple_cond_exp p G (X:A->real) z =\n                   simple_cond_exp p G X w
-      #|  sigma_atom G (w:A) SUBSET UNIONS G
-      #|  w:A
-      #|  t:A->bool
-      #|  z:A
-      #|  sigma_atom G (z:A)
-      #|  z:A
-      #|  {x:A | x IN prob_carrier p /\\ simple_cond_exp p G (X:A->real) x <= v} =\n     UNIONS {sigma_atom G (x:A) | x |\n       x IN prob_carrier p /\\ simple_cond_exp p G X x <= v}
-      #|  v:real
-      #|  UNIONS G = prob_carrier (p:A prob_space)
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  forall p:A prob_space G (X:A->real).\n     sub_sigma_algebra p G /\\ FINITE G\n     ==> measurable_wrt p G (simple_cond_exp p G X)
-      #|  c:real
-      #|  indicator_fn (sigma_atom G (x:A))
-      #|  p:A prob_space
-      #|  z:A
-      #|  x:A
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  z:A
-      #|  \\y:A. c * indicator_fn (sigma_atom G (x:A)) y
-      #|  \\y:A. simple_cond_exp p G (X:A->real) y *\n               indicator_fn (sigma_atom G (x:A)) y
-      #|  p:A prob_space
-      #|  simple_expectation p\n        (\\y. simple_cond_exp p G (X:A->real) y *\n             indicator_fn (sigma_atom G x) y) =\n       simple_expectation p (\\y. c * indicator_fn (sigma_atom G x) y)
-      #|  simple_expectation p\n       (\\y. simple_cond_exp p G (X:A->real) y *\n            indicator_fn (sigma_atom G x) y) =\n      c * prob p (sigma_atom G x)
-      #|  c = simple_cond_exp p G (X:A->real) x
-      #|  sigma_atom G (x:A)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  sigma_atom G (x:A)
-      #|  simple_cond_exp p G (X:A->real)
-      #|  p:A prob_space
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  simple_rv p (simple_cond_exp p G (X:A->real))
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  measurable_wrt p G (simple_cond_exp p G (X:A->real))
-      #|  prob p (sigma_atom G (x:A)) = &0
-      #|  sigma_atom G (x:A) IN prob_events p
-      #|  (x:A) IN UNIONS G
-      #|  UNIONS G = prob_carrier (p:A prob_space)
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  forall p:A prob_space G (X:A->real) (x:A).\n     sub_sigma_algebra p G /\\ FINITE G /\\ simple_rv p X /\\\n     x IN prob_carrier p\n     ==> simple_expectation p\n           (\\y. simple_cond_exp p G X y *\n                indicator_fn (sigma_atom G x) y) =\n         simple_expectation p\n           (\\y. X y * indicator_fn (sigma_atom G x) y)
-      #|  B = sigma_atom G (w:A):A->bool
-      #|  (B:A->bool) IN atoms_a
-      #|  w:A
-      #|  ?w:A. w IN prob_carrier p /\\ sigma_atom G w = B
-      #|  B:A->bool
-      #|  B:A->bool
-      #|  atoms_a:(A->bool)->bool
-      #|  \\(A:A->bool) (x:A). (X:A->real) x * indicator_fn A x
-      #|  p:A prob_space
-      #|  z:A
-      #|  X:A->real
-      #|  z:A
-      #|  simple_expectation p (\\x. (X:A->real) x * indicator_fn a x) =\n      simple_expectation p\n        (\\x. sum atoms_a (\\A. X x * indicator_fn A x))
-      #|  simple_expectation p (\\x. (X:A->real) x * indicator_fn a x) =\n     sum atoms_a (\\A. simple_expectation p (\\x. X x * indicator_fn A x))
-      #|  G:(A->bool)->bool
-      #|  B:A->bool
-      #|  atoms_a:(A->bool)->bool
-      #|  \\(A:A->bool) (x:A). simple_cond_exp p G (X:A->real) x *\n         indicator_fn A x
-      #|  p:A prob_space
-      #|  z:A
-      #|  simple_cond_exp p G (X:A->real)
-      #|  z:A
-      #|  simple_expectation p (\\x. simple_cond_exp p G (X:A->real) x *\n        indicator_fn a x) =\n      simple_expectation p\n        (\\x. sum atoms_a (\\A. simple_cond_exp p G X x * indicator_fn A x))
-      #|  simple_expectation p (\\x. simple_cond_exp p G (X:A->real) x *\n       indicator_fn a x) =\n     sum atoms_a (\\A. simple_expectation p\n       (\\x. simple_cond_exp p G X x * indicator_fn A x))
-      #|  (B:A->bool) IN atoms_a
-      #|  (B:A->bool) SUBSET a
-      #|  ~((z:A) IN a)
-      #|  ~((z:A) IN B)
-      #|  B:A->bool
-      #|  ~((z:A) IN B)
-      #|  B:A->bool
-      #|  sum (atoms_a DELETE sigma_atom G (z:A))\n           (\\A. (f:A->real) z * if z IN A then &1 else &0) = &0
-      #|  sigma_atom G (z:A)
-      #|  atoms_a:((A->bool)->bool)
-      #|  \\(A:A->bool). (f:A->real) z * indicator_fn A z
-      #|  sum atoms_a (\\A. (f:A->real) z * indicator_fn A z) =\n       f z * indicator_fn (sigma_atom G z) z +\n       sum (atoms_a DELETE sigma_atom G (z:A)) (\\A. f z * indicator_fn A z)
-      #|  (z:A) IN sigma_atom G z
-      #|  z:A
-      #|  sigma_atom G (z:A) IN atoms_a
-      #|  (z:A) IN a
-      #|  forall f:A->real z. z IN prob_carrier p\n     ==> f z * indicator_fn a z =\n         sum atoms_a (\\A. f z * indicator_fn A z)
-      #|  (z:A) IN sigma_atom G z
-      #|  z:A
-      #|  z:A
-      #|  sigma_atom G (z:A) IN atoms_a
-      #|  B:A->bool
-      #|  sigma_atom G (z:A)
-      #|  forall z:A B:A->bool. z IN prob_carrier p /\\ z IN a /\\\n     B IN atoms_a /\\ ~(B = sigma_atom G z)\n     ==> ~(z IN B)
-      #|  (B:A->bool) IN atoms_a
-      #|  (B:A->bool) SUBSET a
-      #|  B:A->bool
-      #|  z:A
-      #|  z:A
-      #|  sigma_atom G (z:A)
-      #|  z:A
-      #|  (a:A->bool) = UNIONS atoms_a
-      #|  forall A:A->bool. A IN atoms_a ==> A IN prob_events p
-      #|  forall A1 A2:A->bool. A1 IN atoms_a /\\ A2 IN atoms_a /\\ ~(A1 = A2)\n                      ==> DISJOINT A1 A2
-      #|  atoms:((A->bool)->bool)
-      #|  FINITE (atoms_a:((A->bool)->bool))
-      #|  FINITE (atoms:((A->bool)->bool))
-      #|  atoms_a = {(A:A->bool) | A IN atoms /\\ A SUBSET a}
-      #|  atoms = {sigma_atom G (x:A) | x | x IN prob_carrier (p:A prob_space)}
-      #|  (z:A) IN sigma_atom G z
-      #|  z:A
-      #|  forall z:A. z IN prob_carrier p\n           ==> (z IN a <=> sigma_atom G z SUBSET a)
-      #|  (a:A->bool) = UNIONS {sigma_atom G (x:A) | x | x IN a}
-      #|  UNIONS G = prob_carrier (p:A prob_space)
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  forall p:A prob_space G (X:A->real) (a:A->bool).\n     sub_sigma_algebra p G /\\ FINITE G /\\ simple_rv p X /\\ a IN G\n     ==> simple_expectation p\n           (\\x. simple_cond_exp p G X x * indicator_fn a x) =\n         simple_expectation p (\\x. X x * indicator_fn a x)
-      #|  forall p:A prob_space G (X:A->real).\n     sub_sigma_algebra p G /\\ FINITE G /\\ simple_rv p X\n     ==> simple_rv_wrt p G (simple_cond_exp p G X) /\\\n         (forall a. a IN G ==>\n           simple_expectation p (\\x. simple_cond_exp p G X x * indicator_fn a x) =\n           simple_expectation p (\\x. X x * indicator_fn a x))
-      #|  forall p:A prob_space G (X:A->real) a.\n     sub_sigma_algebra p G /\\ FINITE G /\\ simple_rv p X /\\ a IN G\n     ==> simple_expectation p (\\x. simple_cond_exp p G X x * indicator_fn a x) =\n         simple_expectation p (\\x. X x * indicator_fn a x)
-      #|  forall p:A prob_space G (X:A->real).\n     sub_sigma_algebra p G /\\ FINITE G /\\ simple_rv p X\n     ==> simple_rv_wrt p G (simple_cond_exp p G X)
-      #|  forall p:A prob_space G (X:A->real).\n     sub_sigma_algebra p G /\\ FINITE G /\\ simple_rv p X\n     ==> simple_rv p (simple_cond_exp p G X)
-      #|  x:A
-      #|  (X:A->real) y
-      #|  sigma_atom G (y:A) SUBSET\n     {z | z IN prob_carrier p /\\ (X:A->real) z <= X y}
-      #|  (x:A) IN sigma_atom G y
-      #|  x:A
-      #|  G:(A->bool)->bool
-      #|  (y:A) IN prob_carrier p
-      #|  sigma_atom G (y:A) = sigma_atom G (x:A)
-      #|  y:A
-      #|  (X:A->real) x
-      #|  sigma_atom G (x:A) SUBSET\n     {z | z IN prob_carrier p /\\ (X:A->real) z <= X x}
-      #|  (x:A) IN UNIONS G
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  UNIONS G = prob_carrier (p:A prob_space)
-      #|  forall p:A prob_space G (X:A->real) x y.\n     sub_sigma_algebra p G /\\ measurable_wrt p G X /\\\n     x IN prob_carrier p /\\ y IN sigma_atom G x\n     ==> X y = X x
-      #|  cond_exp (p:A prob_space) (G:(A->bool)->bool) (X:A->real) (x:A) =\n   if prob p (sigma_atom G x) = &0 then &0\n   else expectation p (\\y. X y * indicator_fn (sigma_atom G x) y) /\n        prob p (sigma_atom G x)
-      #|  sigma_atom G (y:A) = sigma_atom G (x:A)
-      #|  forall p:A prob_space G (X:A->real) (x:A) (y:A).\n     sigma_algebra G /\\ x IN UNIONS G /\\ y IN sigma_atom G x\n     ==> cond_exp p G X y = cond_exp p G X x
-      #|  w:A
-      #|  sigma_atom G (w:A)
-      #|  w:A
-      #|  v:real
-      #|  IMAGE (\\(a:A->bool).\n    if prob (p:A prob_space) a = &0 then &0\n    else expectation p (\\y. (X:A->real) y * indicator_fn a y) /\n         prob p a) {sigma_atom G (x:A) | x | x IN UNIONS G}
-      #|  UNIONS G = prob_carrier (p:A prob_space)
-      #|  forall p:A prob_space G (X:A->real).\n     sub_sigma_algebra p G /\\ FINITE G\n     ==> FINITE {cond_exp p G X x | x | x IN prob_carrier p}
-      #|  {sigma_atom G (x:A) | x | x IN UNIONS G}
-      #|  w:A
-      #|  t:A->bool
-      #|  cond_exp p G (X:A->real) z =\n                   cond_exp p G X w
-      #|  sigma_atom G (w:A) SUBSET UNIONS G
-      #|  w:A
-      #|  t:A->bool
-      #|  z:A
-      #|  sigma_atom G (z:A)
-      #|  z:A
-      #|  {x:A | x IN prob_carrier p /\\ cond_exp p G (X:A->real) x <= v} =\n     UNIONS {sigma_atom G (x:A) | x |\n       x IN prob_carrier p /\\ cond_exp p G X x <= v}
-      #|  v:real
-      #|  UNIONS G = prob_carrier (p:A prob_space)
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  forall p:A prob_space G (X:A->real).\n     sub_sigma_algebra p G /\\ FINITE G\n     ==> measurable_wrt p G (cond_exp p G X)
-      #|  G:(A->bool)->bool
-      #|  forall p:A prob_space G (X:A->real).\n     sub_sigma_algebra p G /\\ FINITE G\n     ==> simple_rv p (cond_exp p G X)
-      #|  forall p:A prob_space G (X:A->real).\n     sub_sigma_algebra p G /\\ FINITE G\n     ==> integrable p (cond_exp p G X)
-      #|  forall p:A prob_space (X:A->real) (S:A->bool).\n     integrable p X /\\ S IN prob_events p /\\ prob p S = &0\n     ==> expectation p (\\x. X x * indicator_fn S x) = &0
-      #|  indicator_fn (sigma_atom G (x:A))
-      #|  c:real
-      #|  p:A prob_space
-      #|  z:A
-      #|  expectation p (\\y:A. cond_exp p G (X:A->real) y *\n        indicator_fn (sigma_atom G x) y) =\n       expectation p (\\y. c * indicator_fn (sigma_atom G x) y)
-      #|  expectation p (\\y:A. cond_exp p G (X:A->real) y *\n       indicator_fn (sigma_atom G x) y) =\n      c * prob p (sigma_atom G x)
-      #|  c = cond_exp p G (X:A->real) x
-      #|  expectation p (\\y:A. cond_exp p G (X:A->real) y *\n      indicator_fn (sigma_atom G x) y) =\n      simple_expectation p (\\y. cond_exp p G X y *\n        indicator_fn (sigma_atom G x) y)
-      #|  a = &0 /\\ b = &0 ==> a = b
-      #|  simple_rv p (cond_exp p G (X:A->real))
-      #|  prob p (sigma_atom G (x:A)) = &0
-      #|  sigma_atom G (x:A) IN prob_events p
-      #|  (x:A) IN UNIONS G
-      #|  UNIONS G = prob_carrier (p:A prob_space)
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  forall p:A prob_space G (X:A->real) (x:A).\n     sub_sigma_algebra p G /\\ FINITE G /\\ integrable p X /\\\n     x IN prob_carrier p\n     ==> expectation p\n           (\\y. cond_exp p G X y *\n                indicator_fn (sigma_atom G x) y) =\n         expectation p\n           (\\y. X y * indicator_fn (sigma_atom G x) y)
-      #|  X:A->real
-      #|  cond_exp p G (X:A->real)
-      #|  (z:A) IN UNIONS S'
-      #|  (z:A) IN B
-      #|  z:A
-      #|  DISJOINT B (UNIONS S':A->bool)
-      #|  z:A
-      #|  (\\x:A. f x * indicator_fn (B UNION UNIONS S') x) =\n      (\\x. f x * indicator_fn B x +\n           f x * indicator_fn (UNIONS S':A->bool) x)
-      #|  f:A->real
-      #|  forall f:A->real. integrable p f ==>\n    expectation p (\\x. f x * indicator_fn (B UNION UNIONS S') x) =\n    expectation p (\\x. f x * indicator_fn B x) +\n    expectation p (\\x. f x * indicator_fn (UNIONS S':A->bool) x)
-      #|  B = sigma_atom G (w:A):A->bool
-      #|  expectation p (\\x. cond_exp p G (X:A->real) x *\n       indicator_fn B x) =\n     expectation p (\\x. X x * indicator_fn B x)
-      #|  w:A
-      #|  B:A->bool
-      #|  expectation p (\\x. cond_exp p G (X:A->real) x *\n       indicator_fn (UNIONS S') x) =\n     expectation p (\\x. X x * indicator_fn (UNIONS S') x)
-      #|  DISJOINT (B:A->bool) C
-      #|  C:A->bool
-      #|  ~(p /\\ q) <=> p ==> ~q
-      #|  ~(p /\\ q) <=> p ==> ~q
-      #|  z:A
-      #|  DISJOINT B (UNIONS S':A->bool)
-      #|  C:A->bool
-      #|  UNIONS S' IN (G:(A->bool)->bool)
-      #|  UNIONS S' IN prob_events (p:A prob_space)
-      #|  (B:A->bool) IN prob_events p
-      #|  (S':(A->bool)->bool) SUBSET atoms_a
-      #|  (B:A->bool) IN atoms_a
-      #|  S':(A->bool)->bool
-      #|  B:A->bool
-      #|  a = &0 /\\ b = &0 ==> a = b
-      #|  forall S:(A->bool)->bool. FINITE S /\\ S SUBSET atoms_a\n     ==> expectation p (\\x. cond_exp p G (X:A->real) x *\n           indicator_fn (UNIONS S) x) =\n         expectation p (\\x. X x * indicator_fn (UNIONS S) x)
-      #|  (B:A->bool) IN atoms_a
-      #|  (B:A->bool) SUBSET a
-      #|  B:A->bool
-      #|  z:A
-      #|  sigma_atom G (z:A)
-      #|  z:A
-      #|  (a:A->bool) = UNIONS atoms_a
-      #|  forall B:A->bool. B IN atoms_a\n     ==> ?w:A. w IN prob_carrier p /\\ sigma_atom G w = B
-      #|  forall A:A->bool. A IN atoms_a ==> A IN G
-      #|  forall A:A->bool. A IN atoms_a ==> A IN prob_events p
-      #|  forall A1 A2:A->bool. A1 IN atoms_a /\\ A2 IN atoms_a /\\ ~(A1 = A2)\n                      ==> DISJOINT A1 A2
-      #|  atoms:((A->bool)->bool)
-      #|  FINITE (atoms_a:((A->bool)->bool))
-      #|  prob_carrier (p:A prob_space) = UNIONS G
-      #|  FINITE (atoms:((A->bool)->bool))
-      #|  atoms_a = {(A:A->bool) | A IN atoms /\\ A SUBSET a}
-      #|  atoms = {sigma_atom G (x:A) | x | x IN prob_carrier (p:A prob_space)}
-      #|  (a:A->bool) IN prob_events p
-      #|  simple_rv p (cond_exp p G (X:A->real))
-      #|  UNIONS G = prob_carrier (p:A prob_space)
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  forall p:A prob_space G (X:A->real) (a:A->bool).\n     sub_sigma_algebra p G /\\ FINITE G /\\ integrable p X /\\ a IN G\n     ==> expectation p\n           (\\x. cond_exp p G X x * indicator_fn a x) =\n         expectation p (\\x. X x * indicator_fn a x)
-      #|  atoms_a:((A->bool)->bool)
-      #|  z:A
-      #|  expectation p (X:A->real) =\n     expectation p (\\x. X x * indicator_fn (UNIONS G) x)
-      #|  z:A
-      #|  expectation p (cond_exp p G (X:A->real)) =\n     expectation p (\\x. cond_exp p G X x * indicator_fn (UNIONS G) x)
-      #|  UNIONS G = prob_carrier (p:A prob_space)
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  forall p:A prob_space G (X:A->real).\n     sub_sigma_algebra p G /\\ FINITE G /\\ integrable p X\n     ==> expectation p (cond_exp p G X) = expectation p X
-      #|  sigma_atom G (x:A) IN prob_events p
-      #|  UNIONS G = prob_carrier (p:A prob_space)
-      #|  forall p:A prob_space G (X:A->real) x.\n     sub_sigma_algebra p G /\\ FINITE G /\\ simple_rv p X /\\\n     x IN prob_carrier p\n     ==> cond_exp p G X x = simple_cond_exp p G X x
-      #|  \\y:A. (X:A->real) y * indicator_fn (sigma_atom G x) y
-      #|  (Y:A->real) x
-      #|  p:A prob_space
-      #|  sigma_atom G (x:A) IN prob_events p
-      #|  (Y:A->real) y = Y x
-      #|  y:A
-      #|  (\\y:A. ((Y:A->real) y * (X:A->real) y) * indicator_fn (sigma_atom G x) y) =\n      (\\y. (Y:A->real) x * (X y * indicator_fn (sigma_atom G x) y))
-      #|  expectation p (\\y:A. ((Y:A->real) y * X y) * indicator_fn (sigma_atom G x) y) =\n     Y x * expectation p (\\y. X y * indicator_fn (sigma_atom G x) y)
-      #|  x:A
-      #|  forall p:A prob_space G (X:A->real) Y.\n     sub_sigma_algebra p G /\\ FINITE G /\\\n     integrable p X /\\ integrable p (\\x. Y x * X x) /\\\n     measurable_wrt p G Y\n     ==> forall x. x IN prob_carrier p /\\ ~(prob p (sigma_atom G x) = &0)\n         ==> cond_exp p G (\\w. Y w * X w) x = Y x * cond_exp p G X x
-      #|  n <= SUC n
-      #|  SUC n
-      #|  n:num
-      #|  expectation p (\\x:A. cond_exp p (FF (SUC n)) (X:A->real) x *\n        indicator_fn a x) =\n      expectation p (\\x. X x * indicator_fn a x)
-      #|  forall n. sub_sigma_algebra p ((FF:num->(A->bool)->bool) n)
-      #|  forall p:A prob_space FF (X:A->real).\n     filtration p FF /\\ (forall n. FINITE (FF n)) /\\ integrable p X\n     ==> martingale p FF (\\n. cond_exp p (FF n) X)
-      #|  forall x a. pos_part(x - a) <= abs(x) + abs(a)
-      #|  n:num
-      #|  forall n. simple_expectation (p:A prob_space)\n     (\\x:A. abs((X:num->A->real) n x)) <= C
-      #|  \\x:A. abs(a:real)
-      #|  \\x:A. abs((X:num->A->real) n x)
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n    (\\x:A. abs((X:num->A->real) n x) + abs(a)) =\n    simple_expectation p (\\x. abs(X n x)) + abs(a)
-      #|  simple_expectation (p:A prob_space)\n    (\\x:A. abs((X:num->A->real) n x) + abs(a))
-      #|  simple_expectation (p:A prob_space)\n    (\\x:A. pos_part((X:num->A->real) n x - a))
-      #|  forall m:num. simple_rv (p:A prob_space) ((X:num->A->real) m)
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b n C.\n     simple_submartingale p FF X /\\ a < b /\\\n     (forall n. simple_expectation p (\\x. abs(X n x)) <= C)\n     ==> (b - a) * simple_expectation p (\\x. &(num_upcrossings X a b n x))\n         <= C + abs(a)
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. &(num_upcrossings (X:num->A->real) a b n x)) / &k\n     <= (C + abs(a:real)) / ((b - a) * &k)
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. &(num_upcrossings (X:num->A->real) a b n x))\n     <= (C + abs(a:real)) / (b - a)
-      #|  C:real
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  (b - a) * simple_expectation (p:A prob_space)\n       (\\x:A. &(num_upcrossings (X:num->A->real) a b n x)) <= C + abs(a:real)
-      #|  &0 < b - a
-      #|  x:A
-      #|  prob p {x | x IN prob_carrier (p:A prob_space) /\\\n     &(num_upcrossings (X:num->A->real) a b n x) >= &k}\n     <= simple_expectation p (\\x. &(num_upcrossings X a b n x)) / &k
-      #|  &0 < &k
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  simple_rv p (\\x:A. &(num_upcrossings (X:num->A->real) a b n x))
-      #|  adapted (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) FF
-      #|  forall m:num. simple_rv (p:A prob_space) ((X:num->A->real) m)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b n C k.\n     simple_submartingale p FF X /\\ a < b /\\\n     (forall n. simple_expectation p (\\x. abs(X n x)) <= C) /\\\n     0 < k\n     ==> prob p {x | x IN prob_carrier p /\\\n                     &(num_upcrossings X a b n x) >= &k}\n         <= (C + abs(a)) / ((b - a) * &k)
-      #|  k:num
-      #|  C:real
-      #|  m:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  m:num
-      #|  nn <= SUC nn
-      #|  x:A
-      #|  nn:num
-      #|  FF:num->(A->bool)->bool
-      #|  adapted (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) FF
-      #|  forall m:num. simple_rv (p:A prob_space) ((X:num->A->real) m)
+      #|  {(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)} == UNIV
+      #|  (M : Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  {(x : A) | \226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), (g : (Num) -> Real)(NUMFST((k : Num))), g(NUMSND(k)), n, x) <= B}
+      #|  (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k))
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, almost_surely((p : Prob_space[A]), {(x : A) | (g : (Num) -> Real)(NUMFST(k)) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)})
+      #|  (g : (Num) -> Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 M : Real, simple_submartingale(p, FF, X) && (\226\136\128 m : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(X(m, x)) <= M) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => X(n, x), L, sequentially)})
+      #|  (sigma_atom : (((A) -> Bool) -> Bool, A, A) -> Bool)((G : ((A) -> Bool) -> Bool), (x : A)) == INTERS({(b : (A) -> Bool) | IN(b, G) && IN(x, b)})
+      #|  \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 x : A, IN(x, UNIONS(G)) \226\134\146 IN(x, sigma_atom(G, x))
+      #|  \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 x : A, \226\136\128 b : (A) -> Bool, IN(b, G) && IN(x, b) \226\134\146 SUBSET(sigma_atom(G, x), b)
+      #|  \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 x : A, sigma_algebra(G) && IN(x, UNIONS(G)) \226\134\146 SUBSET(sigma_atom(G, x), UNIONS(G))
+      #|  UNIONS((G : ((A) -> Bool) -> Bool))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 x : A, sigma_algebra(G) && FINITE(G) && IN(x, UNIONS(G)) \226\134\146 IN(sigma_atom(G, x), G)
+      #|  (b : (A) -> Bool)
+      #|  (y : A)
+      #|  SUBSET(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), DIFF(UNIONS(G), (b : (A) -> Bool)))
+      #|  IN((x : A), (b : (A) -> Bool))
+      #|  IN((x : A), (b : (A) -> Bool))
+      #|  (b : (A) -> Bool)
+      #|  (b : (A) -> Bool)
+      #|  IN((y : A), sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)))
+      #|  (b : (A) -> Bool)
+      #|  (b : (A) -> Bool)
+      #|  (z : A)
+      #|  \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 x : A, \226\136\128 y : A, sigma_algebra(G) && IN(x, UNIONS(G)) && IN(y, sigma_atom(G, x)) \226\134\146 sigma_atom(G, y) == sigma_atom(G, x)
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (z : A)) == sigma_atom(G, (x : A))
+      #|  (z : A)
+      #|  DISJOINT(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), sigma_atom(G, (y : A)))
+      #|  \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 x : A, \226\136\128 y : A, sigma_algebra(G) && FINITE(G) && IN(x, UNIONS(G)) && IN(y, UNIONS(G)) \226\134\146 sigma_atom(G, x) == sigma_atom(G, y) || DISJOINT(sigma_atom(G, x), sigma_atom(G, y))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 G : ((A) -> Bool) -> Bool, sigma_algebra(G) && FINITE(G) \226\134\146 FINITE({sigma_atom(G, x) | x : A | IN(x, UNIONS(G))})
+      #|  SUBSET(sigma_atom((G : ((A) -> Bool) -> Bool), (w : A)), (s : (A) -> Bool))
+      #|  (w : A)
+      #|  (t : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (z : A)
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (z : A))
+      #|  (z : A)
+      #|  \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 s : (A) -> Bool, sigma_algebra(G) && IN(s, G) \226\134\146 s == UNIONS({sigma_atom(G, (x : A)) | IN(x, s)})
+      #|  (simple_cond_exp : (Prob_space[A], ((A) -> Bool) -> Bool, (A) -> Real, A) -> Real)((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), (x : A)) == (if prob(p, sigma_atom(G, x)) == real_of_num(0) { real_of_num(0) } else { simple_expectation(p, (y : A) => X(y) * indicator_fn(sigma_atom(G, x), y)) / prob(p, sigma_atom(G, x)) })
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (y : A)) == sigma_atom(G, (x : A))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 x : A, \226\136\128 y : A, sigma_algebra(G) && IN(x, UNIONS(G)) && IN(y, sigma_atom(G, x)) \226\134\146 simple_cond_exp(p, G, X, y) == simple_cond_exp(p, G, X, x)
+      #|  prob((p : Prob_space[A]), (S : (A) -> Bool))
+      #|  real_of_num(0) <= (x : Real) && x <= real_of_num(0) \226\134\146 x == real_of_num(0)
+      #|  IN(INTER({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) == (v : Real)}, (S : (A) -> Bool)), prob_events(p))
+      #|  (X : (A) -> Real)((w : A)) * indicator_fn((S : (A) -> Bool), w) == (v : Real)
+      #|  (X : (A) -> Real)((w : A)) * indicator_fn((S : (A) -> Bool), w) == (v : Real)
+      #|  IN((w : A), (S : (A) -> Bool))
+      #|  IN((w : A), (S : (A) -> Bool))
+      #|  (w : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) * indicator_fn((S : (A) -> Bool), x) == (v : Real)} == INTER({(x : A) | IN(x, prob_carrier(p)) && X(x) == v}, S)
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) * indicator_fn((S : (A) -> Bool), x) == (v : Real)}) == real_of_num(0)
+      #|  (v : Real) == real_of_num(0)
+      #|  (v : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 S : (A) -> Bool, simple_rv(p, X) && IN(S, prob_events(p)) && prob(p, S) == real_of_num(0) \226\134\146 simple_expectation(p, (x : A) => X(x) * indicator_fn(S, x)) == real_of_num(0)
+      #|  (w : A)
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (w : A))
+      #|  (w : A)
+      #|  (v : Real)
+      #|  IMAGE((a : (A) -> Bool) => if prob((p : Prob_space[A]), a) == real_of_num(0) { real_of_num(0) } else { simple_expectation(p, (y : A) => (X : (A) -> Real)(y) * indicator_fn(a, y)) / prob(p, a) }, {sigma_atom((G : ((A) -> Bool) -> Bool), x) | x : A | IN(x, UNIONS(G))})
+      #|  UNIONS((G : ((A) -> Bool) -> Bool)) == prob_carrier((p : Prob_space[A]))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && FINITE(G) \226\134\146 FINITE({simple_cond_exp(p, G, X, x) | x : A | IN(x, prob_carrier(p))})
+      #|  {sigma_atom((G : ((A) -> Bool) -> Bool), x) | x : A | IN(x, UNIONS(G))}
+      #|  (w : A)
+      #|  (t : (A) -> Bool)
+      #|  simple_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), (z : A)) == simple_cond_exp(p, G, X, (w : A))
+      #|  SUBSET(sigma_atom((G : ((A) -> Bool) -> Bool), (w : A)), UNIONS(G))
+      #|  (w : A)
+      #|  (t : (A) -> Bool)
+      #|  (z : A)
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (z : A))
+      #|  (z : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && simple_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) <= (v : Real)} == UNIONS({sigma_atom(G, x) | x : A | IN(x, prob_carrier(p)) && simple_cond_exp(p, G, X, x) <= v})
+      #|  (v : Real)
+      #|  UNIONS((G : ((A) -> Bool) -> Bool)) == prob_carrier((p : Prob_space[A]))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && FINITE(G) \226\134\146 measurable_wrt(p, G, simple_cond_exp(p, G, X))
+      #|  (c : Real)
+      #|  indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)))
+      #|  (p : Prob_space[A])
+      #|  (z : A)
+      #|  (x : A)
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (z : A)
+      #|  (y : A) => (c : Real) * indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), y)
+      #|  (y : A) => simple_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), y) * indicator_fn(sigma_atom(G, (x : A)), y)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (y : A) => simple_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), y) * indicator_fn(sigma_atom(G, (x : A)), y)) == simple_expectation(p, (y : A) => (c : Real) * indicator_fn(sigma_atom(G, x), y))
+      #|  simple_expectation((p : Prob_space[A]), (y : A) => simple_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), y) * indicator_fn(sigma_atom(G, (x : A)), y)) == (c : Real) * prob(p, sigma_atom(G, x))
+      #|  (c : Real) == simple_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), (x : A))
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (x : A))
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (x : A))
+      #|  simple_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  (p : Prob_space[A])
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), simple_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real)))
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), simple_cond_exp(p, G, (X : (A) -> Real)))
+      #|  prob((p : Prob_space[A]), sigma_atom((G : ((A) -> Bool) -> Bool), (x : A))) == real_of_num(0)
+      #|  IN(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), prob_events((p : Prob_space[A])))
+      #|  IN((x : A), UNIONS((G : ((A) -> Bool) -> Bool)))
+      #|  UNIONS((G : ((A) -> Bool) -> Bool)) == prob_carrier((p : Prob_space[A]))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 x : A, sub_sigma_algebra(p, G) && FINITE(G) && simple_rv(p, X) && IN(x, prob_carrier(p)) \226\134\146 simple_expectation(p, (y : A) => simple_cond_exp(p, G, X, y) * indicator_fn(sigma_atom(G, x), y)) == simple_expectation(p, (y : A) => X(y) * indicator_fn(sigma_atom(G, x), y))
+      #|  (B : (A) -> Bool) == sigma_atom((G : ((A) -> Bool) -> Bool), (w : A))
+      #|  IN((B : (A) -> Bool), (atoms_a : ((A) -> Bool) -> Bool))
+      #|  (w : A)
+      #|  \226\136\131 w : A, IN(w, prob_carrier((p : Prob_space[A]))) && sigma_atom((G : ((A) -> Bool) -> Bool), w) == (B : (A) -> Bool)
+      #|  (B : (A) -> Bool)
+      #|  (B : (A) -> Bool)
+      #|  (atoms_a : ((A) -> Bool) -> Bool)
+      #|  (A : (A) -> Bool) => (x : A) => (X : (A) -> Real)(x) * indicator_fn(A, x)
+      #|  (p : Prob_space[A])
+      #|  (z : A)
+      #|  (X : (A) -> Real)
+      #|  (z : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (A) -> Real)(x) * indicator_fn((a : (A) -> Bool), x)) == simple_expectation(p, (x : A) => sum((atoms_a : ((A) -> Bool) -> Bool), (A : (A) -> Bool) => X(x) * indicator_fn(A, x)))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (A) -> Real)(x) * indicator_fn((a : (A) -> Bool), x)) == sum((atoms_a : ((A) -> Bool) -> Bool), (A : (A) -> Bool) => simple_expectation(p, (x : A) => X(x) * indicator_fn(A, x)))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (B : (A) -> Bool)
+      #|  (atoms_a : ((A) -> Bool) -> Bool)
+      #|  (A : (A) -> Bool) => (x : A) => simple_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn(A, x)
+      #|  (p : Prob_space[A])
+      #|  (z : A)
+      #|  simple_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  (z : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => simple_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((a : (A) -> Bool), x)) == simple_expectation(p, (x : A) => sum((atoms_a : ((A) -> Bool) -> Bool), (A : (A) -> Bool) => simple_cond_exp(p, G, X, x) * indicator_fn(A, x)))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => simple_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((a : (A) -> Bool), x)) == sum((atoms_a : ((A) -> Bool) -> Bool), (A : (A) -> Bool) => simple_expectation(p, (x : A) => simple_cond_exp(p, G, X, x) * indicator_fn(A, x)))
+      #|  IN((B : (A) -> Bool), (atoms_a : ((A) -> Bool) -> Bool))
+      #|  SUBSET((B : (A) -> Bool), (a : (A) -> Bool))
+      #|  !IN((z : A), (a : (A) -> Bool))
+      #|  !IN((z : A), (B : (A) -> Bool))
+      #|  (B : (A) -> Bool)
+      #|  !IN((z : A), (B : (A) -> Bool))
+      #|  (B : (A) -> Bool)
+      #|  sum(DELETE((atoms_a : ((A) -> Bool) -> Bool), sigma_atom((G : ((A) -> Bool) -> Bool), (z : A))), (A : (A) -> Bool) => (f : (A) -> Real)(z) * (if IN(z, A) { real_of_num(1) } else { real_of_num(0) })) == real_of_num(0)
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (z : A))
+      #|  (atoms_a : ((A) -> Bool) -> Bool)
+      #|  (A : (A) -> Bool) => (f : (A) -> Real)((z : A)) * indicator_fn(A, z)
+      #|  sum((atoms_a : ((A) -> Bool) -> Bool), (A : (A) -> Bool) => (f : (A) -> Real)((z : A)) * indicator_fn(A, z)) == f(z) * indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), z), z) + sum(DELETE(atoms_a, sigma_atom(G, z)), (A : (A) -> Bool) => f(z) * indicator_fn(A, z))
+      #|  IN((z : A), sigma_atom((G : ((A) -> Bool) -> Bool), z))
+      #|  (z : A)
+      #|  IN(sigma_atom((G : ((A) -> Bool) -> Bool), (z : A)), (atoms_a : ((A) -> Bool) -> Bool))
+      #|  IN((z : A), (a : (A) -> Bool))
+      #|  \226\136\128 f : (A) -> Real, \226\136\128 z : A, IN(z, prob_carrier((p : Prob_space[A]))) \226\134\146 f(z) * indicator_fn((a : (A) -> Bool), z) == sum((atoms_a : ((A) -> Bool) -> Bool), (A : (A) -> Bool) => f(z) * indicator_fn(A, z))
+      #|  IN((z : A), sigma_atom((G : ((A) -> Bool) -> Bool), z))
+      #|  (z : A)
+      #|  (z : A)
+      #|  IN(sigma_atom((G : ((A) -> Bool) -> Bool), (z : A)), (atoms_a : ((A) -> Bool) -> Bool))
+      #|  (B : (A) -> Bool)
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (z : A))
+      #|  \226\136\128 z : A, \226\136\128 B : (A) -> Bool, IN(z, prob_carrier((p : Prob_space[A]))) && IN(z, (a : (A) -> Bool)) && IN(B, (atoms_a : ((A) -> Bool) -> Bool)) && !(B == sigma_atom((G : ((A) -> Bool) -> Bool), z)) \226\134\146 !IN(z, B)
+      #|  IN((B : (A) -> Bool), (atoms_a : ((A) -> Bool) -> Bool))
+      #|  SUBSET((B : (A) -> Bool), (a : (A) -> Bool))
+      #|  (B : (A) -> Bool)
+      #|  (z : A)
+      #|  (z : A)
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (z : A))
+      #|  (z : A)
+      #|  (a : (A) -> Bool) == UNIONS((atoms_a : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 A : (A) -> Bool, IN(A, (atoms_a : ((A) -> Bool) -> Bool)) \226\134\146 IN(A, prob_events((p : Prob_space[A])))
+      #|  \226\136\128 A1 : (A) -> Bool, \226\136\128 A2 : (A) -> Bool, IN(A1, (atoms_a : ((A) -> Bool) -> Bool)) && IN(A2, atoms_a) && !(A1 == A2) \226\134\146 DISJOINT(A1, A2)
+      #|  (atoms : ((A) -> Bool) -> Bool)
+      #|  FINITE((atoms_a : ((A) -> Bool) -> Bool))
+      #|  FINITE((atoms : ((A) -> Bool) -> Bool))
+      #|  (atoms_a : ((A) -> Bool) -> Bool) == {(A : (A) -> Bool) | IN(A, (atoms : ((A) -> Bool) -> Bool)) && SUBSET(A, (a : (A) -> Bool))}
+      #|  (atoms : ((A) -> Bool) -> Bool) == {sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)) | IN(x, prob_carrier((p : Prob_space[A])))}
+      #|  IN((z : A), sigma_atom((G : ((A) -> Bool) -> Bool), z))
+      #|  (z : A)
+      #|  \226\136\128 z : A, IN(z, prob_carrier((p : Prob_space[A]))) \226\134\146 IN(z, (a : (A) -> Bool)) == SUBSET(sigma_atom((G : ((A) -> Bool) -> Bool), z), a)
+      #|  (a : (A) -> Bool) == UNIONS({sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)) | IN(x, a)})
+      #|  UNIONS((G : ((A) -> Bool) -> Bool)) == prob_carrier((p : Prob_space[A]))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 a : (A) -> Bool, sub_sigma_algebra(p, G) && FINITE(G) && simple_rv(p, X) && IN(a, G) \226\134\146 simple_expectation(p, (x : A) => simple_cond_exp(p, G, X, x) * indicator_fn(a, x)) == simple_expectation(p, (x : A) => X(x) * indicator_fn(a, x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && FINITE(G) && simple_rv(p, X) \226\134\146 simple_rv_wrt(p, G, simple_cond_exp(p, G, X)) && (\226\136\128 a : (A) -> Bool, IN(a, G) \226\134\146 simple_expectation(p, (x : A) => simple_cond_exp(p, G, X, x) * indicator_fn(a, x)) == simple_expectation(p, (x : A) => X(x) * indicator_fn(a, x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 a : (A) -> Bool, sub_sigma_algebra(p, G) && FINITE(G) && simple_rv(p, X) && IN(a, G) \226\134\146 simple_expectation(p, (x : A) => simple_cond_exp(p, G, X, x) * indicator_fn(a, x)) == simple_expectation(p, (x : A) => X(x) * indicator_fn(a, x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && FINITE(G) && simple_rv(p, X) \226\134\146 simple_rv_wrt(p, G, simple_cond_exp(p, G, X))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && FINITE(G) && simple_rv(p, X) \226\134\146 simple_rv(p, simple_cond_exp(p, G, X))
+      #|  (x : A)
+      #|  (X : (A) -> Real)((y : A))
+      #|  SUBSET(sigma_atom((G : ((A) -> Bool) -> Bool), (y : A)), {(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(z) <= X(y)})
+      #|  IN((x : A), sigma_atom((G : ((A) -> Bool) -> Bool), (y : A)))
+      #|  (x : A)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  IN((y : A), prob_carrier((p : Prob_space[A])))
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (y : A)) == sigma_atom(G, (x : A))
+      #|  (y : A)
+      #|  (X : (A) -> Real)((x : A))
+      #|  SUBSET(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), {(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(z) <= X(x)})
+      #|  IN((x : A), UNIONS((G : ((A) -> Bool) -> Bool)))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  UNIONS((G : ((A) -> Bool) -> Bool)) == prob_carrier((p : Prob_space[A]))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 x : A, \226\136\128 y : A, sub_sigma_algebra(p, G) && measurable_wrt(p, G, X) && IN(x, prob_carrier(p)) && IN(y, sigma_atom(G, x)) \226\134\146 X(y) == X(x)
+      #|  (cond_exp : (Prob_space[A], ((A) -> Bool) -> Bool, (A) -> Real, A) -> Real)((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), (x : A)) == (if prob(p, sigma_atom(G, x)) == real_of_num(0) { real_of_num(0) } else { expectation(p, (y : A) => X(y) * indicator_fn(sigma_atom(G, x), y)) / prob(p, sigma_atom(G, x)) })
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (y : A)) == sigma_atom(G, (x : A))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 x : A, \226\136\128 y : A, sigma_algebra(G) && IN(x, UNIONS(G)) && IN(y, sigma_atom(G, x)) \226\134\146 cond_exp(p, G, X, y) == cond_exp(p, G, X, x)
+      #|  (w : A)
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (w : A))
+      #|  (w : A)
+      #|  (v : Real)
+      #|  IMAGE((a : (A) -> Bool) => if prob((p : Prob_space[A]), a) == real_of_num(0) { real_of_num(0) } else { expectation(p, (y : A) => (X : (A) -> Real)(y) * indicator_fn(a, y)) / prob(p, a) }, {sigma_atom((G : ((A) -> Bool) -> Bool), x) | x : A | IN(x, UNIONS(G))})
+      #|  UNIONS((G : ((A) -> Bool) -> Bool)) == prob_carrier((p : Prob_space[A]))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && FINITE(G) \226\134\146 FINITE({cond_exp(p, G, X, x) | x : A | IN(x, prob_carrier(p))})
+      #|  {sigma_atom((G : ((A) -> Bool) -> Bool), x) | x : A | IN(x, UNIONS(G))}
+      #|  (w : A)
+      #|  (t : (A) -> Bool)
+      #|  cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), (z : A)) == cond_exp(p, G, X, (w : A))
+      #|  SUBSET(sigma_atom((G : ((A) -> Bool) -> Bool), (w : A)), UNIONS(G))
+      #|  (w : A)
+      #|  (t : (A) -> Bool)
+      #|  (z : A)
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (z : A))
+      #|  (z : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) <= (v : Real)} == UNIONS({sigma_atom(G, x) | x : A | IN(x, prob_carrier(p)) && cond_exp(p, G, X, x) <= v})
+      #|  (v : Real)
+      #|  UNIONS((G : ((A) -> Bool) -> Bool)) == prob_carrier((p : Prob_space[A]))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && FINITE(G) \226\134\146 measurable_wrt(p, G, cond_exp(p, G, X))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && FINITE(G) \226\134\146 simple_rv(p, cond_exp(p, G, X))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && FINITE(G) \226\134\146 integrable(p, cond_exp(p, G, X))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 S : (A) -> Bool, integrable(p, X) && IN(S, prob_events(p)) && prob(p, S) == real_of_num(0) \226\134\146 expectation(p, (x : A) => X(x) * indicator_fn(S, x)) == real_of_num(0)
+      #|  indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)))
+      #|  (c : Real)
+      #|  (p : Prob_space[A])
+      #|  (z : A)
+      #|  expectation((p : Prob_space[A]), (y : A) => cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), y) * indicator_fn(sigma_atom(G, (x : A)), y)) == expectation(p, (y : A) => (c : Real) * indicator_fn(sigma_atom(G, x), y))
+      #|  expectation((p : Prob_space[A]), (y : A) => cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), y) * indicator_fn(sigma_atom(G, (x : A)), y)) == (c : Real) * prob(p, sigma_atom(G, x))
+      #|  (c : Real) == cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), (x : A))
+      #|  expectation((p : Prob_space[A]), (y : A) => cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), y) * indicator_fn(sigma_atom(G, (x : A)), y)) == simple_expectation(p, (y : A) => cond_exp(p, G, X, y) * indicator_fn(sigma_atom(G, x), y))
+      #|  (a : Real) == real_of_num(0) && (b : Real) == real_of_num(0) \226\134\146 a == b
+      #|  simple_rv((p : Prob_space[A]), cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real)))
+      #|  prob((p : Prob_space[A]), sigma_atom((G : ((A) -> Bool) -> Bool), (x : A))) == real_of_num(0)
+      #|  IN(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), prob_events((p : Prob_space[A])))
+      #|  IN((x : A), UNIONS((G : ((A) -> Bool) -> Bool)))
+      #|  UNIONS((G : ((A) -> Bool) -> Bool)) == prob_carrier((p : Prob_space[A]))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 x : A, sub_sigma_algebra(p, G) && FINITE(G) && integrable(p, X) && IN(x, prob_carrier(p)) \226\134\146 expectation(p, (y : A) => cond_exp(p, G, X, y) * indicator_fn(sigma_atom(G, x), y)) == expectation(p, (y : A) => X(y) * indicator_fn(sigma_atom(G, x), y))
+      #|  (X : (A) -> Real)
+      #|  cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  IN((z : A), UNIONS((S' : ((A) -> Bool) -> Bool)))
+      #|  IN((z : A), (B : (A) -> Bool))
+      #|  (z : A)
+      #|  DISJOINT((B : (A) -> Bool), UNIONS((S' : ((A) -> Bool) -> Bool)))
+      #|  (z : A)
+      #|  ((x : A) => (f : (A) -> Real)(x) * indicator_fn(UNION((B : (A) -> Bool), UNIONS((S' : ((A) -> Bool) -> Bool))), x)) == ((x : A) => f(x) * indicator_fn(B, x) + f(x) * indicator_fn(UNIONS(S'), x))
+      #|  (f : (A) -> Real)
+      #|  \226\136\128 f : (A) -> Real, integrable((p : Prob_space[A]), f) \226\134\146 expectation(p, (x : A) => f(x) * indicator_fn(UNION((B : (A) -> Bool), UNIONS((S' : ((A) -> Bool) -> Bool))), x)) == expectation(p, (x : A) => f(x) * indicator_fn(B, x)) + expectation(p, (x : A) => f(x) * indicator_fn(UNIONS(S'), x))
+      #|  (B : (A) -> Bool) == sigma_atom((G : ((A) -> Bool) -> Bool), (w : A))
+      #|  expectation((p : Prob_space[A]), (x : A) => cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((B : (A) -> Bool), x)) == expectation(p, (x : A) => X(x) * indicator_fn(B, x))
+      #|  (w : A)
+      #|  (B : (A) -> Bool)
+      #|  expectation((p : Prob_space[A]), (x : A) => cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn(UNIONS((S' : ((A) -> Bool) -> Bool)), x)) == expectation(p, (x : A) => X(x) * indicator_fn(UNIONS(S'), x))
+      #|  DISJOINT((B : (A) -> Bool), (C : (A) -> Bool))
+      #|  (C : (A) -> Bool)
+      #|  !((p : Bool) && (q : Bool)) == (p \226\134\146 !q)
+      #|  !((p : Bool) && (q : Bool)) == (p \226\134\146 !q)
+      #|  (z : A)
+      #|  DISJOINT((B : (A) -> Bool), UNIONS((S' : ((A) -> Bool) -> Bool)))
+      #|  (C : (A) -> Bool)
+      #|  IN(UNIONS((S' : ((A) -> Bool) -> Bool)), (G : ((A) -> Bool) -> Bool))
+      #|  IN(UNIONS((S' : ((A) -> Bool) -> Bool)), prob_events((p : Prob_space[A])))
+      #|  IN((B : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  SUBSET((S' : ((A) -> Bool) -> Bool), (atoms_a : ((A) -> Bool) -> Bool))
+      #|  IN((B : (A) -> Bool), (atoms_a : ((A) -> Bool) -> Bool))
+      #|  (S' : ((A) -> Bool) -> Bool)
+      #|  (B : (A) -> Bool)
+      #|  (a : Real) == real_of_num(0) && (b : Real) == real_of_num(0) \226\134\146 a == b
+      #|  \226\136\128 S : ((A) -> Bool) -> Bool, FINITE(S) && SUBSET(S, (atoms_a : ((A) -> Bool) -> Bool)) \226\134\146 expectation((p : Prob_space[A]), (x : A) => cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn(UNIONS(S), x)) == expectation(p, (x : A) => X(x) * indicator_fn(UNIONS(S), x))
+      #|  IN((B : (A) -> Bool), (atoms_a : ((A) -> Bool) -> Bool))
+      #|  SUBSET((B : (A) -> Bool), (a : (A) -> Bool))
+      #|  (B : (A) -> Bool)
+      #|  (z : A)
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (z : A))
+      #|  (z : A)
+      #|  (a : (A) -> Bool) == UNIONS((atoms_a : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 B : (A) -> Bool, IN(B, (atoms_a : ((A) -> Bool) -> Bool)) \226\134\146 (\226\136\131 w : A, IN(w, prob_carrier((p : Prob_space[A]))) && sigma_atom((G : ((A) -> Bool) -> Bool), w) == B)
+      #|  \226\136\128 A : (A) -> Bool, IN(A, (atoms_a : ((A) -> Bool) -> Bool)) \226\134\146 IN(A, (G : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 A : (A) -> Bool, IN(A, (atoms_a : ((A) -> Bool) -> Bool)) \226\134\146 IN(A, prob_events((p : Prob_space[A])))
+      #|  \226\136\128 A1 : (A) -> Bool, \226\136\128 A2 : (A) -> Bool, IN(A1, (atoms_a : ((A) -> Bool) -> Bool)) && IN(A2, atoms_a) && !(A1 == A2) \226\134\146 DISJOINT(A1, A2)
+      #|  (atoms : ((A) -> Bool) -> Bool)
+      #|  FINITE((atoms_a : ((A) -> Bool) -> Bool))
+      #|  prob_carrier((p : Prob_space[A])) == UNIONS((G : ((A) -> Bool) -> Bool))
+      #|  FINITE((atoms : ((A) -> Bool) -> Bool))
+      #|  (atoms_a : ((A) -> Bool) -> Bool) == {(A : (A) -> Bool) | IN(A, (atoms : ((A) -> Bool) -> Bool)) && SUBSET(A, (a : (A) -> Bool))}
+      #|  (atoms : ((A) -> Bool) -> Bool) == {sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)) | IN(x, prob_carrier((p : Prob_space[A])))}
+      #|  IN((a : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  simple_rv((p : Prob_space[A]), cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real)))
+      #|  UNIONS((G : ((A) -> Bool) -> Bool)) == prob_carrier((p : Prob_space[A]))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 a : (A) -> Bool, sub_sigma_algebra(p, G) && FINITE(G) && integrable(p, X) && IN(a, G) \226\134\146 expectation(p, (x : A) => cond_exp(p, G, X, x) * indicator_fn(a, x)) == expectation(p, (x : A) => X(x) * indicator_fn(a, x))
+      #|  (atoms_a : ((A) -> Bool) -> Bool)
+      #|  (z : A)
+      #|  expectation((p : Prob_space[A]), (X : (A) -> Real)) == expectation(p, (x : A) => X(x) * indicator_fn(UNIONS((G : ((A) -> Bool) -> Bool)), x))
+      #|  (z : A)
+      #|  expectation((p : Prob_space[A]), cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))) == expectation(p, (x : A) => cond_exp(p, G, X, x) * indicator_fn(UNIONS(G), x))
+      #|  UNIONS((G : ((A) -> Bool) -> Bool)) == prob_carrier((p : Prob_space[A]))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && FINITE(G) && integrable(p, X) \226\134\146 expectation(p, cond_exp(p, G, X)) == expectation(p, X)
+      #|  IN(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), prob_events((p : Prob_space[A])))
+      #|  UNIONS((G : ((A) -> Bool) -> Bool)) == prob_carrier((p : Prob_space[A]))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 x : A, sub_sigma_algebra(p, G) && FINITE(G) && simple_rv(p, X) && IN(x, prob_carrier(p)) \226\134\146 cond_exp(p, G, X, x) == simple_cond_exp(p, G, X, x)
+      #|  (y : A) => (X : (A) -> Real)(y) * indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), y)
+      #|  (Y : (A) -> Real)((x : A))
+      #|  (p : Prob_space[A])
+      #|  IN(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), prob_events((p : Prob_space[A])))
+      #|  (Y : (A) -> Real)((y : A)) == Y((x : A))
+      #|  (y : A)
+      #|  ((y : A) => (Y : (A) -> Real)(y) * (X : (A) -> Real)(y) * indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), y)) == ((y : A) => Y(x) * (X(y) * indicator_fn(sigma_atom(G, x), y)))
+      #|  expectation((p : Prob_space[A]), (y : A) => (Y : (A) -> Real)(y) * (X : (A) -> Real)(y) * indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), y)) == Y(x) * expectation(p, (y : A) => X(y) * indicator_fn(sigma_atom(G, x), y))
+      #|  (x : A)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, sub_sigma_algebra(p, G) && FINITE(G) && integrable(p, X) && integrable(p, (x : A) => Y(x) * X(x)) && measurable_wrt(p, G, Y) \226\134\146 (\226\136\128 x : A, IN(x, prob_carrier(p)) && !(prob(p, sigma_atom(G, x)) == real_of_num(0)) \226\134\146 cond_exp(p, G, (w : A) => Y(w) * X(w), x) == Y(x) * cond_exp(p, G, X, x))
+      #|  (n : Num) <= SUC(n)
+      #|  SUC((n : Num))
+      #|  (n : Num)
+      #|  expectation((p : Prob_space[A]), (x : A) => cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (X : (A) -> Real), x) * indicator_fn((a : (A) -> Bool), x)) == expectation(p, (x : A) => X(x) * indicator_fn(a, x))
+      #|  \226\136\128 n : Num, sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, filtration(p, FF) && (\226\136\128 n : Num, FINITE(FF(n))) && integrable(p, X) \226\134\146 martingale(p, FF, (n : Num) => cond_exp(p, FF(n), X))
+      #|  \226\136\128 x : Real, \226\136\128 a : Real, pos_part(x - a) <= abs(x) + abs(a)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, simple_expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)(n, x))) <= (C : Real)
+      #|  (x : A) => abs((a : Real))
+      #|  (x : A) => abs((X : (Num, A) -> Real)((n : Num), x))
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)((n : Num), x)) + abs((a : Real))) == simple_expectation(p, (x : A) => abs(X(n, x))) + abs(a)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)((n : Num), x)) + abs((a : Real)))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)((n : Num), x) - (a : Real)))
+      #|  \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, \226\136\128 C : Real, simple_submartingale(p, FF, X) && a < b && (\226\136\128 n : Num, simple_expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 (b - a) * simple_expectation(p, (x : A) => real_of_num(num_upcrossings(X, a, b, n, x))) <= C + abs(a)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x))) / real_of_num((k : Num)) <= ((C : Real) + abs(a)) / ((b - a) * real_of_num(k))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x))) <= ((C : Real) + abs(a)) / (b - a)
+      #|  (C : Real)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  ((b : Real) - (a : Real)) * simple_expectation((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), a, b, (n : Num), x))) <= (C : Real) + abs(a)
+      #|  real_of_num(0) < (b : Real) - (a : Real)
+      #|  (x : A)
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num((k : Num))}) <= simple_expectation(p, (x : A) => real_of_num(num_upcrossings(X, a, b, n, x))) / real_of_num(k)
+      #|  real_of_num(0) < real_of_num((k : Num))
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, \226\136\128 C : Real, \226\136\128 k : Num, simple_submartingale(p, FF, X) && a < b && (\226\136\128 n : Num, simple_expectation(p, (x : A) => abs(X(n, x))) <= C) && 0 < k \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings(X, a, b, n, x)) >= real_of_num(k)}) <= (C + abs(a)) / ((b - a) * real_of_num(k))
+      #|  (k : Num)
+      #|  (C : Real)
+      #|  (m : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (m : Num)
+      #|  (nn : Num) <= SUC(nn)
+      #|  (x : A)
+      #|  (nn : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
       #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b C.\n     simple_submartingale p FF X /\\ a < b /\\\n     (forall n. simple_expectation p (\\x. abs(X n x)) <= C)\n     ==> forall k. 0 < k ==>\n         prob p (UNIONS {\n           {x | x IN prob_carrier p /\\ &(num_upcrossings X a b n x) >= &k}\n         | n IN (:num)}) <= (C + abs(a)) / ((b - a) * &k)
-      #|  nn:num
-      #|  nn:num
-      #|  k:num
-      #|  k:num
-      #|  x:A
-      #|  SUC j
-      #|  C:real
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  (C + abs(a:real)) / (b - a) / &(SUC j) =\n                     (C + abs a) / ((b - a) * &(SUC j))
-      #|  FF:num->(A->bool)->bool
-      #|  FF:num->(A->bool)->bool
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (x : A)
+      #|  SUC((j : Num))
+      #|  (C : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  ((C : Real) + abs((a : Real))) / ((b : Real) - a) / real_of_num(SUC((j : Num))) == (C + abs(a)) / ((b - a) * real_of_num(SUC(j)))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
       #|  prob (p:A prob_space) (UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_upcrossings (X:num->A->real) a b n x) >= &(SUC j)}\n       | n IN (:num)})
-      #|  j:num
-      #|  FF:num->(A->bool)->bool
-      #|  (C + abs(a:real)) / (b - a)
-      #|  FF:num->(A->bool)->bool
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  ((C : Real) + abs((a : Real))) / ((b : Real) - a)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
       #|  INTERS {UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_upcrossings (X:num->A->real) a b n x) >= &(SUC k)}\n     | n IN (:num)} | k IN (:num)}
-      #|  adapted (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) FF
-      #|  forall m:num. simple_rv (p:A prob_space) ((X:num->A->real) m)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b C.\n     simple_submartingale p FF X /\\ a < b /\\\n     (forall n. simple_expectation p (\\x. abs(X n x)) <= C)\n     ==> almost_surely p\n           {x | ?B:num. forall n. num_upcrossings X a b n x <= B}
-      #|  a:A->bool
-      #|  n:num
-      #|  &0
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  n:num
-      #|  xx:A
-      #|  xx:A
-      #|  y:real
-      #|  xx:A
-      #|  (X:num->A->real) n xx
-      #|  xx:A
-      #|  {pos_part ((X:num->A->real) n x) | x IN prob_carrier (p:A prob_space)} =\n                  IMAGE (\\y. pos_part y) {X n x | x IN prob_carrier p}
-      #|  v:real
-      #|  n:num
-      #|  {x:A | x IN prob_carrier p /\\ real_max ((X:num->A->real) n x) (&0) <= v} =\n                   {x | x IN prob_carrier p /\\ X n x <= v}
-      #|  {x:A | x IN prob_carrier p /\\ real_max ((X:num->A->real) n x) (&0) <= v} = {}
-      #|  v < &0
-      #|  v:real
-      #|  forall n. simple_rv (p:A prob_space) ((X:num->A->real) n)
-      #|  simple_adapted (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real).\n     simple_submartingale p FF X\n     ==> simple_submartingale p FF (\\n x. pos_part(X n x))
-      #|  simple_expectation (p:A prob_space) (\\x:A. abs((X:num->A->real) n x))
-      #|  simple_expectation (p:A prob_space) ((\\n x. pos_part ((X:num->A->real) n x)) n)
-      #|  c * prob (p:A prob_space)\n    {x:A | x IN prob_carrier p /\\\n           running_max (\\n x. pos_part ((X:num->A->real) n x)) n x >= c} <=\n    simple_expectation p ((\\n x. pos_part (X n x)) n)
-      #|  n:num
-      #|  c:real
-      #|  (\\n x. pos_part((X:num->A->real) n x)):num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) c n C.\n     simple_submartingale p FF X /\\ &0 < c /\\\n     (forall n. simple_expectation p (\\x. abs(X n x)) <= C)\n     ==> c * prob p {x | x IN prob_carrier p /\\\n                         running_max (\\m x. pos_part(X m x)) n x >= c}\n         <= C
-      #|  n:num
-      #|  n:num
-      #|  min L ((f:num->real) N)
-      #|  L:real
-      #|  &0
-      #|  forall f:num->real. forall N. ?L. forall n. n < N ==> f n >= L
-      #|  max (abs M) (max (&(K0 + 1)) (abs (L:real)))
-      #|  f:num->real
-      #|  M:real
-      #|  nn:num
-      #|  forall n. n < N0 ==> (f:num->real) n >= L
-      #|  L:real
-      #|  nn < N0:num
-      #|  M:real
-      #|  nn:num
-      #|  forall n. N0 <= n ==> ~((f:num->real) n <= --(&(K0 + 1)))
-      #|  ~(y <= --x) ==> --x <= y
-      #|  --(&(K0 + 1))
-      #|  N0:num <= nn
-      #|  nn:num
-      #|  forall n:num. abs((f:num->real) n) <= max (abs M) (max (&(K0 + 1)) (abs L))
-      #|  L:real
-      #|  N0:num
-      #|  f:num->real
-      #|  N0:num
-      #|  ~(a /\\ b) <=> a ==> ~b
-      #|  nn:num
-      #|  nn:num
-      #|  --a < --b <=> b < a
-      #|  SUC B
-      #|  --(&K0):real
-      #|  --(&(K0 + 1))
-      #|  f:num->real
-      #|  B:num
-      #|  --a < --b <=> b < a
-      #|  --(&K0):real
-      #|  --(&(K0 + 1))
-      #|  forall a b. rational a /\\ rational b /\\ a < b\n      ==> (?B. forall n. upcrossing_count (f:num->real) a b n <= B)
-      #|  ~(forall N:num. ?n. N <= n /\\ (f:num->real) n <= --(&(K0 + 1)))
-      #|  nn:num
-      #|  nn:num
-      #|  N:num
-      #|  N:num
-      #|  forall N:num. ?n. N <= n /\\ (f:num->real) n >= --(&K0)
-      #|  K0:num
-      #|  forall K:num. ?N:num. forall n. N <= n ==> (f:num->real) n <= --(&K)
-      #|  forall f M. (forall n. (f:num->real) n <= M) /\\\n     (forall a b. rational a /\\ rational b /\\ a < b\n            ==> ?B. forall n. upcrossing_count f a b n <= B)\n     ==> (?L. (f ---> L) sequentially) \\/\n         (forall K:num. ?N. forall n. N <= n ==> f n <= --(&K))
-      #|  n:num
-      #|  n:num
-      #|  c:real
-      #|  (\\m x. pos_part((X:num->A->real) m x)):num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  adapted (p:A prob_space) FF (\\m x. pos_part((X:num->A->real) m x))
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) c n.\n     simple_submartingale p FF X\n     ==> {x | x IN prob_carrier p /\\\n              running_max (\\m x. pos_part(X m x)) n x >= c}\n         IN prob_events p
-      #|  a <= max a b
-      #|  forall X:num->A->real. forall n x.\n     running_max X n x <= running_max X (SUC n) x
-      #|  running_max (X:num->A->real) n x
-      #|  m = SUC n
-      #|  m:num
-      #|  forall X:num->A->real. forall n m x. m <= n ==> X m x <= running_max X n x
-      #|  v:real
-      #|  forall p:A prob_space (X:A->real) v.\n     simple_rv p X\n     ==> {x | x IN prob_carrier p /\\ X x <= v} IN prob_events p
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 C : Real, simple_submartingale(p, FF, X) && a < b && (\226\136\128 n : Num, simple_expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings(X, a, b, n, x) <= B})
+      #|  (a : (A) -> Bool)
+      #|  (n : Num)
+      #|  real_of_num(0)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (n : Num)
+      #|  (xx : A)
+      #|  (xx : A)
+      #|  (y : Real)
+      #|  (xx : A)
+      #|  (X : (Num, A) -> Real)((n : Num), (xx : A))
+      #|  (xx : A)
+      #|  {pos_part((X : (Num, A) -> Real)((n : Num), (x : A))) | IN(x, prob_carrier((p : Prob_space[A])))} == IMAGE((y : Real) => pos_part(y), {X(n, (x : A)) | IN(x, prob_carrier(p))})
+      #|  (v : Real)
+      #|  (n : Num)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max((X : (Num, A) -> Real)((n : Num), x), real_of_num(0)) <= (v : Real)} == {(x : A) | IN(x, prob_carrier(p)) && X(n, x) <= v}
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max((X : (Num, A) -> Real)((n : Num), x), real_of_num(0)) <= (v : Real)} == {}
+      #|  (v : Real) < real_of_num(0)
+      #|  (v : Real)
+      #|  \226\136\128 n : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  simple_adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, simple_submartingale(p, FF, X) \226\134\146 simple_submartingale(p, FF, (n : Num) => (x : A) => pos_part(X(n, x)))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)((n : Num), x)))
+      #|  simple_expectation((p : Prob_space[A]), ((n : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(n, x)))((n : Num)))
+      #|  (c : Real) * prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && running_max((n : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(n, x)), (n : Num), x) >= c}) <= simple_expectation(p, ((n : Num) => (x : A) => pos_part(X(n, x)))(n))
+      #|  (n : Num)
+      #|  (c : Real)
+      #|  (n : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(n, x))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 c : Real, \226\136\128 n : Num, \226\136\128 C : Real, simple_submartingale(p, FF, X) && real_of_num(0) < c && (\226\136\128 n : Num, simple_expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 c * prob(p, {(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => pos_part(X(m, x)), n, x) >= c}) <= C
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  min((L : Real), (f : (Num) -> Real)((N : Num)))
+      #|  (L : Real)
+      #|  real_of_num(0)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 N : Num, \226\136\131 L : Real, \226\136\128 n : Num, n < N \226\134\146 f(n) >= L
+      #|  max(abs((M : Real)), max(real_of_num((K0 : Num) + 1), abs((L : Real))))
+      #|  (f : (Num) -> Real)
+      #|  (M : Real)
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, n < (N0 : Num) \226\134\146 (f : (Num) -> Real)(n) >= (L : Real)
+      #|  (L : Real)
+      #|  (nn : Num) < (N0 : Num)
+      #|  (M : Real)
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, (N0 : Num) <= n \226\134\146 !((f : (Num) -> Real)(n) <= -real_of_num((K0 : Num) + 1))
+      #|  !((y : Real) <= -(x : Real)) \226\134\146 -x <= y
+      #|  -real_of_num((K0 : Num) + 1)
+      #|  (N0 : Num) <= (nn : Num)
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, abs((f : (Num) -> Real)(n)) <= max(abs((M : Real)), max(real_of_num((K0 : Num) + 1), abs((L : Real))))
+      #|  (L : Real)
+      #|  (N0 : Num)
+      #|  (f : (Num) -> Real)
+      #|  (N0 : Num)
+      #|  !((a : Bool) && (b : Bool)) == (a \226\134\146 !b)
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  (-(a : Real) < -(b : Real)) == (b < a)
+      #|  SUC((B : Num))
+      #|  -real_of_num((K0 : Num))
+      #|  -real_of_num((K0 : Num) + 1)
+      #|  (f : (Num) -> Real)
+      #|  (B : Num)
+      #|  (-(a : Real) < -(b : Real)) == (b < a)
+      #|  -real_of_num((K0 : Num))
+      #|  -real_of_num((K0 : Num) + 1)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, rational(a) && rational(b) && a < b \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, upcrossing_count((f : (Num) -> Real), a, b, n) <= B)
+      #|  !(\226\136\128 N : Num, \226\136\131 n : Num, N <= n && (f : (Num) -> Real)(n) <= -real_of_num((K0 : Num) + 1))
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  \226\136\128 N : Num, \226\136\131 n : Num, N <= n && (f : (Num) -> Real)(n) >= -real_of_num((K0 : Num))
+      #|  (K0 : Num)
+      #|  \226\136\128 K : Num, \226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 (f : (Num) -> Real)(n) <= -real_of_num(K)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 M : Real, (\226\136\128 n : Num, f(n) <= M) && (\226\136\128 a : Real, \226\136\128 b : Real, rational(a) && rational(b) && a < b \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, upcrossing_count(f, a, b, n) <= B)) \226\134\146 (\226\136\131 L : Real, op_minus_minus_minus_gt(f, L, sequentially)) || (\226\136\128 K : Num, \226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 f(n) <= -real_of_num(K))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (c : Real)
+      #|  (m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 c : Real, \226\136\128 n : Num, simple_submartingale(p, FF, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => pos_part(X(m, x)), n, x) >= c}, prob_events(p))
+      #|  (a : Real) <= max(a, (b : Real))
+      #|  \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 x : A, running_max(X, n, x) <= running_max(X, SUC(n), x)
+      #|  running_max((X : (Num, A) -> Real), (n : Num), (x : A))
+      #|  (m : Num) == SUC((n : Num))
+      #|  (m : Num)
+      #|  \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 x : A, m <= n \226\134\146 X(m, x) <= running_max(X, n, x)
+      #|  (v : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 v : Real, simple_rv(p, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && X(x) <= v}, prob_events(p))
       #|  forall p (A:num->num->(A->bool)).\n    (forall k:num n:num. A k n IN prob_events p)\n    ==> INTERS {UNIONS {A k n | n IN (:num)} | k IN (:num)}\n        IN prob_events p
-      #|  ~(c <= &0)
-      #|  ~(c <= &0)
-      #|  (x:A) IN prob_carrier p
-      #|  {x:A | x IN prob_carrier p /\\\n              max (running_max (\\m x. max (--((X:num->A->real) m x)) (&0)) n x)\n                  (max (--X (SUC n) x) (&0)) >= c} =\n       {x | x IN prob_carrier p /\\\n            running_max (\\m x. max (--X m x) (&0)) n x >= c} UNION\n       {x | x IN prob_carrier p /\\ X (SUC n) x <= --c}
-      #|  &0
-      #|  {x:A | x IN prob_carrier p /\\\n              max (running_max (\\m x. max (--((X:num->A->real) m x)) (&0)) n x)\n                  (max (--X (SUC n) x) (&0)) >= c} =\n       prob_carrier p
-      #|  c <= &0
-      #|  ~(c <= &0)
-      #|  {x:A | x IN prob_carrier p /\\ max (--((X:num->A->real) 0 x)) (&0) >= c} =\n       {x | x IN prob_carrier p /\\ X 0 x <= --c}
-      #|  &0
-      #|  {x:A | x IN prob_carrier p /\\ max (--((X:num->A->real) 0 x)) (&0) >= c} =\n       prob_carrier p
-      #|  c <= &0
-      #|  n:num
-      #|  n:num
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) c n.\n     simple_submartingale p FF X\n     ==> {x | x IN prob_carrier p /\\\n              running_max (\\m x. max (--X m x) (&0)) n x >= c}\n         IN prob_events p
-      #|  (y:A) IN a
-      #|  y:A
-      #|  simple_expectation (p:A prob_space) (X:A->real) =\n     simple_expectation p (\\x. X x * indicator_fn a x +\n                                X x * indicator_fn (prob_carrier p DIFF a) x)
-      #|  forall p:A prob_space (X:A->real) (a:A->bool).\n     simple_rv p X /\\ a IN prob_events p\n     ==> simple_expectation p X =\n         simple_expectation p (\\x. X x * indicator_fn a x) +\n         simple_expectation p (\\x. X x * indicator_fn (prob_carrier p DIFF a) x)
-      #|  forall m. simple_expectation (p:A prob_space)\n               (\\x. (X:num->A->real) m x * indicator_fn ((B:num->(A->bool)) m) x) <= C
-      #|  n:num
-      #|  forall m. simple_expectation (p:A prob_space)\n               (\\x. (X:num->A->real) m x * indicator_fn ((B:num->(A->bool)) m) x) >=\n             --C + c * prob p ((A:num->(A->bool)) m)
-      #|  n:num
-      #|  simple_expectation (p:A prob_space)\n         (\\x. (X:num->A->real) m x * indicator_fn ((B:num->(A->bool)) m) x) >=\n       --C + c * prob p ((A:num->(A->bool)) m)
-      #|  (y:A) IN D
-      #|  y:A
-      #|  simple_expectation (p:A prob_space) (\\x. --c * indicator_fn D x) =\n         --c * simple_expectation p (indicator_fn D)
-      #|  --c * prob (p:A prob_space) D =\n        simple_expectation p (\\x. --c * indicator_fn D x)
-      #|  simple_expectation (p:A prob_space)\n         (\\x. (X:num->A->real) (SUC m) x * indicator_fn D x) <=\n       --c * prob p D
-      #|  (B:num->(A->bool)) m = B (SUC m) UNION D
-      #|  y:A
-      #|  simple_expectation (p:A prob_space)\n          (\\x. (X:num->A->real) (SUC m) x * indicator_fn ((B:num->(A->bool)) m) x) =\n        simple_expectation p\n          (\\x. X (SUC m) x * indicator_fn (B (SUC m)) x +\n               X (SUC m) x * indicator_fn D x)
-      #|  simple_expectation (p:A prob_space)\n         (\\x. (X:num->A->real) (SUC m) x * indicator_fn ((B:num->(A->bool)) m) x) =\n       simple_expectation p\n         (\\x. X (SUC m) x * indicator_fn (B (SUC m)) x) +\n       simple_expectation p\n         (\\x. X (SUC m) x * indicator_fn D x)
-      #|  (B:num->(A->bool)) (SUC m) = B m DIFF D
-      #|  DISJOINT ((B:num->(A->bool)) (SUC m)) D
-      #|  (B:num->(A->bool)) m = B (SUC m) UNION D
-      #|  m <= SUC m
-      #|  (B:num->(A->bool)) m
-      #|  SUC m
-      #|  m:num
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n         (\\x. (X:num->A->real) m x * indicator_fn ((B:num->(A->bool)) m) x) <=\n       simple_expectation p\n         (\\x. X (SUC m) x * indicator_fn (B m) x)
-      #|  prob_carrier (p:A prob_space) DIFF (A:num->(A->bool)) m =\n                    UNIONS ((FF:num->(A->bool)->bool) m) DIFF A m
-      #|  (B:num->(A->bool)) m IN (FF:num->(A->bool)->bool) m
-      #|  prob (p:A prob_space) ((A:num->(A->bool)) (SUC m)) =\n       prob p (A m) + prob p D
-      #|  &0 < c
-      #|  (z:A) IN prob_carrier p
-      #|  z:A
-      #|  (A:num->(A->bool)) (SUC m) = A m UNION D
-      #|  DISJOINT ((A:num->(A->bool)) m) D
-      #|  D:A->bool IN prob_events p
-      #|  &0 < c
-      #|  (z:A) IN prob_carrier p
-      #|  z:A
-      #|  (B:num->(A->bool)) (SUC m) = B m DIFF D
-      #|  D = (B:num->(A->bool)) m INTER\n           {x:A | x IN prob_carrier p /\\ (X:num->A->real) (SUC m) x <= --c}
-      #|  forall n. simple_expectation (p:A prob_space)\n       (\\x. abs((X:num->A->real) n x)) <= C
+      #|  !((c : Real) <= real_of_num(0))
+      #|  !((c : Real) <= real_of_num(0))
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max(running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), (n : Num), x), max(-X(SUC(n), x), real_of_num(0))) >= (c : Real)} == UNION({(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => max(-X(m, x), real_of_num(0)), n, x) >= c}, {(x : A) | IN(x, prob_carrier(p)) && X(SUC(n), x) <= -c})
+      #|  real_of_num(0)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max(running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), (n : Num), x), max(-X(SUC(n), x), real_of_num(0))) >= (c : Real)} == prob_carrier(p)
+      #|  (c : Real) <= real_of_num(0)
+      #|  !((c : Real) <= real_of_num(0))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max(-(X : (Num, A) -> Real)(0, x), real_of_num(0)) >= (c : Real)} == {(x : A) | IN(x, prob_carrier(p)) && X(0, x) <= -c}
+      #|  real_of_num(0)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max(-(X : (Num, A) -> Real)(0, x), real_of_num(0)) >= (c : Real)} == prob_carrier(p)
+      #|  (c : Real) <= real_of_num(0)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 c : Real, \226\136\128 n : Num, simple_submartingale(p, FF, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => max(-X(m, x), real_of_num(0)), n, x) >= c}, prob_events(p))
+      #|  IN((y : A), (a : (A) -> Bool))
+      #|  (y : A)
+      #|  simple_expectation((p : Prob_space[A]), (X : (A) -> Real)) == simple_expectation(p, (x : A) => X(x) * indicator_fn((a : (A) -> Bool), x) + X(x) * indicator_fn(DIFF(prob_carrier(p), a), x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : (A) -> Bool, simple_rv(p, X) && IN(a, prob_events(p)) \226\134\146 simple_expectation(p, X) == simple_expectation(p, (x : A) => X(x) * indicator_fn(a, x)) + simple_expectation(p, (x : A) => X(x) * indicator_fn(DIFF(prob_carrier(p), a), x))
+      #|  \226\136\128 m : Num, simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(m, x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) <= (C : Real)
+      #|  (n : Num)
+      #|  \226\136\128 m : Num, simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(m, x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) >= -(C : Real) + (c : Real) * prob(p, (A : (Num, A) -> Bool)(m))
+      #|  (n : Num)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((m : Num), x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) >= -(C : Real) + (c : Real) * prob(p, (A : (Num, A) -> Bool)(m))
+      #|  IN((y : A), (D : (A) -> Bool))
+      #|  (y : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => -(c : Real) * indicator_fn((D : (A) -> Bool), x)) == -c * simple_expectation(p, indicator_fn(D))
+      #|  -(c : Real) * prob((p : Prob_space[A]), (D : (A) -> Bool)) == simple_expectation(p, (x : A) => -c * indicator_fn(D, x))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((m : Num)), x) * indicator_fn((D : (A) -> Bool), x)) <= -(c : Real) * prob(p, D)
+      #|  (B : (Num, A) -> Bool)((m : Num)) == UNION(B(SUC(m)), (D : (A) -> Bool))
+      #|  (y : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((m : Num)), x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) == simple_expectation(p, (x : A) => X(SUC(m), x) * indicator_fn(B(SUC(m)), x) + X(SUC(m), x) * indicator_fn((D : (A) -> Bool), x))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((m : Num)), x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) == simple_expectation(p, (x : A) => X(SUC(m), x) * indicator_fn(B(SUC(m)), x)) + simple_expectation(p, (x : A) => X(SUC(m), x) * indicator_fn((D : (A) -> Bool), x))
+      #|  (B : (Num, A) -> Bool)(SUC((m : Num))) == DIFF(B(m), (D : (A) -> Bool))
+      #|  DISJOINT((B : (Num, A) -> Bool)(SUC((m : Num))), (D : (A) -> Bool))
+      #|  (B : (Num, A) -> Bool)((m : Num)) == UNION(B(SUC(m)), (D : (A) -> Bool))
+      #|  (m : Num) <= SUC(m)
+      #|  (B : (Num, A) -> Bool)((m : Num))
+      #|  SUC((m : Num))
+      #|  (m : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((m : Num), x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) <= simple_expectation(p, (x : A) => X(SUC(m), x) * indicator_fn(B(m), x))
+      #|  DIFF(prob_carrier((p : Prob_space[A])), (A : (Num, A) -> Bool)((m : Num))) == DIFF(UNIONS((FF : (Num, (A) -> Bool) -> Bool)(m)), A(m))
+      #|  IN((B : (Num, A) -> Bool)((m : Num)), (FF : (Num, (A) -> Bool) -> Bool)(m))
+      #|  prob((p : Prob_space[A]), (A : (Num, A) -> Bool)(SUC((m : Num)))) == prob(p, A(m)) + prob(p, (D : (A) -> Bool))
+      #|  real_of_num(0) < (c : Real)
+      #|  IN((z : A), prob_carrier((p : Prob_space[A])))
+      #|  (z : A)
+      #|  (A : (Num, A) -> Bool)(SUC((m : Num))) == UNION(A(m), (D : (A) -> Bool))
+      #|  DISJOINT((A : (Num, A) -> Bool)((m : Num)), (D : (A) -> Bool))
+      #|  IN((D : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  real_of_num(0) < (c : Real)
+      #|  IN((z : A), prob_carrier((p : Prob_space[A])))
+      #|  (z : A)
+      #|  (B : (Num, A) -> Bool)(SUC((m : Num))) == DIFF(B(m), (D : (A) -> Bool))
+      #|  (D : (A) -> Bool) == INTER((B : (Num, A) -> Bool)((m : Num)), {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(SUC(m), x) <= -(c : Real)})
+      #|  \226\136\128 n : Num, simple_expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)(n, x))) <= (C : Real)
       #|  0
-      #|  (X:num->A->real) 0
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space) ((X:num->A->real) 0) >= --C
-      #|  &0 < c
-      #|  (y:A) IN (A:num->(A->bool)) 0
-      #|  y:A
-      #|  simple_expectation (p:A prob_space) (\\x. --c * indicator_fn ((A:num->(A->bool)) 0) x) =\n         --c * simple_expectation p (indicator_fn (A 0))
-      #|  --c * prob (p:A prob_space) ((A:num->(A->bool)) 0) =\n        simple_expectation p (\\x. --c * indicator_fn (A 0) x)
-      #|  simple_rv (p:A prob_space) (\\x. --c * indicator_fn ((A:num->(A->bool)) 0) x)
-      #|  simple_expectation (p:A prob_space) (\\x. (X:num->A->real) 0 x * indicator_fn ((A:num->(A->bool)) 0) x)\n       <= --c * prob p (A 0)
-      #|  prob_carrier (p:A prob_space) DIFF (A:num->(A->bool)) 0 = B 0
-      #|  (A:num->(A->bool)) 0
-      #|  (X:num->A->real) 0
-      #|  p:A prob_space
-      #|  forall m. simple_expectation (p:A prob_space)\n           (\\x. (X:num->A->real) m x * indicator_fn ((B:num->(A->bool)) m) x)\n         >= --C + c * prob p ((A:num->(A->bool)) m)
-      #|  forall n. simple_expectation (p:A prob_space) (\\x. abs ((X:num->A->real) n x)) <= C
-      #|  m:num
-      #|  y:A
-      #|  simple_expectation (p:A prob_space)\n        (\\x. (X:num->A->real) m x * indicator_fn ((B:num->(A->bool)) m) x) <=\n      simple_expectation p (\\x. abs(X m x))
-      #|  forall m. simple_expectation (p:A prob_space)\n           (\\x. (X:num->A->real) m x * indicator_fn ((B:num->(A->bool)) m) x) <= C
-      #|  forall m. simple_rv (p:A prob_space)\n           (\\x. (X:num->A->real) m x * indicator_fn ((B:num->(A->bool)) m) x)
-      #|  forall m. (A:num->(A->bool)) m IN prob_events p
-      #|  forall m. (A:num->(A->bool)) m IN (FF:num->(A->bool)->bool) m
-      #|  forall m. (B:num->(A->bool)) m IN prob_events p
-      #|  {x:A | x IN prob_carrier p /\\\n            running_max (\\m x. max (--((X:num->A->real) m x)) (&0)) n x >= c} =\n     (A:num->(A->bool)) n
-      #|  B = \\n. prob_carrier (p:A prob_space) DIFF (A:num->(A->bool)) n
-      #|  A = \\n. {x:A | x IN prob_carrier p /\\\n                    running_max (\\m x. max (--((X:num->A->real) m x)) (&0)) n x >= c}
-      #|  forall n. {x:A | x IN prob_carrier p /\\\n               running_max (\\m x. max (--((X:num->A->real) m x)) (&0)) n x >= c}\n         IN prob_events p
-      #|  --c:real
-      #|  SUC n
-      #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
-      #|  &0 < c
-      #|  &0 < c
-      #|  (z:A) IN prob_carrier p
-      #|  z:A
-      #|  {x:A | x IN prob_carrier p /\\\n              running_max (\\m x. max (--((X:num->A->real) m x)) (&0)) (SUC n) x >= c} =\n       {x | x IN prob_carrier p /\\\n            running_max (\\m x. max (--X m x) (&0)) n x >= c} UNION\n       {x | x IN prob_carrier p /\\ X (SUC n) x <= --c}
-      #|  --c:real
+      #|  (X : (Num, A) -> Real)(0)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (X : (Num, A) -> Real)(0)) >= -(C : Real)
+      #|  real_of_num(0) < (c : Real)
+      #|  IN((y : A), (A : (Num, A) -> Bool)(0))
+      #|  (y : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => -(c : Real) * indicator_fn((A : (Num, A) -> Bool)(0), x)) == -c * simple_expectation(p, indicator_fn(A(0)))
+      #|  -(c : Real) * prob((p : Prob_space[A]), (A : (Num, A) -> Bool)(0)) == simple_expectation(p, (x : A) => -c * indicator_fn(A(0), x))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => -(c : Real) * indicator_fn((A : (Num, A) -> Bool)(0), x))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(0, x) * indicator_fn((A : (Num, A) -> Bool)(0), x)) <= -(c : Real) * prob(p, A(0))
+      #|  DIFF(prob_carrier((p : Prob_space[A])), (A : (Num, A) -> Bool)(0)) == (B : (Num, A) -> Bool)(0)
+      #|  (A : (Num, A) -> Bool)(0)
+      #|  (X : (Num, A) -> Real)(0)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 m : Num, simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(m, x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) >= -(C : Real) + (c : Real) * prob(p, (A : (Num, A) -> Bool)(m))
+      #|  \226\136\128 n : Num, simple_expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)(n, x))) <= (C : Real)
+      #|  (m : Num)
+      #|  (y : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((m : Num), x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) <= simple_expectation(p, (x : A) => abs(X(m, x)))
+      #|  \226\136\128 m : Num, simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(m, x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) <= (C : Real)
+      #|  \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(m, x) * indicator_fn((B : (Num, A) -> Bool)(m), x))
+      #|  \226\136\128 m : Num, IN((A : (Num, A) -> Bool)(m), prob_events((p : Prob_space[A])))
+      #|  \226\136\128 m : Num, IN((A : (Num, A) -> Bool)(m), (FF : (Num, (A) -> Bool) -> Bool)(m))
+      #|  \226\136\128 m : Num, IN((B : (Num, A) -> Bool)(m), prob_events((p : Prob_space[A])))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), (n : Num), x) >= (c : Real)} == (A : (Num, A) -> Bool)(n)
+      #|  (B : (Num, A) -> Bool) == ((n : Num) => DIFF(prob_carrier((p : Prob_space[A])), (A : (Num, A) -> Bool)(n)))
+      #|  (A : (Num, A) -> Bool) == ((n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= (c : Real)})
+      #|  \226\136\128 n : Num, IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= (c : Real)}, prob_events(p))
+      #|  -(c : Real)
+      #|  SUC((n : Num))
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), FF(SUC(n)))
+      #|  real_of_num(0) < (c : Real)
+      #|  real_of_num(0) < (c : Real)
+      #|  IN((z : A), prob_carrier((p : Prob_space[A])))
+      #|  (z : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), SUC((n : Num)), x) >= (c : Real)} == UNION({(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => max(-X(m, x), real_of_num(0)), n, x) >= c}, {(x : A) | IN(x, prob_carrier(p)) && X(SUC(n), x) <= -c})
+      #|  -(c : Real)
       #|  0
-      #|  &0 < c
-      #|  {x:A | x IN prob_carrier p /\\ max (--((X:num->A->real) 0 x)) (&0) >= c} =\n       {x | x IN prob_carrier p /\\ X 0 x <= --c}
-      #|  forall n. {x:A | x IN prob_carrier p /\\\n               running_max (\\m x. max (--((X:num->A->real) m x)) (&0)) n x >= c}\n         IN (FF:num->(A->bool)->bool) n
-      #|  forall n. simple_rv (p:A prob_space) ((X:num->A->real) n)
-      #|  adapted (p:A prob_space) FF X
-      #|  filtration (p:A prob_space) FF
-      #|  forall p:A prob_space FF X c (n:num) C.\n     simple_submartingale p FF X /\\ &0 < c /\\\n     (forall n. simple_expectation p (\\x. abs(X n x)) <= C)\n     ==> c * prob p {x | x IN prob_carrier p /\\\n                         running_max (\\m x. max (--(X m x)) (&0)) n x >= c}\n         <= &2 * C
-      #|  (X:num->A->real) n0 x > --(&K0)
-      #|  n0:num
-      #|  forall n:num. N0 <= n ==> (X:num->A->real) n x <= --(&K0)
-      #|  n0:num
-      #|  N0:num
-      #|  forall N:num. ?n:num. N <= n /\\ (X:num->A->real) n x > --(&K0)
-      #|  N0:num
-      #|  K0:num
-      #|  F
-      #|  n:num
-      #|  n:num
-      #|  B:num
-      #|  B:num
-      #|  NUMPAIR (i:num) (j:num)
-      #|  forall k:num. (g:num->real)(NUMFST k) < g(NUMSND k)\n                 ==> (?B. forall n. num_upcrossings (X:num->A->real)\n                                (g(NUMFST k)) (g(NUMSND k)) n x <= B)
-      #|  b:real
-      #|  ?j:num. (g:num->real) j = b
-      #|  a:real
-      #|  ?i:num. (g:num->real) i = a
-      #|  b:real
-      #|  a:real
-      #|  M0:real
-      #|  \\n:num. (X:num->A->real) n x
-      #|  nn:num
-      #|  forall n:num. pos_part ((X:num->A->real) n x) <= M0
-      #|  nn:num
-      #|  forall n:num. (X:num->A->real) n x <= M0
-      #|  k:num
-      #|  {x:A | (g:num->real)(NUMFST (k:num)) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}
-      #|  k:num
-      #|  forall k. (g:num->real)(NUMFST k) < g(NUMSND k)\n          ==> ?B. forall n. num_upcrossings (X:num->A->real)\n                        (g(NUMFST k)) (g(NUMSND k)) n x <= B
-      #|  K0:num
-      #|  M0:real
-      #|  x:A
+      #|  real_of_num(0) < (c : Real)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max(-(X : (Num, A) -> Real)(0, x), real_of_num(0)) >= (c : Real)} == {(x : A) | IN(x, prob_carrier(p)) && X(0, x) <= -c}
+      #|  \226\136\128 n : Num, IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= (c : Real)}, (FF : (Num, (A) -> Bool) -> Bool)(n))
+      #|  \226\136\128 n : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 c : Real, \226\136\128 n : Num, \226\136\128 C : Real, simple_submartingale(p, FF, X) && real_of_num(0) < c && (\226\136\128 n : Num, simple_expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 c * prob(p, {(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => max(-X(m, x), real_of_num(0)), n, x) >= c}) <= real_of_num(2) * C
+      #|  (X : (Num, A) -> Real)((n0 : Num), (x : A)) > -real_of_num((K0 : Num))
+      #|  (n0 : Num)
+      #|  \226\136\128 n : Num, (N0 : Num) <= n \226\134\146 (X : (Num, A) -> Real)(n, (x : A)) <= -real_of_num((K0 : Num))
+      #|  (n0 : Num)
+      #|  (N0 : Num)
+      #|  \226\136\128 N : Num, \226\136\131 n : Num, N <= n && (X : (Num, A) -> Real)(n, (x : A)) > -real_of_num((K0 : Num))
+      #|  (N0 : Num)
+      #|  (K0 : Num)
+      #|  false
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (B : Num)
+      #|  (B : Num)
+      #|  NUMPAIR((i : Num), (j : Num))
+      #|  \226\136\128 k : Num, (g : (Num) -> Real)(NUMFST(k)) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, (x : A)) <= B)
+      #|  (b : Real)
+      #|  \226\136\131 j : Num, (g : (Num) -> Real)(j) == (b : Real)
+      #|  (a : Real)
+      #|  \226\136\131 i : Num, (g : (Num) -> Real)(i) == (a : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (M0 : Real)
+      #|  (n : Num) => (X : (Num, A) -> Real)(n, (x : A))
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, pos_part((X : (Num, A) -> Real)(n, (x : A))) <= (M0 : Real)
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, (X : (Num, A) -> Real)(n, (x : A)) <= (M0 : Real)
+      #|  (k : Num)
+      #|  {(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)}
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, (g : (Num) -> Real)(NUMFST(k)) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, (x : A)) <= B)
+      #|  (K0 : Num)
+      #|  (M0 : Real)
+      #|  (x : A)
       #|  (INTERS {{x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}\n             | k IN (:num)}) INTER\n     {x:A | ?M. forall n. pos_part((X:num->A->real) n x) <= M} INTER\n     {x:A | ?K:num. forall N:num. ?n. N <= n /\\ X n x > --(&K)}
-      #|  N0:num
-      #|  N0:num
-      #|  N0:num
-      #|  SUC k
-      #|  k:num
-      #|  ~(a /\\ b) <=> a ==> ~b
-      #|  x:A
-      #|  C:real
-      #|  nn:num
-      #|  &(SUC k)
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  nn:num
-      #|  running_max (\\m x. max (--((X:num->A->real) m x)) (&0))\n                      n (x:A)
-      #|  x:A
-      #|  FF:num->(A->bool)->bool
-      #|  (&2 * C) / &(SUC k)
-      #|  \\n. {x:A | x IN prob_carrier p /\\\n           running_max (\\m x. max (--((X:num->A->real) m x)) (&0)) n x\n           >= &(SUC k)}
-      #|  p:A prob_space
-      #|  --((X:num->A->real) nn x)
-      #|  (\\m x. max (--((X:num->A->real) m x)) (&0)) nn (x:A)
-      #|  nn:num
-      #|  nn:num
-      #|  k:num
-      #|  x:A
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n             (X:num->A->real) n x <= --(&(SUC k))}
-      #|  p:A prob_space
+      #|  (N0 : Num)
+      #|  (N0 : Num)
+      #|  (N0 : Num)
+      #|  SUC((k : Num))
+      #|  (k : Num)
+      #|  !((a : Bool) && (b : Bool)) == (a \226\134\146 !b)
+      #|  (x : A)
+      #|  (C : Real)
+      #|  (nn : Num)
+      #|  real_of_num(SUC((k : Num)))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (nn : Num)
+      #|  running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), (n : Num), (x : A))
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  real_of_num(2) * (C : Real) / real_of_num(SUC((k : Num)))
+      #|  (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= real_of_num(SUC((k : Num)))}
+      #|  (p : Prob_space[A])
+      #|  -(X : (Num, A) -> Real)((nn : Num), (x : A))
+      #|  ((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)))((nn : Num), (x : A))
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  (k : Num)
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(n, x) <= -real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
       #|  prob (p:A prob_space) (UNIONS {\n           {x:A | x IN prob_carrier p /\\\n                  running_max (\\m x. max (--((X:num->A->real) m x)) (&0)) n x\n                  >= &(SUC k)}\n           | n IN (:num)})
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n           (X:num->A->real) n x <= --(&(SUC k))}
-      #|  p:A prob_space
-      #|  &2 * C
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n          (X:num->A->real) n x <= --(&(SUC k))}
-      #|  p:A prob_space
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(n, x) <= -real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
+      #|  real_of_num(2) * (C : Real)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(n, x) <= -real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
       #|  INTERS\n     {UNIONS {{x:A | x IN prob_carrier p /\\\n                     (X:num->A->real) n x <= --(&(SUC k))}\n              | n IN (:num)} | k IN (:num)}
-      #|  almost_surely (p:A prob_space)\n       {x:A | ?K:num. forall N:num. ?n. N <= n /\\\n              (X:num->A->real) n x > --(&K)}
-      #|  (\\m x. pos_part ((X:num->A->real) m x)) nn x
-      #|  nn:num
-      #|  nn:num
-      #|  &(SUC k)
-      #|  k:num
-      #|  x:A
-      #|  C:real
-      #|  nn:num
-      #|  &(SUC j)
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  nn:num
-      #|  running_max (\\m x. pos_part ((X:num->A->real) m x))\n                      n (x:A)
-      #|  x:A
-      #|  FF:num->(A->bool)->bool
-      #|  C / &(SUC j)
-      #|  \\n. {x:A | x IN prob_carrier p /\\\n           running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n           >= &(SUC j)}
-      #|  p:A prob_space
-      #|  j:num
-      #|  FF:num->(A->bool)->bool
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n             running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n             >= &(SUC k)}
-      #|  p:A prob_space
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | \226\136\131 K : Num, \226\136\128 N : Num, \226\136\131 n : Num, N <= n && (X : (Num, A) -> Real)(n, x) > -real_of_num(K)})
+      #|  ((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)))((nn : Num), (x : A))
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  real_of_num(SUC((k : Num)))
+      #|  (k : Num)
+      #|  (x : A)
+      #|  (C : Real)
+      #|  (nn : Num)
+      #|  real_of_num(SUC((j : Num)))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (nn : Num)
+      #|  running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), (n : Num), (x : A))
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (C : Real) / real_of_num(SUC((j : Num)))
+      #|  (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC((j : Num)))}
+      #|  (p : Prob_space[A])
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
       #|  prob (p:A prob_space) (UNIONS {\n        {x:A | x IN prob_carrier p /\\\n               running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n               >= &(SUC j)} | n IN (:num)})
-      #|  j:num
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n           running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n           >= &(SUC k)}
-      #|  p:A prob_space
-      #|  C:real
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n          running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n          >= &(SUC k)}
-      #|  p:A prob_space
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
+      #|  (C : Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
       #|  INTERS {UNIONS {\n     {x:A | x IN prob_carrier p /\\\n            running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n            >= &(SUC k)}\n   | n IN (:num)} | k IN (:num)}
-      #|  almost_surely (p:A prob_space)\n       {x:A | ?M. forall n. pos_part((X:num->A->real) n x) <= M}
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, pos_part((X : (Num, A) -> Real)(n, x)) <= M})
       #|  almost_surely (p:A prob_space)\n       (INTERS {{x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}\n             | k IN (:num)})
-      #|  {x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)} = (:A)
-      #|  C:real
-      #|  FF:num->(A->bool)->bool
-      #|  {x:A | ?B. forall n. num_upcrossings (X:num->A->real)\n                  ((g:num->real)(NUMFST k)) (g(NUMSND k)) n x <= B}
-      #|  (g:num->real)(NUMFST k) < g(NUMSND k)
-      #|  k:num
-      #|  forall k. almost_surely (p:A prob_space)\n       {x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}
-      #|  g:num->real
-      #|  adapted (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  forall m:num. simple_rv (p:A prob_space) ((X:num->A->real) m)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) C.\n     simple_submartingale p FF X /\\\n     (forall n. simple_expectation p (\\x. abs(X n x)) <= C)\n     ==> almost_surely p\n           {x | ?L. ((\\n. X n x) ---> L) sequentially}
-      #|  simple_expectation (p:A prob_space) (\\x:A. abs((X:num->A->real) n x)) =\n                expectation p (\\x. abs(X n x))
-      #|  simple_submartingale (p:A prob_space) FF (X:num->A->real)
-      #|  simple_rv (p:A prob_space) ((X:num->A->real) n)
-      #|  n:num
-      #|  C:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  C:real
-      #|  forall p:A prob_space FF X.\n    uniformly_integrable p X /\\ simple_submartingale p FF X\n    ==> almost_surely p {x | ?L. ((\\n. X n x) ---> L) sequentially}
-      #|  simple_rv (p:A prob_space) (indicator_fn (a:A->bool))
-      #|  x:A
-      #|  x:A
-      #|  simple_expectation (p:A prob_space)\n    (\\x:A. M * indicator_fn (a:A->bool) x)
-      #|  simple_expectation (p:A prob_space)\n    (\\x:A. abs((f:A->real) x * indicator_fn a x))
-      #|  abs(x) <= &0 ==> x = &0
-      #|  M:real
-      #|  simple_rv (p:A prob_space) (\\x:A. abs((f:A->real) x))
-      #|  simple_rv (p:A prob_space) (\\x:A. (f:A->real) x * indicator_fn a x)
-      #|  forall p:A prob_space f a.\n    simple_rv p f /\\ a IN prob_events p /\\ prob p a = &0\n    ==> simple_expectation p (\\x. f x * indicator_fn a x) = &0
-      #|  F
-      #|  forall g:num->real a b m. g m <= a /\\ a < b ==> upcrossing_phase g a b m = 1
-      #|  forall g:num->real a b n. a < b ==> ~(upcrossing_phase g a b n = 1 /\\ g n >= b)
-      #|  SUC k
-      #|  ~((f:num->real)(SUC k) <= a)
-      #|  downcrossing_phase f a b k = 1 /\\ downcrossing_count f a b k = 0
-      #|  forall f:num->real a b k. downcrossing_phase f a b 0 = 1 /\\\n   (forall j. j <= k ==> f j > a) ==>\n   downcrossing_phase f a b k = 1 /\\ downcrossing_count f a b k = 0
-      #|  (f:num->real)(SUC v) <= a
-      #|  downcrossing_phase f a b v = 1 /\\ downcrossing_count f a b v = 0
-      #|  u - 1
-      #|  ?v. u = SUC v
-      #|  forall f:num->real a b u. downcrossing_phase f a b 0 = 1 /\\\n   (forall j. j < u ==> f j > a) /\\ 1 <= u /\\ f u <= a ==>\n   downcrossing_phase f a b u = 0 /\\ downcrossing_count f a b u = 1
-      #|  SUC(u + SUC k) = u + SUC(SUC k)
-      #|  u + SUC(SUC k) = SUC(u + SUC k)
-      #|  u:num
-      #|  b:real
-      #|  a:real
-      #|  f:num->real
-      #|  u + SUC 0 = SUC u
-      #|  forall k f:num->real a b u. downcrossing_phase f a b u = 0 /\\ ~(f u >= b) ==>\n   downcrossing_phase f a b (u + SUC k) =\n     downcrossing_phase (\\n. f(u + n)) a b (SUC k) /\\\n   downcrossing_count f a b (u + SUC k) =\n     downcrossing_count f a b u + downcrossing_count (\\n. f(u + n)) a b (SUC k)
-      #|  forall f:num->real a b k. downcrossing_phase f a b 0 = 0 ==>\n   downcrossing_phase f a b (SUC k) = downcrossing_phase (\\n. f(SUC n)) a b k /\\\n   downcrossing_count f a b (SUC k) = downcrossing_count (\\n. f(SUC n)) a b k
-      #|  forall g:num->real a b n. upcrossing_phase g a b n = 0 \\/ upcrossing_phase g a b n = 1
-      #|  (f:num->real)(SUC n) = g(SUC n)
-      #|  b:real
-      #|  a:real
-      #|  g:num->real
-      #|  f:num->real
-      #|  (f:num->real) 0 = g 0
-      #|  forall n f g:num->real a b. (forall k. k <= n ==> f k = g k) ==>\n    upcrossing_phase f a b n = upcrossing_phase g a b n /\\\n    upcrossing_count f a b n = upcrossing_count g a b n
-      #|  upcrossing_count g a b m <= upcrossing_count g a b n
-      #|  ~(1 = 0)
-      #|  upcrossing_phase g a b (SUC n) = 0
-      #|  (g:num->real)(SUC n) >= b
-      #|  m = n:num
-      #|  m:num
-      #|  b:real
-      #|  a:real
-      #|  g:num->real
-      #|  m < n:num
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  g:num->real
-      #|  forall n g:num->real a b m. upcrossing_phase g a b m = 1 /\\\n   upcrossing_phase g a b n = 0 /\\ m < n ==>\n   upcrossing_count g a b n >= upcrossing_count g a b m + 1
-      #|  ~(1 = 0)
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  g:num->real
-      #|  m:num
-      #|  b:real
-      #|  a:real
-      #|  g:num->real
-      #|  n:num
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  g:num->real
-      #|  upcrossing_phase g a b m = 1
-      #|  forall g:num->real a b m n.\n   g m <= a /\\ g n >= b /\\ a < b /\\ m < n\n   ==> upcrossing_count g a b n >= upcrossing_count g a b m + 1
-      #|  b:real
-      #|  a:real
-      #|  \\k. (f:num->real)(SUC M - k)
-      #|  \\k. (f:num->real)(SUC(M - k))
-      #|  M:num
-      #|  a <= b ==> a + 1 <= b + 1
-      #|  forall k:num. k <= M ==> SUC(M - k) = SUC M - k
-      #|  upcrossing_count (\\k. (f:num->real)(SUC(M - k))) a b M + 1
-      #|  b:real
-      #|  a:real
-      #|  \\n. (f:num->real)(SUC n)
-      #|  M:num
-      #|  M:num
-      #|  b:real
-      #|  a:real
-      #|  f:num->real
-      #|  N - 1
-      #|  ?M. N = SUC M
-      #|  downcrossing_phase (f:num->real) a b 0 = 0
-      #|  forall N f:num->real a b.\n    (forall m. m < N ==> forall f a b. a < b ==> downcrossing_count f a b m <=\n      upcrossing_count (\\k. f (m - k)) a b m + 1) ==>\n    a < b ==> ~(N = 0) ==> ~(f 0 >= b) ==>\n    downcrossing_count f a b N <= upcrossing_count (\\k. f(N - k)) a b N + 1
-      #|  N:num
-      #|  b:real
-      #|  a:real
-      #|  f:num->real
-      #|  j:num
-      #|  ~(?u:num. 1 <= u /\\ u <= N /\\ (f:num->real) u <= a)
-      #|  ~((f:num->real) j <= a)
-      #|  a < b
-      #|  (f:num->real) 0 >= b
-      #|  j = 0
-      #|  forall j:num. j <= N ==> (f:num->real) j > a
-      #|  N - N:num = 0
-      #|  N - (N - u:num) = u
-      #|  upcrossing_count (\\k. (f:num->real)(N - k)) a b N >=\n                    upcrossing_count (\\k. f(N - k)) a b (N - u) + 1
-      #|  k:num
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  \\k:num. (f:num->real)(N - k)
-      #|  \\k:num. (f:num->real)(u + n - k)
-      #|  n:num
-      #|  N - u:num
-      #|  upcrossing_count (\\k. (f:num->real)(u + (N - u) - k)) a b (N - u) =\n         upcrossing_count (\\k. f(N - k)) a b (N - u)
-      #|  b:real
-      #|  a:real
-      #|  \\n. (f:num->real)(u + n)
-      #|  N - u:num
-      #|  forall m:num. m < N ==> (forall f:num->real. forall a b. a < b ==>\n          downcrossing_count f a b m <= upcrossing_count (\\k. f(m - k)) a b m + 1)
-      #|  downcrossing_count (\\n. (f:num->real)(u + n)) a b (N - u) <=\n         upcrossing_count (\\k. f(u + (N - u) - k)) a b (N - u) + 1
-      #|  SUC(N - u - 1) = N - u
-      #|  u + SUC(N - u - 1) = N
-      #|  u:num
-      #|  b:real
-      #|  a:real
-      #|  f:num->real
-      #|  N - u - 1
-      #|  a < b
-      #|  (f:num->real) u <= a
-      #|  ~((f:num->real) u >= b)
-      #|  u < N:num
-      #|  downcrossing_count (f:num->real) a b N = 1
-      #|  u = N:num
-      #|  u:num
-      #|  b:real
-      #|  a:real
-      #|  f:num->real
-      #|  ~((f:num->real) j <= a)
-      #|  a < b
-      #|  (f:num->real) 0 >= b
-      #|  j = 0
-      #|  j:num
-      #|  j:num
-      #|  forall j:num. j < u ==> (f:num->real) j > a
-      #|  ?u:num. (1 <= u /\\ u <= N /\\ (f:num->real) u <= a) /\\\n               (forall j:num. j < u ==> ~(1 <= j /\\ j <= N /\\ f j <= a))
-      #|  ?u:num. 1 <= u /\\ u <= N /\\ (f:num->real) u <= a
-      #|  (f:num->real) 0 >= b
-      #|  downcrossing_phase (f:num->real) a b 0 = 1
-      #|  forall N f:num->real a b.\n    (forall m. m < N ==> forall f a b. a < b ==> downcrossing_count f a b m <=\n      upcrossing_count (\\k. f (m - k)) a b m + 1) ==>\n    a < b ==> ~(N = 0) ==> f 0 >= b ==>\n    downcrossing_count f a b N <= upcrossing_count (\\k. f(N - k)) a b N + 1
-      #|  (f:num->real) 0 >= b
-      #|  N = 0
-      #|  N:num
-      #|  forall N (f:num->real) a b. a < b ==>\n    downcrossing_count f a b N <= upcrossing_count (\\k. f(N - k)) a b N + 1
-      #|  N - k = 0 /\\ N - SUC k = 0
-      #|  (a:A->bool) IN FF(N - k:num)
-      #|  SUC(N - SUC k) = N - k
-      #|  a:A->bool
-      #|  N - SUC k
-      #|  forall n (a:A->bool). a IN FF (SUC n) ==>\n        simple_expectation p (\\x. (X:num->A->real) n x * indicator_fn a x) =\n        simple_expectation p (\\x. X (SUC n) x * indicator_fn a x)
-      #|  N - k = SUC(N - SUC k)
-      #|  simple_expectation p (\\x. (X:num->A->real)(N - k) x * indicator_fn a x) =\n         simple_expectation p (\\x. X(N - SUC k) x * indicator_fn a x)
-      #|  k < N:num
-      #|  a:A->bool
-      #|  k:num
-      #|  simple_adapted (p:A prob_space) FF X
-      #|  simple_adapted (p:A prob_space) FF X
-      #|  decreasing_filtration (p:A prob_space) FF
-      #|  decreasing_filtration (p:A prob_space) FF
-      #|  forall p FF (X:num->A->real) N. simple_backward_martingale p FF X\n    ==> simple_submartingale p (\\k. FF(N - k)) (\\k. X(N - k))
-      #|  num_downcrossings (X:num->A->real) a b n x =\n   downcrossing_count (\\k. X k x) a b n
-      #|  forall f a b n. downcrossing_phase f a b n =\n             upcrossing_phase (\\k. --(f k)) (--b) (--a) n
-      #|  (f:num->real)(SUC n) <= a <=> --(f(SUC n)) >= --a
-      #|  forall f a b n. downcrossing_count f a b n =\n             upcrossing_count (\\k. --(f k)) (--b) (--a) n
-      #|  forall X a b (m:num) n (x:A). m <= n ==>\n    num_downcrossings X a b m x <= num_downcrossings X a b n x
-      #|  forall p:A prob_space. sub_sigma_algebra p (prob_events p)
-      #|  n:num
-      #|  forall n. simple_rv (p:A prob_space) ((X:num->A->real) n)
-      #|  m:num
-      #|  m:num
-      #|  --a:real
-      #|  --b:real
-      #|  \\k:num. \\x:A. --((X:num->A->real) k x)
-      #|  \\n:num. prob_events (p:A prob_space)
-      #|  p:A prob_space
-      #|  (\\x:A. &(upcrossing_count (\\k. --((X:num->A->real) k x)) (--b) (--a) n)) =\n     (\\x. &(num_upcrossings (\\k. \\x. --(X k x)) (--b) (--a) n x))
-      #|  forall(p:A prob_space) (X:num->A->real) a b n.\n    (forall n. simple_rv p (X n))\n    ==> simple_rv p (\\x. &(num_downcrossings X a b n x))
-      #|  forall(p:A prob_space) (X:num->A->real) a b n k.\n    (forall m. simple_rv p (X m))\n    ==> {x | x IN prob_carrier p /\\ &(num_downcrossings X a b n x) >= &k}\n        IN prob_events p
-      #|  \\x:A. &1
-      #|  \\x:A. &(num_upcrossings (\\k. (X:num->A->real)(N - k)) a b N x)
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n      (\\x. &(num_upcrossings (\\k. (X:num->A->real)(N - k)) a b N x) + &1)
-      #|  (b - a) * (simple_expectation (p:A prob_space)\n    (\\x. &(num_upcrossings (\\k. (X:num->A->real)(N - k)) a b N x)) + &1)
-      #|  simple_rv (p:A prob_space)\n    (\\x. &(num_upcrossings (\\k. (X:num->A->real)(N - k)) a b N x) + &1)
-      #|  N:num
-      #|  simple_submartingale (p:A prob_space) (\\k. FF (N - k)) (\\k. X (N - k))
-      #|  b:real
-      #|  a:real
-      #|  \\k:num. (X:num->A->real)(N - k)
-      #|  \\k:num. (FF:num->(A->bool)->bool)(N - k)
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space)\n    (\\x. &(num_upcrossings (\\k. (X:num->A->real)(N - k)) a b N x))
-      #|  simple_backward_martingale (p:A prob_space) FF X
-      #|  simple_rv (p:A prob_space)\n    (\\x. &(num_downcrossings (X:num->A->real) a b N x))
-      #|  M:real
-      #|  N:num
-      #|  b:real
-      #|  a:real
-      #|  \\k:num. (X:num->A->real)(N - k)
-      #|  \\k:num. (FF:num->(A->bool)->bool)(N - k)
-      #|  p:A prob_space
-      #|  N:num
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall x:A. x IN prob_carrier p ==>\n      &(num_downcrossings (X:num->A->real) a b N x) <=\n      &(num_upcrossings (\\k. X(N - k)) a b N x) + &1
-      #|  forall(p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) a b N M.\n    simple_backward_martingale p FF X /\\ a < b /\\\n    (forall m x. x IN prob_carrier p ==> abs(X m x) <= M)\n    ==> (b - a) * simple_expectation p (\\x. &(num_downcrossings X a b N x))\n        <= M + abs a + (b - a)
-      #|  &0 < b - a
-      #|  M:real
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  simple_backward_martingale (p:A prob_space) FF X
-      #|  simple_expectation (p:A prob_space)\n    (\\x. &(num_downcrossings (X:num->A->real) a b n x)) / &k
-      #|  forall(p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real)\n    a b n M (k:num).\n    simple_backward_martingale p FF X /\\ a < b /\\\n    (forall m x. x IN prob_carrier p ==> abs(X m x) <= M) /\\ 0 < k\n    ==> prob p {x | x IN prob_carrier p /\\\n          &(num_downcrossings X a b n x) >= &k}\n        <= (M + abs a + (b - a)) / ((b - a) * &k)
-      #|  k:num
-      #|  M:real
-      #|  nn:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  nn:num
-      #|  nn <= SUC nn
-      #|  x:A
-      #|  nn:num
-      #|  simple_backward_martingale (p:A prob_space) FF X
-      #|  forall m:num. simple_rv (p:A prob_space) ((X:num->A->real) m)
+      #|  {(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)} == UNIV
+      #|  (C : Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  {(x : A) | \226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), (g : (Num) -> Real)(NUMFST((k : Num))), g(NUMSND(k)), n, x) <= B}
+      #|  (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k))
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, almost_surely((p : Prob_space[A]), {(x : A) | (g : (Num) -> Real)(NUMFST(k)) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)})
+      #|  (g : (Num) -> Real)
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 C : Real, simple_submartingale(p, FF, X) && (\226\136\128 n : Num, simple_expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => X(n, x), L, sequentially)})
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)((n : Num), x))) == expectation(p, (x : A) => abs(X(n, x)))
+      #|  simple_submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)((n : Num)))
+      #|  (n : Num)
+      #|  (C : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (C : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, uniformly_integrable(p, X) && simple_submartingale(p, FF, X) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => X(n, x), L, sequentially)})
+      #|  simple_rv((p : Prob_space[A]), indicator_fn((a : (A) -> Bool)))
+      #|  (x : A)
+      #|  (x : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (M : Real) * indicator_fn((a : (A) -> Bool), x))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => abs((f : (A) -> Real)(x) * indicator_fn((a : (A) -> Bool), x)))
+      #|  abs((x : Real)) <= real_of_num(0) \226\134\146 x == real_of_num(0)
+      #|  (M : Real)
+      #|  simple_rv((p : Prob_space[A]), (x : A) => abs((f : (A) -> Real)(x)))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => (f : (A) -> Real)(x) * indicator_fn((a : (A) -> Bool), x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (A) -> Real, \226\136\128 a : (A) -> Bool, simple_rv(p, f) && IN(a, prob_events(p)) && prob(p, a) == real_of_num(0) \226\134\146 simple_expectation(p, (x : A) => f(x) * indicator_fn(a, x)) == real_of_num(0)
+      #|  false
+      #|  \226\136\128 g : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Num, g(m) <= a && a < b \226\134\146 upcrossing_phase(g, a, b, m) == 1
+      #|  \226\136\128 g : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, a < b \226\134\146 !(upcrossing_phase(g, a, b, n) == 1 && g(n) >= b)
+      #|  SUC((k : Num))
+      #|  !((f : (Num) -> Real)(SUC((k : Num))) <= (a : Real))
+      #|  downcrossing_phase((f : (Num) -> Real), (a : Real), (b : Real), (k : Num)) == 1 && downcrossing_count(f, a, b, k) == 0
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 k : Num, downcrossing_phase(f, a, b, 0) == 1 && (\226\136\128 j : Num, j <= k \226\134\146 f(j) > a) \226\134\146 downcrossing_phase(f, a, b, k) == 1 && downcrossing_count(f, a, b, k) == 0
+      #|  (f : (Num) -> Real)(SUC((v : Num))) <= (a : Real)
+      #|  downcrossing_phase((f : (Num) -> Real), (a : Real), (b : Real), (v : Num)) == 1 && downcrossing_count(f, a, b, v) == 0
+      #|  (u : Num) - 1
+      #|  \226\136\131 v : Num, (u : Num) == SUC(v)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 u : Num, downcrossing_phase(f, a, b, 0) == 1 && (\226\136\128 j : Num, j < u \226\134\146 f(j) > a) && 1 <= u && f(u) <= a \226\134\146 downcrossing_phase(f, a, b, u) == 0 && downcrossing_count(f, a, b, u) == 1
+      #|  SUC((u : Num) + SUC((k : Num))) == u + SUC(SUC(k))
+      #|  (u : Num) + SUC(SUC((k : Num))) == SUC(u + SUC(k))
+      #|  (u : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Num) -> Real)
+      #|  (u : Num) + SUC(0) == SUC(u)
+      #|  \226\136\128 k : Num, \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 u : Num, downcrossing_phase(f, a, b, u) == 0 && !(f(u) >= b) \226\134\146 downcrossing_phase(f, a, b, u + SUC(k)) == downcrossing_phase((n : Num) => f(u + n), a, b, SUC(k)) && downcrossing_count(f, a, b, u + SUC(k)) == downcrossing_count(f, a, b, u) + downcrossing_count((n : Num) => f(u + n), a, b, SUC(k))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 k : Num, downcrossing_phase(f, a, b, 0) == 0 \226\134\146 downcrossing_phase(f, a, b, SUC(k)) == downcrossing_phase((n : Num) => f(SUC(n)), a, b, k) && downcrossing_count(f, a, b, SUC(k)) == downcrossing_count((n : Num) => f(SUC(n)), a, b, k)
+      #|  \226\136\128 g : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, upcrossing_phase(g, a, b, n) == 0 || upcrossing_phase(g, a, b, n) == 1
+      #|  (f : (Num) -> Real)(SUC((n : Num))) == (g : (Num) -> Real)(SUC(n))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (g : (Num) -> Real)
+      #|  (f : (Num) -> Real)
+      #|  (f : (Num) -> Real)(0) == (g : (Num) -> Real)(0)
+      #|  \226\136\128 n : Num, \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 k : Num, k <= n \226\134\146 f(k) == g(k)) \226\134\146 upcrossing_phase(f, a, b, n) == upcrossing_phase(g, a, b, n) && upcrossing_count(f, a, b, n) == upcrossing_count(g, a, b, n)
+      #|  upcrossing_count((g : (Num) -> Real), (a : Real), (b : Real), (m : Num)) <= upcrossing_count(g, a, b, (n : Num))
+      #|  !(1 == 0)
+      #|  upcrossing_phase((g : (Num) -> Real), (a : Real), (b : Real), SUC((n : Num))) == 0
+      #|  (g : (Num) -> Real)(SUC((n : Num))) >= (b : Real)
+      #|  (m : Num) == (n : Num)
+      #|  (m : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (g : (Num) -> Real)
+      #|  (m : Num) < (n : Num)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (g : (Num) -> Real)
+      #|  \226\136\128 n : Num, \226\136\128 g : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Num, upcrossing_phase(g, a, b, m) == 1 && upcrossing_phase(g, a, b, n) == 0 && m < n \226\134\146 upcrossing_count(g, a, b, n) >= upcrossing_count(g, a, b, m) + 1
+      #|  !(1 == 0)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (g : (Num) -> Real)
+      #|  (m : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (g : (Num) -> Real)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (g : (Num) -> Real)
+      #|  upcrossing_phase((g : (Num) -> Real), (a : Real), (b : Real), (m : Num)) == 1
+      #|  \226\136\128 g : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Num, \226\136\128 n : Num, g(m) <= a && g(n) >= b && a < b && m < n \226\134\146 upcrossing_count(g, a, b, n) >= upcrossing_count(g, a, b, m) + 1
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (k : Num) => (f : (Num) -> Real)(SUC((M : Num)) - k)
+      #|  (k : Num) => (f : (Num) -> Real)(SUC((M : Num) - k))
+      #|  (M : Num)
+      #|  (a : Num) <= (b : Num) \226\134\146 a + 1 <= b + 1
+      #|  \226\136\128 k : Num, k <= (M : Num) \226\134\146 SUC(M - k) == SUC(M) - k
+      #|  upcrossing_count((k : Num) => (f : (Num) -> Real)(SUC((M : Num) - k)), (a : Real), (b : Real), M) + 1
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (n : Num) => (f : (Num) -> Real)(SUC(n))
+      #|  (M : Num)
+      #|  (M : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Num) -> Real)
+      #|  (N : Num) - 1
+      #|  \226\136\131 M : Num, (N : Num) == SUC(M)
+      #|  downcrossing_phase((f : (Num) -> Real), (a : Real), (b : Real), 0) == 0
+      #|  \226\136\128 N : Num, \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 m : Num, m < N \226\134\146 (\226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a < b \226\134\146 downcrossing_count(f, a, b, m) <= upcrossing_count((k : Num) => f(m - k), a, b, m) + 1)) \226\134\146 a < b \226\134\146 !(N == 0) \226\134\146 !(f(0) >= b) \226\134\146 downcrossing_count(f, a, b, N) <= upcrossing_count((k : Num) => f(N - k), a, b, N) + 1
+      #|  (N : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Num) -> Real)
+      #|  (j : Num)
+      #|  !(\226\136\131 u : Num, 1 <= u && u <= (N : Num) && (f : (Num) -> Real)(u) <= (a : Real))
+      #|  !((f : (Num) -> Real)((j : Num)) <= (a : Real))
+      #|  (a : Real) < (b : Real)
+      #|  (f : (Num) -> Real)(0) >= (b : Real)
+      #|  (j : Num) == 0
+      #|  \226\136\128 j : Num, j <= (N : Num) \226\134\146 (f : (Num) -> Real)(j) > (a : Real)
+      #|  (N : Num) - N == 0
+      #|  (N : Num) - (N - (u : Num)) == u
+      #|  upcrossing_count((k : Num) => (f : (Num) -> Real)((N : Num) - k), (a : Real), (b : Real), N) >= upcrossing_count((k : Num) => f(N - k), a, b, N - (u : Num)) + 1
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (k : Num) => (f : (Num) -> Real)((N : Num) - k)
+      #|  (k : Num) => (f : (Num) -> Real)((u : Num) + ((n : Num) - k))
+      #|  (n : Num)
+      #|  (N : Num) - (u : Num)
+      #|  upcrossing_count((k : Num) => (f : (Num) -> Real)((u : Num) + ((N : Num) - u - k)), (a : Real), (b : Real), N - u) == upcrossing_count((k : Num) => f(N - k), a, b, N - u)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (n : Num) => (f : (Num) -> Real)((u : Num) + n)
+      #|  (N : Num) - (u : Num)
+      #|  \226\136\128 m : Num, m < (N : Num) \226\134\146 (\226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a < b \226\134\146 downcrossing_count(f, a, b, m) <= upcrossing_count((k : Num) => f(m - k), a, b, m) + 1)
+      #|  downcrossing_count((n : Num) => (f : (Num) -> Real)((u : Num) + n), (a : Real), (b : Real), (N : Num) - u) <= upcrossing_count((k : Num) => f(u + (N - u - k)), a, b, N - u) + 1
+      #|  SUC((N : Num) - (u : Num) - 1) == N - u
+      #|  (u : Num) + SUC((N : Num) - u - 1) == N
+      #|  (u : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Num) -> Real)
+      #|  (N : Num) - (u : Num) - 1
+      #|  (a : Real) < (b : Real)
+      #|  (f : (Num) -> Real)((u : Num)) <= (a : Real)
+      #|  !((f : (Num) -> Real)((u : Num)) >= (b : Real))
+      #|  (u : Num) < (N : Num)
+      #|  downcrossing_count((f : (Num) -> Real), (a : Real), (b : Real), (N : Num)) == 1
+      #|  (u : Num) == (N : Num)
+      #|  (u : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Num) -> Real)
+      #|  !((f : (Num) -> Real)((j : Num)) <= (a : Real))
+      #|  (a : Real) < (b : Real)
+      #|  (f : (Num) -> Real)(0) >= (b : Real)
+      #|  (j : Num) == 0
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  \226\136\128 j : Num, j < (u : Num) \226\134\146 (f : (Num) -> Real)(j) > (a : Real)
+      #|  \226\136\131 u : Num, (1 <= u && u <= (N : Num) && (f : (Num) -> Real)(u) <= (a : Real)) && (\226\136\128 j : Num, j < u \226\134\146 !(1 <= j && j <= N && f(j) <= a))
+      #|  \226\136\131 u : Num, 1 <= u && u <= (N : Num) && (f : (Num) -> Real)(u) <= (a : Real)
+      #|  (f : (Num) -> Real)(0) >= (b : Real)
+      #|  downcrossing_phase((f : (Num) -> Real), (a : Real), (b : Real), 0) == 1
+      #|  \226\136\128 N : Num, \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 m : Num, m < N \226\134\146 (\226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a < b \226\134\146 downcrossing_count(f, a, b, m) <= upcrossing_count((k : Num) => f(m - k), a, b, m) + 1)) \226\134\146 a < b \226\134\146 !(N == 0) \226\134\146 f(0) >= b \226\134\146 downcrossing_count(f, a, b, N) <= upcrossing_count((k : Num) => f(N - k), a, b, N) + 1
+      #|  (f : (Num) -> Real)(0) >= (b : Real)
+      #|  (N : Num) == 0
+      #|  (N : Num)
+      #|  \226\136\128 N : Num, \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a < b \226\134\146 downcrossing_count(f, a, b, N) <= upcrossing_count((k : Num) => f(N - k), a, b, N) + 1
+      #|  (N : Num) - (k : Num) == 0 && N - SUC(k) == 0
+      #|  IN((a : (A) -> Bool), (FF : (Num, (A) -> Bool) -> Bool)((N : Num) - (k : Num)))
+      #|  SUC((N : Num) - SUC((k : Num))) == N - k
+      #|  (a : (A) -> Bool)
+      #|  (N : Num) - SUC((k : Num))
+      #|  \226\136\128 n : Num, \226\136\128 a : (A) -> Bool, IN(a, (FF : (Num, (A) -> Bool) -> Bool)(SUC(n))) \226\134\146 simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(n, x) * indicator_fn(a, x)) == simple_expectation(p, (x : A) => X(SUC(n), x) * indicator_fn(a, x))
+      #|  (N : Num) - (k : Num) == SUC(N - SUC(k))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((N : Num) - (k : Num), x) * indicator_fn((a : (A) -> Bool), x)) == simple_expectation(p, (x : A) => X(N - SUC(k), x) * indicator_fn(a, x))
+      #|  (k : Num) < (N : Num)
+      #|  (a : (A) -> Bool)
+      #|  (k : Num)
+      #|  simple_adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  simple_adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  decreasing_filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  decreasing_filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 N : Num, simple_backward_martingale(p, FF, X) \226\134\146 simple_submartingale(p, (k : Num) => FF(N - k), (k : Num) => X(N - k))
+      #|  (num_downcrossings : ((Num, A) -> Real, Real, Real, Num, A) -> Num)((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), (x : A)) == downcrossing_count((k : Num) => X(k, x), a, b, n)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, downcrossing_phase(f, a, b, n) == upcrossing_phase((k : Num) => -f(k), -b, -a, n)
+      #|  ((f : (Num) -> Real)(SUC((n : Num))) <= (a : Real)) == (-f(SUC(n)) >= -a)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, downcrossing_count(f, a, b, n) == upcrossing_count((k : Num) => -f(k), -b, -a, n)
+      #|  \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 x : A, m <= n \226\134\146 num_downcrossings(X, a, b, m, x) <= num_downcrossings(X, a, b, n, x)
+      #|  \226\136\128 p : Prob_space[A], sub_sigma_algebra(p, prob_events(p))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  -(a : Real)
+      #|  -(b : Real)
+      #|  (k : Num) => (x : A) => -(X : (Num, A) -> Real)(k, x)
+      #|  (n : Num) => prob_events((p : Prob_space[A]))
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => real_of_num(upcrossing_count((k : Num) => -(X : (Num, A) -> Real)(k, x), -(b : Real), -(a : Real), (n : Num)))) == ((x : A) => real_of_num(num_upcrossings((k : Num) => (x : A) => -X(k, x), -b, -a, n, x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, (\226\136\128 n : Num, simple_rv(p, X(n))) \226\134\146 simple_rv(p, (x : A) => real_of_num(num_downcrossings(X, a, b, n, x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, \226\136\128 k : Num, (\226\136\128 m : Num, simple_rv(p, X(m))) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_downcrossings(X, a, b, n, x)) >= real_of_num(k)}, prob_events(p))
+      #|  (x : A) => real_of_num(1)
+      #|  (x : A) => real_of_num(num_upcrossings((k : Num) => (X : (Num, A) -> Real)((N : Num) - k), (a : Real), (b : Real), N, x))
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((k : Num) => (X : (Num, A) -> Real)((N : Num) - k), (a : Real), (b : Real), N, x)) + real_of_num(1))
+      #|  ((b : Real) - (a : Real)) * (simple_expectation((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((k : Num) => (X : (Num, A) -> Real)((N : Num) - k), a, b, N, x))) + real_of_num(1))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((k : Num) => (X : (Num, A) -> Real)((N : Num) - k), (a : Real), (b : Real), N, x)) + real_of_num(1))
+      #|  (N : Num)
+      #|  simple_submartingale((p : Prob_space[A]), (k : Num) => (FF : (Num, (A) -> Bool) -> Bool)((N : Num) - k), (k : Num) => (X : (Num, A) -> Real)(N - k))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (k : Num) => (X : (Num, A) -> Real)((N : Num) - k)
+      #|  (k : Num) => (FF : (Num, (A) -> Bool) -> Bool)((N : Num) - k)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((k : Num) => (X : (Num, A) -> Real)((N : Num) - k), (a : Real), (b : Real), N, x)))
+      #|  simple_backward_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => real_of_num(num_downcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (N : Num), x)))
+      #|  (M : Real)
+      #|  (N : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (k : Num) => (X : (Num, A) -> Real)((N : Num) - k)
+      #|  (k : Num) => (FF : (Num, (A) -> Bool) -> Bool)((N : Num) - k)
+      #|  (p : Prob_space[A])
+      #|  (N : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 real_of_num(num_downcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (N : Num), x)) <= real_of_num(num_upcrossings((k : Num) => X(N - k), a, b, N, x)) + real_of_num(1)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 N : Num, \226\136\128 M : Real, simple_backward_martingale(p, FF, X) && a < b && (\226\136\128 m : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(X(m, x)) <= M) \226\134\146 (b - a) * simple_expectation(p, (x : A) => real_of_num(num_downcrossings(X, a, b, N, x))) <= M + (abs(a) + (b - a))
+      #|  real_of_num(0) < (b : Real) - (a : Real)
+      #|  (M : Real)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  simple_backward_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => real_of_num(num_downcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x))) / real_of_num((k : Num))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, \226\136\128 M : Real, \226\136\128 k : Num, simple_backward_martingale(p, FF, X) && a < b && (\226\136\128 m : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(X(m, x)) <= M) && 0 < k \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_downcrossings(X, a, b, n, x)) >= real_of_num(k)}) <= (M + (abs(a) + (b - a))) / ((b - a) * real_of_num(k))
+      #|  (k : Num)
+      #|  (M : Real)
+      #|  (nn : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (nn : Num)
+      #|  (nn : Num) <= SUC(nn)
+      #|  (x : A)
+      #|  (nn : Num)
+      #|  simple_backward_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
       #|  forall(p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) a b M.\n    simple_backward_martingale p FF X /\\ a < b /\\\n    (forall m x. x IN prob_carrier p ==> abs(X m x) <= M)\n    ==> forall k. 0 < k ==>\n      prob p (UNIONS {\n        {x | x IN prob_carrier p /\\ &(num_downcrossings X a b n x) >= &k}\n      | n IN (:num)}) <= (M + abs a + (b - a)) / ((b - a) * &k)
-      #|  nn:num
-      #|  nn:num
-      #|  k:num
-      #|  k:num
-      #|  x:A
-      #|  SUC j
-      #|  M:real
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  (M + abs(a:real) + (b - a)) / (b - a) / &(SUC j) =\n                     (M + abs a + (b - a)) / ((b - a) * &(SUC j))
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (x : A)
+      #|  SUC((j : Num))
+      #|  (M : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  ((M : Real) + (abs((a : Real)) + ((b : Real) - a))) / (b - a) / real_of_num(SUC((j : Num))) == (M + (abs(a) + (b - a))) / ((b - a) * real_of_num(SUC(j)))
       #|  prob (p:A prob_space) (UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_downcrossings (X:num->A->real) a b n x) >= &(SUC j)}\n       | n IN (:num)})
-      #|  j:num
-      #|  (M + abs(a:real) + (b - a)) / (b - a)
+      #|  (j : Num)
+      #|  ((M : Real) + (abs((a : Real)) + ((b : Real) - a))) / (b - a)
       #|  INTERS {UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_downcrossings (X:num->A->real) a b n x) >= &(SUC k)}\n     | n IN (:num)} | k IN (:num)}
-      #|  simple_backward_martingale (p:A prob_space) FF X
-      #|  forall m:num. simple_rv (p:A prob_space) ((X:num->A->real) m)
-      #|  forall(p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) a b M.\n    simple_backward_martingale p FF X /\\ a < b /\\\n    (forall m x. x IN prob_carrier p ==> abs(X m x) <= M)\n    ==> almost_surely p\n          {x | ?B:num. forall n. num_downcrossings X a b n x <= B}
-      #|  L:real
-      #|  \\n:num. --(f n:real)
+      #|  simple_backward_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 M : Real, simple_backward_martingale(p, FF, X) && a < b && (\226\136\128 m : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(X(m, x)) <= M) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings(X, a, b, n, x) <= B})
+      #|  (L : Real)
+      #|  (n : Num) => -(f : (Num) -> Real)(n)
       #|  sequentially
-      #|  --L:real
-      #|  L:real
-      #|  --a:real
-      #|  --b:real
-      #|  b:real
-      #|  a:real
-      #|  M:real
-      #|  \\n:num. --(f n:real)
-      #|  forall f M. (forall n. abs(f n) <= M) /\\\n         (forall a b. rational a /\\ rational b /\\ a < b\n                ==> ?B. forall n. downcrossing_count f a b n <= B)\n         ==> ?L. (f ---> L) sequentially
-      #|  n:num
-      #|  n:num
-      #|  B:num
-      #|  B:num
-      #|  NUMPAIR i j
-      #|  b:real
-      #|  ?j:num. (g:num->real) j = b
-      #|  a:real
-      #|  ?i:num. (g:num->real) i = a
-      #|  b:real
-      #|  a:real
-      #|  M:real
-      #|  \\n:num. (X:num->A->real) n x
-      #|  k:num
-      #|  {x:A | (g:num->real)(NUMFST (k:num)) < g(NUMSND k) ==>\n              (?B. forall n. num_downcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}
-      #|  k:num
-      #|  forall k. (g:num->real)(NUMFST k) < g(NUMSND k)\n          ==> ?B. forall n. num_downcrossings (X:num->A->real)\n                        (g(NUMFST k)) (g(NUMSND k)) n x <= B
-      #|  x:A
+      #|  -(L : Real)
+      #|  (L : Real)
+      #|  -(a : Real)
+      #|  -(b : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (M : Real)
+      #|  (n : Num) => -(f : (Num) -> Real)(n)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 M : Real, (\226\136\128 n : Num, abs(f(n)) <= M) && (\226\136\128 a : Real, \226\136\128 b : Real, rational(a) && rational(b) && a < b \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, downcrossing_count(f, a, b, n) <= B)) \226\134\146 (\226\136\131 L : Real, op_minus_minus_minus_gt(f, L, sequentially))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (B : Num)
+      #|  (B : Num)
+      #|  NUMPAIR((i : Num), (j : Num))
+      #|  (b : Real)
+      #|  \226\136\131 j : Num, (g : (Num) -> Real)(j) == (b : Real)
+      #|  (a : Real)
+      #|  \226\136\131 i : Num, (g : (Num) -> Real)(i) == (a : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (M : Real)
+      #|  (n : Num) => (X : (Num, A) -> Real)(n, (x : A))
+      #|  (k : Num)
+      #|  {(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)}
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, (g : (Num) -> Real)(NUMFST(k)) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, (x : A)) <= B)
+      #|  (x : A)
       #|  INTERS {{x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_downcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}\n             | k IN (:num)}
-      #|  {x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_downcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)} = (:A)
-      #|  M:real
-      #|  FF:num->(A->bool)->bool
-      #|  {x:A | ?B. forall n. num_downcrossings (X:num->A->real)\n                  ((g:num->real)(NUMFST k)) (g(NUMSND k)) n x <= B}
-      #|  (g:num->real)(NUMFST k) < g(NUMSND k)
-      #|  k:num
-      #|  forall k. almost_surely (p:A prob_space)\n       {x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_downcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}
-      #|  g:num->real
-      #|  forall(p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) M.\n    simple_backward_martingale p FF X /\\\n    (forall m x. x IN prob_carrier p ==> abs(X m x) <= M)\n    ==> almost_surely p\n          {x | ?L. ((\\n. X n x) ---> L) sequentially}
-      #|  N - k = 0 /\\ N - SUC k = 0
-      #|  SUC(N - SUC k) = N - k
-      #|  a:A->bool
-      #|  N - SUC k
-      #|  expectation p (\\x. (X:num->A->real)(N - k) x * indicator_fn a x) =\n         expectation p (\\x. X(N - SUC k) x * indicator_fn a x)
-      #|  N - k = SUC(N - SUC k)
-      #|  k < N:num
-      #|  a:A->bool
-      #|  k:num
-      #|  adapted (p:A prob_space) FF X
-      #|  decreasing_filtration (p:A prob_space) FF
-      #|  decreasing_filtration (p:A prob_space) FF
-      #|  forall p FF (X:num->A->real) N. backward_martingale p FF X\n    ==> submartingale p (\\k. FF(N - k)) (\\k. X(N - k))
-      #|  forall p:A prob_space. filtration p (\\n:num. prob_events p)
-      #|  decreasing_filtration (p:A prob_space) FF
-      #|  a:real
-      #|  n:num
-      #|  adapted (p:A prob_space) FF X
-      #|  {x:A | x IN prob_carrier p /\\ --((X:num->A->real) n x) <= v} =\n    {x | x IN prob_carrier p /\\ X n x >= --v}
-      #|  v:real
-      #|  n:num
-      #|  forall p:A prob_space FF (X:num->A->real).\n    backward_martingale p FF X\n    ==> adapted p (\\n:num. prob_events p) (\\n. \\x. --(X n x))
-      #|  forall p:A prob_space G. sub_sigma_algebra p G ==>\n    sigma_algebra G /\\\n    (forall a. a IN G ==> &0 <= prob p a) /\\\n    prob p (UNIONS G) = &1 /\\\n    prob p {} = &0 /\\\n    (forall A. (forall n. A n IN G) /\\ (forall i j. ~(i = j) ==> DISJOINT (A i) (A j))\n         ==> ((\\n. prob p (A n)) real_sums\n              prob p (UNIONS {A n | n IN (:num)})) (from 0))
-      #|  restrict_prob_space (p:A prob_space) (G:(A->bool)->bool) =\n   prob_space(G:(A->bool)->bool, prob p)
-      #|  (G:(A->bool)->bool, prob (p:A prob_space))
-      #|  forall p:A prob_space G. sub_sigma_algebra p G ==>\n    prob_space_operations (restrict_prob_space p G) = (G, prob p)
-      #|  forall p:A prob_space G. sub_sigma_algebra p G ==>\n    prob_events (restrict_prob_space p G) = G
-      #|  forall p:A prob_space G. sub_sigma_algebra p G ==>\n    prob (restrict_prob_space p G) = prob p
-      #|  forall p:A prob_space G. sub_sigma_algebra p G ==>\n    prob_carrier (restrict_prob_space p G) = prob_carrier p
-      #|  forall p:A prob_space G (g:A->real). sub_sigma_algebra p G ==>\n    simple_expectation (restrict_prob_space p G) g = simple_expectation p g
-      #|  forall s:A->bool G H. s IN G /\\ G SUBSET H ==> s IN H
-      #|  forall p:A prob_space G. sub_sigma_algebra p G ==>\n    G SUBSET prob_events p
-      #|  {(g:A->real) x | x IN prob_carrier p} =\n                 {g x | x IN prob_carrier (restrict_prob_space (p:A prob_space) G)}
-      #|  a:real
-      #|  G:(A->bool)->bool
-      #|  (G:(A->bool)->bool) SUBSET prob_events p
-      #|  prob_events (restrict_prob_space (p:A prob_space) G) = G
-      #|  prob_carrier (restrict_prob_space (p:A prob_space) G) =\n                prob_carrier p
-      #|  forall p:A prob_space G (g:A->real).\n    sub_sigma_algebra p G /\\ simple_rv (restrict_prob_space p G) g\n    ==> simple_rv p g
-      #|  a:real
-      #|  G:(A->bool)->bool
-      #|  (G:(A->bool)->bool) SUBSET prob_events p
-      #|  prob_events (restrict_prob_space (p:A prob_space) G) = G
-      #|  prob_carrier (restrict_prob_space (p:A prob_space) G) =\n                prob_carrier p
-      #|  forall p:A prob_space G (f:A->real).\n    sub_sigma_algebra p G /\\ random_variable (restrict_prob_space p G) f\n    ==> random_variable p f
-      #|  forall p:A prob_space G f n x. sub_sigma_algebra p G ==>\n    nonneg_simple_fn_approx (restrict_prob_space p G) f n x =\n    nonneg_simple_fn_approx p f n x
-      #|  M:real
-      #|  nonneg_simple_fn_approx p (f:A->real) n =\n       nonneg_simple_fn_approx (restrict_prob_space p G) f n
-      #|  n:num
+      #|  {(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)} == UNIV
+      #|  (M : Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  {(x : A) | \226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings((X : (Num, A) -> Real), (g : (Num) -> Real)(NUMFST((k : Num))), g(NUMSND(k)), n, x) <= B}
+      #|  (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k))
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, almost_surely((p : Prob_space[A]), {(x : A) | (g : (Num) -> Real)(NUMFST(k)) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)})
+      #|  (g : (Num) -> Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 M : Real, simple_backward_martingale(p, FF, X) && (\226\136\128 m : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(X(m, x)) <= M) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => X(n, x), L, sequentially)})
+      #|  (N : Num) - (k : Num) == 0 && N - SUC(k) == 0
+      #|  SUC((N : Num) - SUC((k : Num))) == N - k
+      #|  (a : (A) -> Bool)
+      #|  (N : Num) - SUC((k : Num))
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((N : Num) - (k : Num), x) * indicator_fn((a : (A) -> Bool), x)) == expectation(p, (x : A) => X(N - SUC(k), x) * indicator_fn(a, x))
+      #|  (N : Num) - (k : Num) == SUC(N - SUC(k))
+      #|  (k : Num) < (N : Num)
+      #|  (a : (A) -> Bool)
+      #|  (k : Num)
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  decreasing_filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  decreasing_filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 N : Num, backward_martingale(p, FF, X) \226\134\146 submartingale(p, (k : Num) => FF(N - k), (k : Num) => X(N - k))
+      #|  \226\136\128 p : Prob_space[A], filtration(p, (n : Num) => prob_events(p))
+      #|  decreasing_filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  (a : Real)
+      #|  (n : Num)
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && -(X : (Num, A) -> Real)((n : Num), x) <= (v : Real)} == {(x : A) | IN(x, prob_carrier(p)) && X(n, x) >= -v}
+      #|  (v : Real)
+      #|  (n : Num)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, backward_martingale(p, FF, X) \226\134\146 adapted(p, (n : Num) => prob_events(p), (n : Num) => (x : A) => -X(n, x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, sub_sigma_algebra(p, G) \226\134\146 sigma_algebra(G) && (\226\136\128 a : (A) -> Bool, IN(a, G) \226\134\146 real_of_num(0) <= prob(p, a)) && prob(p, UNIONS(G)) == real_of_num(1) && prob(p, {}) == real_of_num(0) && (\226\136\128 A : (Num, A) -> Bool, (\226\136\128 n : Num, IN(A(n), G)) && (\226\136\128 i : Num, \226\136\128 j : Num, !(i == j) \226\134\146 DISJOINT(A(i), A(j))) \226\134\146 real_sums((n : Num) => prob(p, A(n)), prob(p, UNIONS({A((n : Num)) | IN(n, UNIV)})), from(0)))
+      #|  (restrict_prob_space : (Prob_space[A], ((A) -> Bool) -> Bool) -> Prob_space[A])((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool)) == prob_space((G, prob(p)))
+      #|  ((G : ((A) -> Bool) -> Bool), prob((p : Prob_space[A])))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, sub_sigma_algebra(p, G) \226\134\146 prob_space_operations(restrict_prob_space(p, G)) == (G, prob(p))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, sub_sigma_algebra(p, G) \226\134\146 prob_events(restrict_prob_space(p, G)) == G
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, sub_sigma_algebra(p, G) \226\134\146 prob(restrict_prob_space(p, G)) == prob(p)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, sub_sigma_algebra(p, G) \226\134\146 prob_carrier(restrict_prob_space(p, G)) == prob_carrier(p)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 g : (A) -> Real, sub_sigma_algebra(p, G) \226\134\146 simple_expectation(restrict_prob_space(p, G), g) == simple_expectation(p, g)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 H : ((A) -> Bool) -> Bool, IN(s, G) && SUBSET(G, H) \226\134\146 IN(s, H)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, sub_sigma_algebra(p, G) \226\134\146 SUBSET(G, prob_events(p))
+      #|  {(g : (A) -> Real)((x : A)) | IN(x, prob_carrier((p : Prob_space[A])))} == {g((x : A)) | IN(x, prob_carrier(restrict_prob_space(p, (G : ((A) -> Bool) -> Bool))))}
+      #|  (a : Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  SUBSET((G : ((A) -> Bool) -> Bool), prob_events((p : Prob_space[A])))
+      #|  prob_events(restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool))) == G
+      #|  prob_carrier(restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool))) == prob_carrier(p)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 g : (A) -> Real, sub_sigma_algebra(p, G) && simple_rv(restrict_prob_space(p, G), g) \226\134\146 simple_rv(p, g)
+      #|  (a : Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  SUBSET((G : ((A) -> Bool) -> Bool), prob_events((p : Prob_space[A])))
+      #|  prob_events(restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool))) == G
+      #|  prob_carrier(restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool))) == prob_carrier(p)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, sub_sigma_algebra(p, G) && random_variable(restrict_prob_space(p, G), f) \226\134\146 random_variable(p, f)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, \226\136\128 n : Num, \226\136\128 x : A, sub_sigma_algebra(p, G) \226\134\146 nonneg_simple_fn_approx(restrict_prob_space(p, G), f, n, x) == nonneg_simple_fn_approx(p, f, n, x)
+      #|  (M : Real)
+      #|  nonneg_simple_fn_approx((p : Prob_space[A]), (f : (A) -> Real), (n : Num)) == nonneg_simple_fn_approx(restrict_prob_space(p, (G : ((A) -> Bool) -> Bool)), f, n)
+      #|  (n : Num)
       #|  0
-      #|  M:real
-      #|  n <= SUC n
-      #|  G:(A->bool)->bool
-      #|  random_variable p (f:A->real)
-      #|  \\n. simple_expectation p\n            (nonneg_simple_fn_approx p (f:A->real) n)
+      #|  (M : Real)
+      #|  (n : Num) <= SUC(n)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  random_variable((p : Prob_space[A]), (f : (A) -> Real))
+      #|  (n : Num) => simple_expectation((p : Prob_space[A]), nonneg_simple_fn_approx(p, (f : (A) -> Real), n))
       #|  sequentially
-      #|  M:real
-      #|  G:(A->bool)->bool
-      #|  h:A->real
-      #|  a <= b /\\ b <= a ==> a = b
-      #|  forall p:A prob_space G (f:A->real) M.\n    sub_sigma_algebra p G /\\\n    random_variable (restrict_prob_space p G) f /\\\n    (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (forall x. x IN prob_carrier p ==> f x <= M) /\\\n    &0 <= M\n    ==> nn_expectation (restrict_prob_space p G) f = nn_expectation p f
-      #|  (h:A->real) y <= min (abs((f:A->real) y)) (max Bg (&0))
-      #|  y:A
-      #|  h:A->real
-      #|  restrict_prob_space (p:A prob_space) G
-      #|  y:A
-      #|  max Bg (&0)
-      #|  (g:A->real) y <= Bg
-      #|  (g:A->real) y <= abs((f:A->real) y)
-      #|  y:A
-      #|  &0 <= max x (&0)
-      #|  max Bg (&0)
-      #|  nn_expectation (restrict_prob_space (p:A prob_space) G)\n       (\\x:A. min (abs ((f:A->real) x)) (max Bg (&0))) =\n      nn_expectation p (\\x. min (abs (f x)) (max Bg (&0)))
-      #|  nn_expectation (restrict_prob_space (p:A prob_space) G)\n    (\\x:A. min (abs ((f:A->real) x)) (max (Bg:real) (&0)))
-      #|  ?Bg. forall x:A. x IN prob_carrier p ==> (g:A->real) x <= Bg
-      #|  g:A->real
-      #|  B:real
-      #|  B:real
-      #|  G:(A->bool)->bool
-      #|  forall p:A prob_space G (f:A->real).\n    sub_sigma_algebra p G /\\\n    integrable (restrict_prob_space p G) f\n    ==> integrable p f
-      #|  y:A
-      #|  &0 <= (f:A->real) y
-      #|  y:A
-      #|  restrict_prob_space (p:A prob_space) G
-      #|  y:A
-      #|  &0 <= (f:A->real) y
-      #|  y:A
-      #|  &0 <= max x (&0)
-      #|  max K (&0)
-      #|  nn_expectation (p:A prob_space) (\\x:A. min ((f:A->real) x) (max K (&0))) =\n       nn_expectation (restrict_prob_space p G) (\\x. min (f x) (max K (&0)))
-      #|  y:A
-      #|  max K (&0)
-      #|  (h:A->real) y <= K
-      #|  (h:A->real) y <= (f:A->real) y
-      #|  y:A
-      #|  nn_expectation (p:A prob_space)\n     (\\x:A. min ((f:A->real) x) (max K (&0)))
-      #|  ?K. forall x:A. x IN prob_carrier p ==> (h:A->real) x <= K
-      #|  h:A->real
-      #|  y:A
-      #|  &0 <= (f:A->real) y
-      #|  y:A
-      #|  y:A
-      #|  max K (&0)
-      #|  (h:A->real) y <= K
-      #|  (h:A->real) y <= (f:A->real) y
-      #|  y:A
-      #|  nn_expectation (p:A prob_space)\n     (\\x:A. min ((f:A->real) x) (max K (&0)))
-      #|  ?K. forall x:A. x IN prob_carrier p ==> (h:A->real) x <= K
-      #|  G:(A->bool)->bool
-      #|  simple_rv p (h:A->real)
-      #|  h:A->real
-      #|  restrict_prob_space (p:A prob_space) G
-      #|  a <= b /\\ b <= a ==> a = b
-      #|  G:(A->bool)->bool
-      #|  integrable p (f:A->real)
-      #|  forall p:A prob_space G (f:A->real).\n    sub_sigma_algebra p G /\\\n    random_variable (restrict_prob_space p G) f /\\\n    (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n    integrable (restrict_prob_space p G) f\n    ==> nn_expectation (restrict_prob_space p G) f = nn_expectation p f
-      #|  nn_expectation (restrict_prob_space (p:A prob_space) G)\n       (\\x:A. max (--((f:A->real) x)) (&0)) =\n     nn_expectation p (\\x. max (--f x) (&0))
-      #|  nn_expectation (restrict_prob_space (p:A prob_space) G)\n       (\\x:A. max ((f:A->real) x) (&0)) =\n     nn_expectation p (\\x. max (f x) (&0))
-      #|  random_variable (restrict_prob_space (p:A prob_space) G) (f:A->real)
-      #|  forall p:A prob_space G (f:A->real).\n    sub_sigma_algebra p G /\\\n    integrable (restrict_prob_space p G) f\n    ==> expectation (restrict_prob_space p G) f = expectation p f
-      #|  gen_cond_exp (p:A prob_space) (G:(A->bool)->bool) (X:A->real) =\n   @f. measurable_wrt p G f /\\ integrable p f /\\\n       (forall A. A IN G ==>\n         expectation p (\\x. f x * indicator_fn A x) =\n         expectation p (\\x. X x * indicator_fn A x))
-      #|  (G:(A->bool)->bool) SUBSET prob_events p
-      #|  (G:(A->bool)->bool) SUBSET prob_events p
-      #|  A:num->A->bool
-      #|  A:num->A->bool
-      #|  forall p:A prob_space G mu.\n    sub_sigma_algebra p G /\\ absolutely_continuous p mu\n    ==> absolutely_continuous (restrict_prob_space p G) mu
-      #|  restrict_prob_space (p:A prob_space) G
-      #|  expectation (p:A prob_space) (\\x. (f:A->real) x * indicator_fn A x) =\n      expectation (restrict_prob_space p G) (\\x. f x * indicator_fn A x)
-      #|  A:A->bool
-      #|  G:(A->bool)->bool
-      #|  v:real
-      #|  random_variable (restrict_prob_space (p:A prob_space) G) (f:A->real)
-      #|  f:A->real
-      #|  f:A->real
-      #|  \\A. expectation (p:A prob_space) (\\x. (X:A->real) x * indicator_fn A x)
-      #|  restrict_prob_space (p:A prob_space) G
-      #|  absolutely_continuous (restrict_prob_space (p:A prob_space) G)\n      (\\A. expectation p (\\x. (X:A->real) x * indicator_fn A x))
-      #|  forall p:A prob_space G (X:A->real).\n    sub_sigma_algebra p G /\\ integrable p X\n    ==> ?f. measurable_wrt p G f /\\ integrable p f /\\\n            (forall A. A IN G ==>\n              expectation p (\\x. f x * indicator_fn A x) =\n              expectation p (\\x. X x * indicator_fn A x))
-      #|  ?f:A->real. measurable_wrt p G f /\\ integrable p f /\\\n       (forall A. A IN G ==>\n         expectation p (\\x. f x * indicator_fn A x) =\n         expectation p (\\x. (X:A->real) x * indicator_fn A x))
-      #|  forall p:A prob_space G (X:A->real) (A:A->bool).\n    sub_sigma_algebra p G /\\ integrable p X /\\ A IN G\n    ==> expectation p (\\x. gen_cond_exp p G X x * indicator_fn A x) =\n        expectation p (\\x. X x * indicator_fn A x)
-      #|  ?f:A->real. measurable_wrt p G f /\\ integrable p f /\\\n       (forall A. A IN G ==>\n         expectation p (\\x. f x * indicator_fn A x) =\n         expectation p (\\x. (X:A->real) x * indicator_fn A x))
-      #|  forall p:A prob_space G (X:A->real).\n    sub_sigma_algebra p G /\\ integrable p X\n    ==> measurable_wrt p G (gen_cond_exp p G X)
-      #|  ?f:A->real. measurable_wrt p G f /\\ integrable p f /\\\n       (forall A. A IN G ==>\n         expectation p (\\x. f x * indicator_fn A x) =\n         expectation p (\\x. (X:A->real) x * indicator_fn A x))
-      #|  forall p:A prob_space G (X:A->real).\n    sub_sigma_algebra p G /\\ integrable p X\n    ==> integrable p (gen_cond_exp p G X)
-      #|  x:A
-      #|  expectation (p:A prob_space) (X:A->real) =\n     expectation p (\\x. X x * indicator_fn (prob_carrier p) x)
-      #|  x:A
-      #|  expectation (p:A prob_space) (gen_cond_exp p G X) =\n     expectation p (\\x. gen_cond_exp p G X x *\n       indicator_fn (prob_carrier p) x)
-      #|  UNIONS (G:(A->bool)->bool) = prob_carrier (p:A prob_space)
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  prob_carrier (p:A prob_space) IN G
-      #|  forall p:A prob_space G (X:A->real).\n    sub_sigma_algebra p G /\\ integrable p X\n    ==> expectation p (gen_cond_exp p G X) = expectation p X
-      #|  filtration (p:A prob_space) FF
-      #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
-      #|  filtration (p:A prob_space) FF
-      #|  filtration (p:A prob_space) FF
-      #|  expectation p (\\x:A. gen_cond_exp p (FF (SUC n)) (X:A->real) x *\n        indicator_fn a x) =\n      expectation p (\\x. X x * indicator_fn a x)
-      #|  filtration (p:A prob_space) FF
-      #|  filtration (p:A prob_space) FF
-      #|  forall p:A prob_space FF (X:A->real).\n    filtration p FF /\\ integrable p X\n    ==> martingale p FF (\\n. gen_cond_exp p (FF n) X)
-      #|  v - inv(&n + &1)
-      #|  measurable_wrt (p:A prob_space) G X
-      #|  n:num
-      #|  s:A->bool
-      #|  prob_carrier (p:A prob_space)
-      #|  v:real
-      #|  X:A->real
-      #|  forall p:A prob_space G (X:A->real) v.\n     sub_sigma_algebra p G /\\ measurable_wrt p G X\n     ==> {x | x IN prob_carrier p /\\ X x < v} IN G
-      #|  p:A prob_space
-      #|  forall x v:real. x = v <=> x <= v /\\ ~(x < v)
-      #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x = v} =\n     {x | x IN prob_carrier p /\\ X x <= v} DIFF\n     {x | x IN prob_carrier p /\\ X x < v}
-      #|  forall p:A prob_space G (X:A->real) v.\n     sub_sigma_algebra p G /\\ measurable_wrt p G X\n     ==> {x | x IN prob_carrier p /\\ X x = v} IN G
-      #|  w:A
-      #|  w:A
-      #|  sup {abs((f:A->real) x) | x IN prob_carrier (p:A prob_space)}
-      #|  {abs((f:A->real) x) | x IN prob_carrier (p:A prob_space)}
-      #|  z:A
-      #|  abs((f:A->real) z)
-      #|  ~({abs((f:A->real) x) | x IN prob_carrier (p:A prob_space)} = {})
-      #|  {abs((f:A->real) x) | x IN prob_carrier (p:A prob_space)} =\n    IMAGE abs {f x | x IN prob_carrier p}
-      #|  FINITE {abs((f:A->real) x) | x IN prob_carrier (p:A prob_space)}
-      #|  z:A
-      #|  p:A prob_space
-      #|  forall p:A prob_space f. simple_rv p f ==>\n   ?M. forall x. x IN prob_carrier p ==> abs(f x) <= M
-      #|  ~(u = (X:A->real) x)
-      #|  (X:A->real) x = u
-      #|  u:real
-      #|  sum (IMAGE (X:A->real) (prob_carrier p))\n                  (\\u. if u = X x then X x else &0)
-      #|  x:A
-      #|  (X:A->real) x IN IMAGE X (prob_carrier p)
-      #|  FINITE (IMAGE (X:A->real) (prob_carrier p))
-      #|  forall p:A prob_space (X:A->real) x. simple_rv p X /\\ x IN prob_carrier p\n   ==> X x = sum (IMAGE X (prob_carrier p))\n                 (\\u. u * indicator_fn {z | z IN prob_carrier p /\\ X z = u} x)
-      #|  \\x:A. sum t (\\i. (f:B->A->real) i x)
-      #|  (f:B->A->real) a
-      #|  p:A prob_space
-      #|  t:B->bool
-      #|  a:B
-      #|  forall p:A prob_space (f:B->A->real) s.\n     FINITE s /\\ (forall i. i IN s ==> integrable p (f i))\n     ==> integrable p (\\x. sum s (\\i. f i x))
-      #|  \\x:A. sum t (\\i. (f:B->A->real) i x)
-      #|  (f:B->A->real) a
-      #|  p:A prob_space
-      #|  integrable p (\\x:A. sum t (\\i. (f:B->A->real) i x))
-      #|  forall i. i IN (t:B->bool) ==> integrable p ((f:B->A->real) i)
-      #|  integrable p ((f:B->A->real) a)
-      #|  t:B->bool
-      #|  a:B
-      #|  forall p:A prob_space (f:B->A->real) s.\n     FINITE s /\\ (forall i. i IN s ==> integrable p (f i))\n     ==> expectation p (\\x. sum s (\\i. f i x)) =\n         sum s (\\i. expectation p (f i))
-      #|  x:A
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  forall u zx iy ia:real. u * zx * iy * ia = (u * iy) * (zx * ia)
-      #|  forall p:A prob_space Y Z A' x.\n     simple_rv p Y /\\ x IN prob_carrier p\n     ==> (Y x * Z x) * indicator_fn A' x =\n         sum (IMAGE Y (prob_carrier p))\n           (\\u. u * Z x * indicator_fn\n                  ({z | z IN prob_carrier p /\\ Y z = u} INTER A') x)
-      #|  u:real
-      #|  u:real
-      #|  IMAGE (Y:A->real) (prob_carrier p)
-      #|  \\u:real. \\x:A. u * (Z x * indicator_fn\n        ({z | z IN prob_carrier p /\\ (Y:A->real) z = u} INTER A') x)
-      #|  p:A prob_space
-      #|  u:real
-      #|  x:A
-      #|  A':A->bool
-      #|  Z:A->real
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  x:A
-      #|  expectation p (\\x. ((Y:A->real) x * Z x) * indicator_fn (A':A->bool) x) =\n     expectation p (\\x. sum (IMAGE Y (prob_carrier p))\n        (\\u. u * (Z x * indicator_fn\n               ({z | z IN prob_carrier p /\\ Y z = u} INTER A') x)))
-      #|  forall u. {z:A | z IN prob_carrier p /\\ (Y:A->real) z = u} INTER A' IN prob_events p
-      #|  FINITE (IMAGE (Y:A->real) (prob_carrier p))
-      #|  forall p:A prob_space Y Z A'.\n     simple_rv p Y /\\ integrable p Z /\\\n     A' IN prob_events p /\\ integrable p (\\w. Y w * Z w)\n     ==> expectation p (\\x. (Y x * Z x) * indicator_fn A' x) =\n         sum (IMAGE Y (prob_carrier p))\n             (\\u. u * expectation p\n                    (\\x. Z x * indicator_fn\n                           ({z | z IN prob_carrier p /\\ Y z = u} INTER A') x))
-      #|  (w:A) IN prob_carrier p
-      #|  w:A
-      #|  {x:A | x IN prob_carrier p /\\ --f x <= v} =\n     prob_carrier p DIFF {x | x IN prob_carrier p /\\ f x < --v}
-      #|  v:real
-      #|  forall p:A prob_space G (f:A->real).\n     sub_sigma_algebra p G /\\ measurable_wrt p G f\n     ==> measurable_wrt p G (\\x. --f x)
-      #|  measurable_wrt (p:A prob_space) G f
-      #|  --c:real
-      #|  v:real
-      #|  (f:A->real) w
-      #|  w:A
-      #|  {x:A | x IN prob_carrier p /\\ --c * f x <= v} =\n      {x | x IN prob_carrier p /\\ f x <= v / --c}
-      #|  &0 < --c
-      #|  v:real
-      #|  forall x:A. c * (f:A->real) x = --(--c * f x)
-      #|  c < &0
-      #|  measurable_wrt (p:A prob_space) G f
-      #|  c:real
-      #|  v:real
-      #|  (f:A->real) w
-      #|  &0 < c
-      #|  w:A
-      #|  {x:A | x IN prob_carrier p /\\ c * f x <= v} =\n      {x | x IN prob_carrier p /\\ f x <= v / c}
-      #|  v:real
-      #|  c > &0
-      #|  c = &0
-      #|  forall p:A prob_space G (f:A->real) c.\n     sub_sigma_algebra p G /\\ measurable_wrt p G f\n     ==> measurable_wrt p G (\\x. c * f x)
-      #|  a + inv(&(SUC m0))
-      #|  m0:num
-      #|  n0:num
-      #|  n0 = SUC p
-      #|  p:num
-      #|  &p * inv(&(SUC m0)) <= a
-      #|  a < &n0 * inv(&(SUC m0))
-      #|  n0:num
-      #|  p:num
-      #|  ?p. n0 = SUC p
-      #|  nn:num
-      #|  nn:num
-      #|  inv(&(SUC m0))
-      #|  a /\\ (b ==> c) ==> (a <=> b) ==> c
-      #|  \\n. a < &n * inv(&(SUC m0))
-      #|  ?n0. a < &n0 * inv(&(SUC m0)) /\\\n          forall k. k < n0 ==> &k * inv(&(SUC m0)) <= a
-      #|  inv(&(SUC m0)) < b - a
-      #|  &0 < inv(&(SUC m0))
-      #|  m0:num
-      #|  ?m0. K = SUC m0
-      #|  K:num
-      #|  b - a:real
-      #|  &0 < b - a
-      #|  forall a b. &0 <= a /\\ a < b\n         ==> ?n m. a < &n * inv(&(SUC m)) /\\ &n * inv(&(SUC m)) < b
-      #|  (w:A) IN t
-      #|  w:A
-      #|  NUMPAIR n m
-      #|  {x:A | x IN prob_carrier p /\\\n      f x < --(&(NUMFST(NUMPAIR n m)) *\n              inv(&(SUC(NUMSND(NUMPAIR n m)))))} INTER\n      {x | x IN prob_carrier p /\\\n      g x > --(&(NUMFST(NUMPAIR n m)) *\n              inv(&(SUC(NUMSND(NUMPAIR n m))))) - c}
-      #|  m:num
-      #|  n:num
-      #|  --((f:A->real) w)
-      #|  --((g:A->real) w + c)
-      #|  NUMPAIR 0 0
-      #|  {x:A | x IN prob_carrier p /\\\n       f x < &(NUMFST(NUMPAIR 0 0)) *\n             inv(&(SUC(NUMSND(NUMPAIR 0 0))))} INTER\n       {x | x IN prob_carrier p /\\\n       g x > &(NUMFST(NUMPAIR 0 0)) *\n             inv(&(SUC(NUMSND(NUMPAIR 0 0)))) - c}
-      #|  NUMPAIR n m
-      #|  {x:A | x IN prob_carrier p /\\\n       f x < &(NUMFST(NUMPAIR n m)) * inv(&(SUC(NUMSND(NUMPAIR n m))))}\n       INTER\n       {x | x IN prob_carrier p /\\\n       g x > &(NUMFST(NUMPAIR n m)) *\n             inv(&(SUC(NUMSND(NUMPAIR n m)))) - c}
-      #|  m:num
-      #|  n:num
-      #|  (g:A->real) w + c
-      #|  (f:A->real) w
-      #|  &0 <= (f:A->real) w
-      #|  (g:A->real) w + c > &0
-      #|  w:A
-      #|  {x:A | x IN prob_carrier p /\\ f x - g x < c} = S_all
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  S_all:A->bool IN G
-      #|  S_all =\n     UNIONS (IMAGE (\\i.\n       {x:A | x IN prob_carrier p /\\\n              f x < &(NUMFST i) * inv(&(SUC(NUMSND i)))} INTER\n       {x | x IN prob_carrier p /\\\n            g x > &(NUMFST i) * inv(&(SUC(NUMSND i))) - c})\n     (:num))\n     UNION\n     UNIONS (IMAGE (\\i.\n       {x:A | x IN prob_carrier p /\\\n              f x < --(&(NUMFST i) * inv(&(SUC(NUMSND i))))} INTER\n       {x | x IN prob_carrier p /\\\n            g x > --(&(NUMFST i) * inv(&(SUC(NUMSND i)))) - c})\n     (:num))
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  measurable_wrt (p:A prob_space) G g
-      #|  (w:A) IN prob_carrier p
-      #|  w:A
-      #|  {x:A | x IN prob_carrier p /\\ g x > q - c} =\n       prob_carrier p DIFF {x | x IN prob_carrier p /\\ g x <= q - c}
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall q. {x:A | x IN prob_carrier p /\\ f x < q} INTER\n         {x | x IN prob_carrier p /\\ g x > q - c} IN G
-      #|  forall p:A prob_space G (f:A->real) (g:A->real) c.\n     sub_sigma_algebra p G /\\ measurable_wrt p G f /\\ measurable_wrt p G g\n     ==> {x | x IN prob_carrier p /\\ f x - g x < c} IN G
-      #|  (w:A) IN prob_carrier p
-      #|  w:A
-      #|  {x:A | x IN prob_carrier p /\\ f x - g x <= v} =\n     prob_carrier p DIFF {x | x IN prob_carrier p /\\ g x - f x < --v}
-      #|  v:real
-      #|  forall p:A prob_space G (f:A->real) (g:A->real).\n     sub_sigma_algebra p G /\\ measurable_wrt p G f /\\ measurable_wrt p G g\n     ==> measurable_wrt p G (\\x. f x - g x)
-      #|  (\\x:A. (f:A->real) x + g x) = (\\x. f x - --(g x))
-      #|  forall p:A prob_space G (f:A->real) (g:A->real).\n     sub_sigma_algebra p G /\\ measurable_wrt p G f /\\ measurable_wrt p G g\n     ==> measurable_wrt p G (\\x. f x + g x)
-      #|  ~(j = 0)
-      #|  SUC (j - 1) = j
-      #|  j - 1
-      #|  (A_k:num->A->bool) (j - 1)
-      #|  j:num
-      #|  &0 < (f:A->real) w
-      #|  w:A
-      #|  (A_k:num->A->bool) k
-      #|  (w:A) IN (A_k:num->A->bool) k
-      #|  w:A
-      #|  indicator_fn ((A_k:num->A->bool) k):A->real
-      #|  inv(&(SUC k))
-      #|  p:A prob_space
-      #|  indicator_fn ((A_k:num->A->bool) k):A->real
-      #|  inv(&(SUC k))
-      #|  p:A prob_space
-      #|  inv(&(SUC k)) * prob (p:A prob_space) ((A_k:num->A->bool) k) =\n       expectation p (\\x:A. inv(&(SUC k)) * indicator_fn (A_k k) x)
-      #|  inv(&(SUC k)) * prob (p:A prob_space) ((A_k:num->A->bool) k) <=\n      expectation p (\\x. (f:A->real) x * indicator_fn (A_k k) x)
-      #|  prob (p:A prob_space) ((A_k:num->A->bool) k) <= &0 <=>\n      inv(&(SUC k)) * prob p (A_k k) <= inv(&(SUC k)) * &0
-      #|  &0 < inv(&(SUC k))
-      #|  &0 <= x /\\ x <= &0 ==> x = &0
-      #|  (A_k:num->A->bool) k IN prob_events p
-      #|  (w:A) IN prob_carrier p
-      #|  w:A
-      #|  {x:A | x IN prob_carrier p /\\ f x >= inv(&(SUC k))} =\n       prob_carrier p DIFF {x | x IN prob_carrier p /\\ f x < inv(&(SUC k))}
-      #|  (A_k:num->A->bool) k IN G
-      #|  k:num
-      #|  UNIONS {(A_k:num->A->bool) n | n IN (:num)}
-      #|  A_k = \\k:num. {x:A | x IN prob_carrier p /\\\n                           f x >= inv(&(SUC k))}
-      #|  {x:A | x IN prob_carrier p /\\ ~(x IN {x | f x = &0})} =\n     {x | x IN prob_carrier p /\\ ~(f x = &0)}
-      #|  forall p:A prob_space G (f:A->real).\n    sub_sigma_algebra p G /\\ integrable p f /\\\n    measurable_wrt p G f /\\\n    (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (forall A. A IN G ==> expectation p (\\x. f x * indicator_fn A x) = &0)\n    ==> almost_surely p {x | f x = &0}
-      #|  x:A
-      #|  x:A
-      #|  expectation (p:A prob_space) f
-      #|  A:A->bool
-      #|  f:A->real
-      #|  prob_events (p:A prob_space)
-      #|  p:A prob_space
-      #|  forall p:A prob_space f.\n     integrable p f /\\\n     (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n     expectation p f = &0\n     ==> almost_surely p {x | f x = &0}
-      #|  ~(j = 0)
-      #|  SUC (j - 1) = j
-      #|  j - 1
-      #|  (B_n:num->A->bool) (j - 1)
-      #|  j:num
-      #|  &0 < (g:A->real) w - f w
-      #|  ~(j = 0)
-      #|  SUC (j - 1) = j
-      #|  j - 1
-      #|  (A_n:num->A->bool) (j - 1)
-      #|  j:num
-      #|  &0 < (f:A->real) w - g w
-      #|  (f:A->real) w > g w \\/ (g:A->real) w > f w
-      #|  w:A
-      #|  (B_n:num->A->bool) k
-      #|  \\x:A. (f:A->real) x * indicator_fn ((B_n:num->A->bool) k) x
-      #|  \\x:A. (g:A->real) x * indicator_fn ((B_n:num->A->bool) k) x
-      #|  p:A prob_space
-      #|  (\\x:A. ((g:A->real) x - f x) *\n              indicator_fn ((B_n:num->A->bool) k) x) =\n       (\\x. g x * indicator_fn (B_n k) x -\n            f x * indicator_fn (B_n k) x)
-      #|  (w:A) IN (B_n:num->A->bool) k
-      #|  w:A
-      #|  (\\x:A. ((g:A->real) x - f x) *\n                indicator_fn ((B_n:num->A->bool) k) x) =\n         (\\x. g x * indicator_fn (B_n k) x +\n              --(f x * indicator_fn (B_n k) x))
-      #|  indicator_fn ((B_n:num->A->bool) k):A->real
-      #|  inv(&(SUC k))
-      #|  p:A prob_space
-      #|  indicator_fn ((B_n:num->A->bool) k):A->real
-      #|  inv(&(SUC k))
-      #|  p:A prob_space
-      #|  inv(&(SUC k)) * prob (p:A prob_space) ((B_n:num->A->bool) k) =\n        expectation p (\\x:A. inv(&(SUC k)) * indicator_fn (B_n k) x)
-      #|  inv(&(SUC k)) * prob (p:A prob_space) ((B_n:num->A->bool) k) <=\n       expectation p (\\x. ((g:A->real) x - f x) *\n                          indicator_fn (B_n k) x)
-      #|  prob (p:A prob_space) ((B_n:num->A->bool) k) <= &0 <=>\n       inv(&(SUC k)) * prob p (B_n k) <= inv(&(SUC k)) * &0
-      #|  &0 <= x /\\ x <= &0 ==> x = &0
-      #|  (B_n:num->A->bool) k IN prob_events p
-      #|  (w:A) IN prob_carrier p
-      #|  w:A
-      #|  {x:A | x IN prob_carrier p /\\ g x - f x >= inv(&(SUC k))} =\n        prob_carrier p DIFF\n          {x | x IN prob_carrier p /\\ g x - f x < inv(&(SUC k))}
-      #|  (B_n:num->A->bool) k IN G
-      #|  (A_n:num->A->bool) k
-      #|  \\x:A. (g:A->real) x * indicator_fn ((A_n:num->A->bool) k) x
-      #|  \\x:A. (f:A->real) x * indicator_fn ((A_n:num->A->bool) k) x
-      #|  p:A prob_space
-      #|  (\\x:A. ((f:A->real) x - g x) *\n              indicator_fn ((A_n:num->A->bool) k) x) =\n       (\\x. f x * indicator_fn (A_n k) x -\n            g x * indicator_fn (A_n k) x)
-      #|  (w:A) IN (A_n:num->A->bool) k
-      #|  w:A
-      #|  (\\x:A. ((f:A->real) x - g x) *\n                indicator_fn ((A_n:num->A->bool) k) x) =\n         (\\x. f x * indicator_fn (A_n k) x +\n              --(g x * indicator_fn (A_n k) x))
-      #|  indicator_fn ((A_n:num->A->bool) k):A->real
-      #|  inv(&(SUC k))
-      #|  p:A prob_space
-      #|  indicator_fn ((A_n:num->A->bool) k):A->real
-      #|  inv(&(SUC k))
-      #|  p:A prob_space
-      #|  inv(&(SUC k)) * prob (p:A prob_space) ((A_n:num->A->bool) k) =\n        expectation p (\\x:A. inv(&(SUC k)) * indicator_fn (A_n k) x)
-      #|  inv(&(SUC k)) * prob (p:A prob_space) ((A_n:num->A->bool) k) <=\n       expectation p (\\x. ((f:A->real) x - g x) *\n                          indicator_fn (A_n k) x)
-      #|  prob (p:A prob_space) ((A_n:num->A->bool) k) <= &0 <=>\n       inv(&(SUC k)) * prob p (A_n k) <= inv(&(SUC k)) * &0
-      #|  &0 <= x /\\ x <= &0 ==> x = &0
-      #|  (A_n:num->A->bool) k IN prob_events p
-      #|  (w:A) IN prob_carrier p
-      #|  w:A
-      #|  {x:A | x IN prob_carrier p /\\ f x - g x >= inv(&(SUC k))} =\n        prob_carrier p DIFF\n          {x | x IN prob_carrier p /\\ f x - g x < inv(&(SUC k))}
-      #|  (A_n:num->A->bool) k IN G
-      #|  (&0 < inv(&(SUC k)))
-      #|  k:num
-      #|  UNIONS {(A_n:num->A->bool) n | n IN (:num)} UNION\n              UNIONS {(B_n:num->A->bool) n | n IN (:num)}
-      #|  B_n = \\n:num. {x:A | x IN prob_carrier p /\\\n                           (g:A->real) x - f x >= inv(&(SUC n))}
-      #|  A_n = \\n:num. {x:A | x IN prob_carrier p /\\\n                           (f:A->real) x - g x >= inv(&(SUC n))}
-      #|  {x:A | x IN prob_carrier p /\\ ~(x IN {x | (f:A->real) x = g x})} =\n     {x | x IN prob_carrier p /\\ ~(f x = g x)}
-      #|  forall p:A prob_space G (f:A->real) (g:A->real).\n    sub_sigma_algebra p G /\\\n    measurable_wrt p G f /\\ integrable p f /\\\n    measurable_wrt p G g /\\ integrable p g /\\\n    (forall A. A IN G ==>\n      expectation p (\\x. f x * indicator_fn A x) =\n      expectation p (\\x. g x * indicator_fn A x))\n    ==> almost_surely p {x | f x = g x}
-      #|  prob_events(p:A prob_space)
-      #|  forall p:A prob_space f g mu.\n    integrable p f /\\ integrable p g /\\\n    (forall A. A IN prob_events p\n         ==> expectation p (\\x. f x * indicator_fn A x) = mu A) /\\\n    (forall A. A IN prob_events p\n         ==> expectation p (\\x. g x * indicator_fn A x) = mu A)\n    ==> almost_surely p {x | f x = g x}
-      #|  inv (&j) < --(gen_cond_exp p G (X:A->real) w)
-      #|  ~(j = 0)
-      #|  SUC (j - 1) = j
-      #|  j - 1
-      #|  (A_k:num->A->bool) (j - 1)
-      #|  j:num
-      #|  &0 < --(gen_cond_exp p G (X:A->real) w)
-      #|  w:A
-      #|  --(expectation p (\\x:A. gen_cond_exp p G (X:A->real) x *\n                    indicator_fn ((A_k:num->A->bool) k) x))
-      #|  prob (p:A prob_space) ((A_k:num->A->bool) k) <= &0 <=>\n                  inv(&(SUC k)) * prob p (A_k k) <= inv(&(SUC k)) * &0
-      #|  (w:A) IN (A_k:num->A->bool) k
-      #|  w:A
-      #|  indicator_fn ((A_k:num->A->bool) k):A->real
-      #|  --inv(&(SUC k))
-      #|  p:A prob_space
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  indicator_fn ((A_k:num->A->bool) k):A->real
-      #|  --inv(&(SUC k))
-      #|  p:A prob_space
-      #|  --(inv(&(SUC k))) * prob (p:A prob_space) ((A_k:num->A->bool) k) =\n       expectation p (\\x:A. --inv(&(SUC k)) * indicator_fn (A_k k) x)
-      #|  expectation p (\\x:A. gen_cond_exp p G (X:A->real) x *\n                           indicator_fn ((A_k:num->A->bool) k) x) <=\n      --(inv(&(SUC k))) * prob p ((A_k:num->A->bool) k)
-      #|  w:A
-      #|  \\x:A. (X:A->real) x * indicator_fn ((A_k:num->A->bool) k) x
-      #|  p:A prob_space
-      #|  &0 <= expectation p (\\x:A. (X:A->real) x *\n                                  indicator_fn ((A_k:num->A->bool) k) x)
-      #|  expectation p (\\x:A. gen_cond_exp p G (X:A->real) x *\n                           indicator_fn ((A_k:num->A->bool) k) x) =\n      expectation p (\\x. X x * indicator_fn (A_k k) x)
-      #|  &0 < inv(&(SUC k))
-      #|  &0 <= x /\\ x <= &0 ==> x = &0
-      #|  (A_k:num->A->bool) k IN prob_events p
-      #|  --inv(&(SUC k))
-      #|  gen_cond_exp p G (X:A->real)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (A_k:num->A->bool) k =\n       {x:A | x IN prob_carrier p /\\\n              gen_cond_exp p G (X:A->real) x < --inv(&(SUC k))}
-      #|  (A_k:num->A->bool) k IN G
-      #|  k:num
-      #|  UNIONS {(A_k:num->A->bool) k | k IN (:num)}
-      #|  A_k = \\k:num. {x:A | x IN prob_carrier p /\\\n                           gen_cond_exp p G (X:A->real) x <\n                           --inv(&(SUC k))}
-      #|  (x:A) IN prob_carrier p
-      #|  {x:A | x IN prob_carrier p /\\\n            ~(x IN {x | &0 <= gen_cond_exp p G (X:A->real) x})} =\n     {x | x IN prob_carrier p /\\ gen_cond_exp p G X x < &0}
-      #|  forall p:A prob_space G (X:A->real).\n    sub_sigma_algebra p G /\\ integrable p X /\\\n    (forall x. x IN prob_carrier p ==> &0 <= X x)\n    ==> almost_surely p {x | &0 <= gen_cond_exp p G X x}
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  \\x:A. gen_cond_exp p G (X:A->real) x *\n       indicator_fn (A:A->bool) x
-      #|  c:real
-      #|  p:A prob_space
-      #|  expectation p (\\x:A. c * gen_cond_exp p G (X:A->real) x *\n        indicator_fn (A:A->bool) x) =\n      c * expectation p (\\x. gen_cond_exp p G X x * indicator_fn A x)
-      #|  \\x:A. (X:A->real) x * indicator_fn (A:A->bool) x
-      #|  c:real
-      #|  p:A prob_space
-      #|  expectation p (\\x:A. c * (X:A->real) x * indicator_fn (A:A->bool) x) =\n      c * expectation p (\\x. X x * indicator_fn A x)
-      #|  (A:A->bool) IN prob_events p
-      #|  (\\x:A. (c * gen_cond_exp p G (X:A->real) x) *\n        indicator_fn (A:A->bool) x) =\n      (\\x. c * (gen_cond_exp p G X x * indicator_fn A x))
-      #|  (\\x:A. (c * (X:A->real) x) * indicator_fn (A:A->bool) x) =\n      (\\x. c * (X x * indicator_fn A x))
-      #|  expectation p (\\x:A. gen_cond_exp p G\n        (\\w. c * (X:A->real) w) x * indicator_fn A x) =\n      expectation p (\\x. (c * X x) * indicator_fn A x)
-      #|  A:A->bool
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  gen_cond_exp p G (X:A->real)
-      #|  c:real
-      #|  p:A prob_space
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  c:real
-      #|  gen_cond_exp p G (X:A->real)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (\\w:A. c * (X:A->real) w)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (\\w:A. c * (X:A->real) w)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  G:(A->bool)->bool
-      #|  forall p:A prob_space G (X:A->real) c.\n    sub_sigma_algebra p G /\\ integrable p X\n    ==> almost_surely p\n      {x | gen_cond_exp p G (\\w. c * X w) x = c * gen_cond_exp p G X x}
-      #|  Y:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  integrable p (\\x:A. gen_cond_exp p G (Y:A->real) x *\n        indicator_fn (A:A->bool) x)
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  integrable p (\\x:A. gen_cond_exp p G (X:A->real) x *\n        indicator_fn (A:A->bool) x)
-      #|  integrable p (\\x:A. (Y:A->real) x *\n        indicator_fn (A:A->bool) x)
-      #|  integrable p (\\x:A. (X:A->real) x *\n        indicator_fn (A:A->bool) x)
-      #|  (\\x:A. (gen_cond_exp p G (X:A->real) x +\n        gen_cond_exp p G (Y:A->real) x) *\n        indicator_fn (A:A->bool) x) =\n      (\\x. gen_cond_exp p G X x * indicator_fn A x +\n           gen_cond_exp p G Y x * indicator_fn A x)
-      #|  (\\x:A. ((X:A->real) x + (Y:A->real) x) *\n        indicator_fn (A:A->bool) x) =\n      (\\x. X x * indicator_fn A x + Y x * indicator_fn A x)
-      #|  expectation p (\\x:A. gen_cond_exp p G\n        (\\w. (X:A->real) w + (Y:A->real) w) x *\n        indicator_fn (A:A->bool) x) =\n      expectation p (\\x. (X x + Y x) * indicator_fn A x)
-      #|  (A:A->bool) IN prob_events p
-      #|  A:A->bool
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  gen_cond_exp p G (Y:A->real)
-      #|  gen_cond_exp p G (X:A->real)
-      #|  p:A prob_space
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  gen_cond_exp p G (Y:A->real)
-      #|  gen_cond_exp p G (X:A->real)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (\\w:A. (X:A->real) w + (Y:A->real) w)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (\\w:A. (X:A->real) w + (Y:A->real) w)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  G:(A->bool)->bool
-      #|  forall p:A prob_space G (X:A->real) (Y:A->real).\n    sub_sigma_algebra p G /\\ integrable p X /\\ integrable p Y\n    ==> almost_surely p\n      {x | gen_cond_exp p G (\\w. X w + Y w) x =\n           gen_cond_exp p G X x + gen_cond_exp p G Y x}
-      #|  {x:A | x IN prob_carrier p /\\\n     ~(x IN {x | gen_cond_exp p G (\\w. -- &1 * (Y:A->real) w) x =\n                  -- &1 * gen_cond_exp p G Y x})} SUBSET n2
-      #|  ~(gen_cond_exp p G (\\w:A. (X:A->real) w + -- &1 * Y w) w =\n     gen_cond_exp p G X w - gen_cond_exp p G Y w)
-      #|  {x:A | x IN prob_carrier p /\\\n     ~(x IN {x | gen_cond_exp p G (\\w. (X:A->real) w + -- &1 * Y w) x =\n                  gen_cond_exp p G X x +\n                  gen_cond_exp p G (\\w. -- &1 * Y w) x})} SUBSET n1
-      #|  gen_cond_exp p G (\\w:A. -- &1 * (Y:A->real) w) w =\n     -- &1 * gen_cond_exp p G Y w
-      #|  w:A
-      #|  n1 UNION n2:A->bool
-      #|  n2:A->bool
-      #|  n1:A->bool
-      #|  (\\w:A. (-- &1) * (Y:A->real) w)
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  -- &1
-      #|  Y:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (\\w:A. (X:A->real) w - (Y:A->real) w) = (\\w. X w + (-- &1) * Y w)
-      #|  forall p:A prob_space G (X:A->real) (Y:A->real).\n    sub_sigma_algebra p G /\\ integrable p X /\\ integrable p Y\n    ==> almost_surely p\n      {x | gen_cond_exp p G (\\w. X w - Y w) x =\n           gen_cond_exp p G X x - gen_cond_exp p G Y x}
-      #|  inv (&j) < gen_cond_exp p G (X:A->real) w -\n                   gen_cond_exp p G (Y:A->real) w
-      #|  ~(j = 0)
-      #|  SUC (j - 1) = j
-      #|  j - 1
-      #|  (A_k:num->A->bool) (j - 1)
-      #|  j:num
-      #|  &0 < gen_cond_exp p G (X:A->real) w -\n           gen_cond_exp p G (Y:A->real) w
-      #|  w:A
-      #|  w:A
-      #|  a <= b ==> a - b <= &0
-      #|  integrable p (\\x:A. (Y:A->real) x *\n        indicator_fn ((A_k:num->A->bool) k) x)
-      #|  integrable p (\\x:A. (X:A->real) x *\n        indicator_fn ((A_k:num->A->bool) k) x)
-      #|  expectation p (\\x:A. gen_cond_exp p G (Y:A->real) x *\n        indicator_fn ((A_k:num->A->bool) k) x) =\n       expectation p (\\x. Y x * indicator_fn (A_k k) x)
-      #|  expectation p (\\x:A. gen_cond_exp p G (X:A->real) x *\n        indicator_fn ((A_k:num->A->bool) k) x) =\n       expectation p (\\x. X x * indicator_fn (A_k k) x)
-      #|  integrable p (\\x:A. gen_cond_exp p G (Y:A->real) x *\n        indicator_fn ((A_k:num->A->bool) k) x)
-      #|  integrable p (\\x:A. gen_cond_exp p G (X:A->real) x *\n        indicator_fn ((A_k:num->A->bool) k) x)
-      #|  (\\x:A. (gen_cond_exp p G (X:A->real) x -\n               gen_cond_exp p G (Y:A->real) x) *\n              indicator_fn ((A_k:num->A->bool) k) x) =\n       (\\x. gen_cond_exp p G X x * indicator_fn (A_k k) x -\n            gen_cond_exp p G Y x * indicator_fn (A_k k) x)
-      #|  (w:A) IN (A_k:num->A->bool) k
-      #|  w:A
-      #|  (\\x:A. gen_cond_exp p G (X:A->real) x -\n               gen_cond_exp p G (Y:A->real) x) =\n        (\\x. (\\x. gen_cond_exp p G X x) x -\n             (\\x. gen_cond_exp p G Y x) x)
-      #|  indicator_fn ((A_k:num->A->bool) k):A->real
-      #|  inv(&(SUC k))
-      #|  p:A prob_space
-      #|  indicator_fn ((A_k:num->A->bool) k):A->real
-      #|  inv(&(SUC k))
-      #|  p:A prob_space
-      #|  inv(&(SUC k)) * prob (p:A prob_space) ((A_k:num->A->bool) k) =\n       expectation p (\\x:A. inv(&(SUC k)) * indicator_fn (A_k k) x)
-      #|  expectation p (\\x:A.\n     (gen_cond_exp p G (X:A->real) x -\n      gen_cond_exp p G (Y:A->real) x) *\n     indicator_fn ((A_k:num->A->bool) k) x)
-      #|  prob (p:A prob_space) ((A_k:num->A->bool) k) <= &0 <=>\n      inv(&(SUC k)) * prob p (A_k k) <= inv(&(SUC k)) * &0
-      #|  &0 < inv(&(SUC k))
-      #|  &0 <= x /\\ x <= &0 ==> x = &0
-      #|  (A_k:num->A->bool) k IN prob_events p
-      #|  --inv(&(SUC k))
-      #|  gen_cond_exp p G (X:A->real)
-      #|  gen_cond_exp p G (Y:A->real)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (A_k:num->A->bool) k =\n       {x:A | x IN prob_carrier p /\\\n              gen_cond_exp p G (Y:A->real) x -\n              gen_cond_exp p G (X:A->real) x < --inv(&(SUC k))}
-      #|  (A_k:num->A->bool) k IN G
-      #|  k:num
-      #|  UNIONS {(A_k:num->A->bool) k | k IN (:num)}
-      #|  A_k = \\k:num. {x:A | x IN prob_carrier p /\\\n                           gen_cond_exp p G (Y:A->real) x -\n                           gen_cond_exp p G (X:A->real) x <\n                           --inv(&(SUC k))}
-      #|  (x:A) IN prob_carrier p
-      #|  {x:A | x IN prob_carrier p /\\\n      ~(x IN {x | gen_cond_exp p G (X:A->real) x <=\n                   gen_cond_exp p G (Y:A->real) x})} =\n     {x | x IN prob_carrier p /\\\n      gen_cond_exp p G Y x < gen_cond_exp p G X x}
-      #|  forall p:A prob_space G (X:A->real) (Y:A->real).\n    sub_sigma_algebra p G /\\ integrable p X /\\ integrable p Y /\\\n    (forall x. x IN prob_carrier p ==> X x <= Y x)\n    ==> almost_surely p {x | gen_cond_exp p G X x <= gen_cond_exp p G Y x}
+      #|  (M : Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (h : (A) -> Real)
+      #|  (a : Real) <= (b : Real) && b <= a \226\134\146 a == b
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, \226\136\128 M : Real, sub_sigma_algebra(p, G) && random_variable(restrict_prob_space(p, G), f) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= f(x)) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 f(x) <= M) && real_of_num(0) <= M \226\134\146 nn_expectation(restrict_prob_space(p, G), f) == nn_expectation(p, f)
+      #|  (h : (A) -> Real)((y : A)) <= min(abs((f : (A) -> Real)(y)), max((Bg : Real), real_of_num(0)))
+      #|  (y : A)
+      #|  (h : (A) -> Real)
+      #|  restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool))
+      #|  (y : A)
+      #|  max((Bg : Real), real_of_num(0))
+      #|  (g : (A) -> Real)((y : A)) <= (Bg : Real)
+      #|  (g : (A) -> Real)((y : A)) <= abs((f : (A) -> Real)(y))
+      #|  (y : A)
+      #|  real_of_num(0) <= max((x : Real), real_of_num(0))
+      #|  max((Bg : Real), real_of_num(0))
+      #|  nn_expectation(restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool)), (x : A) => min(abs((f : (A) -> Real)(x)), max((Bg : Real), real_of_num(0)))) == nn_expectation(p, (x : A) => min(abs(f(x)), max(Bg, real_of_num(0))))
+      #|  nn_expectation(restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool)), (x : A) => min(abs((f : (A) -> Real)(x)), max((Bg : Real), real_of_num(0))))
+      #|  \226\136\131 Bg : Real, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 (g : (A) -> Real)(x) <= Bg
+      #|  (g : (A) -> Real)
+      #|  (B : Real)
+      #|  (B : Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, sub_sigma_algebra(p, G) && integrable(restrict_prob_space(p, G), f) \226\134\146 integrable(p, f)
+      #|  (y : A)
+      #|  real_of_num(0) <= (f : (A) -> Real)((y : A))
+      #|  (y : A)
+      #|  restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool))
+      #|  (y : A)
+      #|  real_of_num(0) <= (f : (A) -> Real)((y : A))
+      #|  (y : A)
+      #|  real_of_num(0) <= max((x : Real), real_of_num(0))
+      #|  max((K : Real), real_of_num(0))
+      #|  nn_expectation((p : Prob_space[A]), (x : A) => min((f : (A) -> Real)(x), max((K : Real), real_of_num(0)))) == nn_expectation(restrict_prob_space(p, (G : ((A) -> Bool) -> Bool)), (x : A) => min(f(x), max(K, real_of_num(0))))
+      #|  (y : A)
+      #|  max((K : Real), real_of_num(0))
+      #|  (h : (A) -> Real)((y : A)) <= (K : Real)
+      #|  (h : (A) -> Real)((y : A)) <= (f : (A) -> Real)(y)
+      #|  (y : A)
+      #|  nn_expectation((p : Prob_space[A]), (x : A) => min((f : (A) -> Real)(x), max((K : Real), real_of_num(0))))
+      #|  \226\136\131 K : Real, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 (h : (A) -> Real)(x) <= K
+      #|  (h : (A) -> Real)
+      #|  (y : A)
+      #|  real_of_num(0) <= (f : (A) -> Real)((y : A))
+      #|  (y : A)
+      #|  (y : A)
+      #|  max((K : Real), real_of_num(0))
+      #|  (h : (A) -> Real)((y : A)) <= (K : Real)
+      #|  (h : (A) -> Real)((y : A)) <= (f : (A) -> Real)(y)
+      #|  (y : A)
+      #|  nn_expectation((p : Prob_space[A]), (x : A) => min((f : (A) -> Real)(x), max((K : Real), real_of_num(0))))
+      #|  \226\136\131 K : Real, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 (h : (A) -> Real)(x) <= K
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  simple_rv((p : Prob_space[A]), (h : (A) -> Real))
+      #|  (h : (A) -> Real)
+      #|  restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool))
+      #|  (a : Real) <= (b : Real) && b <= a \226\134\146 a == b
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  integrable((p : Prob_space[A]), (f : (A) -> Real))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, sub_sigma_algebra(p, G) && random_variable(restrict_prob_space(p, G), f) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= f(x)) && integrable(restrict_prob_space(p, G), f) \226\134\146 nn_expectation(restrict_prob_space(p, G), f) == nn_expectation(p, f)
+      #|  nn_expectation(restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool)), (x : A) => max(-(f : (A) -> Real)(x), real_of_num(0))) == nn_expectation(p, (x : A) => max(-f(x), real_of_num(0)))
+      #|  nn_expectation(restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool)), (x : A) => max((f : (A) -> Real)(x), real_of_num(0))) == nn_expectation(p, (x : A) => max(f(x), real_of_num(0)))
+      #|  random_variable(restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool)), (f : (A) -> Real))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, sub_sigma_algebra(p, G) && integrable(restrict_prob_space(p, G), f) \226\134\146 expectation(restrict_prob_space(p, G), f) == expectation(p, f)
+      #|  (gen_cond_exp : (Prob_space[A], ((A) -> Bool) -> Bool, (A) -> Real, A) -> Real)((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real)) == select((f : (A) -> Real) => measurable_wrt(p, G, f) && integrable(p, f) && (\226\136\128 A : (A) -> Bool, IN(A, G) \226\134\146 expectation(p, (x : A) => f(x) * indicator_fn(A, x)) == expectation(p, (x : A) => X(x) * indicator_fn(A, x))))
+      #|  SUBSET((G : ((A) -> Bool) -> Bool), prob_events((p : Prob_space[A])))
+      #|  SUBSET((G : ((A) -> Bool) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (A : (Num, A) -> Bool)
+      #|  (A : (Num, A) -> Bool)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 mu : ((A) -> Bool) -> Real, sub_sigma_algebra(p, G) && absolutely_continuous(p, mu) \226\134\146 absolutely_continuous(restrict_prob_space(p, G), mu)
+      #|  restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool))
+      #|  expectation((p : Prob_space[A]), (x : A) => (f : (A) -> Real)(x) * indicator_fn((A : (A) -> Bool), x)) == expectation(restrict_prob_space(p, (G : ((A) -> Bool) -> Bool)), (x : A) => f(x) * indicator_fn(A, x))
+      #|  (A : (A) -> Bool)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (v : Real)
+      #|  random_variable(restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool)), (f : (A) -> Real))
+      #|  (f : (A) -> Real)
+      #|  (f : (A) -> Real)
+      #|  (A : (A) -> Bool) => expectation((p : Prob_space[A]), (x : A) => (X : (A) -> Real)(x) * indicator_fn(A, x))
+      #|  restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool))
+      #|  absolutely_continuous(restrict_prob_space((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool)), (A : (A) -> Bool) => expectation(p, (x : A) => (X : (A) -> Real)(x) * indicator_fn(A, x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) \226\134\146 (\226\136\131 f : (A) -> Real, measurable_wrt(p, G, f) && integrable(p, f) && (\226\136\128 A : (A) -> Bool, IN(A, G) \226\134\146 expectation(p, (x : A) => f(x) * indicator_fn(A, x)) == expectation(p, (x : A) => X(x) * indicator_fn(A, x))))
+      #|  \226\136\131 f : (A) -> Real, measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), f) && integrable(p, f) && (\226\136\128 A : (A) -> Bool, IN(A, G) \226\134\146 expectation(p, (x : A) => f(x) * indicator_fn(A, x)) == expectation(p, (x : A) => (X : (A) -> Real)(x) * indicator_fn(A, x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 A : (A) -> Bool, sub_sigma_algebra(p, G) && integrable(p, X) && IN(A, G) \226\134\146 expectation(p, (x : A) => gen_cond_exp(p, G, X, x) * indicator_fn(A, x)) == expectation(p, (x : A) => X(x) * indicator_fn(A, x))
+      #|  \226\136\131 f : (A) -> Real, measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), f) && integrable(p, f) && (\226\136\128 A : (A) -> Bool, IN(A, G) \226\134\146 expectation(p, (x : A) => f(x) * indicator_fn(A, x)) == expectation(p, (x : A) => (X : (A) -> Real)(x) * indicator_fn(A, x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) \226\134\146 measurable_wrt(p, G, gen_cond_exp(p, G, X))
+      #|  \226\136\131 f : (A) -> Real, measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), f) && integrable(p, f) && (\226\136\128 A : (A) -> Bool, IN(A, G) \226\134\146 expectation(p, (x : A) => f(x) * indicator_fn(A, x)) == expectation(p, (x : A) => (X : (A) -> Real)(x) * indicator_fn(A, x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) \226\134\146 integrable(p, gen_cond_exp(p, G, X))
+      #|  (x : A)
+      #|  expectation((p : Prob_space[A]), (X : (A) -> Real)) == expectation(p, (x : A) => X(x) * indicator_fn(prob_carrier(p), x))
+      #|  (x : A)
+      #|  expectation((p : Prob_space[A]), gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))) == expectation(p, (x : A) => gen_cond_exp(p, G, X, x) * indicator_fn(prob_carrier(p), x))
+      #|  UNIONS((G : ((A) -> Bool) -> Bool)) == prob_carrier((p : Prob_space[A]))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  IN(prob_carrier((p : Prob_space[A])), (G : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) \226\134\146 expectation(p, gen_cond_exp(p, G, X)) == expectation(p, X)
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), FF(SUC(n)))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  expectation((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (X : (A) -> Real), x) * indicator_fn((a : (A) -> Bool), x)) == expectation(p, (x : A) => X(x) * indicator_fn(a, x))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, filtration(p, FF) && integrable(p, X) \226\134\146 martingale(p, FF, (n : Num) => gen_cond_exp(p, FF(n), X))
+      #|  (v : Real) - inv(real_of_num((n : Num)) + real_of_num(1))
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  (n : Num)
+      #|  (s : (A) -> Bool)
+      #|  prob_carrier((p : Prob_space[A]))
+      #|  (v : Real)
+      #|  (X : (A) -> Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 v : Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && X(x) < v}, G)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 x : Real, \226\136\128 v : Real, (x == v) == (x <= v && !(x < v))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) == (v : Real)} == DIFF({(x : A) | IN(x, prob_carrier(p)) && X(x) <= v}, {(x : A) | IN(x, prob_carrier(p)) && X(x) < v})
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 v : Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && X(x) == v}, G)
+      #|  (w : A)
+      #|  (w : A)
+      #|  sup({abs((f : (A) -> Real)((x : A))) | IN(x, prob_carrier((p : Prob_space[A])))})
+      #|  {abs((f : (A) -> Real)((x : A))) | IN(x, prob_carrier((p : Prob_space[A])))}
+      #|  (z : A)
+      #|  abs((f : (A) -> Real)((z : A)))
+      #|  !({abs((f : (A) -> Real)((x : A))) | IN(x, prob_carrier((p : Prob_space[A])))} == {})
+      #|  {abs((f : (A) -> Real)((x : A))) | IN(x, prob_carrier((p : Prob_space[A])))} == IMAGE(abs, {f((x : A)) | IN(x, prob_carrier(p))})
+      #|  FINITE({abs((f : (A) -> Real)((x : A))) | IN(x, prob_carrier((p : Prob_space[A])))})
+      #|  (z : A)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (A) -> Real, simple_rv(p, f) \226\134\146 (\226\136\131 M : Real, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(f(x)) <= M)
+      #|  !((u : Real) == (X : (A) -> Real)((x : A)))
+      #|  (X : (A) -> Real)((x : A)) == (u : Real)
+      #|  (u : Real)
+      #|  sum(IMAGE((X : (A) -> Real), prob_carrier((p : Prob_space[A]))), (u : Real) => if u == X((x : A)) { X(x) } else { real_of_num(0) })
+      #|  (x : A)
+      #|  IN((X : (A) -> Real)((x : A)), IMAGE(X, prob_carrier((p : Prob_space[A]))))
+      #|  FINITE(IMAGE((X : (A) -> Real), prob_carrier((p : Prob_space[A]))))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 x : A, simple_rv(p, X) && IN(x, prob_carrier(p)) \226\134\146 X(x) == sum(IMAGE(X, prob_carrier(p)), (u : Real) => u * indicator_fn({(z : A) | IN(z, prob_carrier(p)) && X(z) == u}, x))
+      #|  (x : A) => sum((t : (B) -> Bool), (i : B) => (f : (B, A) -> Real)(i, x))
+      #|  (f : (B, A) -> Real)((a : B))
+      #|  (p : Prob_space[A])
+      #|  (t : (B) -> Bool)
+      #|  (a : B)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (B, A) -> Real, \226\136\128 s : (B) -> Bool, FINITE(s) && (\226\136\128 i : B, IN(i, s) \226\134\146 integrable(p, f(i))) \226\134\146 integrable(p, (x : A) => sum(s, (i : B) => f(i, x)))
+      #|  (x : A) => sum((t : (B) -> Bool), (i : B) => (f : (B, A) -> Real)(i, x))
+      #|  (f : (B, A) -> Real)((a : B))
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (x : A) => sum((t : (B) -> Bool), (i : B) => (f : (B, A) -> Real)(i, x)))
+      #|  \226\136\128 i : B, IN(i, (t : (B) -> Bool)) \226\134\146 integrable((p : Prob_space[A]), (f : (B, A) -> Real)(i))
+      #|  integrable((p : Prob_space[A]), (f : (B, A) -> Real)((a : B)))
+      #|  (t : (B) -> Bool)
+      #|  (a : B)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (B, A) -> Real, \226\136\128 s : (B) -> Bool, FINITE(s) && (\226\136\128 i : B, IN(i, s) \226\134\146 integrable(p, f(i))) \226\134\146 expectation(p, (x : A) => sum(s, (i : B) => f(i, x))) == sum(s, (i : B) => expectation(p, f(i)))
+      #|  (x : A)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 u : Real, \226\136\128 zx : Real, \226\136\128 iy : Real, \226\136\128 ia : Real, u * (zx * (iy * ia)) == u * iy * (zx * ia)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, \226\136\128 Z : (A) -> Real, \226\136\128 A' : (A) -> Bool, \226\136\128 x : A, simple_rv(p, Y) && IN(x, prob_carrier(p)) \226\134\146 Y(x) * Z(x) * indicator_fn(A', x) == sum(IMAGE(Y, prob_carrier(p)), (u : Real) => u * (Z(x) * indicator_fn(INTER({(z : A) | IN(z, prob_carrier(p)) && Y(z) == u}, A'), x)))
+      #|  (u : Real)
+      #|  (u : Real)
+      #|  IMAGE((Y : (A) -> Real), prob_carrier((p : Prob_space[A])))
+      #|  (u : Real) => (x : A) => u * ((Z : (A) -> Real)(x) * indicator_fn(INTER({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (Y : (A) -> Real)(z) == u}, (A' : (A) -> Bool)), x))
+      #|  (p : Prob_space[A])
+      #|  (u : Real)
+      #|  (x : A)
+      #|  (A' : (A) -> Bool)
+      #|  (Z : (A) -> Real)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (x : A)
+      #|  expectation((p : Prob_space[A]), (x : A) => (Y : (A) -> Real)(x) * (Z : (A) -> Real)(x) * indicator_fn((A' : (A) -> Bool), x)) == expectation(p, (x : A) => sum(IMAGE(Y, prob_carrier(p)), (u : Real) => u * (Z(x) * indicator_fn(INTER({(z : A) | IN(z, prob_carrier(p)) && Y(z) == u}, A'), x))))
+      #|  \226\136\128 u : Real, IN(INTER({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (Y : (A) -> Real)(z) == u}, (A' : (A) -> Bool)), prob_events(p))
+      #|  FINITE(IMAGE((Y : (A) -> Real), prob_carrier((p : Prob_space[A]))))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, \226\136\128 Z : (A) -> Real, \226\136\128 A' : (A) -> Bool, simple_rv(p, Y) && integrable(p, Z) && IN(A', prob_events(p)) && integrable(p, (w : A) => Y(w) * Z(w)) \226\134\146 expectation(p, (x : A) => Y(x) * Z(x) * indicator_fn(A', x)) == sum(IMAGE(Y, prob_carrier(p)), (u : Real) => u * expectation(p, (x : A) => Z(x) * indicator_fn(INTER({(z : A) | IN(z, prob_carrier(p)) && Y(z) == u}, A'), x)))
+      #|  IN((w : A), prob_carrier((p : Prob_space[A])))
+      #|  (w : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && -(f : (A) -> Real)(x) <= (v : Real)} == DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && f(x) < -v})
+      #|  (v : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, f) \226\134\146 measurable_wrt(p, G, (x : A) => -f(x))
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (f : (A) -> Real))
+      #|  -(c : Real)
+      #|  (v : Real)
+      #|  (f : (A) -> Real)((w : A))
+      #|  (w : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && -(c : Real) * (f : (A) -> Real)(x) <= (v : Real)} == {(x : A) | IN(x, prob_carrier(p)) && f(x) <= v / -c}
+      #|  real_of_num(0) < -(c : Real)
+      #|  (v : Real)
+      #|  \226\136\128 x : A, (c : Real) * (f : (A) -> Real)(x) == -(-c * f(x))
+      #|  (c : Real) < real_of_num(0)
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (f : (A) -> Real))
+      #|  (c : Real)
+      #|  (v : Real)
+      #|  (f : (A) -> Real)((w : A))
+      #|  real_of_num(0) < (c : Real)
+      #|  (w : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (c : Real) * (f : (A) -> Real)(x) <= (v : Real)} == {(x : A) | IN(x, prob_carrier(p)) && f(x) <= v / c}
+      #|  (v : Real)
+      #|  (c : Real) > real_of_num(0)
+      #|  (c : Real) == real_of_num(0)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, \226\136\128 c : Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, f) \226\134\146 measurable_wrt(p, G, (x : A) => c * f(x))
+      #|  (a : Real) + inv(real_of_num(SUC((m0 : Num))))
+      #|  (m0 : Num)
+      #|  (n0 : Num)
+      #|  (n0 : Num) == SUC((p : Num))
+      #|  (p : Num)
+      #|  real_of_num((p : Num)) * inv(real_of_num(SUC((m0 : Num)))) <= (a : Real)
+      #|  (a : Real) < real_of_num((n0 : Num)) * inv(real_of_num(SUC((m0 : Num))))
+      #|  (n0 : Num)
+      #|  (p : Num)
+      #|  \226\136\131 p : Num, (n0 : Num) == SUC(p)
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  inv(real_of_num(SUC((m0 : Num))))
+      #|  (a : Bool) && ((b : Bool) \226\134\146 (c : Bool)) \226\134\146 a == b \226\134\146 c
+      #|  (n : Num) => (a : Real) < real_of_num(n) * inv(real_of_num(SUC((m0 : Num))))
+      #|  \226\136\131 n0 : Num, (a : Real) < real_of_num(n0) * inv(real_of_num(SUC((m0 : Num)))) && (\226\136\128 k : Num, k < n0 \226\134\146 real_of_num(k) * inv(real_of_num(SUC(m0))) <= a)
+      #|  inv(real_of_num(SUC((m0 : Num)))) < (b : Real) - (a : Real)
+      #|  real_of_num(0) < inv(real_of_num(SUC((m0 : Num))))
+      #|  (m0 : Num)
+      #|  \226\136\131 m0 : Num, (K : Num) == SUC(m0)
+      #|  (K : Num)
+      #|  (b : Real) - (a : Real)
+      #|  real_of_num(0) < (b : Real) - (a : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) <= a && a < b \226\134\146 (\226\136\131 n : Num, \226\136\131 m : Num, a < real_of_num(n) * inv(real_of_num(SUC(m))) && real_of_num(n) * inv(real_of_num(SUC(m))) < b)
+      #|  IN((w : A), (t : (A) -> Bool))
+      #|  (w : A)
+      #|  NUMPAIR((n : Num), (m : Num))
+      #|  INTER({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) < -(real_of_num(NUMFST(NUMPAIR((n : Num), (m : Num)))) * inv(real_of_num(SUC(NUMSND(NUMPAIR(n, m))))))}, {(x : A) | IN(x, prob_carrier(p)) && (g : (A) -> Real)(x) > -(real_of_num(NUMFST(NUMPAIR(n, m))) * inv(real_of_num(SUC(NUMSND(NUMPAIR(n, m)))))) - (c : Real)})
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  -(f : (A) -> Real)((w : A))
+      #|  -((g : (A) -> Real)((w : A)) + (c : Real))
+      #|  NUMPAIR(0, 0)
+      #|  INTER({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) < real_of_num(NUMFST(NUMPAIR(0, 0))) * inv(real_of_num(SUC(NUMSND(NUMPAIR(0, 0)))))}, {(x : A) | IN(x, prob_carrier(p)) && (g : (A) -> Real)(x) > real_of_num(NUMFST(NUMPAIR(0, 0))) * inv(real_of_num(SUC(NUMSND(NUMPAIR(0, 0))))) - (c : Real)})
+      #|  NUMPAIR((n : Num), (m : Num))
+      #|  INTER({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) < real_of_num(NUMFST(NUMPAIR((n : Num), (m : Num)))) * inv(real_of_num(SUC(NUMSND(NUMPAIR(n, m)))))}, {(x : A) | IN(x, prob_carrier(p)) && (g : (A) -> Real)(x) > real_of_num(NUMFST(NUMPAIR(n, m))) * inv(real_of_num(SUC(NUMSND(NUMPAIR(n, m))))) - (c : Real)})
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (g : (A) -> Real)((w : A)) + (c : Real)
+      #|  (f : (A) -> Real)((w : A))
+      #|  real_of_num(0) <= (f : (A) -> Real)((w : A))
+      #|  (g : (A) -> Real)((w : A)) + (c : Real) > real_of_num(0)
+      #|  (w : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) - (g : (A) -> Real)(x) < (c : Real)} == (S_all : (A) -> Bool)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  IN((S_all : (A) -> Bool), (G : ((A) -> Bool) -> Bool))
+      #|  (S_all : (A) -> Bool) == UNION(UNIONS(IMAGE((i : Num) => INTER({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) < real_of_num(NUMFST(i)) * inv(real_of_num(SUC(NUMSND(i))))}, {(x : A) | IN(x, prob_carrier(p)) && (g : (A) -> Real)(x) > real_of_num(NUMFST(i)) * inv(real_of_num(SUC(NUMSND(i)))) - (c : Real)}), UNIV)), UNIONS(IMAGE((i : Num) => INTER({(x : A) | IN(x, prob_carrier(p)) && f(x) < -(real_of_num(NUMFST(i)) * inv(real_of_num(SUC(NUMSND(i)))))}, {(x : A) | IN(x, prob_carrier(p)) && g(x) > -(real_of_num(NUMFST(i)) * inv(real_of_num(SUC(NUMSND(i))))) - c}), UNIV)))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (g : (A) -> Real))
+      #|  IN((w : A), prob_carrier((p : Prob_space[A])))
+      #|  (w : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (g : (A) -> Real)(x) > (q : Real) - (c : Real)} == DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && g(x) <= q - c})
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 q : Real, IN(INTER({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) < q}, {(x : A) | IN(x, prob_carrier(p)) && (g : (A) -> Real)(x) > q - (c : Real)}), (G : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 c : Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, f) && measurable_wrt(p, G, g) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && f(x) - g(x) < c}, G)
+      #|  IN((w : A), prob_carrier((p : Prob_space[A])))
+      #|  (w : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) - (g : (A) -> Real)(x) <= (v : Real)} == DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && g(x) - f(x) < -v})
+      #|  (v : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, f) && measurable_wrt(p, G, g) \226\134\146 measurable_wrt(p, G, (x : A) => f(x) - g(x))
+      #|  ((x : A) => (f : (A) -> Real)(x) + (g : (A) -> Real)(x)) == ((x : A) => f(x) - -g(x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, f) && measurable_wrt(p, G, g) \226\134\146 measurable_wrt(p, G, (x : A) => f(x) + g(x))
+      #|  !((j : Num) == 0)
+      #|  SUC((j : Num) - 1) == j
+      #|  (j : Num) - 1
+      #|  (A_k : (Num, A) -> Bool)((j : Num) - 1)
+      #|  (j : Num)
+      #|  real_of_num(0) < (f : (A) -> Real)((w : A))
+      #|  (w : A)
+      #|  (A_k : (Num, A) -> Bool)((k : Num))
+      #|  IN((w : A), (A_k : (Num, A) -> Bool)((k : Num)))
+      #|  (w : A)
+      #|  indicator_fn((A_k : (Num, A) -> Bool)((k : Num)))
+      #|  inv(real_of_num(SUC((k : Num))))
+      #|  (p : Prob_space[A])
+      #|  indicator_fn((A_k : (Num, A) -> Bool)((k : Num)))
+      #|  inv(real_of_num(SUC((k : Num))))
+      #|  (p : Prob_space[A])
+      #|  inv(real_of_num(SUC((k : Num)))) * prob((p : Prob_space[A]), (A_k : (Num, A) -> Bool)(k)) == expectation(p, (x : A) => inv(real_of_num(SUC(k))) * indicator_fn(A_k(k), x))
+      #|  inv(real_of_num(SUC((k : Num)))) * prob((p : Prob_space[A]), (A_k : (Num, A) -> Bool)(k)) <= expectation(p, (x : A) => (f : (A) -> Real)(x) * indicator_fn(A_k(k), x))
+      #|  (prob((p : Prob_space[A]), (A_k : (Num, A) -> Bool)((k : Num))) <= real_of_num(0)) == (inv(real_of_num(SUC(k))) * prob(p, A_k(k)) <= inv(real_of_num(SUC(k))) * real_of_num(0))
+      #|  real_of_num(0) < inv(real_of_num(SUC((k : Num))))
+      #|  real_of_num(0) <= (x : Real) && x <= real_of_num(0) \226\134\146 x == real_of_num(0)
+      #|  IN((A_k : (Num, A) -> Bool)((k : Num)), prob_events((p : Prob_space[A])))
+      #|  IN((w : A), prob_carrier((p : Prob_space[A])))
+      #|  (w : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) >= inv(real_of_num(SUC((k : Num))))} == DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && f(x) < inv(real_of_num(SUC(k)))})
+      #|  IN((A_k : (Num, A) -> Bool)((k : Num)), (G : ((A) -> Bool) -> Bool))
+      #|  (k : Num)
+      #|  UNIONS({(A_k : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)})
+      #|  (A_k : (Num, A) -> Bool) == ((k : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) >= inv(real_of_num(SUC(k)))})
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !IN(x, {(x : A) | (f : (A) -> Real)(x) == real_of_num(0)})} == {(x : A) | IN(x, prob_carrier(p)) && !(f(x) == real_of_num(0))}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, f) && measurable_wrt(p, G, f) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= f(x)) && (\226\136\128 A : (A) -> Bool, IN(A, G) \226\134\146 expectation(p, (x : A) => f(x) * indicator_fn(A, x)) == real_of_num(0)) \226\134\146 almost_surely(p, {(x : A) | f(x) == real_of_num(0)})
+      #|  (x : A)
+      #|  (x : A)
+      #|  expectation((p : Prob_space[A]), (f : (A) -> Real))
+      #|  (A : (A) -> Bool)
+      #|  (f : (A) -> Real)
+      #|  prob_events((p : Prob_space[A]))
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (A) -> Real, integrable(p, f) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= f(x)) && expectation(p, f) == real_of_num(0) \226\134\146 almost_surely(p, {(x : A) | f(x) == real_of_num(0)})
+      #|  !((j : Num) == 0)
+      #|  SUC((j : Num) - 1) == j
+      #|  (j : Num) - 1
+      #|  (B_n : (Num, A) -> Bool)((j : Num) - 1)
+      #|  (j : Num)
+      #|  real_of_num(0) < (g : (A) -> Real)((w : A)) - (f : (A) -> Real)(w)
+      #|  !((j : Num) == 0)
+      #|  SUC((j : Num) - 1) == j
+      #|  (j : Num) - 1
+      #|  (A_n : (Num, A) -> Bool)((j : Num) - 1)
+      #|  (j : Num)
+      #|  real_of_num(0) < (f : (A) -> Real)((w : A)) - (g : (A) -> Real)(w)
+      #|  (f : (A) -> Real)((w : A)) > (g : (A) -> Real)(w) || g(w) > f(w)
+      #|  (w : A)
+      #|  (B_n : (Num, A) -> Bool)((k : Num))
+      #|  (x : A) => (f : (A) -> Real)(x) * indicator_fn((B_n : (Num, A) -> Bool)((k : Num)), x)
+      #|  (x : A) => (g : (A) -> Real)(x) * indicator_fn((B_n : (Num, A) -> Bool)((k : Num)), x)
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => ((g : (A) -> Real)(x) - (f : (A) -> Real)(x)) * indicator_fn((B_n : (Num, A) -> Bool)((k : Num)), x)) == ((x : A) => g(x) * indicator_fn(B_n(k), x) - f(x) * indicator_fn(B_n(k), x))
+      #|  IN((w : A), (B_n : (Num, A) -> Bool)((k : Num)))
+      #|  (w : A)
+      #|  ((x : A) => ((g : (A) -> Real)(x) - (f : (A) -> Real)(x)) * indicator_fn((B_n : (Num, A) -> Bool)((k : Num)), x)) == ((x : A) => g(x) * indicator_fn(B_n(k), x) + -(f(x) * indicator_fn(B_n(k), x)))
+      #|  indicator_fn((B_n : (Num, A) -> Bool)((k : Num)))
+      #|  inv(real_of_num(SUC((k : Num))))
+      #|  (p : Prob_space[A])
+      #|  indicator_fn((B_n : (Num, A) -> Bool)((k : Num)))
+      #|  inv(real_of_num(SUC((k : Num))))
+      #|  (p : Prob_space[A])
+      #|  inv(real_of_num(SUC((k : Num)))) * prob((p : Prob_space[A]), (B_n : (Num, A) -> Bool)(k)) == expectation(p, (x : A) => inv(real_of_num(SUC(k))) * indicator_fn(B_n(k), x))
+      #|  inv(real_of_num(SUC((k : Num)))) * prob((p : Prob_space[A]), (B_n : (Num, A) -> Bool)(k)) <= expectation(p, (x : A) => ((g : (A) -> Real)(x) - (f : (A) -> Real)(x)) * indicator_fn(B_n(k), x))
+      #|  (prob((p : Prob_space[A]), (B_n : (Num, A) -> Bool)((k : Num))) <= real_of_num(0)) == (inv(real_of_num(SUC(k))) * prob(p, B_n(k)) <= inv(real_of_num(SUC(k))) * real_of_num(0))
+      #|  real_of_num(0) <= (x : Real) && x <= real_of_num(0) \226\134\146 x == real_of_num(0)
+      #|  IN((B_n : (Num, A) -> Bool)((k : Num)), prob_events((p : Prob_space[A])))
+      #|  IN((w : A), prob_carrier((p : Prob_space[A])))
+      #|  (w : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (g : (A) -> Real)(x) - (f : (A) -> Real)(x) >= inv(real_of_num(SUC((k : Num))))} == DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && g(x) - f(x) < inv(real_of_num(SUC(k)))})
+      #|  IN((B_n : (Num, A) -> Bool)((k : Num)), (G : ((A) -> Bool) -> Bool))
+      #|  (A_n : (Num, A) -> Bool)((k : Num))
+      #|  (x : A) => (g : (A) -> Real)(x) * indicator_fn((A_n : (Num, A) -> Bool)((k : Num)), x)
+      #|  (x : A) => (f : (A) -> Real)(x) * indicator_fn((A_n : (Num, A) -> Bool)((k : Num)), x)
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => ((f : (A) -> Real)(x) - (g : (A) -> Real)(x)) * indicator_fn((A_n : (Num, A) -> Bool)((k : Num)), x)) == ((x : A) => f(x) * indicator_fn(A_n(k), x) - g(x) * indicator_fn(A_n(k), x))
+      #|  IN((w : A), (A_n : (Num, A) -> Bool)((k : Num)))
+      #|  (w : A)
+      #|  ((x : A) => ((f : (A) -> Real)(x) - (g : (A) -> Real)(x)) * indicator_fn((A_n : (Num, A) -> Bool)((k : Num)), x)) == ((x : A) => f(x) * indicator_fn(A_n(k), x) + -(g(x) * indicator_fn(A_n(k), x)))
+      #|  indicator_fn((A_n : (Num, A) -> Bool)((k : Num)))
+      #|  inv(real_of_num(SUC((k : Num))))
+      #|  (p : Prob_space[A])
+      #|  indicator_fn((A_n : (Num, A) -> Bool)((k : Num)))
+      #|  inv(real_of_num(SUC((k : Num))))
+      #|  (p : Prob_space[A])
+      #|  inv(real_of_num(SUC((k : Num)))) * prob((p : Prob_space[A]), (A_n : (Num, A) -> Bool)(k)) == expectation(p, (x : A) => inv(real_of_num(SUC(k))) * indicator_fn(A_n(k), x))
+      #|  inv(real_of_num(SUC((k : Num)))) * prob((p : Prob_space[A]), (A_n : (Num, A) -> Bool)(k)) <= expectation(p, (x : A) => ((f : (A) -> Real)(x) - (g : (A) -> Real)(x)) * indicator_fn(A_n(k), x))
+      #|  (prob((p : Prob_space[A]), (A_n : (Num, A) -> Bool)((k : Num))) <= real_of_num(0)) == (inv(real_of_num(SUC(k))) * prob(p, A_n(k)) <= inv(real_of_num(SUC(k))) * real_of_num(0))
+      #|  real_of_num(0) <= (x : Real) && x <= real_of_num(0) \226\134\146 x == real_of_num(0)
+      #|  IN((A_n : (Num, A) -> Bool)((k : Num)), prob_events((p : Prob_space[A])))
+      #|  IN((w : A), prob_carrier((p : Prob_space[A])))
+      #|  (w : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) - (g : (A) -> Real)(x) >= inv(real_of_num(SUC((k : Num))))} == DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && f(x) - g(x) < inv(real_of_num(SUC(k)))})
+      #|  IN((A_n : (Num, A) -> Bool)((k : Num)), (G : ((A) -> Bool) -> Bool))
+      #|  real_of_num(0) < inv(real_of_num(SUC((k : Num))))
+      #|  (k : Num)
+      #|  UNION(UNIONS({(A_n : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}), UNIONS({(B_n : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}))
+      #|  (B_n : (Num, A) -> Bool) == ((n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (g : (A) -> Real)(x) - (f : (A) -> Real)(x) >= inv(real_of_num(SUC(n)))})
+      #|  (A_n : (Num, A) -> Bool) == ((n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) - (g : (A) -> Real)(x) >= inv(real_of_num(SUC(n)))})
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !IN(x, {(x : A) | (f : (A) -> Real)(x) == (g : (A) -> Real)(x)})} == {(x : A) | IN(x, prob_carrier(p)) && !(f(x) == g(x))}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, f) && integrable(p, f) && measurable_wrt(p, G, g) && integrable(p, g) && (\226\136\128 A : (A) -> Bool, IN(A, G) \226\134\146 expectation(p, (x : A) => f(x) * indicator_fn(A, x)) == expectation(p, (x : A) => g(x) * indicator_fn(A, x))) \226\134\146 almost_surely(p, {(x : A) | f(x) == g(x)})
+      #|  prob_events((p : Prob_space[A]))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 mu : ((A) -> Bool) -> Real, integrable(p, f) && integrable(p, g) && (\226\136\128 A : (A) -> Bool, IN(A, prob_events(p)) \226\134\146 expectation(p, (x : A) => f(x) * indicator_fn(A, x)) == mu(A)) && (\226\136\128 A : (A) -> Bool, IN(A, prob_events(p)) \226\134\146 expectation(p, (x : A) => g(x) * indicator_fn(A, x)) == mu(A)) \226\134\146 almost_surely(p, {(x : A) | f(x) == g(x)})
+      #|  inv(real_of_num((j : Num))) < -gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), (w : A))
+      #|  !((j : Num) == 0)
+      #|  SUC((j : Num) - 1) == j
+      #|  (j : Num) - 1
+      #|  (A_k : (Num, A) -> Bool)((j : Num) - 1)
+      #|  (j : Num)
+      #|  real_of_num(0) < -gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), (w : A))
+      #|  (w : A)
+      #|  -expectation((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((A_k : (Num, A) -> Bool)((k : Num)), x))
+      #|  (prob((p : Prob_space[A]), (A_k : (Num, A) -> Bool)((k : Num))) <= real_of_num(0)) == (inv(real_of_num(SUC(k))) * prob(p, A_k(k)) <= inv(real_of_num(SUC(k))) * real_of_num(0))
+      #|  IN((w : A), (A_k : (Num, A) -> Bool)((k : Num)))
+      #|  (w : A)
+      #|  indicator_fn((A_k : (Num, A) -> Bool)((k : Num)))
+      #|  -inv(real_of_num(SUC((k : Num))))
+      #|  (p : Prob_space[A])
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  indicator_fn((A_k : (Num, A) -> Bool)((k : Num)))
+      #|  -inv(real_of_num(SUC((k : Num))))
+      #|  (p : Prob_space[A])
+      #|  -inv(real_of_num(SUC((k : Num)))) * prob((p : Prob_space[A]), (A_k : (Num, A) -> Bool)(k)) == expectation(p, (x : A) => -inv(real_of_num(SUC(k))) * indicator_fn(A_k(k), x))
+      #|  expectation((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((A_k : (Num, A) -> Bool)((k : Num)), x)) <= -inv(real_of_num(SUC(k))) * prob(p, A_k(k))
+      #|  (w : A)
+      #|  (x : A) => (X : (A) -> Real)(x) * indicator_fn((A_k : (Num, A) -> Bool)((k : Num)), x)
+      #|  (p : Prob_space[A])
+      #|  real_of_num(0) <= expectation((p : Prob_space[A]), (x : A) => (X : (A) -> Real)(x) * indicator_fn((A_k : (Num, A) -> Bool)((k : Num)), x))
+      #|  expectation((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((A_k : (Num, A) -> Bool)((k : Num)), x)) == expectation(p, (x : A) => X(x) * indicator_fn(A_k(k), x))
+      #|  real_of_num(0) < inv(real_of_num(SUC((k : Num))))
+      #|  real_of_num(0) <= (x : Real) && x <= real_of_num(0) \226\134\146 x == real_of_num(0)
+      #|  IN((A_k : (Num, A) -> Bool)((k : Num)), prob_events((p : Prob_space[A])))
+      #|  -inv(real_of_num(SUC((k : Num))))
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (A_k : (Num, A) -> Bool)((k : Num)) == {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) < -inv(real_of_num(SUC(k)))}
+      #|  IN((A_k : (Num, A) -> Bool)((k : Num)), (G : ((A) -> Bool) -> Bool))
+      #|  (k : Num)
+      #|  UNIONS({(A_k : (Num, A) -> Bool)((k : Num)) | IN(k, UNIV)})
+      #|  (A_k : (Num, A) -> Bool) == ((k : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) < -inv(real_of_num(SUC(k)))})
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !IN(x, {(x : A) | real_of_num(0) <= gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x)})} == {(x : A) | IN(x, prob_carrier(p)) && gen_cond_exp(p, G, X, x) < real_of_num(0)}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= X(x)) \226\134\146 almost_surely(p, {(x : A) | real_of_num(0) <= gen_cond_exp(p, G, X, x)})
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((A : (A) -> Bool), x)
+      #|  (c : Real)
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => (c : Real) * (gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((A : (A) -> Bool), x))) == c * expectation(p, (x : A) => gen_cond_exp(p, G, X, x) * indicator_fn(A, x))
+      #|  (x : A) => (X : (A) -> Real)(x) * indicator_fn((A : (A) -> Bool), x)
+      #|  (c : Real)
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => (c : Real) * ((X : (A) -> Real)(x) * indicator_fn((A : (A) -> Bool), x))) == c * expectation(p, (x : A) => X(x) * indicator_fn(A, x))
+      #|  IN((A : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  ((x : A) => (c : Real) * gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((A : (A) -> Bool), x)) == ((x : A) => c * (gen_cond_exp(p, G, X, x) * indicator_fn(A, x)))
+      #|  ((x : A) => (c : Real) * (X : (A) -> Real)(x) * indicator_fn((A : (A) -> Bool), x)) == ((x : A) => c * (X(x) * indicator_fn(A, x)))
+      #|  expectation((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => (c : Real) * (X : (A) -> Real)(w), x) * indicator_fn((A : (A) -> Bool), x)) == expectation(p, (x : A) => c * X(x) * indicator_fn(A, x))
+      #|  (A : (A) -> Bool)
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  (c : Real)
+      #|  (p : Prob_space[A])
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (c : Real)
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (w : A) => (c : Real) * (X : (A) -> Real)(w)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (w : A) => (c : Real) * (X : (A) -> Real)(w)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 c : Real, sub_sigma_algebra(p, G) && integrable(p, X) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, G, (w : A) => c * X(w), x) == c * gen_cond_exp(p, G, X, x)})
+      #|  (Y : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (Y : (A) -> Real), x) * indicator_fn((A : (A) -> Bool), x))
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((A : (A) -> Bool), x))
+      #|  integrable((p : Prob_space[A]), (x : A) => (Y : (A) -> Real)(x) * indicator_fn((A : (A) -> Bool), x))
+      #|  integrable((p : Prob_space[A]), (x : A) => (X : (A) -> Real)(x) * indicator_fn((A : (A) -> Bool), x))
+      #|  ((x : A) => (gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) + gen_cond_exp(p, G, (Y : (A) -> Real), x)) * indicator_fn((A : (A) -> Bool), x)) == ((x : A) => gen_cond_exp(p, G, X, x) * indicator_fn(A, x) + gen_cond_exp(p, G, Y, x) * indicator_fn(A, x))
+      #|  ((x : A) => ((X : (A) -> Real)(x) + (Y : (A) -> Real)(x)) * indicator_fn((A : (A) -> Bool), x)) == ((x : A) => X(x) * indicator_fn(A, x) + Y(x) * indicator_fn(A, x))
+      #|  expectation((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => (X : (A) -> Real)(w) + (Y : (A) -> Real)(w), x) * indicator_fn((A : (A) -> Bool), x)) == expectation(p, (x : A) => (X(x) + Y(x)) * indicator_fn(A, x))
+      #|  IN((A : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (A : (A) -> Bool)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (Y : (A) -> Real))
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  (p : Prob_space[A])
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (Y : (A) -> Real))
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (w : A) => (X : (A) -> Real)(w) + (Y : (A) -> Real)(w)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (w : A) => (X : (A) -> Real)(w) + (Y : (A) -> Real)(w)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) && integrable(p, Y) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, G, (w : A) => X(w) + Y(w), x) == gen_cond_exp(p, G, X, x) + gen_cond_exp(p, G, Y, x)})
+      #|  SUBSET({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !IN(x, {(x : A) | gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => -real_of_num(1) * (Y : (A) -> Real)(w), x) == -real_of_num(1) * gen_cond_exp(p, G, Y, x)})}, (n2 : (A) -> Bool))
+      #|  !(gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (X : (A) -> Real)(w) + -real_of_num(1) * (Y : (A) -> Real)(w), (w : A)) == gen_cond_exp(p, G, X, w) - gen_cond_exp(p, G, Y, w))
+      #|  SUBSET({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !IN(x, {(x : A) | gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => (X : (A) -> Real)(w) + -real_of_num(1) * (Y : (A) -> Real)(w), x) == gen_cond_exp(p, G, X, x) + gen_cond_exp(p, G, (w : A) => -real_of_num(1) * Y(w), x)})}, (n1 : (A) -> Bool))
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => -real_of_num(1) * (Y : (A) -> Real)(w), (w : A)) == -real_of_num(1) * gen_cond_exp(p, G, Y, w)
+      #|  (w : A)
+      #|  UNION((n1 : (A) -> Bool), (n2 : (A) -> Bool))
+      #|  (n2 : (A) -> Bool)
+      #|  (n1 : (A) -> Bool)
+      #|  (w : A) => -real_of_num(1) * (Y : (A) -> Real)(w)
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  -real_of_num(1)
+      #|  (Y : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  ((w : A) => (X : (A) -> Real)(w) - (Y : (A) -> Real)(w)) == ((w : A) => X(w) + -real_of_num(1) * Y(w))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) && integrable(p, Y) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, G, (w : A) => X(w) - Y(w), x) == gen_cond_exp(p, G, X, x) - gen_cond_exp(p, G, Y, x)})
+      #|  inv(real_of_num((j : Num))) < gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), (w : A)) - gen_cond_exp(p, G, (Y : (A) -> Real), w)
+      #|  !((j : Num) == 0)
+      #|  SUC((j : Num) - 1) == j
+      #|  (j : Num) - 1
+      #|  (A_k : (Num, A) -> Bool)((j : Num) - 1)
+      #|  (j : Num)
+      #|  real_of_num(0) < gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), (w : A)) - gen_cond_exp(p, G, (Y : (A) -> Real), w)
+      #|  (w : A)
+      #|  (w : A)
+      #|  (a : Real) <= (b : Real) \226\134\146 a - b <= real_of_num(0)
+      #|  integrable((p : Prob_space[A]), (x : A) => (Y : (A) -> Real)(x) * indicator_fn((A_k : (Num, A) -> Bool)((k : Num)), x))
+      #|  integrable((p : Prob_space[A]), (x : A) => (X : (A) -> Real)(x) * indicator_fn((A_k : (Num, A) -> Bool)((k : Num)), x))
+      #|  expectation((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (Y : (A) -> Real), x) * indicator_fn((A_k : (Num, A) -> Bool)((k : Num)), x)) == expectation(p, (x : A) => Y(x) * indicator_fn(A_k(k), x))
+      #|  expectation((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((A_k : (Num, A) -> Bool)((k : Num)), x)) == expectation(p, (x : A) => X(x) * indicator_fn(A_k(k), x))
+      #|  integrable((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (Y : (A) -> Real), x) * indicator_fn((A_k : (Num, A) -> Bool)((k : Num)), x))
+      #|  integrable((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((A_k : (Num, A) -> Bool)((k : Num)), x))
+      #|  ((x : A) => (gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) - gen_cond_exp(p, G, (Y : (A) -> Real), x)) * indicator_fn((A_k : (Num, A) -> Bool)((k : Num)), x)) == ((x : A) => gen_cond_exp(p, G, X, x) * indicator_fn(A_k(k), x) - gen_cond_exp(p, G, Y, x) * indicator_fn(A_k(k), x))
+      #|  IN((w : A), (A_k : (Num, A) -> Bool)((k : Num)))
+      #|  (w : A)
+      #|  ((x : A) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) - gen_cond_exp(p, G, (Y : (A) -> Real), x)) == ((x : A) => ((x : A) => gen_cond_exp(p, G, X, x))(x) - ((x : A) => gen_cond_exp(p, G, Y, x))(x))
+      #|  indicator_fn((A_k : (Num, A) -> Bool)((k : Num)))
+      #|  inv(real_of_num(SUC((k : Num))))
+      #|  (p : Prob_space[A])
+      #|  indicator_fn((A_k : (Num, A) -> Bool)((k : Num)))
+      #|  inv(real_of_num(SUC((k : Num))))
+      #|  (p : Prob_space[A])
+      #|  inv(real_of_num(SUC((k : Num)))) * prob((p : Prob_space[A]), (A_k : (Num, A) -> Bool)(k)) == expectation(p, (x : A) => inv(real_of_num(SUC(k))) * indicator_fn(A_k(k), x))
+      #|  expectation((p : Prob_space[A]), (x : A) => (gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) - gen_cond_exp(p, G, (Y : (A) -> Real), x)) * indicator_fn((A_k : (Num, A) -> Bool)((k : Num)), x))
+      #|  (prob((p : Prob_space[A]), (A_k : (Num, A) -> Bool)((k : Num))) <= real_of_num(0)) == (inv(real_of_num(SUC(k))) * prob(p, A_k(k)) <= inv(real_of_num(SUC(k))) * real_of_num(0))
+      #|  real_of_num(0) < inv(real_of_num(SUC((k : Num))))
+      #|  real_of_num(0) <= (x : Real) && x <= real_of_num(0) \226\134\146 x == real_of_num(0)
+      #|  IN((A_k : (Num, A) -> Bool)((k : Num)), prob_events((p : Prob_space[A])))
+      #|  -inv(real_of_num(SUC((k : Num))))
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (Y : (A) -> Real))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (A_k : (Num, A) -> Bool)((k : Num)) == {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (Y : (A) -> Real), x) - gen_cond_exp(p, G, (X : (A) -> Real), x) < -inv(real_of_num(SUC(k)))}
+      #|  IN((A_k : (Num, A) -> Bool)((k : Num)), (G : ((A) -> Bool) -> Bool))
+      #|  (k : Num)
+      #|  UNIONS({(A_k : (Num, A) -> Bool)((k : Num)) | IN(k, UNIV)})
+      #|  (A_k : (Num, A) -> Bool) == ((k : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (Y : (A) -> Real), x) - gen_cond_exp(p, G, (X : (A) -> Real), x) < -inv(real_of_num(SUC(k)))})
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !IN(x, {(x : A) | gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) <= gen_cond_exp(p, G, (Y : (A) -> Real), x)})} == {(x : A) | IN(x, prob_carrier(p)) && gen_cond_exp(p, G, Y, x) < gen_cond_exp(p, G, X, x)}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) && integrable(p, Y) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 X(x) <= Y(x)) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, G, X, x) <= gen_cond_exp(p, G, Y, x)})
       #|  INTERS {{x:A | gen_cond_exp p G ((X:num->A->real) n) x <= gen_cond_exp p G (X (SUC n)) x /\\\n                    gen_cond_exp p G (X n) x <= gen_cond_exp p G (L:A->real) x} | n IN (:num)}
-      #|  {x:A | gen_cond_exp p G ((X:num->A->real) n) x <= gen_cond_exp p G (X (SUC n)) x} INTER\n               {x:A | gen_cond_exp p G ((X:num->A->real) n) x <= gen_cond_exp p G (L:A->real) x}
-      #|  L:A->real
-      #|  (X:num->A->real) n
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (X:num->A->real) (SUC n)
-      #|  (X:num->A->real) n
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall n. almost_surely p\n       {x:A | gen_cond_exp p G ((X:num->A->real) n) x <= gen_cond_exp p G (X (SUC n)) x /\\\n              gen_cond_exp p G (X n) x <= gen_cond_exp p G (L:A->real) x}
-      #|  forall p:A prob_space G X L.\n     sub_sigma_algebra p G /\\ (forall n. integrable p (X n)) /\\ integrable p L /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= X (SUC n) x) /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= L x)\n     ==> almost_surely p\n           {x | (forall n. gen_cond_exp p G (X n) x <= gen_cond_exp p G (X (SUC n)) x) /\\\n                (forall n. gen_cond_exp p G (X n) x <= gen_cond_exp p G L x)}
-      #|  ((\\n. (L x - (X:num->A->real) n x) * indicator_fn A x) --->\n                   (L x - L x) * indicator_fn A x) sequentially
-      #|  x:A
-      #|  (X:num->A->real) n x
-      #|  n:num
-      #|  n:num
-      #|  (X:num->A->real) 0 x <= X n x /\\ X n x <= L x
-      #|  x:A
-      #|  n:num
-      #|  \\x:A. (L x - (X:num->A->real) 0 x) * indicator_fn A x
-      #|  \\x:A. &0
-      #|  \\n:num. \\x:A. (L x - (X:num->A->real) n x) * indicator_fn A x
-      #|  p:A prob_space
-      #|  forall p:A prob_space X L A.\n     (forall n. integrable p (X n)) /\\ integrable p L /\\ A IN prob_events p /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= X (SUC n) x) /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= L x) /\\\n     (forall x. x IN prob_carrier p ==> ((\\n. X n x) ---> L x) sequentially)\n     ==> ((\\n. expectation p (\\x. (L x - X n x) * indicator_fn A x)) ---> &0)\n         sequentially
+      #|  INTER({(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (Num, A) -> Real)((n : Num)), x) <= gen_cond_exp(p, G, X(SUC(n)), x)}, {(x : A) | gen_cond_exp(p, G, X(n), x) <= gen_cond_exp(p, G, (L : (A) -> Real), x)})
+      #|  (L : (A) -> Real)
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (X : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, almost_surely((p : Prob_space[A]), {(x : A) | gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (Num, A) -> Real)(n), x) <= gen_cond_exp(p, G, X(SUC(n)), x) && gen_cond_exp(p, G, X(n), x) <= gen_cond_exp(p, G, (L : (A) -> Real), x)})
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 L : (A) -> Real, sub_sigma_algebra(p, G) && (\226\136\128 n : Num, integrable(p, X(n))) && integrable(p, L) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 X(n, x) <= X(SUC(n), x)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 X(n, x) <= L(x)) \226\134\146 almost_surely(p, {(x : A) | (\226\136\128 n : Num, gen_cond_exp(p, G, X(n), x) <= gen_cond_exp(p, G, X(SUC(n)), x)) && (\226\136\128 n : Num, gen_cond_exp(p, G, X(n), x) <= gen_cond_exp(p, G, L, x))})
+      #|  op_minus_minus_minus_gt((n : Num) => ((L : (A) -> Real)((x : A)) - (X : (Num, A) -> Real)(n, x)) * indicator_fn((A : (A) -> Bool), x), (L(x) - L(x)) * indicator_fn(A, x), sequentially)
+      #|  (x : A)
+      #|  (X : (Num, A) -> Real)((n : Num), (x : A))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (X : (Num, A) -> Real)(0, (x : A)) <= X((n : Num), x) && X(n, x) <= (L : (A) -> Real)(x)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (x : A) => ((L : (A) -> Real)(x) - (X : (Num, A) -> Real)(0, x)) * indicator_fn((A : (A) -> Bool), x)
+      #|  (x : A) => real_of_num(0)
+      #|  (n : Num) => (x : A) => ((L : (A) -> Real)(x) - (X : (Num, A) -> Real)(n, x)) * indicator_fn((A : (A) -> Bool), x)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 L : (A) -> Real, \226\136\128 A : (A) -> Bool, (\226\136\128 n : Num, integrable(p, X(n))) && integrable(p, L) && IN(A, prob_events(p)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= X(n, x)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 X(n, x) <= X(SUC(n), x)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 X(n, x) <= L(x)) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 op_minus_minus_minus_gt((n : Num) => X(n, x), L(x), sequentially)) \226\134\146 op_minus_minus_minus_gt((n : Num) => expectation(p, (x : A) => (L(x) - X(n, x)) * indicator_fn(A, x)), real_of_num(0), sequentially)
       #|  0
-      #|  N:num
-      #|  (:num)
-      #|  n:num
-      #|  N:num
-      #|  m:num
-      #|  &mm
-      #|  inv(inv(eps:real))
-      #|  inv(&(SUC mm)) <= eps
-      #|  N1 + N2:num
-      #|  N1 + N2:num
-      #|  N2:num
-      #|  eps:real
-      #|  x:A
-      #|  ((\\n. Y_seq n (x:A)) ---> Y x) sequentially
-      #|  mm:num
-      #|  inv(eps:real)
-      #|  &0 < eps
-      #|  eps = (Y (x:A) - a) / &2
-      #|  N:num
-      #|  N:num
+      #|  (N : Num)
+      #|  (UNIV : (Num) -> Bool)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (m : Num)
+      #|  real_of_num((mm : Num))
+      #|  inv(inv((eps : Real)))
+      #|  inv(real_of_num(SUC((mm : Num)))) <= (eps : Real)
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (N2 : Num)
+      #|  (eps : Real)
+      #|  (x : A)
+      #|  op_minus_minus_minus_gt((n : Num) => (Y_seq : (Num, A) -> Real)(n, (x : A)), (Y : (A) -> Real)(x), sequentially)
+      #|  (mm : Num)
+      #|  inv((eps : Real))
+      #|  real_of_num(0) < (eps : Real)
+      #|  (eps : Real) == ((Y : (A) -> Real)((x : A)) - (a : Real)) / real_of_num(2)
+      #|  (N : Num)
+      #|  (N : Num)
       #|  0
-      #|  (x:A) IN prob_carrier p
-      #|  nn >= N:num
-      #|  abs(Y_seq (nn:num) (x:A) - Y x) < inv(&(SUC m))
-      #|  nn:num
-      #|  N:num
-      #|  N:num
-      #|  inv(&(SUC m))
-      #|  x:A
-      #|  m:num
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\ Y x <= a} =\n     INTERS (IMAGE (\\m. UNIONS (IMAGE (\\N.\n       INTERS (IMAGE (\\n. {x | x IN prob_carrier p /\\\n         Y_seq n x < a + inv(&(SUC m))}) {n | n >= N})) (:num))) (:num))
-      #|  a:real
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  forall p:A prob_space G Y Y_seq.\n     sub_sigma_algebra p G /\\\n     (forall n. measurable_wrt p G (Y_seq n)) /\\\n     (forall x. x IN prob_carrier p ==> ((\\n. Y_seq n x) ---> Y x) sequentially)\n     ==> measurable_wrt p G Y
-      #|  N1:num
-      #|  mm:num
-      #|  N1:num
-      #|  mm:num
-      #|  N1:num
-      #|  mm:num
-      #|  N1:num
-      #|  mm:num
-      #|  N1:num
-      #|  mm:num
-      #|  N1:num
-      #|  mm:num
-      #|  N1:num
-      #|  mm:num
-      #|  x:A
-      #|  n:num
-      #|  (D:num->A->real) 0
-      #|  \\x:A. &0
-      #|  D:num->A->real
-      #|  p:A prob_space
-      #|  (D:num->A->real) n x
-      #|  x:A
-      #|  forall n x:A. x IN prob_carrier p ==> D n x <= D 0 x
-      #|  forall p:A prob_space D.\n     (forall n. integrable p (D n)) /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= D n x) /\\\n     (forall n x. x IN prob_carrier p ==> D (SUC n) x <= D n x) /\\\n     (forall x. x IN prob_carrier p ==> ((\\n. D n x) ---> &0) sequentially)\n     ==> ((\\n. expectation p (D n)) ---> &0) sequentially
-      #|  x:A
-      #|  n:num
-      #|  (D:num->A->real) 0
-      #|  \\x:A. &0
-      #|  D:num->A->real
-      #|  p:A prob_space
-      #|  (D:num->A->real) n x
-      #|  x:A
-      #|  forall n x:A. x IN prob_carrier p ==> D n x <= D 0 x
-      #|  forall p:A prob_space D.\n     (forall n. integrable p (D n)) /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= D n x) /\\\n     (forall n x. x IN prob_carrier p ==> D (SUC n) x <= D n x) /\\\n     almost_surely p {x | ((\\n. D n x) ---> &0) sequentially}\n     ==> ((\\n. expectation p (D n)) ---> &0) sequentially
-      #|  x:A
-      #|  expectation p (\\x:A. f x * indicator_fn (S:A->bool) x +\n                         f x * indicator_fn (prob_carrier p DIFF S) x) =\n    expectation p f
-      #|  \\x:A. f x * indicator_fn (prob_carrier p DIFF (S:A->bool)) x
-      #|  \\x:A. f x * indicator_fn (S:A->bool) x
-      #|  p:A prob_space
-      #|  prob_carrier p DIFF (S:A->bool)
-      #|  f:A->real
-      #|  p:A prob_space
-      #|  prob_carrier p DIFF (S:A->bool) IN prob_events p
-      #|  forall p:A prob_space f S.\n     integrable p f /\\ S IN prob_events p /\\\n     prob p (prob_carrier p DIFF S) = &0\n     ==> expectation p (\\x. f x * indicator_fn S x) = expectation p f
-      #|  x:A
-      #|  forall x:A. x IN prob_carrier p\n        ==> ((\\n. (gc:num->A->real) n x) ---> (W:A->real) x) sequentially
-      #|  indicator_fn (good:A->bool) x = &1
-      #|  forall n. (gc:num->A->real) n x = gen_cond_exp p G ((D:num->A->real) n) x
-      #|  x:A
-      #|  N0:A->bool
-      #|  good INTER {x:A | (W:A->real) x = &0}
-      #|  almost_surely p {x:A | (W:A->real) x = &0}
-      #|  &0
-      #|  expectation p (W:A->real)
-      #|  \\n. expectation p ((D:num->A->real) n)
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  (nn : Num) >= (N : Num)
+      #|  abs((Y_seq : (Num, A) -> Real)((nn : Num), (x : A)) - (Y : (A) -> Real)(x)) < inv(real_of_num(SUC((m : Num))))
+      #|  (nn : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  inv(real_of_num(SUC((m : Num))))
+      #|  (x : A)
+      #|  (m : Num)
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (Y : (A) -> Real)(x) <= (a : Real)} == INTERS(IMAGE((m : Num) => UNIONS(IMAGE((N : Num) => INTERS(IMAGE((n : Num) => {(x : A) | IN(x, prob_carrier(p)) && (Y_seq : (Num, A) -> Real)(n, x) < a + inv(real_of_num(SUC(m)))}, {(n : Num) | n >= N})), UNIV)), UNIV))
+      #|  (a : Real)
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 Y : (A) -> Real, \226\136\128 Y_seq : (Num, A) -> Real, sub_sigma_algebra(p, G) && (\226\136\128 n : Num, measurable_wrt(p, G, Y_seq(n))) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 op_minus_minus_minus_gt((n : Num) => Y_seq(n, x), Y(x), sequentially)) \226\134\146 measurable_wrt(p, G, Y)
+      #|  (N1 : Num)
+      #|  (mm : Num)
+      #|  (N1 : Num)
+      #|  (mm : Num)
+      #|  (N1 : Num)
+      #|  (mm : Num)
+      #|  (N1 : Num)
+      #|  (mm : Num)
+      #|  (N1 : Num)
+      #|  (mm : Num)
+      #|  (N1 : Num)
+      #|  (mm : Num)
+      #|  (N1 : Num)
+      #|  (mm : Num)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (D : (Num, A) -> Real)(0)
+      #|  (x : A) => real_of_num(0)
+      #|  (D : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (D : (Num, A) -> Real)((n : Num), (x : A))
+      #|  (x : A)
+      #|  \226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 (D : (Num, A) -> Real)(n, x) <= D(0, x)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 D : (Num, A) -> Real, (\226\136\128 n : Num, integrable(p, D(n))) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= D(n, x)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 D(SUC(n), x) <= D(n, x)) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 op_minus_minus_minus_gt((n : Num) => D(n, x), real_of_num(0), sequentially)) \226\134\146 op_minus_minus_minus_gt((n : Num) => expectation(p, D(n)), real_of_num(0), sequentially)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (D : (Num, A) -> Real)(0)
+      #|  (x : A) => real_of_num(0)
+      #|  (D : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (D : (Num, A) -> Real)((n : Num), (x : A))
+      #|  (x : A)
+      #|  \226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 (D : (Num, A) -> Real)(n, x) <= D(0, x)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 D : (Num, A) -> Real, (\226\136\128 n : Num, integrable(p, D(n))) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= D(n, x)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 D(SUC(n), x) <= D(n, x)) && almost_surely(p, {(x : A) | op_minus_minus_minus_gt((n : Num) => D(n, x), real_of_num(0), sequentially)}) \226\134\146 op_minus_minus_minus_gt((n : Num) => expectation(p, D(n)), real_of_num(0), sequentially)
+      #|  (x : A)
+      #|  expectation((p : Prob_space[A]), (x : A) => (f : (A) -> Real)(x) * indicator_fn((S : (A) -> Bool), x) + f(x) * indicator_fn(DIFF(prob_carrier(p), S), x)) == expectation(p, f)
+      #|  (x : A) => (f : (A) -> Real)(x) * indicator_fn(DIFF(prob_carrier((p : Prob_space[A])), (S : (A) -> Bool)), x)
+      #|  (x : A) => (f : (A) -> Real)(x) * indicator_fn((S : (A) -> Bool), x)
+      #|  (p : Prob_space[A])
+      #|  DIFF(prob_carrier((p : Prob_space[A])), (S : (A) -> Bool))
+      #|  (f : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  IN(DIFF(prob_carrier((p : Prob_space[A])), (S : (A) -> Bool)), prob_events(p))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (A) -> Real, \226\136\128 S : (A) -> Bool, integrable(p, f) && IN(S, prob_events(p)) && prob(p, DIFF(prob_carrier(p), S)) == real_of_num(0) \226\134\146 expectation(p, (x : A) => f(x) * indicator_fn(S, x)) == expectation(p, f)
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 op_minus_minus_minus_gt((n : Num) => (gc : (Num, A) -> Real)(n, x), (W : (A) -> Real)(x), sequentially)
+      #|  indicator_fn((good : (A) -> Bool), (x : A)) == real_of_num(1)
+      #|  \226\136\128 n : Num, (gc : (Num, A) -> Real)(n, (x : A)) == gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (D : (Num, A) -> Real)(n), x)
+      #|  (x : A)
+      #|  (N0 : (A) -> Bool)
+      #|  INTER((good : (A) -> Bool), {(x : A) | (W : (A) -> Real)(x) == real_of_num(0)})
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | (W : (A) -> Real)(x) == real_of_num(0)})
+      #|  real_of_num(0)
+      #|  expectation((p : Prob_space[A]), (W : (A) -> Real))
+      #|  (n : Num) => expectation((p : Prob_space[A]), (D : (Num, A) -> Real)(n))
       #|  sequentially
-      #|  expectation p (\\x:A. (g:num->A->real) n x * indicator_fn good x) =\n       expectation p ((g:num->A->real) n)
-      #|  forall n. expectation p ((gc:num->A->real) n) = expectation p ((D:num->A->real) n)
-      #|  &0 <= (gc:num->A->real) n x /\\ gc n x <= gc 0 x
-      #|  x:A
-      #|  n:num
-      #|  (gc:num->A->real) 0
-      #|  W:A->real
-      #|  gc:num->A->real
-      #|  p:A prob_space
-      #|  ((\\n. expectation p ((gc:num->A->real) n)) ---> expectation p (W:A->real))\n      sequentially
-      #|  expectation p (W:A->real) = &0
-      #|  &0 <= (gc:num->A->real) n x /\\ gc n x <= gc 0 x
-      #|  x:A
-      #|  n:num
-      #|  (gc:num->A->real) 0
-      #|  gc:num->A->real
-      #|  integrable p (W:A->real)
+      #|  expectation((p : Prob_space[A]), (x : A) => (g : (Num, A) -> Real)((n : Num), x) * indicator_fn((good : (A) -> Bool), x)) == expectation(p, g(n))
+      #|  \226\136\128 n : Num, expectation((p : Prob_space[A]), (gc : (Num, A) -> Real)(n)) == expectation(p, (D : (Num, A) -> Real)(n))
+      #|  real_of_num(0) <= (gc : (Num, A) -> Real)((n : Num), (x : A)) && gc(n, x) <= gc(0, x)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (gc : (Num, A) -> Real)(0)
+      #|  (W : (A) -> Real)
+      #|  (gc : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  op_minus_minus_minus_gt((n : Num) => expectation((p : Prob_space[A]), (gc : (Num, A) -> Real)(n)), expectation(p, (W : (A) -> Real)), sequentially)
+      #|  expectation((p : Prob_space[A]), (W : (A) -> Real)) == real_of_num(0)
+      #|  real_of_num(0) <= (gc : (Num, A) -> Real)((n : Num), (x : A)) && gc(n, x) <= gc(0, x)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (gc : (Num, A) -> Real)(0)
+      #|  (gc : (Num, A) -> Real)
+      #|  integrable((p : Prob_space[A]), (W : (A) -> Real))
       #|  0
-      #|  &0
-      #|  (W:A->real) x
-      #|  \\n. (gc:num->A->real) n x
+      #|  real_of_num(0)
+      #|  (W : (A) -> Real)((x : A))
+      #|  (n : Num) => (gc : (Num, A) -> Real)(n, (x : A))
       #|  sequentially
-      #|  x:A
-      #|  forall x:A. x IN prob_carrier p ==> &0 <= (W:A->real) x
-      #|  gc:num->A->real
-      #|  random_variable p (W:A->real)
-      #|  x:A
-      #|  x:A
-      #|  forall x:A. x IN prob_carrier p\n       ==> ((\\n. (gc:num->A->real) n x) ---> (W:A->real) x) sequentially
-      #|  W = \\x:A. reallim sequentially (\\n. (gc:num->A->real) n x)
-      #|  &0 <= (gc:num->A->real) m x /\\ gc m x <= gc 0 x
-      #|  m:num
-      #|  abs((gc:num->A->real) 0 x) + &1
-      #|  x:A
-      #|  forall x:A. x IN prob_carrier p\n       ==> ?l. ((\\n. (gc:num->A->real) n x) ---> l) sequentially
-      #|  (gc:num->A->real) n x
-      #|  x:A
-      #|  forall n x:A. x IN prob_carrier p ==> (gc:num->A->real) n x <= gc 0 x
-      #|  x:A
-      #|  n:num
-      #|  forall n x:A. x IN prob_carrier p ==> (gc:num->A->real) (SUC n) x <= gc n x
-      #|  x:A
-      #|  n:num
-      #|  forall n x:A. x IN prob_carrier p ==> &0 <= (gc:num->A->real) n x
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\\n     ~(x IN {x | (forall n. &0 <= (g:num->A->real) n x) /\\\n                 (forall n. g (SUC n) x <= g n x)})} SUBSET N0
-      #|  x:A
-      #|  forall x:A. x IN good\n       ==> (forall n. &0 <= (g:num->A->real) n x) /\\ (forall n. g (SUC n) x <= g n x)
-      #|  forall n:num. integrable p ((gc:num->A->real) n)
-      #|  gc = \\n:num. \\x:A. (g:num->A->real) n x * indicator_fn good x
-      #|  (N0:A->bool) SUBSET prob_carrier p
-      #|  prob_carrier p DIFF (good:A->bool) = N0
-      #|  prob p (prob_carrier p DIFF (good:A->bool)) = &0
-      #|  (good:A->bool) IN prob_events p
-      #|  good = prob_carrier p DIFF (N0:A->bool)
-      #|  N0:A->bool
-      #|  {x:A | &0 <= (g:num->A->real) n x} INTER {x:A | g (SUC n) x <= g n x}
-      #|  n:num
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 real_of_num(0) <= (W : (A) -> Real)(x)
+      #|  (gc : (Num, A) -> Real)
+      #|  random_variable((p : Prob_space[A]), (W : (A) -> Real))
+      #|  (x : A)
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 op_minus_minus_minus_gt((n : Num) => (gc : (Num, A) -> Real)(n, x), (W : (A) -> Real)(x), sequentially)
+      #|  (W : (A) -> Real) == ((x : A) => reallim(sequentially, (n : Num) => (gc : (Num, A) -> Real)(n, x)))
+      #|  real_of_num(0) <= (gc : (Num, A) -> Real)((m : Num), (x : A)) && gc(m, x) <= gc(0, x)
+      #|  (m : Num)
+      #|  abs((gc : (Num, A) -> Real)(0, (x : A))) + real_of_num(1)
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 (\226\136\131 l : Real, op_minus_minus_minus_gt((n : Num) => (gc : (Num, A) -> Real)(n, x), l, sequentially))
+      #|  (gc : (Num, A) -> Real)((n : Num), (x : A))
+      #|  (x : A)
+      #|  \226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 (gc : (Num, A) -> Real)(n, x) <= gc(0, x)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 (gc : (Num, A) -> Real)(SUC(n), x) <= gc(n, x)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 real_of_num(0) <= (gc : (Num, A) -> Real)(n, x)
+      #|  (x : A)
+      #|  SUBSET({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !IN(x, {(x : A) | (\226\136\128 n : Num, real_of_num(0) <= (g : (Num, A) -> Real)(n, x)) && (\226\136\128 n : Num, g(SUC(n), x) <= g(n, x))})}, (N0 : (A) -> Bool))
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, (good : (A) -> Bool)) \226\134\146 (\226\136\128 n : Num, real_of_num(0) <= (g : (Num, A) -> Real)(n, x)) && (\226\136\128 n : Num, g(SUC(n), x) <= g(n, x))
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (gc : (Num, A) -> Real)(n))
+      #|  (gc : (Num, A) -> Real) == ((n : Num) => (x : A) => (g : (Num, A) -> Real)(n, x) * indicator_fn((good : (A) -> Bool), x))
+      #|  SUBSET((N0 : (A) -> Bool), prob_carrier((p : Prob_space[A])))
+      #|  DIFF(prob_carrier((p : Prob_space[A])), (good : (A) -> Bool)) == (N0 : (A) -> Bool)
+      #|  prob((p : Prob_space[A]), DIFF(prob_carrier(p), (good : (A) -> Bool))) == real_of_num(0)
+      #|  IN((good : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (good : (A) -> Bool) == DIFF(prob_carrier((p : Prob_space[A])), (N0 : (A) -> Bool))
+      #|  (N0 : (A) -> Bool)
+      #|  INTER({(x : A) | real_of_num(0) <= (g : (Num, A) -> Real)((n : Num), x)}, {(x : A) | g(SUC(n), x) <= g(n, x)})
+      #|  (n : Num)
       #|  INTERS {{x:A | &0 <= (g:num->A->real) n x /\\ g (SUC n) x <= g n x} |\n             n IN (:num)}
-      #|  almost_surely p\n       {x:A | (forall n. &0 <= (g:num->A->real) n x) /\\\n              (forall n. g (SUC n) x <= g n x)}
-      #|  forall n:num. integrable p ((g:num->A->real) n)
-      #|  g = \\n:num. \\x:A. gen_cond_exp p G ((D:num->A->real) n) x
-      #|  forall p:A prob_space G D.\n     sub_sigma_algebra p G /\\\n     (forall n. integrable p (D n)) /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= D n x) /\\\n     (forall n x. x IN prob_carrier p ==> D (SUC n) x <= D n x) /\\\n     almost_surely p {x | ((\\n. D n x) ---> &0) sequentially}\n     ==> almost_surely p\n           {x | ((\\n. gen_cond_exp p G (D n) x) ---> &0) sequentially}
-      #|  ((\\n. gen_cond_exp p G L x - gen_cond_exp p G ((D:num->A->real) n) x)\n       ---> gen_cond_exp p G L x - &0) sequentially
-      #|  n:num
-      #|  n:num
-      #|  (\\n. gen_cond_exp p G ((X:num->A->real) n) x) =\n      (\\n. gen_cond_exp p G L x - gen_cond_exp p G ((D:num->A->real) n) x)
-      #|  x:A
-      #|  {x:A | ((\\n. gen_cond_exp p G ((D:num->A->real) n) x) ---> &0)\n            sequentially} INTER\n     {x:A | forall n. gen_cond_exp p G ((D:num->A->real) n) x =\n                gen_cond_exp p G L x - gen_cond_exp p G (X n) x}
-      #|  (X:num->A->real) n
-      #|  L:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (\\w:A. L w - (X:num->A->real) n w) = (D:num->A->real) n
-      #|  n:num
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | (\226\136\128 n : Num, real_of_num(0) <= (g : (Num, A) -> Real)(n, x)) && (\226\136\128 n : Num, g(SUC(n), x) <= g(n, x))})
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (g : (Num, A) -> Real)(n))
+      #|  (g : (Num, A) -> Real) == ((n : Num) => (x : A) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (D : (Num, A) -> Real)(n), x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 D : (Num, A) -> Real, sub_sigma_algebra(p, G) && (\226\136\128 n : Num, integrable(p, D(n))) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= D(n, x)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 D(SUC(n), x) <= D(n, x)) && almost_surely(p, {(x : A) | op_minus_minus_minus_gt((n : Num) => D(n, x), real_of_num(0), sequentially)}) \226\134\146 almost_surely(p, {(x : A) | op_minus_minus_minus_gt((n : Num) => gen_cond_exp(p, G, D(n), x), real_of_num(0), sequentially)})
+      #|  op_minus_minus_minus_gt((n : Num) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (L : (A) -> Real), (x : A)) - gen_cond_exp(p, G, (D : (Num, A) -> Real)(n), x), gen_cond_exp(p, G, L, x) - real_of_num(0), sequentially)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  ((n : Num) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (Num, A) -> Real)(n), (x : A))) == ((n : Num) => gen_cond_exp(p, G, (L : (A) -> Real), x) - gen_cond_exp(p, G, (D : (Num, A) -> Real)(n), x))
+      #|  (x : A)
+      #|  INTER({(x : A) | op_minus_minus_minus_gt((n : Num) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (D : (Num, A) -> Real)(n), x), real_of_num(0), sequentially)}, {(x : A) | \226\136\128 n : Num, gen_cond_exp(p, G, D(n), x) == gen_cond_exp(p, G, (L : (A) -> Real), x) - gen_cond_exp(p, G, (X : (Num, A) -> Real)(n), x)})
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (L : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  ((w : A) => (L : (A) -> Real)(w) - (X : (Num, A) -> Real)((n : Num), w)) == (D : (Num, A) -> Real)(n)
+      #|  (n : Num)
       #|  INTERS {{x:A | gen_cond_exp p G ((D:num->A->real) n) x =\n                     gen_cond_exp p G L x - gen_cond_exp p G (X n) x} |\n              n IN (:num)}
-      #|  almost_surely p\n       {x:A | forall n. gen_cond_exp p G ((D:num->A->real) n) x =\n                  gen_cond_exp p G L x - gen_cond_exp p G (X n) x}
-      #|  ((\\n. L x - (X:num->A->real) n x) ---> L x - L x) sequentially
-      #|  x:A
-      #|  prob_carrier (p:A prob_space)
-      #|  (X:num->A->real) n x <= X (SUC n) x
-      #|  x:A
-      #|  n:num
-      #|  (X:num->A->real) n x <= L x
-      #|  x:A
-      #|  n:num
-      #|  almost_surely p\n       {x:A | ((\\n. gen_cond_exp p G ((D:num->A->real) n) x) ---> &0)\n              sequentially}
-      #|  forall n:num. integrable p ((D:num->A->real) n)
-      #|  D = \\n:num. \\x:A. L x - (X:num->A->real) n x
-      #|  forall p:A prob_space G X L.\n     sub_sigma_algebra p G /\\\n     (forall n. integrable p (X n)) /\\ integrable p L /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= X (SUC n) x) /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= L x) /\\\n     (forall x. x IN prob_carrier p ==> ((\\n. X n x) ---> L x) sequentially)\n     ==> almost_surely p\n           {x | ((\\n. gen_cond_exp p G (X n) x) ---> gen_cond_exp p G L x)\n                sequentially}
-      #|  {x:A | x IN prob_carrier p /\\\n     ~(x IN {x | gen_cond_exp p G (\\w. -- &1 * (X:A->real) w) x =\n                  -- &1 * gen_cond_exp p G X x})} SUBSET n1
-      #|  {x:A | x IN prob_carrier p /\\\n      ~(x IN {x | gen_cond_exp p G (\\w. --(X:A->real) w) x <=\n                   gen_cond_exp p G (\\w. abs(X w)) x})} SUBSET n2
-      #|  {x:A | x IN prob_carrier p /\\\n       ~(x IN {x | gen_cond_exp p G (X:A->real) x <=\n                    gen_cond_exp p G (\\w. abs(X w)) x})} SUBSET n3
-      #|  (\\w:A. --(X:A->real) w) = (\\w. -- &1 * X w)
-      #|  gen_cond_exp p G (\\w:A. --(X:A->real) w) w =\n                   --gen_cond_exp p G X w
-      #|  ~(abs (gen_cond_exp p G (X:A->real) w) <=\n          gen_cond_exp p G (\\w. abs (X w)) w)
-      #|  gen_cond_exp p G (X:A->real) w <=\n       gen_cond_exp p G (\\w:A. abs(X w)) w
-      #|  gen_cond_exp p G (\\w:A. --(X:A->real) w) w <=\n      gen_cond_exp p G (\\w. abs(X w)) w
-      #|  gen_cond_exp p G (\\w:A. -- &1 * (X:A->real) w) w =\n     -- &1 * gen_cond_exp p G X w
-      #|  w:A
-      #|  n1 UNION n2 UNION n3:A->bool
-      #|  n3:A->bool
-      #|  n2:A->bool
-      #|  n1:A->bool
-      #|  -- &1
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (\\w:A. abs((X:A->real) w))
-      #|  (\\w:A. --((X:A->real) w))
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (\\w:A. abs((X:A->real) w))
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall p:A prob_space G (X:A->real).\n    sub_sigma_algebra p G /\\ integrable p X /\\\n    integrable p (\\x. abs(X x))\n    ==> almost_surely p\n      {x | abs(gen_cond_exp p G X x) <=\n           gen_cond_exp p G (\\w. abs(X w)) x}
-      #|  k:num
-      #|  (X:num->real) k
-      #|  y:real
-      #|  i < B - c <=> c < B - i
-      #|  B - c:real
-      #|  {B - (X:num->real) k | k >= N}
-      #|  c:real
-      #|  k:num
-      #|  i <= B - X ==> X <= B - i
-      #|  &0
-      #|  ?b. forall y. y IN {B - (X:num->real) k | k >= N} ==> b <= y
-      #|  N:num
-      #|  B - (X:num->real) N
-      #|  ~({B - (X:num->real) k | k >= N} = {})
-      #|  forall X:num->real B N.\n     (forall k. k >= N ==> &0 <= X k /\\ X k <= B)\n     ==> sup {X k | k >= N} = B - inf {B - X k | k >= N}
-      #|  x:A
-      #|  x:A
-      #|  n:num
-      #|  (\\x:A. (X:num->A->real) n x) = X n
-      #|  N:num
-      #|  \\k:num. \\x:A. g x - (X:num->A->real) k x
-      #|  p:A prob_space
-      #|  \\x:A. g x - inf {g x - (X:num->A->real) k x | k >= N}
-      #|  forall p:A prob_space (X:num->A->real) N g.\n     (forall n. random_variable p (X n)) /\\ random_variable p g /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= g x)\n     ==> random_variable p (\\x. sup {X k x | k >= N})
-      #|  &0 <= x ==> abs x < e ==> x < e
-      #|  abs(x - &0) = abs x
-      #|  M:num <= m
-      #|  k:num >= m
-      #|  k:num
-      #|  k:num
-      #|  z:real
-      #|  m:num
-      #|  (a:num->real) m
-      #|  e / &2
-      #|  m:num
-      #|  j:num
-      #|  z:real
-      #|  C:real
-      #|  (a:num->real) m
-      #|  &0 <= sup {(a:num->real) k | k >= m}
-      #|  abs(s - &0) = abs s
-      #|  m:num
-      #|  M:num
-      #|  M:num
-      #|  e / &2
-      #|  ((\\k. (a:num->real) k) ---> &0) sequentially
-      #|  e:real
-      #|  forall a:num->real C.\n     (forall k. &0 <= a k) /\\ (forall k. a k <= C) /\\ ((\\k. a k) ---> &0) sequentially\n     ==> ((\\m. sup {a k | k >= m}) ---> &0) sequentially
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | \226\136\128 n : Num, gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (D : (Num, A) -> Real)(n), x) == gen_cond_exp(p, G, (L : (A) -> Real), x) - gen_cond_exp(p, G, (X : (Num, A) -> Real)(n), x)})
+      #|  op_minus_minus_minus_gt((n : Num) => (L : (A) -> Real)((x : A)) - (X : (Num, A) -> Real)(n, x), L(x) - L(x), sequentially)
+      #|  (x : A)
+      #|  prob_carrier((p : Prob_space[A]))
+      #|  (X : (Num, A) -> Real)((n : Num), (x : A)) <= X(SUC(n), x)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (X : (Num, A) -> Real)((n : Num), (x : A)) <= (L : (A) -> Real)(x)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | op_minus_minus_minus_gt((n : Num) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (D : (Num, A) -> Real)(n), x), real_of_num(0), sequentially)})
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (D : (Num, A) -> Real)(n))
+      #|  (D : (Num, A) -> Real) == ((n : Num) => (x : A) => (L : (A) -> Real)(x) - (X : (Num, A) -> Real)(n, x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 L : (A) -> Real, sub_sigma_algebra(p, G) && (\226\136\128 n : Num, integrable(p, X(n))) && integrable(p, L) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 X(n, x) <= X(SUC(n), x)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 X(n, x) <= L(x)) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 op_minus_minus_minus_gt((n : Num) => X(n, x), L(x), sequentially)) \226\134\146 almost_surely(p, {(x : A) | op_minus_minus_minus_gt((n : Num) => gen_cond_exp(p, G, X(n), x), gen_cond_exp(p, G, L, x), sequentially)})
+      #|  SUBSET({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !IN(x, {(x : A) | gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => -real_of_num(1) * (X : (A) -> Real)(w), x) == -real_of_num(1) * gen_cond_exp(p, G, X, x)})}, (n1 : (A) -> Bool))
+      #|  SUBSET({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !IN(x, {(x : A) | gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => -(X : (A) -> Real)(w), x) <= gen_cond_exp(p, G, (w : A) => abs(X(w)), x)})}, (n2 : (A) -> Bool))
+      #|  SUBSET({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !IN(x, {(x : A) | gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) <= gen_cond_exp(p, G, (w : A) => abs(X(w)), x)})}, (n3 : (A) -> Bool))
+      #|  ((w : A) => -(X : (A) -> Real)(w)) == ((w : A) => -real_of_num(1) * X(w))
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => -(X : (A) -> Real)(w), (w : A)) == -gen_cond_exp(p, G, X, w)
+      #|  !(abs(gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), (w : A))) <= gen_cond_exp(p, G, (w : A) => abs(X(w)), w))
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), (w : A)) <= gen_cond_exp(p, G, (w : A) => abs(X(w)), w)
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => -(X : (A) -> Real)(w), (w : A)) <= gen_cond_exp(p, G, (w : A) => abs(X(w)), w)
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => -real_of_num(1) * (X : (A) -> Real)(w), (w : A)) == -real_of_num(1) * gen_cond_exp(p, G, X, w)
+      #|  (w : A)
+      #|  UNION((n1 : (A) -> Bool), UNION((n2 : (A) -> Bool), (n3 : (A) -> Bool)))
+      #|  (n3 : (A) -> Bool)
+      #|  (n2 : (A) -> Bool)
+      #|  (n1 : (A) -> Bool)
+      #|  -real_of_num(1)
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (w : A) => abs((X : (A) -> Real)(w))
+      #|  (w : A) => -(X : (A) -> Real)(w)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (w : A) => abs((X : (A) -> Real)(w))
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) && integrable(p, (x : A) => abs(X(x))) \226\134\146 almost_surely(p, {(x : A) | abs(gen_cond_exp(p, G, X, x)) <= gen_cond_exp(p, G, (w : A) => abs(X(w)), x)})
+      #|  (k : Num)
+      #|  (X : (Num) -> Real)((k : Num))
+      #|  (y : Real)
+      #|  ((i : Real) < (B : Real) - (c : Real)) == (c < B - i)
+      #|  (B : Real) - (c : Real)
+      #|  {(B : Real) - (X : (Num) -> Real)((k : Num)) | k >= (N : Num)}
+      #|  (c : Real)
+      #|  (k : Num)
+      #|  (i : Real) <= (B : Real) - (X : Real) \226\134\146 X <= B - i
+      #|  real_of_num(0)
+      #|  \226\136\131 b : Real, \226\136\128 y : Real, IN(y, {(B : Real) - (X : (Num) -> Real)((k : Num)) | k >= (N : Num)}) \226\134\146 b <= y
+      #|  (N : Num)
+      #|  (B : Real) - (X : (Num) -> Real)((N : Num))
+      #|  !({(B : Real) - (X : (Num) -> Real)((k : Num)) | k >= (N : Num)} == {})
+      #|  \226\136\128 X : (Num) -> Real, \226\136\128 B : Real, \226\136\128 N : Num, (\226\136\128 k : Num, k >= N \226\134\146 real_of_num(0) <= X(k) && X(k) <= B) \226\134\146 sup({X((k : Num)) | k >= N}) == B - inf({B - X((k : Num)) | k >= N})
+      #|  (x : A)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  ((x : A) => (X : (Num, A) -> Real)((n : Num), x)) == X(n)
+      #|  (N : Num)
+      #|  (k : Num) => (x : A) => (g : (A) -> Real)(x) - (X : (Num, A) -> Real)(k, x)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => (g : (A) -> Real)(x) - inf({g(x) - (X : (Num, A) -> Real)((k : Num), x) | k >= (N : Num)})
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 N : Num, \226\136\128 g : (A) -> Real, (\226\136\128 n : Num, random_variable(p, X(n))) && random_variable(p, g) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= X(n, x)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 X(n, x) <= g(x)) \226\134\146 random_variable(p, (x : A) => sup({X((k : Num), x) | k >= N}))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x) < (e : Real) \226\134\146 x < e
+      #|  abs((x : Real) - real_of_num(0)) == abs(x)
+      #|  (M : Num) <= (m : Num)
+      #|  (k : Num) >= (m : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (z : Real)
+      #|  (m : Num)
+      #|  (a : (Num) -> Real)((m : Num))
+      #|  (e : Real) / real_of_num(2)
+      #|  (m : Num)
+      #|  (j : Num)
+      #|  (z : Real)
+      #|  (C : Real)
+      #|  (a : (Num) -> Real)((m : Num))
+      #|  real_of_num(0) <= sup({(a : (Num) -> Real)((k : Num)) | k >= (m : Num)})
+      #|  abs((s : Real) - real_of_num(0)) == abs(s)
+      #|  (m : Num)
+      #|  (M : Num)
+      #|  (M : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  op_minus_minus_minus_gt((k : Num) => (a : (Num) -> Real)(k), real_of_num(0), sequentially)
+      #|  (e : Real)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 C : Real, (\226\136\128 k : Num, real_of_num(0) <= a(k)) && (\226\136\128 k : Num, a(k) <= C) && op_minus_minus_minus_gt((k : Num) => a(k), real_of_num(0), sequentially) \226\134\146 op_minus_minus_minus_gt((m : Num) => sup({a((k : Num)) | k >= m}), real_of_num(0), sequentially)
       #|  0
-      #|  \\n. gen_cond_exp p G ((W:num->A->real) n) x
-      #|  x:A
-      #|  {x:A | forall n. abs(gen_cond_exp p G ((X:num->A->real) n) x -\n                    gen_cond_exp p G Z x)\n                <= gen_cond_exp p G ((W:num->A->real) n) x} INTER\n     {x:A | ((\\m. gen_cond_exp p G ((W:num->A->real) m) x) ---> &0)\n            sequentially}
-      #|  n:num
-      #|  n:num
-      #|  x:A
-      #|  {x:A | forall n. gen_cond_exp p G (\\w. (X:num->A->real) n w - Z w) x =\n                 gen_cond_exp p G (X n) x - gen_cond_exp p G Z x} INTER\n      {x:A | forall n. abs(gen_cond_exp p G (\\w. (X:num->A->real) n w - Z w) x)\n                 <= gen_cond_exp p G (\\w. abs((X:num->A->real) n w - Z w)) x} INTER\n      {x:A | forall n. gen_cond_exp p G (\\w. abs((X:num->A->real) n w - Z w)) x\n                 <= gen_cond_exp p G ((W:num->A->real) n) x}
-      #|  almost_surely p\n       {x:A | forall n. abs(gen_cond_exp p G ((X:num->A->real) n) x -\n                      gen_cond_exp p G Z x)\n                  <= gen_cond_exp p G ((W:num->A->real) n) x}
+      #|  (n : Num) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (W : (Num, A) -> Real)(n), (x : A))
+      #|  (x : A)
+      #|  INTER({(x : A) | \226\136\128 n : Num, abs(gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (Num, A) -> Real)(n), x) - gen_cond_exp(p, G, (Z : (A) -> Real), x)) <= gen_cond_exp(p, G, (W : (Num, A) -> Real)(n), x)}, {(x : A) | op_minus_minus_minus_gt((m : Num) => gen_cond_exp(p, G, W(m), x), real_of_num(0), sequentially)})
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (x : A)
+      #|  INTER({(x : A) | \226\136\128 n : Num, gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (X : (Num, A) -> Real)(n, w) - (Z : (A) -> Real)(w), x) == gen_cond_exp(p, G, X(n), x) - gen_cond_exp(p, G, Z, x)}, INTER({(x : A) | \226\136\128 n : Num, abs(gen_cond_exp(p, G, (w : A) => X(n, w) - Z(w), x)) <= gen_cond_exp(p, G, (w : A) => abs(X(n, w) - Z(w)), x)}, {(x : A) | \226\136\128 n : Num, gen_cond_exp(p, G, (w : A) => abs(X(n, w) - Z(w)), x) <= gen_cond_exp(p, G, (W : (Num, A) -> Real)(n), x)}))
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | \226\136\128 n : Num, abs(gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (Num, A) -> Real)(n), x) - gen_cond_exp(p, G, (Z : (A) -> Real), x)) <= gen_cond_exp(p, G, (W : (Num, A) -> Real)(n), x)})
       #|  INTERS {{x:A | gen_cond_exp p G (\\w. abs((X:num->A->real) n w - Z w)) x\n                     <= gen_cond_exp p G ((W:num->A->real) n) x} | n IN (:num)}
-      #|  almost_surely p\n       {x:A | forall n. gen_cond_exp p G (\\w. abs((X:num->A->real) n w - Z w)) x\n                  <= gen_cond_exp p G ((W:num->A->real) n) x}
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | \226\136\128 n : Num, gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => abs((X : (Num, A) -> Real)(n, w) - (Z : (A) -> Real)(w)), x) <= gen_cond_exp(p, G, (W : (Num, A) -> Real)(n), x)})
       #|  INTERS {{x:A | abs(gen_cond_exp p G (\\w. (X:num->A->real) n w - Z w) x)\n                     <= gen_cond_exp p G (\\w. abs((X:num->A->real) n w - Z w)) x} |\n              n IN (:num)}
-      #|  almost_surely p\n       {x:A | forall n. abs(gen_cond_exp p G (\\w. (X:num->A->real) n w - Z w) x)\n                  <= gen_cond_exp p G (\\w. abs((X:num->A->real) n w - Z w)) x}
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | \226\136\128 n : Num, abs(gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => (X : (Num, A) -> Real)(n, w) - (Z : (A) -> Real)(w), x)) <= gen_cond_exp(p, G, (w : A) => abs(X(n, w) - Z(w)), x)})
       #|  INTERS {{x:A | gen_cond_exp p G (\\w. (X:num->A->real) n w - Z w) x =\n                     gen_cond_exp p G (X n) x - gen_cond_exp p G Z x} | n IN (:num)}
-      #|  almost_surely p\n       {x:A | forall n. gen_cond_exp p G (\\w. (X:num->A->real) n w - Z w) x =\n                  gen_cond_exp p G (X n) x - gen_cond_exp p G Z x}
-      #|  x:A
-      #|  (W:num->A->real) n
-      #|  \\w:A. abs((X:num->A->real) n w - Z w)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall n:num. almost_surely p\n        {x:A | gen_cond_exp p G (\\w. abs((X:num->A->real) n w - Z w)) x\n               <= gen_cond_exp p G ((W:num->A->real) n) x}
-      #|  \\w:A. (X:num->A->real) n w - Z w
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall n:num. almost_surely p\n        {x:A | abs(gen_cond_exp p G (\\w. (X:num->A->real) n w - Z w) x)\n               <= gen_cond_exp p G (\\w. abs((X:num->A->real) n w - Z w)) x}
-      #|  Z:A->real
-      #|  (X:num->A->real) n
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall n:num. almost_surely p\n        {x:A | gen_cond_exp p G (\\w. (X:num->A->real) n w - Z w) x =\n               gen_cond_exp p G (X n) x - gen_cond_exp p G Z x}
-      #|  j:num
-      #|  z:real
-      #|  &2 * (Y:A->real) x
-      #|  j:num >= SUC m
-      #|  j:num
-      #|  j:num
-      #|  z:real
-      #|  SUC m
-      #|  abs((X:num->A->real) (SUC m) x - Z x)
-      #|  x:A
-      #|  m:num
-      #|  x:A
-      #|  m:num
-      #|  almost_surely p\n       {x:A | ((\\m. gen_cond_exp p G ((W:num->A->real) m) x) ---> &0)\n              sequentially}
-      #|  &2 * (Y:A->real) x
-      #|  \\k:num. abs((X:num->A->real) k x - Z x)
-      #|  x:A
-      #|  {x:A | ((\\n. (X:num->A->real) n x) ---> Z x) sequentially}
-      #|  almost_surely p {x:A | ((\\m. (W:num->A->real) m x) ---> &0) sequentially}
-      #|  n:num
-      #|  j:num
-      #|  z:real
-      #|  &2 * (Y:A->real) x
-      #|  x:A
-      #|  n:num
-      #|  m:num
-      #|  forall m n x:A. n >= m /\\ x IN prob_carrier p\n       ==> abs((X:num->A->real) n x - Z x) <= (W:num->A->real) m x
-      #|  &0 <= w /\\ w <= t ==> abs w <= abs t
-      #|  x:A
-      #|  \\x:A. &2 * Y x
-      #|  forall m:num. integrable p ((W:num->A->real) m)
-      #|  j:num
-      #|  z:real
-      #|  m:num
-      #|  abs((X:num->A->real) m x - Z x)
-      #|  m:num
-      #|  j:num
-      #|  z:real
-      #|  &2 * (Y:A->real) x
-      #|  abs((X:num->A->real) m x - Z x)
-      #|  x:A
-      #|  m:num
-      #|  forall m x:A. x IN prob_carrier p\n       ==> &0 <= (W:num->A->real) m x /\\ W m x <= &2 * Y x
-      #|  \\x:A. &2 * Y x
-      #|  m:num
-      #|  \\k:num. \\x:A. abs((X:num->A->real) k x - Z x)
-      #|  p:A prob_space
-      #|  forall m:num. random_variable p ((W:num->A->real) m)
-      #|  &0 <= a ==> a <= t ==> a <= abs t
-      #|  abs((X:num->A->real) n x - Z x) <= &2 * Y x
-      #|  x:A
-      #|  \\x:A. &2 * Y x
-      #|  forall n:num. integrable p (\\x:A. abs((X:num->A->real) n x - Z x))
-      #|  forall n:num. integrable p (\\x:A. (X:num->A->real) n x - Z x)
-      #|  abs((X:num->A->real) k x) <= Y x /\\ abs(Z x) <= Y x
-      #|  x:A
-      #|  k:num
-      #|  forall k x:A. x IN prob_carrier p ==> abs((X:num->A->real) k x - Z x) <= &2 * Y x
-      #|  forall k:num. random_variable p (\\x:A. abs((X:num->A->real) k x - Z x))
-      #|  W = \\m:num. \\x:A. sup {abs((X:num->A->real) k x - Z x) | k >= m}
-      #|  forall p:A prob_space G X Z Y.\n     sub_sigma_algebra p G /\\\n     (forall n. integrable p (X n)) /\\ integrable p Z /\\ integrable p Y /\\\n     (forall n x. x IN prob_carrier p ==> abs(X n x) <= Y x) /\\\n     (forall x. x IN prob_carrier p ==> abs(Z x) <= Y x) /\\\n     almost_surely p {x | ((\\n. X n x) ---> Z x) sequentially}\n     ==> almost_surely p\n           {x | ((\\n. gen_cond_exp p G (X n) x) ---> gen_cond_exp p G Z x)\n                sequentially}
-      #|  (\\x:A. gen_cond_exp p G (X:A->real) x) = gen_cond_exp p G X
-      #|  (\\x:A. gen_cond_exp p G (X:A->real) x) = gen_cond_exp p G X
-      #|  G:(A->bool)->bool
-      #|  forall p:A prob_space G (X:A->real).\n    sub_sigma_algebra p G /\\ integrable p X /\\ measurable_wrt p G X\n    ==> almost_surely p {x | gen_cond_exp p G X x = X x}
-      #|  forall p:A prob_space G (c:real).\n    sub_sigma_algebra p G\n    ==> almost_surely p {x | gen_cond_exp p G (\\w. c) x = c}
-      #|  expectation p (\\x:A. gen_cond_exp p H (X:A->real) x *\n        indicator_fn (A:A->bool) x) =\n      expectation p (\\x. X x * indicator_fn A x)
-      #|  (A:A->bool) IN H
-      #|  expectation p (\\x:A. gen_cond_exp p G\n        (gen_cond_exp p H (X:A->real)) x *\n        indicator_fn (A:A->bool) x) =\n      expectation p (\\x. gen_cond_exp p H X x * indicator_fn A x)
-      #|  (\\x:A. gen_cond_exp p G (X:A->real) x) = gen_cond_exp p G X
-      #|  (\\x:A. gen_cond_exp p G (X:A->real) x) = gen_cond_exp p G X
-      #|  (\\x:A. gen_cond_exp p G (gen_cond_exp p H (X:A->real)) x) =\n      gen_cond_exp p G (gen_cond_exp p H X)
-      #|  (\\x:A. gen_cond_exp p G (gen_cond_exp p H (X:A->real)) x) =\n      gen_cond_exp p G (gen_cond_exp p H X)
-      #|  G:(A->bool)->bool
-      #|  forall p:A prob_space G H (X:A->real).\n    sub_sigma_algebra p G /\\ sub_sigma_algebra p H /\\\n    G SUBSET H /\\ integrable p X\n    ==> almost_surely p\n      {x | gen_cond_exp p G (gen_cond_exp p H X) x =\n           gen_cond_exp p G X x}
-      #|  sub_sigma_algebra (p:A prob_space) G
-      #|  sub_sigma_algebra (p:A prob_space) G
-      #|  prob_carrier (p:A prob_space) = UNIONS G
-      #|  (if (x:A) IN a then &1 else &0) <= v
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\ (if x IN a then &1 else &0) <= v} =\n       prob_carrier (p:A prob_space) DIFF a
-      #|  sub_sigma_algebra (p:A prob_space) G
-      #|  {x:A | x IN prob_carrier p /\\ (if x IN a then &1 else &0) <= v} =\n       prob_carrier p
-      #|  &1 <= v
-      #|  sub_sigma_algebra (p:A prob_space) G
-      #|  {x:A | x IN prob_carrier p /\\ (if x IN a then &1 else &0) <= v} = {}
-      #|  v < &0
-      #|  v:real
-      #|  forall p:A prob_space G (a:A->bool).\n    sub_sigma_algebra p G /\\ a IN G\n    ==> measurable_wrt p G (indicator_fn a)
-      #|  (\\x:A. (f:num->A->real) (SUC n) x) = f(SUC n)
-      #|  (\\x:A. sum(0..SUC n) (\\k. (f:num->A->real) k x)) =\n      (\\x. sum(0..n) (\\k. f k x) + f (SUC n) x)
-      #|  (\\x:A. sum(0..0) (\\k. (f:num->A->real) k x)) = f 0
-      #|  forall p:A prob_space G (f:num->A->real) n.\n    sub_sigma_algebra p G /\\ (forall k. k <= n ==> measurable_wrt p G (f k))\n    ==> measurable_wrt p G (\\x. sum(0..n) (\\k. f k x))
-      #|  v:real
-      #|  measurable_wrt (p:A prob_space) G (f:A->real)
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  (if (x:A) IN a then &1 else &0) * (f:A->real) x <= v
-      #|  (x:A) IN a
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\ (if x IN a then &1 else &0) * f x <= v} =\n      (prob_carrier p DIFF a) UNION\n      (a INTER {x | x IN prob_carrier p /\\ (f:A->real) x <= v})
-      #|  v:real
-      #|  measurable_wrt (p:A prob_space) G (f:A->real)
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  (x:A) IN a
-      #|  (if (x:A) IN a then &1 else &0) * (f:A->real) x <= v
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\ (if x IN a then &1 else &0) * f x <= v} =\n      a INTER {x | x IN prob_carrier p /\\ (f:A->real) x <= v}
-      #|  v < &0
-      #|  v:real
-      #|  forall p:A prob_space G (a:A->bool) (f:A->real).\n    sub_sigma_algebra p G /\\ a IN G /\\ measurable_wrt p G f\n    ==> measurable_wrt p G (\\x. indicator_fn a x * f x)
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  (x:A) IN B
-      #|  (x:A) IN a
-      #|  x:A
-      #|  (\\x:A. (indicator_fn a x * gen_cond_exp p G (X:A->real) x) *\n             indicator_fn B x) =\n      (\\x. gen_cond_exp p G X x * indicator_fn (a INTER B) x)
-      #|  (x:A) IN B
-      #|  (x:A) IN a
-      #|  x:A
-      #|  (\\x:A. (indicator_fn a x * (X:A->real) x) * indicator_fn B x) =\n      (\\x. X x * indicator_fn (a INTER B) x)
-      #|  expectation p\n       (\\x:A. gen_cond_exp p G (\\w. indicator_fn a w * (X:A->real) w) x *\n              indicator_fn B x) =\n      expectation p (\\x. (indicator_fn a x * X x) * indicator_fn B x)
-      #|  B:A->bool
-      #|  (\\x:A. gen_cond_exp p G (X:A->real) x) = gen_cond_exp p G X
-      #|  (\\x:A. indicator_fn a x * gen_cond_exp p G (X:A->real) x) =\n      (\\x. gen_cond_exp p G X x * indicator_fn a x)
-      #|  (\\x:A. gen_cond_exp p G (X:A->real) x) = gen_cond_exp p G X
-      #|  (\\x:A. gen_cond_exp p G (\\w. indicator_fn a w * (X:A->real) w) x) =\n      gen_cond_exp p G (\\w. indicator_fn a w * X w)
-      #|  (\\x:A. gen_cond_exp p G (\\w. indicator_fn a w * (X:A->real) w) x) =\n      gen_cond_exp p G (\\w. indicator_fn a w * X w)
-      #|  (\\w:A. indicator_fn a w * (X:A->real) w) =\n                  (\\w. X w * indicator_fn a w)
-      #|  integrable p (\\w:A. indicator_fn a w * (X:A->real) w)
-      #|  G:(A->bool)->bool
-      #|  (a:A->bool) IN prob_events p
-      #|  G:(A->bool)->bool
-      #|  forall p:A prob_space G (a:A->bool) (X:A->real).\n    sub_sigma_algebra p G /\\ a IN G /\\ integrable p X\n    ==> almost_surely p\n      {x | gen_cond_exp p G (\\w. indicator_fn a w * X w) x =\n           indicator_fn a x * gen_cond_exp p G X x}
-      #|  v:real
-      #|  forall p:A prob_space (X:A->real) v.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x <= v} IN prob_events p
-      #|  (A:A->bool) IN (FF:num->(A->bool)->bool) n
-      #|  expectation (p:A prob_space)\n      (\\x. (X:num->A->real) n x * indicator_fn A x)
-      #|  forall p:A prob_space FF (X:num->A->real) m n A.\n     submartingale p FF X /\\ m <= n /\\ A IN FF m\n     ==> expectation p (\\x. X m x * indicator_fn A x) <=\n         expectation p (\\x. X n x * indicator_fn A x)
-      #|  (x:A) IN a
-      #|  x:A
-      #|  expectation (p:A prob_space)\n     (\\x. (X:num->A->real) (SUC nn) x * indicator_fn B x)
-      #|  (x:A) IN a
-      #|  x:A
-      #|  expectation (p:A prob_space)\n        (\\x. max ((X:num->A->real) nn x) (&0) * indicator_fn a x) =\n      expectation p (\\x. X nn x * indicator_fn B x)
-      #|  (B:A->bool) IN (FF:num->(A->bool)->bool) nn
-      #|  B = a INTER\n     {x:A | x IN prob_carrier p /\\ (X:num->A->real) nn x >= &0}
-      #|  sigma_algebra ((FF:num->(A->bool)->bool) nn)
-      #|  measurable_wrt (p:A prob_space) ((FF:num->(A->bool)->bool) nn)\n     ((X:num->A->real) nn)
-      #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) nn)
-      #|  a:A->bool
-      #|  nn:num
-      #|  v:real
-      #|  nn:num
-      #|  (x:A) IN prob_carrier p
-      #|  {x:A | x IN prob_carrier p /\\ real_max ((X:num->A->real) nn x) (&0) <= v} =\n       {x | x IN prob_carrier p /\\ X nn x <= v}
-      #|  {x:A | x IN prob_carrier p /\\ real_max ((X:num->A->real) nn x) (&0) <= v} =\n       {}
-      #|  v < &0
-      #|  v:real
-      #|  nn:num
-      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  adapted (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real).\n     submartingale p FF X\n     ==> submartingale p FF (\\n x. pos_part(X n x))
-      #|  a = b ==> abs a <= abs b
-      #|  abs((f:A->real) y)
-      #|  y:A
-      #|  h:A->real
-      #|  h:A->real
-      #|  B:real
-      #|  B:real
-      #|  ?B. forall h:A->real.\n    simple_rv (p:A prob_space) h /\\\n    (forall x. x IN prob_carrier p ==> &0 <= h x) /\\\n    (forall x. x IN prob_carrier p ==> h x <= abs ((g:A->real) x))\n    ==> simple_expectation p h <= B
-      #|  {x:A | x IN prob_carrier p /\\ (f:A->real) x <= aa} =\n      {x | x IN prob_carrier p /\\ (g:A->real) x <= aa}
-      #|  aa:real
-      #|  random_variable (p:A prob_space) (g:A->real)
-      #|  random_variable (p:A prob_space) (f:A->real)
-      #|  forall p:A prob_space f g.\n     integrable p g /\\\n     (forall x. x IN prob_carrier p ==> f x = g x)\n     ==> integrable p f
-      #|  a - d <= b - d <=> a <= b
-      #|  indicator_fn (a:A->bool)
-      #|  c:real
-      #|  p:A prob_space
-      #|  \\x:A. c * indicator_fn (a:A->bool) x
-      #|  \\x:A. (X:num->A->real) (SUC n) x * indicator_fn (a:A->bool) x
-      #|  p:A prob_space
-      #|  y:A
-      #|  expectation (p:A prob_space)\n        (\\x:A. ((X:num->A->real) (SUC n) x - c) *\n               indicator_fn (a:A->bool) x) =\n       expectation p\n        (\\x. X (SUC n) x * indicator_fn a x - c * indicator_fn a x)
-      #|  expectation (p:A prob_space)\n       (\\x:A. ((X:num->A->real) (SUC n) x - c) * indicator_fn (a:A->bool) x) =\n      expectation p (\\x. X (SUC n) x * indicator_fn a x) - c * prob p a
-      #|  indicator_fn (a:A->bool)
-      #|  c:real
-      #|  p:A prob_space
-      #|  \\x:A. c * indicator_fn (a:A->bool) x
-      #|  \\x:A. (X:num->A->real) n x * indicator_fn (a:A->bool) x
-      #|  p:A prob_space
-      #|  y:A
-      #|  expectation (p:A prob_space)\n        (\\x:A. ((X:num->A->real) n x - c) * indicator_fn (a:A->bool) x) =\n       expectation p (\\x. X n x * indicator_fn a x - c * indicator_fn a x)
-      #|  expectation (p:A prob_space)\n       (\\x:A. ((X:num->A->real) n x - c) * indicator_fn (a:A->bool) x) =\n      expectation p (\\x. X n x * indicator_fn a x) - c * prob p a
-      #|  indicator_fn (a:A->bool)
-      #|  c:real
-      #|  p:A prob_space
-      #|  integrable (p:A prob_space)\n     (\\x:A. c * indicator_fn (a:A->bool) x)
-      #|  integrable (p:A prob_space) (indicator_fn (a:A->bool))
-      #|  integrable (p:A prob_space)\n     (\\x:A. (X:num->A->real) (SUC n) x * indicator_fn (a:A->bool) x)
-      #|  integrable (p:A prob_space)\n     (\\x:A. (X:num->A->real) n x * indicator_fn (a:A->bool) x)
-      #|  (FF:num->(A->bool)->bool) n
-      #|  (a:A->bool) IN prob_events (p:A prob_space)
-      #|  {x:A | x IN prob_carrier p /\\ (X:num->A->real) n x - c <= v} =\n      {x | x IN prob_carrier p /\\ X n x <= v + c}
-      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  adapted (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) c.\n     submartingale p FF X ==>\n     submartingale p FF (\\n x. X n x - c)
-      #|  A:A->bool
-      #|  n:num
-      #|  submartingale (p:A prob_space) FF (pp:num->A->real)
-      #|  (\\x:A. ((pp:num->A->real) (SUC n) x - pp n x) *\n              indicator_fn (A:A->bool) x) =\n       (\\x. pp (SUC n) x * indicator_fn A x - pp n x * indicator_fn A x)
-      #|  y:A
-      #|  expectation (p:A prob_space)\n        (\\x:A. (if upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0\n                then &1 else &0) *\n               ((pp:num->A->real) (SUC n) x - pp n x)) =\n       expectation p\n        (\\x. (pp (SUC n) x - pp n x) * indicator_fn (A:A->bool) x)
-      #|  expectation (p:A prob_space)\n       (\\x:A. (if upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0\n               then &1 else &0) *\n              ((pp:num->A->real) (SUC n) x - pp n x)) =\n      expectation p (\\x. pp (SUC n) x * indicator_fn (A:A->bool) x) -\n      expectation p (\\x. pp n x * indicator_fn A x)
-      #|  \\x:A. (if upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0\n             then &1 else &0) *\n            ((pp:num->A->real) (SUC n) x - pp n x)
-      #|  \\x:A. not_bet_gain (\\k. (pp:num->A->real) k x) (&0) (b - a) n
-      #|  p:A prob_space
-      #|  integrable (p:A prob_space)\n     (\\x:A. not_bet_gain (\\k. (pp:num->A->real) k x) (&0) (b - a) n +\n            (if upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0\n             then &1 else &0) *\n            (pp (SUC n) x - pp n x))
-      #|  y:A
-      #|  \\x:A. ((pp:num->A->real) (SUC n) x - pp n x) *\n      indicator_fn (A:A->bool) x
-      #|  integrable (p:A prob_space)\n     (\\x:A. (if upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0\n             then &1 else &0) *\n            ((pp:num->A->real) (SUC n) x - pp n x))
-      #|  (FF:num->(A->bool)->bool) n
-      #|  (A:A->bool) IN prob_events (p:A prob_space)
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  (A:A->bool) IN (FF:num->(A->bool)->bool) n
-      #|  A = {x:A | x IN prob_carrier p /\\\n     upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 0}
-      #|  forall x:A. upcrossing_phase (\\k. (pp:num->A->real) k x) (&0) (b - a) n =\n            upcrossing_phase (\\k. (X:num->A->real) k x) a b n
-      #|  (\\x:A. not_bet_gain (\\k. (pp:num->A->real) k x) (&0) (b - a) (SUC n)) =\n      (\\x. not_bet_gain (\\k. pp k x) (&0) (b - a) n +\n           (if upcrossing_phase (\\k. pp k x) (&0) (b - a) n = 0\n            then &1 else &0) *\n           (pp (SUC n) x - pp n x))
-      #|  &0 <= expectation (p:A prob_space)\n       (\\x:A. not_bet_gain (\\k. pos_part ((X:num->A->real) k x - a))\n         (&0) (b - a) n)
-      #|  integrable (p:A prob_space)\n       (\\x:A. not_bet_gain (\\k. pos_part ((X:num->A->real) k x - a))\n         (&0) (b - a) n)
-      #|  integrable (p:A prob_space)\n       (\\x:A. not_bet_gain (\\k. (pp:num->A->real) k x) (&0) (b - a) n) /\\\n      &0 <= expectation (p:A prob_space)\n        (\\x:A. not_bet_gain (\\k. (pp:num->A->real) k x) (&0) (b - a) n)
-      #|  (\\x:A. not_bet_gain (\\k. (pp:num->A->real) k x)\n     (&0) (b - a) 0) = (\\x. &0)
-      #|  forall k (x:A). pos_part((X:num->A->real) k x - a) =\n    (pp:num->A->real) k x
-      #|  forall n. integrable (p:A prob_space)\n    (\\x. (pp:num->A->real) n x)
-      #|  (pp:num->A->real) = (\\n x. pos_part((X:num->A->real) n x - a))
-      #|  submartingale (p:A prob_space) FF (pp:num->A->real)
-      #|  pp = \\k (x:A). pos_part((X:num->A->real) k x - a)
-      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  adapted (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b.\n     submartingale p FF X /\\ a < b ==>\n     forall n. integrable p\n           (\\x. not_bet_gain (\\k. pos_part(X k x - a)) (&0) (b - a) n) /\\\n         &0 <= expectation p\n           (\\x. not_bet_gain (\\k. pos_part(X k x - a)) (&0) (b - a) n)
-      #|  x:A
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  x:A
-      #|  Eu + En + E0 = expectation (p:A prob_space)\n     (\\x:A. (b - a) * &(num_upcrossings (X:num->A->real) a b n x) +\n       not_bet_gain (\\k. pos_part(X k x - a)) (&0) (b - a) n +\n       pos_part(X 0 x - a))
-      #|  Eu + En = expectation (p:A prob_space)\n     (\\x:A. (b - a) * &(num_upcrossings (X:num->A->real) a b n x) +\n       not_bet_gain (\\k. pos_part(X k x - a)) (&0) (b - a) n)
-      #|  Eu + En + E0 <= expectation (p:A prob_space)\n    (\\x. pos_part((X:num->A->real) n x - a))
-      #|  E0 = expectation (p:A prob_space)\n    (\\x. pos_part((X:num->A->real) 0 x - a))
-      #|  En = expectation (p:A prob_space)\n    (\\x. not_bet_gain (\\k. pos_part((X:num->A->real) k x - a))\n      (&0) (b - a) n)
-      #|  Eu = expectation (p:A prob_space)\n    (\\x. (b - a) * &(num_upcrossings (X:num->A->real) a b n x))
-      #|  (b - a) * expectation (p:A prob_space)\n      (\\x. &(num_upcrossings (X:num->A->real) a b n x)) =\n     expectation p (\\x. (b - a) * &(num_upcrossings X a b n x))
-      #|  x:A
-      #|  &0 <= expectation (p:A prob_space)\n    (\\x:A. pos_part((X:num->A->real) 0 x - a))
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall k. integrable (p:A prob_space)\n      (\\x. pos_part((X:num->A->real) k x - a))
-      #|  k:num
-      #|  n:num
-      #|  x:A
-      #|  &n
-      #|  integrable (p:A prob_space)\n      (\\x. &(num_upcrossings (X:num->A->real) a b n x))
-      #|  c:real
-      #|  indicator_fn (S:A->bool)
-      #|  \\x:A. &(num_upcrossings (X:num->A->real) a b m x)
-      #|  p:A prob_space
-      #|  &(if upcrossing_phase (\\k. (X:num->A->real) k x) a b m = 1 /\\\n              X (SUC m) x >= b then 1 else 0) =\n        indicator_fn (S:A->bool) x
-      #|  &(num_upcrossings (X:num->A->real) a b (SUC m) x) =\n        &(num_upcrossings X a b m x) + indicator_fn (S:A->bool) x
-      #|  (x:A) IN prob_carrier p
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\\n         &(num_upcrossings (X:num->A->real) a b (SUC m) x) <= c} =\n       {x | x IN prob_carrier p /\\\n         &(num_upcrossings X a b m x) + indicator_fn (S:A->bool) x <= c}
-      #|  c:real
-      #|  b:real
-      #|  (X:num->A->real) (SUC m)
-      #|  p:A prob_space
-      #|  m:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  {x:A | x IN prob_carrier p /\\\n          upcrossing_phase (\\k. (X:num->A->real) k x) a b m = 1 /\\\n          X (SUC m) x >= b} =\n        {x | x IN prob_carrier p /\\\n             upcrossing_phase (\\k. X k x) a b m = 1} INTER\n        {x | x IN prob_carrier p /\\ X (SUC m) x >= b}
-      #|  (S:A->bool) IN prob_events p
-      #|  S = {x:A | x IN prob_carrier p /\\\n      upcrossing_phase (\\k. (X:num->A->real) k x) a b m = 1 /\\\n      X (SUC m) x >= b}
-      #|  (\\x:A. &(num_upcrossings (X:num->A->real) a b 0 x)) = (\\x. &0)
-      #|  forall m. random_variable (p:A prob_space)\n      (\\x. &(num_upcrossings (X:num->A->real) a b m x))
-      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  adapted (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b n.\n     submartingale p FF X /\\ a < b ==>\n     (b - a) * expectation p (\\x. &(num_upcrossings X a b n x))\n     <= expectation p (\\x. pos_part(X n x - a))
-      #|  y:A
-      #|  n:num
-      #|  c:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  {y:A | y IN prob_carrier p /\\\n       running_max (X:num->A->real) n y >= c} IN prob_events p
-      #|  (y:A) IN (B:A->bool)
-      #|  y:A
-      #|  indicator_fn (B:A->bool)
-      #|  c:real
-      #|  p:A prob_space
-      #|  indicator_fn (B:A->bool)
-      #|  c:real
-      #|  p:A prob_space
-      #|  expectation (p:A prob_space)\n       (\\x:A. c * indicator_fn (B:A->bool) x)
-      #|  A_n:A->bool
-      #|  n:num
-      #|  submartingale (p:A prob_space) FF (X:num->A->real)
-      #|  expectation (p:A prob_space)\n       (\\x. (X:num->A->real) n x * indicator_fn (A_n:A->bool) x)
-      #|  y:A
-      #|  expectation (p:A prob_space)\n         (\\x. (X:num->A->real) (SUC n) x *\n           indicator_fn (A_n UNION B) x) =\n        expectation p\n         (\\x. X (SUC n) x * indicator_fn A_n x +\n              X (SUC n) x * indicator_fn B x)
-      #|  expectation (p:A prob_space)\n        (\\x. (X:num->A->real) (SUC n) x *\n          indicator_fn (A_n UNION B) x) =\n       expectation p (\\x. X (SUC n) x * indicator_fn A_n x) +\n       expectation p (\\x. X (SUC n) x * indicator_fn B x)
-      #|  prob (p:A prob_space) (A_n UNION B) = prob p A_n + prob p B
-      #|  (B:A->bool) IN prob_events (p:A prob_space)
-      #|  (A_n:A->bool) IN prob_events (p:A prob_space)
-      #|  (A_n:A->bool) IN (FF:num->(A->bool)->bool) n
-      #|  DISJOINT (A_n:A->bool) B
-      #|  running_max (X:num->A->real) n z >= c
-      #|  (z:A) IN prob_carrier p
-      #|  z:A
-      #|  {x:A | x IN prob_carrier p /\\\n        running_max (X:num->A->real) (SUC n) x >= c} = A_n UNION B
-      #|  B = {x:A | x IN prob_carrier p /\\\n        (X:num->A->real) (SUC n) x >= c} DIFF A_n
-      #|  A_n = {x:A | x IN prob_carrier p /\\\n        running_max (X:num->A->real) n x >= c}
-      #|  (y:A) IN (A0:A->bool)
-      #|  y:A
-      #|  indicator_fn (A0:A->bool)
-      #|  c:real
-      #|  p:A prob_space
-      #|  indicator_fn (A0:A->bool)
-      #|  c:real
-      #|  p:A prob_space
-      #|  expectation (p:A prob_space)\n      (\\x:A. c * indicator_fn (A0:A->bool) x)
-      #|  (A0:A->bool) IN prob_events (p:A prob_space)
-      #|  A0 = {y:A | y IN prob_carrier p /\\\n      (X:num->A->real) 0 y >= c}
-      #|  n:num
-      #|  n:num
-      #|  expectation (p:A prob_space)\n    (\\x. (X:num->A->real) n x * indicator_fn\n      {y | y IN prob_carrier p /\\ running_max X n y >= c} x)
-      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  adapted (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  forall p:A prob_space FF (X:num->A->real) c n.\n     submartingale p FF X /\\ &0 < c /\\\n     (forall m x. x IN prob_carrier p ==> &0 <= X m x)\n     ==> c * prob p {x | x IN prob_carrier p /\\ running_max X n x >= c}\n         <= expectation p (X n)
-      #|  n:num
-      #|  expectation (p:A prob_space) (\\x:A. abs((X:num->A->real) n x))
-      #|  FF:num->(A->bool)->bool
-      #|  expectation (p:A prob_space)\n    (\\x:A. pos_part((X:num->A->real) n x))
-      #|  forall m. integrable (p:A prob_space)\n    ((\\m (x:A). pos_part((X:num->A->real) m x)) m)
-      #|  forall m. integrable (p:A prob_space) ((X:num->A->real) m)
-      #|  submartingale (p:A prob_space) FF\n    (\\m (x:A). pos_part((X:num->A->real) m x))
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) c n C.\n     submartingale p FF X /\\ &0 < c /\\\n     (forall n. expectation p (\\x. abs(X n x)) <= C)\n     ==> c * prob p {x | x IN prob_carrier p /\\\n                         running_max (\\m x. pos_part(X m x)) n x >= c}\n         <= C
-      #|  (FF:num->(A->bool)->bool) n SUBSET prob_events (p:A prob_space)
-      #|  a:real
-      #|  n:num
-      #|  n:num
-      #|  forall p:A prob_space FF (X:num->A->real).\n     filtration p FF /\\ adapted p FF X\n     ==> forall n. random_variable p (X n)
-      #|  forall m. expectation (p:A prob_space)\n               (\\x. (X:num->A->real) m x *\n                    indicator_fn ((B:num->(A->bool)) m) x) <= C
-      #|  n:num
-      #|  forall m. expectation (p:A prob_space)\n               (\\x. (X:num->A->real) m x *\n                    indicator_fn ((B:num->(A->bool)) m) x) >=\n             --C + c * prob p ((A:num->(A->bool)) m)
-      #|  n:num
-      #|  PD = prob (p:A prob_space) (D:A->bool)
-      #|  PA = prob (p:A prob_space) ((A:num->(A->bool)) m)
-      #|  Em = expectation (p:A prob_space)\n      (\\x. (X:num->A->real) m x *\n           indicator_fn ((B:num->(A->bool)) m) x)
-      #|  EBm = expectation (p:A prob_space)\n      (\\x. (X:num->A->real) (SUC m) x *\n           indicator_fn ((B:num->(A->bool)) m) x)
-      #|  ED = expectation (p:A prob_space)\n      (\\x. (X:num->A->real) (SUC m) x * indicator_fn (D:A->bool) x)
-      #|  EB = expectation (p:A prob_space)\n      (\\x. (X:num->A->real) (SUC m) x *\n           indicator_fn ((B:num->(A->bool)) (SUC m)) x)
-      #|  (y:A) IN D
-      #|  y:A
-      #|  indicator_fn (D:A->bool)
-      #|  --c:real
-      #|  p:A prob_space
-      #|  indicator_fn (D:A->bool)
-      #|  --c:real
-      #|  p:A prob_space
-      #|  --c * prob (p:A prob_space) D =\n        expectation p (\\x. --c * indicator_fn D x)
-      #|  expectation (p:A prob_space)\n         (\\x. (X:num->A->real) (SUC m) x * indicator_fn D x) <=\n       --c * prob p D
-      #|  (B:num->(A->bool)) m = B (SUC m) UNION D
-      #|  y:A
-      #|  expectation (p:A prob_space)\n          (\\x. (X:num->A->real) (SUC m) x *\n               indicator_fn ((B:num->(A->bool)) m) x) =\n        expectation p\n          (\\x. X (SUC m) x * indicator_fn (B (SUC m)) x +\n               X (SUC m) x * indicator_fn D x)
-      #|  expectation (p:A prob_space)\n         (\\x. (X:num->A->real) (SUC m) x *\n              indicator_fn ((B:num->(A->bool)) m) x) =\n       expectation p\n         (\\x. X (SUC m) x * indicator_fn (B (SUC m)) x) +\n       expectation p\n         (\\x. X (SUC m) x * indicator_fn D x)
-      #|  (B:num->(A->bool)) (SUC m) = B m DIFF D
-      #|  DISJOINT ((B:num->(A->bool)) (SUC m)) D
-      #|  (B:num->(A->bool)) m = B (SUC m) UNION D
-      #|  (B:num->(A->bool)) m
-      #|  m:num
-      #|  submartingale (p:A prob_space) FF (X:num->A->real)
-      #|  expectation (p:A prob_space)\n         (\\x. (X:num->A->real) m x * indicator_fn ((B:num->(A->bool)) m) x) <=\n       expectation p\n         (\\x. X (SUC m) x * indicator_fn (B m) x)
-      #|  prob (p:A prob_space) ((A:num->(A->bool)) (SUC m)) =\n       prob p (A m) + prob p D
-      #|  &0 < c
-      #|  (z:A) IN prob_carrier p
-      #|  z:A
-      #|  (A:num->(A->bool)) (SUC m) = A m UNION D
-      #|  DISJOINT ((A:num->(A->bool)) m) D
-      #|  D:A->bool IN prob_events p
-      #|  &0 < c
-      #|  (z:A) IN prob_carrier p
-      #|  z:A
-      #|  (B:num->(A->bool)) (SUC m) = B m DIFF D
-      #|  D = (B:num->(A->bool)) m INTER\n           {x:A | x IN prob_carrier p /\\ (X:num->A->real) (SUC m) x <= --c}
-      #|  forall n. expectation (p:A prob_space)\n         (\\x. abs ((X:num->A->real) n x)) <= C
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | \226\136\128 n : Num, gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => (X : (Num, A) -> Real)(n, w) - (Z : (A) -> Real)(w), x) == gen_cond_exp(p, G, X(n), x) - gen_cond_exp(p, G, Z, x)})
+      #|  (x : A)
+      #|  (W : (Num, A) -> Real)((n : Num))
+      #|  (w : A) => abs((X : (Num, A) -> Real)((n : Num), w) - (Z : (A) -> Real)(w))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, almost_surely((p : Prob_space[A]), {(x : A) | gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => abs((X : (Num, A) -> Real)(n, w) - (Z : (A) -> Real)(w)), x) <= gen_cond_exp(p, G, (W : (Num, A) -> Real)(n), x)})
+      #|  (w : A) => (X : (Num, A) -> Real)((n : Num), w) - (Z : (A) -> Real)(w)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, almost_surely((p : Prob_space[A]), {(x : A) | abs(gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => (X : (Num, A) -> Real)(n, w) - (Z : (A) -> Real)(w), x)) <= gen_cond_exp(p, G, (w : A) => abs(X(n, w) - Z(w)), x)})
+      #|  (Z : (A) -> Real)
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, almost_surely((p : Prob_space[A]), {(x : A) | gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => (X : (Num, A) -> Real)(n, w) - (Z : (A) -> Real)(w), x) == gen_cond_exp(p, G, X(n), x) - gen_cond_exp(p, G, Z, x)})
+      #|  (j : Num)
+      #|  (z : Real)
+      #|  real_of_num(2) * (Y : (A) -> Real)((x : A))
+      #|  (j : Num) >= SUC((m : Num))
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (z : Real)
+      #|  SUC((m : Num))
+      #|  abs((X : (Num, A) -> Real)(SUC((m : Num)), (x : A)) - (Z : (A) -> Real)(x))
+      #|  (x : A)
+      #|  (m : Num)
+      #|  (x : A)
+      #|  (m : Num)
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | op_minus_minus_minus_gt((m : Num) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (W : (Num, A) -> Real)(m), x), real_of_num(0), sequentially)})
+      #|  real_of_num(2) * (Y : (A) -> Real)((x : A))
+      #|  (k : Num) => abs((X : (Num, A) -> Real)(k, (x : A)) - (Z : (A) -> Real)(x))
+      #|  (x : A)
+      #|  {(x : A) | op_minus_minus_minus_gt((n : Num) => (X : (Num, A) -> Real)(n, x), (Z : (A) -> Real)(x), sequentially)}
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | op_minus_minus_minus_gt((m : Num) => (W : (Num, A) -> Real)(m, x), real_of_num(0), sequentially)})
+      #|  (n : Num)
+      #|  (j : Num)
+      #|  (z : Real)
+      #|  real_of_num(2) * (Y : (A) -> Real)((x : A))
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 x : A, n >= m && IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 abs((X : (Num, A) -> Real)(n, x) - (Z : (A) -> Real)(x)) <= (W : (Num, A) -> Real)(m, x)
+      #|  real_of_num(0) <= (w : Real) && w <= (t : Real) \226\134\146 abs(w) <= abs(t)
+      #|  (x : A)
+      #|  (x : A) => real_of_num(2) * (Y : (A) -> Real)(x)
+      #|  \226\136\128 m : Num, integrable((p : Prob_space[A]), (W : (Num, A) -> Real)(m))
+      #|  (j : Num)
+      #|  (z : Real)
+      #|  (m : Num)
+      #|  abs((X : (Num, A) -> Real)((m : Num), (x : A)) - (Z : (A) -> Real)(x))
+      #|  (m : Num)
+      #|  (j : Num)
+      #|  (z : Real)
+      #|  real_of_num(2) * (Y : (A) -> Real)((x : A))
+      #|  abs((X : (Num, A) -> Real)((m : Num), (x : A)) - (Z : (A) -> Real)(x))
+      #|  (x : A)
+      #|  (m : Num)
+      #|  \226\136\128 m : Num, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 real_of_num(0) <= (W : (Num, A) -> Real)(m, x) && W(m, x) <= real_of_num(2) * (Y : (A) -> Real)(x)
+      #|  (x : A) => real_of_num(2) * (Y : (A) -> Real)(x)
+      #|  (m : Num)
+      #|  (k : Num) => (x : A) => abs((X : (Num, A) -> Real)(k, x) - (Z : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 m : Num, random_variable((p : Prob_space[A]), (W : (Num, A) -> Real)(m))
+      #|  real_of_num(0) <= (a : Real) \226\134\146 a <= (t : Real) \226\134\146 a <= abs(t)
+      #|  abs((X : (Num, A) -> Real)((n : Num), (x : A)) - (Z : (A) -> Real)(x)) <= real_of_num(2) * (Y : (A) -> Real)(x)
+      #|  (x : A)
+      #|  (x : A) => real_of_num(2) * (Y : (A) -> Real)(x)
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)(n, x) - (Z : (A) -> Real)(x)))
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(n, x) - (Z : (A) -> Real)(x))
+      #|  abs((X : (Num, A) -> Real)((k : Num), (x : A))) <= (Y : (A) -> Real)(x) && abs((Z : (A) -> Real)(x)) <= Y(x)
+      #|  (x : A)
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 abs((X : (Num, A) -> Real)(k, x) - (Z : (A) -> Real)(x)) <= real_of_num(2) * (Y : (A) -> Real)(x)
+      #|  \226\136\128 k : Num, random_variable((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)(k, x) - (Z : (A) -> Real)(x)))
+      #|  (W : (Num, A) -> Real) == ((m : Num) => (x : A) => sup({abs((X : (Num, A) -> Real)((k : Num), x) - (Z : (A) -> Real)(x)) | k >= m}))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 Z : (A) -> Real, \226\136\128 Y : (A) -> Real, sub_sigma_algebra(p, G) && (\226\136\128 n : Num, integrable(p, X(n))) && integrable(p, Z) && integrable(p, Y) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(X(n, x)) <= Y(x)) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(Z(x)) <= Y(x)) && almost_surely(p, {(x : A) | op_minus_minus_minus_gt((n : Num) => X(n, x), Z(x), sequentially)}) \226\134\146 almost_surely(p, {(x : A) | op_minus_minus_minus_gt((n : Num) => gen_cond_exp(p, G, X(n), x), gen_cond_exp(p, G, Z, x), sequentially)})
+      #|  ((x : A) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x)) == gen_cond_exp(p, G, X)
+      #|  ((x : A) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x)) == gen_cond_exp(p, G, X)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) && measurable_wrt(p, G, X) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, G, X, x) == X(x)})
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 c : Real, sub_sigma_algebra(p, G) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, G, (w : A) => c, x) == c})
+      #|  expectation((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (H : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((A : (A) -> Bool), x)) == expectation(p, (x : A) => X(x) * indicator_fn(A, x))
+      #|  IN((A : (A) -> Bool), (H : ((A) -> Bool) -> Bool))
+      #|  expectation((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), gen_cond_exp(p, (H : ((A) -> Bool) -> Bool), (X : (A) -> Real)), x) * indicator_fn((A : (A) -> Bool), x)) == expectation(p, (x : A) => gen_cond_exp(p, H, X, x) * indicator_fn(A, x))
+      #|  ((x : A) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x)) == gen_cond_exp(p, G, X)
+      #|  ((x : A) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x)) == gen_cond_exp(p, G, X)
+      #|  ((x : A) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), gen_cond_exp(p, (H : ((A) -> Bool) -> Bool), (X : (A) -> Real)), x)) == gen_cond_exp(p, G, gen_cond_exp(p, H, X))
+      #|  ((x : A) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), gen_cond_exp(p, (H : ((A) -> Bool) -> Bool), (X : (A) -> Real)), x)) == gen_cond_exp(p, G, gen_cond_exp(p, H, X))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 H : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && sub_sigma_algebra(p, H) && SUBSET(G, H) && integrable(p, X) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, G, gen_cond_exp(p, H, X), x) == gen_cond_exp(p, G, X, x)})
+      #|  sub_sigma_algebra((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool))
+      #|  prob_carrier((p : Prob_space[A])) == UNIONS((G : ((A) -> Bool) -> Bool))
+      #|  (if IN((x : A), (a : (A) -> Bool)) { real_of_num(1) } else { real_of_num(0) }) <= (v : Real)
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (if IN(x, (a : (A) -> Bool)) { real_of_num(1) } else { real_of_num(0) }) <= (v : Real)} == DIFF(prob_carrier(p), a)
+      #|  sub_sigma_algebra((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (if IN(x, (a : (A) -> Bool)) { real_of_num(1) } else { real_of_num(0) }) <= (v : Real)} == prob_carrier(p)
+      #|  real_of_num(1) <= (v : Real)
+      #|  sub_sigma_algebra((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (if IN(x, (a : (A) -> Bool)) { real_of_num(1) } else { real_of_num(0) }) <= (v : Real)} == {}
+      #|  (v : Real) < real_of_num(0)
+      #|  (v : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 a : (A) -> Bool, sub_sigma_algebra(p, G) && IN(a, G) \226\134\146 measurable_wrt(p, G, indicator_fn(a))
+      #|  ((x : A) => (f : (Num, A) -> Real)(SUC((n : Num)), x)) == f(SUC(n))
+      #|  ((x : A) => sum(op_dot_dot(0, SUC((n : Num))), (k : Num) => (f : (Num, A) -> Real)(k, x))) == ((x : A) => sum(op_dot_dot(0, n), (k : Num) => f(k, x)) + f(SUC(n), x))
+      #|  ((x : A) => sum(op_dot_dot(0, 0), (k : Num) => (f : (Num, A) -> Real)(k, x))) == f(0)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (Num, A) -> Real, \226\136\128 n : Num, sub_sigma_algebra(p, G) && (\226\136\128 k : Num, k <= n \226\134\146 measurable_wrt(p, G, f(k))) \226\134\146 measurable_wrt(p, G, (x : A) => sum(op_dot_dot(0, n), (k : Num) => f(k, x)))
+      #|  (v : Real)
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (f : (A) -> Real))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  (if IN((x : A), (a : (A) -> Bool)) { real_of_num(1) } else { real_of_num(0) }) * (f : (A) -> Real)(x) <= (v : Real)
+      #|  IN((x : A), (a : (A) -> Bool))
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (if IN(x, (a : (A) -> Bool)) { real_of_num(1) } else { real_of_num(0) }) * (f : (A) -> Real)(x) <= (v : Real)} == UNION(DIFF(prob_carrier(p), a), INTER(a, {(x : A) | IN(x, prob_carrier(p)) && f(x) <= v}))
+      #|  (v : Real)
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (f : (A) -> Real))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  IN((x : A), (a : (A) -> Bool))
+      #|  (if IN((x : A), (a : (A) -> Bool)) { real_of_num(1) } else { real_of_num(0) }) * (f : (A) -> Real)(x) <= (v : Real)
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (if IN(x, (a : (A) -> Bool)) { real_of_num(1) } else { real_of_num(0) }) * (f : (A) -> Real)(x) <= (v : Real)} == INTER(a, {(x : A) | IN(x, prob_carrier(p)) && f(x) <= v})
+      #|  (v : Real) < real_of_num(0)
+      #|  (v : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 a : (A) -> Bool, \226\136\128 f : (A) -> Real, sub_sigma_algebra(p, G) && IN(a, G) && measurable_wrt(p, G, f) \226\134\146 measurable_wrt(p, G, (x : A) => indicator_fn(a, x) * f(x))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  IN((x : A), (B : (A) -> Bool))
+      #|  IN((x : A), (a : (A) -> Bool))
+      #|  (x : A)
+      #|  ((x : A) => indicator_fn((a : (A) -> Bool), x) * gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((B : (A) -> Bool), x)) == ((x : A) => gen_cond_exp(p, G, X, x) * indicator_fn(INTER(a, B), x))
+      #|  IN((x : A), (B : (A) -> Bool))
+      #|  IN((x : A), (a : (A) -> Bool))
+      #|  (x : A)
+      #|  ((x : A) => indicator_fn((a : (A) -> Bool), x) * (X : (A) -> Real)(x) * indicator_fn((B : (A) -> Bool), x)) == ((x : A) => X(x) * indicator_fn(INTER(a, B), x))
+      #|  expectation((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => indicator_fn((a : (A) -> Bool), w) * (X : (A) -> Real)(w), x) * indicator_fn((B : (A) -> Bool), x)) == expectation(p, (x : A) => indicator_fn(a, x) * X(x) * indicator_fn(B, x))
+      #|  (B : (A) -> Bool)
+      #|  ((x : A) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x)) == gen_cond_exp(p, G, X)
+      #|  ((x : A) => indicator_fn((a : (A) -> Bool), x) * gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x)) == ((x : A) => gen_cond_exp(p, G, X, x) * indicator_fn(a, x))
+      #|  ((x : A) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x)) == gen_cond_exp(p, G, X)
+      #|  ((x : A) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => indicator_fn((a : (A) -> Bool), w) * (X : (A) -> Real)(w), x)) == gen_cond_exp(p, G, (w : A) => indicator_fn(a, w) * X(w))
+      #|  ((x : A) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => indicator_fn((a : (A) -> Bool), w) * (X : (A) -> Real)(w), x)) == gen_cond_exp(p, G, (w : A) => indicator_fn(a, w) * X(w))
+      #|  ((w : A) => indicator_fn((a : (A) -> Bool), w) * (X : (A) -> Real)(w)) == ((w : A) => X(w) * indicator_fn(a, w))
+      #|  integrable((p : Prob_space[A]), (w : A) => indicator_fn((a : (A) -> Bool), w) * (X : (A) -> Real)(w))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  IN((a : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 a : (A) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && IN(a, G) && integrable(p, X) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, G, (w : A) => indicator_fn(a, w) * X(w), x) == indicator_fn(a, x) * gen_cond_exp(p, G, X, x)})
+      #|  (v : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 v : Real, random_variable(p, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && X(x) <= v}, prob_events(p))
+      #|  IN((A : (A) -> Bool), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn((A : (A) -> Bool), x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 A : (A) -> Bool, submartingale(p, FF, X) && m <= n && IN(A, FF(m)) \226\134\146 expectation(p, (x : A) => X(m, x) * indicator_fn(A, x)) <= expectation(p, (x : A) => X(n, x) * indicator_fn(A, x))
+      #|  IN((x : A), (a : (A) -> Bool))
+      #|  (x : A)
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((nn : Num)), x) * indicator_fn((B : (A) -> Bool), x))
+      #|  IN((x : A), (a : (A) -> Bool))
+      #|  (x : A)
+      #|  expectation((p : Prob_space[A]), (x : A) => max((X : (Num, A) -> Real)((nn : Num), x), real_of_num(0)) * indicator_fn((a : (A) -> Bool), x)) == expectation(p, (x : A) => X(nn, x) * indicator_fn((B : (A) -> Bool), x))
+      #|  IN((B : (A) -> Bool), (FF : (Num, (A) -> Bool) -> Bool)((nn : Num)))
+      #|  (B : (A) -> Bool) == INTER((a : (A) -> Bool), {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((nn : Num), x) >= real_of_num(0)})
+      #|  sigma_algebra((FF : (Num, (A) -> Bool) -> Bool)((nn : Num)))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((nn : Num)), (X : (Num, A) -> Real)(nn))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((nn : Num)))
+      #|  (a : (A) -> Bool)
+      #|  (nn : Num)
+      #|  (v : Real)
+      #|  (nn : Num)
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max((X : (Num, A) -> Real)((nn : Num), x), real_of_num(0)) <= (v : Real)} == {(x : A) | IN(x, prob_carrier(p)) && X(nn, x) <= v}
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max((X : (Num, A) -> Real)((nn : Num), x), real_of_num(0)) <= (v : Real)} == {}
+      #|  (v : Real) < real_of_num(0)
+      #|  (v : Real)
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, submartingale(p, FF, X) \226\134\146 submartingale(p, FF, (n : Num) => (x : A) => pos_part(X(n, x)))
+      #|  (a : Real) == (b : Real) \226\134\146 abs(a) <= abs(b)
+      #|  abs((f : (A) -> Real)((y : A)))
+      #|  (y : A)
+      #|  (h : (A) -> Real)
+      #|  (h : (A) -> Real)
+      #|  (B : Real)
+      #|  (B : Real)
+      #|  \226\136\131 B : Real, \226\136\128 h : (A) -> Real, simple_rv((p : Prob_space[A]), h) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= h(x)) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 h(x) <= abs((g : (A) -> Real)(x))) \226\134\146 simple_expectation(p, h) <= B
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) <= (aa : Real)} == {(x : A) | IN(x, prob_carrier(p)) && (g : (A) -> Real)(x) <= aa}
+      #|  (aa : Real)
+      #|  random_variable((p : Prob_space[A]), (g : (A) -> Real))
+      #|  random_variable((p : Prob_space[A]), (f : (A) -> Real))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, integrable(p, g) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 f(x) == g(x)) \226\134\146 integrable(p, f)
+      #|  ((a : Real) - (d : Real) <= (b : Real) - d) == (a <= b)
+      #|  indicator_fn((a : (A) -> Bool))
+      #|  (c : Real)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => (c : Real) * indicator_fn((a : (A) -> Bool), x)
+      #|  (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) * indicator_fn((a : (A) -> Bool), x)
+      #|  (p : Prob_space[A])
+      #|  (y : A)
+      #|  expectation((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - (c : Real)) * indicator_fn((a : (A) -> Bool), x)) == expectation(p, (x : A) => X(SUC(n), x) * indicator_fn(a, x) - c * indicator_fn(a, x))
+      #|  expectation((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - (c : Real)) * indicator_fn((a : (A) -> Bool), x)) == expectation(p, (x : A) => X(SUC(n), x) * indicator_fn(a, x)) - c * prob(p, a)
+      #|  indicator_fn((a : (A) -> Bool))
+      #|  (c : Real)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => (c : Real) * indicator_fn((a : (A) -> Bool), x)
+      #|  (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn((a : (A) -> Bool), x)
+      #|  (p : Prob_space[A])
+      #|  (y : A)
+      #|  expectation((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)((n : Num), x) - (c : Real)) * indicator_fn((a : (A) -> Bool), x)) == expectation(p, (x : A) => X(n, x) * indicator_fn(a, x) - c * indicator_fn(a, x))
+      #|  expectation((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)((n : Num), x) - (c : Real)) * indicator_fn((a : (A) -> Bool), x)) == expectation(p, (x : A) => X(n, x) * indicator_fn(a, x)) - c * prob(p, a)
+      #|  indicator_fn((a : (A) -> Bool))
+      #|  (c : Real)
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (x : A) => (c : Real) * indicator_fn((a : (A) -> Bool), x))
+      #|  integrable((p : Prob_space[A]), indicator_fn((a : (A) -> Bool)))
+      #|  integrable((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) * indicator_fn((a : (A) -> Bool), x))
+      #|  integrable((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn((a : (A) -> Bool), x))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  IN((a : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((n : Num), x) - (c : Real) <= (v : Real)} == {(x : A) | IN(x, prob_carrier(p)) && X(n, x) <= v + c}
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 c : Real, submartingale(p, FF, X) \226\134\146 submartingale(p, FF, (n : Num) => (x : A) => X(n, x) - c)
+      #|  (A : (A) -> Bool)
+      #|  (n : Num)
+      #|  submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (pp : (Num, A) -> Real))
+      #|  ((x : A) => ((pp : (Num, A) -> Real)(SUC((n : Num)), x) - pp(n, x)) * indicator_fn((A : (A) -> Bool), x)) == ((x : A) => pp(SUC(n), x) * indicator_fn(A, x) - pp(n, x) * indicator_fn(A, x))
+      #|  (y : A)
+      #|  expectation((p : Prob_space[A]), (x : A) => (if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 0 { real_of_num(1) } else { real_of_num(0) }) * ((pp : (Num, A) -> Real)(SUC(n), x) - pp(n, x))) == expectation(p, (x : A) => (pp(SUC(n), x) - pp(n, x)) * indicator_fn((A : (A) -> Bool), x))
+      #|  expectation((p : Prob_space[A]), (x : A) => (if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 0 { real_of_num(1) } else { real_of_num(0) }) * ((pp : (Num, A) -> Real)(SUC(n), x) - pp(n, x))) == expectation(p, (x : A) => pp(SUC(n), x) * indicator_fn((A : (A) -> Bool), x)) - expectation(p, (x : A) => pp(n, x) * indicator_fn(A, x))
+      #|  (x : A) => (if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 0 { real_of_num(1) } else { real_of_num(0) }) * ((pp : (Num, A) -> Real)(SUC(n), x) - pp(n, x))
+      #|  (x : A) => not_bet_gain((k : Num) => (pp : (Num, A) -> Real)(k, x), real_of_num(0), (b : Real) - (a : Real), (n : Num))
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (x : A) => not_bet_gain((k : Num) => (pp : (Num, A) -> Real)(k, x), real_of_num(0), (b : Real) - (a : Real), (n : Num)) + (if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), a, b, n) == 0 { real_of_num(1) } else { real_of_num(0) }) * (pp(SUC(n), x) - pp(n, x)))
+      #|  (y : A)
+      #|  (x : A) => ((pp : (Num, A) -> Real)(SUC((n : Num)), x) - pp(n, x)) * indicator_fn((A : (A) -> Bool), x)
+      #|  integrable((p : Prob_space[A]), (x : A) => (if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 0 { real_of_num(1) } else { real_of_num(0) }) * ((pp : (Num, A) -> Real)(SUC(n), x) - pp(n, x)))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  IN((A : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  IN((A : (A) -> Bool), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  (A : (A) -> Bool) == {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 0}
+      #|  \226\136\128 x : A, upcrossing_phase((k : Num) => (pp : (Num, A) -> Real)(k, x), real_of_num(0), (b : Real) - (a : Real), (n : Num)) == upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), a, b, n)
+      #|  ((x : A) => not_bet_gain((k : Num) => (pp : (Num, A) -> Real)(k, x), real_of_num(0), (b : Real) - (a : Real), SUC((n : Num)))) == ((x : A) => not_bet_gain((k : Num) => pp(k, x), real_of_num(0), b - a, n) + (if upcrossing_phase((k : Num) => pp(k, x), real_of_num(0), b - a, n) == 0 { real_of_num(1) } else { real_of_num(0) }) * (pp(SUC(n), x) - pp(n, x)))
+      #|  real_of_num(0) <= expectation((p : Prob_space[A]), (x : A) => not_bet_gain((k : Num) => pos_part((X : (Num, A) -> Real)(k, x) - (a : Real)), real_of_num(0), (b : Real) - a, (n : Num)))
+      #|  integrable((p : Prob_space[A]), (x : A) => not_bet_gain((k : Num) => pos_part((X : (Num, A) -> Real)(k, x) - (a : Real)), real_of_num(0), (b : Real) - a, (n : Num)))
+      #|  integrable((p : Prob_space[A]), (x : A) => not_bet_gain((k : Num) => (pp : (Num, A) -> Real)(k, x), real_of_num(0), (b : Real) - (a : Real), (n : Num))) && real_of_num(0) <= expectation(p, (x : A) => not_bet_gain((k : Num) => pp(k, x), real_of_num(0), b - a, n))
+      #|  ((x : A) => not_bet_gain((k : Num) => (pp : (Num, A) -> Real)(k, x), real_of_num(0), (b : Real) - (a : Real), 0)) == ((x : A) => real_of_num(0))
+      #|  \226\136\128 k : Num, \226\136\128 x : A, pos_part((X : (Num, A) -> Real)(k, x) - (a : Real)) == (pp : (Num, A) -> Real)(k, x)
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (x : A) => (pp : (Num, A) -> Real)(n, x))
+      #|  (pp : (Num, A) -> Real) == ((n : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(n, x) - (a : Real)))
+      #|  submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (pp : (Num, A) -> Real))
+      #|  (pp : (Num, A) -> Real) == ((k : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(k, x) - (a : Real)))
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, submartingale(p, FF, X) && a < b \226\134\146 (\226\136\128 n : Num, integrable(p, (x : A) => not_bet_gain((k : Num) => pos_part(X(k, x) - a), real_of_num(0), b - a, n)) && real_of_num(0) <= expectation(p, (x : A) => not_bet_gain((k : Num) => pos_part(X(k, x) - a), real_of_num(0), b - a, n)))
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (x : A)
+      #|  (Eu : Real) + ((En : Real) + (E0 : Real)) == expectation((p : Prob_space[A]), (x : A) => ((b : Real) - (a : Real)) * real_of_num(num_upcrossings((X : (Num, A) -> Real), a, b, (n : Num), x)) + (not_bet_gain((k : Num) => pos_part(X(k, x) - a), real_of_num(0), b - a, n) + pos_part(X(0, x) - a)))
+      #|  (Eu : Real) + (En : Real) == expectation((p : Prob_space[A]), (x : A) => ((b : Real) - (a : Real)) * real_of_num(num_upcrossings((X : (Num, A) -> Real), a, b, (n : Num), x)) + not_bet_gain((k : Num) => pos_part(X(k, x) - a), real_of_num(0), b - a, n))
+      #|  (Eu : Real) + ((En : Real) + (E0 : Real)) <= expectation((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)((n : Num), x) - (a : Real)))
+      #|  (E0 : Real) == expectation((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)(0, x) - (a : Real)))
+      #|  (En : Real) == expectation((p : Prob_space[A]), (x : A) => not_bet_gain((k : Num) => pos_part((X : (Num, A) -> Real)(k, x) - (a : Real)), real_of_num(0), (b : Real) - a, (n : Num)))
+      #|  (Eu : Real) == expectation((p : Prob_space[A]), (x : A) => ((b : Real) - (a : Real)) * real_of_num(num_upcrossings((X : (Num, A) -> Real), a, b, (n : Num), x)))
+      #|  ((b : Real) - (a : Real)) * expectation((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), a, b, (n : Num), x))) == expectation(p, (x : A) => (b - a) * real_of_num(num_upcrossings(X, a, b, n, x)))
+      #|  (x : A)
+      #|  real_of_num(0) <= expectation((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)(0, x) - (a : Real)))
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 k : Num, integrable((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)(k, x) - (a : Real)))
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  (x : A)
+      #|  real_of_num((n : Num))
+      #|  integrable((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)))
+      #|  (c : Real)
+      #|  indicator_fn((S : (A) -> Bool))
+      #|  (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (m : Num), x))
+      #|  (p : Prob_space[A])
+      #|  real_of_num(if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, (x : A)), (a : Real), (b : Real), (m : Num)) == 1 && X(SUC(m), x) >= b { 1 } else { 0 }) == indicator_fn((S : (A) -> Bool), x)
+      #|  real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), SUC((m : Num)), (x : A))) == real_of_num(num_upcrossings(X, a, b, m, x)) + indicator_fn((S : (A) -> Bool), x)
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), SUC((m : Num)), x)) <= (c : Real)} == {(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings(X, a, b, m, x)) + indicator_fn((S : (A) -> Bool), x) <= c}
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  (X : (Num, A) -> Real)(SUC((m : Num)))
+      #|  (p : Prob_space[A])
+      #|  (m : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (m : Num)) == 1 && X(SUC(m), x) >= b} == INTER({(x : A) | IN(x, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, x), a, b, m) == 1}, {(x : A) | IN(x, prob_carrier(p)) && X(SUC(m), x) >= b})
+      #|  IN((S : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (S : (A) -> Bool) == {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (m : Num)) == 1 && X(SUC(m), x) >= b}
+      #|  ((x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), 0, x))) == ((x : A) => real_of_num(0))
+      #|  \226\136\128 m : Num, random_variable((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), m, x)))
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, submartingale(p, FF, X) && a < b \226\134\146 (b - a) * expectation(p, (x : A) => real_of_num(num_upcrossings(X, a, b, n, x))) <= expectation(p, (x : A) => pos_part(X(n, x) - a))
+      #|  (y : A)
+      #|  (n : Num)
+      #|  (c : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  IN({(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && running_max((X : (Num, A) -> Real), (n : Num), y) >= (c : Real)}, prob_events(p))
+      #|  IN((y : A), (B : (A) -> Bool))
+      #|  (y : A)
+      #|  indicator_fn((B : (A) -> Bool))
+      #|  (c : Real)
+      #|  (p : Prob_space[A])
+      #|  indicator_fn((B : (A) -> Bool))
+      #|  (c : Real)
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => (c : Real) * indicator_fn((B : (A) -> Bool), x))
+      #|  (A_n : (A) -> Bool)
+      #|  (n : Num)
+      #|  submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn((A_n : (A) -> Bool), x))
+      #|  (y : A)
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) * indicator_fn(UNION((A_n : (A) -> Bool), (B : (A) -> Bool)), x)) == expectation(p, (x : A) => X(SUC(n), x) * indicator_fn(A_n, x) + X(SUC(n), x) * indicator_fn(B, x))
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) * indicator_fn(UNION((A_n : (A) -> Bool), (B : (A) -> Bool)), x)) == expectation(p, (x : A) => X(SUC(n), x) * indicator_fn(A_n, x)) + expectation(p, (x : A) => X(SUC(n), x) * indicator_fn(B, x))
+      #|  prob((p : Prob_space[A]), UNION((A_n : (A) -> Bool), (B : (A) -> Bool))) == prob(p, A_n) + prob(p, B)
+      #|  IN((B : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  IN((A_n : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  IN((A_n : (A) -> Bool), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  DISJOINT((A_n : (A) -> Bool), (B : (A) -> Bool))
+      #|  running_max((X : (Num, A) -> Real), (n : Num), (z : A)) >= (c : Real)
+      #|  IN((z : A), prob_carrier((p : Prob_space[A])))
+      #|  (z : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((X : (Num, A) -> Real), SUC((n : Num)), x) >= (c : Real)} == UNION((A_n : (A) -> Bool), (B : (A) -> Bool))
+      #|  (B : (A) -> Bool) == DIFF({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(SUC((n : Num)), x) >= (c : Real)}, (A_n : (A) -> Bool))
+      #|  (A_n : (A) -> Bool) == {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((X : (Num, A) -> Real), (n : Num), x) >= (c : Real)}
+      #|  IN((y : A), (A0 : (A) -> Bool))
+      #|  (y : A)
+      #|  indicator_fn((A0 : (A) -> Bool))
+      #|  (c : Real)
+      #|  (p : Prob_space[A])
+      #|  indicator_fn((A0 : (A) -> Bool))
+      #|  (c : Real)
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => (c : Real) * indicator_fn((A0 : (A) -> Bool), x))
+      #|  IN((A0 : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (A0 : (A) -> Bool) == {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(0, y) >= (c : Real)}
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn({(y : A) | IN(y, prob_carrier(p)) && running_max(X, n, y) >= (c : Real)}, x))
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 c : Real, \226\136\128 n : Num, submartingale(p, FF, X) && real_of_num(0) < c && (\226\136\128 m : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= X(m, x)) \226\134\146 c * prob(p, {(x : A) | IN(x, prob_carrier(p)) && running_max(X, n, x) >= c}) <= expectation(p, X(n))
+      #|  (n : Num)
+      #|  expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)((n : Num), x)))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  expectation((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)((n : Num), x)))
+      #|  \226\136\128 m : Num, integrable((p : Prob_space[A]), ((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)))(m))
+      #|  \226\136\128 m : Num, integrable((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
+      #|  submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 c : Real, \226\136\128 n : Num, \226\136\128 C : Real, submartingale(p, FF, X) && real_of_num(0) < c && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 c * prob(p, {(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => pos_part(X(m, x)), n, x) >= c}) <= C
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), prob_events((p : Prob_space[A])))
+      #|  (a : Real)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, filtration(p, FF) && adapted(p, FF, X) \226\134\146 (\226\136\128 n : Num, random_variable(p, X(n)))
+      #|  \226\136\128 m : Num, expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(m, x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) <= (C : Real)
+      #|  (n : Num)
+      #|  \226\136\128 m : Num, expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(m, x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) >= -(C : Real) + (c : Real) * prob(p, (A : (Num, A) -> Bool)(m))
+      #|  (n : Num)
+      #|  (PD : Real) == prob((p : Prob_space[A]), (D : (A) -> Bool))
+      #|  (PA : Real) == prob((p : Prob_space[A]), (A : (Num, A) -> Bool)((m : Num)))
+      #|  (Em : Real) == expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((m : Num), x) * indicator_fn((B : (Num, A) -> Bool)(m), x))
+      #|  (EBm : Real) == expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((m : Num)), x) * indicator_fn((B : (Num, A) -> Bool)(m), x))
+      #|  (ED : Real) == expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((m : Num)), x) * indicator_fn((D : (A) -> Bool), x))
+      #|  (EB : Real) == expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((m : Num)), x) * indicator_fn((B : (Num, A) -> Bool)(SUC(m)), x))
+      #|  IN((y : A), (D : (A) -> Bool))
+      #|  (y : A)
+      #|  indicator_fn((D : (A) -> Bool))
+      #|  -(c : Real)
+      #|  (p : Prob_space[A])
+      #|  indicator_fn((D : (A) -> Bool))
+      #|  -(c : Real)
+      #|  (p : Prob_space[A])
+      #|  -(c : Real) * prob((p : Prob_space[A]), (D : (A) -> Bool)) == expectation(p, (x : A) => -c * indicator_fn(D, x))
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((m : Num)), x) * indicator_fn((D : (A) -> Bool), x)) <= -(c : Real) * prob(p, D)
+      #|  (B : (Num, A) -> Bool)((m : Num)) == UNION(B(SUC(m)), (D : (A) -> Bool))
+      #|  (y : A)
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((m : Num)), x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) == expectation(p, (x : A) => X(SUC(m), x) * indicator_fn(B(SUC(m)), x) + X(SUC(m), x) * indicator_fn((D : (A) -> Bool), x))
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((m : Num)), x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) == expectation(p, (x : A) => X(SUC(m), x) * indicator_fn(B(SUC(m)), x)) + expectation(p, (x : A) => X(SUC(m), x) * indicator_fn((D : (A) -> Bool), x))
+      #|  (B : (Num, A) -> Bool)(SUC((m : Num))) == DIFF(B(m), (D : (A) -> Bool))
+      #|  DISJOINT((B : (Num, A) -> Bool)(SUC((m : Num))), (D : (A) -> Bool))
+      #|  (B : (Num, A) -> Bool)((m : Num)) == UNION(B(SUC(m)), (D : (A) -> Bool))
+      #|  (B : (Num, A) -> Bool)((m : Num))
+      #|  (m : Num)
+      #|  submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((m : Num), x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) <= expectation(p, (x : A) => X(SUC(m), x) * indicator_fn(B(m), x))
+      #|  prob((p : Prob_space[A]), (A : (Num, A) -> Bool)(SUC((m : Num)))) == prob(p, A(m)) + prob(p, (D : (A) -> Bool))
+      #|  real_of_num(0) < (c : Real)
+      #|  IN((z : A), prob_carrier((p : Prob_space[A])))
+      #|  (z : A)
+      #|  (A : (Num, A) -> Bool)(SUC((m : Num))) == UNION(A(m), (D : (A) -> Bool))
+      #|  DISJOINT((A : (Num, A) -> Bool)((m : Num)), (D : (A) -> Bool))
+      #|  IN((D : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  real_of_num(0) < (c : Real)
+      #|  IN((z : A), prob_carrier((p : Prob_space[A])))
+      #|  (z : A)
+      #|  (B : (Num, A) -> Bool)(SUC((m : Num))) == DIFF(B(m), (D : (A) -> Bool))
+      #|  (D : (A) -> Bool) == INTER((B : (Num, A) -> Bool)((m : Num)), {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(SUC(m), x) <= -(c : Real)})
+      #|  \226\136\128 n : Num, expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)(n, x))) <= (C : Real)
       #|  0
-      #|  expectation (p:A prob_space)\n        (\\x:A. abs((X:num->A->real) 0 x))
-      #|  abs(expectation (p:A prob_space) ((X:num->A->real) 0)) <= C
-      #|  expectation (p:A prob_space) ((X:num->A->real) 0) >= --C
-      #|  &0 < c
-      #|  (y:A) IN ((A:num->(A->bool)) 0)
-      #|  y:A
-      #|  indicator_fn ((A:num->(A->bool)) 0)
-      #|  --c:real
-      #|  p:A prob_space
-      #|  indicator_fn ((A:num->(A->bool)) 0)
-      #|  --c:real
-      #|  p:A prob_space
-      #|  --c * prob (p:A prob_space) ((A:num->(A->bool)) 0) =\n        expectation p (\\x. --c * indicator_fn (A 0) x)
-      #|  expectation (p:A prob_space)\n         (\\x. (X:num->A->real) 0 x * indicator_fn ((A:num->(A->bool)) 0) x)\n       <= --c * prob p (A 0)
-      #|  (y:A) IN ((A:num->(A->bool)) 0)
-      #|  y:A
-      #|  expectation (p:A prob_space)\n         (\\x. (X:num->A->real) 0 x * indicator_fn ((B:num->(A->bool)) 0) x +\n              X 0 x * indicator_fn ((A:num->(A->bool)) 0) x) =\n        expectation p (\\x. X 0 x * indicator_fn (B 0) x) +\n        expectation p (\\x. X 0 x * indicator_fn (A 0) x)
-      #|  expectation (p:A prob_space) ((X:num->A->real) 0) =\n       expectation p (\\x. X 0 x * indicator_fn ((B:num->(A->bool)) 0) x) +\n       expectation p (\\x. X 0 x * indicator_fn ((A:num->(A->bool)) 0) x)
-      #|  forall m. expectation (p:A prob_space)\n           (\\x. (X:num->A->real) m x * indicator_fn ((B:num->(A->bool)) m) x)\n         >= --C + c * prob p ((A:num->(A->bool)) m)
-      #|  forall n. expectation (p:A prob_space)\n      (\\x. abs ((X:num->A->real) n x)) <= C
-      #|  m:num
-      #|  y:A
-      #|  expectation (p:A prob_space)\n        (\\x. (X:num->A->real) m x * indicator_fn ((B:num->(A->bool)) m) x) <=\n      expectation p (\\x. abs(X m x))
-      #|  forall m. expectation (p:A prob_space)\n           (\\x. (X:num->A->real) m x * indicator_fn ((B:num->(A->bool)) m) x) <= C
-      #|  forall m. integrable (p:A prob_space)\n    (\\x. (X:num->A->real) m x * indicator_fn ((B:num->(A->bool)) m) x)
-      #|  prob_carrier (p:A prob_space) DIFF (A:num->(A->bool)) m =\n                  UNIONS ((FF:num->(A->bool)->bool) m) DIFF A m
-      #|  forall m. (B:num->(A->bool)) m IN (FF:num->(A->bool)->bool) m
-      #|  forall m. (B:num->(A->bool)) m IN prob_events p
-      #|  (FF:num->(A->bool)->bool) m
-      #|  forall m. (A:num->(A->bool)) m IN prob_events p
-      #|  forall m. (A:num->(A->bool)) m IN (FF:num->(A->bool)->bool) m
-      #|  {x:A | x IN prob_carrier p /\\\n            running_max (\\m x. max (--((X:num->A->real) m x)) (&0)) n x >= c} =\n     (A:num->(A->bool)) n
-      #|  B = \\n. prob_carrier (p:A prob_space) DIFF (A:num->(A->bool)) n
-      #|  A = \\n. {x:A | x IN prob_carrier p /\\\n                    running_max (\\m x. max (--((X:num->A->real) m x)) (&0)) n x >= c}
-      #|  {}:(A->bool)->bool
-      #|  sigma_algebra ((FF:num->(A->bool)->bool) n)
-      #|  ~(&0 <= v)
-      #|  {x:A | x IN prob_carrier p /\\\n              max (--(X:num->A->real) n x) (&0) <= v} = {}
-      #|  &0 <= v
-      #|  {x:A | x IN prob_carrier p /\\\n              max (--(X:num->A->real) n x) (&0) <= v} =\n       {x | x IN prob_carrier p /\\ X n x >= --v}
-      #|  &0 <= v
-      #|  adapted (p:A prob_space) FF (\\m x. max (--(X:num->A->real) m x) (&0))
-      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  adapted (p:A prob_space) FF X
-      #|  filtration (p:A prob_space) FF
-      #|  forall p:A prob_space FF X c (n:num) C.\n     submartingale p FF X /\\ &0 < c /\\\n     (forall n. expectation p (\\x. abs(X n x)) <= C)\n     ==> c * prob p {x | x IN prob_carrier p /\\\n                         running_max (\\m x. max (--(X m x)) (&0)) n x >= c}\n         <= &2 * C
-      #|  (FF:num->(A->bool)->bool) n
-      #|  submartingale (p:A prob_space) FF\n    (\\n x. pos_part((X:num->A->real) n x))
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) c n.\n     submartingale p FF X\n     ==> {x | x IN prob_carrier p /\\\n              running_max (\\m x. pos_part(X m x)) n x >= c}\n         IN prob_events p
-      #|  {}:(A->bool)->bool
-      #|  sigma_algebra ((FF:num->(A->bool)->bool) n)
-      #|  ~(&0 <= v)
-      #|  {x:A | x IN prob_carrier p /\\\n              max (--(X:num->A->real) n x) (&0) <= v} = {}
-      #|  &0 <= v
-      #|  {x:A | x IN prob_carrier p /\\\n              max (--(X:num->A->real) n x) (&0) <= v} =\n       {x | x IN prob_carrier p /\\ X n x >= --v}
-      #|  &0 <= v
-      #|  (FF:num->(A->bool)->bool) n
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) c n.\n     submartingale p FF X\n     ==> {x | x IN prob_carrier p /\\\n              running_max (\\m x. max (--X m x) (&0)) n x >= c}\n         IN prob_events p
-      #|  \\x:A. abs(a:real)
-      #|  \\x:A. abs((X:num->A->real) n x)
-      #|  p:A prob_space
-      #|  expectation (p:A prob_space)\n      (\\x:A. abs((X:num->A->real) n x) + abs(a))\n      = expectation p (\\x. abs(X n x)) + abs(a)
-      #|  expectation (p:A prob_space)\n     (\\x:A. abs((X:num->A->real) n x) + abs(a))
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  expectation (p:A prob_space)\n    (\\x:A. pos_part((X:num->A->real) n x - a))
-      #|  forall m. integrable (p:A prob_space) ((X:num->A->real) m)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b n C.\n     submartingale p FF X /\\ a < b /\\\n     (forall n. expectation p (\\x. abs(X n x)) <= C)\n     ==> (b - a) * expectation p (\\x. &(num_upcrossings X a b n x))\n         <= C + abs(a)
-      #|  ~(a' < &0)
-      #|  ~((x:A) IN S)
-      #|  ~(upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 1 /\\\n           X (SUC n) x >= b)
-      #|  ~(&1 <= a')
-      #|  &(if upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 1 /\\\n           X (SUC n) x >= b then 1 else 0) <= a'
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\\n           &(if upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 1 /\\\n                X (SUC n) x >= b\n             then 1 else 0) <= a'} = prob_carrier p DIFF S
-      #|  {x:A | x IN prob_carrier p /\\\n          &(if upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 1 /\\\n               X (SUC n) x >= b\n            then 1 else 0) <= a'} = {}
-      #|  a' < &0
-      #|  {x:A | x IN prob_carrier p /\\\n         &(if upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 1 /\\\n              X (SUC n) x >= b\n           then 1 else 0) <= a'} = prob_carrier p
-      #|  &1 <= a'
-      #|  SUC n
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  n:num
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  {x:A | x IN prob_carrier p /\\\n       upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 1 /\\\n       X (SUC n) x >= b} =\n       {x | x IN prob_carrier p /\\ upcrossing_phase (\\k. X k x) a b n = 1}\n       INTER {x | x IN prob_carrier p /\\ X (SUC n) x >= b}
-      #|  (S:A->bool) IN prob_events p
-      #|  S = {x:A | x IN prob_carrier p /\\\n      upcrossing_phase (\\k. (X:num->A->real) k x) a b n = 1 /\\\n      X (SUC n) x >= b}
-      #|  0 = 0
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b.\n     filtration p FF /\\ adapted p FF X\n     ==> forall n. random_variable p (\\x. &(num_upcrossings X a b n x))
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b n k.\n     filtration p FF /\\ adapted p FF X\n     ==> {x | x IN prob_carrier p /\\\n              &(num_upcrossings X a b n x) >= &k}\n         IN prob_events p
-      #|  forall f a b n. upcrossing_count f a b n <= n
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  &n
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b.\n     filtration p FF /\\ adapted p FF X\n     ==> forall n. integrable p (\\x. &(num_upcrossings X a b n x))
-      #|  x:A
-      #|  indicator_fn (A:A->bool)
-      #|  c:real
-      #|  p:A prob_space
-      #|  integrable (p:A prob_space) (indicator_fn (A:A->bool))
-      #|  indicator_fn (A:A->bool)
-      #|  c:real
-      #|  p:A prob_space
-      #|  A:A->bool
-      #|  p:A prob_space
-      #|  c * prob (p:A prob_space) A =\n    expectation p (\\x:A. c * indicator_fn (A:A->bool) x)
-      #|  A = {x:A | x IN prob_carrier p /\\ (f:A->real) x >= c}
-      #|  forall p:A prob_space f (c:real).\n     integrable p f /\\\n     (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n     &0 < c /\\\n     {x | x IN prob_carrier p /\\ f x >= c} IN prob_events p\n     ==> c * prob p {x | x IN prob_carrier p /\\ f x >= c}\n         <= expectation p f
-      #|  FF:num->(A->bool)->bool
-      #|  \\n:num. prob_events (p:A prob_space)
-      #|  {x:A | x IN prob_carrier p /\\\n    &(num_downcrossings (X:num->A->real) a b n x) >= &k} =\n    {x | x IN prob_carrier p /\\\n    &(num_upcrossings (\\m:num. \\x:A. --((X:num->A->real) m x)) (--b) (--a) n x) >= &k}
-      #|  forall(p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) a b n k.\n    backward_martingale p FF X\n    ==> {x | x IN prob_carrier p /\\ &(num_downcrossings X a b n x) >= &k}\n        IN prob_events p
-      #|  n:num
-      #|  FF:num->(A->bool)->bool
-      #|  --a:real
-      #|  --b:real
-      #|  \\m:num. \\x:A. --((X:num->A->real) m x)
-      #|  \\n:num. prob_events (p:A prob_space)
-      #|  p:A prob_space
-      #|  (\\x:A. &(num_downcrossings (X:num->A->real) a b n x)) =\n    (\\x. &(num_upcrossings (\\m. \\x. --(X m x)) (--b) (--a) n x))
-      #|  forall(p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) a b.\n    backward_martingale p FF X\n    ==> forall n. random_variable p (\\x. &(num_downcrossings X a b n x))
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  &n
-      #|  forall(p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) a b.\n    backward_martingale p FF X\n    ==> forall n. integrable p (\\x. &(num_downcrossings X a b n x))
-      #|  \\x:A. &1
-      #|  \\x:A. &(num_upcrossings (\\k. (X:num->A->real)(N - k)) a b N x)
-      #|  p:A prob_space
-      #|  expectation (p:A prob_space)\n        (\\x. &(num_upcrossings (\\k. (X:num->A->real)(N - k)) a b N x) + &1) =\n        expectation p (\\x. &(num_upcrossings (\\k. X(N - k)) a b N x)) + &1
-      #|  expectation (p:A prob_space)\n      (\\x. &(num_upcrossings (\\k. (X:num->A->real)(N - k)) a b N x) + &1)
-      #|  (b - a) * (expectation (p:A prob_space)\n    (\\x. &(num_upcrossings (\\k. (X:num->A->real)(N - k)) a b N x)) + &1)
-      #|  forall x:A. x IN prob_carrier p ==>\n      &(num_downcrossings (X:num->A->real) a b N x) <=\n      &(num_upcrossings (\\k. X(N - k)) a b N x) + &1
-      #|  N:num
-      #|  b:real
-      #|  a:real
-      #|  \\k:num. (X:num->A->real)(N - k)
-      #|  \\k:num. (FF:num->(A->bool)->bool)(N - k)
-      #|  p:A prob_space
-      #|  integrable (p:A prob_space)\n    (\\x. &(num_upcrossings (\\k. (X:num->A->real)(N - k)) a b N x))
-      #|  N:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  integrable (p:A prob_space)\n    (\\x. &(num_downcrossings (X:num->A->real) a b N x))
-      #|  C:real
-      #|  N:num
-      #|  b:real
-      #|  a:real
-      #|  \\k:num. (X:num->A->real)(N - k)
-      #|  \\k:num. (FF:num->(A->bool)->bool)(N - k)
-      #|  p:A prob_space
-      #|  N:num
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall(p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) a b N C.\n    backward_martingale p FF X /\\ a < b /\\\n    (forall n. expectation p (\\x. abs(X n x)) <= C)\n    ==> (b - a) * expectation p (\\x. &(num_downcrossings X a b N x))\n        <= C + abs a + (b - a)
-      #|  prob (p:A prob_space)\n      {x | x IN prob_carrier p /\\\n           &(num_downcrossings (X:num->A->real) a b n x) >= &k} *\n      ((b - a) * &k) = (b - a) * (&k * prob p\n      {x | x IN prob_carrier p /\\\n           &(num_downcrossings X a b n x) >= &k})
-      #|  (b - a) * expectation (p:A prob_space)\n    (\\x. &(num_downcrossings (X:num->A->real) a b n x))
-      #|  &0 < &k
-      #|  &0 < b - a
-      #|  C:real
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  FF:num->(A->bool)->bool
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  &k * prob (p:A prob_space)\n    {x | x IN prob_carrier p /\\\n         &(num_downcrossings (X:num->A->real) a b n x) >= &k} <=\n    expectation p (\\x. &(num_downcrossings X a b n x))
-      #|  forall(p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real)\n    a b n C (k:num).\n    backward_martingale p FF X /\\ a < b /\\\n    (forall n. expectation p (\\x. abs(X n x)) <= C) /\\ 0 < k\n    ==> prob p {x | x IN prob_carrier p /\\\n          &(num_downcrossings X a b n x) >= &k}\n        <= (C + abs a + (b - a)) / ((b - a) * &k)
-      #|  nn:num
-      #|  nn:num
-      #|  k:num
-      #|  k:num
-      #|  x:A
-      #|  SUC j
-      #|  C:real
-      #|  nn:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  nn:num
-      #|  nn <= SUC nn
-      #|  x:A
-      #|  nn:num
-      #|  FF:num->(A->bool)->bool
+      #|  expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)(0, x)))
+      #|  abs(expectation((p : Prob_space[A]), (X : (Num, A) -> Real)(0))) <= (C : Real)
+      #|  expectation((p : Prob_space[A]), (X : (Num, A) -> Real)(0)) >= -(C : Real)
+      #|  real_of_num(0) < (c : Real)
+      #|  IN((y : A), (A : (Num, A) -> Bool)(0))
+      #|  (y : A)
+      #|  indicator_fn((A : (Num, A) -> Bool)(0))
+      #|  -(c : Real)
+      #|  (p : Prob_space[A])
+      #|  indicator_fn((A : (Num, A) -> Bool)(0))
+      #|  -(c : Real)
+      #|  (p : Prob_space[A])
+      #|  -(c : Real) * prob((p : Prob_space[A]), (A : (Num, A) -> Bool)(0)) == expectation(p, (x : A) => -c * indicator_fn(A(0), x))
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(0, x) * indicator_fn((A : (Num, A) -> Bool)(0), x)) <= -(c : Real) * prob(p, A(0))
+      #|  IN((y : A), (A : (Num, A) -> Bool)(0))
+      #|  (y : A)
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(0, x) * indicator_fn((B : (Num, A) -> Bool)(0), x) + X(0, x) * indicator_fn((A : (Num, A) -> Bool)(0), x)) == expectation(p, (x : A) => X(0, x) * indicator_fn(B(0), x)) + expectation(p, (x : A) => X(0, x) * indicator_fn(A(0), x))
+      #|  expectation((p : Prob_space[A]), (X : (Num, A) -> Real)(0)) == expectation(p, (x : A) => X(0, x) * indicator_fn((B : (Num, A) -> Bool)(0), x)) + expectation(p, (x : A) => X(0, x) * indicator_fn((A : (Num, A) -> Bool)(0), x))
+      #|  \226\136\128 m : Num, expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(m, x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) >= -(C : Real) + (c : Real) * prob(p, (A : (Num, A) -> Bool)(m))
+      #|  \226\136\128 n : Num, expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)(n, x))) <= (C : Real)
+      #|  (m : Num)
+      #|  (y : A)
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((m : Num), x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) <= expectation(p, (x : A) => abs(X(m, x)))
+      #|  \226\136\128 m : Num, expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(m, x) * indicator_fn((B : (Num, A) -> Bool)(m), x)) <= (C : Real)
+      #|  \226\136\128 m : Num, integrable((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(m, x) * indicator_fn((B : (Num, A) -> Bool)(m), x))
+      #|  DIFF(prob_carrier((p : Prob_space[A])), (A : (Num, A) -> Bool)((m : Num))) == DIFF(UNIONS((FF : (Num, (A) -> Bool) -> Bool)(m)), A(m))
+      #|  \226\136\128 m : Num, IN((B : (Num, A) -> Bool)(m), (FF : (Num, (A) -> Bool) -> Bool)(m))
+      #|  \226\136\128 m : Num, IN((B : (Num, A) -> Bool)(m), prob_events((p : Prob_space[A])))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((m : Num))
+      #|  \226\136\128 m : Num, IN((A : (Num, A) -> Bool)(m), prob_events((p : Prob_space[A])))
+      #|  \226\136\128 m : Num, IN((A : (Num, A) -> Bool)(m), (FF : (Num, (A) -> Bool) -> Bool)(m))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), (n : Num), x) >= (c : Real)} == (A : (Num, A) -> Bool)(n)
+      #|  (B : (Num, A) -> Bool) == ((n : Num) => DIFF(prob_carrier((p : Prob_space[A])), (A : (Num, A) -> Bool)(n)))
+      #|  (A : (Num, A) -> Bool) == ((n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= (c : Real)})
+      #|  ({} : ((A) -> Bool) -> Bool)
+      #|  sigma_algebra((FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  !(real_of_num(0) <= (v : Real))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max(-(X : (Num, A) -> Real)((n : Num), x), real_of_num(0)) <= (v : Real)} == {}
+      #|  real_of_num(0) <= (v : Real)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max(-(X : (Num, A) -> Real)((n : Num), x), real_of_num(0)) <= (v : Real)} == {(x : A) | IN(x, prob_carrier(p)) && X(n, x) >= -v}
+      #|  real_of_num(0) <= (v : Real)
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)))
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 c : Real, \226\136\128 n : Num, \226\136\128 C : Real, submartingale(p, FF, X) && real_of_num(0) < c && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 c * prob(p, {(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => max(-X(m, x), real_of_num(0)), n, x) >= c}) <= real_of_num(2) * C
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (n : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(n, x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 c : Real, \226\136\128 n : Num, submartingale(p, FF, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => pos_part(X(m, x)), n, x) >= c}, prob_events(p))
+      #|  ({} : ((A) -> Bool) -> Bool)
+      #|  sigma_algebra((FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  !(real_of_num(0) <= (v : Real))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max(-(X : (Num, A) -> Real)((n : Num), x), real_of_num(0)) <= (v : Real)} == {}
+      #|  real_of_num(0) <= (v : Real)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max(-(X : (Num, A) -> Real)((n : Num), x), real_of_num(0)) <= (v : Real)} == {(x : A) | IN(x, prob_carrier(p)) && X(n, x) >= -v}
+      #|  real_of_num(0) <= (v : Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 c : Real, \226\136\128 n : Num, submartingale(p, FF, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => max(-X(m, x), real_of_num(0)), n, x) >= c}, prob_events(p))
+      #|  (x : A) => abs((a : Real))
+      #|  (x : A) => abs((X : (Num, A) -> Real)((n : Num), x))
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)((n : Num), x)) + abs((a : Real))) == expectation(p, (x : A) => abs(X(n, x))) + abs(a)
+      #|  expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)((n : Num), x)) + abs((a : Real)))
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => pos_part((X : (Num, A) -> Real)((n : Num), x) - (a : Real)))
+      #|  \226\136\128 m : Num, integrable((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, \226\136\128 C : Real, submartingale(p, FF, X) && a < b && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 (b - a) * expectation(p, (x : A) => real_of_num(num_upcrossings(X, a, b, n, x))) <= C + abs(a)
+      #|  !((a' : Real) < real_of_num(0))
+      #|  !IN((x : A), (S : (A) -> Bool))
+      #|  !(upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, (x : A)), (a : Real), (b : Real), (n : Num)) == 1 && X(SUC(n), x) >= b)
+      #|  !(real_of_num(1) <= (a' : Real))
+      #|  real_of_num(if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, (x : A)), (a : Real), (b : Real), (n : Num)) == 1 && X(SUC(n), x) >= b { 1 } else { 0 }) <= (a' : Real)
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 1 && X(SUC(n), x) >= b { 1 } else { 0 }) <= (a' : Real)} == DIFF(prob_carrier(p), (S : (A) -> Bool))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 1 && X(SUC(n), x) >= b { 1 } else { 0 }) <= (a' : Real)} == {}
+      #|  (a' : Real) < real_of_num(0)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(if upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 1 && X(SUC(n), x) >= b { 1 } else { 0 }) <= (a' : Real)} == prob_carrier(p)
+      #|  real_of_num(1) <= (a' : Real)
+      #|  SUC((n : Num))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 1 && X(SUC(n), x) >= b} == INTER({(x : A) | IN(x, prob_carrier(p)) && upcrossing_phase((k : Num) => X(k, x), a, b, n) == 1}, {(x : A) | IN(x, prob_carrier(p)) && X(SUC(n), x) >= b})
+      #|  IN((S : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (S : (A) -> Bool) == {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && upcrossing_phase((k : Num) => (X : (Num, A) -> Real)(k, x), (a : Real), (b : Real), (n : Num)) == 1 && X(SUC(n), x) >= b}
+      #|  0 == 0
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, filtration(p, FF) && adapted(p, FF, X) \226\134\146 (\226\136\128 n : Num, random_variable(p, (x : A) => real_of_num(num_upcrossings(X, a, b, n, x))))
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, \226\136\128 k : Num, filtration(p, FF) && adapted(p, FF, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings(X, a, b, n, x)) >= real_of_num(k)}, prob_events(p))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, upcrossing_count(f, a, b, n) <= n
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  real_of_num((n : Num))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, filtration(p, FF) && adapted(p, FF, X) \226\134\146 (\226\136\128 n : Num, integrable(p, (x : A) => real_of_num(num_upcrossings(X, a, b, n, x))))
+      #|  (x : A)
+      #|  indicator_fn((A : (A) -> Bool))
+      #|  (c : Real)
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), indicator_fn((A : (A) -> Bool)))
+      #|  indicator_fn((A : (A) -> Bool))
+      #|  (c : Real)
+      #|  (p : Prob_space[A])
+      #|  (A : (A) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (c : Real) * prob((p : Prob_space[A]), (A : (A) -> Bool)) == expectation(p, (x : A) => c * indicator_fn(A, x))
+      #|  (A : (A) -> Bool) == {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) >= (c : Real)}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (A) -> Real, \226\136\128 c : Real, integrable(p, f) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= f(x)) && real_of_num(0) < c && IN({(x : A) | IN(x, prob_carrier(p)) && f(x) >= c}, prob_events(p)) \226\134\146 c * prob(p, {(x : A) | IN(x, prob_carrier(p)) && f(x) >= c}) <= expectation(p, f)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (n : Num) => prob_events((p : Prob_space[A]))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(num_downcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num((k : Num))} == {(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings((m : Num) => (x : A) => -X(m, x), -b, -a, n, x)) >= real_of_num(k)}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, \226\136\128 k : Num, backward_martingale(p, FF, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_downcrossings(X, a, b, n, x)) >= real_of_num(k)}, prob_events(p))
+      #|  (n : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  -(a : Real)
+      #|  -(b : Real)
+      #|  (m : Num) => (x : A) => -(X : (Num, A) -> Real)(m, x)
+      #|  (n : Num) => prob_events((p : Prob_space[A]))
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => real_of_num(num_downcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x))) == ((x : A) => real_of_num(num_upcrossings((m : Num) => (x : A) => -X(m, x), -b, -a, n, x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, backward_martingale(p, FF, X) \226\134\146 (\226\136\128 n : Num, random_variable(p, (x : A) => real_of_num(num_downcrossings(X, a, b, n, x))))
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  real_of_num((n : Num))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, backward_martingale(p, FF, X) \226\134\146 (\226\136\128 n : Num, integrable(p, (x : A) => real_of_num(num_downcrossings(X, a, b, n, x))))
+      #|  (x : A) => real_of_num(1)
+      #|  (x : A) => real_of_num(num_upcrossings((k : Num) => (X : (Num, A) -> Real)((N : Num) - k), (a : Real), (b : Real), N, x))
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((k : Num) => (X : (Num, A) -> Real)((N : Num) - k), (a : Real), (b : Real), N, x)) + real_of_num(1)) == expectation(p, (x : A) => real_of_num(num_upcrossings((k : Num) => X(N - k), a, b, N, x))) + real_of_num(1)
+      #|  expectation((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((k : Num) => (X : (Num, A) -> Real)((N : Num) - k), (a : Real), (b : Real), N, x)) + real_of_num(1))
+      #|  ((b : Real) - (a : Real)) * (expectation((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((k : Num) => (X : (Num, A) -> Real)((N : Num) - k), a, b, N, x))) + real_of_num(1))
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 real_of_num(num_downcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (N : Num), x)) <= real_of_num(num_upcrossings((k : Num) => X(N - k), a, b, N, x)) + real_of_num(1)
+      #|  (N : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (k : Num) => (X : (Num, A) -> Real)((N : Num) - k)
+      #|  (k : Num) => (FF : (Num, (A) -> Bool) -> Bool)((N : Num) - k)
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((k : Num) => (X : (Num, A) -> Real)((N : Num) - k), (a : Real), (b : Real), N, x)))
+      #|  (N : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (x : A) => real_of_num(num_downcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (N : Num), x)))
+      #|  (C : Real)
+      #|  (N : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (k : Num) => (X : (Num, A) -> Real)((N : Num) - k)
+      #|  (k : Num) => (FF : (Num, (A) -> Bool) -> Bool)((N : Num) - k)
+      #|  (p : Prob_space[A])
+      #|  (N : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 N : Num, \226\136\128 C : Real, backward_martingale(p, FF, X) && a < b && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 (b - a) * expectation(p, (x : A) => real_of_num(num_downcrossings(X, a, b, N, x))) <= C + (abs(a) + (b - a))
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_downcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num((k : Num))}) * ((b - a) * real_of_num(k)) == (b - a) * (real_of_num(k) * prob(p, {(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_downcrossings(X, a, b, n, x)) >= real_of_num(k)}))
+      #|  ((b : Real) - (a : Real)) * expectation((p : Prob_space[A]), (x : A) => real_of_num(num_downcrossings((X : (Num, A) -> Real), a, b, (n : Num), x)))
+      #|  real_of_num(0) < real_of_num((k : Num))
+      #|  real_of_num(0) < (b : Real) - (a : Real)
+      #|  (C : Real)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  real_of_num((k : Num)) * prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_downcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num(k)}) <= expectation(p, (x : A) => real_of_num(num_downcrossings(X, a, b, n, x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, \226\136\128 C : Real, \226\136\128 k : Num, backward_martingale(p, FF, X) && a < b && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) && 0 < k \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_downcrossings(X, a, b, n, x)) >= real_of_num(k)}) <= (C + (abs(a) + (b - a))) / ((b - a) * real_of_num(k))
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (x : A)
+      #|  SUC((j : Num))
+      #|  (C : Real)
+      #|  (nn : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (nn : Num)
+      #|  (nn : Num) <= SUC(nn)
+      #|  (x : A)
+      #|  (nn : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
       #|  prob (p:A prob_space) (UNIONS {\n        {x:A | x IN prob_carrier p /\\\n               &(num_downcrossings (X:num->A->real) a b n x) >= &(SUC j)}\n        | n IN (:num)})
-      #|  (C + abs(a:real) + (b - a)) / (b - a) / &(SUC j) =\n                     (C + abs a + (b - a)) / ((b - a) * &(SUC j))
-      #|  FF:num->(A->bool)->bool
-      #|  FF:num->(A->bool)->bool
+      #|  ((C : Real) + (abs((a : Real)) + ((b : Real) - a))) / (b - a) / real_of_num(SUC((j : Num))) == (C + (abs(a) + (b - a))) / ((b - a) * real_of_num(SUC(j)))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
       #|  prob (p:A prob_space) (UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_downcrossings (X:num->A->real) a b n x) >= &(SUC j)}\n       | n IN (:num)})
-      #|  j:num
-      #|  FF:num->(A->bool)->bool
-      #|  (C + abs(a:real) + (b - a)) / (b - a)
-      #|  FF:num->(A->bool)->bool
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  ((C : Real) + (abs((a : Real)) + ((b : Real) - a))) / (b - a)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
       #|  INTERS {UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_downcrossings (X:num->A->real) a b n x) >= &(SUC k)}\n     | n IN (:num)} | k IN (:num)}
-      #|  forall(p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) a b C.\n    backward_martingale p FF X /\\ a < b /\\\n    (forall n. expectation p (\\x. abs(X n x)) <= C)\n    ==> almost_surely p\n          {x | ?B:num. forall n. num_downcrossings X a b n x <= B}
-      #|  forall(f:num->A->real) N x C.\n     (forall m. m <= N ==> f m x <= C) ==> running_max f N x <= C
-      #|  (g:num->A->real) m x = (\\m. g(N - m)) (N - m) x
-      #|  m:num
-      #|  running_max (\\m:num. (g:num->A->real)(N - m)) N x
-      #|  x:A
-      #|  N:num
-      #|  g:num->A->real
-      #|  m:num
-      #|  running_max (g:num->A->real) N x
-      #|  x:A
-      #|  N:num
-      #|  \\m:num. (g:num->A->real)(N - m)
-      #|  forall N (g:num->A->real) x.\n     running_max (\\m. g(N - m)) N x = running_max g N x
-      #|  decreasing_filtration (p:A prob_space) FF
-      #|  a:real
-      #|  n:num
-      #|  adapted (p:A prob_space) FF X
-      #|  forall p:A prob_space FF (X:num->A->real).\n    backward_martingale p FF X ==> forall n. random_variable p (X n)
-      #|  v:real
-      #|  n:num
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  {x:A | x IN prob_carrier p /\\\n      pos_part((X:num->A->real) n x) <= v} =\n      {x | x IN prob_carrier p /\\ X n x <= v}
-      #|  {x:A | x IN prob_carrier p /\\\n     pos_part((X:num->A->real) n x) <= v} = {}
-      #|  v < &0
-      #|  v:real
-      #|  n:num
-      #|  {x:A | x IN prob_carrier p /\\\n    running_max (\\m x. pos_part((X:num->A->real) m x)) N x >= c}\n    IN (\\n:num. prob_events (p:A prob_space)) N
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) c N.\n    backward_martingale p FF X\n    ==> {x | x IN prob_carrier p /\\\n             running_max (\\m x. pos_part(X m x)) N x >= c}\n        IN prob_events p
-      #|  ~(&0 <= v)
-      #|  {x:A | x IN prob_carrier p /\\\n      max (--((X:num->A->real) n x)) (&0) <= v} = {}
-      #|  n:num
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  &0 <= v
-      #|  {x:A | x IN prob_carrier p /\\\n      max (--((X:num->A->real) n x)) (&0) <= v} =\n      {x | x IN prob_carrier p /\\ X n x >= --v}
-      #|  &0 <= v
-      #|  v:real
-      #|  n:num
-      #|  {x:A | x IN prob_carrier p /\\\n    running_max (\\m x. max (--((X:num->A->real) m x)) (&0)) N x >= c}\n    IN (\\n:num. prob_events (p:A prob_space)) N
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) c N.\n    backward_martingale p FF X\n    ==> {x | x IN prob_carrier p /\\\n             running_max (\\m x. max (--(X m x)) (&0)) N x >= c}\n        IN prob_events p
-      #|  y:A
-      #|  \\m (x:A). pos_part((X:num->A->real) m x)
-      #|  N:num
-      #|  forall y:A. running_max (\\m (x:A). pos_part((X:num->A->real) m x)) N y =\n           running_max (\\m (x:A). pos_part(X(N - m) x)) N y
-      #|  C:real
-      #|  N:num
-      #|  c:real
-      #|  \\k:num. (X:num->A->real)(N-k)
-      #|  \\k:num. (FF:num->(A->bool)->bool)(N-k)
-      #|  p:A prob_space
-      #|  submartingale (p:A prob_space)\n    (\\k. (FF:num->(A->bool)->bool)(N - k))\n    (\\k. (X:num->A->real)(N - k))
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) c N C.\n    backward_martingale p FF X /\\ &0 < c /\\\n    (forall n. expectation p (\\x. abs(X n x)) <= C)\n    ==> c * prob p {x | x IN prob_carrier p /\\\n                        running_max (\\m x. pos_part(X m x)) N x >= c}\n        <= C
-      #|  y:A
-      #|  \\m (x:A). max (--((X:num->A->real) m x)) (&0)
-      #|  N:num
-      #|  forall y:A. running_max (\\m (x:A). max (--((X:num->A->real) m x)) (&0)) N y =\n           running_max (\\m (x:A). max (--(X(N - m) x)) (&0)) N y
-      #|  C:real
-      #|  N:num
-      #|  c:real
-      #|  \\k:num. (X:num->A->real)(N-k)
-      #|  \\k:num. (FF:num->(A->bool)->bool)(N-k)
-      #|  p:A prob_space
-      #|  submartingale (p:A prob_space)\n    (\\k. (FF:num->(A->bool)->bool)(N - k))\n    (\\k. (X:num->A->real)(N - k))
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) c N C.\n    backward_martingale p FF X /\\ &0 < c /\\\n    (forall n. expectation p (\\x. abs(X n x)) <= C)\n    ==> c * prob p {x | x IN prob_carrier p /\\\n                        running_max (\\m x. max (--(X m x)) (&0)) N x >= c}\n        <= &2 * C
-      #|  forall n. max (--(X:num->A->real) n x) (&0) <= M2
-      #|  n:num
-      #|  forall n. pos_part ((X:num->A->real) n x) <= M1
-      #|  n:num
-      #|  M1 + M2:real
-      #|  M2:real
-      #|  M1:real
-      #|  x:A
-      #|  (\\m x. max (--(X:num->A->real) m x) (&0)) nn x
-      #|  nn:num
-      #|  nn:num
-      #|  &(SUC k)
-      #|  k:num
-      #|  x:A
-      #|  C:real
-      #|  nn:num
-      #|  &(SUC j)
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  nn:num
-      #|  running_max (\\m x. max (--(X:num->A->real) m x) (&0))\n                       n (x:A)
-      #|  x:A
-      #|  FF:num->(A->bool)->bool
-      #|  (&2 * C) / &(SUC j)
-      #|  \\n. {x:A | x IN prob_carrier p /\\\n            running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n            >= &(SUC j)}
-      #|  p:A prob_space
-      #|  j:num
-      #|  FF:num->(A->bool)->bool
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n              running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n              >= &(SUC k)}
-      #|  p:A prob_space
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 C : Real, backward_martingale(p, FF, X) && a < b && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings(X, a, b, n, x) <= B})
+      #|  \226\136\128 f : (Num, A) -> Real, \226\136\128 N : Num, \226\136\128 x : A, \226\136\128 C : Real, (\226\136\128 m : Num, m <= N \226\134\146 f(m, x) <= C) \226\134\146 running_max(f, N, x) <= C
+      #|  (g : (Num, A) -> Real)((m : Num), (x : A)) == ((m : Num) => g((N : Num) - m))(N - m, x)
+      #|  (m : Num)
+      #|  running_max((m : Num) => (g : (Num, A) -> Real)((N : Num) - m), N, (x : A))
+      #|  (x : A)
+      #|  (N : Num)
+      #|  (g : (Num, A) -> Real)
+      #|  (m : Num)
+      #|  running_max((g : (Num, A) -> Real), (N : Num), (x : A))
+      #|  (x : A)
+      #|  (N : Num)
+      #|  (m : Num) => (g : (Num, A) -> Real)((N : Num) - m)
+      #|  \226\136\128 N : Num, \226\136\128 g : (Num, A) -> Real, \226\136\128 x : A, running_max((m : Num) => g(N - m), N, x) == running_max(g, N, x)
+      #|  decreasing_filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  (a : Real)
+      #|  (n : Num)
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, backward_martingale(p, FF, X) \226\134\146 (\226\136\128 n : Num, random_variable(p, X(n)))
+      #|  (v : Real)
+      #|  (n : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && pos_part((X : (Num, A) -> Real)((n : Num), x)) <= (v : Real)} == {(x : A) | IN(x, prob_carrier(p)) && X(n, x) <= v}
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && pos_part((X : (Num, A) -> Real)((n : Num), x)) <= (v : Real)} == {}
+      #|  (v : Real) < real_of_num(0)
+      #|  (v : Real)
+      #|  (n : Num)
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), (N : Num), x) >= (c : Real)}, ((n : Num) => prob_events(p))(N))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 c : Real, \226\136\128 N : Num, backward_martingale(p, FF, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => pos_part(X(m, x)), N, x) >= c}, prob_events(p))
+      #|  !(real_of_num(0) <= (v : Real))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max(-(X : (Num, A) -> Real)((n : Num), x), real_of_num(0)) <= (v : Real)} == {}
+      #|  (n : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  real_of_num(0) <= (v : Real)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max(-(X : (Num, A) -> Real)((n : Num), x), real_of_num(0)) <= (v : Real)} == {(x : A) | IN(x, prob_carrier(p)) && X(n, x) >= -v}
+      #|  real_of_num(0) <= (v : Real)
+      #|  (v : Real)
+      #|  (n : Num)
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), (N : Num), x) >= (c : Real)}, ((n : Num) => prob_events(p))(N))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 c : Real, \226\136\128 N : Num, backward_martingale(p, FF, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => max(-X(m, x), real_of_num(0)), N, x) >= c}, prob_events(p))
+      #|  (y : A)
+      #|  (m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x))
+      #|  (N : Num)
+      #|  \226\136\128 y : A, running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), (N : Num), y) == running_max((m : Num) => (x : A) => pos_part(X(N - m, x)), N, y)
+      #|  (C : Real)
+      #|  (N : Num)
+      #|  (c : Real)
+      #|  (k : Num) => (X : (Num, A) -> Real)((N : Num) - k)
+      #|  (k : Num) => (FF : (Num, (A) -> Bool) -> Bool)((N : Num) - k)
+      #|  (p : Prob_space[A])
+      #|  submartingale((p : Prob_space[A]), (k : Num) => (FF : (Num, (A) -> Bool) -> Bool)((N : Num) - k), (k : Num) => (X : (Num, A) -> Real)(N - k))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 c : Real, \226\136\128 N : Num, \226\136\128 C : Real, backward_martingale(p, FF, X) && real_of_num(0) < c && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 c * prob(p, {(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => pos_part(X(m, x)), N, x) >= c}) <= C
+      #|  (y : A)
+      #|  (m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0))
+      #|  (N : Num)
+      #|  \226\136\128 y : A, running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), (N : Num), y) == running_max((m : Num) => (x : A) => max(-X(N - m, x), real_of_num(0)), N, y)
+      #|  (C : Real)
+      #|  (N : Num)
+      #|  (c : Real)
+      #|  (k : Num) => (X : (Num, A) -> Real)((N : Num) - k)
+      #|  (k : Num) => (FF : (Num, (A) -> Bool) -> Bool)((N : Num) - k)
+      #|  (p : Prob_space[A])
+      #|  submartingale((p : Prob_space[A]), (k : Num) => (FF : (Num, (A) -> Bool) -> Bool)((N : Num) - k), (k : Num) => (X : (Num, A) -> Real)(N - k))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 c : Real, \226\136\128 N : Num, \226\136\128 C : Real, backward_martingale(p, FF, X) && real_of_num(0) < c && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 c * prob(p, {(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => max(-X(m, x), real_of_num(0)), N, x) >= c}) <= real_of_num(2) * C
+      #|  \226\136\128 n : Num, max(-(X : (Num, A) -> Real)(n, (x : A)), real_of_num(0)) <= (M2 : Real)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, pos_part((X : (Num, A) -> Real)(n, (x : A))) <= (M1 : Real)
+      #|  (n : Num)
+      #|  (M1 : Real) + (M2 : Real)
+      #|  (M2 : Real)
+      #|  (M1 : Real)
+      #|  (x : A)
+      #|  ((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)))((nn : Num), (x : A))
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  real_of_num(SUC((k : Num)))
+      #|  (k : Num)
+      #|  (x : A)
+      #|  (C : Real)
+      #|  (nn : Num)
+      #|  real_of_num(SUC((j : Num)))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (nn : Num)
+      #|  running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), (n : Num), (x : A))
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  real_of_num(2) * (C : Real) / real_of_num(SUC((j : Num)))
+      #|  (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= real_of_num(SUC((j : Num)))}
+      #|  (p : Prob_space[A])
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
       #|  prob (p:A prob_space) (UNIONS {\n         {x:A | x IN prob_carrier p /\\\n                running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n                >= &(SUC j)} | n IN (:num)})
-      #|  j:num
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n            running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n            >= &(SUC k)}
-      #|  p:A prob_space
-      #|  &2 * C
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n           running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n           >= &(SUC k)}
-      #|  p:A prob_space
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
+      #|  real_of_num(2) * (C : Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
       #|  INTERS {UNIONS {\n      {x:A | x IN prob_carrier p /\\\n             running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n             >= &(SUC k)}\n    | n IN (:num)} | k IN (:num)}
-      #|  (\\m x. pos_part ((X:num->A->real) m x)) nn x
-      #|  nn:num
-      #|  nn:num
-      #|  &(SUC k)
-      #|  k:num
-      #|  x:A
-      #|  C:real
-      #|  nn:num
-      #|  &(SUC j)
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  nn:num
-      #|  running_max (\\m x. pos_part ((X:num->A->real) m x))\n                       n (x:A)
-      #|  x:A
-      #|  FF:num->(A->bool)->bool
-      #|  C / &(SUC j)
-      #|  \\n. {x:A | x IN prob_carrier p /\\\n            running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n            >= &(SUC j)}
-      #|  p:A prob_space
-      #|  j:num
-      #|  FF:num->(A->bool)->bool
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n              running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n              >= &(SUC k)}
-      #|  p:A prob_space
+      #|  ((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)))((nn : Num), (x : A))
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  real_of_num(SUC((k : Num)))
+      #|  (k : Num)
+      #|  (x : A)
+      #|  (C : Real)
+      #|  (nn : Num)
+      #|  real_of_num(SUC((j : Num)))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (nn : Num)
+      #|  running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), (n : Num), (x : A))
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (C : Real) / real_of_num(SUC((j : Num)))
+      #|  (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC((j : Num)))}
+      #|  (p : Prob_space[A])
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
       #|  prob (p:A prob_space) (UNIONS {\n         {x:A | x IN prob_carrier p /\\\n                running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n                >= &(SUC j)} | n IN (:num)})
-      #|  j:num
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n            running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n            >= &(SUC k)}
-      #|  p:A prob_space
-      #|  C:real
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n           running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n           >= &(SUC k)}
-      #|  p:A prob_space
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
+      #|  (C : Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
       #|  INTERS {UNIONS {\n      {x:A | x IN prob_carrier p /\\\n             running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n             >= &(SUC k)}\n    | n IN (:num)} | k IN (:num)}
-      #|  {x:A | ?M. forall n. pos_part((X:num->A->real) n x) <= M} INTER\n     {x:A | ?M. forall n. max (--(X:num->A->real) n x) (&0) <= M}
-      #|  forall(p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) C.\n    backward_martingale p FF X /\\\n    (forall n. expectation p (\\x. abs(X n x)) <= C)\n    ==> almost_surely p {x | ?M. forall n. abs(X n x) <= M}
-      #|  n:num
-      #|  n:num
-      #|  B:num
-      #|  B:num
-      #|  NUMPAIR i j
-      #|  b:real
-      #|  ?j:num. (g:num->real) j = b
-      #|  a:real
-      #|  ?i:num. (g:num->real) i = a
-      #|  b:real
-      #|  a:real
-      #|  M:real
-      #|  \\n:num. (X:num->A->real) n x
-      #|  k:num
-      #|  {x:A | (g:num->real)(NUMFST (k:num)) < g(NUMSND k) ==>\n              (?B. forall n. num_downcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}
-      #|  k:num
-      #|  forall k. (g:num->real)(NUMFST k) < g(NUMSND k)\n          ==> ?B. forall n. num_downcrossings (X:num->A->real)\n                        (g(NUMFST k)) (g(NUMSND k)) n x <= B
-      #|  M:real
-      #|  x:A
+      #|  INTER({(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, pos_part((X : (Num, A) -> Real)(n, x)) <= M}, {(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, max(-X(n, x), real_of_num(0)) <= M})
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 C : Real, backward_martingale(p, FF, X) && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, abs(X(n, x)) <= M})
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (B : Num)
+      #|  (B : Num)
+      #|  NUMPAIR((i : Num), (j : Num))
+      #|  (b : Real)
+      #|  \226\136\131 j : Num, (g : (Num) -> Real)(j) == (b : Real)
+      #|  (a : Real)
+      #|  \226\136\131 i : Num, (g : (Num) -> Real)(i) == (a : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (M : Real)
+      #|  (n : Num) => (X : (Num, A) -> Real)(n, (x : A))
+      #|  (k : Num)
+      #|  {(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)}
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, (g : (Num) -> Real)(NUMFST(k)) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, (x : A)) <= B)
+      #|  (M : Real)
+      #|  (x : A)
       #|  {x:A | ?M. forall n. abs((X:num->A->real) n x) <= M} INTER\n     INTERS {{x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_downcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}\n             | k IN (:num)}
-      #|  C:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  almost_surely (p:A prob_space)\n       {x:A | ?M. forall n. abs((X:num->A->real) n x) <= M}
-      #|  {x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_downcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)} = (:A)
-      #|  C:real
-      #|  (g:num->real)(NUMSND (k:num))
-      #|  (g:num->real)(NUMFST (k:num))
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  {x:A | ?B. forall n. num_downcrossings (X:num->A->real)\n                  ((g:num->real)(NUMFST k)) (g(NUMSND k)) n x <= B}
-      #|  (g:num->real)(NUMFST k) < g(NUMSND k)
-      #|  k:num
-      #|  forall k. almost_surely (p:A prob_space)\n       {x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_downcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}
-      #|  g:num->real
-      #|  forall(p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) C.\n    backward_martingale p FF X /\\\n    (forall n. expectation p (\\x. abs(X n x)) <= C)\n    ==> almost_surely p\n          {x | ?L. ((\\n. X n x) ---> L) sequentially}
-      #|  C:real
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  PP * (b - a) * &k = (b - a) * (&k * PP)
-      #|  EE = expectation (p:A prob_space)\n      (\\x:A. &(num_upcrossings (X:num->A->real) a b n x))
-      #|  PP = prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n      &(num_upcrossings (X:num->A->real) a b n x) >= &k}
-      #|  k:num
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  n:num
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  &k
-      #|  \\x:A. &(num_upcrossings (X:num->A->real) a b n x)
-      #|  p:A prob_space
-      #|  &k * prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n     &(num_upcrossings (X:num->A->real) a b n x) >= &k}\n     <= expectation p (\\x. &(num_upcrossings X a b n x))
-      #|  0 < k
-      #|  &0 < &k
-      #|  &0 < b - a
-      #|  (b - a) * expectation (p:A prob_space)\n    (\\x:A. &(num_upcrossings (X:num->A->real) a b n x))
-      #|  0 < k
-      #|  &0 < (b - a) * &k
-      #|  filtration (p:A prob_space) FF /\\ adapted p FF X
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b n C k.\n     submartingale p FF X /\\ a < b /\\\n     (forall n. expectation p (\\x. abs(X n x)) <= C) /\\\n     0 < k\n     ==> prob p {x | x IN prob_carrier p /\\\n                     &(num_upcrossings X a b n x) >= &k}\n         <= (C + abs(a)) / ((b - a) * &k)
-      #|  &0
-      #|  n:num >= m
-      #|  n:num
-      #|  m:num
-      #|  n:num
-      #|  t:A->bool
-      #|  m:num
-      #|  (A:num->A->bool) m
-      #|  x:A
-      #|  forall m. INTERS {(A:num->A->bool) n | n >= m} = A m
-      #|  UNIONS {(A:num->A->bool) n | n IN (:num)} = liminf_events A
-      #|  real_liminf (\\n. prob (p:A prob_space) ((A:num->A->bool) n))
-      #|  forall p:A prob_space (A:num->A->bool) c.\n     (forall n. A n IN prob_events p) /\\\n     (forall m n. m <= n ==> A m SUBSET A n) /\\\n     (forall n. prob p (A n) <= c)\n     ==> prob p (UNIONS {A n | n IN (:num)}) <= c
-      #|  FF:num->(A->bool)->bool
-      #|  &(num_upcrossings (X:num->A->real) a b m x)
-      #|  x:A
-      #|  FF:num->(A->bool)->bool
+      #|  (C : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, abs((X : (Num, A) -> Real)(n, x)) <= M})
+      #|  {(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)} == UNIV
+      #|  (C : Real)
+      #|  (g : (Num) -> Real)(NUMSND((k : Num)))
+      #|  (g : (Num) -> Real)(NUMFST((k : Num)))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  {(x : A) | \226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings((X : (Num, A) -> Real), (g : (Num) -> Real)(NUMFST((k : Num))), g(NUMSND(k)), n, x) <= B}
+      #|  (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k))
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, almost_surely((p : Prob_space[A]), {(x : A) | (g : (Num) -> Real)(NUMFST(k)) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)})
+      #|  (g : (Num) -> Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 C : Real, backward_martingale(p, FF, X) && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => X(n, x), L, sequentially)})
+      #|  (C : Real)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (PP : Real) * (((b : Real) - (a : Real)) * real_of_num((k : Num))) == (b - a) * (real_of_num(k) * PP)
+      #|  (EE : Real) == expectation((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)))
+      #|  (PP : Real) == prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num((k : Num))})
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (n : Num)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  real_of_num((k : Num))
+      #|  (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x))
+      #|  (p : Prob_space[A])
+      #|  real_of_num((k : Num)) * prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num(k)}) <= expectation(p, (x : A) => real_of_num(num_upcrossings(X, a, b, n, x)))
+      #|  0 < (k : Num)
+      #|  real_of_num(0) < real_of_num((k : Num))
+      #|  real_of_num(0) < (b : Real) - (a : Real)
+      #|  ((b : Real) - (a : Real)) * expectation((p : Prob_space[A]), (x : A) => real_of_num(num_upcrossings((X : (Num, A) -> Real), a, b, (n : Num), x)))
+      #|  0 < (k : Num)
+      #|  real_of_num(0) < ((b : Real) - (a : Real)) * real_of_num((k : Num))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)) && adapted(p, FF, (X : (Num, A) -> Real))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, \226\136\128 C : Real, \226\136\128 k : Num, submartingale(p, FF, X) && a < b && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) && 0 < k \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings(X, a, b, n, x)) >= real_of_num(k)}) <= (C + abs(a)) / ((b - a) * real_of_num(k))
+      #|  real_of_num(0)
+      #|  (n : Num) >= (m : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (t : (A) -> Bool)
+      #|  (m : Num)
+      #|  (A : (Num, A) -> Bool)((m : Num))
+      #|  (x : A)
+      #|  \226\136\128 m : Num, INTERS({(A : (Num, A) -> Bool)((n : Num)) | n >= m}) == A(m)
+      #|  UNIONS({(A : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}) == liminf_events(A)
+      #|  real_liminf((n : Num) => prob((p : Prob_space[A]), (A : (Num, A) -> Bool)(n)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 A : (Num, A) -> Bool, \226\136\128 c : Real, (\226\136\128 n : Num, IN(A(n), prob_events(p))) && (\226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSET(A(m), A(n))) && (\226\136\128 n : Num, prob(p, A(n)) <= c) \226\134\146 prob(p, UNIONS({A((n : Num)) | IN(n, UNIV)})) <= c
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (m : Num), (x : A)))
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
       #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b C.\n     submartingale p FF X /\\ a < b /\\\n     (forall n. expectation p (\\x. abs(X n x)) <= C)\n     ==> forall k. 0 < k ==>\n         prob p (UNIONS {\n           {x | x IN prob_carrier p /\\ &(num_upcrossings X a b n x) >= &k}\n         | n IN (:num)}) <= (C + abs(a)) / ((b - a) * &k)
-      #|  &N * d * x = &N * (d * x) /\\\n     x * d * &(SUC N) = &(SUC N) * (d * x)
-      #|  &N * (d * x)
-      #|  c / (d * x) < &N
-      #|  &0 < d * x
-      #|  &0 < d * &(SUC N)
-      #|  0 < SUC N
-      #|  SUC N
-      #|  N:num
-      #|  c / (d * x):real
-      #|  forall x c d. &0 < d /\\ (forall k. 0 < k ==> x <= c / (d * &k)) ==> x <= &0
-      #|  k:num
-      #|  C:real
-      #|  b:real
-      #|  a:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  k:num
+      #|  real_of_num((N : Num)) * ((d : Real) * (x : Real)) == real_of_num(N) * (d * x) && x * (d * real_of_num(SUC(N))) == real_of_num(SUC(N)) * (d * x)
+      #|  real_of_num((N : Num)) * ((d : Real) * (x : Real))
+      #|  (c : Real) / ((d : Real) * (x : Real)) < real_of_num((N : Num))
+      #|  real_of_num(0) < (d : Real) * (x : Real)
+      #|  real_of_num(0) < (d : Real) * real_of_num(SUC((N : Num)))
+      #|  0 < SUC((N : Num))
+      #|  SUC((N : Num))
+      #|  (N : Num)
+      #|  (c : Real) / ((d : Real) * (x : Real))
+      #|  \226\136\128 x : Real, \226\136\128 c : Real, \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 k : Num, 0 < k \226\134\146 x <= c / (d * real_of_num(k))) \226\134\146 x <= real_of_num(0)
+      #|  (k : Num)
+      #|  (C : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (k : Num)
       #|  UNIONS {{x:A | x IN prob_carrier p /\\\n      &(num_upcrossings X a b n x) >= &k} | n IN (:num)}
-      #|  x:A
+      #|  (x : A)
       #|  prob (p:A prob_space) (UNIONS {{x:A | x IN prob_carrier p /\\\n     &(num_upcrossings X a b n x) >= &k} | n IN (:num)})
-      #|  b - a:real
-      #|  C + abs(a:real)
-      #|  &0 <= x /\\ x <= &0 ==> x = &0
+      #|  (b : Real) - (a : Real)
+      #|  (C : Real) + abs((a : Real))
+      #|  real_of_num(0) <= (x : Real) && x <= real_of_num(0) \226\134\146 x == real_of_num(0)
       #|  1
       #|  UNIONS {{x:A | x IN prob_carrier p /\\\n      &(num_upcrossings X a b n x) >= &1} | n IN (:num)}
-      #|  kk:num
-      #|  kk:num
-      #|  s:A->bool
+      #|  (kk : Num)
+      #|  (kk : Num)
+      #|  (s : (A) -> Bool)
       #|  IMAGE (\\k. UNIONS {{x:A | x IN prob_carrier p /\\\n      &(num_upcrossings X a b n x) >= &k} | n IN (:num)}) (:num)
-      #|  kk:num
-      #|  s:A->bool
+      #|  (kk : Num)
+      #|  (s : (A) -> Bool)
       #|  INTERS {UNIONS {{x:A | x IN prob_carrier p /\\\n    &(num_upcrossings X a b n x) >= &k} | n IN (:num)} | 0 < k}\n    IN prob_events p
-      #|  nn:num
-      #|  nn:num
-      #|  s:A->bool
-      #|  IMAGE (\\n. {x:A | x IN prob_carrier p /\\\n      &(num_upcrossings X a b n x) >= &k}) (:num)
-      #|  FF:num->(A->bool)->bool
-      #|  nn:num
-      #|  s:A->bool
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  (s : (A) -> Bool)
+      #|  IMAGE((n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), n, x)) >= real_of_num((k : Num))}, UNIV)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (nn : Num)
+      #|  (s : (A) -> Bool)
       #|  forall k. 0 < k ==> UNIONS {{x:A | x IN prob_carrier p /\\\n    &(num_upcrossings X a b n x) >= &k} | n IN (:num)} IN prob_events p
-      #|  n:num
-      #|  {x:A | x IN prob_carrier p /\\\n     &(num_upcrossings X a b n x) >= &k}
-      #|  n:num
-      #|  k:num
-      #|  k:num
-      #|  t:A->bool
-      #|  x:A
-      #|  c /\\ (c ==> a /\\ b) ==> (a /\\ b) /\\ c
+      #|  (n : Num)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num((k : Num))}
+      #|  (n : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (t : (A) -> Bool)
+      #|  (x : A)
+      #|  (c : Bool) && (c \226\134\146 (a : Bool) && (b : Bool)) \226\134\146 (a && b) && c
       #|  INTERS {UNIONS {\n    {x:A | x IN prob_carrier p /\\ &(num_upcrossings X a b n x) >= &k}\n  | n IN (:num)} | k | 0 < k}
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b C.\n     submartingale p FF X /\\ a < b /\\\n     (forall n. expectation p (\\x. abs(X n x)) <= C)\n     ==> almost_surely p\n           {x | ?B:num. forall n. num_upcrossings X a b n x <= B}
-      #|  forall n. max (--(X:num->A->real) n x) (&0) <= M2
-      #|  n:num
-      #|  forall n. pos_part ((X:num->A->real) n x) <= M1
-      #|  n:num
-      #|  M1 + M2:real
-      #|  M2:real
-      #|  M1:real
-      #|  x:A
-      #|  (\\m x. max (--(X:num->A->real) m x) (&0)) nn x
-      #|  nn:num
-      #|  nn:num
-      #|  &(SUC k)
-      #|  k:num
-      #|  x:A
-      #|  C:real
-      #|  nn:num
-      #|  &(SUC j)
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  nn:num
-      #|  running_max (\\m x. max (--(X:num->A->real) m x) (&0))\n                       n (x:A)
-      #|  x:A
-      #|  FF:num->(A->bool)->bool
-      #|  (&2 * C) / &(SUC j)
-      #|  \\n. {x:A | x IN prob_carrier p /\\\n            running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n            >= &(SUC j)}
-      #|  p:A prob_space
-      #|  j:num
-      #|  FF:num->(A->bool)->bool
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n              running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n              >= &(SUC k)}
-      #|  p:A prob_space
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 C : Real, submartingale(p, FF, X) && a < b && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings(X, a, b, n, x) <= B})
+      #|  \226\136\128 n : Num, max(-(X : (Num, A) -> Real)(n, (x : A)), real_of_num(0)) <= (M2 : Real)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, pos_part((X : (Num, A) -> Real)(n, (x : A))) <= (M1 : Real)
+      #|  (n : Num)
+      #|  (M1 : Real) + (M2 : Real)
+      #|  (M2 : Real)
+      #|  (M1 : Real)
+      #|  (x : A)
+      #|  ((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)))((nn : Num), (x : A))
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  real_of_num(SUC((k : Num)))
+      #|  (k : Num)
+      #|  (x : A)
+      #|  (C : Real)
+      #|  (nn : Num)
+      #|  real_of_num(SUC((j : Num)))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (nn : Num)
+      #|  running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), (n : Num), (x : A))
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  real_of_num(2) * (C : Real) / real_of_num(SUC((j : Num)))
+      #|  (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= real_of_num(SUC((j : Num)))}
+      #|  (p : Prob_space[A])
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
       #|  prob (p:A prob_space) (UNIONS {\n         {x:A | x IN prob_carrier p /\\\n                running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n                >= &(SUC j)} | n IN (:num)})
-      #|  j:num
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n            running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n            >= &(SUC k)}
-      #|  p:A prob_space
-      #|  &2 * C
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n           running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n           >= &(SUC k)}
-      #|  p:A prob_space
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
+      #|  real_of_num(2) * (C : Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
       #|  INTERS {UNIONS {\n      {x:A | x IN prob_carrier p /\\\n             running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n             >= &(SUC k)}\n    | n IN (:num)} | k IN (:num)}
-      #|  (\\m x. pos_part ((X:num->A->real) m x)) nn x
-      #|  nn:num
-      #|  nn:num
-      #|  &(SUC k)
-      #|  k:num
-      #|  x:A
-      #|  C:real
-      #|  nn:num
-      #|  &(SUC j)
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  nn:num
-      #|  running_max (\\m x. pos_part ((X:num->A->real) m x))\n                       n (x:A)
-      #|  x:A
-      #|  FF:num->(A->bool)->bool
-      #|  C / &(SUC j)
-      #|  \\n. {x:A | x IN prob_carrier p /\\\n            running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n            >= &(SUC j)}
-      #|  p:A prob_space
-      #|  j:num
-      #|  FF:num->(A->bool)->bool
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n              running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n              >= &(SUC k)}
-      #|  p:A prob_space
+      #|  ((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)))((nn : Num), (x : A))
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  real_of_num(SUC((k : Num)))
+      #|  (k : Num)
+      #|  (x : A)
+      #|  (C : Real)
+      #|  (nn : Num)
+      #|  real_of_num(SUC((j : Num)))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (nn : Num)
+      #|  running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), (n : Num), (x : A))
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (C : Real) / real_of_num(SUC((j : Num)))
+      #|  (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC((j : Num)))}
+      #|  (p : Prob_space[A])
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
       #|  prob (p:A prob_space) (UNIONS {\n         {x:A | x IN prob_carrier p /\\\n                running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n                >= &(SUC j)} | n IN (:num)})
-      #|  j:num
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n            running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n            >= &(SUC k)}
-      #|  p:A prob_space
-      #|  C:real
-      #|  FF:num->(A->bool)->bool
-      #|  \\k n. {x:A | x IN prob_carrier p /\\\n           running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n           >= &(SUC k)}
-      #|  p:A prob_space
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
+      #|  (C : Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
+      #|  (p : Prob_space[A])
       #|  INTERS {UNIONS {\n      {x:A | x IN prob_carrier p /\\\n             running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n             >= &(SUC k)}\n    | n IN (:num)} | k IN (:num)}
-      #|  {x:A | ?M. forall n. pos_part((X:num->A->real) n x) <= M} INTER\n     {x:A | ?M. forall n. max (--(X:num->A->real) n x) (&0) <= M}
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) C.\n     submartingale p FF X /\\\n     (forall n. expectation p (\\x. abs(X n x)) <= C)\n     ==> almost_surely p {x | ?M. forall n. abs(X n x) <= M}
-      #|  n:num
-      #|  n:num
-      #|  B:num
-      #|  B:num
-      #|  NUMPAIR i j
-      #|  b:real
-      #|  ?j:num. (g:num->real) j = b
-      #|  a:real
-      #|  ?i:num. (g:num->real) i = a
-      #|  b:real
-      #|  a:real
-      #|  M:real
-      #|  \\n:num. (X:num->A->real) n x
-      #|  k:num
-      #|  {x:A | (g:num->real)(NUMFST (k:num)) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}
-      #|  k:num
-      #|  forall k. (g:num->real)(NUMFST k) < g(NUMSND k)\n          ==> ?B. forall n. num_upcrossings (X:num->A->real)\n                        (g(NUMFST k)) (g(NUMSND k)) n x <= B
-      #|  M:real
-      #|  x:A
+      #|  INTER({(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, pos_part((X : (Num, A) -> Real)(n, x)) <= M}, {(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, max(-X(n, x), real_of_num(0)) <= M})
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 C : Real, submartingale(p, FF, X) && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, abs(X(n, x)) <= M})
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (B : Num)
+      #|  (B : Num)
+      #|  NUMPAIR((i : Num), (j : Num))
+      #|  (b : Real)
+      #|  \226\136\131 j : Num, (g : (Num) -> Real)(j) == (b : Real)
+      #|  (a : Real)
+      #|  \226\136\131 i : Num, (g : (Num) -> Real)(i) == (a : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (M : Real)
+      #|  (n : Num) => (X : (Num, A) -> Real)(n, (x : A))
+      #|  (k : Num)
+      #|  {(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)}
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, (g : (Num) -> Real)(NUMFST(k)) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, (x : A)) <= B)
+      #|  (M : Real)
+      #|  (x : A)
       #|  {x:A | ?M. forall n. abs((X:num->A->real) n x) <= M} INTER\n     INTERS {{x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}\n             | k IN (:num)}
-      #|  C:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  almost_surely (p:A prob_space)\n       {x:A | ?M. forall n. abs((X:num->A->real) n x) <= M}
-      #|  {x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)} = (:A)
-      #|  C:real
-      #|  (g:num->real)(NUMSND (k:num))
-      #|  (g:num->real)(NUMFST (k:num))
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  {x:A | ?B. forall n. num_upcrossings (X:num->A->real)\n                  ((g:num->real)(NUMFST k)) (g(NUMSND k)) n x <= B}
-      #|  (g:num->real)(NUMFST k) < g(NUMSND k)
-      #|  k:num
-      #|  forall k. almost_surely (p:A prob_space)\n       {x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}
-      #|  g:num->real
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) C.\n     submartingale p FF X /\\\n     (forall n. expectation p (\\x. abs(X n x)) <= C)\n     ==> almost_surely p\n           {x | ?L. ((\\n. X n x) ---> L) sequentially}
-      #|  C:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  C:real
-      #|  forall p:A prob_space FF X.\n    uniformly_integrable p X /\\ submartingale p FF X\n    ==> almost_surely p {x | ?L. ((\\n. X n x) ---> L) sequentially}
-      #|  C:real
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  C:real
-      #|  forall p:A prob_space FF X.\n    uniformly_integrable p X /\\ backward_martingale p FF X\n    ==> almost_surely p {x | ?L. ((\\n. X n x) ---> L) sequentially}
-      #|  MIN t N <= N ==> N <= n ==> MIN t N <= n
-      #|  forall t N n:num. N <= n ==> MIN t N <= n
-      #|  forall t N n:num. ~(N <= n) ==> (MIN t N <= n <=> t <= n)
-      #|  n:num
-      #|  ~(N:num <= n)
-      #|  y:A
-      #|  {x:A | x IN prob_carrier p /\\ MIN (tau x) N <= n} =\n      {x | x IN prob_carrier p /\\ tau x <= n}
-      #|  N:num <= n
-      #|  y:A
-      #|  {x:A | x IN prob_carrier p /\\ MIN (tau x) N <= n} =\n      prob_carrier p
-      #|  N:num <= n
-      #|  n:num
-      #|  forall p FF (tau:A->num) N.\n    stopping_time p FF tau /\\ filtration p FF\n    ==> bounded_stopping_time p FF (\\x. MIN (tau x) N) N
-      #|  forall X (tau:A->num) N x.\n    stopped_process X (\\x. MIN (tau x) N) N x = stopped_process X tau N x
-      #|  (tau:A->num) x
-      #|  forall X (tau:A->num) x.\n    ((\\n. stopped_process X tau n x) ---> X (tau x) x) sequentially
-      #|  \\x:A. (X:num->A->real) (tau x) x
-      #|  stopped_process (X:num->A->real) tau n
-      #|  p:(A)prob_space
-      #|  expectation p (stopped_process (X:num->A->real) tau n) -\n      expectation p (\\x. X (tau x) x) =\n      expectation p (\\x. stopped_process X tau n x - X (tau x) x)
-      #|  expectation p\n       (\\x:A. abs(stopped_process X tau n x - X (tau x) x))
-      #|  n:num
-      #|  N:num
-      #|  e:real
-      #|  \\n. expectation p (stopped_process (X:num->A->real) tau n)
+      #|  (C : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, abs((X : (Num, A) -> Real)(n, x)) <= M})
+      #|  {(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)} == UNIV
+      #|  (C : Real)
+      #|  (g : (Num) -> Real)(NUMSND((k : Num)))
+      #|  (g : (Num) -> Real)(NUMFST((k : Num)))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  {(x : A) | \226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), (g : (Num) -> Real)(NUMFST((k : Num))), g(NUMSND(k)), n, x) <= B}
+      #|  (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k))
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, almost_surely((p : Prob_space[A]), {(x : A) | (g : (Num) -> Real)(NUMFST(k)) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)})
+      #|  (g : (Num) -> Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 C : Real, submartingale(p, FF, X) && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => X(n, x), L, sequentially)})
+      #|  (C : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (C : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, uniformly_integrable(p, X) && submartingale(p, FF, X) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => X(n, x), L, sequentially)})
+      #|  (C : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (C : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, uniformly_integrable(p, X) && backward_martingale(p, FF, X) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => X(n, x), L, sequentially)})
+      #|  MIN((t : Num), (N : Num)) <= N \226\134\146 N <= (n : Num) \226\134\146 MIN(t, N) <= n
+      #|  \226\136\128 t : Num, \226\136\128 N : Num, \226\136\128 n : Num, N <= n \226\134\146 MIN(t, N) <= n
+      #|  \226\136\128 t : Num, \226\136\128 N : Num, \226\136\128 n : Num, !(N <= n) \226\134\146 (MIN(t, N) <= n) == (t <= n)
+      #|  (n : Num)
+      #|  !((N : Num) <= (n : Num))
+      #|  (y : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && MIN((tau : (A) -> Num)(x), (N : Num)) <= (n : Num)} == {(x : A) | IN(x, prob_carrier(p)) && tau(x) <= n}
+      #|  (N : Num) <= (n : Num)
+      #|  (y : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && MIN((tau : (A) -> Num)(x), (N : Num)) <= (n : Num)} == prob_carrier(p)
+      #|  (N : Num) <= (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 tau : (A) -> Num, \226\136\128 N : Num, stopping_time(p, FF, tau) && filtration(p, FF) \226\134\146 bounded_stopping_time(p, FF, (x : A) => MIN(tau(x), N), N)
+      #|  \226\136\128 X : (Num, A) -> Real, \226\136\128 tau : (A) -> Num, \226\136\128 N : Num, \226\136\128 x : A, stopped_process(X, (x : A) => MIN(tau(x), N), N, x) == stopped_process(X, tau, N, x)
+      #|  (tau : (A) -> Num)((x : A))
+      #|  \226\136\128 X : (Num, A) -> Real, \226\136\128 tau : (A) -> Num, \226\136\128 x : A, op_minus_minus_minus_gt((n : Num) => stopped_process(X, tau, n, x), X(tau(x), x), sequentially)
+      #|  (x : A) => (X : (Num, A) -> Real)((tau : (A) -> Num)(x), x)
+      #|  stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), (n : Num))
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), (n : Num))) - expectation(p, (x : A) => X(tau(x), x)) == expectation(p, (x : A) => stopped_process(X, tau, n, x) - X(tau(x), x))
+      #|  expectation((p : Prob_space[A]), (x : A) => abs(stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), (n : Num), x) - X(tau(x), x)))
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (n : Num) => expectation((p : Prob_space[A]), stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), n))
       #|  sequentially
-      #|  stopped_process X (\\x:A. MIN (tau x) n) n = stopped_process X tau n
-      #|  n:num
-      #|  n:num
-      #|  \\x:A. MIN (tau x) n
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:(A)prob_space
-      #|  forall n. expectation p (stopped_process (X:num->A->real) tau n) =\n        expectation p (X 0)
-      #|  (\\n x:A. stopped_process X tau n x) = (\\n. stopped_process X tau n)
-      #|  integrable p (\\x:A. X (tau x) x) /\\\n    ((\\n. expectation p (\\x. abs(stopped_process X tau n x - X (tau x) x)))\n     ---> &0) sequentially
-      #|  forall p FF X (tau:A->num).\n    martingale p FF X /\\ stopping_time p FF tau /\\\n    uniformly_integrable p (\\n. stopped_process X tau n)\n    ==> integrable p (\\x. X (tau x) x) /\\\n        expectation p (\\x. X (tau x) x) = expectation p (X 0)
-      #|  &0 < e
-      #|  e:real
-      #|  \\x:A. (X:num->A->real) (tau x) x
-      #|  stopped_process (X:num->A->real) tau n
-      #|  p:(A)prob_space
-      #|  expectation p (stopped_process (X:num->A->real) tau n) -\n      expectation p (\\x. X (tau x) x) =\n      expectation p (\\x. stopped_process X tau n x - X (tau x) x)
-      #|  expectation p\n       (\\x:A. abs(stopped_process X tau n x - X (tau x) x))
-      #|  n:num
-      #|  N:num
-      #|  e:real
-      #|  \\n:num. expectation p (stopped_process (X:num->A->real) tau n)
-      #|  \\n:num. expectation p ((X:num->A->real) 0)
+      #|  stopped_process((X : (Num, A) -> Real), (x : A) => MIN((tau : (A) -> Num)(x), (n : Num)), n) == stopped_process(X, tau, n)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (x : A) => MIN((tau : (A) -> Num)(x), (n : Num))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, expectation((p : Prob_space[A]), stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), n)) == expectation(p, X(0))
+      #|  ((n : Num) => (x : A) => stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), n, x)) == ((n : Num) => stopped_process(X, tau, n))
+      #|  integrable((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((tau : (A) -> Num)(x), x)) && op_minus_minus_minus_gt((n : Num) => expectation(p, (x : A) => abs(stopped_process(X, tau, n, x) - X(tau(x), x))), real_of_num(0), sequentially)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 tau : (A) -> Num, martingale(p, FF, X) && stopping_time(p, FF, tau) && uniformly_integrable(p, (n : Num) => stopped_process(X, tau, n)) \226\134\146 integrable(p, (x : A) => X(tau(x), x)) && expectation(p, (x : A) => X(tau(x), x)) == expectation(p, X(0))
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  (x : A) => (X : (Num, A) -> Real)((tau : (A) -> Num)(x), x)
+      #|  stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), (n : Num))
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), (n : Num))) - expectation(p, (x : A) => X(tau(x), x)) == expectation(p, (x : A) => stopped_process(X, tau, n, x) - X(tau(x), x))
+      #|  expectation((p : Prob_space[A]), (x : A) => abs(stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), (n : Num), x) - X(tau(x), x)))
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (n : Num) => expectation((p : Prob_space[A]), stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), n))
+      #|  (n : Num) => expectation((p : Prob_space[A]), (X : (Num, A) -> Real)(0))
       #|  sequentially
-      #|  stopped_process X (\\x:A. MIN (tau x) n) n = stopped_process X tau n
-      #|  n:num
-      #|  n:num
-      #|  \\x:A. MIN (tau x) n
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:(A)prob_space
-      #|  forall n. expectation p ((X:num->A->real) 0) <=\n        expectation p (stopped_process X tau n)
-      #|  (\\n x:A. stopped_process X tau n x) = (\\n. stopped_process X tau n)
-      #|  integrable p (\\x:A. X (tau x) x) /\\\n    ((\\n. expectation p (\\x. abs(stopped_process X tau n x - X (tau x) x)))\n     ---> &0) sequentially
-      #|  forall p FF X (tau:A->num).\n    submartingale p FF X /\\ stopping_time p FF tau /\\\n    uniformly_integrable p (\\n. stopped_process X tau n)\n    ==> integrable p (\\x. X (tau x) x) /\\\n        expectation p (X 0) <= expectation p (\\x. X (tau x) x)
-      #|  &0 < e
-      #|  e:real
-      #|  \\x:A. (X:num->A->real) (tau x) x
-      #|  stopped_process (X:num->A->real) tau n
-      #|  p:(A)prob_space
-      #|  expectation p (stopped_process (X:num->A->real) tau n) -\n      expectation p (\\x. X (tau x) x) =\n      expectation p (\\x. stopped_process X tau n x - X (tau x) x)
-      #|  expectation p\n       (\\x:A. abs(stopped_process X tau n x - X (tau x) x))
-      #|  n:num
-      #|  N:num
-      #|  e:real
-      #|  \\n:num. expectation p ((X:num->A->real) 0)
-      #|  \\n:num. expectation p (stopped_process (X:num->A->real) tau n)
+      #|  stopped_process((X : (Num, A) -> Real), (x : A) => MIN((tau : (A) -> Num)(x), (n : Num)), n) == stopped_process(X, tau, n)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (x : A) => MIN((tau : (A) -> Num)(x), (n : Num))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, expectation((p : Prob_space[A]), (X : (Num, A) -> Real)(0)) <= expectation(p, stopped_process(X, (tau : (A) -> Num), n))
+      #|  ((n : Num) => (x : A) => stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), n, x)) == ((n : Num) => stopped_process(X, tau, n))
+      #|  integrable((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((tau : (A) -> Num)(x), x)) && op_minus_minus_minus_gt((n : Num) => expectation(p, (x : A) => abs(stopped_process(X, tau, n, x) - X(tau(x), x))), real_of_num(0), sequentially)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 tau : (A) -> Num, submartingale(p, FF, X) && stopping_time(p, FF, tau) && uniformly_integrable(p, (n : Num) => stopped_process(X, tau, n)) \226\134\146 integrable(p, (x : A) => X(tau(x), x)) && expectation(p, X(0)) <= expectation(p, (x : A) => X(tau(x), x))
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  (x : A) => (X : (Num, A) -> Real)((tau : (A) -> Num)(x), x)
+      #|  stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), (n : Num))
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), (n : Num))) - expectation(p, (x : A) => X(tau(x), x)) == expectation(p, (x : A) => stopped_process(X, tau, n, x) - X(tau(x), x))
+      #|  expectation((p : Prob_space[A]), (x : A) => abs(stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), (n : Num), x) - X(tau(x), x)))
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (n : Num) => expectation((p : Prob_space[A]), (X : (Num, A) -> Real)(0))
+      #|  (n : Num) => expectation((p : Prob_space[A]), stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), n))
       #|  sequentially
-      #|  stopped_process X (\\x:A. MIN (tau x) n) n = stopped_process X tau n
-      #|  n:num
-      #|  n:num
-      #|  \\x:A. MIN (tau x) n
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:(A)prob_space
-      #|  forall n. expectation p (stopped_process (X:num->A->real) tau n) <=\n        expectation p (X 0)
-      #|  (\\n x:A. stopped_process X tau n x) = (\\n. stopped_process X tau n)
-      #|  integrable p (\\x:A. X (tau x) x) /\\\n    ((\\n. expectation p (\\x. abs(stopped_process X tau n x - X (tau x) x)))\n     ---> &0) sequentially
-      #|  forall p FF X (tau:A->num).\n    supermartingale p FF X /\\ stopping_time p FF tau /\\\n    uniformly_integrable p (\\n. stopped_process X tau n)\n    ==> integrable p (\\x. X (tau x) x) /\\\n        expectation p (\\x. X (tau x) x) <= expectation p (X 0)
-      #|  &0 < e
-      #|  e:real
-      #|  gen_predictable (p:A prob_space) (FF:num->(A->bool)->bool) (H:num->A->real) <=>\n   measurable_wrt p (FF 0) (H 0) /\\\n   (forall n. measurable_wrt p (FF n) (H (SUC n)))
-      #|  (gen_doob_compensator (p:A prob_space) (FF:num->(A->bool)->bool)\n     (X:num->A->real) 0 (x:A) = &0) /\\\n   (gen_doob_compensator p FF X (SUC n) x =\n     gen_doob_compensator p FF X n x +\n     gen_cond_exp p (FF n) (X (SUC n)) x - X n x)
+      #|  stopped_process((X : (Num, A) -> Real), (x : A) => MIN((tau : (A) -> Num)(x), (n : Num)), n) == stopped_process(X, tau, n)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (x : A) => MIN((tau : (A) -> Num)(x), (n : Num))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, expectation((p : Prob_space[A]), stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), n)) <= expectation(p, X(0))
+      #|  ((n : Num) => (x : A) => stopped_process((X : (Num, A) -> Real), (tau : (A) -> Num), n, x)) == ((n : Num) => stopped_process(X, tau, n))
+      #|  integrable((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((tau : (A) -> Num)(x), x)) && op_minus_minus_minus_gt((n : Num) => expectation(p, (x : A) => abs(stopped_process(X, tau, n, x) - X(tau(x), x))), real_of_num(0), sequentially)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 tau : (A) -> Num, supermartingale(p, FF, X) && stopping_time(p, FF, tau) && uniformly_integrable(p, (n : Num) => stopped_process(X, tau, n)) \226\134\146 integrable(p, (x : A) => X(tau(x), x)) && expectation(p, (x : A) => X(tau(x), x)) <= expectation(p, X(0))
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  (gen_predictable : (Prob_space[A], (Num, (A) -> Bool) -> Bool, (Num, A) -> Real) -> Bool)((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (H : (Num, A) -> Real)) == (measurable_wrt(p, FF(0), H(0)) && (\226\136\128 n : Num, measurable_wrt(p, FF(n), H(SUC(n)))))
+      #|  (gen_doob_compensator : (Prob_space[A], (Num, (A) -> Bool) -> Bool, (Num, A) -> Real, Num, A) -> Real)((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), 0, (x : A)) == real_of_num(0) && gen_doob_compensator(p, FF, X, SUC((n : Num)), x) == gen_doob_compensator(p, FF, X, n, x) + (gen_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x))
       #|  :P
       #|  :P
       #|  :P
@@ -86914,1990 +86914,1990 @@ test "Probability/martingale_convergence matches Probability/martingale_converge
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  inv (&j) < (X:num->A->real) n w -\n      gen_cond_exp p ((FF:num->(A->bool)->bool) n) (X (SUC n)) w
-      #|  ~(j = 0)
-      #|  SUC (j - 1) = j
-      #|  j - 1
-      #|  (A_k:num->A->bool) (j - 1)
-      #|  j:num
-      #|  &0 < (X:num->A->real) n w -\n     gen_cond_exp p ((FF:num->(A->bool)->bool) n) (X (SUC n)) w
-      #|  w:A
-      #|  expectation (p:A prob_space)\n      (\\x:A. (X:num->A->real) n x * indicator_fn (B:A->bool) x) <=\n      expectation p (\\x. X (SUC n) x * indicator_fn B x)
-      #|  expectation (p:A prob_space)\n      (\\x:A. gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n        ((X:num->A->real) (SUC n)) x * indicator_fn (B:A->bool) x) =\n      expectation p (\\x. X (SUC n) x * indicator_fn B x)
-      #|  expectation (p:A prob_space)\n         (\\x:A. (X:num->A->real) n x * indicator_fn (B:A->bool) x -\n                gen_cond_exp p ((FF:num->(A->bool)->bool) n) (X (SUC n)) x *\n                indicator_fn B x) =\n       expectation p (\\x. X n x * indicator_fn B x) -\n       expectation p (\\x. gen_cond_exp p (FF n) (X (SUC n)) x *\n                            indicator_fn B x)
-      #|  gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n        ((X:num->A->real) (SUC n)) (w:A) - X n w < --inv (&(SUC k))
-      #|  (w:A) IN (B:A->bool)
-      #|  w:A
-      #|  indicator_fn (B:A->bool):A->real
-      #|  inv(&(SUC k))
-      #|  p:A prob_space
-      #|  expectation (p:A prob_space)\n       (\\x:A. (X:num->A->real) n x * indicator_fn (B:A->bool) x -\n              gen_cond_exp p ((FF:num->(A->bool)->bool) n) (X (SUC n)) x *\n              indicator_fn B x)
-      #|  expectation (p:A prob_space)\n       (\\x:A. (X:num->A->real) n x * indicator_fn (B:A->bool) x) -\n      expectation p (\\x. gen_cond_exp p ((FF:num->(A->bool)->bool) n) (X (SUC n)) x *\n                          indicator_fn B x) =\n      expectation p (\\x. X n x * indicator_fn B x -\n                          gen_cond_exp p (FF n) (X (SUC n)) x *\n                          indicator_fn B x)
-      #|  indicator_fn (B:A->bool):A->real
-      #|  inv(&(SUC k))
-      #|  p:A prob_space
-      #|  inv(&(SUC k)) * prob (p:A prob_space) (B:A->bool) =\n      expectation p (\\x:A. inv(&(SUC k)) * indicator_fn B x)
-      #|  integrable (p:A prob_space) (\\x:A. gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n     ((X:num->A->real) (SUC n)) x * indicator_fn (B:A->bool) x)
-      #|  integrable (p:A prob_space) (\\x:A. (X:num->A->real) n x * indicator_fn (B:A->bool) x)
-      #|  B = {x:A | x IN prob_carrier p /\\\n     gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n       ((X:num->A->real) (SUC n)) x - X n x < --inv(&(SUC k))}
-      #|  submartingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real)
-      #|  expectation p (\\x:A. (X:num->A->real) n x *\n        indicator_fn\n          {x | x IN prob_carrier p /\\\n               gen_cond_exp p ((FF:num->(A->bool)->bool) n) (X (SUC n)) x - X n x <\n               --inv(&(SUC k))} x) <=\n      expectation p (\\x. X (SUC n) x *\n        indicator_fn\n          {x | x IN prob_carrier p /\\\n               gen_cond_exp p (FF n) (X (SUC n)) x - X n x < --inv(&(SUC k))} x)
-      #|  expectation p (\\x:A. gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n        ((X:num->A->real) (SUC n)) x *\n        indicator_fn\n          {x | x IN prob_carrier p /\\\n               gen_cond_exp p (FF n) (X (SUC n)) x - X n x < --inv(&(SUC k))} x) =\n      expectation p (\\x. X (SUC n) x *\n        indicator_fn\n          {x | x IN prob_carrier p /\\\n               gen_cond_exp p (FF n) (X (SUC n)) x - X n x < --inv(&(SUC k))} x)
-      #|  prob (p:A prob_space)\n       {x:A | x IN prob_carrier p /\\\n              gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n                ((X:num->A->real) (SUC n)) x - X n x < --inv(&(SUC k))} <= &0 <=>\n      inv(&(SUC k)) * prob p\n       {x | x IN prob_carrier p /\\\n            gen_cond_exp p (FF n) (X (SUC n)) x - X n x < --inv(&(SUC k))} <=\n      inv(&(SUC k)) * &0
-      #|  &0 < inv(&(SUC k))
-      #|  &0 <= x /\\ x <= &0 ==> x = &0
-      #|  {x:A | x IN prob_carrier p /\\\n             gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n               ((X:num->A->real) (SUC n)) x - X n x < --inv(&(SUC k))} IN\n      prob_events p
-      #|  --inv(&(SUC k))
-      #|  (X:num->A->real) n
-      #|  gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n               ((X:num->A->real) (SUC n))
-      #|  (FF:num->(A->bool)->bool) n
-      #|  p:A prob_space
-      #|  {x:A | x IN prob_carrier p /\\\n             gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n               ((X:num->A->real) (SUC n)) x - X n x < --inv (&(SUC k))} IN\n      FF n
-      #|  (A_k:num->A->bool) k =\n      {x:A | x IN prob_carrier p /\\\n             gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n               ((X:num->A->real) (SUC n)) x - X n x < --inv(&(SUC k))}
-      #|  k:num
-      #|  UNIONS {(A_k:num->A->bool) k | k IN (:num)}
-      #|  A_k = \\k:num. {x:A | x IN prob_carrier p /\\\n                           gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n                             ((X:num->A->real) (SUC n)) x - X n x <\n                           --inv(&(SUC k))}
-      #|  measurable_wrt (p:A prob_space) ((FF:num->(A->bool)->bool) n) ((X:num->A->real) n)
-      #|  integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  integrable (p:A prob_space) ((X:num->A->real) (SUC n))
-      #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) n)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  (x:A) IN prob_carrier p
-      #|  {x:A | x IN prob_carrier p /\\\n            ~(x IN {x | (X:num->A->real) n x <=\n                        gen_cond_exp p ((FF:num->(A->bool)->bool) n) (X (SUC n)) x})} =\n     {x | x IN prob_carrier p /\\\n          gen_cond_exp p (FF n) (X (SUC n)) x - X n x < &0}
-      #|  forall p:A prob_space FF (X:num->A->real) n.\n    submartingale p FF X\n    ==> almost_surely p\n          {x | X n x <= gen_cond_exp p (FF n) (X (SUC n)) x}
-      #|  gen_cond_exp (p:A prob_space) (FF (n:num)) ((X:num->A->real) (SUC n))
-      #|  gen_doob_compensator (p:A prob_space) FF X n
-      #|  p:A prob_space
-      #|  (\\x:A. gen_doob_compensator (p:A prob_space) FF X n x +\n       gen_cond_exp p (FF n) (X (SUC n)) x - X n x) =\n     (\\x. (gen_doob_compensator p FF X n x + gen_cond_exp p (FF n) (X (SUC n)) x) - X n x)
-      #|  gen_doob_compensator (p:A prob_space) FF X (SUC n) =\n       (\\x:A. gen_doob_compensator p FF X n x +\n              gen_cond_exp p (FF n) (X (SUC n)) x - X n x)
-      #|  integrable (p:A prob_space) (gen_doob_compensator p FF X n)
-      #|  gen_doob_compensator (p:A prob_space) FF X 0 = (\\x:A. &0)
-      #|  forall p:A prob_space FF (X:num->A->real) n.\n    submartingale p FF X\n    ==> integrable p (gen_doob_compensator p FF X n)
-      #|  gen_cond_exp (p:A prob_space) ((FF:num->(A->bool)->bool) n) ((X:num->A->real) (SUC n))
-      #|  gen_doob_compensator (p:A prob_space) FF X n
-      #|  (FF:num->(A->bool)->bool) (SUC n)
-      #|  p:A prob_space
-      #|  (X:num->A->real) n
-      #|  \\x:A. gen_doob_compensator (p:A prob_space) FF X n x + gen_cond_exp p (FF n) (X (SUC n)) x
-      #|  (FF:num->(A->bool)->bool) (SUC n)
-      #|  p:A prob_space
-      #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
-      #|  measurable_wrt (p:A prob_space) ((FF:num->(A->bool)->bool) n) ((X:num->A->real) n)
-      #|  measurable_wrt (p:A prob_space) (FF (SUC n)) ((X:num->A->real) n)
-      #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
-      #|  measurable_wrt (p:A prob_space) ((FF:num->(A->bool)->bool) n)\n       (gen_cond_exp p (FF n) ((X:num->A->real) (SUC n)))
-      #|  measurable_wrt (p:A prob_space) (FF (SUC n)) (gen_cond_exp p (FF n) (X (SUC n)))
-      #|  integrable (p:A prob_space) ((X:num->A->real) (SUC n))
-      #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) n)
-      #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) (SUC n))
-      #|  (\\x:A. gen_doob_compensator (p:A prob_space) FF X n x +\n       gen_cond_exp p (FF n) (X (SUC n)) x - X n x) =\n     (\\x. (gen_doob_compensator p FF X n x + gen_cond_exp p (FF n) (X (SUC n)) x) - X n x)
-      #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
-      #|  measurable_wrt (p:A prob_space) (FF n) (gen_doob_compensator p FF X n)
-      #|  measurable_wrt (p:A prob_space) (FF (SUC n)) (gen_doob_compensator p FF X n)
-      #|  p:A prob_space
-      #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
-      #|  filtration (p:A prob_space) FF
-      #|  measurable_wrt (p:A prob_space) (FF n) (gen_doob_compensator p FF X n)
-      #|  gen_doob_compensator (p:A prob_space) FF X 0 = (\\x:A. &0)
-      #|  forall p:A prob_space FF (X:num->A->real) n.\n    submartingale p FF X\n    ==> measurable_wrt p (FF n) (gen_doob_compensator p FF X n)
-      #|  gen_cond_exp (p:A prob_space) ((FF:num->(A->bool)->bool) n) ((X:num->A->real) (SUC n))
-      #|  gen_doob_compensator (p:A prob_space) FF X n
-      #|  (FF:num->(A->bool)->bool) n
-      #|  p:A prob_space
-      #|  (X:num->A->real) n
-      #|  \\x:A. gen_doob_compensator (p:A prob_space) FF X n x + gen_cond_exp p (FF n) (X (SUC n)) x
-      #|  (FF:num->(A->bool)->bool) n
-      #|  p:A prob_space
-      #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) n)
-      #|  (\\x:A. gen_doob_compensator (p:A prob_space) FF X n x +\n       gen_cond_exp p (FF n) (X (SUC n)) x - X n x) =\n     (\\x. (gen_doob_compensator p FF X n x + gen_cond_exp p (FF n) (X (SUC n)) x) - X n x)
-      #|  gen_doob_compensator (p:A prob_space) FF X 0 = (\\x:A. &0)
-      #|  forall p:A prob_space FF (X:num->A->real).\n    submartingale p FF X\n    ==> gen_predictable p FF (gen_doob_compensator p FF X)
-      #|  {x:A | gen_doob_compensator (p:A prob_space) FF X n x <=\n            gen_doob_compensator p FF X n x +\n            gen_cond_exp p (FF n) (X (SUC n)) x - X n x} =\n     {x | (X:num->A->real) n x <= gen_cond_exp p (FF n) (X (SUC n)) x}
-      #|  forall p:A prob_space FF (X:num->A->real) n.\n    submartingale p FF X\n    ==> almost_surely p\n          {x | gen_doob_compensator p FF X n x <=\n               gen_doob_compensator p FF X (SUC n) x}
-      #|  a:A->bool
-      #|  (X:num->A->real) (SUC n)
-      #|  (FF:num->(A->bool)->bool) n
-      #|  p:A prob_space
-      #|  \\x:A. gen_cond_exp (p:A prob_space) ((FF:num->(A->bool)->bool) n) ((X:num->A->real) (SUC n)) x * indicator_fn (a:A->bool) x
-      #|  \\x:A. (X:num->A->real) (SUC n) x * indicator_fn (a:A->bool) x
-      #|  p:A prob_space
-      #|  integrable (p:A prob_space) (\\x:A. gen_cond_exp p ((FF:num->(A->bool)->bool) n) ((X:num->A->real) (SUC n)) x * indicator_fn (a:A->bool) x)
-      #|  integrable (p:A prob_space) (\\x:A. (X:num->A->real) (SUC n) x * indicator_fn (a:A->bool) x)
-      #|  (\\x:A. ((X:num->A->real) (SUC n) x - gen_cond_exp (p:A prob_space) ((FF:num->(A->bool)->bool) n) (X (SUC n)) x) *\n             indicator_fn (a:A->bool) x) =\n      (\\x. X (SUC n) x * indicator_fn a x - gen_cond_exp p (FF n) (X (SUC n)) x * indicator_fn a x)
-      #|  expectation (p:A prob_space)\n       (\\x:A. ((X:num->A->real) (SUC n) x - gen_cond_exp p ((FF:num->(A->bool)->bool) n) (X (SUC n)) x) *\n              indicator_fn (a:A->bool) x) = &0
-      #|  \\x:A. ((X:num->A->real) (SUC n) x - gen_cond_exp (p:A prob_space) ((FF:num->(A->bool)->bool) n) (X (SUC n)) x) * indicator_fn (a:A->bool) x
-      #|  \\x:A. ((X:num->A->real) n x - gen_doob_compensator (p:A prob_space) FF X n x) * indicator_fn (a:A->bool) x
-      #|  p:A prob_space
-      #|  expectation (p:A prob_space)\n       (\\x. (X (SUC n) x - gen_doob_compensator p FF X (SUC n) x) * indicator_fn (a:A->bool) x) =\n      expectation p\n       (\\x. (X n x - gen_doob_compensator p FF X n x) * indicator_fn a x +\n            (X (SUC n) x - gen_cond_exp p (FF n) (X (SUC n)) x) * indicator_fn a x)
-      #|  gen_cond_exp (p:A prob_space) ((FF:num->(A->bool)->bool) n) ((X:num->A->real) (SUC n))
-      #|  (X:num->A->real) (SUC n)
-      #|  p:A prob_space
-      #|  integrable (p:A prob_space) (\\x:A. ((X:num->A->real) (SUC n) x - gen_cond_exp p ((FF:num->(A->bool)->bool) n) (X (SUC n)) x) * indicator_fn (a:A->bool) x)
-      #|  gen_doob_compensator (p:A prob_space) FF X n
-      #|  (X:num->A->real) n
-      #|  p:A prob_space
-      #|  integrable (p:A prob_space) (\\x:A. ((X:num->A->real) n x - gen_doob_compensator p FF X n x) * indicator_fn (a:A->bool) x)
-      #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) n)
-      #|  (a:A->bool) IN prob_events p
-      #|  forall x:A. x IN prob_carrier p ==>\n     (X (SUC n) x - gen_doob_compensator (p:A prob_space) FF X (SUC n) x) * indicator_fn a x =\n     (X n x - gen_doob_compensator p FF X n x) * indicator_fn (a:A->bool) x +\n     (X (SUC n) x - gen_cond_exp p ((FF:num->(A->bool)->bool) n) (X (SUC n)) x) * indicator_fn a x
-      #|  gen_doob_compensator (p:A prob_space) FF X n
-      #|  (X:num->A->real) n
-      #|  p:A prob_space
-      #|  gen_doob_compensator (p:A prob_space) FF X n
-      #|  (X:num->A->real) n
-      #|  (FF:num->(A->bool)->bool) n
-      #|  p:A prob_space
-      #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) n)
-      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  adapted (p:A prob_space) FF X
-      #|  filtration (p:A prob_space) FF
-      #|  forall p:A prob_space FF (X:num->A->real).\n    submartingale p FF X\n    ==> martingale p FF (\\n x. X n x - gen_doob_compensator p FF X n x)
-      #|  gen_doob_compensator (p:A prob_space) FF X
-      #|  \\n (x:A). X n x - gen_doob_compensator (p:A prob_space) FF X n x
-      #|  forall p:A prob_space FF (X:num->A->real).\n    submartingale p FF X\n    ==> ?M A. martingale p FF M /\\\n              gen_predictable p FF A /\\\n              (forall x:A. A 0 x = &0) /\\\n              (forall n. almost_surely p {x | A n x <= A (SUC n) x}) /\\\n              (forall n x. X n x = M n x + A n x)
-      #|  forall k. integrable (p:A prob_space) (\\x:A. (X:num->A->real) k x * indicator_fn (a:A->bool) x)
-      #|  filtration (p:A prob_space) FF
-      #|  (FF:num->(A->bool)->bool) n
-      #|  (a:A->bool) IN prob_events (p:A prob_space)
-      #|  adapted (p:A prob_space) FF X
-      #|  filtration (p:A prob_space) FF
-      #|  forall p:A prob_space FF X.\n     supermartingale p FF X\n     ==> submartingale p FF (\\n x. --((X:num->A->real) n x))
-      #|  forall k. integrable (p:A prob_space) (\\x:A. (X:num->A->real) k x * indicator_fn (a:A->bool) x)
-      #|  filtration (p:A prob_space) FF
-      #|  (FF:num->(A->bool)->bool) n
-      #|  (a:A->bool) IN prob_events (p:A prob_space)
-      #|  adapted (p:A prob_space) FF X
-      #|  filtration (p:A prob_space) FF
-      #|  forall p:A prob_space FF X.\n     martingale p FF X\n     ==> martingale p FF (\\n x. --((X:num->A->real) n x))
-      #|  x:A
-      #|  n:num
-      #|  {x:A | --(A':num->A->real) (SUC n) x <= --A' n x} =\n     {x | A' n x <= A' (SUC n) x}
-      #|  filtration (p:A prob_space) FF
-      #|  gen_predictable (p:A prob_space) FF (A':num->A->real)
-      #|  \\n (x:A). --((A':num->A->real) n x)
-      #|  \\n (x:A). --((M':num->A->real) n x)
-      #|  A':num->A->real
-      #|  M':num->A->real
-      #|  submartingale (p:A prob_space) FF (\\n x. --((X:num->A->real) n x))
-      #|  forall p:A prob_space FF (X:num->A->real).\n    supermartingale p FF X\n    ==> ?M A. martingale p FF M /\\\n              gen_predictable p FF A /\\\n              (forall x:A. A 0 x = &0) /\\\n              (forall n. almost_surely p {x | A (SUC n) x <= A n x}) /\\\n              (forall n x. X n x = M n x + A n x)
-      #|  &0 <= y ==> x <= x + y
-      #|  a:A->bool
-      #|  indicator_fn ((B:num->A->bool) (SUC n))
-      #|  p:A prob_space
-      #|  n:num
-      #|  \\k. indicator_fn ((B:num->A->bool) k)
-      #|  p:A prob_space
-      #|  n:num
-      #|  \\k. indicator_fn ((B:num->A->bool) k)
-      #|  p:A prob_space
-      #|  forall x:A. sum(0..SUC n) (\\k. indicator_fn ((B:num->A->bool) k) x) =\n            sum(0..n) (\\k. indicator_fn (B k) x) + indicator_fn (B (SUC n)) x
-      #|  (FF:num->(A->bool)->bool) n
-      #|  (a:A->bool) IN prob_events p
-      #|  n:num
-      #|  \\k. indicator_fn ((B:num->A->bool) k)
-      #|  p:A prob_space
-      #|  n:num
-      #|  (FF:num->(A->bool)->bool) k SUBSET FF n
-      #|  filtration (p:A prob_space) FF
-      #|  (\\x:A. indicator_fn ((B:num->A->bool) k) x) =\n                   indicator_fn (B k)
-      #|  k:num
-      #|  n:num
-      #|  \\k (x:A). indicator_fn ((B:num->A->bool) k) x
-      #|  (FF:num->(A->bool)->bool) n
-      #|  p:A prob_space
-      #|  n:num
-      #|  forall p:A prob_space FF (B:num->A->bool).\n     filtration p FF /\\\n     (forall n. B n IN prob_events p) /\\\n     (forall n. B n SUBSET prob_carrier p) /\\\n     (forall n. B n IN FF n)\n     ==> submartingale p FF (\\n x. sum(0..n) (\\k. indicator_fn (B k) x))
-      #|  ~(a = &0) /\\ ~(b = &0) ==> inv a - inv b = (b - a) / (a * b)
-      #|  inv(&1 + c) - inv(&1 + c + h) =\n                 h / ((&1 + c) * (&1 + c + h))
-      #|  ~(&1 + c = &0) /\\ ~(&1 + c + h = &0)
-      #|  &0 < &1 + c /\\ &0 < &1 + c + h
-      #|  forall h c:real. &0 <= h /\\ &0 <= c\n    ==> h / (&1 + c + h) pow 2 <= inv(&1 + c) - inv(&1 + c + h)
-      #|  &1 + (c:num->real)(SUC n) + (c(SUC(SUC n)) - c(SUC n)) =\n                    &1 + c(SUC(SUC n))
-      #|  (c:num->real)(SUC n)
-      #|  (c:num->real)(SUC(SUC n)) - c(SUC n)
-      #|  ((c:num->real) (SUC (SUC n)) - c (SUC n)) /\n                  (&1 + c (SUC (SUC n))) pow 2 <=\n                  inv(&1 + c(SUC n)) - inv(&1 + c(SUC(SUC n)))
-      #|  k <= n ==> k <= SUC n
-      #|  k:num
-      #|  sum (0..n) (\\k. ((c:num->real) (SUC k) - c k) /\n                  (&1 + c (SUC k)) pow 2) <= &1 - inv(&1 + c(SUC n))
-      #|  &0 <= (c:num->real) j
-      #|  j:num
-      #|  &0 <= (c:num->real)(SUC j) - c j
-      #|  forall j:num. j <= SUC n ==> &0 <= (c:num->real) j
-      #|  &0
-      #|  (c:num->real) 1
+      #|  inv(real_of_num((j : Num))) < (X : (Num, A) -> Real)((n : Num), (w : A)) - gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), w)
+      #|  !((j : Num) == 0)
+      #|  SUC((j : Num) - 1) == j
+      #|  (j : Num) - 1
+      #|  (A_k : (Num, A) -> Bool)((j : Num) - 1)
+      #|  (j : Num)
+      #|  real_of_num(0) < (X : (Num, A) -> Real)((n : Num), (w : A)) - gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), w)
+      #|  (w : A)
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn((B : (A) -> Bool), x)) <= expectation(p, (x : A) => X(SUC(n), x) * indicator_fn(B, x))
+      #|  expectation((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)), x) * indicator_fn((B : (A) -> Bool), x)) == expectation(p, (x : A) => X(SUC(n), x) * indicator_fn(B, x))
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn((B : (A) -> Bool), x) - gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), x) * indicator_fn(B, x)) == expectation(p, (x : A) => X(n, x) * indicator_fn(B, x)) - expectation(p, (x : A) => gen_cond_exp(p, FF(n), X(SUC(n)), x) * indicator_fn(B, x))
+      #|  gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)), (w : A)) - X(n, w) < -inv(real_of_num(SUC((k : Num))))
+      #|  IN((w : A), (B : (A) -> Bool))
+      #|  (w : A)
+      #|  indicator_fn((B : (A) -> Bool))
+      #|  inv(real_of_num(SUC((k : Num))))
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn((B : (A) -> Bool), x) - gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), x) * indicator_fn(B, x))
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn((B : (A) -> Bool), x)) - expectation(p, (x : A) => gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), x) * indicator_fn(B, x)) == expectation(p, (x : A) => X(n, x) * indicator_fn(B, x) - gen_cond_exp(p, FF(n), X(SUC(n)), x) * indicator_fn(B, x))
+      #|  indicator_fn((B : (A) -> Bool))
+      #|  inv(real_of_num(SUC((k : Num))))
+      #|  (p : Prob_space[A])
+      #|  inv(real_of_num(SUC((k : Num)))) * prob((p : Prob_space[A]), (B : (A) -> Bool)) == expectation(p, (x : A) => inv(real_of_num(SUC(k))) * indicator_fn(B, x))
+      #|  integrable((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)), x) * indicator_fn((B : (A) -> Bool), x))
+      #|  integrable((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn((B : (A) -> Bool), x))
+      #|  (B : (A) -> Bool) == {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)), x) - X(n, x) < -inv(real_of_num(SUC((k : Num))))}
+      #|  submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn({(x : A) | IN(x, prob_carrier(p)) && gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), x) - X(n, x) < -inv(real_of_num(SUC((k : Num))))}, x)) <= expectation(p, (x : A) => X(SUC(n), x) * indicator_fn({(x : A) | IN(x, prob_carrier(p)) && gen_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x) < -inv(real_of_num(SUC(k)))}, x))
+      #|  expectation((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)), x) * indicator_fn({(x : A) | IN(x, prob_carrier(p)) && gen_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x) < -inv(real_of_num(SUC((k : Num))))}, x)) == expectation(p, (x : A) => X(SUC(n), x) * indicator_fn({(x : A) | IN(x, prob_carrier(p)) && gen_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x) < -inv(real_of_num(SUC(k)))}, x))
+      #|  (prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)), x) - X(n, x) < -inv(real_of_num(SUC((k : Num))))}) <= real_of_num(0)) == (inv(real_of_num(SUC(k))) * prob(p, {(x : A) | IN(x, prob_carrier(p)) && gen_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x) < -inv(real_of_num(SUC(k)))}) <= inv(real_of_num(SUC(k))) * real_of_num(0))
+      #|  real_of_num(0) < inv(real_of_num(SUC((k : Num))))
+      #|  real_of_num(0) <= (x : Real) && x <= real_of_num(0) \226\134\146 x == real_of_num(0)
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)), x) - X(n, x) < -inv(real_of_num(SUC((k : Num))))}, prob_events(p))
+      #|  -inv(real_of_num(SUC((k : Num))))
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)), x) - X(n, x) < -inv(real_of_num(SUC((k : Num))))}, FF(n))
+      #|  (A_k : (Num, A) -> Bool)((k : Num)) == {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)), x) - X(n, x) < -inv(real_of_num(SUC(k)))}
+      #|  (k : Num)
+      #|  UNIONS({(A_k : (Num, A) -> Bool)((k : Num)) | IN(k, UNIV)})
+      #|  (A_k : (Num, A) -> Bool) == ((k : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)), x) - X(n, x) < -inv(real_of_num(SUC(k)))})
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(n))
+      #|  integrable((p : Prob_space[A]), (X : (Num, A) -> Real)((n : Num)))
+      #|  integrable((p : Prob_space[A]), (X : (Num, A) -> Real)(SUC((n : Num))))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !IN(x, {(x : A) | (X : (Num, A) -> Real)((n : Num), x) <= gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), x)})} == {(x : A) | IN(x, prob_carrier(p)) && gen_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x) < real_of_num(0)}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, submartingale(p, FF, X) \226\134\146 almost_surely(p, {(x : A) | X(n, x) <= gen_cond_exp(p, FF(n), X(SUC(n)), x)})
+      #|  gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)))
+      #|  gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num))
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num), x) + (gen_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x))) == ((x : A) => gen_doob_compensator(p, FF, X, n, x) + gen_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x))
+      #|  gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), SUC((n : Num))) == ((x : A) => gen_doob_compensator(p, FF, X, n, x) + (gen_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x)))
+      #|  integrable((p : Prob_space[A]), gen_doob_compensator(p, (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num)))
+      #|  gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), 0) == ((x : A) => real_of_num(0))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, submartingale(p, FF, X) \226\134\146 integrable(p, gen_doob_compensator(p, FF, X, n))
+      #|  gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)))
+      #|  gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num)))
+      #|  (p : Prob_space[A])
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (x : A) => gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num), x) + gen_cond_exp(p, FF(n), X(SUC(n)), x)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num)))
+      #|  (p : Prob_space[A])
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), FF(SUC(n)))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(n))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (X : (Num, A) -> Real)(n))
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), FF(SUC(n)))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), gen_cond_exp(p, FF(n), (X : (Num, A) -> Real)(SUC(n))))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), gen_cond_exp(p, FF(n), (X : (Num, A) -> Real)(SUC(n))))
+      #|  integrable((p : Prob_space[A]), (X : (Num, A) -> Real)(SUC((n : Num))))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))))
+      #|  ((x : A) => gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num), x) + (gen_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x))) == ((x : A) => gen_doob_compensator(p, FF, X, n, x) + gen_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x))
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), FF(SUC(n)))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), gen_doob_compensator(p, FF, (X : (Num, A) -> Real), n))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), gen_doob_compensator(p, FF, (X : (Num, A) -> Real), n))
+      #|  (p : Prob_space[A])
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), FF(SUC(n)))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), gen_doob_compensator(p, FF, (X : (Num, A) -> Real), n))
+      #|  gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), 0) == ((x : A) => real_of_num(0))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, submartingale(p, FF, X) \226\134\146 measurable_wrt(p, FF(n), gen_doob_compensator(p, FF, X, n))
+      #|  gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)))
+      #|  gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (x : A) => gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num), x) + gen_cond_exp(p, FF(n), X(SUC(n)), x)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  ((x : A) => gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num), x) + (gen_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x))) == ((x : A) => gen_doob_compensator(p, FF, X, n, x) + gen_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x))
+      #|  gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), 0) == ((x : A) => real_of_num(0))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, submartingale(p, FF, X) \226\134\146 gen_predictable(p, FF, gen_doob_compensator(p, FF, X))
+      #|  {(x : A) | gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num), x) <= gen_doob_compensator(p, FF, X, n, x) + (gen_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x))} == {(x : A) | X(n, x) <= gen_cond_exp(p, FF(n), X(SUC(n)), x)}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, submartingale(p, FF, X) \226\134\146 almost_surely(p, {(x : A) | gen_doob_compensator(p, FF, X, n, x) <= gen_doob_compensator(p, FF, X, SUC(n), x)})
+      #|  (a : (A) -> Bool)
+      #|  (X : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  (x : A) => gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)), x) * indicator_fn((a : (A) -> Bool), x)
+      #|  (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) * indicator_fn((a : (A) -> Bool), x)
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)), x) * indicator_fn((a : (A) -> Bool), x))
+      #|  integrable((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) * indicator_fn((a : (A) -> Bool), x))
+      #|  ((x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), x)) * indicator_fn((a : (A) -> Bool), x)) == ((x : A) => X(SUC(n), x) * indicator_fn(a, x) - gen_cond_exp(p, FF(n), X(SUC(n)), x) * indicator_fn(a, x))
+      #|  expectation((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), x)) * indicator_fn((a : (A) -> Bool), x)) == real_of_num(0)
+      #|  (x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), x)) * indicator_fn((a : (A) -> Bool), x)
+      #|  (x : A) => ((X : (Num, A) -> Real)((n : Num), x) - gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), X, n, x)) * indicator_fn((a : (A) -> Bool), x)
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - gen_doob_compensator(p, (FF : (Num, (A) -> Bool) -> Bool), X, SUC(n), x)) * indicator_fn((a : (A) -> Bool), x)) == expectation(p, (x : A) => (X(n, x) - gen_doob_compensator(p, FF, X, n, x)) * indicator_fn(a, x) + (X(SUC(n), x) - gen_cond_exp(p, FF(n), X(SUC(n)), x)) * indicator_fn(a, x))
+      #|  gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)))
+      #|  (X : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), x)) * indicator_fn((a : (A) -> Bool), x))
+      #|  gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num))
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)((n : Num), x) - gen_doob_compensator(p, (FF : (Num, (A) -> Bool) -> Bool), X, n, x)) * indicator_fn((a : (A) -> Bool), x))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  IN((a : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 ((X : (Num, A) -> Real)(SUC((n : Num)), x) - gen_doob_compensator(p, (FF : (Num, (A) -> Bool) -> Bool), X, SUC(n), x)) * indicator_fn((a : (A) -> Bool), x) == (X(n, x) - gen_doob_compensator(p, FF, X, n, x)) * indicator_fn(a, x) + (X(SUC(n), x) - gen_cond_exp(p, FF(n), X(SUC(n)), x)) * indicator_fn(a, x)
+      #|  gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num))
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num))
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, submartingale(p, FF, X) \226\134\146 martingale(p, FF, (n : Num) => (x : A) => X(n, x) - gen_doob_compensator(p, FF, X, n, x))
+      #|  gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  (n : Num) => (x : A) => (X : (Num, A) -> Real)(n, x) - gen_doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), X, n, x)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, submartingale(p, FF, X) \226\134\146 (\226\136\131 M : (Num, A) -> Real, \226\136\131 A : (Num, A) -> Real, martingale(p, FF, M) && gen_predictable(p, FF, A) && (\226\136\128 x : A, A(0, x) == real_of_num(0)) && (\226\136\128 n : Num, almost_surely(p, {(x : A) | A(n, x) <= A(SUC(n), x)})) && (\226\136\128 n : Num, \226\136\128 x : A, X(n, x) == M(n, x) + A(n, x)))
+      #|  \226\136\128 k : Num, integrable((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(k, x) * indicator_fn((a : (A) -> Bool), x))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  IN((a : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, supermartingale(p, FF, X) \226\134\146 submartingale(p, FF, (n : Num) => (x : A) => -X(n, x))
+      #|  \226\136\128 k : Num, integrable((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(k, x) * indicator_fn((a : (A) -> Bool), x))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  IN((a : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, martingale(p, FF, X) \226\134\146 martingale(p, FF, (n : Num) => (x : A) => -X(n, x))
+      #|  (x : A)
+      #|  (n : Num)
+      #|  {(x : A) | -(A' : (Num, A) -> Real)(SUC((n : Num)), x) <= -A'(n, x)} == {(x : A) | A'(n, x) <= A'(SUC(n), x)}
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  gen_predictable((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (A' : (Num, A) -> Real))
+      #|  (n : Num) => (x : A) => -(A' : (Num, A) -> Real)(n, x)
+      #|  (n : Num) => (x : A) => -(M' : (Num, A) -> Real)(n, x)
+      #|  (A' : (Num, A) -> Real)
+      #|  (M' : (Num, A) -> Real)
+      #|  submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (n : Num) => (x : A) => -(X : (Num, A) -> Real)(n, x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, supermartingale(p, FF, X) \226\134\146 (\226\136\131 M : (Num, A) -> Real, \226\136\131 A : (Num, A) -> Real, martingale(p, FF, M) && gen_predictable(p, FF, A) && (\226\136\128 x : A, A(0, x) == real_of_num(0)) && (\226\136\128 n : Num, almost_surely(p, {(x : A) | A(SUC(n), x) <= A(n, x)})) && (\226\136\128 n : Num, \226\136\128 x : A, X(n, x) == M(n, x) + A(n, x)))
+      #|  real_of_num(0) <= (y : Real) \226\134\146 (x : Real) <= x + y
+      #|  (a : (A) -> Bool)
+      #|  indicator_fn((B : (Num, A) -> Bool)(SUC((n : Num))))
+      #|  (p : Prob_space[A])
+      #|  (n : Num)
+      #|  (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k))
+      #|  (p : Prob_space[A])
+      #|  (n : Num)
+      #|  (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k))
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 x : A, sum(op_dot_dot(0, SUC((n : Num))), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), x)) == sum(op_dot_dot(0, n), (k : Num) => indicator_fn(B(k), x)) + indicator_fn(B(SUC(n)), x)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  IN((a : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (n : Num)
+      #|  (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k))
+      #|  (p : Prob_space[A])
+      #|  (n : Num)
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((k : Num)), FF((n : Num)))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  ((x : A) => indicator_fn((B : (Num, A) -> Bool)((k : Num)), x)) == indicator_fn(B(k))
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  (k : Num) => (x : A) => indicator_fn((B : (Num, A) -> Bool)(k), x)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  (n : Num)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 B : (Num, A) -> Bool, filtration(p, FF) && (\226\136\128 n : Num, IN(B(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(B(n), prob_carrier(p))) && (\226\136\128 n : Num, IN(B(n), FF(n))) \226\134\146 submartingale(p, FF, (n : Num) => (x : A) => sum(op_dot_dot(0, n), (k : Num) => indicator_fn(B(k), x)))
+      #|  !((a : Real) == real_of_num(0)) && !((b : Real) == real_of_num(0)) \226\134\146 inv(a) - inv(b) == (b - a) / (a * b)
+      #|  inv(real_of_num(1) + (c : Real)) - inv(real_of_num(1) + (c + (h : Real))) == h / ((real_of_num(1) + c) * (real_of_num(1) + (c + h)))
+      #|  !(real_of_num(1) + (c : Real) == real_of_num(0)) && !(real_of_num(1) + (c + (h : Real)) == real_of_num(0))
+      #|  real_of_num(0) < real_of_num(1) + (c : Real) && real_of_num(0) < real_of_num(1) + (c + (h : Real))
+      #|  \226\136\128 h : Real, \226\136\128 c : Real, real_of_num(0) <= h && real_of_num(0) <= c \226\134\146 h / pow(real_of_num(1) + (c + h), 2) <= inv(real_of_num(1) + c) - inv(real_of_num(1) + (c + h))
+      #|  real_of_num(1) + ((c : (Num) -> Real)(SUC((n : Num))) + (c(SUC(SUC(n))) - c(SUC(n)))) == real_of_num(1) + c(SUC(SUC(n)))
+      #|  (c : (Num) -> Real)(SUC((n : Num)))
+      #|  (c : (Num) -> Real)(SUC(SUC((n : Num)))) - c(SUC(n))
+      #|  ((c : (Num) -> Real)(SUC(SUC((n : Num)))) - c(SUC(n))) / pow(real_of_num(1) + c(SUC(SUC(n))), 2) <= inv(real_of_num(1) + c(SUC(n))) - inv(real_of_num(1) + c(SUC(SUC(n))))
+      #|  (k : Num) <= (n : Num) \226\134\146 k <= SUC(n)
+      #|  (k : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => ((c : (Num) -> Real)(SUC(k)) - c(k)) / pow(real_of_num(1) + c(SUC(k)), 2)) <= real_of_num(1) - inv(real_of_num(1) + c(SUC(n)))
+      #|  real_of_num(0) <= (c : (Num) -> Real)((j : Num))
+      #|  (j : Num)
+      #|  real_of_num(0) <= (c : (Num) -> Real)(SUC((j : Num))) - c(j)
+      #|  \226\136\128 j : Num, j <= SUC((n : Num)) \226\134\146 real_of_num(0) <= (c : (Num) -> Real)(j)
+      #|  real_of_num(0)
+      #|  (c : (Num) -> Real)(1)
       #|  0
-      #|  &0 <= (c:num->real) 1
-      #|  forall c:num->real n.\n     c(0) = &0 /\\ (forall k. k <= n ==> &0 <= c(SUC k) - c(k))\n     ==> sum(0..n) (\\k. (c(SUC k) - c(k)) / (&1 + c(SUC k)) pow 2)\n         <= &1 - inv(&1 + c(SUC n))
-      #|  SUC n
-      #|  j:num
-      #|  (c:num->real) j
-      #|  forall j:num. j <= SUC n ==> &0 <= (c:num->real) j
-      #|  &0 <= c ==> &0 <= &1 + c
-      #|  &0 <= x ==> &1 - x <= &1
-      #|  &1 - inv(&1 + (c:num->real)(SUC n))
-      #|  forall c:num->real n.\n     c(0) = &0 /\\ (forall k. k <= n ==> &0 <= c(SUC k) - c(k))\n     ==> sum(0..n) (\\k. (c(SUC k) - c(k)) / (&1 + c(SUC k)) pow 2) <= &1
-      #|  t1 = sum (0..n) (\\k. sum (0..k) (a:num->real) *\n                    ((b:num->real) k - b (SUC k)))
-      #|  s2 = sum (0..n) (a:num->real)
-      #|  s1 = sum (0..n) (\\k. (a:num->real) k * (b:num->real) k)
-      #|  0 <= SUC n
-      #|  0 <= SUC(SUC n)
-      #|  0 <= SUC 0
-      #|  forall a b n. sum (0..SUC n) (\\k. a k * b k) =\n           sum (0..SUC n) a * b (SUC n) +\n           sum (0..n) (\\k. sum (0..k) a * (b k - b (SUC k)))
-      #|  k:num
-      #|  sum (0..n) (\\k. &1)
-      #|  forall(B:num->A->bool) x n. sum (0..n) (\\k. indicator_fn (B k) x) <= &n + &1
-      #|  1 <= m
-      #|  &(m - 1) + &1
-      #|  k:num
-      #|  sum (m..m - 1 + p) (\\k. indicator_fn ((B:num->A->bool) k) (x:A)) = &0
-      #|  m - 1 + 1 = m
-      #|  p:num
-      #|  m - 1
+      #|  real_of_num(0) <= (c : (Num) -> Real)(1)
+      #|  \226\136\128 c : (Num) -> Real, \226\136\128 n : Num, c(0) == real_of_num(0) && (\226\136\128 k : Num, k <= n \226\134\146 real_of_num(0) <= c(SUC(k)) - c(k)) \226\134\146 sum(op_dot_dot(0, n), (k : Num) => (c(SUC(k)) - c(k)) / pow(real_of_num(1) + c(SUC(k)), 2)) <= real_of_num(1) - inv(real_of_num(1) + c(SUC(n)))
+      #|  SUC((n : Num))
+      #|  (j : Num)
+      #|  (c : (Num) -> Real)((j : Num))
+      #|  \226\136\128 j : Num, j <= SUC((n : Num)) \226\134\146 real_of_num(0) <= (c : (Num) -> Real)(j)
+      #|  real_of_num(0) <= (c : Real) \226\134\146 real_of_num(0) <= real_of_num(1) + c
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(1) - x <= real_of_num(1)
+      #|  real_of_num(1) - inv(real_of_num(1) + (c : (Num) -> Real)(SUC((n : Num))))
+      #|  \226\136\128 c : (Num) -> Real, \226\136\128 n : Num, c(0) == real_of_num(0) && (\226\136\128 k : Num, k <= n \226\134\146 real_of_num(0) <= c(SUC(k)) - c(k)) \226\134\146 sum(op_dot_dot(0, n), (k : Num) => (c(SUC(k)) - c(k)) / pow(real_of_num(1) + c(SUC(k)), 2)) <= real_of_num(1)
+      #|  (t1 : Real) == sum(op_dot_dot(0, (n : Num)), (k : Num) => sum(op_dot_dot(0, k), (a : (Num) -> Real)) * ((b : (Num) -> Real)(k) - b(SUC(k))))
+      #|  (s2 : Real) == sum(op_dot_dot(0, (n : Num)), (a : (Num) -> Real))
+      #|  (s1 : Real) == sum(op_dot_dot(0, (n : Num)), (k : Num) => (a : (Num) -> Real)(k) * (b : (Num) -> Real)(k))
+      #|  0 <= SUC((n : Num))
+      #|  0 <= SUC(SUC((n : Num)))
+      #|  0 <= SUC(0)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 n : Num, sum(op_dot_dot(0, SUC(n)), (k : Num) => a(k) * b(k)) == sum(op_dot_dot(0, SUC(n)), a) * b(SUC(n)) + sum(op_dot_dot(0, n), (k : Num) => sum(op_dot_dot(0, k), a) * (b(k) - b(SUC(k))))
+      #|  (k : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(1))
+      #|  \226\136\128 B : (Num, A) -> Bool, \226\136\128 x : A, \226\136\128 n : Num, sum(op_dot_dot(0, n), (k : Num) => indicator_fn(B(k), x)) <= real_of_num(n) + real_of_num(1)
+      #|  1 <= (m : Num)
+      #|  real_of_num((m : Num) - 1) + real_of_num(1)
+      #|  (k : Num)
+      #|  sum(op_dot_dot((m : Num), m - 1 + (p : Num)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A))) == real_of_num(0)
+      #|  (m : Num) - 1 + 1 == m
+      #|  (p : Num)
+      #|  (m : Num) - 1
       #|  0
-      #|  \\k. indicator_fn ((B:num->A->bool) k) (x:A)
-      #|  sum (0..m - 1 + p) (\\k. indicator_fn ((B:num->A->bool) k) (x:A)) =\n     sum (0..m - 1) (\\k. indicator_fn (B k) x) +\n     sum (m..m - 1 + p) (\\k. indicator_fn (B k) x)
-      #|  p:num
-      #|  N - (m - 1):num
-      #|  ?p. N = (m - 1) + p:num
-      #|  k:num
-      #|  k:num
-      #|  sum (0..N) (\\k. indicator_fn ((B:num->A->bool) k) (x:A)) = &0
-      #|  m = 0
-      #|  &N + &1
-      #|  N < m:num
-      #|  &(SUC m) <= sum (0..N) (\\k. indicator_fn ((B:num->A->bool) k) (x:A))
-      #|  sum (0..N) (\\k. indicator_fn ((B:num->A->bool) k) (x:A)) <= &m
-      #|  k:num
-      #|  forall k. m <= k ==> indicator_fn ((B:num->A->bool) k) (x:A) = &0
-      #|  ?n:num. m <= n /\\ x IN (B:num->A->bool) n
-      #|  N:num
-      #|  SUC m
-      #|  m:num
-      #|  k:num
-      #|  sum (0..N0) (\\k. indicator_fn ((B:num->A->bool) k) (x:A)) +\n       sum (n..n) (\\k. indicator_fn (B k) x) =\n       sum ((0..N0) UNION (n..n)) (\\k. indicator_fn (B k) x)
-      #|  DISJOINT (0..N0) (n..n:num)
-      #|  sum (0..N0) (\\k. indicator_fn ((B:num->A->bool) k) (x:A)) +\n                   indicator_fn (B n) x =\n                   sum (0..N0) (\\k. indicator_fn (B k) x) +\n                   sum (n..n) (\\k. indicator_fn (B k) x)
-      #|  indicator_fn ((B:num->A->bool) n) (x:A) = &1
-      #|  sum (0..N0) (\\k. indicator_fn ((B:num->A->bool) k) (x:A)) +\n                indicator_fn (B n) x
-      #|  n:num
-      #|  n:num
-      #|  N0 + 1
-      #|  N0:num
+      #|  (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A))
+      #|  sum(op_dot_dot(0, (m : Num) - 1 + (p : Num)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A))) == sum(op_dot_dot(0, m - 1), (k : Num) => indicator_fn(B(k), x)) + sum(op_dot_dot(m, m - 1 + p), (k : Num) => indicator_fn(B(k), x))
+      #|  (p : Num)
+      #|  (N : Num) - ((m : Num) - 1)
+      #|  \226\136\131 p : Num, (N : Num) == (m : Num) - 1 + p
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  sum(op_dot_dot(0, (N : Num)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A))) == real_of_num(0)
+      #|  (m : Num) == 0
+      #|  real_of_num((N : Num)) + real_of_num(1)
+      #|  (N : Num) < (m : Num)
+      #|  real_of_num(SUC((m : Num))) <= sum(op_dot_dot(0, (N : Num)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A)))
+      #|  sum(op_dot_dot(0, (N : Num)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A))) <= real_of_num((m : Num))
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, (m : Num) <= k \226\134\146 indicator_fn((B : (Num, A) -> Bool)(k), (x : A)) == real_of_num(0)
+      #|  \226\136\131 n : Num, (m : Num) <= n && IN((x : A), (B : (Num, A) -> Bool)(n))
+      #|  (N : Num)
+      #|  SUC((m : Num))
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  sum(op_dot_dot(0, (N0 : Num)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A))) + sum(op_dot_dot((n : Num), n), (k : Num) => indicator_fn(B(k), x)) == sum(UNION(op_dot_dot(0, N0), op_dot_dot(n, n)), (k : Num) => indicator_fn(B(k), x))
+      #|  DISJOINT(op_dot_dot(0, (N0 : Num)), op_dot_dot((n : Num), n))
+      #|  sum(op_dot_dot(0, (N0 : Num)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A))) + indicator_fn(B((n : Num)), x) == sum(op_dot_dot(0, N0), (k : Num) => indicator_fn(B(k), x)) + sum(op_dot_dot(n, n), (k : Num) => indicator_fn(B(k), x))
+      #|  indicator_fn((B : (Num, A) -> Bool)((n : Num)), (x : A)) == real_of_num(1)
+      #|  sum(op_dot_dot(0, (N0 : Num)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A))) + indicator_fn(B((n : Num)), x)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (N0 : Num) + 1
+      #|  (N0 : Num)
       #|  0
-      #|  forall(B:num->A->bool) (x:A). x IN limsup_events B <=>\n     (forall M. ?N. &M <= sum (0..N) (\\k. indicator_fn (B k) x))
-      #|  ~(&1 + V + u = &0)
-      #|  ~(&1 + V = &0)
-      #|  inv(&1 + V) - inv(&1 + V + u) = u / ((&1 + V) * (&1 + V + u))
-      #|  a - b + c <= a - d <=> c <= b - d
-      #|  ~(&1 + V + u = &0)
-      #|  ~(&1 + V = &0)
-      #|  &0 <= u
-      #|  &0 <= V
-      #|  (&1 - inv(&1 + V)) + u / (&1 + V + u) pow 2
-      #|  u = (v:num->real) (SUC n)
-      #|  V = sum (0..n) (v:num->real)
-      #|  0 <= SUC n
-      #|  ~(&1 + a = &0)
-      #|  a / (&1 + a)
-      #|  ~(&1 + a = &0)
-      #|  a:real
-      #|  (v:num->real) 0
+      #|  \226\136\128 B : (Num, A) -> Bool, \226\136\128 x : A, IN(x, limsup_events(B)) == (\226\136\128 M : Num, \226\136\131 N : Num, real_of_num(M) <= sum(op_dot_dot(0, N), (k : Num) => indicator_fn(B(k), x)))
+      #|  !(real_of_num(1) + ((V : Real) + (u : Real)) == real_of_num(0))
+      #|  !(real_of_num(1) + (V : Real) == real_of_num(0))
+      #|  inv(real_of_num(1) + (V : Real)) - inv(real_of_num(1) + (V + (u : Real))) == u / ((real_of_num(1) + V) * (real_of_num(1) + (V + u)))
+      #|  ((a : Real) - (b : Real) + (c : Real) <= a - (d : Real)) == (c <= b - d)
+      #|  !(real_of_num(1) + ((V : Real) + (u : Real)) == real_of_num(0))
+      #|  !(real_of_num(1) + (V : Real) == real_of_num(0))
+      #|  real_of_num(0) <= (u : Real)
+      #|  real_of_num(0) <= (V : Real)
+      #|  real_of_num(1) - inv(real_of_num(1) + (V : Real)) + (u : Real) / pow(real_of_num(1) + (V + u), 2)
+      #|  (u : Real) == (v : (Num) -> Real)(SUC((n : Num)))
+      #|  (V : Real) == sum(op_dot_dot(0, (n : Num)), (v : (Num) -> Real))
+      #|  0 <= SUC((n : Num))
+      #|  !(real_of_num(1) + (a : Real) == real_of_num(0))
+      #|  (a : Real) / (real_of_num(1) + a)
+      #|  !(real_of_num(1) + (a : Real) == real_of_num(0))
+      #|  (a : Real)
+      #|  (v : (Num) -> Real)(0)
       #|  0
-      #|  forall v n. (forall k. &0 <= v k) ==>\n         sum (0..n) (\\k. v k / (&1 + sum (0..k) v) pow 2)\n         <= &1 - inv(&1 + sum (0..n) v)
-      #|  &0 <= x ==> &1 - x <= &1
-      #|  &0 <= sum (0..n) (v:num->real)
-      #|  &1 - inv(&1 + sum (0..n) (v:num->real))
-      #|  forall v n. (forall k. &0 <= v k) ==>\n         sum (0..n) (\\k. v k / (&1 + sum (0..k) v) pow 2) <= &1
-      #|  p:A prob_space
-      #|  {x:A | gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n    (\\y. sum (0..n) (\\k. indicator_fn ((B:num->A->bool) k) y) +\n         indicator_fn (B (SUC n)) y) x =\n    gen_cond_exp p (FF n)\n      (\\y. sum (0..n) (\\k. indicator_fn (B k) y)) x +\n    gen_cond_exp p (FF n) (\\y. indicator_fn (B (SUC n)) y) x} INTER\n   {x:A | gen_cond_exp p (FF n)\n      (\\y. sum (0..n) (\\k. indicator_fn (B k) y)) x =\n    sum (0..n) (\\k. indicator_fn (B k) x)}
-      #|  p:A prob_space
-      #|  \\y:A. sum (0..n) (\\k. indicator_fn ((B:num->A->bool) k) y)
-      #|  (FF:num->(A->bool)->bool) n
-      #|  p:A prob_space
-      #|  n:num
-      #|  k:num
-      #|  (FF:num->(A->bool)->bool) k SUBSET FF n
-      #|  (B:num->A->bool) k IN FF k
-      #|  measurable_wrt p ((FF:num->(A->bool)->bool) n)\n     (\\y:A. sum (0..n) (\\k. indicator_fn ((B:num->A->bool) k) y))
-      #|  \\y:A. indicator_fn ((B:num->A->bool) (SUC n)) y
-      #|  \\y:A. sum (0..n) (\\k. indicator_fn ((B:num->A->bool) k) y)
-      #|  (FF:num->(A->bool)->bool) n
-      #|  p:A prob_space
-      #|  almost_surely p\n      {x:A | gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n           (\\y. sum (0..n) (\\k. indicator_fn ((B:num->A->bool) k) y) +\n                indicator_fn (B (SUC n)) y) x =\n           gen_cond_exp p (FF n)\n             (\\y. sum (0..n) (\\k. indicator_fn (B k) y)) x +\n           gen_cond_exp p (FF n)\n             (\\y. indicator_fn (B (SUC n)) y) x}
-      #|  integrable p\n      (\\y:A. sum (0..n) (\\k. indicator_fn ((B:num->A->bool) k) y))
-      #|  forall k:num. integrable p (\\y:A. indicator_fn ((B:num->A->bool) k) y)
-      #|  sub_sigma_algebra p ((FF:num->(A->bool)->bool) n)
-      #|  0 <= SUC n
-      #|  (\\y:A. sum (0..SUC n) (\\k. indicator_fn (B k) y)) =\n    (\\y. sum (0..n) (\\k. indicator_fn ((B:num->A->bool) k) y) +\n         indicator_fn (B (SUC n)) y)
-      #|  forall p FF (B:num->A->bool) n.\n       filtration p FF /\\ (forall n. B n IN prob_events p) /\\\n       (forall n. B n SUBSET prob_carrier p) /\\ (forall n. B n IN FF n)\n       ==> almost_surely p\n           {x | gen_cond_exp p (FF n)\n                  (\\y. sum (0..SUC n) (\\k. indicator_fn (B k) y)) x -\n                sum (0..n) (\\k. indicator_fn (B k) x) =\n                gen_cond_exp p (FF n)\n                  (\\y. indicator_fn (B (SUC n)) y) x}
-      #|  D1 = sum (0..n)\n      (\\k. gen_cond_exp p ((FF:num->(A->bool)->bool) k)\n        (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) (x:A))
-      #|  C1 = gen_cond_exp p ((FF:num->(A->bool)->bool) (SUC n))\n      (\\y. indicator_fn ((B:num->A->bool) (SUC(SUC n))) y) (x:A)
-      #|  S1 = sum (0..SUC n)\n      (\\k. indicator_fn ((B:num->A->bool) k) (x:A))
-      #|  E1 = gen_cond_exp p ((FF:num->(A->bool)->bool) (SUC n))\n      (\\y. sum (0..SUC(SUC n))\n        (\\k. indicator_fn ((B:num->A->bool) k) y)) (x:A)
-      #|  SUC n
-      #|  0 <= SUC n
-      #|  0 <= SUC 0
+      #|  \226\136\128 v : (Num) -> Real, \226\136\128 n : Num, (\226\136\128 k : Num, real_of_num(0) <= v(k)) \226\134\146 sum(op_dot_dot(0, n), (k : Num) => v(k) / pow(real_of_num(1) + sum(op_dot_dot(0, k), v), 2)) <= real_of_num(1) - inv(real_of_num(1) + sum(op_dot_dot(0, n), v))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(1) - x <= real_of_num(1)
+      #|  real_of_num(0) <= sum(op_dot_dot(0, (n : Num)), (v : (Num) -> Real))
+      #|  real_of_num(1) - inv(real_of_num(1) + sum(op_dot_dot(0, (n : Num)), (v : (Num) -> Real)))
+      #|  \226\136\128 v : (Num) -> Real, \226\136\128 n : Num, (\226\136\128 k : Num, real_of_num(0) <= v(k)) \226\134\146 sum(op_dot_dot(0, n), (k : Num) => v(k) / pow(real_of_num(1) + sum(op_dot_dot(0, k), v), 2)) <= real_of_num(1)
+      #|  (p : Prob_space[A])
+      #|  INTER({(x : A) | gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (y : A) => sum(op_dot_dot(0, n), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), y)) + indicator_fn(B(SUC(n)), y), x) == gen_cond_exp(p, FF(n), (y : A) => sum(op_dot_dot(0, n), (k : Num) => indicator_fn(B(k), y)), x) + gen_cond_exp(p, FF(n), (y : A) => indicator_fn(B(SUC(n)), y), x)}, {(x : A) | gen_cond_exp(p, FF(n), (y : A) => sum(op_dot_dot(0, n), (k : Num) => indicator_fn(B(k), y)), x) == sum(op_dot_dot(0, n), (k : Num) => indicator_fn(B(k), x))})
+      #|  (p : Prob_space[A])
+      #|  (y : A) => sum(op_dot_dot(0, (n : Num)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), y))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  (n : Num)
+      #|  (k : Num)
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((k : Num)), FF((n : Num)))
+      #|  IN((B : (Num, A) -> Bool)((k : Num)), (FF : (Num, (A) -> Bool) -> Bool)(k))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (y : A) => sum(op_dot_dot(0, n), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), y)))
+      #|  (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC((n : Num))), y)
+      #|  (y : A) => sum(op_dot_dot(0, (n : Num)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), y))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (y : A) => sum(op_dot_dot(0, n), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), y)) + indicator_fn(B(SUC(n)), y), x) == gen_cond_exp(p, FF(n), (y : A) => sum(op_dot_dot(0, n), (k : Num) => indicator_fn(B(k), y)), x) + gen_cond_exp(p, FF(n), (y : A) => indicator_fn(B(SUC(n)), y), x)})
+      #|  integrable((p : Prob_space[A]), (y : A) => sum(op_dot_dot(0, (n : Num)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), y)))
+      #|  \226\136\128 k : Num, integrable((p : Prob_space[A]), (y : A) => indicator_fn((B : (Num, A) -> Bool)(k), y))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  0 <= SUC((n : Num))
+      #|  ((y : A) => sum(op_dot_dot(0, SUC((n : Num))), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), y))) == ((y : A) => sum(op_dot_dot(0, n), (k : Num) => indicator_fn(B(k), y)) + indicator_fn(B(SUC(n)), y))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 B : (Num, A) -> Bool, \226\136\128 n : Num, filtration(p, FF) && (\226\136\128 n : Num, IN(B(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(B(n), prob_carrier(p))) && (\226\136\128 n : Num, IN(B(n), FF(n))) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, FF(n), (y : A) => sum(op_dot_dot(0, SUC(n)), (k : Num) => indicator_fn(B(k), y)), x) - sum(op_dot_dot(0, n), (k : Num) => indicator_fn(B(k), x)) == gen_cond_exp(p, FF(n), (y : A) => indicator_fn(B(SUC(n)), y), x)})
+      #|  (D1 : Real) == sum(op_dot_dot(0, (n : Num)), (k : Num) => gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), (x : A)))
+      #|  (C1 : Real) == gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(SUC(n))), y), (x : A))
+      #|  (S1 : Real) == sum(op_dot_dot(0, SUC((n : Num))), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A)))
+      #|  (E1 : Real) == gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (y : A) => sum(op_dot_dot(0, SUC(SUC(n))), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), y)), (x : A))
+      #|  SUC((n : Num))
+      #|  0 <= SUC((n : Num))
+      #|  0 <= SUC(0)
       #|  0
-      #|  m:num
-      #|  {x:A | gen_cond_exp p ((FF:num->(A->bool)->bool) m)\n         (\\y. sum (0..SUC m)\n           (\\k. indicator_fn ((B:num->A->bool) k) y))\n         x - sum (0..m) (\\k. indicator_fn (B k) x) =\n         gen_cond_exp p (FF m)\n           (\\y. indicator_fn (B (SUC m)) y) x}
-      #|  m:num
-      #|  forall m. gen_cond_exp p ((FF:num->(A->bool)->bool) m)\n        (\\y. sum (0..SUC m) (\\k. indicator_fn ((B:num->A->bool) k) y))\n        (x:A) - sum (0..m) (\\k. indicator_fn (B k) x) =\n        gen_cond_exp p (FF m) (\\y. indicator_fn (B (SUC m)) y) x
-      #|  x:A
-      #|  \\n. {x:A | gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n        (\\y. sum (0..SUC n) (\\k. indicator_fn ((B:num->A->bool) k) y))\n        x - sum (0..n) (\\k. indicator_fn (B k) x) =\n        gen_cond_exp p (FF n) (\\y. indicator_fn (B (SUC n)) y) x}
-      #|  p:A prob_space
+      #|  (m : Num)
+      #|  {(x : A) | gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((m : Num)), (y : A) => sum(op_dot_dot(0, SUC(m)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), y)), x) - sum(op_dot_dot(0, m), (k : Num) => indicator_fn(B(k), x)) == gen_cond_exp(p, FF(m), (y : A) => indicator_fn(B(SUC(m)), y), x)}
+      #|  (m : Num)
+      #|  \226\136\128 m : Num, gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(m), (y : A) => sum(op_dot_dot(0, SUC(m)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), y)), (x : A)) - sum(op_dot_dot(0, m), (k : Num) => indicator_fn(B(k), x)) == gen_cond_exp(p, FF(m), (y : A) => indicator_fn(B(SUC(m)), y), x)
+      #|  (x : A)
+      #|  (n : Num) => {(x : A) | gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n), (y : A) => sum(op_dot_dot(0, SUC(n)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), y)), x) - sum(op_dot_dot(0, n), (k : Num) => indicator_fn(B(k), x)) == gen_cond_exp(p, FF(n), (y : A) => indicator_fn(B(SUC(n)), y), x)}
+      #|  (p : Prob_space[A])
       #|  INTERS\n    {({x:A | gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n        (\\y. sum (0..SUC n) (\\k. indicator_fn ((B:num->A->bool) k) y))\n        x - sum (0..n) (\\k. indicator_fn (B k) x) =\n        gen_cond_exp p (FF n) (\\y. indicator_fn (B (SUC n)) y) x})\n     | n IN (:num)}
-      #|  p:A prob_space
-      #|  forall p FF (B:num->A->bool).\n     filtration p FF /\\ (forall n. B n IN prob_events p) /\\\n     (forall n. B n SUBSET prob_carrier p) /\\ (forall n. B n IN FF n)\n     ==> almost_surely p\n       {x | forall n. gen_doob_compensator p FF\n             (\\n x. sum (0..n) (\\k. indicator_fn (B k) x)) (SUC n) x =\n            sum (0..n) (\\k. gen_cond_exp p (FF k)\n                             (\\y. indicator_fn (B (SUC k)) y) x)}
-      #|  ~(&1 + sum(0..x) (v:num->real) = &0)
-      #|  (\\k. (a k * (&1 + sum (0..k) (v:num->real))) /\n          (&1 + sum (0..k) v)) = a
-      #|  forall k. &0 <= (v:num->real) k
-      #|  SUC n
-      #|  0 <= SUC n
-      #|  n + 1 = SUC n
-      #|  \\n. &1 + sum(0..n) (v:num->real)
-      #|  \\k. (a:num->real) k * (&1 + sum(0..k) (v:num->real))
-      #|  &0 < x ==> ~(x = &0)
-      #|  forall n. ~(&1 + sum(0..n) (v:num->real) = &0)
-      #|  &0 <= sum(0..n) (v:num->real)
-      #|  forall n. &0 < &1 + sum(0..n) (v:num->real)
-      #|  forall a v. (forall k. &0 <= v k) /\\\n         real_summable (from 0) a /\\\n         (forall M. ?N. forall n. N <= n ==> M <= &1 + sum(0..n) v)\n         ==> ((\\n. inv(&1 + sum(0..n) v) *\n                   sum(0..n) (\\k. a k * (&1 + sum(0..k) v)))\n              ---> &0) sequentially
-      #|  V_inf:real
-      #|  \\n. sum(0..n) (v:num->real)
-      #|  L:real
-      #|  \\n. sum(0..n) (a:num->real)
-      #|  sum (0..n) (\\k. sum(0..k) (a:num->real) *\n        ((&1 + sum(0..k) v) - (&1 + sum(0..SUC k) v))) =\n      --(sum(0..n) (\\k. sum(0..k) a * v(SUC k)))
-      #|  forall n. sum(0..SUC n) (\\k. (a:num->real) k * (&1 + sum(0..k) v)) =\n         sum(0..SUC n) a * (&1 + sum(0..SUC n) v) -\n         sum(0..n) (\\k. sum(0..k) a * v(SUC k))
-      #|  L * (&1 + V_inf) - T_inf
-      #|  &0 <= x ==> abs x = x
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 B : (Num, A) -> Bool, filtration(p, FF) && (\226\136\128 n : Num, IN(B(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(B(n), prob_carrier(p))) && (\226\136\128 n : Num, IN(B(n), FF(n))) \226\134\146 almost_surely(p, {(x : A) | \226\136\128 n : Num, gen_doob_compensator(p, FF, (n : Num) => (x : A) => sum(op_dot_dot(0, n), (k : Num) => indicator_fn(B(k), x)), SUC(n), x) == sum(op_dot_dot(0, n), (k : Num) => gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x))})
+      #|  !(real_of_num(1) + sum(op_dot_dot(0, (x : Num)), (v : (Num) -> Real)) == real_of_num(0))
+      #|  ((k : Num) => (a : (Num) -> Real)(k) * (real_of_num(1) + sum(op_dot_dot(0, k), (v : (Num) -> Real))) / (real_of_num(1) + sum(op_dot_dot(0, k), v))) == a
+      #|  \226\136\128 k : Num, real_of_num(0) <= (v : (Num) -> Real)(k)
+      #|  SUC((n : Num))
+      #|  0 <= SUC((n : Num))
+      #|  (n : Num) + 1 == SUC(n)
+      #|  (n : Num) => real_of_num(1) + sum(op_dot_dot(0, n), (v : (Num) -> Real))
+      #|  (k : Num) => (a : (Num) -> Real)(k) * (real_of_num(1) + sum(op_dot_dot(0, k), (v : (Num) -> Real)))
+      #|  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+      #|  \226\136\128 n : Num, !(real_of_num(1) + sum(op_dot_dot(0, n), (v : (Num) -> Real)) == real_of_num(0))
+      #|  real_of_num(0) <= sum(op_dot_dot(0, (n : Num)), (v : (Num) -> Real))
+      #|  \226\136\128 n : Num, real_of_num(0) < real_of_num(1) + sum(op_dot_dot(0, n), (v : (Num) -> Real))
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 v : (Num) -> Real, (\226\136\128 k : Num, real_of_num(0) <= v(k)) && real_summable(from(0), a) && (\226\136\128 M : Real, \226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 M <= real_of_num(1) + sum(op_dot_dot(0, n), v)) \226\134\146 op_minus_minus_minus_gt((n : Num) => inv(real_of_num(1) + sum(op_dot_dot(0, n), v)) * sum(op_dot_dot(0, n), (k : Num) => a(k) * (real_of_num(1) + sum(op_dot_dot(0, k), v))), real_of_num(0), sequentially)
+      #|  (V_inf : Real)
+      #|  (n : Num) => sum(op_dot_dot(0, n), (v : (Num) -> Real))
+      #|  (L : Real)
+      #|  (n : Num) => sum(op_dot_dot(0, n), (a : (Num) -> Real))
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => sum(op_dot_dot(0, k), (a : (Num) -> Real)) * (real_of_num(1) + sum(op_dot_dot(0, k), (v : (Num) -> Real)) - (real_of_num(1) + sum(op_dot_dot(0, SUC(k)), v)))) == -sum(op_dot_dot(0, n), (k : Num) => sum(op_dot_dot(0, k), a) * v(SUC(k)))
+      #|  \226\136\128 n : Num, sum(op_dot_dot(0, SUC(n)), (k : Num) => (a : (Num) -> Real)(k) * (real_of_num(1) + sum(op_dot_dot(0, k), (v : (Num) -> Real)))) == sum(op_dot_dot(0, SUC(n)), a) * (real_of_num(1) + sum(op_dot_dot(0, SUC(n)), v)) - sum(op_dot_dot(0, n), (k : Num) => sum(op_dot_dot(0, k), a) * v(SUC(k)))
+      #|  (L : Real) * (real_of_num(1) + (V_inf : Real)) - (T_inf : Real)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
       #|  0
-      #|  V_inf:real
-      #|  \\n. sum(0..n) (v:num->real)
-      #|  forall n. sum(0..n) (\\k. (v:num->real)(SUC k)) =\n                       sum(0..SUC n) v - v 0
-      #|  C * (V_inf - (v:num->real) 0)
-      #|  \\k. C * (v:num->real)(SUC k)
-      #|  real_summable (from 0) (\\k. sum(0..k) (a:num->real) * v(SUC k))
-      #|  T_inf:real
-      #|  ?T_inf. ((\\n. sum(0..n) (\\k. sum(0..k) (a:num->real) * v(SUC k)))\n              ---> T_inf) sequentially
-      #|  L:real
-      #|  \\n. sum(0..n) (a:num->real)
-      #|  ?C. &0 < C /\\ forall n. abs(sum(0..n) (a:num->real)) <= C
-      #|  N:num
-      #|  N:num
-      #|  e:real
-      #|  e:real
-      #|  forall f:num->real l. (f ---> l) sequentially\n                     ==> ((\\n. f(SUC n)) ---> l) sequentially
-      #|  SUC(n - 1) = n
-      #|  n - 1
-      #|  n:num
-      #|  SUC N
-      #|  N:num
-      #|  e:real
-      #|  e:real
-      #|  forall f:num->real l. ((\\n. f(SUC n)) ---> l) sequentially\n                     ==> (f ---> l) sequentially
-      #|  forall a v. (forall k. &0 <= v k) /\\\n         (?L. ((\\n. sum(0..n) a) ---> L) sequentially) /\\\n         (?V_inf. ((\\n. sum(0..n) v) ---> V_inf) sequentially)\n         ==> ?M_inf.\n           ((\\n. sum(0..n) (\\k. a k * (&1 + sum(0..k) v))) ---> M_inf)\n           sequentially
-      #|  &0 <= c
-      #|  &(2 * M2 + 1) <= sum(0..N) (v:num->real)
-      #|  &1 + sum(0..N) (v:num->real) = W
-      #|  --(W / &2) < Mn
-      #|  W * inv W = &1
-      #|  W * --inv(&2) < W * inv W * Mn
-      #|  ~(W = &0)
-      #|  abs(inv W * Mn) < inv(&2)
-      #|  --inv(&2) < inv(W) * Mn
-      #|  --(W / &2) < Mn
-      #|  Mn = sum(0..N)\n     (\\k. (a:num->real) k * (&1 + sum(0..k) v))
-      #|  W = &1 + sum(0..N) (v:num->real)
-      #|  N:num
-      #|  N1 <= N:num
-      #|  sum(0..N2) (v:num->real)
-      #|  &(2 * M2 + 1) <= sum(0..N) (v:num->real)
-      #|  N:num
-      #|  N = N1 + N2:num
-      #|  N2:num
-      #|  2 * M2 + 1
-      #|  forall M:num. ?N. &M <= sum(0..N) (v:num->real)
-      #|  M2:num
-      #|  N1:num
-      #|  inv(&2)
-      #|  &0 <= s ==> s <= &1 + s
-      #|  sum(0..n) (v:num->real)
-      #|  sum(0..N1) (v:num->real)
-      #|  n:num
-      #|  N1:num
-      #|  N1:num
-      #|  M1:num
-      #|  forall M:num. ?N:num. &M <= sum(0..N) (v:num->real)
-      #|  M1:num
-      #|  r:real
-      #|  r:real
-      #|  v:num->real
-      #|  a:num->real
-      #|  &0 <= s ==> &0 < &1 + s
-      #|  forall n. &0 < &1 + sum(0..n) (v:num->real)
-      #|  SUC n
-      #|  forall k. &0 <= (v:num->real) k
-      #|  forall m n. m <= n ==> sum(0..m) (v:num->real) <= sum(0..n) v
-      #|  real_summable (from 0) (a:num->real)
-      #|  abs(v) <= Cv /\\ abs(m) <= Cm /\\ c + Cv + Cm + &1 <= &M1\n      ==> c + v + m < &M1
-      #|  M1:num
-      #|  M1:num
-      #|  c + Cv + Cm + &1
-      #|  Cm:real
-      #|  M_inf:real
-      #|  \\n:num. sum(0..n)\n     (\\k. (a:num->real) k * (&1 + sum(0..k) v))
-      #|  Cv:real
-      #|  V_inf:real
-      #|  \\n:num. sum(0..n) (v:num->real)
-      #|  M_inf:real
-      #|  ?M_inf. ((\\n. sum(0..n) (\\k. (a:num->real) k * (&1 + sum(0..k) v)))\n                ---> M_inf) sequentially
-      #|  SUC n
-      #|  forall k. &0 <= (v:num->real) k
-      #|  &0 <= x /\\ x < M ==> abs x <= M
-      #|  &M0
-      #|  V_inf:real
-      #|  ?V_inf. ((\\n. sum(0..n) (v:num->real)) ---> V_inf) sequentially
-      #|  M0:num
-      #|  (p ==> q) <=> (~q ==> ~p)
-      #|  forall v a c.\n   (forall k. &0 <= v k) /\\\n   (?L. ((\\n. sum(0..n) a) ---> L) sequentially) /\\\n   &0 <= c\n   ==> ((forall M. ?N. &M <= c + sum(0..N) v +\n              sum(0..N) (\\k. a k * (&1 + sum(0..k) v)))\n        <=> (forall M. ?N. &M <= sum(0..N) v))
-      #|  N1 <= N:num
-      #|  N1 <= N:num
-      #|  N1 <= N:num
-      #|  N1 <= N:num
-      #|  N1 <= N:num
-      #|  --(sqrt v)
-      #|  f:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  sqrt v
-      #|  measurable_wrt (p:A prob_space) G (f:A->real)
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  abs((f:A->real) x) pow 2 <= v
-      #|  abs((f:A->real) x) <= sqrt v
-      #|  (--(f:A->real) x) pow 2 <= v
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\ f x pow 2 <= v} =\n     {x | x IN prob_carrier p /\\ f x <= sqrt v} INTER\n     {x | x IN prob_carrier p /\\ f x >= --(sqrt v)}
-      #|  &0 <= v
-      #|  v < &0
-      #|  (f:A->real) x
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\ f x pow 2 <= v} = {}
-      #|  v < &0
-      #|  v:real
-      #|  forall p:A prob_space G (f:A->real).\n    sub_sigma_algebra p G /\\ measurable_wrt p G f\n    ==> measurable_wrt p G (\\x. f x pow 2)
-      #|  (\\x:A. f x * g x) =\n     (\\x. inv(&2) * ((f x + g x) pow 2 - f x pow 2 - g x pow 2))
-      #|  forall p:A prob_space G (f:A->real) (g:A->real).\n    sub_sigma_algebra p G /\\ measurable_wrt p G f /\\ measurable_wrt p G g\n    ==> measurable_wrt p G (\\x. f x * g x)
-      #|  \\x:A. d:real
-      #|  \\x:A. c * indicator_fn A x
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  c:real
-      #|  indicator_fn (A:A->bool)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  measurable_wrt (p:A prob_space) G (\\x:A. c * indicator_fn A x)
-      #|  measurable_wrt (p:A prob_space) G (indicator_fn (A:A->bool))
-      #|  forall p:A prob_space G A c d.\n     sub_sigma_algebra p G /\\ A IN G\n     ==> measurable_wrt p G (\\x. c * indicator_fn A x + d)
-      #|  (\\w:A. (c * indicator_fn A w + d) * X w) =\n                (\\w. c * (X w * indicator_fn A w) + d * X w)
-      #|  forall p:A prob_space A X c d.\n     integrable p X /\\ A IN prob_events p\n     ==> integrable p (\\w. (c * indicator_fn A w + d) * X w)
-      #|  \\x:A. d * (Z x * indicator_fn A' x)
-      #|  \\x:A. c * (Z x * indicator_fn (A INTER A') x)
-      #|  p:A prob_space
-      #|  (\\x:A. ((c * indicator_fn A x + d) * Z x) * indicator_fn A' x) =\n    (\\x. c * (Z x * indicator_fn (A INTER A') x) + d * (Z x * indicator_fn A' x))
-      #|  integrable p (\\x:A. Z x * indicator_fn (A INTER A') x) /\\\n                integrable p (\\x:A. Z x * indicator_fn A' x)
-      #|  forall p:A prob_space Z A A' c d.\n     integrable p Z /\\ A IN prob_events p /\\ A' IN prob_events p\n     ==> expectation p (\\x. ((c * indicator_fn A x + d) * Z x) * indicator_fn A' x) =\n         c * expectation p (\\x. Z x * indicator_fn (A INTER A') x) +\n         d * expectation p (\\x. Z x * indicator_fn A' x)
-      #|  d:real
-      #|  c:real
-      #|  A':A->bool
-      #|  A:A->bool
-      #|  gen_cond_exp p G (X:A->real)
-      #|  p:A prob_space
-      #|  A':A->bool
-      #|  \\w:A. (c * indicator_fn A w + d) * X w
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (A':A->bool) IN prob_events p /\\ A INTER A' IN G /\\ A INTER A' IN prob_events p
-      #|  A':A->bool
-      #|  G:(A->bool)->bool
-      #|  d:real
-      #|  c:real
-      #|  gen_cond_exp p G (X:A->real)
-      #|  A:A->bool
-      #|  p:A prob_space
-      #|  integrable p (\\x:A. (c * indicator_fn A x + d) * gen_cond_exp p G X x)
-      #|  gen_cond_exp p G (X:A->real)
-      #|  \\x:A. c * indicator_fn A x + d
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  measurable_wrt p G (\\x:A. (c * indicator_fn A x + d) * gen_cond_exp p G X x)
-      #|  integrable p (\\w:A. (c * indicator_fn A w + d) * X w)
-      #|  (A:A->bool) IN prob_events p
-      #|  forall p:A prob_space G X A c d.\n     sub_sigma_algebra p G /\\ A IN G /\\ integrable p X\n     ==> almost_surely p\n       {x | gen_cond_exp p G (\\w. (c * indicator_fn A w + d) * X w) x =\n            (c * indicator_fn A x + d) * gen_cond_exp p G X x}
-      #|  K * abs((h:A->real) x) = abs(h x) * K
-      #|  abs K = K
-      #|  x:A
-      #|  (\\x:A. K * abs(h x)) = (\\x. K * (\\y. abs(h y)) x)
-      #|  \\x:A. K * abs(h x)
-      #|  forall p:A prob_space (h:A->real) (g:A->real) K.\n    integrable p h /\\ random_variable p g /\\ &0 <= K /\\\n    (forall x. x IN prob_carrier p ==> abs(g x) <= K)\n    ==> integrable p (\\x. h x * g x)
-      #|  {z:A | z IN prob_carrier p /\\ (Y:A->real) z = u} INTER A'
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  {z:A | z IN prob_carrier p /\\ (Y:A->real) z = u} INTER A' IN G
-      #|  u:real
-      #|  A':A->bool
-      #|  gen_cond_exp p G (X:A->real)
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  A':A->bool
-      #|  X:A->real
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  A':A->bool
-      #|  (\\w. Y w * X w):A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (A':A->bool) IN prob_events p
-      #|  A':A->bool
-      #|  G:(A->bool)->bool
-      #|  M:real
-      #|  Y:A->real
-      #|  gen_cond_exp p G (X:A->real)
-      #|  p:A prob_space
-      #|  (\\x:A. Y x * gen_cond_exp p G (X:A->real) x) =\n                 (\\x:A. gen_cond_exp p G (X:A->real) x * Y x)
-      #|  a:A
-      #|  a:A
-      #|  p:A prob_space
-      #|  &0 <= M
-      #|  integrable p (\\x:A. Y x * gen_cond_exp p G (X:A->real) x)
-      #|  gen_cond_exp p G (X:A->real)
-      #|  Y:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  measurable_wrt p G (\\x:A. Y x * gen_cond_exp p G (X:A->real) x)
-      #|  M:real
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  forall p:A prob_space G Y X.\n     sub_sigma_algebra p G /\\ integrable p X /\\\n     measurable_wrt p G Y /\\ simple_rv p Y /\\\n     integrable p (\\w. Y w * X w)\n     ==> almost_surely p\n           {x | gen_cond_exp p G (\\w. Y w * X w) x =\n                Y x * gen_cond_exp p G X x}
-      #|  &0 < a ==> abs a = a
-      #|  &0 < a ==> (f/a - y = (f - a*y)*inv a)
-      #|  floor(&2 pow n * y) / &2 pow n - y =\n     (floor(&2 pow n * y) - &2 pow n * y) * inv(&2 pow n)
-      #|  &2 pow n * y
-      #|  &0 < &2 pow n
-      #|  forall n y:real. abs(floor(&2 pow n * y) / &2 pow n - y) <= inv(&2 pow n)
-      #|  floor(&2 pow n * v)
-      #|  &2 pow n * y
-      #|  floor(&2 pow n * y)
-      #|  &2 pow n * v
-      #|  y * &2 pow n = &2 pow n * y
-      #|  v * &2 pow n = &2 pow n * v
-      #|  integer(floor(&2 pow n * y))
-      #|  integer(floor(&2 pow n * v))
-      #|  &0 < &2 pow n
-      #|  forall n y v:real. floor(&2 pow n * y) / &2 pow n <= v <=>\n                y < (floor(&2 pow n * v) + &1) / &2 pow n
-      #|  (floor(&2 pow n * v) + &1) / &2 pow n
-      #|  Y:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  {x:A | x IN prob_carrier p /\\ floor(&2 pow n * Y x) / &2 pow n <= v} =\n     {x | x IN prob_carrier p /\\ Y x < (floor(&2 pow n * v) + &1) / &2 pow n}
-      #|  v:real
-      #|  forall p:A prob_space G Y n.\n     sub_sigma_algebra p G /\\ measurable_wrt p G Y\n     ==> measurable_wrt p G (\\x. floor(&2 pow n * Y x) / &2 pow n)
-      #|  &0 < a ==> abs a = a
-      #|  abs(&2 pow n * (Y:A->real) x) <= &2 pow n * K
-      #|  &2 pow n * (Y:A->real) x
-      #|  &0 < &2 pow n
-      #|  floor(&2 pow n * (Y:A->real) x)
-      #|  x:A
-      #|  r:real
-      #|  IMAGE (\\m:real. m / &2 pow n)\n                {m | integer m /\\ --(&2 pow n * K + &1) <= m /\\ m <= &2 pow n * K + &1}
-      #|  G:(A->bool)->bool
-      #|  forall p:A prob_space G Y n K.\n     sub_sigma_algebra p G /\\ measurable_wrt p G Y /\\\n     (forall x. x IN prob_carrier p ==> abs(Y x) <= K)\n     ==> simple_rv p (\\x. floor(&2 pow n * Y x) / &2 pow n)
+      #|  (V_inf : Real)
+      #|  (n : Num) => sum(op_dot_dot(0, n), (v : (Num) -> Real))
+      #|  \226\136\128 n : Num, sum(op_dot_dot(0, n), (k : Num) => (v : (Num) -> Real)(SUC(k))) == sum(op_dot_dot(0, SUC(n)), v) - v(0)
+      #|  (C : Real) * ((V_inf : Real) - (v : (Num) -> Real)(0))
+      #|  (k : Num) => (C : Real) * (v : (Num) -> Real)(SUC(k))
+      #|  real_summable(from(0), (k : Num) => sum(op_dot_dot(0, k), (a : (Num) -> Real)) * (v : (Num) -> Real)(SUC(k)))
+      #|  (T_inf : Real)
+      #|  \226\136\131 T_inf : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => sum(op_dot_dot(0, k), (a : (Num) -> Real)) * (v : (Num) -> Real)(SUC(k))), T_inf, sequentially)
+      #|  (L : Real)
+      #|  (n : Num) => sum(op_dot_dot(0, n), (a : (Num) -> Real))
+      #|  \226\136\131 C : Real, real_of_num(0) < C && (\226\136\128 n : Num, abs(sum(op_dot_dot(0, n), (a : (Num) -> Real))) <= C)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(f, l, sequentially) \226\134\146 op_minus_minus_minus_gt((n : Num) => f(SUC(n)), l, sequentially)
+      #|  SUC((n : Num) - 1) == n
+      #|  (n : Num) - 1
+      #|  (n : Num)
+      #|  SUC((N : Num))
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt((n : Num) => f(SUC(n)), l, sequentially) \226\134\146 op_minus_minus_minus_gt(f, l, sequentially)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 v : (Num) -> Real, (\226\136\128 k : Num, real_of_num(0) <= v(k)) && (\226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), a), L, sequentially)) && (\226\136\131 V_inf : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), v), V_inf, sequentially)) \226\134\146 (\226\136\131 M_inf : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => a(k) * (real_of_num(1) + sum(op_dot_dot(0, k), v))), M_inf, sequentially))
+      #|  real_of_num(0) <= (c : Real)
+      #|  real_of_num(2 * (M2 : Num) + 1) <= sum(op_dot_dot(0, (N : Num)), (v : (Num) -> Real))
+      #|  real_of_num(1) + sum(op_dot_dot(0, (N : Num)), (v : (Num) -> Real)) == (W : Real)
+      #|  -((W : Real) / real_of_num(2)) < (Mn : Real)
+      #|  (W : Real) * inv(W) == real_of_num(1)
+      #|  (W : Real) * -inv(real_of_num(2)) < W * (inv(W) * (Mn : Real))
+      #|  !((W : Real) == real_of_num(0))
+      #|  abs(inv((W : Real)) * (Mn : Real)) < inv(real_of_num(2))
+      #|  -inv(real_of_num(2)) < inv((W : Real)) * (Mn : Real)
+      #|  -((W : Real) / real_of_num(2)) < (Mn : Real)
+      #|  (Mn : Real) == sum(op_dot_dot(0, (N : Num)), (k : Num) => (a : (Num) -> Real)(k) * (real_of_num(1) + sum(op_dot_dot(0, k), (v : (Num) -> Real))))
+      #|  (W : Real) == real_of_num(1) + sum(op_dot_dot(0, (N : Num)), (v : (Num) -> Real))
+      #|  (N : Num)
+      #|  (N1 : Num) <= (N : Num)
+      #|  sum(op_dot_dot(0, (N2 : Num)), (v : (Num) -> Real))
+      #|  real_of_num(2 * (M2 : Num) + 1) <= sum(op_dot_dot(0, (N : Num)), (v : (Num) -> Real))
+      #|  (N : Num)
+      #|  (N : Num) == (N1 : Num) + (N2 : Num)
+      #|  (N2 : Num)
+      #|  2 * (M2 : Num) + 1
+      #|  \226\136\128 M : Num, \226\136\131 N : Num, real_of_num(M) <= sum(op_dot_dot(0, N), (v : (Num) -> Real))
+      #|  (M2 : Num)
+      #|  (N1 : Num)
+      #|  inv(real_of_num(2))
+      #|  real_of_num(0) <= (s : Real) \226\134\146 s <= real_of_num(1) + s
+      #|  sum(op_dot_dot(0, (n : Num)), (v : (Num) -> Real))
+      #|  sum(op_dot_dot(0, (N1 : Num)), (v : (Num) -> Real))
+      #|  (n : Num)
+      #|  (N1 : Num)
+      #|  (N1 : Num)
+      #|  (M1 : Num)
+      #|  \226\136\128 M : Num, \226\136\131 N : Num, real_of_num(M) <= sum(op_dot_dot(0, N), (v : (Num) -> Real))
+      #|  (M1 : Num)
+      #|  (r : Real)
+      #|  (r : Real)
+      #|  (v : (Num) -> Real)
+      #|  (a : (Num) -> Real)
+      #|  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(0) < real_of_num(1) + s
+      #|  \226\136\128 n : Num, real_of_num(0) < real_of_num(1) + sum(op_dot_dot(0, n), (v : (Num) -> Real))
+      #|  SUC((n : Num))
+      #|  \226\136\128 k : Num, real_of_num(0) <= (v : (Num) -> Real)(k)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 sum(op_dot_dot(0, m), (v : (Num) -> Real)) <= sum(op_dot_dot(0, n), v)
+      #|  real_summable(from(0), (a : (Num) -> Real))
+      #|  abs((v : Real)) <= (Cv : Real) && abs((m : Real)) <= (Cm : Real) && (c : Real) + (Cv + (Cm + real_of_num(1))) <= real_of_num((M1 : Num)) \226\134\146 c + (v + m) < real_of_num(M1)
+      #|  (M1 : Num)
+      #|  (M1 : Num)
+      #|  (c : Real) + ((Cv : Real) + ((Cm : Real) + real_of_num(1)))
+      #|  (Cm : Real)
+      #|  (M_inf : Real)
+      #|  (n : Num) => sum(op_dot_dot(0, n), (k : Num) => (a : (Num) -> Real)(k) * (real_of_num(1) + sum(op_dot_dot(0, k), (v : (Num) -> Real))))
+      #|  (Cv : Real)
+      #|  (V_inf : Real)
+      #|  (n : Num) => sum(op_dot_dot(0, n), (v : (Num) -> Real))
+      #|  (M_inf : Real)
+      #|  \226\136\131 M_inf : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => (a : (Num) -> Real)(k) * (real_of_num(1) + sum(op_dot_dot(0, k), (v : (Num) -> Real)))), M_inf, sequentially)
+      #|  SUC((n : Num))
+      #|  \226\136\128 k : Num, real_of_num(0) <= (v : (Num) -> Real)(k)
+      #|  real_of_num(0) <= (x : Real) && x < (M : Real) \226\134\146 abs(x) <= M
+      #|  real_of_num((M0 : Num))
+      #|  (V_inf : Real)
+      #|  \226\136\131 V_inf : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (v : (Num) -> Real)), V_inf, sequentially)
+      #|  (M0 : Num)
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == (!q \226\134\146 !p)
+      #|  \226\136\128 v : (Num) -> Real, \226\136\128 a : (Num) -> Real, \226\136\128 c : Real, (\226\136\128 k : Num, real_of_num(0) <= v(k)) && (\226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), a), L, sequentially)) && real_of_num(0) <= c \226\134\146 (\226\136\128 M : Num, \226\136\131 N : Num, real_of_num(M) <= c + (sum(op_dot_dot(0, N), v) + sum(op_dot_dot(0, N), (k : Num) => a(k) * (real_of_num(1) + sum(op_dot_dot(0, k), v))))) == (\226\136\128 M : Num, \226\136\131 N : Num, real_of_num(M) <= sum(op_dot_dot(0, N), v))
+      #|  (N1 : Num) <= (N : Num)
+      #|  (N1 : Num) <= (N : Num)
+      #|  (N1 : Num) <= (N : Num)
+      #|  (N1 : Num) <= (N : Num)
+      #|  (N1 : Num) <= (N : Num)
+      #|  -sqrt((v : Real))
+      #|  (f : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  sqrt((v : Real))
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (f : (A) -> Real))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  pow(abs((f : (A) -> Real)((x : A))), 2) <= (v : Real)
+      #|  abs((f : (A) -> Real)((x : A))) <= sqrt((v : Real))
+      #|  pow(-(f : (A) -> Real)((x : A)), 2) <= (v : Real)
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && pow((f : (A) -> Real)(x), 2) <= (v : Real)} == INTER({(x : A) | IN(x, prob_carrier(p)) && f(x) <= sqrt(v)}, {(x : A) | IN(x, prob_carrier(p)) && f(x) >= -sqrt(v)})
+      #|  real_of_num(0) <= (v : Real)
+      #|  (v : Real) < real_of_num(0)
+      #|  (f : (A) -> Real)((x : A))
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && pow((f : (A) -> Real)(x), 2) <= (v : Real)} == {}
+      #|  (v : Real) < real_of_num(0)
+      #|  (v : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, f) \226\134\146 measurable_wrt(p, G, (x : A) => pow(f(x), 2))
+      #|  ((x : A) => (f : (A) -> Real)(x) * (g : (A) -> Real)(x)) == ((x : A) => inv(real_of_num(2)) * (pow(f(x) + g(x), 2) - pow(f(x), 2) - pow(g(x), 2)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, f) && measurable_wrt(p, G, g) \226\134\146 measurable_wrt(p, G, (x : A) => f(x) * g(x))
+      #|  (x : A) => (d : Real)
+      #|  (x : A) => (c : Real) * indicator_fn((A : (A) -> Bool), x)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (c : Real)
+      #|  indicator_fn((A : (A) -> Bool))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (x : A) => (c : Real) * indicator_fn((A : (A) -> Bool), x))
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), indicator_fn((A : (A) -> Bool)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 A : (A) -> Bool, \226\136\128 c : Real, \226\136\128 d : Real, sub_sigma_algebra(p, G) && IN(A, G) \226\134\146 measurable_wrt(p, G, (x : A) => c * indicator_fn(A, x) + d)
+      #|  ((w : A) => ((c : Real) * indicator_fn((A : (A) -> Bool), w) + (d : Real)) * (X : (A) -> Real)(w)) == ((w : A) => c * (X(w) * indicator_fn(A, w)) + d * X(w))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 A : (A) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 c : Real, \226\136\128 d : Real, integrable(p, X) && IN(A, prob_events(p)) \226\134\146 integrable(p, (w : A) => (c * indicator_fn(A, w) + d) * X(w))
+      #|  (x : A) => (d : Real) * ((Z : (A) -> Real)(x) * indicator_fn((A' : (A) -> Bool), x))
+      #|  (x : A) => (c : Real) * ((Z : (A) -> Real)(x) * indicator_fn(INTER((A : (A) -> Bool), (A' : (A) -> Bool)), x))
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => ((c : Real) * indicator_fn((A : (A) -> Bool), x) + (d : Real)) * (Z : (A) -> Real)(x) * indicator_fn((A' : (A) -> Bool), x)) == ((x : A) => c * (Z(x) * indicator_fn(INTER(A, A'), x)) + d * (Z(x) * indicator_fn(A', x)))
+      #|  integrable((p : Prob_space[A]), (x : A) => (Z : (A) -> Real)(x) * indicator_fn(INTER((A : (A) -> Bool), (A' : (A) -> Bool)), x)) && integrable(p, (x : A) => Z(x) * indicator_fn(A', x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Z : (A) -> Real, \226\136\128 A : (A) -> Bool, \226\136\128 A' : (A) -> Bool, \226\136\128 c : Real, \226\136\128 d : Real, integrable(p, Z) && IN(A, prob_events(p)) && IN(A', prob_events(p)) \226\134\146 expectation(p, (x : A) => (c * indicator_fn(A, x) + d) * Z(x) * indicator_fn(A', x)) == c * expectation(p, (x : A) => Z(x) * indicator_fn(INTER(A, A'), x)) + d * expectation(p, (x : A) => Z(x) * indicator_fn(A', x))
+      #|  (d : Real)
+      #|  (c : Real)
+      #|  (A' : (A) -> Bool)
+      #|  (A : (A) -> Bool)
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  (p : Prob_space[A])
+      #|  (A' : (A) -> Bool)
+      #|  (w : A) => ((c : Real) * indicator_fn((A : (A) -> Bool), w) + (d : Real)) * (X : (A) -> Real)(w)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  IN((A' : (A) -> Bool), prob_events((p : Prob_space[A]))) && IN(INTER((A : (A) -> Bool), A'), (G : ((A) -> Bool) -> Bool)) && IN(INTER(A, A'), prob_events(p))
+      #|  (A' : (A) -> Bool)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (d : Real)
+      #|  (c : Real)
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  (A : (A) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (x : A) => ((c : Real) * indicator_fn((A : (A) -> Bool), x) + (d : Real)) * gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x))
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  (x : A) => (c : Real) * indicator_fn((A : (A) -> Bool), x) + (d : Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (x : A) => ((c : Real) * indicator_fn((A : (A) -> Bool), x) + (d : Real)) * gen_cond_exp(p, G, (X : (A) -> Real), x))
+      #|  integrable((p : Prob_space[A]), (w : A) => ((c : Real) * indicator_fn((A : (A) -> Bool), w) + (d : Real)) * (X : (A) -> Real)(w))
+      #|  IN((A : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 A : (A) -> Bool, \226\136\128 c : Real, \226\136\128 d : Real, sub_sigma_algebra(p, G) && IN(A, G) && integrable(p, X) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, G, (w : A) => (c * indicator_fn(A, w) + d) * X(w), x) == (c * indicator_fn(A, x) + d) * gen_cond_exp(p, G, X, x)})
+      #|  (K : Real) * abs((h : (A) -> Real)((x : A))) == abs(h(x)) * K
+      #|  abs((K : Real)) == K
+      #|  (x : A)
+      #|  ((x : A) => (K : Real) * abs((h : (A) -> Real)(x))) == ((x : A) => K * ((y : A) => abs(h(y)))(x))
+      #|  (x : A) => (K : Real) * abs((h : (A) -> Real)(x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 h : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 K : Real, integrable(p, h) && random_variable(p, g) && real_of_num(0) <= K && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(g(x)) <= K) \226\134\146 integrable(p, (x : A) => h(x) * g(x))
+      #|  INTER({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (Y : (A) -> Real)(z) == (u : Real)}, (A' : (A) -> Bool))
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  IN(INTER({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (Y : (A) -> Real)(z) == (u : Real)}, (A' : (A) -> Bool)), (G : ((A) -> Bool) -> Bool))
+      #|  (u : Real)
+      #|  (A' : (A) -> Bool)
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (A' : (A) -> Bool)
+      #|  (X : (A) -> Real)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (A' : (A) -> Bool)
+      #|  (w : A) => (Y : (A) -> Real)(w) * (X : (A) -> Real)(w)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  IN((A' : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (A' : (A) -> Bool)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (M : Real)
+      #|  (Y : (A) -> Real)
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => (Y : (A) -> Real)(x) * gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x)) == ((x : A) => gen_cond_exp(p, G, X, x) * Y(x))
+      #|  (a : A)
+      #|  (a : A)
+      #|  (p : Prob_space[A])
+      #|  real_of_num(0) <= (M : Real)
+      #|  integrable((p : Prob_space[A]), (x : A) => (Y : (A) -> Real)(x) * gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x))
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  (Y : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (x : A) => (Y : (A) -> Real)(x) * gen_cond_exp(p, G, (X : (A) -> Real), x))
+      #|  (M : Real)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 Y : (A) -> Real, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) && measurable_wrt(p, G, Y) && simple_rv(p, Y) && integrable(p, (w : A) => Y(w) * X(w)) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, G, (w : A) => Y(w) * X(w), x) == Y(x) * gen_cond_exp(p, G, X, x)})
+      #|  real_of_num(0) < (a : Real) \226\134\146 abs(a) == a
+      #|  real_of_num(0) < (a : Real) \226\134\146 (f : Real) / a - (y : Real) == (f - a * y) * inv(a)
+      #|  floor(pow(real_of_num(2), (n : Num)) * (y : Real)) / pow(real_of_num(2), n) - y == (floor(pow(real_of_num(2), n) * y) - pow(real_of_num(2), n) * y) * inv(pow(real_of_num(2), n))
+      #|  pow(real_of_num(2), (n : Num)) * (y : Real)
+      #|  real_of_num(0) < pow(real_of_num(2), (n : Num))
+      #|  \226\136\128 n : Num, \226\136\128 y : Real, abs(floor(pow(real_of_num(2), n) * y) / pow(real_of_num(2), n) - y) <= inv(pow(real_of_num(2), n))
+      #|  floor(pow(real_of_num(2), (n : Num)) * (v : Real))
+      #|  pow(real_of_num(2), (n : Num)) * (y : Real)
+      #|  floor(pow(real_of_num(2), (n : Num)) * (y : Real))
+      #|  pow(real_of_num(2), (n : Num)) * (v : Real)
+      #|  (y : Real) * pow(real_of_num(2), (n : Num)) == pow(real_of_num(2), n) * y
+      #|  (v : Real) * pow(real_of_num(2), (n : Num)) == pow(real_of_num(2), n) * v
+      #|  integer(floor(pow(real_of_num(2), (n : Num)) * (y : Real)))
+      #|  integer(floor(pow(real_of_num(2), (n : Num)) * (v : Real)))
+      #|  real_of_num(0) < pow(real_of_num(2), (n : Num))
+      #|  \226\136\128 n : Num, \226\136\128 y : Real, \226\136\128 v : Real, (floor(pow(real_of_num(2), n) * y) / pow(real_of_num(2), n) <= v) == (y < (floor(pow(real_of_num(2), n) * v) + real_of_num(1)) / pow(real_of_num(2), n))
+      #|  (floor(pow(real_of_num(2), (n : Num)) * (v : Real)) + real_of_num(1)) / pow(real_of_num(2), n)
+      #|  (Y : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && floor(pow(real_of_num(2), (n : Num)) * (Y : (A) -> Real)(x)) / pow(real_of_num(2), n) <= (v : Real)} == {(x : A) | IN(x, prob_carrier(p)) && Y(x) < (floor(pow(real_of_num(2), n) * v) + real_of_num(1)) / pow(real_of_num(2), n)}
+      #|  (v : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 Y : (A) -> Real, \226\136\128 n : Num, sub_sigma_algebra(p, G) && measurable_wrt(p, G, Y) \226\134\146 measurable_wrt(p, G, (x : A) => floor(pow(real_of_num(2), n) * Y(x)) / pow(real_of_num(2), n))
+      #|  real_of_num(0) < (a : Real) \226\134\146 abs(a) == a
+      #|  abs(pow(real_of_num(2), (n : Num)) * (Y : (A) -> Real)((x : A))) <= pow(real_of_num(2), n) * (K : Real)
+      #|  pow(real_of_num(2), (n : Num)) * (Y : (A) -> Real)((x : A))
+      #|  real_of_num(0) < pow(real_of_num(2), (n : Num))
+      #|  floor(pow(real_of_num(2), (n : Num)) * (Y : (A) -> Real)((x : A)))
+      #|  (x : A)
+      #|  (r : Real)
+      #|  IMAGE((m : Real) => m / pow(real_of_num(2), (n : Num)), {(m : Real) | integer(m) && -(pow(real_of_num(2), n) * (K : Real) + real_of_num(1)) <= m && m <= pow(real_of_num(2), n) * K + real_of_num(1)})
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 Y : (A) -> Real, \226\136\128 n : Num, \226\136\128 K : Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, Y) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(Y(x)) <= K) \226\134\146 simple_rv(p, (x : A) => floor(pow(real_of_num(2), n) * Y(x)) / pow(real_of_num(2), n))
       #|  0
-      #|  \\n. inv(&2 pow n)
-      #|  forall Y:A->real x. ((\\n. floor(&2 pow n * Y x) / &2 pow n) ---> Y x) sequentially
-      #|  inv(&2 pow n) <= &1
-      #|  (Y:A->real) x
-      #|  n:num
-      #|  forall Y:A->real x K n. abs(Y x) <= K\n     ==> abs(floor(&2 pow n * Y x) / &2 pow n) <= K + &1
-      #|  (\\n. (Yn:num->A->real) n x * gen_cond_exp p G X x) =\n      (\\n. gen_cond_exp p G (\\w. Yn n w * X w) x)
-      #|  (Y:A->real) x * gen_cond_exp p G X x
-      #|  gen_cond_exp p G (\\w. (Y:A->real) w * X w) x
-      #|  \\n:num. (Yn:num->A->real) n x * gen_cond_exp p G X x
+      #|  (n : Num) => inv(pow(real_of_num(2), n))
+      #|  \226\136\128 Y : (A) -> Real, \226\136\128 x : A, op_minus_minus_minus_gt((n : Num) => floor(pow(real_of_num(2), n) * Y(x)) / pow(real_of_num(2), n), Y(x), sequentially)
+      #|  inv(pow(real_of_num(2), (n : Num))) <= real_of_num(1)
+      #|  (Y : (A) -> Real)((x : A))
+      #|  (n : Num)
+      #|  \226\136\128 Y : (A) -> Real, \226\136\128 x : A, \226\136\128 K : Real, \226\136\128 n : Num, abs(Y(x)) <= K \226\134\146 abs(floor(pow(real_of_num(2), n) * Y(x)) / pow(real_of_num(2), n)) <= K + real_of_num(1)
+      #|  ((n : Num) => (Yn : (Num, A) -> Real)(n, (x : A)) * gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x)) == ((n : Num) => gen_cond_exp(p, G, (w : A) => Yn(n, w) * X(w), x))
+      #|  (Y : (A) -> Real)((x : A)) * gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x)
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (Y : (A) -> Real)(w) * (X : (A) -> Real)(w), (x : A))
+      #|  (n : Num) => (Yn : (Num, A) -> Real)(n, (x : A)) * gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x)
       #|  sequentially
-      #|  x:A
+      #|  (x : A)
       #|  (prob_carrier (p:A prob_space)) INTER\n     (INTERS {{x:A | gen_cond_exp p G (\\w. (Yn:num->A->real) n w * X w) x =\n                     Yn n x * gen_cond_exp p G X x} | n IN (:num)}) INTER\n     {x:A | ((\\n. gen_cond_exp p G (\\w. (Yn:num->A->real) n w * X w) x) --->\n             gen_cond_exp p G (\\w. Y w * X w) x) sequentially}
-      #|  x:A
-      #|  prob_carrier (p:A prob_space)
-      #|  x:A
-      #|  x:A
-      #|  x:A
-      #|  n:num
-      #|  (\\x:A. (K + &1) * abs((X:A->real) x))
-      #|  (\\w:A. (Y:A->real) w * X w)
-      #|  (\\n:num. \\w:A. (Yn:num->A->real) n w * X w)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  almost_surely p\n       {x:A | ((\\n. gen_cond_exp p G (\\w. (Yn:num->A->real) n w * X w) x) --->\n               gen_cond_exp p G (\\w. Y w * X w) x) sequentially}
-      #|  K:real
-      #|  G:(A->bool)->bool
-      #|  forall n. almost_surely p\n       {x:A | gen_cond_exp p G (\\w. (Yn:num->A->real) n w * X w) x =\n              Yn n x * gen_cond_exp p G X x}
-      #|  x:A
-      #|  G:(A->bool)->bool
-      #|  K + &1
-      #|  (Yn:num->A->real) n
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  forall n. integrable p (\\w:A. (Yn:num->A->real) n w * X w)
-      #|  G:(A->bool)->bool
-      #|  K:real
-      #|  Y:A->real
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  integrable p (\\w:A. Y w * X w)
-      #|  a:A
-      #|  a:A
-      #|  p:A prob_space
-      #|  &0 <= K
-      #|  integrable p (\\x:A. (K + &1) * abs(X x))
-      #|  Yn = \\n:num. \\x:A. floor(&2 pow n * Y x) / &2 pow n
-      #|  forall p:A prob_space G Y X K.\n     sub_sigma_algebra p G /\\ integrable p X /\\\n     measurable_wrt p G Y /\\ (forall x. x IN prob_carrier p ==> abs(Y x) <= K)\n     ==> almost_surely p\n           {x | gen_cond_exp p G (\\w. Y w * X w) x =\n                Y x * gen_cond_exp p G X x}
-      #|  b pow 2 / a <= c
-      #|  &0 < a ==> a * (b/a) pow 2 - &2 * b * (b/a) + c = c - b pow 2 / a
-      #|  b / a:real
-      #|  &0 < a
-      #|  ~(b = &0) ==> &2 * b * (c + &1)/(&2 * b) = c + &1
-      #|  (c + &1) / (&2 * b)
-      #|  b = &0
-      #|  b = &0
-      #|  a = &0
-      #|  forall a b c:real. &0 <= a /\\ (forall t. &0 <= a * t pow 2 - &2 * b * t + c)\n                ==> b pow 2 <= a * c
+      #|  (x : A)
+      #|  prob_carrier((p : Prob_space[A]))
+      #|  (x : A)
+      #|  (x : A)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (x : A) => ((K : Real) + real_of_num(1)) * abs((X : (A) -> Real)(x))
+      #|  (w : A) => (Y : (A) -> Real)(w) * (X : (A) -> Real)(w)
+      #|  (n : Num) => (w : A) => (Yn : (Num, A) -> Real)(n, w) * (X : (A) -> Real)(w)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | op_minus_minus_minus_gt((n : Num) => gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => (Yn : (Num, A) -> Real)(n, w) * (X : (A) -> Real)(w), x), gen_cond_exp(p, G, (w : A) => (Y : (A) -> Real)(w) * X(w), x), sequentially)})
+      #|  (K : Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 n : Num, almost_surely((p : Prob_space[A]), {(x : A) | gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => (Yn : (Num, A) -> Real)(n, w) * (X : (A) -> Real)(w), x) == Yn(n, x) * gen_cond_exp(p, G, X, x)})
+      #|  (x : A)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (K : Real) + real_of_num(1)
+      #|  (Yn : (Num, A) -> Real)((n : Num))
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (w : A) => (Yn : (Num, A) -> Real)(n, w) * (X : (A) -> Real)(w))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (K : Real)
+      #|  (Y : (A) -> Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (w : A) => (Y : (A) -> Real)(w) * (X : (A) -> Real)(w))
+      #|  (a : A)
+      #|  (a : A)
+      #|  (p : Prob_space[A])
+      #|  real_of_num(0) <= (K : Real)
+      #|  integrable((p : Prob_space[A]), (x : A) => ((K : Real) + real_of_num(1)) * abs((X : (A) -> Real)(x)))
+      #|  (Yn : (Num, A) -> Real) == ((n : Num) => (x : A) => floor(pow(real_of_num(2), n) * (Y : (A) -> Real)(x)) / pow(real_of_num(2), n))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 Y : (A) -> Real, \226\136\128 X : (A) -> Real, \226\136\128 K : Real, sub_sigma_algebra(p, G) && integrable(p, X) && measurable_wrt(p, G, Y) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(Y(x)) <= K) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, G, (w : A) => Y(w) * X(w), x) == Y(x) * gen_cond_exp(p, G, X, x)})
+      #|  pow((b : Real), 2) / (a : Real) <= (c : Real)
+      #|  real_of_num(0) < (a : Real) \226\134\146 a * pow((b : Real) / a, 2) - real_of_num(2) * (b * (b / a)) + (c : Real) == c - pow(b, 2) / a
+      #|  (b : Real) / (a : Real)
+      #|  real_of_num(0) < (a : Real)
+      #|  !((b : Real) == real_of_num(0)) \226\134\146 real_of_num(2) * (b * (((c : Real) + real_of_num(1)) / (real_of_num(2) * b))) == c + real_of_num(1)
+      #|  ((c : Real) + real_of_num(1)) / (real_of_num(2) * (b : Real))
+      #|  (b : Real) == real_of_num(0)
+      #|  (b : Real) == real_of_num(0)
+      #|  (a : Real) == real_of_num(0)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, real_of_num(0) <= a && (\226\136\128 t : Real, real_of_num(0) <= a * pow(t, 2) - real_of_num(2) * (b * t) + c) \226\134\146 pow(b, 2) <= a * c
       #|  0
-      #|  &0:real
-      #|  A * t pow 2 - &2 * B * t + C
-      #|  \\n. A * (r:num->real) n pow 2 - &2 * B * r n + C
+      #|  real_of_num(0)
+      #|  (A : Real) * pow((t : Real), 2) - real_of_num(2) * ((B : Real) * t) + (C : Real)
+      #|  (n : Num) => (A : Real) * pow((r : (Num) -> Real)(n), 2) - real_of_num(2) * ((B : Real) * r(n)) + (C : Real)
       #|  sequentially
-      #|  ((\\n. A * (r:num->real) n pow 2 - &2 * B * r n + C) --->\n      (A * t pow 2 - &2 * B * t + C)) sequentially
-      #|  inv(&N)
-      #|  inv(&n + &1)
-      #|  n:num
-      #|  n:num
-      #|  N:num
-      #|  N:num
-      #|  e:real
-      #|  e:real
-      #|  ((r:num->real) ---> t) sequentially
-      #|  r:num->real
-      #|  ?r:num->real. forall n. rational(r n) /\\ abs(r n - t) < inv(&n + &1)
-      #|  forall A B C:real. (forall q. rational q ==> &0 <= A * q pow 2 - &2 * B * q + C)\n                ==> (forall t. &0 <= A * t pow 2 - &2 * B * t + C)
-      #|  forall A B C:real. &0 <= A /\\\n                (forall q. rational q ==> &0 <= A * q pow 2 - &2 * B * q + C)\n                ==> B pow 2 <= A * C
-      #|  ({x:A | gen_cond_exp p G (\\w. f w - c * g w + d * h w) x =\n            gen_cond_exp p G (\\u:A. f u - c * g u) x +\n            gen_cond_exp p G (\\u:A. d * h u) x} INTER\n      {x:A | gen_cond_exp p G (\\w. f w - c * g w) x =\n            gen_cond_exp p G f x - gen_cond_exp p G (\\u:A. c * g u) x}) INTER\n     ({x:A | gen_cond_exp p G (\\w. c * g w) x = c * gen_cond_exp p G g x} INTER\n      {x:A | gen_cond_exp p G (\\w. d * h w) x = d * gen_cond_exp p G h x})
-      #|  {x:A | gen_cond_exp p G (\\w. d * h w) x = d * gen_cond_exp p G h x}
-      #|  {x:A | gen_cond_exp p G (\\w. c * g w) x = c * gen_cond_exp p G g x}
-      #|  p:A prob_space
-      #|  {x:A | gen_cond_exp p G (\\w. f w - c * g w) x =\n            gen_cond_exp p G f x - gen_cond_exp p G (\\u:A. c * g u) x}
-      #|  {x:A | gen_cond_exp p G (\\w. f w - c * g w + d * h w) x =\n            gen_cond_exp p G (\\u:A. f u - c * g u) x +\n            gen_cond_exp p G (\\u:A. d * h u) x}
-      #|  p:A prob_space
-      #|  d:real
-      #|  h:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  c:real
-      #|  g:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (\\u:A. (c:real) * (g:A->real) u)
-      #|  f:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (\\u:A. (d:real) * (h:A->real) u)
-      #|  (\\u:A. (f:A->real) u - (c:real) * (g:A->real) u)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  integrable p (\\w:A. f w - c * g w)
-      #|  integrable p (\\w:A. d * h w)
-      #|  integrable p (\\w:A. c * g w)
-      #|  forall p:A prob_space G f g h c d.\n     sub_sigma_algebra p G /\\ integrable p f /\\ integrable p g /\\ integrable p h\n     ==> almost_surely p\n           {x | gen_cond_exp p G (\\w. f w - c * g w + d * h w) x =\n                gen_cond_exp p G f x - c * gen_cond_exp p G g x +\n                d * gen_cond_exp p G h x}
-      #|  n:num
-      #|  (q:real) IN rational
-      #|  n:num
+      #|  op_minus_minus_minus_gt((n : Num) => (A : Real) * pow((r : (Num) -> Real)(n), 2) - real_of_num(2) * ((B : Real) * r(n)) + (C : Real), A * pow((t : Real), 2) - real_of_num(2) * (B * t) + C, sequentially)
+      #|  inv(real_of_num((N : Num)))
+      #|  inv(real_of_num((n : Num)) + real_of_num(1))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((r : (Num) -> Real), (t : Real), sequentially)
+      #|  (r : (Num) -> Real)
+      #|  \226\136\131 r : (Num) -> Real, \226\136\128 n : Num, rational(r(n)) && abs(r(n) - (t : Real)) < inv(real_of_num(n) + real_of_num(1))
+      #|  \226\136\128 A : Real, \226\136\128 B : Real, \226\136\128 C : Real, (\226\136\128 q : Real, rational(q) \226\134\146 real_of_num(0) <= A * pow(q, 2) - real_of_num(2) * (B * q) + C) \226\134\146 (\226\136\128 t : Real, real_of_num(0) <= A * pow(t, 2) - real_of_num(2) * (B * t) + C)
+      #|  \226\136\128 A : Real, \226\136\128 B : Real, \226\136\128 C : Real, real_of_num(0) <= A && (\226\136\128 q : Real, rational(q) \226\134\146 real_of_num(0) <= A * pow(q, 2) - real_of_num(2) * (B * q) + C) \226\134\146 pow(B, 2) <= A * C
+      #|  INTER(INTER({(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (f : (A) -> Real)(w) - (c : Real) * (g : (A) -> Real)(w) + (d : Real) * (h : (A) -> Real)(w), x) == gen_cond_exp(p, G, (u : A) => f(u) - c * g(u), x) + gen_cond_exp(p, G, (u : A) => d * h(u), x)}, {(x : A) | gen_cond_exp(p, G, (w : A) => f(w) - c * g(w), x) == gen_cond_exp(p, G, f, x) - gen_cond_exp(p, G, (u : A) => c * g(u), x)}), INTER({(x : A) | gen_cond_exp(p, G, (w : A) => c * g(w), x) == c * gen_cond_exp(p, G, g, x)}, {(x : A) | gen_cond_exp(p, G, (w : A) => d * h(w), x) == d * gen_cond_exp(p, G, h, x)}))
+      #|  {(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (d : Real) * (h : (A) -> Real)(w), x) == d * gen_cond_exp(p, G, h, x)}
+      #|  {(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (c : Real) * (g : (A) -> Real)(w), x) == c * gen_cond_exp(p, G, g, x)}
+      #|  (p : Prob_space[A])
+      #|  {(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (f : (A) -> Real)(w) - (c : Real) * (g : (A) -> Real)(w), x) == gen_cond_exp(p, G, f, x) - gen_cond_exp(p, G, (u : A) => c * g(u), x)}
+      #|  {(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (f : (A) -> Real)(w) - (c : Real) * (g : (A) -> Real)(w) + (d : Real) * (h : (A) -> Real)(w), x) == gen_cond_exp(p, G, (u : A) => f(u) - c * g(u), x) + gen_cond_exp(p, G, (u : A) => d * h(u), x)}
+      #|  (p : Prob_space[A])
+      #|  (d : Real)
+      #|  (h : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (c : Real)
+      #|  (g : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (u : A) => (c : Real) * (g : (A) -> Real)(u)
+      #|  (f : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (u : A) => (d : Real) * (h : (A) -> Real)(u)
+      #|  (u : A) => (f : (A) -> Real)(u) - (c : Real) * (g : (A) -> Real)(u)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (w : A) => (f : (A) -> Real)(w) - (c : Real) * (g : (A) -> Real)(w))
+      #|  integrable((p : Prob_space[A]), (w : A) => (d : Real) * (h : (A) -> Real)(w))
+      #|  integrable((p : Prob_space[A]), (w : A) => (c : Real) * (g : (A) -> Real)(w))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 h : (A) -> Real, \226\136\128 c : Real, \226\136\128 d : Real, sub_sigma_algebra(p, G) && integrable(p, f) && integrable(p, g) && integrable(p, h) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, G, (w : A) => f(w) - c * g(w) + d * h(w), x) == gen_cond_exp(p, G, f, x) - c * gen_cond_exp(p, G, g, x) + d * gen_cond_exp(p, G, h, x)})
+      #|  (n : Num)
+      #|  IN((q : Real), rational)
+      #|  (n : Num)
       #|  ?n. q = (enum:num->real) n
-      #|  q:real
-      #|  x:A
+      #|  (q : Real)
+      #|  (x : A)
       #|  {x:A | &0 <= gen_cond_exp p G (\\w. Y w pow 2) x} INTER\n     INTERS {{x:A | &0 <= gen_cond_exp p G (\\w. X w pow 2) x -\n                      &2 * ((enum:num->real) n) * gen_cond_exp p G (\\w. X w * Y w) x +\n                      ((enum:num->real) n) pow 2 * gen_cond_exp p G (\\w. Y w pow 2) x} |\n             n IN (:num)}
       #|  INTERS {{x:A | &0 <= gen_cond_exp p G (\\w. X w pow 2) x -\n                      &2 * ((enum:num->real) n) * gen_cond_exp p G (\\w. X w * Y w) x +\n                      ((enum:num->real) n) pow 2 * gen_cond_exp p G (\\w. Y w pow 2) x} |\n             n IN (:num)}
-      #|  {x:A | &0 <= gen_cond_exp p G (\\w. Y w pow 2) x}
-      #|  p:A prob_space
+      #|  {(x : A) | real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => pow((Y : (A) -> Real)(w), 2), x)}
+      #|  (p : Prob_space[A])
       #|  \\n. {x:A | &0 <= gen_cond_exp p G (\\w. X w pow 2) x -\n                      &2 * ((enum:num->real) n) * gen_cond_exp p G (\\w. X w * Y w) x +\n                      ((enum:num->real) n) pow 2 * gen_cond_exp p G (\\w. Y w pow 2) x}
-      #|  p:A prob_space
+      #|  (p : Prob_space[A])
       #|  enum:num->real
-      #|  &0:real
+      #|  real_of_num(0)
       #|  rational
-      #|  (\\w:A. (Y:A->real) w pow 2)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  almost_surely p {x:A | &0 <= gen_cond_exp p G (\\w. Y w pow 2) x}
-      #|  {x:A | gen_cond_exp p G\n            (\\w. (X:A->real) w pow 2 - (&2 * q) * X w * Y w + q pow 2 * Y w pow 2) x =\n            gen_cond_exp p G (\\w. X w pow 2) x -\n            (&2 * q) * gen_cond_exp p G (\\w. X w * Y w) x +\n            q pow 2 * gen_cond_exp p G (\\w. Y w pow 2) x}
-      #|  {x:A | &0 <= gen_cond_exp p G\n            (\\w. (X:A->real) w pow 2 - (&2 * q) * X w * Y w + q pow 2 * Y w pow 2) x}
-      #|  p:A prob_space
-      #|  (\\w:A. ((X:A->real) w - q * (Y:A->real) w) pow 2) =\n      (\\w. X w pow 2 - (&2 * q) * X w * Y w + q pow 2 * Y w pow 2)
-      #|  (\\w:A. ((X:A->real) w - q * (Y:A->real) w) pow 2) =\n      (\\w. X w pow 2 - (&2 * q) * X w * Y w + q pow 2 * Y w pow 2)
-      #|  (q:real) pow 2
-      #|  (&2 * q)
-      #|  (\\w:A. (Y:A->real) w pow 2)
-      #|  (\\w:A. (X:A->real) w * (Y:A->real) w)
-      #|  (\\w:A. (X:A->real) w pow 2)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (\\w:A. ((X:A->real) w - q * (Y:A->real) w) pow 2)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (\\w:A. (X w - q * Y w) pow 2) =\n       (\\w. (\\w. X w pow 2) w - (\\w. (&2 * q) * (\\w. X w * Y w) w) w\n            + (\\w. (q pow 2) * (\\w. Y w pow 2) w) w)
-      #|  integrable p (\\w:A. (X w - q * Y w) pow 2)
-      #|  forall q. almost_surely p\n       {x:A | &0 <= gen_cond_exp p G (\\w. X w pow 2) x -\n                    &2 * q * gen_cond_exp p G (\\w. X w * Y w) x +\n                    q pow 2 * gen_cond_exp p G (\\w. Y w pow 2) x}
-      #|  forall p:A prob_space G X Y.\n     sub_sigma_algebra p G /\\\n     integrable p (\\x. X x pow 2) /\\ integrable p (\\x. Y x pow 2) /\\\n     integrable p (\\x. X x * Y x)\n     ==> almost_surely p\n           {x | gen_cond_exp p G (\\w. X w * Y w) x pow 2 <=\n                gen_cond_exp p G (\\w. X w pow 2) x *\n                gen_cond_exp p G (\\w. Y w pow 2) x}
-      #|  (fv - fu) * (m - u) - (fm - fu) * (v - u) =\n     (fv - fm) * (m - u) - (fm - fu) * (v - m)\n     ==> (fm - fu) * (v - u) <= (fv - fu) * (m - u)\n         ==> (fm - fu) * (v - m) <= (fv - fm) * (m - u)
-      #|  abs(v - u) = v - u /\\ abs(m - u) = m - u
-      #|  m:real
-      #|  v:real
-      #|  u:real
-      #|  forall f:real->real.\n     (forall a b x. a IN (:real) /\\ b IN (:real) /\\ x IN real_segment[a,b]\n              ==> (f x - f a) * abs(b - a) <= (f b - f a) * abs(x - a))\n     ==> forall u m v. u < m /\\ m < v\n                 ==> (f m - f u) * (v - m) <= (f v - f m) * (m - u)
-      #|  s * (y - m) <= f y - f m
-      #|  &0 < y - m
-      #|  y:real
-      #|  s <= (f y - f m) / (y - m)
-      #|  f m - f y <= s * (m - y)
-      #|  &0 < m - y
-      #|  &0 < a ==> (b * x / a = (b * x) / a)
-      #|  &0 < a ==> (x / a * b = x * b / a)
-      #|  v:real
-      #|  m:real
-      #|  y:real
-      #|  (f m - f y) * (v - m) <= (f v - f m) * (m - y)
-      #|  &0 < v - m /\\ &0 < m - y
-      #|  v:real
-      #|  z:real
-      #|  (f m - f y) / (m - y) <= s
-      #|  y < m \\/ y = m \\/ m < y
-      #|  y:real
-      #|  s = inf {((f:real->real) v - f m) / (v - m) | v | (m:real) < v}
-      #|  (f:real->real) m - f(m - &1)
-      #|  {((f:real->real) v - f m) / (v - m) | v | (m:real) < v}
-      #|  m - (m - &1) = &1
-      #|  v:real
-      #|  m:real
-      #|  m - &1:real
-      #|  &0 < v - m
-      #|  forall z. z IN {((f:real->real) v - f m) / (v - m) | v | (m:real) < v}\n         ==> f m - f(m - &1) <= z
-      #|  (m:real) + &1
-      #|  ((f:real->real)(m + &1) - f m) / ((m + &1) - m)
-      #|  ~({((f:real->real) v - f m) / (v - m) | v | (m:real) < v} = {})
-      #|  inf {((f:real->real) v - f m) / (v - m) | v | (m:real) < v}
-      #|  forall u m v. u < m /\\ m < v\n             ==> (f m - f u) * (v - m) <= (f v - f m) * (m - u)
-      #|  forall f:real->real. f real_convex_on (:real)\n     ==> forall m. ?s. forall y. f m + s * (y - m) <= f y
-      #|  m - &1:real
-      #|  m:real
-      #|  m + &1:real
-      #|  m:real
-      #|  sl:real->real
-      #|  sl:real->real
-      #|  f real_convex_on (:real)
-      #|  forall f:real->real. f real_convex_on (:real)\n     ==> ?sl. (forall m y. f m + sl m * (y - m) <= f y) /\\\n              (forall m. sl m <= f(m + &1) - f m) /\\\n              (forall m. f m - f(m - &1) <= sl m)
-      #|  (:real)
-      #|  f:real->real
-      #|  forall f:real->real. f real_convex_on (:real) ==> forall w. f real_continuous atreal w
-      #|  forall f z q:num->real. f real_continuous atreal z /\\ (q ---> z) sequentially\n     ==> ((\\n. f(q n)) ---> f z) sequentially
-      #|  \\x:real. x
-      #|  atreal L
-      #|  forall L:real. abs real_continuous atreal L
-      #|  L:real
-      #|  a:num->real
+      #|  (w : A) => pow((Y : (A) -> Real)(w), 2)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | real_of_num(0) <= gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => pow((Y : (A) -> Real)(w), 2), x)})
+      #|  {(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => pow((X : (A) -> Real)(w), 2) - real_of_num(2) * (q : Real) * (X(w) * (Y : (A) -> Real)(w)) + pow(q, 2) * pow(Y(w), 2), x) == gen_cond_exp(p, G, (w : A) => pow(X(w), 2), x) - real_of_num(2) * q * gen_cond_exp(p, G, (w : A) => X(w) * Y(w), x) + pow(q, 2) * gen_cond_exp(p, G, (w : A) => pow(Y(w), 2), x)}
+      #|  {(x : A) | real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => pow((X : (A) -> Real)(w), 2) - real_of_num(2) * (q : Real) * (X(w) * (Y : (A) -> Real)(w)) + pow(q, 2) * pow(Y(w), 2), x)}
+      #|  (p : Prob_space[A])
+      #|  ((w : A) => pow((X : (A) -> Real)(w) - (q : Real) * (Y : (A) -> Real)(w), 2)) == ((w : A) => pow(X(w), 2) - real_of_num(2) * q * (X(w) * Y(w)) + pow(q, 2) * pow(Y(w), 2))
+      #|  ((w : A) => pow((X : (A) -> Real)(w) - (q : Real) * (Y : (A) -> Real)(w), 2)) == ((w : A) => pow(X(w), 2) - real_of_num(2) * q * (X(w) * Y(w)) + pow(q, 2) * pow(Y(w), 2))
+      #|  pow((q : Real), 2)
+      #|  real_of_num(2) * (q : Real)
+      #|  (w : A) => pow((Y : (A) -> Real)(w), 2)
+      #|  (w : A) => (X : (A) -> Real)(w) * (Y : (A) -> Real)(w)
+      #|  (w : A) => pow((X : (A) -> Real)(w), 2)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (w : A) => pow((X : (A) -> Real)(w) - (q : Real) * (Y : (A) -> Real)(w), 2)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  ((w : A) => pow((X : (A) -> Real)(w) - (q : Real) * (Y : (A) -> Real)(w), 2)) == ((w : A) => ((w : A) => pow(X(w), 2))(w) - ((w : A) => real_of_num(2) * q * ((w : A) => X(w) * Y(w))(w))(w) + ((w : A) => pow(q, 2) * ((w : A) => pow(Y(w), 2))(w))(w))
+      #|  integrable((p : Prob_space[A]), (w : A) => pow((X : (A) -> Real)(w) - (q : Real) * (Y : (A) -> Real)(w), 2))
+      #|  \226\136\128 q : Real, almost_surely((p : Prob_space[A]), {(x : A) | real_of_num(0) <= gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => pow((X : (A) -> Real)(w), 2), x) - real_of_num(2) * (q * gen_cond_exp(p, G, (w : A) => X(w) * (Y : (A) -> Real)(w), x)) + pow(q, 2) * gen_cond_exp(p, G, (w : A) => pow(Y(w), 2), x)})
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, (x : A) => pow(X(x), 2)) && integrable(p, (x : A) => pow(Y(x), 2)) && integrable(p, (x : A) => X(x) * Y(x)) \226\134\146 almost_surely(p, {(x : A) | pow(gen_cond_exp(p, G, (w : A) => X(w) * Y(w), x), 2) <= gen_cond_exp(p, G, (w : A) => pow(X(w), 2), x) * gen_cond_exp(p, G, (w : A) => pow(Y(w), 2), x)})
+      #|  ((fv : Real) - (fu : Real)) * ((m : Real) - (u : Real)) - ((fm : Real) - fu) * ((v : Real) - u) == (fv - fm) * (m - u) - (fm - fu) * (v - m) \226\134\146 (fm - fu) * (v - u) <= (fv - fu) * (m - u) \226\134\146 (fm - fu) * (v - m) <= (fv - fm) * (m - u)
+      #|  abs((v : Real) - (u : Real)) == v - u && abs((m : Real) - u) == m - u
+      #|  (m : Real)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  \226\136\128 f : (Real) -> Real, (\226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Real, IN(a, UNIV) && IN(b, UNIV) && IN(x, real_segment([(a, b)])) \226\134\146 (f(x) - f(a)) * abs(b - a) <= (f(b) - f(a)) * abs(x - a)) \226\134\146 (\226\136\128 u : Real, \226\136\128 m : Real, \226\136\128 v : Real, u < m && m < v \226\134\146 (f(m) - f(u)) * (v - m) <= (f(v) - f(m)) * (m - u))
+      #|  (s : Real) * ((y : Real) - (m : Real)) <= (f : (Real) -> Real)(y) - f(m)
+      #|  real_of_num(0) < (y : Real) - (m : Real)
+      #|  (y : Real)
+      #|  (s : Real) <= ((f : (Real) -> Real)((y : Real)) - f((m : Real))) / (y - m)
+      #|  (f : (Real) -> Real)((m : Real)) - f((y : Real)) <= (s : Real) * (m - y)
+      #|  real_of_num(0) < (m : Real) - (y : Real)
+      #|  real_of_num(0) < (a : Real) \226\134\146 (b : Real) * ((x : Real) / a) == b * x / a
+      #|  real_of_num(0) < (a : Real) \226\134\146 (x : Real) / a * (b : Real) == x * (b / a)
+      #|  (v : Real)
+      #|  (m : Real)
+      #|  (y : Real)
+      #|  ((f : (Real) -> Real)((m : Real)) - f((y : Real))) * ((v : Real) - m) <= (f(v) - f(m)) * (m - y)
+      #|  real_of_num(0) < (v : Real) - (m : Real) && real_of_num(0) < m - (y : Real)
+      #|  (v : Real)
+      #|  (z : Real)
+      #|  ((f : (Real) -> Real)((m : Real)) - f((y : Real))) / (m - y) <= (s : Real)
+      #|  (y : Real) < (m : Real) || y == m || m < y
+      #|  (y : Real)
+      #|  (s : Real) == inf({((f : (Real) -> Real)(v) - f((m : Real))) / (v - m) | v : Real | m < v})
+      #|  (f : (Real) -> Real)((m : Real)) - f(m - real_of_num(1))
+      #|  {((f : (Real) -> Real)(v) - f((m : Real))) / (v - m) | v : Real | m < v}
+      #|  (m : Real) - (m - real_of_num(1)) == real_of_num(1)
+      #|  (v : Real)
+      #|  (m : Real)
+      #|  (m : Real) - real_of_num(1)
+      #|  real_of_num(0) < (v : Real) - (m : Real)
+      #|  \226\136\128 z : Real, IN(z, {((f : (Real) -> Real)(v) - f((m : Real))) / (v - m) | v : Real | m < v}) \226\134\146 f(m) - f(m - real_of_num(1)) <= z
+      #|  (m : Real) + real_of_num(1)
+      #|  ((f : (Real) -> Real)((m : Real) + real_of_num(1)) - f(m)) / (m + real_of_num(1) - m)
+      #|  !({((f : (Real) -> Real)(v) - f((m : Real))) / (v - m) | v : Real | m < v} == {})
+      #|  inf({((f : (Real) -> Real)(v) - f((m : Real))) / (v - m) | v : Real | m < v})
+      #|  \226\136\128 u : Real, \226\136\128 m : Real, \226\136\128 v : Real, u < m && m < v \226\134\146 ((f : (Real) -> Real)(m) - f(u)) * (v - m) <= (f(v) - f(m)) * (m - u)
+      #|  \226\136\128 f : (Real) -> Real, real_convex_on(f, UNIV) \226\134\146 (\226\136\128 m : Real, \226\136\131 s : Real, \226\136\128 y : Real, f(m) + s * (y - m) <= f(y))
+      #|  (m : Real) - real_of_num(1)
+      #|  (m : Real)
+      #|  (m : Real) + real_of_num(1)
+      #|  (m : Real)
+      #|  (sl : (Real) -> Real)
+      #|  (sl : (Real) -> Real)
+      #|  real_convex_on((f : (Real) -> Real), UNIV)
+      #|  \226\136\128 f : (Real) -> Real, real_convex_on(f, UNIV) \226\134\146 (\226\136\131 sl : (Real) -> Real, (\226\136\128 m : Real, \226\136\128 y : Real, f(m) + sl(m) * (y - m) <= f(y)) && (\226\136\128 m : Real, sl(m) <= f(m + real_of_num(1)) - f(m)) && (\226\136\128 m : Real, f(m) - f(m - real_of_num(1)) <= sl(m)))
+      #|  (UNIV : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, real_convex_on(f, UNIV) \226\134\146 (\226\136\128 w : Real, real_continuous(f, atreal(w)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 z : Real, \226\136\128 q : (Num) -> Real, real_continuous(f, atreal(z)) && op_minus_minus_minus_gt(q, z, sequentially) \226\134\146 op_minus_minus_minus_gt((n : Num) => f(q(n)), f(z), sequentially)
+      #|  (x : Real) => x
+      #|  atreal((L : Real))
+      #|  \226\136\128 L : Real, real_continuous(abs, atreal(L))
+      #|  (L : Real)
+      #|  (a : (Num) -> Real)
       #|  sequentially
       #|  abs
-      #|  forall a L. (a ---> L) sequentially ==> ((\\n. abs(a n)) ---> abs L) sequentially
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 L : Real, op_minus_minus_minus_gt(a, L, sequentially) \226\134\146 op_minus_minus_minus_gt((n : Num) => abs(a(n)), abs(L), sequentially)
       #|  0
-      #|  C:real
-      #|  (f:real->real) z
-      #|  \\n. f((q:num->real) n) + sl(q n) * (z - q n)
+      #|  (C : Real)
+      #|  (f : (Real) -> Real)((z : Real))
+      #|  (n : Num) => (f : (Real) -> Real)((q : (Num) -> Real)(n)) + (sl : (Real) -> Real)(q(n)) * ((z : Real) - q(n))
       #|  sequentially
-      #|  (f:real->real) z = f z + &0
-      #|  ((\\n. f((q:num->real) n) + sl(q n) * (z - q n)) ---> f z) sequentially
-      #|  &0 = (abs(f(z + &1) - f z) + abs(f(z - &1) - f z)) * abs(z - z)
-      #|  (q:num->real) n
-      #|  forall m. f m - f(m - &1) <= (sl:real->real) m
-      #|  (q:num->real) n
-      #|  forall m. (sl:real->real) m <= f(m + &1) - f m
+      #|  (f : (Real) -> Real)((z : Real)) == f(z) + real_of_num(0)
+      #|  op_minus_minus_minus_gt((n : Num) => (f : (Real) -> Real)((q : (Num) -> Real)(n)) + (sl : (Real) -> Real)(q(n)) * ((z : Real) - q(n)), f(z), sequentially)
+      #|  real_of_num(0) == (abs((f : (Real) -> Real)((z : Real) + real_of_num(1)) - f(z)) + abs(f(z - real_of_num(1)) - f(z))) * abs(z - z)
+      #|  (q : (Num) -> Real)((n : Num))
+      #|  \226\136\128 m : Real, (f : (Real) -> Real)(m) - f(m - real_of_num(1)) <= (sl : (Real) -> Real)(m)
+      #|  (q : (Num) -> Real)((n : Num))
+      #|  \226\136\128 m : Real, (sl : (Real) -> Real)(m) <= (f : (Real) -> Real)(m + real_of_num(1)) - f(m)
       #|  0
-      #|  \\n. (abs(f((q:num->real) n + &1) - f(q n)) +\n           abs(f(q n - &1) - f(q n))) * abs(z - q n)
-      #|  ((\\n. sl((q:num->real) n) * (z - q n)) ---> &0) sequentially
-      #|  ((\\n. f((q:num->real) n - &1)) ---> f(z - &1)) sequentially
-      #|  ((\\n. f((q:num->real) n + &1)) ---> f(z + &1)) sequentially
-      #|  ((\\n. f((q:num->real) n)) ---> f z) sequentially
-      #|  inv(&N)
-      #|  inv(&n + &1)
-      #|  n:num
-      #|  n:num
-      #|  N:num
-      #|  N:num
-      #|  e:real
-      #|  e:real
-      #|  ((q:num->real) ---> z) sequentially
-      #|  q:num->real
-      #|  ?q:num->real. forall n. rational(q n) /\\ abs(q n - z) < inv(&n + &1)
-      #|  forall w:real. f real_continuous atreal w
-      #|  forall f sl:real->real. f real_convex_on (:real) /\\\n     (forall m. sl m <= f(m + &1) - f m) /\\ (forall m. f m - f(m - &1) <= sl m)\n     ==> forall z C. (forall q. rational q ==> f q + sl q * (z - q) <= C) ==> f z <= C
-      #|  {x:A | gen_cond_exp p G (\\w. b) x = b}
-      #|  ({x:A | gen_cond_exp p G (\\w. a * X w + b) x =\n            gen_cond_exp p G (\\w. a * X w) x + gen_cond_exp p G (\\w. b) x} INTER\n      {x:A | gen_cond_exp p G (\\w. a * X w) x = a * gen_cond_exp p G X x})
-      #|  p:A prob_space
-      #|  {x:A | gen_cond_exp p G (\\w. a * X w) x = a * gen_cond_exp p G X x}
-      #|  {x:A | gen_cond_exp p G (\\w. a * X w + b) x =\n            gen_cond_exp p G (\\w. a * X w) x + gen_cond_exp p G (\\w. b) x}
-      #|  p:A prob_space
-      #|  b:real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  a:real
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (\\w:A. b:real)
-      #|  (\\w:A. a * (X:A->real) w)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  integrable p (\\w:A. b:real)
-      #|  integrable p (\\w:A. a * X w)
-      #|  forall p:A prob_space G X a b.\n     sub_sigma_algebra p G /\\ integrable p X\n     ==> almost_surely p\n           {x | gen_cond_exp p G (\\w. a * X w + b) x =\n                a * gen_cond_exp p G X x + b}
-      #|  n:num
-      #|  (q:real) IN rational
-      #|  n:num
+      #|  (n : Num) => (abs((f : (Real) -> Real)((q : (Num) -> Real)(n) + real_of_num(1)) - f(q(n))) + abs(f(q(n) - real_of_num(1)) - f(q(n)))) * abs((z : Real) - q(n))
+      #|  op_minus_minus_minus_gt((n : Num) => (sl : (Real) -> Real)((q : (Num) -> Real)(n)) * ((z : Real) - q(n)), real_of_num(0), sequentially)
+      #|  op_minus_minus_minus_gt((n : Num) => (f : (Real) -> Real)((q : (Num) -> Real)(n) - real_of_num(1)), f((z : Real) - real_of_num(1)), sequentially)
+      #|  op_minus_minus_minus_gt((n : Num) => (f : (Real) -> Real)((q : (Num) -> Real)(n) + real_of_num(1)), f((z : Real) + real_of_num(1)), sequentially)
+      #|  op_minus_minus_minus_gt((n : Num) => (f : (Real) -> Real)((q : (Num) -> Real)(n)), f((z : Real)), sequentially)
+      #|  inv(real_of_num((N : Num)))
+      #|  inv(real_of_num((n : Num)) + real_of_num(1))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((q : (Num) -> Real), (z : Real), sequentially)
+      #|  (q : (Num) -> Real)
+      #|  \226\136\131 q : (Num) -> Real, \226\136\128 n : Num, rational(q(n)) && abs(q(n) - (z : Real)) < inv(real_of_num(n) + real_of_num(1))
+      #|  \226\136\128 w : Real, real_continuous((f : (Real) -> Real), atreal(w))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 sl : (Real) -> Real, real_convex_on(f, UNIV) && (\226\136\128 m : Real, sl(m) <= f(m + real_of_num(1)) - f(m)) && (\226\136\128 m : Real, f(m) - f(m - real_of_num(1)) <= sl(m)) \226\134\146 (\226\136\128 z : Real, \226\136\128 C : Real, (\226\136\128 q : Real, rational(q) \226\134\146 f(q) + sl(q) * (z - q) <= C) \226\134\146 f(z) <= C)
+      #|  {(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (b : Real), x) == b}
+      #|  INTER({(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (a : Real) * (X : (A) -> Real)(w) + (b : Real), x) == gen_cond_exp(p, G, (w : A) => a * X(w), x) + gen_cond_exp(p, G, (w : A) => b, x)}, {(x : A) | gen_cond_exp(p, G, (w : A) => a * X(w), x) == a * gen_cond_exp(p, G, X, x)})
+      #|  (p : Prob_space[A])
+      #|  {(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (a : Real) * (X : (A) -> Real)(w), x) == a * gen_cond_exp(p, G, X, x)}
+      #|  {(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (a : Real) * (X : (A) -> Real)(w) + (b : Real), x) == gen_cond_exp(p, G, (w : A) => a * X(w), x) + gen_cond_exp(p, G, (w : A) => b, x)}
+      #|  (p : Prob_space[A])
+      #|  (b : Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (a : Real)
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (w : A) => (b : Real)
+      #|  (w : A) => (a : Real) * (X : (A) -> Real)(w)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (w : A) => (b : Real))
+      #|  integrable((p : Prob_space[A]), (w : A) => (a : Real) * (X : (A) -> Real)(w))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, sub_sigma_algebra(p, G) && integrable(p, X) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, G, (w : A) => a * X(w) + b, x) == a * gen_cond_exp(p, G, X, x) + b})
+      #|  (n : Num)
+      #|  IN((q : Real), rational)
+      #|  (n : Num)
       #|  ?n. q = (enum:num->real) n
-      #|  q:real
-      #|  gen_cond_exp p G (\\w. f((X:A->real) w)) x
-      #|  gen_cond_exp p G (X:A->real) x
-      #|  sl:real->real
-      #|  f:real->real
-      #|  x:A
+      #|  (q : Real)
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (f : (Real) -> Real)((X : (A) -> Real)(w)), (x : A))
+      #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), (x : A))
+      #|  (sl : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (x : A)
       #|  \\n. {x:A | (sl:real->real)((enum:num->real) n) * gen_cond_exp p G X x +\n                (f(enum n) - sl(enum n) * (enum n)) <=\n                gen_cond_exp p G (\\w. f(X w)) x}
-      #|  p:A prob_space
+      #|  (p : Prob_space[A])
       #|  enum:num->real
-      #|  &0:real
+      #|  real_of_num(0)
       #|  rational
-      #|  {x:A | gen_cond_exp p G (\\w. sl q * X w + (f q - sl q * q)) x <=\n             gen_cond_exp p G (\\w. f(X w)) x}
-      #|  {x:A | gen_cond_exp p G (\\w. sl q * X w + (f q - sl q * q)) x =\n             sl q * gen_cond_exp p G X x + (f q - sl q * q)}
-      #|  p:A prob_space
-      #|  forall m y. f m + sl m * (y - m) <= f y
-      #|  (X:A->real) w
-      #|  q:real
-      #|  w:A
-      #|  (\\w:A. (f:real->real)((X:A->real) w))
-      #|  (\\w:A. (sl:real->real) q * (X:A->real) w + ((f:real->real) q - sl q * q))
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (f:real->real) q - sl q * q
-      #|  (sl:real->real) q
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall q. almost_surely p\n       {x:A | sl q * gen_cond_exp p G X x + (f q - sl q * q) <=\n              gen_cond_exp p G (\\w. f(X w)) x}
-      #|  sl:real->real
-      #|  forall p:A prob_space G X f.\n     sub_sigma_algebra p G /\\ integrable p X /\\\n     integrable p (\\x. f(X x)) /\\ f real_convex_on (:real)\n     ==> almost_surely p\n           {x | f(gen_cond_exp p G X x) <= gen_cond_exp p G (\\w. f(X w)) x}
-      #|  ~(&0 = &1)
-      #|  (:real)
-      #|  \\x:real. &2
-      #|  \\x:real. &2 * x
-      #|  \\x:real. x pow 2
-      #|  (\\x:real. x pow 2) real_convex_on (:real)
-      #|  \\x:real. x pow 2
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall p:A prob_space G X.\n     sub_sigma_algebra p G /\\ integrable p X /\\ integrable p (\\x. X x pow 2)\n     ==> almost_surely p\n           {x | gen_cond_exp p G X x pow 2 <= gen_cond_exp p G (\\w. X w pow 2) x}
+      #|  {(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (sl : (Real) -> Real)((q : Real)) * (X : (A) -> Real)(w) + ((f : (Real) -> Real)(q) - sl(q) * q), x) <= gen_cond_exp(p, G, (w : A) => f(X(w)), x)}
+      #|  {(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (sl : (Real) -> Real)((q : Real)) * (X : (A) -> Real)(w) + ((f : (Real) -> Real)(q) - sl(q) * q), x) == sl(q) * gen_cond_exp(p, G, X, x) + (f(q) - sl(q) * q)}
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 m : Real, \226\136\128 y : Real, (f : (Real) -> Real)(m) + (sl : (Real) -> Real)(m) * (y - m) <= f(y)
+      #|  (X : (A) -> Real)((w : A))
+      #|  (q : Real)
+      #|  (w : A)
+      #|  (w : A) => (f : (Real) -> Real)((X : (A) -> Real)(w))
+      #|  (w : A) => (sl : (Real) -> Real)((q : Real)) * (X : (A) -> Real)(w) + ((f : (Real) -> Real)(q) - sl(q) * q)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (f : (Real) -> Real)((q : Real)) - (sl : (Real) -> Real)(q) * q
+      #|  (sl : (Real) -> Real)((q : Real))
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 q : Real, almost_surely((p : Prob_space[A]), {(x : A) | (sl : (Real) -> Real)(q) * gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) + ((f : (Real) -> Real)(q) - sl(q) * q) <= gen_cond_exp(p, G, (w : A) => f(X(w)), x)})
+      #|  (sl : (Real) -> Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 f : (Real) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) && integrable(p, (x : A) => f(X(x))) && real_convex_on(f, UNIV) \226\134\146 almost_surely(p, {(x : A) | f(gen_cond_exp(p, G, X, x)) <= gen_cond_exp(p, G, (w : A) => f(X(w)), x)})
+      #|  !(real_of_num(0) == real_of_num(1))
+      #|  (UNIV : (Real) -> Bool)
+      #|  (x : Real) => real_of_num(2)
+      #|  (x : Real) => real_of_num(2) * x
+      #|  (x : Real) => pow(x, 2)
+      #|  real_convex_on((x : Real) => pow(x, 2), UNIV)
+      #|  (x : Real) => pow(x, 2)
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) && integrable(p, (x : A) => pow(X(x), 2)) \226\134\146 almost_surely(p, {(x : A) | pow(gen_cond_exp(p, G, X, x), 2) <= gen_cond_exp(p, G, (w : A) => pow(X(w), 2), x)})
       #|  exp
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall p:A prob_space G X.\n     sub_sigma_algebra p G /\\ integrable p X /\\ integrable p (\\x. exp(X x))\n     ==> almost_surely p\n           {x | exp(gen_cond_exp p G X x) <= gen_cond_exp p G (\\w. exp(X w)) x}
-      #|  {x:A | gen_cond_exp p G (\\w. abs(X w) + abs(Y w)) x =\n            gen_cond_exp p G (\\w. abs(X w)) x + gen_cond_exp p G (\\w. abs(Y w)) x}
-      #|  {x:A | gen_cond_exp p G (\\w. abs(X w + Y w)) x <=\n            gen_cond_exp p G (\\w. abs(X w) + abs(Y w)) x}
-      #|  p:A prob_space
-      #|  (\\w:A. abs((X:A->real) w) + abs(Y w))
-      #|  (\\w:A. abs((X:A->real) w + Y w))
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (\\w:A. abs((Y:A->real) w))
-      #|  (\\w:A. abs((X:A->real) w))
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  integrable p (\\w:A. abs(X w + Y w))
-      #|  integrable p (\\w:A. abs(Y w))
-      #|  integrable p (\\w:A. abs(X w))
-      #|  forall p:A prob_space G X Y.\n     sub_sigma_algebra p G /\\ integrable p X /\\ integrable p Y\n     ==> almost_surely p\n           {x | gen_cond_exp p G (\\w. abs(X w + Y w)) x <=\n                gen_cond_exp p G (\\w. abs(X w)) x +\n                gen_cond_exp p G (\\w. abs(Y w)) x}
-      #|  x:A
-      #|  G:(A->bool)->bool
-      #|  (\\x:A. phi x * indicator_fn A x) =\n                  (\\x. indicator_fn A x * phi x)
-      #|  K:real
-      #|  (\\x:A. h x * phi x * indicator_fn A x) =\n                 (\\x. h x * (phi x * indicator_fn A x))
-      #|  forall p:A prob_space G (h:A->real) (phi:A->real) (A:A->bool) K.\n    sub_sigma_algebra p G /\\ integrable p h /\\\n    measurable_wrt p G phi /\\ A IN G /\\ &0 <= K /\\\n    (forall x. x IN prob_carrier p /\\ x IN A ==> abs(phi x) <= K)\n    ==> integrable p (\\x. h x * phi x * indicator_fn A x)
-      #|  (\\x:A. abs(h x) * indicator_fn A x) =\n                 (\\x. (\\y. abs(h y)) x * indicator_fn A x)
-      #|  forall p:A prob_space (h:A->real) (A:A->bool).\n    integrable p h /\\ A IN prob_events p\n    ==> integrable p (\\x. abs(h x) * indicator_fn A x)
-      #|  (K / &2) / &2 pow n = K / &2 pow (SUC n)
-      #|  (phi:A->real) x < &0
-      #|  ~((phi:A->real) x < &0)
-      #|  (phi:A->real) x >= &0
-      #|  (x:A) IN prob_carrier p
-      #|  (x:A) IN A
-      #|  x:A
-      #|  (\\x:A. abs(h x) * indicator_fn A x) =\n       (\\x. abs(h x) * indicator_fn Apos x +\n            abs(h x) * indicator_fn Aneg x)
-      #|  expectation p (\\x:A. abs(h x) * indicator_fn Apos x) +\n      expectation p (\\x. abs(h x) * indicator_fn Aneg x) =\n      expectation p (\\x. abs(h x) * indicator_fn A x)
-      #|  (K / &2) / &2 pow n *\n      expectation p (\\x:A. abs(h x) * indicator_fn Apos x) +\n      (K / &2) / &2 pow n *\n      expectation p (\\x. abs(h x) * indicator_fn Aneg x)
-      #|  Aneg:A->bool
-      #|  \\x:A. phi x + K / &2
-      #|  K / &2
-      #|  abs(expectation p (\\x:A. h x * (phi x + K / &2) * indicator_fn Aneg x)) <=\n      (K / &2) / &2 pow n *\n      expectation p (\\x. abs(h x) * indicator_fn Aneg x)
-      #|  Apos:A->bool
-      #|  \\x:A. phi x - K / &2
-      #|  K / &2
-      #|  abs(expectation p (\\x:A. h x * (phi x - K / &2) * indicator_fn Apos x)) <=\n      (K / &2) / &2 pow n *\n      expectation p (\\x. abs(h x) * indicator_fn Apos x)
-      #|  abs(expectation p (\\x:A. h x * (phi x - K / &2) * indicator_fn Apos x)) +\n      abs(expectation p (\\x. h x * (phi x + K / &2) * indicator_fn Aneg x))
-      #|  \\x:A. (h:A->real) x * indicator_fn (Aneg:A->bool) x
-      #|  --(K / &2)
-      #|  p:A prob_space
-      #|  \\x:A. --(K / &2) * (h:A->real) x * indicator_fn (Aneg:A->bool) x
-      #|  \\x:A. h x * (phi x + K / &2) * indicator_fn Aneg x
-      #|  p:A prob_space
-      #|  (\\x:A. h x * phi x * indicator_fn Aneg x) =\n        (\\x. h x * (phi x + K / &2) * indicator_fn Aneg x +\n             --(K / &2) * (h x * indicator_fn Aneg x))
-      #|  expectation p (\\x:A. h x * phi x * indicator_fn Aneg x) =\n       expectation p (\\x. h x * (phi x + K / &2) * indicator_fn Aneg x)
-      #|  \\x:A. (h:A->real) x * indicator_fn (Apos:A->bool) x
-      #|  K / &2
-      #|  p:A prob_space
-      #|  \\x:A. K / &2 * (h:A->real) x * indicator_fn (Apos:A->bool) x
-      #|  \\x:A. h x * (phi x - K / &2) * indicator_fn Apos x
-      #|  p:A prob_space
-      #|  (\\x:A. h x * phi x * indicator_fn Apos x) =\n        (\\x. h x * (phi x - K / &2) * indicator_fn Apos x +\n             K / &2 * (h x * indicator_fn Apos x))
-      #|  expectation p (\\x:A. h x * phi x * indicator_fn Apos x) =\n       expectation p (\\x. h x * (phi x - K / &2) * indicator_fn Apos x)
-      #|  (phi:A->real) x < &0
-      #|  ~((phi:A->real) x < &0)
-      #|  (phi:A->real) x >= &0
-      #|  (x:A) IN prob_carrier p
-      #|  (x:A) IN A
-      #|  x:A
-      #|  (\\x:A. h x * phi x * indicator_fn A x) =\n        (\\x. h x * phi x * indicator_fn Apos x +\n             h x * phi x * indicator_fn Aneg x)
-      #|  expectation p (\\x:A. h x * phi x * indicator_fn A x) =\n       expectation p (\\x. h x * phi x * indicator_fn Apos x) +\n       expectation p (\\x. h x * phi x * indicator_fn Aneg x)
-      #|  K:real
-      #|  G:(A->bool)->bool
-      #|  integrable p (\\x:A. h x * phi x * indicator_fn Aneg x)
-      #|  K:real
-      #|  G:(A->bool)->bool
-      #|  integrable p (\\x:A. h x * phi x * indicator_fn Apos x)
-      #|  (x:A) IN Aneg
-      #|  x:A
-      #|  forall x:A. x IN prob_carrier p /\\ x IN A ==> abs(phi x) <= K
-      #|  x:A
-      #|  forall x:A. x IN prob_carrier p /\\ x IN Aneg ==> abs(phi x) <= K
-      #|  (x:A) IN Apos
-      #|  x:A
-      #|  forall x:A. x IN prob_carrier p /\\ x IN A ==> abs(phi x) <= K
-      #|  x:A
-      #|  forall x:A. x IN prob_carrier p /\\ x IN Apos ==> abs(phi x) <= K
-      #|  integrable p (\\x:A. h x * indicator_fn Aneg x)
-      #|  (\\x:A. h x * indicator_fn Apos x) =\n                    (\\x. h x * indicator_fn Apos x)
-      #|  integrable p (\\x:A. h x * indicator_fn Apos x)
-      #|  expectation p (\\x:A. h x * phi x * indicator_fn A x) =\n      expectation p (\\x. h x * (phi x - K / &2) * indicator_fn Apos x) +\n      expectation p (\\x. h x * (phi x + K / &2) * indicator_fn Aneg x)
-      #|  Aneg:A->bool
-      #|  forall B:A->bool. B IN G ==>\n      expectation p (\\x. h x * indicator_fn B x) = &0
-      #|  expectation p (\\x:A. h x * indicator_fn Aneg x) = &0
-      #|  Apos:A->bool
-      #|  forall B:A->bool. B IN G ==>\n      expectation p (\\x. h x * indicator_fn B x) = &0
-      #|  expectation p (\\x:A. h x * indicator_fn Apos x) = &0
-      #|  integrable p (\\x:A. abs(h x) * indicator_fn Aneg x)
-      #|  integrable p (\\x:A. abs(h x) * indicator_fn Apos x)
-      #|  integrable p (\\x:A. abs(h x) * indicator_fn A x)
-      #|  K / &2
-      #|  G:(A->bool)->bool
-      #|  integrable p (\\x:A. h x * (phi x + K / &2) * indicator_fn Aneg x)
-      #|  K / &2
-      #|  G:(A->bool)->bool
-      #|  integrable p (\\x:A. h x * (phi x - K / &2) * indicator_fn Apos x)
-      #|  K:real
-      #|  G:(A->bool)->bool
-      #|  integrable p (\\x:A. h x * phi x * indicator_fn A x)
-      #|  measurable_wrt p G (\\x:A. phi x + K / &2)
-      #|  measurable_wrt p G (\\x:A. phi x - K / &2)
-      #|  abs((phi:A->real) x) <= K
-      #|  (phi:A->real) x < &0
-      #|  x:A
-      #|  forall x:A. x IN prob_carrier p /\\ x IN A ==> abs(phi x) <= K
-      #|  abs((phi:A->real) x) <= K
-      #|  (x:A) IN Aneg
-      #|  (x:A) IN A /\\ phi x < &0
-      #|  x:A
-      #|  forall x:A. x IN prob_carrier p /\\ x IN Aneg\n     ==> abs(phi x + K / &2) <= K / &2
-      #|  abs((phi:A->real) x) <= K
-      #|  (phi:A->real) x >= &0
-      #|  x:A
-      #|  forall x:A. x IN prob_carrier p /\\ x IN A ==> abs(phi x) <= K
-      #|  abs((phi:A->real) x) <= K
-      #|  (x:A) IN Apos
-      #|  (x:A) IN A /\\ phi x >= &0
-      #|  x:A
-      #|  forall x:A. x IN prob_carrier p /\\ x IN Apos\n     ==> abs(phi x - K / &2) <= K / &2
-      #|  G:(A->bool)->bool
-      #|  (Aneg:A->bool) IN prob_events p
-      #|  G:(A->bool)->bool
-      #|  (Apos:A->bool) IN prob_events p
-      #|  (A:A->bool) SUBSET prob_carrier p
-      #|  G:(A->bool)->bool
-      #|  (A:A->bool) IN prob_events p
-      #|  (Aneg:A->bool) IN G
-      #|  (Apos:A->bool) IN G
-      #|  Aneg = (A:A->bool) INTER {x:A | x IN prob_carrier p /\\ phi x < &0}
-      #|  Apos = (A:A->bool) INTER {x | x IN prob_carrier p /\\ phi x >= &0}
-      #|  x:A
-      #|  K * abs((h:A->real) x) = abs(h x) * K
-      #|  abs(indicator_fn A (x:A)) = indicator_fn A x
-      #|  x:A
-      #|  (\\x:A. K * (abs(h x) * indicator_fn A x)) =\n                   (\\x. K * (\\y. abs(h y) * indicator_fn A y) x)
-      #|  K * expectation p (\\x:A. abs(h x) * indicator_fn A x) =\n      expectation p (\\x. K * (abs(h x) * indicator_fn A x))
-      #|  expectation p (\\x:A. abs(h x * phi x * indicator_fn A x))
-      #|  integrable p (\\x:A. abs(h x) * indicator_fn A x)
-      #|  K:real
-      #|  G:(A->bool)->bool
-      #|  integrable p (\\x:A. h x * phi x * indicator_fn A x)
-      #|  G:(A->bool)->bool
-      #|  (A:A->bool) IN prob_events p
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  forall p G (h:A->real).\n    sub_sigma_algebra p G /\\ integrable p h /\\\n    (forall B. B IN G ==>\n       expectation p (\\x. h x * indicator_fn B x) = &0)\n    ==> forall n K phi A.\n          measurable_wrt p G phi /\\ A IN G /\\ &0 <= K /\\\n          (forall x. x IN prob_carrier p /\\ x IN A ==> abs(phi x) <= K)\n          ==> abs(expectation p (\\x. h x * phi x * indicator_fn A x))\n              <= K / &2 pow n *\n                 expectation p (\\x. abs(h x) * indicator_fn A x)
-      #|  abs(x:real) * &2 pow N <= K * C
-      #|  inv(abs(x:real)) * abs x = &1
-      #|  (a * (b * c)) * d = (a * b) * (c * d):real
-      #|  (K * C * inv(abs(x:real))) * abs x = K * C
-      #|  (K * C * inv(abs(x:real))) * abs x < &2 pow N * abs x
-      #|  (a * c) * b = (a * b) * c:real
-      #|  (K / &2 pow N * C) * &2 pow N = K * C
-      #|  abs(x:real) * &2 pow N <= (K / &2 pow N * C) * &2 pow N
-      #|  &0 < &2 pow N
-      #|  K / &2 pow N * &2 pow N = K
-      #|  ~(&2 pow N = &0)
-      #|  N:num
-      #|  N:num
-      #|  K * C * inv(abs(x:real))
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) && integrable(p, (x : A) => exp(X(x))) \226\134\146 almost_surely(p, {(x : A) | exp(gen_cond_exp(p, G, X, x)) <= gen_cond_exp(p, G, (w : A) => exp(X(w)), x)})
+      #|  {(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => abs((X : (A) -> Real)(w)) + abs((Y : (A) -> Real)(w)), x) == gen_cond_exp(p, G, (w : A) => abs(X(w)), x) + gen_cond_exp(p, G, (w : A) => abs(Y(w)), x)}
+      #|  {(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => abs((X : (A) -> Real)(w) + (Y : (A) -> Real)(w)), x) <= gen_cond_exp(p, G, (w : A) => abs(X(w)) + abs(Y(w)), x)}
+      #|  (p : Prob_space[A])
+      #|  (w : A) => abs((X : (A) -> Real)(w)) + abs((Y : (A) -> Real)(w))
+      #|  (w : A) => abs((X : (A) -> Real)(w) + (Y : (A) -> Real)(w))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (w : A) => abs((Y : (A) -> Real)(w))
+      #|  (w : A) => abs((X : (A) -> Real)(w))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (w : A) => abs((X : (A) -> Real)(w) + (Y : (A) -> Real)(w)))
+      #|  integrable((p : Prob_space[A]), (w : A) => abs((Y : (A) -> Real)(w)))
+      #|  integrable((p : Prob_space[A]), (w : A) => abs((X : (A) -> Real)(w)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) && integrable(p, Y) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, G, (w : A) => abs(X(w) + Y(w)), x) <= gen_cond_exp(p, G, (w : A) => abs(X(w)), x) + gen_cond_exp(p, G, (w : A) => abs(Y(w)), x)})
+      #|  (x : A)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  ((x : A) => (phi : (A) -> Real)(x) * indicator_fn((A : (A) -> Bool), x)) == ((x : A) => indicator_fn(A, x) * phi(x))
+      #|  (K : Real)
+      #|  ((x : A) => (h : (A) -> Real)(x) * ((phi : (A) -> Real)(x) * indicator_fn((A : (A) -> Bool), x))) == ((x : A) => h(x) * (phi(x) * indicator_fn(A, x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 h : (A) -> Real, \226\136\128 phi : (A) -> Real, \226\136\128 A : (A) -> Bool, \226\136\128 K : Real, sub_sigma_algebra(p, G) && integrable(p, h) && measurable_wrt(p, G, phi) && IN(A, G) && real_of_num(0) <= K && (\226\136\128 x : A, IN(x, prob_carrier(p)) && IN(x, A) \226\134\146 abs(phi(x)) <= K) \226\134\146 integrable(p, (x : A) => h(x) * (phi(x) * indicator_fn(A, x)))
+      #|  ((x : A) => abs((h : (A) -> Real)(x)) * indicator_fn((A : (A) -> Bool), x)) == ((x : A) => ((y : A) => abs(h(y)))(x) * indicator_fn(A, x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 h : (A) -> Real, \226\136\128 A : (A) -> Bool, integrable(p, h) && IN(A, prob_events(p)) \226\134\146 integrable(p, (x : A) => abs(h(x)) * indicator_fn(A, x))
+      #|  (K : Real) / real_of_num(2) / pow(real_of_num(2), (n : Num)) == K / pow(real_of_num(2), SUC(n))
+      #|  (phi : (A) -> Real)((x : A)) < real_of_num(0)
+      #|  !((phi : (A) -> Real)((x : A)) < real_of_num(0))
+      #|  (phi : (A) -> Real)((x : A)) >= real_of_num(0)
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  IN((x : A), (A : (A) -> Bool))
+      #|  (x : A)
+      #|  ((x : A) => abs((h : (A) -> Real)(x)) * indicator_fn((A : (A) -> Bool), x)) == ((x : A) => abs(h(x)) * indicator_fn((Apos : (A) -> Bool), x) + abs(h(x)) * indicator_fn((Aneg : (A) -> Bool), x))
+      #|  expectation((p : Prob_space[A]), (x : A) => abs((h : (A) -> Real)(x)) * indicator_fn((Apos : (A) -> Bool), x)) + expectation(p, (x : A) => abs(h(x)) * indicator_fn((Aneg : (A) -> Bool), x)) == expectation(p, (x : A) => abs(h(x)) * indicator_fn((A : (A) -> Bool), x))
+      #|  (K : Real) / real_of_num(2) / pow(real_of_num(2), (n : Num)) * expectation((p : Prob_space[A]), (x : A) => abs((h : (A) -> Real)(x)) * indicator_fn((Apos : (A) -> Bool), x)) + K / real_of_num(2) / pow(real_of_num(2), n) * expectation(p, (x : A) => abs(h(x)) * indicator_fn((Aneg : (A) -> Bool), x))
+      #|  (Aneg : (A) -> Bool)
+      #|  (x : A) => (phi : (A) -> Real)(x) + (K : Real) / real_of_num(2)
+      #|  (K : Real) / real_of_num(2)
+      #|  abs(expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * (((phi : (A) -> Real)(x) + (K : Real) / real_of_num(2)) * indicator_fn((Aneg : (A) -> Bool), x)))) <= K / real_of_num(2) / pow(real_of_num(2), (n : Num)) * expectation(p, (x : A) => abs(h(x)) * indicator_fn(Aneg, x))
+      #|  (Apos : (A) -> Bool)
+      #|  (x : A) => (phi : (A) -> Real)(x) - (K : Real) / real_of_num(2)
+      #|  (K : Real) / real_of_num(2)
+      #|  abs(expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * (((phi : (A) -> Real)(x) - (K : Real) / real_of_num(2)) * indicator_fn((Apos : (A) -> Bool), x)))) <= K / real_of_num(2) / pow(real_of_num(2), (n : Num)) * expectation(p, (x : A) => abs(h(x)) * indicator_fn(Apos, x))
+      #|  abs(expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * (((phi : (A) -> Real)(x) - (K : Real) / real_of_num(2)) * indicator_fn((Apos : (A) -> Bool), x)))) + abs(expectation(p, (x : A) => h(x) * ((phi(x) + K / real_of_num(2)) * indicator_fn((Aneg : (A) -> Bool), x))))
+      #|  (x : A) => (h : (A) -> Real)(x) * indicator_fn((Aneg : (A) -> Bool), x)
+      #|  -((K : Real) / real_of_num(2))
+      #|  (p : Prob_space[A])
+      #|  (x : A) => -((K : Real) / real_of_num(2)) * ((h : (A) -> Real)(x) * indicator_fn((Aneg : (A) -> Bool), x))
+      #|  (x : A) => (h : (A) -> Real)(x) * (((phi : (A) -> Real)(x) + (K : Real) / real_of_num(2)) * indicator_fn((Aneg : (A) -> Bool), x))
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => (h : (A) -> Real)(x) * ((phi : (A) -> Real)(x) * indicator_fn((Aneg : (A) -> Bool), x))) == ((x : A) => h(x) * ((phi(x) + (K : Real) / real_of_num(2)) * indicator_fn(Aneg, x)) + -(K / real_of_num(2)) * (h(x) * indicator_fn(Aneg, x)))
+      #|  expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * ((phi : (A) -> Real)(x) * indicator_fn((Aneg : (A) -> Bool), x))) == expectation(p, (x : A) => h(x) * ((phi(x) + (K : Real) / real_of_num(2)) * indicator_fn(Aneg, x)))
+      #|  (x : A) => (h : (A) -> Real)(x) * indicator_fn((Apos : (A) -> Bool), x)
+      #|  (K : Real) / real_of_num(2)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => (K : Real) / real_of_num(2) * ((h : (A) -> Real)(x) * indicator_fn((Apos : (A) -> Bool), x))
+      #|  (x : A) => (h : (A) -> Real)(x) * (((phi : (A) -> Real)(x) - (K : Real) / real_of_num(2)) * indicator_fn((Apos : (A) -> Bool), x))
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => (h : (A) -> Real)(x) * ((phi : (A) -> Real)(x) * indicator_fn((Apos : (A) -> Bool), x))) == ((x : A) => h(x) * ((phi(x) - (K : Real) / real_of_num(2)) * indicator_fn(Apos, x)) + K / real_of_num(2) * (h(x) * indicator_fn(Apos, x)))
+      #|  expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * ((phi : (A) -> Real)(x) * indicator_fn((Apos : (A) -> Bool), x))) == expectation(p, (x : A) => h(x) * ((phi(x) - (K : Real) / real_of_num(2)) * indicator_fn(Apos, x)))
+      #|  (phi : (A) -> Real)((x : A)) < real_of_num(0)
+      #|  !((phi : (A) -> Real)((x : A)) < real_of_num(0))
+      #|  (phi : (A) -> Real)((x : A)) >= real_of_num(0)
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  IN((x : A), (A : (A) -> Bool))
+      #|  (x : A)
+      #|  ((x : A) => (h : (A) -> Real)(x) * ((phi : (A) -> Real)(x) * indicator_fn((A : (A) -> Bool), x))) == ((x : A) => h(x) * (phi(x) * indicator_fn((Apos : (A) -> Bool), x)) + h(x) * (phi(x) * indicator_fn((Aneg : (A) -> Bool), x)))
+      #|  expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * ((phi : (A) -> Real)(x) * indicator_fn((A : (A) -> Bool), x))) == expectation(p, (x : A) => h(x) * (phi(x) * indicator_fn((Apos : (A) -> Bool), x))) + expectation(p, (x : A) => h(x) * (phi(x) * indicator_fn((Aneg : (A) -> Bool), x)))
+      #|  (K : Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  integrable((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * ((phi : (A) -> Real)(x) * indicator_fn((Aneg : (A) -> Bool), x)))
+      #|  (K : Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  integrable((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * ((phi : (A) -> Real)(x) * indicator_fn((Apos : (A) -> Bool), x)))
+      #|  IN((x : A), (Aneg : (A) -> Bool))
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) && IN(x, (A : (A) -> Bool)) \226\134\146 abs((phi : (A) -> Real)(x)) <= (K : Real)
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) && IN(x, (Aneg : (A) -> Bool)) \226\134\146 abs((phi : (A) -> Real)(x)) <= (K : Real)
+      #|  IN((x : A), (Apos : (A) -> Bool))
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) && IN(x, (A : (A) -> Bool)) \226\134\146 abs((phi : (A) -> Real)(x)) <= (K : Real)
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) && IN(x, (Apos : (A) -> Bool)) \226\134\146 abs((phi : (A) -> Real)(x)) <= (K : Real)
+      #|  integrable((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * indicator_fn((Aneg : (A) -> Bool), x))
+      #|  ((x : A) => (h : (A) -> Real)(x) * indicator_fn((Apos : (A) -> Bool), x)) == ((x : A) => h(x) * indicator_fn(Apos, x))
+      #|  integrable((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * indicator_fn((Apos : (A) -> Bool), x))
+      #|  expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * ((phi : (A) -> Real)(x) * indicator_fn((A : (A) -> Bool), x))) == expectation(p, (x : A) => h(x) * ((phi(x) - (K : Real) / real_of_num(2)) * indicator_fn((Apos : (A) -> Bool), x))) + expectation(p, (x : A) => h(x) * ((phi(x) + K / real_of_num(2)) * indicator_fn((Aneg : (A) -> Bool), x)))
+      #|  (Aneg : (A) -> Bool)
+      #|  \226\136\128 B : (A) -> Bool, IN(B, (G : ((A) -> Bool) -> Bool)) \226\134\146 expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * indicator_fn(B, x)) == real_of_num(0)
+      #|  expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * indicator_fn((Aneg : (A) -> Bool), x)) == real_of_num(0)
+      #|  (Apos : (A) -> Bool)
+      #|  \226\136\128 B : (A) -> Bool, IN(B, (G : ((A) -> Bool) -> Bool)) \226\134\146 expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * indicator_fn(B, x)) == real_of_num(0)
+      #|  expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * indicator_fn((Apos : (A) -> Bool), x)) == real_of_num(0)
+      #|  integrable((p : Prob_space[A]), (x : A) => abs((h : (A) -> Real)(x)) * indicator_fn((Aneg : (A) -> Bool), x))
+      #|  integrable((p : Prob_space[A]), (x : A) => abs((h : (A) -> Real)(x)) * indicator_fn((Apos : (A) -> Bool), x))
+      #|  integrable((p : Prob_space[A]), (x : A) => abs((h : (A) -> Real)(x)) * indicator_fn((A : (A) -> Bool), x))
+      #|  (K : Real) / real_of_num(2)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  integrable((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * (((phi : (A) -> Real)(x) + (K : Real) / real_of_num(2)) * indicator_fn((Aneg : (A) -> Bool), x)))
+      #|  (K : Real) / real_of_num(2)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  integrable((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * (((phi : (A) -> Real)(x) - (K : Real) / real_of_num(2)) * indicator_fn((Apos : (A) -> Bool), x)))
+      #|  (K : Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  integrable((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * ((phi : (A) -> Real)(x) * indicator_fn((A : (A) -> Bool), x)))
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (x : A) => (phi : (A) -> Real)(x) + (K : Real) / real_of_num(2))
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (x : A) => (phi : (A) -> Real)(x) - (K : Real) / real_of_num(2))
+      #|  abs((phi : (A) -> Real)((x : A))) <= (K : Real)
+      #|  (phi : (A) -> Real)((x : A)) < real_of_num(0)
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) && IN(x, (A : (A) -> Bool)) \226\134\146 abs((phi : (A) -> Real)(x)) <= (K : Real)
+      #|  abs((phi : (A) -> Real)((x : A))) <= (K : Real)
+      #|  IN((x : A), (Aneg : (A) -> Bool))
+      #|  IN((x : A), (A : (A) -> Bool)) && (phi : (A) -> Real)(x) < real_of_num(0)
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) && IN(x, (Aneg : (A) -> Bool)) \226\134\146 abs((phi : (A) -> Real)(x) + (K : Real) / real_of_num(2)) <= K / real_of_num(2)
+      #|  abs((phi : (A) -> Real)((x : A))) <= (K : Real)
+      #|  (phi : (A) -> Real)((x : A)) >= real_of_num(0)
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) && IN(x, (A : (A) -> Bool)) \226\134\146 abs((phi : (A) -> Real)(x)) <= (K : Real)
+      #|  abs((phi : (A) -> Real)((x : A))) <= (K : Real)
+      #|  IN((x : A), (Apos : (A) -> Bool))
+      #|  IN((x : A), (A : (A) -> Bool)) && (phi : (A) -> Real)(x) >= real_of_num(0)
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) && IN(x, (Apos : (A) -> Bool)) \226\134\146 abs((phi : (A) -> Real)(x) - (K : Real) / real_of_num(2)) <= K / real_of_num(2)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  IN((Aneg : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  IN((Apos : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  SUBSET((A : (A) -> Bool), prob_carrier((p : Prob_space[A])))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  IN((A : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  IN((Aneg : (A) -> Bool), (G : ((A) -> Bool) -> Bool))
+      #|  IN((Apos : (A) -> Bool), (G : ((A) -> Bool) -> Bool))
+      #|  (Aneg : (A) -> Bool) == INTER((A : (A) -> Bool), {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (phi : (A) -> Real)(x) < real_of_num(0)})
+      #|  (Apos : (A) -> Bool) == INTER((A : (A) -> Bool), {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (phi : (A) -> Real)(x) >= real_of_num(0)})
+      #|  (x : A)
+      #|  (K : Real) * abs((h : (A) -> Real)((x : A))) == abs(h(x)) * K
+      #|  abs(indicator_fn((A : (A) -> Bool), (x : A))) == indicator_fn(A, x)
+      #|  (x : A)
+      #|  ((x : A) => (K : Real) * (abs((h : (A) -> Real)(x)) * indicator_fn((A : (A) -> Bool), x))) == ((x : A) => K * ((y : A) => abs(h(y)) * indicator_fn(A, y))(x))
+      #|  (K : Real) * expectation((p : Prob_space[A]), (x : A) => abs((h : (A) -> Real)(x)) * indicator_fn((A : (A) -> Bool), x)) == expectation(p, (x : A) => K * (abs(h(x)) * indicator_fn(A, x)))
+      #|  expectation((p : Prob_space[A]), (x : A) => abs((h : (A) -> Real)(x) * ((phi : (A) -> Real)(x) * indicator_fn((A : (A) -> Bool), x))))
+      #|  integrable((p : Prob_space[A]), (x : A) => abs((h : (A) -> Real)(x)) * indicator_fn((A : (A) -> Bool), x))
+      #|  (K : Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  integrable((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * ((phi : (A) -> Real)(x) * indicator_fn((A : (A) -> Bool), x)))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  IN((A : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 h : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, h) && (\226\136\128 B : (A) -> Bool, IN(B, G) \226\134\146 expectation(p, (x : A) => h(x) * indicator_fn(B, x)) == real_of_num(0)) \226\134\146 (\226\136\128 n : Num, \226\136\128 K : Real, \226\136\128 phi : (A) -> Real, \226\136\128 A : (A) -> Bool, measurable_wrt(p, G, phi) && IN(A, G) && real_of_num(0) <= K && (\226\136\128 x : A, IN(x, prob_carrier(p)) && IN(x, A) \226\134\146 abs(phi(x)) <= K) \226\134\146 abs(expectation(p, (x : A) => h(x) * (phi(x) * indicator_fn(A, x)))) <= K / pow(real_of_num(2), n) * expectation(p, (x : A) => abs(h(x)) * indicator_fn(A, x)))
+      #|  abs((x : Real)) * pow(real_of_num(2), (N : Num)) <= (K : Real) * (C : Real)
+      #|  inv(abs((x : Real))) * abs(x) == real_of_num(1)
+      #|  (a : Real) * ((b : Real) * (c : Real)) * (d : Real) == a * b * (c * d)
+      #|  (K : Real) * ((C : Real) * inv(abs((x : Real)))) * abs(x) == K * C
+      #|  (K : Real) * ((C : Real) * inv(abs((x : Real)))) * abs(x) < pow(real_of_num(2), (N : Num)) * abs(x)
+      #|  (a : Real) * (c : Real) * (b : Real) == a * b * c
+      #|  (K : Real) / pow(real_of_num(2), (N : Num)) * (C : Real) * pow(real_of_num(2), N) == K * C
+      #|  abs((x : Real)) * pow(real_of_num(2), (N : Num)) <= (K : Real) / pow(real_of_num(2), N) * (C : Real) * pow(real_of_num(2), N)
+      #|  real_of_num(0) < pow(real_of_num(2), (N : Num))
+      #|  (K : Real) / pow(real_of_num(2), (N : Num)) * pow(real_of_num(2), N) == K
+      #|  !(pow(real_of_num(2), (N : Num)) == real_of_num(0))
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (K : Real) * ((C : Real) * inv(abs((x : Real))))
       #|  0
-      #|  &0 < K * C
-      #|  &0 < abs(x:real)
-      #|  abs(x:real) = &0
-      #|  (forall n. abs x <= K / &2 pow n * C) /\\ &0 <= C ==> x = &0
-      #|  x:A
-      #|  expectation p (\\x:A. abs(h x) * indicator_fn (prob_carrier p) x) =\n       expectation p (\\x. abs(h x))
-      #|  x:A
-      #|  expectation p (\\x:A. h x * phi x * indicator_fn (prob_carrier p) x) =\n       expectation p (\\x. h x * phi x)
-      #|  prob_carrier(p:A prob_space) IN G
-      #|  prob_carrier(p:A prob_space)
-      #|  phi:A->real
-      #|  K:real
-      #|  n:num
-      #|  h:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  C:real
-      #|  expectation p (\\x:A. abs((h:A->real) x))
-      #|  x:real
-      #|  expectation p (\\x:A. (h:A->real) x * (phi:A->real) x)
-      #|  forall p:A prob_space G (h:A->real) (phi:A->real) K.\n    sub_sigma_algebra p G /\\ integrable p h /\\\n    (forall B. B IN G ==> expectation p (\\x. h x * indicator_fn B x) = &0) /\\\n    measurable_wrt p G phi /\\ &0 <= K /\\\n    (forall x. x IN prob_carrier p ==> abs(phi x) <= K)\n    ==> expectation p (\\x. h x * phi x) = &0
-      #|  \\x:A. ((X:A->real) x - cond_exp p G X x) * cond_exp p G X x
-      #|  &2
-      #|  p:A prob_space
-      #|  \\x:A. &2 * ((X:A->real) x - cond_exp p G X x) * cond_exp p G X x
-      #|  \\x:A. ((X:A->real) x - cond_exp p G X x) pow 2
-      #|  p:A prob_space
-      #|  G:(A->bool)->bool
-      #|  K:real
-      #|  integrable p (\\x:A. ((X:A->real) x - cond_exp p G X x) *\n      cond_exp p G X x)
-      #|  &0 <= (x + c) * (x + c) /\\ &0 <= (x - c) * (x - c)\n        ==> (x - c) * (x - c) <= &2 * (x * x + c * c)
-      #|  &0 <= a /\\ a <= b /\\ &0 <= b ==> abs a <= abs b
-      #|  w:A
-      #|  G:(A->bool)->bool
-      #|  \\x:A. &2 * ((X:A->real) x pow 2 +\n     cond_exp p G X x pow 2)
-      #|  integrable p (\\x:A. ((X:A->real) x - cond_exp p G X x) pow 2)
-      #|  w:A
-      #|  (\\x:A. (X:A->real) x pow 2 - cond_exp p G X x pow 2) =\n     (\\x. (X x - cond_exp p G X x) pow 2 +\n          &2 * (X x - cond_exp p G X x) * cond_exp p G X x)
-      #|  \\x:A. cond_exp p G (X:A->real) x pow 2
-      #|  \\x:A. (X:A->real) x pow 2
-      #|  p:A prob_space
-      #|  integrable p (\\x:A. cond_exp p G (X:A->real) x pow 2)
-      #|  &0 <= a - b ==> b <= a
-      #|  B:A->bool
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  \\x:A. cond_exp p G (X:A->real) x * indicator_fn (B:A->bool) x
-      #|  \\x:A. (X:A->real) x * indicator_fn (B:A->bool) x
-      #|  p:A prob_space
-      #|  (\\x:A. ((X:A->real) x - cond_exp p G X x) * indicator_fn B x) =\n      (\\x. X x * indicator_fn B x - cond_exp p G X x * indicator_fn B x)
-      #|  B IN prob_events (p:A prob_space)
-      #|  B:A->bool
-      #|  K:real
-      #|  G:(A->bool)->bool
-      #|  expectation p\n      (\\x:A. ((X:A->real) x - cond_exp p G X x) * cond_exp p G X x) = &0
-      #|  x <= M ==> x <= max M (&0)
-      #|  max M (&0)
-      #|  M:real
-      #|  \\x:A. abs(cond_exp p G (X:A->real) x)
-      #|  p:A prob_space
-      #|  K:real
-      #|  ?K. &0 <= K /\\ forall z:A. z IN prob_carrier p\n         ==> abs(cond_exp p G (X:A->real) z) <= K
-      #|  measurable_wrt p G (cond_exp p G (X:A->real))
-      #|  integrable p (cond_exp p G (X:A->real))
-      #|  simple_rv p (cond_exp p G (X:A->real))
-      #|  forall p:A prob_space G (X:A->real).\n     sub_sigma_algebra p G /\\ FINITE G /\\\n     integrable p X /\\ integrable p (\\x. X x pow 2)\n     ==> expectation p (\\x. cond_exp p G X x pow 2) <=\n         expectation p (\\x. X x pow 2)
-      #|  cond_variance (p:A prob_space) (G:(A->bool)->bool) (X:A->real) =\n   cond_exp p G (\\x. (X x - cond_exp p G X x) pow 2)
-      #|  cond_exp p G (X:A->real)
-      #|  p:A prob_space
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  \\x:A. ((X:A->real) x - cond_exp p G X x) * cond_exp p G X x
-      #|  &2
-      #|  p:A prob_space
-      #|  \\x:A. &2 * ((X:A->real) x - cond_exp p G X x) * cond_exp p G X x
-      #|  \\x:A. (X:A->real) x pow 2
-      #|  p:A prob_space
-      #|  \\x:A. cond_exp p G (X:A->real) x pow 2
-      #|  \\x:A. (X:A->real) x pow 2 -\n       &2 * (X x - cond_exp p G X x) * cond_exp p G X x
-      #|  p:A prob_space
-      #|  w:A
-      #|  (\\x:A. ((X:A->real) x - cond_exp p G X x) pow 2) =\n      (\\x. X x pow 2 - &2 * (X x - cond_exp p G X x) * cond_exp p G X x -\n           cond_exp p G X x pow 2)
-      #|  G:(A->bool)->bool
-      #|  K:real
-      #|  integrable p (\\x:A. ((X:A->real) x - cond_exp p G X x) *\n       cond_exp p G X x)
-      #|  B:A->bool
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  \\x:A. cond_exp p G (X:A->real) x * indicator_fn (B:A->bool) x
-      #|  \\x:A. (X:A->real) x * indicator_fn (B:A->bool) x
-      #|  p:A prob_space
-      #|  (\\x:A. ((X:A->real) x - cond_exp p G X x) * indicator_fn B x) =\n       (\\x. X x * indicator_fn B x - cond_exp p G X x * indicator_fn B x)
-      #|  B IN prob_events (p:A prob_space)
-      #|  B:A->bool
-      #|  K:real
-      #|  G:(A->bool)->bool
-      #|  expectation p\n       (\\x:A. ((X:A->real) x - cond_exp p G X x) * cond_exp p G X x) = &0
-      #|  x <= M ==> x <= max M (&0)
-      #|  max M (&0)
-      #|  M:real
-      #|  \\x:A. abs(cond_exp p G (X:A->real) x)
-      #|  p:A prob_space
-      #|  K:real
-      #|  ?K. &0 <= K /\\ forall z:A. z IN prob_carrier p\n          ==> abs(cond_exp p G (X:A->real) z) <= K
-      #|  measurable_wrt p G (cond_exp p G (X:A->real))
-      #|  X:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  expectation p (\\x:A. ((X:A->real) x - cond_exp p G X x) pow 2) =\n     expectation p (\\x. X x pow 2) -\n     expectation p (\\x. cond_exp p G X x pow 2)
-      #|  expectation p (cond_variance p G (X:A->real)) =\n     expectation p (\\x. (X x - cond_exp p G X x) pow 2)
-      #|  &0 <= (x + c) * (x + c) /\\ &0 <= (x - c) * (x - c)\n        ==> (x - c) * (x - c) <= &2 * (x * x + c * c)
-      #|  &0 <= a /\\ a <= b /\\ &0 <= b ==> abs a <= abs b
-      #|  w:A
-      #|  G:(A->bool)->bool
-      #|  measurable_wrt p G (cond_exp p G (X:A->real))
-      #|  \\x:A. &2 * ((X:A->real) x pow 2 +\n     cond_exp p G X x pow 2)
-      #|  integrable p (\\x:A. ((X:A->real) x - cond_exp p G X x) pow 2)
-      #|  expectation p (cond_exp p G (X:A->real)) = expectation p X
-      #|  integrable p (\\x:A. cond_exp p G (X:A->real) x pow 2)
-      #|  integrable p (cond_exp p G (X:A->real))
-      #|  simple_rv p (cond_exp p G (X:A->real))
-      #|  forall p:A prob_space G (X:A->real).\n     sub_sigma_algebra p G /\\ FINITE G /\\\n     integrable p X /\\ integrable p (\\x. X x pow 2)\n     ==> variance p X =\n         expectation p (cond_variance p G X) +\n         variance p (cond_exp p G X)
-      #|  forall p:A prob_space FF.\n     filtration p FF ==> filtration p (\\n. FF(SUC n))
-      #|  v:real
-      #|  measurable_wrt (p:A prob_space) G (f:A->real)
-      #|  {x:A | x IN prob_carrier p /\\ max (f x) c <= v} =\n     {x | x IN prob_carrier p /\\ f x <= v}
-      #|  {x:A | x IN prob_carrier p /\\ max (f x) c <= v} = {}
-      #|  v < c
-      #|  v:real
-      #|  forall p:A prob_space G f c.\n     sub_sigma_algebra p G /\\ measurable_wrt p G f\n     ==> measurable_wrt p G (\\x. max (f x) c)
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\ inv(f x) <= v} =\n      {x | x IN prob_carrier p /\\ f x >= inv v}
-      #|  &1
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\ inv(f x) <= v} =\n      prob_carrier p
-      #|  &1 <= v
-      #|  &0 < v
-      #|  &1
-      #|  &0 < inv((f:A->real) x)
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\ inv(f x) <= v} = {}
-      #|  v <= &0
-      #|  v:real
-      #|  forall p:A prob_space G f.\n     sub_sigma_algebra p G /\\ measurable_wrt p G f /\\\n     (forall x. x IN prob_carrier p ==> &1 <= f x)\n     ==> measurable_wrt p G (\\x. inv(f x))
-      #|  expectation (p:A prob_space) (\\x. (f:A->real) x pow 2 + &1) =\n      expectation p (\\x. f x pow 2) + expectation p (\\x:A. &1)
-      #|  expectation (p:A prob_space) (\\x. (f:A->real) x pow 2 + &1) =\n     expectation p (\\x. f x pow 2) + &1
-      #|  expectation (p:A prob_space) (\\x. inv(&2) * ((f:A->real) x pow 2 + &1)) =\n     inv(&2) * expectation p (\\x. f x pow 2 + &1)
-      #|  (\\x:A. ((f:A->real) x pow 2 + &1) / &2) =\n     (\\x. inv(&2) * (f x pow 2 + &1))
-      #|  abs((f:A->real) x) - &1
-      #|  x:A
-      #|  (\\x:A. ((f:A->real) x pow 2 + &1) / &2) =\n      (\\x. inv(&2) * (f x pow 2 + &1))
-      #|  expectation (p:A prob_space) (\\x:A. ((f:A->real) x pow 2 + &1) / &2)
-      #|  forall p:A prob_space f.\n     integrable p f /\\ integrable p (\\x. f x pow 2)\n     ==> expectation p (\\x. abs(f x)) <=\n         (expectation p (\\x. f x pow 2) + &1) / &2
-      #|  {x:A | x IN prob_carrier p /\\ ~(f x = &0)} SUBSET n
-      #|  (x:A) IN n
-      #|  (f:A->real) x = &0
-      #|  x:A
-      #|  expectation (p:A prob_space) (f:A->real) =\n     expectation p (\\x. f x * indicator_fn (n:A->bool) x)
-      #|  forall p:A prob_space f.\n    integrable p f /\\ almost_surely p {x | f x = &0}\n    ==> expectation p f = &0
-      #|  G:(A->bool)->bool
-      #|  K:real
-      #|  G:(A->bool)->bool
-      #|  K:real
-      #|  expectation (p:A prob_space) (\\x. (h:A->real) x * (phi:A->real) x) =\n      expectation p (\\x. h x * (phi_K:A->real) x +\n                         (h x * phi x - h x * phi_K x))
-      #|  expectation (p:A prob_space) (\\x. (h:A->real) x * (phi:A->real) x) =\n      expectation p (\\x. h x * (phi_K:A->real) x) +\n      expectation p (\\x. h x * phi x - h x * phi_K x)
-      #|  max ((phi:A->real) x) (--K) = phi x
-      #|  min ((phi:A->real) x) K = phi x
-      #|  abs((phi:A->real) x) <= K
-      #|  x:A
-      #|  {x:A | abs((phi:A->real) x) <= K}
-      #|  G:(A->bool)->bool
-      #|  K:real
-      #|  expectation (p:A prob_space)\n       (\\x. (h:A->real) x * (phi:A->real) x - h x * (phi_K:A->real) x) = &0
-      #|  K:real
-      #|  G:(A->bool)->bool
-      #|  expectation (p:A prob_space) (\\x. (h:A->real) x * (phi_K:A->real) x) = &0
-      #|  a <= K /\\ --K <= K ==> max a (--K) <= K
-      #|  --K <= max (min (phi:real) K) (--K) /\\\n      max (min phi K) (--K) <= K\n      ==> abs(max (min phi K) (--K)) <= K
-      #|  forall x:A. x IN prob_carrier p ==> abs((phi_K:A->real) x) <= K
-      #|  (\\x:A. min ((phi:A->real) x) K) = (\\x. --(max (--phi x) (--K)))
-      #|  measurable_wrt (p:A prob_space) G (phi_K:A->real)
-      #|  phi_K = \\x:A. max (min ((phi:A->real) x) K) (--K)
-      #|  forall p:A prob_space G (h:A->real) (phi:A->real) K.\n    sub_sigma_algebra p G /\\ integrable p h /\\\n    (forall B. B IN G ==> expectation p (\\x. h x * indicator_fn B x) = &0) /\\\n    measurable_wrt p G phi /\\\n    integrable p (\\x. h x * phi x) /\\\n    &0 <= K /\\ almost_surely p {x | abs(phi x) <= K}\n    ==> expectation p (\\x. h x * phi x) = &0
-      #|  {x:A | (f:A->real) x <= (g:A->real) x}
-      #|  expectation (p:A prob_space) (\\x. max (--(h:A->real) x) (&0)) = &0
-      #|  expectation (p:A prob_space) (h:A->real) =\n     expectation p (\\x. max (h x) (&0) - max (--h x) (&0))
-      #|  expectation (p:A prob_space) (h:A->real) =\n     expectation p (\\x. max (h x) (&0)) -\n     expectation p (\\x. max (--h x) (&0))
-      #|  integrable (p:A prob_space) (\\x. max ((h:A->real) x) (&0))
-      #|  integrable (p:A prob_space) (\\x. max (--(h:A->real) x) (&0))
-      #|  h = \\x:A. (g:A->real) x - (f:A->real) x
-      #|  integrable (p:A prob_space) (\\x. (g:A->real) x - (f:A->real) x)
-      #|  f:A->real
-      #|  g:A->real
-      #|  p:A prob_space
-      #|  &0 <= expectation (p:A prob_space) (\\x. (g:A->real) x - (f:A->real) x)
-      #|  forall p:A prob_space f g.\n    integrable p f /\\ integrable p g /\\\n    almost_surely p {x | f x <= g x}\n    ==> expectation p f <= expectation p g
-      #|  x:A
-      #|  {x:A | &0 <= gen_cond_exp p ((FF:num->(A->bool)->bool) k)\n    (\\y. indicator_fn (B (SUC k)) y) x} INTER\n   ({x | gen_cond_exp p (FF k) (\\y. indicator_fn (B (SUC k)) y) x <=\n         gen_cond_exp p (FF k) (\\w:A. &1) x} INTER\n    {x | gen_cond_exp p (FF k) (\\w. &1) x = &1})
-      #|  integrable p (\\y:A. indicator_fn ((B:num->A->bool) (SUC k)) y)
-      #|  sub_sigma_algebra p ((FF:num->(A->bool)->bool) k)
-      #|  forall p FF (B:num->A->bool).\n    filtration p FF /\\ (forall n. B n IN prob_events p) /\\\n    (forall n. B n SUBSET prob_carrier p) /\\ (forall n. B n IN FF n)\n    ==> forall k. almost_surely p\n      {x | &0 <= gen_cond_exp p (FF k) (\\y. indicator_fn (B (SUC k)) y) x /\\\n           gen_cond_exp p (FF k) (\\y. indicator_fn (B (SUC k)) y) x <= &1}
-      #|  (\\x:A. --(max (--(f:A->real) x) (--c))) =\n    (\\x. &0 - max (&0 - f x) (--c))
-      #|  (\\x:A. min ((f:A->real) x) c) =\n    (\\x. --(max (--f x) (--c)))
-      #|  forall p G (f:A->real) c.\n    sub_sigma_algebra p G /\\ measurable_wrt p G f\n    ==> measurable_wrt p G (\\x. min (f x) c)
-      #|  A:A->bool
-      #|  f:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  expectation (p:A prob_space) (\\x. (f:A->real) x * indicator_fn A x -\n      gen_cond_exp p G f x * indicator_fn A x) =\n    expectation p (\\x. f x * indicator_fn A x) -\n    expectation p (\\x. gen_cond_exp p G f x * indicator_fn A x)
-      #|  (\\x:A. ((f:A->real) x - gen_cond_exp p G f x) * indicator_fn A x) =\n    (\\x. f x * indicator_fn A x -\n         gen_cond_exp p G f x * indicator_fn A x)
-      #|  integrable (p:A prob_space) (gen_cond_exp p G (f:A->real))
-      #|  (A:A->bool) IN prob_events p
-      #|  forall p:A prob_space G f.\n    sub_sigma_algebra p G /\\ integrable p f\n    ==> forall A. A IN G ==>\n      expectation p (\\x. (f x - gen_cond_exp p G f x) *\n        indicator_fn A x) = &0
-      #|  expectation (p:A prob_space)\n      (\\x. sum (0..n)\n        (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n              gen_cond_exp p (FF k) (indicator_fn (B (SUC k))) x) /\n             max (&1 + sum (0..k)\n               (\\j. gen_cond_exp p (FF j) (indicator_fn (B (SUC j))) x))\n             (&1)) * indicator_fn a x +\n       (indicator_fn (B (SUC (SUC n))) x -\n        gen_cond_exp p (FF (SUC n)) (indicator_fn (B (SUC (SUC n)))) x) /\n       max (&1 + sum (0..n)\n         (\\j. gen_cond_exp p (FF j) (indicator_fn (B (SUC j))) x) +\n         gen_cond_exp p (FF (SUC n)) (indicator_fn (B (SUC (SUC n)))) x)\n       (&1) * indicator_fn a x) =\n     expectation p\n      (\\x. sum (0..n)\n        (\\k. (indicator_fn (B (SUC k)) x -\n              gen_cond_exp p (FF k) (indicator_fn (B (SUC k))) x) /\n             max (&1 + sum (0..k)\n               (\\j. gen_cond_exp p (FF j) (indicator_fn (B (SUC j))) x))\n             (&1)) * indicator_fn a x) +\n     expectation p\n      (\\x. (indicator_fn (B (SUC (SUC n))) x -\n        gen_cond_exp p (FF (SUC n)) (indicator_fn (B (SUC (SUC n)))) x) /\n       max (&1 + sum (0..n)\n         (\\j. gen_cond_exp p (FF j) (indicator_fn (B (SUC j))) x) +\n         gen_cond_exp p (FF (SUC n)) (indicator_fn (B (SUC (SUC n)))) x)\n       (&1) * indicator_fn a x)
-      #|  x:A
-      #|  inv(&1)
-      #|  x:A
-      #|  x:A
-      #|  (FF:num->(A->bool)->bool) j
-      #|  j:num
-      #|  (FF:num->(A->bool)->bool) (SUC n)
-      #|  &1
-      #|  &1
-      #|  integrable p (\\x:A.\n       (indicator_fn ((B:num->A->bool) (SUC (SUC n))) x -\n        gen_cond_exp p (FF (SUC n)) (indicator_fn (B (SUC (SUC n)))) x) /\n       max (&1 + sum (0..n)\n         (\\j. gen_cond_exp p (FF j) (indicator_fn (B (SUC j))) x) +\n         gen_cond_exp p (FF (SUC n)) (indicator_fn (B (SUC (SUC n)))) x)\n       (&1) * indicator_fn a x)
-      #|  x:A
-      #|  inv(&1)
-      #|  x:A
-      #|  x:A
-      #|  (FF:num->(A->bool)->bool) j
-      #|  j:num
-      #|  (FF:num->(A->bool)->bool) (SUC n)
-      #|  &1
-      #|  k:num
-      #|  &1
-      #|  integrable p (\\x:A.\n       sum (0..n)\n         (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n               gen_cond_exp p (FF k) (indicator_fn (B (SUC k))) x) /\n              max (&1 + sum (0..k)\n                (\\j. gen_cond_exp p (FF j) (indicator_fn (B (SUC j))) x))\n              (&1)) * indicator_fn a x)
-      #|  inv(&1)
-      #|  &1 * &1
-      #|  x:A
-      #|  x:A
-      #|  (FF:num->(A->bool)->bool) j
-      #|  j:num
-      #|  B':A->bool
-      #|  indicator_fn ((B:num->A->bool) (SUC (SUC n)))
-      #|  (FF:num->(A->bool)->bool) (SUC n)
-      #|  p:A prob_space
-      #|  B':A->bool
-      #|  &1
-      #|  \\x:A. inv(max (&1 + sum (0..n)\n         (\\j. gen_cond_exp p ((FF:num->(A->bool)->bool) j)\n           (indicator_fn ((B:num->A->bool) (SUC j))) x) +\n         gen_cond_exp p (FF (SUC n)) (indicator_fn (B (SUC (SUC n)))) x)\n        (&1)) * indicator_fn (a:A->bool) x
-      #|  \\x:A. indicator_fn ((B:num->A->bool) (SUC (SUC n))) x -\n         gen_cond_exp p ((FF:num->(A->bool)->bool) (SUC n))\n           (indicator_fn (B (SUC (SUC n)))) x
-      #|  (FF:num->(A->bool)->bool) (SUC n)
-      #|  p:A prob_space
-      #|  expectation p (\\x:A.\n       (indicator_fn ((B:num->A->bool) (SUC (SUC n))) x -\n        gen_cond_exp p (FF (SUC n)) (indicator_fn (B (SUC (SUC n)))) x) /\n       max (&1 + sum (0..n)\n         (\\j. gen_cond_exp p (FF j) (indicator_fn (B (SUC j))) x) +\n         gen_cond_exp p (FF (SUC n)) (indicator_fn (B (SUC (SUC n)))) x)\n       (&1) * indicator_fn a x) = &0
-      #|  integrable p (\\x:A. indicator_fn ((B:num->A->bool) (SUC (SUC n))) x -\n       gen_cond_exp p (FF (SUC n)) (indicator_fn (B (SUC (SUC n)))) x)
-      #|  forall x:A. (sum (0..n)\n       (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n             gen_cond_exp p (FF k) (indicator_fn (B (SUC k))) x) /\n            max (&1 + sum (0..k)\n              (\\j. gen_cond_exp p (FF j) (indicator_fn (B (SUC j))) x))\n            (&1)) +\n      (indicator_fn (B (SUC (SUC n))) x -\n       gen_cond_exp p (FF (SUC n)) (indicator_fn (B (SUC (SUC n)))) x) /\n      max (&1 + sum (0..n)\n        (\\j. gen_cond_exp p (FF j) (indicator_fn (B (SUC j))) x) +\n        gen_cond_exp p (FF (SUC n)) (indicator_fn (B (SUC (SUC n)))) x)\n      (&1)) * indicator_fn a x =\n     sum (0..n)\n       (\\k. (indicator_fn (B (SUC k)) x -\n             gen_cond_exp p (FF k) (indicator_fn (B (SUC k))) x) /\n            max (&1 + sum (0..k)\n              (\\j. gen_cond_exp p (FF j) (indicator_fn (B (SUC j))) x))\n            (&1)) * indicator_fn a x +\n     (indicator_fn (B (SUC (SUC n))) x -\n       gen_cond_exp p (FF (SUC n)) (indicator_fn (B (SUC (SUC n)))) x) /\n      max (&1 + sum (0..n)\n        (\\j. gen_cond_exp p (FF j) (indicator_fn (B (SUC j))) x) +\n        gen_cond_exp p (FF (SUC n)) (indicator_fn (B (SUC (SUC n)))) x)\n      (&1) * indicator_fn a x
-      #|  (a:A->bool) IN prob_events p
-      #|  a:A->bool
-      #|  n:num
-      #|  inv(&1)
-      #|  x:A
-      #|  x:A
-      #|  (FF:num->(A->bool)->bool) j
-      #|  j:num
-      #|  (FF:num->(A->bool)->bool) (SUC n)
-      #|  &1
-      #|  k:num
-      #|  n:num
-      #|  x:A
-      #|  (FF:num->(A->bool)->bool) j
-      #|  j:num
-      #|  (FF:num->(A->bool)->bool) k
-      #|  (FF:num->(A->bool)->bool) (SUC k)
-      #|  k:num
-      #|  n:num
-      #|  forall k. integrable p\n     (gen_cond_exp p ((FF:num->(A->bool)->bool) k)\n       (indicator_fn ((B:num->A->bool) (SUC k))))
-      #|  forall k. measurable_wrt p ((FF:num->(A->bool)->bool) k)\n     (gen_cond_exp p (FF k) (indicator_fn ((B:num->A->bool) (SUC k))))
-      #|  forall k:num. integrable p (indicator_fn ((B:num->A->bool) (SUC k)))
-      #|  forall k. sub_sigma_algebra p ((FF:num->(A->bool)->bool) k)
-      #|  forall p FF (B:num->A->bool).\n     filtration p FF /\\ (forall n. B n IN prob_events p) /\\\n     (forall n. B n SUBSET prob_carrier p) /\\ (forall n. B n IN FF n)\n     ==> martingale p (\\n. FF(SUC n))\n       (\\n x. sum(0..n)\n         (\\k. (indicator_fn (B (SUC k)) x -\n               gen_cond_exp p (FF k)\n                 (\\y. indicator_fn (B (SUC k)) y) x) /\n              max (&1 + sum(0..k)\n                (\\j. gen_cond_exp p (FF j)\n                  (\\y. indicator_fn (B (SUC j)) y) x)) (&1)))
-      #|  &0 <= x /\\ x <= &1 ==> max (min x (&1)) (&0) = x
-      #|  max (min (v (x:A)) (&1)) (&0) = v x
-      #|  x:A
-      #|  k:num
-      #|  B:num->A->bool
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  {x:A | &0 <= v x /\\ v x <= &1}
-      #|  x:A
-      #|  (FF:num->(A->bool)->bool) k
-      #|  &1
-      #|  x:A
-      #|  (a = b) ==> a ==> b
-      #|  A:A->bool
-      #|  \\y:A. indicator_fn ((B:num->A->bool) (SUC k)) y
-      #|  (FF:num->(A->bool)->bool) k
-      #|  p:A prob_space
-      #|  expectation p (\\x:A. (indicator_fn ((B:num->A->bool) (SUC k)) x - v x) *\n     indicator_fn (A:A->bool) x) = &0
-      #|  x:A
-      #|  (FF:num->(A->bool)->bool) k
-      #|  &1
-      #|  expectation p\n     (\\x:A. (indicator_fn ((B:num->A->bool) (SUC k)) x - v x) *\n       indicator_fn (A:A->bool) x +\n       (v x - max (min (v x) (&1)) (&0)) * indicator_fn A x) =\n    expectation p (\\x. (indicator_fn (B (SUC k)) x - v x) *\n      indicator_fn A x) +\n    expectation p (\\x. (v x - max (min (v x) (&1)) (&0)) *\n      indicator_fn A x)
-      #|  (A:A->bool) IN prob_events p
-      #|  (\\x:A. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n     max (min (v x) (&1)) (&0)) * indicator_fn (A:A->bool) x) =\n    (\\x. (indicator_fn (B (SUC k)) x - v x) * indicator_fn A x +\n         (v x - max (min (v x) (&1)) (&0)) * indicator_fn A x)
-      #|  A:A->bool
-      #|  x:A
-      #|  (FF:num->(A->bool)->bool) k
-      #|  &1
-      #|  K:real
-      #|  (FF:num->(A->bool)->bool) k
-      #|  integrable p (\\y:A. indicator_fn ((B:num->A->bool) (SUC k)) y)
-      #|  sub_sigma_algebra p ((FF:num->(A->bool)->bool) k)
-      #|  v = gen_cond_exp p ((FF:num->(A->bool)->bool) k)\n    (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y)
-      #|  forall p FF (B:num->A->bool) k phi K.\n    filtration p FF /\\ (forall n. B n IN prob_events p) /\\\n    (forall n. B n SUBSET prob_carrier p) /\\ (forall n. B n IN FF n) /\\\n    integrable p phi /\\\n    measurable_wrt p (FF k) phi /\\\n    &0 <= K /\\\n    (forall x. x IN prob_carrier p ==> abs(phi x) <= K)\n    ==> expectation p\n      (\\x. (indicator_fn (B (SUC k)) x -\n            max (min (gen_cond_exp p (FF k)\n              (\\y. indicator_fn (B (SUC k)) y) x) (&1)) (&0)) *\n           phi x) = &0
-      #|  &0 <= (phi:A->real) x
-      #|  &0 <= (v':A->real) x /\\ v' x <= &1
-      #|  x:A
-      #|  &0 <= v /\\ v <= &1 ==> abs(v) <= &1
-      #|  x:A
-      #|  &1
-      #|  K:real
-      #|  \\x:A. (v':A->real) x * (&1 - v' x) * (phi:A->real) x
-      #|  \\x:A. (indicator_fn ((B:num->A->bool) (SUC k)) x - (v':A->real) x) *\n      (&1 - &2 * v' x) * (phi:A->real) x
-      #|  p:A prob_space
-      #|  &1 * K
-      #|  &0 <= v /\\ v <= &1 ==> abs(&1 - v) <= &1
-      #|  &0 <= v /\\ v <= &1 ==> abs v <= &1
-      #|  &1 * &1
-      #|  abs((v':A->real) x) * abs(&1 - v' x) <= &1
-      #|  abs((v':A->real) x * (&1 - v' x) * (phi:A->real) x)
-      #|  x:A
-      #|  K:real
-      #|  integrable p (\\x:A. (v':A->real) x * (&1 - v' x) *\n    (phi:A->real) x)
-      #|  &1 * K
-      #|  &0 <= v /\\ v <= &1 ==> abs(&1 - &2 * v) <= &1
-      #|  &0 <= v /\\ v <= &1 ==> abs(&0 - v) <= &1
-      #|  &0 <= v /\\ v <= &1 ==> abs(&1 - v) <= &1
-      #|  &1 * &1
-      #|  abs(indicator_fn ((B:num->A->bool) (SUC k)) (x:A) -\n      (v':A->real) x) * abs(&1 - &2 * v' x) <= &1
-      #|  abs((indicator_fn ((B:num->A->bool) (SUC k)) (x:A) -\n      (v':A->real) x) * (&1 - &2 * v' x) * (phi:A->real) x)
-      #|  x:A
-      #|  K:real
-      #|  integrable p (\\x:A. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n    (v':A->real) x) * (&1 - &2 * v' x) * (phi:A->real) x)
-      #|  &0 <= v /\\ v <= &1 ==> abs(&1 - &2 * v) <= &1
-      #|  &1 * K
-      #|  x:A
-      #|  &0 <= v /\\ v <= &1 ==> abs(&1 - &2 * v) <= &1
-      #|  x:A
-      #|  &1
-      #|  K:real
-      #|  K:real
-      #|  \\x:A. (&1 - &2 * (v':A->real) x) * (phi:A->real) x
-      #|  k:num
-      #|  B:num->A->bool
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  expectation p (\\x:A. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n    (v':A->real) x) * (&1 - &2 * v' x) * (phi:A->real) x) = &0
-      #|  x:A
-      #|  forall x:A. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n    (v':A->real) x) pow 2 * phi x =\n    (indicator_fn (B (SUC k)) x - v' x) * (&1 - &2 * v' x) * phi x +\n    v' x * (&1 - v' x) * phi x
-      #|  (v':A->real) =\n    (\\x. max (min (gen_cond_exp p ((FF:num->(A->bool)->bool) k)\n      (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x) (&1)) (&0))
-      #|  measurable_wrt p ((FF:num->(A->bool)->bool) k) (v':A->real)
-      #|  (v':A->real) =\n    (\\x. max (min (gen_cond_exp p ((FF:num->(A->bool)->bool) k)\n      (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x) (&1)) (&0))
-      #|  random_variable p (v':A->real)
-      #|  sub_sigma_algebra p ((FF:num->(A->bool)->bool) k)
-      #|  forall x:A. &0 <= (v':A->real) x /\\ v' x <= &1
-      #|  forall x:A. max (min (gen_cond_exp p ((FF:num->(A->bool)->bool) k)\n    (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x) (&1)) (&0) =\n    (v':A->real) x
-      #|  v' = \\x:A. max (min (gen_cond_exp p ((FF:num->(A->bool)->bool) k)\n    (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x) (&1)) (&0)
-      #|  forall p FF (B:num->A->bool) k phi (K:real).\n     filtration p FF /\\ (forall n. B n IN prob_events p) /\\\n     (forall n. B n SUBSET prob_carrier p) /\\ (forall n. B n IN FF n) /\\\n     integrable p phi /\\ measurable_wrt p (FF k) phi /\\\n     &0 <= K /\\ (forall x:A. x IN prob_carrier p ==> abs(phi x) <= K) /\\\n     (forall x:A. x IN prob_carrier p ==> &0 <= phi x)\n     ==> expectation p\n       (\\x. (indicator_fn (B (SUC k)) x -\n             max (min (gen_cond_exp p (FF k)\n               (\\y. indicator_fn (B (SUC k)) y) x) (&1)) (&0)) pow 2 *\n             phi x) <=\n     expectation p\n       (\\x. max (min (gen_cond_exp p (FF k)\n               (\\y. indicator_fn (B (SUC k)) y) x) (&1)) (&0) *\n             phi x)
-      #|  inv(a:real)
-      #|  g:A->real
-      #|  p:A prob_space
-      #|  (g:A->real) x
-      #|  inv(a:real)
-      #|  a:real
-      #|  inv((g:A->real) x)
-      #|  &0 < (g:A->real) x
-      #|  (x:A) IN prob_carrier p
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\ inv(g x) <= a} =\n    {x | x IN prob_carrier p /\\ (g:A->real) x >= inv a}
-      #|  &0 < a
-      #|  &0
-      #|  &0 < (g:A->real) x
-      #|  &0 < inv((g:A->real) x)
-      #|  (x:A) IN prob_carrier p
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\ inv(g x) <= a} =\n    {x | x IN prob_carrier p /\\ (g:A->real) x <= &0}
-      #|  a <= &0
-      #|  a:real
-      #|  forall p (f:A->real) g. random_variable p f /\\ random_variable p g /\\\n   (forall x:A. x IN prob_carrier p ==> &0 < g x) ==>\n   random_variable p (\\x. f x / g x)
-      #|  &0 < abs b
-      #|  forall a b. abs a <= &1 /\\ &1 <= b ==> abs a / abs b <= &1
-      #|  t * &1
-      #|  &0 < abs d
-      #|  abs s <= t /\\ &1 <= abs d ==> abs s / abs d <= t
-      #|  \\x:A. (f:A->real) x * (g:A->real) x
-      #|  &2
-      #|  p:A prob_space
-      #|  \\x:A. &2 * (f:A->real) x * g x
-      #|  \\x:A. (g:A->real) x pow 2
-      #|  p:A prob_space
-      #|  \\x:A. (g:A->real) x pow 2 + &2 * f x * g x
-      #|  \\x:A. (f:A->real) x pow 2
-      #|  p:A prob_space
-      #|  integrable p (\\x:A. &2 * (f:A->real) x * g x)
-      #|  integrable p (\\x:A. (f:A->real) x pow 2 + g x pow 2)
-      #|  (\\x:A. ((f:A->real) x + g x) pow 2) =\n    (\\x. f x pow 2 + g x pow 2 + &2 * f x * g x)
-      #|  forall p (f:A->real) g.\n    integrable p f /\\ integrable p g /\\\n    integrable p (\\x. f x pow 2) /\\ integrable p (\\x. g x pow 2) /\\\n    integrable p (\\x. f x * g x) /\\\n    expectation p (\\x. f x * g x) = &0\n    ==> expectation p (\\x. (f x + g x) pow 2) =\n        expectation p (\\x. f x pow 2) + expectation p (\\x. g x pow 2)
-      #|  x:A
-      #|  x:A
-      #|  &1
-      #|  n:num
-      #|  \\k:num. (v':num->A->real) k (x:A)
-      #|  &0 <= t /\\ t <= &1 ==> abs t <= &1
-      #|  x:A
-      #|  &0 <= s ==> &0 < &1 + s
-      #|  &1
-      #|  expectation p (\\x:A. &1)
-      #|  expectation p\n    (\\x:A. sum (0..n) (\\k. (v':num->A->real) k x /\n      (&1 + sum (0..k) (\\j. v' j x)) pow 2))
-      #|  &0 <= s /\\ &0 <= t ==> &1 <= abs(&1 + s + t)
-      #|  &1 pow 2
-      #|  x:A
-      #|  x:A
-      #|  (\\x:A. inv((&1 + sum (0..n)\n          (\\j. (v':num->A->real) j x) + v' (SUC n) x) pow 2)) =\n        (\\x. &1 / (&1 + sum (0..n) (\\j. v' j x) +\n             v' (SUC n) x) pow 2)
-      #|  &1
-      #|  &0 <= s ==> &1 <= abs(&1 + s)
-      #|  &1 pow 2
-      #|  x:A
-      #|  x:A
-      #|  (\\x:A. inv((&1 + sum (0..i)\n          (\\j. (v':num->A->real) j x)) pow 2)) =\n        (\\x. &1 / (&1 + sum (0..i) (\\j. v' j x)) pow 2)
-      #|  &1
-      #|  i:num
-      #|  a = b ==> a <= b
-      #|  &0 <= s /\\ &0 <= t ==> &0 <= &1 + s + t
-      #|  x:A
-      #|  &0 <= s /\\ &0 <= t ==> &1 <= abs(&1 + s + t)
-      #|  &1 pow 2
-      #|  x:A
-      #|  &0 <= s /\\ &0 <= t ==> &1 <= &1 + s + t
-      #|  &1 pow 2
-      #|  x:A
-      #|  (FF:num->(A->bool)->bool) (SUC n)
-      #|  j:num <= n
-      #|  j:num <= SUC n
-      #|  (FF:num->(A->bool)->bool) j
-      #|  j:num
-      #|  &0 <= s /\\ &0 <= t ==> &1 <= abs(&1 + s + t)
-      #|  &1 pow 2
-      #|  x:A
-      #|  x:A
-      #|  (\\x:A. inv((&1 + sum (0..n)\n           (\\j. (v':num->A->real) j x) + v' (SUC n) x) pow 2)) =\n         (\\x. &1 / (&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x) pow 2)
-      #|  &1
-      #|  &1
-      #|  \\x:A. inv((&1 + sum (0..n) (\\j. (v':num->A->real) j x) +\n                     v' (SUC n) x) pow 2)
-      #|  SUC n
-      #|  B:num->A->bool
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  expectation p\n      (\\x:A. sum (0..n) (\\k. (v':num->A->real) k x /\n        (&1 + sum (0..k) (\\j. v' j x)) pow 2)) +\n      expectation p\n      (\\x. v' (SUC n) x *\n           inv ((&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x) pow 2))
-      #|  \\x:A. (indicator_fn ((B:num->A->bool) (SUC (SUC n))) x -\n        (v':num->A->real) (SUC n) x) *\n        (sum (0..n) (\\k. (indicator_fn (B (SUC k)) x - v' k x) /\n              (&1 + sum (0..k) (\\j. v' j x))) /\n         (&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x))
-      #|  &2
-      #|  p:A prob_space
-      #|  \\x:A. &2 * ((indicator_fn ((B:num->A->bool) (SUC (SUC n))) x -\n        (v':num->A->real) (SUC n) x) *\n        (sum (0..n) (\\k. (indicator_fn (B (SUC k)) x - v' k x) /\n              (&1 + sum (0..k) (\\j. v' j x))) /\n         (&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x)))
-      #|  \\x:A. (indicator_fn ((B:num->A->bool) (SUC (SUC n))) x -\n        (v':num->A->real) (SUC n) x) pow 2 *\n        inv ((&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x) pow 2)
-      #|  p:A prob_space
-      #|  \\x:A. (indicator_fn ((B:num->A->bool) (SUC (SUC n))) x -\n        (v':num->A->real) (SUC n) x) pow 2 *\n        inv ((&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x) pow 2) +\n        &2 * ((indicator_fn (B (SUC (SUC n))) x - v' (SUC n) x) *\n         (sum (0..n) (\\k. (indicator_fn (B (SUC k)) x - v' k x) /\n               (&1 + sum (0..k) (\\j. v' j x))) /\n          (&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x)))
-      #|  \\x:A. sum (0..n)\n         (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n              (v':num->A->real) k x) /\n              (&1 + sum (0..k) (\\j. v' j x))) pow 2
-      #|  p:A prob_space
-      #|  &0 <= s /\\ &0 <= t ==> &1 <= abs(&1 + s + t)
-      #|  x:A
-      #|  &0 <= s /\\ &0 <= t ==> &1 <= abs(&1 + s + t)
-      #|  x:A
-      #|  x:A
-      #|  (\\x:A. inv(&1 + sum (0..n)\n          (\\j. (v':num->A->real) j x) + v' (SUC n) x)) =\n          (\\x. &1 / (&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x))
-      #|  &1
-      #|  &(SUC n)
-      #|  integrable p\n       (\\x:A. (indicator_fn ((B:num->A->bool) (SUC (SUC n))) x -\n        (v':num->A->real) (SUC n) x) *\n        (sum (0..n) (\\k. (indicator_fn (B (SUC k)) x - v' k x) /\n              (&1 + sum (0..k) (\\j. v' j x))) /\n         (&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x)))
-      #|  &0 <= s /\\ &0 <= t ==> &1 <= abs(&1 + s + t)
-      #|  &1 pow 2
-      #|  &1 * &1
-      #|  x:A
-      #|  x:A
-      #|  (\\x:A. inv((&1 + sum (0..n)\n          (\\j. (v':num->A->real) j x) + v' (SUC n) x) pow 2)) =\n          (\\x. &1 / (&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x) pow 2)
-      #|  (\\x:A. indicator_fn\n           ((B:num->A->bool) (SUC (SUC n))) x) =\n           indicator_fn (B (SUC (SUC n)))
-      #|  &1
-      #|  integrable p\n       (\\x:A. (indicator_fn ((B:num->A->bool) (SUC (SUC n))) x -\n        (v':num->A->real) (SUC n) x) pow 2 *\n        inv ((&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x) pow 2))
-      #|  x:A
-      #|  (&(SUC n)) pow 2
-      #|  integrable p\n       (\\x:A. sum (0..n) (\\k.\n         (indicator_fn ((B:num->A->bool) (SUC k)) x -\n          (v':num->A->real) k x) /\n         (&1 + sum (0..k) (\\j. v' j x))) pow 2)
-      #|  &0 <= s ==> &1 <= &1 + s
-      #|  k:num
-      #|  sum(0..n)\n         (\\k. abs((indicator_fn ((B:num->A->bool) (SUC k)) x -\n                   (v':num->A->real) k x) /\n                  (&1 + sum (0..k) (\\j. v' j x))))
-      #|  sum(0..n) (\\k:num. &1)
-      #|  x:A
-      #|  forall x:A. x IN prob_carrier p\n       ==> abs(sum (0..n) (\\k.\n         (indicator_fn ((B:num->A->bool) (SUC k)) x -\n          (v':num->A->real) k x) /\n         (&1 + sum (0..k) (\\j. v' j x)))) <= &(SUC n)
-      #|  i:num
-      #|  integrable p\n       (\\x:A. sum (0..n) (\\k.\n         (indicator_fn ((B:num->A->bool) (SUC k)) x -\n          (v':num->A->real) k x) /\n         (&1 + sum (0..k) (\\j. v' j x))))
-      #|  &0 <= s ==> &1 <= abs(&1 + s)
-      #|  x:A
-      #|  x:A
-      #|  (\\x:A. inv(&1 + sum (0..i)\n          (\\j. (v':num->A->real) j x))) =\n         (\\x. &1 / (&1 + sum (0..i) (\\j. v' j x)))
-      #|  &1
-      #|  forall i:num. i <= n\n       ==> integrable p (\\x:A. (indicator_fn ((B:num->A->bool) (SUC i)) x -\n           (v':num->A->real) i x) /\n           (&1 + sum (0..i) (\\j. v' j x)))
-      #|  cc:real
-      #|  &1 + sum (0..n) (\\j. (v':num->A->real) j (x:A)) +\n                v' (SUC n) x
-      #|  dd:real
-      #|  indicator_fn ((B:num->A->bool) (SUC (SUC n))) (x:A) -\n                (v':num->A->real) (SUC n) x
-      #|  s:real
-      #|  sum (0..n)\n        (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) (x:A) -\n              (v':num->A->real) k x) /\n             (&1 + sum (0..k) (\\j. v' j x)))
-      #|  x:A
-      #|  (\\x:A. (sum (0..n)\n         (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n              (v':num->A->real) k x) /\n              (&1 + sum (0..k) (\\j. v' j x))) +\n        (indicator_fn (B (SUC (SUC n))) x - v' (SUC n) x) /\n        (&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x)) pow 2) =\n       (\\x. sum (0..n)\n         (\\k. (indicator_fn (B (SUC k)) x - v' k x) /\n              (&1 + sum (0..k) (\\j. v' j x))) pow 2 +\n        (indicator_fn (B (SUC (SUC n))) x - v' (SUC n) x) pow 2 *\n        inv ((&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x) pow 2) +\n        &2 * ((indicator_fn (B (SUC (SUC n))) x - v' (SUC n) x) *\n         (sum (0..n)\n           (\\k. (indicator_fn (B (SUC k)) x - v' k x) /\n                (&1 + sum (0..k) (\\j. v' j x))) /\n          (&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x))))
-      #|  a = b ==> a <= b
-      #|  expectation p\n      (\\x:A. sum (0..n)\n         (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n              (v':num->A->real) k x) /\n              (&1 + sum (0..k) (\\j. v' j x))) pow 2) +\n      expectation p\n      (\\x. (indicator_fn (B (SUC (SUC n))) x - v' (SUC n) x) pow 2 *\n           inv ((&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x) pow 2))
-      #|  &0 <= s /\\ &0 <= t ==> &1 <= abs(&1 + s + t)
-      #|  &0 <= s ==> &1 <= &1 + s
-      #|  k:num
-      #|  sum(0..n)\n          (\\k. abs((indicator_fn ((B:num->A->bool) (SUC k)) x -\n                    (v':num->A->real) k x) /\n                   (&1 + sum (0..k) (\\j. v' j x))))
-      #|  sum(0..n) (\\k:num. &1)
-      #|  x:A
-      #|  &0 <= s /\\ &0 <= t ==> &1 <= &1 + s + t
-      #|  x:A
-      #|  (FF:num->(A->bool)->bool) (SUC n)
-      #|  j:num <= n
-      #|  j:num <= SUC n
-      #|  (FF:num->(A->bool)->bool) j
-      #|  j:num
-      #|  &0 <= s ==> &1 <= &1 + s
-      #|  x:A
-      #|  k:num <= n
-      #|  j:num <= k
-      #|  j:num <= SUC n
-      #|  (FF:num->(A->bool)->bool) j
-      #|  j:num
-      #|  k:num <= n
-      #|  k:num <= SUC n
-      #|  (FF:num->(A->bool)->bool) k
-      #|  k:num <= n
-      #|  SUC k <= SUC (n:num)
-      #|  (FF:num->(A->bool)->bool) (SUC k)
-      #|  k:num
-      #|  &0 <= s /\\ &0 <= t ==> &1 <= abs(&1 + s + t)
-      #|  &0 <= s ==> &1 <= &1 + s
-      #|  k:num
-      #|  sum(0..n)\n           (\\k. abs((indicator_fn ((B:num->A->bool) (SUC k)) x -\n                     (v':num->A->real) k x) /\n                    (&1 + sum (0..k) (\\j. v' j x))))
-      #|  sum(0..n) (\\k:num. &1)
-      #|  x:A
-      #|  x:A
-      #|  x:A
-      #|  (\\x:A. indicator_fn ((B:num->A->bool) (SUC i)) x) =\n           indicator_fn (B (SUC i))
-      #|  i:num
-      #|  &(SUC n)
-      #|  &(SUC n)
-      #|  \\x:A. sum (0..n)\n          (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n                (v':num->A->real) k x) /\n               (&1 + sum (0..k) (\\j. v' j x))) /\n          (&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x)
-      #|  SUC n
-      #|  B:num->A->bool
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  expectation p\n      (\\x:A. (indicator_fn ((B:num->A->bool) (SUC (SUC n))) x -\n              (v':num->A->real) (SUC n) x) *\n       (sum (0..n)\n         (\\k. (indicator_fn (B (SUC k)) x - v' k x) /\n              (&1 + sum (0..k) (\\j. v' j x))) /\n        (&1 + sum (0..n) (\\j. v' j x) + v' (SUC n) x))) = &0
-      #|  &0 <= i /\\ i <= &1 /\\ &0 <= v /\\ v <= &1\n        ==> abs(i - v) <= &1
-      #|  forall k (x:A). x IN prob_carrier p\n      ==> abs(indicator_fn ((B:num->A->bool) (SUC k)) x -\n              (v':num->A->real) k x) <= &1
-      #|  &0 <= y /\\ y <= &1 ==> abs(y) <= &1
-      #|  x:A
-      #|  &1
-      #|  forall k:num. integrable p ((v':num->A->real) k)
-      #|  &0 <= s /\\ &0 <= t ==> &0 < &1 + s + t
-      #|  forall(x:A). x IN prob_carrier p\n      ==> &0 < &1 + sum(0..n) (\\j. (v':num->A->real) j x) +\n          v' (SUC n) x
-      #|  &0 <= s ==> &0 < &1 + s
-      #|  forall k (x:A). x IN prob_carrier p\n      ==> &0 < &1 + sum(0..k) (\\j. (v':num->A->real) j x)
-      #|  &0 <= v ==> &0 <= &1 + v
-      #|  x:A
-      #|  &0 <= v ==> &1 <= abs(&1 + v)
-      #|  &1 pow 2
-      #|  x:A
-      #|  &0 <= v ==> &1 <= &1 + v
-      #|  &1 pow 2
-      #|  x:A
-      #|  &0 <= v ==> &1 <= abs(&1 + v)
-      #|  &1 pow 2
-      #|  x:A
-      #|  &0 <= v ==> &0 < &1 + v
-      #|  x:A
-      #|  (\\x:A. inv((&1 + (v':num->A->real) 0 x) pow 2)) =\n        (\\x. &1 / (&1 + v' 0 x) pow 2)
-      #|  &1
-      #|  &1
-      #|  \\x:A. inv((&1 + (v':num->A->real) 0 x) pow 2)
+      #|  real_of_num(0) < (K : Real) * (C : Real)
+      #|  real_of_num(0) < abs((x : Real))
+      #|  abs((x : Real)) == real_of_num(0)
+      #|  (\226\136\128 n : Num, abs((x : Real)) <= (K : Real) / pow(real_of_num(2), n) * (C : Real)) && real_of_num(0) <= C \226\134\146 x == real_of_num(0)
+      #|  (x : A)
+      #|  expectation((p : Prob_space[A]), (x : A) => abs((h : (A) -> Real)(x)) * indicator_fn(prob_carrier(p), x)) == expectation(p, (x : A) => abs(h(x)))
+      #|  (x : A)
+      #|  expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * ((phi : (A) -> Real)(x) * indicator_fn(prob_carrier(p), x))) == expectation(p, (x : A) => h(x) * phi(x))
+      #|  IN(prob_carrier((p : Prob_space[A])), (G : ((A) -> Bool) -> Bool))
+      #|  prob_carrier((p : Prob_space[A]))
+      #|  (phi : (A) -> Real)
+      #|  (K : Real)
+      #|  (n : Num)
+      #|  (h : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (C : Real)
+      #|  expectation((p : Prob_space[A]), (x : A) => abs((h : (A) -> Real)(x)))
+      #|  (x : Real)
+      #|  expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * (phi : (A) -> Real)(x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 h : (A) -> Real, \226\136\128 phi : (A) -> Real, \226\136\128 K : Real, sub_sigma_algebra(p, G) && integrable(p, h) && (\226\136\128 B : (A) -> Bool, IN(B, G) \226\134\146 expectation(p, (x : A) => h(x) * indicator_fn(B, x)) == real_of_num(0)) && measurable_wrt(p, G, phi) && real_of_num(0) <= K && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(phi(x)) <= K) \226\134\146 expectation(p, (x : A) => h(x) * phi(x)) == real_of_num(0)
+      #|  (x : A) => ((X : (A) -> Real)(x) - cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), X, x)) * cond_exp(p, G, X, x)
+      #|  real_of_num(2)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => real_of_num(2) * (((X : (A) -> Real)(x) - cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), X, x)) * cond_exp(p, G, X, x))
+      #|  (x : A) => pow((X : (A) -> Real)(x) - cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), X, x), 2)
+      #|  (p : Prob_space[A])
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (K : Real)
+      #|  integrable((p : Prob_space[A]), (x : A) => ((X : (A) -> Real)(x) - cond_exp(p, (G : ((A) -> Bool) -> Bool), X, x)) * cond_exp(p, G, X, x))
+      #|  real_of_num(0) <= ((x : Real) + (c : Real)) * (x + c) && real_of_num(0) <= (x - c) * (x - c) \226\134\146 (x - c) * (x - c) <= real_of_num(2) * (x * x + c * c)
+      #|  real_of_num(0) <= (a : Real) && a <= (b : Real) && real_of_num(0) <= b \226\134\146 abs(a) <= abs(b)
+      #|  (w : A)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (x : A) => real_of_num(2) * (pow((X : (A) -> Real)(x), 2) + pow(cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), X, x), 2))
+      #|  integrable((p : Prob_space[A]), (x : A) => pow((X : (A) -> Real)(x) - cond_exp(p, (G : ((A) -> Bool) -> Bool), X, x), 2))
+      #|  (w : A)
+      #|  ((x : A) => pow((X : (A) -> Real)(x), 2) - pow(cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), X, x), 2)) == ((x : A) => pow(X(x) - cond_exp(p, G, X, x), 2) + real_of_num(2) * ((X(x) - cond_exp(p, G, X, x)) * cond_exp(p, G, X, x)))
+      #|  (x : A) => pow(cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x), 2)
+      #|  (x : A) => pow((X : (A) -> Real)(x), 2)
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (x : A) => pow(cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x), 2))
+      #|  real_of_num(0) <= (a : Real) - (b : Real) \226\134\146 b <= a
+      #|  (B : (A) -> Bool)
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((B : (A) -> Bool), x)
+      #|  (x : A) => (X : (A) -> Real)(x) * indicator_fn((B : (A) -> Bool), x)
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => ((X : (A) -> Real)(x) - cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), X, x)) * indicator_fn((B : (A) -> Bool), x)) == ((x : A) => X(x) * indicator_fn(B, x) - cond_exp(p, G, X, x) * indicator_fn(B, x))
+      #|  IN((B : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (B : (A) -> Bool)
+      #|  (K : Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  expectation((p : Prob_space[A]), (x : A) => ((X : (A) -> Real)(x) - cond_exp(p, (G : ((A) -> Bool) -> Bool), X, x)) * cond_exp(p, G, X, x)) == real_of_num(0)
+      #|  (x : Real) <= (M : Real) \226\134\146 x <= max(M, real_of_num(0))
+      #|  max((M : Real), real_of_num(0))
+      #|  (M : Real)
+      #|  (x : A) => abs(cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x))
+      #|  (p : Prob_space[A])
+      #|  (K : Real)
+      #|  \226\136\131 K : Real, real_of_num(0) <= K && (\226\136\128 z : A, IN(z, prob_carrier((p : Prob_space[A]))) \226\134\146 abs(cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), z)) <= K)
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), cond_exp(p, G, (X : (A) -> Real)))
+      #|  integrable((p : Prob_space[A]), cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real)))
+      #|  simple_rv((p : Prob_space[A]), cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && FINITE(G) && integrable(p, X) && integrable(p, (x : A) => pow(X(x), 2)) \226\134\146 expectation(p, (x : A) => pow(cond_exp(p, G, X, x), 2)) <= expectation(p, (x : A) => pow(X(x), 2))
+      #|  (cond_variance : (Prob_space[A], ((A) -> Bool) -> Bool, (A) -> Real, A) -> Real)((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real)) == cond_exp(p, G, (x : A) => pow(X(x) - cond_exp(p, G, X, x), 2))
+      #|  cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
+      #|  (p : Prob_space[A])
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => ((X : (A) -> Real)(x) - cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), X, x)) * cond_exp(p, G, X, x)
+      #|  real_of_num(2)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => real_of_num(2) * (((X : (A) -> Real)(x) - cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), X, x)) * cond_exp(p, G, X, x))
+      #|  (x : A) => pow((X : (A) -> Real)(x), 2)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => pow(cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x), 2)
+      #|  (x : A) => pow((X : (A) -> Real)(x), 2) - real_of_num(2) * ((X(x) - cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), X, x)) * cond_exp(p, G, X, x))
+      #|  (p : Prob_space[A])
+      #|  (w : A)
+      #|  ((x : A) => pow((X : (A) -> Real)(x) - cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), X, x), 2)) == ((x : A) => pow(X(x), 2) - real_of_num(2) * ((X(x) - cond_exp(p, G, X, x)) * cond_exp(p, G, X, x)) - pow(cond_exp(p, G, X, x), 2))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (K : Real)
+      #|  integrable((p : Prob_space[A]), (x : A) => ((X : (A) -> Real)(x) - cond_exp(p, (G : ((A) -> Bool) -> Bool), X, x)) * cond_exp(p, G, X, x))
+      #|  (B : (A) -> Bool)
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((B : (A) -> Bool), x)
+      #|  (x : A) => (X : (A) -> Real)(x) * indicator_fn((B : (A) -> Bool), x)
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => ((X : (A) -> Real)(x) - cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), X, x)) * indicator_fn((B : (A) -> Bool), x)) == ((x : A) => X(x) * indicator_fn(B, x) - cond_exp(p, G, X, x) * indicator_fn(B, x))
+      #|  IN((B : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (B : (A) -> Bool)
+      #|  (K : Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  expectation((p : Prob_space[A]), (x : A) => ((X : (A) -> Real)(x) - cond_exp(p, (G : ((A) -> Bool) -> Bool), X, x)) * cond_exp(p, G, X, x)) == real_of_num(0)
+      #|  (x : Real) <= (M : Real) \226\134\146 x <= max(M, real_of_num(0))
+      #|  max((M : Real), real_of_num(0))
+      #|  (M : Real)
+      #|  (x : A) => abs(cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x))
+      #|  (p : Prob_space[A])
+      #|  (K : Real)
+      #|  \226\136\131 K : Real, real_of_num(0) <= K && (\226\136\128 z : A, IN(z, prob_carrier((p : Prob_space[A]))) \226\134\146 abs(cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), z)) <= K)
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), cond_exp(p, G, (X : (A) -> Real)))
+      #|  (X : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => pow((X : (A) -> Real)(x) - cond_exp(p, (G : ((A) -> Bool) -> Bool), X, x), 2)) == expectation(p, (x : A) => pow(X(x), 2)) - expectation(p, (x : A) => pow(cond_exp(p, G, X, x), 2))
+      #|  expectation((p : Prob_space[A]), cond_variance(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))) == expectation(p, (x : A) => pow(X(x) - cond_exp(p, G, X, x), 2))
+      #|  real_of_num(0) <= ((x : Real) + (c : Real)) * (x + c) && real_of_num(0) <= (x - c) * (x - c) \226\134\146 (x - c) * (x - c) <= real_of_num(2) * (x * x + c * c)
+      #|  real_of_num(0) <= (a : Real) && a <= (b : Real) && real_of_num(0) <= b \226\134\146 abs(a) <= abs(b)
+      #|  (w : A)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), cond_exp(p, G, (X : (A) -> Real)))
+      #|  (x : A) => real_of_num(2) * (pow((X : (A) -> Real)(x), 2) + pow(cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), X, x), 2))
+      #|  integrable((p : Prob_space[A]), (x : A) => pow((X : (A) -> Real)(x) - cond_exp(p, (G : ((A) -> Bool) -> Bool), X, x), 2))
+      #|  expectation((p : Prob_space[A]), cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))) == expectation(p, X)
+      #|  integrable((p : Prob_space[A]), (x : A) => pow(cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x), 2))
+      #|  integrable((p : Prob_space[A]), cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real)))
+      #|  simple_rv((p : Prob_space[A]), cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && FINITE(G) && integrable(p, X) && integrable(p, (x : A) => pow(X(x), 2)) \226\134\146 variance(p, X) == expectation(p, cond_variance(p, G, X)) + variance(p, cond_exp(p, G, X))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, filtration(p, FF) \226\134\146 filtration(p, (n : Num) => FF(SUC(n)))
+      #|  (v : Real)
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (f : (A) -> Real))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max((f : (A) -> Real)(x), (c : Real)) <= (v : Real)} == {(x : A) | IN(x, prob_carrier(p)) && f(x) <= v}
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && max((f : (A) -> Real)(x), (c : Real)) <= (v : Real)} == {}
+      #|  (v : Real) < (c : Real)
+      #|  (v : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, \226\136\128 c : Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, f) \226\134\146 measurable_wrt(p, G, (x : A) => max(f(x), c))
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && inv((f : (A) -> Real)(x)) <= (v : Real)} == {(x : A) | IN(x, prob_carrier(p)) && f(x) >= inv(v)}
+      #|  real_of_num(1)
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && inv((f : (A) -> Real)(x)) <= (v : Real)} == prob_carrier(p)
+      #|  real_of_num(1) <= (v : Real)
+      #|  real_of_num(0) < (v : Real)
+      #|  real_of_num(1)
+      #|  real_of_num(0) < inv((f : (A) -> Real)((x : A)))
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && inv((f : (A) -> Real)(x)) <= (v : Real)} == {}
+      #|  (v : Real) <= real_of_num(0)
+      #|  (v : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, f) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(1) <= f(x)) \226\134\146 measurable_wrt(p, G, (x : A) => inv(f(x)))
+      #|  expectation((p : Prob_space[A]), (x : A) => pow((f : (A) -> Real)(x), 2) + real_of_num(1)) == expectation(p, (x : A) => pow(f(x), 2)) + expectation(p, (x : A) => real_of_num(1))
+      #|  expectation((p : Prob_space[A]), (x : A) => pow((f : (A) -> Real)(x), 2) + real_of_num(1)) == expectation(p, (x : A) => pow(f(x), 2)) + real_of_num(1)
+      #|  expectation((p : Prob_space[A]), (x : A) => inv(real_of_num(2)) * (pow((f : (A) -> Real)(x), 2) + real_of_num(1))) == inv(real_of_num(2)) * expectation(p, (x : A) => pow(f(x), 2) + real_of_num(1))
+      #|  ((x : A) => (pow((f : (A) -> Real)(x), 2) + real_of_num(1)) / real_of_num(2)) == ((x : A) => inv(real_of_num(2)) * (pow(f(x), 2) + real_of_num(1)))
+      #|  abs((f : (A) -> Real)((x : A))) - real_of_num(1)
+      #|  (x : A)
+      #|  ((x : A) => (pow((f : (A) -> Real)(x), 2) + real_of_num(1)) / real_of_num(2)) == ((x : A) => inv(real_of_num(2)) * (pow(f(x), 2) + real_of_num(1)))
+      #|  expectation((p : Prob_space[A]), (x : A) => (pow((f : (A) -> Real)(x), 2) + real_of_num(1)) / real_of_num(2))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (A) -> Real, integrable(p, f) && integrable(p, (x : A) => pow(f(x), 2)) \226\134\146 expectation(p, (x : A) => abs(f(x))) <= (expectation(p, (x : A) => pow(f(x), 2)) + real_of_num(1)) / real_of_num(2)
+      #|  SUBSET({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !((f : (A) -> Real)(x) == real_of_num(0))}, (n : (A) -> Bool))
+      #|  IN((x : A), (n : (A) -> Bool))
+      #|  (f : (A) -> Real)((x : A)) == real_of_num(0)
+      #|  (x : A)
+      #|  expectation((p : Prob_space[A]), (f : (A) -> Real)) == expectation(p, (x : A) => f(x) * indicator_fn((n : (A) -> Bool), x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (A) -> Real, integrable(p, f) && almost_surely(p, {(x : A) | f(x) == real_of_num(0)}) \226\134\146 expectation(p, f) == real_of_num(0)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (K : Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (K : Real)
+      #|  expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * (phi : (A) -> Real)(x)) == expectation(p, (x : A) => h(x) * (phi_K : (A) -> Real)(x) + (h(x) * phi(x) - h(x) * phi_K(x)))
+      #|  expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * (phi : (A) -> Real)(x)) == expectation(p, (x : A) => h(x) * (phi_K : (A) -> Real)(x)) + expectation(p, (x : A) => h(x) * phi(x) - h(x) * phi_K(x))
+      #|  max((phi : (A) -> Real)((x : A)), -(K : Real)) == phi(x)
+      #|  min((phi : (A) -> Real)((x : A)), (K : Real)) == phi(x)
+      #|  abs((phi : (A) -> Real)((x : A))) <= (K : Real)
+      #|  (x : A)
+      #|  {(x : A) | abs((phi : (A) -> Real)(x)) <= (K : Real)}
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (K : Real)
+      #|  expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * (phi : (A) -> Real)(x) - h(x) * (phi_K : (A) -> Real)(x)) == real_of_num(0)
+      #|  (K : Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  expectation((p : Prob_space[A]), (x : A) => (h : (A) -> Real)(x) * (phi_K : (A) -> Real)(x)) == real_of_num(0)
+      #|  (a : Real) <= (K : Real) && -K <= K \226\134\146 max(a, -K) <= K
+      #|  -(K : Real) <= max(min((phi : Real), K), -K) && max(min(phi, K), -K) <= K \226\134\146 abs(max(min(phi, K), -K)) <= K
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 abs((phi_K : (A) -> Real)(x)) <= (K : Real)
+      #|  ((x : A) => min((phi : (A) -> Real)(x), (K : Real))) == ((x : A) => -max(-phi(x), -K))
+      #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (phi_K : (A) -> Real))
+      #|  (phi_K : (A) -> Real) == ((x : A) => max(min((phi : (A) -> Real)(x), (K : Real)), -K))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 h : (A) -> Real, \226\136\128 phi : (A) -> Real, \226\136\128 K : Real, sub_sigma_algebra(p, G) && integrable(p, h) && (\226\136\128 B : (A) -> Bool, IN(B, G) \226\134\146 expectation(p, (x : A) => h(x) * indicator_fn(B, x)) == real_of_num(0)) && measurable_wrt(p, G, phi) && integrable(p, (x : A) => h(x) * phi(x)) && real_of_num(0) <= K && almost_surely(p, {(x : A) | abs(phi(x)) <= K}) \226\134\146 expectation(p, (x : A) => h(x) * phi(x)) == real_of_num(0)
+      #|  {(x : A) | (f : (A) -> Real)(x) <= (g : (A) -> Real)(x)}
+      #|  expectation((p : Prob_space[A]), (x : A) => max(-(h : (A) -> Real)(x), real_of_num(0))) == real_of_num(0)
+      #|  expectation((p : Prob_space[A]), (h : (A) -> Real)) == expectation(p, (x : A) => max(h(x), real_of_num(0)) - max(-h(x), real_of_num(0)))
+      #|  expectation((p : Prob_space[A]), (h : (A) -> Real)) == expectation(p, (x : A) => max(h(x), real_of_num(0))) - expectation(p, (x : A) => max(-h(x), real_of_num(0)))
+      #|  integrable((p : Prob_space[A]), (x : A) => max((h : (A) -> Real)(x), real_of_num(0)))
+      #|  integrable((p : Prob_space[A]), (x : A) => max(-(h : (A) -> Real)(x), real_of_num(0)))
+      #|  (h : (A) -> Real) == ((x : A) => (g : (A) -> Real)(x) - (f : (A) -> Real)(x))
+      #|  integrable((p : Prob_space[A]), (x : A) => (g : (A) -> Real)(x) - (f : (A) -> Real)(x))
+      #|  (f : (A) -> Real)
+      #|  (g : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  real_of_num(0) <= expectation((p : Prob_space[A]), (x : A) => (g : (A) -> Real)(x) - (f : (A) -> Real)(x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, integrable(p, f) && integrable(p, g) && almost_surely(p, {(x : A) | f(x) <= g(x)}) \226\134\146 expectation(p, f) <= expectation(p, g)
+      #|  (x : A)
+      #|  INTER({(x : A) | real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num)), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x)}, INTER({(x : A) | gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x) <= gen_cond_exp(p, FF(k), (w : A) => real_of_num(1), x)}, {(x : A) | gen_cond_exp(p, FF(k), (w : A) => real_of_num(1), x) == real_of_num(1)}))
+      #|  integrable((p : Prob_space[A]), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC((k : Num))), y))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 B : (Num, A) -> Bool, filtration(p, FF) && (\226\136\128 n : Num, IN(B(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(B(n), prob_carrier(p))) && (\226\136\128 n : Num, IN(B(n), FF(n))) \226\134\146 (\226\136\128 k : Num, almost_surely(p, {(x : A) | real_of_num(0) <= gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x) && gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x) <= real_of_num(1)}))
+      #|  ((x : A) => -max(-(f : (A) -> Real)(x), -(c : Real))) == ((x : A) => real_of_num(0) - max(real_of_num(0) - f(x), -c))
+      #|  ((x : A) => min((f : (A) -> Real)(x), (c : Real))) == ((x : A) => -max(-f(x), -c))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, \226\136\128 c : Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, f) \226\134\146 measurable_wrt(p, G, (x : A) => min(f(x), c))
+      #|  (A : (A) -> Bool)
+      #|  (f : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => (f : (A) -> Real)(x) * indicator_fn((A : (A) -> Bool), x) - gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), f, x) * indicator_fn(A, x)) == expectation(p, (x : A) => f(x) * indicator_fn(A, x)) - expectation(p, (x : A) => gen_cond_exp(p, G, f, x) * indicator_fn(A, x))
+      #|  ((x : A) => ((f : (A) -> Real)(x) - gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), f, x)) * indicator_fn((A : (A) -> Bool), x)) == ((x : A) => f(x) * indicator_fn(A, x) - gen_cond_exp(p, G, f, x) * indicator_fn(A, x))
+      #|  integrable((p : Prob_space[A]), gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (f : (A) -> Real)))
+      #|  IN((A : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, f) \226\134\146 (\226\136\128 A : (A) -> Bool, IN(A, G) \226\134\146 expectation(p, (x : A) => (f(x) - gen_cond_exp(p, G, f, x)) * indicator_fn(A, x)) == real_of_num(0))
+      #|  expectation((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(k), indicator_fn(B(SUC(k))), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), indicator_fn(B(SUC(j))), x)), real_of_num(1))) * indicator_fn((a : (A) -> Bool), x) + (indicator_fn(B(SUC(SUC(n))), x) - gen_cond_exp(p, FF(SUC(n)), indicator_fn(B(SUC(SUC(n)))), x)) / max(real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => gen_cond_exp(p, FF(j), indicator_fn(B(SUC(j))), x)) + gen_cond_exp(p, FF(SUC(n)), indicator_fn(B(SUC(SUC(n)))), x)), real_of_num(1)) * indicator_fn(a, x)) == expectation(p, (x : A) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - gen_cond_exp(p, FF(k), indicator_fn(B(SUC(k))), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), indicator_fn(B(SUC(j))), x)), real_of_num(1))) * indicator_fn(a, x)) + expectation(p, (x : A) => (indicator_fn(B(SUC(SUC(n))), x) - gen_cond_exp(p, FF(SUC(n)), indicator_fn(B(SUC(SUC(n)))), x)) / max(real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => gen_cond_exp(p, FF(j), indicator_fn(B(SUC(j))), x)) + gen_cond_exp(p, FF(SUC(n)), indicator_fn(B(SUC(SUC(n)))), x)), real_of_num(1)) * indicator_fn(a, x))
+      #|  (x : A)
+      #|  inv(real_of_num(1))
+      #|  (x : A)
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((j : Num))
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num)))
+      #|  real_of_num(1)
+      #|  real_of_num(1)
+      #|  integrable((p : Prob_space[A]), (x : A) => (indicator_fn((B : (Num, A) -> Bool)(SUC(SUC((n : Num)))), x) - gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(SUC(n)), indicator_fn(B(SUC(SUC(n)))), x)) / max(real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => gen_cond_exp(p, FF(j), indicator_fn(B(SUC(j))), x)) + gen_cond_exp(p, FF(SUC(n)), indicator_fn(B(SUC(SUC(n)))), x)), real_of_num(1)) * indicator_fn((a : (A) -> Bool), x))
+      #|  (x : A)
+      #|  inv(real_of_num(1))
+      #|  (x : A)
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((j : Num))
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num)))
+      #|  real_of_num(1)
+      #|  (k : Num)
+      #|  real_of_num(1)
+      #|  integrable((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(k), indicator_fn(B(SUC(k))), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), indicator_fn(B(SUC(j))), x)), real_of_num(1))) * indicator_fn((a : (A) -> Bool), x))
+      #|  inv(real_of_num(1))
+      #|  real_of_num(1) * real_of_num(1)
+      #|  (x : A)
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((j : Num))
+      #|  (j : Num)
+      #|  (B' : (A) -> Bool)
+      #|  indicator_fn((B : (Num, A) -> Bool)(SUC(SUC((n : Num)))))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num)))
+      #|  (p : Prob_space[A])
+      #|  (B' : (A) -> Bool)
+      #|  real_of_num(1)
+      #|  (x : A) => inv(max(real_of_num(1) + (sum(op_dot_dot(0, (n : Num)), (j : Num) => gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(j), indicator_fn((B : (Num, A) -> Bool)(SUC(j))), x)) + gen_cond_exp(p, FF(SUC(n)), indicator_fn(B(SUC(SUC(n)))), x)), real_of_num(1))) * indicator_fn((a : (A) -> Bool), x)
+      #|  (x : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(SUC((n : Num)))), x) - gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC(n)), indicator_fn(B(SUC(SUC(n)))), x)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num)))
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => (indicator_fn((B : (Num, A) -> Bool)(SUC(SUC((n : Num)))), x) - gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(SUC(n)), indicator_fn(B(SUC(SUC(n)))), x)) / max(real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => gen_cond_exp(p, FF(j), indicator_fn(B(SUC(j))), x)) + gen_cond_exp(p, FF(SUC(n)), indicator_fn(B(SUC(SUC(n)))), x)), real_of_num(1)) * indicator_fn((a : (A) -> Bool), x)) == real_of_num(0)
+      #|  integrable((p : Prob_space[A]), (x : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(SUC((n : Num)))), x) - gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(SUC(n)), indicator_fn(B(SUC(SUC(n)))), x))
+      #|  \226\136\128 x : A, (sum(op_dot_dot(0, (n : Num)), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), indicator_fn(B(SUC(k))), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), indicator_fn(B(SUC(j))), x)), real_of_num(1))) + (indicator_fn(B(SUC(SUC(n))), x) - gen_cond_exp(p, FF(SUC(n)), indicator_fn(B(SUC(SUC(n)))), x)) / max(real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => gen_cond_exp(p, FF(j), indicator_fn(B(SUC(j))), x)) + gen_cond_exp(p, FF(SUC(n)), indicator_fn(B(SUC(SUC(n)))), x)), real_of_num(1))) * indicator_fn((a : (A) -> Bool), x) == sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - gen_cond_exp(p, FF(k), indicator_fn(B(SUC(k))), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), indicator_fn(B(SUC(j))), x)), real_of_num(1))) * indicator_fn(a, x) + (indicator_fn(B(SUC(SUC(n))), x) - gen_cond_exp(p, FF(SUC(n)), indicator_fn(B(SUC(SUC(n)))), x)) / max(real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => gen_cond_exp(p, FF(j), indicator_fn(B(SUC(j))), x)) + gen_cond_exp(p, FF(SUC(n)), indicator_fn(B(SUC(SUC(n)))), x)), real_of_num(1)) * indicator_fn(a, x)
+      #|  IN((a : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (a : (A) -> Bool)
+      #|  (n : Num)
+      #|  inv(real_of_num(1))
+      #|  (x : A)
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((j : Num))
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num)))
+      #|  real_of_num(1)
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((j : Num))
+      #|  (j : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((k : Num))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(SUC((k : Num)))
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  \226\136\128 k : Num, integrable((p : Prob_space[A]), gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(k), indicator_fn((B : (Num, A) -> Bool)(SUC(k)))))
+      #|  \226\136\128 k : Num, measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), gen_cond_exp(p, FF(k), indicator_fn((B : (Num, A) -> Bool)(SUC(k)))))
+      #|  \226\136\128 k : Num, integrable((p : Prob_space[A]), indicator_fn((B : (Num, A) -> Bool)(SUC(k))))
+      #|  \226\136\128 k : Num, sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 B : (Num, A) -> Bool, filtration(p, FF) && (\226\136\128 n : Num, IN(B(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(B(n), prob_carrier(p))) && (\226\136\128 n : Num, IN(B(n), FF(n))) \226\134\146 martingale(p, (n : Num) => FF(SUC(n)), (n : Num) => (x : A) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)), real_of_num(1))))
+      #|  real_of_num(0) <= (x : Real) && x <= real_of_num(1) \226\134\146 max(min(x, real_of_num(1)), real_of_num(0)) == x
+      #|  max(min((v : (A) -> Real)((x : A)), real_of_num(1)), real_of_num(0)) == v(x)
+      #|  (x : A)
+      #|  (k : Num)
+      #|  (B : (Num, A) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  {(x : A) | real_of_num(0) <= (v : (A) -> Real)(x) && v(x) <= real_of_num(1)}
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((k : Num))
+      #|  real_of_num(1)
+      #|  (x : A)
+      #|  (a : Bool) == (b : Bool) \226\134\146 a \226\134\146 b
+      #|  (A : (A) -> Bool)
+      #|  (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC((k : Num))), y)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((k : Num))
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => (indicator_fn((B : (Num, A) -> Bool)(SUC((k : Num))), x) - (v : (A) -> Real)(x)) * indicator_fn((A : (A) -> Bool), x)) == real_of_num(0)
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((k : Num))
+      #|  real_of_num(1)
+      #|  expectation((p : Prob_space[A]), (x : A) => (indicator_fn((B : (Num, A) -> Bool)(SUC((k : Num))), x) - (v : (A) -> Real)(x)) * indicator_fn((A : (A) -> Bool), x) + (v(x) - max(min(v(x), real_of_num(1)), real_of_num(0))) * indicator_fn(A, x)) == expectation(p, (x : A) => (indicator_fn(B(SUC(k)), x) - v(x)) * indicator_fn(A, x)) + expectation(p, (x : A) => (v(x) - max(min(v(x), real_of_num(1)), real_of_num(0))) * indicator_fn(A, x))
+      #|  IN((A : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  ((x : A) => (indicator_fn((B : (Num, A) -> Bool)(SUC((k : Num))), x) - max(min((v : (A) -> Real)(x), real_of_num(1)), real_of_num(0))) * indicator_fn((A : (A) -> Bool), x)) == ((x : A) => (indicator_fn(B(SUC(k)), x) - v(x)) * indicator_fn(A, x) + (v(x) - max(min(v(x), real_of_num(1)), real_of_num(0))) * indicator_fn(A, x))
+      #|  (A : (A) -> Bool)
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((k : Num))
+      #|  real_of_num(1)
+      #|  (K : Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((k : Num))
+      #|  integrable((p : Prob_space[A]), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC((k : Num))), y))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num)))
+      #|  (v : (A) -> Real) == gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num)), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 B : (Num, A) -> Bool, \226\136\128 k : Num, \226\136\128 phi : (A) -> Real, \226\136\128 K : Real, filtration(p, FF) && (\226\136\128 n : Num, IN(B(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(B(n), prob_carrier(p))) && (\226\136\128 n : Num, IN(B(n), FF(n))) && integrable(p, phi) && measurable_wrt(p, FF(k), phi) && real_of_num(0) <= K && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(phi(x)) <= K) \226\134\146 expectation(p, (x : A) => (indicator_fn(B(SUC(k)), x) - max(min(gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x), real_of_num(1)), real_of_num(0))) * phi(x)) == real_of_num(0)
+      #|  real_of_num(0) <= (phi : (A) -> Real)((x : A))
+      #|  real_of_num(0) <= (v' : (A) -> Real)((x : A)) && v'(x) <= real_of_num(1)
+      #|  (x : A)
+      #|  real_of_num(0) <= (v : Real) && v <= real_of_num(1) \226\134\146 abs(v) <= real_of_num(1)
+      #|  (x : A)
+      #|  real_of_num(1)
+      #|  (K : Real)
+      #|  (x : A) => (v' : (A) -> Real)(x) * ((real_of_num(1) - v'(x)) * (phi : (A) -> Real)(x))
+      #|  (x : A) => (indicator_fn((B : (Num, A) -> Bool)(SUC((k : Num))), x) - (v' : (A) -> Real)(x)) * ((real_of_num(1) - real_of_num(2) * v'(x)) * (phi : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  real_of_num(1) * (K : Real)
+      #|  real_of_num(0) <= (v : Real) && v <= real_of_num(1) \226\134\146 abs(real_of_num(1) - v) <= real_of_num(1)
+      #|  real_of_num(0) <= (v : Real) && v <= real_of_num(1) \226\134\146 abs(v) <= real_of_num(1)
+      #|  real_of_num(1) * real_of_num(1)
+      #|  abs((v' : (A) -> Real)((x : A))) * abs(real_of_num(1) - v'(x)) <= real_of_num(1)
+      #|  abs((v' : (A) -> Real)((x : A)) * ((real_of_num(1) - v'(x)) * (phi : (A) -> Real)(x)))
+      #|  (x : A)
+      #|  (K : Real)
+      #|  integrable((p : Prob_space[A]), (x : A) => (v' : (A) -> Real)(x) * ((real_of_num(1) - v'(x)) * (phi : (A) -> Real)(x)))
+      #|  real_of_num(1) * (K : Real)
+      #|  real_of_num(0) <= (v : Real) && v <= real_of_num(1) \226\134\146 abs(real_of_num(1) - real_of_num(2) * v) <= real_of_num(1)
+      #|  real_of_num(0) <= (v : Real) && v <= real_of_num(1) \226\134\146 abs(real_of_num(0) - v) <= real_of_num(1)
+      #|  real_of_num(0) <= (v : Real) && v <= real_of_num(1) \226\134\146 abs(real_of_num(1) - v) <= real_of_num(1)
+      #|  real_of_num(1) * real_of_num(1)
+      #|  abs(indicator_fn((B : (Num, A) -> Bool)(SUC((k : Num))), (x : A)) - (v' : (A) -> Real)(x)) * abs(real_of_num(1) - real_of_num(2) * v'(x)) <= real_of_num(1)
+      #|  abs((indicator_fn((B : (Num, A) -> Bool)(SUC((k : Num))), (x : A)) - (v' : (A) -> Real)(x)) * ((real_of_num(1) - real_of_num(2) * v'(x)) * (phi : (A) -> Real)(x)))
+      #|  (x : A)
+      #|  (K : Real)
+      #|  integrable((p : Prob_space[A]), (x : A) => (indicator_fn((B : (Num, A) -> Bool)(SUC((k : Num))), x) - (v' : (A) -> Real)(x)) * ((real_of_num(1) - real_of_num(2) * v'(x)) * (phi : (A) -> Real)(x)))
+      #|  real_of_num(0) <= (v : Real) && v <= real_of_num(1) \226\134\146 abs(real_of_num(1) - real_of_num(2) * v) <= real_of_num(1)
+      #|  real_of_num(1) * (K : Real)
+      #|  (x : A)
+      #|  real_of_num(0) <= (v : Real) && v <= real_of_num(1) \226\134\146 abs(real_of_num(1) - real_of_num(2) * v) <= real_of_num(1)
+      #|  (x : A)
+      #|  real_of_num(1)
+      #|  (K : Real)
+      #|  (K : Real)
+      #|  (x : A) => (real_of_num(1) - real_of_num(2) * (v' : (A) -> Real)(x)) * (phi : (A) -> Real)(x)
+      #|  (k : Num)
+      #|  (B : (Num, A) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => (indicator_fn((B : (Num, A) -> Bool)(SUC((k : Num))), x) - (v' : (A) -> Real)(x)) * ((real_of_num(1) - real_of_num(2) * v'(x)) * (phi : (A) -> Real)(x))) == real_of_num(0)
+      #|  (x : A)
+      #|  \226\136\128 x : A, pow(indicator_fn((B : (Num, A) -> Bool)(SUC((k : Num))), x) - (v' : (A) -> Real)(x), 2) * (phi : (A) -> Real)(x) == (indicator_fn(B(SUC(k)), x) - v'(x)) * ((real_of_num(1) - real_of_num(2) * v'(x)) * phi(x)) + v'(x) * ((real_of_num(1) - v'(x)) * phi(x))
+      #|  (v' : (A) -> Real) == ((x : A) => max(min(gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num)), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x), real_of_num(1)), real_of_num(0)))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num)), (v' : (A) -> Real))
+      #|  (v' : (A) -> Real) == ((x : A) => max(min(gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num)), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x), real_of_num(1)), real_of_num(0)))
+      #|  random_variable((p : Prob_space[A]), (v' : (A) -> Real))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num)))
+      #|  \226\136\128 x : A, real_of_num(0) <= (v' : (A) -> Real)(x) && v'(x) <= real_of_num(1)
+      #|  \226\136\128 x : A, max(min(gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num)), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x), real_of_num(1)), real_of_num(0)) == (v' : (A) -> Real)(x)
+      #|  (v' : (A) -> Real) == ((x : A) => max(min(gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num)), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x), real_of_num(1)), real_of_num(0)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 B : (Num, A) -> Bool, \226\136\128 k : Num, \226\136\128 phi : (A) -> Real, \226\136\128 K : Real, filtration(p, FF) && (\226\136\128 n : Num, IN(B(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(B(n), prob_carrier(p))) && (\226\136\128 n : Num, IN(B(n), FF(n))) && integrable(p, phi) && measurable_wrt(p, FF(k), phi) && real_of_num(0) <= K && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(phi(x)) <= K) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= phi(x)) \226\134\146 expectation(p, (x : A) => pow(indicator_fn(B(SUC(k)), x) - max(min(gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x), real_of_num(1)), real_of_num(0)), 2) * phi(x)) <= expectation(p, (x : A) => max(min(gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x), real_of_num(1)), real_of_num(0)) * phi(x))
+      #|  inv((a : Real))
+      #|  (g : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (g : (A) -> Real)((x : A))
+      #|  inv((a : Real))
+      #|  (a : Real)
+      #|  inv((g : (A) -> Real)((x : A)))
+      #|  real_of_num(0) < (g : (A) -> Real)((x : A))
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && inv((g : (A) -> Real)(x)) <= (a : Real)} == {(x : A) | IN(x, prob_carrier(p)) && g(x) >= inv(a)}
+      #|  real_of_num(0) < (a : Real)
+      #|  real_of_num(0)
+      #|  real_of_num(0) < (g : (A) -> Real)((x : A))
+      #|  real_of_num(0) < inv((g : (A) -> Real)((x : A)))
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && inv((g : (A) -> Real)(x)) <= (a : Real)} == {(x : A) | IN(x, prob_carrier(p)) && g(x) <= real_of_num(0)}
+      #|  (a : Real) <= real_of_num(0)
+      #|  (a : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, random_variable(p, f) && random_variable(p, g) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) < g(x)) \226\134\146 random_variable(p, (x : A) => f(x) / g(x))
+      #|  real_of_num(0) < abs((b : Real))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, abs(a) <= real_of_num(1) && real_of_num(1) <= b \226\134\146 abs(a) / abs(b) <= real_of_num(1)
+      #|  (t : Real) * real_of_num(1)
+      #|  real_of_num(0) < abs((d : Real))
+      #|  abs((s : Real)) <= (t : Real) && real_of_num(1) <= abs((d : Real)) \226\134\146 abs(s) / abs(d) <= t
+      #|  (x : A) => (f : (A) -> Real)(x) * (g : (A) -> Real)(x)
+      #|  real_of_num(2)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => real_of_num(2) * ((f : (A) -> Real)(x) * (g : (A) -> Real)(x))
+      #|  (x : A) => pow((g : (A) -> Real)(x), 2)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => pow((g : (A) -> Real)(x), 2) + real_of_num(2) * ((f : (A) -> Real)(x) * g(x))
+      #|  (x : A) => pow((f : (A) -> Real)(x), 2)
+      #|  (p : Prob_space[A])
+      #|  integrable((p : Prob_space[A]), (x : A) => real_of_num(2) * ((f : (A) -> Real)(x) * (g : (A) -> Real)(x)))
+      #|  integrable((p : Prob_space[A]), (x : A) => pow((f : (A) -> Real)(x), 2) + pow((g : (A) -> Real)(x), 2))
+      #|  ((x : A) => pow((f : (A) -> Real)(x) + (g : (A) -> Real)(x), 2)) == ((x : A) => pow(f(x), 2) + (pow(g(x), 2) + real_of_num(2) * (f(x) * g(x))))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, integrable(p, f) && integrable(p, g) && integrable(p, (x : A) => pow(f(x), 2)) && integrable(p, (x : A) => pow(g(x), 2)) && integrable(p, (x : A) => f(x) * g(x)) && expectation(p, (x : A) => f(x) * g(x)) == real_of_num(0) \226\134\146 expectation(p, (x : A) => pow(f(x) + g(x), 2)) == expectation(p, (x : A) => pow(f(x), 2)) + expectation(p, (x : A) => pow(g(x), 2))
+      #|  (x : A)
+      #|  (x : A)
+      #|  real_of_num(1)
+      #|  (n : Num)
+      #|  (k : Num) => (v' : (Num, A) -> Real)(k, (x : A))
+      #|  real_of_num(0) <= (t : Real) && t <= real_of_num(1) \226\134\146 abs(t) <= real_of_num(1)
+      #|  (x : A)
+      #|  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(0) < real_of_num(1) + s
+      #|  real_of_num(1)
+      #|  expectation((p : Prob_space[A]), (x : A) => real_of_num(1))
+      #|  expectation((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (k : Num) => (v' : (Num, A) -> Real)(k, x) / pow(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)), 2)))
+      #|  real_of_num(0) <= (s : Real) && real_of_num(0) <= (t : Real) \226\134\146 real_of_num(1) <= abs(real_of_num(1) + (s + t))
+      #|  pow(real_of_num(1), 2)
+      #|  (x : A)
+      #|  (x : A)
+      #|  ((x : A) => inv(pow(real_of_num(1) + (sum(op_dot_dot(0, (n : Num)), (j : Num) => (v' : (Num, A) -> Real)(j, x)) + v'(SUC(n), x)), 2))) == ((x : A) => real_of_num(1) / pow(real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x)), 2))
+      #|  real_of_num(1)
+      #|  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(1) <= abs(real_of_num(1) + s)
+      #|  pow(real_of_num(1), 2)
+      #|  (x : A)
+      #|  (x : A)
+      #|  ((x : A) => inv(pow(real_of_num(1) + sum(op_dot_dot(0, (i : Num)), (j : Num) => (v' : (Num, A) -> Real)(j, x)), 2))) == ((x : A) => real_of_num(1) / pow(real_of_num(1) + sum(op_dot_dot(0, i), (j : Num) => v'(j, x)), 2))
+      #|  real_of_num(1)
+      #|  (i : Num)
+      #|  (a : Real) == (b : Real) \226\134\146 a <= b
+      #|  real_of_num(0) <= (s : Real) && real_of_num(0) <= (t : Real) \226\134\146 real_of_num(0) <= real_of_num(1) + (s + t)
+      #|  (x : A)
+      #|  real_of_num(0) <= (s : Real) && real_of_num(0) <= (t : Real) \226\134\146 real_of_num(1) <= abs(real_of_num(1) + (s + t))
+      #|  pow(real_of_num(1), 2)
+      #|  (x : A)
+      #|  real_of_num(0) <= (s : Real) && real_of_num(0) <= (t : Real) \226\134\146 real_of_num(1) <= real_of_num(1) + (s + t)
+      #|  pow(real_of_num(1), 2)
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num)))
+      #|  (j : Num) <= (n : Num)
+      #|  (j : Num) <= SUC((n : Num))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((j : Num))
+      #|  (j : Num)
+      #|  real_of_num(0) <= (s : Real) && real_of_num(0) <= (t : Real) \226\134\146 real_of_num(1) <= abs(real_of_num(1) + (s + t))
+      #|  pow(real_of_num(1), 2)
+      #|  (x : A)
+      #|  (x : A)
+      #|  ((x : A) => inv(pow(real_of_num(1) + (sum(op_dot_dot(0, (n : Num)), (j : Num) => (v' : (Num, A) -> Real)(j, x)) + v'(SUC(n), x)), 2))) == ((x : A) => real_of_num(1) / pow(real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x)), 2))
+      #|  real_of_num(1)
+      #|  real_of_num(1)
+      #|  (x : A) => inv(pow(real_of_num(1) + (sum(op_dot_dot(0, (n : Num)), (j : Num) => (v' : (Num, A) -> Real)(j, x)) + v'(SUC(n), x)), 2))
+      #|  SUC((n : Num))
+      #|  (B : (Num, A) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (k : Num) => (v' : (Num, A) -> Real)(k, x) / pow(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)), 2))) + expectation(p, (x : A) => v'(SUC(n), x) * inv(pow(real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x)), 2)))
+      #|  (x : A) => (indicator_fn((B : (Num, A) -> Bool)(SUC(SUC((n : Num)))), x) - (v' : (Num, A) -> Real)(SUC(n), x)) * (sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - v'(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))) / (real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x))))
+      #|  real_of_num(2)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => real_of_num(2) * ((indicator_fn((B : (Num, A) -> Bool)(SUC(SUC((n : Num)))), x) - (v' : (Num, A) -> Real)(SUC(n), x)) * (sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - v'(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))) / (real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x)))))
+      #|  (x : A) => pow(indicator_fn((B : (Num, A) -> Bool)(SUC(SUC((n : Num)))), x) - (v' : (Num, A) -> Real)(SUC(n), x), 2) * inv(pow(real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x)), 2))
+      #|  (p : Prob_space[A])
+      #|  (x : A) => pow(indicator_fn((B : (Num, A) -> Bool)(SUC(SUC((n : Num)))), x) - (v' : (Num, A) -> Real)(SUC(n), x), 2) * inv(pow(real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x)), 2)) + real_of_num(2) * ((indicator_fn(B(SUC(SUC(n))), x) - v'(SUC(n), x)) * (sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - v'(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))) / (real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x)))))
+      #|  (x : A) => pow(sum(op_dot_dot(0, (n : Num)), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))), 2)
+      #|  (p : Prob_space[A])
+      #|  real_of_num(0) <= (s : Real) && real_of_num(0) <= (t : Real) \226\134\146 real_of_num(1) <= abs(real_of_num(1) + (s + t))
+      #|  (x : A)
+      #|  real_of_num(0) <= (s : Real) && real_of_num(0) <= (t : Real) \226\134\146 real_of_num(1) <= abs(real_of_num(1) + (s + t))
+      #|  (x : A)
+      #|  (x : A)
+      #|  ((x : A) => inv(real_of_num(1) + (sum(op_dot_dot(0, (n : Num)), (j : Num) => (v' : (Num, A) -> Real)(j, x)) + v'(SUC(n), x)))) == ((x : A) => real_of_num(1) / (real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x))))
+      #|  real_of_num(1)
+      #|  real_of_num(SUC((n : Num)))
+      #|  integrable((p : Prob_space[A]), (x : A) => (indicator_fn((B : (Num, A) -> Bool)(SUC(SUC((n : Num)))), x) - (v' : (Num, A) -> Real)(SUC(n), x)) * (sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - v'(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))) / (real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x)))))
+      #|  real_of_num(0) <= (s : Real) && real_of_num(0) <= (t : Real) \226\134\146 real_of_num(1) <= abs(real_of_num(1) + (s + t))
+      #|  pow(real_of_num(1), 2)
+      #|  real_of_num(1) * real_of_num(1)
+      #|  (x : A)
+      #|  (x : A)
+      #|  ((x : A) => inv(pow(real_of_num(1) + (sum(op_dot_dot(0, (n : Num)), (j : Num) => (v' : (Num, A) -> Real)(j, x)) + v'(SUC(n), x)), 2))) == ((x : A) => real_of_num(1) / pow(real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x)), 2))
+      #|  ((x : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(SUC((n : Num)))), x)) == indicator_fn(B(SUC(SUC(n))))
+      #|  real_of_num(1)
+      #|  integrable((p : Prob_space[A]), (x : A) => pow(indicator_fn((B : (Num, A) -> Bool)(SUC(SUC((n : Num)))), x) - (v' : (Num, A) -> Real)(SUC(n), x), 2) * inv(pow(real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x)), 2)))
+      #|  (x : A)
+      #|  pow(real_of_num(SUC((n : Num))), 2)
+      #|  integrable((p : Prob_space[A]), (x : A) => pow(sum(op_dot_dot(0, (n : Num)), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))), 2))
+      #|  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(1) <= real_of_num(1) + s
+      #|  (k : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => abs((indicator_fn((B : (Num, A) -> Bool)(SUC(k)), (x : A)) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))))
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(1))
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 abs(sum(op_dot_dot(0, (n : Num)), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x))))) <= real_of_num(SUC(n))
+      #|  (i : Num)
+      #|  integrable((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))))
+      #|  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(1) <= abs(real_of_num(1) + s)
+      #|  (x : A)
+      #|  (x : A)
+      #|  ((x : A) => inv(real_of_num(1) + sum(op_dot_dot(0, (i : Num)), (j : Num) => (v' : (Num, A) -> Real)(j, x)))) == ((x : A) => real_of_num(1) / (real_of_num(1) + sum(op_dot_dot(0, i), (j : Num) => v'(j, x))))
+      #|  real_of_num(1)
+      #|  \226\136\128 i : Num, i <= (n : Num) \226\134\146 integrable((p : Prob_space[A]), (x : A) => (indicator_fn((B : (Num, A) -> Bool)(SUC(i)), x) - (v' : (Num, A) -> Real)(i, x)) / (real_of_num(1) + sum(op_dot_dot(0, i), (j : Num) => v'(j, x))))
+      #|  (cc : Real)
+      #|  real_of_num(1) + (sum(op_dot_dot(0, (n : Num)), (j : Num) => (v' : (Num, A) -> Real)(j, (x : A))) + v'(SUC(n), x))
+      #|  (dd : Real)
+      #|  indicator_fn((B : (Num, A) -> Bool)(SUC(SUC((n : Num)))), (x : A)) - (v' : (Num, A) -> Real)(SUC(n), x)
+      #|  (s : Real)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), (x : A)) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x))))
+      #|  (x : A)
+      #|  ((x : A) => pow(sum(op_dot_dot(0, (n : Num)), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))) + (indicator_fn(B(SUC(SUC(n))), x) - v'(SUC(n), x)) / (real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x))), 2)) == ((x : A) => pow(sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - v'(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))), 2) + (pow(indicator_fn(B(SUC(SUC(n))), x) - v'(SUC(n), x), 2) * inv(pow(real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x)), 2)) + real_of_num(2) * ((indicator_fn(B(SUC(SUC(n))), x) - v'(SUC(n), x)) * (sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - v'(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))) / (real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x)))))))
+      #|  (a : Real) == (b : Real) \226\134\146 a <= b
+      #|  expectation((p : Prob_space[A]), (x : A) => pow(sum(op_dot_dot(0, (n : Num)), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))), 2)) + expectation(p, (x : A) => pow(indicator_fn(B(SUC(SUC(n))), x) - v'(SUC(n), x), 2) * inv(pow(real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x)), 2)))
+      #|  real_of_num(0) <= (s : Real) && real_of_num(0) <= (t : Real) \226\134\146 real_of_num(1) <= abs(real_of_num(1) + (s + t))
+      #|  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(1) <= real_of_num(1) + s
+      #|  (k : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => abs((indicator_fn((B : (Num, A) -> Bool)(SUC(k)), (x : A)) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))))
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(1))
+      #|  (x : A)
+      #|  real_of_num(0) <= (s : Real) && real_of_num(0) <= (t : Real) \226\134\146 real_of_num(1) <= real_of_num(1) + (s + t)
+      #|  (x : A)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num)))
+      #|  (j : Num) <= (n : Num)
+      #|  (j : Num) <= SUC((n : Num))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((j : Num))
+      #|  (j : Num)
+      #|  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(1) <= real_of_num(1) + s
+      #|  (x : A)
+      #|  (k : Num) <= (n : Num)
+      #|  (j : Num) <= (k : Num)
+      #|  (j : Num) <= SUC((n : Num))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((j : Num))
+      #|  (j : Num)
+      #|  (k : Num) <= (n : Num)
+      #|  (k : Num) <= SUC((n : Num))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((k : Num))
+      #|  (k : Num) <= (n : Num)
+      #|  SUC((k : Num)) <= SUC((n : Num))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(SUC((k : Num)))
+      #|  (k : Num)
+      #|  real_of_num(0) <= (s : Real) && real_of_num(0) <= (t : Real) \226\134\146 real_of_num(1) <= abs(real_of_num(1) + (s + t))
+      #|  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(1) <= real_of_num(1) + s
+      #|  (k : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => abs((indicator_fn((B : (Num, A) -> Bool)(SUC(k)), (x : A)) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))))
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(1))
+      #|  (x : A)
+      #|  (x : A)
+      #|  (x : A)
+      #|  ((x : A) => indicator_fn((B : (Num, A) -> Bool)(SUC((i : Num))), x)) == indicator_fn(B(SUC(i)))
+      #|  (i : Num)
+      #|  real_of_num(SUC((n : Num)))
+      #|  real_of_num(SUC((n : Num)))
+      #|  (x : A) => sum(op_dot_dot(0, (n : Num)), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))) / (real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x)))
+      #|  SUC((n : Num))
+      #|  (B : (Num, A) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => (indicator_fn((B : (Num, A) -> Bool)(SUC(SUC((n : Num)))), x) - (v' : (Num, A) -> Real)(SUC(n), x)) * (sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - v'(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))) / (real_of_num(1) + (sum(op_dot_dot(0, n), (j : Num) => v'(j, x)) + v'(SUC(n), x))))) == real_of_num(0)
+      #|  real_of_num(0) <= (i : Real) && i <= real_of_num(1) && real_of_num(0) <= (v : Real) && v <= real_of_num(1) \226\134\146 abs(i - v) <= real_of_num(1)
+      #|  \226\136\128 k : Num, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 abs(indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) <= real_of_num(1)
+      #|  real_of_num(0) <= (y : Real) && y <= real_of_num(1) \226\134\146 abs(y) <= real_of_num(1)
+      #|  (x : A)
+      #|  real_of_num(1)
+      #|  \226\136\128 k : Num, integrable((p : Prob_space[A]), (v' : (Num, A) -> Real)(k))
+      #|  real_of_num(0) <= (s : Real) && real_of_num(0) <= (t : Real) \226\134\146 real_of_num(0) < real_of_num(1) + (s + t)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 real_of_num(0) < real_of_num(1) + (sum(op_dot_dot(0, (n : Num)), (j : Num) => (v' : (Num, A) -> Real)(j, x)) + v'(SUC(n), x))
+      #|  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(0) < real_of_num(1) + s
+      #|  \226\136\128 k : Num, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 real_of_num(0) < real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => (v' : (Num, A) -> Real)(j, x))
+      #|  real_of_num(0) <= (v : Real) \226\134\146 real_of_num(0) <= real_of_num(1) + v
+      #|  (x : A)
+      #|  real_of_num(0) <= (v : Real) \226\134\146 real_of_num(1) <= abs(real_of_num(1) + v)
+      #|  pow(real_of_num(1), 2)
+      #|  (x : A)
+      #|  real_of_num(0) <= (v : Real) \226\134\146 real_of_num(1) <= real_of_num(1) + v
+      #|  pow(real_of_num(1), 2)
+      #|  (x : A)
+      #|  real_of_num(0) <= (v : Real) \226\134\146 real_of_num(1) <= abs(real_of_num(1) + v)
+      #|  pow(real_of_num(1), 2)
+      #|  (x : A)
+      #|  real_of_num(0) <= (v : Real) \226\134\146 real_of_num(0) < real_of_num(1) + v
+      #|  (x : A)
+      #|  ((x : A) => inv(pow(real_of_num(1) + (v' : (Num, A) -> Real)(0, x), 2))) == ((x : A) => real_of_num(1) / pow(real_of_num(1) + v'(0, x), 2))
+      #|  real_of_num(1)
+      #|  real_of_num(1)
+      #|  (x : A) => inv(pow(real_of_num(1) + (v' : (Num, A) -> Real)(0, x), 2))
       #|  0
-      #|  B:num->A->bool
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall n:num. expectation p\n    (\\x:A. (sum (0..n) (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n      (v':num->A->real) k x) /\n      (&1 + sum (0..k) (\\j. v' j x)))) pow 2) <=\n    expectation p\n      (\\x. sum (0..n) (\\k. v' k x /\n        (&1 + sum (0..k) (\\j. v' j x)) pow 2))
-      #|  (\\x:A. (v:num->A->real) k x) =\n     gen_cond_exp p ((FF:num->(A->bool)->bool) k)\n       (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y)
-      #|  (v':num->A->real) k =\n     (\\x. max (min ((v:num->A->real) k x) (&1)) (&0))
-      #|  forall k:num. measurable_wrt p ((FF:num->(A->bool)->bool) k)\n    ((v':num->A->real) k)
-      #|  (\\x:A. (v:num->A->real) k x) =\n      gen_cond_exp p ((FF:num->(A->bool)->bool) k)\n        (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y)
-      #|  (v':num->A->real) k =\n     (\\x. max (min ((v:num->A->real) k x) (&1)) (&0))
-      #|  forall k:num. random_variable p ((v':num->A->real) k)
-      #|  forall k. integrable p (\\y:A. indicator_fn\n    ((B:num->A->bool) (SUC k)) y)
-      #|  forall n. sub_sigma_algebra p ((FF:num->(A->bool)->bool) n)
-      #|  forall k (x:A). &0 <= (v':num->A->real) k x /\\ v' k x <= &1
-      #|  forall k (x:A). max (min ((v:num->A->real) k x) (&1)) (&0) =\n    (v':num->A->real) k x
-      #|  v' = \\k (x:A). max (min ((v:num->A->real) k x) (&1)) (&0)
-      #|  forall k (x:A). gen_cond_exp p (FF k)\n    (\\y. indicator_fn (B (SUC k)) y) x = (v:num->A->real) k x
-      #|  v = \\k x:A. gen_cond_exp p (FF k)\n    (\\y. indicator_fn (B (SUC k)) y) x
-      #|  forall p FF (B:num->A->bool).\n     filtration p FF /\\ (forall n. B n IN prob_events p) /\\\n     (forall n. B n SUBSET prob_carrier p) /\\ (forall n. B n IN FF n)\n     ==> forall n. expectation p\n       (\\x. (sum(0..n)\n         (\\k. (indicator_fn (B (SUC k)) x -\n               max (min (gen_cond_exp p (FF k)\n                 (\\y. indicator_fn (B (SUC k)) y) x) (&1)) (&0)) /\n              (&1 + sum(0..k)\n                (\\j. max (min (gen_cond_exp p (FF j)\n                  (\\y. indicator_fn (B (SUC j)) y) x) (&1)) (&0))))) pow 2)\n       <= &1
-      #|  x:A
-      #|  {x:A | sum (0..n) (\\k. (indicator_fn\n    ((B:num->A->bool) (SUC k)) x - (v:num->A->real) k x) /\n    max (&1 + sum (0..k) (\\j. v j x)) (&1)) =\n    sum (0..n) (\\k. (indicator_fn (B (SUC k)) x - (v':num->A->real) k x) /\n    (&1 + sum (0..k) (\\j. v' j x)))}
-      #|  expectation p (\\x:A. abs(sum (0..n)\n    (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n      (v':num->A->real) k x) /\n      (&1 + sum (0..k) (\\j. v' j x)))))
-      #|  n:num
-      #|  e <= &1 ==> (e + &1) / &2 <= &1
-      #|  (expectation p (\\x:A. (sum (0..n)\n     (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n       (v':num->A->real) k x) /\n       (&1 + sum (0..k) (\\j. v' j x)))) pow 2) + &1) / &2
-      #|  forall n:num. expectation p\n    (\\x:A. abs(sum (0..n) (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n      (v':num->A->real) k x) /\n      (&1 + sum (0..k) (\\j. v' j x))))) <= &1
-      #|  x:A
-      #|  n:num
-      #|  x:A
-      #|  &0 <= s ==> &0 < &1 + s
-      #|  x:A
-      #|  &(SUC n)
-      #|  forall n:num. integrable p (\\x:A. sum (0..n)\n    (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n      (v':num->A->real) k x) /\n      (&1 + sum (0..k) (\\j. v' j x))))
-      #|  x:A
-      #|  m:num
-      #|  x:A
-      #|  &0 <= s ==> &0 < &1 + s
-      #|  x:A
-      #|  random_variable p (\\x:A. sum (0..m)\n     (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n       (v':num->A->real) k x) /\n       (&1 + sum (0..k) (\\j. v' j x))))
-      #|  (&(SUC m)) pow 2
-      #|  m:num
-      #|  forall n:num. integrable p (\\x:A. (sum (0..n)\n    (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n      (v':num->A->real) k x) /\n      (&1 + sum (0..k) (\\j. v' j x)))) pow 2)
-      #|  &0 <= s ==> &1 <= abs(&1 + s)
-      #|  &0 <= v /\\ v <= &1 ==> abs(&1 - v) <= &1 /\\ abs(&0 - v) <= &1
-      #|  &1
-      #|  &0 <= s ==> &0 < abs(&1 + s)
-      #|  &0 < abs(&1 + sum(0..k) (\\j. (v':num->A->real) j x))
-      #|  k:num
-      #|  sum (0..n) (\\k:num. &1)
-      #|  sum (0..n) (\\k:num. abs((indicator_fn\n     ((B:num->A->bool) (SUC k)) x - (v':num->A->real) k x) /\n     (&1 + sum (0..k) (\\j. v' j x))))
-      #|  forall n (x:A). abs(sum (0..n) (\\k. (indicator_fn\n    ((B:num->A->bool) (SUC k)) x - (v':num->A->real) k x) /\n    (&1 + sum (0..k) (\\j. v' j x)))) <= &(SUC n)
-      #|  forall k (x:A). max (min (gen_cond_exp p ((FF:num->(A->bool)->bool) k)\n     (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x) (&1)) (&0) =\n     (v':num->A->real) k x
-      #|  B:num->A->bool
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall n:num. expectation p\n    (\\x:A. (sum (0..n) (\\k. (indicator_fn (B (SUC k)) x -\n      (v':num->A->real) k x) /\n      (&1 + sum (0..k) (\\j. v' j x)))) pow 2) <= &1
-      #|  n:num
-      #|  B:num->A->bool
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall n:num. integrable p (\\x:A. abs(sum (0..n)\n    (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n      (v:num->A->real) k x) /\n      max (&1 + sum (0..k) (\\j. v j x)) (&1))))
-      #|  &0 <= s ==> max (&1 + s) (&1) = &1 + s
-      #|  &0 <= sum (0..k) (\\j. (v':num->A->real) j x)
-      #|  sum (0..k) (\\j. (v:num->A->real) j x) =\n     sum (0..k) (\\j. (v':num->A->real) j x)
-      #|  (v:num->A->real) k x = (v':num->A->real) k x
-      #|  k:num
-      #|  x:A
-      #|  {x:A | forall k. (v:num->A->real) k x = (v':num->A->real) k x}
-      #|  forall n:num. almost_surely p\n    {x:A | sum (0..n) (\\k. (indicator_fn (B (SUC k)) x - (v:num->A->real) k x) /\n      max (&1 + sum (0..k) (\\j. v j x)) (&1)) =\n     sum (0..n) (\\k. (indicator_fn (B (SUC k)) x - (v':num->A->real) k x) /\n      (&1 + sum (0..k) (\\j. v' j x)))}
-      #|  k:num
-      #|  {x:A | &0 <= (v:num->A->real) k x /\\ v k x <= &1}
-      #|  &0 <= (v:num->A->real) k x /\\ v k x <= &1
-      #|  k:num
-      #|  x:A
-      #|  n:num
-      #|  B:num->A->bool
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  {x:A | &0 <= (v:num->A->real) n x /\\ v n x <= &1} =\n      {x | &0 <= gen_cond_exp p (FF n) (\\y. indicator_fn (B (SUC n)) y) x /\\\n       gen_cond_exp p (FF n) (\\y. indicator_fn (B (SUC n)) y) x <= &1}
+      #|  (B : (Num, A) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, expectation((p : Prob_space[A]), (x : A) => pow(sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))), 2)) <= expectation(p, (x : A) => sum(op_dot_dot(0, n), (k : Num) => v'(k, x) / pow(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)), 2)))
+      #|  ((x : A) => (v : (Num, A) -> Real)((k : Num), x)) == gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y))
+      #|  (v' : (Num, A) -> Real)((k : Num)) == ((x : A) => max(min((v : (Num, A) -> Real)(k, x), real_of_num(1)), real_of_num(0)))
+      #|  \226\136\128 k : Num, measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (v' : (Num, A) -> Real)(k))
+      #|  ((x : A) => (v : (Num, A) -> Real)((k : Num), x)) == gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y))
+      #|  (v' : (Num, A) -> Real)((k : Num)) == ((x : A) => max(min((v : (Num, A) -> Real)(k, x), real_of_num(1)), real_of_num(0)))
+      #|  \226\136\128 k : Num, random_variable((p : Prob_space[A]), (v' : (Num, A) -> Real)(k))
+      #|  \226\136\128 k : Num, integrable((p : Prob_space[A]), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y))
+      #|  \226\136\128 n : Num, sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n))
+      #|  \226\136\128 k : Num, \226\136\128 x : A, real_of_num(0) <= (v' : (Num, A) -> Real)(k, x) && v'(k, x) <= real_of_num(1)
+      #|  \226\136\128 k : Num, \226\136\128 x : A, max(min((v : (Num, A) -> Real)(k, x), real_of_num(1)), real_of_num(0)) == (v' : (Num, A) -> Real)(k, x)
+      #|  (v' : (Num, A) -> Real) == ((k : Num) => (x : A) => max(min((v : (Num, A) -> Real)(k, x), real_of_num(1)), real_of_num(0)))
+      #|  \226\136\128 k : Num, \226\136\128 x : A, gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x) == (v : (Num, A) -> Real)(k, x)
+      #|  (v : (Num, A) -> Real) == ((k : Num) => (x : A) => gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 B : (Num, A) -> Bool, filtration(p, FF) && (\226\136\128 n : Num, IN(B(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(B(n), prob_carrier(p))) && (\226\136\128 n : Num, IN(B(n), FF(n))) \226\134\146 (\226\136\128 n : Num, expectation(p, (x : A) => pow(sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - max(min(gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x), real_of_num(1)), real_of_num(0))) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => max(min(gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x), real_of_num(1)), real_of_num(0))))), 2)) <= real_of_num(1))
+      #|  (x : A)
+      #|  {(x : A) | sum(op_dot_dot(0, (n : Num)), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v : (Num, A) -> Real)(k, x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v(j, x)), real_of_num(1))) == sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x))))}
+      #|  expectation((p : Prob_space[A]), (x : A) => abs(sum(op_dot_dot(0, (n : Num)), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x))))))
+      #|  (n : Num)
+      #|  (e : Real) <= real_of_num(1) \226\134\146 (e + real_of_num(1)) / real_of_num(2) <= real_of_num(1)
+      #|  (expectation((p : Prob_space[A]), (x : A) => pow(sum(op_dot_dot(0, (n : Num)), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))), 2)) + real_of_num(1)) / real_of_num(2)
+      #|  \226\136\128 n : Num, expectation((p : Prob_space[A]), (x : A) => abs(sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))))) <= real_of_num(1)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (x : A)
+      #|  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(0) < real_of_num(1) + s
+      #|  (x : A)
+      #|  real_of_num(SUC((n : Num)))
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))))
+      #|  (x : A)
+      #|  (m : Num)
+      #|  (x : A)
+      #|  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(0) < real_of_num(1) + s
+      #|  (x : A)
+      #|  random_variable((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (m : Num)), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))))
+      #|  pow(real_of_num(SUC((m : Num))), 2)
+      #|  (m : Num)
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (x : A) => pow(sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))), 2))
+      #|  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(1) <= abs(real_of_num(1) + s)
+      #|  real_of_num(0) <= (v : Real) && v <= real_of_num(1) \226\134\146 abs(real_of_num(1) - v) <= real_of_num(1) && abs(real_of_num(0) - v) <= real_of_num(1)
+      #|  real_of_num(1)
+      #|  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(0) < abs(real_of_num(1) + s)
+      #|  real_of_num(0) < abs(real_of_num(1) + sum(op_dot_dot(0, (k : Num)), (j : Num) => (v' : (Num, A) -> Real)(j, (x : A))))
+      #|  (k : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(1))
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => abs((indicator_fn((B : (Num, A) -> Bool)(SUC(k)), (x : A)) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))))
+      #|  \226\136\128 n : Num, \226\136\128 x : A, abs(sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x))))) <= real_of_num(SUC(n))
+      #|  \226\136\128 k : Num, \226\136\128 x : A, max(min(gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x), real_of_num(1)), real_of_num(0)) == (v' : (Num, A) -> Real)(k, x)
+      #|  (B : (Num, A) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, expectation((p : Prob_space[A]), (x : A) => pow(sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x)))), 2)) <= real_of_num(1)
+      #|  (n : Num)
+      #|  (B : (Num, A) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (x : A) => abs(sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v : (Num, A) -> Real)(k, x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v(j, x)), real_of_num(1)))))
+      #|  real_of_num(0) <= (s : Real) \226\134\146 max(real_of_num(1) + s, real_of_num(1)) == real_of_num(1) + s
+      #|  real_of_num(0) <= sum(op_dot_dot(0, (k : Num)), (j : Num) => (v' : (Num, A) -> Real)(j, (x : A)))
+      #|  sum(op_dot_dot(0, (k : Num)), (j : Num) => (v : (Num, A) -> Real)(j, (x : A))) == sum(op_dot_dot(0, k), (j : Num) => (v' : (Num, A) -> Real)(j, x))
+      #|  (v : (Num, A) -> Real)((k : Num), (x : A)) == (v' : (Num, A) -> Real)(k, x)
+      #|  (k : Num)
+      #|  (x : A)
+      #|  {(x : A) | \226\136\128 k : Num, (v : (Num, A) -> Real)(k, x) == (v' : (Num, A) -> Real)(k, x)}
+      #|  \226\136\128 n : Num, almost_surely((p : Prob_space[A]), {(x : A) | sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - (v : (Num, A) -> Real)(k, x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v(j, x)), real_of_num(1))) == sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - (v' : (Num, A) -> Real)(k, x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => v'(j, x))))})
+      #|  (k : Num)
+      #|  {(x : A) | real_of_num(0) <= (v : (Num, A) -> Real)((k : Num), x) && v(k, x) <= real_of_num(1)}
+      #|  real_of_num(0) <= (v : (Num, A) -> Real)((k : Num), (x : A)) && v(k, x) <= real_of_num(1)
+      #|  (k : Num)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (B : (Num, A) -> Bool)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  {(x : A) | real_of_num(0) <= (v : (Num, A) -> Real)((n : Num), x) && v(n, x) <= real_of_num(1)} == {(x : A) | real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(n)), y), x) && gen_cond_exp(p, FF(n), (y : A) => indicator_fn(B(SUC(n)), y), x) <= real_of_num(1)}
       #|  INTERS {(\\k. {x:A | &0 <= (v:num->A->real) k x /\\\n     v k x <= &1}) n | n IN (:num)}
-      #|  almost_surely p\n    {x:A | forall k. (v:num->A->real) k x = (v':num->A->real) k x}
-      #|  (FF:num->(A->bool)->bool) k
-      #|  (\\x:A. (v:num->A->real) k x) =\n     gen_cond_exp p ((FF:num->(A->bool)->bool) k)\n       (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y)
-      #|  forall k. random_variable p (\\x:A. (v:num->A->real) k x)
-      #|  forall k (x:A). &0 <= (v':num->A->real) k x /\\ v' k x <= &1
-      #|  v' = \\k (x:A). max (min ((v:num->A->real) k x) (&1)) (&0)
-      #|  forall k. integrable p (\\y:A. indicator_fn\n    ((B:num->A->bool) (SUC k)) y)
-      #|  forall n. sub_sigma_algebra p ((FF:num->(A->bool)->bool) n)
-      #|  forall k (x:A). gen_cond_exp p (FF k)\n    (\\y. indicator_fn (B (SUC k)) y) x = (v:num->A->real) k x
-      #|  v = \\k x:A. gen_cond_exp p (FF k)\n    (\\y. indicator_fn (B (SUC k)) y) x
-      #|  forall p FF (B:num->A->bool).\n     filtration p FF /\\ (forall n. B n IN prob_events p) /\\\n     (forall n. B n SUBSET prob_carrier p) /\\ (forall n. B n IN FF n)\n     ==> forall n. expectation p\n       (\\x. abs(sum(0..n)\n         (\\k. (indicator_fn (B (SUC k)) x -\n               gen_cond_exp p (FF k)\n                 (\\y. indicator_fn (B (SUC k)) y) x) /\n              max (&1 + sum(0..k)\n                (\\j. gen_cond_exp p (FF j)\n                  (\\y. indicator_fn (B (SUC j)) y) x)) (&1)))) <= &1
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | \226\136\128 k : Num, (v : (Num, A) -> Real)(k, x) == (v' : (Num, A) -> Real)(k, x)})
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((k : Num))
+      #|  ((x : A) => (v : (Num, A) -> Real)((k : Num), x)) == gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y))
+      #|  \226\136\128 k : Num, random_variable((p : Prob_space[A]), (x : A) => (v : (Num, A) -> Real)(k, x))
+      #|  \226\136\128 k : Num, \226\136\128 x : A, real_of_num(0) <= (v' : (Num, A) -> Real)(k, x) && v'(k, x) <= real_of_num(1)
+      #|  (v' : (Num, A) -> Real) == ((k : Num) => (x : A) => max(min((v : (Num, A) -> Real)(k, x), real_of_num(1)), real_of_num(0)))
+      #|  \226\136\128 k : Num, integrable((p : Prob_space[A]), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y))
+      #|  \226\136\128 n : Num, sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n))
+      #|  \226\136\128 k : Num, \226\136\128 x : A, gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x) == (v : (Num, A) -> Real)(k, x)
+      #|  (v : (Num, A) -> Real) == ((k : Num) => (x : A) => gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 B : (Num, A) -> Bool, filtration(p, FF) && (\226\136\128 n : Num, IN(B(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(B(n), prob_carrier(p))) && (\226\136\128 n : Num, IN(B(n), FF(n))) \226\134\146 (\226\136\128 n : Num, expectation(p, (x : A) => abs(sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)), real_of_num(1))))) <= real_of_num(1))
       #|  2
-      #|  &1
-      #|  \\n (x:A). sum(0..n)\n      (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n            gen_cond_exp p (FF k)\n              (\\y. indicator_fn (B (SUC k)) y) x) /\n           max (&1 + sum(0..k)\n             (\\j. gen_cond_exp p (FF j)\n               (\\y. indicator_fn (B (SUC j)) y) x)) (&1))
-      #|  \\n:num. (FF:num->(A->bool)->bool)(SUC n)
-      #|  p:A prob_space
-      #|  forall n. expectation (p:A prob_space)\n     (\\x. abs(sum(0..n)\n       (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n             gen_cond_exp p (FF k)\n               (\\y. indicator_fn (B (SUC k)) y) x) /\n            max (&1 + sum(0..k)\n              (\\j. gen_cond_exp p (FF j)\n                (\\y. indicator_fn (B (SUC j)) y) x)) (&1)))) <= &1
-      #|  martingale p (\\n. (FF:num->(A->bool)->bool)(SUC n))\n     (\\n (x:A). sum(0..n)\n       (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n             gen_cond_exp p (FF k)\n               (\\y. indicator_fn (B (SUC k)) y) x) /\n            max (&1 + sum(0..k)\n              (\\j. gen_cond_exp p (FF j)\n                (\\y. indicator_fn (B (SUC j)) y) x)) (&1)))
-      #|  forall p FF (B:num->A->bool).\n     filtration p FF /\\ (forall n. B n IN prob_events p) /\\\n     (forall n. B n SUBSET prob_carrier p) /\\ (forall n. B n IN FF n)\n     ==> almost_surely p\n         {x | ?L. ((\\n. sum(0..n)\n           (\\k. (indicator_fn (B (SUC k)) x -\n                 gen_cond_exp p (FF k)\n                   (\\y. indicator_fn (B (SUC k)) y) x) /\n                max (&1 + sum(0..k)\n                  (\\j. gen_cond_exp p (FF j)\n                    (\\y. indicator_fn (B (SUC j)) y) x)) (&1)))\n              ---> L) sequentially}
-      #|  &0 <= s ==> &1 <= &1 + s
-      #|  max a b = a <=> b <= a
-      #|  max (&1 + sum(0..k)\n     (\\j. gen_cond_exp p (FF j)\n       (\\y. indicator_fn ((B:num->A->bool) (SUC j)) y) (x:A))) (&1) =\n    &1 + sum(0..k)\n     (\\j. gen_cond_exp p (FF j)\n       (\\y. indicator_fn (B (SUC j)) y) x)
-      #|  k:num
-      #|  n:num
+      #|  real_of_num(1)
+      #|  (n : Num) => (x : A) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)), real_of_num(1)))
+      #|  (n : Num) => (FF : (Num, (A) -> Bool) -> Bool)(SUC(n))
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, expectation((p : Prob_space[A]), (x : A) => abs(sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)), real_of_num(1))))) <= real_of_num(1)
+      #|  martingale((p : Prob_space[A]), (n : Num) => (FF : (Num, (A) -> Bool) -> Bool)(SUC(n)), (n : Num) => (x : A) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)), real_of_num(1))))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 B : (Num, A) -> Bool, filtration(p, FF) && (\226\136\128 n : Num, IN(B(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(B(n), prob_carrier(p))) && (\226\136\128 n : Num, IN(B(n), FF(n))) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)), real_of_num(1))), L, sequentially)})
+      #|  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(1) <= real_of_num(1) + s
+      #|  (max((a : Real), (b : Real)) == a) == (b <= a)
+      #|  max(real_of_num(1) + sum(op_dot_dot(0, (k : Num)), (j : Num) => gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(j), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(j)), y), (x : A))), real_of_num(1)) == real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x))
+      #|  (k : Num)
+      #|  (n : Num)
       #|  0
-      #|  \\n. sum(0..n)\n    (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) (x:A) -\n          gen_cond_exp p (FF k)\n            (\\y. indicator_fn (B (SUC k)) y) x) /\n         max (&1 + sum(0..k)\n           (\\j. gen_cond_exp p (FF j)\n             (\\y. indicator_fn (B (SUC j)) y) x)) (&1))
+      #|  (n : Num) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), (x : A)) - gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)), real_of_num(1)))
       #|  sequentially
-      #|  L:real
-      #|  k:num
-      #|  {x:A | &0 <= gen_cond_exp p (FF k)\n      (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x}
-      #|  forall k. &0 <= gen_cond_exp p (FF k)\n     (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) (x:A)
-      #|  x:A
+      #|  (L : Real)
+      #|  (k : Num)
+      #|  {(x : A) | real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num)), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x)}
+      #|  \226\136\128 k : Num, real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), (x : A))
+      #|  (x : A)
       #|  (INTERS {{x:A | &0 <=\n      gen_cond_exp p (FF k)\n        (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x} |\n      k IN (:num)}) INTER\n    {x | ?L. ((\\n. sum(0..n)\n      (\\k. (indicator_fn (B (SUC k)) x -\n            gen_cond_exp p (FF k)\n              (\\y. indicator_fn (B (SUC k)) y) x) /\n           max (&1 + sum(0..k)\n             (\\j. gen_cond_exp p (FF j)\n               (\\y. indicator_fn (B (SUC j)) y) x)) (&1)))\n      ---> L) sequentially}
       #|  almost_surely p\n     ((INTERS {{x:A | &0 <=\n       gen_cond_exp p (FF k)\n         (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x} |\n       k IN (:num)}) INTER\n      {x | ?L. ((\\n. sum(0..n)\n        (\\k. (indicator_fn (B (SUC k)) x -\n              gen_cond_exp p (FF k)\n                (\\y. indicator_fn (B (SUC k)) y) x) /\n             max (&1 + sum(0..k)\n               (\\j. gen_cond_exp p (FF j)\n                 (\\y. indicator_fn (B (SUC j)) y) x)) (&1)))\n        ---> L) sequentially})
-      #|  almost_surely p\n     {x:A | ?L. ((\\n. sum(0..n)\n       (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n             gen_cond_exp p (FF k)\n               (\\y. indicator_fn (B (SUC k)) y) x) /\n            max (&1 + sum(0..k)\n              (\\j. gen_cond_exp p (FF j)\n                (\\y. indicator_fn (B (SUC j)) y) x)) (&1)))\n       ---> L) sequentially}
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)), real_of_num(1))), L, sequentially)})
       #|  almost_surely p\n     (INTERS {{x:A | &0 <=\n       gen_cond_exp p (FF k)\n         (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x} |\n       k IN (:num)})
-      #|  forall p FF (B:num->A->bool).\n     filtration p FF /\\ (forall n. B n IN prob_events p) /\\\n     (forall n. B n SUBSET prob_carrier p) /\\ (forall n. B n IN FF n)\n     ==> almost_surely p\n         {x | ?L. ((\\n. sum(0..n)\n           (\\k. (indicator_fn (B (SUC k)) x -\n                 gen_cond_exp p (FF k)\n                   (\\y. indicator_fn (B (SUC k)) y) x) /\n                (&1 + sum(0..k)\n                  (\\j. gen_cond_exp p (FF j)\n                    (\\y. indicator_fn (B (SUC j)) y) x))))\n              ---> L) sequentially}
-      #|  indicator_fn ((B:num->A->bool) 0) x
-      #|  a:num->real
-      #|  v:num->real
-      #|  N:num
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 B : (Num, A) -> Bool, filtration(p, FF) && (\226\136\128 n : Num, IN(B(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(B(n), prob_carrier(p))) && (\226\136\128 n : Num, IN(B(n), FF(n))) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)))), L, sequentially)})
+      #|  indicator_fn((B : (Num, A) -> Bool)(0), (x : A))
+      #|  (a : (Num) -> Real)
+      #|  (v : (Num) -> Real)
+      #|  (N : Num)
       #|  0
-      #|  \\k:num. indicator_fn ((B:num->A->bool) k) x
+      #|  (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A))
       #|  1
-      #|  sum(1..SUC N) (\\k:num. indicator_fn ((B:num->A->bool) k) x) =\n     sum(0..N) (\\k. indicator_fn (B (SUC k)) x)
-      #|  0 + 1 = 1
-      #|  SUC N
+      #|  sum(op_dot_dot(1, SUC((N : Num))), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A))) == sum(op_dot_dot(0, N), (k : Num) => indicator_fn(B(SUC(k)), x))
+      #|  0 + 1 == 1
+      #|  SUC((N : Num))
       #|  0
-      #|  \\k:num. indicator_fn ((B:num->A->bool) k) x
-      #|  forall N. sum(0..SUC N) (\\k. indicator_fn ((B:num->A->bool) k) x) =\n     indicator_fn (B 0) x + sum(0..N) (v:num->real) +\n     sum(0..N) (\\k. a k * (&1 + sum(0..k) v))
-      #|  k:num
-      #|  (a:num->real) k =\n     (indicator_fn ((B:num->A->bool) (SUC k)) x - v k) /\n     (&1 + sum(0..k) v)
-      #|  forall k. (a:num->real) k * (&1 + sum(0..k) v) =\n     indicator_fn ((B:num->A->bool) (SUC k)) x - v k
-      #|  &0 <= s ==> &0 < &1 + s
-      #|  forall k. &0 < &1 + sum(0..k) (v:num->real)
-      #|  k:num
-      #|  forall k. &0 <= (v:num->real) k
-      #|  SUC N0
-      #|  N0:num
-      #|  M:num
-      #|  sum(0..N0) (\\k. indicator_fn ((B:num->A->bool) k) x)
-      #|  N0:num
-      #|  N0:num
-      #|  M:num
-      #|  M:num
-      #|  (forall M:num. ?N. &M <= sum(0..N) (\\k. indicator_fn ((B:num->A->bool) k) x))\n    <=> (forall M:num. ?N. &M <= sum(0..SUC N)\n      (\\k. indicator_fn (B k) x))
-      #|  a = \\k:num. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n     (v:num->real) k) /\n     (&1 + sum(0..k) v)
-      #|  ((\\n. sum(0..n) (\\k:num. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n      (v:num->real) k) / (&1 + sum(0..k) v))) ---> L) sequentially
-      #|  v = \\k. gen_cond_exp p (FF k)\n     (\\y:A. indicator_fn ((B:num->A->bool) (SUC k)) y) x
-      #|  {x:A | &0 <= gen_cond_exp p (FF k)\n      (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x}
-      #|  forall k. &0 <= gen_cond_exp p (FF k)\n     (\\y:A. indicator_fn ((B:num->A->bool) (SUC k)) y) x
-      #|  L:real
-      #|  x:A
+      #|  (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A))
+      #|  \226\136\128 N : Num, sum(op_dot_dot(0, SUC(N)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A))) == indicator_fn(B(0), x) + (sum(op_dot_dot(0, N), (v : (Num) -> Real)) + sum(op_dot_dot(0, N), (k : Num) => (a : (Num) -> Real)(k) * (real_of_num(1) + sum(op_dot_dot(0, k), v))))
+      #|  (k : Num)
+      #|  (a : (Num) -> Real)((k : Num)) == (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), (x : A)) - (v : (Num) -> Real)(k)) / (real_of_num(1) + sum(op_dot_dot(0, k), v))
+      #|  \226\136\128 k : Num, (a : (Num) -> Real)(k) * (real_of_num(1) + sum(op_dot_dot(0, k), (v : (Num) -> Real))) == indicator_fn((B : (Num, A) -> Bool)(SUC(k)), (x : A)) - v(k)
+      #|  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(0) < real_of_num(1) + s
+      #|  \226\136\128 k : Num, real_of_num(0) < real_of_num(1) + sum(op_dot_dot(0, k), (v : (Num) -> Real))
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, real_of_num(0) <= (v : (Num) -> Real)(k)
+      #|  SUC((N0 : Num))
+      #|  (N0 : Num)
+      #|  (M : Num)
+      #|  sum(op_dot_dot(0, (N0 : Num)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A)))
+      #|  (N0 : Num)
+      #|  (N0 : Num)
+      #|  (M : Num)
+      #|  (M : Num)
+      #|  (\226\136\128 M : Num, \226\136\131 N : Num, real_of_num(M) <= sum(op_dot_dot(0, N), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), (x : A)))) == (\226\136\128 M : Num, \226\136\131 N : Num, real_of_num(M) <= sum(op_dot_dot(0, SUC(N)), (k : Num) => indicator_fn(B(k), x)))
+      #|  (a : (Num) -> Real) == ((k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), (x : A)) - (v : (Num) -> Real)(k)) / (real_of_num(1) + sum(op_dot_dot(0, k), v)))
+      #|  op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), (x : A)) - (v : (Num) -> Real)(k)) / (real_of_num(1) + sum(op_dot_dot(0, k), v))), (L : Real), sequentially)
+      #|  (v : (Num) -> Real) == ((k : Num) => gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), (x : A)))
+      #|  {(x : A) | real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num)), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x)}
+      #|  \226\136\128 k : Num, real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), (x : A))
+      #|  (L : Real)
+      #|  (x : A)
       #|  (INTERS {{x:A | &0 <= gen_cond_exp p (FF k)\n     (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x} | k IN (:num)})\n    INTER\n    {x | ?L. ((\\n. sum(0..n)\n      (\\k. (indicator_fn (B (SUC k)) x -\n            gen_cond_exp p (FF k)\n              (\\y. indicator_fn (B (SUC k)) y) x) /\n           (&1 + sum(0..k)\n             (\\j. gen_cond_exp p (FF j)\n               (\\y. indicator_fn (B (SUC j)) y) x))))\n      ---> L) sequentially}
-      #|  almost_surely p\n     {x:A | ?L. ((\\n. sum(0..n)\n       (\\k. (indicator_fn ((B:num->A->bool) (SUC k)) x -\n             gen_cond_exp p (FF k)\n               (\\y. indicator_fn (B (SUC k)) y) x) /\n            (&1 + sum(0..k)\n              (\\j. gen_cond_exp p (FF j)\n                (\\y. indicator_fn (B (SUC j)) y) x))))\n       ---> L) sequentially}
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)))), L, sequentially)})
       #|  almost_surely p\n     (INTERS {{x:A | &0 <= gen_cond_exp p (FF k)\n       (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x} | k IN (:num)})
-      #|  forall p FF (B:num->A->bool).\n     filtration p FF /\\ (forall n. B n IN prob_events p) /\\\n     (forall n. B n SUBSET prob_carrier p) /\\ (forall n. B n IN FF n)\n     ==> almost_surely p\n         {x | x IN limsup_events B <=>\n              (forall M. ?N. &M <= sum(0..N)\n                (\\k. gen_cond_exp p (FF k)\n                  (\\y. indicator_fn (B (SUC k)) y) x))}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 B : (Num, A) -> Bool, filtration(p, FF) && (\226\136\128 n : Num, IN(B(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(B(n), prob_carrier(p))) && (\226\136\128 n : Num, IN(B(n), FF(n))) \226\134\146 almost_surely(p, {(x : A) | IN(x, limsup_events(B)) == (\226\136\128 M : Num, \226\136\131 N : Num, real_of_num(M) <= sum(op_dot_dot(0, N), (k : Num) => gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x)))})
       #|  sequentially
       #|  sequentially
       #|  sequentially
-      #|  forall x M. &0 <= M ==> abs(x - max (min x M) (--M)) = max (abs x - M) (&0)
-      #|  n:num
-      #|  N:num
-      #|  e:real
-      #|  e:real
-      #|  forall f:num->real g M.\n     (f ---> g) sequentially /\\ &0 <= M\n     ==> ((\\n. max (min (f n) M) (--M)) ---> max (min g M) (--M)) sequentially
-      #|  forall p:A prob_space f M.\n     random_variable p f\n     ==> random_variable p (\\x. max (min (f x) M) (--M))
-      #|  forall p:A prob_space f M.\n     integrable p f\n     ==> integrable p (\\x. max (min (f x) M) (--M))
-      #|  expectation (p:A prob_space)\n     (\\x:A. min (abs((X:num->A->real) n x - (f:A->real) x)) (&2 * K)) <\n     e / &3
-      #|  expectation (p:A prob_space)\n       (\\x:A. max (abs((f:A->real) x) - K) (&0)) < e / &3
-      #|  n:num
-      #|  forall n:num. expectation (p:A prob_space)\n       (\\x:A. max (abs((X:num->A->real) n x) - K) (&0)) < e / &3
-      #|  \\x:A. max (abs((f:A->real) x) - K) (&0)
-      #|  \\x:A. max (abs((X:num->A->real) n x) - K) (&0)
-      #|  p:A prob_space
-      #|  expectation (p:A prob_space)\n      (\\x:A. max (abs((X:num->A->real) n x) - K) (&0) +\n             max (abs((f:A->real) x) - K) (&0)) =\n      expectation p (\\x. max (abs(X n x) - K) (&0)) +\n      expectation p (\\x. max (abs(f x) - K) (&0))
-      #|  K:real
-      #|  (f:A->real) x
-      #|  (X:num->A->real) n x
-      #|  \\x:A. max (abs((f:A->real) x) - K) (&0)
-      #|  \\x:A. max (abs((X:num->A->real) n x) - K) (&0)
-      #|  p:A prob_space
-      #|  &2 * K
-      #|  \\x:A. (X:num->A->real) n x - (f:A->real) x
-      #|  p:A prob_space
-      #|  expectation (p:A prob_space)\n     (\\x:A. max (abs((X:num->A->real) n x) - K) (&0) +\n            max (abs((f:A->real) x) - K) (&0))
-      #|  expectation (p:A prob_space)\n    (\\x:A. max (abs((X:num->A->real) n x - (f:A->real) x) - &2 * K) (&0)) <\n    &2 * e / &3
-      #|  &2 * K
-      #|  \\x:A. (X:num->A->real) n x - (f:A->real) x
-      #|  p:A prob_space
-      #|  \\x:A. max (abs((X:num->A->real) n x - (f:A->real) x) - &2 * K) (&0)
-      #|  \\x:A. min (abs((X:num->A->real) n x - (f:A->real) x)) (&2 * K)
-      #|  p:A prob_space
-      #|  expectation (p:A prob_space)\n    (\\x:A. abs((X:num->A->real) n x - (f:A->real) x)) =\n    expectation p (\\x. min (abs(X n x - f x)) (&2 * K)) +\n    expectation p (\\x. max (abs(X n x - f x) - &2 * K) (&0))
-      #|  &0 <= a /\\ &0 <= M ==> &0 <= min a M
-      #|  &0 <= expectation (p:A prob_space)\n     (\\x:A. min (abs((X:num->A->real) n x - (f:A->real) x)) (&2 * K))
-      #|  n:num
-      #|  expectation (p:A prob_space)\n    (\\x:A. min (abs((X:num->A->real) n x - (f:A->real) x)) (&2 * K)) <\n    e / &3
-      #|  n:num
-      #|  N2:num
-      #|  N2:num
-      #|  e / &3
-      #|  &0 <= M ==> min (&0) M = &0
-      #|  &0 = min (&0) (&2 * K)
-      #|  &0
-      #|  \\n:num. (X:num->A->real) n x - (f:A->real) x
+      #|  \226\136\128 x : Real, \226\136\128 M : Real, real_of_num(0) <= M \226\134\146 abs(x - max(min(x, M), -M)) == max(abs(x) - M, real_of_num(0))
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : Real, \226\136\128 M : Real, op_minus_minus_minus_gt(f, g, sequentially) && real_of_num(0) <= M \226\134\146 op_minus_minus_minus_gt((n : Num) => max(min(f(n), M), -M), max(min(g, M), -M), sequentially)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (A) -> Real, \226\136\128 M : Real, random_variable(p, f) \226\134\146 random_variable(p, (x : A) => max(min(f(x), M), -M))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (A) -> Real, \226\136\128 M : Real, integrable(p, f) \226\134\146 integrable(p, (x : A) => max(min(f(x), M), -M))
+      #|  expectation((p : Prob_space[A]), (x : A) => min(abs((X : (Num, A) -> Real)((n : Num), x) - (f : (A) -> Real)(x)), real_of_num(2) * (K : Real))) < (e : Real) / real_of_num(3)
+      #|  expectation((p : Prob_space[A]), (x : A) => max(abs((f : (A) -> Real)(x)) - (K : Real), real_of_num(0))) < (e : Real) / real_of_num(3)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, expectation((p : Prob_space[A]), (x : A) => max(abs((X : (Num, A) -> Real)(n, x)) - (K : Real), real_of_num(0))) < (e : Real) / real_of_num(3)
+      #|  (x : A) => max(abs((f : (A) -> Real)(x)) - (K : Real), real_of_num(0))
+      #|  (x : A) => max(abs((X : (Num, A) -> Real)((n : Num), x)) - (K : Real), real_of_num(0))
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => max(abs((X : (Num, A) -> Real)((n : Num), x)) - (K : Real), real_of_num(0)) + max(abs((f : (A) -> Real)(x)) - K, real_of_num(0))) == expectation(p, (x : A) => max(abs(X(n, x)) - K, real_of_num(0))) + expectation(p, (x : A) => max(abs(f(x)) - K, real_of_num(0)))
+      #|  (K : Real)
+      #|  (f : (A) -> Real)((x : A))
+      #|  (X : (Num, A) -> Real)((n : Num), (x : A))
+      #|  (x : A) => max(abs((f : (A) -> Real)(x)) - (K : Real), real_of_num(0))
+      #|  (x : A) => max(abs((X : (Num, A) -> Real)((n : Num), x)) - (K : Real), real_of_num(0))
+      #|  (p : Prob_space[A])
+      #|  real_of_num(2) * (K : Real)
+      #|  (x : A) => (X : (Num, A) -> Real)((n : Num), x) - (f : (A) -> Real)(x)
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => max(abs((X : (Num, A) -> Real)((n : Num), x)) - (K : Real), real_of_num(0)) + max(abs((f : (A) -> Real)(x)) - K, real_of_num(0)))
+      #|  expectation((p : Prob_space[A]), (x : A) => max(abs((X : (Num, A) -> Real)((n : Num), x) - (f : (A) -> Real)(x)) - real_of_num(2) * (K : Real), real_of_num(0))) < real_of_num(2) * ((e : Real) / real_of_num(3))
+      #|  real_of_num(2) * (K : Real)
+      #|  (x : A) => (X : (Num, A) -> Real)((n : Num), x) - (f : (A) -> Real)(x)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => max(abs((X : (Num, A) -> Real)((n : Num), x) - (f : (A) -> Real)(x)) - real_of_num(2) * (K : Real), real_of_num(0))
+      #|  (x : A) => min(abs((X : (Num, A) -> Real)((n : Num), x) - (f : (A) -> Real)(x)), real_of_num(2) * (K : Real))
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)((n : Num), x) - (f : (A) -> Real)(x))) == expectation(p, (x : A) => min(abs(X(n, x) - f(x)), real_of_num(2) * (K : Real))) + expectation(p, (x : A) => max(abs(X(n, x) - f(x)) - real_of_num(2) * K, real_of_num(0)))
+      #|  real_of_num(0) <= (a : Real) && real_of_num(0) <= (M : Real) \226\134\146 real_of_num(0) <= min(a, M)
+      #|  real_of_num(0) <= expectation((p : Prob_space[A]), (x : A) => min(abs((X : (Num, A) -> Real)((n : Num), x) - (f : (A) -> Real)(x)), real_of_num(2) * (K : Real)))
+      #|  (n : Num)
+      #|  expectation((p : Prob_space[A]), (x : A) => min(abs((X : (Num, A) -> Real)((n : Num), x) - (f : (A) -> Real)(x)), real_of_num(2) * (K : Real))) < (e : Real) / real_of_num(3)
+      #|  (n : Num)
+      #|  (N2 : Num)
+      #|  (N2 : Num)
+      #|  (e : Real) / real_of_num(3)
+      #|  real_of_num(0) <= (M : Real) \226\134\146 min(real_of_num(0), M) == real_of_num(0)
+      #|  real_of_num(0) == min(real_of_num(0), real_of_num(2) * (K : Real))
+      #|  real_of_num(0)
+      #|  (n : Num) => (X : (Num, A) -> Real)(n, (x : A)) - (f : (A) -> Real)(x)
       #|  sequentially
-      #|  ((\\n:num. abs((X:num->A->real) n x - (f:A->real) x)) ---> &0)\n      sequentially
-      #|  ((\\n. (X:num->A->real) n x - (f:A->real) x) ---> &0)\n      sequentially
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\\n      ~(x IN {x | ((\\n. (X:num->A->real) n x) ---> (f:A->real) x)\n        sequentially})}
-      #|  N:A->bool
-      #|  N:A->bool
-      #|  almost_surely (p:A prob_space)\n      {x:A | ((\\n. (X:num->A->real) n x) ---> (f:A->real) x) sequentially}
-      #|  &0 <= M ==> abs(&0) <= M
-      #|  x:A
-      #|  &0 <= a /\\ &0 <= M ==> abs(min a M) <= M
-      #|  x:A
-      #|  \\x:A. &2 * K
-      #|  integrable (p:A prob_space) (\\x:A. &0) /\\\n      ((\\n. expectation (p:A prob_space) (\\x:A. min (abs((X:num->A->real) n x -\n       (f:A->real) x)) (&2 * K))) --->\n      expectation p (\\x:A. &0)) sequentially
-      #|  &0 = expectation (p:A prob_space) (\\x:A. &0)
-      #|  ((\\n. expectation (p:A prob_space) (\\x:A. min (abs((X:num->A->real) n x -\n       (f:A->real) x)) (&2 * K))) ---> &0) sequentially
-      #|  &N1 <= K
-      #|  expectation (p:A prob_space)\n     (\\x:A. max (abs((f:A->real) x) - &N1) (&0))
-      #|  expectation (p:A prob_space)\n    (\\x:A. max (abs((f:A->real) x) - K) (&0)) < e / &3
-      #|  N1:num
-      #|  forall n:num. N1 <= n ==>\n     abs(expectation (p:A prob_space)\n       (\\x:A. max (abs((f:A->real) x) - &n) (&0)) - &0) < e / &3
-      #|  &0 <= expectation (p:A prob_space)\n     (\\x:A. max (abs((f:A->real) x) - &N1) (&0))
-      #|  expectation (p:A prob_space)\n    (\\x:A. max (abs((f:A->real) x) - &N1) (&0)) < e / &3
-      #|  K1 <= K
-      #|  expectation (p:A prob_space)\n     (\\x:A. max (abs((X:num->A->real) n x) - K1) (&0))
-      #|  forall n:num. expectation (p:A prob_space)\n    (\\x:A. max (abs((X:num->A->real) n x) - K) (&0)) < e / &3
-      #|  &0 <= K
-      #|  K = max K1 (&N1)
-      #|  N1:num
-      #|  e / &3
-      #|  f:A->real
-      #|  p:A prob_space
-      #|  K1:real
-      #|  e / &3
-      #|  uniformly_integrable (p:A prob_space) (X:num->A->real)
-      #|  &0 <= x ==> abs x = x
-      #|  forall n:num. abs(expectation (p:A prob_space)\n    (\\x:A. abs((X:num->A->real) n x - (f:A->real) x))) =\n    expectation p (\\x. abs(X n x - f x))
-      #|  forall n:num. &0 <= expectation (p:A prob_space)\n    (\\x:A. abs((X:num->A->real) n x - (f:A->real) x))
-      #|  &0 < e / &3
-      #|  e:real
-      #|  integrable (p:A prob_space) (f:A->real)
-      #|  random_variable (p:A prob_space) (f:A->real)
-      #|  n:num
-      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  forall n. random_variable (p:A prob_space) ((X:num->A->real) n)
-      #|  uniformly_integrable (p:A prob_space) (X:num->A->real)
-      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  forall p:A prob_space (X:num->A->real) f.\n    uniformly_integrable p X /\\ integrable p f /\\\n    almost_surely p {x | ((\\n. X n x) ---> f x) sequentially}\n    ==> ((\\n. expectation p (\\x. abs(X n x - f x))) ---> &0) sequentially
-      #|  abs(x - y) / &2
-      #|  ~(&0 < abs(x - y)) ==> x = y
-      #|  forall x y:real. (forall e. &0 < e ==> abs(x - y) <= e) ==> x = y
-      #|  a:A->bool
-      #|  n:num
-      #|  expectation (p:A prob_space)\n       (\\x. gen_cond_exp p ((FF:num->(A->bool)->bool) n) (f:A->real) x *\n            indicator_fn (a:A->bool) x) =\n      expectation p (\\x. f x * indicator_fn a x)
-      #|  a:A->bool
-      #|  n:num
-      #|  adapted (p:A prob_space) FF (X:num->A->real)
-      #|  (FF:num->(A->bool)->bool) n
-      #|  n:num
-      #|  abs(x:real) < e ==> x <= e
-      #|  x:A
-      #|  (\\x:A. ((X:num->A->real) m x - (f:A->real) x) *\n         indicator_fn (a:A->bool) x) =\n        (\\x. X m x * indicator_fn a x - f x * indicator_fn a x)
-      #|  (\\x:A. ((X:num->A->real) m x - (f:A->real) x) *\n         indicator_fn (a:A->bool) x) =\n        (\\x. X m x * indicator_fn a x - f x * indicator_fn a x)
-      #|  expectation (p:A prob_space)\n      (\\x. abs(((X:num->A->real) m x - (f:A->real) x) *\n        indicator_fn (a:A->bool) x))
-      #|  \\x:A. (f:A->real) x * indicator_fn (a:A->bool) x
-      #|  \\x:A. (X:num->A->real) m x * indicator_fn (a:A->bool) x
-      #|  p:A prob_space
-      #|  expectation (p:A prob_space)\n        (\\x. (X:num->A->real) m x * indicator_fn (a:A->bool) x) -\n       expectation p (\\x. (f:A->real) x * indicator_fn a x) =\n       expectation p (\\x. (X m x - f x) * indicator_fn a x)
-      #|  expectation (p:A prob_space)\n     (\\x. abs((X:num->A->real) m x - (f:A->real) x))
-      #|  sub_sigma_algebra (p:A prob_space)\n      ((FF:num->(A->bool)->bool) n)
-      #|  (a:A->bool) IN prob_events (p:A prob_space)
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  a:A->bool
-      #|  m:num
-      #|  n:num
-      #|  expectation (p:A prob_space)\n       (\\x. (X:num->A->real) m x * indicator_fn (a:A->bool) x) =\n      expectation p (\\x. X n x * indicator_fn a x)
-      #|  n <= (m:num) /\\ N <= m
-      #|  m = n + N:num
-      #|  N:num
-      #|  e:real
-      #|  e:real
-      #|  forall n (a:A->bool). a IN (FF:num->(A->bool)->bool) n ==>\n      expectation (p:A prob_space)\n        (\\x. (X:num->A->real) n x * indicator_fn a x) =\n      expectation p (\\x. (f:A->real) x * indicator_fn a x)
-      #|  ((\\n. expectation (p:A prob_space)\n        (\\x. abs((X:num->A->real) n x - (f:A->real) x))) ---> &0)\n      sequentially
-      #|  ~((x:A) IN prob_carrier p DIFF N0)
-      #|  (x:A) IN prob_carrier p
-      #|  (x:A) IN prob_carrier p DIFF N0
-      #|  {x:A | x IN prob_carrier p /\\\n      ~(x IN {x | ?L. ((\\n. (X:num->A->real) n x) ---> L) sequentially})}\n      SUBSET N0
-      #|  ?L. ((\\n. (X:num->A->real) n x) ---> L) sequentially
-      #|  ~((\\n. (X:num->A->real) n x) ---> (f:A->real) x)\n      sequentially
-      #|  (x:A) IN prob_carrier p DIFF N0
-      #|  x:A
-      #|  N0:A->bool
-      #|  almost_surely (p:A prob_space)\n      {x:A | ((\\n. (X:num->A->real) n x) ---> (f:A->real) x) sequentially}
-      #|  (x:A) IN prob_carrier p DIFF N0
-      #|  {x:A | x IN prob_carrier p /\\\n      ~(x IN {x | ?L. ((\\n. (X:num->A->real) n x) ---> L) sequentially})}\n      SUBSET N0
-      #|  ?L. ((\\n. (X:num->A->real) n x) ---> L) sequentially
-      #|  (x:A) IN prob_carrier p DIFF N0
-      #|  x:A
-      #|  x:A
-      #|  expectation (p:A prob_space)\n      (\\x. max (abs((X:num->A->real) n x) - K) (&0))
-      #|  n:num
-      #|  K:real
-      #|  K:real
-      #|  e:real
-      #|  uniformly_integrable (p:A prob_space) (X:num->A->real)
-      #|  e:real
-      #|  \\n (x:A). (X:num->A->real) n x *\n     indicator_fn (prob_carrier (p:A prob_space) DIFF N0) x
-      #|  integrable (p:A prob_space) (f:A->real)
-      #|  f = \\x:A. if x IN prob_carrier p DIFF N0\n    then reallim sequentially (\\n. (X:num->A->real) n x) else &0
-      #|  \\x:A. if x IN prob_carrier p DIFF N0\n    then reallim sequentially (\\n. (X:num->A->real) n x) else &0
-      #|  null_event (p:A prob_space) (N0:A->bool)
-      #|  p:A prob_space
-      #|  prob_carrier (p:A prob_space) DIFF (N0:A->bool)\n    IN prob_events p
-      #|  N0:A->bool
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  submartingale (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) FF
-      #|  forall n. sub_sigma_algebra (p:A prob_space)\n    ((FF:num->(A->bool)->bool) n)
-      #|  martingale (p:A prob_space) FF (X:num->A->real)
-      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  martingale (p:A prob_space) FF (X:num->A->real)
-      #|  adapted (p:A prob_space) (FF:num->(A->bool)->bool)\n    (X:num->A->real)
-      #|  martingale (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real).\n    martingale p FF X /\\ uniformly_integrable p X\n    ==> ?f. integrable p f /\\\n            almost_surely p {x | ((\\n. X n x) ---> f x) sequentially} /\\\n            ((\\n. expectation p (\\x. abs(X n x - f x))) ---> &0)\n              sequentially /\\\n            (forall n. almost_surely p\n              {x | X n x = gen_cond_exp p (FF n) f x})
+      #|  op_minus_minus_minus_gt((n : Num) => abs((X : (Num, A) -> Real)(n, (x : A)) - (f : (A) -> Real)(x)), real_of_num(0), sequentially)
+      #|  op_minus_minus_minus_gt((n : Num) => (X : (Num, A) -> Real)(n, (x : A)) - (f : (A) -> Real)(x), real_of_num(0), sequentially)
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !IN(x, {(x : A) | op_minus_minus_minus_gt((n : Num) => (X : (Num, A) -> Real)(n, x), (f : (A) -> Real)(x), sequentially)})}
+      #|  (N : (A) -> Bool)
+      #|  (N : (A) -> Bool)
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | op_minus_minus_minus_gt((n : Num) => (X : (Num, A) -> Real)(n, x), (f : (A) -> Real)(x), sequentially)})
+      #|  real_of_num(0) <= (M : Real) \226\134\146 abs(real_of_num(0)) <= M
+      #|  (x : A)
+      #|  real_of_num(0) <= (a : Real) && real_of_num(0) <= (M : Real) \226\134\146 abs(min(a, M)) <= M
+      #|  (x : A)
+      #|  (x : A) => real_of_num(2) * (K : Real)
+      #|  integrable((p : Prob_space[A]), (x : A) => real_of_num(0)) && op_minus_minus_minus_gt((n : Num) => expectation(p, (x : A) => min(abs((X : (Num, A) -> Real)(n, x) - (f : (A) -> Real)(x)), real_of_num(2) * (K : Real))), expectation(p, (x : A) => real_of_num(0)), sequentially)
+      #|  real_of_num(0) == expectation((p : Prob_space[A]), (x : A) => real_of_num(0))
+      #|  op_minus_minus_minus_gt((n : Num) => expectation((p : Prob_space[A]), (x : A) => min(abs((X : (Num, A) -> Real)(n, x) - (f : (A) -> Real)(x)), real_of_num(2) * (K : Real))), real_of_num(0), sequentially)
+      #|  real_of_num((N1 : Num)) <= (K : Real)
+      #|  expectation((p : Prob_space[A]), (x : A) => max(abs((f : (A) -> Real)(x)) - real_of_num((N1 : Num)), real_of_num(0)))
+      #|  expectation((p : Prob_space[A]), (x : A) => max(abs((f : (A) -> Real)(x)) - (K : Real), real_of_num(0))) < (e : Real) / real_of_num(3)
+      #|  (N1 : Num)
+      #|  \226\136\128 n : Num, (N1 : Num) <= n \226\134\146 abs(expectation((p : Prob_space[A]), (x : A) => max(abs((f : (A) -> Real)(x)) - real_of_num(n), real_of_num(0))) - real_of_num(0)) < (e : Real) / real_of_num(3)
+      #|  real_of_num(0) <= expectation((p : Prob_space[A]), (x : A) => max(abs((f : (A) -> Real)(x)) - real_of_num((N1 : Num)), real_of_num(0)))
+      #|  expectation((p : Prob_space[A]), (x : A) => max(abs((f : (A) -> Real)(x)) - real_of_num((N1 : Num)), real_of_num(0))) < (e : Real) / real_of_num(3)
+      #|  (K1 : Real) <= (K : Real)
+      #|  expectation((p : Prob_space[A]), (x : A) => max(abs((X : (Num, A) -> Real)((n : Num), x)) - (K1 : Real), real_of_num(0)))
+      #|  \226\136\128 n : Num, expectation((p : Prob_space[A]), (x : A) => max(abs((X : (Num, A) -> Real)(n, x)) - (K : Real), real_of_num(0))) < (e : Real) / real_of_num(3)
+      #|  real_of_num(0) <= (K : Real)
+      #|  (K : Real) == max((K1 : Real), real_of_num((N1 : Num)))
+      #|  (N1 : Num)
+      #|  (e : Real) / real_of_num(3)
+      #|  (f : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (K1 : Real)
+      #|  (e : Real) / real_of_num(3)
+      #|  uniformly_integrable((p : Prob_space[A]), (X : (Num, A) -> Real))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+      #|  \226\136\128 n : Num, abs(expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)(n, x) - (f : (A) -> Real)(x)))) == expectation(p, (x : A) => abs(X(n, x) - f(x)))
+      #|  \226\136\128 n : Num, real_of_num(0) <= expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)(n, x) - (f : (A) -> Real)(x)))
+      #|  real_of_num(0) < (e : Real) / real_of_num(3)
+      #|  (e : Real)
+      #|  integrable((p : Prob_space[A]), (f : (A) -> Real))
+      #|  random_variable((p : Prob_space[A]), (f : (A) -> Real))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  \226\136\128 n : Num, random_variable((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  uniformly_integrable((p : Prob_space[A]), (X : (Num, A) -> Real))
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 f : (A) -> Real, uniformly_integrable(p, X) && integrable(p, f) && almost_surely(p, {(x : A) | op_minus_minus_minus_gt((n : Num) => X(n, x), f(x), sequentially)}) \226\134\146 op_minus_minus_minus_gt((n : Num) => expectation(p, (x : A) => abs(X(n, x) - f(x))), real_of_num(0), sequentially)
+      #|  abs((x : Real) - (y : Real)) / real_of_num(2)
+      #|  !(real_of_num(0) < abs((x : Real) - (y : Real))) \226\134\146 x == y
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 abs(x - y) <= e) \226\134\146 x == y
+      #|  (a : (A) -> Bool)
+      #|  (n : Num)
+      #|  expectation((p : Prob_space[A]), (x : A) => gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (f : (A) -> Real), x) * indicator_fn((a : (A) -> Bool), x)) == expectation(p, (x : A) => f(x) * indicator_fn(a, x))
+      #|  (a : (A) -> Bool)
+      #|  (n : Num)
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (n : Num)
+      #|  abs((x : Real)) < (e : Real) \226\134\146 x <= e
+      #|  (x : A)
+      #|  ((x : A) => ((X : (Num, A) -> Real)((m : Num), x) - (f : (A) -> Real)(x)) * indicator_fn((a : (A) -> Bool), x)) == ((x : A) => X(m, x) * indicator_fn(a, x) - f(x) * indicator_fn(a, x))
+      #|  ((x : A) => ((X : (Num, A) -> Real)((m : Num), x) - (f : (A) -> Real)(x)) * indicator_fn((a : (A) -> Bool), x)) == ((x : A) => X(m, x) * indicator_fn(a, x) - f(x) * indicator_fn(a, x))
+      #|  expectation((p : Prob_space[A]), (x : A) => abs(((X : (Num, A) -> Real)((m : Num), x) - (f : (A) -> Real)(x)) * indicator_fn((a : (A) -> Bool), x)))
+      #|  (x : A) => (f : (A) -> Real)(x) * indicator_fn((a : (A) -> Bool), x)
+      #|  (x : A) => (X : (Num, A) -> Real)((m : Num), x) * indicator_fn((a : (A) -> Bool), x)
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((m : Num), x) * indicator_fn((a : (A) -> Bool), x)) - expectation(p, (x : A) => (f : (A) -> Real)(x) * indicator_fn(a, x)) == expectation(p, (x : A) => (X(m, x) - f(x)) * indicator_fn(a, x))
+      #|  expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)((m : Num), x) - (f : (A) -> Real)(x)))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  IN((a : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (a : (A) -> Bool)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((m : Num), x) * indicator_fn((a : (A) -> Bool), x)) == expectation(p, (x : A) => X((n : Num), x) * indicator_fn(a, x))
+      #|  (n : Num) <= (m : Num) && (N : Num) <= m
+      #|  (m : Num) == (n : Num) + (N : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 n : Num, \226\136\128 a : (A) -> Bool, IN(a, (FF : (Num, (A) -> Bool) -> Bool)(n)) \226\134\146 expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(n, x) * indicator_fn(a, x)) == expectation(p, (x : A) => (f : (A) -> Real)(x) * indicator_fn(a, x))
+      #|  op_minus_minus_minus_gt((n : Num) => expectation((p : Prob_space[A]), (x : A) => abs((X : (Num, A) -> Real)(n, x) - (f : (A) -> Real)(x))), real_of_num(0), sequentially)
+      #|  !IN((x : A), DIFF(prob_carrier((p : Prob_space[A])), (N0 : (A) -> Bool)))
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  IN((x : A), DIFF(prob_carrier((p : Prob_space[A])), (N0 : (A) -> Bool)))
+      #|  SUBSET({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !IN(x, {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => (X : (Num, A) -> Real)(n, x), L, sequentially)})}, (N0 : (A) -> Bool))
+      #|  \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => (X : (Num, A) -> Real)(n, (x : A)), L, sequentially)
+      #|  !op_minus_minus_minus_gt((n : Num) => (X : (Num, A) -> Real)(n, (x : A)), (f : (A) -> Real)(x), sequentially)
+      #|  IN((x : A), DIFF(prob_carrier((p : Prob_space[A])), (N0 : (A) -> Bool)))
+      #|  (x : A)
+      #|  (N0 : (A) -> Bool)
+      #|  almost_surely((p : Prob_space[A]), {(x : A) | op_minus_minus_minus_gt((n : Num) => (X : (Num, A) -> Real)(n, x), (f : (A) -> Real)(x), sequentially)})
+      #|  IN((x : A), DIFF(prob_carrier((p : Prob_space[A])), (N0 : (A) -> Bool)))
+      #|  SUBSET({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !IN(x, {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => (X : (Num, A) -> Real)(n, x), L, sequentially)})}, (N0 : (A) -> Bool))
+      #|  \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => (X : (Num, A) -> Real)(n, (x : A)), L, sequentially)
+      #|  IN((x : A), DIFF(prob_carrier((p : Prob_space[A])), (N0 : (A) -> Bool)))
+      #|  (x : A)
+      #|  (x : A)
+      #|  expectation((p : Prob_space[A]), (x : A) => max(abs((X : (Num, A) -> Real)((n : Num), x)) - (K : Real), real_of_num(0)))
+      #|  (n : Num)
+      #|  (K : Real)
+      #|  (K : Real)
+      #|  (e : Real)
+      #|  uniformly_integrable((p : Prob_space[A]), (X : (Num, A) -> Real))
+      #|  (e : Real)
+      #|  (n : Num) => (x : A) => (X : (Num, A) -> Real)(n, x) * indicator_fn(DIFF(prob_carrier((p : Prob_space[A])), (N0 : (A) -> Bool)), x)
+      #|  integrable((p : Prob_space[A]), (f : (A) -> Real))
+      #|  (f : (A) -> Real) == ((x : A) => if IN(x, DIFF(prob_carrier((p : Prob_space[A])), (N0 : (A) -> Bool))) { reallim(sequentially, (n : Num) => (X : (Num, A) -> Real)(n, x)) } else { real_of_num(0) })
+      #|  (x : A) => if IN(x, DIFF(prob_carrier((p : Prob_space[A])), (N0 : (A) -> Bool))) { reallim(sequentially, (n : Num) => (X : (Num, A) -> Real)(n, x)) } else { real_of_num(0) }
+      #|  null_event((p : Prob_space[A]), (N0 : (A) -> Bool))
+      #|  (p : Prob_space[A])
+      #|  IN(DIFF(prob_carrier((p : Prob_space[A])), (N0 : (A) -> Bool)), prob_events(p))
+      #|  (N0 : (A) -> Bool)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 n : Num, sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n))
+      #|  martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  \226\136\128 n : Num, integrable((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, martingale(p, FF, X) && uniformly_integrable(p, X) \226\134\146 (\226\136\131 f : (A) -> Real, integrable(p, f) && almost_surely(p, {(x : A) | op_minus_minus_minus_gt((n : Num) => X(n, x), f(x), sequentially)}) && op_minus_minus_minus_gt((n : Num) => expectation(p, (x : A) => abs(X(n, x) - f(x))), real_of_num(0), sequentially) && (\226\136\128 n : Num, almost_surely(p, {(x : A) | X(n, x) == gen_cond_exp(p, FF(n), f, x)})))
       #|pos_part =  |- (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) (#pos_part:fun(real,real) x:real)) ((#real_max:fun(real,fun(real,real)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))
       #|POS_PART_POS =  |- (#forall:fun(fun(real,bool),bool) (\x:real. ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (#pos_part:fun(real,real) x:real))))
       #|POS_PART_NONNEG =  |- (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#=:fun(real,fun(real,bool)) (#pos_part:fun(real,real) x:real)) x:real))))
