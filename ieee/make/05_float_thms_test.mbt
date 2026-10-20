@@ -5763,1406 +5763,1406 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|0..0..solved at 2
       #|0..0..solved at 2
       #|IEEE/float_thms quotations (1400):
-      #|  forall(fmt:flformat).\n  (dest_flformat fmt) = (FST (dest_flformat fmt),\n                         SND (dest_flformat fmt))
-      #|  forall(r:num) (p:num). ((is_valid_flformat (r,p)) ==>\n                                      1 < (FST (r,p)))
-      #|  forall(r:num) (p:num). ((is_valid_flformat (r,p)) ==>\n                                      EVEN (FST (r,p)))
-      #|  forall(r:num) (p:num). ((is_valid_flformat (r,p)) ==>\n                                      1 < (SND (r,p)))
-      #|  forall(fmt:flformat). is_valid_flformat (dest_flformat fmt)
-      #|  forall(fmt:flformat). 1 < (flr fmt)
-      #|  1 < x ==> 0 < x
-      #|  forall(fmt:flformat). 0 < (flr fmt)
-      #|  0 < x ==> ~(x = 0)
-      #|  forall(fmt:flformat). ~(&(flr fmt) = &0)
-      #|  forall(fmt:flformat). EVEN (flr fmt)
-      #|  ODD 1
-      #|  x = 1
-      #|  x = 0
-      #|  forall x. ~(x = 0) /\\ EVEN x ==> 2 <= x
-      #|  forall(fmt:flformat). 2 <= (flr fmt)
-      #|  x = 1
-      #|  forall(fmt:flformat). 1 < (flp fmt)
-      #|  1 < x ==> 0 < x
-      #|  forall(fmt:flformat). 0 < (flp fmt)
-      #|  1 <= n <=> 0 < n
-      #|  &0 <= x:int - &1:int <=> &1 <= x
-      #|  forall(fmt:flformat). &0 <= (&(flp fmt):int) - (&1:int)
-      #|  forall(fmt:flformat). &(flr fmt) ipow (&(flp fmt) - &1) =\n      &((flr fmt) EXP ((flp fmt) - 1))
-      #|  (&0:int) <= (&n)
-      #|  forall(fmt:flformat) (n:num). &((flr fmt) EXP n) = &(flr fmt) ipow (&n)
-      #|  &0 < (x:real) ==> &0 <= x
-      #|  forall(fmt:flformat) (e:int). &0 <= &(flr fmt) ipow e
-      #|  forall(fmt:flformat) (e:int). &0 < &(flr fmt) ipow e
-      #|  &0 < (x:real) ==> ~(x = &0)
-      #|  forall(fmt:flformat) (e:int). ~(&(flr fmt) ipow e = &0)
-      #|  forall(fmt:flformat) (u:int) (v:int).\n        &(flr fmt) ipow u * &(flr fmt) ipow v = &(flr fmt) ipow (u + v)
-      #|  is_valid_fformat ((flr fmt), (flp fmt), e)
-      #|  mk_fformat ((flr fmt), (flp fmt), e)
-      #|  forall(fmt:flformat) (e:int). ?(fmt':fformat).\n          (to_fformat fmt e) = fmt' /\\\n          (fr fmt') = (flr fmt)     /\\\n          (fp fmt') = (flp fmt)     /\\\n          (fe fmt') = e
-      #|  is_valid_fformat (flr fmt, flp fmt, (e:int))
-      #|  forall(fmt:flformat) (e:int).\n          (fr (to_fformat fmt e)) = (flr fmt) /\\\n          (fp (to_fformat fmt e)) = (flp fmt) /\\\n          (fe (to_fformat fmt e)) = e
-      #|  fmt:flformat
-      #|  forall(fmt:flformat) (z:real). ?(e:int). z <= &(flr fmt) ipow e
-      #|  forall(fmt:flformat) (z:real). &0 < z ==> ?(e:int). &(flr fmt) ipow e <= z
-      #|  fmt:flformat
-      #|  abs(-- x) = abs(x)
-      #|  forall(fmt:flformat) (x:real). is_float(fmt) x <=> is_float(fmt) (-- x)
-      #|  &0 < x ==> ~(x = &0)
-      #|  &f * &(flr fmt) ipow (e - &(flp fmt) + &1)
-      #|  forall y. (x:real) = y /\\ ~(y = &0) ==> ~(x = &0)
-      #|  forall(fmt:flformat) (x:real). is_float(fmt) x ==> ~(x = &0)
-      #|  is_greatest_e (fmt:flformat) (x:real) (e:int) =\n  (&(flr fmt) ipow e <= abs(x) /\\ forall(e':int). &(flr fmt) ipow e' <= abs(x)\n     ==> e' <= e)
-      #|  e':int
-      #|  (flr fmt)
-      #|  e:int
-      #|  abs((x:real))
-      #|  fmt:flformat
-      #|  ?(b:int). forall(e:int). e IN\n              { e:int | &(flr fmt) ipow e <= abs(x) } ==> e <= b
-      #|  ~({ e:int | &(flr fmt) ipow e <= abs(x) } = {})
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n           ?(e:int). greatest_e(fmt) x = e /\\ is_greatest_e(fmt) x e
-      #|  ~((x:real) = &0) ==> &0 < abs(x)
-      #|  (e2:int) <= e1
-      #|  (e1:int) <= e2
-      #|  forall(fmt:flformat) (x:real) (e1:int) (e2:int).\n        is_greatest_e(fmt) x e1 /\\ is_greatest_e(fmt) x e2 ==>\n         e1 = e2
-      #|  abs(-- x) = abs(x)
-      #|  ~(-- x = &0)
-      #|  -- x
-      #|  fmt:flformat
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          greatest_e(fmt) (-- x) = greatest_e(fmt) x
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  is_greatest_m (fmt:flformat) (x:real) (m:num) =\n  (&m * &(flr fmt) ipow (greatest_e(fmt) x) <= abs(x) /\\\n  forall(m':num). &m' * &(flr fmt) ipow (greatest_e(fmt) x) <= abs(x) ==>\n   m' <= m)
-      #|  n':num
-      #|  forall(m:num). m IN\n              { (m:num) | &m * &(flr fmt) ipow (greatest_e(fmt) x) <=\n                      abs(x) } ==> m <= (flr fmt)
-      #|  &k * &(flr fmt) ipow e
-      #|  forall z. &0 <= z /\\ (a:real) + z <= b ==> a <= b
-      #|  &(flr fmt + k) * &(flr fmt) ipow e <= abs x
-      #|  ((a:real) + b) * c =\n              a * c + b * c
-      #|  (a:real) * b = b * a
-      #|  fmt:flformat
-      #|  &(flr fmt) ipow (e + &1) <= abs(x)
-      #|  m - (flr fmt)
-      #|  ?k. m = (flr fmt) + k
-      #|  m < (flr fmt)
-      #|  forall(m:num). m IN\n              { (m:num) | &m * &(flr fmt) ipow (greatest_e(fmt) x) <=\n                      abs(x) } ==> m < (flr fmt)
-      #|  1:num
-      #|  ~({ (m:num) | &m * &(flr fmt) ipow (greatest_e(fmt) x) <=\n                      abs(x) } = {})
-      #|  &1 * (x:real) = x
-      #|  1 IN { (m:num) |\n              &m * &(flr fmt) ipow (greatest_e(fmt) x) <= abs(x) }
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n           ?(m:num). greatest_m(fmt) x = m /\\\n                     is_greatest_m(fmt) x m /\\\n                     1 <= m /\\\n                     m < (flr fmt)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  (m2:num) <= m1
-      #|  (m1:num) <= m2
-      #|  forall(fmt:flformat) (x:real) (m1:num) (m2:num).\n        is_greatest_m(fmt) x m1 /\\ is_greatest_m(fmt) x m2 ==>\n         m1 = m2
-      #|  abs(-- x) = abs(x)
-      #|  ~(-- x = &0)
-      #|  -- x
-      #|  fmt:flformat
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n        greatest_m(fmt) (-- x) = greatest_m(fmt) x
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  (a:real) * b + b = (a + &1) * b
-      #|  (x:real) - y < z <=> x < y + z
-      #|  abs(x + &m * &(flr fmt) ipow e) =\n                            -- x - &m * &(flr fmt) ipow e
-      #|  x + &m * &(flr fmt) ipow e
-      #|  (a:real) * b + b = (a + &1) * b
-      #|  (x:real) - y < z <=> x < y + z
-      #|  abs(x - &m * &(flr fmt) ipow e) =\n                            x - &m * &(flr fmt) ipow e
-      #|  x - &m * &(flr fmt) ipow e
-      #|  &0 <= (x:real)
-      #|  e:int
-      #|  fmt:flformat
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n           ?(y:real). greatest_r(fmt) x = y /\\\n                      abs(y) < (finf (to_fformat fmt (greatest_e(fmt) x)))
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  ~(m + 1 <= m)
-      #|  ~(m + 1 <= m)
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n        greatest_r(fmt) (-- x) = -- greatest_r(fmt) x
-      #|  &0 <= (z:real) - w <=> w <= z
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) /\\ &0 <= x ==>\n          &0 <= greatest_r(fmt) x
-      #|  &0 <= (x:real) ==> x = abs(x)
-      #|  fmt:flformat
-      #|  ((z:real) + w <= &0) <=> (w <= -- z)
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) /\\ ~(&0 <= x) ==>\n          greatest_r(fmt) x <= &0
-      #|  ~(&0 <= (x:real)) ==> -- x = abs(x)
-      #|  fmt:flformat
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (if (&0 <= x)\n           then\n             x = &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) +\n                 (greatest_r(fmt) x)\n           else\n             x = -- (&(greatest_m(fmt) x) *\n                     &(flr fmt) ipow (greatest_e(fmt) x)) +\n                 (greatest_r(fmt) x))
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  ((x:real) * y) * inv y * z =\n                                        (y * inv y) * x * z
-      #|  (&((flr fmt) EXP n)) * inv (&((flr fmt) EXP n)) = &1
-      #|  &0 <= (&n:int)
-      #|  &(flr fmt) ipow &n = &((flr fmt) EXP n)
-      #|  -- -- (&n:int) = &n
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  (e:int) - &n - &(flp fmt) + &1 =\n                                       (-- &n) + (e - &(flp fmt) + &1)
-      #|  (a:num) < b <=> ~(b <= a)
-      #|  (n':num) < n
-      #|  n'' = (flp fmt) - 1
-      #|  (a:num) * b * c = b * (a * c)
-      #|  fmt:flformat
-      #|  0 < a ==> ~(a = 0)
-      #|  a \\/ b <=> ~a ==> b
-      #|  ?n'. n = SUC n'
-      #|  n:num
-      #|  (e:int) - &n
-      #|  f * (flr fmt) EXP n
-      #|  (n:num) * m = m * n
-      #|  n:num = n * 1
-      #|  (flp fmt) - 1
-      #|  ?n. (flr fmt) EXP ((flp fmt) - 1) <=\n                          f * (flr fmt) EXP n
-      #|  forall(fmt:flformat) (x:real). is_float(fmt) x ==>\n          ?(f:num) (e:int). (flr fmt) EXP ((flp fmt) - 1) <= f /\\\n                            is_frac_and_exp(fmt) x f e
-      #|  (flr fmt)
-      #|  fmt:flformat
-      #|  0 < n ==> SUC (n - 1) = n
-      #|  (flr fmt) EXP ((flp fmt) - 1)
-      #|  forall(a:num). x < (y:num) /\\ ~(a = 0) ==>\n                          x < y
-      #|  (flr fmt) EXP ((flp fmt) - 1) - f'
-      #|  forall b. (a:num) < b /\\ b <= c ==> a < c
-      #|  1 <= b <=> 0 < b
-      #|  (flr fmt) EXP ((flp fmt) - 1)
-      #|  f':num
-      #|  e:int
-      #|  m:num
-      #|  ?(m:num) (f':num).\n                f = m * ((flr fmt) EXP ((flp fmt) - 1)) + f' /\\\n                f' < (flr fmt) EXP ((flp fmt) - 1)
-      #|  forall(fmt:flformat) (x:real). is_float(fmt) x ==>\n          (?(m:num) (e:int) (f':num).\n             f' < (flr fmt) EXP ((flp fmt) - 1) /\\\n             1 <= m /\\\n             m < (flr fmt) /\\\n             abs(x) = &(m * (flr fmt) EXP ((flp fmt) - 1) + f') *\n                        &(flr fmt) ipow (e - &(flp fmt) + &1))
-      #|  (a:real) * b = b * a
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  (e:int) - &1 + e' - e + &1 = e'
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  ((a:real) * b) * c = a * (b * c)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  (e:int) - &1 + e' - e + &1 = e'
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  &((flr fmt) EXP ((flp fmt) - 1)) *\n                                &(flr fmt) ipow (e - &(flp fmt) + &1)
-      #|  forall b. (a:real) < b /\\ b = c ==> a < c
-      #|  (a:real) < b /\\ c = d ==> c + a < d + b
-      #|  &(m + 1) * &(flr fmt) ipow e
-      #|  forall b. (a:real) < b /\\ b <= d ==> a < d
-      #|  abs(x) < &(flr fmt) ipow (e + &1)
-      #|  1 < x ==> 1 <= x
-      #|  &(flr fmt) ipow e'
-      #|  &(flr fmt) ipow (e + &1) <= abs(x)
-      #|  (e:int) - &1 + e' - e + &1 = e'
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  ((a:real) * b) * c = a * (b * c)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  (e:int) - &1 + e' - e + &1 = e'
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  &((flr fmt) EXP ((flp fmt) - 1)) *\n                                &(flr fmt) ipow (e' - &(flp fmt) + &1)
-      #|  forall b. (a:real) < b /\\ b = c ==> a < c
-      #|  (a:real) < b /\\ c = d ==> c + a < d + b
-      #|  abs(x) < &(m + 1) * &(flr fmt) ipow e'
-      #|  &m' * &(flr fmt) ipow e'
-      #|  &(m + 1) * &(flr fmt) ipow e' <= abs(x)
-      #|  (x:int) - &1 + e - x + &1 = e
-      #|  fmt:flformat
-      #|  ((a:real) * b) * c = a * (b * c)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  (a:real) = b /\\ &0 <= (c:real) ==>\n                                          a <= b + c
-      #|  &(m * flr fmt EXP (flp fmt - 1) + f') *\n                        &(flr fmt) ipow (e - &(flp fmt) + &1)
-      #|  &m * &(flr fmt) ipow e' <= abs(x)
-      #|  (x:int) - &1 + e - x + &1 = e
-      #|  fmt:flformat
-      #|  ((a:real) * b) * c = a * (b * c)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  (a:real) = b /\\ &0 <= (c:real) ==>\n                                          a <= b + c
-      #|  &(m * flr fmt EXP (flp fmt - 1) + f') *\n                        &(flr fmt) ipow (e - &(flp fmt) + &1)
-      #|  (x:real) = &1 * x
-      #|  &m * &(flr fmt) ipow e
-      #|  &(flr fmt) ipow e <= abs(x)
-      #|  f':num
-      #|  forall(fmt:flformat) (x:real). is_float(fmt) x ==>\n           (?(f':num).\n              f' < (flr fmt) EXP ((flp fmt) - 1) /\\\n              abs(x) = &((greatest_m(fmt) x) * ((flr fmt) EXP ((flp fmt) - 1))\n                          + f') *\n                    &(flr fmt) ipow ((greatest_e(fmt) x) - &(flp fmt) + &1))
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  (e:int) <= b ==>\n          e = b \\/ e < b
-      #|  (e:num) <= b ==>\n            e = b \\/ e < b
-      #|  &0 <= (x:real) ==> abs(-- x) = x
-      #|  f':num
-      #|  (e:int) - &1 + e2 - e + &1 = e2
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  ((a:real) * b) * c = a * (b * c)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  ((a:real) + b = c + b) <=> a = c
-      #|  (-- (a:real) + b = -- c) <=> (a = b + c)
-      #|  x = -- abs(x)
-      #|  x + &(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x =\n         -- (&f' * &(flr fmt) ipow (greatest_e fmt x - &(flp fmt) + &1))
-      #|  &0 <= (x:real) ==> abs(x) = x
-      #|  f':num
-      #|  (e:int) - &1 + e2 - e + &1 = e2
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  ((a:real) * b) * c = a * (b * c)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  ((a:real) + b = c + b) <=> a = c
-      #|  ((a:real) - b = c) <=> (a = b + c)
-      #|  x = abs(x)
-      #|  x - &(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x =\n                  &f' * &(flr fmt) ipow (greatest_e fmt x - &(flp fmt) + &1)
-      #|  &0 <= (x:real)
-      #|  greatest_e(fmt) x
-      #|  fmt:flformat
-      #|  forall(fmt:flformat) (x:real). is_float(fmt) x ==>\n          is_fixed(to_fformat fmt (greatest_e(fmt) x)) (greatest_r(fmt) x) /\\\n          (if (&0 <= x)\n           then\n             x = &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) +\n                 (greatest_r(fmt) x)\n           else\n             x = -- (&(greatest_m(fmt) x) *\n                     &(flr fmt) ipow (greatest_e(fmt) x)) +\n                 (greatest_r(fmt) x))
-      #|  (x:real) * y + y = (x + &1) * y
-      #|  e:int
-      #|  fmt:flformat
-      #|  &(m + 1) * &(flr fmt) ipow e
-      #|  (x:real) < x + y <=> &0 < y
-      #|  &m * &(flr fmt) ipow e + finf (to_fformat fmt e)
-      #|  forall y. (x:real) < y /\\ y <= z ==> x < z
-      #|  ~((i:real) <= j) <=> j < i
-      #|  x:real
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  0 < x ==> 1 <= x
-      #|  (a:real) * b = b * a
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  (x:real) * y + y = (x + &1) * y
-      #|  e:int
-      #|  fmt:flformat
-      #|  &(flr fmt) ipow (e + &1)
-      #|  (x:real) < x + y <=> &0 < y
-      #|  &m * &(flr fmt) ipow e + finf (to_fformat fmt e)
-      #|  forall y. (x:real) < y /\\ y <= z ==> x < z
-      #|  ~((i:real) <= j) <=> j < i
-      #|  (x:real) = &1 * x
-      #|  &m * &(flr fmt) ipow e
-      #|  x:real
-      #|  fmt:flformat
-      #|  greatest_e(fmt) x = e
-      #|  forall(fmt:flformat) (x:real) (e:int) (m:num).\n          ~(x = &0) /\\\n          1 <= m /\\\n          m < (flr fmt) /\\\n          abs(x) = &m * &(flr fmt) ipow e ==>\n          greatest_e(fmt) x = e /\\\n          greatest_m(fmt) x = m
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  greatest_e(fmt) x = e /\\ greatest_m(fmt) x = m
-      #|  forall(fmt:flformat) (x:real) (e:int) (m:num).\n          ~(x = &0) /\\\n          1 <= m /\\\n          m < (flr fmt) /\\\n          abs(x) = &m * &(flr fmt) ipow e ==>\n          greatest_r(fmt) x = &0
-      #|  (x:real) * y + y = (x + &1) * y
-      #|  e:int
-      #|  fmt:flformat
-      #|  &(m + 1) * &(flr fmt) ipow e
-      #|  &m * &(flr fmt) ipow e + finf (to_fformat fmt e)
-      #|  forall y. (x:real) < y /\\ y <= z ==> x < z
-      #|  ~((i:real) <= j) <=> j < i
-      #|  x:real
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  0 < x ==> 1 <= x
-      #|  (a:real) * b = b * a
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  (x:real) * y + y = (x + &1) * y
-      #|  e:int
-      #|  fmt:flformat
-      #|  &(flr fmt) ipow (e + &1)
-      #|  &m * &(flr fmt) ipow e + finf (to_fformat fmt e)
-      #|  forall y. (x:real) < y /\\ y <= z ==> x < z
-      #|  ~((i:real) <= j) <=> j < i
-      #|  (x:real) = &1 * x
-      #|  &m * &(flr fmt) ipow e
-      #|  x:real
-      #|  fmt:flformat
-      #|  greatest_e(fmt) x = e
-      #|  forall(fmt:flformat) (x:real) (e:int) (m:num).\n          ~(x = &0) /\\\n          1 <= m /\\\n          m < (flr fmt) /\\\n          &m * &(flr fmt) ipow e <= abs(x) /\\\n          abs(x) < &m * &(flr fmt) ipow e + (finf (to_fformat fmt e)) ==>\n          greatest_e(fmt) x = e /\\\n          greatest_m(fmt) x = m
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  m + 1= (flr fmt)
-      #|  (i:int) - &1 + e - i + &1 = e
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  ((a:real) * b) * c = a * (b * c)
-      #|  (x:real) * y + y = (x + &1) * y
-      #|  e:int
-      #|  fmt:flformat
-      #|  (i:int) - &1 + e - i + &1 = e
-      #|  (to_fformat fmt e)
-      #|  &(fr (to_fformat fmt e))
-      #|  (to_fformat fmt e)
-      #|  (fr (to_fformat fmt e))
-      #|  -- fround (to_fformat fmt e) mode y =\n                       &(flr fmt) ipow e
-      #|  greatest_r fmt x = y
-      #|  greatest_e fmt x = e
-      #|  greatest_r fmt x = y
-      #|  fround (to_fformat fmt e) mode y <= &0
-      #|  &0 <= &m * &(flr fmt) ipow e
-      #|  x - 1 < x <=> 0 < x
-      #|  1 <= x ==> 0 < x
-      #|  (greatest_e(fmt) x) + &1
-      #|  (flr fmt) EXP ((flp fmt) - 1)
-      #|  (i:int) - &1 + e - i + &1 = e
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  ((a:real) * b) * c = a * (b * c)
-      #|  (x:real) * y + y = (x + &1) * y
-      #|  e:int
-      #|  fmt:flformat
-      #|  (i:int) - &1 + e - i + &1 = e
-      #|  (to_fformat fmt e)
-      #|  &(fr (to_fformat fmt e))
-      #|  (to_fformat fmt e)
-      #|  (fr (to_fformat fmt e))
-      #|  -- fround (to_fformat fmt e) mode y =\n                       &(flr fmt) ipow e
-      #|  greatest_r fmt x = y
-      #|  greatest_e fmt x = e
-      #|  greatest_r fmt x = y
-      #|  fround (to_fformat fmt e) mode y <= &0
-      #|  &0 <= &m * &(flr fmt) ipow e
-      #|  fmt:flformat
-      #|  0 < x ==> SUC(x - 1) = x
-      #|  (flr fmt) * flr fmt EXP (flp fmt - 1)
-      #|  forall y. (x:num) < y /\\ y = z ==> x < z
-      #|  1 <= x ==> 0 < x
-      #|  0 < m + 1
-      #|  (greatest_e(fmt) x)
-      #|  ((greatest_m(fmt) x) + 1) * (flr fmt) EXP ((flp fmt) - 1)
-      #|  (greatest_m(fmt) x) < (flr fmt) - 1
-      #|  greatest_e fmt x = e
-      #|  greatest_r fmt x = y
-      #|  e:int
-      #|  fmt:flformat
-      #|  greatest_r fmt x = y
-      #|  greatest_e fmt x = e
-      #|  greatest_r fmt x = y
-      #|  fround (to_fformat fmt e) mode y <= &0
-      #|  &0 <= &m * &(flr fmt) ipow e
-      #|  (i:int) - &1 + e - i + &1 = e
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  ((a:real) * b) * c = a * (b * c)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  ((x:real) + y) * z = x * z + y * z
-      #|  (0 < x) <=>\n                           SUC (x - 1) = x
-      #|  ~(x = 0) <=> x - 1 + 1 = x
-      #|  (n - 1) * z + z = ((n - 1) + 1) * z
-      #|  ff (to_fformat fmt (greatest_e fmt x))\n      (fround (to_fformat fmt (greatest_e fmt x)) mode (greatest_r fmt x)) <\n      fr (to_fformat fmt (greatest_e fmt x)) EXP\n      (fp (to_fformat fmt (greatest_e fmt x)) - 1)
-      #|  greatest_e(fmt) x
-      #|  fmt:flformat
-      #|  ((flr fmt) - 1) * (flr fmt) EXP ((flp fmt) - 1) +\n                            (flr fmt) EXP ((flp fmt) - 1)
-      #|  forall y. (x:num) < y /\\ y = z ==> x < z
-      #|  greatest_m fmt x * flr fmt EXP (flp fmt - 1) <=\n                            ((flr fmt) - 1) * flr fmt EXP (flp fmt - 1)
-      #|  0 < x <=> 1 <= x
-      #|  0 < x ==> 0 < x + y
-      #|  (greatest_e(fmt) x)
-      #|  (greatest_m(fmt) x) * (flr fmt) EXP ((flp fmt) - 1) +\n                        (ff(to_fformat fmt (greatest_e(fmt) x))\n                         (fround(to_fformat fmt (greatest_e(fmt) x)) mode\n                                 (greatest_r(fmt) x)))
-      #|  is_fixed(to_fformat fmt (greatest_e fmt x))\n                                (fround (to_fformat fmt (greatest_e fmt x))\n                                        mode\n                                        (greatest_r fmt x))
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  m + 1= (flr fmt)
-      #|  (i:int) - &1 + e - i + &1 = e
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  ((a:real) * b) * c = a * (b * c)
-      #|  (x:real) * y + y = (x + &1) * y
-      #|  e:int
-      #|  fmt:flformat
-      #|  (i:int) - &1 + e - i + &1 = e
-      #|  (to_fformat fmt e)
-      #|  &(fr (to_fformat fmt e))
-      #|  (to_fformat fmt e)
-      #|  (fr (to_fformat fmt e))
-      #|  fround (to_fformat fmt e) mode y =\n                       &(flr fmt) ipow e
-      #|  greatest_r fmt x = y
-      #|  greatest_e fmt x = e
-      #|  greatest_r fmt x = y
-      #|  &0 <= fround (to_fformat fmt e) mode y
-      #|  &0 <= &m * &(flr fmt) ipow e
-      #|  x - 1 < x <=> 0 < x
-      #|  1 <= x ==> 0 < x
-      #|  (greatest_e(fmt) x) + &1
-      #|  (flr fmt) EXP ((flp fmt) - 1)
-      #|  (i:int) - &1 + e - i + &1 = e
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  ((a:real) * b) * c = a * (b * c)
-      #|  (x:real) * y + y = (x + &1) * y
-      #|  e:int
-      #|  fmt:flformat
-      #|  (i:int) - &1 + e - i + &1 = e
-      #|  (to_fformat fmt e)
-      #|  &(fr (to_fformat fmt e))
-      #|  (to_fformat fmt e)
-      #|  (fr (to_fformat fmt e))
-      #|  fround (to_fformat fmt e) mode y =\n                       &(flr fmt) ipow e
-      #|  greatest_r fmt x = y
-      #|  greatest_e fmt x = e
-      #|  greatest_r fmt x = y
-      #|  &0 <= fround (to_fformat fmt e) mode y
-      #|  &0 <= &m * &(flr fmt) ipow e
-      #|  fmt:flformat
-      #|  0 < x ==> SUC(x - 1) = x
-      #|  (flr fmt) * flr fmt EXP (flp fmt - 1)
-      #|  forall y. (x:num) < y /\\ y = z ==> x < z
-      #|  1 <= x ==> 0 < x
-      #|  0 < m + 1
-      #|  (greatest_e(fmt) x)
-      #|  ((greatest_m(fmt) x) + 1) * (flr fmt) EXP ((flp fmt) - 1)
-      #|  (greatest_m(fmt) x) < (flr fmt) - 1
-      #|  greatest_e fmt x = e
-      #|  greatest_r fmt x = y
-      #|  e:int
-      #|  fmt:flformat
-      #|  greatest_r fmt x = y
-      #|  greatest_e fmt x = e
-      #|  greatest_r fmt x = y
-      #|  &0 <= fround (to_fformat fmt e) mode y
-      #|  &0 <= &m * &(flr fmt) ipow e
-      #|  (i:int) - &1 + e - i + &1 = e
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  ((a:real) * b) * c = a * (b * c)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  ((x:real) + y) * z = x * z + y * z
-      #|  (0 < x) <=>\n                           SUC (x - 1) = x
-      #|  ~(x = 0) <=> x - 1 + 1 = x
-      #|  (n - 1) * z + z = ((n - 1) + 1) * z
-      #|  ff (to_fformat fmt (greatest_e fmt x))\n      (fround (to_fformat fmt (greatest_e fmt x)) mode (greatest_r fmt x)) <\n      fr (to_fformat fmt (greatest_e fmt x)) EXP\n      (fp (to_fformat fmt (greatest_e fmt x)) - 1)
-      #|  greatest_e(fmt) x
-      #|  fmt:flformat
-      #|  ((flr fmt) - 1) * (flr fmt) EXP ((flp fmt) - 1) +\n                            (flr fmt) EXP ((flp fmt) - 1)
-      #|  forall y. (x:num) < y /\\ y = z ==> x < z
-      #|  greatest_m fmt x * flr fmt EXP (flp fmt - 1) <=\n                            ((flr fmt) - 1) * flr fmt EXP (flp fmt - 1)
-      #|  0 < x <=> 1 <= x
-      #|  0 < x ==> 0 < x + y
-      #|  (greatest_e(fmt) x)
-      #|  (greatest_m(fmt) x) * (flr fmt) EXP ((flp fmt) - 1) +\n                        (ff(to_fformat fmt (greatest_e(fmt) x))\n                         (fround(to_fformat fmt (greatest_e(fmt) x)) mode\n                                 (greatest_r(fmt) x)))
-      #|  is_fixed(to_fformat fmt (greatest_e fmt x))\n                                (fround (to_fformat fmt (greatest_e fmt x))\n                                        mode\n                                        (greatest_r fmt x))
-      #|  &0 <= (x:real)
-      #|  forall(fmt:flformat) (x:real) (mode:roundmode). ~(x = &0) ==>\n          is_float(fmt) (flround(fmt) mode x)
-      #|  fmt:flformat
-      #|  (to_fformat fmt (greatest_e(fmt) x))
-      #|  (x:num) <= y ==> x < y \\/ x = y
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  &0 <= x /\\ &0 <= y ==>\n                               abs(x + y) = x + y
-      #|  &0 <= (x:real) ==>\n                 x = abs(x)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  &0 <= x /\\ &0 <= y ==>\n                               abs(x + y) = x + y
-      #|  &0 <= (x:real) ==> x = abs(x)
-      #|  (to_fformat fmt e)
-      #|  fmt:flformat
-      #|  &0 <= x /\\ &0 <= y ==>\n                               abs(x + y) = x + y
-      #|  &0 <= (x:real) ==> x = abs(x)
-      #|  (to_fformat fmt e)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  (to_fformat fmt (greatest_e(fmt) x))
-      #|  (x:num) <= y ==> x < y \\/ x = y
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  &0 <= x /\\ y <= &0 ==>\n                               abs(-- x + y) = x + -- y
-      #|  (x:real) <= &0 ==>\n                 -- x = abs(x)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  &0 <= x /\\ y <= &0 ==>\n                               abs(-- x + y) = x + -- y
-      #|  (x:real) <= &0 ==> -- x = abs(x)
-      #|  (to_fformat fmt e)
-      #|  fmt:flformat
-      #|  &0 <= x /\\ y <= &0 ==>\n                               abs(-- x + y) = x + -- y
-      #|  (x:real) <= &0 ==> -- x = abs(x)
-      #|  (to_fformat fmt e)
-      #|  fmt:flformat
-      #|  forall(a:real) (x:real) (y:real).\n          x < y /\\ y <= a ==> (closer y x a)
-      #|  forall(a:real) (x:real) (y:real) (z:real).\n          (closer x y a) /\\ ((closer z x a) \\/ ~(closer x z a)) ==>\n          (closer z y a)
-      #|  forall(a:real) (x:real) (y:real).\n          a <= y /\\ y < x ==> (closer y x a)
-      #|  fl_is_closest (fmt:flformat) (x:real) (y:real) =\n  (forall(s:real). is_float(fmt) s /\\ ~(s = y) ==>\n     ((closer y s x) \\/ ~(closer s y x)))
-      #|  greatest_e(fmt) x = e
-      #|  greatest_r(fmt) x = y
-      #|  (x:real) = y <=>\n         -- (&(greatest_m fmt s) * &(flr fmt) ipow greatest_e fmt s) + x =\n         -- (&(greatest_m fmt s) * &(flr fmt) ipow greatest_e fmt s) + y
-      #|  greatest_r(fmt) x = y
-      #|  greatest_e(fmt) x = e
-      #|  ((x:real) + y) - (x + z) = y - z
-      #|  greatest_m(fmt) x = m
-      #|  greatest_e(fmt) s = e /\\ greatest_m(fmt) s = m
-      #|  greatest_m(fmt) x = m
-      #|  &0 < (x:real) ==> -- x < &0
-      #|  -- (&m * &(flr fmt) ipow e)
-      #|  forall y. (y:real) < &0 /\\ s <= y ==> s < &0
-      #|  (s:real) < &0 ==> ~(s = &0)
-      #|  ~(s = &0)
-      #|  &0 <= (x:real) ==> -- x <= &0
-      #|  -- (&m * &(flr fmt) ipow e)
-      #|  (s:real) <= &0
-      #|  greatest_r(fmt) x = y
-      #|  greatest_e(fmt) x = e
-      #|  ((x:real) - y) - (x + z) = -- y - z
-      #|  ((x:real) + y) - (x + z) = y - z
-      #|  fround (to_fformat fmt e) To_near y =\n                  -- finf (to_fformat fmt e)
-      #|  s = -- (&m * &(flr fmt) ipow e) -\n                                finf (to_fformat fmt e)
-      #|  ~(fround (to_fformat fmt e) To_near y =\n                                      -- finf (to_fformat fmt e))
-      #|  greatest_r(fmt) x = y
-      #|  greatest_e(fmt) x = e
-      #|  ((x:real) - y) - (x + z) = -- y - z
-      #|  ((x:real) + y) - (x + z) = y - z
-      #|  greatest_r fmt x = y
-      #|  greatest_e fmt x = e
-      #|  greatest_m fmt x = m
-      #|  fround (to_fformat fmt e) To_near y =\n                               -- (finf (to_fformat fmt e))
-      #|  greatest_e(fmt) x = e
-      #|  greatest_m(fmt) x = m
-      #|  greatest_e(fmt) x = e
-      #|  -- x <= -- y <=> y <= x
-      #|  (x:real) + y <= &0 <=> x <= -- y
-      #|  (y':real) <= &0
-      #|  greatest_r(fmt) x = y
-      #|  (x:real) + y <= x + z <=> y <= z
-      #|  -- (&m * &(flr fmt) ipow e) -\n                              (finf (to_fformat fmt e))
-      #|  s < -- (&m * &(flr fmt) ipow e) -\n                               (finf (to_fformat fmt e))
-      #|  ~(fround (to_fformat fmt e) To_near y =\n                                            &0)
-      #|  greatest_r(fmt) x = y
-      #|  greatest_e(fmt) x = e
-      #|  (x:real) - (x + z) = &0 - z
-      #|  ((x:real) + y) - (x + z) = y - z
-      #|  greatest_r fmt x = y
-      #|  greatest_e fmt x = e
-      #|  greatest_m fmt x = m
-      #|  fround (to_fformat fmt e) To_near y = &0
-      #|  greatest_m(fmt) x = m
-      #|  greatest_e(fmt) x = e
-      #|  (-- (x:real)) <= -- y <=> y <= x
-      #|  -- (&m * &(flr fmt) ipow e)
-      #|  -- (&m * &(flr fmt) ipow e) < s
-      #|  -- (&m * &(flr fmt) ipow e) +\n                         fround (to_fformat fmt e) To_near y
-      #|  ~(&0 <= (x:real))
-      #|  greatest_e(fmt) x = e
-      #|  greatest_r(fmt) x = y
-      #|  (x:real) = y <=>\n            &(greatest_m fmt s) * &(flr fmt) ipow greatest_e fmt s + x =\n            &(greatest_m fmt s) * &(flr fmt) ipow greatest_e fmt s + y
-      #|  greatest_r(fmt) x = y
-      #|  greatest_e(fmt) x = e
-      #|  ((x:real) + y) - (x + z) = y - z
-      #|  greatest_m(fmt) x = m
-      #|  greatest_e(fmt) s = e /\\ greatest_m(fmt) s = m
-      #|  greatest_m(fmt) x = m
-      #|  &m * &(flr fmt) ipow e
-      #|  forall y. &0 < (y:real) /\\ y <= s ==> &0 < s
-      #|  &0 < (s:real) ==> ~(s = &0)
-      #|  ~(s = &0)
-      #|  &m * &(flr fmt) ipow e
-      #|  &0 <= (s:real)
-      #|  greatest_r(fmt) x = y
-      #|  greatest_e(fmt) x = e
-      #|  ((x:real) + y) - (x + z) = y - z
-      #|  fround (to_fformat fmt e) To_near y =\n                  finf (to_fformat fmt e)
-      #|  s = &m * &(flr fmt) ipow e +\n                                finf (to_fformat fmt e)
-      #|  ~(fround (to_fformat fmt e) To_near y =\n                                      finf (to_fformat fmt e))
-      #|  greatest_r(fmt) x = y
-      #|  greatest_e(fmt) x = e
-      #|  ((x:real) + y) - (x + z) = y - z
-      #|  greatest_r fmt x = y
-      #|  greatest_e fmt x = e
-      #|  greatest_m fmt x = m
-      #|  fround (to_fformat fmt e) To_near y =\n                               (finf (to_fformat fmt e))
-      #|  greatest_e(fmt) x = e
-      #|  greatest_m(fmt) x = m
-      #|  greatest_e(fmt) x = e
-      #|  &0 <= (x:real) - y <=> y <= x
-      #|  &0 <= (y':real)
-      #|  greatest_r(fmt) x = y
-      #|  (x:real) + y <= x + z <=> y <= z
-      #|  &m * &(flr fmt) ipow e +\n                              (finf (to_fformat fmt e))
-      #|  &m * &(flr fmt) ipow e +\n                               (finf (to_fformat fmt e)) < s
-      #|  ~(fround (to_fformat fmt e) To_near y =\n                                            &0)
-      #|  greatest_r(fmt) x = y
-      #|  greatest_e(fmt) x = e
-      #|  (x:real) - (x + z) = &0 - z
-      #|  ((x:real) + y) - (x + z) = y - z
-      #|  greatest_r fmt x = y
-      #|  greatest_e fmt x = e
-      #|  greatest_m fmt x = m
-      #|  fround (to_fformat fmt e) To_near y = &0
-      #|  greatest_m(fmt) x = m
-      #|  greatest_e(fmt) x = e
-      #|  &m * &(flr fmt) ipow e
-      #|  s < &m * &(flr fmt) ipow e
-      #|  &m * &(flr fmt) ipow e +\n                         fround (to_fformat fmt e) To_near y
-      #|  &0 <= (x:real)
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          ?(z:real). flround(fmt) To_near x = z /\\  fl_is_closest(fmt) x z
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  &0 <= (x:real) ==> x = abs(x)
-      #|  fmt:flformat
-      #|  (x:real) < y ==> x <= y
-      #|  fmt:flformat
-      #|  &0 <= (x:real) ==> x = abs(x)
-      #|  fmt:flformat
-      #|  &0 <= (x:real) ==> x = abs(x)
-      #|  fmt:flformat
-      #|  (x:real) < y ==> x <= y
-      #|  fmt:flformat
-      #|  (x:real) < y ==> x <= y
-      #|  fmt:flformat
-      #|  1 <= m' ==> 0 < m'
-      #|  &0 <= (s:real) ==> abs(s) = s
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  (x:real) < y ==> x <= y
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real)) ==> x = -- abs(x)
-      #|  fmt:flformat
-      #|  (x:real) < y ==> x <= y
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real)) ==> x = -- abs(x)
-      #|  fmt:flformat
-      #|  (x:real) <= &0 ==> x = -- abs(x)
-      #|  fmt:flformat
-      #|  (x:real) < y ==> x <= y
-      #|  fmt:flformat
-      #|  (x:real) < y ==> x <= y
-      #|  fmt:flformat
-      #|  1 <= m' ==> 0 < m'
-      #|  (s:real) <= &0 ==> abs(s) = -- s
-      #|  fmt:flformat
-      #|  ~(s = &0) /\\ s <= &0 ==> ~(&0 <= (s:real))
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  (x:real) < y ==> x <= y
-      #|  (e:int) - &1 + (e2:int) - e + &1 = e2
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  ((a:real) * b) * c = a * (b * c)
-      #|  fmt:flformat
-      #|  &0 <=\n                &(greatest_m fmt x) * &(flr fmt) ipow (greatest_e fmt x)
-      #|  fmt:flformat
-      #|  0 < x ==> SUC(x - 1) = x
-      #|  (flr fmt) * flr fmt EXP ((flp fmt) - 1)
-      #|  forall y. (x:num) < y /\\ y = z ==> x < z
-      #|  (greatest_e(fmt) x)
-      #|  (greatest_m(fmt) x) * (flr fmt) EXP ((flp fmt) - 1)
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          is_float(fmt)\n          (&(greatest_m(fmt) x) *\n           &(flr fmt) ipow (greatest_e(fmt) x))
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  &0 <= (x:real) ==> abs(x) = x
-      #|  abs(-- x) = abs(x)
-      #|  forall(fmt:flformat) (x:real). is_float(fmt) x <=> is_float(fmt) (-- x)
-      #|  (greatest_e(fmt) x)
-      #|  fmt:flformat
-      #|  z = abs(z)
-      #|  (x:real) * z + z = (x + &1) * z
-      #|  (e:int) - &1 + (e2:int) - e + &1 = e2
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  ((a:real) * b) * c = a * (b * c)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  ((a:real) + b) * c = a * c + b * c
-      #|  fmt:flformat
-      #|  (flp fmt) = SUC((flp fmt) - 1)
-      #|  (m:num) * n + n = (m + 1) * n
-      #|  (greatest_e(fmt) x)
-      #|  fmt:flformat
-      #|  abs(z) < finf (to_fformat fmt (greatest_e(fmt) x))
-      #|  (greatest_m(fmt) x) * (flr fmt) EXP ((flp fmt) - 1) +\n                      (flr fmt) EXP ((flp fmt) - 1)
-      #|  forall y. (x:num) < y /\\ y <= z ==> x < z
-      #|  (flr fmt) * (flr fmt) EXP ((flp fmt) - 1)
-      #|  forall y. (x:num) < y /\\ y = z ==> x < z
-      #|  0 < x ==> 0 < x + y
-      #|  (greatest_e(fmt) x)
-      #|  (greatest_m(fmt) x) * (flr fmt) EXP ((flp fmt) - 1) +\n                    ff(to_fformat fmt (greatest_e(fmt) x)) z
-      #|  (x:real) * z + z = (x + &1) * z
-      #|  (e:int) - &1 + (e2:int) - e + &1 = e2
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  ((a:real) * b) * c = a * (b * c)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  (greatest_e(fmt) x)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  (flp fmt) = SUC((flp fmt) - 1)
-      #|  (flr fmt) * (flr fmt) EXP ((flp fmt) - 1)
-      #|  forall y. (x:num) < y /\\ y = z ==> x < z
-      #|  greatest_e(fmt) x
-      #|  ((greatest_m(fmt) x) + 1) * (flr fmt) EXP ((flp fmt) - 1)
-      #|  (a:int) + b = b + a
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  ((x:real) - &1) * (z:real) + z = x * z
-      #|  fmt:flformat
-      #|  1 <= (flr fmt)
-      #|  (e:int) - &1 + (e2:int) - e + &1 = e2
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  fmt:flformat
-      #|  (flr fmt)
-      #|  (greatest_e(fmt) x)
-      #|  fmt:flformat
-      #|  n:num = 1 * n
-      #|  fmt:flformat
-      #|  0 < (n:num) ==> n = SUC(n - 1)
-      #|  greatest_e(fmt) x + &1
-      #|  (flr fmt) EXP ((flp fmt) - 1)
-      #|  greatest_m(fmt) x = (flr fmt) - 1
-      #|  z = (finf (to_fformat fmt (greatest_e(fmt) x)))
-      #|  &0 <= (x:real) /\\ &0 <= y ==> abs(x + y) = x + y
-      #|  forall(m:num).\n            abs(&m * &(flr fmt) ipow (greatest_e(fmt) x) + z) =\n                &m * &(flr fmt) ipow (greatest_e(fmt) x) + z
-      #|  forall(fmt:flformat) (x:real) (z:real).\n          ~(x = &0) /\\ &0 <= z /\\\n            is_fixed(to_fformat(fmt) (greatest_e(fmt) x)) z ==>\n          is_float(fmt)\n          (&(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) + z)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  (to_fformat fmt (greatest_e(fmt) x))
-      #|  (to_fformat fmt (greatest_e(fmt) x))
-      #|  fmt:flformat
-      #|  (to_fformat fmt (greatest_e(fmt) x))
-      #|  -- ( (-- (x:real)) + z) = x + (-- z)
-      #|  &0 <= (-- z)
-      #|  is_fixed (to_fformat fmt (greatest_e fmt x)) (-- z)
-      #|  forall(fmt:flformat) (x:real) (z:real).\n          ~(x = &0) /\\ ~(&0 <= z) /\\\n            is_fixed(to_fformat(fmt) (greatest_e(fmt) x)) z ==>\n          is_float(fmt)\n       ((-- (&(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x))) + z)
-      #|  greatest_r(fmt) y
-      #|  fmt:flformat
-      #|  greatest_e(fmt) y = greatest_e(fmt) x /\\\n                 greatest_m(fmt) y = greatest_m(fmt) x
-      #|  ~closer\n       (--(&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x) +\n        --finf (to_fformat fmt (greatest_e fmt x)))\n       y\n       x
-      #|  closer y\n      (--(&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x) +\n       --finf (to_fformat fmt (greatest_e fmt x)))\n      x
-      #|  (x:real) + (y - (-- ((-- x) + z))) =\n                                     y - (-- z)
-      #|  (x:real) + (y - (x + z)) = y - z
-      #|  abs (\n        (-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) +\n        (-- (finf (to_fformat fmt (greatest_e fmt x)))) - x) =\n\n        &(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x +\n        (finf (to_fformat fmt (greatest_e fmt x))) - (-- x)
-      #|  ~(\n              (-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) +\n                (-- (finf (to_fformat fmt (greatest_e fmt x)))) = y)
-      #|  ~(&0 <= -- (x:real)) <=> &0 < x
-      #|  is_float(fmt)\n                           ((-- (&(greatest_m(fmt) x) *\n                            &(flr fmt) ipow (greatest_e(fmt) x))) +\n                            (-- (finf (to_fformat fmt (greatest_e(fmt) x)))))
-      #|  &0 < &(greatest_m(fmt) x) *\n                           &(flr fmt) ipow (greatest_e(fmt) x) +\n                           (finf (to_fformat fmt (greatest_e(fmt) x)))
-      #|  ~closer\n            (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x +\n            finf (to_fformat fmt (greatest_e fmt x)))\n            y\n            x
-      #|  closer y\n          (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x +\n          finf (to_fformat fmt (greatest_e fmt x)))\n          x
-      #|  (x:real) + (y - (x + z)) = y - z
-      #|  abs (\n        &(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x +\n        (finf (to_fformat fmt (greatest_e fmt x))) - x) =\n\n        &(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x +\n        (finf (to_fformat fmt (greatest_e fmt x))) - x
-      #|  ~(\n              &(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x +\n                (finf (to_fformat fmt (greatest_e fmt x))) = y)
-      #|  is_float(fmt)\n                           (&(greatest_m(fmt) x) *\n                            &(flr fmt) ipow (greatest_e(fmt) x) +\n                            (finf (to_fformat fmt (greatest_e(fmt) x))))
-      #|  &0 <= &(greatest_m(fmt) x) *\n                           &(flr fmt) ipow (greatest_e(fmt) x) +\n                           (finf (to_fformat fmt (greatest_e(fmt) x)))
-      #|  &0 <= (x:real)
-      #|  abs(y) < &(greatest_m(fmt) x) *\n                     &(flr fmt) ipow (greatest_e(fmt) x) +\n                    (finf (to_fformat fmt (greatest_e(fmt) x)))
-      #|  ~(closer\n      (-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) y x)
-      #|  closer y\n         (-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) x
-      #|  ~(-- (&(greatest_m fmt x) *\n                              &(flr fmt) ipow (greatest_e fmt x)) = y)
-      #|  abs (-- (&(greatest_m fmt x) *\n                         &(flr fmt) ipow (greatest_e fmt x)) - x) =\n             (-- x) - &(greatest_m fmt x) * &(flr fmt) ipow (greatest_e fmt x)
-      #|  &0 < &(greatest_m(fmt) x) *\n                           &(flr fmt) ipow (greatest_e(fmt) x)
-      #|  ~(closer\n        (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x) y x)
-      #|  closer y\n           (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x) x
-      #|  abs ((&(greatest_m fmt x) *\n                         &(flr fmt) ipow (greatest_e fmt x)) - x) =\n               x - &(greatest_m fmt x) * &(flr fmt) ipow (greatest_e fmt x)
-      #|  ~(&(greatest_m fmt x) *\n                              &(flr fmt) ipow (greatest_e fmt x) = y)
-      #|  &0 <= &(greatest_m(fmt) x) *\n                           &(flr fmt) ipow (greatest_e(fmt) x)
-      #|  &0 <= (x:real)
-      #|  &(greatest_m(fmt) x) *\n                     &(flr fmt) ipow (greatest_e(fmt) x) <= abs y
-      #|  -- (finf (to_fformat fmt (greatest_e(fmt) x)))
-      #|  (finf (to_fformat fmt (greatest_e(fmt) x)))
-      #|  &0 <= (y:real)
-      #|  abs(y) = &(greatest_m fmt x) *\n                         &(flr fmt) ipow greatest_e fmt x +\n                         (finf (to_fformat fmt (greatest_e(fmt) x)))
-      #|  &0
-      #|  fmt:flformat
-      #|  a /\\ b <=> b /\\ a
-      #|  abs(y) = &(greatest_m fmt x) *\n                         &(flr fmt) ipow greatest_e fmt x
-      #|  forall(fmt:flformat) (x:real) (y:real).\n          ~(x = &0) /\\ is_float(fmt) y /\\ fl_is_closest(fmt) x y ==>\n          (~(abs(y) = &(greatest_m fmt x) *\n                         &(flr fmt) ipow greatest_e fmt x +\n                         (finf (to_fformat fmt (greatest_e(fmt) x)))) ==>\n            (greatest_m(fmt) y) = (greatest_m(fmt) x) /\\\n            (greatest_e(fmt) y) = (greatest_e(fmt) x)) /\\\n          ?(z:real). is_fixed(to_fformat fmt (greatest_e(fmt) x)) z /\\\n          (if (&0 <= y)\n           then\n               y = &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) +\n                  z\n           else\n               y = -- (&(greatest_m(fmt) x) *\n                      &(flr fmt) ipow (greatest_e(fmt) x)) + z)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  ~(closer\n        (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x) y x)
-      #|  closer y\n           (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x) x
-      #|  abs ((&(greatest_m fmt x) *\n                         &(flr fmt) ipow (greatest_e fmt x)) - x) =\n               x - &(greatest_m fmt x) * &(flr fmt) ipow (greatest_e fmt x)
-      #|  ~(&(greatest_m fmt x) *\n                              &(flr fmt) ipow (greatest_e fmt x) = y)
-      #|  &(greatest_m fmt x) *\n                              &(flr fmt) ipow (greatest_e fmt x) = y
-      #|  &0 <= &(greatest_m(fmt) x) *\n                           &(flr fmt) ipow (greatest_e(fmt) x)
-      #|  forall(fmt:flformat) (x:real) (y:real).\n          ~(x = &0) /\\ &0 <= x /\\ fl_is_closest(fmt) x y ==>\n          &0 <= y
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  ~(closer\n      (-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) y x)
-      #|  closer y\n         (-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) x
-      #|  ~((-- (&(greatest_m fmt x) *\n                              &(flr fmt) ipow (greatest_e fmt x))) = y)
-      #|  (-- (&(greatest_m fmt x) *\n                              &(flr fmt) ipow (greatest_e fmt x))) = y
-      #|  abs (-- (&(greatest_m fmt x) *\n                         &(flr fmt) ipow (greatest_e fmt x)) - x) =\n             (-- x) - &(greatest_m fmt x) * &(flr fmt) ipow (greatest_e fmt x)
-      #|  &0 < &(greatest_m(fmt) x) *\n                           &(flr fmt) ipow (greatest_e(fmt) x)
-      #|  forall(fmt:flformat) (x:real) (y:real).\n          ~(x = &0) /\\ ~(&0 <= x) /\\ fl_is_closest(fmt) x y ==>\n          ~(&0 <= y)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  forall(a:real) (x:real) (y:real) (z:real).\n          ((closer x y a) \\/ ~(closer y x a)) /\\ y <= a /\\ z < y ==>\n          (closer x z a)
-      #|  forall(a:real) (x:real) (y:real) (z:real).\n          ((closer x y a) \\/ ~(closer y x a)) /\\ (a <= y) /\\ y < z ==>\n          (closer x z a)
-      #|  (-- x:real) * y = -- (x * y)
-      #|  (y:real) + x = z <=> y = (-- x) + z
-      #|  (y:real) - x = z <=> y = x + z
-      #|  (greatest_r(fmt) y) = z
-      #|  (greatest_e(fmt) x)
-      #|  fmt:flformat
-      #|  1 < x ==> ~(x - 1 = 0)
-      #|   (ff (to_fformat fmt (greatest_e fmt x))\n                     (--finf (to_fformat fmt (greatest_e fmt x)))) =\n                 (ff (to_fformat fmt (greatest_e fmt x))\n                      (finf (to_fformat fmt (greatest_e fmt x))))
-      #|  z = -- (finf (to_fformat fmt (greatest_e fmt x)))
-      #|  (greatest_e(fmt) x)
-      #|  fmt:flformat
-      #|  1 < x ==> ~(x - 1 = 0)
-      #|  z = (finf (to_fformat fmt (greatest_e fmt x)))
-      #|  &0 <= (y:real)
-      #|  (greatest_e(fmt) x)
-      #|  fmt:flformat
-      #|  ((x:real) + &1) * z = x * z + z
-      #|  ~(greatest_m fmt x = flr fmt - 1)
-      #|  (x:num) < y /\\ ~(x = y - 1) ==> x < y - 1
-      #|  m + 1 < (flr fmt) <=> m < (flr fmt) - 1
-      #|  fmt:flformat
-      #|  (greatest_m(fmt) x) + 1
-      #|  (greatest_e(fmt) x)
-      #|  (greatest_e(fmt) x)
-      #|  fmt:flformat
-      #|  1 < n ==> 1 <= n
-      #|  (&(flr fmt) - &1) = &((flr fmt) - 1)
-      #|  (x:real) * y = (x - &1) * y + y
-      #|  (&1) * (x:real) * y = y * x
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  fmt:flformat
+      #|  \226\136\128 fmt : Flformat, dest_flformat(fmt) == (FST(dest_flformat(fmt)), SND(dest_flformat(fmt)))
+      #|  \226\136\128 r : Num, \226\136\128 p : Num, is_valid_flformat((r, p)) \226\134\146 1 < FST((r, p))
+      #|  \226\136\128 r : Num, \226\136\128 p : Num, is_valid_flformat((r, p)) \226\134\146 EVEN(FST((r, p)))
+      #|  \226\136\128 r : Num, \226\136\128 p : Num, is_valid_flformat((r, p)) \226\134\146 1 < SND((r, p))
+      #|  \226\136\128 fmt : Flformat, is_valid_flformat(dest_flformat(fmt))
+      #|  \226\136\128 fmt : Flformat, 1 < flr(fmt)
+      #|  1 < (x : Num) \226\134\146 0 < x
+      #|  \226\136\128 fmt : Flformat, 0 < flr(fmt)
+      #|  0 < (x : Num) \226\134\146 !(x == 0)
+      #|  \226\136\128 fmt : Flformat, !(real_of_num(flr(fmt)) == real_of_num(0))
+      #|  \226\136\128 fmt : Flformat, EVEN(flr(fmt))
+      #|  ODD(1)
+      #|  (x : Num) == 1
+      #|  (x : Num) == 0
+      #|  \226\136\128 x : Num, !(x == 0) && EVEN(x) \226\134\146 2 <= x
+      #|  \226\136\128 fmt : Flformat, 2 <= flr(fmt)
+      #|  (x : Num) == 1
+      #|  \226\136\128 fmt : Flformat, 1 < flp(fmt)
+      #|  1 < (x : Num) \226\134\146 0 < x
+      #|  \226\136\128 fmt : Flformat, 0 < flp(fmt)
+      #|  (1 <= (n : Num)) == (0 < n)
+      #|  (int_of_num(0) <= (x : Int) - int_of_num(1)) == (int_of_num(1) <= x)
+      #|  \226\136\128 fmt : Flformat, int_of_num(0) <= int_of_num(flp(fmt)) - int_of_num(1)
+      #|  \226\136\128 fmt : Flformat, ipow(real_of_num(flr(fmt)), int_of_num(flp(fmt)) - int_of_num(1)) == real_of_num(EXP(flr(fmt), flp(fmt) - 1))
+      #|  int_of_num(0) <= int_of_num((n : Num))
+      #|  \226\136\128 fmt : Flformat, \226\136\128 n : Num, real_of_num(EXP(flr(fmt), n)) == ipow(real_of_num(flr(fmt)), int_of_num(n))
+      #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) <= x
+      #|  \226\136\128 fmt : Flformat, \226\136\128 e : Int, real_of_num(0) <= ipow(real_of_num(flr(fmt)), e)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 e : Int, real_of_num(0) < ipow(real_of_num(flr(fmt)), e)
+      #|  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+      #|  \226\136\128 fmt : Flformat, \226\136\128 e : Int, !(ipow(real_of_num(flr(fmt)), e) == real_of_num(0))
+      #|  \226\136\128 fmt : Flformat, \226\136\128 u : Int, \226\136\128 v : Int, ipow(real_of_num(flr(fmt)), u) * ipow(real_of_num(flr(fmt)), v) == ipow(real_of_num(flr(fmt)), u + v)
+      #|  is_valid_fformat((flr((fmt : Flformat)), flp(fmt), (e : Int)))
+      #|  mk_fformat((flr((fmt : Flformat)), flp(fmt), (e : Int)))
+      #|  \226\136\128 fmt : Flformat, \226\136\128 e : Int, \226\136\131 fmt' : Fformat, to_fformat(fmt, e) == fmt' && fr(fmt') == flr(fmt) && fp(fmt') == flp(fmt) && fe(fmt') == e
+      #|  is_valid_fformat((flr((fmt : Flformat)), flp(fmt), (e : Int)))
+      #|  \226\136\128 fmt : Flformat, \226\136\128 e : Int, fr(to_fformat(fmt, e)) == flr(fmt) && fp(to_fformat(fmt, e)) == flp(fmt) && fe(to_fformat(fmt, e)) == e
+      #|  (fmt : Flformat)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 z : Real, \226\136\131 e : Int, z <= ipow(real_of_num(flr(fmt)), e)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 z : Real, real_of_num(0) < z \226\134\146 (\226\136\131 e : Int, ipow(real_of_num(flr(fmt)), e) <= z)
+      #|  (fmt : Flformat)
+      #|  abs(-(x : Real)) == abs(x)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, is_float(fmt, x) == is_float(fmt, -x)
+      #|  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+      #|  real_of_num((f : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int) - int_of_num(flp(fmt)) + int_of_num(1))
+      #|  \226\136\128 y : Real, (x : Real) == y && !(y == real_of_num(0)) \226\134\146 !(x == real_of_num(0))
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, is_float(fmt, x) \226\134\146 !(x == real_of_num(0))
+      #|  (is_greatest_e : (Flformat, Real, Int) -> Bool)((fmt : Flformat), (x : Real), (e : Int)) == (ipow(real_of_num(flr(fmt)), e) <= abs(x) && (\226\136\128 e' : Int, ipow(real_of_num(flr(fmt)), e') <= abs(x) \226\134\146 e' <= e))
+      #|  (e' : Int)
+      #|  flr((fmt : Flformat))
+      #|  (e : Int)
+      #|  abs((x : Real))
+      #|  (fmt : Flformat)
+      #|  \226\136\131 b : Int, \226\136\128 e : Int, IN(e, {(e : Int) | ipow(real_of_num(flr((fmt : Flformat))), e) <= abs((x : Real))}) \226\134\146 e <= b
+      #|  !({(e : Int) | ipow(real_of_num(flr((fmt : Flformat))), e) <= abs((x : Real))} == {})
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 (\226\136\131 e : Int, greatest_e(fmt, x) == e && is_greatest_e(fmt, x, e))
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 real_of_num(0) < abs(x)
+      #|  (e2 : Int) <= (e1 : Int)
+      #|  (e1 : Int) <= (e2 : Int)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, \226\136\128 e1 : Int, \226\136\128 e2 : Int, is_greatest_e(fmt, x, e1) && is_greatest_e(fmt, x, e2) \226\134\146 e1 == e2
+      #|  abs(-(x : Real)) == abs(x)
+      #|  !(-(x : Real) == real_of_num(0))
+      #|  -(x : Real)
+      #|  (fmt : Flformat)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 greatest_e(fmt, -x) == greatest_e(fmt, x)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (is_greatest_m : (Flformat, Real, Num) -> Bool)((fmt : Flformat), (x : Real), (m : Num)) == (real_of_num(m) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) <= abs(x) && (\226\136\128 m' : Num, real_of_num(m') * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) <= abs(x) \226\134\146 m' <= m))
+      #|  (n' : Num)
+      #|  \226\136\128 m : Num, IN(m, {(m : Num) | real_of_num(m) * ipow(real_of_num(flr((fmt : Flformat))), greatest_e(fmt, (x : Real))) <= abs(x)}) \226\134\146 m <= flr(fmt)
+      #|  real_of_num((k : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  \226\136\128 z : Real, real_of_num(0) <= z && (a : Real) + z <= (b : Real) \226\134\146 a <= b
+      #|  real_of_num(flr((fmt : Flformat)) + (k : Num)) * ipow(real_of_num(flr(fmt)), (e : Int)) <= abs((x : Real))
+      #|  ((a : Real) + (b : Real)) * (c : Real) == a * c + b * c
+      #|  (a : Real) * (b : Real) == b * a
+      #|  (fmt : Flformat)
+      #|  ipow(real_of_num(flr((fmt : Flformat))), (e : Int) + int_of_num(1)) <= abs((x : Real))
+      #|  (m : Num) - flr((fmt : Flformat))
+      #|  \226\136\131 k : Num, (m : Num) == flr((fmt : Flformat)) + k
+      #|  (m : Num) < flr((fmt : Flformat))
+      #|  \226\136\128 m : Num, IN(m, {(m : Num) | real_of_num(m) * ipow(real_of_num(flr((fmt : Flformat))), greatest_e(fmt, (x : Real))) <= abs(x)}) \226\134\146 m < flr(fmt)
       #|  1
-      #|  (greatest_e(fmt) x) + &1
-      #|  (greatest_m(fmt) x) = (flr fmt) - 1
-      #|  (greatest_r(fmt) y) = &0
-      #|  abs y =\n        &(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x +\n        finf (to_fformat fmt (greatest_e fmt x))
-      #|  ~((-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) + s = y)
-      #|  is_float(fmt)\n         ((-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) + s)
-      #|  (a:real) + (b - c) = (a + b) - c
-      #|  (-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) + z = y
-      #|  x:real
-      #|  fmt:flformat
-      #|  ~(&0 <= (y:real))
-      #|  abs((z:real) - y) =\n        abs((-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) + z -\n     ((-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) + y))
-      #|  (&0):real
-      #|  &0 < (s:real)
-      #|  (s:real) = &0
-      #|  &0 <= (s:real)
-      #|  (&0):real
-      #|  ~(&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x + s = y)
-      #|  is_float(fmt)\n         (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x + s)
-      #|  &(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x + z= y
-      #|  (a:real) + (b - c) = (a + b) - c
-      #|  x:real
-      #|  fmt:flformat
-      #|  &0 <= (y:real)
-      #|  abs((z:real) - y) =\n        abs(&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x + z -\n            (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x + y))
-      #|  &0 <= (s:real)
-      #|  &0 <= (x:real)
-      #|  ~((-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) = y)
-      #|  (x:real) = x + (&0)
-      #|  is_float(fmt)\n         ((-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)))
-      #|  (x:real) + (&0) = x
-      #|  (x:real) + (&0 - y) = x - y
-      #|  (a:real) + (b - c) = (a + b) - c
-      #|  (-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) + z = y
-      #|  x:real
-      #|  fmt:flformat
-      #|  ~(&0 <= (y:real))
-      #|  abs((z:real) - y) =\n        abs((-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) + z -\n     ((-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) + y))
-      #|  ~(&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x + (&0) = y)
-      #|  is_float(fmt)\n         (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x + (&0))
-      #|  (a:real) + (b - y) = (a + b) - y
-      #|  &(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x + z= y
-      #|  x:real
-      #|  fmt:flformat
-      #|  &0 <= (y:real)
-      #|  abs((z:real) - y) =\n        abs(&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x + z -\n        (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x + y))
-      #|  &0 <= (x:real)
-      #|  closer z (&0) (greatest_r(fmt) x) \\/\n                   ~(closer (&0) z (greatest_r(fmt) x))
-      #|  (a:real) + (b - c) = (a + b) - c
-      #|  ~((-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) + s = y)
-      #|  is_float(fmt)\n         ((-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) + s)
-      #|  (x:real) + (&0 - y) = x - y
-      #|  (-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) = y
-      #|  x:real
-      #|  fmt:flformat
-      #|  ~(&0 <= (y:real))
-      #|  abs((z:real) - y) =\n        abs((-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) + z -\n     ((-- (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x)) + y))
-      #|  &0 < (s:real)
-      #|  &0 <= (s:real)
-      #|  (a:real) + (b - c) = (a + b) - c
-      #|  ~(&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x + s = y)
-      #|  is_float(fmt)\n         (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x + s)
-      #|  (x:real) + (&0 - y) = x - y
-      #|  &(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x = y
-      #|  x:real
-      #|  fmt:flformat
-      #|  &0 <= (y:real)
-      #|  abs((z:real) - y) =\n        abs(&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x + z -\n            (&(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x + y))
-      #|  &0 <= (s:real)
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  (greatest_m(fmt) x)
-      #|  (greatest_e(fmt) x)
-      #|  (greatest_r(fmt) y) = &0
-      #|  a /\\ b <=> b /\\ a
-      #|  ~(&0 = y) ==> ~((x:real) = x + y)
-      #|  ~(abs y =\n        &(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x +\n        finf (to_fformat fmt (greatest_e fmt x)))
-      #|  abs(y) =\n                 &(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x
-      #|  (z:real) = &0
-      #|  z:real
-      #|  forall(fmt:flformat) (x:real) (y:real).\n          ~(x = &0) /\\ is_float(fmt) y /\\ fl_is_closest(fmt) x y ==>\n          ?(z:real). is_fixed(to_fformat fmt (greatest_e(fmt) x)) z /\\\n     is_closest(to_fformat fmt (greatest_e(fmt) x)) (greatest_r(fmt) x) z /\\\n          (if (&0 <= y)\n           then\n               y = &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) +\n                  z\n           else\n               y = -- (&(greatest_m(fmt) x) *\n                      &(flr fmt) ipow (greatest_e(fmt) x)) + z) /\\\n          (EVEN (ff(to_fformat fmt (greatest_e(fmt) y))\n               (greatest_r(fmt) y)) <=>\n              EVEN (ff(to_fformat fmt (greatest_e(fmt) x)) z))
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  fmt:flformat
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  fmt:flformat
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  fmt:flformat
-      #|  ~(abs y =\n        &(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x +\n        finf (to_fformat fmt (greatest_e fmt x)))
-      #|  fl_norm_frac (fmt:flformat) (y:real) =\n  ( (greatest_m(fmt) y) * (flr fmt) EXP ((flp fmt) - 1) +\n    (ff (to_fformat fmt (greatest_e(fmt) y)) (greatest_r(fmt) y)) )
-      #|  fl_to_even (fmt:flformat) (x:real) (y:real) = (forall(y2:real).\n   is_float(fmt) y2 /\\\n   (fl_is_closest(fmt) x y) /\\\n   (fl_is_closest(fmt) x y2) /\\\n   ~(y2 = y) ==>\n   (EVEN (fl_norm_frac(fmt) y)))
-      #|  z:real
-      #|  to_even (to_fformat fmt (greatest_e fmt x))\n              (greatest_r fmt x) z'
-      #|  is_frac (to_fformat fmt (greatest_e(fmt) x))\n                       z'\n                      (ff (to_fformat fmt (greatest_e(fmt) x)) z')
-      #|  x:real
-      #|  fmt:flformat
-      #|  ~(&0 <= (y2:real))
-      #|  x:real
-      #|  fmt:flformat
-      #|  ~(&0 <= (flround(fmt) To_near x))
-      #|  x:real
-      #|  fmt:flformat
-      #|  &0 <= (y2:real)
-      #|  x:real
-      #|  fmt:flformat
-      #|  &0 <= (flround(fmt) To_near x)
-      #|  &0 <= (x:real)
-      #|  ~((z:real) = z')
-      #|  z IN (fixed (to_fformat fmt (greatest_e(fmt) x)))
-      #|  (x:real) < y ==> x <= y
-      #|  abs(greatest_r(fmt) x) <=\n                    (finf (to_fformat fmt (greatest_e(fmt) x)))
-      #|  ~(x - 1 = 0) <=> 1 < x
-      #|  (-- (&(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x))) +\n fround (to_fformat fmt (greatest_e(fmt) x)) To_near (greatest_r(fmt) x) =\n       (flround(fmt) To_near x)
-      #|  x:real
-      #|  fmt:flformat
-      #|  ~(&0 <= (flround(fmt) To_near x))
-      #|  (x:real) = y <=>\n   (-- (&(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x))) + x =\n (-- (&(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x))) + y
-      #|  &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) +\n    fround (to_fformat fmt (greatest_e(fmt) x)) To_near (greatest_r(fmt) x) =\n            (flround(fmt) To_near x)
-      #|  x:real
-      #|  fmt:flformat
-      #|  &0 <= (flround(fmt) To_near x)
-      #|  (x:real) = y <=>\n  &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) +\n       x = &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) + y
-      #|  &0 <= (x:real)
-      #|  fround (to_fformat fmt (greatest_e(fmt) x)) To_near (greatest_r(fmt) x) = z'
-      #|  is_float(fmt) (flround(fmt) To_near x)
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          fl_to_even(fmt) x (flround(fmt) To_near x)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  (to_fformat fmt (greatest_e(fmt) x))
-      #|  fl_to_zero (fmt:flformat) (x:real) (y:real) =\n  (if (&0 <= x)\n   then\n     (&0 <= y) /\\ (y <= x) /\\\n       forall(y':real). is_float(fmt) y' /\\ y' <= x ==> y' <= y\n   else\n     (y <= &0) /\\ (x <= y) /\\\n       forall(y':real). is_float(fmt) y' /\\ x <= y' ==> y <= y')
-      #|  y'' = &0
-      #|  (y:real) = &0
-      #|  &0 <= (y:real)
-      #|  ~(&0 <= (y:real))
-      #|  (y:real) <= &0
-      #|  greatest_e(fmt) x = e
-      #|  abs(y) <= (finf (to_fformat fmt e))
-      #|  greatest_r(fmt) x = y
-      #|  greatest_e(fmt) x = e
-      #|  greatest_m(fmt) x = m
-      #|  -- (&m * &(flr fmt) ipow e)
-      #|  y <= greatest_r(fmt) y'
-      #|  ~(&0 <= (y':real))
-      #|  greatest_m(fmt) x = m
-      #|  &0 < &m * &(flr fmt) ipow e
-      #|  &m * &(flr fmt) ipow e
-      #|  forall z. &0 < z /\\ y <= (-- z) ==> ~(y = &0)
-      #|  (greatest_e(fmt) y') = e /\\\n                               (greatest_m(fmt) y') = m
-      #|  (y'':real) <= &0
-      #|  (-- y'') = abs(y'')
-      #|  -- ((-- (z:real)) + y) = z + (-- y)
-      #|  abs(x) = -- x
-      #|  abs(x)
-      #|  abs(y') < &m * &(flr fmt) ipow e + (finf (to_fformat fmt e))
-      #|  &0 <= &m * &(flr fmt) ipow e
-      #|  &m * &(flr fmt) ipow e <= abs(y')
-      #|  &0 <= (-- (x:real)) <=> x <= &0
-      #|  (x:real) < y /\\ &0 <= z ==> x <= y + z
-      #|  (-- (z:real)) + y <= y' <=> (-- y') <= z + (-- y)
-      #|  -- (&(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x)) < y'
-      #|  &0 <= (y:real)
-      #|  ~(&0 <= (y:real))
-      #|  (y':real) <= &0
-      #|  (y:real) <= &0
-      #|  abs(y) <= (finf (to_fformat fmt e))
-      #|  &0 <= (-- x) <=> x <= &0
-      #|  -- (z:real) + y <= &0 <=> &0 <= z + (-- y)
-      #|  &0 <= (y:real)
-      #|  greatest_e(fmt) x = e
-      #|  abs(y) <= (finf (to_fformat fmt e))
-      #|  greatest_r(fmt) x = y
-      #|  greatest_e(fmt) x = e
-      #|  greatest_m(fmt) x = m
-      #|  &m * &(flr fmt) ipow e
-      #|  greatest_r(fmt) y' <= y
-      #|  &0 <= (y':real)
-      #|  &m * &(flr fmt) ipow e
-      #|  forall z. &0 < z /\\ z <= y ==> ~(y = &0)
-      #|  (greatest_e(fmt) y') = e /\\\n                               (greatest_m(fmt) y') = m
-      #|  &0 <= (y'':real)
-      #|  y'' = abs(y'')
-      #|  abs(x) = x
-      #|  abs(x)
-      #|  abs(y') < &m * &(flr fmt) ipow e + (finf (to_fformat fmt e))
-      #|  &0 <= &m * &(flr fmt) ipow e
-      #|  &m * &(flr fmt) ipow e <= abs(y')
-      #|  (x:real) < y /\\ &0 <= z ==> x <= y + z
-      #|  y' <\n             &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x)
-      #|  &0 <= (y:real)
-      #|  abs(y) <= (finf (to_fformat fmt e))
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          fl_to_zero(fmt) x (flround (fmt) To_zero x)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  (to_fformat fmt e)
-      #|  fmt:flformat
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  (to_fformat fmt e)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  fmt:flformat
-      #|  (to_fformat fmt e)
-      #|  fmt:flformat
-      #|  ~(&0 <= (y:real))
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  fmt:flformat
-      #|  (to_fformat fmt e)
-      #|  ~(&0 <= (y:real))
-      #|  fl_to_pinf (fmt:flformat) (x:real) (y:real) =\n  (x <= y /\\ forall(y':real). is_float(fmt) y' /\\ x <= y' ==> y <= y')
-      #|  a <= b <=>\n             (-- (&m * &(flr fmt) ipow e)) + a <=\n             (-- (&m * &(flr fmt) ipow e)) + b
-      #|  abs(y) <=\n                       finf (to_fformat fmt (greatest_e fmt x))
-      #|  ~(&0 <= (y':real))
-      #|  fmt:flformat
-      #|  greatest_e(fmt) y' = e /\\\n                     greatest_m(fmt) y' = m
-      #|  (y:real) <= &0
-      #|  --(y:real) = abs(y)
-      #|  -- (-- (a:real) + b) = a + (-- b)
-      #|  abs(x) = -- x
-      #|  abs(x)
-      #|  abs(y') < (&m * &(flr fmt) ipow e) +\n                                (finf (to_fformat fmt e))
-      #|  -- (x:real) < &0 <=> &0 < x
-      #|  --(&m * &(flr fmt) ipow e)
-      #|  (y':real) < &0
-      #|  (&m * &(flr fmt) ipow e) <= abs(y')
-      #|  (z:real) = z + &0
-      #|  -- (&m * &(flr fmt) ipow e)
-      #|  -- (&m * &(flr fmt) ipow e) <= y'
-      #|  a <= b <=>\n             &m * &(flr fmt) ipow e + a <= &m * &(flr fmt) ipow e + b
-      #|  abs(y) <=\n                       finf (to_fformat fmt (greatest_e fmt x))
-      #|  &0 <= (y':real)
-      #|  fmt:flformat
-      #|  greatest_e(fmt) y' = e /\\\n                     greatest_m(fmt) y' = m
-      #|  abs(y') < &m * &(flr fmt) ipow e +\n                               (finf (to_fformat fmt e))
-      #|  abs(x)
-      #|  &m * &(flr fmt) ipow e <= abs(y')
-      #|  (fround (to_fformat fmt e) To_pinf y) IN\n                     (fixed (to_fformat fmt e))
-      #|  &m * &(flr fmt) ipow e + (finf (to_fformat fmt e))
-      #|  &m * &(flr fmt) ipow e + (finf (to_fformat fmt e)) <= y'
-      #|  &0 <= (x:real)
-      #|  abs(y) <= (finf (to_fformat fmt e))
-      #|  abs(y) <= (finf (to_fformat fmt e))
-      #|  &0 <= (x:real)
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          fl_to_pinf(fmt) x (flround(fmt) To_pinf x)
-      #|  fmt:flformat
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  (to_fformat fmt e)
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  fmt:flformat
-      #|  (to_fformat fmt e)
-      #|  fmt:flformat
-      #|  (to_fformat fmt e)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  fl_to_ninf (fmt:flformat) (x:real) (y:real) =\n  (y <= x /\\ forall(y':real). is_float(fmt) y' /\\ y' <= x ==> y' <= y)
-      #|  a <= b <=>\n             (-- (&m * &(flr fmt) ipow e)) + a <=\n             (-- (&m * &(flr fmt) ipow e)) + b
-      #|  abs(y) <=\n                       finf (to_fformat fmt (greatest_e fmt x))
-      #|  ~(&0 <= (y':real))
-      #|  fmt:flformat
-      #|  greatest_e(fmt) y' = e /\\\n                     greatest_m(fmt) y' = m
-      #|  abs(x)
-      #|  (&m * &(flr fmt) ipow e) <= abs(y')
-      #|  abs(y') < (&m * &(flr fmt) ipow e) +\n                                (finf (to_fformat fmt e))
-      #|  (y':real) < &0
-      #|  (fround (to_fformat fmt e) To_ninf y) IN\n            (fixed (to_fformat fmt e))
-      #|  -- (&m * &(flr fmt) ipow e) + (-- (finf (to_fformat fmt e)))
-      #|  y' <= -- (&m * &(flr fmt) ipow e) + (-- (finf (to_fformat fmt e)))
-      #|  a <= b <=>\n             &m * &(flr fmt) ipow e + a <= &m * &(flr fmt) ipow e + b
-      #|  abs(y) <=\n                       finf (to_fformat fmt (greatest_e fmt x))
-      #|  &0 <= (y':real)
-      #|  fmt:flformat
-      #|  greatest_e(fmt) y' = e /\\\n                     greatest_m(fmt) y' = m
-      #|  &0 <= (y:real)
-      #|  y = abs(y)
-      #|  abs(x) = x
-      #|  abs(x)
-      #|  abs(y') < &m * &(flr fmt) ipow e +\n                               (finf (to_fformat fmt e))
-      #|  &m * &(flr fmt) ipow e
-      #|  &0 <= (y':real)
-      #|  &m * &(flr fmt) ipow e <= abs(y')
-      #|  (x:real) = x + &0
-      #|  &m * &(flr fmt) ipow e
-      #|  (a:real) < b ==> a <= b
-      #|  y' < &m * &(flr fmt) ipow e
-      #|  &0 <= (x:real)
-      #|  abs(y) <= (finf (to_fformat fmt e))
-      #|  abs(y) <= (finf (to_fformat fmt e))
-      #|  &0 <= (x:real)
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          fl_to_ninf(fmt) x (flround(fmt) To_ninf x)
-      #|  fmt:flformat
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  (to_fformat fmt e)
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  fmt:flformat
-      #|  (to_fformat fmt e)
-      #|  fmt:flformat
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  (to_fformat fmt e)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  ((a:real) + b) - (a + c) = b - c
-      #|  ((a:real) + b) - (a + c) = b - c
-      #|  &0 <= (x:real)
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          abs( (flround(fmt) To_near x) - x ) <=\n              (fulp (to_fformat fmt (greatest_e(fmt) x))) / &2
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  fmt:flformat
-      #|  ((a:real) + b) - (a + c) = b - c
-      #|  ((a:real) + b) - (a + c) = b - c
-      #|  &0 <= (x:real)
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          abs( (flround(fmt) To_zero x) - x ) <=\n              (fulp (to_fformat fmt (greatest_e(fmt) x)))
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  fmt:flformat
-      #|  ((a:real) + b) - (a + c) = b - c
-      #|  ((a:real) + b) - (a + c) = b - c
-      #|  &0 <= (x:real)
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          abs( (flround(fmt) To_pinf x) - x ) <=\n              (fulp (to_fformat fmt (greatest_e(fmt) x)))
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  fmt:flformat
-      #|  ((a:real) + b) - (a + c) = b - c
-      #|  ((a:real) + b) - (a + c) = b - c
-      #|  &0 <= (x:real)
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          abs( (flround(fmt) To_ninf x) - x ) <=\n              (fulp (to_fformat fmt (greatest_e(fmt) x)))
-      #|  &0 <= (x:real)
-      #|  fmt:flformat
-      #|  ~(&0 <= (x:real))
-      #|  fmt:flformat
-      #|  ((e:int) - p + &1) + (-- e) = &1 - p
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  (a:real) / b * c = (a * c) / b
-      #|  &(flr fmt) ipow greatest_e fmt x =\n            inv (&(flr fmt) ipow (-- (greatest_e fmt x)))
-      #|  (greatest_e(fmt) x)
-      #|  fmt:flformat
-      #|  &0 <\n                 (fulp (to_fformat fmt (greatest_e fmt x)) / &2)
-      #|  fulp (to_fformat fmt (greatest_e fmt x)) / &2 /\n           (&(flr fmt) ipow (greatest_e(fmt) x))
-      #|  &0 < abs(x)
-      #|  (fulp (to_fformat fmt (greatest_e fmt x)) / &2) /\n                       abs(x)
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (rerror x (flround(fmt) To_near x)) <= fl_eps(fmt)
-      #|  fmt:flformat
-      #|  ((e:int) - p + &1) + (-- e) = &1 - p
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  (a:real) / b * c = (a * c) / b
-      #|  &(flr fmt) ipow greatest_e fmt x =\n            inv (&(flr fmt) ipow (-- (greatest_e fmt x)))
-      #|  (greatest_e(fmt) x)
-      #|  fmt:flformat
-      #|  &0 <\n                 (fulp (to_fformat fmt (greatest_e fmt x)))
-      #|  fulp (to_fformat fmt (greatest_e fmt x)) /\n           (&(flr fmt) ipow (greatest_e(fmt) x))
-      #|  &0 < abs(x)
-      #|  (fulp (to_fformat fmt (greatest_e fmt x))) / abs(x)
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (rerror x (flround(fmt) To_zero x)) <= &2 * fl_eps(fmt)
-      #|  fmt:flformat
-      #|  ((e:int) - p + &1) + (-- e) = &1 - p
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  (a:real) / b * c = (a * c) / b
-      #|  &(flr fmt) ipow greatest_e fmt x =\n            inv (&(flr fmt) ipow (-- (greatest_e fmt x)))
-      #|  (greatest_e(fmt) x)
-      #|  fmt:flformat
-      #|  &0 <\n                 (fulp (to_fformat fmt (greatest_e fmt x)))
-      #|  fulp (to_fformat fmt (greatest_e fmt x)) /\n           (&(flr fmt) ipow (greatest_e(fmt) x))
-      #|  &0 < abs(x)
-      #|  (fulp (to_fformat fmt (greatest_e fmt x))) / abs(x)
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (rerror x (flround(fmt) To_pinf x)) <= &2 * fl_eps(fmt)
-      #|  fmt:flformat
-      #|  ((e:int) - p + &1) + (-- e) = &1 - p
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  (a:real) / b * c = (a * c) / b
-      #|  &(flr fmt) ipow greatest_e fmt x =\n            inv (&(flr fmt) ipow (-- (greatest_e fmt x)))
-      #|  (greatest_e(fmt) x)
-      #|  fmt:flformat
-      #|  &0 <\n                 (fulp (to_fformat fmt (greatest_e fmt x)))
-      #|  fulp (to_fformat fmt (greatest_e fmt x)) /\n           (&(flr fmt) ipow (greatest_e(fmt) x))
-      #|  &0 < abs(x)
-      #|  (fulp (to_fformat fmt (greatest_e fmt x))) / abs(x)
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (rerror x (flround(fmt) To_ninf x)) <= &2 * fl_eps(fmt)
-      #|  fmt:flformat
-      #|  forall z. z / x * x = z
-      #|  ((flround(fmt) To_near x) - x) / x
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (?(d:real). flround(fmt) To_near x = (&1 + d) * x /\\\n                      abs(d) <= fl_eps(fmt))
-      #|  forall z. z / x * x = z
-      #|  ((flround(fmt) To_zero x) - x) / x
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (?(d:real). flround(fmt) To_zero x = (&1 + d) * x /\\\n                      abs(d) <= &2 * fl_eps(fmt))
-      #|  forall z. z / x * x = z
-      #|  ((flround(fmt) To_pinf x) - x) / x
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (?(d:real). flround(fmt) To_pinf x = (&1 + d) * x /\\\n                      abs(d) <= &2 * fl_eps(fmt))
-      #|  forall z. z / x * x = z
-      #|  ((flround(fmt) To_ninf x) - x) / x
-      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (?(d:real). flround(fmt) To_ninf x = (&1 + d) * x /\\\n                      abs(d) <= &2 * fl_eps(fmt))
-      #|  &1 < x ==> &1 <= x
-      #|  (e:int) + e2 - e + &1 = e2 + &1
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  &(flr fmt EXP flp fmt) *\n          &(flr fmt) ipow (e - &(flp fmt) + &1)
-      #|  &0 <= &f * &(flr fmt) ipow (e - &(flp fmt) + &1)
-      #|  &0 <= &f * &(flr fmt) ipow (e - &(flp fmt) + &1)
-      #|  (e:int) - &1 + e2 - e + &1 = e2
-      #|  fmt:flformat
-      #|  &(flr fmt)
-      #|  &(flr fmt EXP (flp fmt - 1)) *\n                         &(flr fmt) ipow (e - &(flp fmt) + &1)
-      #|  &f * &(flr fmt) ipow (e - &(flp fmt) + &1)
-      #|  fmt:flformat
-      #|  flr fmt EXP (flp fmt - 1)
-      #|  0 < f ==> ~(f = 0)
-      #|  ~(&f * &(flr fmt) ipow (e - &(flp fmt) + &1) = &0)
-      #|  forall(fmt:flformat) (e:int) (f:num).\n          (flr fmt) EXP ((flp fmt) - 1) <= f /\\\n          f < (flr fmt) EXP (flp fmt) ==>\n          greatest_e(fmt) (&f * &(flr fmt) ipow (e - &(flp fmt) + &1)) = e
-      #|  fmt:flformat
-      #|  &0 <= x ==> abs(x) = x
-      #|  &0 <= x ==> abs(x) = x
-      #|  greatest_r(fmt) x = y
-      #|  greatest_e(fmt) x = e
-      #|  greatest_r(fmt) x = y
-      #|  &0 <= (fround (to_fformat fmt e) m y)
-      #|  forall(fmt:flformat) (x:real) (m:roundmode).\n          ~(x = &0) /\\ &0 <= x ==> &0 <= (flround(fmt) m x)
-      #|  fmt:flformat
-      #|  --(x:real) + y <= &0 <=> &0 <= x + (-- y)
-      #|  greatest_r(fmt) x = y
-      #|  greatest_e(fmt) x = e
-      #|  greatest_r(fmt) x = y
-      #|  (fround (to_fformat fmt e) m y) <= &0
-      #|  forall(fmt:flformat) (x:real) (m:roundmode).\n          ~(x = &0) /\\ ~(&0 <= x) ==> (flround(fmt) m x) <= &0
-      #|  fmt:flformat
-      #|  x = x + &0
-      #|  -- ((-- (x:real)) + y) = x + (-- y)
-      #|  --(x:real) + y <= &0 <=> &0 <= x + (--y)
-      #|  --(&m' * &(flr fmt) ipow e') +\n                       fround (to_fformat fmt e') m y <= &0
-      #|  greatest_r(fmt) x = y
-      #|  greatest_e(fmt) x = e'
-      #|  greatest_r(fmt) x = y
-      #|  x < y ==> x <= (y:real)
-      #|  fround (to_fformat fmt e') m y <= &0
-      #|  x = x + &0
-      #|  &0 <= &m' * &(flr fmt) ipow e' +\n                       fround (to_fformat fmt e') m y
-      #|  greatest_r(fmt) x = y
-      #|  greatest_e(fmt) x = e'
-      #|  greatest_r(fmt) x = y
-      #|  x < y ==> x <= (y:real)
-      #|  &0 <= fround (to_fformat fmt e') m y
-      #|  x = &1 * (x:real)
-      #|  &1 < x ==> &1 <= x
-      #|  &(flr fmt) ipow (greatest_e(fmt) x)
-      #|  &(flr fmt) ipow e <=\n             &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x)
-      #|  forall(fmt:flformat) (x:real) (e:int) (m:roundmode).\n          ~(x = &0) /\\ &(flr fmt) ipow e <= abs(x) ==>\n          &(flr fmt) ipow e <= abs(flround(fmt) m x)
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  fmt:flformat
-      #|  &0 <= x ==> abs(x) = x
-      #|  fmt:flformat
-      #|  x <= &0 ==> abs(x) = -- x
+      #|  !({(m : Num) | real_of_num(m) * ipow(real_of_num(flr((fmt : Flformat))), greatest_e(fmt, (x : Real))) <= abs(x)} == {})
+      #|  real_of_num(1) * (x : Real) == x
+      #|  IN(1, {(m : Num) | real_of_num(m) * ipow(real_of_num(flr((fmt : Flformat))), greatest_e(fmt, (x : Real))) <= abs(x)})
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 (\226\136\131 m : Num, greatest_m(fmt, x) == m && is_greatest_m(fmt, x, m) && 1 <= m && m < flr(fmt))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (m2 : Num) <= (m1 : Num)
+      #|  (m1 : Num) <= (m2 : Num)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, \226\136\128 m1 : Num, \226\136\128 m2 : Num, is_greatest_m(fmt, x, m1) && is_greatest_m(fmt, x, m2) \226\134\146 m1 == m2
+      #|  abs(-(x : Real)) == abs(x)
+      #|  !(-(x : Real) == real_of_num(0))
+      #|  -(x : Real)
+      #|  (fmt : Flformat)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 greatest_m(fmt, -x) == greatest_m(fmt, x)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (a : Real) * (b : Real) + b == (a + real_of_num(1)) * b
+      #|  ((x : Real) - (y : Real) < (z : Real)) == (x < y + z)
+      #|  abs((x : Real) + real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))) == -x - real_of_num(m) * ipow(real_of_num(flr(fmt)), e)
+      #|  (x : Real) + real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  (a : Real) * (b : Real) + b == (a + real_of_num(1)) * b
+      #|  ((x : Real) - (y : Real) < (z : Real)) == (x < y + z)
+      #|  abs((x : Real) - real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))) == x - real_of_num(m) * ipow(real_of_num(flr(fmt)), e)
+      #|  (x : Real) - real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  real_of_num(0) <= (x : Real)
+      #|  (e : Int)
+      #|  (fmt : Flformat)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 (\226\136\131 y : Real, greatest_r(fmt, x) == y && abs(y) < finf(to_fformat(fmt, greatest_e(fmt, x))))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  !((m : Num) + 1 <= m)
+      #|  !((m : Num) + 1 <= m)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 greatest_r(fmt, -x) == -greatest_r(fmt, x)
+      #|  (real_of_num(0) <= (z : Real) - (w : Real)) == (w <= z)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) && real_of_num(0) <= x \226\134\146 real_of_num(0) <= greatest_r(fmt, x)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 x == abs(x)
+      #|  (fmt : Flformat)
+      #|  ((z : Real) + (w : Real) <= real_of_num(0)) == (w <= -z)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) && !(real_of_num(0) <= x) \226\134\146 greatest_r(fmt, x) <= real_of_num(0)
+      #|  !(real_of_num(0) <= (x : Real)) \226\134\146 -x == abs(x)
+      #|  (fmt : Flformat)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 (if real_of_num(0) <= x { x == real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + greatest_r(fmt, x) } else { x == -(real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + greatest_r(fmt, x) })
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (x : Real) * (y : Real) * (inv(y) * (z : Real)) == y * inv(y) * (x * z)
+      #|  real_of_num(EXP(flr((fmt : Flformat)), (n : Num))) * inv(real_of_num(EXP(flr(fmt), n))) == real_of_num(1)
+      #|  int_of_num(0) <= int_of_num((n : Num))
+      #|  ipow(real_of_num(flr((fmt : Flformat))), int_of_num((n : Num))) == real_of_num(EXP(flr(fmt), n))
+      #|  --int_of_num((n : Num)) == int_of_num(n)
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (e : Int) - int_of_num((n : Num)) - int_of_num(flp((fmt : Flformat))) + int_of_num(1) == -int_of_num(n) + (e - int_of_num(flp(fmt)) + int_of_num(1))
+      #|  ((a : Num) < (b : Num)) == !(b <= a)
+      #|  (n' : Num) < (n : Num)
+      #|  (n'' : Num) == flp((fmt : Flformat)) - 1
+      #|  (a : Num) * ((b : Num) * (c : Num)) == b * (a * c)
+      #|  (fmt : Flformat)
+      #|  0 < (a : Num) \226\134\146 !(a == 0)
+      #|  ((a : Bool) || (b : Bool)) == (!a \226\134\146 b)
+      #|  \226\136\131 n' : Num, (n : Num) == SUC(n')
+      #|  (n : Num)
+      #|  (e : Int) - int_of_num((n : Num))
+      #|  (f : Num) * EXP(flr((fmt : Flformat)), (n : Num))
+      #|  (n : Num) * (m : Num) == m * n
+      #|  (n : Num) == n * 1
+      #|  flp((fmt : Flformat)) - 1
+      #|  \226\136\131 n : Num, EXP(flr((fmt : Flformat)), flp(fmt) - 1) <= (f : Num) * EXP(flr(fmt), n)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, is_float(fmt, x) \226\134\146 (\226\136\131 f : Num, \226\136\131 e : Int, EXP(flr(fmt), flp(fmt) - 1) <= f && is_frac_and_exp(fmt, x, f, e))
+      #|  flr((fmt : Flformat))
+      #|  (fmt : Flformat)
+      #|  0 < (n : Num) \226\134\146 SUC(n - 1) == n
+      #|  EXP(flr((fmt : Flformat)), flp(fmt) - 1)
+      #|  \226\136\128 a : Num, (x : Num) < (y : Num) && !(a == 0) \226\134\146 x < y
+      #|  EXP(flr((fmt : Flformat)), flp(fmt) - 1) - (f' : Num)
+      #|  \226\136\128 b : Num, (a : Num) < b && b <= (c : Num) \226\134\146 a < c
+      #|  (1 <= (b : Num)) == (0 < b)
+      #|  EXP(flr((fmt : Flformat)), flp(fmt) - 1)
+      #|  (f' : Num)
+      #|  (e : Int)
+      #|  (m : Num)
+      #|  \226\136\131 m : Num, \226\136\131 f' : Num, (f : Num) == m * EXP(flr((fmt : Flformat)), flp(fmt) - 1) + f' && f' < EXP(flr(fmt), flp(fmt) - 1)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, is_float(fmt, x) \226\134\146 (\226\136\131 m : Num, \226\136\131 e : Int, \226\136\131 f' : Num, f' < EXP(flr(fmt), flp(fmt) - 1) && 1 <= m && m < flr(fmt) && abs(x) == real_of_num(m * EXP(flr(fmt), flp(fmt) - 1) + f') * ipow(real_of_num(flr(fmt)), e - int_of_num(flp(fmt)) + int_of_num(1)))
+      #|  (a : Real) * (b : Real) == b * a
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (e : Int) - int_of_num(1) + ((e' : Int) - e + int_of_num(1)) == e'
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  (e : Int) - int_of_num(1) + ((e' : Int) - e + int_of_num(1)) == e'
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  real_of_num(EXP(flr((fmt : Flformat)), flp(fmt) - 1)) * ipow(real_of_num(flr(fmt)), (e : Int) - int_of_num(flp(fmt)) + int_of_num(1))
+      #|  \226\136\128 b : Real, (a : Real) < b && b == (c : Real) \226\134\146 a < c
+      #|  (a : Real) < (b : Real) && (c : Real) == (d : Real) \226\134\146 c + a < d + b
+      #|  real_of_num((m : Num) + 1) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  \226\136\128 b : Real, (a : Real) < b && b <= (d : Real) \226\134\146 a < d
+      #|  abs((x : Real)) < ipow(real_of_num(flr((fmt : Flformat))), (e : Int) + int_of_num(1))
+      #|  1 < (x : Num) \226\134\146 1 <= x
+      #|  ipow(real_of_num(flr((fmt : Flformat))), (e' : Int))
+      #|  ipow(real_of_num(flr((fmt : Flformat))), (e : Int) + int_of_num(1)) <= abs((x : Real))
+      #|  (e : Int) - int_of_num(1) + ((e' : Int) - e + int_of_num(1)) == e'
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  (e : Int) - int_of_num(1) + ((e' : Int) - e + int_of_num(1)) == e'
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  real_of_num(EXP(flr((fmt : Flformat)), flp(fmt) - 1)) * ipow(real_of_num(flr(fmt)), (e' : Int) - int_of_num(flp(fmt)) + int_of_num(1))
+      #|  \226\136\128 b : Real, (a : Real) < b && b == (c : Real) \226\134\146 a < c
+      #|  (a : Real) < (b : Real) && (c : Real) == (d : Real) \226\134\146 c + a < d + b
+      #|  abs((x : Real)) < real_of_num((m : Num) + 1) * ipow(real_of_num(flr((fmt : Flformat))), (e' : Int))
+      #|  real_of_num((m' : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e' : Int))
+      #|  real_of_num((m : Num) + 1) * ipow(real_of_num(flr((fmt : Flformat))), (e' : Int)) <= abs((x : Real))
+      #|  (x : Int) - int_of_num(1) + ((e : Int) - x + int_of_num(1)) == e
+      #|  (fmt : Flformat)
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  (a : Real) == (b : Real) && real_of_num(0) <= (c : Real) \226\134\146 a <= b + c
+      #|  real_of_num((m : Num) * EXP(flr((fmt : Flformat)), flp(fmt) - 1) + (f' : Num)) * ipow(real_of_num(flr(fmt)), (e : Int) - int_of_num(flp(fmt)) + int_of_num(1))
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e' : Int)) <= abs((x : Real))
+      #|  (x : Int) - int_of_num(1) + ((e : Int) - x + int_of_num(1)) == e
+      #|  (fmt : Flformat)
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  (a : Real) == (b : Real) && real_of_num(0) <= (c : Real) \226\134\146 a <= b + c
+      #|  real_of_num((m : Num) * EXP(flr((fmt : Flformat)), flp(fmt) - 1) + (f' : Num)) * ipow(real_of_num(flr(fmt)), (e : Int) - int_of_num(flp(fmt)) + int_of_num(1))
+      #|  (x : Real) == real_of_num(1) * x
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) <= abs((x : Real))
+      #|  (f' : Num)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, is_float(fmt, x) \226\134\146 (\226\136\131 f' : Num, f' < EXP(flr(fmt), flp(fmt) - 1) && abs(x) == real_of_num(greatest_m(fmt, x) * EXP(flr(fmt), flp(fmt) - 1) + f') * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x) - int_of_num(flp(fmt)) + int_of_num(1)))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (e : Int) <= (b : Int) \226\134\146 e == b || e < b
+      #|  (e : Num) <= (b : Num) \226\134\146 e == b || e < b
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(-x) == x
+      #|  (f' : Num)
+      #|  (e : Int) - int_of_num(1) + ((e2 : Int) - e + int_of_num(1)) == e2
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  ((a : Real) + (b : Real) == (c : Real) + b) == (a == c)
+      #|  (-(a : Real) + (b : Real) == -(c : Real)) == (a == b + c)
+      #|  (x : Real) == -abs(x)
+      #|  (x : Real) + real_of_num(greatest_m((fmt : Flformat), x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) == -(real_of_num((f' : Num)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x) - int_of_num(flp(fmt)) + int_of_num(1)))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+      #|  (f' : Num)
+      #|  (e : Int) - int_of_num(1) + ((e2 : Int) - e + int_of_num(1)) == e2
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  ((a : Real) + (b : Real) == (c : Real) + b) == (a == c)
+      #|  ((a : Real) - (b : Real) == (c : Real)) == (a == b + c)
+      #|  (x : Real) == abs(x)
+      #|  (x : Real) - real_of_num(greatest_m((fmt : Flformat), x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) == real_of_num((f' : Num)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x) - int_of_num(flp(fmt)) + int_of_num(1))
+      #|  real_of_num(0) <= (x : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (fmt : Flformat)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, is_float(fmt, x) \226\134\146 is_fixed(to_fformat(fmt, greatest_e(fmt, x)), greatest_r(fmt, x)) && (if real_of_num(0) <= x { x == real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + greatest_r(fmt, x) } else { x == -(real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + greatest_r(fmt, x) })
+      #|  (x : Real) * (y : Real) + y == (x + real_of_num(1)) * y
+      #|  (e : Int)
+      #|  (fmt : Flformat)
+      #|  real_of_num((m : Num) + 1) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  ((x : Real) < x + (y : Real)) == (real_of_num(0) < y)
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + finf(to_fformat(fmt, e))
+      #|  \226\136\128 y : Real, (x : Real) < y && y <= (z : Real) \226\134\146 x < z
+      #|  !((i : Real) <= (j : Real)) == (j < i)
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  0 < (x : Num) \226\134\146 1 <= x
+      #|  (a : Real) * (b : Real) == b * a
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (x : Real) * (y : Real) + y == (x + real_of_num(1)) * y
+      #|  (e : Int)
+      #|  (fmt : Flformat)
+      #|  ipow(real_of_num(flr((fmt : Flformat))), (e : Int) + int_of_num(1))
+      #|  ((x : Real) < x + (y : Real)) == (real_of_num(0) < y)
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + finf(to_fformat(fmt, e))
+      #|  \226\136\128 y : Real, (x : Real) < y && y <= (z : Real) \226\134\146 x < z
+      #|  !((i : Real) <= (j : Real)) == (j < i)
+      #|  (x : Real) == real_of_num(1) * x
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, \226\136\128 e : Int, \226\136\128 m : Num, !(x == real_of_num(0)) && 1 <= m && m < flr(fmt) && abs(x) == real_of_num(m) * ipow(real_of_num(flr(fmt)), e) \226\134\146 greatest_e(fmt, x) == e && greatest_m(fmt, x) == m
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int) && greatest_m(fmt, x) == (m : Num)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, \226\136\128 e : Int, \226\136\128 m : Num, !(x == real_of_num(0)) && 1 <= m && m < flr(fmt) && abs(x) == real_of_num(m) * ipow(real_of_num(flr(fmt)), e) \226\134\146 greatest_r(fmt, x) == real_of_num(0)
+      #|  (x : Real) * (y : Real) + y == (x + real_of_num(1)) * y
+      #|  (e : Int)
+      #|  (fmt : Flformat)
+      #|  real_of_num((m : Num) + 1) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + finf(to_fformat(fmt, e))
+      #|  \226\136\128 y : Real, (x : Real) < y && y <= (z : Real) \226\134\146 x < z
+      #|  !((i : Real) <= (j : Real)) == (j < i)
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  0 < (x : Num) \226\134\146 1 <= x
+      #|  (a : Real) * (b : Real) == b * a
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (x : Real) * (y : Real) + y == (x + real_of_num(1)) * y
+      #|  (e : Int)
+      #|  (fmt : Flformat)
+      #|  ipow(real_of_num(flr((fmt : Flformat))), (e : Int) + int_of_num(1))
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + finf(to_fformat(fmt, e))
+      #|  \226\136\128 y : Real, (x : Real) < y && y <= (z : Real) \226\134\146 x < z
+      #|  !((i : Real) <= (j : Real)) == (j < i)
+      #|  (x : Real) == real_of_num(1) * x
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, \226\136\128 e : Int, \226\136\128 m : Num, !(x == real_of_num(0)) && 1 <= m && m < flr(fmt) && real_of_num(m) * ipow(real_of_num(flr(fmt)), e) <= abs(x) && abs(x) < real_of_num(m) * ipow(real_of_num(flr(fmt)), e) + finf(to_fformat(fmt, e)) \226\134\146 greatest_e(fmt, x) == e && greatest_m(fmt, x) == m
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (m : Num) + 1 == flr((fmt : Flformat))
+      #|  (i : Int) - int_of_num(1) + ((e : Int) - i + int_of_num(1)) == e
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  (x : Real) * (y : Real) + y == (x + real_of_num(1)) * y
+      #|  (e : Int)
+      #|  (fmt : Flformat)
+      #|  (i : Int) - int_of_num(1) + ((e : Int) - i + int_of_num(1)) == e
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  real_of_num(fr(to_fformat((fmt : Flformat), (e : Int))))
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  fr(to_fformat((fmt : Flformat), (e : Int)))
+      #|  -fround(to_fformat((fmt : Flformat), (e : Int)), (mode : Roundmode), (y : Real)) == ipow(real_of_num(flr(fmt)), e)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  fround(to_fformat((fmt : Flformat), (e : Int)), (mode : Roundmode), (y : Real)) <= real_of_num(0)
+      #|  real_of_num(0) <= real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  ((x : Num) - 1 < x) == (0 < x)
+      #|  1 <= (x : Num) \226\134\146 0 < x
+      #|  greatest_e((fmt : Flformat), (x : Real)) + int_of_num(1)
+      #|  EXP(flr((fmt : Flformat)), flp(fmt) - 1)
+      #|  (i : Int) - int_of_num(1) + ((e : Int) - i + int_of_num(1)) == e
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  (x : Real) * (y : Real) + y == (x + real_of_num(1)) * y
+      #|  (e : Int)
+      #|  (fmt : Flformat)
+      #|  (i : Int) - int_of_num(1) + ((e : Int) - i + int_of_num(1)) == e
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  real_of_num(fr(to_fformat((fmt : Flformat), (e : Int))))
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  fr(to_fformat((fmt : Flformat), (e : Int)))
+      #|  -fround(to_fformat((fmt : Flformat), (e : Int)), (mode : Roundmode), (y : Real)) == ipow(real_of_num(flr(fmt)), e)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  fround(to_fformat((fmt : Flformat), (e : Int)), (mode : Roundmode), (y : Real)) <= real_of_num(0)
+      #|  real_of_num(0) <= real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  (fmt : Flformat)
+      #|  0 < (x : Num) \226\134\146 SUC(x - 1) == x
+      #|  flr((fmt : Flformat)) * EXP(flr(fmt), flp(fmt) - 1)
+      #|  \226\136\128 y : Num, (x : Num) < y && y == (z : Num) \226\134\146 x < z
+      #|  1 <= (x : Num) \226\134\146 0 < x
+      #|  0 < (m : Num) + 1
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (greatest_m((fmt : Flformat), (x : Real)) + 1) * EXP(flr(fmt), flp(fmt) - 1)
+      #|  greatest_m((fmt : Flformat), (x : Real)) < flr(fmt) - 1
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  (e : Int)
+      #|  (fmt : Flformat)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  fround(to_fformat((fmt : Flformat), (e : Int)), (mode : Roundmode), (y : Real)) <= real_of_num(0)
+      #|  real_of_num(0) <= real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  (i : Int) - int_of_num(1) + ((e : Int) - i + int_of_num(1)) == e
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  ((x : Real) + (y : Real)) * (z : Real) == x * z + y * z
+      #|  (0 < (x : Num)) == (SUC(x - 1) == x)
+      #|  !((x : Num) == 0) == (x - 1 + 1 == x)
+      #|  ((n : Num) - 1) * (z : Num) + z == (n - 1 + 1) * z
+      #|  ff(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))), fround(to_fformat(fmt, greatest_e(fmt, x)), (mode : Roundmode), greatest_r(fmt, x))) < EXP(fr(to_fformat(fmt, greatest_e(fmt, x))), fp(to_fformat(fmt, greatest_e(fmt, x))) - 1)
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (fmt : Flformat)
+      #|  (flr((fmt : Flformat)) - 1) * EXP(flr(fmt), flp(fmt) - 1) + EXP(flr(fmt), flp(fmt) - 1)
+      #|  \226\136\128 y : Num, (x : Num) < y && y == (z : Num) \226\134\146 x < z
+      #|  greatest_m((fmt : Flformat), (x : Real)) * EXP(flr(fmt), flp(fmt) - 1) <= (flr(fmt) - 1) * EXP(flr(fmt), flp(fmt) - 1)
+      #|  (0 < (x : Num)) == (1 <= x)
+      #|  0 < (x : Num) \226\134\146 0 < x + (y : Num)
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  greatest_m((fmt : Flformat), (x : Real)) * EXP(flr(fmt), flp(fmt) - 1) + ff(to_fformat(fmt, greatest_e(fmt, x)), fround(to_fformat(fmt, greatest_e(fmt, x)), (mode : Roundmode), greatest_r(fmt, x)))
+      #|  is_fixed(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))), fround(to_fformat(fmt, greatest_e(fmt, x)), (mode : Roundmode), greatest_r(fmt, x)))
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (m : Num) + 1 == flr((fmt : Flformat))
+      #|  (i : Int) - int_of_num(1) + ((e : Int) - i + int_of_num(1)) == e
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  (x : Real) * (y : Real) + y == (x + real_of_num(1)) * y
+      #|  (e : Int)
+      #|  (fmt : Flformat)
+      #|  (i : Int) - int_of_num(1) + ((e : Int) - i + int_of_num(1)) == e
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  real_of_num(fr(to_fformat((fmt : Flformat), (e : Int))))
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  fr(to_fformat((fmt : Flformat), (e : Int)))
+      #|  fround(to_fformat((fmt : Flformat), (e : Int)), (mode : Roundmode), (y : Real)) == ipow(real_of_num(flr(fmt)), e)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  real_of_num(0) <= fround(to_fformat((fmt : Flformat), (e : Int)), (mode : Roundmode), (y : Real))
+      #|  real_of_num(0) <= real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  ((x : Num) - 1 < x) == (0 < x)
+      #|  1 <= (x : Num) \226\134\146 0 < x
+      #|  greatest_e((fmt : Flformat), (x : Real)) + int_of_num(1)
+      #|  EXP(flr((fmt : Flformat)), flp(fmt) - 1)
+      #|  (i : Int) - int_of_num(1) + ((e : Int) - i + int_of_num(1)) == e
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  (x : Real) * (y : Real) + y == (x + real_of_num(1)) * y
+      #|  (e : Int)
+      #|  (fmt : Flformat)
+      #|  (i : Int) - int_of_num(1) + ((e : Int) - i + int_of_num(1)) == e
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  real_of_num(fr(to_fformat((fmt : Flformat), (e : Int))))
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  fr(to_fformat((fmt : Flformat), (e : Int)))
+      #|  fround(to_fformat((fmt : Flformat), (e : Int)), (mode : Roundmode), (y : Real)) == ipow(real_of_num(flr(fmt)), e)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  real_of_num(0) <= fround(to_fformat((fmt : Flformat), (e : Int)), (mode : Roundmode), (y : Real))
+      #|  real_of_num(0) <= real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  (fmt : Flformat)
+      #|  0 < (x : Num) \226\134\146 SUC(x - 1) == x
+      #|  flr((fmt : Flformat)) * EXP(flr(fmt), flp(fmt) - 1)
+      #|  \226\136\128 y : Num, (x : Num) < y && y == (z : Num) \226\134\146 x < z
+      #|  1 <= (x : Num) \226\134\146 0 < x
+      #|  0 < (m : Num) + 1
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (greatest_m((fmt : Flformat), (x : Real)) + 1) * EXP(flr(fmt), flp(fmt) - 1)
+      #|  greatest_m((fmt : Flformat), (x : Real)) < flr(fmt) - 1
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  (e : Int)
+      #|  (fmt : Flformat)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  real_of_num(0) <= fround(to_fformat((fmt : Flformat), (e : Int)), (mode : Roundmode), (y : Real))
+      #|  real_of_num(0) <= real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  (i : Int) - int_of_num(1) + ((e : Int) - i + int_of_num(1)) == e
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  ((x : Real) + (y : Real)) * (z : Real) == x * z + y * z
+      #|  (0 < (x : Num)) == (SUC(x - 1) == x)
+      #|  !((x : Num) == 0) == (x - 1 + 1 == x)
+      #|  ((n : Num) - 1) * (z : Num) + z == (n - 1 + 1) * z
+      #|  ff(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))), fround(to_fformat(fmt, greatest_e(fmt, x)), (mode : Roundmode), greatest_r(fmt, x))) < EXP(fr(to_fformat(fmt, greatest_e(fmt, x))), fp(to_fformat(fmt, greatest_e(fmt, x))) - 1)
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (fmt : Flformat)
+      #|  (flr((fmt : Flformat)) - 1) * EXP(flr(fmt), flp(fmt) - 1) + EXP(flr(fmt), flp(fmt) - 1)
+      #|  \226\136\128 y : Num, (x : Num) < y && y == (z : Num) \226\134\146 x < z
+      #|  greatest_m((fmt : Flformat), (x : Real)) * EXP(flr(fmt), flp(fmt) - 1) <= (flr(fmt) - 1) * EXP(flr(fmt), flp(fmt) - 1)
+      #|  (0 < (x : Num)) == (1 <= x)
+      #|  0 < (x : Num) \226\134\146 0 < x + (y : Num)
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  greatest_m((fmt : Flformat), (x : Real)) * EXP(flr(fmt), flp(fmt) - 1) + ff(to_fformat(fmt, greatest_e(fmt, x)), fround(to_fformat(fmt, greatest_e(fmt, x)), (mode : Roundmode), greatest_r(fmt, x)))
+      #|  is_fixed(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))), fround(to_fformat(fmt, greatest_e(fmt, x)), (mode : Roundmode), greatest_r(fmt, x)))
+      #|  real_of_num(0) <= (x : Real)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, \226\136\128 mode : Roundmode, !(x == real_of_num(0)) \226\134\146 is_float(fmt, flround(fmt, mode, x))
+      #|  (fmt : Flformat)
+      #|  to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))
+      #|  (x : Num) <= (y : Num) \226\134\146 x < y || x == y
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 abs(x + y) == x + y
+      #|  real_of_num(0) <= (x : Real) \226\134\146 x == abs(x)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 abs(x + y) == x + y
+      #|  real_of_num(0) <= (x : Real) \226\134\146 x == abs(x)
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 abs(x + y) == x + y
+      #|  real_of_num(0) <= (x : Real) \226\134\146 x == abs(x)
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))
+      #|  (x : Num) <= (y : Num) \226\134\146 x < y || x == y
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real) && (y : Real) <= real_of_num(0) \226\134\146 abs(-x + y) == x + -y
+      #|  (x : Real) <= real_of_num(0) \226\134\146 -x == abs(x)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real) && (y : Real) <= real_of_num(0) \226\134\146 abs(-x + y) == x + -y
+      #|  (x : Real) <= real_of_num(0) \226\134\146 -x == abs(x)
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real) && (y : Real) <= real_of_num(0) \226\134\146 abs(-x + y) == x + -y
+      #|  (x : Real) <= real_of_num(0) \226\134\146 -x == abs(x)
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  (fmt : Flformat)
+      #|  \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 y : Real, x < y && y <= a \226\134\146 closer(y, x, a)
+      #|  \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, closer(x, y, a) && (closer(z, x, a) || !closer(x, z, a)) \226\134\146 closer(z, y, a)
+      #|  \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 y : Real, a <= y && y < x \226\134\146 closer(y, x, a)
+      #|  (fl_is_closest : (Flformat, Real, Real) -> Bool)((fmt : Flformat), (x : Real), (y : Real)) == (\226\136\128 s : Real, is_float(fmt, s) && !(s == y) \226\134\146 closer(y, s, x) || !closer(s, y, x))
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  ((x : Real) == (y : Real)) == (-(real_of_num(greatest_m((fmt : Flformat), (s : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, s))) + x == -(real_of_num(greatest_m(fmt, s)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, s))) + y)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  (x : Real) + (y : Real) - (x + (z : Real)) == y - z
+      #|  greatest_m((fmt : Flformat), (x : Real)) == (m : Num)
+      #|  greatest_e((fmt : Flformat), (s : Real)) == (e : Int) && greatest_m(fmt, s) == (m : Num)
+      #|  greatest_m((fmt : Flformat), (x : Real)) == (m : Num)
+      #|  real_of_num(0) < (x : Real) \226\134\146 -x < real_of_num(0)
+      #|  -(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)))
+      #|  \226\136\128 y : Real, y < real_of_num(0) && (s : Real) <= y \226\134\146 s < real_of_num(0)
+      #|  (s : Real) < real_of_num(0) \226\134\146 !(s == real_of_num(0))
+      #|  !((s : Real) == real_of_num(0))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 -x <= real_of_num(0)
+      #|  -(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)))
+      #|  (s : Real) <= real_of_num(0)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  (x : Real) - (y : Real) - (x + (z : Real)) == -y - z
+      #|  (x : Real) + (y : Real) - (x + (z : Real)) == y - z
+      #|  fround(to_fformat((fmt : Flformat), (e : Int)), To_near, (y : Real)) == -finf(to_fformat(fmt, e))
+      #|  (s : Real) == -(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))) - finf(to_fformat(fmt, e))
+      #|  !(fround(to_fformat((fmt : Flformat), (e : Int)), To_near, (y : Real)) == -finf(to_fformat(fmt, e)))
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  (x : Real) - (y : Real) - (x + (z : Real)) == -y - z
+      #|  (x : Real) + (y : Real) - (x + (z : Real)) == y - z
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_m((fmt : Flformat), (x : Real)) == (m : Num)
+      #|  fround(to_fformat((fmt : Flformat), (e : Int)), To_near, (y : Real)) == -finf(to_fformat(fmt, e))
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_m((fmt : Flformat), (x : Real)) == (m : Num)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  (-(x : Real) <= -(y : Real)) == (y <= x)
+      #|  ((x : Real) + (y : Real) <= real_of_num(0)) == (x <= -y)
+      #|  (y' : Real) <= real_of_num(0)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  ((x : Real) + (y : Real) <= x + (z : Real)) == (y <= z)
+      #|  -(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))) - finf(to_fformat(fmt, e))
+      #|  (s : Real) < -(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))) - finf(to_fformat(fmt, e))
+      #|  !(fround(to_fformat((fmt : Flformat), (e : Int)), To_near, (y : Real)) == real_of_num(0))
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  (x : Real) - (x + (z : Real)) == real_of_num(0) - z
+      #|  (x : Real) + (y : Real) - (x + (z : Real)) == y - z
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_m((fmt : Flformat), (x : Real)) == (m : Num)
+      #|  fround(to_fformat((fmt : Flformat), (e : Int)), To_near, (y : Real)) == real_of_num(0)
+      #|  greatest_m((fmt : Flformat), (x : Real)) == (m : Num)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  (-(x : Real) <= -(y : Real)) == (y <= x)
+      #|  -(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)))
+      #|  -(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))) < (s : Real)
+      #|  -(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))) + fround(to_fformat(fmt, e), To_near, (y : Real))
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  ((x : Real) == (y : Real)) == (real_of_num(greatest_m((fmt : Flformat), (s : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, s)) + x == real_of_num(greatest_m(fmt, s)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, s)) + y)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  (x : Real) + (y : Real) - (x + (z : Real)) == y - z
+      #|  greatest_m((fmt : Flformat), (x : Real)) == (m : Num)
+      #|  greatest_e((fmt : Flformat), (s : Real)) == (e : Int) && greatest_m(fmt, s) == (m : Num)
+      #|  greatest_m((fmt : Flformat), (x : Real)) == (m : Num)
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  \226\136\128 y : Real, real_of_num(0) < y && y <= (s : Real) \226\134\146 real_of_num(0) < s
+      #|  real_of_num(0) < (s : Real) \226\134\146 !(s == real_of_num(0))
+      #|  !((s : Real) == real_of_num(0))
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  real_of_num(0) <= (s : Real)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  (x : Real) + (y : Real) - (x + (z : Real)) == y - z
+      #|  fround(to_fformat((fmt : Flformat), (e : Int)), To_near, (y : Real)) == finf(to_fformat(fmt, e))
+      #|  (s : Real) == real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + finf(to_fformat(fmt, e))
+      #|  !(fround(to_fformat((fmt : Flformat), (e : Int)), To_near, (y : Real)) == finf(to_fformat(fmt, e)))
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  (x : Real) + (y : Real) - (x + (z : Real)) == y - z
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_m((fmt : Flformat), (x : Real)) == (m : Num)
+      #|  fround(to_fformat((fmt : Flformat), (e : Int)), To_near, (y : Real)) == finf(to_fformat(fmt, e))
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_m((fmt : Flformat), (x : Real)) == (m : Num)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  (real_of_num(0) <= (x : Real) - (y : Real)) == (y <= x)
+      #|  real_of_num(0) <= (y' : Real)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  ((x : Real) + (y : Real) <= x + (z : Real)) == (y <= z)
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + finf(to_fformat(fmt, e))
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + finf(to_fformat(fmt, e)) < (s : Real)
+      #|  !(fround(to_fformat((fmt : Flformat), (e : Int)), To_near, (y : Real)) == real_of_num(0))
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  (x : Real) - (x + (z : Real)) == real_of_num(0) - z
+      #|  (x : Real) + (y : Real) - (x + (z : Real)) == y - z
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_m((fmt : Flformat), (x : Real)) == (m : Num)
+      #|  fround(to_fformat((fmt : Flformat), (e : Int)), To_near, (y : Real)) == real_of_num(0)
+      #|  greatest_m((fmt : Flformat), (x : Real)) == (m : Num)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  (s : Real) < real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + fround(to_fformat(fmt, e), To_near, (y : Real))
+      #|  real_of_num(0) <= (x : Real)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 (\226\136\131 z : Real, flround(fmt, To_near, x) == z && fl_is_closest(fmt, x, z))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 x == abs(x)
+      #|  (fmt : Flformat)
+      #|  (x : Real) < (y : Real) \226\134\146 x <= y
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 x == abs(x)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 x == abs(x)
+      #|  (fmt : Flformat)
+      #|  (x : Real) < (y : Real) \226\134\146 x <= y
+      #|  (fmt : Flformat)
+      #|  (x : Real) < (y : Real) \226\134\146 x <= y
+      #|  (fmt : Flformat)
+      #|  1 <= (m' : Num) \226\134\146 0 < m'
+      #|  real_of_num(0) <= (s : Real) \226\134\146 abs(s) == s
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (x : Real) < (y : Real) \226\134\146 x <= y
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real)) \226\134\146 x == -abs(x)
+      #|  (fmt : Flformat)
+      #|  (x : Real) < (y : Real) \226\134\146 x <= y
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real)) \226\134\146 x == -abs(x)
+      #|  (fmt : Flformat)
+      #|  (x : Real) <= real_of_num(0) \226\134\146 x == -abs(x)
+      #|  (fmt : Flformat)
+      #|  (x : Real) < (y : Real) \226\134\146 x <= y
+      #|  (fmt : Flformat)
+      #|  (x : Real) < (y : Real) \226\134\146 x <= y
+      #|  (fmt : Flformat)
+      #|  1 <= (m' : Num) \226\134\146 0 < m'
+      #|  (s : Real) <= real_of_num(0) \226\134\146 abs(s) == -s
+      #|  (fmt : Flformat)
+      #|  !((s : Real) == real_of_num(0)) && s <= real_of_num(0) \226\134\146 !(real_of_num(0) <= s)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (x : Real) < (y : Real) \226\134\146 x <= y
+      #|  (e : Int) - int_of_num(1) + ((e2 : Int) - e + int_of_num(1)) == e2
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  (fmt : Flformat)
+      #|  0 < (x : Num) \226\134\146 SUC(x - 1) == x
+      #|  flr((fmt : Flformat)) * EXP(flr(fmt), flp(fmt) - 1)
+      #|  \226\136\128 y : Num, (x : Num) < y && y == (z : Num) \226\134\146 x < z
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  greatest_m((fmt : Flformat), (x : Real)) * EXP(flr(fmt), flp(fmt) - 1)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 is_float(fmt, real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+      #|  abs(-(x : Real)) == abs(x)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, is_float(fmt, x) == is_float(fmt, -x)
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (fmt : Flformat)
+      #|  (z : Real) == abs(z)
+      #|  (x : Real) * (z : Real) + z == (x + real_of_num(1)) * z
+      #|  (e : Int) - int_of_num(1) + ((e2 : Int) - e + int_of_num(1)) == e2
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  ((a : Real) + (b : Real)) * (c : Real) == a * c + b * c
+      #|  (fmt : Flformat)
+      #|  flp((fmt : Flformat)) == SUC(flp(fmt) - 1)
+      #|  (m : Num) * (n : Num) + n == (m + 1) * n
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (fmt : Flformat)
+      #|  abs((z : Real)) < finf(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))))
+      #|  greatest_m((fmt : Flformat), (x : Real)) * EXP(flr(fmt), flp(fmt) - 1) + EXP(flr(fmt), flp(fmt) - 1)
+      #|  \226\136\128 y : Num, (x : Num) < y && y <= (z : Num) \226\134\146 x < z
+      #|  flr((fmt : Flformat)) * EXP(flr(fmt), flp(fmt) - 1)
+      #|  \226\136\128 y : Num, (x : Num) < y && y == (z : Num) \226\134\146 x < z
+      #|  0 < (x : Num) \226\134\146 0 < x + (y : Num)
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  greatest_m((fmt : Flformat), (x : Real)) * EXP(flr(fmt), flp(fmt) - 1) + ff(to_fformat(fmt, greatest_e(fmt, x)), (z : Real))
+      #|  (x : Real) * (z : Real) + z == (x + real_of_num(1)) * z
+      #|  (e : Int) - int_of_num(1) + ((e2 : Int) - e + int_of_num(1)) == e2
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  flp((fmt : Flformat)) == SUC(flp(fmt) - 1)
+      #|  flr((fmt : Flformat)) * EXP(flr(fmt), flp(fmt) - 1)
+      #|  \226\136\128 y : Num, (x : Num) < y && y == (z : Num) \226\134\146 x < z
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (greatest_m((fmt : Flformat), (x : Real)) + 1) * EXP(flr(fmt), flp(fmt) - 1)
+      #|  (a : Int) + (b : Int) == b + a
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  ((x : Real) - real_of_num(1)) * (z : Real) + z == x * z
+      #|  (fmt : Flformat)
+      #|  1 <= flr((fmt : Flformat))
+      #|  (e : Int) - int_of_num(1) + ((e2 : Int) - e + int_of_num(1)) == e2
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (fmt : Flformat)
+      #|  flr((fmt : Flformat))
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (fmt : Flformat)
+      #|  (n : Num) == 1 * n
+      #|  (fmt : Flformat)
+      #|  0 < (n : Num) \226\134\146 n == SUC(n - 1)
+      #|  greatest_e((fmt : Flformat), (x : Real)) + int_of_num(1)
+      #|  EXP(flr((fmt : Flformat)), flp(fmt) - 1)
+      #|  greatest_m((fmt : Flformat), (x : Real)) == flr(fmt) - 1
+      #|  (z : Real) == finf(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))))
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 abs(x + y) == x + y
+      #|  \226\136\128 m : Num, abs(real_of_num(m) * ipow(real_of_num(flr((fmt : Flformat))), greatest_e(fmt, (x : Real))) + (z : Real)) == real_of_num(m) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + z
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, \226\136\128 z : Real, !(x == real_of_num(0)) && real_of_num(0) <= z && is_fixed(to_fformat(fmt, greatest_e(fmt, x)), z) \226\134\146 is_float(fmt, real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + z)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))
+      #|  to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))
+      #|  (fmt : Flformat)
+      #|  to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))
+      #|  -(-(x : Real) + (z : Real)) == x + -z
+      #|  real_of_num(0) <= -(z : Real)
+      #|  is_fixed(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))), -(z : Real))
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, \226\136\128 z : Real, !(x == real_of_num(0)) && !(real_of_num(0) <= z) && is_fixed(to_fformat(fmt, greatest_e(fmt, x)), z) \226\134\146 is_float(fmt, -(real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + z)
+      #|  greatest_r((fmt : Flformat), (y : Real))
+      #|  (fmt : Flformat)
+      #|  greatest_e((fmt : Flformat), (y : Real)) == greatest_e(fmt, (x : Real)) && greatest_m(fmt, y) == greatest_m(fmt, x)
+      #|  !closer(-(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + -finf(to_fformat(fmt, greatest_e(fmt, x))), (y : Real), x)
+      #|  closer((y : Real), -(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + -finf(to_fformat(fmt, greatest_e(fmt, x))), x)
+      #|  (x : Real) + ((y : Real) - -(-x + (z : Real))) == y - -z
+      #|  (x : Real) + ((y : Real) - (x + (z : Real))) == y - z
+      #|  abs(-(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + (-finf(to_fformat(fmt, greatest_e(fmt, x))) - x)) == real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + (finf(to_fformat(fmt, greatest_e(fmt, x))) - -x)
+      #|  !(-(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + -finf(to_fformat(fmt, greatest_e(fmt, x))) == (y : Real))
+      #|  !(real_of_num(0) <= -(x : Real)) == (real_of_num(0) < x)
+      #|  is_float((fmt : Flformat), -(real_of_num(greatest_m(fmt, (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + -finf(to_fformat(fmt, greatest_e(fmt, x))))
+      #|  real_of_num(0) < real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + finf(to_fformat(fmt, greatest_e(fmt, x)))
+      #|  !closer(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + finf(to_fformat(fmt, greatest_e(fmt, x))), (y : Real), x)
+      #|  closer((y : Real), real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + finf(to_fformat(fmt, greatest_e(fmt, x))), x)
+      #|  (x : Real) + ((y : Real) - (x + (z : Real))) == y - z
+      #|  abs(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + (finf(to_fformat(fmt, greatest_e(fmt, x))) - x)) == real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + (finf(to_fformat(fmt, greatest_e(fmt, x))) - x)
+      #|  !(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + finf(to_fformat(fmt, greatest_e(fmt, x))) == (y : Real))
+      #|  is_float((fmt : Flformat), real_of_num(greatest_m(fmt, (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + finf(to_fformat(fmt, greatest_e(fmt, x))))
+      #|  real_of_num(0) <= real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + finf(to_fformat(fmt, greatest_e(fmt, x)))
+      #|  real_of_num(0) <= (x : Real)
+      #|  abs((y : Real)) < real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + finf(to_fformat(fmt, greatest_e(fmt, x)))
+      #|  !closer(-(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))), (y : Real), x)
+      #|  closer((y : Real), -(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))), x)
+      #|  !(-(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) == (y : Real))
+      #|  abs(-(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) - x) == -x - real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  real_of_num(0) < real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  !closer(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)), (y : Real), x)
+      #|  closer((y : Real), real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)), x)
+      #|  abs(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) - x) == x - real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  !(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) == (y : Real))
+      #|  real_of_num(0) <= real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  real_of_num(0) <= (x : Real)
+      #|  real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) <= abs((y : Real))
+      #|  -finf(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))))
+      #|  finf(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))))
+      #|  real_of_num(0) <= (y : Real)
+      #|  abs((y : Real)) == real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + finf(to_fformat(fmt, greatest_e(fmt, x)))
+      #|  real_of_num(0)
+      #|  (fmt : Flformat)
+      #|  ((a : Bool) && (b : Bool)) == (b && a)
+      #|  abs((y : Real)) == real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, \226\136\128 y : Real, !(x == real_of_num(0)) && is_float(fmt, y) && fl_is_closest(fmt, x, y) \226\134\146 (!(abs(y) == real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + finf(to_fformat(fmt, greatest_e(fmt, x)))) \226\134\146 greatest_m(fmt, y) == greatest_m(fmt, x) && greatest_e(fmt, y) == greatest_e(fmt, x)) && (\226\136\131 z : Real, is_fixed(to_fformat(fmt, greatest_e(fmt, x)), z) && (if real_of_num(0) <= y { y == real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + z } else { y == -(real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + z }))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  !closer(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)), (y : Real), x)
+      #|  closer((y : Real), real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)), x)
+      #|  abs(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) - x) == x - real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  !(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) == (y : Real))
+      #|  real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) == (y : Real)
+      #|  real_of_num(0) <= real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, \226\136\128 y : Real, !(x == real_of_num(0)) && real_of_num(0) <= x && fl_is_closest(fmt, x, y) \226\134\146 real_of_num(0) <= y
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  !closer(-(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))), (y : Real), x)
+      #|  closer((y : Real), -(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))), x)
+      #|  !(-(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) == (y : Real))
+      #|  -(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) == (y : Real)
+      #|  abs(-(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) - x) == -x - real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  real_of_num(0) < real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, \226\136\128 y : Real, !(x == real_of_num(0)) && !(real_of_num(0) <= x) && fl_is_closest(fmt, x, y) \226\134\146 !(real_of_num(0) <= y)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (closer(x, y, a) || !closer(y, x, a)) && y <= a && z < y \226\134\146 closer(x, z, a)
+      #|  \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (closer(x, y, a) || !closer(y, x, a)) && a <= y && y < z \226\134\146 closer(x, z, a)
+      #|  -(x : Real) * (y : Real) == -(x * y)
+      #|  ((y : Real) + (x : Real) == (z : Real)) == (y == -x + z)
+      #|  ((y : Real) - (x : Real) == (z : Real)) == (y == x + z)
+      #|  greatest_r((fmt : Flformat), (y : Real)) == (z : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (fmt : Flformat)
+      #|  1 < (x : Num) \226\134\146 !(x - 1 == 0)
+      #|  ff(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))), -finf(to_fformat(fmt, greatest_e(fmt, x)))) == ff(to_fformat(fmt, greatest_e(fmt, x)), finf(to_fformat(fmt, greatest_e(fmt, x))))
+      #|  (z : Real) == -finf(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))))
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (fmt : Flformat)
+      #|  1 < (x : Num) \226\134\146 !(x - 1 == 0)
+      #|  (z : Real) == finf(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))))
+      #|  real_of_num(0) <= (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (fmt : Flformat)
+      #|  ((x : Real) + real_of_num(1)) * (z : Real) == x * z + z
+      #|  !(greatest_m((fmt : Flformat), (x : Real)) == flr(fmt) - 1)
+      #|  (x : Num) < (y : Num) && !(x == y - 1) \226\134\146 x < y - 1
+      #|  ((m : Num) + 1 < flr((fmt : Flformat))) == (m < flr(fmt) - 1)
+      #|  (fmt : Flformat)
+      #|  greatest_m((fmt : Flformat), (x : Real)) + 1
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (fmt : Flformat)
+      #|  1 < (n : Num) \226\134\146 1 <= n
+      #|  real_of_num(flr((fmt : Flformat))) - real_of_num(1) == real_of_num(flr(fmt) - 1)
+      #|  (x : Real) * (y : Real) == (x - real_of_num(1)) * y + y
+      #|  real_of_num(1) * ((x : Real) * (y : Real)) == y * x
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (fmt : Flformat)
+      #|  1
+      #|  greatest_e((fmt : Flformat), (x : Real)) + int_of_num(1)
+      #|  greatest_m((fmt : Flformat), (x : Real)) == flr(fmt) - 1
+      #|  greatest_r((fmt : Flformat), (y : Real)) == real_of_num(0)
+      #|  abs((y : Real)) == real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + finf(to_fformat(fmt, greatest_e(fmt, x)))
+      #|  !(-(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + (s : Real) == (y : Real))
+      #|  is_float((fmt : Flformat), -(real_of_num(greatest_m(fmt, (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + (s : Real))
+      #|  (a : Real) + ((b : Real) - (c : Real)) == a + b - c
+      #|  -(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + (z : Real) == (y : Real)
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (y : Real))
+      #|  abs((z : Real) - (y : Real)) == abs(-(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + (z - (-(real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + y)))
+      #|  real_of_num(0)
+      #|  real_of_num(0) < (s : Real)
+      #|  (s : Real) == real_of_num(0)
+      #|  real_of_num(0) <= (s : Real)
+      #|  real_of_num(0)
+      #|  !(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + (s : Real) == (y : Real))
+      #|  is_float((fmt : Flformat), real_of_num(greatest_m(fmt, (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + (s : Real))
+      #|  real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + (z : Real) == (y : Real)
+      #|  (a : Real) + ((b : Real) - (c : Real)) == a + b - c
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (y : Real)
+      #|  abs((z : Real) - (y : Real)) == abs(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + (z - (real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + y)))
+      #|  real_of_num(0) <= (s : Real)
+      #|  real_of_num(0) <= (x : Real)
+      #|  !(-(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) == (y : Real))
+      #|  (x : Real) == x + real_of_num(0)
+      #|  is_float((fmt : Flformat), -(real_of_num(greatest_m(fmt, (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))))
+      #|  (x : Real) + real_of_num(0) == x
+      #|  (x : Real) + (real_of_num(0) - (y : Real)) == x - y
+      #|  (a : Real) + ((b : Real) - (c : Real)) == a + b - c
+      #|  -(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + (z : Real) == (y : Real)
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (y : Real))
+      #|  abs((z : Real) - (y : Real)) == abs(-(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + (z - (-(real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + y)))
+      #|  !(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + real_of_num(0) == (y : Real))
+      #|  is_float((fmt : Flformat), real_of_num(greatest_m(fmt, (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + real_of_num(0))
+      #|  (a : Real) + ((b : Real) - (y : Real)) == a + b - y
+      #|  real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + (z : Real) == (y : Real)
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (y : Real)
+      #|  abs((z : Real) - (y : Real)) == abs(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + (z - (real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + y)))
+      #|  real_of_num(0) <= (x : Real)
+      #|  closer((z : Real), real_of_num(0), greatest_r((fmt : Flformat), (x : Real))) || !closer(real_of_num(0), z, greatest_r(fmt, x))
+      #|  (a : Real) + ((b : Real) - (c : Real)) == a + b - c
+      #|  !(-(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + (s : Real) == (y : Real))
+      #|  is_float((fmt : Flformat), -(real_of_num(greatest_m(fmt, (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + (s : Real))
+      #|  (x : Real) + (real_of_num(0) - (y : Real)) == x - y
+      #|  -(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) == (y : Real)
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (y : Real))
+      #|  abs((z : Real) - (y : Real)) == abs(-(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + (z - (-(real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + y)))
+      #|  real_of_num(0) < (s : Real)
+      #|  real_of_num(0) <= (s : Real)
+      #|  (a : Real) + ((b : Real) - (c : Real)) == a + b - c
+      #|  !(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + (s : Real) == (y : Real))
+      #|  is_float((fmt : Flformat), real_of_num(greatest_m(fmt, (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + (s : Real))
+      #|  (x : Real) + (real_of_num(0) - (y : Real)) == x - y
+      #|  real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) == (y : Real)
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (y : Real)
+      #|  abs((z : Real) - (y : Real)) == abs(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + (z - (real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + y)))
+      #|  real_of_num(0) <= (s : Real)
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  greatest_m((fmt : Flformat), (x : Real))
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  greatest_r((fmt : Flformat), (y : Real)) == real_of_num(0)
+      #|  ((a : Bool) && (b : Bool)) == (b && a)
+      #|  !(real_of_num(0) == (y : Real)) \226\134\146 !((x : Real) == x + y)
+      #|  !(abs((y : Real)) == real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + finf(to_fformat(fmt, greatest_e(fmt, x))))
+      #|  abs((y : Real)) == real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  (z : Real) == real_of_num(0)
+      #|  (z : Real)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, \226\136\128 y : Real, !(x == real_of_num(0)) && is_float(fmt, y) && fl_is_closest(fmt, x, y) \226\134\146 (\226\136\131 z : Real, is_fixed(to_fformat(fmt, greatest_e(fmt, x)), z) && is_closest(to_fformat(fmt, greatest_e(fmt, x)), greatest_r(fmt, x), z) && (if real_of_num(0) <= y { y == real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + z } else { y == -(real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + z }) && EVEN(ff(to_fformat(fmt, greatest_e(fmt, y)), greatest_r(fmt, y))) == EVEN(ff(to_fformat(fmt, greatest_e(fmt, x)), z)))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (fmt : Flformat)
+      #|  !(abs((y : Real)) == real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + finf(to_fformat(fmt, greatest_e(fmt, x))))
+      #|  (fl_norm_frac : (Flformat, Real) -> Num)((fmt : Flformat), (y : Real)) == greatest_m(fmt, y) * EXP(flr(fmt), flp(fmt) - 1) + ff(to_fformat(fmt, greatest_e(fmt, y)), greatest_r(fmt, y))
+      #|  (fl_to_even : (Flformat, Real, Real) -> Bool)((fmt : Flformat), (x : Real), (y : Real)) == (\226\136\128 y2 : Real, is_float(fmt, y2) && fl_is_closest(fmt, x, y) && fl_is_closest(fmt, x, y2) && !(y2 == y) \226\134\146 EVEN(fl_norm_frac(fmt, y)))
+      #|  (z : Real)
+      #|  to_even(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))), greatest_r(fmt, x), (z' : Real))
+      #|  is_frac(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))), (z' : Real), ff(to_fformat(fmt, greatest_e(fmt, x)), z'))
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (y2 : Real))
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= flround((fmt : Flformat), To_near, (x : Real)))
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (y2 : Real)
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= flround((fmt : Flformat), To_near, (x : Real))
+      #|  real_of_num(0) <= (x : Real)
+      #|  !((z : Real) == (z' : Real))
+      #|  IN((z : Real), fixed(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))))
+      #|  (x : Real) < (y : Real) \226\134\146 x <= y
+      #|  abs(greatest_r((fmt : Flformat), (x : Real))) <= finf(to_fformat(fmt, greatest_e(fmt, x)))
+      #|  !((x : Num) - 1 == 0) == (1 < x)
+      #|  -(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + fround(to_fformat(fmt, greatest_e(fmt, x)), To_near, greatest_r(fmt, x)) == flround(fmt, To_near, x)
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= flround((fmt : Flformat), To_near, (x : Real)))
+      #|  ((x : Real) == (y : Real)) == (-(real_of_num(greatest_m((fmt : Flformat), x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + x == -(real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) + y)
+      #|  real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + fround(to_fformat(fmt, greatest_e(fmt, x)), To_near, greatest_r(fmt, x)) == flround(fmt, To_near, x)
+      #|  (x : Real)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= flround((fmt : Flformat), To_near, (x : Real))
+      #|  ((x : Real) == (y : Real)) == (real_of_num(greatest_m((fmt : Flformat), x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + x == real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) + y)
+      #|  real_of_num(0) <= (x : Real)
+      #|  fround(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))), To_near, greatest_r(fmt, x)) == (z' : Real)
+      #|  is_float((fmt : Flformat), flround(fmt, To_near, (x : Real)))
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 fl_to_even(fmt, x, flround(fmt, To_near, x))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))
+      #|  (fl_to_zero : (Flformat, Real, Real) -> Bool)((fmt : Flformat), (x : Real), (y : Real)) == (if real_of_num(0) <= x { real_of_num(0) <= y && y <= x && (\226\136\128 y' : Real, is_float(fmt, y') && y' <= x \226\134\146 y' <= y) } else { y <= real_of_num(0) && x <= y && (\226\136\128 y' : Real, is_float(fmt, y') && x <= y' \226\134\146 y <= y') })
+      #|  (y'' : Real) == real_of_num(0)
+      #|  (y : Real) == real_of_num(0)
+      #|  real_of_num(0) <= (y : Real)
+      #|  !(real_of_num(0) <= (y : Real))
+      #|  (y : Real) <= real_of_num(0)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  abs((y : Real)) <= finf(to_fformat((fmt : Flformat), (e : Int)))
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_m((fmt : Flformat), (x : Real)) == (m : Num)
+      #|  -(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)))
+      #|  (y : Real) <= greatest_r((fmt : Flformat), (y' : Real))
+      #|  !(real_of_num(0) <= (y' : Real))
+      #|  greatest_m((fmt : Flformat), (x : Real)) == (m : Num)
+      #|  real_of_num(0) < real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  \226\136\128 z : Real, real_of_num(0) < z && (y : Real) <= -z \226\134\146 !(y == real_of_num(0))
+      #|  greatest_e((fmt : Flformat), (y' : Real)) == (e : Int) && greatest_m(fmt, y') == (m : Num)
+      #|  (y'' : Real) <= real_of_num(0)
+      #|  -(y'' : Real) == abs(y'')
+      #|  -(-(z : Real) + (y : Real)) == z + -y
+      #|  abs((x : Real)) == -x
+      #|  abs((x : Real))
+      #|  abs((y' : Real)) < real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + finf(to_fformat(fmt, e))
+      #|  real_of_num(0) <= real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) <= abs((y' : Real))
+      #|  (real_of_num(0) <= -(x : Real)) == (x <= real_of_num(0))
+      #|  (x : Real) < (y : Real) && real_of_num(0) <= (z : Real) \226\134\146 x <= y + z
+      #|  (-(z : Real) + (y : Real) <= (y' : Real)) == (-y' <= z + -y)
+      #|  -(real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))) < (y' : Real)
+      #|  real_of_num(0) <= (y : Real)
+      #|  !(real_of_num(0) <= (y : Real))
+      #|  (y' : Real) <= real_of_num(0)
+      #|  (y : Real) <= real_of_num(0)
+      #|  abs((y : Real)) <= finf(to_fformat((fmt : Flformat), (e : Int)))
+      #|  (real_of_num(0) <= -(x : Real)) == (x <= real_of_num(0))
+      #|  (-(z : Real) + (y : Real) <= real_of_num(0)) == (real_of_num(0) <= z + -y)
+      #|  real_of_num(0) <= (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  abs((y : Real)) <= finf(to_fformat((fmt : Flformat), (e : Int)))
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_m((fmt : Flformat), (x : Real)) == (m : Num)
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  greatest_r((fmt : Flformat), (y' : Real)) <= (y : Real)
+      #|  real_of_num(0) <= (y' : Real)
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  \226\136\128 z : Real, real_of_num(0) < z && z <= (y : Real) \226\134\146 !(y == real_of_num(0))
+      #|  greatest_e((fmt : Flformat), (y' : Real)) == (e : Int) && greatest_m(fmt, y') == (m : Num)
+      #|  real_of_num(0) <= (y'' : Real)
+      #|  (y'' : Real) == abs(y'')
+      #|  abs((x : Real)) == x
+      #|  abs((x : Real))
+      #|  abs((y' : Real)) < real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + finf(to_fformat(fmt, e))
+      #|  real_of_num(0) <= real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) <= abs((y' : Real))
+      #|  (x : Real) < (y : Real) && real_of_num(0) <= (z : Real) \226\134\146 x <= y + z
+      #|  (y' : Real) < real_of_num(greatest_m((fmt : Flformat), (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  real_of_num(0) <= (y : Real)
+      #|  abs((y : Real)) <= finf(to_fformat((fmt : Flformat), (e : Int)))
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 fl_to_zero(fmt, x, flround(fmt, To_zero, x))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (fmt : Flformat)
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (y : Real))
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (fmt : Flformat)
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  !(real_of_num(0) <= (y : Real))
+      #|  (fl_to_pinf : (Flformat, Real, Real) -> Bool)((fmt : Flformat), (x : Real), (y : Real)) == (x <= y && (\226\136\128 y' : Real, is_float(fmt, y') && x <= y' \226\134\146 y <= y'))
+      #|  ((a : Real) <= (b : Real)) == (-(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))) + a <= -(real_of_num(m) * ipow(real_of_num(flr(fmt)), e)) + b)
+      #|  abs((y : Real)) <= finf(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))))
+      #|  !(real_of_num(0) <= (y' : Real))
+      #|  (fmt : Flformat)
+      #|  greatest_e((fmt : Flformat), (y' : Real)) == (e : Int) && greatest_m(fmt, y') == (m : Num)
+      #|  (y : Real) <= real_of_num(0)
+      #|  -(y : Real) == abs(y)
+      #|  -(-(a : Real) + (b : Real)) == a + -b
+      #|  abs((x : Real)) == -x
+      #|  abs((x : Real))
+      #|  abs((y' : Real)) < real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + finf(to_fformat(fmt, e))
+      #|  (-(x : Real) < real_of_num(0)) == (real_of_num(0) < x)
+      #|  -(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)))
+      #|  (y' : Real) < real_of_num(0)
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) <= abs((y' : Real))
+      #|  (z : Real) == z + real_of_num(0)
+      #|  -(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)))
+      #|  -(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))) <= (y' : Real)
+      #|  ((a : Real) <= (b : Real)) == (real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + a <= real_of_num(m) * ipow(real_of_num(flr(fmt)), e) + b)
+      #|  abs((y : Real)) <= finf(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))))
+      #|  real_of_num(0) <= (y' : Real)
+      #|  (fmt : Flformat)
+      #|  greatest_e((fmt : Flformat), (y' : Real)) == (e : Int) && greatest_m(fmt, y') == (m : Num)
+      #|  abs((y' : Real)) < real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + finf(to_fformat(fmt, e))
+      #|  abs((x : Real))
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) <= abs((y' : Real))
+      #|  IN(fround(to_fformat((fmt : Flformat), (e : Int)), To_pinf, (y : Real)), fixed(to_fformat(fmt, e)))
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + finf(to_fformat(fmt, e))
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + finf(to_fformat(fmt, e)) <= (y' : Real)
+      #|  real_of_num(0) <= (x : Real)
+      #|  abs((y : Real)) <= finf(to_fformat((fmt : Flformat), (e : Int)))
+      #|  abs((y : Real)) <= finf(to_fformat((fmt : Flformat), (e : Int)))
+      #|  real_of_num(0) <= (x : Real)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 fl_to_pinf(fmt, x, flround(fmt, To_pinf, x))
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (fmt : Flformat)
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  (fmt : Flformat)
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (fl_to_ninf : (Flformat, Real, Real) -> Bool)((fmt : Flformat), (x : Real), (y : Real)) == (y <= x && (\226\136\128 y' : Real, is_float(fmt, y') && y' <= x \226\134\146 y' <= y))
+      #|  ((a : Real) <= (b : Real)) == (-(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))) + a <= -(real_of_num(m) * ipow(real_of_num(flr(fmt)), e)) + b)
+      #|  abs((y : Real)) <= finf(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))))
+      #|  !(real_of_num(0) <= (y' : Real))
+      #|  (fmt : Flformat)
+      #|  greatest_e((fmt : Flformat), (y' : Real)) == (e : Int) && greatest_m(fmt, y') == (m : Num)
+      #|  abs((x : Real))
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) <= abs((y' : Real))
+      #|  abs((y' : Real)) < real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + finf(to_fformat(fmt, e))
+      #|  (y' : Real) < real_of_num(0)
+      #|  IN(fround(to_fformat((fmt : Flformat), (e : Int)), To_ninf, (y : Real)), fixed(to_fformat(fmt, e)))
+      #|  -(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))) + -finf(to_fformat(fmt, e))
+      #|  (y' : Real) <= -(real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))) + -finf(to_fformat(fmt, e))
+      #|  ((a : Real) <= (b : Real)) == (real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + a <= real_of_num(m) * ipow(real_of_num(flr(fmt)), e) + b)
+      #|  abs((y : Real)) <= finf(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))))
+      #|  real_of_num(0) <= (y' : Real)
+      #|  (fmt : Flformat)
+      #|  greatest_e((fmt : Flformat), (y' : Real)) == (e : Int) && greatest_m(fmt, y') == (m : Num)
+      #|  real_of_num(0) <= (y : Real)
+      #|  (y : Real) == abs(y)
+      #|  abs((x : Real)) == x
+      #|  abs((x : Real))
+      #|  abs((y' : Real)) < real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) + finf(to_fformat(fmt, e))
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  real_of_num(0) <= (y' : Real)
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) <= abs((y' : Real))
+      #|  (x : Real) == x + real_of_num(0)
+      #|  real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  (a : Real) < (b : Real) \226\134\146 a <= b
+      #|  (y' : Real) < real_of_num((m : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int))
+      #|  real_of_num(0) <= (x : Real)
+      #|  abs((y : Real)) <= finf(to_fformat((fmt : Flformat), (e : Int)))
+      #|  abs((y : Real)) <= finf(to_fformat((fmt : Flformat), (e : Int)))
+      #|  real_of_num(0) <= (x : Real)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 fl_to_ninf(fmt, x, flround(fmt, To_ninf, x))
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (fmt : Flformat)
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  to_fformat((fmt : Flformat), (e : Int))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (a : Real) + (b : Real) - (a + (c : Real)) == b - c
+      #|  (a : Real) + (b : Real) - (a + (c : Real)) == b - c
+      #|  real_of_num(0) <= (x : Real)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 abs(flround(fmt, To_near, x) - x) <= fulp(to_fformat(fmt, greatest_e(fmt, x))) / real_of_num(2)
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (fmt : Flformat)
+      #|  (a : Real) + (b : Real) - (a + (c : Real)) == b - c
+      #|  (a : Real) + (b : Real) - (a + (c : Real)) == b - c
+      #|  real_of_num(0) <= (x : Real)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 abs(flround(fmt, To_zero, x) - x) <= fulp(to_fformat(fmt, greatest_e(fmt, x)))
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (fmt : Flformat)
+      #|  (a : Real) + (b : Real) - (a + (c : Real)) == b - c
+      #|  (a : Real) + (b : Real) - (a + (c : Real)) == b - c
+      #|  real_of_num(0) <= (x : Real)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 abs(flround(fmt, To_pinf, x) - x) <= fulp(to_fformat(fmt, greatest_e(fmt, x)))
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (fmt : Flformat)
+      #|  (a : Real) + (b : Real) - (a + (c : Real)) == b - c
+      #|  (a : Real) + (b : Real) - (a + (c : Real)) == b - c
+      #|  real_of_num(0) <= (x : Real)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 abs(flround(fmt, To_ninf, x) - x) <= fulp(to_fformat(fmt, greatest_e(fmt, x)))
+      #|  real_of_num(0) <= (x : Real)
+      #|  (fmt : Flformat)
+      #|  !(real_of_num(0) <= (x : Real))
+      #|  (fmt : Flformat)
+      #|  (e : Int) - (p : Int) + int_of_num(1) + -e == int_of_num(1) - p
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (a : Real) / (b : Real) * (c : Real) == a * c / b
+      #|  ipow(real_of_num(flr((fmt : Flformat))), greatest_e(fmt, (x : Real))) == inv(ipow(real_of_num(flr(fmt)), -greatest_e(fmt, x)))
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) < fulp(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))) / real_of_num(2)
+      #|  fulp(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))) / real_of_num(2) / ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  real_of_num(0) < abs((x : Real))
+      #|  fulp(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))) / real_of_num(2) / abs(x)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 rerror(x, flround(fmt, To_near, x)) <= fl_eps(fmt)
+      #|  (fmt : Flformat)
+      #|  (e : Int) - (p : Int) + int_of_num(1) + -e == int_of_num(1) - p
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (a : Real) / (b : Real) * (c : Real) == a * c / b
+      #|  ipow(real_of_num(flr((fmt : Flformat))), greatest_e(fmt, (x : Real))) == inv(ipow(real_of_num(flr(fmt)), -greatest_e(fmt, x)))
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) < fulp(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))))
+      #|  fulp(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))) / ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  real_of_num(0) < abs((x : Real))
+      #|  fulp(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))) / abs(x)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 rerror(x, flround(fmt, To_zero, x)) <= real_of_num(2) * fl_eps(fmt)
+      #|  (fmt : Flformat)
+      #|  (e : Int) - (p : Int) + int_of_num(1) + -e == int_of_num(1) - p
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (a : Real) / (b : Real) * (c : Real) == a * c / b
+      #|  ipow(real_of_num(flr((fmt : Flformat))), greatest_e(fmt, (x : Real))) == inv(ipow(real_of_num(flr(fmt)), -greatest_e(fmt, x)))
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) < fulp(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))))
+      #|  fulp(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))) / ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  real_of_num(0) < abs((x : Real))
+      #|  fulp(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))) / abs(x)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 rerror(x, flround(fmt, To_pinf, x)) <= real_of_num(2) * fl_eps(fmt)
+      #|  (fmt : Flformat)
+      #|  (e : Int) - (p : Int) + int_of_num(1) + -e == int_of_num(1) - p
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  (a : Real) / (b : Real) * (c : Real) == a * c / b
+      #|  ipow(real_of_num(flr((fmt : Flformat))), greatest_e(fmt, (x : Real))) == inv(ipow(real_of_num(flr(fmt)), -greatest_e(fmt, x)))
+      #|  greatest_e((fmt : Flformat), (x : Real))
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) < fulp(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real))))
+      #|  fulp(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))) / ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  real_of_num(0) < abs((x : Real))
+      #|  fulp(to_fformat((fmt : Flformat), greatest_e(fmt, (x : Real)))) / abs(x)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 rerror(x, flround(fmt, To_ninf, x)) <= real_of_num(2) * fl_eps(fmt)
+      #|  (fmt : Flformat)
+      #|  \226\136\128 z : Real, z / (x : Real) * x == z
+      #|  (flround((fmt : Flformat), To_near, (x : Real)) - x) / x
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 (\226\136\131 d : Real, flround(fmt, To_near, x) == (real_of_num(1) + d) * x && abs(d) <= fl_eps(fmt))
+      #|  \226\136\128 z : Real, z / (x : Real) * x == z
+      #|  (flround((fmt : Flformat), To_zero, (x : Real)) - x) / x
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 (\226\136\131 d : Real, flround(fmt, To_zero, x) == (real_of_num(1) + d) * x && abs(d) <= real_of_num(2) * fl_eps(fmt))
+      #|  \226\136\128 z : Real, z / (x : Real) * x == z
+      #|  (flround((fmt : Flformat), To_pinf, (x : Real)) - x) / x
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 (\226\136\131 d : Real, flround(fmt, To_pinf, x) == (real_of_num(1) + d) * x && abs(d) <= real_of_num(2) * fl_eps(fmt))
+      #|  \226\136\128 z : Real, z / (x : Real) * x == z
+      #|  (flround((fmt : Flformat), To_ninf, (x : Real)) - x) / x
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 (\226\136\131 d : Real, flround(fmt, To_ninf, x) == (real_of_num(1) + d) * x && abs(d) <= real_of_num(2) * fl_eps(fmt))
+      #|  real_of_num(1) < (x : Real) \226\134\146 real_of_num(1) <= x
+      #|  (e : Int) + ((e2 : Int) - e + int_of_num(1)) == e2 + int_of_num(1)
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  real_of_num(EXP(flr((fmt : Flformat)), flp(fmt))) * ipow(real_of_num(flr(fmt)), (e : Int) - int_of_num(flp(fmt)) + int_of_num(1))
+      #|  real_of_num(0) <= real_of_num((f : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int) - int_of_num(flp(fmt)) + int_of_num(1))
+      #|  real_of_num(0) <= real_of_num((f : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int) - int_of_num(flp(fmt)) + int_of_num(1))
+      #|  (e : Int) - int_of_num(1) + ((e2 : Int) - e + int_of_num(1)) == e2
+      #|  (fmt : Flformat)
+      #|  real_of_num(flr((fmt : Flformat)))
+      #|  real_of_num(EXP(flr((fmt : Flformat)), flp(fmt) - 1)) * ipow(real_of_num(flr(fmt)), (e : Int) - int_of_num(flp(fmt)) + int_of_num(1))
+      #|  real_of_num((f : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int) - int_of_num(flp(fmt)) + int_of_num(1))
+      #|  (fmt : Flformat)
+      #|  EXP(flr((fmt : Flformat)), flp(fmt) - 1)
+      #|  0 < (f : Num) \226\134\146 !(f == 0)
+      #|  !(real_of_num((f : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e : Int) - int_of_num(flp(fmt)) + int_of_num(1)) == real_of_num(0))
+      #|  \226\136\128 fmt : Flformat, \226\136\128 e : Int, \226\136\128 f : Num, EXP(flr(fmt), flp(fmt) - 1) <= f && f < EXP(flr(fmt), flp(fmt)) \226\134\146 greatest_e(fmt, real_of_num(f) * ipow(real_of_num(flr(fmt)), e - int_of_num(flp(fmt)) + int_of_num(1))) == e
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  real_of_num(0) <= fround(to_fformat((fmt : Flformat), (e : Int)), (m : Roundmode), (y : Real))
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, \226\136\128 m : Roundmode, !(x == real_of_num(0)) && real_of_num(0) <= x \226\134\146 real_of_num(0) <= flround(fmt, m, x)
+      #|  (fmt : Flformat)
+      #|  (-(x : Real) + (y : Real) <= real_of_num(0)) == (real_of_num(0) <= x + -y)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e : Int)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  fround(to_fformat((fmt : Flformat), (e : Int)), (m : Roundmode), (y : Real)) <= real_of_num(0)
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, \226\136\128 m : Roundmode, !(x == real_of_num(0)) && !(real_of_num(0) <= x) \226\134\146 flround(fmt, m, x) <= real_of_num(0)
+      #|  (fmt : Flformat)
+      #|  (x : Real) == x + real_of_num(0)
+      #|  -(-(x : Real) + (y : Real)) == x + -y
+      #|  (-(x : Real) + (y : Real) <= real_of_num(0)) == (real_of_num(0) <= x + -y)
+      #|  -(real_of_num((m' : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e' : Int))) + fround(to_fformat(fmt, e'), (m : Roundmode), (y : Real)) <= real_of_num(0)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e' : Int)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  (x : Real) < (y : Real) \226\134\146 x <= y
+      #|  fround(to_fformat((fmt : Flformat), (e' : Int)), (m : Roundmode), (y : Real)) <= real_of_num(0)
+      #|  (x : Real) == x + real_of_num(0)
+      #|  real_of_num(0) <= real_of_num((m' : Num)) * ipow(real_of_num(flr((fmt : Flformat))), (e' : Int)) + fround(to_fformat(fmt, e'), (m : Roundmode), (y : Real))
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  greatest_e((fmt : Flformat), (x : Real)) == (e' : Int)
+      #|  greatest_r((fmt : Flformat), (x : Real)) == (y : Real)
+      #|  (x : Real) < (y : Real) \226\134\146 x <= y
+      #|  real_of_num(0) <= fround(to_fformat((fmt : Flformat), (e' : Int)), (m : Roundmode), (y : Real))
+      #|  (x : Real) == real_of_num(1) * x
+      #|  real_of_num(1) < (x : Real) \226\134\146 real_of_num(1) <= x
+      #|  ipow(real_of_num(flr((fmt : Flformat))), greatest_e(fmt, (x : Real)))
+      #|  ipow(real_of_num(flr((fmt : Flformat))), (e : Int)) <= real_of_num(greatest_m(fmt, (x : Real))) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x))
+      #|  \226\136\128 fmt : Flformat, \226\136\128 x : Real, \226\136\128 e : Int, \226\136\128 m : Roundmode, !(x == real_of_num(0)) && ipow(real_of_num(flr(fmt)), e) <= abs(x) \226\134\146 ipow(real_of_num(flr(fmt)), e) <= abs(flround(fmt, m, x))
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  (fmt : Flformat)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+      #|  (fmt : Flformat)
+      #|  (x : Real) <= real_of_num(0) \226\134\146 abs(x) == -x
       #|FLFORMAT_SPLIT =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#=:fun(prod(num,num),fun(prod(num,num),bool)) (#dest_flformat:fun(flformat,prod(num,num)) fmt:flformat)) ((#,:fun(num,fun(num,prod(num,num))) (#FST:fun(prod(num,num),num) (#dest_flformat:fun(flformat,prod(num,num)) fmt:flformat))) (#SND:fun(prod(num,num),num) (#dest_flformat:fun(flformat,prod(num,num)) fmt:flformat))))))
       #|FLFORMAT_VALID_IMP_RADIX_LT_1 =  |- (#forall:fun(fun(num,bool),bool) (\r:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#is_valid_flformat:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#FST:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))))))))
       #|FLFORMAT_VALID_IMP_RADIX_EVEN =  |- (#forall:fun(fun(num,bool),bool) (\r:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#is_valid_flformat:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))) (#EVEN:fun(num,bool) (#FST:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))))))))
