@@ -79623,472 +79623,472 @@ Warning: inventing type variables
 0..0..solved at 2
 0..0..2..4..13..25..44..solved at 80
 Examples/brunn_minkowski quotations (466):
-  a < b /\\ c < d\n       ==> (b - a) * inv((b + d) - (a + c)) +\n           (d - c) * inv((b + d) - (a + c)) = &1
-  i:num
-  i:num
-  sum (1..dimindex(:N))\n        (\\i. ((b:real^N)$i - (a:real^N)$i) /\n             ((b$i + d$i) - (a$i + c$i))) / &(dimindex(:N)) +\n    sum (1..dimindex(:N))\n        (\\i. ((d:real^N)$i - (c:real^N)$i) /\n             ((b$i + d$i) - (a$i + c$i))) / &(dimindex(:N))
-  a < b /\\ c < d ==> &0 < (b + d) - (a + c)
-  a <= b /\\ c <= d ==> a + c <= b + d
-  i:num
-  i:num
-  a <= b /\\ c <= d ==> a + c <= b + d
-  measure(interval[c:real^N,d]) = &0
-  i:num
-  i:num
-  a <= b /\\ c <= d ==> a + c <= b + d
-  measure(interval[a:real^N,b]) = &0
-  forall a b c d:real^N.\n    ~(interval[a,b] = {}) /\\ ~(interval[c,d] = {})\n    ==> root (dimindex(:N))\n             (measure {x + y | x IN interval[a,b] /\\ y IN interval[c,d]})\n        >= root (dimindex(:N)) (measure(interval[a,b])) +\n           root (dimindex(:N)) (measure(interval[c,d]))
-  {x:real^N | x$k = &0}
-  (x:real^N) IN s
-  x:real^N
-  measure (s INTER {x | x$k <= &0}) + measure (s INTER {x | x$k >= &0}) =\n    root (dimindex(:N)) (measure(s:real^N->bool)) pow (dimindex(:N))
-  tn / t = sn / s /\\ tp / t = sp / s /\\\n      &0 < sp /\\ &0 < sn /\\ &0 < s /\\ &0 < t\n      ==> tn / sn = t / s /\\ tp / sp = t / s
-  measure(t INTER {x:real^N | x$k <= &0}) /\n    measure(s INTER {x:real^N | x$k <= &0}) = measure t / measure s /\\\n    measure(t INTER {x:real^N | x$k >= &0}) /\n    measure(s INTER {x:real^N | x$k >= &0}) = measure t / measure s
-  &0 < s ==> s + t = s * (&1 + t / s)
-  root (dimindex (:N)) (measure (s INTER {x:real^N | x$k <= &0})) +\n    root (dimindex (:N)) (measure (t INTER {x:real^N | x$k <= &0})) =\n    root (dimindex (:N)) (measure (s INTER {x | x$k <= &0})) *\n    (&1 + root (dimindex (:N)) (measure (t INTER {x | x$k <= &0})) /\n          root (dimindex (:N)) (measure (s INTER {x | x$k <= &0}))) /\\\n   root (dimindex (:N)) (measure (s INTER {x:real^N | x$k >= &0})) +\n    root (dimindex (:N)) (measure (t INTER {x:real^N | x$k >= &0})) =\n    root (dimindex (:N)) (measure (s INTER {x | x$k >= &0})) *\n    (&1 + root (dimindex (:N)) (measure (t INTER {x | x$k >= &0})) /\n          root (dimindex (:N)) (measure (s INTER {x | x$k >= &0})))
-  s SUBSET t ==> s INTER u SUBSET t INTER u
-  s SUBSET t ==> s INTER u SUBSET u INTER t
-  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
-  s:real^N->bool = UNIONS d1
-  s INTER u DIFF t INTER u = (s DIFF t) INTER u
-  s SUBSET t /\\ t DIFF s SUBSET u\n      ==> (s DIFF t UNION t DIFF s) SUBSET u
-  {x:real^N | x$k = &0}
-  x INSERT (s DELETE x) = x INSERT s
-  s = {} UNION s
-  {x | x IN s /\\ ~(x = a)} = s DELETE a
-  {f x |x| x IN s /\\ ~(f x = a)} =\n                               {t | t IN IMAGE f s /\\ ~(t = a)}
-  measure(UNIONS dl :real^N->bool) =\n    measure(s INTER {x:real^N | x$k <= &0}) /\\\n    measure(UNIONS dr :real^N->bool) =\n    measure(s INTER {x:real^N | x$k >= &0})
-  x <= a' + b' ==> a' <= a /\\ b' <= b ==> x <= a + b
-  &0 <= x <=> x >= &0
-  &0 <= x <=> x >= &0
-  measurable { x + y:real^N |\n                  x IN UNIONS dl /\\ y IN t INTER {x | x$k <= &0}} /\\\n     measurable { x + y:real^N |\n                  x IN UNIONS dr /\\ y IN t INTER {x | &0 <= x$k}}
-  measurable(UNIONS dl:real^N->bool) /\\\n    measurable(UNIONS dr:real^N->bool)
-  {f x |x| x IN s /\\ ~(f x = a)} =\n                               {t | t IN IMAGE f s /\\ ~(t = a)}
-  compact(UNIONS dl:real^N->bool) /\\ compact(UNIONS dr:real^N->bool)
-  x INSERT (s DELETE x) = x INSERT s
-  s = {} UNION s
-  {x | x IN s /\\ ~(x = a)} = s DELETE a
-  interior(s) INTER interior(s') = {} /\\\n          interior(s INTER t) SUBSET interior s /\\\n          interior(s' INTER t) SUBSET interior s'\n          ==> interior(s INTER t) INTER interior(s' INTER t) = {}
-  s SUBSET t ==> s INTER u SUBSET t INTER u
-  {f x |x| x IN s /\\ ~(f x = a)} =\n                                     {t | t IN IMAGE f s /\\ ~(t = a)}
-  interior(s) INTER interior(s') = {} /\\\n          interior(s INTER t) SUBSET interior s /\\\n          interior(s' INTER t) SUBSET interior s'\n          ==> interior(s INTER t) INTER interior(s' INTER t) = {}
-  x IN s ==> x SUBSET UNIONS s
-  {f x |x| x IN s /\\ ~(f x = a)} =\n                                     {t | t IN IMAGE f s /\\ ~(t = a)}
-  measure (t INTER {x:real^N | x$k <= &0}) / measure t =\n                   measure (s INTER {x:real^N | x$k <= &0}) / measure s
-  ~(s = {}) /\\ s SUBSET t ==> ~(s INTER t = {})
-  i:real^N->bool
-  {f x |x| x IN s /\\ ~(f x = a)} =\n                                     {t | t IN IMAGE f s /\\ ~(t = a)}
-  i INTER {x:real^N | x$k <= &0}
-  CARD {x | x IN IMAGE f s /\\ P x} <= CARD(IMAGE f s) /\\\n        CARD(IMAGE f s) <= CARD s\n        ==> CARD {x | x IN IMAGE f s /\\ P x} <= CARD s
-  CARD(d1 DELETE (j:real^N->bool))
-  {f x |x| x IN s /\\ ~(f x = a)} =\n                                     {t | t IN IMAGE f s /\\ ~(t = a)}
-  p ==> q ==> r <=> q ==> p ==> r
-  x INSERT (s DELETE x) = x INSERT s
-  s = {} UNION s
-  {x | x IN s /\\ ~(x = a)} = s DELETE a
-  interior(s) INTER interior(s') = {} /\\\n          interior(s INTER t) SUBSET interior s /\\\n          interior(s' INTER t) SUBSET interior s'\n          ==> interior(s INTER t) INTER interior(s' INTER t) = {}
-  s SUBSET t ==> s INTER u SUBSET t INTER u
-  {f x |x| x IN s /\\ ~(f x = a)} =\n                                     {t | t IN IMAGE f s /\\ ~(t = a)}
-  interior(s) INTER interior(s') = {} /\\\n          interior(s INTER t) SUBSET interior s /\\\n          interior(s' INTER t) SUBSET interior s'\n          ==> interior(s INTER t) INTER interior(s' INTER t) = {}
-  x IN s ==> x SUBSET UNIONS s
-  {f x |x| x IN s /\\ ~(f x = a)} =\n                                     {t | t IN IMAGE f s /\\ ~(t = a)}
-  measure (t INTER {x:real^N | x$k >= &0}) / measure t =\n                   measure (s INTER {x:real^N | x$k >= &0}) / measure s
-  ~(s = {}) /\\ s SUBSET t ==> ~(s INTER t = {})
-  j:real^N->bool
-  {f x |x| x IN s /\\ ~(f x = a)} =\n                                     {t | t IN IMAGE f s /\\ ~(t = a)}
-  j INTER {x:real^N | x$k >= &0}
-  CARD {x | x IN IMAGE f s /\\ P x} <= CARD(IMAGE f s) /\\\n        CARD(IMAGE f s) <= CARD s\n        ==> CARD {x | x IN IMAGE f s /\\ P x} <= CARD s
-  CARD(d1 DELETE (i:real^N->bool))
-  {f x |x| x IN s /\\ ~(f x = a)} =\n                                     {t | t IN IMAGE f s /\\ ~(t = a)}
-  d1 division_of (s:real^N->bool)
-  ~negligible(j:real^N->bool)
-  ~negligible(i:real^N->bool)
-  &0 < measure(s INTER {x:real^N | x$k <= &0}) /\\\n    &0 < measure(s INTER {x:real^N | x$k >= &0})
-  x <= &0 /\\ y <= &0 ==> x + y <= &0
-  s SUBSET {x | P x} /\\ t SUBSET {x | Q x}\n        ==> (s INTER t) SUBSET {x | P x /\\ Q x}
-  {x:real^N | x$k = &0}
-  (forall x. P x \\/ Q x)\n        ==> s = (s INTER {x | P x}) UNION (s INTER {x | Q x})
-  s = (s INTER {x:real^N | x$k <= &0}) UNION (s INTER {x | x$k >= &0}) /\\\n      t = (t INTER {x:real^N | x$k <= &0}) UNION (t INTER {x | x$k >= &0})
-  s SUBSET s' ==> {x + y:real^N | x IN s /\\ y IN t} SUBSET\n                         {x + y:real^N | x IN s' /\\ y IN t}
-  {f x |x| x IN s /\\ ~(f x = a)} =\n                                     {t | t IN IMAGE f s /\\ ~(t = a)}
-  measure {x + y:real^N | x IN (s INTER {x | x$k <= &0}) /\\\n                              y IN (t INTER {x | x$k <= &0})} +\n      measure {x + y:real^N | x IN (s INTER {x | x$k >= &0}) /\\\n                              y IN (t INTER {x | x$k >= &0})}
-  measure {x + y:real^N | x IN UNIONS dl /\\ y IN (t INTER {x | x$k <= &0})} +\n    measure {x + y | x IN UNIONS dr /\\ y IN (t INTER {x | x$k >= &0})}
+  (a : Real) < (b : Real) && (c : Real) < (d : Real) \226\134\146 (b - a) * inv(b + d - (a + c)) + (d - c) * inv(b + d - (a + c)) == real_of_num(1)
+  (i : Num)
+  (i : Num)
+  (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => ((op_dollar : (Cart[Real, N], Num) -> Real)((b : Cart[Real, N]), i) - (op_dollar : (Cart[Real, N], Num) -> Real)((a : Cart[Real, N]), i)) / ((op_dollar : (Cart[Real, N], Num) -> Real)(b, i) + (op_dollar : (Cart[Real, N], Num) -> Real)((d : Cart[Real, N]), i) - ((op_dollar : (Cart[Real, N], Num) -> Real)(a, i) + (op_dollar : (Cart[Real, N], Num) -> Real)((c : Cart[Real, N]), i)))) / real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) + (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => ((op_dollar : (Cart[Real, N], Num) -> Real)(d, i) - (op_dollar : (Cart[Real, N], Num) -> Real)(c, i)) / ((op_dollar : (Cart[Real, N], Num) -> Real)(b, i) + (op_dollar : (Cart[Real, N], Num) -> Real)(d, i) - ((op_dollar : (Cart[Real, N], Num) -> Real)(a, i) + (op_dollar : (Cart[Real, N], Num) -> Real)(c, i)))) / real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))
+  (a : Real) < (b : Real) && (c : Real) < (d : Real) \226\134\146 real_of_num(0) < b + d - (a + c)
+  (a : Real) <= (b : Real) && (c : Real) <= (d : Real) \226\134\146 a + c <= b + d
+  (i : Num)
+  (i : Num)
+  (a : Real) <= (b : Real) && (c : Real) <= (d : Real) \226\134\146 a + c <= b + d
+  measure(interval([((c : Cart[Real, N]), (d : Cart[Real, N]))])) == real_of_num(0)
+  (i : Num)
+  (i : Num)
+  (a : Real) <= (b : Real) && (c : Real) <= (d : Real) \226\134\146 a + c <= b + d
+  measure(interval([((a : Cart[Real, N]), (b : Cart[Real, N]))])) == real_of_num(0)
+  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], \226\136\128 d : Cart[Real, N], !((interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)]) == ({} : (Cart[Real, N]) -> Bool)) && !((interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(c, d)]) == ({} : (Cart[Real, N]) -> Bool)) \226\134\146 root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)({(x : Cart[Real, N]) + (y : Cart[Real, N]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)])) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(y, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(c, d)]))})) >= root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)]))) + root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(c, d)])))
+  {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) == real_of_num(0)}
+  IN((x : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+  (x : Cart[Real, N])
+  (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, (k : Num)) <= real_of_num(0)})) + (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) >= real_of_num(0)})) == pow(root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)(s)), (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))
+  (tn : Real) / (t : Real) == (sn : Real) / (s : Real) && (tp : Real) / t == (sp : Real) / s && real_of_num(0) < sp && real_of_num(0) < sn && real_of_num(0) < s && real_of_num(0) < t \226\134\146 tn / sn == t / s && tp / sp == t / s
+  measure(INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)})) / measure(INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, k) <= real_of_num(0)})) == measure(t) / measure(s) && measure(INTER(t, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)})) / measure(INTER(s, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)})) == measure(t) / measure(s)
+  real_of_num(0) < (s : Real) \226\134\146 s + (t : Real) == s * (real_of_num(1) + t / s)
+  root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, (k : Num)) <= real_of_num(0)}))) + root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) <= real_of_num(0)}))) == root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) <= real_of_num(0)}))) * (real_of_num(1) + root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(t, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) <= real_of_num(0)}))) / root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) <= real_of_num(0)})))) && root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) >= real_of_num(0)}))) + root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(t, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) >= real_of_num(0)}))) == root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) >= real_of_num(0)}))) * (real_of_num(1) + root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(t, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) >= real_of_num(0)}))) / root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) >= real_of_num(0)}))))
+  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(INTER(s, (u : (_) -> Bool)), INTER(t, u))
+  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(INTER(s, (u : (_) -> Bool)), INTER(u, t))
+  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
+  (s : (Cart[Real, N]) -> Bool) == UNIONS((d1 : ((Cart[Real, N]) -> Bool) -> Bool))
+  DIFF(INTER((s : (_) -> Bool), (u : (_) -> Bool)), INTER((t : (_) -> Bool), u)) == INTER(DIFF(s, t), u)
+  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) && SUBSET(DIFF(t, s), (u : (_) -> Bool)) \226\134\146 SUBSET(UNION(DIFF(s, t), DIFF(t, s)), u)
+  {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) == real_of_num(0)}
+  INSERT((x : _), DELETE((s : (_) -> Bool), x)) == INSERT(x, s)
+  (s : (_) -> Bool) == UNION({}, s)
+  {(x : _) | IN(x, (s : (_) -> Bool)) && !(x == (a : _))} == DELETE(s, a)
+  {(f : (_) -> _)(x) | x : _ | IN(x, (s : (_) -> Bool)) && !(f(x) == (a : _))} == {(t : _) | IN(t, IMAGE(f, s)) && !(t == a)}
+  measure(UNIONS((dl : ((Cart[Real, N]) -> Bool) -> Bool))) == measure(INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)})) && measure(UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))) == measure(INTER(s, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}))
+  (x : Real) <= (a' : Real) + (b' : Real) \226\134\146 a' <= (a : Real) && b' <= (b : Real) \226\134\146 x <= a + b
+  (real_of_num(0) <= (x : Real)) == (x >= real_of_num(0))
+  (real_of_num(0) <= (x : Real)) == (x >= real_of_num(0))
+  measurable({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, UNIONS((dl : ((Cart[Real, N]) -> Bool) -> Bool))) && IN(y, INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)}))}) && measurable({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))) && IN(y, INTER(t, {(x : Cart[Real, N]) | real_of_num(0) <= op_dollar(x, k)}))})
+  measurable(UNIONS((dl : ((Cart[Real, N]) -> Bool) -> Bool))) && measurable(UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool)))
+  {(f : (_) -> _)(x) | x : _ | IN(x, (s : (_) -> Bool)) && !(f(x) == (a : _))} == {(t : _) | IN(t, IMAGE(f, s)) && !(t == a)}
+  compact(UNIONS((dl : ((Cart[Real, N]) -> Bool) -> Bool))) && compact(UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool)))
+  INSERT((x : _), DELETE((s : (_) -> Bool), x)) == INSERT(x, s)
+  (s : (_) -> Bool) == UNION({}, s)
+  {(x : _) | IN(x, (s : (_) -> Bool)) && !(x == (a : _))} == DELETE(s, a)
+  INTER(interior((s : (Cart[Real, _]) -> Bool)), interior((s' : (Cart[Real, _]) -> Bool))) == {} && SUBSET(interior(INTER(s, (t : (Cart[Real, _]) -> Bool))), interior(s)) && SUBSET(interior(INTER(s', t)), interior(s')) \226\134\146 INTER(interior(INTER(s, t)), interior(INTER(s', t))) == {}
+  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(INTER(s, (u : (_) -> Bool)), INTER(t, u))
+  {(f : (_) -> _)(x) | x : _ | IN(x, (s : (_) -> Bool)) && !(f(x) == (a : _))} == {(t : _) | IN(t, IMAGE(f, s)) && !(t == a)}
+  INTER(interior((s : (Cart[Real, _]) -> Bool)), interior((s' : (Cart[Real, _]) -> Bool))) == {} && SUBSET(interior(INTER(s, (t : (Cart[Real, _]) -> Bool))), interior(s)) && SUBSET(interior(INTER(s', t)), interior(s')) \226\134\146 INTER(interior(INTER(s, t)), interior(INTER(s', t))) == {}
+  IN((x : (_) -> Bool), (s : ((_) -> Bool) -> Bool)) \226\134\146 SUBSET(x, UNIONS(s))
+  {(f : (_) -> _)(x) | x : _ | IN(x, (s : (_) -> Bool)) && !(f(x) == (a : _))} == {(t : _) | IN(t, IMAGE(f, s)) && !(t == a)}
+  measure(INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)})) / measure(t) == measure(INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, k) <= real_of_num(0)})) / measure(s)
+  !((s : (_) -> Bool) == {}) && SUBSET(s, (t : (_) -> Bool)) \226\134\146 !(INTER(s, t) == {})
+  (i : (Cart[Real, N]) -> Bool)
+  {(f : (_) -> _)(x) | x : _ | IN(x, (s : (_) -> Bool)) && !(f(x) == (a : _))} == {(t : _) | IN(t, IMAGE(f, s)) && !(t == a)}
+  INTER((i : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)})
+  CARD({(x : _) | IN(x, IMAGE((f : (_) -> _), (s : (_) -> Bool))) && (P : (_) -> Bool)(x)}) <= CARD(IMAGE(f, s)) && CARD(IMAGE(f, s)) <= CARD(s) \226\134\146 CARD({(x : _) | IN(x, IMAGE(f, s)) && P(x)}) <= CARD(s)
+  CARD(DELETE((d1 : ((Cart[Real, N]) -> Bool) -> Bool), (j : (Cart[Real, N]) -> Bool)))
+  {(f : (_) -> _)(x) | x : _ | IN(x, (s : (_) -> Bool)) && !(f(x) == (a : _))} == {(t : _) | IN(t, IMAGE(f, s)) && !(t == a)}
+  ((p : Bool) \226\134\146 (q : Bool) \226\134\146 (r : Bool)) == (q \226\134\146 p \226\134\146 r)
+  INSERT((x : _), DELETE((s : (_) -> Bool), x)) == INSERT(x, s)
+  (s : (_) -> Bool) == UNION({}, s)
+  {(x : _) | IN(x, (s : (_) -> Bool)) && !(x == (a : _))} == DELETE(s, a)
+  INTER(interior((s : (Cart[Real, _]) -> Bool)), interior((s' : (Cart[Real, _]) -> Bool))) == {} && SUBSET(interior(INTER(s, (t : (Cart[Real, _]) -> Bool))), interior(s)) && SUBSET(interior(INTER(s', t)), interior(s')) \226\134\146 INTER(interior(INTER(s, t)), interior(INTER(s', t))) == {}
+  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(INTER(s, (u : (_) -> Bool)), INTER(t, u))
+  {(f : (_) -> _)(x) | x : _ | IN(x, (s : (_) -> Bool)) && !(f(x) == (a : _))} == {(t : _) | IN(t, IMAGE(f, s)) && !(t == a)}
+  INTER(interior((s : (Cart[Real, _]) -> Bool)), interior((s' : (Cart[Real, _]) -> Bool))) == {} && SUBSET(interior(INTER(s, (t : (Cart[Real, _]) -> Bool))), interior(s)) && SUBSET(interior(INTER(s', t)), interior(s')) \226\134\146 INTER(interior(INTER(s, t)), interior(INTER(s', t))) == {}
+  IN((x : (_) -> Bool), (s : ((_) -> Bool) -> Bool)) \226\134\146 SUBSET(x, UNIONS(s))
+  {(f : (_) -> _)(x) | x : _ | IN(x, (s : (_) -> Bool)) && !(f(x) == (a : _))} == {(t : _) | IN(t, IMAGE(f, s)) && !(t == a)}
+  measure(INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})) / measure(t) == measure(INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)})) / measure(s)
+  !((s : (_) -> Bool) == {}) && SUBSET(s, (t : (_) -> Bool)) \226\134\146 !(INTER(s, t) == {})
+  (j : (Cart[Real, N]) -> Bool)
+  {(f : (_) -> _)(x) | x : _ | IN(x, (s : (_) -> Bool)) && !(f(x) == (a : _))} == {(t : _) | IN(t, IMAGE(f, s)) && !(t == a)}
+  INTER((j : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  CARD({(x : _) | IN(x, IMAGE((f : (_) -> _), (s : (_) -> Bool))) && (P : (_) -> Bool)(x)}) <= CARD(IMAGE(f, s)) && CARD(IMAGE(f, s)) <= CARD(s) \226\134\146 CARD({(x : _) | IN(x, IMAGE(f, s)) && P(x)}) <= CARD(s)
+  CARD(DELETE((d1 : ((Cart[Real, N]) -> Bool) -> Bool), (i : (Cart[Real, N]) -> Bool)))
+  {(f : (_) -> _)(x) | x : _ | IN(x, (s : (_) -> Bool)) && !(f(x) == (a : _))} == {(t : _) | IN(t, IMAGE(f, s)) && !(t == a)}
+  division_of((d1 : ((Cart[Real, N]) -> Bool) -> Bool), (s : (Cart[Real, N]) -> Bool))
+  !negligible((j : (Cart[Real, N]) -> Bool))
+  !negligible((i : (Cart[Real, N]) -> Bool))
+  real_of_num(0) < measure(INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)})) && real_of_num(0) < measure(INTER(s, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}))
+  (x : Real) <= real_of_num(0) && (y : Real) <= real_of_num(0) \226\134\146 x + y <= real_of_num(0)
+  SUBSET((s : (_) -> Bool), {(x : _) | (P : (_) -> Bool)(x)}) && SUBSET((t : (_) -> Bool), {(x : _) | (Q : (_) -> Bool)(x)}) \226\134\146 SUBSET(INTER(s, t), {(x : _) | P(x) && Q(x)})
+  {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) == real_of_num(0)}
+  (\226\136\128 x : _, (P : (_) -> Bool)(x) || (Q : (_) -> Bool)(x)) \226\134\146 (s : (_) -> Bool) == UNION(INTER(s, {(x : _) | P(x)}), INTER(s, {(x : _) | Q(x)}))
+  (s : (Cart[Real, N]) -> Bool) == UNION(INTER(s, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)}), INTER(s, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)})) && (t : (Cart[Real, N]) -> Bool) == UNION(INTER(t, {(x : Cart[Real, N]) | op_dollar(x, k) <= real_of_num(0)}), INTER(t, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}))
+  SUBSET((s : (Cart[Real, N]) -> Bool), (s' : (Cart[Real, N]) -> Bool)) \226\134\146 SUBSET({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s) && IN(y, (t : (Cart[Real, N]) -> Bool))}, {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s') && IN(y, t)})
+  {(f : (_) -> _)(x) | x : _ | IN(x, (s : (_) -> Bool)) && !(f(x) == (a : _))} == {(t : _) | IN(t, IMAGE(f, s)) && !(t == a)}
+  measure({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)})) && IN(y, INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, k) <= real_of_num(0)}))}) + measure({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, INTER(s, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)})) && IN(y, INTER(t, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}))})
+  measure({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, UNIONS((dl : ((Cart[Real, N]) -> Bool) -> Bool))) && IN(y, INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)}))}) + measure({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))) && IN(y, INTER(t, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}))})
   dr = {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d1 DELETE i /\\ ~(l INTER {x | x$k >= &0} = {})}
   dl = {l INTER {x:real^N | x$k <= &0} |l|\n                    l IN d1 DELETE j /\\ ~(l INTER {x | x$k <= &0} = {})}
-  FINITE(d1:(real^N->bool)->bool) /\\\n                FINITE(d2:(real^N->bool)->bool)
-  &0 < measure(s:real^N->bool) /\\ &0 < measure(t:real^N->bool)
-  measurable {x + y:real^N | x IN s /\\ y IN t}
-  measurable(s:real^N->bool) /\\ measurable(t:real^N->bool)
-  {a + x + y:real^N | x IN s /\\ y IN t} =\n        IMAGE (\\z. a + z) {x + y | x IN s /\\ y IN t}
-  x + a + y:real^N = a + x + y
-  {f x y | x IN s /\\ y IN IMAGE g t} =\n        {f x (g y) | x IN s /\\ y IN t}
-  a' = a ==> a' >= b ==> a >= b
-  x <= a /\\ x >= a <=> x = a
-  negligible t ==> negligible(s INTER t)
-  (t INTER {x | P x}) INTER (t INTER {x | Q x}) =\n                               t INTER {x | P x /\\ Q x}
-  (forall x. P x \\/ Q x)\n           ==> s INTER {x | P x} UNION s INTER {x | Q x} = s
-  &0 < s /\\ &0 < t /\\ t' / t = s' / s  /\\ s' + s'' = s /\\ t' + t'' = t\n        ==> t' / t = s' / s /\\ t'' / t = s'' / s
-  \\x:real^N. a % basis k + x
-  forall g. (forall x. f(x) IN s' <=> x IN s) /\\ (forall x. g(f x) = x)\n               ==> IMAGE f t INTER s' = IMAGE f (t INTER s)
-  IMAGE (\\x. --(a % basis k) + x) t INTER {x:real^N | x$k >= &0} =\n        IMAGE (\\x. --(a % basis k) + x) (t INTER {x | x$k >= a}) /\\\n        IMAGE (\\x. --(a % basis k) + x) t INTER {x:real^N | x$k <= &0} =\n        IMAGE (\\x. --(a % basis k) + x) (t INTER {x | x$k <= a})
-  (forall x y. Q x y ==> R x y)\n          ==> (forall x y. P x /\\ P y /\\ Q x y ==> R x y)
-  x - a:real^N = --a + x
-  k:num
-  j:real^N->bool
-  i:real^N->bool
-  IMAGE (\\x:real^N. x - a % basis k) t
-  s:real^N->bool
-  IMAGE (IMAGE (\\x:real^N. x - a % basis k)) d2
-  d1:(real^N->bool)->bool
-  abs x <= b ==> x <= b
-  u <= &1 ==> x = &1 ==> u <= x
-  abs x <= b ==> --b <= x
-  {x:real^N | x$k = --b}
-  &0 <= u ==> x = &0 ==> x <= u
-  ?a. a IN real_interval[--b,b] /\\\n            measure (t INTER {x:real^N | x$k <= a}) / measure t = u
-  bounded(t:real^N->bool)
-  ?b:real. &0 < b /\\ forall x:real^N. x IN t ==> abs(x$k) <= b
-  u:real
-  u:real
-  measure(s INTER {x:real^N | x$k <= &0}) / measure s
-  &0 <= measure(s INTER {x:real^N | x$k <= &0}) / measure s /\\\n        measure(s INTER {x:real^N | x$k <= &0}) / measure s <= &1
-  ?a. measure(t INTER {x:real^N | x$k <= a}) / measure t =\n          measure(s INTER {x:real^N | x$k <= &0}) / measure s
-  &0 < measure(s:real^N->bool) /\\ &0 < measure(t:real^N->bool)
-  forall d1 d2 s t i j k.\n        CARD d1 + CARD d2 = n /\\\n        1 <= k /\\ k <= dimindex(:N) /\\ ~(i = j) /\\\n        i IN d1 /\\ i SUBSET {x:real^N | x$k <= &0} /\\ ~(negligible i) /\\\n        j IN d1 /\\ j SUBSET {x | x$k >= &0} /\\ ~(negligible j) /\\\n        measure(t INTER {x | x$k <= &0}) / measure t =\n        measure(s INTER {x | x$k <= &0}) / measure s /\\\n        measure(t INTER {x | x$k >= &0}) / measure t =\n        measure(s INTER {x | x$k >= &0}) / measure s /\\\n        ~(s = {}) /\\ ~(t = {}) /\\ ~(negligible s) /\\ ~(negligible t) /\\\n        d1 division_of s /\\ d2 division_of t\n        ==> root(dimindex (:N)) (measure {x + y | x IN s /\\ y IN t}) >=\n            root(dimindex (:N)) (measure s) + root(dimindex (:N)) (measure t)
-  {a + x + y:real^N | x IN s /\\ y IN t} =\n           IMAGE (\\z. a + z) {x + y | x IN s /\\ y IN t}
-  {f x y | x IN IMAGE g s /\\ y IN t} =\n           {f (g x) y | x IN s /\\ y IN t}
-  x - a:real^N = --a + x
-  a = a' /\\ b = b' ==> a >= b + c ==> a' >= b' + c
-  x - a:real^N = --a + x
-  x - a:real^N = --a + x
-  x - a:real^N = --a + x
-  x - a:real^N = --a + x
-  x - a:real^N = y - a <=> x = y
-  (forall x y. f x = f y ==> x = y) /\\ ~(s = t)\n           ==> ~(IMAGE f s = IMAGE f t)
-  (forall x y. Q x y ==> R x y)\n           ==> (forall x y. P x /\\ P y /\\ Q x y ==> R x y)
-  k:num
-  IMAGE (\\x:real^N. x - a % basis k) i
-  IMAGE (\\x:real^N. x - a % basis k) j
-  k:num
-  IMAGE (\\x:real^N. x - a % basis k) j
-  IMAGE (\\x:real^N. x - a % basis k) i
-  t:real^N->bool
-  IMAGE (\\x:real^N. x - a % basis k) s
-  d2:(real^N->bool)->bool
-  IMAGE (IMAGE (\\x:real^N. x - a % basis k)) d1
-  forall i:real^N->bool. i IN d1 ==> ~(interior i = {})
-  min v z <= a /\\ a <= max u w\n        ==> u < v /\\ w < z\n            ==> u <= a /\\ v <= a /\\ a <= w /\\ a <= z \\/\n                w <= a /\\ z <= a /\\ a <= u /\\ a <= v
-  a:real
-  k <= dimindex(:N)
-  1 <= k
-  k:num
-  ?u v w z. i = interval[u:real^N,v] /\\ j = interval[w:real^N,z]
-  j:real^N->bool
-  i:real^N->bool
-  d1 division_of (s:real^N->bool)
-  p /\\ q /\\ r <=> r /\\ p /\\ q
-  j:real^N->bool
-  i:real^N->bool
-  ?d:(real^N->bool)->bool. d SUBSET d1 /\\ d HAS_SIZE 2
-  ~(a /\\ b) <=> a ==> ~b
-  {x | x IN s /\\ ~Q x} UNION {x | x IN s /\\ Q x} = s
-  s' UNION s'' = s\n              ==> (s' DIFF s) UNION (s DIFF s') SUBSET s''
-  UNIONS {i:real^N->bool | i IN d1 /\\ interior i = {}}
-  s:real^N->bool = UNIONS d1
-  s' SUBSET s\n              ==> {f x y | x IN s' /\\ y IN t} SUBSET\n                  {f x y | x IN s /\\ y IN t}
-  c' <= c /\\ a' = a\n          ==> c' >= a' + b ==> c >= a + b
-  d1:(real^N->bool)->bool
-  {x | x IN s /\\ ~Q x} UNION {x | x IN s /\\ Q x} = s
-  negligible(UNIONS {i | i IN d1 /\\ ~(interior i = {})} UNION\n                       UNIONS {i:real^N->bool | i IN d1 /\\ interior i = {}})
-  t:real^N->bool
-  UNIONS {i:real^N->bool | i IN d1 /\\ ~(interior i = {})}
-  d2:(real^N->bool)->bool
-  {i:real^N->bool | i IN d1 /\\ ~(interior i = {})}
-  ?i:real^N->bool. i IN d1 /\\ interior i = {}
-  forall d1 d2 s t i j k.\n        CARD d1 + CARD d2 = n /\\\n        1 <= k /\\ k <= dimindex(:N) /\\ ~(i = j) /\\\n        i IN d1 /\\ i SUBSET {x:real^N | x$k <= &0} /\\\n        j IN d1 /\\ j SUBSET {x | x$k >= &0} /\\\n        ~(negligible i) /\\ ~(negligible j) /\\\n        ~(s = {}) /\\ ~(t = {}) /\\ ~(negligible s) /\\ ~(negligible t) /\\\n        d1 division_of s /\\ d2 division_of t\n        ==> root(dimindex (:N)) (measure {x + y | x IN s /\\ y IN t}) >=\n            root(dimindex (:N)) (measure s) + root(dimindex (:N)) (measure t)
-  measure(IMAGE (\\x:real^N. a + x) t)
-  ?a:real^N. a IN s
-  measure(s:real^N->bool) = &0
-  v:real^N->bool
-  u:real^N->bool
-  (d1:(real^N->bool)->bool) HAS_SIZE 1 /\\\n      (d2:(real^N->bool)->bool) HAS_SIZE 1
-  d2:(real^N->bool)->bool = {}
-  d1:(real^N->bool)->bool = {}
-  ~(2 <= n) <=> n = 0 \\/ n = 1
-  FINITE(d1:(real^N->bool)->bool) /\\\n                   FINITE(d2:(real^N->bool)->bool)
-  x = y ==> x >= a + b ==> y >= b + a
-  (forall d d' s s'. P d d' s s' ==> P d' d s' s) /\\\n    (forall d d' s s'. ~(2 <= CARD d) /\\ ~(2 <= CARD d') ==> P d d' s s') /\\\n    (forall d d' s s'. negligible s ==>  P d d' s s') /\\\n    (forall d d' s s'. 2 <= CARD d /\\ ~(negligible s) /\\ ~(negligible s')\n                 ==> P d d' s s')\n    ==> forall d d' s s'.  P d d' s s'
-  (forall m. m < n ==> forall a b c d. f a b = m /\\ stuff a b c d ==> other a b c d) <=>\n    (forall a b c d. f a b:num < n /\\ stuff a b c d ==> other a b c d)
-  n:num
-  n:num
-  d1:(real^N->bool)->bool
-  d2:(real^N->bool)->bool
-  s:real^N->bool
-  t:real^N->bool
-  CARD(d1:(real^N->bool)->bool) + CARD(d2:(real^N->bool)->bool)
-  n:num
-  p ==> q /\\ r ==> s <=> q /\\ p /\\ r ==> s
-  {f x y |x,y| F} = {}
-  t:real^N->bool = {}
-  d2:(real^N->bool)->bool
-  d1:(real^N->bool)->bool
-  t:real^N->bool
-  s:real^N->bool
-  forall s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ (?d. d division_of s) /\\ (?d. d division_of t)\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)
-  interval[w:real^N,z]
-  interval[u:real^N,v]
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  FINITE((d1 : ((Cart[Real, N]) -> Bool) -> Bool)) && FINITE((d2 : ((Cart[Real, N]) -> Bool) -> Bool))
+  real_of_num(0) < measure((s : (Cart[Real, N]) -> Bool)) && real_of_num(0) < measure((t : (Cart[Real, N]) -> Bool))
+  measurable({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, (t : (Cart[Real, N]) -> Bool))})
+  measurable((s : (Cart[Real, N]) -> Bool)) && measurable((t : (Cart[Real, N]) -> Bool))
+  {(a : Cart[Real, N]) + ((x : Cart[Real, N]) + (y : Cart[Real, N])) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, (t : (Cart[Real, N]) -> Bool))} == IMAGE((z : Cart[Real, N]) => a + z, {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s) && IN(y, t)})
+  (x : Cart[Real, N]) + ((a : Cart[Real, N]) + (y : Cart[Real, N])) == a + (x + y)
+  {(f : (_, _) -> _)((x : _), (y : _)) | IN(x, (s : (_) -> Bool)) && IN(y, IMAGE((g : (_) -> _), (t : (_) -> Bool)))} == {f((x : _), g((y : _))) | IN(x, s) && IN(y, t)}
+  (a' : Real) == (a : Real) \226\134\146 a' >= (b : Real) \226\134\146 a >= b
+  ((x : Real) <= (a : Real) && x >= a) == (x == a)
+  negligible((t : (Cart[Real, _]) -> Bool)) \226\134\146 negligible(INTER((s : (Cart[Real, _]) -> Bool), t))
+  INTER(INTER((t : (_) -> Bool), {(x : _) | (P : (_) -> Bool)(x)}), INTER(t, {(x : _) | (Q : (_) -> Bool)(x)})) == INTER(t, {(x : _) | P(x) && Q(x)})
+  (\226\136\128 x : _, (P : (_) -> Bool)(x) || (Q : (_) -> Bool)(x)) \226\134\146 UNION(INTER((s : (_) -> Bool), {(x : _) | P(x)}), INTER(s, {(x : _) | Q(x)})) == s
+  real_of_num(0) < (s : Real) && real_of_num(0) < (t : Real) && (t' : Real) / t == (s' : Real) / s && s' + (s'' : Real) == s && t' + (t'' : Real) == t \226\134\146 t' / t == s' / s && t'' / t == s'' / s
+  (x : Cart[Real, N]) => op_pct((a : Real), basis((k : Num))) + x
+  \226\136\128 g : (_) -> _, (\226\136\128 x : _, IN((f : (_) -> _)(x), (s' : (_) -> Bool)) == IN(x, (s : (_) -> Bool))) && (\226\136\128 x : _, g(f(x)) == x) \226\134\146 INTER(IMAGE(f, (t : (_) -> Bool)), s') == IMAGE(f, INTER(t, s))
+  INTER(IMAGE((x : Cart[Real, N]) => -op_pct((a : Real), basis((k : Num))) + x, (t : (Cart[Real, N]) -> Bool)), {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == IMAGE((x : Cart[Real, N]) => -op_pct(a, basis(k)) + x, INTER(t, {(x : Cart[Real, N]) | op_dollar(x, k) >= a})) && INTER(IMAGE((x : Cart[Real, N]) => -op_pct(a, basis(k)) + x, t), {(x : Cart[Real, N]) | op_dollar(x, k) <= real_of_num(0)}) == IMAGE((x : Cart[Real, N]) => -op_pct(a, basis(k)) + x, INTER(t, {(x : Cart[Real, N]) | op_dollar(x, k) <= a}))
+  (\226\136\128 x : _, \226\136\128 y : _, (Q : (_, _) -> Bool)(x, y) \226\134\146 (R : (_, _) -> Bool)(x, y)) \226\134\146 (\226\136\128 x : _, \226\136\128 y : _, (P : (_) -> Bool)(x) && P(y) && Q(x, y) \226\134\146 R(x, y))
+  (x : Cart[Real, N]) - (a : Cart[Real, N]) == -a + x
+  (k : Num)
+  (j : (Cart[Real, N]) -> Bool)
+  (i : (Cart[Real, N]) -> Bool)
+  IMAGE((x : Cart[Real, N]) => x - op_pct((a : Real), basis((k : Num))), (t : (Cart[Real, N]) -> Bool))
+  (s : (Cart[Real, N]) -> Bool)
+  IMAGE(IMAGE((x : Cart[Real, N]) => x - op_pct((a : Real), basis((k : Num)))), (d2 : ((Cart[Real, N]) -> Bool) -> Bool))
+  (d1 : ((Cart[Real, N]) -> Bool) -> Bool)
+  abs((x : Real)) <= (b : Real) \226\134\146 x <= b
+  (u : Real) <= real_of_num(1) \226\134\146 (x : Real) == real_of_num(1) \226\134\146 u <= x
+  abs((x : Real)) <= (b : Real) \226\134\146 -b <= x
+  {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) == -(b : Real)}
+  real_of_num(0) <= (u : Real) \226\134\146 (x : Real) == real_of_num(0) \226\134\146 x <= u
+  \226\136\131 a : Real, IN(a, real_interval([(-(b : Real), b)])) && measure(INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= a})) / measure(t) == (u : Real)
+  bounded((t : (Cart[Real, N]) -> Bool))
+  \226\136\131 b : Real, real_of_num(0) < b && (\226\136\128 x : Cart[Real, N], IN(x, (t : (Cart[Real, N]) -> Bool)) \226\134\146 abs(op_dollar(x, (k : Num))) <= b)
+  (u : Real)
+  (u : Real)
+  measure(INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)})) / measure(s)
+  real_of_num(0) <= measure(INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)})) / measure(s) && measure(INTER(s, {(x : Cart[Real, N]) | op_dollar(x, k) <= real_of_num(0)})) / measure(s) <= real_of_num(1)
+  \226\136\131 a : Real, measure(INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= a})) / measure(t) == measure(INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, k) <= real_of_num(0)})) / measure(s)
+  real_of_num(0) < measure((s : (Cart[Real, N]) -> Bool)) && real_of_num(0) < measure((t : (Cart[Real, N]) -> Bool))
+  \226\136\128 d1 : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 d2 : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 i : (Cart[Real, N]) -> Bool, \226\136\128 j : (Cart[Real, N]) -> Bool, \226\136\128 k : Num, (CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)(d1) + (CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)(d2) == (n : Num) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && !(i == j) && (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(i, d1) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(i, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) <= real_of_num(0)}) && !(negligible : ((Cart[Real, N]) -> Bool) -> Bool)(i) && (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(j, d1) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(j, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) >= real_of_num(0)}) && !(negligible : ((Cart[Real, N]) -> Bool) -> Bool)(j) && (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(t, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) <= real_of_num(0)})) / (measure : ((Cart[Real, N]) -> Bool) -> Real)(t) == (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) <= real_of_num(0)})) / (measure : ((Cart[Real, N]) -> Bool) -> Real)(s) && (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(t, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) >= real_of_num(0)})) / (measure : ((Cart[Real, N]) -> Bool) -> Real)(t) == (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) >= real_of_num(0)})) / (measure : ((Cart[Real, N]) -> Bool) -> Real)(s) && !(s == ({} : (Cart[Real, N]) -> Bool)) && !(t == ({} : (Cart[Real, N]) -> Bool)) && !(negligible : ((Cart[Real, N]) -> Bool) -> Bool)(s) && !(negligible : ((Cart[Real, N]) -> Bool) -> Bool)(t) && (division_of : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(d1, s) && (division_of : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(d2, t) \226\134\146 root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)({(x : Cart[Real, N]) + (y : Cart[Real, N]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, s) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(y, t)})) >= root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)(s)) + root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)(t))
+  {(a : Cart[Real, N]) + ((x : Cart[Real, N]) + (y : Cart[Real, N])) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, (t : (Cart[Real, N]) -> Bool))} == IMAGE((z : Cart[Real, N]) => a + z, {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s) && IN(y, t)})
+  {(f : (_, _) -> _)((x : _), (y : _)) | IN(x, IMAGE((g : (_) -> _), (s : (_) -> Bool))) && IN(y, (t : (_) -> Bool))} == {f(g((x : _)), (y : _)) | IN(x, s) && IN(y, t)}
+  (x : Cart[Real, N]) - (a : Cart[Real, N]) == -a + x
+  (a : Real) == (a' : Real) && (b : Real) == (b' : Real) \226\134\146 a >= b + (c : Real) \226\134\146 a' >= b' + c
+  (x : Cart[Real, N]) - (a : Cart[Real, N]) == -a + x
+  (x : Cart[Real, N]) - (a : Cart[Real, N]) == -a + x
+  (x : Cart[Real, N]) - (a : Cart[Real, N]) == -a + x
+  (x : Cart[Real, N]) - (a : Cart[Real, N]) == -a + x
+  ((x : Cart[Real, N]) - (a : Cart[Real, N]) == (y : Cart[Real, N]) - a) == (x == y)
+  (\226\136\128 x : _, \226\136\128 y : _, (f : (_) -> _)(x) == f(y) \226\134\146 x == y) && !((s : (_) -> Bool) == (t : (_) -> Bool)) \226\134\146 !(IMAGE(f, s) == IMAGE(f, t))
+  (\226\136\128 x : _, \226\136\128 y : _, (Q : (_, _) -> Bool)(x, y) \226\134\146 (R : (_, _) -> Bool)(x, y)) \226\134\146 (\226\136\128 x : _, \226\136\128 y : _, (P : (_) -> Bool)(x) && P(y) && Q(x, y) \226\134\146 R(x, y))
+  (k : Num)
+  IMAGE((x : Cart[Real, N]) => x - op_pct((a : Real), basis((k : Num))), (i : (Cart[Real, N]) -> Bool))
+  IMAGE((x : Cart[Real, N]) => x - op_pct((a : Real), basis((k : Num))), (j : (Cart[Real, N]) -> Bool))
+  (k : Num)
+  IMAGE((x : Cart[Real, N]) => x - op_pct((a : Real), basis((k : Num))), (j : (Cart[Real, N]) -> Bool))
+  IMAGE((x : Cart[Real, N]) => x - op_pct((a : Real), basis((k : Num))), (i : (Cart[Real, N]) -> Bool))
+  (t : (Cart[Real, N]) -> Bool)
+  IMAGE((x : Cart[Real, N]) => x - op_pct((a : Real), basis((k : Num))), (s : (Cart[Real, N]) -> Bool))
+  (d2 : ((Cart[Real, N]) -> Bool) -> Bool)
+  IMAGE(IMAGE((x : Cart[Real, N]) => x - op_pct((a : Real), basis((k : Num)))), (d1 : ((Cart[Real, N]) -> Bool) -> Bool))
+  \226\136\128 i : (Cart[Real, N]) -> Bool, IN(i, (d1 : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 !(interior(i) == {})
+  min((v : Real), (z : Real)) <= (a : Real) && a <= max((u : Real), (w : Real)) \226\134\146 u < v && w < z \226\134\146 u <= a && v <= a && a <= w && a <= z || w <= a && z <= a && a <= u && a <= v
+  (a : Real)
+  (k : Num) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+  1 <= (k : Num)
+  (k : Num)
+  \226\136\131 u : Cart[Real, N], \226\136\131 v : Cart[Real, N], \226\136\131 w : Cart[Real, N], \226\136\131 z : Cart[Real, N], (i : (Cart[Real, N]) -> Bool) == interval([(u, v)]) && (j : (Cart[Real, N]) -> Bool) == interval([(w, z)])
+  (j : (Cart[Real, N]) -> Bool)
+  (i : (Cart[Real, N]) -> Bool)
+  division_of((d1 : ((Cart[Real, N]) -> Bool) -> Bool), (s : (Cart[Real, N]) -> Bool))
+  ((p : Bool) && (q : Bool) && (r : Bool)) == (r && p && q)
+  (j : (Cart[Real, N]) -> Bool)
+  (i : (Cart[Real, N]) -> Bool)
+  \226\136\131 d : ((Cart[Real, N]) -> Bool) -> Bool, SUBSET(d, (d1 : ((Cart[Real, N]) -> Bool) -> Bool)) && HAS_SIZE(d, 2)
+  !((a : Bool) && (b : Bool)) == (a \226\134\146 !b)
+  UNION({(x : _) | IN(x, (s : (_) -> Bool)) && !(Q : (_) -> Bool)(x)}, {(x : _) | IN(x, s) && Q(x)}) == s
+  UNION((s' : (_) -> Bool), (s'' : (_) -> Bool)) == (s : (_) -> Bool) \226\134\146 SUBSET(UNION(DIFF(s', s), DIFF(s, s')), s'')
+  UNIONS({(i : (Cart[Real, N]) -> Bool) | IN(i, (d1 : ((Cart[Real, N]) -> Bool) -> Bool)) && interior(i) == {}})
+  (s : (Cart[Real, N]) -> Bool) == UNIONS((d1 : ((Cart[Real, N]) -> Bool) -> Bool))
+  SUBSET((s' : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 SUBSET({(f : (_, _) -> _)((x : _), (y : _)) | IN(x, s') && IN(y, (t : (_) -> Bool))}, {f((x : _), (y : _)) | IN(x, s) && IN(y, t)})
+  (c' : Real) <= (c : Real) && (a' : Real) == (a : Real) \226\134\146 c' >= a' + (b : Real) \226\134\146 c >= a + b
+  (d1 : ((Cart[Real, N]) -> Bool) -> Bool)
+  UNION({(x : _) | IN(x, (s : (_) -> Bool)) && !(Q : (_) -> Bool)(x)}, {(x : _) | IN(x, s) && Q(x)}) == s
+  negligible(UNION(UNIONS({(i : (Cart[Real, N]) -> Bool) | IN(i, (d1 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(interior(i) == {})}), UNIONS({(i : (Cart[Real, N]) -> Bool) | IN(i, d1) && interior(i) == {}})))
+  (t : (Cart[Real, N]) -> Bool)
+  UNIONS({(i : (Cart[Real, N]) -> Bool) | IN(i, (d1 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(interior(i) == {})})
+  (d2 : ((Cart[Real, N]) -> Bool) -> Bool)
+  {(i : (Cart[Real, N]) -> Bool) | IN(i, (d1 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(interior(i) == {})}
+  \226\136\131 i : (Cart[Real, N]) -> Bool, IN(i, (d1 : ((Cart[Real, N]) -> Bool) -> Bool)) && interior(i) == {}
+  \226\136\128 d1 : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 d2 : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 i : (Cart[Real, N]) -> Bool, \226\136\128 j : (Cart[Real, N]) -> Bool, \226\136\128 k : Num, (CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)(d1) + (CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)(d2) == (n : Num) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && !(i == j) && (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(i, d1) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(i, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) <= real_of_num(0)}) && (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(j, d1) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(j, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) >= real_of_num(0)}) && !(negligible : ((Cart[Real, N]) -> Bool) -> Bool)(i) && !(negligible : ((Cart[Real, N]) -> Bool) -> Bool)(j) && !(s == ({} : (Cart[Real, N]) -> Bool)) && !(t == ({} : (Cart[Real, N]) -> Bool)) && !(negligible : ((Cart[Real, N]) -> Bool) -> Bool)(s) && !(negligible : ((Cart[Real, N]) -> Bool) -> Bool)(t) && (division_of : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(d1, s) && (division_of : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(d2, t) \226\134\146 root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)({(x : Cart[Real, N]) + (y : Cart[Real, N]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, s) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(y, t)})) >= root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)(s)) + root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)(t))
+  measure(IMAGE((x : Cart[Real, N]) => (a : Cart[Real, N]) + x, (t : (Cart[Real, N]) -> Bool)))
+  \226\136\131 a : Cart[Real, N], IN(a, (s : (Cart[Real, N]) -> Bool))
+  measure((s : (Cart[Real, N]) -> Bool)) == real_of_num(0)
+  (v : (Cart[Real, N]) -> Bool)
+  (u : (Cart[Real, N]) -> Bool)
+  HAS_SIZE((d1 : ((Cart[Real, N]) -> Bool) -> Bool), 1) && HAS_SIZE((d2 : ((Cart[Real, N]) -> Bool) -> Bool), 1)
+  (d2 : ((Cart[Real, N]) -> Bool) -> Bool) == {}
+  (d1 : ((Cart[Real, N]) -> Bool) -> Bool) == {}
+  !(2 <= (n : Num)) == (n == 0 || n == 1)
+  FINITE((d1 : ((Cart[Real, N]) -> Bool) -> Bool)) && FINITE((d2 : ((Cart[Real, N]) -> Bool) -> Bool))
+  (x : Real) == (y : Real) \226\134\146 x >= (a : Real) + (b : Real) \226\134\146 y >= b + a
+  (\226\136\128 d : (_) -> Bool, \226\136\128 d' : (_) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 s' : (Cart[Real, _]) -> Bool, (P : ((_) -> Bool, (_) -> Bool, (Cart[Real, _]) -> Bool, (Cart[Real, _]) -> Bool) -> Bool)(d, d', s, s') \226\134\146 P(d', d, s', s)) && (\226\136\128 d : (_) -> Bool, \226\136\128 d' : (_) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 s' : (Cart[Real, _]) -> Bool, !(2 <= CARD(d)) && !(2 <= CARD(d')) \226\134\146 P(d, d', s, s')) && (\226\136\128 d : (_) -> Bool, \226\136\128 d' : (_) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 s' : (Cart[Real, _]) -> Bool, negligible(s) \226\134\146 P(d, d', s, s')) && (\226\136\128 d : (_) -> Bool, \226\136\128 d' : (_) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 s' : (Cart[Real, _]) -> Bool, 2 <= CARD(d) && !negligible(s) && !negligible(s') \226\134\146 P(d, d', s, s')) \226\134\146 (\226\136\128 d : (_) -> Bool, \226\136\128 d' : (_) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 s' : (Cart[Real, _]) -> Bool, P(d, d', s, s'))
+  (\226\136\128 m : Num, m < (n : Num) \226\134\146 (\226\136\128 a : _, \226\136\128 b : _, \226\136\128 c : _, \226\136\128 d : _, (f : (_, _) -> Num)(a, b) == m && (stuff : (_, _, _, _) -> Bool)(a, b, c, d) \226\134\146 (other : (_, _, _, _) -> Bool)(a, b, c, d))) == (\226\136\128 a : _, \226\136\128 b : _, \226\136\128 c : _, \226\136\128 d : _, f(a, b) < n && stuff(a, b, c, d) \226\134\146 other(a, b, c, d))
+  (n : Num)
+  (n : Num)
+  (d1 : ((Cart[Real, N]) -> Bool) -> Bool)
+  (d2 : ((Cart[Real, N]) -> Bool) -> Bool)
+  (s : (Cart[Real, N]) -> Bool)
+  (t : (Cart[Real, N]) -> Bool)
+  CARD((d1 : ((Cart[Real, N]) -> Bool) -> Bool)) + CARD((d2 : ((Cart[Real, N]) -> Bool) -> Bool))
+  (n : Num)
+  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (q && p && r \226\134\146 s)
+  {(f : (_, _) -> _)(x, y) | x : _, y : _ | false} == {}
+  (t : (Cart[Real, N]) -> Bool) == {}
+  (d2 : ((Cart[Real, N]) -> Bool) -> Bool)
+  (d1 : ((Cart[Real, N]) -> Bool) -> Bool)
+  (t : (Cart[Real, N]) -> Bool)
+  (s : (Cart[Real, N]) -> Bool)
+  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (s == ({} : (Cart[Real, N]) -> Bool)) == (t == ({} : (Cart[Real, N]) -> Bool)) && (\226\136\131 d : ((Cart[Real, N]) -> Bool) -> Bool, (division_of : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(d, s)) && (\226\136\131 d : ((Cart[Real, N]) -> Bool) -> Bool, (division_of : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(d, t)) \226\134\146 root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)({(x : Cart[Real, N]) + (y : Cart[Real, N]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, s) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(y, t)})) >= root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)(s)) + root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)(t))
+  interval([((w : Cart[Real, N]), (z : Cart[Real, N]))])
+  interval([((u : Cart[Real, N]), (v : Cart[Real, N]))])
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k >= &0}
-  UNIONS dr :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
+  UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dr:(real^N->bool)->bool
-  t INTER {x:real^N | x$k <= &0}
-  UNIONS dl :real^N->bool
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool)
+  INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)})
+  UNIONS((dl : ((Cart[Real, N]) -> Bool) -> Bool))
   {l INTER {x:real^N | x$k <= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k <= &0} = {})}
-  dl:(real^N->bool)->bool
-  measurable {x + y :real^N | x IN UNIONS D /\\ y IN UNIONS E}
-  s1 <= r1 /\\ s2 <= r2 /\\ rs <= s\n      ==> rs >= r1 + r2 ==> s1 + s2 <= s
-  e < s ==> ~(s - e < &0)
-  UNIONS E:real^N->bool
-  UNIONS D:real^N->bool
-  E:(real^N->bool)->bool
-  D:(real^N->bool)->bool
-  e:real
-  s:real^N->bool
-  e:real
-  t:real^N->bool
-  &0 <= e
-  e:real
-  min (measure(s:real^N->bool)) (measure(t:real^N->bool))
-  &1
-  (\\x. x rpow y) o (\\e. s - e)
-  measure(s:real^N->bool) = measure s - &0
-  min (measure(s:real^N->bool)) (measure(t:real^N->bool))
-  \\e. (measure(s:real^N->bool) - e) rpow (inv(&(dimindex(:N)))) +\n          (measure(t:real^N->bool) - e) rpow (inv(&(dimindex(:N))))
-  \\e. root (dimindex(:N)) (measure(s:real^N->bool) - e) +\n                  root (dimindex(:N)) (measure(t:real^N->bool) - e)
-  atreal(&0) within {e | &0 <= e}
-  {x + y:real^N | x IN {} /\\ y IN {}} = {}
-  t:real^N->bool = {}
-  forall s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ bounded s /\\ open s /\\ bounded t /\\ open t\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)
-  s' SUBSET s /\\ t' SUBSET t\n    ==> {x + y:real^N | x IN s' /\\ y IN t'} SUBSET\n        {x + y | x IN s /\\ y IN t}
-  root (dimindex (:N))\n          (measure {x + y:real^N | x IN interior s /\\ y IN interior t})
-  measure(IMAGE (\\x:real^N. a + x) s)
-  ?a:real^N. a IN t
-  interior t:real^N->bool = {}
-  measure(IMAGE (\\x:real^N. a + x) t)
-  ?a:real^N. a IN s
-  interior s:real^N->bool = {}
-  t:real^N->bool = {}
-  forall s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ bounded s /\\ convex s /\\ bounded t /\\ convex t\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)
-  vec 0:real^N
-  x:real^N
-  n:num
-  inv(&n + &1) <= inv(&n)
-  dist(y + e:real^N,y) = norm e
+  (dl : ((Cart[Real, N]) -> Bool) -> Bool)
+  measurable({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, UNIONS((D : ((Cart[Real, N]) -> Bool) -> Bool))) && IN(y, UNIONS((E : ((Cart[Real, N]) -> Bool) -> Bool)))})
+  (s1 : Real) <= (r1 : Real) && (s2 : Real) <= (r2 : Real) && (rs : Real) <= (s : Real) \226\134\146 rs >= r1 + r2 \226\134\146 s1 + s2 <= s
+  (e : Real) < (s : Real) \226\134\146 !(s - e < real_of_num(0))
+  UNIONS((E : ((Cart[Real, N]) -> Bool) -> Bool))
+  UNIONS((D : ((Cart[Real, N]) -> Bool) -> Bool))
+  (E : ((Cart[Real, N]) -> Bool) -> Bool)
+  (D : ((Cart[Real, N]) -> Bool) -> Bool)
+  (e : Real)
+  (s : (Cart[Real, N]) -> Bool)
+  (e : Real)
+  (t : (Cart[Real, N]) -> Bool)
+  real_of_num(0) <= (e : Real)
+  (e : Real)
+  min(measure((s : (Cart[Real, N]) -> Bool)), measure((t : (Cart[Real, N]) -> Bool)))
+  real_of_num(1)
+  o((x : Real) => rpow(x, (y : Real)), (e : Real) => (s : Real) - e)
+  measure((s : (Cart[Real, N]) -> Bool)) == measure(s) - real_of_num(0)
+  min(measure((s : (Cart[Real, N]) -> Bool)), measure((t : (Cart[Real, N]) -> Bool)))
+  (e : Real) => rpow((measure : ((Cart[Real, N]) -> Bool) -> Real)((s : (Cart[Real, N]) -> Bool)) - e, inv(real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))) + rpow((measure : ((Cart[Real, N]) -> Bool) -> Real)((t : (Cart[Real, N]) -> Bool)) - e, inv(real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))))
+  (e : Real) => root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((s : (Cart[Real, N]) -> Bool)) - e) + root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((t : (Cart[Real, N]) -> Bool)) - e)
+  within(atreal(real_of_num(0)), {(e : Real) | real_of_num(0) <= e})
+  {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, {}) && IN(y, {})} == {}
+  (t : (Cart[Real, N]) -> Bool) == {}
+  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (s == ({} : (Cart[Real, N]) -> Bool)) == (t == ({} : (Cart[Real, N]) -> Bool)) && (bounded : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (open : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (bounded : ((Cart[Real, N]) -> Bool) -> Bool)(t) && (open : ((Cart[Real, N]) -> Bool) -> Bool)(t) \226\134\146 root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)({(x : Cart[Real, N]) + (y : Cart[Real, N]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, s) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(y, t)})) >= root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)(s)) + root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)(t))
+  SUBSET((s' : (Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool)) && SUBSET((t' : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)) \226\134\146 SUBSET({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s') && IN(y, t')}, {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s) && IN(y, t)})
+  root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)({(x : Cart[Real, N]) + (y : Cart[Real, N]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interior : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((s : (Cart[Real, N]) -> Bool))) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(y, (interior : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((t : (Cart[Real, N]) -> Bool)))}))
+  measure(IMAGE((x : Cart[Real, N]) => (a : Cart[Real, N]) + x, (s : (Cart[Real, N]) -> Bool)))
+  \226\136\131 a : Cart[Real, N], IN(a, (t : (Cart[Real, N]) -> Bool))
+  interior((t : (Cart[Real, N]) -> Bool)) == {}
+  measure(IMAGE((x : Cart[Real, N]) => (a : Cart[Real, N]) + x, (t : (Cart[Real, N]) -> Bool)))
+  \226\136\131 a : Cart[Real, N], IN(a, (s : (Cart[Real, N]) -> Bool))
+  interior((s : (Cart[Real, N]) -> Bool)) == {}
+  (t : (Cart[Real, N]) -> Bool) == {}
+  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (s == ({} : (Cart[Real, N]) -> Bool)) == (t == ({} : (Cart[Real, N]) -> Bool)) && (bounded : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (convex : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (bounded : ((Cart[Real, N]) -> Bool) -> Bool)(t) && (convex : ((Cart[Real, N]) -> Bool) -> Bool)(t) \226\134\146 root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)({(x : Cart[Real, N]) + (y : Cart[Real, N]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, s) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(y, t)})) >= root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)(s)) + root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)(t))
+  (vec : (Num) -> Cart[Real, N])(0)
+  (x : Cart[Real, N])
+  (n : Num)
+  inv(real_of_num((n : Num)) + real_of_num(1)) <= inv(real_of_num(n))
+  dist(((y : Cart[Real, N]) + (e : Cart[Real, N]), y)) == norm(e)
   :real
   :real
-  y:real^N
-  e:real^N
-  y:real^N
-  n:num
-  n:num
-  d:real
-  x:real^N
-  s:real^N->bool
-  (x:real^N) IN s
-  x:real^N
+  (y : Cart[Real, N])
+  (e : Cart[Real, N])
+  (y : Cart[Real, N])
+  (n : Num)
+  (n : Num)
+  (d : Real)
+  (x : Cart[Real, N])
+  (s : (Cart[Real, N]) -> Bool)
+  IN((x : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+  (x : Cart[Real, N])
   forall s:real^N->bool.\n        closed s\n        ==> INTERS {{x + d | x IN s /\\ d IN ball(vec 0,inv(&n + &1))} |\n                    n IN (:num)} = s
-  t' SUBSET t\n      ==> {x + y:real^N | x IN s /\\ y IN t'} SUBSET\n          {x + y | x IN s /\\ y IN t}
-  vec 0:real^N
-  x:real^N
-  x:real^N
-  m <= m1 /\\ m1 <= m2\n    ==> abs(m2 - m) < e ==> abs(m1 - m) < e
-  N:num
-  abs d = d
-  d:real
-  inv(&N + &1)
-  N:num
-  e:real
-  e:real
-  t' SUBSET t\n      ==> {x + y:real^N | x IN s /\\ y IN t'} SUBSET\n          {x + y | x IN s /\\ y IN t}
-  \\n. {x + d:real^N | x IN s /\\ d IN ball(vec 0,inv(&n + &1))}
-  forall s:real^N->bool.\n        compact s\n        ==> ((\\e. measure {x + d | x IN s /\\ d IN ball(vec 0,e)})\n             ---> measure s)\n            (atreal (&0) within {e | &0 <= e})
-  inv(&2) % d:real^N
-  y:real^N
-  x:real^N
-  y + inv(&2) % d:real^N
-  x + inv(&2) % d:real^N
-  d:real^N
-  y:real^N
-  x:real^N
-  y:real^N
-  x:real^N
-  norm(d:real^N) < e /\\ norm(k) < e ==> norm(d + k) < &2 * e
+  SUBSET((t' : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)) \226\134\146 SUBSET({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, t')}, {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s) && IN(y, t)})
+  (vec : (Num) -> Cart[Real, N])(0)
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  (m : Real) <= (m1 : Real) && m1 <= (m2 : Real) \226\134\146 abs(m2 - m) < (e : Real) \226\134\146 abs(m1 - m) < e
+  (N : Num)
+  abs((d : Real)) == d
+  (d : Real)
+  inv(real_of_num((N : Num)) + real_of_num(1))
+  (N : Num)
+  (e : Real)
+  (e : Real)
+  SUBSET((t' : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)) \226\134\146 SUBSET({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, t')}, {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s) && IN(y, t)})
+  (n : Num) => {(x : Cart[Real, N]) + (d : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(d, ball((vec(0), inv(real_of_num(n) + real_of_num(1)))))}
+  \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) \226\134\146 op_minus_minus_minus_gt((e : Real) => measure({(x : Cart[Real, N]) + (d : Cart[Real, N]) | IN(x, s) && IN(d, ball((vec(0), e)))}), measure(s), within(atreal(real_of_num(0)), {(e : Real) | real_of_num(0) <= e}))
+  op_pct(inv(real_of_num(2)), (d : Cart[Real, N]))
+  (y : Cart[Real, N])
+  (x : Cart[Real, N])
+  (y : Cart[Real, N]) + op_pct(inv(real_of_num(2)), (d : Cart[Real, N]))
+  (x : Cart[Real, N]) + op_pct(inv(real_of_num(2)), (d : Cart[Real, N]))
+  (d : Cart[Real, N])
+  (y : Cart[Real, N])
+  (x : Cart[Real, N])
+  (y : Cart[Real, N])
+  (x : Cart[Real, N])
+  norm((d : Cart[Real, N])) < (e : Real) && norm((k : Cart[Real, N])) < e \226\134\146 norm(d + k) < real_of_num(2) * e
   :real
   :real
-  d + k:real^N
-  x + y:real^N
-  k:real^N
-  y:real^N
-  d:real^N
-  x:real^N
-  { x + y:real^N | x IN {x + d | x IN s /\\ d IN ball(vec 0,e)} /\\\n                      y IN {y + d | y IN t /\\ d IN ball(vec 0,e)}} =\n     { z + d | z IN {x + y | x IN s /\\ y IN t} /\\ d IN ball(vec 0,&2 * e) }
-  d / &2
-  d:real
-  e:real
-  e:real
-  (f ---> l) (atreal (&0) within {e | &0 <= e})\n     ==> ((\\e. f(&2 * e)) ---> l) (atreal (&0) within {e | &0 <= e})
-  e:real
-  &1
-  \\e. root (dimindex(:N))\n             (measure { x + y:real^N |\n                   x IN {x + d | x IN s /\\ d IN ball(vec 0,e)} /\\\n                   y IN {y + d | y IN t /\\ d IN ball(vec 0,e)}})
-  \\e. root (dimindex(:N))\n             (measure {x + d:real^N | x IN s /\\ d IN ball(vec 0,e)}) +\n        root (dimindex(:N))\n             (measure {x + d:real^N | x IN t /\\ d IN ball(vec 0,e)})
-  atreal (&0) within {e | &0 <= e}
-  t:real^N->bool = {}
-  forall s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ compact s /\\ compact t\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)
-  s1 <= r1 /\\ s2 <= r2 /\\ rs <= s\n      ==> rs >= r1 + r2 ==> s1 + s2 <= s
-  e < s ==> ~(s - e < &0)
-  t':real^N->bool
-  s':real^N->bool
-  t':real^N->bool
-  s':real^N->bool
-  e:real
-  s:real^N->bool
-  e:real
-  t:real^N->bool
-  &0 <= e
-  e:real
-  min (measure(s:real^N->bool)) (measure(t:real^N->bool))
-  &1
-  (\\x. x rpow y) o (\\e. s - e)
-  measure(s:real^N->bool) = measure s - &0
-  min (measure(s:real^N->bool)) (measure(t:real^N->bool))
-  \\e. (measure(s:real^N->bool) - e) rpow (inv(&(dimindex(:N)))) +\n          (measure(t:real^N->bool) - e) rpow (inv(&(dimindex(:N))))
-  \\e. root (dimindex(:N)) (measure(s:real^N->bool) - e) +\n                  root (dimindex(:N)) (measure(t:real^N->bool) - e)
-  atreal(&0) within {e | &0 <= e}
-  &0 < measure(s:real^N->bool) /\\\n    &0 < measure(t:real^N->bool)
-  measure(IMAGE (\\x:real^N. a + x) s)
-  ?a:real^N. a IN t
-  measure(t:real^N->bool) = &0
-  measure(IMAGE (\\x:real^N. a + x) t)
-  ?a:real^N. a IN s
-  measure(s:real^N->bool) = &0
-  t:real^N->bool = {}
-  forall s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ measurable s /\\ measurable t /\\\n    measurable {x + y | x IN s /\\ y IN t}\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)
+  (d : Cart[Real, N]) + (k : Cart[Real, N])
+  (x : Cart[Real, N]) + (y : Cart[Real, N])
+  (k : Cart[Real, N])
+  (y : Cart[Real, N])
+  (d : Cart[Real, N])
+  (x : Cart[Real, N])
+  {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, {(x : Cart[Real, N]) + (d : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(d, ball((vec(0), (e : Real))))}) && IN(y, {(y : Cart[Real, N]) + (d : Cart[Real, N]) | IN(y, (t : (Cart[Real, N]) -> Bool)) && IN(d, ball((vec(0), e)))})} == {(z : Cart[Real, N]) + (d : Cart[Real, N]) | IN(z, {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s) && IN(y, t)}) && IN(d, ball((vec(0), real_of_num(2) * e)))}
+  (d : Real) / real_of_num(2)
+  (d : Real)
+  (e : Real)
+  (e : Real)
+  op_minus_minus_minus_gt((f : (Real) -> Real), (l : Real), within(atreal(real_of_num(0)), {(e : Real) | real_of_num(0) <= e})) \226\134\146 op_minus_minus_minus_gt((e : Real) => f(real_of_num(2) * e), l, within(atreal(real_of_num(0)), {(e : Real) | real_of_num(0) <= e}))
+  (e : Real)
+  real_of_num(1)
+  (e : Real) => root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)({(x : Cart[Real, N]) + (y : Cart[Real, N]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, {(x : Cart[Real, N]) + (d : Cart[Real, N]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (s : (Cart[Real, N]) -> Bool)) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(d, (ball : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), e)))}) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(y, {(y : Cart[Real, N]) + (d : Cart[Real, N]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(y, (t : (Cart[Real, N]) -> Bool)) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(d, (ball : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), e)))})}))
+  (e : Real) => root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)({(x : Cart[Real, N]) + (d : Cart[Real, N]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (s : (Cart[Real, N]) -> Bool)) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(d, (ball : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), e)))})) + root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)({(x : Cart[Real, N]) + (d : Cart[Real, N]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (t : (Cart[Real, N]) -> Bool)) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(d, (ball : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), e)))}))
+  within(atreal(real_of_num(0)), {(e : Real) | real_of_num(0) <= e})
+  (t : (Cart[Real, N]) -> Bool) == {}
+  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (s == ({} : (Cart[Real, N]) -> Bool)) == (t == ({} : (Cart[Real, N]) -> Bool)) && (compact : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (compact : ((Cart[Real, N]) -> Bool) -> Bool)(t) \226\134\146 root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)({(x : Cart[Real, N]) + (y : Cart[Real, N]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, s) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(y, t)})) >= root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)(s)) + root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)(t))
+  (s1 : Real) <= (r1 : Real) && (s2 : Real) <= (r2 : Real) && (rs : Real) <= (s : Real) \226\134\146 rs >= r1 + r2 \226\134\146 s1 + s2 <= s
+  (e : Real) < (s : Real) \226\134\146 !(s - e < real_of_num(0))
+  (t' : (Cart[Real, N]) -> Bool)
+  (s' : (Cart[Real, N]) -> Bool)
+  (t' : (Cart[Real, N]) -> Bool)
+  (s' : (Cart[Real, N]) -> Bool)
+  (e : Real)
+  (s : (Cart[Real, N]) -> Bool)
+  (e : Real)
+  (t : (Cart[Real, N]) -> Bool)
+  real_of_num(0) <= (e : Real)
+  (e : Real)
+  min(measure((s : (Cart[Real, N]) -> Bool)), measure((t : (Cart[Real, N]) -> Bool)))
+  real_of_num(1)
+  o((x : Real) => rpow(x, (y : Real)), (e : Real) => (s : Real) - e)
+  measure((s : (Cart[Real, N]) -> Bool)) == measure(s) - real_of_num(0)
+  min(measure((s : (Cart[Real, N]) -> Bool)), measure((t : (Cart[Real, N]) -> Bool)))
+  (e : Real) => rpow((measure : ((Cart[Real, N]) -> Bool) -> Real)((s : (Cart[Real, N]) -> Bool)) - e, inv(real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))) + rpow((measure : ((Cart[Real, N]) -> Bool) -> Real)((t : (Cart[Real, N]) -> Bool)) - e, inv(real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))))
+  (e : Real) => root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((s : (Cart[Real, N]) -> Bool)) - e) + root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)((t : (Cart[Real, N]) -> Bool)) - e)
+  within(atreal(real_of_num(0)), {(e : Real) | real_of_num(0) <= e})
+  real_of_num(0) < measure((s : (Cart[Real, N]) -> Bool)) && real_of_num(0) < measure((t : (Cart[Real, N]) -> Bool))
+  measure(IMAGE((x : Cart[Real, N]) => (a : Cart[Real, N]) + x, (s : (Cart[Real, N]) -> Bool)))
+  \226\136\131 a : Cart[Real, N], IN(a, (t : (Cart[Real, N]) -> Bool))
+  measure((t : (Cart[Real, N]) -> Bool)) == real_of_num(0)
+  measure(IMAGE((x : Cart[Real, N]) => (a : Cart[Real, N]) + x, (t : (Cart[Real, N]) -> Bool)))
+  \226\136\131 a : Cart[Real, N], IN(a, (s : (Cart[Real, N]) -> Bool))
+  measure((s : (Cart[Real, N]) -> Bool)) == real_of_num(0)
+  (t : (Cart[Real, N]) -> Bool) == {}
+  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (s == ({} : (Cart[Real, N]) -> Bool)) == (t == ({} : (Cart[Real, N]) -> Bool)) && (measurable : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (measurable : ((Cart[Real, N]) -> Bool) -> Bool)(t) && (measurable : ((Cart[Real, N]) -> Bool) -> Bool)({(x : Cart[Real, N]) + (y : Cart[Real, N]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, s) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(y, t)}) \226\134\146 root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)({(x : Cart[Real, N]) + (y : Cart[Real, N]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, s) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(y, t)})) >= root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)(s)) + root((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), (measure : ((Cart[Real, N]) -> Bool) -> Real)(t))
 BRUNN_MINKOWSKI_INTERVAL =  |- (#forall:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\b:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\c:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\d:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) b:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))) #EMPTY:fun(cart(real,'N),bool)))) (#~:fun(bool,bool) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) c:cart(real,'N)) d:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))) #EMPTY:fun(cart(real,'N),bool))))) ((#real_ge:fun(real,fun(real,bool)) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) (#GSPEC:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) (\GEN%PVAR%1:cart(real,'N). (#?:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#?:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). (((#SETSPEC:fun(cart(real,'N),fun(bool,fun(cart(real,'N),bool))) GEN%PVAR%1:cart(real,'N)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) b:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) y:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) c:cart(real,'N)) d:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))))) ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N)))))))))))) ((#real_add:fun(real,fun(real,real)) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) b:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))))) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) c:cart(real,'N)) d:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))))))))))))))
 BRUNN_MINKOWSKI_ELEMENTARY =  |- (#forall:fun(fun(fun(cart(real,'N),bool),bool),bool) (\s:fun(cart(real,'N),bool). (#forall:fun(fun(fun(cart(real,'N),bool),bool),bool) (\t:fun(cart(real,'N),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) s:fun(cart(real,'N),bool)) #EMPTY:fun(cart(real,'N),bool))) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) t:fun(cart(real,'N),bool)) #EMPTY:fun(cart(real,'N),bool)))) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun(fun(fun(cart(real,'N),bool),bool),bool),bool) (\d:fun(fun(cart(real,'N),bool),bool). ((#division_of:fun(fun(fun(cart(real,'N),bool),bool),fun(fun(cart(real,'N),bool),bool)) d:fun(fun(cart(real,'N),bool),bool)) s:fun(cart(real,'N),bool))))) (#?:fun(fun(fun(fun(cart(real,'N),bool),bool),bool),bool) (\d:fun(fun(cart(real,'N),bool),bool). ((#division_of:fun(fun(fun(cart(real,'N),bool),bool),fun(fun(cart(real,'N),bool),bool)) d:fun(fun(cart(real,'N),bool),bool)) t:fun(cart(real,'N),bool))))))) ((#real_ge:fun(real,fun(real,bool)) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) (#GSPEC:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) (\GEN%PVAR%2:cart(real,'N). (#?:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#?:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). (((#SETSPEC:fun(cart(real,'N),fun(bool,fun(cart(real,'N),bool))) GEN%PVAR%2:cart(real,'N)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) s:fun(cart(real,'N),bool))) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) y:cart(real,'N)) t:fun(cart(real,'N),bool)))) ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N)))))))))))) ((#real_add:fun(real,fun(real,real)) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) s:fun(cart(real,'N),bool)))) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) t:fun(cart(real,'N),bool))))))))))
 BRUNN_MINKOWSKI_OPEN =  |- (#forall:fun(fun(fun(cart(real,'N),bool),bool),bool) (\s:fun(cart(real,'N),bool). (#forall:fun(fun(fun(cart(real,'N),bool),bool),bool) (\t:fun(cart(real,'N),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) s:fun(cart(real,'N),bool)) #EMPTY:fun(cart(real,'N),bool))) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) t:fun(cart(real,'N),bool)) #EMPTY:fun(cart(real,'N),bool)))) ((#/\:fun(bool,fun(bool,bool)) (#bounded:fun(fun(cart(real,'N),bool),bool) s:fun(cart(real,'N),bool))) ((#/\:fun(bool,fun(bool,bool)) (#open:fun(fun(cart(real,'N),bool),bool) s:fun(cart(real,'N),bool))) ((#/\:fun(bool,fun(bool,bool)) (#bounded:fun(fun(cart(real,'N),bool),bool) t:fun(cart(real,'N),bool))) (#open:fun(fun(cart(real,'N),bool),bool) t:fun(cart(real,'N),bool))))))) ((#real_ge:fun(real,fun(real,bool)) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) (#GSPEC:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) (\GEN%PVAR%3:cart(real,'N). (#?:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#?:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). (((#SETSPEC:fun(cart(real,'N),fun(bool,fun(cart(real,'N),bool))) GEN%PVAR%3:cart(real,'N)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) s:fun(cart(real,'N),bool))) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) y:cart(real,'N)) t:fun(cart(real,'N),bool)))) ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N)))))))))))) ((#real_add:fun(real,fun(real,real)) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) s:fun(cart(real,'N),bool)))) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) t:fun(cart(real,'N),bool))))))))))
