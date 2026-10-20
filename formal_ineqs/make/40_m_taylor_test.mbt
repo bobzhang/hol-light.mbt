@@ -101,7 +101,7 @@ test "Formal_ineqs/taylor/m_taylor matches Formal_ineqs/taylor/m_taylor.ml" {
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|Formal_ineqs/taylor/m_taylor quotations (433):
-      #|  EL : num->(A)list->A
+      #|  (EL : (Num, List[A]) -> A)
       #|  0
       #|  0
       #|  0
@@ -111,17 +111,17 @@ test "Formal_ineqs/taylor/m_taylor matches Formal_ineqs/taylor/m_taylor.ml" {
       #|  0
       #|  0
       #|  0
-      #|  forall l i. i IN 1..dimindex (:N) ==>\n\t\t\t       (vector l:A^N)$i = EL (i - 1) l
-      #|  forall(P:A->B->bool) l1 l2. LENGTH l1 = LENGTH l2 ==> \n    (ALL2 P l1 l2 <=> ALL (\\p. P (FST p) (SND p)) (ZIP l1 l2))
-      #|  SUC n < SUC x <=> n < x
-      #|  forall(l1:(A)list) (l2:(B)list) i. LENGTH l1 = LENGTH l2 /\\ i < LENGTH l1 ==> \n    EL i (ZIP l1 l2) = (EL i l1, EL i l2)
-      #|  forall l1 l2. LENGTH l1 = LENGTH l2 ==> LENGTH (ZIP l1 l2) = LENGTH l1
-      #|  test_domain_xi xz yw <=> FST xz <= FST yw /\\ FST yw <= SND xz /\\ \n  FST yw - FST xz <= SND yw /\\ SND xz - FST yw <= SND yw
-      #|  j:num
-      #|  j < dimindex (:N)
-      #|  j = i - 1
-      #|  LENGTH (xz:(real#real)list) = dimindex (:N) /\\ LENGTH (yw:(real#real)list) = dimindex (:N)
-      #|  forall xz (yw:(real#real)list) x z y w.\n    LENGTH x = dimindex (:N) /\\ LENGTH z = dimindex (:N) /\\\n    LENGTH y = dimindex (:N) /\\ LENGTH w = dimindex (:N) /\\\n    ZIP y w = yw /\\ ZIP x z = xz /\\\n    ALL2 test_domain_xi xz yw ==>\n    m_cell_domain (vector x, vector z:real^N) (vector y) (vector w)
+      #|  \226\136\128 l : List[A], \226\136\128 i : Num, IN(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (op_dollar : (Cart[A, N], Num) -> A)((vector : (List[A]) -> Cart[A, N])(l), i) == EL(i - 1, l)
+      #|  \226\136\128 P : (A, B) -> Bool, \226\136\128 l1 : List[A], \226\136\128 l2 : List[B], LENGTH(l1) == LENGTH(l2) \226\134\146 ALL2(P, l1, l2) == ALL((p : (A, B)) => P(FST(p), SND(p)), ZIP(l1, l2))
+      #|  (SUC((n : Num)) < SUC((x : Num))) == (n < x)
+      #|  \226\136\128 l1 : List[A], \226\136\128 l2 : List[B], \226\136\128 i : Num, LENGTH(l1) == LENGTH(l2) && i < LENGTH(l1) \226\134\146 EL(i, ZIP(l1, l2)) == (EL(i, l1), EL(i, l2))
+      #|  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], LENGTH(l1) == LENGTH(l2) \226\134\146 LENGTH(ZIP(l1, l2)) == LENGTH(l1)
+      #|  (test_domain_xi : ((Real, Real), (Real, Real)) -> Bool)((xz : (Real, Real)), (yw : (Real, Real))) == (FST(xz) <= FST(yw) && FST(yw) <= SND(xz) && FST(yw) - FST(xz) <= SND(yw) && SND(xz) - FST(yw) <= SND(yw))
+      #|  (j : Num)
+      #|  (j : Num) < (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  (j : Num) == (i : Num) - 1
+      #|  LENGTH((xz : List[(Real, Real)])) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && LENGTH((yw : List[(Real, Real)])) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  \226\136\128 xz : List[(Real, Real)], \226\136\128 yw : List[(Real, Real)], \226\136\128 x : List[Real], \226\136\128 z : List[Real], \226\136\128 y : List[Real], \226\136\128 w : List[Real], LENGTH(x) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && LENGTH(z) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && LENGTH(y) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && LENGTH(w) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && ZIP(y, w) == yw && ZIP(x, z) == xz && ALL2(test_domain_xi, xz, yw) \226\134\146 (m_cell_domain : ((Cart[Real, N], Cart[Real, N]), Cart[Real, N], Cart[Real, N]) -> Bool)(((vector : (List[Real]) -> Cart[Real, N])(x), (vector : (List[Real]) -> Cart[Real, N])(z)), (vector : (List[Real]) -> Cart[Real, N])(y), (vector : (List[Real]) -> Cart[Real, N])(w))
       #|  :N
       #|  :N
       #|  :N
@@ -130,410 +130,410 @@ test "Formal_ineqs/taylor/m_taylor matches Formal_ineqs/taylor/m_taylor.ml" {
       #|  :N
       #|  :N
       #|  :N
-      #|  xz = (x,z) /\\ yw = (y,w) /\\\n    x <= y /\\ y <= z /\\ y - x <= w1 /\\ z - y <= w2 /\\ w1 <= w /\\ w2 <= w ==> test_domain_xi xz yw
-      #|  (\\x:real^N. f x pow n) = (\\t. t pow n) o f
-      #|  forall i f n (y:real^N). lift o f differentiable at y ==>\n\t\t\t  partial i (\\x. f x pow n) y = &n * f y pow (n - 1) * partial i f y
-      #|  (:real)
-      #|  \\x. &n * x pow (n - 1)
-      #|  (:real)
-      #|  forall n y. nth_diff_strong 2 (\\x. x pow n) y
-      #|  forall n. derivative (\\t. &n * t pow (n - 1)) = (\\t. &n * derivative (\\t. t pow (n - 1)) t)
-      #|  forall n. derivative (\\t. t pow n) = (\\t. &n * t pow (n - 1))
-      #|  (\\x:real^N. f x pow n) = (\\t. t pow n) o f
-      #|  forall f n (x:real^N). diff2c f x ==> diff2c (\\x. f x pow n) x
-      #|  forall f n domain. diff2c_domain domain f ==> \n\t\t\t       diff2c_domain domain (\\x. f x pow n)
-      #|  diff2c_domain domain
-      #|  (x:real^N, x:real^N)
-      #|  forall f. (forall domain. diff2c_domain domain f) ==> forall x:real^N. diff2c f x
-      #|  x:real^N
-      #|  x:real^N
-      #|  x:real^N, x:real^N
-      #|  forall f. (forall domain. diff2c_domain domain f) ==> forall x:real^N. lift o f differentiable at x
-      #|  IN
-      #|  i:num
-      #|  1 <= i /\\ i <= SUC n <=> (1 <= i /\\ i <= n) \\/ i = SUC n
-      #|  1 <= i /\\ i <= 1 <=> i = 1
-      #|  1 <= i
-      #|  1 <= i
-      #|  1 <= i
-      #|  1 <= i
-      #|  1 <= i
-      #|  1 <= i
-      #|  1 <= i
-      #|  (forall i:num. (i = k \\/ Q i) ==> P i) <=> (P k /\\ (forall i. Q i ==> P i))
-      #|  (forall i:num. (i = k ==> P i)) <=> P k
-      #|  1 <= i ==> (i + 1) - 1 = SUC (i - 1)
-      #|  t':(B)list
-      #|  forall(f:A->B->real) l1 l2. LENGTH l1 <= LENGTH l2 ==>\n\t\t\t       ITLIST2 (\\x y z. f x y + z) l1 l2 (&0) =\n\t\t\t       sum (1..(LENGTH l1)) (\\i. f (EL (i - 1) l1) (EL (i - 1) l2))
-      #|  forall x int y. interval_arith x int ==> iabs int <= y ==> abs x <= y
-      #|  SUC i0 - 1 < SUC i0
-      #|  SUC i0 - 1
-      #|  SUC i0
-      #|  t:(A)list
-      #|  t:(A)list
-      #|  forall P (l:(A)list) i0.\n\t\t\t (all_n i0 l P <=> if l = [] then T else ALL2 P (l_seq i0 ((i0 + LENGTH l) - 1)) l)
-      #|  i:num
-      #|  ((i0 + SUC a) - 1 + 1) - i0 = SUC a
-      #|  l:(A)list
-      #|  l:(A)list
-      #|  forall P (l:(A)list) i0. all_n i0 l P <=> (forall i. i < LENGTH l ==> P (i0 + i) (EL i l))
-      #|  1 + j - 1 = j /\\ 1 + i - 1 = i
-      #|  j - 1
-      #|  i - 1
-      #|  x:real^N
-      #|  j IN 1..dimindex (:N)
-      #|  1 + i - 1 = i /\\ 1 + i - 1 = i
-      #|  1 <= i /\\ i <= dimindex (:N)
-      #|  i - 1
-      #|  i - 1
-      #|  x:real^N
-      #|  i - 1
-      #|  LENGTH (EL (i - 1) dd_bounds_list:(real#real)list) = i
-      #|  s:real
-      #|  i:num
-      #|  forall i. i IN 1..dimindex (:N) ==> &0 <= EL (i - 1) w
-      #|  ITLIST2 _1 _2 _3 _4
-      #|  forall f domain y w dd_bounds_list error. \n\t     m_cell_domain domain y (vector w) ==>\n\t     diff2c_domain domain f ==>\n\t     second_bounded (f:real^N->real) domain dd_bounds_list ==>\n\t     LENGTH w = dimindex (:N) ==>\n\t\t LENGTH dd_bounds_list = dimindex (:N) ==>\n\t\t all_n 1 dd_bounds_list (\\i list. LENGTH list = i) ==>\n\t\t ITLIST2 (\\list x z. x * (x * iabs (LAST list)\n\t\t\t\t\t  + &2 * ITLIST2 (\\a b c. b * iabs a + c) (BUTLAST list) w (&0)) + z)\n\t\t dd_bounds_list w (&0) <= error ==>\n\t\t m_taylor_error f domain (vector w) error
-      #|  forall f domain y w f_lo f_hi d_bounds_list dd_bounds_list error. \n\t m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) d_bounds_list dd_bounds_list ==>\n\t LENGTH w = dimindex (:N) ==>\n\t     LENGTH dd_bounds_list = dimindex (:N) ==>\n\t     all_n 1 dd_bounds_list (\\i list. LENGTH list = i) ==>\n\t     ITLIST2 (\\list x z. x * (x * iabs (LAST list)\n\t\t\t\t      + &2 * ITLIST2 (\\a b c. b * iabs a + c) (BUTLAST list) w (&0)) + z)\n\t     dd_bounds_list w (&0) <= error ==>\n\t     m_taylor_error f domain (vector w) error
-      #|  1 + x - 1 = x
-      #|  x - 1
-      #|  x:num
-      #|  m_cell_domain domain (y:real^N) (vector w)
-      #|  s:real
-      #|  b + inv (&2) * error
-      #|  a:real
-      #|  f_hi:real
-      #|  f_lo:real
-      #|  error:real
-      #|  vector w:real^N
-      #|  y:real^N
-      #|  diff2c_domain domain (f:real^N->real)
-      #|  diff2_domain domain (f:real^N->real)
-      #|  ITLIST2 _1 _2 _3 _4
-      #|  m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) d_bounds_list dd_bounds_list /\\\n\t  m_taylor_error f domain (vector w) error /\\\n\t  ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t  b + inv(&2) * error <= a /\\\n\t  lo <= f_lo - a /\\\n\t  f_hi + a <= hi /\\\n\t  LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t      (forall x. x IN interval [domain] ==> interval_arith (f x) (lo, hi))
-      #|  lo:real
-      #|  f_lo - a:real
-      #|  m_taylor_interval f domain y (vector w) (f_lo, f_hi) \n\t\t\t\t    d_bounds_list dd_bounds_list /\\\n\t\t\t\t    m_taylor_error f domain (vector w:real^N) error /\\\n\t\t\t\t    ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t\t\t\t    b + inv(&2) * error <= a /\\\n\t\t\t\t    f_hi + a <= hi /\\\n\t\t\t\t    LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t\t\t\t\t(forall p. p IN interval [domain] ==> f p <= hi)
-      #|  hi:real
-      #|  f_hi + a:real
-      #|  m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) \n\t\t\t\t    d_bounds_list dd_bounds_list /\\\n\t\t\t\t    m_taylor_error f domain (vector w) error /\\\n\t\t\t\t    ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t\t\t\t    b + inv(&2) * error <= a /\\\n\t\t\t\t    lo <= f_lo - a /\\\n\t\t\t\t    LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t\t\t\t    (forall p. p IN interval [domain] ==> lo <= f p)
-      #|  diff2c_domain domain (f:real^N->real)
-      #|  forall i. 1 <= i ==> 1 + i - 1 = i
-      #|  1 <= j /\\ j <= n ==> j - 1 < n
-      #|  j - 1
-      #|  x:real^N
-      #|  j:num
-      #|  m_cell_domain domain (y:real^N) (vector w)
-      #|  s:real
-      #|  1 <= i ==> 1 + i - 1 = i
-      #|  1 <= i /\\ i <= n ==> i - 1 < n
-      #|  i - 1
-      #|  df_hi:real
-      #|  df_lo:real
-      #|  error:real
-      #|  vector w:real^N
-      #|  y:real^N
-      #|  diff2c_domain domain (f:real^N->real)
-      #|  diff2_domain domain (f:real^N->real)
-      #|  1 <= i /\\ i <= dimindex (:N)
-      #|  ITLIST2 _1 _2 _3 _4
-      #|  m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (forall x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  df_hi + error <= hi ==>\n\t  lo <= df_lo - error ==>\n\t  (forall x. x IN interval [domain] ==> interval_arith (partial i f x) (lo, hi))
-      #|  lo:real
-      #|  df_lo - error
-      #|  m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (forall x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  df_hi + error <= hi ==>\n\t  (forall x. x IN interval [domain] ==> partial i f x <= hi)
-      #|  hi:real
-      #|  df_hi + error
-      #|  m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (forall x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  lo <= df_lo - error ==>\n\t  (forall x. x IN interval [domain] ==> lo <= partial i f x)
-      #|  ((P ==> Q) /\\ (P ==> R)) <=> (P ==> Q /\\ R)
-      #|  dd_list : (real#real)list
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  j IN 1..dimindex (:N)
-      #|  j:num
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
-      #|  i:num
-      #|  df_lo:real, df_hi:real
+      #|  (xz : (Real, Real)) == ((x : Real), (z : Real)) && (yw : (Real, Real)) == ((y : Real), (w : Real)) && x <= y && y <= z && y - x <= (w1 : Real) && z - y <= (w2 : Real) && w1 <= w && w2 <= w \226\134\146 test_domain_xi(xz, yw)
+      #|  ((x : Cart[Real, N]) => pow((f : (Cart[Real, N]) -> Real)(x), (n : Num))) == o((t : Real) => pow(t, n), f)
+      #|  \226\136\128 i : Num, \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 n : Num, \226\136\128 y : Cart[Real, N], differentiable(o(lift, f), at(y)) \226\134\146 partial(i, (x : Cart[Real, N]) => pow(f(x), n), y) == real_of_num(n) * (pow(f(y), n - 1) * partial(i, f, y))
+      #|  (UNIV : (Real) -> Bool)
+      #|  (x : Real) => real_of_num((n : Num)) * pow(x, n - 1)
+      #|  (UNIV : (Real) -> Bool)
+      #|  \226\136\128 n : Num, \226\136\128 y : Real, nth_diff_strong(2, (x : Real) => pow(x, n), y)
+      #|  \226\136\128 n : Num, derivative((t : Real) => real_of_num(n) * pow(t, n - 1)) == ((t : Real) => real_of_num(n) * derivative((t : Real) => pow(t, n - 1), t))
+      #|  \226\136\128 n : Num, derivative((t : Real) => pow(t, n)) == ((t : Real) => real_of_num(n) * pow(t, n - 1))
+      #|  ((x : Cart[Real, N]) => pow((f : (Cart[Real, N]) -> Real)(x), (n : Num))) == o((t : Real) => pow(t, n), f)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 n : Num, \226\136\128 x : Cart[Real, N], diff2c(f, x) \226\134\146 diff2c((x : Cart[Real, N]) => pow(f(x), n), x)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 n : Num, \226\136\128 domain : (Cart[Real, _], Cart[Real, _]), diff2c_domain(domain, f) \226\134\146 diff2c_domain(domain, (x : Cart[Real, _]) => pow(f(x), n))
+      #|  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])))
+      #|  ((x : Cart[Real, N]), x)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, (\226\136\128 domain : (Cart[Real, N], Cart[Real, N]), diff2c_domain(domain, f)) \226\134\146 (\226\136\128 x : Cart[Real, N], diff2c(f, x))
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  ((x : Cart[Real, N]), x)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, (\226\136\128 domain : (Cart[Real, N], Cart[Real, N]), diff2c_domain(domain, f)) \226\134\146 (\226\136\128 x : Cart[Real, N], differentiable(o(lift, f), at(x)))
+      #|  (IN : (_, (_) -> Bool) -> Bool)
+      #|  (i : Num)
+      #|  (1 <= (i : Num) && i <= SUC((n : Num))) == (1 <= i && i <= n || i == SUC(n))
+      #|  (1 <= (i : Num) && i <= 1) == (i == 1)
+      #|  1 <= (i : Num)
+      #|  1 <= (i : Num)
+      #|  1 <= (i : Num)
+      #|  1 <= (i : Num)
+      #|  1 <= (i : Num)
+      #|  1 <= (i : Num)
+      #|  1 <= (i : Num)
+      #|  (\226\136\128 i : Num, i == (k : Num) || (Q : (Num) -> Bool)(i) \226\134\146 (P : (Num) -> Bool)(i)) == (P(k) && (\226\136\128 i : Num, Q(i) \226\134\146 P(i)))
+      #|  (\226\136\128 i : Num, i == (k : Num) \226\134\146 (P : (Num) -> Bool)(i)) == P(k)
+      #|  1 <= (i : Num) \226\134\146 i + 1 - 1 == SUC(i - 1)
+      #|  (t' : List[B])
+      #|  \226\136\128 f : (A, B) -> Real, \226\136\128 l1 : List[A], \226\136\128 l2 : List[B], LENGTH(l1) <= LENGTH(l2) \226\134\146 ITLIST2((x : A) => (y : B) => (z : Real) => f(x, y) + z, l1, l2, real_of_num(0)) == sum(op_dot_dot(1, LENGTH(l1)), (i : Num) => f(EL(i - 1, l1), EL(i - 1, l2)))
+      #|  \226\136\128 x : Real, \226\136\128 int : (Real, Real), \226\136\128 y : Real, interval_arith(x, int) \226\134\146 iabs(int) <= y \226\134\146 abs(x) <= y
+      #|  SUC((i0 : Num)) - 1 < SUC(i0)
+      #|  SUC((i0 : Num)) - 1
+      #|  SUC((i0 : Num))
+      #|  (t : List[A])
+      #|  (t : List[A])
+      #|  \226\136\128 P : (Num, A) -> Bool, \226\136\128 l : List[A], \226\136\128 i0 : Num, all_n(i0, l, P) == (if l == NIL { true } else { ALL2(P, l_seq(i0, i0 + LENGTH(l) - 1), l) })
+      #|  (i : Num)
+      #|  (i0 : Num) + SUC((a : Num)) - 1 + 1 - i0 == SUC(a)
+      #|  (l : List[A])
+      #|  (l : List[A])
+      #|  \226\136\128 P : (Num, A) -> Bool, \226\136\128 l : List[A], \226\136\128 i0 : Num, all_n(i0, l, P) == (\226\136\128 i : Num, i < LENGTH(l) \226\134\146 P(i0 + i, EL(i, l)))
+      #|  1 + ((j : Num) - 1) == j && 1 + ((i : Num) - 1) == i
+      #|  (j : Num) - 1
+      #|  (i : Num) - 1
+      #|  (x : Cart[Real, N])
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  1 + ((i : Num) - 1) == i && 1 + (i - 1) == i
+      #|  1 <= (i : Num) && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  (i : Num) - 1
+      #|  (i : Num) - 1
+      #|  (x : Cart[Real, N])
+      #|  (i : Num) - 1
+      #|  LENGTH(EL((i : Num) - 1, (dd_bounds_list : List[List[(Real, Real)]]))) == i
+      #|  (s : Real)
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 real_of_num(0) <= EL(i - 1, (w : List[Real]))
+      #|  ITLIST2((_1 : (_, _, _) -> _), (_2 : List[_]), (_3 : List[_]), (_4 : _))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 domain : (Cart[Real, N], Cart[Real, N]), \226\136\128 y : Cart[Real, N], \226\136\128 w : List[Real], \226\136\128 dd_bounds_list : List[List[(Real, Real)]], \226\136\128 error : Real, (m_cell_domain : ((Cart[Real, N], Cart[Real, N]), Cart[Real, N], Cart[Real, N]) -> Bool)(domain, y, (vector : (List[Real]) -> Cart[Real, N])(w)) \226\134\146 (diff2c_domain : ((Cart[Real, N], Cart[Real, N]), (Cart[Real, N]) -> Real) -> Bool)(domain, f) \226\134\146 (second_bounded : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), List[List[(Real, Real)]]) -> Bool)(f, domain, dd_bounds_list) \226\134\146 (LENGTH : (List[Real]) -> Num)(w) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (LENGTH : (List[List[(Real, Real)]]) -> Num)(dd_bounds_list) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (all_n : (Num, List[List[(Real, Real)]], (Num, List[(Real, Real)]) -> Bool) -> Bool)(1, dd_bounds_list, (i : Num) => (list : List[(Real, Real)]) => (LENGTH : (List[(Real, Real)]) -> Num)(list) == i) \226\134\146 (ITLIST2 : ((List[(Real, Real)], Real, Real) -> Real, List[List[(Real, Real)]], List[Real], Real) -> Real)((list : List[(Real, Real)]) => (x : Real) => (z : Real) => x * (x * iabs((LAST : (List[(Real, Real)]) -> (Real, Real))(list)) + real_of_num(2) * (ITLIST2 : (((Real, Real), Real, Real) -> Real, List[(Real, Real)], List[Real], Real) -> Real)((a : (Real, Real)) => (b : Real) => (c : Real) => b * iabs(a) + c, (BUTLAST : (List[(Real, Real)]) -> List[(Real, Real)])(list), w, real_of_num(0))) + z, dd_bounds_list, w, real_of_num(0)) <= error \226\134\146 (m_taylor_error : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)(f, domain, (vector : (List[Real]) -> Cart[Real, N])(w), error)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 domain : (Cart[Real, N], Cart[Real, N]), \226\136\128 y : Cart[Real, N], \226\136\128 w : List[Real], \226\136\128 f_lo : Real, \226\136\128 f_hi : Real, \226\136\128 d_bounds_list : List[(Real, Real)], \226\136\128 dd_bounds_list : List[List[(Real, Real)]], \226\136\128 error : Real, (m_taylor_interval : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Cart[Real, N], (Real, Real), List[(Real, Real)], List[List[(Real, Real)]]) -> Bool)(f, domain, y, (vector : (List[Real]) -> Cart[Real, N])(w), (f_lo, f_hi), d_bounds_list, dd_bounds_list) \226\134\146 (LENGTH : (List[Real]) -> Num)(w) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (LENGTH : (List[List[(Real, Real)]]) -> Num)(dd_bounds_list) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (all_n : (Num, List[List[(Real, Real)]], (Num, List[(Real, Real)]) -> Bool) -> Bool)(1, dd_bounds_list, (i : Num) => (list : List[(Real, Real)]) => (LENGTH : (List[(Real, Real)]) -> Num)(list) == i) \226\134\146 (ITLIST2 : ((List[(Real, Real)], Real, Real) -> Real, List[List[(Real, Real)]], List[Real], Real) -> Real)((list : List[(Real, Real)]) => (x : Real) => (z : Real) => x * (x * iabs((LAST : (List[(Real, Real)]) -> (Real, Real))(list)) + real_of_num(2) * (ITLIST2 : (((Real, Real), Real, Real) -> Real, List[(Real, Real)], List[Real], Real) -> Real)((a : (Real, Real)) => (b : Real) => (c : Real) => b * iabs(a) + c, (BUTLAST : (List[(Real, Real)]) -> List[(Real, Real)])(list), w, real_of_num(0))) + z, dd_bounds_list, w, real_of_num(0)) <= error \226\134\146 (m_taylor_error : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)(f, domain, (vector : (List[Real]) -> Cart[Real, N])(w), error)
+      #|  1 + ((x : Num) - 1) == x
+      #|  (x : Num) - 1
+      #|  (x : Num)
+      #|  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), vector((w : List[Real])))
+      #|  (s : Real)
+      #|  (b : Real) + inv(real_of_num(2)) * (error : Real)
+      #|  (a : Real)
+      #|  (f_hi : Real)
+      #|  (f_lo : Real)
+      #|  (error : Real)
+      #|  (vector : (List[Real]) -> Cart[Real, N])((w : List[Real]))
+      #|  (y : Cart[Real, N])
+      #|  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+      #|  diff2_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+      #|  ITLIST2((_1 : (_, _, _) -> _), (_2 : List[_]), (_3 : List[_]), (_4 : _))
+      #|  (m_taylor_interval : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Cart[Real, N], (Real, Real), List[(Real, Real)], List[List[(Real, Real)]]) -> Bool)((f : (Cart[Real, N]) -> Real), (domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (vector : (List[Real]) -> Cart[Real, N])((w : List[Real])), ((f_lo : Real), (f_hi : Real)), (d_bounds_list : List[(Real, Real)]), (dd_bounds_list : List[List[(Real, Real)]])) && (m_taylor_error : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)(f, domain, (vector : (List[Real]) -> Cart[Real, N])(w), (error : Real)) && (ITLIST2 : (((Real, Real), Real, Real) -> Real, List[(Real, Real)], List[Real], Real) -> Real)((a : (Real, Real)) => (b : Real) => (c : Real) => b * iabs(a) + c, d_bounds_list, w, real_of_num(0)) <= (b : Real) && b + inv(real_of_num(2)) * error <= (a : Real) && (lo : Real) <= f_lo - a && f_hi + a <= (hi : Real) && (LENGTH : (List[Real]) -> Num)(w) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (LENGTH : (List[(Real, Real)]) -> Num)(d_bounds_list) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (\226\136\128 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 interval_arith(f(x), (lo, hi)))
+      #|  (lo : Real)
+      #|  (f_lo : Real) - (a : Real)
+      #|  (m_taylor_interval : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Cart[Real, N], (Real, Real), List[(Real, Real)], List[List[(Real, Real)]]) -> Bool)((f : (Cart[Real, N]) -> Real), (domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (vector : (List[Real]) -> Cart[Real, N])((w : List[Real])), ((f_lo : Real), (f_hi : Real)), (d_bounds_list : List[(Real, Real)]), (dd_bounds_list : List[List[(Real, Real)]])) && (m_taylor_error : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)(f, domain, (vector : (List[Real]) -> Cart[Real, N])(w), (error : Real)) && (ITLIST2 : (((Real, Real), Real, Real) -> Real, List[(Real, Real)], List[Real], Real) -> Real)((a : (Real, Real)) => (b : Real) => (c : Real) => b * iabs(a) + c, d_bounds_list, w, real_of_num(0)) <= (b : Real) && b + inv(real_of_num(2)) * error <= (a : Real) && f_hi + a <= (hi : Real) && (LENGTH : (List[Real]) -> Num)(w) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (LENGTH : (List[(Real, Real)]) -> Num)(d_bounds_list) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (\226\136\128 p : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(p, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 f(p) <= hi)
+      #|  (hi : Real)
+      #|  (f_hi : Real) + (a : Real)
+      #|  (m_taylor_interval : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Cart[Real, N], (Real, Real), List[(Real, Real)], List[List[(Real, Real)]]) -> Bool)((f : (Cart[Real, N]) -> Real), (domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (vector : (List[Real]) -> Cart[Real, N])((w : List[Real])), ((f_lo : Real), (f_hi : Real)), (d_bounds_list : List[(Real, Real)]), (dd_bounds_list : List[List[(Real, Real)]])) && (m_taylor_error : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)(f, domain, (vector : (List[Real]) -> Cart[Real, N])(w), (error : Real)) && (ITLIST2 : (((Real, Real), Real, Real) -> Real, List[(Real, Real)], List[Real], Real) -> Real)((a : (Real, Real)) => (b : Real) => (c : Real) => b * iabs(a) + c, d_bounds_list, w, real_of_num(0)) <= (b : Real) && b + inv(real_of_num(2)) * error <= (a : Real) && (lo : Real) <= f_lo - a && (LENGTH : (List[Real]) -> Num)(w) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (LENGTH : (List[(Real, Real)]) -> Num)(d_bounds_list) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (\226\136\128 p : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(p, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 lo <= f(p))
+      #|  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+      #|  \226\136\128 i : Num, 1 <= i \226\134\146 1 + (i - 1) == i
+      #|  1 <= (j : Num) && j <= (n : Num) \226\134\146 j - 1 < n
+      #|  (j : Num) - 1
+      #|  (x : Cart[Real, N])
+      #|  (j : Num)
+      #|  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), vector((w : List[Real])))
+      #|  (s : Real)
+      #|  1 <= (i : Num) \226\134\146 1 + (i - 1) == i
+      #|  1 <= (i : Num) && i <= (n : Num) \226\134\146 i - 1 < n
+      #|  (i : Num) - 1
+      #|  (df_hi : Real)
+      #|  (df_lo : Real)
+      #|  (error : Real)
+      #|  (vector : (List[Real]) -> Cart[Real, N])((w : List[Real]))
+      #|  (y : Cart[Real, N])
+      #|  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+      #|  diff2_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+      #|  1 <= (i : Num) && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  ITLIST2((_1 : (_, _, _) -> _), (_2 : List[_]), (_3 : List[_]), (_4 : _))
+      #|  (m_taylor_interval : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Cart[Real, N], (Real, Real), List[(Real, Real)], List[List[(Real, Real)]]) -> Bool)((f : (Cart[Real, N]) -> Real), (domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (vector : (List[Real]) -> Cart[Real, N])((w : List[Real])), (f_bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)]), (dd_bounds_list : List[List[(Real, Real)]])) && (IN : (Num, (Num) -> Bool) -> Bool)((i : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (EL : (Num, List[(Real, Real)]) -> (Real, Real))(i - 1, d_bounds_list) == ((df_lo : Real), (df_hi : Real)) && (\226\136\128 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 (all_n : (Num, List[(Real, Real)], (Num, (Real, Real)) -> Bool) -> Bool)(1, (dd_list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(if j <= i { (partial2 : (Num, Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(j, i, f, x) } else { (partial2 : (Num, Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, j, f, x) }, int))) && (LENGTH : (List[(Real, Real)]) -> Num)(dd_list) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (LENGTH : (List[(Real, Real)]) -> Num)(d_bounds_list) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (LENGTH : (List[Real]) -> Num)(w) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (ITLIST2 : (((Real, Real), Real, Real) -> Real, List[(Real, Real)], List[Real], Real) -> Real)((a : (Real, Real)) => (b : Real) => (c : Real) => b * iabs(a) + c, dd_list, w, real_of_num(0)) <= (error : Real) && df_hi + error <= (hi : Real) \226\134\146 (lo : Real) <= df_lo - error \226\134\146 (\226\136\128 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 interval_arith((partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f, x), (lo, hi)))
+      #|  (lo : Real)
+      #|  (df_lo : Real) - (error : Real)
+      #|  (m_taylor_interval : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Cart[Real, N], (Real, Real), List[(Real, Real)], List[List[(Real, Real)]]) -> Bool)((f : (Cart[Real, N]) -> Real), (domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (vector : (List[Real]) -> Cart[Real, N])((w : List[Real])), (f_bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)]), (dd_bounds_list : List[List[(Real, Real)]])) && (IN : (Num, (Num) -> Bool) -> Bool)((i : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (EL : (Num, List[(Real, Real)]) -> (Real, Real))(i - 1, d_bounds_list) == ((df_lo : Real), (df_hi : Real)) && (\226\136\128 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 (all_n : (Num, List[(Real, Real)], (Num, (Real, Real)) -> Bool) -> Bool)(1, (dd_list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(if j <= i { (partial2 : (Num, Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(j, i, f, x) } else { (partial2 : (Num, Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, j, f, x) }, int))) && (LENGTH : (List[(Real, Real)]) -> Num)(dd_list) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (LENGTH : (List[(Real, Real)]) -> Num)(d_bounds_list) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (LENGTH : (List[Real]) -> Num)(w) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (ITLIST2 : (((Real, Real), Real, Real) -> Real, List[(Real, Real)], List[Real], Real) -> Real)((a : (Real, Real)) => (b : Real) => (c : Real) => b * iabs(a) + c, dd_list, w, real_of_num(0)) <= (error : Real) && df_hi + error <= (hi : Real) \226\134\146 (\226\136\128 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f, x) <= hi)
+      #|  (hi : Real)
+      #|  (df_hi : Real) + (error : Real)
+      #|  (m_taylor_interval : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Cart[Real, N], (Real, Real), List[(Real, Real)], List[List[(Real, Real)]]) -> Bool)((f : (Cart[Real, N]) -> Real), (domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (vector : (List[Real]) -> Cart[Real, N])((w : List[Real])), (f_bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)]), (dd_bounds_list : List[List[(Real, Real)]])) && (IN : (Num, (Num) -> Bool) -> Bool)((i : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (EL : (Num, List[(Real, Real)]) -> (Real, Real))(i - 1, d_bounds_list) == ((df_lo : Real), (df_hi : Real)) && (\226\136\128 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 (all_n : (Num, List[(Real, Real)], (Num, (Real, Real)) -> Bool) -> Bool)(1, (dd_list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(if j <= i { (partial2 : (Num, Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(j, i, f, x) } else { (partial2 : (Num, Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, j, f, x) }, int))) && (LENGTH : (List[(Real, Real)]) -> Num)(dd_list) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (LENGTH : (List[(Real, Real)]) -> Num)(d_bounds_list) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (LENGTH : (List[Real]) -> Num)(w) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (ITLIST2 : (((Real, Real), Real, Real) -> Real, List[(Real, Real)], List[Real], Real) -> Real)((a : (Real, Real)) => (b : Real) => (c : Real) => b * iabs(a) + c, dd_list, w, real_of_num(0)) <= (error : Real) && (lo : Real) <= df_lo - error \226\134\146 (\226\136\128 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 lo <= (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f, x))
+      #|  (((P : Bool) \226\134\146 (Q : Bool)) && (P \226\134\146 (R : Bool))) == (P \226\134\146 Q && R)
+      #|  (dd_list : List[(Real, Real)])
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
+      #|  (i : Num)
+      #|  ((df_lo : Real), (df_hi : Real))
       #|M_taylor.interval0 =  |- ((#interval_arith:fun(real,fun(prod(real,real),bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#,:fun(real,fun(real,prod(real,real))) (((#float_num:fun(bool,fun(num,fun(num,real))) #F:bool) #_0:num) (#D50:fun(num,num) #_0:num))) (((#float_num:fun(bool,fun(num,fun(num,real))) #F:bool) #_0:num) (#D50:fun(num,num) #_0:num))))
       #|M_taylor.VECTOR_COMPONENT =  |- (#forall:fun(fun(list('A),bool),bool) (\l:list('A). (#forall:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#=:fun('A,fun('A,bool)) ((#$:fun(cart('A,'N),fun(num,'A)) (#vector:fun(list('A),cart('A,'N)) l:list('A))) i:num)) ((#EL:fun(num,fun(list('A),'A)) ((#-:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) l:list('A))))))))
       #|M_taylor.ALL2_ALL_ZIP =  |- (#forall:fun(fun(fun('A,fun('B,bool)),bool),bool) (\P:fun('A,fun('B,bool)). (#forall:fun(fun(list('A),bool),bool) (\l1:list('A). (#forall:fun(fun(list('B),bool),bool) (\l2:list('B). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list('A),num) l1:list('A))) (#LENGTH:fun(list('B),num) l2:list('B)))) ((#=:fun(bool,fun(bool,bool)) (((#ALL2:fun(fun('A,fun('B,bool)),fun(list('A),fun(list('B),bool))) P:fun('A,fun('B,bool))) l1:list('A)) l2:list('B))) ((#ALL:fun(fun(prod('A,'B),bool),fun(list(prod('A,'B)),bool)) (\p:prod('A,'B). ((P:fun('A,fun('B,bool)) (#FST:fun(prod('A,'B),'A) p:prod('A,'B))) (#SND:fun(prod('A,'B),'B) p:prod('A,'B))))) ((#ZIP:fun(list('A),fun(list('B),list(prod('A,'B)))) l1:list('A)) l2:list('B)))))))))))
