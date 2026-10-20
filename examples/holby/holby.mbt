@@ -59,48 +59,48 @@ fn step_1() -> Unit raise {
       }
     }
   }
-  let (tm_1, act) = action_taut_l(@parser.parse_term("~(p <=> q) <=> p /\\ ~q \\/ ~p /\\ q"))
+  let (tm_1, act) = action_taut_l(@term_syntax.parse_term("!((p : Bool) == (q : Bool)) == (p && !q || !p && q)"))
   let cond : (@kernel.Term) -> Bool raise = fn(x60 : @kernel.Term) -> Bool raise {
     let tm_2 = x60
     (@kernel.type_of(@kernel.rand(@kernel.rand(tm_2))) == @kernel.bool_ty)
   }
-  let (tm_3, act_1) = action_taut_l(@parser.parse_term("(p <=> q) <=> p /\\ q \\/ ~p /\\ ~q"))
+  let (tm_3, act_1) = action_taut_l(@term_syntax.parse_term("((p : Bool) == (q : Bool)) == (p && q || !p && !q)"))
   let cond_1 : (@kernel.Term) -> Bool raise = fn(x61 : @kernel.Term) -> Bool raise {
     let tm_4 = x61
     (@kernel.type_of(@kernel.rand(tm_4)) == @kernel.bool_ty)
   }
   let t62 = conditional_enter((tm_1, (cond, act)), conditional_enter((tm_3, (cond_1, act_1)), @nets.empty_net()))
-  let t42 = action_taut_l(@parser.parse_term("T \\/ p <=> T"))
-  let t43 = action_taut_l(@parser.parse_term("p \\/ T <=> T"))
-  let t44 = action_taut_l(@parser.parse_term("F \\/ p <=> p"))
-  let t45 = action_taut_l(@parser.parse_term("p \\/ F <=> p"))
-  let t46 = action_taut_l(@parser.parse_term("T /\\ p <=> p"))
-  let t47 = action_taut_l(@parser.parse_term("p /\\ T <=> p"))
-  let t48 = action_taut_l(@parser.parse_term("F /\\ p <=> F"))
-  let t49 = action_taut_l(@parser.parse_term("p /\\ F <=> F"))
-  let t50 = action_taut_l(@parser.parse_term("~(p ==> q) <=> p /\\ ~q"))
-  let t51 = action_taut_l(@parser.parse_term("~(p \\/ q) <=> ~p /\\ ~q"))
-  let t52 = action_taut_l(@parser.parse_term("~(p /\\ q) <=> ~p \\/ ~q"))
-  let t53 = action_taut_l(@parser.parse_term("~(~p) <=> p"))
-  let t54 = action_taut_l(@parser.parse_term("~T <=> F"))
-  let t55 = action_taut_l(@parser.parse_term("~F <=> T"))
-  let t56 = action_taut_l(@parser.parse_term("(p ==> q) <=> ~p \\/ q"))
-  let t57 = (@parser.parse_term("p \\/ q"), action_disj)
-  let t58 = (@parser.parse_term("p /\\ q"), fn(x39 : @kernel.Thm) -> (((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t42 = action_taut_l(@term_syntax.parse_term("(true || (p : Bool)) == true"))
+  let t43 = action_taut_l(@term_syntax.parse_term("((p : Bool) || true) == true"))
+  let t44 = action_taut_l(@term_syntax.parse_term("(false || (p : Bool)) == p"))
+  let t45 = action_taut_l(@term_syntax.parse_term("((p : Bool) || false) == p"))
+  let t46 = action_taut_l(@term_syntax.parse_term("(true && (p : Bool)) == p"))
+  let t47 = action_taut_l(@term_syntax.parse_term("((p : Bool) && true) == p"))
+  let t48 = action_taut_l(@term_syntax.parse_term("(false && (p : Bool)) == false"))
+  let t49 = action_taut_l(@term_syntax.parse_term("((p : Bool) && false) == false"))
+  let t50 = action_taut_l(@term_syntax.parse_term("!((p : Bool) → (q : Bool)) == (p && !q)"))
+  let t51 = action_taut_l(@term_syntax.parse_term("!((p : Bool) || (q : Bool)) == (!p && !q)"))
+  let t52 = action_taut_l(@term_syntax.parse_term("!((p : Bool) && (q : Bool)) == (!p || !q)"))
+  let t53 = action_taut_l(@term_syntax.parse_term("!!(p : Bool) == p"))
+  let t54 = action_taut_l(@term_syntax.parse_term("!true == false"))
+  let t55 = action_taut_l(@term_syntax.parse_term("!false == true"))
+  let t56 = action_taut_l(@term_syntax.parse_term("((p : Bool) → (q : Bool)) == (!p || q)"))
+  let t57 = (@term_syntax.parse_term("(p : Bool) || (q : Bool)"), action_disj)
+  let t58 = (@term_syntax.parse_term("(p : Bool) && (q : Bool)"), fn(x39 : @kernel.Thm) -> (((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x40 : (@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       fn(x41 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
         action_conj_l(x39, x40, x41)
       }
     }
   })
-  let t59 = (@parser.parse_term("T"), fn(x36 : @kernel.Thm) -> (((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t59 = (@term_syntax.parse_term("true"), fn(x36 : @kernel.Thm) -> (((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x37 : (@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       fn(x38 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
         action_true_l(x36, x37, x38)
       }
     }
   })
-  let enet = @lib.itlist(unconditional_enter, @list.List([(@parser.parse_term("F"), fn(x33 : @kernel.Thm) -> (((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let enet = @lib.itlist(unconditional_enter, @list.List([(@term_syntax.parse_term("false"), fn(x33 : @kernel.Thm) -> (((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x34 : (@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       fn(x35 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
         action_false_l(x33, x34, x35)
@@ -210,13 +210,13 @@ fn step_2() -> Unit raise {
       }
     }
   }
-  let t123 = action_fol_l(@parser.parse_term("(forall x. P x /\\ Q x) <=> (forall x. P x) /\\ (forall x. Q x)"))
-  let t124 = action_fol_l(@parser.parse_term("~(forall x. P x) <=> (?x. ~(P x))"))
-  let t125 = action_taut_l_1(@parser.parse_term("~(p \\/ q) <=> ~p /\\ ~q"))
-  let t126 = action_taut_l_1(@parser.parse_term("~(p /\\ q) <=> ~p \\/ ~q"))
-  let t127 = action_taut_l_1(@parser.parse_term("~(~p) <=> p"))
-  let t128 = (@parser.parse_term("?x. P x"), action_exists)
-  let t129 = (@parser.parse_term("p \\/ q"), fn(x119 : @kernel.Thm) -> (((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
+  let t123 = action_fol_l(@term_syntax.parse_term("(∀ x : _, (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)) == ((∀ x : _, P(x)) && (∀ x : _, Q(x)))"))
+  let t124 = action_fol_l(@term_syntax.parse_term("!(∀ x : _, (P : (_) -> Bool)(x)) == (∃ x : _, !P(x))"))
+  let t125 = action_taut_l_1(@term_syntax.parse_term("!((p : Bool) || (q : Bool)) == (!p && !q)"))
+  let t126 = action_taut_l_1(@term_syntax.parse_term("!((p : Bool) && (q : Bool)) == (!p || !q)"))
+  let t127 = action_taut_l_1(@term_syntax.parse_term("!!(p : Bool) == p"))
+  let t128 = (@term_syntax.parse_term("∃ x : _, (P : (_) -> Bool)(x)"), action_exists)
+  let t129 = (@term_syntax.parse_term("(p : Bool) || (q : Bool)"), fn(x119 : @kernel.Thm) -> (((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
     fn(x120 : (@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       fn(x121 : @list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
         fn(x122 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
@@ -225,7 +225,7 @@ fn step_2() -> Unit raise {
       }
     }
   })
-  let t130 = (@parser.parse_term("p /\\ q"), fn(x115 : @kernel.Thm) -> (((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
+  let t130 = (@term_syntax.parse_term("(p : Bool) && (q : Bool)"), fn(x115 : @kernel.Thm) -> (((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
     fn(x116 : (@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       fn(x117 : @list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
         fn(x118 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
@@ -234,7 +234,7 @@ fn step_2() -> Unit raise {
       }
     }
   })
-  let t131 = (@parser.parse_term("T"), fn(x111 : @kernel.Thm) -> (((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
+  let t131 = (@term_syntax.parse_term("true"), fn(x111 : @kernel.Thm) -> (((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
     fn(x112 : (@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       fn(x113 : @list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
         fn(x114 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
@@ -243,7 +243,7 @@ fn step_2() -> Unit raise {
       }
     }
   })
-  let enet = @lib.itlist(unconditional_enter, @list.List([(@parser.parse_term("F"), fn(x107 : @kernel.Thm) -> (((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
+  let enet = @lib.itlist(unconditional_enter, @list.List([(@term_syntax.parse_term("false"), fn(x107 : @kernel.Thm) -> (((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
     fn(x108 : (@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       fn(x109 : @list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
         fn(x110 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
@@ -371,22 +371,22 @@ fn[TN, TO] action_fol_l(x101 : @kernel.Term) -> ((@kernel.Term, (@kernel.Thm) ->
 /// CORRELATE_RULE
 fn step_3() -> Unit raise {
   let t138 = @meson.meson_tac(@list.List([]))
-  let t139 = @tactics.prove(@parser.parse_term("(?x. P x) <=> ~(forall x. ~(P x))"), t138)
+  let t139 = @tactics.prove(@term_syntax.parse_term("(∃ x : _, (P : (_) -> Bool)(x)) == !(∀ x : _, !P(x))"), t138)
   let t140 = @equal.gsym(@theorems.disj_assoc())
   let t141 = @equal.gsym(@theorems.conj_assoc())
-  let t142 = @class.taut(@parser.parse_term("p \\/ F <=> p"))
-  let t143 = @class.taut(@parser.parse_term("F \\/ p <=> p"))
-  let t144 = @class.taut(@parser.parse_term("p \\/ T <=> T"))
-  let t145 = @class.taut(@parser.parse_term("T \\/ p <=> T"))
-  let t146 = @class.taut(@parser.parse_term("p /\\ F <=> F"))
-  let t147 = @class.taut(@parser.parse_term("F /\\ p <=> F"))
-  let t148 = @class.taut(@parser.parse_term("p /\\ T <=> p"))
-  let t149 = @class.taut(@parser.parse_term("T /\\ p <=> p"))
-  let t150 = @class.taut(@parser.parse_term("~F <=> T"))
-  let t151 = @class.taut(@parser.parse_term("~T <=> F"))
-  let t152 = @class.taut(@parser.parse_term("~(~a) <=> a"))
-  let t153 = @class.taut(@parser.parse_term("(a ==> b) <=> ~a \\/ b"))
-  correlate_rule_c.set(@simp.pure_rewrite_rule(@list.List([@class.taut(@parser.parse_term("(a <=> b) <=> (a ==> b) /\\ (b ==> a)")), t153, @class.de_morgan_thm(), t152, t151, t150, t149, t148, t147, t146, t145, t144, t143, t142, t141, t140, t139])))
+  let t142 = @class.taut(@term_syntax.parse_term("((p : Bool) || false) == p"))
+  let t143 = @class.taut(@term_syntax.parse_term("(false || (p : Bool)) == p"))
+  let t144 = @class.taut(@term_syntax.parse_term("((p : Bool) || true) == true"))
+  let t145 = @class.taut(@term_syntax.parse_term("(true || (p : Bool)) == true"))
+  let t146 = @class.taut(@term_syntax.parse_term("((p : Bool) && false) == false"))
+  let t147 = @class.taut(@term_syntax.parse_term("(false && (p : Bool)) == false"))
+  let t148 = @class.taut(@term_syntax.parse_term("((p : Bool) && true) == p"))
+  let t149 = @class.taut(@term_syntax.parse_term("(true && (p : Bool)) == p"))
+  let t150 = @class.taut(@term_syntax.parse_term("!false == true"))
+  let t151 = @class.taut(@term_syntax.parse_term("!true == false"))
+  let t152 = @class.taut(@term_syntax.parse_term("!!(a : Bool) == a"))
+  let t153 = @class.taut(@term_syntax.parse_term("((a : Bool) → (b : Bool)) == (!a || b)"))
+  correlate_rule_c.set(@simp.pure_rewrite_rule(@list.List([@class.taut(@term_syntax.parse_term("((a : Bool) == (b : Bool)) == ((a → b) && (b → a))")), t153, @class.de_morgan_thm(), t152, t151, t150, t149, t148, t147, t146, t145, t144, t143, t142, t141, t140, t139])))
 }
 
 ///|
@@ -401,8 +401,8 @@ pub fn correlate_rule(x : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// THMLIST_CONTR_RULE
 fn step_4() -> Unit raise {
-  let contr_pair_thm = @bool.undisch_all(@class.taut(@parser.parse_term("p ==> ~p ==> F")))
-  let p_tm = @parser.parse_term("p:bool")
+  let contr_pair_thm = @bool.undisch_all(@class.taut(@term_syntax.parse_term("(p : Bool) → !p → false")))
+  let p_tm = @term_syntax.parse_term("(p : Bool)")
   thmlist_contr_rule_c.set(fn(x154 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
     let ths = x154
     let (ths_n, ths_p) = @lib.partition(fn(x157 : @kernel.Thm) -> Bool raise {
@@ -1527,8 +1527,8 @@ pub fn mizar_refuter(x401 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
 ///|
 /// MIZAR_BY
 fn step_7() -> Unit raise {
-  let pth = @class.taut(@parser.parse_term("(~p ==> F) <=> p"))
-  let p_tm = @parser.parse_term("p:bool")
+  let pth = @class.taut(@term_syntax.parse_term("(!(p : Bool) → false) == p"))
+  let p_tm = @term_syntax.parse_term("(p : Bool)")
   mizar_by_c.set(fn(x402 : @list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let ths = x402
     fn(x403 : @kernel.Term) -> @kernel.Thm raise {
@@ -1701,7 +1701,7 @@ pub fn hol_rule(x423 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// prop_1
 fn step_9() -> Unit raise {
-  prop_1_c.set(@lib.time(hol_rule, @parser.parse_term("p ==> q <=> ~q ==> ~p")))
+  prop_1_c.set(@lib.time(hol_rule, @term_syntax.parse_term("((p : Bool) → (q : Bool)) == (!q → !p)")))
 }
 
 ///|
@@ -1716,7 +1716,7 @@ pub fn prop_1() -> @kernel.Thm {
 ///|
 /// prop_2
 fn step_10() -> Unit raise {
-  prop_2_c.set(@lib.time(hol_rule, @parser.parse_term("~ ~p <=> p")))
+  prop_2_c.set(@lib.time(hol_rule, @term_syntax.parse_term("!!(p : Bool) == p")))
 }
 
 ///|
@@ -1731,7 +1731,7 @@ pub fn prop_2() -> @kernel.Thm {
 ///|
 /// prop_3
 fn step_11() -> Unit raise {
-  prop_3_c.set(@lib.time(hol_rule, @parser.parse_term("~(p ==> q) ==> q ==> p")))
+  prop_3_c.set(@lib.time(hol_rule, @term_syntax.parse_term("!((p : Bool) → (q : Bool)) → q → p")))
 }
 
 ///|
@@ -1746,7 +1746,7 @@ pub fn prop_3() -> @kernel.Thm {
 ///|
 /// prop_4
 fn step_12() -> Unit raise {
-  prop_4_c.set(@lib.time(hol_rule, @parser.parse_term("~p ==> q <=> ~q ==> p")))
+  prop_4_c.set(@lib.time(hol_rule, @term_syntax.parse_term("(!(p : Bool) → (q : Bool)) == (!q → p)")))
 }
 
 ///|
@@ -1761,7 +1761,7 @@ pub fn prop_4() -> @kernel.Thm {
 ///|
 /// prop_5
 fn step_13() -> Unit raise {
-  prop_5_c.set(@lib.time(hol_rule, @parser.parse_term("(p \\/ q ==> p \\/ r) ==> p \\/ (q ==> r)")))
+  prop_5_c.set(@lib.time(hol_rule, @term_syntax.parse_term("((p : Bool) || (q : Bool) → p || (r : Bool)) → p || (q → r)")))
 }
 
 ///|
@@ -1776,7 +1776,7 @@ pub fn prop_5() -> @kernel.Thm {
 ///|
 /// prop_6
 fn step_14() -> Unit raise {
-  prop_6_c.set(@lib.time(hol_rule, @parser.parse_term("p \\/ ~p")))
+  prop_6_c.set(@lib.time(hol_rule, @term_syntax.parse_term("(p : Bool) || !p")))
 }
 
 ///|
@@ -1791,7 +1791,7 @@ pub fn prop_6() -> @kernel.Thm {
 ///|
 /// prop_7
 fn step_15() -> Unit raise {
-  prop_7_c.set(@lib.time(hol_rule, @parser.parse_term("p \\/ ~ ~ ~p")))
+  prop_7_c.set(@lib.time(hol_rule, @term_syntax.parse_term("(p : Bool) || !!!p")))
 }
 
 ///|
@@ -1806,7 +1806,7 @@ pub fn prop_7() -> @kernel.Thm {
 ///|
 /// prop_8
 fn step_16() -> Unit raise {
-  prop_8_c.set(@lib.time(hol_rule, @parser.parse_term("((p ==> q) ==> p) ==> p")))
+  prop_8_c.set(@lib.time(hol_rule, @term_syntax.parse_term("(((p : Bool) → (q : Bool)) → p) → p")))
 }
 
 ///|
@@ -1821,7 +1821,7 @@ pub fn prop_8() -> @kernel.Thm {
 ///|
 /// prop_9
 fn step_17() -> Unit raise {
-  prop_9_c.set(@lib.time(hol_rule, @parser.parse_term("(p \\/ q) /\\ (~p \\/ q) /\\ (p \\/ ~q) ==> ~(~q \\/ ~q)")))
+  prop_9_c.set(@lib.time(hol_rule, @term_syntax.parse_term("((p : Bool) || (q : Bool)) && (!p || q) && (p || !q) → !(!q || !q)")))
 }
 
 ///|
@@ -1836,7 +1836,7 @@ pub fn prop_9() -> @kernel.Thm {
 ///|
 /// prop_10
 fn step_18() -> Unit raise {
-  prop_10_c.set(@lib.time(hol_rule, @parser.parse_term("(q ==> r) /\\ (r ==> p /\\ q) /\\ (p ==> q /\\ r) ==> (p <=> q)")))
+  prop_10_c.set(@lib.time(hol_rule, @term_syntax.parse_term("((q : Bool) → (r : Bool)) && (r → (p : Bool) && q) && (p → q && r) → p == q")))
 }
 
 ///|
@@ -1851,7 +1851,7 @@ pub fn prop_10() -> @kernel.Thm {
 ///|
 /// prop_11
 fn step_19() -> Unit raise {
-  prop_11_c.set(@lib.time(hol_rule, @parser.parse_term("p <=> p")))
+  prop_11_c.set(@lib.time(hol_rule, @term_syntax.parse_term("(p : Bool) == p")))
 }
 
 ///|
@@ -1866,7 +1866,7 @@ pub fn prop_11() -> @kernel.Thm {
 ///|
 /// prop_12
 fn step_20() -> Unit raise {
-  prop_12_c.set(@lib.time(hol_rule, @parser.parse_term("((p <=> q) <=> r) <=> (p <=> (q <=> r))")))
+  prop_12_c.set(@lib.time(hol_rule, @term_syntax.parse_term("(((p : Bool) == (q : Bool)) == (r : Bool)) == (p == (q == r))")))
 }
 
 ///|
@@ -1881,7 +1881,7 @@ pub fn prop_12() -> @kernel.Thm {
 ///|
 /// prop_13
 fn step_21() -> Unit raise {
-  prop_13_c.set(@lib.time(hol_rule, @parser.parse_term("p \\/ q /\\ r <=> (p \\/ q) /\\ (p \\/ r)")))
+  prop_13_c.set(@lib.time(hol_rule, @term_syntax.parse_term("((p : Bool) || (q : Bool) && (r : Bool)) == ((p || q) && (p || r))")))
 }
 
 ///|
@@ -1896,7 +1896,7 @@ pub fn prop_13() -> @kernel.Thm {
 ///|
 /// prop_14
 fn step_22() -> Unit raise {
-  prop_14_c.set(@lib.time(hol_rule, @parser.parse_term("(p <=> q) <=> (q \\/ ~p) /\\ (~q \\/ p)")))
+  prop_14_c.set(@lib.time(hol_rule, @term_syntax.parse_term("((p : Bool) == (q : Bool)) == ((q || !p) && (!q || p))")))
 }
 
 ///|
@@ -1911,7 +1911,7 @@ pub fn prop_14() -> @kernel.Thm {
 ///|
 /// prop_15
 fn step_23() -> Unit raise {
-  prop_15_c.set(@lib.time(hol_rule, @parser.parse_term("p ==> q <=> ~p \\/ q")))
+  prop_15_c.set(@lib.time(hol_rule, @term_syntax.parse_term("((p : Bool) → (q : Bool)) == (!p || q)")))
 }
 
 ///|
@@ -1926,7 +1926,7 @@ pub fn prop_15() -> @kernel.Thm {
 ///|
 /// prop_16
 fn step_24() -> Unit raise {
-  prop_16_c.set(@lib.time(hol_rule, @parser.parse_term("(p ==> q) \\/ (q ==> p)")))
+  prop_16_c.set(@lib.time(hol_rule, @term_syntax.parse_term("((p : Bool) → (q : Bool)) || (q → p)")))
 }
 
 ///|
@@ -1941,7 +1941,7 @@ pub fn prop_16() -> @kernel.Thm {
 ///|
 /// prop_17
 fn step_25() -> Unit raise {
-  prop_17_c.set(@lib.time(hol_rule, @parser.parse_term("p /\\ (q ==> r) ==> s <=> (~p \\/ q \\/ s) /\\ (~p \\/ ~r \\/ s)")))
+  prop_17_c.set(@lib.time(hol_rule, @term_syntax.parse_term("((p : Bool) && ((q : Bool) → (r : Bool)) → (s : Bool)) == ((!p || q || s) && (!p || !r || s))")))
 }
 
 ///|
@@ -1956,152 +1956,152 @@ pub fn prop_17() -> @kernel.Thm {
 ///|
 /// Examples/holby.ml:758
 fn step_26() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(f(f(f(f(f(x))))) = x) /\\ (f(f(f(x))) = x) ==> (f(x) = x)")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(f : (_) -> _)(f(f(f(f((x : _)))))) == x && f(f(f(x))) == x → f(x) == x")))
 }
 
 ///|
 /// Examples/holby.ml:761
 fn step_27() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(f(f(f(f(f(f(x)))))) = x) /\\ (f(f(f(f(x)))) = x) ==> (f(f(x)) = x)")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(f : (_) -> _)(f(f(f(f(f((x : _))))))) == x && f(f(f(f(x)))) == x → f(f(x)) == x")))
 }
 
 ///|
 /// Examples/holby.ml:764
 fn step_28() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(f a = a) ==> (f(f a) = a)")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(f : (_) -> _)((a : _)) == a → f(f(a)) == a")))
 }
 
 ///|
 /// Examples/holby.ml:766
 fn step_29() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(a = f a) /\\ ((g b (f a))=(f (f a))) /\\ ((g a b)=(f (g b a)))\n   ==> (g a b = a)")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(a : _) == (f : (_) -> _)(a) && (g : (_, _) -> _)((b : _), f(a)) == f(f(a)) && g(a, b) == f(g(b, a)) → g(a, b) == a")))
 }
 
 ///|
 /// Examples/holby.ml:770
 fn step_30() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("((s(s(s(s(s(s(s(s(s(s(s(s(s(s(s a)))))))))))))))=a) /\\\n   ((s (s (s (s (s (s (s (s (s (s a))))))))))=a) /\\\n   ((s (s (s (s (s (s a))))))=a)\n   ==> (a = s a)")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(s : (_) -> _)(s(s(s(s(s(s(s(s(s(s(s(s(s(s((a : _)))))))))))))))) == a && s(s(s(s(s(s(s(s(s(s(a)))))))))) == a && s(s(s(s(s(s(a)))))) == a → a == s(a)")))
 }
 
 ///|
 /// Examples/holby.ml:776
 fn step_31() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(u = v) ==> (P u <=> P v)")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(u : _) == (v : _) → (P : (_) -> Bool)(u) == P(v)")))
 }
 
 ///|
 /// Examples/holby.ml:778
 fn step_32() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(b + c + d + e + f + g + h + i + j + k + l + m =\n    m + l + k + j + i + h + g + f + e + d + c + b)\n   ==> (a + b + c + d + e + f + g + h + i + j + k + l + m =\n        a + m + l + k + j + i + h + g + f + e + d + c + b)")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(b : Num) + ((c : Num) + ((d : Num) + ((e : Num) + ((f : Num) + ((g : Num) + ((h : Num) + ((i : Num) + ((j : Num) + ((k : Num) + ((l : Num) + (m : Num))))))))))) == m + (l + (k + (j + (i + (h + (g + (f + (e + (d + (c + b)))))))))) → (a : Num) + (b + (c + (d + (e + (f + (g + (h + (i + (j + (k + (l + m))))))))))) == a + (m + (l + (k + (j + (i + (h + (g + (f + (e + (d + (c + b)))))))))))")))
 }
 
 ///|
 /// Examples/holby.ml:784
 fn step_33() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(f(f(f(f(a)))) = a) /\\ (f(f(f(f(f(f(a)))))) = a) /\\\n   something(irrelevant) /\\ (11 + 12 = 23) /\\\n   (f(f(f(f(b)))) = f(f(f(f(f(f(f(f(f(f(c))))))))))) /\\\n   ~(otherthing) /\\ ~(f(a) = a) /\\ ~(f(b) = b) /\\\n   P(f(f(f(a)))) ==> P(f(a))")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(f : (_) -> _)(f(f(f((a : _))))) == a && f(f(f(f(f(f(a)))))) == a && (something : (_) -> Bool)((irrelevant : _)) && 11 + 12 == 23 && f(f(f(f((b : _))))) == f(f(f(f(f(f(f(f(f(f((c : _))))))))))) && !(otherthing : Bool) && !(f(a) == a) && !(f(b) == b) && (P : (_) -> Bool)(f(f(f(a)))) → P(f(a))")))
 }
 
 ///|
 /// Examples/holby.ml:791
 fn step_34() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("((a = b) \\/ (c = d)) /\\ ((a = c) \\/ (b = d)) ==> (a = d) \\/ (b = c)")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("((a : _) == (b : _) || (c : _) == (d : _)) && (a == c || b == d) → a == d || b == c")))
 }
 
 ///|
 /// Examples/holby.ml:798
 fn step_35() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(f(f(f(f(a:A)))) = a) /\\ (f(f(f(f(f(f(a)))))) = a) /\\\n   something(irrelevant) /\\ (11 + 12 = 23) /\\\n   (f(f(f(f(b:A)))) = f(f(f(f(f(f(f(f(f(f(c))))))))))) /\\\n   ~(otherthing) /\\ ~(f(a) = a) /\\ ~(f(b) = b) /\\\n   P(f(a)) /\\ ~(f(f(f(a))) = f(a)) ==> ?x. P(f(f(f(x))))")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(f : (A) -> A)(f(f(f((a : A))))) == a && f(f(f(f(f(f(a)))))) == a && (something : (_) -> Bool)((irrelevant : _)) && 11 + 12 == 23 && f(f(f(f((b : A))))) == f(f(f(f(f(f(f(f(f(f((c : A))))))))))) && !(otherthing : Bool) && !(f(a) == a) && !(f(b) == b) && (P : (A) -> Bool)(f(a)) && !(f(f(f(a))) == f(a)) → (∃ x : A, P(f(f(f(x)))))")))
 }
 
 ///|
 /// Examples/holby.ml:805
 fn step_36() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(f(f(f(f(a:A)))) = a) /\\ (f(f(f(f(f(f(a)))))) = a) /\\\n   something(irrelevant) /\\ (11 + 12 = 23) /\\\n   (f(f(f(f(b:A)))) = f(f(f(f(f(f(f(f(f(f(c))))))))))) /\\\n   ~(otherthing) /\\ ~(f(a) = a) /\\ ~(f(b) = b) /\\\n   P(f(a))\n   ==> P(f(f(f(a))))")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(f : (A) -> A)(f(f(f((a : A))))) == a && f(f(f(f(f(f(a)))))) == a && (something : (_) -> Bool)((irrelevant : _)) && 11 + 12 == 23 && f(f(f(f((b : A))))) == f(f(f(f(f(f(f(f(f(f((c : A))))))))))) && !(otherthing : Bool) && !(f(a) == a) && !(f(b) == b) && (P : (A) -> Bool)(f(a)) → P(f(f(f(a))))")))
 }
 
 ///|
 /// Examples/holby.ml:813
 fn step_37() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(f(f(f(f(a:A)))) = a) /\\ (f(f(f(f(f(f(a)))))) = a) /\\\n   something(irrelevant) /\\ (11 + 12 = 23) /\\\n   (f(f(f(f(b:A)))) = f(f(f(f(f(f(f(f(f(f(c))))))))))) /\\\n   ~(otherthing) /\\ ~(f(a) = a) /\\ ~(f(b) = b) /\\\n   P(f(a))\n   ==> ?x. P(f(f(f(x))))")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(f : (A) -> A)(f(f(f((a : A))))) == a && f(f(f(f(f(f(a)))))) == a && (something : (_) -> Bool)((irrelevant : _)) && 11 + 12 == 23 && f(f(f(f((b : A))))) == f(f(f(f(f(f(f(f(f(f((c : A))))))))))) && !(otherthing : Bool) && !(f(a) == a) && !(f(b) == b) && (P : (A) -> Bool)(f(a)) → (∃ x : A, P(f(f(f(x)))))")))
 }
 
 ///|
 /// Examples/holby.ml:821
 fn step_38() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(a = f a) /\\ ((g b (f a))=(f (f a))) /\\ ((g a b)=(f (g b a))) /\\\n   (forall x y. ~P (g x y))\n   ==> ~P(a)")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(a : _) == (f : (_) -> _)(a) && (g : (_, _) -> _)((b : _), f(a)) == f(f(a)) && g(a, b) == f(g(b, a)) && (∀ x : _, ∀ y : _, !(P : (_) -> Bool)(g(x, y))) → !P(a)")))
 }
 
 ///|
 /// Examples/holby.ml:826
 fn step_39() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(forall x y. x + y = y + x) /\\ (1 + 2 = x) /\\ (x = 3) ==> (3 = 2 + 1)")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(∀ x : Num, ∀ y : Num, x + y == y + x) && 1 + 2 == (x : Num) && x == 3 → 3 == 2 + 1")))
 }
 
 ///|
 /// Examples/holby.ml:829
 fn step_40() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(forall x:num y. x + y = y + x) ==> (1 + 2 = 2 + 1)")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(∀ x : Num, ∀ y : Num, x + y == y + x) → 1 + 2 == 2 + 1")))
 }
 
 ///|
 /// Examples/holby.ml:832
 fn step_41() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(forall x:num y. ~(x + y = y + x)) ==> ~(1 + 2 = 2 + 1)")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(∀ x : Num, ∀ y : Num, !(x + y == y + x)) → !(1 + 2 == 2 + 1)")))
 }
 
 ///|
 /// Examples/holby.ml:835
 fn step_42() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(1 + 2 = 2 + 1) ==> ?x:num y. x + y = y + x")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("1 + 2 == 2 + 1 → (∃ x : Num, ∃ y : Num, x + y == y + x)")))
 }
 
 ///|
 /// Examples/holby.ml:838
 fn step_43() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(1 + x = x + 1) ==> ?x:num y. x + y = y + x")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("1 + (x : Num) == x + 1 → (∃ x : Num, ∃ y : Num, x + y == y + x)")))
 }
 
 ///|
 /// Examples/holby.ml:841
 fn step_44() -> Unit raise {
-  let t424 = @parser.parse_term("?x. P x ==> forall y. P y")
+  let t424 = @term_syntax.parse_term("∃ x : _, (P : (_) -> Bool)(x) → (∀ y : _, P(y))")
   ignore(@lib.time(hol_by(@list.List([])), t424))
 }
 
 ///|
 /// Examples/holby.ml:847
 fn step_45() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("1 + 1 = 2")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("1 + 1 == 2")))
 }
 
 ///|
 /// Examples/holby.ml:849
 fn step_46() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(\\x. x + 1) 2 = 2 + 1")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("((x : Num) => x + 1)(2) == 2 + 1")))
 }
 
 ///|
 /// Examples/holby.ml:851
 fn step_47() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("forall x. x < 2 ==> 2 * x <= 3")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("∀ x : Num, x < 2 → 2 * x <= 3")))
 }
 
 ///|
 /// Examples/holby.ml:853
 fn step_48() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("y IN {x | x < 2} <=> y < 2")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("IN((y : Num), {(x : Num) | x < 2}) == (y < 2)")))
 }
 
 ///|
 /// Examples/holby.ml:855
 fn step_49() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(forall x. (x = a) \\/ x > a) ==> (1 + x = a) \\/ 1 + x > a")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(∀ x : Num, x == (a : Num) || x > a) → 1 + (x : Num) == a || 1 + x > a")))
 }
 
 ///|
 /// Examples/holby.ml:857
 fn step_50() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(\\(x,y). x + y)(1,2) + 5 = (1 + 2) + 5")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("GABS((f : ((Num, Num)) -> Num) => ∀ x : Num, ∀ y : Num, GEQ(f((x, y)), x + y), (1, 2)) + 5 == 1 + 2 + 5")))
 }
 
 ///|
@@ -2116,26 +2116,26 @@ fn step_51() -> Unit raise {
 ///|
 /// Examples/holby.ml:866
 fn step_52() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("?x y. x = y")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("∃ x : _, ∃ y : _, x == y")))
 }
 
 ///|
 /// Examples/holby.ml:868
 fn step_53() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(forall Y X Z. p(X,Y) /\\ p(Y,Z) ==> p(X,Z)) /\\\n               (forall Y X Z. q(X,Y) /\\ q(Y,Z) ==> q(X,Z)) /\\\n               (forall Y X. q(X,Y) ==> q(Y,X)) /\\\n               (forall X Y. p(X,Y) \\/ q(X,Y))\n               ==> p(a,b) \\/ q(c,d)")))
+  ignore(@lib.time(hol_rule, @term_syntax.parse_term("(∀ Y : _, ∀ X : _, ∀ Z : _, (p : ((_, _)) -> Bool)((X, Y)) && p((Y, Z)) → p((X, Z))) && (∀ Y : _, ∀ X : _, ∀ Z : _, (q : ((_, _)) -> Bool)((X, Y)) && q((Y, Z)) → q((X, Z))) && (∀ Y : _, ∀ X : _, q((X, Y)) → q((Y, X))) && (∀ X : _, ∀ Y : _, p((X, Y)) || q((X, Y))) → p(((a : _), (b : _))) || q(((c : _), (d : _)))")))
 }
 
 ///|
 /// Examples/holby.ml:874
 fn step_54() -> Unit raise {
-  let t425 = @parser.parse_term("(1,2) IN {(x,y) | x < y} <=> 1 < 2")
+  let t425 = @term_syntax.parse_term("IN((1, 2), {((x : Num), (y : Num)) | x < y}) == (1 < 2)")
   ignore(@lib.time(hol_by, @list.List([@pair.pair_eq()]))(t425))
 }
 
 ///|
 /// Examples/holby.ml:876
 fn step_55() -> Unit raise {
-  let t426 = @parser.parse_term("?x. forall y. P x ==> P y")
+  let t426 = @term_syntax.parse_term("∃ x : _, ∀ y : _, (P : (_) -> Bool)(x) → P(y)")
   ignore(hol_by(@list.List([]))(t426))
 }
 

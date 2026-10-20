@@ -5655,101 +5655,101 @@ test "Examples/holby matches Examples/holby.ml" {
       #|Warning: inventing type variables
       #|0..0..solved at 2
       #|Examples/holby quotations (95):
-      #|  ~(p <=> q) <=> p /\\ ~q \\/ ~p /\\ q
-      #|  (p <=> q) <=> p /\\ q \\/ ~p /\\ ~q
-      #|  T \\/ p <=> T
-      #|  p \\/ T <=> T
-      #|  F \\/ p <=> p
-      #|  p \\/ F <=> p
-      #|  T /\\ p <=> p
-      #|  p /\\ T <=> p
-      #|  F /\\ p <=> F
-      #|  p /\\ F <=> F
-      #|  ~(p ==> q) <=> p /\\ ~q
-      #|  ~(p \\/ q) <=> ~p /\\ ~q
-      #|  ~(p /\\ q) <=> ~p \\/ ~q
-      #|  ~(~p) <=> p
-      #|  ~T <=> F
-      #|  ~F <=> T
-      #|  (p ==> q) <=> ~p \\/ q
-      #|  p \\/ q
-      #|  p /\\ q
-      #|  T
-      #|  F
-      #|  (forall x. P x /\\ Q x) <=> (forall x. P x) /\\ (forall x. Q x)
-      #|  ~(forall x. P x) <=> (?x. ~(P x))
-      #|  ~(p \\/ q) <=> ~p /\\ ~q
-      #|  ~(p /\\ q) <=> ~p \\/ ~q
-      #|  ~(~p) <=> p
-      #|  ?x. P x
-      #|  p \\/ q
-      #|  p /\\ q
-      #|  T
-      #|  F
-      #|  (?x. P x) <=> ~(forall x. ~(P x))
-      #|  p \\/ F <=> p
-      #|  F \\/ p <=> p
-      #|  p \\/ T <=> T
-      #|  T \\/ p <=> T
-      #|  p /\\ F <=> F
-      #|  F /\\ p <=> F
-      #|  p /\\ T <=> p
-      #|  T /\\ p <=> p
-      #|  ~F <=> T
-      #|  ~T <=> F
-      #|  ~(~a) <=> a
-      #|  (a ==> b) <=> ~a \\/ b
-      #|  (a <=> b) <=> (a ==> b) /\\ (b ==> a)
-      #|  p ==> ~p ==> F
-      #|  p:bool
-      #|  (~p ==> F) <=> p
-      #|  p:bool
-      #|  p ==> q <=> ~q ==> ~p
-      #|  ~ ~p <=> p
-      #|  ~(p ==> q) ==> q ==> p
-      #|  ~p ==> q <=> ~q ==> p
-      #|  (p \\/ q ==> p \\/ r) ==> p \\/ (q ==> r)
-      #|  p \\/ ~p
-      #|  p \\/ ~ ~ ~p
-      #|  ((p ==> q) ==> p) ==> p
-      #|  (p \\/ q) /\\ (~p \\/ q) /\\ (p \\/ ~q) ==> ~(~q \\/ ~q)
-      #|  (q ==> r) /\\ (r ==> p /\\ q) /\\ (p ==> q /\\ r) ==> (p <=> q)
-      #|  p <=> p
-      #|  ((p <=> q) <=> r) <=> (p <=> (q <=> r))
-      #|  p \\/ q /\\ r <=> (p \\/ q) /\\ (p \\/ r)
-      #|  (p <=> q) <=> (q \\/ ~p) /\\ (~q \\/ p)
-      #|  p ==> q <=> ~p \\/ q
-      #|  (p ==> q) \\/ (q ==> p)
-      #|  p /\\ (q ==> r) ==> s <=> (~p \\/ q \\/ s) /\\ (~p \\/ ~r \\/ s)
-      #|  (f(f(f(f(f(x))))) = x) /\\ (f(f(f(x))) = x) ==> (f(x) = x)
-      #|  (f(f(f(f(f(f(x)))))) = x) /\\ (f(f(f(f(x)))) = x) ==> (f(f(x)) = x)
-      #|  (f a = a) ==> (f(f a) = a)
-      #|  (a = f a) /\\ ((g b (f a))=(f (f a))) /\\ ((g a b)=(f (g b a)))\n   ==> (g a b = a)
-      #|  ((s(s(s(s(s(s(s(s(s(s(s(s(s(s(s a)))))))))))))))=a) /\\\n   ((s (s (s (s (s (s (s (s (s (s a))))))))))=a) /\\\n   ((s (s (s (s (s (s a))))))=a)\n   ==> (a = s a)
-      #|  (u = v) ==> (P u <=> P v)
-      #|  (b + c + d + e + f + g + h + i + j + k + l + m =\n    m + l + k + j + i + h + g + f + e + d + c + b)\n   ==> (a + b + c + d + e + f + g + h + i + j + k + l + m =\n        a + m + l + k + j + i + h + g + f + e + d + c + b)
-      #|  (f(f(f(f(a)))) = a) /\\ (f(f(f(f(f(f(a)))))) = a) /\\\n   something(irrelevant) /\\ (11 + 12 = 23) /\\\n   (f(f(f(f(b)))) = f(f(f(f(f(f(f(f(f(f(c))))))))))) /\\\n   ~(otherthing) /\\ ~(f(a) = a) /\\ ~(f(b) = b) /\\\n   P(f(f(f(a)))) ==> P(f(a))
-      #|  ((a = b) \\/ (c = d)) /\\ ((a = c) \\/ (b = d)) ==> (a = d) \\/ (b = c)
-      #|  (f(f(f(f(a:A)))) = a) /\\ (f(f(f(f(f(f(a)))))) = a) /\\\n   something(irrelevant) /\\ (11 + 12 = 23) /\\\n   (f(f(f(f(b:A)))) = f(f(f(f(f(f(f(f(f(f(c))))))))))) /\\\n   ~(otherthing) /\\ ~(f(a) = a) /\\ ~(f(b) = b) /\\\n   P(f(a)) /\\ ~(f(f(f(a))) = f(a)) ==> ?x. P(f(f(f(x))))
-      #|  (f(f(f(f(a:A)))) = a) /\\ (f(f(f(f(f(f(a)))))) = a) /\\\n   something(irrelevant) /\\ (11 + 12 = 23) /\\\n   (f(f(f(f(b:A)))) = f(f(f(f(f(f(f(f(f(f(c))))))))))) /\\\n   ~(otherthing) /\\ ~(f(a) = a) /\\ ~(f(b) = b) /\\\n   P(f(a))\n   ==> P(f(f(f(a))))
-      #|  (f(f(f(f(a:A)))) = a) /\\ (f(f(f(f(f(f(a)))))) = a) /\\\n   something(irrelevant) /\\ (11 + 12 = 23) /\\\n   (f(f(f(f(b:A)))) = f(f(f(f(f(f(f(f(f(f(c))))))))))) /\\\n   ~(otherthing) /\\ ~(f(a) = a) /\\ ~(f(b) = b) /\\\n   P(f(a))\n   ==> ?x. P(f(f(f(x))))
-      #|  (a = f a) /\\ ((g b (f a))=(f (f a))) /\\ ((g a b)=(f (g b a))) /\\\n   (forall x y. ~P (g x y))\n   ==> ~P(a)
-      #|  (forall x y. x + y = y + x) /\\ (1 + 2 = x) /\\ (x = 3) ==> (3 = 2 + 1)
-      #|  (forall x:num y. x + y = y + x) ==> (1 + 2 = 2 + 1)
-      #|  (forall x:num y. ~(x + y = y + x)) ==> ~(1 + 2 = 2 + 1)
-      #|  (1 + 2 = 2 + 1) ==> ?x:num y. x + y = y + x
-      #|  (1 + x = x + 1) ==> ?x:num y. x + y = y + x
-      #|  ?x. P x ==> forall y. P y
-      #|  1 + 1 = 2
-      #|  (\\x. x + 1) 2 = 2 + 1
-      #|  forall x. x < 2 ==> 2 * x <= 3
-      #|  y IN {x | x < 2} <=> y < 2
-      #|  (forall x. (x = a) \\/ x > a) ==> (1 + x = a) \\/ 1 + x > a
-      #|  (\\(x,y). x + y)(1,2) + 5 = (1 + 2) + 5
-      #|  ?x y. x = y
-      #|  (forall Y X Z. p(X,Y) /\\ p(Y,Z) ==> p(X,Z)) /\\\n               (forall Y X Z. q(X,Y) /\\ q(Y,Z) ==> q(X,Z)) /\\\n               (forall Y X. q(X,Y) ==> q(Y,X)) /\\\n               (forall X Y. p(X,Y) \\/ q(X,Y))\n               ==> p(a,b) \\/ q(c,d)
-      #|  (1,2) IN {(x,y) | x < y} <=> 1 < 2
-      #|  ?x. forall y. P x ==> P y
+      #|  !((p : Bool) == (q : Bool)) == (p && !q || !p && q)
+      #|  ((p : Bool) == (q : Bool)) == (p && q || !p && !q)
+      #|  (true || (p : Bool)) == true
+      #|  ((p : Bool) || true) == true
+      #|  (false || (p : Bool)) == p
+      #|  ((p : Bool) || false) == p
+      #|  (true && (p : Bool)) == p
+      #|  ((p : Bool) && true) == p
+      #|  (false && (p : Bool)) == false
+      #|  ((p : Bool) && false) == false
+      #|  !((p : Bool) \226\134\146 (q : Bool)) == (p && !q)
+      #|  !((p : Bool) || (q : Bool)) == (!p && !q)
+      #|  !((p : Bool) && (q : Bool)) == (!p || !q)
+      #|  !!(p : Bool) == p
+      #|  !true == false
+      #|  !false == true
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == (!p || q)
+      #|  (p : Bool) || (q : Bool)
+      #|  (p : Bool) && (q : Bool)
+      #|  true
+      #|  false
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)) == ((\226\136\128 x : _, P(x)) && (\226\136\128 x : _, Q(x)))
+      #|  !(\226\136\128 x : _, (P : (_) -> Bool)(x)) == (\226\136\131 x : _, !P(x))
+      #|  !((p : Bool) || (q : Bool)) == (!p && !q)
+      #|  !((p : Bool) && (q : Bool)) == (!p || !q)
+      #|  !!(p : Bool) == p
+      #|  \226\136\131 x : _, (P : (_) -> Bool)(x)
+      #|  (p : Bool) || (q : Bool)
+      #|  (p : Bool) && (q : Bool)
+      #|  true
+      #|  false
+      #|  (\226\136\131 x : _, (P : (_) -> Bool)(x)) == !(\226\136\128 x : _, !P(x))
+      #|  ((p : Bool) || false) == p
+      #|  (false || (p : Bool)) == p
+      #|  ((p : Bool) || true) == true
+      #|  (true || (p : Bool)) == true
+      #|  ((p : Bool) && false) == false
+      #|  (false && (p : Bool)) == false
+      #|  ((p : Bool) && true) == p
+      #|  (true && (p : Bool)) == p
+      #|  !false == true
+      #|  !true == false
+      #|  !!(a : Bool) == a
+      #|  ((a : Bool) \226\134\146 (b : Bool)) == (!a || b)
+      #|  ((a : Bool) == (b : Bool)) == ((a \226\134\146 b) && (b \226\134\146 a))
+      #|  (p : Bool) \226\134\146 !p \226\134\146 false
+      #|  (p : Bool)
+      #|  (!(p : Bool) \226\134\146 false) == p
+      #|  (p : Bool)
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == (!q \226\134\146 !p)
+      #|  !!(p : Bool) == p
+      #|  !((p : Bool) \226\134\146 (q : Bool)) \226\134\146 q \226\134\146 p
+      #|  (!(p : Bool) \226\134\146 (q : Bool)) == (!q \226\134\146 p)
+      #|  ((p : Bool) || (q : Bool) \226\134\146 p || (r : Bool)) \226\134\146 p || (q \226\134\146 r)
+      #|  (p : Bool) || !p
+      #|  (p : Bool) || !!!p
+      #|  (((p : Bool) \226\134\146 (q : Bool)) \226\134\146 p) \226\134\146 p
+      #|  ((p : Bool) || (q : Bool)) && (!p || q) && (p || !q) \226\134\146 !(!q || !q)
+      #|  ((q : Bool) \226\134\146 (r : Bool)) && (r \226\134\146 (p : Bool) && q) && (p \226\134\146 q && r) \226\134\146 p == q
+      #|  (p : Bool) == p
+      #|  (((p : Bool) == (q : Bool)) == (r : Bool)) == (p == (q == r))
+      #|  ((p : Bool) || (q : Bool) && (r : Bool)) == ((p || q) && (p || r))
+      #|  ((p : Bool) == (q : Bool)) == ((q || !p) && (!q || p))
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == (!p || q)
+      #|  ((p : Bool) \226\134\146 (q : Bool)) || (q \226\134\146 p)
+      #|  ((p : Bool) && ((q : Bool) \226\134\146 (r : Bool)) \226\134\146 (s : Bool)) == ((!p || q || s) && (!p || !r || s))
+      #|  (f : (_) -> _)(f(f(f(f((x : _)))))) == x && f(f(f(x))) == x \226\134\146 f(x) == x
+      #|  (f : (_) -> _)(f(f(f(f(f((x : _))))))) == x && f(f(f(f(x)))) == x \226\134\146 f(f(x)) == x
+      #|  (f : (_) -> _)((a : _)) == a \226\134\146 f(f(a)) == a
+      #|  (a : _) == (f : (_) -> _)(a) && (g : (_, _) -> _)((b : _), f(a)) == f(f(a)) && g(a, b) == f(g(b, a)) \226\134\146 g(a, b) == a
+      #|  (s : (_) -> _)(s(s(s(s(s(s(s(s(s(s(s(s(s(s((a : _)))))))))))))))) == a && s(s(s(s(s(s(s(s(s(s(a)))))))))) == a && s(s(s(s(s(s(a)))))) == a \226\134\146 a == s(a)
+      #|  (u : _) == (v : _) \226\134\146 (P : (_) -> Bool)(u) == P(v)
+      #|  (b : Num) + ((c : Num) + ((d : Num) + ((e : Num) + ((f : Num) + ((g : Num) + ((h : Num) + ((i : Num) + ((j : Num) + ((k : Num) + ((l : Num) + (m : Num))))))))))) == m + (l + (k + (j + (i + (h + (g + (f + (e + (d + (c + b)))))))))) \226\134\146 (a : Num) + (b + (c + (d + (e + (f + (g + (h + (i + (j + (k + (l + m))))))))))) == a + (m + (l + (k + (j + (i + (h + (g + (f + (e + (d + (c + b)))))))))))
+      #|  (f : (_) -> _)(f(f(f((a : _))))) == a && f(f(f(f(f(f(a)))))) == a && (something : (_) -> Bool)((irrelevant : _)) && 11 + 12 == 23 && f(f(f(f((b : _))))) == f(f(f(f(f(f(f(f(f(f((c : _))))))))))) && !(otherthing : Bool) && !(f(a) == a) && !(f(b) == b) && (P : (_) -> Bool)(f(f(f(a)))) \226\134\146 P(f(a))
+      #|  ((a : _) == (b : _) || (c : _) == (d : _)) && (a == c || b == d) \226\134\146 a == d || b == c
+      #|  (f : (A) -> A)(f(f(f((a : A))))) == a && f(f(f(f(f(f(a)))))) == a && (something : (_) -> Bool)((irrelevant : _)) && 11 + 12 == 23 && f(f(f(f((b : A))))) == f(f(f(f(f(f(f(f(f(f((c : A))))))))))) && !(otherthing : Bool) && !(f(a) == a) && !(f(b) == b) && (P : (A) -> Bool)(f(a)) && !(f(f(f(a))) == f(a)) \226\134\146 (\226\136\131 x : A, P(f(f(f(x)))))
+      #|  (f : (A) -> A)(f(f(f((a : A))))) == a && f(f(f(f(f(f(a)))))) == a && (something : (_) -> Bool)((irrelevant : _)) && 11 + 12 == 23 && f(f(f(f((b : A))))) == f(f(f(f(f(f(f(f(f(f((c : A))))))))))) && !(otherthing : Bool) && !(f(a) == a) && !(f(b) == b) && (P : (A) -> Bool)(f(a)) \226\134\146 P(f(f(f(a))))
+      #|  (f : (A) -> A)(f(f(f((a : A))))) == a && f(f(f(f(f(f(a)))))) == a && (something : (_) -> Bool)((irrelevant : _)) && 11 + 12 == 23 && f(f(f(f((b : A))))) == f(f(f(f(f(f(f(f(f(f((c : A))))))))))) && !(otherthing : Bool) && !(f(a) == a) && !(f(b) == b) && (P : (A) -> Bool)(f(a)) \226\134\146 (\226\136\131 x : A, P(f(f(f(x)))))
+      #|  (a : _) == (f : (_) -> _)(a) && (g : (_, _) -> _)((b : _), f(a)) == f(f(a)) && g(a, b) == f(g(b, a)) && (\226\136\128 x : _, \226\136\128 y : _, !(P : (_) -> Bool)(g(x, y))) \226\134\146 !P(a)
+      #|  (\226\136\128 x : Num, \226\136\128 y : Num, x + y == y + x) && 1 + 2 == (x : Num) && x == 3 \226\134\146 3 == 2 + 1
+      #|  (\226\136\128 x : Num, \226\136\128 y : Num, x + y == y + x) \226\134\146 1 + 2 == 2 + 1
+      #|  (\226\136\128 x : Num, \226\136\128 y : Num, !(x + y == y + x)) \226\134\146 !(1 + 2 == 2 + 1)
+      #|  1 + 2 == 2 + 1 \226\134\146 (\226\136\131 x : Num, \226\136\131 y : Num, x + y == y + x)
+      #|  1 + (x : Num) == x + 1 \226\134\146 (\226\136\131 x : Num, \226\136\131 y : Num, x + y == y + x)
+      #|  \226\136\131 x : _, (P : (_) -> Bool)(x) \226\134\146 (\226\136\128 y : _, P(y))
+      #|  1 + 1 == 2
+      #|  ((x : Num) => x + 1)(2) == 2 + 1
+      #|  \226\136\128 x : Num, x < 2 \226\134\146 2 * x <= 3
+      #|  IN((y : Num), {(x : Num) | x < 2}) == (y < 2)
+      #|  (\226\136\128 x : Num, x == (a : Num) || x > a) \226\134\146 1 + (x : Num) == a || 1 + x > a
+      #|  GABS((f : ((Num, Num)) -> Num) => \226\136\128 x : Num, \226\136\128 y : Num, GEQ(f((x, y)), x + y), (1, 2)) + 5 == 1 + 2 + 5
+      #|  \226\136\131 x : _, \226\136\131 y : _, x == y
+      #|  (\226\136\128 Y : _, \226\136\128 X : _, \226\136\128 Z : _, (p : ((_, _)) -> Bool)((X, Y)) && p((Y, Z)) \226\134\146 p((X, Z))) && (\226\136\128 Y : _, \226\136\128 X : _, \226\136\128 Z : _, (q : ((_, _)) -> Bool)((X, Y)) && q((Y, Z)) \226\134\146 q((X, Z))) && (\226\136\128 Y : _, \226\136\128 X : _, q((X, Y)) \226\134\146 q((Y, X))) && (\226\136\128 X : _, \226\136\128 Y : _, p((X, Y)) || q((X, Y))) \226\134\146 p(((a : _), (b : _))) || q(((c : _), (d : _)))
+      #|  IN((1, 2), {((x : Num), (y : Num)) | x < y}) == (1 < 2)
+      #|  \226\136\131 x : _, \226\136\128 y : _, (P : (_) -> Bool)(x) \226\134\146 P(y)
       #|prop_1 =  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) q:bool)) (#~:fun(bool,bool) p:bool)))
       #|prop_2 =  |- ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#~:fun(bool,bool) p:bool))) p:bool)
       #|prop_3 =  |- ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#==>:fun(bool,fun(bool,bool)) p:bool) q:bool))) ((#==>:fun(bool,fun(bool,bool)) q:bool) p:bool))
