@@ -23,7 +23,7 @@ fn step_2() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_()]))
   subset_pred_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. P SUBSET Q <=> forall x. P x ==> Q x"),
+      @term_syntax.parse_term("∀ P : (_) -> Bool, ∀ Q : (_) -> Bool, SUBSET(P, Q) == (∀ x : _, P(x) → Q(x))"),
       t1,
     ),
   )
@@ -50,7 +50,7 @@ fn step_3() -> Unit raise {
     ]),
   )
   unions_pred_c.set(
-    @tactics.prove(@parser.parse_term("UNIONS P = \\x. ?p. P p /\\ p x"), t2),
+    @tactics.prove(@term_syntax.parse_term("UNIONS((P : ((_) -> Bool) -> Bool)) == ((x : _) => ∃ p : (_) -> Bool, P(p) && p(x))"), t2),
   )
 }
 
@@ -68,7 +68,7 @@ pub fn unions_pred() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   fld_c.set(
     @pair.new_definition(
-      @parser.parse_term("fld R = {x:A | ?y. R x y \\/ R y x}"),
+      @term_syntax.parse_term("(fld : ((A, A) -> Bool, A) -> Bool)((R : (A, A) -> Bool)) == {(x : A) | ∃ y : A, R(x, y) || R(y, x)}"),
     ),
   )
 }
@@ -88,7 +88,7 @@ fn step_5() -> Unit raise {
   let t3 = @simp.rewrite_tac(@list.List([fld(), @sets.in_elim_thm()]))
   in_fld_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l x:A. x IN fld l <=> ?y. l x y \\/ l y x"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, ∀ x : A, IN(x, fld(l)) == (∃ y : A, l(x, y) || l(y, x))"),
       t3,
     ),
   )
@@ -132,7 +132,7 @@ fn step_6() -> Unit raise {
   )
   fld_eq_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall R:A->A->bool. fld R = {} <=> R = (\\x y. F)"),
+      @term_syntax.parse_term("∀ R : (A, A) -> Bool, (fld(R) == {}) == (R == ((x : A) => (y : A) => false))"),
       t10,
     ),
   )
@@ -154,7 +154,7 @@ fn step_7() -> Unit raise {
   let t12 = @tactics.then_tac(@simp.rewrite_tac(@list.List([fld()])), t11)
   fld_subset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l r. (forall x y. l x y ==> r x y) ==> fld l SUBSET fld r"),
+      @term_syntax.parse_term("∀ l : (_, _) -> Bool, ∀ r : (_, _) -> Bool, (∀ x : _, ∀ y : _, l(x, y) → r(x, y)) → SUBSET(fld(l), fld(r))"),
       t12,
     ),
   )
@@ -246,10 +246,10 @@ fn step_8() -> Unit raise {
       ) raise) raise {
         let th = x22
         let t24 = @tactics.mp_tac(
-          @bool.ispec(@parser.parse_term("SND:A#A->A"), th),
+          @bool.ispec(@term_syntax.parse_term("(SND : ((A, A)) -> A)"), th),
         )
         @tactics.then_tac(
-          @tactics.mp_tac(@bool.ispec(@parser.parse_term("FST:A#A->A"), th)),
+          @tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("(FST : ((A, A)) -> A)"), th)),
           t24,
         )
       })(t25(x26))
@@ -658,7 +658,7 @@ fn step_20() -> Unit raise {
   )
   qoset_refl_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. qoset l ==> forall x. fld(l) x ==> l x x"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, qoset(l) → (∀ x : A, fld(l, x) → l(x, x))"),
       t45,
     ),
   )
@@ -707,7 +707,7 @@ fn step_22() -> Unit raise {
   )
   qoset_refl_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l (x:A). qoset l ==> (l x x <=> x IN fld l)"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, ∀ x : A, qoset(l) → l(x, x) == IN(x, fld(l))"),
       t49,
     ),
   )
@@ -728,7 +728,7 @@ fn step_23() -> Unit raise {
   let t50 = @meson.meson_tac(@list.List([qoset_refl_eq(), @sets.in_()]))
   qoset_fldeq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. qoset l ==> (forall x. fld(l) x <=> l x x)"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, qoset(l) → (∀ x : A, fld(l, x) == l(x, x))"),
       t50,
     ),
   )
@@ -753,7 +753,7 @@ fn step_24() -> Unit raise {
   )
   qoset_fld_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. qoset l ==> fld l = {x | l x x}"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, qoset(l) → fld(l) == {(x : A) | l(x, x)}"),
       t52,
     ),
   )
@@ -784,7 +784,7 @@ fn step_25() -> Unit raise {
   )
   woset_imp_toset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. woset l ==> toset l"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, woset(l) → toset(l)"),
       t54,
     ),
   )
@@ -817,7 +817,7 @@ fn step_26() -> Unit raise {
   )
   woset_imp_poset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. woset l ==> poset l"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, woset(l) → poset(l)"),
       t56,
     ),
   )
@@ -850,7 +850,7 @@ fn step_27() -> Unit raise {
   )
   woset_imp_qoset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. woset l ==> qoset l"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, woset(l) → qoset(l)"),
       t58,
     ),
   )
@@ -883,7 +883,7 @@ fn step_28() -> Unit raise {
   )
   toset_imp_poset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. toset l ==> poset l"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, toset(l) → poset(l)"),
       t60,
     ),
   )
@@ -916,7 +916,7 @@ fn step_29() -> Unit raise {
   )
   toset_imp_qoset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. toset l ==> qoset l"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, toset(l) → qoset(l)"),
       t62,
     ),
   )
@@ -949,7 +949,7 @@ fn step_30() -> Unit raise {
   )
   poset_imp_qoset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. poset l ==> qoset l"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, poset(l) → qoset(l)"),
       t64,
     ),
   )
@@ -982,7 +982,7 @@ fn step_31() -> Unit raise {
   )
   wqoset_imp_qoset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. wqoset l ==> qoset l"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, wqoset(l) → qoset(l)"),
       t66,
     ),
   )
@@ -1004,7 +1004,7 @@ pub fn wqoset_imp_qoset() -> @kernel.Thm {
 fn step_32() -> Unit raise {
   strictly_c.set(
     @pair.new_definition(
-      @parser.parse_term("strictly R = \\x y:A. R x y /\\ ~(R y x)"),
+      @term_syntax.parse_term("(strictly : ((A, A) -> Bool, A, A) -> Bool)((R : (A, A) -> Bool)) == ((x : A) => (y : A) => R(x, y) && !R(y, x))"),
     ),
   )
 }
@@ -1023,7 +1023,7 @@ pub fn strictly() -> @kernel.Thm {
 fn step_33() -> Unit raise {
   properly_c.set(
     @pair.new_definition(
-      @parser.parse_term("properly R = \\x y:A. R x y /\\ ~(x = y)"),
+      @term_syntax.parse_term("(properly : ((A, A) -> Bool, A, A) -> Bool)((R : (A, A) -> Bool)) == ((x : A) => (y : A) => R(x, y) && !(x == y))"),
     ),
   )
 }
@@ -1049,7 +1049,7 @@ fn step_34() -> Unit raise {
   )
   properly_eq_strictly_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. poset l ==> properly l = strictly l"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, poset(l) → properly(l) == strictly(l)"),
       t68,
     ),
   )
@@ -1078,7 +1078,7 @@ fn step_35() -> Unit raise {
   )
   strictly_eq_properly_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. poset l ==> strictly l = properly l"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, poset(l) → strictly(l) == properly(l)"),
       t70,
     ),
   )
@@ -1136,7 +1136,7 @@ fn step_37() -> Unit raise {
   )
   strictly_strictly_c.set(
     @tactics.prove(
-      @parser.parse_term("forall R:A->A->bool. strictly(strictly R) = strictly R"),
+      @term_syntax.parse_term("∀ R : (A, A) -> Bool, strictly(strictly(R)) == strictly(R)"),
       t74,
     ),
   )
@@ -1163,7 +1163,7 @@ fn step_38() -> Unit raise {
   )
   properly_properly_c.set(
     @tactics.prove(
-      @parser.parse_term("forall R:A->A->bool. properly(properly R) = properly R"),
+      @term_syntax.parse_term("∀ R : (A, A) -> Bool, properly(properly(R)) == properly(R)"),
       t76,
     ),
   )
@@ -1190,7 +1190,7 @@ fn step_39() -> Unit raise {
   )
   strictly_properly_c.set(
     @tactics.prove(
-      @parser.parse_term("forall R:A->A->bool. strictly(properly R) = strictly R"),
+      @term_syntax.parse_term("∀ R : (A, A) -> Bool, strictly(properly(R)) == strictly(R)"),
       t78,
     ),
   )
@@ -1217,7 +1217,7 @@ fn step_40() -> Unit raise {
   )
   properly_strictly_c.set(
     @tactics.prove(
-      @parser.parse_term("forall R:A->A->bool. properly(strictly R) = strictly R"),
+      @term_syntax.parse_term("∀ R : (A, A) -> Bool, properly(strictly(R)) == strictly(R)"),
       t80,
     ),
   )
@@ -1361,7 +1361,7 @@ pub fn woset_toset() -> @kernel.Thm {
 /// WQOSET
 fn step_46() -> Unit raise {
   let t97 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t93 = @parser.parse_term("{x:A}")
+  let t93 = @term_syntax.parse_term("{(x : A)}")
   let t96 = @tactics.first_x_assum(fn(
     x95 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1430,7 +1430,7 @@ fn step_46() -> Unit raise {
       }
     })(((x94 : @kernel.Thm) => @bool.spec(t93, x94))(x95))
   })
-  let t89 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t89 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t88 = @simp.asm_rewrite_tac(@list.List([]))
   let t98 = @tactics.then_tac(
     @tactics.then_tac(
@@ -1505,7 +1505,7 @@ pub fn wqoset_qoset() -> @kernel.Thm {
 /// WOSET_POSET
 fn step_48() -> Unit raise {
   let t110 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t106 = @parser.parse_term("{x:A,y}")
+  let t106 = @term_syntax.parse_term("{(x : A), (y : A)}")
   let t109 = @tactics.first_x_assum(fn(
     x108 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1574,10 +1574,10 @@ fn step_48() -> Unit raise {
       }
     })(((x107 : @kernel.Thm) => @bool.spec(t106, x107))(x108))
   })
-  let t101 = @parser.parse_term("y:A")
+  let t101 = @term_syntax.parse_term("(y : A)")
   let t102 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("x:A"), t101]),
+    @list.List([@term_syntax.parse_term("(x : A)"), t101]),
   )
   let t100 = @simp.asm_rewrite_tac(@list.List([]))
   let t111 = @tactics.then_tac(
@@ -1629,7 +1629,7 @@ pub fn woset_poset() -> @kernel.Thm {
 fn step_49() -> Unit raise {
   let t134 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t133 = @simp.rewrite_tac(@list.List([fld()]))
-  let t129 = @parser.parse_term("{x:A,y,z}")
+  let t129 = @term_syntax.parse_term("{(x : A), (y : A), (z : A)}")
   let t132 = @tactics.first_x_assum(fn(
     x131 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1698,15 +1698,15 @@ fn step_49() -> Unit raise {
       }
     })(((x130 : @kernel.Thm) => @bool.spec(t129, x130))(x131))
   })
-  let t124 = @parser.parse_term("z:A")
-  let t125 = @parser.parse_term("y:A")
+  let t124 = @term_syntax.parse_term("(z : A)")
+  let t125 = @term_syntax.parse_term("(y : A)")
   let t135 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.map_every(
             @tactics.x_gen_tac,
-            @list.List([@parser.parse_term("x:A"), t125, t124]),
+            @list.List([@term_syntax.parse_term("(x : A)"), t125, t124]),
           ),
           @tactics.strip_tac,
         ),
@@ -1717,7 +1717,7 @@ fn step_49() -> Unit raise {
     t134,
   )
   let t123 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t119 = @parser.parse_term("{x:A,y}")
+  let t119 = @term_syntax.parse_term("{(x : A), (y : A)}")
   let t122 = @tactics.first_x_assum(fn(
     x121 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1786,13 +1786,13 @@ fn step_49() -> Unit raise {
       }
     })(((x120 : @kernel.Thm) => @bool.spec(t119, x120))(x121))
   })
-  let t115 = @parser.parse_term("y:A")
+  let t115 = @term_syntax.parse_term("(y : A)")
   let t136 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.map_every(
           @tactics.x_gen_tac,
-          @list.List([@parser.parse_term("x:A"), t115]),
+          @list.List([@term_syntax.parse_term("(x : A)"), t115]),
         ),
         @tactics.strip_tac,
       ),
@@ -1803,7 +1803,7 @@ fn step_49() -> Unit raise {
   let t137 = @list.List([@meson.meson_tac(@list.List([])), t136, t135])
   let t114 = @tactics.repeat_tac(@tactics.conj_tac)
   let t113 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("(r ==> p) /\\ r /\\ q ==> p /\\ q /\\ r")),
+    @class.taut(@term_syntax.parse_term("((r : Bool) → (p : Bool)) && r && (q : Bool) → p && q && r")),
   )
   let t112 = @simp.asm_rewrite_tac(@list.List([]))
   let t138 = @tactics.thenl(
@@ -1853,7 +1853,7 @@ fn step_50() -> Unit raise {
   let t168 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t167 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([fld()])))
   let t166 = @simp.rewrite_tac(@list.List([fld()]))
-  let t162 = @parser.parse_term("{x:A | x IN fld l /\\ P x}")
+  let t162 = @term_syntax.parse_term("{(x : A) | IN(x, fld((l : (A, A) -> Bool))) && (P : (A) -> Bool)(x)}")
   let t165 = @tactics.first_x_assum(fn(
     x164 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1927,7 +1927,7 @@ fn step_50() -> Unit raise {
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.then_tac(
-            @tactics.x_gen_tac(@parser.parse_term("P:A->bool")),
+            @tactics.x_gen_tac(@term_syntax.parse_term("(P : (A) -> Bool)")),
             @tactics.disch_tac,
           ),
           t165,
@@ -1939,7 +1939,7 @@ fn step_50() -> Unit raise {
     t168,
   )
   let t158 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t154 = @parser.parse_term("\\x:A. x IN s")
+  let t154 = @term_syntax.parse_term("(x : A) => IN(x, (s : (A) -> Bool))")
   let t157 = @tactics.first_x_assum(fn(
     x156 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2012,7 +2012,7 @@ fn step_50() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
-          @tactics.x_gen_tac(@parser.parse_term("s:A->bool")),
+          @tactics.x_gen_tac(@term_syntax.parse_term("(s : (A) -> Bool)")),
           @tactics.strip_tac,
         ),
         t157,
@@ -2101,7 +2101,7 @@ fn step_50() -> Unit raise {
   let t142 = @simp.rewrite_tac(@list.List([properly()]))
   let t141 = @tactics.match_mp_tac(
     @class.taut(
-      @parser.parse_term("(p ==> q) /\\ (q ==> (p <=> r)) ==> (q /\\ r <=> p)"),
+      @term_syntax.parse_term("((p : Bool) → (q : Bool)) && (q → p == (r : Bool)) → (q && r) == p"),
     ),
   )
   let t139 = @tactics.then_tac(
@@ -2173,12 +2173,12 @@ pub fn woset_wf() -> @kernel.Thm {
 fn step_51() -> Unit raise {
   let t188 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t187 = @simp.asm_rewrite_tac(@list.List([@sets.finite_sing()]))
-  let t186 = @tactics.exists_tac(@parser.parse_term("{x:A}"))
+  let t186 = @tactics.exists_tac(@term_syntax.parse_term("{(x : A)}"))
   let t185 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("x:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(x : A)"))(@tactics.strip_assume_tac),
   )
   let t184 = @simp.asm_rewrite_tac(@list.List([]))
-  let t180 = @parser.parse_term("s:A->bool")
+  let t180 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t183 = @tactics.first_x_assum(fn(
     x182 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2254,8 +2254,8 @@ fn step_51() -> Unit raise {
     @tactics.all_tac,
   ])
   let t175 = @simp.asm_rewrite_tac(@list.List([@sets.not_in_empty()]))
-  let t174 = @class.asm_cases_tac(@parser.parse_term("s:A->bool = {}"))
-  let t173 = @tactics.x_gen_tac(@parser.parse_term("s:A->bool"))
+  let t174 = @class.asm_cases_tac(@term_syntax.parse_term("(s : (A) -> Bool) == {}"))
+  let t173 = @tactics.x_gen_tac(@term_syntax.parse_term("(s : (A) -> Bool)"))
   let t172 = @simp.asm_rewrite_tac(@list.List([]))
   let t189 = @tactics.then_tac(
     @tactics.then_tac(
@@ -2302,7 +2302,7 @@ fn step_51() -> Unit raise {
   )
   woset_imp_wqoset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. woset l ==> wqoset l"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, woset(l) → wqoset(l)"),
       t189,
     ),
   )
@@ -2323,7 +2323,7 @@ pub fn woset_imp_wqoset() -> @kernel.Thm {
 /// WQOSET_SUPERSET
 fn step_52() -> Unit raise {
   let t200 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t196 = @parser.parse_term("s:A->bool")
+  let t196 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t199 = @tactics.first_x_assum(fn(
     x198 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2392,7 +2392,7 @@ fn step_52() -> Unit raise {
       }
     })(((x197 : @kernel.Thm) => @bool.spec(t196, x197))(x198))
   })
-  let t192 = @tactics.x_gen_tac(@parser.parse_term("s:A->bool"))
+  let t192 = @tactics.x_gen_tac(@term_syntax.parse_term("(s : (A) -> Bool)"))
   let t191 = @simp.asm_rewrite_tac(@list.List([]))
   let t190 = @simp.rewrite_tac(@list.List([wqoset_qoset()]))
   let t201 = @tactics.then_tac(
@@ -2502,7 +2502,7 @@ fn step_53() -> Unit raise {
     t391,
   ])
   let t385 = @tactics.subgoal_then(
-    @parser.parse_term("FINITE(IMAGE (x:num->A) (:num))"),
+    @term_syntax.parse_term("FINITE(IMAGE((x : (Num) -> A), UNIV))"),
     fn(
       x382 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2551,7 +2551,7 @@ fn step_53() -> Unit raise {
     },
   )
   let t381 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("x:num->A"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(x : (Num) -> A)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -2691,13 +2691,13 @@ fn step_53() -> Unit raise {
   let t365 = @simp.rewrite_tac(
     @list.List([
       @sets.subset(),
-      @class.taut(@parser.parse_term("~(p /\\ q) <=> p ==> ~q")),
+      @class.taut(@term_syntax.parse_term("!((p : Bool) && (q : Bool)) == (p → !q)")),
     ]),
   )
   let t364 = @simp.simp_tac(
     @list.List([@sets.finite_image(), @sets.finite_numseg_lt()]),
   )
-  let t360 = @parser.parse_term("IMAGE (x:num->A) {m | m < n}")
+  let t360 = @term_syntax.parse_term("IMAGE((x : (Num) -> A), {(m : Num) | m < (n : Num)})")
   let t363 = @tactics.first_x_assum(fn(
     x362 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2815,10 +2815,10 @@ fn step_53() -> Unit raise {
   let t351 = @simp.rewrite_tac(
     @list.List([@sets.in_diff(), @sets.in_elim_thm()]),
   )
-  let t349 = @parser.parse_term("n:num")
+  let t349 = @term_syntax.parse_term("(n : Num)")
   let t350 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("x:num->A"), t349]),
+    @list.List([@term_syntax.parse_term("(x : (Num) -> A)"), t349]),
   )
   let t348 = @list.List([@sets.set_tac(@list.List([])), @tactics.all_tac])
   let t347 = @simp.rewrite_tac(@list.List([@sets.unions_gspec()]))
@@ -2968,7 +2968,7 @@ fn step_53() -> Unit raise {
             @tactics.then_tac(
               @tactics.then_tac(
                 @tactics.strip_tac,
-                @tactics.x_gen_tac(@parser.parse_term("s:A->bool")),
+                @tactics.x_gen_tac(@term_syntax.parse_term("(s : (A) -> Bool)")),
               ),
               @tactics.disch_tac,
             ),
@@ -2983,8 +2983,8 @@ fn step_53() -> Unit raise {
     t396,
   )
   let t331 = @simp.asm_simp_tac(@list.List([@arith.lt_imp_ne()]))
-  let t326 = @parser.parse_term("(x:num->A)(r(SUC n))")
-  let t327 = @list.List([@parser.parse_term("(x:num->A)(r(n:num))"), t326])
+  let t326 = @term_syntax.parse_term("(x : (Num) -> A)((r : (Num) -> Num)(SUC((n : Num))))")
+  let t327 = @list.List([@term_syntax.parse_term("(x : (Num) -> A)((r : (Num) -> Num)((n : Num)))"), t326])
   let t330 = @tactics.disch_then(fn(
     x329 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3135,8 +3135,8 @@ fn step_53() -> Unit raise {
       @list.List([@int.arith_tac, @tactics.disch_tac]),
     ),
   )
-  let t309 = @parser.parse_term("SUC n")
-  let t310 = @list.List([@parser.parse_term("n:num"), t309])
+  let t309 = @term_syntax.parse_term("SUC((n : Num))")
+  let t310 = @list.List([@term_syntax.parse_term("(n : Num)"), t309])
   let t313 = @tactics.conjuncts_then(fn(
     x312 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3206,14 +3206,14 @@ fn step_53() -> Unit raise {
     })(((x311 : @kernel.Thm) => @bool.specl(t310, x311))(x312))
   })
   let t314 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("r:num->num"))(t313),
+    @tactics.x_choose_then(@term_syntax.parse_term("(r : (Num) -> Num)"))(t313),
   )
   let t305 = @list.List([
     @tactics.asm_tac(@sets.set_tac)(@list.List([])),
     @tactics.all_tac,
   ])
   let t304 = @simp.rewrite_tac(@list.List([@class.not_imp()]))
-  let t300 = @parser.parse_term("x:num->A")
+  let t300 = @term_syntax.parse_term("(x : (Num) -> A)")
   let t303 = @tactics.first_x_assum(fn(
     x302 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3283,7 +3283,7 @@ fn step_53() -> Unit raise {
     })(((x301 : @kernel.Thm) => @bool.spec(t300, x301))(x302))
   })
   let t296 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t295 = @tactics.x_gen_tac(@parser.parse_term("x:num->A"))
+  let t295 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : (Num) -> A)"))
   let t294 = @simp.rewrite_tac(
     @list.List([@sets.injective_alt(), @theorems.left_imp_exists_thm()]),
   )
@@ -3317,7 +3317,7 @@ fn step_53() -> Unit raise {
                           @tactics.then_tac(
                             @tactics.then_tac(
                               @tactics.x_gen_tac(
-                                @parser.parse_term("s:A->bool"),
+                                @term_syntax.parse_term("(s : (A) -> Bool)"),
                               ),
                               t292,
                             ),
@@ -3349,14 +3349,14 @@ fn step_53() -> Unit raise {
   )
   let t288 = @meson.asm_meson_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("n < SUC n")),
+      @int.arith_rule(@term_syntax.parse_term("(n : Num) < SUC(n)")),
       @arith.lt_imp_le(),
     ]),
   )
   let t287 = @simp.rewrite_tac(
     @list.List([fld(), @sets.in_elim_thm(), @class.not_imp()]),
   )
-  let t284 = @parser.parse_term("x:num->A")
+  let t284 = @term_syntax.parse_term("(x : (Num) -> A)")
   let t289 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.first_x_assum(fn(
@@ -3490,7 +3490,7 @@ fn step_53() -> Unit raise {
       }
     },
   )
-  let t275 = @tactics.x_gen_tac(@parser.parse_term("x:num->A"))
+  let t275 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : (Num) -> A)"))
   let t333 = @list.List([
     @tactics.thenl(
       @tactics.then_tac(
@@ -3540,9 +3540,9 @@ fn step_53() -> Unit raise {
   ])
   let t267 = @simp.rewrite_tac(@list.List([]))
   let t266 = @tactics.exists_tac(
-    @parser.parse_term("\\i. (t:num->num) i + p + 1"),
+    @term_syntax.parse_term("(i : Num) => (t : (Num) -> Num)(i) + ((p : Num) + 1)"),
   )
-  let t265 = @tactics.x_gen_tac(@parser.parse_term("t:num->num"))
+  let t265 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : (Num) -> Num)"))
   let t273 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -3574,8 +3574,8 @@ fn step_53() -> Unit raise {
       ),
     ),
   )
-  let t261 = @tactics.x_gen_tac(@parser.parse_term("q:num"))
-  let t260 = @tactics.exists_tac(@parser.parse_term("p:num"))
+  let t261 = @tactics.x_gen_tac(@term_syntax.parse_term("(q : Num)"))
+  let t260 = @tactics.exists_tac(@term_syntax.parse_term("(p : Num)"))
   let t259 = @tactics.match_mp_tac(
     @meson.meson(
       @list.List([]),
@@ -3588,10 +3588,10 @@ fn step_53() -> Unit raise {
     @list.List([
       @class.not_forall_thm(),
       @class.not_imp(),
-      @int.arith_rule(@parser.parse_term("~(n + p + 1 <= p)")),
+      @int.arith_rule(@term_syntax.parse_term("!((n : Num) + ((p : Num) + 1) <= p)")),
     ]),
   )
-  let t254 = @parser.parse_term("n + p + 1")
+  let t254 = @term_syntax.parse_term("(n : Num) + ((p : Num) + 1)")
   let t252 = @simp.gen_rewrite_rule(
     fn(
       x251 : (@kernel.Term) -> @kernel.Thm raise,
@@ -3690,7 +3690,7 @@ fn step_53() -> Unit raise {
       })(t252(x253))
     })(((x255 : @kernel.Thm) => @bool.spec(t254, x255))(x256))
   })
-  let t247 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
+  let t247 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t246 = @simp.rewrite_tac(@list.List([]))
   let t274 = @list.List([
     @tactics.then_tac(
@@ -3780,7 +3780,7 @@ fn step_53() -> Unit raise {
       }
     },
   )
-  let t239 = @parser.parse_term("p:num")
+  let t239 = @term_syntax.parse_term("(p : Num)")
   let t241 = @tactics.disch_then((x240 : @kernel.Thm) => {
     @tactics.x_choose_tac(t239, x240)
   })
@@ -3789,7 +3789,7 @@ fn step_53() -> Unit raise {
   )
   let t236 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t235 = @simp.asm_rewrite_tac(@list.List([@trivia.o_thm()]))
-  let t231 = @parser.parse_term("(x:num->A) o (r:num->num)")
+  let t231 = @term_syntax.parse_term("o((x : (Num) -> A), (r : (Num) -> Num))")
   let t234 = @tactics.first_x_assum(fn(
     x233 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3858,7 +3858,7 @@ fn step_53() -> Unit raise {
       }
     })(((x232 : @kernel.Thm) => @bool.spec(t231, x232))(x233))
   })
-  let t227 = @tactics.x_gen_tac(@parser.parse_term("r:num->num"))
+  let t227 = @tactics.x_gen_tac(@term_syntax.parse_term("(r : (Num) -> Num)"))
   let t238 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -3884,7 +3884,7 @@ fn step_53() -> Unit raise {
     t237,
   ])
   let t226 = @tactics.subgoal_then(
-    @parser.parse_term("~INFINITE {n | forall p. n < p ==> ~l ((x:num->A) n) (x p)}"),
+    @term_syntax.parse_term("!INFINITE({(n : Num) | ∀ p : Num, n < p → !(l : (A, A) -> Bool)((x : (Num) -> A)(n), x(p))})"),
     fn(
       x223 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3940,7 +3940,7 @@ fn step_53() -> Unit raise {
             @tactics.then_tac(
               @tactics.then_tac(
                 @tactics.disch_tac,
-                @tactics.x_gen_tac(@parser.parse_term("x:num->A")),
+                @tactics.x_gen_tac(@term_syntax.parse_term("(x : (Num) -> A)")),
               ),
               @tactics.disch_tac,
             ),
@@ -3966,7 +3966,7 @@ fn step_53() -> Unit raise {
   )
   let t218 = @simp.rewrite_tac(@list.List([@sets.exists_finite_subset_image()]))
   let t219 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t218])
-  let t214 = @parser.parse_term("IMAGE (x:num->A) (:num)")
+  let t214 = @term_syntax.parse_term("IMAGE((x : (Num) -> A), UNIV)")
   let t217 = @tactics.first_x_assum(fn(
     x216 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4045,7 +4045,7 @@ fn step_53() -> Unit raise {
                 @tactics.then_tac(
                   @tactics.then_tac(
                     @tactics.disch_tac,
-                    @tactics.x_gen_tac(@parser.parse_term("x:num->A")),
+                    @tactics.x_gen_tac(@term_syntax.parse_term("(x : (Num) -> A)")),
                   ),
                   @tactics.disch_tac,
                 ),
@@ -4075,16 +4075,16 @@ fn step_53() -> Unit raise {
   )
   let t208 = @simp.asm_rewrite_tac(@list.List([]))
   let t207 = @class.asm_cases_tac(
-    @parser.parse_term("forall x y z:A. l x y /\\ l y z ==> l x z"),
+    @term_syntax.parse_term("∀ x : A, ∀ y : A, ∀ z : A, (l : (A, A) -> Bool)(x, y) && l(y, z) → l(x, z)"),
   )
   let t206 = @simp.asm_rewrite_tac(@list.List([]))
   let t205 = @class.asm_cases_tac(
-    @parser.parse_term("forall x:A. x IN fld l ==> l x x"),
+    @term_syntax.parse_term("∀ x : A, IN(x, fld((l : (A, A) -> Bool))) → l(x, x)"),
   )
   let t204 = @simp.rewrite_tac(
     @list.List([wqoset(), qoset(), antichain(), @theorems.forall_and_thm()]),
   )
-  let t203 = @tactics.x_gen_tac(@parser.parse_term("l:A->A->bool"))
+  let t203 = @tactics.x_gen_tac(@term_syntax.parse_term("(l : (A, A) -> Bool)"))
   let t401 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -4167,7 +4167,7 @@ fn step_54() -> Unit raise {
   let t403 = @simp.simp_tac(@list.List([wqoset_antichain()]))
   wqoset_imp_wf_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. wqoset l ==> WF(strictly l)"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, wqoset(l) → WF(strictly(l))"),
       t403,
     ),
   )
@@ -4213,29 +4213,29 @@ fn step_56() -> Unit raise {
   let t439 = @meson.asm_meson_tac(
     @list.List([
       @int.arith_rule(
-        @parser.parse_term("~(n < l) /\\ ~(k < SUC n) ==> ~(k < l)"),
+        @term_syntax.parse_term("!((n : Num) < (l : Num)) && !((k : Num) < SUC(n)) → !(k < l)"),
       ),
     ]),
   )
-  let t437 = @parser.parse_term("l:num")
+  let t437 = @term_syntax.parse_term("(l : Num)")
   let t438 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("k:num"), t437]),
+    @list.List([@term_syntax.parse_term("(k : Num)"), t437]),
   )
   let t436 = @simp.asm_simp_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("n < SUC n")),
+      @int.arith_rule(@term_syntax.parse_term("(n : Num) < SUC(n)")),
       @class.not_exists_thm(),
     ]),
   )
   let t435 = @list.List([
     @meson.asm_meson_tac(
-      @list.List([@int.arith_rule(@parser.parse_term("n < SUC n"))]),
+      @list.List([@int.arith_rule(@term_syntax.parse_term("(n : Num) < SUC(n)"))]),
     ),
     @tactics.all_tac,
   ])
-  let t434 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
-  let t433 = @tactics.exists_tac(@parser.parse_term("a:num->A"))
+  let t434 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
+  let t433 = @tactics.exists_tac(@term_syntax.parse_term("(a : (Num) -> A)"))
   let t432 = @simp.rewrite_tac(@list.List([@wf.wf_dchain(), strictly()]))
   let t431 = @list.List([
     @meson.asm_meson_tac(@list.List([@arith.lt_trans(), @arith.lt_cases()])),
@@ -4330,7 +4330,7 @@ fn step_56() -> Unit raise {
   ])
   let t418 = @tactics.match_mp_tac(
     @class.taut(
-      @parser.parse_term("r /\\ (r ==> p /\\ q /\\ s) ==> p /\\ q /\\ r /\\ s"),
+      @term_syntax.parse_term("(r : Bool) && (r → (p : Bool) && (q : Bool) && (s : Bool)) → p && q && r && s"),
     ),
   )
   let t417 = @simp.simp_tac(@list.List([]))
@@ -4411,10 +4411,10 @@ fn step_56() -> Unit raise {
   let t408 = @tactics.match_mp_tac(
     @meson.meson(
       @list.List([]),
-      @parser.parse_term("~(forall i j. P i j ==> ~Q i j) ==> ?i j. P i j /\\ Q i j"),
+      @term_syntax.parse_term("!(∀ i : _, ∀ j : _, (P : (_, _) -> Bool)(i, j) → !(Q : (_, _) -> Bool)(i, j)) → (∃ i : _, ∃ j : _, P(i, j) && Q(i, j))"),
     ),
   )
-  let t407 = @tactics.x_gen_tac(@parser.parse_term("a:num->A"))
+  let t407 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : (Num) -> A)"))
   let t405 = @tactics.then_tac(
     @tactics.strip_tac,
     @simp.asm_rewrite_tac(@list.List([wqoset_nobad()])),
@@ -4553,7 +4553,7 @@ fn step_57() -> Unit raise {
   )
   woset_wqoset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. woset l <=> toset l /\\ wqoset l"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, woset(l) == (toset(l) && wqoset(l))"),
       t445,
     ),
   )
@@ -4879,10 +4879,10 @@ fn step_68() -> Unit raise {
     @list.List([
       @sets.not_in_empty(),
       strictly(),
-      @class.taut(@parser.parse_term("~(p /\\ ~p)")),
+      @class.taut(@term_syntax.parse_term("!((p : Bool) && !p)")),
     ]),
   )
-  let t474 = @class.asm_cases_tac(@parser.parse_term("s:A->bool = {}"))
+  let t474 = @class.asm_cases_tac(@term_syntax.parse_term("(s : (A) -> Bool) == {}"))
   let t473 = @tactics.disch_then(
     @tactics.conjuncts_then2(
       fn(
@@ -4934,10 +4934,10 @@ fn step_68() -> Unit raise {
       @tactics.strip_assume_tac,
     ),
   )
-  let t468 = @parser.parse_term("s:A->bool")
+  let t468 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t469 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("a:A"), t468]),
+    @list.List([@term_syntax.parse_term("(a : A)"), t468]),
   )
   let t467 = @simp.rewrite_tac(
     @list.List([
@@ -5222,7 +5222,7 @@ fn step_70() -> Unit raise {
 fn step_71() -> Unit raise {
   let t496 = @simp.rewrite_tac(@list.List([fld_eq_empty()]))
   fld_trivial_c.set(
-    @tactics.prove(@parser.parse_term("fld(\\x y:A. F) = {}"), t496),
+    @tactics.prove(@term_syntax.parse_term("fld((x : A) => (y : A) => false) == {}"), t496),
   )
 }
 
@@ -5246,7 +5246,7 @@ fn step_72() -> Unit raise {
     t497,
   )
   woset_trivial_c.set(
-    @tactics.prove(@parser.parse_term("woset(\\x y:A. F)"), t498),
+    @tactics.prove(@term_syntax.parse_term("woset((x : A) => (y : A) => false)"), t498),
   )
 }
 
@@ -5264,7 +5264,7 @@ pub fn woset_trivial() -> @kernel.Thm {
 fn step_73() -> Unit raise {
   let t499 = @simp.simp_tac(@list.List([woset_imp_wqoset(), woset_trivial()]))
   wqoset_trivial_c.set(
-    @tactics.prove(@parser.parse_term("wqoset(\\x y:A. F)"), t499),
+    @tactics.prove(@term_syntax.parse_term("wqoset((x : A) => (y : A) => false)"), t499),
   )
 }
 
@@ -5282,7 +5282,7 @@ pub fn wqoset_trivial() -> @kernel.Thm {
 fn step_74() -> Unit raise {
   let t500 = @simp.simp_tac(@list.List([woset_imp_toset(), woset_trivial()]))
   toset_trivial_c.set(
-    @tactics.prove(@parser.parse_term("toset(\\x y:A. F)"), t500),
+    @tactics.prove(@term_syntax.parse_term("toset((x : A) => (y : A) => false)"), t500),
   )
 }
 
@@ -5300,7 +5300,7 @@ pub fn toset_trivial() -> @kernel.Thm {
 fn step_75() -> Unit raise {
   let t501 = @simp.simp_tac(@list.List([woset_imp_poset(), woset_trivial()]))
   poset_trivial_c.set(
-    @tactics.prove(@parser.parse_term("poset(\\x y:A. F)"), t501),
+    @tactics.prove(@term_syntax.parse_term("poset((x : A) => (y : A) => false)"), t501),
   )
 }
 
@@ -5318,7 +5318,7 @@ pub fn poset_trivial() -> @kernel.Thm {
 fn step_76() -> Unit raise {
   let t502 = @simp.simp_tac(@list.List([woset_imp_qoset(), woset_trivial()]))
   qoset_trivial_c.set(
-    @tactics.prove(@parser.parse_term("qoset(\\x y:A. F)"), t502),
+    @tactics.prove(@term_syntax.parse_term("qoset((x : A) => (y : A) => false)"), t502),
   )
 }
 
@@ -5341,7 +5341,7 @@ fn step_77() -> Unit raise {
     ),
     t503,
   )
-  fld_num_c.set(@tactics.prove(@parser.parse_term("fld(<=) = (:num)"), t504))
+  fld_num_c.set(@tactics.prove(@term_syntax.parse_term("fld(op_lt_eq) == UNIV"), t504))
 }
 
 ///|
@@ -5372,7 +5372,7 @@ fn step_78() -> Unit raise {
     t505,
   )
   woset_num_c.set(
-    @tactics.prove(@parser.parse_term("woset((<=):num->num->bool)"), t506),
+    @tactics.prove(@term_syntax.parse_term("woset(op_lt_eq)"), t506),
   )
 }
 
@@ -5390,7 +5390,7 @@ pub fn woset_num() -> @kernel.Thm {
 fn step_79() -> Unit raise {
   let t507 = @simp.simp_tac(@list.List([woset_imp_wqoset(), woset_num()]))
   wqoset_num_c.set(
-    @tactics.prove(@parser.parse_term("wqoset((<=):num->num->bool)"), t507),
+    @tactics.prove(@term_syntax.parse_term("wqoset(op_lt_eq)"), t507),
   )
 }
 
@@ -5408,7 +5408,7 @@ pub fn wqoset_num() -> @kernel.Thm {
 fn step_80() -> Unit raise {
   let t508 = @simp.simp_tac(@list.List([woset_imp_toset(), woset_num()]))
   toset_num_c.set(
-    @tactics.prove(@parser.parse_term("toset((<=):num->num->bool)"), t508),
+    @tactics.prove(@term_syntax.parse_term("toset(op_lt_eq)"), t508),
   )
 }
 
@@ -5426,7 +5426,7 @@ pub fn toset_num() -> @kernel.Thm {
 fn step_81() -> Unit raise {
   let t509 = @simp.simp_tac(@list.List([woset_imp_poset(), woset_num()]))
   poset_num_c.set(
-    @tactics.prove(@parser.parse_term("poset((<=):num->num->bool)"), t509),
+    @tactics.prove(@term_syntax.parse_term("poset(op_lt_eq)"), t509),
   )
 }
 
@@ -5444,7 +5444,7 @@ pub fn poset_num() -> @kernel.Thm {
 fn step_82() -> Unit raise {
   let t510 = @simp.simp_tac(@list.List([woset_imp_qoset(), woset_num()]))
   qoset_num_c.set(
-    @tactics.prove(@parser.parse_term("qoset((<=):num->num->bool)"), t510),
+    @tactics.prove(@term_syntax.parse_term("qoset(op_lt_eq)"), t510),
   )
 }
 
@@ -5461,8 +5461,8 @@ pub fn qoset_num() -> @kernel.Thm {
 /// QOSET_POINTWISE
 fn step_83() -> Unit raise {
   let t526 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t525 = @tactics.exists_tac(@parser.parse_term("(\\i. y):K->A"))
-  let t522 = @parser.parse_term("y:A")
+  let t525 = @tactics.exists_tac(@term_syntax.parse_term("(i : K) => (y : A)"))
+  let t522 = @term_syntax.parse_term("(y : A)")
   let t524 = @tactics.disch_then((x523 : @kernel.Thm) => {
     @tactics.x_choose_tac(t522, x523)
   })
@@ -5499,7 +5499,7 @@ fn step_83() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([@sets.not_in_empty(), qoset()])),
     t512,
   ])
-  let t511 = @class.asm_cases_tac(@parser.parse_term("s:K->bool = {}"))
+  let t511 = @class.asm_cases_tac(@term_syntax.parse_term("(s : (K) -> Bool) == {}"))
   let t527 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -5818,15 +5818,15 @@ fn step_85() -> Unit raise {
   let t576 = @meson.asm_meson_tac(@list.List([@arith.le_lt()]))
   let t575 = @simp.asm_simp_tac(@list.List([@trivia.o_thm()]))
   let t574 = @tactics.exists_tac(
-    @parser.parse_term("(l:num->num) o (r:num->num)"),
+    @term_syntax.parse_term("o((l : (Num) -> Num), (r : (Num) -> Num))"),
   )
   let t573 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("r:num->num"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(r : (Num) -> Num)"))(
       @tactics.strip_assume_tac,
     ),
   )
   let t572 = @simp.asm_rewrite_tac(@list.List([]))
-  let t568 = @parser.parse_term("\\i:num. (x:num->K->A) (l i) a")
+  let t568 = @term_syntax.parse_term("(i : Num) => (x : (Num, K) -> A)((l : (Num) -> Num)(i), (a : K))")
   let t571 = @tactics.first_x_assum(fn(
     x570 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -5895,7 +5895,7 @@ fn step_85() -> Unit raise {
       }
     })(((x569 : @kernel.Thm) => @bool.spec(t568, x569))(x570))
   })
-  let t564 = @tactics.x_gen_tac(@parser.parse_term("l:num->num"))
+  let t564 = @tactics.x_gen_tac(@term_syntax.parse_term("(l : (Num) -> Num)"))
   let t563 = @simp.asm_rewrite_tac(
     @list.List([@theorems.left_imp_exists_thm()]),
   )
@@ -5922,11 +5922,11 @@ fn step_85() -> Unit raise {
   ) raise) raise {
     let th = x559
     let t561 = @tactics.mp_tac(
-      @bool.spec(@parser.parse_term("x:num->K->A"), th),
+      @bool.spec(@term_syntax.parse_term("(x : (Num, K) -> A)"), th),
     )
     @tactics.then_tac(
       @tactics.then_tac(
-        @tactics.x_gen_tac(@parser.parse_term("x:num->K->A")),
+        @tactics.x_gen_tac(@term_syntax.parse_term("(x : (Num, K) -> A)")),
         @tactics.strip_tac,
       ),
       t561,
@@ -5986,13 +5986,13 @@ fn step_85() -> Unit raise {
   let t554 = @simp.rewrite_tac(
     @list.List([@sets.forall_in_insert(), @theorems.forall_and_thm()]),
   )
-  let t551 = @parser.parse_term("s:K->bool")
+  let t551 = @term_syntax.parse_term("(s : (K) -> Bool)")
   let t552 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("a:K"), t551]),
+    @list.List([@term_syntax.parse_term("(a : K)"), t551]),
   )
   let t550 = @simp.rewrite_tac(@list.List([]))
-  let t549 = @tactics.exists_tac(@parser.parse_term("\\n:num. n"))
+  let t549 = @tactics.exists_tac(@term_syntax.parse_term("(n : Num) => n"))
   let t553 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -6133,7 +6133,7 @@ fn step_86() -> Unit raise {
     },
     @list.List([wqoset_nobad()]),
   )
-  let t578 = @parser.parse_term("{m:num | m < n}")
+  let t578 = @term_syntax.parse_term("{(m : Num) | m < (n : Num)}")
   let t590 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -6142,7 +6142,7 @@ fn step_86() -> Unit raise {
             @tactics.gen_tac,
             @tactics.mp_tac(
               @bool.ispecl(
-                @list.List([@parser.parse_term("(<=):num->num->bool"), t578]),
+                @list.List([@term_syntax.parse_term("op_lt_eq"), t578]),
                 wqoset_pointwise(),
               ),
             ),
@@ -6217,7 +6217,7 @@ fn step_89() -> Unit raise {
   )
   inseg_antisym_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l m:A->A->bool. l inseg m /\\ m inseg l ==> l = m"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, ∀ m : (A, A) -> Bool, inseg(l, m) && inseg(m, l) → l == m"),
       t593,
     ),
   )
@@ -6246,7 +6246,7 @@ fn step_90() -> Unit raise {
     t594,
   )
   inseg_refl_c.set(
-    @tactics.prove(@parser.parse_term("forall l:A->A->bool. l inseg l"), t595),
+    @tactics.prove(@term_syntax.parse_term("∀ l : (A, A) -> Bool, inseg(l, l)"), t595),
   )
 }
 
@@ -6363,11 +6363,11 @@ pub fn poset_antisym() -> @kernel.Thm {
 ///|
 /// POSET_REFL, POSET_TRANS, POSET_ANTISYM
 fn step_94() -> Unit raise {
-  let t601 = @kernel.assume_rule(@parser.parse_term("poset (l:A->A->bool)"))
+  let t601 = @kernel.assume_rule(@term_syntax.parse_term("poset((l : (A, A) -> Bool))"))
   let t602 = @bool.conjuncts_rule(
     @simp.rewrite_rule(@list.List([poset(), @sets.in_()]))(t601),
   )
-  let t598 = @parser.parse_term("l:A->A->bool")
+  let t598 = @term_syntax.parse_term("(l : (A, A) -> Bool)")
   match
     @lib.map(
       fn(x600 : @kernel.Thm) -> @kernel.Thm raise {
@@ -6399,7 +6399,7 @@ fn step_95() -> Unit raise {
   )
   poset_fldeq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. poset l ==> (forall x. fld(l) x <=> l x x)"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, poset(l) → (∀ x : A, fld(l, x) == l(x, x))"),
       t603,
     ),
   )
@@ -6462,7 +6462,7 @@ pub fn woset_well() -> @kernel.Thm {
 ///|
 /// WOSET_REFL, WOSET_TRANS, WOSET_ANTISYM, WOSET_TOTAL, WOSET_WELL
 fn step_96() -> Unit raise {
-  let t607 = @kernel.assume_rule(@parser.parse_term("woset (l:A->A->bool)"))
+  let t607 = @kernel.assume_rule(@term_syntax.parse_term("woset((l : (A, A) -> Bool))"))
   let t608 = @bool.conjuncts_rule(
     @simp.rewrite_rule(
       @list.List([
@@ -6473,7 +6473,7 @@ fn step_96() -> Unit raise {
       ]),
     )(t607),
   )
-  let t604 = @parser.parse_term("l:A->A->bool")
+  let t604 = @term_syntax.parse_term("(l : (A, A) -> Bool)")
   match
     @lib.map(
       fn(x606 : @kernel.Thm) -> @kernel.Thm raise {
@@ -6508,7 +6508,7 @@ fn step_97() -> Unit raise {
   let t609 = @meson.meson_tac(@list.List([woset_imp_poset(), poset_fldeq()]))
   woset_fldeq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. woset l ==> (forall x. fld(l) x <=> l x x)"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, woset(l) → (∀ x : A, fld(l, x) == l(x, x))"),
       t609,
     ),
   )
@@ -6558,7 +6558,7 @@ fn step_99() -> Unit raise {
   let t612 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
   paired_ext_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(l:A->B->C) m. (forall x y. l x y = m x y) <=> (l = m)"),
+      @term_syntax.parse_term("∀ l : (A, B) -> C, ∀ m : (A, B) -> C, (∀ x : A, ∀ y : B, l(x, y) == m(x, y)) == (l == m)"),
       t612,
     ),
   )
@@ -6605,7 +6605,7 @@ pub fn woset_trans_le() -> @kernel.Thm {
 fn step_101() -> Unit raise {
   let t624 = @meson.asm_meson_tac(@list.List([woset_trans_le(), properly()]))
   let t621 = @drule.match_mp(woset_well())
-  let t618 = @parser.parse_term("P:A->bool")
+  let t618 = @term_syntax.parse_term("(P : (A) -> Bool)")
   let t623 = @tactics.first_assum(fn(
     x622 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6787,7 +6787,7 @@ fn step_104() -> Unit raise {
   let t630 = @simp.simp_tac(@list.List([ordinal()]))
   ordinal_imp_woset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A->A->bool. ordinal l ==> woset l"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, ordinal(l) → woset(l)"),
       t630,
     ),
   )
@@ -6845,7 +6845,7 @@ fn step_105() -> Unit raise {
   ) raise) raise {
     @tactics.match_mp_tac(t637(x638))
   })
-  let t635 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
+  let t635 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
   let t636 = @list.List([@meson.asm_meson_tac(@list.List([])), t635])
   let t634 = @simp.rewrite_tac(@list.List([]))
   let t633 = @tactics.match_mp_tac(@sets.wf_finite())
@@ -7102,7 +7102,7 @@ fn step_110() -> Unit raise {
   )
   inseg_fld_subset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l m:A->A->bool. l inseg m ==> fld l SUBSET fld m"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, ∀ m : (A, A) -> Bool, inseg(l, m) → SUBSET(fld(l), fld(m))"),
       t661,
     ),
   )
@@ -7129,7 +7129,7 @@ fn step_111() -> Unit raise {
     @list.List([fld(), @sets.subset(), @sets.in_elim_thm()]),
   )
   let t670 = @drule.match_mp(woset_well())
-  let t667 = @parser.parse_term("P:A->bool")
+  let t667 = @term_syntax.parse_term("(P : (A) -> Bool)")
   let t672 = @tactics.first_assum(fn(
     x671 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -7223,7 +7223,7 @@ fn step_111() -> Unit raise {
   let t675 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
-        @tactics.x_gen_tac(@parser.parse_term("P:A->bool")),
+        @tactics.x_gen_tac(@term_syntax.parse_term("(P : (A) -> Bool)")),
         t672,
       ),
       t673,
@@ -7255,7 +7255,7 @@ fn step_111() -> Unit raise {
   )
   inseg_woset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(l:A->A->bool) m. m inseg l /\\ woset l ==> woset m"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, ∀ m : (A, A) -> Bool, inseg(m, l) && woset(l) → woset(m)"),
       t677,
     ),
   )
@@ -7346,7 +7346,7 @@ fn step_112() -> Unit raise {
       }
     })(t691(x692))
   })
-  let t684 = @parser.parse_term("x:A")
+  let t684 = @term_syntax.parse_term("(x : A)")
   let t687 = @tactics.first_x_assum(fn(
     x686 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -7415,7 +7415,7 @@ fn step_112() -> Unit raise {
       }
     })(((x685 : @kernel.Thm) => @bool.spec(t684, x685))(x686))
   })
-  let t680 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t680 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t679 = @list.List([
     @meson.asm_meson_tac(@list.List([inseg_woset()])),
     @tactics.all_tac,
@@ -7509,7 +7509,7 @@ fn step_113() -> Unit raise {
   )
   linseg_inseg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(l:A->A->bool) a. woset l ==> (linseg l a) inseg l"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, ∀ a : A, woset(l) → inseg(linseg(l, a), l)"),
       t701,
     ),
   )
@@ -7530,7 +7530,7 @@ fn step_114() -> Unit raise {
   let t702 = @meson.meson_tac(@list.List([inseg_woset(), linseg_inseg()]))
   linseg_woset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(l:A->A->bool) a. woset l ==> woset(linseg l a)"),
+      @term_syntax.parse_term("∀ l : (A, A) -> Bool, ∀ a : A, woset(l) → woset(linseg(l, a))"),
       t702,
     ),
   )
@@ -7662,9 +7662,9 @@ fn step_118() -> Unit raise {
     ]),
   )
   let t743 = @simp.asm_rewrite_tac(@list.List([]))
-  let t742 = @tactics.exists_tac(@parser.parse_term("a:A"))
+  let t742 = @tactics.exists_tac(@term_syntax.parse_term("(a : A)"))
   let t741 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("a:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(a : A)"))(@tactics.strip_assume_tac),
   )
   let t740 = @list.List([
     @meson.asm_meson_tac(@list.List([inseg_proper_subset_fld()])),
@@ -7674,7 +7674,7 @@ fn step_118() -> Unit raise {
     @list.List([linseg(), @equal.gsym(paired_ext())]),
   )
   let t726 = @simp.rewrite_tac(@list.List([]))
-  let t722 = @parser.parse_term("\\x:A. fld(l) x /\\ ~fld(m) x")
+  let t722 = @term_syntax.parse_term("(x : A) => fld((l : (A, A) -> Bool), x) && !fld((m : (A, A) -> Bool), x)")
   let t725 = @tactics.disch_then(fn(
     x724 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -7830,7 +7830,7 @@ fn step_118() -> Unit raise {
     @tactics.all_tac,
   ])
   let t709 = @simp.asm_rewrite_tac(@list.List([]))
-  let t708 = @class.asm_cases_tac(@parser.parse_term("m:A->A->bool = l"))
+  let t708 = @class.asm_cases_tac(@term_syntax.parse_term("(m : (A, A) -> Bool) == (l : (A, A) -> Bool)"))
   let t745 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -8371,7 +8371,7 @@ fn step_122() -> Unit raise {
     @list.List([linseg(), @equal.gsym(paired_ext())]),
   )
   let t793 = @simp.asm_rewrite_tac(@list.List([]))
-  let t792 = @tactics.undisch_tac(@parser.parse_term("k = linseg m (b:A)"))
+  let t792 = @tactics.undisch_tac(@term_syntax.parse_term("(k : (A, A) -> Bool) == linseg((m : (A, A) -> Bool), (b : A))"))
   let t791 = @tactics.first_assum(fn(
     x788 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -8394,7 +8394,7 @@ fn step_122() -> Unit raise {
     ) -> @kernel.Thm raise,
   ) raise) raise {
     let th_3 = x788
-    let t790 = @kernel.assume_rule(@parser.parse_term("fld(m) (b:A)"))
+    let t790 = @kernel.assume_rule(@term_syntax.parse_term("fld((m : (A, A) -> Bool), (b : A))"))
     @tactics.subst1_tac(@drule.match_mp(th_3)(t790))
   })
   let t787 = @tactics.first_assum(fn(
@@ -8419,10 +8419,10 @@ fn step_122() -> Unit raise {
     ) -> @kernel.Thm raise,
   ) raise) raise {
     let th_2 = x784
-    let t786 = @kernel.assume_rule(@parser.parse_term("fld(l) (a:A)"))
+    let t786 = @kernel.assume_rule(@term_syntax.parse_term("fld((l : (A, A) -> Bool), (a : A))"))
     @tactics.subst1_tac(@drule.match_mp(th_2)(t786))
   })
-  let t783 = @tactics.subgoal_then(@parser.parse_term("a:A = b"), fn(
+  let t783 = @tactics.subgoal_then(@term_syntax.parse_term("(a : A) == (b : A)"), fn(
     x781 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -8447,22 +8447,22 @@ fn step_122() -> Unit raise {
     @meson.asm_meson_tac(@list.List([th_1]))
   })
   let t780 = @simp.asm_rewrite_tac(@list.List([]))
-  let t779 = @tactics.exists_tac(@parser.parse_term("a:A"))
-  let t777 = @tactics.x_choose_then(@parser.parse_term("b:A"))(
+  let t779 = @tactics.exists_tac(@term_syntax.parse_term("(a : A)"))
+  let t777 = @tactics.x_choose_then(@term_syntax.parse_term("(b : A)"))(
     @tactics.strip_assume_tac,
   )
   let t778 = @tactics.disch_then(
     @tactics.conjuncts_then2(
-      @tactics.x_choose_then(@parser.parse_term("a:A"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(a : A)"))(
         @tactics.strip_assume_tac,
       ),
       t777,
     ),
   )
   let t776 = @simp.asm_rewrite_tac(@list.List([]))
-  let t775 = @class.asm_cases_tac(@parser.parse_term("k:A->A->bool = m"))
+  let t775 = @class.asm_cases_tac(@term_syntax.parse_term("(k : (A, A) -> Bool) == (m : (A, A) -> Bool)"))
   let t774 = @simp.asm_rewrite_tac(@list.List([]))
-  let t773 = @class.asm_cases_tac(@parser.parse_term("k:A->A->bool = l"))
+  let t773 = @class.asm_cases_tac(@term_syntax.parse_term("(k : (A, A) -> Bool) == (l : (A, A) -> Bool)"))
   let t772 = @tactics.every_assum(fn(
     x769 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -8695,8 +8695,8 @@ fn step_123() -> Unit raise {
   )
   let t834 = @simp.rewrite_tac(@list.List([properly()]))
   let t833 = @simp.rewrite_tac(@list.List([linseg()]))
-  let t828 = @parser.parse_term("a:A")
-  let t829 = @list.List([@parser.parse_term("a:A"), t828])
+  let t828 = @term_syntax.parse_term("(a : A)")
+  let t829 = @list.List([@term_syntax.parse_term("(a : A)"), t828])
   let t832 = @tactics.disch_then(fn(
     x831 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -8798,7 +8798,7 @@ fn step_123() -> Unit raise {
     ),
   )
   let t819 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("a:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(a : A)"))(@tactics.strip_assume_tac),
   )
   let t817 = @meson.asm_meson_tac(@list.List([]))
   let t818 = @list.List([
@@ -8905,7 +8905,7 @@ fn step_123() -> Unit raise {
   })
   let t806 = @simp.rewrite_tac(
     @list.List([
-      @class.taut(@parser.parse_term("(a /\\ b ==> a) /\\ (a /\\ b ==> b)")),
+      @class.taut(@term_syntax.parse_term("((a : Bool) && (b : Bool) → a) && (a && b → b)")),
     ]),
   )
   let t805 = @tactics.disch_then(fn(
@@ -8930,14 +8930,14 @@ fn step_123() -> Unit raise {
     ) -> @kernel.Thm raise,
   ) raise) raise {
     let th_1 = x802
-    let t804 = @bool.spec(@parser.parse_term("m:A->A->bool"), th_1)
+    let t804 = @bool.spec(@term_syntax.parse_term("(m : (A, A) -> Bool)"), th_1)
     @tactics.mp_tac(
-      @bool.conj(@bool.spec(@parser.parse_term("l:A->A->bool"), th_1), t804),
+      @bool.conj(@bool.spec(@term_syntax.parse_term("(l : (A, A) -> Bool)"), th_1), t804),
     )
   })
   let t801 = @tactics.mp_tac(
     @bool.spec(
-      @parser.parse_term("\\k:A->A->bool. k inseg l /\\ k inseg m"),
+      @term_syntax.parse_term("(k : (A, A) -> Bool) => inseg(k, (l : (A, A) -> Bool)) && inseg(k, (m : (A, A) -> Bool))"),
       union_inseg(),
     ),
   )
@@ -9071,10 +9071,10 @@ fn step_124() -> Unit raise {
   let t850 = @simp.rewrite_tac(
     @list.List([inseg(), @class.fun_eq_thm(), @pair.forall_pair_thm()]),
   )
-  let t848 = @parser.parse_term("m:A->A->bool")
+  let t848 = @term_syntax.parse_term("(m : (A, A) -> Bool)")
   let t849 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:A->A->bool"), t848]),
+      @list.List([@term_syntax.parse_term("(l : (A, A) -> Bool)"), t848]),
       ordinal_chained(),
     ),
   )
@@ -9183,14 +9183,14 @@ fn step_125() -> Unit raise {
   let t856 = @tactics.match_mp_tac(
     @meson.meson(
       @list.List([inseg_refl()]),
-      @parser.parse_term("x = y ==> x inseg y"),
+      @term_syntax.parse_term("(x : (_, _) -> Bool) == (y : (_, _) -> Bool) → inseg(x, y)"),
     ),
   )
   let t855 = @simp.asm_rewrite_tac(@list.List([]))
-  let t853 = @parser.parse_term("m:A->A->bool")
+  let t853 = @term_syntax.parse_term("(m : (A, A) -> Bool)")
   let t854 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:A->A->bool"), t853]),
+      @list.List([@term_syntax.parse_term("(l : (A, A) -> Bool)"), t853]),
       ordinal_chained(),
     ),
   )
@@ -9310,15 +9310,15 @@ pub fn fld_suc() -> @kernel.Thm {
 /// ORDINAL_SUC
 fn step_128() -> Unit raise {
   let t977 = @simp.asm_rewrite_tac(@list.List([]))
-  let t976 = @tactics.exists_tac(@parser.parse_term("a:A"))
+  let t976 = @tactics.exists_tac(@term_syntax.parse_term("(a : A)"))
   let t975 = @simp.rewrite_tac(
     @list.List([@simp.rewrite_rule(@list.List([@sets.in_()]))(in_fld())]),
   )
   let t974 = @simp.asm_rewrite_tac(@list.List([]))
   let t973 = @simp.asm_rewrite_tac(@list.List([]))
-  let t972 = @class.asm_cases_tac(@parser.parse_term("y:A = a"))
+  let t972 = @class.asm_cases_tac(@term_syntax.parse_term("(y : A) == (a : A)"))
   let t971 = @simp.rewrite_tac(@list.List([]))
-  let t970 = @tactics.x_gen_tac(@parser.parse_term("y:A"))
+  let t970 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : A)"))
   let t969 = @simp.gen_rewrite_tac(
     fn(
       x968 : (@kernel.Term) -> @kernel.Thm raise,
@@ -9336,7 +9336,7 @@ fn step_128() -> Unit raise {
     },
     @list.List([
       @equal.sym(
-        @kernel.assume_rule(@parser.parse_term("(@y:A. ~fld(l) y) = a")),
+        @kernel.assume_rule(@term_syntax.parse_term("select((y : A) => !fld((l : (A, A) -> Bool), y)) == (a : A)")),
       ),
     ]),
   )
@@ -9403,7 +9403,7 @@ fn step_128() -> Unit raise {
                               @tactics.then_tac(
                                 @tactics.then_tac(
                                   @tactics.undisch_tac(
-                                    @parser.parse_term("z:A = a"),
+                                    @term_syntax.parse_term("(z : A) == (a : A)"),
                                   ),
                                   t963,
                                 ),
@@ -9438,12 +9438,12 @@ fn step_128() -> Unit raise {
     t977,
   )
   let t959 = @simp.asm_rewrite_tac(@list.List([]))
-  let t958 = @tactics.undisch_tac(@parser.parse_term("fld(l:A->A->bool) z"))
+  let t958 = @tactics.undisch_tac(@term_syntax.parse_term("fld((l : (A, A) -> Bool), (z : A))"))
   let t957 = @simp.asm_rewrite_tac(@list.List([]))
   let t956 = @simp.asm_rewrite_tac(@list.List([]))
-  let t955 = @class.asm_cases_tac(@parser.parse_term("y:A = z"))
+  let t955 = @class.asm_cases_tac(@term_syntax.parse_term("(y : A) == (z : A)"))
   let t954 = @simp.rewrite_tac(@list.List([properly()]))
-  let t953 = @tactics.x_gen_tac(@parser.parse_term("y:A"))
+  let t953 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : A)"))
   let t952 = @simp.gen_rewrite_tac(
     fn(
       x951 : (@kernel.Term) -> @kernel.Thm raise,
@@ -9590,7 +9590,7 @@ fn step_128() -> Unit raise {
   let t980 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
-        @tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("z:A")), t939),
+        @tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(z : A)")), t939),
         pbeta_tac,
       ),
       t940,
@@ -9607,7 +9607,7 @@ fn step_128() -> Unit raise {
     },
     @list.List([@class.not_exists_thm()]),
   )
-  let t927 = @parser.parse_term("w:A")
+  let t927 = @term_syntax.parse_term("(w : A)")
   let t935 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -9709,11 +9709,11 @@ fn step_128() -> Unit raise {
   )
   let t936 = @list.List([@meson.asm_meson_tac(@list.List([])), t935])
   let t923 = @simp.asm_rewrite_tac(@list.List([]))
-  let t922 = @class.asm_cases_tac(@parser.parse_term("?x:A. P x /\\ fld(l) x"))
+  let t922 = @class.asm_cases_tac(@term_syntax.parse_term("∃ x : A, (P : (A) -> Bool)(x) && fld((l : (A, A) -> Bool), x)"))
   let t921 = @simp.rewrite_tac(
-    @list.List([@class.taut(@parser.parse_term("a /\\ b ==> b"))]),
+    @list.List([@class.taut(@term_syntax.parse_term("(a : Bool) && (b : Bool) → b"))]),
   )
-  let t917 = @parser.parse_term("\\x:A. P x /\\ fld(l) x")
+  let t917 = @term_syntax.parse_term("(x : A) => (P : (A) -> Bool)(x) && fld((l : (A, A) -> Bool), x)")
   let t920 = @tactics.imp_res_then(fn(
     x919 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -9782,7 +9782,7 @@ fn step_128() -> Unit raise {
       }
     })(((x918 : @kernel.Thm) => @bool.spec(t917, x918))(x919))
   })(woset_well())
-  let t911 = @parser.parse_term("w:A")
+  let t911 = @term_syntax.parse_term("(w : A)")
   let t913 = @tactics.disch_then(
     @tactics.conjuncts_then2(
       fn(
@@ -9843,7 +9843,7 @@ fn step_128() -> Unit raise {
             @tactics.then_tac(
               @tactics.then_tac(
                 @tactics.then_tac(
-                  @tactics.x_gen_tac(@parser.parse_term("P:A->bool")),
+                  @tactics.x_gen_tac(@term_syntax.parse_term("(P : (A) -> Bool)")),
                   t907,
                 ),
                 t913,
@@ -9861,8 +9861,8 @@ fn step_128() -> Unit raise {
     t936,
   )
   let t906 = @simp.asm_rewrite_tac(@list.List([]))
-  let t904 = @tactics.exists_tac(@parser.parse_term("x:A"))
-  let t905 = @list.List([@tactics.exists_tac(@parser.parse_term("y:A")), t904])
+  let t904 = @tactics.exists_tac(@term_syntax.parse_term("(x : A)"))
+  let t905 = @list.List([@tactics.exists_tac(@term_syntax.parse_term("(y : A)")), t904])
   let t903 = @simp.rewrite_tac(
     @list.List([@simp.rewrite_rule(@list.List([@sets.in_()]))(in_fld())]),
   )
@@ -10014,7 +10014,7 @@ fn step_128() -> Unit raise {
     )
   })
   let t889 = @tactics.conv_tac(@class.contrapos_conv)
-  let t888 = @tactics.undisch_tac(@parser.parse_term("~fld(l:A->A->bool) a"))
+  let t888 = @tactics.undisch_tac(@term_syntax.parse_term("!fld((l : (A, A) -> Bool), (a : A))"))
   let t887 = @list.List([
     @meson.asm_meson_tac(@list.List([woset_antisym()])),
     @tactics.all_tac,
@@ -10081,7 +10081,7 @@ fn step_128() -> Unit raise {
     @tactics.then_tac(@tactics.then_tac(@simp.expand_tac("a"), t883), t884),
     @tactics.all_tac,
   ])
-  let t882 = @tactics.subgoal_then(@parser.parse_term("~fld(l:A->A->bool) a"), fn(
+  let t882 = @tactics.subgoal_then(@term_syntax.parse_term("!fld((l : (A, A) -> Bool), (a : A))"), fn(
     x879 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -10127,7 +10127,7 @@ fn step_128() -> Unit raise {
       s880(x881)
     }
   })
-  let t878 = @simp.abbrev_tac(@parser.parse_term("a:A = @y. ~fld(l) y"))
+  let t878 = @simp.abbrev_tac(@term_syntax.parse_term("(a : A) == select((y : A) => !fld((l : (A, A) -> Bool), y))"))
   let t877 = @tactics.disch_then(
     @tactics.repeat_tcl(@tactics.conjuncts_then)(fn(
       x874 : @kernel.Thm,
@@ -10270,7 +10270,7 @@ fn step_129() -> Unit raise {
     t1152,
   ])
   let t1148 = @tactics.subgoal_then(
-    @parser.parse_term("ordinal(l:A->A->bool) /\\ ordinal(m:A->A->bool)"),
+    @term_syntax.parse_term("ordinal((l : (A, A) -> Bool)) && ordinal((m : (A, A) -> Bool))"),
     fn(
       x1145 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -10322,7 +10322,7 @@ fn step_129() -> Unit raise {
     @tactics.thenl(
       @tactics.then_tac(
         @tactics.first_assum(
-          @tactics.x_choose_then(@parser.parse_term("m:A->A->bool"))(
+          @tactics.x_choose_then(@term_syntax.parse_term("(m : (A, A) -> Bool)"))(
             @tactics.strip_assume_tac,
           ),
         ),
@@ -10335,14 +10335,14 @@ fn step_129() -> Unit raise {
   let t1144 = @simp.asm_rewrite_tac(@list.List([]))
   let t1159 = @list.List([
     @tactics.then_tac(
-      @tactics.exists_tac(@parser.parse_term("l:A->A->bool")),
+      @tactics.exists_tac(@term_syntax.parse_term("(l : (A, A) -> Bool)")),
       t1144,
     ),
     t1158,
   ])
   let t1143 = @simp.asm_rewrite_tac(@list.List([properly(), unions_pred()]))
-  let t1142 = @class.asm_cases_tac(@parser.parse_term("y:A = x"))
-  let t1141 = @tactics.x_gen_tac(@parser.parse_term("y:A"))
+  let t1142 = @class.asm_cases_tac(@term_syntax.parse_term("(y : A) == (x : A)"))
+  let t1141 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : A)"))
   let t1140 = @simp.gen_rewrite_tac(
     fn(
       x1139 : (@kernel.Term) -> @kernel.Thm raise,
@@ -10354,7 +10354,7 @@ fn step_129() -> Unit raise {
   let t1138 = @tactics.repeat_tac(@tactics.ap_term_tac)
   let t1137 = @tactics.match_mp_tac(@theorems.eq_imp())
   let t1136 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1132 = @parser.parse_term("x:A")
+  let t1132 = @term_syntax.parse_term("(x : A)")
   let t1135 = @tactics.disch_then(
     @tactics.conjuncts_then2(
       fn(
@@ -10523,10 +10523,10 @@ fn step_129() -> Unit raise {
     }),
   )
   let t1120 = @tactics.mp_tac(
-    @kernel.assume_rule(@parser.parse_term("forall l:A->A->bool. P l ==> ordinal l")),
+    @kernel.assume_rule(@term_syntax.parse_term("∀ l : (A, A) -> Bool, (P : ((A, A) -> Bool) -> Bool)(l) → ordinal(l)")),
   )
   let t1119 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("l:A->A->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(l : (A, A) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -10551,7 +10551,7 @@ fn step_129() -> Unit raise {
                                     @tactics.then_tac(
                                       @tactics.then_tac(
                                         @tactics.x_gen_tac(
-                                          @parser.parse_term("x:A"),
+                                          @term_syntax.parse_term("(x : A)"),
                                         ),
                                         t1118,
                                       ),
@@ -10592,7 +10592,7 @@ fn step_129() -> Unit raise {
     t1159,
   )
   let t1115 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1114 = @tactics.exists_tac(@parser.parse_term("b:A"))
+  let t1114 = @tactics.exists_tac(@term_syntax.parse_term("(b : A)"))
   let t1113 = @simp.asm_rewrite_tac(
     @list.List([@simp.rewrite_rule(@list.List([@sets.in_()]))(in_fld())]),
   )
@@ -10649,8 +10649,8 @@ fn step_129() -> Unit raise {
   )
   let t1105 = @simp.asm_rewrite_tac(@list.List([]))
   let t1102 = @drule.match_mp(woset_total())
-  let t1098 = @parser.parse_term("x:A")
-  let t1099 = @list.List([@parser.parse_term("b:A"), t1098])
+  let t1098 = @term_syntax.parse_term("(x : A)")
+  let t1099 = @list.List([@term_syntax.parse_term("(b : A)"), t1098])
   let t1104 = @tactics.disch_then(fn(
     x1103 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -10741,12 +10741,12 @@ fn step_129() -> Unit raise {
       })(((x1100 : @kernel.Thm) => @bool.specl(t1099, x1100))(x1101))
     })(t1102(x1103))
   })
-  let t1093 = @kernel.assume_rule(@parser.parse_term("ordinal(m:A->A->bool)"))
+  let t1093 = @kernel.assume_rule(@term_syntax.parse_term("ordinal((m : (A, A) -> Bool))"))
   let t1094 = @tactics.mp_tac(
     @bool.conjunct1(@simp.rewrite_rule(@list.List([ordinal()]))(t1093)),
   )
   let t1092 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1088 = @parser.parse_term("b:A")
+  let t1088 = @term_syntax.parse_term("(b : A)")
   let t1091 = @tactics.imp_res_then(fn(
     x1090 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -10885,8 +10885,8 @@ fn step_129() -> Unit raise {
   })
   let t1079 = @simp.asm_rewrite_tac(@list.List([]))
   let t1076 = @simp.rewrite_rule(@list.List([inseg()]))
-  let t1072 = @parser.parse_term("b:A")
-  let t1073 = @list.List([@parser.parse_term("x:A"), t1072])
+  let t1072 = @term_syntax.parse_term("(b : A)")
+  let t1073 = @list.List([@term_syntax.parse_term("(x : A)"), t1072])
   let t1078 = @tactics.first_assum(fn(
     x1077 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -10997,7 +10997,7 @@ fn step_129() -> Unit raise {
                                   @tactics.then_tac(
                                     @tactics.then_tac(
                                       @tactics.exists_tac(
-                                        @parser.parse_term("m:A->A->bool"),
+                                        @term_syntax.parse_term("(m : (A, A) -> Bool)"),
                                       ),
                                       t1068,
                                     ),
@@ -11046,7 +11046,7 @@ fn step_129() -> Unit raise {
         @tactics.then_tac(
           @tactics.then_tac(
             @tactics.then_tac(
-              @tactics.exists_tac(@parser.parse_term("l:A->A->bool")),
+              @tactics.exists_tac(@term_syntax.parse_term("(l : (A, A) -> Bool)")),
               t1063,
             ),
             t1064,
@@ -11061,15 +11061,15 @@ fn step_129() -> Unit raise {
   ])
   let t1062 = @tactics.disch_then(@tactics.disj_cases_tac)
   let t1061 = @simp.asm_rewrite_tac(@list.List([unions_pred()]))
-  let t1059 = @parser.parse_term("m:A->A->bool")
+  let t1059 = @term_syntax.parse_term("(m : (A, A) -> Bool)")
   let t1060 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("l:A->A->bool"), t1059]),
+      @list.List([@term_syntax.parse_term("(l : (A, A) -> Bool)"), t1059]),
       ordinal_chained(),
     ),
   )
   let t1057 = @kernel.assume_rule(
-    @parser.parse_term("(P:(A->A->bool)->bool) m"),
+    @term_syntax.parse_term("(P : ((A, A) -> Bool) -> Bool)((m : (A, A) -> Bool))"),
   )
   let t1058 = @tactics.ante_res_then(fn(
     x1054 : @kernel.Thm,
@@ -11118,11 +11118,11 @@ fn step_129() -> Unit raise {
     }
   })(t1057)
   let t1053 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("m:A->A->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(m : (A, A) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
-  let t1051 = @kernel.assume_rule(@parser.parse_term("(Q:A->bool) x"))
+  let t1051 = @kernel.assume_rule(@term_syntax.parse_term("(Q : (A) -> Bool)((x : A))"))
   let t1052 = @tactics.ante_res_then(fn(
     x1048 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -11169,19 +11169,19 @@ fn step_129() -> Unit raise {
       s1049(x1050)
     }
   })(t1051)
-  let t1047 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t1047 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t1046 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1045 = @tactics.exists_tac(@parser.parse_term("b:A"))
+  let t1045 = @tactics.exists_tac(@term_syntax.parse_term("(b : A)"))
   let t1044 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("b:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(b : A)"))(@tactics.strip_assume_tac),
   )
   let t1042 = @simp.asm_rewrite_tac(@list.List([]))
   let t1043 = @list.List([
-    @tactics.then_tac(@tactics.exists_tac(@parser.parse_term("a:A")), t1042),
+    @tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("(a : A)")), t1042),
     @tactics.all_tac,
   ])
   let t1041 = @tactics.subgoal_then(
-    @parser.parse_term("?x:A. fld(l) x /\\ Q x"),
+    @term_syntax.parse_term("∃ x : A, fld((l : (A, A) -> Bool), x) && (Q : (A) -> Bool)(x)"),
     fn(
       x1039 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -11208,9 +11208,9 @@ fn step_129() -> Unit raise {
     },
   )
   let t1038 = @simp.rewrite_tac(
-    @list.List([@class.taut(@parser.parse_term("a /\\ b ==> a"))]),
+    @list.List([@class.taut(@term_syntax.parse_term("(a : Bool) && (b : Bool) → a"))]),
   )
-  let t1034 = @parser.parse_term("\\x:A. fld(l) x /\\ Q x")
+  let t1034 = @term_syntax.parse_term("(x : A) => fld((l : (A, A) -> Bool), x) && (Q : (A) -> Bool)(x)")
   let t1037 = @tactics.imp_res_then(fn(
     x1036 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -11279,12 +11279,12 @@ fn step_129() -> Unit raise {
       }
     })(((x1035 : @kernel.Thm) => @bool.spec(t1034, x1035))(x1036))
   })(woset_well())
-  let t1029 = @kernel.assume_rule(@parser.parse_term("ordinal(l:A->A->bool)"))
+  let t1029 = @kernel.assume_rule(@term_syntax.parse_term("ordinal((l : (A, A) -> Bool))"))
   let t1030 = @tactics.assume_tac(
     @bool.conjunct1(@simp.rewrite_rule(@list.List([ordinal()]))(t1029)),
   )
   let t1027 = @kernel.assume_rule(
-    @parser.parse_term("forall l:A->A->bool. P l ==> ordinal l"),
+    @term_syntax.parse_term("∀ l : (A, A) -> Bool, (P : ((A, A) -> Bool) -> Bool)(l) → ordinal(l)"),
   )
   let t1028 = @tactics.imp_res_then(fn(
     x1024 : @kernel.Thm,
@@ -11334,17 +11334,17 @@ fn step_129() -> Unit raise {
   })(t1027)
   let t1023 = @tactics.disch_then(
     @tactics.imp_res_then(
-      @tactics.x_choose_then(@parser.parse_term("l:A->A->bool"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(l : (A, A) -> Bool)"))(
         @tactics.strip_assume_tac,
       ),
     ),
   )
   let t1022 = @tactics.mp_tac(
     @kernel.assume_rule(
-      @parser.parse_term("forall x:A. Q x ==> (?l. P l /\\ fld l x)"),
+      @term_syntax.parse_term("∀ x : A, (Q : (A) -> Bool)(x) → (∃ l : (A, A) -> Bool, (P : ((A, A) -> Bool) -> Bool)(l) && fld(l, x))"),
     ),
   )
-  let t1019 = @parser.parse_term("a:A")
+  let t1019 = @term_syntax.parse_term("(a : A)")
   let t1021 = @tactics.disch_then(
     @tactics.conjuncts_then2(
       fn(
@@ -11483,20 +11483,20 @@ fn step_129() -> Unit raise {
     @simp.rewrite_rule(@list.List([ordinal()])),
   )
   let t1007 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("m:A->A->bool"), woset_antisym()),
+    @bool.spec(@term_syntax.parse_term("(m : (A, A) -> Bool)"), woset_antisym()),
   )
   let t1008 = @list.List([
     @tactics.mp_tac(
-      @bool.spec(@parser.parse_term("l:A->A->bool"), woset_antisym()),
+      @bool.spec(@term_syntax.parse_term("(l : (A, A) -> Bool)"), woset_antisym()),
     ),
     t1007,
   ])
   let t1006 = @tactics.disch_then(@tactics.disj_cases_tac)
   let t1005 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1003 = @parser.parse_term("m:A->A->bool")
+  let t1003 = @term_syntax.parse_term("(m : (A, A) -> Bool)")
   let t1004 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("l:A->A->bool"), t1003]),
+      @list.List([@term_syntax.parse_term("(l : (A, A) -> Bool)"), t1003]),
       ordinal_chained(),
     ),
   )
@@ -11594,7 +11594,7 @@ fn step_129() -> Unit raise {
       }
     },
   )
-  let t1001 = @tactics.x_choose_then(@parser.parse_term("m:A->A->bool"))(t1000)
+  let t1001 = @tactics.x_choose_then(@term_syntax.parse_term("(m : (A, A) -> Bool)"))(t1000)
   let t993 = @tactics.conjuncts_then2(
     @tactics.ante_res_then(fn(
       x987 : @kernel.Thm,
@@ -11691,12 +11691,12 @@ fn step_129() -> Unit raise {
   )
   let t1002 = @tactics.disch_then(
     @tactics.conjuncts_then2(
-      @tactics.x_choose_then(@parser.parse_term("l:A->A->bool"))(t993),
+      @tactics.x_choose_then(@term_syntax.parse_term("(l : (A, A) -> Bool)"))(t993),
       t1001,
     ),
   )
   let t986 = @simp.rewrite_tac(@list.List([unions_pred()]))
-  let t985 = @parser.parse_term("y:A")
+  let t985 = @term_syntax.parse_term("(y : A)")
   let t1162 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -11713,7 +11713,7 @@ fn step_129() -> Unit raise {
                             @tactics.then_tac(
                               @tactics.map_every(
                                 @tactics.x_gen_tac,
-                                @list.List([@parser.parse_term("x:A"), t985]),
+                                @list.List([@term_syntax.parse_term("(x : A)"), t985]),
                               ),
                               t986,
                             ),
@@ -11787,7 +11787,7 @@ pub fn ordinal_union() -> @kernel.Thm {
 /// ORDINAL_UNION_LEMMA
 fn step_130() -> Unit raise {
   let t1166 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1165 = @tactics.exists_tac(@parser.parse_term("l:A->A->bool"))
+  let t1165 = @tactics.exists_tac(@term_syntax.parse_term("(l : (A, A) -> Bool)"))
   let t1164 = @simp.rewrite_tac(@list.List([union_fld()]))
   let t1167 = @tactics.then_tac(
     @tactics.then_tac(
@@ -11823,7 +11823,7 @@ fn step_131() -> Unit raise {
   let t1182 = @simp.asm_rewrite_tac(@list.List([]))
   let t1181 = @tactics.conv_tac(@class.select_conv)
   let t1180 = @simp.asm_rewrite_tac(@list.List([fld_suc()]))
-  let t1178 = @parser.parse_term("@y. ~fld(l:A->A->bool) y")
+  let t1178 = @term_syntax.parse_term("select((y : A) => !fld((l : (A, A) -> Bool), y))")
   let t1179 = @tactics.map_every(
     fn(
       x1175 : @kernel.Term,
@@ -11880,7 +11880,7 @@ fn step_131() -> Unit raise {
   )
   let t1174 = @simp.asm_rewrite_tac(@list.List([]))
   let t1173 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("l:A->A->bool"), ordinal_suc()),
+    @bool.spec(@term_syntax.parse_term("(l : (A, A) -> Bool)"), ordinal_suc()),
   )
   let t1172 = @simp.gen_rewrite_tac(
     fn(
@@ -11892,7 +11892,7 @@ fn step_131() -> Unit raise {
     @list.List([@class.not_forall_thm()]),
   )
   let t1168 = @simp.rewrite_tac(
-    @list.List([@class.taut(@parser.parse_term("a \\/ b <=> ~a ==> b"))]),
+    @list.List([@class.taut(@term_syntax.parse_term("((a : Bool) || (b : Bool)) == (!a → b)"))]),
   )
   let t1183 = @tactics.then_tac(
     @tactics.then_tac(
@@ -11996,11 +11996,11 @@ fn step_132() -> Unit raise {
       }
     }),
   )(ordinal_union_lemma())
-  let t1189 = @tactics.x_choose_then(@parser.parse_term("x:A"))(
+  let t1189 = @tactics.x_choose_then(@term_syntax.parse_term("(x : A)"))(
     @tactics.strip_assume_tac,
   )
   let t1190 = @tactics.pop_assum(
-    @tactics.x_choose_then(@parser.parse_term("m:A->A->bool"))(t1189),
+    @tactics.x_choose_then(@term_syntax.parse_term("(m : (A, A) -> Bool)"))(t1189),
   )
   let t1188 = @simp.asm_rewrite_tac(@list.List([]))
   let t1186 = @drule.match_mp(ordinal_up())
@@ -12045,13 +12045,13 @@ fn step_132() -> Unit raise {
     t1196,
   ])
   let t1184 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("a /\\ (a ==> b) ==> a /\\ b")),
+    @class.taut(@term_syntax.parse_term("(a : Bool) && (a → (b : Bool)) → a && b")),
   )
   let t1198 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.exists_tac(
-          @parser.parse_term("\\a b:A. ?l. ordinal l /\\ l a b"),
+          @term_syntax.parse_term("(a : A) => (b : A) => ∃ l : (A, A) -> Bool, ordinal(l) && l(a, b)"),
         ),
         t1184,
       ),
@@ -12061,7 +12061,7 @@ fn step_132() -> Unit raise {
   )
   wo_ordinal_c.set(
     @tactics.prove(
-      @parser.parse_term("?l:A->A->bool. ordinal(l) /\\ forall x. fld(l) x"),
+      @term_syntax.parse_term("∃ l : (A, A) -> Bool, ordinal(l) && (∀ x : A, fld(l, x))"),
       t1198,
     ),
   )
@@ -12080,17 +12080,17 @@ pub fn wo_ordinal() -> @kernel.Thm {
 /// FLD_RESTRICT
 fn step_133() -> Unit raise {
   let t1208 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1207 = @tactics.exists_tac(@parser.parse_term("y:A"))
+  let t1207 = @tactics.exists_tac(@term_syntax.parse_term("(y : A)"))
   let t1206 = @simp.rewrite_tac(
     @list.List([@simp.rewrite_rule(@list.List([@sets.in_()]))(in_fld())]),
   )
   let t1205 = @tactics.imp_res_then(@tactics.match_mp_tac)(woset_refl())
   let t1204 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1203 = @tactics.exists_tac(@parser.parse_term("x:A"))
+  let t1203 = @tactics.exists_tac(@term_syntax.parse_term("(x : A)"))
   let t1201 = @simp.asm_rewrite_tac(@list.List([]))
   let t1202 = @tactics.try_tac(
     @tactics.then_tac(
-      @tactics.then_tac(@tactics.exists_tac(@parser.parse_term("y:A")), t1201),
+      @tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("(y : A)")), t1201),
       @tactics.no_tac,
     ),
   )
@@ -12203,12 +12203,12 @@ fn step_134() -> Unit raise {
   let t1247 = @tactics.first_assum(@tactics.match_mp_tac)
   let t1246 = @tactics.repeat_tac(@tactics.conj_tac)
   let t1245 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1244 = @tactics.exists_tac(@parser.parse_term("y:A"))
+  let t1244 = @tactics.exists_tac(@term_syntax.parse_term("(y : A)"))
   let t1243 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("y:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(y : A)"))(@tactics.strip_assume_tac),
   )
   let t1242 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1238 = @parser.parse_term("Q:A->bool")
+  let t1238 = @term_syntax.parse_term("(Q : (A) -> Bool)")
   let t1241 = @tactics.disch_then(fn(
     x1240 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -12406,7 +12406,7 @@ fn step_134() -> Unit raise {
                     @tactics.then_tac(
                       @tactics.then_tac(
                         @tactics.then_tac(
-                          @tactics.x_gen_tac(@parser.parse_term("Q:A->bool")),
+                          @tactics.x_gen_tac(@term_syntax.parse_term("(Q : (A) -> Bool)")),
                           t1228,
                         ),
                         t1234,
@@ -12512,7 +12512,7 @@ fn step_134() -> Unit raise {
     ]),
   )
   let t1211 = @tactics.exists_tac(
-    @parser.parse_term("\\x y:A. P x /\\ P y /\\ l x y"),
+    @term_syntax.parse_term("(x : A) => (y : A) => (P : (A) -> Bool)(x) && P(y) && (l : (A, A) -> Bool)(x, y)"),
   )
   let t1210 = @simp.rewrite_rule(@list.List([ordinal()]))(wo_ordinal())
   let t1254 = @tactics.thenl(
@@ -12525,7 +12525,7 @@ fn step_134() -> Unit raise {
                 @tactics.then_tac(
                   @tactics.then_tac(
                     @tactics.gen_tac,
-                    @tactics.x_choose_then(@parser.parse_term("l:A->A->bool"))(
+                    @tactics.x_choose_then(@term_syntax.parse_term("(l : (A, A) -> Bool)"))(
                       @tactics.strip_assume_tac,
                     )(t1210),
                   ),
@@ -12547,7 +12547,7 @@ fn step_134() -> Unit raise {
   )
   wo_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. ?l:A->A->bool. woset l /\\ (fld(l) = P)"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∃ l : (A, A) -> Bool, woset(l) && fld(l) == P"),
       t1254,
     ),
   )
@@ -12710,7 +12710,7 @@ fn step_135() -> Unit raise {
     )
   })
   let t1350 = @tactics.undisch_tac(
-    @parser.parse_term("fld ((l:(A->A->bool)->(A->A->bool)) w) (a (l w))"),
+    @term_syntax.parse_term("fld((l : ((A, A) -> Bool, A, A) -> Bool)((w : (A, A) -> Bool)), (a : ((A, A) -> Bool) -> A)(l(w)))"),
   )
   let t1349 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1348 = @simp.asm_simp_tac(@list.List([]))
@@ -12737,11 +12737,11 @@ fn step_135() -> Unit raise {
   ) raise) raise {
     let th = x1344
     let t1346 = @tactics.mp_tac(
-      @bool.spec(@parser.parse_term("w:A->A->bool"), th),
+      @bool.spec(@term_syntax.parse_term("(w : (A, A) -> Bool)"), th),
     )
     @tactics.then_tac(
       @tactics.mp_tac(
-        @bool.spec(@parser.parse_term("(l:(A->A->bool)->(A->A->bool)) w"), th),
+        @bool.spec(@term_syntax.parse_term("(l : ((A, A) -> Bool, A, A) -> Bool)((w : (A, A) -> Bool))"), th),
       ),
       t1346,
     )
@@ -12751,7 +12751,7 @@ fn step_135() -> Unit raise {
     @tactics.disch_tac,
   ])
   let t1342 = @simp.asm_simp_tac(@list.List([@class.not_imp()]))
-  let t1338 = @parser.parse_term("(l:(A->A->bool)->(A->A->bool)) w")
+  let t1338 = @term_syntax.parse_term("(l : ((A, A) -> Bool, A, A) -> Bool)((w : (A, A) -> Bool))")
   let t1341 = @tactics.disch_then(fn(
     x1340 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -12919,7 +12919,7 @@ fn step_135() -> Unit raise {
     ),
   )
   let t1327 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("w:A->A->bool"))(fn(
+    @tactics.x_choose_then(@term_syntax.parse_term("(w : (A, A) -> Bool)"))(fn(
       x1324 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
@@ -13007,10 +13007,10 @@ fn step_135() -> Unit raise {
     ]),
   )
   let t1315 = @simp.rewrite_tac(
-    @list.List([@class.taut(@parser.parse_term("P /\\ x = y <=> x = y /\\ P"))]),
+    @list.List([@class.taut(@term_syntax.parse_term("((P : Bool) && (x : _) == (y : _)) == (x == y && P)"))]),
   )
   let t1314 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
-  let t1310 = @parser.parse_term("{(a:(A->A->bool)->A) x | P x /\\ x inseg z}")
+  let t1310 = @term_syntax.parse_term("{(a : ((A, A) -> Bool) -> A)((x : (A, A) -> Bool)) | (P : ((A, A) -> Bool) -> Bool)(x) && inseg(x, (z : (A, A) -> Bool))}")
   let t1313 = @tactics.disch_then(fn(
     x1312 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -13186,7 +13186,7 @@ fn step_135() -> Unit raise {
     ]),
   )
   let t1299 = @list.List([@meson.asm_meson_tac(@list.List([])), t1298])
-  let t1297 = @tactics.subgoal_then(@parser.parse_term("woset(z:A->A->bool)"), fn(
+  let t1297 = @tactics.subgoal_then(@term_syntax.parse_term("woset((z : (A, A) -> Bool))"), fn(
     x1294 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -13232,21 +13232,21 @@ fn step_135() -> Unit raise {
       s1295(x1296)
     }
   })
-  let t1291 = @parser.parse_term("z:A->A->bool")
+  let t1291 = @term_syntax.parse_term("(z : (A, A) -> Bool)")
   let t1293 = @tactics.first_x_assum((x1292 : @kernel.Thm) => {
     @tactics.x_choose_tac(t1291, x1292)
   })
-  let t1289 = @parser.parse_term("l:(A->A->bool)->(A->A->bool)")
+  let t1289 = @term_syntax.parse_term("(l : ((A, A) -> Bool, A, A) -> Bool)")
   let t1290 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("a:(A->A->bool)->A"), t1289]),
+    @list.List([@term_syntax.parse_term("(a : ((A, A) -> Bool) -> A)"), t1289]),
   )
   let t1288 = @simp.rewrite_tac(
     @list.List([@class.skolem_thm(), @class.not_exists_thm()]),
   )
   let t1286 = @meson.asm_meson_tac(@list.List([inseg_linseg()]))
   let t1285 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1281 = @parser.parse_term("y:A->A->bool")
+  let t1281 = @term_syntax.parse_term("(y : (A, A) -> Bool)")
   let t1284 = @tactics.repeat_tac(
     @tactics.first_x_assum(fn(
       x1283 : @kernel.Thm,
@@ -13319,7 +13319,7 @@ fn step_135() -> Unit raise {
   )
   let t1277 = @simp.asm_rewrite_tac(@list.List([]))
   let t1276 = @class.asm_cases_tac(
-    @parser.parse_term("(P:(A->A->bool)->bool) y"),
+    @term_syntax.parse_term("(P : ((A, A) -> Bool) -> Bool)((y : (A, A) -> Bool))"),
   )
   let t1287 = @list.List([
     @tactics.then_tac(
@@ -13327,7 +13327,7 @@ fn step_135() -> Unit raise {
         @tactics.then_tac(
           @tactics.then_tac(
             @tactics.then_tac(
-              @tactics.x_gen_tac(@parser.parse_term("y:A->A->bool")),
+              @tactics.x_gen_tac(@term_syntax.parse_term("(y : (A, A) -> Bool)")),
               t1276,
             ),
             t1277,
@@ -13393,7 +13393,7 @@ fn step_135() -> Unit raise {
   )
   let t1271 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t1270 = @tactics.subgoal_then(
-    @parser.parse_term("forall x:A->A->bool. P x ==> woset x"),
+    @term_syntax.parse_term("∀ x : (A, A) -> Bool, (P : ((A, A) -> Bool) -> Bool)(x) → woset(x)"),
     fn(
       x1267 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -13463,17 +13463,17 @@ fn step_135() -> Unit raise {
     @list.List([@class.not_forall_thm()]),
   )
   let t1257 = @simp.rewrite_tac(
-    @list.List([@class.taut(@parser.parse_term("~(p /\\ q) <=> p ==> ~q"))]),
+    @list.List([@class.taut(@term_syntax.parse_term("!((p : Bool) && (q : Bool)) == (p → !q)"))]),
   )
   let t1256 = @simp.once_rewrite_tac(
     @list.List([
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("(?x. P x) <=> ~(forall x. ~P x)"),
+        @term_syntax.parse_term("(∃ x : _, (P : (_) -> Bool)(x)) == !(∀ x : _, !P(x))"),
       ),
     ]),
   )
-  let t1255 = @tactics.x_gen_tac(@parser.parse_term("P:(A->A->bool)->bool"))
+  let t1255 = @tactics.x_gen_tac(@term_syntax.parse_term("(P : ((A, A) -> Bool) -> Bool)"))
   let t1373 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -13875,8 +13875,8 @@ fn step_137() -> Unit raise {
       }
     }),
   )
-  let t1513 = @parser.parse_term("(f:A->A) y")
-  let t1514 = @list.List([@parser.parse_term("x:A"), t1513])
+  let t1513 = @term_syntax.parse_term("(f : (A) -> A)((y : A))")
+  let t1514 = @list.List([@term_syntax.parse_term("(x : A)"), t1513])
   let t1517 = @tactics.repeat_tac(
     @tactics.first_x_assum(fn(
       x1516 : @kernel.Thm,
@@ -14355,7 +14355,7 @@ fn step_137() -> Unit raise {
   let t1470 = @parser.parse_term(
     "(:A) DIFF IMAGE (f:A->A) {u | u IN s /\\ properly l u x}",
   )
-  let t1467 = @parser.parse_term("x:A")
+  let t1467 = @term_syntax.parse_term("(x : A)")
   let t1465 = @drule.match_mp(@theorems.mono_forall())
   let t1473 = @tactics.first_x_assum(fn(
     x1472 : @kernel.Thm,
@@ -14724,7 +14724,7 @@ fn step_137() -> Unit raise {
   let t1435 = @simp.rewrite_tac(
     @list.List([@theorems.imp_imp(), @equal.gsym(@theorems.conj_assoc())]),
   )
-  let t1434 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t1434 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t1433 = @tactics.disch_then(@tactics.match_mp_tac)
   let t1432 = @simp.rewrite_tac(@list.List([@wf.wf_ind()]))
   let t1430 = @simp.rewrite_rule(@list.List([woset_wf(), properly()]))
@@ -14867,7 +14867,7 @@ fn step_137() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1425 = @tactics.subgoal_then(
-    @parser.parse_term("forall x. x IN s ==> (l:A->A->bool)(f x) x"),
+    @term_syntax.parse_term("∀ x : A, IN(x, (s : (A) -> Bool)) → (l : (A, A) -> Bool)((f : (A) -> A)(x), x)"),
     fn(
       x1422 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -14983,7 +14983,7 @@ fn step_137() -> Unit raise {
       }
     })(@equal.gsym(x1420))
   })
-  let t1416 = @tactics.x_gen_tac(@parser.parse_term("f:A->A"))
+  let t1416 = @tactics.x_gen_tac(@term_syntax.parse_term("(f : (A) -> A)"))
   let t1414 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t1413 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t1412 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -15176,7 +15176,7 @@ fn step_137() -> Unit raise {
       }
     },
   )
-  let t1397 = @tactics.x_gen_tac(@parser.parse_term("m:(A->bool)->A"))
+  let t1397 = @tactics.x_gen_tac(@term_syntax.parse_term("(m : ((A) -> Bool) -> A)"))
   let t1396 = @simp.rewrite_tac(
     @list.List([@class.skolem_thm(), @theorems.left_imp_exists_thm()]),
   )
@@ -15423,12 +15423,12 @@ pub fn subwoset_iso_inseg() -> @kernel.Thm {
 /// HP
 fn step_138() -> Unit raise {
   let t1803 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(subset_pred())]))
-  let t1802 = @parser.parse_term("z:A")
+  let t1802 = @term_syntax.parse_term("(z : A)")
   let t1804 = @tactics.then_tac(
-    @tactics.spec_tac(@parser.parse_term("z:A"), t1802),
+    @tactics.spec_tac(@term_syntax.parse_term("(z : A)"), t1802),
     t1803,
   )
-  let t1799 = @tactics.exists_tac(@parser.parse_term("y:A"))
+  let t1799 = @tactics.exists_tac(@term_syntax.parse_term("(y : A)"))
   let t1796 = @simp.rewrite_rule(@list.List([subset_pred()]))
   let t1798 = @tactics.first_assum(fn(
     x1797 : @kernel.Thm,
@@ -15455,8 +15455,8 @@ fn step_138() -> Unit raise {
   })
   let t1795 = @simp.asm_rewrite_tac(@list.List([]))
   let t1794 = @tactics.disch_then(@tactics.match_mp_tac)
-  let t1789 = @parser.parse_term("(f:A->A) y")
-  let t1790 = @list.List([@parser.parse_term("z:A"), t1789])
+  let t1789 = @term_syntax.parse_term("(f : (A) -> A)((y : A))")
+  let t1790 = @list.List([@term_syntax.parse_term("(z : A)"), t1789])
   let t1793 = @tactics.disch_then(fn(
     x1792 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -15526,7 +15526,7 @@ fn step_138() -> Unit raise {
     })(((x1791 : @kernel.Thm) => @bool.specl(t1790, x1791))(x1792))
   })
   let t1785 = @simp.rewrite_tac(@list.List([chain(), @sets.in_()]))
-  let t1784 = @tactics.undisch_tac(@parser.parse_term("chain(l:A->A->bool) Q"))
+  let t1784 = @tactics.undisch_tac(@term_syntax.parse_term("chain((l : (A, A) -> Bool), (Q : (A) -> Bool))"))
   let t1800 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -15537,7 +15537,7 @@ fn step_138() -> Unit raise {
                 @tactics.then_tac(
                   @tactics.then_tac(
                     @tactics.then_tac(
-                      @tactics.x_gen_tac(@parser.parse_term("y:A")),
+                      @tactics.x_gen_tac(@term_syntax.parse_term("(y : A)")),
                       @tactics.disch_tac,
                     ),
                     t1784,
@@ -15559,12 +15559,12 @@ fn step_138() -> Unit raise {
     @tactics.refl_tac,
   )
   let t1783 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1782 = @tactics.exists_tac(@parser.parse_term("z:A"))
+  let t1782 = @tactics.exists_tac(@term_syntax.parse_term("(z : A)"))
   let t1781 = @simp.asm_rewrite_tac(
     @list.List([@simp.rewrite_rule(@list.List([@sets.in_()]))(in_fld())]),
   )
-  let t1776 = @parser.parse_term("z:A")
-  let t1777 = @list.List([@parser.parse_term("z:A"), t1776])
+  let t1776 = @term_syntax.parse_term("(z : A)")
+  let t1777 = @list.List([@term_syntax.parse_term("(z : A)"), t1776])
   let t1780 = @tactics.disch_then(fn(
     x1779 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -15642,7 +15642,7 @@ fn step_138() -> Unit raise {
             @tactics.then_tac(
               @tactics.then_tac(
                 @tactics.undisch_tac(
-                  @parser.parse_term("chain(l:A->A->bool) Q"),
+                  @term_syntax.parse_term("chain((l : (A, A) -> Bool), (Q : (A) -> Bool))"),
                 ),
                 t1772,
               ),
@@ -15687,7 +15687,7 @@ fn step_138() -> Unit raise {
       @simp.rewrite_tac(@list.List([th_1]))
     },
   )
-  let t1765 = @parser.parse_term("z:A")
+  let t1765 = @term_syntax.parse_term("(z : A)")
   let t1768 = @tactics.first_assum(fn(
     x1767 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -15778,7 +15778,7 @@ fn step_138() -> Unit raise {
       })(@equal.sym(x1764))
     })(((x1766 : @kernel.Thm) => @bool.spec(t1765, x1766))(x1767))
   })
-  let t1760 = @tactics.exists_tac(@parser.parse_term("z:A"))
+  let t1760 = @tactics.exists_tac(@term_syntax.parse_term("(z : A)"))
   let t1805 = @list.List([
     @tactics.thenl(
       @tactics.then_tac(
@@ -15798,7 +15798,7 @@ fn step_138() -> Unit raise {
     ),
     t1804,
   ])
-  let t1759 = @tactics.x_gen_tac(@parser.parse_term("z:A"))
+  let t1759 = @tactics.x_gen_tac(@term_syntax.parse_term("(z : A)"))
   let t1758 = @simp.gen_rewrite_tac(
     fn(
       x1757 : (@kernel.Term) -> @kernel.Thm raise,
@@ -15807,7 +15807,7 @@ fn step_138() -> Unit raise {
     },
     @list.List([@class.fun_eq_thm()]),
   )
-  let t1756 = @tactics.x_gen_tac(@parser.parse_term("Q:A->bool"))
+  let t1756 = @tactics.x_gen_tac(@term_syntax.parse_term("(Q : (A) -> Bool)"))
   let t1755 = @simp.asm_rewrite_tac(@list.List([]))
   let t1753 = @tactics.disch_then(
     @tactics.conjuncts_then(
@@ -15874,7 +15874,7 @@ fn step_138() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1748 = @tactics.subgoal_then(
-    @parser.parse_term("chain(l:A->A->bool)(\\y. ?x:A. y = f x)"),
+    @term_syntax.parse_term("chain((l : (A, A) -> Bool), (y : A) => ∃ x : A, y == (f : (A) -> A)(x))"),
     fn(
       x1745 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -15922,7 +15922,7 @@ fn step_138() -> Unit raise {
       }
     },
   )
-  let t1744 = @tactics.exists_tac(@parser.parse_term("\\y:A. ?x:A. y = f(x)"))
+  let t1744 = @tactics.exists_tac(@term_syntax.parse_term("(y : A) => ∃ x : A, y == (f : (A) -> A)(x)"))
   let t1740 = @tactics.imp_res_then(fn(
     x1737 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -15994,7 +15994,7 @@ fn step_138() -> Unit raise {
   })
   let t1736 = @simp.asm_rewrite_tac(@list.List([]))
   let t1735 = @tactics.try_tac(@class.cond_cases_tac)
-  let t1729 = @parser.parse_term("x:A")
+  let t1729 = @term_syntax.parse_term("(x : A)")
   let t1732 = @tactics.first_assum(fn(
     x1731 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -16085,7 +16085,7 @@ fn step_138() -> Unit raise {
       })(@equal.sym(x1728))
     })(((x1730 : @kernel.Thm) => @bool.spec(t1729, x1730))(x1731))
   })
-  let t1721 = @parser.parse_term("y:A")
+  let t1721 = @term_syntax.parse_term("(y : A)")
   let t1724 = @tactics.first_assum(fn(
     x1723 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -16235,8 +16235,8 @@ fn step_138() -> Unit raise {
     }),
   )
   let t1711 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1706 = @parser.parse_term("y:A")
-  let t1707 = @list.List([@parser.parse_term("x:A"), t1706])
+  let t1706 = @term_syntax.parse_term("(y : A)")
+  let t1707 = @list.List([@term_syntax.parse_term("(x : A)"), t1706])
   let t1710 = @tactics.imp_res_then(fn(
     x1709 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -16328,7 +16328,7 @@ fn step_138() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1702 = @tactics.subgoal_then(
-    @parser.parse_term("forall x y. l((f:A->A) x) (f y) \\/ l(f y) (f x)"),
+    @term_syntax.parse_term("∀ x : A, ∀ y : A, (l : (A, A) -> Bool)((f : (A) -> A)(x), f(y)) || l(f(y), f(x))"),
     fn(
       x1699 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -16551,7 +16551,7 @@ fn step_138() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1679 = @tactics.subgoal_then(
-    @parser.parse_term("(properly w) (b:A) x"),
+    @term_syntax.parse_term("properly((w : (A, A) -> Bool), (b : A), (x : A))"),
     fn(
       x1676 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -16600,9 +16600,9 @@ fn step_138() -> Unit raise {
     },
   )
   let t1675 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1674 = @class.asm_cases_tac(@parser.parse_term("x:A = b"))
+  let t1674 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (b : A)"))
   let t1673 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1669 = @parser.parse_term("x:A")
+  let t1669 = @term_syntax.parse_term("(x : A)")
   let t1672 = @tactics.first_assum(fn(
     x1671 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -16694,7 +16694,7 @@ fn step_138() -> Unit raise {
     })(((x1670 : @kernel.Thm) => @bool.spec(t1669, x1670))(x1671))
   })
   let t1664 = @kernel.assume_rule(
-    @parser.parse_term("forall x:A. (w:A->A->bool) b (f x)"),
+    @term_syntax.parse_term("∀ x : A, (w : (A, A) -> Bool)((b : A), (f : (A) -> A)(x))"),
   )
   let t1698 = @list.List([
     @tactics.then_tac(
@@ -16712,7 +16712,7 @@ fn step_138() -> Unit raise {
                             @tactics.then_tac(
                               @tactics.gen_tac,
                               @tactics.mp_tac(
-                                @bool.spec(@parser.parse_term("x:A"), t1664),
+                                @bool.spec(@term_syntax.parse_term("(x : A)"), t1664),
                               ),
                             ),
                             t1672,
@@ -16742,7 +16742,7 @@ fn step_138() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1663 = @tactics.subgoal_then(
-    @parser.parse_term("forall x:A. (l:A->A->bool) b (f x) \\/ l (f x) b"),
+    @term_syntax.parse_term("∀ x : A, (l : (A, A) -> Bool)((b : A), (f : (A) -> A)(x)) || l(f(x), b)"),
     fn(
       x1660 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -16882,7 +16882,7 @@ fn step_138() -> Unit raise {
     t1657(@bool.spec_all(x1658))
   })
   let t1651 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1648 = @parser.parse_term("x:A")
+  let t1648 = @term_syntax.parse_term("(x : A)")
   let t1652 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -16986,7 +16986,7 @@ fn step_138() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1643 = @tactics.subgoal_then(
-    @parser.parse_term("forall x:A. fld(l:A->A->bool) (f x)"),
+    @term_syntax.parse_term("∀ x : A, fld((l : (A, A) -> Bool), (f : (A) -> A)(x))"),
     fn(
       x1640 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -17036,7 +17036,7 @@ fn step_138() -> Unit raise {
   )
   let t1638 = @simp.asm_rewrite_tac(@list.List([]))
   let t1637 = @simp.rewrite_tac(@list.List([@class.cond_id()]))
-  let t1634 = @parser.parse_term("b:A")
+  let t1634 = @term_syntax.parse_term("(b : A)")
   let t1639 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -17136,7 +17136,7 @@ fn step_138() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t1629 = @tactics.subgoal_then(@parser.parse_term("(f:A->A) b = b"), fn(
+  let t1629 = @tactics.subgoal_then(@term_syntax.parse_term("(f : (A) -> A)((b : A)) == b"), fn(
     x1626 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -17285,7 +17285,7 @@ fn step_138() -> Unit raise {
   let t1621 = @list.List([
     @tactics.thenl(
       @tactics.subgoal_then(
-        @parser.parse_term("WF(\\x:A y. (properly w) x y)"),
+        @term_syntax.parse_term("WF((x : A) => (y : A) => properly((w : (A, A) -> Bool), x, y))"),
         fn(
           x1608 : @kernel.Thm,
         ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -17434,8 +17434,8 @@ fn step_138() -> Unit raise {
       }
     })(@equal.gsym(x1601))
   })(qoset_fldeq())
-  let t1593 = @parser.parse_term("u:A")
-  let t1594 = @list.List([@parser.parse_term("u:A"), t1593])
+  let t1593 = @term_syntax.parse_term("(u : A)")
+  let t1594 = @list.List([@term_syntax.parse_term("(u : A)"), t1593])
   let t1597 = @tactics.disch_then(fn(
     x1596 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -17513,7 +17513,7 @@ fn step_138() -> Unit raise {
     },
     @list.List([@class.not_forall_thm()]),
   )
-  let t1586 = @tactics.x_choose_then(@parser.parse_term("u:A"))(fn(
+  let t1586 = @tactics.x_choose_then(@term_syntax.parse_term("(u : A)"))(fn(
     x1581 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -17596,7 +17596,7 @@ fn step_138() -> Unit raise {
   let t1574 = @simp.rewrite_tac(
     @list.List([chain(), @sets.in_(), subset_pred()]),
   )
-  let t1573 = @tactics.exists_tac(@parser.parse_term("\\x:A. F"))
+  let t1573 = @tactics.exists_tac(@term_syntax.parse_term("(x : A) => false"))
   let t1571 = @simp.gen_rewrite_rule(
     fn(
       x1570 : (@kernel.Term) -> @kernel.Thm raise,
@@ -17734,16 +17734,16 @@ fn step_138() -> Unit raise {
   )
   let t1605 = @list.List([
     @tactics.disch_then(
-      @tactics.x_choose_then(@parser.parse_term("b:A"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(b : A)"))(
         @tactics.strip_assume_tac,
       ),
     ),
     t1604,
   ])
   let t1566 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1565 = @class.asm_cases_tac(@parser.parse_term("?x:A. fld(l) x"))
+  let t1565 = @class.asm_cases_tac(@term_syntax.parse_term("∃ x : A, fld((l : (A, A) -> Bool), x)"))
   let t1564 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1560 = @parser.parse_term("\\x:A. fld(l) x")
+  let t1560 = @term_syntax.parse_term("(x : A) => fld((l : (A, A) -> Bool), x)")
   let t1563 = @tactics.imp_res_then(fn(
     x1562 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -17918,8 +17918,8 @@ fn step_138() -> Unit raise {
       },
     ),
   )
-  let t1543 = @bool.spec(@parser.parse_term("\\x:A. T"), wo())
-  let t1544 = @tactics.x_choose_then(@parser.parse_term("w:A->A->bool"))(fn(
+  let t1543 = @bool.spec(@term_syntax.parse_term("(x : A) => true"), wo())
+  let t1544 = @tactics.x_choose_then(@term_syntax.parse_term("(w : (A, A) -> Bool)"))(fn(
     x1540 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -18132,7 +18132,7 @@ fn step_139() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1865 = @tactics.subgoal_then(
-    @parser.parse_term("M SUBSET (\\x:A. M x \\/ x = z)"),
+    @term_syntax.parse_term("SUBSET((M : (A) -> Bool), (x : A) => M(x) || x == (z : A))"),
     fn(
       x1862 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -18181,7 +18181,7 @@ fn step_139() -> Unit raise {
     },
   )
   let t1856 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1855 = @tactics.exists_tac(@parser.parse_term("m:A"))
+  let t1855 = @tactics.exists_tac(@term_syntax.parse_term("(m : A)"))
   let t1854 = @simp.rewrite_tac(
     @list.List([@simp.rewrite_rule(@list.List([@sets.in_()]))(in_fld())]),
   )
@@ -18266,7 +18266,7 @@ fn step_139() -> Unit raise {
   })
   let t1847 = @tactics.first_assum(@tactics.match_mp_tac)
   let t1846 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1845 = @tactics.exists_tac(@parser.parse_term("m:A"))
+  let t1845 = @tactics.exists_tac(@term_syntax.parse_term("(m : A)"))
   let t1843 = @drule.match_mp(qoset_trans())
   let t1858 = @tactics.then_tac(
     @tactics.then_tac(
@@ -18354,7 +18354,7 @@ fn step_139() -> Unit raise {
   })
   let t1838 = @tactics.first_assum(@tactics.match_mp_tac)
   let t1837 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1836 = @tactics.exists_tac(@parser.parse_term("m:A"))
+  let t1836 = @tactics.exists_tac(@term_syntax.parse_term("(m : A)"))
   let t1834 = @drule.match_mp(qoset_trans())
   let t1859 = @tactics.then_tac(
     @tactics.then_tac(
@@ -18401,7 +18401,7 @@ fn step_139() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
-          @tactics.undisch_tac(@parser.parse_term("chain(l:A->A->bool) M")),
+          @tactics.undisch_tac(@term_syntax.parse_term("chain((l : (A, A) -> Bool), (M : (A) -> Bool))")),
           t1831,
         ),
         t1832,
@@ -18437,7 +18437,7 @@ fn step_139() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1827 = @tactics.subgoal_then(
-    @parser.parse_term("chain(l) (\\x:A. M x \\/ x = z)"),
+    @term_syntax.parse_term("chain((l : (A, A) -> Bool), (x : A) => (M : (A) -> Bool)(x) || x == (z : A))"),
     fn(
       x1824 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -18485,14 +18485,14 @@ fn step_139() -> Unit raise {
       }
     },
   )
-  let t1823 = @tactics.x_gen_tac(@parser.parse_term("z:A"))
+  let t1823 = @tactics.x_gen_tac(@term_syntax.parse_term("(z : A)"))
   let t1822 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1821 = @tactics.exists_tac(@parser.parse_term("m:A"))
+  let t1821 = @tactics.exists_tac(@term_syntax.parse_term("(m : A)"))
   let t1820 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("m:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(m : A)"))(@tactics.strip_assume_tac),
   )
   let t1819 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1815 = @parser.parse_term("M:A->bool")
+  let t1815 = @term_syntax.parse_term("(M : (A) -> Bool)")
   let t1818 = @tactics.disch_then(fn(
     x1817 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -18567,7 +18567,7 @@ fn step_139() -> Unit raise {
     ),
   )
   let t1807 = @drule.match_mp(hp())
-  let t1808 = @tactics.x_choose_then(@parser.parse_term("M:A->bool"))(
+  let t1808 = @tactics.x_choose_then(@term_syntax.parse_term("(M : (A) -> Bool)"))(
     @tactics.strip_assume_tac,
   )
   let t1810 = @tactics.first_assum(fn(
@@ -18666,7 +18666,7 @@ pub fn zl_strong() -> @kernel.Thm {
 fn step_140() -> Unit raise {
   let t1875 = @meson.asm_meson_tac(@list.List([poset_antisym()]))
   let t1874 = @simp.asm_simp_tac(@list.List([poset_imp_qoset()]))
-  let t1872 = @bool.ispec(@parser.parse_term("l:A->A->bool"), zl_strong())
+  let t1872 = @bool.ispec(@term_syntax.parse_term("(l : (A, A) -> Bool)"), zl_strong())
   let t1873 = @tactics.mp_tac(
     @simp.rewrite_rule(@list.List([@sets.in_()]))(t1872),
   )
@@ -18704,7 +18704,7 @@ pub fn zl() -> @kernel.Thm {
 fn step_141() -> Unit raise {
   let t1890 = @simp.asm_rewrite_tac(@list.List([]))
   let t1889 = @tactics.try_tac(
-    @tactics.exists_tac(@parser.parse_term("Q:A->bool")),
+    @tactics.exists_tac(@term_syntax.parse_term("(Q : (A) -> Bool)")),
   )
   let t1885 = @tactics.match_mp_tac(@sets.subset_antisym())
   let t1886 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1885)
@@ -18716,7 +18716,7 @@ fn step_141() -> Unit raise {
         @tactics.then_tac(
           @tactics.then_tac(
             @tactics.gen_tac,
-            @tactics.x_gen_tac(@parser.parse_term("Q:A->bool")),
+            @tactics.x_gen_tac(@term_syntax.parse_term("(Q : (A) -> Bool)")),
           ),
           @tactics.gen_tac,
         ),
@@ -18730,7 +18730,7 @@ fn step_141() -> Unit raise {
   let t1882 = @list.List([@tactics.match_mp_tac(chain_subset()), t1881])
   let t1880 = @simp.asm_rewrite_tac(@list.List([@sets.subset_refl()]))
   let t1879 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("Q:A->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(Q : (A) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -18742,7 +18742,7 @@ fn step_141() -> Unit raise {
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.then_tac(
-            @tactics.x_gen_tac(@parser.parse_term("P:A->bool")),
+            @tactics.x_gen_tac(@term_syntax.parse_term("(P : (A) -> Bool)")),
             t1878,
           ),
           t1879,
@@ -18798,7 +18798,7 @@ fn step_142() -> Unit raise {
   let t2001 = @tactics.conv_tac(@equal.sym_conv)
   let t2000 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1999 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1998 = @tactics.exists_tac(@parser.parse_term("D:A->bool"))
+  let t1998 = @tactics.exists_tac(@term_syntax.parse_term("(D : (A) -> Bool)"))
   let t2004 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -18806,7 +18806,7 @@ fn step_142() -> Unit raise {
           @tactics.then_tac(
             @tactics.then_tac(
               @tactics.disch_then(
-                @tactics.x_choose_then(@parser.parse_term("D:A->bool"))(
+                @tactics.x_choose_then(@term_syntax.parse_term("(D : (A) -> Bool)"))(
                   @tactics.strip_assume_tac,
                 ),
               ),
@@ -18901,13 +18901,13 @@ fn step_142() -> Unit raise {
   })
   let t1996 = @tactics.then_tac(
     @tactics.then_tac(
-      @tactics.exists_tac(@parser.parse_term("C:A->bool")),
+      @tactics.exists_tac(@term_syntax.parse_term("(C : (A) -> Bool)")),
       t1994,
     ),
     t1995,
   )
   let t1984 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1983 = @tactics.exists_tac(@parser.parse_term("X:A->bool"))
+  let t1983 = @tactics.exists_tac(@term_syntax.parse_term("(X : (A) -> Bool)"))
   let t1982 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1981 = @simp.rewrite_tac(@list.List([unions_pred(), subset_pred()]))
   let t1980 = @simp.asm_rewrite_tac(@list.List([]))
@@ -18915,8 +18915,8 @@ fn step_142() -> Unit raise {
     @tactics.imp_res_then(@tactics.strip_assume_tac),
   )
   let t1978 = @simp.rewrite_tac(@list.List([]))
-  let t1973 = @parser.parse_term("X:A->bool")
-  let t1974 = @list.List([@parser.parse_term("X:A->bool"), t1973])
+  let t1973 = @term_syntax.parse_term("(X : (A) -> Bool)")
+  let t1974 = @list.List([@term_syntax.parse_term("(X : (A) -> Bool)"), t1973])
   let t1977 = @tactics.first_assum(fn(
     x1976 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -18997,7 +18997,7 @@ fn step_142() -> Unit raise {
                     @tactics.then_tac(
                       @tactics.then_tac(
                         @tactics.strip_tac,
-                        @tactics.x_gen_tac(@parser.parse_term("X:A->bool")),
+                        @tactics.x_gen_tac(@term_syntax.parse_term("(X : (A) -> Bool)")),
                       ),
                       @tactics.disch_tac,
                     ),
@@ -19047,14 +19047,14 @@ fn step_142() -> Unit raise {
   let t1965 = @simp.asm_rewrite_tac(@list.List([]))
   let t1964 = @tactics.disch_then(@tactics.match_mp_tac)
   let t1963 = @simp.rewrite_tac(@list.List([chain(), @sets.in_()]))
-  let t1961 = @tactics.undisch_tac(@parser.parse_term("chain(l:A->A->bool) A"))
+  let t1961 = @tactics.undisch_tac(@term_syntax.parse_term("chain((l : (A, A) -> Bool), (A : (A) -> Bool))"))
   let t1962 = @list.List([
-    @tactics.undisch_tac(@parser.parse_term("chain(l:A->A->bool) B")),
+    @tactics.undisch_tac(@term_syntax.parse_term("chain((l : (A, A) -> Bool), (B : (A) -> Bool))")),
     t1961,
   ])
   let t1960 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1955 = @parser.parse_term("B:A->bool")
-  let t1956 = @list.List([@parser.parse_term("A:A->bool"), t1955])
+  let t1955 = @term_syntax.parse_term("(B : (A) -> Bool)")
+  let t1956 = @list.List([@term_syntax.parse_term("(A : (A) -> Bool)"), t1955])
   let t1959 = @tactics.disch_then(fn(
     x1958 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -19224,18 +19224,18 @@ fn step_142() -> Unit raise {
       ),
     )
   })
-  let t1940 = @parser.parse_term("B:A->bool")
-  let t1938 = @parser.parse_term("A:A->bool")
+  let t1940 = @term_syntax.parse_term("(B : (A) -> Bool)")
+  let t1938 = @term_syntax.parse_term("(A : (A) -> Bool)")
   let t1942 = @tactics.disch_then(
     @tactics.conjuncts_then2(
       (x1939 : @kernel.Thm) => @tactics.x_choose_tac(t1938, x1939),
       (x1941 : @kernel.Thm) => @tactics.x_choose_tac(t1940, x1941),
     ),
   )
-  let t1936 = @parser.parse_term("y:A")
+  let t1936 = @term_syntax.parse_term("(y : A)")
   let t1937 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("x:A"), t1936]),
+    @list.List([@term_syntax.parse_term("(x : A)"), t1936]),
   )
   let t1986 = @tactics.then_tac(
     @tactics.then_tac(
@@ -19305,7 +19305,7 @@ fn step_142() -> Unit raise {
     @tactics.match_mp_tac(t1932(x1933))
   })
   let t1931 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1930 = @tactics.exists_tac(@parser.parse_term("D:A->bool"))
+  let t1930 = @tactics.exists_tac(@term_syntax.parse_term("(D : (A) -> Bool)"))
   let t1929 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1987 = @list.List([
     @tactics.then_tac(
@@ -19333,17 +19333,17 @@ fn step_142() -> Unit raise {
   let t1928 = @tactics.repeat_tac(@tactics.conj_tac)
   let t1927 = @tactics.match_mp_tac(
     @class.taut(
-      @parser.parse_term("a /\\ b /\\ (a /\\ b ==> c) ==> (a /\\ b) /\\ c"),
+      @term_syntax.parse_term("(a : Bool) && (b : Bool) && (a && b → (c : Bool)) → (a && b) && c"),
     ),
   )
   let t1926 = @simp.rewrite_tac(
     @list.List([
-      @kernel.assume_rule(@parser.parse_term("(P:(A->bool)->bool) D")),
+      @kernel.assume_rule(@term_syntax.parse_term("(P : ((A) -> Bool) -> Bool)((D : (A) -> Bool))")),
       @sets.subset_refl(),
     ]),
   )
-  let t1921 = @parser.parse_term("D:A->bool")
-  let t1922 = @list.List([@parser.parse_term("D:A->bool"), t1921])
+  let t1921 = @term_syntax.parse_term("(D : (A) -> Bool)")
+  let t1922 = @list.List([@term_syntax.parse_term("(D : (A) -> Bool)"), t1921])
   let t1925 = @tactics.first_assum(fn(
     x1924 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -19412,7 +19412,7 @@ fn step_142() -> Unit raise {
       }
     })(((x1923 : @kernel.Thm) => @bool.specl(t1922, x1923))(x1924))
   })
-  let t1915 = @parser.parse_term("D:A->bool")
+  let t1915 = @term_syntax.parse_term("(D : (A) -> Bool)")
   let t1917 = @tactics.first_assum((x1916 : @kernel.Thm) => {
     @tactics.x_choose_tac(t1915, x1916)
   })
@@ -19427,7 +19427,7 @@ fn step_142() -> Unit raise {
                 @tactics.then_tac(
                   @tactics.then_tac(
                     @tactics.exists_tac(
-                      @parser.parse_term("UNIONS(P) :A->bool"),
+                      @term_syntax.parse_term("UNIONS((P : ((A) -> Bool) -> Bool))"),
                     ),
                     t1914,
                   ),
@@ -19447,7 +19447,7 @@ fn step_142() -> Unit raise {
     ),
     t1996,
   ])
-  let t1913 = @class.asm_cases_tac(@parser.parse_term("?D:A->bool. P D"))
+  let t1913 = @class.asm_cases_tac(@term_syntax.parse_term("∃ D : (A) -> Bool, (P : ((A) -> Bool) -> Bool)(D)"))
   let t1912 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t1911 = @simp.gen_rewrite_tac(
     fn(
@@ -19465,7 +19465,7 @@ fn step_142() -> Unit raise {
           @tactics.then_tac(
             @tactics.then_tac(
               @tactics.then_tac(
-                @tactics.x_gen_tac(@parser.parse_term("P:(A->bool)->bool")),
+                @tactics.x_gen_tac(@term_syntax.parse_term("(P : ((A) -> Bool) -> Bool)")),
                 t1911,
               ),
               t1912,
@@ -19800,7 +19800,7 @@ fn step_143() -> Unit raise {
   )
   poset_restricted_subset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. poset(\\x y. P(x) /\\ P(y) /\\ x SUBSET y)"),
+      @term_syntax.parse_term("∀ P : ((_) -> Bool) -> Bool, poset((x : (_) -> Bool) => (y : (_) -> Bool) => P(x) && P(y) && SUBSET(x, y))"),
       t2010,
     ),
   )
@@ -19837,7 +19837,7 @@ fn step_144() -> Unit raise {
   )
   fld_restricted_subset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. fld(\\ x y. P(x) /\\ P(y) /\\ x SUBSET y) = P"),
+      @term_syntax.parse_term("∀ P : ((_) -> Bool) -> Bool, fld((x : (_) -> Bool) => (y : (_) -> Bool) => P(x) && P(y) && SUBSET(x, y)) == P"),
       t2013,
     ),
   )
@@ -19930,7 +19930,7 @@ fn step_146() -> Unit raise {
     @list.List([@sets.subset(), @sets.in_unions()]),
   )
   let t2024 = @tactics.exists_tac(
-    @parser.parse_term("UNIONS(c:(A->bool)->bool)"),
+    @term_syntax.parse_term("UNIONS((c : ((A) -> Bool) -> Bool))"),
   )
   let t2023 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2022 = @tactics.match_mp_tac(zl_subsets())
@@ -19974,14 +19974,14 @@ fn step_147() -> Unit raise {
   let t2033 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
-        @tactics.exists_tac(@parser.parse_term("UNIONS(c:(A->bool)->bool)")),
+        @tactics.exists_tac(@term_syntax.parse_term("UNIONS((c : ((A) -> Bool) -> Bool))")),
         t2030,
       ),
       t2031,
     ),
     t2032,
   ])
-  let t2029 = @class.asm_cases_tac(@parser.parse_term("?x:A->bool. x IN c"))
+  let t2029 = @class.asm_cases_tac(@term_syntax.parse_term("∃ x : (A) -> Bool, IN(x, (c : ((A) -> Bool) -> Bool))"))
   let t2028 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2027 = @tactics.match_mp_tac(zl_subsets())
   let t2034 = @tactics.thenl(
@@ -20156,7 +20156,7 @@ fn step_148() -> Unit raise {
       }
     }),
   )
-  let t2037 = @tactics.x_gen_tac(@parser.parse_term("c:(A->bool)->bool"))
+  let t2037 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : ((A) -> Bool) -> Bool)"))
   let t2036 = @list.List([
     @tactics.asm_tac(@sets.set_tac)(@list.List([])),
     @tactics.all_tac,
@@ -20221,8 +20221,8 @@ fn step_149() -> Unit raise {
   let t2241 = @meson.meson_tac(@list.List([]))
   let t2240 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t2239 = @simp.asm_rewrite_tac(@list.List([@theorems.or_exists_thm()]))
-  let t2234 = @parser.parse_term("y:A")
-  let t2235 = @list.List([@parser.parse_term("x:A"), t2234])
+  let t2234 = @term_syntax.parse_term("(y : A)")
+  let t2235 = @list.List([@term_syntax.parse_term("(x : A)"), t2234])
   let t2238 = @tactics.remove_then("*", fn(
     x2237 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -20293,8 +20293,8 @@ fn step_149() -> Unit raise {
   })
   let t2230 = @simp.asm_rewrite_tac(@list.List([]))
   let t2229 = @simp.asm_rewrite_tac(@list.List([@sets.in_()]))
-  let t2228 = @class.asm_cases_tac(@parser.parse_term("y:A = x"))
-  let t2227 = @parser.parse_term("y:A")
+  let t2228 = @class.asm_cases_tac(@term_syntax.parse_term("(y : A) == (x : A)"))
+  let t2227 = @term_syntax.parse_term("(y : A)")
   let t2242 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -20305,7 +20305,7 @@ fn step_149() -> Unit raise {
                 @tactics.then_tac(
                   @tactics.map_every(
                     @tactics.x_gen_tac,
-                    @list.List([@parser.parse_term("x:A"), t2227]),
+                    @list.List([@term_syntax.parse_term("(x : A)"), t2227]),
                   ),
                   t2228,
                 ),
@@ -20324,8 +20324,8 @@ fn step_149() -> Unit raise {
     t2241,
   )
   let t2226 = @meson.asm_meson_tac(@list.List([]))
-  let t2220 = @parser.parse_term("n:A")
-  let t2221 = @list.List([@parser.parse_term("m:A"), t2220])
+  let t2220 = @term_syntax.parse_term("(n : A)")
+  let t2221 = @list.List([@term_syntax.parse_term("(m : A)"), t2220])
   let t2225 = @tactics.disch_then(fn(
     x2224 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -20598,24 +20598,24 @@ fn step_149() -> Unit raise {
       }
     })(t2206(x2207))
   })
-  let t2200 = @tactics.x_choose_then(@parser.parse_term("n:A"))(
+  let t2200 = @tactics.x_choose_then(@term_syntax.parse_term("(n : A)"))(
     @tactics.strip_assume_tac,
   )
   let t2201 = @tactics.disch_then(
     @tactics.conjuncts_then2(
-      @tactics.x_choose_then(@parser.parse_term("m:A"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(m : A)"))(
         @tactics.strip_assume_tac,
       ),
       t2200,
     ),
   )
   let t2199 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2198 = @class.asm_cases_tac(@parser.parse_term("fld p (y:A)"))
+  let t2198 = @class.asm_cases_tac(@term_syntax.parse_term("fld((p : (A, A) -> Bool), (y : A))"))
   let t2197 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2196 = @class.asm_cases_tac(@parser.parse_term("fld p (x:A)"))
+  let t2196 = @class.asm_cases_tac(@term_syntax.parse_term("fld((p : (A, A) -> Bool), (x : A))"))
   let t2195 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2194 = @class.asm_cases_tac(@parser.parse_term("y:A = x"))
-  let t2193 = @parser.parse_term("y:A")
+  let t2194 = @class.asm_cases_tac(@term_syntax.parse_term("(y : A) == (x : A)"))
+  let t2193 = @term_syntax.parse_term("(y : A)")
   let t2243 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -20630,7 +20630,7 @@ fn step_149() -> Unit raise {
                         @tactics.then_tac(
                           @tactics.map_every(
                             @tactics.x_gen_tac,
-                            @list.List([@parser.parse_term("x:A"), t2193]),
+                            @list.List([@term_syntax.parse_term("(x : A)"), t2193]),
                           ),
                           t2194,
                         ),
@@ -20657,16 +20657,16 @@ fn step_149() -> Unit raise {
     t2226,
   )
   let t2192 = @meson.asm_meson_tac(@list.List([]))
-  let t2190 = @tactics.exists_tac(@parser.parse_term("n:A"))
-  let t2191 = @list.List([@tactics.exists_tac(@parser.parse_term("m:A")), t2190])
+  let t2190 = @tactics.exists_tac(@term_syntax.parse_term("(n : A)"))
+  let t2191 = @list.List([@tactics.exists_tac(@term_syntax.parse_term("(m : A)")), t2190])
   let t2189 = @list.List([
     @meson.asm_meson_tac(
       @list.List([@simp.rewrite_rule(@list.List([@sets.in_()]))(in_fld())]),
     ),
     @tactics.all_tac,
   ])
-  let t2183 = @parser.parse_term("n:A")
-  let t2184 = @list.List([@parser.parse_term("m:A"), t2183])
+  let t2183 = @term_syntax.parse_term("(n : A)")
+  let t2184 = @list.List([@term_syntax.parse_term("(m : A)"), t2183])
   let t2188 = @tactics.disch_then(fn(
     x2187 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -20939,34 +20939,34 @@ fn step_149() -> Unit raise {
       }
     })(t2169(x2170))
   })
-  let t2163 = @tactics.x_choose_then(@parser.parse_term("n:A"))(
+  let t2163 = @tactics.x_choose_then(@term_syntax.parse_term("(n : A)"))(
     @tactics.strip_assume_tac,
   )
   let t2164 = @tactics.disch_then(
     @tactics.conjuncts_then2(
-      @tactics.x_choose_then(@parser.parse_term("m:A"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(m : A)"))(
         @tactics.strip_assume_tac,
       ),
       t2163,
     ),
   )
   let t2162 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2161 = @class.asm_cases_tac(@parser.parse_term("fld p (z:A)"))
+  let t2161 = @class.asm_cases_tac(@term_syntax.parse_term("fld((p : (A, A) -> Bool), (z : A))"))
   let t2160 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2159 = @class.asm_cases_tac(@parser.parse_term("fld p (y:A)"))
+  let t2159 = @class.asm_cases_tac(@term_syntax.parse_term("fld((p : (A, A) -> Bool), (y : A))"))
   let t2158 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2157 = @class.asm_cases_tac(@parser.parse_term("fld p (x:A)"))
+  let t2157 = @class.asm_cases_tac(@term_syntax.parse_term("fld((p : (A, A) -> Bool), (x : A))"))
   let t2156 = @simp.simp_tac(@list.List([]))
   let t2155 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2154 = @class.asm_cases_tac(@parser.parse_term("y:A = x"))
+  let t2154 = @class.asm_cases_tac(@term_syntax.parse_term("(y : A) == (x : A)"))
   let t2153 = @simp.simp_tac(@list.List([]))
   let t2152 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2151 = @class.asm_cases_tac(@parser.parse_term("y:A = z"))
+  let t2151 = @class.asm_cases_tac(@term_syntax.parse_term("(y : A) == (z : A)"))
   let t2150 = @simp.simp_tac(@list.List([]))
   let t2149 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2148 = @class.asm_cases_tac(@parser.parse_term("x:A = z"))
-  let t2146 = @parser.parse_term("z:A")
-  let t2147 = @parser.parse_term("y:A")
+  let t2148 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (z : A)"))
+  let t2146 = @term_syntax.parse_term("(z : A)")
+  let t2147 = @term_syntax.parse_term("(y : A)")
   let t2244 = @list.List([
     @tactics.then_tac(
       @tactics.thenl(
@@ -21120,7 +21120,7 @@ fn step_149() -> Unit raise {
     t2136,
   ])
   let t2131 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("q /\\ (q ==> p) ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(q : Bool) && (q → (p : Bool)) → p && q")),
   )
   let t2130 = @simp.asm_rewrite_tac(
     @list.List([@sets.subset(), @pair.forall_pair_thm(), @sets.in_()]),
@@ -21210,8 +21210,8 @@ fn step_149() -> Unit raise {
     t2119,
   ])
   let t2118 = @simp.asm_simp_tac(@list.List([]))
-  let t2113 = @parser.parse_term("y:A")
-  let t2114 = @list.List([@parser.parse_term("x:A"), t2113])
+  let t2113 = @term_syntax.parse_term("(y : A)")
+  let t2114 = @list.List([@term_syntax.parse_term("(x : A)"), t2113])
   let t2117 = @tactics.remove_then("*", fn(
     x2116 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -21286,7 +21286,7 @@ fn step_149() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t2108 = @class.asm_cases_tac(@parser.parse_term("x:A = y"))
+  let t2108 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (y : A)"))
   let t2107 = @tactics.repeat_tac(
     @tactics.thenl(
       @tactics.conj_tac,
@@ -21338,7 +21338,7 @@ fn step_149() -> Unit raise {
     @tactics.all_tac,
   ])
   let t2104 = @tactics.subgoal_then(
-    @parser.parse_term("forall x:A y:A. p x y ==> t x y"),
+    @term_syntax.parse_term("∀ x : A, ∀ y : A, (p : (A, A) -> Bool)(x, y) → (t : (A, A) -> Bool)(x, y)"),
     fn(
       x2101 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -21389,7 +21389,7 @@ fn step_149() -> Unit raise {
   let t2097 = @meson.asm_meson_tac(
     @list.List([@simp.rewrite_rule(@list.List([@sets.in_()]))(in_fld())]),
   )
-  let t2096 = @tactics.x_gen_tac(@parser.parse_term("i:A"))
+  let t2096 = @tactics.x_gen_tac(@term_syntax.parse_term("(i : A)"))
   let t2098 = @tactics.then_tac(
     @tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_exists()), t2096),
     t2097,
@@ -21478,7 +21478,7 @@ fn step_149() -> Unit raise {
     t2098,
   ])
   let t2088 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2084 = @parser.parse_term("\\i:A. fld p i /\\ ~(p i x <=> p i y)")
+  let t2084 = @term_syntax.parse_term("(i : A) => fld((p : (A, A) -> Bool), i) && !(p(i, (x : A)) == p(i, (y : A)))")
   let t2087 = @tactics.disch_then(fn(
     x2086 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -21800,20 +21800,20 @@ fn step_149() -> Unit raise {
       }
     },
   )
-  let t2060 = @tactics.exists_tac(@parser.parse_term("t:A->A->bool"))
+  let t2060 = @tactics.exists_tac(@term_syntax.parse_term("(t : (A, A) -> Bool)"))
   let t2059 = @simp.abbrev_tac(
     @parser.parse_term(
       "t = \\(x:A) (y:A). fld p x /\\ fld p y /\\\n                    (x = y \\/\n                     ?i. fld p i /\\\n                         (forall j. w j i /\\ ~(j = i) ==> (p j x <=> p j y)) /\\\n                         ~p i x /\\ p i y)",
     ),
   )
   let t2058 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("w:A->A->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(w : (A, A) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
   let t2057 = @simp.asm_rewrite_tac(@list.List([]))
   let t2056 = @tactics.mp_tac(
-    @bool.ispec(@parser.parse_term("fld(p:A->A->bool)"), wo()),
+    @bool.ispec(@term_syntax.parse_term("fld((p : (A, A) -> Bool))"), wo()),
   )
   let t2245 = @tactics.thenl(
     @tactics.then_tac(
@@ -21947,7 +21947,7 @@ fn step_150() -> Unit raise {
     t2451,
   ])
   let t2446 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
-  let t2445 = @tactics.x_gen_tac(@parser.parse_term("y:A->bool"))
+  let t2445 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : (A) -> Bool)"))
   let t2442 = @drule.match_mp(
     @sets.set_rule(
       @parser.parse_term(
@@ -21979,9 +21979,9 @@ fn step_150() -> Unit raise {
     @tactics.match_mp_tac(t2442(x2443))
   })
   let t2441 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
-  let t2440 = @tactics.exists_tac(@parser.parse_term("(f:(A->bool)->A) z"))
+  let t2440 = @tactics.exists_tac(@term_syntax.parse_term("(f : ((A) -> Bool) -> A)((z : (A) -> Bool))"))
   let t2439 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("z:A->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(z : (A) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -21990,7 +21990,7 @@ fn step_150() -> Unit raise {
     @tactics.all_tac,
   ])
   let t2437 = @simp.rewrite_tac(@list.List([]))
-  let t2431 = @parser.parse_term("\\x:A->bool. (P:A->bool) (f x)")
+  let t2431 = @term_syntax.parse_term("(x : (A) -> Bool) => (P : (A) -> Bool)((f : ((A) -> Bool) -> A)(x))")
   let t2436 = @tactics.disch_then(fn(
     x2435 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -22184,7 +22184,7 @@ fn step_150() -> Unit raise {
     })(t2424(x2425))
   })
   let t2420 = @simp.rewrite_tac(@list.List([]))
-  let t2419 = @tactics.x_gen_tac(@parser.parse_term("P:A->bool"))
+  let t2419 = @tactics.x_gen_tac(@term_syntax.parse_term("(P : (A) -> Bool)"))
   let t2417 = @simp.simp_tac(@list.List([]))
   let t2418 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t2417])
   let t2416 = @simp.rewrite_tac(@list.List([@theorems.conj_assoc()]))
@@ -22267,7 +22267,7 @@ fn step_150() -> Unit raise {
     @list.List([
       @simp.rewrite_rule(
         @list.List([
-          @sets.set_rule(@parser.parse_term("fld l x <=> x IN fld l")),
+          @sets.set_rule(@term_syntax.parse_term("fld((l : (_, _) -> Bool), (x : _)) == IN(x, fld(l))")),
         ]),
       )(t2402),
     ]),
@@ -22574,7 +22574,7 @@ fn step_150() -> Unit raise {
     )
   })
   let t2362 = @drule.match_mp(
-    @meson.meson(@list.List([]), @parser.parse_term("~(f x = f y) ==> ~(x = y)")),
+    @meson.meson(@list.List([]), @term_syntax.parse_term("!((f : (_) -> _)((x : _)) == f((y : _))) → !(x == y)")),
   )
   let t2364 = @tactics.disch_then(fn(
     x2363 : @kernel.Thm,
@@ -22732,7 +22732,7 @@ fn step_150() -> Unit raise {
   )
   let t2349 = @meson.meson_tac(@list.List([]))
   let t2348 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
-  let t2344 = @parser.parse_term("\\x:A. ~(g x x)")
+  let t2344 = @term_syntax.parse_term("(x : A) => !(g : (A, A) -> Bool)(x, x)")
   let t2347 = @tactics.disch_then(fn(
     x2346 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -22801,7 +22801,7 @@ fn step_150() -> Unit raise {
       }
     })(((x2345 : @kernel.Thm) => @bool.spec(t2344, x2345))(x2346))
   })
-  let t2340 = @tactics.x_gen_tac(@parser.parse_term("g:A->(A->bool)"))
+  let t2340 = @tactics.x_gen_tac(@term_syntax.parse_term("(g : (A, A) -> Bool)"))
   let t2350 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -22825,7 +22825,7 @@ fn step_150() -> Unit raise {
   let t2334 = @drule.match_mp(
     @meson.meson(
       @list.List([]),
-      @parser.parse_term("(y = @x. P x) ==> (?x. P x) ==> P y"),
+      @term_syntax.parse_term("(y : _) == select((x : _) => (P : (_) -> Bool)(x)) → (∃ x : _, P(x)) → P(y)"),
     ),
   )
   let t2336 = @tactics.disch_then(fn(
@@ -23338,7 +23338,7 @@ fn step_150() -> Unit raise {
     t2350,
   ])
   let t2299 = @tactics.subgoal_then(
-    @parser.parse_term("forall v w:A->bool. f v:A = f w ==> v = w"),
+    @term_syntax.parse_term("∀ v : (A) -> Bool, ∀ w : (A) -> Bool, (f : ((A) -> Bool) -> A)(v) == f(w) → v == w"),
     fn(
       x2296 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -23390,7 +23390,7 @@ fn step_150() -> Unit raise {
     @list.List([
       @class.not_imp(),
       @class.not_exists_thm(),
-      @class.taut(@parser.parse_term("~(p /\\ q /\\ r) <=> (p /\\ q ==> ~r)")),
+      @class.taut(@term_syntax.parse_term("!((p : Bool) && (q : Bool) && (r : Bool)) == (p && q → !r)")),
     ]),
   )
   let t2294 = @simp.gen_rewrite_tac(
@@ -23417,7 +23417,7 @@ fn step_150() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("(?w. P w) <=> ~(forall w. ~P w)"),
+        @term_syntax.parse_term("(∃ w : _, (P : (_) -> Bool)(w)) == !(∀ w : _, !P(w))"),
       ),
     ]),
   )
@@ -23594,7 +23594,7 @@ fn step_150() -> Unit raise {
     @tactics.all_tac,
   ])
   let t2273 = @tactics.subgoal_then(
-    @parser.parse_term("forall w. (f:(A->bool)->A) w IN fld l"),
+    @term_syntax.parse_term("∀ w : (A) -> Bool, IN((f : ((A) -> Bool) -> A)(w), fld((l : (A, A) -> Bool)))"),
     fn(
       x2270 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -23824,7 +23824,7 @@ fn step_150() -> Unit raise {
     @tactics.all_tac,
   ])
   let t2250 = @tactics.subgoal_then(
-    @parser.parse_term("?r. ordinal r /\\ fld r = (:A->bool)"),
+    @term_syntax.parse_term("∃ r : ((A) -> Bool, (A) -> Bool) -> Bool, ordinal(r) && fld(r) == UNIV"),
     @tactics.strip_assume_tac,
   )
   let t2248 = @sets.set_tac(@list.List([]))
@@ -23834,14 +23834,14 @@ fn step_150() -> Unit raise {
   let t2249 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
-        @tactics.exists_tac(@parser.parse_term("(\\x y. F):A->A->bool")),
+        @tactics.exists_tac(@term_syntax.parse_term("(x : A) => (y : A) => false")),
         t2247,
       ),
       t2248,
     ),
     @tactics.all_tac,
   ])
-  let t2246 = @class.asm_cases_tac(@parser.parse_term("fld l:A->bool = {}"))
+  let t2246 = @class.asm_cases_tac(@term_syntax.parse_term("fld((l : (A, A) -> Bool)) == {}"))
   let t2453 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
