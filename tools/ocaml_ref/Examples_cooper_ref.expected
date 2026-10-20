@@ -5638,320 +5638,320 @@ CPU time (user): <t>
 CPU time (user): <t>
 CPU time (user): <t>
 Examples/cooper quotations (314):
-  (*)
-  (+)
-  a divides b <=> ?x. b = a * x
-  forall a b. ?c. forall x. x < c ==> x < a /\\ x < b
-  forall d a b. d divides a /\\ d divides b ==> d divides (a + b)
-  forall d a b. d divides a /\\ d divides b ==> d divides (a - b)
-  (a + b) - a = b
-  forall d a b. d divides a /\\ d divides (a + b) ==> d divides b
-  (a + b) - b = a
-  forall d a b. d divides b /\\ d divides (a + b) ==> d divides a
-  a * b * c = b * a * c
-  forall d a x. d divides a ==> d divides (x * a)
-  forall d a. d divides (--a) <=> d divides a
-  forall d a. (--d) divides a <=> d divides a
-  x - y < c * d <=> x + --c * d < y
-  forall x y d. &0 < d ==> ?c. x + c * d < y
-  SUC n - 1 = n
-  n:num
-  n:num
-  &1 <= x + (c0 + &n) * d
-  n - 1
-  c0 + &n
-  n:num
-  --(x + a * d) < b * d <=> &1 <= x + (a + b) * d
-  a /\\ b <=> ~(a ==> ~b)
-  (&0 < --c1 ==> &0 < --cd) /\\ xcod < &0\n       ==> --xcod < cd ==> &0 <= c1
-  &0 < d ==> ~(d = &0)
-  ?c1. --(x + c0 * d) < c1 * d
-  ?c1. &0 <= c1 /\\ --(x + c0 * d) < c1 * d
-  c0:int
-  &0
-  x:int
-  forall d x. &0 < d ==> ?c. &1 <= x + c * d /\\ x + c * d <= d
-  (interp x (Lt e) <=> x + e < &0) /\\\n   (interp x (Gt e) <=> x + e > &0) /\\\n   (interp x (Eq e) <=> (x + e = &0)) /\\\n   (interp x (Ne e) <=> ~(x + e = &0)) /\\\n   (interp x (Divides c e) <=> c divides (x + e)) /\\\n   (interp x (Ndivides c e) <=> ~(c divides (x + e))) /\\\n   (interp x (And p q) <=> interp x p /\\ interp x q) /\\\n   (interp x (Or p q) <=> interp x p \\/ interp x q) /\\\n   (interp x (Nox P) <=> P)
-  (minusinf (Lt e) = Nox T) /\\\n  (minusinf (Gt e) = Nox F) /\\\n  (minusinf (Eq e) = Nox F) /\\\n  (minusinf (Ne e) = Nox T) /\\\n  (minusinf (Divides c e) = Divides c e) /\\\n  (minusinf (Ndivides c e) = Ndivides c e) /\\\n  (minusinf (And p q) = And (minusinf p) (minusinf q)) /\\\n  (minusinf (Or p q) = Or (minusinf p) (minusinf q)) /\\\n  (minusinf (Nox P) = Nox P)
-  (plusinf (Lt e) = Nox F) /\\\n  (plusinf (Gt e) = Nox T) /\\\n  (plusinf (Eq e) = Nox F) /\\\n  (plusinf (Ne e) = Nox T) /\\\n  (plusinf (Divides c e) = Divides c e) /\\\n  (plusinf (Ndivides c e) = Ndivides c e) /\\\n  (plusinf (And p q) = And (plusinf p) (plusinf q)) /\\\n  (plusinf (Or p q) = Or (plusinf p) (plusinf q)) /\\\n  (plusinf (Nox P) = Nox P)
-  (alldivide d (Lt e) <=> T) /\\\n  (alldivide d (Gt e) <=> T) /\\\n  (alldivide d (Eq e) <=> T) /\\\n  (alldivide d (Ne e) <=> T) /\\\n  (alldivide d (Divides c e) <=> c divides d) /\\\n  (alldivide d (Ndivides c e) <=> c divides d) /\\\n  (alldivide d (And p q) <=> alldivide d p /\\ alldivide d q) /\\\n  (alldivide d (Or p q) <=> alldivide d p /\\ alldivide d q) /\\\n  (alldivide d (Nox P) <=> T)
-  (aset (Lt e) = {(--e)}) /\\\n  (aset (Gt e) = {}) /\\\n  (aset (Eq e) = {(--e + &1)}) /\\\n  (aset (Ne e) = {(--e)}) /\\\n  (aset (Divides c e) = {}) /\\\n  (aset (Ndivides c e) = {}) /\\\n  (aset (And p q) = (aset p) UNION (aset q)) /\\\n  (aset (Or p q) = (aset p) UNION (aset q)) /\\\n  (aset (Nox P) = {})
-  (bset (Lt e) = {}) /\\\n  (bset (Gt e) = {(--e)}) /\\\n  (bset (Eq e) = {(--(e + &1))}) /\\\n  (bset (Ne e) = {(--e)}) /\\\n  (bset (Divides c e) = {}) /\\\n  (bset (Ndivides c e) = {}) /\\\n  (bset (And p q) = (bset p) UNION (bset q)) /\\\n  (bset (Or p q) = (bset p) UNION (bset q)) /\\\n  (bset (Nox P) = {})
-  z < y /\\ y < x - &n ==> z < x - (&n + &1)
-  x - (x - y) = y
-  x - y
-  forall n. ?y. y < x - &n /\\ P y
-  x < y \\/ &0 <= x - y
-  y:int
-  ~(p /\\ q) <=> p ==> ~q
-  (~b ==> a) ==> a \\/ b
-  x:int
-  (?x. P x) <=> (forall y. ?x. x < y /\\ P x) \\/ (?x. P x /\\ forall y. y < x ==> ~P y)
-  b:int
-  a:int
-  b:int
-  a:int
-  x < --a ==> x + a < &0
-  (a /\\ b /\\ c /\\ d) /\\ (e /\\ f) ==> a /\\ b /\\ c /\\ d /\\ e /\\ f
-  forall p. ?y. forall x. x < y ==> (interp x p <=> interp x (minusinf p))
-  (x + d) + y = (x + y) + d
-  forall p c d x. alldivide d p\n             ==> (interp x (minusinf p) <=> interp (x + c * d) (minusinf p))
-  alldivide d p /\\ &0 < d\n   ==> ((forall y. ?x. x < y /\\ interp x p) <=>\n        ?j. &1 <= j /\\ j <= d /\\ interp j (minusinf p))
-  (x - y) + y = x
-  (x - y) + z = (x + z) - y
-  (x - y) + z = (x + z) - y
-  --a
-  d:int
-  --a - &1
-  &1
-  --a
-  x + a
-  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-  a /\\ (b \\/ c) <=> a /\\ b \\/ a /\\ c
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  ~a \\/ a
-  (a /\\ b /\\ c /\\ d /\\ e /\\ f) /\\ g /\\ h\n                     ==> a /\\ b /\\ c /\\ d /\\ e /\\ f /\\ g /\\ h
-  a /\\ b ==> c <=> b ==> a ==> c
-  forall d p. alldivide d p /\\ &0 < d\n         ==> forall x. interp x p /\\ ~(interp (x - d) p)\n                 ==> ?j b. &1 <= j /\\ j <= d /\\ b IN bset p /\\ (x = b + j)
-  x:int
-  p:cform
-  d:int
-  &0 < d ==> x - d < x
-  x - d
-  x:int
-  ?x. interp x p /\\ forall y. y < x ==> ~(interp y p)
-  forall y. ?x. x < y /\\ interp x p
-  forall a1 a2. (a <=> a1 \\/ a2) /\\ (a1 <=> b) /\\ (a2 ==> c) /\\ (c ==> a)\n            ==> (a <=> b \\/ c)
-  a /\\ (b \\/ c) <=> a /\\ b \\/ a /\\ c
-  forall p d. alldivide d p /\\ &0 < d\n         ==> ((?x. interp x p) <=>\n              ?j. &1 <= j /\\ j <= d /\\\n                  (interp j (minusinf p) \\/\n                   ?b. b IN bset p /\\ interp (b + j) p))
-  (mirror (Lt e) = Gt(--e)) /\\\n  (mirror (Gt e) = Lt(--e)) /\\\n  (mirror (Eq e) = Eq(--e)) /\\\n  (mirror (Ne e) = Ne(--e)) /\\\n  (mirror (Divides c e) = Divides c (--e)) /\\\n  (mirror (Ndivides c e) = Ndivides c (--e)) /\\\n  (mirror (And p q) = And (mirror p) (mirror q)) /\\\n  (mirror (Or p q) = Or (mirror p) (mirror q)) /\\\n  (mirror (Nox P) = Nox P)
-  forall p x. interp (--x) (mirror p) <=> interp x p
-  forall p x. interp x (mirror p) <=> interp (--x) p
-  forall p. bset(mirror p) = IMAGE (--) (aset p)
-  forall p. minusinf (mirror p) = mirror (plusinf p)
-  forall p. plusinf p = mirror(minusinf (mirror p))
-  forall p d. alldivide d (mirror p) = alldivide d p
-  (?x. P(--x)) <=> (?x. P(x))
-  (forall x. P(--x)) <=> (forall x. P x)
-  ~(d:int = j)
-  j <= d
-  &1 <= j
-  d - j
-  --j + &1 * d = d - j
-  --j
-  &1
-  d + --(&2) * d = --d
-  d:int
-  --(&2)
-  d:int = j
-  forall P d. (forall c x. P(x + c * d) <=> P(x)) /\\ (?j. &1 <= j /\\ j <= d /\\ P(--j))\n         ==> ?j. &1 <= j /\\ j <= d /\\ P(j)
-  --(x + c * d) = --x + --c * d
-  d:int
-  \\x. P(--x):bool
-  P:int->bool
-  forall P d. (forall c x. P(x + c * d) <=> P(x))\n         ==> ((?j. &1 <= j /\\ j <= d /\\ P(--j)) <=>\n              (?j. &1 <= j /\\ j <= d /\\ P(j)))
-  q:cform
-  mirror p
-  --(b + j) = --b - j
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  a /\\ (b \\/ c) <=> a /\\ b \\/ a /\\ c
-  d:int
-  mirror p
-  forall p d. alldivide d p /\\ &0 < d\n         ==> ((?x. interp x p) <=>\n              ?j. &1 <= j /\\ j <= d /\\\n                  (interp j (plusinf p) \\/\n                   ?a. a IN aset p /\\ interp (a - j) p))
-  (?x. P(&1 * x)) <=> ?x. P(x)
-  (?x. P(c * x)) <=> ?x. c divides x /\\ P(x)
-  &
-  &
-  (--)
-  (--)
-  (F /\\ F <=> F) /\\ (F /\\ T <=> F) /\\\n          (T /\\ F <=> F) /\\ (T /\\ T <=> T)
-  (~T <=> F) /\\ (~F <=> T)
-  (--(&m) <= &n <=> T) /\\\n     (&m <= &n <=> m <= n) /\\\n     (--(&m) <= --(&n) <=> n <= m) /\\\n     (&m <= --(&n) <=> (m = 0) /\\ (n = 0))
-  (&m < --(&n) <=> F) /\\\n     (&m < &n <=> m < n) /\\\n     (--(&m) < --(&n) <=> n < m) /\\\n     (--(&m) < &n <=> ~((m = 0) /\\ (n = 0)))
-  (&m >= --(&n) <=> T) /\\\n     (&m >= &n <=> n <= m) /\\\n     (--(&m) >= --(&n) <=> m <= n) /\\\n     (--(&m) >= &n <=> (m = 0) /\\ (n = 0))
-  (--(&m) > &n <=> F) /\\\n     (&m > &n <=> n < m) /\\\n     (--(&m) > --(&n) <=> m < n) /\\\n     (&m > --(&n) <=> ~((m = 0) /\\ (n = 0)))
-  ((&m = &n) <=> (m = n)) /\\\n     ((--(&m) = --(&n)) <=> (m = n)) /\\\n     ((--(&m) = &n) <=> (m = 0) /\\ (n = 0)) /\\\n     ((&m = --(&n)) <=> (m = 0) /\\ (n = 0))
-  (--(&0) = &0) /\\\n     (--(--(&x)) = &x)
-  (&0 * &x = &0) /\\\n     (&0 * --(&x) = &0) /\\\n     (&x * &0 = &0) /\\\n     (--(&x) * &0 = &0)
-  ((&m * &n = &(m * n)) /\\\n      (--(&m) * --(&n) = &(m * n))) /\\\n     ((--(&m) * &n = --(&(m * n))) /\\\n      (&m * --(&n) = --(&(m * n))))
-  (--)
-  &
-  (+)
-  (+)
-  m:num
-  n:num
-  (--(&m) + &m = &0) /\\\n     (&m + --(&m) = &0)
-  (--(&m) + --(&n) = --(&(m + n))) /\\\n     (--(&m) + &(m + n) = &n) /\\\n     (--(&(m + n)) + &m = --(&n)) /\\\n     (&(m + n) + --(&m) = &n) /\\\n     (&m + --(&(m + n)) = --(&n)) /\\\n     (&m + &n = &(m + n))
-  n:num
-  x:num
-  (&x pow n = &(x EXP n)) /\\\n     ((--(&x)) pow n = if EVEN n then &(x EXP n) else --(&(x EXP n)))
-  ((if T then x:int else y) = x) /\\ ((if F then x:int else y) = y)
-  (--)
-  (+)
-  (*)
-  (pow)
-  (-)
-  (+)
-  (*)
-  (pow)
-  (-)
-  (forall x y z. x + (y + z) = (x + y) + z) /\\\n     (forall x y. x + y = y + x) /\\\n     (forall x. &0 + x = x) /\\\n     (forall x y z. x * (y * z) = (x * y) * z) /\\\n     (forall x y. x * y = y * x) /\\\n     (forall x. &1 * x = x) /\\\n     (forall x. &0 * x = &0) /\\\n     (forall x y z. x * (y + z) = x * y + x * z) /\\\n     (forall x. x pow 0 = &1) /\\\n     (forall x n. x pow (SUC n) = x * x pow n)
-  (forall x. --x = --(&1) * x) /\\\n     (forall x y. x - y = x + --(&1) * y)
+  op_star
+  op_plus
+  divides((a : Int), (b : Int)) == (\226\136\131 x : Int, b == a * x)
+  \226\136\128 a : Int, \226\136\128 b : Int, \226\136\131 c : Int, \226\136\128 x : Int, x < c \226\134\146 x < a && x < b
+  \226\136\128 d : Int, \226\136\128 a : Int, \226\136\128 b : Int, divides(d, a) && divides(d, b) \226\134\146 divides(d, a + b)
+  \226\136\128 d : Int, \226\136\128 a : Int, \226\136\128 b : Int, divides(d, a) && divides(d, b) \226\134\146 divides(d, a - b)
+  (a : Int) + (b : Int) - a == b
+  \226\136\128 d : Int, \226\136\128 a : Int, \226\136\128 b : Int, divides(d, a) && divides(d, a + b) \226\134\146 divides(d, b)
+  (a : Int) + (b : Int) - b == a
+  \226\136\128 d : Int, \226\136\128 a : Int, \226\136\128 b : Int, divides(d, b) && divides(d, a + b) \226\134\146 divides(d, a)
+  (a : Int) * ((b : Int) * (c : Int)) == b * (a * c)
+  \226\136\128 d : Int, \226\136\128 a : Int, \226\136\128 x : Int, divides(d, a) \226\134\146 divides(d, x * a)
+  \226\136\128 d : Int, \226\136\128 a : Int, divides(d, -a) == divides(d, a)
+  \226\136\128 d : Int, \226\136\128 a : Int, divides(-d, a) == divides(d, a)
+  ((x : Int) - (y : Int) < (c : Int) * (d : Int)) == (x + -c * d < y)
+  \226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 d : Int, int_of_num(0) < d \226\134\146 (\226\136\131 c : Int, x + c * d < y)
+  SUC((n : Num)) - 1 == n
+  (n : Num)
+  (n : Num)
+  int_of_num(1) <= (x : Int) + ((c0 : Int) + int_of_num((n : Num))) * (d : Int)
+  (n : Num) - 1
+  (c0 : Int) + int_of_num((n : Num))
+  (n : Num)
+  (-((x : Int) + (a : Int) * (d : Int)) < (b : Int) * d) == (int_of_num(1) <= x + (a + b) * d)
+  ((a : Bool) && (b : Bool)) == !(a \226\134\146 !b)
+  (int_of_num(0) < -(c1 : Int) \226\134\146 int_of_num(0) < -(cd : Int)) && (xcod : Int) < int_of_num(0) \226\134\146 -xcod < cd \226\134\146 int_of_num(0) <= c1
+  int_of_num(0) < (d : Int) \226\134\146 !(d == int_of_num(0))
+  \226\136\131 c1 : Int, -((x : Int) + (c0 : Int) * (d : Int)) < c1 * d
+  \226\136\131 c1 : Int, int_of_num(0) <= c1 && -((x : Int) + (c0 : Int) * (d : Int)) < c1 * d
+  (c0 : Int)
+  int_of_num(0)
+  (x : Int)
+  \226\136\128 d : Int, \226\136\128 x : Int, int_of_num(0) < d \226\134\146 (\226\136\131 c : Int, int_of_num(1) <= x + c * d && x + c * d <= d)
+  (interp : (Int, Cform) -> Bool)((x : Int), Lt((e : Int))) == (x + e < int_of_num(0)) && interp(x, Gt(e)) == (x + e > int_of_num(0)) && interp(x, Eq(e)) == (x + e == int_of_num(0)) && interp(x, Ne(e)) == !(x + e == int_of_num(0)) && interp(x, Divides((c : Int), e)) == divides(c, x + e) && interp(x, Ndivides(c, e)) == !divides(c, x + e) && interp(x, And((p : Cform), (q : Cform))) == (interp(x, p) && interp(x, q)) && interp(x, Or(p, q)) == (interp(x, p) || interp(x, q)) && interp(x, Nox((P : Bool))) == P
+  (minusinf : (Cform) -> Cform)(Lt((e : Int))) == Nox(true) && minusinf(Gt(e)) == Nox(false) && minusinf(Eq(e)) == Nox(false) && minusinf(Ne(e)) == Nox(true) && minusinf(Divides((c : Int), e)) == Divides(c, e) && minusinf(Ndivides(c, e)) == Ndivides(c, e) && minusinf(And((p : Cform), (q : Cform))) == And(minusinf(p), minusinf(q)) && minusinf(Or(p, q)) == Or(minusinf(p), minusinf(q)) && minusinf(Nox((P : Bool))) == Nox(P)
+  (plusinf : (Cform) -> Cform)(Lt((e : Int))) == Nox(false) && plusinf(Gt(e)) == Nox(true) && plusinf(Eq(e)) == Nox(false) && plusinf(Ne(e)) == Nox(true) && plusinf(Divides((c : Int), e)) == Divides(c, e) && plusinf(Ndivides(c, e)) == Ndivides(c, e) && plusinf(And((p : Cform), (q : Cform))) == And(plusinf(p), plusinf(q)) && plusinf(Or(p, q)) == Or(plusinf(p), plusinf(q)) && plusinf(Nox((P : Bool))) == Nox(P)
+  (alldivide : (Int, Cform) -> Bool)((d : Int), Lt((e : Int))) == true && alldivide(d, Gt(e)) == true && alldivide(d, Eq(e)) == true && alldivide(d, Ne(e)) == true && alldivide(d, Divides((c : Int), e)) == divides(c, d) && alldivide(d, Ndivides(c, e)) == divides(c, d) && alldivide(d, And((p : Cform), (q : Cform))) == (alldivide(d, p) && alldivide(d, q)) && alldivide(d, Or(p, q)) == (alldivide(d, p) && alldivide(d, q)) && alldivide(d, Nox((P : Bool))) == true
+  (aset : (Cform, Int) -> Bool)(Lt((e : Int))) == {-e} && aset(Gt(e)) == {} && aset(Eq(e)) == {-e + int_of_num(1)} && aset(Ne(e)) == {-e} && aset(Divides((c : Int), e)) == {} && aset(Ndivides(c, e)) == {} && aset(And((p : Cform), (q : Cform))) == UNION(aset(p), aset(q)) && aset(Or(p, q)) == UNION(aset(p), aset(q)) && aset(Nox((P : Bool))) == {}
+  (bset : (Cform, Int) -> Bool)(Lt((e : Int))) == {} && bset(Gt(e)) == {-e} && bset(Eq(e)) == {-(e + int_of_num(1))} && bset(Ne(e)) == {-e} && bset(Divides((c : Int), e)) == {} && bset(Ndivides(c, e)) == {} && bset(And((p : Cform), (q : Cform))) == UNION(bset(p), bset(q)) && bset(Or(p, q)) == UNION(bset(p), bset(q)) && bset(Nox((P : Bool))) == {}
+  (z : Int) < (y : Int) && y < (x : Int) - int_of_num((n : Num)) \226\134\146 z < x - (int_of_num(n) + int_of_num(1))
+  (x : Int) - (x - (y : Int)) == y
+  (x : Int) - (y : Int)
+  \226\136\128 n : Num, \226\136\131 y : Int, y < (x : Int) - int_of_num(n) && (P : (Int) -> Bool)(y)
+  (x : Int) < (y : Int) || int_of_num(0) <= x - y
+  (y : Int)
+  !((p : Bool) && (q : Bool)) == (p \226\134\146 !q)
+  (!(b : Bool) \226\134\146 (a : Bool)) \226\134\146 a || b
+  (x : Int)
+  (\226\136\131 x : Int, (P : (Int) -> Bool)(x)) == ((\226\136\128 y : Int, \226\136\131 x : Int, x < y && P(x)) || (\226\136\131 x : Int, P(x) && (\226\136\128 y : Int, y < x \226\134\146 !P(y))))
+  (b : Int)
+  (a : Int)
+  (b : Int)
+  (a : Int)
+  (x : Int) < -(a : Int) \226\134\146 x + a < int_of_num(0)
+  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool)) && (e : Bool) && (f : Bool) \226\134\146 a && b && c && d && e && f
+  \226\136\128 p : Cform, \226\136\131 y : Int, \226\136\128 x : Int, x < y \226\134\146 interp(x, p) == interp(x, minusinf(p))
+  (x : Int) + (d : Int) + (y : Int) == x + y + d
+  \226\136\128 p : Cform, \226\136\128 c : Int, \226\136\128 d : Int, \226\136\128 x : Int, alldivide(d, p) \226\134\146 interp(x, minusinf(p)) == interp(x + c * d, minusinf(p))
+  alldivide((d : Int), (p : Cform)) && int_of_num(0) < d \226\134\146 (\226\136\128 y : Int, \226\136\131 x : Int, x < y && interp(x, p)) == (\226\136\131 j : Int, int_of_num(1) <= j && j <= d && interp(j, minusinf(p)))
+  (x : Int) - (y : Int) + y == x
+  (x : Int) - (y : Int) + (z : Int) == x + z - y
+  (x : Int) - (y : Int) + (z : Int) == x + z - y
+  -(a : Int)
+  (d : Int)
+  -(a : Int) - int_of_num(1)
+  int_of_num(1)
+  -(a : Int)
+  (x : Int) + (a : Int)
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  ((a : Bool) && ((b : Bool) || (c : Bool))) == (a && b || a && c)
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  !(a : Bool) || a
+  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) && (e : Bool) && (f : Bool)) && (g : Bool) && (h : Bool) \226\134\146 a && b && c && d && e && f && g && h
+  ((a : Bool) && (b : Bool) \226\134\146 (c : Bool)) == (b \226\134\146 a \226\134\146 c)
+  \226\136\128 d : Int, \226\136\128 p : Cform, alldivide(d, p) && int_of_num(0) < d \226\134\146 (\226\136\128 x : Int, interp(x, p) && !interp(x - d, p) \226\134\146 (\226\136\131 j : Int, \226\136\131 b : Int, int_of_num(1) <= j && j <= d && IN(b, bset(p)) && x == b + j))
+  (x : Int)
+  (p : Cform)
+  (d : Int)
+  int_of_num(0) < (d : Int) \226\134\146 (x : Int) - d < x
+  (x : Int) - (d : Int)
+  (x : Int)
+  \226\136\131 x : Int, interp(x, (p : Cform)) && (\226\136\128 y : Int, y < x \226\134\146 !interp(y, p))
+  \226\136\128 y : Int, \226\136\131 x : Int, x < y && interp(x, (p : Cform))
+  \226\136\128 a1 : Bool, \226\136\128 a2 : Bool, (a : Bool) == (a1 || a2) && a1 == (b : Bool) && (a2 \226\134\146 (c : Bool)) && (c \226\134\146 a) \226\134\146 a == (b || c)
+  ((a : Bool) && ((b : Bool) || (c : Bool))) == (a && b || a && c)
+  \226\136\128 p : Cform, \226\136\128 d : Int, alldivide(d, p) && int_of_num(0) < d \226\134\146 (\226\136\131 x : Int, interp(x, p)) == (\226\136\131 j : Int, int_of_num(1) <= j && j <= d && (interp(j, minusinf(p)) || (\226\136\131 b : Int, IN(b, bset(p)) && interp(b + j, p))))
+  (mirror : (Cform) -> Cform)(Lt((e : Int))) == Gt(-e) && mirror(Gt(e)) == Lt(-e) && mirror(Eq(e)) == Eq(-e) && mirror(Ne(e)) == Ne(-e) && mirror(Divides((c : Int), e)) == Divides(c, -e) && mirror(Ndivides(c, e)) == Ndivides(c, -e) && mirror(And((p : Cform), (q : Cform))) == And(mirror(p), mirror(q)) && mirror(Or(p, q)) == Or(mirror(p), mirror(q)) && mirror(Nox((P : Bool))) == Nox(P)
+  \226\136\128 p : Cform, \226\136\128 x : Int, interp(-x, mirror(p)) == interp(x, p)
+  \226\136\128 p : Cform, \226\136\128 x : Int, interp(x, mirror(p)) == interp(-x, p)
+  \226\136\128 p : Cform, bset(mirror(p)) == IMAGE(op_minus_minus, aset(p))
+  \226\136\128 p : Cform, minusinf(mirror(p)) == mirror(plusinf(p))
+  \226\136\128 p : Cform, plusinf(p) == mirror(minusinf(mirror(p)))
+  \226\136\128 p : Cform, \226\136\128 d : Int, alldivide(d, mirror(p)) == alldivide(d, p)
+  (\226\136\131 x : Int, (P : (Int) -> Bool)(-x)) == (\226\136\131 x : Int, P(x))
+  (\226\136\128 x : Int, (P : (Int) -> Bool)(-x)) == (\226\136\128 x : Int, P(x))
+  !((d : Int) == (j : Int))
+  (j : Int) <= (d : Int)
+  int_of_num(1) <= (j : Int)
+  (d : Int) - (j : Int)
+  -(j : Int) + int_of_num(1) * (d : Int) == d - j
+  -(j : Int)
+  int_of_num(1)
+  (d : Int) + -int_of_num(2) * d == -d
+  (d : Int)
+  -int_of_num(2)
+  (d : Int) == (j : Int)
+  \226\136\128 P : (Int) -> Bool, \226\136\128 d : Int, (\226\136\128 c : Int, \226\136\128 x : Int, P(x + c * d) == P(x)) && (\226\136\131 j : Int, int_of_num(1) <= j && j <= d && P(-j)) \226\134\146 (\226\136\131 j : Int, int_of_num(1) <= j && j <= d && P(j))
+  -((x : Int) + (c : Int) * (d : Int)) == -x + -c * d
+  (d : Int)
+  (x : Int) => (P : (Int) -> Bool)(-x)
+  (P : (Int) -> Bool)
+  \226\136\128 P : (Int) -> Bool, \226\136\128 d : Int, (\226\136\128 c : Int, \226\136\128 x : Int, P(x + c * d) == P(x)) \226\134\146 (\226\136\131 j : Int, int_of_num(1) <= j && j <= d && P(-j)) == (\226\136\131 j : Int, int_of_num(1) <= j && j <= d && P(j))
+  (q : Cform)
+  mirror((p : Cform))
+  -((b : Int) + (j : Int)) == -b - j
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  ((a : Bool) && ((b : Bool) || (c : Bool))) == (a && b || a && c)
+  (d : Int)
+  mirror((p : Cform))
+  \226\136\128 p : Cform, \226\136\128 d : Int, alldivide(d, p) && int_of_num(0) < d \226\134\146 (\226\136\131 x : Int, interp(x, p)) == (\226\136\131 j : Int, int_of_num(1) <= j && j <= d && (interp(j, plusinf(p)) || (\226\136\131 a : Int, IN(a, aset(p)) && interp(a - j, p))))
+  (\226\136\131 x : Int, (P : (Int) -> Bool)(int_of_num(1) * x)) == (\226\136\131 x : Int, P(x))
+  (\226\136\131 x : Int, (P : (Int) -> Bool)((c : Int) * x)) == (\226\136\131 x : Int, divides(c, x) && P(x))
+  int_of_num
+  int_of_num
+  op_minus_minus
+  op_minus_minus
+  (false && false) == false && (false && true) == false && (true && false) == false && (true && true) == true
+  !true == false && !false == true
+  (-int_of_num((m : Num)) <= int_of_num((n : Num))) == true && (int_of_num(m) <= int_of_num(n)) == (m <= n) && (-int_of_num(m) <= -int_of_num(n)) == (n <= m) && (int_of_num(m) <= -int_of_num(n)) == (m == 0 && n == 0)
+  (int_of_num((m : Num)) < -int_of_num((n : Num))) == false && (int_of_num(m) < int_of_num(n)) == (m < n) && (-int_of_num(m) < -int_of_num(n)) == (n < m) && (-int_of_num(m) < int_of_num(n)) == !(m == 0 && n == 0)
+  (int_of_num((m : Num)) >= -int_of_num((n : Num))) == true && (int_of_num(m) >= int_of_num(n)) == (n <= m) && (-int_of_num(m) >= -int_of_num(n)) == (m <= n) && (-int_of_num(m) >= int_of_num(n)) == (m == 0 && n == 0)
+  (-int_of_num((m : Num)) > int_of_num((n : Num))) == false && (int_of_num(m) > int_of_num(n)) == (n < m) && (-int_of_num(m) > -int_of_num(n)) == (m < n) && (int_of_num(m) > -int_of_num(n)) == !(m == 0 && n == 0)
+  (int_of_num((m : Num)) == int_of_num((n : Num))) == (m == n) && (-int_of_num(m) == -int_of_num(n)) == (m == n) && (-int_of_num(m) == int_of_num(n)) == (m == 0 && n == 0) && (int_of_num(m) == -int_of_num(n)) == (m == 0 && n == 0)
+  -int_of_num(0) == int_of_num(0) && --int_of_num((x : Num)) == int_of_num(x)
+  int_of_num(0) * int_of_num((x : Num)) == int_of_num(0) && int_of_num(0) * -int_of_num(x) == int_of_num(0) && int_of_num(x) * int_of_num(0) == int_of_num(0) && -int_of_num(x) * int_of_num(0) == int_of_num(0)
+  (int_of_num((m : Num)) * int_of_num((n : Num)) == int_of_num(m * n) && -int_of_num(m) * -int_of_num(n) == int_of_num(m * n)) && -int_of_num(m) * int_of_num(n) == -int_of_num(m * n) && int_of_num(m) * -int_of_num(n) == -int_of_num(m * n)
+  op_minus_minus
+  int_of_num
+  op_plus
+  op_plus
+  (m : Num)
+  (n : Num)
+  -int_of_num((m : Num)) + int_of_num(m) == int_of_num(0) && int_of_num(m) + -int_of_num(m) == int_of_num(0)
+  -int_of_num((m : Num)) + -int_of_num((n : Num)) == -int_of_num(m + n) && -int_of_num(m) + int_of_num(m + n) == int_of_num(n) && -int_of_num(m + n) + int_of_num(m) == -int_of_num(n) && int_of_num(m + n) + -int_of_num(m) == int_of_num(n) && int_of_num(m) + -int_of_num(m + n) == -int_of_num(n) && int_of_num(m) + int_of_num(n) == int_of_num(m + n)
+  (n : Num)
+  (x : Num)
+  pow(int_of_num((x : Num)), (n : Num)) == int_of_num(EXP(x, n)) && pow(-int_of_num(x), n) == (if EVEN(n) { int_of_num(EXP(x, n)) } else { -int_of_num(EXP(x, n)) })
+  (if true { (x : Int) } else { (y : Int) }) == x && (if false { x } else { y }) == y
+  op_minus_minus
+  op_plus
+  op_star
+  pow
+  op_minus
+  op_plus
+  op_star
+  pow
+  op_minus
+  (\226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, x + (y + z) == x + y + z) && (\226\136\128 x : Int, \226\136\128 y : Int, x + y == y + x) && (\226\136\128 x : Int, int_of_num(0) + x == x) && (\226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, x * (y * z) == x * y * z) && (\226\136\128 x : Int, \226\136\128 y : Int, x * y == y * x) && (\226\136\128 x : Int, int_of_num(1) * x == x) && (\226\136\128 x : Int, int_of_num(0) * x == int_of_num(0)) && (\226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, x * (y + z) == x * y + x * z) && (\226\136\128 x : Int, pow(x, 0) == int_of_num(1)) && (\226\136\128 x : Int, \226\136\128 n : Num, pow(x, SUC(n)) == x * pow(x, n))
+  (\226\136\128 x : Int, -x == -int_of_num(1) * x) && (\226\136\128 x : Int, \226\136\128 y : Int, x - y == x + -int_of_num(1) * y)
   p:num
   q:num
   0
   1
-  (*)
-  (s < t <=> &0 < t - s) /\\\n               (~(s < t) <=> &0 < (s + &1) - t) /\\\n               (s > t <=> &0 < s - t) /\\\n               (~(s > t) <=> &0 < (t + &1) - s) /\\\n               (s <= t <=> &0 < (t + &1) - s) /\\\n               (~(s <= t) <=> &0 < s - t) /\\\n               (s >= t <=> &0 < (s + &1) - t) /\\\n               (~(s >= t) <=> &0 < t - s) /\\\n               ((s = t) <=> (&0 = s - t))
-  c divides e
-  T
-  F
-  x = &1 * x
-  x + a = &1 * x + a
-  (=):int->int->bool
-  (<):int->int->bool
-  (>):int->int->bool
-  (divides):int->int->bool
-  c:int
-  d:int
-  e:int
-  ~(d = &0) ==> (c divides e <=> (d * c) divides (d * e))
-  ~(d = &0) ==> ((&0 = e) <=> (&0 = d * e))
-  &0 < e <=> d * &0 < d * e
-  &0 < d ==> (&0 < e <=> &0 < d * e)
-  e < &0 <=> d * e < d * &0
-  &0 < d ==> (&0 > e <=> &0 > d * e)
-  T
-  F
-  d < &0 <=> &0 < --d
-  &0 > d * e <=> &0 < --d * e
-  d < &0 ==> (&0 < e <=> &0 > d * e)
-  d < &0 <=> &0 < --d
-  &0 < d * e <=> &0 > --d * e
-  d < &0 ==> (&0 > e <=> &0 < d * e)
-  c:int
-  (?x. P(c * x)) <=> (?x. c divides x /\\ P x)
-  P = interp x (Nox P)
-  (interp x p /\\ interp x q <=> interp x (And p q)) /\\\n     (interp x p \\/ interp x q <=> interp x (Or p q))
-  (&0 > x + e <=> interp x (Lt e)) /\\\n     (&0 < x + e <=> interp x (Gt e)) /\\\n     ((&0 = x + e) <=> interp x (Eq e)) /\\\n     (~(&0 = x + e) <=> interp x (Ne e)) /\\\n     (c divides (x + e) <=> interp x (Divides c e)) /\\\n     (~(c divides (x + e)) <=> interp x (Ndivides c e))
-  (&0 > x <=> interp x (Lt(&0))) /\\\n     (&0 < x <=> interp x (Gt(&0))) /\\\n     ((&0 = x) <=> interp x (Eq(&0))) /\\\n     (~(&0 = x) <=> interp x (Ne(&0))) /\\\n     (c divides x <=> interp x (Divides c (&0))) /\\\n     (~(c divides x) <=> interp x (Ndivides c (&0)))
-  x:int
-  P:bool
+  op_star
+  ((s : Int) < (t : Int)) == (int_of_num(0) < t - s) && !(s < t) == (int_of_num(0) < s + int_of_num(1) - t) && (s > t) == (int_of_num(0) < s - t) && !(s > t) == (int_of_num(0) < t + int_of_num(1) - s) && (s <= t) == (int_of_num(0) < t + int_of_num(1) - s) && !(s <= t) == (int_of_num(0) < s - t) && (s >= t) == (int_of_num(0) < s + int_of_num(1) - t) && !(s >= t) == (int_of_num(0) < t - s) && (s == t) == (int_of_num(0) == s - t)
+  divides((c : Int), (e : Int))
+  true
+  false
+  (x : Int) == int_of_num(1) * x
+  (x : Int) + (a : Int) == int_of_num(1) * x + a
+  (op_eq : (Int, Int) -> Bool)
+  op_lt
+  op_gt
+  divides
+  (c : Int)
+  (d : Int)
+  (e : Int)
+  !((d : Int) == int_of_num(0)) \226\134\146 divides((c : Int), (e : Int)) == divides(d * c, d * e)
+  !((d : Int) == int_of_num(0)) \226\134\146 (int_of_num(0) == (e : Int)) == (int_of_num(0) == d * e)
+  (int_of_num(0) < (e : Int)) == ((d : Int) * int_of_num(0) < d * e)
+  int_of_num(0) < (d : Int) \226\134\146 (int_of_num(0) < (e : Int)) == (int_of_num(0) < d * e)
+  ((e : Int) < int_of_num(0)) == ((d : Int) * e < d * int_of_num(0))
+  int_of_num(0) < (d : Int) \226\134\146 (int_of_num(0) > (e : Int)) == (int_of_num(0) > d * e)
+  true
+  false
+  ((d : Int) < int_of_num(0)) == (int_of_num(0) < -d)
+  (int_of_num(0) > (d : Int) * (e : Int)) == (int_of_num(0) < -d * e)
+  (d : Int) < int_of_num(0) \226\134\146 (int_of_num(0) < (e : Int)) == (int_of_num(0) > d * e)
+  ((d : Int) < int_of_num(0)) == (int_of_num(0) < -d)
+  (int_of_num(0) < (d : Int) * (e : Int)) == (int_of_num(0) > -d * e)
+  (d : Int) < int_of_num(0) \226\134\146 (int_of_num(0) > (e : Int)) == (int_of_num(0) < d * e)
+  (c : Int)
+  (\226\136\131 x : Int, (P : (Int) -> Bool)((c : Int) * x)) == (\226\136\131 x : Int, divides(c, x) && P(x))
+  (P : Bool) == interp((x : Int), Nox(P))
+  (interp((x : Int), (p : Cform)) && interp(x, (q : Cform))) == interp(x, And(p, q)) && (interp(x, p) || interp(x, q)) == interp(x, Or(p, q))
+  (int_of_num(0) > (x : Int) + (e : Int)) == interp(x, Lt(e)) && (int_of_num(0) < x + e) == interp(x, Gt(e)) && (int_of_num(0) == x + e) == interp(x, Eq(e)) && !(int_of_num(0) == x + e) == interp(x, Ne(e)) && divides((c : Int), x + e) == interp(x, Divides(c, e)) && !divides(c, x + e) == interp(x, Ndivides(c, e))
+  (int_of_num(0) > (x : Int)) == interp(x, Lt(int_of_num(0))) && (int_of_num(0) < x) == interp(x, Gt(int_of_num(0))) && (int_of_num(0) == x) == interp(x, Eq(int_of_num(0))) && !(int_of_num(0) == x) == interp(x, Ne(int_of_num(0))) && divides((c : Int), x) == interp(x, Divides(c, int_of_num(0))) && !divides(c, x) == interp(x, Ndivides(c, int_of_num(0)))
+  (x : Int)
+  (P : Bool)
   Divides
   Ndivides
   And
   Or
-  &m
-  (p * m = n) ==> &p divides &n
-  m:num
-  n:num
-  p:num
-  abs:int->int
-  x:int
-  q:num
-  x:int
-  &p divides &n <=> ?m. (n = p * m)
-  n:num
-  p = 0
-  (&p divides &n) <=> (p = 0) /\\ (n = 0) \\/ ~(p = 0) /\\ (n MOD p = 0)
-  (alldivide d (Lt e) <=> T) /\\\n     (alldivide d (Gt e) <=> T) /\\\n     (alldivide d (Eq e) <=> T) /\\\n     (alldivide d (Ne e) <=> T) /\\\n     (alldivide d (Nox P) <=> T)
-  (alldivide d (Divides c e) <=> c divides d) /\\\n      (alldivide d (Ndivides c e) <=> c divides d)
-  (alldivide d (And p q) <=> alldivide d p /\\ alldivide d q) /\\\n     (alldivide d (Or p q) <=> alldivide d p /\\ alldivide d q)
-  (T /\\ T <=> T)
-  ((?b. b IN bset (Lt e) /\\ P b) <=> F) /\\\n     ((?b. b IN bset (Divides c e) /\\ P b) <=> F) /\\\n     ((?b. b IN bset (Ndivides c e) /\\ P b) <=> F) /\\\n     ((?b. b IN bset(Nox Q) /\\ P b) <=> F)
-  ((?b. b IN bset (Gt e) /\\ P b) <=> P(--e)) /\\\n     ((?b. b IN bset (Ne e) /\\ P b) <=> P(--e))
-  (?b. b IN bset (Eq e) /\\ P b) <=> P(--(e + &1))
-  ((?b. b IN bset (And p q) /\\ P b) <=>\n              (?b. b IN bset p /\\ P b) \\/\n              (?b. b IN bset q /\\ P b)) /\\\n     ((?b. b IN bset (Or p q) /\\ P b) <=>\n              (?b. b IN bset p /\\ P b) \\/\n                   (?b. b IN bset q /\\ P b))
-  (F \\/ P <=> P) /\\ (P \\/ F <=> P)
-  interp x (Nox P) <=> P
-  (interp x (And p q) <=> interp x p /\\ interp x q) /\\\n     (interp x (Or p q) <=> interp x p \\/ interp x q)
-  ((interp x (Lt e)         <=> &0 > x + e) /\\\n      (interp x (Gt e)         <=> &0 < x + e) /\\\n      (interp x (Eq e)         <=> (&0 = x + e)) /\\\n      (interp x (Divides c e)  <=> c divides (x + e))) /\\\n     ((interp x (Ne e)         <=> ~(&0 = x + e)) /\\\n      (interp x (Ndivides c e) <=> ~(c divides (x + e))))
-  (?j. n <= j /\\ j <= n /\\ P(j)) <=> P(n)
-  &0 <= x ==> &1 <= x + &1
-  x <= y + &1 <=> (x = y + &1) \\/ x < y + &1
-  (?j. &1 <= j /\\ j <= &(SUC n) /\\ P(j)) <=>\n     (?j. &1 <= j /\\ j <= &n /\\ P(j)) \\/ P(&(SUC n))
-  interp (t + c) P
-  F \\/ a
-  a \\/ F
-  T \\/ a
-  a \\/ T
-  F /\\ a
-  a /\\ F
-  T /\\ a
-  a /\\ T
-  ~T
-  ~F
-  x divides y
-  x:int = y
-  x > y
-  x < y
-  p:cform
-  d:int
-  (~(&0 < x) <=> &0 < &1 - x) /\\\n     (~(&0 > x) <=> &0 < &1 + x)
-  ~(&0 < x)
-  ~(&0 > x)
-  ~(p \\/ q) <=> ~p /\\ ~q
-  ~(p /\\ q) <=> ~p \\/ ~q
-  ~(~ p) <=> p
-  (forall x. P x) <=> ~(?x. ~(P x))
-  (~)
-  min m n = if m <= n then m else n
-  max m n = if m <= n then n else m
-  forall x y. x < y ==> &2 * x + &1 < &2 * y
-  forall x y. ~(&2 * x + &1 = &2 * y)
-  ?x y. x > &0 /\\ y >= &0 /\\ (&3 * x - &5 * y = &1)
-  ?x y z. &4 * x - &6 * y = &1
-  forall x. b < x ==> a <= x
-  forall x. a < &3 * x ==> b < &3 * x
-  forall x y. x <= y ==> &2 * x + &1 < &2 * y
-  (?d. y = &65 * d) ==> (?d. y = &5 * d)
-  forall y. (?d. y = &65 * d) ==> (?d. y = &5 * d)
-  forall x y. ~(&2 * x + &1 = &2 * y)
-  forall x y z. (&2 * x + &1 = &2 * y) ==> x + y + z > &129
-  forall x. a < x ==> b < x
-  forall x. a <= x ==> b < x
-  forall a b. ?x. a < &20 * x /\\ &20 * x < b
-  ?x. a < &20 * x /\\ &20 * x < b
-  forall b. ?x. a < &20 * x /\\ &20 * x < b
-  forall a. ?b. a < &4 * b + &3 * a \\/ (~(a < b) /\\ a > b + &1)
-  ?y. forall x. x + &5 * y > &1 /\\ &13 * x - y > &1 /\\ x + &2 < &0
-  forall x y. x >= &0 /\\ y >= &0\n                  ==> &12 * x - &8 * y < &0 \\/ &12 * x - &8 * y > &2
-  ?x y. &5 * x + &3 * y = &1
-  ?x y. &5 * x + &10 * y = &1
-  ?x y. x >= &0 /\\ y >= &0 /\\ (&5 * x - &6 * y = &1)
-  ?w x y z. &2 * w + &3 * x + &4 * y + &5 * z = &1
-  ?x y. x >= &0 /\\ y >= &0 /\\ (&5 * x - &3 * y = &1)
-  ?x y. x >= &0 /\\ y >= &0 /\\ (&3 * x - &5 * y = &1)
-  ?x y. x >= &0 /\\ y >= &0 /\\ (&6 * x - &3 * y = &1)
-  forall x y. ~(x = &0) ==> &5 * y < &6 * x \\/ &5 * y > &6 * x
-  forall x y. ~(&5 divides x) /\\ ~(&6 divides y) ==> ~(&6 * x = &5 * y)
-  forall x y. ~(&5 divides x) ==> ~(&6 * x = &5 * y)
-  forall x y. ~(&6 * x = &5 * y)
-  forall x y. (&6 * x = &5 * y) ==> (?d. y = &3 * d)
-  (&6 * x = &5 * y) ==> (?d. y = &3 * d)
-  forall z. z > &7 ==> ?x y. x >= &0 /\\ y >= &0 /\\ (&3 * x + &5 * y = z)
-  forall z. z > &2 ==> ?x y. x >= &0 /\\ y >= &0 /\\ (&3 * x + &5 * y = z)
-  forall z. z <= &7 ==>\n         ((?x y. x >= &0 /\\ y >= &0 /\\ (&3 * x + &5 * y = z)) <=>\n          ~(?x y. x >= &0 /\\ y >= &0 /\\ (&3 * x + &5 * y = &7 - z)))
-  forall x. ~(&2 divides x) /\\ &3 divides (x - &1) <=>\n                      &12 divides (x - &1) \\/ &12 divides (x - &7)
-  forall x. ~(?m. x = &2 * m) /\\ (?m. x = &3 * m + &1) <=>\n                     (?m. x = &12 * m + &1) \\/ (?m. x = &12 * m + &7)
-  forall x. ~(&2 divides x)\n      ==> &4 divides (x - &1) \\/\n          &8 divides (x - &1) \\/\n          &8 divides (x - &3) \\/\n          &6 divides (x - &1) \\/\n          &14 divides (x - &1) \\/\n          &14 divides (x - &9) \\/\n          &14 divides (x - &11) \\/\n          &24 divides (x - &5) \\/\n          &24 divides (x - &11)
-  forall a b v_1 v_2 v_3.\n    (a + &2 = b) /\\ (v_3 = b - a + &1) /\\ (v_2 = b - &2) /\\ (v_1 = &3) ==> F
-  ?a b. ~(a = &1) /\\ ((&2 * b = a) \\/ (&2 * b = &3 * a + &1)) /\\\n              (a = b)
-  ?a b. a > &1 /\\ b > &1 /\\\n             ((&2 * b = a) \\/ (&2 * b = &3 * a + &1)) /\\\n             (a = b)
-  ?b. a > &1 /\\ b > &1 /\\\n      ((&2 * b = a) \\/ (&2 * b = &3 * a + &1)) /\\\n      ((&2 * a = b) \\/ (&2 * a = &3 * b + &1))
-  ?x. &5 * x + x + x < x \\/\n      (y = &7 - x) /\\ &33 + z < x /\\ x + &1 <= &2 * y \\/\n      &3 divides &4 * x + z /\\ (x + y + z = &7 * z)
-  ?x. &5 * x + x + x < x \\/\n      (y = &7 - x) /\\\n      &33 + z < x /\\\n      x + &1 <= &2 * y \\/\n      &3 divides (&4 * x + z) /\\\n      (x + y + z = &7 * z)
-  ?x. &5 * x + x + x < x \\/\n      (y = &7 - x) /\\\n      &33 + z < x /\\\n      x + &1 <= &2 * y \\/\n      &3 divides (&4 * x + z) /\\\n      (x + y + z = &7 * z)
-  ?x. x + &1 < &2 * y /\\\n          &3 divides (&4 * x + z) /\\\n          (&6 * x + y + z = &7 * z)
-  ?x. &5 * x + x + x < x \\/\n          (y = &7 - x) /\\\n          &33 + z < x /\\\n          x + &1 < &2 * y \\/\n          &3 divides (&4 * x + z) /\\\n          (x + y + z = &7 * z)
-  forall x. x >= &8 ==> ?u v. u >= &0 /\\ v >= &0 /\\\n                                         (x = &3 * u + &5 * v)
-  forall x. x >= &10 ==> ?u v. u >= &0 /\\ v >= &0 /\\\n                                         (x = &3 * u + &7 * v)
-  forall x. x >= &30 ==> ?u v. u >= &0 /\\ v >= &0 /\\\n                                         (x = &3 * u + &7 * v)
-  abs(x) < &1 ==> (x = &0)
-  ODD n ==> 2 * n DIV 2 < n
-  forall n. EVEN(n) ==> (2 * n DIV 2 = n)
-  forall n. ODD n <=> 2 * n DIV 2 < n
-  forall n. n >= 8 ==> ?a b. n = 3 * a + 5 * b
+  int_of_num((m : Num))
+  (p : Num) * (m : Num) == (n : Num) \226\134\146 divides(int_of_num(p), int_of_num(n))
+  (m : Num)
+  (n : Num)
+  (p : Num)
+  abs
+  (x : Int)
+  (q : Num)
+  (x : Int)
+  divides(int_of_num((p : Num)), int_of_num((n : Num))) == (\226\136\131 m : Num, n == p * m)
+  (n : Num)
+  (p : Num) == 0
+  divides(int_of_num((p : Num)), int_of_num((n : Num))) == (p == 0 && n == 0 || !(p == 0) && MOD(n, p) == 0)
+  alldivide((d : Int), Lt((e : Int))) == true && alldivide(d, Gt(e)) == true && alldivide(d, Eq(e)) == true && alldivide(d, Ne(e)) == true && alldivide(d, Nox((P : Bool))) == true
+  alldivide((d : Int), Divides((c : Int), (e : Int))) == divides(c, d) && alldivide(d, Ndivides(c, e)) == divides(c, d)
+  alldivide((d : Int), And((p : Cform), (q : Cform))) == (alldivide(d, p) && alldivide(d, q)) && alldivide(d, Or(p, q)) == (alldivide(d, p) && alldivide(d, q))
+  (true && true) == true
+  (\226\136\131 b : Int, IN(b, bset(Lt((e : Int)))) && (P : (Int) -> Bool)(b)) == false && (\226\136\131 b : Int, IN(b, bset(Divides((c : Int), e))) && P(b)) == false && (\226\136\131 b : Int, IN(b, bset(Ndivides(c, e))) && P(b)) == false && (\226\136\131 b : Int, IN(b, bset(Nox((Q : Bool)))) && P(b)) == false
+  (\226\136\131 b : Int, IN(b, bset(Gt((e : Int)))) && (P : (Int) -> Bool)(b)) == P(-e) && (\226\136\131 b : Int, IN(b, bset(Ne(e))) && P(b)) == P(-e)
+  (\226\136\131 b : Int, IN(b, bset(Eq((e : Int)))) && (P : (Int) -> Bool)(b)) == P(-(e + int_of_num(1)))
+  (\226\136\131 b : Int, IN(b, bset(And((p : Cform), (q : Cform)))) && (P : (Int) -> Bool)(b)) == ((\226\136\131 b : Int, IN(b, bset(p)) && P(b)) || (\226\136\131 b : Int, IN(b, bset(q)) && P(b))) && (\226\136\131 b : Int, IN(b, bset(Or(p, q))) && P(b)) == ((\226\136\131 b : Int, IN(b, bset(p)) && P(b)) || (\226\136\131 b : Int, IN(b, bset(q)) && P(b)))
+  (false || (P : Bool)) == P && (P || false) == P
+  interp((x : Int), Nox((P : Bool))) == P
+  interp((x : Int), And((p : Cform), (q : Cform))) == (interp(x, p) && interp(x, q)) && interp(x, Or(p, q)) == (interp(x, p) || interp(x, q))
+  (interp((x : Int), Lt((e : Int))) == (int_of_num(0) > x + e) && interp(x, Gt(e)) == (int_of_num(0) < x + e) && interp(x, Eq(e)) == (int_of_num(0) == x + e) && interp(x, Divides((c : Int), e)) == divides(c, x + e)) && interp(x, Ne(e)) == !(int_of_num(0) == x + e) && interp(x, Ndivides(c, e)) == !divides(c, x + e)
+  (\226\136\131 j : Int, (n : Int) <= j && j <= n && (P : (Int) -> Bool)(j)) == P(n)
+  int_of_num(0) <= (x : Int) \226\134\146 int_of_num(1) <= x + int_of_num(1)
+  ((x : Int) <= (y : Int) + int_of_num(1)) == (x == y + int_of_num(1) || x < y + int_of_num(1))
+  (\226\136\131 j : Int, int_of_num(1) <= j && j <= int_of_num(SUC((n : Num))) && (P : (Int) -> Bool)(j)) == ((\226\136\131 j : Int, int_of_num(1) <= j && j <= int_of_num(n) && P(j)) || P(int_of_num(SUC(n))))
+  interp((t : Int) + (c : Int), (P : Cform))
+  false || (a : Bool)
+  (a : Bool) || false
+  true || (a : Bool)
+  (a : Bool) || true
+  false && (a : Bool)
+  (a : Bool) && false
+  true && (a : Bool)
+  (a : Bool) && true
+  !true
+  !false
+  divides((x : Int), (y : Int))
+  (x : Int) == (y : Int)
+  (x : Int) > (y : Int)
+  (x : Int) < (y : Int)
+  (p : Cform)
+  (d : Int)
+  !(int_of_num(0) < (x : Int)) == (int_of_num(0) < int_of_num(1) - x) && !(int_of_num(0) > x) == (int_of_num(0) < int_of_num(1) + x)
+  !(int_of_num(0) < (x : Int))
+  !(int_of_num(0) > (x : Int))
+  !((p : Bool) || (q : Bool)) == (!p && !q)
+  !((p : Bool) && (q : Bool)) == (!p || !q)
+  !!(p : Bool) == p
+  (\226\136\128 x : _, (P : (_) -> Bool)(x)) == !(\226\136\131 x : _, !P(x))
+  op_tilde
+  min((m : Int), (n : Int)) == (if m <= n { m } else { n })
+  max((m : Int), (n : Int)) == (if m <= n { n } else { m })
+  \226\136\128 x : Int, \226\136\128 y : Int, x < y \226\134\146 int_of_num(2) * x + int_of_num(1) < int_of_num(2) * y
+  \226\136\128 x : Int, \226\136\128 y : Int, !(int_of_num(2) * x + int_of_num(1) == int_of_num(2) * y)
+  \226\136\131 x : Int, \226\136\131 y : Int, x > int_of_num(0) && y >= int_of_num(0) && int_of_num(3) * x - int_of_num(5) * y == int_of_num(1)
+  \226\136\131 x : Int, \226\136\131 y : Int, \226\136\131 z : _, int_of_num(4) * x - int_of_num(6) * y == int_of_num(1)
+  \226\136\128 x : Int, (b : Int) < x \226\134\146 (a : Int) <= x
+  \226\136\128 x : Int, (a : Int) < int_of_num(3) * x \226\134\146 (b : Int) < int_of_num(3) * x
+  \226\136\128 x : Int, \226\136\128 y : Int, x <= y \226\134\146 int_of_num(2) * x + int_of_num(1) < int_of_num(2) * y
+  (\226\136\131 d : Int, (y : Int) == int_of_num(65) * d) \226\134\146 (\226\136\131 d : Int, y == int_of_num(5) * d)
+  \226\136\128 y : Int, (\226\136\131 d : Int, y == int_of_num(65) * d) \226\134\146 (\226\136\131 d : Int, y == int_of_num(5) * d)
+  \226\136\128 x : Int, \226\136\128 y : Int, !(int_of_num(2) * x + int_of_num(1) == int_of_num(2) * y)
+  \226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, int_of_num(2) * x + int_of_num(1) == int_of_num(2) * y \226\134\146 x + (y + z) > int_of_num(129)
+  \226\136\128 x : Int, (a : Int) < x \226\134\146 (b : Int) < x
+  \226\136\128 x : Int, (a : Int) <= x \226\134\146 (b : Int) < x
+  \226\136\128 a : Int, \226\136\128 b : Int, \226\136\131 x : Int, a < int_of_num(20) * x && int_of_num(20) * x < b
+  \226\136\131 x : Int, (a : Int) < int_of_num(20) * x && int_of_num(20) * x < (b : Int)
+  \226\136\128 b : Int, \226\136\131 x : Int, (a : Int) < int_of_num(20) * x && int_of_num(20) * x < b
+  \226\136\128 a : Int, \226\136\131 b : Int, a < int_of_num(4) * b + int_of_num(3) * a || !(a < b) && a > b + int_of_num(1)
+  \226\136\131 y : Int, \226\136\128 x : Int, x + int_of_num(5) * y > int_of_num(1) && int_of_num(13) * x - y > int_of_num(1) && x + int_of_num(2) < int_of_num(0)
+  \226\136\128 x : Int, \226\136\128 y : Int, x >= int_of_num(0) && y >= int_of_num(0) \226\134\146 int_of_num(12) * x - int_of_num(8) * y < int_of_num(0) || int_of_num(12) * x - int_of_num(8) * y > int_of_num(2)
+  \226\136\131 x : Int, \226\136\131 y : Int, int_of_num(5) * x + int_of_num(3) * y == int_of_num(1)
+  \226\136\131 x : Int, \226\136\131 y : Int, int_of_num(5) * x + int_of_num(10) * y == int_of_num(1)
+  \226\136\131 x : Int, \226\136\131 y : Int, x >= int_of_num(0) && y >= int_of_num(0) && int_of_num(5) * x - int_of_num(6) * y == int_of_num(1)
+  \226\136\131 w : Int, \226\136\131 x : Int, \226\136\131 y : Int, \226\136\131 z : Int, int_of_num(2) * w + (int_of_num(3) * x + (int_of_num(4) * y + int_of_num(5) * z)) == int_of_num(1)
+  \226\136\131 x : Int, \226\136\131 y : Int, x >= int_of_num(0) && y >= int_of_num(0) && int_of_num(5) * x - int_of_num(3) * y == int_of_num(1)
+  \226\136\131 x : Int, \226\136\131 y : Int, x >= int_of_num(0) && y >= int_of_num(0) && int_of_num(3) * x - int_of_num(5) * y == int_of_num(1)
+  \226\136\131 x : Int, \226\136\131 y : Int, x >= int_of_num(0) && y >= int_of_num(0) && int_of_num(6) * x - int_of_num(3) * y == int_of_num(1)
+  \226\136\128 x : Int, \226\136\128 y : Int, !(x == int_of_num(0)) \226\134\146 int_of_num(5) * y < int_of_num(6) * x || int_of_num(5) * y > int_of_num(6) * x
+  \226\136\128 x : Int, \226\136\128 y : Int, !divides(int_of_num(5), x) && !divides(int_of_num(6), y) \226\134\146 !(int_of_num(6) * x == int_of_num(5) * y)
+  \226\136\128 x : Int, \226\136\128 y : Int, !divides(int_of_num(5), x) \226\134\146 !(int_of_num(6) * x == int_of_num(5) * y)
+  \226\136\128 x : Int, \226\136\128 y : Int, !(int_of_num(6) * x == int_of_num(5) * y)
+  \226\136\128 x : Int, \226\136\128 y : Int, int_of_num(6) * x == int_of_num(5) * y \226\134\146 (\226\136\131 d : Int, y == int_of_num(3) * d)
+  int_of_num(6) * (x : Int) == int_of_num(5) * (y : Int) \226\134\146 (\226\136\131 d : Int, y == int_of_num(3) * d)
+  \226\136\128 z : Int, z > int_of_num(7) \226\134\146 (\226\136\131 x : Int, \226\136\131 y : Int, x >= int_of_num(0) && y >= int_of_num(0) && int_of_num(3) * x + int_of_num(5) * y == z)
+  \226\136\128 z : Int, z > int_of_num(2) \226\134\146 (\226\136\131 x : Int, \226\136\131 y : Int, x >= int_of_num(0) && y >= int_of_num(0) && int_of_num(3) * x + int_of_num(5) * y == z)
+  \226\136\128 z : Int, z <= int_of_num(7) \226\134\146 (\226\136\131 x : Int, \226\136\131 y : Int, x >= int_of_num(0) && y >= int_of_num(0) && int_of_num(3) * x + int_of_num(5) * y == z) == !(\226\136\131 x : Int, \226\136\131 y : Int, x >= int_of_num(0) && y >= int_of_num(0) && int_of_num(3) * x + int_of_num(5) * y == int_of_num(7) - z)
+  \226\136\128 x : Int, (!divides(int_of_num(2), x) && divides(int_of_num(3), x - int_of_num(1))) == (divides(int_of_num(12), x - int_of_num(1)) || divides(int_of_num(12), x - int_of_num(7)))
+  \226\136\128 x : Int, (!(\226\136\131 m : Int, x == int_of_num(2) * m) && (\226\136\131 m : Int, x == int_of_num(3) * m + int_of_num(1))) == ((\226\136\131 m : Int, x == int_of_num(12) * m + int_of_num(1)) || (\226\136\131 m : Int, x == int_of_num(12) * m + int_of_num(7)))
+  \226\136\128 x : Int, !divides(int_of_num(2), x) \226\134\146 divides(int_of_num(4), x - int_of_num(1)) || divides(int_of_num(8), x - int_of_num(1)) || divides(int_of_num(8), x - int_of_num(3)) || divides(int_of_num(6), x - int_of_num(1)) || divides(int_of_num(14), x - int_of_num(1)) || divides(int_of_num(14), x - int_of_num(9)) || divides(int_of_num(14), x - int_of_num(11)) || divides(int_of_num(24), x - int_of_num(5)) || divides(int_of_num(24), x - int_of_num(11))
+  \226\136\128 a : Int, \226\136\128 b : Int, \226\136\128 v_1 : Int, \226\136\128 v_2 : Int, \226\136\128 v_3 : Int, a + int_of_num(2) == b && v_3 == b - a + int_of_num(1) && v_2 == b - int_of_num(2) && v_1 == int_of_num(3) \226\134\146 false
+  \226\136\131 a : Int, \226\136\131 b : Int, !(a == int_of_num(1)) && (int_of_num(2) * b == a || int_of_num(2) * b == int_of_num(3) * a + int_of_num(1)) && a == b
+  \226\136\131 a : Int, \226\136\131 b : Int, a > int_of_num(1) && b > int_of_num(1) && (int_of_num(2) * b == a || int_of_num(2) * b == int_of_num(3) * a + int_of_num(1)) && a == b
+  \226\136\131 b : Int, (a : Int) > int_of_num(1) && b > int_of_num(1) && (int_of_num(2) * b == a || int_of_num(2) * b == int_of_num(3) * a + int_of_num(1)) && (int_of_num(2) * a == b || int_of_num(2) * a == int_of_num(3) * b + int_of_num(1))
+  \226\136\131 x : Int, int_of_num(5) * x + (x + x) < x || (y : Int) == int_of_num(7) - x && int_of_num(33) + (z : Int) < x && x + int_of_num(1) <= int_of_num(2) * y || divides(int_of_num(3), int_of_num(4) * x + z) && x + (y + z) == int_of_num(7) * z
+  \226\136\131 x : Int, int_of_num(5) * x + (x + x) < x || (y : Int) == int_of_num(7) - x && int_of_num(33) + (z : Int) < x && x + int_of_num(1) <= int_of_num(2) * y || divides(int_of_num(3), int_of_num(4) * x + z) && x + (y + z) == int_of_num(7) * z
+  \226\136\131 x : Int, int_of_num(5) * x + (x + x) < x || (y : Int) == int_of_num(7) - x && int_of_num(33) + (z : Int) < x && x + int_of_num(1) <= int_of_num(2) * y || divides(int_of_num(3), int_of_num(4) * x + z) && x + (y + z) == int_of_num(7) * z
+  \226\136\131 x : Int, x + int_of_num(1) < int_of_num(2) * (y : Int) && divides(int_of_num(3), int_of_num(4) * x + (z : Int)) && int_of_num(6) * x + (y + z) == int_of_num(7) * z
+  \226\136\131 x : Int, int_of_num(5) * x + (x + x) < x || (y : Int) == int_of_num(7) - x && int_of_num(33) + (z : Int) < x && x + int_of_num(1) < int_of_num(2) * y || divides(int_of_num(3), int_of_num(4) * x + z) && x + (y + z) == int_of_num(7) * z
+  \226\136\128 x : Int, x >= int_of_num(8) \226\134\146 (\226\136\131 u : Int, \226\136\131 v : Int, u >= int_of_num(0) && v >= int_of_num(0) && x == int_of_num(3) * u + int_of_num(5) * v)
+  \226\136\128 x : Int, x >= int_of_num(10) \226\134\146 (\226\136\131 u : Int, \226\136\131 v : Int, u >= int_of_num(0) && v >= int_of_num(0) && x == int_of_num(3) * u + int_of_num(7) * v)
+  \226\136\128 x : Int, x >= int_of_num(30) \226\134\146 (\226\136\131 u : Int, \226\136\131 v : Int, u >= int_of_num(0) && v >= int_of_num(0) && x == int_of_num(3) * u + int_of_num(7) * v)
+  abs((x : Int)) < int_of_num(1) \226\134\146 x == int_of_num(0)
+  ODD((n : Num)) \226\134\146 2 * DIV(n, 2) < n
+  \226\136\128 n : Num, EVEN(n) \226\134\146 2 * DIV(n, 2) == n
+  \226\136\128 n : Num, ODD(n) == (2 * DIV(n, 2) < n)
+  \226\136\128 n : Num, n >= 8 \226\134\146 (\226\136\131 a : Num, \226\136\131 b : Num, n == 3 * a + 5 * b)
 divides =  |- (#forall:fun(fun(int,bool),bool) (\b:int. (#forall:fun(fun(int,bool),bool) (\a:int. ((#=:fun(bool,fun(bool,bool)) ((#int_divides:fun(int,fun(int,bool)) a:int) b:int)) (#?:fun(fun(int,bool),bool) (\x:int. ((#=:fun(int,fun(int,bool)) b:int) ((#int_mul:fun(int,fun(int,int)) a:int) x:int)))))))))
 INT_DOWN2 =  |- (#forall:fun(fun(int,bool),bool) (\a:int. (#forall:fun(fun(int,bool),bool) (\b:int. (#?:fun(fun(int,bool),bool) (\c:int. (#forall:fun(fun(int,bool),bool) (\x:int. ((#==>:fun(bool,fun(bool,bool)) ((#int_lt:fun(int,fun(int,bool)) x:int) c:int)) ((#/\:fun(bool,fun(bool,bool)) ((#int_lt:fun(int,fun(int,bool)) x:int) a:int)) ((#int_lt:fun(int,fun(int,bool)) x:int) b:int)))))))))))
 DIVIDES_ADD =  |- (#forall:fun(fun(int,bool),bool) (\d:int. (#forall:fun(fun(int,bool),bool) (\a:int. (#forall:fun(fun(int,bool),bool) (\b:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#int_divides:fun(int,fun(int,bool)) d:int) a:int)) ((#int_divides:fun(int,fun(int,bool)) d:int) b:int))) ((#int_divides:fun(int,fun(int,bool)) d:int) ((#int_add:fun(int,fun(int,int)) a:int) b:int)))))))))
