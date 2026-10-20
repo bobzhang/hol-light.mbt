@@ -90722,1322 +90722,1322 @@ test "100/pnt matches 100/pnt.ml" {
       #|  complex_div:complex->complex->complex
       #|  complex_pow:complex->num->complex
       #|  complex_inv:complex->complex
-      #|  2 <= n ==> 1 < n
-      #|  2 <= n ==> 0 < n
-      #|  forall n s. &0 < Re s /\\ 2 <= n ==> &1 < norm(Cx(&n) cpow s)
-      #|  norm:complex->real
-      #|  forall n s. &0 < Re s /\\ 2 <= n ==> ~(Cx(&n) cpow s = Cx(&1))
-      #|  0..n
-      #|  forall P n. FINITE {m:num | P m /\\ m <= n}
-      #|  prime p
-      #|  p:num
-      #|  {p | prime p /\\ p <= n} = {p | p IN 1..n /\\ prime p}
-      #|  nearzeta n s = infsum (from n)\n                        (\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n                              (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n                               Cx(&1) / Cx(&(m+1)) cpow (s - Cx(&1))))
-      #|  genzeta n s = if s = Cx(&1) then complex_derivative (nearzeta n) (Cx(&1))\n                else (nearzeta n s + Cx(&1) / Cx(&n) cpow (s - Cx(&1))) /\n                     (s - Cx(&1))
-      #|  zeta s = genzeta 1 s
-      #|  Cx(&n) + Cx(&1)
-      #|  Cx(&n)
-      #|  0..1
-      #|  &0 <= u
-      #|  z IN segment[Cx (&n),Cx (&n) + Cx (&1)]
-      #|  Cx(&n) + Cx(&1)
-      #|  Cx(&n)
-      #|  real z
-      #|  ~(z = Cx(&0))
-      #|  ~(z cpow s = Cx(&0))
-      #|  i <= 1 ==> i = 0 \\/ i = 1
-      #|  ~(z = Cx(&0))
-      #|  Cx(&n) + Cx(&1)
-      #|  Cx(&n)
-      #|  &0 < Re z
-      #|  z:complex
-      #|  z:complex
-      #|  i:num
-      #|  norm(s * (s - Cx (&1)) / Cx(&n) cpow (s + Cx(&1)))
-      #|  segment[Cx(&n),Cx(&n) + Cx(&1)]
+      #|  2 <= (n : Num) \226\134\146 1 < n
+      #|  2 <= (n : Num) \226\134\146 0 < n
+      #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(0) < Re(s) && 2 <= n \226\134\146 real_of_num(1) < norm(cpow(Cx(real_of_num(n)), s))
+      #|  (norm : (Cart[Real, Tybit0[Unit]]) -> Real)
+      #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(0) < Re(s) && 2 <= n \226\134\146 !(cpow(Cx(real_of_num(n)), s) == Cx(real_of_num(1)))
+      #|  op_dot_dot(0, (n : Num))
+      #|  \226\136\128 P : (Num) -> Bool, \226\136\128 n : Num, FINITE({(m : Num) | P(m) && m <= n})
+      #|  prime((p : Num))
+      #|  (p : Num)
+      #|  {(p : Num) | prime(p) && p <= (n : Num)} == {(p : Num) | IN(p, op_dot_dot(1, n)) && prime(p)}
+      #|  (nearzeta : (Num, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((n : Num), (s : Cart[Real, Tybit0[Unit]])) == infsum(from(n), (m : Num) => (s - Cx(real_of_num(1))) / cpow(Cx(real_of_num(m)), s) - (Cx(real_of_num(1)) / cpow(Cx(real_of_num(m)), s - Cx(real_of_num(1))) - Cx(real_of_num(1)) / cpow(Cx(real_of_num(m + 1)), s - Cx(real_of_num(1)))))
+      #|  (genzeta : (Num, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((n : Num), (s : Cart[Real, Tybit0[Unit]])) == (if s == Cx(real_of_num(1)) { complex_derivative(nearzeta(n), Cx(real_of_num(1))) } else { (nearzeta(n, s) + Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), s - Cx(real_of_num(1)))) / (s - Cx(real_of_num(1))) })
+      #|  (zeta : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((s : Cart[Real, Tybit0[Unit]])) == genzeta(1, s)
+      #|  Cx(real_of_num((n : Num))) + Cx(real_of_num(1))
+      #|  Cx(real_of_num((n : Num)))
+      #|  op_dot_dot(0, 1)
+      #|  real_of_num(0) <= (u : Real)
+      #|  IN((z : Cart[Real, Tybit0[Unit]]), segment([(Cx(real_of_num((n : Num))), Cx(real_of_num(n)) + Cx(real_of_num(1)))]))
+      #|  Cx(real_of_num((n : Num))) + Cx(real_of_num(1))
+      #|  Cx(real_of_num((n : Num)))
+      #|  real((z : Cart[Real, Tybit0[Unit]]))
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  !(cpow((z : Cart[Real, Tybit0[Unit]]), (s : Cart[Real, Tybit0[Unit]])) == Cx(real_of_num(0)))
+      #|  (i : Num) <= 1 \226\134\146 i == 0 || i == 1
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  Cx(real_of_num((n : Num))) + Cx(real_of_num(1))
+      #|  Cx(real_of_num((n : Num)))
+      #|  real_of_num(0) < Re((z : Cart[Real, Tybit0[Unit]]))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (i : Num)
+      #|  norm((s : Cart[Real, Tybit0[Unit]]) * ((s - Cx(real_of_num(1))) / cpow(Cx(real_of_num((n : Num))), s + Cx(real_of_num(1)))))
+      #|  segment([(Cx(real_of_num((n : Num))), Cx(real_of_num(n)) + Cx(real_of_num(1)))])
       #|  1
-      #|  \\n z. if n = 0 then Cx(&1) / z cpow (s - Cx(&1))\n           else if n = 1 then (Cx(&1) - s) / z cpow s\n           else s * (s - Cx(&1)) / z cpow (s + Cx(&1))
-      #|  forall s n. ~(n = 0) /\\ &0 <= Re s + &1\n         ==> norm((s - Cx(&1)) / Cx(&n) cpow s -\n                  (Cx(&1) / Cx(&n) cpow (s - Cx(&1)) -\n                   Cx(&1) / Cx(&(n + 1)) cpow (s - Cx(&1)))) <=\n             norm(s * (s - Cx(&1)) / Cx(&n) cpow (s + Cx(&1)))
+      #|  (n : Num) => (z : Cart[Real, Tybit0[Unit]]) => if n == 0 { Cx(real_of_num(1)) / cpow(z, (s : Cart[Real, Tybit0[Unit]]) - Cx(real_of_num(1))) } else { if n == 1 { (Cx(real_of_num(1)) - s) / cpow(z, s) } else { s * ((s - Cx(real_of_num(1))) / cpow(z, s + Cx(real_of_num(1)))) } }
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, !(n == 0) && real_of_num(0) <= Re(s) + real_of_num(1) \226\134\146 norm((s - Cx(real_of_num(1))) / cpow(Cx(real_of_num(n)), s) - (Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), s - Cx(real_of_num(1))) - Cx(real_of_num(1)) / cpow(Cx(real_of_num(n + 1)), s - Cx(real_of_num(1))))) <= norm(s * ((s - Cx(real_of_num(1))) / cpow(Cx(real_of_num(n)), s + Cx(real_of_num(1)))))
       #|  (f has_complex_derivative f') net
       #|  (f has_complex_derivative f') net
-      #|  exp(&m * log(&n))
-      #|  forall m s n. &m <= Re s /\\ ~(n = 0) ==> &n pow m <= norm(Cx(&n) cpow s)
-      #|  forall s n m. &m <= Re s /\\ ~(n = 0)\n           ==> norm(Cx(&1) / Cx(&n) cpow s) <= inv(&n pow m)
-      #|  &n pow 2 <= x ==> &n * (&n - &1) <= x
-      #|  &2 <= x ==> inv(x - &1) - inv((x + &1) - &1) = inv(x * (x - &1))
-      #|  m:num
+      #|  exp(real_of_num((m : Num)) * log(real_of_num((n : Num))))
+      #|  \226\136\128 m : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, real_of_num(m) <= Re(s) && !(n == 0) \226\134\146 pow(real_of_num(n), m) <= norm(cpow(Cx(real_of_num(n)), s))
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, \226\136\128 m : Num, real_of_num(m) <= Re(s) && !(n == 0) \226\134\146 norm(Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), s)) <= inv(pow(real_of_num(n), m))
+      #|  pow(real_of_num((n : Num)), 2) <= (x : Real) \226\134\146 real_of_num(n) * (real_of_num(n) - real_of_num(1)) <= x
+      #|  real_of_num(2) <= (x : Real) \226\134\146 inv(x - real_of_num(1)) - inv(x + real_of_num(1) - real_of_num(1)) == inv(x * (x - real_of_num(1)))
+      #|  (m : Num)
       #|  2
-      #|  (x + &1) - &1 = x
+      #|  (x : Real) + real_of_num(1) - real_of_num(1) == x
       #|  1
-      #|  n:num
-      #|  \\n. lift(inv(&n - &1))
-      #|  lift(inv(&n - &1))
-      #|  \\n. inv(&n - &1) - inv(&(n + 1) - &1)
-      #|  forall n s. &2 <= Re s ==> summable (from n) (\\m. Cx(&1) / Cx(&m) cpow s)
-      #|  N + 2 <= n ==> N <= n
-      #|  &n
-      #|  &N
-      #|  &0 < x ==> abs x = x
-      #|  N + 2 <= n
-      #|  &0 < log(&n)
-      #|  n:num
-      #|  N + 2
-      #|  N:num
-      #|  exp(inv(Re s * e))
-      #|  e:real
-      #|  2 <= n ==> 1 < n
-      #|  &0 < x /\\ (&0 <= x ==> &1 + u <= v) ==> &0 < x /\\ u <= v
+      #|  (n : Num)
+      #|  (n : Num) => lift(inv(real_of_num(n) - real_of_num(1)))
+      #|  lift(inv(real_of_num((n : Num)) - real_of_num(1)))
+      #|  (n : Num) => inv(real_of_num(n) - real_of_num(1)) - inv(real_of_num(n + 1) - real_of_num(1))
+      #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(2) <= Re(s) \226\134\146 summable(from(n), (m : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(m)), s))
+      #|  (N : Num) + 2 <= (n : Num) \226\134\146 N <= n
+      #|  real_of_num((n : Num))
+      #|  real_of_num((N : Num))
+      #|  real_of_num(0) < (x : Real) \226\134\146 abs(x) == x
+      #|  (N : Num) + 2 <= (n : Num)
+      #|  real_of_num(0) < log(real_of_num((n : Num)))
+      #|  (n : Num)
+      #|  (N : Num) + 2
+      #|  (N : Num)
+      #|  exp(inv(Re((s : Cart[Real, Tybit0[Unit]])) * (e : Real)))
+      #|  (e : Real)
+      #|  2 <= (n : Num) \226\134\146 1 < n
+      #|  real_of_num(0) < (x : Real) && (real_of_num(0) <= x \226\134\146 real_of_num(1) + (u : Real) <= (v : Real)) \226\134\146 real_of_num(0) < x && u <= v
       #|  2
-      #|  \\n. &1 / (Re s * log(&n))
+      #|  (n : Num) => real_of_num(1) / (Re((s : Cart[Real, Tybit0[Unit]])) * log(real_of_num(n)))
       #|  1
-      #|  \\n. lift(&1 / exp (Re s * log (&n)))
-      #|  n:num
-      #|  \\m. Cx(&1) / Cx(&m) cpow s
-      #|  forall n s. &0 < Re(s)\n         ==> ((\\m. Cx(&1) / Cx(&m) cpow s - Cx(&1) / Cx(&(m + 1)) cpow s)\n              sums Cx(&1) / Cx(&n) cpow s) (from n)
-      #|  m:num
+      #|  (n : Num) => lift(real_of_num(1) / exp(Re((s : Cart[Real, Tybit0[Unit]])) * log(real_of_num(n))))
+      #|  (n : Num)
+      #|  (m : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(m)), (s : Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(0) < Re(s) \226\134\146 sums((m : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(m)), s) - Cx(real_of_num(1)) / cpow(Cx(real_of_num(m + 1)), s), Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), s), from(n))
+      #|  (m : Num)
       #|  1
-      #|  summable (from n)\n     (\\m. lift(((Cx (norm s) * Cx (norm (s - Cx (&1)))) *\n                Cx (&1) / Cx (&m) cpow Cx (Re s + &1))$1))
-      #|  &1 <= s ==> &0 <= s + &1
+      #|  summable(from((n : Num)), (m : Num) => lift(op_dollar(Cx(norm((s : Cart[Real, Tybit0[Unit]]))) * Cx(norm(s - Cx(real_of_num(1)))) * (Cx(real_of_num(1)) / cpow(Cx(real_of_num(m)), Cx(Re(s) + real_of_num(1)))), 1)))
+      #|  real_of_num(1) <= (s : Real) \226\134\146 real_of_num(0) <= s + real_of_num(1)
       #|  1
-      #|  \\m. norm(s * (s - Cx(&1)) / Cx(&m) cpow (s + Cx(&1)))
-      #|  forall n s. &1 <= Re s\n         ==> ((\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n                   (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n                    Cx(&1) / Cx(&(m + 1)) cpow (s - Cx(&1))))\n              sums nearzeta n s) (from n)
-      #|  ~(s - Cx(&1) = Cx(&0))
-      #|  inv(s - Cx(&1))
-      #|  &1 < Re s
-      #|  a + (b - a) = b:complex
-      #|  s - Cx(&1)
-      #|  n:num
-      #|  n:num
-      #|  forall n s. &1 < Re s\n         ==> ((\\m. Cx(&1) / Cx(&m) cpow s) sums genzeta n s) (from n)
-      #|  forall s. &1 < Re s\n       ==> ((\\n. Cx(&1) / Cx(&n) cpow s) sums zeta(s)) (from 1)
-      #|  z - s:complex
-      #|  &1 < Re z
-      #|  from 1
-      #|  \\n. Cx(&1) / Cx(&n) cpow z
-      #|  z:complex
-      #|  Re s - &1
-      #|  b /\\ c /\\ d ==> e <=> b /\\ c ==> d ==> e
-      #|  &1 < Re s
-      #|  s:complex
-      #|  &1 < Re s
-      #|  s:complex
-      #|  g:complex->complex
-      #|  f:complex->complex
-      #|  z - y:complex
-      #|  --(a * x) <= --(b * x) <=> b * x <= a * x
-      #|  Cx(&1 + (Re z - &1) / &2)
+      #|  (m : Num) => norm((s : Cart[Real, Tybit0[Unit]]) * ((s - Cx(real_of_num(1))) / cpow(Cx(real_of_num(m)), s + Cx(real_of_num(1)))))
+      #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) <= Re(s) \226\134\146 sums((m : Num) => (s - Cx(real_of_num(1))) / cpow(Cx(real_of_num(m)), s) - (Cx(real_of_num(1)) / cpow(Cx(real_of_num(m)), s - Cx(real_of_num(1))) - Cx(real_of_num(1)) / cpow(Cx(real_of_num(m + 1)), s - Cx(real_of_num(1)))), nearzeta(n, s), from(n))
+      #|  !((s : Cart[Real, Tybit0[Unit]]) - Cx(real_of_num(1)) == Cx(real_of_num(0)))
+      #|  inv((s : Cart[Real, Tybit0[Unit]]) - Cx(real_of_num(1)))
+      #|  real_of_num(1) < Re((s : Cart[Real, Tybit0[Unit]]))
+      #|  (a : Cart[Real, Tybit0[Unit]]) + ((b : Cart[Real, Tybit0[Unit]]) - a) == b
+      #|  (s : Cart[Real, Tybit0[Unit]]) - Cx(real_of_num(1))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) < Re(s) \226\134\146 sums((m : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(m)), s), genzeta(n, s), from(n))
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) < Re(s) \226\134\146 sums((n : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), s), zeta(s), from(1))
+      #|  (z : Cart[Real, Tybit0[Unit]]) - (s : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(1) < Re((z : Cart[Real, Tybit0[Unit]]))
+      #|  from(1)
+      #|  (n : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), (z : Cart[Real, Tybit0[Unit]]))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  Re((s : Cart[Real, Tybit0[Unit]])) - real_of_num(1)
+      #|  ((b : Bool) && (c : Bool) && (d : Bool) \226\134\146 (e : Bool)) == (b && c \226\134\146 d \226\134\146 e)
+      #|  real_of_num(1) < Re((s : Cart[Real, Tybit0[Unit]]))
+      #|  (s : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(1) < Re((s : Cart[Real, Tybit0[Unit]]))
+      #|  (s : Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]]) - (y : Cart[Real, Tybit0[Unit]])
+      #|  (-((a : Real) * (x : Real)) <= -((b : Real) * x)) == (b * x <= a * x)
+      #|  Cx(real_of_num(1) + (Re((z : Cart[Real, Tybit0[Unit]])) - real_of_num(1)) / real_of_num(2))
       #|  42
-      #|  \\n. Cx(&1) / Cx(&n) cpow (Cx(&1 + (Re z - &1) / &2))
-      #|  (Re z - &1) / &2
-      #|  z:complex
-      #|  (a ==> b) /\\ a ==> a /\\ b
-      #|  from 1
-      #|  {s | Re s > &1}
-      #|  \\n z. --clog(Cx(&n)) / Cx(&n) cpow z
-      #|  \\n z. Cx(&1) / Cx(&n) cpow z
-      #|  forall s. &1 < Re s\n       ==> ((\\n. --clog(Cx(&n)) / Cx(&n) cpow s) sums\n            complex_derivative zeta s) (from 1)
+      #|  (n : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), Cx(real_of_num(1) + (Re((z : Cart[Real, Tybit0[Unit]])) - real_of_num(1)) / real_of_num(2)))
+      #|  (Re((z : Cart[Real, Tybit0[Unit]])) - real_of_num(1)) / real_of_num(2)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  ((a : Bool) \226\134\146 (b : Bool)) && a \226\134\146 a && b
+      #|  from(1)
+      #|  {(s : Cart[Real, Tybit0[Unit]]) | Re(s) > real_of_num(1)}
+      #|  (n : Num) => (z : Cart[Real, Tybit0[Unit]]) => -clog(Cx(real_of_num(n))) / cpow(Cx(real_of_num(n)), z)
+      #|  (n : Num) => (z : Cart[Real, Tybit0[Unit]]) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), z)
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) < Re(s) \226\134\146 sums((n : Num) => -clog(Cx(real_of_num(n))) / cpow(Cx(real_of_num(n)), s), complex_derivative(zeta, s), from(1))
       #|  (f has_complex_derivative f') net
       #|  :real
       #|  :real
-      #|  s - z:complex
-      #|  norm(w) = &1 /\\ norm(z) <= x + &1\n      ==> norm z <= abs(x + &2) /\\ norm(z - w) <=  abs(x + &2)
+      #|  (s : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])
+      #|  norm((w : Cart[Real, Tybit0[Unit]])) == real_of_num(1) && norm((z : Cart[Real, Tybit0[Unit]])) <= (x : Real) + real_of_num(1) \226\134\146 norm(z) <= abs(x + real_of_num(2)) && norm(z - w) <= abs(x + real_of_num(2))
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  a <= b ==> x <= a ==> x <= b
-      #|  s - z:complex
-      #|  z:complex
-      #|  1 <= m
-      #|  m:num
-      #|  Cx(Re s / &2 + &1)
-      #|  n:num
+      #|  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+      #|  (s : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  1 <= (m : Num)
+      #|  (m : Num)
+      #|  Cx(Re((s : Cart[Real, Tybit0[Unit]])) / real_of_num(2) + real_of_num(1))
+      #|  (n : Num)
       #|  1
-      #|  \\n. Cx(norm(s) + &2) pow 2 /\n                  Cx(&n) cpow Cx((Re s / &2 + &1))
-      #|  min (Re s / &2) (&1)
-      #|  s:complex
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  s:complex
-      #|  m:num
-      #|  forall n. 1 <= n\n       ==> ?g g'. forall s. s IN {s | Re(s) > &0}\n                      ==> ((\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n                           (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n                            Cx(&1) / Cx(&(m + 1)) cpow (s - Cx(&1))))\n                           sums g s) (from n) /\\\n                           ((\\m. (Cx(&1) - (s - Cx(&1)) * clog(Cx(&m))) /\n                                 Cx(&m) cpow s -\n                                 (clog(Cx(&(m + 1))) /\n                                  Cx(&(m + 1)) cpow (s - Cx(&1)) -\n                                  clog(Cx(&m)) /\n                                  Cx(&m) cpow (s - Cx(&1))))\n                            sums g' s) (from n) /\\\n                       (g has_complex_derivative g' s) (at s)
+      #|  (n : Num) => pow(Cx(norm((s : Cart[Real, Tybit0[Unit]])) + real_of_num(2)), 2) / cpow(Cx(real_of_num(n)), Cx(Re(s) / real_of_num(2) + real_of_num(1)))
+      #|  min(Re((s : Cart[Real, Tybit0[Unit]])) / real_of_num(2), real_of_num(1))
+      #|  (s : Cart[Real, Tybit0[Unit]])
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  (s : Cart[Real, Tybit0[Unit]])
+      #|  (m : Num)
+      #|  \226\136\128 n : Num, 1 <= n \226\134\146 (\226\136\131 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\131 g' : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : Cart[Real, Tybit0[Unit]], IN(s, {(s : Cart[Real, Tybit0[Unit]]) | Re(s) > real_of_num(0)}) \226\134\146 sums((m : Num) => (s - Cx(real_of_num(1))) / cpow(Cx(real_of_num(m)), s) - (Cx(real_of_num(1)) / cpow(Cx(real_of_num(m)), s - Cx(real_of_num(1))) - Cx(real_of_num(1)) / cpow(Cx(real_of_num(m + 1)), s - Cx(real_of_num(1)))), g(s), from(n)) && sums((m : Num) => (Cx(real_of_num(1)) - (s - Cx(real_of_num(1))) * clog(Cx(real_of_num(m)))) / cpow(Cx(real_of_num(m)), s) - (clog(Cx(real_of_num(m + 1))) / cpow(Cx(real_of_num(m + 1)), s - Cx(real_of_num(1))) - clog(Cx(real_of_num(m))) / cpow(Cx(real_of_num(m)), s - Cx(real_of_num(1)))), g'(s), from(n)) && has_complex_derivative(g, g'(s), at(s)))
       #|  (f has_complex_derivative f') net
       #|  :real
       #|  :real
       #|  :real
-      #|  w - z:complex
-      #|  w:complex
-      #|  Re z
-      #|  g:complex->complex
-      #|  forall z. &0 < Re z ==> ((nearzeta n) has_complex_derivative g' z) (at z)
-      #|  forall z. &0 < Re z ==> nearzeta n z = g z
-      #|  forall s. &0 < Re s\n        ==> ((\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n                   (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n                    Cx(&1) / Cx(&(m + 1)) cpow (s - Cx(&1))))\n              sums nearzeta n s) (from n)
-      #|  a ==> b /\\ c <=> (a ==> b) /\\ (a ==> c)
-      #|  g':complex->complex
-      #|  g:complex->complex
-      #|  forall n s. 1 <= n /\\ &0 < Re s\n         ==> ((\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n              (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n               Cx(&1) / Cx(&(m + 1)) cpow (s - Cx(&1))))\n              sums (nearzeta n s)) (from n) /\\\n              ((\\m. (Cx(&1) - (s - Cx(&1)) * clog(Cx(&m))) /\n                    Cx(&m) cpow s -\n                    (clog(Cx(&(m + 1))) /\n                     Cx(&(m + 1)) cpow (s - Cx(&1)) -\n                     clog(Cx(&m)) /\n                     Cx(&m) cpow (s - Cx(&1))))\n               sums (complex_derivative(nearzeta n) s)) (from n) /\\\n          ((nearzeta n) has_complex_derivative\n           complex_derivative(nearzeta n) s) (at s)
-      #|  s:complex
-      #|  n + 1
-      #|  from(n + 1) DIFF from n UNION from n DIFF from(n + 1) = {n}
-      #|  from(n + 1)
-      #|  forall n s. &0 < Re s\n         ==> ((\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n                   (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n                    Cx(&1) / Cx(&(m + 1)) cpow (s - Cx(&1))))\n              sums nearzeta n s) (from n)
-      #|  forall n s. 1 <= n /\\ &0 < Re s\n         ==> ((\\m. (Cx(&1) - (s - Cx(&1)) * clog(Cx(&m))) / Cx(&m) cpow s -\n                    (clog(Cx(&(m + 1))) / Cx(&(m + 1)) cpow (s - Cx(&1)) -\n                     clog(Cx(&m)) / Cx(&m) cpow (s - Cx(&1)))) sums\n            (complex_derivative (nearzeta n) s)) (from n)
-      #|  forall n. 1 <= n ==> (nearzeta n) holomorphic_on {s | Re(s) > &0}
-      #|  forall n s. 1 <= n /\\ &0 < Re s ==> (nearzeta n) complex_differentiable (at s)
-      #|  ~(m = 0)
-      #|  m:num
-      #|  \\n:num. (vec 0:complex)
-      #|  forall n. 1 <= n ==> nearzeta n (Cx(&1)) = Cx(&0)
-      #|  {s | Re s > &0}
-      #|  \\z. (nearzeta 1 z + Cx(&1) / Cx(&1) cpow (z - Cx(&1))) /\n                  (z - Cx(&1))
-      #|  zeta holomorphic_on {s | Re(s) > &0 /\\ ~(s = Cx(&1))}
-      #|  {s | P s /\\ ~(s = a)} = {s | P s} DELETE a
-      #|  forall s. &0 < Re s /\\ ~(s = Cx(&1))\n       ==> zeta complex_differentiable at s
-      #|  n DIV p
-      #|  n:num
-      #|  p * N:num
-      #|  N:num
-      #|  &0 < e
-      #|  e:real
-      #|  forall x p l k.\n      ((\\n. x(p * n)) sums l) k\n      ==> ~(p = 0) /\\\n          (forall n. (p * n) IN k <=> n IN k)\n          ==> (x sums l) {n | n IN k /\\ p divides n}
-      #|  s INTER t = {}\n      ==> t INTER u = (((s UNION t) INTER u) DIFF (s INTER u))
-      #|  (x sums (k + l)) (s UNION t) /\\ s INTER t = {}\n     ==> (x sums k) s ==> (x sums l) t
-      #|  a * x + (Cx(&1) - a) * x = x
-      #|  m = 0
-      #|  m:num
-      #|  1 <= n <=> ~(n = 0)
-      #|  ~(p = 0)
-      #|  \\n. Cx(&1) / Cx(&n) cpow s
-      #|  x * Cx(&1) * y = Cx(&1) * x * y
-      #|  inv(Cx(&p) cpow s)
-      #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  ps:num->bool
-      #|  p:num
-      #|  forall s ps. &1 < Re s /\\ FINITE ps /\\ (forall p. p IN ps ==> prime p)\n          ==> ((\\n. Cx(&1) / Cx(&n) cpow s) sums\n               (cproduct ps (\\p. Cx(&1) - inv(Cx(&p) cpow s)) * zeta s))\n       {n | 1 <= n /\\ forall p. prime p /\\ p divides n ==> ~(p IN ps)}
+      #|  (w : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  Re((z : Cart[Real, Tybit0[Unit]]))
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], real_of_num(0) < Re(z) \226\134\146 has_complex_derivative(nearzeta((n : Num)), (g' : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z), at(z))
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], real_of_num(0) < Re(z) \226\134\146 nearzeta((n : Num), z) == (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z)
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(0) < Re(s) \226\134\146 sums((m : Num) => (s - Cx(real_of_num(1))) / cpow(Cx(real_of_num(m)), s) - (Cx(real_of_num(1)) / cpow(Cx(real_of_num(m)), s - Cx(real_of_num(1))) - Cx(real_of_num(1)) / cpow(Cx(real_of_num(m + 1)), s - Cx(real_of_num(1)))), nearzeta((n : Num), s), from(n))
+      #|  ((a : Bool) \226\134\146 (b : Bool) && (c : Bool)) == ((a \226\134\146 b) && (a \226\134\146 c))
+      #|  (g' : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], 1 <= n && real_of_num(0) < Re(s) \226\134\146 sums((m : Num) => (s - Cx(real_of_num(1))) / cpow(Cx(real_of_num(m)), s) - (Cx(real_of_num(1)) / cpow(Cx(real_of_num(m)), s - Cx(real_of_num(1))) - Cx(real_of_num(1)) / cpow(Cx(real_of_num(m + 1)), s - Cx(real_of_num(1)))), nearzeta(n, s), from(n)) && sums((m : Num) => (Cx(real_of_num(1)) - (s - Cx(real_of_num(1))) * clog(Cx(real_of_num(m)))) / cpow(Cx(real_of_num(m)), s) - (clog(Cx(real_of_num(m + 1))) / cpow(Cx(real_of_num(m + 1)), s - Cx(real_of_num(1))) - clog(Cx(real_of_num(m))) / cpow(Cx(real_of_num(m)), s - Cx(real_of_num(1)))), complex_derivative(nearzeta(n), s), from(n)) && has_complex_derivative(nearzeta(n), complex_derivative(nearzeta(n), s), at(s))
+      #|  (s : Cart[Real, Tybit0[Unit]])
+      #|  (n : Num) + 1
+      #|  UNION(DIFF(from((n : Num) + 1), from(n)), DIFF(from(n), from(n + 1))) == {n}
+      #|  from((n : Num) + 1)
+      #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(0) < Re(s) \226\134\146 sums((m : Num) => (s - Cx(real_of_num(1))) / cpow(Cx(real_of_num(m)), s) - (Cx(real_of_num(1)) / cpow(Cx(real_of_num(m)), s - Cx(real_of_num(1))) - Cx(real_of_num(1)) / cpow(Cx(real_of_num(m + 1)), s - Cx(real_of_num(1)))), nearzeta(n, s), from(n))
+      #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], 1 <= n && real_of_num(0) < Re(s) \226\134\146 sums((m : Num) => (Cx(real_of_num(1)) - (s - Cx(real_of_num(1))) * clog(Cx(real_of_num(m)))) / cpow(Cx(real_of_num(m)), s) - (clog(Cx(real_of_num(m + 1))) / cpow(Cx(real_of_num(m + 1)), s - Cx(real_of_num(1))) - clog(Cx(real_of_num(m))) / cpow(Cx(real_of_num(m)), s - Cx(real_of_num(1)))), complex_derivative(nearzeta(n), s), from(n))
+      #|  \226\136\128 n : Num, 1 <= n \226\134\146 holomorphic_on(nearzeta(n), {(s : Cart[Real, Tybit0[Unit]]) | Re(s) > real_of_num(0)})
+      #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], 1 <= n && real_of_num(0) < Re(s) \226\134\146 complex_differentiable(nearzeta(n), at(s))
+      #|  !((m : Num) == 0)
+      #|  (m : Num)
+      #|  (n : Num) => (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0)
+      #|  \226\136\128 n : Num, 1 <= n \226\134\146 nearzeta(n, Cx(real_of_num(1))) == Cx(real_of_num(0))
+      #|  {(s : Cart[Real, Tybit0[Unit]]) | Re(s) > real_of_num(0)}
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (nearzeta(1, z) + Cx(real_of_num(1)) / cpow(Cx(real_of_num(1)), z - Cx(real_of_num(1)))) / (z - Cx(real_of_num(1)))
+      #|  holomorphic_on(zeta, {(s : Cart[Real, Tybit0[Unit]]) | Re(s) > real_of_num(0) && !(s == Cx(real_of_num(1)))})
+      #|  {(s : _) | (P : (_) -> Bool)(s) && !(s == (a : _))} == DELETE({(s : _) | P(s)}, a)
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(0) < Re(s) && !(s == Cx(real_of_num(1))) \226\134\146 complex_differentiable(zeta, at(s))
+      #|  DIV((n : Num), (p : Num))
+      #|  (n : Num)
+      #|  (p : Num) * (N : Num)
+      #|  (N : Num)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 x : (Num) -> Cart[Real, _], \226\136\128 p : Num, \226\136\128 l : Cart[Real, _], \226\136\128 k : (Num) -> Bool, sums((n : Num) => x(p * n), l, k) \226\134\146 !(p == 0) && (\226\136\128 n : Num, IN(p * n, k) == IN(n, k)) \226\134\146 sums(x, l, {(n : Num) | IN(n, k) && divides(p, n)})
+      #|  INTER((s : (_) -> Bool), (t : (_) -> Bool)) == {} \226\134\146 INTER(t, (u : (_) -> Bool)) == DIFF(INTER(UNION(s, t), u), INTER(s, u))
+      #|  sums((x : (Num) -> Cart[Real, Tybit0[Unit]]), (k : Cart[Real, Tybit0[Unit]]) + (l : Cart[Real, Tybit0[Unit]]), UNION((s : (Num) -> Bool), (t : (Num) -> Bool))) && INTER(s, t) == {} \226\134\146 sums(x, k, s) \226\134\146 sums(x, l, t)
+      #|  (a : Cart[Real, Tybit0[Unit]]) * (x : Cart[Real, Tybit0[Unit]]) + (Cx(real_of_num(1)) - a) * x == x
+      #|  (m : Num) == 0
+      #|  (m : Num)
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  !((p : Num) == 0)
+      #|  (n : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), (s : Cart[Real, Tybit0[Unit]]))
+      #|  (x : Cart[Real, Tybit0[Unit]]) * (Cx(real_of_num(1)) * (y : Cart[Real, Tybit0[Unit]])) == Cx(real_of_num(1)) * (x * y)
+      #|  inv(cpow(Cx(real_of_num((p : Num))), (s : Cart[Real, Tybit0[Unit]])))
+      #|  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+      #|  (ps : (Num) -> Bool)
+      #|  (p : Num)
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], \226\136\128 ps : (Num) -> Bool, real_of_num(1) < Re(s) && FINITE(ps) && (\226\136\128 p : Num, IN(p, ps) \226\134\146 prime(p)) \226\134\146 sums((n : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), s), cproduct(ps, (p : Num) => Cx(real_of_num(1)) - inv(cpow(Cx(real_of_num(p)), s))) * zeta(s), {(n : Num) | 1 <= n && (\226\136\128 p : Num, prime(p) && divides(p, n) \226\134\146 !IN(p, ps))})
       #|  0
-      #|  zeta (Cx(Re s))
-      #|  \\n. Cx(&1) / Cx(&n) cpow (Cx(Re s))
-      #|  from 1
-      #|  forall s t. &1 < Re s /\\ ~(0 IN t)\n         ==> summable t (\\n. Cx (&1) / Cx (&n) cpow s)
-      #|  m:num
+      #|  zeta(Cx(Re((s : Cart[Real, Tybit0[Unit]]))))
+      #|  (n : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), Cx(Re((s : Cart[Real, Tybit0[Unit]]))))
+      #|  from(1)
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], \226\136\128 t : (Num) -> Bool, real_of_num(1) < Re(s) && !IN(0, t) \226\134\146 summable(t, (n : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), s))
+      #|  (m : Num)
       #|  1 <= 0
-      #|  1 <= a + b + 1
-      #|  (forall x. P x /\\ x = 1 ==> Q x) <=> P 1 ==> Q 1
-      #|  vsum\n     ({m | 1 <= m /\\ (forall p. prime p /\\ p divides m ==> n < p)} INTER\n      (0..N1 + N2 + 1))\n     (\\n. Cx (&1) / Cx (&n) cpow s) - Cx(&1) =\n    vsum\n     (({m | 1 <= m /\\ (forall p. prime p /\\ p divides m ==> n < p)} INTER\n       (0..N1 + N2 + 1)) DELETE 1)\n     (\\n. Cx (&1) / Cx (&n) cpow s)
-      #|  x <= y ==> y < e ==> x < e
-      #|  N1 + N2 + 1
-      #|  dist(x,z) < e / &2 /\\ dist(y,z) <= dist(x,y) + dist(x,z)\n    ==> dist(x,y) < e / &2 ==> dist(y,z) < e
-      #|  N1 + N2 + 1
-      #|  N2:num
-      #|  e / &2
-      #|  {m | 1 <= m /\\ (forall p. prime p /\\ p divides m ==> n < p)}
-      #|  s:complex
-      #|  n:num
-      #|  N:num
-      #|  e / &2
-      #|  Cx(Re s)
-      #|  ?l. ((\\n. Cx (&1) / Cx (&n) cpow Cx(Re s)) sums l) (from 1)
-      #|  e:real
-      #|  0..n
-      #|  n:num
-      #|  \\n. infsum {m | 1 <= m /\\ forall p. prime p /\\ p divides m\n                                   ==> ~(p IN {p | prime p /\\ p <= n})}\n                (\\n. Cx (&1) / Cx (&n) cpow s)
-      #|  forall s. &1 < Re s\n       ==> ((\\n. cproduct {p | prime p /\\ p <= n}\n                          (\\p. Cx(&1) - inv(Cx(&p) cpow s)) * zeta s)\n            --> Cx(&1)) sequentially
-      #|  n:num
-      #|  n:num
-      #|  &1 / &2
-      #|  forall s. &1 < Re s ==> ~(zeta s = Cx(&0))
-      #|  inv(zeta(s))
-      #|  \\x. ((\\n. x) --> x) sq
-      #|  forall s. &1 < Re s\n       ==> ((\\n. cproduct {p | prime p /\\ p <= n}\n                          (\\p. inv(Cx(&1) - inv(Cx(&p) cpow s))))\n            --> zeta(s)) sequentially
-      #|  0 < i + 1
-      #|  1 <= i ==> 0 < i /\\ ~(i = 0)
-      #|  n:num
-      #|  Cx(&1)
+      #|  1 <= (a : Num) + ((b : Num) + 1)
+      #|  (\226\136\128 x : Num, (P : (Num) -> Bool)(x) && x == 1 \226\134\146 (Q : (Num) -> Bool)(x)) == (P(1) \226\134\146 Q(1))
+      #|  vsum(INTER({(m : Num) | 1 <= m && (\226\136\128 p : Num, prime(p) && divides(p, m) \226\134\146 (n : Num) < p)}, op_dot_dot(0, (N1 : Num) + ((N2 : Num) + 1))), (n : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), (s : Cart[Real, Tybit0[Unit]]))) - Cx(real_of_num(1)) == vsum(DELETE(INTER({(m : Num) | 1 <= m && (\226\136\128 p : Num, prime(p) && divides(p, m) \226\134\146 n < p)}, op_dot_dot(0, N1 + (N2 + 1))), 1), (n : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), s))
+      #|  (x : Real) <= (y : Real) \226\134\146 y < (e : Real) \226\134\146 x < e
+      #|  (N1 : Num) + ((N2 : Num) + 1)
+      #|  dist(((x : Cart[Real, _]), (z : Cart[Real, _]))) < (e : Real) / real_of_num(2) && dist(((y : Cart[Real, _]), z)) <= dist((x, y)) + dist((x, z)) \226\134\146 dist((x, y)) < e / real_of_num(2) \226\134\146 dist((y, z)) < e
+      #|  (N1 : Num) + ((N2 : Num) + 1)
+      #|  (N2 : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  {(m : Num) | 1 <= m && (\226\136\128 p : Num, prime(p) && divides(p, m) \226\134\146 (n : Num) < p)}
+      #|  (s : Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  Cx(Re((s : Cart[Real, Tybit0[Unit]])))
+      #|  \226\136\131 l : Cart[Real, Tybit0[Unit]], sums((n : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), Cx(Re((s : Cart[Real, Tybit0[Unit]])))), l, from(1))
+      #|  (e : Real)
+      #|  op_dot_dot(0, (n : Num))
+      #|  (n : Num)
+      #|  (n : Num) => infsum({(m : Num) | 1 <= m && (\226\136\128 p : Num, prime(p) && divides(p, m) \226\134\146 !IN(p, {(p : Num) | prime(p) && p <= n}))}, (n : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), (s : Cart[Real, Tybit0[Unit]])))
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) < Re(s) \226\134\146 op_minus_minus_gt((n : Num) => cproduct({(p : Num) | prime(p) && p <= n}, (p : Num) => Cx(real_of_num(1)) - inv(cpow(Cx(real_of_num(p)), s))) * zeta(s), Cx(real_of_num(1)), sequentially)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  real_of_num(1) / real_of_num(2)
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) < Re(s) \226\134\146 !(zeta(s) == Cx(real_of_num(0)))
+      #|  inv(zeta((s : Cart[Real, Tybit0[Unit]])))
+      #|  (x : Cart[Real, _]) => op_minus_minus_gt((n : _) => x, x, (sq : Net[_]))
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) < Re(s) \226\134\146 op_minus_minus_gt((n : Num) => cproduct({(p : Num) | prime(p) && p <= n}, (p : Num) => inv(Cx(real_of_num(1)) - inv(cpow(Cx(real_of_num(p)), s)))), zeta(s), sequentially)
+      #|  0 < (i : Num) + 1
+      #|  1 <= (i : Num) \226\134\146 0 < i && !(i == 0)
+      #|  (n : Num)
+      #|  Cx(real_of_num(1))
       #|  1
-      #|  ((\\n. Cx(sum(1..n) (\\i. &1 / &i - (log(&(i + 1)) - log(&i))))) -->\n    complex_derivative (nearzeta 1) (Cx(&1))) sequentially
-      #|  (&1 + &1 / &2) pow 2 <= exp(&1 / &2) pow 2
-      #|  2 <= x ==> 0 < x
-      #|  &0 < x ==> (x + &1) / x = &1 + &1 / x
-      #|  2 <= x ==> 0 < x /\\ 0 < x + 1
-      #|  a - b <= a - (b - &0) + c <=> &0 <= c
-      #|  n:num
+      #|  op_minus_minus_gt((n : Num) => Cx(sum(op_dot_dot(1, n), (i : Num) => real_of_num(1) / real_of_num(i) - (log(real_of_num(i + 1)) - log(real_of_num(i))))), complex_derivative(nearzeta(1), Cx(real_of_num(1))), sequentially)
+      #|  pow(real_of_num(1) + real_of_num(1) / real_of_num(2), 2) <= pow(exp(real_of_num(1) / real_of_num(2)), 2)
+      #|  2 <= (x : Num) \226\134\146 0 < x
+      #|  real_of_num(0) < (x : Real) \226\134\146 (x + real_of_num(1)) / x == real_of_num(1) + real_of_num(1) / x
+      #|  2 <= (x : Num) \226\134\146 0 < x && 0 < x + 1
+      #|  ((a : Real) - (b : Real) <= a - (b - real_of_num(0)) + (c : Real)) == (real_of_num(0) <= c)
+      #|  (n : Num)
       #|  1
-      #|  \\n. Cx(sum(1..n) (\\i. &1 / &i - (log(&(i + 1)) - log(&i))))
+      #|  (n : Num) => Cx(sum(op_dot_dot(1, n), (i : Num) => real_of_num(1) / real_of_num(i) - (log(real_of_num(i + 1)) - log(real_of_num(i)))))
       #|  sequentially
-      #|  &1 - log(&2) <= Re(complex_derivative (nearzeta 1) (Cx(&1)))
-      #|  ~(zeta(Cx(&1)) = Cx(&0))
-      #|  a pow 2 * b <= (&2 * a + b) pow 3 / &27 <=>\n      &0 <= (&8 / &27 * a + &1 / &27 * b) * (a - b) pow 2
-      #|  a <= b ==> b <= x ==> a <= x
-      #|  &0 <= a /\\ &0 <= b /\\ &0 <= c /\\\n     c * (&2 * a + b) pow 3 / &27 <= x\n     ==> c * a pow 2 * b <= x
-      #|  &0 <= (&1 - t) * (&1 + t) /\\ &0 <= (r - t) pow 2\n      ==> &0 <= &1 + r pow 2 - &2 * r * t
-      #|  -- &1 <= t /\\ t <= &1\n     ==> &0 <= &1 + r pow 2 - &2 * r * t
-      #|  &0 <= r pow 3
-      #|  &0 <= &2 * (&2 * t pow 2 + &2 * t - &1) + &3 <=>\n                            &0 <= (t + &1 / &2) pow 2
-      #|  c - &2 * r * y <= c + &3 * r <=> &0 <= r * (&2 * y + &3)
-      #|  (&1 - r) * ((&3 + &3 * r pow 2) + &3 * r)
-      #|  &2 * (&1 + r pow 2 - &2 * r * t) + &1 + r pow 2 +\n    &2 * r - &4 * r * t pow 2 =\n    (&3 + &3 * r pow 2) - &2 * r * (&2 * t pow 2 + &2 * t - &1)
-      #|  x pow 3 * y pow 3 / &27 <= &1 <=> (x * y) pow 3 <= &3 pow 3
-      #|  &2 * t pow 2 - &1 <= &1 <=> t pow 2 <= &1 pow 2
-      #|  -- &1 <= &2 * x pow 2 - &1 <=> &0 <= x * x
-      #|  &1 + s + &2 * r - &4 * r * t = &1 + s - &2 * r * (&2 * t - &1)
-      #|  r < &1 ==> abs(&1 - r) = (&1 - r)
-      #|  1 < t <=> 2 <= t
-      #|  &0 < r /\\ r < &1
-      #|  Re y * log(&p)
-      #|  x - &2 * r * (&2 * y - &1) = x + &2 * r - &4 * r * y
-      #|  t = cos(Re y * log(&p))
-      #|  r = exp(--(Re x * log(&p)))
-      #|  (&1 - r * c) pow 2 + --(r * s) pow 2 =\n    &1 + r pow 2 * (s pow 2 + c pow 2) - &2 * r * c
-      #|  (z:real) pow 4 = (z pow 2) pow 2
-      #|  --(Cx(&2) * ii * x) = ii * Cx(&2) * --x
-      #|  --(ii * x) = ii * --x
-      #|  p:num
-      #|  &1 < x /\\ &0 < y ==> ~(x = &0 \\/ y = &0)
-      #|  (norm:complex->real) o inv
-      #|  p:num
-      #|  (~p \\/ ~q) \\/ ~r <=> p /\\ q ==> ~r
-      #|  Cx(&1) - x = Cx(&0) <=> x = Cx(&1)
-      #|  n:num
+      #|  real_of_num(1) - log(real_of_num(2)) <= Re(complex_derivative(nearzeta(1), Cx(real_of_num(1))))
+      #|  !(zeta(Cx(real_of_num(1))) == Cx(real_of_num(0)))
+      #|  (pow((a : Real), 2) * (b : Real) <= pow(real_of_num(2) * a + b, 3) / real_of_num(27)) == (real_of_num(0) <= (real_of_num(8) / real_of_num(27) * a + real_of_num(1) / real_of_num(27) * b) * pow(a - b, 2))
+      #|  (a : Real) <= (b : Real) \226\134\146 b <= (x : Real) \226\134\146 a <= x
+      #|  real_of_num(0) <= (a : Real) && real_of_num(0) <= (b : Real) && real_of_num(0) <= (c : Real) && c * (pow(real_of_num(2) * a + b, 3) / real_of_num(27)) <= (x : Real) \226\134\146 c * (pow(a, 2) * b) <= x
+      #|  real_of_num(0) <= (real_of_num(1) - (t : Real)) * (real_of_num(1) + t) && real_of_num(0) <= pow((r : Real) - t, 2) \226\134\146 real_of_num(0) <= real_of_num(1) + (pow(r, 2) - real_of_num(2) * (r * t))
+      #|  -real_of_num(1) <= (t : Real) && t <= real_of_num(1) \226\134\146 real_of_num(0) <= real_of_num(1) + (pow((r : Real), 2) - real_of_num(2) * (r * t))
+      #|  real_of_num(0) <= pow((r : Real), 3)
+      #|  (real_of_num(0) <= real_of_num(2) * (real_of_num(2) * pow((t : Real), 2) + (real_of_num(2) * t - real_of_num(1))) + real_of_num(3)) == (real_of_num(0) <= pow(t + real_of_num(1) / real_of_num(2), 2))
+      #|  ((c : Real) - real_of_num(2) * ((r : Real) * (y : Real)) <= c + real_of_num(3) * r) == (real_of_num(0) <= r * (real_of_num(2) * y + real_of_num(3)))
+      #|  (real_of_num(1) - (r : Real)) * (real_of_num(3) + real_of_num(3) * pow(r, 2) + real_of_num(3) * r)
+      #|  real_of_num(2) * (real_of_num(1) + (pow((r : Real), 2) - real_of_num(2) * (r * (t : Real)))) + (real_of_num(1) + (pow(r, 2) + (real_of_num(2) * r - real_of_num(4) * (r * pow(t, 2))))) == real_of_num(3) + real_of_num(3) * pow(r, 2) - real_of_num(2) * (r * (real_of_num(2) * pow(t, 2) + (real_of_num(2) * t - real_of_num(1))))
+      #|  (pow((x : Real), 3) * (pow((y : Real), 3) / real_of_num(27)) <= real_of_num(1)) == (pow(x * y, 3) <= pow(real_of_num(3), 3))
+      #|  (real_of_num(2) * pow((t : Real), 2) - real_of_num(1) <= real_of_num(1)) == (pow(t, 2) <= pow(real_of_num(1), 2))
+      #|  (-real_of_num(1) <= real_of_num(2) * pow((x : Real), 2) - real_of_num(1)) == (real_of_num(0) <= x * x)
+      #|  real_of_num(1) + ((s : Real) + (real_of_num(2) * (r : Real) - real_of_num(4) * (r * (t : Real)))) == real_of_num(1) + (s - real_of_num(2) * (r * (real_of_num(2) * t - real_of_num(1))))
+      #|  (r : Real) < real_of_num(1) \226\134\146 abs(real_of_num(1) - r) == real_of_num(1) - r
+      #|  (1 < (t : Num)) == (2 <= t)
+      #|  real_of_num(0) < (r : Real) && r < real_of_num(1)
+      #|  Re((y : Cart[Real, Tybit0[Unit]])) * log(real_of_num((p : Num)))
+      #|  (x : Real) - real_of_num(2) * ((r : Real) * (real_of_num(2) * (y : Real) - real_of_num(1))) == x + (real_of_num(2) * r - real_of_num(4) * (r * y))
+      #|  (t : Real) == cos(Re((y : Cart[Real, Tybit0[Unit]])) * log(real_of_num((p : Num))))
+      #|  (r : Real) == exp(-(Re((x : Cart[Real, Tybit0[Unit]])) * log(real_of_num((p : Num)))))
+      #|  pow(real_of_num(1) - (r : Real) * (c : Real), 2) + pow(-(r * (s : Real)), 2) == real_of_num(1) + (pow(r, 2) * (pow(s, 2) + pow(c, 2)) - real_of_num(2) * (r * c))
+      #|  pow((z : Real), 4) == pow(pow(z, 2), 2)
+      #|  -(Cx(real_of_num(2)) * (ii * (x : Cart[Real, Tybit0[Unit]]))) == ii * (Cx(real_of_num(2)) * -x)
+      #|  -(ii * (x : Cart[Real, Tybit0[Unit]])) == ii * -x
+      #|  (p : Num)
+      #|  real_of_num(1) < (x : Real) && real_of_num(0) < (y : Real) \226\134\146 !(x == real_of_num(0) || y == real_of_num(0))
+      #|  o(norm, inv)
+      #|  (p : Num)
+      #|  ((!(p : Bool) || !(q : Bool)) || !(r : Bool)) == (p && q \226\134\146 !r)
+      #|  (Cx(real_of_num(1)) - (x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) == (x == Cx(real_of_num(1)))
+      #|  (n : Num)
       #|  0
-      #|  \\n. cproduct {p | prime p /\\ p <= n}\n                 (\\p. inv(Cx(&1) - inv(Cx(&p) cpow x))) pow 3 *\n        cproduct {p | prime p /\\ p <= n}\n                 (\\p. inv(Cx(&1) - inv(Cx(&p) cpow (x + ii * y)))) pow 4 *\n        cproduct {p | prime p /\\ p <= n}\n                 (\\p. inv(Cx(&1) -\n                      inv(Cx(&p) cpow (x + Cx(&2) * ii * y)))) pow 2
+      #|  (n : Num) => pow(cproduct({(p : Num) | prime(p) && p <= n}, (p : Num) => inv(Cx(real_of_num(1)) - inv(cpow(Cx(real_of_num(p)), (x : Cart[Real, Tybit0[Unit]]))))), 3) * (pow(cproduct({(p : Num) | prime(p) && p <= n}, (p : Num) => inv(Cx(real_of_num(1)) - inv(cpow(Cx(real_of_num(p)), x + ii * (y : Cart[Real, Tybit0[Unit]]))))), 4) * pow(cproduct({(p : Num) | prime(p) && p <= n}, (p : Num) => inv(Cx(real_of_num(1)) - inv(cpow(Cx(real_of_num(p)), x + Cx(real_of_num(2)) * (ii * y))))), 2))
       #|  sequentially
-      #|  forall x y. real x /\\ real y /\\ &1 < Re x\n       ==> &1 <= norm(zeta(x) pow 3 *\n                      zeta(x + ii * y) pow 4 *\n                      zeta(x + Cx(&2) * ii * y) pow 2)
-      #|  Cx(&0) = (nearzeta 1 (Cx(&1)) + Cx(&1)) pow 3 * (Cx(&1) - Cx(&1))
-      #|  ~(x:complex = a)\n     ==> b * (x - a) - (c / (x - a)) pow 3 * (x - a) pow 4 =\n         (b - c pow 3) * (x - a)
-      #|  \\x. (nearzeta 1 (x) + Cx(&1)) pow 3 * (x - Cx(&1))
-      #|  x + y = x <=> y = Cx(&0)
-      #|  ((\\x. zeta (x + ii * Cx y)) has_complex_derivative\n                   complex_derivative (\\x. zeta (x + ii * Cx y)) (Cx (&1)))\n                  (at (Cx (&1)) within {s | real s /\\ &1 < Re s})
-      #|  ~(x = Cx(&0))\n      ==> (y * x pow 4) * (z / x) pow 4 - y * z pow 4 = Cx(&0)
-      #|  \\x. (zeta x pow 3 * (x - Cx(&1)) pow 4) *\n                  (zeta(x + ii * Cx y) / (x - Cx(&1))) pow 4
-      #|  x + y = x <=> y = Cx(&0)
-      #|  &1
-      #|  &0 < e
-      #|  Cx(&1 + e)
-      #|  e:real
-      #|  Cx(&1) limit_point_of {s | real s /\\ &1 < Re s}
-      #|  \\x. zeta (x) pow 3 * zeta (x + ii * Cx(y)) pow 4 *\n        zeta (x + Cx (&2) * ii * Cx(y)) pow 2
-      #|  at (Cx(&1)) within {s | real s /\\ &1 < Re s}
-      #|  ~(&1 <= norm((Cx(&0) *\n                complex_derivative (\\x. zeta(x + ii * Cx y)) (Cx(&1)) pow 4) *\n                zeta (Cx(&1) + Cx (&2) * ii * Cx(y)) pow 2))
-      #|  y = &0
-      #|  y = Im s
-      #|  s:complex
-      #|  &1 <= x <=> &1 < x \\/ x = &1
-      #|  forall s. &1 <= Re s ==> ~(zeta s = Cx(&0))
-      #|  forall s. &1 <= Re s ==> ~(nearzeta 1 s + Cx (&1) = Cx(&0))
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], real(x) && real(y) && real_of_num(1) < Re(x) \226\134\146 real_of_num(1) <= norm(pow(zeta(x), 3) * (pow(zeta(x + ii * y), 4) * pow(zeta(x + Cx(real_of_num(2)) * (ii * y)), 2)))
+      #|  Cx(real_of_num(0)) == pow(nearzeta(1, Cx(real_of_num(1))) + Cx(real_of_num(1)), 3) * (Cx(real_of_num(1)) - Cx(real_of_num(1)))
+      #|  !((x : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])) \226\134\146 (b : Cart[Real, Tybit0[Unit]]) * (x - a) - pow((c : Cart[Real, Tybit0[Unit]]) / (x - a), 3) * pow(x - a, 4) == (b - pow(c, 3)) * (x - a)
+      #|  (x : Cart[Real, Tybit0[Unit]]) => pow(nearzeta(1, x) + Cx(real_of_num(1)), 3) * (x - Cx(real_of_num(1)))
+      #|  ((x : Cart[Real, Tybit0[Unit]]) + (y : Cart[Real, Tybit0[Unit]]) == x) == (y == Cx(real_of_num(0)))
+      #|  has_complex_derivative((x : Cart[Real, Tybit0[Unit]]) => zeta(x + ii * Cx((y : Real))), complex_derivative((x : Cart[Real, Tybit0[Unit]]) => zeta(x + ii * Cx(y)), Cx(real_of_num(1))), within(at(Cx(real_of_num(1))), {(s : Cart[Real, Tybit0[Unit]]) | real(s) && real_of_num(1) < Re(s)}))
+      #|  !((x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 (y : Cart[Real, Tybit0[Unit]]) * pow(x, 4) * pow((z : Cart[Real, Tybit0[Unit]]) / x, 4) - y * pow(z, 4) == Cx(real_of_num(0))
+      #|  (x : Cart[Real, Tybit0[Unit]]) => pow(zeta(x), 3) * pow(x - Cx(real_of_num(1)), 4) * pow(zeta(x + ii * Cx((y : Real))) / (x - Cx(real_of_num(1))), 4)
+      #|  ((x : Cart[Real, Tybit0[Unit]]) + (y : Cart[Real, Tybit0[Unit]]) == x) == (y == Cx(real_of_num(0)))
+      #|  real_of_num(1)
+      #|  real_of_num(0) < (e : Real)
+      #|  Cx(real_of_num(1) + (e : Real))
+      #|  (e : Real)
+      #|  limit_point_of(Cx(real_of_num(1)), {(s : Cart[Real, Tybit0[Unit]]) | real(s) && real_of_num(1) < Re(s)})
+      #|  (x : Cart[Real, Tybit0[Unit]]) => pow(zeta(x), 3) * (pow(zeta(x + ii * Cx((y : Real))), 4) * pow(zeta(x + Cx(real_of_num(2)) * (ii * Cx(y))), 2))
+      #|  within(at(Cx(real_of_num(1))), {(s : Cart[Real, Tybit0[Unit]]) | real(s) && real_of_num(1) < Re(s)})
+      #|  !(real_of_num(1) <= norm(Cx(real_of_num(0)) * pow(complex_derivative((x : Cart[Real, Tybit0[Unit]]) => zeta(x + ii * Cx((y : Real))), Cx(real_of_num(1))), 4) * pow(zeta(Cx(real_of_num(1)) + Cx(real_of_num(2)) * (ii * Cx(y))), 2)))
+      #|  (y : Real) == real_of_num(0)
+      #|  (y : Real) == Im((s : Cart[Real, Tybit0[Unit]]))
+      #|  (s : Cart[Real, Tybit0[Unit]])
+      #|  (real_of_num(1) <= (x : Real)) == (real_of_num(1) < x || x == real_of_num(1))
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) <= Re(s) \226\134\146 !(zeta(s) == Cx(real_of_num(0)))
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) <= Re(s) \226\134\146 !(nearzeta(1, s) + Cx(real_of_num(1)) == Cx(real_of_num(0)))
       #|  1
-      #|  inv(&1 / &2)
-      #|  w:complex
-      #|  (Cx(&0) - Cx(&1)) * x = --x
-      #|  w:complex
-      #|  Cx(&0)
-      #|  z:complex
-      #|  &2
-      #|  cball(Cx(&0),&1 / &2)
-      #|  \\z. inv(z - Cx(&1))
-      #|  \\z. clog(Cx(&1) - z)
-      #|  norm(z) <= &1 / &2 ==> norm(clog(Cx(&1) - z)) <= &2 * norm(z)
+      #|  inv(real_of_num(1) / real_of_num(2))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (Cx(real_of_num(0)) - Cx(real_of_num(1))) * (x : Cart[Real, Tybit0[Unit]]) == -x
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  Cx(real_of_num(0))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(2)
+      #|  cball((Cx(real_of_num(0)), real_of_num(1) / real_of_num(2)))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => inv(z - Cx(real_of_num(1)))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => clog(Cx(real_of_num(1)) - z)
+      #|  norm((z : Cart[Real, Tybit0[Unit]])) <= real_of_num(1) / real_of_num(2) \226\134\146 norm(clog(Cx(real_of_num(1)) - z)) <= real_of_num(2) * norm(z)
       #|  (f has_complex_derivative f') net
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  2 <= p ==> 1 < p
-      #|  x < a ==> y <= x ==> y <= a
-      #|  &2 * norm(inv(Cx(&p) cpow y))
-      #|  1 <= n <=> ~(n = 0)
-      #|  p:num
-      #|  N:num
-      #|  &1 / &2
-      #|  zeta(Cx(&1 + (Re s - &1) / &2))
-      #|  summable (from 1) (\\n. Cx (&1) / Cx (&n) cpow (Cx(&1 + (Re s - &1) / &2)))
-      #|  inv(x) = Cx(&1) * inv x
-      #|  zeta(Cx(&1 + (Re s - &1) / &2))
-      #|  2 <= p ==> 1 <= p
-      #|  0 < n <=> 1 <= n
-      #|  from 1
-      #|  \\p. Cx(&2) / Cx(&p) cpow (Cx(&1 + (Re(s) - &1) / &2))
-      #|  (Re(s) - &1) / &2
-      #|  s:complex
-      #|  1 < p <=> 2 <= p
-      #|  norm(inv (Cx (&p) cpow s))
-      #|  forall y. abs x <= y /\\ y < w ==> x < w
-      #|  ~(y = Cx(&0)) ==> y * (Cx(&1) - inv(y)) = y - Cx(&1)
-      #|  ~(x = Cx(&0)) ==> --(a * x) / x pow 2 = --(a / x)
-      #|  ?logzeta logzeta'.\n        forall s. s IN {s | Re s > &1}\n            ==> ((\\p. clog(Cx(&1) - inv(Cx(&p) cpow s)))\n                 sums logzeta(s))\n                {p | prime p} /\\\n                ((\\p. clog(Cx(&p)) / (Cx(&p) cpow s - Cx(&1)))\n                 sums logzeta'(s))\n                {p | prime p} /\\\n                (logzeta has_complex_derivative logzeta'(s)) (at s)
+      #|  2 <= (p : Num) \226\134\146 1 < p
+      #|  (x : Real) < (a : Real) \226\134\146 (y : Real) <= x \226\134\146 y <= a
+      #|  real_of_num(2) * norm(inv(cpow(Cx(real_of_num((p : Num))), (y : Cart[Real, Tybit0[Unit]]))))
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  (p : Num)
+      #|  (N : Num)
+      #|  real_of_num(1) / real_of_num(2)
+      #|  zeta(Cx(real_of_num(1) + (Re((s : Cart[Real, Tybit0[Unit]])) - real_of_num(1)) / real_of_num(2)))
+      #|  summable(from(1), (n : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), Cx(real_of_num(1) + (Re((s : Cart[Real, Tybit0[Unit]])) - real_of_num(1)) / real_of_num(2))))
+      #|  inv((x : Cart[Real, Tybit0[Unit]])) == Cx(real_of_num(1)) * inv(x)
+      #|  zeta(Cx(real_of_num(1) + (Re((s : Cart[Real, Tybit0[Unit]])) - real_of_num(1)) / real_of_num(2)))
+      #|  2 <= (p : Num) \226\134\146 1 <= p
+      #|  (0 < (n : Num)) == (1 <= n)
+      #|  from(1)
+      #|  (p : Num) => Cx(real_of_num(2)) / cpow(Cx(real_of_num(p)), Cx(real_of_num(1) + (Re((s : Cart[Real, Tybit0[Unit]])) - real_of_num(1)) / real_of_num(2)))
+      #|  (Re((s : Cart[Real, Tybit0[Unit]])) - real_of_num(1)) / real_of_num(2)
+      #|  (s : Cart[Real, Tybit0[Unit]])
+      #|  (1 < (p : Num)) == (2 <= p)
+      #|  norm(inv(cpow(Cx(real_of_num((p : Num))), (s : Cart[Real, Tybit0[Unit]]))))
+      #|  \226\136\128 y : Real, abs((x : Real)) <= y && y < (w : Real) \226\134\146 x < w
+      #|  !((y : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 y * (Cx(real_of_num(1)) - inv(y)) == y - Cx(real_of_num(1))
+      #|  !((x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 -((a : Cart[Real, Tybit0[Unit]]) * x) / pow(x, 2) == -(a / x)
+      #|  \226\136\131 logzeta : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\131 logzeta' : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : Cart[Real, Tybit0[Unit]], IN(s, {(s : Cart[Real, Tybit0[Unit]]) | Re(s) > real_of_num(1)}) \226\134\146 sums((p : Num) => clog(Cx(real_of_num(1)) - inv(cpow(Cx(real_of_num(p)), s))), logzeta(s), {(p : Num) | prime(p)}) && sums((p : Num) => clog(Cx(real_of_num(p))) / (cpow(Cx(real_of_num(p)), s) - Cx(real_of_num(1))), logzeta'(s), {(p : Num) | prime(p)}) && has_complex_derivative(logzeta, logzeta'(s), at(s))
       #|  (f has_complex_derivative f') net
-      #|  y:complex
-      #|  a ==> b /\\ c <=> (a ==> b) /\\ (a ==> c)
-      #|  &1 < s ==> ~(s = &0)
-      #|  norm:complex->real
-      #|  p:num
-      #|  {x | P x} INTER {x | Q x} = {x | P x /\\ Q x}
-      #|  n:num
-      #|  \\n. cproduct {p | prime p /\\ p <= n}\n                             (\\p. inv(Cx(&1) - inv(Cx(&p) cpow s)))
-      #|  --logzeta s
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  ((a : Bool) \226\134\146 (b : Bool) && (c : Bool)) == ((a \226\134\146 b) && (a \226\134\146 c))
+      #|  real_of_num(1) < (s : Real) \226\134\146 !(s == real_of_num(0))
+      #|  (norm : (Cart[Real, Tybit0[Unit]]) -> Real)
+      #|  (p : Num)
+      #|  INTER({(x : _) | (P : (_) -> Bool)(x)}, {(x : _) | (Q : (_) -> Bool)(x)}) == {(x : _) | P(x) && Q(x)}
+      #|  (n : Num)
+      #|  (n : Num) => cproduct({(p : Num) | prime(p) && p <= n}, (p : Num) => inv(Cx(real_of_num(1)) - inv(cpow(Cx(real_of_num(p)), (s : Cart[Real, Tybit0[Unit]])))))
+      #|  -logzeta((s : Cart[Real, Tybit0[Unit]]))
       #|  cexp
-      #|  \\n. cexp(vsum({p | prime p} INTER (0..n))\n                 (\\p. --clog(Cx(&1) - inv(Cx(&p) cpow s))))
+      #|  (n : Num) => cexp(vsum(INTER({(p : Num) | prime(p)}, op_dot_dot(0, n)), (p : Num) => -clog(Cx(real_of_num(1)) - inv(cpow(Cx(real_of_num(p)), (s : Cart[Real, Tybit0[Unit]]))))))
       #|  sequentially
-      #|  forall s. &1 < Re s ==> cexp(--(logzeta s)) = zeta s
-      #|  Re s - &1
-      #|  \\s. cexp(--(logzeta s))
-      #|  forall s. &1 < Re s ==> (zeta has_complex_derivative\n                      (--(logzeta'(s)) * zeta(s))) (at s)
-      #|  forall s. &1 < Re s\n       ==> complex_derivative zeta s = --(logzeta'(s)) * zeta(s)
-      #|  \\p. clog(Cx(&p)) / (Cx(&p) cpow s - Cx(&1))
-      #|  ~(b = Cx(&0)) ==> (--(a / b) = c <=> a = --c * b)
-      #|  --(complex_derivative zeta s / zeta s) = logzeta'(s)
-      #|  forall s. &1 < Re s\n       ==> ((\\p. Cx(log(&p)) / (Cx(&p) cpow s - Cx(&1))) sums\n            (--(complex_derivative zeta s / zeta s))) {p | prime p}
-      #|  forall g. valid_path g ==> valid_path ((--) o g)
-      #|  forall g. pathstart((--) o g) = --(pathstart g)
-      #|  forall g. pathfinish((--) o g) = --(pathfinish g)
-      #|  forall g. path_image((--) o g) = IMAGE (--) (path_image g)
-      #|  t:real^1
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) < Re(s) \226\134\146 cexp(-logzeta(s)) == zeta(s)
+      #|  Re((s : Cart[Real, Tybit0[Unit]])) - real_of_num(1)
+      #|  (s : Cart[Real, Tybit0[Unit]]) => cexp(-logzeta(s))
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) < Re(s) \226\134\146 has_complex_derivative(zeta, -logzeta'(s) * zeta(s), at(s))
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) < Re(s) \226\134\146 complex_derivative(zeta, s) == -logzeta'(s) * zeta(s)
+      #|  (p : Num) => clog(Cx(real_of_num(p))) / (cpow(Cx(real_of_num(p)), (s : Cart[Real, Tybit0[Unit]])) - Cx(real_of_num(1)))
+      #|  !((b : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 (-((a : Cart[Real, Tybit0[Unit]]) / b) == (c : Cart[Real, Tybit0[Unit]])) == (a == -c * b)
+      #|  -(complex_derivative(zeta, (s : Cart[Real, Tybit0[Unit]])) / zeta(s)) == logzeta'(s)
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) < Re(s) \226\134\146 sums((p : Num) => Cx(log(real_of_num(p))) / (cpow(Cx(real_of_num(p)), s) - Cx(real_of_num(1))), -(complex_derivative(zeta, s) / zeta(s)), {(p : Num) | prime(p)})
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], valid_path(g) \226\134\146 valid_path(o(op_minus_minus, g))
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], pathstart(o(op_minus_minus, g)) == -pathstart(g)
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], pathfinish(o(op_minus_minus, g)) == -pathfinish(g)
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], path_image(o(op_minus_minus, g)) == IMAGE(op_minus_minus, path_image(g))
+      #|  (t : Cart[Real, Unit])
       #|  forall g z. valid_path g /\\ ((\\z. f(--z)) has_path_integral (--i)) g\n         ==> (f has_path_integral i) ((--) o g)
-      #|  --z - Cx(&0) = --(z - Cx(&0))
-      #|  Cx(&0) = --x <=> x = Cx(&0)
-      #|  forall g z. valid_path g /\\ ~(Cx(&0) IN path_image g)\n         ==> winding_number((--) o g,Cx(&0)) = winding_number(g,Cx(&0))
+      #|  -(z : Cart[Real, Tybit0[Unit]]) - Cx(real_of_num(0)) == -(z - Cx(real_of_num(0)))
+      #|  (Cx(real_of_num(0)) == -(x : Cart[Real, Tybit0[Unit]])) == (x == Cx(real_of_num(0)))
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : _, valid_path(g) && !IN(Cx(real_of_num(0)), path_image(g)) \226\134\146 winding_number((o(op_minus_minus, g), Cx(real_of_num(0)))) == winding_number((g, Cx(real_of_num(0))))
       #|  forall g z. valid_path g /\\ (\\z. f(--z)) path_integrable_on g\n         ==> f path_integrable_on ((--) o g)
-      #|  forall z R. norm(z) = R\n         ==> Cx(&1) / z + z / Cx(R) pow 2 = Cx(&2 * Re z / R pow 2)
-      #|  norm z = R ==> abs R = R
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 R : Real, norm(z) == R \226\134\146 Cx(real_of_num(1)) / z + z / pow(Cx(R), 2) == Cx(real_of_num(2) * (Re(z) / pow(R, 2)))
+      #|  norm((z : Cart[Real, _])) == (R : Real) \226\134\146 abs(R) == R
       #|  :real
       #|  :real
       #|  :real
-      #|  forall z R. norm(z) = R\n         ==> norm(Cx(&1) / z + z / Cx(R) pow 2) = &2 * abs(Re z) / R pow 2
-      #|  &0 < R pow 2 ==> (&2 * x / R pow 2) pow 2 = &4 * x pow 2 / R pow 4
-      #|  &0 < R pow 2 /\\ &0 < x pow 2 + R pow 2\n    ==> x pow 2 * (inv (x pow 2 + R pow 2) + inv (R pow 2)) pow 2 +\n        R pow 2 * (inv (R pow 2) - inv (x pow 2 + R pow 2)) pow 2 =\n        (x pow 4 + &5 * R pow 2 * x pow 2 + &4 * R pow 4) /\n        (x pow 2 + R pow 2) pow 2 *\n        (x pow 2 / R pow 4)
-      #|  Im z pow 2 = R pow 2
-      #|  &0 <= x /\\ &0 < y ==> &0 < x + y
-      #|  &0 < x pow 2 + R pow 2
-      #|  (--R * a + R * b:real) pow 2 = R pow 2 * (b - a) pow 2
-      #|  (--x * a + --x * b:real) pow 2 = x pow 2 * (a + b) pow 2
-      #|  (--x:real) pow 2 = x pow 2
-      #|  (--x:real) pow 2 = x pow 2
-      #|  z:complex
-      #|  &0 <= &2 * x <=> &0 <= x
-      #|  forall R x z. Re(z) = --x /\\ abs(Im(z)) = R /\\ &0 <= x /\\ &0 < R\n           ==> norm (Cx (&1) / z + z / Cx R pow 2) <= &2 * x / R pow 2
-      #|  &1 <= x
-      #|  &0 <= y ==> x - y <= x
-      #|  &0 < &n + &1
-      #|  0 < n <=> 1 <= n
-      #|  x = y /\\ u <= v ==> x <= u ==> y <= v
-      #|  &1 <= x ==> &0 < x
-      #|  &1 <= b
-      #|  b:real
-      #|  a:real
-      #|  &1 <= x
-      #|  ~(Cx x = Cx(&0))
-      #|  ?y. u = Cx y
-      #|  u:complex
-      #|  n:num
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 R : Real, norm(z) == R \226\134\146 norm(Cx(real_of_num(1)) / z + z / pow(Cx(R), 2)) == real_of_num(2) * (abs(Re(z)) / pow(R, 2))
+      #|  real_of_num(0) < pow((R : Real), 2) \226\134\146 pow(real_of_num(2) * ((x : Real) / pow(R, 2)), 2) == real_of_num(4) * (pow(x, 2) / pow(R, 4))
+      #|  real_of_num(0) < pow((R : Real), 2) && real_of_num(0) < pow((x : Real), 2) + pow(R, 2) \226\134\146 pow(x, 2) * pow(inv(pow(x, 2) + pow(R, 2)) + inv(pow(R, 2)), 2) + pow(R, 2) * pow(inv(pow(R, 2)) - inv(pow(x, 2) + pow(R, 2)), 2) == (pow(x, 4) + (real_of_num(5) * (pow(R, 2) * pow(x, 2)) + real_of_num(4) * pow(R, 4))) / pow(pow(x, 2) + pow(R, 2), 2) * (pow(x, 2) / pow(R, 4))
+      #|  pow(Im((z : Cart[Real, Tybit0[Unit]])), 2) == pow((R : Real), 2)
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) < (y : Real) \226\134\146 real_of_num(0) < x + y
+      #|  real_of_num(0) < pow((x : Real), 2) + pow((R : Real), 2)
+      #|  pow(-(R : Real) * (a : Real) + R * (b : Real), 2) == pow(R, 2) * pow(b - a, 2)
+      #|  pow(-(x : Real) * (a : Real) + -x * (b : Real), 2) == pow(x, 2) * pow(a + b, 2)
+      #|  pow(-(x : Real), 2) == pow(x, 2)
+      #|  pow(-(x : Real), 2) == pow(x, 2)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (real_of_num(0) <= real_of_num(2) * (x : Real)) == (real_of_num(0) <= x)
+      #|  \226\136\128 R : Real, \226\136\128 x : Real, \226\136\128 z : Cart[Real, Tybit0[Unit]], Re(z) == -x && abs(Im(z)) == R && real_of_num(0) <= x && real_of_num(0) < R \226\134\146 norm(Cx(real_of_num(1)) / z + z / pow(Cx(R), 2)) <= real_of_num(2) * (x / pow(R, 2))
+      #|  real_of_num(1) <= (x : Real)
+      #|  real_of_num(0) <= (y : Real) \226\134\146 (x : Real) - y <= x
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+      #|  (0 < (n : Num)) == (1 <= n)
+      #|  (x : Real) == (y : Real) && (u : Real) <= (v : Real) \226\134\146 x <= u \226\134\146 y <= v
+      #|  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(0) < x
+      #|  real_of_num(1) <= (b : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  real_of_num(1) <= (x : Real)
+      #|  !(Cx((x : Real)) == Cx(real_of_num(0)))
+      #|  \226\136\131 y : Real, (u : Cart[Real, Tybit0[Unit]]) == Cx(y)
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
       #|  1
-      #|  \\n. n cpow (Cx(x)) / (Cx(x))
-      #|  \\n. n cpow (Cx(x) - Cx(&1))
-      #|  &1 <= x
-      #|  n = 0 \\/ 1 <= n
-      #|  forall n x.\n          &1 <= x\n          ==> sum(1..n) (\\n. exp((x - &1) * log(&n))) <=\n                  exp(x * log(&n + &1)) / x
+      #|  (n : Cart[Real, Tybit0[Unit]]) => cpow(n, Cx((x : Real))) / Cx(x)
+      #|  (n : Cart[Real, Tybit0[Unit]]) => cpow(n, Cx((x : Real)) - Cx(real_of_num(1)))
+      #|  real_of_num(1) <= (x : Real)
+      #|  (n : Num) == 0 || 1 <= n
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, real_of_num(1) <= x \226\134\146 sum(op_dot_dot(1, n), (n : Num) => exp((x - real_of_num(1)) * log(real_of_num(n)))) <= exp(x * log(real_of_num(n) + real_of_num(1))) / x
       #|  (f has_complex_derivative f') net
-      #|  &1 <= x ==> &1 + a - x <= a
-      #|  2 <= i ==> 0 < i
-      #|  x = y /\\ &1 + u <= v ==> x <= u ==> &1 + y <= v
-      #|  (&1 - x) * a <= (&1 - x) * b ==> (x - &1) * b <= (x - &1) * a
-      #|  &1 <= x ==> &0 < x
-      #|  &1 <= b
-      #|  b:real
-      #|  a:real
-      #|  &0 < x
-      #|  ~(Cx x = Cx(&0))
-      #|  ?y. u = Cx y
-      #|  u:complex
-      #|  n:num
+      #|  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(1) + ((a : Real) - x) <= a
+      #|  2 <= (i : Num) \226\134\146 0 < i
+      #|  (x : Real) == (y : Real) && real_of_num(1) + (u : Real) <= (v : Real) \226\134\146 x <= u \226\134\146 real_of_num(1) + y <= v
+      #|  (real_of_num(1) - (x : Real)) * (a : Real) <= (real_of_num(1) - x) * (b : Real) \226\134\146 (x - real_of_num(1)) * b <= (x - real_of_num(1)) * a
+      #|  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(0) < x
+      #|  real_of_num(1) <= (b : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  real_of_num(0) < (x : Real)
+      #|  !(Cx((x : Real)) == Cx(real_of_num(0)))
+      #|  \226\136\131 y : Real, (u : Cart[Real, Tybit0[Unit]]) == Cx(y)
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
       #|  2
-      #|  \\n. n cpow (Cx(x)) / (Cx(x))
-      #|  \\n. n cpow (Cx(x) - Cx(&1))
-      #|  n = 1
-      #|  2 <= n
-      #|  n = 0 \\/ 1 <= n
-      #|  forall n x.\n          &0 < x /\\ x <= &1\n          ==> sum(1..n) (\\n. exp((x - &1) * log(&n))) <=\n                  exp(x * log(&n)) / x
+      #|  (n : Cart[Real, Tybit0[Unit]]) => cpow(n, Cx((x : Real))) / Cx(x)
+      #|  (n : Cart[Real, Tybit0[Unit]]) => cpow(n, Cx((x : Real)) - Cx(real_of_num(1)))
+      #|  (n : Num) == 1
+      #|  2 <= (n : Num)
+      #|  (n : Num) == 0 || 1 <= n
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, real_of_num(0) < x && x <= real_of_num(1) \226\134\146 sum(op_dot_dot(1, n), (n : Num) => exp((x - real_of_num(1)) * log(real_of_num(n)))) <= exp(x * log(real_of_num(n))) / x
       #|  (f has_complex_derivative f') net
-      #|  1 <= n ==> n - 1 + 1 = n
-      #|  exp(x * log(&(n - 1) + &1)) / x
-      #|  0 < n <=> 1 <= n
-      #|  b <= x * a /\\ c <= x * d ==> c + b <= x * (a + d)
-      #|  x <= a + x <=> &0 <= a
-      #|  exp(x * log(&n)) / x
-      #|  x <= &1 \\/ &1 <= x
-      #|  x = Re z
-      #|  &1 <= Re w
-      #|  0 < k <=> 1 <= k
-      #|  m:num
-      #|  sum(1..n) (\\n. exp((Re(z) - &1) * log(&n)))
-      #|  forall a n. (forall m. 1 <= m ==> norm(a(m)) <= &1) /\\\n         1 <= n /\\ &1 <= Re w /\\ &0 < Re z\n         ==> norm(vsum(1..n) (\\n. a(n) / Cx(&n) cpow (w - z)))\n                  <= exp(Re(z) * log(&n)) * (&1 / &n + &1 / Re(z))
-      #|  x = z /\\ &0 <= y ==> x - y <= z
-      #|  1 <= n ==> 0 < n
-      #|  n + 1 <= m ==> 0 < m
-      #|  &0 < &k
-      #|  k:num
-      #|  x = y /\\ u <= v ==> x <= u ==> y <= v
-      #|  x * a <= x * b ==> --x * b <= --x * a
-      #|  &0 < a /\\ &0 < b
-      #|  b:real
-      #|  a:real
-      #|  &0 < x
-      #|  ~(Cx x = Cx(&0))
-      #|  --x - Cx(&1) = --(x + Cx(&1))
-      #|  ?y. u = Cx y
-      #|  u:complex
-      #|  (x + &1) - &1 = x
-      #|  m:num
-      #|  n + 1
-      #|  \\n. --(n cpow (--(Cx(x)))) / Cx(x)
-      #|  \\n. n cpow (--(Cx(x) + Cx(&1)))
-      #|  n + 1 <= m
-      #|  x = Re z
-      #|  &1 <= Re w
-      #|  0 < r /\\ 1 <= r
-      #|  r:num
-      #|  sum(n+1..m) (\\n. &1 / exp((Re(z) + &1) * log(&n)))
-      #|  forall a n m. (forall m. 1 <= m ==> norm(a(m)) <= &1) /\\\n           1 <= n /\\ &1 <= Re w /\\ &0 < Re z\n           ==> norm(vsum(n+1..m) (\\n. a(n) / Cx(&n) cpow (w + z)))\n                    <= &1 / (Re z * exp(Re z * log(&n)))
+      #|  1 <= (n : Num) \226\134\146 n - 1 + 1 == n
+      #|  exp((x : Real) * log(real_of_num((n : Num) - 1) + real_of_num(1))) / x
+      #|  (0 < (n : Num)) == (1 <= n)
+      #|  (b : Real) <= (x : Real) * (a : Real) && (c : Real) <= x * (d : Real) \226\134\146 c + b <= x * (a + d)
+      #|  ((x : Real) <= (a : Real) + x) == (real_of_num(0) <= a)
+      #|  exp((x : Real) * log(real_of_num((n : Num)))) / x
+      #|  (x : Real) <= real_of_num(1) || real_of_num(1) <= x
+      #|  (x : Real) == Re((z : Cart[Real, Tybit0[Unit]]))
+      #|  real_of_num(1) <= Re((w : Cart[Real, Tybit0[Unit]]))
+      #|  (0 < (k : Num)) == (1 <= k)
+      #|  (m : Num)
+      #|  sum(op_dot_dot(1, (n : Num)), (n : Num) => exp((Re((z : Cart[Real, Tybit0[Unit]])) - real_of_num(1)) * log(real_of_num(n))))
+      #|  \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, (\226\136\128 m : Num, 1 <= m \226\134\146 norm(a(m)) <= real_of_num(1)) && 1 <= n && real_of_num(1) <= Re((w : Cart[Real, Tybit0[Unit]])) && real_of_num(0) < Re((z : Cart[Real, Tybit0[Unit]])) \226\134\146 norm(vsum(op_dot_dot(1, n), (n : Num) => a(n) / cpow(Cx(real_of_num(n)), w - z))) <= exp(Re(z) * log(real_of_num(n))) * (real_of_num(1) / real_of_num(n) + real_of_num(1) / Re(z))
+      #|  (x : Real) == (z : Real) && real_of_num(0) <= (y : Real) \226\134\146 x - y <= z
+      #|  1 <= (n : Num) \226\134\146 0 < n
+      #|  (n : Num) + 1 <= (m : Num) \226\134\146 0 < m
+      #|  real_of_num(0) < real_of_num((k : Num))
+      #|  (k : Num)
+      #|  (x : Real) == (y : Real) && (u : Real) <= (v : Real) \226\134\146 x <= u \226\134\146 y <= v
+      #|  (x : Real) * (a : Real) <= x * (b : Real) \226\134\146 -x * b <= -x * a
+      #|  real_of_num(0) < (a : Real) && real_of_num(0) < (b : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  real_of_num(0) < (x : Real)
+      #|  !(Cx((x : Real)) == Cx(real_of_num(0)))
+      #|  -(x : Cart[Real, Tybit0[Unit]]) - Cx(real_of_num(1)) == -(x + Cx(real_of_num(1)))
+      #|  \226\136\131 y : Real, (u : Cart[Real, Tybit0[Unit]]) == Cx(y)
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  (x : Real) + real_of_num(1) - real_of_num(1) == x
+      #|  (m : Num)
+      #|  (n : Num) + 1
+      #|  (n : Cart[Real, Tybit0[Unit]]) => -cpow(n, -Cx((x : Real))) / Cx(x)
+      #|  (n : Cart[Real, Tybit0[Unit]]) => cpow(n, -(Cx((x : Real)) + Cx(real_of_num(1))))
+      #|  (n : Num) + 1 <= (m : Num)
+      #|  (x : Real) == Re((z : Cart[Real, Tybit0[Unit]]))
+      #|  real_of_num(1) <= Re((w : Cart[Real, Tybit0[Unit]]))
+      #|  0 < (r : Num) && 1 <= r
+      #|  (r : Num)
+      #|  sum(op_dot_dot((n : Num) + 1, (m : Num)), (n : Num) => real_of_num(1) / exp((Re((z : Cart[Real, Tybit0[Unit]])) + real_of_num(1)) * log(real_of_num(n))))
+      #|  \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, \226\136\128 m : Num, (\226\136\128 m : Num, 1 <= m \226\134\146 norm(a(m)) <= real_of_num(1)) && 1 <= n && real_of_num(1) <= Re((w : Cart[Real, Tybit0[Unit]])) && real_of_num(0) < Re((z : Cart[Real, Tybit0[Unit]])) \226\134\146 norm(vsum(op_dot_dot(n + 1, m), (n : Num) => a(n) / cpow(Cx(real_of_num(n)), w + z))) <= real_of_num(1) / (Re(z) * exp(Re(z) * log(real_of_num(n))))
       #|  (f has_complex_derivative f') net
       #|  1
-      #|  Cx d
-      #|  abs x = abs(x - &0)
-      #|  forall d M R. &0 < d\n           ==> forall e. &0 < e\n                   ==> ?N. forall n. N <= n\n                               ==> abs(&2 * pi / &n +\n                                       &6 * M * R / (d * exp (d * log (&n))) +\n                                       &4 * M / (R * log (&n)) pow 2) < e
-      #|  &0 < R
-      #|  d <= R
-      #|  &0 < d
-      #|  &0 <= d * x /\\ d * x <= d * &1
-      #|  &2 * M * r * d * x = M * (&2 * (d * x) * r)
-      #|  (a * b) * c:real = (a * c) * b
-      #|  &0 < d ==> abs d = d
-      #|  &0 - d * x = --(d * x)
-      #|  x:real
-      #|  &0 <= (M * R) * (b - i) ==> (&2 * M * R) * i <= &2 * M * R * b
-      #|  a <= b ==> x <= a ==> x <= b
+      #|  Cx((d : Real))
+      #|  abs((x : Real)) == abs(x - real_of_num(0))
+      #|  \226\136\128 d : Real, \226\136\128 M : Real, \226\136\128 R : Real, real_of_num(0) < d \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 abs(real_of_num(2) * (pi / real_of_num(n)) + (real_of_num(6) * (M * (R / (d * exp(d * log(real_of_num(n)))))) + real_of_num(4) * (M / pow(R * log(real_of_num(n)), 2)))) < e))
+      #|  real_of_num(0) < (R : Real)
+      #|  (d : Real) <= (R : Real)
+      #|  real_of_num(0) < (d : Real)
+      #|  real_of_num(0) <= (d : Real) * (x : Real) && d * x <= d * real_of_num(1)
+      #|  real_of_num(2) * ((M : Real) * ((r : Real) * ((d : Real) * (x : Real)))) == M * (real_of_num(2) * (d * x * r))
+      #|  (a : Real) * (b : Real) * (c : Real) == a * c * b
+      #|  real_of_num(0) < (d : Real) \226\134\146 abs(d) == d
+      #|  real_of_num(0) - (d : Real) * (x : Real) == -(d * x)
+      #|  (x : Real)
+      #|  real_of_num(0) <= (M : Real) * (R : Real) * ((b : Real) - (i : Real)) \226\134\146 real_of_num(2) * (M * R) * i <= real_of_num(2) * (M * (R * b))
+      #|  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
       #|  1
-      #|  a /\\ b /\\ c /\\ d /\\ e ==> f <=>\n                             c /\\ d ==> a /\\ b /\\ e ==> f
-      #|  (forall x. linepath(complex (&0,R),complex (--d,R)) x =\n          ii * Cx(R) - Cx(d * drop x)) /\\\n     (forall x. linepath(Cx (&0),Cx d) x = Cx(d * drop x)) /\\\n     (complex(--d,R) - complex(&0,R) = --Cx(d)) /\\\n     (forall x. linepath(complex (--d,--R),complex(&0,--R)) (vec 1 - x) =\n          --ii * Cx(R) - Cx(d * drop x)) /\\\n     (complex(&0,--R) - complex(--d,--R) = Cx(d))
-      #|  --x + y:real^1 = y - x
-      #|  vec 1:real^1
-      #|  ~(-- &1 = &0)
-      #|  ((\\z. f(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx R pow 2))\n       has_path_integral integral_fC')\n      (linepath (complex(--d,--R),complex(&0,--R)))
-      #|  ((\\z. f(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx R pow 2))\n       has_path_integral integral_fC)\n       (linepath (complex (&0,R),complex (--d,R)))
-      #|  Cx(&2) * Cx(M) / Cx(R) pow 2
-      #|  &0 * x <= &1 - y /\\ &1 - y <= &1 <=>\n                            &0 <= y /\\ y <= &1
-      #|  &0 <= integral_bound /\\ integral_bound <= inv(log(&N) pow 2)
-      #|  integral_bound =\n    inv(log(&N) pow 2) *\n    (&1 - (&1 + d * log(&N)) * inv(exp(d * log (&N))))
-      #|  &1 - (&1 + d) = --d
-      #|  --x * y - --x * z:complex = x * (z - y)
-      #|  ~(clog(Cx(&N)) = Cx(&0))
-      #|  z:complex
-      #|  (:complex)
-      #|  linepath(Cx(&0),Cx(d))
-      #|  \\z. z * Cx(&N) cpow (--z)
-      #|  \\z. --(inv(clog(Cx(&N)) pow 2)) * (Cx(&1) + z * clog(Cx(&N))) *\n         Cx(&N) cpow (--z)
-      #|  abs(Re z)
-      #|  abs(Im z) <= R
-      #|  d <= R
-      #|  &0 < R
-      #|  &0 < d
-      #|  d pow 2 <= R pow 2 /\\ i pow 2 <= R pow 2\n        ==> --d pow 2 + i pow 2 <= &2 * R pow 2
-      #|  norm(i) = &1 /\\ norm(z) <= &2 ==> norm(i + z) <= &3
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) && (e : Bool) \226\134\146 (f : Bool)) == (c && d \226\134\146 a && b && e \226\134\146 f)
+      #|  (\226\136\128 x : Cart[Real, Unit], linepath((complex((real_of_num(0), (R : Real))), complex((-(d : Real), R))), x) == ii * Cx(R) - Cx(d * drop(x))) && (\226\136\128 x : Cart[Real, Unit], linepath((Cx(real_of_num(0)), Cx(d)), x) == Cx(d * drop(x))) && complex((-d, R)) - complex((real_of_num(0), R)) == -Cx(d) && (\226\136\128 x : Cart[Real, Unit], linepath((complex((-d, -R)), complex((real_of_num(0), -R))), vec(1) - x) == -ii * Cx(R) - Cx(d * drop(x))) && complex((real_of_num(0), -R)) - complex((-d, -R)) == Cx(d)
+      #|  -(x : Cart[Real, Unit]) + (y : Cart[Real, Unit]) == y - x
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  !(-real_of_num(1) == real_of_num(0))
+      #|  has_path_integral((z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z) * (cpow(Cx(real_of_num((N : Num))), z) * (Cx(real_of_num(1)) / z + z / pow(Cx((R : Real)), 2))), (integral_fC' : Cart[Real, Tybit0[Unit]]), linepath((complex((-(d : Real), -R)), complex((real_of_num(0), -R)))))
+      #|  has_path_integral((z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z) * (cpow(Cx(real_of_num((N : Num))), z) * (Cx(real_of_num(1)) / z + z / pow(Cx((R : Real)), 2))), (integral_fC : Cart[Real, Tybit0[Unit]]), linepath((complex((real_of_num(0), R)), complex((-(d : Real), R)))))
+      #|  Cx(real_of_num(2)) * (Cx((M : Real)) / pow(Cx((R : Real)), 2))
+      #|  (real_of_num(0) * (x : Real) <= real_of_num(1) - (y : Real) && real_of_num(1) - y <= real_of_num(1)) == (real_of_num(0) <= y && y <= real_of_num(1))
+      #|  real_of_num(0) <= (integral_bound : Real) && integral_bound <= inv(pow(log(real_of_num((N : Num))), 2))
+      #|  (integral_bound : Real) == inv(pow(log(real_of_num((N : Num))), 2)) * (real_of_num(1) - (real_of_num(1) + (d : Real) * log(real_of_num(N))) * inv(exp(d * log(real_of_num(N)))))
+      #|  real_of_num(1) - (real_of_num(1) + (d : Real)) == -d
+      #|  -(x : Cart[Real, Tybit0[Unit]]) * (y : Cart[Real, Tybit0[Unit]]) - -x * (z : Cart[Real, Tybit0[Unit]]) == x * (z - y)
+      #|  !(clog(Cx(real_of_num((N : Num)))) == Cx(real_of_num(0)))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (UNIV : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  linepath((Cx(real_of_num(0)), Cx((d : Real))))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => z * cpow(Cx(real_of_num((N : Num))), -z)
+      #|  (z : Cart[Real, Tybit0[Unit]]) => -inv(pow(clog(Cx(real_of_num((N : Num)))), 2)) * ((Cx(real_of_num(1)) + z * clog(Cx(real_of_num(N)))) * cpow(Cx(real_of_num(N)), -z))
+      #|  abs(Re((z : Cart[Real, Tybit0[Unit]])))
+      #|  abs(Im((z : Cart[Real, Tybit0[Unit]]))) <= (R : Real)
+      #|  (d : Real) <= (R : Real)
+      #|  real_of_num(0) < (R : Real)
+      #|  real_of_num(0) < (d : Real)
+      #|  pow((d : Real), 2) <= pow((R : Real), 2) && pow((i : Real), 2) <= pow(R, 2) \226\134\146 pow(-d, 2) + pow(i, 2) <= real_of_num(2) * pow(R, 2)
+      #|  norm((i : Cart[Real, Tybit0[Unit]])) == real_of_num(1) && norm((z : Cart[Real, Tybit0[Unit]])) <= real_of_num(2) \226\134\146 norm(i + z) <= real_of_num(3)
       #|  :real
       #|  :real
-      #|  ~(z = Cx(&0)) /\\ ~(R = Cx(&0))\n      ==> Cx(&1) / z + z / R pow 2 =\n          (Cx(&1) + (z / R) pow 2) * inv(z)
-      #|  &0 < d
-      #|  Re z = --d
-      #|  ~(z = Cx(&0))
-      #|  &0 < d
-      #|  &0 < R
-      #|  z:complex
-      #|  &0 < R
-      #|  {a,b} SUBSET s <=> a IN s /\\ b IN s
-      #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
-      #|  abs(x) <= r <=> x >= --r /\\ x <= r
-      #|  segment[complex(--d,R),complex(--d,--R)] SUBSET\n                       {z | abs(Im z) <= R}
-      #|  z IN segment[complex(--d,R),complex(--d,--R)]
-      #|  Re z = --d
-      #|  z:complex
-      #|  &0 < R ==> abs(--R) = R
-      #|  a = b ==> x <= a ==> x <= b
-      #|  complex (--d,--R) - complex (--d,R) =\n                    Cx(&2) * ii * Cx(--R)
-      #|  M * inv(exp(d * log(&N))) * &3 / d
-      #|  complex (--d,--R)
-      #|  complex (--d,R)
-      #|  integral_fD:complex
-      #|  \\z. f(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx R pow 2)
-      #|  norm(y) <= a /\\ norm(x) <= &2 * b /\\ norm(z) <= &2 * b\n    ==> norm(x + y + z) <= a + &4 * b
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) && !((R : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 Cx(real_of_num(1)) / z + z / pow(R, 2) == (Cx(real_of_num(1)) + pow(z / R, 2)) * inv(z)
+      #|  real_of_num(0) < (d : Real)
+      #|  Re((z : Cart[Real, Tybit0[Unit]])) == -(d : Real)
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  real_of_num(0) < (d : Real)
+      #|  real_of_num(0) < (R : Real)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(0) < (R : Real)
+      #|  SUBSET({(a : _), (b : _)}, (s : (_) -> Bool)) == (IN(a, s) && IN(b, s))
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
+      #|  (abs((x : Real)) <= (r : Real)) == (x >= -r && x <= r)
+      #|  SUBSET(segment([(complex((-(d : Real), (R : Real))), complex((-d, -R)))]), {(z : Cart[Real, Tybit0[Unit]]) | abs(Im(z)) <= R})
+      #|  IN((z : Cart[Real, Tybit0[Unit]]), segment([(complex((-(d : Real), (R : Real))), complex((-d, -R)))]))
+      #|  Re((z : Cart[Real, Tybit0[Unit]])) == -(d : Real)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(0) < (R : Real) \226\134\146 abs(-R) == R
+      #|  (a : Real) == (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+      #|  complex((-(d : Real), -(R : Real))) - complex((-d, R)) == Cx(real_of_num(2)) * (ii * Cx(-R))
+      #|  (M : Real) * (inv(exp((d : Real) * log(real_of_num((N : Num))))) * (real_of_num(3) / d))
+      #|  complex((-(d : Real), -(R : Real)))
+      #|  complex((-(d : Real), (R : Real)))
+      #|  (integral_fD : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z) * (cpow(Cx(real_of_num((N : Num))), z) * (Cx(real_of_num(1)) / z + z / pow(Cx((R : Real)), 2)))
+      #|  norm((y : Cart[Real, Tybit0[Unit]])) <= (a : Real) && norm((x : Cart[Real, Tybit0[Unit]])) <= real_of_num(2) * (b : Real) && norm((z : Cart[Real, Tybit0[Unit]])) <= real_of_num(2) * b \226\134\146 norm(x + (y + z)) <= a + real_of_num(4) * b
       #|  :real
       #|  :real
       #|  :real
-      #|  B:real^1->complex
-      #|  \\z. f(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx R pow 2)
-      #|  integral_fB:complex = integral_fC + integral_fD + integral_fC'
-      #|  integral_fC':complex
-      #|  integral_fD:complex
-      #|  integral_fC:complex
-      #|  (\\z. f(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx R pow 2))\n    path_integrable_on B
-      #|  1 <= N <=> ~(N = 0)
-      #|  forall w. vsum (1..N) (\\n. a n / Cx (&n) cpow w) = S_N w
-      #|  z:complex
-      #|  x <= &1 ==> &2 * x <= &2
-      #|  &0 < n /\\ &0 < r\n                   ==> (&2 * z * &1 / n / r pow 2) * n * r = &2 * z / r
-      #|  &0 < x ==> (n + &1 / x) * &2 * x / y = &2 / y + &2 * x * n / y
-      #|  ~(e = &0) ==> (e * x) * inv(e) * y = x * y
-      #|  &0 < z ==> abs z = z
-      #|  (exp (Re z * log (&N)) * (&1 / &N + &1 / Re z)) *\n                inv(exp(Re z * log(&N))) * (&2 * abs(Re z) / R pow 2)
-      #|  ~(z = complex(&0,R))
-      #|  ~(z = complex(&0,--R))
-      #|  &0 pow 2 + x pow 2 = y pow 2 <=> x = y \\/ x = --y
-      #|  Re z = &0
-      #|  z:complex
-      #|  path_image A SUBSET {z | Re z >= &0 /\\ norm z = R}
-      #|  norm(z) = R /\\ &0 < Re z
-      #|  z:complex
-      #|  &0 < x ==> --(x / &2) <= x / &2
-      #|  &0 < R /\\ ~(N = &0)\n      ==> (&2 / R pow 2 + &2 / (N * R)) * R * (p / &2 - --(p / &2)) =\n          &2 * p / R + &2 * p / N
-      #|  {complex(&0,R),complex(&0,--R)}
-      #|  &2 / R pow 2 + &2 / (&N * R)
-      #|  pi / &2
-      #|  --(pi / &2)
-      #|  R:real
-      #|  Cx(&0)
-      #|  integral_sA':complex
-      #|  \\z. S_N(w - z) * Cx(&N) cpow (--z) * (Cx(&1) / z + z / Cx R pow 2)
-      #|  N + 1 <= n
-      #|  ~(N = 0)
-      #|  n:num
-      #|  N:num
+      #|  (B : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z) * (cpow(Cx(real_of_num((N : Num))), z) * (Cx(real_of_num(1)) / z + z / pow(Cx((R : Real)), 2)))
+      #|  (integral_fB : Cart[Real, Tybit0[Unit]]) == (integral_fC : Cart[Real, Tybit0[Unit]]) + ((integral_fD : Cart[Real, Tybit0[Unit]]) + (integral_fC' : Cart[Real, Tybit0[Unit]]))
+      #|  (integral_fC' : Cart[Real, Tybit0[Unit]])
+      #|  (integral_fD : Cart[Real, Tybit0[Unit]])
+      #|  (integral_fC : Cart[Real, Tybit0[Unit]])
+      #|  path_integrable_on((z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z) * (cpow(Cx(real_of_num((N : Num))), z) * (Cx(real_of_num(1)) / z + z / pow(Cx((R : Real)), 2))), (B : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (1 <= (N : Num)) == !(N == 0)
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], vsum(op_dot_dot(1, (N : Num)), (n : Num) => (a : (Num) -> Cart[Real, Tybit0[Unit]])(n) / cpow(Cx(real_of_num(n)), w)) == (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (x : Real) <= real_of_num(1) \226\134\146 real_of_num(2) * x <= real_of_num(2)
+      #|  real_of_num(0) < (n : Real) && real_of_num(0) < (r : Real) \226\134\146 real_of_num(2) * ((z : Real) * (real_of_num(1) / n / pow(r, 2))) * (n * r) == real_of_num(2) * (z / r)
+      #|  real_of_num(0) < (x : Real) \226\134\146 ((n : Real) + real_of_num(1) / x) * (real_of_num(2) * (x / (y : Real))) == real_of_num(2) / y + real_of_num(2) * (x * (n / y))
+      #|  !((e : Real) == real_of_num(0)) \226\134\146 e * (x : Real) * (inv(e) * (y : Real)) == x * y
+      #|  real_of_num(0) < (z : Real) \226\134\146 abs(z) == z
+      #|  exp(Re((z : Cart[Real, Tybit0[Unit]])) * log(real_of_num((N : Num)))) * (real_of_num(1) / real_of_num(N) + real_of_num(1) / Re(z)) * (inv(exp(Re(z) * log(real_of_num(N)))) * (real_of_num(2) * (abs(Re(z)) / pow((R : Real), 2))))
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == complex((real_of_num(0), (R : Real))))
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == complex((real_of_num(0), -(R : Real))))
+      #|  (pow(real_of_num(0), 2) + pow((x : Real), 2) == pow((y : Real), 2)) == (x == y || x == -y)
+      #|  Re((z : Cart[Real, Tybit0[Unit]])) == real_of_num(0)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  SUBSET(path_image((A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), {(z : Cart[Real, Tybit0[Unit]]) | Re(z) >= real_of_num(0) && norm(z) == (R : Real)})
+      #|  norm((z : Cart[Real, Tybit0[Unit]])) == (R : Real) && real_of_num(0) < Re(z)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(0) < (x : Real) \226\134\146 -(x / real_of_num(2)) <= x / real_of_num(2)
+      #|  real_of_num(0) < (R : Real) && !((N : Real) == real_of_num(0)) \226\134\146 (real_of_num(2) / pow(R, 2) + real_of_num(2) / (N * R)) * (R * ((p : Real) / real_of_num(2) - -(p / real_of_num(2)))) == real_of_num(2) * (p / R) + real_of_num(2) * (p / N)
+      #|  {complex((real_of_num(0), (R : Real))), complex((real_of_num(0), -R))}
+      #|  real_of_num(2) / pow((R : Real), 2) + real_of_num(2) / (real_of_num((N : Num)) * R)
+      #|  pi / real_of_num(2)
+      #|  -(pi / real_of_num(2))
+      #|  (R : Real)
+      #|  Cx(real_of_num(0))
+      #|  (integral_sA' : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) - z) * (cpow(Cx(real_of_num((N : Num))), -z) * (Cx(real_of_num(1)) / z + z / pow(Cx((R : Real)), 2)))
+      #|  (N : Num) + 1 <= (n : Num)
+      #|  !((N : Num) == 0)
+      #|  (n : Num)
+      #|  (N : Num)
       #|  1
-      #|  y + z = x ==> norm(x - y) <= norm(z)
+      #|  (y : Cart[Real, Tybit0[Unit]]) + (z : Cart[Real, Tybit0[Unit]]) == (x : Cart[Real, Tybit0[Unit]]) \226\134\146 norm(x - y) <= norm(z)
       #|  :real
       #|  :real
-      #|  1 <= N <=> ~(N = 0)
-      #|  norm(vsum(N+1..n) (\\n. a n / Cx(&n) cpow (w + z)))
-      #|  forall w. vsum (1..N) (\\n. a n / Cx (&n) cpow w) = S_N w
-      #|  n:num
-      #|  N + 1
-      #|  &0 < Re z
-      #|  Re w = &1
-      #|  &0 < z ==> &1 + z > &1
-      #|  forall z. Re z > &1 ==> ((\\n. a n / Cx(&n) cpow z) sums f z) (from 1)
-      #|  w + z:complex
-      #|  forall w. (f:complex->complex) w - S_N w = r_N w
-      #|  \\n. vsum(1..n) (\\n. a n / Cx (&n) cpow (w + z)) - S_N(w + z)
+      #|  (1 <= (N : Num)) == !(N == 0)
+      #|  norm(vsum(op_dot_dot((N : Num) + 1, (n : Num)), (n : Num) => (a : (Num) -> Cart[Real, Tybit0[Unit]])(n) / cpow(Cx(real_of_num(n)), (w : Cart[Real, Tybit0[Unit]]) + (z : Cart[Real, Tybit0[Unit]]))))
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], vsum(op_dot_dot(1, (N : Num)), (n : Num) => (a : (Num) -> Cart[Real, Tybit0[Unit]])(n) / cpow(Cx(real_of_num(n)), w)) == (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w)
+      #|  (n : Num)
+      #|  (N : Num) + 1
+      #|  real_of_num(0) < Re((z : Cart[Real, Tybit0[Unit]]))
+      #|  Re((w : Cart[Real, Tybit0[Unit]])) == real_of_num(1)
+      #|  real_of_num(0) < (z : Real) \226\134\146 real_of_num(1) + z > real_of_num(1)
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], Re(z) > real_of_num(1) \226\134\146 sums((n : Num) => (a : (Num) -> Cart[Real, Tybit0[Unit]])(n) / cpow(Cx(real_of_num(n)), z), (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z), from(1))
+      #|  (w : Cart[Real, Tybit0[Unit]]) + (z : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w) - (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w) == (r_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w)
+      #|  (n : Num) => vsum(op_dot_dot(1, n), (n : Num) => (a : (Num) -> Cart[Real, Tybit0[Unit]])(n) / cpow(Cx(real_of_num(n)), (w : Cart[Real, Tybit0[Unit]]) + (z : Cart[Real, Tybit0[Unit]]))) - (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w + z)
       #|  sequentially
-      #|  &0 < z /\\ ~(e = &0)\n        ==> &1 / (z * e) * e * &2 * z / R pow 2 = &2 / R pow 2
-      #|  &0 < z ==> abs z = z
-      #|  &1 / (Re z * exp(Re z * log(&N))) *\n                exp(Re z * log(&N)) * (&2 * abs(Re z) / R pow 2)
-      #|  ~(z = complex(&0,R))
-      #|  ~(z = complex(&0,--R))
-      #|  &0 pow 2 + x pow 2 = y pow 2 <=> x = y \\/ x = --y
-      #|  Re z = &0
-      #|  z:complex
-      #|  path_image A SUBSET {z | Re z >= &0 /\\ norm z = R}
-      #|  norm(z) = R /\\ &0 < Re z
-      #|  z:complex
-      #|  ~(r = &0) ==> &2 / r pow 2 * r * x = &2 * x / r
-      #|  --(p / &2) <= (p / &2) <=> &0 <= p
-      #|  p / &2 - --(p / &2) = p
-      #|  {complex(&0,R),complex(&0,--R)}
-      #|  &2 / R pow 2
-      #|  pi / &2
-      #|  --(pi / &2)
-      #|  R:real
-      #|  Cx(&0)
-      #|  integral_rA:complex
-      #|  \\z. r_N(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx R pow 2)
-      #|  norm(x) <= &2 * a /\\ norm(y) <= &2 * a + b /\\ norm(z) <= c\n    ==> norm(x - y + z) <= &4 * a + b + c
+      #|  real_of_num(0) < (z : Real) && !((e : Real) == real_of_num(0)) \226\134\146 real_of_num(1) / (z * e) * (e * (real_of_num(2) * (z / pow((R : Real), 2)))) == real_of_num(2) / pow(R, 2)
+      #|  real_of_num(0) < (z : Real) \226\134\146 abs(z) == z
+      #|  real_of_num(1) / (Re((z : Cart[Real, Tybit0[Unit]])) * exp(Re(z) * log(real_of_num((N : Num))))) * (exp(Re(z) * log(real_of_num(N))) * (real_of_num(2) * (abs(Re(z)) / pow((R : Real), 2))))
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == complex((real_of_num(0), (R : Real))))
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == complex((real_of_num(0), -(R : Real))))
+      #|  (pow(real_of_num(0), 2) + pow((x : Real), 2) == pow((y : Real), 2)) == (x == y || x == -y)
+      #|  Re((z : Cart[Real, Tybit0[Unit]])) == real_of_num(0)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  SUBSET(path_image((A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), {(z : Cart[Real, Tybit0[Unit]]) | Re(z) >= real_of_num(0) && norm(z) == (R : Real)})
+      #|  norm((z : Cart[Real, Tybit0[Unit]])) == (R : Real) && real_of_num(0) < Re(z)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  !((r : Real) == real_of_num(0)) \226\134\146 real_of_num(2) / pow(r, 2) * (r * (x : Real)) == real_of_num(2) * (x / r)
+      #|  (-((p : Real) / real_of_num(2)) <= p / real_of_num(2)) == (real_of_num(0) <= p)
+      #|  (p : Real) / real_of_num(2) - -(p / real_of_num(2)) == p
+      #|  {complex((real_of_num(0), (R : Real))), complex((real_of_num(0), -R))}
+      #|  real_of_num(2) / pow((R : Real), 2)
+      #|  pi / real_of_num(2)
+      #|  -(pi / real_of_num(2))
+      #|  (R : Real)
+      #|  Cx(real_of_num(0))
+      #|  (integral_rA : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (r_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z) * (cpow(Cx(real_of_num((N : Num))), z) * (Cx(real_of_num(1)) / z + z / pow(Cx((R : Real)), 2)))
+      #|  norm((x : Cart[Real, Tybit0[Unit]])) <= real_of_num(2) * (a : Real) && norm((y : Cart[Real, Tybit0[Unit]])) <= real_of_num(2) * a + (b : Real) && norm((z : Cart[Real, Tybit0[Unit]])) <= (c : Real) \226\134\146 norm(x - y + z) <= real_of_num(4) * a + (b + c)
       #|  :real
       #|  :real
       #|  :real
-      #|  abs x < e ==> x < e
-      #|  &4 * pi / R <= &4 * pi * (e / &3) /\\\n      y < &2 / &3 * e * pi\n      ==> &4 * pi / R + y < e * &2 * pi
-      #|  &4 * pi / R + &2 * pi / &N +\n              &6 * M * R / (d * exp(d * log(&N))) +\n              &4 * M / (R * log(&N)) pow 2
-      #|  &0 < &2 * p <=> &0 < p
-      #|  forall w. (f:complex->complex) w - S_N w = r_N w
-      #|  ~(z = Cx(&0)) ==> (x = y / z <=> z * x = y)
-      #|  r_N(w:complex) = ((integral_rA - integral_sA') + integral_fB) /\n                      (Cx(&2) * Cx(pi) * ii)
-      #|  forall w. (f:complex->complex) w - S_N w = r_N w
-      #|  A:real^1->complex
-      #|  \\z. r_N(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx R pow 2)
-      #|  integral_fA - integral_sA:complex = integral_rA
-      #|  integral_rA:complex
-      #|  forall w. (f:complex->complex) w - S_N w = r_N w
-      #|  (\\z. r_N(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx(R) pow 2))\n    path_integrable_on A
-      #|  (A:real^1->complex) = (--) o (--) o A
-      #|  ((\\z. S_N(w - z) * Cx (&N) cpow (--z) * (Cx (&1) / z + z / Cx R pow 2))\n     has_path_integral integral_sA') A
-      #|  A ++ A':real^1->complex
-      #|  \\z. S_N(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx R pow 2)
-      #|  integral_sA + integral_sA' = Cx(&2) * Cx pi * ii * S_N(w:complex)
-      #|  integral_sA':complex
-      #|  integral_sA:complex
-      #|  ~(x IN s) /\\ s SUBSET t ==> s SUBSET (t DELETE x)
-      #|  wever = inv(Cx R pow 2)
-      #|  ~(z = Cx(&0))
-      #|  z = Cx(&0)
-      #|  z:complex
-      #|  Cx(&1) + Cx(&0) pow 2 * z = Cx(&1)
-      #|  Cx(&0)
-      #|  A ++ A':real^1->complex
-      #|  cball(Cx(&0),R)
-      #|  \\z. S_N(w + z) * Cx(&N) cpow z * (Cx(&1) + z pow 2 / Cx(R) pow 2)
-      #|  ((\\z. S_N(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx(R) pow 2))\n    has_path_integral (Cx(&2) * Cx pi * ii * S_N(w))) (A ++ A')
-      #|  ~(n = 0) <=> 1 <= n
-      #|  forall w. vsum (1..N) (\\n. a n / Cx (&n) cpow w) = S_N w
-      #|  (\\z. S_N (w + z) * Cx (&N) cpow z * (Cx (&1) + z pow 2 * inv (Cx R pow 2)))\n    holomorphic_on (:complex)
-      #|  &0 < t
-      #|  s SUBSET t ==> ~(x IN t) ==> ~(x IN s)
-      #|  t:real
-      #|  Cx(&1)
-      #|  --Cx(&1)
-      #|  x < &1 /\\ y < &1 ==> x + y < &2
-      #|  winding_number(A++A',Cx(&0)) = Cx(&1)
-      #|  s SUBSET t ==> (forall x. x IN t ==> P x) ==> (forall x. x IN s ==> P x)
-      #|  path_image A' SUBSET {z | Re z <= &0 /\\ norm z = R}
-      #|  valid_path(A ++ A') /\\\n    pathstart(A ++ A') = complex(&0,--R) /\\\n    pathfinish(A ++ A') = complex(&0,--R) /\\\n    ~(Cx(&0) IN path_image(A ++ A')) /\\\n    path_image(A ++ A') = path_image A UNION path_image A'
-      #|  Cx(&0) = --x <=> x = Cx(&0)
-      #|  valid_path A' /\\\n    pathstart A' = complex(&0,R) /\\\n    pathfinish A' = complex(&0,--R) /\\\n    ~(Cx(&0) IN path_image A') /\\\n    &0 < Re(winding_number(A',Cx(&0)))
-      #|  A' = (--) o (A:real^1->complex)
-      #|  A ++ B:real^1->complex
-      #|  \\z. f(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx R pow 2)
-      #|  integral_fA + integral_fB = Cx(&2) * Cx pi * ii * f(w:complex)
-      #|  integral_fB:complex
-      #|  integral_fA:complex
-      #|  &0 < d
-      #|  ~(x IN s) /\\ s SUBSET t ==> s SUBSET (t DELETE x)
-      #|  abs(n1) <= n /\\ abs(n2) <= n\n        ==>  n < min d R ==> n1 >= --d /\\ abs n2 <= R
-      #|  min d R:real
-      #|  clog(Cx(&N)) * Cx(&N) cpow z
-      #|  z:complex
-      #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
-      #|  abs(x) <= a <=> x >= --a /\\ x <= a
-      #|  wever = inv(Cx R pow 2)
-      #|  ~(z = Cx(&0))
-      #|  z = Cx(&0)
-      #|  z:complex
-      #|  Cx(&1) + Cx(&0) pow 2 * z = Cx(&1)
-      #|  Cx(&0)
-      #|  A ++ B:real^1->complex
-      #|  {z | Re(z) >= --d /\\ abs(Im z) <= R}
-      #|  \\z. f(w + z) * Cx(&N) cpow z * (Cx(&1) + z pow 2 / Cx(R) pow 2)
-      #|  ((\\z. f(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx(R) pow 2))\n    has_path_integral (Cx(&2) * Cx pi * ii * f(w))) (A ++ B)
-      #|  &0 < t
-      #|  s SUBSET t ==> ~(x IN t) ==> ~(x IN s)
-      #|  t:real
-      #|  Cx(&1)
-      #|  --Cx(&1)
-      #|  x < &1 /\\ y < &1 ==> x + y < &2
-      #|  winding_number(A++B,Cx(&0)) = Cx(&1)
-      #|  valid_path(A ++ B) /\\\n    pathstart(A ++ B) = complex(&0,--R) /\\\n    pathfinish(A ++ B) = complex(&0,--R) /\\\n    ~(Cx(&0) IN path_image(A ++ B))
-      #|  &0 < R
-      #|  &0 < d
-      #|  path_image(p1 ++ p2) SUBSET path_image p1 UNION path_image p2 /\\\n             path_image p1 SUBSET s /\\ path_image p2 SUBSET s\n             ==> path_image(p1 ++ p2) SUBSET s
-      #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
-      #|  convex {z | --d <= Re z /\\ Re z <= &0 /\\ abs (Im z) <= R}
-      #|  path_image B SUBSET {z | --d <= Re z /\\ Re(z) <= &0 /\\ abs(Im z) <= R}
-      #|  pathstart B = complex(&0,R) /\\\n    pathfinish B = complex(&0,--R)
-      #|  &0 = (&1 - u) * x + u * x <=> x = &0
-      #|  valid_path B /\\\n    ~(Cx(&0) IN path_image B) /\\\n    &0 < Re(winding_number(B,Cx(&0)))
-      #|  B = linepath(complex(&0,R),complex(--d,R)) ++\n                  linepath(complex(--d,R),complex(--d,--R)) ++\n                  linepath(complex(--d,--R),complex(&0,--R))
-      #|  &0 < R
-      #|  s SUBSET t ==> ~(x IN t) ==> ~(x IN s)
-      #|  ~(Cx(&0) IN path_image A)
-      #|  &0 < r ==> abs r = r
-      #|  --p < p <=> &0 < p
-      #|  path_image A SUBSET {z | Re(z) >= &0 /\\ norm(z) = R}
-      #|  valid_path A /\\\n    pathstart A = complex(&0,--R) /\\\n    pathfinish A = complex(&0,R) /\\\n    &0 < Re(winding_number(A,Cx(&0)))
-      #|  A = partcirclepath(Cx(&0),R,--(pi / &2),pi / &2)
-      #|  r_N(w) = (f:complex->complex)(w) - S_N(w)
-      #|  S_N(w) = vsum(1..N) (\\n. a(n) / Cx(&n) cpow w)
-      #|  ~(N = 0) /\\ 1 < N
-      #|  N0 + 2 <= N ==> N0 <= N
-      #|  N:num
-      #|  N:num
-      #|  N0 + 2
-      #|  N0:num
-      #|  &0 < &2 / &3
-      #|  &2 / &3 * e * pi
-      #|  R:real
-      #|  M:real
-      #|  d:real
-      #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
-      #|  x <= Im z <=> Im z >= x
-      #|  &0 < d
-      #|  cball(Cx(&0),&2 * R + d)
-      #|  a /\\ b ==> c <=> b ==> a ==> c
-      #|  IMAGE (\\z. f (w + z):complex)\n                        {z | Re z >= --d /\\ abs (Im z) <= R /\\ Re(z) <= R}
-      #|  M:real
-      #|  ?M. &0 < M /\\\n        forall z. Re z >= --d /\\ abs (Im z) <= R /\\ Re(z) <= R\n            ==> norm(f(w + z):complex) <= M
-      #|  ~(&0 <= Re z)
-      #|  v:complex
-      #|  --(x / &2) <= z ==> &2 * --z <= x
-      #|  &0 < b ==> abs(b / &2) = b / &2
-      #|  &0 < b * b /\\ x <= (b / &2) pow 2 /\\ y <= (b / &2) pow 2\n      ==> x + y < b pow 2
-      #|  &0 < e /\\ x < abs e ==> x < e
-      #|  v:complex
-      #|  forall z. &0 <= Re z ==> &0 < bs z /\\ g holomorphic_on ball (z,bs z)
-      #|  t SUBSET s ==> (x IN s ==> P x) ==> (x IN t ==> P x)
-      #|  (v:complex) IN t
-      #|  Re v = &0
-      #|  v:complex
-      #|  abs(Im z) <= R
-      #|  i SUBSET UNIONS s ==> forall x. x IN i ==> x IN UNIONS s
-      #|  complex(&0,Im z)
-      #|  &0 <= Re z
-      #|  z:complex
-      #|  t SUBSET s ==> (forall x. x IN s ==> P x) ==> (forall x. x IN t ==> P x)
-      #|  &0 < R
-      #|  complex(&0,&0)
-      #|  s SUBSET UNIONS (IMAGE g t) ==> ~(s = {}) ==> ~(t = {})
-      #|  inf (IMAGE (bs:complex->real) t) / &2
-      #|  t:complex->bool
-      #|  a /\\ b /\\ c /\\ d <=> d /\\ a /\\ b /\\ c
-      #|  a /\\ b /\\ c <=> c /\\ b /\\ a
-      #|  (forall x. x IN s ==> x IN g x) ==> s SUBSET (UNIONS (IMAGE g s))
-      #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
-      #|  abs(x - a) < e /\\ abs(y - b) < e <=>\n          a < x + e /\\ a > x - e /\\ b < y + e /\\ b > y - e
-      #|  IMAGE (\\z. {w | abs(Re(z - w)) < bs z / &2 /\\ abs(Im(z - w)) < bs z / &2})\n            (interval[complex(&0,--R),complex(&0,R)])
-      #|  complex(&0,R)
-      #|  complex(&0,--R)
-      #|  bs:complex->real
-      #|  x:complex = w + y <=> x - w = y
-      #|  f holomorphic_on ball(w + z,d)
-      #|  d:real
-      #|  &0 <= z ==> &1 <= &1 + z
-      #|  w + z:complex
-      #|  forall z. &1 <= Re z ==> (?e. &0 < e /\\ f holomorphic_on ball (z,e))
-      #|  z:complex
-      #|  forall z. &0 <= Re z ==> ?e. &0 < e /\\ g holomorphic_on ball (z,e)
-      #|  g = \\z. (f:complex->complex) (w + z)
-      #|  {z | Re(z) >= --d /\\ abs(Im z) <= R}
-      #|  min d R
-      #|  d:real
-      #|  ?d. &0 < d /\\\n          (\\z. f(w + z)) holomorphic_on {z | Re(z) >= --d /\\ abs(Im z) <= R}
-      #|  d:real
-      #|  ?d. &0 < d /\\ d <= R /\\\n        (\\z. f(w + z)) holomorphic_on {z | Re(z) >= --d /\\ abs(Im z) <= R}
-      #|  &0 < R
-      #|  R = max (&3 / e) (&1)
-      #|  e:real
-      #|  &1 <= w ==> w > &1 \\/ w = &1
-      #|  w:complex
-      #|  forall f a. (forall n. 1 <= n ==> norm(a(n)) <= &1) /\\\n         f analytic_on {z | Re(z) >= &1} /\\\n         (forall z. Re(z) > &1 ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1))\n         ==> forall z. Re(z) >= &1\n                 ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1)
+      #|  abs((x : Real)) < (e : Real) \226\134\146 x < e
+      #|  real_of_num(4) * (pi / (R : Real)) <= real_of_num(4) * (pi * ((e : Real) / real_of_num(3))) && (y : Real) < real_of_num(2) / real_of_num(3) * (e * pi) \226\134\146 real_of_num(4) * (pi / R) + y < e * (real_of_num(2) * pi)
+      #|  real_of_num(4) * (pi / (R : Real)) + (real_of_num(2) * (pi / real_of_num((N : Num))) + (real_of_num(6) * ((M : Real) * (R / ((d : Real) * exp(d * log(real_of_num(N)))))) + real_of_num(4) * (M / pow(R * log(real_of_num(N)), 2))))
+      #|  (real_of_num(0) < real_of_num(2) * (p : Real)) == (real_of_num(0) < p)
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w) - (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w) == (r_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w)
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 ((x : Cart[Real, Tybit0[Unit]]) == (y : Cart[Real, Tybit0[Unit]]) / z) == (z * x == y)
+      #|  (r_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]])) == ((integral_rA : Cart[Real, Tybit0[Unit]]) - (integral_sA' : Cart[Real, Tybit0[Unit]]) + (integral_fB : Cart[Real, Tybit0[Unit]])) / (Cx(real_of_num(2)) * (Cx(pi) * ii))
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w) - (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w) == (r_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w)
+      #|  (A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (r_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z) * (cpow(Cx(real_of_num((N : Num))), z) * (Cx(real_of_num(1)) / z + z / pow(Cx((R : Real)), 2)))
+      #|  (integral_fA : Cart[Real, Tybit0[Unit]]) - (integral_sA : Cart[Real, Tybit0[Unit]]) == (integral_rA : Cart[Real, Tybit0[Unit]])
+      #|  (integral_rA : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w) - (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w) == (r_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w)
+      #|  path_integrable_on((z : Cart[Real, Tybit0[Unit]]) => (r_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z) * (cpow(Cx(real_of_num((N : Num))), z) * (Cx(real_of_num(1)) / z + z / pow(Cx((R : Real)), 2))), (A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]) == o(op_minus_minus, o(op_minus_minus, A))
+      #|  has_path_integral((z : Cart[Real, Tybit0[Unit]]) => (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) - z) * (cpow(Cx(real_of_num((N : Num))), -z) * (Cx(real_of_num(1)) / z + z / pow(Cx((R : Real)), 2))), (integral_sA' : Cart[Real, Tybit0[Unit]]), (A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  op_plus_plus((A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), (A' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z) * (cpow(Cx(real_of_num((N : Num))), z) * (Cx(real_of_num(1)) / z + z / pow(Cx((R : Real)), 2)))
+      #|  (integral_sA : Cart[Real, Tybit0[Unit]]) + (integral_sA' : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(2)) * (Cx(pi) * (ii * (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]))))
+      #|  (integral_sA' : Cart[Real, Tybit0[Unit]])
+      #|  (integral_sA : Cart[Real, Tybit0[Unit]])
+      #|  !IN((x : _), (s : (_) -> Bool)) && SUBSET(s, (t : (_) -> Bool)) \226\134\146 SUBSET(s, DELETE(t, x))
+      #|  (wever : Cart[Real, Tybit0[Unit]]) == inv(pow(Cx((R : Real)), 2))
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  Cx(real_of_num(1)) + pow(Cx(real_of_num(0)), 2) * (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1))
+      #|  Cx(real_of_num(0))
+      #|  op_plus_plus((A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), (A' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  cball((Cx(real_of_num(0)), (R : Real)))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z) * (cpow(Cx(real_of_num((N : Num))), z) * (Cx(real_of_num(1)) + pow(z, 2) / pow(Cx((R : Real)), 2)))
+      #|  has_path_integral((z : Cart[Real, Tybit0[Unit]]) => (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z) * (cpow(Cx(real_of_num((N : Num))), z) * (Cx(real_of_num(1)) / z + z / pow(Cx((R : Real)), 2))), Cx(real_of_num(2)) * (Cx(pi) * (ii * S_N(w))), op_plus_plus((A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), (A' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
+      #|  !((n : Num) == 0) == (1 <= n)
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], vsum(op_dot_dot(1, (N : Num)), (n : Num) => (a : (Num) -> Cart[Real, Tybit0[Unit]])(n) / cpow(Cx(real_of_num(n)), w)) == (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w)
+      #|  holomorphic_on((z : Cart[Real, Tybit0[Unit]]) => (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z) * (cpow(Cx(real_of_num((N : Num))), z) * (Cx(real_of_num(1)) + pow(z, 2) * inv(pow(Cx((R : Real)), 2)))), UNIV)
+      #|  real_of_num(0) < (t : Real)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !IN((x : _), t) \226\134\146 !IN(x, s)
+      #|  (t : Real)
+      #|  Cx(real_of_num(1))
+      #|  -Cx(real_of_num(1))
+      #|  (x : Real) < real_of_num(1) && (y : Real) < real_of_num(1) \226\134\146 x + y < real_of_num(2)
+      #|  winding_number((op_plus_plus((A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), (A' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), Cx(real_of_num(0)))) == Cx(real_of_num(1))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 (\226\136\128 x : _, IN(x, t) \226\134\146 (P : (_) -> Bool)(x)) \226\134\146 (\226\136\128 x : _, IN(x, s) \226\134\146 P(x))
+      #|  SUBSET(path_image((A' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), {(z : Cart[Real, Tybit0[Unit]]) | Re(z) <= real_of_num(0) && norm(z) == (R : Real)})
+      #|  valid_path(op_plus_plus((A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), (A' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))) && pathstart(op_plus_plus(A, A')) == complex((real_of_num(0), -(R : Real))) && pathfinish(op_plus_plus(A, A')) == complex((real_of_num(0), -R)) && !IN(Cx(real_of_num(0)), path_image(op_plus_plus(A, A'))) && path_image(op_plus_plus(A, A')) == UNION(path_image(A), path_image(A'))
+      #|  (Cx(real_of_num(0)) == -(x : Cart[Real, Tybit0[Unit]])) == (x == Cx(real_of_num(0)))
+      #|  valid_path((A' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) && pathstart(A') == complex((real_of_num(0), (R : Real))) && pathfinish(A') == complex((real_of_num(0), -R)) && !IN(Cx(real_of_num(0)), path_image(A')) && real_of_num(0) < Re(winding_number((A', Cx(real_of_num(0)))))
+      #|  (A' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]) == o(op_minus_minus, (A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  op_plus_plus((A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), (B : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z) * (cpow(Cx(real_of_num((N : Num))), z) * (Cx(real_of_num(1)) / z + z / pow(Cx((R : Real)), 2)))
+      #|  (integral_fA : Cart[Real, Tybit0[Unit]]) + (integral_fB : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(2)) * (Cx(pi) * (ii * (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]))))
+      #|  (integral_fB : Cart[Real, Tybit0[Unit]])
+      #|  (integral_fA : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(0) < (d : Real)
+      #|  !IN((x : _), (s : (_) -> Bool)) && SUBSET(s, (t : (_) -> Bool)) \226\134\146 SUBSET(s, DELETE(t, x))
+      #|  abs((n1 : Real)) <= (n : Real) && abs((n2 : Real)) <= n \226\134\146 n < min((d : Real), (R : Real)) \226\134\146 n1 >= -d && abs(n2) <= R
+      #|  min((d : Real), (R : Real))
+      #|  clog(Cx(real_of_num((N : Num)))) * cpow(Cx(real_of_num(N)), (z : Cart[Real, Tybit0[Unit]]))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
+      #|  (abs((x : Real)) <= (a : Real)) == (x >= -a && x <= a)
+      #|  (wever : Cart[Real, Tybit0[Unit]]) == inv(pow(Cx((R : Real)), 2))
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  Cx(real_of_num(1)) + pow(Cx(real_of_num(0)), 2) * (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1))
+      #|  Cx(real_of_num(0))
+      #|  op_plus_plus((A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), (B : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  {(z : Cart[Real, Tybit0[Unit]]) | Re(z) >= -(d : Real) && abs(Im(z)) <= (R : Real)}
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z) * (cpow(Cx(real_of_num((N : Num))), z) * (Cx(real_of_num(1)) + pow(z, 2) / pow(Cx((R : Real)), 2)))
+      #|  has_path_integral((z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z) * (cpow(Cx(real_of_num((N : Num))), z) * (Cx(real_of_num(1)) / z + z / pow(Cx((R : Real)), 2))), Cx(real_of_num(2)) * (Cx(pi) * (ii * f(w))), op_plus_plus((A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), (B : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
+      #|  real_of_num(0) < (t : Real)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !IN((x : _), t) \226\134\146 !IN(x, s)
+      #|  (t : Real)
+      #|  Cx(real_of_num(1))
+      #|  -Cx(real_of_num(1))
+      #|  (x : Real) < real_of_num(1) && (y : Real) < real_of_num(1) \226\134\146 x + y < real_of_num(2)
+      #|  winding_number((op_plus_plus((A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), (B : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), Cx(real_of_num(0)))) == Cx(real_of_num(1))
+      #|  valid_path(op_plus_plus((A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), (B : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))) && pathstart(op_plus_plus(A, B)) == complex((real_of_num(0), -(R : Real))) && pathfinish(op_plus_plus(A, B)) == complex((real_of_num(0), -R)) && !IN(Cx(real_of_num(0)), path_image(op_plus_plus(A, B)))
+      #|  real_of_num(0) < (R : Real)
+      #|  real_of_num(0) < (d : Real)
+      #|  SUBSET(path_image(op_plus_plus((p1 : (Cart[Real, Unit]) -> Cart[Real, _]), (p2 : (Cart[Real, Unit]) -> Cart[Real, _]))), UNION(path_image(p1), path_image(p2))) && SUBSET(path_image(p1), (s : (Cart[Real, _]) -> Bool)) && SUBSET(path_image(p2), s) \226\134\146 SUBSET(path_image(op_plus_plus(p1, p2)), s)
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
+      #|  convex({(z : Cart[Real, Tybit0[Unit]]) | -(d : Real) <= Re(z) && Re(z) <= real_of_num(0) && abs(Im(z)) <= (R : Real)})
+      #|  SUBSET(path_image((B : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), {(z : Cart[Real, Tybit0[Unit]]) | -(d : Real) <= Re(z) && Re(z) <= real_of_num(0) && abs(Im(z)) <= (R : Real)})
+      #|  pathstart((B : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) == complex((real_of_num(0), (R : Real))) && pathfinish(B) == complex((real_of_num(0), -R))
+      #|  (real_of_num(0) == (real_of_num(1) - (u : Real)) * (x : Real) + u * x) == (x == real_of_num(0))
+      #|  valid_path((B : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) && !IN(Cx(real_of_num(0)), path_image(B)) && real_of_num(0) < Re(winding_number((B, Cx(real_of_num(0)))))
+      #|  (B : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]) == op_plus_plus(linepath((complex((real_of_num(0), (R : Real))), complex((-(d : Real), R)))), op_plus_plus(linepath((complex((-d, R)), complex((-d, -R)))), linepath((complex((-d, -R)), complex((real_of_num(0), -R))))))
+      #|  real_of_num(0) < (R : Real)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !IN((x : _), t) \226\134\146 !IN(x, s)
+      #|  !IN(Cx(real_of_num(0)), path_image((A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
+      #|  real_of_num(0) < (r : Real) \226\134\146 abs(r) == r
+      #|  (-(p : Real) < p) == (real_of_num(0) < p)
+      #|  SUBSET(path_image((A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), {(z : Cart[Real, Tybit0[Unit]]) | Re(z) >= real_of_num(0) && norm(z) == (R : Real)})
+      #|  valid_path((A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) && pathstart(A) == complex((real_of_num(0), -(R : Real))) && pathfinish(A) == complex((real_of_num(0), R)) && real_of_num(0) < Re(winding_number((A, Cx(real_of_num(0)))))
+      #|  (A : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]) == partcirclepath((Cx(real_of_num(0)), (R : Real), -(pi / real_of_num(2)), pi / real_of_num(2)))
+      #|  (r_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]])) == (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w) - (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w)
+      #|  (S_N : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]])) == vsum(op_dot_dot(1, (N : Num)), (n : Num) => (a : (Num) -> Cart[Real, Tybit0[Unit]])(n) / cpow(Cx(real_of_num(n)), w))
+      #|  !((N : Num) == 0) && 1 < N
+      #|  (N0 : Num) + 2 <= (N : Num) \226\134\146 N0 <= N
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (N0 : Num) + 2
+      #|  (N0 : Num)
+      #|  real_of_num(0) < real_of_num(2) / real_of_num(3)
+      #|  real_of_num(2) / real_of_num(3) * ((e : Real) * pi)
+      #|  (R : Real)
+      #|  (M : Real)
+      #|  (d : Real)
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
+      #|  ((x : Real) <= Im((z : Cart[Real, Tybit0[Unit]]))) == (Im(z) >= x)
+      #|  real_of_num(0) < (d : Real)
+      #|  cball((Cx(real_of_num(0)), real_of_num(2) * (R : Real) + (d : Real)))
+      #|  ((a : Bool) && (b : Bool) \226\134\146 (c : Bool)) == (b \226\134\146 a \226\134\146 c)
+      #|  IMAGE((z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z), {(z : Cart[Real, Tybit0[Unit]]) | Re(z) >= -(d : Real) && abs(Im(z)) <= (R : Real) && Re(z) <= R})
+      #|  (M : Real)
+      #|  \226\136\131 M : Real, real_of_num(0) < M && (\226\136\128 z : Cart[Real, Tybit0[Unit]], Re(z) >= -(d : Real) && abs(Im(z)) <= (R : Real) && Re(z) <= R \226\134\146 norm((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z)) <= M)
+      #|  !(real_of_num(0) <= Re((z : Cart[Real, Tybit0[Unit]])))
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  -((x : Real) / real_of_num(2)) <= (z : Real) \226\134\146 real_of_num(2) * -z <= x
+      #|  real_of_num(0) < (b : Real) \226\134\146 abs(b / real_of_num(2)) == b / real_of_num(2)
+      #|  real_of_num(0) < (b : Real) * b && (x : Real) <= pow(b / real_of_num(2), 2) && (y : Real) <= pow(b / real_of_num(2), 2) \226\134\146 x + y < pow(b, 2)
+      #|  real_of_num(0) < (e : Real) && (x : Real) < abs(e) \226\134\146 x < e
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], real_of_num(0) <= Re(z) \226\134\146 real_of_num(0) < (bs : (Cart[Real, Tybit0[Unit]]) -> Real)(z) && holomorphic_on((g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), ball((z, bs(z))))
+      #|  SUBSET((t : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 (IN((x : _), s) \226\134\146 (P : (_) -> Bool)(x)) \226\134\146 IN(x, t) \226\134\146 P(x)
+      #|  IN((v : Cart[Real, Tybit0[Unit]]), (t : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  Re((v : Cart[Real, Tybit0[Unit]])) == real_of_num(0)
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  abs(Im((z : Cart[Real, Tybit0[Unit]]))) <= (R : Real)
+      #|  SUBSET((i : (_) -> Bool), UNIONS((s : ((_) -> Bool) -> Bool))) \226\134\146 (\226\136\128 x : _, IN(x, i) \226\134\146 IN(x, UNIONS(s)))
+      #|  complex((real_of_num(0), Im((z : Cart[Real, Tybit0[Unit]]))))
+      #|  real_of_num(0) <= Re((z : Cart[Real, Tybit0[Unit]]))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  SUBSET((t : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 (\226\136\128 x : _, IN(x, s) \226\134\146 (P : (_) -> Bool)(x)) \226\134\146 (\226\136\128 x : _, IN(x, t) \226\134\146 P(x))
+      #|  real_of_num(0) < (R : Real)
+      #|  complex((real_of_num(0), real_of_num(0)))
+      #|  SUBSET((s : (_) -> Bool), UNIONS(IMAGE((g : (_, _) -> Bool), (t : (_) -> Bool)))) \226\134\146 !(s == {}) \226\134\146 !(t == {})
+      #|  inf(IMAGE((bs : (Cart[Real, Tybit0[Unit]]) -> Real), (t : (Cart[Real, Tybit0[Unit]]) -> Bool))) / real_of_num(2)
+      #|  (t : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool)) == (d && a && b && c)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool)) == (c && b && a)
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 IN(x, (g : (_, _) -> Bool)(x))) \226\134\146 SUBSET(s, UNIONS(IMAGE(g, s)))
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
+      #|  (abs((x : Real) - (a : Real)) < (e : Real) && abs((y : Real) - (b : Real)) < e) == (a < x + e && a > x - e && b < y + e && b > y - e)
+      #|  IMAGE((z : Cart[Real, Tybit0[Unit]]) => {(w : Cart[Real, Tybit0[Unit]]) | abs(Re(z - w)) < (bs : (Cart[Real, Tybit0[Unit]]) -> Real)(z) / real_of_num(2) && abs(Im(z - w)) < bs(z) / real_of_num(2)}, interval([(complex((real_of_num(0), -(R : Real))), complex((real_of_num(0), R)))]))
+      #|  complex((real_of_num(0), (R : Real)))
+      #|  complex((real_of_num(0), -(R : Real)))
+      #|  (bs : (Cart[Real, Tybit0[Unit]]) -> Real)
+      #|  ((x : Cart[Real, Tybit0[Unit]]) == (w : Cart[Real, Tybit0[Unit]]) + (y : Cart[Real, Tybit0[Unit]])) == (x - w == y)
+      #|  holomorphic_on((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), ball(((w : Cart[Real, Tybit0[Unit]]) + (z : Cart[Real, Tybit0[Unit]]), (d : Real))))
+      #|  (d : Real)
+      #|  real_of_num(0) <= (z : Real) \226\134\146 real_of_num(1) <= real_of_num(1) + z
+      #|  (w : Cart[Real, Tybit0[Unit]]) + (z : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], real_of_num(1) <= Re(z) \226\134\146 (\226\136\131 e : Real, real_of_num(0) < e && holomorphic_on((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), ball((z, e))))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], real_of_num(0) <= Re(z) \226\134\146 (\226\136\131 e : Real, real_of_num(0) < e && holomorphic_on((g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), ball((z, e))))
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == ((z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z))
+      #|  {(z : Cart[Real, Tybit0[Unit]]) | Re(z) >= -(d : Real) && abs(Im(z)) <= (R : Real)}
+      #|  min((d : Real), (R : Real))
+      #|  (d : Real)
+      #|  \226\136\131 d : Real, real_of_num(0) < d && holomorphic_on((z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z), {(z : Cart[Real, Tybit0[Unit]]) | Re(z) >= -d && abs(Im(z)) <= (R : Real)})
+      #|  (d : Real)
+      #|  \226\136\131 d : Real, real_of_num(0) < d && d <= (R : Real) && holomorphic_on((z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z), {(z : Cart[Real, Tybit0[Unit]]) | Re(z) >= -d && abs(Im(z)) <= R})
+      #|  real_of_num(0) < (R : Real)
+      #|  (R : Real) == max(real_of_num(3) / (e : Real), real_of_num(1))
+      #|  (e : Real)
+      #|  real_of_num(1) <= (w : Real) \226\134\146 w > real_of_num(1) || w == real_of_num(1)
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], (\226\136\128 n : Num, 1 <= n \226\134\146 norm(a(n)) <= real_of_num(1)) && analytic_on(f, {(z : Cart[Real, Tybit0[Unit]]) | Re(z) >= real_of_num(1)}) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], Re(z) > real_of_num(1) \226\134\146 sums((n : Num) => a(n) / cpow(Cx(real_of_num(n)), z), f(z), from(1))) \226\134\146 (\226\136\128 z : Cart[Real, Tybit0[Unit]], Re(z) >= real_of_num(1) \226\134\146 sums((n : Num) => a(n) / cpow(Cx(real_of_num(n)), z), f(z), from(1)))
       #|  :real
       #|  :real
       #|  (f has_complex_derivative f') net
-      #|  Cx b
-      #|  z:complex
-      #|  &0 < b ==> abs b = b
-      #|  \\n:num. inv(Cx(b)) * a n
-      #|  \\z:complex. inv(Cx(b)) * f z
-      #|  forall f a b. &0 < b /\\\n           (forall n. 1 <= n ==> norm(a(n)) <= b) /\\\n           f analytic_on {z | Re(z) >= &1} /\\\n           (forall z. Re(z) > &1 ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1))\n           ==> forall z. Re(z) >= &1\n                   ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1)
-      #|  x <= b ==> x <= abs b + &1
-      #|  abs b + &1
-      #|  forall f a b. (forall n. 1 <= n ==> norm(a(n)) <= b) /\\\n           f analytic_on {z | Re(z) >= &1} /\\\n           (forall z. Re(z) > &1 ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1))\n           ==> forall z. Re(z) >= &1\n                   ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1)
-      #|  &0 < x /\\ &0 < z ==> inv(x) * x / z = inv(z)
-      #|  x <= n * e ==> i * e <= (n + i) * e - x
-      #|  n + 1 <= m ==> 0 < m
-      #|  &0 <= --x /\\ --y <= e ==> x - y <= e
-      #|  0 < r
-      #|  r:num
-      #|  x = y /\\ a <= b ==> x <= a ==> y <= b
-      #|  &0 <= s * (y - x) ==> --(s * y) <= --(s * x)
-      #|  &0 < x /\\ &0 < y
-      #|  y:real
-      #|  x:real
-      #|  ~(z = Cx(&0))
-      #|  (a ==> b) /\\ a ==> a /\\ b
-      #|  ~(z = Cx(&0))
-      #|  &0 < Re z
-      #|  z:complex
-      #|  (n + &1) - &1 = n
-      #|  m:num
-      #|  n + 1
-      #|  \\z. Cx(&1) / ((Cx(&1) - (Cx(Re s))) * z cpow (Cx(Re s) - Cx(&1)))
-      #|  \\z. Cx(&1) / z cpow (Cx(Re s))
-      #|  y <= a - x ==> x + y <= a
-      #|  n + 1 <= m
-      #|  n + 1 <= m ==> n <= m
-      #|  forall n s m. ~(n = 0) /\\ &1 < Re s /\\ n + 1 <= m\n           ==> sum(n..m) (\\x. norm(Cx(&1) / Cx(&x) cpow s))\n                <= (&1 / &n + &1 / (Re s - &1)) * exp((&1 - Re s) * log(&n))
+      #|  Cx((b : Real))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(0) < (b : Real) \226\134\146 abs(b) == b
+      #|  (n : Num) => inv(Cx((b : Real))) * (a : (Num) -> Cart[Real, Tybit0[Unit]])(n)
+      #|  (z : Cart[Real, Tybit0[Unit]]) => inv(Cx((b : Real))) * (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z)
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 b : Real, real_of_num(0) < b && (\226\136\128 n : Num, 1 <= n \226\134\146 norm(a(n)) <= b) && analytic_on(f, {(z : Cart[Real, Tybit0[Unit]]) | Re(z) >= real_of_num(1)}) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], Re(z) > real_of_num(1) \226\134\146 sums((n : Num) => a(n) / cpow(Cx(real_of_num(n)), z), f(z), from(1))) \226\134\146 (\226\136\128 z : Cart[Real, Tybit0[Unit]], Re(z) >= real_of_num(1) \226\134\146 sums((n : Num) => a(n) / cpow(Cx(real_of_num(n)), z), f(z), from(1)))
+      #|  (x : Real) <= (b : Real) \226\134\146 x <= abs(b) + real_of_num(1)
+      #|  abs((b : Real)) + real_of_num(1)
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 b : Real, (\226\136\128 n : Num, 1 <= n \226\134\146 norm(a(n)) <= b) && analytic_on(f, {(z : Cart[Real, Tybit0[Unit]]) | Re(z) >= real_of_num(1)}) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], Re(z) > real_of_num(1) \226\134\146 sums((n : Num) => a(n) / cpow(Cx(real_of_num(n)), z), f(z), from(1))) \226\134\146 (\226\136\128 z : Cart[Real, Tybit0[Unit]], Re(z) >= real_of_num(1) \226\134\146 sums((n : Num) => a(n) / cpow(Cx(real_of_num(n)), z), f(z), from(1)))
+      #|  real_of_num(0) < (x : Real) && real_of_num(0) < (z : Real) \226\134\146 inv(x) * (x / z) == inv(z)
+      #|  (x : Real) <= (n : Real) * (e : Real) \226\134\146 (i : Real) * e <= (n + i) * e - x
+      #|  (n : Num) + 1 <= (m : Num) \226\134\146 0 < m
+      #|  real_of_num(0) <= -(x : Real) && -(y : Real) <= (e : Real) \226\134\146 x - y <= e
+      #|  0 < (r : Num)
+      #|  (r : Num)
+      #|  (x : Real) == (y : Real) && (a : Real) <= (b : Real) \226\134\146 x <= a \226\134\146 y <= b
+      #|  real_of_num(0) <= (s : Real) * ((y : Real) - (x : Real)) \226\134\146 -(s * y) <= -(s * x)
+      #|  real_of_num(0) < (x : Real) && real_of_num(0) < (y : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  ((a : Bool) \226\134\146 (b : Bool)) && a \226\134\146 a && b
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  real_of_num(0) < Re((z : Cart[Real, Tybit0[Unit]]))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (n : Real) + real_of_num(1) - real_of_num(1) == n
+      #|  (m : Num)
+      #|  (n : Num) + 1
+      #|  (z : Cart[Real, Tybit0[Unit]]) => Cx(real_of_num(1)) / ((Cx(real_of_num(1)) - Cx(Re((s : Cart[Real, Tybit0[Unit]])))) * cpow(z, Cx(Re(s)) - Cx(real_of_num(1))))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => Cx(real_of_num(1)) / cpow(z, Cx(Re((s : Cart[Real, Tybit0[Unit]]))))
+      #|  (y : Real) <= (a : Real) - (x : Real) \226\134\146 x + y <= a
+      #|  (n : Num) + 1 <= (m : Num)
+      #|  (n : Num) + 1 <= (m : Num) \226\134\146 n <= m
+      #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, !(n == 0) && real_of_num(1) < Re(s) && n + 1 <= m \226\134\146 sum(op_dot_dot(n, m), (x : Num) => norm(Cx(real_of_num(1)) / cpow(Cx(real_of_num(x)), s))) <= (real_of_num(1) / real_of_num(n) + real_of_num(1) / (Re(s) - real_of_num(1))) * exp((real_of_num(1) - Re(s)) * log(real_of_num(n)))
       #|  (f has_complex_derivative f') net
-      #|  a <= b ==> x <= a ==> x <= b
-      #|  m:num
-      #|  n + 1
-      #|  n:num
-      #|  \\m. vsum(n..m) (\\r. Cx(&1) / Cx(&r) cpow s)
+      #|  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+      #|  (m : Num)
+      #|  (n : Num) + 1
+      #|  (n : Num)
+      #|  (m : Num) => vsum(op_dot_dot((n : Num), m), (r : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(r)), (s : Cart[Real, Tybit0[Unit]])))
       #|  sequentially
-      #|  forall n s. ~(n = 0) /\\ &1 < Re s\n         ==> norm(genzeta n s) <=\n                (&1 / &n + &1 / (Re s - &1)) * exp((&1 - Re s) * log(&n))
-      #|  (&1 - (s + &1)) * x = --(s * x)
-      #|  (x + &1) - &1 = x
-      #|  a <= b ==> x <= a ==> x <= b
-      #|  a / b = a * Cx(&1) / b
-      #|  sum (n..m)\n                (\\r. norm(s * (s - Cx (&1)) / Cx(&r) cpow (s + Cx(&1))))
-      #|  a <= b ==> x <= a ==> x <= b
-      #|  m:num
-      #|  n + 1
-      #|  n:num
-      #|  \\m. vsum(n..m)\n              (\\r. (s - Cx(&1)) / Cx(&r) cpow s -\n                   (Cx(&1) / Cx(&r) cpow (s - Cx(&1)) -\n                    Cx(&1) / Cx(&(r + 1)) cpow (s - Cx(&1))))
+      #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], !(n == 0) && real_of_num(1) < Re(s) \226\134\146 norm(genzeta(n, s)) <= (real_of_num(1) / real_of_num(n) + real_of_num(1) / (Re(s) - real_of_num(1))) * exp((real_of_num(1) - Re(s)) * log(real_of_num(n)))
+      #|  (real_of_num(1) - ((s : Real) + real_of_num(1))) * (x : Real) == -(s * x)
+      #|  (x : Real) + real_of_num(1) - real_of_num(1) == x
+      #|  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+      #|  (a : Cart[Real, Tybit0[Unit]]) / (b : Cart[Real, Tybit0[Unit]]) == a * (Cx(real_of_num(1)) / b)
+      #|  sum(op_dot_dot((n : Num), (m : Num)), (r : Num) => norm((s : Cart[Real, Tybit0[Unit]]) * ((s - Cx(real_of_num(1))) / cpow(Cx(real_of_num(r)), s + Cx(real_of_num(1))))))
+      #|  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+      #|  (m : Num)
+      #|  (n : Num) + 1
+      #|  (n : Num)
+      #|  (m : Num) => vsum(op_dot_dot((n : Num), m), (r : Num) => ((s : Cart[Real, Tybit0[Unit]]) - Cx(real_of_num(1))) / cpow(Cx(real_of_num(r)), s) - (Cx(real_of_num(1)) / cpow(Cx(real_of_num(r)), s - Cx(real_of_num(1))) - Cx(real_of_num(1)) / cpow(Cx(real_of_num(r + 1)), s - Cx(real_of_num(1)))))
       #|  sequentially
-      #|  forall n s. ~(n = 0) /\\ &0 < Re s\n         ==> norm(nearzeta n s) <=\n                  norm(s * (s - Cx(&1))) *\n                  (&1 / &n + &1 / Re s) / exp(Re s * log(&n))
-      #|  s:complex
-      #|  1 <= n <=> ~(n = 0)
-      #|  inv(&1)
-      #|  a + y <= (x + &1) * y <=> a <= x * y
-      #|  norm(y) = b ==> norm(x - y) <= norm(x) + b
+      #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], !(n == 0) && real_of_num(0) < Re(s) \226\134\146 norm(nearzeta(n, s)) <= norm(s * (s - Cx(real_of_num(1)))) * ((real_of_num(1) / real_of_num(n) + real_of_num(1) / Re(s)) / exp(Re(s) * log(real_of_num(n))))
+      #|  (s : Cart[Real, Tybit0[Unit]])
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  inv(real_of_num(1))
+      #|  ((a : Real) + (y : Real) <= ((x : Real) + real_of_num(1)) * y) == (a <= x * y)
+      #|  norm((y : Cart[Real, Tybit0[Unit]])) == (b : Real) \226\134\146 norm((x : Cart[Real, Tybit0[Unit]]) - y) <= norm(x) + b
       #|  :real
       #|  :real
-      #|  (x pow 3):real = x * x * x
-      #|  a <= b ==> x <= a ==> x <= b
-      #|  forall n s. ~(n = 0) /\\ &0 < Re s\n         ==> norm(nearzeta n s)\n                  <= ((norm(s) + &1) pow 3 / Re s) / exp (Re s * log (&n))
-      #|  s - z:complex
-      #|  2 <= p ==> 1 <= p
-      #|  --(a * p) <= --(b * p) <=> b * p <= a * p
-      #|  5 <= p ==> 0 < p
-      #|  s - z:complex
-      #|  5 <= p ==> 4 <= p
-      #|  l <= &1 / &2 * x <=> &2 * l <= x
-      #|  &1 / &2 * log(&4)
-      #|  &0 < &2
-      #|  5 <= p ==> 0 < p
-      #|  &2 <= norm(a) /\\ norm(b) = &1 ==> norm(a) * inv(&2) <= norm(a - b)
+      #|  pow((x : Real), 3) == x * (x * x)
+      #|  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+      #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], !(n == 0) && real_of_num(0) < Re(s) \226\134\146 norm(nearzeta(n, s)) <= pow(norm(s) + real_of_num(1), 3) / Re(s) / exp(Re(s) * log(real_of_num(n)))
+      #|  (s : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])
+      #|  2 <= (p : Num) \226\134\146 1 <= p
+      #|  (-((a : Real) * (p : Real)) <= -((b : Real) * p)) == (b * p <= a * p)
+      #|  5 <= (p : Num) \226\134\146 0 < p
+      #|  (s : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])
+      #|  5 <= (p : Num) \226\134\146 4 <= p
+      #|  ((l : Real) <= real_of_num(1) / real_of_num(2) * (x : Real)) == (real_of_num(2) * l <= x)
+      #|  real_of_num(1) / real_of_num(2) * log(real_of_num(4))
+      #|  real_of_num(0) < real_of_num(2)
+      #|  5 <= (p : Num) \226\134\146 0 < p
+      #|  real_of_num(2) <= norm((a : Cart[Real, Tybit0[Unit]])) && norm((b : Cart[Real, Tybit0[Unit]])) == real_of_num(1) \226\134\146 norm(a) * inv(real_of_num(2)) <= norm(a - b)
       #|  :real
       #|  :real
-      #|  &0 < x * inv(&2) <=> &0 < x
-      #|  clog(Cx(&p)) / Cx(&p) cpow (z + z)
-      #|  forall y:complex. norm(x) <= &2 * norm(y) /\\ norm(y) <= a\n                ==> norm(x) <= &2 * a
-      #|  s - z:complex
-      #|  2 <= p ==> 1 <= p
-      #|  --(a * p) <= --(b * p) <=> b * p <= a * p
-      #|  s - z:complex
-      #|  (&2 * x) * y = x * &2 * y
-      #|  a <= b ==> x <= a ==> x <= b
-      #|  s - z:complex
-      #|  a /\\ (a ==> b ==> c) ==> (a ==> b) ==> c
-      #|  x * a * b:real = a * x * b
-      #|  norm(x) <= a /\\ norm(y) <= b ==> norm(x - y) <= a + b
+      #|  (real_of_num(0) < (x : Real) * inv(real_of_num(2))) == (real_of_num(0) < x)
+      #|  clog(Cx(real_of_num((p : Num)))) / cpow(Cx(real_of_num(p)), (z : Cart[Real, Tybit0[Unit]]) + z)
+      #|  \226\136\128 y : Cart[Real, Tybit0[Unit]], norm((x : Cart[Real, _])) <= real_of_num(2) * norm(y) && norm(y) <= (a : Real) \226\134\146 norm(x) <= real_of_num(2) * a
+      #|  (s : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])
+      #|  2 <= (p : Num) \226\134\146 1 <= p
+      #|  (-((a : Real) * (p : Real)) <= -((b : Real) * p)) == (b * p <= a * p)
+      #|  (s : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(2) * (x : Real) * (y : Real) == x * (real_of_num(2) * y)
+      #|  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+      #|  (s : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])
+      #|  (a : Bool) && (a \226\134\146 (b : Bool) \226\134\146 (c : Bool)) \226\134\146 (a \226\134\146 b) \226\134\146 c
+      #|  (x : Real) * ((a : Real) * (b : Real)) == a * (x * b)
+      #|  norm((x : Cart[Real, Tybit0[Unit]])) <= (a : Real) && norm((y : Cart[Real, Tybit0[Unit]])) <= (b : Real) \226\134\146 norm(x - y) <= a + b
       #|  :real
       #|  :real
-      #|  x <= a * b /\\ a * b <= abs a * b ==> x <= abs a * b
-      #|  z:complex
-      #|  2 <= p ==> 1 <= p
-      #|  &0 <= x ==> &0 <= &2 * x + &2
-      #|  p:num
-      #|  --(complex_derivative zeta (Cx(&1 + (Re s - &1 / &2) / &4)))
-      #|  from 1
+      #|  (x : Real) <= (a : Real) * (b : Real) && a * b <= abs(a) * b \226\134\146 x <= abs(a) * b
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  2 <= (p : Num) \226\134\146 1 <= p
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) <= real_of_num(2) * x + real_of_num(2)
+      #|  (p : Num)
+      #|  -complex_derivative(zeta, Cx(real_of_num(1) + (Re((s : Cart[Real, Tybit0[Unit]])) - real_of_num(1) / real_of_num(2)) / real_of_num(4)))
+      #|  from(1)
       #|  5
-      #|  \\p. Cx(&2 * (norm(s:complex) + &2) pow 3 + &2) *\n                  clog(Cx(&p)) /\n                  Cx(&p) cpow (Cx(&1 + (Re s - &1 / &2) / &4))
-      #|  min (&1 / &2) ((Re s - &1 / &2) / &2)
-      #|  s:complex
-      #|  &1 / &2 < x ==> &0 < x
-      #|  ?f. forall s. s IN {s | Re(s) > &1 / &2}\n           ==> ((\\p. clog(Cx(&p)) / Cx(&p) * nearzeta p s -\n                     clog(Cx(&p)) / (Cx(&p) cpow s * (Cx(&p) cpow s - Cx(&1))))\n                sums (f s)) {p | prime p} /\\\n               f complex_differentiable (at s)
+      #|  (p : Num) => Cx(real_of_num(2) * pow(norm((s : Cart[Real, Tybit0[Unit]])) + real_of_num(2), 3) + real_of_num(2)) * (clog(Cx(real_of_num(p))) / cpow(Cx(real_of_num(p)), Cx(real_of_num(1) + (Re(s) - real_of_num(1) / real_of_num(2)) / real_of_num(4))))
+      #|  min(real_of_num(1) / real_of_num(2), (Re((s : Cart[Real, Tybit0[Unit]])) - real_of_num(1) / real_of_num(2)) / real_of_num(2))
+      #|  (s : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(1) / real_of_num(2) < (x : Real) \226\134\146 real_of_num(0) < x
+      #|  \226\136\131 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : Cart[Real, Tybit0[Unit]], IN(s, {(s : Cart[Real, Tybit0[Unit]]) | Re(s) > real_of_num(1) / real_of_num(2)}) \226\134\146 sums((p : Num) => clog(Cx(real_of_num(p))) / Cx(real_of_num(p)) * nearzeta(p, s) - clog(Cx(real_of_num(p))) / (cpow(Cx(real_of_num(p)), s) * (cpow(Cx(real_of_num(p)), s) - Cx(real_of_num(1)))), f(s), {(p : Num) | prime(p)}) && complex_differentiable(f, at(s))
       #|  :real
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  a ==> b /\\ c <=> (a ==> b) /\\ (a ==> c)
-      #|  newman(s) = (nearnewman(s) - (complex_derivative zeta s / zeta s)) /\n              (s - Cx(&1))
+      #|  ((a : Bool) \226\134\146 (b : Bool) && (c : Bool)) == ((a \226\134\146 b) && (a \226\134\146 c))
+      #|  (newman : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((s : Cart[Real, Tybit0[Unit]])) == (nearnewman(s) - complex_derivative(zeta, s) / zeta(s)) / (s - Cx(real_of_num(1)))
       #|  1
-      #|  s:complex
-      #|  --Cx(&1) / (s - Cx(&1)) pow 2
-      #|  \\z. inv(z - Cx(&1))
-      #|  complex_derivative(nearzeta 1) s
-      #|  \\z. nearzeta 1 z + Cx(&1)
-      #|  w:complex
-      #|  dist(Cx(&1),s)
-      #|  \\s. (nearzeta 1 s + Cx(&1)) * inv(s - Cx(&1))
-      #|  forall s. &0 < Re s /\\ ~(s = Cx(&1))\n       ==> complex_derivative zeta s =\n                complex_derivative (nearzeta 1) s / (s - Cx(&1)) -\n                (nearzeta 1 s + Cx(&1)) / (s - Cx(&1)) pow 2
+      #|  (s : Cart[Real, Tybit0[Unit]])
+      #|  -Cx(real_of_num(1)) / pow((s : Cart[Real, Tybit0[Unit]]) - Cx(real_of_num(1)), 2)
+      #|  (z : Cart[Real, Tybit0[Unit]]) => inv(z - Cx(real_of_num(1)))
+      #|  complex_derivative(nearzeta(1), (s : Cart[Real, Tybit0[Unit]]))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => nearzeta(1, z) + Cx(real_of_num(1))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  dist((Cx(real_of_num(1)), (s : Cart[Real, Tybit0[Unit]])))
+      #|  (s : Cart[Real, Tybit0[Unit]]) => (nearzeta(1, s) + Cx(real_of_num(1))) * inv(s - Cx(real_of_num(1)))
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(0) < Re(s) && !(s == Cx(real_of_num(1))) \226\134\146 complex_derivative(zeta, s) == complex_derivative(nearzeta(1), s) / (s - Cx(real_of_num(1))) - (nearzeta(1, s) + Cx(real_of_num(1))) / pow(s - Cx(real_of_num(1)), 2)
       #|  (f has_complex_derivative f') net
-      #|  ~(w = Cx(&1))
-      #|  w:complex
-      #|  z - w:complex
-      #|  &0 < Re w
-      #|  w:complex
-      #|  min e (&1)
-      #|  e:real
+      #|  !((w : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1)))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]]) - (w : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(0) < Re((w : Cart[Real, Tybit0[Unit]]))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  min((e : Real), real_of_num(1))
+      #|  (e : Real)
       #|  1
-      #|  Cx(&0)
-      #|  z:complex
-      #|  \\z. nearzeta 1 z + Cx(&1)
-      #|  z:complex
-      #|  {s | Re(s) > &0}
-      #|  Cx(&1)
-      #|  \\z. (Cx(&1) - inv(nearzeta 1 z + Cx(&1))) *\n         ((z - Cx(&1)) * complex_derivative (nearzeta 1) z -\n          (nearzeta 1 z + Cx(&1)))
-      #|  complex_derivative\n     (\\z. (Cx(&1) - inv(nearzeta 1 z + Cx(&1))) *\n          ((z - Cx(&1)) * complex_derivative (nearzeta 1) z -\n           (nearzeta 1 z + Cx(&1)))) (Cx(&1))
-      #|  ?a. (\\z. if z = Cx(&1) then a\n            else (z - Cx(&1)) * complex_derivative zeta z -\n                 complex_derivative zeta z / zeta z)\n       analytic_on {s | Re(s) >= &1}
+      #|  Cx(real_of_num(0))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]]) => nearzeta(1, z) + Cx(real_of_num(1))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  {(s : Cart[Real, Tybit0[Unit]]) | Re(s) > real_of_num(0)}
+      #|  Cx(real_of_num(1))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (Cx(real_of_num(1)) - inv(nearzeta(1, z) + Cx(real_of_num(1)))) * ((z - Cx(real_of_num(1))) * complex_derivative(nearzeta(1), z) - (nearzeta(1, z) + Cx(real_of_num(1))))
+      #|  complex_derivative((z : Cart[Real, Tybit0[Unit]]) => (Cx(real_of_num(1)) - inv(nearzeta(1, z) + Cx(real_of_num(1)))) * ((z - Cx(real_of_num(1))) * complex_derivative(nearzeta(1), z) - (nearzeta(1, z) + Cx(real_of_num(1)))), Cx(real_of_num(1)))
+      #|  \226\136\131 a : Cart[Real, Tybit0[Unit]], analytic_on((z : Cart[Real, Tybit0[Unit]]) => if z == Cx(real_of_num(1)) { a } else { (z - Cx(real_of_num(1))) * complex_derivative(zeta, z) - complex_derivative(zeta, z) / zeta(z) }, {(s : Cart[Real, Tybit0[Unit]]) | Re(s) >= real_of_num(1)})
       #|  :real
-      #|  ~(w = Cx(&1))
-      #|  w:complex
-      #|  &1
-      #|  {s | Re(s) > &0}
-      #|  {s | Re(s) > &1 / &2}
-      #|  Cx(&1)
-      #|  \\z. nearnewman z +\n         (if z = Cx(&1) then c\n          else (z - Cx(&1)) * complex_derivative zeta z -\n               complex_derivative zeta z / zeta z) +\n          --(c + nearnewman(Cx(&1))) * (nearzeta 1 z + Cx(&1))
-      #|  complex_derivative\n     (\\z. nearnewman z +\n          (if z = Cx(&1)\n           then c\n           else (z - Cx(&1)) * complex_derivative zeta z -\n                complex_derivative zeta z / zeta z) +\n           --(c + nearnewman (Cx(&1))) * (nearzeta 1 z + Cx(&1)))\n     (Cx(&1))
-      #|  --(c + nearnewman(Cx(&1)))
-      #|  c:complex
-      #|  ?c a. (\\z. if z = Cx(&1) then a\n              else newman z + complex_derivative zeta z + c * zeta z)\n         analytic_on {s | Re(s) >= &1}
-      #|  &1 < x ==> &0 < x
-      #|  ~(ps = Cx(&1)) /\\ ~(ps = Cx(&0)) /\\ ~(p = Cx(&0))\n    ==> inv(ps - Cx(&1)) - inv(ps * (ps - Cx(&1))) =\n        inv(p * ps / p)
-      #|  c - b = a * m ==> (a:complex) * n - b + c = a * (n + m)
-      #|  p:num
-      #|  &1 < x ==> &1 / &2 < x
-      #|  s = Cx(&1)
-      #|  s:complex
-      #|  forall s. &1 < Re s\n       ==> ((\\p. clog(Cx(&p)) / Cx(&p) * genzeta p s) sums newman(s))\n           {p | prime p}
-      #|  n = (n + 1) - 1
-      #|  \\n. (f sums (a - vsum(m..n) s)) k
-      #|  from(n + 1)
-      #|  \\k. Cx(&1) / Cx(&k) cpow s
-      #|  forall m n s. &1 < Re s /\\ m <= n\n           ==> genzeta m s - vsum(m..n) (\\k. Cx(&1) / Cx(&k) cpow s) =\n               genzeta (n + 1) s
-      #|  \\(x:num,y:num). (y,x)
-      #|  vsum (1..n) (\\m. vsum {p | prime p /\\ p <= m} (\\p. f p m)) =\n     vsum {p | prime p /\\ p <= n} (\\p. vsum (p..n) (\\m. f p m))
-      #|  (&1 - s) * l <= --((s - &1) * m) <=>\n                            (s - &1) * m <= (s - &1) * l
-      #|  a <= &1 ==> a + b <= abs(&1 + b)
-      #|  a <= b ==> x <= a ==> x <= b
-      #|  s:complex
-      #|  n + 1
-      #|  &0 <= x ==> abs x = x
-      #|  &0 <= x ==> abs x <= x
-      #|  p:num
-      #|  x' <= x /\\ y' = y ==> abs x <= y ==> x' <= y'
-      #|  abs(x - y) <= e ==> &0 <= y ==> abs(x) <= y + e
-      #|  ~(n = 0) /\\ 1 <= n
-      #|  a * b * c:complex = b * a * c
-      #|  y <= x ==> x < e ==> y <= e
-      #|  n:num
-      #|  norm(vsum {p | prime p /\\ p <= n}\n              (\\p. clog(Cx(&p)) / Cx(&p) * genzeta (n + 1) s))
-      #|  inv x = Cx(&1) / x
-      #|  norm(x - y) <= e / &2 ==> norm(x - a) < e / &2 ==> norm(y - a) < e
-      #|  :real
-      #|  :real
-      #|  n:num
-      #|  n:num
-      #|  N0 + N1 + 1
-      #|  N1:num
-      #|  e / &2
-      #|  inv x = Cx(&1) / x
-      #|  ((\\n. Cx(&1 + &1 / (Re s - &1)) *\n          (clog(Cx(&n)) + Cx(&24)) / Cx(&n) cpow (s - Cx(&1)))\n     --> Cx(&0)) sequentially
-      #|  N0:num
-      #|  e / &2
-      #|  forall n. {p | prime p} INTER (0..n) = {p | prime p /\\ p <= n}
-      #|  e:real
-      #|  forall s. &1 < Re s\n       ==> ((\\n. vsum {p | prime p /\\ p <= n} (\\p. clog(Cx(&p)) / Cx(&p)) /\n                 Cx(&n) cpow s)\n            sums (newman s)) (from 1)
-      #|  z:complex
-      #|  x = y ==> x <= a ==> y <= a
-      #|  n:num
-      #|  norm(x - y) <= &24 ==> norm(x - y + c) <= &24 + norm c
+      #|  !((w : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1)))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(1)
+      #|  {(s : Cart[Real, Tybit0[Unit]]) | Re(s) > real_of_num(0)}
+      #|  {(s : Cart[Real, Tybit0[Unit]]) | Re(s) > real_of_num(1) / real_of_num(2)}
+      #|  Cx(real_of_num(1))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => nearnewman(z) + ((if z == Cx(real_of_num(1)) { (c : Cart[Real, Tybit0[Unit]]) } else { (z - Cx(real_of_num(1))) * complex_derivative(zeta, z) - complex_derivative(zeta, z) / zeta(z) }) + -(c + nearnewman(Cx(real_of_num(1)))) * (nearzeta(1, z) + Cx(real_of_num(1))))
+      #|  complex_derivative((z : Cart[Real, Tybit0[Unit]]) => nearnewman(z) + ((if z == Cx(real_of_num(1)) { (c : Cart[Real, Tybit0[Unit]]) } else { (z - Cx(real_of_num(1))) * complex_derivative(zeta, z) - complex_derivative(zeta, z) / zeta(z) }) + -(c + nearnewman(Cx(real_of_num(1)))) * (nearzeta(1, z) + Cx(real_of_num(1)))), Cx(real_of_num(1)))
+      #|  -((c : Cart[Real, Tybit0[Unit]]) + nearnewman(Cx(real_of_num(1))))
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\131 c : Cart[Real, Tybit0[Unit]], \226\136\131 a : Cart[Real, Tybit0[Unit]], analytic_on((z : Cart[Real, Tybit0[Unit]]) => if z == Cx(real_of_num(1)) { a } else { newman(z) + (complex_derivative(zeta, z) + c * zeta(z)) }, {(s : Cart[Real, Tybit0[Unit]]) | Re(s) >= real_of_num(1)})
+      #|  real_of_num(1) < (x : Real) \226\134\146 real_of_num(0) < x
+      #|  !((ps : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1))) && !(ps == Cx(real_of_num(0))) && !((p : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 inv(ps - Cx(real_of_num(1))) - inv(ps * (ps - Cx(real_of_num(1)))) == inv(p * (ps / p))
+      #|  (c : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]]) * (m : Cart[Real, Tybit0[Unit]]) \226\134\146 a * (n : Cart[Real, Tybit0[Unit]]) - b + c == a * (n + m)
+      #|  (p : Num)
+      #|  real_of_num(1) < (x : Real) \226\134\146 real_of_num(1) / real_of_num(2) < x
+      #|  (s : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1))
+      #|  (s : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) < Re(s) \226\134\146 sums((p : Num) => clog(Cx(real_of_num(p))) / Cx(real_of_num(p)) * genzeta(p, s), newman(s), {(p : Num) | prime(p)})
+      #|  (n : Num) == n + 1 - 1
+      #|  (n : Num) => sums((f : (Num) -> Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]) - vsum(op_dot_dot((m : Num), n), (s : (Num) -> Cart[Real, Tybit0[Unit]])), (k : (Num) -> Bool))
+      #|  from((n : Num) + 1)
+      #|  (k : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(k)), (s : Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) < Re(s) && m <= n \226\134\146 genzeta(m, s) - vsum(op_dot_dot(m, n), (k : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(k)), s)) == genzeta(n + 1, s)
+      #|  GABS((f : ((Num, Num)) -> (Num, Num)) => \226\136\128 x : Num, \226\136\128 y : Num, GEQ(f((x, y)), (y, x)))
+      #|  vsum(op_dot_dot(1, (n : Num)), (m : Num) => vsum({(p : Num) | prime(p) && p <= m}, (p : Num) => (f : (Num, Num) -> Cart[Real, _])(p, m))) == vsum({(p : Num) | prime(p) && p <= n}, (p : Num) => vsum(op_dot_dot(p, n), (m : Num) => f(p, m)))
+      #|  ((real_of_num(1) - (s : Real)) * (l : Real) <= -((s - real_of_num(1)) * (m : Real))) == ((s - real_of_num(1)) * m <= (s - real_of_num(1)) * l)
+      #|  (a : Real) <= real_of_num(1) \226\134\146 a + (b : Real) <= abs(real_of_num(1) + b)
+      #|  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+      #|  (s : Cart[Real, Tybit0[Unit]])
+      #|  (n : Num) + 1
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x) <= x
+      #|  (p : Num)
+      #|  (x' : Real) <= (x : Real) && (y' : Real) == (y : Real) \226\134\146 abs(x) <= y \226\134\146 x' <= y'
+      #|  abs((x : Real) - (y : Real)) <= (e : Real) \226\134\146 real_of_num(0) <= y \226\134\146 abs(x) <= y + e
+      #|  !((n : Num) == 0) && 1 <= n
+      #|  (a : Cart[Real, Tybit0[Unit]]) * ((b : Cart[Real, Tybit0[Unit]]) * (c : Cart[Real, Tybit0[Unit]])) == b * (a * c)
+      #|  (y : Real) <= (x : Real) \226\134\146 x < (e : Real) \226\134\146 y <= e
+      #|  (n : Num)
+      #|  norm(vsum({(p : Num) | prime(p) && p <= (n : Num)}, (p : Num) => clog(Cx(real_of_num(p))) / Cx(real_of_num(p)) * genzeta(n + 1, (s : Cart[Real, Tybit0[Unit]]))))
+      #|  inv((x : Cart[Real, Tybit0[Unit]])) == Cx(real_of_num(1)) / x
+      #|  norm((x : Cart[Real, Tybit0[Unit]]) - (y : Cart[Real, Tybit0[Unit]])) <= (e : Real) / real_of_num(2) \226\134\146 norm(x - (a : Cart[Real, Tybit0[Unit]])) < e / real_of_num(2) \226\134\146 norm(y - a) < e
       #|  :real
       #|  :real
-      #|  n:num
-      #|  Cx(&1)
-      #|  &24 + norm(c:complex)
-      #|  \\n. vsum {p | prime p /\\ p <= n} (\\p. clog(Cx(&p)) / Cx(&p)) -\n         clog(Cx(&n)) + c
-      #|  \\z. if z = Cx(&1) then singval\n         else newman z + complex_derivative zeta z + c * zeta z
-      #|  c:complex
-      #|  singval:complex
-      #|  c:complex
-      #|  ?c. summable (from 1)\n        (\\n. (vsum {p | prime p /\\ p <= n} (\\p. clog(Cx(&p)) / Cx(&p)) -\n              clog(Cx(&n)) + c) / Cx(&n))
-      #|  a <= x - y + b <=> a + y <= b + x
-      #|  log(&n)
-      #|  forall x'. x <= x' /\\ a <= y - x' + b ==> a <= y - x + b
-      #|  --(x + y:real) = --y - x
-      #|  a * x <= a * y <=> --a * y <= --a * x
-      #|  (log(&N * inv(&M)) + a N) * inv(&n)
-      #|  a - (x - y) <= b <=> a + y <= b + x
-      #|  log(&n)
-      #|  forall x'. x' <= x /\\ a - (x' - m) <= b ==> a - (x - m) <= b
-      #|  (a M - log(&N * inv(&M))) * inv(&n)
-      #|  &0 < &n
-      #|  n:num
-      #|  m < n ==> m <= n + &1
-      #|  &N - &M + &1 = &((N + 1) - M)
-      #|  a <= --x ==> x <= abs a
-      #|  x <= a ==> x <= abs a
-      #|  abs(sum(M..N) (\\i. a(i) / &i))
-      #|  (x * y) * z:real = y * (x * z)
-      #|  m < n ==> &0 < n - m + &1
-      #|  &0 <= y /\\ (&0 <= x ==> x <= y) ==> x <= y
-      #|  (d * &N) / (&N - &M + &1)
-      #|  forall m n. &m <= &n ==> a m + log(&m) <= a n + log(&n)
-      #|  &0 < m /\\ &0 < n\n                             ==> n / m = &1 + (n - m) / m
-      #|  d * &N / (&N - &M) + log(&N / &M)
-      #|  forall a. a <= b /\\ x <= a /\\ y <= a ==> x <= b /\\ y <= b
-      #|  0 < N
-      #|  &0 <= d
-      #|  forall a M N.\n        abs(sum(M..N) (\\i. a(i) / &i)) <= d\n        ==> 0 < M /\\ M < N /\\ (forall n. a(n) + log(&n) <= a(n + 1) + log(&n + &1))\n            ==> a(M) <= d * &N / (&N - &M) + (&N - &M) / &M /\\\n                --a(N) <= d * &N / (&N - &M) + (&N - &M) / &M
-      #|  min e (&1 / &5)
-      #|  (forall e. &0 < e /\\ e < &1 / &4 ==> ?N:num. forall n. N <= n ==> f(n) < e)\n     ==> (forall e. &0 < e ==> ?N. forall n. N <= n ==> f(n) < e)
-      #|  ~(n < 1) ==> 0 < n
-      #|  k <= n * e / &4 /\\ &0 < n * e ==> k < e / &2 * n
-      #|  1 <= n <=> 0 < n
-      #|  n * e / &4 < k + &1 /\\ &1 <= k /\\ (&1 / &4 + e / &16) * k < &1 * k\n      ==> e / &16 * (n + k) < &2 * k
-      #|  n < &2 * (n - k) <=> &2 * k < n
-      #|  n * e / &4 < e / &2 * m <=> e * n < e * &2 * m
-      #|  &n * e / &4
-      #|  n * e / &4 < k + &1 /\\ &1 <= k ==> e / &16 * n < &2 * k
-      #|  ~(n < 1) ==> 0 < n
-      #|  0 < k /\\ 4 * k <= n ==> k < n
-      #|  (e / &8) pow 2 * x < e / &2 <=> e * e / &16 * x < e * &2
-      #|  x < e / &2 /\\ y < e / &2 ==> x + y < e
-      #|  (n + k) - n:real = k
-      #|  n - (n - k):real = k
-      #|  4 * k <= n ==> k <= n
-      #|  a < b ==> x <= a ==> x < b
-      #|  a < b ==> --x <= a ==> --b < x
-      #|  n + k:num
-      #|  n:num
-      #|  n:num
-      #|  n - k:num
-      #|  &n * e / &4
-      #|  &4 * x <= y <=> x <= y * inv(&4)
-      #|  &N1 * e / &4
-      #|  &n * e / &4 < &0 + &1
-      #|  0 < k /\\ 4 * k <= n
-      #|  k:num
-      #|  &n * e / &4
-      #|  &n * e / &4
-      #|  n:num
-      #|  2 * N0 + N1 + 7
-      #|  N1:num
-      #|  e / &4
-      #|  N0:num
-      #|  (e / &8) pow 2
-      #|  e:real
-      #|  forall a c. ((\\i. a(i) / &i) real_sums c) (from 1) /\\\n         (forall n. a(n) + log(&n) <= a(n + 1) + log(&n + &1))\n         ==> (a ---> &0) sequentially
-      #|  prime p
-      #|  p:num
-      #|  s <= s' ==> (s - l - c) + l <= (s' - l' - c) + l'
-      #|  n:num
-      #|  Re l
-      #|  --Re(c)
-      #|  l:complex
-      #|  c:complex
-      #|  ?c. ((\\n. sum {p | prime p /\\ p <= n} (\\p. log(&p) / &p) - log(&n))\n        ---> c) sequentially
-      #|  2 <= p ==> 1 < p
-      #|  &0 < x /\\ &0 < y ==> &1 = x / y * y / x
-      #|  1 <= p ==> SUC(p - 1) = p
-      #|  1 <= SUC n
-      #|  p:num
-      #|  &(CARD {p | prime p /\\ p <= n}) =\n        sum(1..n)\n         (\\k. &k / log (&k) *\n              (sum {p | prime p /\\ p <= k} (\\p. log (&p) / &p) -\n               sum {p | prime p /\\ p <= k - 1} (\\p. log (&p) / &p)))
-      #|  1 <= p ==> p = SUC(p - 1)
-      #|  1 <= p ==> p = SUC(p - 1)
-      #|  \\x. l = a * (sum(1..x) f - s)
-      #|  1 <= N + 1 /\\ N <= n
-      #|  N + 1 <= n ==> N <= n + 1
-      #|  &0 < x ==> abs x = x
-      #|  N + 1 <= n
-      #|  n:num
-      #|  N + 1
-      #|  d / &2
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (N0 : Num) + ((N1 : Num) + 1)
+      #|  (N1 : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  inv((x : Cart[Real, Tybit0[Unit]])) == Cx(real_of_num(1)) / x
+      #|  op_minus_minus_gt((n : Num) => Cx(real_of_num(1) + real_of_num(1) / (Re((s : Cart[Real, Tybit0[Unit]])) - real_of_num(1))) * ((clog(Cx(real_of_num(n))) + Cx(real_of_num(24))) / cpow(Cx(real_of_num(n)), s - Cx(real_of_num(1)))), Cx(real_of_num(0)), sequentially)
+      #|  (N0 : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  \226\136\128 n : Num, INTER({(p : Num) | prime(p)}, op_dot_dot(0, n)) == {(p : Num) | prime(p) && p <= n}
+      #|  (e : Real)
+      #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) < Re(s) \226\134\146 sums((n : Num) => vsum({(p : Num) | prime(p) && p <= n}, (p : Num) => clog(Cx(real_of_num(p))) / Cx(real_of_num(p))) / cpow(Cx(real_of_num(n)), s), newman(s), from(1))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (x : Real) == (y : Real) \226\134\146 x <= (a : Real) \226\134\146 y <= a
+      #|  (n : Num)
+      #|  norm((x : Cart[Real, Tybit0[Unit]]) - (y : Cart[Real, Tybit0[Unit]])) <= real_of_num(24) \226\134\146 norm(x - y + (c : Cart[Real, Tybit0[Unit]])) <= real_of_num(24) + norm(c)
+      #|  :real
+      #|  :real
+      #|  (n : Num)
+      #|  Cx(real_of_num(1))
+      #|  real_of_num(24) + norm((c : Cart[Real, Tybit0[Unit]]))
+      #|  (n : Num) => vsum({(p : Num) | prime(p) && p <= n}, (p : Num) => clog(Cx(real_of_num(p))) / Cx(real_of_num(p))) - clog(Cx(real_of_num(n))) + (c : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]]) => if z == Cx(real_of_num(1)) { (singval : Cart[Real, Tybit0[Unit]]) } else { newman(z) + (complex_derivative(zeta, z) + (c : Cart[Real, Tybit0[Unit]]) * zeta(z)) }
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (singval : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\131 c : Cart[Real, Tybit0[Unit]], summable(from(1), (n : Num) => (vsum({(p : Num) | prime(p) && p <= n}, (p : Num) => clog(Cx(real_of_num(p))) / Cx(real_of_num(p))) - clog(Cx(real_of_num(n))) + c) / Cx(real_of_num(n)))
+      #|  ((a : Real) <= (x : Real) - (y : Real) + (b : Real)) == (a + y <= b + x)
+      #|  log(real_of_num((n : Num)))
+      #|  \226\136\128 x' : Real, (x : Real) <= x' && (a : Real) <= (y : Real) - x' + (b : Real) \226\134\146 a <= y - x + b
+      #|  -((x : Real) + (y : Real)) == -y - x
+      #|  ((a : Real) * (x : Real) <= a * (y : Real)) == (-a * y <= -a * x)
+      #|  (log(real_of_num((N : Num)) * inv(real_of_num((M : Num)))) + (a : (Num) -> Real)(N)) * inv(real_of_num((n : Num)))
+      #|  ((a : Real) - ((x : Real) - (y : Real)) <= (b : Real)) == (a + y <= b + x)
+      #|  log(real_of_num((n : Num)))
+      #|  \226\136\128 x' : Real, x' <= (x : Real) && (a : Real) - (x' - (m : Real)) <= (b : Real) \226\134\146 a - (x - m) <= b
+      #|  ((a : (Num) -> Real)((M : Num)) - log(real_of_num((N : Num)) * inv(real_of_num(M)))) * inv(real_of_num((n : Num)))
+      #|  real_of_num(0) < real_of_num((n : Num))
+      #|  (n : Num)
+      #|  (m : Real) < (n : Real) \226\134\146 m <= n + real_of_num(1)
+      #|  real_of_num((N : Num)) - real_of_num((M : Num)) + real_of_num(1) == real_of_num(N + 1 - M)
+      #|  (a : Real) <= -(x : Real) \226\134\146 x <= abs(a)
+      #|  (x : Real) <= (a : Real) \226\134\146 x <= abs(a)
+      #|  abs(sum(op_dot_dot((M : Num), (N : Num)), (i : Num) => (a : (Num) -> Real)(i) / real_of_num(i)))
+      #|  (x : Real) * (y : Real) * (z : Real) == y * (x * z)
+      #|  (m : Real) < (n : Real) \226\134\146 real_of_num(0) < n - m + real_of_num(1)
+      #|  real_of_num(0) <= (y : Real) && (real_of_num(0) <= (x : Real) \226\134\146 x <= y) \226\134\146 x <= y
+      #|  (d : Real) * real_of_num((N : Num)) / (real_of_num(N) - real_of_num((M : Num)) + real_of_num(1))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, real_of_num(m) <= real_of_num(n) \226\134\146 (a : (Num) -> Real)(m) + log(real_of_num(m)) <= a(n) + log(real_of_num(n))
+      #|  real_of_num(0) < (m : Real) && real_of_num(0) < (n : Real) \226\134\146 n / m == real_of_num(1) + (n - m) / m
+      #|  (d : Real) * (real_of_num((N : Num)) / (real_of_num(N) - real_of_num((M : Num)))) + log(real_of_num(N) / real_of_num(M))
+      #|  \226\136\128 a : Real, a <= (b : Real) && (x : Real) <= a && (y : Real) <= a \226\134\146 x <= b && y <= b
+      #|  0 < (N : Num)
+      #|  real_of_num(0) <= (d : Real)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 M : Num, \226\136\128 N : Num, abs(sum(op_dot_dot(M, N), (i : Num) => a(i) / real_of_num(i))) <= (d : Real) \226\134\146 0 < M && M < N && (\226\136\128 n : Num, a(n) + log(real_of_num(n)) <= a(n + 1) + log(real_of_num(n) + real_of_num(1))) \226\134\146 a(M) <= d * (real_of_num(N) / (real_of_num(N) - real_of_num(M))) + (real_of_num(N) - real_of_num(M)) / real_of_num(M) && -a(N) <= d * (real_of_num(N) / (real_of_num(N) - real_of_num(M))) + (real_of_num(N) - real_of_num(M)) / real_of_num(M)
+      #|  min((e : Real), real_of_num(1) / real_of_num(5))
+      #|  (\226\136\128 e : Real, real_of_num(0) < e && e < real_of_num(1) / real_of_num(4) \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 (f : (Num) -> Real)(n) < e)) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 f(n) < e))
+      #|  !((n : Num) < 1) \226\134\146 0 < n
+      #|  (k : Real) <= (n : Real) * ((e : Real) / real_of_num(4)) && real_of_num(0) < n * e \226\134\146 k < e / real_of_num(2) * n
+      #|  (1 <= (n : Num)) == (0 < n)
+      #|  (n : Real) * ((e : Real) / real_of_num(4)) < (k : Real) + real_of_num(1) && real_of_num(1) <= k && (real_of_num(1) / real_of_num(4) + e / real_of_num(16)) * k < real_of_num(1) * k \226\134\146 e / real_of_num(16) * (n + k) < real_of_num(2) * k
+      #|  ((n : Real) < real_of_num(2) * (n - (k : Real))) == (real_of_num(2) * k < n)
+      #|  ((n : Real) * ((e : Real) / real_of_num(4)) < e / real_of_num(2) * (m : Real)) == (e * n < e * (real_of_num(2) * m))
+      #|  real_of_num((n : Num)) * ((e : Real) / real_of_num(4))
+      #|  (n : Real) * ((e : Real) / real_of_num(4)) < (k : Real) + real_of_num(1) && real_of_num(1) <= k \226\134\146 e / real_of_num(16) * n < real_of_num(2) * k
+      #|  !((n : Num) < 1) \226\134\146 0 < n
+      #|  0 < (k : Num) && 4 * k <= (n : Num) \226\134\146 k < n
+      #|  (pow((e : Real) / real_of_num(8), 2) * (x : Real) < e / real_of_num(2)) == (e * (e / real_of_num(16) * x) < e * real_of_num(2))
+      #|  (x : Real) < (e : Real) / real_of_num(2) && (y : Real) < e / real_of_num(2) \226\134\146 x + y < e
+      #|  (n : Real) + (k : Real) - n == k
+      #|  (n : Real) - (n - (k : Real)) == k
+      #|  4 * (k : Num) <= (n : Num) \226\134\146 k <= n
+      #|  (a : Real) < (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x < b
+      #|  (a : Real) < (b : Real) \226\134\146 -(x : Real) <= a \226\134\146 -b < x
+      #|  (n : Num) + (k : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num) - (k : Num)
+      #|  real_of_num((n : Num)) * ((e : Real) / real_of_num(4))
+      #|  (real_of_num(4) * (x : Real) <= (y : Real)) == (x <= y * inv(real_of_num(4)))
+      #|  real_of_num((N1 : Num)) * ((e : Real) / real_of_num(4))
+      #|  real_of_num((n : Num)) * ((e : Real) / real_of_num(4)) < real_of_num(0) + real_of_num(1)
+      #|  0 < (k : Num) && 4 * k <= (n : Num)
+      #|  (k : Num)
+      #|  real_of_num((n : Num)) * ((e : Real) / real_of_num(4))
+      #|  real_of_num((n : Num)) * ((e : Real) / real_of_num(4))
+      #|  (n : Num)
+      #|  2 * (N0 : Num) + ((N1 : Num) + 7)
+      #|  (N1 : Num)
+      #|  (e : Real) / real_of_num(4)
+      #|  (N0 : Num)
+      #|  pow((e : Real) / real_of_num(8), 2)
+      #|  (e : Real)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 c : Real, real_sums((i : Num) => a(i) / real_of_num(i), c, from(1)) && (\226\136\128 n : Num, a(n) + log(real_of_num(n)) <= a(n + 1) + log(real_of_num(n) + real_of_num(1))) \226\134\146 op_minus_minus_minus_gt(a, real_of_num(0), sequentially)
+      #|  prime((p : Num))
+      #|  (p : Num)
+      #|  (s : Real) <= (s' : Real) \226\134\146 s - (l : Real) - (c : Real) + l <= s' - (l' : Real) - c + l'
+      #|  (n : Num)
+      #|  Re((l : Cart[Real, Tybit0[Unit]]))
+      #|  -Re((c : Cart[Real, Tybit0[Unit]]))
+      #|  (l : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\131 c : Real, op_minus_minus_minus_gt((n : Num) => sum({(p : Num) | prime(p) && p <= n}, (p : Num) => log(real_of_num(p)) / real_of_num(p)) - log(real_of_num(n)), c, sequentially)
+      #|  2 <= (p : Num) \226\134\146 1 < p
+      #|  real_of_num(0) < (x : Real) && real_of_num(0) < (y : Real) \226\134\146 real_of_num(1) == x / y * (y / x)
+      #|  1 <= (p : Num) \226\134\146 SUC(p - 1) == p
+      #|  1 <= SUC((n : Num))
+      #|  (p : Num)
+      #|  real_of_num(CARD({(p : Num) | prime(p) && p <= (n : Num)})) == sum(op_dot_dot(1, n), (k : Num) => real_of_num(k) / log(real_of_num(k)) * (sum({(p : Num) | prime(p) && p <= k}, (p : Num) => log(real_of_num(p)) / real_of_num(p)) - sum({(p : Num) | prime(p) && p <= k - 1}, (p : Num) => log(real_of_num(p)) / real_of_num(p))))
+      #|  1 <= (p : Num) \226\134\146 p == SUC(p - 1)
+      #|  1 <= (p : Num) \226\134\146 p == SUC(p - 1)
+      #|  (x : Num) => (l : Real) == (a : Real) * (sum(op_dot_dot(1, x), (f : (Num) -> Real)) - (s : Real))
+      #|  1 <= (N : Num) + 1 && N <= (n : Num)
+      #|  (N : Num) + 1 <= (n : Num) \226\134\146 N <= n + 1
+      #|  real_of_num(0) < (x : Real) \226\134\146 abs(x) == x
+      #|  (N : Num) + 1 <= (n : Num)
+      #|  (n : Num)
+      #|  (N : Num) + 1
+      #|  (d : Real) / real_of_num(2)
       #|  1
-      #|  sum(1..N) (\\k. e k * (f (k + 1) - f k)) - c * f(N + 1)
-      #|  N + 1 <= n ==> N <= n + 1
-      #|  N + 1 <= n ==> N <= n
-      #|  abs x <= x <=> &0 <= x
-      #|  N + 1 <= n ==> N <= n + 1
-      #|  &0 <= d * f1 /\\ &0 <= dd /\\ abs(en - cn) <= d / &4 * f1\n      ==> abs(s - (cn - cN)) <= d / &4 * f1 - dd\n          ==> abs(s - en + cN) <= d / &2 * f1
-      #|  N + 1 <= n ==> N <= n
-      #|  a <= b ==> abs(b - a) = b - a
-      #|  N + 1 <= n ==> N <= n
-      #|  (N+1)..n
-      #|  \\k. d / &4 * (f (k + 1) - f k)
-      #|  \\k. (e k - c:real) * (f (k + 1) - f k)
-      #|  forall n. N + 1 <= n\n        ==> abs((sum((N+1)..n) (\\k. e k * (f (k + 1) - f k)) -\n                 e(n) * f(n + 1)) +\n                c * f(N + 1))\n            <= d / &2 * f(n + 1)
-      #|  M + N <= (n:num) ==> M <= n /\\ N <= n
-      #|  N:num
-      #|  d / &4
-      #|  N:num
-      #|  ?N. (forall k. N <= k ==> &0 < f k) /\\\n                    (forall k. N <= k ==> f(k) <= f(k + 1)) /\\\n                    (forall k. N <= k ==> abs(e k - c) < d / &4)
-      #|  d:real
-      #|  forall k:num. M <= k ==> &0 <= f k
-      #|  forall f e c M.\n        (forall k. M <= k ==> &0 < f k) /\\\n        (forall k. M <= k ==> f(k) <= f(k + 1)) /\\\n        ((\\k. inv(f k)) ---> &0) sequentially /\\\n        (e ---> c) sequentially\n        ==> ((\\n. (sum(1..n) (\\k. e(k) * (f(k + 1) - f(k))) - e(n) * f(n + 1)) /\n                  f(n + 1)) ---> &0) sequentially
-      #|  &0 = &0 * b
-      #|  M <= n ==> M <= n + 1
-      #|  &0 < a /\\ &0 < b ==> x / b * b / a = x / a
-      #|  M:num
-      #|  \\n. ((sum(1..n) (\\k. e(k) * (f(k + 1) - f(k))) - e(n) * f(n + 1)) /\n         f(n + 1)) * (f(n + 1) / f(n))
-      #|  forall f e b c M.\n        (forall k. M <= k ==> &0 < f k) /\\\n        (forall k. M <= k ==> f(k) <= f(k + 1)) /\\\n        ((\\k. inv(f k)) ---> &0) sequentially /\\\n        ((\\n. f(n + 1) / f n) ---> b) sequentially /\\\n        (e ---> c) sequentially\n        ==> ((\\n. (sum(1..n) (\\k. e(k) * (f(k + 1) - f(k))) - e(n) * f(n + 1)) /\n                  f(n)) ---> &0) sequentially
+      #|  sum(op_dot_dot(1, (N : Num)), (k : Num) => (e : (Num) -> Real)(k) * ((f : (Num) -> Real)(k + 1) - f(k))) - (c : Real) * f(N + 1)
+      #|  (N : Num) + 1 <= (n : Num) \226\134\146 N <= n + 1
+      #|  (N : Num) + 1 <= (n : Num) \226\134\146 N <= n
+      #|  (abs((x : Real)) <= x) == (real_of_num(0) <= x)
+      #|  (N : Num) + 1 <= (n : Num) \226\134\146 N <= n + 1
+      #|  real_of_num(0) <= (d : Real) * (f1 : Real) && real_of_num(0) <= (dd : Real) && abs((en : Real) - (cn : Real)) <= d / real_of_num(4) * f1 \226\134\146 abs((s : Real) - (cn - (cN : Real))) <= d / real_of_num(4) * f1 - dd \226\134\146 abs(s - en + cN) <= d / real_of_num(2) * f1
+      #|  (N : Num) + 1 <= (n : Num) \226\134\146 N <= n
+      #|  (a : Real) <= (b : Real) \226\134\146 abs(b - a) == b - a
+      #|  (N : Num) + 1 <= (n : Num) \226\134\146 N <= n
+      #|  op_dot_dot((N : Num) + 1, (n : Num))
+      #|  (k : Num) => (d : Real) / real_of_num(4) * ((f : (Num) -> Real)(k + 1) - f(k))
+      #|  (k : Num) => ((e : (Num) -> Real)(k) - (c : Real)) * ((f : (Num) -> Real)(k + 1) - f(k))
+      #|  \226\136\128 n : Num, (N : Num) + 1 <= n \226\134\146 abs(sum(op_dot_dot(N + 1, n), (k : Num) => (e : (Num) -> Real)(k) * ((f : (Num) -> Real)(k + 1) - f(k))) - e(n) * f(n + 1) + (c : Real) * f(N + 1)) <= (d : Real) / real_of_num(2) * f(n + 1)
+      #|  (M : Num) + (N : Num) <= (n : Num) \226\134\146 M <= n && N <= n
+      #|  (N : Num)
+      #|  (d : Real) / real_of_num(4)
+      #|  (N : Num)
+      #|  \226\136\131 N : Num, (\226\136\128 k : Num, N <= k \226\134\146 real_of_num(0) < (f : (Num) -> Real)(k)) && (\226\136\128 k : Num, N <= k \226\134\146 f(k) <= f(k + 1)) && (\226\136\128 k : Num, N <= k \226\134\146 abs((e : (Num) -> Real)(k) - (c : Real)) < (d : Real) / real_of_num(4))
+      #|  (d : Real)
+      #|  \226\136\128 k : Num, (M : Num) <= k \226\134\146 real_of_num(0) <= (f : (Num) -> Real)(k)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 e : (Num) -> Real, \226\136\128 c : Real, \226\136\128 M : Num, (\226\136\128 k : Num, M <= k \226\134\146 real_of_num(0) < f(k)) && (\226\136\128 k : Num, M <= k \226\134\146 f(k) <= f(k + 1)) && op_minus_minus_minus_gt((k : Num) => inv(f(k)), real_of_num(0), sequentially) && op_minus_minus_minus_gt(e, c, sequentially) \226\134\146 op_minus_minus_minus_gt((n : Num) => (sum(op_dot_dot(1, n), (k : Num) => e(k) * (f(k + 1) - f(k))) - e(n) * f(n + 1)) / f(n + 1), real_of_num(0), sequentially)
+      #|  real_of_num(0) == real_of_num(0) * (b : Real)
+      #|  (M : Num) <= (n : Num) \226\134\146 M <= n + 1
+      #|  real_of_num(0) < (a : Real) && real_of_num(0) < (b : Real) \226\134\146 (x : Real) / b * (b / a) == x / a
+      #|  (M : Num)
+      #|  (n : Num) => (sum(op_dot_dot(1, n), (k : Num) => (e : (Num) -> Real)(k) * ((f : (Num) -> Real)(k + 1) - f(k))) - e(n) * f(n + 1)) / f(n + 1) * (f(n + 1) / f(n))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 e : (Num) -> Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 M : Num, (\226\136\128 k : Num, M <= k \226\134\146 real_of_num(0) < f(k)) && (\226\136\128 k : Num, M <= k \226\134\146 f(k) <= f(k + 1)) && op_minus_minus_minus_gt((k : Num) => inv(f(k)), real_of_num(0), sequentially) && op_minus_minus_minus_gt((n : Num) => f(n + 1) / f(n), b, sequentially) && op_minus_minus_minus_gt(e, c, sequentially) \226\134\146 op_minus_minus_minus_gt((n : Num) => (sum(op_dot_dot(1, n), (k : Num) => e(k) * (f(k + 1) - f(k))) - e(n) * f(n + 1)) / f(n), real_of_num(0), sequentially)
       #|  1
-      #|  \\n:num. &1
-      #|  forall a. ((\\n. (&n + a) / &n) ---> &1) sequentially
-      #|  forall a. ((\\n. &n / (&n + &1)) ---> &1) sequentially
-      #|  a <= b ==> a <= abs b
-      #|  &2 * log(&2)
-      #|  &0 <= x ==> &1 <= &1 + x
-      #|  &0 <= x /\\ x <= y ==> abs x <= y
-      #|  n:num
+      #|  (n : Num) => real_of_num(1)
+      #|  \226\136\128 a : Real, op_minus_minus_minus_gt((n : Num) => (real_of_num(n) + a) / real_of_num(n), real_of_num(1), sequentially)
+      #|  \226\136\128 a : _, op_minus_minus_minus_gt((n : Num) => real_of_num(n) / (real_of_num(n) + real_of_num(1)), real_of_num(1), sequentially)
+      #|  (a : Real) <= (b : Real) \226\134\146 a <= abs(b)
+      #|  real_of_num(2) * log(real_of_num(2))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(1) <= real_of_num(1) + x
+      #|  real_of_num(0) <= (x : Real) && x <= (y : Real) \226\134\146 abs(x) <= y
+      #|  (n : Num)
       #|  16
-      #|  \\n. inv(&n)
-      #|  &2 <= x ==> &0 < x
-      #|  &0 <= x ==> &0 < &1 + x
-      #|  &0 < x ==> (&1 + a / x = b / x <=> x + a = b)
-      #|  &2 <= x ==> &1 < x
+      #|  (n : Num) => inv(real_of_num(n))
+      #|  real_of_num(2) <= (x : Real) \226\134\146 real_of_num(0) < x
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) < real_of_num(1) + x
+      #|  real_of_num(0) < (x : Real) \226\134\146 (real_of_num(1) + (a : Real) / x == (b : Real) / x) == (x + a == b)
+      #|  real_of_num(2) <= (x : Real) \226\134\146 real_of_num(1) < x
       #|  2
-      #|  \\n. &1 + log(&1 + &1 / &n) / log(&n)
-      #|  ((\\n. log(&n + &1) / log(&n)) ---> &1) sequentially
-      #|  ((\\n. log(&n) / log(&n + &1)) ---> &1) sequentially
-      #|  &0 < x ==> abs x = x
-      #|  &0 < Re z
-      #|  a * b * c * d = (a * b:real) * (c * d)
-      #|  &0 < x ==> x * (y - (z + --inv x)) = &1 - x * (z - y)
-      #|  (*) (&k + &1)
-      #|  w:real = z + u <=> w - z = u
-      #|  &0 < &k /\\ &0 < &k + &1
-      #|  z:complex
-      #|  n <= 1 <=> n = 0 \\/ n = 1
-      #|  z:complex
-      #|  n:num
-      #|  k - (k + &1) = -- &1
+      #|  (n : Num) => real_of_num(1) + log(real_of_num(1) + real_of_num(1) / real_of_num(n)) / log(real_of_num(n))
+      #|  op_minus_minus_minus_gt((n : Num) => log(real_of_num(n) + real_of_num(1)) / log(real_of_num(n)), real_of_num(1), sequentially)
+      #|  op_minus_minus_minus_gt((n : Num) => log(real_of_num(n)) / log(real_of_num(n) + real_of_num(1)), real_of_num(1), sequentially)
+      #|  real_of_num(0) < (x : Real) \226\134\146 abs(x) == x
+      #|  real_of_num(0) < Re((z : Cart[Real, Tybit0[Unit]]))
+      #|  (a : Real) * ((b : Real) * ((c : Real) * (d : Real))) == a * b * (c * d)
+      #|  real_of_num(0) < (x : Real) \226\134\146 x * ((y : Real) - ((z : Real) + -inv(x))) == real_of_num(1) - x * (z - y)
+      #|  op_star(real_of_num((k : Num)) + real_of_num(1))
+      #|  ((w : Real) == (z : Real) + (u : Real)) == (w - z == u)
+      #|  real_of_num(0) < real_of_num((k : Num)) && real_of_num(0) < real_of_num(k) + real_of_num(1)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  ((n : Num) <= 1) == (n == 0 || n == 1)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
+      #|  (k : Real) - (k + real_of_num(1)) == -real_of_num(1)
       #|  1
-      #|  Cx(&k)
-      #|  Cx(&k + &1)
-      #|  \\n z. if n = 0 then clog z\n           else if n = 1 then inv z\n           else --inv(z pow 2)
-      #|  forall k. 1 <= k ==> abs((&k + &1) * (log(&k + &1) - log(&k)) - &1)\n                  <= &2 / &k
+      #|  Cx(real_of_num((k : Num)))
+      #|  Cx(real_of_num((k : Num)) + real_of_num(1))
+      #|  (n : Num) => (z : Cart[Real, Tybit0[Unit]]) => if n == 0 { clog(z) } else { if n == 1 { inv(z) } else { -inv(pow(z, 2)) } }
+      #|  \226\136\128 k : Num, 1 <= k \226\134\146 abs((real_of_num(k) + real_of_num(1)) * (log(real_of_num(k) + real_of_num(1)) - log(real_of_num(k))) - real_of_num(1)) <= real_of_num(2) / real_of_num(k)
       #|  (f has_complex_derivative f') net
       #|  (f has_complex_derivative f') net
-      #|  &0 < &1 + abs B
-      #|  (e * inv(&2) * i) * x = (e * inv(&2)) * x * i
-      #|  abs(&1 + abs B) = &1 + abs B
-      #|  &0 < n ==> abs n = n
-      #|  abs(d * abs xN + abs yN) < e / &2\n    ==> d * abs xN = abs(d * xN) /\\ abs(d * xN + xn) <= e / &2\n        ==> abs(yN) + xn < e
-      #|  N + 1 <= n ==> N <= n
-      #|  &0 < x /\\ abs x < y ==> x <= y
-      #|  N + 1 <= n ==> N <= n
-      #|  &0 < n ==> abs n = n
-      #|  e / (&2 * (&1 + abs B)) * sum(N+1..n) x / z n
-      #|  forall y'. abs(y) <= y' /\\ abs(x) + y' < e ==> abs(x + y) < e
-      #|  N + 1 <= n ==> N <= n
-      #|  &0 < n ==> abs n = n
-      #|  forall x. abs(x) / z(n:num) = abs(x / z n)
-      #|  1 <= N + 1 /\\ N <= n
-      #|  n:num
-      #|  N + 1
-      #|  eventually (\\n. abs (sum (1..n) x / z n) <= B) sequentially
-      #|  e / &2
-      #|  e / (&2 * (&1 + abs B)) * abs(sum(1..N) x) + abs(sum(1..N) y)
-      #|  ((\\n. inv (z n)) ---> &0) sequentially
-      #|  N:num
-      #|  e / (&2 * (&1 + abs B))
-      #|  ((\\n. y n / x n) ---> &0) sequentially
-      #|  eventually (\\n. &0 < x n /\\ &0 < y n /\\ &0 < z n) sequentially
-      #|  e:real
-      #|  forall x y z B.\n        eventually (\\n. &0 < x n) sequentially /\\\n        eventually (\\n. &0 < y n) sequentially /\\\n        eventually (\\n. &0 < z n) sequentially /\\\n        ((\\n. inv(z n)) ---> &0) sequentially /\\\n        eventually (\\n. abs(sum (1..n) x / z(n)) <= B) sequentially /\\\n        ((\\n. y(n) / x(n)) ---> &0) sequentially\n        ==> ((\\n. sum (1..n) y / z(n)) ---> &0) sequentially
-      #|  ((\\n. sum (1..n) x / z n) ---> l) sequentially
-      #|  x:num->real
-      #|  forall x y z l.\n        eventually (\\n. &0 < x n) sequentially /\\\n        eventually (\\n. &0 < y n) sequentially /\\\n        eventually (\\n. &0 < z n) sequentially /\\\n        ((\\n. inv(z n)) ---> &0) sequentially /\\\n        ((\\n. sum (1..n) x / z(n)) ---> l) sequentially /\\\n        ((\\n. y(n) / x(n)) ---> &0) sequentially\n        ==> ((\\n. sum (1..n) y / z(n)) ---> &0) sequentially
-      #|  &2 < x ==> &0 <= x
-      #|  l pow 2 <= l / &2 <=> &0 <= (&1 / &2 - l) * l
-      #|  l pow 2 <= l / &2\n    ==> inv(&2) * l <= abs(l - l pow 2)
-      #|  &2 < l ==> (inv(l) * &2) * l pow 2 = inv(inv(&2 * l))
-      #|  &2 < x ==> &0 < x
-      #|  &2 < x ==> abs x = x
-      #|  &4 * log(&2)
-      #|  &2 < log(&n + &1)
-      #|  n:num
+      #|  real_of_num(0) < real_of_num(1) + abs((B : Real))
+      #|  (e : Real) * (inv(real_of_num(2)) * (i : Real)) * (x : Real) == e * inv(real_of_num(2)) * (x * i)
+      #|  abs(real_of_num(1) + abs((B : Real))) == real_of_num(1) + abs(B)
+      #|  real_of_num(0) < (n : Real) \226\134\146 abs(n) == n
+      #|  abs((d : Real) * abs((xN : Real)) + abs((yN : Real))) < (e : Real) / real_of_num(2) \226\134\146 d * abs(xN) == abs(d * xN) && abs(d * xN + (xn : Real)) <= e / real_of_num(2) \226\134\146 abs(yN) + xn < e
+      #|  (N : Num) + 1 <= (n : Num) \226\134\146 N <= n
+      #|  real_of_num(0) < (x : Real) && abs(x) < (y : Real) \226\134\146 x <= y
+      #|  (N : Num) + 1 <= (n : Num) \226\134\146 N <= n
+      #|  real_of_num(0) < (n : Real) \226\134\146 abs(n) == n
+      #|  (e : Real) / (real_of_num(2) * (real_of_num(1) + abs((B : Real)))) * (sum(op_dot_dot((N : Num) + 1, (n : Num)), (x : (Num) -> Real)) / (z : (Num) -> Real)(n))
+      #|  \226\136\128 y' : Real, abs((y : Real)) <= y' && abs((x : Real)) + y' < (e : Real) \226\134\146 abs(x + y) < e
+      #|  (N : Num) + 1 <= (n : Num) \226\134\146 N <= n
+      #|  real_of_num(0) < (n : Real) \226\134\146 abs(n) == n
+      #|  \226\136\128 x : Real, abs(x) / (z : (Num) -> Real)((n : Num)) == abs(x / z(n))
+      #|  1 <= (N : Num) + 1 && N <= (n : Num)
+      #|  (n : Num)
+      #|  (N : Num) + 1
+      #|  eventually((n : Num) => abs(sum(op_dot_dot(1, n), (x : (Num) -> Real)) / (z : (Num) -> Real)(n)) <= (B : Real), sequentially)
+      #|  (e : Real) / real_of_num(2)
+      #|  (e : Real) / (real_of_num(2) * (real_of_num(1) + abs((B : Real)))) * abs(sum(op_dot_dot(1, (N : Num)), (x : (Num) -> Real))) + abs(sum(op_dot_dot(1, N), (y : (Num) -> Real)))
+      #|  op_minus_minus_minus_gt((n : Num) => inv((z : (Num) -> Real)(n)), real_of_num(0), sequentially)
+      #|  (N : Num)
+      #|  (e : Real) / (real_of_num(2) * (real_of_num(1) + abs((B : Real))))
+      #|  op_minus_minus_minus_gt((n : Num) => (y : (Num) -> Real)(n) / (x : (Num) -> Real)(n), real_of_num(0), sequentially)
+      #|  eventually((n : Num) => real_of_num(0) < (x : (Num) -> Real)(n) && real_of_num(0) < (y : (Num) -> Real)(n) && real_of_num(0) < (z : (Num) -> Real)(n), sequentially)
+      #|  (e : Real)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, \226\136\128 z : (Num) -> Real, \226\136\128 B : Real, eventually((n : Num) => real_of_num(0) < x(n), sequentially) && eventually((n : Num) => real_of_num(0) < y(n), sequentially) && eventually((n : Num) => real_of_num(0) < z(n), sequentially) && op_minus_minus_minus_gt((n : Num) => inv(z(n)), real_of_num(0), sequentially) && eventually((n : Num) => abs(sum(op_dot_dot(1, n), x) / z(n)) <= B, sequentially) && op_minus_minus_minus_gt((n : Num) => y(n) / x(n), real_of_num(0), sequentially) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(1, n), y) / z(n), real_of_num(0), sequentially)
+      #|  op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(1, n), (x : (Num) -> Real)) / (z : (Num) -> Real)(n), (l : Real), sequentially)
+      #|  (x : (Num) -> Real)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, \226\136\128 z : (Num) -> Real, \226\136\128 l : Real, eventually((n : Num) => real_of_num(0) < x(n), sequentially) && eventually((n : Num) => real_of_num(0) < y(n), sequentially) && eventually((n : Num) => real_of_num(0) < z(n), sequentially) && op_minus_minus_minus_gt((n : Num) => inv(z(n)), real_of_num(0), sequentially) && op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(1, n), x) / z(n), l, sequentially) && op_minus_minus_minus_gt((n : Num) => y(n) / x(n), real_of_num(0), sequentially) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(1, n), y) / z(n), real_of_num(0), sequentially)
+      #|  real_of_num(2) < (x : Real) \226\134\146 real_of_num(0) <= x
+      #|  (pow((l : Real), 2) <= l / real_of_num(2)) == (real_of_num(0) <= (real_of_num(1) / real_of_num(2) - l) * l)
+      #|  pow((l : Real), 2) <= l / real_of_num(2) \226\134\146 inv(real_of_num(2)) * l <= abs(l - pow(l, 2))
+      #|  real_of_num(2) < (l : Real) \226\134\146 inv(l) * real_of_num(2) * pow(l, 2) == inv(inv(real_of_num(2) * l))
+      #|  real_of_num(2) < (x : Real) \226\134\146 real_of_num(0) < x
+      #|  real_of_num(2) < (x : Real) \226\134\146 abs(x) == x
+      #|  real_of_num(4) * log(real_of_num(2))
+      #|  real_of_num(2) < log(real_of_num((n : Num)) + real_of_num(1))
+      #|  (n : Num)
       #|  42
       #|  1
-      #|  \\n. &2 / log(&n + &1)
+      #|  (n : Num) => real_of_num(2) / log(real_of_num(n) + real_of_num(1))
       #|  1
-      #|  &0 < &n + &1
-      #|  &1 <= x ==> &1 < x + &1
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+      #|  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(1) < x + real_of_num(1)
       #|  1
-      #|  &1 <= x ==> &1 < x + &1
+      #|  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(1) < x + real_of_num(1)
       #|  1
-      #|  &4 * log(&2)
-      #|  &1 < log(&n + &1)
+      #|  real_of_num(4) * log(real_of_num(2))
+      #|  real_of_num(1) < log(real_of_num((n : Num)) + real_of_num(1))
       #|  16
-      #|  &1
-      #|  \\n. &1 / log(&n + &1) - &1 / log(&n + &1) pow 2
-      #|  &0 < log(&m + &1)
-      #|  &0 <= y /\\ y <= x\n      ==> abs(&1 * x + &2 * y) <= &3 * x
-      #|  m:num
-      #|  abs x <= x <=> &0 <= x
-      #|  n:num
+      #|  real_of_num(1)
+      #|  (n : Num) => real_of_num(1) / log(real_of_num(n) + real_of_num(1)) - real_of_num(1) / pow(log(real_of_num(n) + real_of_num(1)), 2)
+      #|  real_of_num(0) < log(real_of_num((m : Num)) + real_of_num(1))
+      #|  real_of_num(0) <= (y : Real) && y <= (x : Real) \226\134\146 abs(real_of_num(1) * x + real_of_num(2) * y) <= real_of_num(3) * x
+      #|  (m : Num)
+      #|  (abs((x : Real)) <= x) == (real_of_num(0) <= x)
+      #|  (n : Num)
       #|  1
-      #|  \\n. sum(1..n) (\\k. &3 / log(&k + &1) pow 2) /\n                  ((&n + &1) / log(&n + &1))
-      #|  abs x <= x <=> &0 <= x
-      #|  &1 / l - m1 / l * x:real = --((m1 * x - &1) / l)
-      #|  &0 <= x /\\ abs(a - b) <= y ==> abs(a - x - b) <= x + y
-      #|  m:num
-      #|  abs x <= x <=> &0 <= x
-      #|  n:num
+      #|  (n : Num) => sum(op_dot_dot(1, n), (k : Num) => real_of_num(3) / pow(log(real_of_num(k) + real_of_num(1)), 2)) / ((real_of_num(n) + real_of_num(1)) / log(real_of_num(n) + real_of_num(1)))
+      #|  (abs((x : Real)) <= x) == (real_of_num(0) <= x)
+      #|  real_of_num(1) / (l : Real) - (m1 : Real) / l * (x : Real) == -((m1 * x - real_of_num(1)) / l)
+      #|  real_of_num(0) <= (x : Real) && abs((a : Real) - (b : Real)) <= (y : Real) \226\134\146 abs(a - x - b) <= x + y
+      #|  (m : Num)
+      #|  (abs((x : Real)) <= x) == (real_of_num(0) <= x)
+      #|  (n : Num)
       #|  1
-      #|  \\n. sum(1..n) (\\k. &1 / log(&k + &1) pow 2 +\n                                 &2 / (&k * log(&k + &1))) /\n                  ((&n + &1) / log(&n + &1))
+      #|  (n : Num) => sum(op_dot_dot(1, n), (k : Num) => real_of_num(1) / pow(log(real_of_num(k) + real_of_num(1)), 2) + real_of_num(2) / (real_of_num(k) * log(real_of_num(k) + real_of_num(1)))) / ((real_of_num(n) + real_of_num(1)) / log(real_of_num(n) + real_of_num(1)))
       #|  1
-      #|  &0 < log(&n + &1)
-      #|  n:num
+      #|  real_of_num(0) < log(real_of_num((n : Num)) + real_of_num(1))
+      #|  (n : Num)
       #|  1
-      #|  \\n:num. &1
-      #|  &0 < &n + &1 /\\ &0 < &n + &2
-      #|  (n + &1) + &1 = n + &2
-      #|  16 <= n
-      #|  1 <= 15 + 1 /\\ 15 <= n
-      #|  n:num
+      #|  (n : Num) => real_of_num(1)
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1) && real_of_num(0) < real_of_num(n) + real_of_num(2)
+      #|  (n : Real) + real_of_num(1) + real_of_num(1) == n + real_of_num(2)
+      #|  16 <= (n : Num)
+      #|  1 <= 15 + 1 && 15 <= (n : Num)
+      #|  (n : Num)
       #|  16
       #|  1
       #|  1
-      #|  &1
-      #|  &0 < &n + &1 /\\ &0 < &n + &2
-      #|  (n + &1) + &1 = n + &2
-      #|  16 <= n
-      #|  1 <= 15 + 1 /\\ 15 <= n
-      #|  n:num
+      #|  real_of_num(1)
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1) && real_of_num(0) < real_of_num(n) + real_of_num(2)
+      #|  (n : Real) + real_of_num(1) + real_of_num(1) == n + real_of_num(2)
+      #|  16 <= (n : Num)
+      #|  1 <= 15 + 1 && 15 <= (n : Num)
+      #|  (n : Num)
       #|  16
-      #|  &4 * log(&2)
-      #|  x <= inv(&2) /\\ y <= x\n        ==> y + x <= &1 /\\ &0 <= x - y
-      #|  x - x pow 2 <= y - y pow 2 <=>\n          (x + y) * (y - x) <= &1 * (y - x)
-      #|  &15 <= x ==> &0 < x + &1
-      #|  &15 <= y
-      #|  y:real
-      #|  x:real
-      #|  &15 <= z ==> &0 < z + &1
+      #|  real_of_num(4) * log(real_of_num(2))
+      #|  (x : Real) <= inv(real_of_num(2)) && (y : Real) <= x \226\134\146 y + x <= real_of_num(1) && real_of_num(0) <= x - y
+      #|  ((x : Real) - pow(x, 2) <= (y : Real) - pow(y, 2)) == ((x + y) * (y - x) <= real_of_num(1) * (y - x))
+      #|  real_of_num(15) <= (x : Real) \226\134\146 real_of_num(0) < x + real_of_num(1)
+      #|  real_of_num(15) <= (y : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  real_of_num(15) <= (z : Real) \226\134\146 real_of_num(0) < z + real_of_num(1)
       #|  Re
-      #|  ~(z + Cx(&1) = Cx(&0))
-      #|  (a ==> b) /\\ a ==> a /\\ b
-      #|  z:complex
-      #|  n:num
-      #|  (forall n. P n ==> Q n) /\\ ((forall n. P n ==> R n) ==> s)\n      ==> (forall n. P n /\\ Q n ==> R n) ==> s
-      #|  n:num
+      #|  !((z : Cart[Real, Tybit0[Unit]]) + Cx(real_of_num(1)) == Cx(real_of_num(0)))
+      #|  ((a : Bool) \226\134\146 (b : Bool)) && a \226\134\146 a && b
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
+      #|  (\226\136\128 n : _, (P : (_) -> Bool)(n) \226\134\146 (Q : (_) -> Bool)(n)) && ((\226\136\128 n : _, P(n) \226\134\146 (R : (_) -> Bool)(n)) \226\134\146 (s : Bool)) \226\134\146 (\226\136\128 n : _, P(n) && Q(n) \226\134\146 R(n)) \226\134\146 s
+      #|  (n : Num)
       #|  16
-      #|  \\z. (z + Cx(&1)) / clog(z + Cx(&1))
-      #|  \\z. Cx(&1) / clog(z + Cx(&1)) - Cx(&1) / (clog(z + Cx(&1))) pow 2
-      #|  n:num
-      #|  \\n.  ((&n + &1) / log(&n + &1) +\n                (sum(1..15) (\\k. &1 / log(&k + &1) - &1 / log(&k + &1) pow 2) -\n                      &16 / log (&16))) / ((&n + &1) / log (&n + &1))
-      #|  \\n. ((&n + &2) / log (&n + &2) +\n                   (sum(1..15) (\\k. &1 / log(&k + &1) - &1 / log(&k + &1) pow 2) -\n                      &17 / log (&17))) / ((&n + &1) / log (&n + &1))
-      #|  b /\\ (b ==> a) ==> a /\\ b
-      #|  \\n. sum(1..n) (\\k. &1 / log(&k + &1) - &1 / log(&k + &1) pow 2) /\n        ((&n + &1) / log(&n + &1))
-      #|  a * (x - y) + s + a * (y - x):real = s
-      #|  1 <= SUC i
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (z + Cx(real_of_num(1))) / clog(z + Cx(real_of_num(1)))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => Cx(real_of_num(1)) / clog(z + Cx(real_of_num(1))) - Cx(real_of_num(1)) / pow(clog(z + Cx(real_of_num(1))), 2)
+      #|  (n : Num)
+      #|  (n : Num) => ((real_of_num(n) + real_of_num(1)) / log(real_of_num(n) + real_of_num(1)) + (sum(op_dot_dot(1, 15), (k : Num) => real_of_num(1) / log(real_of_num(k) + real_of_num(1)) - real_of_num(1) / pow(log(real_of_num(k) + real_of_num(1)), 2)) - real_of_num(16) / log(real_of_num(16)))) / ((real_of_num(n) + real_of_num(1)) / log(real_of_num(n) + real_of_num(1)))
+      #|  (n : Num) => ((real_of_num(n) + real_of_num(2)) / log(real_of_num(n) + real_of_num(2)) + (sum(op_dot_dot(1, 15), (k : Num) => real_of_num(1) / log(real_of_num(k) + real_of_num(1)) - real_of_num(1) / pow(log(real_of_num(k) + real_of_num(1)), 2)) - real_of_num(17) / log(real_of_num(17)))) / ((real_of_num(n) + real_of_num(1)) / log(real_of_num(n) + real_of_num(1)))
+      #|  (b : Bool) && (b \226\134\146 (a : Bool)) \226\134\146 a && b
+      #|  (n : Num) => sum(op_dot_dot(1, n), (k : Num) => real_of_num(1) / log(real_of_num(k) + real_of_num(1)) - real_of_num(1) / pow(log(real_of_num(k) + real_of_num(1)), 2)) / ((real_of_num(n) + real_of_num(1)) / log(real_of_num(n) + real_of_num(1)))
+      #|  (a : Real) * ((x : Real) - (y : Real)) + ((s : Real) + a * (y - x)) == s
+      #|  1 <= SUC((i : Num))
       #|  1
       #|  1
-      #|  \\n. ((&n + &1) / log(&n + &1) * (log(&n) - log(&n + &1)) +\n         sum(1..n) (\\k. (&k + &1) / log(&k + &1) *\n                        (log(&k + &1) - log(&k)))) / (&n / log(&n))
-      #|  &4 * log(&2)
-      #|  x pow 2 <= x <=> x * x <= x * &1
-      #|  &0 < Re z /\\ &0 < &n /\\ &0 < &n + &1
-      #|  z:complex
-      #|  &16 <= x ==> &0 < x
-      #|  &0 < Re z
-      #|  ~(z = Cx(&0))
-      #|  (a ==> b) /\\ a ==> a /\\ b
-      #|  z:complex
-      #|  ~(n + &1 <= x /\\ x <= n)
-      #|  Cx(&n + &1)
-      #|  Cx(&n)
-      #|  \\z. inv(clog z) - inv(clog z) pow 2
-      #|  \\z. z / clog z
-      #|  n:num
-      #|  &1
-      #|  16 <= n ==> 0 < n /\\ 1 < n
+      #|  (n : Num) => ((real_of_num(n) + real_of_num(1)) / log(real_of_num(n) + real_of_num(1)) * (log(real_of_num(n)) - log(real_of_num(n) + real_of_num(1))) + sum(op_dot_dot(1, n), (k : Num) => (real_of_num(k) + real_of_num(1)) / log(real_of_num(k) + real_of_num(1)) * (log(real_of_num(k) + real_of_num(1)) - log(real_of_num(k))))) / (real_of_num(n) / log(real_of_num(n)))
+      #|  real_of_num(4) * log(real_of_num(2))
+      #|  (pow((x : Real), 2) <= x) == (x * x <= x * real_of_num(1))
+      #|  real_of_num(0) < Re((z : Cart[Real, Tybit0[Unit]])) && real_of_num(0) < real_of_num((n : Num)) && real_of_num(0) < real_of_num(n) + real_of_num(1)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(16) <= (x : Real) \226\134\146 real_of_num(0) < x
+      #|  real_of_num(0) < Re((z : Cart[Real, Tybit0[Unit]]))
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  ((a : Bool) \226\134\146 (b : Bool)) && a \226\134\146 a && b
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  !((n : Real) + real_of_num(1) <= (x : Real) && x <= n)
+      #|  Cx(real_of_num((n : Num)) + real_of_num(1))
+      #|  Cx(real_of_num((n : Num)))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => inv(clog(z)) - pow(inv(clog(z)), 2)
+      #|  (z : Cart[Real, Tybit0[Unit]]) => z / clog(z)
+      #|  (n : Num)
+      #|  real_of_num(1)
+      #|  16 <= (n : Num) \226\134\146 0 < n && 1 < n
       #|  16
-      #|  &1
-      #|  (a * x - s) / b - (a * x' - s') / b:real =\n      ((s' - s) - (x' - x) * a) / b
-      #|  \\n. ((&n + &1) / log(&n + &1) * log(&n) -\n         sum (1..n)\n         (\\k. log(&k) * ((&k + &1) / log(&k + &1) - &k / log(&k)))) /\n        (&n / log(&n))
+      #|  real_of_num(1)
+      #|  ((a : Real) * (x : Real) - (s : Real)) / (b : Real) - (a * (x' : Real) - (s' : Real)) / b == (s' - s - (x' - x) * a) / b
+      #|  (n : Num) => ((real_of_num(n) + real_of_num(1)) / log(real_of_num(n) + real_of_num(1)) * log(real_of_num(n)) - sum(op_dot_dot(1, n), (k : Num) => log(real_of_num(k)) * ((real_of_num(k) + real_of_num(1)) / log(real_of_num(k) + real_of_num(1)) - real_of_num(k) / log(real_of_num(k))))) / (real_of_num(n) / log(real_of_num(n)))
       #|  1
-      #|  \\n. ((&n + &1) / log(&n + &1) *\n         sum {p | prime p /\\ p <= n} (\\p. log(&p) / &p) -\n         sum (1..n)\n         (\\k. sum {p | prime p /\\ p <= k} (\\p. log(&p) / &p) *\n              ((&k + &1) / log(&k + &1) - &k / log(&k)))) / (&n / log(&n))
-      #|  {p | prime p /\\ p = 0} = {}
-      #|  ((\\n. &(CARD {p | prime p /\\ p <= n}) / (&n / log(&n)))\n    ---> &1) sequentially
+      #|  (n : Num) => ((real_of_num(n) + real_of_num(1)) / log(real_of_num(n) + real_of_num(1)) * sum({(p : Num) | prime(p) && p <= n}, (p : Num) => log(real_of_num(p)) / real_of_num(p)) - sum(op_dot_dot(1, n), (k : Num) => sum({(p : Num) | prime(p) && p <= k}, (p : Num) => log(real_of_num(p)) / real_of_num(p)) * ((real_of_num(k) + real_of_num(1)) / log(real_of_num(k) + real_of_num(1)) - real_of_num(k) / log(real_of_num(k))))) / (real_of_num(n) / log(real_of_num(n)))
+      #|  {(p : Num) | prime(p) && p == 0} == {}
+      #|  op_minus_minus_minus_gt((n : Num) => real_of_num(CARD({(p : Num) | prime(p) && p <= n})) / (real_of_num(n) / log(real_of_num(n))), real_of_num(1), sequentially)
       #|  (f has_complex_derivative f') net
       #|  (f has_complex_derivative f') net
-      #|  x < x pow 2 <=> &0 < x * (x - &1)
-      #|  &1 < x ==> &0 < x
+      #|  ((x : Real) < pow(x, 2)) == (real_of_num(0) < x * (x - real_of_num(1)))
+      #|  real_of_num(1) < (x : Real) \226\134\146 real_of_num(0) < x
       #|LT_NORM_CPOW_NUM =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\s:cart(real,tybit0(1)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (#Re:fun(cart(real,tybit0(1)),real) s:cart(real,tybit0(1))))) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#vector_norm:fun(cart(real,tybit0(1)),real) ((#cpow:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_num:fun(num,real) n:num))) s:cart(real,tybit0(1))))))))))
       #|CPOW_NUM_NE_1 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\s:cart(real,tybit0(1)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (#Re:fun(cart(real,tybit0(1)),real) s:cart(real,tybit0(1))))) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))) (#~:fun(bool,bool) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) ((#cpow:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_num:fun(num,real) n:num))) s:cart(real,tybit0(1)))) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
       #|FINITE_ATMOST =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#forall:fun(fun(num,bool),bool) (\n:num. (#FINITE:fun(fun(num,bool),bool) (#GSPEC:fun(fun(num,bool),fun(num,bool)) (\GEN%PVAR%1:num. (#?:fun(fun(num,bool),bool) (\m:num. (((#SETSPEC:fun(num,fun(bool,fun(num,bool))) GEN%PVAR%1:num) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) m:num)) ((#<=:fun(num,fun(num,bool)) m:num) n:num))) m:num))))))))))
