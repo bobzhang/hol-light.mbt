@@ -24,7 +24,7 @@ pub fn countable() -> @kernel.Thm {
 ///|
 /// repeating
 fn step_3() -> Unit raise {
-  repeating_c.set(@pair.new_definition(@parser.parse_term("repeating = {s:num->bool | ?n. forall m. m >= n ==> s m}")))
+  repeating_c.set(@pair.new_definition(@term_syntax.parse_term("(repeating : ((Num) -> Bool) -> Bool) == {(s : (Num) -> Bool) | ∃ n : Num, ∀ m : Num, m >= n → s(m)}")))
 }
 
 ///|
@@ -203,7 +203,7 @@ fn step_9() -> Unit raise {
   let t50 = @simp.rewrite_tac(@list.List([@sets.le_c()]))
   let t48 = @simp.rewrite_tac(@list.List([@card.card_square_num()]))
   let t49 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.match_mp_tac(@card.card_eq_imp_le()), t48)])
-  let t46 = @parser.parse_term("(UNIV:num->bool) *_c (UNIV:num->bool)")
+  let t46 = @term_syntax.parse_term("(op_star_us_c : ((Num) -> Bool, (Num) -> Bool, (Num, Num)) -> Bool)((UNIV : (Num) -> Bool), (UNIV : (Num) -> Bool))")
   let t47 = @tactics.trans_tac(@card.card_le_trans())(t46)
   let t78 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([countable()])), t47), @tactics.conj_tac), t49), t50), t51), t52), @tactics.conj_tac), t55), t57), t58), t59), t60), t61), t63), t64), t65), t69), t70), @tactics.strip_tac), t76), t77)
   countable_repeating_c.set(@tactics.prove(@term_syntax.parse_term("countable(repeating)"), t78))
@@ -221,7 +221,7 @@ pub fn countable_repeating() -> @kernel.Thm {
 ///|
 /// canonical
 fn step_10() -> Unit raise {
-  canonical_c.set(@pair.new_definition(@parser.parse_term("canonical = {s:num->bool | forall n. ?m. m >= n /\\ ~(s m)}")))
+  canonical_c.set(@pair.new_definition(@term_syntax.parse_term("(canonical : ((Num) -> Bool) -> Bool) == {(s : (Num) -> Bool) | ∀ n : Num, ∃ m : Num, m >= n && !s(m)}")))
 }
 
 ///|
@@ -239,7 +239,7 @@ fn step_11() -> Unit raise {
   let t97 = @simp.rewrite_tac(@list.List([@sets.num_infinite(), @card.card_le_refl()]))
   let t98 = @tactics.then_tac(@tactics.match_mp_tac(@card.card_add_absorb_le()), t97)
   let t99 = @list.List([@meson.asm_meson_tac(@list.List([countable(), countable_repeating(), @card.card_le_add()])), t98])
-  let t95 = @parser.parse_term("(UNIV:num->bool) +_c (UNIV:num->bool)")
+  let t95 = @term_syntax.parse_term("(op_plus_us_c : ((Num) -> Bool, (Num) -> Bool, Sum[Num, Num]) -> Bool)((UNIV : (Num) -> Bool), (UNIV : (Num) -> Bool))")
   let t96 = @tactics.trans_tac(@card.card_le_trans())(t95)
   let t94 = @simp.asm_simp_tac(@list.List([@card.card_eq_imp_le()]))
   let t92 = @term_syntax.parse_term("op_plus_us_c(canonical, repeating)")
@@ -565,12 +565,12 @@ fn step_19() -> Unit raise {
     @tactics.all_tac
   })
   let t233 = @simp.asm_rewrite_tac(@list.List([]))
-  let t231 = @parser.parse_term("UNIV:real->bool")
+  let t231 = @term_syntax.parse_term("(UNIV : (Real) -> Bool)")
   let t232 = @tactics.trans_tac(@card.card_le_trans())(t231)
   let t230 = @simp.rewrite_tac(@list.List([countable()]))
   let t229 = @simp.rewrite_tac(@list.List([@class.contrapos_thm()]))
   let t266 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(uncountable_canonical()), t229), t230), @tactics.disch_tac), t232), t233), t235), t236), t237), t238), t240), t241), @tactics.strip_tac), t242), t244), t245), t246), t254), t255), t256), @tactics.strip_tac), t261), t263), t264), t265)
-  uncountable_reals_c.set(@tactics.prove(@parser.parse_term("~countable(UNIV:real->bool)"), t266))
+  uncountable_reals_c.set(@tactics.prove(@term_syntax.parse_term("!(countable : ((Real) -> Bool) -> Bool)((UNIV : (Real) -> Bool))"), t266))
 }
 
 ///|

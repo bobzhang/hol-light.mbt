@@ -5588,7 +5588,7 @@ Warning: inventing type variables
   (f : (A) -> B)((x : A))
   (f : (A) -> B)
   (((a : Bool) && (b : Bool) && (c : Bool)) && (d : Bool)) == (d && a && b && c)
-  (x INSERT s) --> t =\n        IMAGE (\\(y:B,g) u:A. if u = x then y else g(u))\n              {y,g | y IN t /\\ g IN s --> t}
+  op_minus_minus_gt(INSERT((x : A), (s : (A) -> Bool)), (t : (B) -> Bool)) == IMAGE(GABS((f : ((B, (A) -> B), A) -> B) => \226\136\128 y : B, \226\136\128 g : (A) -> B, GEQ(f((y, g)), (u : A) => if u == x { y } else { g(u) })), {((y : B), (g : (A) -> B)) | IN(y, t) && IN(g, op_minus_minus_gt(s, t))})
   \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, HAS_SIZE(s, m) && HAS_SIZE(t, n) \226\134\146 HAS_SIZE(op_minus_minus_gt(s, t), EXP(n, m))
   (m : Num)
   \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 (\226\136\131 d : Num, FACT(n) == d * FACT(m))
@@ -5611,21 +5611,21 @@ Warning: inventing type variables
   (f : (A) -> B)((x : A))
   (f : (A) -> B)
   (((a : Bool) && (b : Bool) && (c : Bool)) && (d : Bool)) == (d && a && b && c)
-  {f | f IN (x INSERT s) --> t /\\\n    (forall u v. u IN (x INSERT s) /\\ v IN (x INSERT s) /\\ f u = f v ==> u = v)} =\n        IMAGE (\\(y:B,g) u:A. if u = x then y else g(u))\n              {y,g | y IN t /\\\n                     g IN {f | f IN (s --> (t DELETE y)) /\\\n                               forall u v. u IN s /\\ v IN s /\\ f u = f v ==> u = v}}
-  {x | x IN s} = s
-  forall s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> {f | f IN (s --> t) /\\\n                 (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)}\n            HAS_SIZE (if n < m then 0 else (FACT n) DIV (FACT(n - m)))
+  {(f : (A) -> B) | IN(f, op_minus_minus_gt(INSERT((x : A), (s : (A) -> Bool)), (t : (B) -> Bool))) && (\226\136\128 u : A, \226\136\128 v : A, IN(u, INSERT(x, s)) && IN(v, INSERT(x, s)) && f(u) == f(v) \226\134\146 u == v)} == IMAGE(GABS((f : ((B, (A) -> B), A) -> B) => \226\136\128 y : B, \226\136\128 g : (A) -> B, GEQ(f((y, g)), (u : A) => if u == x { y } else { g(u) })), {((y : B), (g : (A) -> B)) | IN(y, t) && IN(g, {(f : (A) -> B) | IN(f, op_minus_minus_gt(s, DELETE(t, y))) && (\226\136\128 u : A, \226\136\128 v : A, IN(u, s) && IN(v, s) && f(u) == f(v) \226\134\146 u == v)})})
+  {(x : _) | IN(x, (s : (_) -> Bool))} == s
+  \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, HAS_SIZE(s, m) && HAS_SIZE(t, n) \226\134\146 HAS_SIZE({(f : (A) -> B) | IN(f, op_minus_minus_gt(s, t)) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && f(x) == f(y) \226\134\146 x == y)}, if n < m { 0 } else { DIV(FACT(n), FACT(n - m)) })
   INTER((s : (_) -> Bool), DIFF((t : (_) -> Bool), s)) == EMPTY
   SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 t == UNION(s, DIFF(t, s))
   \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, SUBSET(s, t) && HAS_SIZE(s, m) && HAS_SIZE(t, n) \226\134\146 HAS_SIZE(DIFF(t, s), n - m)
   (if (a : Num) <= (b : Num) { (x : Num) - (y : Num) } else { x }) == x - (if b < a { 0 } else { y })
-  {f:A->B | f IN (s --> t) /\\\n              ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)} =\n    (s --> t) DIFF\n    {f | f IN (s --> t) /\\\n                 (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)}
-  forall s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> {f | f IN (s --> t) /\\\n                 ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)}\n            HAS_SIZE (if m <= n then (n EXP m) - (FACT n) DIV (FACT(n - m))\n                      else n EXP m)
+  {(f : (A) -> B) | IN(f, op_minus_minus_gt((s : (A) -> Bool), (t : (B) -> Bool))) && (\226\136\131 x : A, \226\136\131 y : A, IN(x, s) && IN(y, s) && !(x == y) && f(x) == f(y))} == DIFF(op_minus_minus_gt(s, t), {(f : (A) -> B) | IN(f, op_minus_minus_gt(s, t)) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && f(x) == f(y) \226\134\146 x == y)})
+  \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, HAS_SIZE(s, m) && HAS_SIZE(t, n) \226\134\146 HAS_SIZE({(f : (A) -> B) | IN(f, op_minus_minus_gt(s, t)) && (\226\136\131 x : A, \226\136\131 y : A, IN(x, s) && IN(y, s) && !(x == y) && f(x) == f(y))}, if m <= n { EXP(n, m) - DIV(FACT(n), FACT(n - m)) } else { EXP(n, m) })
   (x : Num) + 0 == x
   0
   (m : Num) + SUC((d : Num)) - 1 == m + d
   (m : Num) + SUC((d : Num)) - 1 - m == d
   \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 DIV(FACT(n), FACT(m)) == n * DIV(FACT(n - 1), FACT(m))
-  forall s t. s HAS_SIZE 23 /\\ t HAS_SIZE 365\n         ==> 2 * CARD {f | f IN (s --> t) /\\\n                           ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)}\n             >= CARD (s --> t)
+  \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, HAS_SIZE(s, 23) && HAS_SIZE(t, 365) \226\134\146 2 * CARD({(f : (_) -> _) | IN(f, op_minus_minus_gt(s, t)) && (\226\136\131 x : _, \226\136\131 y : _, IN(x, s) && IN(y, s) && !(x == y) && f(x) == f(y))}) >= CARD(op_minus_minus_gt(s, t))
 funspace =  |- (#forall:fun(fun(fun('B,bool),bool),bool) (\t:fun('B,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#=:fun(fun(fun('A,'B),bool),fun(fun(fun('A,'B),bool),bool)) ((#-->:fun(fun('A,bool),fun(fun('B,bool),fun(fun('A,'B),bool))) s:fun('A,bool)) t:fun('B,bool))) (#GSPEC:fun(fun(fun('A,'B),bool),fun(fun('A,'B),bool)) (\GEN%PVAR%1:fun('A,'B). (#?:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). (((#SETSPEC:fun(fun('A,'B),fun(bool,fun(fun('A,'B),bool))) GEN%PVAR%1:fun('A,'B)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) s:fun('A,bool))) ((#IN:fun('B,fun(fun('B,bool),bool)) (f:fun('A,'B) x:'A)) t:fun('B,bool)))))) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) s:fun('A,bool)))) ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) x:'A)) (#@:fun(fun('B,bool),'B) (\y:'B. #T:bool)))))))) f:fun('A,'B)))))))))))
 FUNSPACE_EMPTY =  |- ((#=:fun(fun(fun('?1,'?2),bool),fun(fun(fun('?1,'?2),bool),bool)) ((#-->:fun(fun('?1,bool),fun(fun('?2,bool),fun(fun('?1,'?2),bool))) #EMPTY:fun('?1,bool)) t:fun('?2,bool))) ((#INSERT:fun(fun('?1,'?2),fun(fun(fun('?1,'?2),bool),fun(fun('?1,'?2),bool))) (\x:'?1. (#@:fun(fun('?2,bool),'?2) (\y:'?2. #T:bool)))) #EMPTY:fun(fun('?1,'?2),bool)))
 HAS_SIZE_FUNSPACE =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#forall:fun(fun(fun('B,bool),bool),bool) (\t:fun('B,bool). (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#HAS_SIZE:fun(fun('A,bool),fun(num,bool)) s:fun('A,bool)) m:num)) ((#HAS_SIZE:fun(fun('B,bool),fun(num,bool)) t:fun('B,bool)) n:num))) ((#HAS_SIZE:fun(fun(fun('A,'B),bool),fun(num,bool)) ((#-->:fun(fun('A,bool),fun(fun('B,bool),fun(fun('A,'B),bool))) s:fun('A,bool)) t:fun('B,bool))) ((#EXP:fun(num,fun(num,num)) n:num) m:num)))))))))))

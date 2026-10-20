@@ -17,7 +17,7 @@ fn step_1() -> Unit raise {
     x1
   }, @list.List([@sets.extension()]))
   let t11 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2), @tactics.gen_tac), t3), t4), t8), t9), t10)
-  lemma_c.set(@tactics.prove(@parser.parse_term("forall f s. s = UNIONS (IMAGE (\\a. {x | x IN s /\\ f(x) = a}) (IMAGE f s))"), t11))
+  lemma_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (_) -> _, ∀ s : (_) -> Bool, s == UNIONS(IMAGE((a : _) => {(x : _) | IN(x, s) && f(x) == a}, IMAGE(f, s)))"), t11))
 }
 
 ///|
@@ -45,7 +45,7 @@ fn step_2() -> Unit raise {
     })(((x63 : @kernel.Thm) => @bool.spec(t62, x63))(x64))
   })
   let t58 = @simp.asm_rewrite_tac(@list.List([]))
-  let t57 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("{y | y IN s /\\ (f:A->B) y = f x}"), @sets.choose_subset()))
+  let t57 = @tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("{(y : A) | IN(y, (s : (A) -> Bool)) && (f : (A) -> B)(y) == f((x : A))}"), @sets.choose_subset()))
   let t56 = @simp.rewrite_tac(@list.List([]))
   let t55 = @tactics.first_x_assum(fn(x54 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x47 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -69,7 +69,7 @@ fn step_2() -> Unit raise {
   let t41 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t40 = @simp.rewrite_tac(@list.List([@sets.forall_in_image()]))
   let t39 = @simp.asm_simp_tac(@list.List([@sets.has_size(), @sets.finite_image()]))
-  let t38 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@sets.set_rule(@parser.parse_term("{t x | x IN s} = IMAGE t s"))]))(@sets.card_unions_le()))
+  let t38 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@sets.set_rule(@term_syntax.parse_term("{(t : (_) -> _)((x : _)) | IN(x, (s : (_) -> Bool))} == IMAGE(t, s)"))]))(@sets.card_unions_le()))
   let t37 = @simp.gen_rewrite_tac(fn(x34 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s35 = @equal.rand_conv(x34)
     fn(x36 : @kernel.Term) -> @kernel.Thm raise {

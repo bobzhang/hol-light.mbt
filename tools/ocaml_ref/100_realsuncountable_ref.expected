@@ -7752,7 +7752,7 @@ Warning: inventing type variables
 0..0..3..6..12..19..39..93..151..222..315..408..515..638..769..902..1058..1214..1370..1561..1768..1975..2288..2671..3066..3529..4018..4507..5048..5619..6210..6962..7828..8698..9603..10526..11449..12460..13529..14598..solved at 14937
 100/realsuncountable quotations (78):
   (countable : ((_) -> Bool) -> Bool)((s : (_) -> Bool)) == (op_lt_eq_us_c : ((_) -> Bool, (Num) -> Bool) -> Bool)(s, UNIV)
-  repeating = {s:num->bool | ?n. forall m. m >= n ==> s m}
+  (repeating : ((Num) -> Bool) -> Bool) == {(s : (Num) -> Bool) | \226\136\131 n : Num, \226\136\128 m : Num, m >= n \226\134\146 s(m)}
   \226\136\128 n : Num, nsum(op_dot_dot(0, n), (i : Num) => if (b : (Num) -> Bool)(i) { EXP(2, i) } else { 0 }) < EXP(2, n + 1)
   \226\136\128 n : Num, DIV(nsum(op_dot_dot(0, n), (i : Num) => if (b : (Num) -> Bool)(i) { EXP(2, i) } else { 0 }), EXP(2, SUC(n))) == 0
   \226\136\128 a : Num, \226\136\128 b : Num, !(b == 0) \226\134\146 MOD(a + b, b) == MOD(a, b)
@@ -7768,10 +7768,10 @@ Warning: inventing type variables
   (t : (Num) -> Bool)
   (s : (Num) -> Bool)
   (s : (Num) -> Bool) => LET((n : Num) => LET_END((n, nsum(op_dot_dot(0, n), (i : Num) => if s(i) { EXP(2, i) } else { 0 }))), minimal((n : Num) => \226\136\128 m : Num, m >= n \226\134\146 s(m)))
-  (UNIV:num->bool) *_c (UNIV:num->bool)
+  (op_star_us_c : ((Num) -> Bool, (Num) -> Bool, (Num, Num)) -> Bool)((UNIV : (Num) -> Bool), (UNIV : (Num) -> Bool))
   countable(repeating)
-  canonical = {s:num->bool | forall n. ?m. m >= n /\\ ~(s m)}
-  (UNIV:num->bool) +_c (UNIV:num->bool)
+  (canonical : ((Num) -> Bool) -> Bool) == {(s : (Num) -> Bool) | \226\136\128 n : Num, \226\136\131 m : Num, m >= n && !s(m)}
+  (op_plus_us_c : ((Num) -> Bool, (Num) -> Bool, Sum[Num, Num]) -> Bool)((UNIV : (Num) -> Bool), (UNIV : (Num) -> Bool))
   op_plus_us_c(canonical, repeating)
   UNION(canonical, repeating) == UNIV
   repeating
@@ -7827,8 +7827,8 @@ Warning: inventing type variables
   (t : (Num) -> Bool)
   (s : (Num) -> Bool)
   (s : (Num) -> Bool) => suminf((n : Num) => if s(n) { inv(pow(real_of_num(2), n)) } else { real_of_num(0) })
-  UNIV:real->bool
-  ~countable(UNIV:real->bool)
+  (UNIV : (Real) -> Bool)
+  !(countable : ((Real) -> Bool) -> Bool)((UNIV : (Real) -> Bool))
 countable =  |- (#forall:fun(fun(fun('?1,bool),bool),bool) (\s:fun('?1,bool). ((#=:fun(bool,fun(bool,bool)) (#countable:fun(fun('?1,bool),bool) s:fun('?1,bool))) ((#<=_c:fun(fun('?1,bool),fun(fun(num,bool),bool)) s:fun('?1,bool)) #UNIV:fun(num,bool)))))
 repeating =  |- ((#=:fun(fun(fun(num,bool),bool),fun(fun(fun(num,bool),bool),bool)) #repeating:fun(fun(num,bool),bool)) (#GSPEC:fun(fun(fun(num,bool),bool),fun(fun(num,bool),bool)) (\GEN%PVAR%1:fun(num,bool). (#?:fun(fun(fun(num,bool),bool),bool) (\s:fun(num,bool). (((#SETSPEC:fun(fun(num,bool),fun(bool,fun(fun(num,bool),bool))) GEN%PVAR%1:fun(num,bool)) (#?:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#>=:fun(num,fun(num,bool)) m:num) n:num)) (s:fun(num,bool) m:num))))))) s:fun(num,bool)))))))
 BINARY_BOUND =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#<:fun(num,fun(num,bool)) ((#nsum:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\i:num. (((#COND:fun(bool,fun(num,fun(num,num))) (b:fun(num,bool) i:num)) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) i:num)) (#NUMERAL:fun(num,num) #_0:num))))) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))

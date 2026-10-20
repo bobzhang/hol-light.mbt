@@ -78,7 +78,7 @@ fn step_3() -> Unit raise {
   let t23 = @tactics.exists_tac(@term_syntax.parse_term("(op_eq : (A, A) -> Bool)"))
   let t38 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.le_c()])), t23), t24), t25), t37])
   let t39 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@sets.lt_c()]))), @tactics.conj_tac), t38)
-  cantor_v1_c.set(@tactics.prove(@parser.parse_term("forall s:A->bool. s <_c {t | t SUBSET s}"), t39))
+  cantor_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (A) -> Bool, op_lt_us_c(s, {(t : (A) -> Bool) | SUBSET(t, s)})"), t39))
 }
 
 ///|
@@ -105,7 +105,7 @@ fn step_4() -> Unit raise {
   })
   let t40 = @simp.rewrite_rule(@list.List([@class.not_exists_thm()]))(cantor_thm_surj())
   let t41 = @tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("(g : (A, A) -> Bool)"), t40))
-  let t49 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @simp.abbrev_tac(@parser.parse_term("(g:A->A->bool) = \\a. { b | forall s. f(s) = a ==> b IN s}"))), t41), t46), t47), t48)
+  let t49 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @simp.abbrev_tac(@term_syntax.parse_term("(g : (A, A) -> Bool) == ((a : A) => {(b : A) | ∀ s : (A) -> Bool, (f : ((A) -> Bool) -> A)(s) == a → IN(b, s)})"))), t41), t46), t47), t48)
   cantor_thm_inj_p_c.set(@tactics.prove(@term_syntax.parse_term("!(∃ f : ((A) -> Bool) -> A, ∀ x : (A) -> Bool, ∀ y : (A) -> Bool, f(x) == f(y) → x == y)"), t49))
 }
 
@@ -177,7 +177,7 @@ fn step_7() -> Unit raise {
   let t71 = @meson.asm_meson_tac(@list.List([]))
   let t70 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_thm()]))
   let t68 = @simp.rewrite_rule(@list.List([@class.not_exists_thm()]))(cantor())
-  let t69 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("\\a:A.  { b:A | forall s. f(s) = a ==> b IN s}"), t68))
+  let t69 = @tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("(a : A) => {(b : A) | ∀ s : (A) -> Bool, (f : ((A) -> Bool) -> A)(s) == a → IN(b, s)}"), t68))
   let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t69), t70), t71)
   cantor_taylor_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : ((A) -> Bool) -> A, !(∀ x : (A) -> Bool, ∀ y : (A) -> Bool, f(x) == f(y) → x == y)"), t72))
 }
@@ -214,7 +214,7 @@ fn step_9() -> Unit raise {
   let t75 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_thm(), @sets.in_image()]))
   let t74 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE((f : (A) -> B), (t : (A) -> Bool))"))
   let t77 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t74), t75), t76)
-  injective_surjective_preimage_c.set(@tactics.prove(@parser.parse_term("forall f:A->B. (forall x y. f(x) = f(y) ==> x = y) ==> forall t. ?s. {x | f(x) IN s} = t"), t77))
+  injective_surjective_preimage_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (A) -> B, (∀ x : A, ∀ y : A, f(x) == f(y) → x == y) → (∀ t : (A) -> Bool, ∃ s : (B) -> Bool, {(x : A) | IN(f(x), s)} == t)"), t77))
 }
 
 ///|
@@ -235,7 +235,7 @@ fn step_10() -> Unit raise {
   let t81 = @tactics.match_mp_tac(surjective_compose())
   let t80 = @simp.rewrite_tac(@list.List([]))
   let t78 = @simp.rewrite_rule(@list.List([@class.not_exists_thm()]))(cantor())
-  let t79 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("(IMAGE (f:B->S->bool)) o (\\s:S->bool. {x | i(x) IN s})"), t78))
+  let t79 = @tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("o(IMAGE((f : (B, S) -> Bool)), (s : (S) -> Bool) => {(x : B) | IN((i : (B) -> S)(x), s)})"), t78))
   let t85 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t79), t80), t81), t82), t83), t84)
   cantor_johnstone_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : (B) -> S, ∀ f : (B, S) -> Bool, !((∀ x : B, ∀ y : B, i(x) == i(y) → x == y) && (∀ s : (S) -> Bool, ∃ z : B, f(z) == s))"), t85))
 }

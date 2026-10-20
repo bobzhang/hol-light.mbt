@@ -54,7 +54,7 @@ fn step_3() -> Unit raise {
   let t315 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
   let t324 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), @sets.in_elim_thm()])), t315), t316), t317), t321), t322), t323), @tactics.all_tac])
   let t329 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(@sets.card_image_inj()), @tactics.conj_tac), t324), t325), @tactics.conj_tac), t326), t327), t328), @tactics.all_tac])
-  let t314 = @tactics.exists_tac(@parser.parse_term("CARD {(a:A,x:A) | a IN q /\\ x IN h}"))
+  let t314 = @tactics.exists_tac(@term_syntax.parse_term("CARD({((a : A), (x : A)) | IN(a, (q : (A) -> Bool)) && IN(x, (h : (A) -> Bool))})"))
   let t313 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t311 = @meson.asm_meson_tac(@list.List([]))
   let t310 = @simp.rewrite_tac(@list.List([@theorems.conj_assoc(), @simp.once_rewrite_rule(@list.List([@theorems.conj_sym()]))(@theorems.unwind_thm1())]))
@@ -227,7 +227,7 @@ fn step_3() -> Unit raise {
       s180(x181)
     }
   })
-  let t178 = @simp.abbrev_tac(@parser.parse_term("q = {c:A | ?a:A. a IN g /\\ (c = (@)(coset a))}"))
+  let t178 = @simp.abbrev_tac(@term_syntax.parse_term("(q : (A) -> Bool) == {(c : A) | ∃ a : A, IN(a, (g : (A) -> Bool)) && c == select((coset : (A, A) -> Bool)(a))}"))
   let t176 = @meson.asm_meson_tac(@list.List([]))
   let t175 = @simp.asm_simp_tac(@list.List([]))
   let t174 = @tactics.exists_tac(@term_syntax.parse_term("(i : (A) -> A)((c : A))"))
@@ -279,7 +279,7 @@ fn step_3() -> Unit raise {
   let t141 = @tactics.exists_tac(@term_syntax.parse_term("select((coset : (A, A) -> Bool)((b : A)))"))
   let t177 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(b : A)")), @tactics.disch_tac), t141), t142), @tactics.conj_tac), t145), t149), t152), t166), t167), t168), t169), t173), t174), t175), t176), @tactics.all_tac])
   let t140 = @tactics.match_mp_tac(@class.taut(@term_syntax.parse_term("(a : Bool) && (a → (b : Bool)) → b && a")))
-  let t139 = @tactics.exists_tac(@parser.parse_term("{c:A | ?a:A. a IN g /\\ (c = (@)(coset a))}"))
+  let t139 = @tactics.exists_tac(@term_syntax.parse_term("{(c : A) | ∃ a : A, IN(a, (g : (A) -> Bool)) && c == select((coset : (A, A) -> Bool)(a))}"))
   let t137 = @meson.asm_meson_tac(@list.List([]))
   let t136 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t135 = @tactics.subgoal_then(@parser.parse_term("(i(b:A) ** a:A):A = z ** i(y)"), fn(x132 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {

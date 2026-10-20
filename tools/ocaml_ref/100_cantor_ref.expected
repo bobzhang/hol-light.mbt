@@ -5542,20 +5542,20 @@ Warning: inventing type variables
   (x : A) => (s : (A) -> Bool)(x) && !(g : (A, A) -> Bool)(x, x)
   (g : (A, A) -> Bool)
   (op_eq : (A, A) -> Bool)
-  forall s:A->bool. s <_c {t | t SUBSET s}
+  \226\136\128 s : (A) -> Bool, op_lt_us_c(s, {(t : (A) -> Bool) | SUBSET(t, s)})
   (g : (A, A) -> Bool)
-  (g:A->A->bool) = \\a. { b | forall s. f(s) = a ==> b IN s}
+  (g : (A, A) -> Bool) == ((a : A) => {(b : A) | \226\136\128 s : (A) -> Bool, (f : ((A) -> Bool) -> A)(s) == a \226\134\146 IN(b, s)})
   !(\226\136\131 f : ((A) -> Bool) -> A, \226\136\128 x : (A) -> Bool, \226\136\128 y : (A) -> Bool, f(x) == f(y) \226\134\146 x == y)
   (g : (A) -> B) == ((a : A) => (n : (B) -> B)((h : (A, A) -> B)(a, a)))
   \226\136\128 h : (A, A) -> B, (\226\136\128 f : (A) -> B, \226\136\131 x : A, h(x) == f) \226\134\146 (\226\136\128 n : (B) -> B, \226\136\131 x : B, n(x) == x)
   op_tilde
   \226\136\128 f : (A, A) -> Bool, !(\226\136\128 s : (A) -> Bool, \226\136\131 x : A, f(x) == s)
-  \\a:A.  { b:A | forall s. f(s) = a ==> b IN s}
+  (a : A) => {(b : A) | \226\136\128 s : (A) -> Bool, (f : ((A) -> Bool) -> A)(s) == a \226\134\146 IN(b, s)}
   \226\136\128 f : ((A) -> Bool) -> A, !(\226\136\128 x : (A) -> Bool, \226\136\128 y : (A) -> Bool, f(x) == f(y) \226\134\146 x == y)
   (\226\136\128 y : _, \226\136\131 x : _, (f : (_) -> _)(x) == y) && (\226\136\128 z : _, \226\136\131 y : _, (g : (_) -> _)(y) == z) \226\134\146 (\226\136\128 z : _, \226\136\131 x : _, o(g, f, x) == z)
   IMAGE((f : (A) -> B), (t : (A) -> Bool))
-  forall f:A->B. (forall x y. f(x) = f(y) ==> x = y) ==> forall t. ?s. {x | f(x) IN s} = t
-  (IMAGE (f:B->S->bool)) o (\\s:S->bool. {x | i(x) IN s})
+  \226\136\128 f : (A) -> B, (\226\136\128 x : A, \226\136\128 y : A, f(x) == f(y) \226\134\146 x == y) \226\134\146 (\226\136\128 t : (A) -> Bool, \226\136\131 s : (B) -> Bool, {(x : A) | IN(f(x), s)} == t)
+  o(IMAGE((f : (B, S) -> Bool)), (s : (S) -> Bool) => {(x : B) | IN((i : (B) -> S)(x), s)})
   \226\136\128 i : (B) -> S, \226\136\128 f : (B, S) -> Bool, !((\226\136\128 x : B, \226\136\128 y : B, i(x) == i(y) \226\134\146 x == y) && (\226\136\128 s : (S) -> Bool, \226\136\131 z : B, f(z) == s))
 CANTOR_THM_INJ =  |- (#~:fun(bool,bool) (#?:fun(fun(fun(fun('A,bool),'A),bool),bool) (\f:fun(fun('A,bool),'A). (#forall:fun(fun(fun('A,bool),bool),bool) (\x:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\y:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (f:fun(fun('A,bool),'A) x:fun('A,bool))) (f:fun(fun('A,bool),'A) y:fun('A,bool)))) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) x:fun('A,bool)) y:fun('A,bool))))))))))
 CANTOR_THM_SURJ =  |- (#~:fun(bool,bool) (#?:fun(fun(fun('A,fun('A,bool)),bool),bool) (\f:fun('A,fun('A,bool)). (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#?:fun(fun('A,bool),bool) (\x:'A. ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (f:fun('A,fun('A,bool)) x:'A)) s:fun('A,bool)))))))))

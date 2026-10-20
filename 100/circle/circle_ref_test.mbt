@@ -79095,7 +79095,7 @@ test "100/circle matches 100/circle.ml" {
       #|  :2
       #|  :M
       #|  :1
-      #|  measure(cball(vec 0:real^2,&1)) = pi
+      #|  (measure : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Real)((cball : ((Cart[Real, Tybit0[Unit]], Real), Cart[Real, Tybit0[Unit]]) -> Bool)(((vec : (Num) -> Cart[Real, Tybit0[Unit]])(0), real_of_num(1)))) == pi
       #|  op_pct(inv((r : Real)), (w : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]]))
       #|  (w : Cart[Real, Tybit0[Unit]])
       #|  (abs((r : Real)) * (x : Real) <= r) == (abs(r) * x <= r * real_of_num(1))
@@ -79105,7 +79105,7 @@ test "100/circle matches 100/circle.ml" {
       #|  pi
       #|  (z : Cart[Real, Tybit0[Unit]])
       #|  (r : Real)
-      #|  cball(vec 0:real^2,&1)
+      #|  (cball : ((Cart[Real, Tybit0[Unit]], Real), Cart[Real, Tybit0[Unit]]) -> Bool)(((vec : (Num) -> Cart[Real, Tybit0[Unit]])(0), real_of_num(1)))
       #|  real_of_num(0) < (r : Real)
       #|  (r : Real) == real_of_num(0)
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, real_of_num(0) <= r \226\134\146 measure(cball((z, r))) == pi * pow(r, 2)

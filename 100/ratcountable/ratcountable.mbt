@@ -45,7 +45,7 @@ fn step_4() -> Unit raise {
   let t13 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
   let t12 = @tactics.exists_tac(@term_syntax.parse_term("GABS((f : ((Num, Num)) -> Real) => ∀ p : Num, ∀ q : Num, GEQ(f((p, q)), real_of_num(p) / real_of_num(q)))"))
   let t17 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.le_c_v1(), @pair.exists_pair_thm(), @card.mul_c(), @sets.in_univ()])), t12), t13), t14), t15), t16])
-  let t10 = @parser.parse_term("(UNIV *_c UNIV):num#num->bool")
+  let t10 = @term_syntax.parse_term("(op_star_us_c : ((Num) -> Bool, (Num) -> Bool, (Num, Num)) -> Bool)((UNIV : (Num) -> Bool), (UNIV : (Num) -> Bool))")
   let t11 = @tactics.trans_tac(@card.card_le_trans())(t10)
   let t9 = @simp.rewrite_tac(@list.List([@sets.num_infinite()]))
   let t8 = @tactics.match_mp_tac(@card.card_mul_absorb_le())
@@ -54,10 +54,10 @@ fn step_4() -> Unit raise {
   let t4 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
   let t3 = @tactics.exists_tac(@term_syntax.parse_term("GABS((f : ((Real, Num)) -> Real) => ∀ x : Real, ∀ b : Num, GEQ(f((x, b)), if b == 0 { x } else { -x }))"))
   let t7 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.le_c_v1(), @pair.exists_pair_thm(), @card.mul_c()])), t3), t4), t5), t6), @tactics.all_tac])
-  let t1 = @parser.parse_term("{ x:real | ?p q. x = &p / &q } *_c (UNIV:num->bool)")
+  let t1 = @term_syntax.parse_term("(op_star_us_c : ((Real) -> Bool, (Num) -> Bool, (Real, Num)) -> Bool)({(x : Real) | ∃ p : Num, ∃ q : Num, x == real_of_num(p) / real_of_num(q)}, (UNIV : (Num) -> Bool))")
   let t2 = @tactics.trans_tac(@card.card_le_trans())(t1)
   let t18 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([countable()])), t2), @tactics.conj_tac), t7), t8), t9), t11), @tactics.conj_tac), t17)
-  countable_rationals_c.set(@tactics.prove(@parser.parse_term("countable { x:real | rational(x)}"), t18))
+  countable_rationals_c.set(@tactics.prove(@term_syntax.parse_term("countable({(x : Real) | rational(x)})"), t18))
 }
 
 ///|
@@ -101,7 +101,7 @@ fn step_6() -> Unit raise {
   let t20 = @simp.rewrite_tac(@list.List([@sets.le_c()]))
   let t19 = @simp.rewrite_tac(@list.List([@equal.gsym(countable()), countable_rationals()]))
   let t30 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([denumerable(), @equal.gsym(@card.card_le_antisym())])), t19), t20), t21), t22), t23), t28), t29)
-  denumerable_rationals_c.set(@tactics.prove(@parser.parse_term("denumerable { x:real | rational(x)}"), t30))
+  denumerable_rationals_c.set(@tactics.prove(@term_syntax.parse_term("denumerable({(x : Real) | rational(x)})"), t30))
 }
 
 ///|

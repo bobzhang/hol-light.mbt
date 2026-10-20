@@ -106555,9 +106555,9 @@ Generating HOL version of proof
   (p : Cart[Real, Tybit1[Unit]])
   \226\136\128 p : Direction, \226\136\128 p' : Direction, !op_bar_bar(p, p') \226\134\146 (\226\136\131 l : Direction, op_us_bar_us(p, l) && op_us_bar_us(p', l) && (\226\136\128 l' : Direction, op_us_bar_us(p, l') && op_us_bar_us(p', l') \226\134\146 op_bar_bar(l', l)))
   \226\136\128 l : Direction, \226\136\128 l' : Direction, \226\136\131 p : Direction, op_us_bar_us(p, l) && op_us_bar_us(p, l')
-  basis 3 :real^3
-  basis 2 : real^3
-  basis 1 :real^3
+  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)
+  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(2)
+  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(1)
   \226\136\131 p : Direction, \226\136\131 p' : Direction, \226\136\131 p'' : Direction, !op_bar_bar(p, p') && !op_bar_bar(p', p'') && !op_bar_bar(p, p'') && !(\226\136\131 l : Direction, op_us_bar_us(p, l) && op_us_bar_us(p', l) && op_us_bar_us(p'', l))
   orthogonal(cross((l : Cart[Real, Tybit1[Unit]]), basis(1)), l) && orthogonal(cross(l, basis(2)), l) && !(cross(cross(l, basis(1)), cross(l, basis(2))) == vec(0)) || orthogonal(cross(l, basis(1)), l) && orthogonal(cross(l, basis(3)), l) && !(cross(cross(l, basis(1)), cross(l, basis(3))) == vec(0)) || orthogonal(cross(l, basis(2)), l) && orthogonal(cross(l, basis(3)), l) && !(cross(cross(l, basis(2)), cross(l, basis(3))) == vec(0))
   \226\136\128 l : Direction, \226\136\131 p : Direction, \226\136\131 p' : Direction, !op_bar_bar(p, p') && op_us_bar_us(p, l) && op_us_bar_us(p', l)
