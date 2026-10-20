@@ -23245,44 +23245,44 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|0..0..1..2..solved at 6
       #|0..0..1..2..solved at 6
       #|Library/grouptheory quotations (3775):
-      #|  (\\x y. ARB):A->A->A
-      #|  (\\x. ARB):A->A
-      #|  ARB:A
-      #|  {ARB:A}
+      #|  (x : A) => (y : A) => (ARB : A)
+      #|  (x : A) => (ARB : A)
+      #|  (ARB : A)
+      #|  {(ARB : A)}
       #|  ?s (z:A) n a.\n          z IN s /\\\n          (forall x. x IN s ==> n x IN s) /\\\n          (forall x y. x IN s /\\ y IN s ==> a x y IN s) /\\\n          (forall x y z. x IN s /\\ y IN s /\\ z IN s\n                   ==> a x (a y z) = a (a x y) z) /\\\n          (forall x. x IN s ==> a z x = x /\\ a x z = x) /\\\n          (forall x. x IN s ==> a (n x) x = z /\\ a x (n x) = z)
       #|  (group_carrier:(A)group->A->bool) = \\g. FST(group_operations g)
       #|  (group_id:(A)group->A) = \\g. FST(SND(group_operations g))
       #|  (group_inv:(A)group->A->A) = \\g. FST(SND(SND(group_operations g)))
       #|  (group_mul:(A)group->A->A->A) = \\g. SND(SND(SND(group_operations g)))
       #|  (forall a. mk(dest a) = a) /\\ (forall r. P r <=> dest(mk r) = r)\n    ==> forall a. P(dest a)
-      #|  G:A group
+      #|  (G : Group[A])
       #|  (forall G:A group. group_id G IN group_carrier G) /\\\n   (forall G x:A. x IN group_carrier G ==> group_inv G x IN group_carrier G) /\\\n   (forall G x y:A. x IN group_carrier G /\\ y IN group_carrier G\n              ==> group_mul G x y IN group_carrier G) /\\\n   (forall G x y z:A. x IN group_carrier G /\\\n                y IN group_carrier G /\\\n                z IN group_carrier G\n                ==> group_mul G x (group_mul G y z) =\n                    group_mul G (group_mul G x y) z) /\\\n   (forall G x:A. x IN group_carrier G ==> group_mul G (group_id G) x = x) /\\\n   (forall G x:A. x IN group_carrier G ==> group_mul G x (group_id G) = x) /\\\n   (forall G x:A. x IN group_carrier G\n            ==> group_mul G (group_inv G x) x = group_id G) /\\\n   (forall G x:A. x IN group_carrier G\n            ==> group_mul G x(group_inv G x) = group_id G)
       #|  forall G H:A group.\n        G = H <=>\n        group_carrier G = group_carrier H /\\\n        group_id G = group_id H /\\\n        group_inv G = group_inv H /\\\n        group_mul G = group_mul H
-      #|  forall G:A group. ~(group_carrier G = {})
+      #|  \226\136\128 G : Group[A], !(group_carrier(G) == {})
       #|  singleton_group (a:A) = group({a},a,(\\x. a),(\\x y. a))
       #|  (forall a:A. group_carrier(singleton_group a) = {a}) /\\\n   (forall a:A. group_id(singleton_group a) = a) /\\\n   (forall a:A. group_inv(singleton_group a) = \\x. a) /\\\n   (forall a:A. group_mul(singleton_group a) = \\x y. a)
-      #|  trivial_group G <=> group_carrier G = {group_id G}
+      #|  (trivial_group : (Group[_]) -> Bool)((G : Group[_])) == (group_carrier(G) == {group_id(G)})
       #|  forall G:A group. trivial_group G ==> FINITE(group_carrier G)
-      #|  forall a:A. trivial_group(singleton_group a)
-      #|  forall a:A. FINITE(group_carrier(singleton_group a))
+      #|  \226\136\128 a : A, trivial_group(singleton_group(a))
+      #|  \226\136\128 a : A, FINITE(group_carrier(singleton_group(a)))
       #|  forall G:A group. trivial_group G <=> group_carrier G SUBSET {group_id G}
-      #|  c IN s ==> (s = {c} <=> ?a. s = {a})
+      #|  IN((c : _), (s : (_) -> Bool)) \226\134\146 (s == {c}) == (\226\136\131 a : _, s == {a})
       #|  forall G:A group. trivial_group G <=> ?a. group_carrier G = {a}
-      #|  (?a. s = {a}) <=> (?a. s SUBSET {a}) /\\ ~(s = {})
+      #|  (\226\136\131 a : _, (s : (_) -> Bool) == {a}) == ((\226\136\131 a : _, SUBSET(s, {a})) && !(s == {}))
       #|  forall G:A group. trivial_group G <=> ?a. group_carrier G SUBSET {a}
       #|  forall G:A group. trivial_group G <=> group_carrier(G) HAS_SIZE 1
       #|  forall G:A group. group_carrier(G) HAS_SIZE 1 <=> trivial_group G
       #|  opposite_group(G:A group) =\n        group(group_carrier G,group_id G,group_inv G,\n              \\x y. group_mul G y x)
       #|  forall G:A group.\n        group_carrier(opposite_group G) = group_carrier G /\\\n        group_id(opposite_group G) = group_id G /\\\n        group_inv(opposite_group G) = group_inv G /\\\n        group_mul(opposite_group G) = \\x y. group_mul G y x
-      #|  forall G:A group. opposite_group (opposite_group G) = G
+      #|  \226\136\128 G : Group[A], opposite_group(opposite_group(G)) == G
       #|  forall G x:A. group_inv(opposite_group G) x = group_inv G x
       #|  forall G x y:A. group_mul(opposite_group G) x y = group_mul G y x
       #|  forall a:A. opposite_group(singleton_group a) = singleton_group a
       #|  forall G:A group. trivial_group(opposite_group G) <=> trivial_group G
       #|  forall G:A group. FINITE(group_carrier(opposite_group G)) <=>\n               FINITE(group_carrier G)
-      #|  group_div G x y = group_mul G x (group_inv G y)
+      #|  (group_div : (Group[_], _, _) -> _)((G : Group[_]), (x : _), (y : _)) == group_mul(G, x, group_inv(G, y))
       #|  forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_div G x y) IN group_carrier G
-      #|  group_mul G (group_inv G x):A->A
+      #|  group_mul((G : Group[A]), group_inv(G, (x : A)))
       #|  forall G x y z:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ z IN group_carrier G\n        ==> (group_mul G x y = group_mul G x z <=> y = z)
       #|  forall G x y z:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ z IN group_carrier G /\\\n        group_mul G x y = group_mul G x z\n        ==> y = z
       #|  forall G x y z:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ z IN group_carrier G\n        ==> (group_mul G x z = group_mul G y z <=> x = y)
@@ -23297,15 +23297,15 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_inv G x = y <=> group_mul G y x = group_id G)
       #|  forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_mul G x y = group_id G <=> group_mul G y x = group_id G)
       #|  forall G x:A. x IN group_carrier G ==> group_inv G (group_inv G x) = x
-      #|  forall G:A group. group_inv G (group_id G) = group_id G
+      #|  \226\136\128 G : Group[A], group_inv(G, group_id(G)) == group_id(G)
       #|  forall G x:A.\n        x IN group_carrier G\n        ==> (group_inv G x = group_id G <=> x = group_id G)
       #|  forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_inv G (group_mul G x y) =\n            group_mul G (group_inv G y) (group_inv G x)
       #|  forall G x y:A. x IN group_carrier G /\\ y IN group_carrier G\n             ==> (group_inv G x = group_inv G y <=> x = y)
       #|  forall G x:A. x IN group_carrier G ==> group_div G x x = group_id G
-      #|  group_id G:A = group_div G y y
+      #|  group_id((G : Group[A])) == group_div(G, (y : A), y)
       #|  forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_div G x y = group_id G <=> x = y)
-      #|  x:A
-      #|  G:A group
+      #|  (x : A)
+      #|  (G : Group[A])
       #|  forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==>  group_mul G (group_inv G x) y = group_mul G y (group_inv G x)
       #|  forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_mul G (group_inv G x) y = group_mul G y (group_inv G x) <=>\n             group_mul G x y = group_mul G y x)
       #|  forall G x y z:A.\n        x IN group_carrier G /\\\n        y IN group_carrier G /\\\n        z IN group_carrier G /\\\n        group_mul G x z = group_mul G z x /\\\n        group_mul G y z = group_mul G z y\n        ==> group_mul G (group_mul G x y) z = group_mul G z (group_mul G x y)
@@ -23313,22 +23313,22 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall P G:A group.\n        (?x. x IN group_carrier G /\\ P(group_inv G x)) <=>\n        (?x. x IN group_carrier G /\\ P x)
       #|  group_pow G x 0 = group_id G /\\\n  group_pow G x (SUC n) = group_mul G x (group_pow G x n)
       #|  forall G (x:A) n. x IN group_carrier G ==> group_pow G x n IN group_carrier G
-      #|  forall G (x:A). group_pow G x 0 = group_id G
+      #|  \226\136\128 G : Group[A], \226\136\128 x : A, group_pow(G, x, 0) == group_id(G)
       #|  1
-      #|  forall G x:A. x IN group_carrier G ==> group_pow G x 1 = x
+      #|  \226\136\128 G : Group[A], \226\136\128 x : A, IN(x, group_carrier(G)) \226\134\146 group_pow(G, x, 1) == x
       #|  1
       #|  2
       #|  forall G x:A. x IN group_carrier G ==> group_pow G x 2 = group_mul G x x
-      #|  forall n. group_pow G (group_id G) n = group_id G
+      #|  \226\136\128 n : Num, group_pow((G : Group[_]), group_id(G), n) == group_id(G)
       #|  forall G (x:A) m n.\n        x IN group_carrier G\n        ==> group_pow G x (m + n) =\n            group_mul G (group_pow G x m) (group_pow G x n)
-      #|  group_pow G x n:A
-      #|  G:A group
+      #|  group_pow((G : Group[A]), (x : A), (n : Num))
+      #|  (G : Group[A])
       #|  forall G (x:A) m n.\n        x IN group_carrier G /\\ n <= m\n        ==> group_pow G x (m - n) =\n            group_div G (group_pow G x m) (group_pow G x n)
-      #|  n:num <= m ==> n + m - n = m
-      #|  group_pow G x n:A
-      #|  G:A group
+      #|  (n : Num) <= (m : Num) \226\134\146 n + (m - n) == m
+      #|  group_pow((G : Group[A]), (x : A), (n : Num))
+      #|  (G : Group[A])
       #|  forall G (x:A) m n.\n        x IN group_carrier G /\\ n <= m\n        ==> group_pow G x (m - n) =\n            group_mul G (group_inv G (group_pow G x n)) (group_pow G x m)
-      #|  SUC n = 1 + n
+      #|  SUC((n : Num)) == 1 + n
       #|  forall G (x:A) n.\n        x IN group_carrier G\n        ==> group_inv G (group_pow G x n) = group_pow G (group_inv G x) n
       #|  forall G (x:A) m n.\n        x IN group_carrier G\n        ==> group_pow G x (m * n) = group_pow G (group_pow G x m) n
       #|  forall G (x:A) m n.\n        x IN group_carrier G\n        ==> group_pow G (group_pow G x m) n = group_pow G x (m * n)
@@ -23336,45 +23336,45 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G (x:A) (y:A) n.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> group_pow G (group_mul G x y) n =\n            group_mul G (group_pow G x n) (group_pow G y n)
       #|  group_zpow G (x:A) n =\n    if &0 <= n then group_pow G x (num_of_int n)\n    else group_inv G (group_pow G x (num_of_int(--n)))
       #|  forall G (x:A) n. x IN group_carrier G ==> group_zpow G x n IN group_carrier G
-      #|  forall G (x:A) n. group_zpow G x (&n) = group_pow G x n
-      #|  forall G (x:A). group_zpow G x (&0) = group_id G
+      #|  \226\136\128 G : Group[A], \226\136\128 x : A, \226\136\128 n : Num, group_zpow(G, x, int_of_num(n)) == group_pow(G, x, n)
+      #|  \226\136\128 G : Group[A], \226\136\128 x : A, group_zpow(G, x, int_of_num(0)) == group_id(G)
       #|  forall G x:A. x IN group_carrier G ==> group_zpow G x (&1) = x
       #|  forall G x:A. x IN group_carrier G ==> group_zpow G x (&2) = group_mul G x x
-      #|  forall n. group_zpow G (group_id G) n = group_id G
-      #|  &0:int <= n
-      #|  ~(n:int = &0) ==> (&0 <= --n <=> ~(&0 <= n))
-      #|  n:int = &0
+      #|  \226\136\128 n : Int, group_zpow((G : Group[_]), group_id(G), n) == group_id(G)
+      #|  int_of_num(0) <= (n : Int)
+      #|  !((n : Int) == int_of_num(0)) \226\134\146 (int_of_num(0) <= -n) == !(int_of_num(0) <= n)
+      #|  (n : Int) == int_of_num(0)
       #|  forall G (x:A) n.\n        x IN group_carrier G\n        ==> group_zpow G x (--n) = group_inv G (group_zpow G x n)
       #|  forall G x:A. x IN group_carrier G ==> group_zpow G x (-- &1) = group_inv G x
-      #|  &0:int <= -- &n <=> &n:int = &0
+      #|  (int_of_num(0) <= -int_of_num((n : Num))) == (int_of_num(n) == int_of_num(0))
       #|  (forall G (x:A) n. group_zpow G x (&n) = group_pow G x n) /\\\n   (forall G (x:A) n. group_zpow G x (-- &n) = group_inv G (group_pow G x n))
       #|  forall G (x:A) n.\n        x IN group_carrier G\n        ==> (group_zpow G x (abs n) = group_id G <=>\n             group_zpow G x n = group_id G)
-      #|  y + --x:int = --(x - y)
-      #|  y + --x:int = y - x
-      #|  q:num <= p \\/ p <= q
-      #|  --x + y:int = --(x - y)
-      #|  --x + y:int = y - x
-      #|  p:num <= q \\/ q <= p
-      #|  q:num
-      #|  p:num
-      #|  m:int
-      #|  n:int
+      #|  (y : Int) + -(x : Int) == -(x - y)
+      #|  (y : Int) + -(x : Int) == y - x
+      #|  (q : Num) <= (p : Num) || p <= q
+      #|  -(x : Int) + (y : Int) == -(x - y)
+      #|  -(x : Int) + (y : Int) == y - x
+      #|  (p : Num) <= (q : Num) || q <= p
+      #|  (q : Num)
+      #|  (p : Num)
+      #|  (m : Int)
+      #|  (n : Int)
       #|  forall G (x:A) m n.\n        x IN group_carrier G\n        ==> group_zpow G x (m + n) =\n            group_mul G (group_zpow G x m) (group_zpow G x n)
       #|  forall G (x:A) m n.\n        x IN group_carrier G\n        ==> group_zpow G x (m - n) =\n            group_div G (group_zpow G x m) (group_zpow G x n)
-      #|  x - y:int = --y + x
+      #|  (x : Int) - (y : Int) == -y + x
       #|  forall G (x:A) m n.\n        x IN group_carrier G\n        ==> group_zpow G x (m - n) =\n            group_mul G (group_inv G (group_zpow G x n)) (group_zpow G x m)
       #|  forall G (x:A) n.\n        x IN group_carrier G\n        ==> group_inv G (group_zpow G x n) = group_zpow G (group_inv G x) n
       #|  forall G (x:A) n.\n        x IN group_carrier G\n        ==> group_zpow G (group_inv G x) n = group_zpow G x (--n)
-      #|  q:num
-      #|  p:num
-      #|  m:int
-      #|  n:int
+      #|  (q : Num)
+      #|  (p : Num)
+      #|  (m : Int)
+      #|  (n : Int)
       #|  forall G (x:A) m n.\n        x IN group_carrier G\n        ==> group_zpow G x (m * n) = group_zpow G (group_zpow G x m) n
       #|  forall G (x:A) (y:A) n.\n      x IN group_carrier G /\\ y IN group_carrier G /\\\n      group_mul G x y = group_mul G y x\n      ==> group_mul G (group_zpow G x n) y = group_mul G y (group_zpow G x n)
       #|  forall G (x:A) (y:A) n.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> group_zpow G (group_mul G x y) n =\n            group_mul G (group_zpow G x n) (group_zpow G y n)
       #|  abelian_group (G:A group) <=>\n  forall x y. x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_mul G x y = group_mul G y x
-      #|  forall G:A group. trivial_group G ==> abelian_group G
-      #|  forall a:A. abelian_group(singleton_group a)
+      #|  \226\136\128 G : Group[A], trivial_group(G) \226\134\146 abelian_group(G)
+      #|  \226\136\128 a : A, abelian_group(singleton_group(a))
       #|  forall G:A group. abelian_group (opposite_group G) <=> abelian_group G
       #|  forall G (x:A) (y:A) n.\n        abelian_group G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_pow G (group_mul G x y) n =\n            group_mul G (group_pow G x n) (group_pow G y n)
       #|  forall G (x:A) (y:A) n.\n        abelian_group G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_zpow G (group_mul G x y) n =\n            group_mul G (group_zpow G x n) (group_zpow G y n)
@@ -23387,29 +23387,29 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G x y:A.\n        group_add G x y IN group_carrier G <=>\n        x IN group_carrier G /\\ y IN group_carrier G
       #|  forall G x:A. x IN group_carrier G ==> group_neg G x = group_inv G x
       #|  forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_add G x y = group_mul G x y
-      #|  forall G x:A. group_add G (group_id G) x = x
-      #|  forall G x:A. group_add G x (group_id G) = x
-      #|  (z:A) IN group_carrier G
-      #|  (y:A) IN group_carrier G
-      #|  (x:A) IN group_carrier G
+      #|  \226\136\128 G : Group[A], \226\136\128 x : A, group_add(G, group_id(G), x) == x
+      #|  \226\136\128 G : Group[A], \226\136\128 x : A, group_add(G, x, group_id(G)) == x
+      #|  IN((z : A), group_carrier((G : Group[A])))
+      #|  IN((y : A), group_carrier((G : Group[A])))
+      #|  IN((x : A), group_carrier((G : Group[A])))
       #|  forall G x y z:A.\n        group_add G x (group_add G y z) = group_add G (group_add G x y) z
-      #|  (y:A) IN group_carrier G
-      #|  (x:A) IN group_carrier G
+      #|  IN((y : A), group_carrier((G : Group[A])))
+      #|  IN((x : A), group_carrier((G : Group[A])))
       #|  forall G x y:A. group_neg G (group_add G x y) =\n             group_add G (group_neg G y) (group_neg G x)
-      #|  forall G x:A. group_neg G (group_neg G x) = x
-      #|  forall G:A group. group_neg G (group_id G) = group_id G
+      #|  \226\136\128 G : Group[A], \226\136\128 x : A, group_neg(G, group_neg(G, x)) == x
+      #|  \226\136\128 G : Group[A], group_neg(G, group_id(G)) == group_id(G)
       #|  forall G x y:A. group_add G x y = group_id G <=> group_add G y x = group_id G
       #|  forall G x:A. group_neg G x = group_id G <=> x = group_id G
       #|  forall G (x:A) n. x IN group_carrier G ==> group_nmul G n x = group_pow G x n
       #|  forall G (x:A) m n.\n        group_nmul G (m + n) x =\n        group_add G (group_nmul G m x) (group_nmul G n x)
       #|  forall G (x:A) m n.\n        group_nmul G (m * n) x = group_nmul G m (group_nmul G n x)
       #|  1
-      #|  forall G x:A. group_nmul G 1 x = x
+      #|  \226\136\128 G : Group[A], \226\136\128 x : A, group_nmul(G, 1, x) == x
       #|  forall G (x:A) n.\n        group_neg G (group_nmul G n x) = group_nmul G n (group_neg G x)
       #|  forall G x y:A. abelian_group G ==> group_add G x y = group_add G y x
       #|  forall G:A group. (forall x y. group_add G x y = group_add G y x) <=> abelian_group G
       #|  forall G (x:A) y n.\n        abelian_group G\n        ==> group_nmul G n (group_add G x y) =\n            group_add G (group_nmul G n x) (group_nmul G n y)
-      #|  forall G:A group. neutral(group_add G) = group_id G
+      #|  \226\136\128 G : Group[A], neutral(group_add(G)) == group_id(G)
       #|  forall G:A group. monoidal(group_add G) <=> abelian_group G
       #|  forall G t t':A.\n            t = t' /\\ t IN group_carrier G\n            ==> group_inv G t = group_neg G t' /\\\n                group_inv G t IN group_carrier G
       #|  forall G t t':A.\n            t = t' /\\ t IN group_carrier G\n            ==> group_neg G t = group_neg G t' /\\\n                group_neg G t IN group_carrier G
@@ -23417,40 +23417,40 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G t (t':A) n.\n            t = t' /\\ t IN group_carrier G\n            ==> group_nmul G n t = group_nmul G n t' /\\\n                group_nmul G n t IN group_carrier G
       #|  forall G s t s' t':A.\n            (s = s' /\\ s IN group_carrier G) /\\\n            (t = t' /\\ t IN group_carrier G)\n            ==> group_mul G s t = group_add G s' t' /\\\n                group_mul G s t IN group_carrier G
       #|  forall G s t s' t':A.\n            (s = s' /\\ s IN group_carrier G) /\\\n            (t = t' /\\ t IN group_carrier G)\n            ==> group_add G s t = group_add G s' t' /\\\n                group_add G s t IN group_carrier G
-      #|  (IN):A->(A->bool)->bool
-      #|  group_carrier:(A)group->A->bool
+      #|  (IN : (A, (A) -> Bool) -> Bool)
+      #|  (group_carrier : (Group[A], A) -> Bool)
       #|  (forall G x:A. x IN group_carrier G\n                ==> group_add G x (group_neg G x) = group_id G) /\\\n       (forall G x:A. x IN group_carrier G\n                ==> group_add G (group_neg G x) x = group_id G) /\\\n       (forall G x y:A. x IN group_carrier G\n                ==> group_add G x (group_add G (group_neg G x) y) = y) /\\\n       (forall G x y:A. x IN group_carrier G\n                ==> group_add G (group_neg G x) (group_add G x y) = y)
-      #|  (u = v <=> s = t) ==> (u = v ==> s = t)
+      #|  ((u : _) == (v : _)) == ((s : _) == (t : _)) \226\134\146 u == v \226\134\146 s == t
       #|  group_product (G:A group) =\n        iterato (group_carrier G) (group_id G) (group_mul G)
       #|  group_sum (G:A group) =\n        group_product G (@l. woset l /\\ fld l = (:K))
       #|  forall G (<<=) k (f:K->A) g.\n        (forall i. i IN k ==> f i = g i)\n        ==> group_product G (<<=) k f = group_product G (<<=) k g
       #|  forall G k (f:K->A) g.\n        (forall i. i IN k ==> f i = g i) ==> group_sum G k f = group_sum G k g
       #|  (forall G (<<=) k f (g:K->A).\n         (forall i. i IN k ==> f i = g i)\n         ==> group_product G (<<=) k (\\i. f i) = group_product G (<<=) k g) /\\\n   (forall G k f (g:K->A).\n         (forall i. i IN k ==> f i = g i)\n         ==> group_sum G k (\\i. f i) = group_sum G k g)
-      #|  \\x:A. x IN group_carrier G /\\ P x
-      #|  f:K->A
-      #|  k:K->bool
-      #|  (<<=):K->K->bool
-      #|  group_mul G:A->A->A
-      #|  group_id G:A
-      #|  group_carrier G:A->bool
+      #|  (x : A) => IN(x, group_carrier((G : Group[A]))) && (P : (A) -> Bool)(x)
+      #|  (f : (K) -> A)
+      #|  (k : (K) -> Bool)
+      #|  (op_lt_lt_eq : (K, K) -> Bool)
+      #|  group_mul((G : Group[A]))
+      #|  group_id((G : Group[A]))
+      #|  group_carrier((G : Group[A]))
       #|  forall P G (<<=) k (f:K->A).\n       P(group_id G) /\\\n       (forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n              P x /\\ P y\n              ==> P(group_mul G x y)) /\\\n       (forall i. i IN k /\\ f i IN group_carrier G /\\ ~(f i = group_id G) ==> P(f i))\n       ==> P(group_product G (<<=) k f)
       #|  forall P G k (f:K->A).\n       P(group_id G) /\\\n       (forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n              P x /\\ P y\n              ==> P(group_mul G x y)) /\\\n       (forall i. i IN k /\\ f i IN group_carrier G /\\ ~(f i = group_id G) ==> P(f i))\n       ==> P(group_sum G k f)
-      #|  \\x:A. x IN group_carrier G
+      #|  (x : A) => IN(x, group_carrier((G : Group[A])))
       #|  forall G (<<=) k (f:K->A). group_product G (<<=) k f IN group_carrier G
-      #|  forall G k (f:K->A). group_sum G k f IN group_carrier G
+      #|  \226\136\128 G : Group[A], \226\136\128 k : (K) -> Bool, \226\136\128 f : (K) -> A, IN(group_sum(G, k, f), group_carrier(G))
       #|  forall G (<<=) k (f:K->A).\n        group_product G (<<=) {i | i IN k /\\ ~(f i = group_id G)} f =\n        group_product G (<<=) k f
       #|  forall G k (f:K->A).\n      group_sum G {i | i IN k /\\ ~(f i = group_id G)} f =\n      group_sum G k f
       #|  forall G (<<=) k (f:K->A).\n        group_product G (<<=) {i | i IN k /\\ f i IN group_carrier G} f =\n        group_product G (<<=) k f
       #|  forall G k (f:K->A).\n        group_sum G {i | i IN k /\\ f i IN group_carrier G} f =\n        group_sum G k f
       #|  forall G (<<=) k (f:K->A).\n        group_product G (<<=) k f =\n        if FINITE {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}}\n        then group_product G (<<=)\n              {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} f\n        else group_id G
       #|  forall G k (f:K->A).\n        group_sum G k f =\n        if FINITE {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}}\n        then group_sum G\n              {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} f\n        else group_id G
-      #|  ~((if p then x else z) = z) <=> p /\\ ~(x = z)
+      #|  !((if (p : Bool) { (x : _) } else { (z : _) }) == z) == (p && !(x == z))
       #|  forall G (<<=) P s (f:K->A).\n        group_product G (<<=) {x | x IN s /\\ P x} f =\n        group_product G (<<=) s (\\x. if P x then f x else group_id G)
       #|  forall G P s (f:K->A).\n        group_sum G {x | x IN s /\\ P x} f =\n        group_sum G s (\\x. if P x then f x else group_id G)
       #|  forall G (<<=) s t (f:K->A).\n        t SUBSET s /\\ (forall x. x IN s /\\ ~(x IN t) ==> f x = group_id G)\n        ==> group_product G (<<=) s f = group_product G (<<=) t f
       #|  forall G s t (f:K->A).\n        t SUBSET s /\\ (forall x. x IN s /\\ ~(x IN t) ==> f x = group_id G)\n        ==> group_sum G s f = group_sum G t f
-      #|  (f:K->A) i = group_id G
-      #|  (i:K) IN k
+      #|  (f : (K) -> A)((i : K)) == group_id((G : Group[A]))
+      #|  IN((i : K), (k : (K) -> Bool))
       #|  forall G (<<=) (f:K->A).\n      group_product G (<<=) {} f = group_id G /\\\n      (forall i k. FINITE {j | j IN k /\\ f j IN group_carrier G DIFF {group_id G}} /\\\n             (forall j. j IN k ==> i <<= j /\\ ~(j <<= i))\n             ==> group_product G (<<=) (i INSERT k) f =\n                   if f i IN group_carrier G ==> i IN k\n                   then group_product G (<<=) k f\n                   else group_mul G (f i) (group_product G (<<=) k f))
       #|  forall G (<<=) (f:K->A).\n      group_product G (<<=) {} f = group_id G /\\\n      (forall k. FINITE {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} /\\\n           ~({i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} = {})\n           ==> ?i. i IN k /\\\n                   f i IN group_carrier G DIFF {group_id G} /\\\n                   group_product G (<<=) k f =\n                   group_mul G (f i) (group_product G (<<=) (k DELETE i) f))
       #|  forall G (f:K->A).\n      group_sum G {} f = group_id G /\\\n      (forall k. FINITE {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} /\\\n           ~({i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} = {})\n           ==> ?i. i IN k /\\\n                   f i IN group_carrier G DIFF {group_id G} /\\\n                   group_sum G k f =\n                   group_mul G (f i) (group_sum G (k DELETE i) f))
@@ -23458,87 +23458,87 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall(G:A group) (s:K->bool) f.\n        (forall i. i IN s ==> f i = group_id G)\n        ==> group_sum G s f = group_id G
       #|  forall(G:A group) (<<=) (s:K->bool).\n        group_product G (<<=) s (\\x. group_id G) = group_id G
       #|  forall(G:A group) (s:K->bool).\n        group_sum G s (\\x. group_id G) = group_id G
-      #|  \\x:A. group_mul G x z = group_mul G z x
+      #|  (x : A) => group_mul((G : Group[A]), x, (z : A)) == group_mul(G, z, x)
       #|  forall G (<<=) k (f:K->A) z.\n        (forall i. i IN k /\\ f i IN group_carrier G /\\ ~(f i = group_id G)\n             ==> group_mul G (f i) z = group_mul G z (f i)) /\\\n        z IN group_carrier G\n        ==> group_mul G (group_product G (<<=) k f) z =\n            group_mul G z (group_product G (<<=) k f)
       #|  forall G k (f:K->A) z.\n        (forall i. i IN k /\\ f i IN group_carrier G /\\ ~(f i = group_id G)\n             ==> group_mul G (f i) z = group_mul G z (f i)) /\\\n        z IN group_carrier G\n        ==> group_mul G (group_sum G k f) z = group_mul G z (group_sum G k f)
       #|  forall G (<<=) i (f:K->A).\n        group_product G (<<=) {i} f =\n        if f i IN group_carrier G then f i else group_id G
       #|  forall G i (f:K->A).\n        group_sum G {i} f =\n        if f i IN group_carrier G then f i else group_id G
-      #|  s DELETE (i:K)
-      #|  n - 1 < n <=> ~(n = 0)
-      #|  n - 1
-      #|  i IN s ==> i INSERT (s DELETE i UNION t) = s UNION t
-      #|  i IN s ==> i INSERT (s DELETE i) = s
-      #|  i:K
-      #|  f:K->A
-      #|  (<<=):K->K->bool
-      #|  G:A group
-      #|  i:K
-      #|  s:K->bool
-      #|  s:K->bool = {}
-      #|  s:K->bool
-      #|  n:num
+      #|  DELETE((s : (K) -> Bool), (i : K))
+      #|  ((n : Num) - 1 < n) == !(n == 0)
+      #|  (n : Num) - 1
+      #|  IN((i : _), (s : (_) -> Bool)) \226\134\146 INSERT(i, UNION(DELETE(s, i), (t : (_) -> Bool))) == UNION(s, t)
+      #|  IN((i : _), (s : (_) -> Bool)) \226\134\146 INSERT(i, DELETE(s, i)) == s
+      #|  (i : K)
+      #|  (f : (K) -> A)
+      #|  (op_lt_lt_eq : (K, K) -> Bool)
+      #|  (G : Group[A])
+      #|  (i : K)
+      #|  (s : (K) -> Bool)
+      #|  (s : (K) -> Bool) == {}
+      #|  (s : (K) -> Bool)
+      #|  (n : Num)
       #|  (forall n s. FINITE s /\\ CARD s = n ==> P s) ==> forall s. FINITE s ==> P s
       #|  forall i. i IN t ==> (f:K->A) i IN group_carrier G /\\ ~(f i = group_id G)
-      #|  t:K->bool
-      #|  t:K->bool
+      #|  (t : (K) -> Bool)
+      #|  (t : (K) -> Bool)
       #|  {i | i IN t /\\ (f:K->A) i IN group_carrier G DIFF {group_id G}}
-      #|  s:K->bool
+      #|  (s : (K) -> Bool)
       #|  {i | i IN s /\\ (f:K->A) i IN group_carrier G DIFF {group_id G}}
-      #|  woset((<<=):K->K->bool)
-      #|  fld(<<=) = (:K)
-      #|  (p <=> q) ==> (q ==> q /\\ p)
+      #|  woset((op_lt_lt_eq : (K, K) -> Bool))
+      #|  fld((op_lt_lt_eq : (K, K) -> Bool)) == UNIV
+      #|  (p : Bool) == (q : Bool) \226\134\146 q \226\134\146 q && p
       #|  forall x y. x IN {i | i IN s /\\ f i IN group_carrier G DIFF {group_id G}} /\\\n          y IN {i | i IN t /\\ (f:K->A) i IN group_carrier G DIFF {group_id G}}\n          ==> x <<= y /\\ ~(x = y)
       #|  (forall i. i IN {i | i IN s /\\ (f:K->A) i IN group_carrier G DIFF {group_id G}}\n         ==> f i IN group_carrier G /\\ ~(f i = group_id G)) /\\\n    (forall i. i IN {i | i IN t /\\ (f:K->A) i IN group_carrier G DIFF {group_id G}}\n         ==> f i IN group_carrier G /\\ ~(f i = group_id G))
       #|  FINITE {i | i IN t /\\ (f:K->A) i IN group_carrier G DIFF {group_id G}}
       #|  {x | x IN s UNION t /\\ P x} =\n    {x | x IN s /\\ P x} UNION {x | x IN t /\\ P x}
       #|  forall G (<<=) (f:K->A) s t.\n        woset(<<=) /\\ fld(<<=) = (:K) /\\\n        (FINITE {i | i IN s /\\ f i IN group_carrier G DIFF {group_id G}} <=>\n         FINITE {i | i IN t /\\ f i IN group_carrier G DIFF {group_id G}}) /\\\n        (forall x y. x IN s /\\ y IN t ==> x <<= y /\\ ~(x = y))\n        ==> group_product G (<<=) (s UNION t) f =\n            group_mul G (group_product G (<<=) s f)\n                        (group_product G (<<=) t f)
-      #|  (s DELETE (i:K)) UNION t
-      #|  s DELETE (i:K)
-      #|  a INSERT s = {a} UNION s
+      #|  UNION(DELETE((s : (K) -> Bool), (i : K)), (t : (K) -> Bool))
+      #|  DELETE((s : (K) -> Bool), (i : K))
+      #|  INSERT((a : _), (s : (_) -> Bool)) == UNION({a}, s)
       #|  forall G (f:num->A) m n.\n        group_product G (<=) (m..n) f =\n        if m <= n then\n           if f m IN group_carrier G\n           then group_mul G (f m) (group_product G (<=) (m+1..n) f)\n           else group_product G (<=) (m+1..n) f\n         else group_id G
-      #|  a INSERT s = s UNION {a}
-      #|  m = 0
-      #|  n = 0
+      #|  INSERT((a : _), (s : (_) -> Bool)) == UNION(s, {a})
+      #|  (m : Num) == 0
+      #|  (n : Num) == 0
       #|  forall G (f:num->A) m n.\n        group_product G (<=) (m..n) f =\n        if m <= n then\n           if f n IN group_carrier G\n           then if n = 0 then f 0\n                else group_mul G (group_product G (<=) (m..n-1) f) (f n)\n           else group_product G (<=) (m..n-1) f\n         else group_id G
-      #|  ~(m <= SUC n) ==> n < m
-      #|  m <= SUC n
+      #|  !((m : Num) <= SUC((n : Num))) \226\134\146 n < m
+      #|  (m : Num) <= SUC((n : Num))
       #|  (forall G m f:num->A.\n        group_product G (<=) (m..0) f =\n        if m = 0 /\\ f 0 IN group_carrier G then f 0 else group_id G) /\\\n   (forall G m n f:num->A.\n        group_product G (<=) (m..SUC n) f =\n        if m <= SUC n /\\ f(SUC n) IN group_carrier G\n        then group_mul G (group_product G (<=) (m..n) f) (f(SUC n))\n        else group_product G (<=) (m..n) f)
-      #|  i:K
-      #|  FINITE s ==> forall i. t SUBSET i INSERT s ==> FINITE t
-      #|  p /\\ q ==> (p <=> q)
-      #|  i:K
-      #|  FINITE s ==> forall i. t SUBSET i INSERT s ==> FINITE t
-      #|  p /\\ q ==> (p <=> q)
-      #|  i INSERT s = s UNION {i}
-      #|  i:K
-      #|  FINITE s ==> forall i. t SUBSET i INSERT s ==> FINITE t
-      #|  p /\\ q ==> (p <=> q)
-      #|  i INSERT (l UNION r) = (i INSERT l) UNION r
+      #|  (i : K)
+      #|  FINITE((s : (_) -> Bool)) \226\134\146 (\226\136\128 i : _, SUBSET((t : (_) -> Bool), INSERT(i, s)) \226\134\146 FINITE(t))
+      #|  (p : Bool) && (q : Bool) \226\134\146 p == q
+      #|  (i : K)
+      #|  FINITE((s : (_) -> Bool)) \226\134\146 (\226\136\128 i : _, SUBSET((t : (_) -> Bool), INSERT(i, s)) \226\134\146 FINITE(t))
+      #|  (p : Bool) && (q : Bool) \226\134\146 p == q
+      #|  INSERT((i : _), (s : (_) -> Bool)) == UNION(s, {i})
+      #|  (i : K)
+      #|  FINITE((s : (_) -> Bool)) \226\134\146 (\226\136\128 i : _, SUBSET((t : (_) -> Bool), INSERT(i, s)) \226\134\146 FINITE(t))
+      #|  (p : Bool) && (q : Bool) \226\134\146 p == q
+      #|  INSERT((i : _), UNION((l : (_) -> Bool), (r : (_) -> Bool))) == UNION(INSERT(i, l), r)
       #|  k = {j:K | j IN k /\\ j <<= i /\\ ~(j = i)} UNION\n        {j | j IN k /\\ i <<= j /\\ ~(j = i)}
       #|  forall G (<<=) i k (f:K->A).\n        woset(<<=) /\\ fld(<<=) = (:K) /\\\n        FINITE {j | j IN k /\\ f j IN group_carrier G DIFF {group_id G}} /\\\n        (forall j. j IN k /\\ j <<= i /\\ ~(j = i) /\\\n             f i IN group_carrier G /\\ f j IN group_carrier G\n             ==> group_mul G (f i) (f j) = group_mul G (f j) (f i))\n        ==> group_product G (<<=) (i INSERT k) f =\n                if f i IN group_carrier G ==> i IN k\n                then group_product G (<<=) k f\n                else group_mul G (f i) (group_product G (<<=) k f)
       #|  forall G (<<=) i k (f:K->A).\n        woset(<<=) /\\ fld(<<=) = (:K) /\\\n        abelian_group G /\\\n        FINITE {j | j IN k /\\ f j IN group_carrier G DIFF {group_id G}}\n        ==> group_product G (<<=) (i INSERT k) f =\n                if f i IN group_carrier G ==> i IN k\n                then group_product G (<<=) k f\n                else group_mul G (f i) (group_product G (<<=) k f)
       #|  forall G i k (f:K->A).\n        FINITE {j | j IN k /\\ f j IN group_carrier G DIFF {group_id G}} /\\\n        (forall j. j IN k /\\ ~(j = i) /\\\n             f i IN group_carrier G /\\ f j IN group_carrier G\n             ==> group_mul G (f i) (f j) = group_mul G (f j) (f i))\n        ==> group_sum G (i INSERT k) f =\n                if f i IN group_carrier G ==> i IN k\n                then group_sum G k f\n                else group_mul G (f i) (group_sum G k f)
       #|  forall G i k (f:K->A).\n        abelian_group G /\\\n        FINITE {j | j IN k /\\ f j IN group_carrier G DIFF {group_id G}}\n        ==> group_sum G (i INSERT k) f =\n                if f i IN group_carrier G ==> i IN k\n                then group_sum G k f\n                else group_mul G (f i) (group_sum G k f)
-      #|  s DELETE (i:K)
-      #|  n - 1 < n <=> ~(n = 0)
-      #|  n - 1
-      #|  s = {i:K} UNION (s DELETE i)
-      #|  i:K
-      #|  (forall s. ~(s = {}) ==> P s) /\\ ~(t = {}) ==> P t
-      #|  CARD s = n ==> FINITE s /\\ ~(n = 0) ==> ~(s = {})
-      #|  n = 0
-      #|  s:K->bool
-      #|  n:num
+      #|  DELETE((s : (K) -> Bool), (i : K))
+      #|  ((n : Num) - 1 < n) == !(n == 0)
+      #|  (n : Num) - 1
+      #|  (s : (K) -> Bool) == UNION({(i : K)}, DELETE(s, i))
+      #|  (i : K)
+      #|  (\226\136\128 s : (_) -> Bool, !(s == {}) \226\134\146 (P : ((_) -> Bool) -> Bool)(s)) && !((t : (_) -> Bool) == {}) \226\134\146 P(t)
+      #|  CARD((s : (_) -> Bool)) == (n : Num) \226\134\146 FINITE(s) && !(n == 0) \226\134\146 !(s == {})
+      #|  (n : Num) == 0
+      #|  (s : (K) -> Bool)
+      #|  (n : Num)
       #|  (forall n s. FINITE s /\\ CARD s = n ==> P s)\n    ==> forall s. FINITE s ==> P s
-      #|  s:K->bool
-      #|  t:K->bool
-      #|  G:A group
-      #|  G:A group
-      #|  FINITE(t:K->bool)
-      #|  t:K->bool
+      #|  (s : (K) -> Bool)
+      #|  (t : (K) -> Bool)
+      #|  (G : Group[A])
+      #|  (G : Group[A])
+      #|  FINITE((t : (K) -> Bool))
+      #|  (t : (K) -> Bool)
       #|  forall i. i IN t ==> (f:K->A) i IN group_carrier G /\\ g i IN group_carrier G
       #|  group_product G (<<=) t (\\i. group_mul G (f i) (g i)) =\n    group_mul G (group_product G (<<=) t (f:K->A)) (group_product G (<<=) t g)
-      #|  s:K->bool
+      #|  (s : (K) -> Bool)
       #|  forall G (<<=) k f (g:K->A).\n      woset(<<=) /\\ fld(<<=) = (:K) /\\\n      FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n      FINITE {i | i IN k /\\ ~(g i = group_id G)} /\\\n      (forall i. i IN k ==> f i IN group_carrier G /\\ g i IN group_carrier G) /\\\n      pairwise (\\i j. group_mul G (f i) (g j) = group_mul G (g j) (f i)) k\n      ==> group_product G (<<=) k (\\i. group_mul G (f i) (g i)) =\n          group_mul G (group_product G (<<=) k f) (group_product G (<<=) k g)
       #|  t:K->bool
       #|  forall G k f (g:K->A).\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        FINITE {i | i IN k /\\ ~(g i = group_id G)} /\\\n        (forall i. i IN k ==> f i IN group_carrier G /\\ g i IN group_carrier G) /\\\n        pairwise (\\i j. group_mul G (f i) (g j) = group_mul G (g j) (f i)) k\n        ==> group_sum G k (\\i. group_mul G (f i) (g i)) =\n            group_mul G (group_sum G k f) (group_sum G k g)
@@ -23549,16 +23549,16 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G k (f:K->A) n.\n        abelian_group G /\\\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        (forall i. i IN k ==> f i IN group_carrier G)\n        ==> group_sum G k (\\i. group_pow G (f i) n) =\n            group_pow G (group_sum G k f) n
       #|  forall G k (f:K->A) n.\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        (forall i. i IN k ==> f i IN group_carrier G) /\\\n        pairwise (\\i j. group_mul G (f i) (f j) = group_mul G (f j) (f i)) k\n        ==> group_sum G k (\\i. group_zpow G (f i) n) =\n            group_zpow G (group_sum G k f) n
       #|  forall G k (f:K->A) n.\n        abelian_group G /\\\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        (forall i. i IN k ==> f i IN group_carrier G)\n        ==> group_sum G k (\\i. group_zpow G (f i) n) =\n            group_zpow G (group_sum G k f) n
-      #|  (f:K->A) x IN IMAGE f s
+      #|  IN((f : (K) -> A)((x : K)), IMAGE(f, (s : (K) -> Bool)))
       #|  (p <=> q) /\\ (q ==> x = y)\n      ==> (if p then x else z) = (if q then y else z)
       #|  {y | y IN IMAGE f s /\\ P y} = IMAGE f {x | x IN s /\\ P(f x)}
       #|  ((forall s. FINITE s ==> P s) ==> (forall s. P s)) /\\ (forall s. FINITE s ==> P s)\n    ==> forall s. P s
       #|  forall G (f:K->A) (g:A->B) s.\n        abelian_group G /\\\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> group_sum G (IMAGE f s) g = group_sum G s (g o f)
-      #|  k:K->bool
-      #|  {j | j IN k /\\ ~((x:K->A) j = group_id G)}
+      #|  (k : (K) -> Bool)
+      #|  {(j : K) | IN(j, (k : (K) -> Bool)) && !((x : (K) -> A)(j) == group_id((G : Group[A])))}
       #|  (p ==> q ==> x = y)\n    ==> q ==> ((if p then x else z) = (if p then y else z))
       #|  forall i. i IN {j | j IN k /\\ ~((x:K->A) j = group_id G)}\n        ==> x i IN group_carrier G /\\ ~(x i = group_id G)
-      #|  p /\\ q <=> ~(p ==> ~q)
+      #|  ((p : Bool) && (q : Bool)) == !(p \226\134\146 !q)
       #|  forall G (<<=) (x:K->A) k.\n        woset(<<=) /\\\n        fld(<<=) = (:K) /\\\n        abelian_group G /\\\n        (forall i. i IN k ==> x i IN group_carrier G)\n        ==> group_product G (<<=) k x = iterate (group_add G) k x
       #|  forall G (x:K->A) k.\n        abelian_group G /\\\n        (forall i. i IN k ==> x i IN group_carrier G)\n        ==> group_sum G k x = iterate (group_add G) k x
       #|  forall G (x:K->A) k.\n        abelian_group G /\\\n        (forall i. i IN k ==> x i IN group_carrier G)\n        ==> iterate (group_add G) k x IN group_carrier G
@@ -23571,31 +23571,31 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G x:A. x IN group_carrier G ==> group_conjugation G (group_id G) x = x
       #|  forall G a x:A.\n        a IN group_carrier G /\\ x IN group_carrier G\n        ==> group_conjugation G (group_inv G a) (group_conjugation G a x) = x
       #|  forall G a x:A.\n        a IN group_carrier G /\\ x IN group_carrier G\n        ==> group_conjugation G a (group_conjugation G (group_inv G a) x) = x
-      #|  group_carrier G:A->bool
+      #|  group_carrier((G : Group[A]))
       #|  forall u. s SUBSET u /\\ x IN u /\\\n        (forall x. x IN u ==> f(g x) = x /\\ g(f x) = x)\n        ==> (x IN IMAGE f s <=> g x IN s)
       #|  forall G s x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        s SUBSET group_carrier G\n        ==> (x IN IMAGE (group_conjugation G y) s <=>\n             group_conjugation G (group_inv G y) x IN s)
       #|  forall G (a:A) s.\n        a IN group_carrier G /\\ s SUBSET group_carrier G\n        ==> IMAGE (group_conjugation G a) s SUBSET group_carrier G
-      #|  (forall x. x IN s ==> f x = x) ==> IMAGE f s = s
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> _)(x) == x) \226\134\146 IMAGE(f, s) == s
       #|  forall G s:A->bool.\n        s SUBSET group_carrier G\n        ==> IMAGE (group_conjugation G (group_id G)) s = s
       #|  forall G s a b:A.\n        a IN group_carrier G /\\\n        b IN group_carrier G /\\\n        s SUBSET group_carrier G\n        ==> IMAGE (group_conjugation G (group_mul G a b)) s =\n            IMAGE (group_conjugation G a) (IMAGE (group_conjugation G b) s)
       #|  (forall x. x IN s ==> g(f x) = x) /\\ (forall y. y IN t ==> f(g y) = y)\n    ==> (IMAGE f s = t <=> IMAGE g t = s)
       #|  forall G (a:A) s t.\n        a IN group_carrier G /\\\n        s SUBSET group_carrier G /\\\n        t SUBSET group_carrier G\n        ==> (IMAGE (group_conjugation G (group_inv G a)) s = t <=>\n             IMAGE (group_conjugation G a) t = s)
       #|  forall G (a:A) s t.\n        a IN group_carrier G /\\\n        s SUBSET group_carrier G /\\\n        t SUBSET group_carrier G /\\\n        IMAGE (group_conjugation G (group_inv G a)) s = t\n        ==> IMAGE (group_conjugation G a) t = s
-      #|  group_conjugation G (group_inv G (a:A))
+      #|  group_conjugation((G : Group[A]), group_inv(G, (a : A)))
       #|  forall g. s SUBSET u /\\ t SUBSET u /\\\n        (forall x. x IN u ==> f(x) IN u /\\ g(f x) = x) /\\\n        (forall y. y IN u ==> g(y) IN u /\\ f(g(y)) = y)\n       ==> (IMAGE f s = t <=> {x | x IN u /\\ f x IN t} = s)
       #|  forall G (a:A) s t.\n        a IN group_carrier G /\\\n        s SUBSET group_carrier G /\\\n        t SUBSET group_carrier G\n        ==> (IMAGE (group_conjugation G a) s = t <=>\n             {x | x IN group_carrier G /\\\n                  group_conjugation G a x IN t} = s)
       #|  (s:A->bool) subgroup_of (G:A group) <=>\n        s SUBSET group_carrier G /\\\n        group_id G IN s /\\\n        (forall x. x IN s ==> group_inv G x IN s) /\\\n        (forall x y. x IN s /\\ y IN s ==> group_mul G x y IN s)
-      #|  forall G h:A->bool. h subgroup_of G ==> group_id G IN h
+      #|  \226\136\128 G : Group[A], \226\136\128 h : (A) -> Bool, subgroup_of(h, G) \226\134\146 IN(group_id(G), h)
       #|  forall G h x:A. h subgroup_of G /\\ x IN h ==> group_inv G x IN h
       #|  forall G h x y:A. h subgroup_of G /\\ x IN h /\\ y IN h ==> group_mul G x y IN h
       #|  forall G h x y:A. h subgroup_of G /\\ x IN h /\\ y IN h ==> group_div G x y IN h
       #|  forall G h (x:A) n. h subgroup_of G /\\ x IN h ==> group_pow G x n IN h
       #|  forall G h (x:A) n. h subgroup_of G /\\ x IN h ==> group_zpow G x n IN h
       #|  forall G h a x:A.\n        h subgroup_of G /\\ a IN h /\\ x IN h ==> group_conjugation G a x IN h
-      #|  \\x:A. x IN h
+      #|  (x : A) => IN(x, (h : (A) -> Bool))
       #|  forall G h (<<=) k (f:K->A).\n        h subgroup_of G /\\\n        (forall i. i IN k /\\ f i IN group_carrier G ==> f i IN h)\n        ==> group_product G (<<=) k f IN h
       #|  forall G h k (f:K->A).\n        h subgroup_of G /\\\n        (forall i. i IN k /\\ f i IN group_carrier G ==> f i IN h)\n        ==> group_sum G k f IN h
-      #|  group_conjugation G (group_inv G a:A)
+      #|  group_conjugation((G : Group[A]), group_inv(G, (a : A)))
       #|  forall g. (forall x. x IN s ==> f x IN s /\\ g x IN s /\\ g(f x) = x /\\ f(g x) = x)\n    ==> IMAGE f s = s
       #|  forall G h a:A.\n        h subgroup_of G /\\ a IN h ==> IMAGE (group_conjugation G a) h = h
       #|  forall G (gs:(A->bool)->bool).\n        (forall g. g IN gs ==> g subgroup_of G) /\\ ~(gs = {})\n        ==> (INTERS gs) subgroup_of G
@@ -23603,41 +23603,41 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G (u:(A->bool)->bool).\n        ~(u = {}) /\\\n        (forall h. h IN u ==> h subgroup_of G) /\\\n        (forall g h. g IN u /\\ h IN u ==> g SUBSET h \\/ h SUBSET g)\n        ==> (UNIONS u) subgroup_of G
       #|  forall G h:A->bool. h subgroup_of opposite_group G <=> h subgroup_of G
       #|  forall G s:A->bool. s subgroup_of G ==> s SUBSET group_carrier G
-      #|  forall G s:A->bool. s subgroup_of G ==> ~(s = {})
-      #|  forall G:A group. {group_id G} subgroup_of G
-      #|  forall G:A group. (group_carrier G) subgroup_of G
-      #|  {h:A->bool | h SUBSET group_carrier G}
+      #|  \226\136\128 G : Group[A], \226\136\128 s : (A) -> Bool, subgroup_of(s, G) \226\134\146 !(s == {})
+      #|  \226\136\128 G : Group[A], subgroup_of({group_id(G)}, G)
+      #|  \226\136\128 G : Group[A], subgroup_of(group_carrier(G), G)
+      #|  {(h : (A) -> Bool) | SUBSET(h, group_carrier((G : Group[A])))}
       #|  forall(G:A group). FINITE(group_carrier G) ==> FINITE {h | h subgroup_of G}
-      #|  {h:A->bool | h SUBSET group_carrier G}
+      #|  {(h : (A) -> Bool) | SUBSET(h, group_carrier((G : Group[A])))}
       #|  forall P (G:A group).\n        FINITE(group_carrier G) ==> FINITE {h | h subgroup_of G /\\ P h}
       #|  subgroup_generated G (s:A->bool) =\n      group(INTERS {h | h subgroup_of G /\\ (group_carrier G INTER s) SUBSET h},\n            group_id G,group_inv G,group_mul G)
-      #|  group_carrier G:A->bool
+      #|  group_carrier((G : Group[A]))
       #|  (forall G s:A->bool.\n        group_carrier (subgroup_generated G s) =\n          INTERS {h | h subgroup_of G /\\ (group_carrier G INTER s) SUBSET h}) /\\\n    (forall G s:A->bool. group_id (subgroup_generated G s) = group_id G) /\\\n    (forall G s:A->bool. group_inv (subgroup_generated G s) = group_inv G) /\\\n    (forall G s:A->bool. group_mul (subgroup_generated G s) = group_mul G)
       #|  forall G s:A->bool.\n        subgroup_generated G s = G <=>\n        group_carrier(subgroup_generated G s) = group_carrier G
       #|  forall G s:A->bool. group_id G IN group_carrier(subgroup_generated G s)
       #|  forall x. x IN group_carrier (subgroup_generated G s)\n       ==> group_inv G x IN group_carrier(subgroup_generated G s)
       #|  forall x y. x IN group_carrier (subgroup_generated G s) /\\\n         y IN group_carrier (subgroup_generated G s)\n         ==> group_mul G x y IN group_carrier(subgroup_generated G s)
-      #|  group_carrier(G:A group)
+      #|  group_carrier((G : Group[A]))
       #|  forall G h:A->bool.\n        abelian_group G ==> abelian_group(subgroup_generated G h)
       #|  forall G s:A->bool. group_div (subgroup_generated G s) = group_div G
       #|  forall G s:A->bool. group_pow (subgroup_generated G s) = group_pow G
       #|  forall G s:A->bool. group_zpow (subgroup_generated G s) = group_zpow G
       #|  forall G s:A->bool.\n    group_conjugation (subgroup_generated G s) = group_conjugation G
-      #|  g INTER g INTER s = g INTER s
+      #|  INTER((g : (_) -> Bool), INTER(g, (s : (_) -> Bool))) == INTER(g, s)
       #|  forall G s:A->bool.\n        subgroup_generated G s =\n        subgroup_generated G (group_carrier G INTER s)
-      #|  group_carrier G:A->bool
+      #|  group_carrier((G : Group[A]))
       #|  forall G s:A->bool. group_carrier(subgroup_generated G s) subgroup_of G
       #|  forall G s t:A->bool.\n        s SUBSET t\n        ==> group_carrier(subgroup_generated G s) SUBSET\n            group_carrier(subgroup_generated G t)
       #|  forall G h s:A->bool.\n        s SUBSET h /\\ h subgroup_of G\n        ==> group_carrier(subgroup_generated G s) SUBSET h
       #|  forall G s t:A->bool.\n        s SUBSET group_carrier(subgroup_generated G t) /\\\n        t SUBSET group_carrier(subgroup_generated G s)\n        ==> subgroup_generated G s = subgroup_generated G t
-      #|  s:A->bool
-      #|  {x:A | x IN group_carrier G /\\ P x}
-      #|  G:A group
-      #|  s:A->bool
-      #|  group_carrier G INTER (s:A->bool)
+      #|  (s : (A) -> Bool)
+      #|  {(x : A) | IN(x, group_carrier((G : Group[A]))) && (P : (A) -> Bool)(x)}
+      #|  (G : Group[A])
+      #|  (s : (A) -> Bool)
+      #|  INTER(group_carrier((G : Group[A])), (s : (A) -> Bool))
       #|  group_carrier G INTER (s:A->bool) SUBSET group_carrier G
       #|  forall G P s:A->bool.\n        (forall x. x IN group_carrier G /\\ x IN s ==> P x) /\\\n        P(group_id G) /\\\n        (forall x. P x ==> P(group_inv G x)) /\\\n        (forall x y. P x /\\ P y ==> P(group_mul G x y))\n        ==> forall x. x IN group_carrier(subgroup_generated G s) ==> P x
-      #|  a IN s ==> INTERS s SUBSET a
+      #|  IN((a : (_) -> Bool), (s : ((_) -> Bool) -> Bool)) \226\134\146 SUBSET(INTERS(s), a)
       #|  forall G h:A->bool.\n        group_carrier (subgroup_generated G h) SUBSET group_carrier G
       #|  forall G s:A->bool.\n    subgroup_generated G s = G <=>\n    group_carrier G SUBSET group_carrier(subgroup_generated G s)
       #|  forall G h k:A->bool.\n        h subgroup_of (subgroup_generated G k) <=>\n        h subgroup_of G /\\ h SUBSET group_carrier(subgroup_generated G k)
@@ -23648,12 +23648,12 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall x:A. x IN group_carrier (subgroup_generated G s)\n          ==> forall y. y IN group_carrier G /\\ P y ==> P(group_mul G x y)
       #|  forall G P s:A->bool.\n        P (group_id G) /\\\n        (forall x y. x IN group_carrier G /\\ x IN s /\\ y IN group_carrier G /\\ P y\n               ==> P (group_mul G x y) /\\ P (group_mul G (group_inv G x) y))\n        ==> forall x. x IN group_carrier(subgroup_generated G s) ==> P x
       #|  forall G s:A->bool.\n        FINITE(group_carrier G)\n        ==> FINITE(group_carrier(subgroup_generated G s))
-      #|  CONS (T,(gencmap:A->K) x) l
-      #|  CONS (F,(gencmap:A->K) x) l
-      #|  l:(bool#K)list
-      #|  y:A
-      #|  x:A
-      #|  []:(bool#K)list
+      #|  CONS((true, (gencmap : (A) -> K)((x : A))), (l : List[(Bool, K)]))
+      #|  CONS((false, (gencmap : (A) -> K)((x : A))), (l : List[(Bool, K)]))
+      #|  (l : List[(Bool, K)])
+      #|  (y : A)
+      #|  (x : A)
+      #|  (NIL : List[(Bool, K)])
       #|  IMAGE (groupel:(bool#K)list->A)\n          {l | forall x. MEM x l ==> x IN (:bool) CROSS k}
       #|  ?groupel:(bool#K)list->A.\n        groupel [] = group_id G /\\\n        (forall x l. groupel (CONS (F,x) l) = group_mul G (gdecmap x) (groupel l)) /\\\n        (forall x l. groupel (CONS (T,x) l) =\n               group_mul G (group_inv G (gdecmap x)) (groupel l))
       #|  :P
@@ -23663,60 +23663,60 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  \\n. n + 1
       #|  (+):num->num->num
       #|  (+):num->num->num
-      #|  gencmap:A->K
-      #|  gdecmap:K->A
+      #|  (gencmap : (A) -> K)
+      #|  (gdecmap : (K) -> A)
       #|  forall(G:A group) s (k:K->bool).\n      INFINITE k /\\ s <=_c k ==> group_carrier(subgroup_generated G s) <=_c k
       #|  forall G s:A->bool.\n        COUNTABLE(group_carrier G) \\/ COUNTABLE s\n        ==> COUNTABLE(group_carrier(subgroup_generated G s))
       #|  forall G h:A->bool.\n     group_carrier G INTER h SUBSET group_carrier(subgroup_generated G h)
       #|  forall G s t:A->bool.\n        s SUBSET group_carrier G /\\ s SUBSET t\n        ==> s SUBSET group_carrier(subgroup_generated G t)
       #|  forall G h s:A->bool.\n        h subgroup_of G\n        ==> (group_carrier (subgroup_generated G s) SUBSET h <=>\n             group_carrier G INTER s SUBSET h)
-      #|  h:A->bool
-      #|  x:A
-      #|  h SUBSET g ==> g INTER h = h
+      #|  (h : (A) -> Bool)
+      #|  (x : A)
+      #|  SUBSET((h : (_) -> Bool), (g : (_) -> Bool)) \226\134\146 INTER(g, h) == h
       #|  forall G h:A->bool.\n        h subgroup_of G ==> group_carrier (subgroup_generated G h) = h
       #|  forall G h k:A->bool.\n        k subgroup_of G\n        ==> (h subgroup_of (subgroup_generated G k) <=>\n             h subgroup_of G /\\ h SUBSET k)
       #|  forall G:A group. subgroup_generated G (group_carrier G) = G
       #|  forall G g h:A->bool.\n        g subgroup_of G /\\ g SUBSET h\n        ==> g subgroup_of (subgroup_generated G h)
-      #|  s SUBSET t <=> t INTER s = s
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) == (INTER(t, s) == s)
       #|  forall G s:A->bool.\n        s SUBSET group_carrier G\n        ==> s SUBSET group_carrier(subgroup_generated G s)
-      #|  u SUBSET s ==> u INTER s = u
+      #|  SUBSET((u : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 INTER(u, s) == u
       #|  forall G s:A->bool. group_carrier G SUBSET s ==> subgroup_generated G s = G
       #|  forall G s x:A.\n        s SUBSET group_carrier G /\\ x IN s\n        ==> x IN group_carrier(subgroup_generated G s)
       #|  forall G s x:A.\n        x IN group_carrier G /\\ x IN s\n        ==> x IN group_carrier(subgroup_generated G s)
       #|  forall G g h:A->bool.\n        g subgroup_of (subgroup_generated G h)\n        ==> g subgroup_of G
       #|  forall G s:A->bool.\n        trivial_group G ==> trivial_group(subgroup_generated G s)
-      #|  {group_id G:A}
-      #|  group_id G:A
+      #|  {group_id((G : Group[A]))}
+      #|  group_id((G : Group[A]))
       #|  forall G s:A->bool.\n        s SUBSET {group_id G} ==> trivial_group(subgroup_generated G s)
       #|  forall G s:A->bool.\n        trivial_group(subgroup_generated G s) <=>\n        group_carrier G INTER s SUBSET {group_id G}
-      #|  s:A->bool
+      #|  (s : (A) -> Bool)
       #|  forall G s:A->bool. trivial_group G ==> subgroup_generated G s = G
       #|  forall G s:A->bool.\n        subgroup_generated G (group_carrier(subgroup_generated G s)) =\n        subgroup_generated G s
       #|  p /\\ (q \\/ r) ==> s <=> (q ==> p ==> s) /\\ (p /\\ r ==> s)
       #|  forall G s:A->bool.\n        subgroup_generated G (group_id G INSERT s) = subgroup_generated G s
-      #|  s:A->bool
-      #|  G:A group
-      #|  h INTER group_carrier (subgroup_generated G s):A->bool
-      #|  h:A->bool
+      #|  (s : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  INTER((h : (A) -> Bool), group_carrier(subgroup_generated((G : Group[A]), (s : (A) -> Bool))))
+      #|  (h : (A) -> Bool)
       #|  forall G s t:A->bool.\n        group_carrier(subgroup_generated (subgroup_generated G s) t) SUBSET\n        group_carrier(subgroup_generated G t)
       #|  forall G s t:A->bool.\n        s SUBSET group_carrier(subgroup_generated G t)\n        ==> subgroup_generated (subgroup_generated G t) s =\n            subgroup_generated G s
-      #|  t SUBSET u ==> t INTER s = t INTER u INTER s
-      #|  t:A->bool
-      #|  group_carrier G INTER s:A->bool
-      #|  G:A group
+      #|  SUBSET((t : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 INTER(t, (s : (_) -> Bool)) == INTER(t, INTER(u, s))
+      #|  (t : (A) -> Bool)
+      #|  INTER(group_carrier((G : Group[A])), (s : (A) -> Bool))
+      #|  (G : Group[A])
       #|  forall G s t:A->bool.\n        s SUBSET t\n        ==> subgroup_generated (subgroup_generated G t) s =\n            subgroup_generated G s
       #|  forall G s t:A->bool.\n        s SUBSET t\n        ==> subgroup_generated (subgroup_generated G t)\n                               (group_carrier (subgroup_generated G s)) =\n            subgroup_generated G s
       #|  forall G s t:A->bool.\n        subgroup_generated G (group_carrier(subgroup_generated G s) UNION t) =\n        subgroup_generated G (s UNION t)
       #|  forall G s t:A->bool.\n        subgroup_generated G (s UNION group_carrier(subgroup_generated G t)) =\n        subgroup_generated G (s UNION t)
       #|  forall G s t:A->bool.\n        subgroup_generated G (group_carrier(subgroup_generated G s) UNION\n                              group_carrier(subgroup_generated G t)) =\n        subgroup_generated G (s UNION t)
-      #|  forall G:A group. trivial_group(subgroup_generated G {})
+      #|  \226\136\128 G : Group[A], trivial_group(subgroup_generated(G, {}))
       #|  forall G z:A.\n        z IN group_carrier G\n        ==> {x | x IN group_carrier G /\\ group_mul G x z = group_mul G z x}\n            subgroup_of G
       #|  s SUBSET {x | P x /\\ Q x} <=>\n    s SUBSET {x | P x} /\\ s SUBSET {x | Q x}
-      #|  s:A->bool
+      #|  (s : (A) -> Bool)
       #|  forall G s z:A.\n        z IN group_carrier G\n        ==> ((forall x. x IN group_carrier(subgroup_generated G s)\n                  ==> group_mul G x z = group_mul G z x) <=>\n             (forall x. x IN group_carrier G /\\ x IN s\n                  ==> group_mul G x z = group_mul G z x))
       #|  forall G s z:A.\n        (forall x. x IN s ==> group_mul G x z = group_mul G z x) /\\\n        z IN group_carrier G\n        ==> (forall x. x IN group_carrier(subgroup_generated G s)\n                 ==> group_mul G x z = group_mul G z x)
-      #|  t:A->bool
-      #|  G:A group
+      #|  (t : (A) -> Bool)
+      #|  (G : Group[A])
       #|  p /\\ q /\\ r /\\ s ==> t <=> p /\\ q ==> r /\\ s ==> t
       #|  forall G s t:A->bool.\n        (forall x y. x IN group_carrier(subgroup_generated G s) /\\\n               y IN group_carrier(subgroup_generated G t)\n               ==> group_mul G x y = group_mul G y x) <=>\n        (forall x y. x IN group_carrier G /\\ x IN s /\\\n               y IN group_carrier G /\\ y IN t\n               ==> group_mul G x y = group_mul G y x)
       #|  forall G s:A->bool.\n        (forall x y. x IN group_carrier G /\\ x IN s /\\\n               y IN group_carrier G /\\ y IN s\n               ==> group_mul G x y = group_mul G y x)\n        ==> abelian_group (subgroup_generated G s)
@@ -23727,8 +23727,8 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall(G1:A group) (G2:B group).\n        opposite_group(prod_group G1 G2) =\n        prod_group (opposite_group G1) (opposite_group G2)
       #|  forall(G:A group) (H:B group).\n        trivial_group(prod_group G H) <=>\n        trivial_group G /\\ trivial_group H
       #|  forall(G:A group) (H:B group).\n        FINITE(group_carrier(prod_group G H)) <=>\n        FINITE(group_carrier G) /\\ FINITE(group_carrier H)
-      #|  H:B group
-      #|  G:A group
+      #|  (H : Group[B])
+      #|  (G : Group[A])
       #|  forall(G:A group) (H:B group).\n        abelian_group(prod_group G H) <=>\n        abelian_group G /\\ abelian_group H
       #|  forall(G1:A group) (G2:B group) h1 h2.\n        (h1 CROSS h2) subgroup_of (prod_group G1 G2) <=>\n        h1 subgroup_of G1 /\\ h2 subgroup_of G2
       #|  forall(G1:A group) (G2:B group) h1 h2.\n        h1 subgroup_of G1 /\\ h2 subgroup_of G2\n        ==> (prod_group (subgroup_generated G1 h1) (subgroup_generated G2 h2) =\n             subgroup_generated (prod_group G1 G2) (h1 CROSS h2))
@@ -23739,41 +23739,41 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall(G:K->A group) k.\n        opposite_group(product_group k G) =\n        product_group k (\\i. opposite_group(G i))
       #|  forall k (G:K->A group) a i.\n        RESTRICTION k (\\j. if j = i then a else group_id (G j)) IN\n        group_carrier(product_group k G) <=>\n        i IN k ==> a IN group_carrier(G i)
       #|  forall k (G:K->A group).\n        trivial_group(product_group k G) <=>\n        forall i. i IN k ==> trivial_group(G i)
-      #|  cartesian_product k (h:K->A->bool) = {}
+      #|  cartesian_product((k : (K) -> Bool), (h : (K, A) -> Bool)) == {}
       #|  forall k h G:K->A group.\n        (cartesian_product k h) subgroup_of (product_group k G) <=>\n        forall i. i IN k ==> (h i) subgroup_of (G i)
       #|  forall k G (h:K->A->bool).\n        (forall i. i IN k ==> (h i) subgroup_of (G i))\n        ==> product_group k (\\i. subgroup_generated (G i) (h i)) =\n            subgroup_generated (product_group k G) (cartesian_product k h)
       #|  forall k (G:K->A group).\n        FINITE(group_carrier(product_group k G)) <=>\n        FINITE {i | i IN k /\\ ~trivial_group(G i)} /\\\n        forall i. i IN k ==> FINITE(group_carrier(G i))
-      #|  p /\\ q /\\ r ==> s <=> p /\\ q ==> r ==> s
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (p && q \226\134\146 r \226\134\146 s)
       #|  forall k (G:K->A group).\n        abelian_group(product_group k G) <=>\n        forall i. i IN k ==> abelian_group(G i)
       #|  sum_group k (G:K->A group) =\n        subgroup_generated\n         (product_group k G)\n         {x | x IN cartesian_product k (\\i. group_carrier(G i)) /\\\n              FINITE {i | i IN k /\\ ~(x i = group_id(G i))}}
       #|  forall k (G:K->A group).\n      sum_group k G =\n      subgroup_generated (product_group k G)\n                 {x | FINITE {i | i IN k /\\ ~(x i = group_id (G i))}}
       #|  forall k (G:K->A group). FINITE k ==> sum_group k G = product_group k G
-      #|  ~p \\/ q <=> p ==> q
-      #|  p /\\ ~q <=> ~(p ==> q)
+      #|  (!(p : Bool) || (q : Bool)) == (p \226\134\146 q)
+      #|  ((p : Bool) && !(q : Bool)) == !(p \226\134\146 q)
       #|  forall k (G:K->A group).\n    {x | x IN cartesian_product k (\\i. group_carrier(G i)) /\\\n         FINITE {i | i IN k /\\ ~(x i = group_id(G i))}}\n    subgroup_of product_group k G
       #|  (forall k (G:K->A group).\n        group_carrier(sum_group k G) =\n          {x | x IN cartesian_product k (\\i. group_carrier(G i)) /\\\n               FINITE {i | i IN k /\\ ~(x i = group_id(G i))}}) /\\\n   (forall k (G:K->A group).\n        group_id (sum_group k G) =\n          RESTRICTION k (\\i. group_id (G i))) /\\\n   (forall k (G:K->A group).\n        group_inv (sum_group k G) =\n          \\x. RESTRICTION k (\\i. group_inv (G i) (x i))) /\\\n   (forall k (G:K->A group).\n        group_mul (sum_group k G) =\n          (\\x y. RESTRICTION k (\\i. group_mul (G i) (x i) (y i))))
       #|  forall(G:K->A group) k x n.\n        group_pow (sum_group k G) x n =\n        RESTRICTION k (\\i. group_pow (G i) (x i) n)
       #|  forall(G:K->A group) k x n.\n        group_zpow (sum_group k G) x n =\n        RESTRICTION k (\\i. group_zpow (G i) (x i) n)
-      #|  {i:K}
-      #|  (p <=> r) /\\ q ==> (p /\\ q <=> r)
+      #|  {(i : K)}
+      #|  (p : Bool) == (r : Bool) && (q : Bool) \226\134\146 (p && q) == r
       #|  forall k (G:K->A group) a i.\n        RESTRICTION k (\\j. if j = i then a else group_id (G j)) IN\n        group_carrier(sum_group k G) <=>\n        i IN k ==> a IN group_carrier(G i)
-      #|  i:K
-      #|  {i:K}
+      #|  (i : K)
+      #|  {(i : K)}
       #|  RESTRICTION k (\\j. if j = i then a else group_id (G j)):K->A
-      #|  a:A
-      #|  ~(s SUBSET {a}) <=> ?x. x IN s /\\ ~(x = a)
-      #|  i:K
+      #|  (a : A)
+      #|  !SUBSET((s : (_) -> Bool), {(a : _)}) == (\226\136\131 x : _, IN(x, s) && !(x == a))
+      #|  (i : K)
       #|  forall k (G:K->A group).\n        trivial_group(sum_group k G) <=> forall i. i IN k ==> trivial_group(G i)
       #|  s SUBSET t\n    ==> ((forall x. x IN s ==> x IN t /\\ P x) <=> (forall x. x IN s ==> P x))
-      #|  (p ==> (q <=> r)) ==> (p /\\ q <=> p /\\ r)
+      #|  ((p : Bool) \226\134\146 (q : Bool) == (r : Bool)) \226\134\146 (p && q) == (p && r)
       #|  forall k h G:K->A group.\n        (cartesian_product k h) subgroup_of (sum_group k G) <=>\n        (forall i. i IN k ==> (h i) subgroup_of (G i)) /\\\n        (forall z. z IN cartesian_product k h\n             ==> FINITE {i | i IN k /\\ ~(z i = group_id(G i))})
       #|  forall k G (h:K->A->bool).\n        (forall i. i IN k ==> (h i) subgroup_of (G i))\n        ==> sum_group k (\\i. subgroup_generated (G i) (h i)) =\n            subgroup_generated (sum_group k G) (cartesian_product k h)
-      #|  i:K
+      #|  (i : K)
       #|  RESTRICTION k (\\j. if j = i then y else group_id (G j)):K->A
       #|  RESTRICTION k (\\j. if j = i then x else group_id (G j)):K->A
-      #|  y:A
-      #|  x:A
-      #|  i:K
+      #|  (y : A)
+      #|  (x : A)
+      #|  (i : K)
       #|  forall k (G:K->A group).\n           abelian_group (sum_group k G) <=>\n           (forall i. i IN k ==> abelian_group (G i))
       #|  group_homomorphism (G,G') (f:A->B) <=>\n        IMAGE f (group_carrier G) SUBSET group_carrier G' /\\\n        f (group_id G) = group_id G' /\\\n        (forall x. x IN group_carrier G\n             ==> f(group_inv G x) = group_inv G' (f x)) /\\\n        (forall x y. x IN group_carrier G /\\ y IN group_carrier G\n               ==> f(group_mul G x y) = group_mul G' (f x) (f y))
       #|  group_monomorphism (G,G') (f:A->B) <=>\n        group_homomorphism (G,G') f /\\\n        forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\ f x = f y\n             ==> x = y
@@ -23793,11 +23793,11 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G G' (f:A->B) g.\n        group_isomorphisms (G,G') (f,g) <=> group_isomorphisms(G',G) (g,f)
       #|  forall(f:A->B) g G G'.\n        group_isomorphisms (G,G') (f,g) ==> group_isomorphism (G,G') f
       #|  forall(f:A->B) g G G'.\n        group_isomorphisms (G,G') (f,g) ==> group_isomorphism (G',G) g
-      #|  group_inv G x:A
-      #|  x:A
-      #|  group_id G:A
-      #|  group_id G:A
-      #|  p /\\ (p ==> q) ==> p /\\ q
+      #|  group_inv((G : Group[A]), (x : A))
+      #|  (x : A)
+      #|  group_id((G : Group[A]))
+      #|  group_id((G : Group[A]))
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
       #|  forall G G' f:A->B.\n        group_homomorphism (G,G') (f:A->B) <=>\n        IMAGE f (group_carrier G) SUBSET group_carrier G' /\\\n        (forall x y. x IN group_carrier G /\\ y IN group_carrier G\n               ==> f(group_mul G x y) = group_mul G' (f x) (f y))
       #|  forall G G' (f:A->B).\n        group_epimorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_carrier G' SUBSET IMAGE f (group_carrier G)
       #|  forall G H (f:A->B) g.\n        group_isomorphisms(G,H) (f,g) <=>\n        group_homomorphism(G,H) f /\\\n        (forall x. x IN group_carrier G ==> g(f x) = x) /\\\n        (forall y. y IN group_carrier H ==> g y IN group_carrier G /\\ f(g y) = y)
@@ -23807,12 +23807,12 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> forall x y. x IN group_carrier G /\\ y IN group_carrier G\n                  ==> f(group_div G x y) = group_div G' (f x) (f y)
       #|  forall G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> forall x n. x IN group_carrier G\n                  ==> f(group_pow G x n) = group_pow G' (f x) n
       #|  forall G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> forall x n. x IN group_carrier G\n                  ==> f(group_zpow G x n) = group_zpow G' (f x) n
-      #|  forall G H. group_homomorphism (G,H) (\\x. group_id H)
-      #|  forall G:A group. group_homomorphism (G,G) (\\x. x)
-      #|  forall G:A group. group_monomorphism (G,G) (\\x. x)
-      #|  forall G:A group. group_epimorphism (G,G) (\\x. x)
+      #|  \226\136\128 G : Group[_], \226\136\128 H : Group[_], group_homomorphism((G, H), (x : _) => group_id(H))
+      #|  \226\136\128 G : Group[A], group_homomorphism((G, G), (x : A) => x)
+      #|  \226\136\128 G : Group[A], group_monomorphism((G, G), (x : A) => x)
+      #|  \226\136\128 G : Group[A], group_epimorphism((G, G), (x : A) => x)
       #|  forall G:A group. group_isomorphisms (G,G) ((\\x. x),(\\x. x))
-      #|  forall G:A group. group_isomorphism (G,G) (\\x. x)
+      #|  \226\136\128 G : Group[A], group_isomorphism((G, G), (x : A) => x)
       #|  forall G1 G2 G3 (f:A->B) (g:B->C).\n        group_homomorphism(G1,G2) f /\\ group_homomorphism(G2,G3) g\n        ==> group_homomorphism(G1,G3) (g o f)
       #|  forall G1 G2 G3 (f:A->B) (g:B->C).\n        group_monomorphism(G1,G2) f /\\ group_monomorphism(G2,G3) g\n        ==> group_monomorphism(G1,G3) (g o f)
       #|  forall(f:A->B) (g:B->C) A B C.\n        group_homomorphism(A,B) f /\\ group_homomorphism(B,C) g /\\\n        group_monomorphism(A,C) (g o f)\n        ==> group_monomorphism(A,B) f
@@ -23821,31 +23821,31 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G H (f:A->B) g.\n        group_homomorphism(G,H) f /\\\n        (forall x. x IN group_carrier G ==> g(f x) = x)\n        ==> group_monomorphism (G,H) f
       #|  forall G H (f:A->B) g.\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,G) g /\\\n        (forall x. x IN group_carrier G ==> g(f x) = x)\n        ==> group_epimorphism (H,G) g
       #|  forall G G' h (f:A->B).\n        group_homomorphism (G,G') f /\\ IMAGE f (group_carrier G) SUBSET h\n        ==> group_homomorphism (G,subgroup_generated G' h) f
-      #|  s:B->bool
-      #|  H:B group
+      #|  (s : (B) -> Bool)
+      #|  (H : Group[B])
       #|  forall(f:A->B) G H s.\n      group_homomorphism(G,subgroup_generated H s) f <=>\n      group_homomorphism(G,H) f /\\\n      IMAGE f (group_carrier G) SUBSET group_carrier(subgroup_generated H s)
       #|  forall G G' h (f:A->B).\n        h subgroup_of G'\n        ==> (group_homomorphism (G,subgroup_generated G' h) f <=>\n             group_homomorphism (G,G') f /\\\n             IMAGE f (group_carrier G) SUBSET h)
-      #|  s:A->bool
-      #|  G:A group
+      #|  (s : (A) -> Bool)
+      #|  (G : Group[A])
       #|  forall(f:A->B) G H s.\n        group_homomorphism (G,H) f\n        ==> group_homomorphism(subgroup_generated G s,H) f
-      #|  g:A->bool
-      #|  G:A group
-      #|  p ==> q <=> p ==> p /\\ q
+      #|  (g : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == (p \226\134\146 p && q)
       #|  forall G H g h (f:A->B).\n      group_homomorphism(G,H) f /\\ IMAGE f g SUBSET h\n      ==> group_homomorphism(subgroup_generated G g,subgroup_generated H h) f
       #|  forall G H g h (f:A->B).\n      group_homomorphism(G,H) f /\\ IMAGE f (group_carrier G INTER g) SUBSET h\n      ==> group_homomorphism(subgroup_generated G g,subgroup_generated H h) f
-      #|  s:A->bool
-      #|  G:A group
+      #|  (s : (A) -> Bool)
+      #|  (G : Group[A])
       #|  forall(f:A->B) G H s.\n        group_monomorphism (G,H) f\n        ==> group_monomorphism(subgroup_generated G s,H) f
-      #|  s:A->bool
-      #|  G:A group
+      #|  (s : (A) -> Bool)
+      #|  (G : Group[A])
       #|  forall G H s t (f:A->B).\n      group_monomorphism(G,H) f /\\ IMAGE f s SUBSET t\n      ==> group_monomorphism(subgroup_generated G s,subgroup_generated H t) f
       #|  forall G G' t (f:A->B).\n        group_monomorphism(G,subgroup_generated G' t) f\n        ==> group_monomorphism(G,G') f
       #|  forall G s:A->bool. group_homomorphism(subgroup_generated G s,G) (\\x. x)
       #|  forall G s:A->bool. group_monomorphism(subgroup_generated G s,G) (\\x. x)
-      #|  IMAGE (f:A->B) s
-      #|  s:A->bool
-      #|  s:A->bool
-      #|  G:A group
+      #|  IMAGE((f : (A) -> B), (s : (A) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (G : Group[A])
       #|  forall G H (f:A->B) s.\n        group_homomorphism(G,H) f /\\ s SUBSET group_carrier G\n        ==> group_carrier (subgroup_generated H (IMAGE f s)) =\n            IMAGE f (group_carrier(subgroup_generated G s))
       #|  forall G H s t (f:A->B).\n        group_homomorphism (G,H) f /\\\n        s SUBSET group_carrier G /\\\n        t SUBSET group_carrier G /\\\n        subgroup_generated G s = subgroup_generated G t\n        ==> subgroup_generated H (IMAGE f s) =\n            subgroup_generated H (IMAGE f t)
       #|  forall G H s (f:A->B).\n        group_epimorphism (G,H) f /\\\n        s SUBSET group_carrier G /\\\n        subgroup_generated G s = G\n        ==> subgroup_generated H (IMAGE f s) = H
@@ -23867,21 +23867,21 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall(f:A->B) G H. group_epimorphism(G,H) f ==> group_homomorphism(G,H) f
       #|  forall(f:A->B) G H. group_isomorphism(G,H) f ==> group_homomorphism(G,H) f
       #|  forall G (f:A->A). group_automorphism G f ==> group_endomorphism G f
-      #|  f:A->B
-      #|  group_carrier H:B->bool
-      #|  group_carrier G:A->bool
+      #|  (f : (A) -> B)
+      #|  group_carrier((H : Group[B]))
+      #|  group_carrier((G : Group[A]))
       #|  forall G H (f:A->B).\n        FINITE(group_carrier G) /\\ FINITE(group_carrier H) /\\\n        CARD(group_carrier G) = CARD(group_carrier H)\n        ==> (group_isomorphism(G,H) f <=> group_monomorphism(G,H) f)
-      #|  f:A->B
-      #|  group_carrier H:B->bool
-      #|  group_carrier G:A->bool
+      #|  (f : (A) -> B)
+      #|  group_carrier((H : Group[B]))
+      #|  group_carrier((G : Group[A]))
       #|  forall G H (f:A->B).\n        FINITE(group_carrier G) /\\ FINITE(group_carrier H) /\\\n        CARD(group_carrier G) = CARD(group_carrier H)\n        ==> (group_isomorphism(G,H) f <=> group_epimorphism(G,H) f)
       #|  forall G a:A.\n        a IN group_carrier G\n        ==> group_isomorphisms (G,G)\n             (group_conjugation G a,group_conjugation G (group_inv G a))
       #|  forall G a:A.\n        a IN group_carrier G ==> group_automorphism G (group_conjugation G a)
       #|  forall G a:A. a IN group_carrier G\n           ==> group_isomorphism (G,G) (group_conjugation G a)
       #|  forall G a:A. a IN group_carrier G\n           ==> group_homomorphism (G,G) (group_conjugation G a)
-      #|  f:A->B
+      #|  (f : (A) -> B)
       #|  forall G H (f:A->B).\n        group_monomorphism(G,H) f ==> group_carrier G <=_c group_carrier H
-      #|  f:A->B
+      #|  (f : (A) -> B)
       #|  forall G H (f:A->B).\n        group_epimorphism(G,H) f ==> group_carrier H <=_c group_carrier G
       #|  forall G H (f:A->B).\n        group_isomorphism(G,H) f ==> group_carrier G =_c group_carrier H
       #|  forall G H (f:A->B).\n        group_monomorphism(G,H) f /\\ FINITE(group_carrier H)\n        ==> FINITE(group_carrier G)
@@ -23889,33 +23889,33 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G H (f:A->B).\n        group_monomorphism(G,H) f\n        ==> IMAGE f (group_carrier G) =_c group_carrier G
       #|  forall G H g h (f:A->B) f'.\n      group_isomorphisms(G,H) (f,f') /\\\n      IMAGE f g SUBSET h /\\ IMAGE f' h SUBSET g\n      ==> group_isomorphisms (subgroup_generated G g,subgroup_generated H h)\n                             (f,f')
       #|  forall G H g h (f:A->B) f'.\n      group_isomorphisms(G,H) (f,f') /\\\n      IMAGE f (group_carrier G INTER g) SUBSET h /\\\n      IMAGE f' (group_carrier H INTER h) SUBSET g\n      ==> group_isomorphisms (subgroup_generated G g,subgroup_generated H h)\n                             (f,f')
-      #|  f':B->A
+      #|  (f' : (B) -> A)
       #|  forall G H g h (f:A->B).\n      group_isomorphism(G,H) f /\\ g SUBSET group_carrier G /\\ IMAGE f g = h\n      ==> group_isomorphism(subgroup_generated G g,subgroup_generated H h) f
       #|  forall G1 G2 G3 (f1:A->B) (f2:B->C) g1 g2.\n        group_isomorphisms(G1,G2) (f1,g1) /\\ group_isomorphisms(G2,G3) (f2,g2)\n        ==> group_isomorphisms(G1,G3) (f2 o f1,g1 o g2)
       #|  forall G1 G2 G3 (f:A->B) (g:B->C).\n        group_isomorphism(G1,G2) f /\\ group_isomorphism(G2,G3) g\n        ==> group_isomorphism(G1,G3) (g o f)
       #|  forall(f:A->B) (g:B->C) A B C.\n        group_homomorphism(A,B) f /\\ group_homomorphism(B,C) g /\\\n        group_isomorphism(A,C) (g o f)\n        ==> group_monomorphism(A,B) f /\\ group_epimorphism(B,C) g
-      #|  (g:B->C) o f o (f':B->A)
-      #|  f':B->A
-      #|  p /\\ (p ==> q) ==> p /\\ q
+      #|  o((g : (B) -> C), o((f : (A) -> B), (f' : (B) -> A)))
+      #|  (f' : (B) -> A)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
       #|  forall(f:A->B) (g:B->C) A B C.\n        group_epimorphism (A,B) f /\\\n        group_homomorphism (B,C) g /\\\n        group_isomorphism (A,C) (g o f)\n        ==> group_isomorphism (A,B) f /\\ group_isomorphism (B,C) g
-      #|  (g':C->B) o g o (f:A->B)
-      #|  g':C->B
-      #|  q /\\ (q ==> p) ==> p /\\ q
+      #|  o((g' : (C) -> B), o((g : (B) -> C), (f : (A) -> B)))
+      #|  (g' : (C) -> B)
+      #|  (q : Bool) && (q \226\134\146 (p : Bool)) \226\134\146 p && q
       #|  forall(f:A->B) (g:B->C) A B C.\n        group_homomorphism (A,B) f /\\\n        group_monomorphism (B,C) g /\\\n        group_isomorphism (A,C) (g o f)\n        ==> group_isomorphism (A,B) f /\\ group_isomorphism (B,C) g
-      #|  forall y. y IN group_carrier H ==> (f:A->B)(g y) = y
+      #|  \226\136\128 y : B, IN(y, group_carrier((H : Group[B]))) \226\134\146 (f : (A) -> B)((g : (B) -> A)(y)) == y
       #|  forall y. y IN group_carrier H ==> (g:B->A) y IN group_carrier G
-      #|  f:A->B
+      #|  (f : (A) -> B)
       #|  forall(f:A->B) g G H.\n        group_isomorphism(G,H) f /\\\n        (forall x. x IN group_carrier G ==> g(f x) = x)\n        ==> group_isomorphism(H,G) g
       #|  forall G:A group.\n        group_isomorphisms(G,opposite_group G) (group_inv G,group_inv G)
       #|  forall G:A group.\n        group_isomorphism(G,opposite_group G) (group_inv G)
-      #|  (f:A->B)(group_id G) = group_id H
+      #|  (f : (A) -> B)(group_id((G : Group[A]))) == group_id((H : Group[B]))
       #|  forall(f:A->B) G H.\n        trivial_group G\n        ==> (group_homomorphism(G,H) f <=> f(group_id G) = group_id H)
       #|  forall(f:A->B) G H.\n        trivial_group G\n        ==> (group_monomorphism (G,H) f <=> group_homomorphism (G,H) f)
-      #|  G:A group
+      #|  (G : Group[A])
       #|  forall(f:A->B) G H.\n        trivial_group H\n        ==> (group_monomorphism (G,H) f <=>\n             group_homomorphism (G,H) f /\\ trivial_group G)
       #|  forall(f:A->B) G H.\n        trivial_group G\n        ==> (group_epimorphism (G,H) f <=>\n             group_homomorphism (G,H) f /\\ trivial_group H)
-      #|  H:B group
-      #|  G:A group
+      #|  (H : Group[B])
+      #|  (G : Group[A])
       #|  forall(f:A->B) G H.\n        trivial_group H\n        ==> (group_epimorphism (G,H) f <=>\n             group_homomorphism (G,H) f)
       #|  forall(f:A->B#C) G H K.\n        group_homomorphism(G,prod_group H K) f <=>\n        group_homomorphism(G,H) (FST o f) /\\\n        group_homomorphism(G,K) (SND o f)
       #|  forall(f:A->B) (g:A->C) G H K.\n        group_homomorphism(G,prod_group H K) (\\x. f x,g x) <=>\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(G,K) g
@@ -23930,44 +23930,44 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall(A:A group) (B:B group). group_homomorphism (prod_group A B,B) SND
       #|  forall(A:A group) (B:B group). group_epimorphism (prod_group A B,A) FST
       #|  forall(A:A group) (B:B group). group_epimorphism (prod_group A B,B) SND
-      #|  G:A group
+      #|  (G : Group[A])
       #|  forall(G:A group) (H:B group).\n        group_isomorphism (prod_group G H,G) FST <=> trivial_group H
-      #|  H:B group
+      #|  (H : Group[B])
       #|  forall(G:A group) (H:B group).\n        group_isomorphism (prod_group G H,H) SND <=> trivial_group G
       #|  forall(G:A group) (H:B group).\n        group_isomorphisms (prod_group G H,prod_group H G)\n                           ((\\(x,y). y,x),(\\(y,x). x,y))
       #|  forall x. x IN group_carrier G ==> EXTENSIONAL k ((f:A->K->B) x)
-      #|  f IN EXTENSIONAL s <=> EXTENSIONAL s f
+      #|  IN((f : (_) -> _), EXTENSIONAL((s : (_) -> Bool))) == EXTENSIONAL(s, f)
       #|  forall G k H (f:A->K->B).\n        group_homomorphism(G,product_group k H) f <=>\n        IMAGE f (group_carrier G) SUBSET EXTENSIONAL k /\\\n        forall i. i IN k ==> group_homomorphism (G,H i) (\\x. f x i)
-      #|  s SUBSET P <=> forall x. x IN s ==> P x
+      #|  SUBSET((s : (_) -> Bool), (P : (_) -> Bool)) == (\226\136\128 x : _, IN(x, s) \226\134\146 P(x))
       #|  forall G H (f:A->K->B).\n        group_homomorphism(G,product_group (:K) H) f <=>\n        forall i. group_homomorphism (G,H i) (\\x. f x i)
-      #|  \\x:K->A. x
-      #|  G:K->A group
-      #|  k:K->bool
-      #|  product_group k (G:K->A group)
+      #|  (x : (K) -> A) => x
+      #|  (G : (K) -> Group[A])
+      #|  (k : (K) -> Bool)
+      #|  product_group((k : (K) -> Bool), (G : (K) -> Group[A]))
       #|  forall(G:K->A group) k i.\n        i IN k ==> group_homomorphism (product_group k G,G i) (\\x. x i)
       #|  forall(G:K->A group) k i.\n        i IN k ==> group_homomorphism (sum_group k G,G i) (\\x. x i)
-      #|  j:K = i
-      #|  j:K
+      #|  (j : K) == (i : K)
+      #|  (j : K)
       #|  forall k (G:K->A group) i.\n        group_homomorphism\n          (G i,product_group k G)\n          (\\a. RESTRICTION k (\\j. if j = i then a else group_id(G j)))
-      #|  {i:K}
+      #|  {(i : K)}
       #|  forall k (G:K->A group) i.\n        group_homomorphism\n          (G i,sum_group k G)\n          (\\a. RESTRICTION k (\\j. if j = i then a else group_id(G j)))
-      #|  (G:K->A group) i
-      #|  (f:K->A->B) i o (\\x. x i)
-      #|  i:K
-      #|  product_group k (G:K->A group)
-      #|  product_group k (H:K->B group)
+      #|  (G : (K) -> Group[A])((i : K))
+      #|  o((f : (K, A) -> B)((i : K)), (x : (K) -> A) => x(i))
+      #|  (i : K)
+      #|  product_group((k : (K) -> Bool), (G : (K) -> Group[A]))
+      #|  product_group((k : (K) -> Bool), (H : (K) -> Group[B]))
       #|  (\\x. x i) o (\\x. RESTRICTION k (\\i. ((f:K->A->B) i) (x i))) o\n      (\\x. RESTRICTION k (\\j. if j = i then x else group_id(G j)))
       #|  forall(f:K->A->B) k G H.\n        group_homomorphism (product_group k G,product_group k H)\n                           (\\x. RESTRICTION k (\\i. (f i) (x i))) <=>\n        forall i. i IN k ==> group_homomorphism(G i,H i) (f i)
-      #|  i:K
-      #|  sum_group k (G:K->A group)
-      #|  sum_group k (H:K->B group)
+      #|  (i : K)
+      #|  sum_group((k : (K) -> Bool), (G : (K) -> Group[A]))
+      #|  sum_group((k : (K) -> Bool), (H : (K) -> Group[B]))
       #|  (\\x. x i) o (\\x. RESTRICTION k (\\i. ((f:K->A->B) i) (x i))) o\n      (\\x. RESTRICTION k (\\j. if j = i then x else group_id(G j)))
       #|  forall(f:K->A->B) k G H.\n        group_homomorphism (sum_group k G,sum_group k H)\n                           (\\x. RESTRICTION k (\\i. (f i) (x i))) <=>\n        forall i. i IN k ==> group_homomorphism(G i,H i) (f i)
       #|  forall(G:K->A group) k i.\n        i IN k ==> group_epimorphism (product_group k G,G i) (\\x. x i)
       #|  forall G k. group_isomorphism (product_group {k} G,G k) (\\x. x k)
-      #|  {i:K}
+      #|  {(i : K)}
       #|  RESTRICTION k (\\j:K. if j = i then x:A else group_id(G j))
-      #|  x:A
+      #|  (x : A)
       #|  forall(G:K->A group) k i.\n        i IN k ==> group_epimorphism (sum_group k G,G i) (\\x. x i)
       #|  forall G k. group_isomorphism (sum_group {k} G,G k) (\\x. x k)
       #|  forall G H (f:A->B).\n     group_epimorphism(G,H) f /\\ abelian_group G ==> abelian_group H
@@ -23983,15 +23983,15 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G H f:A->B. group_isomorphism (G,H) f ==> G isomorphic_group H
       #|  forall(G:K->A group) k. product_group {k} G isomorphic_group G k
       #|  forall(G:K->A group) k. sum_group {k} G isomorphic_group G k
-      #|  \\x:A. x
-      #|  forall G:A group. G isomorphic_group G
+      #|  (x : A) => x
+      #|  \226\136\128 G : Group[A], isomorphic_group(G, G)
       #|  forall(G:A group) (H:B group). G isomorphic_group H <=> H isomorphic_group G
       #|  forall(G1:A group) (G2:B group) (G3:C group).\n        G1 isomorphic_group G2 /\\ G2 isomorphic_group G3\n        ==> G1 isomorphic_group G3
-      #|  forall G:A group. (opposite_group G) isomorphic_group G
+      #|  \226\136\128 G : Group[A], isomorphic_group(opposite_group(G), G)
       #|  forall(G:A group) (H:B group).\n        G isomorphic_group H ==> (trivial_group G <=> trivial_group H)
-      #|  (\\x. b):A->B
-      #|  b:B
-      #|  a:A
+      #|  (x : A) => (b : B)
+      #|  (b : B)
+      #|  (a : A)
       #|  forall(G:A group) (H:B group).\n        trivial_group G ==> (G isomorphic_group H <=> trivial_group H)
       #|  (forall(G:A group) (H:B group).\n        trivial_group G ==> (G isomorphic_group H <=> trivial_group H)) /\\\n   (forall(G:A group) (H:B group).\n        trivial_group H ==> (G isomorphic_group H <=> trivial_group G))
       #|  forall(G:A group) (H:B group).\n        trivial_group G /\\ trivial_group H\n        ==> G isomorphic_group H
@@ -24000,105 +24000,105 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall(G:A group) (H:B group).\n        prod_group G H isomorphic_group prod_group H G
       #|  forall(G:A group) (H:B group) (K:C group).\n        prod_group G H isomorphic_group K <=>\n        prod_group H G isomorphic_group K
       #|  forall(G:A group) (H:B group) (K:C group).\n        G isomorphic_group prod_group H K <=>\n        G isomorphic_group prod_group K H
-      #|  SND:A#B->B
+      #|  (SND : ((A, B)) -> B)
       #|  forall(G:A group) (H:B group).\n        trivial_group G ==> (prod_group G H isomorphic_group H)
       #|  (forall(G:A group) (H:B group).\n        trivial_group G ==> (prod_group G H isomorphic_group H)) /\\\n   (forall(G:A group) (H:B group).\n        trivial_group H ==> (prod_group G H isomorphic_group G)) /\\\n   (forall(G:A group) (H:B group).\n        trivial_group G ==> (H isomorphic_group prod_group G H)) /\\\n   (forall(G:A group) (H:B group).\n        trivial_group H ==> (G isomorphic_group prod_group G H))
       #|  \\x. RESTRICTION k (\\i. if trivial_group((G:K->A group) i)\n                            then group_id(G i) else x i)
       #|  \\x:K->A. RESTRICTION {i | i IN k /\\ ~trivial_group((G:K->A group) i)} x
       #|  forall k (G:K->A group).\n        product_group {i | i IN k /\\ ~trivial_group(G i)} G isomorphic_group\n        product_group k G
-      #|  G = H ==> G isomorphic_group H
+      #|  (G : Group[_]) == (H : Group[_]) \226\134\146 isomorphic_group(G, H)
       #|  forall k l (G:K->A group).\n        (forall i. i IN (k DIFF l) UNION (l DIFF k) ==> trivial_group(G i))\n        ==> product_group k G isomorphic_group product_group l G
-      #|  (i:K) IN k
-      #|  i:K
+      #|  IN((i : K), (k : (K) -> Bool))
+      #|  (i : K)
       #|  \\x. RESTRICTION k (\\i. if trivial_group((G:K->A group) i)\n                            then group_id(G i) else x i)
       #|  \\x:K->A. RESTRICTION {i | i IN k /\\ ~trivial_group((G:K->A group) i)} x
       #|  forall k (G:K->A group).\n        sum_group {i | i IN k /\\ ~trivial_group(G i)} G isomorphic_group\n        sum_group k G
-      #|  G = H ==> G isomorphic_group H
+      #|  (G : Group[_]) == (H : Group[_]) \226\134\146 isomorphic_group(G, H)
       #|  forall k l (G:K->A group).\n        (forall i. i IN (k DIFF l) UNION (l DIFF k) ==> trivial_group(G i))\n        ==> sum_group k G isomorphic_group sum_group l G
-      #|  (H:L->B group) (f(i:K))
-      #|  (G:K->A group) (g(j:L))
-      #|  i:K
-      #|  j:L
-      #|  g:L->K
-      #|  f:K->L
-      #|  forall f. t SUBSET IMAGE f s ==> FINITE s ==> FINITE t
-      #|  y:L->B
-      #|  x:K->A
+      #|  (H : (L) -> Group[B])((f : (K) -> L)((i : K)))
+      #|  (G : (K) -> Group[A])((g : (L) -> K)((j : L)))
+      #|  (i : K)
+      #|  (j : L)
+      #|  (g : (L) -> K)
+      #|  (f : (K) -> L)
+      #|  \226\136\128 f : (_) -> _, SUBSET((t : (_) -> Bool), IMAGE(f, (s : (_) -> Bool))) \226\134\146 FINITE(s) \226\134\146 FINITE(t)
+      #|  (y : (L) -> B)
+      #|  (x : (K) -> A)
       #|  \\(y:L->B). RESTRICTION s (\\i:K. (k:K->B->A) i (y (f i)))
       #|  \\(x:K->A). RESTRICTION t (\\j:L. (h:K->A->B) (g j) (x (g j)))
-      #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
-      #|  k:K->B->A
-      #|  h:K->A->B
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
+      #|  (k : (K, B) -> A)
+      #|  (h : (K, A) -> B)
       #|  (forall s (G:K->A group) t (H:L->B group) f g.\n        (forall x. x IN s ==> f(x) IN t /\\ g(f x) = x) /\\\n        (forall y. y IN t ==> g(y) IN s /\\ f(g y) = y) /\\\n        (forall i. i IN s ==> (G i) isomorphic_group H(f i))\n        ==> product_group s G isomorphic_group product_group t H) /\\\n   (forall s (G:K->A group) t (H:L->B group) f g.\n        (forall x. x IN s ==> f(x) IN t /\\ g(f x) = x) /\\\n        (forall y. y IN t ==> g(y) IN s /\\ f(g y) = y) /\\\n        (forall i. i IN s ==> (G i) isomorphic_group H(f i))\n        ==> sum_group s G isomorphic_group sum_group t H)
-      #|  \\x:K. x
+      #|  (x : K) => x
       #|  forall(G:K->A group) (H:K->B group) k.\n        (forall i. i IN k ==> (G i) isomorphic_group (H i))\n        ==> (product_group k G) isomorphic_group (product_group k H)
-      #|  \\x:K. x
+      #|  (x : K) => x
       #|  forall(G:K->A group) (H:K->B group) k.\n        (forall i. i IN k ==> (G i) isomorphic_group (H i))\n        ==> (sum_group k G) isomorphic_group (sum_group k H)
       #|  forall(f:K->A group) k l.\n        DISJOINT k l\n        ==> group_isomorphisms\n                (product_group (k UNION l) f,\n                 prod_group (product_group k f) (product_group l f))\n                ((\\f. RESTRICTION k f,RESTRICTION l f),\n                 (\\(f,g) x. if x IN k then f x else g x))
-      #|  {x | x IN s /\\ P x} = s INTER {x | P x}
+      #|  {(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)} == INTER(s, {(x : _) | P(x)})
       #|  forall(f:K->A group) k l.\n        DISJOINT k l\n        ==> group_isomorphisms\n                (sum_group (k UNION l) f,\n                 prod_group (sum_group k f) (sum_group l f))\n                ((\\f. RESTRICTION k f,RESTRICTION l f),\n                 (\\(f,g) x. if x IN k then f x else g x))
       #|  forall(f:K->A group) k l.\n        DISJOINT k l\n        ==> group_isomorphism\n                (product_group (k UNION l) f,\n                 prod_group (product_group k f) (product_group l f))\n                (\\f. RESTRICTION k f,RESTRICTION l f)
       #|  forall(f:K->A group) k l.\n        DISJOINT k l\n        ==> group_isomorphism\n                (sum_group (k UNION l) f,\n                 prod_group (sum_group k f) (sum_group l f))\n                (\\f. RESTRICTION k f,RESTRICTION l f)
       #|  forall(f:K->A group) k l.\n        DISJOINT k l\n        ==> product_group (k UNION l) f isomorphic_group\n            prod_group (product_group k f) (product_group l f)
       #|  forall(f:K->A group) k l.\n        DISJOINT k l\n        ==> sum_group (k UNION l) f isomorphic_group\n            prod_group (sum_group k f) (sum_group l f)
-      #|  (i:K) INSERT k = {i} UNION k
+      #|  INSERT((i : K), (k : (K) -> Bool)) == UNION({i}, k)
       #|  prod_group (product_group {i} f) (product_group k (f:K->A group))
       #|  forall(f:K->A group) i k.\n        ~(i IN k)\n        ==> product_group (i INSERT k) f isomorphic_group\n            prod_group (f i) (product_group k f)
-      #|  (i:K) INSERT k = {i} UNION k
+      #|  INSERT((i : K), (k : (K) -> Bool)) == UNION({i}, k)
       #|  prod_group (sum_group {i} f) (sum_group k (f:K->A group))
       #|  forall(f:K->A group) i k.\n        ~(i IN k)\n        ==> sum_group (i INSERT k) f isomorphic_group\n            prod_group (f i) (sum_group k f)
       #|  forall(G:A group) (H:B group).\n        G isomorphic_group H ==> group_carrier G =_c group_carrier H
       #|  forall(G:A group) (H:B group).\n        G isomorphic_group H\n        ==> (FINITE(group_carrier G) <=> FINITE(group_carrier H))
-      #|  (~p <=> ~q) <=> (p <=> q)
+      #|  (!(p : Bool) == !(q : Bool)) == (p == q)
       #|  forall(G:A group) (H:B group).\n        G isomorphic_group H\n        ==> (INFINITE(group_carrier G) <=> INFINITE(group_carrier H))
       #|  forall(G:A group) (H:B group) n.\n        G isomorphic_group H\n        ==> (group_carrier G HAS_SIZE n <=> group_carrier H HAS_SIZE n)
       #|  forall(G:A group) (H:B group).\n        G isomorphic_group H /\\\n        (FINITE(group_carrier G) \\/ FINITE(group_carrier H))\n        ==> CARD(group_carrier G) = CARD(group_carrier H)
       #|  forall(G:A group) (H:B group).\n        G isomorphic_group H ==> (abelian_group G <=> abelian_group H)
-      #|  (q ==> p) /\\ q ==> p /\\ q
+      #|  ((q : Bool) \226\134\146 (p : Bool)) && q \226\134\146 p && q
       #|  forall(f:A->B) g G s z i m.\n        z IN s /\\\n        (forall x. x IN group_carrier G ==> f x IN s /\\ g(f x) = x) /\\\n        (forall y. y IN s ==> g y IN group_carrier G /\\ f(g y) = y) /\\\n        g z = group_id G /\\\n        (forall x. x IN s ==> i x = f(group_inv G (g x))) /\\\n        (forall x y. x IN s /\\ y IN s ==> m x y = f(group_mul G (g x) (g y)))\n        ==> group_isomorphisms (G,group(s,z,i,m)) (f,g) /\\\n            group_carrier (group(s,z,i,m)) = s /\\\n            group_id (group(s,z,i,m)) = z /\\\n            group_inv (group(s,z,i,m)) = i /\\\n            group_mul (group(s,z,i,m)) = m
       #|  group(s:B->bool,\n              f (group_id G:A),\n              (\\x. f(group_inv G (g x))),\n              (\\x1 x2. f(group_mul G (g x1) (g x2))))
       #|  (?G'. group_isomorphisms(G,G') (f:A->B,g) /\\ group_carrier G' = s)\n    ==> ?G'. group_carrier G' = s /\\ G isomorphic_group G'
-      #|  g:B->A
-      #|  f:A->B
+      #|  (g : (B) -> A)
+      #|  (f : (A) -> B)
       #|  forall(G:A group) (s:B->bool).\n        (?G'. group_carrier G' = s /\\ G isomorphic_group G') <=>\n        group_carrier G =_c s
-      #|  G:A group
-      #|  {f x | x IN s} = {} <=> s = {}
-      #|  {group_carrier g:A->bool | g IN c}
-      #|  x IN s /\\ y IN s <=> {x,y} SUBSET s
+      #|  (G : Group[A])
+      #|  ({(f : (_) -> _)((x : _)) | IN(x, (s : (_) -> Bool))} == {}) == (s == {})
+      #|  {group_carrier((g : Group[A])) | IN(g, (c : (Group[A]) -> Bool))}
+      #|  (IN((x : _), (s : (_) -> Bool)) && IN((y : _), s)) == SUBSET({x, y}, s)
       #|  group_carrier G = UNIONS {group_carrier g | g IN c} /\\\n    group_id G :A = gid /\\\n    group_inv G = ginv /\\\n    group_mul G = mul
       #|  G = group(UNIONS {group_carrier g:A->bool | g IN c},\n                        gid,ginv,mul)
       #|  (forall g. g IN c ==> gid:A = group_id g) /\\\n    (forall g x. g IN c /\\ x IN group_carrier g ==> ginv x = group_inv g x) /\\\n    (forall g x y. g IN c /\\ x IN group_carrier g /\\ y IN group_carrier g\n              ==> mul x y = group_mul g x y)
       #|  mul = \\x y:A.\n        let g = @g. g IN c /\\ x IN group_carrier g /\\ y IN group_carrier g in\n        group_mul g x y
       #|  ginv = \\x:A. let g = @g. g IN c /\\ x IN group_carrier g in\n                  group_inv g x
-      #|  gid:A = let g = @g. g IN c in group_id g
+      #|  (gid : A) == LET((g : Group[A]) => LET_END(group_id(g)), select((g : Group[A]) => IN(g, (c : (Group[A]) -> Bool))))
       #|  forall c:(A group->bool).\n        ~(c = {}) /\\\n        (forall g g'. g IN c /\\ g' IN c\n                ==> ?G. G IN c /\\\n                        group_monomorphism(g,G) I /\\\n                        group_monomorphism(g',G) I)\n        ==> ?G. group_carrier G = UNIONS {group_carrier g | g IN c} /\\\n                forall g. g IN c ==> group_monomorphism(g,G) I
-      #|  group_setinv G g = {group_inv G x | x IN g}
+      #|  (group_setinv : (Group[_], (_) -> Bool, _) -> Bool)((G : Group[_]), (g : (_) -> Bool)) == {group_inv(G, (x : _)) | IN(x, g)}
       #|  group_setmul G g h = {group_mul G x y | x IN g /\\ y IN h}
-      #|  forall G:A group. group_setinv G = IMAGE (group_inv G)
+      #|  \226\136\128 G : Group[A], group_setinv(G) == IMAGE(group_inv(G))
       #|  forall G s:A->bool.\n        s subgroup_of G <=>\n        s SUBSET group_carrier G /\\\n        group_id G IN s /\\\n        group_setinv G s SUBSET s /\\\n        group_setmul G s s SUBSET s
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  group_mul G (x:A)
-      #|  s:A->bool
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  group_mul((G : Group[A]), (x : A))
+      #|  (s : (A) -> Bool)
       #|  forall x y:A. x IN s /\\ y IN s ==> ?z. z IN s /\\ group_mul G x z = y
       #|  forall G s:A->bool.\n        FINITE s\n        ==> (s subgroup_of G <=>\n             s SUBSET group_carrier G /\\\n             ~(s = {}) /\\\n             group_setmul G s s SUBSET s)
       #|  forall G s:A->bool.\n        group_setinv (opposite_group G) s = group_setinv G s
       #|  forall G s t:A->bool.\n        group_setmul (opposite_group G) s t = group_setmul G t s
-      #|  forall G g:A->bool. group_setinv G g = {} <=> g = {}
+      #|  \226\136\128 G : Group[A], \226\136\128 g : (A) -> Bool, (group_setinv(G, g) == {}) == (g == {})
       #|  forall G g h:A->bool. group_setmul G g h = {} <=> g = {} \\/ h = {}
       #|  (forall G s:A->bool. group_setmul G s {} = {}) /\\\n   (forall G t:A->bool. group_setmul G {} t = {})
       #|  forall G s s':A->bool.\n        s SUBSET s' ==> group_setinv G s SUBSET group_setinv G s'
       #|  forall G s t s' t':A->bool.\n        s SUBSET s' /\\ t SUBSET t'\n        ==> group_setmul G s t SUBSET group_setmul G s' t'
-      #|  group_id G:A
-      #|  x:A
-      #|  x:A
-      #|  group_id G:A
-      #|  x:A
+      #|  group_id((G : Group[A]))
+      #|  (x : A)
+      #|  (x : A)
+      #|  group_id((G : Group[A]))
+      #|  (x : A)
       #|  (forall G s t:A->bool.\n        group_id G IN s /\\ t SUBSET group_carrier G\n        ==> t SUBSET group_setmul G s t) /\\\n   (forall G s t:A->bool.\n        s SUBSET group_carrier G /\\ group_id G IN t\n        ==> s SUBSET group_setmul G s t)
       #|  (forall G s t:A->bool.\n        s subgroup_of G /\\ t subgroup_of G ==> t SUBSET group_setmul G s t) /\\\n   (forall G s t:A->bool.\n        s subgroup_of G /\\ t subgroup_of G ==> s SUBSET group_setmul G s t)
       #|  forall G s t:A->bool.\n        FINITE s /\\ FINITE t ==> FINITE(group_setmul G s t)
       #|  forall G s t u:A->bool.\n        (forall a. a IN s ==> group_setmul G {a} t = group_setmul G u {a})\n        ==> group_setmul G s t = group_setmul G u s
-      #|  forall G x:A. group_setinv G {x} = {group_inv G x}
-      #|  forall G x y:A. group_setmul G {x} {y} = {group_mul G x y}
+      #|  \226\136\128 G : Group[A], \226\136\128 x : A, group_setinv(G, {x}) == {group_inv(G, x)}
+      #|  \226\136\128 G : Group[A], \226\136\128 x : A, \226\136\128 y : A, group_setmul(G, {x}, {y}) == {group_mul(G, x, y)}
       #|  forall G g:A->bool.\n        g SUBSET group_carrier G ==> group_setinv G g SUBSET group_carrier G
       #|  forall G g h:A->bool.\n        g SUBSET group_carrier G /\\ h SUBSET group_carrier G==>\n        group_setmul G g h SUBSET group_carrier G
       #|  (forall y. y IN s ==> f a y = y) ==> {f x y | x IN {a} /\\ y IN s} = s
@@ -24111,24 +24111,24 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G g h:A->bool.\n        abelian_group G /\\ g SUBSET group_carrier G /\\ h SUBSET group_carrier G\n        ==> group_setmul G g h = group_setmul G h g
       #|  (forall x. x IN s ==> f x IN s /\\ f(f x) = x) ==> {f x | x IN s} = s
       #|  forall G h:A->bool. h subgroup_of G ==> group_setinv G h = h
-      #|  group_mul G (group_inv G y) x:A
-      #|  y:A
-      #|  y:A
-      #|  x:A
+      #|  group_mul((G : Group[A]), group_inv(G, (y : A)), (x : A))
+      #|  (y : A)
+      #|  (y : A)
+      #|  (x : A)
       #|  forall G h s:A->bool.\n        h subgroup_of G /\\ s SUBSET h /\\ ~(s = {}) ==> group_setmul G s h = h
       #|  forall G h s:A->bool.\n        h subgroup_of G /\\ s SUBSET h /\\ ~(s = {}) ==> group_setmul G h s = h
-      #|  group_id G:A
-      #|  x:A
-      #|  x:A
-      #|  s:A->bool = {}
+      #|  group_id((G : Group[A]))
+      #|  (x : A)
+      #|  (x : A)
+      #|  (s : (A) -> Bool) == {}
       #|  forall G h s:A->bool.\n        h subgroup_of G /\\ s SUBSET group_carrier G\n        ==> (group_setmul G s h = h <=> s SUBSET h /\\ ~(s = {}))
       #|  forall G h s:A->bool.\n        h subgroup_of G /\\ s SUBSET group_carrier G\n        ==> (group_setmul G h s = h <=> s SUBSET h /\\ ~(s = {}))
       #|  forall G (a:A) s.\n        IMAGE (group_conjugation G a) s =\n        group_setmul G {a} (group_setmul G s {group_inv G a})
-      #|  \\s. group_setmul G s {group_inv G a:A}
-      #|  \\s. group_setmul G s {a:A}
+      #|  (s : (A) -> Bool) => group_setmul((G : Group[A]), s, {group_inv(G, (a : A))})
+      #|  (s : (A) -> Bool) => group_setmul((G : Group[A]), s, {(a : A)})
       #|  forall G (a:A) s t.\n        a IN group_carrier G /\\\n        s SUBSET group_carrier G /\\\n        t SUBSET group_carrier G\n        ==> (IMAGE (group_conjugation G a) s = t <=>\n             group_setmul G {a} s = group_setmul G t {a})
       #|  forall G h:A->bool.\n        h subgroup_of G ==> group_setmul G h h = h
-      #|  group_setmul G {group_inv G x:A}
+      #|  group_setmul((G : Group[A]), {group_inv(G, (x : A))})
       #|  forall G g h x:A.\n        x IN group_carrier G /\\\n        g SUBSET group_carrier G /\\ h SUBSET group_carrier G\n        ==> (group_setmul G {x} g = group_setmul G {x} h <=> g = h)
       #|  forall G g h x:A.\n        x IN group_carrier G /\\ g SUBSET group_carrier G /\\\n        h SUBSET group_carrier G\n        ==> (group_setmul G g {x} = group_setmul G h {x} <=> g = h)
       #|  group_setmul G (group_setmul G h {x}) {group_inv G y}  =\n    group_setmul G (group_setmul G h {y:A}) {group_inv G y}
@@ -24137,18 +24137,18 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  group_setmul G h (group_setmul G (group_setmul G g g) h):A->bool
       #|  group_setmul G h (group_setmul G g (group_setmul G g h)):A->bool
       #|  group_setmul G (group_setmul G h g) (group_setmul G g h):A->bool
-      #|  group_inv G y:A
-      #|  group_inv G x:A
-      #|  s = t ==> forall x. x IN s ==> x IN t
-      #|  x:A
-      #|  y:A
+      #|  group_inv((G : Group[A]), (y : A))
+      #|  group_inv((G : Group[A]), (x : A))
+      #|  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 (\226\136\128 x : _, IN(x, s) \226\134\146 IN(x, t))
+      #|  (x : A)
+      #|  (y : A)
       #|  group_mul G (group_inv G y) (group_inv G x):A
-      #|  group_inv (G:A group)
-      #|  z:A
-      #|  w:A
-      #|  group_mul G x y:A
-      #|  y:A
-      #|  x:A
+      #|  group_inv((G : Group[A]))
+      #|  (z : A)
+      #|  (w : A)
+      #|  group_mul((G : Group[A]), (x : A), (y : A))
+      #|  (y : A)
+      #|  (x : A)
       #|  forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> ((group_setmul G g h) subgroup_of G <=>\n             group_setmul G g h = group_setmul G h g)
       #|  forall G g h:A->bool.\n        abelian_group G /\\ g subgroup_of G /\\ h subgroup_of G\n        ==> (group_setmul G g h) subgroup_of G
       #|  x IN group_carrier(subgroup_generated G s) /\\\n      y IN group_carrier(subgroup_generated G s)\n      ==> group_mul G x y IN group_carrier(subgroup_generated G s)
@@ -24163,51 +24163,51 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G s (a:A->X->X) g y.\n        group_action G s a /\\ g IN group_carrier G /\\ y IN s\n        ==> ?x. a g x = y
       #|  forall G s (a:A->X->X).\n        group_action G s a /\\ g IN group_carrier G /\\ x IN s /\\ y IN s\n        ==> (a g x = a g y <=> x = y)
       #|  forall G s t (a:A->X->X).\n        group_action G s a /\\\n        t SUBSET s /\\\n        (forall g x. g IN group_carrier G /\\ x IN t ==> a g x IN t)\n        ==> group_action G t a
-      #|  h:A->bool
-      #|  G:A group
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
       #|  forall G s h (a:A->X->X).\n        group_action G s a ==> group_action (subgroup_generated G h) s a
-      #|  s:X->bool
-      #|  G:A group
-      #|  (a:A->X->X) g
+      #|  (s : (X) -> Bool)
+      #|  (G : Group[A])
+      #|  (a : (A, X) -> X)((g : A))
       #|  forall f:X->X.\n        (forall x y. x IN s /\\ y IN s ==> (f x = f y <=> x = y)) /\\\n        g a IN s /\\ h a IN s /\\ f(g a) = a /\\ f(h a) = a\n        ==> g a = h a
-      #|  x:X
-      #|  g:A
+      #|  (x : X)
+      #|  (g : A)
       #|  forall G t s (a:A->X->X) a'.\n        group_action G s a /\\\n        group_action G s a' /\\\n        (forall g x. g IN group_carrier G /\\ g IN t /\\ x IN s ==> a g x = a' g x)\n        ==> forall g x. g IN group_carrier(subgroup_generated G t) /\\ x IN s\n                  ==> a g x = a' g x
       #|  forall G u s (a:A->X->X).\n        group_action G s a /\\\n        (forall t. t IN u ==> t SUBSET s) /\\\n        (forall g t. g IN group_carrier G /\\ t IN u ==> IMAGE (a g) t IN u)\n        ==> group_action G u (IMAGE o a)
-      #|  t:X->bool
-      #|  g:A
-      #|  s:X->bool
+      #|  (t : (X) -> Bool)
+      #|  (g : A)
+      #|  (s : (X) -> Bool)
       #|  forall G s k (a:A->X->X).\n        group_action G s a\n        ==> group_action G {t | t SUBSET s /\\ t HAS_SIZE k} (IMAGE o a)
       #|  group_stabilizer G (a:A->X->X) x = {g | g IN group_carrier G /\\ a g x = x}
       #|  forall G a x. group_stabilizer G a x SUBSET group_carrier G
       #|  forall G (a:A->X->X) x.\n        FINITE(group_carrier G) ==> FINITE(group_stabilizer G a x)
       #|  forall G s (a:A->X->X) x.\n        group_action G s a /\\ x IN s ==> group_stabilizer G a x subgroup_of G
-      #|  group_id G:A
+      #|  group_id((G : Group[A]))
       #|  forall G (a:A->X->X) s x.\n        group_action G s a /\\ x IN s ==> ~(group_stabilizer G a x = {})
       #|  forall G h (a:A->X->X) x.\n        group_stabilizer (subgroup_generated G h) a x =\n        group_carrier(subgroup_generated G h) INTER group_stabilizer G a x
       #|  forall G h (a:A->X->X) x.\n        h subgroup_of G\n        ==> group_stabilizer (subgroup_generated G h) a x =\n            h INTER group_stabilizer G a x
       #|  forall G s (a:A->X->X).\n        {g | g IN group_carrier G /\\ forall x. x IN s ==> a g x = x} =\n        if s = {} then group_carrier G\n        else INTERS {group_stabilizer G a x | x IN s}
-      #|  (a:A->X->X) g
-      #|  (a:A->X->X) (group_inv G g)
+      #|  (a : (A, X) -> X)((g : A))
+      #|  (a : (A, X) -> X)(group_inv((G : Group[A]), (g : A)))
       #|  forall G s (a:A->X->X) g h x.\n        group_action G s a /\\\n        g IN group_carrier G /\\ h IN group_carrier G /\\\n        x IN s\n        ==> (a g x = a h x <=>\n             group_mul G (group_inv G g) h IN group_stabilizer G a x)
-      #|  group_mul G (group_inv G h:A)
+      #|  group_mul((G : Group[A]), group_inv(G, (h : A)))
       #|  forall g. (forall x. x IN u ==> (P x <=> g x IN t)) /\\ t SUBSET u /\\\n        (forall y. y IN u ==> f y IN u /\\ g(f y) = y /\\ f(g y) = y)\n        ==> {x | x IN u /\\ P x} = IMAGE f t
       #|  forall G s (a:A->X->X) h x.\n        group_action G s a /\\ h IN group_carrier G /\\ x IN s\n        ==> {g | g IN group_carrier G /\\ (a:A->X->X) g x = a h x} =\n            IMAGE (group_mul G h) (group_stabilizer G a x)
       #|  group_orbit G s (a:A->X->X) x y <=>\n        x IN s /\\ y IN s /\\ ?g. g IN group_carrier G /\\ a g x = y
       #|  forall G s (a:A->X->X) x y.\n        group_orbit G s a x y ==> x IN s /\\ y IN s
       #|  forall G s (a:A->X->X) x y.\n        y IN group_orbit G s a x <=>\n        x IN s /\\ y IN s /\\ ?g. g IN group_carrier G /\\ a g x = y
       #|  forall G s (a:A->X->X) x.\n        group_action G s a\n        ==> group_orbit G s a x =\n            if x IN s then {a g x | g IN group_carrier G} else {}
-      #|  s SUBSET t <=> forall x. s x ==> x IN t
-      #|  forall G s (a:A->X->X) x. group_orbit G s a x SUBSET s
-      #|  u = t INTER v <=> forall x. u x <=> x IN t /\\ v x
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) == (\226\136\128 x : _, s(x) \226\134\146 IN(x, t))
+      #|  \226\136\128 G : Group[A], \226\136\128 s : (X) -> Bool, \226\136\128 a : (A, X) -> X, \226\136\128 x : X, SUBSET(group_orbit(G, s, a, x), s)
+      #|  ((u : (_) -> Bool) == INTER((t : (_) -> Bool), (v : (_) -> Bool))) == (\226\136\128 x : _, u(x) == (IN(x, t) && v(x)))
       #|  forall G s t (a:A->X->X).\n        t SUBSET s /\\ x IN t\n        ==> group_orbit G t a x = t INTER group_orbit G s a x
-      #|  P SUBSET s <=> forall x. P x ==> x IN s
-      #|  IMAGE (\\g. (a:A->X->X) g x) (group_carrier G)
+      #|  SUBSET((P : (_) -> Bool), (s : (_) -> Bool)) == (\226\136\128 x : _, P(x) \226\134\146 IN(x, s))
+      #|  IMAGE((g : A) => (a : (A, X) -> X)(g, (x : X)), group_carrier((G : Group[A])))
       #|  forall G s (a:A->X->X) x.\n        FINITE(group_carrier G) \\/ FINITE s ==> FINITE(group_orbit G s a x)
       #|  forall G s (a:A->X->X) x.\n        group_action G s a ==> (group_orbit G s a x x <=> x IN s)
       #|  forall G s (a:A->X->X) x.\n        group_action G s a /\\ x IN s\n        ==> group_orbit G s a x x
       #|  forall G s (a:A->X->X) x.\n        group_action G s a /\\ x IN s ==> x IN group_orbit G s a x
-      #|  s = {} <=> forall x. ~s x
+      #|  ((s : (_) -> Bool) == {}) == (\226\136\128 x : _, !s(x))
       #|  forall G s (a:A->X->X) x. ~(x IN s) ==> group_orbit G s a x = {}
       #|  forall G s (a:A->X->X) x.\n        group_action G s a\n        ==> (group_orbit G s a x = {} <=> ~(x IN s))
       #|  forall G s (a:A->X->X) x y.\n        group_action G s a\n        ==> (group_orbit G s a x y <=> group_orbit G s a y x)
@@ -24215,24 +24215,24 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G s (a:A->X->X) x y z.\n        group_action G s a /\\ group_orbit G s a x y /\\ group_orbit G s a y z\n        ==> group_orbit G s a x z
       #|  forall G s (a:A->X->X) x y.\n        group_action G s a /\\ x IN s /\\ y IN s\n        ==> (group_orbit G s a x = group_orbit G s a y <=>\n             group_orbit G s a x y)
       #|  forall G s (a:A->X->X) x g.\n        group_action G s a /\\ g IN group_carrier G\n        ==> IMAGE (a g) (group_orbit G s a x) SUBSET group_orbit G s a x
-      #|  G:A group
+      #|  (G : Group[A])
       #|  forall G s (a:A->X->X) x y.\n        group_action G s a\n        ==> (group_orbit G s a y = {x} <=>\n             x IN s /\\ y = x /\\ forall g. g IN group_carrier G ==> a g x = x)
       #|  forall G s (a:A->X->X) x.\n        group_action G s a\n        ==> (group_orbit G s a x = {x} <=>\n             x IN s /\\ forall g. g IN group_carrier G ==> a g x = x)
       #|  forall G s (a:A->X->X) x.\n        group_action G s a\n        ==> (group_orbit G s a x HAS_SIZE 1 <=>\n             x IN s /\\ forall g. g IN group_carrier G ==> a g x = x)
-      #|  (a:A->X->X) (group_inv G g)
+      #|  (a : (A, X) -> X)(group_inv((G : Group[A]), (g : A)))
       #|  forall g. (forall x. x IN s ==> f(g x) = x /\\ g(f x) = x) /\\\n        IMAGE f s SUBSET s /\\ IMAGE g s SUBSET s\n        ==> IMAGE f s = s
       #|  forall G s (a:A->X->X) t.\n        group_action G s a /\\ t SUBSET s\n        ==> ((forall g. g IN group_carrier G ==> IMAGE (a g) t SUBSET t) <=>\n             (forall g. g IN group_carrier G ==> IMAGE (a g) t = t))
       #|  forall G s (a:A->X->X) g.\n        group_action G s a /\\ g IN group_carrier G\n        ==> IMAGE (a g) s SUBSET s
       #|  forall G s (a:A->X->X) g.\n        group_action G s a /\\ g IN group_carrier G\n        ==> IMAGE (a g) s = s
       #|  forall G s (a:A->X->X) x g.\n        group_action G s a /\\ g IN group_carrier G\n        ==> IMAGE (a g) (group_orbit G s a x) = group_orbit G s a x
-      #|  (z:X) IN s
-      #|  z:X
-      #|  ~DISJOINT s t <=> ?z. z IN t /\\ s z
+      #|  IN((z : X), (s : (X) -> Bool))
+      #|  (z : X)
+      #|  !DISJOINT((s : (_) -> Bool), (t : (_) -> Bool)) == (\226\136\131 z : _, IN(z, t) && s(z))
       #|  ~(s = {}) /\\ (~DISJOINT s t ==> s SUBSET t)\n    ==> (s SUBSET t <=> ~DISJOINT s t)
-      #|  (x:X) IN s
+      #|  IN((x : X), (s : (X) -> Bool))
       #|  forall G s (a:A->X->X) x t.\n        group_action G s a /\\ t SUBSET s /\\\n        (forall g. g IN group_carrier G ==> IMAGE (a g) t SUBSET t)\n        ==> (group_orbit G s a x SUBSET t <=>\n             x IN s ==> ~DISJOINT (group_orbit G s a x) t)
       #|  forall G s (a:A->X->X) x t.\n        group_action G s a /\\ t SUBSET s /\\\n        (forall g. g IN group_carrier G ==> IMAGE (a g) t = t)\n        ==> (group_orbit G s a x SUBSET t <=>\n             x IN s ==> ~DISJOINT (group_orbit G s a x) t)
-      #|  DISJOINT s t <=> forall x. ~(s x /\\ t x)
+      #|  DISJOINT((s : (_) -> Bool), (t : (_) -> Bool)) == (\226\136\128 x : _, !(s(x) && t(x)))
       #|  forall G s (a:A->X->X) x y.\n        group_action G s a /\\ x IN s /\\ y IN s\n        ==> (group_orbit G s a x = group_orbit G s a y <=>\n             ~DISJOINT (group_orbit G s a x) (group_orbit G s a y))
       #|  forall G s (a:A->X->X) x y.\n        group_action G s a /\\ x IN s /\\ y IN s\n        ==> (DISJOINT (group_orbit G s a x) (group_orbit G s a y) <=>\n             ~(group_orbit G s a x = group_orbit G s a y))
       #|  forall G s (a:A->X->X).\n        group_action G s a\n        ==> pairwise DISJOINT {group_orbit G s a x |x| x IN s}
@@ -24241,76 +24241,76 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G s (a:A->X->X) t.\n        group_action G s a /\\ t SUBSET s /\\\n        (forall g. g IN group_carrier G ==> IMAGE (a g) t = t)\n        ==> UNIONS {group_orbit G s a x |x| x IN t} = t
       #|  forall G s (a:A->X->X).\n        group_action G s a\n        ==> UNIONS {group_orbit G s a x |x| x IN s} = s
       #|  forall G s (a:A->X->X).\n        group_action G s a /\\ FINITE s\n        ==> nsum {group_orbit G s a x | x | x IN s} CARD = CARD s
-      #|  g:A
+      #|  (g : A)
       #|  forall G s (a:A->X->X) x.\n      group_action G s a /\\ x IN s\n      ==> group_orbit G s a x *_c group_stabilizer G a x =_c group_carrier G
       #|  forall G s (a:A->X->X) x.\n      FINITE(group_carrier G) /\\ group_action G s a /\\ x IN s\n      ==> CARD(group_orbit G s a x) * CARD(group_stabilizer G a x) =\n          CARD(group_carrier G)
       #|  forall G s (a:A->X->X) x.\n        FINITE(group_carrier G) /\\ group_action G s a /\\ x IN s\n        ==> CARD(group_orbit G s a x) divides CARD(group_carrier G)
       #|  forall G s (a:A->X->X) x.\n        FINITE(group_carrier G) /\\ group_action G s a /\\ x IN s\n        ==> CARD(group_stabilizer G a x) divides CARD(group_carrier G)
-      #|  (h:A) IN group_carrier G
-      #|  h:A
+      #|  IN((h : A), group_carrier((G : Group[A])))
+      #|  (h : A)
       #|  forall G s (a:A->X->X) g x.\n        group_action G s a /\\ g IN group_carrier G /\\ x IN s\n        ==> group_stabilizer G a (a g x) =\n            IMAGE (group_conjugation G g) (group_stabilizer G a x)
       #|  forall G (h:A->bool).\n    group_action (subgroup_generated G h) (group_carrier G) (group_mul G)
-      #|  group_mul G g a = a <=> g = group_id G
+      #|  (group_mul((G : Group[_]), (g : _), (a : _)) == a) == (g == group_id(G))
       #|  a IN s /\\ (forall x. x IN s ==> (P x <=> x = a))\n    ==> {x | x IN s /\\ P x} = {a}
       #|  forall G h a:A.\n        h subgroup_of G /\\ a IN group_carrier G\n        ==> group_stabilizer (subgroup_generated G h) (group_mul G) a =\n            {group_id G}
-      #|  forall G. group_action G (group_carrier G) (group_mul G)
-      #|  a:A
-      #|  group_carrier G:A->bool
-      #|  G:A group
+      #|  \226\136\128 G : Group[_], group_action(G, group_carrier(G), group_mul(G))
+      #|  (a : A)
+      #|  group_carrier((G : Group[A]))
+      #|  (G : Group[A])
       #|  forall G a:A.\n        a IN group_carrier G\n        ==> group_stabilizer G (group_mul G) a = {group_id G}
       #|  forall(G:A group) u.\n      (forall s. s IN u ==> s SUBSET group_carrier G) /\\\n      (forall a s. a IN group_carrier G /\\ s IN u ==> IMAGE (group_mul G a) s IN u)\n      ==> group_action G u (IMAGE o group_mul G)
       #|  forall G:A group. group_action G (group_carrier G) (group_conjugation G)
-      #|  y:A = x
-      #|  (y:A) IN h
-      #|  (x:A) IN g
-      #|  y:A
-      #|  x:A
+      #|  (y : A) == (x : A)
+      #|  IN((y : A), (h : (A) -> Bool))
+      #|  IN((x : A), (g : (A) -> Bool))
+      #|  (y : A)
+      #|  (x : A)
       #|  {z | z IN {x,y | P x y} /\\ Q z} = {x,y | P x y /\\ Q(x,y)}
-      #|  IMAGE (\\x:A. x,x) (g INTER h)
-      #|  group_inv G y:A
-      #|  x:A
-      #|  y:A
-      #|  x:A
-      #|  group_id G:A
-      #|  group_mul G y2 (group_inv G y1):A
-      #|  group_mul G x1 x2:A
-      #|  y2:A
-      #|  x2:A
-      #|  y1:A
-      #|  x1:A
-      #|  p /\\ (p ==> q ==> r) ==> (p ==> q) ==> r
-      #|  group_id G:A
+      #|  IMAGE((x : A) => (x, x), INTER((g : (A) -> Bool), (h : (A) -> Bool)))
+      #|  group_inv((G : Group[A]), (y : A))
+      #|  (x : A)
+      #|  (y : A)
+      #|  (x : A)
+      #|  group_id((G : Group[A]))
+      #|  group_mul((G : Group[A]), (y2 : A), group_inv(G, (y1 : A)))
+      #|  group_mul((G : Group[A]), (x1 : A), (x2 : A))
+      #|  (y2 : A)
+      #|  (x2 : A)
+      #|  (y1 : A)
+      #|  (x1 : A)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool) \226\134\146 (r : Bool)) \226\134\146 (p \226\134\146 q) \226\134\146 r
+      #|  group_id((G : Group[A]))
       #|  \\(x,y) (z:A). group_mul G x (group_mul G z (group_inv G y))
-      #|  group_setmul (G:A group) g h
+      #|  group_setmul((G : Group[A]), (g : (A) -> Bool), (h : (A) -> Bool))
       #|  prod_group (subgroup_generated G g) (subgroup_generated G h:A group)
       #|  forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (group_setmul G g h) *_c (g INTER h) =_c g *_c h
-      #|  h:A->bool
-      #|  g:A->bool
-      #|  G:A group
+      #|  (h : (A) -> Bool)
+      #|  (g : (A) -> Bool)
+      #|  (G : Group[A])
       #|  forall G g h:A->bool.\n        FINITE g /\\ FINITE h /\\ g subgroup_of G /\\ h subgroup_of G\n        ==> CARD(group_setmul G g h) * CARD(g INTER h) = CARD g * CARD h
-      #|  ~(n = 0) ==> 0 < n
+      #|  !((n : Num) == 0) \226\134\146 0 < n
       #|  0
       #|  forall G g h:A->bool.\n        FINITE g /\\ FINITE h /\\ g subgroup_of G /\\ h subgroup_of G\n        ==> CARD(group_setmul G g h) = (CARD g * CARD h) DIV CARD(g INTER h)
       #|  forall G g h:A->bool.\n        FINITE g /\\ FINITE h /\\ g subgroup_of G /\\ h subgroup_of G\n        ==> CARD(group_setmul G g h) divides CARD(g) * CARD(h)
       #|  forall G s (a:A->X->X) n.\n        group_action G s a /\\\n        FINITE s /\\\n        (forall x. x IN s ==> n divides CARD(group_orbit G s a x))\n        ==> n divides CARD s
-      #|  s:X->bool = {}
+      #|  (s : (X) -> Bool) == {}
       #|  forall G s (a:A->X->X) p k.\n        group_action G s a /\\\n        FINITE s /\\ (s = {} ==> k = 0) /\\\n        (forall x. x IN s ==> k <= index p (CARD(group_orbit G s a x)))\n        ==> k <= index p (CARD s)
-      #|  right_coset G h x = group_setmul G h {x}
-      #|  left_coset G x h = group_setmul G {x} h
-      #|  forall(x:A) h. left_coset G x h = IMAGE (group_mul G x) h
+      #|  (right_coset : (Group[_], (_) -> Bool, _, _) -> Bool)((G : Group[_]), (h : (_) -> Bool), (x : _)) == group_setmul(G, h, {x})
+      #|  (left_coset : (Group[_], _, (_) -> Bool, _) -> Bool)((G : Group[_]), (x : _), (h : (_) -> Bool)) == group_setmul(G, {x}, h)
+      #|  \226\136\128 x : A, \226\136\128 h : (A) -> Bool, left_coset((G : Group[A]), x, h) == IMAGE(group_mul(G, x), h)
       #|  forall G h x:A.\n        x IN group_carrier G /\\ h SUBSET group_carrier G\n        ==> right_coset G h x SUBSET group_carrier G
       #|  forall G h x:A.\n        x IN group_carrier G /\\ h SUBSET group_carrier G\n        ==> left_coset G x h SUBSET group_carrier G
-      #|  P a ==> a IN h ==> ?y. y IN h /\\ P y
-      #|  (p /\\ q) /\\ r <=> q /\\ p /\\ r
+      #|  (P : (_) -> Bool)((a : _)) \226\134\146 IN(a, (h : (_) -> Bool)) \226\134\146 (\226\136\131 y : _, IN(y, h) && P(y))
+      #|  (((p : Bool) && (q : Bool)) && (r : Bool)) == (q && p && r)
       #|  forall G h x a:A.\n        h SUBSET group_carrier G /\\\n        a IN group_carrier G /\\ x IN group_carrier G\n        ==> (x IN right_coset G h a <=>\n             group_mul G x (group_inv G a) IN h)
-      #|  P a ==> a IN h ==> ?y. y IN h /\\ P y
+      #|  (P : (_) -> Bool)((a : _)) \226\134\146 IN(a, (h : (_) -> Bool)) \226\134\146 (\226\136\131 y : _, IN(y, h) && P(y))
       #|  forall G h x a:A.\n        h SUBSET group_carrier G /\\\n        a IN group_carrier G /\\ x IN group_carrier G\n        ==> (x IN left_coset G a h <=>\n             group_mul G (group_inv G a) x IN h)
       #|  forall G h x y:A.\n        h SUBSET group_carrier G /\\\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (x IN right_coset G h (group_inv G y) <=>\n             group_mul G x y IN h)
       #|  forall G h x y:A.\n        h SUBSET group_carrier G /\\\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (x IN left_coset G (group_inv G y) h <=>\n             group_mul G y x IN h)
-      #|  G:A group
-      #|  group_carrier G:A->bool
+      #|  (G : Group[A])
+      #|  group_carrier((G : Group[A]))
       #|  forall u. s SUBSET u /\\ t SUBSET u /\\ (forall x. x IN u ==> f(f x) = x) /\\\n        (forall x. x IN u ==> (f x IN t <=> x IN s)) /\\\n        (forall x. x IN u ==> (f x IN s <=> x IN t))\n        ==> IMAGE f s = t /\\ IMAGE f t = s
-      #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
+      #|  (((p : Bool) \226\134\146 (q : Bool)) && (p \226\134\146 (r : Bool))) == (p \226\134\146 q && r)
       #|  (forall G h a:A.\n        h subgroup_of G /\\ a IN group_carrier G\n        ==> group_setinv G (left_coset G a h) =\n            right_coset G h (group_inv G a)) /\\\n   (forall G h a:A.\n        h subgroup_of G /\\ a IN group_carrier G\n        ==> group_setinv G (right_coset G h a) =\n            left_coset G (group_inv G a) h)
       #|  forall G h x:A. right_coset G h x = left_coset (opposite_group G) x h
       #|  forall G h x:A. left_coset G x h = right_coset (opposite_group G) h x
@@ -24318,8 +24318,8 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G h x:A.\n     x IN group_carrier G /\\ h SUBSET group_carrier G\n     ==> right_coset G (IMAGE (group_conjugation G x) h) x =\n         left_coset G x h
       #|  forall x y h:A->bool.\n        x IN group_carrier G /\\\n        y IN group_carrier G /\\\n        h SUBSET group_carrier G\n        ==> left_coset G x (left_coset G y h) =\n            left_coset G (group_mul G x y) h
       #|  forall x y h:A->bool.\n        h SUBSET group_carrier G /\\\n        x IN group_carrier G /\\\n        y IN group_carrier G\n        ==> right_coset G (right_coset G h x) y =\n            right_coset G h (group_mul G x y)
-      #|  (forall x. x IN s ==> f x = x) ==> {f x | x IN s} = s
-      #|  {f x y | P x /\\ y IN {a}} = {f x a | P x}
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> _)(x) == x) \226\134\146 {f((x : _)) | IN(x, s)} == s
+      #|  {(f : (_, _) -> _)((x : _), (y : _)) | (P : (_) -> Bool)(x) && IN(y, {(a : _)})} == {f((x : _), a) | P(x)}
       #|  forall G h:A->bool.\n        h SUBSET group_carrier G ==> right_coset G h (group_id G) = h
       #|  forall G h:A->bool.\n        h SUBSET group_carrier G ==> left_coset G (group_id G) h = h
       #|  forall G x:A. x IN group_carrier G ==> left_coset G x {group_id G} = {x}
@@ -24330,17 +24330,17 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (left_coset G x h = left_coset G y h <=>\n             group_mul G (group_inv G x) y IN h)
       #|  forall G h x:A.\n        h subgroup_of G /\\ x IN group_carrier G\n        ==> (right_coset G h x = h <=> x IN h)
       #|  forall G h x:A.\n        h subgroup_of G /\\ x IN group_carrier G\n        ==> (left_coset G x h = h <=> x IN h)
-      #|  forall G h x:A. right_coset G h x = {} <=> h = {}
-      #|  forall G h x:A. left_coset G x h = {} <=> h = {}
+      #|  \226\136\128 G : Group[A], \226\136\128 h : (A) -> Bool, \226\136\128 x : A, (right_coset(G, h, x) == {}) == (h == {})
+      #|  \226\136\128 G : Group[A], \226\136\128 h : (A) -> Bool, \226\136\128 x : A, (left_coset(G, x, h) == {}) == (h == {})
       #|  forall G h x:A. h subgroup_of G ==> ~(right_coset G h x = {})
       #|  forall G h x:A. h subgroup_of G ==> ~(left_coset G x h = {})
       #|  forall G h x:A.\n      h subgroup_of G /\\ x IN group_carrier G ==> x IN right_coset G h x
       #|  forall G h x:A.\n      h subgroup_of G /\\ x IN group_carrier G ==> x IN left_coset G x h
       #|  forall G h:A->bool.\n        h subgroup_of G\n        ==> UNIONS {right_coset G h x |x| x IN group_carrier G} =\n            group_carrier G
       #|  forall G h:A->bool.\n        h subgroup_of G\n        ==> UNIONS {left_coset G x h |x| x IN group_carrier G} =\n            group_carrier G
-      #|  group_mul G (group_inv G u):A->A
-      #|  v:A
-      #|  u:A
+      #|  group_mul((G : Group[A]), group_inv(G, (u : A)))
+      #|  (v : A)
+      #|  (u : A)
       #|  ~DISJOINT s t <=> ?x. x IN s /\\ ?y. y IN t /\\ x = y
       #|  forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (right_coset G h x = right_coset G h y <=>\n             ~(DISJOINT (right_coset G h x) (right_coset G h y)))
       #|  forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (left_coset G x h = left_coset G y h <=>\n             ~(DISJOINT (left_coset G x h) (left_coset G y h)))
@@ -24352,13 +24352,13 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> IMAGE (\\a. group_mul G a (group_mul G (group_inv G x) y))\n                  (right_coset G h x) =\n            right_coset G h y
       #|  group_setmul G {group_div G y x:A} (left_coset G x h)
       #|  forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> IMAGE (\\a. group_mul G (group_div G y x) a)\n                  (left_coset G x h) =\n            left_coset G y h
-      #|  p \\/ q ==> r <=> (p ==> r) /\\ (q ==> r)
-      #|  group_setinv(G:A group)
+      #|  ((p : Bool) || (q : Bool) \226\134\146 (r : Bool)) == ((p \226\134\146 r) && (q \226\134\146 r))
+      #|  group_setinv((G : Group[A]))
       #|  forall G h:A->bool.\n        h subgroup_of G\n        ==> {left_coset G x h |x| x IN group_carrier G} =_c\n            {right_coset G h x |x| x IN group_carrier G}
       #|  forall G h:A->bool.\n        h subgroup_of G\n        ==> ({left_coset G x h | x | x IN group_carrier G} HAS_SIZE n <=>\n             {right_coset G h x | x | x IN group_carrier G} HAS_SIZE n)
       #|  forall f g. (IMAGE f s = t /\\ IMAGE g t = s) /\\\n           (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n     ==> s =_c t
-      #|  \\a:A. group_mul G a (group_mul G (group_inv G y) x)
-      #|  \\a:A. group_mul G a (group_mul G (group_inv G x) y)
+      #|  (a : A) => group_mul((G : Group[A]), a, group_mul(G, group_inv(G, (y : A)), (x : A)))
+      #|  (a : A) => group_mul((G : Group[A]), a, group_mul(G, group_inv(G, (x : A)), (y : A)))
       #|  forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> right_coset G h x =_c right_coset G h y
       #|  forall G h x:A.\n        h SUBSET group_carrier G /\\ x IN group_carrier G\n        ==> (group_id G IN left_coset G x h <=> group_inv G x IN h)
       #|  forall G h x:A.\n        h subgroup_of G /\\ x IN group_carrier G\n        ==> (group_id G IN left_coset G x h <=> x IN h)
@@ -24370,39 +24370,39 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> right_coset G h x =_c h
       #|  forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> left_coset G x h =_c h
       #|  forall G h a:A.\n   h subgroup_of G /\\ a IN group_carrier G\n   ==> group_orbit (subgroup_generated G h) (group_carrier G) (group_mul G) a =\n       right_coset G h a
-      #|  a:A
-      #|  group_carrier G:A->bool
-      #|  G:A group
+      #|  (a : A)
+      #|  group_carrier((G : Group[A]))
+      #|  (G : Group[A])
       #|  forall G a:A.\n    a IN group_carrier G\n    ==> group_orbit G (group_carrier G) (group_mul G) a = group_carrier G
       #|  forall G s (a:A->X->X) x.\n      group_action G s a /\\ x IN s\n      ==> group_orbit G s a x =_c\n          {left_coset G g (group_stabilizer G a x) |g| g IN group_carrier G}
       #|  forall G s (a:A->X->X) x.\n      FINITE(group_carrier G) /\\ group_action G s a /\\ x IN s\n      ==> CARD (group_orbit G s a x) =\n          CARD {left_coset G g (group_stabilizer G a x) |g|\n                g IN group_carrier G}
-      #|  group_mul G a b:A
-      #|  b:A
-      #|  a:A
+      #|  group_mul((G : Group[A]), (a : A), (b : A))
+      #|  (b : A)
+      #|  (a : A)
       #|  forall G h:A->bool.\n        h SUBSET group_carrier G\n        ==> group_action G {left_coset G x h | x | x IN group_carrier G}\n                           (IMAGE o group_mul G)
-      #|  h subgroup_of G ==> x = group_id G ==> x IN h
-      #|  group_mul G b (group_inv G a):A
-      #|  group_mul G b a:A
-      #|  b:A
-      #|  (?x. P x /\\ Q x) <=> ~(forall x. P x ==> ~Q x)
+      #|  subgroup_of((h : (_) -> Bool), (G : Group[_])) \226\134\146 (x : _) == group_id(G) \226\134\146 IN(x, h)
+      #|  group_mul((G : Group[A]), (b : A), group_inv(G, (a : A)))
+      #|  group_mul((G : Group[A]), (b : A), (a : A))
+      #|  (b : A)
+      #|  (\226\136\131 x : _, (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)) == !(\226\136\128 x : _, P(x) \226\134\146 !Q(x))
       #|  forall G h a:A.\n        a IN group_carrier G /\\ h subgroup_of G\n        ==> group_orbit G { left_coset G x h | x | x IN group_carrier G}\n                          (IMAGE o group_mul G) (left_coset G a h) =\n            { left_coset G x h | x | x IN group_carrier G}
       #|  (forall x. x IN s ==> f(g x) = x) /\\ (forall x. x IN s ==> f x IN s /\\ g(f x) = x) /\\\n    t SUBSET s\n    ==> {x | x IN s /\\ g x IN t} = IMAGE f t
-      #|  p /\\ q <=> ~(p ==> ~q)
+      #|  ((p : Bool) && (q : Bool)) == !(p \226\134\146 !q)
       #|  forall G h a:A.\n        a IN group_carrier G /\\ h subgroup_of G\n        ==> group_stabilizer G (IMAGE o group_mul G) (left_coset G a h) =\n            IMAGE (group_conjugation G a) h
-      #|  group_id G:A
-      #|  h:A->bool
-      #|  G:A group
+      #|  group_id((G : Group[A]))
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
       #|  forall G h:A->bool.\n        h subgroup_of G\n        ==> group_orbit G { left_coset G x h | x | x IN group_carrier G}\n                          (IMAGE o group_mul G) h =\n            { left_coset G x h | x | x IN group_carrier G}
-      #|  (forall x. x IN s ==> f x = x) ==> IMAGE f s = s
-      #|  group_id G:A
-      #|  h:A->bool
-      #|  G:A group
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> _)(x) == x) \226\134\146 IMAGE(f, s) == s
+      #|  group_id((G : Group[A]))
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
       #|  forall G h:A->bool.\n        h subgroup_of G\n        ==> group_stabilizer G (IMAGE o group_mul G) h = h
-      #|  group_id G:A
-      #|  h:A->bool
+      #|  group_id((G : Group[A]))
+      #|  (h : (A) -> Bool)
       #|  forall G h:A->bool.\n        h subgroup_of G\n        ==> {left_coset G x h | x | x IN group_carrier G} *_c h =_c\n            group_carrier G
       #|  forall G h:A->bool.\n        h subgroup_of G\n        ==> {right_coset G h x | x | x IN group_carrier G} *_c h =_c\n            group_carrier G
-      #|  FINITE(h:A->bool)
+      #|  FINITE((h : (A) -> Bool))
       #|  forall G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> CARD {left_coset G x h |x| x IN group_carrier G} * CARD h =\n            CARD(group_carrier G)
       #|  forall G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> CARD {right_coset G h x |x| x IN group_carrier G} * CARD h =\n            CARD(group_carrier G)
       #|  forall G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> (CARD h) divides CARD(group_carrier G)
@@ -24420,66 +24420,66 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  {f x y | x,y | x IN {g x | P x} /\\ y IN {g f | Q f}} =\n    {f (g x) (g y) | P x /\\ Q y}
       #|  forall(G:K->A group) k s t.\n        group_setmul (product_group k G)\n                     (cartesian_product k s) (cartesian_product k t) =\n        cartesian_product k (\\i. group_setmul (G i) (s i) (t i))
       #|  (forall x. x IN s ==> f x = g x) ==> {f x | x IN s} = {g x | x IN s}
-      #|  {f x y | x,y | P x /\\ y IN {a}} = {f x a | P x}
+      #|  {(f : (_, _) -> _)((x : _), (y : _)) | (P : (_) -> Bool)(x) && IN(y, {(a : _)})} == {f((x : _), a) | P(x)}
       #|  forall(G:K->A group) h x k.\n        right_coset (product_group k G) (cartesian_product k h) x =\n        cartesian_product k (\\i. right_coset (G i) (h i) (x i))
       #|  forall(G:K->A group) h x k.\n        left_coset (product_group k G) x (cartesian_product k h) =\n        cartesian_product k (\\i. left_coset (G i) (x i) (h i))
       #|  forall G h:A->bool.\n        group_setinv (subgroup_generated G h) = group_setinv G
       #|  forall G h:A->bool.\n        group_setmul (subgroup_generated G h) = group_setmul G
       #|  forall G h k x. right_coset (subgroup_generated G h) k x = right_coset G k x
       #|  forall G h k x. left_coset (subgroup_generated G h) x k = left_coset G x k
-      #|  s SUBSET t ==> x IN s ==> x IN t
-      #|  (z:A) IN group_carrier (subgroup_generated G k)
-      #|  group_mul G z y':A = x
-      #|  y':A = group_mul G (group_inv G z) x
-      #|  s SUBSET {z} ==> y IN s ==> y = z
-      #|  y':A = group_id G
-      #|  (z:A) IN group_carrier G /\\ y' IN group_carrier G
-      #|  y':A
-      #|  z:A
-      #|  (w:A) IN group_carrier G
-      #|  w:A
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 IN((x : _), s) \226\134\146 IN(x, t)
+      #|  IN((z : A), group_carrier(subgroup_generated((G : Group[A]), (k : (A) -> Bool))))
+      #|  group_mul((G : Group[A]), (z : A), (y' : A)) == (x : A)
+      #|  (y' : A) == group_mul((G : Group[A]), group_inv(G, (z : A)), (x : A))
+      #|  SUBSET((s : (_) -> Bool), {(z : _)}) \226\134\146 IN((y : _), s) \226\134\146 y == z
+      #|  (y' : A) == group_id((G : Group[A]))
+      #|  IN((z : A), group_carrier((G : Group[A]))) && IN((y' : A), group_carrier(G))
+      #|  (y' : A)
+      #|  (z : A)
+      #|  IN((w : A), group_carrier((G : Group[A])))
+      #|  (w : A)
       #|  (group_id G:A) IN UNIONS {right_coset G h x | x IN t}
-      #|  group_id G:A
+      #|  group_id((G : Group[A]))
       #|  (p' ==> p) /\\ (p /\\ p' ==> q ==> q') ==> (p ==> q) ==> (p' ==> q')
-      #|  x:A = group_id G
-      #|  x:A
-      #|  y'':A
-      #|  group_mul G z z':A
-      #|  (z':A) IN group_carrier G /\\ y'' IN group_carrier G
-      #|  y'':A
-      #|  z':A
-      #|  y':A
-      #|  y':A
-      #|  z:A
-      #|  group_inv G x:A
-      #|  y:A
-      #|  x:A
-      #|  y:A
-      #|  (y:A) IN group_carrier G
-      #|  y:A
-      #|  y':A
-      #|  z:A
-      #|  group_inv G x:A
-      #|  y:A
-      #|  x:A
-      #|  y:A
-      #|  (y:A) IN group_carrier G
-      #|  y:A
-      #|  xs:A = group_id G
-      #|  xs:A
-      #|  x:A
+      #|  (x : A) == group_id((G : Group[A]))
+      #|  (x : A)
+      #|  (y'' : A)
+      #|  group_mul((G : Group[A]), (z : A), (z' : A))
+      #|  IN((z' : A), group_carrier((G : Group[A]))) && IN((y'' : A), group_carrier(G))
+      #|  (y'' : A)
+      #|  (z' : A)
+      #|  (y' : A)
+      #|  (y' : A)
+      #|  (z : A)
+      #|  group_inv((G : Group[A]), (x : A))
+      #|  (y : A)
+      #|  (x : A)
+      #|  (y : A)
+      #|  IN((y : A), group_carrier((G : Group[A])))
+      #|  (y : A)
+      #|  (y' : A)
+      #|  (z : A)
+      #|  group_inv((G : Group[A]), (x : A))
+      #|  (y : A)
+      #|  (x : A)
+      #|  (y : A)
+      #|  IN((y : A), group_carrier((G : Group[A])))
+      #|  (y : A)
+      #|  (xs : A) == group_id((G : Group[A]))
+      #|  (xs : A)
+      #|  (x : A)
       #|  forall x:A. x IN group_carrier(subgroup_generated G s)\n          ==> ~(x = group_id G)\n              ==> forall y. y IN t\n                      ==> ?z y'. z IN group_carrier(subgroup_generated G k) /\\\n                                 y' IN t /\\\n                                 group_mul G y x = group_mul G z y'
-      #|  group_mul G y x:A = group_mul G z y'
-      #|  group_mul G x (group_inv G y'):A
-      #|  y:A
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  y':A
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  z:A
-      #|  y':A
+      #|  group_mul((G : Group[A]), (y : A), (x : A)) == group_mul(G, (z : A), (y' : A))
+      #|  group_mul((G : Group[A]), (x : A), group_inv(G, (y' : A)))
+      #|  (y : A)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (y' : A)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (z : A)
+      #|  (y' : A)
       #|  group_mul G y (x:A) IN UNIONS {right_coset G h x | x IN t}
-      #|  x IN group_carrier G /\\ (y:A) IN group_carrier G
-      #|  x:A
+      #|  IN((x : A), group_carrier((G : Group[A]))) && IN((y : A), group_carrier(G))
+      #|  (x : A)
       #|  y:A
       #|  forall y x. y IN t /\\ x IN s\n          ==> ?z y'. z IN group_carrier G /\\ y' IN group_carrier G /\\\n                     z IN k /\\ y' IN t /\\\n                     group_mul G y x:A = group_mul G z y'
       #|  k:A->bool =\n    h INTER group_setmul G t (group_setmul G s (group_setinv G t))
@@ -24489,78 +24489,78 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G n:A->bool. n normal_subgroup_of G ==> n SUBSET group_carrier G
       #|  forall G n:A->bool.\n        n normal_subgroup_of opposite_group G <=> n normal_subgroup_of G
       #|  forall G n:A->bool.\n        abelian_group G ==> (n normal_subgroup_of G <=> n subgroup_of G)
-      #|  group_setmul G {x:A}
-      #|  x:A
-      #|  x:A
-      #|  (n:A->bool) subgroup_of G
+      #|  group_setmul((G : Group[A]), {(x : A)})
+      #|  (x : A)
+      #|  (x : A)
+      #|  subgroup_of((n : (A) -> Bool), (G : Group[A]))
       #|  forall G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\\n        forall x. x IN group_carrier G\n            ==> group_setmul G {group_inv G x} (group_setmul G n {x}) = n
       #|  (forall x. x IN s ==> f x = x) ==> IMAGE f s SUBSET t ==> s SUBSET t
-      #|  {f x y | P x /\\ y IN {a}} = {f x a | P x}
-      #|  {f x y | x IN {a} /\\ P y} = {f a y | P y}
+      #|  {(f : (_, _) -> _)((x : _), (y : _)) | (P : (_) -> Bool)(x) && IN(y, {(a : _)})} == {f((x : _), a) | P(x)}
+      #|  {(f : (_, _) -> _)((x : _), (y : _)) | IN(x, {(a : _)}) && (P : (_) -> Bool)(y)} == {f(a, (y : _)) | P(y)}
       #|  \\y:A. group_mul G (group_inv G x) (group_mul G y x)
-      #|  group_inv G (x:A)
-      #|  x:A
-      #|  (n:A->bool) subgroup_of G
+      #|  group_inv((G : Group[A]), (x : A))
+      #|  (x : A)
+      #|  subgroup_of((n : (A) -> Bool), (G : Group[A]))
       #|  forall G n:A->bool.\n      n normal_subgroup_of G <=>\n      n subgroup_of G /\\\n      forall x. x IN group_carrier G\n          ==> group_setmul G {group_inv G x} (group_setmul G n {x}) SUBSET n
-      #|  x:A
-      #|  group_inv G x:A
-      #|  x:A
-      #|  (h:A->bool) subgroup_of G
+      #|  (x : A)
+      #|  group_inv((G : Group[A]), (x : A))
+      #|  (x : A)
+      #|  subgroup_of((h : (A) -> Bool), (G : Group[A]))
       #|  forall G h:A->bool.\n        h normal_subgroup_of G <=>\n        h subgroup_of G /\\\n        forall a. a IN group_carrier G ==> IMAGE (group_conjugation G a) h = h
       #|  (forall x. x IN h ==> f(g x) = x)\n    ==> IMAGE g h SUBSET h ==> h SUBSET IMAGE f h
-      #|  group_inv G x:A
-      #|  x:A
-      #|  (h:A->bool) subgroup_of G
+      #|  group_inv((G : Group[A]), (x : A))
+      #|  (x : A)
+      #|  subgroup_of((h : (A) -> Bool), (G : Group[A]))
       #|  forall G h:A->bool.\n        h normal_subgroup_of G <=>\n        h subgroup_of G /\\\n        forall a. a IN group_carrier G ==> IMAGE (group_conjugation G a) h SUBSET h
       #|  (forall x. x IN h ==> g(f x) = x)\n    ==> h SUBSET IMAGE f h ==> IMAGE g h SUBSET h
-      #|  group_inv G x:A
-      #|  x:A
+      #|  group_inv((G : Group[A]), (x : A))
+      #|  (x : A)
       #|  forall G h:A->bool.\n        h normal_subgroup_of G <=>\n        h subgroup_of G /\\\n        forall a. a IN group_carrier G ==> h SUBSET IMAGE (group_conjugation G a) h
       #|  forall G a x:A.\n        abelian_group G /\\ a IN group_carrier G /\\ x IN group_carrier G\n        ==> group_conjugation G a x = x
       #|  forall G gs. (forall g. g IN gs ==> g normal_subgroup_of G) /\\ ~(gs = {})\n          ==> INTERS gs normal_subgroup_of G
       #|  forall G g h:A->bool.\n        g normal_subgroup_of G /\\ h normal_subgroup_of G\n        ==> g INTER h normal_subgroup_of G
       #|  forall G (u:(A->bool)->bool).\n        ~(u = {}) /\\\n        (forall h. h IN u ==> h normal_subgroup_of G) /\\\n        (forall g h. g IN u /\\ h IN u ==> g SUBSET h \\/ h SUBSET g)\n        ==> (UNIONS u) normal_subgroup_of G
-      #|  h:A
-      #|  g:A
+      #|  (h : A)
+      #|  (g : A)
       #|  forall G s (a:A->X->X).\n        group_action G s a\n        ==> {g | g IN group_carrier G /\\ forall x. x IN s ==> a g x = x}\n            normal_subgroup_of G
       #|  (forall x. x IN s ==> x IN f x /\\ x IN g x) /\\\n      (forall x y. x IN s /\\ y IN s /\\ ~(f x = f y) ==> DISJOINT (f x) (f y)) /\\\n      {f x | x IN s} = {g x | x IN s}\n      ==> forall x. x IN s ==> f x = g x
       #|  (forall x. x IN s ==> f x = g x) ==> {f x | x IN s} = {g x | x IN s}
-      #|  (n:A->bool) subgroup_of G
+      #|  subgroup_of((n : (A) -> Bool), (G : Group[A]))
       #|  forall G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\\n        {left_coset G x n |x| x IN group_carrier G} =\n        {right_coset G n x |x| x IN group_carrier G}
       #|  (forall x. x IN t ==> ~(P x))\n    ==> (forall x. x IN t DIFF s ==> P x) ==> t SUBSET s
-      #|  (n:A->bool) subgroup_of G
+      #|  subgroup_of((n : (A) -> Bool), (G : Group[A]))
       #|  (forall G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\\n        {left_coset G x n |x| x IN group_carrier G} SUBSET\n        {right_coset G n x |x| x IN group_carrier G}) /\\\n   (forall G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\\n        {right_coset G n x |x| x IN group_carrier G} SUBSET\n        {left_coset G x n |x| x IN group_carrier G})
-      #|  h:A->bool
-      #|  G:A group
-      #|  h:A->bool
-      #|  G:A group
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
       #|  forall x y:A. x IN group_carrier G /\\ y IN group_carrier G\n            ==> (y IN left_coset G (group_inv G x) h <=>\n                 y IN right_coset G h (group_inv G x))
-      #|  (h:A->bool) subgroup_of G
+      #|  subgroup_of((h : (A) -> Bool), (G : Group[A]))
       #|  forall G h:A->bool.\n        h normal_subgroup_of G <=>\n        h subgroup_of G /\\\n        forall x y. x IN group_carrier G /\\ y IN group_carrier G\n              ==> (group_mul G x y IN h <=> group_mul G y x IN h)
-      #|  forall G:A group. {group_id G} normal_subgroup_of G
-      #|  forall G:A group. (group_carrier G) normal_subgroup_of G
-      #|  {f x y | x IN {a} /\\ P y} = {f a y | P y}
+      #|  \226\136\128 G : Group[A], normal_subgroup_of({group_id(G)}, G)
+      #|  \226\136\128 G : Group[A], normal_subgroup_of(group_carrier(G), G)
+      #|  {(f : (_, _) -> _)((x : _), (y : _)) | IN(x, {(a : _)}) && (P : (_) -> Bool)(y)} == {f(a, (y : _)) | P(y)}
       #|  {f x y | P x /\\ y IN {a}} = {f x a | P x}
       #|  group_setmul G {group_inv G a} (group_setinv G n):A->bool
       #|  forall G n a:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G\n        ==> group_setinv G (right_coset G n a) =\n            right_coset G n (group_inv G a)
       #|  forall G n a:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G\n        ==> group_setinv G (left_coset G a n) =\n            left_coset G (group_inv G a) n
-      #|  group_mul G a b:A
-      #|  b:A
+      #|  group_mul((G : Group[A]), (a : A), (b : A))
+      #|  (b : A)
       #|  a SUBSET group_carrier G /\\ b SUBSET group_carrier G /\\\n    c SUBSET group_carrier G /\\ d SUBSET group_carrier G\n    ==> group_setmul G (group_setmul G a b) (group_setmul G c d) =\n        group_setmul G a (group_setmul G (group_setmul G b c) d)
-      #|  a:A
+      #|  (a : A)
       #|  forall G n a b:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G /\\ b IN group_carrier G\n        ==> group_setmul G (right_coset G n a) (right_coset G n b) =\n            right_coset G n (group_mul G a b)
       #|  forall G n a b:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G /\\ b IN group_carrier G\n        ==> group_setmul G (left_coset G a n) (left_coset G b n) =\n            left_coset G (group_mul G a b) n
-      #|  (h2:B->bool) subgroup_of G2
-      #|  (h1:A->bool) subgroup_of G1
+      #|  subgroup_of((h2 : (B) -> Bool), (G2 : Group[B]))
+      #|  subgroup_of((h1 : (A) -> Bool), (G1 : Group[A]))
       #|  forall(G1:A group) (G2:B group) h1 h2.\n        (h1 CROSS h2) normal_subgroup_of (prod_group G1 G2) <=>\n        h1 normal_subgroup_of G1 /\\ h2 normal_subgroup_of G2
       #|  forall G s h:A->bool.\n        h normal_subgroup_of G /\\\n        h SUBSET group_carrier(subgroup_generated G s)\n        ==> h normal_subgroup_of (subgroup_generated G s)
       #|  forall G s h:A->bool.\n        h normal_subgroup_of G /\\ h SUBSET s\n        ==> h normal_subgroup_of (subgroup_generated G s)
-      #|  x:A
-      #|  x:A
+      #|  (x : A)
+      #|  (x : A)
       #|  (forall x. x IN s ==> {f x y | y IN t} = {f y x | y IN t})\n    ==> {f x y | x IN s /\\ y IN t} = {f y x | y IN t /\\ x IN s}
       #|  forall G n h:A->bool.\n        n normal_subgroup_of G /\\ h subgroup_of G\n        ==> group_setmul G n h subgroup_of G
-      #|  x:A
-      #|  x:A
+      #|  (x : A)
+      #|  (x : A)
       #|  (forall x. x IN s ==> {f x y | y IN t} = {f y x | y IN t})\n    ==> {f x y | x IN s /\\ y IN t} = {f y x | y IN t /\\ x IN s}
       #|  forall G h n:A->bool.\n        h subgroup_of G /\\ n normal_subgroup_of G\n        ==> group_setmul G h n subgroup_of G
       #|  forall G h k:A->bool.\n        h normal_subgroup_of G /\\ k normal_subgroup_of G\n        ==> group_setmul G h k normal_subgroup_of G
@@ -24570,102 +24570,102 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G s:A->bool.\n        group_conjugate G s s <=> s SUBSET group_carrier G
       #|  forall G s t:A->bool. group_conjugate G s t <=> group_conjugate G t s
       #|  forall G s t u:A->bool.\n        group_conjugate G s t /\\ group_conjugate G t u\n        ==> group_conjugate G s u
-      #|  a:A
+      #|  (a : A)
       #|  forall G s t:A->bool.\n        group_conjugate G s t\n        ==> group_conjugate G (group_carrier(subgroup_generated G s))\n                              (group_carrier(subgroup_generated G t))
-      #|  group_conjugation G (a:A)
-      #|  a:A
+      #|  group_conjugation((G : Group[A]), (a : A))
+      #|  (a : A)
       #|  forall G s t:A->bool.\n      group_conjugate G s t\n      ==> (subgroup_generated G s) isomorphic_group (subgroup_generated G t)
-      #|  forall G s t:A->bool. group_conjugate G s t ==> s =_c t
-      #|  g:A
+      #|  \226\136\128 G : Group[A], \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, group_conjugate(G, s, t) \226\134\146 op_eq_us_c(s, t)
+      #|  (g : A)
       #|  forall G s (a:A->X->X) x y.\n      group_action G s a /\\ group_orbit G s a x y\n      ==> group_conjugate G (group_stabilizer G a x) (group_stabilizer G a y)
       #|  forall G s (a:A->X->X) x y.\n        group_action G s a /\\ group_orbit G s a x y\n        ==> group_stabilizer G a x =_c group_stabilizer G a y
       #|  group_centralizer G s =\n        {x:A | x IN group_carrier G /\\\n               forall y. y IN group_carrier G /\\ y IN s\n                   ==> group_mul G x y = group_mul G y x}
       #|  group_normalizer G s =\n        {x:A | x IN group_carrier G /\\\n               group_setmul G {x} (group_carrier G INTER s) =\n               group_setmul G (group_carrier G INTER s) {x}}
       #|  forall G s:A->bool.\n        s SUBSET group_carrier G\n        ==> group_centralizer G s =\n             {x | x IN group_carrier G /\\\n                  forall y. y IN s ==> group_mul G x y = group_mul G y x}
-      #|  s SUBSET u ==> u INTER s = s
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 INTER(u, s) == s
       #|  forall G s:A->bool.\n        s SUBSET group_carrier G\n        ==> group_normalizer G s =\n             {x | x IN group_carrier G /\\\n                  group_setmul G {x} s = group_setmul G s {x}}
       #|  forall G s:A->bool.\n        group_normalizer G s =\n             {x | x IN group_carrier G /\\\n                  IMAGE (group_conjugation G x) (group_carrier G INTER s) =\n                  (group_carrier G INTER s)}
-      #|  s SUBSET u ==> u INTER s = s
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 INTER(u, s) == s
       #|  forall G s:A->bool.\n        s SUBSET group_carrier G\n        ==> group_normalizer G s =\n            {x | x IN group_carrier G /\\ IMAGE (group_conjugation G x) s = s}
-      #|  a:A
+      #|  (a : A)
       #|  forall G s:A->bool.\n        s SUBSET group_carrier G /\\ FINITE s\n        ==> group_normalizer G s =\n            {x | x IN group_carrier G /\\\n                 IMAGE (group_conjugation G x) s SUBSET s}
       #|  forall G s:A->bool.\n        group_centralizer G s =\n        group_centralizer G (group_carrier G INTER s)
-      #|  u INTER u INTER s = u INTER s
+      #|  INTER((u : (_) -> Bool), INTER(u, (s : (_) -> Bool))) == INTER(u, s)
       #|  forall G s:A->bool.\n        group_normalizer G s =\n        group_normalizer G (group_carrier G INTER s)
       #|  forall G s:A->bool. group_centralizer G s SUBSET group_carrier G
       #|  forall G s:A->bool. group_normalizer G s SUBSET group_carrier G
       #|  forall(G:A group) s. FINITE(group_carrier G) ==> FINITE(group_centralizer G s)
       #|  forall(G:A group) s. FINITE(group_carrier G) ==> FINITE(group_normalizer G s)
       #|  forall G s:A->bool. group_centralizer G s SUBSET group_normalizer G s
-      #|  forall G s:A->bool. (group_centralizer G s) subgroup_of G
-      #|  s:A->bool
-      #|  group_carrier G INTER s:A->bool
+      #|  \226\136\128 G : Group[A], \226\136\128 s : (A) -> Bool, subgroup_of(group_centralizer(G, s), G)
+      #|  (s : (A) -> Bool)
+      #|  INTER(group_carrier((G : Group[A])), (s : (A) -> Bool))
       #|  group_carrier G INTER s SUBSET (group_carrier G:A->bool)
-      #|  forall G s:A->bool. (group_normalizer G s) subgroup_of G
-      #|  (s:A->bool) SUBSET group_carrier G
+      #|  \226\136\128 G : Group[A], \226\136\128 s : (A) -> Bool, subgroup_of(group_normalizer(G, s), G)
+      #|  SUBSET((s : (A) -> Bool), group_carrier((G : Group[A])))
       #|  forall G h s:A->bool.\n        s SUBSET h /\\ h subgroup_of G\n        ==> group_centralizer (subgroup_generated G h) s =\n             h INTER group_centralizer G s
-      #|  (s:A->bool) SUBSET group_carrier G
+      #|  SUBSET((s : (A) -> Bool), group_carrier((G : Group[A])))
       #|  forall G h s:A->bool.\n        s SUBSET h /\\ h subgroup_of G\n        ==> group_normalizer (subgroup_generated G h) s =\n             h INTER group_normalizer G s
-      #|  forall(G:A group) s. group_id G IN group_centralizer G s
-      #|  forall(G:A group) s. group_id G IN group_normalizer G s
-      #|  forall(G:A group) s. ~(group_centralizer G s = {})
-      #|  forall(G:A group) s. ~(group_normalizer G s = {})
+      #|  \226\136\128 G : Group[A], \226\136\128 s : (A) -> Bool, IN(group_id(G), group_centralizer(G, s))
+      #|  \226\136\128 G : Group[A], \226\136\128 s : (A) -> Bool, IN(group_id(G), group_normalizer(G, s))
+      #|  \226\136\128 G : Group[A], \226\136\128 s : (A) -> Bool, !(group_centralizer(G, s) == {})
+      #|  \226\136\128 G : Group[A], \226\136\128 s : (A) -> Bool, !(group_normalizer(G, s) == {})
       #|  forall G s:A->bool.\n        s SUBSET group_centralizer G s <=>\n        s SUBSET group_carrier G /\\\n        forall a b. a IN s /\\ b IN s ==> group_mul G a b = group_mul G b a
       #|  forall G h:A->bool.\n        h subgroup_of G\n        ==> (h SUBSET group_centralizer G h <=>\n             abelian_group(subgroup_generated G h))
       #|  forall G:A group.\n        group_centralizer G (group_carrier G) = group_carrier G <=>\n        abelian_group G
       #|  forall G s:A->bool.\n        s SUBSET group_centralizer G (group_centralizer G s) <=>\n        s SUBSET group_carrier G
       #|  s SUBSET {x | x IN t /\\ Q x} <=> s SUBSET t /\\ forall x. x IN s ==> Q x
-      #|  (h:A->bool) subgroup_of G
+      #|  subgroup_of((h : (A) -> Bool), (G : Group[A]))
       #|  forall G h n:A->bool.\n        h normal_subgroup_of (subgroup_generated G n) <=>\n        h subgroup_of (subgroup_generated G n) /\\\n        group_carrier G INTER n SUBSET group_normalizer G h
-      #|  s SUBSET t ==> t INTER s = s
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 INTER(t, s) == s
       #|  forall G h n:A->bool.\n        n subgroup_of G\n        ==> (h normal_subgroup_of (subgroup_generated G n) <=>\n             h subgroup_of G /\\ h SUBSET n /\\ n SUBSET group_normalizer G h)
-      #|  group_carrier G:A->bool
-      #|  n:A->bool
-      #|  G:A group
+      #|  group_carrier((G : Group[A]))
+      #|  (n : (A) -> Bool)
+      #|  (G : Group[A])
       #|  forall G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\ group_carrier G SUBSET group_normalizer G n
       #|  forall G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\ group_normalizer G n = group_carrier G
       #|  forall G h:A->bool.\n        h subgroup_of G ==> h SUBSET group_normalizer G h
-      #|  (p /\\ q <=> p) <=> p ==> q
+      #|  (((p : Bool) && (q : Bool)) == p) == (p \226\134\146 q)
       #|  forall G h:A->bool.\n        h normal_subgroup_of (subgroup_generated G (group_normalizer G h)) <=>\n        h subgroup_of G
       #|  forall G s:A->bool.\n        group_centralizer G s =\n        if s = {} then group_carrier G\n        else INTERS {group_centralizer G {x} | x IN s}
       #|  forall G s:A->bool.\n        group_centralizer G s =\n         {x | x IN group_carrier G /\\\n              forall y. y IN group_carrier G /\\ y IN s\n                  ==> group_conjugation G x y = y}
-      #|  (y:A) IN h
-      #|  f(h y) = y /\\ g(h y) = h y ==> f(g(h y)) = y
-      #|  y:A
-      #|  x:A
-      #|  a:A
-      #|  h:A->bool
-      #|  group_carrier G INTER (h:A->bool)
+      #|  IN((y : A), (h : (A) -> Bool))
+      #|  (f : (_) -> _)((h : (_) -> _)((y : _))) == y && (g : (_) -> _)(h(y)) == h(y) \226\134\146 f(g(h(y))) == y
+      #|  (y : A)
+      #|  (x : A)
+      #|  (a : A)
+      #|  (h : (A) -> Bool)
+      #|  INTER(group_carrier((G : Group[A])), (h : (A) -> Bool))
       #|  group_carrier G INTER (h:A->bool) SUBSET group_carrier G
       #|  forall G h:A->bool.\n        group_centralizer G h normal_subgroup_of\n        subgroup_generated G (group_normalizer G h)
       #|  forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_centralizer G n normal_subgroup_of G
-      #|  ~(a IN s) ==> s INTER {a} = {}
-      #|  a IN s ==> s INTER {a} = {a}
-      #|  (a:A) IN group_carrier G
+      #|  !IN((a : _), (s : (_) -> Bool)) \226\134\146 INTER(s, {a}) == {}
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 INTER(s, {a}) == {a}
+      #|  IN((a : A), group_carrier((G : Group[A])))
       #|  forall G a:A. group_normalizer G {a} = group_centralizer G {a}
       #|  forall G s t:A->bool.\n        s SUBSET group_carrier G /\\ t SUBSET group_carrier G\n        ==> (s SUBSET group_centralizer G t <=>\n             t SUBSET group_centralizer G s)
       #|  forall G s t:A->bool.\n        s SUBSET group_carrier G /\\ t SUBSET group_centralizer G s\n        ==> s SUBSET group_centralizer G t
       #|  forall G s t:A->bool.\n        s SUBSET t ==> group_centralizer G t SUBSET group_centralizer G s
-      #|  group_carrier G:A->bool
+      #|  group_carrier((G : Group[A]))
       #|  forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_action G n (group_conjugation G)
       #|  forall G a:A.\n     a IN group_carrier G\n     ==> group_stabilizer G (group_conjugation G) a =\n         group_centralizer G {a}
-      #|  {a} = {b} <=> a = b
+      #|  ({(a : _)} == {(b : _)}) == (a == b)
       #|  forall G s x:A.\n        s SUBSET group_carrier G\n        ==> group_orbit G s (group_conjugation G) x =\n            if x IN s then {y | y IN s /\\ group_conjugate G {x} {y}} else {}
       #|  forall G x:A.\n        group_orbit G (group_carrier G) (group_conjugation G) x =\n        if x IN group_carrier G\n        then {y | y IN group_carrier G /\\ group_conjugate G {x} {y}}\n        else {}
-      #|  group_carrier G:A->bool
+      #|  group_carrier((G : Group[A]))
       #|  forall G u:(A->bool)->bool.\n        (forall t. t IN u ==> t SUBSET group_carrier G) /\\\n        (forall g t. g IN group_carrier G /\\ t IN u\n               ==> IMAGE (group_conjugation G g) t IN u)\n        ==> group_action G u (IMAGE o group_conjugation G)
       #|  forall G s:A->bool.\n        s SUBSET group_carrier G\n        ==> group_stabilizer G (IMAGE o group_conjugation G) s =\n            group_normalizer G s
       #|  forall G:A group. group_action G {s | s SUBSET group_carrier G}\n                              (IMAGE o group_conjugation G)
       #|  forall G:A group. group_action G {n | n subgroup_of G}\n                              (IMAGE o group_conjugation G)
       #|  forall G. group_orbit G {s | s SUBSET group_carrier G}\n                     (IMAGE o group_conjugation G) =\n       group_conjugate G
       #|  forall G u s:A->bool.\n        (forall t. t IN u ==> t SUBSET group_carrier G) /\\ s IN u\n        ==> group_orbit G u (IMAGE o group_conjugation G) s =\n            \\t. t IN u /\\ group_conjugate G s t
-      #|  {t | P t} = P
+      #|  {(t : _) | (P : (_) -> Bool)(t)} == P
       #|  forall G s:A->bool.\n        s SUBSET group_carrier G\n        ==> {t | group_conjugate G s t} *_c group_normalizer G s =_c\n            group_carrier G
       #|  forall G s:A->bool.\n        FINITE(group_carrier G) /\\ s SUBSET group_carrier G\n        ==> CARD {t | group_conjugate G s t} * CARD(group_normalizer G s) =\n            CARD(group_carrier G)
       #|  forall G s:A->bool.\n        FINITE(group_carrier G) /\\ s SUBSET group_carrier G\n        ==> CARD {t | group_conjugate G s t} =\n            CARD(group_carrier G) DIV CARD(group_normalizer G s)
       #|  quotient_group G (n:A->bool) =\n        group ({right_coset G n x |x| x IN group_carrier G},\n               n,group_setinv G,group_setmul G)
-      #|  x:A
-      #|  x:A
+      #|  (x : A)
+      #|  (x : A)
       #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
       #|  (forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_carrier(quotient_group G n) =\n              {right_coset G n x |x| x IN group_carrier G}) /\\\n   (forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_id(quotient_group G n) = n) /\\\n   (forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_inv(quotient_group G n) = group_setinv G) /\\\n   (forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_mul(quotient_group G n) = group_setmul G)
       #|  forall G n:A->bool.\n     abelian_group G /\\ n subgroup_of G ==> abelian_group(quotient_group G n)
@@ -24683,33 +24683,33 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G n:A->bool.\n        FINITE(group_carrier G) /\\ n normal_subgroup_of G\n        ==> CARD(group_carrier(quotient_group G n)) divides\n            CARD(group_carrier G)
       #|  forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> (trivial_group(quotient_group G n) <=> n = group_carrier G)
       #|  forall G:A group. trivial_group(quotient_group G (group_carrier G))
-      #|  right_coset G {group_id G:A}
+      #|  right_coset((G : Group[A]), {group_id(G)})
       #|  forall G:A group. quotient_group G {group_id G} isomorphic_group G
       #|  (IMAGE f s SUBSET t /\\ P) /\\ IMAGE f s = t /\\ Q <=>\n    IMAGE f s SUBSET t /\\ t SUBSET IMAGE f s /\\ P /\\ Q
       #|  forall(G1:A group) (G2:B group) n1 n2.\n        n1 normal_subgroup_of G1 /\\ n2 normal_subgroup_of G2\n        ==> group_isomorphism(prod_group (quotient_group G1 n1)\n                                         (quotient_group G2 n2),\n                              quotient_group (prod_group G1 G2) (n1 CROSS n2))\n                             (\\(s,t). s CROSS t)
       #|  forall(G1:A group) (G2:B group) n1 n2.\n        n1 normal_subgroup_of G1 /\\ n2 normal_subgroup_of G2\n        ==> quotient_group (prod_group G1 G2) (n1 CROSS n2) isomorphic_group\n            prod_group (quotient_group G1 n1) (quotient_group G2 n2)
-      #|  forall i. i IN k ==> (h:K->A->bool) i subgroup_of G i
-      #|  (?x. P x /\\ Q x) <=> ~(forall x. P x ==> ~Q x)
+      #|  \226\136\128 i : K, IN(i, (k : (K) -> Bool)) \226\134\146 subgroup_of((h : (K, A) -> Bool)(i), (G : (K) -> Group[A])(i))
+      #|  (\226\136\131 x : _, (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)) == !(\226\136\128 x : _, P(x) \226\134\146 !Q(x))
       #|  forall(G:K->A group) h k.\n        (cartesian_product k h) normal_subgroup_of (product_group k G) <=>\n        forall i. i IN k ==> (h i) normal_subgroup_of (G i)
       #|  RESTRICTION k (\\i. right_coset (G i) (n i) (x i)):K->A->bool
-      #|  x:K->A
-      #|  RESTRICTION k (y:K->A)
-      #|  y:K->A
-      #|  x:K->A->bool
+      #|  (x : (K) -> A)
+      #|  RESTRICTION((k : (K) -> Bool), (y : (K) -> A))
+      #|  (y : (K) -> A)
+      #|  (x : (K, A) -> Bool)
       #|  (IMAGE f s SUBSET t /\\ P) /\\ IMAGE f s = t /\\ Q <=>\n    IMAGE f s SUBSET t /\\ t SUBSET IMAGE f s /\\ P /\\ Q
       #|  forall(G:K->A group) n k.\n        (forall i. i IN k ==> (n i) normal_subgroup_of (G i))\n        ==> group_isomorphism\n              (product_group k (\\i. quotient_group (G i) (n i)),\n               quotient_group (product_group k G) (cartesian_product k n))\n              (cartesian_product k)
       #|  forall(G:K->A group) n k.\n        (forall i. i IN k ==> (n i) normal_subgroup_of (G i))\n        ==> (quotient_group (product_group k G) (cartesian_product k n))\n            isomorphic_group\n            (product_group k (\\i. quotient_group (G i) (n i)))
-      #|  G:A group
-      #|  k:A->bool
-      #|  quotient_group (G:A group) n
+      #|  (G : Group[A])
+      #|  (k : (A) -> Bool)
+      #|  quotient_group((G : Group[A]), (n : (A) -> Bool))
       #|  n SUBSET {x | x IN s /\\ f x = z}\n        ==> z IN h ==> n SUBSET {x | x IN s /\\ f x IN h}
-      #|  q /\\ p /\\ r ==> p /\\ q /\\ r
+      #|  (q : Bool) && (p : Bool) && (r : Bool) \226\134\146 p && q && r
       #|  {x:A | x IN group_carrier G /\\ right_coset G n x IN h}
       #|  (r ==> q) /\\ (p ==> r) /\\ (q ==> p)\n    ==> (p <=> q) /\\ (p <=> r)
       #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
       #|  (forall G n h:(A->bool)->bool.\n        n normal_subgroup_of G\n        ==> (h subgroup_of quotient_group G n <=>\n             ?k. k subgroup_of G /\\ { right_coset G n x | x IN k} = h)) /\\\n   (forall G n h:(A->bool)->bool.\n        n normal_subgroup_of G\n        ==> (h subgroup_of quotient_group G n <=>\n             ?k. k subgroup_of G /\\\n                 n SUBSET k /\\\n                 { right_coset G n x | x IN k} = h))
-      #|  k:A->bool
-      #|  h:(A->bool)->bool
+      #|  (k : (A) -> Bool)
+      #|  (h : ((A) -> Bool) -> Bool)
       #|  forall G n h:(A->bool)->bool.\n        n normal_subgroup_of G /\\ h subgroup_of quotient_group G n\n        ==> ?k. k subgroup_of G /\\ n SUBSET k /\\\n                quotient_group (subgroup_generated G k) n =\n                subgroup_generated (quotient_group G n) h
       #|  forall G h n:A->bool.\n        n normal_subgroup_of G /\\ h subgroup_of G /\\ n SUBSET h\n        ==> quotient_group (subgroup_generated G h) n =\n            subgroup_generated (quotient_group G n)\n                               {right_coset G n x | x IN h}
       #|  group_kernel (G,G') (f:A->B) =\n    {x | x IN group_carrier G /\\ f x = group_id G'}
@@ -24717,23 +24717,23 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> group_id G IN group_kernel (G,G') f
       #|  forall G H (f:A->B).\n        group_homomorphism(G,H) f ==> ~(group_kernel(G,H) f = {})
       #|  forall G H (f:A->B). group_kernel(G,H) f SUBSET group_carrier G
-      #|  group_div G x y:A
-      #|  y:A
-      #|  x:A
-      #|  group_id G:A
-      #|  x:A
-      #|  x:A
-      #|  (p /\\ q <=> p /\\ r) <=> p ==> (q <=> r)
+      #|  group_div((G : Group[A]), (x : A), (y : A))
+      #|  (y : A)
+      #|  (x : A)
+      #|  group_id((G : Group[A]))
+      #|  (x : A)
+      #|  (x : A)
+      #|  (((p : Bool) && (q : Bool)) == (p && (r : Bool))) == (p \226\134\146 q == r)
       #|  forall G G' (f:A->B).\n        group_monomorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_kernel (G,G') f = {group_id G}
-      #|  G:A group
+      #|  (G : Group[A])
       #|  forall G G' (f:A->B).\n        group_monomorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        forall x. x IN group_carrier G /\\ f x = group_id G' ==> x = group_id G
       #|  forall G G' f:A->B.\n        group_monomorphism (G,G') f <=>\n        group_homomorphism (G,G') f /\\\n        forall x. x IN group_carrier G ==> (f x = group_id G' <=> x = group_id G)
       #|  forall G G' (f:A->B).\n        group_epimorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_image (G,G') f = group_carrier G'
       #|  forall G G' (f:A->B).\n        group_epimorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_carrier G' SUBSET group_image (G,G') f
       #|  forall G G' (f:A->B).\n        group_isomorphism (G,G') f <=>\n        group_epimorphism (G,G') f /\\\n        (forall x. x IN group_carrier G /\\ f x = group_id G' ==> x = group_id G)
       #|  forall G G' (f:A->B).\n        group_isomorphism (G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_kernel (G,G') f = {group_id G} /\\\n        group_image (G,G') f = group_carrier G'
-      #|  G:A group
-      #|  group_homomorphism (G,G') (f:A->B)
+      #|  (G : Group[A])
+      #|  group_homomorphism(((G : Group[A]), (G' : Group[B])), (f : (A) -> B))
       #|  forall G G' (f:A->B).\n      group_isomorphism (G,G') f <=>\n      IMAGE f (group_carrier G) = group_carrier G' /\\\n      (forall x y. x IN group_carrier G /\\ y IN group_carrier G\n             ==> f(group_mul G x y) = group_mul G' (f x) (f y)) /\\\n      (forall x. x IN group_carrier G /\\ f x = group_id G' ==> x = group_id G)
       #|  forall G G' (f:A->B).\n        group_homomorphism(G,G') f ==> (group_kernel (G,G') f) subgroup_of G
       #|  forall G G' (f:A->B).\n        group_homomorphism(G,G') f ==> (group_image (G,G') f) subgroup_of G'
@@ -24741,142 +24741,142 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G H s (f:A->B).\n        group_image (G,subgroup_generated H s) f = group_image(G,H) f
       #|  forall G H s f:A->B.\n        s subgroup_of G\n        ==> group_kernel(subgroup_generated G s,H) f =\n            group_kernel(G,H) f INTER s
       #|  forall G H s f:A->B.\n        s subgroup_of G\n        ==> group_image(subgroup_generated G s,H) f =\n            group_image(G,H) f INTER IMAGE f s
-      #|  group_homomorphism (G,H) (f:A->B)
+      #|  group_homomorphism(((G : Group[A]), (H : Group[B])), (f : (A) -> B))
       #|  forall(f:A->B) G H.\n        group_isomorphism(G,subgroup_generated H (group_image (G,H) f)) f <=>\n        group_monomorphism(G,H) f
-      #|  {f x y | x IN {a} /\\ P y} = {f a y | P y}
-      #|  {f x y | P x /\\ y IN {a}} = {f x a | P x}
+      #|  {(f : (_, _) -> _)((x : _), (y : _)) | IN(x, {(a : _)}) && (P : (_) -> Bool)(y)} == {f(a, (y : _)) | P(y)}
+      #|  {(f : (_, _) -> _)((x : _), (y : _)) | (P : (_) -> Bool)(x) && IN(y, {(a : _)})} == {f((x : _), a) | P(x)}
       #|  forall G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> (group_kernel (G,G') f) normal_subgroup_of G
-      #|  p /\\ q <=> ~(p ==> ~q)
+      #|  ((p : Bool) && (q : Bool)) == !(p \226\134\146 !q)
       #|  forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_kernel(G,quotient_group G n) (right_coset G n) = n
-      #|  group_mul G (group_inv G x:A)
+      #|  group_mul((G : Group[A]), group_inv(G, (x : A)))
       #|  forall g. IMAGE f s SUBSET t /\\ IMAGE g t SUBSET s /\\ (forall y. y IN t ==> f(g y) = y)\n        ==> t = IMAGE f s
       #|  IMAGE (group_mul G x) (group_kernel(G,H) (f:A->B))
-      #|  x:A
+      #|  (x : A)
       #|  forall G H (f:A->B).\n        group_homomorphism(G,H) f\n        ==> group_image(G,H) f *_c group_kernel(G,H) f =_c group_carrier G
       #|  CARD(group_carrier G) = CARD(group_image (G,H) (f:A->B))
       #|  forall G H (f:A->B).\n        group_monomorphism(G,H) f /\\ FINITE(group_carrier H)\n        ==> CARD(group_carrier G) divides CARD(group_carrier H)
       #|  forall G H (f:A->B).\n        group_epimorphism(G,H) f /\\ FINITE(group_carrier G)\n        ==> CARD(group_carrier H) divides CARD(group_carrier G)
-      #|  n = right_coset G n (group_id G:A)
-      #|  g:(A->bool)->B
+      #|  (n : (A) -> Bool) == right_coset((G : Group[A]), n, group_id(G))
+      #|  (g : ((A) -> Bool) -> B)
       #|  forall G G' n (f:A->B).\n        group_homomorphism (G,G') f /\\ n normal_subgroup_of G /\\\n        (forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n               right_coset G n x = right_coset G n y\n               ==> f x = f y)\n        ==> ?g. group_homomorphism(quotient_group G n,G') g /\\\n                forall x. x IN group_carrier G ==> g(right_coset G n x) = f x
-      #|  group_div G x y:A
-      #|  y:A
-      #|  x:A
+      #|  group_div((G : Group[A]), (x : A), (y : A))
+      #|  (y : A)
+      #|  (x : A)
       #|  forall G G' n (f:A->B).\n        group_homomorphism (G,G') f /\\\n        n normal_subgroup_of G /\\\n        n SUBSET group_kernel (G,G') f\n        ==> ?g. group_homomorphism(quotient_group G n,G') g /\\\n                forall x. x IN group_carrier G ==> g(right_coset G n x) = f x
-      #|  f:A->B
-      #|  n:A->bool
-      #|  G':B group
-      #|  G:A group
+      #|  (f : (A) -> B)
+      #|  (n : (A) -> Bool)
+      #|  (G' : Group[B])
+      #|  (G : Group[A])
       #|  forall G G' n (f:A->B).\n        group_epimorphism (G,G') f /\\\n        n normal_subgroup_of G /\\\n        n SUBSET group_kernel (G,G') f\n        ==> ?g. group_epimorphism(quotient_group G n,G') g /\\\n                forall x. x IN group_carrier G ==> g(right_coset G n x) = f x
       #|  forall G H (f:A->B).\n        group_homomorphism (G,H) f /\\ trivial_group G\n        ==> group_kernel (G,H) f = group_carrier G
       #|  forall G H (f:A->B).\n        group_homomorphism (G,H) f /\\ trivial_group G\n        ==> group_image (G,H) f = {group_id H}
       #|  forall G H (f:A->B).\n        group_homomorphism (G,H) f /\\ trivial_group H\n        ==> group_kernel (G,H) f = group_carrier G
       #|  forall G H (f:A->B).\n        group_homomorphism (G,H) f /\\ trivial_group H\n        ==> group_image (G,H) f = group_carrier H
-      #|  g:(A->bool)->B
-      #|  group_kernel (G,G') (f:A->B)
+      #|  (g : ((A) -> Bool) -> B)
+      #|  group_kernel(((G : Group[A]), (G' : Group[B])), (f : (A) -> B))
       #|  forall G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> (quotient_group G (group_kernel (G,G') f)) isomorphic_group\n            (subgroup_generated G' (group_image (G,G') f))
       #|  forall G G' (f:A->B).\n        group_epimorphism(G,G') f\n        ==> (quotient_group G (group_kernel (G,G') f)) isomorphic_group G'
-      #|  (x:A) IN group_carrier G
-      #|  y:A
-      #|  x:A
-      #|  group_mul G (group_inv G x) z:A
-      #|  (x:A) IN group_carrier G
-      #|  x:A
-      #|  z:A
+      #|  IN((x : A), group_carrier((G : Group[A])))
+      #|  (y : A)
+      #|  (x : A)
+      #|  group_mul((G : Group[A]), group_inv(G, (x : A)), (z : A))
+      #|  IN((x : A), group_carrier((G : Group[A])))
+      #|  (x : A)
+      #|  (z : A)
       #|  forall G H (f:A->B) s.\n        group_homomorphism(G,H) f /\\ s SUBSET group_carrier G\n        ==> {x | x IN group_carrier G /\\ f x IN IMAGE f s} =\n            group_setmul G s (group_kernel(G,H) f)
-      #|  (x:A) IN group_carrier G
-      #|  y:A
-      #|  x:A
-      #|  group_mul G z (group_inv G x):A
-      #|  (x:A) IN group_carrier G
-      #|  x:A
-      #|  z:A
+      #|  IN((x : A), group_carrier((G : Group[A])))
+      #|  (y : A)
+      #|  (x : A)
+      #|  group_mul((G : Group[A]), (z : A), group_inv(G, (x : A)))
+      #|  IN((x : A), group_carrier((G : Group[A])))
+      #|  (x : A)
+      #|  (z : A)
       #|  forall G H (f:A->B) s.\n        group_homomorphism(G,H) f /\\ s SUBSET group_carrier G\n        ==> {x | x IN group_carrier G /\\ f x IN IMAGE f s} =\n            group_setmul G (group_kernel(G,H) f) s
       #|  forall G H (f:A->B) t.\n        group_homomorphism(G,H) f\n        ==> IMAGE f {x | x IN group_carrier G /\\ f x IN t} =\n            t INTER (group_image(G,H) f)
       #|  forall G H (f:A->B) s.\n        group_homomorphism(G,H) f /\\\n        group_kernel(G,H) f SUBSET s /\\\n        s subgroup_of G\n        ==> {x | x IN group_carrier G /\\ f x IN IMAGE f s} = s
       #|  forall G H (f:A->B) t.\n        group_homomorphism(G,H) f /\\ t SUBSET group_image(G,H) f\n        ==> IMAGE f {x | x IN group_carrier G /\\ f x IN t} = t
-      #|  {x | x IN group_carrier G /\\ (f:A->B) x IN k}
+      #|  {(x : A) | IN(x, group_carrier((G : Group[A]))) && IN((f : (A) -> B)(x), (k : (B) -> Bool))}
       #|  forall G H (f:A->B) k.\n        group_epimorphism(G,H) f\n        ==> (k subgroup_of H <=>\n             ?j. j subgroup_of G /\\\n                 group_kernel(G,H) f SUBSET j /\\\n                 {x | x IN group_carrier G /\\ f x IN k} = j /\\\n                 IMAGE f j = k)
-      #|  k:B->bool
-      #|  y:A = group_mul G (group_div G y x) x
-      #|  y:A
-      #|  x:A
+      #|  (k : (B) -> Bool)
+      #|  (y : A) == group_mul((G : Group[A]), group_div(G, y, (x : A)), x)
+      #|  (y : A)
+      #|  (x : A)
       #|  j SUBSET s /\\ (forall x y. x IN j /\\ y IN s /\\ f x = f y ==> y IN j)\n      ==> {x | x IN s /\\ f x IN IMAGE f j} = j
-      #|  IMAGE (f:A->B) j
+      #|  IMAGE((f : (A) -> B), (j : (A) -> Bool))
       #|  forall G H (f:A->B) j.\n        group_epimorphism(G,H) f\n        ==> (j subgroup_of G /\\ group_kernel(G,H) f SUBSET j <=>\n             ?k. k subgroup_of H /\\\n                 {x | x IN group_carrier G /\\ f x IN k} = j /\\\n                 IMAGE f j = k)
       #|  forall G H (f:A->B) j.\n        group_homomorphism(G,H) f /\\ j normal_subgroup_of H\n        ==> {x | x IN group_carrier G /\\ f x IN j} normal_subgroup_of G
-      #|  x:A
-      #|  x:A
-      #|  a:A
-      #|  a:A
+      #|  (x : A)
+      #|  (x : A)
+      #|  (a : A)
+      #|  (a : A)
       #|  forall G H (f:A->B) n.\n        group_epimorphism(G,H) f /\\ n normal_subgroup_of G\n        ==> IMAGE f n normal_subgroup_of H
-      #|  k = IMAGE (f:A->B) j
+      #|  (k : (B) -> Bool) == IMAGE((f : (A) -> B), (j : (A) -> Bool))
       #|  forall G H (f:A->B) j k.\n        group_epimorphism (G,H) f /\\\n        k subgroup_of H /\\\n        {x | x IN group_carrier G /\\ f x IN k} = j\n        ==> (j normal_subgroup_of G <=> k normal_subgroup_of H)
       #|  forall G H (f:A->B) k.\n        group_epimorphism(G,H) f\n        ==> (k normal_subgroup_of H <=>\n             ?j. j normal_subgroup_of G /\\\n                 group_kernel(G,H) f SUBSET j /\\\n                 {x | x IN group_carrier G /\\ f x IN k} = j /\\\n                 IMAGE f j = k)
       #|  forall G H (f:A->B) j.\n        group_epimorphism(G,H) f\n        ==> (j normal_subgroup_of G /\\ group_kernel(G,H) f SUBSET j <=>\n             ?k. k normal_subgroup_of H /\\\n                 {x | x IN group_carrier G /\\ f x IN k} = j /\\\n                 IMAGE f j = k)
       #|  j = {x | x IN group_carrier G /\\ (f:A->B) x IN IMAGE f j}
       #|  forall G H (f:A->B) j.\n        group_isomorphism(G,H) f /\\ j SUBSET group_carrier G\n        ==> ((IMAGE f j) subgroup_of H <=> j subgroup_of G)
-      #|  f:A->B
+      #|  (f : (A) -> B)
       #|  (q ==> p) /\\ (q' ==> p') /\\ (p' ==> (q' <=> q))\n    ==> (p' <=> p) ==> (q' <=> q)
       #|  forall G H (f:A->B) j.\n        group_isomorphism(G,H) f /\\ j SUBSET group_carrier G\n        ==> ((IMAGE f j) normal_subgroup_of H <=> j normal_subgroup_of G)
-      #|  a:A
+      #|  (a : A)
       #|  forall G s t:A->bool.\n        group_conjugate G s t\n        ==> (s subgroup_of G <=> t subgroup_of G)
-      #|  a:A
+      #|  (a : A)
       #|  forall G s t:A->bool.\n        group_conjugate G s t\n        ==> (s normal_subgroup_of G <=> t normal_subgroup_of G)
       #|  forall G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\ forall n'. group_conjugate G n n' ==> n' = n
       #|  forall G n n':A->bool.\n        n normal_subgroup_of G \\/ n' normal_subgroup_of G\n        ==> (group_conjugate G n n' <=> n = n')
       #|  forall(G:A group) j k.\n        j normal_subgroup_of G\n        ==> (k subgroup_of (quotient_group G j) <=>\n             ?i. i subgroup_of G /\\ j SUBSET i /\\\n                 {x | x IN group_carrier G /\\ right_coset G j x IN k} = i /\\\n                 IMAGE (right_coset G j) i = k)
       #|  forall(G:A group) j k.\n        j normal_subgroup_of G\n        ==> (k normal_subgroup_of (quotient_group G j) <=>\n             ?i. i normal_subgroup_of G /\\ j SUBSET i /\\\n                 {x | x IN group_carrier G /\\ right_coset G j x IN k} = i /\\\n                 IMAGE (right_coset G j) i = k)
-      #|  (x:A) IN group_carrier G
-      #|  x:A
-      #|  H:B group
-      #|  right_coset H k o (f:A->B)
-      #|  quotient_group H (k:B->bool)
-      #|  G:A group
+      #|  IN((x : A), group_carrier((G : Group[A])))
+      #|  (x : A)
+      #|  (H : Group[B])
+      #|  o(right_coset((H : Group[B]), (k : (B) -> Bool)), (f : (A) -> B))
+      #|  quotient_group((H : Group[B]), (k : (B) -> Bool))
+      #|  (G : Group[A])
       #|  forall G H (f:A->B) j k.\n        group_epimorphism(G,H) f /\\\n        k normal_subgroup_of H /\\ {x | x IN group_carrier G /\\ f x IN k} = j\n        ==> quotient_group G j isomorphic_group quotient_group H k
-      #|  f:A->B
+      #|  (f : (A) -> B)
       #|  forall G H (f:A->B) j k.\n        group_epimorphism(G,H) f /\\ j normal_subgroup_of G /\\\n        group_kernel (G,H) f SUBSET j /\\ IMAGE f j = k\n        ==> quotient_group G j isomorphic_group quotient_group H k
-      #|  (k:B->bool) normal_subgroup_of H
-      #|  k:B->bool
-      #|  p /\\ q /\\ r ==> s <=> q ==> p /\\ r ==> s
-      #|  p /\\ q /\\ ~r ==> s <=> p /\\ q ==> r \\/ s
+      #|  normal_subgroup_of((k : (B) -> Bool), (H : Group[B]))
+      #|  (k : (B) -> Bool)
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (q \226\134\146 p && r \226\134\146 s)
+      #|  ((p : Bool) && (q : Bool) && !(r : Bool) \226\134\146 (s : Bool)) == (p && q \226\134\146 r || s)
       #|  forall G H (f:A->B).\n      group_epimorphism(G,H) f\n      ==> ((forall k. k normal_subgroup_of H\n                ==> k = {group_id H} \\/ k = group_carrier H) <=>\n           (forall h. h normal_subgroup_of G /\\ group_kernel(G,H) f PSUBSET h\n                ==> h = group_carrier G))
-      #|  (k:B->bool) subgroup_of H
-      #|  k:B->bool
-      #|  p /\\ q /\\ r ==> s <=> q ==> p /\\ r ==> s
-      #|  p /\\ q /\\ ~r ==> s <=> p /\\ q ==> r \\/ s
+      #|  subgroup_of((k : (B) -> Bool), (H : Group[B]))
+      #|  (k : (B) -> Bool)
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (q \226\134\146 p && r \226\134\146 s)
+      #|  ((p : Bool) && (q : Bool) && !(r : Bool) \226\134\146 (s : Bool)) == (p && q \226\134\146 r || s)
       #|  forall G H (f:A->B).\n      group_epimorphism(G,H) f\n      ==> ((forall k. k subgroup_of H\n                ==> k = {group_id H} \\/ k = group_carrier H) <=>\n           (forall h. h subgroup_of G /\\ group_kernel(G,H) f PSUBSET h\n                ==> h = group_carrier G))
       #|  forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> ((forall h. h subgroup_of G /\\ n PSUBSET h ==> h = group_carrier G) <=>\n             (forall k. k subgroup_of quotient_group G n\n                  ==> k = {group_id(quotient_group G n)} \\/\n                      k = group_carrier(quotient_group G n)))
       #|  forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> ((forall h. h normal_subgroup_of G /\\ n PSUBSET h\n                  ==> h = group_carrier G) <=>\n             (forall k. k normal_subgroup_of quotient_group G n\n                  ==> k = {group_id(quotient_group G n)} \\/\n                      k = group_carrier(quotient_group G n)))
       #|  trivial_homomorphism(G,G') (f:A->B) <=>\n        group_homomorphism(G,G') f /\\\n        forall x. x IN group_carrier G ==> f x = group_id G'
-      #|  G:A group
+      #|  (G : Group[A])
       #|  forall(f:A->B) G G'.\n        group_homomorphism (G,G') f\n        ==> (group_kernel(G,G') f = group_carrier G <=>\n             group_image(G,G') f = {group_id G'})
       #|  forall(f:A->B) G G'.\n        trivial_homomorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_kernel(G,G') f = group_carrier G
       #|  forall(f:A->B) G G'.\n        trivial_homomorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_image(G,G') f = {group_id G'}
-      #|  forall G H. trivial_homomorphism (G,H) (\\x. group_id H)
+      #|  \226\136\128 G : Group[_], \226\136\128 H : Group[_], trivial_homomorphism((G, H), (x : _) => group_id(H))
       #|  forall G H. group_monomorphism (G,H) (\\x. group_id H) <=> trivial_group G
-      #|  ~(s = {}) ==> IMAGE (\\x. a) s = {a}
+      #|  !((s : (_) -> Bool) == {}) \226\134\146 IMAGE((x : _) => (a : _), s) == {a}
       #|  forall G H. group_epimorphism (G,H) (\\x. group_id H) <=> trivial_group H
       #|  forall G H. group_isomorphism (G,H) (\\x. group_id H) <=>\n         trivial_group G /\\ trivial_group H
       #|  group_element_order G (x:A) =\n        @d. forall n. group_pow G x n = group_id G <=> d divides n
-      #|  n divides 0
-      #|  n MOD d = 0
-      #|  (d:num) divides (a * d + b) <=> d divides b
-      #|  d:num
-      #|  n:num
-      #|  n:num
-      #|  p ==> q ==> r <=> ~r /\\ p ==> ~q
-      #|  d:num
-      #|  0 divides n <=> n = 0
+      #|  divides((n : Num), 0)
+      #|  MOD((n : Num), (d : Num)) == 0
+      #|  divides((d : Num), (a : Num) * d + (b : Num)) == divides(d, b)
+      #|  (d : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  ((p : Bool) \226\134\146 (q : Bool) \226\134\146 (r : Bool)) == (!r && p \226\134\146 !q)
+      #|  (d : Num)
+      #|  divides(0, (n : Num)) == (n == 0)
       #|  0
-      #|  forall n. group_pow G (x:A) n = group_id G ==> n = 0
+      #|  \226\136\128 n : Num, group_pow((G : Group[A]), (x : A), n) == group_id(G) \226\134\146 n == 0
       #|  forall G (x:A) n.\n        x IN group_carrier G\n        ==> (group_pow G x n = group_id G <=>\n             (group_element_order G x) divides n)
       #|  forall G (x:A) m n.\n        x IN group_carrier G /\\\n        group_pow G x m = group_id G /\\\n        m divides n\n        ==> group_pow G x n = group_id G
-      #|  (d:num) divides d
+      #|  divides((d : Num), d)
       #|  forall G x:A. x IN group_carrier G\n           ==> group_pow G x (group_element_order G x) = group_id G
-      #|  m divides (--n:int) <=> m divides n
-      #|  n:int
-      #|  m:num
+      #|  divides((m : Int), -(n : Int)) == divides(m, n)
+      #|  (n : Int)
+      #|  (m : Num)
       #|  forall G (x:A) n.\n        x IN group_carrier G\n        ==> (group_zpow G x n = group_id G <=>\n             &(group_element_order G x) divides n)
       #|  forall G (x:A) m n.\n        x IN group_carrier G /\\\n        group_zpow G x m = group_id G /\\\n        m divides n\n        ==> group_zpow G x n = group_id G
       #|  forall G (x:A) m n.\n        x IN group_carrier G\n        ==> (group_zpow G x m = group_zpow G x n <=>\n             &(group_element_order G x) divides n - m)
@@ -24884,30 +24884,30 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G (x:A) m n.\n        x IN group_carrier G\n        ==> (group_pow G x m = group_pow G x n <=>\n             (m == n) (mod (group_element_order G x)))
       #|  forall G (x:A) n.\n        x IN group_carrier G\n        ==> group_zpow G x (n rem &(group_element_order G x)) =\n            group_zpow G x n
       #|  forall G (x:A) n.\n        x IN group_carrier G\n        ==> group_pow G x (n MOD group_element_order G x) =\n            group_pow G x n
-      #|  forall n:num. n divides n
-      #|  0 divides n <=> n = 0
+      #|  \226\136\128 n : Num, divides(n, n)
+      #|  divides(0, (n : Num)) == (n == 0)
       #|  forall G (x:A).\n        x IN group_carrier G\n        ==> (group_element_order G x = 0 <=>\n              forall n. ~(n = 0) ==> ~(group_pow G x n = group_id G))
-      #|  (n:num) divides n
+      #|  divides((n : Num), n)
       #|  forall G (x:A) d.\n        x IN group_carrier G\n        ==> (group_element_order G x = d <=>\n             forall n. group_pow G x n = group_id G <=> d divides n)
-      #|  1 divides n
+      #|  divides(1, (n : Num))
       #|  forall G (x:A).\n        x IN group_carrier G\n        ==> (group_element_order G x = 1 <=> x = group_id G)
-      #|  1 divides n /\\ n divides n
+      #|  divides(1, (n : Num)) && divides(n, n)
       #|  forall G (x:A) p.\n        x IN group_carrier G /\\ prime p\n        ==> (group_element_order G x = p <=>\n             ~(x = group_id G) /\\ group_pow G x p = group_id G)
-      #|  forall G:A group. group_element_order G (group_id G) = 1
+      #|  \226\136\128 G : Group[A], group_element_order(G, group_id(G)) == 1
       #|  forall G x:A.\n        x IN group_carrier G\n        ==> group_element_order G (group_inv G x) = group_element_order G x
       #|  forall G (x:A) m n.\n        x IN group_carrier G\n        ==> (group_pow G x (gcd(m,n)) = group_id G <=>\n             group_pow G x m = group_id G /\\ group_pow G x n = group_id G)
       #|  forall G (x:A) m n.\n        x IN group_carrier G /\\ coprime(m,n)\n        ==> (group_pow G x m = group_id G /\\ group_pow G x n = group_id G <=>\n             x = group_id G)
-      #|  IMAGE (\\n. group_pow G (x:A) n) (:num)
+      #|  IMAGE((n : Num) => group_pow((G : Group[A]), (x : A), n), UNIV)
       #|  forall G x:A.\n        FINITE(group_carrier G) /\\ x IN group_carrier G\n        ==> ~(group_element_order G x = 0)
-      #|  ~(k = 0)
+      #|  !((k : Num) == 0)
       #|  forall G (x:A) k.\n        x IN group_carrier G /\\ ~(k = 0) /\\ k divides group_element_order G x\n        ==> group_element_order G (group_pow G x k) =\n            group_element_order G x DIV k
-      #|  ~(k = 0)
-      #|  gcd(d,k) = 0 <=> d = 0 /\\ k = 0
-      #|  m:num
-      #|  gcd(d:num,k) divides d
-      #|  d:num
-      #|  group_element_order G (x:A)
-      #|  n:num
+      #|  !((k : Num) == 0)
+      #|  (gcd(((d : Num), (k : Num))) == 0) == (d == 0 && k == 0)
+      #|  (m : Num)
+      #|  divides(gcd(((d : Num), (k : Num))), d)
+      #|  (d : Num)
+      #|  group_element_order((G : Group[A]), (x : A))
+      #|  (n : Num)
       #|  forall G (x:A) k.\n        x IN group_carrier G\n        ==> group_element_order G (group_pow G x k) =\n            if k = 0 then 1\n            else group_element_order G x DIV gcd(group_element_order G x,k)
       #|  forall G x (y:A) n.\n        x IN group_carrier G /\\\n        y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x /\\\n        group_element_order G x divides n /\\\n        group_element_order G y divides n\n        ==> group_element_order G (group_mul G x y) divides n
       #|  forall G x (y:A) n.\n        abelian_group G /\\\n        x IN group_carrier G /\\\n        y IN group_carrier G /\\\n        group_element_order G x divides n /\\\n        group_element_order G y divides n\n        ==> group_element_order G (group_mul G x y) divides n
@@ -24920,84 +24920,84 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> group_element_order G (group_mul G x y)\n            divides (group_element_order G x * group_element_order G y)
       #|  forall G x y:A.\n        abelian_group G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_element_order G (group_mul G x y)\n            divides (group_element_order G x * group_element_order G y)
       #|  group_mul G (group_inv G x)\n                (group_mul G (group_mul G (group_mul G x y) z) x) =\n    group_mul G (group_mul G y x)\n                (group_mul G (group_inv G x) (group_mul G z x))
-      #|  n:num
-      #|  n:num
+      #|  (n : Num)
+      #|  (n : Num)
       #|  group_mul G (group_inv G x) (group_mul G z x) = group_id G <=>\n      z = group_id G
       #|  group_mul G (group_inv G x)\n               (group_mul G (group_pow G (group_mul G x y) n) x):A =\n    group_id G
       #|  forall G n x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_pow G (group_mul G x y) n = group_id G <=>\n             group_pow G (group_mul G y x) n = group_id G)
       #|  forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_element_order G (group_mul G x y) =\n            group_element_order G (group_mul G y x)
-      #|  n divides 0
-      #|  (n:num) divides (q * n + r) <=> n divides r
-      #|  m:num
-      #|  group_pow G (x:A) m = group_id G
-      #|  m:num
+      #|  divides((n : Num), 0)
+      #|  divides((n : Num), (q : Num) * n + (r : Num)) == divides(n, r)
+      #|  (m : Num)
+      #|  group_pow((G : Group[A]), (x : A), (m : Num)) == group_id(G)
+      #|  (m : Num)
       #|  forall G (x:A) n.\n        x IN group_carrier G /\\ ~(n = 0)\n        ==> (group_element_order G x = n <=>\n             group_pow G x n = group_id G /\\\n             forall m. 0 < m /\\ m < n ==> ~(group_pow G x m = group_id G))
-      #|  0 < m /\\ m < 2 <=> m = 1
+      #|  (0 < (m : Num) && m < 2) == (m == 1)
       #|  forall G x:A.\n        x IN group_carrier G\n        ==> (group_element_order G x = 2 <=>\n             ~(x = group_id G) /\\ group_pow G x 2 = group_id G)
       #|  forall G x:A.\n        x IN group_carrier G\n        ==> (group_element_order G x = 2 <=>\n             ~(x = group_id G) /\\ group_inv G x = x)
       #|  forall G (x:A) n.\n        x IN group_carrier G\n        ==> group_element_order G (group_pow G x n) divides\n            group_element_order G x
       #|  (group_mul G (group_pow G x m) (group_pow G y m) = group_pow G x m /\\\n     group_mul G (group_pow G x n) (group_pow G y n) = group_pow G y n) /\\\n    (group_mul G (group_pow G x m) (group_pow G y m) = group_id G /\\\n     group_mul G (group_pow G x n) (group_pow G y n) = group_id G)\n    ==> group_pow G x m = group_id G /\\ group_pow G y n = group_id G
       #|  (a:num) divides (b * c) /\\ b divides (a * c) /\\ coprime(a,b)\n    ==> (a * b) divides c
       #|  forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x /\\\n        coprime(group_element_order G x,group_element_order G y)\n        ==> group_element_order G (group_mul G x y) =\n            group_element_order G x * group_element_order G y
-      #|  ~(k = 0) /\\ x' * k = x ==> (x = k * n <=> x' = n)
-      #|  (p ==> q) /\\ (q ==> (p <=> r)) ==> (p <=> q /\\ r)
+      #|  !((k : Num) == 0) && (x' : Num) * k == (x : Num) \226\134\146 (x == k * (n : Num)) == (x' == n)
+      #|  ((p : Bool) \226\134\146 (q : Bool)) && (q \226\134\146 p == (r : Bool)) \226\134\146 p == (q && r)
       #|  forall G (x:A) k n.\n        x IN group_carrier G /\\ ~(k = 0)\n        ==> (group_element_order G x = k * n <=>\n             k divides group_element_order G x /\\\n             group_element_order G (group_pow G x k) = n)
       #|  forall G (x:A) k n.\n        x IN group_carrier G /\\ ~(k = 0) /\\ k divides n\n        ==> (group_element_order G x = k * n <=>\n             group_element_order G (group_pow G x k) = n)
       #|  forall G x y:A.\n        abelian_group G /\\ x IN group_carrier G /\\ y IN group_carrier G /\\\n        coprime(group_element_order G x,group_element_order G y)\n        ==> group_element_order G (group_mul G x y) =\n            group_element_order G x * group_element_order G y
-      #|  gcd(a * b:num,a) = a /\\ gcd(a * b,b) = b
+      #|  gcd(((a : Num) * (b : Num), a)) == a && gcd((a * b, b)) == b
       #|  group_element_order G (group_pow G (x:A) m') = m /\\\n    group_element_order G (group_pow G (y:A) n') = n
-      #|  group_mul G (group_pow G x m') (group_pow G y n'):A
-      #|  n':num
-      #|  m':num
-      #|  n:num
-      #|  m:num
-      #|  group_element_order G (y:A)
-      #|  group_element_order G (x:A)
-      #|  group_element_order G (y:A) = 0
-      #|  group_element_order G (x:A) = 0
+      #|  group_mul((G : Group[A]), group_pow(G, (x : A), (m' : Num)), group_pow(G, (y : A), (n' : Num)))
+      #|  (n' : Num)
+      #|  (m' : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  group_element_order((G : Group[A]), (y : A))
+      #|  group_element_order((G : Group[A]), (x : A))
+      #|  group_element_order((G : Group[A]), (y : A)) == 0
+      #|  group_element_order((G : Group[A]), (x : A)) == 0
       #|  forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> ?z. z IN group_carrier G /\\\n                group_element_order G z =\n                lcm(group_element_order G x,group_element_order G y)
       #|  forall G x y:A.\n        abelian_group G /\\\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> ?z. z IN group_carrier G /\\\n                group_element_order G z =\n                lcm(group_element_order G x,group_element_order G y)
-      #|  y:A
-      #|  z:A
-      #|  IMAGE f s x <=> x IN IMAGE f s
+      #|  (y : A)
+      #|  (z : A)
+      #|  IMAGE((f : (_) -> _), (s : (_) -> Bool), (x : _)) == IN(x, IMAGE(f, s))
       #|  IMAGE (group_element_order G) (group_carrier G:A->bool)
       #|  forall G:A group.\n      abelian_group G /\\ FINITE(group_carrier G)\n      ==> ?x. x IN group_carrier G /\\\n              forall y. y IN group_carrier G\n                  ==> group_element_order G y divides group_element_order G x
       #|  forall G:A group.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> ?x. x IN group_carrier G /\\\n                forall y. y IN group_carrier G\n                    ==> group_pow G y (group_element_order G x) = group_id G
       #|  forall G h x:A.\n        group_element_order (subgroup_generated G h) x =\n        group_element_order G x
       #|  forall(G:A group) (H:B group) x y.\n        x IN group_carrier G /\\ y IN group_carrier H\n        ==> group_element_order (prod_group G H) (x,y) =\n            lcm(group_element_order G x,group_element_order H y)
       #|  forall(G:A group) (H:B group) z.\n        z IN group_carrier(prod_group G H)\n        ==> group_element_order (prod_group G H) z =\n            lcm(group_element_order G (FST z),group_element_order H (SND z))
-      #|  q ==> (p <=> q ==> p)
-      #|  n:num
+      #|  (q : Bool) \226\134\146 (p : Bool) == (q \226\134\146 p)
+      #|  (n : Num)
       #|  forall(G:K->A group) k x.\n        x IN group_carrier(sum_group k G)\n        ==> (group_element_order (sum_group k G) x =\n             iterate (\\m n. lcm(m,n)) k\n                     (\\i. group_element_order (G i) (x i)))
       #|  (q ==> r ==> s) ==> (p /\\ q) /\\ r ==> (s /\\ t <=> t)
       #|  forall G k (x:K->A).\n        x IN group_carrier (sum_group k G)\n        ==> (group_element_order (sum_group k G) x = 0 <=>\n             ?i. i IN k /\\ group_element_order (G i) (x i) = 0)
-      #|  coprime(&m:int,&n)
-      #|  b * &n + a * &m:int = &1
-      #|  a * &m:int
-      #|  b * &n:int
-      #|  b:int
-      #|  a:int
-      #|  forall m n:int. coprime(m,n) ==> ?a b. b * n + a * m = &1
+      #|  coprime((int_of_num((m : Num)), int_of_num((n : Num))))
+      #|  (b : Int) * int_of_num((n : Num)) + (a : Int) * int_of_num((m : Num)) == int_of_num(1)
+      #|  (a : Int) * int_of_num((m : Num))
+      #|  (b : Int) * int_of_num((n : Num))
+      #|  (b : Int)
+      #|  (a : Int)
+      #|  \226\136\128 m : Int, \226\136\128 n : Int, coprime((m, n)) \226\134\146 (\226\136\131 a : Int, \226\136\131 b : Int, b * n + a * m == int_of_num(1))
       #|  forall G (x:A) m n.\n        coprime(m,n) /\\\n        x IN group_carrier G /\\\n        group_element_order G x = m * n\n        ==> ?r s. group_element_order G (group_zpow G x r) = m /\\\n                  group_element_order G (group_zpow G x s) = n /\\\n                  group_mul G (group_zpow G x r) (group_zpow G x s) = x
       #|  x = group_id G /\\ y = group_id G ==> group_mul G x y = group_id G
       #|  group_mul G (group_inv G x') x = group_mul G y' (group_inv G y) <=>\n    group_mul G x y = group_mul G x' y'
       #|  coprime(m,n) /\\ x IN group_carrier G /\\ y IN group_carrier G /\\ x = y /\\\n      group_pow G x m = group_id G /\\ group_pow G y n = group_id G\n      ==> x = group_id G /\\ y = group_id G
       #|  group_mul G (group_inv G x:A) (group_zpow G z r) = group_id G /\\\n    group_mul G y (group_inv G (group_zpow G z s)) = group_id G
-      #|  y:A
-      #|  x:A
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  group_zpow G (z:A) s
-      #|  group_zpow G (z:A) r
-      #|  s:int
-      #|  r:int
+      #|  (y : A)
+      #|  (x : A)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  group_zpow((G : Group[A]), (z : A), (s : Int))
+      #|  group_zpow((G : Group[A]), (z : A), (r : Int))
+      #|  (s : Int)
+      #|  (r : Int)
       #|  forall G (z:A) m n.\n        coprime(m,n) /\\\n        z IN group_carrier G /\\\n        group_element_order G z = m * n\n        ==> ?!(x,y). x IN group_carrier G /\\ y IN group_carrier G /\\\n                     group_mul G x y = z /\\\n                     group_mul G y x = z /\\\n                     group_element_order G x = m /\\\n                     group_element_order G y = n
       #|  forall G (z:A) m n.\n        coprime(m,n) /\\\n        z IN group_carrier G /\\\n        group_element_order G z = m * n\n        ==> ?x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                  group_mul G x y = z /\\\n                  group_mul G y x = z /\\\n                  group_element_order G x = m /\\\n                  group_element_order G y = n
       #|  coprime(m:num,n) /\\ d divides m * n ==> gcd(d,m) * gcd(d,n) = d
-      #|  coprime(m:num,n) ==> coprime(gcd(d,m),gcd(d,n))
-      #|  gcd(group_element_order G (z:A),n)
-      #|  gcd(group_element_order G (z:A),m)
-      #|  z:A
-      #|  G:A group
+      #|  coprime(((m : Num), (n : Num))) \226\134\146 coprime((gcd(((d : Num), m)), gcd((d, n))))
+      #|  gcd((group_element_order((G : Group[A]), (z : A)), (n : Num)))
+      #|  gcd((group_element_order((G : Group[A]), (z : A)), (m : Num)))
+      #|  (z : A)
+      #|  (G : Group[A])
       #|  forall G (z:A) m n.\n        coprime(m,n) /\\\n        z IN group_carrier G /\\\n        group_element_order G z divides m * n\n        ==> ?x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                  group_mul G x y = z /\\\n                  group_mul G y x = z /\\\n                  group_element_order G x divides m /\\\n                  group_element_order G y divides n
       #|  forall G (z:A) m n.\n        coprime(m,n) /\\\n        z IN group_carrier G /\\\n        group_pow G z (m * n) = group_id G\n        ==> ?x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                  group_mul G x y = z /\\\n                  group_mul G y x = z /\\\n                  group_pow G x m = group_id G /\\\n                  group_pow G y n = group_id G
       #|  ~
@@ -25058,15 +25058,15 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  ~
       #|  \\/
       #|  F
-      #|  n:num
-      #|  p EXP k
-      #|  z:A
-      #|  G:A group
-      #|  n:num
-      #|  prime p ==> ~(p = 1)
-      #|  k = index p (group_element_order G (z:A))
-      #|  p:num
-      #|  group_element_order G (z:A)
+      #|  (n : Num)
+      #|  EXP((p : Num), (k : Num))
+      #|  (z : A)
+      #|  (G : Group[A])
+      #|  (n : Num)
+      #|  prime((p : Num)) \226\134\146 !(p == 1)
+      #|  (k : Num) == index((p : Num), group_element_order((G : Group[A]), (z : A)))
+      #|  (p : Num)
+      #|  group_element_order((G : Group[A]), (z : A))
       #|  forall G (z:A) p.\n        prime p /\\\n        z IN group_carrier G /\\\n        ~(group_element_order G z = 0)\n        ==> ?x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                  group_mul G x y = z /\\\n                  group_mul G y x = z /\\\n                  (?k. group_element_order G x = p EXP k) /\\\n                  coprime(p,group_element_order G y)
       #|  forall P G:A group.\n        abelian_group G /\\\n        P 1 /\\ (forall m n p. p divides lcm(m,n) /\\ P m /\\ P n ==> P p)\n        ==> {x | x IN group_carrier G /\\ P(group_element_order G x)}\n            subgroup_of G
       #|  forall P G:A group.\n        abelian_group G /\\\n        P 1 /\\ (forall m n p. p divides m * n /\\ P m /\\ P n ==> P p)\n        ==> {x | x IN group_carrier G /\\ P(group_element_order G x)}\n            subgroup_of G
@@ -25074,219 +25074,219 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall(G:A group) Q.\n        abelian_group G\n        ==> {x | x IN group_carrier G /\\\n                 forall p. prime p /\\ p divides group_element_order G x\n                     ==> Q p}\n            subgroup_of G
       #|  forall(G:A group) p.\n        abelian_group G /\\ prime p\n        ==> {x | x IN group_carrier G /\\ ?k. group_element_order G x = p EXP k}\n            subgroup_of G
       #|  forall(G:A group) n.\n        abelian_group G\n        ==> {x | x IN group_carrier G /\\ group_element_order G x divides n}\n            subgroup_of G
-      #|  n:num
+      #|  (n : Num)
       #|  forall(G:A group) n.\n        abelian_group G\n        ==> {x | x IN group_carrier G /\\ group_pow G x n = group_id G}\n            subgroup_of G
-      #|  prime p ==> ~(p = 1)
+      #|  prime((p : Num)) \226\134\146 !(p == 1)
       #|  forall(G:A group) p.\n        abelian_group G /\\ prime p\n        ==> {x | x IN group_carrier G /\\\n                 ~(p divides group_element_order G x)}\n            subgroup_of G
       #|  forall(G:A group) n.\n        abelian_group G\n        ==> {x | x IN group_carrier G /\\\n                 coprime(n,group_element_order G x)}\n            subgroup_of G
-      #|  n <= 1 <=> n = 0 \\/ n = 1
+      #|  ((n : Num) <= 1) == (n == 0 || n == 1)
       #|  forall G:A group.\n        (forall x. x IN group_carrier G ==> group_element_order G x <= 1) <=>\n        (forall x. x IN group_carrier G /\\ ~(x = group_id G)\n             ==> group_element_order G x = 0)
       #|  forall G:A group.\n        (forall x. x IN group_carrier G ==> group_element_order G x <= 1) <=>\n        (forall x n. x IN group_carrier G /\\ group_pow G x n = group_id G\n               ==> x = group_id G \\/ n = 0)
       #|  forall(G:A group) n x k.\n        n normal_subgroup_of G /\\ x IN group_carrier G\n        ==> (group_pow (quotient_group G n) (right_coset G n x) k =\n             group_id (quotient_group G n) <=>\n             group_pow G x k IN n)
       #|  forall(G:A group) H.\n        abelian_group G /\\\n        quotient_group\n          G {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)} = H\n        ==> forall x. x IN group_carrier H ==> group_element_order H x <= 1
-      #|  group_conjugation G (group_inv G a:A)
+      #|  group_conjugation((G : Group[A]), group_inv(G, (a : A)))
       #|  forall g. (forall x. x IN s ==> f x IN s /\\ g(f x) = x) /\\\n        (forall x. x IN s ==> g x IN s /\\ f(g x) = x)\n        ==> IMAGE f s = s
       #|  forall G P a:A.\n        a IN group_carrier G\n        ==> IMAGE (group_conjugation G a)\n                  {x | x IN group_carrier G /\\ P(group_element_order G x)} =\n            {x | x IN group_carrier G /\\ P(group_element_order G x)}
       #|  forall P G:A group.\n        {x | x IN group_carrier G /\\ P(group_element_order G x)}\n        normal_subgroup_of G <=>\n        {x | x IN group_carrier G /\\ P(group_element_order G x)}\n        subgroup_of G
       #|  forall G:A group.\n        {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)}\n        normal_subgroup_of G <=>\n        {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)}\n        subgroup_of G
       #|  forall G (x:A).\n      x IN group_carrier G ==> {group_zpow G x n | n IN (:int)} subgroup_of G
-      #|  m:num
-      #|  m:num
-      #|  m:num
-      #|  n:int
-      #|  n:int
-      #|  {x:A}
-      #|  G:A group
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (n : Int)
+      #|  (n : Int)
+      #|  {(x : A)}
+      #|  (G : Group[A])
       #|  forall G x:A.\n        x IN group_carrier G\n        ==> group_carrier(subgroup_generated G {x}) =\n            {group_zpow G x n | n IN (:int)}
       #|  cyclic_group G <=>\n        ?x. x IN group_carrier G /\\ subgroup_generated G {x} = G
       #|  (forall x. P x ==> (Q x <=> R x))\n    ==> ((?x. P x /\\ Q x) <=> (?x. P x /\\ R x))
       #|  forall G:A group.\n        cyclic_group G <=>\n        ?x. x IN group_carrier G /\\\n            group_carrier G = {group_zpow G x n | n IN (:int)}
-      #|  forall G:A group. cyclic_group G ==> abelian_group G
-      #|  group_id G:A
-      #|  forall G:A group. trivial_group G ==> cyclic_group G
-      #|  (a:A) IN group_carrier G
-      #|  a:A
+      #|  \226\136\128 G : Group[A], cyclic_group(G) \226\134\146 abelian_group(G)
+      #|  group_id((G : Group[A]))
+      #|  \226\136\128 G : Group[A], trivial_group(G) \226\134\146 cyclic_group(G)
+      #|  IN((a : A), group_carrier((G : Group[A])))
+      #|  (a : A)
       #|  forall G:A group. cyclic_group G <=> ?x. subgroup_generated G {x} = G
-      #|  x:A
-      #|  forall G x:A. cyclic_group(subgroup_generated G {x})
-      #|  t = IMAGE f s ==> forall x. x IN s ==> f x IN t
-      #|  (f:A->B) x
-      #|  x:A
+      #|  (x : A)
+      #|  \226\136\128 G : Group[A], \226\136\128 x : A, cyclic_group(subgroup_generated(G, {x}))
+      #|  (t : (_) -> Bool) == IMAGE((f : (_) -> _), (s : (_) -> Bool)) \226\134\146 (\226\136\128 x : _, IN(x, s) \226\134\146 IN(f(x), t))
+      #|  (f : (A) -> B)((x : A))
+      #|  (x : A)
       #|  forall G H (f:A->B).\n        group_epimorphism(G,H) f /\\ cyclic_group G ==> cyclic_group H
       #|  forall(G:A group) (H:B group).\n        G isomorphic_group H ==> (cyclic_group G <=> cyclic_group H)
-      #|  &m:int = --(&k * q) + (q * &k + &m)
-      #|  p ==> ~p ==> q
-      #|  m:num
-      #|  m = 0
-      #|  q:int
-      #|  m:num
-      #|  p /\\ q /\\ r ==> s <=> q ==> r /\\ p ==> s
-      #|  r:int
-      #|  m rem &k
-      #|  q:int
-      #|  m div &k
-      #|  &k:int
-      #|  m:int
-      #|  m:int
+      #|  int_of_num((m : Num)) == -(int_of_num((k : Num)) * (q : Int)) + (q * int_of_num(k) + int_of_num(m))
+      #|  (p : Bool) \226\134\146 !p \226\134\146 (q : Bool)
+      #|  (m : Num)
+      #|  (m : Num) == 0
+      #|  (q : Int)
+      #|  (m : Num)
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (q \226\134\146 r && p \226\134\146 s)
+      #|  (r : Int)
+      #|  rem((m : Int), int_of_num((k : Num)))
+      #|  (q : Int)
+      #|  div((m : Int), int_of_num((k : Num)))
+      #|  int_of_num((k : Num))
+      #|  (m : Int)
+      #|  (m : Int)
       #|  h SUBSET {f x | x IN s} ==> (forall x. f x IN h ==> P(f x))\n   ==> forall y. y IN h ==> P y
-      #|  group_pow G x k:A
-      #|  subgroup_generated G (h:A->bool)
-      #|  q /\\ (q ==> p) ==> p /\\ q
-      #|  (p ==> ~(q /\\ r)) <=> q /\\ p ==> ~r
-      #|  k:num
-      #|  num_of_int(abs n)
-      #|  n:int
+      #|  group_pow((G : Group[A]), (x : A), (k : Num))
+      #|  subgroup_generated((G : Group[A]), (h : (A) -> Bool))
+      #|  (q : Bool) && (q \226\134\146 (p : Bool)) \226\134\146 p && q
+      #|  ((p : Bool) \226\134\146 !((q : Bool) && (r : Bool))) == (q && p \226\134\146 !r)
+      #|  (k : Num)
+      #|  num_of_int(abs((n : Int)))
+      #|  (n : Int)
       #|  h SUBSET {f x | x IN (:int)} ==> ~(h SUBSET {f(&0)})\n      ==> ?n. ~(n = &0) /\\ f n IN h
-      #|  ?n. 0 < n /\\ group_pow G (x:A) n IN h
-      #|  {a |x| x IN UNIV} = {a}
+      #|  \226\136\131 n : Num, 0 < n && IN(group_pow((G : Group[A]), (x : A), n), (h : (A) -> Bool))
+      #|  {(a : _) | x : _ | IN(x, UNIV)} == {a}
       #|  0
-      #|  h SUBSET {group_zpow G (x:A) (&0)}
-      #|  (h:A->bool) subgroup_of G
+      #|  SUBSET((h : (A) -> Bool), {group_zpow((G : Group[A]), (x : A), int_of_num(0))})
+      #|  subgroup_of((h : (A) -> Bool), (G : Group[A]))
       #|  forall G h x:A.\n        x IN group_carrier G /\\ h subgroup_of (subgroup_generated G {x})\n        ==> ?k. h = {group_zpow G x (&k * n) | n IN (:int)}
-      #|  m div (&k)
-      #|  &1:int
-      #|  group_zpow G x (&k):A
-      #|  k:num
-      #|  x:A
-      #|  h:A->bool
-      #|  G:A group
-      #|  x:A
+      #|  div((m : Int), int_of_num((k : Num)))
+      #|  int_of_num(1)
+      #|  group_zpow((G : Group[A]), (x : A), int_of_num((k : Num)))
+      #|  (k : Num)
+      #|  (x : A)
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  (x : A)
       #|  forall G h:A->bool.\n        cyclic_group G /\\ h subgroup_of G\n        ==> cyclic_group(subgroup_generated G h)
       #|  forall G n:A->bool.\n     cyclic_group G /\\ n subgroup_of G ==> cyclic_group(quotient_group G n)
-      #|  a:A
-      #|  ~p ==> p \\/ q ==> q
-      #|  group_carrier (subgroup_generated G {a:A})
-      #|  a:A
-      #|  ~(s SUBSET {a}) <=> ?x. x IN s /\\ ~(x = a)
-      #|  trivial_group(G:A group)
+      #|  (a : A)
+      #|  !(p : Bool) \226\134\146 p || (q : Bool) \226\134\146 q
+      #|  group_carrier(subgroup_generated((G : Group[A]), {(a : A)}))
+      #|  (a : A)
+      #|  !SUBSET((s : (_) -> Bool), {(a : _)}) == (\226\136\131 x : _, IN(x, s) && !(x == a))
+      #|  trivial_group((G : Group[A]))
       #|  forall G:A group.\n        (forall h. h subgroup_of G ==> h SUBSET {group_id G} \\/ h = group_carrier G)\n        ==> cyclic_group G
-      #|  m:num
-      #|  m:num
-      #|  b:int
-      #|  a rem &n
-      #|  &n:int
-      #|  a:int
-      #|  a:int
-      #|  IMAGE (group_pow G (x:A)) (0..n)
-      #|  num_of_int(abs n)
-      #|  n:int
-      #|  ?n. ~(n = 0) /\\ group_pow G (x:A) n = group_id G
-      #|  num_of_int(n - m)
-      #|  n:int
-      #|  m:int
-      #|  (:num)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (b : Int)
+      #|  rem((a : Int), int_of_num((n : Num)))
+      #|  int_of_num((n : Num))
+      #|  (a : Int)
+      #|  (a : Int)
+      #|  IMAGE(group_pow((G : Group[A]), (x : A)), op_dot_dot(0, (n : Num)))
+      #|  num_of_int(abs((n : Int)))
+      #|  (n : Int)
+      #|  \226\136\131 n : Num, !(n == 0) && group_pow((G : Group[A]), (x : A), n) == group_id(G)
+      #|  num_of_int((n : Int) - (m : Int))
+      #|  (n : Int)
+      #|  (m : Int)
+      #|  (UNIV : (Num) -> Bool)
       #|  (r ==> ~p) /\\ (r' ==> r) /\\ (~r' ==> q) /\\ (q ==> q') /\\ (q' ==> p)\n    ==> (p <=> q) /\\ (~p <=> r) /\\ (p <=> q') /\\ (~p <=> r')
-      #|  (x:A) IN group_carrier G
+      #|  IN((x : A), group_carrier((G : Group[A])))
       #|  (forall G x:A.\n        x IN group_carrier G\n        ==> (FINITE(group_carrier(subgroup_generated G {x})) <=>\n             ?n. ~(n = 0) /\\ group_pow G x n = group_id G)) /\\\n   (forall G x:A.\n        x IN group_carrier G\n        ==> (INFINITE(group_carrier(subgroup_generated G {x})) <=>\n             forall m n. group_pow G x m = group_pow G x n ==> m = n)) /\\\n   (forall G x:A.\n        x IN group_carrier G\n        ==> (FINITE(group_carrier(subgroup_generated G {x})) <=>\n             ?n. ~(n = &0) /\\ group_zpow G x n = group_id G)) /\\\n   (forall G x:A.\n        x IN group_carrier G\n        ==> (INFINITE(group_carrier(subgroup_generated G {x})) <=>\n             forall m n. group_zpow G x m = group_zpow G x n ==> m = n))
       #|  forall G x:A.\n        x IN group_carrier G\n        ==> (FINITE(group_carrier(subgroup_generated G {x})) <=>\n             ~(group_element_order G x = 0))
       #|  forall G x:A.\n        x IN group_carrier G\n        ==> (INFINITE (group_carrier(subgroup_generated G {x})) <=>\n             group_element_order G x = 0)
-      #|  num_of_int r
-      #|  r:int
-      #|  n rem &(group_element_order G (x:A))
-      #|  q:int
-      #|  n div &(group_element_order G (x:A))
-      #|  &(group_element_order G (x:A)):int
-      #|  n:int
-      #|  n:int
+      #|  num_of_int((r : Int))
+      #|  (r : Int)
+      #|  rem((n : Int), int_of_num(group_element_order((G : Group[A]), (x : A))))
+      #|  (q : Int)
+      #|  div((n : Int), int_of_num(group_element_order((G : Group[A]), (x : A))))
+      #|  int_of_num(group_element_order((G : Group[A]), (x : A)))
+      #|  (n : Int)
+      #|  (n : Int)
       #|  forall G x:A.\n        FINITE(group_carrier(subgroup_generated G {x})) /\\ x IN group_carrier G\n        ==> group_carrier(subgroup_generated G {x}) =\n            {group_pow G x n |n| n < group_element_order G x}
-      #|  (?n:int. (a == b * n) (mod (&0))) <=> b divides a
-      #|  group_pow G (x:A) m
-      #|  forall a. a IN s /\\ ~(a IN t) ==> s = t ==> P
-      #|  n:num
-      #|  m:num
+      #|  (\226\136\131 n : Int, op_eq_eq((a : Int), (b : Int) * n, mod(int_of_num(0)))) == divides(b, a)
+      #|  group_pow((G : Group[A]), (x : A), (m : Num))
+      #|  \226\136\128 a : _, IN(a, (s : (_) -> Bool)) && !IN(a, (t : (_) -> Bool)) \226\134\146 s == t \226\134\146 (P : Bool)
+      #|  (n : Num)
+      #|  (m : Num)
       #|  IMAGE (\\n. group_carrier(subgroup_generated G {group_pow G (x:A) n}))\n          ((:num) DELETE 0)
-      #|  FINITE s ==> INFINITE s ==> F
-      #|  x:A
-      #|  x:A
-      #|  x:A
+      #|  FINITE((s : (_) -> Bool)) \226\134\146 INFINITE(s) \226\134\146 false
+      #|  (x : A)
+      #|  (x : A)
+      #|  (x : A)
       #|  group_carrier G:A->bool =\n    UNIONS {group_carrier(subgroup_generated G {x}) |x| x IN group_carrier G}
       #|  forall G:A group. FINITE {h | h subgroup_of G} <=> FINITE(group_carrier G)
       #|  forall G x:A.\n        FINITE(group_carrier(subgroup_generated G {x})) /\\ x IN group_carrier G\n        ==> CARD(group_carrier(subgroup_generated G {x})) =\n            group_element_order G x
-      #|  CARD {group_id G:A,x}
-      #|  2 <= n ==> ~(n = 1)
-      #|  h:A->bool
-      #|  G:A group
-      #|  x:A
+      #|  CARD({group_id((G : Group[A])), (x : A)})
+      #|  2 <= (n : Num) \226\134\146 !(n == 1)
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  (x : A)
       #|  z IN s /\\ (forall x. x IN s /\\ ~(x = z) ==> s = t) ==> s = {z} \\/ s = t
-      #|  p ==> q \\/ r <=> p /\\ ~q ==> r
+      #|  ((p : Bool) \226\134\146 (q : Bool) || (r : Bool)) == (p && !q \226\134\146 r)
       #|  forall(G:A group) p.\n        (group_carrier G) HAS_SIZE p /\\ (p = 1 \\/ prime p)\n        ==> forall h. h subgroup_of G\n                ==> h = {group_id G} \\/ h = group_carrier G
-      #|  CARD:(A->bool)->num
+      #|  (CARD : ((A) -> Bool) -> Num)
       #|  FINITE(group_carrier (subgroup_generated G {group_pow G x m:A}))
-      #|  r:num
-      #|  CARD(group_carrier G:A->bool) DIV n = m
-      #|  group_element_order G (group_pow G (x:A) m) = n
+      #|  (r : Num)
+      #|  DIV(CARD(group_carrier((G : Group[A]))), (n : Num)) == (m : Num)
+      #|  group_element_order((G : Group[A]), group_pow(G, (x : A), (m : Num))) == (n : Num)
       #|  group_carrier(subgroup_generated G {group_pow G x m:A})
-      #|  ~(m = 0)
-      #|  m = CARD(group_carrier(G:A group)) DIV n
-      #|  0 divides n <=> n = 0
-      #|  n = 0
-      #|  n:num
-      #|  n:int <= &0 \\/ &1 <= n ==> ~(&2 * n = &1)
-      #|  &1:int
-      #|  &2 * n:int
-      #|  n:int
-      #|  x:A
-      #|  &0:int
-      #|  &2 * &1:int
-      #|  {f n | n IN (:int)} = {a} ==> f(&1) = a
+      #|  !((m : Num) == 0)
+      #|  (m : Num) == DIV(CARD(group_carrier((G : Group[A]))), (n : Num))
+      #|  divides(0, (n : Num)) == (n == 0)
+      #|  (n : Num) == 0
+      #|  (n : Num)
+      #|  (n : Int) <= int_of_num(0) || int_of_num(1) <= n \226\134\146 !(int_of_num(2) * n == int_of_num(1))
+      #|  int_of_num(1)
+      #|  int_of_num(2) * (n : Int)
+      #|  (n : Int)
+      #|  (x : A)
+      #|  int_of_num(0)
+      #|  int_of_num(2) * int_of_num(1)
+      #|  {(f : (Int) -> _)((n : Int)) | IN(n, UNIV)} == {(a : _)} \226\134\146 f(int_of_num(1)) == a
       #|  {group_zpow G (group_zpow G (x:A) (&2)) n | n IN (:int)}
-      #|  (~p <=> q) ==> ~q ==> p
-      #|  x:A
-      #|  G:A group
-      #|  x:A
+      #|  !(p : Bool) == (q : Bool) \226\134\146 !q \226\134\146 p
+      #|  (x : A)
+      #|  (G : Group[A])
+      #|  (x : A)
       #|  (p ==> n) /\\ (n ==> c) /\\ (c /\\ n ==> p)\n    ==> (p <=> n) /\\ (n <=> c /\\ p)
       #|  (forall(G:A group).\n        FINITE(group_carrier G) /\\\n        (CARD(group_carrier G) = 1 \\/ prime(CARD(group_carrier G))) <=>\n        forall h. h subgroup_of G ==> h = {group_id G} \\/ h = group_carrier G) /\\\n   (forall(G:A group).\n        (forall h. h subgroup_of G ==> h = {group_id G} \\/ h = group_carrier G) <=>\n        cyclic_group G /\\\n        FINITE(group_carrier G) /\\\n        (CARD(group_carrier G) = 1 \\/ prime(CARD(group_carrier G))))
       #|  forall G:A group.\n        abelian_group G\n        ==> ((forall h. h normal_subgroup_of G\n                  ==> h = {group_id G} \\/ h = group_carrier G) <=>\n             FINITE(group_carrier G) /\\\n             (CARD (group_carrier G) = 1 \\/ prime(CARD(group_carrier G))))
       #|  forall G:A group.\n        FINITE(group_carrier G) /\\\n        (CARD(group_carrier G) = 1 \\/ prime(CARD(group_carrier G)))\n        ==> cyclic_group G
       #|  forall G x:A.\n        x IN group_carrier G /\\ FINITE(group_carrier G)\n        ==> (group_element_order G x) divides CARD(group_carrier G)
       #|  forall G x:A.\n        x IN group_carrier G /\\ FINITE(group_carrier G)\n        ==> group_pow G x (CARD(group_carrier G)) = group_id G
-      #|  &(CARD(group_carrier G:A->bool)):int
+      #|  int_of_num(CARD(group_carrier((G : Group[A]))))
       #|  forall d:int. (x == y) (mod d) /\\ e divides d ==> (x == y) (mod e)
       #|  forall G (x:A) n.\n        FINITE(group_carrier G) /\\ x IN group_carrier G\n        ==> group_zpow G x (n rem &(CARD(group_carrier G))) =\n            group_zpow G x n
       #|  forall G (x:A) n. FINITE(group_carrier G) /\\ x IN group_carrier G\n           ==> group_pow G x (n MOD CARD(group_carrier G)) =\n               group_pow G x n
-      #|  a:A
-      #|  G:A group
-      #|  gcd(k,CARD(group_carrier G:A->bool))
-      #|  k:num
-      #|  a:A
-      #|  h:A->bool
-      #|  G:A group
+      #|  (a : A)
+      #|  (G : Group[A])
+      #|  gcd(((k : Num), CARD(group_carrier((G : Group[A])))))
+      #|  (k : Num)
+      #|  (a : A)
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
       #|  forall G h a:A.\n        FINITE(group_carrier G) /\\\n        a IN group_carrier G /\\\n        subgroup_generated G {a} = G\n        ==> (h subgroup_of G <=>\n             ?d. d divides CARD(group_carrier G) /\\\n                 h = group_carrier(subgroup_generated G {group_pow G a d}))
       #|  g DIV k2 = g DIV k1\n      ==> g DIV k1 * k1 = g /\\ g DIV k2 * k2 = g /\\ ~(g = 0)\n          ==> k1 = k2
-      #|  k divides g ==> gcd(g:num,k) = k
-      #|  k2:num
-      #|  k1:num
-      #|  (p /\\ q) /\\ r <=> q /\\ p /\\ r
-      #|  k divides g ==> gcd(g:num,k) = k
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  k:num
-      #|  (p /\\ q) /\\ r <=> q /\\ p /\\ r
-      #|  a:A
-      #|  h:A->bool
-      #|  G:A group
-      #|  h:A->bool
+      #|  divides((k : Num), (g : Num)) \226\134\146 gcd((g, k)) == k
+      #|  (k2 : Num)
+      #|  (k1 : Num)
+      #|  (((p : Bool) && (q : Bool)) && (r : Bool)) == (q && p && r)
+      #|  divides((k : Num), (g : Num)) \226\134\146 gcd((g, k)) == k
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (k : Num)
+      #|  (((p : Bool) && (q : Bool)) && (r : Bool)) == (q && p && r)
+      #|  (a : A)
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  (h : (A) -> Bool)
       #|  (?x. P x) /\\ (forall x. P x ==> forall x'. P x' ==> x = x')\n    ==> ?a. {x | P x} = {a}
-      #|  a:A
-      #|  G:A group
-      #|  ~(d * k = 0)
-      #|  k:num
-      #|  s HAS_SIZE 1 ==> CARD s = 1
-      #|  a:A
+      #|  (a : A)
+      #|  (G : Group[A])
+      #|  !((d : Num) * (k : Num) == 0)
+      #|  (k : Num)
+      #|  HAS_SIZE((s : (_) -> Bool), 1) \226\134\146 CARD(s) == 1
+      #|  (a : A)
       #|  forall(G:A group) d.\n        FINITE(group_carrier G) /\\ cyclic_group G\n        ==> (CARD {h | h subgroup_of G /\\ CARD h = d} =\n             if d divides CARD(group_carrier G) then 1 else 0)
-      #|  s HAS_SIZE 1
+      #|  HAS_SIZE((s : (_) -> Bool), 1)
       #|  (forall y. y IN t ==> ?a. {x | x IN s /\\ f x = y} = {a}) /\\\n    (forall y. ~(y IN t) ==> {x | x IN s /\\ f x = y} = {})\n    ==> t = IMAGE f s /\\ (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)
-      #|  CARD:(A->bool)->num
+      #|  (CARD : ((A) -> Bool) -> Num)
       #|  forall f. FINITE s /\\\n        t = IMAGE f s /\\\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> CARD s = CARD t
       #|  forall G:A group.\n      FINITE(group_carrier G) /\\ cyclic_group G\n      ==> CARD {h | h subgroup_of G} =\n          CARD {d | d divides CARD(group_carrier G)}
       #|  forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> ((forall h. h subgroup_of G /\\ n PSUBSET h ==> h = group_carrier G) <=>\n             FINITE {right_coset G n x | x | x IN group_carrier G} /\\\n             (CARD {right_coset G n x | x | x IN group_carrier G} = 1 \\/\n              prime(CARD {right_coset G n x | x | x IN group_carrier G})))
       #|  forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> (FINITE {right_coset G n x | x | x IN group_carrier G} /\\\n             prime(CARD {right_coset G n x | x | x IN group_carrier G}) <=>\n             ~(n = group_carrier G) /\\\n             forall h. h subgroup_of G /\\ n PSUBSET h ==> h = group_carrier G)
       #|  forall G n:A->bool.\n        n normal_subgroup_of G /\\ ~(n = group_carrier G)\n        ==> ((forall h. h subgroup_of G /\\ n PSUBSET h ==> h = group_carrier G) <=>\n             FINITE {right_coset G n x | x | x IN group_carrier G} /\\\n             prime(CARD {right_coset G n x | x | x IN group_carrier G}))
       #|  (a:int == b) (mod d) ==> e divides d ==> (a == b) (mod e)
-      #|  group_zpow G (x:A) (&1)
-      #|  x:A
-      #|  \\x:A. group_zpow G x m
-      #|  coprime(n:int,g) ==> ?m. (n * m == &1) (mod g)
-      #|  m:int
+      #|  group_zpow((G : Group[A]), (x : A), int_of_num(1))
+      #|  (x : A)
+      #|  (x : A) => group_zpow((G : Group[A]), x, (m : Int))
+      #|  coprime(((n : Int), (g : Int))) \226\134\146 (\226\136\131 m : Int, op_eq_eq(n * m, int_of_num(1), mod(g)))
+      #|  (m : Int)
       #|  (?g. (forall x. x IN s ==> g(f x) = x))\n    ==> forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y
       #|  forall G n x y:A.\n        FINITE(group_carrier G) /\\ coprime(n,&(CARD(group_carrier G))) /\\\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_zpow G x n = group_zpow G y n\n        ==> x = y
       #|  forall G n x y:A.\n        FINITE(group_carrier G) /\\ coprime(n,CARD(group_carrier G)) /\\\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_pow G x n = group_pow G y n\n        ==> x = y
@@ -25295,423 +25295,423 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G:A group. cyclic_group G ==> finitely_generated_group G
       #|  forall G:A group. FINITE(group_carrier G) ==> finitely_generated_group G
       #|  forall G:A group. trivial_group G ==> finitely_generated_group G
-      #|  IMAGE (f:A->B) s
-      #|  s:A->bool
+      #|  IMAGE((f : (A) -> B), (s : (A) -> Bool))
+      #|  (s : (A) -> Bool)
       #|  forall G H (f:A->B).\n        group_epimorphism(G,H) f /\\ finitely_generated_group G\n        ==> finitely_generated_group H
       #|  forall(G:A group) (H:B group).\n        G isomorphic_group H\n        ==> (finitely_generated_group G <=> finitely_generated_group H)
       #|  forall G n:A->bool.\n     finitely_generated_group G /\\ n normal_subgroup_of G\n     ==> finitely_generated_group(quotient_group G n)
       #|  forall G:A group. finitely_generated_group G ==> COUNTABLE(group_carrier G)
-      #|  t:B->bool
-      #|  (\\y. group_id G,y):B->A#B
-      #|  prod_group (G:A group) (H:B group)
-      #|  H:B group
-      #|  s:A->bool
-      #|  (\\x. x,group_id H):A->A#B
-      #|  prod_group (G:A group) (H:B group)
-      #|  G:A group
+      #|  (t : (B) -> Bool)
+      #|  (y : B) => (group_id((G : Group[A])), y)
+      #|  prod_group((G : Group[A]), (H : Group[B]))
+      #|  (H : Group[B])
+      #|  (s : (A) -> Bool)
+      #|  (x : A) => (x, group_id((H : Group[B])))
+      #|  prod_group((G : Group[A]), (H : Group[B]))
+      #|  (G : Group[A])
       #|  group_carrier(subgroup_generated G s) SUBSET\n    group_carrier(subgroup_generated G (s UNION t)) /\\\n    x IN group_carrier(subgroup_generated G s)\n    ==> x IN group_carrier(subgroup_generated G (s UNION t))
       #|  (x,y):A#B = group_mul (prod_group G H)\n                                      (x,group_id H) (group_id G,y)
-      #|  y:B
-      #|  x:A
+      #|  (y : B)
+      #|  (x : A)
       #|  IMAGE (\\x:A. (x,group_id H)) s UNION\n    IMAGE (\\y:B. (group_id G,y)) t
-      #|  t:B->bool
-      #|  s:A->bool
+      #|  (t : (B) -> Bool)
+      #|  (s : (A) -> Bool)
       #|  forall(G:A group) (H:B group).\n        finitely_generated_group(prod_group G H) <=>\n        finitely_generated_group G /\\ finitely_generated_group H
-      #|  k:K->bool
-      #|  {i | i IN k /\\ ~trivial_group ((G:K->A group) i)}
+      #|  (k : (K) -> Bool)
+      #|  {(i : K) | IN(i, (k : (K) -> Bool)) && !trivial_group((G : (K) -> Group[A])(i))}
       #|  i IN s /\\ ~P i ==> Q i <=> i IN {i | i IN s /\\ ~P i} ==> Q i
       #|  (forall i. P i ==> finitely_generated_group(G i)) <=>\n      (forall i. P i /\\ ~trivial_group(G i) ==> finitely_generated_group(G i))
-      #|  ~p ==> (p' <=> p) ==> ~(p' /\\ q)
-      #|  (~p ==> F) ==> p
-      #|  k:K->bool
-      #|  {i | i IN k /\\ ~trivial_group ((G:K->A group) i)}
+      #|  !(p : Bool) \226\134\146 (p' : Bool) == p \226\134\146 !(p' && (q : Bool))
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  (k : (K) -> Bool)
+      #|  {(i : K) | IN(i, (k : (K) -> Bool)) && !trivial_group((G : (K) -> Group[A])(i))}
       #|  forall i. i IN {i | i IN k /\\ ~trivial_group (G i)}\n          ==> ~trivial_group((G:K->A group) i)
-      #|  (p ==> q) /\\ (q ==> (p <=> r)) ==> (p <=> q /\\ r)
+      #|  ((p : Bool) \226\134\146 (q : Bool)) && (q \226\134\146 p == (r : Bool)) \226\134\146 p == (q && r)
       #|  forall k (G:K->A group).\n        finitely_generated_group(product_group k G) <=>\n        FINITE {i | i IN k /\\ ~trivial_group(G i)} /\\\n        forall i. i IN k ==> finitely_generated_group(G i)
-      #|  k:K->bool
-      #|  {i | i IN k /\\ ~trivial_group ((G:K->A group) i)}
+      #|  (k : (K) -> Bool)
+      #|  {(i : K) | IN(i, (k : (K) -> Bool)) && !trivial_group((G : (K) -> Group[A])(i))}
       #|  i IN s /\\ ~P i ==> Q i <=> i IN {i | i IN s /\\ ~P i} ==> Q i
       #|  (forall i. P i ==> finitely_generated_group(G i)) <=>\n    (forall i. P i /\\ ~trivial_group(G i) ==> finitely_generated_group(G i))
       #|  RESTRICTION k (\\j. if j = i then x else group_id((G:K->A group) j))
-      #|  (i:K) IN k
+      #|  IN((i : K), (k : (K) -> Bool))
       #|  forall f:K->A. f IN group_carrier(subgroup_generated (sum_group k G) s)\n               ==> f i = group_id(G i)
-      #|  x:A
-      #|  i:K
+      #|  (x : A)
+      #|  (i : K)
       #|  UNIONS {{i | i IN k /\\ ~((f:K->A) i = group_id(G i))} |\n                        f IN s}
-      #|  s:(K->A)->bool
-      #|  (p ==> q) /\\ (q ==> (p <=> r)) ==> (p <=> q /\\ r)
+      #|  (s : ((K) -> A) -> Bool)
+      #|  ((p : Bool) \226\134\146 (q : Bool)) && (q \226\134\146 p == (r : Bool)) \226\134\146 p == (q && r)
       #|  forall k (G:K->A group).\n        finitely_generated_group(sum_group k G) <=>\n        FINITE {i | i IN k /\\ ~trivial_group(G i)} /\\\n        forall i. i IN k ==> finitely_generated_group(G i)
-      #|  a':A->X->X
-      #|  a:A->X->X
+      #|  (a' : (A, X) -> X)
+      #|  (a : (A, X) -> X)
       #|  cartesian_product ((t:A->bool) CROSS (s:X->bool)) (\\x. s)
       #|  \\a:A->X->X. RESTRICTION (t CROSS s) (\\(g,x). a g x)
-      #|  t:A->bool
+      #|  (t : (A) -> Bool)
       #|  forall G s (f:(A->X->X)->B).\n        finitely_generated_group G /\\ FINITE s /\\\n        (forall a a'. (forall g x. g IN group_carrier G /\\ x IN s ==> a g x = a' g x)\n                ==> f a = f a')\n        ==> FINITE {f a | group_action G s a}
       #|  \\x i. (f:(A->bool)->num) (a (x:A)  ((g:num->A->bool) i))
-      #|  g:num->A->bool
-      #|  f:(A->bool)->num
-      #|  group_id G:A
-      #|  p /\\ (p ==> q ==> r) ==> (p ==> q) ==> r
+      #|  (g : (Num, A) -> Bool)
+      #|  (f : ((A) -> Bool) -> Num)
+      #|  group_id((G : Group[A]))
+      #|  (p : Bool) && (p \226\134\146 (q : Bool) \226\134\146 (r : Bool)) \226\134\146 (p \226\134\146 q) \226\134\146 r
       #|  1
-      #|  h:A->bool
-      #|  1..n
-      #|  c:(A->bool)->bool
-      #|  h:A->bool
-      #|  G:A group
-      #|  group_id G:A
-      #|  h:A->bool
-      #|  G:A group
-      #|  a = (IMAGE o group_mul (G:A group))
-      #|  c = {left_coset G x h | x | (x:A) IN group_carrier G}
-      #|  h:A->bool
+      #|  (h : (A) -> Bool)
+      #|  op_dot_dot(1, (n : Num))
+      #|  (c : ((A) -> Bool) -> Bool)
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  group_id((G : Group[A]))
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  (a : (A, (A) -> Bool, A) -> Bool) == o(IMAGE, group_mul((G : Group[A])))
+      #|  (c : ((A) -> Bool) -> Bool) == {left_coset((G : Group[A]), x, (h : (A) -> Bool)) | x : A | IN(x, group_carrier(G))}
+      #|  (h : (A) -> Bool)
       #|  { group_stabilizer (G:A group) a 1 |a| group_action G (1..n) a}
-      #|  ~(n = 0) <=> 1 <= n
-      #|  n = 0
+      #|  !((n : Num) == 0) == (1 <= n)
+      #|  (n : Num) == 0
       #|  forall(G:A group) n.\n     finitely_generated_group G\n     ==> FINITE {h | h subgroup_of G /\\\n                     {right_coset G h x |x| x IN group_carrier G} HAS_SIZE n}
       #|  h INTER\n    group_setmul G t (group_setmul G s (group_setinv G t)):A->bool
-      #|  group_id G:A
-      #|  (x:A) IN h
-      #|  x:A
-      #|  (group_id G:A) INSERT (t DIFF h)
-      #|  UNIONS:((A->bool)->bool)->A->bool
-      #|  t:A->bool
+      #|  group_id((G : Group[A]))
+      #|  IN((x : A), (h : (A) -> Bool))
+      #|  (x : A)
+      #|  INSERT(group_id((G : Group[A])), DIFF((t : (A) -> Bool), (h : (A) -> Bool)))
+      #|  (UNIONS : (((A) -> Bool) -> Bool, A) -> Bool)
+      #|  (t : (A) -> Bool)
       #|  ?t:A->bool. FINITE t /\\\n                t SUBSET group_carrier G /\\\n                UNIONS {right_coset G h x | x IN t} = group_carrier G /\\\n                t INTER h SUBSET {group_id G}
-      #|  s UNION group_setinv G (s:A->bool)
-      #|  s:A->bool
+      #|  UNION((s : (A) -> Bool), group_setinv((G : Group[A]), s))
+      #|  (s : (A) -> Bool)
       #|  ?s:A->bool. FINITE s /\\\n                s SUBSET group_carrier G /\\\n                subgroup_generated G s = G /\\\n                (forall x. x IN s ==> group_inv G x IN s)
       #|  forall G h:A->bool.\n        finitely_generated_group G /\\\n        h subgroup_of G /\\\n        FINITE {right_coset G h x | x | x IN group_carrier G}\n        ==> finitely_generated_group(subgroup_generated G h)
-      #|  s SUBSET t ==> x IN s ==> x IN t
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 IN((x : _), s) \226\134\146 IN(x, t)
+      #|  IN((y : A), group_carrier(subgroup_generated((G : Group[A]), (t : (A) -> Bool))))
+      #|  (z : A) == group_mul((G : Group[A]), group_inv(G, (y : A)), (x : A))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 IN((x : _), s) \226\134\146 IN(x, t)
+      #|  group_carrier(subgroup_generated((G : Group[A]), {(b : A)}))
+      #|  \226\136\128 s : (_) -> Bool, SUBSET(s, (t : (_) -> Bool)) && IN((z : _), s) \226\134\146 IN(z, t)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 IN((x : _), s) \226\134\146 IN(x, t)
       #|  (y:A) IN group_carrier (subgroup_generated G t)
-      #|  z:A = group_mul G (group_inv G y) x
-      #|  s SUBSET t ==> x IN s ==> x IN t
-      #|  group_carrier (subgroup_generated G {b:A})
-      #|  forall s. s SUBSET t /\\ z IN s ==> z IN t
-      #|  s SUBSET t ==> x IN s ==> x IN t
-      #|  (y:A) IN group_carrier (subgroup_generated G t)
-      #|  z:A
-      #|  y:A
-      #|  h:A->bool
-      #|  right_coset G (c:A->bool)
-      #|  G':(A->bool) group
-      #|  G:A group
-      #|  t:A->bool
-      #|  right_coset G (c:A->bool)
-      #|  G':(A->bool) group
-      #|  G:A group
-      #|  {x | P x} = s ==> forall x. P x ==> x IN s
-      #|  x:A
+      #|  (z : A)
+      #|  (y : A)
+      #|  (h : (A) -> Bool)
+      #|  right_coset((G : Group[A]), (c : (A) -> Bool))
+      #|  (G' : Group[(A) -> Bool])
+      #|  (G : Group[A])
+      #|  (t : (A) -> Bool)
+      #|  right_coset((G : Group[A]), (c : (A) -> Bool))
+      #|  (G' : Group[(A) -> Bool])
+      #|  (G : Group[A])
+      #|  {(x : _) | (P : (_) -> Bool)(x)} == (s : (_) -> Bool) \226\134\146 (\226\136\128 x : _, P(x) \226\134\146 IN(x, s))
+      #|  (x : A)
       #|  group_carrier (subgroup_generated G t):A->bool
-      #|  right_coset G (c:A->bool)
-      #|  G':(A->bool) group
-      #|  G:A group
-      #|  (x:A) IN group_carrier G
-      #|  x:A
-      #|  CARD(t:A->bool) < n
-      #|  (b:A) INSERT t
+      #|  right_coset((G : Group[A]), (c : (A) -> Bool))
+      #|  (G' : Group[(A) -> Bool])
+      #|  (G : Group[A])
+      #|  IN((x : A), group_carrier((G : Group[A])))
+      #|  (x : A)
+      #|  CARD((t : (A) -> Bool)) < (n : Num)
+      #|  INSERT((b : A), (t : (A) -> Bool))
       #|  group_carrier(subgroup_generated G h):A->bool
-      #|  ~(b IN h) ==> s SUBSET h ==> s INTER {b} SUBSET t
+      #|  !IN((b : _), (h : (_) -> Bool)) \226\134\146 SUBSET((s : (_) -> Bool), h) \226\134\146 SUBSET(INTER(s, {b}), (t : (_) -> Bool))
       #|  u SUBSET s /\\ t SUBSET v ==> s SUBSET t ==> u SUBSET v
       #|  u SUBSET s /\\ t SUBSET v ==> s SUBSET t ==> u SUBSET v
-      #|  (b:A) IN group_carrier G
-      #|  (b:A) IN h
-      #|  b:A
+      #|  IN((b : A), group_carrier((G : Group[A])))
+      #|  IN((b : A), (h : (A) -> Bool))
+      #|  (b : A)
       #|  group_carrier(subgroup_generated G {a:A}) INTER h
-      #|  subgroup_generated G {a:A}
+      #|  subgroup_generated((G : Group[A]), {(a : A)})
       #|  ?b:A. b IN group_carrier G /\\ b IN h /\\\n          group_carrier(subgroup_generated G {a}) INTER h\n          SUBSET group_carrier(subgroup_generated G {b})
-      #|  t:A->bool
-      #|  (forall x. x IN s ==> f x = x) ==> IMAGE f s = s
-      #|  IMAGE (f:(A->bool)->A) h'
-      #|  g:A->(A->bool)
-      #|  G':(A->bool)group
-      #|  G'':A group
-      #|  t:A->bool
-      #|  g:A->(A->bool)
-      #|  G':(A->bool)group
-      #|  G'':A group
-      #|  (forall x. x IN s ==> f x = x) ==> IMAGE f s = s
-      #|  s = t ==> s SUBSET t
-      #|  IMAGE (f:(A->bool)->A) h'
-      #|  g:A->(A->bool)
-      #|  G':(A->bool)group
-      #|  G'':A group
+      #|  (t : (A) -> Bool)
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> _)(x) == x) \226\134\146 IMAGE(f, s) == s
+      #|  IMAGE((f : ((A) -> Bool) -> A), (h' : ((A) -> Bool) -> Bool))
+      #|  (g : (A, A) -> Bool)
+      #|  (G' : Group[(A) -> Bool])
+      #|  (G'' : Group[A])
+      #|  (t : (A) -> Bool)
+      #|  (g : (A, A) -> Bool)
+      #|  (G' : Group[(A) -> Bool])
+      #|  (G'' : Group[A])
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> _)(x) == x) \226\134\146 IMAGE(f, s) == s
+      #|  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 SUBSET(s, t)
+      #|  IMAGE((f : ((A) -> Bool) -> A), (h' : ((A) -> Bool) -> Bool))
+      #|  (g : (A, A) -> Bool)
+      #|  (G' : Group[(A) -> Bool])
+      #|  (G'' : Group[A])
       #|  IMAGE (g:A->(A->bool)) (group_carrier(subgroup_generated G'' t))
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  ~(n = 0)
-      #|  IMAGE (g:A->(A->bool)) t
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  !((n : Num) == 0)
+      #|  IMAGE((g : (A, A) -> Bool), (t : (A) -> Bool))
       #|  t:A->bool
-      #|  abelian_group(G':(A->bool)group)
-      #|  IMAGE (f:(A->bool)->A) (group_carrier G')
-      #|  right_coset G (c:A->bool)
-      #|  G':(A->bool)group
-      #|  G:A group
+      #|  abelian_group((G' : Group[(A) -> Bool]))
+      #|  IMAGE((f : ((A) -> Bool) -> A), group_carrier((G' : Group[(A) -> Bool])))
+      #|  right_coset((G : Group[A]), (c : (A) -> Bool))
+      #|  (G' : Group[(A) -> Bool])
+      #|  (G : Group[A])
       #|  x = group_id G\n            ==> x IN group_carrier(subgroup_generated G s)
-      #|  (x:A) IN group_carrier G /\\ y IN group_carrier G
-      #|  y:A
-      #|  x:A
-      #|  {a:A} UNION s DELETE a = s
-      #|  s DELETE (a:A)
-      #|  {a:A}
-      #|  G:A group
+      #|  IN((x : A), group_carrier((G : Group[A]))) && IN((y : A), group_carrier(G))
+      #|  (y : A)
+      #|  (x : A)
+      #|  UNION({(a : A)}, DELETE((s : (A) -> Bool), a)) == s
+      #|  DELETE((s : (A) -> Bool), (a : A))
+      #|  {(a : A)}
+      #|  (G : Group[A])
       #|  IMAGE (right_coset G c)\n                (group_carrier(subgroup_generated G (s:A->bool)))
-      #|  IMAGE (f:(A->bool)->A) (group_carrier G')
-      #|  f:(A->bool)->A
-      #|  G'':A group
-      #|  G':(A->bool)group
+      #|  IMAGE((f : ((A) -> Bool) -> A), group_carrier((G' : Group[(A) -> Bool])))
+      #|  (f : ((A) -> Bool) -> A)
+      #|  (G'' : Group[A])
+      #|  (G' : Group[(A) -> Bool])
       #|  subgroup_generated G''\n         (IMAGE (f:(A->bool)->A) (IMAGE (right_coset G c) (s DELETE a))) = G''
-      #|  IMAGE (f:(A->bool)->A) h'
+      #|  IMAGE((f : ((A) -> Bool) -> A), (h' : ((A) -> Bool) -> Bool))
       #|  IMAGE (f:(A->bool)->A) (IMAGE (right_coset G c) (s DELETE a))
-      #|  G'':A group
-      #|  n - 1 < n <=> ~(n = 0)
-      #|  CARD(s DELETE (a:A))
+      #|  (G'' : Group[A])
+      #|  ((n : Num) - 1 < n) == !(n == 0)
+      #|  CARD(DELETE((s : (A) -> Bool), (a : A)))
       #|  CARD(IMAGE (f:(A->bool)->A)\n                 (IMAGE (right_coset G c) (s DELETE a)))
-      #|  g:A->(A->bool)
-      #|  f:(A->bool)->A
-      #|  G'':A group
+      #|  (g : (A, A) -> Bool)
+      #|  (f : ((A) -> Bool) -> A)
+      #|  (G'' : Group[A])
       #|  ?d:A->bool. group_carrier(G':(A->bool)group) =_c d
       #|  ?t:(A->bool)->bool.\n        FINITE t /\\ CARD t < n /\\\n        t SUBSET group_carrier(subgroup_generated G' h') /\\\n        subgroup_generated (subgroup_generated G' h') t =\n        subgroup_generated G' h'
-      #|  c:A->bool
-      #|  G:A group
-      #|  (h':(A->bool)->bool) SUBSET group_carrier G'
-      #|  (h':(A->bool)->bool) subgroup_of G'
-      #|  abelian_group(G':(A->bool)group)
-      #|  (c:A->bool) SUBSET group_carrier G
-      #|  (c:A->bool) normal_subgroup_of G
-      #|  (c:A->bool) subgroup_of G
-      #|  h' = IMAGE (right_coset G c) (h:A->bool)
-      #|  G' = quotient_group G (c:A->bool)
-      #|  c = group_carrier(subgroup_generated G {a:A})
-      #|  a:A
-      #|  n = 0
-      #|  (h:A->bool) SUBSET group_carrier G
-      #|  {}:A->bool
-      #|  s:A->bool = {}
-      #|  h:A->bool
-      #|  s:A->bool
-      #|  G:A group
-      #|  t:A->bool
-      #|  h:A->bool
-      #|  s:A->bool
-      #|  subgroup_generated G (s:A->bool)
-      #|  h:A->bool
-      #|  s:A->bool
-      #|  G:A group
+      #|  (c : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  SUBSET((h' : ((A) -> Bool) -> Bool), group_carrier((G' : Group[(A) -> Bool])))
+      #|  subgroup_of((h' : ((A) -> Bool) -> Bool), (G' : Group[(A) -> Bool]))
+      #|  abelian_group((G' : Group[(A) -> Bool]))
+      #|  SUBSET((c : (A) -> Bool), group_carrier((G : Group[A])))
+      #|  normal_subgroup_of((c : (A) -> Bool), (G : Group[A]))
+      #|  subgroup_of((c : (A) -> Bool), (G : Group[A]))
+      #|  (h' : ((A) -> Bool) -> Bool) == IMAGE(right_coset((G : Group[A]), (c : (A) -> Bool)), (h : (A) -> Bool))
+      #|  (G' : Group[(A) -> Bool]) == quotient_group((G : Group[A]), (c : (A) -> Bool))
+      #|  (c : (A) -> Bool) == group_carrier(subgroup_generated((G : Group[A]), {(a : A)}))
+      #|  (a : A)
+      #|  (n : Num) == 0
+      #|  SUBSET((h : (A) -> Bool), group_carrier((G : Group[A])))
+      #|  ({} : (A) -> Bool)
+      #|  (s : (A) -> Bool) == {}
+      #|  (h : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  (t : (A) -> Bool)
+      #|  (h : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  subgroup_generated((G : Group[A]), (s : (A) -> Bool))
+      #|  (h : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (G : Group[A])
       #|  forall G s h:A->bool.\n        s SUBSET group_carrier G /\\ FINITE s /\\ CARD s = n /\\\n        subgroup_generated G s = G /\\\n        abelian_group G /\\ h subgroup_of G\n        ==> ?t. FINITE t /\\\n                t SUBSET group_carrier G /\\\n                CARD t <= n /\\\n                subgroup_generated G t = subgroup_generated G h
-      #|  n:num
-      #|  s:A->bool
+      #|  (n : Num)
+      #|  (s : (A) -> Bool)
       #|  forall n G s h:A->bool.\n        s SUBSET group_carrier G /\\ s HAS_SIZE n /\\\n        abelian_group G /\\ h subgroup_of subgroup_generated G s\n        ==> ?t. FINITE t /\\ t SUBSET group_carrier G /\\\n                CARD t <= n /\\\n                subgroup_generated G t = subgroup_generated G h
       #|  forall G s h:A->bool.\n        FINITE s /\\ s SUBSET group_carrier G /\\\n        abelian_group G /\\ h subgroup_of subgroup_generated G s\n        ==> ?t. FINITE t /\\ t SUBSET group_carrier G /\\\n                CARD t <= CARD s /\\\n                subgroup_generated G t = subgroup_generated G h
-      #|  b:A
-      #|  group_id G:A
-      #|  h:A->bool
-      #|  s:A->bool
-      #|  G:A group
-      #|  s:A->bool
+      #|  (b : A)
+      #|  group_id((G : Group[A]))
+      #|  (h : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  (s : (A) -> Bool)
       #|  forall G h:A->bool.\n        finitely_generated_group G /\\ abelian_group G /\\ h subgroup_of G\n        ==> finitely_generated_group(subgroup_generated G h)
-      #|  h:A->bool
-      #|  (a:A) INSERT t
-      #|  h:A->bool
-      #|  a:A
-      #|  s SUBSET t /\\ ~(s = t) ==> ~(t SUBSET s)
+      #|  (h : (A) -> Bool)
+      #|  INSERT((a : A), (t : (A) -> Bool))
+      #|  (h : (A) -> Bool)
+      #|  (a : A)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) && !(s == t) \226\134\146 !SUBSET(t, s)
       #|  group_carrier(subgroup_generated G (s:A->bool)) SUBSET n
       #|  ~(s SUBSET t) /\\ s SUBSET u\n      ==> ?a. a IN s /\\ a IN u /\\ ~(a IN t)
-      #|  ?a:A. a IN s /\\ a IN group_carrier G /\\ ~(a IN t)
-      #|  c:(A->bool)->bool
-      #|  h':A->bool
-      #|  h':A->bool
-      #|  h:A->bool
+      #|  \226\136\131 a : A, IN(a, (s : (A) -> Bool)) && IN(a, group_carrier((G : Group[A]))) && !IN(a, (t : (A) -> Bool))
+      #|  (c : ((A) -> Bool) -> Bool)
+      #|  (h' : (A) -> Bool)
+      #|  (h' : (A) -> Bool)
+      #|  (h : (A) -> Bool)
       #|  \\h:A->bool. n SUBSET h /\\\n                h subgroup_of G /\\\n                ~(h = group_carrier G)
-      #|  n:A->bool
-      #|  t:A->bool
-      #|  p ==> ~(q /\\ ~r /\\ s) <=> p /\\ q /\\ s ==> r
-      #|  {group_id G:A}
-      #|  {}:A->bool
+      #|  (n : (A) -> Bool)
+      #|  (t : (A) -> Bool)
+      #|  ((p : Bool) \226\134\146 !((q : Bool) && !(r : Bool) && (s : Bool))) == (p && q && s \226\134\146 r)
+      #|  {group_id((G : Group[A]))}
+      #|  ({} : (A) -> Bool)
       #|  \\t:A->bool. t SUBSET s /\\ ?h.\n         h subgroup_of G /\\ ~(h = group_carrier G) /\\ t SUBSET h
-      #|  {t:A->bool | t SUBSET s}
-      #|  WF(\\t t':A->bool. t' PSUBSET t /\\ t SUBSET s)
-      #|  s:A->bool
+      #|  {(t : (A) -> Bool) | SUBSET(t, (s : (A) -> Bool))}
+      #|  WF((t : (A) -> Bool) => (t' : (A) -> Bool) => PSUBSET(t', t) && SUBSET(t, (s : (A) -> Bool)))
+      #|  (s : (A) -> Bool)
       #|  forall G:A group.\n      finitely_generated_group G /\\ ~trivial_group G\n      ==> ?h. h subgroup_of G /\\ ~(h = group_carrier G) /\\\n              forall h'. h' subgroup_of G /\\ h PSUBSET h'\n                   ==> h' = group_carrier G
-      #|  h:A->bool
-      #|  (a:A) INSERT t
-      #|  h:A->bool
-      #|  a:A
-      #|  s SUBSET t /\\ ~(s = t) ==> ~(t SUBSET s)
+      #|  (h : (A) -> Bool)
+      #|  INSERT((a : A), (t : (A) -> Bool))
+      #|  (h : (A) -> Bool)
+      #|  (a : A)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) && !(s == t) \226\134\146 !SUBSET(t, s)
       #|  group_carrier(subgroup_generated G (s:A->bool)) SUBSET n
       #|  ~(s SUBSET t) /\\ s SUBSET u\n      ==> ?a. a IN s /\\ a IN u /\\ ~(a IN t)
-      #|  ?a:A. a IN s /\\ a IN group_carrier G /\\ ~(a IN t)
-      #|  c:(A->bool)->bool
-      #|  h':A->bool
-      #|  h':A->bool
-      #|  h:A->bool
+      #|  \226\136\131 a : A, IN(a, (s : (A) -> Bool)) && IN(a, group_carrier((G : Group[A]))) && !IN(a, (t : (A) -> Bool))
+      #|  (c : ((A) -> Bool) -> Bool)
+      #|  (h' : (A) -> Bool)
+      #|  (h' : (A) -> Bool)
+      #|  (h : (A) -> Bool)
       #|  \\h:A->bool. n SUBSET h /\\\n                h normal_subgroup_of G /\\\n                ~(h = group_carrier G)
-      #|  n:A->bool
-      #|  t:A->bool
-      #|  p ==> ~(q /\\ ~r /\\ s) <=> p /\\ q /\\ s ==> r
-      #|  {group_id G:A}
-      #|  {}:A->bool
+      #|  (n : (A) -> Bool)
+      #|  (t : (A) -> Bool)
+      #|  ((p : Bool) \226\134\146 !((q : Bool) && !(r : Bool) && (s : Bool))) == (p && q && s \226\134\146 r)
+      #|  {group_id((G : Group[A]))}
+      #|  ({} : (A) -> Bool)
       #|  \\t:A->bool. t SUBSET s /\\ ?h.\n         h normal_subgroup_of G /\\ ~(h = group_carrier G) /\\ t SUBSET h
-      #|  {t:A->bool | t SUBSET s}
-      #|  WF(\\t t':A->bool. t' PSUBSET t /\\ t SUBSET s)
-      #|  s:A->bool
+      #|  {(t : (A) -> Bool) | SUBSET(t, (s : (A) -> Bool))}
+      #|  WF((t : (A) -> Bool) => (t' : (A) -> Bool) => PSUBSET(t', t) && SUBSET(t, (s : (A) -> Bool)))
+      #|  (s : (A) -> Bool)
       #|  forall G:A group.\n      finitely_generated_group G /\\ ~trivial_group G\n      ==> ?h. h normal_subgroup_of G /\\ ~(h = group_carrier G) /\\\n              forall h'. h' normal_subgroup_of G /\\ h PSUBSET h'\n                   ==> h' = group_carrier G
-      #|  integer_group = group((:int),&0,(--),(+))
+      #|  (integer_group : Group[Int]) == group((UNIV, int_of_num(0), op_minus_minus, op_plus))
       #|  group_carrier integer_group = (:int) /\\\n   group_id integer_group = &0 /\\\n   group_inv integer_group = (--) /\\\n   group_mul integer_group = (+)
-      #|  abelian_group integer_group
-      #|  INFINITE(group_carrier integer_group)
-      #|  forall x n. group_pow integer_group x n = &n * x
-      #|  forall x n. group_zpow integer_group x n = n * x
+      #|  abelian_group(integer_group)
+      #|  INFINITE(group_carrier(integer_group))
+      #|  \226\136\128 x : Int, \226\136\128 n : Num, group_pow(integer_group, x, n) == int_of_num(n) * x
+      #|  \226\136\128 x : Int, \226\136\128 n : Int, group_zpow(integer_group, x, n) == n * x
       #|  forall n. group_element_order integer_group n = if n = &0 then 1 else 0
-      #|  forall c. group_endomorphism integer_group (\\x. c * x)
-      #|  --x:int = y * --z <=> x = y * z
-      #|  x:int
-      #|  x:int
-      #|  x:int
-      #|  x:int
+      #|  \226\136\128 c : Int, group_endomorphism(integer_group, (x : Int) => c * x)
+      #|  (-(x : Int) == (y : Int) * -(z : Int)) == (x == y * z)
+      #|  (x : Int)
+      #|  (x : Int)
+      #|  (x : Int)
+      #|  (x : Int)
       #|  forall f. group_endomorphism integer_group f ==> f = \\x. f(&1) * x
-      #|  (f:int->int) (&1)
-      #|  f:int->int
+      #|  (f : (Int) -> Int)(int_of_num(1))
+      #|  (f : (Int) -> Int)
       #|  (forall c. P(m c)) /\\ (forall f. P f ==> ?c. f = m c) /\\\n    (forall c d. m c = m d ==> c = d)\n    ==> (P f <=> ?c. f = m c) /\\ (P f <=> ?!c. f = m c)
       #|  (forall f. group_endomorphism integer_group f <=> ?c. f = \\x. c * x) /\\\n   (forall f. group_endomorphism integer_group f <=> ?!c. f = \\x. c * x)
       #|  forall G x:A. x IN group_carrier G\n           ==> group_homomorphism(integer_group,G) (group_zpow G x)
       #|  forall G x:A. x IN group_carrier G\n           ==> group_epimorphism (integer_group,subgroup_generated G {x})\n                                 (group_zpow G x)
       #|  forall G x:A. INFINITE(group_carrier(subgroup_generated G {x})) /\\\n           x IN group_carrier G\n           ==> group_isomorphism (integer_group,subgroup_generated G {x})\n                                 (group_zpow G x)
-      #|  x:A
-      #|  G:A group
-      #|  x:A
+      #|  (x : A)
+      #|  (G : Group[A])
+      #|  (x : A)
       #|  forall G:A group.\n        cyclic_group G /\\ INFINITE(group_carrier G)\n        ==> G isomorphic_group integer_group
       #|  integer_group
       #|  forall(G:A group) (H:B group).\n        cyclic_group G /\\ INFINITE(group_carrier G) /\\\n        cyclic_group H /\\ INFINITE(group_carrier H)\n        ==> G isomorphic_group H
       #|  integer_mod_group n =\n     if n = 0 then integer_group else\n     group({m | &0 <= m /\\ m < &n},\n           &0,\n           (\\a. --a rem &n),\n           (\\a b. (a + b) rem &n))
-      #|  &n:int
-      #|  m:int
-      #|  m:int
-      #|  n:num
+      #|  int_of_num((n : Num))
+      #|  (m : Int)
+      #|  (m : Int)
+      #|  (n : Num)
       #|  (group_carrier(integer_mod_group 0) = (:int)) /\\\n   (forall n. 0 < n\n        ==> group_carrier(integer_mod_group n) = {m | &0 <= m /\\ m < &n}) /\\\n   (forall n. group_id(integer_mod_group n) = &0) /\\\n   (forall n. group_inv(integer_mod_group n) = \\a. --a rem &n) /\\\n   (forall n. group_mul(integer_mod_group n) = \\a b. (a + b) rem &n)
-      #|  integer_mod_group 0 = integer_group
+      #|  integer_mod_group(0) == integer_group
       #|  (forall x. x IN s ==> f x = x) /\\ (forall x. f x IN s)\n    ==> s = IMAGE f UNIV
-      #|  n = 0
+      #|  (n : Num) == 0
       #|  forall n. group_carrier (integer_mod_group n) = IMAGE (\\x. x rem &n) (:int)
-      #|  n = 0
+      #|  (n : Num) == 0
       #|  forall n x m. group_pow (integer_mod_group n) x m = (&m * x) rem &n
-      #|  (--x:int == y) (mod n) <=> (x == --y) (mod n)
+      #|  op_eq_eq(-(x : Int), (y : Int), mod((n : Int))) == op_eq_eq(x, -y, mod(n))
       #|  forall n x m. group_zpow (integer_mod_group n) x m = (m * x) rem &n
-      #|  forall n. abelian_group(integer_mod_group n)
-      #|  forall n. &0 IN group_carrier(integer_mod_group n)
-      #|  n = 0
+      #|  \226\136\128 n : Num, abelian_group(integer_mod_group(n))
+      #|  \226\136\128 n : Num, IN(int_of_num(0), group_carrier(integer_mod_group(n)))
+      #|  (n : Num) == 0
       #|  forall n x. (x rem &n) IN group_carrier(integer_mod_group n)
-      #|  n = 0
+      #|  (n : Num) == 0
       #|  forall n. &1 IN group_carrier(integer_mod_group n) <=> ~(n = 1)
       #|  forall m n.\n        group_homomorphism\n         (integer_mod_group (m * n),\n          prod_group (integer_mod_group m) (integer_mod_group n))\n         (\\a. (a rem &m),(a rem &n))
-      #|  &1:int
-      #|  &0:int
+      #|  int_of_num(1)
+      #|  int_of_num(0)
       #|  forall a b. (a IN s /\\ b IN s /\\ ~(a = b)) ==> ~(?c. s SUBSET {c})
-      #|  n = 1
-      #|  forall n. trivial_group(integer_mod_group n) <=> n = 1
+      #|  (n : Num) == 1
+      #|  \226\136\128 n : Num, trivial_group(integer_mod_group(n)) == (n == 1)
       #|  0
-      #|  ~(trivial_group integer_group)
+      #|  !trivial_group(integer_group)
       #|  forall n. group_element_order (integer_mod_group n) (&1) = n
       #|  forall n. group_element_order (integer_mod_group n) (&1 rem &n) = n
-      #|  gcd(n,0) = n
-      #|  n = 0
-      #|  m = 0
+      #|  gcd(((n : Num), 0)) == n
+      #|  (n : Num) == 0
+      #|  (m : Num) == 0
       #|  group_element_order (integer_mod_group n) ((&m * &1 rem &n) rem &n)
       #|  forall n m. group_element_order (integer_mod_group n) (&m) =\n         if m = 0 /\\ n = 0 then 1 else n DIV gcd(n,m)
       #|  (forall x. f x IN s) /\\ (forall x. x IN s ==> f x = x)\n   ==> {f x | x IN UNIV} = s
-      #|  n = 0
+      #|  (n : Num) == 0
       #|  forall n. subgroup_generated (integer_mod_group n) {&1 rem &n} =\n       integer_mod_group n
-      #|  n = 1
+      #|  (n : Num) == 1
       #|  forall n. subgroup_generated (integer_mod_group n) {&1} =\n       integer_mod_group n
-      #|  forall n. cyclic_group(integer_mod_group n)
+      #|  \226\136\128 n : Num, cyclic_group(integer_mod_group(n))
       #|  0
-      #|  cyclic_group integer_group
-      #|  n = 0
+      #|  cyclic_group(integer_group)
+      #|  (n : Num) == 0
       #|  forall n. FINITE(group_carrier(integer_mod_group n)) <=> ~(n = 0)
       #|  forall n. ~(n = 1)\n       ==> group_epimorphism (integer_group,integer_mod_group n)\n                             (group_zpow (integer_mod_group n) (&1))
-      #|  (d:int) divides (n - (n - q * d))
-      #|  y IN IMAGE f {x | P x} <=> ?x. P x /\\ f x = y
-      #|  group_element_order G (x:A) = 0
+      #|  divides((d : Int), (n : Int) - (n - (q : Int) * d))
+      #|  IN((y : _), IMAGE((f : (_) -> _), {(x : _) | (P : (_) -> Bool)(x)})) == (\226\136\131 x : _, P(x) && f(x) == y)
+      #|  group_element_order((G : Group[A]), (x : A)) == 0
       #|  forall G x:A.\n        x IN group_carrier G\n        ==> group_isomorphism (integer_mod_group (group_element_order G x),\n                               subgroup_generated G {x})\n                              (group_zpow G x)
       #|  forall G:A group. cyclic_group G <=> ?n. G isomorphic_group integer_mod_group n
-      #|  {m:int | &0 <= m /\\ m < &n} = IMAGE (&) {i | i < n}
+      #|  {(m : Int) | int_of_num(0) <= m && m < int_of_num((n : Num))} == IMAGE(int_of_num, {(i : Num) | i < n})
       #|  forall n. ~(n = 0) ==> CARD(group_carrier(integer_mod_group n)) = n
-      #|  n:num
+      #|  (n : Num)
       #|  forall G:A group.\n        cyclic_group G /\\ FINITE(group_carrier G)\n        ==> G isomorphic_group integer_mod_group (CARD(group_carrier G))
-      #|  n:num
+      #|  (n : Num)
       #|  (forall m n. R m /\\ R n ==> P m ==> P n) /\\\n    (forall n. P n ==> R n)\n    ==> forall n. P n <=> (?m. P m) /\\ R n
       #|  (forall(G:A group) n.\n        G isomorphic_group integer_mod_group n <=>\n        cyclic_group G /\\\n        (n = 0 /\\ INFINITE(group_carrier G) \\/\n         ~(n = 0) /\\ (group_carrier G) HAS_SIZE n)) /\\\n   (forall(G:A group) n.\n        integer_mod_group n isomorphic_group G <=>\n        cyclic_group G /\\\n        (n = 0 /\\ INFINITE(group_carrier G) \\/\n         ~(n = 0) /\\ (group_carrier G) HAS_SIZE n))
-      #|  n = 0
+      #|  (n : Num) == 0
       #|  forall m n. integer_mod_group m isomorphic_group integer_mod_group n <=>\n         m = n
       #|  integer_mod_group(CARD(group_carrier G:A->bool))
       #|  forall(G:A group) (H:B group).\n        cyclic_group G /\\ cyclic_group H /\\\n        FINITE(group_carrier G) /\\ FINITE(group_carrier H) /\\\n        CARD(group_carrier G) = CARD(group_carrier H)\n        ==> G isomorphic_group H
       #|  forall G:A group. cyclic_group G ==> COUNTABLE(group_carrier G)
-      #|  FINITE (group_carrier (subgroup_generated G {a:A}))
+      #|  FINITE(group_carrier(subgroup_generated((G : Group[A]), {(a : A)})))
       #|  forall G a:A.\n        FINITE(group_carrier G) /\\ a IN group_carrier G\n        ==> (subgroup_generated G {a} = G <=>\n             group_element_order G a = CARD(group_carrier G))
-      #|  (a:A) IN group_carrier G
-      #|  a:A
+      #|  IN((a : A), group_carrier((G : Group[A])))
+      #|  (a : A)
       #|  forall G:A group.\n        FINITE(group_carrier G)\n        ==> (cyclic_group G <=>\n             ?a. a IN group_carrier G /\\\n                 group_element_order G a = CARD(group_carrier G))
       #|  coprime(m:int,n)\n          ==> forall a b. (a == b) (mod m) /\\ (a == b) (mod n)\n        ==> (a == b) (mod (m * n))
-      #|  b:int
-      #|  a:int
-      #|  c rem &(m * n)
-      #|  c:int
+      #|  (b : Int)
+      #|  (a : Int)
+      #|  rem((c : Int), int_of_num((m : Num) * (n : Num)))
+      #|  (c : Int)
       #|  coprime(m:int,n)\n          ==> forall a b. ?c. (c == a) (mod m) /\\ (c == b) (mod n)
-      #|  b:int
-      #|  a:int
-      #|  b:int
-      #|  a:int
-      #|  coprime(n,0) <=> n = 1
-      #|  n = 0
-      #|  coprime(0,n) <=> n = 1
-      #|  m = 0
+      #|  (b : Int)
+      #|  (a : Int)
+      #|  (b : Int)
+      #|  (a : Int)
+      #|  coprime(((n : Num), 0)) == (n == 1)
+      #|  (n : Num) == 0
+      #|  coprime((0, (n : Num))) == (n == 1)
+      #|  (m : Num) == 0
       #|  (x * a == &1) (mod m) /\\ (x * b == &1) (mod n) /\\\n      (y * a == &0) (mod m) /\\ (y * b == &1) (mod n)\n      ==> coprime(m,n)
-      #|  forall z. z IN s /\\ ~(z IN t) ==> ~(s = t)
-      #|  b:int
-      #|  a:int
-      #|  ~(?x. P x /\\ Q x) <=> forall x. P x ==> ~Q x
+      #|  \226\136\128 z : _, IN(z, (s : (_) -> Bool)) && !IN(z, (t : (_) -> Bool)) \226\134\146 !(s == t)
+      #|  (b : Int)
+      #|  (a : Int)
+      #|  !(\226\136\131 x : _, (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)) == (\226\136\128 x : _, P(x) \226\134\146 !Q(x))
       #|  (r ==> q) /\\ (q ==> p) /\\ (p ==> c) /\\ (c ==> r)\n    ==> (p <=> c) /\\ (q <=> c) /\\ (r <=> c)
       #|  (forall m n. cyclic_group (prod_group (integer_mod_group m) (integer_mod_group n))\n          <=> coprime(m,n)) /\\\n   (forall m n.\n        prod_group (integer_mod_group m) (integer_mod_group n) isomorphic_group\n        integer_mod_group (m * n) <=>\n        coprime(m,n)) /\\\n   (forall m n.\n        group_isomorphism\n         (integer_mod_group (m * n),\n          prod_group (integer_mod_group m) (integer_mod_group n))\n         (\\a. (a rem &m),(a rem &n)) <=>\n        coprime(m,n))
-      #|  coprime(n,0) <=> n = 1
-      #|  n = 0
-      #|  coprime(0,n) <=> n = 1
-      #|  m = 0
-      #|  coprime(n,1)
-      #|  n = 1
-      #|  coprime(1,n)
-      #|  m = 1
-      #|  n:num
-      #|  m:num
-      #|  SND:A#B->B
-      #|  cyclic_group(H:B group)
-      #|  FST:A#B->A
-      #|  cyclic_group(G:A group)
+      #|  coprime(((n : Num), 0)) == (n == 1)
+      #|  (n : Num) == 0
+      #|  coprime((0, (n : Num))) == (n == 1)
+      #|  (m : Num) == 0
+      #|  coprime(((n : Num), 1))
+      #|  (n : Num) == 1
+      #|  coprime((1, (n : Num)))
+      #|  (m : Num) == 1
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (SND : ((A, B)) -> B)
+      #|  cyclic_group((H : Group[B]))
+      #|  (FST : ((A, B)) -> A)
+      #|  cyclic_group((G : Group[A]))
       #|  forall(G:A group) (H:B group).\n        cyclic_group (prod_group G H) <=>\n        cyclic_group G /\\ cyclic_group H /\\\n        (trivial_group G \\/\n         trivial_group H \\/\n         FINITE(group_carrier G) /\\ FINITE(group_carrier H) /\\\n         coprime(CARD(group_carrier G),CARD(group_carrier H)))
-      #|  group_element_order G (a:A)
+      #|  group_element_order((G : Group[A]), (a : A))
       #|  forall G (a:A).\n        FINITE (group_carrier G) /\\\n        (CARD(group_carrier G) = 1 \\/ prime(CARD(group_carrier G))) /\\\n        a IN group_carrier G /\\ ~(a = group_id G)\n        ==> subgroup_generated G {a} = G
       #|  forall G a:A. prime p /\\ (group_carrier G) HAS_SIZE p /\\ a IN group_carrier G\n           ==> group_element_order G a =\n               if a = group_id G then 1 else CARD(group_carrier G)
-      #|  n = 0
-      #|  n = 1
+      #|  (n : Num) == 0
+      #|  (n : Num) == 1
       #|  trivial_group (subgroup_generated (integer_mod_group n) {a})
-      #|  &1:int
+      #|  int_of_num(1)
       #|  {(x * a) rem &n | x IN (:int)} = IMAGE (\\x. x rem &n) (:int) <=>\n        forall x. ?y. (y * a) rem &n = x rem &n
-      #|  n = 0
-      #|  q /\\ (p <=> r) ==> (p <=> q /\\ r)
-      #|  a IN group_carrier(integer_mod_group n)
+      #|  (n : Num) == 0
+      #|  (q : Bool) && (p : Bool) == (r : Bool) \226\134\146 p == (q && r)
+      #|  IN((a : Int), group_carrier(integer_mod_group((n : Num))))
       #|  forall n a. subgroup_generated (integer_mod_group n) {a} = integer_mod_group n <=>\n         (n <= 1 \\/ &0 <= a /\\ a < &n) /\\ coprime(&n,a)
-      #|  m:int
-      #|  z:A
-      #|  group_carrier:A group->A->bool
-      #|  group_pow G (z:A) n
-      #|  (d:num) divides n
-      #|  n:num
-      #|  d:num
+      #|  (m : Int)
+      #|  (z : A)
+      #|  (group_carrier : (Group[A], A) -> Bool)
+      #|  group_pow((G : Group[A]), (z : A), (n : Num))
+      #|  divides((d : Num), (n : Num))
+      #|  (n : Num)
+      #|  (d : Num)
       #|  2
-      #|  (p ==> ~q) /\\ q ==> ~p /\\ q
-      #|  d = group_element_order G (z:A)
-      #|  G = subgroup_generated G {z:A}
-      #|  p /\\ (p ==> r) ==> p /\\ (q \\/ r)
-      #|  z:A
-      #|  trivial_group(G:A group)
+      #|  ((p : Bool) \226\134\146 !(q : Bool)) && q \226\134\146 !p && q
+      #|  (d : Num) == group_element_order((G : Group[A]), (z : A))
+      #|  (G : Group[A]) == subgroup_generated(G, {(z : A)})
+      #|  (p : Bool) && (p \226\134\146 (r : Bool)) \226\134\146 p && ((q : Bool) || r)
+      #|  (z : A)
+      #|  trivial_group((G : Group[A]))
       #|  forall(G:A group).\n        (forall a. a IN group_carrier G /\\ ~(a = group_id G)\n             ==> subgroup_generated G {a} = G) <=>\n        FINITE(group_carrier G) /\\\n        (CARD (group_carrier G) = 1 \\/ prime (CARD (group_carrier G)))
-      #|  p /\\ (p ==> q) <=> p /\\ q
+      #|  ((p : Bool) && (p \226\134\146 (q : Bool))) == (p && q)
       #|  pgroup s (G:A group) <=>\n        forall p x. prime p /\\\n              x IN group_carrier G /\\\n              p divides group_element_order G x\n              ==> p IN s
       #|  forall G H (f:A->B) s. group_monomorphism (G,H) f /\\ pgroup s H ==> pgroup s G
       #|  forall G H (f:A->B) s. group_epimorphism (G,H) f /\\ pgroup s G ==> pgroup s H
@@ -25719,114 +25719,114 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall(G:A group) s h.\n        pgroup s G ==> pgroup s (subgroup_generated G h)
       #|  forall(G:A group) (H:A group) s.\n        pgroup s (prod_group G H) <=> pgroup s G /\\ pgroup s H
       #|  (forall p x. ~(prime p /\\ P x /\\ p divides f x)) <=>\n    (forall x. P x ==> f x = 1)
-      #|  forall G:A group. pgroup {} G <=> trivial_group G
+      #|  \226\136\128 G : Group[A], pgroup({}, G) == trivial_group(G)
       #|  forall(G:A group) s t. pgroup s G /\\ s SUBSET t ==> pgroup t G
-      #|  x:K->A
-      #|  p:num
+      #|  (x : (K) -> A)
+      #|  (p : Num)
       #|  forall k (G:K->A group) s.\n        pgroup s (sum_group k G) <=> forall i. i IN k ==> pgroup s (G i)
       #|  forall(G:A group) p.\n     prime p\n     ==> (pgroup {p} G <=>\n          forall x. x IN group_carrier G ==> ?k. group_element_order G x = p EXP k)
-      #|  (p ==> y = x) ==> (p /\\ x = k <=> p /\\ y = k)
-      #|  u:A->bool
+      #|  ((p : Bool) \226\134\146 (y : _) == (x : _)) \226\134\146 (p && x == (k : _)) == (p && y == k)
+      #|  (u : (A) -> Bool)
       #|  {t' | (?u. u SUBSET s /\\ t' = f u) /\\ P t'} =\n      IMAGE f {u | u SUBSET s /\\ P(f u)}
-      #|  t = IMAGE (f:A->B) s
-      #|  f:A->B
+      #|  (t : (B) -> Bool) == IMAGE((f : (A) -> B), (s : (A) -> Bool))
+      #|  (f : (A) -> B)
       #|  forall(s:A->bool) (t:B->bool) k.\n          FINITE s /\\ FINITE t /\\ CARD s = CARD t\n          ==> CARD {s' | s' SUBSET s /\\ CARD s' = k} =\n              CARD {t' | t' SUBSET t /\\ CARD t' = k}
       #|  t SUBSET u /\\ (forall x. x IN u ==> (P x <=> x IN t))\n      ==> t SUBSET {x | x IN u /\\ P x}
-      #|  group_id G:A
-      #|  x:A
+      #|  group_id((G : Group[A]))
+      #|  (x : A)
       #|  group_stabilizer G (a:A->(A->bool)->(A->bool)) t SUBSET t
-      #|  CARD(t:A->bool) = p EXP k
+      #|  CARD((t : (A) -> Bool)) == EXP((p : Num), (k : Num))
       #|  x * y = p * n /\\ ~(p * n = 0) ==> (x = n <=> y = p)
       #|  CARD(group_stabilizer G (a:A->(A->bool)->(A->bool)) t) = p EXP k
-      #|  t:A->bool
-      #|  t:A->bool = {}
-      #|  t:A->bool
-      #|  group_id G = group_mul G g h <=> g = group_inv G h
-      #|  p /\\ q <=> ~(q ==> ~p)
-      #|  p /\\ q <=> ~(q ==> ~p)
+      #|  (t : (A) -> Bool)
+      #|  (t : (A) -> Bool) == {}
+      #|  (t : (A) -> Bool)
+      #|  (group_id((G : Group[_])) == group_mul(G, (g : _), (h : _))) == (g == group_inv(G, h))
+      #|  ((p : Bool) && (q : Bool)) == !(q \226\134\146 !p)
+      #|  ((p : Bool) && (q : Bool)) == !(q \226\134\146 !p)
       #|  p /\\ q <=> ~(p ==> ~q)
-      #|  \\t:A->bool. group_id G IN t
+      #|  (t : (A) -> Bool) => IN(group_id((G : Group[A])), t)
       #|  forall Q. s'' SUBSET {x | x IN s /\\ Q x} /\\\n          (forall x. x IN s ==> f x = f' x) /\\\n          (forall x. x IN s ==> ?x'. x' IN s /\\ Q x' /\\ f x' = f x) /\\\n          (forall x. x IN s /\\ Q x ==> (P(f x) <=> x IN s''))\n          ==> {y | y IN IMAGE f s /\\ P y} = IMAGE f' s''
       #|  {f x | x IN u} = {g x | x IN u}\n        ==> forall a. a IN u ==> ?b. b IN u /\\ g b = f a
-      #|  group_id G:A
-      #|  h2:A->bool
-      #|  h1:A->bool
+      #|  group_id((G : Group[A]))
+      #|  (h2 : (A) -> Bool)
+      #|  (h1 : (A) -> Bool)
       #|  {x | x IN IMAGE (group_orbit G m (a:A->(A->bool)->(A->bool))) m /\\\n           CARD x = n} =\n      IMAGE (\\h. {left_coset G x h | x | x IN group_carrier G})\n            {h | h subgroup_of G /\\ h HAS_SIZE p EXP k}
-      #|  a * p = p * b <=> p = 0 \\/ a = b
-      #|  d:num
-      #|  i:num
-      #|  p EXP k * n = CARD(group_carrier G:A->bool)
-      #|  t:A->bool
-      #|  t:A->bool
-      #|  a:A->(A->bool)->(A->bool)
-      #|  m:(A->bool)->bool
-      #|  G:A group
-      #|  (a:num == a) (mod n)
-      #|  t:A->bool
-      #|  \\s:(A->bool)->bool. if CARD s = n then CARD s else 0
+      #|  ((a : Num) * (p : Num) == p * (b : Num)) == (p == 0 || a == b)
+      #|  (d : Num)
+      #|  (i : Num)
+      #|  EXP((p : Num), (k : Num)) * (n : Num) == CARD(group_carrier((G : Group[A])))
+      #|  (t : (A) -> Bool)
+      #|  (t : (A) -> Bool)
+      #|  (a : (A, (A) -> Bool, A) -> Bool)
+      #|  (m : ((A) -> Bool) -> Bool)
+      #|  (G : Group[A])
+      #|  op_eq_eq((a : Num), a, mod((n : Num)))
+      #|  (t : (A) -> Bool)
+      #|  (s : ((A) -> Bool) -> Bool) => if CARD(s) == (n : Num) { CARD(s) } else { 0 }
       #|  forall g. (nsum s g == nsum s f) (mod n) /\\ nsum s g = z\n          ==> (nsum s f == z) (mod n)
       #|  (forall t r. t SUBSET group_carrier G /\\ CARD t = r <=>\n             t SUBSET group_carrier G /\\ t HAS_SIZE r) /\\\n      (forall h r. (h:A->bool) subgroup_of G /\\ CARD h = r <=>\n             h subgroup_of G /\\ h HAS_SIZE r)
-      #|  m:num = n ==> n divides m
-      #|  s INTER t = t <=> t SUBSET s
+      #|  (m : Num) == (n : Num) \226\134\146 divides(n, m)
+      #|  (INTER((s : (_) -> Bool), (t : (_) -> Bool)) == t) == SUBSET(t, s)
       #|  t INTER right_coset G (group_stabilizer G a t) x =\n          right_coset G (group_stabilizer G (a:A->(A->bool)->(A->bool)) t) x
-      #|  group_mul(G:A group)
-      #|  t:A->bool
-      #|  group_carrier G:A->bool
+      #|  group_mul((G : Group[A]))
+      #|  (t : (A) -> Bool)
+      #|  group_carrier((G : Group[A]))
       #|  subgroup_generated G\n            (group_stabilizer G (a:A->(A->bool)->(A->bool)) t)
-      #|  (x:A) IN group_carrier G
-      #|  x:A
-      #|  group_carrier G:A->bool
-      #|  group_mul(G:A group)
-      #|  t:A->bool
+      #|  IN((x : A), group_carrier((G : Group[A])))
+      #|  (x : A)
+      #|  group_carrier((G : Group[A]))
+      #|  group_mul((G : Group[A]))
+      #|  (t : (A) -> Bool)
       #|  subgroup_generated G\n            (group_stabilizer G (a:A->(A->bool)->(A->bool)) t)
-      #|  t:A->bool
-      #|  t:A->bool
+      #|  (t : (A) -> Bool)
+      #|  (t : (A) -> Bool)
       #|  forall t. t IN m\n          ==> CARD(group_stabilizer G (a:A->(A->bool)->(A->bool)) t)\n              divides p EXP k
-      #|  group_action (G:A group) (m:(A->bool)->bool) a
-      #|  FINITE(m:(A->bool)->bool)
-      #|  a = \\x:A. IMAGE (group_mul G x)
+      #|  group_action((G : Group[A]), (m : ((A) -> Bool) -> Bool), (a : (A, (A) -> Bool, A) -> Bool))
+      #|  FINITE((m : ((A) -> Bool) -> Bool))
+      #|  (a : (A, (A) -> Bool, A) -> Bool) == ((x : A) => IMAGE(group_mul((G : Group[A]), x)))
       #|  m = {t:A->bool | t SUBSET group_carrier G /\\ t HAS_SIZE p EXP k}
       #|  forall(G:A group) p k n.\n          FINITE(group_carrier G) /\\\n          prime p /\\\n          p EXP k * n = CARD(group_carrier G)\n          ==> (CARD {t | t SUBSET group_carrier G /\\ CARD t = p EXP k} ==\n               CARD {h | h subgroup_of G /\\ CARD h = p EXP k} * n)\n              (mod (p * n))
       #|  ~(n = 0) /\\ s = s' /\\ t = 1\n    ==> (s == t * n) (mod (p * n))\n        ==> (s' == t' * n) (mod (p * n))\n            ==> (t' == 1) (mod p)
-      #|  n:num
-      #|  k:num
-      #|  p:num
-      #|  integer_mod_group (p EXP k * n)
-      #|  n:num
-      #|  k:num
-      #|  p:num
-      #|  G:A group
-      #|  n:num
+      #|  (n : Num)
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  integer_mod_group(EXP((p : Num), (k : Num)) * (n : Num))
+      #|  (n : Num)
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  (G : Group[A])
+      #|  (n : Num)
       #|  forall(G:A group) p k.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        p EXP k divides CARD(group_carrier G)\n        ==> (CARD {h | h subgroup_of G /\\ CARD h = p EXP k} == 1) (mod p)
-      #|  (0 == n) (mod p) <=> p divides n
-      #|  k:num
-      #|  p:num
-      #|  G:A group
-      #|  (?x. P x) <=> ~({x | P x} = {})
+      #|  op_eq_eq(0, (n : Num), mod((p : Num))) == divides(p, n)
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  (G : Group[A])
+      #|  (\226\136\131 x : _, (P : (_) -> Bool)(x)) == !({(x : _) | P(x)} == {})
       #|  forall(G:A group) p k.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        p EXP k divides CARD(group_carrier G)\n        ==> ?h. h subgroup_of G /\\ CARD h = p EXP k
-      #|  a:A
-      #|  subgroup_generated G h:A group
-      #|  (a:A) IN group_carrier G
-      #|  ~(h SUBSET {a}) ==> ?x. x IN h /\\ ~(x = a)
-      #|  a:A
-      #|  ~trivial_group(subgroup_generated G (h:A->bool))
-      #|  h:A->bool
+      #|  (a : A)
+      #|  subgroup_generated((G : Group[A]), (h : (A) -> Bool))
+      #|  IN((a : A), group_carrier((G : Group[A])))
+      #|  !SUBSET((h : (_) -> Bool), {(a : _)}) \226\134\146 (\226\136\131 x : _, IN(x, h) && !(x == a))
+      #|  (a : A)
+      #|  !trivial_group(subgroup_generated((G : Group[A]), (h : (A) -> Bool)))
+      #|  (h : (A) -> Bool)
       #|  1
-      #|  p:num
-      #|  G:A group
+      #|  (p : Num)
+      #|  (G : Group[A])
       #|  forall(G:A group) p.\n        FINITE(group_carrier G) /\\ prime p /\\ p divides CARD(group_carrier G)\n        ==> ?x. x IN group_carrier G /\\ group_element_order G x = p
       #|  forall(G:A group) p.\n    FINITE(group_carrier G) /\\ prime p\n    ==> ((?x. x IN group_carrier G /\\ p divides (group_element_order G x)) <=>\n         p divides CARD(group_carrier G))
       #|  forall(G:A group) n.\n    FINITE(group_carrier G)\n    ==> ((forall x. x IN group_carrier G ==> coprime(group_element_order G x,n)) <=>\n         coprime(CARD(group_carrier G),n))
       #|  forall s (G:A group).\n        FINITE(group_carrier G)\n        ==> (pgroup s G <=>\n             forall p. prime p /\\ p divides CARD(group_carrier G) ==> p IN s)
       #|  forall(G:A group) p.\n     FINITE(group_carrier G) /\\ prime p\n     ==> (pgroup {p} G <=> ?k. CARD(group_carrier G) = p EXP k)
       #|  forall(G:A group) p.\n     prime p\n     ==> (FINITE(group_carrier G) /\\ pgroup {p} G <=>\n          ?k. (group_carrier G) HAS_SIZE (p EXP k))
-      #|  group_id G:A
-      #|  x:A
-      #|  p:num
-      #|  G:A group
-      #|  p:num
+      #|  group_id((G : Group[A]))
+      #|  (x : A)
+      #|  (p : Num)
+      #|  (G : Group[A])
+      #|  (p : Num)
       #|  forall(G:A group) n.\n        FINITE(group_carrier G)\n        ==> ((forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                    group_pow G x n = group_pow G y n\n                    ==> x = y) <=>\n             coprime(n,CARD(group_carrier G)))
-      #|  coprime(--x:int,y) <=> coprime(x,y)
+      #|  coprime((-(x : Int), (y : Int))) == coprime((x, y))
       #|  forall(G:A group) n.\n        FINITE(group_carrier G)\n        ==> ((forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                    group_zpow G x n = group_zpow G y n\n                    ==> x = y) <=>\n             coprime(n,&(CARD(group_carrier G))))
       #|  forall(G:A group) n.\n        FINITE(group_carrier G)\n        ==> ((forall x. x IN group_carrier G\n                  ==> ?y. y IN group_carrier G /\\ group_pow G y n = x) <=>\n             coprime(n,CARD(group_carrier G)))
       #|  forall(G:A group) n.\n        FINITE(group_carrier G)\n        ==> ((forall x. x IN group_carrier G\n                  ==> ?y. y IN group_carrier G /\\ group_zpow G y n = x) <=>\n             coprime(n,&(CARD(group_carrier G))))
@@ -25838,219 +25838,219 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall(G:A group) n.\n        abelian_group G /\\ FINITE(group_carrier G) /\\\n        coprime(n,CARD(group_carrier G))\n        ==> group_isomorphism (G,G) (\\x. group_pow G x n)
       #|  forall(G:A group) n.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> (group_epimorphism (G,G) (\\x. group_pow G x n) <=>\n             coprime(n,CARD(group_carrier G)))
       #|  forall(G:A group) n.\n        abelian_group G /\\ FINITE(group_carrier G) /\\\n        coprime(n,CARD(group_carrier G))\n        ==> group_epimorphism (G,G) (\\x. group_pow G x n)
-      #|  (0 == n) (mod p) <=> p divides n
-      #|  (n:num == n) (mod p)
-      #|  i:num
-      #|  x:X
-      #|  a:A->X->X
-      #|  s:X->bool
-      #|  G:A group
-      #|  x:X
-      #|  p /\\ p /\\ q <=> p /\\ q
+      #|  op_eq_eq(0, (n : Num), mod((p : Num))) == divides(p, n)
+      #|  op_eq_eq((n : Num), n, mod((p : Num)))
+      #|  (i : Num)
+      #|  (x : X)
+      #|  (a : (A, X) -> X)
+      #|  (s : (X) -> Bool)
+      #|  (G : Group[A])
+      #|  (x : X)
+      #|  ((p : Bool) && p && (q : Bool)) == (p && q)
       #|  {y | y IN IMAGE f s /\\ P y} = IMAGE f {x | x IN s /\\ P(f x)}
       #|  nsum {t | t IN {group_orbit G s (a:A->X->X) x | x | x IN s} /\\\n              t HAS_SIZE 1} (\\i. 1)
       #|  forall y:num. x = y /\\ (y == z) (mod n) ==> (x == z) (mod n)
-      #|  k:num
+      #|  (k : Num)
       #|  forall G s (a:A->X->X) p.\n        group_action G s a /\\ FINITE s /\\\n        prime p /\\ FINITE(group_carrier G) /\\ pgroup {p} G\n        ==> (CARD {x | x IN s /\\ forall g. g IN group_carrier G ==> a g x = x} ==\n             CARD s) (mod p)
-      #|  (x == y) (mod p) ==> x = 0 ==> p divides y
-      #|  p:num
-      #|  a:A->X->X
-      #|  s:X->bool
-      #|  G:A group
+      #|  op_eq_eq((x : Num), (y : Num), mod((p : Num))) \226\134\146 x == 0 \226\134\146 divides(p, y)
+      #|  (p : Num)
+      #|  (a : (A, X) -> X)
+      #|  (s : (X) -> Bool)
+      #|  (G : Group[A])
       #|  forall G s (a:A->X->X) p.\n        group_action G s a /\\\n        prime p /\\ FINITE(group_carrier G) /\\ pgroup {p} G /\\\n        FINITE s /\\ ~(p divides CARD s)\n        ==> ?x. x IN s /\\ forall g. g IN group_carrier G ==> a g x = x
-      #|  (x:A) IN group_carrier G
-      #|  group_inv G x:A
-      #|  x:A
-      #|  y:A
-      #|  p:num
+      #|  IN((x : A), group_carrier((G : Group[A])))
+      #|  group_inv((G : Group[A]), (x : A))
+      #|  (x : A)
+      #|  (y : A)
+      #|  (p : Num)
       #|  group_action (subgroup_generated G j:A group)\n                 {left_coset G x h | x | x IN group_carrier G} a
-      #|  a:A->(A->bool)->(A->bool) = IMAGE o group_mul G
+      #|  (a : (A, (A) -> Bool, A) -> Bool) == o(IMAGE, group_mul((G : Group[A])))
       #|  forall(G:A group) p k h j.\n        prime p /\\\n        h subgroup_of G /\\\n        FINITE {left_coset G x h | x | x IN group_carrier G} /\\\n        ~(p divides CARD {left_coset G x h | x | x IN group_carrier G}) /\\\n        j subgroup_of G /\\ FINITE j /\\ CARD j = p EXP k\n        ==> ?a. a IN group_carrier G /\\\n                j SUBSET IMAGE (group_conjugation G a) h
       #|  m * p EXP k = n /\\ p divides m ==> p EXP k * p EXP 1 divides n
-      #|  p ==> ~q <=> ~(p /\\ q)
-      #|  h:A->bool
-      #|  G:A group
-      #|  l:num
-      #|  p:num
+      #|  ((p : Bool) \226\134\146 !(q : Bool)) == !(p && q)
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  (l : Num)
+      #|  (p : Num)
       #|  forall(G:A group) p k l h j.\n        FINITE(group_carrier G) /\\ prime p /\\\n        ~(p EXP (k + 1) divides CARD(group_carrier G)) /\\\n        h subgroup_of G /\\ CARD h = p EXP k /\\\n        j subgroup_of G /\\ CARD j = p EXP l\n        ==> ?a. a IN group_carrier G /\\\n                j SUBSET IMAGE (group_conjugation G a) h
-      #|  a:A
-      #|  h':A->bool
-      #|  h:A->bool
-      #|  k:num
-      #|  k:num
-      #|  p:num
-      #|  G:A group
+      #|  (a : A)
+      #|  (h' : (A) -> Bool)
+      #|  (h : (A) -> Bool)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  (G : Group[A])
       #|  forall(G:A group) p k h h'.\n        FINITE(group_carrier G) /\\ prime p /\\\n        ~(p EXP (k + 1) divides CARD(group_carrier G)) /\\\n        h subgroup_of G /\\ CARD h = p EXP k /\\\n        h' subgroup_of G /\\ CARD h' = p EXP k\n        ==> group_conjugate G h h'
-      #|  ~(k + 1 <= k)
-      #|  k:num
-      #|  p:num
+      #|  !((k : Num) + 1 <= k)
+      #|  (k : Num)
+      #|  (p : Num)
       #|  forall(G:A group) p k h h'.\n        FINITE(group_carrier G) /\\ prime p /\\\n        index p (CARD(group_carrier G)) = k /\\\n        h subgroup_of G /\\ CARD h = p EXP k /\\\n        h' subgroup_of G /\\ CARD h' = p EXP k\n        ==> group_conjugate G h h'
       #|  forall(G:A group) p k h h'.\n      FINITE(group_carrier G) /\\ prime p /\\\n      index p (CARD(group_carrier G)) = k /\\\n      h subgroup_of G /\\ CARD h = p EXP k\n      ==> (h' subgroup_of G /\\ CARD h' = p EXP k <=> group_conjugate G h h')
-      #|  IMAGE (group_conjugation G (a:A)) s
-      #|  a:A
-      #|  ~(p + 1 <= p)
-      #|  h:A->bool
-      #|  s:A->bool
-      #|  k:num
-      #|  index p (CARD(group_carrier  G:A->bool))
-      #|  p:num
-      #|  G:A group
-      #|  s:A->bool
-      #|  index p (CARD(group_carrier G:A->bool))
-      #|  p:num
-      #|  G:A group
+      #|  IMAGE(group_conjugation((G : Group[A]), (a : A)), (s : (A) -> Bool))
+      #|  (a : A)
+      #|  !((p : Num) + 1 <= p)
+      #|  (h : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (k : Num)
+      #|  index((p : Num), CARD(group_carrier((G : Group[A]))))
+      #|  (p : Num)
+      #|  (G : Group[A])
+      #|  (s : (A) -> Bool)
+      #|  index((p : Num), CARD(group_carrier((G : Group[A]))))
+      #|  (p : Num)
+      #|  (G : Group[A])
       #|  forall G p k (h:A->bool).\n        FINITE(group_carrier G) /\\ prime p /\\\n        h subgroup_of G /\\ CARD h = p EXP k\n        ==> ?h'. h' subgroup_of G /\\ h SUBSET h' /\\\n                 CARD h' = p EXP (index p (CARD(group_carrier G)))
       #|  forall(G:A group) p k h h'.\n      FINITE(group_carrier G) /\\ prime p /\\\n      index p (CARD(group_carrier G)) = k /\\\n      h normal_subgroup_of G /\\ CARD h = p EXP k\n      ==> (h' subgroup_of G /\\ CARD h' = p EXP k <=> h' = h)
       #|  forall(G:A group) h p k.\n        FINITE(group_carrier G) /\\ prime p /\\\n        index p (CARD(group_carrier G)) = k /\\\n        h subgroup_of G /\\ CARD h = p EXP k\n        ==> CARD {h | h subgroup_of G /\\ CARD h = p EXP k} =\n            CARD(group_carrier G) DIV CARD(group_normalizer G h)
-      #|  h:A->bool
-      #|  G:A group
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
       #|  forall(G:A group) h p k.\n        FINITE(group_carrier G) /\\ prime p /\\\n        index p (CARD(group_carrier G)) = k /\\\n        h subgroup_of G /\\ CARD h = p EXP k\n        ==> CARD {h | h subgroup_of G /\\ CARD h = p EXP k} *\n            CARD(group_normalizer G h) =\n            CARD(group_carrier G)
-      #|  k:num
-      #|  p:num
-      #|  h:A->bool
-      #|  G:A group
-      #|  (forall x. P x <=> x = a) <=> {x | P x} = {a}
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) == (x == (a : _))) == ({(x : _) | P(x)} == {a})
       #|  forall G p k h:A->bool.\n        FINITE (group_carrier G) /\\\n        prime p /\\\n        index p (CARD (group_carrier G)) = k /\\\n        h subgroup_of G /\\\n        CARD h = p EXP k\n        ==> ((forall h'. h' subgroup_of G /\\ CARD h' = p EXP k <=> h' = h) <=>\n             h normal_subgroup_of G)
-      #|  h:A->bool
-      #|  k:num
-      #|  p:num
-      #|  G:A group
-      #|  (h:A->bool) subgroup_of G
-      #|  CARD(h:A->bool) = p EXP k
-      #|  h:A->bool
+      #|  (h : (A) -> Bool)
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  (G : Group[A])
+      #|  subgroup_of((h : (A) -> Bool), (G : Group[A]))
+      #|  CARD((h : (A) -> Bool)) == EXP((p : Num), (k : Num))
+      #|  (h : (A) -> Bool)
       #|  forall(G:A group) p k.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        index p (CARD(group_carrier G)) = k\n        ==> ((?!h. h subgroup_of G /\\ CARD h = p EXP k) <=>\n             (?h. h normal_subgroup_of G /\\ CARD h = p EXP k))
-      #|  s:A->bool
+      #|  (s : (A) -> Bool)
       #|  subgroup_generated G (group_normalizer G s):A group
-      #|  (p:num) divides n ==> p * m divides m * n
-      #|  k:num
-      #|  p:num
-      #|  s:A->bool
-      #|  G:A group
-      #|  s:A->bool
-      #|  k:num
-      #|  p:num
-      #|  G:A group
+      #|  divides((p : Num), (n : Num)) \226\134\146 divides(p * (m : Num), m * n)
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  (s : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  (s : (A) -> Bool)
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  (G : Group[A])
       #|  forall(G:A group) p k.\n        FINITE(group_carrier G) /\\ prime p /\\\n        index p (CARD(group_carrier G)) = k\n        ==> CARD {h | h subgroup_of G /\\ CARD h = p EXP k}\n            divides (CARD(group_carrier G)) DIV (p EXP k)
-      #|  x:A
+      #|  (x : A)
       #|  z IN s /\\ (forall x. P x ==> x IN s DELETE z)\n      ==> (?x. P x) ==> {z} PSUBSET s
-      #|  (n:A->bool) HAS_SIZE 1
-      #|  prime p ==> ~(p = 1)
-      #|  (p * q == 1) (mod p) <=> p = 1
+      #|  HAS_SIZE((n : (A) -> Bool), 1)
+      #|  prime((p : Num)) \226\134\146 !(p == 1)
+      #|  op_eq_eq((p : Num) * (q : Num), 1, mod(p)) == (p == 1)
       #|  pgroup {p} (G:A group)
-      #|  p /\\ (p ==> q ==> r) ==> (p ==> q) ==> r
-      #|  x:A
-      #|  a:A
-      #|  group_carrier G:A->bool
-      #|  p:num
-      #|  group_conjugation (G:A group)
-      #|  n DELETE (group_id G:A)
-      #|  G:A group
+      #|  (p : Bool) && (p \226\134\146 (q : Bool) \226\134\146 (r : Bool)) \226\134\146 (p \226\134\146 q) \226\134\146 r
+      #|  (x : A)
+      #|  (a : A)
+      #|  group_carrier((G : Group[A]))
+      #|  (p : Num)
+      #|  group_conjugation((G : Group[A]))
+      #|  DELETE((n : (A) -> Bool), group_id((G : Group[A])))
+      #|  (G : Group[A])
       #|  forall G (n:A->bool) p.\n        prime p /\\ FINITE(group_carrier G) /\\ pgroup {p} G /\\\n        n normal_subgroup_of G /\\ ~(n = {group_id G})\n        ==> {group_id G} PSUBSET\n            (group_centralizer G (group_carrier G) INTER n)
-      #|  p:num
-      #|  group_carrier G:A->bool
-      #|  G:A group
+      #|  (p : Num)
+      #|  group_carrier((G : Group[A]))
+      #|  (G : Group[A])
       #|  forall(G:A group) p k.\n        prime p /\\ ~(k = 0) /\\ (group_carrier G) HAS_SIZE (p EXP k)\n        ==> {group_id G} PSUBSET (group_centralizer G (group_carrier G))
       #|  (forall x. x IN s ==> f x = g x) /\\\n      (IMAGE g s SUBSET s ==> IMAGE g s = s)\n      ==> ((forall x. x IN s ==> f x IN s) <=> IMAGE g s = s)
-      #|  forall x:A. x IN h ==> x IN group_carrier G
+      #|  \226\136\128 x : A, IN(x, (h : (A) -> Bool)) \226\134\146 IN(x, group_carrier((G : Group[A])))
       #|  h subgroup_of G /\\ ((forall x. x IN h ==> P(group_inv G x)) <=> Q)\n      ==> ((forall x. x IN h ==> P x) <=> Q)
-      #|  (x:A) IN group_carrier G
-      #|  x:A
+      #|  IN((x : A), group_carrier((G : Group[A])))
+      #|  (x : A)
       #|  (forall x. P x /\\ R(f x) <=> Q x)\n      ==> {y | y IN {f x | P x} /\\ R y} = {f x | Q x}
       #|  CARD { left_coset (subgroup_generated G (group_normalizer G h)) x h |x|\n           (x:A) IN group_carrier\n                     (subgroup_generated G (group_normalizer G h))}
       #|  p divides y /\\ x:num = z ==> (x == y) (mod p) ==> p divides z
-      #|  p:num
+      #|  (p : Num)
       #|  group_action (subgroup_generated G h:A group)\n                 {left_coset G x h | x | x IN group_carrier G} a
-      #|  a:A->(A->bool)->(A->bool) = IMAGE o group_mul G
-      #|  FINITE(h:A->bool)
+      #|  (a : (A, (A) -> Bool, A) -> Bool) == o(IMAGE, group_mul((G : Group[A])))
+      #|  FINITE((h : (A) -> Bool))
       #|  forall G p k h:A->bool.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        h subgroup_of G /\\ CARD h = p EXP k /\\\n        p divides CARD(group_carrier G) DIV CARD h\n        ==> p divides CARD(group_normalizer G h) DIV CARD h
-      #|  d:num
-      #|  ~(p = 0) /\\ ~(p = 1)
-      #|  h:A->bool
-      #|  i:num
-      #|  p:num
-      #|  G:A group
-      #|  i:num
-      #|  h:A->bool
-      #|  G:A group
+      #|  (d : Num)
+      #|  !((p : Num) == 0) && !(p == 1)
+      #|  (h : (A) -> Bool)
+      #|  (i : Num)
+      #|  (p : Num)
+      #|  (G : Group[A])
+      #|  (i : Num)
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
       #|  forall G p h:A->bool.\n        prime p /\\ FINITE(group_carrier G) /\\ pgroup {p} G /\\\n        h subgroup_of G /\\ ~(h = group_carrier G)\n        ==> h PSUBSET group_normalizer G h
-      #|  h:A->bool = group_carrier G
+      #|  (h : (A) -> Bool) == group_carrier((G : Group[A]))
       #|  forall G p h:A->bool.\n        prime p /\\ FINITE(group_carrier G) /\\ pgroup {p} G /\\\n        h subgroup_of G /\\\n        (forall h'. h' subgroup_of G /\\ h PSUBSET h' ==> h' = group_carrier G)\n        ==> h normal_subgroup_of G
-      #|  group_inv G x:A
-      #|  group_mul G (group_inv G g) x:A
-      #|  (x:A) IN group_carrier G
-      #|  x:A
-      #|  IMAGE (group_conjugation G (g:A)) h
-      #|  h:A->bool
-      #|  k:num
-      #|  p:num
-      #|  subgroup_generated G (j:A->bool)
-      #|  g:A
+      #|  group_inv((G : Group[A]), (x : A))
+      #|  group_mul((G : Group[A]), group_inv(G, (g : A)), (x : A))
+      #|  IN((x : A), group_carrier((G : Group[A])))
+      #|  (x : A)
+      #|  IMAGE(group_conjugation((G : Group[A]), (g : A)), (h : (A) -> Bool))
+      #|  (h : (A) -> Bool)
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  subgroup_generated((G : Group[A]), (j : (A) -> Bool))
+      #|  (g : A)
       #|  forall(G:A group) p k h j.\n        prime p /\\\n        FINITE j /\\ j normal_subgroup_of G /\\\n        h SUBSET j /\\ h subgroup_of G /\\\n        index p (CARD j) = k /\\ CARD h = p EXP k\n        ==> group_setmul G (group_normalizer G h) j = group_carrier G
-      #|  group_normalizer G s:A->bool
-      #|  s:A->bool
-      #|  subgroup_generated G h:A group
-      #|  h:A->bool
-      #|  G:A group
-      #|  h:A->bool
-      #|  s:A->bool
-      #|  k:num
-      #|  p:num
+      #|  group_normalizer((G : Group[A]), (s : (A) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  subgroup_generated((G : Group[A]), (h : (A) -> Bool))
+      #|  (h : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  (h : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (k : Num)
+      #|  (p : Num)
       #|  subgroup_generated G (group_normalizer G (h:A->bool))
       #|  forall G p k s h:A->bool.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        index p (CARD(group_carrier G)) = k /\\\n        s subgroup_of G /\\ CARD s = p EXP k /\\\n        h subgroup_of G /\\ group_normalizer G s SUBSET h\n        ==> group_normalizer G h = h
-      #|  h:A->bool
-      #|  k:num
-      #|  p:num
+      #|  (h : (A) -> Bool)
+      #|  (k : Num)
+      #|  (p : Num)
       #|  forall G p k h:A->bool.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        index p (CARD(group_carrier G)) = k /\\\n        h subgroup_of G /\\ CARD h = p EXP k\n        ==> group_normalizer G (group_normalizer G h) = group_normalizer G h
       #|  forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (g INTER h SUBSET {group_id G} <=> g INTER h = {group_id G})
       #|  forall x y:A. x IN g /\\ y IN h /\\ group_mul G x (group_inv G y) = group_id G\n            ==> x = group_id G /\\ group_inv G y = group_id G
       #|  forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (g INTER h SUBSET {group_id G} <=>\n             forall x y. x IN g /\\ y IN h /\\ group_mul G x y = group_id G\n                   ==> x = group_id G /\\ y = group_id G)
-      #|  group_id G:A
-      #|  y:A
-      #|  group_id G:A
-      #|  x:A
-      #|  y:A
-      #|  x:A
+      #|  group_id((G : Group[A]))
+      #|  (y : A)
+      #|  group_id((G : Group[A]))
+      #|  (x : A)
+      #|  (y : A)
+      #|  (x : A)
       #|  group_mul G (group_inv G x)\n         (group_mul G (group_mul G x y) (group_inv G y)) = group_id G
       #|  \\z:A. group_mul G (group_inv G x') (group_mul G z (group_inv G y'))
-      #|  group_div G y y':A
-      #|  group_mul G (group_inv G x') x:A
-      #|  y':A
-      #|  y:A
-      #|  x':A
-      #|  x:A
+      #|  group_div((G : Group[A]), (y : A), (y' : A))
+      #|  group_mul((G : Group[A]), group_inv(G, (x' : A)), (x : A))
+      #|  (y' : A)
+      #|  (y : A)
+      #|  (x' : A)
+      #|  (x : A)
       #|  forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (g INTER h SUBSET {group_id G} <=>\n             forall x x' y y'. x IN g /\\ x' IN g /\\ y IN h /\\ y' IN h /\\\n                         group_mul G x y = group_mul G x' y'\n                         ==> x = x' /\\ y = y')
-      #|  group_setmul G (group_setmul G {x:A} h) {y}
-      #|  group_setmul G (group_setmul G {x:A} g) {y}
+      #|  group_setmul((G : Group[A]), group_setmul(G, {(x : A)}, (h : (A) -> Bool)), {(y : A)})
+      #|  group_setmul((G : Group[A]), group_setmul(G, {(x : A)}, (g : (A) -> Bool)), {(y : A)})
       #|  (x:A) IN group_carrier G /\\ y IN group_carrier G /\\\n                g SUBSET group_carrier G /\\ h SUBSET group_carrier G
-      #|  y:A
-      #|  x:A
-      #|  a:A
-      #|  a:A
-      #|  a:A
-      #|  a:A
+      #|  (y : A)
+      #|  (x : A)
+      #|  (a : A)
+      #|  (a : A)
+      #|  (a : A)
+      #|  (a : A)
       #|  forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G /\\\n        group_carrier G SUBSET group_setmul G g h /\\\n        (forall x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x)\n        ==> g normal_subgroup_of G /\\ h normal_subgroup_of G
-      #|  x':A
-      #|  x:A
-      #|  y':A
-      #|  y:A
+      #|  (x' : A)
+      #|  (x : A)
+      #|  (y' : A)
+      #|  (y : A)
       #|  u = v /\\ s = t\n    ==> (forall x. x IN t ==> x IN s) /\\ (forall x. x IN u ==> x IN v)
-      #|  y:A
-      #|  x:A
-      #|  (h:A->bool) normal_subgroup_of G
-      #|  (g:A->bool) normal_subgroup_of G
-      #|  (x:A) IN group_carrier G /\\ y IN group_carrier G
-      #|  y:A
-      #|  x:A
+      #|  (y : A)
+      #|  (x : A)
+      #|  normal_subgroup_of((h : (A) -> Bool), (G : Group[A]))
+      #|  normal_subgroup_of((g : (A) -> Bool), (G : Group[A]))
+      #|  IN((x : A), group_carrier((G : Group[A]))) && IN((y : A), group_carrier(G))
+      #|  (y : A)
+      #|  (x : A)
       #|  forall G g h:A->bool.\n        g normal_subgroup_of G /\\ h normal_subgroup_of G /\\\n        g INTER h SUBSET {group_id G}\n        ==> forall x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x
       #|  forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G /\\\n        group_carrier G SUBSET group_setmul G g h /\\\n        g INTER h SUBSET {group_id G}\n        ==> (g normal_subgroup_of G /\\ h normal_subgroup_of G <=>\n             forall x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x)
       #|  (x1:A) IN group_carrier G /\\\n    (x2:A) IN group_carrier G /\\\n    (y1:A) IN group_carrier G /\\\n    (y2:A) IN group_carrier G
-      #|  y2:A
-      #|  x2:A
-      #|  y1:A
-      #|  x1:A
-      #|  (x:A,y:A)
-      #|  y:A
-      #|  x:A
+      #|  (y2 : A)
+      #|  (x2 : A)
+      #|  (y1 : A)
+      #|  (x1 : A)
+      #|  ((x : A), (y : A))
+      #|  (y : A)
+      #|  (x : A)
       #|  forall G g h:A->bool.\n        group_homomorphism\n            (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n            (\\(x,y). group_mul G x y) <=>\n        forall x y. x IN group_carrier G /\\ x IN g /\\\n              y IN group_carrier G /\\ y IN h\n              ==> group_mul G x y = group_mul G y x
       #|  forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (group_homomorphism\n              (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n              (\\(x,y). group_mul G x y) <=>\n              forall x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x)
       #|  forall G g h:A->bool.\n        abelian_group G\n        ==> group_homomorphism\n              (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n              (\\(x,y). group_mul G x y)
@@ -26061,69 +26061,69 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (group_isomorphism\n               (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n               (\\(x,y). group_mul G x y) <=>\n             g normal_subgroup_of G /\\ h normal_subgroup_of G /\\\n             g INTER h = {group_id G} /\\\n             group_setmul G g h = group_carrier G)
       #|  forall G g h:A->bool.\n        g normal_subgroup_of G /\\ h normal_subgroup_of G\n        ==> (group_isomorphism\n               (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n               (\\(x,y). group_mul G x y) <=>\n             g INTER h SUBSET {group_id G} /\\\n             group_setmul G g h = group_carrier G)
       #|  forall G g h:A->bool.\n        abelian_group G /\\ g subgroup_of G /\\ h subgroup_of G\n        ==> (group_isomorphism\n               (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n               (\\(x,y). group_mul G x y) <=>\n             g INTER h SUBSET {group_id G} /\\\n             group_setmul G g h = group_carrier G)
-      #|  h:A->bool
-      #|  g:A->bool
-      #|  subgroup_generated G (group_setmul G g h:A->bool)
+      #|  (h : (A) -> Bool)
+      #|  (g : (A) -> Bool)
+      #|  subgroup_generated((G : Group[A]), group_setmul(G, (g : (A) -> Bool), (h : (A) -> Bool)))
       #|  forall G g h:A->bool.\n        g normal_subgroup_of G /\\ h normal_subgroup_of G /\\\n        g INTER h = {group_id G}\n        ==> prod_group (subgroup_generated G g) (subgroup_generated G h)\n            isomorphic_group subgroup_generated G (group_setmul G g h)
       #|  forall(f:A->B) (g:B->C) G H K.\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,K) g /\\\n        group_monomorphism(G,K) (g o f)\n        ==> (group_image(G,H) f) INTER (group_kernel(H,K) g) =\n            {group_id H}
-      #|  group_mul H (group_inv H ((f:A->B) x)) y
-      #|  x:A
-      #|  x:A
+      #|  group_mul((H : Group[B]), group_inv(H, (f : (A) -> B)((x : A))), (y : B))
+      #|  (x : A)
+      #|  (x : A)
       #|  P /\\ IMAGE f s = t ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
-      #|  (g:B->C) y
-      #|  y:B
+      #|  (g : (B) -> C)((y : B))
+      #|  (y : B)
       #|  forall(f:A->B) (g:B->C) G H K.\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,K) g /\\\n        group_epimorphism(G,K) (g o f)\n        ==> group_setmul H (group_image(G,H) f) (group_kernel(H,K) g) =\n            group_carrier H
-      #|  group_mul H y (group_inv H ((f:A->B) x))
-      #|  x:A
-      #|  (p /\\ q) /\\ r <=> q /\\ p /\\ r
-      #|  x:A
+      #|  group_mul((H : Group[B]), (y : B), group_inv(H, (f : (A) -> B)((x : A))))
+      #|  (x : A)
+      #|  (((p : Bool) && (q : Bool)) && (r : Bool)) == (q && p && r)
+      #|  (x : A)
       #|  P /\\ IMAGE f s = t ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
-      #|  (g:B->C) y
-      #|  y:B
+      #|  (g : (B) -> C)((y : B))
+      #|  (y : B)
       #|  forall(f:A->B) (g:B->C) G H K.\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,K) g /\\\n        group_epimorphism(G,K) (g o f)\n        ==> group_setmul H (group_kernel(H,K) g) (group_image(G,H) f) =\n            group_carrier H
       #|  forall(f:A->B) (g:B->C) G H K.\n      group_homomorphism(G,H) f /\\\n      group_homomorphism(H,K) g /\\\n      group_isomorphism(G,K) (g o f)\n      ==> (group_image(G,H) f) INTER (group_kernel(H,K) g) = {group_id H} /\\\n          group_setmul H (group_image(G,H) f) (group_kernel(H,K) g) =\n          group_carrier H
       #|  forall(f:A->B) (g:B->C) G H K.\n      group_homomorphism(G,H) f /\\\n      group_homomorphism(H,K) g /\\\n      group_isomorphism(G,K) (g o f)\n      ==> (group_kernel(H,K) g) INTER (group_image(G,H) f) = {group_id H} /\\\n           group_setmul H (group_kernel(H,K) g) (group_image(G,H) f) =\n           group_carrier H
       #|  forall(f:A->B) (g:B->C) G H K.\n        abelian_group H /\\\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,K) g /\\\n        group_isomorphism(G,K) (g o f)\n        ==> group_isomorphism\n              (prod_group (subgroup_generated H (group_image(G,H) f))\n                          (subgroup_generated H (group_kernel(H,K) g)),H)\n              (\\(x,y). group_mul H x y)
       #|  forall(f:A->B) (g:B->C) G H K.\n        abelian_group H /\\\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,K) g /\\\n        group_isomorphism(G,K) (g o f)\n        ==> group_isomorphism\n              (prod_group (subgroup_generated H (group_kernel(H,K) g))\n                          (subgroup_generated H (group_image(G,H) f)),H)\n              (\\(x,y). group_mul H x y)
       #|  FINITE {i | i IN l /\\ P i}\n            ==> {i | i IN k /\\ P i} SUBSET {i | i IN l /\\ P i}\n                ==> FINITE {i | i IN k /\\ P i}
-      #|  g:K->A
-      #|  f:K->A
-      #|  {i,j} = {j,i}
-      #|  (i:K) <<= j \\/ j <<= i
-      #|  woset(<<=) /\\ fld(<<=) = (:K)
-      #|  (<<=) = @l. woset l /\\ fld l = (:K)
+      #|  (g : (K) -> A)
+      #|  (f : (K) -> A)
+      #|  {(i : _), (j : _)} == {j, i}
+      #|  (op_lt_lt_eq : (K, K) -> Bool)((i : K), (j : K)) || op_lt_lt_eq(j, i)
+      #|  woset((op_lt_lt_eq : (K, K) -> Bool)) && fld(op_lt_lt_eq) == UNIV
+      #|  (op_lt_lt_eq : (K, K) -> Bool) == select((l : (K, K) -> Bool) => woset(l) && fld(l) == UNIV)
       #|  group_sum G k f = group_inv G(group_sum G k g)\n      ==> forall k'. group_sum G k' f = group_sum G k f /\\\n               group_sum G k' g = group_sum G k g\n               ==> group_sum G k' f = group_inv G (group_sum G k' g)
-      #|  {i:K,j:K}
-      #|  {i:K,j:K}
-      #|  l:K
+      #|  {(i : K), (j : K)}
+      #|  {(i : K), (j : K)}
+      #|  (l : K)
       #|  RESTRICTION l\n            (\\l. if l = i then x else if l = j then y else group_id G):K->A
-      #|  y:A = group_id G
-      #|  x:A = group_id G
-      #|  (x:A) IN group_carrier G /\\ y IN group_carrier G
-      #|  y:A
-      #|  x:A
-      #|  j:K
-      #|  i:K
+      #|  (y : A) == group_id((G : Group[A]))
+      #|  (x : A) == group_id((G : Group[A]))
+      #|  IN((x : A), group_carrier((G : Group[A]))) && IN((y : A), group_carrier(G))
+      #|  (y : A)
+      #|  (x : A)
+      #|  (j : K)
+      #|  (i : K)
       #|  forall k l G (h:K->A->bool).\n      k SUBSET l\n      ==> (group_homomorphism (sum_group l (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k) <=>\n           pairwise (\\i j. forall x y. x IN group_carrier G /\\ x IN (h i) /\\\n                                 y IN group_carrier G /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k)
       #|  forall k l G (h:K->A->bool).\n      k SUBSET l /\\\n      (forall i. i IN k ==> (h i) subgroup_of G)\n      ==> (group_homomorphism (sum_group l (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k) <=>\n           pairwise (\\i j. forall x y. x IN (h i) /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k)
       #|  forall k G (h:K->A->bool).\n        pairwise (\\i j. forall x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k\n        ==> group_homomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k)
       #|  forall k G (h:K->A->bool).\n        abelian_group G\n        ==> group_homomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k)
-      #|  sum_group k (\\i:K. (B:B group))
+      #|  sum_group((k : (K) -> Bool), (i : K) => (B : Group[B]))
       #|  group_sum B k o (\\x. RESTRICTION k (\\i. ((f:K->A->B) i) (x i)))
       #|  forall(f:K->A->B) k A B.\n        abelian_group B /\\\n        (forall i. i IN k ==> group_homomorphism (A i,B) (f i))\n        ==> group_homomorphism (sum_group k A,B)\n             (\\x. group_sum B k (\\i. (f i) (x i)))
-      #|  x:A = group_id G
+      #|  (x : A) == group_id((G : Group[A]))
       #|  {j | ~(P j ==> j = i ==> Q)} = {j | j = i /\\ P i /\\ ~Q}
-      #|  (if p then q else T) <=> p ==> q
-      #|  p /\\ ~q <=> ~(p ==> q)
+      #|  (if (p : Bool) { (q : Bool) } else { true }) == (p \226\134\146 q)
+      #|  ((p : Bool) && !(q : Bool)) == !(p \226\134\146 q)
       #|  RESTRICTION l (\\l. if l = i then x else group_id G):K->A
-      #|  x:A
-      #|  i:K
+      #|  (x : A)
+      #|  (i : K)
       #|  (forall i. i IN f ==> forall x. x IN i /\\ x IN u ==> x IN t)\n      ==> u INTER UNIONS f SUBSET t
-      #|  s SUBSET t ==> a IN s ==> a IN t
-      #|  i:K
-      #|  i:K
-      #|  z:K->A
-      #|  (p /\\ q <=> p) <=> p ==> q
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 IN((a : _), s) \226\134\146 IN(a, t)
+      #|  (i : K)
+      #|  (i : K)
+      #|  (z : (K) -> A)
+      #|  (((p : Bool) && (q : Bool)) == p) == (p \226\134\146 q)
       #|  forall k l G (h:K->A->bool).\n        k SUBSET l\n        ==> (group_epimorphism (sum_group l (\\i. subgroup_generated G (h i)),\n                                subgroup_generated G (UNIONS {h i | i IN k}))\n                               (group_sum G k) <=>\n             pairwise (\\i j. forall x y. x IN group_carrier G /\\ x IN (h i) /\\\n                                   y IN group_carrier G /\\ y IN (h j)\n                                   ==> group_mul G x y = group_mul G y x) k)
       #|  forall k l G (h:K->A->bool).\n      k SUBSET l /\\\n      (forall i. i IN k ==> (h i) subgroup_of G)\n      ==> (group_epimorphism (sum_group l (\\i. subgroup_generated G (h i)),\n                              subgroup_generated G (UNIONS {h i | i IN k}))\n                              (group_sum G k) <=>\n           pairwise (\\i j. forall x y. x IN (h i) /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k)
       #|  forall k G (h:K->A->bool).\n        pairwise (\\i j. forall x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k\n        ==> group_epimorphism (sum_group k (\\i. subgroup_generated G (h i)),\n                               subgroup_generated G (UNIONS {h i | i IN k}))\n                               (group_sum G k)
@@ -26132,42 +26132,42 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall k l G (h:K->A->bool).\n        k SUBSET l /\\\n        (forall i. i IN k ==> (h i) subgroup_of G)\n        ==> (group_epimorphism (sum_group l (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k) <=>\n             pairwise (\\i j. forall x y. x IN (h i) /\\ y IN (h j)\n                                   ==> group_mul G x y = group_mul G y x) k /\\\n             subgroup_generated G (UNIONS {h i | i IN k}) = G)
       #|  forall k G (h:K->A->bool).\n        pairwise (\\i j. forall x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G\n        ==> group_epimorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k)
       #|  forall k G (h:K->A->bool).\n        abelian_group G /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G\n        ==> group_epimorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k)
-      #|  s SUBSET t ==> x IN s ==> x IN t
-      #|  j:K
-      #|  j:K
-      #|  (z:K->A) i
-      #|  i:K
-      #|  i IN k ==> i INSERT (k DELETE i) = k
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 IN((x : _), s) \226\134\146 IN(x, t)
+      #|  (j : K)
+      #|  (j : K)
+      #|  (z : (K) -> A)((i : K))
+      #|  (i : K)
+      #|  IN((i : _), (k : (_) -> Bool)) \226\134\146 INSERT(i, DELETE(k, i)) == k
+      #|  (z : (K) -> A)
+      #|  DELETE((k : (K) -> Bool), (i : K))
+      #|  (i : K)
+      #|  (G : Group[A])
+      #|  (i : K)
       #|  z:K->A
-      #|  k DELETE (i:K)
-      #|  i:K
-      #|  G:A group
-      #|  i:K
-      #|  z:K->A
-      #|  i:K
+      #|  (i : K)
       #|  x IN group_carrier G /\\ x = y\n          ==> group_mul G (group_inv G x) y = group_id G
-      #|  i IN k ==> i INSERT (k DELETE i) = k
-      #|  j:K
-      #|  i:K
-      #|  FINITE t ==> forall x. s SUBSET x INSERT t ==> FINITE s
+      #|  IN((i : _), (k : (_) -> Bool)) \226\134\146 INSERT(i, DELETE(k, i)) == k
+      #|  (j : K)
+      #|  (i : K)
+      #|  FINITE((t : (_) -> Bool)) \226\134\146 (\226\136\128 x : _, SUBSET((s : (_) -> Bool), INSERT(x, t)) \226\134\146 FINITE(s))
       #|  \\j. if j = i then group_inv G x else (z:K->A) j
-      #|  k DELETE (i:K)
-      #|  i:K
-      #|  G:A group
-      #|  i:K
-      #|  FINITE t ==> forall x. s SUBSET x INSERT t ==> FINITE s
+      #|  DELETE((k : (K) -> Bool), (i : K))
+      #|  (i : K)
+      #|  (G : Group[A])
+      #|  (i : K)
+      #|  FINITE((t : (_) -> Bool)) \226\134\146 (\226\136\128 x : _, SUBSET((s : (_) -> Bool), INSERT(x, t)) \226\134\146 FINITE(s))
       #|  RESTRICTION k (\\j. if j = i then group_inv G x else (z:K->A) j)
-      #|  z:K->A
+      #|  (z : (K) -> A)
       #|  P /\\ IMAGE f s = t ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
-      #|  x:A
-      #|  h:K->A->bool
-      #|  G:A group
-      #|  k:K->bool
-      #|  k DELETE (i:K)
-      #|  (x:A) IN group_carrier G
-      #|  x:A
-      #|  i:K
-      #|  (p ==> (q <=> r)) ==> (p /\\ q <=> p /\\ r)
+      #|  (x : A)
+      #|  (h : (K, A) -> Bool)
+      #|  (G : Group[A])
+      #|  (k : (K) -> Bool)
+      #|  DELETE((k : (K) -> Bool), (i : K))
+      #|  IN((x : A), group_carrier((G : Group[A])))
+      #|  (x : A)
+      #|  (i : K)
+      #|  ((p : Bool) \226\134\146 (q : Bool) == (r : Bool)) \226\134\146 (p && q) == (p && r)
       #|  forall k G (h:K->A->bool).\n      group_monomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                         (group_sum G k) <=>\n      pairwise (\\i j. forall x y. x IN group_carrier G /\\ x IN (h i) /\\\n                            y IN group_carrier G /\\ y IN (h j)\n                            ==> group_mul G x y = group_mul G y x) k /\\\n      forall i. i IN k\n          ==> group_carrier\n                 (subgroup_generated G (h i)) INTER\n              group_carrier\n                 (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n              {group_id G}
       #|  forall k G (h:K->A->bool).\n      (forall i. i IN k ==> (h i) subgroup_of G)\n      ==> (group_monomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k) <=>\n           pairwise (\\i j. forall x y. x IN (h i) /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k /\\\n           forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})
       #|  forall k G (h:K->A->bool).\n        (forall i. i IN k ==> (h i) subgroup_of G) /\\\n        pairwise (\\i j. forall x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        (forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> group_monomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k)
@@ -26181,619 +26181,619 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall k G (h:K->A->bool).\n        (forall i. i IN k ==> (h i) subgroup_of G) /\\\n        pairwise (\\i j. forall x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k)
       #|  forall k G (h:K->A->bool).\n        abelian_group G /\\\n        (forall i. i IN k ==> (h i) subgroup_of G) /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (forall i. i IN k\n             ==> h i INTER\n                 group_carrier\n                   (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                 {group_id G})\n        ==> group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k)
       #|  forall k G (h:K->A->bool).\n        pairwise (\\i j. forall x y. x IN group_carrier G /\\ x IN (h i) /\\\n                              y IN group_carrier G /\\ y IN (h j)\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (forall i. i IN k\n             ==> group_carrier\n                    (subgroup_generated G (h i)) INTER\n                 group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                 {group_id G})\n        ==> sum_group k (\\i. subgroup_generated G (h i)) isomorphic_group G
-      #|  group_sum (G:A group) (k:K->bool)
+      #|  group_sum((G : Group[A]), (k : (K) -> Bool))
       #|  forall k G (h:K->A->bool).\n        (forall i. i IN k ==> (h i) subgroup_of G) /\\\n        pairwise (\\i j. forall x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> sum_group k (\\i. subgroup_generated G (h i)) isomorphic_group G
-      #|  group_sum (G:A group) (k:K->bool)
+      #|  group_sum((G : Group[A]), (k : (K) -> Bool))
       #|  forall k G (h:K->A->bool).\n        abelian_group G /\\\n        (forall i. i IN k ==> (h i) subgroup_of G) /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> sum_group k (\\i. subgroup_generated G (h i)) isomorphic_group G
       #|  group_carrier(subgroup_generated G ((h:K->A->bool) j))
-      #|  t SUBSET t' ==> s INTER t SUBSET s INTER t'
-      #|  i:K
-      #|  j:K
-      #|  i:K
+      #|  SUBSET((t : (_) -> Bool), (t' : (_) -> Bool)) \226\134\146 SUBSET(INTER((s : (_) -> Bool), t), INTER(s, t'))
+      #|  (i : K)
+      #|  (j : K)
+      #|  (i : K)
       #|  forall k G (h:K->A->bool).\n        (forall i. i IN k ==> (h i) normal_subgroup_of G) /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> sum_group k (\\i. subgroup_generated G (h i)) isomorphic_group G
-      #|  \\u:A->bool. u
-      #|  G:A group
-      #|  u:(A->bool)->bool
-      #|  u:(A->bool)->bool
+      #|  (u : (A) -> Bool) => u
+      #|  (G : Group[A])
+      #|  (u : ((A) -> Bool) -> Bool)
+      #|  (u : ((A) -> Bool) -> Bool)
       #|  forall(G:A group) u.\n        abelian_group G\n        ==> group_carrier(subgroup_generated G (UNIONS u)) =\n            IMAGE (group_sum G u)\n                  (group_carrier (sum_group u (\\i. subgroup_generated G i)))
-      #|  p /\\ ~q <=> ~(p ==> q)
+      #|  ((p : Bool) && !(q : Bool)) == !(p \226\134\146 q)
       #|  {y | y IN {f x | P x} /\\ Q y} = IMAGE f {x | P x /\\ Q(f x)}
       #|  forall(G:A group) u.\n        abelian_group G\n        ==> group_carrier(subgroup_generated G (UNIONS u)) =\n            { group_sum G u f | f |\n              (forall s. s IN u ==> f s IN group_carrier(subgroup_generated G s)) /\\\n              FINITE {s | s IN u /\\ ~(f s = group_id G)}}
       #|  forall(G:A group) u.\n        abelian_group G /\\ FINITE u\n        ==> group_carrier(subgroup_generated G (UNIONS u)) =\n            { group_sum G u f | f |\n              (forall s. s IN u ==> f s IN group_carrier(subgroup_generated G s))}
-      #|  t SUBSET u ==> {x | x IN u /\\ x IN t} = t
-      #|  \\s. if s IN t then (f:(A->bool)->A) s else group_id G
-      #|  f:(A->bool)->A
-      #|  t:(A->bool)->bool
-      #|  f:(A->bool)->A
-      #|  {s | s IN u /\\ ~((f:(A->bool)->A) s = group_id G)}
-      #|  f:(A->bool)->A
+      #|  SUBSET((t : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 {(x : _) | IN(x, u) && IN(x, t)} == t
+      #|  (s : (A) -> Bool) => if IN(s, (t : ((A) -> Bool) -> Bool)) { (f : ((A) -> Bool) -> A)(s) } else { group_id((G : Group[A])) }
+      #|  (f : ((A) -> Bool) -> A)
+      #|  (t : ((A) -> Bool) -> Bool)
+      #|  (f : ((A) -> Bool) -> A)
+      #|  {(s : (A) -> Bool) | IN(s, (u : ((A) -> Bool) -> Bool)) && !((f : ((A) -> Bool) -> A)(s) == group_id((G : Group[A])))}
+      #|  (f : ((A) -> Bool) -> A)
       #|  forall(G:A group) u.\n        abelian_group G\n        ==> group_carrier(subgroup_generated G (UNIONS u)) =\n            { group_sum G t f | t,f |\n              FINITE t /\\ t SUBSET u /\\\n              (forall s. s IN t ==> f s IN group_carrier(subgroup_generated G s))}
-      #|  FINITE {x | x IN s /\\ ~((n:A->int) x = &0)}
+      #|  FINITE({(x : A) | IN(x, (s : (A) -> Bool)) && !((n : (A) -> Int)(x) == int_of_num(0))})
       #|  FINITE {x | x IN s /\\ ~((m:A->int) x = &0)}
       #|  FINITE {x | x IN s /\\ ~((m:A->int) x = &0)}
       #|  FINITE {x | x IN s /\\ ~((n:A->int) x = &0)}
-      #|  \\x. ((m:A->int) x) + n x
-      #|  n:A->int
-      #|  m:A->int
-      #|  \\x. --((n:A->int) x)
-      #|  n:A->int
-      #|  (\\x. &0):A->int
-      #|  x IN s ==> {y | y IN s /\\ y = x} = {x}
-      #|  (if p then F else T) <=> ~p
-      #|  \\y:A. if y = x then &1:int else &0
-      #|  x:A
-      #|  x:A
-      #|  n:A->int
+      #|  (x : A) => (m : (A) -> Int)(x) + (n : (A) -> Int)(x)
+      #|  (n : (A) -> Int)
+      #|  (m : (A) -> Int)
+      #|  (x : A) => -(n : (A) -> Int)(x)
+      #|  (n : (A) -> Int)
+      #|  (x : A) => int_of_num(0)
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 {(y : _) | IN(y, s) && y == x} == {x}
+      #|  (if (p : Bool) { false } else { true }) == !p
+      #|  (y : A) => if y == (x : A) { int_of_num(1) } else { int_of_num(0) }
+      #|  (x : A)
+      #|  (x : A)
+      #|  (n : (A) -> Int)
       #|  forall G (s:A->bool).\n        abelian_group G /\\ s SUBSET group_carrier G\n        ==> group_carrier(subgroup_generated G s) =\n            { group_sum G s (\\x. group_zpow G x (n x)) | n |\n              FINITE {x | x IN s /\\ ~(n x = &0)}}
       #|  forall G (s:A->bool).\n        abelian_group G /\\ FINITE s /\\ s SUBSET group_carrier G\n        ==> group_carrier(subgroup_generated G s) =\n            { group_sum G s (\\x. group_zpow G x (n x)) | n IN (:A->int)}
-      #|  t SUBSET u ==> {x | x IN u /\\ x IN t} = t
-      #|  \\x. if x IN t then (f:A->int) x else &0
-      #|  f:A->int
-      #|  t:A->bool
-      #|  f:A->int
-      #|  {x | x IN s /\\ ~((f:A->int) x = &0)}
-      #|  f:A->int
+      #|  SUBSET((t : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 {(x : _) | IN(x, u) && IN(x, t)} == t
+      #|  (x : A) => if IN(x, (t : (A) -> Bool)) { (f : (A) -> Int)(x) } else { int_of_num(0) }
+      #|  (f : (A) -> Int)
+      #|  (t : (A) -> Bool)
+      #|  (f : (A) -> Int)
+      #|  {(x : A) | IN(x, (s : (A) -> Bool)) && !((f : (A) -> Int)(x) == int_of_num(0))}
+      #|  (f : (A) -> Int)
       #|  forall G (s:A->bool).\n        abelian_group G /\\ s SUBSET group_carrier G\n        ==> group_carrier(subgroup_generated G s) =\n            { group_sum G t (\\x. group_zpow G x (n x)) | t,n |\n              FINITE t /\\ t SUBSET s}
       #|  group_carrier(subgroup_generated G t) SUBSET\n    group_carrier(subgroup_generated G (s UNION t)) /\\\n    x IN group_carrier(subgroup_generated G t)\n    ==> x IN group_carrier(subgroup_generated G (s UNION t))
-      #|  group_mul G x y:A = z
+      #|  group_mul((G : Group[A]), (x : A), (y : A)) == (z : A)
       #|  (forall q. prime q ==> P q \\/ Q q ==> q IN p INSERT t)\n      ==> ~Q p ==> (forall q. prime q /\\ Q q ==> q IN t)
-      #|  y:A
-      #|  x:A
-      #|  G:A group
-      #|  y:A
-      #|  x:A
+      #|  (y : A)
+      #|  (x : A)
+      #|  (G : Group[A])
+      #|  (y : A)
+      #|  (x : A)
       #|  ~({p | prime p} SUBSET s) ==> (forall p. prime p ==> p IN s) ==> Q
-      #|  ~p ==> q <=> p \\/ q
-      #|  p:num
-      #|  z:A
-      #|  G:A group
-      #|  z:A
-      #|  t:num->bool
-      #|  p:num
-      #|  t:num->bool
-      #|  {p | prime p /\\ P p}
-      #|  FINITE {p | prime p /\\ P p}
-      #|  forall p. p IN {p | prime p /\\ P p} ==> prime p
+      #|  (!(p : Bool) \226\134\146 (q : Bool)) == (p || q)
+      #|  (p : Num)
+      #|  (z : A)
+      #|  (G : Group[A])
+      #|  (z : A)
+      #|  (t : (Num) -> Bool)
+      #|  (p : Num)
+      #|  (t : (Num) -> Bool)
+      #|  {(p : Num) | prime(p) && (P : (Num) -> Bool)(p)}
+      #|  FINITE({(p : Num) | prime(p) && (P : (Num) -> Bool)(p)})
+      #|  \226\136\128 p : Num, IN(p, {(p : Num) | prime(p) && (P : (Num) -> Bool)(p)}) \226\134\146 prime(p)
       #|  {x | x IN group_carrier G /\\\n         forall p. prime p /\\ p divides group_element_order G (x:A)\n             ==> p IN {p | prime p /\\ P p}}
       #|  forall(G:A group) P.\n      FINITE {p | prime p /\\ P p}\n      ==> subgroup_generated G\n           (UNIONS\n            {{ x | x IN group_carrier G /\\\n                   ?k. group_element_order G x = p EXP k} | prime p /\\ P p}) =\n          subgroup_generated G\n           {x | x IN group_carrier G /\\\n                forall p. prime p /\\ p divides group_element_order G x ==> P p}
       #|  group_carrier(subgroup_generated G\n     (UNIONS\n      {{y | y IN group_carrier G /\\ ?k. group_element_order G y = q EXP k} |q|\n       prime q /\\ q IN {p | p divides group_element_order G (x:A)}}))
-      #|  forall s. x IN s /\\ s SUBSET t ==> x IN t
-      #|  x:A
+      #|  \226\136\128 s : (_) -> Bool, IN((x : _), s) && SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
+      #|  (x : A)
       #|  forall(G:A group) P.\n        subgroup_generated G\n         (UNIONS\n           {{ x | x IN group_carrier G /\\\n                  ?k. group_element_order G x = p EXP k} | prime p /\\ P p}) =\n        subgroup_generated G\n         {x | x IN group_carrier G /\\ ~(group_element_order G x = 0) /\\\n              forall p. prime p /\\ p divides group_element_order G x ==> P p}
-      #|  prime p <=> prime p /\\ p IN (:num)
+      #|  prime((p : Num)) == (prime(p) && IN(p, UNIV))
       #|  forall(G:A group).\n        subgroup_generated G\n         (UNIONS\n           {{ x | x IN group_carrier G /\\\n                  ?k. group_element_order G x = p EXP k} | prime p}) =\n        subgroup_generated G\n         {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)}
       #|  forall(G:A group) p.\n        abelian_group G /\\ prime p\n        ==> pgroup {p} (subgroup_generated G\n                         {x | x IN group_carrier G /\\\n                              ?k. group_element_order G x = p EXP k})
-      #|  x:A
+      #|  (x : A)
       #|  forall(G:A group) p s.\n        prime p /\\\n        s SUBSET group_carrier G /\\\n        pgroup {p} (subgroup_generated G s)\n        ==> s SUBSET {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k}
       #|  {x | P x /\\ Q x /\\ R x} = {x | P x /\\ Q x} INTER {x | P x /\\ R x}
-      #|  k:num
-      #|  x:A
-      #|  p:num
+      #|  (k : Num)
+      #|  (x : A)
+      #|  (p : Num)
       #|  forall G:A group.\n        abelian_group G\n        ==> group_isomorphism\n             (sum_group {p | prime p}\n               (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k}),\n              subgroup_generated G\n               {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)})\n             (group_sum G {p | prime p})
       #|  forall G:A group.\n        abelian_group G\n        ==> subgroup_generated G\n               {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)}\n            isomorphic_group\n            sum_group {p | prime p}\n              (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k})
       #|  forall G:A group.\n        abelian_group G /\\\n        (forall x. x IN group_carrier G ==> ~(group_element_order G x = 0))\n        ==> group_isomorphism\n             (sum_group {p | prime p}\n               (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k}),\n              G)\n             (group_sum G {p | prime p})
       #|  forall G:A group.\n        abelian_group G /\\\n        (forall x. x IN group_carrier G ==> ~(group_element_order G x = 0))\n        ==> G isomorphic_group\n            sum_group {p | prime p}\n              (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k})
       #|  (p:num) divides pk /\\ x divides g ==> x = pk ==> p divides g
-      #|  (q ==> p) ==> (~p ==> q ==> r)
-      #|  ~(p divides CARD(group_carrier G:A->bool))
-      #|  k = 0
-      #|  k:num
-      #|  (x:A) IN group_carrier G
-      #|  x:A
-      #|  prime p
-      #|  p:num
-      #|  G:A group
+      #|  ((q : Bool) \226\134\146 (p : Bool)) \226\134\146 !p \226\134\146 q \226\134\146 (r : Bool)
+      #|  !divides((p : Num), CARD(group_carrier((G : Group[A]))))
+      #|  (k : Num) == 0
+      #|  (k : Num)
+      #|  IN((x : A), group_carrier((G : Group[A])))
+      #|  (x : A)
+      #|  prime((p : Num))
+      #|  (p : Num)
+      #|  (G : Group[A])
       #|  forall G:A group.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> G isomorphic_group\n            sum_group {p | prime p /\\ p divides CARD(group_carrier G)}\n              (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k})
       #|  forall G:A group.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> G isomorphic_group\n            product_group {p | prime p /\\ p divides CARD(group_carrier G)}\n              (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k})
-      #|  (x:num->A) p
-      #|  p:num
-      #|  (H:num->A group) p
-      #|  p:num
-      #|  p:num
-      #|  x:num->A
+      #|  (x : (Num) -> A)((p : Num))
+      #|  (p : Num)
+      #|  (H : (Num) -> Group[A])((p : Num))
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (x : (Num) -> A)
       #|  group_carrier G = IMAGE (f:(num->A)->A)\n                        (group_carrier(sum_group {p | prime p} H))
-      #|  f:(num->A)->A
-      #|  H:num->A group
+      #|  (f : ((Num) -> A) -> A)
+      #|  (H : (Num) -> Group[A])
       #|  \\p. subgroup_generated G {x:A | x IN group_carrier G /\\\n                        ?k. group_element_order G x = p EXP k}
       #|  forall G:A group.\n        abelian_group G\n        ==> ((forall x. x IN group_carrier G ==> ~(group_element_order G x = 0)) <=>\n             ?H:num->A group.\n                (forall p. prime p ==> pgroup {p} (H p)) /\\\n                G isomorphic_group sum_group {p | prime p} H)
-      #|  q /\\ (q ==> p) ==> p /\\ q
-      #|  a' INSERT t = {a':A} UNION t
+      #|  (q : Bool) && (q \226\134\146 (p : Bool)) \226\134\146 p && q
+      #|  INSERT((a' : A), (t : (A) -> Bool)) == UNION({a'}, t)
       #|  prod_group (sum_group {a'} (\\x:A. subgroup_generated G {x}))\n                         (sum_group t (\\x. subgroup_generated G {x}))
       #|  prod_group (subgroup_generated G {a':A})\n                         (subgroup_generated G (s DELETE a))
-      #|  (forall x. x IN a INSERT s ==> P x) ==> P a
-      #|  z:A->A
+      #|  (\226\136\128 x : _, IN(x, INSERT((a : _), (s : (_) -> Bool))) \226\134\146 (P : (_) -> Bool)(x)) \226\134\146 P(a)
+      #|  (z : (A) -> A)
       #|  (\\(x,y). group_mul G x y) o\n    (\\(x,y). x a',group_sum (G:A group) t y) o\n    (\\f:A->A. RESTRICTION {a'} f,RESTRICTION t f)
       #|  ~(a IN group_carrier (subgroup_generated G s))\n      ==> t SUBSET group_carrier (subgroup_generated G s) ==> ~(a IN t)
-      #|  ~((a':A) IN t)
-      #|  a INSERT s = {a} UNION s
+      #|  !IN((a' : A), (t : (A) -> Bool))
+      #|  INSERT((a : _), (s : (_) -> Bool)) == UNION({a}, s)
       #|  t <= r - 1 /\\ ~(r = 0) ==> (if p then t else SUC t) <= r
-      #|  (a':A) INSERT t
-      #|  t:A->bool
-      #|  r - 1 < r<=> ~(r = 0)
-      #|  s DELETE (a:A)
-      #|  n - r:int = m * q <=> q * m + r = n
-      #|  n div &m
-      #|  &m:int
-      #|  &0:int <= x /\\ x < m ==> abs x < m
-      #|  r /\\ p ==> ~(p /\\ ~q /\\ r) ==> q
-      #|  a':A
-      #|  \\x:A. if x = a' then n rem &m else r x
-      #|  s':A->bool
-      #|  &m:int
-      #|  r:A->int
-      #|  b:A
-      #|  b:A
+      #|  INSERT((a' : A), (t : (A) -> Bool))
+      #|  (t : (A) -> Bool)
+      #|  ((r : Num) - 1 < r) == !(r == 0)
+      #|  DELETE((s : (A) -> Bool), (a : A))
+      #|  ((n : Int) - (r : Int) == (m : Int) * (q : Int)) == (q * m + r == n)
+      #|  div((n : Int), int_of_num((m : Num)))
+      #|  int_of_num((m : Num))
+      #|  int_of_num(0) <= (x : Int) && x < (m : Int) \226\134\146 abs(x) < m
+      #|  (r : Bool) && (p : Bool) \226\134\146 !(p && !(q : Bool) && r) \226\134\146 q
+      #|  (a' : A)
+      #|  (x : A) => if x == (a' : A) { rem((n : Int), int_of_num((m : Num))) } else { (r : (A) -> Int)(x) }
+      #|  (s' : (A) -> Bool)
+      #|  int_of_num((m : Num))
+      #|  (r : (A) -> Int)
+      #|  (b : A)
+      #|  (b : A)
       #|  (b:A) IN group_carrier (subgroup_generated G (s DELETE a))
       #|  (x IN group_carrier G /\\ y IN group_carrier G) /\\\n      (group_mul G x y = group_id G ==> x = group_id G)\n      ==> group_mul G x y = group_id G\n          ==> x = group_id G /\\ y = group_id G
-      #|  b:A
-      #|  n:int
-      #|  s' = {a':A} UNION (s DELETE a)
-      #|  IMAGE f {g(x,y) | P x y} = {f(g(x,y)) | P x y}
+      #|  (b : A)
+      #|  (n : Int)
+      #|  (s' : (A) -> Bool) == UNION({(a' : A)}, DELETE((s : (A) -> Bool), (a : A)))
+      #|  IMAGE((f : (_) -> _), {(g : ((_, _)) -> _)(((x : _), (y : _))) | (P : (_, _) -> Bool)(x, y)}) == {f(g(((x : _), (y : _)))) | P(x, y)}
       #|  group_isomorphism (prod_group (subgroup_generated G {a'})\n                                  (subgroup_generated G (s DELETE a)),\n                       subgroup_generated G s')\n                      (\\(x,y). group_mul G (x:A) y)
-      #|  (b:A) IN group_carrier G
-      #|  b:A
-      #|  s = (a:A) INSERT (s DELETE a)
-      #|  m rem n = &0 <=> m div n * n = m
-      #|  &0:int <= x /\\ x < m ==> abs x < m
+      #|  IN((b : A), group_carrier((G : Group[A])))
+      #|  (b : A)
+      #|  (s : (A) -> Bool) == INSERT((a : A), DELETE(s, a))
+      #|  (rem((m : Int), (n : Int)) == int_of_num(0)) == (div(m, n) * n == m)
+      #|  int_of_num(0) <= (x : Int) && x < (m : Int) \226\134\146 abs(x) < m
       #|  (forall x. P x /\\ Q x ==> R x ==> S x)\n        ==> (forall x. P x ==> Q x) /\\ (forall x. R x) ==> (forall x. P x ==> S x)
       #|  (forall b. b IN s /\\ P b ==> Q b)\n        ==> forall t a. t SUBSET s DELETE a\n                  ==> forall b. b IN t /\\ ~(b = a) ==> P b ==> Q b
-      #|  a':A
-      #|  s DELETE (a:A)
-      #|  (b:A) IN group_carrier G
-      #|  b:A = a'
-      #|  b:A
-      #|  s = (a:A) INSERT (s DELETE a)
-      #|  ~(p /\\ q /\\ ~r /\\ s) <=> p ==> q /\\ s ==> r
-      #|  \\x:A. if x = a' then n a else n x rem n a
-      #|  s':A->bool
-      #|  abs((n:A->int) a) = &m
-      #|  group_pow G (a':A) m = group_id G
-      #|  SUC(r - 1) = r <=> ~(r = 0)
-      #|  CARD(s':A->bool) = r
+      #|  (a' : A)
+      #|  DELETE((s : (A) -> Bool), (a : A))
+      #|  IN((b : A), group_carrier((G : Group[A])))
+      #|  (b : A) == (a' : A)
+      #|  (b : A)
+      #|  (s : (A) -> Bool) == INSERT((a : A), DELETE(s, a))
+      #|  !((p : Bool) && (q : Bool) && !(r : Bool) && (s : Bool)) == (p \226\134\146 q && s \226\134\146 r)
+      #|  (x : A) => if x == (a' : A) { (n : (A) -> Int)((a : A)) } else { rem(n(x), n(a)) }
+      #|  (s' : (A) -> Bool)
+      #|  abs((n : (A) -> Int)((a : A))) == int_of_num((m : Num))
+      #|  group_pow((G : Group[A]), (a' : A), (m : Num)) == group_id(G)
+      #|  (SUC((r : Num) - 1) == r) == !(r == 0)
+      #|  CARD((s' : (A) -> Bool)) == (r : Num)
       #|  ~(a IN group_carrier (subgroup_generated G t))\n    ==> t SUBSET group_carrier (subgroup_generated G t) ==> ~(a IN t)
-      #|  r - 1 < r <=> ~(r = 0)
-      #|  s DELETE (a:A)
-      #|  a IN s ==> {a} UNION s = s
-      #|  a INSERT s = {a} UNION s
+      #|  ((r : Num) - 1 < r) == !(r == 0)
+      #|  DELETE((s : (A) -> Bool), (a : A))
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 UNION({a}, s) == s
+      #|  INSERT((a : _), (s : (_) -> Bool)) == UNION({a}, s)
       #|  subgroup_generated G s' = subgroup_generated G (s DELETE (a:A))
       #|  (a':A) IN group_carrier(subgroup_generated G (s DELETE a))
-      #|  (a:A) IN group_carrier G /\\ a' IN group_carrier G
+      #|  IN((a : A), group_carrier((G : Group[A]))) && IN((a' : A), group_carrier(G))
       #|  group_mul G a x = b\n        ==> x IN group_carrier G /\\\n            a IN group_carrier G /\\\n            b IN group_carrier G\n             ==> a = group_mul G b (group_inv G x)
       #|  group_mul G a x = b <=> group_mul G b (group_inv G x) = a
-      #|  s = (a:A) INSERT (s DELETE a)
+      #|  (s : (A) -> Bool) == INSERT((a : A), DELETE(s, a))
       #|  subgroup_generated G (s:A->bool) = subgroup_generated G s'
       #|  a' IN u /\\ s SUBSET u ==> a' INSERT (s DELETE a) SUBSET u
-      #|  (s':A->bool) SUBSET group_carrier G
-      #|  FINITE(s':A->bool)
-      #|  (a':A) IN s'
-      #|  s' = (a':A) INSERT (s DELETE a)
+      #|  SUBSET((s' : (A) -> Bool), group_carrier((G : Group[A])))
+      #|  FINITE((s' : (A) -> Bool))
+      #|  IN((a' : A), (s' : (A) -> Bool))
+      #|  (s' : (A) -> Bool) == INSERT((a' : A), DELETE((s : (A) -> Bool), (a : A)))
       #|  a':A = group_mul G a\n            (group_sum G (s DELETE a) (\\x. group_zpow G x (n x div n a)))
-      #|  t:A->bool
-      #|  abs((c:A->int) b)
-      #|  b:A
-      #|  c:A->int
-      #|  t:A->bool
+      #|  (t : (A) -> Bool)
+      #|  abs((c : (A) -> Int)((b : A)))
+      #|  (b : A)
+      #|  (c : (A) -> Int)
+      #|  (t : (A) -> Bool)
       #|  ?t (c:A->int) b.\n        FINITE t /\\\n        CARD t <= r /\\\n        t SUBSET group_carrier G /\\\n        subgroup_generated G t = subgroup_generated G s /\\\n        group_sum G t (\\x. group_zpow G x (c x)) = group_id G /\\\n        b IN t /\\ ~(c b = &0) /\\ abs(c b) < &m
-      #|  a:A
-      #|  n:A->int
-      #|  s:A->bool
-      #|  m:num
-      #|  abs((n:A->int) x)
-      #|  (x:A) IN s
-      #|  x:A
-      #|  n:A->int
-      #|  n:A->int
-      #|  f:A->A
-      #|  \\x:A. {x}
-      #|  G:A group
-      #|  s:A->bool
-      #|  s:A->bool
-      #|  s:A->bool
-      #|  s:A->bool
-      #|  (forall x y z. P x y z) <=> (forall y z x. P x y z)
-      #|  ~(0 < n) <=> n = 0
+      #|  (a : A)
+      #|  (n : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  (m : Num)
+      #|  abs((n : (A) -> Int)((x : A)))
+      #|  IN((x : A), (s : (A) -> Bool))
+      #|  (x : A)
+      #|  (n : (A) -> Int)
+      #|  (n : (A) -> Int)
+      #|  (f : (A) -> A)
+      #|  (x : A) => {x}
+      #|  (G : Group[A])
+      #|  (s : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (\226\136\128 x : _, \226\136\128 y : _, \226\136\128 z : _, (P : (_, _, _) -> Bool)(x, y, z)) == (\226\136\128 y : _, \226\136\128 z : _, \226\136\128 x : _, P(x, y, z))
+      #|  !(0 < (n : Num)) == (n == 0)
       #|  ~(p /\\ q) <=> q ==> ~p
       #|  \\m s. 0 < m /\\\n          ?n x:A. group_sum G s (\\x. group_zpow G x (n x)):A = group_id G /\\\n                  x IN s /\\ abs(n x):int = &m
       #|  forall R. (forall s. (forall m. ~R m s) ==> P s) /\\ (forall(m:num) s. R m s ==> P s)\n        ==> forall s. P s
-      #|  CARD(s:A->bool)
-      #|  group_carrier G INTER s:A->bool
-      #|  s:A->bool
-      #|  s:A->bool
-      #|  FINITE(s:A->bool)
-      #|  CARD(s:A->bool) <= r
-      #|  (s:A->bool) SUBSET group_carrier G
-      #|  (s:A->bool) SUBSET group_carrier G
-      #|  s:A->bool
+      #|  CARD((s : (A) -> Bool))
+      #|  INTER(group_carrier((G : Group[A])), (s : (A) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  FINITE((s : (A) -> Bool))
+      #|  CARD((s : (A) -> Bool)) <= (r : Num)
+      #|  SUBSET((s : (A) -> Bool), group_carrier((G : Group[A])))
+      #|  SUBSET((s : (A) -> Bool), group_carrier((G : Group[A])))
+      #|  (s : (A) -> Bool)
       #|  (forall m. m < r ==> forall s. FINITE s /\\ CARD s <= m ==> Q s) <=>\n    (forall s. FINITE s /\\ CARD s < r ==> Q s)
-      #|  r:num
+      #|  (r : Num)
       #|  (forall n s. FINITE s /\\ CARD s <= n ==> P s) ==> (forall s. FINITE s ==> P s)
       #|  forall G (s:A->bool).\n        abelian_group G /\\ FINITE s\n        ==> ?t. FINITE t /\\ CARD t <= CARD s /\\ t SUBSET group_carrier G /\\\n                subgroup_generated G t = subgroup_generated G s /\\\n                group_isomorphism\n                  (sum_group t (\\x. subgroup_generated G {x}),\n                   subgroup_generated G s)\n                  (group_sum G t)
       #|  forall G (s:A->bool).\n        abelian_group G /\\ FINITE s\n        ==> ?t. FINITE t /\\ CARD t <= CARD s /\\ t SUBSET group_carrier G /\\\n                subgroup_generated G t = subgroup_generated G s /\\\n                group_isomorphism\n                  (product_group t (\\x. subgroup_generated G {x}),\n                   subgroup_generated G s)\n                  (group_sum G t)
       #|  forall G (s:A->bool).\n        abelian_group G /\\ FINITE s\n        ==> ?t. FINITE t /\\ CARD t <= CARD s /\\ t SUBSET group_carrier G /\\\n                subgroup_generated G t = subgroup_generated G s /\\\n                subgroup_generated G s isomorphic_group\n                sum_group t (\\x. subgroup_generated G {x})
       #|  forall G (s:A->bool).\n        abelian_group G /\\ FINITE s\n        ==> ?t. FINITE t /\\ CARD t <= CARD s /\\ t SUBSET group_carrier G /\\\n                subgroup_generated G t = subgroup_generated G s /\\\n                subgroup_generated G s isomorphic_group\n                product_group t (\\x. subgroup_generated G {x})
-      #|  s:A->bool
-      #|  G:A group
-      #|  s:A->bool
+      #|  (s : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  (s : (A) -> Bool)
       #|  forall G:A group.\n        finitely_generated_group G /\\ abelian_group G <=>\n        ?t. FINITE t /\\ t SUBSET group_carrier G /\\\n            G isomorphic_group sum_group t (\\x. subgroup_generated G {x})
       #|  forall G:A group.\n        finitely_generated_group G /\\ abelian_group G <=>\n        ?t. FINITE t /\\ t SUBSET group_carrier G /\\\n            G isomorphic_group product_group t (\\x. subgroup_generated G {x})
-      #|  g:num->A
-      #|  f:A->num
-      #|  \\i. subgroup_generated G {(g:num->A) i}
-      #|  n:num
-      #|  g:num->A
-      #|  f:A->num
-      #|  n = CARD(t:A->bool)
-      #|  1..CARD(t:A->bool)
-      #|  t:A->bool
-      #|  t:A->bool
+      #|  (g : (Num) -> A)
+      #|  (f : (A) -> Num)
+      #|  (i : Num) => subgroup_generated((G : Group[A]), {(g : (Num) -> A)(i)})
+      #|  (n : Num)
+      #|  (g : (Num) -> A)
+      #|  (f : (A) -> Num)
+      #|  (n : Num) == CARD((t : (A) -> Bool))
+      #|  op_dot_dot(1, CARD((t : (A) -> Bool)))
+      #|  (t : (A) -> Bool)
+      #|  (t : (A) -> Bool)
       #|  forall G:A group.\n        finitely_generated_group G /\\ abelian_group G <=>\n        ?n H:num->A group.\n            (forall i. 1 <= i /\\ i <= n ==> cyclic_group (H i)) /\\\n            G isomorphic_group sum_group (1..n) H
       #|  forall G:A group.\n        finitely_generated_group G /\\ abelian_group G <=>\n        ?n H:num->A group.\n            (forall i. 1 <= i /\\ i <= n ==> cyclic_group (H i)) /\\\n            G isomorphic_group product_group (1..n) H
-      #|  d:num->num
-      #|  n:num
+      #|  (d : (Num) -> Num)
+      #|  (n : Num)
       #|  forall G:A group.\n      finitely_generated_group G /\\ abelian_group G <=>\n      ?n d. G isomorphic_group sum_group (1..n) (\\i. integer_mod_group(d i))
       #|  forall G:A group.\n      finitely_generated_group G /\\ abelian_group G <=>\n      ?n d. G isomorphic_group\n            product_group (1..n) (\\i. integer_mod_group(d i))
-      #|  j:num = i
-      #|  j:num
-      #|  p /\\ q <=> ~(p ==> ~q)
+      #|  (j : Num) == (i : Num)
+      #|  (j : Num)
+      #|  ((p : Bool) && (q : Bool)) == !(p \226\134\146 !q)
       #|  RESTRICTION (1..n)\n        (\\j. if j = i then &1 else group_id (integer_mod_group(d j)))
-      #|  (~p ==> F) ==> p
-      #|  i:num
-      #|  g:num->num
-      #|  f:num->num
-      #|  g:num->num
-      #|  f:num->num
-      #|  1..m
-      #|  {i | i IN 1..n /\\ ~(d i = 1)}
-      #|  m:num
-      #|  m = CARD {i | i IN 1..n /\\ ~(d i = 1)}
-      #|  d:num->num
-      #|  n:num
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  (i : Num)
+      #|  (g : (Num) -> Num)
+      #|  (f : (Num) -> Num)
+      #|  (g : (Num) -> Num)
+      #|  (f : (Num) -> Num)
+      #|  op_dot_dot(1, (m : Num))
+      #|  {(i : Num) | IN(i, op_dot_dot(1, (n : Num))) && !((d : (Num) -> Num)(i) == 1)}
+      #|  (m : Num)
+      #|  (m : Num) == CARD({(i : Num) | IN(i, op_dot_dot(1, (n : Num))) && !((d : (Num) -> Num)(i) == 1)})
+      #|  (d : (Num) -> Num)
+      #|  (n : Num)
       #|  forall G:A group.\n      finitely_generated_group G /\\ abelian_group G /\\\n      (forall x. x IN group_carrier G ==> group_element_order G x <= 1) <=>\n      ?n. G isomorphic_group sum_group (1..n) (\\i. integer_group)
       #|  forall G:A group.\n      finitely_generated_group G /\\ abelian_group G /\\\n      (forall x. x IN group_carrier G ==> group_element_order G x <= 1) <=>\n      ?n. G isomorphic_group product_group (1..n) (\\i. integer_group)
       #|  free_abelian_group (s:A->bool) =\n    group({c | frag_support c SUBSET s},frag_0,frag_neg,frag_add)
       #|  (forall s:A->bool.\n        group_carrier(free_abelian_group s) = {c | frag_support c SUBSET s}) /\\\n   (forall s:A->bool. group_id(free_abelian_group s) = frag_0) /\\\n   (forall s:A->bool. group_inv(free_abelian_group s) = frag_neg) /\\\n   (forall s:A->bool. group_mul(free_abelian_group s) = frag_add)
-      #|  forall s:A->bool. abelian_group(free_abelian_group s)
+      #|  \226\136\128 s : (A) -> Bool, abelian_group(free_abelian_group(s))
       #|  forall(s:A->bool) x n.\n        group_pow (free_abelian_group s) x n = frag_cmul (&n) x
       #|  forall(s:A->bool) x n.\n        group_zpow (free_abelian_group s) x n = frag_cmul n x
       #|  forall s x:A. frag_of x IN group_carrier(free_abelian_group s) <=> x IN s
-      #|  p ==> q <=> p ==> p /\\ q
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == (p \226\134\146 p && q)
       #|  forall P s:A->bool.\n        P(frag_0) /\\\n        (forall x y. x IN group_carrier(free_abelian_group s) /\\\n               y IN group_carrier(free_abelian_group s) /\\\n               P x /\\ P y\n               ==> P(frag_sub x y)) /\\\n        (forall a. a IN s ==> P(frag_of a))\n        ==> forall x. x IN group_carrier(free_abelian_group s) ==> P x
-      #|  frag_support y:A->bool
-      #|  frag_support x:A->bool
-      #|  y:A frag
-      #|  x:A frag
-      #|  dest_frag x (a:A) = &0
-      #|  a:A
-      #|  \\x:B. x IN group_carrier G
-      #|  p /\\ (p ==> q) ==> p /\\ q
+      #|  frag_support((y : Frag[A]))
+      #|  frag_support((x : Frag[A]))
+      #|  (y : Frag[A])
+      #|  (x : Frag[A])
+      #|  dest_frag((x : Frag[A]), (a : A)) == int_of_num(0)
+      #|  (a : A)
+      #|  (x : B) => IN(x, group_carrier((G : Group[B])))
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
       #|  iterate (group_add G) {x}\n         (\\a. group_zpow G ((f:A->B) a) (dest_frag (frag_of x) a))
-      #|  x:A
+      #|  (x : A)
       #|  \\x. iterate (group_add G) s\n                          (\\a. group_zpow G ((f:A->B) a) (dest_frag x a))
       #|  forall(f:A->B) s G.\n        IMAGE f s SUBSET group_carrier G /\\ abelian_group G\n        ==> ?h. group_homomorphism(free_abelian_group s,G) h /\\\n                forall x. x IN s ==> h(frag_of x) = f x
       #|  frag_sub (frag_cmul a c) (frag_cmul b c) =\n                 frag_cmul (a - b) c
-      #|  frag_cmul (&1) x = x
-      #|  frag_cmul (&0) x = frag_0
-      #|  p /\\ p /\\ q <=> p /\\ q
-      #|  frag_cmul c x = frag_0 <=> c = &0 \\/ x = frag_0
+      #|  frag_cmul(int_of_num(1), (x : Frag[_])) == x
+      #|  frag_cmul(int_of_num(0), (x : Frag[_])) == frag_0
+      #|  ((p : Bool) && p && (q : Bool)) == (p && q)
+      #|  (frag_cmul((c : Int), (x : Frag[_])) == frag_0) == (c == int_of_num(0) || x == frag_0)
       #|  frag_cmul(a + b) c = frag_add (frag_cmul a c) (frag_cmul b c)
-      #|  frag_cmul (--n) x = frag_neg(frag_cmul n x)
-      #|  \\n. frag_cmul n (frag_of(x:A))
+      #|  frag_cmul(-(n : Int), (x : Frag[_])) == frag_neg(frag_cmul(n, x))
+      #|  (n : Int) => frag_cmul(n, frag_of((x : A)))
       #|  forall x:A. integer_group isomorphic_group free_abelian_group {x}
-      #|  frag_of(x:A)
-      #|  x:A
+      #|  frag_of((x : A))
+      #|  (x : A)
       #|  forall k k':A->bool.\n    group_homomorphism (free_abelian_group k,free_abelian_group k') (\\x. x) <=>\n    k SUBSET k'
-      #|  j:K
-      #|  {i:K}
+      #|  (j : K)
+      #|  {(i : K)}
       #|  iterate frag_add {i}\n         (RESTRICTION k (\\j:K. if j = i then frag_of(a:A) else frag_0))
       #|  RESTRICTION k (\\j:K. if j = i then frag_of(a:A) else frag_0)
-      #|  a:A
-      #|  i:K
-      #|  frag_add x (frag_neg y) = frag_sub x y
-      #|  j:K
+      #|  (a : A)
+      #|  (i : K)
+      #|  frag_add((x : Frag[_]), frag_neg((y : Frag[_]))) == frag_sub(x, y)
+      #|  (j : K)
       #|  DISJOINT a (UNIONS {f i | i IN s}) <=>\n        forall i. i IN s ==> DISJOINT a (f i)
-      #|  DISJOINT t u ==> s SUBSET t ==> DISJOINT s u
-      #|  i:K
-      #|  UNIONS {(f:K->A->bool) j | j IN (k DELETE i)}
-      #|  forall u. s SUBSET u /\\ DISJOINT t u ==> s = t ==> t = {}
-      #|  x = frag_neg y ==> frag_support x = frag_support y
-      #|  frag_add x y = frag_0 <=> y = frag_neg x
-      #|  x IN s ==> x INSERT (s DELETE x) = s
+      #|  DISJOINT((t : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 SUBSET((s : (_) -> Bool), t) \226\134\146 DISJOINT(s, u)
+      #|  (i : K)
+      #|  UNIONS({(f : (K, A) -> Bool)((j : K)) | IN(j, DELETE((k : (K) -> Bool), (i : K)))})
+      #|  \226\136\128 u : (_) -> Bool, SUBSET((s : (_) -> Bool), u) && DISJOINT((t : (_) -> Bool), u) \226\134\146 s == t \226\134\146 t == {}
+      #|  (x : Frag[_]) == frag_neg((y : Frag[_])) \226\134\146 frag_support(x) == frag_support(y)
+      #|  (frag_add((x : Frag[_]), (y : Frag[_])) == frag_0) == (y == frag_neg(x))
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 INSERT(x, DELETE(s, x)) == s
       #|  iterate frag_add (i INSERT (k DELETE i)) (x:K->A frag) = frag_0
-      #|  (i:K) IN k
-      #|  i:K
-      #|  x:K->A frag
-      #|  p /\\ q /\\ (p ==> r) ==> (p /\\ q) /\\ (p /\\ r)
+      #|  IN((i : K), (k : (K) -> Bool))
+      #|  (i : K)
+      #|  (x : (K) -> Frag[A])
+      #|  (p : Bool) && (q : Bool) && (p \226\134\146 (r : Bool)) \226\134\146 (p && q) && p && r
       #|  forall k (f:K->A->bool).\n        pairwise (\\i j. DISJOINT (f i) (f j)) k\n        ==> group_isomorphism (sum_group k (\\i. free_abelian_group(f i)),\n                               free_abelian_group(UNIONS {f i | i IN k}))\n                              (iterate frag_add k)
-      #|  \\x:A->bool. x
-      #|  k:(A->bool)->bool
+      #|  (x : (A) -> Bool) => x
+      #|  (k : ((A) -> Bool) -> Bool)
       #|  forall k:(A->bool)->bool.\n        pairwise DISJOINT k\n        ==> free_abelian_group(UNIONS k) isomorphic_group\n            sum_group k free_abelian_group
-      #|  \\x:A. {x}
-      #|  k:A->bool
-      #|  sum_group k (\\i:A. free_abelian_group {i})
+      #|  (x : A) => {x}
+      #|  (k : (A) -> Bool)
+      #|  sum_group((k : (A) -> Bool), (i : A) => free_abelian_group({i}))
       #|  forall k:A->bool.\n        sum_group k (\\i. integer_group) isomorphic_group free_abelian_group k
-      #|  frag_of:A->A frag
-      #|  dest_frag:A frag->A->int
+      #|  (frag_of : (A) -> Frag[A])
+      #|  (dest_frag : (Frag[A], A) -> Int)
       #|  {f | IMAGE f s SUBSET (:int) /\\\n       {x | ~(f x = &0)} SUBSET s /\\\n       FINITE {x:A | ~(f x = &0)}}
       #|  forall s:A->bool. INFINITE s ==> group_carrier(free_abelian_group s) =_c s
-      #|  frag_add x (frag_neg y) = frag_sub x y
-      #|  x:A
-      #|  x:A
-      #|  p ==> q <=> p ==> p /\\ q
-      #|  forall c. frag_support c SUBSET s ==> (g:A frag->B) c = h c
-      #|  h:A frag->B
-      #|  g:A frag->B
-      #|  (x:A) IN s
-      #|  x:A
-      #|  EXTENSIONAL s (f:A->B)
+      #|  frag_add((x : Frag[_]), frag_neg((y : Frag[_]))) == frag_sub(x, y)
+      #|  (x : A)
+      #|  (x : A)
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == (p \226\134\146 p && q)
+      #|  \226\136\128 c : Frag[A], SUBSET(frag_support(c), (s : (A) -> Bool)) \226\134\146 (g : (Frag[A]) -> B)(c) == (h : (Frag[A]) -> B)(c)
+      #|  (h : (Frag[A]) -> B)
+      #|  (g : (Frag[A]) -> B)
+      #|  IN((x : A), (s : (A) -> Bool))
+      #|  (x : A)
+      #|  EXTENSIONAL((s : (A) -> Bool), (f : (A) -> B))
       #|  group_homomorphism(free_abelian_group s,G) (g:A frag->B)
       #|  RESTRICTION (group_carrier(free_abelian_group s)) (g:A frag->B)
-      #|  g:(A)frag->B
-      #|  G:B group
-      #|  s:A->bool
-      #|  f:A->B
-      #|  f:A->B
-      #|  \\(f:(A)frag->B). RESTRICTION s (f o frag_of)
+      #|  (g : (Frag[A]) -> B)
+      #|  (G : Group[B])
+      #|  (s : (A) -> Bool)
+      #|  (f : (A) -> B)
+      #|  (f : (A) -> B)
+      #|  (f : (Frag[A]) -> B) => RESTRICTION((s : (A) -> Bool), o(f, frag_of))
       #|  forall(s:A->bool) (G:B group).\n        abelian_group G\n        ==> {f | EXTENSIONAL (group_carrier(free_abelian_group s)) f /\\\n                 group_homomorphism(free_abelian_group s,G) f} =_c\n            (group_carrier G) ^_c s
-      #|  frag_sub x y = frag_add x (frag_neg y)
-      #|  IMAGE f s SUBSET t <=> forall x. x IN s ==> f x IN t
-      #|  p ==> q <=> p ==> p /\\ q
-      #|  k:B frag->A frag
-      #|  free_abelian_group(s:A->bool)
-      #|  t:B->bool
-      #|  frag_of o (g:B->A)
-      #|  h:A frag->B frag
-      #|  free_abelian_group(t:B->bool)
-      #|  s:A->bool
-      #|  frag_of o (f:A->B)
-      #|  g:B->A
-      #|  f:A->B
-      #|  s:A->bool
-      #|  t:B->bool
+      #|  frag_sub((x : Frag[_]), (y : Frag[_])) == frag_add(x, frag_neg(y))
+      #|  SUBSET(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) == (\226\136\128 x : _, IN(x, s) \226\134\146 IN(f(x), t))
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == (p \226\134\146 p && q)
+      #|  (k : (Frag[B]) -> Frag[A])
+      #|  free_abelian_group((s : (A) -> Bool))
+      #|  (t : (B) -> Bool)
+      #|  o(frag_of, (g : (B) -> A))
+      #|  (h : (Frag[A]) -> Frag[B])
+      #|  free_abelian_group((t : (B) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  o(frag_of, (f : (A) -> B))
+      #|  (g : (B) -> A)
+      #|  (f : (A) -> B)
+      #|  (s : (A) -> Bool)
+      #|  (t : (B) -> Bool)
       #|  {&0:int, &1} ^_c (s:A->bool) =_c {&0:int, &1} ^_c (t:B->bool)
-      #|  (p <=> q) <=> p /\\ q \\/ ~p /\\ ~q
-      #|  s = {} \\/ FINITE s <=> FINITE s
-      #|  {a,b} SUBSET {c} <=> a = b /\\ a = c
+      #|  ((p : Bool) == (q : Bool)) == (p && q || !p && !q)
+      #|  ((s : (_) -> Bool) == {} || FINITE(s)) == FINITE(s)
+      #|  SUBSET({(a : _), (b : _)}, {(c : _)}) == (a == b && a == c)
       #|  group_homomorphism(G,H) f /\\\n          (forall x. x IN group_carrier G ==> RESTRICTION s f x = f x)\n          ==> group_homomorphism(G,H) (RESTRICTION s f)
-      #|  k:B frag->int
-      #|  h:A frag->int
+      #|  (k : (Frag[B]) -> Int)
+      #|  (h : (Frag[A]) -> Int)
       #|  \\(h:B frag->int).\n            RESTRICTION (group_carrier (free_abelian_group s))\n                        (h o (f:A frag->B frag))
       #|  \\(h:A frag->int).\n            RESTRICTION (group_carrier (free_abelian_group t))\n                        (h o (g:B frag->A frag))
-      #|  g:B frag->A frag
-      #|  f:A frag->B frag
-      #|  {x | x = a \\/ x = b} = {a,b}
-      #|  &0:int <= m /\\ m < &2 <=> m = &0 \\/ m = &1
+      #|  (g : (Frag[B]) -> Frag[A])
+      #|  (f : (Frag[A]) -> Frag[B])
+      #|  {(x : _) | x == (a : _) || x == (b : _)} == {a, b}
+      #|  (int_of_num(0) <= (m : Int) && m < int_of_num(2)) == (m == int_of_num(0) || m == int_of_num(1))
       #|  0 < 2
-      #|  integer_mod_group 2
-      #|  t:B->bool
-      #|  integer_mod_group 2
-      #|  s:A->bool
+      #|  integer_mod_group(2)
+      #|  (t : (B) -> Bool)
+      #|  integer_mod_group(2)
+      #|  (s : (A) -> Bool)
       #|  {&0:int,&1} ^_c (s:A->bool) =_c {&0:int, &1} ^_c (t:B->bool)
       #|  forall(s:A->bool) (t:B->bool).\n      free_abelian_group s isomorphic_group free_abelian_group t <=>\n      s =_c t
       #|  solvable_group (G:A group) <=>\n    ?k (c:num->A->bool).\n      c 0 = group_carrier G /\\\n      c k = {group_id G} /\\\n      (forall i. i < k\n           ==> c(SUC i) normal_subgroup_of (subgroup_generated G (c i)) /\\\n               abelian_group(quotient_group\n                               (subgroup_generated G (c i)) (c(SUC i))))
-      #|  k - SUC i
-      #|  k - i = SUC(k - SUC i)
-      #|  i:num
-      #|  \\i. (c:num->A->bool)(k - i)
-      #|  k:num
-      #|  c:num->A->bool
-      #|  k:num
-      #|  k - SUC i
-      #|  k - i = SUC(k - SUC i)
-      #|  i:num
-      #|  \\i. (c:num->A->bool)(k - i)
-      #|  k:num
-      #|  c:num->A->bool
-      #|  k:num
+      #|  (k : Num) - SUC((i : Num))
+      #|  (k : Num) - (i : Num) == SUC(k - SUC(i))
+      #|  (i : Num)
+      #|  (i : Num) => (c : (Num, A) -> Bool)((k : Num) - i)
+      #|  (k : Num)
+      #|  (c : (Num, A) -> Bool)
+      #|  (k : Num)
+      #|  (k : Num) - SUC((i : Num))
+      #|  (k : Num) - (i : Num) == SUC(k - SUC(i))
+      #|  (i : Num)
+      #|  (i : Num) => (c : (Num, A) -> Bool)((k : Num) - i)
+      #|  (k : Num)
+      #|  (c : (Num, A) -> Bool)
+      #|  (k : Num)
       #|  forall G:A group.\n     solvable_group G <=>\n     (?k c. c 0 = {group_id G} /\\\n            c k = group_carrier G /\\\n            (forall i. i < k\n                 ==> c i normal_subgroup_of\n                     subgroup_generated G (c(SUC i)) /\\\n                     abelian_group\n                     (quotient_group\n                        (subgroup_generated G (c(SUC i))) (c i))))
-      #|  group_inv G (y:A)
-      #|  group_inv G (x:A)
+      #|  group_inv((G : Group[A]), (y : A))
+      #|  group_inv((G : Group[A]), (x : A))
       #|  right_coset G (n:A->bool)\n       (group_mul G (group_inv G x) (group_inv G y)) =\n     right_coset G n\n       (group_mul G (group_inv G y) (group_inv G x))
-      #|  (n:A->bool) subgroup_of G
+      #|  subgroup_of((n : (A) -> Bool), (G : Group[A]))
       #|  forall G (n:A->bool) x y.\n     n normal_subgroup_of G /\\\n     abelian_group(quotient_group G n) /\\\n     x IN group_carrier G /\\ y IN group_carrier G\n     ==> group_mul G (group_inv G x)\n           (group_mul G (group_inv G y)\n             (group_mul G x y)) IN n
-      #|  \\n:num. group_carrier(G:A group)
+      #|  (n : Num) => group_carrier((G : Group[A]))
       #|  0
-      #|  forall G:A group. trivial_group G ==> solvable_group G
-      #|  i < 1 <=> i = 0
+      #|  \226\136\128 G : Group[A], trivial_group(G) \226\134\146 solvable_group(G)
+      #|  ((i : Num) < 1) == (i == 0)
       #|  \\n:num. if n = 0 then group_carrier(G:A group)\n                      else {group_id G}
       #|  1
-      #|  forall G:A group. abelian_group G ==> solvable_group G
-      #|  j:num
-      #|  j:num
-      #|  j:num
+      #|  \226\136\128 G : Group[A], abelian_group(G) \226\134\146 solvable_group(G)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
       #|  subgroup_generated (subgroup_generated (G:A group) n)\n       ((d:num->(A->bool)) j) = subgroup_generated G (d j)
-      #|  SUC j - 1 = j
-      #|  SUC(SUC j) - 1 = SUC j
-      #|  i - 1
-      #|  ?j. i = SUC j /\\ j < m
-      #|  i = 0
-      #|  i:num
-      #|  (d:num->(A->bool)) j
-      #|  (d:num->(A->bool)) j
-      #|  (d:num->(A->bool)) (SUC j)
-      #|  subgroup_generated (G:A group) (n:A->bool)
+      #|  SUC((j : Num)) - 1 == j
+      #|  SUC(SUC((j : Num))) - 1 == SUC(j)
+      #|  (i : Num) - 1
+      #|  \226\136\131 j : Num, (i : Num) == SUC(j) && j < (m : Num)
+      #|  (i : Num) == 0
+      #|  (i : Num)
+      #|  (d : (Num, A) -> Bool)((j : Num))
+      #|  (d : (Num, A) -> Bool)((j : Num))
+      #|  (d : (Num, A) -> Bool)(SUC((j : Num)))
+      #|  subgroup_generated((G : Group[A]), (n : (A) -> Bool))
       #|  (d:num->(A->bool))(SUC j) subgroup_of\n         subgroup_generated (G:A group) n /\\\n         (d:num->(A->bool))(SUC j) SUBSET (d:num->(A->bool)) j
       #|  (d:num->(A->bool))(SUC j) subgroup_of\n         subgroup_generated (subgroup_generated (G:A group) n) (d j)
-      #|  j:num
-      #|  j < (m:num)
-      #|  j <= (m:num)
-      #|  subgroup_generated (G:A group) (n:A->bool)
+      #|  (j : Num)
+      #|  (j : Num) < (m : Num)
+      #|  (j : Num) <= (m : Num)
+      #|  subgroup_generated((G : Group[A]), (n : (A) -> Bool))
       #|  (n:A->bool) subgroup_of subgroup_generated (G:A group) n
       #|  forall j. j <= m\n         ==> (d:num->(A->bool)) j subgroup_of\n             subgroup_generated (G:A group) n /\\\n             d j SUBSET n
       #|  \\i. if i = 0 then group_carrier(G:A group)\n                  else (d:num->(A->bool))(i - 1)
-      #|  SUC m
-      #|  d:num->(A->bool)
-      #|  m:num
+      #|  SUC((m : Num))
+      #|  (d : (Num, A) -> Bool)
+      #|  (m : Num)
       #|  group_id(subgroup_generated G (n:A->bool)) = group_id G
-      #|  group_carrier(subgroup_generated G (n:A->bool)) = n
-      #|  n subgroup_of (G:A group)
+      #|  group_carrier(subgroup_generated((G : Group[A]), (n : (A) -> Bool))) == n
+      #|  subgroup_of((n : (A) -> Bool), (G : Group[A]))
       #|  forall G (n:A->bool).\n     n normal_subgroup_of G /\\\n     abelian_group(quotient_group G n) /\\\n     solvable_group(subgroup_generated G n)\n     ==> solvable_group G
-      #|  g:(A->bool)->(B->bool)
+      #|  (g : ((A) -> Bool, B) -> Bool)
       #|  right_coset (H:B group) (m:B->bool) o (f:A->B)
-      #|  n:A->bool
-      #|  quotient_group (H:B group) (m:B->bool)
-      #|  G:A group
-      #|  (f:A->B) x IN group_carrier H
-      #|  (x:A) IN group_carrier G
-      #|  x:A
+      #|  (n : (A) -> Bool)
+      #|  quotient_group((H : Group[B]), (m : (B) -> Bool))
+      #|  (G : Group[A])
+      #|  IN((f : (A) -> B)((x : A)), group_carrier((H : Group[B])))
+      #|  IN((x : A), group_carrier((G : Group[A])))
+      #|  (x : A)
       #|  n SUBSET group_kernel(G:A group, quotient_group (H:B group) m)\n      (right_coset H m o (f:A->B))
-      #|  H:B group
+      #|  (H : Group[B])
       #|  group_epimorphism(G:A group, quotient_group (H:B group) m)\n      (right_coset H m o (f:A->B))
-      #|  m:B->bool = IMAGE (f:A->B) n
-      #|  IMAGE (f:A->B) n normal_subgroup_of H
+      #|  (m : (B) -> Bool) == IMAGE((f : (A) -> B), (n : (A) -> Bool))
+      #|  normal_subgroup_of(IMAGE((f : (A) -> B), (n : (A) -> Bool)), (H : Group[B]))
       #|  forall(G:A group) (H:B group) (f:A->B) n.\n    group_epimorphism(G,H) f /\\\n    n normal_subgroup_of G /\\\n    abelian_group(quotient_group G n)\n    ==> IMAGE f n normal_subgroup_of H /\\\n        abelian_group(quotient_group H (IMAGE f n))
-      #|  (c:num->A->bool)(SUC i)
-      #|  f:A->B
+      #|  (c : (Num, A) -> Bool)(SUC((i : Num)))
+      #|  (f : (A) -> B)
       #|  subgroup_generated (H:B group) (IMAGE (f:A->B) ((c:num->A->bool) i))
       #|  subgroup_generated (G:A group) ((c:num->A->bool) i)
       #|  group_epimorphism\n        (subgroup_generated (G:A group) ((c:num->A->bool) i),\n         subgroup_generated (H:B group) (IMAGE (f:A->B) (c i))) f
       #|  (c:num->A->bool)(SUC i) normal_subgroup_of\n         subgroup_generated (G:A group) (c i) /\\\n       abelian_group(quotient_group (subgroup_generated G (c i)) (c(SUC i)))
-      #|  i:num
-      #|  IMAGE (f:A->B) {a} = {f a}
+      #|  (i : Num)
+      #|  IMAGE((f : (A) -> B), {(a : A)}) == {f(a)}
       #|  (c:num->A->bool)(SUC j) normal_subgroup_of\n        subgroup_generated (G:A group) (c j)
-      #|  j < (k:num)
+      #|  (j : Num) < (k : Num)
       #|  forall j. j <= k ==> (c:num->A->bool) j SUBSET group_carrier G
       #|  IMAGE (f:A->B) (group_carrier G) = group_carrier (H:B group)
-      #|  group_homomorphism(G:A group, H:B group) (f:A->B)
-      #|  \\i. IMAGE (f:A->B) ((c:num->A->bool) i)
-      #|  k:num
-      #|  c:num->A->bool
-      #|  k:num
+      #|  group_homomorphism(((G : Group[A]), (H : Group[B])), (f : (A) -> B))
+      #|  (i : Num) => IMAGE((f : (A) -> B), (c : (Num, A) -> Bool)(i))
+      #|  (k : Num)
+      #|  (c : (Num, A) -> Bool)
+      #|  (k : Num)
       #|  forall(G:A group) (H:B group) (f:A->B).\n    group_epimorphism(G,H) f /\\ solvable_group G ==> solvable_group H
-      #|  right_coset G (n:A->bool)
-      #|  G:A group
+      #|  right_coset((G : Group[A]), (n : (A) -> Bool))
+      #|  (G : Group[A])
       #|  forall(G:A group) n.\n     solvable_group G /\\ n normal_subgroup_of G\n     ==> solvable_group(quotient_group G n)
-      #|  f:B->A
-      #|  G:A group
-      #|  H:B group
-      #|  f:B->A
-      #|  f:A->B
-      #|  H:B group
-      #|  G:A group
-      #|  f:A->B
+      #|  (f : (B) -> A)
+      #|  (G : Group[A])
+      #|  (H : Group[B])
+      #|  (f : (B) -> A)
+      #|  (f : (A) -> B)
+      #|  (H : Group[B])
+      #|  (G : Group[A])
+      #|  (f : (A) -> B)
       #|  forall(G:A group) (H:B group).\n     G isomorphic_group H ==> (solvable_group G <=> solvable_group H)
-      #|  group_inv G (y:A)
-      #|  group_inv G (x:A)
-      #|  y:A
-      #|  x:A
-      #|  (n:A->bool) subgroup_of G
+      #|  group_inv((G : Group[A]), (y : A))
+      #|  group_inv((G : Group[A]), (x : A))
+      #|  (y : A)
+      #|  (x : A)
+      #|  subgroup_of((n : (A) -> Bool), (G : Group[A]))
       #|  forall G (n:A->bool).\n     n normal_subgroup_of G /\\\n     (forall x y. x IN group_carrier G /\\ y IN group_carrier G\n            ==> group_mul G (group_inv G x)\n                  (group_mul G (group_inv G y)\n                    (group_mul G x y)) IN n)\n     ==> abelian_group(quotient_group G n)
-      #|  y:A
-      #|  x:A
-      #|  (n:A->bool) subgroup_of G
+      #|  (y : A)
+      #|  (x : A)
+      #|  subgroup_of((n : (A) -> Bool), (G : Group[A]))
       #|  forall G (n:A->bool).\n     n normal_subgroup_of G /\\\n     (forall x y. x IN group_carrier G /\\ y IN group_carrier G\n            ==> group_div G (group_mul G x y) (group_mul G y x) IN n)\n     ==> abelian_group(quotient_group G n)
-      #|  group_inv G (x:A) IN h /\\ group_inv G y IN h
-      #|  y:A
-      #|  x:A
-      #|  (c:num->A->bool)(SUC i)
+      #|  IN(group_inv((G : Group[A]), (x : A)), (h : (A) -> Bool)) && IN(group_inv(G, (y : A)), h)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (c : (Num, A) -> Bool)(SUC((i : Num)))
       #|  subgroup_generated G ((c:num->A->bool) i)
-      #|  y:A
-      #|  x:A
-      #|  y:A
-      #|  b:A
+      #|  (y : A)
+      #|  (x : A)
+      #|  (y : A)
+      #|  (b : A)
       #|  (c:num->A->bool)(SUC i) INTER h normal_subgroup_of\n     subgroup_generated G (c i INTER h)
-      #|  a:A
+      #|  (a : A)
       #|  (c:num->A->bool)(SUC i) normal_subgroup_of\n         subgroup_generated G (c i)
       #|  forall a x. a IN (c:num->A->bool) i INTER h /\\ x IN c(SUC i) INTER h\n           ==> group_conjugation G a x IN c(SUC i) INTER h
       #|  (c:num->A->bool)(SUC i) INTER h subgroup_of\n     subgroup_generated G (c i INTER h)
       #|  group_carrier(subgroup_generated G ((c:num->A->bool) i INTER h)) =\n     c i INTER h
       #|  subgroup_generated (subgroup_generated G (h:A->bool))\n       ((c:num->A->bool) i INTER h) =\n     subgroup_generated G (c i INTER h)
       #|  (c:num->A->bool) i INTER h subgroup_of\n     subgroup_generated (G:A group) (h:A->bool)
-      #|  (c:num->A->bool)(SUC i) INTER h subgroup_of G
-      #|  (c:num->A->bool) i INTER h subgroup_of G
-      #|  (c:num->A->bool)(SUC i) SUBSET c i
-      #|  (c:num->A->bool)(SUC i) subgroup_of G
-      #|  (c:num->A->bool) i subgroup_of G
+      #|  subgroup_of(INTER((c : (Num, A) -> Bool)(SUC((i : Num))), (h : (A) -> Bool)), (G : Group[A]))
+      #|  subgroup_of(INTER((c : (Num, A) -> Bool)((i : Num)), (h : (A) -> Bool)), (G : Group[A]))
+      #|  SUBSET((c : (Num, A) -> Bool)(SUC((i : Num))), c(i))
+      #|  subgroup_of((c : (Num, A) -> Bool)(SUC((i : Num))), (G : Group[A]))
+      #|  subgroup_of((c : (Num, A) -> Bool)((i : Num)), (G : Group[A]))
       #|  (c:num->A->bool)(SUC i) normal_subgroup_of\n       subgroup_generated (G:A group) (c i) /\\\n     abelian_group(quotient_group (subgroup_generated G (c i)) (c(SUC i)))
-      #|  i:num
-      #|  (c:num->A->bool) j
-      #|  j <= (k:num)
-      #|  j < (k:num)
-      #|  forall j. j <= k ==> (c:num->A->bool) j subgroup_of G
-      #|  {a:A} INTER (h:A->bool) = {a} <=> a IN h
-      #|  (h:A->bool) SUBSET s ==> s INTER h = h
-      #|  \\i. (c:num->A->bool) i INTER (h:A->bool)
-      #|  k:num
+      #|  (i : Num)
+      #|  (c : (Num, A) -> Bool)((j : Num))
+      #|  (j : Num) <= (k : Num)
+      #|  (j : Num) < (k : Num)
+      #|  \226\136\128 j : Num, j <= (k : Num) \226\134\146 subgroup_of((c : (Num, A) -> Bool)(j), (G : Group[A]))
+      #|  (INTER({(a : A)}, (h : (A) -> Bool)) == {a}) == IN(a, h)
+      #|  SUBSET((h : (A) -> Bool), (s : (A) -> Bool)) \226\134\146 INTER(s, h) == h
+      #|  (i : Num) => INTER((c : (Num, A) -> Bool)(i), (h : (A) -> Bool))
+      #|  (k : Num)
       #|  group_id(subgroup_generated G (h:A->bool)) = group_id G
-      #|  group_carrier(subgroup_generated G (h:A->bool)) = h
-      #|  c:num->A->bool
-      #|  k:num
+      #|  group_carrier(subgroup_generated((G : Group[A]), (h : (A) -> Bool))) == h
+      #|  (c : (Num, A) -> Bool)
+      #|  (k : Num)
       #|  forall G (h:A->bool).\n     h subgroup_of G /\\ solvable_group G\n     ==> solvable_group(subgroup_generated G h)
       #|  subgroup_generated H (group_image(G,H) (f:A->B))
-      #|  G:A group
+      #|  (G : Group[A])
       #|  forall(G:A group) (H:B group) (f:A->B).\n     group_monomorphism(G,H) f /\\ solvable_group H ==> solvable_group G
-      #|  n:A->bool
-      #|  G:A group
-      #|  (e:num->A->bool) 0 = (n:A->bool)
-      #|  SUC 0 = 1
+      #|  (n : (A) -> Bool)
+      #|  (G : Group[A])
+      #|  (e : (Num, A) -> Bool)(0) == (n : (A) -> Bool)
+      #|  SUC(0) == 1
       #|  0
-      #|  SUC m - m = 1
-      #|  ~(SUC m <= m)
-      #|  (e:num->A->bool)(i - m) SUBSET (n:A->bool)
-      #|  i - m:num
-      #|  i - m:num
-      #|  SUC i - m = SUC(i - m)
+      #|  SUC((m : Num)) - m == 1
+      #|  !(SUC((m : Num)) <= m)
+      #|  SUBSET((e : (Num, A) -> Bool)((i : Num) - (m : Num)), (n : (A) -> Bool))
+      #|  (i : Num) - (m : Num)
+      #|  (i : Num) - (m : Num)
+      #|  SUC((i : Num)) - (m : Num) == SUC(i - m)
       #|  ~(i <= m) /\\ ~(SUC i <= m)
-      #|  ~(i:num <= m) \\/ i = m
-      #|  right_coset G (n:A->bool)
+      #|  !((i : Num) <= (m : Num)) || i == m
+      #|  right_coset((G : Group[A]), (n : (A) -> Bool))
       #|  quotient_group (subgroup_generated G ci) (csi:A->bool)\n       isomorphic_group\n       quotient_group\n         (subgroup_generated (quotient_group G (n:A->bool))\n           ((d:num->(A->bool)->bool) i)) (d(SUC i))
       #|  subgroup_generated (quotient_group G (n:A->bool))\n                    ((d:num->(A->bool)->bool) i)
       #|  (csi:A->bool) normal_subgroup_of subgroup_generated G ci
-      #|  i:num
+      #|  (i : Num)
       #|  (d:num->(A->bool)->bool)(SUC i) normal_subgroup_of\n       subgroup_generated (quotient_group G (n:A->bool)) (d i) /\\\n       abelian_group(quotient_group\n         (subgroup_generated (quotient_group G n) (d i)) (d(SUC i)))
-      #|  i:num
-      #|  i:num
-      #|  (d:num->(A->bool)->bool)(SUC i) SUBSET d i
-      #|  x:A
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  SUBSET((d : (Num, (A) -> Bool) -> Bool)(SUC((i : Num))), d(i))
+      #|  (x : A)
       #|  {x:A | x IN group_carrier(subgroup_generated G ci) /\\\n              right_coset G n x IN (d:num->(A->bool)->bool)(SUC i)} = csi
-      #|  (ci:A->bool) subgroup_of G
+      #|  subgroup_of((ci : (A) -> Bool), (G : Group[A]))
       #|  subgroup_generated (quotient_group G (n:A->bool))\n           (IMAGE (right_coset G n) (ci:A->bool)) =\n         subgroup_generated (quotient_group G n) ((d:num->(A->bool)->bool) i)
       #|  group_epimorphism\n        (subgroup_generated G ci,\n         subgroup_generated (quotient_group G (n:A->bool))\n           ((d:num->(A->bool)->bool) i))\n        (right_coset G n)
       #|  (d:num->(A->bool)->bool) i subgroup_of\n                        quotient_group G (n:A->bool)
       #|  group_epimorphism(G,quotient_group G (n:A->bool))\n                         (right_coset G n)
       #|  (d:num->(A->bool)->bool) i SUBSET\n                    IMAGE (right_coset G (n:A->bool)) (group_carrier G)
       #|  IMAGE (right_coset G (n:A->bool)) ci = (d:num->(A->bool)->bool) i
-      #|  quotient_group G (n:A->bool)
-      #|  (csi:A->bool) subgroup_of G
-      #|  quotient_group G (n:A->bool)
-      #|  (ci:A->bool) subgroup_of G
+      #|  quotient_group((G : Group[A]), (n : (A) -> Bool))
+      #|  subgroup_of((csi : (A) -> Bool), (G : Group[A]))
+      #|  quotient_group((G : Group[A]), (n : (A) -> Bool))
+      #|  subgroup_of((ci : (A) -> Bool), (G : Group[A]))
       #|  csi = {x:A | x IN group_carrier G /\\\n                     right_coset G n x IN (d:num->(A->bool)->bool)(SUC i)}
       #|  ci = {x:A | x IN group_carrier G /\\\n                    right_coset G n x IN (d:num->(A->bool)->bool) i}
       #|  (d:num->(A->bool)->bool)(SUC i) subgroup_of\n                  quotient_group G (n:A->bool)
       #|  (d:num->(A->bool)->bool) i subgroup_of\n                  quotient_group G (n:A->bool)
-      #|  SUC i <= (m:num)
+      #|  SUC((i : Num)) <= (m : Num)
       #|  i <= (m:num)
-      #|  i:num < m
-      #|  i:num
-      #|  (m + p) - m:num = p
-      #|  ~(p = 0)
-      #|  ~(m + p:num <= m)
-      #|  (e:num->A->bool) 0 = (n:A->bool)
-      #|  (e:num->A->bool) 0 = {group_id(G:A group)}
-      #|  (n:A->bool) = {group_id G}
-      #|  p = 0
+      #|  (i : Num) < (m : Num)
+      #|  (i : Num)
+      #|  (m : Num) + (p : Num) - m == p
+      #|  !((p : Num) == 0)
+      #|  !((m : Num) + (p : Num) <= m)
+      #|  (e : (Num, A) -> Bool)(0) == (n : (A) -> Bool)
+      #|  (e : (Num, A) -> Bool)(0) == {group_id((G : Group[A]))}
+      #|  (n : (A) -> Bool) == {group_id((G : Group[A]))}
+      #|  (p : Num) == 0
       #|  \\i:num. if i <= m\n    then {x:A | x IN group_carrier G /\\\n                right_coset G n x IN (d:num->(A->bool)->bool) i}\n    else (e:num->A->bool)(i - m)
-      #|  m + p:num
+      #|  (m : Num) + (p : Num)
       #|  {x:A | x IN group_carrier G /\\\n              right_coset G n x = (n:A->bool)} =\n       group_kernel(G,quotient_group G n) (right_coset G n)
       #|  {x:A | x IN group_carrier G /\\\n            right_coset G n x IN (d:num->(A->bool)->bool) m} = n
-      #|  (e:num->A->bool) j
+      #|  (e : (Num, A) -> Bool)((j : Num))
       #|  (e:num->A->bool)(SUC j) subgroup_of subgroup_generated G (n:A->bool)
-      #|  j <= (p:num)
-      #|  j < (p:num)
-      #|  subgroup_generated G (n:A->bool)
+      #|  (j : Num) <= (p : Num)
+      #|  (j : Num) < (p : Num)
+      #|  subgroup_generated((G : Group[A]), (n : (A) -> Bool))
       #|  forall j. j <= p\n         ==> (e:num->A->bool) j subgroup_of subgroup_generated G (n:A->bool) /\\\n             e j SUBSET n
-      #|  (d:num->(A->bool)->bool) j
-      #|  j <= (m:num)
-      #|  j < (m:num)
+      #|  (d : (Num, (A) -> Bool) -> Bool)((j : Num))
+      #|  (j : Num) <= (m : Num)
+      #|  (j : Num) < (m : Num)
       #|  forall j. j <= m\n         ==> (d:num->(A->bool)->bool) j subgroup_of\n             quotient_group G (n:A->bool)
       #|  group_homomorphism(G,quotient_group G (n:A->bool)) (right_coset G n)
       #|  group_epimorphism(G,quotient_group G (n:A->bool)) (right_coset G n)
-      #|  e:num->A->bool
-      #|  p:num
-      #|  d:num->(A->bool)->bool
-      #|  m:num
+      #|  (e : (Num, A) -> Bool)
+      #|  (p : Num)
+      #|  (d : (Num, (A) -> Bool) -> Bool)
+      #|  (m : Num)
       #|  group_id(subgroup_generated G (n:A->bool)) = group_id G
-      #|  group_carrier(subgroup_generated G (n:A->bool)) = n
-      #|  (n:A->bool) subgroup_of G
+      #|  group_carrier(subgroup_generated((G : Group[A]), (n : (A) -> Bool))) == n
+      #|  subgroup_of((n : (A) -> Bool), (G : Group[A]))
       #|  forall G (n:A->bool).\n     n normal_subgroup_of G /\\\n     solvable_group(subgroup_generated G n) /\\\n     solvable_group(quotient_group G n)\n     ==> solvable_group G
       #|  group_exactness (G,H,K) ((f:A->B),(g:B->C)) <=>\n        group_homomorphism (G,H) f /\\ group_homomorphism (H,K) g /\\\n        group_image (G,H) f = group_kernel (H,K) g
       #|  short_exact_sequence(A,B,C) (f:A->B,g:B->C) <=>\n        group_monomorphism (A,B) f /\\\n        group_exactness (A,B,C) (f,g) /\\\n        group_epimorphism (B,C) g
@@ -26811,214 +26811,214 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> short_exact_sequence\n             (subgroup_generated G n,G,quotient_group G n)\n             ((\\x. x),right_coset G n)
       #|  forall(G:A group) (H:B group).\n        short_exact_sequence(G,prod_group G H,H) ((\\x. x,group_id H),SND)
       #|  forall(G:A group) (H:B group).\n        short_exact_sequence(H,prod_group G H,G) ((\\x. group_id G,x),FST)
-      #|  (h':C->A)(f(x:X))
-      #|  y:B
-      #|  group_div X x ((i:A->X)((h':C->A)(f x)))
-      #|  h':C->A
-      #|  group_isomorphism (A,C) (h:A->C)
+      #|  (h' : (C) -> A)((f : (X) -> C)((x : X)))
+      #|  (y : B)
+      #|  group_div((X : Group[X]), (x : X), (i : (A) -> X)((h' : (C) -> A)((f : (X) -> C)(x))))
+      #|  (h' : (C) -> A)
+      #|  group_isomorphism(((A : Group[A]), (C : Group[C])), (h : (A) -> C))
       #|  group_image (B,X) (j:B->X) = group_kernel (X,C) (f:X->C)
-      #|  x:X
-      #|  (\\(x,y). h x,k y):A#B->C#D
-      #|  group_homomorphism (X,prod_group C D) (gf:X->C#D)
-      #|  group_homomorphism (prod_group A B,X) (ij:A#B->X)
-      #|  gf:X->C#D = \\z. f z,g z
-      #|  ij:A#B->X = \\(x,y). group_mul X (i x) (j y)
+      #|  (x : X)
+      #|  GABS((f : ((A, B)) -> (C, D)) => \226\136\128 x : A, \226\136\128 y : B, GEQ(f((x, y)), ((h : (A) -> C)(x), (k : (B) -> D)(y))))
+      #|  group_homomorphism(((X : Group[X]), prod_group((C : Group[C]), (D : Group[D]))), (gf : (X) -> (C, D)))
+      #|  group_homomorphism((prod_group((A : Group[A]), (B : Group[B])), (X : Group[X])), (ij : ((A, B)) -> X))
+      #|  (gf : (X) -> (C, D)) == ((z : X) => ((f : (X) -> C)(z), (g : (X) -> D)(z)))
+      #|  (ij : ((A, B)) -> X) == GABS((f : ((A, B)) -> X) => \226\136\128 x : A, \226\136\128 y : B, GEQ(f((x, y)), group_mul((X : Group[X]), (i : (A) -> X)(x), (j : (B) -> X)(y))))
       #|  forall(f:X->C) (g:X->D) (h:A->C) (i:A->X) (j:B->X) (k:B->D) A B C D X.\n        abelian_group X /\\\n        group_isomorphism(A,C) h /\\\n        group_isomorphism(B,D) k /\\\n        group_exactness(A,X,D) (i,g) /\\\n        group_exactness(B,X,C) (j,f) /\\\n        (forall x. x IN group_carrier A ==> f(i x) = h x) /\\\n        (forall x. x IN group_carrier B ==> g(j x) = k x)\n        ==> group_isomorphism (prod_group A B,X)\n                              (\\(x,y). group_mul X (i x) (j y)) /\\\n            group_isomorphism (X,prod_group C D) (\\z. f z,g z)
-      #|  g:B->C
-      #|  C:C group
-      #|  B:B group
-      #|  f:A->B
+      #|  (g : (B) -> C)
+      #|  (C : Group[C])
+      #|  (B : Group[B])
+      #|  (f : (A) -> B)
       #|  forall(f:A->B) (g:B->C) A B C.\n        short_exact_sequence(A,B,C) (f,g)\n        ==> subgroup_generated B (group_image(A,B) f) isomorphic_group A /\\\n            quotient_group B (group_image(A,B) f) isomorphic_group C
       #|  forall(f:A->B) (g:B->C) (h:C->D) (k:D->E) A B C D E.\n        trivial_group A /\\ trivial_group E /\\\n        group_exactness(A,B,C) (f,g) /\\\n        group_exactness(B,C,D) (g,h) /\\\n        group_exactness(C,D,E) (h,k)\n        ==> short_exact_sequence(B,C,D) (g,h)
-      #|  singleton_group (ARB:E)
-      #|  singleton_group (ARB:A)
-      #|  (\\x. ARB):D->E
-      #|  (\\x. group_id B):A->B
+      #|  (singleton_group : (E) -> Group[E])((ARB : E))
+      #|  (singleton_group : (A) -> Group[A])((ARB : A))
+      #|  (x : D) => (ARB : E)
+      #|  (x : A) => group_id((B : Group[B]))
       #|  forall(g:B->C) h B C D.\n        short_exact_sequence(B,C,D) (g,h) <=>\n        ?f:(A->B) (k:D->E) A E.\n                trivial_group A /\\ trivial_group E /\\\n                group_exactness(A,B,C) (f,g) /\\\n                group_exactness(B,C,D) (g,h) /\\\n                group_exactness(C,D,E) (h,k)
-      #|  group_kernel (B,C) (g:B->C) = h
-      #|  (x:B) IN h
-      #|  y:B
-      #|  y:B
-      #|  x:B
-      #|  group_setmul B (h:B->bool) k = group_carrier B
-      #|  (p /\\ q) /\\ (p /\\ r) <=> p /\\ q /\\ r
-      #|  (h:B->bool) subgroup_of B
-      #|  group_kernel(B,C) (g:B->C) = h
-      #|  group_image(A,B) (f:A->B) = h
+      #|  group_kernel(((B : Group[B]), (C : Group[C])), (g : (B) -> C)) == (h : (B) -> Bool)
+      #|  IN((x : B), (h : (B) -> Bool))
+      #|  (y : B)
+      #|  (y : B)
+      #|  (x : B)
+      #|  group_setmul((B : Group[B]), (h : (B) -> Bool), (k : (B) -> Bool)) == group_carrier(B)
+      #|  (((p : Bool) && (q : Bool)) && p && (r : Bool)) == (p && q && r)
+      #|  subgroup_of((h : (B) -> Bool), (B : Group[B]))
+      #|  group_kernel(((B : Group[B]), (C : Group[C])), (g : (B) -> C)) == (h : (B) -> Bool)
+      #|  group_image(((A : Group[A]), (B : Group[B])), (f : (A) -> B)) == (h : (B) -> Bool)
       #|  forall(f:A->B) (g:B->C) A B C h k.\n        group_exactness(A,B,C) (f,g) /\\\n        group_image(A,B) f = h /\\ k subgroup_of B /\\\n        h INTER k SUBSET {group_id B} /\\ group_setmul B h k = group_carrier B\n        ==> group_isomorphism(subgroup_generated B k,\n                              subgroup_generated C (group_image(B,C) g)) g
-      #|  C = subgroup_generated C (group_image(B,C) (g:B->C))
+      #|  (C : Group[C]) == subgroup_generated(C, group_image(((B : Group[B]), C), (g : (B) -> C)))
       #|  forall(f:A->B) (g:B->C) A B C h k.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        group_image(A,B) f = h /\\ k subgroup_of B /\\\n        h INTER k SUBSET {group_id B} /\\ group_setmul B h k = group_carrier B\n        ==> group_isomorphism(A,subgroup_generated B h) f /\\\n            group_isomorphism(subgroup_generated B k,C) g
-      #|  (p /\\ q) /\\ (p /\\ q ==> r) ==> p /\\ q /\\ r
-      #|  k:B->bool
-      #|  h:B->bool
-      #|  k = group_kernel(B,A) (f':B->A)
-      #|  h = group_image(A,B) (f:A->B)
-      #|  A:A group
-      #|  B:B group
-      #|  A:A group
-      #|  f':B->A
-      #|  f:A->B
+      #|  ((p : Bool) && (q : Bool)) && (p && q \226\134\146 (r : Bool)) \226\134\146 p && q && r
+      #|  (k : (B) -> Bool)
+      #|  (h : (B) -> Bool)
+      #|  (k : (B) -> Bool) == group_kernel(((B : Group[B]), (A : Group[A])), (f' : (B) -> A))
+      #|  (h : (B) -> Bool) == group_image(((A : Group[A]), (B : Group[B])), (f : (A) -> B))
+      #|  (A : Group[A])
+      #|  (B : Group[B])
+      #|  (A : Group[A])
+      #|  (f' : (B) -> A)
+      #|  (f : (A) -> B)
       #|  forall(f:A->B) f' (g:B->C) A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        group_homomorphism(B,A) f' /\\\n        group_isomorphism(A,A) (f' o f)\n        ==> ?h k. h normal_subgroup_of B /\\ k normal_subgroup_of B /\\\n                  h INTER k SUBSET {group_id B} /\\\n                  group_setmul B h k = group_carrier B /\\\n                  group_isomorphism(A,subgroup_generated B h) f /\\\n                  group_isomorphism(subgroup_generated B k,C) g
-      #|  \\x:A. x
-      #|  f':B->A
+      #|  (x : A) => x
+      #|  (f' : (B) -> A)
       #|  forall(f:A->B) f' (g:B->C) A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        group_homomorphism(B,A) f' /\\\n        (forall x. x IN group_carrier A ==> f'(f x) = x)\n        ==> ?h k. h normal_subgroup_of B /\\ k normal_subgroup_of B /\\\n                  h INTER k SUBSET {group_id B} /\\\n                  group_setmul B h k = group_carrier B /\\\n                  group_isomorphism(A,subgroup_generated B h) f /\\\n                  group_isomorphism(subgroup_generated B k,C) g
-      #|  \\(x:B,y). group_mul B x y
+      #|  GABS((f : ((B, B)) -> B) => \226\136\128 x : B, \226\136\128 y : B, GEQ(f((x, y)), group_mul((B : Group[B]), x, y)))
       #|  prod_group (subgroup_generated B h)\n               (subgroup_generated B (k:B->bool))
-      #|  k:B->bool
-      #|  h:B->bool
-      #|  C:C group
-      #|  B:B group
-      #|  A:A group
-      #|  g:B->C
-      #|  f':B->A
-      #|  f:A->B
+      #|  (k : (B) -> Bool)
+      #|  (h : (B) -> Bool)
+      #|  (C : Group[C])
+      #|  (B : Group[B])
+      #|  (A : Group[A])
+      #|  (g : (B) -> C)
+      #|  (f' : (B) -> A)
+      #|  (f : (A) -> B)
       #|  forall(f:A->B) f' (g:B->C) A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        abelian_group B /\\\n        group_homomorphism(B,A) f' /\\\n        (forall x. x IN group_carrier A ==> f'(f x) = x)\n        ==> B isomorphic_group prod_group A C
-      #|  (p /\\ q) /\\ (p /\\ q ==> r) ==> p /\\ q /\\ r
-      #|  k:B->bool
-      #|  h:B->bool
-      #|  h = group_kernel(B,C) (g:B->C)
-      #|  k = group_image(C,B) (g':C->B)
-      #|  C:C group
-      #|  B:B group
-      #|  C:C group
-      #|  g:B->C
-      #|  g':C->B
+      #|  ((p : Bool) && (q : Bool)) && (p && q \226\134\146 (r : Bool)) \226\134\146 p && q && r
+      #|  (k : (B) -> Bool)
+      #|  (h : (B) -> Bool)
+      #|  (h : (B) -> Bool) == group_kernel(((B : Group[B]), (C : Group[C])), (g : (B) -> C))
+      #|  (k : (B) -> Bool) == group_image(((C : Group[C]), (B : Group[B])), (g' : (C) -> B))
+      #|  (C : Group[C])
+      #|  (B : Group[B])
+      #|  (C : Group[C])
+      #|  (g : (B) -> C)
+      #|  (g' : (C) -> B)
       #|  forall(f:A->B) (g:B->C) g' A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        group_homomorphism(C,B) g' /\\\n        group_isomorphism(C,C) (g o g')\n        ==> ?h k. h normal_subgroup_of B /\\ k subgroup_of B /\\\n                  h INTER k SUBSET {group_id B} /\\\n                  group_setmul B h k = group_carrier B /\\\n                  group_isomorphism(A,subgroup_generated B h) f /\\\n                  group_isomorphism(subgroup_generated B k,C) g
-      #|  \\x:C. x
-      #|  g':C->B
+      #|  (x : C) => x
+      #|  (g' : (C) -> B)
       #|  forall(f:A->B) (g:B->C) g' A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        group_homomorphism(C,B) g' /\\\n        (forall z. z IN group_carrier C ==> g(g' z) = z)\n        ==> ?h k. h normal_subgroup_of B /\\ k subgroup_of B /\\\n                  h INTER k SUBSET {group_id B} /\\\n                  group_setmul B h k = group_carrier B /\\\n                  group_isomorphism(A,subgroup_generated B h) f /\\\n                  group_isomorphism(subgroup_generated B k,C) g
-      #|  \\(x:B,y). group_mul B x y
+      #|  GABS((f : ((B, B)) -> B) => \226\136\128 x : B, \226\136\128 y : B, GEQ(f((x, y)), group_mul((B : Group[B]), x, y)))
       #|  prod_group (subgroup_generated B h)\n               (subgroup_generated B (k:B->bool))
-      #|  k:B->bool
-      #|  h:B->bool
-      #|  C:C group
-      #|  B:B group
-      #|  A:A group
-      #|  g':C->B
-      #|  g:B->C
-      #|  f:A->B
+      #|  (k : (B) -> Bool)
+      #|  (h : (B) -> Bool)
+      #|  (C : Group[C])
+      #|  (B : Group[B])
+      #|  (A : Group[A])
+      #|  (g' : (C) -> B)
+      #|  (g : (B) -> C)
+      #|  (f : (A) -> B)
       #|  forall(f:A->B) (g:B->C) g' A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        abelian_group B /\\\n        group_homomorphism(C,B) g' /\\\n        (forall z. z IN group_carrier C ==> g(g' z) = z)\n        ==> B isomorphic_group prod_group A C
-      #|  frag_add x (frag_neg y) = frag_sub x y
-      #|  d:D frag
-      #|  (h:C->D frag) c
+      #|  frag_add((x : Frag[_]), frag_neg((y : Frag[_]))) == frag_sub(x, y)
+      #|  (d : Frag[D])
+      #|  (h : (C) -> Frag[D])((c : C))
       #|  c = (h':D frag->C) (h c) /\\\n      h c IN group_carrier(free_abelian_group s)
-      #|  c:C
-      #|  (k:D frag->B) o (h:C->D frag)
-      #|  k:D frag->B
-      #|  B:B group
-      #|  s:D->bool
-      #|  (g':C->B) o (h':D frag->C) o frag_of
-      #|  h':D frag->C
-      #|  h:C->D frag
-      #|  g':C->B
+      #|  (c : C)
+      #|  o((k : (Frag[D]) -> B), (h : (C) -> Frag[D]))
+      #|  (k : (Frag[D]) -> B)
+      #|  (B : Group[B])
+      #|  (s : (D) -> Bool)
+      #|  o((g' : (C) -> B), o((h' : (Frag[D]) -> C), frag_of))
+      #|  (h' : (Frag[D]) -> C)
+      #|  (h : (C) -> Frag[D])
+      #|  (g' : (C) -> B)
       #|  IMAGE f s = t ==> forall y. ?x. y IN t ==> x IN s /\\ f x = y
-      #|  g:B->C
-      #|  f:A->B
+      #|  (g : (B) -> C)
+      #|  (f : (A) -> B)
       #|  forall(f:A->B) (g:B->C) A B C (s:D->bool).\n        short_exact_sequence (A,B,C) (f,g) /\\\n        abelian_group B /\\ C isomorphic_group free_abelian_group s\n        ==> B isomorphic_group prod_group A C
       #|  ?w. w IN group_carrier A' /\\ (f':A'->B') w = (b:B->B') y
-      #|  ?y. y IN group_carrier B /\\ (g:B->C) y = x
-      #|  (h:C->D) x = group_id D
-      #|  D':D' group
-      #|  C':C' group
-      #|  B':B' group
-      #|  A':A' group
-      #|  D:D group
-      #|  C:C group
-      #|  B:B group
-      #|  A:A group
-      #|  x:C
+      #|  \226\136\131 y : B, IN(y, group_carrier((B : Group[B]))) && (g : (B) -> C)(y) == (x : C)
+      #|  (h : (C) -> D)((x : C)) == group_id((D : Group[D]))
+      #|  (D' : Group[D'])
+      #|  (C' : Group[C'])
+      #|  (B' : Group[B'])
+      #|  (A' : Group[A'])
+      #|  (D : Group[D])
+      #|  (C : Group[C])
+      #|  (B : Group[B])
+      #|  (A : Group[A])
+      #|  (x : C)
       #|  forall(f:A->B) (g:B->C) (h:C->D) (f':A'->B') (g':B'->C') (h':C'->D') a b c d\n     A B C D A' B' C' D'.\n      group_epimorphism(A,A') a /\\\n      group_monomorphism(B,B') b /\\\n      group_homomorphism(C,C') c /\\\n      group_monomorphism(D,D') d /\\\n      group_exactness(A,B,C) (f,g) /\\ group_exactness(B,C,D) (g,h) /\\\n      group_exactness(A',B',C') (f',g') /\\ group_exactness(B',C',D') (g',h') /\\\n      (forall x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n      (forall y. y IN group_carrier B ==> g'(b y) = c(g y)) /\\\n      (forall z. z IN group_carrier C ==> h'(c z) = d(h z))\n      ==> group_monomorphism(C,C') c
-      #|  group_mul B' x (group_inv B' ((b:B->B') z)) = w
-      #|  (b:B->B') ((f:A->B) u) = w
-      #|  group_mul B ((f:A->B) u) z
-      #|  ?u. u IN group_carrier A /\\ (a:A->A') u = v
-      #|  ?v. v IN group_carrier A' /\\ (f':A'->B') v = w
-      #|  (g':B'->C') w = group_id C'
-      #|  (w:B') IN group_carrier B'
-      #|  w =  group_mul B' x (group_inv B' ((b:B->B') z))
-      #|  ?z. z IN group_carrier B /\\ (g:B->C) z = y
-      #|  (h:C->D) y = group_id D
+      #|  group_mul((B' : Group[B']), (x : B'), group_inv(B', (b : (B) -> B')((z : B)))) == (w : B')
+      #|  (b : (B) -> B')((f : (A) -> B)((u : A))) == (w : B')
+      #|  group_mul((B : Group[B]), (f : (A) -> B)((u : A)), (z : B))
+      #|  \226\136\131 u : A, IN(u, group_carrier((A : Group[A]))) && (a : (A) -> A')(u) == (v : A')
+      #|  \226\136\131 v : A', IN(v, group_carrier((A' : Group[A']))) && (f' : (A') -> B')(v) == (w : B')
+      #|  (g' : (B') -> C')((w : B')) == group_id((C' : Group[C']))
+      #|  IN((w : B'), group_carrier((B' : Group[B'])))
+      #|  (w : B') == group_mul((B' : Group[B']), (x : B'), group_inv(B', (b : (B) -> B')((z : B))))
+      #|  \226\136\131 z : B, IN(z, group_carrier((B : Group[B]))) && (g : (B) -> C)(z) == (y : C)
+      #|  (h : (C) -> D)((y : C)) == group_id((D : Group[D]))
       #|  ?y. y IN group_carrier C /\\ (c:C->C') y = (g':B'->C') x
-      #|  D':D' group
-      #|  C':C' group
-      #|  B':B' group
-      #|  A':A' group
-      #|  D:D group
-      #|  C:C group
-      #|  B:B group
-      #|  A:A group
-      #|  x:B'
+      #|  (D' : Group[D'])
+      #|  (C' : Group[C'])
+      #|  (B' : Group[B'])
+      #|  (A' : Group[A'])
+      #|  (D : Group[D])
+      #|  (C : Group[C])
+      #|  (B : Group[B])
+      #|  (A : Group[A])
+      #|  (x : B')
       #|  forall(f:A->B) (g:B->C) (h:C->D) (f':A'->B') (g':B'->C') (h':C'->D') a b c d\n     A B C D A' B' C' D'.\n      group_epimorphism(A,A') a /\\\n      group_homomorphism(B,B') b /\\\n      group_epimorphism(C,C') c /\\\n      group_monomorphism(D,D') d /\\\n      group_exactness(A,B,C) (f,g) /\\ group_exactness(B,C,D) (g,h) /\\\n      group_exactness(A',B',C') (f',g') /\\ group_exactness(B',C',D') (g',h') /\\\n      (forall x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n      (forall y. y IN group_carrier B ==> g'(b y) = c(g y)) /\\\n      (forall z. z IN group_carrier C ==> h'(c z) = d(h z))\n      ==> group_epimorphism(B,B') b
       #|  a /\\ (b /\\ b') /\\ c /\\ (d /\\ d') /\\ e /\\\n    fg /\\ gh /\\ hk /\\ fg' /\\ gh' /\\ hk' /\\\n    ca /\\ cb /\\ cc /\\ cd\n    ==> (a /\\ b /\\ c /\\ d /\\ fg /\\ gh /\\ fg' /\\ gh' /\\ ca /\\ cb /\\ cc) /\\\n        (b' /\\ c /\\ d' /\\ e /\\ gh /\\ hk /\\ gh' /\\ hk' /\\ cb /\\ cc /\\ cd)
       #|  forall(f:A->B) (g:B->C) (h:C->D) (k:D->E)\n    (f':A'->B') (g':B'->C') (h':C'->D') (k':D'->E') a b c d e\n     A B C D E A' B' C' D' E'.\n      group_epimorphism(A,A') a /\\\n      group_isomorphism(B,B') b /\\\n      group_homomorphism(C,C') c /\\\n      group_isomorphism(D,D') d /\\\n      group_monomorphism(E,E') e /\\\n      group_exactness(A,B,C) (f,g) /\\\n      group_exactness(B,C,D) (g,h) /\\\n      group_exactness(C,D,E) (h,k) /\\\n      group_exactness(A',B',C') (f',g') /\\\n      group_exactness(B',C',D') (g',h') /\\\n      group_exactness(C',D',E') (h',k') /\\\n      (forall x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n      (forall y. y IN group_carrier B ==> g'(b y) = c(g y)) /\\\n      (forall z. z IN group_carrier C ==> h'(c z) = d(h z)) /\\\n      (forall w. w IN group_carrier D ==> k'(d w) = e(k w))\n      ==> group_isomorphism(C,C') c
-      #|  C':C' group
-      #|  B':B' group
-      #|  A':A' group
-      #|  W':Z group
-      #|  C:C group
-      #|  B:B group
-      #|  A:A group
-      #|  W:Z group
-      #|  c:C->C'
-      #|  b:B->B'
-      #|  a:A->A'
-      #|  (\\x. group_id W'):Z->Z
-      #|  g':B'->C'
-      #|  f':A'->B'
-      #|  w':Z->A'
-      #|  g:B->C
-      #|  f:A->B
-      #|  w:Z->A
+      #|  (C' : Group[C'])
+      #|  (B' : Group[B'])
+      #|  (A' : Group[A'])
+      #|  (W' : Group[Z])
+      #|  (C : Group[C])
+      #|  (B : Group[B])
+      #|  (A : Group[A])
+      #|  (W : Group[Z])
+      #|  (c : (C) -> C')
+      #|  (b : (B) -> B')
+      #|  (a : (A) -> A')
+      #|  (x : Z) => group_id((W' : Group[Z]))
+      #|  (g' : (B') -> C')
+      #|  (f' : (A') -> B')
+      #|  (w' : (Z) -> A')
+      #|  (g : (B) -> C)
+      #|  (f : (A) -> B)
+      #|  (w : (Z) -> A)
       #|  (?(w:Z->A) (z:C->Z) W Z.\n        trivial_group W /\\ trivial_group Z /\\\n        group_exactness (W,A,B) (w,f:A->B) /\\\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,Z) (g:B->C,z)) /\\\n    (?(w':Z->A') (z':C'->Z) W' Z'.\n        trivial_group W' /\\ trivial_group Z' /\\\n        group_exactness (W',A',B') (w',f':A'->B') /\\\n        group_exactness (A',B',C') (f',g') /\\\n        group_exactness (B',C',Z') (g':B'->C',z'))
       #|  forall(f:A->B) (g:B->C) (f':A'->B') (g':B'->C') a b c A B C A' B' C'.\n        group_monomorphism(A,A') a /\\\n        group_homomorphism(B,B') b /\\\n        group_monomorphism(C,C') c /\\\n        short_exact_sequence(A,B,C) (f,g) /\\\n        short_exact_sequence(A',B',C') (f',g') /\\\n        (forall x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n        (forall y. y IN group_carrier B ==> g'(b y) = c(g y))\n        ==> group_monomorphism(B,B') b
-      #|  Z':Z group
-      #|  C':C' group
-      #|  B':B' group
-      #|  A':A' group
-      #|  Z:Z group
-      #|  C:C group
-      #|  B:B group
-      #|  A:A group
-      #|  (\\x. group_id Z'):Z->Z
-      #|  c:C->C'
-      #|  b:B->B'
-      #|  a:A->A'
-      #|  z':C'->Z
-      #|  g':B'->C'
-      #|  f':A'->B'
-      #|  z:C->Z
-      #|  g:B->C
-      #|  f:A->B
+      #|  (Z' : Group[Z])
+      #|  (C' : Group[C'])
+      #|  (B' : Group[B'])
+      #|  (A' : Group[A'])
+      #|  (Z : Group[Z])
+      #|  (C : Group[C])
+      #|  (B : Group[B])
+      #|  (A : Group[A])
+      #|  (x : Z) => group_id((Z' : Group[Z]))
+      #|  (c : (C) -> C')
+      #|  (b : (B) -> B')
+      #|  (a : (A) -> A')
+      #|  (z' : (C') -> Z)
+      #|  (g' : (B') -> C')
+      #|  (f' : (A') -> B')
+      #|  (z : (C) -> Z)
+      #|  (g : (B) -> C)
+      #|  (f : (A) -> B)
       #|  (?(w:Z->A) (z:C->Z) W Z.\n        trivial_group W /\\ trivial_group Z /\\\n        group_exactness (W,A,B) (w,f:A->B) /\\\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,Z) (g:B->C,z)) /\\\n    (?(w':Z->A') (z':C'->Z) W' Z'.\n        trivial_group W' /\\ trivial_group Z' /\\\n        group_exactness (W',A',B') (w',f':A'->B') /\\\n        group_exactness (A',B',C') (f',g') /\\\n        group_exactness (B',C',Z') (g':B'->C',z'))
       #|  forall(f:A->B) (g:B->C) (f':A'->B') (g':B'->C') a b c A B C A' B' C'.\n        group_epimorphism(A,A') a /\\\n        group_homomorphism(B,B') b /\\\n        group_epimorphism(C,C') c /\\\n        short_exact_sequence(A,B,C) (f,g) /\\\n        short_exact_sequence(A',B',C') (f',g') /\\\n        (forall x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n        (forall y. y IN group_carrier B ==> g'(b y) = c(g y))\n        ==> group_epimorphism(B,B') b
       #|  (a /\\ a') /\\ b /\\ (c /\\ c') /\\ d /\\ e /\\ f /\\ g\n    ==> (a /\\ b /\\ c /\\ d /\\ e /\\ f /\\ g) /\\\n        (a' /\\ b /\\ c' /\\ d /\\ e /\\ f /\\ g)
       #|  forall(f:A->B) (g:B->C) (f':A'->B') (g':B'->C') a b c A B C A' B' C'.\n        group_isomorphism(A,A') a /\\\n        group_homomorphism(B,B') b /\\\n        group_isomorphism(C,C') c /\\\n        short_exact_sequence(A,B,C) (f,g) /\\\n        short_exact_sequence(A',B',C') (f',g') /\\\n        (forall x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n        (forall y. y IN group_carrier B ==> g'(b y) = c(g y))\n        ==> group_isomorphism(B,B') b
-      #|  group_mul G x y = y <=> x = group_id G
-      #|  group_mul G x y = x <=> y = group_id G
+      #|  (group_mul((G : Group[_]), (x : _), (y : _)) == y) == (x == group_id(G))
+      #|  (group_mul((G : Group[_]), (x : _), (y : _)) == x) == (y == group_id(G))
       #|  group_mul D ((g:X->D) ((i:A->X) u)) ((g:X->D) (((j:B->X) v))) = k v
       #|  group_mul C ((f:X->C) ((i:A->X) u)) ((f:X->C) (((j:B->X) v))) = h u
-      #|  x:W
+      #|  (x : W)
       #|  y IN s /\\ y IN IMAGE l t\n    ==> IMAGE l t = {x | x IN s /\\ m x = z} ==> m y = z
-      #|  group_exactness (W,X,Y) ((l:W->X),(m:X->Y))
-      #|  group_inv G x = y <=> group_mul G x y = group_id G
+      #|  group_exactness(((W : Group[W]), (X : Group[X]), (Y : Group[Y])), ((l : (W) -> X), (m : (X) -> Y)))
+      #|  (group_inv((G : Group[_]), (x : _)) == (y : _)) == (group_mul(G, x, y) == group_id(G))
       #|  (i:A->X) u IN group_carrier X /\\\n    (j:B->X) v IN group_carrier X /\\\n    (f:X->C) (i u) IN group_carrier C /\\\n    (f:X->C) (j v) IN group_carrier C /\\\n    (g:X->D) (i u) IN group_carrier D /\\\n    (g:X->D) (j v) IN group_carrier D
-      #|  v:B
-      #|  u:A
+      #|  (v : B)
+      #|  (u : A)
       #|  IMAGE f s = t /\\ P ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
-      #|  (l:W->X) x
-      #|  X:X group
-      #|  D:D group
-      #|  C:C group
-      #|  B:B group
-      #|  A:A group
-      #|  k:B->D
-      #|  j:B->X
-      #|  i:A->X
-      #|  h:A->C
-      #|  g:X->D
-      #|  f:X->C
+      #|  (l : (W) -> X)((x : W))
+      #|  (X : Group[X])
+      #|  (D : Group[D])
+      #|  (C : Group[C])
+      #|  (B : Group[B])
+      #|  (A : Group[A])
+      #|  (k : (B) -> D)
+      #|  (j : (B) -> X)
+      #|  (i : (A) -> X)
+      #|  (h : (A) -> C)
+      #|  (g : (X) -> D)
+      #|  (f : (X) -> C)
       #|  (c:W->C) x IN group_carrier C /\\\n    (h':C->A) (c x) IN group_carrier A /\\\n    (a:A->Y) (h'(c x)) IN group_carrier Y /\\\n    (i:A->X) (h'(c x)) IN group_carrier X /\\\n    (d:W->D) x IN group_carrier D /\\\n    (k':D->B) (d x) IN group_carrier B /\\\n    (b:B->Y) (k'(d x)) IN group_carrier Y /\\\n    (j:B->X) (k'(d x)) IN group_carrier X
-      #|  (l:W->X) x IN group_carrier X
+      #|  IN((l : (W) -> X)((x : W)), group_carrier((X : Group[X])))
       #|  forall(f:X->C) (g:X->D) (h:A->C) (h':C->A) (i:A->X) (j:B->X) (k:B->D) (k':D->B)\n    (a:A->Y) (b:B->Y) (c:W->C) (d:W->D) (l:W->X) (m:X->Y) A B C D W X Y.\n        abelian_group X /\\\n        group_homomorphism(A,Y) a /\\\n        group_homomorphism(B,Y) b /\\\n        group_homomorphism(W,C) c /\\\n        group_homomorphism(W,D) d /\\\n        group_isomorphisms(A,C) (h,h') /\\\n        group_isomorphisms(B,D) (k,k') /\\\n        group_exactness(A,X,D) (i,g) /\\\n        group_exactness(B,X,C) (j,f) /\\\n        group_exactness(W,X,Y) (l,m) /\\\n        (forall x. x IN group_carrier W ==> f(l x) = c x) /\\\n        (forall x. x IN group_carrier W ==> g(l x) = d x) /\\\n        (forall x. x IN group_carrier A ==> f(i x) = h x) /\\\n        (forall x. x IN group_carrier A ==> m(i x) = a x) /\\\n        (forall x. x IN group_carrier B ==> g(j x) = k x) /\\\n        (forall x. x IN group_carrier B ==> m(j x) = b x)\n        ==> forall x. x IN group_carrier W\n                ==> group_inv Y (a(h'(c x))) = b(k'(d x))
       #|group_tybij =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(group('A),bool),bool) (\a:group('A). ((#=:fun(group('A),fun(group('A),bool)) (#group:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),group('A)) (#group_operations:fun(group('A),prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))) a:group('A)))) a:group('A))))) (#forall:fun(fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),bool),bool) (\r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))). ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) (#FST:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),'A) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) (#FST:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) ((#FST:fun(prod(fun('A,'A),fun('A,fun('A,'A))),fun('A,'A)) (#SND:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),prod(fun('A,'A),fun('A,fun('A,'A)))) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) x:'A)) (#FST:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) (((#SND:fun(prod(fun('A,'A),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),prod(fun('A,'A),fun('A,fun('A,'A)))) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) x:'A) y:'A)) (#FST:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. (#forall:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) z:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))))) ((#=:fun('A,fun('A,bool)) (((#SND:fun(prod(fun('A,'A),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),prod(fun('A,'A),fun('A,fun('A,'A)))) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) x:'A) (((#SND:fun(prod(fun('A,'A),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),prod(fun('A,'A),fun('A,fun('A,'A)))) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) y:'A) z:'A))) (((#SND:fun(prod(fun('A,'A),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),prod(fun('A,'A),fun('A,fun('A,'A)))) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) (((#SND:fun(prod(fun('A,'A),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),prod(fun('A,'A),fun('A,fun('A,'A)))) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) x:'A) y:'A)) z:'A)))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (((#SND:fun(prod(fun('A,'A),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),prod(fun('A,'A),fun('A,fun('A,'A)))) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) (#FST:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),'A) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) x:'A)) x:'A)) ((#=:fun('A,fun('A,bool)) (((#SND:fun(prod(fun('A,'A),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),prod(fun('A,'A),fun('A,fun('A,'A)))) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) x:'A) (#FST:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),'A) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))))))) x:'A)))))) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (((#SND:fun(prod(fun('A,'A),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),prod(fun('A,'A),fun('A,fun('A,'A)))) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) ((#FST:fun(prod(fun('A,'A),fun('A,fun('A,'A))),fun('A,'A)) (#SND:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),prod(fun('A,'A),fun('A,fun('A,'A)))) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) x:'A)) x:'A)) (#FST:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),'A) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))))))) ((#=:fun('A,fun('A,bool)) (((#SND:fun(prod(fun('A,'A),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),prod(fun('A,'A),fun('A,fun('A,'A)))) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) x:'A) ((#FST:fun(prod(fun('A,'A),fun('A,fun('A,'A))),fun('A,'A)) (#SND:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),prod(fun('A,'A),fun('A,fun('A,'A)))) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) x:'A))) (#FST:fun(prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))),'A) (#SND:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))))))))))))) ((#=:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),bool)) (#group_operations:fun(group('A),prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))) (#group:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),group('A)) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))))) r:prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))))))))
       #|group_carrier =  |- ((#=:fun(fun(group('A),fun('A,bool)),fun(fun(group('A),fun('A,bool)),bool)) #group_carrier:fun(group('A),fun('A,bool))) (\g:group('A). (#FST:fun(prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A))))),fun('A,bool)) (#group_operations:fun(group('A),prod(fun('A,bool),prod('A,prod(fun('A,'A),fun('A,fun('A,'A)))))) g:group('A)))))
