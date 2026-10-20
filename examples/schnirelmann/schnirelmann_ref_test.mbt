@@ -9216,221 +9216,221 @@ test "Examples/schnirelmann matches Examples/schnirelmann.ml" {
       #|0..0..4..11..22..solved at 27
       #|0..0..3..solved at 7
       #|Examples/schnirelmann quotations (215):
-      #|  count s n = CARD (s INTER (1..n))
-      #|  schnirelmann s = inf { &(count s n) / &n | 1 <= n}
-      #|  forall s. count s n <= n
-      #|  forall n. count (:num) n = n
-      #|  forall s t n. s SUBSET t ==> count s n <= count t n
-      #|  forall s t n. (forall m. 1 <= m ==> (m IN s <=> m IN t))\n         ==> count s n = count t n
-      #|  &0
+      #|  (count : ((Num) -> Bool, Num) -> Num)((s : (Num) -> Bool), (n : Num)) == CARD(INTER(s, op_dot_dot(1, n)))
+      #|  (schnirelmann : ((Num) -> Bool) -> Real)((s : (Num) -> Bool)) == inf({real_of_num(count(s, (n : Num))) / real_of_num(n) | 1 <= n})
+      #|  \226\136\128 s : (Num) -> Bool, count(s, (n : Num)) <= n
+      #|  \226\136\128 n : Num, count(UNIV, n) == n
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, \226\136\128 n : Num, SUBSET(s, t) \226\134\146 count(s, n) <= count(t, n)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, \226\136\128 n : Num, (\226\136\128 m : Num, 1 <= m \226\134\146 IN(m, s) == IN(m, t)) \226\134\146 count(s, n) == count(t, n)
+      #|  real_of_num(0)
       #|  (forall x. x IN {f x | P x} ==> Q x) <=> forall x. P x ==> Q(f x)
-      #|  { &(count s n) / &n | 1 <= n}
-      #|  (forall n. 1 <= n ==> schnirelmann s <= &(count s n) / &n) /\\\n   (forall b. (forall n. 1 <= n ==> b <= &(count s n) / &n) ==> b <= schnirelmann s)
-      #|  n = 0 \\/ 1 <= n
-      #|  forall n s. schnirelmann s * &n <= &(count s n)
+      #|  {real_of_num(count((s : (Num) -> Bool), (n : Num))) / real_of_num(n) | 1 <= n}
+      #|  (\226\136\128 n : Num, 1 <= n \226\134\146 schnirelmann((s : (Num) -> Bool)) <= real_of_num(count(s, n)) / real_of_num(n)) && (\226\136\128 b : Real, (\226\136\128 n : Num, 1 <= n \226\134\146 b <= real_of_num(count(s, n)) / real_of_num(n)) \226\134\146 b <= schnirelmann(s))
+      #|  (n : Num) == 0 || 1 <= n
+      #|  \226\136\128 n : Num, \226\136\128 s : (Num) -> Bool, schnirelmann(s) * real_of_num(n) <= real_of_num(count(s, n))
       #|  (forall x. x IN {f x | P x} ==> Q x) <=> forall x. P x ==> Q(f x)
-      #|  forall s. &0 <= schnirelmann s /\\ schnirelmann s <= &1
-      #|  &(count s n) / &n
-      #|  n:num
-      #|  forall s t. s SUBSET t ==> schnirelmann s <= schnirelmann t
-      #|  forall s t. (forall n. 1 <= n ==> (n IN s <=> n IN t))\n         ==> schnirelmann s = schnirelmann t
-      #|  1 <= k ==> (x <= k - 1 <=> x <= k /\\ ~(x = k))
-      #|  &1 <= x ==> (&1 - &1 / x) = (x - &1) / x
-      #|  &(count s k) / &k
-      #|  forall s k. 1 <= k /\\ ~(k IN s) ==> schnirelmann s <= &1 - &1 / &k
-      #|  s:num->bool
+      #|  \226\136\128 s : (Num) -> Bool, real_of_num(0) <= schnirelmann(s) && schnirelmann(s) <= real_of_num(1)
+      #|  real_of_num(count((s : (Num) -> Bool), (n : Num))) / real_of_num(n)
+      #|  (n : Num)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, SUBSET(s, t) \226\134\146 schnirelmann(s) <= schnirelmann(t)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, (\226\136\128 n : Num, 1 <= n \226\134\146 IN(n, s) == IN(n, t)) \226\134\146 schnirelmann(s) == schnirelmann(t)
+      #|  1 <= (k : Num) \226\134\146 ((x : Num) <= k - 1) == (x <= k && !(x == k))
+      #|  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(1) - real_of_num(1) / x == (x - real_of_num(1)) / x
+      #|  real_of_num(count((s : (Num) -> Bool), (k : Num))) / real_of_num(k)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 k : Num, 1 <= k && !IN(k, s) \226\134\146 schnirelmann(s) <= real_of_num(1) - real_of_num(1) / real_of_num(k)
+      #|  (s : (Num) -> Bool)
       #|  1
-      #|  s:num->bool
-      #|  forall s. ~(1 IN s) ==> schnirelmann s = &0
-      #|  schnirelmann(:num) = &1
-      #|  &0 < x ==> s <= &1 - x ==> ~(s = &1)
-      #|  forall s. schnirelmann s = &1 <=> forall n. 1 <= n ==> n IN s
-      #|  s +++ t = {x + y:num | x IN s /\\ y IN t}
-      #|  forall s t. 0 IN s /\\ 0 IN t ==> 0 IN (s +++ t)
-      #|  n:num
+      #|  (s : (Num) -> Bool)
+      #|  \226\136\128 s : (Num) -> Bool, !IN(1, s) \226\134\146 schnirelmann(s) == real_of_num(0)
+      #|  schnirelmann(UNIV) == real_of_num(1)
+      #|  real_of_num(0) < (x : Real) \226\134\146 (s : Real) <= real_of_num(1) - x \226\134\146 !(s == real_of_num(1))
+      #|  \226\136\128 s : (Num) -> Bool, (schnirelmann(s) == real_of_num(1)) == (\226\136\128 n : Num, 1 <= n \226\134\146 IN(n, s))
+      #|  (op_plus_plus_plus : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)((s : (Num) -> Bool), (t : (Num) -> Bool)) == {(x : Num) + (y : Num) | IN(x, s) && IN(y, t)}
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, IN(0, s) && IN(0, t) \226\134\146 IN(0, op_plus_plus_plus(s, t))
+      #|  (n : Num)
       #|  0
-      #|  n:num
-      #|  forall s t. 0 IN s ==> t SUBSET (s +++ t)
+      #|  (n : Num)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, IN(0, s) \226\134\146 SUBSET(t, op_plus_plus_plus(s, t))
       #|  0
-      #|  n:num
-      #|  n:num
-      #|  forall s t. 0 IN t ==> s SUBSET (s +++ t)
-      #|  forall s t. s +++ t = t +++ s
-      #|  forall s t u. s +++ (t +++ u) = (s +++ t) +++ u
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, IN(0, t) \226\134\146 SUBSET(s, op_plus_plus_plus(s, t))
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, op_plus_plus_plus(s, t) == op_plus_plus_plus(t, s)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, \226\136\128 u : (Num) -> Bool, op_plus_plus_plus(s, op_plus_plus_plus(t, u)) == op_plus_plus_plus(op_plus_plus_plus(s, t), u)
       #|  {0}
-      #|  s:num->bool
-      #|  neutral(+++) = {0}
-      #|  monoidal (+++)
-      #|  forall a s. FINITE s /\\ (forall k. k IN s ==> 0 IN a k) ==> 0 IN iterate(+++) s a
-      #|  b:num
-      #|  a:num
-      #|  b:num
-      #|  a:num
-      #|  ~(n IN s +++ t)
-      #|  ~(n = 0) ==> (x <= n - 1 <=> x <= n /\\ ~(x = n))
-      #|  CARD(IMAGE (\\b. n - b) (t INTER (1..n-1))) = count t (n - 1)
-      #|  s + t:num >= n ==> a = s /\\ b = t ==> n <= a + b
-      #|  ~(n = 0) /\\ n <= x ==> n - 1 < x
-      #|  (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-      #|  CARD(1..n-1)
-      #|  ~((s INTER (1..n-1)) INTER (IMAGE (\\b. n - b) (t INTER (1..n-1))) = {})
-      #|  n = 0
-      #|  (n:num) IN t
-      #|  (n:num) IN s
-      #|  (~p ==> F) ==> p
-      #|  forall s t n. 0 IN (s INTER t) /\\ count s n + count t n >= n ==> n IN (s +++ t)
-      #|  a + b >= &1 ==> a <= x /\\ b <= y ==> &1 <= x + y
-      #|  n = 0
-      #|  n:num
-      #|  forall s t. 0 IN (s INTER t) /\\ schnirelmann s + schnirelmann t >= &1\n         ==> s +++ t = (:num)
-      #|  forall s. 0 IN s /\\ schnirelmann s >= &1 / &2 ==> s +++ s = (:num)
-      #|  j:num
-      #|  i:num
-      #|  j:num
-      #|  i:num
-      #|  forall k. 1 <= k /\\ k <= n ==> 1 <= f(k) /\\ f(k) <= p
-      #|  (a ==> b) /\\ a ==> a /\\ b
-      #|  1 <= n + 1 /\\ ~(n + 1 <= n)
-      #|  \\i. if 1 <= i then if i <= n then f i else p + 1 else 0
-      #|  f:num->num
-      #|  s:num->bool
-      #|  n:num
+      #|  (s : (Num) -> Bool)
+      #|  neutral(op_plus_plus_plus) == {0}
+      #|  monoidal(op_plus_plus_plus)
+      #|  \226\136\128 a : (_, Num) -> Bool, \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 k : _, IN(k, s) \226\134\146 IN(0, a(k))) \226\134\146 IN(0, iterate(op_plus_plus_plus, s, a))
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  !IN((n : Num), op_plus_plus_plus((s : (Num) -> Bool), (t : (Num) -> Bool)))
+      #|  !((n : Num) == 0) \226\134\146 ((x : Num) <= n - 1) == (x <= n && !(x == n))
+      #|  CARD(IMAGE((b : Num) => (n : Num) - b, INTER((t : (Num) -> Bool), op_dot_dot(1, n - 1)))) == count(t, n - 1)
+      #|  (s : Num) + (t : Num) >= (n : Num) \226\134\146 (a : Num) == s && (b : Num) == t \226\134\146 n <= a + b
+      #|  !((n : Num) == 0) && n <= (x : Num) \226\134\146 n - 1 < x
+      #|  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+      #|  CARD(op_dot_dot(1, (n : Num) - 1))
+      #|  !(INTER(INTER((s : (Num) -> Bool), op_dot_dot(1, (n : Num) - 1)), IMAGE((b : Num) => n - b, INTER((t : (Num) -> Bool), op_dot_dot(1, n - 1)))) == {})
+      #|  (n : Num) == 0
+      #|  IN((n : Num), (t : (Num) -> Bool))
+      #|  IN((n : Num), (s : (Num) -> Bool))
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, \226\136\128 n : Num, IN(0, INTER(s, t)) && count(s, n) + count(t, n) >= n \226\134\146 IN(n, op_plus_plus_plus(s, t))
+      #|  (a : Real) + (b : Real) >= real_of_num(1) \226\134\146 a <= (x : Real) && b <= (y : Real) \226\134\146 real_of_num(1) <= x + y
+      #|  (n : Num) == 0
+      #|  (n : Num)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, IN(0, INTER(s, t)) && schnirelmann(s) + schnirelmann(t) >= real_of_num(1) \226\134\146 op_plus_plus_plus(s, t) == UNIV
+      #|  \226\136\128 s : (Num) -> Bool, IN(0, s) && schnirelmann(s) >= real_of_num(1) / real_of_num(2) \226\134\146 op_plus_plus_plus(s, s) == UNIV
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  \226\136\128 k : Num, 1 <= k && k <= (n : Num) \226\134\146 1 <= (f : (Num) -> Num)(k) && f(k) <= (p : Num)
+      #|  ((a : Bool) \226\134\146 (b : Bool)) && a \226\134\146 a && b
+      #|  1 <= (n : Num) + 1 && !(n + 1 <= n)
+      #|  (i : Num) => if 1 <= i { if i <= (n : Num) { (f : (Num) -> Num)(i) } else { (p : Num) + 1 } } else { 0 }
+      #|  (f : (Num) -> Num)
+      #|  (s : (Num) -> Bool)
+      #|  (n : Num)
       #|  (<=):num->num->bool
-      #|  forall n s p. s HAS_SIZE n /\\ (forall k. k IN s ==> 1 <= k /\\ k <= p)\n           ==> ?a:num->num.\n                 a(0) = 0 /\\\n                 a(n + 1) = p + 1 /\\\n                 s = IMAGE a (1..n) /\\\n                 (forall j k. j <= n /\\ k <= n + 1 /\\ j < k ==> a(j) < a(k)) /\\\n                 (forall j k. j <= n /\\ k <= n + 1 /\\ j <= k ==> a(j) <= a(k))
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  i:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  i:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  i:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  i:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  i:num
-      #|  a IN s /\\ (t = a INSERT u)\n      ==> (s INTER t = a INSERT (s INTER u))
-      #|  s INTER (0..n) = 0 INSERT (s INTER (1..n))
-      #|  forall n s. 0 IN s ==> CARD(s INTER (0..n)) = SUC(CARD(s INTER (1..n)))
-      #|  (&1 - t) * s * n <= (&1 - t) * a\n    ==> ((s + t) - s * t) * n <= t * (n - a) + a
-      #|  (n + &1) - (a + &1) = n - a
-      #|  --(&0 - a + b) = a - b
-      #|  a - b - c:real = --((b - a) + c)
-      #|  a < b ==> 1 <= b - a
-      #|  a(i):num < a(i + 1)
-      #|  i:num
-      #|  sum(0..A) (\\i. schnirelmann t * (&(a(i + 1)) - &(a i) - &1)) + &A
-      #|  sum(0..A) (\\i. schnirelmann t * &(a(i + 1) - a(i) - 1) + &1)
-      #|  j:num
-      #|  i:num
-      #|  j:num
-      #|  i:num
-      #|  i:num = j
-      #|  j:num
-      #|  i:num
-      #|  (a:num->num)(i) < a(i + 1) /\\ a(j) < a(j + 1)
-      #|  ~(i = j) ==> i + 1 <= j \\/ j + 1 <= i
-      #|  a(i + 1):num <= a(j) \\/ a(j + 1) <= a(i)
-      #|  l:num
-      #|  k:num
-      #|  IMAGE f s INTER t = {} <=> forall x. x IN s ==> ~(f x IN t)
-      #|  j:num
-      #|  i:num
-      #|  forall i j. i IN 0..A /\\ j IN 0..A /\\ ~(i = j)\n               ==> IMAGE (\\b. a i + b) (t INTER (0..a (i + 1) - a i - 1)) INTER\n                   IMAGE (\\b. a j + b) (t INTER (0..a (j + 1) - a j - 1)) = {}
-      #|  k + 1
-      #|  k:num = A
-      #|  a(k) < a(k + 1) /\\ a(k + 1) <= n + 1 /\\ l <= a(k + 1) - a(k) - 1\n      ==> a(k) + l <= n
-      #|  l:num
-      #|  k:num
-      #|  &(CARD(UNIONS(IMAGE (\\i. (IMAGE (\\b. a i + b)\n                                    (t INTER (0..(a(i+1) - a(i) - 1)))))\n                        (0..A))))
-      #|  &(CARD ((s +++ t) INTER (0..n))) - &1
-      #|  d ==> (a /\\ b /\\ c <=> d) ==> a /\\ c
-      #|  k = 0 \\/ 1 <= k
-      #|  (a:num->num)(k)
-      #|  forall k. k <= A ==> (a:num->num)(k) IN s /\\ a(k) <= n
-      #|  A = CARD(s INTER (1..n))
-      #|  a:num->num
-      #|  n:num
-      #|  s INTER (1..n)
-      #|  count s n
-      #|  n:num
-      #|  forall s t. 0 IN (s INTER t)\n         ==> schnirelmann(s +++ t)\n                >= (schnirelmann s + schnirelmann t) -\n                   schnirelmann s * schnirelmann t
-      #|  &1 - (&1 - s) * (&1 - t) <= u <=>\n                            u >= (s + t) - s * t
-      #|  a <= b ==> &1 - b <= &1 - a
-      #|  &1 - (&1 - schnirelmann(a(k:A))) *\n                   (&1 - schnirelmann(iterate (+++) s a))
-      #|  s:A->bool
-      #|  k:A
-      #|  forall a s. FINITE s /\\ (forall i:A. i IN s ==> 0 IN a i)\n         ==> schnirelmann(iterate(+++) s a)\n             >= &1 - product s (\\i. &1 - schnirelmann(a i))
-      #|  i:A->bool
-      #|  \\i:A. (s:num->bool)
-      #|  forall i s. FINITE i /\\ 0 IN s\n         ==> schnirelmann(iterate(+++) i (\\k:A. s))\n             >= &1 - (&1 - schnirelmann s) pow (CARD i)
-      #|  a < &1 / &2 ==> y >= &1 - a ==> x >= &1 - a ==> x + y >= &1
-      #|  s:num->bool
-      #|  k:A->bool
-      #|  s:num->bool
-      #|  j:A->bool
-      #|  n = 2 * n - n
-      #|  (a /\\ b /\\ c) /\\ (a /\\ b /\\ c ==> d) ==> a /\\ b /\\ c /\\ d
-      #|  i DIFF j:A->bool
-      #|  j:A->bool
-      #|  n <= 2 * n
-      #|  n:num
-      #|  ?j k:A->bool. i = j UNION k /\\ j INTER k = {} /\\\n                  j HAS_SIZE n /\\ k HAS_SIZE n
-      #|  i:A->bool
-      #|  2 * n
-      #|  n:num
-      #|  &1 / &2
-      #|  &1 - schnirelmann s
-      #|  forall s. 0 IN s /\\ schnirelmann s > &0\n       ==> ?k. forall i. i HAS_SIZE k ==> iterate(+++) i (\\a:A. s) = (:num)
-      #|  ~(SUC n <= n)
-      #|  1 = SUC m \\/ 1 <= m
-      #|  ~(SUC n <= n)
-      #|  \\i. if i = SUC m then x:num else f i
-      #|  SUC m
-      #|  f:num->num
-      #|  m:num
-      #|  y:num
-      #|  y:num
-      #|  x <= k ==> x <= SUC k
-      #|  x = 0
-      #|  x:num
-      #|  n:num
-      #|  ~(SUC n <= n)
-      #|  ~(1 <= i /\\ i <= 0)
+      #|  \226\136\128 n : Num, \226\136\128 s : (Num) -> Bool, \226\136\128 p : Num, HAS_SIZE(s, n) && (\226\136\128 k : Num, IN(k, s) \226\134\146 1 <= k && k <= p) \226\134\146 (\226\136\131 a : (Num) -> Num, a(0) == 0 && a(n + 1) == p + 1 && s == IMAGE(a, op_dot_dot(1, n)) && (\226\136\128 j : Num, \226\136\128 k : Num, j <= n && k <= n + 1 && j < k \226\134\146 a(j) < a(k)) && (\226\136\128 j : Num, \226\136\128 k : Num, j <= n && k <= n + 1 && j <= k \226\134\146 a(j) <= a(k)))
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  IN((a : _), (s : (_) -> Bool)) && (t : (_) -> Bool) == INSERT(a, (u : (_) -> Bool)) \226\134\146 INTER(s, t) == INSERT(a, INTER(s, u))
+      #|  INTER((s : (Num) -> Bool), op_dot_dot(0, (n : Num))) == INSERT(0, INTER(s, op_dot_dot(1, n)))
+      #|  \226\136\128 n : Num, \226\136\128 s : (Num) -> Bool, IN(0, s) \226\134\146 CARD(INTER(s, op_dot_dot(0, n))) == SUC(CARD(INTER(s, op_dot_dot(1, n))))
+      #|  (real_of_num(1) - (t : Real)) * ((s : Real) * (n : Real)) <= (real_of_num(1) - t) * (a : Real) \226\134\146 (s + t - s * t) * n <= t * (n - a) + a
+      #|  (n : Real) + real_of_num(1) - ((a : Real) + real_of_num(1)) == n - a
+      #|  -(real_of_num(0) - (a : Real) + (b : Real)) == a - b
+      #|  (a : Real) - (b : Real) - (c : Real) == -(b - a + c)
+      #|  (a : Num) < (b : Num) \226\134\146 1 <= b - a
+      #|  (a : (Num) -> Num)((i : Num)) < a(i + 1)
+      #|  (i : Num)
+      #|  sum(op_dot_dot(0, (A : Num)), (i : Num) => schnirelmann((t : (Num) -> Bool)) * (real_of_num((a : (Num) -> Num)(i + 1)) - real_of_num(a(i)) - real_of_num(1))) + real_of_num(A)
+      #|  sum(op_dot_dot(0, (A : Num)), (i : Num) => schnirelmann((t : (Num) -> Bool)) * real_of_num((a : (Num) -> Num)(i + 1) - a(i) - 1) + real_of_num(1))
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (i : Num) == (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (a : (Num) -> Num)((i : Num)) < a(i + 1) && a((j : Num)) < a(j + 1)
+      #|  !((i : Num) == (j : Num)) \226\134\146 i + 1 <= j || j + 1 <= i
+      #|  (a : (Num) -> Num)((i : Num) + 1) <= a((j : Num)) || a(j + 1) <= a(i)
+      #|  (l : Num)
+      #|  (k : Num)
+      #|  (INTER(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) == {}) == (\226\136\128 x : _, IN(x, s) \226\134\146 !IN(f(x), t))
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, \226\136\128 j : Num, IN(i, op_dot_dot(0, (A : Num))) && IN(j, op_dot_dot(0, A)) && !(i == j) \226\134\146 INTER(IMAGE((b : Num) => (a : (Num) -> Num)(i) + b, INTER((t : (Num) -> Bool), op_dot_dot(0, a(i + 1) - a(i) - 1))), IMAGE((b : Num) => a(j) + b, INTER(t, op_dot_dot(0, a(j + 1) - a(j) - 1)))) == {}
+      #|  (k : Num) + 1
+      #|  (k : Num) == (A : Num)
+      #|  (a : (Num) -> Num)((k : Num)) < a(k + 1) && a(k + 1) <= (n : Num) + 1 && (l : Num) <= a(k + 1) - a(k) - 1 \226\134\146 a(k) + l <= n
+      #|  (l : Num)
+      #|  (k : Num)
+      #|  real_of_num(CARD(UNIONS(IMAGE((i : Num) => IMAGE((b : Num) => (a : (Num) -> Num)(i) + b, INTER((t : (Num) -> Bool), op_dot_dot(0, a(i + 1) - a(i) - 1))), op_dot_dot(0, (A : Num))))))
+      #|  real_of_num(CARD(INTER(op_plus_plus_plus((s : (Num) -> Bool), (t : (Num) -> Bool)), op_dot_dot(0, (n : Num))))) - real_of_num(1)
+      #|  (d : Bool) \226\134\146 ((a : Bool) && (b : Bool) && (c : Bool)) == d \226\134\146 a && c
+      #|  (k : Num) == 0 || 1 <= k
+      #|  (a : (Num) -> Num)((k : Num))
+      #|  \226\136\128 k : Num, k <= (A : Num) \226\134\146 IN((a : (Num) -> Num)(k), (s : (Num) -> Bool)) && a(k) <= (n : Num)
+      #|  (A : Num) == CARD(INTER((s : (Num) -> Bool), op_dot_dot(1, (n : Num))))
+      #|  (a : (Num) -> Num)
+      #|  (n : Num)
+      #|  INTER((s : (Num) -> Bool), op_dot_dot(1, (n : Num)))
+      #|  count((s : (Num) -> Bool), (n : Num))
+      #|  (n : Num)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, IN(0, INTER(s, t)) \226\134\146 schnirelmann(op_plus_plus_plus(s, t)) >= schnirelmann(s) + schnirelmann(t) - schnirelmann(s) * schnirelmann(t)
+      #|  (real_of_num(1) - (real_of_num(1) - (s : Real)) * (real_of_num(1) - (t : Real)) <= (u : Real)) == (u >= s + t - s * t)
+      #|  (a : Real) <= (b : Real) \226\134\146 real_of_num(1) - b <= real_of_num(1) - a
+      #|  real_of_num(1) - (real_of_num(1) - schnirelmann((a : (A, Num) -> Bool)((k : A)))) * (real_of_num(1) - schnirelmann(iterate(op_plus_plus_plus, (s : (A) -> Bool), a)))
+      #|  (s : (A) -> Bool)
+      #|  (k : A)
+      #|  \226\136\128 a : (A, Num) -> Bool, \226\136\128 s : (A) -> Bool, FINITE(s) && (\226\136\128 i : A, IN(i, s) \226\134\146 IN(0, a(i))) \226\134\146 schnirelmann(iterate(op_plus_plus_plus, s, a)) >= real_of_num(1) - product(s, (i : A) => real_of_num(1) - schnirelmann(a(i)))
+      #|  (i : (A) -> Bool)
+      #|  (i : A) => (s : (Num) -> Bool)
+      #|  \226\136\128 i : (A) -> Bool, \226\136\128 s : (Num) -> Bool, FINITE(i) && IN(0, s) \226\134\146 schnirelmann(iterate(op_plus_plus_plus, i, (k : A) => s)) >= real_of_num(1) - pow(real_of_num(1) - schnirelmann(s), CARD(i))
+      #|  (a : Real) < real_of_num(1) / real_of_num(2) \226\134\146 (y : Real) >= real_of_num(1) - a \226\134\146 (x : Real) >= real_of_num(1) - a \226\134\146 x + y >= real_of_num(1)
+      #|  (s : (Num) -> Bool)
+      #|  (k : (A) -> Bool)
+      #|  (s : (Num) -> Bool)
+      #|  (j : (A) -> Bool)
+      #|  (n : Num) == 2 * n - n
+      #|  ((a : Bool) && (b : Bool) && (c : Bool)) && (a && b && c \226\134\146 (d : Bool)) \226\134\146 a && b && c && d
+      #|  DIFF((i : (A) -> Bool), (j : (A) -> Bool))
+      #|  (j : (A) -> Bool)
+      #|  (n : Num) <= 2 * n
+      #|  (n : Num)
+      #|  \226\136\131 j : (A) -> Bool, \226\136\131 k : (A) -> Bool, (i : (A) -> Bool) == UNION(j, k) && INTER(j, k) == {} && HAS_SIZE(j, (n : Num)) && HAS_SIZE(k, n)
+      #|  (i : (A) -> Bool)
+      #|  2 * (n : Num)
+      #|  (n : Num)
+      #|  real_of_num(1) / real_of_num(2)
+      #|  real_of_num(1) - schnirelmann((s : (Num) -> Bool))
+      #|  \226\136\128 s : (Num) -> Bool, IN(0, s) && schnirelmann(s) > real_of_num(0) \226\134\146 (\226\136\131 k : Num, \226\136\128 i : (A) -> Bool, HAS_SIZE(i, k) \226\134\146 iterate(op_plus_plus_plus, i, (a : A) => s) == UNIV)
+      #|  !(SUC((n : Num)) <= n)
+      #|  1 == SUC((m : Num)) || 1 <= m
+      #|  !(SUC((n : Num)) <= n)
+      #|  (i : Num) => if i == SUC((m : Num)) { (x : Num) } else { (f : (Num) -> Num)(i) }
+      #|  SUC((m : Num))
+      #|  (f : (Num) -> Num)
+      #|  (m : Num)
+      #|  (y : Num)
+      #|  (y : Num)
+      #|  (x : Num) <= (k : Num) \226\134\146 x <= SUC(k)
+      #|  (x : Num) == 0
+      #|  (x : Num)
+      #|  (n : Num)
+      #|  !(SUC((n : Num)) <= n)
+      #|  !(1 <= (i : Num) && i <= 0)
       #|  0
-      #|  1 <= SUC k
-      #|  k:num
-      #|  k:num
-      #|  1..k
-      #|  k:num
-      #|  ?k. forall i:num->bool.\n           i HAS_SIZE k ==> iterate (+++) i (\\a. 0 INSERT s) = (:num)
-      #|  forall s. schnirelmann s > &0\n       ==> ?k. forall n. ?m f. m <= k /\\ (forall i. i IN 1..m ==> f(i) IN s) /\\\n                         n = nsum (1..m) f
+      #|  1 <= SUC((k : Num))
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  op_dot_dot(1, (k : Num))
+      #|  (k : Num)
+      #|  \226\136\131 k : Num, \226\136\128 i : (Num) -> Bool, HAS_SIZE(i, k) \226\134\146 iterate(op_plus_plus_plus, i, (a : Num) => INSERT(0, (s : (Num) -> Bool))) == UNIV
+      #|  \226\136\128 s : (Num) -> Bool, schnirelmann(s) > real_of_num(0) \226\134\146 (\226\136\131 k : Num, \226\136\128 n : Num, \226\136\131 m : Num, \226\136\131 f : (Num) -> Num, m <= k && (\226\136\128 i : Num, IN(i, op_dot_dot(1, m)) \226\134\146 IN(f(i), s)) && n == nsum(op_dot_dot(1, m), f))
       #|count =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\s:fun(num,bool). (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#count:fun(fun(num,bool),fun(num,num)) s:fun(num,bool)) n:num)) (#CARD:fun(fun(num,bool),num) ((#INTER:fun(fun(num,bool),fun(fun(num,bool),fun(num,bool))) s:fun(num,bool)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num))))))))
       #|schnirelmann =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\s:fun(num,bool). ((#=:fun(real,fun(real,bool)) (#schnirelmann:fun(fun(num,bool),real) s:fun(num,bool))) (#inf:fun(fun(real,bool),real) (#GSPEC:fun(fun(real,bool),fun(real,bool)) (\GEN%PVAR%1:real. (#?:fun(fun(num,bool),bool) (\n:num. (((#SETSPEC:fun(real,fun(bool,fun(real,bool))) GEN%PVAR%1:real) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#count:fun(fun(num,bool),fun(num,num)) s:fun(num,bool)) n:num))) (#real_of_num:fun(num,real) n:num)))))))))))
       #|COUNT_BOUND =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\s:fun(num,bool). ((#<=:fun(num,fun(num,bool)) ((#count:fun(fun(num,bool),fun(num,num)) s:fun(num,bool)) n:num)) n:num)))
