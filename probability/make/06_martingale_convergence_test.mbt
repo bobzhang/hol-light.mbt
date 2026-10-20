@@ -87711,7 +87711,7 @@ test "Probability/martingale_convergence matches Probability/martingale_converge
       #|  (L : Real)
       #|  (a : (Num) -> Real)
       #|  sequentially
-      #|  abs
+      #|  real_abs
       #|  \226\136\128 a : (Num) -> Real, \226\136\128 L : Real, op_minus_minus_minus_gt(a, L, sequentially) \226\134\146 op_minus_minus_minus_gt((n : Num) => abs(a(n)), abs(L), sequentially)
       #|  0
       #|  (C : Real)
