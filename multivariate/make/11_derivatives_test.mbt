@@ -64062,1752 +64062,1752 @@ test "Multivariate/derivatives matches Multivariate/derivatives.ml" {
       #|0..0..3..7..solved at 11
       #|0..0..1..3..solved at 7
       #|Multivariate/derivatives quotations (1746):
-      #|  (f has_derivative f') net <=>\n        linear f' /\\\n        ((\\y. inv(norm(y - netlimit net)) %\n              (f(y) -\n               (f(netlimit net) + f'(y - netlimit net)))) --> vec 0) net
-      #|  trivial_limit(at (x:real^M) within s)
-      #|  forall f:real^M->real^N f' x s.\n    (f has_derivative f') (at x within s) <=>\n         linear f' /\\\n         ((\\y. inv(norm(y - x)) % (f(y) - (f(x) + f'(y - x)))) --> vec 0)\n         (at x within s)
-      #|  forall f:real^M->real^N f' x.\n    (f has_derivative f') (at x) <=>\n         linear f' /\\\n         ((\\y. inv(norm(y - x)) % (f(y) - (f(x) + f'(y - x)))) --> vec 0)\n         (at x)
-      #|  (x' - (x + d)) = x' - x - d:real^N
-      #|  (f has_derivative f')(at x within s) <=>\n        linear f' /\\\n        forall e. &0 < e\n            ==> ?d. &0 < d /\\\n                    forall x'. x' IN s /\\\n                         &0 < norm(x' - x) /\\ norm(x' - x) < d\n                         ==> norm(f(x') - f(x) - f'(x' - x)) /\n                             norm(x' - x) < e
-      #|  (f has_derivative f')(at x) <=>\n        linear f' /\\\n        forall e. &0 < e\n            ==> ?d. &0 < d /\\\n                    forall x'. &0 < norm(x' - x) /\\ norm(x' - x) < d\n                         ==> norm(f(x') - f(x) - f'(x' - x)) /\n                             norm(x' - x) < e
-      #|  forall f x s. (f has_derivative f') (at x)\n           ==> (f has_derivative f') (at x within s)
-      #|  forall f f' a s.\n         a IN s /\\ open s\n         ==> ((f has_derivative f') (at a within s) <=>\n              (f has_derivative f') (at a))
-      #|  forall f:real^M->real^N f' a s u.\n        a IN s /\\ open_in (subtopology euclidean u) s\n        ==> ((f has_derivative f') (at a within s) <=>\n             (f has_derivative f') (at a within u))
-      #|  x + --(&1) % (y + x + --(&1) % y) = vec 0
-      #|  x - y = x + --(&1) % y
-      #|  forall f net. linear f ==> (f has_derivative f) net
-      #|  forall net. ((\\x. x) has_derivative (\\h. h)) net
-      #|  forall c net. ((\\x. c) has_derivative (\\h. vec 0)) net
-      #|  forall net:(real^N)net. ((\\x. lift(x$i)) has_derivative (\\x. lift(x$i))) net
-      #|  c:real
-      #|  forall f f' net c. (f has_derivative f') net\n                ==> ((\\x. c % f(x)) has_derivative (\\h. c % f'(h))) net
-      #|  c:real
-      #|  inv(c):real
-      #|  forall f f' net c.\n       ~(c = &0)\n       ==> (((\\x. c % f(x)) has_derivative (\\h. c % f'(h))) net <=>\n            (f has_derivative f') net)
-      #|  forall f f' net. (f has_derivative f') net\n            ==> ((\\x. --(f(x))) has_derivative (\\h. --(f'(h)))) net
-      #|  forall f f' net. ((\\x. --(f(x))) has_derivative (\\h. --(f'(h)))) net <=>\n              (f has_derivative f') net
-      #|  (a /\\ b) /\\ (c /\\ d) ==> b /\\ d
-      #|  forall f f' g g' net.\n        (f has_derivative f') net /\\ (g has_derivative g') net\n        ==> ((\\x. f(x) + g(x)) has_derivative (\\h. f'(h) + g'(h))) net
-      #|  forall f f' g g' net.\n        (f has_derivative f') net /\\ (g has_derivative g') net\n        ==> ((\\x. f(x) - g(x)) has_derivative (\\h. f'(h) - g'(h))) net
-      #|  forall f net s.\n     FINITE s /\\\n     (forall a. a IN s ==> ((f a) has_derivative (f' a)) net)\n     ==> ((\\x. vsum s (\\a. f a x)) has_derivative (\\h. vsum s (\\a. f' a h)))\n          net
-      #|  forall f net m n.\n     (forall i. m <= i /\\ i <= n ==> ((f i) has_derivative (f' i)) net)\n     ==> ((\\x. vsum (m..n) (\\i. f i x)) has_derivative\n          (\\h. vsum (m..n) (\\i. f' i h))) net
-      #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
-      #|  forall f:real^M->real^N f' a s.\n        (f has_derivative f') (at a within s) <=>\n        forall i. 1 <= i /\\ i <= dimindex(:N)\n            ==> ((\\x. lift(f(x)$i)) has_derivative (\\x. lift(f'(x)$i)))\n                (at a within s)
-      #|  forall f:real^M->real^N f' a.\n        (f has_derivative f') (at a) <=>\n        forall i. 1 <= i /\\ i <= dimindex(:N)\n            ==> ((\\x. lift(f(x)$i)) has_derivative (\\x. lift(f'(x)$i))) (at a)
-      #|  forall net f:real^M->real^N g:real^M->real^P f' g'.\n        ((\\x. pastecart (f x) (g x)) has_derivative\n        (\\x. pastecart (f' x) (g' x))) net <=>\n        (f has_derivative f') net /\\ (g has_derivative g') net
-      #|  forall net f:real^M->real^N g:real^M->real^P f' g'.\n        (f has_derivative f') net /\\ (g has_derivative g') net\n        ==> ((\\x. pastecart (f x) (g x)) has_derivative\n             (\\x. pastecart (f' x) (g' x))) net
-      #|  vec 0 = &0 % (v:real^P)
-      #|  forall c:real^M->real^N c' k v:real^P.\n        1 <= k /\\ k <= dimindex(:N) /\\ (c has_derivative c') net\n        ==> ((\\x. c(x)$k % v) has_derivative (\\x. c'(x)$k % v)) net
-      #|  forall c c' v. (c has_derivative c') net\n            ==> ((\\x. drop(c(x)) % v) has_derivative (\\x. drop(c'(x)) % v)) net
-      #|  (\\t. lift (v dot (f':real^M->real^N) t)) = (\\y. lift(v dot y)) o f'
-      #|  forall f:real^M->real^N f'.\n     (f has_derivative f') net\n     ==> ((\\x. lift(v dot f(x))) has_derivative (\\t. lift(v dot (f' t)))) net
-      #|  d:real
-      #|  a /\\ b /\\ c ==> d <=> a /\\ b ==> c ==> d
-      #|  forall f f' g x s d.\n       &0 < d /\\ x IN s /\\\n       (forall x'. x' IN s /\\ dist (x',x) < d ==> f x' = g x') /\\\n       (f has_derivative f') (at x within s)\n       ==> (g has_derivative f') (at x within s)
-      #|  forall f f' g x d.\n       &0 < d /\\ (forall x'. dist (x',x) < d ==> f x' = g x') /\\\n       (f has_derivative f') (at x)\n       ==> (g has_derivative f') (at x)
-      #|  s:real^M->bool
-      #|  a /\\ b /\\ c /\\ d ==> e <=> a /\\ b /\\ c ==> d ==> e
-      #|  forall f g:real^M->real^N s x.\n        open s /\\ x IN s /\\\n        (forall y. y IN s ==> f y = g y) /\\\n        (f has_derivative f') (at x)\n        ==> (g has_derivative f') (at x)
-      #|  f differentiable net <=> ?f'. (f has_derivative f') net
-      #|  f differentiable_on s <=> forall x. x IN s ==> f differentiable (at x within s)
-      #|  forall f f' net. (f has_derivative f') net ==> f differentiable net
-      #|  forall f s x. f differentiable (at x)\n           ==> f differentiable (at x within s)
-      #|  forall f a s.\n         a IN s /\\ open s\n         ==> (f differentiable (at a within s) <=> (f differentiable (at a)))
-      #|  forall f s. (forall x. x IN s ==> f differentiable at x) ==> f differentiable_on s
-      #|  forall f s. open s ==> (f differentiable_on s <=>\n                     forall x. x IN s ==> f differentiable at x)
-      #|  forall f g x s d.\n       &0 < d /\\ x IN s /\\\n       (forall x'. x' IN s /\\ dist (x',x) < d ==> f x' = g x') /\\\n       f differentiable (at x within s)\n       ==> g differentiable (at x within s)
-      #|  forall f g x d.\n       &0 < d /\\\n       (forall x'. dist (x',x) < d ==> f x' = g x') /\\\n       f differentiable at x\n       ==> g differentiable at x
-      #|  forall f g:real^M->real^N s.\n        (forall x. x IN s ==> f x = g x) /\\ f differentiable_on s\n        ==> g differentiable_on s
-      #|  frechet_derivative f net = @f'. (f has_derivative f') net
-      #|  forall f net. f differentiable net <=>\n           (f has_derivative (frechet_derivative f net)) net
-      #|  forall f net. f differentiable net ==> linear(frechet_derivative f net)
-      #|  jacobian f net = matrix(frechet_derivative f net)
-      #|  forall f net. f differentiable net <=>\n           (f has_derivative (\\h. jacobian f net ** h)) net
-      #|  min d (&1)
-      #|  d:real
-      #|  &0 < e
-      #|  e:real
-      #|  forall f a s. (f --> vec 0) (at a within s)\n           ==> ((\\x. norm(x - a) % f(x)) --> vec 0) (at a within s)
-      #|  (a + b - (c + a)) - (vec 0 + vec 0) = b - c
-      #|  (x - y = vec 0) <=> (x = y)
-      #|  ((f':real^M->real^N) o (\\y. y - x)) continuous (at x within s)
-      #|  f':real^M->real^N
-      #|  forall f:real^M->real^N s.\n        f differentiable (at x within s) ==> f continuous (at x within s)
-      #|  forall f:real^M->real^N x. f differentiable (at x) ==> f continuous (at x)
-      #|  forall f:real^M->real^N s. f differentiable_on s ==> f continuous_on s
-      #|  forall f s t x. (f has_derivative f') (at x within s) /\\ t SUBSET s\n             ==> (f has_derivative f') (at x within t)
-      #|  forall f:real^M->real^N s t.\n      f differentiable (at x within t) /\\ s SUBSET t\n      ==> f differentiable (at x within s)
-      #|  forall f:real^M->real^N s t.\n      f differentiable_on t /\\ s SUBSET t ==> f differentiable_on s
-      #|  forall f. f differentiable_on {}
-      #|  &0 < e
-      #|  e / &2 * norm(y - x :real^M)
-      #|  y:real^M
-      #|  d:real
-      #|  e / &2
-      #|  vec 0 - x = --x
-      #|  &0 < norm(y - x :real^M)
-      #|  y:real^M
-      #|  d:real
-      #|  e:real
-      #|  e:real
-      #|  a - (b + c) = a - b - c :real^M
-      #|  linear(f':real^M->real^N)
-      #|  forall f:real^M->real^N f' s x.\n     (f has_derivative f') (at x within s) <=>\n            linear f' /\\\n            forall e. &0 < e\n                ==> ?d. &0 < d /\\\n                        forall y. y IN s /\\ norm(y - x) < d\n                            ==> norm(f(y) - f(x) - f'(y - x)) <=\n                                e * norm(y - x)
-      #|  forall f:real^M->real^N f' x.\n     (f has_derivative f') (at x) <=>\n        linear f' /\\\n        forall e. &0 < e\n            ==> ?d. &0 < d /\\\n                    forall y. norm(y - x) < d\n                        ==> norm(f(y) - f(x) - f'(y - x)) <= e * norm(y - x)
-      #|  u <= x * b /\\ v <= b ==> u + v <= b * (&1 + x)
-      #|  norm(f'(y - x)) + norm((f:real^M->real^N) y - f x - f'(y - x))
-      #|  b * ((e * h) * b') * x <= e * x - d <=>\n    d <= e * (&1 - h * b' * b) * x
-      #|  B2 * e / &2 / B2 * norm(y - x :real^M)
-      #|  B2 * norm((f:real^M->real^N) y - f x - f'(y - x))
-      #|  a <= d ==> b <= ee - d ==> a + b <= ee
-      #|  (a - b - c1) - (a - b - c2) = c2 - c1:real^M
-      #|  norm((g:real^N->real^P)(f(y:real^M)) - g(f x) - g'(f y - f x)) +\n              norm((g(f y) - g(f x) - g'(f'(y - x))) -\n                   (g(f y) - g(f x) - g'(f y - f x)))
-      #|  a * x + x = x * (a + &1)
-      #|  B1 * norm(y - x) + norm(y - x :real^M)
-      #|  norm(f'(y - x)) + norm((f:real^M->real^N) y - f x - f'(y - x))
-      #|  (f:real^M->real^N) y
-      #|  y:real^M
-      #|  y:real^M
-      #|  forall y. y IN s /\\ norm(y - x) < d2\n        ==> norm ((f:real^M->real^N) y - f x - f'(y - x)) <= norm(y - x)
-      #|  y:real^M
-      #|  d:real
-      #|  de / (B1 + &1)
-      #|  d0:real
-      #|  d0:real
-      #|  d2:real
-      #|  d1:real
-      #|  d2:real
-      #|  &1
-      #|  de:real
-      #|  e / &2 / (&1 + B1)
-      #|  d1:real
-      #|  B1:real
-      #|  forall f:real^M->real^N g:real^N->real^P f' g' x s.\n        (f has_derivative f') (at x within s) /\\\n        (g has_derivative g') (at (f x) within (IMAGE f s))\n        ==> ((g o f) has_derivative (g' o f'))(at x within s)
-      #|  e:real
-      #|  B2:real
-      #|  e / &2 / B2
-      #|  e / &2 / B2
-      #|  e / &2 / B2
-      #|  e / &2 / B2
-      #|  e / &2 / B2
-      #|  forall f:real^M->real^N g:real^N->real^P f' g' x.\n        (f has_derivative f') (at x) /\\\n        (g has_derivative g') (at (f x))\n        ==> ((g o f) has_derivative (g' o f')) (at x)
-      #|  (--):real^M->real^M
-      #|  q /\\ (q ==> p) ==> p /\\ q
-      #|  (p <=> q) <=> (q ==> p) /\\ (p ==> q)
-      #|  forall f:real^M->real^N f' s a.\n        ((\\x. f(--x)) has_derivative (\\x. f'(--x)))\n        (at (--a) within (IMAGE (--) s)) <=>\n        (f has_derivative f') (at a within s)
-      #|  forall f:real^M->real^N f' a.\n        ((\\x. f(--x)) has_derivative (\\x. f'(--x))) (at (--a)) <=>\n        (f has_derivative f') (at a)
-      #|  x:real^M
-      #|  forall f:real^M->real^N s.\n        (\\x. f(--x)) differentiable_on (IMAGE (--) s) <=>\n        f differentiable_on s
-      #|  forall net f:real^M->real^N. linear f ==> f differentiable net
-      #|  forall c net. (\\z. c) differentiable net
-      #|  forall net. (\\z. z) differentiable net
-      #|  forall net:(real^N)net. (\\x. lift(x$i)) differentiable net
-      #|  forall net f c. f differentiable net ==> (\\x. c % f(x)) differentiable net
-      #|  forall f net. f differentiable net ==> (\\z. --(f z)) differentiable net
-      #|  forall f g net.\n        f differentiable net /\\\n        g differentiable net\n        ==> (\\z. f z + g z) differentiable net
-      #|  forall f g net.\n        f differentiable net /\\\n        g differentiable net\n        ==> (\\z. f z - g z) differentiable net
-      #|  forall f net s.\n     FINITE s /\\\n     (forall a. a IN s ==> (f a) differentiable net)\n     ==> (\\x. vsum s (\\a. f a x)) differentiable net
-      #|  forall f net m n.\n     FINITE s /\\\n     (forall i. m <= i /\\ i <= n ==> (f i) differentiable net)\n     ==> (\\x. vsum (m..n) (\\a. f a x)) differentiable net
-      #|  forall f g x.\n    f differentiable (at x) /\\\n    g differentiable (at(f x))\n    ==> (g o f) differentiable (at x)
-      #|  forall f g x s.\n    f differentiable (at x within s) /\\\n    g differentiable (at(f x) within IMAGE f s)\n    ==> (g o f) differentiable (at x within s)
-      #|  (\\x. lambda i. drop((g':num->real^M->real^1) i x))\n                :real^M->real^N
-      #|  g':num->real^M->real^1
-      #|  \\i x. lift((g':real^M->real^N) x$i)
-      #|  g':real^M->real^N
-      #|  forall f:real^M->real^N a s.\n        f differentiable (at a within s) <=>\n        forall i. 1 <= i /\\ i <= dimindex(:N)\n            ==> (\\x. lift(f(x)$i)) differentiable (at a within s)
-      #|  forall f:real^M->real^N a.\n        f differentiable (at a) <=>\n        forall i. 1 <= i /\\ i <= dimindex(:N)\n            ==> (\\x. lift(f(x)$i)) differentiable (at a)
-      #|  forall f:real^M->real^N s. linear f ==> f differentiable_on s
-      #|  forall s c. (\\z. c) differentiable_on s
-      #|  forall s. (\\z. z) differentiable_on s
-      #|  forall f g s. f differentiable_on s /\\ g differentiable_on (IMAGE f s)\n           ==> (g o f) differentiable_on s
-      #|  forall f s. f differentiable_on s ==> (\\z. --(f z)) differentiable_on s
-      #|  forall f g s.\n        f differentiable_on s /\\ g differentiable_on s\n        ==> (\\z. f z + g z) differentiable_on s
-      #|  forall f g s.\n        f differentiable_on s /\\ g differentiable_on s\n        ==> (\\z. f z - g z) differentiable_on s
-      #|  (x:real^M) + c % basis i
-      #|  c:real
-      #|  d:real
-      #|  i:num
-      #|  d:real
-      #|  e:real
-      #|  e = norm((f':real^M->real^N) (basis i) - f''(basis i :real^M))
-      #|  p = ~ ~p
-      #|  i:num
-      #|  fx - (fa + f'') - (fx - (fa + f')):real^M = f' - f''
-      #|  netlimit(at x within s) = x:real^M
-      #|  (x:real^M) + d % basis 1
-      #|  d:real
-      #|  e:real
+      #|  (has_derivative : ((Cart[Real, _]) -> Cart[Real, _], (Cart[Real, _]) -> Cart[Real, _], Net[Cart[Real, _]]) -> Bool)((f : (Cart[Real, _]) -> Cart[Real, _]), (f' : (Cart[Real, _]) -> Cart[Real, _]), (net : Net[Cart[Real, _]])) == (linear(f') && op_minus_minus_gt((y : Cart[Real, _]) => op_pct(inv(norm(y - netlimit(net))), f(y) - (f(netlimit(net)) + f'(y - netlimit(net)))), vec(0), net))
+      #|  trivial_limit(within(at((x : Cart[Real, M])), (s : (Cart[Real, M]) -> Bool)))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, has_derivative(f, f', within(at(x), s)) == (linear(f') && op_minus_minus_gt((y : Cart[Real, M]) => op_pct(inv(norm(y - x)), f(y) - (f(x) + f'(y - x))), vec(0), within(at(x), s)))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], has_derivative(f, f', at(x)) == (linear(f') && op_minus_minus_gt((y : Cart[Real, M]) => op_pct(inv(norm(y - x)), f(y) - (f(x) + f'(y - x))), vec(0), at(x)))
+      #|  (x' : Cart[Real, N]) - ((x : Cart[Real, N]) + (d : Cart[Real, N])) == x' - x - d
+      #|  has_derivative((f : (Cart[Real, _]) -> Cart[Real, _]), (f' : (Cart[Real, _]) -> Cart[Real, _]), within(at((x : Cart[Real, _])), (s : (Cart[Real, _]) -> Bool))) == (linear(f') && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, _], IN(x', s) && real_of_num(0) < norm(x' - x) && norm(x' - x) < d \226\134\146 norm(f(x') - f(x) - f'(x' - x)) / norm(x' - x) < e))))
+      #|  has_derivative((f : (Cart[Real, _]) -> Cart[Real, _]), (f' : (Cart[Real, _]) -> Cart[Real, _]), at((x : Cart[Real, _]))) == (linear(f') && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, _], real_of_num(0) < norm(x' - x) && norm(x' - x) < d \226\134\146 norm(f(x') - f(x) - f'(x' - x)) / norm(x' - x) < e))))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, has_derivative(f, (f' : (Cart[Real, _]) -> Cart[Real, _]), at(x)) \226\134\146 has_derivative(f, f', within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 f' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, IN(a, s) && open(s) \226\134\146 has_derivative(f, f', within(at(a), s)) == has_derivative(f, f', at(a))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 u : (Cart[Real, M]) -> Bool, IN(a, s) && open_in(subtopology(euclidean, u), s) \226\134\146 has_derivative(f, f', within(at(a), s)) == has_derivative(f, f', within(at(a), u))
+      #|  (x : Cart[Real, _]) + op_pct(-real_of_num(1), (y : Cart[Real, _]) + (x + op_pct(-real_of_num(1), y))) == vec(0)
+      #|  (x : Cart[Real, _]) - (y : Cart[Real, _]) == x + op_pct(-real_of_num(1), y)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], linear(f) \226\134\146 has_derivative(f, f, net)
+      #|  \226\136\128 net : Net[Cart[Real, _]], has_derivative((x : Cart[Real, _]) => x, (h : Cart[Real, _]) => h, net)
+      #|  \226\136\128 c : Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], has_derivative((x : Cart[Real, _]) => c, (h : Cart[Real, _]) => vec(0), net)
+      #|  \226\136\128 net : Net[Cart[Real, N]], has_derivative((x : Cart[Real, N]) => lift(op_dollar(x, (i : Num))), (x : Cart[Real, N]) => lift(op_dollar(x, i)), net)
+      #|  (c : Real)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 f' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], \226\136\128 c : Real, has_derivative(f, f', net) \226\134\146 has_derivative((x : Cart[Real, _]) => op_pct(c, f(x)), (h : Cart[Real, _]) => op_pct(c, f'(h)), net)
+      #|  (c : Real)
+      #|  inv((c : Real))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 f' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], \226\136\128 c : Real, !(c == real_of_num(0)) \226\134\146 has_derivative((x : Cart[Real, _]) => op_pct(c, f(x)), (h : Cart[Real, _]) => op_pct(c, f'(h)), net) == has_derivative(f, f', net)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 f' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], has_derivative(f, f', net) \226\134\146 has_derivative((x : Cart[Real, _]) => -f(x), (h : Cart[Real, _]) => -f'(h), net)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 f' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], has_derivative((x : Cart[Real, _]) => -f(x), (h : Cart[Real, _]) => -f'(h), net) == has_derivative(f, f', net)
+      #|  ((a : Bool) && (b : Bool)) && (c : Bool) && (d : Bool) \226\134\146 b && d
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 f' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], has_derivative(f, f', net) && has_derivative(g, g', net) \226\134\146 has_derivative((x : Cart[Real, _]) => f(x) + g(x), (h : Cart[Real, _]) => f'(h) + g'(h), net)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 f' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], has_derivative(f, f', net) && has_derivative(g, g', net) \226\134\146 has_derivative((x : Cart[Real, _]) => f(x) - g(x), (h : Cart[Real, _]) => f'(h) - g'(h), net)
+      #|  \226\136\128 f : (_, Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 a : _, IN(a, s) \226\134\146 has_derivative(f(a), (f' : (_, Cart[Real, _]) -> Cart[Real, _])(a), net)) \226\134\146 has_derivative((x : Cart[Real, _]) => vsum(s, (a : _) => f(a, x)), (h : Cart[Real, _]) => vsum(s, (a : _) => f'(a, h)), net)
+      #|  \226\136\128 f : (Num, Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], \226\136\128 m : Num, \226\136\128 n : Num, (\226\136\128 i : Num, m <= i && i <= n \226\134\146 has_derivative(f(i), (f' : (Num, Cart[Real, _]) -> Cart[Real, _])(i), net)) \226\134\146 has_derivative((x : Cart[Real, _]) => vsum(op_dot_dot(m, n), (i : Num) => f(i, x)), (h : Cart[Real, _]) => vsum(op_dot_dot(m, n), (i : Num) => f'(i, h)), net)
+      #|  (((p : Bool) \226\134\146 (q : Bool)) && (p \226\134\146 (r : Bool))) == (p \226\134\146 q && r)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, f', (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(a), s)) == (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (has_derivative : ((Cart[Real, M]) -> Cart[Real, Unit], (Cart[Real, M]) -> Cart[Real, Unit], Net[Cart[Real, M]]) -> Bool)((x : Cart[Real, M]) => lift((op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i)), (x : Cart[Real, M]) => lift((op_dollar : (Cart[Real, N], Num) -> Real)(f'(x), i)), (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(a), s)))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, f', (at : (Cart[Real, M]) -> Net[Cart[Real, M]])(a)) == (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (has_derivative : ((Cart[Real, M]) -> Cart[Real, Unit], (Cart[Real, M]) -> Cart[Real, Unit], Net[Cart[Real, M]]) -> Bool)((x : Cart[Real, M]) => lift((op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i)), (x : Cart[Real, M]) => lift((op_dollar : (Cart[Real, N], Num) -> Real)(f'(x), i)), (at : (Cart[Real, M]) -> Net[Cart[Real, M]])(a)))
+      #|  \226\136\128 net : Net[Cart[Real, M]], \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, P], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, M]) -> Cart[Real, P], has_derivative((x : Cart[Real, M]) => pastecart(f(x), g(x)), (x : Cart[Real, M]) => pastecart(f'(x), g'(x)), net) == (has_derivative(f, f', net) && has_derivative(g, g', net))
+      #|  \226\136\128 net : Net[Cart[Real, M]], \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, P], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, M]) -> Cart[Real, P], has_derivative(f, f', net) && has_derivative(g, g', net) \226\134\146 has_derivative((x : Cart[Real, M]) => pastecart(f(x), g(x)), (x : Cart[Real, M]) => pastecart(f'(x), g'(x)), net)
+      #|  vec(0) == op_pct(real_of_num(0), (v : Cart[Real, P]))
+      #|  \226\136\128 c : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 c' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 k : Num, \226\136\128 v : Cart[Real, P], 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(c, c', (net : Net[Cart[Real, M]])) \226\134\146 (has_derivative : ((Cart[Real, M]) -> Cart[Real, P], (Cart[Real, M]) -> Cart[Real, P], Net[Cart[Real, M]]) -> Bool)((x : Cart[Real, M]) => (op_pct : (Real, Cart[Real, P]) -> Cart[Real, P])((op_dollar : (Cart[Real, N], Num) -> Real)(c(x), k), v), (x : Cart[Real, M]) => (op_pct : (Real, Cart[Real, P]) -> Cart[Real, P])((op_dollar : (Cart[Real, N], Num) -> Real)(c'(x), k), v), net)
+      #|  \226\136\128 c : (Cart[Real, _]) -> Cart[Real, Unit], \226\136\128 c' : (Cart[Real, _]) -> Cart[Real, Unit], \226\136\128 v : Cart[Real, _], has_derivative(c, c', (net : Net[Cart[Real, _]])) \226\134\146 has_derivative((x : Cart[Real, _]) => op_pct(drop(c(x)), v), (x : Cart[Real, _]) => op_pct(drop(c'(x)), v), net)
+      #|  ((t : Cart[Real, M]) => lift(dot((v : Cart[Real, N]), (f' : (Cart[Real, M]) -> Cart[Real, N])(t)))) == o((y : Cart[Real, N]) => lift(dot(v, y)), f')
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], has_derivative(f, f', (net : Net[Cart[Real, M]])) \226\134\146 has_derivative((x : Cart[Real, M]) => lift(dot((v : Cart[Real, N]), f(x))), (t : Cart[Real, M]) => lift(dot(v, f'(t))), net)
+      #|  (d : Real)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (a && b \226\134\146 c \226\134\146 d)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 f' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, _], IN(x', s) && dist((x', x)) < d \226\134\146 f(x') == g(x')) && has_derivative(f, f', within(at(x), s)) \226\134\146 has_derivative(g, f', within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 f' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, _], dist((x', x)) < d \226\134\146 f(x') == g(x')) && has_derivative(f, f', at(x)) \226\134\146 has_derivative(g, f', at(x))
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) \226\134\146 (e : Bool)) == (a && b && c \226\134\146 d \226\134\146 e)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 x : Cart[Real, M], open(s) && IN(x, s) && (\226\136\128 y : Cart[Real, M], IN(y, s) \226\134\146 f(y) == g(y)) && has_derivative(f, (f' : (Cart[Real, M]) -> Cart[Real, N]), at(x)) \226\134\146 has_derivative(g, f', at(x))
+      #|  (differentiable : ((Cart[Real, _]) -> Cart[Real, _], Net[Cart[Real, _]]) -> Bool)((f : (Cart[Real, _]) -> Cart[Real, _]), (net : Net[Cart[Real, _]])) == (\226\136\131 f' : (Cart[Real, _]) -> Cart[Real, _], has_derivative(f, f', net))
+      #|  (differentiable_on : ((Cart[Real, _]) -> Cart[Real, _], (Cart[Real, _]) -> Bool) -> Bool)((f : (Cart[Real, _]) -> Cart[Real, _]), (s : (Cart[Real, _]) -> Bool)) == (\226\136\128 x : Cart[Real, _], IN(x, s) \226\134\146 differentiable(f, within(at(x), s)))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 f' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], has_derivative(f, f', net) \226\134\146 differentiable(f, net)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 x : Cart[Real, _], differentiable(f, at(x)) \226\134\146 differentiable(f, within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, IN(a, s) && open(s) \226\134\146 differentiable(f, within(at(a), s)) == differentiable(f, at(a))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, (\226\136\128 x : Cart[Real, _], IN(x, s) \226\134\146 differentiable(f, at(x))) \226\134\146 differentiable_on(f, s)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, open(s) \226\134\146 differentiable_on(f, s) == (\226\136\128 x : Cart[Real, _], IN(x, s) \226\134\146 differentiable(f, at(x)))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, _], IN(x', s) && dist((x', x)) < d \226\134\146 f(x') == g(x')) && differentiable(f, within(at(x), s)) \226\134\146 differentiable(g, within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, _], dist((x', x)) < d \226\134\146 f(x') == g(x')) && differentiable(f, at(x)) \226\134\146 differentiable(g, at(x))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 f(x) == g(x)) && differentiable_on(f, s) \226\134\146 differentiable_on(g, s)
+      #|  (frechet_derivative : ((Cart[Real, _]) -> Cart[Real, _], Net[Cart[Real, _]], Cart[Real, _]) -> Cart[Real, _])((f : (Cart[Real, _]) -> Cart[Real, _]), (net : Net[Cart[Real, _]])) == select((f' : (Cart[Real, _]) -> Cart[Real, _]) => has_derivative(f, f', net))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], differentiable(f, net) == has_derivative(f, frechet_derivative(f, net), net)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], differentiable(f, net) \226\134\146 linear(frechet_derivative(f, net))
+      #|  (jacobian : ((Cart[Real, _]) -> Cart[Real, _], Net[Cart[Real, _]]) -> Cart[Cart[Real, _], _])((f : (Cart[Real, _]) -> Cart[Real, _]), (net : Net[Cart[Real, _]])) == matrix(frechet_derivative(f, net))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], differentiable(f, net) == has_derivative(f, (h : Cart[Real, _]) => matrix_vector_mul(jacobian(f, net), h), net)
+      #|  min((d : Real), real_of_num(1))
+      #|  (d : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, op_minus_minus_gt(f, vec(0), within(at(a), s)) \226\134\146 op_minus_minus_gt((x : Cart[Real, _]) => op_pct(norm(x - a), f(x)), vec(0), within(at(a), s))
+      #|  (a : Cart[Real, _]) + ((b : Cart[Real, _]) - ((c : Cart[Real, _]) + a)) - (vec(0) + vec(0)) == b - c
+      #|  ((x : Cart[Real, _]) - (y : Cart[Real, _]) == vec(0)) == (x == y)
+      #|  continuous(o((f' : (Cart[Real, M]) -> Cart[Real, N]), (y : Cart[Real, M]) => y - (x : Cart[Real, M])), within(at(x), (s : (Cart[Real, M]) -> Bool)))
+      #|  (f' : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, differentiable(f, within(at((x : Cart[Real, M])), s)) \226\134\146 continuous(f, within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], differentiable(f, at(x)) \226\134\146 continuous(f, at(x))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, differentiable_on(f, s) \226\134\146 continuous_on(f, s)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, \226\136\128 x : Cart[Real, _], has_derivative(f, (f' : (Cart[Real, _]) -> Cart[Real, _]), within(at(x), s)) && SUBSET(t, s) \226\134\146 has_derivative(f, f', within(at(x), t))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, differentiable(f, within(at((x : Cart[Real, M])), t)) && SUBSET(s, t) \226\134\146 differentiable(f, within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, differentiable_on(f, t) && SUBSET(s, t) \226\134\146 differentiable_on(f, s)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], differentiable_on(f, {})
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real) / real_of_num(2) * norm((y : Cart[Real, M]) - (x : Cart[Real, M]))
+      #|  (y : Cart[Real, M])
+      #|  (d : Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  vec(0) - (x : Cart[Real, _]) == -x
+      #|  real_of_num(0) < norm((y : Cart[Real, M]) - (x : Cart[Real, M]))
+      #|  (y : Cart[Real, M])
+      #|  (d : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (a : Cart[Real, M]) - ((b : Cart[Real, M]) + (c : Cart[Real, M])) == a - b - c
+      #|  linear((f' : (Cart[Real, M]) -> Cart[Real, N]))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 x : Cart[Real, M], has_derivative(f, f', within(at(x), s)) == (linear(f') && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 y : Cart[Real, M], IN(y, s) && norm(y - x) < d \226\134\146 norm(f(y) - f(x) - f'(y - x)) <= e * norm(y - x)))))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], has_derivative(f, f', at(x)) == (linear(f') && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 y : Cart[Real, M], norm(y - x) < d \226\134\146 norm(f(y) - f(x) - f'(y - x)) <= e * norm(y - x)))))
+      #|  (u : Real) <= (x : Real) * (b : Real) && (v : Real) <= b \226\134\146 u + v <= b * (real_of_num(1) + x)
+      #|  norm((f' : (Cart[Real, M]) -> Cart[Real, N])((y : Cart[Real, M]) - (x : Cart[Real, M]))) + norm((f : (Cart[Real, M]) -> Cart[Real, N])(y) - f(x) - f'(y - x))
+      #|  ((b : Real) * ((e : Real) * (h : Real) * (b' : Real) * (x : Real)) <= e * x - (d : Real)) == (d <= e * ((real_of_num(1) - h * (b' * b)) * x))
+      #|  (B2 : Real) * ((e : Real) / real_of_num(2) / B2 * norm((y : Cart[Real, M]) - (x : Cart[Real, M])))
+      #|  (B2 : Real) * norm((f : (Cart[Real, M]) -> Cart[Real, N])((y : Cart[Real, M])) - f((x : Cart[Real, M])) - (f' : (Cart[Real, M]) -> Cart[Real, N])(y - x))
+      #|  (a : Real) <= (d : Real) \226\134\146 (b : Real) <= (ee : Real) - d \226\134\146 a + b <= ee
+      #|  (a : Cart[Real, M]) - (b : Cart[Real, M]) - (c1 : Cart[Real, M]) - (a - b - (c2 : Cart[Real, M])) == c2 - c1
+      #|  norm((g : (Cart[Real, N]) -> Cart[Real, P])((f : (Cart[Real, M]) -> Cart[Real, N])((y : Cart[Real, M]))) - g(f((x : Cart[Real, M]))) - (g' : (Cart[Real, N]) -> Cart[Real, P])(f(y) - f(x))) + norm(g(f(y)) - g(f(x)) - g'((f' : (Cart[Real, M]) -> Cart[Real, N])(y - x)) - (g(f(y)) - g(f(x)) - g'(f(y) - f(x))))
+      #|  (a : Real) * (x : Real) + x == x * (a + real_of_num(1))
+      #|  (B1 : Real) * norm((y : Cart[Real, M]) - (x : Cart[Real, M])) + norm(y - x)
+      #|  norm((f' : (Cart[Real, M]) -> Cart[Real, N])((y : Cart[Real, M]) - (x : Cart[Real, M]))) + norm((f : (Cart[Real, M]) -> Cart[Real, N])(y) - f(x) - f'(y - x))
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])((y : Cart[Real, M]))
+      #|  (y : Cart[Real, M])
+      #|  (y : Cart[Real, M])
+      #|  \226\136\128 y : Cart[Real, M], IN(y, (s : (Cart[Real, M]) -> Bool)) && norm(y - (x : Cart[Real, M])) < (d2 : Real) \226\134\146 norm((f : (Cart[Real, M]) -> Cart[Real, N])(y) - f(x) - (f' : (Cart[Real, M]) -> Cart[Real, N])(y - x)) <= norm(y - x)
+      #|  (y : Cart[Real, M])
+      #|  (d : Real)
+      #|  (de : Real) / ((B1 : Real) + real_of_num(1))
+      #|  (d0 : Real)
+      #|  (d0 : Real)
+      #|  (d2 : Real)
+      #|  (d1 : Real)
+      #|  (d2 : Real)
+      #|  real_of_num(1)
+      #|  (de : Real)
+      #|  (e : Real) / real_of_num(2) / (real_of_num(1) + (B1 : Real))
+      #|  (d1 : Real)
+      #|  (B1 : Real)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, P], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, N]) -> Cart[Real, P], \226\136\128 x : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, has_derivative(f, f', within(at(x), s)) && has_derivative(g, g', within(at(f(x)), IMAGE(f, s))) \226\134\146 has_derivative(o(g, f), o(g', f'), within(at(x), s))
+      #|  (e : Real)
+      #|  (B2 : Real)
+      #|  (e : Real) / real_of_num(2) / (B2 : Real)
+      #|  (e : Real) / real_of_num(2) / (B2 : Real)
+      #|  (e : Real) / real_of_num(2) / (B2 : Real)
+      #|  (e : Real) / real_of_num(2) / (B2 : Real)
+      #|  (e : Real) / real_of_num(2) / (B2 : Real)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, P], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, N]) -> Cart[Real, P], \226\136\128 x : Cart[Real, M], has_derivative(f, f', at(x)) && has_derivative(g, g', at(f(x))) \226\134\146 has_derivative(o(g, f), o(g', f'), at(x))
+      #|  (op_minus_minus : (Cart[Real, M]) -> Cart[Real, M])
+      #|  (q : Bool) && (q \226\134\146 (p : Bool)) \226\134\146 p && q
+      #|  ((p : Bool) == (q : Bool)) == ((q \226\134\146 p) && (p \226\134\146 q))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 a : Cart[Real, M], has_derivative((x : Cart[Real, M]) => f(-x), (x : Cart[Real, M]) => f'(-x), within(at(-a), IMAGE(op_minus_minus, s))) == has_derivative(f, f', within(at(a), s))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], has_derivative((x : Cart[Real, M]) => f(-x), (x : Cart[Real, M]) => f'(-x), at(-a)) == has_derivative(f, f', at(a))
+      #|  (x : Cart[Real, M])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, differentiable_on((x : Cart[Real, M]) => f(-x), IMAGE(op_minus_minus, s)) == differentiable_on(f, s)
+      #|  \226\136\128 net : Net[Cart[Real, M]], \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], linear(f) \226\134\146 differentiable(f, net)
+      #|  \226\136\128 c : Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], differentiable((z : Cart[Real, _]) => c, net)
+      #|  \226\136\128 net : Net[Cart[Real, _]], differentiable((z : Cart[Real, _]) => z, net)
+      #|  \226\136\128 net : Net[Cart[Real, N]], differentiable((x : Cart[Real, N]) => lift(op_dollar(x, (i : Num))), net)
+      #|  \226\136\128 net : Net[Cart[Real, _]], \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 c : Real, differentiable(f, net) \226\134\146 differentiable((x : Cart[Real, _]) => op_pct(c, f(x)), net)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], differentiable(f, net) \226\134\146 differentiable((z : Cart[Real, _]) => -f(z), net)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], differentiable(f, net) && differentiable(g, net) \226\134\146 differentiable((z : Cart[Real, _]) => f(z) + g(z), net)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], differentiable(f, net) && differentiable(g, net) \226\134\146 differentiable((z : Cart[Real, _]) => f(z) - g(z), net)
+      #|  \226\136\128 f : (_, Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 a : _, IN(a, s) \226\134\146 differentiable(f(a), net)) \226\134\146 differentiable((x : Cart[Real, _]) => vsum(s, (a : _) => f(a, x)), net)
+      #|  \226\136\128 f : (Num, Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], \226\136\128 m : Num, \226\136\128 n : Num, FINITE((s : (_) -> Bool)) && (\226\136\128 i : Num, m <= i && i <= n \226\134\146 differentiable(f(i), net)) \226\134\146 differentiable((x : Cart[Real, _]) => vsum(op_dot_dot(m, n), (a : Num) => f(a, x)), net)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], differentiable(f, at(x)) && differentiable(g, at(f(x))) \226\134\146 differentiable(o(g, f), at(x))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, differentiable(f, within(at(x), s)) && differentiable(g, within(at(f(x)), IMAGE(f, s))) \226\134\146 differentiable(o(g, f), within(at(x), s))
+      #|  (x : Cart[Real, M]) => (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => drop((g' : (Num, Cart[Real, M]) -> Cart[Real, Unit])(i, x)))
+      #|  (g' : (Num, Cart[Real, M]) -> Cart[Real, Unit])
+      #|  (i : Num) => (x : Cart[Real, M]) => lift(op_dollar((g' : (Cart[Real, M]) -> Cart[Real, N])(x), i))
+      #|  (g' : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, (differentiable : ((Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(a), s)) == (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (differentiable : ((Cart[Real, M]) -> Cart[Real, Unit], Net[Cart[Real, M]]) -> Bool)((x : Cart[Real, M]) => lift((op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i)), (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(a), s)))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], (differentiable : ((Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, (at : (Cart[Real, M]) -> Net[Cart[Real, M]])(a)) == (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (differentiable : ((Cart[Real, M]) -> Cart[Real, Unit], Net[Cart[Real, M]]) -> Bool)((x : Cart[Real, M]) => lift((op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i)), (at : (Cart[Real, M]) -> Net[Cart[Real, M]])(a)))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) \226\134\146 differentiable_on(f, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 c : Cart[Real, _], differentiable_on((z : Cart[Real, _]) => c, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, differentiable_on((z : Cart[Real, _]) => z, s)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, differentiable_on(f, s) && differentiable_on(g, IMAGE(f, s)) \226\134\146 differentiable_on(o(g, f), s)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, differentiable_on(f, s) \226\134\146 differentiable_on((z : Cart[Real, _]) => -f(z), s)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, differentiable_on(f, s) && differentiable_on(g, s) \226\134\146 differentiable_on((z : Cart[Real, _]) => f(z) + g(z), s)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, differentiable_on(f, s) && differentiable_on(g, s) \226\134\146 differentiable_on((z : Cart[Real, _]) => f(z) - g(z), s)
+      #|  (x : Cart[Real, M]) + op_pct((c : Real), basis((i : Num)))
+      #|  (c : Real)
+      #|  (d : Real)
+      #|  (i : Num)
+      #|  (d : Real)
+      #|  (e : Real)
+      #|  (e : Real) == norm((f' : (Cart[Real, M]) -> Cart[Real, N])(basis((i : Num))) - (f'' : (Cart[Real, M]) -> Cart[Real, N])(basis(i)))
+      #|  (p : Bool) == !!p
+      #|  (i : Num)
+      #|  (fx : Cart[Real, M]) - ((fa : Cart[Real, M]) + (f'' : Cart[Real, M])) - (fx - (fa + (f' : Cart[Real, M]))) == f' - f''
+      #|  netlimit(within(at((x : Cart[Real, M])), (s : (Cart[Real, M]) -> Bool))) == x
+      #|  (x : Cart[Real, M]) + op_pct((d : Real), basis(1))
+      #|  (d : Real)
+      #|  (e : Real)
       #|  1
-      #|  e:real
-      #|  (x:real^M) limit_point_of s
-      #|  forall f:real^M->real^N f' f'' x s.\n     (f has_derivative f') (at x within s) /\\\n     (f has_derivative f'') (at x within s) /\\\n     (forall i e. 1 <= i /\\ i <= dimindex(:M) /\\ &0 < e\n            ==> ?d. &0 < abs(d) /\\ abs(d) < e /\\ (x + d % basis i) IN s)\n     ==> f' = f''
-      #|  &0 < e ==> &0 < abs(e / &2) /\\ abs(e / &2) < e
-      #|  (:real^M)
-      #|  x:real^M
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N f' f'' x.\n     (f has_derivative f') (at x) /\\ (f has_derivative f'') (at x)\n     ==> f' = f''
-      #|  x:real^M
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N f' x.\n        (f has_derivative f') (at x)\n        ==> frechet_derivative f (at x) = f'
-      #|  forall c:real^N a:real^M. frechet_derivative (\\x. c) (at a) = \\h. vec 0
-      #|  &0 < e
-      #|  i:num
-      #|  forall P. (forall j. 1 <= j /\\ j <= dimindex(:M) ==> P j) <=>\n        P i /\\\n        (forall j. 1 <= j /\\ j <= dimindex(:M) /\\ ~(j = i) ==> P j)
-      #|  (x:real^M) IN interval[a,b]
-      #|  i:num
-      #|  &0 < e
-      #|  (min ((b:real^M)$i - (a:real^M)$i) e) / &2
-      #|  (?a. P a \\/ P(--a)) ==> (?a:real. P a)
-      #|  e:real
-      #|  i:num
-      #|  interval[a:real^M,b]
-      #|  x:real^M
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N f' f'' x a b.\n     (forall i. 1 <= i /\\ i <= dimindex(:M) ==> a$i < b$i) /\\\n     x IN interval[a,b] /\\\n     (f has_derivative f') (at x within interval[a,b]) /\\\n     (f has_derivative f'') (at x within interval[a,b])\n     ==> f' = f''
-      #|  &0 < e
-      #|  i:num
-      #|  forall P. (forall j. 1 <= j /\\ j <= dimindex(:M) ==> P j) <=>\n        P i /\\\n        (forall j. 1 <= j /\\ j <= dimindex(:M) /\\ ~(j = i) ==> P j)
-      #|  (x:real^M) IN interval(a,b)
-      #|  i:num
-      #|  &0 < e
-      #|  (min ((b:real^M)$i - (a:real^M)$i) e) / &3
-      #|  (?a. P a \\/ P(--a)) ==> (?a:real. P a)
-      #|  e:real
-      #|  i:num
-      #|  interval(a:real^M,b)
-      #|  x:real^M
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N f' f'' x a b.\n     x IN interval(a,b) /\\\n     (f has_derivative f') (at x within interval(a,b)) /\\\n     (f has_derivative f'') (at x within interval(a,b))\n     ==> f' = f''
-      #|  forall f:real^M->real^N f' x.\n     (f has_derivative f') (at x) ==> (f' = frechet_derivative f (at x))
-      #|  forall f:real^M->real^N f' x a b.\n     (forall i. 1 <= i /\\ i <= dimindex(:M) ==> a$i < b$i) /\\\n     x IN interval[a,b] /\\\n     (f has_derivative f') (at x within interval[a,b])\n     ==> frechet_derivative f (at x within interval[a,b]) = f'
-      #|  dist(x:real^M,x + e) = norm e
+      #|  (e : Real)
+      #|  limit_point_of((x : Cart[Real, M]), (s : (Cart[Real, M]) -> Bool))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f'' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, f', (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), s)) && (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, f'', (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), s)) && (\226\136\128 i : Num, \226\136\128 e : Real, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) && real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < abs(d) && abs(d) < e && (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x + (op_pct : (Real, Cart[Real, M]) -> Cart[Real, M])(d, (basis : (Num) -> Cart[Real, M])(i)), s))) \226\134\146 f' == f''
+      #|  real_of_num(0) < (e : Real) \226\134\146 real_of_num(0) < abs(e / real_of_num(2)) && abs(e / real_of_num(2)) < e
+      #|  (UNIV : (Cart[Real, M]) -> Bool)
+      #|  (x : Cart[Real, M])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f'' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], has_derivative(f, f', at(x)) && has_derivative(f, f'', at(x)) \226\134\146 f' == f''
+      #|  (x : Cart[Real, M])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], has_derivative(f, f', at(x)) \226\134\146 frechet_derivative(f, at(x)) == f'
+      #|  \226\136\128 c : Cart[Real, N], \226\136\128 a : Cart[Real, M], frechet_derivative((x : Cart[Real, M]) => c, at(a)) == ((h : Cart[Real, M]) => vec(0))
+      #|  real_of_num(0) < (e : Real)
+      #|  (i : Num)
+      #|  \226\136\128 P : (Num) -> Bool, (\226\136\128 j : Num, 1 <= j && j <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 P(j)) == (P((i : Num)) && (\226\136\128 j : Num, 1 <= j && j <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) && !(j == i) \226\134\146 P(j)))
+      #|  IN((x : Cart[Real, M]), interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]))
+      #|  (i : Num)
+      #|  real_of_num(0) < (e : Real)
+      #|  min(op_dollar((b : Cart[Real, M]), (i : Num)) - op_dollar((a : Cart[Real, M]), i), (e : Real)) / real_of_num(2)
+      #|  (\226\136\131 a : Real, (P : (Real) -> Bool)(a) || P(-a)) \226\134\146 (\226\136\131 a : Real, P(a))
+      #|  (e : Real)
+      #|  (i : Num)
+      #|  interval([((a : Cart[Real, M]), (b : Cart[Real, M]))])
+      #|  (x : Cart[Real, M])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f'' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, M], Num) -> Real)(a, i) < (op_dollar : (Cart[Real, M], Num) -> Real)(b, i)) && (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) && (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, f', (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)]))) && (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, f'', (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)]))) \226\134\146 f' == f''
+      #|  real_of_num(0) < (e : Real)
+      #|  (i : Num)
+      #|  \226\136\128 P : (Num) -> Bool, (\226\136\128 j : Num, 1 <= j && j <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 P(j)) == (P((i : Num)) && (\226\136\128 j : Num, 1 <= j && j <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) && !(j == i) \226\134\146 P(j)))
+      #|  IN((x : Cart[Real, M]), interval(((a : Cart[Real, M]), (b : Cart[Real, M]))))
+      #|  (i : Num)
+      #|  real_of_num(0) < (e : Real)
+      #|  min(op_dollar((b : Cart[Real, M]), (i : Num)) - op_dollar((a : Cart[Real, M]), i), (e : Real)) / real_of_num(3)
+      #|  (\226\136\131 a : Real, (P : (Real) -> Bool)(a) || P(-a)) \226\134\146 (\226\136\131 a : Real, P(a))
+      #|  (e : Real)
+      #|  (i : Num)
+      #|  interval(((a : Cart[Real, M]), (b : Cart[Real, M])))
+      #|  (x : Cart[Real, M])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f'' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], IN(x, interval((a, b))) && has_derivative(f, f', within(at(x), interval((a, b)))) && has_derivative(f, f'', within(at(x), interval((a, b)))) \226\134\146 f' == f''
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], has_derivative(f, f', at(x)) \226\134\146 f' == frechet_derivative(f, at(x))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, M], Num) -> Real)(a, i) < (op_dollar : (Cart[Real, M], Num) -> Real)(b, i)) && (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) && (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, f', (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)]))) \226\134\146 (frechet_derivative : ((Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]], Cart[Real, M]) -> Cart[Real, N])(f, (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)]))) == f'
+      #|  dist(((x : Cart[Real, M]), x + (e : Cart[Real, M]))) == norm(e)
       #|  :real
       #|  :real
-      #|  x * y < &0 <=> &0 < x * --y
-      #|  fx <= fy /\\ a = --b /\\ b < &0 ==> a <= abs(fy - (fx + b))
-      #|  &0 < x ==> &0 < abs x
-      #|  d <= (a * inv b) * c <=> d <= (c * a) / b
-      #|  abs(y$k) <= norm(y) /\\ ~(abs(y$k) < e) ==> ~(norm y < e)
+      #|  ((x : Real) * (y : Real) < real_of_num(0)) == (real_of_num(0) < x * -y)
+      #|  (fx : Real) <= (fy : Real) && (a : Real) == -(b : Real) && b < real_of_num(0) \226\134\146 a <= abs(fy - (fx + b))
+      #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) < abs(x)
+      #|  ((d : Real) <= (a : Real) * inv((b : Real)) * (c : Real)) == (d <= c * a / b)
+      #|  abs(op_dollar((y : Cart[Real, _]), (k : Num))) <= norm(y) && !(abs(op_dollar(y, k)) < (e : Real)) \226\134\146 !(norm(y) < e)
       #|  :real
       #|  :real
-      #|  &0 < x ==> &0 < abs x
-      #|  x + a % (y - x):real^N = (&1 - a) % x + a % y
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  &0 < de /\\ de <= &1
-      #|  &0 < de / x ==> abs(min (&1) (de / &2 / x)) < de / x
-      #|  norm(de % (y - x):real^M) < min d e
-      #|  x + de % (y - x):real^M
-      #|  de = min (&1) ((min d e) / &2 / norm(y - x:real^M))
-      #|  d:real
-      #|  &0 < --x <=> x < &0
-      #|  --((f':real^M->real^N)(y - x)$k) / norm(y - x)
-      #|  y:real^M = x
-      #|  forall f:real^M->real^N f' x s k e.\n        1 <= k /\\ k <= dimindex(:N) /\\\n        x IN s /\\ convex s /\\ (f has_derivative f') (at x within s) /\\\n        &0 < e /\\ (forall w. w IN s INTER ball(x,e) ==> (f x)$k <= (f w)$k)\n        ==> forall y. y IN s ==> &0 <= (f'(y - x))$k
-      #|  e:real
-      #|  k:num
-      #|  s:real^M->bool
-      #|  x:real^M
-      #|  \\x. --((f':real^M->real^N) x)
-      #|  \\x. --((f:real^M->real^N) x)
-      #|  forall f:real^M->real^N f' x s k e.\n        1 <= k /\\ k <= dimindex(:N) /\\\n        x IN s /\\ convex s /\\ (f has_derivative f') (at x within s) /\\\n        &0 < e /\\ (forall w. w IN s INTER ball(x,e) ==> (f w)$k <= (f x)$k)\n        ==> forall y. y IN s ==> (f'(y - x))$k <= &0
-      #|  e:real
-      #|  f:real^N->real^1
-      #|  forall f:real^N->real^1 f' x s e.\n        x IN s /\\ convex s /\\ (f has_derivative f') (at x within s) /\\\n        &0 < e /\\ (forall w. w IN s INTER ball(x,e) ==> drop(f x) <= drop(f w))\n        ==> forall y. y IN s ==> &0 <= drop(f'(y - x))
-      #|  e:real
-      #|  f:real^N->real^1
-      #|  forall f:real^N->real^1 f' x s e.\n        x IN s /\\ convex s /\\ (f has_derivative f') (at x within s) /\\\n        &0 < e /\\ (forall w. w IN s INTER ball(x,e) ==> drop(f w) <= drop(f x))\n        ==> forall y. y IN s ==> drop(f'(y - x)) <= &0
-      #|  ~(x = &0) /\\ ~(y = &0) ==> x / y * y / x = &1
-      #|  (*) (norm(h:real^M) / e)
-      #|  --x <= &0 /\\ x <= &0 <=> x = &0
-      #|  &0 <= --x /\\ &0 <= x <=> x = &0
-      #|  x - e - x:real^N = --e /\\ (x + e) - x = e
-      #|  dist(x:real^N,x - e) = norm e /\\ dist(x:real^N,x + e) = norm e
-      #|  :real
-      #|  :real
-      #|  :real
-      #|  :real
-      #|  h:real^M = vec 0
-      #|  h:real^M
-      #|  e:real
-      #|  k:num
-      #|  cball(x:real^M,e)
-      #|  x:real^M
-      #|  f':real^M->real^N
-      #|  f:real^M->real^N
-      #|  e:real
-      #|  k:num
-      #|  cball(x:real^M,e)
-      #|  x:real^M
-      #|  f':real^M->real^N
-      #|  f:real^M->real^N
-      #|  e:real
-      #|  x:real^M
-      #|  forall f:real^M->real^N f' x s k.\n        1 <= k /\\ k <= dimindex(:N) /\\\n        x IN s /\\ open s /\\ (f has_derivative f') (at x) /\\\n        ((forall w. w IN s ==> (f w)$k <= (f x)$k) \\/\n         (forall w. w IN s ==> (f x)$k <= (f w)$k))\n        ==> forall h. (f' h)$k = &0
-      #|  x - e / norm h % h:real^M
-      #|  x + e / norm h % h:real^M
-      #|  x - e / norm h % h:real^M
-      #|  x + e / norm h % h:real^M
-      #|  k:num
-      #|  ball(x:real^M,e)
-      #|  x:real^M
-      #|  \\h:real^M. jacobian (f:real^M->real^N) (at x) ** h
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N x e k.\n        1 <= k /\\ k <= dimindex(:N) /\\ &0 < e /\\\n        ((forall y. y IN ball(x,e) ==> (f y)$k <= (f x)$k) \\/\n         (forall y. y IN ball(x,e) ==> (f x)$k <= (f y)$k)) /\\\n        f differentiable (at x)\n        ==> (jacobian f (at x) $ k = vec 0)
-      #|  1:num
-      #|  s:real^N->bool
-      #|  x:real^N
-      #|  f':real^N->real^1
-      #|  f:real^N->real^1
-      #|  forall f:real^N->real^1 f' x s.\n        x IN s /\\ open s /\\ (f has_derivative f') (at x) /\\\n        ((forall y. y IN s ==> drop(f y) <= drop(f x)) \\/\n         (forall y. y IN s ==> drop(f x) <= drop(f y)))\n        ==> (f' = \\v. vec 0)
-      #|  interval(a:real^1,b)
-      #|  c:real^1
-      #|  f:real^1->real^1
-      #|  c:real^1
-      #|  b:real^1
-      #|  a:real^1
-      #|  f:real^1->real^1
-      #|  forall f:real^1->real^1 f' a b.\n        drop a < drop b /\\ (f a = f b) /\\\n        f continuous_on interval[a,b] /\\\n        (forall x. x IN interval(a,b) ==> (f has_derivative f'(x)) (at x))\n        ==> ?x. x IN interval(a,b) /\\ (f'(x) = \\v. vec 0)
-      #|  b - a:real^1
-      #|  x:real^1
-      #|  (fa - k % a = fb - k % b) <=> (fb - fa = k % (b - a))
-      #|  b:real^1
-      #|  a:real^1
-      #|  \\k:real^1 x:real^1.\n                    f'(k)(x) - (drop(f b - f a) / drop(b - a)) % x
-      #|  \\x. f(x) - (drop(f b - f a) / drop(b - a)) % x
-      #|  forall f:real^1->real^1 f' a b.\n        drop a < drop b /\\\n        f continuous_on interval[a,b] /\\\n        (forall x. x IN interval(a,b) ==> (f has_derivative f'(x)) (at x))\n        ==> ?x. x IN interval(a,b) /\\ (f(b) - f(a) = f'(x) (b - a))
-      #|  forall f:real^1->real^1 f' a b.\n        drop a < drop b /\\\n        (forall x. x IN interval[a,b]\n             ==> (f has_derivative f'(x)) (at x within interval[a,b]))\n        ==> ?x. x IN interval(a,b) /\\ (f(b) - f(a) = f'(x) (b - a))
-      #|  a:real^1
-      #|  b:real^1 = a
-      #|  forall f:real^1->real^1 f' a b.\n        drop a <= drop b /\\\n        (forall x. x IN interval[a,b]\n             ==> (f has_derivative f'(x)) (at x within interval[a,b]))\n        ==> ?x. x IN interval[a,b] /\\ (f(b) - f(a) = f'(x) (b - a))
-      #|  (&1 - x) % a + x % b:real^N = a + x % (b - a)
-      #|  a IN s\n          ==> open s /\\ (f has_derivative f') (at a within s)\n              ==> (f has_derivative f') (at a)
-      #|  x:real^1
-      #|  vec 1:real^1
-      #|  vec 0:real^1
-      #|  \\x. (f':real^N->real^N->real^1)\n                      ((&1 - drop x) % a + drop x % b) o\n                      (\\x. drop x % (b - a))
-      #|  (f:real^N->real^1) o (\\x. (&1 - drop x) % a + drop x % b)
-      #|  forall f:real^N->real^1 f' a b.\n        ~(a = b) /\\\n        f continuous_on segment[a,b] /\\\n        (forall x. x IN segment(a,b)\n\n             ==> (f has_derivative f' x) (at x within segment(a,b)))\n        ==> ?c. c IN segment(a,b) /\\ f(b) - f(a) = f'(c) (b - a)
-      #|  min (dist(x:real^N,a)) (dist(x,b))
-      #|  dist(a:real^N,b)
-      #|  x:real^N = a \\/ x:real^N = b
-      #|  x:real^N
-      #|  (f':real^N->real^N->real^1) x
-      #|  x:real^N
-      #|  forall f:real^N->real^1 f' a b.\n        ~(a = b) /\\\n        (forall x. x IN segment[a,b]\n             ==> (f has_derivative f' x) (at x within segment(a,b)))\n        ==> ?c. c IN segment(a,b) /\\ f(b) - f(a) = f'(c) (b - a)
-      #|  norm((f:real^1->real^N) b - f a)
-      #|  (f:real^1->real^N) b = f a
-      #|  x:real^1
-      #|  b:real^1
-      #|  a:real^1
-      #|  \\x t. lift((f(b:real^1) - f(a)) dot\n                      ((f':real^1->real^1->real^N) x t))
-      #|  (lift o (\\y. (f(b) - f(a)) dot y)) o (f:real^1->real^N)
-      #|  forall f:real^1->real^N f' a b.\n        drop a < drop b /\\\n        f continuous_on interval[a,b] /\\\n        (forall x. x IN interval(a,b) ==> (f has_derivative f'(x)) (at x))\n        ==> ?x. x IN interval(a,b) /\\\n                norm(f(b) - f(a)) <= norm(f'(x) (b - a))
-      #|  s:real^M->bool
-      #|  a IN interval(vec 0:real^1,vec 1) /\\\n                open(interval(vec 0:real^1,vec 1))
-      #|  a:real^1
-      #|  s:real^M->bool
-      #|  x + &1 % (y - x) = y
-      #|  vec 1:real^1
-      #|  vec 0:real^1
-      #|  \\u. (f':real^M->real^M->real^N) (x + drop u % (y - x)) o\n         (\\u. vec 0 + drop u % (y - x))
-      #|  (f:real^M->real^N) o (\\u. x + drop u % (y - x))
-      #|  forall u. u IN interval(vec 0,vec 1) ==> (x + drop u % (y - x) :real^M) IN s
-      #|  x + u % (y - x) = (&1 - u) % x + u % y
-      #|  forall u. u IN interval[vec 0,vec 1] ==> (x + drop u % (y - x) :real^M) IN s
-      #|  forall x y. x IN s ==> norm((f':real^M->real^M->real^N)(x) y) <= B * norm(y)
-      #|  forall f:real^M->real^N f' s B.\n        convex s /\\\n        (forall x. x IN s ==> (f has_derivative f'(x)) (at x within s)) /\\\n        (forall x. x IN s ==> onorm(f'(x)) <= B)\n        ==> forall x y. x IN s /\\ y IN s ==> norm(f(x) - f(y)) <= B * norm(x - y)
-      #|  abs g <= x * h\n      ==> u <= v /\\ abs(u - v - (f - g)) < (b - x) * h ==> f <= b * h
-      #|  h:real^M
-      #|  &1
-      #|  b - onorm(g':real^M->real^P)
-      #|  y:real^M
-      #|  ((\\y. inv(norm(y - x:real^M)) %\n          lift((norm(f y - f x:real^N) - norm(g y - g x:real^P)) -\n               (norm(f'(y - x):real^N) - norm(g'(y - x):real^P))))\n     --> vec 0) (at x)
-      #|  b:real
-      #|  forall f:real^M->real^N g:real^M->real^P f' g' x.\n        (f has_derivative f') (at x) /\\\n        (g has_derivative g') (at x) /\\\n        eventually (\\y. norm(f y - f x) <= norm(g y - g x)) (at x)\n        ==> onorm f' <= onorm g'
+      #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) < abs(x)
+      #|  (x : Cart[Real, N]) + op_pct((a : Real), (y : Cart[Real, N]) - x) == op_pct(real_of_num(1) - a, x) + op_pct(a, y)
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  real_of_num(0) < (de : Real) && de <= real_of_num(1)
+      #|  real_of_num(0) < (de : Real) / (x : Real) \226\134\146 abs(min(real_of_num(1), de / real_of_num(2) / x)) < de / x
+      #|  norm(op_pct((de : Real), (y : Cart[Real, M]) - (x : Cart[Real, M]))) < min((d : Real), (e : Real))
+      #|  (x : Cart[Real, M]) + op_pct((de : Real), (y : Cart[Real, M]) - x)
+      #|  (de : Real) == min(real_of_num(1), min((d : Real), (e : Real)) / real_of_num(2) / norm((y : Cart[Real, M]) - (x : Cart[Real, M])))
+      #|  (d : Real)
+      #|  (real_of_num(0) < -(x : Real)) == (x < real_of_num(0))
+      #|  -op_dollar((f' : (Cart[Real, M]) -> Cart[Real, N])((y : Cart[Real, M]) - (x : Cart[Real, M])), (k : Num)) / norm(y - x)
+      #|  (y : Cart[Real, M]) == (x : Cart[Real, M])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 k : Num, \226\136\128 e : Real, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, s) && (convex : ((Cart[Real, M]) -> Bool) -> Bool)(s) && (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, f', (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), s)) && real_of_num(0) < e && (\226\136\128 w : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(w, (INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)(s, (ball : ((Cart[Real, M], Real), Cart[Real, M]) -> Bool)((x, e)))) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), k) <= (op_dollar : (Cart[Real, N], Num) -> Real)(f(w), k)) \226\134\146 (\226\136\128 y : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(y, s) \226\134\146 real_of_num(0) <= (op_dollar : (Cart[Real, N], Num) -> Real)(f'(y - x), k))
+      #|  (e : Real)
+      #|  (k : Num)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M]) => -(f' : (Cart[Real, M]) -> Cart[Real, N])(x)
+      #|  (x : Cart[Real, M]) => -(f : (Cart[Real, M]) -> Cart[Real, N])(x)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 k : Num, \226\136\128 e : Real, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, s) && (convex : ((Cart[Real, M]) -> Bool) -> Bool)(s) && (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, f', (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), s)) && real_of_num(0) < e && (\226\136\128 w : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(w, (INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)(s, (ball : ((Cart[Real, M], Real), Cart[Real, M]) -> Bool)((x, e)))) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(f(w), k) <= (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), k)) \226\134\146 (\226\136\128 y : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(y, s) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(f'(y - x), k) <= real_of_num(0))
+      #|  (e : Real)
+      #|  (f : (Cart[Real, N]) -> Cart[Real, Unit])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Unit], \226\136\128 f' : (Cart[Real, N]) -> Cart[Real, Unit], \226\136\128 x : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 e : Real, IN(x, s) && convex(s) && has_derivative(f, f', within(at(x), s)) && real_of_num(0) < e && (\226\136\128 w : Cart[Real, N], IN(w, INTER(s, ball((x, e)))) \226\134\146 drop(f(x)) <= drop(f(w))) \226\134\146 (\226\136\128 y : Cart[Real, N], IN(y, s) \226\134\146 real_of_num(0) <= drop(f'(y - x)))
+      #|  (e : Real)
+      #|  (f : (Cart[Real, N]) -> Cart[Real, Unit])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Unit], \226\136\128 f' : (Cart[Real, N]) -> Cart[Real, Unit], \226\136\128 x : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 e : Real, IN(x, s) && convex(s) && has_derivative(f, f', within(at(x), s)) && real_of_num(0) < e && (\226\136\128 w : Cart[Real, N], IN(w, INTER(s, ball((x, e)))) \226\134\146 drop(f(w)) <= drop(f(x))) \226\134\146 (\226\136\128 y : Cart[Real, N], IN(y, s) \226\134\146 drop(f'(y - x)) <= real_of_num(0))
+      #|  !((x : Real) == real_of_num(0)) && !((y : Real) == real_of_num(0)) \226\134\146 x / y * (y / x) == real_of_num(1)
+      #|  op_star(norm((h : Cart[Real, M])) / (e : Real))
+      #|  (-(x : Real) <= real_of_num(0) && x <= real_of_num(0)) == (x == real_of_num(0))
+      #|  (real_of_num(0) <= -(x : Real) && real_of_num(0) <= x) == (x == real_of_num(0))
+      #|  (x : Cart[Real, N]) - (e : Cart[Real, N]) - x == -e && x + e - x == e
+      #|  dist(((x : Cart[Real, N]), x - (e : Cart[Real, N]))) == norm(e) && dist((x, x + e)) == norm(e)
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  :real
-      #|  :real
-      #|  :real
-      #|  :real
-      #|  &0
-      #|  s:real^M->bool
-      #|  (\\x h. vec 0):real^M->real^M->real^N
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N s.\n        convex s /\\\n        (forall x. x IN s ==> (f has_derivative (\\h. vec 0)) (at x within s))\n        ==> ?c. forall x. x IN s ==> f(x) = c
-      #|  forall f s a c. convex s /\\ a IN s /\\ f a = c /\\\n             (forall x. x IN s ==> (f has_derivative (\\h. vec 0)) (at x within s))\n             ==> forall x. x IN s ==> f x = c
-      #|  ball(x:real^M,e)
-      #|  f:real^M->real^N
-      #|  e:real
-      #|  x:real^M
-      #|  x:real^M
-      #|  {x | x IN s /\\ (f:real^M->real^N) x = f a}
-      #|  a:real^M
-      #|  s:real^M->bool = {}
-      #|  forall f:real^M->real^N s.\n        open s /\\ connected s /\\\n        (forall x. x IN s ==> (f has_derivative (\\h. vec 0)) (at x))\n        ==> ?c. forall x. x IN s ==> f(x) = c
-      #|  forall f s a c. open s /\\ connected s /\\ a IN s /\\ f a = c /\\\n             (forall x. x IN s ==> (f has_derivative (\\h. vec 0)) (at x))\n             ==> forall x. x IN s ==> f x = c
-      #|  inv x * y:real = y / x
-      #|  c % (p - p) - v:real^N = --v
-      #|  d:real
-      #|  d:real
-      #|  c % (y - (x + d)):real^N = c % (y - x) - c % d
-      #|  B:real
-      #|  ((f:real^N->real^N) has_derivative f' x0) (at x0 within s)
-      #|  B:real
-      #|  g:real^N->real^N
-      #|  (f':real^N->real^N->real^N) x0
-      #|  g:real^N->real^N
-      #|  x0:real^N
-      #|  (f:real^N->real^N) continuous_on s
-      #|  (f:real^N->real^N) o (x:num->real^N)
-      #|  sequentially
-      #|  x:num->real^N
-      #|  (f:real^N->real^N) x0 = y
-      #|  x0:real^N
-      #|  forall f f' s y:real^N.\n        (forall x. x IN s ==> (f has_derivative f' x) (at x within s)) /\\\n        (forall x. x IN s /\\ f(x) = y ==> ~(det(matrix (f' x)) = &0))\n        ==> {l | l IN s /\\ l limit_point_of {x | x IN s /\\ f x = y}} = {}
-      #|  l:real^N
-      #|  s:real^N->bool
-      #|  forall s. {x | x IN s /\\ P x} = {} /\\ (forall x. P x ==> x IN s)\n        ==> {x | P x} = {}
-      #|  forall f f' s y:real^N.\n        closed s /\\\n        (forall x. x IN s ==> (f has_derivative f' x) (at x within s)) /\\\n        (forall x. x IN s /\\ f(x) = y ==> ~(det(matrix (f' x)) = &0))\n        ==> {l | l limit_point_of {x | x IN s /\\ f x = y}} = {}
-      #|  {x | P x /\\ R x} = {} ==> {x | (P x /\\ Q x) /\\ R x} = {}
-      #|  forall f f' s y:real^N.\n        (forall x. x IN s ==> (f has_derivative f' x) (at x within s)) /\\\n        (forall x. x IN s /\\ f(x) = y ==> ~(det(matrix (f' x)) = &0))\n        ==> COUNTABLE {x | x IN s /\\ f(x) = y}
-      #|  forall f f' s y:real^N.\n        compact s /\\\n        (forall x. x IN s ==> (f has_derivative f' x) (at x within s)) /\\\n        (forall x. x IN s /\\ f(x) = y ==> ~(det(matrix (f' x)) = &0))\n        ==> FINITE {x | x IN s /\\ f(x) = y}
-      #|  s:real^N->bool
-      #|  f':real^N->real^N->real^N
-      #|  {x | x IN s /\\ f x = y} =\n    {x | x IN {x | x IN s /\\ f x = y} /\\ f x = y}
-      #|  forall f:real^N->real^N f' s y.\n         compact {x | x IN s /\\ f x = y} /\\\n         (forall x. x IN s /\\ f x = y ==> (f has_derivative f' x) (at x within s)) /\\\n         (forall x. x IN s /\\ f x = y ==> ~(det (matrix (f' x)) = &0))\n         ==> FINITE {x | x IN s /\\ f x = y}
-      #|  (e * inv B / C) * n:real = (n / B * e) / C
-      #|  norm((g':real^N->real^M)(f x - f a - ((f':real^M->real^N) (x - a))))
-      #|  B * norm((f:real^M->real^N) x - f a)
-      #|  x:real^M
-      #|  x:real^M
-      #|  min k (d / B)
-      #|  d:real
-      #|  e / (B * C):real
-      #|  e:real
-      #|  norm(y - b - f':real^N) <= B / &2 * norm(x - a:real^M)\n      ==> norm(x - a) * B <= norm f'\n          ==> norm(y - b) >= B / &2 * norm(x - a)
-      #|  :real
-      #|  :real
-      #|  x:real^M
-      #|  x:real^M
-      #|  e:real
-      #|  d:real
-      #|  d:real
-      #|  B / &2
-      #|  &0 < &2
-      #|  &2 / B
-      #|  B:real
-      #|  f':real^M->real^N
-      #|  ?B k. &0 < B /\\ &0 < k /\\\n          forall x. x IN s /\\ norm((f:real^M->real^N) x - f a) < k\n              ==> norm(x - a) <= B * norm(f x - f a)
-      #|  C:real
-      #|  g':real^N->real^M
-      #|  forall f:real^M->real^N f' g g' s a.\n        a IN s /\\\n        (forall x. x IN s ==> g(f x) = x) /\\\n        (f has_derivative f') (at a within s) /\\\n        linear g' /\\ g' o f' = I /\\\n        g continuous (at (f a) within IMAGE f s)\n        ==> (g has_derivative g') (at (f a) within IMAGE f s)
-      #|  :real
-      #|  e / B * norm ((g:real^N->real^M) z - g y)
-      #|  z:real^N
-      #|  k:real
-      #|  d':real
-      #|  d:real
-      #|  d':real
-      #|  e / B
-      #|  e:real
-      #|  norm(dg) <= norm(dg') + norm(dg - dg') /\\\n         ((&2 * (&1 - h)) * norm(dg) = &1 * norm(dg)) /\\\n         norm(dg') <= c * norm(d)\n         ==> norm(dg - dg') <= h * norm(dg)\n             ==> norm(dg) <= (&2 * c) * norm(d)
-      #|  z:real^N
-      #|  d:real
-      #|  &1 / &2
-      #|  &2 * C
-      #|  ?B d. &0 < B /\\ &0 < d /\\\n          forall z. norm(z - y) < d\n              ==> norm((g:real^N->real^M)(z) - g(y)) <= B * norm(z - y)
-      #|  --(gz:real^N - gy - (z - y)) = z - y - (gz - gy)
-      #|  norm(g'(f((g:real^N->real^M) z) - y - f'(g z - g y)):real^M)
-      #|  C * norm(f((g:real^N->real^M) z) - y - f'(g z - g y))
-      #|  C * (e / C) * norm((g:real^N->real^M) z - g y)
-      #|  z:real^N
-      #|  d:real
-      #|  d2:real
-      #|  d1:real
-      #|  d2:real
-      #|  y:real^N
-      #|  d1:real
-      #|  d0:real
-      #|  (g:real^N->real^M) z
-      #|  z:real^N
-      #|  d0:real
-      #|  e / C
-      #|  e:real
-      #|  forall e. &0 < e ==> ?d. &0 < d /\\\n                       forall z. norm(z - y) < d\n                           ==> norm((g:real^N->real^M)(z) - g(y) - g'(z - y))\n                               <= e * norm(g(z) - g(y))
-      #|  C:real
-      #|  forall f:real^M->real^N g f' g' t y.\n        (f has_derivative f') (at (g y)) /\\ linear g' /\\ (g' o f' = I) /\\\n        g continuous (at y) /\\\n        open t /\\ y IN t /\\ (forall z. z IN t ==> (f(g(z)) = z))\n        ==> (g has_derivative g') (at y)
-      #|  forall f:real^M->real^N g f' g' t x.\n        (f has_derivative f') (at x) /\\ linear g' /\\ (g' o f' = I) /\\\n        g continuous (at (f(x))) /\\ (g(f(x)) = x) /\\\n        open t /\\ f(x) IN t /\\ (forall y. y IN t ==> (f(g(y)) = y))\n        ==> (g has_derivative g') (at (f(x)))
-      #|  IMAGE (f:real^M->real^N) s
-      #|  f':real^M->real^N
-      #|  forall f:real^M->real^N g s.\n        open s /\\ open (IMAGE f s) /\\\n        f continuous_on s /\\ g continuous_on (IMAGE f s) /\\\n        (forall x. x IN s ==> (g(f(x)) = x))\n        ==> forall f' g' x. x IN s /\\ (f has_derivative f') (at x) /\\\n                      linear g' /\\ (g' o f' = I)\n                      ==> (g has_derivative g') (at (f(x)))
-      #|  interior(IMAGE (f:real^M->real^N) s)
-      #|  f':real^M->real^N
-      #|  forall f:real^M->real^N g f' g' s x.\n        compact s /\\ x IN s /\\ f(x) IN interior(IMAGE f s) /\\\n        f continuous_on s /\\ (forall x. x IN s ==> (g(f(x)) = x)) /\\\n        (f has_derivative f') (at x) /\\ linear g' /\\ (g' o f' = I)\n        ==> (g has_derivative g') (at (f(x)))
-      #|  ((f:real^N->real^N)(y) = x) <=> (x + (y - f(y)) = y)
-      #|  forall f:real^N->real^N s t.\n        compact t /\\ convex t /\\ ~(t = {}) /\\ f continuous_on t /\\\n        (forall x y. x IN s /\\ y IN t ==> x + (y - f(y)) IN t)\n        ==> forall x. x IN s ==> ?y. y IN t /\\ (f(y) = x)
-      #|  forall f:real^N->real^N s a e.\n        &0 < e /\\\n        f continuous_on cball(a,e) /\\\n        (forall x y. x IN s /\\ y IN cball(a,e) ==> x + (y - f(y)) IN cball(a,e))\n        ==> forall x. x IN s ==> ?y. y IN cball(a,e) /\\ (f(y) = x)
-      #|  B * norm(z - (f:real^M->real^N) x)
-      #|  x - (x + y) = --y:real^N
-      #|  x + g'(z - (f:real^M->real^N) x)
-      #|  z:real^N
-      #|  y:real^N
-      #|  B * norm(z - (f:real^M->real^N) x)
-      #|  (&1 / &2 * b) * x <= e * &1 / &2 <=> x * b <= e
-      #|  e / &2 <= e - x <=> x <= e / &2
-      #|  e / &2
-      #|  x <= a ==> y <= b - a ==> x + y <= b
-      #|  norm(f(x + g'(z - (f:real^M->real^N) x)) - z) + norm(f x - y)
-      #|  f0 - (y + z - f1) = (f1 - z) + (f0 - y):real^N
-      #|  a - b - (c - b) = a - c:real^N
-      #|  B * norm(z - (f:real^M->real^N) x)
-      #|  x + g'(z - (f:real^M->real^N) x)
-      #|  z:real^N
-      #|  y:real^N
-      #|  B * norm(y - (f:real^M->real^N) x)
-      #|  x - (x + y) = --y:real^N
-      #|  y:real^N
-      #|  cball(x:real^M,e1)
-      #|  e:real
-      #|  (f:real^M->real^N) x
-      #|  cball((f:real^M->real^N) x,e / &2)
-      #|  \\y. (f:real^M->real^N)(x + g'(y - f(x)))
-      #|  e:real
-      #|  e1 / B
-      #|  e0 / B
-      #|  e1:real
-      #|  e0:real
-      #|  &1 / (&2 * B)
-      #|  B:real
-      #|  linear(g':real^N->real^M)
-      #|  forall f:real^M->real^N f' g' s x.\n        open s /\\ f continuous_on s /\\\n        x IN s /\\ (f has_derivative f') (at x) /\\ linear g' /\\ (f' o g' = I)\n        ==> forall t. t SUBSET s /\\ x IN interior(t)\n                ==> f(x) IN interior(IMAGE f t)
-      #|  e / &2
-      #|  x:real^M
-      #|  s:real^M->bool
-      #|  (g':real^M->real^N->real^M) x
-      #|  (f':real^M->real^M->real^N) x
-      #|  f:real^M->real^N
-      #|  x:real^M
-      #|  forall f:real^M->real^N f' g' s.\n        open s /\\\n        (forall x. x IN s\n             ==> (f has_derivative f' x) (at x) /\\\n                 linear(g' x) /\\ f' x o g' x = I)\n        ==> open(IMAGE f s)
-      #|  f':real^N->real^N->real^N
-      #|  forall f:real^N->real^N f' s.\n        open s /\\\n        (forall x. x IN s\n             ==> (f has_derivative f' x) (at x) /\\ ~(det(matrix(f' x)) = &0))\n        ==> open(IMAGE f s)
-      #|  t:real^N->bool
-      #|  x:real^N
-      #|  x:real^N
-      #|  f':real^N->real^N->real^N
-      #|  forall f:real^N->real^N f' s t.\n        (forall x. x IN s\n             ==> (f has_derivative f' x) (at x within s) /\\\n                 ~(det(matrix(f' x)) = &0)) /\\\n        open t /\\ t SUBSET s\n        ==> open(IMAGE f t)
-      #|  y:real^N
-      #|  &0 < d
-      #|  d:real
-      #|  ball(x:real^N,e) INTER s
-      #|  forall t. t SUBSET s /\\ x IN interior(t)\n        ==> (f:real^N->real^N)(x) IN interior(IMAGE f t)
-      #|  e:real
-      #|  interior (IMAGE (f:real^N->real^N) s)
-      #|  f':real^N->real^N
-      #|  linear (g':real^N->real^N) /\\ (g' o f' = I)
-      #|  forall f:real^N->real^N g f' g' s x.\n        open s /\\ x IN s /\\ f continuous_on s /\\\n        (forall x. x IN s ==> (g(f(x)) = x)) /\\\n        (f has_derivative f') (at x) /\\ (f' o g' = I)\n        ==> (g has_derivative g') (at (f(x)))
-      #|  s:real^N->bool
-      #|  f':real^N->real^N
-      #|  forall f:real^N->real^N g f' g' s y.\n        open s /\\ (g y) IN s /\\ f continuous_on s /\\\n        (forall x. x IN s ==> (g(f(x)) = x)) /\\\n        (f has_derivative f') (at (g y)) /\\ (f' o g' = I) /\\\n        f(g y) = y\n        ==> (g has_derivative g') (at y)
-      #|  s:real^N->bool
-      #|  (f':real^N->real^N->real^N) x
-      #|  forall f:real^N->real^N s.\n        open s /\\\n        (forall x. x IN s ==> (f has_derivative f'(x)) (at x) /\\ (g(f(x)) = x) /\\\n                        (f'(x) o g'(x) = I))\n        ==> forall x. x IN s ==> (g has_derivative g'(x)) (at (f(x)))
-      #|  a <= e / &2 * h /\\ b <= e / &2 * h ==> a + b <= e * h
-      #|  (f':num->real^M->real^M->real^N) m x h - f' n x h =\n    (f' m x h - g' x h) + --(f' n x h - g' x h)
-      #|  h:real^M
-      #|  forall h. norm((f':num->real^M->real^M->real^N) m x h - f' n x h) <= e * norm(h)
-      #|  x:real^M
-      #|  \\x h. (f':num->real^M->real^M->real^N) m x h - f' n x h
-      #|  n:num >= N
-      #|  m:num >= N
-      #|  n:num
-      #|  m:num
-      #|  N:num
-      #|  e / &2
-      #|  forall s f:num->real^M->real^N f' g'.\n        convex s /\\\n        (forall n x. x IN s ==> ((f n) has_derivative (f' n x)) (at x within s)) /\\\n        (forall e. &0 < e\n             ==> ?N. forall n x h. n >= N /\\ x IN s\n                             ==> norm(f' n x h - g' x h) <= e * norm(h))\n        ==> forall e. &0 < e\n                ==> ?N. forall m n x y. m >= N /\\ n >= N /\\ x IN s /\\ y IN s\n                                  ==> norm((f m x - f n x) - (f m y - f n y))\n                                      <= e * norm(x - y)
-      #|  (norm(x + y + z) = norm(a)) /\\\n    norm(x + y + z) <= norm(x) + norm(y + z) /\\\n    norm(y + z) <= norm(y) + norm(z)\n    ==> norm(a) <= norm(x) + norm(y) + norm(z)
-      #|  d <= a + b + c\n    ==> a <= e / &3 * n ==> b <= e / &3 * n ==> c <= e / &3 * n\n        ==> d <= e * n
-      #|  y:real^M
-      #|  y:real^M
-      #|  y:real^M
-      #|  y:real^M
-      #|  d1:real
-      #|  d1:real
-      #|  e / &3
-      #|  m + n >= m:num /\\ m + n >= n
-      #|  x:real^M
-      #|  N1 + N2:num
-      #|  x:real^M
-      #|  y:real^M
-      #|  N1 + N2:num
-      #|  y:real^M
-      #|  y - x:real^M
-      #|  x:real^M
-      #|  N1 + N2:num
-      #|  y:real^M
-      #|  N2:num
-      #|  N1:num
-      #|  e / &3
-      #|  e / &3
-      #|  e:real
-      #|  \\n. (f':num->real^M->real^M->real^N) n x (c % u) -\n            c % f' n x u
-      #|  \\n. (f':num->real^M->real^M->real^N) n x (u + v) -\n            (f' n x u + f' n x v)
-      #|  sequentially
-      #|  u:real^M
-      #|  c:real
-      #|  v:real^M
-      #|  u:real^M
-      #|  &0 < e
-      #|  u:real^M
-      #|  x:real^M
-      #|  e / &2 / norm(u:real^M)
-      #|  e:real
-      #|  u = vec 0:real^M
-      #|  forall u. ((\\n. (f':num->real^M->real^M->real^N) n x u) --> g' x u) sequentially
-      #|  (x - y) - (u - v) = (x - u) - (y -  v):real^N
-      #|  N:num
-      #|  \\m. ((f:num->real^M->real^N) n u - f n v) - (f m u - f m v)
-      #|  sequentially
-      #|  v:real^M
-      #|  u:real^M
-      #|  m:num
-      #|  m:num
-      #|  v:real^M
-      #|  u:real^M
-      #|  n:num
-      #|  N:num
-      #|  e:real
-      #|  e:real
-      #|  forall e. &0 < e\n        ==> ?N. forall n x y. n >= N /\\ x IN s /\\ y IN s\n                        ==> norm(((f:num->real^M->real^N) n x - f n y) -\n                                 (g x - g y))\n                             <= e * norm(x - y)
-      #|  x:real^M
-      #|  n:num
-      #|  m:num
-      #|  x0:real^M
-      #|  x:real^M
-      #|  n:num
-      #|  m:num
-      #|  (f:num->real^M->real^N) m x - f n x =\n      (f m x - f n x - (f m x0 - f n x0)) + (f m x0 - f n x0)
-      #|  m >= N1 + N2:num ==> m >= N1 /\\ m >= N2
-      #|  N1 + N2:num
-      #|  N2:num
-      #|  e / &2 / norm(x - x0:real^M)
-      #|  N1:num
-      #|  e / &2
-      #|  x:real^M = x0
-      #|  e:real
-      #|  x:real^M
-      #|  ?g:real^M->real^N. forall x. x IN s ==> ((\\n. f n x) --> g x) sequentially
-      #|  forall e. &0 < e\n        ==> ?N. forall m n x y. m >= N /\\ n >= N /\\ x IN s /\\ y IN s\n                          ==> norm(((f:num->real^M->real^N) m x - f n x) -\n                                   (f m y - f n y))\n                               <= e * norm(x - y)
-      #|  x0:real^M
-      #|  forall s f:num->real^M->real^N f' g'.\n        convex s /\\\n        (forall n x. x IN s ==> ((f n) has_derivative (f' n x)) (at x within s)) /\\\n        (forall e. &0 < e\n             ==> ?N. forall n x h. n >= N /\\ x IN s\n                             ==> norm(f' n x h - g' x h) <= e * norm(h)) /\\\n        (?x l. x IN s /\\ ((\\n. f n x) --> l) sequentially)\n        ==> ?g. forall x. x IN s\n                    ==> ((\\n. f n x) --> g x) sequentially /\\\n                        (g has_derivative g'(x)) (at x within s)
-      #|  a + b - a = b:real^N
-      #|  f 0 (a:real^M) :real^N
-      #|  a:real^M
-      #|  (f':num->real^M->real^M->real^N) n x =\n                  \\h. f' n x h + vec 0
-      #|  g':real^M->real^M->real^N
-      #|  f':num->real^M->real^M->real^N
-      #|  \\n x. (f:num->real^M->real^N) n x + (f 0 a -  f n a)
-      #|  s:real^M->bool
-      #|  a:real^M
-      #|  (s:real^M->bool) = {}
-      #|  forall s f:num->real^M->real^N f' g'.\n        convex s /\\\n        (forall n x. x IN s ==> ((f n) has_derivative (f' n x)) (at x within s)) /\\\n        (forall e. &0 < e\n             ==> ?N. forall n x h. n >= N /\\ x IN s\n                             ==> norm(f' n x h - g' x h) <= e * norm(h))\n        ==> ?g. forall x. x IN s ==> (g has_derivative g'(x)) (at x within s)
-      #|  inv(&N)
-      #|  inv(&n + &1) * norm(h:real^M)
-      #|  h:real^M
-      #|  x:real^M
-      #|  n:num
-      #|  N:num
-      #|  f':num->real^M->real^M->real^N
-      #|  f:num->real^M->real^N
-      #|  convex(s:real^M->bool)
-      #|  &0 < &n + &1
-      #|  inv(&n + &1)
-      #|  n:num
-      #|  forall s g':real^M->real^M->real^N.\n        convex s /\\\n        (forall e. &0 < e\n             ==> ?f f'. forall x. x IN s\n                            ==> (f has_derivative (f' x)) (at x within s) /\\\n                                (forall h. norm(f' x h - g' x h) <= e * norm(h)))\n        ==> ?g. forall x. x IN s ==> (g has_derivative g'(x)) (at x within s)
-      #|  \\n:num x:real^M h:real^M. vsum(k INTER (0..n)) (\\n. f' n x h):real^N
-      #|  forall s f:num->real^M->real^N f' g' k.\n        convex s /\\\n        (forall n x. x IN s ==> ((f n) has_derivative (f' n x)) (at x within s)) /\\\n        (forall e. &0 < e\n             ==> ?N. forall n x h. n >= N /\\ x IN s\n                             ==> norm(vsum(k INTER (0..n)) (\\i. f' i x h) -\n                                      g' x h) <= e * norm(h)) /\\\n        (?x l. x IN s /\\ ((\\n. f n x) sums l) k)\n        ==> ?g. forall x. x IN s ==> ((\\n. f n x) sums (g x)) k /\\\n                               (g has_derivative g'(x)) (at x within s)
-      #|  bilinear(h:real^M->real^N->real^P)
-      #|  i * b * (c * x) * (d * x) = (i * x) * x * (b * c * d)
-      #|  inv(norm(x' - x :real^Q)) *\n                B * (C * norm(x' - x)) * (D * norm(x' - x))
-      #|  x':real^Q
-      #|  e / (B * C * D)
-      #|  e:real
-      #|  linear (g':real^Q->real^N)
-      #|  D:real
-      #|  linear (f':real^Q->real^M)
-      #|  C:real
-      #|  B:real
-      #|  ((\\y:real^Q. inv(norm(y - x)) %\n                 (h:real^M->real^N->real^P) (f'(y - x)) (g'(y - x)))\n    --> vec 0) (at x within s)
-      #|  h:real^M->real^N->real^P
-      #|  at (x:real^Q) within s
-      #|  vec 0 = (f':real^Q->real^M)(x - x)
-      #|  ((\\y. (f:real^Q->real^M)(x) + f'(y - x)) --> f(x)) (at x within s)
-      #|  ((f:real^Q->real^M) has_derivative f') (at x within s)
-      #|  ((g:real^Q->real^N) --> g(x)) (at x within s)
-      #|  forall h:real^M->real^N->real^P f g f' g' x:real^Q s.\n        (f has_derivative f') (at x within s) /\\\n        (g has_derivative g') (at x within s) /\\\n        bilinear h\n        ==> ((\\x. h (f x) (g x)) has_derivative\n             (\\d. h (f x) (g' d) + h (f' d) (g x))) (at x within s)
-      #|  forall h:real^M->real^N->real^P f g f' g' x:real^Q.\n        (f has_derivative f') (at x) /\\\n        (g has_derivative g') (at x) /\\\n        bilinear h\n        ==> ((\\x. h (f x) (g x)) has_derivative\n             (\\d. h (f x) (g' d) + h (f' d) (g x))) (at x)
-      #|  forall f:real^M->real^N g:real^M->real^P h:real^N->real^P->real^Q a.\n        f differentiable at a /\\ g differentiable at a /\\ bilinear h\n        ==> (\\x. h (f x) (g x)) differentiable at a
-      #|  forall f:real^M->real^N g:real^M->real^P h:real^N->real^P->real^Q x s.\n        f differentiable at x within s /\\ g differentiable at x within s /\\\n        bilinear h\n        ==> (\\x. h (f x) (g x)) differentiable at x within s
-      #|  forall f:real^M->real^N g:real^M->real^P h:real^N->real^P->real^Q s.\n        f differentiable_on s /\\ g differentiable_on s /\\ bilinear h\n        ==> (\\x. h (f x) (g x)) differentiable_on s
-      #|  p /\\ q /\\ r ==> s <=> r ==> p /\\ q ==> s
-      #|  forall f:real^M->real^N g x.\n        f differentiable at x /\\ g differentiable at x\n        ==> (\\x. lift(f x dot g x)) differentiable at x
-      #|  p /\\ q /\\ r ==> s <=> r ==> p /\\ q ==> s
-      #|  forall f:real^M->real^N g x s.\n        f differentiable (at x within s) /\\ g differentiable (at x within s)\n        ==> (\\x. lift(f x dot g x)) differentiable (at x within s)
-      #|  p /\\ q /\\ r ==> s <=> r ==> p /\\ q ==> s
-      #|  forall f:real^M->real^N g s.\n        f differentiable_on s /\\ g differentiable_on s\n        ==> (\\x. lift(f x dot g x)) differentiable_on s
-      #|  \\x y:real^M. drop x % y
-      #|  forall f f' g:real^M->real^N g' a s.\n        ((lift o f) has_derivative (lift o f')) (at a within s) /\\\n        (g has_derivative g') (at a within s)\n        ==> ((\\x. f x % g x) has_derivative\n             (\\h. f a % g' h + f' h % g a)) (at a within s)
-      #|  forall f f' g:real^M->real^N g' a.\n        ((lift o f) has_derivative (lift o f')) (at a) /\\\n        (g has_derivative g') (at a)\n        ==> ((\\x. f x % g x) has_derivative\n             (\\h. f a % g' h + f' h % g a)) (at a)
-      #|  a:real^N
-      #|  \\x:real^N. x
-      #|  \\x:real^N. x
-      #|  \\x:real^N. x
-      #|  \\x:real^N. x
-      #|  \\x y:real^N. lift(x dot y)
-      #|  forall a:real^N.\n    ((\\x. lift(norm x pow 2)) has_derivative (\\x. &2 % lift(a dot x))) (at a)
-      #|  s:real^M->bool
-      #|  a:real^M
-      #|  \\x y:real^N. drop x % y
-      #|  g:real^M->real^N
-      #|  lift o (f:real^M->real)
-      #|  forall f g:real^M->real^N a s.\n        (lift o f) differentiable (at a within s) /\\\n        g differentiable (at a within s)\n        ==> (\\x. f x % g x) differentiable (at a within s)
-      #|  forall f g:real^M->real^N a.\n        (lift o f) differentiable (at a) /\\ g differentiable (at a)\n        ==> (\\x. f x % g x) differentiable (at a)
-      #|  forall a:real^N. (\\x. lift(norm x pow 2)) differentiable (at a)
-      #|  s:real^M->bool
-      #|  \\x y:real^N. drop x % y
-      #|  g:real^M->real^N
-      #|  lift o (f:real^M->real)
-      #|  forall f g:real^M->real^N s.\n        (lift o f) differentiable_on s /\\ g differentiable_on s\n        ==> (\\x. f x % g x) differentiable_on s
-      #|  forall s:real^N->bool. (\\x. lift(norm x pow 2)) differentiable_on s
-      #|  x:real^M
-      #|  x - (y + z):real^N = x - y - z
-      #|  forall a y. (f':real^M->real^M->real^N) x (a % y) = a % f' x y
-      #|  (\\n. inv(d n x) % (f (x + d n x % basis j) - f x) - f' x (basis j)) =\n      (\\y. inv(norm(y - x)) % ((f:real^M->real^N) y -\n                               (f x + f' x (y - x)))) o\n      (\\n:num. x + d n x % basis j)
-      #|  x:real^M
-      #|  s = (:real^M)
-      #|  &1 < &n + &2
-      #|  &0 <= x /\\ x * inv n < x * &1 ==> ~(x <= abs x / n)
-      #|  abs(&n + &2) = &n + &2
-      #|  dist(x:real^N,x + y) = norm y
-      #|  :real
-      #|  :real
-      #|  x:real^M
-      #|  {x:real^M}
-      #|  x IN s <=> ~(x IN UNIV DIFF s)
-      #|  x:real^M
-      #|  n:num
-      #|  \\n:num x.\n        inv(d n x) % lift((f(x + d n x % basis j) -\n                          (f:real^M->real^N) x)$i)
-      #|  (f:real^M->real^N) continuous_on s
+      #|  (h : Cart[Real, M]) == vec(0)
+      #|  (h : Cart[Real, M])
+      #|  (e : Real)
+      #|  (k : Num)
+      #|  cball(((x : Cart[Real, M]), (e : Real)))
+      #|  (x : Cart[Real, M])
+      #|  (f' : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (e : Real)
+      #|  (k : Num)
+      #|  cball(((x : Cart[Real, M]), (e : Real)))
+      #|  (x : Cart[Real, M])
+      #|  (f' : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (e : Real)
+      #|  (x : Cart[Real, M])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 k : Num, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, s) && (open : ((Cart[Real, M]) -> Bool) -> Bool)(s) && (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, f', (at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x)) && ((\226\136\128 w : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(w, s) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(f(w), k) <= (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), k)) || (\226\136\128 w : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(w, s) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), k) <= (op_dollar : (Cart[Real, N], Num) -> Real)(f(w), k))) \226\134\146 (\226\136\128 h : Cart[Real, M], (op_dollar : (Cart[Real, N], Num) -> Real)(f'(h), k) == real_of_num(0))
+      #|  (x : Cart[Real, M]) - op_pct((e : Real) / norm((h : Cart[Real, M])), h)
+      #|  (x : Cart[Real, M]) + op_pct((e : Real) / norm((h : Cart[Real, M])), h)
+      #|  (x : Cart[Real, M]) - op_pct((e : Real) / norm((h : Cart[Real, M])), h)
+      #|  (x : Cart[Real, M]) + op_pct((e : Real) / norm((h : Cart[Real, M])), h)
+      #|  (k : Num)
+      #|  ball(((x : Cart[Real, M]), (e : Real)))
+      #|  (x : Cart[Real, M])
+      #|  (h : Cart[Real, M]) => matrix_vector_mul(jacobian((f : (Cart[Real, M]) -> Cart[Real, N]), at((x : Cart[Real, M]))), h)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], \226\136\128 e : Real, \226\136\128 k : Num, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && real_of_num(0) < e && ((\226\136\128 y : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(y, (ball : ((Cart[Real, M], Real), Cart[Real, M]) -> Bool)((x, e))) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(f(y), k) <= (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), k)) || (\226\136\128 y : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(y, (ball : ((Cart[Real, M], Real), Cart[Real, M]) -> Bool)((x, e))) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), k) <= (op_dollar : (Cart[Real, N], Num) -> Real)(f(y), k))) && (differentiable : ((Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, (at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x)) \226\134\146 (op_dollar : (Cart[Cart[Real, M], N], Num) -> Cart[Real, M])((jacobian : ((Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Cart[Cart[Real, M], N])(f, (at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x)), k) == (vec : (Num) -> Cart[Real, M])(0)
       #|  1
-      #|  &0 < &n + &2
-      #|  forall n x. x IN s ==> &0 < (d:num->real^M->real) n x
-      #|  d = \\n x. (if s = UNIV then &1 else setdist({x},(:real^M) DIFF s)) /\n              (&n + &2)
-      #|  forall f:real^M->real^N f' s i j.\n        (forall x. x IN s ==> (f has_derivative f'(x)) (at x)) /\\\n        open s /\\\n        1 <= i /\\ i <= dimindex(:N) /\\\n        1 <= j /\\ j <= dimindex(:M)\n        ==> baire 1 s (\\x. lift(matrix(f' x)$i$j))
-      #|  f:real^N->real^N
-      #|  p:num->num
-      #|  forall f:real^N->real^N f' s.\n        (forall x. x IN s ==> (f has_derivative f'(x)) (at x)) /\\ open s\n        ==> baire 1 s (\\x. lift(det(matrix(f' x))))
-      #|  a % y:real^N = z ==> c - a % (x + y) = c - a % x - z
-      #|  t:real
-      #|  &1
-      #|  ~(y = &0) ==> y * x * inv y = x
-      #|  norm(y:real^M)
-      #|  p /\\ q /\\ r ==> s <=> p /\\ r ==> q ==> s
-      #|  (\\t. x + drop t % (y:real^M)) continuous\n    (at (vec 0) within {t | (x + drop t % y:real^M) IN s})
-      #|  y:real^M = vec 0
-      #|  a + x:real^N = a + y <=> x = y
-      #|  \\r. (x:real^M) + drop r % y
-      #|  trivial_limit (at (x:real^M) within s)
-      #|  y:real^M = vec 0
-      #|  forall f:real^M->real^N f' s x y.\n        (f has_derivative f') (at x within s)\n        ==> ((\\t. inv(drop t) % (f(x + drop t % y) - f(x))) --> f' y)\n            (at (vec 0) within {t | (x + drop t % y) IN s})
-      #|  y:real^M
-      #|  forall f:real^M->real^N f' x y.\n        (f has_derivative f') (at x)\n        ==> ((\\t. inv(drop t) % (f(x + drop t % y) - f(x))) --> f' y)\n            (at (vec 0))
-      #|  a % (y - (x + b % u)):real^M = --((a * b) % u - a % (y - x)) /\\\n    a % (y - x - b % u):real^M = --((a * b) % u - a % (y - x))
-      #|  norm(y - z:real^M) <= a /\\ norm(d - e) <= b\n    ==> norm(y - (x + d)) - norm(z - x - e) <= a + b
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  (f' : (Cart[Real, N]) -> Cart[Real, Unit])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, Unit])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Unit], \226\136\128 f' : (Cart[Real, N]) -> Cart[Real, Unit], \226\136\128 x : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, IN(x, s) && open(s) && has_derivative(f, f', at(x)) && ((\226\136\128 y : Cart[Real, N], IN(y, s) \226\134\146 drop(f(y)) <= drop(f(x))) || (\226\136\128 y : Cart[Real, N], IN(y, s) \226\134\146 drop(f(x)) <= drop(f(y)))) \226\134\146 f' == ((v : Cart[Real, N]) => vec(0))
+      #|  interval(((a : Cart[Real, Unit]), (b : Cart[Real, Unit])))
+      #|  (c : Cart[Real, Unit])
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  (c : Cart[Real, Unit])
+      #|  (b : Cart[Real, Unit])
+      #|  (a : Cart[Real, Unit])
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 f' : (Cart[Real, Unit], Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], drop(a) < drop(b) && f(a) == f(b) && continuous_on(f, interval([(a, b)])) && (\226\136\128 x : Cart[Real, Unit], IN(x, interval((a, b))) \226\134\146 has_derivative(f, f'(x), at(x))) \226\134\146 (\226\136\131 x : Cart[Real, Unit], IN(x, interval((a, b))) && f'(x) == ((v : Cart[Real, Unit]) => vec(0)))
+      #|  (b : Cart[Real, Unit]) - (a : Cart[Real, Unit])
+      #|  (x : Cart[Real, Unit])
+      #|  ((fa : Cart[Real, _]) - op_pct((k : Real), (a : Cart[Real, _])) == (fb : Cart[Real, _]) - op_pct(k, (b : Cart[Real, _]))) == (fb - fa == op_pct(k, b - a))
+      #|  (b : Cart[Real, Unit])
+      #|  (a : Cart[Real, Unit])
+      #|  (k : Cart[Real, Unit]) => (x : Cart[Real, Unit]) => (f' : (Cart[Real, Unit], Cart[Real, Unit]) -> Cart[Real, Unit])(k, x) - op_pct(drop((f : (Cart[Real, Unit]) -> Cart[Real, Unit])((b : Cart[Real, Unit])) - f((a : Cart[Real, Unit]))) / drop(b - a), x)
+      #|  (x : Cart[Real, Unit]) => (f : (Cart[Real, Unit]) -> Cart[Real, Unit])(x) - op_pct(drop(f((b : Cart[Real, Unit])) - f((a : Cart[Real, Unit]))) / drop(b - a), x)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 f' : (Cart[Real, Unit], Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], drop(a) < drop(b) && continuous_on(f, interval([(a, b)])) && (\226\136\128 x : Cart[Real, Unit], IN(x, interval((a, b))) \226\134\146 has_derivative(f, f'(x), at(x))) \226\134\146 (\226\136\131 x : Cart[Real, Unit], IN(x, interval((a, b))) && f(b) - f(a) == f'(x, b - a))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 f' : (Cart[Real, Unit], Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], drop(a) < drop(b) && (\226\136\128 x : Cart[Real, Unit], IN(x, interval([(a, b)])) \226\134\146 has_derivative(f, f'(x), within(at(x), interval([(a, b)])))) \226\134\146 (\226\136\131 x : Cart[Real, Unit], IN(x, interval((a, b))) && f(b) - f(a) == f'(x, b - a))
+      #|  (a : Cart[Real, Unit])
+      #|  (b : Cart[Real, Unit]) == (a : Cart[Real, Unit])
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 f' : (Cart[Real, Unit], Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], drop(a) <= drop(b) && (\226\136\128 x : Cart[Real, Unit], IN(x, interval([(a, b)])) \226\134\146 has_derivative(f, f'(x), within(at(x), interval([(a, b)])))) \226\134\146 (\226\136\131 x : Cart[Real, Unit], IN(x, interval([(a, b)])) && f(b) - f(a) == f'(x, b - a))
+      #|  op_pct(real_of_num(1) - (x : Real), (a : Cart[Real, N])) + op_pct(x, (b : Cart[Real, N])) == a + op_pct(x, b - a)
+      #|  IN((a : Cart[Real, _]), (s : (Cart[Real, _]) -> Bool)) \226\134\146 open(s) && has_derivative((f : (Cart[Real, _]) -> Cart[Real, _]), (f' : (Cart[Real, _]) -> Cart[Real, _]), within(at(a), s)) \226\134\146 has_derivative(f, f', at(a))
+      #|  (x : Cart[Real, Unit])
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (x : Cart[Real, Unit]) => o((f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, Unit])(op_pct(real_of_num(1) - drop(x), (a : Cart[Real, N])) + op_pct(drop(x), (b : Cart[Real, N]))), (x : Cart[Real, Unit]) => op_pct(drop(x), b - a))
+      #|  o((f : (Cart[Real, N]) -> Cart[Real, Unit]), (x : Cart[Real, Unit]) => op_pct(real_of_num(1) - drop(x), (a : Cart[Real, N])) + op_pct(drop(x), (b : Cart[Real, N])))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Unit], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, Unit], \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], !(a == b) && continuous_on(f, segment([(a, b)])) && (\226\136\128 x : Cart[Real, N], IN(x, segment((a, b))) \226\134\146 has_derivative(f, f'(x), within(at(x), segment((a, b))))) \226\134\146 (\226\136\131 c : Cart[Real, N], IN(c, segment((a, b))) && f(b) - f(a) == f'(c, b - a))
+      #|  min(dist(((x : Cart[Real, N]), (a : Cart[Real, N]))), dist((x, (b : Cart[Real, N]))))
+      #|  dist(((a : Cart[Real, N]), (b : Cart[Real, N])))
+      #|  (x : Cart[Real, N]) == (a : Cart[Real, N]) || x == (b : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, Unit])((x : Cart[Real, N]))
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Unit], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, Unit], \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], !(a == b) && (\226\136\128 x : Cart[Real, N], IN(x, segment([(a, b)])) \226\134\146 has_derivative(f, f'(x), within(at(x), segment((a, b))))) \226\134\146 (\226\136\131 c : Cart[Real, N], IN(c, segment((a, b))) && f(b) - f(a) == f'(c, b - a))
+      #|  norm((f : (Cart[Real, Unit]) -> Cart[Real, N])((b : Cart[Real, Unit])) - f((a : Cart[Real, Unit])))
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, N])((b : Cart[Real, Unit])) == f((a : Cart[Real, Unit]))
+      #|  (x : Cart[Real, Unit])
+      #|  (b : Cart[Real, Unit])
+      #|  (a : Cart[Real, Unit])
+      #|  (x : Cart[Real, Unit]) => (t : Cart[Real, Unit]) => lift(dot((f : (Cart[Real, Unit]) -> Cart[Real, N])((b : Cart[Real, Unit])) - f((a : Cart[Real, Unit])), (f' : (Cart[Real, Unit], Cart[Real, Unit]) -> Cart[Real, N])(x, t)))
+      #|  o(o(lift, (y : Cart[Real, N]) => dot((f : (Cart[Real, Unit]) -> Cart[Real, N])((b : Cart[Real, Unit])) - f((a : Cart[Real, Unit])), y)), f)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, Unit], Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], drop(a) < drop(b) && continuous_on(f, interval([(a, b)])) && (\226\136\128 x : Cart[Real, Unit], IN(x, interval((a, b))) \226\134\146 has_derivative(f, f'(x), at(x))) \226\134\146 (\226\136\131 x : Cart[Real, Unit], IN(x, interval((a, b))) && norm(f(b) - f(a)) <= norm(f'(x, b - a)))
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (IN : (Cart[Real, Unit], (Cart[Real, Unit]) -> Bool) -> Bool)((a : Cart[Real, Unit]), (interval : ((Cart[Real, Unit], Cart[Real, Unit]), Cart[Real, Unit]) -> Bool)(((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1)))) && (open : ((Cart[Real, Unit]) -> Bool) -> Bool)((interval : ((Cart[Real, Unit], Cart[Real, Unit]), Cart[Real, Unit]) -> Bool)(((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))))
+      #|  (a : Cart[Real, Unit])
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (x : Cart[Real, _]) + op_pct(real_of_num(1), (y : Cart[Real, _]) - x) == y
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (u : Cart[Real, Unit]) => o((f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M]) + op_pct(drop(u), (y : Cart[Real, M]) - x)), (u : Cart[Real, Unit]) => vec(0) + op_pct(drop(u), y - x))
+      #|  o((f : (Cart[Real, M]) -> Cart[Real, N]), (u : Cart[Real, Unit]) => (x : Cart[Real, M]) + op_pct(drop(u), (y : Cart[Real, M]) - x))
+      #|  \226\136\128 u : Cart[Real, Unit], IN(u, interval((vec(0), vec(1)))) \226\134\146 IN((x : Cart[Real, M]) + op_pct(drop(u), (y : Cart[Real, M]) - x), (s : (Cart[Real, M]) -> Bool))
+      #|  (x : Cart[Real, _]) + op_pct((u : Real), (y : Cart[Real, _]) - x) == op_pct(real_of_num(1) - u, x) + op_pct(u, y)
+      #|  \226\136\128 u : Cart[Real, Unit], IN(u, interval([(vec(0), vec(1))])) \226\134\146 IN((x : Cart[Real, M]) + op_pct(drop(u), (y : Cart[Real, M]) - x), (s : (Cart[Real, M]) -> Bool))
+      #|  \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], IN(x, (s : (Cart[Real, M]) -> Bool)) \226\134\146 norm((f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])(x, y)) <= (B : Real) * norm(y)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 B : Real, convex(s) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 has_derivative(f, f'(x), within(at(x), s))) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 onorm(f'(x)) <= B) \226\134\146 (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], IN(x, s) && IN(y, s) \226\134\146 norm(f(x) - f(y)) <= B * norm(x - y))
+      #|  abs((g : Real)) <= (x : Real) * (h : Real) \226\134\146 (u : Real) <= (v : Real) && abs(u - v - ((f : Real) - g)) < ((b : Real) - x) * h \226\134\146 f <= b * h
+      #|  (h : Cart[Real, M])
+      #|  real_of_num(1)
+      #|  (b : Real) - onorm((g' : (Cart[Real, M]) -> Cart[Real, P]))
+      #|  (y : Cart[Real, M])
+      #|  op_minus_minus_gt((y : Cart[Real, M]) => op_pct(inv(norm(y - (x : Cart[Real, M]))), lift(norm((f : (Cart[Real, M]) -> Cart[Real, N])(y) - f(x)) - norm((g : (Cart[Real, M]) -> Cart[Real, P])(y) - g(x)) - (norm((f' : (Cart[Real, M]) -> Cart[Real, N])(y - x)) - norm((g' : (Cart[Real, M]) -> Cart[Real, P])(y - x))))), vec(0), at(x))
+      #|  (b : Real)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, P], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, M]) -> Cart[Real, P], \226\136\128 x : Cart[Real, M], has_derivative(f, f', at(x)) && has_derivative(g, g', at(x)) && eventually((y : Cart[Real, M]) => norm(f(y) - f(x)) <= norm(g(y) - g(x)), at(x)) \226\134\146 onorm(f') <= onorm(g')
       #|  :real
       #|  :real
       #|  :real
-      #|  y - x <= B * e + D * e ==> x < e ==> y < (B + D + &1) * e
-      #|  f' u = inv(norm(y - x:real^M)) % norm(y - x) % (f':real^M->real^N) u
-      #|  lift(norm(y - x:real^M))
-      #|  u:real^M
-      #|  (B + D + &1) * e / (B + D + &1) * norm(y - x:real^M)
-      #|  u:real^M
-      #|  inv(norm(y - x)) % (y - x):real^M
-      #|  y:real^M
-      #|  min r (inf (IMAGE (d:real^M->real) k))
-      #|  d:real^M->real
-      #|  &0 < B /\\ &0 < D ==> &0 < B + D + &1
-      #|  e / (B + D + &1)
-      #|  k:real^M->bool = {}
-      #|  k:real^M->bool
-      #|  &0 < B /\\ &0 < D ==> &0 < B + D + &1
-      #|  e / (B + D + &1)
-      #|  sphere(vec 0:real^M,&1)
-      #|  e:real
-      #|  D:real
-      #|  r:real
-      #|  x:real^M
-      #|  forall f:real^M->real^N f' x s.\n        x IN s /\\ open s /\\\n        (?B. forall u v. u IN s /\\ v IN s ==> norm(f u - f v) <= B * norm(u - v)) /\\\n        linear f' /\\\n        (forall y. ((\\t. inv(drop t) % (f(x + drop t % y) - f(x))) --> f' y)\n             (at (vec 0)))\n        ==> (f has_derivative f') (at x)
-      #|  (u1:real^N->bool) IN U
-      #|  (min t0 t1) / &2
-      #|  z:real^N
-      #|  (min t0 t1) / &2
-      #|  t1:real
-      #|  (?w. open w /\\ (?t0. P t0 /\\ forall t. R t t0 ==> f t IN w) /\\\n         w SUBSET u)\n    ==> ?t0. P t0 /\\ forall t. R t t0 ==> f t IN u
-      #|  ball(a:real^N,dd)
-      #|  (?x t. P t /\\ A t /\\ B x /\\ R x t)\n    ==> (forall t x. P t /\\ R x t ==> Q x t)\n        ==> (?t x. P t /\\ A t /\\ B x /\\ Q x t)
-      #|  &0 < t ==> abs t = t
-      #|  &0 < n ==> l / n * t * n = l * t
-      #|  a + t % --h:real^N = a - t % h
-      #|  b - (f:real^N->real^N) a = --(f a - b)
-      #|  a + b:real^N = c <=> c - a = b
-      #|  a:real^N = a + x <=> x = vec 0
-      #|  (forall t. P t) ==> (forall t. &0 < t ==> P t)
-      #|  b INTER {x | x IN s /\\ f x = y} SUBSET c <=>\n    forall x. x IN b /\\ x IN s /\\ y = f x ==> x IN c
-      #|  (f:real^N->real^N)(a) + t % (b - f a)
-      #|  t:real
-      #|  dd:real
-      #|  l / norm((f:real^N->real^N) a - b)
-      #|  a:real^N
-      #|  z:real^N
-      #|  s INTER IMAGE f t = {} <=> forall x. x IN t ==> ~(f x IN s)
-      #|  (u1:real^N->bool) IN U
-      #|  (forall x. x IN t2 ==> f x IN s1) /\\\n        ~(t2 INTER {x | x IN t1 /\\ f x IN s2} = {})\n        ==> ~((s1 INTER s2) INTER IMAGE f (t1 INTER t2) = {})
-      #|  closure(ball(a:real^N,q))
-      #|  (u1:real^N->bool) IN U
-      #|  IMAGE (f:real^N->real^N) (ball(a,q) INTER u1)
-      #|  &0 < t ==> abs t = t
-      #|  n <= e /\\ x * n < &1 * n ==> x * n < e
-      #|  b - a - t % (b - a):real^N = (&1 - t) % (b - a)
-      #|  dist(b:real^N,a + x) = norm((b - a) - x)
       #|  :real
       #|  :real
-      #|  t:real
-      #|  min (&1) ((dd * q) / norm(b - (f:real^N->real^N) a))
-      #|  dist(a:real^N,a + x) = norm x
       #|  :real
       #|  :real
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  vv:real^N->bool
-      #|  vv = ball(b,e) INTER ball((f:real^N->real^N) a,dd * q)
-      #|  q:real
-      #|  cball(a:real^N,rr)
-      #|  b SUBSET c /\\ b' SUBSET c' /\\ c' SUBSET s /\\ c SUBSET v\n        ==> (b INTER b' SUBSET v /\\ b INTER b' SUBSET s) /\\\n             c INTER c' SUBSET s
-      #|  r / &2 < r <=> &0 < r
-      #|  min q (rr / &2)
-      #|  q:real
-      #|  a:real^N
-      #|  v:real^N->bool
-      #|  ?q. &0 < q /\\ q < rr /\\ ball(a:real^N,q) SUBSET v INTER s /\\\n                      cball(a,q) SUBSET s
-      #|  dd:real
-      #|  rr:real
-      #|  a:real^N
-      #|  v:real^N->bool
-      #|  forall w. open w /\\ a IN w\n        ==> ?w'. open w' /\\\n                 (?t1. &0 < t1 /\\\n                       forall t. &0 < t /\\ t < t1 ==> (f(a) + t % (b - f a)) IN w') /\\\n                 w' SUBSET IMAGE (f:real^N->real^N) (u1 INTER w)
-      #|  z IN u <=> (z INSERT u) SUBSET u
-      #|  a:real^N
-      #|  u1:real^N->bool
-      #|  u0:real^N->bool
-      #|  {x | x IN s /\\ (f:real^N->real^N) x IN ball (b,e)}
-      #|  (u1:real^N->bool) IN U
-      #|  ~((f:real^N->real^N) a = b)
-      #|  (a:real^N) IN s
-      #|  {x | x IN s /\\ (f:real^N->real^N) x IN ball(b,e)}
-      #|  z IN u1\n        ==> ~(u1 = u0) /\\ (u0 INTER u1 = {} <=> ~(u0 = u1))\n        ==> ~(z IN u0)
-      #|  norm(a - z - h:real^N) = norm(z - (a - h))
+      #|  :real
+      #|  real_of_num(0)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (x : Cart[Real, M]) => (h : Cart[Real, M]) => (vec : (Num) -> Cart[Real, N])(0)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, convex(s) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 has_derivative(f, (h : Cart[Real, M]) => vec(0), within(at(x), s))) \226\134\146 (\226\136\131 c : Cart[Real, N], \226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 f(x) == c)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 a : Cart[Real, _], \226\136\128 c : Cart[Real, _], convex(s) && IN(a, s) && f(a) == c && (\226\136\128 x : Cart[Real, _], IN(x, s) \226\134\146 has_derivative(f, (h : Cart[Real, _]) => vec(0), within(at(x), s))) \226\134\146 (\226\136\128 x : Cart[Real, _], IN(x, s) \226\134\146 f(x) == c)
+      #|  ball(((x : Cart[Real, M]), (e : Real)))
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (e : Real)
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M])
+      #|  {(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && (f : (Cart[Real, M]) -> Cart[Real, N])(x) == f((a : Cart[Real, M]))}
+      #|  (a : Cart[Real, M])
+      #|  (s : (Cart[Real, M]) -> Bool) == {}
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, open(s) && connected(s) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 has_derivative(f, (h : Cart[Real, M]) => vec(0), at(x))) \226\134\146 (\226\136\131 c : Cart[Real, N], \226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 f(x) == c)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 a : Cart[Real, _], \226\136\128 c : Cart[Real, _], open(s) && connected(s) && IN(a, s) && f(a) == c && (\226\136\128 x : Cart[Real, _], IN(x, s) \226\134\146 has_derivative(f, (h : Cart[Real, _]) => vec(0), at(x))) \226\134\146 (\226\136\128 x : Cart[Real, _], IN(x, s) \226\134\146 f(x) == c)
+      #|  inv((x : Real)) * (y : Real) == y / x
+      #|  op_pct((c : Real), (p : Cart[Real, N]) - p) - (v : Cart[Real, N]) == -v
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  op_pct((c : Real), (y : Cart[Real, N]) - ((x : Cart[Real, N]) + (d : Cart[Real, N]))) == op_pct(c, y - x) - op_pct(c, d)
+      #|  (B : Real)
+      #|  has_derivative((f : (Cart[Real, N]) -> Cart[Real, N]), (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((x0 : Cart[Real, N])), within(at(x0), (s : (Cart[Real, N]) -> Bool)))
+      #|  (B : Real)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((x0 : Cart[Real, N]))
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (x0 : Cart[Real, N])
+      #|  continuous_on((f : (Cart[Real, N]) -> Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  o((f : (Cart[Real, N]) -> Cart[Real, N]), (x : (Num) -> Cart[Real, N]))
+      #|  sequentially
+      #|  (x : (Num) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])((x0 : Cart[Real, N])) == (y : Cart[Real, N])
+      #|  (x0 : Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 y : Cart[Real, N], (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(f, f'(x), within(at(x), s))) && (\226\136\128 x : Cart[Real, N], IN(x, s) && f(x) == y \226\134\146 !(det(matrix(f'(x))) == real_of_num(0))) \226\134\146 {(l : Cart[Real, N]) | IN(l, s) && limit_point_of(l, {(x : Cart[Real, N]) | IN(x, s) && f(x) == y})} == {}
+      #|  (l : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (_) -> Bool, {(x : _) | IN(x, s) && (P : (_) -> Bool)(x)} == {} && (\226\136\128 x : _, P(x) \226\134\146 IN(x, s)) \226\134\146 {(x : _) | P(x)} == {}
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 y : Cart[Real, N], closed(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(f, f'(x), within(at(x), s))) && (\226\136\128 x : Cart[Real, N], IN(x, s) && f(x) == y \226\134\146 !(det(matrix(f'(x))) == real_of_num(0))) \226\134\146 {(l : Cart[Real, N]) | limit_point_of(l, {(x : Cart[Real, N]) | IN(x, s) && f(x) == y})} == {}
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (R : (_) -> Bool)(x)} == {} \226\134\146 {(x : _) | (P(x) && (Q : (_) -> Bool)(x)) && R(x)} == {}
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 y : Cart[Real, N], (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(f, f'(x), within(at(x), s))) && (\226\136\128 x : Cart[Real, N], IN(x, s) && f(x) == y \226\134\146 !(det(matrix(f'(x))) == real_of_num(0))) \226\134\146 COUNTABLE({(x : Cart[Real, N]) | IN(x, s) && f(x) == y})
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 y : Cart[Real, N], compact(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(f, f'(x), within(at(x), s))) && (\226\136\128 x : Cart[Real, N], IN(x, s) && f(x) == y \226\134\146 !(det(matrix(f'(x))) == real_of_num(0))) \226\134\146 FINITE({(x : Cart[Real, N]) | IN(x, s) && f(x) == y})
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  {(x : _) | IN(x, (s : (_) -> Bool)) && (f : (_) -> _)(x) == (y : _)} == {(x : _) | IN(x, {(x : _) | IN(x, s) && f(x) == y}) && f(x) == y}
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 y : Cart[Real, N], compact({(x : Cart[Real, N]) | IN(x, s) && f(x) == y}) && (\226\136\128 x : Cart[Real, N], IN(x, s) && f(x) == y \226\134\146 has_derivative(f, f'(x), within(at(x), s))) && (\226\136\128 x : Cart[Real, N], IN(x, s) && f(x) == y \226\134\146 !(det(matrix(f'(x))) == real_of_num(0))) \226\134\146 FINITE({(x : Cart[Real, N]) | IN(x, s) && f(x) == y})
+      #|  (e : Real) * (inv((B : Real)) / (C : Real)) * (n : Real) == n / B * e / C
+      #|  norm((g' : (Cart[Real, N]) -> Cart[Real, M])((f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M])) - f((a : Cart[Real, M])) - (f' : (Cart[Real, M]) -> Cart[Real, N])(x - a)))
+      #|  (B : Real) * norm((f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M])) - f((a : Cart[Real, M])))
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M])
+      #|  min((k : Real), (d : Real) / (B : Real))
+      #|  (d : Real)
+      #|  (e : Real) / ((B : Real) * (C : Real))
+      #|  (e : Real)
+      #|  norm((y : Cart[Real, N]) - (b : Cart[Real, N]) - (f' : Cart[Real, N])) <= (B : Real) / real_of_num(2) * norm((x : Cart[Real, M]) - (a : Cart[Real, M])) \226\134\146 norm(x - a) * B <= norm(f') \226\134\146 norm(y - b) >= B / real_of_num(2) * norm(x - a)
       #|  :real
       #|  :real
-      #|  &0 < x ==> abs x = x
-      #|  abs t
-      #|  a - &1 % (a - z):real^N = z
-      #|  t:real
-      #|  inv(t) % (a - z):real^N
-      #|  ?t z. &0 < t /\\ t < t0 /\\ z IN u1 /\\\n          norm(z - (a - t % h):real^N) < l * t
-      #|  (forall v. ~(s SUBSET {v})) ==> forall u. u IN s ==> ?v. v IN s /\\ ~(v = u)
-      #|  u0:real^N->bool
-      #|  ?u1:real^N->bool. u1 IN U /\\ ~(u1 = u0) /\\ a IN closure u1
-      #|  u0:real^N->bool
-      #|  ball(x:real^N,r)
-      #|  (u0:real^N->bool) IN U
-      #|  u0:real^N->bool
-      #|  t0:real
-      #|  l:real
-      #|  h:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  e:real
-      #|  k INTER  UNIONS {f x | x IN s DELETE a} = {}\n        ==> k INTER (UNIONS {f x | x IN s} DIFF f a) = {}
-      #|  k INTER (t DIFF s) = {}\n        ==> ~(k SUBSET s) ==> k SUBSET t ==> F
-      #|  ~((k:real^N->bool) SUBSET closure u)
-      #|  k SUBSET UNIONS {closure u:real^N->bool | u IN U}
-      #|  s INTER t INTER k = {} <=>\n        (k INTER s) INTER (k INTER t) = {}
-      #|  x IN s ==> x INSERT (s DELETE x) = s
-      #|  closure(UNIONS (U DELETE u)):real^N->bool
-      #|  closure u:real^N->bool
-      #|  k:real^N->bool
-      #|  u:real^N->bool
-      #|  k SUBSET UNIONS {f u | u IN U}\n      ==> ~(k = {}) ==> ?u. u IN U /\\ ~(k INTER f u = {})
-      #|  ~(pairwise (\\u v:real^N->bool.\n           DISJOINT (k INTER closure u) (k INTER closure v)) U)
-      #|  ?a:real^N. a IN k /\\ forall v. ~({u | u IN U /\\ a IN closure u} SUBSET {v})
-      #|  norm((f:real^N->real^N) q - b)
-      #|  q:real^N
-      #|  b:real^N
-      #|  IMAGE (f:real^N->real^N) (path_image g)
-      #|  ball(x:real^N,r)
-      #|  path_image g:real^N->bool
-      #|  g:real^1->real^N
-      #|  z IN u <=> (z INSERT u) SUBSET u
-      #|  z2:real^N
-      #|  z1:real^N
-      #|  path_connected(u:real^N->bool)
-      #|  (u:real^N->bool) IN U
-      #|  u:real^N->bool
-      #|  forall u:real^N->bool. u IN U ==> ~(k SUBSET closure u)
-      #|  {f x | x IN {}} = {}
-      #|  U:(real^N->bool)->bool = {}
-      #|  c:real^N->bool
-      #|  ball(x:real^N,r)
-      #|  c:real^N->bool
-      #|  c:real^N->bool
-      #|  t0:real
-      #|  l:real
-      #|  h:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  e:real
-      #|  (a:real^N) IN s
-      #|  a:real^N
-      #|  k SUBSET UNIONS {closure u:real^N->bool | u IN U}
-      #|  (p /\\ x) /\\ (q /\\ y) /\\ r ==> (p /\\ q) /\\ r
-      #|  r:real
-      #|  x:real^N
-      #|  (IN):real^N->(real^N->bool)->bool
-      #|  f':real^N->real^N->real^N
-      #|  FINITE {z | z IN cball(x,r) /\\ (f:real^N->real^N) z = b}
-      #|  FINITE(U:(real^N->bool)->bool)
-      #|  b:real^N
-      #|  u:real^N->bool
-      #|  (forall x. x IN s ==> f x IN t) ==> (u DIFF t) INTER IMAGE f s = {}
-      #|  ball(b:real^N,e)
-      #|  u:real^N->bool
-      #|  closure(ball(x:real^N,r))
-      #|  closure(u:real^N->bool) SUBSET s
-      #|  u SUBSET ball(x:real^N,r)
-      #|  forall u. u IN U ==> ~(u INTER {x | x IN s /\\ (f:real^N->real^N) x = b} = {})
-      #|  u':real^N->bool
-      #|  u:real^N->bool
-      #|  u:real^N->bool = u'
-      #|  open(u:real^N->bool) /\\ open(u':real^N->bool)
-      #|  u':real^N->bool
-      #|  z IN UNIONS(components\n           {x | x IN s /\\ (f:real^N->real^N) x IN ball (b,e)})
-      #|  (z:real^N) IN frontier u
-      #|  (z:real^N) IN closure u
-      #|  (z:real^N) IN s
-      #|  e:real
-      #|  b:real^N
-      #|  IMAGE f s SUBSET t ==> z IN s ==> f z IN t
-      #|  (z:real^N) IN closure u
-      #|  closure(ball(x:real^N,r))
-      #|  closure(u:real^N->bool) SUBSET s
-      #|  forall u z. u IN U /\\ z IN frontier u ==> (f:real^N->real^N) z IN sphere(b,e)
-      #|  forall u. u IN U ==> u SUBSET ball(x:real^N,r)
-      #|  U = {c | c IN components\n                         {x | x IN s /\\ (f:real^N->real^N) x IN ball(b,e)} /\\\n                       ~(c INTER ball(x,r) = {})}
-      #|  z1:real^N
-      #|  k SUBSET ball(x:real^N,r)
-      #|  (f:real^N->real^N) z1 = b
-      #|  (f:real^N->real^N) z1
-      #|  forall fz1. e <= &2 / &3 * dr /\\ norm(fz - fz1) <= e /\\\n            dist(fx,fz1) < dr / &3\n            ==> norm(fz - fx:real^N) < dr
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M])
+      #|  (e : Real)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  (B : Real) / real_of_num(2)
+      #|  real_of_num(0) < real_of_num(2)
+      #|  real_of_num(2) / (B : Real)
+      #|  (B : Real)
+      #|  (f' : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\131 B : Real, \226\136\131 k : Real, real_of_num(0) < B && real_of_num(0) < k && (\226\136\128 x : Cart[Real, M], IN(x, (s : (Cart[Real, M]) -> Bool)) && norm((f : (Cart[Real, M]) -> Cart[Real, N])(x) - f((a : Cart[Real, M]))) < k \226\134\146 norm(x - a) <= B * norm(f(x) - f(a)))
+      #|  (C : Real)
+      #|  (g' : (Cart[Real, N]) -> Cart[Real, M])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 g' : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 a : Cart[Real, M], IN(a, s) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 g(f(x)) == x) && has_derivative(f, f', within(at(a), s)) && linear(g') && o(g', f') == I && continuous(g, within(at(f(a)), IMAGE(f, s))) \226\134\146 has_derivative(g, g', within(at(f(a)), IMAGE(f, s)))
+      #|  :real
+      #|  (e : Real) / (B : Real) * norm((g : (Cart[Real, N]) -> Cart[Real, M])((z : Cart[Real, N])) - g((y : Cart[Real, N])))
+      #|  (z : Cart[Real, N])
+      #|  (k : Real)
+      #|  (d' : Real)
+      #|  (d : Real)
+      #|  (d' : Real)
+      #|  (e : Real) / (B : Real)
+      #|  (e : Real)
+      #|  norm((dg : Cart[Real, _])) <= norm((dg' : Cart[Real, _])) + norm(dg - dg') && real_of_num(2) * (real_of_num(1) - (h : Real)) * norm(dg) == real_of_num(1) * norm(dg) && norm(dg') <= (c : Real) * norm((d : Cart[Real, _])) \226\134\146 norm(dg - dg') <= h * norm(dg) \226\134\146 norm(dg) <= real_of_num(2) * c * norm(d)
+      #|  (z : Cart[Real, N])
+      #|  (d : Real)
+      #|  real_of_num(1) / real_of_num(2)
+      #|  real_of_num(2) * (C : Real)
+      #|  \226\136\131 B : Real, \226\136\131 d : Real, real_of_num(0) < B && real_of_num(0) < d && (\226\136\128 z : Cart[Real, N], norm(z - (y : Cart[Real, N])) < d \226\134\146 norm((g : (Cart[Real, N]) -> Cart[Real, M])(z) - g(y)) <= B * norm(z - y))
+      #|  -((gz : Cart[Real, N]) - (gy : Cart[Real, N]) - ((z : Cart[Real, N]) - (y : Cart[Real, N]))) == z - y - (gz - gy)
+      #|  norm((g' : (Cart[Real, N]) -> Cart[Real, M])((f : (Cart[Real, M]) -> Cart[Real, N])((g : (Cart[Real, N]) -> Cart[Real, M])((z : Cart[Real, N]))) - (y : Cart[Real, N]) - (f' : (Cart[Real, M]) -> Cart[Real, N])(g(z) - g(y))))
+      #|  (C : Real) * norm((f : (Cart[Real, M]) -> Cart[Real, N])((g : (Cart[Real, N]) -> Cart[Real, M])((z : Cart[Real, N]))) - (y : Cart[Real, N]) - (f' : (Cart[Real, M]) -> Cart[Real, N])(g(z) - g(y)))
+      #|  (C : Real) * ((e : Real) / C * norm((g : (Cart[Real, N]) -> Cart[Real, M])((z : Cart[Real, N])) - g((y : Cart[Real, N]))))
+      #|  (z : Cart[Real, N])
+      #|  (d : Real)
+      #|  (d2 : Real)
+      #|  (d1 : Real)
+      #|  (d2 : Real)
+      #|  (y : Cart[Real, N])
+      #|  (d1 : Real)
+      #|  (d0 : Real)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, M])((z : Cart[Real, N]))
+      #|  (z : Cart[Real, N])
+      #|  (d0 : Real)
+      #|  (e : Real) / (C : Real)
+      #|  (e : Real)
+      #|  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 z : Cart[Real, N], norm(z - (y : Cart[Real, N])) < d \226\134\146 norm((g : (Cart[Real, N]) -> Cart[Real, M])(z) - g(y) - (g' : (Cart[Real, N]) -> Cart[Real, M])(z - y)) <= e * norm(g(z) - g(y))))
+      #|  (C : Real)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 y : Cart[Real, N], has_derivative(f, f', at(g(y))) && linear(g') && o(g', f') == I && continuous(g, at(y)) && open(t) && IN(y, t) && (\226\136\128 z : Cart[Real, N], IN(z, t) \226\134\146 f(g(z)) == z) \226\134\146 has_derivative(g, g', at(y))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, M], has_derivative(f, f', at(x)) && linear(g') && o(g', f') == I && continuous(g, at(f(x))) && g(f(x)) == x && open(t) && IN(f(x), t) && (\226\136\128 y : Cart[Real, N], IN(y, t) \226\134\146 f(g(y)) == y) \226\134\146 has_derivative(g, g', at(f(x)))
+      #|  IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), (s : (Cart[Real, M]) -> Bool))
+      #|  (f' : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, open(s) && open(IMAGE(f, s)) && continuous_on(f, s) && continuous_on(g, IMAGE(f, s)) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 g(f(x)) == x) \226\134\146 (\226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 x : Cart[Real, M], IN(x, s) && has_derivative(f, f', at(x)) && linear(g') && o(g', f') == I \226\134\146 has_derivative(g, g', at(f(x))))
+      #|  interior(IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), (s : (Cart[Real, M]) -> Bool)))
+      #|  (f' : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 x : Cart[Real, M], compact(s) && IN(x, s) && IN(f(x), interior(IMAGE(f, s))) && continuous_on(f, s) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 g(f(x)) == x) && has_derivative(f, f', at(x)) && linear(g') && o(g', f') == I \226\134\146 has_derivative(g, g', at(f(x)))
+      #|  ((f : (Cart[Real, N]) -> Cart[Real, N])((y : Cart[Real, N])) == (x : Cart[Real, N])) == (x + (y - f(y)) == y)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, compact(t) && convex(t) && !(t == {}) && continuous_on(f, t) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, t) \226\134\146 IN(x + (y - f(y)), t)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 (\226\136\131 y : Cart[Real, N], IN(y, t) && f(y) == x))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 e : Real, real_of_num(0) < e && continuous_on(f, cball((a, e))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, cball((a, e))) \226\134\146 IN(x + (y - f(y)), cball((a, e)))) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 (\226\136\131 y : Cart[Real, N], IN(y, cball((a, e))) && f(y) == x))
+      #|  (B : Real) * norm((z : Cart[Real, N]) - (f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M])))
+      #|  (x : Cart[Real, N]) - (x + (y : Cart[Real, N])) == -y
+      #|  (x : Cart[Real, M]) + (g' : (Cart[Real, N]) -> Cart[Real, M])((z : Cart[Real, N]) - (f : (Cart[Real, M]) -> Cart[Real, N])(x))
+      #|  (z : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (B : Real) * norm((z : Cart[Real, N]) - (f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M])))
+      #|  (real_of_num(1) / real_of_num(2) * (b : Real) * (x : Real) <= (e : Real) * (real_of_num(1) / real_of_num(2))) == (x * b <= e)
+      #|  ((e : Real) / real_of_num(2) <= e - (x : Real)) == (x <= e / real_of_num(2))
+      #|  (e : Real) / real_of_num(2)
+      #|  (x : Real) <= (a : Real) \226\134\146 (y : Real) <= (b : Real) - a \226\134\146 x + y <= b
+      #|  norm((f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M]) + (g' : (Cart[Real, N]) -> Cart[Real, M])((z : Cart[Real, N]) - f(x))) - z) + norm(f(x) - (y : Cart[Real, N]))
+      #|  (f0 : Cart[Real, N]) - ((y : Cart[Real, N]) + ((z : Cart[Real, N]) - (f1 : Cart[Real, N]))) == f1 - z + (f0 - y)
+      #|  (a : Cart[Real, N]) - (b : Cart[Real, N]) - ((c : Cart[Real, N]) - b) == a - c
+      #|  (B : Real) * norm((z : Cart[Real, N]) - (f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M])))
+      #|  (x : Cart[Real, M]) + (g' : (Cart[Real, N]) -> Cart[Real, M])((z : Cart[Real, N]) - (f : (Cart[Real, M]) -> Cart[Real, N])(x))
+      #|  (z : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (B : Real) * norm((y : Cart[Real, N]) - (f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M])))
+      #|  (x : Cart[Real, N]) - (x + (y : Cart[Real, N])) == -y
+      #|  (y : Cart[Real, N])
+      #|  cball(((x : Cart[Real, M]), (e1 : Real)))
+      #|  (e : Real)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M]))
+      #|  cball(((f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M])), (e : Real) / real_of_num(2)))
+      #|  (y : Cart[Real, N]) => (f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M]) + (g' : (Cart[Real, N]) -> Cart[Real, M])(y - f(x)))
+      #|  (e : Real)
+      #|  (e1 : Real) / (B : Real)
+      #|  (e0 : Real) / (B : Real)
+      #|  (e1 : Real)
+      #|  (e0 : Real)
+      #|  real_of_num(1) / (real_of_num(2) * (B : Real))
+      #|  (B : Real)
+      #|  linear((g' : (Cart[Real, N]) -> Cart[Real, M]))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 x : Cart[Real, M], open(s) && continuous_on(f, s) && IN(x, s) && has_derivative(f, f', at(x)) && linear(g') && o(f', g') == I \226\134\146 (\226\136\128 t : (Cart[Real, M]) -> Bool, SUBSET(t, s) && IN(x, interior(t)) \226\134\146 IN(f(x), interior(IMAGE(f, t))))
+      #|  (e : Real) / real_of_num(2)
+      #|  (x : Cart[Real, M])
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (g' : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, M])((x : Cart[Real, M]))
+      #|  (f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M]))
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (x : Cart[Real, M])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, open(s) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 has_derivative(f, f'(x), at(x)) && linear(g'(x)) && o(f'(x), g'(x)) == I) \226\134\146 open(IMAGE(f, s))
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, open(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(f, f'(x), at(x)) && !(det(matrix(f'(x))) == real_of_num(0))) \226\134\146 open(IMAGE(f, s))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(f, f'(x), within(at(x), s)) && !(det(matrix(f'(x))) == real_of_num(0))) && open(t) && SUBSET(t, s) \226\134\146 open(IMAGE(f, t))
+      #|  (y : Cart[Real, N])
+      #|  real_of_num(0) < (d : Real)
+      #|  (d : Real)
+      #|  INTER(ball(((x : Cart[Real, N]), (e : Real))), (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 t : (Cart[Real, N]) -> Bool, SUBSET(t, (s : (Cart[Real, N]) -> Bool)) && IN((x : Cart[Real, N]), interior(t)) \226\134\146 IN((f : (Cart[Real, N]) -> Cart[Real, N])(x), interior(IMAGE(f, t)))
+      #|  (e : Real)
+      #|  interior(IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (s : (Cart[Real, N]) -> Bool)))
+      #|  (f' : (Cart[Real, N]) -> Cart[Real, N])
+      #|  linear((g' : (Cart[Real, N]) -> Cart[Real, N])) && o(g', (f' : (Cart[Real, N]) -> Cart[Real, N])) == I
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], open(s) && IN(x, s) && continuous_on(f, s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 g(f(x)) == x) && has_derivative(f, f', at(x)) && o(f', g') == I \226\134\146 has_derivative(g, g', at(f(x)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f' : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 y : Cart[Real, N], open(s) && IN(g(y), s) && continuous_on(f, s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 g(f(x)) == x) && has_derivative(f, f', at(g(y))) && o(f', g') == I && f(g(y)) == y \226\134\146 has_derivative(g, g', at(y))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N]))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, open(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(f, (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x), at(x)) && (g : (Cart[Real, N]) -> Cart[Real, N])(f(x)) == x && o(f'(x), (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x)) == I) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(g, g'(x), at(f(x))))
+      #|  (a : Real) <= (e : Real) / real_of_num(2) * (h : Real) && (b : Real) <= e / real_of_num(2) * h \226\134\146 a + b <= e * h
+      #|  (f' : (Num, Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])((m : Num), (x : Cart[Real, M]), (h : Cart[Real, M])) - f'((n : Num), x, h) == f'(m, x, h) - (g' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])(x, h) + -(f'(n, x, h) - g'(x, h))
+      #|  (h : Cart[Real, M])
+      #|  \226\136\128 h : Cart[Real, M], norm((f' : (Num, Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])((m : Num), (x : Cart[Real, M]), h) - f'((n : Num), x, h)) <= (e : Real) * norm(h)
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M]) => (h : Cart[Real, M]) => (f' : (Num, Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])((m : Num), x, h) - f'((n : Num), x, h)
+      #|  (n : Num) >= (N : Num)
+      #|  (m : Num) >= (N : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (N : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 f : (Num, Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Num, Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], convex(s) && (\226\136\128 n : Num, \226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 has_derivative(f(n), f'(n, x), within(at(x), s))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : Cart[Real, M], \226\136\128 h : Cart[Real, M], n >= N && IN(x, s) \226\134\146 norm(f'(n, x, h) - g'(x, h)) <= e * norm(h))) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], m >= N && n >= N && IN(x, s) && IN(y, s) \226\134\146 norm(f(m, x) - f(n, x) - (f(m, y) - f(n, y))) <= e * norm(x - y)))
+      #|  norm((x : Cart[Real, _]) + ((y : Cart[Real, _]) + (z : Cart[Real, _]))) == norm((a : Cart[Real, _])) && norm(x + (y + z)) <= norm(x) + norm(y + z) && norm(y + z) <= norm(y) + norm(z) \226\134\146 norm(a) <= norm(x) + (norm(y) + norm(z))
+      #|  (d : Real) <= (a : Real) + ((b : Real) + (c : Real)) \226\134\146 a <= (e : Real) / real_of_num(3) * (n : Real) \226\134\146 b <= e / real_of_num(3) * n \226\134\146 c <= e / real_of_num(3) * n \226\134\146 d <= e * n
+      #|  (y : Cart[Real, M])
+      #|  (y : Cart[Real, M])
+      #|  (y : Cart[Real, M])
+      #|  (y : Cart[Real, M])
+      #|  (d1 : Real)
+      #|  (d1 : Real)
+      #|  (e : Real) / real_of_num(3)
+      #|  (m : Num) + (n : Num) >= m && m + n >= n
+      #|  (x : Cart[Real, M])
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (x : Cart[Real, M])
+      #|  (y : Cart[Real, M])
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (y : Cart[Real, M])
+      #|  (y : Cart[Real, M]) - (x : Cart[Real, M])
+      #|  (x : Cart[Real, M])
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (y : Cart[Real, M])
+      #|  (N2 : Num)
+      #|  (N1 : Num)
+      #|  (e : Real) / real_of_num(3)
+      #|  (e : Real) / real_of_num(3)
+      #|  (e : Real)
+      #|  (n : Num) => (f' : (Num, Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])(n, (x : Cart[Real, M]), op_pct((c : Real), (u : Cart[Real, M]))) - op_pct(c, f'(n, x, u))
+      #|  (n : Num) => (f' : (Num, Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])(n, (x : Cart[Real, M]), (u : Cart[Real, M]) + (v : Cart[Real, M])) - (f'(n, x, u) + f'(n, x, v))
+      #|  sequentially
+      #|  (u : Cart[Real, M])
+      #|  (c : Real)
+      #|  (v : Cart[Real, M])
+      #|  (u : Cart[Real, M])
+      #|  real_of_num(0) < (e : Real)
+      #|  (u : Cart[Real, M])
+      #|  (x : Cart[Real, M])
+      #|  (e : Real) / real_of_num(2) / norm((u : Cart[Real, M]))
+      #|  (e : Real)
+      #|  (u : Cart[Real, M]) == vec(0)
+      #|  \226\136\128 u : Cart[Real, M], op_minus_minus_gt((n : Num) => (f' : (Num, Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])(n, (x : Cart[Real, M]), u), (g' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])(x, u), sequentially)
+      #|  (x : Cart[Real, N]) - (y : Cart[Real, N]) - ((u : Cart[Real, N]) - (v : Cart[Real, N])) == x - u - (y - v)
+      #|  (N : Num)
+      #|  (m : Num) => (f : (Num, Cart[Real, M]) -> Cart[Real, N])((n : Num), (u : Cart[Real, M])) - f(n, (v : Cart[Real, M])) - (f(m, u) - f(m, v))
+      #|  sequentially
+      #|  (v : Cart[Real, M])
+      #|  (u : Cart[Real, M])
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (v : Cart[Real, M])
+      #|  (u : Cart[Real, M])
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], n >= N && IN(x, (s : (Cart[Real, M]) -> Bool)) && IN(y, s) \226\134\146 norm((f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x) - f(n, y) - ((g : (Cart[Real, M]) -> Cart[Real, N])(x) - g(y))) <= e * norm(x - y))
+      #|  (x : Cart[Real, M])
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (x0 : Cart[Real, M])
+      #|  (x : Cart[Real, M])
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (f : (Num, Cart[Real, M]) -> Cart[Real, N])((m : Num), (x : Cart[Real, M])) - f((n : Num), x) == f(m, x) - f(n, x) - (f(m, (x0 : Cart[Real, M])) - f(n, x0)) + (f(m, x0) - f(n, x0))
+      #|  (m : Num) >= (N1 : Num) + (N2 : Num) \226\134\146 m >= N1 && m >= N2
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (N2 : Num)
+      #|  (e : Real) / real_of_num(2) / norm((x : Cart[Real, M]) - (x0 : Cart[Real, M]))
+      #|  (N1 : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  (x : Cart[Real, M]) == (x0 : Cart[Real, M])
+      #|  (e : Real)
+      #|  (x : Cart[Real, M])
+      #|  \226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], IN(x, (s : (Cart[Real, M]) -> Bool)) \226\134\146 op_minus_minus_gt((n : Num) => (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x), g(x), sequentially)
+      #|  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], m >= N && n >= N && IN(x, (s : (Cart[Real, M]) -> Bool)) && IN(y, s) \226\134\146 norm((f : (Num, Cart[Real, M]) -> Cart[Real, N])(m, x) - f(n, x) - (f(m, y) - f(n, y))) <= e * norm(x - y))
+      #|  (x0 : Cart[Real, M])
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 f : (Num, Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Num, Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], convex(s) && (\226\136\128 n : Num, \226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 has_derivative(f(n), f'(n, x), within(at(x), s))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : Cart[Real, M], \226\136\128 h : Cart[Real, M], n >= N && IN(x, s) \226\134\146 norm(f'(n, x, h) - g'(x, h)) <= e * norm(h))) && (\226\136\131 x : Cart[Real, M], \226\136\131 l : Cart[Real, N], IN(x, s) && op_minus_minus_gt((n : Num) => f(n, x), l, sequentially)) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 op_minus_minus_gt((n : Num) => f(n, x), g(x), sequentially) && has_derivative(g, g'(x), within(at(x), s)))
+      #|  (a : Cart[Real, N]) + ((b : Cart[Real, N]) - a) == b
+      #|  (f : (Num, Cart[Real, M]) -> Cart[Real, N])(0, (a : Cart[Real, M]))
+      #|  (a : Cart[Real, M])
+      #|  (f' : (Num, Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])((n : Num), (x : Cart[Real, M])) == ((h : Cart[Real, M]) => f'(n, x, h) + vec(0))
+      #|  (g' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])
+      #|  (f' : (Num, Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])
+      #|  (n : Num) => (x : Cart[Real, M]) => (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x) + (f(0, (a : Cart[Real, M])) - f(n, a))
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (a : Cart[Real, M])
+      #|  (s : (Cart[Real, M]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 f : (Num, Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Num, Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], convex(s) && (\226\136\128 n : Num, \226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 has_derivative(f(n), f'(n, x), within(at(x), s))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : Cart[Real, M], \226\136\128 h : Cart[Real, M], n >= N && IN(x, s) \226\134\146 norm(f'(n, x, h) - g'(x, h)) <= e * norm(h))) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 has_derivative(g, g'(x), within(at(x), s)))
+      #|  inv(real_of_num((N : Num)))
+      #|  inv(real_of_num((n : Num)) + real_of_num(1)) * norm((h : Cart[Real, M]))
+      #|  (h : Cart[Real, M])
+      #|  (x : Cart[Real, M])
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (f' : (Num, Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])
+      #|  (f : (Num, Cart[Real, M]) -> Cart[Real, N])
+      #|  convex((s : (Cart[Real, M]) -> Bool))
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+      #|  inv(real_of_num((n : Num)) + real_of_num(1))
+      #|  (n : Num)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 g' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], convex(s) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\131 f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 has_derivative(f, f'(x), within(at(x), s)) && (\226\136\128 h : Cart[Real, M], norm(f'(x, h) - g'(x, h)) <= e * norm(h)))) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 has_derivative(g, g'(x), within(at(x), s)))
+      #|  (n : Num) => (x : Cart[Real, M]) => (h : Cart[Real, M]) => vsum(INTER((k : (Num) -> Bool), op_dot_dot(0, n)), (n : Num) => (f' : (Num, Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])(n, x, h))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 f : (Num, Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Num, Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], \226\136\128 k : (Num) -> Bool, convex(s) && (\226\136\128 n : Num, \226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 has_derivative(f(n), f'(n, x), within(at(x), s))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : Cart[Real, M], \226\136\128 h : Cart[Real, M], n >= N && IN(x, s) \226\134\146 norm(vsum(INTER(k, op_dot_dot(0, n)), (i : Num) => f'(i, x, h)) - g'(x, h)) <= e * norm(h))) && (\226\136\131 x : Cart[Real, M], \226\136\131 l : Cart[Real, N], IN(x, s) && sums((n : Num) => f(n, x), l, k)) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 sums((n : Num) => f(n, x), g(x), k) && has_derivative(g, g'(x), within(at(x), s)))
+      #|  bilinear((h : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P]))
+      #|  (i : Real) * ((b : Real) * ((c : Real) * (x : Real) * ((d : Real) * x))) == i * x * (x * (b * (c * d)))
+      #|  inv(norm((x' : Cart[Real, Q]) - (x : Cart[Real, Q]))) * ((B : Real) * ((C : Real) * norm(x' - x) * ((D : Real) * norm(x' - x))))
+      #|  (x' : Cart[Real, Q])
+      #|  (e : Real) / ((B : Real) * ((C : Real) * (D : Real)))
+      #|  (e : Real)
+      #|  linear((g' : (Cart[Real, Q]) -> Cart[Real, N]))
+      #|  (D : Real)
+      #|  linear((f' : (Cart[Real, Q]) -> Cart[Real, M]))
+      #|  (C : Real)
+      #|  (B : Real)
+      #|  op_minus_minus_gt((y : Cart[Real, Q]) => op_pct(inv(norm(y - (x : Cart[Real, Q]))), (h : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P])((f' : (Cart[Real, Q]) -> Cart[Real, M])(y - x), (g' : (Cart[Real, Q]) -> Cart[Real, N])(y - x))), vec(0), within(at(x), (s : (Cart[Real, Q]) -> Bool)))
+      #|  (h : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P])
+      #|  within(at((x : Cart[Real, Q])), (s : (Cart[Real, Q]) -> Bool))
+      #|  vec(0) == (f' : (Cart[Real, Q]) -> Cart[Real, M])((x : Cart[Real, Q]) - x)
+      #|  op_minus_minus_gt((y : Cart[Real, Q]) => (f : (Cart[Real, Q]) -> Cart[Real, M])((x : Cart[Real, Q])) + (f' : (Cart[Real, Q]) -> Cart[Real, M])(y - x), f(x), within(at(x), (s : (Cart[Real, Q]) -> Bool)))
+      #|  has_derivative((f : (Cart[Real, Q]) -> Cart[Real, M]), (f' : (Cart[Real, Q]) -> Cart[Real, M]), within(at((x : Cart[Real, Q])), (s : (Cart[Real, Q]) -> Bool)))
+      #|  op_minus_minus_gt((g : (Cart[Real, Q]) -> Cart[Real, N]), g((x : Cart[Real, Q])), within(at(x), (s : (Cart[Real, Q]) -> Bool)))
+      #|  \226\136\128 h : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P], \226\136\128 f : (Cart[Real, Q]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, Q]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, Q]) -> Cart[Real, M], \226\136\128 g' : (Cart[Real, Q]) -> Cart[Real, N], \226\136\128 x : Cart[Real, Q], \226\136\128 s : (Cart[Real, Q]) -> Bool, has_derivative(f, f', within(at(x), s)) && has_derivative(g, g', within(at(x), s)) && bilinear(h) \226\134\146 has_derivative((x : Cart[Real, Q]) => h(f(x), g(x)), (d : Cart[Real, Q]) => h(f(x), g'(d)) + h(f'(d), g(x)), within(at(x), s))
+      #|  \226\136\128 h : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P], \226\136\128 f : (Cart[Real, Q]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, Q]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, Q]) -> Cart[Real, M], \226\136\128 g' : (Cart[Real, Q]) -> Cart[Real, N], \226\136\128 x : Cart[Real, Q], has_derivative(f, f', at(x)) && has_derivative(g, g', at(x)) && bilinear(h) \226\134\146 has_derivative((x : Cart[Real, Q]) => h(f(x), g(x)), (d : Cart[Real, Q]) => h(f(x), g'(d)) + h(f'(d), g(x)), at(x))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, P], \226\136\128 h : (Cart[Real, N], Cart[Real, P]) -> Cart[Real, Q], \226\136\128 a : Cart[Real, M], differentiable(f, at(a)) && differentiable(g, at(a)) && bilinear(h) \226\134\146 differentiable((x : Cart[Real, M]) => h(f(x), g(x)), at(a))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, P], \226\136\128 h : (Cart[Real, N], Cart[Real, P]) -> Cart[Real, Q], \226\136\128 x : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, differentiable(f, within(at(x), s)) && differentiable(g, within(at(x), s)) && bilinear(h) \226\134\146 differentiable((x : Cart[Real, M]) => h(f(x), g(x)), within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, P], \226\136\128 h : (Cart[Real, N], Cart[Real, P]) -> Cart[Real, Q], \226\136\128 s : (Cart[Real, M]) -> Bool, differentiable_on(f, s) && differentiable_on(g, s) && bilinear(h) \226\134\146 differentiable_on((x : Cart[Real, M]) => h(f(x), g(x)), s)
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (r \226\134\146 p && q \226\134\146 s)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], differentiable(f, at(x)) && differentiable(g, at(x)) \226\134\146 differentiable((x : Cart[Real, M]) => lift(dot(f(x), g(x))), at(x))
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (r \226\134\146 p && q \226\134\146 s)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, differentiable(f, within(at(x), s)) && differentiable(g, within(at(x), s)) \226\134\146 differentiable((x : Cart[Real, M]) => lift(dot(f(x), g(x))), within(at(x), s))
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (r \226\134\146 p && q \226\134\146 s)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, differentiable_on(f, s) && differentiable_on(g, s) \226\134\146 differentiable_on((x : Cart[Real, M]) => lift(dot(f(x), g(x))), s)
+      #|  (x : Cart[Real, Unit]) => (y : Cart[Real, M]) => op_pct(drop(x), y)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Real, \226\136\128 f' : (Cart[Real, M]) -> Real, \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, has_derivative(o(lift, f), o(lift, f'), within(at(a), s)) && has_derivative(g, g', within(at(a), s)) \226\134\146 has_derivative((x : Cart[Real, M]) => op_pct(f(x), g(x)), (h : Cart[Real, M]) => op_pct(f(a), g'(h)) + op_pct(f'(h), g(a)), within(at(a), s))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Real, \226\136\128 f' : (Cart[Real, M]) -> Real, \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], has_derivative(o(lift, f), o(lift, f'), at(a)) && has_derivative(g, g', at(a)) \226\134\146 has_derivative((x : Cart[Real, M]) => op_pct(f(x), g(x)), (h : Cart[Real, M]) => op_pct(f(a), g'(h)) + op_pct(f'(h), g(a)), at(a))
+      #|  (a : Cart[Real, N])
+      #|  (x : Cart[Real, N]) => x
+      #|  (x : Cart[Real, N]) => x
+      #|  (x : Cart[Real, N]) => x
+      #|  (x : Cart[Real, N]) => x
+      #|  (x : Cart[Real, N]) => (y : Cart[Real, N]) => lift(dot(x, y))
+      #|  \226\136\128 a : Cart[Real, N], has_derivative((x : Cart[Real, N]) => lift(pow(norm(x), 2)), (x : Cart[Real, N]) => op_pct(real_of_num(2), lift(dot(a, x))), at(a))
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (a : Cart[Real, M])
+      #|  (x : Cart[Real, Unit]) => (y : Cart[Real, N]) => op_pct(drop(x), y)
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  o(lift, (f : (Cart[Real, M]) -> Real))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Real, \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, differentiable(o(lift, f), within(at(a), s)) && differentiable(g, within(at(a), s)) \226\134\146 differentiable((x : Cart[Real, M]) => op_pct(f(x), g(x)), within(at(a), s))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Real, \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], differentiable(o(lift, f), at(a)) && differentiable(g, at(a)) \226\134\146 differentiable((x : Cart[Real, M]) => op_pct(f(x), g(x)), at(a))
+      #|  \226\136\128 a : Cart[Real, N], differentiable((x : Cart[Real, N]) => lift(pow(norm(x), 2)), at(a))
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (x : Cart[Real, Unit]) => (y : Cart[Real, N]) => op_pct(drop(x), y)
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  o(lift, (f : (Cart[Real, M]) -> Real))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Real, \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, differentiable_on(o(lift, f), s) && differentiable_on(g, s) \226\134\146 differentiable_on((x : Cart[Real, M]) => op_pct(f(x), g(x)), s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, differentiable_on((x : Cart[Real, N]) => lift(pow(norm(x), 2)), s)
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, N]) - ((y : Cart[Real, N]) + (z : Cart[Real, N])) == x - y - z
+      #|  \226\136\128 a : Real, \226\136\128 y : Cart[Real, M], (f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M]), op_pct(a, y)) == op_pct(a, f'(x, y))
+      #|  ((n : Num) => op_pct(inv((d : (Num, Cart[Real, M]) -> Real)(n, (x : Cart[Real, M]))), (f : (Cart[Real, M]) -> Cart[Real, N])(x + op_pct(d(n, x), basis((j : Num)))) - f(x)) - (f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])(x, basis(j))) == o((y : Cart[Real, M]) => op_pct(inv(norm(y - x)), f(y) - (f(x) + f'(x, y - x))), (n : Num) => x + op_pct(d(n, x), basis(j)))
+      #|  (x : Cart[Real, M])
+      #|  (s : (Cart[Real, M]) -> Bool) == UNIV
+      #|  real_of_num(1) < real_of_num((n : Num)) + real_of_num(2)
+      #|  real_of_num(0) <= (x : Real) && x * inv((n : Real)) < x * real_of_num(1) \226\134\146 !(x <= abs(x) / n)
+      #|  abs(real_of_num((n : Num)) + real_of_num(2)) == real_of_num(n) + real_of_num(2)
+      #|  dist(((x : Cart[Real, N]), x + (y : Cart[Real, N]))) == norm(y)
       #|  :real
       #|  :real
-      #|  d * r <= norm((f:real^N->real^N) z - w)
-      #|  z:real^N
-      #|  ball(x:real^N,r)
-      #|  c:real^N->bool
-      #|  forall c. connected c /\\ ~(c INTER ball(x,r) = {}) /\\\n        (forall z. z IN c ==> norm((f:real^N->real^N) z - b) <= e)\n        ==> c SUBSET ball(x,r)
-      #|  r':real
-      #|  x:real^N
-      #|  w:real^N
-      #|  forall a. norm(a - x) < dr / &3 /\\ norm(a - y) < dr / &3\n          ==> norm(x - y:real^N) <= &2 / &3 * dr
+      #|  (x : Cart[Real, M])
+      #|  {(x : Cart[Real, M])}
+      #|  IN((x : _), (s : (_) -> Bool)) == !IN(x, DIFF(UNIV, s))
+      #|  (x : Cart[Real, M])
+      #|  (n : Num)
+      #|  (n : Num) => (x : Cart[Real, M]) => op_pct(inv((d : (Num, Cart[Real, M]) -> Real)(n, x)), lift(op_dollar((f : (Cart[Real, M]) -> Cart[Real, N])(x + op_pct(d(n, x), basis((j : Num)))) - f(x), (i : Num))))
+      #|  continuous_on((f : (Cart[Real, M]) -> Cart[Real, N]), (s : (Cart[Real, M]) -> Bool))
+      #|  1
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(2)
+      #|  \226\136\128 n : Num, \226\136\128 x : Cart[Real, M], IN(x, (s : (Cart[Real, M]) -> Bool)) \226\134\146 real_of_num(0) < (d : (Num, Cart[Real, M]) -> Real)(n, x)
+      #|  (d : (Num, Cart[Real, M]) -> Real) == ((n : Num) => (x : Cart[Real, M]) => (if (s : (Cart[Real, M]) -> Bool) == UNIV { real_of_num(1) } else { setdist(({x}, DIFF(UNIV, s))) }) / (real_of_num(n) + real_of_num(2)))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 i : Num, \226\136\128 j : Num, (\226\136\128 x : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, s) \226\134\146 (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, f'(x), (at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x))) && (open : ((Cart[Real, M]) -> Bool) -> Bool)(s) && 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= j && j <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 (baire : (Num, (Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Cart[Real, Unit]) -> Bool)(1, s, (x : Cart[Real, M]) => lift((op_dollar : (Cart[Real, M], Num) -> Real)((op_dollar : (Cart[Cart[Real, M], N], Num) -> Cart[Real, M])((matrix : ((Cart[Real, M]) -> Cart[Real, N]) -> Cart[Cart[Real, M], N])(f'(x)), i), j)))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (p : (Num) -> Num)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(f, f'(x), at(x))) && open(s) \226\134\146 baire(1, s, (x : Cart[Real, N]) => lift(det(matrix(f'(x)))))
+      #|  op_pct((a : Real), (y : Cart[Real, N])) == (z : Cart[Real, N]) \226\134\146 (c : Cart[Real, N]) - op_pct(a, (x : Cart[Real, N]) + y) == c - op_pct(a, x) - z
+      #|  (t : Real)
+      #|  real_of_num(1)
+      #|  !((y : Real) == real_of_num(0)) \226\134\146 y * ((x : Real) * inv(y)) == x
+      #|  norm((y : Cart[Real, M]))
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (p && r \226\134\146 q \226\134\146 s)
+      #|  continuous((t : Cart[Real, Unit]) => (x : Cart[Real, M]) + op_pct(drop(t), (y : Cart[Real, M])), within(at(vec(0)), {(t : Cart[Real, Unit]) | IN(x + op_pct(drop(t), y), (s : (Cart[Real, M]) -> Bool))}))
+      #|  (y : Cart[Real, M]) == vec(0)
+      #|  ((a : Cart[Real, N]) + (x : Cart[Real, N]) == a + (y : Cart[Real, N])) == (x == y)
+      #|  (r : Cart[Real, Unit]) => (x : Cart[Real, M]) + op_pct(drop(r), (y : Cart[Real, M]))
+      #|  trivial_limit(within(at((x : Cart[Real, M])), (s : (Cart[Real, M]) -> Bool)))
+      #|  (y : Cart[Real, M]) == vec(0)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], has_derivative(f, f', within(at(x), s)) \226\134\146 op_minus_minus_gt((t : Cart[Real, Unit]) => op_pct(inv(drop(t)), f(x + op_pct(drop(t), y)) - f(x)), f'(y), within(at(vec(0)), {(t : Cart[Real, Unit]) | IN(x + op_pct(drop(t), y), s)}))
+      #|  (y : Cart[Real, M])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], has_derivative(f, f', at(x)) \226\134\146 op_minus_minus_gt((t : Cart[Real, Unit]) => op_pct(inv(drop(t)), f(x + op_pct(drop(t), y)) - f(x)), f'(y), at(vec(0)))
+      #|  op_pct((a : Real), (y : Cart[Real, M]) - ((x : Cart[Real, M]) + op_pct((b : Real), (u : Cart[Real, M])))) == -(op_pct(a * b, u) - op_pct(a, y - x)) && op_pct(a, y - x - op_pct(b, u)) == -(op_pct(a * b, u) - op_pct(a, y - x))
+      #|  norm((y : Cart[Real, M]) - (z : Cart[Real, M])) <= (a : Real) && norm((d : Cart[Real, M]) - (e : Cart[Real, M])) <= (b : Real) \226\134\146 norm(y - ((x : Cart[Real, M]) + d)) - norm(z - x - e) <= a + b
       #|  :real
       #|  :real
-      #|  z:real^N
-      #|  &0 < r ==> ~(r < &0)
-      #|  {f x | x IN s} = {} <=> s = {}
-      #|  cball(x:real^N,r')
-      #|  e <= &2 / &3 * d * r
-      #|  norm((f:real^N->real^N) z - b)
-      #|  z:real^N
-      #|  f':real^N->real^N->real^N
-      #|  IMAGE f k SUBSET {b} ==> k SUBSET {x | x IN k /\\ f x = b}
-      #|  ~(IMAGE (f:real^N->real^N) k SUBSET {b})
-      #|  &0 < e
-      #|  x - b:real^N = --b + x
-      #|  (forall z. z IN c ==> norm(f z - b:real^N) <= B) <=>\n      (forall z. z IN IMAGE (\\x. x - b) (IMAGE f c) ==> norm z <= B)
-      #|  {norm((f:real^N->real^N) z - b) | z IN k}
-      #|  ~(k:real^N->bool = {})
-      #|  IMAGE (f:real^N->real^N) c
-      #|  IMAGE (f:real^N->real^N) (k((q:num->num) n))
-      #|  (?z. z IN c /\\ dist(x:real^N,f z) < a) <=>\n        (?z. z IN IMAGE f c /\\ dist(x,z) < a)
-      #|  (?z. z IN c /\\ dist(x:real^N,f z) < a)\n        ==> ?z. z IN c /\\ norm(b + x) - norm(b + f z) <= a
-      #|  dist(x:real^N,y) < a ==> norm(b + x) - norm(b + y) <= a
+      #|  :real
+      #|  (y : Real) - (x : Real) <= (B : Real) * (e : Real) + (D : Real) * e \226\134\146 x < e \226\134\146 y < (B + (D + real_of_num(1))) * e
+      #|  (f' : (Cart[Real, M]) -> Cart[Real, N])((u : Cart[Real, M])) == op_pct(inv(norm((y : Cart[Real, M]) - (x : Cart[Real, M]))), op_pct(norm(y - x), f'(u)))
+      #|  lift(norm((y : Cart[Real, M]) - (x : Cart[Real, M])))
+      #|  (u : Cart[Real, M])
+      #|  ((B : Real) + ((D : Real) + real_of_num(1))) * ((e : Real) / (B + (D + real_of_num(1))) * norm((y : Cart[Real, M]) - (x : Cart[Real, M])))
+      #|  (u : Cart[Real, M])
+      #|  op_pct(inv(norm((y : Cart[Real, M]) - (x : Cart[Real, M]))), y - x)
+      #|  (y : Cart[Real, M])
+      #|  min((r : Real), inf(IMAGE((d : (Cart[Real, M]) -> Real), (k : (Cart[Real, M]) -> Bool))))
+      #|  (d : (Cart[Real, M]) -> Real)
+      #|  real_of_num(0) < (B : Real) && real_of_num(0) < (D : Real) \226\134\146 real_of_num(0) < B + (D + real_of_num(1))
+      #|  (e : Real) / ((B : Real) + ((D : Real) + real_of_num(1)))
+      #|  (k : (Cart[Real, M]) -> Bool) == {}
+      #|  (k : (Cart[Real, M]) -> Bool)
+      #|  real_of_num(0) < (B : Real) && real_of_num(0) < (D : Real) \226\134\146 real_of_num(0) < B + (D + real_of_num(1))
+      #|  (e : Real) / ((B : Real) + ((D : Real) + real_of_num(1)))
+      #|  (sphere : ((Cart[Real, M], Real), Cart[Real, M]) -> Bool)(((vec : (Num) -> Cart[Real, M])(0), real_of_num(1)))
+      #|  (e : Real)
+      #|  (D : Real)
+      #|  (r : Real)
+      #|  (x : Cart[Real, M])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, IN(x, s) && open(s) && (\226\136\131 B : Real, \226\136\128 u : Cart[Real, M], \226\136\128 v : Cart[Real, M], IN(u, s) && IN(v, s) \226\134\146 norm(f(u) - f(v)) <= B * norm(u - v)) && linear(f') && (\226\136\128 y : Cart[Real, M], op_minus_minus_gt((t : Cart[Real, Unit]) => op_pct(inv(drop(t)), f(x + op_pct(drop(t), y)) - f(x)), f'(y), at(vec(0)))) \226\134\146 has_derivative(f, f', at(x))
+      #|  IN((u1 : (Cart[Real, N]) -> Bool), (U : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  min((t0 : Real), (t1 : Real)) / real_of_num(2)
+      #|  (z : Cart[Real, N])
+      #|  min((t0 : Real), (t1 : Real)) / real_of_num(2)
+      #|  (t1 : Real)
+      #|  (\226\136\131 w : (Cart[Real, _]) -> Bool, open(w) && (\226\136\131 t0 : _, (P : (_) -> Bool)(t0) && (\226\136\128 t : _, (R : (_, _) -> Bool)(t, t0) \226\134\146 IN((f : (_) -> Cart[Real, _])(t), w))) && SUBSET(w, (u : (Cart[Real, _]) -> Bool))) \226\134\146 (\226\136\131 t0 : _, P(t0) && (\226\136\128 t : _, R(t, t0) \226\134\146 IN(f(t), u)))
+      #|  ball(((a : Cart[Real, N]), (dd : Real)))
+      #|  (\226\136\131 x : _, \226\136\131 t : _, (P : (_) -> Bool)(t) && (A : (_) -> Bool)(t) && (B : (_) -> Bool)(x) && (R : (_, _) -> Bool)(x, t)) \226\134\146 (\226\136\128 t : _, \226\136\128 x : _, P(t) && R(x, t) \226\134\146 (Q : (_, _) -> Bool)(x, t)) \226\134\146 (\226\136\131 t : _, \226\136\131 x : _, P(t) && A(t) && B(x) && Q(x, t))
+      #|  real_of_num(0) < (t : Real) \226\134\146 abs(t) == t
+      #|  real_of_num(0) < (n : Real) \226\134\146 (l : Real) / n * ((t : Real) * n) == l * t
+      #|  (a : Cart[Real, N]) + op_pct((t : Real), -(h : Cart[Real, N])) == a - op_pct(t, h)
+      #|  (b : Cart[Real, N]) - (f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N])) == -(f(a) - b)
+      #|  ((a : Cart[Real, N]) + (b : Cart[Real, N]) == (c : Cart[Real, N])) == (c - a == b)
+      #|  ((a : Cart[Real, N]) == a + (x : Cart[Real, N])) == (x == vec(0))
+      #|  (\226\136\128 t : Real, (P : (Real) -> Bool)(t)) \226\134\146 (\226\136\128 t : Real, real_of_num(0) < t \226\134\146 P(t))
+      #|  SUBSET(INTER((b : (_) -> Bool), {(x : _) | IN(x, (s : (_) -> Bool)) && (f : (_) -> _)(x) == (y : _)}), (c : (_) -> Bool)) == (\226\136\128 x : _, IN(x, b) && IN(x, s) && y == f(x) \226\134\146 IN(x, c))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N])) + op_pct((t : Real), (b : Cart[Real, N]) - f(a))
+      #|  (t : Real)
+      #|  (dd : Real)
+      #|  (l : Real) / norm((f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N])) - (b : Cart[Real, N]))
+      #|  (a : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (INTER((s : (_) -> Bool), IMAGE((f : (_) -> _), (t : (_) -> Bool))) == {}) == (\226\136\128 x : _, IN(x, t) \226\134\146 !IN(f(x), s))
+      #|  IN((u1 : (Cart[Real, N]) -> Bool), (U : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (\226\136\128 x : _, IN(x, (t2 : (_) -> Bool)) \226\134\146 IN((f : (_) -> _)(x), (s1 : (_) -> Bool))) && !(INTER(t2, {(x : _) | IN(x, (t1 : (_) -> Bool)) && IN(f(x), (s2 : (_) -> Bool))}) == {}) \226\134\146 !(INTER(INTER(s1, s2), IMAGE(f, INTER(t1, t2))) == {})
+      #|  closure(ball(((a : Cart[Real, N]), (q : Real))))
+      #|  IN((u1 : (Cart[Real, N]) -> Bool), (U : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), INTER(ball(((a : Cart[Real, N]), (q : Real))), (u1 : (Cart[Real, N]) -> Bool)))
+      #|  real_of_num(0) < (t : Real) \226\134\146 abs(t) == t
+      #|  (n : Real) <= (e : Real) && (x : Real) * n < real_of_num(1) * n \226\134\146 x * n < e
+      #|  (b : Cart[Real, N]) - (a : Cart[Real, N]) - op_pct((t : Real), b - a) == op_pct(real_of_num(1) - t, b - a)
+      #|  dist(((b : Cart[Real, N]), (a : Cart[Real, N]) + (x : Cart[Real, N]))) == norm(b - a - x)
       #|  :real
       #|  :real
-      #|  x - y <= z <=> x - z <= y
-      #|  x - b:real^N = --b + x
-      #|  (forall z. z IN c ==> norm(f z - b:real^N) <= B) <=>\n        (forall z. z IN IMAGE (\\x. x - b) (IMAGE f c) ==> norm z <= B)
-      #|  x1:real^N
-      #|  abs(x - y) <= e <=> x <= y + e /\\ y <= x + e
-      #|  h:real
-      #|  abs(x - y) <= h\n          ==> x < e + a / &2 ==> h < a / &2 ==> y <= a + e
-      #|  &0 < &n + &1
-      #|  x < a ==> y <= x ==> y <= a
-      #|  e + inv(&(q(n:num)) + &1)
-      #|  sup {norm((f:real^N->real^N) z - b) | z IN k((q:num->num)n)}\n        < e + a / &2
-      #|  (k:num->real^N->bool)(q(n:num))
-      #|  c:real^N->bool
-      #|  n:num
-      #|  n:num
-      #|  e:real
-      #|  de:real
-      #|  &0 < de
-      #|  eventually\n         (\\n. inv(&n + &1) < a / &2 /\\\n              dist(lift(hausdist ((k:num->real^N->bool) (q n),c)),vec 0) < de)\n         sequentially
-      #|  de:real
-      #|  a / &2
-      #|  (f:real^N->real^N) uniformly_continuous_on cball (x,r)
-      #|  a:real
-      #|  ~(x < y) <=> y - x <= &0
-      #|  (k:num->real^N->bool) o (q:num->num)
-      #|  a IN s /\\ b IN s <=> {a,b} SUBSET s
-      #|  (k:num->real^N->bool) o (q:num->num)
-      #|  q:num->num
-      #|  c:real^N->bool
-      #|  cball(x:real^N,r)
-      #|  k:num->real^N->bool
-      #|  k:num->real^N->bool
-      #|  &0 < &n + &1
-      #|  e + i <= e <=> ~(&0 < i)
-      #|  e + inv(&n + &1)
-      #|  n:num
-      #|  ~(p /\\ q) <=> p ==> ~q
-      #|  (?k. P k) <=> ~(forall k. ~P k)
-      #|  ?k. compact k /\\ connected k /\\\n        z1 IN k /\\ z2 IN k /\\ k SUBSET cball(x,r) /\\\n        sup { norm((f:real^N->real^N) z - b) | z IN k} = e
-      #|  e:real
-      #|  norm(x:real^N) <= B ==> norm(x - b) <= B + norm b
+      #|  (t : Real)
+      #|  min(real_of_num(1), (dd : Real) * (q : Real) / norm((b : Cart[Real, N]) - (f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N]))))
+      #|  dist(((a : Cart[Real, N]), a + (x : Cart[Real, N]))) == norm(x)
       #|  :real
       #|  :real
-      #|  B + norm(b:real^N)
-      #|  B:real
-      #|  k:real^N->bool
-      #|  f:real^N->real^N
-      #|  k:real^N->bool
-      #|  &0
-      #|  cball(x:real^N,r')
-      #|  ~({f x | P x} = {}) <=> ?x. P x
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (vv : (Cart[Real, N]) -> Bool)
+      #|  (vv : (Cart[Real, N]) -> Bool) == INTER(ball(((b : Cart[Real, N]), (e : Real))), ball(((f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N])), (dd : Real) * (q : Real))))
+      #|  (q : Real)
+      #|  cball(((a : Cart[Real, N]), (rr : Real)))
+      #|  SUBSET((b : (_) -> Bool), (c : (_) -> Bool)) && SUBSET((b' : (_) -> Bool), (c' : (_) -> Bool)) && SUBSET(c', (s : (_) -> Bool)) && SUBSET(c, (v : (_) -> Bool)) \226\134\146 (SUBSET(INTER(b, b'), v) && SUBSET(INTER(b, b'), s)) && SUBSET(INTER(c, c'), s)
+      #|  ((r : Real) / real_of_num(2) < r) == (real_of_num(0) < r)
+      #|  min((q : Real), (rr : Real) / real_of_num(2))
+      #|  (q : Real)
+      #|  (a : Cart[Real, N])
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  \226\136\131 q : Real, real_of_num(0) < q && q < (rr : Real) && SUBSET(ball(((a : Cart[Real, N]), q)), INTER((v : (Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool))) && SUBSET(cball((a, q)), s)
+      #|  (dd : Real)
+      #|  (rr : Real)
+      #|  (a : Cart[Real, N])
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 w : (Cart[Real, N]) -> Bool, open(w) && IN((a : Cart[Real, N]), w) \226\134\146 (\226\136\131 w' : (Cart[Real, N]) -> Bool, open(w') && (\226\136\131 t1 : Real, real_of_num(0) < t1 && (\226\136\128 t : Real, real_of_num(0) < t && t < t1 \226\134\146 IN((f : (Cart[Real, N]) -> Cart[Real, N])(a) + op_pct(t, (b : Cart[Real, N]) - f(a)), w'))) && SUBSET(w', IMAGE(f, INTER((u1 : (Cart[Real, N]) -> Bool), w))))
+      #|  IN((z : _), (u : (_) -> Bool)) == SUBSET(INSERT(z, u), u)
+      #|  (a : Cart[Real, N])
+      #|  (u1 : (Cart[Real, N]) -> Bool)
+      #|  (u0 : (Cart[Real, N]) -> Bool)
+      #|  {(x : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN((f : (Cart[Real, N]) -> Cart[Real, N])(x), ball(((b : Cart[Real, N]), (e : Real))))}
+      #|  IN((u1 : (Cart[Real, N]) -> Bool), (U : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  !((f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N])) == (b : Cart[Real, N]))
+      #|  IN((a : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  {(x : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN((f : (Cart[Real, N]) -> Cart[Real, N])(x), ball(((b : Cart[Real, N]), (e : Real))))}
+      #|  IN((z : _), (u1 : (_) -> Bool)) \226\134\146 !(u1 == (u0 : (_) -> Bool)) && (INTER(u0, u1) == {}) == !(u0 == u1) \226\134\146 !IN(z, u0)
+      #|  norm((a : Cart[Real, N]) - (z : Cart[Real, N]) - (h : Cart[Real, N])) == norm(z - (a - h))
+      #|  :real
+      #|  :real
+      #|  real_of_num(0) < (x : Real) \226\134\146 abs(x) == x
+      #|  abs((t : Real))
+      #|  (a : Cart[Real, N]) - op_pct(real_of_num(1), a - (z : Cart[Real, N])) == z
+      #|  (t : Real)
+      #|  op_pct(inv((t : Real)), (a : Cart[Real, N]) - (z : Cart[Real, N]))
+      #|  \226\136\131 t : Real, \226\136\131 z : Cart[Real, N], real_of_num(0) < t && t < (t0 : Real) && IN(z, (u1 : (Cart[Real, N]) -> Bool)) && norm(z - ((a : Cart[Real, N]) - op_pct(t, (h : Cart[Real, N])))) < (l : Real) * t
+      #|  (\226\136\128 v : _, !SUBSET((s : (_) -> Bool), {v})) \226\134\146 (\226\136\128 u : _, IN(u, s) \226\134\146 (\226\136\131 v : _, IN(v, s) && !(v == u)))
+      #|  (u0 : (Cart[Real, N]) -> Bool)
+      #|  \226\136\131 u1 : (Cart[Real, N]) -> Bool, IN(u1, (U : ((Cart[Real, N]) -> Bool) -> Bool)) && !(u1 == (u0 : (Cart[Real, N]) -> Bool)) && IN((a : Cart[Real, N]), closure(u1))
+      #|  (u0 : (Cart[Real, N]) -> Bool)
+      #|  ball(((x : Cart[Real, N]), (r : Real)))
+      #|  IN((u0 : (Cart[Real, N]) -> Bool), (U : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (u0 : (Cart[Real, N]) -> Bool)
+      #|  (t0 : Real)
+      #|  (l : Real)
+      #|  (h : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (e : Real)
+      #|  INTER((k : (_) -> Bool), UNIONS({(f : (_, _) -> Bool)((x : _)) | IN(x, DELETE((s : (_) -> Bool), (a : _)))})) == {} \226\134\146 INTER(k, DIFF(UNIONS({f((x : _)) | IN(x, s)}), f(a))) == {}
+      #|  INTER((k : (_) -> Bool), DIFF((t : (_) -> Bool), (s : (_) -> Bool))) == {} \226\134\146 !SUBSET(k, s) \226\134\146 SUBSET(k, t) \226\134\146 false
+      #|  !SUBSET((k : (Cart[Real, N]) -> Bool), closure((u : (Cart[Real, N]) -> Bool)))
+      #|  SUBSET((k : (Cart[Real, N]) -> Bool), UNIONS({closure((u : (Cart[Real, N]) -> Bool)) | IN(u, (U : ((Cart[Real, N]) -> Bool) -> Bool))}))
+      #|  (INTER((s : (_) -> Bool), INTER((t : (_) -> Bool), (k : (_) -> Bool))) == {}) == (INTER(INTER(k, s), INTER(k, t)) == {})
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 INSERT(x, DELETE(s, x)) == s
+      #|  closure(UNIONS(DELETE((U : ((Cart[Real, N]) -> Bool) -> Bool), (u : (Cart[Real, N]) -> Bool))))
+      #|  closure((u : (Cart[Real, N]) -> Bool))
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  SUBSET((k : (_) -> Bool), UNIONS({(f : (_, _) -> Bool)((u : _)) | IN(u, (U : (_) -> Bool))})) \226\134\146 !(k == {}) \226\134\146 (\226\136\131 u : _, IN(u, U) && !(INTER(k, f(u)) == {}))
+      #|  !pairwise((u : (Cart[Real, N]) -> Bool) => (v : (Cart[Real, N]) -> Bool) => DISJOINT(INTER((k : (Cart[Real, N]) -> Bool), closure(u)), INTER(k, closure(v))), (U : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  \226\136\131 a : Cart[Real, N], IN(a, (k : (Cart[Real, N]) -> Bool)) && (\226\136\128 v : (Cart[Real, N]) -> Bool, !SUBSET({(u : (Cart[Real, N]) -> Bool) | IN(u, (U : ((Cart[Real, N]) -> Bool) -> Bool)) && IN(a, closure(u))}, {v}))
+      #|  norm((f : (Cart[Real, N]) -> Cart[Real, N])((q : Cart[Real, N])) - (b : Cart[Real, N]))
+      #|  (q : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), path_image((g : (Cart[Real, Unit]) -> Cart[Real, N])))
+      #|  ball(((x : Cart[Real, N]), (r : Real)))
+      #|  path_image((g : (Cart[Real, Unit]) -> Cart[Real, N]))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  IN((z : _), (u : (_) -> Bool)) == SUBSET(INSERT(z, u), u)
+      #|  (z2 : Cart[Real, N])
+      #|  (z1 : Cart[Real, N])
+      #|  path_connected((u : (Cart[Real, N]) -> Bool))
+      #|  IN((u : (Cart[Real, N]) -> Bool), (U : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, IN(u, (U : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 !SUBSET((k : (Cart[Real, N]) -> Bool), closure(u))
+      #|  {(f : (_) -> _)((x : _)) | IN(x, {})} == {}
+      #|  (U : ((Cart[Real, N]) -> Bool) -> Bool) == {}
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  ball(((x : Cart[Real, N]), (r : Real)))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (t0 : Real)
+      #|  (l : Real)
+      #|  (h : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (e : Real)
+      #|  IN((a : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (a : Cart[Real, N])
+      #|  SUBSET((k : (Cart[Real, N]) -> Bool), UNIONS({closure((u : (Cart[Real, N]) -> Bool)) | IN(u, (U : ((Cart[Real, N]) -> Bool) -> Bool))}))
+      #|  ((p : Bool) && (x : Bool)) && ((q : Bool) && (y : Bool)) && (r : Bool) \226\134\146 (p && q) && r
+      #|  (r : Real)
+      #|  (x : Cart[Real, N])
+      #|  (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  FINITE({(z : Cart[Real, N]) | IN(z, cball(((x : Cart[Real, N]), (r : Real)))) && (f : (Cart[Real, N]) -> Cart[Real, N])(z) == (b : Cart[Real, N])})
+      #|  FINITE((U : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (b : Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 IN((f : (_) -> _)(x), (t : (_) -> Bool))) \226\134\146 INTER(DIFF((u : (_) -> Bool), t), IMAGE(f, s)) == {}
+      #|  ball(((b : Cart[Real, N]), (e : Real)))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  closure(ball(((x : Cart[Real, N]), (r : Real))))
+      #|  SUBSET(closure((u : (Cart[Real, N]) -> Bool)), (s : (Cart[Real, N]) -> Bool))
+      #|  SUBSET((u : (Cart[Real, N]) -> Bool), ball(((x : Cart[Real, N]), (r : Real))))
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, IN(u, (U : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 !(INTER(u, {(x : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && (f : (Cart[Real, N]) -> Cart[Real, N])(x) == (b : Cart[Real, N])}) == {})
+      #|  (u' : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool) == (u' : (Cart[Real, N]) -> Bool)
+      #|  open((u : (Cart[Real, N]) -> Bool)) && open((u' : (Cart[Real, N]) -> Bool))
+      #|  (u' : (Cart[Real, N]) -> Bool)
+      #|  IN((z : Cart[Real, N]), UNIONS(components({(x : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN((f : (Cart[Real, N]) -> Cart[Real, N])(x), ball(((b : Cart[Real, N]), (e : Real))))})))
+      #|  IN((z : Cart[Real, N]), frontier((u : (Cart[Real, N]) -> Bool)))
+      #|  IN((z : Cart[Real, N]), closure((u : (Cart[Real, N]) -> Bool)))
+      #|  IN((z : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (e : Real)
+      #|  (b : Cart[Real, N])
+      #|  SUBSET(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 IN((z : _), s) \226\134\146 IN(f(z), t)
+      #|  IN((z : Cart[Real, N]), closure((u : (Cart[Real, N]) -> Bool)))
+      #|  closure(ball(((x : Cart[Real, N]), (r : Real))))
+      #|  SUBSET(closure((u : (Cart[Real, N]) -> Bool)), (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 z : Cart[Real, N], IN(u, (U : ((Cart[Real, N]) -> Bool) -> Bool)) && IN(z, frontier(u)) \226\134\146 IN((f : (Cart[Real, N]) -> Cart[Real, N])(z), sphere(((b : Cart[Real, N]), (e : Real))))
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, IN(u, (U : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 SUBSET(u, ball(((x : Cart[Real, N]), (r : Real))))
+      #|  (U : ((Cart[Real, N]) -> Bool) -> Bool) == {(c : (Cart[Real, N]) -> Bool) | IN(c, components({(x : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN((f : (Cart[Real, N]) -> Cart[Real, N])(x), ball(((b : Cart[Real, N]), (e : Real))))})) && !(INTER(c, ball(((x : Cart[Real, N]), (r : Real)))) == {})}
+      #|  (z1 : Cart[Real, N])
+      #|  SUBSET((k : (Cart[Real, N]) -> Bool), ball(((x : Cart[Real, N]), (r : Real))))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])((z1 : Cart[Real, N])) == (b : Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])((z1 : Cart[Real, N]))
+      #|  \226\136\128 fz1 : Cart[Real, N], (e : Real) <= real_of_num(2) / real_of_num(3) * (dr : Real) && norm((fz : Cart[Real, N]) - fz1) <= e && dist(((fx : Cart[Real, N]), fz1)) < dr / real_of_num(3) \226\134\146 norm(fz - fx) < dr
+      #|  :real
+      #|  :real
+      #|  (d : Real) * (r : Real) <= norm((f : (Cart[Real, N]) -> Cart[Real, N])((z : Cart[Real, N])) - (w : Cart[Real, N]))
+      #|  (z : Cart[Real, N])
+      #|  ball(((x : Cart[Real, N]), (r : Real)))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 c : (Cart[Real, N]) -> Bool, connected(c) && !(INTER(c, ball(((x : Cart[Real, N]), (r : Real)))) == {}) && (\226\136\128 z : Cart[Real, N], IN(z, c) \226\134\146 norm((f : (Cart[Real, N]) -> Cart[Real, N])(z) - (b : Cart[Real, N])) <= (e : Real)) \226\134\146 SUBSET(c, ball((x, r)))
+      #|  (r' : Real)
+      #|  (x : Cart[Real, N])
+      #|  (w : Cart[Real, N])
+      #|  \226\136\128 a : Cart[Real, N], norm(a - (x : Cart[Real, N])) < (dr : Real) / real_of_num(3) && norm(a - (y : Cart[Real, N])) < dr / real_of_num(3) \226\134\146 norm(x - y) <= real_of_num(2) / real_of_num(3) * dr
+      #|  :real
+      #|  :real
+      #|  (z : Cart[Real, N])
+      #|  real_of_num(0) < (r : Real) \226\134\146 !(r < real_of_num(0))
+      #|  ({(f : (_) -> _)((x : _)) | IN(x, (s : (_) -> Bool))} == {}) == (s == {})
+      #|  cball(((x : Cart[Real, N]), (r' : Real)))
+      #|  (e : Real) <= real_of_num(2) / real_of_num(3) * ((d : Real) * (r : Real))
+      #|  norm((f : (Cart[Real, N]) -> Cart[Real, N])((z : Cart[Real, N])) - (b : Cart[Real, N]))
+      #|  (z : Cart[Real, N])
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  SUBSET(IMAGE((f : (_) -> _), (k : (_) -> Bool)), {(b : _)}) \226\134\146 SUBSET(k, {(x : _) | IN(x, k) && f(x) == b})
+      #|  !SUBSET(IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (k : (Cart[Real, N]) -> Bool)), {(b : Cart[Real, N])})
+      #|  real_of_num(0) < (e : Real)
+      #|  (x : Cart[Real, N]) - (b : Cart[Real, N]) == -b + x
+      #|  (\226\136\128 z : _, IN(z, (c : (_) -> Bool)) \226\134\146 norm((f : (_) -> Cart[Real, N])(z) - (b : Cart[Real, N])) <= (B : Real)) == (\226\136\128 z : Cart[Real, N], IN(z, IMAGE((x : Cart[Real, N]) => x - b, IMAGE(f, c))) \226\134\146 norm(z) <= B)
+      #|  {norm((f : (Cart[Real, N]) -> Cart[Real, N])((z : Cart[Real, N])) - (b : Cart[Real, N])) | IN(z, (k : (Cart[Real, N]) -> Bool))}
+      #|  !((k : (Cart[Real, N]) -> Bool) == {})
+      #|  IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (c : (Cart[Real, N]) -> Bool))
+      #|  IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (k : (Num, Cart[Real, N]) -> Bool)((q : (Num) -> Num)((n : Num))))
+      #|  (\226\136\131 z : _, IN(z, (c : (_) -> Bool)) && dist(((x : Cart[Real, N]), (f : (_) -> Cart[Real, N])(z))) < (a : Real)) == (\226\136\131 z : Cart[Real, N], IN(z, IMAGE(f, c)) && dist((x, z)) < a)
+      #|  (\226\136\131 z : _, IN(z, (c : (_) -> Bool)) && dist(((x : Cart[Real, N]), (f : (_) -> Cart[Real, N])(z))) < (a : Real)) \226\134\146 (\226\136\131 z : _, IN(z, c) && norm((b : Cart[Real, N]) + x) - norm(b + f(z)) <= a)
+      #|  dist(((x : Cart[Real, N]), (y : Cart[Real, N]))) < (a : Real) \226\134\146 norm((b : Cart[Real, N]) + x) - norm(b + y) <= a
+      #|  :real
+      #|  :real
+      #|  ((x : Real) - (y : Real) <= (z : Real)) == (x - z <= y)
+      #|  (x : Cart[Real, N]) - (b : Cart[Real, N]) == -b + x
+      #|  (\226\136\128 z : _, IN(z, (c : (_) -> Bool)) \226\134\146 norm((f : (_) -> Cart[Real, N])(z) - (b : Cart[Real, N])) <= (B : Real)) == (\226\136\128 z : Cart[Real, N], IN(z, IMAGE((x : Cart[Real, N]) => x - b, IMAGE(f, c))) \226\134\146 norm(z) <= B)
+      #|  (x1 : Cart[Real, N])
+      #|  (abs((x : Real) - (y : Real)) <= (e : Real)) == (x <= y + e && y <= x + e)
+      #|  (h : Real)
+      #|  abs((x : Real) - (y : Real)) <= (h : Real) \226\134\146 x < (e : Real) + (a : Real) / real_of_num(2) \226\134\146 h < a / real_of_num(2) \226\134\146 y <= a + e
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+      #|  (x : Real) < (a : Real) \226\134\146 (y : Real) <= x \226\134\146 y <= a
+      #|  (e : Real) + inv(real_of_num((q : (Num) -> Num)((n : Num))) + real_of_num(1))
+      #|  sup({norm((f : (Cart[Real, N]) -> Cart[Real, N])((z : Cart[Real, N])) - (b : Cart[Real, N])) | IN(z, (k : (Num, Cart[Real, N]) -> Bool)((q : (Num) -> Num)((n : Num))))}) < (e : Real) + (a : Real) / real_of_num(2)
+      #|  (k : (Num, Cart[Real, N]) -> Bool)((q : (Num) -> Num)((n : Num)))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (e : Real)
+      #|  (de : Real)
+      #|  real_of_num(0) < (de : Real)
+      #|  eventually((n : Num) => inv(real_of_num(n) + real_of_num(1)) < (a : Real) / real_of_num(2) && dist((lift(hausdist(((k : (Num, Cart[Real, N]) -> Bool)((q : (Num) -> Num)(n)), (c : (Cart[Real, N]) -> Bool)))), vec(0))) < (de : Real), sequentially)
+      #|  (de : Real)
+      #|  (a : Real) / real_of_num(2)
+      #|  uniformly_continuous_on((f : (Cart[Real, N]) -> Cart[Real, N]), cball(((x : Cart[Real, N]), (r : Real))))
+      #|  (a : Real)
+      #|  !((x : Real) < (y : Real)) == (y - x <= real_of_num(0))
+      #|  o((k : (Num, Cart[Real, N]) -> Bool), (q : (Num) -> Num))
+      #|  (IN((a : _), (s : (_) -> Bool)) && IN((b : _), s)) == SUBSET({a, b}, s)
+      #|  o((k : (Num, Cart[Real, N]) -> Bool), (q : (Num) -> Num))
+      #|  (q : (Num) -> Num)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  cball(((x : Cart[Real, N]), (r : Real)))
+      #|  (k : (Num, Cart[Real, N]) -> Bool)
+      #|  (k : (Num, Cart[Real, N]) -> Bool)
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+      #|  ((e : Real) + (i : Real) <= e) == !(real_of_num(0) < i)
+      #|  (e : Real) + inv(real_of_num((n : Num)) + real_of_num(1))
+      #|  (n : Num)
+      #|  !((p : Bool) && (q : Bool)) == (p \226\134\146 !q)
+      #|  (\226\136\131 k : _, (P : (_) -> Bool)(k)) == !(\226\136\128 k : _, !P(k))
+      #|  \226\136\131 k : (Cart[Real, N]) -> Bool, compact(k) && connected(k) && IN((z1 : Cart[Real, N]), k) && IN((z2 : Cart[Real, N]), k) && SUBSET(k, cball(((x : Cart[Real, N]), (r : Real)))) && sup({norm((f : (Cart[Real, N]) -> Cart[Real, N])((z : Cart[Real, N])) - (b : Cart[Real, N])) | IN(z, k)}) == (e : Real)
+      #|  (e : Real)
+      #|  norm((x : Cart[Real, N])) <= (B : Real) \226\134\146 norm(x - (b : Cart[Real, N])) <= B + norm(b)
+      #|  :real
+      #|  :real
+      #|  (B : Real) + norm((b : Cart[Real, N]))
+      #|  (B : Real)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  real_of_num(0)
+      #|  cball(((x : Cart[Real, N]), (r' : Real)))
+      #|  !({(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x)} == {}) == (\226\136\131 x : _, P(x))
       #|  {sup { norm((f:real^N->real^N) z - b) | z IN k} |\n           compact k /\\ connected k /\\\n           z1 IN k /\\ z2 IN k /\\ k SUBSET cball(x,r)}
       #|  e = inf { sup { norm((f:real^N->real^N) z - b) | z IN k} |\n              compact k /\\ connected k /\\\n              z1 IN k /\\ z2 IN k /\\ k SUBSET cball(x,r)}
-      #|  cball(x:real^N,r') SUBSET s
-      #|  z1:real^N = z2
-      #|  b = (f:real^N->real^N) z2
-      #|  z2:real^N
-      #|  z1:real^N
-      #|  ball(x:real^N,r')
-      #|  min r' (r / &2)
-      #|  r':real
-      #|  &0 < &3
-      #|  x:real^N
-      #|  {y | y IN s /\\ (f:real^N->real^N) y IN ball(w,(d * r) / &3)}
-      #|  ?r'. &0 < r' /\\ r' < r /\\\n         IMAGE (f:real^N->real^N) (cball(x,r')) SUBSET ball(w,(d * r) / &3)
-      #|  z:real^N
-      #|  forall z. norm(z - x) = r ==> d * r <= norm((f:real^N->real^N) z - w)
-      #|  w = (f:real^N->real^N) x
-      #|  d:real
-      #|  r:real
-      #|  x:real^N
-      #|  x:real^N
-      #|  &0 < &2
-      #|  s <= (d * e / &2 / B) * n\n       ==> e / &2 / B * d * n <= e / &2 / B * n'\n           ==> s <= (n' * e / &2) / B
-      #|  &0 < x * e /\\ y <= x * e / &2 ==> y < x * e
-      #|  B * norm(eta:real^N)
-      #|  eta = b - (f:real^N->real^N) x - f' x (z - x)
-      #|  z:real^N
-      #|  norm((g':real^N->real^N->real^N) x (b - f x - f' x (z - x)))
-      #|  z:real^N
-      #|  b:real^N
-      #|  min p (min r1 (d * r1)):real
-      #|  r1:real
-      #|  d * e / &2 / B:real
-      #|  (f has_derivative (f':real^N->real^N->real^N) x) (at x)
-      #|  B:real
-      #|  linear((g':real^N->real^N->real^N) x)
-      #|  d:real
-      #|  p:real
-      #|  x:real^N
-      #|  forall x e. &0 < e /\\ x IN s\n          ==> ?d. &0 < d /\\\n                   forall b. ~((f:real^N->real^N) x = b)\n                       ==> ball(x,d) INTER {z | z IN s /\\ f z = b} SUBSET\n                           ball(x + (g':real^N->real^N->real^N)(x) (b - f x),\n                                e * norm(b - f x))
-      #|  &0 < B\n      ==> B * (&1 / (&4 * B) * x + &1 / (&2 * B) * x) = &3 / &4 * x
-      #|  B:real
-      #|  a + d <= norm f'\n      ==> norm(fy - fx - f') <= d ==> a <= norm(fy - fx:real^N)
+      #|  SUBSET(cball(((x : Cart[Real, N]), (r' : Real))), (s : (Cart[Real, N]) -> Bool))
+      #|  (z1 : Cart[Real, N]) == (z2 : Cart[Real, N])
+      #|  (b : Cart[Real, N]) == (f : (Cart[Real, N]) -> Cart[Real, N])((z2 : Cart[Real, N]))
+      #|  (z2 : Cart[Real, N])
+      #|  (z1 : Cart[Real, N])
+      #|  ball(((x : Cart[Real, N]), (r' : Real)))
+      #|  min((r' : Real), (r : Real) / real_of_num(2))
+      #|  (r' : Real)
+      #|  real_of_num(0) < real_of_num(3)
+      #|  (x : Cart[Real, N])
+      #|  {(y : Cart[Real, N]) | IN(y, (s : (Cart[Real, N]) -> Bool)) && IN((f : (Cart[Real, N]) -> Cart[Real, N])(y), ball(((w : Cart[Real, N]), (d : Real) * (r : Real) / real_of_num(3))))}
+      #|  \226\136\131 r' : Real, real_of_num(0) < r' && r' < (r : Real) && SUBSET(IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), cball(((x : Cart[Real, N]), r'))), ball(((w : Cart[Real, N]), (d : Real) * r / real_of_num(3))))
+      #|  (z : Cart[Real, N])
+      #|  \226\136\128 z : Cart[Real, N], norm(z - (x : Cart[Real, N])) == (r : Real) \226\134\146 (d : Real) * r <= norm((f : (Cart[Real, N]) -> Cart[Real, N])(z) - (w : Cart[Real, N]))
+      #|  (w : Cart[Real, N]) == (f : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N]))
+      #|  (d : Real)
+      #|  (r : Real)
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  real_of_num(0) < real_of_num(2)
+      #|  (s : Real) <= (d : Real) * ((e : Real) / real_of_num(2) / (B : Real)) * (n : Real) \226\134\146 e / real_of_num(2) / B * (d * n) <= e / real_of_num(2) / B * (n' : Real) \226\134\146 s <= n' * (e / real_of_num(2)) / B
+      #|  real_of_num(0) < (x : Real) * (e : Real) && (y : Real) <= x * (e / real_of_num(2)) \226\134\146 y < x * e
+      #|  (B : Real) * norm((eta : Cart[Real, N]))
+      #|  (eta : Cart[Real, N]) == (b : Cart[Real, N]) - (f : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])) - (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x, (z : Cart[Real, N]) - x)
+      #|  (z : Cart[Real, N])
+      #|  norm((g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N]), (b : Cart[Real, N]) - (f : (Cart[Real, N]) -> Cart[Real, N])(x) - (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x, (z : Cart[Real, N]) - x)))
+      #|  (z : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  min((p : Real), min((r1 : Real), (d : Real) * r1))
+      #|  (r1 : Real)
+      #|  (d : Real) * ((e : Real) / real_of_num(2) / (B : Real))
+      #|  has_derivative((f : (Cart[Real, N]) -> Cart[Real, N]), (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])), at(x))
+      #|  (B : Real)
+      #|  linear((g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])))
+      #|  (d : Real)
+      #|  (p : Real)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 e : Real, real_of_num(0) < e && IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 b : Cart[Real, N], !((f : (Cart[Real, N]) -> Cart[Real, N])(x) == b) \226\134\146 SUBSET(INTER(ball((x, d)), {(z : Cart[Real, N]) | IN(z, s) && f(z) == b}), ball((x + (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x, b - f(x)), e * norm(b - f(x)))))))
+      #|  real_of_num(0) < (B : Real) \226\134\146 B * (real_of_num(1) / (real_of_num(4) * B) * (x : Real) + real_of_num(1) / (real_of_num(2) * B) * x) == real_of_num(3) / real_of_num(4) * x
+      #|  (B : Real)
+      #|  (a : Real) + (d : Real) <= norm((f' : Cart[Real, N])) \226\134\146 norm((fy : Cart[Real, N]) - (fx : Cart[Real, N]) - f') <= d \226\134\146 a <= norm(fy - fx)
       #|  :real
       #|  :real
-      #|  norm(x - y:real^N) <= e / &2 ==> &0 < e ==> norm(y - x) < e
+      #|  norm((x : Cart[Real, N]) - (y : Cart[Real, N])) <= (e : Real) / real_of_num(2) \226\134\146 real_of_num(0) < e \226\134\146 norm(y - x) < e
       #|  :real
-      #|  y:real^N
-      #|  &0 < &2 /\\ &0 < &4
-      #|  &1 / (&4 * B)
-      #|  min (e0 / &2) e1:real
-      #|  e1:real
-      #|  x:real^N
-      #|  e0:real
-      #|  &1 / (&2 * B)
-      #|  B:real
-      #|  (g':real^N->real^N->real^N) x
-      #|  ((f:real^N->real^N) has_derivative f'(x)) (at x)
-      #|  x:real^N
-      #|  forall x. x IN s\n        ==> ?r d. &0 < r /\\ &0 < d /\\\n                  cball(x,r) SUBSET s /\\\n                  forall y. y IN cball(x,r)\n                      ==> d * norm(y - x) <= norm(f y - (f:real^N->real^N) x)
-      #|  &0 < l
-      #|  norm(h - u:real^N) <= min l (m / &2)
-      #|  &0 < l ==> &0 < norm(h:real^N) + l
+      #|  (y : Cart[Real, N])
+      #|  real_of_num(0) < real_of_num(2) && real_of_num(0) < real_of_num(4)
+      #|  real_of_num(1) / (real_of_num(4) * (B : Real))
+      #|  min((e0 : Real) / real_of_num(2), (e1 : Real))
+      #|  (e1 : Real)
+      #|  (x : Cart[Real, N])
+      #|  (e0 : Real)
+      #|  real_of_num(1) / (real_of_num(2) * (B : Real))
+      #|  (B : Real)
+      #|  (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N]))
+      #|  has_derivative((f : (Cart[Real, N]) -> Cart[Real, N]), (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])), at(x))
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 (\226\136\131 r : Real, \226\136\131 d : Real, real_of_num(0) < r && real_of_num(0) < d && SUBSET(cball((x, r)), s) && (\226\136\128 y : Cart[Real, N], IN(y, cball((x, r))) \226\134\146 d * norm(y - x) <= norm((f : (Cart[Real, N]) -> Cart[Real, N])(y) - f(x))))
+      #|  real_of_num(0) < (l : Real)
+      #|  norm((h : Cart[Real, N]) - (u : Cart[Real, N])) <= min((l : Real), (m : Real) / real_of_num(2))
+      #|  real_of_num(0) < (l : Real) \226\134\146 real_of_num(0) < norm((h : Cart[Real, N])) + l
       #|  :real
-      #|  a / &2 / b * x < a <=> a * x / b < a * &2
-      #|  (e:real) pow 2
-      #|  &0 < t ==> (a * abs t * u < x <=> t * a * u < x)
-      #|  p + x < y + d ==> abs(q - p - --d) <= x ==> q < y
-      #|  &0 < l ==> &0 < norm(h:real^N) + l
+      #|  ((a : Real) / real_of_num(2) / (b : Real) * (x : Real) < a) == (a * (x / b) < a * real_of_num(2))
+      #|  pow((e : Real), 2)
+      #|  real_of_num(0) < (t : Real) \226\134\146 ((a : Real) * (abs(t) * (u : Real)) < (x : Real)) == (t * (a * u) < x)
+      #|  (p : Real) + (x : Real) < (y : Real) + (d : Real) \226\134\146 abs((q : Real) - p - -d) <= x \226\134\146 q < y
+      #|  real_of_num(0) < (l : Real) \226\134\146 real_of_num(0) < norm((h : Cart[Real, N])) + l
       #|  :real
-      #|  norm(y - x:real^N) <= l ==> norm(x) <= norm(y) + l
-      #|  :real
-      #|  :real
-      #|  &0 < x ==> abs x = x
-      #|  t * (norm(h:real^N) + l)
-      #|  a - t - a:real^N = --t
-      #|  a - t % u:real^N
-      #|  drop(p(a - t % u:real^N))
-      #|  u:real^N = h + (u - h)
-      #|  u:real^N
-      #|  t:real
-      #|  &0 < l ==> &0 < norm(h:real^N) + l
-      #|  :real
-      #|  ~(s = {}) /\\ s SUBSET t ==> s SUBSET t /\\ ~(t = {})
-      #|  r /\\ p /\\ q ==> p /\\ q /\\ r
-      #|  forall x y. {a - t % u:real^N | norm(u - h) <= x /\\ &0 < t /\\ t < y} =\n      IMAGE (\\z. a - drop(fstcart z) % sndcart z)\n            (interval(vec 0,lift y) PCROSS cball(h,x))
-      #|  (forall u t. P u t ==> f t u IN c) <=> {f t u | P u t} SUBSET c
-      #|  &0 < l ==> &0 < norm(h:real^N) + l
-      #|  :real
-      #|  min (d / (norm(h:real^N) + l)) (m / &2)
-      #|  d:real
-      #|  &0 < l ==> &0 < norm(h:real^N) + l
-      #|  :real
-      #|  e pow 2 / &2 / (norm(h:real^N) + l)
-      #|  ((p:real^N->real^1) has_derivative p' a) (at a)
-      #|  min l (m / &2)
-      #|  l:real
-      #|  h = &2 * e ==> abs(h' - h) < e ==> e <= h'
-      #|  h':real^N
-      #|  h':real^N
-      #|  d / &2
-      #|  d:real
-      #|  (e:real) pow 2
-      #|  h:real^N
-      #|  (p':real^N->real^N->real^1) a continuous_on UNIV
-      #|  ?l. &0 < l /\\\n          forall h'. norm(h' - h) <= l\n               ==> e pow 2 <= drop((p':real^N->real^N->real^1) a h')
-      #|  m:real
-      #|  vec 0:real^N
-      #|  vec 0:real^1
-      #|  open {z | z IN UNIV /\\\n                (a - drop(fstcart z) % (h + sndcart z):real^N) IN s}
-      #|  z:real^N
-      #|  \\x:real^N. &2 % lift((f(z:real^N) - b) dot x)
-      #|  \\h. (f':real^N->real^N->real^N) z h - vec 0
-      #|  \\x:real^N. lift (norm x pow 2)
-      #|  \\x. (f:real^N->real^N) x - b
-      #|  forall z. z IN s ==> ((p:real^N->real^1) has_derivative p'(z)) (at z)
-      #|  p' = \\z h. &2 % lift((f z - b) dot (f':real^N->real^N->real^N) z h)
-      #|  p = \\z. lift(norm((f:real^N->real^N) z - b) pow 2)
-      #|  h:real^N
-      #|  (g':real^N->real^N->real^N) a (f a - b) = h
-      #|  (f':real^N->real^N->real^N) a h = f a - b
-      #|  h = (g':real^N->real^N->real^N) a (f a - b)
-      #|  &0 < e
-      #|  e0:real
-      #|  e:real
-      #|  b:real^N
-      #|  ~(c = {}) /\\ c SUBSET s ==> c SUBSET s /\\ ~(s = {})
-      #|  c:real^N->bool
-      #|  {x | x IN s /\\ (f:real^N->real^N) x IN ball(b,e0)}
-      #|  c:real^N->bool
-      #|  ?h l t0 c. c IN components\n                       {x | x IN s /\\ (f:real^N->real^N) x IN ball(b,e)} /\\\n                 (g':real^N->real^N->real^N) a (f a - b) = h /\\\n                 &0 < l /\\ &0 < t0 /\\\n                 forall u t. norm(u - h) <= l /\\ &0 < t /\\ t < t0\n                       ==> (a - t % u) IN c
-      #|  e = norm((f:real^N->real^N) a - b)
-      #|  t:real
-      #|  z:real^N
-      #|  c:real^N->bool
-      #|  d / &2
-      #|  d / &2
-      #|  vec 0:real^N
-      #|  d:real
-      #|  vec 0:real^N
-      #|  vec 0:real^1
-      #|  open {z | z IN UNIV /\\\n                  (a - drop(fstcart z) % sndcart z:real^N) IN c}
-      #|  c = connected_component\n              {x | x IN s /\\ (f:real^N->real^N) x IN ball(b,e0)} a
-      #|  (f:real^N->real^N) a = b
-      #|  x / y * z < t <=> (x * z) / y < t
-      #|  &0 < norm(h:real^N) + &1
-      #|  :real
-      #|  min a b <= b
-      #|  (t / (norm h + &1)) * norm(h:real^N)
-      #|  &0 < norm(h:real^N) + &1
-      #|  :real
-      #|  &0 < x ==> abs x = x
-      #|  dist(a - x:real^N,a) = norm x
+      #|  norm((y : Cart[Real, N]) - (x : Cart[Real, N])) <= (l : Real) \226\134\146 norm(x) <= norm(y) + l
       #|  :real
       #|  :real
-      #|  &0 < norm(h:real^N) + &1
+      #|  real_of_num(0) < (x : Real) \226\134\146 abs(x) == x
+      #|  (t : Real) * (norm((h : Cart[Real, N])) + (l : Real))
+      #|  (a : Cart[Real, N]) - (t : Cart[Real, N]) - a == -t
+      #|  (a : Cart[Real, N]) - op_pct((t : Real), (u : Cart[Real, N]))
+      #|  drop((p : (Cart[Real, N]) -> Cart[Real, Unit])((a : Cart[Real, N]) - op_pct((t : Real), (u : Cart[Real, N]))))
+      #|  (u : Cart[Real, N]) == (h : Cart[Real, N]) + (u - h)
+      #|  (u : Cart[Real, N])
+      #|  (t : Real)
+      #|  real_of_num(0) < (l : Real) \226\134\146 real_of_num(0) < norm((h : Cart[Real, N])) + l
       #|  :real
-      #|  a - (min (t0 / &2) (t / (norm h + &1))) % h:real^N
-      #|  t:real
-      #|  c:real^N->bool
-      #|  t0:real
-      #|  l:real
-      #|  h:real^N
-      #|  (forall a b c d. Q a b c d ==> P a b c d) /\\\n      (?a b c d. Q a b c d)\n      ==> ?a b c d. P a b c d /\\ Q a b c d
-      #|  e0:real
-      #|  forall e a b. &0 < e /\\ a IN s /\\ norm((f:real^N->real^N) a - b) <= e\n            ==> ?h l t0 c. a IN closure c /\\\n                           (g':real^N->real^N->real^N) a (f a - b) = h /\\\n                           c IN components {x | x IN s /\\ f x IN ball(b,e)} /\\\n                           &0 < l /\\ &0 < t0 /\\\n                           forall u t. norm(u - h) <= l /\\ &0 < t /\\ t < t0\n                                 ==> (a - t % u) IN c
-      #|  v INTER s = {} ==> t SUBSET s ==> v INTER t = {}
-      #|  IMAGE (f:real^N->real^N) u
-      #|  v:real^N->bool
-      #|  (~p ==> F) ==> p
-      #|  forall u v. bounded u /\\ open u /\\ closure u SUBSET s /\\ open v /\\ connected v /\\\n          ~(v INTER IMAGE f u = {}) /\\ v INTER IMAGE f (frontier u) = {}\n          ==> v SUBSET IMAGE (f:real^N->real^N) u
-      #|  (f:real^N->real^N) continuous_on s
-      #|  t:real^N->bool
-      #|  (f':real^N->real^N->real^N) x
-      #|  x:real^N
-      #|  (p /\\ (r ==> q)) /\\ r ==> p /\\ q /\\ r
-      #|  x:real^N
-      #|  s:real^N->bool
-      #|  (g':real^N->real^N->real^N) x
-      #|  (f':real^N->real^N->real^N) x
-      #|  f:real^N->real^N
-      #|  x:real^N
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  (g':real^N->real^N->real^N) o (g:real^N->real^N)
-      #|  IMAGE (f:real^N->real^N) t
-      #|  g:real^N->real^N
-      #|  t:real^N->bool
-      #|  (?t. P t)\n      ==> forall s. (forall t. P t ==> P(s INTER t)) ==> ?t. t SUBSET s /\\ P t
-      #|  s:real^N->bool
-      #|  x:real^N
-      #|  a:real^N
-      #|  (a:real^N) IN s
-      #|  ?u. open u /\\ a IN u /\\\n        (forall x y. x IN u /\\ y IN u /\\ (f:real^N->real^N) x = f y ==> x = y)
-      #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
-      #|  g':real^N->real^N->real^N
-      #|  forall x. x IN s\n        ==> ?g. linear g /\\\n                (f':real^N->real^N->real^N) x o g = I /\\ g o f' x = I
-      #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
-      #|  forall f:real^N->real^N f' a s.\n        open s /\\ a IN s /\\\n        (forall x. x IN s\n             ==> (f has_derivative f' x) (at x) /\\ ~(det(matrix (f' x)) = &0))\n        ==> ?t u g g'. open t /\\ a IN t /\\ t SUBSET s /\\ open u /\\ f a IN u /\\\n                       homeomorphism (t,u) (f,g) /\\\n                       (forall x. x IN t\n                            ==> (f has_derivative f' x) (at x) /\\\n                                f'(x) o g'(f x) = I /\\ g'(f x) o f'(x) = I) /\\\n                       (forall y. y IN u\n                            ==> (g has_derivative g' y) (at y) /\\\n                                f'(g y) o g' y = I /\\ g' y o f'(g y) = I)
+      #|  !((s : (_) -> Bool) == {}) && SUBSET(s, (t : (_) -> Bool)) \226\134\146 SUBSET(s, t) && !(t == {})
+      #|  (r : Bool) && (p : Bool) && (q : Bool) \226\134\146 p && q && r
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, {(a : Cart[Real, N]) - op_pct((t : Real), (u : Cart[Real, N])) | norm(u - (h : Cart[Real, N])) <= x && real_of_num(0) < t && t < y} == IMAGE((z : Cart[Real, Finite_sum[Unit, N]]) => a - op_pct(drop(fstcart(z)), sndcart(z)), PCROSS(interval((vec(0), lift(y))), cball((h, x))))
+      #|  (\226\136\128 u : _, \226\136\128 t : _, (P : (_, _) -> Bool)(u, t) \226\134\146 IN((f : (_, _) -> _)(t, u), (c : (_) -> Bool))) == SUBSET({f((t : _), (u : _)) | P(u, t)}, c)
+      #|  real_of_num(0) < (l : Real) \226\134\146 real_of_num(0) < norm((h : Cart[Real, N])) + l
       #|  :real
+      #|  min((d : Real) / (norm((h : Cart[Real, N])) + (l : Real)), (m : Real) / real_of_num(2))
+      #|  (d : Real)
+      #|  real_of_num(0) < (l : Real) \226\134\146 real_of_num(0) < norm((h : Cart[Real, N])) + l
       #|  :real
-      #|  &1
-      #|  &0 < x ==> inv x * (&3 * x pow 2 - &2 * x pow 3) =\n               &3 * x - &2 * x pow 2
-      #|  \\y:real^(1,N)finite_sum.\n      lift(&3 * drop(fstcart y) - &2 * drop(fstcart y) pow 2)
-      #|  (:real^1) PCROSS ((:real^N) DELETE vec 0)
-      #|  \\x:real^(1,N)finite_sum. abs r * norm(fstcart x)
-      #|  (&1 - a - &1) % x:real^N = --(a % x)
-      #|  (a * x * y) % z - (x * y) % z:real^N = (a - &1) % x % y % z
-      #|  (a + b) - c:real^N = (b - c) + a
-      #|  ~(y = &0) ==> inv y * (&3 * y pow 2 - &2 * y pow 3) =\n                                y * (&3 - &2 * y)
-      #|  ~(y = &0) ==> inv y * y * z = z
-      #|  drop x = &0 <=> x = vec 0
-      #|  forall z. z IN interval(vec 0,vec 1) PCROSS ((:real^N) DELETE vec 0)\n                     ==> ~(drop(fstcart z) = &0)
-      #|  (a - x) - (a - y):real^N = --(x - y)
-      #|  c % (x - y - z) - (c % (x - y) - d):real^N = --(c % z - d)
-      #|  ~(y = &0) ==> (x * y) * inv y = x
-      #|  (g:real^(1,N)finite_sum->real^N) y = a
-      #|  y:real^(1,N)finite_sum
-      #|  \\y. inv(norm(fstcart(y:real^(1,N)finite_sum))) %\n                    (f(g y) - f a - (f':real^N->real^N) (g y - a))
-      #|  \\y. inv(drop(fstcart y)) %\n                  ((g:real^(1,N)finite_sum->real^N) y - a) -\n                  c % inv(norm x) % x
-      #|  (:real^1) PCROSS ((:real^N) DELETE vec 0)
-      #|  \\x:real^(1,N)finite_sum. abs c * norm(fstcart x)
-      #|  &1
-      #|  (g' - a' - n) - (g - a):real^N = ((g' - g) - (a' - a)) + --n
-      #|  &0
-      #|  \\y:real^(1,N)finite_sum. drop(fstcart y)
-      #|  g:real^(1,N)finite_sum->real^N
-      #|  at (pastecart (vec 0:real^1) (x:real^N))\n        within (interval(vec 0,vec 1) PCROSS ((:real^N) DELETE vec 0))
-      #|  forall g c. ((\\y. inv(drop(fstcart y)) % (g y - a) -\n                c % inv(norm(sndcart y)) % sndcart y)\n           --> vec 0)\n           (at (pastecart (vec 0) x) within\n            interval(vec 0,vec 1) PCROSS ((:real^N) DELETE vec 0))\n          ==> ((\\y. inv(drop(fstcart y)) % (f(g y) - f a))\n               --> c % (f':real^N->real^N) (inv(norm x) % x))\n              (at (pastecart (vec 0) x) within\n               interval(vec 0,vec 1) PCROSS ((:real^N) DELETE vec 0))
-      #|  x:real^N = &1 % x - &0 % x
-      #|  forall k x y. k % (f:real^N->real^N)((a + x) + y) - k % f(a + x):real^N =\n            k % (f((a + x) + y) - f a) - k % (f(a + x) - f a)
-      #|  ~(x = &0) /\\ &0 < r ==> x / r * r / x = &1
-      #|  (f':real^N->real^N) x = norm(x:real^N) / r % f'(r / norm x % x)
-      #|  (a * b) % (x - y):real^N = a % (b % x - b % y)
-      #|  n * x * y * z:real = (n * y * z) * x
-      #|  x:real^N
-      #|  ball(a:real^N,&2 * r)
-      #|  forall s. x IN s /\\ s SUBSET t ==> x IN t
-      #|  (f':real^N->real^N->real^N)
-      #|  forall f'. (f has_derivative f' x) (at x) /\\ ~(det(matrix(f' x)) = &0)\n              ==> (f:real^N->real^N) continuous at x
-      #|  ~(x:real^N = vec 0)
-      #|  &0 < r
-      #|  a:real^N
-      #|  b:real^N
-      #|  v:real^N
-      #|  a - b:real^N
-      #|  f':real^N->real^N
-      #|  (f':real^N->real^N->real^N) b
-      #|  ((f:real^N->real^N) has_derivative f'(b)) (at b)
-      #|  a + (&1 - x) % (b - a):real^N = b + x % (a - b)
-      #|  &3 * (&1 - t) pow 2 - &2 * (&1 - t) pow 3 =\n        &1 - (&3 * t pow 2 - &2 * t pow 3)
-      #|  (&1 - x) * (&1 - (&1 - x)) * r = x * (&1 - x) * r
-      #|  &1 - x < &1 <=> &0 < x
-      #|  pastecart (vec 0:real^1) (x:real^N)
-      #|  interval(vec 0:real^1,vec 1) PCROSS ((:real^N) DELETE vec 0)
-      #|  x - (x - y):real^N = y
-      #|  \\z:real^(1,N)finite_sum.\n                        pastecart (vec 1 - fstcart z) (sndcart z)
-      #|  forall g. g o g = I /\\ ((f o g o g) --> l) net\n            ==> (f --> l) net
-      #|  t:real^1 = vec 1
-      #|  ~(x:real^N = vec 0)
-      #|  &0 < r
-      #|  a:real^N
-      #|  a:real^N
-      #|  v:real^N
-      #|  b - a:real^N
-      #|  f':real^N->real^N
-      #|  (f':real^N->real^N->real^N) a
-      #|  ((f:real^N->real^N) has_derivative f'(a)) (at a)
-      #|  t:real^1 = vec 0
-      #|  &1
-      #|  \\z. norm(sndcart z) / (drop(fstcart z) * (&1 - drop(fstcart z)) * r) %\n        (f((a + (&3 * drop(fstcart z) pow 2 - &2 * drop(fstcart z) pow 3) %\n           (b - a)) +\n           (drop(fstcart z) * (&1 - drop(fstcart z)) * r) %\n           inv(norm(sndcart z)) % sndcart z)  -\n         (f:real^N->real^N)\n         (a + (&3 * drop(fstcart z) pow 2 - &2 * drop(fstcart z) pow 3) %\n           (b - a)))
-      #|  x:real^N
-      #|  t:real^1
-      #|  interval(vec 0:real^1,vec 1) PCROSS ((:real^N) DELETE vec 0)
-      #|  x + y:real^N = x <=> y = vec 0
-      #|  linear((f':real^N->real^N->real^N) b) /\\ invertible(matrix(f' b))
-      #|  t = &1
-      #|  linear((f':real^N->real^N->real^N) a) /\\ invertible(matrix(f' a))
-      #|  t = &0
-      #|  x:real^N
-      #|  t:real
-      #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
-      #|  &2 * t pow 3 - &3 * t pow 2 + &1 =\n        (&1 - t) pow 2 + &2 * t * (&1 - t) pow 2
-      #|  y <= x /\\ &0 <= y - x + &1\n      ==> abs(x - y) <= &1
-      #|  dist(a:real^N,b) = &1 * norm(b - a)
+      #|  pow((e : Real), 2) / real_of_num(2) / (norm((h : Cart[Real, N])) + (l : Real))
+      #|  has_derivative((p : (Cart[Real, N]) -> Cart[Real, Unit]), (p' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, Unit])((a : Cart[Real, N])), at(a))
+      #|  min((l : Real), (m : Real) / real_of_num(2))
+      #|  (l : Real)
+      #|  (h : Real) == real_of_num(2) * (e : Real) \226\134\146 abs((h' : Real) - h) < e \226\134\146 e <= h'
+      #|  (h' : Cart[Real, N])
+      #|  (h' : Cart[Real, N])
+      #|  (d : Real) / real_of_num(2)
+      #|  (d : Real)
+      #|  pow((e : Real), 2)
+      #|  (h : Cart[Real, N])
+      #|  continuous_on((p' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, Unit])((a : Cart[Real, N])), UNIV)
+      #|  \226\136\131 l : Real, real_of_num(0) < l && (\226\136\128 h' : Cart[Real, N], norm(h' - (h : Cart[Real, N])) <= l \226\134\146 pow((e : Real), 2) <= drop((p' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, Unit])((a : Cart[Real, N]), h')))
+      #|  (m : Real)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  open({(z : Cart[Real, Finite_sum[Unit, N]]) | IN(z, UNIV) && IN((a : Cart[Real, N]) - op_pct(drop(fstcart(z)), (h : Cart[Real, N]) + sndcart(z)), (s : (Cart[Real, N]) -> Bool))})
+      #|  (z : Cart[Real, N])
+      #|  (x : Cart[Real, N]) => op_pct(real_of_num(2), lift(dot((f : (Cart[Real, N]) -> Cart[Real, N])((z : Cart[Real, N])) - (b : Cart[Real, N]), x)))
+      #|  (h : Cart[Real, N]) => (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((z : Cart[Real, N]), h) - vec(0)
+      #|  (x : Cart[Real, N]) => lift(pow(norm(x), 2))
+      #|  (x : Cart[Real, N]) => (f : (Cart[Real, N]) -> Cart[Real, N])(x) - (b : Cart[Real, N])
+      #|  \226\136\128 z : Cart[Real, N], IN(z, (s : (Cart[Real, N]) -> Bool)) \226\134\146 has_derivative((p : (Cart[Real, N]) -> Cart[Real, Unit]), (p' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, Unit])(z), at(z))
+      #|  (p' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, Unit]) == ((z : Cart[Real, N]) => (h : Cart[Real, N]) => op_pct(real_of_num(2), lift(dot((f : (Cart[Real, N]) -> Cart[Real, N])(z) - (b : Cart[Real, N]), (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(z, h)))))
+      #|  (p : (Cart[Real, N]) -> Cart[Real, Unit]) == ((z : Cart[Real, N]) => lift(pow(norm((f : (Cart[Real, N]) -> Cart[Real, N])(z) - (b : Cart[Real, N])), 2)))
+      #|  (h : Cart[Real, N])
+      #|  (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N]), (f : (Cart[Real, N]) -> Cart[Real, N])(a) - (b : Cart[Real, N])) == (h : Cart[Real, N])
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N]), (h : Cart[Real, N])) == (f : (Cart[Real, N]) -> Cart[Real, N])(a) - (b : Cart[Real, N])
+      #|  (h : Cart[Real, N]) == (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N]), (f : (Cart[Real, N]) -> Cart[Real, N])(a) - (b : Cart[Real, N]))
+      #|  real_of_num(0) < (e : Real)
+      #|  (e0 : Real)
+      #|  (e : Real)
+      #|  (b : Cart[Real, N])
+      #|  !((c : (_) -> Bool) == {}) && SUBSET(c, (s : (_) -> Bool)) \226\134\146 SUBSET(c, s) && !(s == {})
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  {(x : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN((f : (Cart[Real, N]) -> Cart[Real, N])(x), ball(((b : Cart[Real, N]), (e0 : Real))))}
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  \226\136\131 h : Cart[Real, N], \226\136\131 l : Real, \226\136\131 t0 : Real, \226\136\131 c : (Cart[Real, N]) -> Bool, IN(c, components({(x : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN((f : (Cart[Real, N]) -> Cart[Real, N])(x), ball(((b : Cart[Real, N]), (e : Real))))})) && (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N]), f(a) - b) == h && real_of_num(0) < l && real_of_num(0) < t0 && (\226\136\128 u : Cart[Real, N], \226\136\128 t : Real, norm(u - h) <= l && real_of_num(0) < t && t < t0 \226\134\146 IN(a - op_pct(t, u), c))
+      #|  (e : Real) == norm((f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N])) - (b : Cart[Real, N]))
+      #|  (t : Real)
+      #|  (z : Cart[Real, N])
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (d : Real) / real_of_num(2)
+      #|  (d : Real) / real_of_num(2)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (d : Real)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  open({(z : Cart[Real, Finite_sum[Unit, N]]) | IN(z, UNIV) && IN((a : Cart[Real, N]) - op_pct(drop(fstcart(z)), sndcart(z)), (c : (Cart[Real, N]) -> Bool))})
+      #|  (c : (Cart[Real, N]) -> Bool) == connected_component({(x : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN((f : (Cart[Real, N]) -> Cart[Real, N])(x), ball(((b : Cart[Real, N]), (e0 : Real))))}, (a : Cart[Real, N]))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N])) == (b : Cart[Real, N])
+      #|  ((x : Real) / (y : Real) * (z : Real) < (t : Real)) == (x * z / y < t)
+      #|  real_of_num(0) < norm((h : Cart[Real, N])) + real_of_num(1)
+      #|  :real
+      #|  min((a : Real), (b : Real)) <= b
+      #|  (t : Real) / (norm((h : Cart[Real, N])) + real_of_num(1)) * norm(h)
+      #|  real_of_num(0) < norm((h : Cart[Real, N])) + real_of_num(1)
+      #|  :real
+      #|  real_of_num(0) < (x : Real) \226\134\146 abs(x) == x
+      #|  dist(((a : Cart[Real, N]) - (x : Cart[Real, N]), a)) == norm(x)
       #|  :real
       #|  :real
-      #|  dist(a:real^N,b)
-      #|  &0 < r ==> (x * abs r < r <=> x * r < &1 * r)
-      #|  norm(x:real^N) <= r /\\ norm y < r\n      ==> dist(a,(a + x) + y) < &2 * r /\\ dist(a,a + x) < &2 * r
+      #|  real_of_num(0) < norm((h : Cart[Real, N])) + real_of_num(1)
+      #|  :real
+      #|  (a : Cart[Real, N]) - op_pct(min((t0 : Real) / real_of_num(2), (t : Real) / (norm((h : Cart[Real, N])) + real_of_num(1))), h)
+      #|  (t : Real)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (t0 : Real)
+      #|  (l : Real)
+      #|  (h : Cart[Real, N])
+      #|  (\226\136\128 a : _, \226\136\128 b : _, \226\136\128 c : _, \226\136\128 d : _, (Q : (_, _, _, _) -> Bool)(a, b, c, d) \226\134\146 (P : (_, _, _, _) -> Bool)(a, b, c, d)) && (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, \226\136\131 d : _, Q(a, b, c, d)) \226\134\146 (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, \226\136\131 d : _, P(a, b, c, d) && Q(a, b, c, d))
+      #|  (e0 : Real)
+      #|  \226\136\128 e : Real, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], real_of_num(0) < e && IN(a, (s : (Cart[Real, N]) -> Bool)) && norm((f : (Cart[Real, N]) -> Cart[Real, N])(a) - b) <= e \226\134\146 (\226\136\131 h : Cart[Real, N], \226\136\131 l : Real, \226\136\131 t0 : Real, \226\136\131 c : (Cart[Real, N]) -> Bool, IN(a, closure(c)) && (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(a, f(a) - b) == h && IN(c, components({(x : Cart[Real, N]) | IN(x, s) && IN(f(x), ball((b, e)))})) && real_of_num(0) < l && real_of_num(0) < t0 && (\226\136\128 u : Cart[Real, N], \226\136\128 t : Real, norm(u - h) <= l && real_of_num(0) < t && t < t0 \226\134\146 IN(a - op_pct(t, u), c)))
+      #|  INTER((v : (_) -> Bool), (s : (_) -> Bool)) == {} \226\134\146 SUBSET((t : (_) -> Bool), s) \226\134\146 INTER(v, t) == {}
+      #|  IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (u : (Cart[Real, N]) -> Bool))
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 v : (Cart[Real, N]) -> Bool, bounded(u) && open(u) && SUBSET(closure(u), (s : (Cart[Real, N]) -> Bool)) && open(v) && connected(v) && !(INTER(v, IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), u)) == {}) && INTER(v, IMAGE(f, frontier(u))) == {} \226\134\146 SUBSET(v, IMAGE(f, u))
+      #|  continuous_on((f : (Cart[Real, N]) -> Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N]))
+      #|  (x : Cart[Real, N])
+      #|  ((p : Bool) && ((r : Bool) \226\134\146 (q : Bool))) && r \226\134\146 p && q && r
+      #|  (x : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N]))
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N]))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  o((g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N]), (g : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (t : (Cart[Real, N]) -> Bool))
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (\226\136\131 t : (_) -> Bool, (P : ((_) -> Bool) -> Bool)(t)) \226\134\146 (\226\136\128 s : (_) -> Bool, (\226\136\128 t : (_) -> Bool, P(t) \226\134\146 P(INTER(s, t))) \226\134\146 (\226\136\131 t : (_) -> Bool, SUBSET(t, s) && P(t)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  IN((a : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\131 u : (Cart[Real, N]) -> Bool, open(u) && IN((a : Cart[Real, N]), u) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, u) && IN(y, u) && (f : (Cart[Real, N]) -> Cart[Real, N])(x) == f(y) \226\134\146 x == y)
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
+      #|  (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 (\226\136\131 g : (Cart[Real, N]) -> Cart[Real, N], linear(g) && o((f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x), g) == I && o(g, f'(x)) == I)
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, open(s) && IN(a, s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(f, f'(x), at(x)) && !(det(matrix(f'(x))) == real_of_num(0))) \226\134\146 (\226\136\131 t : (Cart[Real, N]) -> Bool, \226\136\131 u : (Cart[Real, N]) -> Bool, \226\136\131 g : (Cart[Real, N]) -> Cart[Real, N], \226\136\131 g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], open(t) && IN(a, t) && SUBSET(t, s) && open(u) && IN(f(a), u) && homeomorphism((t, u), (f, g)) && (\226\136\128 x : Cart[Real, N], IN(x, t) \226\134\146 has_derivative(f, f'(x), at(x)) && o(f'(x), g'(f(x))) == I && o(g'(f(x)), f'(x)) == I) && (\226\136\128 y : Cart[Real, N], IN(y, u) \226\134\146 has_derivative(g, g'(y), at(y)) && o(f'(g(y)), g'(y)) == I && o(g'(y), f'(g(y))) == I))
+      #|  :real
+      #|  :real
+      #|  real_of_num(1)
+      #|  real_of_num(0) < (x : Real) \226\134\146 inv(x) * (real_of_num(3) * pow(x, 2) - real_of_num(2) * pow(x, 3)) == real_of_num(3) * x - real_of_num(2) * pow(x, 2)
+      #|  (y : Cart[Real, Finite_sum[Unit, N]]) => lift(real_of_num(3) * drop(fstcart(y)) - real_of_num(2) * pow(drop(fstcart(y)), 2))
+      #|  (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[Unit, N]]) -> Bool)(UNIV, (DELETE : ((Cart[Real, N]) -> Bool, Cart[Real, N], Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), (vec : (Num) -> Cart[Real, N])(0)))
+      #|  (x : Cart[Real, Finite_sum[Unit, N]]) => abs((r : Real)) * norm(fstcart(x))
+      #|  op_pct(real_of_num(1) - (a : Real) - real_of_num(1), (x : Cart[Real, N])) == -op_pct(a, x)
+      #|  op_pct((a : Real) * ((x : Real) * (y : Real)), (z : Cart[Real, N])) - op_pct(x * y, z) == op_pct(a - real_of_num(1), op_pct(x, op_pct(y, z)))
+      #|  (a : Cart[Real, N]) + (b : Cart[Real, N]) - (c : Cart[Real, N]) == b - c + a
+      #|  !((y : Real) == real_of_num(0)) \226\134\146 inv(y) * (real_of_num(3) * pow(y, 2) - real_of_num(2) * pow(y, 3)) == y * (real_of_num(3) - real_of_num(2) * y)
+      #|  !((y : Real) == real_of_num(0)) \226\134\146 inv(y) * (y * (z : Real)) == z
+      #|  (drop((x : Cart[Real, Unit])) == real_of_num(0)) == (x == vec(0))
+      #|  \226\136\128 z : Cart[Real, Finite_sum[Unit, N]], IN(z, PCROSS(interval((vec(0), vec(1))), DELETE(UNIV, vec(0)))) \226\134\146 !(drop(fstcart(z)) == real_of_num(0))
+      #|  (a : Cart[Real, N]) - (x : Cart[Real, N]) - (a - (y : Cart[Real, N])) == -(x - y)
+      #|  op_pct((c : Real), (x : Cart[Real, N]) - (y : Cart[Real, N]) - (z : Cart[Real, N])) - (op_pct(c, x - y) - (d : Cart[Real, N])) == -(op_pct(c, z) - d)
+      #|  !((y : Real) == real_of_num(0)) \226\134\146 (x : Real) * y * inv(y) == x
+      #|  (g : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N])((y : Cart[Real, Finite_sum[Unit, N]])) == (a : Cart[Real, N])
+      #|  (y : Cart[Real, Finite_sum[Unit, N]])
+      #|  (y : Cart[Real, Finite_sum[Unit, N]]) => op_pct(inv(norm(fstcart(y))), (f : (Cart[Real, N]) -> Cart[Real, N])((g : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N])(y)) - f((a : Cart[Real, N])) - (f' : (Cart[Real, N]) -> Cart[Real, N])(g(y) - a))
+      #|  (y : Cart[Real, Finite_sum[Unit, N]]) => op_pct(inv(drop(fstcart(y))), (g : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N])(y) - (a : Cart[Real, N])) - op_pct((c : Real), op_pct(inv(norm((x : Cart[Real, N]))), x))
+      #|  (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[Unit, N]]) -> Bool)(UNIV, (DELETE : ((Cart[Real, N]) -> Bool, Cart[Real, N], Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), (vec : (Num) -> Cart[Real, N])(0)))
+      #|  (x : Cart[Real, Finite_sum[Unit, N]]) => abs((c : Real)) * norm(fstcart(x))
+      #|  real_of_num(1)
+      #|  (g' : Cart[Real, N]) - (a' : Cart[Real, N]) - (n : Cart[Real, N]) - ((g : Cart[Real, N]) - (a : Cart[Real, N])) == g' - g - (a' - a) + -n
+      #|  real_of_num(0)
+      #|  (y : Cart[Real, Finite_sum[Unit, N]]) => drop(fstcart(y))
+      #|  (g : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N])
+      #|  (within : (Net[Cart[Real, Finite_sum[Unit, N]]], (Cart[Real, Finite_sum[Unit, N]]) -> Bool) -> Net[Cart[Real, Finite_sum[Unit, N]]])((at : (Cart[Real, Finite_sum[Unit, N]]) -> Net[Cart[Real, Finite_sum[Unit, N]]])((pastecart : (Cart[Real, Unit], Cart[Real, N]) -> Cart[Real, Finite_sum[Unit, N]])((vec : (Num) -> Cart[Real, Unit])(0), (x : Cart[Real, N]))), (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[Unit, N]]) -> Bool)((interval : ((Cart[Real, Unit], Cart[Real, Unit]), Cart[Real, Unit]) -> Bool)(((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))), (DELETE : ((Cart[Real, N]) -> Bool, Cart[Real, N], Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), (vec : (Num) -> Cart[Real, N])(0))))
+      #|  \226\136\128 g : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N], \226\136\128 c : Real, op_minus_minus_gt((y : Cart[Real, Finite_sum[Unit, N]]) => op_pct(inv(drop(fstcart(y))), g(y) - (a : Cart[Real, N])) - op_pct(c, op_pct(inv(norm(sndcart(y))), sndcart(y))), vec(0), within(at(pastecart(vec(0), (x : Cart[Real, N]))), PCROSS(interval((vec(0), vec(1))), DELETE(UNIV, vec(0))))) \226\134\146 op_minus_minus_gt((y : Cart[Real, Finite_sum[Unit, N]]) => op_pct(inv(drop(fstcart(y))), (f : (Cart[Real, N]) -> Cart[Real, N])(g(y)) - f(a)), op_pct(c, (f' : (Cart[Real, N]) -> Cart[Real, N])(op_pct(inv(norm(x)), x))), within(at(pastecart(vec(0), x)), PCROSS(interval((vec(0), vec(1))), DELETE(UNIV, vec(0)))))
+      #|  (x : Cart[Real, N]) == op_pct(real_of_num(1), x) - op_pct(real_of_num(0), x)
+      #|  \226\136\128 k : Real, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], op_pct(k, (f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N]) + x + y)) - op_pct(k, f(a + x)) == op_pct(k, f(a + x + y) - f(a)) - op_pct(k, f(a + x) - f(a))
+      #|  !((x : Real) == real_of_num(0)) && real_of_num(0) < (r : Real) \226\134\146 x / r * (r / x) == real_of_num(1)
+      #|  (f' : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])) == op_pct(norm(x) / (r : Real), f'(op_pct(r / norm(x), x)))
+      #|  op_pct((a : Real) * (b : Real), (x : Cart[Real, N]) - (y : Cart[Real, N])) == op_pct(a, op_pct(b, x) - op_pct(b, y))
+      #|  (n : Real) * ((x : Real) * ((y : Real) * (z : Real))) == n * (y * z) * x
+      #|  (x : Cart[Real, N])
+      #|  ball(((a : Cart[Real, N]), real_of_num(2) * (r : Real)))
+      #|  \226\136\128 s : (_) -> Bool, IN((x : _), s) && SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], has_derivative((f : (Cart[Real, N]) -> Cart[Real, N]), f'((x : Cart[Real, N])), at(x)) && !(det(matrix(f'(x))) == real_of_num(0)) \226\134\146 continuous(f, at(x))
+      #|  !((x : Cart[Real, N]) == vec(0))
+      #|  real_of_num(0) < (r : Real)
+      #|  (a : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (v : Cart[Real, N])
+      #|  (a : Cart[Real, N]) - (b : Cart[Real, N])
+      #|  (f' : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((b : Cart[Real, N]))
+      #|  has_derivative((f : (Cart[Real, N]) -> Cart[Real, N]), (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((b : Cart[Real, N])), at(b))
+      #|  (a : Cart[Real, N]) + op_pct(real_of_num(1) - (x : Real), (b : Cart[Real, N]) - a) == b + op_pct(x, a - b)
+      #|  real_of_num(3) * pow(real_of_num(1) - (t : Real), 2) - real_of_num(2) * pow(real_of_num(1) - t, 3) == real_of_num(1) - (real_of_num(3) * pow(t, 2) - real_of_num(2) * pow(t, 3))
+      #|  (real_of_num(1) - (x : Real)) * ((real_of_num(1) - (real_of_num(1) - x)) * (r : Real)) == x * ((real_of_num(1) - x) * r)
+      #|  (real_of_num(1) - (x : Real) < real_of_num(1)) == (real_of_num(0) < x)
+      #|  (pastecart : (Cart[Real, Unit], Cart[Real, N]) -> Cart[Real, Finite_sum[Unit, N]])((vec : (Num) -> Cart[Real, Unit])(0), (x : Cart[Real, N]))
+      #|  (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[Unit, N]]) -> Bool)(interval((vec(0), vec(1))), (DELETE : ((Cart[Real, N]) -> Bool, Cart[Real, N], Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), (vec : (Num) -> Cart[Real, N])(0)))
+      #|  (x : Cart[Real, N]) - (x - (y : Cart[Real, N])) == y
+      #|  (z : Cart[Real, Finite_sum[Unit, N]]) => pastecart(vec(1) - fstcart(z), sndcart(z))
+      #|  \226\136\128 g : (_) -> _, o(g, g) == I && op_minus_minus_gt(o((f : (_) -> Cart[Real, _]), o(g, g)), (l : Cart[Real, _]), (net : Net[_])) \226\134\146 op_minus_minus_gt(f, l, net)
+      #|  (t : Cart[Real, Unit]) == vec(1)
+      #|  !((x : Cart[Real, N]) == vec(0))
+      #|  real_of_num(0) < (r : Real)
+      #|  (a : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (v : Cart[Real, N])
+      #|  (b : Cart[Real, N]) - (a : Cart[Real, N])
+      #|  (f' : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N]))
+      #|  has_derivative((f : (Cart[Real, N]) -> Cart[Real, N]), (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N])), at(a))
+      #|  (t : Cart[Real, Unit]) == vec(0)
+      #|  real_of_num(1)
+      #|  (z : Cart[Real, Finite_sum[Unit, N]]) => op_pct(norm(sndcart(z)) / (drop(fstcart(z)) * ((real_of_num(1) - drop(fstcart(z))) * (r : Real))), (f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N]) + op_pct(real_of_num(3) * pow(drop(fstcart(z)), 2) - real_of_num(2) * pow(drop(fstcart(z)), 3), (b : Cart[Real, N]) - a) + op_pct(drop(fstcart(z)) * ((real_of_num(1) - drop(fstcart(z))) * r), op_pct(inv(norm(sndcart(z))), sndcart(z)))) - f(a + op_pct(real_of_num(3) * pow(drop(fstcart(z)), 2) - real_of_num(2) * pow(drop(fstcart(z)), 3), b - a)))
+      #|  (x : Cart[Real, N])
+      #|  (t : Cart[Real, Unit])
+      #|  (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[Unit, N]]) -> Bool)(interval((vec(0), vec(1))), (DELETE : ((Cart[Real, N]) -> Bool, Cart[Real, N], Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), (vec : (Num) -> Cart[Real, N])(0)))
+      #|  ((x : Cart[Real, N]) + (y : Cart[Real, N]) == x) == (y == vec(0))
+      #|  linear((f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((b : Cart[Real, N]))) && invertible(matrix(f'(b)))
+      #|  (t : Real) == real_of_num(1)
+      #|  linear((f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N]))) && invertible(matrix(f'(a)))
+      #|  (t : Real) == real_of_num(0)
+      #|  (x : Cart[Real, N])
+      #|  (t : Real)
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
+      #|  real_of_num(2) * pow((t : Real), 3) - real_of_num(3) * pow(t, 2) + real_of_num(1) == pow(real_of_num(1) - t, 2) + real_of_num(2) * (t * pow(real_of_num(1) - t, 2))
+      #|  (y : Real) <= (x : Real) && real_of_num(0) <= y - x + real_of_num(1) \226\134\146 abs(x - y) <= real_of_num(1)
+      #|  dist(((a : Cart[Real, N]), (b : Cart[Real, N]))) == real_of_num(1) * norm(b - a)
+      #|  :real
+      #|  :real
+      #|  dist(((a : Cart[Real, N]), (b : Cart[Real, N])))
+      #|  real_of_num(0) < (r : Real) \226\134\146 ((x : Real) * abs(r) < r) == (x * r < real_of_num(1) * r)
+      #|  norm((x : Cart[Real, N])) <= (r : Real) && norm((y : Cart[Real, N])) < r \226\134\146 dist(((a : Cart[Real, N]), a + x + y)) < real_of_num(2) * r && dist((a, a + x)) < real_of_num(2) * r
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  forall x t. ~(x = vec 0) /\\ &0 <= t /\\ t <= &1 /\\ ~(t = &0) /\\ ~(t = &1)\n          ==> (a + (&3 * t pow 2 - &2 * t pow 3) % (b - a:real^N)) +\n               (t * (&1 - t) * r) % inv (norm x) % x IN ball(a,&2 * r) /\\\n              a + (&3 * t pow 2 - &2 * t pow 3) % (b - a) IN ball(a,&2 * r)
-      #|  \\z. if fstcart z:real^1 = vec 0\n        then (f':real^N->real^N->real^N) a (sndcart z)\n        else if fstcart z = vec 1\n        then (f':real^N->real^N->real^N) b (sndcart z)\n        else norm(sndcart z) / (drop(fstcart z) * (&1 - drop(fstcart z)) * r) %\n             (f((a + (&3 * drop(fstcart z) pow 2 - &2 * drop(fstcart z) pow 3) %\n                (b - a)) +\n                (drop(fstcart z) * (&1 - drop(fstcart z)) * r) %\n                inv(norm(sndcart z)) % sndcart z)  -\n              f(a + (&3 * drop(fstcart z) pow 2 - &2 * drop(fstcart z) pow 3) %\n                (b - a)))
-      #|  b:real^N
-      #|  ball(a:real^N,&2 * r)
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  ball(a:real^N,r)
-      #|  r / &2
-      #|  r:real
-      #|  a:real^N
-      #|  t:real^N->bool
-      #|  g':real^N->real^N->real^N
-      #|  g:real^N->real^N
-      #|  u:real^N->bool
-      #|  t:real^N->bool
-      #|  s:real^N->bool
-      #|  a:real^N
-      #|  f':real^N->real^N->real^N
-      #|  f:real^N->real^N
-      #|  ?r. &0 < r /\\ ball(a,&2 * r) SUBSET s /\\\n        (forall x y. x IN ball(a,&2 * r) /\\ y IN ball(a,&2 * r)\n               ==> ((f:real^N->real^N) x = f y <=> x = y))
-      #|  a:real^N
-      #|  (forall x. x IN s ==> ~(real_sgn(f x) = &0)) /\\\n    (?c. forall x. x IN s ==> real_sgn(f x) = c)\n    ==> (forall x. x IN s ==> real_sgn(f x) = &1) \\/\n        (forall x. x IN s ==> real_sgn(f x) = -- &1)
-      #|  forall f:real^N->real^N f' s.\n        open s /\\ connected s /\\\n        (forall x. x IN s\n             ==> (f has_derivative f' x) (at x) /\\ ~(det(matrix (f' x)) = &0))\n        ==> (forall x. x IN s ==> &0 < det(matrix(f' x))) \\/\n            (forall x. x IN s ==> det(matrix(f' x)) < &0)
-      #|  onorm(\\w. (f':real^M->real^M->real^N) a w - f' u w) =\n                onorm(\\w. f' u w - f' a w)
-      #|  inv(&2) * x = (&1 * x) * inv(&2)
-      #|  onorm(g':real^N->real^M) *\n    onorm(\\w. f' a w - (f':real^M->real^M->real^N) u w)
-      #|  linear(\\w. f' a w - (f':real^M->real^M->real^N) u w)
-      #|  (\\w. w - g'((f':real^M->real^M->real^N) u w)) =\n     g' o (\\w. f' a w - f' u w)
-      #|  u:real^M
-      #|  \\x v. v - g'((f':real^M->real^M->real^N) x v)
-      #|  forall u v:real^M. u IN ball(a,d) /\\ v IN ball(a,d)\n                 ==> norm(ph u - ph v :real^M) <= norm(u - v) / &2
-      #|  norm((ph:real^M->real^M) x' - ph x) <= norm(x' - x) / &2
-      #|  ph = \\w. w - g'(f(w) - (f:real^M->real^N)(x))
-      #|  x':real^M
-      #|  x:real^M
-      #|  ball(a:real^M,d)
-      #|  min d1 d2
-      #|  d2:real
-      #|  a:real^M
-      #|  d1:real
-      #|  k:real
-      #|  ?d. &0 < d /\\ ball(a,d) SUBSET s /\\\n        forall x. x IN ball(a,d)\n            ==> onorm(\\v. (f':real^M->real^M->real^N)(x) v - f'(a) v) < k
-      #|  k = &1 / onorm(g':real^N->real^M) / &2
-      #|  &0 < onorm(g':real^N->real^M)
-      #|  forall f:real^M->real^N f' g' s a.\n        a IN s /\\ open s /\\ linear g' /\\ (g' o f'(a) = I) /\\\n        (forall x. x IN s ==> (f has_derivative f'(x)) (at x)) /\\\n        (forall e. &0 < e\n             ==> ?d. &0 < d /\\\n                     forall x. dist(a,x) < d ==> onorm(\\v. f'(x) v - f'(a) v) < e)\n        ==> ?t. a IN t /\\ open t /\\\n                forall x x'. x IN t /\\ x' IN t /\\ (f x' = f x) ==> (x' = x)
-      #|  y:real^N
-      #|  t:real^N->bool
-      #|  (x --> l) net\n          ==> m = l /\\ ((x --> l) net ==> (y --> l) net)\n              ==> (y --> m) net
-      #|  x = (g:real^N->real^N)(f x)
-      #|  x:real^N
-      #|  u:real^N->bool
-      #|  (\\z. (g':real^N->real^N->real^N) (f z) h) o\n                  (g:real^N->real^N)
-      #|  h:real^N
-      #|  y:real^N
-      #|  t:real^N->bool
-      #|  m = l /\\ ((x --> l) net ==> (y --> l) net)\n        ==> (x --> l) net ==> (y --> m) net
-      #|  h:real^N
-      #|  r /\\ (p ==> q) ==> p ==> q /\\ r
-      #|  forall h:real^N. ((\\y. matrix_inv(matrix ((f':real^N->real^N->real^N) y)) ** h)\n                   --> matrix_inv(matrix(f' x)) ** h) (at x)
-      #|  forall q. (p ==> q) /\\ (q ==> r) ==> p ==> r
-      #|  x:real^N
-      #|  g':real^N->real^N->real^N
-      #|  g:real^N->real^N
-      #|  u:real^N->bool
-      #|  t:real^N->bool
-      #|  s':real^N->bool
-      #|  a:real^N
-      #|  f':real^N->real^N->real^N
-      #|  f:real^N->real^N
-      #|  x:real^N
-      #|  x:real^N = a
-      #|  x:real^N
-      #|  s INTER u:real^N->bool
-      #|  u:real^N->bool
-      #|  abs(det(matrix((f':real^N->real^N->real^N) a)))
-      #|  s:real^N->bool
-      #|  \\a. (f':real^N->real^N->real^N) a h
-      #|  h:real^N
-      #|  at(a:real^N)
-      #|  matrix((f':real^N->real^N->real^N) a)
-      #|  \\x. matrix((f':real^N->real^N->real^N) x)
-      #|  ?s'. a IN s' /\\ s' SUBSET s /\\ open s' /\\\n         forall x. x IN s' ==> ~(det(matrix((f':real^N->real^N->real^N) x)) = &0)
-      #|  forall f:real^N->real^N f' s a.\n        open s /\\ a IN s /\\\n        (forall x. x IN s ==> (f has_derivative f'(x)) (at x)) /\\\n        ~(det(matrix(f' a)) = &0) /\\ (forall h. (\\x. f' x h) continuous at a)\n        ==> ?t u g g'.\n                open t /\\ a IN t /\\ t SUBSET s /\\ open u /\\ f a IN u /\\\n                homeomorphism (t,u) (f,g) /\\\n                (forall x. x IN t\n                     ==> (f has_derivative f' x) (at x) /\\\n                         f'(x) o g'(f x) = I /\\ g'(f x) o f'(x) = I) /\\\n                (forall y. y IN u\n                     ==> (g has_derivative g' y) (at y) /\\\n                         f'(g y) o g' y = I /\\ g' y o f'(g y) = I) /\\\n                (forall x. x IN t /\\ (forall h. (\\y. f' y h) continuous at x)\n                       ==> (forall h. (\\z. g' z h) continuous at (f x)))
-      #|  a:real^N
-      #|  s:real^N->bool
-      #|  f':real^N->real^N->real^N
-      #|  f:real^N->real^N
-      #|  forall f:real^N->real^N f' s a.\n        open s /\\ a IN s /\\\n        (forall x. x IN s\n             ==> (f has_derivative f'(x)) (at x) /\\\n                 ((forall h. (\\y. f' y h) continuous at x))) /\\\n        ~(det(matrix(f' a)) = &0)\n        ==> ?t u g g'.\n                open t /\\ a IN t /\\ t SUBSET s /\\ open u /\\ f a IN u /\\\n                homeomorphism (t,u) (f,g) /\\\n                (forall x. x IN t\n                     ==> (f has_derivative f' x) (at x) /\\\n                         f'(x) o g'(f x) = I /\\ g'(f x) o f'(x) = I) /\\\n                (forall y. y IN u\n                     ==> (g has_derivative g' y) (at y) /\\\n                         f'(g y) o g' y = I /\\ g' y o f'(g y) = I) /\\\n                (forall x. x IN t ==> (forall h. (\\z. g' z h) continuous at (f x)))
-      #|  s:real^N->bool
-      #|  (f':real^N->real^N->real^N) x
-      #|  g':real^N->real^N
-      #|  (f':real^N->real^N->real^N) x
-      #|  x:real^N
-      #|  t = IMAGE (f:real^N->real^N) s
-      #|  (forall x. P /\\ Q x ==> R x) /\\ (P ==> ?x. Q x)\n    ==> (P ==> ?x. P /\\ Q x /\\ R x)
-      #|  g:real^N->real^N
-      #|  s:real^N->bool
-      #|  s:real^N->bool
-      #|  a:real^N
-      #|  f':real^N->real^N->real^N
-      #|  f:real^N->real^N
-      #|  a:real^N
-      #|  t:real^N->bool
-      #|  s:real^N->bool
-      #|  f:real^N->real^N
-      #|  open(IMAGE (f:real^N->real^N) s)
-      #|  forall f:real^N->real^N f' s t.\n      open s /\\ connected s /\\ simply_connected t /\\ (s = {} ==> t = {}) /\\\n      (forall c. closed_in (subtopology euclidean s) c\n           ==> closed_in (subtopology euclidean t) (IMAGE f c)) /\\\n      (forall x. x IN s\n           ==> (f has_derivative f' x) (at x) /\\ ~(det(matrix(f' x)) = &0))\n      ==> ?g g'. homeomorphism (s,t) (f,g) /\\\n                 (forall y. y IN t\n                      ==> (g has_derivative g' y) (at y) /\\\n                          f' (g y) o g' y = I /\\ g' y o f' (g y) = I) /\\\n                 (forall x. x IN s ==> f' x o g' (f x) = I /\\ g' (f x) o f' x = I)
-      #|  (f:real^N->real^N) x IN u /\\\n        forall w. w IN u ==> ((g:real^N->real^N) w IN p <=> w IN p)
-      #|  r:real
-      #|  {r | r IN (:real^1) /\\ ((f:real^N->real^N) x + drop r % z) IN u}
-      #|  eventually (\\r. ((f:real^N->real^N) x + drop r % z) IN u) (at(vec 0))
-      #|  z:real^N
-      #|  x:real^N
-      #|  u = IMAGE (h:real^N->real^N) t
-      #|  (g':real^N->real^N->real^N) (f(x:real^N)) z IN p
-      #|  z:real^N
-      #|  x:real^N
-      #|  x:real^N
-      #|  (p INTER t:real^N->bool) SUBSET s
-      #|  u = IMAGE (h:real^N->real^N) t
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  f:real^N->real^N
-      #|  forall f. (forall x. x IN p ==> h x = f x) /\\\n            IMAGE h t = u /\\ IMAGE f (t INTER p) SUBSET p /\\\n            (forall x. x IN t ==> (h x IN p <=> x IN p))\n            ==> IMAGE h (p INTER t) = p INTER u
-      #|  homeomorphism(t,u) (f',g)\n         ==> (forall x. x IN t' ==> f' x = f x) /\\\n             t' SUBSET t /\\ u' SUBSET u /\\ IMAGE f' t' = u'\n         ==> homeomorphism(t',u') (f,g)
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  a:real^N
-      #|  p:real^N->bool
-      #|  x = ((f:real^N->real^N)(closest_point p x) + x - closest_point p x) -\n              (f(closest_point p x) - closest_point p x)
-      #|  x:real^N
-      #|  forall x. x IN t ==> ((h:real^N->real^N) x IN p <=> x IN p)
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  forall x. x IN p ==> (h:real^N->real^N) x = f x
-      #|  p:real^N->bool
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  g':real^N->real^N->real^N
-      #|  g:real^N->real^N
-      #|  p INTER u:real^N->bool
-      #|  p INTER t:real^N->bool
-      #|  g':real^N->real^N->real^N
-      #|  g:real^N->real^N
-      #|  u:real^N->bool
-      #|  t:real^N->bool
-      #|  w + (y - closest_point p y):real^N
-      #|  w:real^N
-      #|  closest_point p (y:real^N)
-      #|  IMAGE f s = t ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
-      #|  closest_point p (x:real^N)
-      #|  y:real^N
-      #|  closest_point p (x:real^N)
-      #|  closest_point p (x:real^N)
-      #|  {x:real^N | closest_point p x IN s}
-      #|  x:real^N
-      #|  (f':real^N->real^N->real^N) (closest_point p x)
-      #|  closest_point(p:real^N->bool)
-      #|  f:real^N->real^N
-      #|  closest_point(p:real^N->bool)
-      #|  x:real^N
-      #|  closest_point p a:real^N = a
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  p:real^N->bool
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  {x | x IN (:real^N) /\\ closest_point p x IN s}
-      #|  a:real^N
-      #|  h':real^N->real^N->real^N
-      #|  h:real^N->real^N
-      #|  h' = \\x h. (f':real^N->real^N->real^N)\n                (closest_point p x) (closest_point p h) +\n                (h - closest_point p h)
-      #|  h = \\x:real^N. f(closest_point p x) + (x - closest_point p x)
-      #|  forall f:real^N->real^N f' s p a.\n        subspace p /\\ open_in (subtopology euclidean p) s /\\\n        IMAGE f s SUBSET p /\\ a IN s /\\\n        (forall x. x IN s\n             ==> (f has_derivative f' x) (at x within p) /\\ IMAGE (f' x) p = p)\n        ==> ?t u g g'. open_in (subtopology euclidean p) t /\\ a IN t /\\\n                       t SUBSET s /\\\n                       open_in (subtopology euclidean p) u /\\ f(a) IN u /\\\n                       homeomorphism (t,u) (f,g) /\\\n                       (forall x. x IN t\n                            ==> (f has_derivative f' x) (at x within p) /\\\n                                (forall h. h IN p\n                                     ==> f' x (g' (f x) h) = h /\\\n                                         g' (f x) (f' x h) = h)) /\\\n                       (forall y. y IN u\n                            ==> (g has_derivative g' y) (at y within p) /\\\n                                (forall h. h IN p\n                                     ==> f' (g y) (g' y h) = h /\\\n                                         g' y (f' (g y) h) = h))
-      #|  --a + a + x:real^N = x
-      #|  x:real^N
-      #|  a + --a + x:real^N = x
-      #|  f =\n        (\\x:real^N. a + x) o ((\\x. --a + x) o f o (\\x. a + x)) o (\\x. --a + x)
-      #|  x:real^N
-      #|  --a + x:real^N = x - a
-      #|  --a + a + x:real^N = x
-      #|  x - a:real^N = --a + x
-      #|  a + --a + x:real^N = x
-      #|  f = (\\x:real^N. a + x) o\n              ((\\x. --a + x) o f o (\\x. a + x)) o (\\x. --a + x)
-      #|  x - a:real^N = y <=> x = a + y
-      #|  --a + x:real^N = x - a
-      #|  --a + a + x:real^N = x
-      #|  x - a:real^N = --a + x
-      #|  a + --a + x:real^N = x
-      #|  p = IMAGE (\\x:real^N. a + x) (IMAGE (\\x. --a + x) p)
-      #|  a + --a + x:real^N = x
-      #|  p = IMAGE (\\x:real^N. a + x) (IMAGE (\\x. --a + x) p)
-      #|  --a + a + x:real^N = x
-      #|  (g':real^N->real^N->real^N) o (\\x. --a + x)
-      #|  (\\x:real^N. a + x) o g o (\\x. --a + x)
-      #|  IMAGE (\\x:real^N. a + x) u
-      #|  IMAGE (\\x:real^N. a + x) t
-      #|  g':real^N->real^N->real^N
-      #|  g:real^N->real^N
-      #|  u:real^N->bool
-      #|  t:real^N->bool
-      #|  a + --a + x:real^N = x
-      #|  x:real^N
-      #|  x:real^N
-      #|  a + --a + x:real^N = x
-      #|  vec 0 - --a:real^N = a
-      #|  a + --a + x:real^N = x
-      #|  IMAGE (f:real^N->real^N) s
-      #|  --a + x:real^N = x - a
-      #|  vec 0:real^N
-      #|  IMAGE (\\x:real^N. --a + x) p
-      #|  IMAGE (\\x:real^N. --a + x) s
-      #|  (f':real^N->real^N->real^N) o (\\x. a + x)
-      #|  (\\x:real^N. --a + x) o f o (\\x. a + x)
-      #|  IMAGE (f:real^N->real^N) t = u
-      #|  x:real^N
-      #|  t:real^N->bool
-      #|  (g':real^N->real^N->real^N) x
-      #|  g:real^N->real^N
-      #|  (f':real^N->real^N->real^N) x
-      #|  f:real^N->real^N
-      #|  x:real^N
-      #|  u = IMAGE (f:real^N->real^N) t
-      #|  (g':real^N->real^N->real^N) o (g:real^N->real^N)
-      #|  g':real^N->real^N->real^N
-      #|  forall x. x IN t\n          ==> ?g. linear g /\\\n                  (f':real^N->real^N->real^N) x o g = I /\\ g o f' x = I
-      #|  g:real^N->real^N
-      #|  u:real^N->bool
-      #|  t:real^N->bool
-      #|  r:real
-      #|  p:real^N->bool
-      #|  {x | P x} = {x | x IN UNIV /\\ P x}
-      #|  eventually (\\r. r IN {q | (x + drop q % z:real^N) IN s}) (at(vec 0))
-      #|  (x:real^N) IN p
-      #|  z:real^N
-      #|  z:real^N
-      #|  x:real^N
-      #|  x:real^N
-      #|  a:real^N
-      #|  p:real^N->bool
-      #|  s:real^N->bool
-      #|  f':real^N->real^N->real^N
-      #|  f:real^N->real^N
-      #|  forall f:real^N->real^N f' s p a.\n        affine p /\\ open_in (subtopology euclidean p) s /\\\n        IMAGE f s SUBSET p /\\ a IN s /\\\n        (forall x. x IN s\n             ==> (f has_derivative f' x) (at x within p) /\\\n                 ~(det (matrix (f' x)) = &0))\n        ==> ?t u g g'. open_in (subtopology euclidean p) t /\\ a IN t /\\\n                       t SUBSET s /\\\n                       open_in (subtopology euclidean p) u /\\ f(a) IN u /\\\n                       homeomorphism (t,u) (f,g) /\\\n                       (forall x. x IN t\n                            ==> (f has_derivative f' x) (at x within p) /\\\n                                f' x o g' (f x) = I /\\\n                                g' (f x) o f' x = I) /\\\n                       (forall y. y IN u\n                            ==> (g has_derivative g' y) (at y within p) /\\\n                                f' (g y) o g' y = I /\\\n                                g' y o f' (g y) = I)
-      #|  affine:(real^N->bool)->bool
-      #|  subspace:(real^N->bool)->bool
-      #|  (f has_vector_derivative f') net <=>\n        (f has_derivative (\\x. drop(x) % f')) net
-      #|  vector_derivative (f:real^1->real^N) net =\n        @f'. (f has_vector_derivative f') net
-      #|  column 1 (jacobian (f:real^1->real^N) net)
-      #|  forall net f:real^1->real^N.\n        f differentiable net <=>\n        (f has_vector_derivative (vector_derivative f net)) net
-      #|  forall f net. f differentiable net <=> (?f'. (f has_vector_derivative f') net)
-      #|  forall f f' net. (f has_vector_derivative f') net ==> f differentiable net
-      #|  vec 1:real^1
-      #|  x:real^1
-      #|  \\x. drop x % (f'':real^N)
-      #|  \\x. drop x % (f':real^N)
-      #|  f:real^1->real^N
-      #|  forall f:real^1->real^N x f' f''.\n     (f has_vector_derivative f') (at x) /\\\n     (f has_vector_derivative f'') (at x)\n     ==> f' = f''
-      #|  x:real^1
-      #|  f:real^1->real^N
-      #|  forall f:real^1->real^N f' x.\n        (f has_vector_derivative f') (at x)\n        ==> vector_derivative f (at x) = f'
-      #|  forall(f:real^1->real^N) f' a s.\n         (f has_vector_derivative f') (at a within s) <=>\n         forall i. 1 <= i /\\ i <= dimindex(:N)\n             ==> ((\\x. lift(f x$i)) has_vector_derivative lift(f'$i))\n                 (at a within s)
-      #|  forall(f:real^1->real^N) f' a.\n         (f has_vector_derivative f') (at a) <=>\n         forall i. 1 <= i /\\ i <= dimindex(:N)\n             ==> ((\\x. lift(f x$i)) has_vector_derivative lift(f'$i)) (at a)
-      #|  forall(f:real^1->real^N) f' a s i.\n        (f has_vector_derivative f') (at a within s) /\\\n        1 <= i /\\ i <= dimindex(:N)\n        ==> ((\\x. lift(f x$i)) has_vector_derivative lift(f'$i))\n             (at a within s)
-      #|  forall(f:real^1->real^N) f' a i.\n        (f has_vector_derivative f') (at a) /\\\n        1 <= i /\\ i <= dimindex(:N)\n        ==> ((\\x. lift(f x$i)) has_vector_derivative lift(f'$i)) (at a)
-      #|  &1
-      #|  forall f:real^1->real^N s x.\n      (f has_vector_derivative f') (at x within s) <=>\n      ((\\y. inv(drop(y - x)) % (f y - f x)) --> f') (at x within s)
-      #|  forall f:real^1->real^N x.\n      (f has_vector_derivative f') (at x) <=>\n      ((\\y. inv(drop(y - x)) % (f y - f x)) --> f') (at x)
-      #|  forall(f:real^1->real^N) x s f' f''.\n        ~trivial_limit (at x within s) /\\\n        (f has_vector_derivative f') (at x within s) /\\\n        (f has_vector_derivative f'') (at x within s)\n        ==> f' = f''
-      #|  interval[a:real^1,b]
-      #|  x:real^1
-      #|  f:real^1->real^N
-      #|  forall f:real^1->real^N a b x f' f''.\n        drop a < drop b /\\\n        x IN interval [a,b] /\\\n        (f has_vector_derivative f') (at x within interval [a,b]) /\\\n        (f has_vector_derivative f'') (at x within interval [a,b])\n        ==> f' = f''
-      #|  forall f:real^1->real^N f' x a b.\n         drop a < drop b /\\ x IN interval[a,b] /\\\n         (f has_vector_derivative f') (at x within interval [a,b])\n         ==> vector_derivative f (at x within interval [a,b]) = f'
-      #|  forall f s t x. (f has_vector_derivative f') (at x within s) /\\ t SUBSET s\n             ==> (f has_vector_derivative f') (at x within t)
-      #|  forall c net. ((\\x. c) has_vector_derivative vec 0) net
-      #|  forall c:real^N a. vector_derivative (\\x. c) (at a) = vec 0
-      #|  (\\x. drop x % vec 1) = (\\x. x)
-      #|  forall net. ((\\x. x) has_vector_derivative (vec 1)) net
-      #|  a % b % x = b % a % x
-      #|  forall f f' net c. (f has_vector_derivative f') net\n                ==> ((\\x. c % f(x)) has_vector_derivative (c % f')) net
-      #|  c:real
-      #|  inv(c):real
-      #|  forall f f' net c.\n       ~(c = &0)\n       ==> (((\\x. c % f(x)) has_vector_derivative (c % f')) net <=>\n            (f has_vector_derivative f') net)
-      #|  forall f f' net. (f has_vector_derivative f') net\n            ==> ((\\x. --(f(x))) has_vector_derivative (--f')) net
-      #|  forall f f' net. ((\\x. --(f(x))) has_vector_derivative --f') net <=>\n              (f has_vector_derivative f') net
-      #|  forall f f' g g' net.\n        (f has_vector_derivative f') net /\\ (g has_vector_derivative g') net\n        ==> ((\\x. f(x) + g(x)) has_vector_derivative (f' + g')) net
-      #|  forall f f' g g' net.\n        (f has_vector_derivative f') net /\\ (g has_vector_derivative g') net\n        ==> ((\\x. f(x) - g(x)) has_vector_derivative (f' - g')) net
-      #|  forall h:real^M->real^N->real^P f g f' g' x s.\n        (f has_vector_derivative f') (at x within s) /\\\n        (g has_vector_derivative g') (at x within s) /\\\n        bilinear h\n        ==> ((\\x. h (f x) (g x)) has_vector_derivative\n             (h (f x) g' + h f' (g x))) (at x within s)
-      #|  forall h:real^M->real^N->real^P f g f' g' x.\n        (f has_vector_derivative f') (at x) /\\\n        (g has_vector_derivative g') (at x) /\\\n        bilinear h\n        ==> ((\\x. h (f x) (g x)) has_vector_derivative\n             (h (f x) g' + h f' (g x))) (at x)
-      #|  forall f x s. (f has_vector_derivative f') (at x)\n           ==> (f has_vector_derivative f') (at x within s)
-      #|  forall f f' g x s d.\n       &0 < d /\\ x IN s /\\\n       (forall x'. x' IN s /\\ dist (x',x) < d ==> f x' = g x') /\\\n       (f has_vector_derivative f') (at x within s)\n       ==> (g has_vector_derivative f') (at x within s)
-      #|  forall f f' g x d.\n       &0 < d /\\ (forall x'. dist (x',x) < d ==> f x' = g x') /\\\n       (f has_vector_derivative f') (at x)\n       ==> (g has_vector_derivative f') (at x)
-      #|  forall f g s x.\n        open s /\\ x IN s /\\\n        (forall y. y IN s ==> f y = g y) /\\\n        (f has_vector_derivative f') (at x)\n        ==> (g has_vector_derivative f') (at x)
-      #|  forall f g f' g' x.\n         (f has_vector_derivative f') (at x) /\\\n         (g has_vector_derivative g') (at (f x))\n         ==> ((g o f) has_vector_derivative (drop f' % g')) (at x)
-      #|  forall f g f' g' s x.\n         (f has_vector_derivative f') (at x within s) /\\\n         (g has_vector_derivative g') (at (f x) within IMAGE f s)\n         ==> ((g o f) has_vector_derivative (drop f' % g')) (at x within s)
-      #|  linear (\\h. drop h % f' (x0:real^1):real^N)
-      #|  B:real
-      #|  s:real^1->bool
-      #|  \\x:real^1 h. drop h % f' x : real^N
-      #|  f:real^1->real^N
-      #|  forall f f':real^1->real^N s B.\n     convex s /\\\n     (forall x. x IN s ==> (f has_vector_derivative f' x) (at x within s)) /\\\n     (forall x. x IN s ==> norm (f' x) <= B)\n     ==> (forall x y. x IN s /\\ y IN s ==> norm (f x - f y) <= B * norm (x - y))
-      #|  B:real
-      #|  forall f:real^1->real^N f' s.\n      (forall x. x IN s ==> (f has_vector_derivative f'(x)) (at x within s)) /\\\n      convex s /\\ bounded(IMAGE f' s)\n      ==> ?B. &0 < B /\\\n              forall x y. x IN s /\\ y IN s ==> norm(f x - f y) <= B * norm (x - y)
-      #|  &1
-      #|  f:real^1->real^N
-      #|  &1
-      #|  RESTRICTION s f:real^1->real^N
-      #|  forall f:real^1->real^N f' s x.\n     x IN s\n     ==> ((RESTRICTION s f has_vector_derivative f') (at x within s) <=>\n          (f has_vector_derivative f') (at x within s))
-      #|  x:real^1
-      #|  p /\\ q /\\ r ==> s <=> p /\\ q ==> r ==> s
-      #|  forall f:real^1->real^N f' s.\n        (forall x. x IN s ==> (f has_vector_derivative f'(x)) (at x)) /\\ open s\n        ==> baire 1 s f'
-      #|  drop a <= drop b \\/ drop b <= drop a
-      #|  b:real^1
-      #|  &1
-      #|  forall f f' s a.\n        (forall x y. x IN s /\\ y IN s /\\ drop x <= drop y\n               ==> drop(f x) <= drop(f y)) /\\\n        a IN s /\\ a limit_point_of s /\\\n        (f has_vector_derivative f') (at a within s)\n        ==> &0 <= drop f'
-      #|  \\y. lift(norm(inv(drop(y - x)) % (g y - g x:real^N)))
-      #|  \\y. lift(norm(inv(drop(y - x)) % (f y - f x:real^M)))
-      #|  at (x:real^1) within s
-      #|  forall f:real^1->real^M g:real^1->real^N f' g' x s.\n        x limit_point_of s /\\\n        (f has_vector_derivative f') (at x within s) /\\\n        (g has_vector_derivative g') (at x within s) /\\\n        eventually (\\y. norm(f y - f x) <= norm(g y - g x)) (at x within s)\n        ==> norm f' <= norm g'
-      #|  (:real^1)
-      #|  x:real^1
-      #|  g:real^1->real^N
-      #|  f:real^1->real^M
-      #|  forall f:real^1->real^M g:real^1->real^N f' g' x.\n        (f has_vector_derivative f') (at x) /\\\n        (g has_vector_derivative g') (at x) /\\\n        eventually (\\y. norm(f y - f x) <= norm(g y - g x)) (at x)\n        ==> norm f' <= norm g'
-      #|  y - x:real^N
-      #|  u:real
-      #|  ((&1 - u) % x + u % y) - x:real^N = u % (y - x)
-      #|  (f':real^N->real)(z - x) / norm(z - x) = f'(y - x) / norm(y - x)
-      #|  z <= y / n /\\ abs(z - d) < e / n ==> d <= (y + e) / n
-      #|  inv y * (z - (x + d)):real = (z - x) / y - d / y
-      #|  z:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  ((&1 - u) % x + u % y) - x:real^N = u % (y - x)
-      #|  (z:real^N) IN s
-      #|  z:real^N
-      #|  (z:real^N) IN segment(x,y)
-      #|  z:real^N = (&1 - u) % x + u % y
-      #|  &0 < u /\\ u < &1
-      #|  u = min (&1 / &2) (d / &2 / norm (y - x:real^N))
-      #|  d:real
-      #|  e / &2 / norm(y - x:real^N)
-      #|  &0 < e
-      #|  e = (f':real^N->real)(y - x) - (f y - f x)
-      #|  y:real^N = x
-      #|  (x:real^N) IN s /\\ (y:real^N) IN s
-      #|  forall f f' s x y:real^N.\n        f convex_on s /\\ segment[x,y] SUBSET s /\\\n        ((lift o f) has_derivative (lift o f')) (at x within s)\n        ==> f'(y - x) <= f y - f x
-      #|  z:real^N
-      #|  y - x:real^N
-      #|  f' = --f'' ==> f' <= x - y ==> y - x <= f''
-      #|  x:real^N
-      #|  y:real^N
-      #|  s:real^N->bool
-      #|  f':real^N->real
-      #|  f:real^N->real
-      #|  forall f f' s x y:real^N.\n        f convex_on s /\\ segment[x,y] SUBSET s /\\\n        ((lift o f) has_derivative (lift o f')) (at y within s)\n        ==> f y - f x <= f'(y - x)
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 t : Real, !(x == vec(0)) && real_of_num(0) <= t && t <= real_of_num(1) && !(t == real_of_num(0)) && !(t == real_of_num(1)) \226\134\146 IN((a : Cart[Real, N]) + op_pct(real_of_num(3) * pow(t, 2) - real_of_num(2) * pow(t, 3), (b : Cart[Real, N]) - a) + op_pct(t * ((real_of_num(1) - t) * (r : Real)), op_pct(inv(norm(x)), x)), ball((a, real_of_num(2) * r))) && IN(a + op_pct(real_of_num(3) * pow(t, 2) - real_of_num(2) * pow(t, 3), b - a), ball((a, real_of_num(2) * r)))
+      #|  (z : Cart[Real, Finite_sum[Unit, N]]) => if fstcart(z) == vec(0) { (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N]), sndcart(z)) } else { if fstcart(z) == vec(1) { f'((b : Cart[Real, N]), sndcart(z)) } else { op_pct(norm(sndcart(z)) / (drop(fstcart(z)) * ((real_of_num(1) - drop(fstcart(z))) * (r : Real))), (f : (Cart[Real, N]) -> Cart[Real, N])(a + op_pct(real_of_num(3) * pow(drop(fstcart(z)), 2) - real_of_num(2) * pow(drop(fstcart(z)), 3), b - a) + op_pct(drop(fstcart(z)) * ((real_of_num(1) - drop(fstcart(z))) * r), op_pct(inv(norm(sndcart(z))), sndcart(z)))) - f(a + op_pct(real_of_num(3) * pow(drop(fstcart(z)), 2) - real_of_num(2) * pow(drop(fstcart(z)), 3), b - a))) } }
+      #|  (b : Cart[Real, N])
+      #|  ball(((a : Cart[Real, N]), real_of_num(2) * (r : Real)))
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  ball(((a : Cart[Real, N]), (r : Real)))
+      #|  (r : Real) / real_of_num(2)
+      #|  (r : Real)
+      #|  (a : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\131 r : Real, real_of_num(0) < r && SUBSET(ball(((a : Cart[Real, N]), real_of_num(2) * r)), (s : (Cart[Real, N]) -> Bool)) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, ball((a, real_of_num(2) * r))) && IN(y, ball((a, real_of_num(2) * r))) \226\134\146 ((f : (Cart[Real, N]) -> Cart[Real, N])(x) == f(y)) == (x == y))
+      #|  (a : Cart[Real, N])
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 !(real_sgn((f : (_) -> Real)(x)) == real_of_num(0))) && (\226\136\131 c : Real, \226\136\128 x : _, IN(x, s) \226\134\146 real_sgn(f(x)) == c) \226\134\146 (\226\136\128 x : _, IN(x, s) \226\134\146 real_sgn(f(x)) == real_of_num(1)) || (\226\136\128 x : _, IN(x, s) \226\134\146 real_sgn(f(x)) == -real_of_num(1))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, open(s) && connected(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(f, f'(x), at(x)) && !(det(matrix(f'(x))) == real_of_num(0))) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 real_of_num(0) < det(matrix(f'(x)))) || (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 det(matrix(f'(x))) < real_of_num(0))
+      #|  onorm((w : Cart[Real, M]) => (f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])((a : Cart[Real, M]), w) - f'((u : Cart[Real, M]), w)) == onorm((w : Cart[Real, M]) => f'(u, w) - f'(a, w))
+      #|  inv(real_of_num(2)) * (x : Real) == real_of_num(1) * x * inv(real_of_num(2))
+      #|  onorm((g' : (Cart[Real, N]) -> Cart[Real, M])) * onorm((w : Cart[Real, M]) => (f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])((a : Cart[Real, M]), w) - f'((u : Cart[Real, M]), w))
+      #|  linear((w : Cart[Real, M]) => (f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])((a : Cart[Real, M]), w) - f'((u : Cart[Real, M]), w))
+      #|  ((w : Cart[Real, M]) => w - (g' : (Cart[Real, N]) -> Cart[Real, M])((f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])((u : Cart[Real, M]), w))) == o(g', (w : Cart[Real, M]) => f'((a : Cart[Real, M]), w) - f'(u, w))
+      #|  (u : Cart[Real, M])
+      #|  (x : Cart[Real, M]) => (v : Cart[Real, M]) => v - (g' : (Cart[Real, N]) -> Cart[Real, M])((f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])(x, v))
+      #|  \226\136\128 u : Cart[Real, M], \226\136\128 v : Cart[Real, M], IN(u, ball(((a : Cart[Real, M]), (d : Real)))) && IN(v, ball((a, d))) \226\134\146 norm((ph : (Cart[Real, M]) -> Cart[Real, M])(u) - ph(v)) <= norm(u - v) / real_of_num(2)
+      #|  norm((ph : (Cart[Real, M]) -> Cart[Real, M])((x' : Cart[Real, M])) - ph((x : Cart[Real, M]))) <= norm(x' - x) / real_of_num(2)
+      #|  (ph : (Cart[Real, M]) -> Cart[Real, M]) == ((w : Cart[Real, M]) => w - (g' : (Cart[Real, N]) -> Cart[Real, M])((f : (Cart[Real, M]) -> Cart[Real, N])(w) - f((x : Cart[Real, M]))))
+      #|  (x' : Cart[Real, M])
+      #|  (x : Cart[Real, M])
+      #|  ball(((a : Cart[Real, M]), (d : Real)))
+      #|  min((d1 : Real), (d2 : Real))
+      #|  (d2 : Real)
+      #|  (a : Cart[Real, M])
+      #|  (d1 : Real)
+      #|  (k : Real)
+      #|  \226\136\131 d : Real, real_of_num(0) < d && SUBSET(ball(((a : Cart[Real, M]), d)), (s : (Cart[Real, M]) -> Bool)) && (\226\136\128 x : Cart[Real, M], IN(x, ball((a, d))) \226\134\146 onorm((v : Cart[Real, M]) => (f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])(x, v) - f'(a, v)) < (k : Real))
+      #|  (k : Real) == real_of_num(1) / onorm((g' : (Cart[Real, N]) -> Cart[Real, M])) / real_of_num(2)
+      #|  real_of_num(0) < onorm((g' : (Cart[Real, N]) -> Cart[Real, M]))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 a : Cart[Real, M], IN(a, s) && open(s) && linear(g') && o(g', f'(a)) == I && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 has_derivative(f, f'(x), at(x))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, M], dist((a, x)) < d \226\134\146 onorm((v : Cart[Real, M]) => f'(x, v) - f'(a, v)) < e))) \226\134\146 (\226\136\131 t : (Cart[Real, M]) -> Bool, IN(a, t) && open(t) && (\226\136\128 x : Cart[Real, M], \226\136\128 x' : Cart[Real, M], IN(x, t) && IN(x', t) && f(x') == f(x) \226\134\146 x' == x))
+      #|  (y : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  op_minus_minus_gt((x : (_) -> Cart[Real, _]), (l : Cart[Real, _]), (net : Net[_])) \226\134\146 (m : Cart[Real, _]) == l && (op_minus_minus_gt(x, l, net) \226\134\146 op_minus_minus_gt((y : (_) -> Cart[Real, _]), l, net)) \226\134\146 op_minus_minus_gt(y, m, net)
+      #|  (x : Cart[Real, N]) == (g : (Cart[Real, N]) -> Cart[Real, N])((f : (Cart[Real, N]) -> Cart[Real, N])(x))
+      #|  (x : Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  o((z : Cart[Real, N]) => (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((f : (Cart[Real, N]) -> Cart[Real, N])(z), (h : Cart[Real, N])), (g : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  (h : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (m : Cart[Real, _]) == (l : Cart[Real, _]) && (op_minus_minus_gt((x : (_) -> Cart[Real, _]), l, (net : Net[_])) \226\134\146 op_minus_minus_gt((y : (_) -> Cart[Real, _]), l, net)) \226\134\146 op_minus_minus_gt(x, l, net) \226\134\146 op_minus_minus_gt(y, m, net)
+      #|  (h : Cart[Real, N])
+      #|  (r : Bool) && ((p : Bool) \226\134\146 (q : Bool)) \226\134\146 p \226\134\146 q && r
+      #|  \226\136\128 h : Cart[Real, N], op_minus_minus_gt((y : Cart[Real, N]) => matrix_vector_mul(matrix_inv(matrix((f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(y))), h), matrix_vector_mul(matrix_inv(matrix(f'((x : Cart[Real, N])))), h), at(x))
+      #|  \226\136\128 q : Bool, ((p : Bool) \226\134\146 q) && (q \226\134\146 (r : Bool)) \226\134\146 p \226\134\146 r
+      #|  (x : Cart[Real, N])
+      #|  (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s' : (Cart[Real, N]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N]) == (a : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  INTER((s : (Cart[Real, N]) -> Bool), (u : (Cart[Real, N]) -> Bool))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  abs(det(matrix((f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N])))))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (a : Cart[Real, N]) => (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(a, (h : Cart[Real, N]))
+      #|  (h : Cart[Real, N])
+      #|  at((a : Cart[Real, N]))
+      #|  matrix((f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N])))
+      #|  (x : Cart[Real, N]) => matrix((f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x))
+      #|  \226\136\131 s' : (Cart[Real, N]) -> Bool, IN((a : Cart[Real, N]), s') && SUBSET(s', (s : (Cart[Real, N]) -> Bool)) && open(s') && (\226\136\128 x : Cart[Real, N], IN(x, s') \226\134\146 !(det(matrix((f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x))) == real_of_num(0)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], open(s) && IN(a, s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(f, f'(x), at(x))) && !(det(matrix(f'(a))) == real_of_num(0)) && (\226\136\128 h : Cart[Real, N], continuous((x : Cart[Real, N]) => f'(x, h), at(a))) \226\134\146 (\226\136\131 t : (Cart[Real, N]) -> Bool, \226\136\131 u : (Cart[Real, N]) -> Bool, \226\136\131 g : (Cart[Real, N]) -> Cart[Real, N], \226\136\131 g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], open(t) && IN(a, t) && SUBSET(t, s) && open(u) && IN(f(a), u) && homeomorphism((t, u), (f, g)) && (\226\136\128 x : Cart[Real, N], IN(x, t) \226\134\146 has_derivative(f, f'(x), at(x)) && o(f'(x), g'(f(x))) == I && o(g'(f(x)), f'(x)) == I) && (\226\136\128 y : Cart[Real, N], IN(y, u) \226\134\146 has_derivative(g, g'(y), at(y)) && o(f'(g(y)), g'(y)) == I && o(g'(y), f'(g(y))) == I) && (\226\136\128 x : Cart[Real, N], IN(x, t) && (\226\136\128 h : Cart[Real, N], continuous((y : Cart[Real, N]) => f'(y, h), at(x))) \226\134\146 (\226\136\128 h : Cart[Real, N], continuous((z : Cart[Real, N]) => g'(z, h), at(f(x))))))
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], open(s) && IN(a, s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(f, f'(x), at(x)) && (\226\136\128 h : Cart[Real, N], continuous((y : Cart[Real, N]) => f'(y, h), at(x)))) && !(det(matrix(f'(a))) == real_of_num(0)) \226\134\146 (\226\136\131 t : (Cart[Real, N]) -> Bool, \226\136\131 u : (Cart[Real, N]) -> Bool, \226\136\131 g : (Cart[Real, N]) -> Cart[Real, N], \226\136\131 g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], open(t) && IN(a, t) && SUBSET(t, s) && open(u) && IN(f(a), u) && homeomorphism((t, u), (f, g)) && (\226\136\128 x : Cart[Real, N], IN(x, t) \226\134\146 has_derivative(f, f'(x), at(x)) && o(f'(x), g'(f(x))) == I && o(g'(f(x)), f'(x)) == I) && (\226\136\128 y : Cart[Real, N], IN(y, u) \226\134\146 has_derivative(g, g'(y), at(y)) && o(f'(g(y)), g'(y)) == I && o(g'(y), f'(g(y))) == I) && (\226\136\128 x : Cart[Real, N], IN(x, t) \226\134\146 (\226\136\128 h : Cart[Real, N], continuous((z : Cart[Real, N]) => g'(z, h), at(f(x))))))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N]))
+      #|  (g' : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N]))
+      #|  (x : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool) == IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (\226\136\128 x : _, (P : Bool) && (Q : (_) -> Bool)(x) \226\134\146 (R : (_) -> Bool)(x)) && (P \226\134\146 (\226\136\131 x : _, Q(x))) \226\134\146 P \226\134\146 (\226\136\131 x : _, P && Q(x) && R(x))
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  open(IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (s : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, open(s) && connected(s) && simply_connected(t) && (s == {} \226\134\146 t == {}) && (\226\136\128 c : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, s), c) \226\134\146 closed_in(subtopology(euclidean, t), IMAGE(f, c))) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(f, f'(x), at(x)) && !(det(matrix(f'(x))) == real_of_num(0))) \226\134\146 (\226\136\131 g : (Cart[Real, N]) -> Cart[Real, N], \226\136\131 g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], homeomorphism((s, t), (f, g)) && (\226\136\128 y : Cart[Real, N], IN(y, t) \226\134\146 has_derivative(g, g'(y), at(y)) && o(f'(g(y)), g'(y)) == I && o(g'(y), f'(g(y))) == I) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 o(f'(x), g'(f(x))) == I && o(g'(f(x)), f'(x)) == I))
+      #|  IN((f : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])), (u : (Cart[Real, N]) -> Bool)) && (\226\136\128 w : Cart[Real, N], IN(w, u) \226\134\146 IN((g : (Cart[Real, N]) -> Cart[Real, N])(w), (p : (Cart[Real, N]) -> Bool)) == IN(w, p))
+      #|  (r : Real)
+      #|  {(r : Cart[Real, Unit]) | IN(r, UNIV) && IN((f : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])) + op_pct(drop(r), (z : Cart[Real, N])), (u : (Cart[Real, N]) -> Bool))}
+      #|  eventually((r : Cart[Real, Unit]) => IN((f : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])) + op_pct(drop(r), (z : Cart[Real, N])), (u : (Cart[Real, N]) -> Bool)), at(vec(0)))
+      #|  (z : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool) == IMAGE((h : (Cart[Real, N]) -> Cart[Real, N]), (t : (Cart[Real, N]) -> Bool))
+      #|  IN((g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((f : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])), (z : Cart[Real, N])), (p : (Cart[Real, N]) -> Bool))
+      #|  (z : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  SUBSET(INTER((p : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)), (s : (Cart[Real, N]) -> Bool))
+      #|  (u : (Cart[Real, N]) -> Bool) == IMAGE((h : (Cart[Real, N]) -> Cart[Real, N]), (t : (Cart[Real, N]) -> Bool))
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 f : (_) -> _, (\226\136\128 x : _, IN(x, (p : (_) -> Bool)) \226\134\146 (h : (_) -> _)(x) == f(x)) && IMAGE(h, (t : (_) -> Bool)) == (u : (_) -> Bool) && SUBSET(IMAGE(f, INTER(t, p)), p) && (\226\136\128 x : _, IN(x, t) \226\134\146 IN(h(x), p) == IN(x, p)) \226\134\146 IMAGE(h, INTER(p, t)) == INTER(p, u)
+      #|  homeomorphism(((t : (Cart[Real, _]) -> Bool), (u : (Cart[Real, _]) -> Bool)), ((f' : (Cart[Real, _]) -> Cart[Real, _]), (g : (Cart[Real, _]) -> Cart[Real, _]))) \226\134\146 (\226\136\128 x : Cart[Real, _], IN(x, (t' : (Cart[Real, _]) -> Bool)) \226\134\146 f'(x) == (f : (Cart[Real, _]) -> Cart[Real, _])(x)) && SUBSET(t', t) && SUBSET((u' : (Cart[Real, _]) -> Bool), u) && IMAGE(f', t') == u' \226\134\146 homeomorphism((t', u'), (f, g))
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (a : Cart[Real, N])
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N]) == (f : (Cart[Real, N]) -> Cart[Real, N])(closest_point((p : (Cart[Real, N]) -> Bool), x)) + (x - closest_point(p, x)) - (f(closest_point(p, x)) - closest_point(p, x))
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (t : (Cart[Real, N]) -> Bool)) \226\134\146 IN((h : (Cart[Real, N]) -> Cart[Real, N])(x), (p : (Cart[Real, N]) -> Bool)) == IN(x, p)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (p : (Cart[Real, N]) -> Bool)) \226\134\146 (h : (Cart[Real, N]) -> Cart[Real, N])(x) == (f : (Cart[Real, N]) -> Cart[Real, N])(x)
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  INTER((p : (Cart[Real, N]) -> Bool), (u : (Cart[Real, N]) -> Bool))
+      #|  INTER((p : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (w : Cart[Real, N]) + ((y : Cart[Real, N]) - closest_point((p : (Cart[Real, N]) -> Bool), y))
+      #|  (w : Cart[Real, N])
+      #|  closest_point((p : (Cart[Real, N]) -> Bool), (y : Cart[Real, N]))
+      #|  IMAGE((f : (_) -> _), (s : (_) -> Bool)) == (t : (_) -> Bool) \226\134\146 (\226\136\128 y : _, IN(y, t) \226\134\146 (\226\136\131 x : _, IN(x, s) && f(x) == y))
+      #|  closest_point((p : (Cart[Real, N]) -> Bool), (x : Cart[Real, N]))
+      #|  (y : Cart[Real, N])
+      #|  closest_point((p : (Cart[Real, N]) -> Bool), (x : Cart[Real, N]))
+      #|  closest_point((p : (Cart[Real, N]) -> Bool), (x : Cart[Real, N]))
+      #|  {(x : Cart[Real, N]) | IN(closest_point((p : (Cart[Real, N]) -> Bool), x), (s : (Cart[Real, N]) -> Bool))}
+      #|  (x : Cart[Real, N])
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(closest_point((p : (Cart[Real, N]) -> Bool), (x : Cart[Real, N])))
+      #|  closest_point((p : (Cart[Real, N]) -> Bool))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  closest_point((p : (Cart[Real, N]) -> Bool))
+      #|  (x : Cart[Real, N])
+      #|  closest_point((p : (Cart[Real, N]) -> Bool), (a : Cart[Real, N])) == a
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  {(x : Cart[Real, N]) | IN(x, UNIV) && IN(closest_point((p : (Cart[Real, N]) -> Bool), x), (s : (Cart[Real, N]) -> Bool))}
+      #|  (a : Cart[Real, N])
+      #|  (h' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  (h : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (h' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N]) == ((x : Cart[Real, N]) => (h : Cart[Real, N]) => (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(closest_point((p : (Cart[Real, N]) -> Bool), x), closest_point(p, h)) + (h - closest_point(p, h)))
+      #|  (h : (Cart[Real, N]) -> Cart[Real, N]) == ((x : Cart[Real, N]) => (f : (Cart[Real, N]) -> Cart[Real, N])(closest_point((p : (Cart[Real, N]) -> Bool), x)) + (x - closest_point(p, x)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 p : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], subspace(p) && open_in(subtopology(euclidean, p), s) && SUBSET(IMAGE(f, s), p) && IN(a, s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(f, f'(x), within(at(x), p)) && IMAGE(f'(x), p) == p) \226\134\146 (\226\136\131 t : (Cart[Real, N]) -> Bool, \226\136\131 u : (Cart[Real, N]) -> Bool, \226\136\131 g : (Cart[Real, N]) -> Cart[Real, N], \226\136\131 g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], open_in(subtopology(euclidean, p), t) && IN(a, t) && SUBSET(t, s) && open_in(subtopology(euclidean, p), u) && IN(f(a), u) && homeomorphism((t, u), (f, g)) && (\226\136\128 x : Cart[Real, N], IN(x, t) \226\134\146 has_derivative(f, f'(x), within(at(x), p)) && (\226\136\128 h : Cart[Real, N], IN(h, p) \226\134\146 f'(x, g'(f(x), h)) == h && g'(f(x), f'(x, h)) == h)) && (\226\136\128 y : Cart[Real, N], IN(y, u) \226\134\146 has_derivative(g, g'(y), within(at(y), p)) && (\226\136\128 h : Cart[Real, N], IN(h, p) \226\134\146 f'(g(y), g'(y, h)) == h && g'(y, f'(g(y), h)) == h)))
+      #|  -(a : Cart[Real, N]) + (a + (x : Cart[Real, N])) == x
+      #|  (x : Cart[Real, N])
+      #|  (a : Cart[Real, N]) + (-a + (x : Cart[Real, N])) == x
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N]) == o((x : Cart[Real, N]) => (a : Cart[Real, N]) + x, o(o((x : Cart[Real, N]) => -a + x, o(f, (x : Cart[Real, N]) => a + x)), (x : Cart[Real, N]) => -a + x))
+      #|  (x : Cart[Real, N])
+      #|  -(a : Cart[Real, N]) + (x : Cart[Real, N]) == x - a
+      #|  -(a : Cart[Real, N]) + (a + (x : Cart[Real, N])) == x
+      #|  (x : Cart[Real, N]) - (a : Cart[Real, N]) == -a + x
+      #|  (a : Cart[Real, N]) + (-a + (x : Cart[Real, N])) == x
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N]) == o((x : Cart[Real, N]) => (a : Cart[Real, N]) + x, o(o((x : Cart[Real, N]) => -a + x, o(f, (x : Cart[Real, N]) => a + x)), (x : Cart[Real, N]) => -a + x))
+      #|  ((x : Cart[Real, N]) - (a : Cart[Real, N]) == (y : Cart[Real, N])) == (x == a + y)
+      #|  -(a : Cart[Real, N]) + (x : Cart[Real, N]) == x - a
+      #|  -(a : Cart[Real, N]) + (a + (x : Cart[Real, N])) == x
+      #|  (x : Cart[Real, N]) - (a : Cart[Real, N]) == -a + x
+      #|  (a : Cart[Real, N]) + (-a + (x : Cart[Real, N])) == x
+      #|  (p : (Cart[Real, N]) -> Bool) == IMAGE((x : Cart[Real, N]) => (a : Cart[Real, N]) + x, IMAGE((x : Cart[Real, N]) => -a + x, p))
+      #|  (a : Cart[Real, N]) + (-a + (x : Cart[Real, N])) == x
+      #|  (p : (Cart[Real, N]) -> Bool) == IMAGE((x : Cart[Real, N]) => (a : Cart[Real, N]) + x, IMAGE((x : Cart[Real, N]) => -a + x, p))
+      #|  -(a : Cart[Real, N]) + (a + (x : Cart[Real, N])) == x
+      #|  o((g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N]), (x : Cart[Real, N]) => -(a : Cart[Real, N]) + x)
+      #|  o((x : Cart[Real, N]) => (a : Cart[Real, N]) + x, o((g : (Cart[Real, N]) -> Cart[Real, N]), (x : Cart[Real, N]) => -a + x))
+      #|  IMAGE((x : Cart[Real, N]) => (a : Cart[Real, N]) + x, (u : (Cart[Real, N]) -> Bool))
+      #|  IMAGE((x : Cart[Real, N]) => (a : Cart[Real, N]) + x, (t : (Cart[Real, N]) -> Bool))
+      #|  (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (a : Cart[Real, N]) + (-a + (x : Cart[Real, N])) == x
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (a : Cart[Real, N]) + (-a + (x : Cart[Real, N])) == x
+      #|  vec(0) - -(a : Cart[Real, N]) == a
+      #|  (a : Cart[Real, N]) + (-a + (x : Cart[Real, N])) == x
+      #|  IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  -(a : Cart[Real, N]) + (x : Cart[Real, N]) == x - a
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  IMAGE((x : Cart[Real, N]) => -(a : Cart[Real, N]) + x, (p : (Cart[Real, N]) -> Bool))
+      #|  IMAGE((x : Cart[Real, N]) => -(a : Cart[Real, N]) + x, (s : (Cart[Real, N]) -> Bool))
+      #|  o((f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N]), (x : Cart[Real, N]) => (a : Cart[Real, N]) + x)
+      #|  o((x : Cart[Real, N]) => -(a : Cart[Real, N]) + x, o((f : (Cart[Real, N]) -> Cart[Real, N]), (x : Cart[Real, N]) => a + x))
+      #|  IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (t : (Cart[Real, N]) -> Bool)) == (u : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N]))
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N]))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool) == IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (t : (Cart[Real, N]) -> Bool))
+      #|  o((g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N]), (g : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  (g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (t : (Cart[Real, N]) -> Bool)) \226\134\146 (\226\136\131 g : (Cart[Real, N]) -> Cart[Real, N], linear(g) && o((f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x), g) == I && o(g, f'(x)) == I)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (r : Real)
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  {(x : _) | (P : (_) -> Bool)(x)} == {(x : _) | IN(x, UNIV) && P(x)}
+      #|  eventually((r : Cart[Real, Unit]) => IN(r, {(q : Cart[Real, Unit]) | IN((x : Cart[Real, N]) + op_pct(drop(q), (z : Cart[Real, N])), (s : (Cart[Real, N]) -> Bool))}), at(vec(0)))
+      #|  IN((x : Cart[Real, N]), (p : (Cart[Real, N]) -> Bool))
+      #|  (z : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 p : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], affine(p) && open_in(subtopology(euclidean, p), s) && SUBSET(IMAGE(f, s), p) && IN(a, s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(f, f'(x), within(at(x), p)) && !(det(matrix(f'(x))) == real_of_num(0))) \226\134\146 (\226\136\131 t : (Cart[Real, N]) -> Bool, \226\136\131 u : (Cart[Real, N]) -> Bool, \226\136\131 g : (Cart[Real, N]) -> Cart[Real, N], \226\136\131 g' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], open_in(subtopology(euclidean, p), t) && IN(a, t) && SUBSET(t, s) && open_in(subtopology(euclidean, p), u) && IN(f(a), u) && homeomorphism((t, u), (f, g)) && (\226\136\128 x : Cart[Real, N], IN(x, t) \226\134\146 has_derivative(f, f'(x), within(at(x), p)) && o(f'(x), g'(f(x))) == I && o(g'(f(x)), f'(x)) == I) && (\226\136\128 y : Cart[Real, N], IN(y, u) \226\134\146 has_derivative(g, g'(y), within(at(y), p)) && o(f'(g(y)), g'(y)) == I && o(g'(y), f'(g(y))) == I))
+      #|  (affine : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (subspace : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (has_vector_derivative : ((Cart[Real, Unit]) -> Cart[Real, _], Cart[Real, _], Net[Cart[Real, Unit]]) -> Bool)((f : (Cart[Real, Unit]) -> Cart[Real, _]), (f' : Cart[Real, _]), (net : Net[Cart[Real, Unit]])) == has_derivative(f, (x : Cart[Real, Unit]) => op_pct(drop(x), f'), net)
+      #|  (vector_derivative : ((Cart[Real, Unit]) -> Cart[Real, N], Net[Cart[Real, Unit]]) -> Cart[Real, N])((f : (Cart[Real, Unit]) -> Cart[Real, N]), (net : Net[Cart[Real, Unit]])) == select((f' : Cart[Real, N]) => has_vector_derivative(f, f', net))
+      #|  column(1, jacobian((f : (Cart[Real, Unit]) -> Cart[Real, N]), (net : Net[Cart[Real, Unit]])))
+      #|  \226\136\128 net : Net[Cart[Real, Unit]], \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], differentiable(f, net) == has_vector_derivative(f, vector_derivative(f, net), net)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, Unit]], differentiable(f, net) == (\226\136\131 f' : Cart[Real, _], has_vector_derivative(f, f', net))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, _], \226\136\128 net : Net[Cart[Real, Unit]], has_vector_derivative(f, f', net) \226\134\146 differentiable(f, net)
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  (x : Cart[Real, Unit])
+      #|  (x : Cart[Real, Unit]) => op_pct(drop(x), (f'' : Cart[Real, N]))
+      #|  (x : Cart[Real, Unit]) => op_pct(drop(x), (f' : Cart[Real, N]))
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 x : Cart[Real, Unit], \226\136\128 f' : Cart[Real, N], \226\136\128 f'' : Cart[Real, N], has_vector_derivative(f, f', at(x)) && has_vector_derivative(f, f'', at(x)) \226\134\146 f' == f''
+      #|  (x : Cart[Real, Unit])
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : Cart[Real, N], \226\136\128 x : Cart[Real, Unit], has_vector_derivative(f, f', at(x)) \226\134\146 vector_derivative(f, at(x)) == f'
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (has_vector_derivative : ((Cart[Real, Unit]) -> Cart[Real, N], Cart[Real, N], Net[Cart[Real, Unit]]) -> Bool)(f, f', (within : (Net[Cart[Real, Unit]], (Cart[Real, Unit]) -> Bool) -> Net[Cart[Real, Unit]])((at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(a), s)) == (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (has_vector_derivative : ((Cart[Real, Unit]) -> Cart[Real, Unit], Cart[Real, Unit], Net[Cart[Real, Unit]]) -> Bool)((x : Cart[Real, Unit]) => lift((op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i)), lift((op_dollar : (Cart[Real, N], Num) -> Real)(f', i)), (within : (Net[Cart[Real, Unit]], (Cart[Real, Unit]) -> Bool) -> Net[Cart[Real, Unit]])((at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(a), s)))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : Cart[Real, N], \226\136\128 a : Cart[Real, Unit], (has_vector_derivative : ((Cart[Real, Unit]) -> Cart[Real, N], Cart[Real, N], Net[Cart[Real, Unit]]) -> Bool)(f, f', (at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(a)) == (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (has_vector_derivative : ((Cart[Real, Unit]) -> Cart[Real, Unit], Cart[Real, Unit], Net[Cart[Real, Unit]]) -> Bool)((x : Cart[Real, Unit]) => lift((op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i)), lift((op_dollar : (Cart[Real, N], Num) -> Real)(f', i)), (at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(a)))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 i : Num, (has_vector_derivative : ((Cart[Real, Unit]) -> Cart[Real, N], Cart[Real, N], Net[Cart[Real, Unit]]) -> Bool)(f, f', (within : (Net[Cart[Real, Unit]], (Cart[Real, Unit]) -> Bool) -> Net[Cart[Real, Unit]])((at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(a), s)) && 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (has_vector_derivative : ((Cart[Real, Unit]) -> Cart[Real, Unit], Cart[Real, Unit], Net[Cart[Real, Unit]]) -> Bool)((x : Cart[Real, Unit]) => lift((op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i)), lift((op_dollar : (Cart[Real, N], Num) -> Real)(f', i)), (within : (Net[Cart[Real, Unit]], (Cart[Real, Unit]) -> Bool) -> Net[Cart[Real, Unit]])((at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(a), s))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 i : Num, (has_vector_derivative : ((Cart[Real, Unit]) -> Cart[Real, N], Cart[Real, N], Net[Cart[Real, Unit]]) -> Bool)(f, f', (at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(a)) && 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (has_vector_derivative : ((Cart[Real, Unit]) -> Cart[Real, Unit], Cart[Real, Unit], Net[Cart[Real, Unit]]) -> Bool)((x : Cart[Real, Unit]) => lift((op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i)), lift((op_dollar : (Cart[Real, N], Num) -> Real)(f', i)), (at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(a))
+      #|  real_of_num(1)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 x : Cart[Real, Unit], has_vector_derivative(f, (f' : Cart[Real, N]), within(at(x), s)) == op_minus_minus_gt((y : Cart[Real, Unit]) => op_pct(inv(drop(y - x)), f(y) - f(x)), f', within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 x : Cart[Real, Unit], has_vector_derivative(f, (f' : Cart[Real, N]), at(x)) == op_minus_minus_gt((y : Cart[Real, Unit]) => op_pct(inv(drop(y - x)), f(y) - f(x)), f', at(x))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 x : Cart[Real, Unit], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 f' : Cart[Real, N], \226\136\128 f'' : Cart[Real, N], !trivial_limit(within(at(x), s)) && has_vector_derivative(f, f', within(at(x), s)) && has_vector_derivative(f, f'', within(at(x), s)) \226\134\146 f' == f''
+      #|  interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))])
+      #|  (x : Cart[Real, Unit])
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], \226\136\128 x : Cart[Real, Unit], \226\136\128 f' : Cart[Real, N], \226\136\128 f'' : Cart[Real, N], drop(a) < drop(b) && IN(x, interval([(a, b)])) && has_vector_derivative(f, f', within(at(x), interval([(a, b)]))) && has_vector_derivative(f, f'', within(at(x), interval([(a, b)]))) \226\134\146 f' == f''
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : Cart[Real, N], \226\136\128 x : Cart[Real, Unit], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], drop(a) < drop(b) && IN(x, interval([(a, b)])) && has_vector_derivative(f, f', within(at(x), interval([(a, b)]))) \226\134\146 vector_derivative(f, within(at(x), interval([(a, b)]))) == f'
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 t : (Cart[Real, Unit]) -> Bool, \226\136\128 x : Cart[Real, Unit], has_vector_derivative(f, (f' : Cart[Real, _]), within(at(x), s)) && SUBSET(t, s) \226\134\146 has_vector_derivative(f, f', within(at(x), t))
+      #|  \226\136\128 c : Cart[Real, _], \226\136\128 net : Net[Cart[Real, Unit]], has_vector_derivative((x : Cart[Real, Unit]) => c, vec(0), net)
+      #|  \226\136\128 c : Cart[Real, N], \226\136\128 a : Cart[Real, Unit], vector_derivative((x : Cart[Real, Unit]) => c, at(a)) == vec(0)
+      #|  ((x : Cart[Real, Unit]) => op_pct(drop(x), vec(1))) == ((x : Cart[Real, Unit]) => x)
+      #|  \226\136\128 net : Net[Cart[Real, Unit]], has_vector_derivative((x : Cart[Real, Unit]) => x, vec(1), net)
+      #|  op_pct((a : Real), op_pct((b : Real), (x : Cart[Real, _]))) == op_pct(b, op_pct(a, x))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, _], \226\136\128 net : Net[Cart[Real, Unit]], \226\136\128 c : Real, has_vector_derivative(f, f', net) \226\134\146 has_vector_derivative((x : Cart[Real, Unit]) => op_pct(c, f(x)), op_pct(c, f'), net)
+      #|  (c : Real)
+      #|  inv((c : Real))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, _], \226\136\128 net : Net[Cart[Real, Unit]], \226\136\128 c : Real, !(c == real_of_num(0)) \226\134\146 has_vector_derivative((x : Cart[Real, Unit]) => op_pct(c, f(x)), op_pct(c, f'), net) == has_vector_derivative(f, f', net)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, _], \226\136\128 net : Net[Cart[Real, Unit]], has_vector_derivative(f, f', net) \226\134\146 has_vector_derivative((x : Cart[Real, Unit]) => -f(x), -f', net)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, _], \226\136\128 net : Net[Cart[Real, Unit]], has_vector_derivative((x : Cart[Real, Unit]) => -f(x), -f', net) == has_vector_derivative(f, f', net)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 g' : Cart[Real, _], \226\136\128 net : Net[Cart[Real, Unit]], has_vector_derivative(f, f', net) && has_vector_derivative(g, g', net) \226\134\146 has_vector_derivative((x : Cart[Real, Unit]) => f(x) + g(x), f' + g', net)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 g' : Cart[Real, _], \226\136\128 net : Net[Cart[Real, Unit]], has_vector_derivative(f, f', net) && has_vector_derivative(g, g', net) \226\134\146 has_vector_derivative((x : Cart[Real, Unit]) => f(x) - g(x), f' - g', net)
+      #|  \226\136\128 h : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P], \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : Cart[Real, M], \226\136\128 g' : Cart[Real, N], \226\136\128 x : Cart[Real, Unit], \226\136\128 s : (Cart[Real, Unit]) -> Bool, has_vector_derivative(f, f', within(at(x), s)) && has_vector_derivative(g, g', within(at(x), s)) && bilinear(h) \226\134\146 has_vector_derivative((x : Cart[Real, Unit]) => h(f(x), g(x)), h(f(x), g') + h(f', g(x)), within(at(x), s))
+      #|  \226\136\128 h : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P], \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : Cart[Real, M], \226\136\128 g' : Cart[Real, N], \226\136\128 x : Cart[Real, Unit], has_vector_derivative(f, f', at(x)) && has_vector_derivative(g, g', at(x)) && bilinear(h) \226\134\146 has_vector_derivative((x : Cart[Real, Unit]) => h(f(x), g(x)), h(f(x), g') + h(f', g(x)), at(x))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 x : Cart[Real, Unit], \226\136\128 s : (Cart[Real, Unit]) -> Bool, has_vector_derivative(f, (f' : Cart[Real, _]), at(x)) \226\134\146 has_vector_derivative(f, f', within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 x : Cart[Real, Unit], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, Unit], IN(x', s) && dist((x', x)) < d \226\134\146 f(x') == g(x')) && has_vector_derivative(f, f', within(at(x), s)) \226\134\146 has_vector_derivative(g, f', within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 x : Cart[Real, Unit], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, Unit], dist((x', x)) < d \226\134\146 f(x') == g(x')) && has_vector_derivative(f, f', at(x)) \226\134\146 has_vector_derivative(g, f', at(x))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 x : Cart[Real, Unit], open(s) && IN(x, s) && (\226\136\128 y : Cart[Real, Unit], IN(y, s) \226\134\146 f(y) == g(y)) && has_vector_derivative(f, (f' : Cart[Real, _]), at(x)) \226\134\146 has_vector_derivative(g, f', at(x))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, Unit], \226\136\128 g' : Cart[Real, _], \226\136\128 x : Cart[Real, Unit], has_vector_derivative(f, f', at(x)) && has_vector_derivative(g, g', at(f(x))) \226\134\146 has_vector_derivative(o(g, f), op_pct(drop(f'), g'), at(x))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, Unit], \226\136\128 g' : Cart[Real, _], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 x : Cart[Real, Unit], has_vector_derivative(f, f', within(at(x), s)) && has_vector_derivative(g, g', within(at(f(x)), IMAGE(f, s))) \226\134\146 has_vector_derivative(o(g, f), op_pct(drop(f'), g'), within(at(x), s))
+      #|  linear((h : Cart[Real, Unit]) => op_pct(drop(h), (f' : (Cart[Real, Unit]) -> Cart[Real, N])((x0 : Cart[Real, Unit]))))
+      #|  (B : Real)
+      #|  (s : (Cart[Real, Unit]) -> Bool)
+      #|  (x : Cart[Real, Unit]) => (h : Cart[Real, Unit]) => op_pct(drop(h), (f' : (Cart[Real, Unit]) -> Cart[Real, N])(x))
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 B : Real, convex(s) && (\226\136\128 x : Cart[Real, Unit], IN(x, s) \226\134\146 has_vector_derivative(f, f'(x), within(at(x), s))) && (\226\136\128 x : Cart[Real, Unit], IN(x, s) \226\134\146 norm(f'(x)) <= B) \226\134\146 (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, s) && IN(y, s) \226\134\146 norm(f(x) - f(y)) <= B * norm(x - y))
+      #|  (B : Real)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, Unit], IN(x, s) \226\134\146 has_vector_derivative(f, f'(x), within(at(x), s))) && convex(s) && bounded(IMAGE(f', s)) \226\134\146 (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, s) && IN(y, s) \226\134\146 norm(f(x) - f(y)) <= B * norm(x - y)))
+      #|  real_of_num(1)
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  real_of_num(1)
+      #|  RESTRICTION((s : (Cart[Real, Unit]) -> Bool), (f : (Cart[Real, Unit]) -> Cart[Real, N]))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 x : Cart[Real, Unit], IN(x, s) \226\134\146 has_vector_derivative(RESTRICTION(s, f), f', within(at(x), s)) == has_vector_derivative(f, f', within(at(x), s))
+      #|  (x : Cart[Real, Unit])
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (p && q \226\134\146 r \226\134\146 s)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, Unit], IN(x, s) \226\134\146 has_vector_derivative(f, f'(x), at(x))) && open(s) \226\134\146 baire(1, s, f')
+      #|  drop((a : Cart[Real, Unit])) <= drop((b : Cart[Real, Unit])) || drop(b) <= drop(a)
+      #|  (b : Cart[Real, Unit])
+      #|  real_of_num(1)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 f' : Cart[Real, Unit], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 a : Cart[Real, Unit], (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, s) && IN(y, s) && drop(x) <= drop(y) \226\134\146 drop(f(x)) <= drop(f(y))) && IN(a, s) && limit_point_of(a, s) && has_vector_derivative(f, f', within(at(a), s)) \226\134\146 real_of_num(0) <= drop(f')
+      #|  (y : Cart[Real, Unit]) => lift(norm(op_pct(inv(drop(y - (x : Cart[Real, Unit]))), (g : (Cart[Real, Unit]) -> Cart[Real, N])(y) - g(x))))
+      #|  (y : Cart[Real, Unit]) => lift(norm(op_pct(inv(drop(y - (x : Cart[Real, Unit]))), (f : (Cart[Real, Unit]) -> Cart[Real, M])(y) - f(x))))
+      #|  within(at((x : Cart[Real, Unit])), (s : (Cart[Real, Unit]) -> Bool))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : Cart[Real, M], \226\136\128 g' : Cart[Real, N], \226\136\128 x : Cart[Real, Unit], \226\136\128 s : (Cart[Real, Unit]) -> Bool, limit_point_of(x, s) && has_vector_derivative(f, f', within(at(x), s)) && has_vector_derivative(g, g', within(at(x), s)) && eventually((y : Cart[Real, Unit]) => norm(f(y) - f(x)) <= norm(g(y) - g(x)), within(at(x), s)) \226\134\146 norm(f') <= norm(g')
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  (x : Cart[Real, Unit])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, M])
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : Cart[Real, M], \226\136\128 g' : Cart[Real, N], \226\136\128 x : Cart[Real, Unit], has_vector_derivative(f, f', at(x)) && has_vector_derivative(g, g', at(x)) && eventually((y : Cart[Real, Unit]) => norm(f(y) - f(x)) <= norm(g(y) - g(x)), at(x)) \226\134\146 norm(f') <= norm(g')
+      #|  (y : Cart[Real, N]) - (x : Cart[Real, N])
+      #|  (u : Real)
+      #|  op_pct(real_of_num(1) - (u : Real), (x : Cart[Real, N])) + op_pct(u, (y : Cart[Real, N])) - x == op_pct(u, y - x)
+      #|  (f' : (Cart[Real, N]) -> Real)((z : Cart[Real, N]) - (x : Cart[Real, N])) / norm(z - x) == f'((y : Cart[Real, N]) - x) / norm(y - x)
+      #|  (z : Real) <= (y : Real) / (n : Real) && abs(z - (d : Real)) < (e : Real) / n \226\134\146 d <= (y + e) / n
+      #|  inv((y : Real)) * ((z : Real) - ((x : Real) + (d : Real))) == (z - x) / y - d / y
+      #|  (z : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  op_pct(real_of_num(1) - (u : Real), (x : Cart[Real, N])) + op_pct(u, (y : Cart[Real, N])) - x == op_pct(u, y - x)
+      #|  IN((z : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (z : Cart[Real, N])
+      #|  IN((z : Cart[Real, N]), segment(((x : Cart[Real, N]), (y : Cart[Real, N]))))
+      #|  (z : Cart[Real, N]) == op_pct(real_of_num(1) - (u : Real), (x : Cart[Real, N])) + op_pct(u, (y : Cart[Real, N]))
+      #|  real_of_num(0) < (u : Real) && u < real_of_num(1)
+      #|  (u : Real) == min(real_of_num(1) / real_of_num(2), (d : Real) / real_of_num(2) / norm((y : Cart[Real, N]) - (x : Cart[Real, N])))
+      #|  (d : Real)
+      #|  (e : Real) / real_of_num(2) / norm((y : Cart[Real, N]) - (x : Cart[Real, N]))
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real) == (f' : (Cart[Real, N]) -> Real)((y : Cart[Real, N]) - (x : Cart[Real, N])) - ((f : (Cart[Real, N]) -> Real)(y) - f(x))
+      #|  (y : Cart[Real, N]) == (x : Cart[Real, N])
+      #|  IN((x : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool)) && IN((y : Cart[Real, N]), s)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 f' : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], convex_on(f, s) && SUBSET(segment([(x, y)]), s) && has_derivative(o(lift, f), o(lift, f'), within(at(x), s)) \226\134\146 f'(y - x) <= f(y) - f(x)
+      #|  (z : Cart[Real, N])
+      #|  (y : Cart[Real, N]) - (x : Cart[Real, N])
+      #|  (f' : Real) == -(f'' : Real) \226\134\146 f' <= (x : Real) - (y : Real) \226\134\146 y - x <= f''
+      #|  (x : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f' : (Cart[Real, N]) -> Real)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 f' : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], convex_on(f, s) && SUBSET(segment([(x, y)]), s) && has_derivative(o(lift, f), o(lift, f'), within(at(y), s)) \226\134\146 f(y) - f(x) <= f'(y - x)
       #|  forall f f'x f'y s x y:real^N.\n        f convex_on s /\\ segment[x,y] SUBSET s /\\\n        ((lift o f) has_derivative (lift o f'x)) (at x within s) /\\\n        ((lift o f) has_derivative (lift o f'y)) (at y within s)\n        ==> f'x(y - x) <= f'y(y - x)
-      #|  &0 < w - v
-      #|  v:real = w
-      #|  ((&1 - v) % a + v % b) - ((&1 - w) % a + w % b):real^N =\n      (v - w) % (b - a)
-      #|  (&1 - w) % a + w % b:real^N
-      #|  (&1 - v) % a + v % b:real^N
-      #|  (&1 - u) * u * x = u * (&1 - u) * x
-      #|  linear(lift o (f'((&1 - v) % a + v % b:real^N):real^N->real)) /\\\n      linear(lift o (f'((&1 - w) % a + w % b:real^N):real^N->real))
-      #|  ((&1 - v) % a + v % b:real^N) IN s /\\\n      ((&1 - w) % a + w % b:real^N) IN s
-      #|  f1 <= f2 /\\ (xa <= xb ==> a <= b)\n      ==> xa = f1 ==> xb = f2 ==> a <= b
-      #|  (*) (&1 - u:real)
-      #|  (*) (u:real)
-      #|  a ==> b /\\ c ==> d <=> b ==> a ==> c ==> d
-      #|  v:real
-      #|  w:real
-      #|  --u % a + u % b:real^N = u % (b - a)
-      #|  s:real^N->bool
-      #|  --u % a:real^N = vec 0 + --u % a
-      #|  (&1 - a) % x:real^N = x + --a % x
-      #|  v:real^1
-      #|  (a1 /\\ a2) /\\ (b1 ==> b2 ==> c) ==> (a1 ==> b1) ==> (a2 ==> b2) ==> c
-      #|  \\x:real^1. lift o f'((&1 - drop x) % a + drop x % b) o\n     (\\u. --(drop u) % a + drop u % b:real^N)
-      #|  lift o (f:real^N->real) o (\\u. (&1 - drop u) % a + drop u % b)
-      #|  &0 < u /\\ u < &1
-      #|  u = &1
-      #|  u = &0
-      #|  u:real
-      #|  u + v = &1 <=> u = &1 - v
-      #|  a /\\ b /\\ c /\\ d /\\ e <=> e /\\ a /\\ b /\\ c /\\ d
-      #|  b:real^N
-      #|  a:real^N
-      #|  z:real^N
-      #|  y - x:real^N
-      #|  f''' = --f'' ==> f''' <= x - y ==> f' <= y - x ==> f' <= f''
-      #|  y:real^N
-      #|  x:real^N
-      #|  s:real^N->bool
-      #|  (a ==> b) /\\ (b ==> c) /\\ (c ==> a) ==> (a <=> b) /\\ (a <=> c)
-      #|  (a ==> b) /\\ (a ==> c) <=> a ==> b /\\ c
-      #|  (forall f f' s:real^N->bool.\n        convex s /\\\n        (forall x. x IN s ==> ((lift o f) has_derivative (lift o f'(x)))\n                        (at x within s))\n        ==> (f convex_on s <=>\n             forall x y. x IN s /\\ y IN s ==> f'(x)(y - x) <= f y - f x)) /\\\n   (forall f f' s:real^N->bool.\n        convex s /\\\n        (forall x. x IN s ==> ((lift o f) has_derivative (lift o f'(x)))\n                        (at x within s))\n        ==> (f convex_on s <=>\n             forall x y. x IN s /\\ y IN s ==> f'(x)(y - x) <= f'(y)(y - x)))
-      #|  x:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  y:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  vec 1:real^1
-      #|  lift u
-      #|  lift u
-      #|  vec 0:real^1
-      #|  z:real^N
-      #|  x - y:real^N
-      #|  f' = --f'' ==> (f' <= y - x <=> x - y <= f'')
-      #|  (y:real^N) IN s
-      #|  (x:real^N) IN s
-      #|  y:real^N
-      #|  x:real^N
-      #|  forall f f' s:real^N->bool.\n        convex s /\\\n        (forall x. x IN s ==> ((lift o f) has_derivative (lift o f'(x)))\n                        (at x within s))\n        ==> (f convex_on s <=>\n             forall x y. x IN s /\\ y IN s ==> f y - f x <= f'(y)(y - x))
+      #|  real_of_num(0) < (w : Real) - (v : Real)
+      #|  (v : Real) == (w : Real)
+      #|  op_pct(real_of_num(1) - (v : Real), (a : Cart[Real, N])) + op_pct(v, (b : Cart[Real, N])) - (op_pct(real_of_num(1) - (w : Real), a) + op_pct(w, b)) == op_pct(v - w, b - a)
+      #|  op_pct(real_of_num(1) - (w : Real), (a : Cart[Real, N])) + op_pct(w, (b : Cart[Real, N]))
+      #|  op_pct(real_of_num(1) - (v : Real), (a : Cart[Real, N])) + op_pct(v, (b : Cart[Real, N]))
+      #|  (real_of_num(1) - (u : Real)) * (u * (x : Real)) == u * ((real_of_num(1) - u) * x)
+      #|  linear(o(lift, (f' : (Cart[Real, N], Cart[Real, N]) -> Real)(op_pct(real_of_num(1) - (v : Real), (a : Cart[Real, N])) + op_pct(v, (b : Cart[Real, N]))))) && linear(o(lift, f'(op_pct(real_of_num(1) - (w : Real), a) + op_pct(w, b))))
+      #|  IN(op_pct(real_of_num(1) - (v : Real), (a : Cart[Real, N])) + op_pct(v, (b : Cart[Real, N])), (s : (Cart[Real, N]) -> Bool)) && IN(op_pct(real_of_num(1) - (w : Real), a) + op_pct(w, b), s)
+      #|  (f1 : Real) <= (f2 : Real) && ((xa : Real) <= (xb : Real) \226\134\146 (a : Real) <= (b : Real)) \226\134\146 xa == f1 \226\134\146 xb == f2 \226\134\146 a <= b
+      #|  op_star(real_of_num(1) - (u : Real))
+      #|  op_star((u : Real))
+      #|  ((a : Bool) \226\134\146 (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (b \226\134\146 a \226\134\146 c \226\134\146 d)
+      #|  (v : Real)
+      #|  (w : Real)
+      #|  op_pct(-(u : Real), (a : Cart[Real, N])) + op_pct(u, (b : Cart[Real, N])) == op_pct(u, b - a)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  op_pct(-(u : Real), (a : Cart[Real, N])) == vec(0) + op_pct(-u, a)
+      #|  op_pct(real_of_num(1) - (a : Real), (x : Cart[Real, N])) == x + op_pct(-a, x)
+      #|  (v : Cart[Real, Unit])
+      #|  ((a1 : Bool) && (a2 : Bool)) && ((b1 : Bool) \226\134\146 (b2 : Bool) \226\134\146 (c : Bool)) \226\134\146 (a1 \226\134\146 b1) \226\134\146 (a2 \226\134\146 b2) \226\134\146 c
+      #|  (x : Cart[Real, Unit]) => o(lift, o((f' : (Cart[Real, N], Cart[Real, N]) -> Real)(op_pct(real_of_num(1) - drop(x), (a : Cart[Real, N])) + op_pct(drop(x), (b : Cart[Real, N]))), (u : Cart[Real, Unit]) => op_pct(-drop(u), a) + op_pct(drop(u), b)))
+      #|  o(lift, o((f : (Cart[Real, N]) -> Real), (u : Cart[Real, Unit]) => op_pct(real_of_num(1) - drop(u), (a : Cart[Real, N])) + op_pct(drop(u), (b : Cart[Real, N]))))
+      #|  real_of_num(0) < (u : Real) && u < real_of_num(1)
+      #|  (u : Real) == real_of_num(1)
+      #|  (u : Real) == real_of_num(0)
+      #|  (u : Real)
+      #|  ((u : Real) + (v : Real) == real_of_num(1)) == (u == real_of_num(1) - v)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) && (e : Bool)) == (e && a && b && c && d)
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (y : Cart[Real, N]) - (x : Cart[Real, N])
+      #|  (f''' : Real) == -(f'' : Real) \226\134\146 f''' <= (x : Real) - (y : Real) \226\134\146 (f' : Real) <= y - x \226\134\146 f' <= f''
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  ((a : Bool) \226\134\146 (b : Bool)) && (b \226\134\146 (c : Bool)) && (c \226\134\146 a) \226\134\146 a == b && a == c
+      #|  (((a : Bool) \226\134\146 (b : Bool)) && (a \226\134\146 (c : Bool))) == (a \226\134\146 b && c)
+      #|  (\226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(o(lift, f), o(lift, f'(x)), within(at(x), s))) \226\134\146 convex_on(f, s) == (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) \226\134\146 f'(x, y - x) <= f(y) - f(x))) && (\226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(o(lift, f), o(lift, f'(x)), within(at(x), s))) \226\134\146 convex_on(f, s) == (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) \226\134\146 f'(x, y - x) <= f'(y, y - x)))
+      #|  (x : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  lift((u : Real))
+      #|  lift((u : Real))
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (z : Cart[Real, N])
+      #|  (x : Cart[Real, N]) - (y : Cart[Real, N])
+      #|  (f' : Real) == -(f'' : Real) \226\134\146 (f' <= (y : Real) - (x : Real)) == (x - y <= f'')
+      #|  IN((y : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  IN((x : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 has_derivative(o(lift, f), o(lift, f'(x)), within(at(x), s))) \226\134\146 convex_on(f, s) == (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) \226\134\146 f(y) - f(x) <= f'(y, y - x))
       #|has_derivative =  |- (#forall:fun(fun(fun(cart(real,'?1),cart(real,'?2)),bool),bool) (\f:fun(cart(real,'?1),cart(real,'?2)). (#forall:fun(fun(fun(cart(real,'?1),cart(real,'?2)),bool),bool) (\f':fun(cart(real,'?1),cart(real,'?2)). (#forall:fun(fun(net(cart(real,'?1)),bool),bool) (\net:net(cart(real,'?1)). ((#=:fun(bool,fun(bool,bool)) (((#has_derivative:fun(fun(cart(real,'?1),cart(real,'?2)),fun(fun(cart(real,'?1),cart(real,'?2)),fun(net(cart(real,'?1)),bool))) f:fun(cart(real,'?1),cart(real,'?2))) f':fun(cart(real,'?1),cart(real,'?2))) net:net(cart(real,'?1)))) ((#/\:fun(bool,fun(bool,bool)) (#linear:fun(fun(cart(real,'?1),cart(real,'?2)),bool) f':fun(cart(real,'?1),cart(real,'?2)))) (((#-->:fun(fun(cart(real,'?1),cart(real,'?2)),fun(cart(real,'?2),fun(net(cart(real,'?1)),bool))) (\y:cart(real,'?1). ((#%:fun(real,fun(cart(real,'?2),cart(real,'?2))) (#real_inv:fun(real,real) (#vector_norm:fun(cart(real,'?1),real) ((#vector_sub:fun(cart(real,'?1),fun(cart(real,'?1),cart(real,'?1))) y:cart(real,'?1)) (#netlimit:fun(net(cart(real,'?1)),cart(real,'?1)) net:net(cart(real,'?1))))))) ((#vector_sub:fun(cart(real,'?2),fun(cart(real,'?2),cart(real,'?2))) (f:fun(cart(real,'?1),cart(real,'?2)) y:cart(real,'?1))) ((#vector_add:fun(cart(real,'?2),fun(cart(real,'?2),cart(real,'?2))) (f:fun(cart(real,'?1),cart(real,'?2)) (#netlimit:fun(net(cart(real,'?1)),cart(real,'?1)) net:net(cart(real,'?1))))) (f':fun(cart(real,'?1),cart(real,'?2)) ((#vector_sub:fun(cart(real,'?1),fun(cart(real,'?1),cart(real,'?1))) y:cart(real,'?1)) (#netlimit:fun(net(cart(real,'?1)),cart(real,'?1)) net:net(cart(real,'?1)))))))))) (#vec:fun(num,cart(real,'?2)) (#NUMERAL:fun(num,num) #_0:num))) net:net(cart(real,'?1)))))))))))
       #|has_derivative_within =  |- (#forall:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool) (\f:fun(cart(real,'M),cart(real,'N)). (#forall:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool) (\f':fun(cart(real,'M),cart(real,'N)). (#forall:fun(fun(cart(real,'M),bool),bool) (\x:cart(real,'M). (#forall:fun(fun(fun(cart(real,'M),bool),bool),bool) (\s:fun(cart(real,'M),bool). ((#=:fun(bool,fun(bool,bool)) (((#has_derivative:fun(fun(cart(real,'M),cart(real,'N)),fun(fun(cart(real,'M),cart(real,'N)),fun(net(cart(real,'M)),bool))) f:fun(cart(real,'M),cart(real,'N))) f':fun(cart(real,'M),cart(real,'N))) ((#within:fun(net(cart(real,'M)),fun(fun(cart(real,'M),bool),net(cart(real,'M)))) (#at:fun(cart(real,'M),net(cart(real,'M))) x:cart(real,'M))) s:fun(cart(real,'M),bool)))) ((#/\:fun(bool,fun(bool,bool)) (#linear:fun(fun(cart(real,'M),cart(real,'N)),bool) f':fun(cart(real,'M),cart(real,'N)))) (((#-->:fun(fun(cart(real,'M),cart(real,'N)),fun(cart(real,'N),fun(net(cart(real,'M)),bool))) (\y:cart(real,'M). ((#%:fun(real,fun(cart(real,'N),cart(real,'N))) (#real_inv:fun(real,real) (#vector_norm:fun(cart(real,'M),real) ((#vector_sub:fun(cart(real,'M),fun(cart(real,'M),cart(real,'M))) y:cart(real,'M)) x:cart(real,'M))))) ((#vector_sub:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) (f:fun(cart(real,'M),cart(real,'N)) y:cart(real,'M))) ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) (f:fun(cart(real,'M),cart(real,'N)) x:cart(real,'M))) (f':fun(cart(real,'M),cart(real,'N)) ((#vector_sub:fun(cart(real,'M),fun(cart(real,'M),cart(real,'M))) y:cart(real,'M)) x:cart(real,'M)))))))) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num))) ((#within:fun(net(cart(real,'M)),fun(fun(cart(real,'M),bool),net(cart(real,'M)))) (#at:fun(cart(real,'M),net(cart(real,'M))) x:cart(real,'M))) s:fun(cart(real,'M),bool)))))))))))))
       #|has_derivative_at =  |- (#forall:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool) (\f:fun(cart(real,'M),cart(real,'N)). (#forall:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool) (\f':fun(cart(real,'M),cart(real,'N)). (#forall:fun(fun(cart(real,'M),bool),bool) (\x:cart(real,'M). ((#=:fun(bool,fun(bool,bool)) (((#has_derivative:fun(fun(cart(real,'M),cart(real,'N)),fun(fun(cart(real,'M),cart(real,'N)),fun(net(cart(real,'M)),bool))) f:fun(cart(real,'M),cart(real,'N))) f':fun(cart(real,'M),cart(real,'N))) (#at:fun(cart(real,'M),net(cart(real,'M))) x:cart(real,'M)))) ((#/\:fun(bool,fun(bool,bool)) (#linear:fun(fun(cart(real,'M),cart(real,'N)),bool) f':fun(cart(real,'M),cart(real,'N)))) (((#-->:fun(fun(cart(real,'M),cart(real,'N)),fun(cart(real,'N),fun(net(cart(real,'M)),bool))) (\y:cart(real,'M). ((#%:fun(real,fun(cart(real,'N),cart(real,'N))) (#real_inv:fun(real,real) (#vector_norm:fun(cart(real,'M),real) ((#vector_sub:fun(cart(real,'M),fun(cart(real,'M),cart(real,'M))) y:cart(real,'M)) x:cart(real,'M))))) ((#vector_sub:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) (f:fun(cart(real,'M),cart(real,'N)) y:cart(real,'M))) ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) (f:fun(cart(real,'M),cart(real,'N)) x:cart(real,'M))) (f':fun(cart(real,'M),cart(real,'N)) ((#vector_sub:fun(cart(real,'M),fun(cart(real,'M),cart(real,'M))) y:cart(real,'M)) x:cart(real,'M)))))))) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num))) (#at:fun(cart(real,'M),net(cart(real,'M))) x:cart(real,'M)))))))))))
