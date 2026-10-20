@@ -79712,215 +79712,215 @@ test "Examples/mangoldt matches Examples/mangoldt.ml" {
       #|0..0..solved at 2
       #|0..0..solved at 2
       #|Examples/mangoldt quotations (209):
-      #|  1 <= SUC n
-      #|  forall n. log(&(FACT n)) = sum(1..n) (\\d. log(&d))
-      #|  n < 1 <=> n = 0
-      #|  d = 1 * d
-      #|  1 <= n <=> ~(n = 0)
-      #|  \\m:num. m * d
-      #|  \\m:num. m DIV d
-      #|  forall n d. ~(d = 0)\n         ==> sum(1..n) (\\m. if d divides m then &1 else &0) = floor(&n / &d)
-      #|  &1
-      #|  inv(&2)
-      #|  &1 / &2 <= log(&2) /\\ log(&2) <= &1
-      #|  ~(n = 0)
-      #|  n = &1 + (n  - &1)
-      #|  x <= y - &1 ==> x <= y
-      #|  forall n. ~(n = 0) ==> log(&n) <= &n
-      #|  &0 <= log(&n)
-      #|  log(&2)
-      #|  inv(&2)
-      #|  ~(n = &0) ==> &1 / n * (n + &1) = inv(n) + &1
-      #|  (n + &1) * (l + n') <= (n + k) * l + &1 <=>\n      n' * (n + &1) <= (k - &1) * l + &1
-      #|  &0 < x ==> (x + &1) / x = &1 + &1 / x
-      #|  &0 < &n + &1
-      #|  x <= y + z <=> x - y <= z
-      #|  (&n + &1) * (log(&n) + &1 / &n)
-      #|  (n + &1) * l' - (n + &1) + &1 <= (n * l - n + &1) + k * l <=>\n      (n + &1) * l' <= (n + k) * l + &1
-      #|  &0 < &n + &1
-      #|  2 <= n ==> 0 < n
-      #|  y <= x /\\ a <= b ==> x <= a ==> y <= b
-      #|  &0 < a /\\ &0 < b
-      #|  b:real
-      #|  a:real
-      #|  ~(x = Cx(&0))
-      #|  x = Cx(&0)
-      #|  &1 <= Re x
-      #|  n:num
+      #|  1 <= SUC((n : Num))
+      #|  \226\136\128 n : Num, log(real_of_num(FACT(n))) == sum(op_dot_dot(1, n), (d : Num) => log(real_of_num(d)))
+      #|  ((n : Num) < 1) == (n == 0)
+      #|  (d : Num) == 1 * d
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  (m : Num) => m * (d : Num)
+      #|  (m : Num) => DIV(m, (d : Num))
+      #|  \226\136\128 n : Num, \226\136\128 d : Num, !(d == 0) \226\134\146 sum(op_dot_dot(1, n), (m : Num) => if divides(d, m) { real_of_num(1) } else { real_of_num(0) }) == floor(real_of_num(n) / real_of_num(d))
+      #|  real_of_num(1)
+      #|  inv(real_of_num(2))
+      #|  real_of_num(1) / real_of_num(2) <= log(real_of_num(2)) && log(real_of_num(2)) <= real_of_num(1)
+      #|  !((n : Num) == 0)
+      #|  (n : Real) == real_of_num(1) + (n - real_of_num(1))
+      #|  (x : Real) <= (y : Real) - real_of_num(1) \226\134\146 x <= y
+      #|  \226\136\128 n : Num, !(n == 0) \226\134\146 log(real_of_num(n)) <= real_of_num(n)
+      #|  real_of_num(0) <= log(real_of_num((n : Num)))
+      #|  log(real_of_num(2))
+      #|  inv(real_of_num(2))
+      #|  !((n : Real) == real_of_num(0)) \226\134\146 real_of_num(1) / n * (n + real_of_num(1)) == inv(n) + real_of_num(1)
+      #|  (((n : Real) + real_of_num(1)) * ((l : Real) + (n' : Real)) <= (n + (k : Real)) * l + real_of_num(1)) == (n' * (n + real_of_num(1)) <= (k - real_of_num(1)) * l + real_of_num(1))
+      #|  real_of_num(0) < (x : Real) \226\134\146 (x + real_of_num(1)) / x == real_of_num(1) + real_of_num(1) / x
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+      #|  ((x : Real) <= (y : Real) + (z : Real)) == (x - y <= z)
+      #|  (real_of_num((n : Num)) + real_of_num(1)) * (log(real_of_num(n)) + real_of_num(1) / real_of_num(n))
+      #|  (((n : Real) + real_of_num(1)) * (l' : Real) - (n + real_of_num(1)) + real_of_num(1) <= n * (l : Real) - n + real_of_num(1) + (k : Real) * l) == ((n + real_of_num(1)) * l' <= (n + k) * l + real_of_num(1))
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+      #|  2 <= (n : Num) \226\134\146 0 < n
+      #|  (y : Real) <= (x : Real) && (a : Real) <= (b : Real) \226\134\146 x <= a \226\134\146 y <= b
+      #|  real_of_num(0) < (a : Real) && real_of_num(0) < (b : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  !((x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  (x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  real_of_num(1) <= Re((x : Cart[Real, Tybit0[Unit]]))
+      #|  (n : Num)
       #|  2
-      #|  \\z. z * clog z - z
-      #|  \\z. clog(z)
-      #|  ~(n = 0) ==> n = 1 \\/ 2 <= n
-      #|  1 <= n <=> ~(n = 0)
-      #|  &0 < a /\\ &0 < b
-      #|  b:real
-      #|  a:real
-      #|  ~(x = Cx(&0))
-      #|  x = Cx(&0)
-      #|  &1 <= Re x
-      #|  n:num
+      #|  (z : Cart[Real, Tybit0[Unit]]) => z * clog(z) - z
+      #|  (z : Cart[Real, Tybit0[Unit]]) => clog(z)
+      #|  !((n : Num) == 0) \226\134\146 n == 1 || 2 <= n
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  real_of_num(0) < (a : Real) && real_of_num(0) < (b : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  !((x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  (x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  real_of_num(1) <= Re((x : Cart[Real, Tybit0[Unit]]))
+      #|  (n : Num)
       #|  1
-      #|  \\z. z * clog z - z
-      #|  \\z. clog(z)
-      #|  abs(x - y) <= e <=> x <= y + e /\\ y - e <= x
+      #|  (z : Cart[Real, Tybit0[Unit]]) => z * clog(z) - z
+      #|  (z : Cart[Real, Tybit0[Unit]]) => clog(z)
+      #|  (abs((x : Real) - (y : Real)) <= (e : Real)) == (x <= y + e && y - e <= x)
       #|  1
-      #|  n = 1
-      #|  forall n. ~(n = 0)\n       ==> abs(log(&(FACT n)) - (&n * log(&n) - &n + &1)) <= &2 * log(&n)
+      #|  (n : Num) == 1
+      #|  \226\136\128 n : Num, !(n == 0) \226\134\146 abs(log(real_of_num(FACT(n))) - (real_of_num(n) * log(real_of_num(n)) - real_of_num(n) + real_of_num(1))) <= real_of_num(2) * log(real_of_num(n))
       #|  (f has_complex_derivative f') net
       #|  (f has_complex_derivative f') net
-      #|  mangoldt n = if ?p k. 1 <= k /\\ prime p /\\ n = p EXP k\n               then log(&(@p. prime p /\\ p divides n))\n               else &0
-      #|  ~(1 <= 0)
-      #|  mangoldt 1 = &0
-      #|  ~(a /\\ b ==> ~(c /\\ d)) <=> d /\\ c /\\ a /\\ b
-      #|  a /\\ b /\\ c <=> ~(a /\\ b ==> ~c)
-      #|  forall p k. prime p ==> mangoldt(p EXP k) = if 1 <= k then log(&p) else &0
-      #|  ?p k. 1 <= k /\\ prime p /\\ n = p EXP k
-      #|  forall n. &0 <= mangoldt n
-      #|  2 <= p ==> ~(p = 0) /\\ ~(p = 1)
-      #|  {d | ?i. i <= k /\\ d = p EXP i} =\n                        IMAGE (\\i. p EXP i) {i | i <= k}
-      #|  d:num
-      #|  1 < n ==> ~(n = 0)
-      #|  sum ({d | d divides a} UNION {d | d divides b}) (\\d. mangoldt d)
-      #|  1 < a ==> 0 < a
-      #|  n:num
-      #|  n:num
-      #|  1 < n
-      #|  ~(1 <= 0)
-      #|  {x | x = a} = {a}
-      #|  n = 1
-      #|  forall n. ~(n = 0) ==> log(&n) = sum {d | d divides n} (\\d. mangoldt(d))
-      #|  d:num
-      #|  m:num
-      #|  sum (1..n) (\\m. sum (1..n)\n     (\\d. mangoldt d * (if d divides m then &1 else &0)))
-      #|  sum(1..n) (\\m. sum {d | d divides m} (\\d. mangoldt d))
-      #|  forall n. log(&(FACT n)) = sum(1..n) (\\d. mangoldt(d) * floor(&n / &d))
-      #|  1 <= n <=> ~(n = 0)
-      #|  &6 * &n + (&2 * log(&2) - &1) * &n + (&2 * log(&2)) * &n
-      #|  &6 * log(&n) + (&2 * log(&2) - &1) * &1 + (&2 * log(&2)) * &n
-      #|  a2 + e2 + &2 * (e1 - a1) <= m\n     ==> abs(f2 - a2) <= e2 ==> abs(f1 - a1) <= e1 ==> f2 - &2 * f1 <= m
-      #|  2 * n
-      #|  n:num
-      #|  y' <= y ==> x - y <= x - y'
-      #|  sum(1..2*n) (\\d. mangoldt(d) * floor(&(2 * n) / &d)) -\n              &2 * sum(1..n) (\\d. mangoldt(d) * floor(&n / &d))
-      #|  m * (f1 - &2 * f2) = m * f1 - &2 * m * f2
-      #|  ~(r = 0)
-      #|  r:num
-      #|  sum (1..2*n)\n        (\\d. mangoldt(d) * (floor(&(2 * n) / &d) - &2 * floor(&n / &d)))
-      #|  ~(r = 0)
-      #|  &1 <= a /\\ b = &0 ==> &1 <= a - &2 * b
-      #|  r:num
-      #|  sum (n+1..2*n)\n        (\\d. mangoldt(d) * (floor(&(2 * n) / &d) - &2 * floor(&n / &d)))
-      #|  ~(n = 0) ==> 1 <= n + 1 /\\ n <= 2 * n
-      #|  sum (n+1..2 * n) (\\d. mangoldt d)
-      #|  forall n. ~(n = 0)\n       ==> sum(1..2*n) (\\d. mangoldt(d)) -\n           sum(1..n) (\\d. mangoldt(d)) <= &9 * &n
-      #|  s1 <= &9 * e ==> s2 - s1 <= &9 * e ==> s2 <= &9 * &2 * e
-      #|  forall n. sum(1..2 EXP n) (\\d. mangoldt(d)) <= &9 * &(2 EXP n)
-      #|  k - 1
-      #|  ~(k = 0) ==> k = SUC(k - 1)
-      #|  k = 0
-      #|  &9 * &(2 EXP k)
-      #|  sum(1..2 EXP k) (\\d. mangoldt d)
-      #|  n:num
-      #|  n:num
-      #|  ?k. n <= 2 EXP k /\\ forall l. l < k ==> ~(n <= 2 EXP l)
-      #|  sum(1..1) (\\d. mangoldt d)
-      #|  n <= 1
-      #|  forall n. sum(1..n) (\\d. mangoldt(d)) <= &18 * &n
-      #|  x <= (k - &2) * n /\\ l <= n ==> x <= k * n - &2 * l
-      #|  &n / &i
-      #|  i:num
-      #|  i:num
-      #|  --(a * (x - y)):real = a * (y - x)
-      #|  &0 <= --x /\\ --x <= y ==> abs(x) <= y
-      #|  sum(1..n) (\\i. mangoldt i)
-      #|  n * i / x:real = i * n / x
-      #|  &1 <= x ==> abs(x - &1) <= x
-      #|  abs(n - &1) <= n /\\ abs(s' - s) <= (k - &1) * n - a\n    ==> abs(s' - (nl - n + &1)) <= a\n        ==> abs(s - nl) <= n * k
-      #|  &n
-      #|  forall n. ~(n = 0) ==> abs(sum(1..n) (\\d. mangoldt(d) / &d) - log(&n)) <= &21
-      #|  3 <= n ==> 1 <= n /\\ 1 < n
-      #|  x - &1 <= x
-      #|  --x <= &0 <=> &0 <= x
-      #|  a <= b /\\ --c <= e ==> a - b - c <= e
-      #|  a <= e - &2 /\\ x <= &1 ==> a + &2 * x <= e
-      #|  a - (&0 - x - x / &1) = a + &2 * x
-      #|  3 <= n ==> 0 < n /\\ 1 < n
-      #|  x = y /\\ a <= b ==> x <= a ==> y <= b
-      #|  log(&2)
-      #|  a * b <= &1 /\\ &1 / &2 <= c ==> b * a <= &2 * c
-      #|  (x:real) pow 3 = x * x pow 2
-      #|  &0 < u /\\ &1 < u /\\ &2 <= u
-      #|  x <= y\n      ==> (x <= u /\\ u <= y \\/ y <= u /\\ u <= x <=> x <= u /\\ u <= y)
-      #|  u = Re w
-      #|  real w
-      #|  a * (y - x) <= &0 <=> &0 <= --a * (y - x)
-      #|  w:complex
-      #|  x <= y <=> x - y <= &0
-      #|  ~(z = Cx(&0)) /\\ ~(z = Cx(&1))
-      #|  a <= x /\\ x <= b \\/ b <= x /\\ x <= a <=>\n                         a <= x /\\ x <= b \\/ b < a /\\ b <= x /\\ x <= a
-      #|  z:complex
-      #|  Cx(y)
-      #|  Cx(x)
-      #|  \\z. inv(z * (z - Cx(&1)) pow 2) -\n                       Cx(&2) * clog(z) / (z - Cx(&1)) pow 3
-      #|  \\z. clog(z) / (z - Cx(&1)) pow 2
-      #|  y:real
-      #|  x:real
-      #|  &2 <= Re z
-      #|  ~(z = Cx(&0)) /\\ ~(z = Cx(&1))
-      #|  &2 <= x ==> &1 < x /\\ &0 < x
-      #|  z:complex
-      #|  n:num
+      #|  (mangoldt : (Num) -> Real)((n : Num)) == (if (\226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && n == EXP(p, k)) { log(real_of_num(select((p : Num) => prime(p) && divides(p, n)))) } else { real_of_num(0) })
+      #|  !(1 <= 0)
+      #|  mangoldt(1) == real_of_num(0)
+      #|  !((a : Bool) && (b : Bool) \226\134\146 !((c : Bool) && (d : Bool))) == (d && c && a && b)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool)) == !(a && b \226\134\146 !c)
+      #|  \226\136\128 p : Num, \226\136\128 k : Num, prime(p) \226\134\146 mangoldt(EXP(p, k)) == (if 1 <= k { log(real_of_num(p)) } else { real_of_num(0) })
+      #|  \226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && (n : Num) == EXP(p, k)
+      #|  \226\136\128 n : Num, real_of_num(0) <= mangoldt(n)
+      #|  2 <= (p : Num) \226\134\146 !(p == 0) && !(p == 1)
+      #|  {(d : Num) | \226\136\131 i : Num, i <= (k : Num) && d == EXP((p : Num), i)} == IMAGE((i : Num) => EXP(p, i), {(i : Num) | i <= k})
+      #|  (d : Num)
+      #|  1 < (n : Num) \226\134\146 !(n == 0)
+      #|  sum(UNION({(d : Num) | divides(d, (a : Num))}, {(d : Num) | divides(d, (b : Num))}), (d : Num) => mangoldt(d))
+      #|  1 < (a : Num) \226\134\146 0 < a
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  1 < (n : Num)
+      #|  !(1 <= 0)
+      #|  {(x : _) | x == (a : _)} == {a}
+      #|  (n : Num) == 1
+      #|  \226\136\128 n : Num, !(n == 0) \226\134\146 log(real_of_num(n)) == sum({(d : Num) | divides(d, n)}, (d : Num) => mangoldt(d))
+      #|  (d : Num)
+      #|  (m : Num)
+      #|  sum(op_dot_dot(1, (n : Num)), (m : Num) => sum(op_dot_dot(1, n), (d : Num) => mangoldt(d) * (if divides(d, m) { real_of_num(1) } else { real_of_num(0) })))
+      #|  sum(op_dot_dot(1, (n : Num)), (m : Num) => sum({(d : Num) | divides(d, m)}, (d : Num) => mangoldt(d)))
+      #|  \226\136\128 n : Num, log(real_of_num(FACT(n))) == sum(op_dot_dot(1, n), (d : Num) => mangoldt(d) * floor(real_of_num(n) / real_of_num(d)))
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  real_of_num(6) * real_of_num((n : Num)) + ((real_of_num(2) * log(real_of_num(2)) - real_of_num(1)) * real_of_num(n) + real_of_num(2) * log(real_of_num(2)) * real_of_num(n))
+      #|  real_of_num(6) * log(real_of_num((n : Num))) + ((real_of_num(2) * log(real_of_num(2)) - real_of_num(1)) * real_of_num(1) + real_of_num(2) * log(real_of_num(2)) * real_of_num(n))
+      #|  (a2 : Real) + ((e2 : Real) + real_of_num(2) * ((e1 : Real) - (a1 : Real))) <= (m : Real) \226\134\146 abs((f2 : Real) - a2) <= e2 \226\134\146 abs((f1 : Real) - a1) <= e1 \226\134\146 f2 - real_of_num(2) * f1 <= m
+      #|  2 * (n : Num)
+      #|  (n : Num)
+      #|  (y' : Real) <= (y : Real) \226\134\146 (x : Real) - y <= x - y'
+      #|  sum(op_dot_dot(1, 2 * (n : Num)), (d : Num) => mangoldt(d) * floor(real_of_num(2 * n) / real_of_num(d))) - real_of_num(2) * sum(op_dot_dot(1, n), (d : Num) => mangoldt(d) * floor(real_of_num(n) / real_of_num(d)))
+      #|  (m : Real) * ((f1 : Real) - real_of_num(2) * (f2 : Real)) == m * f1 - real_of_num(2) * (m * f2)
+      #|  !((r : Num) == 0)
+      #|  (r : Num)
+      #|  sum(op_dot_dot(1, 2 * (n : Num)), (d : Num) => mangoldt(d) * (floor(real_of_num(2 * n) / real_of_num(d)) - real_of_num(2) * floor(real_of_num(n) / real_of_num(d))))
+      #|  !((r : Num) == 0)
+      #|  real_of_num(1) <= (a : Real) && (b : Real) == real_of_num(0) \226\134\146 real_of_num(1) <= a - real_of_num(2) * b
+      #|  (r : Num)
+      #|  sum(op_dot_dot((n : Num) + 1, 2 * n), (d : Num) => mangoldt(d) * (floor(real_of_num(2 * n) / real_of_num(d)) - real_of_num(2) * floor(real_of_num(n) / real_of_num(d))))
+      #|  !((n : Num) == 0) \226\134\146 1 <= n + 1 && n <= 2 * n
+      #|  sum(op_dot_dot((n : Num) + 1, 2 * n), (d : Num) => mangoldt(d))
+      #|  \226\136\128 n : Num, !(n == 0) \226\134\146 sum(op_dot_dot(1, 2 * n), (d : Num) => mangoldt(d)) - sum(op_dot_dot(1, n), (d : Num) => mangoldt(d)) <= real_of_num(9) * real_of_num(n)
+      #|  (s1 : Real) <= real_of_num(9) * (e : Real) \226\134\146 (s2 : Real) - s1 <= real_of_num(9) * e \226\134\146 s2 <= real_of_num(9) * (real_of_num(2) * e)
+      #|  \226\136\128 n : Num, sum(op_dot_dot(1, EXP(2, n)), (d : Num) => mangoldt(d)) <= real_of_num(9) * real_of_num(EXP(2, n))
+      #|  (k : Num) - 1
+      #|  !((k : Num) == 0) \226\134\146 k == SUC(k - 1)
+      #|  (k : Num) == 0
+      #|  real_of_num(9) * real_of_num(EXP(2, (k : Num)))
+      #|  sum(op_dot_dot(1, EXP(2, (k : Num))), (d : Num) => mangoldt(d))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\131 k : Num, (n : Num) <= EXP(2, k) && (\226\136\128 l : Num, l < k \226\134\146 !(n <= EXP(2, l)))
+      #|  sum(op_dot_dot(1, 1), (d : Num) => mangoldt(d))
+      #|  (n : Num) <= 1
+      #|  \226\136\128 n : Num, sum(op_dot_dot(1, n), (d : Num) => mangoldt(d)) <= real_of_num(18) * real_of_num(n)
+      #|  (x : Real) <= ((k : Real) - real_of_num(2)) * (n : Real) && (l : Real) <= n \226\134\146 x <= k * n - real_of_num(2) * l
+      #|  real_of_num((n : Num)) / real_of_num((i : Num))
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  -((a : Real) * ((x : Real) - (y : Real))) == a * (y - x)
+      #|  real_of_num(0) <= -(x : Real) && -x <= (y : Real) \226\134\146 abs(x) <= y
+      #|  sum(op_dot_dot(1, (n : Num)), (i : Num) => mangoldt(i))
+      #|  (n : Real) * ((i : Real) / (x : Real)) == i * (n / x)
+      #|  real_of_num(1) <= (x : Real) \226\134\146 abs(x - real_of_num(1)) <= x
+      #|  abs((n : Real) - real_of_num(1)) <= n && abs((s' : Real) - (s : Real)) <= ((k : Real) - real_of_num(1)) * n - (a : Real) \226\134\146 abs(s' - ((nl : Real) - n + real_of_num(1))) <= a \226\134\146 abs(s - nl) <= n * k
+      #|  real_of_num((n : Num))
+      #|  \226\136\128 n : Num, !(n == 0) \226\134\146 abs(sum(op_dot_dot(1, n), (d : Num) => mangoldt(d) / real_of_num(d)) - log(real_of_num(n))) <= real_of_num(21)
+      #|  3 <= (n : Num) \226\134\146 1 <= n && 1 < n
+      #|  (x : Real) - real_of_num(1) <= x
+      #|  (-(x : Real) <= real_of_num(0)) == (real_of_num(0) <= x)
+      #|  (a : Real) <= (b : Real) && -(c : Real) <= (e : Real) \226\134\146 a - b - c <= e
+      #|  (a : Real) <= (e : Real) - real_of_num(2) && (x : Real) <= real_of_num(1) \226\134\146 a + real_of_num(2) * x <= e
+      #|  (a : Real) - (real_of_num(0) - (x : Real) - x / real_of_num(1)) == a + real_of_num(2) * x
+      #|  3 <= (n : Num) \226\134\146 0 < n && 1 < n
+      #|  (x : Real) == (y : Real) && (a : Real) <= (b : Real) \226\134\146 x <= a \226\134\146 y <= b
+      #|  log(real_of_num(2))
+      #|  (a : Real) * (b : Real) <= real_of_num(1) && real_of_num(1) / real_of_num(2) <= (c : Real) \226\134\146 b * a <= real_of_num(2) * c
+      #|  pow((x : Real), 3) == x * pow(x, 2)
+      #|  real_of_num(0) < (u : Real) && real_of_num(1) < u && real_of_num(2) <= u
+      #|  (x : Real) <= (y : Real) \226\134\146 (x <= (u : Real) && u <= y || y <= u && u <= x) == (x <= u && u <= y)
+      #|  (u : Real) == Re((w : Cart[Real, Tybit0[Unit]]))
+      #|  real((w : Cart[Real, Tybit0[Unit]]))
+      #|  ((a : Real) * ((y : Real) - (x : Real)) <= real_of_num(0)) == (real_of_num(0) <= -a * (y - x))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  ((x : Real) <= (y : Real)) == (x - y <= real_of_num(0))
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) && !(z == Cx(real_of_num(1)))
+      #|  ((a : Real) <= (x : Real) && x <= (b : Real) || b <= x && x <= a) == (a <= x && x <= b || b < a && b <= x && x <= a)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  Cx((y : Real))
+      #|  Cx((x : Real))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => inv(z * pow(z - Cx(real_of_num(1)), 2)) - Cx(real_of_num(2)) * (clog(z) / pow(z - Cx(real_of_num(1)), 3))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => clog(z) / pow(z - Cx(real_of_num(1)), 2)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  real_of_num(2) <= Re((z : Cart[Real, Tybit0[Unit]]))
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) && !(z == Cx(real_of_num(1)))
+      #|  real_of_num(2) <= (x : Real) \226\134\146 real_of_num(1) < x && real_of_num(0) < x
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
       #|  3
-      #|  \\z. clog(z - Cx(&1)) - clog(z) - clog(z) / (z - Cx(&1))
-      #|  \\z. clog(z) / (z - Cx(&1)) pow 2
-      #|  n < 3
-      #|  x <= &1 /\\ y <= e - &1 ==> x + y <= e
-      #|  n < 2
-      #|  x - &1 <= x
-      #|  1 < p <=> 2 <= p
-      #|  2 <= p ==> 1 <= p
-      #|  sum (2..n) (\\m. log(&m) / (&m - &1) pow 2)
-      #|  2 <= p ==> 1 <= p
-      #|  sum (2..n)  (\\p. log(&p) / (&p * (&p - &1)))
-      #|  &0 <= y * z /\\ x * z <= a ==> (x - y) * z <= a
-      #|  2 <= p ==> ~(p = 1)
-      #|  p:num
-      #|  sum {p | p IN 1..n /\\ prime p}\n                  (\\p. log(&p) / (&p * (&p - &1)))
-      #|  2 EXP k
-      #|  p EXP k
-      #|  p EXP k
-      #|  1 <= k <=> ~(k = 0)
-      #|  k >= 2 ==> 1 <= k /\\ 2 <= k
-      #|  k:num
-      #|  p:num
-      #|  x:num
-      #|  0..n
-      #|  \\(p,k). p EXP k
-      #|  sum {p | p IN 1..n /\\ prime p}\n        (\\p. sum (2..n) (\\k. log(&p) / &p pow k))
-      #|  0..n
-      #|  &0 <= x /\\ x <= y ==> abs(x) <= y
-      #|  k >= 1 <=> k >= 2 \\/ k = 1
-      #|  ~(1 >= 2)
-      #|  0..n
-      #|  1 <= x <=> ~(x = 0)
-      #|  sum {p EXP k | prime p /\\ p EXP k <= n /\\ k >= 1}\n          (\\d. mangoldt d / &d)
-      #|  sum {p | prime p /\\ p <= n} (\\p. log (&p) / &p) =\n      sum {p | prime p /\\ p <= n} (\\d. mangoldt d / &d)
-      #|  sum(1..n) (\\d. mangoldt d / &d) -\n    sum {p | prime p /\\ p <= n} (\\p. log (&p) / &p) =\n    sum {p EXP k | prime p /\\ p EXP k <= n /\\ k >= 2} (\\d. mangoldt d / &d)
-      #|  2 <= p ==> 1 <= p
-      #|  {p | prime p /\\ p IN 1..n} = {p | prime p /\\ p <= n}
-      #|  x:num
-      #|  &0 <= x /\\ x <= y ==> abs x <= abs y
-      #|  FINITE(s:num->bool)
-      #|  abs(sum (1..n) (\\d. mangoldt d / &d) -\n                  sum {p | prime p /\\ p IN 1..n} (\\p. log (&p) / &p))
-      #|  n = 0
-      #|  forall n s. s SUBSET (1..n)\n         ==> abs (sum s (\\d. mangoldt d / &d) -\n                  sum {p | prime p /\\ p IN s} (\\p. log (&p) / &p)) <= &3
+      #|  (z : Cart[Real, Tybit0[Unit]]) => clog(z - Cx(real_of_num(1))) - clog(z) - clog(z) / (z - Cx(real_of_num(1)))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => clog(z) / pow(z - Cx(real_of_num(1)), 2)
+      #|  (n : Num) < 3
+      #|  (x : Real) <= real_of_num(1) && (y : Real) <= (e : Real) - real_of_num(1) \226\134\146 x + y <= e
+      #|  (n : Num) < 2
+      #|  (x : Real) - real_of_num(1) <= x
+      #|  (1 < (p : Num)) == (2 <= p)
+      #|  2 <= (p : Num) \226\134\146 1 <= p
+      #|  sum(op_dot_dot(2, (n : Num)), (m : Num) => log(real_of_num(m)) / pow(real_of_num(m) - real_of_num(1), 2))
+      #|  2 <= (p : Num) \226\134\146 1 <= p
+      #|  sum(op_dot_dot(2, (n : Num)), (p : Num) => log(real_of_num(p)) / (real_of_num(p) * (real_of_num(p) - real_of_num(1))))
+      #|  real_of_num(0) <= (y : Real) * (z : Real) && (x : Real) * z <= (a : Real) \226\134\146 (x - y) * z <= a
+      #|  2 <= (p : Num) \226\134\146 !(p == 1)
+      #|  (p : Num)
+      #|  sum({(p : Num) | IN(p, op_dot_dot(1, (n : Num))) && prime(p)}, (p : Num) => log(real_of_num(p)) / (real_of_num(p) * (real_of_num(p) - real_of_num(1))))
+      #|  EXP(2, (k : Num))
+      #|  EXP((p : Num), (k : Num))
+      #|  EXP((p : Num), (k : Num))
+      #|  (1 <= (k : Num)) == !(k == 0)
+      #|  (k : Num) >= 2 \226\134\146 1 <= k && 2 <= k
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  (x : Num)
+      #|  op_dot_dot(0, (n : Num))
+      #|  GABS((f : ((Num, Num)) -> Num) => \226\136\128 p : Num, \226\136\128 k : Num, GEQ(f((p, k)), EXP(p, k)))
+      #|  sum({(p : Num) | IN(p, op_dot_dot(1, (n : Num))) && prime(p)}, (p : Num) => sum(op_dot_dot(2, n), (k : Num) => log(real_of_num(p)) / pow(real_of_num(p), k)))
+      #|  op_dot_dot(0, (n : Num))
+      #|  real_of_num(0) <= (x : Real) && x <= (y : Real) \226\134\146 abs(x) <= y
+      #|  ((k : Num) >= 1) == (k >= 2 || k == 1)
+      #|  !(1 >= 2)
+      #|  op_dot_dot(0, (n : Num))
+      #|  (1 <= (x : Num)) == !(x == 0)
+      #|  sum({EXP((p : Num), (k : Num)) | prime(p) && EXP(p, k) <= (n : Num) && k >= 1}, (d : Num) => mangoldt(d) / real_of_num(d))
+      #|  sum({(p : Num) | prime(p) && p <= (n : Num)}, (p : Num) => log(real_of_num(p)) / real_of_num(p)) == sum({(p : Num) | prime(p) && p <= n}, (d : Num) => mangoldt(d) / real_of_num(d))
+      #|  sum(op_dot_dot(1, (n : Num)), (d : Num) => mangoldt(d) / real_of_num(d)) - sum({(p : Num) | prime(p) && p <= n}, (p : Num) => log(real_of_num(p)) / real_of_num(p)) == sum({EXP((p : Num), (k : Num)) | prime(p) && EXP(p, k) <= n && k >= 2}, (d : Num) => mangoldt(d) / real_of_num(d))
+      #|  2 <= (p : Num) \226\134\146 1 <= p
+      #|  {(p : Num) | prime(p) && IN(p, op_dot_dot(1, (n : Num)))} == {(p : Num) | prime(p) && p <= n}
+      #|  (x : Num)
+      #|  real_of_num(0) <= (x : Real) && x <= (y : Real) \226\134\146 abs(x) <= abs(y)
+      #|  FINITE((s : (Num) -> Bool))
+      #|  abs(sum(op_dot_dot(1, (n : Num)), (d : Num) => mangoldt(d) / real_of_num(d)) - sum({(p : Num) | prime(p) && IN(p, op_dot_dot(1, n))}, (p : Num) => log(real_of_num(p)) / real_of_num(p)))
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, \226\136\128 s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, n)) \226\134\146 abs(sum(s, (d : Num) => mangoldt(d) / real_of_num(d)) - sum({(p : Num) | prime(p) && IN(p, s)}, (p : Num) => log(real_of_num(p)) / real_of_num(p))) <= real_of_num(3)
       #|  (f has_complex_derivative f') net
       #|  (f has_complex_derivative f') net
-      #|  n:num
-      #|  2 <= p ==> 1 <= p
-      #|  {p | prime p /\\ p <= n} = {p | prime p /\\ p IN 1..n}
-      #|  abs(s1 - s2) <= k - e ==> abs(s1 - l) <= e ==> abs(s2 - l) <= k
-      #|  forall n. ~(n = 0)\n       ==> abs(sum {p | prime p /\\ p <= n}\n                   (\\p. log(&p) / &p) - log(&n)) <= &24
+      #|  (n : Num)
+      #|  2 <= (p : Num) \226\134\146 1 <= p
+      #|  {(p : Num) | prime(p) && p <= (n : Num)} == {(p : Num) | prime(p) && IN(p, op_dot_dot(1, n))}
+      #|  abs((s1 : Real) - (s2 : Real)) <= (k : Real) - (e : Real) \226\134\146 abs(s1 - (l : Real)) <= e \226\134\146 abs(s2 - l) <= k
+      #|  \226\136\128 n : Num, !(n == 0) \226\134\146 abs(sum({(p : Num) | prime(p) && p <= n}, (p : Num) => log(real_of_num(p)) / real_of_num(p)) - log(real_of_num(n))) <= real_of_num(24)
       #|LOG_FACT =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(real,fun(real,bool)) (#log:fun(real,real) (#real_of_num:fun(num,real) (#FACT:fun(num,num) n:num)))) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\d:num. (#log:fun(real,real) (#real_of_num:fun(num,real) d:num)))))))
       #|SUM_DIVISORS_FLOOR_LEMMA =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\d:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) d:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(real,fun(real,bool)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\m:num. (((#COND:fun(bool,fun(real,fun(real,real))) ((#num_divides:fun(num,fun(num,bool)) d:num) m:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))) (#floor:fun(real,real) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) d:num)))))))))
       #|LOG_2_BOUNDS =  |- ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#log:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#real_le:fun(real,fun(real,bool)) (#log:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))
