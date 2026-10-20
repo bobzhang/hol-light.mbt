@@ -79697,8 +79697,8 @@ Examples/mangoldt quotations (209):
   1
   (n : Num) == 1
   \226\136\128 n : Num, !(n == 0) \226\134\146 abs(log(real_of_num(FACT(n))) - (real_of_num(n) * log(real_of_num(n)) - real_of_num(n) + real_of_num(1))) <= real_of_num(2) * log(real_of_num(n))
-  (f has_complex_derivative f') net
-  (f has_complex_derivative f') net
+  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
+  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
   (mangoldt : (Num) -> Real)((n : Num)) == (if (\226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && n == EXP(p, k)) { log(real_of_num(select((p : Num) => prime(p) && divides(p, n)))) } else { real_of_num(0) })
   !(1 <= 0)
   mangoldt(1) == real_of_num(0)
@@ -79845,8 +79845,8 @@ Examples/mangoldt quotations (209):
   abs(sum(op_dot_dot(1, (n : Num)), (d : Num) => mangoldt(d) / real_of_num(d)) - sum({(p : Num) | prime(p) && IN(p, op_dot_dot(1, n))}, (p : Num) => log(real_of_num(p)) / real_of_num(p)))
   (n : Num) == 0
   \226\136\128 n : Num, \226\136\128 s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, n)) \226\134\146 abs(sum(s, (d : Num) => mangoldt(d) / real_of_num(d)) - sum({(p : Num) | prime(p) && IN(p, s)}, (p : Num) => log(real_of_num(p)) / real_of_num(p))) <= real_of_num(3)
-  (f has_complex_derivative f') net
-  (f has_complex_derivative f') net
+  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
+  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
   (n : Num)
   2 <= (p : Num) \226\134\146 1 <= p
   {(p : Num) | prime(p) && p <= (n : Num)} == {(p : Num) | prime(p) && IN(p, op_dot_dot(1, n))}
