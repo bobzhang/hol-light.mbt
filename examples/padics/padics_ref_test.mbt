@@ -27963,28 +27963,28 @@ test "Examples/padics matches Examples/padics.ml" {
       #|5 basis elements and 0 critical pairs
       #|Generating HOL version of proof
       #|Examples/padics quotations (533):
-      #|  ~(a = &0) ==> abs x = a ==> ~(x = &0)
-      #|  n = 0
-      #|  prime p
-      #|  n:num
-      #|  m:num
-      #|  x:real
-      #|  p:num
-      #|  ((if q then y else &0) = &0 <=> ~p \\/ ~q \\/ x = &0) <=>\n        (q ==> (y = &0 <=> ~p \\/ x = &0))
-      #|  \\p x. if rational x then (padic:num->real->real) p (abs x)\n                        else &0
-      #|  index p
-      #|  ~(y1 = &0) /\\ ~(y2 = &0)\n        ==> (x1 * inv y1 = x2 * inv y2 <=> x1 * y2 = x2 * y1)
-      #|  b2 = 0
-      #|  b1 = 0
-      #|  a2 = 0
-      #|  a1 = 0
-      #|  prime p
-      #|  b2:num
-      #|  a2:num
-      #|  b1:num
-      #|  a1:num
-      #|  ?padic. forall p m n.\n          padic p (&m / &n) =\n          if ~prime p \\/ m = 0 \\/ n = 0 then &0\n          else &p pow (index p n) / &p pow (index p m)
-      #|  ?qnorm.\n          (forall p m n. prime p /\\ ~(m = 0) /\\ ~(n = 0)\n                   ==> qnorm p (&m / &n) =\n                       &p pow (index p n) / &p pow (index p m)) /\\\n          (forall p x. qnorm p x = &0 <=> ~prime p \\/ ~rational x \\/ x = &0) /\\\n          (forall p x. qnorm p (abs x) = qnorm p x)
+      #|  !((a : Real) == real_of_num(0)) \226\134\146 abs((x : Real)) == a \226\134\146 !(x == real_of_num(0))
+      #|  (n : Num) == 0
+      #|  prime((p : Num))
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (x : Real)
+      #|  (p : Num)
+      #|  (((if (q : Bool) { (y : Real) } else { real_of_num(0) }) == real_of_num(0)) == (!(p : Bool) || !q || (x : Real) == real_of_num(0))) == (q \226\134\146 (y == real_of_num(0)) == (!p || x == real_of_num(0)))
+      #|  (p : Num) => (x : Real) => if rational(x) { (padic : (Num, Real) -> Real)(p, abs(x)) } else { real_of_num(0) }
+      #|  index((p : Num))
+      #|  !((y1 : Real) == real_of_num(0)) && !((y2 : Real) == real_of_num(0)) \226\134\146 ((x1 : Real) * inv(y1) == (x2 : Real) * inv(y2)) == (x1 * y2 == x2 * y1)
+      #|  (b2 : Num) == 0
+      #|  (b1 : Num) == 0
+      #|  (a2 : Num) == 0
+      #|  (a1 : Num) == 0
+      #|  prime((p : Num))
+      #|  (b2 : Num)
+      #|  (a2 : Num)
+      #|  (b1 : Num)
+      #|  (a1 : Num)
+      #|  \226\136\131 padic : (Num, Real) -> Real, \226\136\128 p : Num, \226\136\128 m : Num, \226\136\128 n : Num, padic(p, real_of_num(m) / real_of_num(n)) == (if !prime(p) || m == 0 || n == 0 { real_of_num(0) } else { pow(real_of_num(p), index(p, n)) / pow(real_of_num(p), index(p, m)) })
+      #|  \226\136\131 qnorm : (Num, Real) -> Real, (\226\136\128 p : Num, \226\136\128 m : Num, \226\136\128 n : Num, prime(p) && !(m == 0) && !(n == 0) \226\134\146 qnorm(p, real_of_num(m) / real_of_num(n)) == pow(real_of_num(p), index(p, n)) / pow(real_of_num(p), index(p, m))) && (\226\136\128 p : Num, \226\136\128 x : Real, (qnorm(p, x) == real_of_num(0)) == (!prime(p) || !rational(x) || x == real_of_num(0))) && (\226\136\128 p : Num, \226\136\128 x : Real, qnorm(p, abs(x)) == qnorm(p, x))
       #|  \\/
       #|  \\/
       #|  ~
@@ -28111,22 +28111,22 @@ test "Examples/padics matches Examples/padics.ml" {
       #|  \\/
       #|  ~
       #|  F
-      #|  forall p m n. qnorm p (&m / &n) =\n           if ~prime p \\/ m = 0 \\/ n = 0 then &0\n           else &p pow (index p n) / &p pow (index p m)
-      #|  forall p x. qnorm p (--x) = qnorm p x
-      #|  forall p. qnorm p (&0) = &0
-      #|  a2 = 0
-      #|  a1 = 0
-      #|  a1 / b1 * a2 / b2:real = (a1 * a2) * inv b1 * inv b2
-      #|  b2:num
-      #|  a2:num
-      #|  b1:num
-      #|  a1:num
-      #|  rational x
-      #|  rational y
-      #|  rational y
-      #|  rational x
-      #|  prime p
-      #|  forall p x y. (rational (x * y) ==> rational x /\\ rational y)\n           ==> qnorm p (x * y) = qnorm p x * qnorm p y
+      #|  \226\136\128 p : Num, \226\136\128 m : Num, \226\136\128 n : Num, qnorm(p, real_of_num(m) / real_of_num(n)) == (if !prime(p) || m == 0 || n == 0 { real_of_num(0) } else { pow(real_of_num(p), index(p, n)) / pow(real_of_num(p), index(p, m)) })
+      #|  \226\136\128 p : Num, \226\136\128 x : Real, qnorm(p, -x) == qnorm(p, x)
+      #|  \226\136\128 p : Num, qnorm(p, real_of_num(0)) == real_of_num(0)
+      #|  (a2 : Num) == 0
+      #|  (a1 : Num) == 0
+      #|  (a1 : Real) / (b1 : Real) * ((a2 : Real) / (b2 : Real)) == a1 * a2 * (inv(b1) * inv(b2))
+      #|  (b2 : Num)
+      #|  (a2 : Num)
+      #|  (b1 : Num)
+      #|  (a1 : Num)
+      #|  rational((x : Real))
+      #|  rational((y : Real))
+      #|  rational((y : Real))
+      #|  rational((x : Real))
+      #|  prime((p : Num))
+      #|  \226\136\128 p : Num, \226\136\128 x : Real, \226\136\128 y : Real, (rational(x * y) \226\134\146 rational(x) && rational(y)) \226\134\146 qnorm(p, x * y) == qnorm(p, x) * qnorm(p, y)
       #|  \\/
       #|  ~
       #|  ~
@@ -28145,54 +28145,54 @@ test "Examples/padics matches Examples/padics.ml" {
       #|  \\/
       #|  ~
       #|  F
-      #|  ~(x = &0) /\\ x * x = x ==> x = &1
-      #|  forall p. qnorm p (&1) = if prime p then &1 else &0
-      #|  x * y = &1 ==> x = inv y
-      #|  prime p
-      #|  x:real = &0
-      #|  forall p x. rational x ==> qnorm p (inv x) = inv(qnorm p x)
+      #|  !((x : Real) == real_of_num(0)) && x * x == x \226\134\146 x == real_of_num(1)
+      #|  \226\136\128 p : Num, qnorm(p, real_of_num(1)) == (if prime(p) { real_of_num(1) } else { real_of_num(0) })
+      #|  (x : Real) * (y : Real) == real_of_num(1) \226\134\146 x == inv(y)
+      #|  prime((p : Num))
+      #|  (x : Real) == real_of_num(0)
+      #|  \226\136\128 p : Num, \226\136\128 x : Real, rational(x) \226\134\146 qnorm(p, inv(x)) == inv(qnorm(p, x))
       #|  ~
       #|  \\/
       #|  ~
       #|  \\/
       #|  ~
       #|  F
-      #|  rational x
-      #|  ~(x = &0)
-      #|  (~(x = &0) ==> &0 <= x) ==> &0 <= x
-      #|  forall p x. &0 <= qnorm p x
-      #|  &0 < x <=> &0 <= x /\\ ~(x = &0)
-      #|  forall p x. &0 < qnorm p x <=> prime p /\\ rational x /\\ ~(x = &0)
-      #|  x <= z \\/ y <= z <=> MIN x y <= z
-      #|  (b1 + b2) + a1:num <= b2 + c <=> b1 + a1 <= c
-      #|  (b1 + b2) + a1:num <= b1 + c <=> b2 + a1 <= c
-      #|  &1 <= p /\\ (u <= v \\/ x <= y)\n    ==> p pow u <= p pow v \\/ p pow x <= p pow y
-      #|  a / b * c:real = (a * c) / b
-      #|  ~(b1 = &0) /\\ ~(b2 = &0)\n    ==> a1 / b1 + a2 / b2 = (a1 * b2 + a2 * b1) / (b1 * b2) /\\\n        a1 / b1 - a2 / b2 = (a1 * b2 - a2 * b1) / (b1 * b2)
-      #|  a / b * c:real = (a * c) / b
-      #|  abs y <= abs x
-      #|  abs y <= abs x ==> abs(x + y) = abs x + abs y \\/\n                                   abs(x + y) = abs x - abs y
-      #|  b2:num
-      #|  a2:num
-      #|  b1:num
-      #|  a1:num
-      #|  rational x
-      #|  rational y
-      #|  ~(y = &0)
-      #|  ~(x = &0)
-      #|  max a b = max b a
-      #|  (forall x y. P x y ==> P y x) /\\ (forall x y. abs y <= abs x ==> P x y)\n    ==> (forall x y. P x y)
-      #|  x:real
-      #|  y:real
-      #|  x = &0 /\\ &0 <= y ==> x <= max y z
-      #|  rational(x + y)
-      #|  x <= max x x
-      #|  prime p
-      #|  x <= max x y
-      #|  y = &0
-      #|  y <= max x y
-      #|  x = &0
-      #|  forall p x y. (rational(x + y) ==> rational x /\\ rational y)\n           ==> qnorm p (x + y) <= max (qnorm p x) (qnorm p y)
+      #|  rational((x : Real))
+      #|  !((x : Real) == real_of_num(0))
+      #|  (!((x : Real) == real_of_num(0)) \226\134\146 real_of_num(0) <= x) \226\134\146 real_of_num(0) <= x
+      #|  \226\136\128 p : Num, \226\136\128 x : Real, real_of_num(0) <= qnorm(p, x)
+      #|  (real_of_num(0) < (x : Real)) == (real_of_num(0) <= x && !(x == real_of_num(0)))
+      #|  \226\136\128 p : Num, \226\136\128 x : Real, (real_of_num(0) < qnorm(p, x)) == (prime(p) && rational(x) && !(x == real_of_num(0)))
+      #|  ((x : Num) <= (z : Num) || (y : Num) <= z) == (MIN(x, y) <= z)
+      #|  ((b1 : Num) + (b2 : Num) + (a1 : Num) <= b2 + (c : Num)) == (b1 + a1 <= c)
+      #|  ((b1 : Num) + (b2 : Num) + (a1 : Num) <= b1 + (c : Num)) == (b2 + a1 <= c)
+      #|  real_of_num(1) <= (p : Real) && ((u : Num) <= (v : Num) || (x : Num) <= (y : Num)) \226\134\146 pow(p, u) <= pow(p, v) || pow(p, x) <= pow(p, y)
+      #|  (a : Real) / (b : Real) * (c : Real) == a * c / b
+      #|  !((b1 : Real) == real_of_num(0)) && !((b2 : Real) == real_of_num(0)) \226\134\146 (a1 : Real) / b1 + (a2 : Real) / b2 == (a1 * b2 + a2 * b1) / (b1 * b2) && a1 / b1 - a2 / b2 == (a1 * b2 - a2 * b1) / (b1 * b2)
+      #|  (a : Real) / (b : Real) * (c : Real) == a * c / b
+      #|  abs((y : Real)) <= abs((x : Real))
+      #|  abs((y : Real)) <= abs((x : Real)) \226\134\146 abs(x + y) == abs(x) + abs(y) || abs(x + y) == abs(x) - abs(y)
+      #|  (b2 : Num)
+      #|  (a2 : Num)
+      #|  (b1 : Num)
+      #|  (a1 : Num)
+      #|  rational((x : Real))
+      #|  rational((y : Real))
+      #|  !((y : Real) == real_of_num(0))
+      #|  !((x : Real) == real_of_num(0))
+      #|  max((a : Real), (b : Real)) == max(b, a)
+      #|  (\226\136\128 x : Real, \226\136\128 y : Real, (P : (Real, Real) -> Bool)(x, y) \226\134\146 P(y, x)) && (\226\136\128 x : Real, \226\136\128 y : Real, abs(y) <= abs(x) \226\134\146 P(x, y)) \226\134\146 (\226\136\128 x : Real, \226\136\128 y : Real, P(x, y))
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (x : Real) == real_of_num(0) && real_of_num(0) <= (y : Real) \226\134\146 x <= max(y, (z : Real))
+      #|  rational((x : Real) + (y : Real))
+      #|  (x : Real) <= max(x, x)
+      #|  prime((p : Num))
+      #|  (x : Real) <= max(x, (y : Real))
+      #|  (y : Real) == real_of_num(0)
+      #|  (y : Real) <= max((x : Real), y)
+      #|  (x : Real) == real_of_num(0)
+      #|  \226\136\128 p : Num, \226\136\128 x : Real, \226\136\128 y : Real, (rational(x + y) \226\134\146 rational(x) && rational(y)) \226\134\146 qnorm(p, x + y) <= max(qnorm(p, x), qnorm(p, y))
       #|  \\/
       #|  ~
       #|  \\/
@@ -28200,302 +28200,302 @@ test "Examples/padics matches Examples/padics.ml" {
       #|  \\/
       #|  ~
       #|  F
-      #|  &0 <= x /\\ &0 <= y ==> max x y <= x + y
-      #|  p:num
-      #|  forall p x y. (rational(x + y) ==> rational x /\\ rational y)\n           ==> qnorm p (x + y) <= qnorm p x + qnorm p y
-      #|  qadic_metric p =\n        metric(rational,(\\(x,y). qnorm (if prime p then p else 2) (x - y)))
-      #|  x - z:real = (x - y) + (y - z)
-      #|  z:real
-      #|  y:real
-      #|  x:real
-      #|  prime p
-      #|  \\(x,y). qnorm (if prime p then p else 2) (x - y)
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 max(x, y) <= x + y
+      #|  (p : Num)
+      #|  \226\136\128 p : Num, \226\136\128 x : Real, \226\136\128 y : Real, (rational(x + y) \226\134\146 rational(x) && rational(y)) \226\134\146 qnorm(p, x + y) <= qnorm(p, x) + qnorm(p, y)
+      #|  (qadic_metric : (Num) -> Metric[Real])((p : Num)) == metric((rational, GABS((f : ((Real, Real)) -> Real) => \226\136\128 x : Real, \226\136\128 y : Real, GEQ(f((x, y)), qnorm(if prime(p) { p } else { 2 }, x - y)))))
+      #|  (x : Real) - (z : Real) == x - (y : Real) + (y - z)
+      #|  (z : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  prime((p : Num))
+      #|  GABS((f : ((Real, Real)) -> Real) => \226\136\128 x : Real, \226\136\128 y : Real, GEQ(f((x, y)), qnorm(if prime((p : Num)) { p } else { 2 }, x - y)))
       #|  rational
-      #|  p:num
-      #|  (forall p. mspace(qadic_metric p) = rational) /\\\n   (forall p x y. mdist(qadic_metric p) (x,y) =\n                if prime p then qnorm p (x - y)\n                else qnorm 2 (x - y))
-      #|  x - z:real = (x - y) + (y - z)
-      #|  z:real
-      #|  y:real
-      #|  x:real
-      #|  prime p
-      #|  forall p x y z.\n        x IN mspace(qadic_metric p) /\\\n        y IN mspace(qadic_metric p) /\\\n        z IN mspace(qadic_metric p)\n        ==> mdist(qadic_metric p) (x,z) <=\n            max (mdist(qadic_metric p) (x,y)) (mdist(qadic_metric p) (y,z))
-      #|  ?x:real. T
+      #|  (p : Num)
+      #|  (\226\136\128 p : Num, mspace(qadic_metric(p)) == rational) && (\226\136\128 p : Num, \226\136\128 x : Real, \226\136\128 y : Real, mdist(qadic_metric(p), (x, y)) == (if prime(p) { qnorm(p, x - y) } else { qnorm(2, x - y) }))
+      #|  (x : Real) - (z : Real) == x - (y : Real) + (y - z)
+      #|  (z : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  prime((p : Num))
+      #|  \226\136\128 p : Num, \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, IN(x, mspace(qadic_metric(p))) && IN(y, mspace(qadic_metric(p))) && IN(z, mspace(qadic_metric(p))) \226\134\146 mdist(qadic_metric(p), (x, z)) <= max(mdist(qadic_metric(p), (x, y)), mdist(qadic_metric(p), (y, z)))
+      #|  \226\136\131 x : Real, true
       #|  mk_padic
       #|  dest_padic
-      #|  (:padic) =_c (:real)
-      #|  (:real)
-      #|  ?s:padic->bool. s =_c (:num)
-      #|  (:num)
-      #|  prational =_c rational
-      #|  IMAGE padic_of_rational rational = prational
-      #|  y:real
-      #|  x:real
-      #|  y:real
-      #|  x:real
-      #|  &0 < r
-      #|  r:real
-      #|  (k:real->real) IN s
-      #|  k:real->real
-      #|  s SUBSET m ==> s INTER m = s
-      #|  p /\\ q /\\ r <=> q /\\ p /\\ r
-      #|  (:padic) = IMAGE (g:(real->real)->padic) s
-      #|  {y | y IN IMAGE f s /\\ P y} =\n          IMAGE f {x | x IN s /\\ P(f x)}
-      #|  (q ==> p) /\\ q /\\ r ==> p /\\ q /\\ r
+      #|  (op_eq_us_c : ((Padic) -> Bool, (Real) -> Bool) -> Bool)((UNIV : (Padic) -> Bool), (UNIV : (Real) -> Bool))
+      #|  (UNIV : (Real) -> Bool)
+      #|  \226\136\131 s : (Padic) -> Bool, (op_eq_us_c : ((Padic) -> Bool, (Num) -> Bool) -> Bool)(s, (UNIV : (Num) -> Bool))
+      #|  (UNIV : (Num) -> Bool)
+      #|  op_eq_us_c(prational, rational)
+      #|  IMAGE(padic_of_rational, rational) == prational
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  real_of_num(0) < (r : Real)
+      #|  (r : Real)
+      #|  IN((k : (Real) -> Real), (s : ((Real) -> Real) -> Bool))
+      #|  (k : (Real) -> Real)
+      #|  SUBSET((s : (_) -> Bool), (m : (_) -> Bool)) \226\134\146 INTER(s, m) == s
+      #|  ((p : Bool) && (q : Bool) && (r : Bool)) == (q && p && r)
+      #|  UNIV == IMAGE((g : ((Real) -> Real) -> Padic), (s : ((Real) -> Real) -> Bool))
+      #|  {(y : _) | IN(y, IMAGE((f : (_) -> _), (s : (_) -> Bool))) && (P : (_) -> Bool)(y)} == IMAGE(f, {(x : _) | IN(x, s) && P(f(x))})
+      #|  ((q : Bool) \226\134\146 (p : Bool)) && q && (r : Bool) \226\134\146 p && q && r
       #|  prational
-      #|  forall x. x IN rational\n          ==> g ((f:real->real->real) x) = padic_of_rational x
-      #|  prational = IMAGE (g:(real->real)->padic)\n                        (IMAGE (f:real->real->real) rational)
-      #|  l:real->real
-      #|  (h:padic->real->real) o (x:num->padic)
-      #|  x:num->padic
-      #|  \\(x,y). mdist m ((h:padic->real->real) x,h y)
-      #|  IMAGE (g:(real->real)->padic) s
-      #|  m':padic metric
-      #|  m' = metric(IMAGE (g:(real->real)->padic) s,\n                   (\\(x,y). mdist m ((h:padic->real->real) x,h y)))
-      #|  h:padic->(real->real)
-      #|  g:(real->real)->padic
-      #|  (:real)
-      #|  (:num)
+      #|  \226\136\128 x : Real, IN(x, rational) \226\134\146 (g : ((Real) -> Real) -> Padic)((f : (Real, Real) -> Real)(x)) == padic_of_rational(x)
+      #|  prational == IMAGE((g : ((Real) -> Real) -> Padic), IMAGE((f : (Real, Real) -> Real), rational))
+      #|  (l : (Real) -> Real)
+      #|  o((h : (Padic, Real) -> Real), (x : (Num) -> Padic))
+      #|  (x : (Num) -> Padic)
+      #|  GABS((f : ((Padic, Padic)) -> Real) => \226\136\128 x : Padic, \226\136\128 y : Padic, GEQ(f((x, y)), mdist((m : Metric[(Real) -> Real]), ((h : (Padic, Real) -> Real)(x), h(y)))))
+      #|  IMAGE((g : ((Real) -> Real) -> Padic), (s : ((Real) -> Real) -> Bool))
+      #|  (m' : Metric[Padic])
+      #|  (m' : Metric[Padic]) == metric((IMAGE((g : ((Real) -> Real) -> Padic), (s : ((Real) -> Real) -> Bool)), GABS((f : ((Padic, Padic)) -> Real) => \226\136\128 x : Padic, \226\136\128 y : Padic, GEQ(f((x, y)), mdist((m : Metric[(Real) -> Real]), ((h : (Padic, Real) -> Real)(x), h(y)))))))
+      #|  (h : (Padic, Real) -> Real)
+      #|  (g : ((Real) -> Real) -> Padic)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (UNIV : (Num) -> Bool)
       #|  rational
-      #|  (:num)
+      #|  (UNIV : (Num) -> Bool)
       #|  rational
-      #|  (:real)
-      #|  (:padic)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (UNIV : (Padic) -> Bool)
       #|  prational
-      #|  s:(real->real)->bool
-      #|  IMAGE (f:real->real->real) rational
-      #|  (f:real->real->real) o rational_of_padic
-      #|  padic_of_rational o (f':(real->real)->real)
-      #|  f':(real->real)->real
-      #|  y:real
-      #|  x:real
-      #|  y:real
-      #|  x:real
+      #|  (s : ((Real) -> Real) -> Bool)
+      #|  IMAGE((f : (Real, Real) -> Real), rational)
+      #|  o((f : (Real, Real) -> Real), rational_of_padic)
+      #|  o(padic_of_rational, (f' : ((Real) -> Real) -> Real))
+      #|  (f' : ((Real) -> Real) -> Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (x : Real)
       #|  rational
-      #|  f:real->real->real
-      #|  mtopology (submetric m s) derived_set_of\n              (IMAGE f rational):(real->real)->bool
-      #|  mtopology(submetric m (s:(real->real)->bool))
-      #|  (:real) ^_c rational
-      #|  mspace m:(real->real)->bool
-      #|  (s:(real->real)->bool) =_c (:real)
-      #|  p <= 1 <=> ~(2 <= p)
-      #|  abs x = abs(x / &1)
-      #|  abs(x - (x + y)) = abs y
-      #|  m:(real->real)metric
-      #|  p /\\ q /\\ r /\\ s <=> (q /\\ r) /\\ (q /\\ r ==> p /\\ s)
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  y:real
-      #|  y = x + &p' pow n
-      #|  n:num
-      #|  r:real
-      #|  inv(&p')
-      #|  prime p' /\\ 2 <= p'
-      #|  p' = if prime p then p else 2
-      #|  (if prime p then qnorm p x else qnorm q x) =\n          qnorm (if prime p then p else q) x
-      #|  r:real
-      #|  x:real
-      #|  p /\\ q /\\ r <=> q /\\ p /\\ r
-      #|  u SUBSET v /\\ t SUBSET u ==> s INTER (t UNION u) SUBSET v
-      #|  t SUBSET s ==> s INTER t = t
-      #|  mtopology(submetric m s) closure_of\n           (IMAGE (f:real->real->real) rational)
-      #|  s SUBSET m ==> s INTER (s INTER m) INTER s = s
-      #|  mtopology (submetric m s) derived_set_of s:(real->real)->bool
-      #|  mtopology (submetric m s) derived_set_of\n                (IMAGE f rational):(real->real)->bool = s
-      #|  m = funspace rational real_euclidean_metric
-      #|  f:real->real->real
-      #|  s:(real->real)->bool
-      #|  qadic_metric p
-      #|  p:num
-      #|  forall p. ?(m:padic metric).\n          mcomplete m /\\\n          mspace m = (:padic) /\\\n          mtopology m closure_of prational = (:padic) /\\\n          mtopology m derived_set_of prational = (:padic) /\\\n          forall x y. rational x /\\ rational y\n                ==> mdist m (padic_of_rational x,padic_of_rational y) =\n                    qnorm (if prime p then p else 2) (x - y)
-      #|  forall p. mspace(padic_metric p) = (:padic)
-      #|  forall p. mcomplete (padic_metric p)
-      #|  padic_topology p = mtopology (padic_metric p)
-      #|  forall p. topspace(padic_topology p) = (:padic)
-      #|  forall p. hausdorff_space (padic_topology p)
-      #|  forall p. (padic_topology p) closure_of prational = (:padic)
-      #|  forall p. (padic_topology p) derived_set_of prational = (:padic)
-      #|  pdist p = mdist (padic_metric p)
-      #|  forall p q r. rational q /\\ rational r\n         ==> pdist p (padic_of_rational q,padic_of_rational r) =\n             if prime p then qnorm p (q - r) else qnorm 2 (q - r)
-      #|  forall p q r. prime p /\\ rational q /\\ rational r\n           ==> pdist p (padic_of_rational q,padic_of_rational r) =\n               qnorm p (q - r)
-      #|  forall p q r. rational q /\\ rational r\n           ==> pdist p (padic_of_rational q,padic_of_rational r) =\n               qnorm (if prime p then p else 2) (q - r)
-      #|  forall p x y. &0 <= pdist p (x,y)
-      #|  forall p x. pdist p (x,x) = &0
-      #|  forall p x y. pdist p (x,y) = pdist p (y,x)
-      #|  forall p x y. pdist p (x,y) = &0 <=> x = y
-      #|  forall p x y z.\n        pdist p (x,z) <= pdist p (x,y) + pdist p (y,z)
+      #|  (f : (Real, Real) -> Real)
+      #|  derived_set_of(mtopology(submetric((m : Metric[(Real) -> Real]), (s : ((Real) -> Real) -> Bool))), IMAGE((f : (Real, Real) -> Real), rational))
+      #|  mtopology(submetric((m : Metric[(Real) -> Real]), (s : ((Real) -> Real) -> Bool)))
+      #|  (op_caret_us_c : ((Real) -> Bool, (Real) -> Bool, (Real) -> Real) -> Bool)((UNIV : (Real) -> Bool), rational)
+      #|  mspace((m : Metric[(Real) -> Real]))
+      #|  (op_eq_us_c : (((Real) -> Real) -> Bool, (Real) -> Bool) -> Bool)((s : ((Real) -> Real) -> Bool), (UNIV : (Real) -> Bool))
+      #|  ((p : Num) <= 1) == !(2 <= p)
+      #|  abs((x : Real)) == abs(x / real_of_num(1))
+      #|  abs((x : Real) - (x + (y : Real))) == abs(y)
+      #|  (m : Metric[(Real) -> Real])
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) && (s : Bool)) == ((q && r) && (q && r \226\134\146 p && s))
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (y : Real)
+      #|  (y : Real) == (x : Real) + pow(real_of_num((p' : Num)), (n : Num))
+      #|  (n : Num)
+      #|  (r : Real)
+      #|  inv(real_of_num((p' : Num)))
+      #|  prime((p' : Num)) && 2 <= p'
+      #|  (p' : Num) == (if prime((p : Num)) { p } else { 2 })
+      #|  (if prime((p : Num)) { qnorm(p, (x : Real)) } else { qnorm((q : Num), x) }) == qnorm(if prime(p) { p } else { q }, x)
+      #|  (r : Real)
+      #|  (x : Real)
+      #|  ((p : Bool) && (q : Bool) && (r : Bool)) == (q && p && r)
+      #|  SUBSET((u : (_) -> Bool), (v : (_) -> Bool)) && SUBSET((t : (_) -> Bool), u) \226\134\146 SUBSET(INTER((s : (_) -> Bool), UNION(t, u)), v)
+      #|  SUBSET((t : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 INTER(s, t) == t
+      #|  closure_of(mtopology(submetric((m : Metric[(Real) -> Real]), (s : ((Real) -> Real) -> Bool))), IMAGE((f : (Real, Real) -> Real), rational))
+      #|  SUBSET((s : (_) -> Bool), (m : (_) -> Bool)) \226\134\146 INTER(s, INTER(INTER(s, m), s)) == s
+      #|  derived_set_of(mtopology(submetric((m : Metric[(Real) -> Real]), (s : ((Real) -> Real) -> Bool))), s)
+      #|  derived_set_of(mtopology(submetric((m : Metric[(Real) -> Real]), (s : ((Real) -> Real) -> Bool))), IMAGE((f : (Real, Real) -> Real), rational)) == s
+      #|  (m : Metric[(Real) -> Real]) == funspace(rational, real_euclidean_metric)
+      #|  (f : (Real, Real) -> Real)
+      #|  (s : ((Real) -> Real) -> Bool)
+      #|  qadic_metric((p : Num))
+      #|  (p : Num)
+      #|  \226\136\128 p : Num, \226\136\131 m : Metric[Padic], mcomplete(m) && mspace(m) == UNIV && closure_of(mtopology(m), prational) == UNIV && derived_set_of(mtopology(m), prational) == UNIV && (\226\136\128 x : Real, \226\136\128 y : Real, rational(x) && rational(y) \226\134\146 mdist(m, (padic_of_rational(x), padic_of_rational(y))) == qnorm(if prime(p) { p } else { 2 }, x - y))
+      #|  \226\136\128 p : Num, mspace(padic_metric(p)) == UNIV
+      #|  \226\136\128 p : Num, mcomplete(padic_metric(p))
+      #|  (padic_topology : (Num) -> Topology[Padic])((p : Num)) == mtopology(padic_metric(p))
+      #|  \226\136\128 p : Num, topspace(padic_topology(p)) == UNIV
+      #|  \226\136\128 p : Num, hausdorff_space(padic_topology(p))
+      #|  \226\136\128 p : Num, closure_of(padic_topology(p), prational) == UNIV
+      #|  \226\136\128 p : Num, derived_set_of(padic_topology(p), prational) == UNIV
+      #|  (pdist : (Num, (Padic, Padic)) -> Real)((p : Num)) == mdist(padic_metric(p))
+      #|  \226\136\128 p : Num, \226\136\128 q : Real, \226\136\128 r : Real, rational(q) && rational(r) \226\134\146 pdist(p, (padic_of_rational(q), padic_of_rational(r))) == (if prime(p) { qnorm(p, q - r) } else { qnorm(2, q - r) })
+      #|  \226\136\128 p : Num, \226\136\128 q : Real, \226\136\128 r : Real, prime(p) && rational(q) && rational(r) \226\134\146 pdist(p, (padic_of_rational(q), padic_of_rational(r))) == qnorm(p, q - r)
+      #|  \226\136\128 p : Num, \226\136\128 q : Real, \226\136\128 r : Real, rational(q) && rational(r) \226\134\146 pdist(p, (padic_of_rational(q), padic_of_rational(r))) == qnorm(if prime(p) { p } else { 2 }, q - r)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, real_of_num(0) <= pdist(p, (x, y))
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, pdist(p, (x, x)) == real_of_num(0)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, pdist(p, (x, y)) == pdist(p, (y, x))
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, (pdist(p, (x, y)) == real_of_num(0)) == (x == y)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, \226\136\128 z : Padic, pdist(p, (x, z)) <= pdist(p, (x, y)) + pdist(p, (y, z))
       #|  forall p. (\\(x,y,z). &0 <= f x y z) p <=>\n         f (FST p) (FST(SND p)) (SND(SND p)) IN {t | &0 <= t}
       #|  euclideanreal
-      #|  prational CROSS prational CROSS prational
-      #|  \\(x,y,z). pdist p (x,z)\n               <= max (pdist p (x,y)) (pdist p (y,z))
-      #|  prod_topology (padic_topology p)\n                   (prod_topology (padic_topology p) (padic_topology p))
-      #|  forall p x y z.\n        pdist p (x,z) <= max (pdist p (x,y)) (pdist p (y,z))
-      #|  a < e /\\ b < e ==> x <= max a b ==> x < e
-      #|  (x + y) - (x' + y'):real = (x - x') + (y - y')
-      #|  MAX M N <= n <=> M <= n /\\ N <= n
-      #|  MAX M N
-      #|  N:num
-      #|  M:num
-      #|  e:real
-      #|  e:real
-      #|  p:num
-      #|  p':num
-      #|  p':num
-      #|  prime p'
-      #|  p' = if prime p then p else 2
-      #|  forall p x y. cauchy_in (qadic_metric p) x /\\ cauchy_in (qadic_metric p) y\n           ==> cauchy_in (qadic_metric p) (\\n. x n + y n)
-      #|  plus:padic->padic->padic
-      #|  prime p
-      #|  y:num->real
-      #|  x:num->real
-      #|  p:num
-      #|  y:num->real
-      #|  x:num->real
-      #|  (p /\\ p') /\\ q /\\ q' ==> r <=> p ==> q ==> p' /\\ q' ==> r
-      #|  prational CROSS prational
-      #|  \\(x,y). padic_of_rational\n           (rational_of_padic x + rational_of_padic y)
-      #|  padic_metric p
-      #|  prod_metric (padic_metric p) (padic_metric p)
-      #|  forall p. ?plus.\n        continuous_map\n         (prod_topology (padic_topology p) (padic_topology p),padic_topology p)\n         (\\(a,b). plus a b) /\\\n        forall x y. rational x /\\ rational y\n              ==> plus (padic_of_rational x) (padic_of_rational y) =\n                  padic_of_rational (x + y)
-      #|  n:num
-      #|  (x:num->real) n = --(c - x n) + c
-      #|  n:num
-      #|  qnorm p c + b
-      #|  b:real
-      #|  c:real
-      #|  forall p x. prime p /\\ cauchy_in (qadic_metric p) x\n           ==> ?b. &0 < b /\\ forall n. qnorm p (x n) <= b
-      #|  B * e / &3 / B + B * e / &3 / B
-      #|  (x:num->real) m * y m - x n * y n =\n      x m * (y m - y n) + y n * (x m - x n)
-      #|  MAX M N <= n <=> M <= n /\\ N <= n
-      #|  n:num
-      #|  m:num
-      #|  MAX M N
-      #|  N:num
-      #|  M:num
-      #|  &0 < &3
-      #|  e / &3 / B
-      #|  e:real
-      #|  max B C:real
-      #|  C:real
-      #|  B:real
-      #|  p:num
-      #|  ?B. &0 < B /\\\n          (forall n:num. qnorm p (x n) <= B) /\\\n          (forall n:num. qnorm p (y n) <= B)
-      #|  p:num
-      #|  p':num
-      #|  prime p'
-      #|  prime p
-      #|  qadic_metric p = qadic_metric p'
-      #|  p' = if prime p then p else 2
-      #|  forall p x y. cauchy_in (qadic_metric p) x /\\ cauchy_in (qadic_metric p) y\n           ==> cauchy_in (qadic_metric p) (\\n. x n * y n)
-      #|  x:num->real
-      #|  y:num->real
-      #|  plus:padic->padic->padic
-      #|  prime p
-      #|  y:num->real
-      #|  x:num->real
-      #|  p:num
-      #|  y:num->real
-      #|  x:num->real
-      #|  (p /\\ p') /\\ q /\\ q' ==> r <=> p ==> q ==> p' /\\ q' ==> r
-      #|  prational CROSS prational
-      #|  \\(x,y). padic_of_rational\n           (rational_of_padic x * rational_of_padic y)
-      #|  padic_metric p
-      #|  prod_metric (padic_metric p) (padic_metric p)
-      #|  forall p. ?plus.\n        continuous_map\n         (prod_topology (padic_topology p) (padic_topology p),padic_topology p)\n         (\\(a,b). plus a b) /\\\n        forall x y. rational x /\\ rational y\n              ==> plus (padic_of_rational x) (padic_of_rational y) =\n                  padic_of_rational (x * y)
-      #|  padic_of_num n = padic_of_rational(&n)
-      #|  padic_neg p x = padic_mul p (padic_of_rational(-- &1)) x
-      #|  padic_sub p x y = padic_add p x (padic_neg p y)
-      #|  forall p x. rational x\n         ==> padic_neg p (padic_of_rational x) =\n             padic_of_rational (--x)
-      #|  forall p x y.\n         rational x /\\ rational y\n         ==> padic_sub p (padic_of_rational x) (padic_of_rational y) =\n             padic_of_rational (x - y)
-      #|  prod_topology (padic_topology p) (padic_topology p)
-      #|  (\\x. padic_add p (f x) (g x)) =\n    (\\(x,y). padic_add p x y) o (\\a. (f:A->padic) a,g a)
-      #|  forall p top f g:A->padic.\n      continuous_map (top,padic_topology p) f /\\\n      continuous_map (top,padic_topology p) g\n      ==> continuous_map (top,padic_topology p) (\\x. padic_add p (f x) (g x))
-      #|  prod_topology (padic_topology p) (padic_topology p)
-      #|  (\\x. padic_mul p (f x) (g x)) =\n    (\\(x,y). padic_mul p x y) o (\\a. (f:A->padic) a,g a)
-      #|  forall p top f g:A->padic.\n      continuous_map (top,padic_topology p) f /\\\n      continuous_map (top,padic_topology p) g\n      ==> continuous_map (top,padic_topology p) (\\x. padic_mul p (f x) (g x))
-      #|  forall p top f:A->padic.\n        continuous_map (top,padic_topology p) f\n        ==> continuous_map (top,padic_topology p) (\\x. padic_neg p (f x))
-      #|  forall p top f g:A->padic.\n      continuous_map (top,padic_topology p) f /\\\n      continuous_map (top,padic_topology p) g\n      ==> continuous_map (top,padic_topology p) (\\x. padic_sub p (f x) (g x))
-      #|  padic_topology p
-      #|  forall p top s f g:A->padic.\n        (continuous_map (top,padic_topology p) f /\\\n         continuous_map (top,padic_topology p) g) /\\\n        (forall x. x IN s ==> f x = g x)\n        ==> (forall x. x IN top closure_of s ==> f x = g x)
-      #|  p:num
-      #|  (forall x. P x) <=> (forall x. x IN UNIV ==> P x)
-      #|  p:num
-      #|  forall p x y. padic_add p x y = padic_add p y x
-      #|  forall p x y z. padic_add p x (padic_add p y z) =\n             padic_add p (padic_add p x y) z
-      #|  forall p x. padic_add p (padic_of_num 0) x = x
-      #|  forall p x. padic_add p (padic_neg p x) x = padic_of_num 0
-      #|  forall p x y. padic_mul p x y = padic_mul p y x
-      #|  forall p x y z. padic_mul p x (padic_mul p y z) =\n             padic_mul p (padic_mul p x y) z
-      #|  forall p x. padic_mul p (padic_of_num 1) x = x
-      #|  forall p x y z. padic_mul p x (padic_add p y z) =\n             padic_add p (padic_mul p x y)  (padic_mul p x z)
-      #|  pnorm p x = pdist p (padic_of_num 0,x)
+      #|  CROSS(prational, CROSS(prational, prational))
+      #|  GABS((f : ((Padic, Padic, Padic)) -> Bool) => \226\136\128 x : Padic, \226\136\128 y : Padic, \226\136\128 z : Padic, GEQ(f((x, y, z)), pdist((p : Num), (x, z)) <= max(pdist(p, (x, y)), pdist(p, (y, z)))))
+      #|  prod_topology(padic_topology((p : Num)), prod_topology(padic_topology(p), padic_topology(p)))
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, \226\136\128 z : Padic, pdist(p, (x, z)) <= max(pdist(p, (x, y)), pdist(p, (y, z)))
+      #|  (a : Real) < (e : Real) && (b : Real) < e \226\134\146 (x : Real) <= max(a, b) \226\134\146 x < e
+      #|  (x : Real) + (y : Real) - ((x' : Real) + (y' : Real)) == x - x' + (y - y')
+      #|  (MAX((M : Num), (N : Num)) <= (n : Num)) == (M <= n && N <= n)
+      #|  MAX((M : Num), (N : Num))
+      #|  (N : Num)
+      #|  (M : Num)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (p : Num)
+      #|  (p' : Num)
+      #|  (p' : Num)
+      #|  prime((p' : Num))
+      #|  (p' : Num) == (if prime((p : Num)) { p } else { 2 })
+      #|  \226\136\128 p : Num, \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, cauchy_in(qadic_metric(p), x) && cauchy_in(qadic_metric(p), y) \226\134\146 cauchy_in(qadic_metric(p), (n : Num) => x(n) + y(n))
+      #|  (plus : (Padic, Padic) -> Padic)
+      #|  prime((p : Num))
+      #|  (y : (Num) -> Real)
+      #|  (x : (Num) -> Real)
+      #|  (p : Num)
+      #|  (y : (Num) -> Real)
+      #|  (x : (Num) -> Real)
+      #|  (((p : Bool) && (p' : Bool)) && (q : Bool) && (q' : Bool) \226\134\146 (r : Bool)) == (p \226\134\146 q \226\134\146 p' && q' \226\134\146 r)
+      #|  CROSS(prational, prational)
+      #|  GABS((f : ((Padic, Padic)) -> Padic) => \226\136\128 x : Padic, \226\136\128 y : Padic, GEQ(f((x, y)), padic_of_rational(rational_of_padic(x) + rational_of_padic(y))))
+      #|  padic_metric((p : Num))
+      #|  prod_metric(padic_metric((p : Num)), padic_metric(p))
+      #|  \226\136\128 p : Num, \226\136\131 plus : (Padic, Padic) -> Padic, continuous_map((prod_topology(padic_topology(p), padic_topology(p)), padic_topology(p)), GABS((f : ((Padic, Padic)) -> Padic) => \226\136\128 a : Padic, \226\136\128 b : Padic, GEQ(f((a, b)), plus(a, b)))) && (\226\136\128 x : Real, \226\136\128 y : Real, rational(x) && rational(y) \226\134\146 plus(padic_of_rational(x), padic_of_rational(y)) == padic_of_rational(x + y))
+      #|  (n : Num)
+      #|  (x : (Num) -> Real)((n : Num)) == -((c : Real) - x(n)) + c
+      #|  (n : Num)
+      #|  qnorm((p : Num), (c : Real)) + (b : Real)
+      #|  (b : Real)
+      #|  (c : Real)
+      #|  \226\136\128 p : Num, \226\136\128 x : (Num) -> Real, prime(p) && cauchy_in(qadic_metric(p), x) \226\134\146 (\226\136\131 b : Real, real_of_num(0) < b && (\226\136\128 n : Num, qnorm(p, x(n)) <= b))
+      #|  (B : Real) * ((e : Real) / real_of_num(3) / B) + B * (e / real_of_num(3) / B)
+      #|  (x : (Num) -> Real)((m : Num)) * (y : (Num) -> Real)(m) - x((n : Num)) * y(n) == x(m) * (y(m) - y(n)) + y(n) * (x(m) - x(n))
+      #|  (MAX((M : Num), (N : Num)) <= (n : Num)) == (M <= n && N <= n)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  MAX((M : Num), (N : Num))
+      #|  (N : Num)
+      #|  (M : Num)
+      #|  real_of_num(0) < real_of_num(3)
+      #|  (e : Real) / real_of_num(3) / (B : Real)
+      #|  (e : Real)
+      #|  max((B : Real), (C : Real))
+      #|  (C : Real)
+      #|  (B : Real)
+      #|  (p : Num)
+      #|  \226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 n : Num, qnorm((p : Num), (x : (Num) -> Real)(n)) <= B) && (\226\136\128 n : Num, qnorm(p, (y : (Num) -> Real)(n)) <= B)
+      #|  (p : Num)
+      #|  (p' : Num)
+      #|  prime((p' : Num))
+      #|  prime((p : Num))
+      #|  qadic_metric((p : Num)) == qadic_metric((p' : Num))
+      #|  (p' : Num) == (if prime((p : Num)) { p } else { 2 })
+      #|  \226\136\128 p : Num, \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, cauchy_in(qadic_metric(p), x) && cauchy_in(qadic_metric(p), y) \226\134\146 cauchy_in(qadic_metric(p), (n : Num) => x(n) * y(n))
+      #|  (x : (Num) -> Real)
+      #|  (y : (Num) -> Real)
+      #|  (plus : (Padic, Padic) -> Padic)
+      #|  prime((p : Num))
+      #|  (y : (Num) -> Real)
+      #|  (x : (Num) -> Real)
+      #|  (p : Num)
+      #|  (y : (Num) -> Real)
+      #|  (x : (Num) -> Real)
+      #|  (((p : Bool) && (p' : Bool)) && (q : Bool) && (q' : Bool) \226\134\146 (r : Bool)) == (p \226\134\146 q \226\134\146 p' && q' \226\134\146 r)
+      #|  CROSS(prational, prational)
+      #|  GABS((f : ((Padic, Padic)) -> Padic) => \226\136\128 x : Padic, \226\136\128 y : Padic, GEQ(f((x, y)), padic_of_rational(rational_of_padic(x) * rational_of_padic(y))))
+      #|  padic_metric((p : Num))
+      #|  prod_metric(padic_metric((p : Num)), padic_metric(p))
+      #|  \226\136\128 p : Num, \226\136\131 plus : (Padic, Padic) -> Padic, continuous_map((prod_topology(padic_topology(p), padic_topology(p)), padic_topology(p)), GABS((f : ((Padic, Padic)) -> Padic) => \226\136\128 a : Padic, \226\136\128 b : Padic, GEQ(f((a, b)), plus(a, b)))) && (\226\136\128 x : Real, \226\136\128 y : Real, rational(x) && rational(y) \226\134\146 plus(padic_of_rational(x), padic_of_rational(y)) == padic_of_rational(x * y))
+      #|  (padic_of_num : (Num) -> Padic)((n : Num)) == padic_of_rational(real_of_num(n))
+      #|  (padic_neg : (Num, Padic) -> Padic)((p : Num), (x : Padic)) == padic_mul(p, padic_of_rational(-real_of_num(1)), x)
+      #|  (padic_sub : (Num, Padic, Padic) -> Padic)((p : Num), (x : Padic), (y : Padic)) == padic_add(p, x, padic_neg(p, y))
+      #|  \226\136\128 p : Num, \226\136\128 x : Real, rational(x) \226\134\146 padic_neg(p, padic_of_rational(x)) == padic_of_rational(-x)
+      #|  \226\136\128 p : Num, \226\136\128 x : Real, \226\136\128 y : Real, rational(x) && rational(y) \226\134\146 padic_sub(p, padic_of_rational(x), padic_of_rational(y)) == padic_of_rational(x - y)
+      #|  prod_topology(padic_topology((p : Num)), padic_topology(p))
+      #|  ((x : A) => padic_add((p : Num), (f : (A) -> Padic)(x), (g : (A) -> Padic)(x))) == o(GABS((f : ((Padic, Padic)) -> Padic) => \226\136\128 x : Padic, \226\136\128 y : Padic, GEQ(f((x, y)), padic_add(p, x, y))), (a : A) => (f(a), g(a)))
+      #|  \226\136\128 p : Num, \226\136\128 top : Topology[A], \226\136\128 f : (A) -> Padic, \226\136\128 g : (A) -> Padic, continuous_map((top, padic_topology(p)), f) && continuous_map((top, padic_topology(p)), g) \226\134\146 continuous_map((top, padic_topology(p)), (x : A) => padic_add(p, f(x), g(x)))
+      #|  prod_topology(padic_topology((p : Num)), padic_topology(p))
+      #|  ((x : A) => padic_mul((p : Num), (f : (A) -> Padic)(x), (g : (A) -> Padic)(x))) == o(GABS((f : ((Padic, Padic)) -> Padic) => \226\136\128 x : Padic, \226\136\128 y : Padic, GEQ(f((x, y)), padic_mul(p, x, y))), (a : A) => (f(a), g(a)))
+      #|  \226\136\128 p : Num, \226\136\128 top : Topology[A], \226\136\128 f : (A) -> Padic, \226\136\128 g : (A) -> Padic, continuous_map((top, padic_topology(p)), f) && continuous_map((top, padic_topology(p)), g) \226\134\146 continuous_map((top, padic_topology(p)), (x : A) => padic_mul(p, f(x), g(x)))
+      #|  \226\136\128 p : Num, \226\136\128 top : Topology[A], \226\136\128 f : (A) -> Padic, continuous_map((top, padic_topology(p)), f) \226\134\146 continuous_map((top, padic_topology(p)), (x : A) => padic_neg(p, f(x)))
+      #|  \226\136\128 p : Num, \226\136\128 top : Topology[A], \226\136\128 f : (A) -> Padic, \226\136\128 g : (A) -> Padic, continuous_map((top, padic_topology(p)), f) && continuous_map((top, padic_topology(p)), g) \226\134\146 continuous_map((top, padic_topology(p)), (x : A) => padic_sub(p, f(x), g(x)))
+      #|  padic_topology((p : Num))
+      #|  \226\136\128 p : Num, \226\136\128 top : Topology[A], \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Padic, \226\136\128 g : (A) -> Padic, (continuous_map((top, padic_topology(p)), f) && continuous_map((top, padic_topology(p)), g)) && (\226\136\128 x : A, IN(x, s) \226\134\146 f(x) == g(x)) \226\134\146 (\226\136\128 x : A, IN(x, closure_of(top, s)) \226\134\146 f(x) == g(x))
+      #|  (p : Num)
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x)) == (\226\136\128 x : _, IN(x, UNIV) \226\134\146 P(x))
+      #|  (p : Num)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, padic_add(p, x, y) == padic_add(p, y, x)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, \226\136\128 z : Padic, padic_add(p, x, padic_add(p, y, z)) == padic_add(p, padic_add(p, x, y), z)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, padic_add(p, padic_of_num(0), x) == x
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, padic_add(p, padic_neg(p, x), x) == padic_of_num(0)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, padic_mul(p, x, y) == padic_mul(p, y, x)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, \226\136\128 z : Padic, padic_mul(p, x, padic_mul(p, y, z)) == padic_mul(p, padic_mul(p, x, y), z)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, padic_mul(p, padic_of_num(1), x) == x
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, \226\136\128 z : Padic, padic_mul(p, x, padic_add(p, y, z)) == padic_add(p, padic_mul(p, x, y), padic_mul(p, x, z))
+      #|  (pnorm : (Num, Padic) -> Real)((p : Num), (x : Padic)) == pdist(p, (padic_of_num(0), x))
       #|  euclideanreal
-      #|  (forall x. P x) <=> (forall x. x IN UNIV ==> P x)
-      #|  p:num
-      #|  forall p x y. pdist p (x,y) = pnorm p (padic_sub p x y)
-      #|  forall p. pnorm p (padic_of_num 0) = &0
-      #|  forall p x. rational x\n         ==> pnorm p (padic_of_rational x) =\n             qnorm (if prime p then p else 2) x
-      #|  forall p. pnorm p (padic_of_num 1) = &1
-      #|  x:padic
-      #|  x:padic
-      #|  forall p x. pnorm p (padic_neg p x) = pnorm p x
-      #|  forall p x. &0 <= pnorm p x
-      #|  forall p x. pnorm p (padic_of_num 0) = &0
-      #|  forall p x. pnorm p x = &0 <=> x = padic_of_num 0
-      #|  &0 < x <=> &0 <= x /\\ ~(x = &0)
-      #|  forall p x. &0 < pnorm p x <=> ~(x = padic_of_num 0)
-      #|  padic_neg p y
-      #|  padic_of_num 0
-      #|  x:padic
-      #|  p:num
-      #|  x:padic
-      #|  y:padic
-      #|  pnorm p (padic_sub p x (padic_neg p y))
-      #|  forall p x y. pnorm p (padic_add p x y) <= max (pnorm p x) (pnorm p y)
-      #|  x <= max y z /\\ &0 <= y /\\ &0 <= z ==> x <= y + z
-      #|  forall p x y. pnorm p (padic_add p x y) <= pnorm p x + pnorm p y
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x)) == (\226\136\128 x : _, IN(x, UNIV) \226\134\146 P(x))
+      #|  (p : Num)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, pdist(p, (x, y)) == pnorm(p, padic_sub(p, x, y))
+      #|  \226\136\128 p : Num, pnorm(p, padic_of_num(0)) == real_of_num(0)
+      #|  \226\136\128 p : Num, \226\136\128 x : Real, rational(x) \226\134\146 pnorm(p, padic_of_rational(x)) == qnorm(if prime(p) { p } else { 2 }, x)
+      #|  \226\136\128 p : Num, pnorm(p, padic_of_num(1)) == real_of_num(1)
+      #|  (x : Padic)
+      #|  (x : Padic)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, pnorm(p, padic_neg(p, x)) == pnorm(p, x)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, real_of_num(0) <= pnorm(p, x)
+      #|  \226\136\128 p : Num, \226\136\128 x : _, pnorm(p, padic_of_num(0)) == real_of_num(0)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, (pnorm(p, x) == real_of_num(0)) == (x == padic_of_num(0))
+      #|  (real_of_num(0) < (x : Real)) == (real_of_num(0) <= x && !(x == real_of_num(0)))
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, (real_of_num(0) < pnorm(p, x)) == !(x == padic_of_num(0))
+      #|  padic_neg((p : Num), (y : Padic))
+      #|  padic_of_num(0)
+      #|  (x : Padic)
+      #|  (p : Num)
+      #|  (x : Padic)
+      #|  (y : Padic)
+      #|  pnorm((p : Num), padic_sub(p, (x : Padic), padic_neg(p, (y : Padic))))
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, pnorm(p, padic_add(p, x, y)) <= max(pnorm(p, x), pnorm(p, y))
+      #|  (x : Real) <= max((y : Real), (z : Real)) && real_of_num(0) <= y && real_of_num(0) <= z \226\134\146 x <= y + z
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, pnorm(p, padic_add(p, x, y)) <= pnorm(p, x) + pnorm(p, y)
       #|  euclideanreal
-      #|  (forall x. P x) <=> (forall x. x IN UNIV ==> P x)
-      #|  p:num
-      #|  forall p x y. pnorm p (padic_mul p x y) = pnorm p x * pnorm p y
-      #|  forall p x y. padic_mul p x y = padic_of_num 0 <=>\n          x = padic_of_num 0 \\/ y = padic_of_num 0
-      #|  padic_inv p x = if x = padic_of_num 0 then padic_of_num 0\n                  else @y. padic_mul p x y = padic_of_num 1
-      #|  forall p. padic_inv p (padic_of_num 0) = padic_of_num 0
-      #|  n:num
-      #|  prod_topology (padic_topology p) (padic_topology p)
-      #|  padic_mul p x y = (\\(x,y). padic_mul p x y) (x,y)
-      #|  (\\(x,y). padic_mul p x y) o\n           (\\n:num. padic_of_rational (q n),padic_of_rational (inv(q n)))
-      #|  padic_metric p
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x)) == (\226\136\128 x : _, IN(x, UNIV) \226\134\146 P(x))
+      #|  (p : Num)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, pnorm(p, padic_mul(p, x, y)) == pnorm(p, x) * pnorm(p, y)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, (padic_mul(p, x, y) == padic_of_num(0)) == (x == padic_of_num(0) || y == padic_of_num(0))
+      #|  (padic_inv : (Num, Padic) -> Padic)((p : Num), (x : Padic)) == (if x == padic_of_num(0) { padic_of_num(0) } else { select((y : Padic) => padic_mul(p, x, y) == padic_of_num(1)) })
+      #|  \226\136\128 p : Num, padic_inv(p, padic_of_num(0)) == padic_of_num(0)
+      #|  (n : Num)
+      #|  prod_topology(padic_topology((p : Num)), padic_topology(p))
+      #|  padic_mul((p : Num), (x : Padic), (y : Padic)) == GABS((f : ((Padic, Padic)) -> Padic) => \226\136\128 x : Padic, \226\136\128 y : Padic, GEQ(f((x, y)), padic_mul(p, x, y)), (x, y))
+      #|  o(GABS((f : ((Padic, Padic)) -> Padic) => \226\136\128 x : Padic, \226\136\128 y : Padic, GEQ(f((x, y)), padic_mul((p : Num), x, y))), (n : Num) => (padic_of_rational((q : (Num) -> Real)(n)), padic_of_rational(inv(q(n)))))
+      #|  padic_metric((p : Num))
       #|  sequentially
-      #|  y:padic
-      #|  n:num
-      #|  m:num
-      #|  forall x. e <= x ==> &0 < x
-      #|  ~(x = &0) /\\ ~(y = &0)\n      ==> inv x - inv y = --(x - y) * inv(x) * inv(y)
-      #|  MAX M N <= n <=> M <= n /\\ N <= n
-      #|  n:num
-      #|  m:num
-      #|  MAX M N
-      #|  M:num
-      #|  N:num
-      #|  (d:real) * e pow 2
-      #|  d:real
-      #|  padic_of_rational o inv o (q:num->real)
-      #|  p:num
-      #|  mdist m (z:padic,x) / &2 = e /\\ z IN mspace m /\\ x IN mspace m\n      ==> q IN mspace m /\\ mdist m (q,x) < e / &2\n          ==> e <= mdist m (z,q)
-      #|  (q ==> ~r) /\\ (p ==> r) ==> p ==> ~q /\\ r
-      #|  n:num
-      #|  e / &2
-      #|  eventually (\\n. ~(q n = &0) /\\\n                    e <= pnorm p (padic_of_rational(q n)))\n               sequentially
-      #|  &0 < e
-      #|  e = pnorm p x / &2
-      #|  q:num->real
-      #|  x:padic
+      #|  (y : Padic)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  \226\136\128 x : Real, (e : Real) <= x \226\134\146 real_of_num(0) < x
+      #|  !((x : Real) == real_of_num(0)) && !((y : Real) == real_of_num(0)) \226\134\146 inv(x) - inv(y) == -(x - y) * (inv(x) * inv(y))
+      #|  (MAX((M : Num), (N : Num)) <= (n : Num)) == (M <= n && N <= n)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  MAX((M : Num), (N : Num))
+      #|  (M : Num)
+      #|  (N : Num)
+      #|  (d : Real) * pow((e : Real), 2)
+      #|  (d : Real)
+      #|  o(padic_of_rational, o(inv, (q : (Num) -> Real)))
+      #|  (p : Num)
+      #|  mdist((m : Metric[Padic]), ((z : Padic), (x : Padic))) / real_of_num(2) == (e : Real) && IN(z, mspace(m)) && IN(x, mspace(m)) \226\134\146 IN((q : Padic), mspace(m)) && mdist(m, (q, x)) < e / real_of_num(2) \226\134\146 e <= mdist(m, (z, q))
+      #|  ((q : Bool) \226\134\146 !(r : Bool)) && ((p : Bool) \226\134\146 r) \226\134\146 p \226\134\146 !q && r
+      #|  (n : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  eventually((n : Num) => !((q : (Num) -> Real)(n) == real_of_num(0)) && (e : Real) <= pnorm((p : Num), padic_of_rational(q(n))), sequentially)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real) == pnorm((p : Num), (x : Padic)) / real_of_num(2)
+      #|  (q : (Num) -> Real)
+      #|  (x : Padic)
       #|  prational
-      #|  padic_metric p
-      #|  forall p x. ~(x = padic_of_num 0)\n         ==> padic_mul p x (padic_inv p x) = padic_of_num 1
-      #|  forall p x. ~(x = padic_of_num 0)\n         ==> padic_mul p (padic_inv p x) x = padic_of_num 1
-      #|  x * y = &1 ==> x = inv y
-      #|  x = padic_of_num 0
-      #|  forall p x. pnorm p (padic_inv p x) = inv(pnorm p x)
+      #|  padic_metric((p : Num))
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, !(x == padic_of_num(0)) \226\134\146 padic_mul(p, x, padic_inv(p, x)) == padic_of_num(1)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, !(x == padic_of_num(0)) \226\134\146 padic_mul(p, padic_inv(p, x), x) == padic_of_num(1)
+      #|  (x : Real) * (y : Real) == real_of_num(1) \226\134\146 x == inv(y)
+      #|  (x : Padic) == padic_of_num(0)
+      #|  \226\136\128 p : Num, \226\136\128 x : Padic, pnorm(p, padic_inv(p, x)) == inv(pnorm(p, x))
       #|qnorm_def =  |- (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#prime:fun(num,bool) p:num)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))))) ((#=:fun(real,fun(real,bool)) ((#qnorm:fun(num,fun(real,real)) p:num) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) m:num)) (#real_of_num:fun(num,real) n:num)))) ((#real_div:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) p:num)) ((#index:fun(num,fun(num,num)) p:num) n:num))) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) p:num)) ((#index:fun(num,fun(num,num)) p:num) m:num)))))))))))
       #|QNORM_EQ_0 =  |- (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#qnorm:fun(num,fun(real,real)) p:num) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#prime:fun(num,bool) p:num))) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#rational:fun(real,bool) x:real))) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))
       #|QNORM_ABS =  |- (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#qnorm:fun(num,fun(real,real)) p:num) (#real_abs:fun(real,real) x:real))) ((#qnorm:fun(num,fun(real,real)) p:num) x:real))))))
