@@ -36879,127 +36879,127 @@ Warning: inventing type variables
 0..0..solved at 2
 0..0..solved at 2
 Multivariate/msum quotations (121):
-  matrix_norm:real^M^N->real
-  matrix_norm (m:real^M^N) = norm(vectorize m)
-  x + y = x <=> y = mat 0:real^M^N
-  x + y = y <=> x = mat 0:real^M^N
-  neutral(+) = mat 0:real^M^N
-  monoidal((+):real^M^N->real^M^N->real^M^N)
-  msum s (f:A->real^M^N):real^M^N = (lambda i j. sum s (\\x. f x$i$j))
-  (?h. 1 <= h /\\ h <= dimindex(:N) /\\ forall z:real^M^N. z$i = z$h) /\\\n     (?k. 1 <= k /\\ k <= dimindex(:M) /\\ forall z:real^M. z$j = z$k)
-  forall s (f:A->real^M^N) i j. msum s f$i$j = sum s (\\x. f x$i$j)
-  forall s f:A->real^M^N i. msum s f$i = vsum s (\\x. f x$i)
-  (forall f:A->real^M^N. msum {} f = mat 0) /\\\n   (forall x:A f s. FINITE s\n            ==> msum (x INSERT s) f : real^M^N=\n                if x IN s then msum s f else f(x) + msum s f)
-  forall f:A->real^M^N s. FINITE s ==> msum s f = iterate (+) s f
-  forall f:A->real^M^N s. (forall x. x IN s ==> (f(x) = mat 0)) ==> (msum s f = mat 0)
-  msum s (\\x:A. mat 0) = mat 0:real^M^N
-  forall f:A->real^M^N c s.  msum s (\\x. c %% f(x)) = c %% msum s f
-  forall c:A->real s v:real^M^N. msum s (\\x. c x %% v) = (sum s c) %% v
-  forall f g:A->real^M^N s.\n     FINITE s ==> (msum s (\\x. f x + g x) = msum s f + msum s g)
-  forall f g:A->real^M^N s.\n     FINITE s ==> (msum s (\\x. f x - g x) = msum s f - msum s g)
-  forall c:real^M^N s. FINITE s ==> (msum s (\\n:A. c) = &(CARD s) %% c)
-  forall(f:A->real^N^M) (A:real^P^N) s.\n        FINITE s ==> msum s (\\i. f(i) ** A) = msum s f ** A
-  forall(f:A->real^P^N) (A:real^N^M) s.\n        FINITE s ==> msum s (\\i. A ** f(i)) = A ** msum s f
-  forall(f:A->B) (g:B->real^M^N) s.\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> msum (IMAGE f s) g = msum s (g o f)
-  forall f:A->real^M^N s t.\n     FINITE s /\\ FINITE t /\\ DISJOINT s t\n     ==> (msum (s UNION t) f = msum s f + msum t f)
-  forall f:A->real^M^N s t. FINITE s /\\ t SUBSET s\n           ==> (msum (s DIFF t) f = msum s f - msum t f)
-  forall f:A->real^M^N s a.\n     FINITE s /\\ a IN s\n     ==> msum (s DELETE a) f = msum s f - f a
-  forall s t (f:A->real^M^N).\n     FINITE s /\\ FINITE t\n     ==> msum s f + msum t f = msum (s UNION t) f + msum (s INTER t) f
-  forall f:A->real^M^N s. msum s (\\x. --f x) = --msum s f
-  forall f g:A->real^M^N s. (forall x. x IN s ==> (f x = g x)) ==> (msum s f = msum s g)
-  forall f:A->real^M^N u v.\n        u SUBSET v /\\ (forall x. x IN v /\\ ~(x IN u) ==> (f(x) = mat 0))\n        ==> (msum v f = msum u f)
-  forall f:A->real^M^N s. msum {x | x IN s /\\ ~(f x = mat 0)} f = msum s f
-  forall f s. msum (support (+) f s) f = msum s f
-  forall f:A->real^M^N s.\n     support (+) f (:A) SUBSET s ==> msum s f = msum (:A) f
-  forall(f:A->real^M^N) s t.\n        FINITE t /\\ t SUBSET s /\\\n        (forall x. x IN t ==> (f x = g x)) /\\\n        (forall x. x IN s /\\ ~(x IN t) ==> f(x) = mat 0)\n        ==> msum s f = msum t g
-  forall f:A->real^M^N u v.\n        (forall x. x IN v /\\ ~(x IN u) ==> (f(x) = mat 0))\n        ==> (msum (u UNION v) f = msum u f)
-  forall f:A->real^M^N u v.\n        (forall x. x IN u /\\ ~(x IN v) ==> (f(x) = mat 0))\n        ==> (msum (u UNION v) f = msum v f)
-  forall f:A->real^M^N s. msum s (\\x. if x IN s then f(x) else mat 0) = msum s f
-  forall P s f:A->real^M^N. msum {x | x IN s /\\ P x} f =\n                       msum s (\\x. if P x then f x else mat 0)
-  forall s P f g. FINITE s\n             ==> msum s (\\x:A. if P x then (f x):real^M^N else g x) =\n                 msum {x | x IN s /\\ P x} f + msum {x | x IN s /\\ ~P x} g
-  forall f:A->real^M^N x. msum {x} f = f(x)
-  forall s f:A->real^M^N. vectorize (msum s f) = vsum s (\\x. vectorize (f x))
-  forall s f:A->real^M^N. FINITE s ==> norm(msum s f) <= sum s (\\x. norm(f x))
-  sum s (\\x:A. norm(f x:real^M^N))
-  forall s f:A->real^M^N g. FINITE s /\\ (forall x. x IN s ==> norm(f x) <= g(x))\n                       ==> norm(msum s f) <= sum s g
-  forall s f:A->real^M^N b. FINITE s /\\ sum s (\\a. norm(f a)) <= b\n                       ==> norm(msum s f) <= b
-  forall s f:A->real^M^N b. FINITE s /\\ (forall x. x IN s ==> norm(f(x)) <= b)\n                       ==> norm(msum s f) <= &(CARD s) * b
-  ~(SUC n <= n)
-  (forall m. msum(m..0) f = if m = 0 then f(0) else mat 0:real^M^N) /\\\n   (forall m n. msum(m..SUC n) f = if m <= SUC n then msum(m..n) f + f(SUC n)\n                             else msum(m..n) f)
-  forall f m n. 0 < n /\\ m <= n ==> msum(m..n) f = msum(m..n-1) f + (f n):real^M^N
-  forall f c m n. msum (m..n) (\\x. c %% f x) = c %% msum (m..n) f:real^M^N
-  forall f g m n.\n         (forall x. m <= x /\\ x <= n ==> (f x = g x:real^M^N))\n         ==> (msum(m .. n) f = msum(m .. n) g)
-  forall f:A->B (g:A->real^M^N) s.\n        FINITE s\n        ==> (msum s g =\n             msum (IMAGE f s) (\\y. msum {x | x IN s /\\ (f(x) = y)} g))
-  forall f:A->B (g:A->real^M^N) s t.\n        FINITE s /\\ IMAGE f s SUBSET t\n        ==> msum t (\\y. msum {x | x IN s /\\ f(x) = y} g) = msum s g
-  forall R:A->B->bool (g:A->real^M^N) s t.\n         FINITE s /\\\n         (forall x. x IN s ==> ?!y. y IN t /\\ R x y)\n         ==> msum t (\\y. msum {x | x IN s /\\ R x y} g) = msum s g
-  forall f v:real^M^N s. (sum s f) %% v = msum s (\\x:A. f(x) %% v)
-  forall s a. msum s (\\x:A. if x = a then b else mat 0:real^M^N) =\n         if a IN s then b else mat 0
-  forall f g m n.\n     msum(m..n) (\\i. f i + g i) = msum(m..n) f + msum(m..n) g:real^M^N
-  forall f g m n.\n     msum(m..n) (\\i. f i - g i) = msum(m..n) f - msum(m..n) g:real^M^N
-  forall f m n p.\n       m <= n + 1\n       ==> msum(m..n + p) f = msum(m..n) f + msum(n + 1..n + p) f:real^M^N
-  forall s:A->bool t:A->B->bool x.\n        FINITE s /\\ (forall i. i IN s ==> FINITE(t i))\n        ==> msum s (\\i. msum (t i) (x i)) =\n            msum {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j):real^M^N
-  a = x + a <=> x = mat 0:real^M^N
-  msum s ((d:B->real^M^N) o (i:A->B)) = msum (IMAGE i s) d
-  s:A->bool
-  a:A
-  forall d:B->real^M^N i:A->B s.\n     FINITE s /\\\n     (forall x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ i x = i y ==> d(i x) = mat 0)\n     ==> msum (IMAGE i s) d = msum s (d o i):real^M^N
-  forall f:A->real^M^N s t.\n     FINITE s /\\ FINITE t /\\ (forall x. x IN s INTER t ==> f(x) = mat 0)\n     ==> msum (s UNION t) f = msum s f + msum t f
-  s:(A->bool)->bool
-  t:A->bool
-  forall f:A->real^M^N s.\n     FINITE s /\\ (forall t. t IN s ==> FINITE t) /\\\n     (forall t1 t2 x. t1 IN s /\\ t2 IN s /\\ ~(t1 = t2) /\\ x IN t1 /\\ x IN t2\n                ==> f x = mat 0)\n     ==> msum (UNIONS s) f = msum s (\\t. msum t f)
-  forall f m n. m <= n ==> msum(m..n) f = f m + msum(m + 1..n) f:real^M^N
-  ~(SUC n <= n)
-  m = SUC n
-  forall m n. msum(m..n) (\\k. f(k) - f(k + 1)) =\n          if m <= n then f(m) - f(n + 1) else mat 0:real^M^N
-  forall m n. msum(m..n) (\\k. f(k + 1) - f(k)) =\n         if m <= n then f(n + 1) - f(m) else mat 0:real^M^N
-  ~(x:A IN s) ==> s DELETE x = s
-  forall x f:A->real^M^N s.\n        FINITE s\n        ==> msum(s DELETE x) f = if x IN s then msum s f - f x else msum s f
-  x:A IN s ==> s = x INSERT (s DELETE x)
-  h:A->B
-  forall s:A->bool t:B->bool (f:A->real^M^N) g h.\n        (forall y. y IN t ==> ?!x. x IN s /\\ h x = y) /\\\n        (forall x. x IN s ==> h x IN t /\\ g(h x) = f x)\n        ==> msum s f = msum t g
-  k:B->A
-  h:A->B
-  forall s t (f:A->real^M^N) (g:B->real^M^N) h k.\n        (forall y. y IN t ==> k y IN s /\\ h (k y) = y) /\\\n        (forall x. x IN s ==> h x IN t /\\ k (h x) = x /\\ g (h x) = f x)\n        ==> msum s f = msum t g
-  forall p f m n. msum(m + p..n + p) f = msum(m..n) (\\i. f (i + p)):real^M^N
-  forall f m n. m <= n ==> msum(m..n) f = msum(0..n - m) (\\i. f (i + m)):real^M^N
-  forall f m n. n < m ==> msum(m..n) f = mat 0:real^M^N
-  forall c m n. msum(m..n) (\\n. c) = &((n + 1) - m) %% c:real^M^N
-  SUC n..SUC m = IMAGE SUC (n..m)
-  forall f m n. msum (SUC n..SUC m) f = msum (n..m) (f o SUC):real^M^N
-  p:A->A
-  forall f:A->real^M^N p s:A->bool.\n                (forall x. x IN s ==> p(x) IN s) /\\\n                (forall y. y IN s ==> ?!x. x IN s /\\ p(x) = y)\n                ==> msum s f = msum s (f o p)
-  n < SUC n
-  forall f g:num->real^M^N m n.\n        msum (m..n) (\\k. f(k) %% (g(k + 1) - g(k))) =\n            if m <= n then f(n + 1) %% g(n + 1) - f(m) %% g(m) -\n                           msum (m..n) (\\k. (f(k + 1) - f(k)) %% g(k + 1))\n            else mat 0
-  n:num
-  m:num
-  \\k. (g:num->real^M^N)(k - 1)
-  f:num->real
-  forall f g:num->real^M^N m n.\n        msum (m..n) (\\k. f(k) %% (g(k) - g(k - 1))) =\n            if m <= n then f(n + 1) %% g(n) - f(m) %% g(m - 1) -\n                           msum (m..n) (\\k. (f(k + 1) - f(k)) %% g(k))\n            else mat 0
-  forall f m n p.\n        0 < n /\\ m <= n /\\ n <= p + 1\n        ==> msum(m..n - 1) f + msum(n..p) f = msum(m..p) f:real^M^N
-  forall f m n p.\n        m <= n + 1 /\\ n <= p\n        ==> msum(m..n) f + msum(n + 1..p) f = msum(m..p) f:real^M^N
-  forall f:A->real^M^N p:A->A s.\n     FINITE s /\\\n     (forall x. x IN s ==> p x IN s) /\\\n     (forall x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n     ==> msum s (f o p) = msum s f
-  forall f:A->B->real^M^N s t.\n     FINITE s /\\ FINITE t\n     ==> msum s (\\i. msum t (f i)) = msum t (\\j. msum s (\\i. f i j))
-  forall a b c d f.\n         msum (a..b) (\\i. msum (c..d) (f i)) =\n         msum (c..d) (\\j. msum (a..b) (\\i. f i j)):real^M^N
-  forall f g:A->real^M^N s.\n       FINITE {x | x IN s /\\ ~(f x = mat 0)} /\\\n       FINITE {x | x IN s /\\ ~(g x = mat 0)}\n       ==> msum s (\\x. f x + g x) = msum s f + msum s g
-  a:A IN s ==> {x | x IN s /\\ x = a} = {a}
-  forall s a:A. FINITE s /\\ a IN s\n           ==> msum s (\\x. if x = a then y else f(x)) =\n               msum s f + (y - f a):real^M^N
-  msum(n..n) f = f n:real^M^N
-  msum(1..1) f = f(1):real^M^N
+  (matrix_norm : (Cart[Cart[Real, M], N]) -> Real)
+  (matrix_norm : (Cart[Cart[Real, M], N]) -> Real)((m : Cart[Cart[Real, M], N])) == norm(vectorize(m))
+  ((x : Cart[Cart[Real, M], N]) + (y : Cart[Cart[Real, M], N]) == x) == (y == mat(0))
+  ((x : Cart[Cart[Real, M], N]) + (y : Cart[Cart[Real, M], N]) == y) == (x == mat(0))
+  (neutral : ((Cart[Cart[Real, M], N], Cart[Cart[Real, M], N]) -> Cart[Cart[Real, M], N]) -> Cart[Cart[Real, M], N])((op_plus : (Cart[Cart[Real, M], N], Cart[Cart[Real, M], N]) -> Cart[Cart[Real, M], N])) == (mat : (Num) -> Cart[Cart[Real, M], N])(0)
+  (monoidal : ((Cart[Cart[Real, M], N], Cart[Cart[Real, M], N]) -> Cart[Cart[Real, M], N]) -> Bool)((op_plus : (Cart[Cart[Real, M], N], Cart[Cart[Real, M], N]) -> Cart[Cart[Real, M], N]))
+  (msum : ((A) -> Bool, (A) -> Cart[Cart[Real, M], N]) -> Cart[Cart[Real, M], N])((s : (A) -> Bool), (f : (A) -> Cart[Cart[Real, M], N])) == lambda((i : Num) => lambda((j : Num) => sum(s, (x : A) => op_dollar(op_dollar(f(x), i), j))))
+  (\226\136\131 h : Num, 1 <= h && h <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (\226\136\128 z : Cart[Cart[Real, M], N], (op_dollar : (Cart[Cart[Real, M], N], Num) -> Cart[Real, M])(z, (i : Num)) == (op_dollar : (Cart[Cart[Real, M], N], Num) -> Cart[Real, M])(z, h))) && (\226\136\131 k : Num, 1 <= k && k <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) && (\226\136\128 z : Cart[Real, M], (op_dollar : (Cart[Real, M], Num) -> Real)(z, (j : Num)) == (op_dollar : (Cart[Real, M], Num) -> Real)(z, k)))
+  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 i : Num, \226\136\128 j : Num, op_dollar(op_dollar(msum(s, f), i), j) == sum(s, (x : A) => op_dollar(op_dollar(f(x), i), j))
+  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 i : Num, op_dollar(msum(s, f), i) == vsum(s, (x : A) => op_dollar(f(x), i))
+  (\226\136\128 f : (A) -> Cart[Cart[Real, M], N], msum({}, f) == mat(0)) && (\226\136\128 x : A, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 msum(INSERT(x, s), f) == (if IN(x, s) { msum(s, f) } else { f(x) + msum(s, f) }))
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 msum(s, f) == iterate(op_plus, s, f)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, (\226\136\128 x : A, IN(x, s) \226\134\146 f(x) == mat(0)) \226\134\146 msum(s, f) == mat(0)
+  (msum : ((A) -> Bool, (A) -> Cart[Cart[Real, M], N]) -> Cart[Cart[Real, M], N])((s : (A) -> Bool), (x : A) => (mat : (Num) -> Cart[Cart[Real, M], N])(0)) == (mat : (Num) -> Cart[Cart[Real, M], N])(0)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 c : Real, \226\136\128 s : (A) -> Bool, msum(s, (x : A) => op_pct_pct(c, f(x))) == op_pct_pct(c, msum(s, f))
+  \226\136\128 c : (A) -> Real, \226\136\128 s : (A) -> Bool, \226\136\128 v : Cart[Cart[Real, M], N], msum(s, (x : A) => op_pct_pct(c(x), v)) == op_pct_pct(sum(s, c), v)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 g : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 msum(s, (x : A) => f(x) + g(x)) == msum(s, f) + msum(s, g)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 g : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 msum(s, (x : A) => f(x) - g(x)) == msum(s, f) - msum(s, g)
+  \226\136\128 c : Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 msum(s, (n : A) => c) == op_pct_pct(real_of_num(CARD(s)), c)
+  \226\136\128 f : (A) -> Cart[Cart[Real, N], M], \226\136\128 A : Cart[Cart[Real, P], N], \226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 msum(s, (i : A) => matrix_mul(f(i), A)) == matrix_mul(msum(s, f), A)
+  \226\136\128 f : (A) -> Cart[Cart[Real, P], N], \226\136\128 A : Cart[Cart[Real, N], M], \226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 msum(s, (i : A) => matrix_mul(A, f(i))) == matrix_mul(A, msum(s, f))
+  \226\136\128 f : (A) -> B, \226\136\128 g : (B) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && f(x) == f(y) \226\134\146 x == y) \226\134\146 msum(IMAGE(f, s), g) == msum(s, o(g, f))
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, FINITE(s) && FINITE(t) && DISJOINT(s, t) \226\134\146 msum(UNION(s, t), f) == msum(s, f) + msum(t, f)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, FINITE(s) && SUBSET(t, s) \226\134\146 msum(DIFF(s, t), f) == msum(s, f) - msum(t, f)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, \226\136\128 a : A, FINITE(s) && IN(a, s) \226\134\146 msum(DELETE(s, a), f) == msum(s, f) - f(a)
+  \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], FINITE(s) && FINITE(t) \226\134\146 msum(s, f) + msum(t, f) == msum(UNION(s, t), f) + msum(INTER(s, t), f)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, msum(s, (x : A) => -f(x)) == -msum(s, f)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 g : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, (\226\136\128 x : A, IN(x, s) \226\134\146 f(x) == g(x)) \226\134\146 msum(s, f) == msum(s, g)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 u : (A) -> Bool, \226\136\128 v : (A) -> Bool, SUBSET(u, v) && (\226\136\128 x : A, IN(x, v) && !IN(x, u) \226\134\146 f(x) == mat(0)) \226\134\146 msum(v, f) == msum(u, f)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, msum({(x : A) | IN(x, s) && !(f(x) == mat(0))}, f) == msum(s, f)
+  \226\136\128 f : (_) -> Cart[Cart[Real, _], _], \226\136\128 s : (_) -> Bool, msum(support(op_plus, f, s), f) == msum(s, f)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, SUBSET(support(op_plus, f, UNIV), s) \226\134\146 msum(s, f) == msum(UNIV, f)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, FINITE(t) && SUBSET(t, s) && (\226\136\128 x : A, IN(x, t) \226\134\146 f(x) == (g : (A) -> Cart[Cart[Real, M], N])(x)) && (\226\136\128 x : A, IN(x, s) && !IN(x, t) \226\134\146 f(x) == mat(0)) \226\134\146 msum(s, f) == msum(t, g)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 u : (A) -> Bool, \226\136\128 v : (A) -> Bool, (\226\136\128 x : A, IN(x, v) && !IN(x, u) \226\134\146 f(x) == mat(0)) \226\134\146 msum(UNION(u, v), f) == msum(u, f)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 u : (A) -> Bool, \226\136\128 v : (A) -> Bool, (\226\136\128 x : A, IN(x, u) && !IN(x, v) \226\134\146 f(x) == mat(0)) \226\134\146 msum(UNION(u, v), f) == msum(v, f)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, msum(s, (x : A) => if IN(x, s) { f(x) } else { mat(0) }) == msum(s, f)
+  \226\136\128 P : (A) -> Bool, \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], msum({(x : A) | IN(x, s) && P(x)}, f) == msum(s, (x : A) => if P(x) { f(x) } else { mat(0) })
+  \226\136\128 s : (A) -> Bool, \226\136\128 P : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 g : (A) -> Cart[Cart[Real, M], N], FINITE(s) \226\134\146 msum(s, (x : A) => if P(x) { f(x) } else { g(x) }) == msum({(x : A) | IN(x, s) && P(x)}, f) + msum({(x : A) | IN(x, s) && !P(x)}, g)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 x : A, msum({x}, f) == f(x)
+  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], vectorize(msum(s, f)) == vsum(s, (x : A) => vectorize(f(x)))
+  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], FINITE(s) \226\134\146 norm(msum(s, f)) <= sum(s, (x : A) => norm(f(x)))
+  sum((s : (A) -> Bool), (x : A) => norm((f : (A) -> Cart[Cart[Real, M], N])(x)))
+  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 g : (A) -> Real, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 norm(f(x)) <= g(x)) \226\134\146 norm(msum(s, f)) <= sum(s, g)
+  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 b : Real, FINITE(s) && sum(s, (a : A) => norm(f(a))) <= b \226\134\146 norm(msum(s, f)) <= b
+  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 b : Real, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 norm(f(x)) <= b) \226\134\146 norm(msum(s, f)) <= real_of_num(CARD(s)) * b
+  !(SUC((n : Num)) <= n)
+  (\226\136\128 m : Num, msum(op_dot_dot(m, 0), (f : (Num) -> Cart[Cart[Real, M], N])) == (if m == 0 { f(0) } else { mat(0) })) && (\226\136\128 m : Num, \226\136\128 n : Num, msum(op_dot_dot(m, SUC(n)), f) == (if m <= SUC(n) { msum(op_dot_dot(m, n), f) + f(SUC(n)) } else { msum(op_dot_dot(m, n), f) }))
+  \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, 0 < n && m <= n \226\134\146 msum(op_dot_dot(m, n), f) == msum(op_dot_dot(m, n - 1), f) + f(n)
+  \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 c : Real, \226\136\128 m : Num, \226\136\128 n : Num, msum(op_dot_dot(m, n), (x : Num) => op_pct_pct(c, f(x))) == op_pct_pct(c, msum(op_dot_dot(m, n), f))
+  \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 g : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, (\226\136\128 x : Num, m <= x && x <= n \226\134\146 f(x) == g(x)) \226\134\146 msum(op_dot_dot(m, n), f) == msum(op_dot_dot(m, n), g)
+  \226\136\128 f : (A) -> B, \226\136\128 g : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 msum(s, g) == msum(IMAGE(f, s), (y : B) => msum({(x : A) | IN(x, s) && f(x) == y}, g))
+  \226\136\128 f : (A) -> B, \226\136\128 g : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, FINITE(s) && SUBSET(IMAGE(f, s), t) \226\134\146 msum(t, (y : B) => msum({(x : A) | IN(x, s) && f(x) == y}, g)) == msum(s, g)
+  \226\136\128 R : (A, B) -> Bool, \226\136\128 g : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 existsunique((y : B) => IN(y, t) && R(x, y))) \226\134\146 msum(t, (y : B) => msum({(x : A) | IN(x, s) && R(x, y)}, g)) == msum(s, g)
+  \226\136\128 f : (A) -> Real, \226\136\128 v : Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, op_pct_pct(sum(s, f), v) == msum(s, (x : A) => op_pct_pct(f(x), v))
+  \226\136\128 s : (A) -> Bool, \226\136\128 a : A, msum(s, (x : A) => if x == a { (b : Cart[Cart[Real, M], N]) } else { mat(0) }) == (if IN(a, s) { b } else { mat(0) })
+  \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 g : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, msum(op_dot_dot(m, n), (i : Num) => f(i) + g(i)) == msum(op_dot_dot(m, n), f) + msum(op_dot_dot(m, n), g)
+  \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 g : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, msum(op_dot_dot(m, n), (i : Num) => f(i) - g(i)) == msum(op_dot_dot(m, n), f) - msum(op_dot_dot(m, n), g)
+  \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m <= n + 1 \226\134\146 msum(op_dot_dot(m, n + p), f) == msum(op_dot_dot(m, n), f) + msum(op_dot_dot(n + 1, n + p), f)
+  \226\136\128 s : (A) -> Bool, \226\136\128 t : (A, B) -> Bool, \226\136\128 x : (A, B) -> Cart[Cart[Real, M], N], FINITE(s) && (\226\136\128 i : A, IN(i, s) \226\134\146 FINITE(t(i))) \226\134\146 msum(s, (i : A) => msum(t(i), x(i))) == msum({((i : A), (j : B)) | IN(i, s) && IN(j, t(i))}, GABS((f : ((A, B)) -> Cart[Cart[Real, M], N]) => \226\136\128 i : A, \226\136\128 j : B, GEQ(f((i, j)), x(i, j))))
+  ((a : Cart[Cart[Real, M], N]) == (x : Cart[Cart[Real, M], N]) + a) == (x == mat(0))
+  msum((s : (A) -> Bool), o((d : (B) -> Cart[Cart[Real, M], N]), (i : (A) -> B))) == msum(IMAGE(i, s), d)
+  (s : (A) -> Bool)
+  (a : A)
+  \226\136\128 d : (B) -> Cart[Cart[Real, M], N], \226\136\128 i : (A) -> B, \226\136\128 s : (A) -> Bool, FINITE(s) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && !(x == y) && i(x) == i(y) \226\134\146 d(i(x)) == mat(0)) \226\134\146 msum(IMAGE(i, s), d) == msum(s, o(d, i))
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, FINITE(s) && FINITE(t) && (\226\136\128 x : A, IN(x, INTER(s, t)) \226\134\146 f(x) == mat(0)) \226\134\146 msum(UNION(s, t), f) == msum(s, f) + msum(t, f)
+  (s : ((A) -> Bool) -> Bool)
+  (t : (A) -> Bool)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : ((A) -> Bool) -> Bool, FINITE(s) && (\226\136\128 t : (A) -> Bool, IN(t, s) \226\134\146 FINITE(t)) && (\226\136\128 t1 : (A) -> Bool, \226\136\128 t2 : (A) -> Bool, \226\136\128 x : A, IN(t1, s) && IN(t2, s) && !(t1 == t2) && IN(x, t1) && IN(x, t2) \226\134\146 f(x) == mat(0)) \226\134\146 msum(UNIONS(s), f) == msum(s, (t : (A) -> Bool) => msum(t, f))
+  \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 msum(op_dot_dot(m, n), f) == f(m) + msum(op_dot_dot(m + 1, n), f)
+  !(SUC((n : Num)) <= n)
+  (m : Num) == SUC((n : Num))
+  \226\136\128 m : Num, \226\136\128 n : Num, msum(op_dot_dot(m, n), (k : Num) => (f : (Num) -> Cart[Cart[Real, M], N])(k) - f(k + 1)) == (if m <= n { f(m) - f(n + 1) } else { mat(0) })
+  \226\136\128 m : Num, \226\136\128 n : Num, msum(op_dot_dot(m, n), (k : Num) => (f : (Num) -> Cart[Cart[Real, M], N])(k + 1) - f(k)) == (if m <= n { f(n + 1) - f(m) } else { mat(0) })
+  !IN((x : A), (s : (A) -> Bool)) \226\134\146 DELETE(s, x) == s
+  \226\136\128 x : A, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 msum(DELETE(s, x), f) == (if IN(x, s) { msum(s, f) - f(x) } else { msum(s, f) })
+  IN((x : A), (s : (A) -> Bool)) \226\134\146 s == INSERT(x, DELETE(s, x))
+  (h : (A) -> B)
+  \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 g : (B) -> Cart[Cart[Real, M], N], \226\136\128 h : (A) -> B, (\226\136\128 y : B, IN(y, t) \226\134\146 existsunique((x : A) => IN(x, s) && h(x) == y)) && (\226\136\128 x : A, IN(x, s) \226\134\146 IN(h(x), t) && g(h(x)) == f(x)) \226\134\146 msum(s, f) == msum(t, g)
+  (k : (B) -> A)
+  (h : (A) -> B)
+  \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 g : (B) -> Cart[Cart[Real, M], N], \226\136\128 h : (A) -> B, \226\136\128 k : (B) -> A, (\226\136\128 y : B, IN(y, t) \226\134\146 IN(k(y), s) && h(k(y)) == y) && (\226\136\128 x : A, IN(x, s) \226\134\146 IN(h(x), t) && k(h(x)) == x && g(h(x)) == f(x)) \226\134\146 msum(s, f) == msum(t, g)
+  \226\136\128 p : Num, \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, msum(op_dot_dot(m + p, n + p), f) == msum(op_dot_dot(m, n), (i : Num) => f(i + p))
+  \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 msum(op_dot_dot(m, n), f) == msum(op_dot_dot(0, n - m), (i : Num) => f(i + m))
+  \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, n < m \226\134\146 msum(op_dot_dot(m, n), f) == mat(0)
+  \226\136\128 c : Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, msum(op_dot_dot(m, n), (n : Num) => c) == op_pct_pct(real_of_num(n + 1 - m), c)
+  op_dot_dot(SUC((n : Num)), SUC((m : Num))) == IMAGE(SUC, op_dot_dot(n, m))
+  \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, msum(op_dot_dot(SUC(n), SUC(m)), f) == msum(op_dot_dot(n, m), o(f, SUC))
+  (p : (A) -> A)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 p : (A) -> A, \226\136\128 s : (A) -> Bool, (\226\136\128 x : A, IN(x, s) \226\134\146 IN(p(x), s)) && (\226\136\128 y : A, IN(y, s) \226\134\146 existsunique((x : A) => IN(x, s) && p(x) == y)) \226\134\146 msum(s, f) == msum(s, o(f, p))
+  (n : Num) < SUC(n)
+  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, msum(op_dot_dot(m, n), (k : Num) => op_pct_pct(f(k), g(k + 1) - g(k))) == (if m <= n { op_pct_pct(f(n + 1), g(n + 1)) - op_pct_pct(f(m), g(m)) - msum(op_dot_dot(m, n), (k : Num) => op_pct_pct(f(k + 1) - f(k), g(k + 1))) } else { mat(0) })
+  (n : Num)
+  (m : Num)
+  (k : Num) => (g : (Num) -> Cart[Cart[Real, M], N])(k - 1)
+  (f : (Num) -> Real)
+  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, msum(op_dot_dot(m, n), (k : Num) => op_pct_pct(f(k), g(k) - g(k - 1))) == (if m <= n { op_pct_pct(f(n + 1), g(n)) - op_pct_pct(f(m), g(m - 1)) - msum(op_dot_dot(m, n), (k : Num) => op_pct_pct(f(k + 1) - f(k), g(k))) } else { mat(0) })
+  \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, 0 < n && m <= n && n <= p + 1 \226\134\146 msum(op_dot_dot(m, n - 1), f) + msum(op_dot_dot(n, p), f) == msum(op_dot_dot(m, p), f)
+  \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m <= n + 1 && n <= p \226\134\146 msum(op_dot_dot(m, n), f) + msum(op_dot_dot(n + 1, p), f) == msum(op_dot_dot(m, p), f)
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 p : (A) -> A, \226\136\128 s : (A) -> Bool, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 IN(p(x), s)) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && p(x) == p(y) \226\134\146 x == y) \226\134\146 msum(s, o(f, p)) == msum(s, f)
+  \226\136\128 f : (A, B) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, FINITE(s) && FINITE(t) \226\134\146 msum(s, (i : A) => msum(t, f(i))) == msum(t, (j : B) => msum(s, (i : A) => f(i, j)))
+  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 c : Num, \226\136\128 d : Num, \226\136\128 f : (Num, Num) -> Cart[Cart[Real, M], N], msum(op_dot_dot(a, b), (i : Num) => msum(op_dot_dot(c, d), f(i))) == msum(op_dot_dot(c, d), (j : Num) => msum(op_dot_dot(a, b), (i : Num) => f(i, j)))
+  \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 g : (A) -> Cart[Cart[Real, M], N], \226\136\128 s : (A) -> Bool, FINITE({(x : A) | IN(x, s) && !(f(x) == mat(0))}) && FINITE({(x : A) | IN(x, s) && !(g(x) == mat(0))}) \226\134\146 msum(s, (x : A) => f(x) + g(x)) == msum(s, f) + msum(s, g)
+  IN((a : A), (s : (A) -> Bool)) \226\134\146 {(x : A) | IN(x, s) && x == a} == {a}
+  \226\136\128 s : (A) -> Bool, \226\136\128 a : A, FINITE(s) && IN(a, s) \226\134\146 msum(s, (x : A) => if x == a { (y : Cart[Cart[Real, M], N]) } else { (f : (A) -> Cart[Cart[Real, M], N])(x) }) == msum(s, f) + (y - f(a))
+  msum(op_dot_dot((n : Num), n), (f : (Num) -> Cart[Cart[Real, M], N])) == f(n)
+  msum(op_dot_dot(1, 1), (f : (Num) -> Cart[Cart[Real, M], N])) == f(1)
   2
-  forall t. msum(1..2) t = t(1) + t(2):real^M^N
+  \226\136\128 t : (Num) -> Cart[Cart[Real, M], N], msum(op_dot_dot(1, 2), t) == t(1) + t(2)
   2
   3
-  forall t. msum(1..3) t = t(1) + t(2) + t(3):real^M^N
+  \226\136\128 t : (Num) -> Cart[Cart[Real, M], N], msum(op_dot_dot(1, 3), t) == t(1) + (t(2) + t(3))
   2
   3
   4
-  forall t. msum(1..4) t = t(1) + t(2) + t(3) + t(4):real^M^N
-  forall f:num->real^M^N m n.\n        msum(2*m..2*n+1) f = msum(m..n) (\\i. f(2*i) + f(2*i+1))
-  n:num
+  \226\136\128 t : (Num) -> Cart[Cart[Real, M], N], msum(op_dot_dot(1, 4), t) == t(1) + (t(2) + (t(3) + t(4)))
+  \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, msum(op_dot_dot(2 * m, 2 * n + 1), f) == msum(op_dot_dot(m, n), (i : Num) => f(2 * i) + f(2 * i + 1))
+  (n : Num)
   0
-  f:num->real^M^N
-  forall f:num->real^M^N n. msum(0..2*n+1) f = msum(0..n) (\\i. f(2*i) + f(2*i+1))
-  forall x m n. msum(m..n) x =\n           if n < m then mat 0 else msum(0..n-m) (\\i. x(n - i)):real^M^N
+  (f : (Num) -> Cart[Cart[Real, M], N])
+  \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 n : Num, msum(op_dot_dot(0, 2 * n + 1), f) == msum(op_dot_dot(0, n), (i : Num) => f(2 * i) + f(2 * i + 1))
+  \226\136\128 x : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, msum(op_dot_dot(m, n), x) == (if n < m { mat(0) } else { msum(op_dot_dot(0, n - m), (i : Num) => x(n - i)) })
 matrix_norm =  |- (#forall:fun(fun(cart(cart(real,'M),'N),bool),bool) (\m:cart(cart(real,'M),'N). ((#=:fun(real,fun(real,bool)) (#matrix_norm:fun(cart(cart(real,'M),'N),real) m:cart(cart(real,'M),'N))) (#vector_norm:fun(cart(real,finite_prod('N,'M)),real) (#vectorize:fun(cart(cart(real,'M),'N),cart(real,finite_prod('N,'M))) m:cart(cart(real,'M),'N))))))
 NEUTRAL_MATRIX_ADD =  |- ((#=:fun(cart(cart(real,'M),'N),fun(cart(cart(real,'M),'N),bool)) (#neutral:fun(fun(cart(cart(real,'M),'N),fun(cart(cart(real,'M),'N),cart(cart(real,'M),'N))),cart(cart(real,'M),'N)) #matrix_add:fun(cart(cart(real,'M),'N),fun(cart(cart(real,'M),'N),cart(cart(real,'M),'N))))) (#mat:fun(num,cart(cart(real,'M),'N)) (#NUMERAL:fun(num,num) #_0:num)))
 MONOIDAL_MATRIX_ADD =  |- (#monoidal:fun(fun(cart(cart(real,'M),'N),fun(cart(cart(real,'M),'N),cart(cart(real,'M),'N))),bool) #matrix_add:fun(cart(cart(real,'M),'N),fun(cart(cart(real,'M),'N),cart(cart(real,'M),'N))))
