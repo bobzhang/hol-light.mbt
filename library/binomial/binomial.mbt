@@ -30,7 +30,7 @@ fn step_2() -> Unit raise {
   )
   binom_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. binom(0,n) = if n = 0 then 1 else 0"),
+      @term_syntax.parse_term("∀ n : Num, binom((0, n)) == (if n == 0 { 1 } else { 0 })"),
       t1,
     ),
   )
@@ -50,7 +50,7 @@ pub fn binom_0() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   let t3 = @simp.asm_simp_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("n < k ==> n < SUC(k)")),
+      @int.arith_rule(@term_syntax.parse_term("(n : Num) < (k : Num) → n < SUC(k)")),
       @calc_num.arith(),
     ]),
   )
@@ -62,7 +62,7 @@ fn step_3() -> Unit raise {
     t3,
   )
   binom_lt_c.set(
-    @tactics.prove(@parser.parse_term("forall n k. n < k ==> binom(n,k) = 0"), t4),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, ∀ k : Num, n < k → binom((n, k)) == 0"), t4),
   )
 }
 
@@ -84,7 +84,7 @@ fn step_4() -> Unit raise {
       @list.List([binom(), binom_lt(), @arith.lt(), @calc_num.arith()]),
     ),
   )
-  binom_refl_c.set(@tactics.prove(@parser.parse_term("forall n. binom(n,n) = 1"), t5))
+  binom_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, binom((n, n)) == 1"), t5))
 }
 
 ///|
@@ -104,7 +104,7 @@ fn step_5() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @simp.rewrite_tac(
-          @list.List([@calc_num.num_conv(@parser.parse_term("1"))]),
+          @list.List([@calc_num.num_conv(@term_syntax.parse_term("1"))]),
         ),
         @nums.induct_tac,
       ),
@@ -112,7 +112,7 @@ fn step_5() -> Unit raise {
     ),
     @int.arith_tac,
   )
-  binom_1_c.set(@tactics.prove(@parser.parse_term("forall n. binom(n,1) = n"), t7))
+  binom_1_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, binom((n, 1)) == n"), t7))
 }
 
 ///|
@@ -177,7 +177,7 @@ fn step_6() -> Unit raise {
       s17(x18)
     }
   })
-  let t12 = @parser.parse_term("SUC k")
+  let t12 = @term_syntax.parse_term("SUC((k : Num))")
   let t15 = @tactics.first_x_assum(fn(
     x14 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -285,7 +285,7 @@ fn step_6() -> Unit raise {
   )
   binom_fact_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n k. FACT n * FACT k * binom(n+k,k) = FACT(n + k)"),
+      @term_syntax.parse_term("∀ n : Num, ∀ k : Num, FACT(n) * (FACT(k) * binom((n + k, k))) == FACT(n + k)"),
       t22,
     ),
   )
@@ -310,14 +310,14 @@ fn step_7() -> Unit raise {
       @arith.fact_lt(),
     ]),
   )
-  let t31 = @parser.parse_term("k:num")
+  let t31 = @term_syntax.parse_term("(k : Num)")
   let t32 = @tactics.mp_tac(
     @equal.sym(
-      @bool.specl(@list.List([@parser.parse_term("d:num"), t31]), binom_fact()),
+      @bool.specl(@list.List([@term_syntax.parse_term("(d : Num)"), t31]), binom_fact()),
     ),
   )
   let t30 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("d:num"))(fn(
+    @tactics.x_choose_then(@term_syntax.parse_term("(d : Num)"))(fn(
       x27 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
@@ -402,7 +402,7 @@ fn step_7() -> Unit raise {
     t33,
   )
   binom_eq_0_c.set(
-    @tactics.prove(@parser.parse_term("forall n k. binom(n,k) = 0 <=> n < k"), t34),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, ∀ k : Num, (binom((n, k)) == 0) == (n < k)"), t34),
   )
 }
 
@@ -425,7 +425,7 @@ fn step_8() -> Unit raise {
     @simp.rewrite_tac(@list.List([binom_eq_0(), @arith.lt()])),
     t39,
   ])
-  let t38 = @tactics.subgoal_then(@parser.parse_term("binom(n,SUC n) = 0"), fn(
+  let t38 = @tactics.subgoal_then(@term_syntax.parse_term("binom(((n : Num), SUC(n))) == 0"), fn(
     x35 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -482,7 +482,7 @@ fn step_8() -> Unit raise {
     t40,
   )
   binom_penult_c.set(
-    @tactics.prove(@parser.parse_term("forall n. binom(SUC n,n) = SUC n"), t41),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, binom((SUC(n), n)) == SUC(n)"), t41),
   )
 }
 
@@ -501,10 +501,10 @@ fn step_9() -> Unit raise {
   let t55 = @simp.rewrite_tac(@list.List([binom_eq_0()]))
   let t54 = @tactics.match_mp_tac(
     @int.arith_rule(
-      @parser.parse_term("~(c = 0) ==> n <= b ==> n + 1 <= c + b"),
+      @term_syntax.parse_term("!((c : Num) == 0) → (n : Num) <= (b : Num) → n + 1 <= c + b"),
     ),
   )
-  let t50 = @parser.parse_term("n:num")
+  let t50 = @term_syntax.parse_term("(n : Num)")
   let t53 = @tactics.first_x_assum(fn(
     x52 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -577,7 +577,7 @@ fn step_9() -> Unit raise {
   let t45 = @simp.asm_simp_tac(
     @list.List([binom_1(), @calc_num.arith_suc(), binom()]),
   )
-  let t44 = @class.asm_cases_tac(@parser.parse_term("m = 0"))
+  let t44 = @class.asm_cases_tac(@term_syntax.parse_term("(m : Num) == 0"))
   let t43 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t42 = @simp.rewrite_tac(@list.List([binom()]))
   let t56 = @tactics.then_tac(
@@ -619,7 +619,7 @@ fn step_9() -> Unit raise {
   )
   binom_ge_top_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. 1 <= m /\\ m < n ==> n <= binom(n,m)"),
+      @term_syntax.parse_term("∀ m : Num, ∀ n : Num, 1 <= m && m < n → n <= binom((n, m))"),
       t56,
     ),
   )
@@ -639,7 +639,7 @@ pub fn binom_ge_top() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let t83 = @tactics.conv_tac(@grobner.num_ring)
   let t82 = @simp.rewrite_tac(@list.List([@arith.lt_nz()]))
-  let t80 = @parser.parse_term("k:num")
+  let t80 = @term_syntax.parse_term("(k : Num)")
   let t81 = @tactics.map_every(
     fn(
       x78 : @kernel.Term,
@@ -665,7 +665,7 @@ fn step_10() -> Unit raise {
       let t = x78
       @tactics.mp_tac(@bool.spec(t, @arith.fact_lt()))
     },
-    @list.List([@parser.parse_term("d:num"), t80]),
+    @list.List([@term_syntax.parse_term("(d : Num)"), t80]),
   )
   let t77 = @simp.rewrite_tac(
     @list.List([
@@ -675,13 +675,13 @@ fn step_10() -> Unit raise {
       @arith.add_ac(),
     ]),
   )
-  let t75 = @parser.parse_term("k:num")
+  let t75 = @term_syntax.parse_term("(k : Num)")
   let t76 = @tactics.mp_tac(
-    @bool.specl(@list.List([@parser.parse_term("d:num"), t75]), binom_fact()),
+    @bool.specl(@list.List([@term_syntax.parse_term("(d : Num)"), t75]), binom_fact()),
   )
-  let t73 = @parser.parse_term("k:num")
+  let t73 = @term_syntax.parse_term("(k : Num)")
   let t74 = @tactics.mp_tac(
-    @bool.specl(@list.List([@parser.parse_term("d + 1"), t73]), binom_fact()),
+    @bool.specl(@list.List([@term_syntax.parse_term("(d : Num) + 1"), t73]), binom_fact()),
   )
   let t72 = @simp.rewrite_tac(
     @list.List([
@@ -691,7 +691,7 @@ fn step_10() -> Unit raise {
     ]),
   )
   let t71 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("d:num"))(fn(
+    @tactics.x_choose_then(@term_syntax.parse_term("(d : Num)"))(fn(
       x68 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
@@ -813,7 +813,7 @@ fn step_10() -> Unit raise {
     @list.List([binom_lt(), @arith.sub_refl(), @arith.mult_clauses()]),
   )
   let t58 = @drule.match_mp(
-    @int.arith_rule(@parser.parse_term("n < k ==> n + 1 = k \\/ n + 1 < k")),
+    @int.arith_rule(@term_syntax.parse_term("(n : Num) < (k : Num) → n + 1 == k || n + 1 < k")),
   )
   let t61 = @list.List([
     @tactics.then_tac(
@@ -844,7 +844,7 @@ fn step_10() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t57 = @class.asm_cases_tac(@parser.parse_term("n < k:num"))
+  let t57 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) < (k : Num)"))
   let t84 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -903,7 +903,7 @@ pub fn binom_top_step() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t111 = @tactics.conv_tac(@grobner.num_ring)
   let t110 = @simp.rewrite_tac(@list.List([@arith.lt_nz()]))
-  let t108 = @parser.parse_term("k:num")
+  let t108 = @term_syntax.parse_term("(k : Num)")
   let t109 = @tactics.map_every(
     fn(
       x106 : @kernel.Term,
@@ -929,7 +929,7 @@ fn step_11() -> Unit raise {
       let t = x106
       @tactics.mp_tac(@bool.spec(t, @arith.fact_lt()))
     },
-    @list.List([@parser.parse_term("d:num"), t108]),
+    @list.List([@term_syntax.parse_term("(d : Num)"), t108]),
   )
   let t105 = @simp.rewrite_tac(
     @list.List([
@@ -939,13 +939,13 @@ fn step_11() -> Unit raise {
       @arith.add_ac(),
     ]),
   )
-  let t103 = @parser.parse_term("k + 1")
+  let t103 = @term_syntax.parse_term("(k : Num) + 1")
   let t104 = @tactics.mp_tac(
-    @bool.specl(@list.List([@parser.parse_term("d:num"), t103]), binom_fact()),
+    @bool.specl(@list.List([@term_syntax.parse_term("(d : Num)"), t103]), binom_fact()),
   )
-  let t101 = @parser.parse_term("k:num")
+  let t101 = @term_syntax.parse_term("(k : Num)")
   let t102 = @tactics.mp_tac(
-    @bool.specl(@list.List([@parser.parse_term("d + 1"), t101]), binom_fact()),
+    @bool.specl(@list.List([@term_syntax.parse_term("(d : Num) + 1"), t101]), binom_fact()),
   )
   let t100 = @simp.rewrite_tac(
     @list.List([
@@ -955,7 +955,7 @@ fn step_11() -> Unit raise {
     ]),
   )
   let t99 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("d:num"))(fn(
+    @tactics.x_choose_then(@term_syntax.parse_term("(d : Num)"))(fn(
       x96 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
@@ -1077,7 +1077,7 @@ fn step_11() -> Unit raise {
     @list.List([binom_lt(), @arith.sub_refl(), @arith.mult_clauses()]),
   )
   let t86 = @drule.match_mp(
-    @int.arith_rule(@parser.parse_term("n < k + 1 ==> n = k \\/ n < k")),
+    @int.arith_rule(@term_syntax.parse_term("(n : Num) < (k : Num) + 1 → n == k || n < k")),
   )
   let t89 = @list.List([
     @tactics.then_tac(
@@ -1108,7 +1108,7 @@ fn step_11() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t85 = @class.asm_cases_tac(@parser.parse_term("n < k + 1"))
+  let t85 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) < (k : Num) + 1"))
   let t112 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1187,7 +1187,7 @@ fn step_12() -> Unit raise {
   let t120 = @simp.simp_tac(@list.List([@sets.card_clauses()]))
   let t119 = @simp.once_rewrite_tac(
     @list.List([
-      @class.taut(@parser.parse_term("p /\\ q /\\ r <=> ~(p /\\ q ==> ~r)")),
+      @class.taut(@term_syntax.parse_term("((p : Bool) && (q : Bool) && (r : Bool)) == !(p && q → !r)")),
     ]),
   )
   let t118 = @simp.rewrite_tac(
@@ -1245,7 +1245,7 @@ fn step_12() -> Unit raise {
     t123,
   )
   let t157 = @sets.set_tac(@list.List([]))
-  let t156 = @tactics.undisch_tac(@parser.parse_term("~(a:A IN t)"))
+  let t156 = @tactics.undisch_tac(@term_syntax.parse_term("!IN((a : A), (t : (A) -> Bool))"))
   let t155 = @simp.rewrite_tac(
     @list.List([@sets.in_image(), @sets.in_elim_thm(), @sets.has_size_suc()]),
   )
@@ -1258,7 +1258,7 @@ fn step_12() -> Unit raise {
     ]),
   )
   let t152 = @sets.set_tac(@list.List([]))
-  let t151 = @tactics.undisch_tac(@parser.parse_term("~(a:A IN t)"))
+  let t151 = @tactics.undisch_tac(@term_syntax.parse_term("!IN((a : A), (t : (A) -> Bool))"))
   let t150 = @simp.asm_simp_tac(@list.List([]))
   let t153 = @list.List([
     @tactics.then_tac(
@@ -1322,10 +1322,10 @@ fn step_12() -> Unit raise {
       s144(x145)
     }
   })
-  let t141 = @parser.parse_term("t:A->bool")
+  let t141 = @term_syntax.parse_term("(t : (A) -> Bool)")
   let t142 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("a:A"), t141]),
+    @list.List([@term_syntax.parse_term("(a : A)"), t141]),
   )
   let t140 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
   let t139 = @simp.gen_rewrite_tac(
@@ -1337,10 +1337,10 @@ fn step_12() -> Unit raise {
     },
     @list.List([@sets.has_size_clauses()]),
   )
-  let t134 = @parser.parse_term("m:num")
+  let t134 = @term_syntax.parse_term("(m : Num)")
   let t135 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("n:num"), t134]),
+    @list.List([@term_syntax.parse_term("(n : Num)"), t134]),
   )
   let t131 = @sets.set_tac(@list.List([]))
   let t132 = @tactics.then_tac(
@@ -1360,7 +1360,7 @@ fn step_12() -> Unit raise {
   let t128 = @simp.simp_tac(
     @list.List([@sets.extension(), @sets.in_sing(), @sets.in_elim_thm()]),
   )
-  let t127 = @tactics.exists_tac(@parser.parse_term("{}:A->bool"))
+  let t127 = @tactics.exists_tac(@term_syntax.parse_term("({} : (A) -> Bool)"))
   let t126 = @tactics.conv_tac(@sets.has_size_conv)
   let t133 = @list.List([
     @tactics.then_tac(
@@ -1468,7 +1468,7 @@ pub fn has_size_restricted_powerset() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t169 = @simp.simp_tac(@list.List([@sets.has_size()]))
   let t166 = @drule.match_mp(has_size_restricted_powerset())
-  let t163 = @parser.parse_term("k:num")
+  let t163 = @term_syntax.parse_term("(k : Num)")
   let t168 = @tactics.disch_then(fn(
     x167 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1595,7 +1595,7 @@ fn step_14() -> Unit raise {
   let t185 = @simp.simp_tac(
     @list.List([
       @calc_num.arith(),
-      @int.arith_rule(@parser.parse_term("k <= n ==> SUC n - k = SUC(n - k)")),
+      @int.arith_rule(@term_syntax.parse_term("(k : Num) <= (n : Num) → SUC(n) - k == SUC(n - k)")),
       @arith.exp(),
     ]),
   )
@@ -1621,7 +1621,7 @@ fn step_14() -> Unit raise {
       @arith.le_0(),
     ]),
   )
-  let t180 = @parser.parse_term("nsum(m+1..n+1) (\\i. f i)")
+  let t180 = @term_syntax.parse_term("nsum(op_dot_dot((m : Num) + 1, (n : Num) + 1), (i : Num) => (f : (Num) -> Num)(i))")
   let t181 = @simp.simp_tac(
     @list.List([
       @arith.add1(),
@@ -1635,7 +1635,7 @@ fn step_14() -> Unit raise {
   ])
   let t177 = @tactics.match_mp_tac(
     @int.arith_rule(
-      @parser.parse_term("a:num = e /\\ b = c + d ==> a + b = c + d + e"),
+      @term_syntax.parse_term("(a : Num) == (e : Num) && (b : Num) == (c : Num) + (d : Num) → a + b == c + (d + e)"),
     ),
   )
   let t176 = @simp.rewrite_tac(
@@ -1654,7 +1654,7 @@ fn step_14() -> Unit raise {
     @list.List([
       @iterate.nsum_clauses_left(),
       @arith.add1(),
-      @int.arith_rule(@parser.parse_term("0 <= n + 1")),
+      @int.arith_rule(@term_syntax.parse_term("0 <= (n : Num) + 1")),
       @iterate.nsum_offset(),
     ]),
   )
@@ -1742,7 +1742,7 @@ fn step_15() -> Unit raise {
   let t202 = @simp.simp_tac(
     @list.List([
       @calc_num.arith(),
-      @int.arith_rule(@parser.parse_term("k <= n ==> SUC n - k = SUC(n - k)")),
+      @int.arith_rule(@term_syntax.parse_term("(k : Num) <= (n : Num) → SUC(n) - k == SUC(n - k)")),
       @realax.real_pow(),
     ]),
   )
@@ -1768,7 +1768,7 @@ fn step_15() -> Unit raise {
       @arith.le_0(),
     ]),
   )
-  let t198 = @parser.parse_term("sum(m+1..n+1) (\\i. f i)")
+  let t198 = @term_syntax.parse_term("sum(op_dot_dot((m : Num) + 1, (n : Num) + 1), (i : Num) => (f : (Num) -> Real)(i))")
   let t199 = @simp.simp_tac(
     @list.List([
       @arith.add1(),
@@ -1782,7 +1782,7 @@ fn step_15() -> Unit raise {
   ])
   let t195 = @tactics.match_mp_tac(
     @calc_rat.real_arith(
-      @parser.parse_term("a:real = e /\\ b = c + d ==> a + b = c + d + e"),
+      @term_syntax.parse_term("(a : Real) == (e : Real) && (b : Real) == (c : Real) + (d : Real) → a + b == c + (d + e)"),
     ),
   )
   let t194 = @simp.rewrite_tac(
@@ -1804,7 +1804,7 @@ fn step_15() -> Unit raise {
     @list.List([
       @iterate.sum_clauses_left(),
       @arith.add1(),
-      @int.arith_rule(@parser.parse_term("0 <= n + 1")),
+      @int.arith_rule(@term_syntax.parse_term("0 <= (n : Num) + 1")),
       @iterate.sum_offset(),
     ]),
   )
@@ -1892,17 +1892,17 @@ fn step_16() -> Unit raise {
   let t217 = @simp.rewrite_tac(
     @list.List([@equal.gsym(@realax.real_of_num_le())]),
   )
-  let t216 = @tactics.undisch_tac(@parser.parse_term("k <= n:num"))
+  let t216 = @tactics.undisch_tac(@term_syntax.parse_term("(k : Num) <= (n : Num)"))
   let t212 = @equal.gsym(@real.real_of_num_sub())
   let t213 = @equal.gsym(@realax.real_of_num_add())
   let t214 = @equal.gsym(@realax.real_of_num_mul())
   let t215 = @simp.asm_simp_tac(
     @list.List([@equal.gsym(@realax.real_of_num_eq()), t214, t213, t212]),
   )
-  let t210 = @parser.parse_term("k:num")
+  let t210 = @term_syntax.parse_term("(k : Num)")
   let t211 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("n:num"), t210]),
+      @list.List([@term_syntax.parse_term("(n : Num)"), t210]),
       binom_top_step(),
     ),
   )
@@ -1999,12 +1999,12 @@ fn step_17() -> Unit raise {
   let t225 = @simp.asm_simp_tac(
     @list.List([@equal.gsym(@realax.real_of_num_eq()), t224, t223, t222]),
   )
-  let t221 = @parser.parse_term("k:num")
+  let t221 = @term_syntax.parse_term("(k : Num)")
   let t227 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.mp_tac(
         @bool.specl(
-          @list.List([@parser.parse_term("n:num"), t221]),
+          @list.List([@term_syntax.parse_term("(n : Num)"), t221]),
           binom_bottom_step(),
         ),
       ),
@@ -2016,14 +2016,14 @@ fn step_17() -> Unit raise {
     @simp.asm_simp_tac(
       @list.List([
         binom_lt(),
-        @int.arith_rule(@parser.parse_term("n < k ==> n < k + 1")),
+        @int.arith_rule(@term_syntax.parse_term("(n : Num) < (k : Num) → n < k + 1")),
         @calc_int.real_mul_rzero(),
       ]),
     ),
     t227,
   ])
   let t220 = @tactics.disj_cases_tac(
-    @int.arith_rule(@parser.parse_term("n:num < k \\/ k <= n")),
+    @int.arith_rule(@term_syntax.parse_term("(n : Num) < (k : Num) || k <= n")),
   )
   let t229 = @tactics.thenl(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t220),
@@ -2452,7 +2452,7 @@ fn step_22() -> Unit raise {
   let t267 = @simp.simp_tac(
     @list.List([@arith.lt_mult(), @arith.fact_lt(), @arith.add_clauses()]),
   )
-  let t266 = @tactics.exists_tac(@parser.parse_term("0"))
+  let t266 = @tactics.exists_tac(@term_syntax.parse_term("0"))
   let t265 = @tactics.match_mp_tac(@arith.div_uniq())
   let t264 = @tactics.conv_tac(@equal.sym_conv)
   let t263 = @simp.asm_simp_tac(
@@ -2572,7 +2572,7 @@ fn step_23() -> Unit raise {
     @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t281),
     @tactics.all_tac,
   ])
-  let t280 = @class.asm_cases_tac(@parser.parse_term("k = 0"))
+  let t280 = @class.asm_cases_tac(@term_syntax.parse_term("(k : Num) == 0"))
   let t301 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -2758,7 +2758,7 @@ fn step_23() -> Unit raise {
   )
   divides_gcd_binom_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n k. n divides gcd(n,k) * binom(n,k)"),
+      @term_syntax.parse_term("∀ n : Num, ∀ k : Num, divides(n, gcd((n, k)) * binom((n, k)))"),
       t301,
     ),
   )
@@ -2782,12 +2782,12 @@ fn step_24() -> Unit raise {
     @list.List([
       divides_gcd_binom(),
       @arith.mult_clauses(),
-      @int.number_rule(@parser.parse_term("coprime(n,k) <=> gcd(n,k) = 1")),
+      @int.number_rule(@term_syntax.parse_term("coprime(((n : Num), (k : Num))) == (gcd((n, k)) == 1)")),
     ]),
   )
   divides_coprime_binom_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n k. coprime(n,k) ==> n divides binom (n,k)"),
+      @term_syntax.parse_term("∀ n : Num, ∀ k : Num, coprime((n, k)) → divides(n, binom((n, k)))"),
       t302,
     ),
   )
@@ -2885,7 +2885,7 @@ fn step_25() -> Unit raise {
     ),
     t310,
   ])
-  let t304 = @class.asm_cases_tac(@parser.parse_term("(p:num) divides n"))
+  let t304 = @class.asm_cases_tac(@term_syntax.parse_term("divides((p : Num), (n : Num))"))
   let t303 = @tactics.match_mp_tac(divides_coprime_binom())
   let t312 = @tactics.thenl(
     @tactics.then_tac(
@@ -2923,11 +2923,11 @@ fn step_26() -> Unit raise {
   )
   let t316 = @simp.asm_simp_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("k:num <= n ==> n - (n - k) = k")),
+      @int.arith_rule(@term_syntax.parse_term("(k : Num) <= (n : Num) → n - (n - k) == k")),
     ]),
   )
   let t315 = @simp.asm_rewrite_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("n - k:num <= n"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("(n : Num) - (k : Num) <= n"))]),
   )
   let t314 = @simp.rewrite_tac(
     @list.List([@equal.gsym(@realax.real_of_num_eq()), real_of_num_binom()]),
@@ -2935,7 +2935,7 @@ fn step_26() -> Unit raise {
   let t313 = @simp.asm_simp_tac(
     @list.List([
       binom(),
-      @int.arith_rule(@parser.parse_term("~(k <= n) ==> n - k = 0")),
+      @int.arith_rule(@term_syntax.parse_term("!((k : Num) <= (n : Num)) → n - k == 0")),
     ]),
   )
   let t318 = @tactics.then_tac(
@@ -2983,10 +2983,10 @@ fn step_27() -> Unit raise {
   let t337 = @simp.rewrite_tac(
     @list.List([@equal.gsym(@realax.real_of_num_eq())]),
   )
-  let t332 = @parser.parse_term("m - k:num")
-  let t333 = @parser.parse_term("n - k:num")
-  let t334 = @parser.parse_term("n - m:num")
-  let t335 = @parser.parse_term("m:num")
+  let t332 = @term_syntax.parse_term("(m : Num) - (k : Num)")
+  let t333 = @term_syntax.parse_term("(n : Num) - (k : Num)")
+  let t334 = @term_syntax.parse_term("(n : Num) - (m : Num)")
+  let t335 = @term_syntax.parse_term("(m : Num)")
   let t336 = @tactics.map_every(
     fn(
       x331 : @kernel.Term,
@@ -3066,12 +3066,12 @@ fn step_27() -> Unit raise {
         })(x331),
       )
     },
-    @list.List([@parser.parse_term("n:num"), t335, t334, t333, t332]),
+    @list.List([@term_syntax.parse_term("(n : Num)"), t335, t334, t333, t332]),
   )
   let t324 = @simp.asm_simp_tac(
     @list.List([
       @int.arith_rule(
-        @parser.parse_term("k:num <= m /\\ m <= n ==> n - k - (m - k) = n - m"),
+        @term_syntax.parse_term("(k : Num) <= (m : Num) && m <= (n : Num) → n - k - (m - k) == n - m"),
       ),
     ]),
   )
@@ -3090,7 +3090,7 @@ fn step_27() -> Unit raise {
                   @tactics.all_tac,
                   @tactics.then_tac(
                     @tactics.match_mp_tac(
-                      @class.taut(@parser.parse_term("F ==> p")),
+                      @class.taut(@term_syntax.parse_term("false → (p : Bool)")),
                     ),
                     @int.asm_arith_tac,
                   ),
@@ -3107,7 +3107,7 @@ fn step_27() -> Unit raise {
     ),
     t338,
   )
-  let t322 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("F ==> p")))
+  let t322 = @tactics.match_mp_tac(@class.taut(@term_syntax.parse_term("false → (p : Bool)")))
   let t340 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -3128,7 +3128,7 @@ fn step_27() -> Unit raise {
     ),
     t339,
   ])
-  let t321 = @class.asm_cases_tac(@parser.parse_term("n:num < m"))
+  let t321 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) < (m : Num)"))
   let t319 = @equal.gsym(@realax.real_of_num_mul())
   let t320 = @simp.simp_tac(
     @list.List([
@@ -3208,10 +3208,10 @@ fn step_28() -> Unit raise {
     @list.List([@sets.forall_in_gspec(), @sets.in_elim_pair_thm()]),
   )
   let t348 = @tactics.exists_tac(
-    @parser.parse_term("(\\(x,y). x + y,x):num#num->num#num"),
+    @term_syntax.parse_term("GABS((f : ((Num, Num)) -> (Num, Num)) => ∀ x : Num, ∀ y : Num, GEQ(f((x, y)), (x + y, x)))"),
   )
   let t347 = @tactics.exists_tac(
-    @parser.parse_term("(\\(x,y). y,x - y):num#num->num#num"),
+    @term_syntax.parse_term("GABS((f : ((Num, Num)) -> (Num, Num)) => ∀ x : Num, ∀ y : Num, GEQ(f((x, y)), (y, x - y)))"),
   )
   let t346 = @tactics.match_mp_tac(@iterate.sum_eq_general_inverses())
   let t345 = @simp.simp_tac(
@@ -3379,21 +3379,21 @@ fn step_29() -> Unit raise {
   )
   let t363 = @simp.rewrite_tac(@list.List([binom_lt()]))
   let pth_0 = @tactics.prove(
-    @parser.parse_term("n < k ==> binom(n,k) = 0"),
+    @term_syntax.parse_term("(n : Num) < (k : Num) → binom((n, k)) == 0"),
     t363,
   )
   let t364 = @simp.rewrite_tac(@list.List([binom_refl()]))
-  let pth_1 = @tactics.prove(@parser.parse_term("binom(n,n) = 1"), t364)
+  let pth_1 = @tactics.prove(@term_syntax.parse_term("binom(((n : Num), n)) == 1"), t364)
   let t365 = @meson.meson_tac(@list.List([binom_sym()]))
   let pth_swap = @tactics.prove(
-    @parser.parse_term("k <= n ==> binom(n,k) = binom(n,n - k)"),
+    @term_syntax.parse_term("(k : Num) <= (n : Num) → binom((n, k)) == binom((n, n - k))"),
     t365,
   )
-  let k_tm = @parser.parse_term("k:num")
-  let n_tm = @parser.parse_term("n:num")
-  let x_tm = @parser.parse_term("x:num")
-  let y_tm = @parser.parse_term("y:num")
-  let binom_tm = @parser.parse_term("binom")
+  let k_tm = @term_syntax.parse_term("(k : Num)")
+  let n_tm = @term_syntax.parse_term("(n : Num)")
+  let x_tm = @term_syntax.parse_term("(x : Num)")
+  let y_tm = @term_syntax.parse_term("(y : Num)")
+  let binom_tm = @term_syntax.parse_term("binom")
   fn binom_rule(x366 : @num.Num, x367 : @num.Num) -> @kernel.Thm raise {
     let (n, k) = (x366, x367)
     if @num.lt_num(n, k) {
