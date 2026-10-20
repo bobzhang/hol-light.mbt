@@ -8345,231 +8345,231 @@ test "Logic/resolution matches Logic/resolution.ml" {
       #|0..0..4..10..22..45..85..142..238..362..522..833..solved at 1052
       #|0..0..4..11..25..50..94..157..261..401..579..870..1297..1823..solved at 2169
       #|Logic/resolution quotations (225):
-      #|  (atom False <=> F) /\\\n   (atom (Atom p l) <=> T) /\\\n   (atom (q --> r) <=> F) /\\\n   (atom (!!x q) <=> F)
-      #|  literal p <=> atom(p) \\/ ?q. atom(q) /\\ (p = Not q)
-      #|  clause cl <=> FINITE cl /\\ forall p. p IN cl ==> literal p
-      #|  literal(Atom r args) /\\\n   literal(Not(Atom r args))
-      #|  atom p <=> ?q l. p = Atom q l
-      #|  negative p <=> ?q. p = Not q
-      #|  positive p <=> ~(negative p)
-      #|  ~~p = if negative p then @q. (Not q = p) else Not p
-      #|  pholds d (~~p) <=> ~(pholds d p)
-      #|  holds M v (~~p) <=> ~(holds M v p)
-      #|  ~~(Not p) = p
-      #|  forall p. atom p ==> (~~p = Not p)
-      #|  forall p. ~(~~p = p)
-      #|  forall p d. atom(p) ==> (pholds d p = d(p))
-      #|  forall p. literal p ==> (~~(~~p) = p)
-      #|  resolve (p:form) cl1 cl2 = (cl1 DELETE p) UNION (cl2 DELETE ~~p)
-      #|  (forall cl. cl IN hyps ==> presproof hyps cl) /\\\n   (forall p cl1 cl2.\n       presproof hyps cl1 /\\ presproof hyps cl2 /\\ p IN cl1 /\\ ~~p IN cl2\n      ==> presproof hyps (resolve p cl1 cl2))
-      #|  interp cl = ITLIST (||) (list_of_set cl) False
-      #|  forall s. ~(psatisfiable s)\n       ==> ?t. FINITE t /\\ t SUBSET s /\\ ~(psatisfiable t)
-      #|  forall hyps1 hyps2 c.\n        presproof hyps1 c /\\ hyps1 SUBSET hyps2 ==> presproof hyps2 c
-      #|  forall hyps hyps' c.\n        (forall c'. c' IN hyps' ==> presproof hyps c') /\\ presproof hyps' c\n        ==> presproof hyps c
-      #|  {interp cl | cl IN hyps} = IMAGE interp hyps
-      #|  l:form list
-      #|  list_of_set(cl:form->bool)
-      #|  forall cl d. FINITE cl ==> (pholds d (interp cl) <=> ?p. p IN cl /\\ pholds d p)
-      #|  l:form list
-      #|  list_of_set(cl:form->bool)
-      #|  forall cl M v. FINITE cl\n            ==> (holds M v (interp cl) <=> ?p. p IN cl /\\ holds M v p)
-      #|  b /\\ ~c ==> ~(a \\/ b ==> c)
-      #|  resolve p cl1 cl2
-      #|  ~a ==> a ==> b
-      #|  forall x. x IN hyps' ==> (?p. p IN x /\\ pholds d p)
-      #|  cl2:form->bool
-      #|  r:form
-      #|  literal q
-      #|  q:form
-      #|  ((a ==> c) ==> d) ==> (a \\/ b ==> c) ==> d
-      #|  cl:form->bool
-      #|  forall x. x IN hyps' ==> (?p. p IN x /\\ pholds d p)
-      #|  r:form
-      #|  literal q
-      #|  q:form
-      #|  cl:form->bool
-      #|  forall cl. cl IN hyps /\\ ~~p IN cl /\\ ~(p IN cl)\n             ==> (?q. q IN cl DELETE ~~p /\\ pholds d q)
-      #|  ~~p IN cl
-      #|  p:form
-      #|  p:form IN cl
-      #|  cl:form->bool
-      #|  \\x:form. if x = p then T else d(x)
-      #|  forall cl. cl IN hyps /\\ ~~p IN cl /\\ ~(p IN cl)\n         ==> ?q. q IN (cl DELETE ~~p) /\\ pholds d q
-      #|  cl1:form->bool
-      #|  r:form
-      #|  literal q
-      #|  q:form
-      #|  ((a ==> c) ==> d) ==> (a \\/ b ==> c) ==> d
-      #|  cl:form->bool
-      #|  forall x. x IN hyps' ==> (?p. p IN x /\\ pholds d p)
-      #|  r:form
-      #|  literal q
-      #|  q:form
-      #|  cl:form->bool
-      #|  forall cl. cl IN hyps /\\ p IN cl /\\ ~(~~p IN cl)\n             ==> (?q. q IN cl DELETE p /\\ pholds d q)
-      #|  p:form IN cl
-      #|  ~~p
-      #|  ~~p IN cl
-      #|  cl:form->bool
-      #|  \\x:form. if x = p then F else d(x)
-      #|  forall cl. cl IN hyps /\\ p IN cl /\\ ~(~~p IN cl)\n         ==> ?q. q IN (cl DELETE p) /\\ pholds d q
-      #|  d:form->bool
-      #|  ~a ==> ~b <=> b ==> a
-      #|  ~psatisfiable (IMAGE interp hyps)
-      #|  ~(n = 0) ==> n - 1 - 1 < n
-      #|  CARD(((UNIONS hyps) DELETE p) DELETE ~~p)
-      #|  IMAGE (\\(cl1,cl2). resolve p cl1 cl2)\n                      {(cl1,cl2) | cl1 IN hyps /\\ cl2 IN hyps}
-      #|  hyps:(form->bool)->bool
-      #|  cl:form->bool
-      #|  (e ==> f) /\\ b /\\ c /\\ a /\\ (c ==> d)\n    ==> (a /\\ b /\\ c /\\ d ==> e) ==> f
-      #|  hyps':(form->bool)->bool
-      #|  hyps' = {cl | cl IN hyps /\\ ~(p IN cl) /\\ ~(~~p IN cl)} UNION\n                      {cl | ?cl1 cl2. cl1 IN hyps /\\ cl2 IN hyps /\\\n                                      p IN cl1 /\\ ~(~~p IN cl1) /\\\n                                      ~~p IN cl2 /\\ ~(p IN cl2) /\\\n                                      (cl = resolve p cl1 cl2)}
-      #|  CARD (UNIONS hyps :form->bool) = n
-      #|  (a ==> b /\\ c /\\ d ==> e) <=>\n                         (c ==> a /\\ b /\\ d ==> e)
-      #|  literal q
-      #|  q:form
-      #|  ?p:form. p IN cl
-      #|  FINITE(cl:form->bool)
-      #|  cl:form->bool
-      #|  \\p:form. p IN UNIONS hyps
-      #|  ~(a /\\ b) <=> a ==> ~b
-      #|  ~(a /\\ b /\\ c) <=> a ==> ~b \\/ ~c
-      #|  p <=> ~ ~ p
-      #|  ~~p
-      #|  ?p. literal p /\\ p IN UNIONS hyps /\\ ~~p IN UNIONS hyps
-      #|  p:form
-      #|  ?p. atom p /\\ p IN UNIONS hyps /\\ ~~p IN UNIONS hyps
-      #|  FINITE(UNIONS hyps :form->bool)
-      #|  hyps:(form->bool)->bool = {}
-      #|  {}:form->bool IN hyps
-      #|  hyps:(form->bool)->bool
-      #|  n:num
-      #|  forall n hyps. FINITE hyps /\\\n             (CARD(UNIONS hyps) = n) /\\\n             (forall cl. cl IN hyps ==> clause cl) /\\\n             ~(psatisfiable (IMAGE interp hyps))\n             ==> presproof hyps {}
-      #|  FINITE hyps /\\\n   (forall cl. cl IN hyps ==> clause cl) /\\\n   ~(psatisfiable {interp cl | cl IN hyps})\n   ==> presproof hyps {}
-      #|  b ==> ~c ==> ~a <=> a /\\ b ==> c
-      #|  t SUBSET {interp cl | cl IN h}
-      #|  ~(psatisfiable t)
-      #|  ?h. FINITE h /\\ h SUBSET hyps /\\ t SUBSET {interp cl | cl IN h}
-      #|  t:form->bool
-      #|  (forall cl. cl IN hyps ==> clause cl) /\\\n   ~(psatisfiable {interp cl | cl IN hyps})\n   ==> presproof hyps {}
-      #|  cl1 instance_of cl2 <=> ?i. cl1 = IMAGE (formsubst i) cl2
-      #|  FVS(cl) = UNIONS {FV(p) | p IN cl}
-      #|  r:form
-      #|  r:form
-      #|  r:form
-      #|  forall p. negative (formsubst i p) = negative p
-      #|  q:form
-      #|  forall p i. formsubst i (~~p) = ~~(formsubst i p)
-      #|  forall p i. atom (formsubst i p) = atom p
-      #|  forall i p. formsubst i (Not p) = Not(formsubst i p)
-      #|  forall p. ~atom(Not p)
-      #|  r:form
-      #|  r:form
-      #|  r:form
-      #|  s:form
-      #|  forall p i. literal (formsubst i p) = literal p
-      #|  forall p. qfree(Not p) = qfree p
-      #|  forall p. atom p ==> qfree p
-      #|  forall p. literal p ==> qfree p
-      #|  forall p. qfree(~~p) = qfree p
-      #|  s:form->bool = A DIFF A1 UNION B DIFF B1
-      #|  forall q. q IN (A DIFF A1 UNION B DIFF B1)\n                    ==> (formsubst k (formsubst j q) = formsubst i q)
-      #|  IMAGE (formsubst i) B DELETE ~~p =\n                IMAGE (formsubst i) (B DIFF B1)
-      #|  IMAGE (formsubst i) A DELETE p =\n                IMAGE (formsubst i) (A DIFF A1)
-      #|  k:num->term
-      #|  k:num->term
-      #|  i:num->term
-      #|  j:num->term
-      #|  i:num->term
-      #|  ~~p IN B'
-      #|  p:form IN A'
-      #|  a /\\ b /\\ c /\\ d /\\ e /\\\n                     (a /\\ b /\\ c /\\ d ==> f)\n                     ==> a /\\ b /\\ c /\\ d /\\ e /\\ f
-      #|  Unifies i (A1 UNION {~~l | l IN B1})
-      #|  B1:form->bool
-      #|  A1:form->bool
-      #|  B1 = {r | r IN B /\\ (formsubst i r = ~~p)}
-      #|  A1 = {q | q IN A /\\ (formsubst i q = p)}
-      #|  FVS(A) INTER FVS(B) = {}
-      #|  ~(x IN FVS(A))
-      #|  x IN FVS(A)
-      #|  x:num
-      #|  (b ==> (a <=> a')) ==> (a /\\ b <=> a' /\\ b)
-      #|  q:form
-      #|  r:form
-      #|  \\x. if x IN FVS(A) then ia(x) else ib(x):term
-      #|  ib:num->term
-      #|  B' instance_of B
-      #|  ia:num->term
-      #|  A' instance_of A
-      #|  i:num->term
-      #|  ?i. (A' = IMAGE (formsubst i) A) /\\\n                    (B' = IMAGE (formsubst i) B)
-      #|  forall A B A' B' C' p.\n        clause A /\\ clause B /\\ (FVS(A) INTER FVS(B) = {}) /\\\n        A' instance_of A /\\ B' instance_of B /\\\n        p IN A' /\\ ~~p IN B' /\\ (C' = resolve p A' B')\n        ==> ?A1 B1. A1 SUBSET A /\\ B1 SUBSET B /\\ ~(A1 = {}) /\\ ~(B1 = {}) /\\\n                    (?i. Unifies i (A1 UNION {~~l | l IN B1})) /\\\n                    forall j. ismgu (A1 UNION {~~l | l IN B1}) j\n                        ==> C' instance_of (IMAGE (formsubst j)\n                                           ((A DIFF A1) UNION (B DIFF B1)))
-      #|  FINITE (IMAGE FV cl)
-      #|  (a ==> (b <=> c)) ==> a /\\ c ==> b
-      #|  forall cl. clause(cl) ==> FINITE(FVS cl)
-      #|  ((UNIONS s) INTER y = {}) <=> forall x. x IN s ==> (x INTER y = {})
-      #|  y < 2 * N ==> y - N < N
-      #|  ~(x + N < N)
-      #|  y:num
-      #|  x:num
-      #|  forall x. x IN FV(r) ==> x < N:num
-      #|  r:form
-      #|  \\x. if x < N then V(x + N) else if x < 2 * N then V(x - N)\n                    else V(x)
-      #|  \\x. if x < N then V(x + N) else if x < 2 * N then V(x - N)\n                  else V(x)
-      #|  N:num
-      #|  (x < a ==> x < a + b + 1) /\\ b < a + b + 1
-      #|  s:num->bool
-      #|  s UNION FVS(cl)
-      #|  FINITE(s UNION FVS(cl))
-      #|  ?n. forall x. x IN s \\/ x IN FVS cl ==> x < n
-      #|  forall cl s. FINITE(s) /\\ clause(cl)\n          ==> ?i. renaming(i) /\\ (FVS(IMAGE (formsubst i) cl) INTER s = {})
-      #|  (forall cl. cl IN hyps ==> resproof hyps cl) /\\\n   (forall cl1 cl2 cl2' ps1 ps2 i.\n        resproof hyps cl1 /\\ resproof hyps cl2 /\\\n        (IMAGE (formsubst (rename cl2 (FVS cl1))) cl2 = cl2') /\\\n        ps1 SUBSET cl1 /\\ ps2 SUBSET cl2' /\\ ~(ps1 = {}) /\\ ~(ps2 = {}) /\\\n        (?i. Unifies i (ps1 UNION {~~p | p IN ps2})) /\\\n        (mgu (ps1 UNION {~~p | p IN ps2}) = i)\n        ==> resproof hyps\n               (IMAGE (formsubst i) ((cl1 DIFF ps1) UNION (cl2' DIFF ps2))))
-      #|  forall p i d. qfree(p)\n           ==> (pholds d (formsubst i p) <=> pholds (d o formsubst i) p)
-      #|  l:form list
-      #|  list_of_set cl :form list
-      #|  forall p. MEM p (list_of_set cl) ==> qfree p
-      #|  forall cl. clause cl ==> qfree(interp cl)
-      #|  forall cl v d. clause cl\n            ==> (pholds d (interp (IMAGE (formsubst v) cl)) <=>\n                 pholds d (formsubst v (interp cl)))
-      #|  forall v cl. clause(cl) ==> clause(IMAGE (formsubst v) cl)
-      #|  forall cl. {} instance_of cl ==> (cl = {})
-      #|  s DIFF t SUBSET s
-      #|  (forall cl. cl IN hyps ==> clause cl)\n   ==> forall cl. resproof hyps cl ==> clause cl
-      #|  B:form->bool
-      #|  {~~l | l IN B1} = IMAGE (~~) B1
-      #|  mgu (A1 UNION {~~ l | l IN B1})
-      #|  B1:form->bool
-      #|  A1:form->bool
-      #|  termsubst k = termsubst (termsubst k o j) o termsubst (rename B (FVS A))
-      #|  termsubst k o (j:num->term)
-      #|  k:num->term
-      #|  B' instance_of B
-      #|  j:num->term
-      #|  FVS(A)
-      #|  B:form->bool
-      #|  C = IMAGE (formsubst (rename B (FVS A))) B
-      #|  p:form
-      #|  resolve p A' B'
-      #|  B':form->bool
-      #|  A':form->bool
-      #|  IMAGE (formsubst (rename B (FVS A))) B
-      #|  A:form->bool
-      #|  B:form->bool
-      #|  A:form->bool
-      #|  B':form->bool
-      #|  A':form->bool
-      #|  p:form
-      #|  (b ==> c) ==> (a ==> b) ==> (a ==> c)
-      #|  {}:form->bool
-      #|  forall cl0. presproof {IMAGE (formsubst v) cl | cl,v | cl IN hyps} cl0\n           ==> ?cl. resproof hyps cl /\\ cl0 instance_of cl
-      #|  d:form->bool
-      #|  ~(psatisfiable\n        {interp cl |\n         cl IN {IMAGE(formsubst v) cl | cl,v | cl IN hyps}})
-      #|  IMAGE interp hyps
-      #|  (forall cl. cl IN hyps ==> clause cl) /\\\n   ~(?M:(term->bool)#(num->term list->term)#(num->term list->bool).\n        interpretation (language(IMAGE interp hyps)) M /\\ ~(Dom M = {}) /\\\n        M satisfies (IMAGE interp hyps))\n   ==> resproof hyps {}
-      #|  (b ==> a) ==> ~a ==> ~b
-      #|  isaresolvent cl (cl1,cl2) <=>\n        let cl2' = IMAGE (formsubst (rename cl2 (FVS cl1))) cl2 in\n        ?ps1 ps2.\n            ps1 SUBSET cl1 /\\ ps2 SUBSET cl2' /\\ ~(ps1 = {}) /\\ ~(ps2 = {}) /\\\n            (?i. Unifies i (ps1 UNION {~~p | p IN ps2})) /\\\n            let i = mgu (ps1 UNION {~~p | p IN ps2}) in\n            cl = IMAGE (formsubst i) ((cl1 DIFF ps1) UNION (cl2' DIFF ps2))
-      #|  i:num->term
-      #|  cl2:form->bool
-      #|  forall hyps. (forall cl. cl IN hyps ==> resproof hyps cl) /\\\n          (forall cl1 cl2 cl.\n                resproof hyps cl1 /\\ resproof hyps cl2 /\\\n                isaresolvent cl (cl1,cl2)\n                ==> resproof hyps cl)
+      #|  (atom : (Form) -> Bool)(False) == false && atom(Atom((p : Num), (l : List[Term]))) == true && atom(op_minus_minus_gt((q : Form), (r : Form))) == false && atom(op_bang_bang((x : Num), q)) == false
+      #|  (literal : (Form) -> Bool)((p : Form)) == (atom(p) || (\226\136\131 q : Form, atom(q) && p == Not(q)))
+      #|  (clause : ((Form) -> Bool) -> Bool)((cl : (Form) -> Bool)) == (FINITE(cl) && (\226\136\128 p : Form, IN(p, cl) \226\134\146 literal(p)))
+      #|  literal(Atom((r : Num), (args : List[Term]))) && literal(Not(Atom(r, args)))
+      #|  atom((p : Form)) == (\226\136\131 q : Num, \226\136\131 l : List[Term], p == Atom(q, l))
+      #|  (negative : (Form) -> Bool)((p : Form)) == (\226\136\131 q : Form, p == Not(q))
+      #|  (positive : (Form) -> Bool)((p : Form)) == !negative(p)
+      #|  (op_tilde_tilde : (Form) -> Form)((p : Form)) == (if negative(p) { select((q : Form) => Not(q) == p) } else { Not(p) })
+      #|  pholds((d : (Form) -> Bool), op_tilde_tilde((p : Form))) == !pholds(d, p)
+      #|  holds((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)), (v : (Num) -> _), op_tilde_tilde((p : Form))) == !holds(M, v, p)
+      #|  op_tilde_tilde(Not((p : Form))) == p
+      #|  \226\136\128 p : Form, atom(p) \226\134\146 op_tilde_tilde(p) == Not(p)
+      #|  \226\136\128 p : Form, !(op_tilde_tilde(p) == p)
+      #|  \226\136\128 p : Form, \226\136\128 d : (Form) -> Bool, atom(p) \226\134\146 pholds(d, p) == d(p)
+      #|  \226\136\128 p : Form, literal(p) \226\134\146 op_tilde_tilde(op_tilde_tilde(p)) == p
+      #|  (resolve : (Form, (Form) -> Bool, (Form) -> Bool, Form) -> Bool)((p : Form), (cl1 : (Form) -> Bool), (cl2 : (Form) -> Bool)) == UNION(DELETE(cl1, p), DELETE(cl2, op_tilde_tilde(p)))
+      #|  (\226\136\128 cl : (Form) -> Bool, IN(cl, (hyps : ((Form) -> Bool) -> Bool)) \226\134\146 (presproof : (((Form) -> Bool) -> Bool, (Form) -> Bool) -> Bool)(hyps, cl)) && (\226\136\128 p : Form, \226\136\128 cl1 : (Form) -> Bool, \226\136\128 cl2 : (Form) -> Bool, presproof(hyps, cl1) && presproof(hyps, cl2) && IN(p, cl1) && IN(op_tilde_tilde(p), cl2) \226\134\146 presproof(hyps, resolve(p, cl1, cl2)))
+      #|  (interp : ((Form) -> Bool) -> Form)((cl : (Form) -> Bool)) == ITLIST(op_bar_bar, list_of_set(cl), False)
+      #|  \226\136\128 s : (Form) -> Bool, !psatisfiable(s) \226\134\146 (\226\136\131 t : (Form) -> Bool, FINITE(t) && SUBSET(t, s) && !psatisfiable(t))
+      #|  \226\136\128 hyps1 : ((Form) -> Bool) -> Bool, \226\136\128 hyps2 : ((Form) -> Bool) -> Bool, \226\136\128 c : (Form) -> Bool, presproof(hyps1, c) && SUBSET(hyps1, hyps2) \226\134\146 presproof(hyps2, c)
+      #|  \226\136\128 hyps : ((Form) -> Bool) -> Bool, \226\136\128 hyps' : ((Form) -> Bool) -> Bool, \226\136\128 c : (Form) -> Bool, (\226\136\128 c' : (Form) -> Bool, IN(c', hyps') \226\134\146 presproof(hyps, c')) && presproof(hyps', c) \226\134\146 presproof(hyps, c)
+      #|  {interp((cl : (Form) -> Bool)) | IN(cl, (hyps : ((Form) -> Bool) -> Bool))} == IMAGE(interp, hyps)
+      #|  (l : List[Form])
+      #|  list_of_set((cl : (Form) -> Bool))
+      #|  \226\136\128 cl : (Form) -> Bool, \226\136\128 d : (Form) -> Bool, FINITE(cl) \226\134\146 pholds(d, interp(cl)) == (\226\136\131 p : Form, IN(p, cl) && pholds(d, p))
+      #|  (l : List[Form])
+      #|  list_of_set((cl : (Form) -> Bool))
+      #|  \226\136\128 cl : (Form) -> Bool, \226\136\128 M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), \226\136\128 v : (Num) -> _, FINITE(cl) \226\134\146 holds(M, v, interp(cl)) == (\226\136\131 p : Form, IN(p, cl) && holds(M, v, p))
+      #|  (b : Bool) && !(c : Bool) \226\134\146 !((a : Bool) || b \226\134\146 c)
+      #|  resolve((p : Form), (cl1 : (Form) -> Bool), (cl2 : (Form) -> Bool))
+      #|  !(a : Bool) \226\134\146 a \226\134\146 (b : Bool)
+      #|  \226\136\128 x : (Form) -> Bool, IN(x, (hyps' : ((Form) -> Bool) -> Bool)) \226\134\146 (\226\136\131 p : Form, IN(p, x) && pholds((d : (Form) -> Bool), p))
+      #|  (cl2 : (Form) -> Bool)
+      #|  (r : Form)
+      #|  literal((q : Form))
+      #|  (q : Form)
+      #|  (((a : Bool) \226\134\146 (c : Bool)) \226\134\146 (d : Bool)) \226\134\146 (a || (b : Bool) \226\134\146 c) \226\134\146 d
+      #|  (cl : (Form) -> Bool)
+      #|  \226\136\128 x : (Form) -> Bool, IN(x, (hyps' : ((Form) -> Bool) -> Bool)) \226\134\146 (\226\136\131 p : Form, IN(p, x) && pholds((d : (Form) -> Bool), p))
+      #|  (r : Form)
+      #|  literal((q : Form))
+      #|  (q : Form)
+      #|  (cl : (Form) -> Bool)
+      #|  \226\136\128 cl : (Form) -> Bool, IN(cl, (hyps : ((Form) -> Bool) -> Bool)) && IN(op_tilde_tilde((p : Form)), cl) && !IN(p, cl) \226\134\146 (\226\136\131 q : Form, IN(q, DELETE(cl, op_tilde_tilde(p))) && pholds((d : (Form) -> Bool), q))
+      #|  IN(op_tilde_tilde((p : Form)), (cl : (Form) -> Bool))
+      #|  (p : Form)
+      #|  IN((p : Form), (cl : (Form) -> Bool))
+      #|  (cl : (Form) -> Bool)
+      #|  (x : Form) => if x == (p : Form) { true } else { (d : (Form) -> Bool)(x) }
+      #|  \226\136\128 cl : (Form) -> Bool, IN(cl, (hyps : ((Form) -> Bool) -> Bool)) && IN(op_tilde_tilde((p : Form)), cl) && !IN(p, cl) \226\134\146 (\226\136\131 q : Form, IN(q, DELETE(cl, op_tilde_tilde(p))) && pholds((d : (Form) -> Bool), q))
+      #|  (cl1 : (Form) -> Bool)
+      #|  (r : Form)
+      #|  literal((q : Form))
+      #|  (q : Form)
+      #|  (((a : Bool) \226\134\146 (c : Bool)) \226\134\146 (d : Bool)) \226\134\146 (a || (b : Bool) \226\134\146 c) \226\134\146 d
+      #|  (cl : (Form) -> Bool)
+      #|  \226\136\128 x : (Form) -> Bool, IN(x, (hyps' : ((Form) -> Bool) -> Bool)) \226\134\146 (\226\136\131 p : Form, IN(p, x) && pholds((d : (Form) -> Bool), p))
+      #|  (r : Form)
+      #|  literal((q : Form))
+      #|  (q : Form)
+      #|  (cl : (Form) -> Bool)
+      #|  \226\136\128 cl : (Form) -> Bool, IN(cl, (hyps : ((Form) -> Bool) -> Bool)) && IN((p : Form), cl) && !IN(op_tilde_tilde(p), cl) \226\134\146 (\226\136\131 q : Form, IN(q, DELETE(cl, p)) && pholds((d : (Form) -> Bool), q))
+      #|  IN((p : Form), (cl : (Form) -> Bool))
+      #|  op_tilde_tilde((p : Form))
+      #|  IN(op_tilde_tilde((p : Form)), (cl : (Form) -> Bool))
+      #|  (cl : (Form) -> Bool)
+      #|  (x : Form) => if x == (p : Form) { false } else { (d : (Form) -> Bool)(x) }
+      #|  \226\136\128 cl : (Form) -> Bool, IN(cl, (hyps : ((Form) -> Bool) -> Bool)) && IN((p : Form), cl) && !IN(op_tilde_tilde(p), cl) \226\134\146 (\226\136\131 q : Form, IN(q, DELETE(cl, p)) && pholds((d : (Form) -> Bool), q))
+      #|  (d : (Form) -> Bool)
+      #|  (!(a : Bool) \226\134\146 !(b : Bool)) == (b \226\134\146 a)
+      #|  !psatisfiable(IMAGE(interp, (hyps : ((Form) -> Bool) -> Bool)))
+      #|  !((n : Num) == 0) \226\134\146 n - 1 - 1 < n
+      #|  CARD(DELETE(DELETE(UNIONS((hyps : ((Form) -> Bool) -> Bool)), (p : Form)), op_tilde_tilde(p)))
+      #|  IMAGE(GABS((f : (((Form) -> Bool, (Form) -> Bool), Form) -> Bool) => \226\136\128 cl1 : (Form) -> Bool, \226\136\128 cl2 : (Form) -> Bool, GEQ(f((cl1, cl2)), resolve((p : Form), cl1, cl2))), {((cl1 : (Form) -> Bool), (cl2 : (Form) -> Bool)) | IN(cl1, (hyps : ((Form) -> Bool) -> Bool)) && IN(cl2, hyps)})
+      #|  (hyps : ((Form) -> Bool) -> Bool)
+      #|  (cl : (Form) -> Bool)
+      #|  ((e : Bool) \226\134\146 (f : Bool)) && (b : Bool) && (c : Bool) && (a : Bool) && (c \226\134\146 (d : Bool)) \226\134\146 (a && b && c && d \226\134\146 e) \226\134\146 f
+      #|  (hyps' : ((Form) -> Bool) -> Bool)
+      #|  (hyps' : ((Form) -> Bool) -> Bool) == UNION({(cl : (Form) -> Bool) | IN(cl, (hyps : ((Form) -> Bool) -> Bool)) && !IN((p : Form), cl) && !IN(op_tilde_tilde(p), cl)}, {(cl : (Form) -> Bool) | \226\136\131 cl1 : (Form) -> Bool, \226\136\131 cl2 : (Form) -> Bool, IN(cl1, hyps) && IN(cl2, hyps) && IN(p, cl1) && !IN(op_tilde_tilde(p), cl1) && IN(op_tilde_tilde(p), cl2) && !IN(p, cl2) && cl == resolve(p, cl1, cl2)})
+      #|  CARD(UNIONS((hyps : ((Form) -> Bool) -> Bool))) == (n : Num)
+      #|  ((a : Bool) \226\134\146 (b : Bool) && (c : Bool) && (d : Bool) \226\134\146 (e : Bool)) == (c \226\134\146 a && b && d \226\134\146 e)
+      #|  literal((q : Form))
+      #|  (q : Form)
+      #|  \226\136\131 p : Form, IN(p, (cl : (Form) -> Bool))
+      #|  FINITE((cl : (Form) -> Bool))
+      #|  (cl : (Form) -> Bool)
+      #|  (p : Form) => IN(p, UNIONS((hyps : ((Form) -> Bool) -> Bool)))
+      #|  !((a : Bool) && (b : Bool)) == (a \226\134\146 !b)
+      #|  !((a : Bool) && (b : Bool) && (c : Bool)) == (a \226\134\146 !b || !c)
+      #|  (p : Bool) == !!p
+      #|  op_tilde_tilde((p : Form))
+      #|  \226\136\131 p : Form, literal(p) && IN(p, UNIONS((hyps : ((Form) -> Bool) -> Bool))) && IN(op_tilde_tilde(p), UNIONS(hyps))
+      #|  (p : Form)
+      #|  \226\136\131 p : Form, atom(p) && IN(p, UNIONS((hyps : ((Form) -> Bool) -> Bool))) && IN(op_tilde_tilde(p), UNIONS(hyps))
+      #|  FINITE(UNIONS((hyps : ((Form) -> Bool) -> Bool)))
+      #|  (hyps : ((Form) -> Bool) -> Bool) == {}
+      #|  IN({}, (hyps : ((Form) -> Bool) -> Bool))
+      #|  (hyps : ((Form) -> Bool) -> Bool)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 hyps : ((Form) -> Bool) -> Bool, FINITE(hyps) && CARD(UNIONS(hyps)) == n && (\226\136\128 cl : (Form) -> Bool, IN(cl, hyps) \226\134\146 clause(cl)) && !psatisfiable(IMAGE(interp, hyps)) \226\134\146 presproof(hyps, {})
+      #|  FINITE((hyps : ((Form) -> Bool) -> Bool)) && (\226\136\128 cl : (Form) -> Bool, IN(cl, hyps) \226\134\146 clause(cl)) && !psatisfiable({interp((cl : (Form) -> Bool)) | IN(cl, hyps)}) \226\134\146 presproof(hyps, {})
+      #|  ((b : Bool) \226\134\146 !(c : Bool) \226\134\146 !(a : Bool)) == (a && b \226\134\146 c)
+      #|  SUBSET((t : (Form) -> Bool), {interp((cl : (Form) -> Bool)) | IN(cl, (h : ((Form) -> Bool) -> Bool))})
+      #|  !psatisfiable((t : (Form) -> Bool))
+      #|  \226\136\131 h : ((Form) -> Bool) -> Bool, FINITE(h) && SUBSET(h, (hyps : ((Form) -> Bool) -> Bool)) && SUBSET((t : (Form) -> Bool), {interp((cl : (Form) -> Bool)) | IN(cl, h)})
+      #|  (t : (Form) -> Bool)
+      #|  (\226\136\128 cl : (Form) -> Bool, IN(cl, (hyps : ((Form) -> Bool) -> Bool)) \226\134\146 clause(cl)) && !psatisfiable({interp((cl : (Form) -> Bool)) | IN(cl, hyps)}) \226\134\146 presproof(hyps, {})
+      #|  (instance_of : ((Form) -> Bool, (Form) -> Bool) -> Bool)((cl1 : (Form) -> Bool), (cl2 : (Form) -> Bool)) == (\226\136\131 i : (Num) -> Term, cl1 == IMAGE(formsubst(i), cl2))
+      #|  (FVS : ((Form) -> Bool, Num) -> Bool)((cl : (Form) -> Bool)) == UNIONS({FV((p : Form)) | IN(p, cl)})
+      #|  (r : Form)
+      #|  (r : Form)
+      #|  (r : Form)
+      #|  \226\136\128 p : Form, negative(formsubst((i : (Num) -> Term), p)) == negative(p)
+      #|  (q : Form)
+      #|  \226\136\128 p : Form, \226\136\128 i : (Num) -> Term, formsubst(i, op_tilde_tilde(p)) == op_tilde_tilde(formsubst(i, p))
+      #|  \226\136\128 p : Form, \226\136\128 i : (Num) -> Term, atom(formsubst(i, p)) == atom(p)
+      #|  \226\136\128 i : (Num) -> Term, \226\136\128 p : Form, formsubst(i, Not(p)) == Not(formsubst(i, p))
+      #|  \226\136\128 p : Form, !atom(Not(p))
+      #|  (r : Form)
+      #|  (r : Form)
+      #|  (r : Form)
+      #|  (s : Form)
+      #|  \226\136\128 p : Form, \226\136\128 i : (Num) -> Term, literal(formsubst(i, p)) == literal(p)
+      #|  \226\136\128 p : Form, qfree(Not(p)) == qfree(p)
+      #|  \226\136\128 p : Form, atom(p) \226\134\146 qfree(p)
+      #|  \226\136\128 p : Form, literal(p) \226\134\146 qfree(p)
+      #|  \226\136\128 p : Form, qfree(op_tilde_tilde(p)) == qfree(p)
+      #|  (s : (Form) -> Bool) == UNION(DIFF((A : (Form) -> Bool), (A1 : (Form) -> Bool)), DIFF((B : (Form) -> Bool), (B1 : (Form) -> Bool)))
+      #|  \226\136\128 q : Form, IN(q, UNION(DIFF((A : (Form) -> Bool), (A1 : (Form) -> Bool)), DIFF((B : (Form) -> Bool), (B1 : (Form) -> Bool)))) \226\134\146 formsubst((k : (Num) -> Term), formsubst((j : (Num) -> Term), q)) == formsubst((i : (Num) -> Term), q)
+      #|  DELETE(IMAGE(formsubst((i : (Num) -> Term)), (B : (Form) -> Bool)), op_tilde_tilde((p : Form))) == IMAGE(formsubst(i), DIFF(B, (B1 : (Form) -> Bool)))
+      #|  DELETE(IMAGE(formsubst((i : (Num) -> Term)), (A : (Form) -> Bool)), (p : Form)) == IMAGE(formsubst(i), DIFF(A, (A1 : (Form) -> Bool)))
+      #|  (k : (Num) -> Term)
+      #|  (k : (Num) -> Term)
+      #|  (i : (Num) -> Term)
+      #|  (j : (Num) -> Term)
+      #|  (i : (Num) -> Term)
+      #|  IN(op_tilde_tilde((p : Form)), (B' : (Form) -> Bool))
+      #|  IN((p : Form), (A' : (Form) -> Bool))
+      #|  (a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) && (e : Bool) && (a && b && c && d \226\134\146 (f : Bool)) \226\134\146 a && b && c && d && e && f
+      #|  Unifies((i : (Num) -> Term), UNION((A1 : (Form) -> Bool), {op_tilde_tilde((l : Form)) | IN(l, (B1 : (Form) -> Bool))}))
+      #|  (B1 : (Form) -> Bool)
+      #|  (A1 : (Form) -> Bool)
+      #|  (B1 : (Form) -> Bool) == {(r : Form) | IN(r, (B : (Form) -> Bool)) && formsubst((i : (Num) -> Term), r) == op_tilde_tilde((p : Form))}
+      #|  (A1 : (Form) -> Bool) == {(q : Form) | IN(q, (A : (Form) -> Bool)) && formsubst((i : (Num) -> Term), q) == (p : Form)}
+      #|  INTER(FVS((A : (Form) -> Bool)), FVS((B : (Form) -> Bool))) == {}
+      #|  !IN((x : Num), FVS((A : (Form) -> Bool)))
+      #|  IN((x : Num), FVS((A : (Form) -> Bool)))
+      #|  (x : Num)
+      #|  ((b : Bool) \226\134\146 (a : Bool) == (a' : Bool)) \226\134\146 (a && b) == (a' && b)
+      #|  (q : Form)
+      #|  (r : Form)
+      #|  (x : Num) => if IN(x, FVS((A : (Form) -> Bool))) { (ia : (Num) -> Term)(x) } else { (ib : (Num) -> Term)(x) }
+      #|  (ib : (Num) -> Term)
+      #|  instance_of((B' : (Form) -> Bool), (B : (Form) -> Bool))
+      #|  (ia : (Num) -> Term)
+      #|  instance_of((A' : (Form) -> Bool), (A : (Form) -> Bool))
+      #|  (i : (Num) -> Term)
+      #|  \226\136\131 i : (Num) -> Term, (A' : (Form) -> Bool) == IMAGE(formsubst(i), (A : (Form) -> Bool)) && (B' : (Form) -> Bool) == IMAGE(formsubst(i), (B : (Form) -> Bool))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 B : (Form) -> Bool, \226\136\128 A' : (Form) -> Bool, \226\136\128 B' : (Form) -> Bool, \226\136\128 C' : (Form) -> Bool, \226\136\128 p : Form, clause(A) && clause(B) && INTER(FVS(A), FVS(B)) == {} && instance_of(A', A) && instance_of(B', B) && IN(p, A') && IN(op_tilde_tilde(p), B') && C' == resolve(p, A', B') \226\134\146 (\226\136\131 A1 : (Form) -> Bool, \226\136\131 B1 : (Form) -> Bool, SUBSET(A1, A) && SUBSET(B1, B) && !(A1 == {}) && !(B1 == {}) && (\226\136\131 i : (Num) -> Term, Unifies(i, UNION(A1, {op_tilde_tilde((l : Form)) | IN(l, B1)}))) && (\226\136\128 j : (Num) -> Term, ismgu(UNION(A1, {op_tilde_tilde((l : Form)) | IN(l, B1)}), j) \226\134\146 instance_of(C', IMAGE(formsubst(j), UNION(DIFF(A, A1), DIFF(B, B1))))))
+      #|  FINITE(IMAGE(FV, (cl : (Form) -> Bool)))
+      #|  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 a && c \226\134\146 b
+      #|  \226\136\128 cl : (Form) -> Bool, clause(cl) \226\134\146 FINITE(FVS(cl))
+      #|  (INTER(UNIONS((s : ((_) -> Bool) -> Bool)), (y : (_) -> Bool)) == {}) == (\226\136\128 x : (_) -> Bool, IN(x, s) \226\134\146 INTER(x, y) == {})
+      #|  (y : Num) < 2 * (N : Num) \226\134\146 y - N < N
+      #|  !((x : Num) + (N : Num) < N)
+      #|  (y : Num)
+      #|  (x : Num)
+      #|  \226\136\128 x : Num, IN(x, FV((r : Form))) \226\134\146 x < (N : Num)
+      #|  (r : Form)
+      #|  (x : Num) => if x < (N : Num) { V(x + N) } else { if x < 2 * N { V(x - N) } else { V(x) } }
+      #|  (x : Num) => if x < (N : Num) { V(x + N) } else { if x < 2 * N { V(x - N) } else { V(x) } }
+      #|  (N : Num)
+      #|  ((x : Num) < (a : Num) \226\134\146 x < a + ((b : Num) + 1)) && b < a + (b + 1)
+      #|  (s : (Num) -> Bool)
+      #|  UNION((s : (Num) -> Bool), FVS((cl : (Form) -> Bool)))
+      #|  FINITE(UNION((s : (Num) -> Bool), FVS((cl : (Form) -> Bool))))
+      #|  \226\136\131 n : Num, \226\136\128 x : Num, IN(x, (s : (Num) -> Bool)) || IN(x, FVS((cl : (Form) -> Bool))) \226\134\146 x < n
+      #|  \226\136\128 cl : (Form) -> Bool, \226\136\128 s : (Num) -> Bool, FINITE(s) && clause(cl) \226\134\146 (\226\136\131 i : (Num) -> Term, renaming(i) && INTER(FVS(IMAGE(formsubst(i), cl)), s) == {})
+      #|  (\226\136\128 cl : (Form) -> Bool, IN(cl, (hyps : ((Form) -> Bool) -> Bool)) \226\134\146 (resproof : (((Form) -> Bool) -> Bool, (Form) -> Bool) -> Bool)(hyps, cl)) && (\226\136\128 cl1 : (Form) -> Bool, \226\136\128 cl2 : (Form) -> Bool, \226\136\128 cl2' : (Form) -> Bool, \226\136\128 ps1 : (Form) -> Bool, \226\136\128 ps2 : (Form) -> Bool, \226\136\128 i : (Num) -> Term, resproof(hyps, cl1) && resproof(hyps, cl2) && IMAGE(formsubst(rename(cl2, FVS(cl1))), cl2) == cl2' && SUBSET(ps1, cl1) && SUBSET(ps2, cl2') && !(ps1 == {}) && !(ps2 == {}) && (\226\136\131 i : (Num) -> Term, Unifies(i, UNION(ps1, {op_tilde_tilde((p : Form)) | IN(p, ps2)}))) && mgu(UNION(ps1, {op_tilde_tilde((p : Form)) | IN(p, ps2)})) == i \226\134\146 resproof(hyps, IMAGE(formsubst(i), UNION(DIFF(cl1, ps1), DIFF(cl2', ps2)))))
+      #|  \226\136\128 p : Form, \226\136\128 i : (Num) -> Term, \226\136\128 d : (Form) -> Bool, qfree(p) \226\134\146 pholds(d, formsubst(i, p)) == pholds(o(d, formsubst(i)), p)
+      #|  (l : List[Form])
+      #|  list_of_set((cl : (Form) -> Bool))
+      #|  \226\136\128 p : Form, MEM(p, list_of_set((cl : (Form) -> Bool))) \226\134\146 qfree(p)
+      #|  \226\136\128 cl : (Form) -> Bool, clause(cl) \226\134\146 qfree(interp(cl))
+      #|  \226\136\128 cl : (Form) -> Bool, \226\136\128 v : (Num) -> Term, \226\136\128 d : (Form) -> Bool, clause(cl) \226\134\146 pholds(d, interp(IMAGE(formsubst(v), cl))) == pholds(d, formsubst(v, interp(cl)))
+      #|  \226\136\128 v : (Num) -> Term, \226\136\128 cl : (Form) -> Bool, clause(cl) \226\134\146 clause(IMAGE(formsubst(v), cl))
+      #|  \226\136\128 cl : (Form) -> Bool, instance_of({}, cl) \226\134\146 cl == {}
+      #|  SUBSET(DIFF((s : (_) -> Bool), (t : (_) -> Bool)), s)
+      #|  (\226\136\128 cl : (Form) -> Bool, IN(cl, (hyps : ((Form) -> Bool) -> Bool)) \226\134\146 clause(cl)) \226\134\146 (\226\136\128 cl : (Form) -> Bool, resproof(hyps, cl) \226\134\146 clause(cl))
+      #|  (B : (Form) -> Bool)
+      #|  {op_tilde_tilde((l : Form)) | IN(l, (B1 : (Form) -> Bool))} == IMAGE(op_tilde_tilde, B1)
+      #|  mgu(UNION((A1 : (Form) -> Bool), {op_tilde_tilde((l : Form)) | IN(l, (B1 : (Form) -> Bool))}))
+      #|  (B1 : (Form) -> Bool)
+      #|  (A1 : (Form) -> Bool)
+      #|  termsubst((k : (Num) -> Term)) == o(termsubst(o(termsubst(k), (j : (Num) -> Term))), termsubst(rename((B : (Form) -> Bool), FVS((A : (Form) -> Bool)))))
+      #|  o(termsubst((k : (Num) -> Term)), (j : (Num) -> Term))
+      #|  (k : (Num) -> Term)
+      #|  instance_of((B' : (Form) -> Bool), (B : (Form) -> Bool))
+      #|  (j : (Num) -> Term)
+      #|  FVS((A : (Form) -> Bool))
+      #|  (B : (Form) -> Bool)
+      #|  (C : (Form) -> Bool) == IMAGE(formsubst(rename((B : (Form) -> Bool), FVS((A : (Form) -> Bool)))), B)
+      #|  (p : Form)
+      #|  resolve((p : Form), (A' : (Form) -> Bool), (B' : (Form) -> Bool))
+      #|  (B' : (Form) -> Bool)
+      #|  (A' : (Form) -> Bool)
+      #|  IMAGE(formsubst(rename((B : (Form) -> Bool), FVS((A : (Form) -> Bool)))), B)
+      #|  (A : (Form) -> Bool)
+      #|  (B : (Form) -> Bool)
+      #|  (A : (Form) -> Bool)
+      #|  (B' : (Form) -> Bool)
+      #|  (A' : (Form) -> Bool)
+      #|  (p : Form)
+      #|  ((b : Bool) \226\134\146 (c : Bool)) \226\134\146 ((a : Bool) \226\134\146 b) \226\134\146 a \226\134\146 c
+      #|  ({} : (Form) -> Bool)
+      #|  \226\136\128 cl0 : (Form) -> Bool, presproof({IMAGE(formsubst(v), cl) | cl : (Form) -> Bool, v : (Num) -> Term | IN(cl, (hyps : ((Form) -> Bool) -> Bool))}, cl0) \226\134\146 (\226\136\131 cl : (Form) -> Bool, resproof(hyps, cl) && instance_of(cl0, cl))
+      #|  (d : (Form) -> Bool)
+      #|  !psatisfiable({interp((cl : (Form) -> Bool)) | IN(cl, {IMAGE(formsubst(v), cl) | cl : (Form) -> Bool, v : (Num) -> Term | IN(cl, (hyps : ((Form) -> Bool) -> Bool))})})
+      #|  IMAGE(interp, (hyps : ((Form) -> Bool) -> Bool))
+      #|  (\226\136\128 cl : (Form) -> Bool, IN(cl, (hyps : ((Form) -> Bool) -> Bool)) \226\134\146 clause(cl)) && !(\226\136\131 M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), interpretation(language(IMAGE(interp, hyps)), M) && !(Dom(M) == {}) && satisfies(M, IMAGE(interp, hyps))) \226\134\146 resproof(hyps, {})
+      #|  ((b : Bool) \226\134\146 (a : Bool)) \226\134\146 !a \226\134\146 !b
+      #|  (isaresolvent : ((Form) -> Bool, ((Form) -> Bool, (Form) -> Bool)) -> Bool)((cl : (Form) -> Bool), ((cl1 : (Form) -> Bool), (cl2 : (Form) -> Bool))) == LET((cl2' : (Form) -> Bool) => LET_END(\226\136\131 ps1 : (Form) -> Bool, \226\136\131 ps2 : (Form) -> Bool, SUBSET(ps1, cl1) && SUBSET(ps2, cl2') && !(ps1 == {}) && !(ps2 == {}) && (\226\136\131 i : (Num) -> Term, Unifies(i, UNION(ps1, {op_tilde_tilde((p : Form)) | IN(p, ps2)}))) && LET((i : (Num) -> Term) => LET_END(cl == IMAGE(formsubst(i), UNION(DIFF(cl1, ps1), DIFF(cl2', ps2)))), mgu(UNION(ps1, {op_tilde_tilde((p : Form)) | IN(p, ps2)})))), IMAGE(formsubst(rename(cl2, FVS(cl1))), cl2))
+      #|  (i : (Num) -> Term)
+      #|  (cl2 : (Form) -> Bool)
+      #|  \226\136\128 hyps : ((Form) -> Bool) -> Bool, (\226\136\128 cl : (Form) -> Bool, IN(cl, hyps) \226\134\146 resproof(hyps, cl)) && (\226\136\128 cl1 : (Form) -> Bool, \226\136\128 cl2 : (Form) -> Bool, \226\136\128 cl : (Form) -> Bool, resproof(hyps, cl1) && resproof(hyps, cl2) && isaresolvent(cl, (cl1, cl2)) \226\134\146 resproof(hyps, cl))
       #|atom =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#atom:fun(form,bool) #False:form)) #F:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#atom:fun(form,bool) ((#Atom:fun(num,fun(list(term),form)) p:num) l:list(term)))) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#atom:fun(form,bool) ((#-->:fun(form,fun(form,form)) q:form) r:form))) #F:bool)) ((#=:fun(bool,fun(bool,bool)) (#atom:fun(form,bool) ((#!!:fun(num,fun(form,form)) x:num) q:form))) #F:bool))))
       #|literal =  |- (#forall:fun(fun(form,bool),bool) (\p:form. ((#=:fun(bool,fun(bool,bool)) (#literal:fun(form,bool) p:form)) ((#\/:fun(bool,fun(bool,bool)) (#atom:fun(form,bool) p:form)) (#?:fun(fun(form,bool),bool) (\q:form. ((#/\:fun(bool,fun(bool,bool)) (#atom:fun(form,bool) q:form)) ((#=:fun(form,fun(form,bool)) p:form) (#Not:fun(form,form) q:form)))))))))
       #|clause =  |- (#forall:fun(fun(fun(form,bool),bool),bool) (\cl:fun(form,bool). ((#=:fun(bool,fun(bool,bool)) (#clause:fun(fun(form,bool),bool) cl:fun(form,bool))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun(form,bool),bool) cl:fun(form,bool))) (#forall:fun(fun(form,bool),bool) (\p:form. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(form,fun(fun(form,bool),bool)) p:form) cl:fun(form,bool))) (#literal:fun(form,bool) p:form))))))))
