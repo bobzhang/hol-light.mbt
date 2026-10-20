@@ -22510,309 +22510,309 @@ Translating certificate to HOL inferences
 0..0..solved at 2
 0..0..solved at 2
 Examples/pseudoprime quotations (409):
-  t:A->bool
-  f:A->A
-  forall f t. CARD t <= n /\\\n          CARD(IMAGE f s) <= CARD(t DIFF s) /\\\n          CARD(t DIFF s) + CARD(s) = CARD t /\\\n          CARD(IMAGE (f:A->A) s) = CARD s\n          ==> 2 * CARD s <= n
-  forall f s (t:A->bool) n.\n        FINITE t /\\ CARD t <= n /\\\n        s SUBSET t /\\ IMAGE f s SUBSET t DIFF s /\\\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> 2 * CARD s <= n
-  fermat_pseudoprime a n <=>\n        (a EXP (n - 1) == 1) (mod n)
-  carmichael_number n <=>\n     2 <= n /\\ ~prime n /\\ forall a. coprime(a,n) ==> fermat_pseudoprime a n
-  p divides a /\\ p divides b ==> (b:num == a) (mod p)
-  p - 1 divides n - 1
-  (b == 1) (mod n) ==> (a * b == a) (mod n)
-  ~(n = 0) ==> SUC(n - 1) = n
-  b = a * a EXP (n - 1)
-  coprime(a:num,p)
-  p:num
-  (dk ==> d2) /\\ (dk ==> d)\n        ==> (d ==> ~d2 /\\ p) ==> dk ==> q
-  p:num
-  k = 1
-  k = 0
-  k:num
-  p:num
-  forall m:num. m divides n ==> (b == a) (mod m)
-  b = a EXP n
-  a:num
-  k - 1 <= k
-  (p * m == 1) (mod q) ==> q divides p ==> q = 1
-  n:num
-  p EXP (k - 1)
-  (a:num) * b divides c ==> a divides c /\\ b divides c
-  order (p EXP k) t = order (p EXP k) g
-  (a == 1) (mod (n * m)) ==> (a == 1) (mod n)
-  (t == 1) (mod m) ==> coprime(t,m)
-  (t == g) (mod (p EXP k))
-  t:num
-  t:num
+  (t : (A) -> Bool)
+  (f : (A) -> A)
+  \226\136\128 f : (A) -> A, \226\136\128 t : (A) -> Bool, CARD(t) <= (n : Num) && CARD(IMAGE(f, (s : (A) -> Bool))) <= CARD(DIFF(t, s)) && CARD(DIFF(t, s)) + CARD(s) == CARD(t) && CARD(IMAGE(f, s)) == CARD(s) \226\134\146 2 * CARD(s) <= n
+  \226\136\128 f : (A) -> A, \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, \226\136\128 n : Num, FINITE(t) && CARD(t) <= n && SUBSET(s, t) && SUBSET(IMAGE(f, s), DIFF(t, s)) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && f(x) == f(y) \226\134\146 x == y) \226\134\146 2 * CARD(s) <= n
+  (fermat_pseudoprime : (Num, Num) -> Bool)((a : Num), (n : Num)) == op_eq_eq(EXP(a, n - 1), 1, mod(n))
+  (carmichael_number : (Num) -> Bool)((n : Num)) == (2 <= n && !prime(n) && (\226\136\128 a : Num, coprime((a, n)) \226\134\146 fermat_pseudoprime(a, n)))
+  divides((p : Num), (a : Num)) && divides(p, (b : Num)) \226\134\146 op_eq_eq(b, a, mod(p))
+  divides((p : Num) - 1, (n : Num) - 1)
+  op_eq_eq((b : Num), 1, mod((n : Num))) \226\134\146 op_eq_eq((a : Num) * b, a, mod(n))
+  !((n : Num) == 0) \226\134\146 SUC(n - 1) == n
+  (b : Num) == (a : Num) * EXP(a, (n : Num) - 1)
+  coprime(((a : Num), (p : Num)))
+  (p : Num)
+  ((dk : Bool) \226\134\146 (d2 : Bool)) && (dk \226\134\146 (d : Bool)) \226\134\146 (d \226\134\146 !d2 && (p : Bool)) \226\134\146 dk \226\134\146 (q : Bool)
+  (p : Num)
+  (k : Num) == 1
+  (k : Num) == 0
+  (k : Num)
+  (p : Num)
+  \226\136\128 m : Num, divides(m, (n : Num)) \226\134\146 op_eq_eq((b : Num), (a : Num), mod(m))
+  (b : Num) == EXP((a : Num), (n : Num))
+  (a : Num)
+  (k : Num) - 1 <= k
+  op_eq_eq((p : Num) * (m : Num), 1, mod((q : Num))) \226\134\146 divides(q, p) \226\134\146 q == 1
+  (n : Num)
+  EXP((p : Num), (k : Num) - 1)
+  divides((a : Num) * (b : Num), (c : Num)) \226\134\146 divides(a, c) && divides(b, c)
+  order(EXP((p : Num), (k : Num)), (t : Num)) == order(EXP(p, k), (g : Num))
+  op_eq_eq((a : Num), 1, mod((n : Num) * (m : Num))) \226\134\146 op_eq_eq(a, 1, mod(n))
+  op_eq_eq((t : Num), 1, mod((m : Num))) \226\134\146 coprime((t, m))
+  op_eq_eq((t : Num), (g : Num), mod(EXP((p : Num), (k : Num))))
+  (t : Num)
+  (t : Num)
   1
-  g:num
-  m:num
-  p EXP k
-  g:num
-  p EXP k
-  ~(k = 0)
-  k = index p n
-  m:num
-  p:num
-  n:num
-  p = 1
-  p = 0
-  ODD p
-  p:num
-  n = 2
+  (g : Num)
+  (m : Num)
+  EXP((p : Num), (k : Num))
+  (g : Num)
+  EXP((p : Num), (k : Num))
+  !((k : Num) == 0)
+  (k : Num) == index((p : Num), (n : Num))
+  (m : Num)
+  (p : Num)
+  (n : Num)
+  (p : Num) == 1
+  (p : Num) == 0
+  ODD((p : Num))
+  (p : Num)
+  (n : Num) == 2
   1
   1
-  (x == 1) (mod n) /\\ ~(y == 1) (mod n) ==> ~(x == y) (mod n)
-  m:num
-  ?m. (n - 1) EXP n = (n - 1) EXP (2 * m)
-  2 <= n ==> SUC(n - 1) = n
-  (a EXP k == 1) (mod n) ==> (a * a EXP k == a) (mod n)
-  n - 1
-  p /\\ (p ==> q) ==> p /\\ q
-  2 <= n ==> SUC(n - 1) = n
-  (a * x == a) (mod n) ==> coprime(a,n) ==> (x == 1) (mod n)
-  (q ==> p) /\\ (p ==> r) /\\ (r ==> q) ==> (p <=> q) /\\ (p <=> r)
-  n = 0
-  n:num
-  (forall n. carmichael_number n <=>\n        2 <= n /\\ ~prime n /\\ forall a. (a EXP n == a) (mod n)) /\\\n   (forall n. carmichael_number n <=>\n        2 <= n /\\ ~prime n /\\ ODD n /\\\n        forall p. prime p /\\ p divides n\n            ==> ~(p EXP 2 divides n) /\\ (p - 1) divides (n - 1))
-  forall n. carmichael_number n <=>\n        2 <= n /\\ ~prime n /\\ ODD n /\\ squarefree n /\\\n        forall p. prime p /\\ p divides n ==> (p - 1) divides (n - 1)
-  forall n. carmichael_number n ==> ODD n
-  forall n. carmichael_number n ==> squarefree n
-  forall n. carmichael_number n ==> ~(n = 0)
-  2 <= p /\\ 2 <= q
-  (q:num) divides p * q + r ==> q divides r
-  1 <= q <=> ~(q = 0)
-  ~(p = 0) /\\ p * 1 <= pq ==> pq - 1 = (pq - p * 1) + p - 1
-  n - 1 = p * (q - 1) + p - 1
-  q:num
-  q:num
-  p:num
-  p:num
-  q:num
-  q:num
-  p:num
-  p:num
-  FINITE s ==> (CARD s = n <=> s HAS_SIZE n)
-  n >= 3 <=> ~(n = 0) /\\ ~(n = 1) /\\ ~(n = 2)
-  forall n. carmichael_number n ==> CARD {p | prime p /\\ p divides n} >= 3
-  (n == n + 1) (mod q) <=> q = 1
-  2 <= n ==> n - 1 + 1 = n
-  q divides n /\\ q divides q' /\\ q' divides n'\n    ==> (n' + 1 == n + 1) (mod q)
-  p ==> ~q <=> ~(p /\\ q)
-  (p:num) divides n
-  q:num
-  forall n p q.\n        carmichael_number n /\\\n        prime p /\\ p divides n /\\\n        prime q /\\ q divides n\n        ==> ~((q == 1) (mod p))
-  (a == 1) (mod n) ==> coprime(a,n)
-  n = 1
-  n = 0
-  forall a n. fermat_pseudoprime a n ==> n = 0 \\/ coprime(a,n)
-  forall p a. prime p /\\ ~(p divides a) ==> fermat_pseudoprime a p
-  a:num
-  a:num
-  forall p. prime p <=> 2 <= p /\\ (forall a. 0 < a /\\ a < p ==> fermat_pseudoprime a p)
-  prime n
-  2 <= n <=> ~(n = 0 \\/ n = 1)
-  n = 1
-  n = 0
-  forall n. (forall a. coprime(a,n) ==> fermat_pseudoprime a n) <=>\n       n = 0 \\/ n = 1 \\/ prime n \\/ carmichael_number n
-  (a * b == 1) (mod n) ==> (a == 1) (mod n) ==> (b == 1) (mod n)
-  n = 0
-  a:num
-  n:num
-  {i:num | i < n}
-  {a:num | coprime(a,n) /\\ a < n}
-  \\a. (a * b) MOD n
-  b:num
-  2 <= n <=> ~(n = 0 \\/ n = 1)
-  n = 0
-  forall n. ~(n = 1) /\\ ~prime n /\\ ~carmichael_number n\n        ==> 2 * CARD {a | a < n /\\ fermat_pseudoprime a n} <= phi n
-  a <= b DIV 2 <=> 2 * a <= b
-  forall n. ~(n = 1) /\\ ~prime n /\\ ~carmichael_number n\n        ==> CARD {a | a < n /\\ fermat_pseudoprime a n} <= phi n DIV 2
-  p < n - 1  ==> 2 * a <= p ==> a < n DIV 2
-  n:num
-  forall n. ~(n = 0) /\\ ~(n = 1) /\\ ~prime n /\\ ~carmichael_number n\n        ==> CARD {a | a < n /\\ fermat_pseudoprime a n} < n DIV 2
-  forall a q. miller_rabin_pseudoprime a q /\\ ~(q = 2) ==> fermat_pseudoprime a q
-  forall a q. (?p k. prime p /\\ ODD p /\\ p EXP k = q)\n         ==> (miller_rabin_pseudoprime a q <=> fermat_pseudoprime a q)
-  weak_euler_pseudoprime a n <=>\n        ODD n /\\\n        ((&a pow ((n - 1) DIV 2) == (&1:int)) (mod &n) \\/\n         (&a pow ((n - 1) DIV 2) == (-- &1:int)) (mod &n))
-  (2 * m) DIV 2 = m
-  x:int = y ==> (x == &1) (mod n) ==> (y == &1) (mod n)
-  (x:int == y) (mod m) ==> (x pow 2 == y pow 2) (mod m)
-  forall a n. weak_euler_pseudoprime a n ==> fermat_pseudoprime a n
-  forall a n. weak_euler_pseudoprime a n ==> ODD n
-  forall a n. weak_euler_pseudoprime a n ==> coprime(a,n)
-  (j == a) (mod p) ==> j:int = z ==> (a == z) (mod p)
-  p:num
-  a:num
-  p:num
-  a:num
-  forall p a. prime p /\\ ~(p = 2) /\\ ~(p divides a) ==> weak_euler_pseudoprime a p
-  p = 2
-  forall p. prime p <=>\n       p = 2 \\/ 2 <= p /\\\n       (forall a. 0 < a /\\ a < p ==> weak_euler_pseudoprime a p)
-  2 * 2 EXP (e - i - 2)
-  i < e ==> e - 1 = SUC(i + (e - i - 2)) \\/ e - 1 = i
-  i:num
-  e = SUC(e - 1) <=> ~(e = 0)
-  (ee * m) * 2 + 0 = (2 * ee) * m
+  op_eq_eq((x : Num), 1, mod((n : Num))) && !op_eq_eq((y : Num), 1, mod(n)) \226\134\146 !op_eq_eq(x, y, mod(n))
+  (m : Num)
+  \226\136\131 m : Num, EXP((n : Num) - 1, n) == EXP(n - 1, 2 * m)
+  2 <= (n : Num) \226\134\146 SUC(n - 1) == n
+  op_eq_eq(EXP((a : Num), (k : Num)), 1, mod((n : Num))) \226\134\146 op_eq_eq(a * EXP(a, k), a, mod(n))
+  (n : Num) - 1
+  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+  2 <= (n : Num) \226\134\146 SUC(n - 1) == n
+  op_eq_eq((a : Num) * (x : Num), a, mod((n : Num))) \226\134\146 coprime((a, n)) \226\134\146 op_eq_eq(x, 1, mod(n))
+  ((q : Bool) \226\134\146 (p : Bool)) && (p \226\134\146 (r : Bool)) && (r \226\134\146 q) \226\134\146 p == q && p == r
+  (n : Num) == 0
+  (n : Num)
+  (\226\136\128 n : Num, carmichael_number(n) == (2 <= n && !prime(n) && (\226\136\128 a : Num, op_eq_eq(EXP(a, n), a, mod(n))))) && (\226\136\128 n : Num, carmichael_number(n) == (2 <= n && !prime(n) && ODD(n) && (\226\136\128 p : Num, prime(p) && divides(p, n) \226\134\146 !divides(EXP(p, 2), n) && divides(p - 1, n - 1))))
+  \226\136\128 n : Num, carmichael_number(n) == (2 <= n && !prime(n) && ODD(n) && squarefree(n) && (\226\136\128 p : Num, prime(p) && divides(p, n) \226\134\146 divides(p - 1, n - 1)))
+  \226\136\128 n : Num, carmichael_number(n) \226\134\146 ODD(n)
+  \226\136\128 n : Num, carmichael_number(n) \226\134\146 squarefree(n)
+  \226\136\128 n : Num, carmichael_number(n) \226\134\146 !(n == 0)
+  2 <= (p : Num) && 2 <= (q : Num)
+  divides((q : Num), (p : Num) * q + (r : Num)) \226\134\146 divides(q, r)
+  (1 <= (q : Num)) == !(q == 0)
+  !((p : Num) == 0) && p * 1 <= (pq : Num) \226\134\146 pq - 1 == pq - p * 1 + (p - 1)
+  (n : Num) - 1 == (p : Num) * ((q : Num) - 1) + (p - 1)
+  (q : Num)
+  (q : Num)
+  (p : Num)
+  (p : Num)
+  (q : Num)
+  (q : Num)
+  (p : Num)
+  (p : Num)
+  FINITE((s : (_) -> Bool)) \226\134\146 (CARD(s) == (n : Num)) == HAS_SIZE(s, n)
+  ((n : Num) >= 3) == (!(n == 0) && !(n == 1) && !(n == 2))
+  \226\136\128 n : Num, carmichael_number(n) \226\134\146 CARD({(p : Num) | prime(p) && divides(p, n)}) >= 3
+  op_eq_eq((n : Num), n + 1, mod((q : Num))) == (q == 1)
+  2 <= (n : Num) \226\134\146 n - 1 + 1 == n
+  divides((q : Num), (n : Num)) && divides(q, (q' : Num)) && divides(q', (n' : Num)) \226\134\146 op_eq_eq(n' + 1, n + 1, mod(q))
+  ((p : Bool) \226\134\146 !(q : Bool)) == !(p && q)
+  divides((p : Num), (n : Num))
+  (q : Num)
+  \226\136\128 n : Num, \226\136\128 p : Num, \226\136\128 q : Num, carmichael_number(n) && prime(p) && divides(p, n) && prime(q) && divides(q, n) \226\134\146 !op_eq_eq(q, 1, mod(p))
+  op_eq_eq((a : Num), 1, mod((n : Num))) \226\134\146 coprime((a, n))
+  (n : Num) == 1
+  (n : Num) == 0
+  \226\136\128 a : Num, \226\136\128 n : Num, fermat_pseudoprime(a, n) \226\134\146 n == 0 || coprime((a, n))
+  \226\136\128 p : Num, \226\136\128 a : Num, prime(p) && !divides(p, a) \226\134\146 fermat_pseudoprime(a, p)
+  (a : Num)
+  (a : Num)
+  \226\136\128 p : Num, prime(p) == (2 <= p && (\226\136\128 a : Num, 0 < a && a < p \226\134\146 fermat_pseudoprime(a, p)))
+  prime((n : Num))
+  (2 <= (n : Num)) == !(n == 0 || n == 1)
+  (n : Num) == 1
+  (n : Num) == 0
+  \226\136\128 n : Num, (\226\136\128 a : Num, coprime((a, n)) \226\134\146 fermat_pseudoprime(a, n)) == (n == 0 || n == 1 || prime(n) || carmichael_number(n))
+  op_eq_eq((a : Num) * (b : Num), 1, mod((n : Num))) \226\134\146 op_eq_eq(a, 1, mod(n)) \226\134\146 op_eq_eq(b, 1, mod(n))
+  (n : Num) == 0
+  (a : Num)
+  (n : Num)
+  {(i : Num) | i < (n : Num)}
+  {(a : Num) | coprime((a, (n : Num))) && a < n}
+  (a : Num) => MOD(a * (b : Num), (n : Num))
+  (b : Num)
+  (2 <= (n : Num)) == !(n == 0 || n == 1)
+  (n : Num) == 0
+  \226\136\128 n : Num, !(n == 1) && !prime(n) && !carmichael_number(n) \226\134\146 2 * CARD({(a : Num) | a < n && fermat_pseudoprime(a, n)}) <= phi(n)
+  ((a : Num) <= DIV((b : Num), 2)) == (2 * a <= b)
+  \226\136\128 n : Num, !(n == 1) && !prime(n) && !carmichael_number(n) \226\134\146 CARD({(a : Num) | a < n && fermat_pseudoprime(a, n)}) <= DIV(phi(n), 2)
+  (p : Num) < (n : Num) - 1 \226\134\146 2 * (a : Num) <= p \226\134\146 a < DIV(n, 2)
+  (n : Num)
+  \226\136\128 n : Num, !(n == 0) && !(n == 1) && !prime(n) && !carmichael_number(n) \226\134\146 CARD({(a : Num) | a < n && fermat_pseudoprime(a, n)}) < DIV(n, 2)
+  \226\136\128 a : Num, \226\136\128 q : Num, miller_rabin_pseudoprime(a, q) && !(q == 2) \226\134\146 fermat_pseudoprime(a, q)
+  \226\136\128 a : Num, \226\136\128 q : Num, (\226\136\131 p : Num, \226\136\131 k : Num, prime(p) && ODD(p) && EXP(p, k) == q) \226\134\146 miller_rabin_pseudoprime(a, q) == fermat_pseudoprime(a, q)
+  (weak_euler_pseudoprime : (Num, Num) -> Bool)((a : Num), (n : Num)) == (ODD(n) && (op_eq_eq(pow(int_of_num(a), DIV(n - 1, 2)), int_of_num(1), mod(int_of_num(n))) || op_eq_eq(pow(int_of_num(a), DIV(n - 1, 2)), -int_of_num(1), mod(int_of_num(n)))))
+  DIV(2 * (m : Num), 2) == m
+  (x : Int) == (y : Int) \226\134\146 op_eq_eq(x, int_of_num(1), mod((n : Int))) \226\134\146 op_eq_eq(y, int_of_num(1), mod(n))
+  op_eq_eq((x : Int), (y : Int), mod((m : Int))) \226\134\146 op_eq_eq(pow(x, 2), pow(y, 2), mod(m))
+  \226\136\128 a : Num, \226\136\128 n : Num, weak_euler_pseudoprime(a, n) \226\134\146 fermat_pseudoprime(a, n)
+  \226\136\128 a : Num, \226\136\128 n : Num, weak_euler_pseudoprime(a, n) \226\134\146 ODD(n)
+  \226\136\128 a : Num, \226\136\128 n : Num, weak_euler_pseudoprime(a, n) \226\134\146 coprime((a, n))
+  op_eq_eq((j : Int), (a : Int), mod((p : Int))) \226\134\146 j == (z : Int) \226\134\146 op_eq_eq(a, z, mod(p))
+  (p : Num)
+  (a : Num)
+  (p : Num)
+  (a : Num)
+  \226\136\128 p : Num, \226\136\128 a : Num, prime(p) && !(p == 2) && !divides(p, a) \226\134\146 weak_euler_pseudoprime(a, p)
+  (p : Num) == 2
+  \226\136\128 p : Num, prime(p) == (p == 2 || 2 <= p && (\226\136\128 a : Num, 0 < a && a < p \226\134\146 weak_euler_pseudoprime(a, p)))
+  2 * EXP(2, (e : Num) - (i : Num) - 2)
+  (i : Num) < (e : Num) \226\134\146 e - 1 == SUC(i + (e - i - 2)) || e - 1 == i
+  (i : Num)
+  ((e : Num) == SUC(e - 1)) == !(e == 0)
+  (ee : Num) * (m : Num) * 2 + 0 == 2 * ee * m
   0
-  (2 EXP e * m) DIV 2 = 2 EXP (e - 1) * m
-  2 EXP e * m = n - 1
-  m:num
-  e = index 2 (n - 1)
-  n - 1 = 0 <=> n = 0 \\/ n = 1
+  DIV(EXP(2, (e : Num)) * (m : Num), 2) == EXP(2, e - 1) * m
+  EXP(2, (e : Num)) * (m : Num) == (n : Num) - 1
+  (m : Num)
+  (e : Num) == index(2, (n : Num) - 1)
+  ((n : Num) - 1 == 0) == (n == 0 || n == 1)
   2
-  n - 1
-  (x:int == n - z) (mod n) <=> (x == --z) (mod n)
-  n = 1
-  n = 0
-  n = 2
-  n:num
-  a:num
-  forall a q. miller_rabin_pseudoprime a q /\\ ~(q = 2)\n         ==> weak_euler_pseudoprime a q
-  i < 1 <=> i = 0
-  (2 * n) DIV 2 = n
-  ~(2 * n + 1 = 0)
-  m = n DIV 4
-  n MOD 4 = 3 ==> n - 1 = 2 * (2 * (n DIV 4) + 1)
-  n divides (x + &1:int) <=> (x == -- &1) (mod n)
-  ODD n
-  n = 0
-  n = 2
-  forall a n. ~(n = 2) /\\ (?p k. prime p /\\ ODD p /\\ p EXP k = n) \\/\n         (n == 3) (mod 4)\n         ==> (miller_rabin_pseudoprime a n <=> weak_euler_pseudoprime a n)
-  ODD 2
-  (--z:int == a) (mod p) /\\ (a == z) (mod (p * q))\n    ==> p divides &2 * z
-  p ==> ~q <=> ~(p /\\ q)
-  (2 * r) DIV 2 = r
-  r:num
-  ODD p
-  (p - 1) * m = n - 1
-  (p - 1) DIV 2 * m = (n - 1) DIV 2
-  m:num
-  b:num
-  p:num
-  jacobi(a,p) = jacobi(b,p)
-  ODD 2
-  p:num
-  a:num
-  ~ODD 0 /\\ ~ODD 2
-  q <= 2 \\/ 2 = 0 <=> q = 0 \\/ q = 1 \\/ q = 2
-  (a:int == --z) (mod (p * q))\n       ==> (a == z) (mod q) ==> q divides (&2 * z)
-  (a:num == b) (mod p)
-  coprime(p:num,b)
-  (a == 1) (mod q) ==> coprime(a,q)
-  a:num
-  a:num
+  (n : Num) - 1
+  op_eq_eq((x : Int), (n : Int) - (z : Int), mod(n)) == op_eq_eq(x, -z, mod(n))
+  (n : Num) == 1
+  (n : Num) == 0
+  (n : Num) == 2
+  (n : Num)
+  (a : Num)
+  \226\136\128 a : Num, \226\136\128 q : Num, miller_rabin_pseudoprime(a, q) && !(q == 2) \226\134\146 weak_euler_pseudoprime(a, q)
+  ((i : Num) < 1) == (i == 0)
+  DIV(2 * (n : Num), 2) == n
+  !(2 * (n : Num) + 1 == 0)
+  (m : Num) == DIV((n : Num), 4)
+  MOD((n : Num), 4) == 3 \226\134\146 n - 1 == 2 * (2 * DIV(n, 4) + 1)
+  divides((n : Int), (x : Int) + int_of_num(1)) == op_eq_eq(x, -int_of_num(1), mod(n))
+  ODD((n : Num))
+  (n : Num) == 0
+  (n : Num) == 2
+  \226\136\128 a : Num, \226\136\128 n : Num, !(n == 2) && (\226\136\131 p : Num, \226\136\131 k : Num, prime(p) && ODD(p) && EXP(p, k) == n) || op_eq_eq(n, 3, mod(4)) \226\134\146 miller_rabin_pseudoprime(a, n) == weak_euler_pseudoprime(a, n)
+  ODD(2)
+  op_eq_eq(-(z : Int), (a : Int), mod((p : Int))) && op_eq_eq(a, z, mod(p * (q : Int))) \226\134\146 divides(p, int_of_num(2) * z)
+  ((p : Bool) \226\134\146 !(q : Bool)) == !(p && q)
+  DIV(2 * (r : Num), 2) == r
+  (r : Num)
+  ODD((p : Num))
+  ((p : Num) - 1) * (m : Num) == (n : Num) - 1
+  DIV((p : Num) - 1, 2) * (m : Num) == DIV((n : Num) - 1, 2)
+  (m : Num)
+  (b : Num)
+  (p : Num)
+  jacobi(((a : Num), (p : Num))) == jacobi(((b : Num), p))
+  ODD(2)
+  (p : Num)
+  (a : Num)
+  !ODD(0) && !ODD(2)
+  ((q : Num) <= 2 || 2 == 0) == (q == 0 || q == 1 || q == 2)
+  op_eq_eq((a : Int), -(z : Int), mod((p : Int) * (q : Int))) \226\134\146 op_eq_eq(a, z, mod(q)) \226\134\146 divides(q, int_of_num(2) * z)
+  op_eq_eq((a : Num), (b : Num), mod((p : Num)))
+  coprime(((p : Num), (b : Num)))
+  op_eq_eq((a : Num), 1, mod((q : Num))) \226\134\146 coprime((a, q))
+  (a : Num)
+  (a : Num)
   1
-  b:num
-  q:num
-  p:num
-  b:num
-  ODD 2
-  p:num
-  coprime(p:num,q)
-  ?q:num. p * q = n
-  F ==> p
-  (a * 2 * b) DIV 2 = a * b
-  q:num
-  m:num
-  m:num
-  p:num
-  n:num
-  (p:num) divides n
-  coprime(a:num,n)
-  m:num
-  p:num
-  p:num
-  a:num
-  (r ==> p) /\\ (q ==> r) /\\ (p ==> q)\n    ==> (p <=> q) /\\ (p <=> r)
-  n = 1
-  ODD 2
-  prime n
-  ODD n
-  n:num
-  (forall n. (forall a. coprime(a,n) ==> weak_euler_pseudoprime a n) <=>\n        ODD n /\\\n        (prime n \\/\n         squarefree n /\\\n         forall p. prime p /\\ p divides n ==> (p - 1) divides ((n - 1) DIV 2))) /\\\n   (forall n. (forall a. coprime(a,n) ==> weak_euler_pseudoprime a n) <=>\n        ODD n /\\\n        (prime n \\/\n         forall a. coprime(a,n) ==> (a EXP ((n - 1) DIV 2) == 1) (mod n)))
-  (a * b:int == -- &1) (mod n)\n     ==> (a == -- &1) (mod n) ==> (b == &1) (mod n)
-  (a * b:int == -- &1) (mod n)\n     ==> (a == &1) (mod n) ==> (b == -- &1) (mod n)
-  (a * b:int == &1) (mod n)\n     ==> (a == -- &1) (mod n) ==> (b == -- &1) (mod n)
-  (a * b:int == &1) (mod n)\n     ==> (a == &1) (mod n) ==> (b == &1) (mod n)
-  ODD n
-  n = 0
-  a:num
-  n:num
-  {i:num | i < n}
-  {a:num | coprime(a,n) /\\ a < n}
-  \\a. (a * b) MOD n
-  b:num
-  n:num
-  n = 0
-  forall n. ~prime n /\\\n       ~(squarefree n /\\\n         forall p. prime p /\\ p divides n ==> p - 1 divides (n - 1) DIV 2)\n        ==> 2 * CARD {a | a < n /\\ weak_euler_pseudoprime a n} <= phi n
-  a <= b DIV 2 <=> 2 * a <= b
-  forall n. ~prime n /\\\n       ~(squarefree n /\\\n         forall p. prime p /\\ p divides n ==> p - 1 divides (n - 1) DIV 2)\n        ==> CARD {a | a < n /\\ weak_euler_pseudoprime a n} <= phi n DIV 2
-  p < n - 1  ==> 2 * a <= p ==> a < n DIV 2
-  n:num
-  forall n. ~(n = 0) /\\ ~(n = 1) /\\ ~prime n /\\\n       ~(squarefree n /\\\n         forall p. prime p /\\ p divides n ==> p - 1 divides (n - 1) DIV 2)\n       ==> CARD {a | a < n /\\ weak_euler_pseudoprime a n} < n DIV 2
-  euler_jacobi_pseudoprime a n <=>\n        ODD n /\\ coprime(a,n) /\\\n        (jacobi(a,n) == &a pow ((n - 1) DIV 2)) (mod &n)
-  forall a n. euler_jacobi_pseudoprime a n ==> coprime(a,n)
-  forall a n. euler_jacobi_pseudoprime a n ==> ODD n
-  n:num
-  a:num
-  forall a n. euler_jacobi_pseudoprime a n ==> weak_euler_pseudoprime a n
-  forall a n. euler_jacobi_pseudoprime a n ==> fermat_pseudoprime a n
-  forall p a. prime p /\\ ~(p = 2) /\\ ~(p divides a)\n         ==> euler_jacobi_pseudoprime a p
-  p = 2
-  forall p. prime p <=>\n       p = 2 \\/ 2 <= p /\\\n       (forall a. 0 < a /\\ a < p ==> euler_jacobi_pseudoprime a p)
-  ODD 2
-  1 <= q /\\ q <= 2 <=> q = 1 \\/ q = 2
-  (--a == y) (mod q) ==> (y == a) (mod q) ==> q divides (a - --a)
-  coprime(p:num,a) /\\ (t == a) (mod p) /\\ p divides t ==> p = 1
-  (x:int == y) (mod (p * q)) ==> (x == y) (mod q)
-  jacobi(t,q) = &1
-  (t == 1) (mod q) ==> coprime(t,q)
-  t:num
+  (b : Num)
+  (q : Num)
+  (p : Num)
+  (b : Num)
+  ODD(2)
+  (p : Num)
+  coprime(((p : Num), (q : Num)))
+  \226\136\131 q : Num, (p : Num) * q == (n : Num)
+  false \226\134\146 (p : Bool)
+  DIV((a : Num) * (2 * (b : Num)), 2) == a * b
+  (q : Num)
+  (m : Num)
+  (m : Num)
+  (p : Num)
+  (n : Num)
+  divides((p : Num), (n : Num))
+  coprime(((a : Num), (n : Num)))
+  (m : Num)
+  (p : Num)
+  (p : Num)
+  (a : Num)
+  ((r : Bool) \226\134\146 (p : Bool)) && ((q : Bool) \226\134\146 r) && (p \226\134\146 q) \226\134\146 p == q && p == r
+  (n : Num) == 1
+  ODD(2)
+  prime((n : Num))
+  ODD((n : Num))
+  (n : Num)
+  (\226\136\128 n : Num, (\226\136\128 a : Num, coprime((a, n)) \226\134\146 weak_euler_pseudoprime(a, n)) == (ODD(n) && (prime(n) || squarefree(n) && (\226\136\128 p : Num, prime(p) && divides(p, n) \226\134\146 divides(p - 1, DIV(n - 1, 2)))))) && (\226\136\128 n : Num, (\226\136\128 a : Num, coprime((a, n)) \226\134\146 weak_euler_pseudoprime(a, n)) == (ODD(n) && (prime(n) || (\226\136\128 a : Num, coprime((a, n)) \226\134\146 op_eq_eq(EXP(a, DIV(n - 1, 2)), 1, mod(n))))))
+  op_eq_eq((a : Int) * (b : Int), -int_of_num(1), mod((n : Int))) \226\134\146 op_eq_eq(a, -int_of_num(1), mod(n)) \226\134\146 op_eq_eq(b, int_of_num(1), mod(n))
+  op_eq_eq((a : Int) * (b : Int), -int_of_num(1), mod((n : Int))) \226\134\146 op_eq_eq(a, int_of_num(1), mod(n)) \226\134\146 op_eq_eq(b, -int_of_num(1), mod(n))
+  op_eq_eq((a : Int) * (b : Int), int_of_num(1), mod((n : Int))) \226\134\146 op_eq_eq(a, -int_of_num(1), mod(n)) \226\134\146 op_eq_eq(b, -int_of_num(1), mod(n))
+  op_eq_eq((a : Int) * (b : Int), int_of_num(1), mod((n : Int))) \226\134\146 op_eq_eq(a, int_of_num(1), mod(n)) \226\134\146 op_eq_eq(b, int_of_num(1), mod(n))
+  ODD((n : Num))
+  (n : Num) == 0
+  (a : Num)
+  (n : Num)
+  {(i : Num) | i < (n : Num)}
+  {(a : Num) | coprime((a, (n : Num))) && a < n}
+  (a : Num) => MOD(a * (b : Num), (n : Num))
+  (b : Num)
+  (n : Num)
+  (n : Num) == 0
+  \226\136\128 n : Num, !prime(n) && !(squarefree(n) && (\226\136\128 p : Num, prime(p) && divides(p, n) \226\134\146 divides(p - 1, DIV(n - 1, 2)))) \226\134\146 2 * CARD({(a : Num) | a < n && weak_euler_pseudoprime(a, n)}) <= phi(n)
+  ((a : Num) <= DIV((b : Num), 2)) == (2 * a <= b)
+  \226\136\128 n : Num, !prime(n) && !(squarefree(n) && (\226\136\128 p : Num, prime(p) && divides(p, n) \226\134\146 divides(p - 1, DIV(n - 1, 2)))) \226\134\146 CARD({(a : Num) | a < n && weak_euler_pseudoprime(a, n)}) <= DIV(phi(n), 2)
+  (p : Num) < (n : Num) - 1 \226\134\146 2 * (a : Num) <= p \226\134\146 a < DIV(n, 2)
+  (n : Num)
+  \226\136\128 n : Num, !(n == 0) && !(n == 1) && !prime(n) && !(squarefree(n) && (\226\136\128 p : Num, prime(p) && divides(p, n) \226\134\146 divides(p - 1, DIV(n - 1, 2)))) \226\134\146 CARD({(a : Num) | a < n && weak_euler_pseudoprime(a, n)}) < DIV(n, 2)
+  (euler_jacobi_pseudoprime : (Num, Num) -> Bool)((a : Num), (n : Num)) == (ODD(n) && coprime((a, n)) && op_eq_eq(jacobi((a, n)), pow(int_of_num(a), DIV(n - 1, 2)), mod(int_of_num(n))))
+  \226\136\128 a : Num, \226\136\128 n : Num, euler_jacobi_pseudoprime(a, n) \226\134\146 coprime((a, n))
+  \226\136\128 a : Num, \226\136\128 n : Num, euler_jacobi_pseudoprime(a, n) \226\134\146 ODD(n)
+  (n : Num)
+  (a : Num)
+  \226\136\128 a : Num, \226\136\128 n : Num, euler_jacobi_pseudoprime(a, n) \226\134\146 weak_euler_pseudoprime(a, n)
+  \226\136\128 a : Num, \226\136\128 n : Num, euler_jacobi_pseudoprime(a, n) \226\134\146 fermat_pseudoprime(a, n)
+  \226\136\128 p : Num, \226\136\128 a : Num, prime(p) && !(p == 2) && !divides(p, a) \226\134\146 euler_jacobi_pseudoprime(a, p)
+  (p : Num) == 2
+  \226\136\128 p : Num, prime(p) == (p == 2 || 2 <= p && (\226\136\128 a : Num, 0 < a && a < p \226\134\146 euler_jacobi_pseudoprime(a, p)))
+  ODD(2)
+  (1 <= (q : Num) && q <= 2) == (q == 1 || q == 2)
+  op_eq_eq(-(a : Int), (y : Int), mod((q : Int))) \226\134\146 op_eq_eq(y, a, mod(q)) \226\134\146 divides(q, a - -a)
+  coprime(((p : Num), (a : Num))) && op_eq_eq((t : Num), a, mod(p)) && divides(p, t) \226\134\146 p == 1
+  op_eq_eq((x : Int), (y : Int), mod((p : Int) * (q : Int))) \226\134\146 op_eq_eq(x, y, mod(q))
+  jacobi(((t : Num), (q : Num))) == int_of_num(1)
+  op_eq_eq((t : Num), 1, mod((q : Num))) \226\134\146 coprime((t, q))
+  (t : Num)
   1
-  a:num
-  q:num
-  p:num
-  a:num
-  ODD 2
-  p:num
-  q:num
-  p:num
-  q = 1
-  q = 0
-  q:num
-  p:num
-  n:num
-  2 <= n <=> ~(n = 0) /\\ ~(n = 1)
-  carmichael_number n
-  n = 0
-  ODD 2
-  prime n
-  n = 1
-  forall n. (forall a. coprime(a,n) ==> euler_jacobi_pseudoprime a n) <=>\n       n = 1 \\/ ODD n /\\ prime n
-  (x * y:int == a * b) (mod n)\n    ==> (x == a) (mod n) /\\ coprime(a,n) ==> (y == b) (mod n)
-  a:num
-  n:num
-  {i:num | i < n}
-  {a:num | coprime(a,n) /\\ a < n}
-  \\a. (a * b) MOD n
-  b:num
-  n:num
-  n = 0
-  forall n. ~(n = 1) /\\ ~prime n\n        ==> 2 * CARD {a | a < n /\\ euler_jacobi_pseudoprime a n} <= phi n
-  a <= b DIV 2 <=> 2 * a <= b
-  forall n. ~(n = 1) /\\ ~prime n\n        ==> CARD {a | a < n /\\ euler_jacobi_pseudoprime a n} <= phi n DIV 2
-  p < n - 1  ==> 2 * a <= p ==> a < n DIV 2
-  n:num
-  forall n. ~(n = 0) /\\ ~(n = 1) /\\ ~prime n\n        ==> CARD {a | a < n /\\ euler_jacobi_pseudoprime a n} < n DIV 2
-  s:A->bool
-  a:A
-  forall x m n (k:A->bool).\n          n divides m EXP 2 /\\ FINITE k\n          ==> (nproduct k (\\i. m * x i + 1) == m * nsum k x + 1) (mod n)
-  a EXP k = a EXP CARD(1..k)
-  i:A
-  nproduct s (\\i:A. m * k i * x i + 1)
-  forall x k m n (s:A->bool).\n          n divides m EXP 2 /\\ FINITE s\n          ==> (nproduct s (\\i. (m * x i + 1) EXP k i) ==\n               m * nsum s (\\i. k i * x i) + 1) (mod n)
-  (a * b) * m:num = b * a * m
-  r < e ==> e - 1 = r + (e - r - 1)
-  (EVEN m <=> EVEN n) ==> (--(&1:int) pow m = --(&1) pow n)
+  (a : Num)
+  (q : Num)
+  (p : Num)
+  (a : Num)
+  ODD(2)
+  (p : Num)
+  (q : Num)
+  (p : Num)
+  (q : Num) == 1
+  (q : Num) == 0
+  (q : Num)
+  (p : Num)
+  (n : Num)
+  (2 <= (n : Num)) == (!(n == 0) && !(n == 1))
+  carmichael_number((n : Num))
+  (n : Num) == 0
+  ODD(2)
+  prime((n : Num))
+  (n : Num) == 1
+  \226\136\128 n : Num, (\226\136\128 a : Num, coprime((a, n)) \226\134\146 euler_jacobi_pseudoprime(a, n)) == (n == 1 || ODD(n) && prime(n))
+  op_eq_eq((x : Int) * (y : Int), (a : Int) * (b : Int), mod((n : Int))) \226\134\146 op_eq_eq(x, a, mod(n)) && coprime((a, n)) \226\134\146 op_eq_eq(y, b, mod(n))
+  (a : Num)
+  (n : Num)
+  {(i : Num) | i < (n : Num)}
+  {(a : Num) | coprime((a, (n : Num))) && a < n}
+  (a : Num) => MOD(a * (b : Num), (n : Num))
+  (b : Num)
+  (n : Num)
+  (n : Num) == 0
+  \226\136\128 n : Num, !(n == 1) && !prime(n) \226\134\146 2 * CARD({(a : Num) | a < n && euler_jacobi_pseudoprime(a, n)}) <= phi(n)
+  ((a : Num) <= DIV((b : Num), 2)) == (2 * a <= b)
+  \226\136\128 n : Num, !(n == 1) && !prime(n) \226\134\146 CARD({(a : Num) | a < n && euler_jacobi_pseudoprime(a, n)}) <= DIV(phi(n), 2)
+  (p : Num) < (n : Num) - 1 \226\134\146 2 * (a : Num) <= p \226\134\146 a < DIV(n, 2)
+  (n : Num)
+  \226\136\128 n : Num, !(n == 0) && !(n == 1) && !prime(n) \226\134\146 CARD({(a : Num) | a < n && euler_jacobi_pseudoprime(a, n)}) < DIV(n, 2)
+  (s : (A) -> Bool)
+  (a : A)
+  \226\136\128 x : (A) -> Num, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 k : (A) -> Bool, divides(n, EXP(m, 2)) && FINITE(k) \226\134\146 op_eq_eq(nproduct(k, (i : A) => m * x(i) + 1), m * nsum(k, x) + 1, mod(n))
+  EXP((a : Num), (k : Num)) == EXP(a, CARD(op_dot_dot(1, k)))
+  (i : A)
+  nproduct((s : (A) -> Bool), (i : A) => (m : Num) * ((k : (A) -> Num)(i) * (x : (A) -> Num)(i)) + 1)
+  \226\136\128 x : (A) -> Num, \226\136\128 k : (A) -> Num, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 s : (A) -> Bool, divides(n, EXP(m, 2)) && FINITE(s) \226\134\146 op_eq_eq(nproduct(s, (i : A) => EXP(m * x(i) + 1, k(i))), m * nsum(s, (i : A) => k(i) * x(i)) + 1, mod(n))
+  (a : Num) * (b : Num) * (m : Num) == b * (a * m)
+  (r : Num) < (e : Num) \226\134\146 e - 1 == r + (e - r - 1)
+  EVEN((m : Num)) == EVEN((n : Num)) \226\134\146 pow(-int_of_num(1), m) == pow(-int_of_num(1), n)
   ~
   \\/
   ~
@@ -22832,93 +22832,93 @@ Examples/pseudoprime quotations (409):
   \\/
   ~
   F
-  r + 2 <= (r + 1) * 2
-  {p | prime p /\\ p divides n}
-  2 EXP (r + 2)
-  2 EXP (r + 1)
-  \\p. index p n
-  d:num->num
-  SUC(r + 1) = r + 2
-  ~(n = 0) ==> n - 1 + 1 = n
-  (x + 1 == y + 1) (mod n) ==> (y == x) (mod n)
-  r < e ==> (r + 1) + e - r - 1 = e
-  2 EXP (r + 1)
-  forall a. (a * x == a * y) (mod (a * n)) /\\ ~(a = 0)\n          ==> (x == y) (mod n)
-  (nsum {p | prime p /\\ p divides n} (\\p. index p n * d p) ==\n     2 EXP (e - r - 1) * m) (mod 2)
-  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
-  d:num->num
-  2 * n <= n <=> n = 0
-  2 EXP (r + 1) * i = order p a
-  ~r /\\ ~q /\\ p ==> (p <=> q \\/ r \\/ s) ==> s
-  a EXP (order p a DIV 2)
+  (r : Num) + 2 <= (r + 1) * 2
+  {(p : Num) | prime(p) && divides(p, (n : Num))}
+  EXP(2, (r : Num) + 2)
+  EXP(2, (r : Num) + 1)
+  (p : Num) => index(p, (n : Num))
+  (d : (Num) -> Num)
+  SUC((r : Num) + 1) == r + 2
+  !((n : Num) == 0) \226\134\146 n - 1 + 1 == n
+  op_eq_eq((x : Num) + 1, (y : Num) + 1, mod((n : Num))) \226\134\146 op_eq_eq(y, x, mod(n))
+  (r : Num) < (e : Num) \226\134\146 r + 1 + (e - r - 1) == e
+  EXP(2, (r : Num) + 1)
+  \226\136\128 a : Num, op_eq_eq(a * (x : Num), a * (y : Num), mod(a * (n : Num))) && !(a == 0) \226\134\146 op_eq_eq(x, y, mod(n))
+  op_eq_eq(nsum({(p : Num) | prime(p) && divides(p, (n : Num))}, (p : Num) => index(p, n) * (d : (Num) -> Num)(p)), EXP(2, (e : Num) - (r : Num) - 1) * (m : Num), mod(2))
+  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
+  (d : (Num) -> Num)
+  (2 * (n : Num) <= n) == (n == 0)
+  EXP(2, (r : Num) + 1) * (i : Num) == order((p : Num), (a : Num))
+  !(r : Bool) && !(q : Bool) && (p : Bool) \226\134\146 p == (q || r || (s : Bool)) \226\134\146 s
+  EXP((a : Num), DIV(order((p : Num), a), 2))
   1
-  p:num
-  (a:int == -- &1) (mod p) <=> p divides (a + &1)
-  2 EXP (r + 1) * i = order p a
-  a + 1 = p ==> p - 1 = a
-  (p - 1) DIV 2 = order p a DIV 2 * q
-  (-- &1:int) pow (i * q) = -- &1 pow q
-  (&a:int) pow ((p - 1) DIV 2)
-  &3 <= p /\\ abs(x) <= &1 /\\ abs(y) <= &1 ==> abs(x - y:int) < p
-  &p:int
-  i * q:num
-  p - 1 = d ==> ~(p = 0) ==> d + 1 = p
-  q:num
-  p:num
-  a:num
-  j = r + 1
-  j <= r + 1 <=> j = r + 1 \\/ j <= r
-  e1 * m divides e2 * n\n           ==> coprime(e1:num,n) /\\ coprime(e2,m)\n                ==> e1 divides e2 /\\ m divides n
-  (x:int == -- &1) (mod p) /\\ (x == &1) (mod p)\n          ==> p divides &2
-  p ==> ~q <=> ~(p /\\ q)
-  (a:int == -- &1) (mod n) ==> (a pow 2 == &1) (mod n)
-  (x:int == y) (mod n) ==> forall p. p divides n ==> (x == y) (mod p)
-  &p:int
-  (a * 2) * b = a * b + a * b
-  2 EXP j * i divides 2 EXP (r + 1) * m /\\\n        ~(2 EXP j * i divides 2 EXP r * m)
-  j = r + 1
-  j = index 2 (order p a)
-  i:num
+  (p : Num)
+  op_eq_eq((a : Int), -int_of_num(1), mod((p : Int))) == divides(p, a + int_of_num(1))
+  EXP(2, (r : Num) + 1) * (i : Num) == order((p : Num), (a : Num))
+  (a : Num) + 1 == (p : Num) \226\134\146 p - 1 == a
+  DIV((p : Num) - 1, 2) == DIV(order(p, (a : Num)), 2) * (q : Num)
+  pow(-int_of_num(1), (i : Num) * (q : Num)) == pow(-int_of_num(1), q)
+  pow(int_of_num((a : Num)), DIV((p : Num) - 1, 2))
+  int_of_num(3) <= (p : Int) && abs((x : Int)) <= int_of_num(1) && abs((y : Int)) <= int_of_num(1) \226\134\146 abs(x - y) < p
+  int_of_num((p : Num))
+  (i : Num) * (q : Num)
+  (p : Num) - 1 == (d : Num) \226\134\146 !(p == 0) \226\134\146 d + 1 == p
+  (q : Num)
+  (p : Num)
+  (a : Num)
+  (j : Num) == (r : Num) + 1
+  ((j : Num) <= (r : Num) + 1) == (j == r + 1 || j <= r)
+  divides((e1 : Num) * (m : Num), (e2 : Num) * (n : Num)) \226\134\146 coprime((e1, n)) && coprime((e2, m)) \226\134\146 divides(e1, e2) && divides(m, n)
+  op_eq_eq((x : Int), -int_of_num(1), mod((p : Int))) && op_eq_eq(x, int_of_num(1), mod(p)) \226\134\146 divides(p, int_of_num(2))
+  ((p : Bool) \226\134\146 !(q : Bool)) == !(p && q)
+  op_eq_eq((a : Int), -int_of_num(1), mod((n : Int))) \226\134\146 op_eq_eq(pow(a, 2), int_of_num(1), mod(n))
+  op_eq_eq((x : Int), (y : Int), mod((n : Int))) \226\134\146 (\226\136\128 p : Int, divides(p, n) \226\134\146 op_eq_eq(x, y, mod(p)))
+  int_of_num((p : Num))
+  (a : Num) * 2 * (b : Num) == a * b + a * b
+  divides(EXP(2, (j : Num)) * (i : Num), EXP(2, (r : Num) + 1) * (m : Num)) && !divides(EXP(2, j) * i, EXP(2, r) * m)
+  (j : Num) == (r : Num) + 1
+  (j : Num) == index(2, order((p : Num), (a : Num)))
+  (i : Num)
   2
-  order p a
-  ODD 2
-  ODD p /\\ ~(p = 2)
-  coprime(a:num,n) ==> forall p. p divides n ==> coprime(p,a)
-  p:num
-  p:num
-  forall p. prime p /\\ p divides n\n        ==> ?d. jacobi(a,p) = --(&1) pow d /\\ 2 EXP (r + 1) * d + 1 = p
-  r:num
-  (x:int == y) (mod n) ==> p divides n ==> (x == y) (mod p)
-  m:num
-  forall n. ODD n /\\ m divides n ==> ODD m
-  coprime(a:num,n) /\\ p divides n ==> coprime(a,p)
-  p /\\ (p ==> q) ==> p /\\ q
-  x:int = &1 ==> x pow n = &1
-  p:num
-  (a:int == &1) (mod n) /\\ j = &1 ==> (j == a) (mod n)
-  (ee * m) * 2 + 0 = (2 * ee) * m
+  order((p : Num), (a : Num))
+  ODD(2)
+  ODD((p : Num)) && !(p == 2)
+  coprime(((a : Num), (n : Num))) \226\134\146 (\226\136\128 p : Num, divides(p, n) \226\134\146 coprime((p, a)))
+  (p : Num)
+  (p : Num)
+  \226\136\128 p : Num, prime(p) && divides(p, (n : Num)) \226\134\146 (\226\136\131 d : Num, jacobi(((a : Num), p)) == pow(-int_of_num(1), d) && EXP(2, (r : Num) + 1) * d + 1 == p)
+  (r : Num)
+  op_eq_eq((x : Int), (y : Int), mod((n : Int))) \226\134\146 divides((p : Int), n) \226\134\146 op_eq_eq(x, y, mod(p))
+  (m : Num)
+  \226\136\128 n : Num, ODD(n) && divides((m : Num), n) \226\134\146 ODD(m)
+  coprime(((a : Num), (n : Num))) && divides((p : Num), n) \226\134\146 coprime((a, p))
+  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+  (x : Int) == int_of_num(1) \226\134\146 pow(x, (n : Num)) == int_of_num(1)
+  (p : Num)
+  op_eq_eq((a : Int), int_of_num(1), mod((n : Int))) && (j : Int) == int_of_num(1) \226\134\146 op_eq_eq(j, a, mod(n))
+  (ee : Num) * (m : Num) * 2 + 0 == 2 * ee * m
   0
-  (2 EXP e * m) DIV 2 = 2 EXP (e - 1) * m
-  ~(e = 0)
-  2 EXP e * m = n - 1
-  m:num
-  e = index 2 (n - 1)
-  n - 1 = 0 <=> n = 0 \\/ n = 1
+  DIV(EXP(2, (e : Num)) * (m : Num), 2) == EXP(2, e - 1) * m
+  !((e : Num) == 0)
+  EXP(2, (e : Num)) * (m : Num) == (n : Num) - 1
+  (m : Num)
+  (e : Num) == index(2, (n : Num) - 1)
+  ((n : Num) - 1 == 0) == (n == 0 || n == 1)
   2
-  n - 1
-  (x:int == n - z) (mod n) <=> (x == --z) (mod n)
-  n = 1
-  n = 0
-  coprime(a:num,n)
-  n = 2
-  n:num
-  a:num
-  forall a q. miller_rabin_pseudoprime a q /\\ ~(q = 2)\n         ==> euler_jacobi_pseudoprime a q
-  (q ==> r) /\\ (p ==> q)\n    ==> (p <=> r) ==> (p <=> q)
-  n:num
-  a:num
-  n = 2
-  forall a n. ~(n = 2) /\\ (?p k. prime p /\\ ODD p /\\ p EXP k = n) \\/\n         (n == 3) (mod 4)\n         ==> (miller_rabin_pseudoprime a n <=> euler_jacobi_pseudoprime a n)
+  (n : Num) - 1
+  op_eq_eq((x : Int), (n : Int) - (z : Int), mod(n)) == op_eq_eq(x, -z, mod(n))
+  (n : Num) == 1
+  (n : Num) == 0
+  coprime(((a : Num), (n : Num)))
+  (n : Num) == 2
+  (n : Num)
+  (a : Num)
+  \226\136\128 a : Num, \226\136\128 q : Num, miller_rabin_pseudoprime(a, q) && !(q == 2) \226\134\146 euler_jacobi_pseudoprime(a, q)
+  ((q : Bool) \226\134\146 (r : Bool)) && ((p : Bool) \226\134\146 q) \226\134\146 p == r \226\134\146 p == q
+  (n : Num)
+  (a : Num)
+  (n : Num) == 2
+  \226\136\128 a : Num, \226\136\128 n : Num, !(n == 2) && (\226\136\131 p : Num, \226\136\131 k : Num, prime(p) && ODD(p) && EXP(p, k) == n) || op_eq_eq(n, 3, mod(4)) \226\134\146 miller_rabin_pseudoprime(a, n) == euler_jacobi_pseudoprime(a, n)
 CARD_SUBSET_HALF_LEMMA =  |- (#forall:fun(fun(fun('A,'A),bool),bool) (\f:fun('A,'A). (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\t:fun('A,bool). (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('A,bool),bool) t:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#CARD:fun(fun('A,bool),num) t:fun('A,bool))) n:num)) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) t:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) ((#IMAGE:fun(fun('A,'A),fun(fun('A,bool),fun('A,bool))) f:fun('A,'A)) s:fun('A,bool))) ((#DIFF:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) t:fun('A,bool)) s:fun('A,bool)))) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) s:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) s:fun('A,bool))) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (f:fun('A,'A) y:'A))))) ((#=:fun('A,fun('A,bool)) x:'A) y:'A))))))))))) ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#CARD:fun(fun('A,bool),num) s:fun('A,bool)))) n:num))))))))))
 fermat_pseudoprime =  |- (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#fermat_pseudoprime:fun(num,fun(num,bool)) a:num) n:num)) (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#EXP:fun(num,fun(num,num)) a:num) ((#-:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#num_mod:fun(num,fun(num,fun(num,bool))) n:num)))))))
 carmichael_number =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#carmichael_number:fun(num,bool) n:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#prime:fun(num,bool) n:num))) (#forall:fun(fun(num,bool),bool) (\a:num. ((#==>:fun(bool,fun(bool,bool)) (#num_coprime:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) a:num) n:num))) ((#fermat_pseudoprime:fun(num,fun(num,bool)) a:num) n:num)))))))))
