@@ -5707,284 +5707,284 @@ CPU time (user): <t>
 CPU time (user): <t>
 CPU time (user): <t>
 Examples/dlo quotations (278):
-  T
-  (<)
-  forall x. ~(~ x) <=> x
-  forall a b. (a ==> b) <=> (~a \\/ b)
-  forall a b. (a = b) <=> (a /\\ b \\/ ~a /\\ ~b)
-  forall a b. ~(a /\\ b) <=> (~a \\/ ~b)
-  forall a b. ~(a \\/ b) <=> (~a /\\ ~b)
-  forall a b. ~(a ==> b) <=> (a /\\ ~b)
-  forall a b. ~(a = b) <=> (a /\\ ~b \\/ ~a /\\ b)
-  forall p q0 q1. ~(p /\\ q0 \\/ ~p /\\ q1) <=> (p /\\ ~q0 \\/ ~p /\\ ~q1)
-  ~(?!x. P x) <=> (forall x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')
-  ~(p /\\ q \\/ ~p /\\ r) <=> p /\\ ~q \\/ ~p /\\ ~r
-  (p = q) <=> (p /\\ q) \\/ (~p /\\ ~q)
-  ~(p = q) <=> (p /\\ ~q) \\/ (~p /\\ q)
-  p ==> q <=> ~p \\/ q
-  ~(p ==> q) <=> p /\\ ~q
-  ~(p \\/ q) <=> ~p /\\ ~q
-  ~(p /\\ q) <=> ~p \\/ ~q
-  ~(~p) <=> p
-  (/\\)
-  (\\/)
-  (MINL [] default = default) /\\\n   (MINL (CONS h t) default = min h (MINL t default))
-  (MAXL [] default = default) /\\\n   (MAXL (CONS h t) default = max h (MAXL t default))
-  forall x y z. max x y < z <=> x < z /\\ y < z
-  forall x y z. x < real_min y z <=> x < y /\\ x < z
-  t:real list
-  t:real list
-  forall left x lefts. ALL (\\l. l < x) (CONS left lefts) <=> MAXL lefts left < x
-  t:real list
-  t:real list
-  forall right x rights.\n        ALL (\\r. x < r) (CONS right rights) <=> x < MINL rights right
-  (x + y) / &2
-  forall x y. x < y ==> ?z. x < z /\\ z < y
-  x + &1
-  forall x. ?y. x < y
-  x - &1
-  forall x. ?y. y < x
-  ~(s = t) <=> (s < t \\/ t < s)
-  ~(s < t) <=> ((s = t) \\/ (t < s))
-  forall l ls. (?x. ALL (\\l. l < x) (CONS l ls)) <=> T
-  forall r rs. (?x. ALL (\\r. x < r) (CONS r rs)) <=> T
-  forall l ls r rs.\n        (?x. ALL (\\l. l < x) (CONS l ls) /\\ ALL (\\r. x < r) (CONS r rs)) <=>\n        ALL (\\l. ALL (\\r. l < r) (CONS r rs)) (CONS l ls)
+  true
+  op_lt
+  \226\136\128 x : Bool, !!x == x
+  \226\136\128 a : Bool, \226\136\128 b : Bool, (a \226\134\146 b) == (!a || b)
+  \226\136\128 a : Bool, \226\136\128 b : Bool, (a == b) == (a && b || !a && !b)
+  \226\136\128 a : Bool, \226\136\128 b : Bool, !(a && b) == (!a || !b)
+  \226\136\128 a : Bool, \226\136\128 b : Bool, !(a || b) == (!a && !b)
+  \226\136\128 a : Bool, \226\136\128 b : Bool, !(a \226\134\146 b) == (a && !b)
+  \226\136\128 a : Bool, \226\136\128 b : Bool, !(a == b) == (a && !b || !a && b)
+  \226\136\128 p : Bool, \226\136\128 q0 : Bool, \226\136\128 q1 : Bool, !(p && q0 || !p && q1) == (p && !q0 || !p && !q1)
+  !existsunique((x : _) => (P : (_) -> Bool)(x)) == ((\226\136\128 x : _, !P(x)) || (\226\136\131 x : _, \226\136\131 x' : _, P(x) && P(x') && !(x == x')))
+  !((p : Bool) && (q : Bool) || !p && (r : Bool)) == (p && !q || !p && !r)
+  ((p : Bool) == (q : Bool)) == (p && q || !p && !q)
+  !((p : Bool) == (q : Bool)) == (p && !q || !p && q)
+  ((p : Bool) \226\134\146 (q : Bool)) == (!p || q)
+  !((p : Bool) \226\134\146 (q : Bool)) == (p && !q)
+  !((p : Bool) || (q : Bool)) == (!p && !q)
+  !((p : Bool) && (q : Bool)) == (!p || !q)
+  !!(p : Bool) == p
+  op_slash_bslash
+  op_bslash_slash
+  (MINL : (List[Real], Real) -> Real)(NIL, (default : Real)) == default && MINL(CONS((h : Real), (t : List[Real])), default) == min(h, MINL(t, default))
+  (MAXL : (List[Real], Real) -> Real)(NIL, (default : Real)) == default && MAXL(CONS((h : Real), (t : List[Real])), default) == max(h, MAXL(t, default))
+  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (max(x, y) < z) == (x < z && y < z)
+  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x < min(y, z)) == (x < y && x < z)
+  (t : List[Real])
+  (t : List[Real])
+  \226\136\128 left : Real, \226\136\128 x : Real, \226\136\128 lefts : List[Real], ALL((l : Real) => l < x, CONS(left, lefts)) == (MAXL(lefts, left) < x)
+  (t : List[Real])
+  (t : List[Real])
+  \226\136\128 right : Real, \226\136\128 x : Real, \226\136\128 rights : List[Real], ALL((r : Real) => x < r, CONS(right, rights)) == (x < MINL(rights, right))
+  ((x : Real) + (y : Real)) / real_of_num(2)
+  \226\136\128 x : Real, \226\136\128 y : Real, x < y \226\134\146 (\226\136\131 z : Real, x < z && z < y)
+  (x : Real) + real_of_num(1)
+  \226\136\128 x : Real, \226\136\131 y : Real, x < y
+  (x : Real) - real_of_num(1)
+  \226\136\128 x : Real, \226\136\131 y : Real, y < x
+  !((s : Real) == (t : Real)) == (s < t || t < s)
+  !((s : Real) < (t : Real)) == (s == t || t < s)
+  \226\136\128 l : Real, \226\136\128 ls : List[Real], (\226\136\131 x : Real, ALL((l : Real) => l < x, CONS(l, ls))) == true
+  \226\136\128 r : Real, \226\136\128 rs : List[Real], (\226\136\131 x : Real, ALL((r : Real) => x < r, CONS(r, rs))) == true
+  \226\136\128 l : Real, \226\136\128 ls : List[Real], \226\136\128 r : Real, \226\136\128 rs : List[Real], (\226\136\131 x : Real, ALL((l : Real) => l < x, CONS(l, ls)) && ALL((r : Real) => x < r, CONS(r, rs))) == ALL((l : Real) => ALL((r : Real) => l < r, CONS(r, rs)), CONS(l, ls))
   :real
-  a /\\ T <=> a
-  ((?x. x = x) <=> T) /\\\n     ((?x. x = t) <=> T) /\\\n     ((?x. t = x) <=> T) /\\\n     ((?x. (x = t) /\\ P x) <=> P t) /\\\n     ((?x. (t = x) /\\ P x) <=> P t)
-  (?x. (x = x) /\\ P x) <=> (?x. P x)
-  forall P. (forall x. P x) <=> ~ (?x. ~ P x)
-  (~)
-  (\\/)
-  T
-  F
-  forall x y. x <= y \\/ x < y
-  forall x y. x <= y \\/ x > y
-  forall a b. ?x. ~(x = a) \\/ ~(x = b) \\/ (a = b:real)
-  forall x. x < a ==> x <= b
-  forall x. x < a ==> x < b
-  forall a b. (forall x. x < a ==> x < b) <=> (a <= b)
-  ?z. z < x /\\ x < y
-  forall x y . x < y
-  forall y. x < y /\\ y < z ==> w < z
-  forall x y z. ?u. u < x /\\ u < y /\\ u < z
-  ?z. x < z /\\ z <= y
-  ?z. x <= z /\\ z <= y
-  ?z. x < z /\\ z < y
-  ?x.(x = x) /\\ (x = y)
-  ?x. x = x:real
-  forall x y. ~(x = y) ==> ?u. u < x /\\ (y < u \\/ x < y)
-  forall x y. x < y ==> ?z. x < z /\\ z < y
-  forall x y. ?z. z < x /\\ z < y
-  forall x y. ?z. z < x /\\ x < y
-  ?x y. x < y /\\ y < x
-  forall x y. x < y \\/ (x = y) \\/ y < x
-  forall x y. x < y \\/ (x = y) \\/ y < x
-  forall x y z. x < y /\\ y < z ==> x < z
-  forall x. ?y. x < y
-  forall a b. (forall x. (x < a) <=> (x < b)) <=> (a = b)
-  forall x. x < a ==> x < b
-  ?z. x < z /\\ z < y
-  ?z. x < x /\\ z < y
-  forall x y. ?z. z < x /\\ z < y
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
-  s > t <=> t < s
-  s >= t <=> ~(s < t)
-  s <= t <=> ~(t < s)
+  ((a : Bool) && true) == a
+  (\226\136\131 x : _, x == x) == true && (\226\136\131 x : _, x == (t : _)) == true && (\226\136\131 x : _, t == x) == true && (\226\136\131 x : _, x == t && (P : (_) -> Bool)(x)) == P(t) && (\226\136\131 x : _, t == x && P(x)) == P(t)
+  (\226\136\131 x : _, x == x && (P : (_) -> Bool)(x)) == (\226\136\131 x : _, P(x))
+  \226\136\128 P : (_) -> Bool, (\226\136\128 x : _, P(x)) == !(\226\136\131 x : _, !P(x))
+  op_tilde
+  op_bslash_slash
+  true
+  false
+  \226\136\128 x : Real, \226\136\128 y : Real, x <= y || x < y
+  \226\136\128 x : Real, \226\136\128 y : Real, x <= y || x > y
+  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\131 x : Real, !(x == a) || !(x == b) || a == b
+  \226\136\128 x : Real, x < (a : Real) \226\134\146 x <= (b : Real)
+  \226\136\128 x : Real, x < (a : Real) \226\134\146 x < (b : Real)
+  \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 x : Real, x < a \226\134\146 x < b) == (a <= b)
+  \226\136\131 z : Real, z < (x : Real) && x < (y : Real)
+  \226\136\128 x : Real, \226\136\128 y : Real, x < y
+  \226\136\128 y : Real, (x : Real) < y && y < (z : Real) \226\134\146 (w : Real) < z
+  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, \226\136\131 u : Real, u < x && u < y && u < z
+  \226\136\131 z : Real, (x : Real) < z && z <= (y : Real)
+  \226\136\131 z : Real, (x : Real) <= z && z <= (y : Real)
+  \226\136\131 z : Real, (x : Real) < z && z < (y : Real)
+  \226\136\131 x : _, x == x && x == (y : _)
+  \226\136\131 x : Real, x == x
+  \226\136\128 x : Real, \226\136\128 y : Real, !(x == y) \226\134\146 (\226\136\131 u : Real, u < x && (y < u || x < y))
+  \226\136\128 x : Real, \226\136\128 y : Real, x < y \226\134\146 (\226\136\131 z : Real, x < z && z < y)
+  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\131 z : Real, z < x && z < y
+  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\131 z : Real, z < x && x < y
+  \226\136\131 x : Real, \226\136\131 y : Real, x < y && y < x
+  \226\136\128 x : Real, \226\136\128 y : Real, x < y || x == y || y < x
+  \226\136\128 x : Real, \226\136\128 y : Real, x < y || x == y || y < x
+  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, x < y && y < z \226\134\146 x < z
+  \226\136\128 x : Real, \226\136\131 y : Real, x < y
+  \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 x : Real, (x < a) == (x < b)) == (a == b)
+  \226\136\128 x : Real, x < (a : Real) \226\134\146 x < (b : Real)
+  \226\136\131 z : Real, (x : Real) < z && z < (y : Real)
+  \226\136\131 z : Real, (x : Real) < x && z < (y : Real)
+  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\131 z : Real, z < x && z < y
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
+  ((s : Real) > (t : Real)) == (t < s)
+  ((s : Real) >= (t : Real)) == !(s < t)
+  ((s : Real) <= (t : Real)) == !(t < s)
 MINL =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#MINL:fun(list(real),fun(real,real)) #NIL:list(real)) default:real)) default:real)) ((#=:fun(real,fun(real,bool)) ((#MINL:fun(list(real),fun(real,real)) ((#CONS:fun(real,fun(list(real),list(real))) h:real) t:list(real))) default:real)) ((#real_min:fun(real,fun(real,real)) h:real) ((#MINL:fun(list(real),fun(real,real)) t:list(real)) default:real))))
 MAXL =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#MAXL:fun(list(real),fun(real,real)) #NIL:list(real)) default:real)) default:real)) ((#=:fun(real,fun(real,bool)) ((#MAXL:fun(list(real),fun(real,real)) ((#CONS:fun(real,fun(list(real),list(real))) h:real) t:list(real))) default:real)) ((#real_max:fun(real,fun(real,real)) h:real) ((#MAXL:fun(list(real),fun(real,real)) t:list(real)) default:real))))
 MAX_LT =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. (#forall:fun(fun(real,bool),bool) (\z:real. ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) ((#real_max:fun(real,fun(real,real)) x:real) y:real)) z:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)) ((#real_lt:fun(real,fun(real,bool)) y:real) z:real)))))))))
