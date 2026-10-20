@@ -86646,641 +86646,641 @@ Translating certificate to HOL inferences
 0..0..1..2..8..18..55..115..331..655..solved at 1095
 0..0..solved at 2
 Autoformalization/three_squares quotations (1104):
-  d + &1
-  d:int
-  r * &2 <= q
-  d = x div q
-  r = x rem q
-  q:int
-  x:int
-  forall x q:int. &0 < q ==> ?b. abs(x - q * b) * &2 <= q
-  (abs a * &2) pow 2 <= q pow 2
-  forall a q:int. abs a * &2 <= q ==> &4 * a pow 2 <= q pow 2
-  &0 <= a /\\ &0 < b ==> &0 < a + b
-  A11 * (A11*x pow 2 + &2*A12*x*y + A22*y pow 2) =\n      (A11*x + A12*y) pow 2 + (A11*A22 - A12 pow 2) * y pow 2
-  &0 < A11 *\n       (A11*x pow 2 + &2*A12*x*y + A22*y pow 2)
-  A11*x pow 2 + &2*A12*x*y + A22*y pow 2 = A11 * x pow 2
-  ~(x = &0 /\\ y = &0)
-  ~(x = &0)
-  y = &0
-  forall A11 A12 A22:int.\n     &0 < A11 /\\ &0 < A11 * A22 - A12 pow 2\n     ==> forall x y. ~(x = &0 /\\ y = &0)\n               ==> &0 < A11 * x pow 2 + &2 * A12 * x * y + A22 * y pow 2
-  A11 * x pow 2 + &2*A12*x*y + A22*y pow 2 = n
-  x - r * y:int
-  y:int
-  A11 * A22' - A12' pow 2 = &1
-  A11:int
-  A12':int
-  A22':int
-  &4 <= A11 * A11
-  &4 * (A11*A22') <= &4 + A11 pow 2
-  &4 + A11 pow 2
-  A11 * (&4 * A22') < A11 * (&4 * A11)
-  &2 * A11
-  &4 <= A11 * A11
-  &2 <= A11
-  abs A12' * &2 <= A11
-  A11 * A22' = &1 + A12' pow 2
-  &4 * (A11 * A22') <= &4 + A11 pow 2
-  A22' < A11
-  A12':int
-  A11 * A22' = &1 + A12' pow 2
-  &0 < A11 * A22'
-  &0 < A22'
-  A11 * A22 - A12 pow 2 = &1
-  A11 * A22' - A12' pow 2 = &1
-  A12 + A11 * --b = A12 - A11 * b
-  abs (A12 - A11 * b) * &2 <= A11
-  abs A12' * &2 <= A11
-  A22' = A11*r pow 2 + &2*A12*r + A22
-  A12' = A12 + A11 * r
-  r = --b:int
-  b:int
-  A11:int
-  A12:int
-  A11 * A22 - A12 pow 2 = &1
-  A22 = &1 + A12 pow 2
-  A11 * x pow 2 + &2*A12*x*y + A22*y pow 2 = n
-  y:int
-  x + A12 * y:int
-  A11 = &1
-  y:int
-  x:int
-  abs:int->int
-  forall A11. &0 < A11\n   ==> forall A12 A22. A11 * A22 - A12 pow 2 = &1\n       ==> forall n. (?x y. A11 * x pow 2 + &2 * A12 * x * y + A22 * y pow 2 = n)\n               ==> ?u v:int. u pow 2 + v pow 2 = n
-  forall a11 a12 a13 a22 a23 a33 x1 x2 x3:int.\n    a11 * (a11 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n           &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 + &2 * a23 * x2 * x3) =\n    (a11 * x1 + a12 * x2 + a13 * x3) pow 2 +\n    ((a11 * a22 - a12 pow 2) * x2 pow 2 +\n     &2 * (a11 * a23 - a12 * a13) * x2 * x3 +\n     (a11 * a33 - a13 pow 2) * x3 pow 2)
-  u pow 2 + v pow 2 = n - L pow 2
-  v:int
-  u:int
-  L:int
-  v:int
-  u:int
-  x3:int
-  x2:int
-  x1:int
-  a33:int
-  a23:int
-  a22:int
-  a13:int
-  a12:int
-  &1:int
-  x3:int
-  x2:int
-  n - L pow 2
-  G22:int
-  G12:int
-  G11:int
-  L = x1 + a12*x2 + a13*x3
-  &0 < &1*a22 - a12 pow 2
-  &0 < G11
-  &1*(a22*a33 - a23 pow 2) - a12*(a12*a33 - a23*a13) +\n      a13*(a12*a23 - a22*a13) = &1
-  G11 * G22 - G12 pow 2 = &1
-  G22 = a33 - a13 pow 2
-  G12 = a23 - a12 * a13
-  G11 = a22 - a12 pow 2
-  forall a12 a13 a22 a23 a33 n:int.\n     &0 < &1 * a22 - a12 pow 2 /\\\n     &1 * (a22 * a33 - a23 pow 2) - a12 * (a12 * a33 - a23 * a13) +\n       a13 * (a12 * a23 - a22 * a13) = &1 /\\\n     (?x1 x2 x3. &1 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n                 &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 +\n                 &2 * a23 * x2 * x3 = n)\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n
-  a * (u1' * x + u2' * y) + u3 * z = &1
-  u1' * x' + u2' * y' = &1
-  u2 = a * u2'
-  u1 = a * u1'
-  u1'*x + u2'*y:int
-  &0:int
-  --(u2' * z):int
-  x':int
-  --(u1' * z):int
-  --y':int
-  u2 = a * u2'
-  u1 = a * u1'
-  u1 * x + u2 * y + u3 * z = &1
-  a * (u1'*x + u2'*y) + u3 * z = &1
-  u2 = a * u2'
-  u1 = a * u1'
-  a = u1 * x' + u2 * y'
-  a * (u1'*x' + u2'*y') = a * &1
-  u1' * x' + u2' * y' = &1
-  u2':int
-  u1':int
-  ~(u1 = &0 /\\ u2 = &0)
-  &0 < a
-  a = gcd(u1,u2)
-  u2:int
-  u1:int
-  u1*x+u2*y+u3*z = &1
-  &0:int
-  &0:int
-  &1:int
-  &0:int
-  &0:int
-  z:int
-  u1 = &0 /\\ u2 = &0
-  forall u1 u2 u3:int. (?x y z. u1 * x + u2 * y + u3 * z = &1)\n     ==> ?c12 c13 c22 c23 c32 c33.\n            u1 * (c22 * c33 - c23 * c32) -\n            c12 * (u2 * c33 - c23 * u3) +\n            c13 * (u2 * c32 - c22 * u3) = &1
-  u1:int
-  u1:int
-  u1:int
-  u1:int
-  u2:int
-  u2:int
-  u2:int
-  u2:int
-  A11*(y'+r*x') pow 2 + &2*A12*(y'+r*x')*x' + A22*x' pow 2 =\n      A22' * x' pow 2 + &2 * A12' * x' * y' + A11 * y' pow 2
-  ~(x' = &0 /\\ y' = &0)
-  x' = &0
-  x':int
-  y' + r * x':int
-  y':int
-  x':int
-  A11 * A22' - A12' pow 2 = D
-  A11:int
-  A12':int
-  A22':int
-  &4 * D < &3 * A11 pow 2
-  &4 * (A11*A22') <= &4 * D + A11 pow 2
-  &4 * D + A11 pow 2
-  A11 * (&4 * A22') < A11 * (&4 * A11)
-  &4 * D < &3 * A11 pow 2
-  abs A12' * &2 <= A11
-  A11 * A22' = D + A12' pow 2
-  &4 * (A11 * A22') <= &4 * D + A11 pow 2
-  A22' < A11
-  A11 * (&1:int) pow 2 + &2*A12*(&1)*(&0) + A22*(&0) pow 2 = A11
-  &0:int
-  &1:int
-  &3 * A11 pow 2 <= &4 * D
-  A12':int
-  A11 * A22' = D + A12' pow 2
-  &0 < A11 * A22'
-  &0 < A22'
-  A11 * A22 - A12 pow 2 = D
-  A11 * A22' - A12' pow 2 = D
-  A12 + A11 * --b = A12 - A11 * b
-  abs (A12 - A11 * b) * &2 <= A11
-  abs A12' * &2 <= A11
-  A22' = A11*r pow 2 + &2*A12*r + A22
-  A12' = A12 + A11 * r
-  r = --b:int
-  b:int
-  A11:int
-  A12:int
-  abs:int->int
-  forall D. &0 < D ==>\n     forall A11. &0 < A11\n       ==> forall A12 A22. A11 * A22 - A12 pow 2 = D\n           ==> ?x y. ~(x = &0 /\\ y = &0) /\\\n                     &3 * (A11 * x pow 2 + &2 * A12 * x * y +\n                           A22 * y pow 2) pow 2\n                       <= &4 * D
-  y':int
-  y * x':int
-  x * x':int
-  d = e * x' + c * y'
-  e = a * x + b * y
-  d:int
-  d:int
-  c:int
-  e:int
-  e:int
-  b:int
-  a:int
-  forall a b c:int. ?d. d divides a /\\ d divides b /\\ d divides c /\\\n                   (?x y z. d = a * x + b * y + c * z)
-  mn = a11*x' pow 2 + a22*y pow 2 + a33*z pow 2 +\n                      &2*a12*x'*y + &2*a13*x'*z + &2*a23*y*z
-  s:int
-  q:int
-  p:int
-  a11*p pow 2 + a22*q pow 2 + a33*s pow 2 +\n    &2*a12*p*q + &2*a13*p*s + &2*a23*q*s
-  s:int
-  q:int
-  p:int
-  z:int
-  y:int
-  x':int
-  mn:int
-  &0:int
-  &0:int
-  &1:int
-  &0:int
-  &0:int
-  &1:int
-  a11*(&1) pow 2 + a22*(&0) pow 2 + a33*(&0) pow 2 +\n               &2*a12*(&1)*(&0) + &2*a13*(&1)*(&0) + &2*a23*(&0)*(&0)
-  ?v. &0 <= v /\\\n        (?x y z. ~(x = &0 /\\ y = &0 /\\ z = &0) /\\\n                 v = a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n                     &2*a12*x*y + &2*a13*x*z + &2*a23*y*z)
-  P:int->bool
-  \\v:int. ?x y z. ~(x = &0 /\\ y = &0 /\\ z = &0) /\\\n                v = a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n                    &2*a12*x*y + &2*a13*x*z + &2*a23*y*z
-  forall a11 a12 a13 a22 a23 a33:int.\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> &0 < a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                       &2 * a12 * x * y + &2 * a13 * x * z + &2 * a23 * y * z)\n     ==> ?v1 v2 v3.\n            ~(v1 = &0 /\\ v2 = &0 /\\ v3 = &0) /\\\n            (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n                     ==> a11 * v1 pow 2 + a22 * v2 pow 2 + a33 * v3 pow 2 +\n                         &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n                         &2 * a23 * v2 * v3\n                         <= a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                            &2 * a12 * x * y + &2 * a13 * x * z +\n                            &2 * a23 * y * z)
-  g pow 2 = &1
-  g = (g*w1)*x + (g*w2)*y + (g*w3)*z
-  g*z:int
-  g*y:int
-  g*x:int
-  &1 <= x <=> &0 < x
-  &1 <= g pow 2
-  &1 * Fw = Fw
-  a11*(g*w1) pow 2 + a22*(g*w2) pow 2 + a33*(g*w3) pow 2 +\n      &2*a12*(g*w1)*(g*w2) + &2*a13*(g*w1)*(g*w3) +\n      &2*a23*(g*w2)*(g*w3) = g pow 2 * Fw
-  w3:int
-  w2:int
-  w1:int
-  forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> a11*(g*w1) pow 2 + a22*(g*w2) pow 2 +\n                  a33*(g*w3) pow 2 + &2*a12*(g*w1)*(g*w2) +\n                  &2*a13*(g*w1)*(g*w3) + &2*a23*(g*w2)*(g*w3)\n                  <= a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n                     &2*a12*x*y + &2*a13*x*z + &2*a23*y*z
-  &0 < Fw
-  Fw = a11*w1 pow 2 + a22*w2 pow 2 + a33*w3 pow 2 +\n                     &2*a12*w1*w2 + &2*a13*w1*w3 + &2*a23*w2*w3
-  g pow 2 = &1
-  w1 * x + w2 * y + w3 * z = &1
-  ~(w1 = &0 /\\ w2 = &0 /\\ w3 = &0)
-  g = (g*w1)*x + (g*w2)*y + (g*w3)*z
-  g * (w1*x+w2*y+w3*z) = g * &1
-  w1 * x + w2 * y + w3 * z = &1
-  ~(g * w1 = &0 /\\ g * w2 = &0 /\\ g * w3 = &0)
-  ~(g = &0)
-  w3:int
-  w2:int
-  w1:int
-  g:int
-  v3:int
-  v2:int
-  v1:int
-  forall a11 a12 a13 a22 a23 a33 v1 v2 v3:int.\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> &0 < a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                       &2 * a12 * x * y + &2 * a13 * x * z +\n                       &2 * a23 * y * z) /\\\n     ~(v1 = &0 /\\ v2 = &0 /\\ v3 = &0) /\\\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> a11 * v1 pow 2 + a22 * v2 pow 2 + a33 * v3 pow 2 +\n                  &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n                  &2 * a23 * v2 * v3\n                  <= a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                     &2 * a12 * x * y + &2 * a13 * x * z + &2 * a23 * y * z)\n     ==> ?x y z. v1 * x + v2 * y + v3 * z = &1
-  v1:int
-  v1:int
-  v1:int
-  v1:int
-  v2:int
-  v2:int
-  v2:int
-  v2:int
-  v3:int
-  v3:int
-  v3:int
-  v3:int
-  v1:int
-  v2:int
-  v3:int
-  v1:int
-  v2:int
-  v1:int
-  v1:int
-  v2:int
-  v3:int
-  forall a11 a12 a13 a22 a23 a33:int.\n    (a11 * a22 - a12 pow 2) * (a11 * a33 - a13 pow 2) -\n    (a11 * a23 - a12 * a13) pow 2 =\n    a11 * (a11 * (a22 * a33 - a23 pow 2) -\n           a12 * (a12 * a33 - a23 * a13) +\n           a13 * (a12 * a23 - a22 * a13))
-  &2 pow 3
-  forall a:int. &2 <= a ==> &8 <= a pow 3
-  &4 * (a11*x1 + a12*s + a13*t) pow 2 <= a11 pow 2
-  a11 * a11 <= a11 * (a11*x1 pow 2 + a22*s pow 2 + a33*t pow 2 +\n            &2*a12*x1*s + &2*a13*x1*t + &2*a23*s*t)
-  forall a11 a12 a13 a22 a23 a33 x1 s t Gst:int.\n     &0 < a11 /\\\n     a11 <= a11 * x1 pow 2 + a22 * s pow 2 + a33 * t pow 2 +\n             &2 * a12 * x1 * s + &2 * a13 * x1 * t + &2 * a23 * s * t /\\\n     &4 * (a11 * x1 + a12 * s + a13 * t) pow 2 <= a11 pow 2 /\\\n     a11 * (a11 * x1 pow 2 + a22 * s pow 2 + a33 * t pow 2 +\n            &2 * a12 * x1 * s + &2 * a13 * x1 * t + &2 * a23 * s * t) =\n       (a11 * x1 + a12 * s + a13 * t) pow 2 + Gst\n     ==> &3 * a11 pow 2 <= &4 * Gst
-  &3 * G pow 2 <= &4 * a
-  a pow 2 pow 2 = a pow 3 * a
-  &3 pow 2 * a pow 2 pow 2 <= &4 pow 2 * G pow 2
-  &16 * (&3 * G pow 2)
-  a:int
-  (&3 * a pow 2) pow 2 <= (&4 * G) pow 2
-  forall a G:int.\n     &0 < a /\\ &0 < G /\\\n     &3 * a pow 2 <= &4 * G /\\ &3 * G pow 2 <= &4 * a\n     ==> &27 * a pow 3 <= &64
-  G22:int
-  G12:int
-  G11:int
-  &0 <= a /\\ &0 < b ==> &0 < a + b
-  ~(x = &0 /\\ y = &0 /\\ z = &0)
-  ~(x = &0)
-  y = &0 /\\ z = &0
-  z:int
-  y:int
-  x:int
-  a33:int
-  a23:int
-  a22:int
-  a13:int
-  a12:int
-  a11:int
-  a11 * (a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n           &2*a12*x*y + &2*a13*x*z + &2*a23*y*z) =\n    (a11*x + a12*y + a13*z) pow 2 + (G11*y pow 2 + &2*G12*y*z + G22*z pow 2)
-  &0 < a11 *\n     (a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n      &2*a12*x*y + &2*a13*x*z + &2*a23*y*z)
-  (a11*a22 - a12 pow 2)*(a11*a33 - a13 pow 2) - (a11*a23 - a12*a13) pow 2 =\n      a11 * (a11*(a22*a33 - a23 pow 2) - a12*(a12*a33 - a23*a13) +\n             a13*(a12*a23 - a22*a13))
-  &0 < G11 * G22 - G12 pow 2
-  G22 = a11*a33 - a13 pow 2
-  G12 = a11*a23 - a12*a13
-  G11 = a11*a22 - a12 pow 2
-  forall a11 a12 a13 a22 a23 a33:int.\n     &0 < a11 /\\ &0 < a11 * a22 - a12 pow 2 /\\\n     &0 < a11 * (a22 * a33 - a23 pow 2) -\n          a12 * (a12 * a33 - a23 * a13) +\n          a13 * (a12 * a23 - a22 * a13)\n     ==> forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n                 ==> &0 < a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                          &2 * a12 * x * y + &2 * a13 * x * z +\n                          &2 * a23 * y * z
-  u1*(c22*c33 - c23*c32) - c12*(u2*c33 - c23*u3) +\n    c13*(u2*c32 - c22*u3) = &1
-  (u2*c32 - u3*c22)*X1 + (u3*c12 - u1*c32)*X2 + (u1*c22 - u2*c12)*X3
-  (c23*u3 - u2*c33)*X1 + (u1*c33 - c13*u3)*X2 + (c13*u2 - u1*c23)*X3
-  (c22*c33 - c23*c32)*X1 + (c13*c32 - c12*c33)*X2 + (c12*c23 - c13*c22)*X3
-  forall u1 u2 u3 c12 c22 c32 c13 c23 c33 X1 X2 X3:int.\n     u1 * (c22 * c33 - c23 * c32) -\n     c12 * (u2 * c33 - c23 * u3) +\n     c13 * (u2 * c32 - c22 * u3) = &1\n     ==> ?y1 y2 y3.\n            u1 * y1 + c12 * y2 + c13 * y3 = X1 /\\\n            u2 * y1 + c22 * y2 + c23 * y3 = X2 /\\\n            u3 * y1 + c32 * y2 + c33 * y3 = X3
-  &27 * b11 pow 3 <= &64
-  b11:int
-  ~(&2 <= b11)
-  Gst:int
-  b11:int
-  t:int
-  s:int
-  G22:int
-  G12:int
-  G11:int
-  &0 < Gst
-  b11 * b33 - b13 pow 2 = G22
-  b11 * b23 - b12 * b13 = G12
-  b11 * b22 - b12 pow 2 = G11
-  t:int
-  s:int
-  x1:int
-  b33:int
-  b23:int
-  b22:int
-  b13:int
-  b12:int
-  b11:int
-  t:int
-  s:int
-  x1:int
-  b33:int
-  b23:int
-  b22:int
-  b13:int
-  b12:int
-  &3 * b11 pow 2 <= &4 * Gst
-  b11 * --bb + b12*s + b13*t = (b12*s + b13*t) - b11*bb
-  abs ((b12*s + b13*t) - b11 * bb) * &2 <= b11
-  &4 * (b11*x1 + b12*s + b13*t) pow 2 <= b11 pow 2
-  x1 = --bb:int
-  bb:int
-  b11:int
-  b12*s + b13*t
-  Gst = G11 * s pow 2 + &2 * G12 * s * t + G22 * t pow 2
-  t:int
-  s:int
-  G22:int
-  G12:int
-  G11:int
-  b11:int
-  b11*(b22*b33 - b23 pow 2) - b12*(b12*b33 - b13*b23) +\n                   b13*(b12*b23 - b13*b22) = &1
-  G11 * G22 - G12 pow 2 = b11
-  G22 = b11*b33 - b13 pow 2
-  G12 = b11*b23 - b12*b13
-  G11 = b11*b22 - b12 pow 2
-  forall b11 b12 b13 b22 b23 b33:int.\n     &0 < b11 /\\\n     b11 * (b22 * b33 - b23 pow 2) - b12 * (b12 * b33 - b13 * b23) +\n       b13 * (b12 * b23 - b13 * b22) = &1 /\\\n     &0 < b11 * b22 - b12 pow 2 /\\\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> b11 <= b11 * x pow 2 + b22 * y pow 2 + b33 * z pow 2 +\n                         &2 * b12 * x * y + &2 * b13 * x * z +\n                         &2 * b23 * y * z)\n     ==> b11 = &1
-  ~(s = &0 /\\ t = &0)
-  t:int
-  s:int
-  x1:int
-  ~(s = &0 /\\ t = &0)
-  t:int
-  s:int
-  x1:int
-  ~(s = &0 /\\ t = &0)
-  t:int
-  s:int
-  x1:int
-  ~(s = &0 /\\ t = &0)
-  t:int
-  s:int
-  x1:int
-  ~(s = &0 /\\ t = &0)
-  t:int
-  s:int
-  x1:int
-  ~(s = &0 /\\ t = &0)
-  t:int
-  s:int
-  x1:int
-  ~(s = &0 /\\ t = &0)
-  t:int
-  s:int
-  x1:int
-  ~(s = &0 /\\ t = &0)
-  t:int
-  s:int
-  x1:int
-  ~(s = &0 /\\ t = &0)
-  t:int
-  s:int
-  x1:int
-  ~(s = &0 /\\ t = &0)
-  t:int
-  s:int
-  x1:int
-  ~(s = &0 /\\ t = &0)
-  t:int
-  s:int
-  x1:int
-  lhs1 = lhs2 /\\ rhs1 = rhs2 ==> lhs2 <= rhs2\n    ==> lhs1 <= rhs1
-  ~(x = &0 /\\ y = &0 /\\ z = &0)
-  x*v3 + y*c32 + z*c33
-  x*v2 + y*c22 + z*c23
-  x*v1 + y*c12 + z*c13
-  forall a11 a12 a13 a22 a23 a33 v1 v2 v3 c12 c13 c22 c23 c32 c33\n     b11 b12 b13 b22 b23 b33:int.\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> a11 * v1 pow 2 + a22 * v2 pow 2 + a33 * v3 pow 2 +\n                  &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n                  &2 * a23 * v2 * v3\n                  <= a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                     &2 * a12 * x * y + &2 * a13 * x * z + &2 * a23 * y * z) /\\\n     v1 * (c22 * c33 - c23 * c32) -\n     c12 * (v2 * c33 - c23 * v3) +\n     c13 * (v2 * c32 - c22 * v3) = &1 /\\\n     b11 = a11 * v1 pow 2 + &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n            a22 * v2 pow 2 + &2 * a23 * v2 * v3 + a33 * v3 pow 2 /\\\n     b22 = a11 * c12 pow 2 + &2 * a12 * c12 * c22 + &2 * a13 * c12 * c32 +\n            a22 * c22 pow 2 + &2 * a23 * c22 * c32 + a33 * c32 pow 2 /\\\n     b33 = a11 * c13 pow 2 + &2 * a12 * c13 * c23 + &2 * a13 * c13 * c33 +\n            a22 * c23 pow 2 + &2 * a23 * c23 * c33 + a33 * c33 pow 2 /\\\n     b12 = a11 * v1 * c12 + a12 * (v1 * c22 + v2 * c12) +\n            a13 * (v1 * c32 + v3 * c12) +\n            a22 * v2 * c22 + a23 * (v2 * c32 + v3 * c22) + a33 * v3 * c32 /\\\n     b13 = a11 * v1 * c13 + a12 * (v1 * c23 + v2 * c13) +\n            a13 * (v1 * c33 + v3 * c13) +\n            a22 * v2 * c23 + a23 * (v2 * c33 + v3 * c23) + a33 * v3 * c33 /\\\n     b23 = a11 * c12 * c13 + a12 * (c12 * c23 + c22 * c13) +\n            a13 * (c12 * c33 + c32 * c13) +\n            a22 * c22 * c23 + a23 * (c22 * c33 + c32 * c23) + a33 * c32 * c33\n     ==> forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n                 ==> b11 <= b11 * x pow 2 + b22 * y pow 2 + b33 * z pow 2 +\n                            &2 * b12 * x * y + &2 * b13 * x * z +\n                            &2 * b23 * y * z
-  a = b ==> &0 < a ==> &0 < b
-  ~(b11 = &0)
-  &0:int
-  b11:int
-  --b12:int
-  &0 < b11 * (b11*b22 - b12 pow 2)
-  forall b11 b12 b13 b22 b23 b33:int.\n     &0 < b11 /\\\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> &0 < b11 * x pow 2 + b22 * y pow 2 + b33 * z pow 2 +\n                       &2 * b12 * x * y + &2 * b13 * x * z + &2 * b23 * y * z)\n     ==> &0 < b11 * b22 - b12 pow 2
-  y3:int
-  y2:int
-  y1:int
-  y3:int
-  y2:int
-  y1:int
-  x3:int
-  x2:int
-  x1:int
-  c33:int
-  c23:int
-  c13:int
-  c32:int
-  c22:int
-  c12:int
-  v3:int
-  v2:int
-  v1:int
-  forall a11 a12 a13 a22 a23 a33 v1 v2 v3 c12 c13 c22 c23 c32 c33\n     b11 b12 b13 b22 b23 b33 n:int.\n     v1 * (c22 * c33 - c23 * c32) -\n     c12 * (v2 * c33 - c23 * v3) +\n     c13 * (v2 * c32 - c22 * v3) = &1 /\\\n     b11 = a11 * v1 pow 2 + &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n            a22 * v2 pow 2 + &2 * a23 * v2 * v3 + a33 * v3 pow 2 /\\\n     b22 = a11 * c12 pow 2 + &2 * a12 * c12 * c22 + &2 * a13 * c12 * c32 +\n            a22 * c22 pow 2 + &2 * a23 * c22 * c32 + a33 * c32 pow 2 /\\\n     b33 = a11 * c13 pow 2 + &2 * a12 * c13 * c23 + &2 * a13 * c13 * c33 +\n            a22 * c23 pow 2 + &2 * a23 * c23 * c33 + a33 * c33 pow 2 /\\\n     b12 = a11 * v1 * c12 + a12 * (v1 * c22 + v2 * c12) +\n            a13 * (v1 * c32 + v3 * c12) +\n            a22 * v2 * c22 + a23 * (v2 * c32 + v3 * c22) + a33 * v3 * c32 /\\\n     b13 = a11 * v1 * c13 + a12 * (v1 * c23 + v2 * c13) +\n            a13 * (v1 * c33 + v3 * c13) +\n            a22 * v2 * c23 + a23 * (v2 * c33 + v3 * c23) + a33 * v3 * c33 /\\\n     b23 = a11 * c12 * c13 + a12 * (c12 * c23 + c22 * c13) +\n            a13 * (c12 * c33 + c32 * c13) +\n            a22 * c22 * c23 + a23 * (c22 * c33 + c32 * c23) +\n            a33 * c32 * c33 /\\\n     (?x1 x2 x3. a11 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n                 &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 +\n                 &2 * a23 * x2 * x3 = n)\n     ==> ?y1 y2 y3. b11 * y1 pow 2 + b22 * y2 pow 2 + b33 * y3 pow 2 +\n                    &2 * b12 * y1 * y2 + &2 * b13 * y1 * y3 +\n                    &2 * b23 * y2 * y3 = n
-  b11 = &1
-  b11 * y1 pow 2 + b22 * y2 pow 2 + b33 * y3 pow 2 +\n      &2 * b12 * y1 * y2 + &2 * b13 * y1 * y3 +\n      &2 * b23 * y2 * y3 = n
-  y3:int
-  y2:int
-  y1:int
-  b11 = &1
-  b11 * (b22 * b33 - b23 pow 2) -\n      b12 * (b12 * b33 - b13 * b23) +\n      b13 * (b12 * b23 - b13 * b22) = &1
-  b11 = &1
-  &0 < b11*b22 - b12 pow 2
-  b11 = &1
-  b33:int
-  b23:int
-  b22:int
-  b13:int
-  b12:int
-  c33:int
-  c32:int
-  c23:int
-  c22:int
-  c13:int
-  c12:int
-  v3:int
-  v2:int
-  v1:int
-  a33:int
-  a23:int
-  a22:int
-  a13:int
-  a12:int
-  a11:int
-  ?y1 y2 y3. b11*y1 pow 2 + b22*y2 pow 2 + b33*y3 pow 2 +\n               &2*b12*y1*y2 + &2*b13*y1*y3 + &2*b23*y2*y3 = n
-  b33:int
-  b23:int
-  b22:int
-  b13:int
-  b12:int
-  b11 = &1
-  b33:int
-  b23:int
-  b13:int
-  &0 < b11*b22 - b12 pow 2
-  b11:int
-  forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n            ==> &0 < b11*x pow 2 + b22*y pow 2 + b33*z pow 2 +\n                     &2*b12*x*y + &2*b13*x*z + &2*b23*y*z
-  a11 * (a22 * a33 - a23 pow 2) -\n      a12 * (a12 * a33 - a23 * a13) +\n      a13 * (a12 * a23 - a22 * a13) = &1
-  v1 * (c22 * c33 - c23 * c32) - c12 * (v2 * c33 - c23 * v3) +\n                   c13 * (v2 * c32 - c22 * v3) = &1
-  b11*(b22*b33 - b23 pow 2) - b12*(b12*b33 - b13*b23) +\n    b13*(b12*b23 - b13*b22) = &1
-  a11 * v1 pow 2 + &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n      a22 * v2 pow 2 + &2 * a23 * v2 * v3 + a33 * v3 pow 2 = b11
-  &0 < b11
-  c33:int
-  c32:int
-  c23:int
-  c22:int
-  c13:int
-  c12:int
-  v3:int
-  v2:int
-  v1:int
-  a33:int
-  a23:int
-  a22:int
-  a13:int
-  a12:int
-  a11:int
-  forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n            ==> b11 <= b11*x pow 2 + b22*y pow 2 + b33*z pow 2 +\n                       &2*b12*x*y + &2*b13*x*z + &2*b23*y*z
-  b23 = a11*c12*c13 + a12*(c12*c23+c22*c13) +\n          a13*(c12*c33+c32*c13) + a22*c22*c23 +\n          a23*(c22*c33+c32*c23) + a33*c32*c33
-  b13 = a11*v1*c13 + a12*(v1*c23+v2*c13) + a13*(v1*c33+v3*c13) +\n                a22*v2*c23 + a23*(v2*c33+v3*c23) + a33*v3*c33
-  b12 = a11*v1*c12 + a12*(v1*c22+v2*c12) + a13*(v1*c32+v3*c12) +\n                a22*v2*c22 + a23*(v2*c32+v3*c22) + a33*v3*c32
-  b33 = a11*c13 pow 2 + &2*a12*c13*c23 + &2*a13*c13*c33 +\n                a22*c23 pow 2 + &2*a23*c23*c33 + a33*c33 pow 2
-  b22 = a11*c12 pow 2 + &2*a12*c12*c22 + &2*a13*c12*c32 +\n                a22*c22 pow 2 + &2*a23*c22*c32 + a33*c32 pow 2
-  b11 = a11*v1 pow 2 + &2*a12*v1*v2 + &2*a13*v1*v3 +\n                a22*v2 pow 2 + &2*a23*v2*v3 + a33*v3 pow 2
-  c33:int
-  c32:int
-  c23:int
-  c22:int
-  c13:int
-  c12:int
-  v3:int
-  v2:int
-  v1:int
-  a33:int
-  a23:int
-  a22:int
-  a13:int
-  a12:int
-  a11:int
-  ?p q s. v1*p + v2*q + v3*s = &1
-  v3:int
-  v2:int
-  v1:int
-  a33:int
-  a23:int
-  a22:int
-  a13:int
-  a12:int
-  a11:int
-  a11*(a22*a33 - a23 pow 2) - a12*(a12*a33 - a23*a13) +\n       a13*(a12*a23 - a22*a13) = &1
-  forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n            ==> &0 < a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n                     &2*a12*x*y + &2*a13*x*z + &2*a23*y*z
-  forall a11 a12 a13 a22 a23 a33 n:int.\n     &0 < a11 /\\\n     &0 < a11 * a22 - a12 pow 2 /\\\n     a11 * (a22 * a33 - a23 pow 2) - a12 * (a12 * a33 - a23 * a13) +\n       a13 * (a12 * a23 - a22 * a13) = &1 /\\\n     (?x1 x2 x3. a11 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n                 &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 +\n                 &2 * a23 * x2 * x3 = n)\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n
-  v3:int
-  v2:int
-  v1:int
-  &0
-  v3:int
-  v2:int
-  v1:int
-  v3:int
-  v2:int
-  v1:int
-  v3:int
-  v2:int
-  v1:int
-  v3:int
-  v2:int
-  v1:int
-  v3:int
-  v2:int
-  v1:int
-  v3:int
-  v2:int
-  v1:int
-  v3:int
-  v2:int
-  v1:int
-  v3:int
-  v2:int
-  v1:int
-  v3:int
-  v2:int
-  v1:int
-  &0
-  v3:int
-  v2:int
-  v1:int
-  v3:int
-  v2:int
-  v1:int
-  &0
-  &1:int
-  &0:int
-  &0:int
-  d' * n - &1 = a22
-  a11 * a22 - t pow 2 = d'
-  a11 * a22 - t pow 2 = d'
-  n:int
-  &0:int
-  a22:int
-  &1:int
-  t:int
-  a11:int
-  t:int
-  a11 * a22 = t pow 2 + d'
-  &0 < a11 * a22
-  &0 < a11
-  t pow 2 + d' = a22 * a11
-  a11 * a22 - t pow 2 = d'
-  &1 * &2 <= d' * n
-  &0 < a22
-  a11:int
-  a22 divides (t pow 2 + d')
-  a22 = d'*n - &1
-  forall n d' t:int.\n     &1 < n /\\ &0 < d' /\\ (d' * n - &1) divides (t pow 2 + d')\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n
-  d:int
-  (x pow 2 + d' == &0) (mod (d'*n - &1))
-  x:int
-  d':int
-  forall n d':int.\n     &1 < n /\\ &0 < d' /\\ (?x:int. (x pow 2 + d' == &0) (mod (d' * n - &1)))\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n
+  (d : Int) + int_of_num(1)
+  (d : Int)
+  (r : Int) * int_of_num(2) <= (q : Int)
+  (d : Int) == div((x : Int), (q : Int))
+  (r : Int) == rem((x : Int), (q : Int))
+  (q : Int)
+  (x : Int)
+  \226\136\128 x : Int, \226\136\128 q : Int, int_of_num(0) < q \226\134\146 (\226\136\131 b : Int, abs(x - q * b) * int_of_num(2) <= q)
+  pow(abs((a : Int)) * int_of_num(2), 2) <= pow((q : Int), 2)
+  \226\136\128 a : Int, \226\136\128 q : Int, abs(a) * int_of_num(2) <= q \226\134\146 int_of_num(4) * pow(a, 2) <= pow(q, 2)
+  int_of_num(0) <= (a : Int) && int_of_num(0) < (b : Int) \226\134\146 int_of_num(0) < a + b
+  (A11 : Int) * (A11 * pow((x : Int), 2) + (int_of_num(2) * ((A12 : Int) * (x * (y : Int))) + (A22 : Int) * pow(y, 2))) == pow(A11 * x + A12 * y, 2) + (A11 * A22 - pow(A12, 2)) * pow(y, 2)
+  int_of_num(0) < (A11 : Int) * (A11 * pow((x : Int), 2) + (int_of_num(2) * ((A12 : Int) * (x * (y : Int))) + (A22 : Int) * pow(y, 2)))
+  (A11 : Int) * pow((x : Int), 2) + (int_of_num(2) * ((A12 : Int) * (x * (y : Int))) + (A22 : Int) * pow(y, 2)) == A11 * pow(x, 2)
+  !((x : Int) == int_of_num(0) && (y : Int) == int_of_num(0))
+  !((x : Int) == int_of_num(0))
+  (y : Int) == int_of_num(0)
+  \226\136\128 A11 : Int, \226\136\128 A12 : Int, \226\136\128 A22 : Int, int_of_num(0) < A11 && int_of_num(0) < A11 * A22 - pow(A12, 2) \226\134\146 (\226\136\128 x : Int, \226\136\128 y : Int, !(x == int_of_num(0) && y == int_of_num(0)) \226\134\146 int_of_num(0) < A11 * pow(x, 2) + (int_of_num(2) * (A12 * (x * y)) + A22 * pow(y, 2)))
+  (A11 : Int) * pow((x : Int), 2) + (int_of_num(2) * ((A12 : Int) * (x * (y : Int))) + (A22 : Int) * pow(y, 2)) == (n : Int)
+  (x : Int) - (r : Int) * (y : Int)
+  (y : Int)
+  (A11 : Int) * (A22' : Int) - pow((A12' : Int), 2) == int_of_num(1)
+  (A11 : Int)
+  (A12' : Int)
+  (A22' : Int)
+  int_of_num(4) <= (A11 : Int) * A11
+  int_of_num(4) * ((A11 : Int) * (A22' : Int)) <= int_of_num(4) + pow(A11, 2)
+  int_of_num(4) + pow((A11 : Int), 2)
+  (A11 : Int) * (int_of_num(4) * (A22' : Int)) < A11 * (int_of_num(4) * A11)
+  int_of_num(2) * (A11 : Int)
+  int_of_num(4) <= (A11 : Int) * A11
+  int_of_num(2) <= (A11 : Int)
+  abs((A12' : Int)) * int_of_num(2) <= (A11 : Int)
+  (A11 : Int) * (A22' : Int) == int_of_num(1) + pow((A12' : Int), 2)
+  int_of_num(4) * ((A11 : Int) * (A22' : Int)) <= int_of_num(4) + pow(A11, 2)
+  (A22' : Int) < (A11 : Int)
+  (A12' : Int)
+  (A11 : Int) * (A22' : Int) == int_of_num(1) + pow((A12' : Int), 2)
+  int_of_num(0) < (A11 : Int) * (A22' : Int)
+  int_of_num(0) < (A22' : Int)
+  (A11 : Int) * (A22 : Int) - pow((A12 : Int), 2) == int_of_num(1)
+  (A11 : Int) * (A22' : Int) - pow((A12' : Int), 2) == int_of_num(1)
+  (A12 : Int) + (A11 : Int) * -(b : Int) == A12 - A11 * b
+  abs((A12 : Int) - (A11 : Int) * (b : Int)) * int_of_num(2) <= A11
+  abs((A12' : Int)) * int_of_num(2) <= (A11 : Int)
+  (A22' : Int) == (A11 : Int) * pow((r : Int), 2) + (int_of_num(2) * ((A12 : Int) * r) + (A22 : Int))
+  (A12' : Int) == (A12 : Int) + (A11 : Int) * (r : Int)
+  (r : Int) == -(b : Int)
+  (b : Int)
+  (A11 : Int)
+  (A12 : Int)
+  (A11 : Int) * (A22 : Int) - pow((A12 : Int), 2) == int_of_num(1)
+  (A22 : Int) == int_of_num(1) + pow((A12 : Int), 2)
+  (A11 : Int) * pow((x : Int), 2) + (int_of_num(2) * ((A12 : Int) * (x * (y : Int))) + (A22 : Int) * pow(y, 2)) == (n : Int)
+  (y : Int)
+  (x : Int) + (A12 : Int) * (y : Int)
+  (A11 : Int) == int_of_num(1)
+  (y : Int)
+  (x : Int)
+  abs
+  \226\136\128 A11 : Int, int_of_num(0) < A11 \226\134\146 (\226\136\128 A12 : Int, \226\136\128 A22 : Int, A11 * A22 - pow(A12, 2) == int_of_num(1) \226\134\146 (\226\136\128 n : Int, (\226\136\131 x : Int, \226\136\131 y : Int, A11 * pow(x, 2) + (int_of_num(2) * (A12 * (x * y)) + A22 * pow(y, 2)) == n) \226\134\146 (\226\136\131 u : Int, \226\136\131 v : Int, pow(u, 2) + pow(v, 2) == n)))
+  \226\136\128 a11 : Int, \226\136\128 a12 : Int, \226\136\128 a13 : Int, \226\136\128 a22 : Int, \226\136\128 a23 : Int, \226\136\128 a33 : Int, \226\136\128 x1 : Int, \226\136\128 x2 : Int, \226\136\128 x3 : Int, a11 * (a11 * pow(x1, 2) + (a22 * pow(x2, 2) + (a33 * pow(x3, 2) + (int_of_num(2) * (a12 * (x1 * x2)) + (int_of_num(2) * (a13 * (x1 * x3)) + int_of_num(2) * (a23 * (x2 * x3))))))) == pow(a11 * x1 + (a12 * x2 + a13 * x3), 2) + ((a11 * a22 - pow(a12, 2)) * pow(x2, 2) + (int_of_num(2) * ((a11 * a23 - a12 * a13) * (x2 * x3)) + (a11 * a33 - pow(a13, 2)) * pow(x3, 2)))
+  pow((u : Int), 2) + pow((v : Int), 2) == (n : Int) - pow((L : Int), 2)
+  (v : Int)
+  (u : Int)
+  (L : Int)
+  (v : Int)
+  (u : Int)
+  (x3 : Int)
+  (x2 : Int)
+  (x1 : Int)
+  (a33 : Int)
+  (a23 : Int)
+  (a22 : Int)
+  (a13 : Int)
+  (a12 : Int)
+  int_of_num(1)
+  (x3 : Int)
+  (x2 : Int)
+  (n : Int) - pow((L : Int), 2)
+  (G22 : Int)
+  (G12 : Int)
+  (G11 : Int)
+  (L : Int) == (x1 : Int) + ((a12 : Int) * (x2 : Int) + (a13 : Int) * (x3 : Int))
+  int_of_num(0) < int_of_num(1) * (a22 : Int) - pow((a12 : Int), 2)
+  int_of_num(0) < (G11 : Int)
+  int_of_num(1) * ((a22 : Int) * (a33 : Int) - pow((a23 : Int), 2)) - (a12 : Int) * (a12 * a33 - a23 * (a13 : Int)) + a13 * (a12 * a23 - a22 * a13) == int_of_num(1)
+  (G11 : Int) * (G22 : Int) - pow((G12 : Int), 2) == int_of_num(1)
+  (G22 : Int) == (a33 : Int) - pow((a13 : Int), 2)
+  (G12 : Int) == (a23 : Int) - (a12 : Int) * (a13 : Int)
+  (G11 : Int) == (a22 : Int) - pow((a12 : Int), 2)
+  \226\136\128 a12 : Int, \226\136\128 a13 : Int, \226\136\128 a22 : Int, \226\136\128 a23 : Int, \226\136\128 a33 : Int, \226\136\128 n : Int, int_of_num(0) < int_of_num(1) * a22 - pow(a12, 2) && int_of_num(1) * (a22 * a33 - pow(a23, 2)) - a12 * (a12 * a33 - a23 * a13) + a13 * (a12 * a23 - a22 * a13) == int_of_num(1) && (\226\136\131 x1 : Int, \226\136\131 x2 : Int, \226\136\131 x3 : Int, int_of_num(1) * pow(x1, 2) + (a22 * pow(x2, 2) + (a33 * pow(x3, 2) + (int_of_num(2) * (a12 * (x1 * x2)) + (int_of_num(2) * (a13 * (x1 * x3)) + int_of_num(2) * (a23 * (x2 * x3)))))) == n) \226\134\146 (\226\136\131 u : Int, \226\136\131 v : Int, \226\136\131 w : Int, pow(u, 2) + (pow(v, 2) + pow(w, 2)) == n)
+  (a : Int) * ((u1' : Int) * (x : Int) + (u2' : Int) * (y : Int)) + (u3 : Int) * (z : Int) == int_of_num(1)
+  (u1' : Int) * (x' : Int) + (u2' : Int) * (y' : Int) == int_of_num(1)
+  (u2 : Int) == (a : Int) * (u2' : Int)
+  (u1 : Int) == (a : Int) * (u1' : Int)
+  (u1' : Int) * (x : Int) + (u2' : Int) * (y : Int)
+  int_of_num(0)
+  -((u2' : Int) * (z : Int))
+  (x' : Int)
+  -((u1' : Int) * (z : Int))
+  -(y' : Int)
+  (u2 : Int) == (a : Int) * (u2' : Int)
+  (u1 : Int) == (a : Int) * (u1' : Int)
+  (u1 : Int) * (x : Int) + ((u2 : Int) * (y : Int) + (u3 : Int) * (z : Int)) == int_of_num(1)
+  (a : Int) * ((u1' : Int) * (x : Int) + (u2' : Int) * (y : Int)) + (u3 : Int) * (z : Int) == int_of_num(1)
+  (u2 : Int) == (a : Int) * (u2' : Int)
+  (u1 : Int) == (a : Int) * (u1' : Int)
+  (a : Int) == (u1 : Int) * (x' : Int) + (u2 : Int) * (y' : Int)
+  (a : Int) * ((u1' : Int) * (x' : Int) + (u2' : Int) * (y' : Int)) == a * int_of_num(1)
+  (u1' : Int) * (x' : Int) + (u2' : Int) * (y' : Int) == int_of_num(1)
+  (u2' : Int)
+  (u1' : Int)
+  !((u1 : Int) == int_of_num(0) && (u2 : Int) == int_of_num(0))
+  int_of_num(0) < (a : Int)
+  (a : Int) == gcd(((u1 : Int), (u2 : Int)))
+  (u2 : Int)
+  (u1 : Int)
+  (u1 : Int) * (x : Int) + ((u2 : Int) * (y : Int) + (u3 : Int) * (z : Int)) == int_of_num(1)
+  int_of_num(0)
+  int_of_num(0)
+  int_of_num(1)
+  int_of_num(0)
+  int_of_num(0)
+  (z : Int)
+  (u1 : Int) == int_of_num(0) && (u2 : Int) == int_of_num(0)
+  \226\136\128 u1 : Int, \226\136\128 u2 : Int, \226\136\128 u3 : Int, (\226\136\131 x : Int, \226\136\131 y : Int, \226\136\131 z : Int, u1 * x + (u2 * y + u3 * z) == int_of_num(1)) \226\134\146 (\226\136\131 c12 : Int, \226\136\131 c13 : Int, \226\136\131 c22 : Int, \226\136\131 c23 : Int, \226\136\131 c32 : Int, \226\136\131 c33 : Int, u1 * (c22 * c33 - c23 * c32) - c12 * (u2 * c33 - c23 * u3) + c13 * (u2 * c32 - c22 * u3) == int_of_num(1))
+  (u1 : Int)
+  (u1 : Int)
+  (u1 : Int)
+  (u1 : Int)
+  (u2 : Int)
+  (u2 : Int)
+  (u2 : Int)
+  (u2 : Int)
+  (A11 : Int) * pow((y' : Int) + (r : Int) * (x' : Int), 2) + (int_of_num(2) * ((A12 : Int) * ((y' + r * x') * x')) + (A22 : Int) * pow(x', 2)) == (A22' : Int) * pow(x', 2) + (int_of_num(2) * ((A12' : Int) * (x' * y')) + A11 * pow(y', 2))
+  !((x' : Int) == int_of_num(0) && (y' : Int) == int_of_num(0))
+  (x' : Int) == int_of_num(0)
+  (x' : Int)
+  (y' : Int) + (r : Int) * (x' : Int)
+  (y' : Int)
+  (x' : Int)
+  (A11 : Int) * (A22' : Int) - pow((A12' : Int), 2) == (D : Int)
+  (A11 : Int)
+  (A12' : Int)
+  (A22' : Int)
+  int_of_num(4) * (D : Int) < int_of_num(3) * pow((A11 : Int), 2)
+  int_of_num(4) * ((A11 : Int) * (A22' : Int)) <= int_of_num(4) * (D : Int) + pow(A11, 2)
+  int_of_num(4) * (D : Int) + pow((A11 : Int), 2)
+  (A11 : Int) * (int_of_num(4) * (A22' : Int)) < A11 * (int_of_num(4) * A11)
+  int_of_num(4) * (D : Int) < int_of_num(3) * pow((A11 : Int), 2)
+  abs((A12' : Int)) * int_of_num(2) <= (A11 : Int)
+  (A11 : Int) * (A22' : Int) == (D : Int) + pow((A12' : Int), 2)
+  int_of_num(4) * ((A11 : Int) * (A22' : Int)) <= int_of_num(4) * (D : Int) + pow(A11, 2)
+  (A22' : Int) < (A11 : Int)
+  (A11 : Int) * pow(int_of_num(1), 2) + (int_of_num(2) * ((A12 : Int) * (int_of_num(1) * int_of_num(0))) + (A22 : Int) * pow(int_of_num(0), 2)) == A11
+  int_of_num(0)
+  int_of_num(1)
+  int_of_num(3) * pow((A11 : Int), 2) <= int_of_num(4) * (D : Int)
+  (A12' : Int)
+  (A11 : Int) * (A22' : Int) == (D : Int) + pow((A12' : Int), 2)
+  int_of_num(0) < (A11 : Int) * (A22' : Int)
+  int_of_num(0) < (A22' : Int)
+  (A11 : Int) * (A22 : Int) - pow((A12 : Int), 2) == (D : Int)
+  (A11 : Int) * (A22' : Int) - pow((A12' : Int), 2) == (D : Int)
+  (A12 : Int) + (A11 : Int) * -(b : Int) == A12 - A11 * b
+  abs((A12 : Int) - (A11 : Int) * (b : Int)) * int_of_num(2) <= A11
+  abs((A12' : Int)) * int_of_num(2) <= (A11 : Int)
+  (A22' : Int) == (A11 : Int) * pow((r : Int), 2) + (int_of_num(2) * ((A12 : Int) * r) + (A22 : Int))
+  (A12' : Int) == (A12 : Int) + (A11 : Int) * (r : Int)
+  (r : Int) == -(b : Int)
+  (b : Int)
+  (A11 : Int)
+  (A12 : Int)
+  abs
+  \226\136\128 D : Int, int_of_num(0) < D \226\134\146 (\226\136\128 A11 : Int, int_of_num(0) < A11 \226\134\146 (\226\136\128 A12 : Int, \226\136\128 A22 : Int, A11 * A22 - pow(A12, 2) == D \226\134\146 (\226\136\131 x : Int, \226\136\131 y : Int, !(x == int_of_num(0) && y == int_of_num(0)) && int_of_num(3) * pow(A11 * pow(x, 2) + (int_of_num(2) * (A12 * (x * y)) + A22 * pow(y, 2)), 2) <= int_of_num(4) * D)))
+  (y' : Int)
+  (y : Int) * (x' : Int)
+  (x : Int) * (x' : Int)
+  (d : Int) == (e : Int) * (x' : Int) + (c : Int) * (y' : Int)
+  (e : Int) == (a : Int) * (x : Int) + (b : Int) * (y : Int)
+  (d : Int)
+  (d : Int)
+  (c : Int)
+  (e : Int)
+  (e : Int)
+  (b : Int)
+  (a : Int)
+  \226\136\128 a : Int, \226\136\128 b : Int, \226\136\128 c : Int, \226\136\131 d : Int, divides(d, a) && divides(d, b) && divides(d, c) && (\226\136\131 x : Int, \226\136\131 y : Int, \226\136\131 z : Int, d == a * x + (b * y + c * z))
+  (mn : Int) == (a11 : Int) * pow((x' : Int), 2) + ((a22 : Int) * pow((y : Int), 2) + ((a33 : Int) * pow((z : Int), 2) + (int_of_num(2) * ((a12 : Int) * (x' * y)) + (int_of_num(2) * ((a13 : Int) * (x' * z)) + int_of_num(2) * ((a23 : Int) * (y * z))))))
+  (s : Int)
+  (q : Int)
+  (p : Int)
+  (a11 : Int) * pow((p : Int), 2) + ((a22 : Int) * pow((q : Int), 2) + ((a33 : Int) * pow((s : Int), 2) + (int_of_num(2) * ((a12 : Int) * (p * q)) + (int_of_num(2) * ((a13 : Int) * (p * s)) + int_of_num(2) * ((a23 : Int) * (q * s))))))
+  (s : Int)
+  (q : Int)
+  (p : Int)
+  (z : Int)
+  (y : Int)
+  (x' : Int)
+  (mn : Int)
+  int_of_num(0)
+  int_of_num(0)
+  int_of_num(1)
+  int_of_num(0)
+  int_of_num(0)
+  int_of_num(1)
+  (a11 : Int) * pow(int_of_num(1), 2) + ((a22 : Int) * pow(int_of_num(0), 2) + ((a33 : Int) * pow(int_of_num(0), 2) + (int_of_num(2) * ((a12 : Int) * (int_of_num(1) * int_of_num(0))) + (int_of_num(2) * ((a13 : Int) * (int_of_num(1) * int_of_num(0))) + int_of_num(2) * ((a23 : Int) * (int_of_num(0) * int_of_num(0)))))))
+  \226\136\131 v : Int, int_of_num(0) <= v && (\226\136\131 x : Int, \226\136\131 y : Int, \226\136\131 z : Int, !(x == int_of_num(0) && y == int_of_num(0) && z == int_of_num(0)) && v == (a11 : Int) * pow(x, 2) + ((a22 : Int) * pow(y, 2) + ((a33 : Int) * pow(z, 2) + (int_of_num(2) * ((a12 : Int) * (x * y)) + (int_of_num(2) * ((a13 : Int) * (x * z)) + int_of_num(2) * ((a23 : Int) * (y * z)))))))
+  (P : (Int) -> Bool)
+  (v : Int) => \226\136\131 x : Int, \226\136\131 y : Int, \226\136\131 z : Int, !(x == int_of_num(0) && y == int_of_num(0) && z == int_of_num(0)) && v == (a11 : Int) * pow(x, 2) + ((a22 : Int) * pow(y, 2) + ((a33 : Int) * pow(z, 2) + (int_of_num(2) * ((a12 : Int) * (x * y)) + (int_of_num(2) * ((a13 : Int) * (x * z)) + int_of_num(2) * ((a23 : Int) * (y * z))))))
+  \226\136\128 a11 : Int, \226\136\128 a12 : Int, \226\136\128 a13 : Int, \226\136\128 a22 : Int, \226\136\128 a23 : Int, \226\136\128 a33 : Int, (\226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, !(x == int_of_num(0) && y == int_of_num(0) && z == int_of_num(0)) \226\134\146 int_of_num(0) < a11 * pow(x, 2) + (a22 * pow(y, 2) + (a33 * pow(z, 2) + (int_of_num(2) * (a12 * (x * y)) + (int_of_num(2) * (a13 * (x * z)) + int_of_num(2) * (a23 * (y * z))))))) \226\134\146 (\226\136\131 v1 : Int, \226\136\131 v2 : Int, \226\136\131 v3 : Int, !(v1 == int_of_num(0) && v2 == int_of_num(0) && v3 == int_of_num(0)) && (\226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, !(x == int_of_num(0) && y == int_of_num(0) && z == int_of_num(0)) \226\134\146 a11 * pow(v1, 2) + (a22 * pow(v2, 2) + (a33 * pow(v3, 2) + (int_of_num(2) * (a12 * (v1 * v2)) + (int_of_num(2) * (a13 * (v1 * v3)) + int_of_num(2) * (a23 * (v2 * v3)))))) <= a11 * pow(x, 2) + (a22 * pow(y, 2) + (a33 * pow(z, 2) + (int_of_num(2) * (a12 * (x * y)) + (int_of_num(2) * (a13 * (x * z)) + int_of_num(2) * (a23 * (y * z))))))))
+  pow((g : Int), 2) == int_of_num(1)
+  (g : Int) == g * (w1 : Int) * (x : Int) + (g * (w2 : Int) * (y : Int) + g * (w3 : Int) * (z : Int))
+  (g : Int) * (z : Int)
+  (g : Int) * (y : Int)
+  (g : Int) * (x : Int)
+  (int_of_num(1) <= (x : Int)) == (int_of_num(0) < x)
+  int_of_num(1) <= pow((g : Int), 2)
+  int_of_num(1) * (Fw : Int) == Fw
+  (a11 : Int) * pow((g : Int) * (w1 : Int), 2) + ((a22 : Int) * pow(g * (w2 : Int), 2) + ((a33 : Int) * pow(g * (w3 : Int), 2) + (int_of_num(2) * ((a12 : Int) * (g * w1 * (g * w2))) + (int_of_num(2) * ((a13 : Int) * (g * w1 * (g * w3))) + int_of_num(2) * ((a23 : Int) * (g * w2 * (g * w3))))))) == pow(g, 2) * (Fw : Int)
+  (w3 : Int)
+  (w2 : Int)
+  (w1 : Int)
+  \226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, !(x == int_of_num(0) && y == int_of_num(0) && z == int_of_num(0)) \226\134\146 (a11 : Int) * pow((g : Int) * (w1 : Int), 2) + ((a22 : Int) * pow(g * (w2 : Int), 2) + ((a33 : Int) * pow(g * (w3 : Int), 2) + (int_of_num(2) * ((a12 : Int) * (g * w1 * (g * w2))) + (int_of_num(2) * ((a13 : Int) * (g * w1 * (g * w3))) + int_of_num(2) * ((a23 : Int) * (g * w2 * (g * w3))))))) <= a11 * pow(x, 2) + (a22 * pow(y, 2) + (a33 * pow(z, 2) + (int_of_num(2) * (a12 * (x * y)) + (int_of_num(2) * (a13 * (x * z)) + int_of_num(2) * (a23 * (y * z))))))
+  int_of_num(0) < (Fw : Int)
+  (Fw : Int) == (a11 : Int) * pow((w1 : Int), 2) + ((a22 : Int) * pow((w2 : Int), 2) + ((a33 : Int) * pow((w3 : Int), 2) + (int_of_num(2) * ((a12 : Int) * (w1 * w2)) + (int_of_num(2) * ((a13 : Int) * (w1 * w3)) + int_of_num(2) * ((a23 : Int) * (w2 * w3))))))
+  pow((g : Int), 2) == int_of_num(1)
+  (w1 : Int) * (x : Int) + ((w2 : Int) * (y : Int) + (w3 : Int) * (z : Int)) == int_of_num(1)
+  !((w1 : Int) == int_of_num(0) && (w2 : Int) == int_of_num(0) && (w3 : Int) == int_of_num(0))
+  (g : Int) == g * (w1 : Int) * (x : Int) + (g * (w2 : Int) * (y : Int) + g * (w3 : Int) * (z : Int))
+  (g : Int) * ((w1 : Int) * (x : Int) + ((w2 : Int) * (y : Int) + (w3 : Int) * (z : Int))) == g * int_of_num(1)
+  (w1 : Int) * (x : Int) + ((w2 : Int) * (y : Int) + (w3 : Int) * (z : Int)) == int_of_num(1)
+  !((g : Int) * (w1 : Int) == int_of_num(0) && g * (w2 : Int) == int_of_num(0) && g * (w3 : Int) == int_of_num(0))
+  !((g : Int) == int_of_num(0))
+  (w3 : Int)
+  (w2 : Int)
+  (w1 : Int)
+  (g : Int)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  \226\136\128 a11 : Int, \226\136\128 a12 : Int, \226\136\128 a13 : Int, \226\136\128 a22 : Int, \226\136\128 a23 : Int, \226\136\128 a33 : Int, \226\136\128 v1 : Int, \226\136\128 v2 : Int, \226\136\128 v3 : Int, (\226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, !(x == int_of_num(0) && y == int_of_num(0) && z == int_of_num(0)) \226\134\146 int_of_num(0) < a11 * pow(x, 2) + (a22 * pow(y, 2) + (a33 * pow(z, 2) + (int_of_num(2) * (a12 * (x * y)) + (int_of_num(2) * (a13 * (x * z)) + int_of_num(2) * (a23 * (y * z))))))) && !(v1 == int_of_num(0) && v2 == int_of_num(0) && v3 == int_of_num(0)) && (\226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, !(x == int_of_num(0) && y == int_of_num(0) && z == int_of_num(0)) \226\134\146 a11 * pow(v1, 2) + (a22 * pow(v2, 2) + (a33 * pow(v3, 2) + (int_of_num(2) * (a12 * (v1 * v2)) + (int_of_num(2) * (a13 * (v1 * v3)) + int_of_num(2) * (a23 * (v2 * v3)))))) <= a11 * pow(x, 2) + (a22 * pow(y, 2) + (a33 * pow(z, 2) + (int_of_num(2) * (a12 * (x * y)) + (int_of_num(2) * (a13 * (x * z)) + int_of_num(2) * (a23 * (y * z))))))) \226\134\146 (\226\136\131 x : Int, \226\136\131 y : Int, \226\136\131 z : Int, v1 * x + (v2 * y + v3 * z) == int_of_num(1))
+  (v1 : Int)
+  (v1 : Int)
+  (v1 : Int)
+  (v1 : Int)
+  (v2 : Int)
+  (v2 : Int)
+  (v2 : Int)
+  (v2 : Int)
+  (v3 : Int)
+  (v3 : Int)
+  (v3 : Int)
+  (v3 : Int)
+  (v1 : Int)
+  (v2 : Int)
+  (v3 : Int)
+  (v1 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  (v1 : Int)
+  (v2 : Int)
+  (v3 : Int)
+  \226\136\128 a11 : Int, \226\136\128 a12 : Int, \226\136\128 a13 : Int, \226\136\128 a22 : Int, \226\136\128 a23 : Int, \226\136\128 a33 : Int, (a11 * a22 - pow(a12, 2)) * (a11 * a33 - pow(a13, 2)) - pow(a11 * a23 - a12 * a13, 2) == a11 * (a11 * (a22 * a33 - pow(a23, 2)) - a12 * (a12 * a33 - a23 * a13) + a13 * (a12 * a23 - a22 * a13))
+  pow(int_of_num(2), 3)
+  \226\136\128 a : Int, int_of_num(2) <= a \226\134\146 int_of_num(8) <= pow(a, 3)
+  int_of_num(4) * pow((a11 : Int) * (x1 : Int) + ((a12 : Int) * (s : Int) + (a13 : Int) * (t : Int)), 2) <= pow(a11, 2)
+  (a11 : Int) * a11 <= a11 * (a11 * pow((x1 : Int), 2) + ((a22 : Int) * pow((s : Int), 2) + ((a33 : Int) * pow((t : Int), 2) + (int_of_num(2) * ((a12 : Int) * (x1 * s)) + (int_of_num(2) * ((a13 : Int) * (x1 * t)) + int_of_num(2) * ((a23 : Int) * (s * t)))))))
+  \226\136\128 a11 : Int, \226\136\128 a12 : Int, \226\136\128 a13 : Int, \226\136\128 a22 : Int, \226\136\128 a23 : Int, \226\136\128 a33 : Int, \226\136\128 x1 : Int, \226\136\128 s : Int, \226\136\128 t : Int, \226\136\128 Gst : Int, int_of_num(0) < a11 && a11 <= a11 * pow(x1, 2) + (a22 * pow(s, 2) + (a33 * pow(t, 2) + (int_of_num(2) * (a12 * (x1 * s)) + (int_of_num(2) * (a13 * (x1 * t)) + int_of_num(2) * (a23 * (s * t)))))) && int_of_num(4) * pow(a11 * x1 + (a12 * s + a13 * t), 2) <= pow(a11, 2) && a11 * (a11 * pow(x1, 2) + (a22 * pow(s, 2) + (a33 * pow(t, 2) + (int_of_num(2) * (a12 * (x1 * s)) + (int_of_num(2) * (a13 * (x1 * t)) + int_of_num(2) * (a23 * (s * t))))))) == pow(a11 * x1 + (a12 * s + a13 * t), 2) + Gst \226\134\146 int_of_num(3) * pow(a11, 2) <= int_of_num(4) * Gst
+  int_of_num(3) * pow((G : Int), 2) <= int_of_num(4) * (a : Int)
+  pow(pow((a : Int), 2), 2) == pow(a, 3) * a
+  pow(int_of_num(3), 2) * pow(pow((a : Int), 2), 2) <= pow(int_of_num(4), 2) * pow((G : Int), 2)
+  int_of_num(16) * (int_of_num(3) * pow((G : Int), 2))
+  (a : Int)
+  pow(int_of_num(3) * pow((a : Int), 2), 2) <= pow(int_of_num(4) * (G : Int), 2)
+  \226\136\128 a : Int, \226\136\128 G : Int, int_of_num(0) < a && int_of_num(0) < G && int_of_num(3) * pow(a, 2) <= int_of_num(4) * G && int_of_num(3) * pow(G, 2) <= int_of_num(4) * a \226\134\146 int_of_num(27) * pow(a, 3) <= int_of_num(64)
+  (G22 : Int)
+  (G12 : Int)
+  (G11 : Int)
+  int_of_num(0) <= (a : Int) && int_of_num(0) < (b : Int) \226\134\146 int_of_num(0) < a + b
+  !((x : Int) == int_of_num(0) && (y : Int) == int_of_num(0) && (z : Int) == int_of_num(0))
+  !((x : Int) == int_of_num(0))
+  (y : Int) == int_of_num(0) && (z : Int) == int_of_num(0)
+  (z : Int)
+  (y : Int)
+  (x : Int)
+  (a33 : Int)
+  (a23 : Int)
+  (a22 : Int)
+  (a13 : Int)
+  (a12 : Int)
+  (a11 : Int)
+  (a11 : Int) * (a11 * pow((x : Int), 2) + ((a22 : Int) * pow((y : Int), 2) + ((a33 : Int) * pow((z : Int), 2) + (int_of_num(2) * ((a12 : Int) * (x * y)) + (int_of_num(2) * ((a13 : Int) * (x * z)) + int_of_num(2) * ((a23 : Int) * (y * z))))))) == pow(a11 * x + (a12 * y + a13 * z), 2) + ((G11 : Int) * pow(y, 2) + (int_of_num(2) * ((G12 : Int) * (y * z)) + (G22 : Int) * pow(z, 2)))
+  int_of_num(0) < (a11 : Int) * (a11 * pow((x : Int), 2) + ((a22 : Int) * pow((y : Int), 2) + ((a33 : Int) * pow((z : Int), 2) + (int_of_num(2) * ((a12 : Int) * (x * y)) + (int_of_num(2) * ((a13 : Int) * (x * z)) + int_of_num(2) * ((a23 : Int) * (y * z)))))))
+  ((a11 : Int) * (a22 : Int) - pow((a12 : Int), 2)) * (a11 * (a33 : Int) - pow((a13 : Int), 2)) - pow(a11 * (a23 : Int) - a12 * a13, 2) == a11 * (a11 * (a22 * a33 - pow(a23, 2)) - a12 * (a12 * a33 - a23 * a13) + a13 * (a12 * a23 - a22 * a13))
+  int_of_num(0) < (G11 : Int) * (G22 : Int) - pow((G12 : Int), 2)
+  (G22 : Int) == (a11 : Int) * (a33 : Int) - pow((a13 : Int), 2)
+  (G12 : Int) == (a11 : Int) * (a23 : Int) - (a12 : Int) * (a13 : Int)
+  (G11 : Int) == (a11 : Int) * (a22 : Int) - pow((a12 : Int), 2)
+  \226\136\128 a11 : Int, \226\136\128 a12 : Int, \226\136\128 a13 : Int, \226\136\128 a22 : Int, \226\136\128 a23 : Int, \226\136\128 a33 : Int, int_of_num(0) < a11 && int_of_num(0) < a11 * a22 - pow(a12, 2) && int_of_num(0) < a11 * (a22 * a33 - pow(a23, 2)) - a12 * (a12 * a33 - a23 * a13) + a13 * (a12 * a23 - a22 * a13) \226\134\146 (\226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, !(x == int_of_num(0) && y == int_of_num(0) && z == int_of_num(0)) \226\134\146 int_of_num(0) < a11 * pow(x, 2) + (a22 * pow(y, 2) + (a33 * pow(z, 2) + (int_of_num(2) * (a12 * (x * y)) + (int_of_num(2) * (a13 * (x * z)) + int_of_num(2) * (a23 * (y * z)))))))
+  (u1 : Int) * ((c22 : Int) * (c33 : Int) - (c23 : Int) * (c32 : Int)) - (c12 : Int) * ((u2 : Int) * c33 - c23 * (u3 : Int)) + (c13 : Int) * (u2 * c32 - c22 * u3) == int_of_num(1)
+  ((u2 : Int) * (c32 : Int) - (u3 : Int) * (c22 : Int)) * (X1 : Int) + ((u3 * (c12 : Int) - (u1 : Int) * c32) * (X2 : Int) + (u1 * c22 - u2 * c12) * (X3 : Int))
+  ((c23 : Int) * (u3 : Int) - (u2 : Int) * (c33 : Int)) * (X1 : Int) + (((u1 : Int) * c33 - (c13 : Int) * u3) * (X2 : Int) + (c13 * u2 - u1 * c23) * (X3 : Int))
+  ((c22 : Int) * (c33 : Int) - (c23 : Int) * (c32 : Int)) * (X1 : Int) + (((c13 : Int) * c32 - (c12 : Int) * c33) * (X2 : Int) + (c12 * c23 - c13 * c22) * (X3 : Int))
+  \226\136\128 u1 : Int, \226\136\128 u2 : Int, \226\136\128 u3 : Int, \226\136\128 c12 : Int, \226\136\128 c22 : Int, \226\136\128 c32 : Int, \226\136\128 c13 : Int, \226\136\128 c23 : Int, \226\136\128 c33 : Int, \226\136\128 X1 : Int, \226\136\128 X2 : Int, \226\136\128 X3 : Int, u1 * (c22 * c33 - c23 * c32) - c12 * (u2 * c33 - c23 * u3) + c13 * (u2 * c32 - c22 * u3) == int_of_num(1) \226\134\146 (\226\136\131 y1 : Int, \226\136\131 y2 : Int, \226\136\131 y3 : Int, u1 * y1 + (c12 * y2 + c13 * y3) == X1 && u2 * y1 + (c22 * y2 + c23 * y3) == X2 && u3 * y1 + (c32 * y2 + c33 * y3) == X3)
+  int_of_num(27) * pow((b11 : Int), 3) <= int_of_num(64)
+  (b11 : Int)
+  !(int_of_num(2) <= (b11 : Int))
+  (Gst : Int)
+  (b11 : Int)
+  (t : Int)
+  (s : Int)
+  (G22 : Int)
+  (G12 : Int)
+  (G11 : Int)
+  int_of_num(0) < (Gst : Int)
+  (b11 : Int) * (b33 : Int) - pow((b13 : Int), 2) == (G22 : Int)
+  (b11 : Int) * (b23 : Int) - (b12 : Int) * (b13 : Int) == (G12 : Int)
+  (b11 : Int) * (b22 : Int) - pow((b12 : Int), 2) == (G11 : Int)
+  (t : Int)
+  (s : Int)
+  (x1 : Int)
+  (b33 : Int)
+  (b23 : Int)
+  (b22 : Int)
+  (b13 : Int)
+  (b12 : Int)
+  (b11 : Int)
+  (t : Int)
+  (s : Int)
+  (x1 : Int)
+  (b33 : Int)
+  (b23 : Int)
+  (b22 : Int)
+  (b13 : Int)
+  (b12 : Int)
+  int_of_num(3) * pow((b11 : Int), 2) <= int_of_num(4) * (Gst : Int)
+  (b11 : Int) * -(bb : Int) + ((b12 : Int) * (s : Int) + (b13 : Int) * (t : Int)) == b12 * s + b13 * t - b11 * bb
+  abs((b12 : Int) * (s : Int) + (b13 : Int) * (t : Int) - (b11 : Int) * (bb : Int)) * int_of_num(2) <= b11
+  int_of_num(4) * pow((b11 : Int) * (x1 : Int) + ((b12 : Int) * (s : Int) + (b13 : Int) * (t : Int)), 2) <= pow(b11, 2)
+  (x1 : Int) == -(bb : Int)
+  (bb : Int)
+  (b11 : Int)
+  (b12 : Int) * (s : Int) + (b13 : Int) * (t : Int)
+  (Gst : Int) == (G11 : Int) * pow((s : Int), 2) + (int_of_num(2) * ((G12 : Int) * (s * (t : Int))) + (G22 : Int) * pow(t, 2))
+  (t : Int)
+  (s : Int)
+  (G22 : Int)
+  (G12 : Int)
+  (G11 : Int)
+  (b11 : Int)
+  (b11 : Int) * ((b22 : Int) * (b33 : Int) - pow((b23 : Int), 2)) - (b12 : Int) * (b12 * b33 - (b13 : Int) * b23) + b13 * (b12 * b23 - b13 * b22) == int_of_num(1)
+  (G11 : Int) * (G22 : Int) - pow((G12 : Int), 2) == (b11 : Int)
+  (G22 : Int) == (b11 : Int) * (b33 : Int) - pow((b13 : Int), 2)
+  (G12 : Int) == (b11 : Int) * (b23 : Int) - (b12 : Int) * (b13 : Int)
+  (G11 : Int) == (b11 : Int) * (b22 : Int) - pow((b12 : Int), 2)
+  \226\136\128 b11 : Int, \226\136\128 b12 : Int, \226\136\128 b13 : Int, \226\136\128 b22 : Int, \226\136\128 b23 : Int, \226\136\128 b33 : Int, int_of_num(0) < b11 && b11 * (b22 * b33 - pow(b23, 2)) - b12 * (b12 * b33 - b13 * b23) + b13 * (b12 * b23 - b13 * b22) == int_of_num(1) && int_of_num(0) < b11 * b22 - pow(b12, 2) && (\226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, !(x == int_of_num(0) && y == int_of_num(0) && z == int_of_num(0)) \226\134\146 b11 <= b11 * pow(x, 2) + (b22 * pow(y, 2) + (b33 * pow(z, 2) + (int_of_num(2) * (b12 * (x * y)) + (int_of_num(2) * (b13 * (x * z)) + int_of_num(2) * (b23 * (y * z))))))) \226\134\146 b11 == int_of_num(1)
+  !((s : Int) == int_of_num(0) && (t : Int) == int_of_num(0))
+  (t : Int)
+  (s : Int)
+  (x1 : Int)
+  !((s : Int) == int_of_num(0) && (t : Int) == int_of_num(0))
+  (t : Int)
+  (s : Int)
+  (x1 : Int)
+  !((s : Int) == int_of_num(0) && (t : Int) == int_of_num(0))
+  (t : Int)
+  (s : Int)
+  (x1 : Int)
+  !((s : Int) == int_of_num(0) && (t : Int) == int_of_num(0))
+  (t : Int)
+  (s : Int)
+  (x1 : Int)
+  !((s : Int) == int_of_num(0) && (t : Int) == int_of_num(0))
+  (t : Int)
+  (s : Int)
+  (x1 : Int)
+  !((s : Int) == int_of_num(0) && (t : Int) == int_of_num(0))
+  (t : Int)
+  (s : Int)
+  (x1 : Int)
+  !((s : Int) == int_of_num(0) && (t : Int) == int_of_num(0))
+  (t : Int)
+  (s : Int)
+  (x1 : Int)
+  !((s : Int) == int_of_num(0) && (t : Int) == int_of_num(0))
+  (t : Int)
+  (s : Int)
+  (x1 : Int)
+  !((s : Int) == int_of_num(0) && (t : Int) == int_of_num(0))
+  (t : Int)
+  (s : Int)
+  (x1 : Int)
+  !((s : Int) == int_of_num(0) && (t : Int) == int_of_num(0))
+  (t : Int)
+  (s : Int)
+  (x1 : Int)
+  !((s : Int) == int_of_num(0) && (t : Int) == int_of_num(0))
+  (t : Int)
+  (s : Int)
+  (x1 : Int)
+  (lhs1 : Int) == (lhs2 : Int) && (rhs1 : Int) == (rhs2 : Int) \226\134\146 lhs2 <= rhs2 \226\134\146 lhs1 <= rhs1
+  !((x : Int) == int_of_num(0) && (y : Int) == int_of_num(0) && (z : Int) == int_of_num(0))
+  (x : Int) * (v3 : Int) + ((y : Int) * (c32 : Int) + (z : Int) * (c33 : Int))
+  (x : Int) * (v2 : Int) + ((y : Int) * (c22 : Int) + (z : Int) * (c23 : Int))
+  (x : Int) * (v1 : Int) + ((y : Int) * (c12 : Int) + (z : Int) * (c13 : Int))
+  \226\136\128 a11 : Int, \226\136\128 a12 : Int, \226\136\128 a13 : Int, \226\136\128 a22 : Int, \226\136\128 a23 : Int, \226\136\128 a33 : Int, \226\136\128 v1 : Int, \226\136\128 v2 : Int, \226\136\128 v3 : Int, \226\136\128 c12 : Int, \226\136\128 c13 : Int, \226\136\128 c22 : Int, \226\136\128 c23 : Int, \226\136\128 c32 : Int, \226\136\128 c33 : Int, \226\136\128 b11 : Int, \226\136\128 b12 : Int, \226\136\128 b13 : Int, \226\136\128 b22 : Int, \226\136\128 b23 : Int, \226\136\128 b33 : Int, (\226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, !(x == int_of_num(0) && y == int_of_num(0) && z == int_of_num(0)) \226\134\146 a11 * pow(v1, 2) + (a22 * pow(v2, 2) + (a33 * pow(v3, 2) + (int_of_num(2) * (a12 * (v1 * v2)) + (int_of_num(2) * (a13 * (v1 * v3)) + int_of_num(2) * (a23 * (v2 * v3)))))) <= a11 * pow(x, 2) + (a22 * pow(y, 2) + (a33 * pow(z, 2) + (int_of_num(2) * (a12 * (x * y)) + (int_of_num(2) * (a13 * (x * z)) + int_of_num(2) * (a23 * (y * z))))))) && v1 * (c22 * c33 - c23 * c32) - c12 * (v2 * c33 - c23 * v3) + c13 * (v2 * c32 - c22 * v3) == int_of_num(1) && b11 == a11 * pow(v1, 2) + (int_of_num(2) * (a12 * (v1 * v2)) + (int_of_num(2) * (a13 * (v1 * v3)) + (a22 * pow(v2, 2) + (int_of_num(2) * (a23 * (v2 * v3)) + a33 * pow(v3, 2))))) && b22 == a11 * pow(c12, 2) + (int_of_num(2) * (a12 * (c12 * c22)) + (int_of_num(2) * (a13 * (c12 * c32)) + (a22 * pow(c22, 2) + (int_of_num(2) * (a23 * (c22 * c32)) + a33 * pow(c32, 2))))) && b33 == a11 * pow(c13, 2) + (int_of_num(2) * (a12 * (c13 * c23)) + (int_of_num(2) * (a13 * (c13 * c33)) + (a22 * pow(c23, 2) + (int_of_num(2) * (a23 * (c23 * c33)) + a33 * pow(c33, 2))))) && b12 == a11 * (v1 * c12) + (a12 * (v1 * c22 + v2 * c12) + (a13 * (v1 * c32 + v3 * c12) + (a22 * (v2 * c22) + (a23 * (v2 * c32 + v3 * c22) + a33 * (v3 * c32))))) && b13 == a11 * (v1 * c13) + (a12 * (v1 * c23 + v2 * c13) + (a13 * (v1 * c33 + v3 * c13) + (a22 * (v2 * c23) + (a23 * (v2 * c33 + v3 * c23) + a33 * (v3 * c33))))) && b23 == a11 * (c12 * c13) + (a12 * (c12 * c23 + c22 * c13) + (a13 * (c12 * c33 + c32 * c13) + (a22 * (c22 * c23) + (a23 * (c22 * c33 + c32 * c23) + a33 * (c32 * c33))))) \226\134\146 (\226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, !(x == int_of_num(0) && y == int_of_num(0) && z == int_of_num(0)) \226\134\146 b11 <= b11 * pow(x, 2) + (b22 * pow(y, 2) + (b33 * pow(z, 2) + (int_of_num(2) * (b12 * (x * y)) + (int_of_num(2) * (b13 * (x * z)) + int_of_num(2) * (b23 * (y * z)))))))
+  (a : Int) == (b : Int) \226\134\146 int_of_num(0) < a \226\134\146 int_of_num(0) < b
+  !((b11 : Int) == int_of_num(0))
+  int_of_num(0)
+  (b11 : Int)
+  -(b12 : Int)
+  int_of_num(0) < (b11 : Int) * (b11 * (b22 : Int) - pow((b12 : Int), 2))
+  \226\136\128 b11 : Int, \226\136\128 b12 : Int, \226\136\128 b13 : Int, \226\136\128 b22 : Int, \226\136\128 b23 : Int, \226\136\128 b33 : Int, int_of_num(0) < b11 && (\226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, !(x == int_of_num(0) && y == int_of_num(0) && z == int_of_num(0)) \226\134\146 int_of_num(0) < b11 * pow(x, 2) + (b22 * pow(y, 2) + (b33 * pow(z, 2) + (int_of_num(2) * (b12 * (x * y)) + (int_of_num(2) * (b13 * (x * z)) + int_of_num(2) * (b23 * (y * z))))))) \226\134\146 int_of_num(0) < b11 * b22 - pow(b12, 2)
+  (y3 : Int)
+  (y2 : Int)
+  (y1 : Int)
+  (y3 : Int)
+  (y2 : Int)
+  (y1 : Int)
+  (x3 : Int)
+  (x2 : Int)
+  (x1 : Int)
+  (c33 : Int)
+  (c23 : Int)
+  (c13 : Int)
+  (c32 : Int)
+  (c22 : Int)
+  (c12 : Int)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  \226\136\128 a11 : Int, \226\136\128 a12 : Int, \226\136\128 a13 : Int, \226\136\128 a22 : Int, \226\136\128 a23 : Int, \226\136\128 a33 : Int, \226\136\128 v1 : Int, \226\136\128 v2 : Int, \226\136\128 v3 : Int, \226\136\128 c12 : Int, \226\136\128 c13 : Int, \226\136\128 c22 : Int, \226\136\128 c23 : Int, \226\136\128 c32 : Int, \226\136\128 c33 : Int, \226\136\128 b11 : Int, \226\136\128 b12 : Int, \226\136\128 b13 : Int, \226\136\128 b22 : Int, \226\136\128 b23 : Int, \226\136\128 b33 : Int, \226\136\128 n : Int, v1 * (c22 * c33 - c23 * c32) - c12 * (v2 * c33 - c23 * v3) + c13 * (v2 * c32 - c22 * v3) == int_of_num(1) && b11 == a11 * pow(v1, 2) + (int_of_num(2) * (a12 * (v1 * v2)) + (int_of_num(2) * (a13 * (v1 * v3)) + (a22 * pow(v2, 2) + (int_of_num(2) * (a23 * (v2 * v3)) + a33 * pow(v3, 2))))) && b22 == a11 * pow(c12, 2) + (int_of_num(2) * (a12 * (c12 * c22)) + (int_of_num(2) * (a13 * (c12 * c32)) + (a22 * pow(c22, 2) + (int_of_num(2) * (a23 * (c22 * c32)) + a33 * pow(c32, 2))))) && b33 == a11 * pow(c13, 2) + (int_of_num(2) * (a12 * (c13 * c23)) + (int_of_num(2) * (a13 * (c13 * c33)) + (a22 * pow(c23, 2) + (int_of_num(2) * (a23 * (c23 * c33)) + a33 * pow(c33, 2))))) && b12 == a11 * (v1 * c12) + (a12 * (v1 * c22 + v2 * c12) + (a13 * (v1 * c32 + v3 * c12) + (a22 * (v2 * c22) + (a23 * (v2 * c32 + v3 * c22) + a33 * (v3 * c32))))) && b13 == a11 * (v1 * c13) + (a12 * (v1 * c23 + v2 * c13) + (a13 * (v1 * c33 + v3 * c13) + (a22 * (v2 * c23) + (a23 * (v2 * c33 + v3 * c23) + a33 * (v3 * c33))))) && b23 == a11 * (c12 * c13) + (a12 * (c12 * c23 + c22 * c13) + (a13 * (c12 * c33 + c32 * c13) + (a22 * (c22 * c23) + (a23 * (c22 * c33 + c32 * c23) + a33 * (c32 * c33))))) && (\226\136\131 x1 : Int, \226\136\131 x2 : Int, \226\136\131 x3 : Int, a11 * pow(x1, 2) + (a22 * pow(x2, 2) + (a33 * pow(x3, 2) + (int_of_num(2) * (a12 * (x1 * x2)) + (int_of_num(2) * (a13 * (x1 * x3)) + int_of_num(2) * (a23 * (x2 * x3)))))) == n) \226\134\146 (\226\136\131 y1 : Int, \226\136\131 y2 : Int, \226\136\131 y3 : Int, b11 * pow(y1, 2) + (b22 * pow(y2, 2) + (b33 * pow(y3, 2) + (int_of_num(2) * (b12 * (y1 * y2)) + (int_of_num(2) * (b13 * (y1 * y3)) + int_of_num(2) * (b23 * (y2 * y3)))))) == n)
+  (b11 : Int) == int_of_num(1)
+  (b11 : Int) * pow((y1 : Int), 2) + ((b22 : Int) * pow((y2 : Int), 2) + ((b33 : Int) * pow((y3 : Int), 2) + (int_of_num(2) * ((b12 : Int) * (y1 * y2)) + (int_of_num(2) * ((b13 : Int) * (y1 * y3)) + int_of_num(2) * ((b23 : Int) * (y2 * y3)))))) == (n : Int)
+  (y3 : Int)
+  (y2 : Int)
+  (y1 : Int)
+  (b11 : Int) == int_of_num(1)
+  (b11 : Int) * ((b22 : Int) * (b33 : Int) - pow((b23 : Int), 2)) - (b12 : Int) * (b12 * b33 - (b13 : Int) * b23) + b13 * (b12 * b23 - b13 * b22) == int_of_num(1)
+  (b11 : Int) == int_of_num(1)
+  int_of_num(0) < (b11 : Int) * (b22 : Int) - pow((b12 : Int), 2)
+  (b11 : Int) == int_of_num(1)
+  (b33 : Int)
+  (b23 : Int)
+  (b22 : Int)
+  (b13 : Int)
+  (b12 : Int)
+  (c33 : Int)
+  (c32 : Int)
+  (c23 : Int)
+  (c22 : Int)
+  (c13 : Int)
+  (c12 : Int)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  (a33 : Int)
+  (a23 : Int)
+  (a22 : Int)
+  (a13 : Int)
+  (a12 : Int)
+  (a11 : Int)
+  \226\136\131 y1 : Int, \226\136\131 y2 : Int, \226\136\131 y3 : Int, (b11 : Int) * pow(y1, 2) + ((b22 : Int) * pow(y2, 2) + ((b33 : Int) * pow(y3, 2) + (int_of_num(2) * ((b12 : Int) * (y1 * y2)) + (int_of_num(2) * ((b13 : Int) * (y1 * y3)) + int_of_num(2) * ((b23 : Int) * (y2 * y3)))))) == (n : Int)
+  (b33 : Int)
+  (b23 : Int)
+  (b22 : Int)
+  (b13 : Int)
+  (b12 : Int)
+  (b11 : Int) == int_of_num(1)
+  (b33 : Int)
+  (b23 : Int)
+  (b13 : Int)
+  int_of_num(0) < (b11 : Int) * (b22 : Int) - pow((b12 : Int), 2)
+  (b11 : Int)
+  \226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, !(x == int_of_num(0) && y == int_of_num(0) && z == int_of_num(0)) \226\134\146 int_of_num(0) < (b11 : Int) * pow(x, 2) + ((b22 : Int) * pow(y, 2) + ((b33 : Int) * pow(z, 2) + (int_of_num(2) * ((b12 : Int) * (x * y)) + (int_of_num(2) * ((b13 : Int) * (x * z)) + int_of_num(2) * ((b23 : Int) * (y * z))))))
+  (a11 : Int) * ((a22 : Int) * (a33 : Int) - pow((a23 : Int), 2)) - (a12 : Int) * (a12 * a33 - a23 * (a13 : Int)) + a13 * (a12 * a23 - a22 * a13) == int_of_num(1)
+  (v1 : Int) * ((c22 : Int) * (c33 : Int) - (c23 : Int) * (c32 : Int)) - (c12 : Int) * ((v2 : Int) * c33 - c23 * (v3 : Int)) + (c13 : Int) * (v2 * c32 - c22 * v3) == int_of_num(1)
+  (b11 : Int) * ((b22 : Int) * (b33 : Int) - pow((b23 : Int), 2)) - (b12 : Int) * (b12 * b33 - (b13 : Int) * b23) + b13 * (b12 * b23 - b13 * b22) == int_of_num(1)
+  (a11 : Int) * pow((v1 : Int), 2) + (int_of_num(2) * ((a12 : Int) * (v1 * (v2 : Int))) + (int_of_num(2) * ((a13 : Int) * (v1 * (v3 : Int))) + ((a22 : Int) * pow(v2, 2) + (int_of_num(2) * ((a23 : Int) * (v2 * v3)) + (a33 : Int) * pow(v3, 2))))) == (b11 : Int)
+  int_of_num(0) < (b11 : Int)
+  (c33 : Int)
+  (c32 : Int)
+  (c23 : Int)
+  (c22 : Int)
+  (c13 : Int)
+  (c12 : Int)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  (a33 : Int)
+  (a23 : Int)
+  (a22 : Int)
+  (a13 : Int)
+  (a12 : Int)
+  (a11 : Int)
+  \226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, !(x == int_of_num(0) && y == int_of_num(0) && z == int_of_num(0)) \226\134\146 (b11 : Int) <= b11 * pow(x, 2) + ((b22 : Int) * pow(y, 2) + ((b33 : Int) * pow(z, 2) + (int_of_num(2) * ((b12 : Int) * (x * y)) + (int_of_num(2) * ((b13 : Int) * (x * z)) + int_of_num(2) * ((b23 : Int) * (y * z))))))
+  (b23 : Int) == (a11 : Int) * ((c12 : Int) * (c13 : Int)) + ((a12 : Int) * (c12 * (c23 : Int) + (c22 : Int) * c13) + ((a13 : Int) * (c12 * (c33 : Int) + (c32 : Int) * c13) + ((a22 : Int) * (c22 * c23) + ((a23 : Int) * (c22 * c33 + c32 * c23) + (a33 : Int) * (c32 * c33)))))
+  (b13 : Int) == (a11 : Int) * ((v1 : Int) * (c13 : Int)) + ((a12 : Int) * (v1 * (c23 : Int) + (v2 : Int) * c13) + ((a13 : Int) * (v1 * (c33 : Int) + (v3 : Int) * c13) + ((a22 : Int) * (v2 * c23) + ((a23 : Int) * (v2 * c33 + v3 * c23) + (a33 : Int) * (v3 * c33)))))
+  (b12 : Int) == (a11 : Int) * ((v1 : Int) * (c12 : Int)) + ((a12 : Int) * (v1 * (c22 : Int) + (v2 : Int) * c12) + ((a13 : Int) * (v1 * (c32 : Int) + (v3 : Int) * c12) + ((a22 : Int) * (v2 * c22) + ((a23 : Int) * (v2 * c32 + v3 * c22) + (a33 : Int) * (v3 * c32)))))
+  (b33 : Int) == (a11 : Int) * pow((c13 : Int), 2) + (int_of_num(2) * ((a12 : Int) * (c13 * (c23 : Int))) + (int_of_num(2) * ((a13 : Int) * (c13 * (c33 : Int))) + ((a22 : Int) * pow(c23, 2) + (int_of_num(2) * ((a23 : Int) * (c23 * c33)) + (a33 : Int) * pow(c33, 2)))))
+  (b22 : Int) == (a11 : Int) * pow((c12 : Int), 2) + (int_of_num(2) * ((a12 : Int) * (c12 * (c22 : Int))) + (int_of_num(2) * ((a13 : Int) * (c12 * (c32 : Int))) + ((a22 : Int) * pow(c22, 2) + (int_of_num(2) * ((a23 : Int) * (c22 * c32)) + (a33 : Int) * pow(c32, 2)))))
+  (b11 : Int) == (a11 : Int) * pow((v1 : Int), 2) + (int_of_num(2) * ((a12 : Int) * (v1 * (v2 : Int))) + (int_of_num(2) * ((a13 : Int) * (v1 * (v3 : Int))) + ((a22 : Int) * pow(v2, 2) + (int_of_num(2) * ((a23 : Int) * (v2 * v3)) + (a33 : Int) * pow(v3, 2)))))
+  (c33 : Int)
+  (c32 : Int)
+  (c23 : Int)
+  (c22 : Int)
+  (c13 : Int)
+  (c12 : Int)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  (a33 : Int)
+  (a23 : Int)
+  (a22 : Int)
+  (a13 : Int)
+  (a12 : Int)
+  (a11 : Int)
+  \226\136\131 p : Int, \226\136\131 q : Int, \226\136\131 s : Int, (v1 : Int) * p + ((v2 : Int) * q + (v3 : Int) * s) == int_of_num(1)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  (a33 : Int)
+  (a23 : Int)
+  (a22 : Int)
+  (a13 : Int)
+  (a12 : Int)
+  (a11 : Int)
+  (a11 : Int) * ((a22 : Int) * (a33 : Int) - pow((a23 : Int), 2)) - (a12 : Int) * (a12 * a33 - a23 * (a13 : Int)) + a13 * (a12 * a23 - a22 * a13) == int_of_num(1)
+  \226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, !(x == int_of_num(0) && y == int_of_num(0) && z == int_of_num(0)) \226\134\146 int_of_num(0) < (a11 : Int) * pow(x, 2) + ((a22 : Int) * pow(y, 2) + ((a33 : Int) * pow(z, 2) + (int_of_num(2) * ((a12 : Int) * (x * y)) + (int_of_num(2) * ((a13 : Int) * (x * z)) + int_of_num(2) * ((a23 : Int) * (y * z))))))
+  \226\136\128 a11 : Int, \226\136\128 a12 : Int, \226\136\128 a13 : Int, \226\136\128 a22 : Int, \226\136\128 a23 : Int, \226\136\128 a33 : Int, \226\136\128 n : Int, int_of_num(0) < a11 && int_of_num(0) < a11 * a22 - pow(a12, 2) && a11 * (a22 * a33 - pow(a23, 2)) - a12 * (a12 * a33 - a23 * a13) + a13 * (a12 * a23 - a22 * a13) == int_of_num(1) && (\226\136\131 x1 : Int, \226\136\131 x2 : Int, \226\136\131 x3 : Int, a11 * pow(x1, 2) + (a22 * pow(x2, 2) + (a33 * pow(x3, 2) + (int_of_num(2) * (a12 * (x1 * x2)) + (int_of_num(2) * (a13 * (x1 * x3)) + int_of_num(2) * (a23 * (x2 * x3)))))) == n) \226\134\146 (\226\136\131 u : Int, \226\136\131 v : Int, \226\136\131 w : Int, pow(u, 2) + (pow(v, 2) + pow(w, 2)) == n)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  int_of_num(0)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  int_of_num(0)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  (v3 : Int)
+  (v2 : Int)
+  (v1 : Int)
+  int_of_num(0)
+  int_of_num(1)
+  int_of_num(0)
+  int_of_num(0)
+  (d' : Int) * (n : Int) - int_of_num(1) == (a22 : Int)
+  (a11 : Int) * (a22 : Int) - pow((t : Int), 2) == (d' : Int)
+  (a11 : Int) * (a22 : Int) - pow((t : Int), 2) == (d' : Int)
+  (n : Int)
+  int_of_num(0)
+  (a22 : Int)
+  int_of_num(1)
+  (t : Int)
+  (a11 : Int)
+  (t : Int)
+  (a11 : Int) * (a22 : Int) == pow((t : Int), 2) + (d' : Int)
+  int_of_num(0) < (a11 : Int) * (a22 : Int)
+  int_of_num(0) < (a11 : Int)
+  pow((t : Int), 2) + (d' : Int) == (a22 : Int) * (a11 : Int)
+  (a11 : Int) * (a22 : Int) - pow((t : Int), 2) == (d' : Int)
+  int_of_num(1) * int_of_num(2) <= (d' : Int) * (n : Int)
+  int_of_num(0) < (a22 : Int)
+  (a11 : Int)
+  divides((a22 : Int), pow((t : Int), 2) + (d' : Int))
+  (a22 : Int) == (d' : Int) * (n : Int) - int_of_num(1)
+  \226\136\128 n : Int, \226\136\128 d' : Int, \226\136\128 t : Int, int_of_num(1) < n && int_of_num(0) < d' && divides(d' * n - int_of_num(1), pow(t, 2) + d') \226\134\146 (\226\136\131 u : Int, \226\136\131 v : Int, \226\136\131 w : Int, pow(u, 2) + (pow(v, 2) + pow(w, 2)) == n)
+  (d : Int)
+  op_eq_eq(pow((x : Int), 2) + (d' : Int), int_of_num(0), mod(d' * (n : Int) - int_of_num(1)))
+  (x : Int)
+  (d' : Int)
+  \226\136\128 n : Int, \226\136\128 d' : Int, int_of_num(1) < n && int_of_num(0) < d' && (\226\136\131 x : Int, op_eq_eq(pow(x, 2) + d', int_of_num(0), mod(d' * n - int_of_num(1)))) \226\134\146 (\226\136\131 u : Int, \226\136\131 v : Int, \226\136\131 w : Int, pow(u, 2) + (pow(v, 2) + pow(w, 2)) == n)
   1 < 8
-  forall d:num. (d == 1) (mod 8) ==> ?q. d = 8 * q + 1
+  \226\136\128 d : Num, op_eq_eq(d, 1, mod(8)) \226\134\146 (\226\136\131 q : Num, d == 8 * q + 1)
   4
   8
-  a:num
-  x:num
-  forall x a:num. (x == a) (mod 8) ==> (x == a) (mod 4)
-  ((8 * q + 1) EXP 2 - 1) DIV 8 = 8*q*q + 2*q
-  q:num
-  forall d:num. (d == 1) (mod 8) ==> jacobi(2, d) = &1
+  (a : Num)
+  (x : Num)
+  \226\136\128 x : Num, \226\136\128 a : Num, op_eq_eq(x, a, mod(8)) \226\134\146 op_eq_eq(x, a, mod(4))
+  DIV(EXP(8 * (q : Num) + 1, 2) - 1, 8) == 8 * (q * q) + 2 * q
+  (q : Num)
+  \226\136\128 d : Num, op_eq_eq(d, 1, mod(8)) \226\134\146 jacobi((2, d)) == int_of_num(1)
   1 < 4
-  forall d:num. (d == 1) (mod 4) ==> ?q. d = 4 * q + 1
-  q:num
-  forall p:num. (p == 1) (mod 4) ==> ODD p
-  forall p:num. (p == 1) (mod 4) ==> jacobi(p - 1, p) = &1
+  \226\136\128 d : Num, op_eq_eq(d, 1, mod(4)) \226\134\146 (\226\136\131 q : Num, d == 4 * q + 1)
+  (q : Num)
+  \226\136\128 p : Num, op_eq_eq(p, 1, mod(4)) \226\134\146 ODD(p)
+  \226\136\128 p : Num, op_eq_eq(p, 1, mod(4)) \226\134\146 jacobi((p - 1, p)) == int_of_num(1)
   3 < 8
-  forall d:num. (d == 3) (mod 8) ==> ?q. d = 8 * q + 3
+  \226\136\128 d : Num, op_eq_eq(d, 3, mod(8)) \226\134\146 (\226\136\131 q : Num, d == 8 * q + 3)
   3 < 4
-  forall d:num. (d == 3) (mod 4) ==> ?q. d = 4 * q + 3
-  q:num
-  forall p:num. (p == 3) (mod 4) ==> ODD p
-  ((4 * q + 3) - 1) DIV 2 = 2 * q + 1
-  ODD p
-  q:num
-  forall p:num. (p == 3) (mod 4) ==> jacobi(p - 1, p) = -- &1
-  ((8 * q + 3) EXP 2 - 1) DIV 8 = 8*q*q + 6*q + 1
-  q:num
-  forall d:num. (d == 3) (mod 8) ==> jacobi(2, d) = -- &1
-  d':num
-  p:num
+  \226\136\128 d : Num, op_eq_eq(d, 3, mod(4)) \226\134\146 (\226\136\131 q : Num, d == 4 * q + 3)
+  (q : Num)
+  \226\136\128 p : Num, op_eq_eq(p, 3, mod(4)) \226\134\146 ODD(p)
+  DIV(4 * (q : Num) + 3 - 1, 2) == 2 * q + 1
+  ODD((p : Num))
+  (q : Num)
+  \226\136\128 p : Num, op_eq_eq(p, 3, mod(4)) \226\134\146 jacobi((p - 1, p)) == -int_of_num(1)
+  DIV(EXP(8 * (q : Num) + 3, 2) - 1, 8) == 8 * (q * q) + (6 * q + 1)
+  (q : Num)
+  \226\136\128 d : Num, op_eq_eq(d, 3, mod(8)) \226\134\146 jacobi((2, d)) == -int_of_num(1)
+  (d' : Num)
+  (p : Num)
   2
-  d':num
-  d' - 1
-  2*p
-  forall p d':num.\n     ((d' == 1) (mod 8) \\/ (d' == 3) (mod 8)) /\\\n     (2 * p == d' - 1) (mod d')\n     ==> jacobi(p, d') = &1
+  (d' : Num)
+  (d' : Num) - 1
+  2 * (p : Num)
+  \226\136\128 p : Num, \226\136\128 d' : Num, (op_eq_eq(d', 1, mod(8)) || op_eq_eq(d', 3, mod(8))) && op_eq_eq(2 * p, d' - 1, mod(d')) \226\134\146 jacobi((p, d')) == int_of_num(1)
   8
   8
   8
@@ -87363,393 +87363,393 @@ Autoformalization/three_squares quotations (1104):
   8
   8
   8
-  (2*p == d' - 1) (mod d')
-  (2*p == d' - 1) (mod d')
-  (2*p == d' - 1) (mod d')
-  (2*p == d' - 1) (mod d')
-  (2 * qp) * m = 2 * (qp * m)
-  ((4 * qp + 1) - 1) DIV 2 = 2 * qp
-  (p - 1) DIV 2 = 2 * qp
-  qp:num
-  d':num
-  p:num
-  forall p d':num.\n     ODD p /\\ ODD d' /\\ coprime(p,d') /\\ (p == 1) (mod 4)\n     ==> jacobi(d', p) = jacobi(p, d')
-  jacobi(d,p) = jacobi(p,d)
-  forall p d:num.\n     ODD p /\\ ODD d /\\ coprime(p,d) /\\\n     (p == 1) (mod 4) /\\ jacobi(p,d) = &1\n     ==> jacobi(d * (p - 1),p) = &1
-  p:num
-  d = d * 1
-  d * (p - 1) + d = d * p:num
-  d * (p - 1) + d:num
-  x:num
-  ?x:num. (x EXP 2 == d * (p - 1)) (mod p)
-  p divides d * (p - 1)
-  p:num
-  d * (p - 1)
-  ?x:num. (x EXP 2 == d * (p - 1)) (mod p)
-  forall p d:num.\n     prime p /\\ jacobi(d * (p - 1),p) = &1\n     ==> ?x. (x EXP 2 + d == 0) (mod p)
-  ODD p
-  forall p d:num.\n     prime p /\\ ODD d /\\ coprime(p,d) /\\\n     (p == 1) (mod 4) /\\ jacobi(p,d) = &1\n     ==> ?x. (x EXP 2 + d == 0) (mod p)
-  forall p d':num.\n     prime p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 1) (mod 4) /\\\n     ((d' == 1) (mod 8) \\/ (d' == 3) (mod 8)) /\\\n     (2 * p == d' - 1) (mod d')\n     ==> ?x. (x EXP 2 + d' == 0) (mod p)
-  x EXP 2 + d'
-  (z EXP 2 + d' == 0) (mod p)
-  z:num
-  forall x p:num. (x + p == x) (mod p)
-  x + p:num
-  x:num
-  ODD x
-  ?z. ODD z /\\ (z == x) (mod p)
-  forall p d' x:num.\n     ODD p /\\ ODD d' /\\ (x EXP 2 + d' == 0) (mod p)\n     ==> ?z. (z EXP 2 + d' == 0) (mod (2 * p))
-  (x EXP 2 + d == 0) (mod q)
-  q + 1 = d * m
-  &d * &m - &1:int = &q
-  &x:int
-  &d:int
-  &m:int
-  forall q d m x:num.\n     (x EXP 2 + d == 0) (mod q) /\\\n     q + 1 = d * m /\\\n     1 < m /\\ 1 <= d\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &m
-  z:num
-  m:num
-  d:num
-  2 * p
-  z:num
-  x:num
-  d:num
-  p:num
-  forall p d m:num.\n     ODD p /\\ ODD d /\\\n     (?x. (x EXP 2 + d == 0) (mod p)) /\\\n     2 * p + 1 = d * m /\\\n     1 < m\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &m
-  ODD d
-  ODD d
-  ODD d
-  ODD d
-  ODD d
+  op_eq_eq(2 * (p : Num), (d' : Num) - 1, mod(d'))
+  op_eq_eq(2 * (p : Num), (d' : Num) - 1, mod(d'))
+  op_eq_eq(2 * (p : Num), (d' : Num) - 1, mod(d'))
+  op_eq_eq(2 * (p : Num), (d' : Num) - 1, mod(d'))
+  2 * (qp : Num) * (m : Num) == 2 * (qp * m)
+  DIV(4 * (qp : Num) + 1 - 1, 2) == 2 * qp
+  DIV((p : Num) - 1, 2) == 2 * (qp : Num)
+  (qp : Num)
+  (d' : Num)
+  (p : Num)
+  \226\136\128 p : Num, \226\136\128 d' : Num, ODD(p) && ODD(d') && coprime((p, d')) && op_eq_eq(p, 1, mod(4)) \226\134\146 jacobi((d', p)) == jacobi((p, d'))
+  jacobi(((d : Num), (p : Num))) == jacobi((p, d))
+  \226\136\128 p : Num, \226\136\128 d : Num, ODD(p) && ODD(d) && coprime((p, d)) && op_eq_eq(p, 1, mod(4)) && jacobi((p, d)) == int_of_num(1) \226\134\146 jacobi((d * (p - 1), p)) == int_of_num(1)
+  (p : Num)
+  (d : Num) == d * 1
+  (d : Num) * ((p : Num) - 1) + d == d * p
+  (d : Num) * ((p : Num) - 1) + d
+  (x : Num)
+  \226\136\131 x : Num, op_eq_eq(EXP(x, 2), (d : Num) * ((p : Num) - 1), mod(p))
+  divides((p : Num), (d : Num) * (p - 1))
+  (p : Num)
+  (d : Num) * ((p : Num) - 1)
+  \226\136\131 x : Num, op_eq_eq(EXP(x, 2), (d : Num) * ((p : Num) - 1), mod(p))
+  \226\136\128 p : Num, \226\136\128 d : Num, prime(p) && jacobi((d * (p - 1), p)) == int_of_num(1) \226\134\146 (\226\136\131 x : Num, op_eq_eq(EXP(x, 2) + d, 0, mod(p)))
+  ODD((p : Num))
+  \226\136\128 p : Num, \226\136\128 d : Num, prime(p) && ODD(d) && coprime((p, d)) && op_eq_eq(p, 1, mod(4)) && jacobi((p, d)) == int_of_num(1) \226\134\146 (\226\136\131 x : Num, op_eq_eq(EXP(x, 2) + d, 0, mod(p)))
+  \226\136\128 p : Num, \226\136\128 d' : Num, prime(p) && ODD(d') && coprime((p, d')) && op_eq_eq(p, 1, mod(4)) && (op_eq_eq(d', 1, mod(8)) || op_eq_eq(d', 3, mod(8))) && op_eq_eq(2 * p, d' - 1, mod(d')) \226\134\146 (\226\136\131 x : Num, op_eq_eq(EXP(x, 2) + d', 0, mod(p)))
+  EXP((x : Num), 2) + (d' : Num)
+  op_eq_eq(EXP((z : Num), 2) + (d' : Num), 0, mod((p : Num)))
+  (z : Num)
+  \226\136\128 x : Num, \226\136\128 p : Num, op_eq_eq(x + p, x, mod(p))
+  (x : Num) + (p : Num)
+  (x : Num)
+  ODD((x : Num))
+  \226\136\131 z : Num, ODD(z) && op_eq_eq(z, (x : Num), mod((p : Num)))
+  \226\136\128 p : Num, \226\136\128 d' : Num, \226\136\128 x : Num, ODD(p) && ODD(d') && op_eq_eq(EXP(x, 2) + d', 0, mod(p)) \226\134\146 (\226\136\131 z : Num, op_eq_eq(EXP(z, 2) + d', 0, mod(2 * p)))
+  op_eq_eq(EXP((x : Num), 2) + (d : Num), 0, mod((q : Num)))
+  (q : Num) + 1 == (d : Num) * (m : Num)
+  int_of_num((d : Num)) * int_of_num((m : Num)) - int_of_num(1) == int_of_num((q : Num))
+  int_of_num((x : Num))
+  int_of_num((d : Num))
+  int_of_num((m : Num))
+  \226\136\128 q : Num, \226\136\128 d : Num, \226\136\128 m : Num, \226\136\128 x : Num, op_eq_eq(EXP(x, 2) + d, 0, mod(q)) && q + 1 == d * m && 1 < m && 1 <= d \226\134\146 (\226\136\131 u : Int, \226\136\131 v : Int, \226\136\131 w : Int, pow(u, 2) + (pow(v, 2) + pow(w, 2)) == int_of_num(m))
+  (z : Num)
+  (m : Num)
+  (d : Num)
+  2 * (p : Num)
+  (z : Num)
+  (x : Num)
+  (d : Num)
+  (p : Num)
+  \226\136\128 p : Num, \226\136\128 d : Num, \226\136\128 m : Num, ODD(p) && ODD(d) && (\226\136\131 x : Num, op_eq_eq(EXP(x, 2) + d, 0, mod(p))) && 2 * p + 1 == d * m && 1 < m \226\134\146 (\226\136\131 u : Int, \226\136\131 v : Int, \226\136\131 w : Int, pow(u, 2) + (pow(v, 2) + pow(w, 2)) == int_of_num(m))
+  ODD((d : Num))
+  ODD((d : Num))
+  ODD((d : Num))
+  ODD((d : Num))
+  ODD((d : Num))
   2
-  c:num
-  4 = 2 * 2
-  forall a b c:num. ODD a /\\ c * b = 2 * a + 1 ==> coprime(a,4 * b)
-  a:num
-  m:num
-  forall m a:num. 1 < m /\\ coprime(a,m)\n            ==> ?p. prime p /\\ (p == a) (mod m)
+  (c : Num)
+  4 == 2 * 2
+  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 c : Num, ODD(a) && c * b == 2 * a + 1 \226\134\146 coprime((a, 4 * b))
+  (a : Num)
+  (m : Num)
+  \226\136\128 m : Num, \226\136\128 a : Num, 1 < m && coprime((a, m)) \226\134\146 (\226\136\131 p : Num, prime(p) && op_eq_eq(p, a, mod(m)))
   1
-  8*k+3
-  4*k+1
-  forall k:num. ?p. prime p /\\ (p == 4 * k + 1) (mod (4 * (8 * k + 3)))
-  forall p c d m:num. prime p /\\ c * p + 1 = d * m ==> coprime(p,d)
-  m:num
-  d':num
-  p:num
-  m:num
-  d':num
+  8 * (k : Num) + 3
+  4 * (k : Num) + 1
+  \226\136\128 k : Num, \226\136\131 p : Num, prime(p) && op_eq_eq(p, 4 * k + 1, mod(4 * (8 * k + 3)))
+  \226\136\128 p : Num, \226\136\128 c : Num, \226\136\128 d : Num, \226\136\128 m : Num, prime(p) && c * p + 1 == d * m \226\134\146 coprime((p, d))
+  (m : Num)
+  (d' : Num)
+  (p : Num)
+  (m : Num)
+  (d' : Num)
   2
-  p:num
-  coprime(p:num,d')
-  2 * p + 1 = d' * m
-  (2 * p == d' - 1) (mod d')
-  4*m*j+4*k+1 = 2*(2*m*j+2*k)+1
-  ODD p
-  4*m*j+4*k+1 = (m*j+k)*4+1
-  (p == 1) (mod 4)
-  ODD d'
-  8*j+1 = j*8+1
-  (d' == 1) (mod 8)
-  p = 4 * m * j + 4 * k + 1
-  2 * p = d' * m - 1 /\\ 2 * p + 1 = d' * m
-  m = 8*k+3
-  d' = 8*j+1
-  p:num
-  4*k+1
-  4*(8*k+3)
-  j:num
-  ?j. p = 4*(8*k+3)*j + (4*k+1)
-  p:num
-  k:num
-  forall k:num. ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &(8 * k + 3)
-  num_of_int(abs w)
-  num_of_int(abs v)
-  num_of_int(abs u)
-  w:int
-  v:int
-  u:int
-  forall n:num.\n     (?u v w:int. u pow 2 + v pow 2 + w pow 2 = &n)\n     ==> (?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n)
-  forall k:num. ?u v w:num. u EXP 2 + v EXP 2 + w EXP 2 = 8 * k + 3
-  ~(m = 0) ==> (n < m <=> n = m - 1 \\/ n < m - 1)
+  (p : Num)
+  coprime(((p : Num), (d' : Num)))
+  2 * (p : Num) + 1 == (d' : Num) * (m : Num)
+  op_eq_eq(2 * (p : Num), (d' : Num) - 1, mod(d'))
+  4 * ((m : Num) * (j : Num)) + (4 * (k : Num) + 1) == 2 * (2 * (m * j) + 2 * k) + 1
+  ODD((p : Num))
+  4 * ((m : Num) * (j : Num)) + (4 * (k : Num) + 1) == (m * j + k) * 4 + 1
+  op_eq_eq((p : Num), 1, mod(4))
+  ODD((d' : Num))
+  8 * (j : Num) + 1 == j * 8 + 1
+  op_eq_eq((d' : Num), 1, mod(8))
+  (p : Num) == 4 * ((m : Num) * (j : Num)) + (4 * (k : Num) + 1)
+  2 * (p : Num) == (d' : Num) * (m : Num) - 1 && 2 * p + 1 == d' * m
+  (m : Num) == 8 * (k : Num) + 3
+  (d' : Num) == 8 * (j : Num) + 1
+  (p : Num)
+  4 * (k : Num) + 1
+  4 * (8 * (k : Num) + 3)
+  (j : Num)
+  \226\136\131 j : Num, (p : Num) == 4 * ((8 * (k : Num) + 3) * j) + (4 * k + 1)
+  (p : Num)
+  (k : Num)
+  \226\136\128 k : Num, \226\136\131 u : Int, \226\136\131 v : Int, \226\136\131 w : Int, pow(u, 2) + (pow(v, 2) + pow(w, 2)) == int_of_num(8 * k + 3)
+  num_of_int(abs((w : Int)))
+  num_of_int(abs((v : Int)))
+  num_of_int(abs((u : Int)))
+  (w : Int)
+  (v : Int)
+  (u : Int)
+  \226\136\128 n : Num, (\226\136\131 u : Int, \226\136\131 v : Int, \226\136\131 w : Int, pow(u, 2) + (pow(v, 2) + pow(w, 2)) == int_of_num(n)) \226\134\146 (\226\136\131 x : Num, \226\136\131 y : Num, \226\136\131 z : Num, EXP(x, 2) + (EXP(y, 2) + EXP(z, 2)) == n)
+  \226\136\128 k : Num, \226\136\131 u : Num, \226\136\131 v : Num, \226\136\131 w : Num, EXP(u, 2) + (EXP(v, 2) + EXP(w, 2)) == 8 * k + 3
+  !((m : Num) == 0) \226\134\146 ((n : Num) < m) == (n == m - 1 || n < m - 1)
   8
-  n:num
-  forall n. (n EXP 2 == 0) (mod 8) \\/\n       (n EXP 2 == 1) (mod 8) \\/\n       (n EXP 2 == 4) (mod 8)
-  (x:num == a) (mod n) /\\ (y == b) (mod n) /\\ (z == c) (mod n) /\\\n    (x + y + z == d) (mod n)\n    ==> (a + b + c == d) (mod n)
-  a ==> ~b <=> ~(a /\\ b)
-  x:num
-  y:num
-  z:num
-  forall x y z. ~((x EXP 2 + y EXP 2 + z EXP 2 == 7) (mod 8))
-  p divides (1 + p * q + r) <=> p divides (r + 1)
-  p divides (1 + p * q) <=> p divides 1
-  p:num divides (p * x + y) <=> p divides y
-  (2 * n) EXP 2 = 4 * n EXP 2
-  SUC(2 * n) EXP 2 = 4 * (n EXP 2 + n) + 1
-  ~p ==> p ==> q
-  z:num
-  y:num
-  x:num
-  forall x y z.\n     4 divides (x EXP 2 + y EXP 2 + z EXP 2)\n     ==> EVEN x /\\ EVEN y /\\ EVEN z
-  (2 * x) EXP 2 = 4 * x EXP 2
-  4 * 4 EXP a * (8 * m + 7) = x EXP 2 + y EXP 2 + z EXP 2
-  EVEN x /\\ EVEN y /\\ EVEN z
-  e:num
+  (n : Num)
+  \226\136\128 n : Num, op_eq_eq(EXP(n, 2), 0, mod(8)) || op_eq_eq(EXP(n, 2), 1, mod(8)) || op_eq_eq(EXP(n, 2), 4, mod(8))
+  op_eq_eq((x : Num), (a : Num), mod((n : Num))) && op_eq_eq((y : Num), (b : Num), mod(n)) && op_eq_eq((z : Num), (c : Num), mod(n)) && op_eq_eq(x + (y + z), (d : Num), mod(n)) \226\134\146 op_eq_eq(a + (b + c), d, mod(n))
+  ((a : Bool) \226\134\146 !(b : Bool)) == !(a && b)
+  (x : Num)
+  (y : Num)
+  (z : Num)
+  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 z : Num, !op_eq_eq(EXP(x, 2) + (EXP(y, 2) + EXP(z, 2)), 7, mod(8))
+  divides((p : Num), 1 + (p * (q : Num) + (r : Num))) == divides(p, r + 1)
+  divides((p : Num), 1 + p * (q : Num)) == divides(p, 1)
+  divides((p : Num), p * (x : Num) + (y : Num)) == divides(p, y)
+  EXP(2 * (n : Num), 2) == 4 * EXP(n, 2)
+  EXP(SUC(2 * (n : Num)), 2) == 4 * (EXP(n, 2) + n) + 1
+  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+  (z : Num)
+  (y : Num)
+  (x : Num)
+  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 z : Num, divides(4, EXP(x, 2) + (EXP(y, 2) + EXP(z, 2))) \226\134\146 EVEN(x) && EVEN(y) && EVEN(z)
+  EXP(2 * (x : Num), 2) == 4 * EXP(x, 2)
+  4 * (EXP(4, (a : Num)) * (8 * (m : Num) + 7)) == EXP((x : Num), 2) + (EXP((y : Num), 2) + EXP((z : Num), 2))
+  EVEN((x : Num)) && EVEN((y : Num)) && EVEN((z : Num))
+  (e : Num)
   8
-  z:num
-  y:num
-  x:num
+  (z : Num)
+  (y : Num)
+  (x : Num)
   8
-  forall a m x y z. ~(4 EXP a * (8 * m + 7) = x EXP 2 + y EXP 2 + z EXP 2)
-  (2 * m) EXP 2 = 4 * m EXP 2
-  2 * z
-  2 * y
-  2 * x
-  z:num
-  y:num
-  x:num
-  forall n.\n     (?x y z. x EXP 2 + y EXP 2 + z EXP 2 = n)\n     ==> (?x y z. x EXP 2 + y EXP 2 + z EXP 2 = 4 * n)
-  EVEN n
-  n = 1
-  forall n:num. 1 <= n /\\ EVEN n ==> ODD(n - 1)
+  \226\136\128 a : Num, \226\136\128 m : Num, \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 z : Num, !(EXP(4, a) * (8 * m + 7) == EXP(x, 2) + (EXP(y, 2) + EXP(z, 2)))
+  EXP(2 * (m : Num), 2) == 4 * EXP(m, 2)
+  2 * (z : Num)
+  2 * (y : Num)
+  2 * (x : Num)
+  (z : Num)
+  (y : Num)
+  (x : Num)
+  \226\136\128 n : Num, (\226\136\131 x : Num, \226\136\131 y : Num, \226\136\131 z : Num, EXP(x, 2) + (EXP(y, 2) + EXP(z, 2)) == n) \226\134\146 (\226\136\131 x : Num, \226\136\131 y : Num, \226\136\131 z : Num, EXP(x, 2) + (EXP(y, 2) + EXP(z, 2)) == 4 * n)
+  EVEN((n : Num))
+  (n : Num) == 1
+  \226\136\128 n : Num, 1 <= n && EVEN(n) \226\134\146 ODD(n - 1)
   2 < 4
-  forall n:num. (n == 2) (mod 4) ==> ?t. n = 4 * t + 2
-  jacobi(d' - 1,d')
-  forall p d':num.\n     prime p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 1) (mod 4) /\\ (d' == 1) (mod 4) /\\\n     (p == d' - 1) (mod d')\n     ==> ?x. (x EXP 2 + d' == 0) (mod p)
-  1 <= n
-  4 = 2 * 2
-  forall n:num. 1 <= n /\\ EVEN n ==> coprime(n - 1, 4 * n)
-  forall n:num. 1 <= n /\\ EVEN n ==> ?p. prime p /\\ (p == n - 1) (mod (4 * n))
-  x:num
-  4 * t + 2
-  d':num
-  p:num
-  x:num
-  ?x. (x EXP 2 + d' == 0) (mod p)
-  4*t+2
-  d':num
+  \226\136\128 n : Num, op_eq_eq(n, 2, mod(4)) \226\134\146 (\226\136\131 t : Num, n == 4 * t + 2)
+  jacobi(((d' : Num) - 1, d'))
+  \226\136\128 p : Num, \226\136\128 d' : Num, prime(p) && ODD(d') && coprime((p, d')) && op_eq_eq(p, 1, mod(4)) && op_eq_eq(d', 1, mod(4)) && op_eq_eq(p, d' - 1, mod(d')) \226\134\146 (\226\136\131 x : Num, op_eq_eq(EXP(x, 2) + d', 0, mod(p)))
+  1 <= (n : Num)
+  4 == 2 * 2
+  \226\136\128 n : Num, 1 <= n && EVEN(n) \226\134\146 coprime((n - 1, 4 * n))
+  \226\136\128 n : Num, 1 <= n && EVEN(n) \226\134\146 (\226\136\131 p : Num, prime(p) && op_eq_eq(p, n - 1, mod(4 * n)))
+  (x : Num)
+  4 * (t : Num) + 2
+  (d' : Num)
+  (p : Num)
+  (x : Num)
+  \226\136\131 x : Num, op_eq_eq(EXP(x, 2) + (d' : Num), 0, mod((p : Num)))
+  4 * (t : Num) + 2
+  (d' : Num)
   1
-  p:num
-  coprime(p:num,d')
-  p + 1 = d' * (4 * t + 2)
-  (p == d' - 1)(mod d')
-  1 <= d' * (4 * t + 2)
-  p = d' * (4 * t + 2) - 1
-  p + 1 = d' * (4 * t + 2)
-  4 * (4 * t + 2) * j + (4 * t + 2) - 1 =\n        (((4*t+2)*j + t) * 4) + 1
-  p = 4 * (4 * t + 2) * j + (4 * t + 2) - 1
-  (p == 1)(mod 4)
-  4*j+1 = j*4+1
-  (d' == 1)(mod 4)
-  ODD d'
-  p = 4 * (4 * t + 2) * j + (4 * t + 2) - 1
-  p = d' * (4 * t + 2) - 1
-  d' = 4 * j + 1
-  p:num
-  (4*t+2)-1
-  4*(4*t+2)
-  j:num
-  ?j. p = 4 * (4 * t + 2) * j + ((4 * t + 2) - 1)
-  p:num
-  4 * t + 2
-  1 <= 4 * t + 2 /\\ EVEN(4 * t + 2)
-  t:num
-  forall n:num.\n     1 < n /\\ (n == 2) (mod 4)\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &n
+  (p : Num)
+  coprime(((p : Num), (d' : Num)))
+  (p : Num) + 1 == (d' : Num) * (4 * (t : Num) + 2)
+  op_eq_eq((p : Num), (d' : Num) - 1, mod(d'))
+  1 <= (d' : Num) * (4 * (t : Num) + 2)
+  (p : Num) == (d' : Num) * (4 * (t : Num) + 2) - 1
+  (p : Num) + 1 == (d' : Num) * (4 * (t : Num) + 2)
+  4 * ((4 * (t : Num) + 2) * (j : Num)) + (4 * t + 2 - 1) == ((4 * t + 2) * j + t) * 4 + 1
+  (p : Num) == 4 * ((4 * (t : Num) + 2) * (j : Num)) + (4 * t + 2 - 1)
+  op_eq_eq((p : Num), 1, mod(4))
+  4 * (j : Num) + 1 == j * 4 + 1
+  op_eq_eq((d' : Num), 1, mod(4))
+  ODD((d' : Num))
+  (p : Num) == 4 * ((4 * (t : Num) + 2) * (j : Num)) + (4 * t + 2 - 1)
+  (p : Num) == (d' : Num) * (4 * (t : Num) + 2) - 1
+  (d' : Num) == 4 * (j : Num) + 1
+  (p : Num)
+  4 * (t : Num) + 2 - 1
+  4 * (4 * (t : Num) + 2)
+  (j : Num)
+  \226\136\131 j : Num, (p : Num) == 4 * ((4 * (t : Num) + 2) * j) + (4 * t + 2 - 1)
+  (p : Num)
+  4 * (t : Num) + 2
+  1 <= 4 * (t : Num) + 2 && EVEN(4 * t + 2)
+  (t : Num)
+  \226\136\128 n : Num, 1 < n && op_eq_eq(n, 2, mod(4)) \226\134\146 (\226\136\131 u : Int, \226\136\131 v : Int, \226\136\131 w : Int, pow(u, 2) + (pow(v, 2) + pow(w, 2)) == int_of_num(n))
   3
-  8*k+1
-  12*k+1
-  forall k:num. ?p. prime p /\\ (p == 12 * k + 1) (mod (4 * (8 * k + 1)))
-  m:num
-  d':num
-  p:num
-  m:num
-  d':num
+  8 * (k : Num) + 1
+  12 * (k : Num) + 1
+  \226\136\128 k : Num, \226\136\131 p : Num, prime(p) && op_eq_eq(p, 12 * k + 1, mod(4 * (8 * k + 1)))
+  (m : Num)
+  (d' : Num)
+  (p : Num)
+  (m : Num)
+  (d' : Num)
   2
-  p:num
-  coprime(p:num,d')
-  2 * p + 1 = d' * m
-  (2 * p == d' - 1) (mod d')
-  ODD p
-  4*m*j+12*k+1 = (m*j+3*k)*4+1
-  (p == 1) (mod 4)
-  ODD d'
-  8*j+3 = j*8+3
-  (d' == 3) (mod 8)
-  p = 4 * m * j + 12 * k + 1
-  2 * p = d' * m - 1 /\\ 2 * p + 1 = d' * m
-  m = 8*k+1
-  d' = 8*j+3
-  p:num
-  12*k+1
-  4*(8*k+1)
-  j:num
-  ?j. p = 4*(8*k+1)*j + (12*k+1)
-  p:num
-  k:num
-  &0:int
-  &0:int
-  &1:int
-  k = 0
-  forall k:num. ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &(8 * k + 1)
-  ((8 * qd + 3) - 1) DIV 2 = 4 * qd + 1
-  (d' - 1) DIV 2 = 4 * qd + 1
-  ((4 * qp + 3) - 1) DIV 2 = 2 * qp + 1
-  (p - 1) DIV 2 = 2 * qp + 1
-  qd:num
-  qp:num
-  d':num
-  p:num
-  forall p d':num.\n     ODD p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 3) (mod 4) /\\ (d' == 3) (mod 8)\n     ==> jacobi(d', p) = -- jacobi(p, d')
-  jacobi(d,p) = -- jacobi(p,d)
-  forall p d:num.\n     ODD p /\\ ODD d /\\ coprime(p,d) /\\\n     (p == 3) (mod 4) /\\ (d == 3) (mod 8) /\\\n     jacobi(p,d) = &1\n     ==> jacobi(d * (p - 1),p) = &1
-  ODD p
-  forall p d':num.\n     prime p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 3) (mod 4) /\\ (d' == 3) (mod 8) /\\\n     (2 * p == d' - 1) (mod d')\n     ==> ?x. (x EXP 2 + d' == 0) (mod p)
+  (p : Num)
+  coprime(((p : Num), (d' : Num)))
+  2 * (p : Num) + 1 == (d' : Num) * (m : Num)
+  op_eq_eq(2 * (p : Num), (d' : Num) - 1, mod(d'))
+  ODD((p : Num))
+  4 * ((m : Num) * (j : Num)) + (12 * (k : Num) + 1) == (m * j + 3 * k) * 4 + 1
+  op_eq_eq((p : Num), 1, mod(4))
+  ODD((d' : Num))
+  8 * (j : Num) + 3 == j * 8 + 3
+  op_eq_eq((d' : Num), 3, mod(8))
+  (p : Num) == 4 * ((m : Num) * (j : Num)) + (12 * (k : Num) + 1)
+  2 * (p : Num) == (d' : Num) * (m : Num) - 1 && 2 * p + 1 == d' * m
+  (m : Num) == 8 * (k : Num) + 1
+  (d' : Num) == 8 * (j : Num) + 3
+  (p : Num)
+  12 * (k : Num) + 1
+  4 * (8 * (k : Num) + 1)
+  (j : Num)
+  \226\136\131 j : Num, (p : Num) == 4 * ((8 * (k : Num) + 1) * j) + (12 * k + 1)
+  (p : Num)
+  (k : Num)
+  int_of_num(0)
+  int_of_num(0)
+  int_of_num(1)
+  (k : Num) == 0
+  \226\136\128 k : Num, \226\136\131 u : Int, \226\136\131 v : Int, \226\136\131 w : Int, pow(u, 2) + (pow(v, 2) + pow(w, 2)) == int_of_num(8 * k + 1)
+  DIV(8 * (qd : Num) + 3 - 1, 2) == 4 * qd + 1
+  DIV((d' : Num) - 1, 2) == 4 * (qd : Num) + 1
+  DIV(4 * (qp : Num) + 3 - 1, 2) == 2 * qp + 1
+  DIV((p : Num) - 1, 2) == 2 * (qp : Num) + 1
+  (qd : Num)
+  (qp : Num)
+  (d' : Num)
+  (p : Num)
+  \226\136\128 p : Num, \226\136\128 d' : Num, ODD(p) && ODD(d') && coprime((p, d')) && op_eq_eq(p, 3, mod(4)) && op_eq_eq(d', 3, mod(8)) \226\134\146 jacobi((d', p)) == -jacobi((p, d'))
+  jacobi(((d : Num), (p : Num))) == -jacobi((p, d))
+  \226\136\128 p : Num, \226\136\128 d : Num, ODD(p) && ODD(d) && coprime((p, d)) && op_eq_eq(p, 3, mod(4)) && op_eq_eq(d, 3, mod(8)) && jacobi((p, d)) == int_of_num(1) \226\134\146 jacobi((d * (p - 1), p)) == int_of_num(1)
+  ODD((p : Num))
+  \226\136\128 p : Num, \226\136\128 d' : Num, prime(p) && ODD(d') && coprime((p, d')) && op_eq_eq(p, 3, mod(4)) && op_eq_eq(d', 3, mod(8)) && op_eq_eq(2 * p, d' - 1, mod(d')) \226\134\146 (\226\136\131 x : Num, op_eq_eq(EXP(x, 2) + d', 0, mod(p)))
   3
-  8*k+5
-  12*k+7
-  forall k:num. ?p. prime p /\\ (p == 12 * k + 7) (mod (4 * (8 * k + 5)))
-  m:num
-  d':num
-  p:num
-  m:num
-  d':num
+  8 * (k : Num) + 5
+  12 * (k : Num) + 7
+  \226\136\128 k : Num, \226\136\131 p : Num, prime(p) && op_eq_eq(p, 12 * k + 7, mod(4 * (8 * k + 5)))
+  (m : Num)
+  (d' : Num)
+  (p : Num)
+  (m : Num)
+  (d' : Num)
   2
-  p:num
-  coprime(p:num,d')
-  2 * p + 1 = d' * m
-  (2 * p == d' - 1) (mod d')
-  ODD p
-  4*m*j+12*k+7 = (m*j+3*k+1)*4+3
-  (p == 3) (mod 4)
-  ODD d'
-  8*j+3 = j*8+3
-  (d' == 3) (mod 8)
-  p = 4 * m * j + 12 * k + 7
-  2 * p = d' * m - 1 /\\ 2 * p + 1 = d' * m
-  m = 8*k+5
-  d' = 8*j+3
-  p:num
-  12*k+7
-  4*(8*k+5)
-  j:num
-  ?j. p = 4*(8*k+5)*j + (12*k+7)
-  p:num
-  k:num
-  forall k:num. ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &(8 * k + 5)
-  forall k:num. ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = 8 * k + 1
-  forall k:num. ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = 8 * k + 5
-  forall n:num.\n     1 < n /\\ (n == 2) (mod 4)\n     ==> ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n
-  8*k+6 = (2*k+1)*4+2
-  8*k+2 = (2*k)*4+2
-  k * 8 + r = 8 * k + r
-  k = n DIV 8
+  (p : Num)
+  coprime(((p : Num), (d' : Num)))
+  2 * (p : Num) + 1 == (d' : Num) * (m : Num)
+  op_eq_eq(2 * (p : Num), (d' : Num) - 1, mod(d'))
+  ODD((p : Num))
+  4 * ((m : Num) * (j : Num)) + (12 * (k : Num) + 7) == (m * j + (3 * k + 1)) * 4 + 3
+  op_eq_eq((p : Num), 3, mod(4))
+  ODD((d' : Num))
+  8 * (j : Num) + 3 == j * 8 + 3
+  op_eq_eq((d' : Num), 3, mod(8))
+  (p : Num) == 4 * ((m : Num) * (j : Num)) + (12 * (k : Num) + 7)
+  2 * (p : Num) == (d' : Num) * (m : Num) - 1 && 2 * p + 1 == d' * m
+  (m : Num) == 8 * (k : Num) + 5
+  (d' : Num) == 8 * (j : Num) + 3
+  (p : Num)
+  12 * (k : Num) + 7
+  4 * (8 * (k : Num) + 5)
+  (j : Num)
+  \226\136\131 j : Num, (p : Num) == 4 * ((8 * (k : Num) + 5) * j) + (12 * k + 7)
+  (p : Num)
+  (k : Num)
+  \226\136\128 k : Num, \226\136\131 u : Int, \226\136\131 v : Int, \226\136\131 w : Int, pow(u, 2) + (pow(v, 2) + pow(w, 2)) == int_of_num(8 * k + 5)
+  \226\136\128 k : Num, \226\136\131 x : Num, \226\136\131 y : Num, \226\136\131 z : Num, EXP(x, 2) + (EXP(y, 2) + EXP(z, 2)) == 8 * k + 1
+  \226\136\128 k : Num, \226\136\131 x : Num, \226\136\131 y : Num, \226\136\131 z : Num, EXP(x, 2) + (EXP(y, 2) + EXP(z, 2)) == 8 * k + 5
+  \226\136\128 n : Num, 1 < n && op_eq_eq(n, 2, mod(4)) \226\134\146 (\226\136\131 x : Num, \226\136\131 y : Num, \226\136\131 z : Num, EXP(x, 2) + (EXP(y, 2) + EXP(z, 2)) == n)
+  8 * (k : Num) + 6 == (2 * k + 1) * 4 + 2
+  8 * (k : Num) + 2 == 2 * k * 4 + 2
+  (k : Num) * 8 + (r : Num) == 8 * k + r
+  (k : Num) == DIV((n : Num), 8)
   8
-  n:num
-  forall n:num.\n     (n MOD 8 = 1 \\/ n MOD 8 = 2 \\/ n MOD 8 = 3 \\/\n      n MOD 8 = 5 \\/ n MOD 8 = 6)\n     ==> ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n
-  8 = 4 * 2
-  n MOD 4 = n MOD 8 MOD 4
-  forall n:num. (n MOD 8 = 0 \\/ n MOD 8 = 4) ==> 4 divides n
-  c * 4 = 4 * c
-  (c * 4) DIV 4 = c
-  4 * c = c * 4
-  c:num
-  m:num
-  SUC a
-  ~(?a m. n = 4 EXP a * (8 * m + 7))
-  m:num
-  a:num
-  forall n:num.\n     4 divides n /\\ ~(?a m. n = 4 EXP a * (8 * m + 7))\n     ==> ~(?a m. n DIV 4 = 4 EXP a * (8 * m + 7))
-  (4 * c) DIV 4 = c
-  c:num
-  forall n:num. ~(n = 0) /\\ 4 divides n ==> n DIV 4 < n
+  (n : Num)
+  \226\136\128 n : Num, MOD(n, 8) == 1 || MOD(n, 8) == 2 || MOD(n, 8) == 3 || MOD(n, 8) == 5 || MOD(n, 8) == 6 \226\134\146 (\226\136\131 x : Num, \226\136\131 y : Num, \226\136\131 z : Num, EXP(x, 2) + (EXP(y, 2) + EXP(z, 2)) == n)
+  8 == 4 * 2
+  MOD((n : Num), 4) == MOD(MOD(n, 8), 4)
+  \226\136\128 n : Num, MOD(n, 8) == 0 || MOD(n, 8) == 4 \226\134\146 divides(4, n)
+  (c : Num) * 4 == 4 * c
+  DIV((c : Num) * 4, 4) == c
+  4 * (c : Num) == c * 4
+  (c : Num)
+  (m : Num)
+  SUC((a : Num))
+  !(\226\136\131 a : Num, \226\136\131 m : Num, (n : Num) == EXP(4, a) * (8 * m + 7))
+  (m : Num)
+  (a : Num)
+  \226\136\128 n : Num, divides(4, n) && !(\226\136\131 a : Num, \226\136\131 m : Num, n == EXP(4, a) * (8 * m + 7)) \226\134\146 !(\226\136\131 a : Num, \226\136\131 m : Num, DIV(n, 4) == EXP(4, a) * (8 * m + 7))
+  DIV(4 * (c : Num), 4) == c
+  (c : Num)
+  \226\136\128 n : Num, !(n == 0) && divides(4, n) \226\134\146 DIV(n, 4) < n
   8
-  n:num
-  n DIV 8
-  0:num
-  forall n:num. n MOD 8 = 7 ==> ?a m. n = 4 EXP a * (8 * m + 7)
-  c:num
-  4 * (n DIV 4) = n
-  n DIV 4
-  ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n DIV 4
-  4 divides n
-  n:num
-  (n MOD 8 = 1 \\/ n MOD 8 = 2 \\/ n MOD 8 = 3 \\/ n MOD 8 = 5\n     \\/ n MOD 8 = 6) \\/\n    (n MOD 8 = 0 \\/ n MOD 8 = 4) \\/ n MOD 8 = 7
+  (n : Num)
+  DIV((n : Num), 8)
+  0
+  \226\136\128 n : Num, MOD(n, 8) == 7 \226\134\146 (\226\136\131 a : Num, \226\136\131 m : Num, n == EXP(4, a) * (8 * m + 7))
+  (c : Num)
+  4 * DIV((n : Num), 4) == n
+  DIV((n : Num), 4)
+  \226\136\131 x : Num, \226\136\131 y : Num, \226\136\131 z : Num, EXP(x, 2) + (EXP(y, 2) + EXP(z, 2)) == DIV((n : Num), 4)
+  divides(4, (n : Num))
+  (n : Num)
+  (MOD((n : Num), 8) == 1 || MOD(n, 8) == 2 || MOD(n, 8) == 3 || MOD(n, 8) == 5 || MOD(n, 8) == 6) || (MOD(n, 8) == 0 || MOD(n, 8) == 4) || MOD(n, 8) == 7
   0
   0
-  0:num
-  n = 0
-  n:num
-  forall n:num.\n     ~(?a m. n = 4 EXP a * (8 * m + 7))\n     ==> ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n
-  forall n:num.\n     (?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n) <=>\n     ~(?a m. n = 4 EXP a * (8 * m + 7))
-  &8:int
-  x:int
-  forall x:int. x rem &8 = &0 \\/ x rem &8 = &1 \\/ x rem &8 = &2 \\/ x rem &8 = &3 \\/\n           x rem &8 = &4 \\/ x rem &8 = &5 \\/ x rem &8 = &6 \\/ x rem &8 = &7
-  x:int
-  forall x:int.\n     (x pow 2) rem &8 = &0 \\/\n     (x pow 2) rem &8 = &1 \\/\n     (x pow 2) rem &8 = &4
-  x:int
-  &8 = &2 * &4
-  x rem &2 = (x rem &8) rem &2
-  forall x:int. (x pow 2 rem &8 = &1) <=> ~(&2 divides x)
-  forall pu pv pw:int.\n     (pu = &0 \\/ pu = &1 \\/ pu = &4) /\\\n     (pv = &0 \\/ pv = &1 \\/ pv = &4) /\\\n     (pw = &0 \\/ pw = &1 \\/ pw = &4) /\\\n     (pu + pv + pw) rem &8 = &3\n     ==> pu = &1 /\\ pv = &1 /\\ pw = &1
-  (u pow 2 rem &8 + v pow 2 rem &8 + w pow 2 rem &8) rem &8 =\n    (u pow 2 + v pow 2 + w pow 2) rem &8
-  forall u v w n:int.\n     u pow 2 + v pow 2 + w pow 2 = &8 * n + &3\n     ==> ~(&2 divides u) /\\ ~(&2 divides v) /\\ ~(&2 divides w)
-  u rem &2 = &1
-  ~(&2 = &0)
-  &2:int
-  u:int
-  u div &2
-  forall u:int. ~(&2 divides u) ==> ?a. u = &2 * a + &1
-  &(num_of_int(--a - &1)) = --a - &1
-  num_of_int(--a - &1)
-  &(num_of_int a) = a
-  num_of_int a
-  &0 <= a \\/ a < &0
-  forall a:int. ?k:num. a * (a + &1) = &(k * (k + 1))
-  &2 * &n = r * (r + &1) + s * (s + &1) + t * (t + &1)
-  c:num
-  b:num
-  a:num
-  c:num
-  t:int
-  b:num
-  s:int
-  a:num
-  r:int
-  u pow 2 + v pow 2 + w pow 2 = &8 * &n + &3
-  &2 * &n = r * (r + &1) + s * (s + &1) + t * (t + &1)
-  t:int
-  w:int
-  s:int
-  v:int
-  r:int
-  u:int
-  &n:int
-  w:int
-  v:int
-  u:int
-  w:int
-  v:int
-  u:int
-  forall n.\n     (?u v w:int. u pow 2 + v pow 2 + w pow 2 = &8 * &n + &3)\n     ==> ?a b c:num. 2 * n = a * (a + 1) + b * (b + 1) + c * (c + 1)
-  forall n:num. ?a b c. 2 * n = a * (a + 1) + b * (b + 1) + c * (c + 1)
-  triangular t <=> ?k. t = (k * (k + 1)) DIV 2
-  2 * n = a * (a + 1) + b * (b + 1) + c * (c + 1)
-  (2 * x) DIV 2 = x
-  c:num
-  (2 * x) DIV 2 = x
-  b:num
-  (2 * x) DIV 2 = x
-  a:num
-  kc:num
-  kb:num
-  ka:num
-  kc:num
-  kb:num
-  ka:num
-  EVEN(a * (a + 1)) /\\ EVEN(b * (b + 1)) /\\ EVEN(c * (c + 1))
-  c:num
-  b:num
-  a:num
-  n:num
-  forall n:num.\n     ?a b c. triangular a /\\ triangular b /\\ triangular c /\\\n             n = a + b + c
+  0
+  (n : Num) == 0
+  (n : Num)
+  \226\136\128 n : Num, !(\226\136\131 a : Num, \226\136\131 m : Num, n == EXP(4, a) * (8 * m + 7)) \226\134\146 (\226\136\131 x : Num, \226\136\131 y : Num, \226\136\131 z : Num, EXP(x, 2) + (EXP(y, 2) + EXP(z, 2)) == n)
+  \226\136\128 n : Num, (\226\136\131 x : Num, \226\136\131 y : Num, \226\136\131 z : Num, EXP(x, 2) + (EXP(y, 2) + EXP(z, 2)) == n) == !(\226\136\131 a : Num, \226\136\131 m : Num, n == EXP(4, a) * (8 * m + 7))
+  int_of_num(8)
+  (x : Int)
+  \226\136\128 x : Int, rem(x, int_of_num(8)) == int_of_num(0) || rem(x, int_of_num(8)) == int_of_num(1) || rem(x, int_of_num(8)) == int_of_num(2) || rem(x, int_of_num(8)) == int_of_num(3) || rem(x, int_of_num(8)) == int_of_num(4) || rem(x, int_of_num(8)) == int_of_num(5) || rem(x, int_of_num(8)) == int_of_num(6) || rem(x, int_of_num(8)) == int_of_num(7)
+  (x : Int)
+  \226\136\128 x : Int, rem(pow(x, 2), int_of_num(8)) == int_of_num(0) || rem(pow(x, 2), int_of_num(8)) == int_of_num(1) || rem(pow(x, 2), int_of_num(8)) == int_of_num(4)
+  (x : Int)
+  int_of_num(8) == int_of_num(2) * int_of_num(4)
+  rem((x : Int), int_of_num(2)) == rem(rem(x, int_of_num(8)), int_of_num(2))
+  \226\136\128 x : Int, (rem(pow(x, 2), int_of_num(8)) == int_of_num(1)) == !divides(int_of_num(2), x)
+  \226\136\128 pu : Int, \226\136\128 pv : Int, \226\136\128 pw : Int, (pu == int_of_num(0) || pu == int_of_num(1) || pu == int_of_num(4)) && (pv == int_of_num(0) || pv == int_of_num(1) || pv == int_of_num(4)) && (pw == int_of_num(0) || pw == int_of_num(1) || pw == int_of_num(4)) && rem(pu + (pv + pw), int_of_num(8)) == int_of_num(3) \226\134\146 pu == int_of_num(1) && pv == int_of_num(1) && pw == int_of_num(1)
+  rem(rem(pow((u : Int), 2), int_of_num(8)) + (rem(pow((v : Int), 2), int_of_num(8)) + rem(pow((w : Int), 2), int_of_num(8))), int_of_num(8)) == rem(pow(u, 2) + (pow(v, 2) + pow(w, 2)), int_of_num(8))
+  \226\136\128 u : Int, \226\136\128 v : Int, \226\136\128 w : Int, \226\136\128 n : Int, pow(u, 2) + (pow(v, 2) + pow(w, 2)) == int_of_num(8) * n + int_of_num(3) \226\134\146 !divides(int_of_num(2), u) && !divides(int_of_num(2), v) && !divides(int_of_num(2), w)
+  rem((u : Int), int_of_num(2)) == int_of_num(1)
+  !(int_of_num(2) == int_of_num(0))
+  int_of_num(2)
+  (u : Int)
+  div((u : Int), int_of_num(2))
+  \226\136\128 u : Int, !divides(int_of_num(2), u) \226\134\146 (\226\136\131 a : Int, u == int_of_num(2) * a + int_of_num(1))
+  int_of_num(num_of_int(-(a : Int) - int_of_num(1))) == -a - int_of_num(1)
+  num_of_int(-(a : Int) - int_of_num(1))
+  int_of_num(num_of_int((a : Int))) == a
+  num_of_int((a : Int))
+  int_of_num(0) <= (a : Int) || a < int_of_num(0)
+  \226\136\128 a : Int, \226\136\131 k : Num, a * (a + int_of_num(1)) == int_of_num(k * (k + 1))
+  int_of_num(2) * int_of_num((n : Num)) == (r : Int) * (r + int_of_num(1)) + ((s : Int) * (s + int_of_num(1)) + (t : Int) * (t + int_of_num(1)))
+  (c : Num)
+  (b : Num)
+  (a : Num)
+  (c : Num)
+  (t : Int)
+  (b : Num)
+  (s : Int)
+  (a : Num)
+  (r : Int)
+  pow((u : Int), 2) + (pow((v : Int), 2) + pow((w : Int), 2)) == int_of_num(8) * int_of_num((n : Num)) + int_of_num(3)
+  int_of_num(2) * int_of_num((n : Num)) == (r : Int) * (r + int_of_num(1)) + ((s : Int) * (s + int_of_num(1)) + (t : Int) * (t + int_of_num(1)))
+  (t : Int)
+  (w : Int)
+  (s : Int)
+  (v : Int)
+  (r : Int)
+  (u : Int)
+  int_of_num((n : Num))
+  (w : Int)
+  (v : Int)
+  (u : Int)
+  (w : Int)
+  (v : Int)
+  (u : Int)
+  \226\136\128 n : Num, (\226\136\131 u : Int, \226\136\131 v : Int, \226\136\131 w : Int, pow(u, 2) + (pow(v, 2) + pow(w, 2)) == int_of_num(8) * int_of_num(n) + int_of_num(3)) \226\134\146 (\226\136\131 a : Num, \226\136\131 b : Num, \226\136\131 c : Num, 2 * n == a * (a + 1) + (b * (b + 1) + c * (c + 1)))
+  \226\136\128 n : Num, \226\136\131 a : Num, \226\136\131 b : Num, \226\136\131 c : Num, 2 * n == a * (a + 1) + (b * (b + 1) + c * (c + 1))
+  (triangular : (Num) -> Bool)((t : Num)) == (\226\136\131 k : Num, t == DIV(k * (k + 1), 2))
+  2 * (n : Num) == (a : Num) * (a + 1) + ((b : Num) * (b + 1) + (c : Num) * (c + 1))
+  DIV(2 * (x : Num), 2) == x
+  (c : Num)
+  DIV(2 * (x : Num), 2) == x
+  (b : Num)
+  DIV(2 * (x : Num), 2) == x
+  (a : Num)
+  (kc : Num)
+  (kb : Num)
+  (ka : Num)
+  (kc : Num)
+  (kb : Num)
+  (ka : Num)
+  EVEN((a : Num) * (a + 1)) && EVEN((b : Num) * (b + 1)) && EVEN((c : Num) * (c + 1))
+  (c : Num)
+  (b : Num)
+  (a : Num)
+  (n : Num)
+  \226\136\128 n : Num, \226\136\131 a : Num, \226\136\131 b : Num, \226\136\131 c : Num, triangular(a) && triangular(b) && triangular(c) && n == a + (b + c)
 INT_BALANCED_REM =  |- (#forall:fun(fun(int,bool),bool) (\x:int. (#forall:fun(fun(int,bool),bool) (\q:int. ((#==>:fun(bool,fun(bool,bool)) ((#int_lt:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) q:int)) (#?:fun(fun(int,bool),bool) (\b:int. ((#int_le:fun(int,fun(int,bool)) ((#int_mul:fun(int,fun(int,int)) (#int_abs:fun(int,int) ((#int_sub:fun(int,fun(int,int)) x:int) ((#int_mul:fun(int,fun(int,int)) q:int) b:int)))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) q:int))))))))
 SQ_BOUND =  |- (#forall:fun(fun(int,bool),bool) (\a:int. (#forall:fun(fun(int,bool),bool) (\q:int. ((#==>:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) ((#int_mul:fun(int,fun(int,int)) (#int_abs:fun(int,int) a:int)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) q:int)) ((#int_le:fun(int,fun(int,bool)) ((#int_mul:fun(int,fun(int,int)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#int_pow:fun(int,fun(num,int)) a:int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#int_pow:fun(int,fun(num,int)) q:int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))
 POSDEF_BINARY_CRITERION =  |- (#forall:fun(fun(int,bool),bool) (\A11:int. (#forall:fun(fun(int,bool),bool) (\A12:int. (#forall:fun(fun(int,bool),bool) (\A22:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#int_lt:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) A11:int)) ((#int_lt:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) ((#int_sub:fun(int,fun(int,int)) ((#int_mul:fun(int,fun(int,int)) A11:int) A22:int)) ((#int_pow:fun(int,fun(num,int)) A12:int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (#forall:fun(fun(int,bool),bool) (\x:int. (#forall:fun(fun(int,bool),bool) (\y:int. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) x:int) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(int,fun(int,bool)) y:int) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num)))))) ((#int_lt:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) ((#int_add:fun(int,fun(int,int)) ((#int_mul:fun(int,fun(int,int)) A11:int) ((#int_pow:fun(int,fun(num,int)) x:int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#int_add:fun(int,fun(int,int)) ((#int_mul:fun(int,fun(int,int)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#int_mul:fun(int,fun(int,int)) A12:int) ((#int_mul:fun(int,fun(int,int)) x:int) y:int)))) ((#int_mul:fun(int,fun(int,int)) A22:int) ((#int_pow:fun(int,fun(num,int)) y:int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))))))))))))
