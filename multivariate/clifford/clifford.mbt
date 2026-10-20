@@ -10,7 +10,7 @@ fn step_1() -> Unit raise {
 /// CARD_UNION_LEMMA
 fn step_2() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([@sets.card_union()]))
-  card_union_lemma_c.set(@tactics.prove(@parser.parse_term("FINITE s /\\ FINITE t /\\ FINITE u /\\ FINITE v /\\\n   s INTER t = {} /\\ u INTER v = {} /\\ s UNION t = u UNION v\n   ==> CARD(s) + CARD(t) = CARD(u) + CARD(v)"), t1))
+  card_union_lemma_c.set(@tactics.prove(@term_syntax.parse_term("FINITE((s : (_) -> Bool)) && FINITE((t : (_) -> Bool)) && FINITE((u : (_) -> Bool)) && FINITE((v : (_) -> Bool)) && INTER(s, t) == {} && INTER(u, v) == {} && UNION(s, t) == UNION(u, v) → CARD(s) + CARD(t) == CARD(u) + CARD(v)"), t1))
 }
 
 ///|
@@ -30,7 +30,7 @@ fn step_3() -> Unit raise {
   let t3 = @tactics.match_mp_tac(@sets.card_union_eq())
   let t2 = @tactics.conv_tac(@equal.sym_conv)
   let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2), t3), t4), t5)
-  card_diff_inter_c.set(@tactics.prove(@parser.parse_term("forall s t. FINITE s ==> CARD s = CARD(s DIFF t) + CARD(s INTER t)"), t6))
+  card_diff_inter_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (_) -> Bool, ∀ t : (_) -> Bool, FINITE(s) → CARD(s) == CARD(DIFF(s, t)) + CARD(INTER(s, t))"), t6))
 }
 
 ///|
@@ -48,16 +48,16 @@ fn step_4() -> Unit raise {
   let t17 = @sets.set_tac(@list.List([]))
   let t16 = @simp.asm_simp_tac(@list.List([@sets.finite_diff()]))
   let t15 = @tactics.match_mp_tac(@sets.card_union())
-  let t14 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("c = a + b ==> (a + x) + (b + x) = c + 2 * x")))
+  let t14 = @tactics.match_mp_tac(@int.arith_rule(@term_syntax.parse_term("(c : Num) == (a : Num) + (b : Num) → a + (x : Num) + (b + x) == c + 2 * x")))
   let t13 = @simp.rewrite_tac(@list.List([@sets.inter_aci()]))
-  let t10 = @kernel.assume_rule(@parser.parse_term("FINITE(t:A->bool)"))
+  let t10 = @kernel.assume_rule(@term_syntax.parse_term("FINITE((t : (A) -> Bool))"))
   let t11 = @drule.match_mp(card_diff_inter())(t10)
-  let t12 = @tactics.subst1_tac(@bool.spec(@parser.parse_term("s:A->bool"), t11))
-  let t7 = @kernel.assume_rule(@parser.parse_term("FINITE(s:A->bool)"))
+  let t12 = @tactics.subst1_tac(@bool.spec(@term_syntax.parse_term("(s : (A) -> Bool)"), t11))
+  let t7 = @kernel.assume_rule(@term_syntax.parse_term("FINITE((s : (A) -> Bool))"))
   let t8 = @drule.match_mp(card_diff_inter())(t7)
-  let t9 = @tactics.subst1_tac(@bool.spec(@parser.parse_term("t:A->bool"), t8))
+  let t9 = @tactics.subst1_tac(@bool.spec(@term_syntax.parse_term("(t : (A) -> Bool)"), t8))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9), t12), t13), t14), t15), t16), t17)
-  card_add_symdiff_inter_c.set(@tactics.prove(@parser.parse_term("forall s t:A->bool.\n        FINITE s /\\ FINITE t\n        ==> CARD s + CARD t =\n            CARD((s DIFF t) UNION (t DIFF s)) + 2 * CARD(s INTER t)"), t18))
+  card_add_symdiff_inter_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (A) -> Bool, ∀ t : (A) -> Bool, FINITE(s) && FINITE(t) → CARD(s) + CARD(t) == CARD(UNION(DIFF(s, t), DIFF(t, s))) + 2 * CARD(INTER(s, t))"), t18))
 }
 
 ///|
@@ -75,7 +75,7 @@ fn step_5() -> Unit raise {
   let t20 = @simp.rewrite_tac(@list.List([@arith.even_add(), @arith.even_mult(), @calc_num.arith()]))
   let t19 = @simp.simp_tac(@list.List([card_add_symdiff_inter()]))
   let t21 = @tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@equal.gsym(@arith.even_add())])), t19), t20)
-  symdiff_parity_lemma_c.set(@tactics.prove(@parser.parse_term("forall s t u. FINITE s /\\ FINITE t /\\ (s DIFF t) UNION (t DIFF s) = u\n           ==> EVEN(CARD u) = (EVEN(CARD s) <=> EVEN(CARD t))"), t21))
+  symdiff_parity_lemma_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (_) -> Bool, ∀ t : (_) -> Bool, ∀ u : (_) -> Bool, FINITE(s) && FINITE(t) && UNION(DIFF(s, t), DIFF(t, s)) == u → EVEN(CARD(u)) == (EVEN(CARD(s)) == EVEN(CARD(t)))"), t21))
 }
 
 ///|
@@ -92,10 +92,10 @@ pub fn symdiff_parity_lemma() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t25 = @simp.simp_tac(@list.List([@pair.forall_pair_thm(), @sets.in_elim_pair_thm()]))
   let t24 = @simp.simp_tac(@list.List([@sets.subset(), @sets.finite_product(), @iterate.finite_numseg()]))
-  let t23 = @tactics.exists_tac(@parser.parse_term("{i,j | i IN 1..m /\\ j IN 1..n}"))
+  let t23 = @tactics.exists_tac(@term_syntax.parse_term("{((i : Num), (j : Num)) | IN(i, op_dot_dot(1, (m : Num))) && IN(j, op_dot_dot(1, (n : Num)))}"))
   let t22 = @tactics.match_mp_tac(@sets.finite_subset())
   let t26 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t22), t23), t24), t25)
-  finite_cart_subset_lemma_c.set(@tactics.prove(@parser.parse_term("forall P m n. FINITE {i,j | i IN 1..m /\\ j IN 1..n /\\ P i j}"), t26))
+  finite_cart_subset_lemma_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (Num, Num) -> Bool, ∀ m : Num, ∀ n : Num, FINITE({((i : Num), (j : Num)) | IN(i, op_dot_dot(1, m)) && IN(j, op_dot_dot(1, n)) && P(i, j)})"), t26))
 }
 
 ///|
@@ -111,7 +111,7 @@ pub fn finite_cart_subset_lemma() -> @kernel.Thm {
 /// multivector_tybij_th
 fn step_7() -> Unit raise {
   let t27 = @meson.meson_tac(@list.List([@sets.empty_subset()]))
-  multivector_tybij_th_c.set(@tactics.prove(@parser.parse_term("?s. s SUBSET (1..dimindex(:N))"), t27))
+  multivector_tybij_th_c.set(@tactics.prove(@term_syntax.parse_term("∃ s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))"), t27))
 }
 
 ///|
@@ -143,7 +143,7 @@ pub fn multivector_tybij() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t28 = @meson.meson_tac(@list.List([multivector_tybij()]))
   let t29 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_univ(), @sets.in_image(), @sets.in_elim_thm()])), t28)
-  multivector_image_c.set(@tactics.prove(@parser.parse_term("(:(N)multivector) = IMAGE mk_multivector {s | s SUBSET 1..dimindex(:N)}"), t29))
+  multivector_image_c.set(@tactics.prove(@term_syntax.parse_term("(UNIV : (Multivector[N]) -> Bool) == (IMAGE : (((Num) -> Bool) -> Multivector[N], ((Num) -> Bool) -> Bool, Multivector[N]) -> Bool)((mk_multivector : ((Num) -> Bool) -> Multivector[N]), {(s : (Num) -> Bool) | SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))})"), t29))
 }
 
 ///|
@@ -162,7 +162,7 @@ fn step_10() -> Unit raise {
   let t31 = @simp.simp_tac(@list.List([@sets.has_size_powerset(), @iterate.has_size_numseg_1(), @sets.in_elim_thm()]))
   let t30 = @tactics.match_mp_tac(@sets.has_size_image_inj())
   let t33 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([multivector_image()])), t30), t31), t32)
-  has_size_multivector_c.set(@tactics.prove(@parser.parse_term("(:(N)multivector) HAS_SIZE (2 EXP dimindex(:N))"), t33))
+  has_size_multivector_c.set(@tactics.prove(@term_syntax.parse_term("(HAS_SIZE : ((Multivector[N]) -> Bool, Num) -> Bool)((UNIV : (Multivector[N]) -> Bool), EXP(2, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))"), t33))
 }
 
 ///|
@@ -178,7 +178,7 @@ pub fn has_size_multivector() -> @kernel.Thm {
 /// FINITE_MULTIVECTOR
 fn step_11() -> Unit raise {
   let t34 = @meson.meson_tac(@list.List([@sets.has_size(), has_size_multivector()]))
-  finite_multivector_c.set(@tactics.prove(@parser.parse_term("FINITE(:(N)multivector)"), t34))
+  finite_multivector_c.set(@tactics.prove(@term_syntax.parse_term("(FINITE : ((Multivector[N]) -> Bool) -> Bool)((UNIV : (Multivector[N]) -> Bool))"), t34))
 }
 
 ///|
@@ -194,7 +194,7 @@ pub fn finite_multivector() -> @kernel.Thm {
 /// DIMINDEX_MULTIVECTOR
 fn step_12() -> Unit raise {
   let t35 = @meson.meson_tac(@list.List([@cart.dimindex_unique(), has_size_multivector()]))
-  dimindex_multivector_c.set(@tactics.prove(@parser.parse_term("dimindex(:(N)multivector) = 2 EXP dimindex(:N)"), t35))
+  dimindex_multivector_c.set(@tactics.prove(@term_syntax.parse_term("(dimindex : ((Multivector[N]) -> Bool) -> Num)((UNIV : (Multivector[N]) -> Bool)) == EXP(2, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))"), t35))
 }
 
 ///|
@@ -214,7 +214,7 @@ fn step_13() -> Unit raise {
     x36
   }, @list.List([@equal.gsym(multivector_tybij())]))
   let t39 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t37), t38)
-  dest_mk_multivector_c.set(@tactics.prove(@parser.parse_term("forall s. s SUBSET 1..dimindex(:N)\n         ==> dest_multivector(mk_multivector s :(N)multivector) = s"), t39))
+  dest_mk_multivector_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) → (dest_multivector : (Multivector[N], Num) -> Bool)((mk_multivector : ((Num) -> Bool) -> Multivector[N])(s)) == s"), t39))
 }
 
 ///|
@@ -232,9 +232,9 @@ fn step_14() -> Unit raise {
   let t43 = @meson.asm_meson_tac(@list.List([]))
   let t42 = @simp.rewrite_tac(@list.List([@sets.in_univ(), @sets.in_image(), @pair.exists_pair_thm(), @sets.in_elim_thm()]))
   let t40 = @simp.rewrite_rule(@list.List([@sets.extension()]))(multivector_image())
-  let t41 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("m:(N)multivector"), t40))
+  let t41 = @tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("(m : Multivector[N])"), t40))
   let t44 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.eq_tac, @list.List([@tactics.all_tac, @simp.simp_tac(@list.List([]))])), @tactics.disch_tac), @tactics.gen_tac), t41), t42), t43)
-  forall_multivector_c.set(@tactics.prove(@parser.parse_term("(forall s. s SUBSET 1..dimindex(:N) ==> P(mk_multivector s)) <=>\n   (forall m:(N)multivector. P m)"), t44))
+  forall_multivector_c.set(@tactics.prove(@term_syntax.parse_term("(∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) → (P : (Multivector[N]) -> Bool)((mk_multivector : ((Num) -> Bool) -> Multivector[N])(s))) == (∀ m : Multivector[N], P(m))"), t44))
 }
 
 ///|
@@ -249,7 +249,7 @@ pub fn forall_multivector() -> @kernel.Thm {
 ///|
 /// setcode
 fn step_15() -> Unit raise {
-  setcode_c.set(@pair.new_definition(@parser.parse_term("setcode s = 1 + binarysum (IMAGE PRE s)")))
+  setcode_c.set(@pair.new_definition(@term_syntax.parse_term("(setcode : ((Num) -> Bool) -> Num)((s : (Num) -> Bool)) == 1 + binarysum(IMAGE(PRE, s))")))
 }
 
 ///|
@@ -264,7 +264,7 @@ pub fn setcode() -> @kernel.Thm {
 ///|
 /// codeset
 fn step_16() -> Unit raise {
-  codeset_c.set(@pair.new_definition(@parser.parse_term("codeset n = IMAGE SUC (bitset(n - 1))")))
+  codeset_c.set(@pair.new_definition(@term_syntax.parse_term("(codeset : (Num, Num) -> Bool)((n : Num)) == IMAGE(SUC, bitset(n - 1))")))
 }
 
 ///|
@@ -279,14 +279,14 @@ pub fn codeset() -> @kernel.Thm {
 ///|
 /// CODESET_SETCODE_BIJECTIONS
 fn step_17() -> Unit raise {
-  let t82 = @meson.meson_tac(@list.List([@int.arith_rule(@parser.parse_term("1 <= n ==> SUC(PRE n) = n"))]))
+  let t82 = @meson.meson_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("1 <= (n : Num) → SUC(PRE(n)) == n"))]))
   let t81 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.extension(), @sets.in_image(), @iterate.in_numseg()]))
-  let t80 = @tactics.undisch_tac(@parser.parse_term("s SUBSET 1..n"))
+  let t80 = @tactics.undisch_tac(@term_syntax.parse_term("SUBSET((s : (Num) -> Bool), op_dot_dot(1, (n : Num)))"))
   let t79 = @list.List([@meson.asm_meson_tac(@list.List([@sets.finite_image(), @sets.finite_subset(), @iterate.finite_numseg(), @binary.bitset_binarysum()])), @tactics.all_tac])
-  let t78 = @tactics.exists_tac(@parser.parse_term("IMAGE SUC (IMAGE PRE s)"))
+  let t78 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE(SUC, IMAGE(PRE, (s : (Num) -> Bool)))"))
   let t77 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t75 = @simp.asm_rewrite_tac(@list.List([@sets.in_image(), @iterate.in_numseg()]))
-  let t71 = @parser.parse_term("i:num")
+  let t71 = @term_syntax.parse_term("(i : Num)")
   let t74 = @tactics.first_x_assum(fn(x73 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x68 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s69 = @tactics.mp_tac(x68)
@@ -295,12 +295,12 @@ fn step_17() -> Unit raise {
       }
     })(((x72 : @kernel.Thm) => @bool.spec(t71, x72))(x73))
   })
-  let t67 = @tactics.x_gen_tac(@parser.parse_term("i:num"))
+  let t67 = @tactics.x_gen_tac(@term_syntax.parse_term("(i : Num)"))
   let t66 = @tactics.match_mp_tac(@binary.binarysum_bound())
-  let t76 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("x < n ==> 1 <= 1 + x /\\ 1 + x <= n"))), t66), t67), @tactics.disch_tac), t74), t75), @int.arith_tac), @tactics.all_tac])
+  let t76 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@term_syntax.parse_term("(x : Num) < (n : Num) → 1 <= 1 + x && 1 + x <= n"))), t66), t67), @tactics.disch_tac), t74), t75), @int.arith_tac), @tactics.all_tac])
   let t65 = @simp.rewrite_tac(@list.List([@iterate.in_numseg(), @sets.subset()]))
   let t62 = @drule.match_mp(@sets.image_subset())
-  let t59 = @parser.parse_term("PRE")
+  let t59 = @term_syntax.parse_term("PRE")
   let t64 = @tactics.first_assum(fn(x63 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x61 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       (fn(x56 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -312,7 +312,7 @@ fn step_17() -> Unit raise {
     })(t62(x63))
   })
   let t54 = @meson.meson_tac(@list.List([@binary.bitset_bound(), @binary.binarysum_bitset()]))
-  let t51 = @drule.match_mp(@int.arith_rule(@parser.parse_term("1 <= i /\\ i <= t ==> i - 1 < t")))
+  let t51 = @drule.match_mp(@int.arith_rule(@term_syntax.parse_term("1 <= (i : Num) && i <= (t : Num) → i - 1 < t")))
   let t53 = @tactics.disch_then(fn(x52 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x48 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s49 = @tactics.mp_tac(x48)
@@ -321,12 +321,12 @@ fn step_17() -> Unit raise {
       }
     })(t51(x52))
   })
-  let t47 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("1 <= SUC n /\\ SUC n <= k <=> n < k"))]))
-  let t46 = @simp.simp_tac(@list.List([@int.arith_rule(@parser.parse_term("1 <= i ==> (1 + b = i <=> b = i - 1)"))]))
+  let t47 = @simp.rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(1 <= SUC((n : Num)) && SUC(n) <= (k : Num)) == (n < k)"))]))
+  let t46 = @simp.simp_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("1 <= (i : Num) → (1 + (b : Num) == i) == (b == i - 1)"))]))
   let t55 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.subset(), @sets.forall_in_image(), @iterate.in_numseg()])), t46), t47), t53), t54), @tactics.all_tac])
-  let t45 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("IMAGE (\\x. x) s = s"))]))
+  let t45 = @simp.rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("IMAGE((x : _) => x, (s : (_) -> Bool)) == s"))]))
   let t83 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([codeset(), setcode(), @arith.add_sub2(), @equal.gsym(@sets.image_o()), @trivia.o_def(), @arith.pre()])), t45), @tactics.conj_tac), @tactics.gen_tac), t55), @tactics.disch_tac), t64), t65), @tactics.disch_tac), @tactics.conj_tac), t76), t77), t78), @tactics.conj_tac), t79), t80), t81), t82)
-  codeset_setcode_bijections_c.set(@tactics.prove(@parser.parse_term("(forall i. i IN 1..(2 EXP n)\n        ==> codeset i SUBSET 1..n /\\ setcode(codeset i) = i) /\\\n   (forall s. s SUBSET (1..n)\n        ==> (setcode s) IN 1..(2 EXP n) /\\ codeset(setcode s) = s)"), t83))
+  codeset_setcode_bijections_c.set(@tactics.prove(@term_syntax.parse_term("(∀ i : Num, IN(i, op_dot_dot(1, EXP(2, (n : Num)))) → SUBSET(codeset(i), op_dot_dot(1, n)) && setcode(codeset(i)) == i) && (∀ s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, n)) → IN(setcode(s), op_dot_dot(1, EXP(2, n))) && codeset(setcode(s)) == s)"), t83))
 }
 
 ///|
@@ -342,7 +342,7 @@ pub fn codeset_setcode_bijections() -> @kernel.Thm {
 /// FORALL_SETCODE
 fn step_18() -> Unit raise {
   let t84 = @meson.meson_tac(@list.List([codeset_setcode_bijections(), @sets.subset()]))
-  forall_setcode_c.set(@tactics.prove(@parser.parse_term("(forall s. s SUBSET (1..n) ==> P(setcode s)) <=> (forall i. i IN 1..(2 EXP n) ==> P i)"), t84))
+  forall_setcode_c.set(@tactics.prove(@term_syntax.parse_term("(∀ s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (n : Num))) → (P : (Num) -> Bool)(setcode(s))) == (∀ i : Num, IN(i, op_dot_dot(1, EXP(2, n))) → P(i))"), t84))
 }
 
 ///|
@@ -358,7 +358,7 @@ pub fn forall_setcode() -> @kernel.Thm {
 /// SETCODE_BOUNDS
 fn step_19() -> Unit raise {
   let t85 = @meson.meson_tac(@list.List([codeset_setcode_bijections()]))
-  setcode_bounds_c.set(@tactics.prove(@parser.parse_term("forall s n. s SUBSET 1..n ==> setcode s IN (1..(2 EXP n))"), t85))
+  setcode_bounds_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ n : Num, SUBSET(s, op_dot_dot(1, n)) → IN(setcode(s), op_dot_dot(1, EXP(2, n)))"), t85))
 }
 
 ///|
@@ -379,7 +379,7 @@ fn step_20() -> Unit raise {
 ///|
 /// sindex
 fn step_21() -> Unit raise {
-  sindex_c.set(@pair.new_definition(@parser.parse_term("(x:real^(N)multivector)$$s = x$(setcode s)")))
+  sindex_c.set(@pair.new_definition(@term_syntax.parse_term("(op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)((x : Cart[Real, Multivector[N]]), (s : (Num) -> Bool)) == op_dollar(x, setcode(s))")))
 }
 
 ///|
@@ -400,7 +400,7 @@ fn step_22() -> Unit raise {
 ///|
 /// lambdas
 fn step_23() -> Unit raise {
-  lambdas_c.set(@pair.new_definition(@parser.parse_term("(lambdas) (g:(num->bool)->real) =\n    (lambda i. g(codeset i)):real^(N)multivector")))
+  lambdas_c.set(@pair.new_definition(@term_syntax.parse_term("(lambdas : (((Num) -> Bool) -> Real) -> Cart[Real, Multivector[N]])((g : ((Num) -> Bool) -> Real)) == lambda((i : Num) => g(codeset(i)))")))
 }
 
 ///|
@@ -416,7 +416,7 @@ pub fn lambdas() -> @kernel.Thm {
 /// MULTIVECTOR_EQ
 fn step_24() -> Unit raise {
   let t86 = @simp.simp_tac(@list.List([@cart.cart_eq(), sindex(), forall_setcode(), @equal.gsym(@iterate.in_numseg()), dimindex_multivector()]))
-  multivector_eq_c.set(@tactics.prove(@parser.parse_term("forall x y:real^(N)multivector.\n        x = y <=> forall s. s SUBSET 1..dimindex(:N) ==> x$$s = y$$s"), t86))
+  multivector_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Multivector[N]], ∀ y : Cart[Real, Multivector[N]], (x == y) == (∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) → (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(x, s) == (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(y, s))"), t86))
 }
 
 ///|
@@ -433,7 +433,7 @@ pub fn multivector_eq() -> @kernel.Thm {
 fn step_25() -> Unit raise {
   let t87 = @meson.meson_tac(@list.List([codeset_setcode_bijections()]))
   let t88 = @tactics.then_tac(@simp.simp_tac(@list.List([sindex(), lambdas(), @cart.lambda_beta(), setcode_bounds(), dimindex_multivector(), @equal.gsym(@iterate.in_numseg())])), t87)
-  multivector_beta_c.set(@tactics.prove(@parser.parse_term("forall s. s SUBSET 1..dimindex(:N)\n         ==> ((lambdas) g :real^(N)multivector)$$s = g s"), t88))
+  multivector_beta_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) → (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)((lambdas : (((Num) -> Bool) -> Real) -> Cart[Real, Multivector[N]])((g : ((Num) -> Bool) -> Real)), s) == g(s)"), t88))
 }
 
 ///|
@@ -450,7 +450,7 @@ pub fn multivector_beta() -> @kernel.Thm {
 fn step_26() -> Unit raise {
   let t89 = @meson.meson_tac(@list.List([]))
   let t90 = @tactics.then_tac(@simp.simp_tac(@list.List([multivector_eq(), multivector_beta()])), t89)
-  multivector_unique_c.set(@tactics.prove(@parser.parse_term("forall m:real^(N)multivector g.\n        (forall s. s SUBSET 1..dimindex(:N) ==> m$$s = g s)\n        ==> (lambdas) g = m"), t90))
+  multivector_unique_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Cart[Real, Multivector[N]], ∀ g : ((Num) -> Bool) -> Real, (∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) → (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(m, s) == g(s)) → (lambdas : (((Num) -> Bool) -> Real) -> Cart[Real, Multivector[N]])(g) == m"), t90))
 }
 
 ///|
@@ -466,7 +466,7 @@ pub fn multivector_unique() -> @kernel.Thm {
 /// MULTIVECTOR_ETA
 fn step_27() -> Unit raise {
   let t91 = @simp.simp_tac(@list.List([multivector_eq(), multivector_beta()]))
-  multivector_eta_c.set(@tactics.prove(@parser.parse_term("(lambdas s. m$$s) = m"), t91))
+  multivector_eta_c.set(@tactics.prove(@term_syntax.parse_term("lambdas((s : (Num) -> Bool) => op_dollar_dollar((m : Cart[Real, Multivector[_]]), s)) == m"), t91))
 }
 
 ///|
@@ -482,7 +482,7 @@ pub fn multivector_eta() -> @kernel.Thm {
 /// MULTIVECTOR_ADD_COMPONENT
 fn step_28() -> Unit raise {
   let t92 = @simp.simp_tac(@list.List([sindex(), setcode_bounds(), dimindex_multivector(), @equal.gsym(@iterate.in_numseg()), @vectors.vector_add_component()]))
-  multivector_add_component_c.set(@tactics.prove(@parser.parse_term("forall x y:real^(N)multivector s.\n      s SUBSET (1..dimindex(:N)) ==> (x + y)$$s = x$$s + y$$s"), t92))
+  multivector_add_component_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Multivector[N]], ∀ y : Cart[Real, Multivector[N]], ∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) → (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(x + y, s) == (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(x, s) + (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(y, s)"), t92))
 }
 
 ///|
@@ -498,7 +498,7 @@ pub fn multivector_add_component() -> @kernel.Thm {
 /// MULTIVECTOR_MUL_COMPONENT
 fn step_29() -> Unit raise {
   let t93 = @simp.simp_tac(@list.List([sindex(), setcode_bounds(), dimindex_multivector(), @equal.gsym(@iterate.in_numseg()), @vectors.vector_mul_component()]))
-  multivector_mul_component_c.set(@tactics.prove(@parser.parse_term("forall c x:real^(N)multivector s.\n      s SUBSET (1..dimindex(:N)) ==> (c % x)$$s = c * x$$s"), t93))
+  multivector_mul_component_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : Real, ∀ x : Cart[Real, Multivector[N]], ∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) → (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)((op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(c, x), s) == c * (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(x, s)"), t93))
 }
 
 ///|
@@ -514,7 +514,7 @@ pub fn multivector_mul_component() -> @kernel.Thm {
 /// MULTIVECTOR_VEC_COMPONENT
 fn step_30() -> Unit raise {
   let t94 = @simp.simp_tac(@list.List([sindex(), setcode_bounds(), dimindex_multivector(), @equal.gsym(@iterate.in_numseg()), @vectors.vec_component()]))
-  multivector_vec_component_c.set(@tactics.prove(@parser.parse_term("forall k s. s SUBSET (1..dimindex(:N)) ==> (vec k :real^(N)multivector)$$s = &k"), t94))
+  multivector_vec_component_c.set(@tactics.prove(@term_syntax.parse_term("∀ k : Num, ∀ s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) → (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)((vec : (Num) -> Cart[Real, Multivector[N]])(k), s) == real_of_num(k)"), t94))
 }
 
 ///|
@@ -530,7 +530,7 @@ pub fn multivector_vec_component() -> @kernel.Thm {
 /// MULTIVECTOR_VSUM_COMPONENT
 fn step_31() -> Unit raise {
   let t95 = @simp.simp_tac(@list.List([@vectors.vsum(), sindex(), @cart.lambda_beta(), setcode_bounds(), @equal.gsym(@iterate.in_numseg()), dimindex_multivector()]))
-  multivector_vsum_component_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^(N)multivector t s.\n        s SUBSET (1..dimindex(:N))\n        ==> (vsum t f)$$s = sum t (\\x. (f x)$$s)"), t95))
+  multivector_vsum_component_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (A) -> Cart[Real, Multivector[N]], ∀ t : (A) -> Bool, ∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) → (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)((vsum : ((A) -> Bool, (A) -> Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(t, f), s) == (sum : ((A) -> Bool, (A) -> Real) -> Real)(t, (x : A) => (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(f(x), s))"), t95))
 }
 
 ///|
@@ -546,7 +546,7 @@ pub fn multivector_vsum_component() -> @kernel.Thm {
 /// MULTIVECTOR_VSUM
 fn step_32() -> Unit raise {
   let t96 = @simp.simp_tac(@list.List([multivector_eq(), multivector_beta(), multivector_vsum_component()]))
-  multivector_vsum_c.set(@tactics.prove(@parser.parse_term("forall t f. vsum t f = lambdas s. sum t (\\x. (f x)$$s)"), t96))
+  multivector_vsum_c.set(@tactics.prove(@term_syntax.parse_term("∀ t : (_) -> Bool, ∀ f : (_) -> Cart[Real, Multivector[_]], vsum(t, f) == lambdas((s : (Num) -> Bool) => sum(t, (x : _) => op_dollar_dollar(f(x), s)))"), t96))
 }
 
 ///|
@@ -561,7 +561,7 @@ pub fn multivector_vsum() -> @kernel.Thm {
 ///|
 /// mbasis
 fn step_33() -> Unit raise {
-  mbasis_c.set(@pair.new_definition(@parser.parse_term("mbasis i = lambdas s. if i = s then &1 else &0")))
+  mbasis_c.set(@pair.new_definition(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])((i : (Num) -> Bool)) == lambdas((s : (Num) -> Bool) => if i == s { real_of_num(1) } else { real_of_num(0) })")))
 }
 
 ///|
@@ -578,7 +578,7 @@ pub fn mbasis() -> @kernel.Thm {
 fn step_34() -> Unit raise {
   let t97 = @meson.meson_tac(@list.List([]))
   let t98 = @tactics.then_tac(@simp.simp_tac(@list.List([mbasis(), @sets.in_elim_thm(), multivector_beta()])), t97)
-  mbasis_component_c.set(@tactics.prove(@parser.parse_term("forall s t. s SUBSET (1..dimindex(:N))\n         ==> (mbasis t :real^(N)multivector)$$s = if s = t then &1 else &0"), t98))
+  mbasis_component_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) → (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(t), s) == (if s == t { real_of_num(1) } else { real_of_num(0) })"), t98))
 }
 
 ///|
@@ -593,9 +593,9 @@ pub fn mbasis_component() -> @kernel.Thm {
 ///|
 /// MBASIS_EQ_0
 fn step_35() -> Unit raise {
-  let t99 = @meson.meson_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("~(&1 = &0)"))]))
+  let t99 = @meson.meson_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("!(real_of_num(1) == real_of_num(0))"))]))
   let t100 = @tactics.then_tac(@simp.simp_tac(@list.List([multivector_eq(), mbasis_component(), multivector_vec_component()])), t99)
-  mbasis_eq_0_c.set(@tactics.prove(@parser.parse_term("forall s. (mbasis s :real^(N)multivector = vec 0) <=>\n       ~(s SUBSET 1..dimindex(:N))"), t100))
+  mbasis_eq_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s) == (vec : (Num) -> Cart[Real, Multivector[N]])(0)) == !SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))"), t100))
 }
 
 ///|
@@ -611,7 +611,7 @@ pub fn mbasis_eq_0() -> @kernel.Thm {
 /// MBASIS_NONZERO
 fn step_36() -> Unit raise {
   let t101 = @simp.rewrite_tac(@list.List([mbasis_eq_0()]))
-  mbasis_nonzero_c.set(@tactics.prove(@parser.parse_term("forall s. s SUBSET 1..dimindex(:N) ==> ~(mbasis s :real^(N)multivector = vec 0)"), t101))
+  mbasis_nonzero_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) → !((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s) == (vec : (Num) -> Cart[Real, Multivector[N]])(0))"), t101))
 }
 
 ///|
@@ -626,7 +626,7 @@ pub fn mbasis_nonzero() -> @kernel.Thm {
 ///|
 /// MBASIS_EXPANSION
 fn step_37() -> Unit raise {
-  let t111 = @simp.asm_simp_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("x * (if p then &1 else &0) = if p then x else &0")), @iterate.sum_delta(), @sets.in_elim_thm()]))
+  let t111 = @simp.asm_simp_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("(x : Real) * (if (p : Bool) { real_of_num(1) } else { real_of_num(0) }) == (if p { x } else { real_of_num(0) })")), @iterate.sum_delta(), @sets.in_elim_thm()]))
   let t110 = @simp.gen_rewrite_tac(fn(x109 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     (fn(x103 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       let s104 = @equal.land_conv(x103)
@@ -642,7 +642,7 @@ fn step_37() -> Unit raise {
   }, @list.List([@theorems.eq_sym_eq()]))
   let t102 = @tactics.repeat_tac(@tactics.strip_tac)
   let t112 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([multivector_eq(), multivector_vsum_component(), multivector_mul_component(), mbasis_component()])), t102), t110), t111)
-  mbasis_expansion_c.set(@tactics.prove(@parser.parse_term("forall x:real^(N)multivector.\n        vsum {s | s SUBSET 1..dimindex(:N)} (\\s. x$$s % mbasis s) = x"), t112))
+  mbasis_expansion_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Multivector[N]], (vsum : (((Num) -> Bool) -> Bool, ((Num) -> Bool) -> Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])({(s : (Num) -> Bool) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}, (s : (Num) -> Bool) => (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(x, s), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s))) == x"), t112))
 }
 
 ///|
@@ -670,9 +670,9 @@ fn step_38() -> Unit raise {
       s115(x116)
     }
   }, @list.List([@equal.gsym(mbasis_expansion())]))
-  let t113 = @tactics.x_gen_tac(@parser.parse_term("x:real^(N)multivector"))
+  let t113 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : Cart[Real, Multivector[N]])"))
   let t125 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_univ()])), t113), t117), t118), t119), t120), t121), t122), t123), t124)
-  span_mbasis_c.set(@tactics.prove(@parser.parse_term("span {mbasis s :real^(N)multivector | s SUBSET 1..dimindex(:N)} = UNIV"), t125))
+  span_mbasis_c.set(@tactics.prove(@term_syntax.parse_term("(span : ((Cart[Real, Multivector[N]]) -> Bool, Cart[Real, Multivector[N]]) -> Bool)({(mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}) == (UNIV : (Cart[Real, Multivector[N]]) -> Bool)"), t125))
 }
 
 ///|
@@ -689,9 +689,9 @@ pub fn span_mbasis() -> @kernel.Thm {
 fn step_39() -> Unit raise {
   let t133 = @meson.asm_meson_tac(@list.List([]))
   let t132 = @simp.asm_rewrite_tac(@list.List([span_mbasis(), @sets.subset_refl(), @sets.in_elim_thm()]))
-  let t131 = @tactics.exists_tac(@parser.parse_term("{mbasis s :real^(M)multivector | s SUBSET 1..dimindex(:M)}"))
+  let t131 = @tactics.exists_tac(@term_syntax.parse_term("{(mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[M]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool))))}"))
   let t130 = @tactics.match_mp_tac(@vectors.linear_eq())
-  let t129 = @tactics.subgoal_then(@parser.parse_term("forall x. x IN UNIV ==> (f:real^(M)multivector->real^N) x = g x"), fn(x126 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t129 = @tactics.subgoal_then(@term_syntax.parse_term("∀ x : Cart[Real, Multivector[M]], IN(x, UNIV) → (f : (Cart[Real, Multivector[M]]) -> Cart[Real, N])(x) == (g : (Cart[Real, Multivector[M]]) -> Cart[Real, N])(x)"), fn(x126 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x126
     let t128 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @sets.in_univ()]))
     @tactics.then_tac(@tactics.mp_tac(th), t128)
@@ -714,10 +714,10 @@ pub fn linear_eq_mbasis() -> @kernel.Thm {
 fn step_40() -> Unit raise {
   let t143 = @meson.asm_meson_tac(@list.List([]))
   let t142 = @simp.asm_rewrite_tac(@list.List([span_mbasis(), @sets.subset_refl(), @sets.in_elim_thm()]))
-  let t141 = @tactics.exists_tac(@parser.parse_term("{mbasis t :real^(N)multivector | t SUBSET 1..dimindex(:N)}"))
-  let t140 = @tactics.exists_tac(@parser.parse_term("{mbasis s :real^(M)multivector | s SUBSET 1..dimindex(:M)}"))
+  let t141 = @tactics.exists_tac(@term_syntax.parse_term("{(mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])((t : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(t, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}"))
+  let t140 = @tactics.exists_tac(@term_syntax.parse_term("{(mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[M]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool))))}"))
   let t139 = @tactics.match_mp_tac(@vectors.bilinear_eq())
-  let t138 = @tactics.subgoal_then(@parser.parse_term("forall x y. x IN UNIV /\\ y IN UNIV\n          ==> (f:real^(M)multivector->real^(N)multivector->real^P) x y = g x y"), fn(x135 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t138 = @tactics.subgoal_then(@term_syntax.parse_term("∀ x : Cart[Real, Multivector[M]], ∀ y : Cart[Real, Multivector[N]], IN(x, UNIV) && IN(y, UNIV) → (f : (Cart[Real, Multivector[M]], Cart[Real, Multivector[N]]) -> Cart[Real, P])(x, y) == (g : (Cart[Real, Multivector[M]], Cart[Real, Multivector[N]]) -> Cart[Real, P])(x, y)"), fn(x135 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x135
     let t137 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @sets.in_univ()]))
     @tactics.then_tac(@tactics.mp_tac(th), t137)
@@ -742,7 +742,7 @@ fn step_41() -> Unit raise {
   let t146 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t145 = @simp.once_rewrite_tac(@list.List([@theorems.imp_conj()]))
   let t148 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), @tactics.gen_tac), t145), t146), t147)
-  linear_property_c.set(@tactics.prove(@parser.parse_term("forall P. P(vec 0) /\\ (forall x y. P x /\\ P y ==> P(x + y))\n       ==> forall f s. FINITE s /\\ (forall i. i IN s ==> P(f i)) ==> P(vsum s f)"), t148))
+  linear_property_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (Cart[Real, _]) -> Bool, P(vec(0)) && (∀ x : Cart[Real, _], ∀ y : Cart[Real, _], P(x) && P(y) → P(x + y)) → (∀ f : (_) -> Cart[Real, _], ∀ s : (_) -> Bool, FINITE(s) && (∀ i : _, IN(i, s) → P(f(i))) → P(vsum(s, f)))"), t148))
 }
 
 ///|
@@ -767,7 +767,7 @@ fn step_42() -> Unit raise {
     }
   }, @list.List([@equal.gsym(mbasis_expansion())]))
   let t156 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t152), t153), t154), t155)
-  mbasis_extension_c.set(@tactics.prove(@parser.parse_term("forall P. (forall s. s SUBSET 1..dimindex(:N) ==> P(mbasis s)) /\\\n       (forall c x. P x ==> P(c % x)) /\\ (forall x y. P x /\\ P y ==> P(x + y))\n       ==> forall x:real^(N)multivector. P x"), t156))
+  mbasis_extension_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (Cart[Real, Multivector[N]]) -> Bool, (∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) → P((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s))) && (∀ c : Real, ∀ x : Cart[Real, Multivector[N]], P(x) → P((op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(c, x))) && (∀ x : Cart[Real, Multivector[N]], ∀ y : Cart[Real, Multivector[N]], P(x) && P(y) → P(x + y)) → (∀ x : Cart[Real, Multivector[N]], P(x))"), t156))
 }
 
 ///|
@@ -782,7 +782,7 @@ pub fn mbasis_extension() -> @kernel.Thm {
 ///|
 /// multivec
 fn step_43() -> Unit raise {
-  multivec_c.set(@pair.new_definition(@parser.parse_term("(multivec:real^N->real^(N)multivector) x =\n      vsum(1..dimindex(:N)) (\\i. x$i % mbasis{i})")))
+  multivec_c.set(@pair.new_definition(@term_syntax.parse_term("(multivec : (Cart[Real, N]) -> Cart[Real, Multivector[N]])((x : Cart[Real, N])) == (vsum : ((Num) -> Bool, (Num) -> Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((op_dollar : (Cart[Real, N], Num) -> Real)(x, i), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i})))")))
 }
 
 ///|
@@ -803,7 +803,7 @@ fn step_44() -> Unit raise {
 ///|
 /// multivector
 fn step_45() -> Unit raise {
-  multivector_c.set(@pair.new_definition(@parser.parse_term("k multivector (p:real^(N)multivector) <=>\n        forall s. s SUBSET (1..dimindex(:N)) /\\ ~(p$$s = &0) ==> s HAS_SIZE k")))
+  multivector_c.set(@pair.new_definition(@term_syntax.parse_term("(multivector : (Num, Cart[Real, Multivector[N]]) -> Bool)((k : Num), (p : Cart[Real, Multivector[N]])) == (∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && !((op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(p, s) == real_of_num(0)) → (HAS_SIZE : ((Num) -> Bool, Num) -> Bool)(s, k))")))
 }
 
 ///|
@@ -824,7 +824,7 @@ fn step_46() -> Unit raise {
 ///|
 /// grade
 fn step_47() -> Unit raise {
-  grade_c.set(@pair.new_definition(@parser.parse_term("k grade (p:real^(N)multivector) =\n     (lambdas s. if s HAS_SIZE k then p$$s else &0):real^(N)multivector")))
+  grade_c.set(@pair.new_definition(@term_syntax.parse_term("(grade : (Num, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((k : Num), (p : Cart[Real, Multivector[N]])) == lambdas((s : (Num) -> Bool) => if HAS_SIZE(s, k) { op_dollar_dollar(p, s) } else { real_of_num(0) })")))
 }
 
 ///|
@@ -841,7 +841,7 @@ pub fn grade() -> @kernel.Thm {
 fn step_48() -> Unit raise {
   let t157 = @meson.meson_tac(@list.List([]))
   let t158 = @tactics.then_tac(@simp.simp_tac(@list.List([multivector(), grade(), multivector_beta(), @theorems.imp_conj()])), t157)
-  multivector_grade_c.set(@tactics.prove(@parser.parse_term("forall k x. k multivector (k grade x)"), t158))
+  multivector_grade_c.set(@tactics.prove(@term_syntax.parse_term("∀ k : Num, ∀ x : Cart[Real, Multivector[_]], multivector(k, grade(k, x))"), t158))
 }
 
 ///|
@@ -857,7 +857,7 @@ pub fn multivector_grade() -> @kernel.Thm {
 /// GRADE_ADD
 fn step_49() -> Unit raise {
   let t159 = @tactics.then_tac(@simp.simp_tac(@list.List([grade(), multivector_eq(), multivector_add_component(), multivector_beta(), @vectors.cond_component()])), @calc_rat.real_arith_tac)
-  grade_add_c.set(@tactics.prove(@parser.parse_term("forall x y k. k grade (x + y) = (k grade x) + (k grade y)"), t159))
+  grade_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Multivector[_]], ∀ y : Cart[Real, Multivector[_]], ∀ k : Num, grade(k, x + y) == grade(k, x) + grade(k, y)"), t159))
 }
 
 ///|
@@ -873,7 +873,7 @@ pub fn grade_add() -> @kernel.Thm {
 /// GRADE_CMUL
 fn step_50() -> Unit raise {
   let t160 = @tactics.then_tac(@simp.simp_tac(@list.List([grade(), multivector_eq(), multivector_mul_component(), multivector_beta(), @vectors.cond_component()])), @calc_rat.real_arith_tac)
-  grade_cmul_c.set(@tactics.prove(@parser.parse_term("forall c x k. k grade (c % x) = c % (k grade x)"), t160))
+  grade_cmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : Real, ∀ x : Cart[Real, Multivector[_]], ∀ k : Num, grade(k, op_pct(c, x)) == op_pct(c, grade(k, x))"), t160))
 }
 
 ///|
@@ -888,7 +888,7 @@ pub fn grade_cmul() -> @kernel.Thm {
 ///|
 /// Product_DEF
 fn step_51() -> Unit raise {
-  product_def_c.set(@pair.new_definition(@parser.parse_term("(Product mult op\n     :real^(N)multivector->real^(N)multivector->real^(N)multivector) x y =\n        vsum {s | s SUBSET 1..dimindex(:N)}\n         (\\s. vsum {s | s SUBSET 1..dimindex(:N)}\n                (\\t. (x$$s * y$$t * mult s t) % mbasis (op s t)))")))
+  product_def_c.set(@pair.new_definition(@term_syntax.parse_term("(Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((mult : ((Num) -> Bool, (Num) -> Bool) -> Real), (op : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool), (x : Cart[Real, Multivector[N]]), (y : Cart[Real, Multivector[N]])) == (vsum : (((Num) -> Bool) -> Bool, ((Num) -> Bool) -> Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])({(s : (Num) -> Bool) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}, (s : (Num) -> Bool) => (vsum : (((Num) -> Bool) -> Bool, ((Num) -> Bool) -> Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])({(s : (Num) -> Bool) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}, (t : (Num) -> Bool) => (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(x, s) * ((op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(y, t) * mult(s, t)), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(op(s, t)))))")))
 }
 
 ///|
@@ -913,7 +913,7 @@ fn step_52() -> Unit raise {
   let t162 = @simp.rewrite_tac(@list.List([@vectors.vector_mul_assoc(), @real.real_mul_ac()]))
   let t161 = @simp.simp_tac(@list.List([@equal.gsym(@vectors.vsum_lmul()), multivector_mul_component()]))
   let t170 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.bilinear(), @vectors.linear(), product_def()])), t161), t162), t163), t164), t165), t168), t169), @vectors.vector_arith_tac)
-  bilinear_product_c.set(@tactics.prove(@parser.parse_term("forall mult op. bilinear(Product mult op)"), t170))
+  bilinear_product_c.set(@tactics.prove(@term_syntax.parse_term("∀ mult : ((Num) -> Bool, (Num) -> Bool) -> Real, ∀ op : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, (bilinear : ((Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]) -> Bool)((Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])(mult, op))"), t170))
 }
 
 ///|
@@ -1056,8 +1056,8 @@ pub fn product_rzero() -> @kernel.Thm {
 ///|
 /// PRODUCT_ASSOCIATIVE
 fn step_61() -> Unit raise {
-  let t181 = @bool.ispec(@parser.parse_term("f:(num->bool)->(num->bool)->real"), @iterate.sum_swap())
-  let t179 = @parser.parse_term("{s | s SUBSET 1..dimindex(:N)}")
+  let t181 = @bool.ispec(@term_syntax.parse_term("(f : ((Num) -> Bool, (Num) -> Bool) -> Real)"), @iterate.sum_swap())
+  let t179 = @term_syntax.parse_term("{(s : (Num) -> Bool) | SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}")
   let t182 = @lib.repeat((x180 : @kernel.Thm) => @bool.spec(t179, x180), t181)
   let sum_swap_powerset = @simp.simp_rule(@list.List([@sets.finite_powerset(), @iterate.finite_numseg()]))(t182)
   let swap_tac : (((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise) -> ((Int64) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise = fn(x183 : ((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise) -> ((Int64) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
@@ -1094,10 +1094,10 @@ fn step_61() -> Unit raise {
   let t233 = @simp.asm_rewrite_tac(@list.List([@realax.real_mul_lid(), @realarith.real_mul_rid()]))
   let t232 = @simp.asm_simp_tac(@list.List([@sets.in_elim_thm()]))
   let t231 = @simp.simp_tac(@list.List([@iterate.sum_delta()]))
-  let t228 = @calc_rat.real_arith(@parser.parse_term("a * (if p then b else &0) = if p then a * b else &0"))
-  let t229 = @calc_rat.real_arith(@parser.parse_term("(if p then a else &0) * b = if p then a * b else &0"))
+  let t228 = @calc_rat.real_arith(@term_syntax.parse_term("(a : Real) * (if (p : Bool) { (b : Real) } else { real_of_num(0) }) == (if p { a * b } else { real_of_num(0) })"))
+  let t229 = @calc_rat.real_arith(@term_syntax.parse_term("(if (p : Bool) { (a : Real) } else { real_of_num(0) }) * (b : Real) == (if p { a * b } else { real_of_num(0) })"))
   let t230 = @simp.rewrite_tac(@list.List([@equal.gsym(@realax.real_mul_assoc()), t229, t228]))
-  let t226 = @parser.parse_term("u:num->bool")
+  let t226 = @term_syntax.parse_term("(u : (Num) -> Bool)")
   let t227 = swaps_tac(fn(x223 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s224 = @equal.land_conv(x223)
     fn(x225 : @kernel.Term) -> @kernel.Thm raise {
@@ -1110,7 +1110,7 @@ fn step_61() -> Unit raise {
       s220(x221)
     }
   })(0L)
-  let t217 = @parser.parse_term("t:num->bool")
+  let t217 = @term_syntax.parse_term("(t : (Num) -> Bool)")
   let t218 = swaps_tac(fn(x214 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s215 = @equal.rand_conv(x214)
     fn(x216 : @kernel.Term) -> @kernel.Thm raise {
@@ -1123,20 +1123,20 @@ fn step_61() -> Unit raise {
       s211(x212)
     }
   })(0L)
-  let t208 = @parser.parse_term("s:num->bool")
+  let t208 = @term_syntax.parse_term("(s : (Num) -> Bool)")
   let t209 = swaps_tac(fn(x205 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s206 = @equal.rand_conv(x205)
     fn(x207 : @kernel.Term) -> @kernel.Thm raise {
       s206(x207)
     }
   })(@list.List([1L, 0L]))(t208)
-  let t204 = @tactics.x_gen_tac(@parser.parse_term("r:num->bool"))
+  let t204 = @tactics.x_gen_tac(@term_syntax.parse_term("(r : (Num) -> Bool)"))
   let t202 = @equal.gsym(@iterate.sum_rmul())
   let t203 = @simp.simp_tac(@list.List([@equal.gsym(@iterate.sum_lmul()), t202]))
   let t201 = @simp.simp_tac(@list.List([multivector_eq(), multivector_vsum_component(), mbasis_component(), multivector_mul_component()]))
   let t200 = @tactics.repeat_tac(@tactics.strip_tac)
   let t236 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([product_def()])), t200), t201), t203), t204), @tactics.strip_tac), t209), t213), t218), t222), t227), t230), t231), t232), @class.cond_cases_tac), t233), t234), t235)
-  product_associative_c.set(@tactics.prove(@parser.parse_term("forall op mult. (forall s t. s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N)\n                    ==> (op s t) SUBSET 1..dimindex(:N)) /\\\n             (forall s t u. op s (op t u) = op (op s t) u) /\\\n             (forall s t u. mult t u * mult s (op t u) = mult s t * mult (op s t) u)\n             ==> forall x y z:real^(N)multivector.\n                        Product mult op x (Product mult op y z) =\n                        Product mult op (Product mult op x y) z"), t236))
+  product_associative_c.set(@tactics.prove(@term_syntax.parse_term("∀ op : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, ∀ mult : ((Num) -> Bool, (Num) -> Bool) -> Real, (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(t, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) → (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(op(s, t), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, ∀ u : (Num) -> Bool, op(s, op(t, u)) == op(op(s, t), u)) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, ∀ u : (Num) -> Bool, mult(t, u) * mult(s, op(t, u)) == mult(s, t) * mult(op(s, t), u)) → (∀ x : Cart[Real, Multivector[N]], ∀ y : Cart[Real, Multivector[N]], ∀ z : Cart[Real, Multivector[N]], (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(mult, op, x, (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(mult, op, y, z)) == (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(mult, op, (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(mult, op, x, y), z))"), t236))
 }
 
 ///|
@@ -1151,13 +1151,13 @@ pub fn product_associative() -> @kernel.Thm {
 ///|
 /// Multivariate/clifford.ml:442
 fn step_62() -> Unit raise {
-  @preterm.overload_interface("*", @parser.parse_term("geom_mul:real^(N)multivector->real^(N)multivector->real^(N)multivector"))
+  @preterm.overload_interface("*", @term_syntax.parse_term("(geom_mul : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])"))
 }
 
 ///|
 /// geom_mul
 fn step_63() -> Unit raise {
-  geom_mul_c.set(@pair.new_definition(@parser.parse_term("(x:real^(N)multivector) * y =\n        Product (\\s t. --(&1) pow CARD {i,j | i IN 1..dimindex(:N) /\\\n                                              j IN 1..dimindex(:N) /\\\n                                              i IN s /\\ j IN t /\\ i > j})\n                (\\s t. (s DIFF t) UNION (t DIFF s))\n                x y")))
+  geom_mul_c.set(@pair.new_definition(@term_syntax.parse_term("(geom_mul : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((x : Cart[Real, Multivector[N]]), (y : Cart[Real, Multivector[N]])) == (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((s : (Num) -> Bool) => (t : (Num) -> Bool) => pow(-real_of_num(1), (CARD : (((Num, Num)) -> Bool) -> Num)({((i : Num), (j : Num)) | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(i, s) && (IN : (Num, (Num) -> Bool) -> Bool)(j, t) && i > j})), (s : (Num) -> Bool) => (t : (Num) -> Bool) => (UNION : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)((DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(s, t), (DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(t, s)), x, y)")))
 }
 
 ///|
@@ -1174,7 +1174,7 @@ pub fn geom_mul() -> @kernel.Thm {
 fn step_64() -> Unit raise {
   let t237 = @tactics.match_accept_tac(bilinear_product())
   let t238 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@equal.gsym(@class.fun_eq_thm()), @class.eta_ax()]))(geom_mul())])), t237)
-  bilinear_geom_c.set(@tactics.prove(@parser.parse_term("bilinear(geom_mul)"), t238))
+  bilinear_geom_c.set(@tactics.prove(@term_syntax.parse_term("(bilinear : ((Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]) -> Bool)((op_star : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]))"), t238))
 }
 
 ///|
@@ -1322,7 +1322,7 @@ fn step_73() -> Unit raise {
   let t265 = @simp.rewrite_tac(@list.List([finite_cart_subset_lemma()]))
   let t264 = @tactics.match_mp_tac(symdiff_parity_lemma())
   let t262 = @tactics.then_tac(@tactics.ap_term_tac, @tactics.conv_tac(@equal.sym_conv))
-  let t263 = @list.List([@tactics.match_mp_tac(@class.taut(@parser.parse_term("(x <=> y <=> z) ==> ((a <=> x) <=> (y <=> z <=> a))"))), t262])
+  let t263 = @list.List([@tactics.match_mp_tac(@class.taut(@term_syntax.parse_term("(x : Bool) == ((y : Bool) == (z : Bool)) → ((a : Bool) == x) == (y == (z == a))"))), t262])
   let t252 = @simp.rewrite_tac(@list.List([@arith.even_add()]))
   let t251 = @simp.rewrite_tac(@list.List([@calc_int.real_pow_neg(), @real.real_pow_one()]))
   let t250 = @simp.rewrite_tac(@list.List([@equal.gsym(@real.real_pow_add())]))
@@ -1333,17 +1333,17 @@ fn step_73() -> Unit raise {
     (fn(x253 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let (_, w) = x253
       let tu = @lib.funpow(2, @equal.lhand, w)
-      let t255 = @parser.parse_term("t:num->bool")
-      let su = @kernel.vsubst(@list.List([(@parser.parse_term("s:num->bool"), t255)]), tu)
-      let t256 = @parser.parse_term("u:num->bool")
-      let st = @kernel.vsubst(@list.List([(@parser.parse_term("t:num->bool"), t256)]), su)
+      let t255 = @term_syntax.parse_term("(t : (Num) -> Bool)")
+      let su = @kernel.vsubst(@list.List([(@term_syntax.parse_term("(s : (Num) -> Bool)"), t255)]), tu)
+      let t256 = @term_syntax.parse_term("(u : (Num) -> Bool)")
+      let st = @kernel.vsubst(@list.List([(@term_syntax.parse_term("(t : (Num) -> Bool)"), t256)]), su)
       let t260 = @tactics.exists_tac(@lib.end_itlist((x258 : @kernel.Term, x259 : @kernel.Term) => @lib.curry(fn(x257 : (@kernel.Term, @kernel.Term)) -> @kernel.Term raise {
         @basics.mk_eq(x257.0, x257.1)
       }, x258, x259), @list.List([st, su, tu])))
       @tactics.then_tac(@tactics.match_mp_tac(@theorems.eq_trans()), t260)
     })(x261)(x261)
   }), @tactics.conj_tac), t263), t264), t265), t266), t267)
-  geom_assoc_c.set(@tactics.prove(@parser.parse_term("forall x y z:real^(N)multivector. x * (y * z) = (x * y) * z"), t268))
+  geom_assoc_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Multivector[N]], ∀ y : Cart[Real, Multivector[N]], ∀ z : Cart[Real, Multivector[N]], x * (y * z) == x * y * z"), t268))
 }
 
 ///|
@@ -1364,7 +1364,7 @@ fn step_74() -> Unit raise {
 ///|
 /// outer
 fn step_75() -> Unit raise {
-  outer_c.set(@pair.new_definition(@parser.parse_term("forall x y:real^(N)multivector.\n    x outer y =\n        Product (\\s t. if ~(s INTER t = {}) then &0\n                       else --(&1) pow CARD {i,j | i IN 1..dimindex(:N) /\\\n                                                   j IN 1..dimindex(:N) /\\\n                                                   i IN s /\\ j IN t /\\ i > j})\n                (\\s t. (s DIFF t) UNION (t DIFF s))\n                x y")))
+  outer_c.set(@pair.new_definition(@term_syntax.parse_term("∀ x : Cart[Real, Multivector[N]], ∀ y : Cart[Real, Multivector[N]], (outer : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(x, y) == (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((s : (Num) -> Bool) => (t : (Num) -> Bool) => if !((INTER : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(s, t) == ({} : (Num) -> Bool)) { real_of_num(0) } else { pow(-real_of_num(1), (CARD : (((Num, Num)) -> Bool) -> Num)({((i : Num), (j : Num)) | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(i, s) && (IN : (Num, (Num) -> Bool) -> Bool)(j, t) && i > j})) }, (s : (Num) -> Bool) => (t : (Num) -> Bool) => (UNION : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)((DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(s, t), (DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(t, s)), x, y)")))
 }
 
 ///|
@@ -1379,13 +1379,13 @@ pub fn outer() -> @kernel.Thm {
 ///|
 /// OUTER
 fn step_76() -> Unit raise {
-  let t273 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@parser.parse_term("(s INTER t = {}) ==> (s DIFF t) UNION (t DIFF s) = s UNION t"))]))
+  let t273 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("INTER((s : (_) -> Bool), (t : (_) -> Bool)) == {} → UNION(DIFF(s, t), DIFF(t, s)) == UNION(s, t)"))]))
   let t272 = @simp.asm_rewrite_tac(@list.List([@calc_int.real_mul_rzero(), @vectors.vector_mul_lzero()]))
-  let t271 = @class.asm_cases_tac(@parser.parse_term("s INTER t :num->bool = {}"))
+  let t271 = @class.asm_cases_tac(@term_syntax.parse_term("INTER((s : (Num) -> Bool), (t : (Num) -> Bool)) == {}"))
   let t270 = @tactics.repeat_tac(@tactics.then_tac(@tactics.ap_term_tac, @tactics.abs_tac))
   let t269 = @simp.rewrite_tac(@list.List([outer(), product_def()]))
   let t274 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t269), t270), t271), t272), t273)
-  outer_v1_c.set(@tactics.prove(@parser.parse_term("forall x y:real^(N)multivector.\n    x outer y =\n        Product (\\s t. if ~(s INTER t = {}) then &0\n                       else --(&1) pow CARD {i,j | i IN 1..dimindex(:N) /\\\n                                                   j IN 1..dimindex(:N) /\\\n                                                   i IN s /\\ j IN t /\\ i > j})\n                (UNION)\n                x y"), t274))
+  outer_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Multivector[N]], ∀ y : Cart[Real, Multivector[N]], (outer : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(x, y) == (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((s : (Num) -> Bool) => (t : (Num) -> Bool) => if !((INTER : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(s, t) == ({} : (Num) -> Bool)) { real_of_num(0) } else { pow(-real_of_num(1), (CARD : (((Num, Num)) -> Bool) -> Num)({((i : Num), (j : Num)) | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(i, s) && (IN : (Num, (Num) -> Bool) -> Bool)(j, t) && i > j})) }, (UNION : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool), x, y)"), t274))
 }
 
 ///|
@@ -1402,7 +1402,7 @@ pub fn outer_v1() -> @kernel.Thm {
 fn step_77() -> Unit raise {
   let t275 = @tactics.match_accept_tac(bilinear_product())
   let t276 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@equal.gsym(@class.fun_eq_thm()), @class.eta_ax()]))(outer())])), t275)
-  bilinear_outer_c.set(@tactics.prove(@parser.parse_term("bilinear(outer)"), t276))
+  bilinear_outer_c.set(@tactics.prove(@term_syntax.parse_term("(bilinear : ((Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]) -> Bool)((outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]))"), t276))
 }
 
 ///|
@@ -1552,16 +1552,16 @@ fn step_86() -> Unit raise {
   let t295 = @tactics.match_mp_tac(card_union_lemma())
   let t294 = @simp.rewrite_tac(@list.List([@equal.gsym(@real.real_pow_add())]))
   let t293 = @simp.asm_rewrite_tac(@list.List([@calc_int.real_mul_lzero(), @calc_int.real_mul_rzero()]))
-  let t290 = @parser.parse_term("t INTER u :num->bool = {}")
-  let t291 = @parser.parse_term("s INTER u :num->bool = {}")
-  let t292 = @tactics.map_every(@class.asm_cases_tac, @list.List([@parser.parse_term("s INTER t :num->bool = {}"), t291, t290]))
+  let t290 = @term_syntax.parse_term("INTER((t : (Num) -> Bool), (u : (Num) -> Bool)) == {}")
+  let t291 = @term_syntax.parse_term("INTER((s : (Num) -> Bool), (u : (Num) -> Bool)) == {}")
+  let t292 = @tactics.map_every(@class.asm_cases_tac, @list.List([@term_syntax.parse_term("INTER((s : (Num) -> Bool), (t : (Num) -> Bool)) == {}"), t291, t290]))
   let t289 = @tactics.repeat_tac(@tactics.gen_tac)
   let t288 = @simp.rewrite_tac(@list.List([@sets.empty_union()]))
-  let t286 = @sets.set_rule(@parser.parse_term("(t UNION u) INTER s = (t INTER s) UNION (u INTER s)"))
-  let t287 = @simp.simp_tac(@list.List([@sets.union_subset(), @sets.union_assoc(), @sets.set_rule(@parser.parse_term("s INTER (t UNION u) = (s INTER t) UNION (s INTER u)")), t286]))
+  let t286 = @sets.set_rule(@term_syntax.parse_term("INTER(UNION((t : (_) -> Bool), (u : (_) -> Bool)), (s : (_) -> Bool)) == UNION(INTER(t, s), INTER(u, s))"))
+  let t287 = @simp.simp_tac(@list.List([@sets.union_subset(), @sets.union_assoc(), @sets.set_rule(@term_syntax.parse_term("INTER((s : (_) -> Bool), UNION((t : (_) -> Bool), (u : (_) -> Bool))) == UNION(INTER(s, t), INTER(s, u))")), t286]))
   let t285 = @tactics.match_mp_tac(product_associative())
   let t300 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([outer_v1()])), t285), t287), t288), t289), t292), t293), t294), @tactics.ap_term_tac), t295), t296), t297), t298), t299)
-  outer_assoc_c.set(@tactics.prove(@parser.parse_term("forall x y z:real^(N)multivector. x outer (y outer z) = (x outer y) outer z"), t300))
+  outer_assoc_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Multivector[N]], ∀ y : Cart[Real, Multivector[N]], ∀ z : Cart[Real, Multivector[N]], outer(x, outer(y, z)) == outer(outer(x, y), z)"), t300))
 }
 
 ///|
@@ -1582,7 +1582,7 @@ fn step_87() -> Unit raise {
 ///|
 /// inner
 fn step_88() -> Unit raise {
-  inner_c.set(@pair.new_definition(@parser.parse_term("forall x y:real^(N)multivector.\n    x inner y =\n        Product (\\s t. if s = {} \\/ t = {} \\/\n                          ~((s DIFF t) = {} /\\ ~(t DIFF s = {}))\n                       then &0\n                       else --(&1) pow CARD {i,j | i IN 1..dimindex(:N) /\\\n                                                   j IN 1..dimindex(:N) /\\\n                                                   i IN s /\\ j IN t /\\ i > j})\n                (\\s t. (s DIFF t) UNION (t DIFF s))\n                x y")))
+  inner_c.set(@pair.new_definition(@term_syntax.parse_term("∀ x : Cart[Real, Multivector[N]], ∀ y : Cart[Real, Multivector[N]], (inner : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(x, y) == (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((s : (Num) -> Bool) => (t : (Num) -> Bool) => if s == ({} : (Num) -> Bool) || t == ({} : (Num) -> Bool) || !((DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(s, t) == ({} : (Num) -> Bool) && !((DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(t, s) == ({} : (Num) -> Bool))) { real_of_num(0) } else { pow(-real_of_num(1), (CARD : (((Num, Num)) -> Bool) -> Num)({((i : Num), (j : Num)) | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(i, s) && (IN : (Num, (Num) -> Bool) -> Bool)(j, t) && i > j})) }, (s : (Num) -> Bool) => (t : (Num) -> Bool) => (UNION : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)((DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(s, t), (DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(t, s)), x, y)")))
 }
 
 ///|
@@ -1599,7 +1599,7 @@ pub fn inner() -> @kernel.Thm {
 fn step_89() -> Unit raise {
   let t301 = @tactics.match_accept_tac(bilinear_product())
   let t302 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@equal.gsym(@class.fun_eq_thm()), @class.eta_ax()]))(inner())])), t301)
-  bilinear_inner_c.set(@tactics.prove(@parser.parse_term("bilinear(inner)"), t302))
+  bilinear_inner_c.set(@tactics.prove(@term_syntax.parse_term("(bilinear : ((Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]) -> Bool)((inner : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]))"), t302))
 }
 
 ///|
@@ -1743,7 +1743,7 @@ pub fn inner_rzero() -> @kernel.Thm {
 /// PRODUCT_MBASIS
 fn step_98() -> Unit raise {
   let t331 = @simp.asm_rewrite_tac(@list.List([]))
-  let t330 = @class.asm_cases_tac(@parser.parse_term("t SUBSET 1..dimindex(:N)"))
+  let t330 = @class.asm_cases_tac(@term_syntax.parse_term("SUBSET((t : (Num) -> Bool), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))"))
   let t329 = @simp.simp_tac(@list.List([@vectors.vector_mul_lzero(), @class.cond_id(), @vectors.vsum_delta(), @sets.in_elim_thm(), @vectors.vsum_0()]))
   let t328 = @simp.gen_rewrite_tac(fn(x327 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     (fn(x321 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -1771,11 +1771,11 @@ fn step_98() -> Unit raise {
       }
     })(x320))
   }, @list.List([@class.cond_rand()])), t328), t329), t330), t331))
-  let t313 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(if p then &1 else &0) * (if q then &1 else &0) * x =\n    if q then if p then x else &0 else &0"))]))
+  let t313 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("(if (p : Bool) { real_of_num(1) } else { real_of_num(0) }) * ((if (q : Bool) { real_of_num(1) } else { real_of_num(0) }) * (x : Real)) == (if q { if p { x } else { real_of_num(0) } } else { real_of_num(0) })"))]))
   let t312 = @simp.simp_tac(@list.List([multivector_mul_component(), mbasis_component()]))
   let t311 = @simp.rewrite_tac(@list.List([product_def()]))
   let t333 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t311), t312), t313), t332)
-  product_mbasis_c.set(@tactics.prove(@parser.parse_term("forall s t. Product mult op (mbasis s) (mbasis t) :real^(N)multivector =\n            if s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N)\n            then mult s t % mbasis(op s t)\n            else vec 0"), t333))
+  product_mbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((mult : ((Num) -> Bool, (Num) -> Bool) -> Real), (op : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(t)) == (if SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && SUBSET(t, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) { (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(mult(s, t), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(op(s, t))) } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })"), t333))
 }
 
 ///|
@@ -1790,8 +1790,8 @@ pub fn product_mbasis() -> @kernel.Thm {
 ///|
 /// PRODUCT_MBASIS_SING
 fn step_99() -> Unit raise {
-  let t334 = @simp.rewrite_tac(@list.List([product_mbasis(), @sets.set_rule(@parser.parse_term("{x} SUBSET s <=> x IN s"))]))
-  product_mbasis_sing_c.set(@tactics.prove(@parser.parse_term("forall i j. Product mult op (mbasis{i}) (mbasis{j}) :real^(N)multivector =\n            if i IN 1..dimindex(:N) /\\ j IN 1..dimindex(:N)\n            then mult {i} {j} % mbasis(op {i} {j})\n            else vec 0"), t334))
+  let t334 = @simp.rewrite_tac(@list.List([product_mbasis(), @sets.set_rule(@term_syntax.parse_term("SUBSET({(x : _)}, (s : (_) -> Bool)) == IN(x, s)"))]))
+  product_mbasis_sing_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, ∀ j : Num, (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((mult : ((Num) -> Bool, (Num) -> Bool) -> Real), (op : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({j})) == (if IN(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && IN(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) { (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(mult({i}, {j}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(op({i}, {j}))) } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })"), t334))
 }
 
 ///|
@@ -1811,7 +1811,7 @@ fn step_100() -> Unit raise {
   let t336 = @simp.asm_rewrite_tac(@list.List([]))
   let t335 = @simp.rewrite_tac(@list.List([geom_mul(), product_mbasis()]))
   let t339 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t335), @class.cond_cases_tac), t336), @tactics.ap_thm_tac), @tactics.ap_term_tac), @tactics.ap_term_tac), @tactics.ap_term_tac), t337), t338)
-  geom_mbasis_c.set(@tactics.prove(@parser.parse_term("forall s t. mbasis s * mbasis t :real^(N)multivector =\n                if s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N)\n                then --(&1) pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} %\n                     mbasis((s DIFF t) UNION (t DIFF s))\n                else vec 0"), t339))
+  geom_mbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s) * (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(t) == (if SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && SUBSET(t, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) { (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(pow(-real_of_num(1), CARD({((i : Num), (j : Num)) | IN(i, s) && IN(j, t) && i > j})), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(UNION(DIFF(s, t), DIFF(t, s)))) } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })"), t339))
 }
 
 ///|
@@ -1827,8 +1827,8 @@ pub fn geom_mbasis() -> @kernel.Thm {
 /// GEOM_MBASIS_SING
 fn step_101() -> Unit raise {
   let t361 = @simp.asm_simp_tac(@list.List([@sets.card_clauses(), @realax.real_pow(), @vectors.vector_mul_lid(), @sets.finite_rules(), @sets.not_in_empty()]))
-  let t360 = @class.asm_cases_tac(@parser.parse_term("i:num < j"))
-  let t357 = @drule.match_mp(@int.arith_rule(@parser.parse_term("~(i:num = j) ==> (j < i <=> ~(i < j))")))
+  let t360 = @class.asm_cases_tac(@term_syntax.parse_term("(i : Num) < (j : Num)"))
+  let t357 = @drule.match_mp(@int.arith_rule(@term_syntax.parse_term("!((i : Num) == (j : Num)) → (j < i) == !(i < j)")))
   let t359 = @tactics.first_assum(fn(x358 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x354 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s355 = @tactics.subst1_tac(x354)
@@ -1837,15 +1837,15 @@ fn step_101() -> Unit raise {
       }
     })(t357(x358))
   })
-  let t353 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@parser.parse_term("~(i = j) ==> ({i} DIFF {j}) UNION ({j} DIFF {i}) = {i,j}"))]))
+  let t353 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("!((i : _) == (j : _)) → UNION(DIFF({i}, {j}), DIFF({j}, {i})) == {i, j}"))]))
   let t351 = @sets.set_tac(@list.List([]))
   let t352 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.card_clauses(), @realax.real_pow(), @vectors.vector_mul_lid()])), @tactics.ap_term_tac), t351), @tactics.all_tac])
   let t350 = @simp.asm_rewrite_tac(@list.List([@arith.gt(), @arith.lt_refl()]))
-  let t349 = @class.asm_cases_tac(@parser.parse_term("i:num = j"))
+  let t349 = @class.asm_cases_tac(@term_syntax.parse_term("(i : Num) == (j : Num)"))
   let t347 = @meson.asm_meson_tac(@list.List([@arith.lt_refl()]))
   let t346 = @simp.asm_rewrite_tac(@list.List([@sets.in_sing(), @sets.not_in_empty(), @pair.pair_eq()]))
   let t348 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @pair.forall_pair_thm(), @sets.in_elim_pair_thm(), @sets.in_sing()])), @class.cond_cases_tac), t346), t347), @tactics.all_tac])
-  let t345 = @tactics.subgoal_then(@parser.parse_term("{i',j' | i' IN 1 .. dimindex (:N) /\\\n             j' IN 1 .. dimindex (:N) /\\\n             i' = i /\\\n             j' = j /\\\n             i' > j'} =\n    if i > j then {(i,j)} else {}"), fn(x342 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t345 = @tactics.subgoal_then(@term_syntax.parse_term("{((i' : Num), (j' : Num)) | IN(i', op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && IN(j', op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && i' == (i : Num) && j' == (j : Num) && i' > j'} == (if i > j { {(i, j)} } else { {} })"), fn(x342 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s343 = @tactics.subst1_tac(x342)
     fn(x344 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s343(x344)
@@ -1854,7 +1854,7 @@ fn step_101() -> Unit raise {
   let t341 = @simp.asm_rewrite_tac(@list.List([@sets.in_sing()]))
   let t340 = @simp.rewrite_tac(@list.List([geom_mul(), product_mbasis_sing()]))
   let t362 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t340), @class.cond_cases_tac), t341), t345), t348), t349), t350), t352), t353), t359), t360), t361), @vectors.vector_arith_tac)
-  geom_mbasis_sing_c.set(@tactics.prove(@parser.parse_term("forall i j. mbasis{i} * mbasis{j} :real^(N)multivector =\n                if i IN 1..dimindex(:N) /\\ j IN 1..dimindex(:N)\n                then if i = j then mbasis{}\n                     else if i < j then mbasis{i,j}\n                     else --(mbasis{i,j})\n                else vec 0"), t362))
+  geom_mbasis_sing_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, ∀ j : Num, (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({j}) == (if IN(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && IN(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) { if i == j { (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({}) } else { if i < j { (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i, j}) } else { -(mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i, j}) } } } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })"), t362))
 }
 
 ///|
@@ -1873,10 +1873,10 @@ fn step_102() -> Unit raise {
   let t367 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_pair_thm(), @pair.forall_pair_thm()]))
   let t366 = @simp.asm_rewrite_tac(@list.List([]))
   let t365 = @simp.asm_rewrite_tac(@list.List([@vectors.vector_mul_lzero(), @class.cond_id()]))
-  let t364 = @class.asm_cases_tac(@parser.parse_term("(s:num->bool) INTER t = {}"))
+  let t364 = @class.asm_cases_tac(@term_syntax.parse_term("INTER((s : (Num) -> Bool), (t : (Num) -> Bool)) == {}"))
   let t363 = @simp.rewrite_tac(@list.List([outer_v1(), product_mbasis()]))
   let t369 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t363), t364), t365), @class.cond_cases_tac), t366), @tactics.ap_thm_tac), @tactics.ap_term_tac), @tactics.ap_term_tac), @tactics.ap_term_tac), t367), t368)
-  outer_mbasis_c.set(@tactics.prove(@parser.parse_term("forall s t. (mbasis s) outer (mbasis t) :real^(N)multivector =\n                if s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N) /\\\n                   s INTER t = {}\n                then --(&1) pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} %\n                     mbasis(s UNION t)\n                else vec 0"), t369))
+  outer_mbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (outer : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(t)) == (if SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && SUBSET(t, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && INTER(s, t) == {} { (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(pow(-real_of_num(1), CARD({((i : Num), (j : Num)) | IN(i, s) && IN(j, t) && i > j})), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(UNION(s, t))) } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })"), t369))
 }
 
 ///|
@@ -1892,8 +1892,8 @@ pub fn outer_mbasis() -> @kernel.Thm {
 /// OUTER_MBASIS_SING
 fn step_103() -> Unit raise {
   let t390 = @simp.asm_simp_tac(@list.List([@sets.card_clauses(), @realax.real_pow(), @vectors.vector_mul_lid(), @sets.finite_rules(), @sets.not_in_empty()]))
-  let t389 = @class.asm_cases_tac(@parser.parse_term("i:num < j"))
-  let t386 = @drule.match_mp(@int.arith_rule(@parser.parse_term("~(i:num = j) ==> (j < i <=> ~(i < j))")))
+  let t389 = @class.asm_cases_tac(@term_syntax.parse_term("(i : Num) < (j : Num)"))
+  let t386 = @drule.match_mp(@int.arith_rule(@term_syntax.parse_term("!((i : Num) == (j : Num)) → (j < i) == !(i < j)")))
   let t388 = @tactics.first_assum(fn(x387 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x383 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s384 = @tactics.subst1_tac(x383)
@@ -1902,11 +1902,11 @@ fn step_103() -> Unit raise {
       }
     })(t386(x387))
   })
-  let t382 = @simp.asm_simp_tac(@list.List([@arith.gt(), @sets.set_rule(@parser.parse_term("{i} UNION {j} = {i,j}"))]))
+  let t382 = @simp.asm_simp_tac(@list.List([@arith.gt(), @sets.set_rule(@term_syntax.parse_term("UNION({(i : _)}, {(j : _)}) == {i, j}"))]))
   let t380 = @meson.asm_meson_tac(@list.List([@arith.lt_refl()]))
   let t379 = @simp.asm_rewrite_tac(@list.List([@sets.in_sing(), @sets.not_in_empty(), @pair.pair_eq()]))
   let t381 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @pair.forall_pair_thm(), @sets.in_elim_pair_thm(), @sets.in_sing()])), @class.cond_cases_tac), t379), t380), @tactics.all_tac])
-  let t378 = @tactics.subgoal_then(@parser.parse_term("{i',j' | i' IN 1 .. dimindex (:N) /\\\n             j' IN 1 .. dimindex (:N) /\\\n             i' = i /\\\n             j' = j /\\\n             i' > j'} =\n    if i > j then {(i,j)} else {}"), fn(x375 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t378 = @tactics.subgoal_then(@term_syntax.parse_term("{((i' : Num), (j' : Num)) | IN(i', op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && IN(j', op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && i' == (i : Num) && j' == (j : Num) && i' > j'} == (if i > j { {(i, j)} } else { {} })"), fn(x375 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s376 = @tactics.subst1_tac(x375)
     fn(x377 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s376(x377)
@@ -1914,11 +1914,11 @@ fn step_103() -> Unit raise {
   })
   let t374 = @simp.asm_rewrite_tac(@list.List([@sets.in_sing()]))
   let t373 = @simp.asm_rewrite_tac(@list.List([@vectors.vector_mul_lzero(), @class.cond_id()]))
-  let t372 = @class.asm_cases_tac(@parser.parse_term("i:num = j"))
-  let t371 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{i} INTER {j} = {} <=> ~(i = j)"))]))
+  let t372 = @class.asm_cases_tac(@term_syntax.parse_term("(i : Num) == (j : Num)"))
+  let t371 = @simp.rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("(INTER({(i : _)}, {(j : _)}) == {}) == !(i == j)"))]))
   let t370 = @simp.rewrite_tac(@list.List([outer_v1(), product_mbasis_sing()]))
   let t391 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t370), t371), t372), t373), @class.cond_cases_tac), t374), t378), t381), t382), t388), t389), t390), @vectors.vector_arith_tac)
-  outer_mbasis_sing_c.set(@tactics.prove(@parser.parse_term("forall i j. mbasis{i} outer mbasis{j} :real^(N)multivector =\n                if i IN 1..dimindex(:N) /\\ j IN 1..dimindex(:N) /\\ ~(i = j)\n                then if i < j then mbasis{i,j} else --(mbasis{i,j})\n                else vec 0"), t391))
+  outer_mbasis_sing_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, ∀ j : Num, (outer : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({j})) == (if IN(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && IN(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && !(i == j) { if i < j { (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i, j}) } else { -(mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i, j}) } } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })"), t391))
 }
 
 ///|
@@ -1937,15 +1937,15 @@ fn step_104() -> Unit raise {
   let t400 = @tactics.repeat_tac(@tactics.ap_term_tac)
   let t399 = @simp.asm_rewrite_tac(@list.List([@vectors.vector_neg_neg(), @vectors.vector_neg_0()]))
   let t398 = @simp.asm_rewrite_tac(@list.List([@theorems.conj_aci()]))
-  let t395 = @drule.match_mp(@int.arith_rule(@parser.parse_term("~(i:num = j) ==> i < j /\\ ~(j < i) \\/ j < i /\\ ~(i < j)")))
+  let t395 = @drule.match_mp(@int.arith_rule(@term_syntax.parse_term("!((i : Num) == (j : Num)) → i < j && !(j < i) || j < i && !(i < j)")))
   let t397 = @tactics.first_assum(fn(x396 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.disj_cases_tac(t395(x396))
   })
   let t394 = @simp.asm_rewrite_tac(@list.List([@vectors.vector_neg_0()]))
-  let t393 = @class.asm_cases_tac(@parser.parse_term("i:num = j"))
+  let t393 = @class.asm_cases_tac(@term_syntax.parse_term("(i : Num) == (j : Num)"))
   let t392 = @simp.rewrite_tac(@list.List([outer_mbasis_sing()]))
   let t402 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t392), t393), t394), t397), t398), @class.cond_cases_tac), t399), t400), t401)
-  outer_mbasis_skewsym_c.set(@tactics.prove(@parser.parse_term("forall i j. mbasis{i} outer mbasis{j} = --(mbasis{j} outer mbasis{i})"), t402))
+  outer_mbasis_skewsym_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, ∀ j : Num, (outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({j})) == -(outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({j}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i}))"), t402))
 }
 
 ///|
@@ -1961,8 +1961,8 @@ pub fn outer_mbasis_skewsym() -> @kernel.Thm {
 /// OUTER_MBASIS_REFL
 fn step_105() -> Unit raise {
   let t403 = @tactics.match_accept_tac(outer_mbasis_skewsym())
-  let t404 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@vectors.vector_arith(@parser.parse_term("forall x:real^N. x = --x ==> x = vec 0")))), t403)
-  outer_mbasis_refl_c.set(@tactics.prove(@parser.parse_term("forall i. mbasis{i} outer mbasis{i} = vec 0"), t404))
+  let t404 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@vectors.vector_arith(@term_syntax.parse_term("∀ x : Cart[Real, N], x == -x → x == vec(0)")))), t403)
+  outer_mbasis_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, (outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i})) == (vec : (Num) -> Cart[Real, Multivector[_]])(0)"), t404))
 }
 
 ///|
@@ -1978,11 +1978,11 @@ pub fn outer_mbasis_refl() -> @kernel.Thm {
 /// OUTER_MBASIS_LSCALAR
 fn step_106() -> Unit raise {
   let t408 = @simp.rewrite_tac(@list.List([@sets.card_clauses(), @realax.real_pow(), @vectors.vector_mul_lid()]))
-  let t407 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{i,j | i IN {} /\\ j IN s /\\ i:num > j} = {}"))]))
+  let t407 = @simp.rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("{((i : Num), (j : Num)) | IN(i, {}) && IN(j, (s : (Num) -> Bool)) && i > j} == {}"))]))
   let t406 = @simp.simp_tac(@list.List([outer_mbasis(), @sets.empty_subset(), @sets.inter_empty(), @sets.union_empty()]))
   let t405 = @simp.simp_tac(@list.List([outer_rmul(), outer_radd()]))
   let t409 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(mbasis_extension()), t405), t406), t407), t408)
-  outer_mbasis_lscalar_c.set(@tactics.prove(@parser.parse_term("forall x. mbasis{} outer x = x"), t409))
+  outer_mbasis_lscalar_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Multivector[_]], outer(mbasis({}), x) == x"), t409))
 }
 
 ///|
@@ -1998,11 +1998,11 @@ pub fn outer_mbasis_lscalar() -> @kernel.Thm {
 /// OUTER_MBASIS_RSCALAR
 fn step_107() -> Unit raise {
   let t413 = @simp.rewrite_tac(@list.List([@sets.card_clauses(), @realax.real_pow(), @vectors.vector_mul_lid()]))
-  let t412 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{i,j | i IN s /\\ j IN {} /\\ i:num > j} = {}"))]))
+  let t412 = @simp.rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("{((i : Num), (j : Num)) | IN(i, (s : (Num) -> Bool)) && IN(j, {}) && i > j} == {}"))]))
   let t411 = @simp.simp_tac(@list.List([outer_mbasis(), @sets.empty_subset(), @sets.inter_empty(), @sets.union_empty()]))
   let t410 = @simp.simp_tac(@list.List([outer_lmul(), outer_ladd()]))
   let t414 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(mbasis_extension()), t410), t411), t412), t413)
-  outer_mbasis_rscalar_c.set(@tactics.prove(@parser.parse_term("forall x. x outer mbasis{} = x"), t414))
+  outer_mbasis_rscalar_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Multivector[_]], outer(x, mbasis({})) == x"), t414))
 }
 
 ///|
@@ -2017,17 +2017,17 @@ pub fn outer_mbasis_rscalar() -> @kernel.Thm {
 ///|
 /// MBASIS_SPLIT
 fn step_108() -> Unit raise {
-  let t428 = @meson.asm_meson_tac(@list.List([@int.arith_rule(@parser.parse_term("~(n < m /\\ n:num > m)"))]))
+  let t428 = @meson.asm_meson_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("!((n : Num) < (m : Num) && n > m)"))]))
   let t427 = @simp.rewrite_tac(@list.List([@sets.extension(), @pair.forall_pair_thm(), @sets.in_elim_pair_thm(), @sets.in_sing(), @sets.not_in_empty()]))
-  let t426 = @tactics.subgoal_then(@parser.parse_term("{(i:num),(j:num) | i IN {a} /\\ j IN s /\\ i > j} = {}"), fn(x424 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t426 = @tactics.subgoal_then(@term_syntax.parse_term("{((i : Num), (j : Num)) | IN(i, {(a : Num)}) && IN(j, (s : (Num) -> Bool)) && i > j} == {}"), fn(x424 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x424
     @simp.simp_tac(@list.List([th, @sets.card_clauses(), @realax.real_pow(), @vectors.vector_mul_lid()]))
   })
-  let t423 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{a} UNION s = a INSERT s"))]))
+  let t423 = @simp.rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("UNION({(a : _)}, (s : (_) -> Bool)) == INSERT(a, s)"))]))
   let t422 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([mbasis_eq_0()]))])
-  let t421 = @simp.simp_tac(@list.List([@sets.set_rule(@parser.parse_term("{a} SUBSET t /\\ s SUBSET t <=> (a INSERT s) SUBSET t"))]))
+  let t421 = @simp.simp_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("(SUBSET({(a : _)}, (t : (_) -> Bool)) && SUBSET((s : (_) -> Bool), t)) == SUBSET(INSERT(a, s), t)"))]))
   let t420 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([@arith.lt_refl()])), @tactics.all_tac])
-  let t419 = @tactics.subgoal_then(@parser.parse_term("{a:num} INTER s = {}"), fn(x416 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t419 = @tactics.subgoal_then(@term_syntax.parse_term("INTER({(a : Num)}, (s : (Num) -> Bool)) == {}"), fn(x416 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s417 = @tactics.subst1_tac(x416)
     fn(x418 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s417(x418)
@@ -2035,7 +2035,7 @@ fn step_108() -> Unit raise {
   })
   let t415 = @simp.rewrite_tac(@list.List([outer_mbasis()]))
   let t429 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t415), t419), t420), t421), @class.cond_cases_tac), t422), t423), t426), t427), t428)
-  mbasis_split_c.set(@tactics.prove(@parser.parse_term("forall a s. (forall x. x IN s ==> a < x)\n         ==> mbasis (a INSERT s) = mbasis{a} outer mbasis s"), t429))
+  mbasis_split_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Num, ∀ s : (Num) -> Bool, (∀ x : Num, IN(x, s) → a < x) → (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])(INSERT(a, s)) == (outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({a}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])(s))"), t429))
 }
 
 ///|
@@ -2110,7 +2110,7 @@ pub fn mbasis_merge_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// MBASIS_SPLIT_CONV, MBASIS_MERGE_CONV
 fn step_110() -> Unit raise {
-  let setlemma = @sets.set_rule(@parser.parse_term("((forall x:num. x IN {} ==> a < x) <=> T) /\\\n    ((forall x:num. x IN (y INSERT s) ==> a < x) <=>\n              a < y /\\ (forall x. x IN s ==> a < x))"))
+  let setlemma = @sets.set_rule(@term_syntax.parse_term("(∀ x : Num, IN(x, {}) → (a : Num) < x) == true && (∀ x : Num, IN(x, INSERT((y : Num), (s : (Num) -> Bool))) → a < x) == (a < y && (∀ x : Num, IN(x, s) → a < x))"))
   let set_check_conv : (@kernel.Term) -> @kernel.Thm raise = @equal.thenc(@simp.gen_rewrite_conv(fn(x442 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s443 = @equal.top_sweep_conv(x442)
     fn(x444 : @kernel.Term) -> @kernel.Thm raise {
@@ -2164,12 +2164,12 @@ fn step_110() -> Unit raise {
 /// OUTER_ACI
 fn step_111() -> Unit raise {
   let t455 = @meson.meson_tac(@list.List([outer_mbasis_skewsym(), outer_lneg()]))
-  let t453 = @vectors.vector_arith(@parser.parse_term("x - y:real^N = x + --y"))
+  let t453 = @vectors.vector_arith(@term_syntax.parse_term("(x : Cart[Real, N]) - (y : Cart[Real, N]) == x + -y"))
   let t454 = @simp.simp_tac(@list.List([@equal.gsym(@vectors.vector_neg_minus1()), t453]))
   let t452 = @simp.rewrite_tac(@list.List([outer_mbasis_lscalar(), outer_mbasis_rscalar()]))
   let t451 = @simp.rewrite_tac(@list.List([outer_mbasis_refl(), outer_lzero()]))
   let t456 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([outer_assoc(), outer_lzero(), outer_rzero(), outer_ladd(), outer_radd(), outer_lmul(), outer_rmul(), outer_lzero(), outer_rzero()])), t451), t452), t454), t455)
-  outer_aci_c.set(@tactics.prove(@parser.parse_term("(forall x y z. (x outer y) outer z = x outer (y outer z)) /\\\n   (forall i j. i > j\n          ==> mbasis{i} outer mbasis{j} =\n              --(&1) % (mbasis{j} outer mbasis{i})) /\\\n   (forall i j x. i > j\n            ==> mbasis{i} outer mbasis{j} outer x =\n                --(&1) % (mbasis{j} outer mbasis{i} outer x)) /\\\n   (forall i. mbasis{i} outer mbasis{i} = vec 0) /\\\n   (forall i x. mbasis{i} outer mbasis{i} outer x = vec 0) /\\\n   (forall x. mbasis{} outer x = x) /\\\n   (forall x. x outer mbasis{} = x)"), t456))
+  outer_aci_c.set(@tactics.prove(@term_syntax.parse_term("(∀ x : Cart[Real, Multivector[_]], ∀ y : Cart[Real, Multivector[_]], ∀ z : Cart[Real, Multivector[_]], outer(outer(x, y), z) == outer(x, outer(y, z))) && (∀ i : Num, ∀ j : Num, i > j → (outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({j})) == (op_pct : (Real, Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])(-real_of_num(1), (outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({j}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i})))) && (∀ i : Num, ∀ j : Num, ∀ x : Cart[Real, Multivector[_]], i > j → outer(mbasis({i}), outer(mbasis({j}), x)) == op_pct(-real_of_num(1), outer(mbasis({j}), outer(mbasis({i}), x)))) && (∀ i : Num, (outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i})) == (vec : (Num) -> Cart[Real, Multivector[_]])(0)) && (∀ i : Num, ∀ x : Cart[Real, Multivector[_]], outer(mbasis({i}), outer(mbasis({i}), x)) == vec(0)) && (∀ x : Cart[Real, Multivector[_]], outer(mbasis({}), x) == x) && (∀ x : Cart[Real, Multivector[_]], outer(x, mbasis({})) == x)"), t456))
 }
 
 ///|
@@ -2269,7 +2269,7 @@ pub fn outer_canon_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// seqiterate_EXISTS
 fn step_113() -> Unit raise {
-  let t515 = @simp.asm_simp_tac(@list.List([@sets.card_delete(), @sets.card_eq_0(), @int.arith_rule(@parser.parse_term("n - 1 < n <=> ~(n = 0)"))]))
+  let t515 = @simp.asm_simp_tac(@list.List([@sets.card_delete(), @sets.card_eq_0(), @int.arith_rule(@term_syntax.parse_term("((n : Num) - 1 < n) == !(n == 0)"))]))
   let t514 = @simp.gen_rewrite_tac(fn(x511 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s512 = @equal.land_conv(x511)
     fn(x513 : @kernel.Term) -> @kernel.Thm raise {
@@ -2277,7 +2277,7 @@ fn step_113() -> Unit raise {
     }
   }, @list.List([@arith.minimal_v1()]))
   let t510 = @list.List([@meson.asm_meson_tac(@list.List([@sets.member_not_empty()])), @tactics.all_tac])
-  let t509 = @tactics.subgoal_then(@parser.parse_term("?i:num. i IN s"), fn(x506 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t509 = @tactics.subgoal_then(@term_syntax.parse_term("∃ i : Num, IN(i, (s : (Num) -> Bool))"), fn(x506 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s507 = @tactics.mp_tac(x506)
     fn(x508 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s507(x508)
@@ -2290,11 +2290,11 @@ fn step_113() -> Unit raise {
   let t501 = @tactics.conv_tac(@equal.once_depth_conv(@pair.let_conv))
   let t500 = @simp.asm_rewrite_tac(@list.List([]))
   let t499 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t497 = @bool.ispec(@parser.parse_term("CARD:(num->bool)->num"), @wf.wf_measure())
+  let t497 = @bool.ispec(@term_syntax.parse_term("(CARD : ((Num) -> Bool) -> Num)"), @wf.wf_measure())
   let t498 = @tactics.match_mp_tac(@drule.match_mp(@wf.wf_rec())(t497))
   let t496 = @simp.rewrite_tac(@list.List([@sets.infinite()]))
   let t516 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t496), t498), t499), @class.cond_cases_tac), t500), @pair.let_tac), t501), @class.cond_cases_tac), t502), @tactics.ap_term_tac), t503), t504), t505), t509), t510), t514), t515)
-  seqiterate_exists_c.set(@tactics.prove(@parser.parse_term("forall op f. ?h.\n        forall s. h s = if INFINITE s \\/ s = {} then neutral op else\n                  let i = minimal x. x IN s in\n                  if s = {i} then f(i) else op (f i) (h (s DELETE i))"), t516))
+  seqiterate_exists_c.set(@tactics.prove(@term_syntax.parse_term("∀ op : (_, _) -> _, ∀ f : (Num) -> _, ∃ h : ((Num) -> Bool) -> _, ∀ s : (Num) -> Bool, h(s) == (if INFINITE(s) || s == {} { neutral(op) } else { LET((i : Num) => LET_END(if s == {i} { f(i) } else { op(f(i), h(DELETE(s, i))) }), minimal((x : Num) => IN(x, s))) })"), t516))
 }
 
 ///|
@@ -2311,10 +2311,10 @@ pub fn seqiterate_exists() -> @kernel.Thm {
 fn step_114() -> Unit raise {
   let t519 = @meson.asm_meson_tac(@list.List([]))
   let t518 = @simp.asm_rewrite_tac(@list.List([@class.eta_ax()]))
-  let t520 = @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("\\a b. (f:B->A->C) b a")), t518), t519])
+  let t520 = @list.List([@tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("(a : A) => (b : B) => (f : (B, A) -> C)(b, a)")), t518), t519])
   let t517 = @tactics.disch_then(@tactics.choose_tac)
   let t521 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t517), t520)
-  exists_swap_c.set(@tactics.prove(@parser.parse_term("forall P. (?f. P f) <=> (?f:A->B->C. P (\\b a. f a b))"), t521))
+  exists_swap_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : ((B, A) -> C) -> Bool, (∃ f : (B, A) -> C, P(f)) == (∃ f : (A, B) -> C, P((b : B) => (a : A) => f(a, b)))"), t521))
 }
 
 ///|
@@ -2352,7 +2352,7 @@ fn step_116() -> Unit raise {
   let t526 = @tactics.match_mp_tac(@class.select_unique())
   let t525 = @simp.rewrite_tac(@list.List([@arith.minimal()]))
   let t529 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t525), t526), t527), t528)
-  minimal_in_insert_c.set(@tactics.prove(@parser.parse_term("forall s i. (forall j. j IN s ==> i < j) ==> (minimal j. j IN (i INSERT s)) = i"), t529))
+  minimal_in_insert_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ i : Num, (∀ j : Num, IN(j, s) → i < j) → minimal((j : Num) => IN(j, INSERT(i, s))) == i"), t529))
 }
 
 ///|
@@ -2367,9 +2367,9 @@ pub fn minimal_in_insert() -> @kernel.Thm {
 ///|
 /// SEQITERATE_CLAUSES
 fn step_117() -> Unit raise {
-  let t541 = @simp.asm_simp_tac(@list.List([@sets.delete_insert(), @sets.set_rule(@parser.parse_term("~(i IN s) /\\ ~(s = {}) ==> (s DELETE i = s) /\\ ~(i INSERT s = {i})"))]))
+  let t541 = @simp.asm_simp_tac(@list.List([@sets.delete_insert(), @sets.set_rule(@term_syntax.parse_term("!IN((i : _), (s : (_) -> Bool)) && !(s == {}) → DELETE(s, i) == s && !(INSERT(i, s) == {i})"))]))
   let t540 = @list.List([@meson.asm_meson_tac(@list.List([@arith.lt_refl()])), @tactics.all_tac])
-  let t539 = @tactics.subgoal_then(@parser.parse_term("~((i:num) IN s)"), fn(x536 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t539 = @tactics.subgoal_then(@term_syntax.parse_term("!IN((i : Num), (s : (Num) -> Bool))"), fn(x536 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s537 = @tactics.assume_tac(x536)
     fn(x538 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s537(x538)
@@ -2384,7 +2384,7 @@ fn step_117() -> Unit raise {
     }
   }, @list.List([seqiterate()]))
   let t542 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t533), t534), t535), t539), t540), t541)
-  seqiterate_clauses_c.set(@tactics.prove(@parser.parse_term("(forall op f. seqiterate op {} f = neutral op) /\\\n   (forall op f i. seqiterate op {i} f = f(i)) /\\\n   (forall op f i s. FINITE s /\\ ~(s = {}) /\\ (forall j. j IN s ==> i < j)\n               ==> seqiterate op (i INSERT s) f =\n                   op (f i) (seqiterate op s f))"), t542))
+  seqiterate_clauses_c.set(@tactics.prove(@term_syntax.parse_term("(∀ op : (_, _) -> _, ∀ f : (Num) -> _, seqiterate(op, {}, f) == neutral(op)) && (∀ op : (_, _) -> _, ∀ f : (Num) -> _, ∀ i : Num, seqiterate(op, {i}, f) == f(i)) && (∀ op : (_, _) -> _, ∀ f : (Num) -> _, ∀ i : Num, ∀ s : (Num) -> Bool, FINITE(s) && !(s == {}) && (∀ j : Num, IN(j, s) → i < j) → seqiterate(op, INSERT(i, s), f) == op(f(i), seqiterate(op, s, f)))"), t542))
 }
 
 ///|
@@ -2412,9 +2412,9 @@ fn step_118() -> Unit raise {
   })
   let t573 = @list.List([@meson.asm_meson_tac(@list.List([@iterate.monoidal()])), t572])
   let t567 = @simp.asm_simp_tac(@list.List([seqiterate_clauses(), @iterate.iterate_clauses()]))
-  let t566 = @class.asm_cases_tac(@parser.parse_term("s DELETE (i:num) = {}"))
+  let t566 = @class.asm_cases_tac(@term_syntax.parse_term("DELETE((s : (Num) -> Bool), (i : Num)) == {}"))
   let t565 = @simp.asm_simp_tac(@list.List([@iterate.iterate_clauses(), @sets.finite_delete(), @sets.in_delete()]))
-  let t562 = @drule.match_mp(@sets.set_rule(@parser.parse_term("i IN s ==> s = i INSERT (s DELETE i)")))
+  let t562 = @drule.match_mp(@sets.set_rule(@term_syntax.parse_term("IN((i : _), (s : (_) -> Bool)) → s == INSERT(i, DELETE(s, i))")))
   let t564 = @tactics.first_x_assum(fn(x563 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x559 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s560 = @tactics.subst1_tac(x559)
@@ -2424,7 +2424,7 @@ fn step_118() -> Unit raise {
     })(t562(x563))
   })
   let t558 = @simp.asm_rewrite_tac(@list.List([]))
-  let t557 = @tactics.x_gen_tac(@parser.parse_term("i:num"))
+  let t557 = @tactics.x_gen_tac(@term_syntax.parse_term("(i : Num)"))
   let t556 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t555 = @simp.gen_rewrite_tac(fn(x552 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s553 = @equal.land_conv(x552)
@@ -2446,7 +2446,7 @@ fn step_118() -> Unit raise {
   let t544 = @simp.asm_simp_tac(@list.List([seqiterate_clauses(), @iterate.iterate_clauses()]))
   let t543 = @tactics.match_mp_tac(@sets.finite_induct_delete())
   let t577 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()])), @tactics.gen_tac), @tactics.disch_tac), @tactics.gen_tac), t543), t544), @tactics.gen_tac), @tactics.strip_tac), t551), t555), t556), t557), @tactics.strip_tac), t558), @tactics.disch_tac), t564), t565), t566), t567), t573), t574), t575), t576)
-  seqiterate_iterate_c.set(@tactics.prove(@parser.parse_term("forall op f s. monoidal op /\\ FINITE s ==> seqiterate op s f = iterate op s f"), t577))
+  seqiterate_iterate_c.set(@tactics.prove(@term_syntax.parse_term("∀ op : (_, _) -> _, ∀ f : (Num) -> _, ∀ s : (Num) -> Bool, monoidal(op) && FINITE(s) → seqiterate(op, s, f) == iterate(op, s, f)"), t577))
 }
 
 ///|
@@ -2461,7 +2461,7 @@ pub fn seqiterate_iterate() -> @kernel.Thm {
 ///|
 /// outermorphism
 fn step_119() -> Unit raise {
-  outermorphism_c.set(@pair.new_definition(@parser.parse_term("outermorphism(f:real^N->real^P) (x:real^(N)multivector) =\n        vsum {s | s SUBSET 1..dimindex(:N)}\n             (\\s. x$$s % seqiterate(outer) s (multivec o f o basis))")))
+  outermorphism_c.set(@pair.new_definition(@term_syntax.parse_term("(outermorphism : ((Cart[Real, N]) -> Cart[Real, P], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[P]])((f : (Cart[Real, N]) -> Cart[Real, P]), (x : Cart[Real, Multivector[N]])) == (vsum : (((Num) -> Bool) -> Bool, ((Num) -> Bool) -> Cart[Real, Multivector[P]]) -> Cart[Real, Multivector[P]])({(s : (Num) -> Bool) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}, (s : (Num) -> Bool) => (op_pct : (Real, Cart[Real, Multivector[P]]) -> Cart[Real, Multivector[P]])((op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(x, s), (seqiterate : ((Cart[Real, Multivector[P]], Cart[Real, Multivector[P]]) -> Cart[Real, Multivector[P]], (Num) -> Bool, (Num) -> Cart[Real, Multivector[P]]) -> Cart[Real, Multivector[P]])((outer : (Cart[Real, Multivector[P]], Cart[Real, Multivector[P]]) -> Cart[Real, Multivector[P]]), s, (o : ((Cart[Real, P]) -> Cart[Real, Multivector[P]], (Num) -> Cart[Real, P], Num) -> Cart[Real, Multivector[P]])((multivec : (Cart[Real, P]) -> Cart[Real, Multivector[P]]), (o : ((Cart[Real, N]) -> Cart[Real, P], (Num) -> Cart[Real, N], Num) -> Cart[Real, P])(f, (basis : (Num) -> Cart[Real, N]))))))")))
 }
 
 ///|
@@ -2479,7 +2479,7 @@ fn step_120() -> Unit raise {
   let t579 = @meson.meson_tac(@list.List([outer_mbasis_lscalar(), outer_mbasis_rscalar()]))
   let t578 = @tactics.match_mp_tac(@class.select_unique())
   let t580 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@iterate.neutral()])), t578), t579)
-  neutral_outer_c.set(@tactics.prove(@parser.parse_term("neutral(outer) = mbasis{}"), t580))
+  neutral_outer_c.set(@tactics.prove(@term_syntax.parse_term("(neutral : ((Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])) == (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({})"), t580))
 }
 
 ///|
@@ -2499,7 +2499,7 @@ fn step_121() -> Unit raise {
   let t582 = @simp.once_rewrite_tac(@list.List([@class.cond_rand()]))
   let t581 = @simp.simp_tac(@list.List([mbasis_component()]))
   let t585 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([outermorphism()])), t581), t582), t583), t584)
-  outermorphism_mbasis_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N s.\n        s SUBSET 1..dimindex(:M)\n        ==> outermorphism f (mbasis s) =\n            seqiterate(outer) s (multivec o f o basis)"), t585))
+  outermorphism_mbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)))) → (outermorphism : ((Cart[Real, M]) -> Cart[Real, N], Cart[Real, Multivector[M]]) -> Cart[Real, Multivector[N]])(f, (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[M]])(s)) == (seqiterate : ((Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]], (Num) -> Bool, (Num) -> Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((outer : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]]), s, (o : ((Cart[Real, N]) -> Cart[Real, Multivector[N]], (Num) -> Cart[Real, N], Num) -> Cart[Real, Multivector[N]])((multivec : (Cart[Real, N]) -> Cart[Real, Multivector[N]]), (o : ((Cart[Real, M]) -> Cart[Real, N], (Num) -> Cart[Real, M], Num) -> Cart[Real, N])(f, (basis : (Num) -> Cart[Real, M]))))"), t585))
 }
 
 ///|
@@ -2516,7 +2516,7 @@ pub fn outermorphism_mbasis() -> @kernel.Thm {
 fn step_122() -> Unit raise {
   let t586 = @simp.rewrite_tac(@list.List([neutral_outer()]))
   let t587 = @tactics.then_tac(@simp.simp_tac(@list.List([outermorphism_mbasis(), @sets.empty_subset(), seqiterate_clauses()])), t586)
-  outermorphism_mbasis_empty_c.set(@tactics.prove(@parser.parse_term("forall f. outermorphism f (mbasis {}) = mbasis {}"), t587))
+  outermorphism_mbasis_empty_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, _]) -> Cart[Real, _], outermorphism(f, mbasis({})) == mbasis({})"), t587))
 }
 
 ///|
@@ -2531,7 +2531,7 @@ pub fn outermorphism_mbasis_empty() -> @kernel.Thm {
 ///|
 /// reversion
 fn step_123() -> Unit raise {
-  reversion_c.set(@pair.new_definition(@parser.parse_term("(reversion:real^(N)multivector->real^(N)multivector) x =\n    lambdas s. --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2) * x$$s")))
+  reversion_c.set(@pair.new_definition(@term_syntax.parse_term("(reversion : (Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((x : Cart[Real, Multivector[N]])) == lambdas((s : (Num) -> Bool) => pow(-real_of_num(1), DIV(CARD(s) * (CARD(s) - 1), 2)) * op_dollar_dollar(x, s))")))
 }
 
 ///|

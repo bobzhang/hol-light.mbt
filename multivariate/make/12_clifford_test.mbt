@@ -64041,167 +64041,167 @@ test "Multivariate/clifford matches Multivariate/clifford.ml" {
       #|0..0..solved at 2
       #|Warning: inventing type variables
       #|Multivariate/clifford quotations (161):
-      #|  FINITE s /\\ FINITE t /\\ FINITE u /\\ FINITE v /\\\n   s INTER t = {} /\\ u INTER v = {} /\\ s UNION t = u UNION v\n   ==> CARD(s) + CARD(t) = CARD(u) + CARD(v)
-      #|  forall s t. FINITE s ==> CARD s = CARD(s DIFF t) + CARD(s INTER t)
-      #|  c = a + b ==> (a + x) + (b + x) = c + 2 * x
-      #|  FINITE(t:A->bool)
-      #|  s:A->bool
-      #|  FINITE(s:A->bool)
-      #|  t:A->bool
-      #|  forall s t:A->bool.\n        FINITE s /\\ FINITE t\n        ==> CARD s + CARD t =\n            CARD((s DIFF t) UNION (t DIFF s)) + 2 * CARD(s INTER t)
-      #|  forall s t u. FINITE s /\\ FINITE t /\\ (s DIFF t) UNION (t DIFF s) = u\n           ==> EVEN(CARD u) = (EVEN(CARD s) <=> EVEN(CARD t))
-      #|  {i,j | i IN 1..m /\\ j IN 1..n}
-      #|  forall P m n. FINITE {i,j | i IN 1..m /\\ j IN 1..n /\\ P i j}
-      #|  ?s. s SUBSET (1..dimindex(:N))
-      #|  (:(N)multivector) = IMAGE mk_multivector {s | s SUBSET 1..dimindex(:N)}
-      #|  (:(N)multivector) HAS_SIZE (2 EXP dimindex(:N))
-      #|  FINITE(:(N)multivector)
-      #|  dimindex(:(N)multivector) = 2 EXP dimindex(:N)
-      #|  forall s. s SUBSET 1..dimindex(:N)\n         ==> dest_multivector(mk_multivector s :(N)multivector) = s
-      #|  m:(N)multivector
-      #|  (forall s. s SUBSET 1..dimindex(:N) ==> P(mk_multivector s)) <=>\n   (forall m:(N)multivector. P m)
-      #|  setcode s = 1 + binarysum (IMAGE PRE s)
-      #|  codeset n = IMAGE SUC (bitset(n - 1))
-      #|  1 <= n ==> SUC(PRE n) = n
-      #|  s SUBSET 1..n
-      #|  IMAGE SUC (IMAGE PRE s)
-      #|  i:num
-      #|  i:num
-      #|  x < n ==> 1 <= 1 + x /\\ 1 + x <= n
+      #|  FINITE((s : (_) -> Bool)) && FINITE((t : (_) -> Bool)) && FINITE((u : (_) -> Bool)) && FINITE((v : (_) -> Bool)) && INTER(s, t) == {} && INTER(u, v) == {} && UNION(s, t) == UNION(u, v) \226\134\146 CARD(s) + CARD(t) == CARD(u) + CARD(v)
+      #|  \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, FINITE(s) \226\134\146 CARD(s) == CARD(DIFF(s, t)) + CARD(INTER(s, t))
+      #|  (c : Num) == (a : Num) + (b : Num) \226\134\146 a + (x : Num) + (b + x) == c + 2 * x
+      #|  FINITE((t : (A) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  FINITE((s : (A) -> Bool))
+      #|  (t : (A) -> Bool)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, FINITE(s) && FINITE(t) \226\134\146 CARD(s) + CARD(t) == CARD(UNION(DIFF(s, t), DIFF(t, s))) + 2 * CARD(INTER(s, t))
+      #|  \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, \226\136\128 u : (_) -> Bool, FINITE(s) && FINITE(t) && UNION(DIFF(s, t), DIFF(t, s)) == u \226\134\146 EVEN(CARD(u)) == (EVEN(CARD(s)) == EVEN(CARD(t)))
+      #|  {((i : Num), (j : Num)) | IN(i, op_dot_dot(1, (m : Num))) && IN(j, op_dot_dot(1, (n : Num)))}
+      #|  \226\136\128 P : (Num, Num) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, FINITE({((i : Num), (j : Num)) | IN(i, op_dot_dot(1, m)) && IN(j, op_dot_dot(1, n)) && P(i, j)})
+      #|  \226\136\131 s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (UNIV : (Multivector[N]) -> Bool) == (IMAGE : (((Num) -> Bool) -> Multivector[N], ((Num) -> Bool) -> Bool, Multivector[N]) -> Bool)((mk_multivector : ((Num) -> Bool) -> Multivector[N]), {(s : (Num) -> Bool) | SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))})
+      #|  (HAS_SIZE : ((Multivector[N]) -> Bool, Num) -> Bool)((UNIV : (Multivector[N]) -> Bool), EXP(2, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (FINITE : ((Multivector[N]) -> Bool) -> Bool)((UNIV : (Multivector[N]) -> Bool))
+      #|  (dimindex : ((Multivector[N]) -> Bool) -> Num)((UNIV : (Multivector[N]) -> Bool)) == EXP(2, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))
+      #|  \226\136\128 s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (dest_multivector : (Multivector[N], Num) -> Bool)((mk_multivector : ((Num) -> Bool) -> Multivector[N])(s)) == s
+      #|  (m : Multivector[N])
+      #|  (\226\136\128 s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (P : (Multivector[N]) -> Bool)((mk_multivector : ((Num) -> Bool) -> Multivector[N])(s))) == (\226\136\128 m : Multivector[N], P(m))
+      #|  (setcode : ((Num) -> Bool) -> Num)((s : (Num) -> Bool)) == 1 + binarysum(IMAGE(PRE, s))
+      #|  (codeset : (Num, Num) -> Bool)((n : Num)) == IMAGE(SUC, bitset(n - 1))
+      #|  1 <= (n : Num) \226\134\146 SUC(PRE(n)) == n
+      #|  SUBSET((s : (Num) -> Bool), op_dot_dot(1, (n : Num)))
+      #|  IMAGE(SUC, IMAGE(PRE, (s : (Num) -> Bool)))
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (x : Num) < (n : Num) \226\134\146 1 <= 1 + x && 1 + x <= n
       #|  PRE
-      #|  1 <= i /\\ i <= t ==> i - 1 < t
-      #|  1 <= SUC n /\\ SUC n <= k <=> n < k
-      #|  1 <= i ==> (1 + b = i <=> b = i - 1)
-      #|  IMAGE (\\x. x) s = s
-      #|  (forall i. i IN 1..(2 EXP n)\n        ==> codeset i SUBSET 1..n /\\ setcode(codeset i) = i) /\\\n   (forall s. s SUBSET (1..n)\n        ==> (setcode s) IN 1..(2 EXP n) /\\ codeset(setcode s) = s)
-      #|  (forall s. s SUBSET (1..n) ==> P(setcode s)) <=> (forall i. i IN 1..(2 EXP n) ==> P i)
-      #|  forall s n. s SUBSET 1..n ==> setcode s IN (1..(2 EXP n))
-      #|  (x:real^(N)multivector)$$s = x$(setcode s)
-      #|  (lambdas) (g:(num->bool)->real) =\n    (lambda i. g(codeset i)):real^(N)multivector
-      #|  forall x y:real^(N)multivector.\n        x = y <=> forall s. s SUBSET 1..dimindex(:N) ==> x$$s = y$$s
-      #|  forall s. s SUBSET 1..dimindex(:N)\n         ==> ((lambdas) g :real^(N)multivector)$$s = g s
-      #|  forall m:real^(N)multivector g.\n        (forall s. s SUBSET 1..dimindex(:N) ==> m$$s = g s)\n        ==> (lambdas) g = m
-      #|  (lambdas s. m$$s) = m
-      #|  forall x y:real^(N)multivector s.\n      s SUBSET (1..dimindex(:N)) ==> (x + y)$$s = x$$s + y$$s
-      #|  forall c x:real^(N)multivector s.\n      s SUBSET (1..dimindex(:N)) ==> (c % x)$$s = c * x$$s
-      #|  forall k s. s SUBSET (1..dimindex(:N)) ==> (vec k :real^(N)multivector)$$s = &k
-      #|  forall f:A->real^(N)multivector t s.\n        s SUBSET (1..dimindex(:N))\n        ==> (vsum t f)$$s = sum t (\\x. (f x)$$s)
-      #|  forall t f. vsum t f = lambdas s. sum t (\\x. (f x)$$s)
-      #|  mbasis i = lambdas s. if i = s then &1 else &0
-      #|  forall s t. s SUBSET (1..dimindex(:N))\n         ==> (mbasis t :real^(N)multivector)$$s = if s = t then &1 else &0
-      #|  ~(&1 = &0)
-      #|  forall s. (mbasis s :real^(N)multivector = vec 0) <=>\n       ~(s SUBSET 1..dimindex(:N))
-      #|  forall s. s SUBSET 1..dimindex(:N) ==> ~(mbasis s :real^(N)multivector = vec 0)
-      #|  x * (if p then &1 else &0) = if p then x else &0
-      #|  forall x:real^(N)multivector.\n        vsum {s | s SUBSET 1..dimindex(:N)} (\\s. x$$s % mbasis s) = x
-      #|  x:real^(N)multivector
-      #|  span {mbasis s :real^(N)multivector | s SUBSET 1..dimindex(:N)} = UNIV
-      #|  {mbasis s :real^(M)multivector | s SUBSET 1..dimindex(:M)}
-      #|  forall x. x IN UNIV ==> (f:real^(M)multivector->real^N) x = g x
+      #|  1 <= (i : Num) && i <= (t : Num) \226\134\146 i - 1 < t
+      #|  (1 <= SUC((n : Num)) && SUC(n) <= (k : Num)) == (n < k)
+      #|  1 <= (i : Num) \226\134\146 (1 + (b : Num) == i) == (b == i - 1)
+      #|  IMAGE((x : _) => x, (s : (_) -> Bool)) == s
+      #|  (\226\136\128 i : Num, IN(i, op_dot_dot(1, EXP(2, (n : Num)))) \226\134\146 SUBSET(codeset(i), op_dot_dot(1, n)) && setcode(codeset(i)) == i) && (\226\136\128 s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, n)) \226\134\146 IN(setcode(s), op_dot_dot(1, EXP(2, n))) && codeset(setcode(s)) == s)
+      #|  (\226\136\128 s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (n : Num))) \226\134\146 (P : (Num) -> Bool)(setcode(s))) == (\226\136\128 i : Num, IN(i, op_dot_dot(1, EXP(2, n))) \226\134\146 P(i))
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 n : Num, SUBSET(s, op_dot_dot(1, n)) \226\134\146 IN(setcode(s), op_dot_dot(1, EXP(2, n)))
+      #|  (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)((x : Cart[Real, Multivector[N]]), (s : (Num) -> Bool)) == op_dollar(x, setcode(s))
+      #|  (lambdas : (((Num) -> Bool) -> Real) -> Cart[Real, Multivector[N]])((g : ((Num) -> Bool) -> Real)) == lambda((i : Num) => g(codeset(i)))
+      #|  \226\136\128 x : Cart[Real, Multivector[N]], \226\136\128 y : Cart[Real, Multivector[N]], (x == y) == (\226\136\128 s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(x, s) == (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(y, s))
+      #|  \226\136\128 s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)((lambdas : (((Num) -> Bool) -> Real) -> Cart[Real, Multivector[N]])((g : ((Num) -> Bool) -> Real)), s) == g(s)
+      #|  \226\136\128 m : Cart[Real, Multivector[N]], \226\136\128 g : ((Num) -> Bool) -> Real, (\226\136\128 s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(m, s) == g(s)) \226\134\146 (lambdas : (((Num) -> Bool) -> Real) -> Cart[Real, Multivector[N]])(g) == m
+      #|  lambdas((s : (Num) -> Bool) => op_dollar_dollar((m : Cart[Real, Multivector[_]]), s)) == m
+      #|  \226\136\128 x : Cart[Real, Multivector[N]], \226\136\128 y : Cart[Real, Multivector[N]], \226\136\128 s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(x + y, s) == (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(x, s) + (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(y, s)
+      #|  \226\136\128 c : Real, \226\136\128 x : Cart[Real, Multivector[N]], \226\136\128 s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)((op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(c, x), s) == c * (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(x, s)
+      #|  \226\136\128 k : Num, \226\136\128 s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)((vec : (Num) -> Cart[Real, Multivector[N]])(k), s) == real_of_num(k)
+      #|  \226\136\128 f : (A) -> Cart[Real, Multivector[N]], \226\136\128 t : (A) -> Bool, \226\136\128 s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)((vsum : ((A) -> Bool, (A) -> Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(t, f), s) == (sum : ((A) -> Bool, (A) -> Real) -> Real)(t, (x : A) => (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(f(x), s))
+      #|  \226\136\128 t : (_) -> Bool, \226\136\128 f : (_) -> Cart[Real, Multivector[_]], vsum(t, f) == lambdas((s : (Num) -> Bool) => sum(t, (x : _) => op_dollar_dollar(f(x), s)))
+      #|  (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])((i : (Num) -> Bool)) == lambdas((s : (Num) -> Bool) => if i == s { real_of_num(1) } else { real_of_num(0) })
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(t), s) == (if s == t { real_of_num(1) } else { real_of_num(0) })
+      #|  !(real_of_num(1) == real_of_num(0))
+      #|  \226\136\128 s : (Num) -> Bool, ((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s) == (vec : (Num) -> Cart[Real, Multivector[N]])(0)) == !SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  \226\136\128 s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 !((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s) == (vec : (Num) -> Cart[Real, Multivector[N]])(0))
+      #|  (x : Real) * (if (p : Bool) { real_of_num(1) } else { real_of_num(0) }) == (if p { x } else { real_of_num(0) })
+      #|  \226\136\128 x : Cart[Real, Multivector[N]], (vsum : (((Num) -> Bool) -> Bool, ((Num) -> Bool) -> Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])({(s : (Num) -> Bool) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}, (s : (Num) -> Bool) => (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(x, s), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s))) == x
+      #|  (x : Cart[Real, Multivector[N]])
+      #|  (span : ((Cart[Real, Multivector[N]]) -> Bool, Cart[Real, Multivector[N]]) -> Bool)({(mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}) == (UNIV : (Cart[Real, Multivector[N]]) -> Bool)
+      #|  {(mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[M]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool))))}
+      #|  \226\136\128 x : Cart[Real, Multivector[M]], IN(x, UNIV) \226\134\146 (f : (Cart[Real, Multivector[M]]) -> Cart[Real, N])(x) == (g : (Cart[Real, Multivector[M]]) -> Cart[Real, N])(x)
       #|  forall f:real^(M)multivector->real^N g s.\n        linear f /\\ linear g /\\\n        (forall s. s SUBSET 1..dimindex(:M) ==> f(mbasis s) = g(mbasis s))\n        ==> f = g
-      #|  {mbasis t :real^(N)multivector | t SUBSET 1..dimindex(:N)}
-      #|  {mbasis s :real^(M)multivector | s SUBSET 1..dimindex(:M)}
-      #|  forall x y. x IN UNIV /\\ y IN UNIV\n          ==> (f:real^(M)multivector->real^(N)multivector->real^P) x y = g x y
+      #|  {(mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])((t : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(t, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}
+      #|  {(mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[M]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool))))}
+      #|  \226\136\128 x : Cart[Real, Multivector[M]], \226\136\128 y : Cart[Real, Multivector[N]], IN(x, UNIV) && IN(y, UNIV) \226\134\146 (f : (Cart[Real, Multivector[M]], Cart[Real, Multivector[N]]) -> Cart[Real, P])(x, y) == (g : (Cart[Real, Multivector[M]], Cart[Real, Multivector[N]]) -> Cart[Real, P])(x, y)
       #|  forall f:real^(M)multivector->real^(N)multivector->real^P g s.\n        bilinear f /\\ bilinear g /\\\n        (forall s t.  s SUBSET 1..dimindex(:M) /\\ t SUBSET 1..dimindex(:N)\n                ==> f (mbasis s) (mbasis t) = g (mbasis s) (mbasis t))\n        ==> f = g
-      #|  forall P. P(vec 0) /\\ (forall x y. P x /\\ P y ==> P(x + y))\n       ==> forall f s. FINITE s /\\ (forall i. i IN s ==> P(f i)) ==> P(vsum s f)
-      #|  forall P. (forall s. s SUBSET 1..dimindex(:N) ==> P(mbasis s)) /\\\n       (forall c x. P x ==> P(c % x)) /\\ (forall x y. P x /\\ P y ==> P(x + y))\n       ==> forall x:real^(N)multivector. P x
-      #|  (multivec:real^N->real^(N)multivector) x =\n      vsum(1..dimindex(:N)) (\\i. x$i % mbasis{i})
-      #|  k multivector (p:real^(N)multivector) <=>\n        forall s. s SUBSET (1..dimindex(:N)) /\\ ~(p$$s = &0) ==> s HAS_SIZE k
-      #|  k grade (p:real^(N)multivector) =\n     (lambdas s. if s HAS_SIZE k then p$$s else &0):real^(N)multivector
-      #|  forall k x. k multivector (k grade x)
-      #|  forall x y k. k grade (x + y) = (k grade x) + (k grade y)
-      #|  forall c x k. k grade (c % x) = c % (k grade x)
-      #|  (Product mult op\n     :real^(N)multivector->real^(N)multivector->real^(N)multivector) x y =\n        vsum {s | s SUBSET 1..dimindex(:N)}\n         (\\s. vsum {s | s SUBSET 1..dimindex(:N)}\n                (\\t. (x$$s * y$$t * mult s t) % mbasis (op s t)))
-      #|  forall mult op. bilinear(Product mult op)
-      #|  f:(num->bool)->(num->bool)->real
-      #|  {s | s SUBSET 1..dimindex(:N)}
-      #|  a * (if p then b else &0) = if p then a * b else &0
-      #|  (if p then a else &0) * b = if p then a * b else &0
-      #|  u:num->bool
-      #|  t:num->bool
-      #|  s:num->bool
-      #|  r:num->bool
-      #|  forall op mult. (forall s t. s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N)\n                    ==> (op s t) SUBSET 1..dimindex(:N)) /\\\n             (forall s t u. op s (op t u) = op (op s t) u) /\\\n             (forall s t u. mult t u * mult s (op t u) = mult s t * mult (op s t) u)\n             ==> forall x y z:real^(N)multivector.\n                        Product mult op x (Product mult op y z) =\n                        Product mult op (Product mult op x y) z
-      #|  geom_mul:real^(N)multivector->real^(N)multivector->real^(N)multivector
-      #|  (x:real^(N)multivector) * y =\n        Product (\\s t. --(&1) pow CARD {i,j | i IN 1..dimindex(:N) /\\\n                                              j IN 1..dimindex(:N) /\\\n                                              i IN s /\\ j IN t /\\ i > j})\n                (\\s t. (s DIFF t) UNION (t DIFF s))\n                x y
-      #|  bilinear(geom_mul)
-      #|  (x <=> y <=> z) ==> ((a <=> x) <=> (y <=> z <=> a))
-      #|  forall x y z:real^(N)multivector. x * (y * z) = (x * y) * z
-      #|  t:num->bool
-      #|  s:num->bool
-      #|  u:num->bool
-      #|  t:num->bool
-      #|  forall x y:real^(N)multivector.\n    x outer y =\n        Product (\\s t. if ~(s INTER t = {}) then &0\n                       else --(&1) pow CARD {i,j | i IN 1..dimindex(:N) /\\\n                                                   j IN 1..dimindex(:N) /\\\n                                                   i IN s /\\ j IN t /\\ i > j})\n                (\\s t. (s DIFF t) UNION (t DIFF s))\n                x y
-      #|  (s INTER t = {}) ==> (s DIFF t) UNION (t DIFF s) = s UNION t
-      #|  s INTER t :num->bool = {}
-      #|  forall x y:real^(N)multivector.\n    x outer y =\n        Product (\\s t. if ~(s INTER t = {}) then &0\n                       else --(&1) pow CARD {i,j | i IN 1..dimindex(:N) /\\\n                                                   j IN 1..dimindex(:N) /\\\n                                                   i IN s /\\ j IN t /\\ i > j})\n                (UNION)\n                x y
-      #|  bilinear(outer)
-      #|  t INTER u :num->bool = {}
-      #|  s INTER u :num->bool = {}
-      #|  s INTER t :num->bool = {}
-      #|  (t UNION u) INTER s = (t INTER s) UNION (u INTER s)
-      #|  s INTER (t UNION u) = (s INTER t) UNION (s INTER u)
-      #|  forall x y z:real^(N)multivector. x outer (y outer z) = (x outer y) outer z
-      #|  forall x y:real^(N)multivector.\n    x inner y =\n        Product (\\s t. if s = {} \\/ t = {} \\/\n                          ~((s DIFF t) = {} /\\ ~(t DIFF s = {}))\n                       then &0\n                       else --(&1) pow CARD {i,j | i IN 1..dimindex(:N) /\\\n                                                   j IN 1..dimindex(:N) /\\\n                                                   i IN s /\\ j IN t /\\ i > j})\n                (\\s t. (s DIFF t) UNION (t DIFF s))\n                x y
-      #|  bilinear(inner)
-      #|  t SUBSET 1..dimindex(:N)
-      #|  (if p then &1 else &0) * (if q then &1 else &0) * x =\n    if q then if p then x else &0 else &0
-      #|  forall s t. Product mult op (mbasis s) (mbasis t) :real^(N)multivector =\n            if s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N)\n            then mult s t % mbasis(op s t)\n            else vec 0
-      #|  {x} SUBSET s <=> x IN s
-      #|  forall i j. Product mult op (mbasis{i}) (mbasis{j}) :real^(N)multivector =\n            if i IN 1..dimindex(:N) /\\ j IN 1..dimindex(:N)\n            then mult {i} {j} % mbasis(op {i} {j})\n            else vec 0
-      #|  forall s t. mbasis s * mbasis t :real^(N)multivector =\n                if s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N)\n                then --(&1) pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} %\n                     mbasis((s DIFF t) UNION (t DIFF s))\n                else vec 0
-      #|  i:num < j
-      #|  ~(i:num = j) ==> (j < i <=> ~(i < j))
-      #|  ~(i = j) ==> ({i} DIFF {j}) UNION ({j} DIFF {i}) = {i,j}
-      #|  i:num = j
-      #|  {i',j' | i' IN 1 .. dimindex (:N) /\\\n             j' IN 1 .. dimindex (:N) /\\\n             i' = i /\\\n             j' = j /\\\n             i' > j'} =\n    if i > j then {(i,j)} else {}
-      #|  forall i j. mbasis{i} * mbasis{j} :real^(N)multivector =\n                if i IN 1..dimindex(:N) /\\ j IN 1..dimindex(:N)\n                then if i = j then mbasis{}\n                     else if i < j then mbasis{i,j}\n                     else --(mbasis{i,j})\n                else vec 0
-      #|  (s:num->bool) INTER t = {}
-      #|  forall s t. (mbasis s) outer (mbasis t) :real^(N)multivector =\n                if s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N) /\\\n                   s INTER t = {}\n                then --(&1) pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} %\n                     mbasis(s UNION t)\n                else vec 0
-      #|  i:num < j
-      #|  ~(i:num = j) ==> (j < i <=> ~(i < j))
-      #|  {i} UNION {j} = {i,j}
-      #|  {i',j' | i' IN 1 .. dimindex (:N) /\\\n             j' IN 1 .. dimindex (:N) /\\\n             i' = i /\\\n             j' = j /\\\n             i' > j'} =\n    if i > j then {(i,j)} else {}
-      #|  i:num = j
-      #|  {i} INTER {j} = {} <=> ~(i = j)
-      #|  forall i j. mbasis{i} outer mbasis{j} :real^(N)multivector =\n                if i IN 1..dimindex(:N) /\\ j IN 1..dimindex(:N) /\\ ~(i = j)\n                then if i < j then mbasis{i,j} else --(mbasis{i,j})\n                else vec 0
-      #|  ~(i:num = j) ==> i < j /\\ ~(j < i) \\/ j < i /\\ ~(i < j)
-      #|  i:num = j
-      #|  forall i j. mbasis{i} outer mbasis{j} = --(mbasis{j} outer mbasis{i})
-      #|  forall x:real^N. x = --x ==> x = vec 0
-      #|  forall i. mbasis{i} outer mbasis{i} = vec 0
-      #|  {i,j | i IN {} /\\ j IN s /\\ i:num > j} = {}
-      #|  forall x. mbasis{} outer x = x
-      #|  {i,j | i IN s /\\ j IN {} /\\ i:num > j} = {}
-      #|  forall x. x outer mbasis{} = x
-      #|  ~(n < m /\\ n:num > m)
-      #|  {(i:num),(j:num) | i IN {a} /\\ j IN s /\\ i > j} = {}
-      #|  {a} UNION s = a INSERT s
-      #|  {a} SUBSET t /\\ s SUBSET t <=> (a INSERT s) SUBSET t
-      #|  {a:num} INTER s = {}
-      #|  forall a s. (forall x. x IN s ==> a < x)\n         ==> mbasis (a INSERT s) = mbasis{a} outer mbasis s
-      #|  ((forall x:num. x IN {} ==> a < x) <=> T) /\\\n    ((forall x:num. x IN (y INSERT s) ==> a < x) <=>\n              a < y /\\ (forall x. x IN s ==> a < x))
-      #|  x - y:real^N = x + --y
-      #|  (forall x y z. (x outer y) outer z = x outer (y outer z)) /\\\n   (forall i j. i > j\n          ==> mbasis{i} outer mbasis{j} =\n              --(&1) % (mbasis{j} outer mbasis{i})) /\\\n   (forall i j x. i > j\n            ==> mbasis{i} outer mbasis{j} outer x =\n                --(&1) % (mbasis{j} outer mbasis{i} outer x)) /\\\n   (forall i. mbasis{i} outer mbasis{i} = vec 0) /\\\n   (forall i x. mbasis{i} outer mbasis{i} outer x = vec 0) /\\\n   (forall x. mbasis{} outer x = x) /\\\n   (forall x. x outer mbasis{} = x)
-      #|  n - 1 < n <=> ~(n = 0)
-      #|  ?i:num. i IN s
-      #|  CARD:(num->bool)->num
-      #|  forall op f. ?h.\n        forall s. h s = if INFINITE s \\/ s = {} then neutral op else\n                  let i = minimal x. x IN s in\n                  if s = {i} then f(i) else op (f i) (h (s DELETE i))
-      #|  \\a b. (f:B->A->C) b a
-      #|  forall P. (?f. P f) <=> (?f:A->B->C. P (\\b a. f a b))
-      #|  forall s i. (forall j. j IN s ==> i < j) ==> (minimal j. j IN (i INSERT s)) = i
-      #|  ~(i IN s) /\\ ~(s = {}) ==> (s DELETE i = s) /\\ ~(i INSERT s = {i})
-      #|  ~((i:num) IN s)
-      #|  (forall op f. seqiterate op {} f = neutral op) /\\\n   (forall op f i. seqiterate op {i} f = f(i)) /\\\n   (forall op f i s. FINITE s /\\ ~(s = {}) /\\ (forall j. j IN s ==> i < j)\n               ==> seqiterate op (i INSERT s) f =\n                   op (f i) (seqiterate op s f))
-      #|  s DELETE (i:num) = {}
-      #|  i IN s ==> s = i INSERT (s DELETE i)
-      #|  i:num
-      #|  forall op f s. monoidal op /\\ FINITE s ==> seqiterate op s f = iterate op s f
-      #|  outermorphism(f:real^N->real^P) (x:real^(N)multivector) =\n        vsum {s | s SUBSET 1..dimindex(:N)}\n             (\\s. x$$s % seqiterate(outer) s (multivec o f o basis))
-      #|  neutral(outer) = mbasis{}
-      #|  forall f:real^M->real^N s.\n        s SUBSET 1..dimindex(:M)\n        ==> outermorphism f (mbasis s) =\n            seqiterate(outer) s (multivec o f o basis)
-      #|  forall f. outermorphism f (mbasis {}) = mbasis {}
-      #|  (reversion:real^(N)multivector->real^(N)multivector) x =\n    lambdas s. --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2) * x$$s
+      #|  \226\136\128 P : (Cart[Real, _]) -> Bool, P(vec(0)) && (\226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], P(x) && P(y) \226\134\146 P(x + y)) \226\134\146 (\226\136\128 f : (_) -> Cart[Real, _], \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 i : _, IN(i, s) \226\134\146 P(f(i))) \226\134\146 P(vsum(s, f)))
+      #|  \226\136\128 P : (Cart[Real, Multivector[N]]) -> Bool, (\226\136\128 s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 P((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s))) && (\226\136\128 c : Real, \226\136\128 x : Cart[Real, Multivector[N]], P(x) \226\134\146 P((op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(c, x))) && (\226\136\128 x : Cart[Real, Multivector[N]], \226\136\128 y : Cart[Real, Multivector[N]], P(x) && P(y) \226\134\146 P(x + y)) \226\134\146 (\226\136\128 x : Cart[Real, Multivector[N]], P(x))
+      #|  (multivec : (Cart[Real, N]) -> Cart[Real, Multivector[N]])((x : Cart[Real, N])) == (vsum : ((Num) -> Bool, (Num) -> Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((op_dollar : (Cart[Real, N], Num) -> Real)(x, i), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i})))
+      #|  (multivector : (Num, Cart[Real, Multivector[N]]) -> Bool)((k : Num), (p : Cart[Real, Multivector[N]])) == (\226\136\128 s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && !((op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(p, s) == real_of_num(0)) \226\134\146 (HAS_SIZE : ((Num) -> Bool, Num) -> Bool)(s, k))
+      #|  (grade : (Num, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((k : Num), (p : Cart[Real, Multivector[N]])) == lambdas((s : (Num) -> Bool) => if HAS_SIZE(s, k) { op_dollar_dollar(p, s) } else { real_of_num(0) })
+      #|  \226\136\128 k : Num, \226\136\128 x : Cart[Real, Multivector[_]], multivector(k, grade(k, x))
+      #|  \226\136\128 x : Cart[Real, Multivector[_]], \226\136\128 y : Cart[Real, Multivector[_]], \226\136\128 k : Num, grade(k, x + y) == grade(k, x) + grade(k, y)
+      #|  \226\136\128 c : Real, \226\136\128 x : Cart[Real, Multivector[_]], \226\136\128 k : Num, grade(k, op_pct(c, x)) == op_pct(c, grade(k, x))
+      #|  (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((mult : ((Num) -> Bool, (Num) -> Bool) -> Real), (op : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool), (x : Cart[Real, Multivector[N]]), (y : Cart[Real, Multivector[N]])) == (vsum : (((Num) -> Bool) -> Bool, ((Num) -> Bool) -> Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])({(s : (Num) -> Bool) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}, (s : (Num) -> Bool) => (vsum : (((Num) -> Bool) -> Bool, ((Num) -> Bool) -> Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])({(s : (Num) -> Bool) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}, (t : (Num) -> Bool) => (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(x, s) * ((op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(y, t) * mult(s, t)), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(op(s, t)))))
+      #|  \226\136\128 mult : ((Num) -> Bool, (Num) -> Bool) -> Real, \226\136\128 op : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, (bilinear : ((Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]) -> Bool)((Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])(mult, op))
+      #|  (f : ((Num) -> Bool, (Num) -> Bool) -> Real)
+      #|  {(s : (Num) -> Bool) | SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}
+      #|  (a : Real) * (if (p : Bool) { (b : Real) } else { real_of_num(0) }) == (if p { a * b } else { real_of_num(0) })
+      #|  (if (p : Bool) { (a : Real) } else { real_of_num(0) }) * (b : Real) == (if p { a * b } else { real_of_num(0) })
+      #|  (u : (Num) -> Bool)
+      #|  (t : (Num) -> Bool)
+      #|  (s : (Num) -> Bool)
+      #|  (r : (Num) -> Bool)
+      #|  \226\136\128 op : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, \226\136\128 mult : ((Num) -> Bool, (Num) -> Bool) -> Real, (\226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(t, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(op(s, t), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))) && (\226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, \226\136\128 u : (Num) -> Bool, op(s, op(t, u)) == op(op(s, t), u)) && (\226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, \226\136\128 u : (Num) -> Bool, mult(t, u) * mult(s, op(t, u)) == mult(s, t) * mult(op(s, t), u)) \226\134\146 (\226\136\128 x : Cart[Real, Multivector[N]], \226\136\128 y : Cart[Real, Multivector[N]], \226\136\128 z : Cart[Real, Multivector[N]], (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(mult, op, x, (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(mult, op, y, z)) == (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(mult, op, (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(mult, op, x, y), z))
+      #|  (geom_mul : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])
+      #|  (geom_mul : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((x : Cart[Real, Multivector[N]]), (y : Cart[Real, Multivector[N]])) == (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((s : (Num) -> Bool) => (t : (Num) -> Bool) => pow(-real_of_num(1), (CARD : (((Num, Num)) -> Bool) -> Num)({((i : Num), (j : Num)) | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(i, s) && (IN : (Num, (Num) -> Bool) -> Bool)(j, t) && i > j})), (s : (Num) -> Bool) => (t : (Num) -> Bool) => (UNION : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)((DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(s, t), (DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(t, s)), x, y)
+      #|  (bilinear : ((Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]) -> Bool)((op_star : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]))
+      #|  (x : Bool) == ((y : Bool) == (z : Bool)) \226\134\146 ((a : Bool) == x) == (y == (z == a))
+      #|  \226\136\128 x : Cart[Real, Multivector[N]], \226\136\128 y : Cart[Real, Multivector[N]], \226\136\128 z : Cart[Real, Multivector[N]], x * (y * z) == x * y * z
+      #|  (t : (Num) -> Bool)
+      #|  (s : (Num) -> Bool)
+      #|  (u : (Num) -> Bool)
+      #|  (t : (Num) -> Bool)
+      #|  \226\136\128 x : Cart[Real, Multivector[N]], \226\136\128 y : Cart[Real, Multivector[N]], (outer : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(x, y) == (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((s : (Num) -> Bool) => (t : (Num) -> Bool) => if !((INTER : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(s, t) == ({} : (Num) -> Bool)) { real_of_num(0) } else { pow(-real_of_num(1), (CARD : (((Num, Num)) -> Bool) -> Num)({((i : Num), (j : Num)) | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(i, s) && (IN : (Num, (Num) -> Bool) -> Bool)(j, t) && i > j})) }, (s : (Num) -> Bool) => (t : (Num) -> Bool) => (UNION : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)((DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(s, t), (DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(t, s)), x, y)
+      #|  INTER((s : (_) -> Bool), (t : (_) -> Bool)) == {} \226\134\146 UNION(DIFF(s, t), DIFF(t, s)) == UNION(s, t)
+      #|  INTER((s : (Num) -> Bool), (t : (Num) -> Bool)) == {}
+      #|  \226\136\128 x : Cart[Real, Multivector[N]], \226\136\128 y : Cart[Real, Multivector[N]], (outer : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(x, y) == (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((s : (Num) -> Bool) => (t : (Num) -> Bool) => if !((INTER : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(s, t) == ({} : (Num) -> Bool)) { real_of_num(0) } else { pow(-real_of_num(1), (CARD : (((Num, Num)) -> Bool) -> Num)({((i : Num), (j : Num)) | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(i, s) && (IN : (Num, (Num) -> Bool) -> Bool)(j, t) && i > j})) }, (UNION : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool), x, y)
+      #|  (bilinear : ((Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]) -> Bool)((outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]))
+      #|  INTER((t : (Num) -> Bool), (u : (Num) -> Bool)) == {}
+      #|  INTER((s : (Num) -> Bool), (u : (Num) -> Bool)) == {}
+      #|  INTER((s : (Num) -> Bool), (t : (Num) -> Bool)) == {}
+      #|  INTER(UNION((t : (_) -> Bool), (u : (_) -> Bool)), (s : (_) -> Bool)) == UNION(INTER(t, s), INTER(u, s))
+      #|  INTER((s : (_) -> Bool), UNION((t : (_) -> Bool), (u : (_) -> Bool))) == UNION(INTER(s, t), INTER(s, u))
+      #|  \226\136\128 x : Cart[Real, Multivector[N]], \226\136\128 y : Cart[Real, Multivector[N]], \226\136\128 z : Cart[Real, Multivector[N]], outer(x, outer(y, z)) == outer(outer(x, y), z)
+      #|  \226\136\128 x : Cart[Real, Multivector[N]], \226\136\128 y : Cart[Real, Multivector[N]], (inner : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(x, y) == (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((s : (Num) -> Bool) => (t : (Num) -> Bool) => if s == ({} : (Num) -> Bool) || t == ({} : (Num) -> Bool) || !((DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(s, t) == ({} : (Num) -> Bool) && !((DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(t, s) == ({} : (Num) -> Bool))) { real_of_num(0) } else { pow(-real_of_num(1), (CARD : (((Num, Num)) -> Bool) -> Num)({((i : Num), (j : Num)) | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Num, (Num) -> Bool) -> Bool)(i, s) && (IN : (Num, (Num) -> Bool) -> Bool)(j, t) && i > j})) }, (s : (Num) -> Bool) => (t : (Num) -> Bool) => (UNION : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)((DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(s, t), (DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)(t, s)), x, y)
+      #|  (bilinear : ((Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]) -> Bool)((inner : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]))
+      #|  SUBSET((t : (Num) -> Bool), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (if (p : Bool) { real_of_num(1) } else { real_of_num(0) }) * ((if (q : Bool) { real_of_num(1) } else { real_of_num(0) }) * (x : Real)) == (if q { if p { x } else { real_of_num(0) } } else { real_of_num(0) })
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((mult : ((Num) -> Bool, (Num) -> Bool) -> Real), (op : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(t)) == (if SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && SUBSET(t, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) { (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(mult(s, t), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(op(s, t))) } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })
+      #|  SUBSET({(x : _)}, (s : (_) -> Bool)) == IN(x, s)
+      #|  \226\136\128 i : Num, \226\136\128 j : Num, (Product : (((Num) -> Bool, (Num) -> Bool) -> Real, ((Num) -> Bool, (Num) -> Bool, Num) -> Bool, Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((mult : ((Num) -> Bool, (Num) -> Bool) -> Real), (op : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({j})) == (if IN(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && IN(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) { (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(mult({i}, {j}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(op({i}, {j}))) } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s) * (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(t) == (if SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && SUBSET(t, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) { (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(pow(-real_of_num(1), CARD({((i : Num), (j : Num)) | IN(i, s) && IN(j, t) && i > j})), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(UNION(DIFF(s, t), DIFF(t, s)))) } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })
+      #|  (i : Num) < (j : Num)
+      #|  !((i : Num) == (j : Num)) \226\134\146 (j < i) == !(i < j)
+      #|  !((i : _) == (j : _)) \226\134\146 UNION(DIFF({i}, {j}), DIFF({j}, {i})) == {i, j}
+      #|  (i : Num) == (j : Num)
+      #|  {((i' : Num), (j' : Num)) | IN(i', op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && IN(j', op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && i' == (i : Num) && j' == (j : Num) && i' > j'} == (if i > j { {(i, j)} } else { {} })
+      #|  \226\136\128 i : Num, \226\136\128 j : Num, (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({j}) == (if IN(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && IN(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) { if i == j { (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({}) } else { if i < j { (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i, j}) } else { -(mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i, j}) } } } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })
+      #|  INTER((s : (Num) -> Bool), (t : (Num) -> Bool)) == {}
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, (outer : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(t)) == (if SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && SUBSET(t, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && INTER(s, t) == {} { (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(pow(-real_of_num(1), CARD({((i : Num), (j : Num)) | IN(i, s) && IN(j, t) && i > j})), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(UNION(s, t))) } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })
+      #|  (i : Num) < (j : Num)
+      #|  !((i : Num) == (j : Num)) \226\134\146 (j < i) == !(i < j)
+      #|  UNION({(i : _)}, {(j : _)}) == {i, j}
+      #|  {((i' : Num), (j' : Num)) | IN(i', op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && IN(j', op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && i' == (i : Num) && j' == (j : Num) && i' > j'} == (if i > j { {(i, j)} } else { {} })
+      #|  (i : Num) == (j : Num)
+      #|  (INTER({(i : _)}, {(j : _)}) == {}) == !(i == j)
+      #|  \226\136\128 i : Num, \226\136\128 j : Num, (outer : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({j})) == (if IN(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && IN(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && !(i == j) { if i < j { (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i, j}) } else { -(mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i, j}) } } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })
+      #|  !((i : Num) == (j : Num)) \226\134\146 i < j && !(j < i) || j < i && !(i < j)
+      #|  (i : Num) == (j : Num)
+      #|  \226\136\128 i : Num, \226\136\128 j : Num, (outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({j})) == -(outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({j}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i}))
+      #|  \226\136\128 x : Cart[Real, N], x == -x \226\134\146 x == vec(0)
+      #|  \226\136\128 i : Num, (outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i})) == (vec : (Num) -> Cart[Real, Multivector[_]])(0)
+      #|  {((i : Num), (j : Num)) | IN(i, {}) && IN(j, (s : (Num) -> Bool)) && i > j} == {}
+      #|  \226\136\128 x : Cart[Real, Multivector[_]], outer(mbasis({}), x) == x
+      #|  {((i : Num), (j : Num)) | IN(i, (s : (Num) -> Bool)) && IN(j, {}) && i > j} == {}
+      #|  \226\136\128 x : Cart[Real, Multivector[_]], outer(x, mbasis({})) == x
+      #|  !((n : Num) < (m : Num) && n > m)
+      #|  {((i : Num), (j : Num)) | IN(i, {(a : Num)}) && IN(j, (s : (Num) -> Bool)) && i > j} == {}
+      #|  UNION({(a : _)}, (s : (_) -> Bool)) == INSERT(a, s)
+      #|  (SUBSET({(a : _)}, (t : (_) -> Bool)) && SUBSET((s : (_) -> Bool), t)) == SUBSET(INSERT(a, s), t)
+      #|  INTER({(a : Num)}, (s : (Num) -> Bool)) == {}
+      #|  \226\136\128 a : Num, \226\136\128 s : (Num) -> Bool, (\226\136\128 x : Num, IN(x, s) \226\134\146 a < x) \226\134\146 (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])(INSERT(a, s)) == (outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({a}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])(s))
+      #|  (\226\136\128 x : Num, IN(x, {}) \226\134\146 (a : Num) < x) == true && (\226\136\128 x : Num, IN(x, INSERT((y : Num), (s : (Num) -> Bool))) \226\134\146 a < x) == (a < y && (\226\136\128 x : Num, IN(x, s) \226\134\146 a < x))
+      #|  (x : Cart[Real, N]) - (y : Cart[Real, N]) == x + -y
+      #|  (\226\136\128 x : Cart[Real, Multivector[_]], \226\136\128 y : Cart[Real, Multivector[_]], \226\136\128 z : Cart[Real, Multivector[_]], outer(outer(x, y), z) == outer(x, outer(y, z))) && (\226\136\128 i : Num, \226\136\128 j : Num, i > j \226\134\146 (outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({j})) == (op_pct : (Real, Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])(-real_of_num(1), (outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({j}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i})))) && (\226\136\128 i : Num, \226\136\128 j : Num, \226\136\128 x : Cart[Real, Multivector[_]], i > j \226\134\146 outer(mbasis({i}), outer(mbasis({j}), x)) == op_pct(-real_of_num(1), outer(mbasis({j}), outer(mbasis({i}), x)))) && (\226\136\128 i : Num, (outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({i})) == (vec : (Num) -> Cart[Real, Multivector[_]])(0)) && (\226\136\128 i : Num, \226\136\128 x : Cart[Real, Multivector[_]], outer(mbasis({i}), outer(mbasis({i}), x)) == vec(0)) && (\226\136\128 x : Cart[Real, Multivector[_]], outer(mbasis({}), x) == x) && (\226\136\128 x : Cart[Real, Multivector[_]], outer(x, mbasis({})) == x)
+      #|  ((n : Num) - 1 < n) == !(n == 0)
+      #|  \226\136\131 i : Num, IN(i, (s : (Num) -> Bool))
+      #|  (CARD : ((Num) -> Bool) -> Num)
+      #|  \226\136\128 op : (_, _) -> _, \226\136\128 f : (Num) -> _, \226\136\131 h : ((Num) -> Bool) -> _, \226\136\128 s : (Num) -> Bool, h(s) == (if INFINITE(s) || s == {} { neutral(op) } else { LET((i : Num) => LET_END(if s == {i} { f(i) } else { op(f(i), h(DELETE(s, i))) }), minimal((x : Num) => IN(x, s))) })
+      #|  (a : A) => (b : B) => (f : (B, A) -> C)(b, a)
+      #|  \226\136\128 P : ((B, A) -> C) -> Bool, (\226\136\131 f : (B, A) -> C, P(f)) == (\226\136\131 f : (A, B) -> C, P((b : B) => (a : A) => f(a, b)))
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 i : Num, (\226\136\128 j : Num, IN(j, s) \226\134\146 i < j) \226\134\146 minimal((j : Num) => IN(j, INSERT(i, s))) == i
+      #|  !IN((i : _), (s : (_) -> Bool)) && !(s == {}) \226\134\146 DELETE(s, i) == s && !(INSERT(i, s) == {i})
+      #|  !IN((i : Num), (s : (Num) -> Bool))
+      #|  (\226\136\128 op : (_, _) -> _, \226\136\128 f : (Num) -> _, seqiterate(op, {}, f) == neutral(op)) && (\226\136\128 op : (_, _) -> _, \226\136\128 f : (Num) -> _, \226\136\128 i : Num, seqiterate(op, {i}, f) == f(i)) && (\226\136\128 op : (_, _) -> _, \226\136\128 f : (Num) -> _, \226\136\128 i : Num, \226\136\128 s : (Num) -> Bool, FINITE(s) && !(s == {}) && (\226\136\128 j : Num, IN(j, s) \226\134\146 i < j) \226\134\146 seqiterate(op, INSERT(i, s), f) == op(f(i), seqiterate(op, s, f)))
+      #|  DELETE((s : (Num) -> Bool), (i : Num)) == {}
+      #|  IN((i : _), (s : (_) -> Bool)) \226\134\146 s == INSERT(i, DELETE(s, i))
+      #|  (i : Num)
+      #|  \226\136\128 op : (_, _) -> _, \226\136\128 f : (Num) -> _, \226\136\128 s : (Num) -> Bool, monoidal(op) && FINITE(s) \226\134\146 seqiterate(op, s, f) == iterate(op, s, f)
+      #|  (outermorphism : ((Cart[Real, N]) -> Cart[Real, P], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[P]])((f : (Cart[Real, N]) -> Cart[Real, P]), (x : Cart[Real, Multivector[N]])) == (vsum : (((Num) -> Bool) -> Bool, ((Num) -> Bool) -> Cart[Real, Multivector[P]]) -> Cart[Real, Multivector[P]])({(s : (Num) -> Bool) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}, (s : (Num) -> Bool) => (op_pct : (Real, Cart[Real, Multivector[P]]) -> Cart[Real, Multivector[P]])((op_dollar_dollar : (Cart[Real, Multivector[N]], (Num) -> Bool) -> Real)(x, s), (seqiterate : ((Cart[Real, Multivector[P]], Cart[Real, Multivector[P]]) -> Cart[Real, Multivector[P]], (Num) -> Bool, (Num) -> Cart[Real, Multivector[P]]) -> Cart[Real, Multivector[P]])((outer : (Cart[Real, Multivector[P]], Cart[Real, Multivector[P]]) -> Cart[Real, Multivector[P]]), s, (o : ((Cart[Real, P]) -> Cart[Real, Multivector[P]], (Num) -> Cart[Real, P], Num) -> Cart[Real, Multivector[P]])((multivec : (Cart[Real, P]) -> Cart[Real, Multivector[P]]), (o : ((Cart[Real, N]) -> Cart[Real, P], (Num) -> Cart[Real, N], Num) -> Cart[Real, P])(f, (basis : (Num) -> Cart[Real, N]))))))
+      #|  (neutral : ((Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])((outer : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]])) == (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[_]])({})
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)))) \226\134\146 (outermorphism : ((Cart[Real, M]) -> Cart[Real, N], Cart[Real, Multivector[M]]) -> Cart[Real, Multivector[N]])(f, (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[M]])(s)) == (seqiterate : ((Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]], (Num) -> Bool, (Num) -> Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((outer : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]]), s, (o : ((Cart[Real, N]) -> Cart[Real, Multivector[N]], (Num) -> Cart[Real, N], Num) -> Cart[Real, Multivector[N]])((multivec : (Cart[Real, N]) -> Cart[Real, Multivector[N]]), (o : ((Cart[Real, M]) -> Cart[Real, N], (Num) -> Cart[Real, M], Num) -> Cart[Real, N])(f, (basis : (Num) -> Cart[Real, M]))))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], outermorphism(f, mbasis({})) == mbasis({})
+      #|  (reversion : (Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((x : Cart[Real, Multivector[N]])) == lambdas((s : (Num) -> Bool) => pow(-real_of_num(1), DIV(CARD(s) * (CARD(s) - 1), 2)) * op_dollar_dollar(x, s))
       #|CARD_UNION_LEMMA =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?1,bool),bool) s:fun('?1,bool))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?1,bool),bool) t:fun('?1,bool))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?1,bool),bool) u:fun('?1,bool))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?1,bool),bool) v:fun('?1,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun('?1,bool),fun(fun('?1,bool),bool)) ((#INTER:fun(fun('?1,bool),fun(fun('?1,bool),fun('?1,bool))) s:fun('?1,bool)) t:fun('?1,bool))) #EMPTY:fun('?1,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun('?1,bool),fun(fun('?1,bool),bool)) ((#INTER:fun(fun('?1,bool),fun(fun('?1,bool),fun('?1,bool))) u:fun('?1,bool)) v:fun('?1,bool))) #EMPTY:fun('?1,bool))) ((#=:fun(fun('?1,bool),fun(fun('?1,bool),bool)) ((#UNION:fun(fun('?1,bool),fun(fun('?1,bool),fun('?1,bool))) s:fun('?1,bool)) t:fun('?1,bool))) ((#UNION:fun(fun('?1,bool),fun(fun('?1,bool),fun('?1,bool))) u:fun('?1,bool)) v:fun('?1,bool)))))))))) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) (#CARD:fun(fun('?1,bool),num) s:fun('?1,bool))) (#CARD:fun(fun('?1,bool),num) t:fun('?1,bool)))) ((#+:fun(num,fun(num,num)) (#CARD:fun(fun('?1,bool),num) u:fun('?1,bool))) (#CARD:fun(fun('?1,bool),num) v:fun('?1,bool)))))
       #|CARD_DIFF_INTER =  |- (#forall:fun(fun(fun('?2,bool),bool),bool) (\s:fun('?2,bool). (#forall:fun(fun(fun('?2,bool),bool),bool) (\t:fun('?2,bool). ((#==>:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?2,bool),bool) s:fun('?2,bool))) ((#=:fun(num,fun(num,bool)) (#CARD:fun(fun('?2,bool),num) s:fun('?2,bool))) ((#+:fun(num,fun(num,num)) (#CARD:fun(fun('?2,bool),num) ((#DIFF:fun(fun('?2,bool),fun(fun('?2,bool),fun('?2,bool))) s:fun('?2,bool)) t:fun('?2,bool)))) (#CARD:fun(fun('?2,bool),num) ((#INTER:fun(fun('?2,bool),fun(fun('?2,bool),fun('?2,bool))) s:fun('?2,bool)) t:fun('?2,bool))))))))))
       #|CARD_ADD_SYMDIFF_INTER =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\t:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('A,bool),bool) s:fun('A,bool))) (#FINITE:fun(fun('A,bool),bool) t:fun('A,bool)))) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) (#CARD:fun(fun('A,bool),num) s:fun('A,bool))) (#CARD:fun(fun('A,bool),num) t:fun('A,bool)))) ((#+:fun(num,fun(num,num)) (#CARD:fun(fun('A,bool),num) ((#UNION:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) ((#DIFF:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) s:fun('A,bool)) t:fun('A,bool))) ((#DIFF:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) t:fun('A,bool)) s:fun('A,bool))))) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#CARD:fun(fun('A,bool),num) ((#INTER:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) s:fun('A,bool)) t:fun('A,bool)))))))))))
