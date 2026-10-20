@@ -61,14 +61,14 @@ fn step_5() -> Unit raise {
     @list.List([
       @int.int_of_num_sub(),
       @int.arith_rule(
-        @parser.parse_term("x <= y ==> (y:num = x + d <=> y - x = d)"),
+        @term_syntax.parse_term("(x : Num) <= (y : Num) → (y == x + (d : Num)) == (y - x == d)"),
       ),
     ]),
   )
   let t9 = @simp.once_rewrite_tac(
     @list.List([
       @int.integer_rule(
-        @parser.parse_term("(x == y) (mod &n) <=> &n divides (x - y)"),
+        @term_syntax.parse_term("op_eq_eq((x : Int), (y : Int), mod(int_of_num((n : Num)))) == divides(int_of_num(n), x - y)"),
       ),
     ]),
   )
@@ -207,7 +207,7 @@ fn step_6() -> Unit raise {
   let t25 = @meson.meson_tac(
     @list.List([
       nat_mod_lemma(),
-      @int.arith_rule(@parser.parse_term("x + y * 0 = x")),
+      @int.arith_rule(@term_syntax.parse_term("(x : Num) + (y : Num) * 0 == x")),
     ]),
   )
   let t24 = @list.List([
@@ -215,7 +215,7 @@ fn step_6() -> Unit raise {
     @simp.once_rewrite_tac(
       @list.List([
         @int.number_rule(
-          @parser.parse_term("(x:num == y) (mod n) <=> (y == x) (mod n)"),
+          @term_syntax.parse_term("op_eq_eq((x : Num), (y : Num), mod((n : Num))) == op_eq_eq(y, x, mod(n))"),
         ),
       ]),
     ),
@@ -277,10 +277,10 @@ fn step_6() -> Unit raise {
       ),
     ]),
   )
-  let t17 = @parser.parse_term("y:num")
+  let t17 = @term_syntax.parse_term("(y : Num)")
   let t18 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("x:num"), t17]),
+      @list.List([@term_syntax.parse_term("(x : Num)"), t17]),
       @arith.le_cases(),
     ),
   )
@@ -408,7 +408,7 @@ fn step_7() -> Unit raise {
   })
   let t77 = @simp.simp_tac(@list.List([]))
   let t76 = @simp.asm_rewrite_tac(@list.List([]))
-  let t75 = @class.asm_cases_tac(@parser.parse_term("p:num = q"))
+  let t75 = @class.asm_cases_tac(@term_syntax.parse_term("(p : Num) == (q : Num)"))
   let t74 = @simp.asm_rewrite_tac(@list.List([@arith.lt_le(), @arith.le_0()]))
   let t71 = @drule.match_mp(@int.divides_le())
   let t73 = @tactics.first_assum(fn(
@@ -481,7 +481,7 @@ fn step_7() -> Unit raise {
   })
   let t66 = @meson.asm_meson_tac(@list.List([@prime.prime_1()]))
   let t65 = @simp.asm_rewrite_tac(@list.List([@prime.divides_refl()]))
-  let t64 = @tactics.exists_tac(@parser.parse_term("q:num"))
+  let t64 = @tactics.exists_tac(@term_syntax.parse_term("(q : Num)"))
   let t67 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -497,7 +497,7 @@ fn step_7() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t63 = @tactics.subgoal_then(@parser.parse_term("~(coprime(p,q))"), fn(
+  let t63 = @tactics.subgoal_then(@term_syntax.parse_term("!coprime(((p : Num), (q : Num)))"), fn(
     x61 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -521,7 +521,7 @@ fn step_7() -> Unit raise {
     let th = x61
     @simp.rewrite_tac(@list.List([th]))
   })
-  let t57 = @parser.parse_term("q:num")
+  let t57 = @term_syntax.parse_term("(q : Num)")
   let t60 = @tactics.first_x_assum(fn(
     x59 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -592,7 +592,7 @@ fn step_7() -> Unit raise {
   })
   let t53 = @tactics.repeat_tac(@tactics.strip_tac)
   let t49 = @drule.match_mp(@prime.prime_factor())
-  let t50 = @tactics.x_choose_then(@parser.parse_term("q:num"))(fn(
+  let t50 = @tactics.x_choose_then(@term_syntax.parse_term("(q : Num)"))(fn(
     x46 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -665,7 +665,7 @@ fn step_7() -> Unit raise {
     @list.List([@arith.not_lt(), @arith.lt_refl(), @int.divides_le()]),
   )
   let t43 = @simp.asm_rewrite_tac(@list.List([@prime.coprime_1()]))
-  let t39 = @parser.parse_term("m:num")
+  let t39 = @term_syntax.parse_term("(m : Num)")
   let t42 = @tactics.first_x_assum(fn(
     x41 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -734,7 +734,7 @@ fn step_7() -> Unit raise {
       }
     })(((x40 : @kernel.Thm) => @bool.spec(t39, x40))(x41))
   })
-  let t35 = @tactics.x_gen_tac(@parser.parse_term("m:num"))
+  let t35 = @tactics.x_gen_tac(@term_syntax.parse_term("(m : Num)"))
   let t33 = @drule.match_mp(@prime.prime_coprime())
   let t45 = @list.List([
     @tactics.then_tac(
@@ -835,7 +835,7 @@ fn step_7() -> Unit raise {
     @tactics.all_tac,
   ])
   let t29 = @simp.asm_rewrite_tac(@list.List([@prime.prime_1()]))
-  let t28 = @class.asm_cases_tac(@parser.parse_term("p = 1"))
+  let t28 = @class.asm_cases_tac(@term_syntax.parse_term("(p : Num) == 1"))
   let t27 = @simp.asm_rewrite_tac(@list.List([@prime.prime_0()]))
   let t84 = @tactics.then_tac(
     @tactics.then_tac(
@@ -858,7 +858,7 @@ fn step_7() -> Unit raise {
                                       @tactics.then_tac(
                                         @tactics.gen_tac,
                                         @class.asm_cases_tac(
-                                          @parser.parse_term("p = 0"),
+                                          @term_syntax.parse_term("(p : Num) == 0"),
                                         ),
                                       ),
                                       t27,
@@ -971,8 +971,8 @@ fn step_8() -> Unit raise {
       s105(x106)
     }
   })
-  let t103 = @tactics.undisch_tac(@parser.parse_term("~(n = 0)"))
-  let t101 = @tactics.undisch_tac(@parser.parse_term("~(n = 0)"))
+  let t103 = @tactics.undisch_tac(@term_syntax.parse_term("!((n : Num) == 0)"))
+  let t101 = @tactics.undisch_tac(@term_syntax.parse_term("!((n : Num) == 0)"))
   let t102 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1083,7 +1083,7 @@ fn step_8() -> Unit raise {
         @tactics.then_tac(
           @tactics.thenl(
             @tactics.subgoal_then(
-              @parser.parse_term("{m | 0 < m /\\ m < SUC n} = EMPTY"),
+              @term_syntax.parse_term("{(m : Num) | 0 < m && m < SUC((n : Num))} == {}"),
               fn(
                 x91 : @kernel.Thm,
               ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1142,7 +1142,7 @@ fn step_8() -> Unit raise {
     t110,
   ])
   let t112 = @tactics.thenl(
-    @class.asm_cases_tac(@parser.parse_term("n = 0")),
+    @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0")),
     t111,
   )
   let t90 = @tactics.conv_tac(@calc_num.num_reduce_conv)
@@ -1167,7 +1167,7 @@ fn step_8() -> Unit raise {
         @tactics.then_tac(
           @tactics.thenl(
             @tactics.subgoal_then(
-              @parser.parse_term("{m | 0 < m /\\ m < 0} = EMPTY"),
+              @term_syntax.parse_term("{(m : Num) | 0 < m && m < 0} == {}"),
               fn(
                 x85 : @kernel.Thm,
               ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1226,7 +1226,7 @@ fn step_8() -> Unit raise {
   )
   finite_number_segment_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. { m | 0 < m /\\ m < n } HAS_SIZE (n - 1)"),
+      @term_syntax.parse_term("∀ n : Num, HAS_SIZE({(m : Num) | 0 < m && m < n}, n - 1)"),
       t113,
     ),
   )
@@ -1248,7 +1248,7 @@ pub fn finite_number_segment() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   cong_mod_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (x == y) (mod 0) <=> (x = y)"),
+      @term_syntax.parse_term("∀ x : Num, ∀ y : Num, op_eq_eq(x, y, mod(0)) == (x == y)"),
       @int.number_tac,
     ),
   )
@@ -1268,7 +1268,7 @@ pub fn cong_mod_0() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   cong_mod_1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (x == y) (mod 1)"),
+      @term_syntax.parse_term("∀ x : Num, ∀ y : Num, op_eq_eq(x, y, mod(1))"),
       @int.number_tac,
     ),
   )
@@ -1288,7 +1288,7 @@ pub fn cong_mod_1() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   cong_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. ((x == 0) (mod n) <=> n divides x)"),
+      @term_syntax.parse_term("∀ x : Num, ∀ n : Num, op_eq_eq(x, 0, mod(n)) == divides(n, x)"),
       @int.number_tac,
     ),
   )
@@ -1523,7 +1523,7 @@ fn step_13() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t125 = @class.asm_cases_tac(@parser.parse_term("a = 0"))
+  let t125 = @class.asm_cases_tac(@term_syntax.parse_term("(a : Num) == 0"))
   let t141 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1582,7 +1582,7 @@ fn step_14() -> Unit raise {
     ]),
   )
   cong_refl_c.set(
-    @tactics.prove(@parser.parse_term("forall x n. (x == x) (mod n)"), t142),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Num, ∀ n : Num, op_eq_eq(x, x, mod(n))"), t142),
   )
 }
 
@@ -1605,7 +1605,7 @@ fn step_15() -> Unit raise {
   )
   cong_sym_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y n. (x == y) (mod n) <=> (y == x) (mod n)"),
+      @term_syntax.parse_term("∀ x : Num, ∀ y : Num, ∀ n : Num, op_eq_eq(x, y, mod(n)) == op_eq_eq(y, x, mod(n))"),
       t144,
     ),
   )
@@ -1687,8 +1687,8 @@ fn step_18() -> Unit raise {
     t164,
   ])
   let t163 = @simp.asm_rewrite_tac(@list.List([@arith.lt()]))
-  let t162 = @class.asm_cases_tac(@parser.parse_term("m = 0"))
-  let t161 = @tactics.x_gen_tac(@parser.parse_term("m:num"))
+  let t162 = @class.asm_cases_tac(@term_syntax.parse_term("(m : Num) == 0"))
+  let t161 = @tactics.x_gen_tac(@term_syntax.parse_term("(m : Num)"))
   let t160 = @simp.asm_rewrite_tac(
     @list.List([@sets.extension(), @sets.in_elim_thm()]),
   )
@@ -1777,7 +1777,7 @@ fn step_18() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t150 = @class.asm_cases_tac(@parser.parse_term("n = 1"))
+  let t150 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 1"))
   let t148 = @meson.meson_tac(@list.List([@arith.lt(), @arith.not_lt()]))
   let t149 = @list.List([
     @tactics.then_tac(
@@ -1791,7 +1791,7 @@ fn step_18() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t147 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
+  let t147 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0"))
   let t166 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1825,7 +1825,7 @@ fn step_18() -> Unit raise {
   )
   phi_alt_c.set(
     @tactics.prove(
-      @parser.parse_term("phi(n) = CARD { m | coprime(m,n) /\\ m < n}"),
+      @term_syntax.parse_term("phi((n : Num)) == CARD({(m : Num) | coprime((m, n)) && m < n})"),
       t166,
     ),
   )
@@ -1915,7 +1915,7 @@ fn step_20() -> Unit raise {
     ),
     t177,
   )
-  phi_limit_c.set(@tactics.prove(@parser.parse_term("forall n. phi(n) <= n"), t178))
+  phi_limit_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, phi(n) <= n"), t178))
 }
 
 ///|
@@ -2053,7 +2053,7 @@ fn step_21() -> Unit raise {
   )
   let t180 = @simp.asm_simp_tac(@list.List([phi_another(), @sets.has_size()]))
   let t179 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("n:num"), finite_number_segment()),
+    @bool.spec(@term_syntax.parse_term("(n : Num)"), finite_number_segment()),
   )
   let t192 = @tactics.then_tac(
     @tactics.then_tac(
@@ -2072,7 +2072,7 @@ fn step_21() -> Unit raise {
     t191,
   )
   phi_limit_strong_c.set(
-    @tactics.prove(@parser.parse_term("forall n. ~(n = 1) ==> phi(n) <= n - 1"), t192),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, !(n == 1) → phi(n) <= n - 1"), t192),
   )
 }
 
@@ -2093,12 +2093,12 @@ fn step_22() -> Unit raise {
   let t193 = @simp.rewrite_tac(@list.List([@calc_num.arith()]))
   let t194 = @tactics.then_tac(
     @tactics.then_tac(
-      @tactics.mp_tac(@bool.spec(@parser.parse_term("0"), phi_limit())),
+      @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("0"), phi_limit())),
       t193,
     ),
     @int.arith_tac,
   )
-  phi_0_c.set(@tactics.prove(@parser.parse_term("phi 0 = 0"), t194))
+  phi_0_c.set(@tactics.prove(@term_syntax.parse_term("phi(0) == 0"), t194))
 }
 
 ///|
@@ -2116,7 +2116,7 @@ fn step_23() -> Unit raise {
   let t195 = @simp.rewrite_tac(
     @list.List([phi_alt(), @prime.coprime_1(), @sets.card_numseg_lt()]),
   )
-  phi_1_c.set(@tactics.prove(@parser.parse_term("phi 1 = 1"), t195))
+  phi_1_c.set(@tactics.prove(@term_syntax.parse_term("phi(1) == 1"), t195))
 }
 
 ///|
@@ -2135,7 +2135,7 @@ fn step_24() -> Unit raise {
   let t209 = @simp.rewrite_tac(
     @list.List([@sets.card_numseg_le(), @sets.finite_numseg_le()]),
   )
-  let t208 = @tactics.exists_tac(@parser.parse_term("{b | b <= n}"))
+  let t208 = @tactics.exists_tac(@term_syntax.parse_term("{(b : Num) | b <= (n : Num)}"))
   let t211 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(@tactics.match_mp_tac(@sets.finite_subset()), t208),
@@ -2232,7 +2232,7 @@ fn step_24() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t199 = @tactics.subgoal_then(@parser.parse_term("1 = CARD {1}"), fn(
+  let t199 = @tactics.subgoal_then(@term_syntax.parse_term("1 == CARD({1})"), fn(
     x196 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -2295,7 +2295,7 @@ fn step_24() -> Unit raise {
     t212,
   )
   phi_lowerbound_1_strong_c.set(
-    @tactics.prove(@parser.parse_term("forall n. 1 <= n ==> 1 <= phi(n)"), t213),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, 1 <= n → 1 <= phi(n)"), t213),
   )
 }
 
@@ -2317,11 +2317,11 @@ fn step_25() -> Unit raise {
     @list.List([
       phi_lowerbound_1_strong(),
       @arith.le_trans(),
-      @int.arith_rule(@parser.parse_term("1 <= 2")),
+      @int.arith_rule(@term_syntax.parse_term("1 <= 2")),
     ]),
   )
   phi_lowerbound_1_c.set(
-    @tactics.prove(@parser.parse_term("forall n. 2 <= n ==> 1 <= phi(n)"), t214),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, 2 <= n → 1 <= phi(n)"), t214),
   )
 }
 
@@ -2343,7 +2343,7 @@ fn step_26() -> Unit raise {
   let t239 = @simp.rewrite_tac(
     @list.List([@sets.card_numseg_le(), @sets.finite_numseg_le()]),
   )
-  let t238 = @tactics.exists_tac(@parser.parse_term("{b | b <= n}"))
+  let t238 = @tactics.exists_tac(@term_syntax.parse_term("{(b : Num) | b <= (n : Num)}"))
   let t241 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(@tactics.match_mp_tac(@sets.finite_subset()), t238),
@@ -2354,12 +2354,12 @@ fn step_26() -> Unit raise {
   let t236 = @simp.asm_simp_tac(@list.List([@prime.divides_sub()]))
   let t237 = @list.List([
     @tactics.then_tac(
-      @tactics.undisch_tac(@parser.parse_term("3 <= n")),
+      @tactics.undisch_tac(@term_syntax.parse_term("3 <= (n : Num)")),
       @int.arith_tac,
     ),
     t236,
   ])
-  let t235 = @tactics.subgoal_then(@parser.parse_term("1 = n - (n - 1)"), fn(
+  let t235 = @tactics.subgoal_then(@term_syntax.parse_term("1 == (n : Num) - (n - 1)"), fn(
     x232 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -2409,14 +2409,14 @@ fn step_26() -> Unit raise {
   let t230 = @tactics.disch_then(@tactics.match_mp_tac)
   let t229 = @simp.rewrite_tac(@list.List([@int.coprime()]))
   let t227 = @bool.conjunct1(@prime.coprime_1())
-  let t228 = @tactics.mp_tac(@bool.spec(@parser.parse_term("n:num"), t227))
-  let t226 = @tactics.x_gen_tac(@parser.parse_term("d:num"))
+  let t228 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(n : Num)"), t227))
+  let t226 = @tactics.x_gen_tac(@term_syntax.parse_term("(d : Num)"))
   let t225 = @simp.rewrite_tac(@list.List([@int.coprime()]))
   let t224 = @simp.asm_simp_tac(
     @list.List([
       @calc_num.arith(),
       @int.arith_rule(
-        @parser.parse_term("3 <= n ==> 0 < n - 1 /\\ n - 1 <= n /\\ 1 <= n"),
+        @term_syntax.parse_term("3 <= (n : Num) → 0 < n - 1 && n - 1 <= n && 1 <= n"),
       ),
     ]),
   )
@@ -2474,7 +2474,7 @@ fn step_26() -> Unit raise {
   let t222 = @tactics.match_mp_tac(@sets.card_subset())
   let t221 = @simp.rewrite_tac(@list.List([phi()]))
   let t219 = @simp.asm_simp_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("3 <= n ==> ~(1 = n - 1)"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("3 <= (n : Num) → !(1 == n - 1)"))]),
   )
   let t220 = @list.List([
     @tactics.then_tac(
@@ -2491,7 +2491,7 @@ fn step_26() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t218 = @tactics.subgoal_then(@parser.parse_term("2 = CARD {1,(n-1)}"), fn(
+  let t218 = @tactics.subgoal_then(@term_syntax.parse_term("2 == CARD({1, (n : Num) - 1})"), fn(
     x215 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -2554,7 +2554,7 @@ fn step_26() -> Unit raise {
     t242,
   )
   phi_lowerbound_2_c.set(
-    @tactics.prove(@parser.parse_term("forall n. 3 <= n ==> 2 <= phi(n)"), t243),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, 3 <= n → 2 <= phi(n)"), t243),
   )
 }
 
@@ -2722,12 +2722,12 @@ fn step_27() -> Unit raise {
   )
   let t249 = @simp.asm_simp_tac(@list.List([phi_another(), @sets.has_size()]))
   let t248 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("n:num"), finite_number_segment()),
+    @bool.spec(@term_syntax.parse_term("(n : Num)"), finite_number_segment()),
   )
   let t247 = @simp.asm_rewrite_tac(@list.List([phi_1(), @calc_num.arith()]))
-  let t246 = @class.asm_cases_tac(@parser.parse_term("n = 1"))
+  let t246 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 1"))
   let t245 = @simp.asm_rewrite_tac(@list.List([]))
-  let t244 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
+  let t244 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0"))
   let t267 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -2807,7 +2807,7 @@ pub fn phi_prime_eq() -> @kernel.Thm {
 fn step_28() -> Unit raise {
   let t268 = @meson.meson_tac(@list.List([phi_prime_eq()]))
   phi_prime_c.set(
-    @tactics.prove(@parser.parse_term("forall p. prime p ==> phi p = p - 1"), t268),
+    @tactics.prove(@term_syntax.parse_term("∀ p : Num, prime(p) → phi(p) == p - 1"), t268),
   )
 }
 
@@ -2901,7 +2901,7 @@ fn step_29() -> Unit raise {
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.strip_tac,
-          @tactics.exists_tac(@parser.parse_term("x2 - x1")),
+          @tactics.exists_tac(@term_syntax.parse_term("(x2 : Num) - (x1 : Num)")),
         ),
         t274,
       ),
@@ -2940,7 +2940,7 @@ fn step_30() -> Unit raise {
   let t360 = @simp.rewrite_tac(@list.List([@arith.exp()]))
   let t358 = @simp.asm_simp_tac(@list.List([@arith.mod_lt()]))
   let t356 = @simp.asm_rewrite_tac(@list.List([]))
-  let t355 = @tactics.exists_tac(@parser.parse_term("a:num"))
+  let t355 = @tactics.exists_tac(@term_syntax.parse_term("(a : Num)"))
   let t354 = @tactics.match_mp_tac(cong_mult_lcancel())
   let t357 = @list.List([
     @tactics.then_tac(
@@ -2955,7 +2955,7 @@ fn step_30() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t353 = @tactics.subgoal_then(@parser.parse_term("b MOD n = c MOD n"), fn(
+  let t353 = @tactics.subgoal_then(@term_syntax.parse_term("MOD((b : Num), (n : Num)) == MOD((c : Num), n)"), fn(
     x350 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -3001,7 +3001,7 @@ fn step_30() -> Unit raise {
       s351(x352)
     }
   })
-  let t349 = @tactics.subgoal_then(@parser.parse_term("b:num = c"), fn(
+  let t349 = @tactics.subgoal_then(@term_syntax.parse_term("(b : Num) == (c : Num)"), fn(
     x347 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -3026,7 +3026,7 @@ fn step_30() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([th_2]))
   })
   let t346 = @simp.rewrite_tac(@list.List([]))
-  let t345 = @tactics.undisch_tac(@parser.parse_term("~(b:num IN s)"))
+  let t345 = @tactics.undisch_tac(@term_syntax.parse_term("!IN((b : Num), (s : (Num) -> Bool))"))
   let t344 = @simp.asm_simp_tac(@list.List([@equal.gsym(@int.cong_v1())]))
   let t343 = @tactics.disch_then(
     @tactics.conjuncts_then2(
@@ -3125,7 +3125,7 @@ fn step_30() -> Unit raise {
     ),
   )
   let t336 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("c:num"))(fn(
+    @tactics.x_choose_then(@term_syntax.parse_term("(c : Num)"))(fn(
       x333 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
@@ -3207,7 +3207,7 @@ fn step_30() -> Unit raise {
     @tactics.all_tac,
   ])
   let t332 = @tactics.subgoal_then(
-    @parser.parse_term("~((a * b) MOD n IN IMAGE (\\b. (a * b) MOD n) s)"),
+    @term_syntax.parse_term("!IN(MOD((a : Num) * (b : Num), (n : Num)), IMAGE((b : Num) => MOD(a * b, n), (s : (Num) -> Bool)))"),
     fn(
       x330 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3234,7 +3234,7 @@ fn step_30() -> Unit raise {
     },
   )
   let t329 = @simp.rewrite_tac(@list.List([]))
-  let t325 = @parser.parse_term("b:num")
+  let t325 = @term_syntax.parse_term("(b : Num)")
   let t328 = @tactics.disch_then(fn(
     x327 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3305,12 +3305,12 @@ fn step_30() -> Unit raise {
   })
   let t321 = @simp.simp_tac(@list.List([]))
   let t320 = @simp.asm_rewrite_tac(@list.List([]))
-  let t319 = @class.asm_cases_tac(@parser.parse_term("forall b. b IN s ==> b < n"))
+  let t319 = @class.asm_cases_tac(@term_syntax.parse_term("∀ b : Num, IN(b, (s : (Num) -> Bool)) → b < (n : Num)"))
   let t318 = @simp.rewrite_tac(@list.List([@theorems.forall_and_thm()]))
   let t317 = @simp.rewrite_tac(
     @list.List([
       @class.taut(
-        @parser.parse_term("(a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)"),
+        @term_syntax.parse_term("((a : Bool) || (b : Bool) → (c : Bool)) == ((a → c) && (b → c))"),
       ),
     ]),
   )
@@ -3366,9 +3366,9 @@ fn step_30() -> Unit raise {
       @tactics.strip_assume_tac,
     ),
   )
-  let t311 = @tactics.x_gen_tac(@parser.parse_term("s:num->bool"))
-  let t310 = @tactics.x_gen_tac(@parser.parse_term("b:num"))
-  let t307 = @parser.parse_term("~(n = 1)")
+  let t311 = @tactics.x_gen_tac(@term_syntax.parse_term("(s : (Num) -> Bool)"))
+  let t310 = @tactics.x_gen_tac(@term_syntax.parse_term("(b : Num)"))
+  let t307 = @term_syntax.parse_term("!((n : Num) == 1)")
   let t308 = @tactics.map_every(
     fn(
       x304 : @kernel.Term,
@@ -3416,12 +3416,12 @@ fn step_30() -> Unit raise {
         s305(x306)
       }
     },
-    @list.List([@parser.parse_term("~(n = 0)"), t307]),
+    @list.List([@term_syntax.parse_term("!((n : Num) == 0)"), t307]),
   )
   let t303 = @simp.rewrite_tac(
     @list.List([@arith.add_clauses(), @arith.mult_clauses()]),
   )
-  let t302 = @tactics.exists_tac(@parser.parse_term("0"))
+  let t302 = @tactics.exists_tac(@term_syntax.parse_term("0"))
   let t301 = @tactics.match_mp_tac(@arith.mod_uniq())
   let t300 = @tactics.conv_tac(@equal.sym_conv)
   let t309 = @list.List([
@@ -3466,18 +3466,18 @@ fn step_30() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t283 = @parser.parse_term("1")
+  let t283 = @term_syntax.parse_term("1")
   let t284 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("\\x y. (x * y) MOD n"), t283]),
+      @list.List([@term_syntax.parse_term("(x : Num) => (y : Num) => MOD(x * y, (n : Num))"), t283]),
       @sets.finite_recursion(),
     ),
   )
   let t282 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t281 = @simp.asm_rewrite_tac(@list.List([]))
-  let t280 = @class.asm_cases_tac(@parser.parse_term("coprime(a,n)"))
+  let t280 = @class.asm_cases_tac(@term_syntax.parse_term("coprime(((a : Num), (n : Num)))"))
   let t279 = @simp.asm_rewrite_tac(@list.List([]))
-  let t278 = @class.asm_cases_tac(@parser.parse_term("n = 1"))
+  let t278 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 1"))
   let t277 = @simp.asm_rewrite_tac(@list.List([]))
   let t363 = @tactics.then_tac(
     @tactics.then_tac(
@@ -4370,7 +4370,7 @@ fn step_31() -> Unit raise {
       ),
     ]),
   )
-  let t395 = @parser.parse_term("x:num")
+  let t395 = @term_syntax.parse_term("(x : Num)")
   let t398 = @tactics.disch_then(fn(
     x397 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4441,18 +4441,18 @@ fn step_31() -> Unit raise {
   })
   let t391 = @simp.asm_rewrite_tac(@list.List([]))
   let t390 = @class.asm_cases_tac(
-    @parser.parse_term("forall b. b IN s ==> coprime(b,n)"),
+    @term_syntax.parse_term("∀ b : Num, IN(b, (s : (Num) -> Bool)) → coprime((b, (n : Num)))"),
   )
-  let t388 = @parser.parse_term("s:num->bool")
+  let t388 = @term_syntax.parse_term("(s : (Num) -> Bool)")
   let t389 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("x:num"), t388]),
+    @list.List([@term_syntax.parse_term("(x : Num)"), t388]),
   )
   let t387 = @simp.rewrite_tac(@list.List([@theorems.forall_and_thm()]))
   let t386 = @simp.rewrite_tac(
     @list.List([
       @class.taut(
-        @parser.parse_term("(a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)"),
+        @term_syntax.parse_term("((a : Bool) || (b : Bool) → (c : Bool)) == ((a → c) && (b → c))"),
       ),
     ]),
   )
@@ -4479,10 +4479,10 @@ fn step_31() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t367 = @parser.parse_term("1")
+  let t367 = @term_syntax.parse_term("1")
   let t368 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("\\x y. (x * y) MOD n"), t367]),
+      @list.List([@term_syntax.parse_term("(x : Num) => (y : Num) => MOD(x * y, (n : Num))"), t367]),
       @sets.finite_recursion(),
     ),
   )
@@ -4510,7 +4510,7 @@ fn step_31() -> Unit raise {
                                       @tactics.then_tac(
                                         @tactics.gen_tac,
                                         @class.asm_cases_tac(
-                                          @parser.parse_term("n = 0"),
+                                          @term_syntax.parse_term("(n : Num) == 0"),
                                         ),
                                       ),
                                       t364,
@@ -5077,11 +5077,11 @@ fn step_32() -> Unit raise {
         })(x671),
       )
     },
-    @list.List([@int.arith_rule(@parser.parse_term("x = x * 1"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("(x : Num) == x * 1"))]),
   )
   let t660 = @simp.asm_simp_tac(@list.List([@equal.gsym(@int.cong_v1())]))
   let t659 = @simp.asm_simp_tac(@list.List([@arith.mod_mod_refl()]))
-  let t655 = @parser.parse_term("n:num")
+  let t655 = @term_syntax.parse_term("(n : Num)")
   let t658 = @tactics.disch_then(fn(
     x657 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -5158,7 +5158,7 @@ fn step_32() -> Unit raise {
       })(x657),
     )
   })
-  let t646 = @parser.parse_term("(MOD)")
+  let t646 = @term_syntax.parse_term("MOD")
   let t649 = @tactics.disch_then(fn(
     x648 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -5241,7 +5241,7 @@ fn step_32() -> Unit raise {
       ),
     ]),
   )
-  let t637 = @tactics.exists_tac(@parser.parse_term("{b | 0 < b /\\ b < n}"))
+  let t637 = @tactics.exists_tac(@term_syntax.parse_term("{(b : Num) | 0 < b && b < (n : Num)}"))
   let t636 = @tactics.match_mp_tac(@sets.finite_subset())
   let t640 = @list.List([
     @tactics.then_tac(
@@ -5316,7 +5316,7 @@ fn step_32() -> Unit raise {
       }
     },
   )
-  let t628 = @parser.parse_term("1")
+  let t628 = @term_syntax.parse_term("1")
   let t631 = @tactics.disch_then(fn(
     x630 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -5393,7 +5393,7 @@ fn step_32() -> Unit raise {
       })(x630),
     )
   })
-  let t619 = @parser.parse_term("ITSET (\\x y. (x * y) MOD n)")
+  let t619 = @term_syntax.parse_term("ITSET((x : Num) => (y : Num) => MOD(x * y, (n : Num)))")
   let t622 = @tactics.disch_then(fn(
     x621 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -5537,7 +5537,7 @@ fn step_32() -> Unit raise {
     @tactics.all_tac,
   ])
   let t604 = @tactics.subgoal_then(
-    @parser.parse_term("y = (y DIV n) * n + y MOD n"),
+    @term_syntax.parse_term("(y : Num) == DIV(y, (n : Num)) * n + MOD(y, n)"),
     fn(
       x595 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -5584,7 +5584,7 @@ fn step_32() -> Unit raise {
   )
   let t592 = @drule.match_mp(
     @int.arith_rule(
-      @parser.parse_term("(n * x - a * y = 1) ==> (x * n = a * y + 1)"),
+      @term_syntax.parse_term("(n : Num) * (x : Num) - (a : Num) * (y : Num) == 1 → x * n == a * y + 1"),
     ),
   )
   let t594 = @tactics.first_assum(fn(
@@ -5658,7 +5658,7 @@ fn step_32() -> Unit raise {
   let t588 = @simp.rewrite_tac(
     @list.List([
       @int.arith_rule(
-        @parser.parse_term("(x + a * c * n = c * a * n + y) <=> (x = y)"),
+        @term_syntax.parse_term("((x : Num) + (a : Num) * ((c : Num) * (n : Num)) == c * (a * n) + (y : Num)) == (x == y)"),
       ),
     ]),
   )
@@ -5689,13 +5689,13 @@ fn step_32() -> Unit raise {
   ])
   let t581 = @tactics.match_mp_tac(
     @int.arith_rule(
-      @parser.parse_term("y <= n /\\ (a + n = x + y) ==> (a + (n - y) = x)"),
+      @term_syntax.parse_term("(y : Num) <= (n : Num) && (a : Num) + n == (x : Num) + y → a + (n - y) == x"),
     ),
   )
   let t580 = @simp.rewrite_tac(
     @list.List([@arith.left_add_distrib(), @arith.left_sub_distrib()]),
   )
-  let t578 = @parser.parse_term("c * a * (1 + y DIV n)")
+  let t578 = @term_syntax.parse_term("(c : Num) * ((a : Num) * (1 + DIV((y : Num), (n : Num))))")
   let t579 = @tactics.map_every(
     fn(
       x575 : @kernel.Term,
@@ -5743,18 +5743,18 @@ fn step_32() -> Unit raise {
         s576(x577)
       }
     },
-    @list.List([@parser.parse_term("c * x"), t578]),
+    @list.List([@term_syntax.parse_term("(c : Num) * (x : Num)"), t578]),
   )
   let t573 = @simp.asm_simp_tac(
     @list.List([@arith.division(), @arith.not_le()]),
   )
   let t572 = @simp.asm_rewrite_tac(@list.List([@prime.coprime_0()]))
-  let t571 = @class.asm_cases_tac(@parser.parse_term("a = 0"))
+  let t571 = @class.asm_cases_tac(@term_syntax.parse_term("(a : Num) == 0"))
   let t570 = @simp.once_rewrite_tac(@list.List([@prime.coprime_sym()]))
-  let t569 = @tactics.undisch_tac(@parser.parse_term("coprime(a,n)"))
+  let t569 = @tactics.undisch_tac(@term_syntax.parse_term("coprime(((a : Num), (n : Num)))"))
   let t568 = @simp.rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("1 <= n <=> ~(n = 0)")),
+      @int.arith_rule(@term_syntax.parse_term("(1 <= (n : Num)) == !(n == 0)")),
       @arith.mult_eq_0(),
       @arith.sub_eq_0(),
       @class.de_morgan_thm(),
@@ -5820,7 +5820,7 @@ fn step_32() -> Unit raise {
     @tactics.all_tac,
   ])
   let t555 = @tactics.subgoal_then(
-    @parser.parse_term("forall x. c * x = (c * x) DIV n * n + (c * x) MOD n"),
+    @term_syntax.parse_term("∀ x : Num, (c : Num) * x == DIV(c * x, (n : Num)) * n + MOD(c * x, n)"),
     fn(
       x546 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -5867,12 +5867,12 @@ fn step_32() -> Unit raise {
   )
   let t544 = @simp.asm_simp_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("m < n ==> ((n - m) + m = n:num)")),
+      @int.arith_rule(@term_syntax.parse_term("(m : Num) < (n : Num) → n - m + m == n")),
       @arith.division(),
     ]),
   )
   let t543 = @simp.asm_rewrite_tac(@list.List([]))
-  let t542 = @tactics.exists_tac(@parser.parse_term("n - y MOD n"))
+  let t542 = @tactics.exists_tac(@term_syntax.parse_term("(n : Num) - MOD((y : Num), n)"))
   let t541 = @tactics.match_mp_tac(@prime.divides_add_revr())
   let t540 = @simp.asm_simp_tac(
     @list.List([@prime.divides_lmul(), @prime.divides_refl()]),
@@ -5883,7 +5883,7 @@ fn step_32() -> Unit raise {
     @tactics.all_tac,
   ])
   let t537 = @tactics.subgoal_then(
-    @parser.parse_term("y = (y DIV n) * n + y MOD n"),
+    @term_syntax.parse_term("(y : Num) == DIV(y, (n : Num)) * n + MOD(y, n)"),
     fn(
       x534 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -5936,7 +5936,7 @@ fn step_32() -> Unit raise {
     @list.List([@prime.divides_rmul(), @prime.divides_refl()]),
   )
   let t531 = @tactics.match_mp_tac(@prime.divides_sub())
-  let t530 = @tactics.x_gen_tac(@parser.parse_term("e:num"))
+  let t530 = @tactics.x_gen_tac(@term_syntax.parse_term("(e : Num)"))
   let t529 = @tactics.first_x_assum(fn(
     x528 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6076,7 +6076,7 @@ fn step_32() -> Unit raise {
               @tactics.then_tac(
                 @tactics.thenl(
                   @tactics.subgoal_then(
-                    @parser.parse_term("coprime(n,c * (n - y MOD n))"),
+                    @term_syntax.parse_term("coprime(((n : Num), (c : Num) * (n - MOD((y : Num), n))))"),
                     fn(
                       x519 : @kernel.Thm,
                     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6152,7 +6152,7 @@ fn step_32() -> Unit raise {
       @tactics.then_tac(
         @simp.simp_tac(
           @list.List([
-            @int.arith_rule(@parser.parse_term("~(0 < n) <=> (n = 0)")),
+            @int.arith_rule(@term_syntax.parse_term("!(0 < (n : Num)) == (n == 0)")),
           ]),
         ),
         t515,
@@ -6259,7 +6259,7 @@ fn step_32() -> Unit raise {
     ]),
   )
   let t510 = @drule.match_mp(
-    @int.arith_rule(@parser.parse_term("(a - b = 1) ==> (a = b + 1)")),
+    @int.arith_rule(@term_syntax.parse_term("(a : Num) - (b : Num) == 1 → a == b + 1")),
   )
   let t512 = @tactics.first_assum(fn(
     x511 : @kernel.Thm,
@@ -6332,14 +6332,14 @@ fn step_32() -> Unit raise {
   let t506 = @simp.once_rewrite_tac(
     @list.List([
       @int.arith_rule(
-        @parser.parse_term("(a * c * x = b:num) <=> (c * a * x = b)"),
+        @term_syntax.parse_term("((a : Num) * ((c : Num) * (x : Num)) == (b : Num)) == (c * (a * x) == b)"),
       ),
     ]),
   )
   let t505 = @simp.asm_rewrite_tac(
     @list.List([@equal.gsym(@arith.mult_assoc())]),
   )
-  let t504 = @tactics.exists_tac(@parser.parse_term("c * y:num"))
+  let t504 = @tactics.exists_tac(@term_syntax.parse_term("(c : Num) * (y : Num)"))
   let t503 = @tactics.match_mp_tac(@arith.mod_uniq())
   let t502 = @tactics.conv_tac(@equal.sym_conv)
   let t501 = @simp.asm_simp_tac(@list.List([@arith.mod_mult_rmod()]))
@@ -6358,7 +6358,7 @@ fn step_32() -> Unit raise {
     @tactics.all_tac,
   ])
   let t494 = @tactics.subgoal_then(
-    @parser.parse_term("c * x = (c * x) DIV n * n + (c * x) MOD n"),
+    @term_syntax.parse_term("(c : Num) * (x : Num) == DIV(c * x, (n : Num)) * n + MOD(c * x, n)"),
     fn(
       x485 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6509,7 +6509,7 @@ fn step_32() -> Unit raise {
               @tactics.then_tac(
                 @tactics.thenl(
                   @tactics.subgoal_then(
-                    @parser.parse_term("coprime(n,c * x)"),
+                    @term_syntax.parse_term("coprime(((n : Num), (c : Num) * (x : Num)))"),
                     fn(
                       x472 : @kernel.Thm,
                     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6585,7 +6585,7 @@ fn step_32() -> Unit raise {
       @tactics.then_tac(
         @simp.simp_tac(
           @list.List([
-            @int.arith_rule(@parser.parse_term("~(0 < n) <=> (n = 0)")),
+            @int.arith_rule(@term_syntax.parse_term("!(0 < (n : Num)) == (n == 0)")),
           ]),
         ),
         t468,
@@ -6617,7 +6617,7 @@ fn step_32() -> Unit raise {
                             @tactics.then_tac(
                               @tactics.then_tac(
                                 @tactics.exists_tac(
-                                  @parser.parse_term("(c * x) MOD n"),
+                                  @term_syntax.parse_term("MOD((c : Num) * (x : Num), (n : Num))"),
                                 ),
                                 t467,
                               ),
@@ -6653,7 +6653,7 @@ fn step_32() -> Unit raise {
     @meson.asm_meson_tac(@list.List([@int.coprime()])),
     @tactics.all_tac,
   ])
-  let t465 = @tactics.subgoal_then(@parser.parse_term("d = 1"), fn(
+  let t465 = @tactics.subgoal_then(@term_syntax.parse_term("(d : Num) == 1"), fn(
     x462 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -6745,15 +6745,15 @@ fn step_32() -> Unit raise {
       s456(x457)
     }
   })
-  let t459 = @tactics.x_choose_then(@parser.parse_term("y:num"))(t458)
-  let t460 = @tactics.x_choose_then(@parser.parse_term("x:num"))(t459)
+  let t459 = @tactics.x_choose_then(@term_syntax.parse_term("(y : Num)"))(t458)
+  let t460 = @tactics.x_choose_then(@term_syntax.parse_term("(x : Num)"))(t459)
   let t461 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("d:num"))(t460),
+    @tactics.x_choose_then(@term_syntax.parse_term("(d : Num)"))(t460),
   )
-  let t453 = @parser.parse_term("n:num")
+  let t453 = @term_syntax.parse_term("(n : Num)")
   let t454 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("a:num"), t453]),
+      @list.List([@term_syntax.parse_term("(a : Num)"), t453]),
       @prime.bezout(),
     ),
   )
@@ -6772,7 +6772,7 @@ fn step_32() -> Unit raise {
     @tactics.all_tac,
   ])
   let t446 = @tactics.subgoal_then(
-    @parser.parse_term("a * b = (a * b) DIV n * n + (a * b) MOD n"),
+    @term_syntax.parse_term("(a : Num) * (b : Num) == DIV(a * b, (n : Num)) * n + MOD(a * b, n)"),
     fn(
       x437 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6826,7 +6826,7 @@ fn step_32() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t433 = @tactics.subgoal_then(@parser.parse_term("coprime(n,a * b)"), fn(
+  let t433 = @tactics.subgoal_then(@term_syntax.parse_term("coprime(((n : Num), (a : Num) * (b : Num)))"), fn(
     x430 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -6875,10 +6875,10 @@ fn step_32() -> Unit raise {
   let t429 = @simp.asm_simp_tac(@list.List([@prime.coprime_0()]))
   let t428 = @simp.once_rewrite_tac(@list.List([@prime.coprime_sym()]))
   let t427 = @simp.simp_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("~(0 < n) <=> (n = 0)"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("!(0 < (n : Num)) == (n == 0)"))]),
   )
   let t426 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("b /\\ (~a ==> ~b) ==> a /\\ b")),
+    @class.taut(@term_syntax.parse_term("(b : Bool) && (!(a : Bool) → !b) → a && b")),
   )
   let t425 = @simp.asm_simp_tac(@list.List([@arith.division()]))
   let t424 = @tactics.disch_then(fn(
@@ -7043,7 +7043,7 @@ fn step_32() -> Unit raise {
                                 @tactics.then_tac(
                                   @tactics.disch_then(
                                     @tactics.x_choose_then(
-                                      @parser.parse_term("b:num"),
+                                      @term_syntax.parse_term("(b : Num)"),
                                     )(fn(
                                       x411 : @kernel.Thm,
                                     ) -> ((
@@ -7157,7 +7157,7 @@ fn step_32() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t410 = @tactics.x_gen_tac(@parser.parse_term("c:num"))
+  let t410 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : Num)"))
   let t610 = @list.List([
     @tactics.thenl(
       @tactics.then_tac(
@@ -7246,12 +7246,12 @@ fn step_32() -> Unit raise {
     },
   )
   let t405 = @simp.asm_rewrite_tac(@list.List([cong_mod_1()]))
-  let t404 = @class.asm_cases_tac(@parser.parse_term("n = 1"))
+  let t404 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 1"))
   let t403 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t402 = @simp.asm_simp_tac(
     @list.List([@prime.coprime_0(), phi_0(), cong_mod_0()]),
   )
-  let t401 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
+  let t401 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0"))
   let t689 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -7338,7 +7338,7 @@ fn step_32() -> Unit raise {
   )
   fermat_little_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a n. coprime(a,n) ==> (a EXP (phi n) == 1) (mod n)"),
+      @term_syntax.parse_term("∀ a : Num, ∀ n : Num, coprime((a, n)) → op_eq_eq(EXP(a, phi(n)), 1, mod(n))"),
       t689,
     ),
   )
@@ -7358,7 +7358,7 @@ pub fn fermat_little() -> @kernel.Thm {
 fn step_33() -> Unit raise {
   let t739 = @meson.asm_meson_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("~(p = 0) ==> (SUC(p - 1) = p)")),
+      @int.arith_rule(@term_syntax.parse_term("!((p : Num) == 0) → SUC(p - 1) == p")),
       @prime.prime_0(),
     ]),
   )
@@ -7391,7 +7391,7 @@ fn step_33() -> Unit raise {
       @equal.gsym(@bool.conjunct2(@arith.exp())),
     ]),
   )
-  let t725 = @parser.parse_term("( * ) a")
+  let t725 = @term_syntax.parse_term("op_star((a : Num))")
   let t728 = @tactics.disch_then(fn(
     x727 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -7460,7 +7460,7 @@ fn step_33() -> Unit raise {
       }
     })(((x726 : @kernel.Thm) => @equal.ap_term(t725, x726))(x727))
   })
-  let t720 = @tactics.x_choose_then(@parser.parse_term("q2:num"))(fn(
+  let t720 = @tactics.x_choose_then(@term_syntax.parse_term("(q2 : Num)"))(fn(
     x717 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -7507,7 +7507,7 @@ fn step_33() -> Unit raise {
     }
   })
   let t721 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("q1:num"))(t720),
+    @tactics.x_choose_then(@term_syntax.parse_term("(q1 : Num)"))(t720),
   )
   let t716 = @simp.rewrite_tac(@list.List([@int.cong(), nat_mod()]))
   let t715 = @simp.asm_simp_tac(
@@ -7595,7 +7595,7 @@ fn step_33() -> Unit raise {
     },
     @list.List([cong_sym()]),
   )
-  let t700 = @tactics.exists_tac(@parser.parse_term("0"))
+  let t700 = @tactics.exists_tac(@term_syntax.parse_term("0"))
   let t707 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -7613,7 +7613,7 @@ fn step_33() -> Unit raise {
   ])
   let t699 = @simp.once_rewrite_tac(@list.List([@prime.coprime_sym()]))
   let t696 = @drule.match_mp(@prime.prime_coprime())
-  let t693 = @parser.parse_term("a:num")
+  let t693 = @term_syntax.parse_term("(a : Num)")
   let t698 = @tactics.first_assum(fn(
     x697 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -7746,7 +7746,7 @@ fn step_33() -> Unit raise {
   )
   fermat_little_prime_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p a. prime p ==> (a EXP p == a) (mod p)"),
+      @term_syntax.parse_term("∀ p : Num, ∀ a : Num, prime(p) → op_eq_eq(EXP(a, p), a, mod(p))"),
       t740,
     ),
   )
@@ -7771,12 +7771,12 @@ fn step_34() -> Unit raise {
   )
   let t779 = @list.List([
     @tactics.then_tac(
-      @tactics.undisch_tac(@parser.parse_term("~(m = 0)")),
+      @tactics.undisch_tac(@term_syntax.parse_term("!((m : Num) == 0)")),
       @int.arith_tac,
     ),
     t778,
   ])
-  let t777 = @tactics.subgoal_then(@parser.parse_term("m = SUC(m - 1)"), fn(
+  let t777 = @tactics.subgoal_then(@term_syntax.parse_term("(m : Num) == SUC(m - 1)"), fn(
     x774 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -7825,14 +7825,14 @@ fn step_34() -> Unit raise {
   let t773 = @simp.asm_simp_tac(
     @list.List([@equal.gsym(@arith.division()), @prime.divides_lmul()]),
   )
-  let t772 = @tactics.exists_tac(@parser.parse_term("a EXP m DIV n * n"))
+  let t772 = @tactics.exists_tac(@term_syntax.parse_term("DIV(EXP((a : Num), (m : Num)), (n : Num)) * n"))
   let t771 = @tactics.match_mp_tac(@prime.divides_add_revr())
   let t770 = @list.List([
     @tactics.all_tac,
     @simp.asm_simp_tac(@list.List([@int.divides_one()])),
   ])
   let t769 = @tactics.subgoal_then(
-    @parser.parse_term("d divides (a EXP m) MOD n"),
+    @term_syntax.parse_term("divides((d : Num), MOD(EXP((a : Num), (m : Num)), (n : Num)))"),
     fn(
       x766 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -7880,7 +7880,7 @@ fn step_34() -> Unit raise {
       }
     },
   )
-  let t763 = @parser.parse_term("~(n = 1)")
+  let t763 = @term_syntax.parse_term("!((n : Num) == 1)")
   let t764 = @tactics.map_every(
     fn(
       x760 : @kernel.Term,
@@ -7928,12 +7928,12 @@ fn step_34() -> Unit raise {
         s761(x762)
       }
     },
-    @list.List([@parser.parse_term("~(n = 0)"), t763]),
+    @list.List([@term_syntax.parse_term("!((n : Num) == 0)"), t763]),
   )
   let t759 = @simp.rewrite_tac(
     @list.List([@arith.mult_clauses(), @arith.add_clauses()]),
   )
-  let t758 = @tactics.exists_tac(@parser.parse_term("0"))
+  let t758 = @tactics.exists_tac(@term_syntax.parse_term("0"))
   let t765 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -7947,7 +7947,7 @@ fn step_34() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t757 = @tactics.subgoal_then(@parser.parse_term("1 MOD n = 1"), fn(
+  let t757 = @tactics.subgoal_then(@term_syntax.parse_term("MOD(1, (n : Num)) == 1"), fn(
     x754 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -7994,16 +7994,16 @@ fn step_34() -> Unit raise {
     }
   })
   let t753 = @simp.asm_simp_tac(@list.List([@int.cong_v1()]))
-  let t752 = @tactics.undisch_tac(@parser.parse_term("(a EXP m == 1) (mod n)"))
-  let t751 = @tactics.x_gen_tac(@parser.parse_term("d:num"))
+  let t752 = @tactics.undisch_tac(@term_syntax.parse_term("op_eq_eq(EXP((a : Num), (m : Num)), 1, mod((n : Num)))"))
+  let t751 = @tactics.x_gen_tac(@term_syntax.parse_term("(d : Num)"))
   let t750 = @simp.rewrite_tac(@list.List([@int.coprime()]))
   let t749 = @tactics.repeat_tac(@tactics.strip_tac)
   let t748 = @simp.asm_rewrite_tac(@list.List([@prime.coprime_1()]))
-  let t747 = @class.asm_cases_tac(@parser.parse_term("n = 1"))
+  let t747 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 1"))
   let t745 = @simp.simp_tac(@list.List([@prime.coprime_1()]))
   let t744 = @simp.once_rewrite_tac(@list.List([@prime.coprime_sym()]))
   let t743 = @simp.asm_rewrite_tac(@list.List([]))
-  let t742 = @class.asm_cases_tac(@parser.parse_term("m = 0"))
+  let t742 = @class.asm_cases_tac(@term_syntax.parse_term("(m : Num) == 0"))
   let t746 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -8020,7 +8020,7 @@ fn step_34() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t741 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
+  let t741 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0"))
   let t780 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -8109,17 +8109,17 @@ fn step_35() -> Unit raise {
   let t799 = @simp.asm_simp_tac(
     @list.List([
       phi_lowerbound_1(),
-      @int.arith_rule(@parser.parse_term("1 <= n ==> 0 < n")),
+      @int.arith_rule(@term_syntax.parse_term("1 <= (n : Num) → 0 < n")),
     ]),
   )
   let t798 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("a ==> ~(a /\\ b) ==> ~b")),
+    @class.taut(@term_syntax.parse_term("(a : Bool) → !(a && (b : Bool)) → !b")),
   )
   let t797 = @simp.rewrite_tac(@list.List([@equal.gsym(@arith.not_lt())]))
   let t795 = @simp.asm_simp_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("2 <= n ==> ~(n - 1 = 0)"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("2 <= (n : Num) → !(n - 1 == 0)"))]),
   )
-  let t794 = @tactics.exists_tac(@parser.parse_term("n - 1"))
+  let t794 = @tactics.exists_tac(@term_syntax.parse_term("(n : Num) - 1"))
   let t796 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(@tactics.match_mp_tac(lucas_coprime_lemma()), t794),
@@ -8127,7 +8127,7 @@ fn step_35() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t793 = @tactics.subgoal_then(@parser.parse_term("coprime(a,n)"), fn(
+  let t793 = @tactics.subgoal_then(@term_syntax.parse_term("coprime(((a : Num), (n : Num)))"), fn(
     x791 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -8151,7 +8151,7 @@ fn step_35() -> Unit raise {
     let th = x791
     @simp.simp_tac(@list.List([fermat_little(), th]))
   })
-  let t787 = @parser.parse_term("phi n")
+  let t787 = @term_syntax.parse_term("phi((n : Num))")
   let t790 = @tactics.first_x_assum(fn(
     x789 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -8221,7 +8221,7 @@ fn step_35() -> Unit raise {
     })(((x788 : @kernel.Thm) => @bool.spec(t787, x788))(x789))
   })
   let t781 = @int.arith_rule(
-    @parser.parse_term("2 <= n ==> ~(n = 0) /\\ ~(n = 1)"),
+    @term_syntax.parse_term("2 <= (n : Num) → !(n == 0) && !(n == 1)"),
   )
   let t782 = @equal.gsym(@arith.le_antisym())
   let t783 = @simp.asm_simp_tac(
@@ -8270,8 +8270,8 @@ pub fn lucas_weak() -> @kernel.Thm {
 fn step_36() -> Unit raise {
   let t936 = @simp.rewrite_tac(@list.List([@arith.exp_exp(), @arith.exp_one()]))
   let t935 = @simp.asm_simp_tac(@list.List([@arith.mod_exp_mod()]))
-  let t931 = @parser.parse_term("(MOD)")
-  let t928 = @parser.parse_term("n:num")
+  let t931 = @term_syntax.parse_term("MOD")
+  let t928 = @term_syntax.parse_term("(n : Num)")
   let t934 = @tactics.disch_then(fn(
     x933 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -8372,8 +8372,8 @@ fn step_36() -> Unit raise {
       )
     })(((x932 : @kernel.Thm) => @equal.ap_term(t931, x932))(x933))
   })
-  let t919 = @parser.parse_term("(EXP)")
-  let t916 = @parser.parse_term("r DIV p")
+  let t919 = @term_syntax.parse_term("EXP")
+  let t916 = @term_syntax.parse_term("DIV((r : Num), (p : Num))")
   let t922 = @tactics.disch_then(fn(
     x921 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -8475,22 +8475,22 @@ fn step_36() -> Unit raise {
     })(((x920 : @kernel.Thm) => @equal.ap_term(t919, x920))(x921))
   })
   let t910 = @simp.asm_simp_tac(@list.List([@int.cong_v1()]))
-  let t909 = @tactics.undisch_tac(@parser.parse_term("(a EXP m == 1) (mod n)"))
+  let t909 = @tactics.undisch_tac(@term_syntax.parse_term("op_eq_eq(EXP((a : Num), (m : Num)), 1, mod((n : Num)))"))
   let t907 = @simp.rewrite_tac(@list.List([@arith.mult_ac()]))
   let t906 = @simp.asm_simp_tac(@list.List([@arith.div_mult()]))
   let t905 = @simp.asm_rewrite_tac(@list.List([]))
   let t904 = @simp.rewrite_tac(@list.List([@int.divides()]))
-  let t903 = @tactics.undisch_tac(@parser.parse_term("p divides r"))
+  let t903 = @tactics.undisch_tac(@term_syntax.parse_term("divides((p : Num), (r : Num))"))
   let t902 = @simp.rewrite_tac(
     @list.List([@arith.add_clauses(), @equal.gsym(@arith.mult_assoc())]),
   )
   let t901 = @simp.asm_simp_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("~(p = 0) ==> 0 < p"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("!((p : Num) == 0) → 0 < p"))]),
   )
   let t900 = @simp.asm_rewrite_tac(@list.List([@prime.prime_0()]))
-  let t899 = @class.asm_cases_tac(@parser.parse_term("p = 0"))
-  let t898 = @tactics.undisch_tac(@parser.parse_term("prime p"))
-  let t897 = @tactics.exists_tac(@parser.parse_term("0"))
+  let t899 = @class.asm_cases_tac(@term_syntax.parse_term("(p : Num) == 0"))
+  let t898 = @tactics.undisch_tac(@term_syntax.parse_term("prime((p : Num))"))
+  let t897 = @tactics.exists_tac(@term_syntax.parse_term("0"))
   let t908 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -8538,7 +8538,7 @@ fn step_36() -> Unit raise {
     @tactics.all_tac,
   ])
   let t896 = @tactics.subgoal_then(
-    @parser.parse_term("(m * r) DIV p = m * (r DIV p)"),
+    @term_syntax.parse_term("DIV((m : Num) * (r : Num), (p : Num)) == m * DIV(r, p)"),
     fn(
       x893 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -8587,7 +8587,7 @@ fn step_36() -> Unit raise {
     },
   )
   let t892 = @simp.asm_simp_tac(@list.List([@prime.divides_lmul()]))
-  let t888 = @parser.parse_term("p:num")
+  let t888 = @term_syntax.parse_term("(p : Num)")
   let t891 = @tactics.disch_then(fn(
     x890 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -8662,7 +8662,7 @@ fn step_36() -> Unit raise {
     ),
   )
   let t883 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("p:num"))(fn(
+    @tactics.x_choose_then(@term_syntax.parse_term("(p : Num)"))(fn(
       x880 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
@@ -8785,14 +8785,14 @@ fn step_36() -> Unit raise {
   let t873 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
-        @tactics.undisch_tac(@parser.parse_term("m < m * r")),
+        @tactics.undisch_tac(@term_syntax.parse_term("(m : Num) < m * (r : Num)")),
         t871,
       ),
       t872,
     ),
     @tactics.all_tac,
   ])
-  let t870 = @tactics.subgoal_then(@parser.parse_term("~(r = 1)"), fn(
+  let t870 = @tactics.subgoal_then(@term_syntax.parse_term("!((r : Num) == 1)"), fn(
     x867 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -8839,7 +8839,7 @@ fn step_36() -> Unit raise {
     }
   })
   let t866 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("r:num"))(fn(
+    @tactics.x_choose_then(@term_syntax.parse_term("(r : Num)"))(fn(
       x863 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
@@ -8895,14 +8895,14 @@ fn step_36() -> Unit raise {
     @simp.asm_simp_tac(@list.List([@arith.mod_exp_mod()])),
   ])
   let t856 = @tactics.exists_tac(
-    @parser.parse_term("((a EXP m) MOD n) EXP ((n - 1) DIV m) MOD n"),
+    @term_syntax.parse_term("MOD(EXP(MOD(EXP((a : Num), (m : Num)), (n : Num)), DIV(n - 1, m)), n)"),
   )
   let t855 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t854 = @tactics.repeat_tac(@tactics.disch_tac)
   let t853 = @simp.asm_simp_tac(@list.List([@int.cong_v1()]))
-  let t852 = @tactics.undisch_tac(@parser.parse_term("(a EXP m == 1) (mod n)"))
+  let t852 = @tactics.undisch_tac(@term_syntax.parse_term("op_eq_eq(EXP((a : Num), (m : Num)), 1, mod((n : Num)))"))
   let t851 = @tactics.undisch_tac(
-    @parser.parse_term("(a EXP (n - 1) == 1) (mod n)"),
+    @term_syntax.parse_term("op_eq_eq(EXP((a : Num), (n : Num) - 1), 1, mod(n))"),
   )
   let t850 = @simp.rewrite_tac(@list.List([@equal.gsym(@arith.exp_exp())]))
   let t849 = @simp.once_rewrite_tac(@list.List([@arith.mult_sym()]))
@@ -8910,7 +8910,7 @@ fn step_36() -> Unit raise {
   let t847 = @simp.asm_simp_tac(@list.List([@equal.gsym(@arith.division())]))
   let t846 = @simp.rewrite_tac(@list.List([@equal.gsym(@arith.exp_add())]))
   let t844 = @simp.asm_simp_tac(@list.List([]))
-  let t843 = @tactics.exists_tac(@parser.parse_term("m:num"))
+  let t843 = @tactics.exists_tac(@term_syntax.parse_term("(m : Num)"))
   let t842 = @tactics.match_mp_tac(lucas_coprime_lemma())
   let t841 = @simp.once_rewrite_tac(@list.List([@prime.coprime_sym()]))
   let t840 = @tactics.match_mp_tac(@prime.coprime_exp())
@@ -8934,11 +8934,11 @@ fn step_36() -> Unit raise {
     @tactics.all_tac,
   ])
   let t839 = @tactics.exists_tac(
-    @parser.parse_term("a EXP ((n - 1) DIV m * m)"),
+    @term_syntax.parse_term("EXP((a : Num), DIV((n : Num) - 1, (m : Num)) * m)"),
   )
   let t838 = @tactics.match_mp_tac(cong_mult_lcancel())
   let t836 = @simp.asm_simp_tac(@list.List([@arith.division()]))
-  let t835 = @tactics.exists_tac(@parser.parse_term("m:num"))
+  let t835 = @tactics.exists_tac(@term_syntax.parse_term("(m : Num)"))
   let t837 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(@tactics.match_mp_tac(@arith.lt_trans()), t835),
@@ -8947,7 +8947,7 @@ fn step_36() -> Unit raise {
     @tactics.all_tac,
   ])
   let t834 = @simp.asm_simp_tac(@list.List([@arith.division()]))
-  let t830 = @parser.parse_term("(n - 1) MOD m")
+  let t830 = @term_syntax.parse_term("MOD((n : Num) - 1, (m : Num))")
   let t833 = @tactics.first_x_assum(fn(
     x832 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -9017,7 +9017,7 @@ fn step_36() -> Unit raise {
     })(((x831 : @kernel.Thm) => @bool.spec(t830, x831))(x832))
   })
   let t826 = @tactics.match_mp_tac(
-    @int.arith_rule(@parser.parse_term("~(0 < n) ==> (n = 0)")),
+    @int.arith_rule(@term_syntax.parse_term("!(0 < (n : Num)) → n == 0")),
   )
   let t825 = @simp.asm_simp_tac(@list.List([@equal.gsym(@arith.mod_eq_0())]))
   let t824 = @simp.once_rewrite_tac(@list.List([@arith.mult_sym()]))
@@ -9113,7 +9113,7 @@ fn step_36() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t823 = @tactics.subgoal_then(@parser.parse_term("m divides (n - 1)"), fn(
+  let t823 = @tactics.subgoal_then(@term_syntax.parse_term("divides((m : Num), (n : Num) - 1)"), fn(
     x820 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -9160,7 +9160,7 @@ fn step_36() -> Unit raise {
     }
   })
   let t817 = @drule.match_mp(
-    @int.arith_rule(@parser.parse_term("0 < n ==> ~(n = 0)")),
+    @int.arith_rule(@term_syntax.parse_term("0 < (n : Num) → !(n == 0)")),
   )
   let t819 = @tactics.first_assum(fn(
     x818 : @kernel.Thm,
@@ -9231,7 +9231,7 @@ fn step_36() -> Unit raise {
     })(t817(x818))
   })
   let t813 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("m:num"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(m : Num)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -9239,15 +9239,15 @@ fn step_36() -> Unit raise {
   let t810 = @equal.gsym(@class.not_exists_thm())
   let t811 = @simp.rewrite_tac(
     @list.List([
-      @class.taut(@parser.parse_term("a ==> ~b <=> ~(a /\\ b)")),
+      @class.taut(@term_syntax.parse_term("((a : Bool) → !(b : Bool)) == !(a && b)")),
       t810,
     ]),
   )
   let t809 = @simp.asm_rewrite_tac(@list.List([]))
-  let t808 = @tactics.exists_tac(@parser.parse_term("a:num"))
+  let t808 = @tactics.exists_tac(@term_syntax.parse_term("(a : Num)"))
   let t807 = @tactics.match_mp_tac(lucas_weak())
   let t804 = @drule.match_mp(
-    @int.arith_rule(@parser.parse_term("2 <= n ==> ~(n = 0)")),
+    @int.arith_rule(@term_syntax.parse_term("2 <= (n : Num) → !(n == 0)")),
   )
   let t806 = @tactics.first_assum(fn(
     x805 : @kernel.Thm,
@@ -9449,9 +9449,9 @@ pub fn primefact() -> @kernel.Thm {
 fn step_38() -> Unit raise {
   let t984 = @meson.asm_meson_tac(@list.List([]))
   let t983 = @simp.asm_rewrite_tac(@list.List([@lists.mem(), @lists.itlist()]))
-  let t982 = @tactics.exists_tac(@parser.parse_term("CONS (p:num) ps"))
+  let t982 = @tactics.exists_tac(@term_syntax.parse_term("CONS((p : Num), (ps : List[Num]))"))
   let t981 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("ps:num list"))(fn(
+    @tactics.x_choose_then(@term_syntax.parse_term("(ps : List[Num])"))(fn(
       x978 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
@@ -9502,7 +9502,7 @@ fn step_38() -> Unit raise {
   let t975 = @simp.asm_rewrite_tac(
     @list.List([@prime.prime_0(), @prime.prime_1()]),
   )
-  let t974 = @tactics.undisch_tac(@parser.parse_term("prime p"))
+  let t974 = @tactics.undisch_tac(@term_syntax.parse_term("prime((p : Num))"))
   let t973 = @tactics.repeat_tac(@tactics.strip_tac)
   let t976 = @list.List([
     @tactics.then_tac(
@@ -9510,7 +9510,7 @@ fn step_38() -> Unit raise {
         @tactics.then_tac(
           @tactics.match_mp_tac(
             @int.arith_rule(
-              @parser.parse_term("~(p = 0) /\\ ~(p = 1) ==> 1 < p"),
+              @term_syntax.parse_term("!((p : Num) == 0) && !(p == 1) → 1 < p"),
             ),
           ),
           t973,
@@ -9521,7 +9521,7 @@ fn step_38() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t972 = @tactics.subgoal_then(@parser.parse_term("1 < p"), fn(
+  let t972 = @tactics.subgoal_then(@term_syntax.parse_term("1 < (p : Num)"), fn(
     x970 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -9559,12 +9559,12 @@ fn step_38() -> Unit raise {
         x967,
       )
     },
-    @list.List([@int.arith_rule(@parser.parse_term("n = 1 * n"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("(n : Num) == 1 * n"))]),
   )
   let t963 = @simp.asm_rewrite_tac(@list.List([@arith.mult_clauses()]))
-  let t962 = @class.asm_cases_tac(@parser.parse_term("m = 0"))
-  let t961 = @tactics.undisch_tac(@parser.parse_term("~(p * m = 0)"))
-  let t957 = @parser.parse_term("m:num")
+  let t962 = @class.asm_cases_tac(@term_syntax.parse_term("(m : Num) == 0"))
+  let t961 = @tactics.undisch_tac(@term_syntax.parse_term("!((p : Num) * (m : Num) == 0)"))
+  let t957 = @term_syntax.parse_term("(m : Num)")
   let t960 = @tactics.first_x_assum(fn(
     x959 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -9634,7 +9634,7 @@ fn step_38() -> Unit raise {
     })(((x958 : @kernel.Thm) => @bool.spec(t957, x958))(x959))
   })
   let t953 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("m:num"))(fn(
+    @tactics.x_choose_then(@term_syntax.parse_term("(m : Num)"))(fn(
       x950 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
@@ -9682,9 +9682,9 @@ fn step_38() -> Unit raise {
     }),
   )
   let t949 = @simp.rewrite_tac(@list.List([@int.divides()]))
-  let t948 = @tactics.undisch_tac(@parser.parse_term("p divides n"))
+  let t948 = @tactics.undisch_tac(@term_syntax.parse_term("divides((p : Num), (n : Num))"))
   let t944 = @drule.match_mp(@prime.prime_factor())
-  let t945 = @tactics.x_choose_then(@parser.parse_term("p:num"))(
+  let t945 = @tactics.x_choose_then(@term_syntax.parse_term("(p : Num)"))(
     @tactics.strip_assume_tac,
   )
   let t947 = @tactics.first_assum(fn(
@@ -9713,7 +9713,7 @@ fn step_38() -> Unit raise {
   let t942 = @simp.rewrite_tac(
     @list.List([primefact(), @lists.itlist(), @lists.mem()]),
   )
-  let t941 = @tactics.exists_tac(@parser.parse_term("[]:num list"))
+  let t941 = @tactics.exists_tac(@term_syntax.parse_term("(NIL : List[Num])"))
   let t943 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(@tactics.repeat_tac(@tactics.disch_tac), t941),
@@ -9722,8 +9722,8 @@ fn step_38() -> Unit raise {
     @tactics.all_tac,
   ])
   let t940 = @simp.asm_rewrite_tac(@list.List([]))
-  let t939 = @class.asm_cases_tac(@parser.parse_term("n = 1"))
-  let t938 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
+  let t939 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 1"))
+  let t938 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t985 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -9801,7 +9801,7 @@ fn step_38() -> Unit raise {
   )
   primefact_v1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. ~(n = 0) ==> ?ps. primefact ps n"),
+      @term_syntax.parse_term("∀ n : Num, !(n == 0) → (∃ ps : List[Num], primefact(ps, n))"),
       t985,
     ),
   )
@@ -9874,8 +9874,8 @@ fn step_39() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1001 = @simp.rewrite_tac(@list.List([@lists.itlist(), @lists.mem()]))
-  let t999 = @parser.parse_term("ps:num list")
-  let t1000 = @tactics.spec_tac(@parser.parse_term("ps:num list"), t999)
+  let t999 = @term_syntax.parse_term("(ps : List[Num])")
+  let t1000 = @tactics.spec_tac(@term_syntax.parse_term("(ps : List[Num])"), t999)
   let t998 = @tactics.pop_assum(fn(
     x997 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -10104,8 +10104,8 @@ pub fn primafact_contains() -> @kernel.Thm {
 fn step_40() -> Unit raise {
   let t1016 = @meson.asm_meson_tac(@list.List([]))
   let t1015 = @simp.asm_rewrite_tac(@list.List([@lists.mem(), @lists.all()]))
-  let t1013 = @parser.parse_term("ps:num list")
-  let t1014 = @tactics.spec_tac(@parser.parse_term("ps:num list"), t1013)
+  let t1013 = @term_syntax.parse_term("(ps : List[Num])")
+  let t1014 = @tactics.spec_tac(@term_syntax.parse_term("(ps : List[Num])"), t1013)
   let t1012 = @simp.rewrite_tac(@list.List([primefact()]))
   let t1017 = @tactics.then_tac(
     @tactics.then_tac(
@@ -10149,8 +10149,8 @@ pub fn primefact_variant() -> @kernel.Thm {
 fn step_41() -> Unit raise {
   let t1044 = @meson.asm_meson_tac(@list.List([]))
   let t1043 = @simp.simp_tac(@list.List([@lists.all(), @lists.mem()]))
-  let t1041 = @parser.parse_term("ps:num list")
-  let t1042 = @tactics.spec_tac(@parser.parse_term("ps:num list"), t1041)
+  let t1041 = @term_syntax.parse_term("(ps : List[Num])")
+  let t1042 = @tactics.spec_tac(@term_syntax.parse_term("(ps : List[Num])"), t1041)
   let t1040 = @tactics.undisch_tac(
     @parser.parse_term(
       "ALL (\\p. prime p /\\ ~(a EXP ((n - 1) DIV p) == 1) (mod n)) ps",
@@ -10204,7 +10204,7 @@ fn step_41() -> Unit raise {
       }
     }),
   )
-  let t1035 = @tactics.x_gen_tac(@parser.parse_term("p:num"))
+  let t1035 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : Num)"))
   let t1032 = @drule.match_mp(primafact_contains())
   let t1034 = @tactics.disch_then(fn(
     x1033 : @kernel.Thm,
@@ -10276,7 +10276,7 @@ fn step_41() -> Unit raise {
   })
   let t1027 = @simp.asm_simp_tac(@list.List([]))
   let t1026 = @tactics.exists_tac(
-    @parser.parse_term("\\p. prime p /\\ ~(a EXP ((n - 1) DIV p) == 1) (mod n)"),
+    @term_syntax.parse_term("(p : Num) => prime(p) && !op_eq_eq(EXP((a : Num), DIV((n : Num) - 1, p)), 1, mod(n))"),
   )
   let t1025 = @tactics.match_mp_tac(@lists.all_imp())
   let t1028 = @list.List([
@@ -10293,7 +10293,7 @@ fn step_41() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1024 = @tactics.subgoal_then(
-    @parser.parse_term("primefact ps (n - 1)"),
+    @term_syntax.parse_term("primefact((ps : List[Num]), (n : Num) - 1)"),
     fn(
       x1021 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -10342,7 +10342,7 @@ fn step_41() -> Unit raise {
     },
   )
   let t1020 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1019 = @tactics.exists_tac(@parser.parse_term("a:num"))
+  let t1019 = @tactics.exists_tac(@term_syntax.parse_term("(a : Num)"))
   let t1018 = @tactics.match_mp_tac(lucas())
   let t1045 = @tactics.then_tac(
     @tactics.then_tac(
@@ -10878,10 +10878,10 @@ fn step_49() -> Unit raise {
   )
   let t1101 = @simp.rewrite_tac(@list.List([@int.cong_v1()]))
   let pth_cong = @tactics.prove(
-    @parser.parse_term("~(n = 0) ==> ((x == y) (mod n) <=> x MOD n = y MOD n)"),
+    @term_syntax.parse_term("!((n : Num) == 0) → op_eq_eq((x : Num), (y : Num), mod(n)) == (MOD(x, n) == MOD(y, n))"),
     t1101,
   )
-  let n_tm = @parser.parse_term("n:num")
+  let n_tm = @term_syntax.parse_term("(n : Num)")
   let raw_conv : (@kernel.Term) -> @kernel.Thm raise = fn(
     x1102 : @kernel.Term,
   ) -> @kernel.Thm raise {
@@ -10956,7 +10956,7 @@ fn step_49() -> Unit raise {
       })(x1111)
       s1113(x1112)
     },
-    @list.List([(@parser.parse_term("(a EXP m == 1) (mod n)"), raw_conv)]),
+    @list.List([(@term_syntax.parse_term("op_eq_eq(EXP((a : Num), (m : Num)), 1, mod((n : Num)))"), raw_conv)]),
     @nets.empty_net(),
   )
   exp_eq_mod_conv_c.set(@simp.rewrites_conv(gconv_net))
@@ -11013,14 +11013,14 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] lookup_under_num(
 ///|
 /// check_certificate
 fn step_51() -> Unit raise {
-  let n_tm = @parser.parse_term("n:num")
-  let a_tm = @parser.parse_term("a:num")
-  let ps_tm = @parser.parse_term("ps:num list")
+  let n_tm = @term_syntax.parse_term("(n : Num)")
+  let a_tm = @term_syntax.parse_term("(a : Num)")
+  let ps_tm = @term_syntax.parse_term("(ps : List[Num])")
   let simple_rewrite_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.rewrite_conv(
     @list.List([]),
   )
   let conj_ac_sorted = @class.taut(
-    @parser.parse_term("(a /\\ a /\\ b <=> a /\\ b) /\\ (a /\\ a <=> a)"),
+    @term_syntax.parse_term("((a : Bool) && a && (b : Bool)) == (a && b) && (a && a) == a"),
   )
   let t1119 = @equal.once_depth_conv(
     @equal.orelsec(@calc_num.num_eq_conv, @calc_num.num_le_conv),
@@ -11132,8 +11132,8 @@ fn step_53() -> Unit raise {
     @simp.pure_rewrite_conv(@list.List([@lists.itlist(), @lists.all()])),
     @calc_num.num_reduce_conv,
   )
-  let ps_tm = @parser.parse_term("ps:num list")
-  let n_tm = @parser.parse_term("n:num")
+  let ps_tm = @term_syntax.parse_term("(ps : List[Num])")
+  let n_tm = @term_syntax.parse_term("(n : Num)")
   prove_primefact_c.set(fn(x1128 : @num.Num) -> @kernel.Thm raise {
     let n = x1128
     let pfact = multifactor(n)
@@ -11173,9 +11173,9 @@ fn step_54() -> Unit raise {
     ),
     t1131,
   )
-  let m_tm = @parser.parse_term("m:num")
-  let n_tm = @parser.parse_term("n:num")
-  let p_tm = @parser.parse_term("p:num")
+  let m_tm = @term_syntax.parse_term("(m : Num)")
+  let n_tm = @term_syntax.parse_term("(n : Num)")
+  let p_tm = @term_syntax.parse_term("(p : Num)")
   prime_test_c.set(fn(x1132 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x1132
     let p = @basics.dest_numeral(tm)
@@ -11236,7 +11236,7 @@ pub fn prime_test(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// PRIME_CONV
 fn step_55() -> Unit raise {
-  let prime_tm = @parser.parse_term("prime")
+  let prime_tm = @term_syntax.parse_term("prime")
   prime_conv_c.set(fn(x1137 : @kernel.Term) -> @kernel.Thm raise {
     let tm0 = x1137
     let (ptm, tm) = @kernel.dest_comb(tm0)
@@ -11277,19 +11277,19 @@ fn step_56() -> Unit raise {
 ///|
 /// Library/pratt.ml:970
 fn step_57() -> Unit raise {
-  ignore(@lib.time(prime_test, @parser.parse_term("65535")))
+  ignore(@lib.time(prime_test, @term_syntax.parse_term("65535")))
 }
 
 ///|
 /// Library/pratt.ml:972
 fn step_58() -> Unit raise {
-  ignore(@lib.time(prime_test, @parser.parse_term("65536")))
+  ignore(@lib.time(prime_test, @term_syntax.parse_term("65536")))
 }
 
 ///|
 /// Library/pratt.ml:974
 fn step_59() -> Unit raise {
-  ignore(@lib.time(prime_test, @parser.parse_term("65537")))
+  ignore(@lib.time(prime_test, @term_syntax.parse_term("65537")))
 }
 
 ///|
