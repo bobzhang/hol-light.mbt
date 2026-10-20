@@ -1,120 +1,120 @@
 Formal_ineqs/misc/misc_vars quotations (122):
-  s:bool
-  s1:bool
-  s2:bool
-  n:num
-  m:num
-  t:num
-  p:num
-  q:num
-  k:num
-  e:num
-  e1:num
-  e2:num
-  r:num
-  r1:num
-  r2:num
-  n1:num
-  n2:num
-  m1:num
-  m2:num
-  x:num
-  y:num
-  i:num
-  j:num
-  x : real
-  y : real
-  z : real
-  w : real
-  a : real
-  b : real
-  a1 : real
-  a2 : real
-  b1 : real
-  b2 : real
-  c : real
-  d : real
-  h : real
-  m : real
-  n : real
-  r : real
-  x1 : real
-  x2 : real
-  y1 : real
-  y2 : real
-  f1 : real
-  f2 : real
-  f : real->real
-  g : real->real
-  f1 : real->real
-  f2 : real->real
-  int : real#real
-  f_bounds : real#real
-  df_bounds : real#real
-  dd_bounds : real#real
-  x_lo : real
-  x_hi : real
-  low : real
-  high : real
-  lo : real
-  hi : real
-  dd : real
-  df_lo : real
-  df_hi : real
-  df : real
-  f_lo : real
-  f_hi : real
-  w1 : real
-  w2 : real
-  t : real
-  g_bounds : real#real
-  dg_bounds : real#real
-  bounds : real#real
-  d_bounds : real#real
-  x0 : real
-  z0 : real
-  w0 : real
-  error : real
-  d_bounds_list : (real#real)list
-  dd_bounds_list : ((real#real)list)list
-  df_bounds_list : (real#real)list
-  dd_list : (real#real)list
-  t:(real)list
-  x:(real)list
-  y:(real)list
-  z:(real)list
-  w:(real)list
-  yw : (real#real)list
-  xz : (real#real)list
-  xz : real#real
-  yw : real#real
-  list : (real#real)list
-  T
-  F
+  (s : Bool)
+  (s1 : Bool)
+  (s2 : Bool)
+  (n : Num)
+  (m : Num)
+  (t : Num)
+  (p : Num)
+  (q : Num)
+  (k : Num)
+  (e : Num)
+  (e1 : Num)
+  (e2 : Num)
+  (r : Num)
+  (r1 : Num)
+  (r2 : Num)
+  (n1 : Num)
+  (n2 : Num)
+  (m1 : Num)
+  (m2 : Num)
+  (x : Num)
+  (y : Num)
+  (i : Num)
+  (j : Num)
+  (x : Real)
+  (y : Real)
+  (z : Real)
+  (w : Real)
+  (a : Real)
+  (b : Real)
+  (a1 : Real)
+  (a2 : Real)
+  (b1 : Real)
+  (b2 : Real)
+  (c : Real)
+  (d : Real)
+  (h : Real)
+  (m : Real)
+  (n : Real)
+  (r : Real)
+  (x1 : Real)
+  (x2 : Real)
+  (y1 : Real)
+  (y2 : Real)
+  (f1 : Real)
+  (f2 : Real)
+  (f : (Real) -> Real)
+  (g : (Real) -> Real)
+  (f1 : (Real) -> Real)
+  (f2 : (Real) -> Real)
+  (int : (Real, Real))
+  (f_bounds : (Real, Real))
+  (df_bounds : (Real, Real))
+  (dd_bounds : (Real, Real))
+  (x_lo : Real)
+  (x_hi : Real)
+  (low : Real)
+  (high : Real)
+  (lo : Real)
+  (hi : Real)
+  (dd : Real)
+  (df_lo : Real)
+  (df_hi : Real)
+  (df : Real)
+  (f_lo : Real)
+  (f_hi : Real)
+  (w1 : Real)
+  (w2 : Real)
+  (t : Real)
+  (g_bounds : (Real, Real))
+  (dg_bounds : (Real, Real))
+  (bounds : (Real, Real))
+  (d_bounds : (Real, Real))
+  (x0 : Real)
+  (z0 : Real)
+  (w0 : Real)
+  (error : Real)
+  (d_bounds_list : List[(Real, Real)])
+  (dd_bounds_list : List[List[(Real, Real)]])
+  (df_bounds_list : List[(Real, Real)])
+  (dd_list : List[(Real, Real)])
+  (t : List[Real])
+  (x : List[Real])
+  (y : List[Real])
+  (z : List[Real])
+  (w : List[Real])
+  (yw : List[(Real, Real)])
+  (xz : List[(Real, Real)])
+  (xz : (Real, Real))
+  (yw : (Real, Real))
+  (list : List[(Real, Real)])
+  true
+  false
   _0
   0
   (+) : num->num->num
   (-) : num->num->num
   ( * ) : num->num->num
-  (=) : num->num->bool
+  (op_eq : (Num, Num) -> Bool)
   (<=) : num->num->bool
   (<) : num->num->bool
-  (DIV): num->num->num
-  PRE: num->num
-  SUC : num->num
-  []:(real)list
-  (+) : real->real->real
-  ( * ) : real->real->real
-  (-) : real->real->real
-  (/) :real->real->real
-  inv : real->real
-  (--) : real->real
-  (=) : real->real->bool
-  (<) : real->real->bool
-  (<=):real->real->bool
-  (>=):real->real->bool
-  (&) : num->real
-  (pow) : real->num->real
+  DIV
+  PRE
+  SUC
+  (NIL : List[Real])
+  real_add
+  real_mul
+  real_sub
+  real_div
+  real_inv
+  real_neg
+  (op_eq : (Real, Real) -> Bool)
+  op_lt
+  op_lt_eq
+  op_gt_eq
+  real_of_num
+  real_pow
   :real
   :(real)list
   :real#real
