@@ -80028,1308 +80028,1308 @@ test "100/fourier matches 100/fourier.ml" {
       #|0..0..1..2..3..solved at 8
       #|0..0..1..2..3..solved at 8
       #|100/fourier quotations (1302):
-      #|  forall n. sum(0..n) (\\r. &r) = (&n * (&n + &1)) / &2
-      #|  a /\\ b /\\ (a /\\ b ==> c) ==> a /\\ b /\\ c
-      #|  forall f a. f real_integrable_on real_interval[--a,a]\n         ==> f real_integrable_on real_interval[&0,a] /\\\n             (\\x. f(--x)) real_integrable_on real_interval[&0,a] /\\\n             (\\x. f x + f(--x)) real_integrable_on real_interval[&0,a]
-      #|  ~(&0 <= a) ==> a <= --a /\\ a <= &0
-      #|  &0:real
-      #|  a:real
-      #|  --a:real
-      #|  f:real->real
-      #|  &0 <= a
-      #|  forall f a. f real_integrable_on real_interval[--a,a]\n         ==> real_integral (real_interval[--a,a]) f =\n             real_integral (real_interval[&0,a])\n                           (\\x. f x + f(--x))
-      #|  f square_integrable_on s <=>\n     f real_measurable_on s /\\ (\\x. f(x) pow 2) real_integrable_on s
-      #|  forall f s. f square_integrable_on s ==> f real_measurable_on s
-      #|  forall f s. f square_integrable_on s <=>\n         (lift o f o drop) IN lspace (IMAGE lift s) (&2)
-      #|  forall s. (\\x. &0) square_integrable_on s
-      #|  forall f s. (\\x. --(f x)) square_integrable_on s <=> f square_integrable_on s
-      #|  forall f s. f square_integrable_on s ==> (\\x. --(f x)) square_integrable_on s
-      #|  forall f s c. f square_integrable_on s ==> (\\x. c * f(x)) square_integrable_on s
-      #|  forall f s c. f square_integrable_on s ==> (\\x. f(x) * c) square_integrable_on s
-      #|  lift o g o drop
-      #|  lift o f o drop
-      #|  &2
-      #|  &2
-      #|  IMAGE lift s
-      #|  forall f g s. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (\\x. f(x) * g(x)) absolutely_real_integrable_on s
-      #|  forall f g s. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (\\x. f(x) * g(x)) real_integrable_on s
-      #|  (x + y) pow 2 = (x pow 2 + y pow 2) + &2 * x * y
-      #|  forall f g s. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (\\x. f(x) + g(x)) square_integrable_on s
-      #|  forall f g s. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (\\x. f(x) - g(x)) square_integrable_on s
-      #|  forall f g s. f square_integrable_on s ==> (\\x. abs(f x)) square_integrable_on s
-      #|  forall f s t. FINITE t /\\ (forall i. i IN t ==> (f i) square_integrable_on s)\n           ==> (\\x. sum t (\\i. f i x)) square_integrable_on s
-      #|  forall f a b. f real_continuous_on real_interval[a,b]\n           ==> f square_integrable_on real_interval[a,b]
-      #|  &2
-      #|  forall f s. f square_integrable_on s /\\ real_measurable s\n         ==> f absolutely_real_integrable_on s
-      #|  forall f s. f square_integrable_on s /\\ real_measurable s\n         ==> f real_integrable_on s
-      #|  l2product s f g = real_integral s (\\x. f(x) * g(x))
-      #|  l2norm s f = sqrt(l2product s f f)
-      #|  forall f s. f square_integrable_on s\n         ==> l2norm s f = lnorm (IMAGE lift s) (&2) (lift o f o drop)
-      #|  forall s f g. l2product s f g = l2product s g f
-      #|  forall s f. f square_integrable_on s ==> &0 <= l2product s f f
-      #|  forall s f. f square_integrable_on s ==> (l2norm s f) pow 2 = l2product s f f
-      #|  forall s f. f square_integrable_on s ==> &0 <= l2norm s f
-      #|  forall s f g. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (l2norm s f <= l2norm s g <=>\n                l2product s f f <= l2product s g g)
-      #|  forall s f g. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (l2norm s f = l2norm s g <=>\n                l2product s f f = l2product s g g)
-      #|  lift o g o drop
-      #|  lift o f o drop
-      #|  &2
-      #|  &2
-      #|  IMAGE lift s
-      #|  forall f g s. f square_integrable_on s /\\\n           g square_integrable_on s\n           ==> l2product s (\\x. abs(f x)) (\\x. abs(g x))\n               <= l2norm s f * l2norm s g
-      #|  l2product s (\\x. abs(f x)) (\\x. abs(g x))
-      #|  forall f g s. f square_integrable_on s /\\\n           g square_integrable_on s\n           ==> abs(l2product s f g) <= l2norm s f * l2norm s g
-      #|  abs x <= a ==> x <= a
-      #|  forall f g s. f square_integrable_on s /\\\n           g square_integrable_on s\n           ==> l2product s f g <= l2norm s f * l2norm s g
-      #|  lift o g o drop
-      #|  lift o f o drop
-      #|  &2
-      #|  IMAGE lift s
-      #|  forall f g s. f square_integrable_on s /\\\n           g square_integrable_on s\n           ==> l2norm s (\\x. f x + g x) <= l2norm s f + l2norm s g
-      #|  forall s f g h.\n        f square_integrable_on s /\\\n        g square_integrable_on s /\\\n        h square_integrable_on s\n        ==> l2product s (\\x. f x + g x) h =\n            l2product s f h + l2product s g h
-      #|  forall s f g h.\n        f square_integrable_on s /\\\n        g square_integrable_on s /\\\n        h square_integrable_on s\n        ==> l2product s f (\\x. g x + h x) =\n            l2product s f g + l2product s f h
-      #|  forall s f g h.\n        f square_integrable_on s /\\\n        g square_integrable_on s /\\\n        h square_integrable_on s\n        ==> l2product s (\\x. f x - g x) h =\n            l2product s f h - l2product s g h
-      #|  forall s f g h.\n        f square_integrable_on s /\\\n        g square_integrable_on s /\\\n        h square_integrable_on s\n        ==> l2product s f (\\x. g x - h x) =\n            l2product s f g - l2product s f h
-      #|  forall s f. l2product s (\\x. &0) f = &0
-      #|  forall s f. l2product s f (\\x. &0) = &0
-      #|  g square_integrable_on s
-      #|  forall s f g t.\n        FINITE t /\\ (forall i. i IN t ==> (f i) square_integrable_on s) /\\\n        g square_integrable_on s\n        ==> l2product s (\\x. sum t (\\i. f i x)) g =\n            sum t (\\i. l2product s (f i) g)
-      #|  forall s f g t.\n        FINITE t /\\ (forall i. i IN t ==> (f i) square_integrable_on s) /\\\n        g square_integrable_on s\n        ==> l2product s g (\\x. sum t (\\i. f i x)) =\n            sum t (\\i. l2product s g (f i))
-      #|  forall s c f g.\n        f square_integrable_on s /\\ g square_integrable_on s\n        ==> l2product s (\\x. c * f x) g = c * l2product s f g
-      #|  forall s c f g.\n        f square_integrable_on s /\\ g square_integrable_on s\n        ==> l2product s f (\\x. c * g x) = c * l2product s f g
-      #|  forall f s c. f square_integrable_on s\n           ==> l2norm s (\\x. c * f(x)) = abs(c) * l2norm s f
-      #|  forall f s c. f square_integrable_on s\n           ==> l2norm s (\\x. f(x) * c) = l2norm s f * abs(c)
-      #|  --x:real = --(&1) * x
-      #|  forall f s. f square_integrable_on s ==> l2norm s (\\x. --(f x)) = l2norm s f
-      #|  forall f g s.  f square_integrable_on s /\\ g square_integrable_on s\n        ==> l2norm s (\\x. f x - g x) = l2norm s (\\x. g x - f x)
-      #|  forall f. (\\x. lift(f(drop x))) = (lift o f o drop)
-      #|  h square_integrable_on s
-      #|  h = drop o g o lift
-      #|  g = (lift o (drop o g o lift) o drop)
-      #|  g:real^1->real^1
-      #|  n:num
-      #|  N:num
-      #|  e:real
-      #|  x:real
-      #|  real_summable t (\\i. l2norm s (f i))
-      #|  t:num->bool
-      #|  IMAGE lift s
-      #|  &2
-      #|  \\n:num. (lift o f n o drop)
-      #|  forall f s t.\n     (forall i. i IN t ==> (f i) square_integrable_on s) /\\\n     real_summable t (\\i. l2norm s (f i))\n     ==> ?g. g square_integrable_on s /\\\n             ((\\n. l2norm s (\\x. sum (t INTER (0..n)) (\\i. f i x) - g x))\n              ---> &0) sequentially
-      #|  h:real->real
-      #|  &0 <= x ==> abs(x - &0) = x
-      #|  forall f g. (\\x. (lift o f o drop) x - (lift o g o drop) x) =\n                       (lift o (\\y. f y - g y) o drop)
-      #|  h square_integrable_on s
-      #|  h = drop o g o lift
-      #|  g = (lift o (drop o g o lift) o drop)
-      #|  g:real^1->real^1
-      #|  IMAGE lift s
-      #|  &2
-      #|  \\n:num. lift o f n o drop
-      #|  forall f s. (forall i. f i square_integrable_on s) /\\\n         (forall e. &0 < e ==> ?N. forall m n. m >= N /\\ n >= N\n                                   ==> l2norm s (\\x. f m x - f n x) < e)\n         ==> ?g. g square_integrable_on s /\\\n                 ((\\n. l2norm s (\\x. f n x - g x)) ---> &0) sequentially
-      #|  h:real->real
-      #|  x < e ==> x = y ==> y < e
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  drop o g o lift
-      #|  g:real^1->real^1
-      #|  e:real
-      #|  &2:real
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  forall f s e. real_measurable s /\\ f square_integrable_on s /\\ &0 < e\n           ==> ?g. g real_continuous_on (:real) /\\\n                   g square_integrable_on s /\\\n                   l2norm s (\\x. f x - g x) < e
-      #|  abs x <= x <=> &0 <= x
-      #|  forall f s. real_measurable s /\\ f square_integrable_on s\n         ==> f absolutely_real_integrable_on s /\\\n             (real_integral s f) pow 2\n             <= real_measure s * real_integral s (\\x. f x pow 2)
-      #|  orthonormal_system s w <=>\n        forall m n. l2product s (w m) (w n) = if m = n then &1 else &0
-      #|  orthonormal_coefficient s w f (n:num) = l2product s (w n) f
-      #|  forall s w. orthonormal_system s w ==> forall i. l2norm s (w i) = &1
-      #|  x' = x /\\ b - &2 * x = c ==> a - x - (x' - b) = a + c
-      #|  (\\x. sum t (\\i:num. a i * w i x)) square_integrable_on s
-      #|  forall s w a f t.\n        orthonormal_system s w /\\ (forall i. (w i) square_integrable_on s) /\\\n        f square_integrable_on s /\\ FINITE t\n        ==> l2norm s (\\x. f(x) - sum t (\\i. a i * w i x)) pow 2 =\n            (l2norm s f) pow 2 + sum t (\\i. (a i) pow 2) -\n            &2 * sum t (\\i. a i * orthonormal_coefficient s w f i)
-      #|  b pow 2 - &2 * b * b <= a pow 2 - &2 * a * b <=> &0 <= (a - b) pow 2
-      #|  forall s w a f t.\n        orthonormal_system s w /\\ (forall i. (w i) square_integrable_on s) /\\\n        f square_integrable_on s /\\ FINITE t\n        ==>  l2norm s (\\x. f(x) -\n                           sum t (\\i. orthonormal_coefficient s w f i * w i x))\n             <= l2norm s (\\x. f(x) - sum t (\\i. a i * w i x))
-      #|  &0 <= p ==> p = x - y ==> y <= x
-      #|  a + b - &2 * b = a - b
-      #|  orthonormal_coefficient s w f
-      #|  forall s w f t.\n        orthonormal_system s w /\\ (forall i. (w i) square_integrable_on s) /\\\n        f square_integrable_on s /\\ FINITE t\n        ==> sum t (\\i. (orthonormal_coefficient s w f i) pow 2)\n             <= l2norm s f pow 2
-      #|  s SUBSET t ==> u INTER s SUBSET u INTER t
-      #|  &0 <= x /\\ x <= y ==> abs(x) <= y
-      #|  t INTER (0..n)
-      #|  f:real->real
-      #|  w:num->real->real
-      #|  s:real->bool
-      #|  n:num
-      #|  l2norm s f pow 2
-      #|  \\n. sum(t INTER (0..n)) (\\i. (orthonormal_coefficient s w f i) pow 2)
-      #|  forall s w f t.\n        orthonormal_system s w /\\ (forall i. (w i) square_integrable_on s) /\\\n        f square_integrable_on s\n        ==> real_summable t (\\i. (orthonormal_coefficient s w f i) pow 2)
-      #|  a + b - &2 * b = a - b
-      #|  orthonormal_coefficient s w f
-      #|  forall s w a f t.\n    orthonormal_system s w /\\ (forall i. (w i) square_integrable_on s) /\\\n    f square_integrable_on s /\\ FINITE t\n    ==> l2norm s (\\x. f x -\n                      sum t (\\i. orthonormal_coefficient s w f i * w i x))\n        pow 2 =\n        l2norm s f pow 2 - sum t (\\i. orthonormal_coefficient s w f i pow 2)
-      #|  x <= abs x
-      #|  x <= y ==> y < e ==> x < e
-      #|  (i:num) IN t
-      #|  i:num
-      #|  a - b:real = c <=> b + c = a
-      #|  h:num->real
-      #|  forall f. sum (t INTER (0..n)) f - sum (t INTER (0..m)) f =\n        sum (t INTER (m+1..n)) f
-      #|  m:num
-      #|  n:num
+      #|  \226\136\128 n : Num, sum(op_dot_dot(0, n), (r : Num) => real_of_num(r)) == real_of_num(n) * (real_of_num(n) + real_of_num(1)) / real_of_num(2)
+      #|  (a : Bool) && (b : Bool) && (a && b \226\134\146 (c : Bool)) \226\134\146 a && b && c
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, real_integrable_on(f, real_interval([(-a, a)])) \226\134\146 real_integrable_on(f, real_interval([(real_of_num(0), a)])) && real_integrable_on((x : Real) => f(-x), real_interval([(real_of_num(0), a)])) && real_integrable_on((x : Real) => f(x) + f(-x), real_interval([(real_of_num(0), a)]))
+      #|  !(real_of_num(0) <= (a : Real)) \226\134\146 a <= -a && a <= real_of_num(0)
+      #|  real_of_num(0)
+      #|  (a : Real)
+      #|  -(a : Real)
+      #|  (f : (Real) -> Real)
+      #|  real_of_num(0) <= (a : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, real_integrable_on(f, real_interval([(-a, a)])) \226\134\146 real_integral(real_interval([(-a, a)]), f) == real_integral(real_interval([(real_of_num(0), a)]), (x : Real) => f(x) + f(-x))
+      #|  (square_integrable_on : ((Real) -> Real, (Real) -> Bool) -> Bool)((f : (Real) -> Real), (s : (Real) -> Bool)) == (real_measurable_on(f, s) && real_integrable_on((x : Real) => pow(f(x), 2), s))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) \226\134\146 real_measurable_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) == IN(o(lift, o(f, drop)), lspace(IMAGE(lift, s), real_of_num(2)))
+      #|  \226\136\128 s : (Real) -> Bool, square_integrable_on((x : Real) => real_of_num(0), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on((x : Real) => -f(x), s) == square_integrable_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) \226\134\146 square_integrable_on((x : Real) => -f(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, square_integrable_on(f, s) \226\134\146 square_integrable_on((x : Real) => c * f(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, square_integrable_on(f, s) \226\134\146 square_integrable_on((x : Real) => f(x) * c, s)
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  real_of_num(2)
+      #|  real_of_num(2)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) && square_integrable_on(g, s) \226\134\146 absolutely_real_integrable_on((x : Real) => f(x) * g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) && square_integrable_on(g, s) \226\134\146 real_integrable_on((x : Real) => f(x) * g(x), s)
+      #|  pow((x : Real) + (y : Real), 2) == pow(x, 2) + pow(y, 2) + real_of_num(2) * (x * y)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) && square_integrable_on(g, s) \226\134\146 square_integrable_on((x : Real) => f(x) + g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) && square_integrable_on(g, s) \226\134\146 square_integrable_on((x : Real) => f(x) - g(x), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : _, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) \226\134\146 square_integrable_on((x : Real) => abs(f(x)), s)
+      #|  \226\136\128 f : (_, Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (_) -> Bool, FINITE(t) && (\226\136\128 i : _, IN(i, t) \226\134\146 square_integrable_on(f(i), s)) \226\134\146 square_integrable_on((x : Real) => sum(t, (i : _) => f(i, x)), s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_continuous_on(f, real_interval([(a, b)])) \226\134\146 square_integrable_on(f, real_interval([(a, b)]))
+      #|  real_of_num(2)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) && real_measurable(s) \226\134\146 absolutely_real_integrable_on(f, s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) && real_measurable(s) \226\134\146 real_integrable_on(f, s)
+      #|  (l2product : ((Real) -> Bool, (Real) -> Real, (Real) -> Real) -> Real)((s : (Real) -> Bool), (f : (Real) -> Real), (g : (Real) -> Real)) == real_integral(s, (x : Real) => f(x) * g(x))
+      #|  (l2norm : ((Real) -> Bool, (Real) -> Real) -> Real)((s : (Real) -> Bool), (f : (Real) -> Real)) == sqrt(l2product(s, f, f))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) \226\134\146 l2norm(s, f) == lnorm(IMAGE(lift, s), real_of_num(2), o(lift, o(f, drop)))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, l2product(s, f, g) == l2product(s, g, f)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Real) -> Real, square_integrable_on(f, s) \226\134\146 real_of_num(0) <= l2product(s, f, f)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Real) -> Real, square_integrable_on(f, s) \226\134\146 pow(l2norm(s, f), 2) == l2product(s, f, f)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Real) -> Real, square_integrable_on(f, s) \226\134\146 real_of_num(0) <= l2norm(s, f)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, square_integrable_on(f, s) && square_integrable_on(g, s) \226\134\146 (l2norm(s, f) <= l2norm(s, g)) == (l2product(s, f, f) <= l2product(s, g, g))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, square_integrable_on(f, s) && square_integrable_on(g, s) \226\134\146 (l2norm(s, f) == l2norm(s, g)) == (l2product(s, f, f) == l2product(s, g, g))
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  real_of_num(2)
+      #|  real_of_num(2)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) && square_integrable_on(g, s) \226\134\146 l2product(s, (x : Real) => abs(f(x)), (x : Real) => abs(g(x))) <= l2norm(s, f) * l2norm(s, g)
+      #|  l2product((s : (Real) -> Bool), (x : Real) => abs((f : (Real) -> Real)(x)), (x : Real) => abs((g : (Real) -> Real)(x)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) && square_integrable_on(g, s) \226\134\146 abs(l2product(s, f, g)) <= l2norm(s, f) * l2norm(s, g)
+      #|  abs((x : Real)) <= (a : Real) \226\134\146 x <= a
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) && square_integrable_on(g, s) \226\134\146 l2product(s, f, g) <= l2norm(s, f) * l2norm(s, g)
+      #|  o(lift, o((g : (Real) -> Real), drop))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  real_of_num(2)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) && square_integrable_on(g, s) \226\134\146 l2norm(s, (x : Real) => f(x) + g(x)) <= l2norm(s, f) + l2norm(s, g)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 h : (Real) -> Real, square_integrable_on(f, s) && square_integrable_on(g, s) && square_integrable_on(h, s) \226\134\146 l2product(s, (x : Real) => f(x) + g(x), h) == l2product(s, f, h) + l2product(s, g, h)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 h : (Real) -> Real, square_integrable_on(f, s) && square_integrable_on(g, s) && square_integrable_on(h, s) \226\134\146 l2product(s, f, (x : Real) => g(x) + h(x)) == l2product(s, f, g) + l2product(s, f, h)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 h : (Real) -> Real, square_integrable_on(f, s) && square_integrable_on(g, s) && square_integrable_on(h, s) \226\134\146 l2product(s, (x : Real) => f(x) - g(x), h) == l2product(s, f, h) - l2product(s, g, h)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 h : (Real) -> Real, square_integrable_on(f, s) && square_integrable_on(g, s) && square_integrable_on(h, s) \226\134\146 l2product(s, f, (x : Real) => g(x) - h(x)) == l2product(s, f, g) - l2product(s, f, h)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Real) -> Real, l2product(s, (x : Real) => real_of_num(0), f) == real_of_num(0)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (Real) -> Real, l2product(s, f, (x : Real) => real_of_num(0)) == real_of_num(0)
+      #|  square_integrable_on((g : (Real) -> Real), (s : (Real) -> Bool))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (_, Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 t : (_) -> Bool, FINITE(t) && (\226\136\128 i : _, IN(i, t) \226\134\146 square_integrable_on(f(i), s)) && square_integrable_on(g, s) \226\134\146 l2product(s, (x : Real) => sum(t, (i : _) => f(i, x)), g) == sum(t, (i : _) => l2product(s, f(i), g))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 f : (_, Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 t : (_) -> Bool, FINITE(t) && (\226\136\128 i : _, IN(i, t) \226\134\146 square_integrable_on(f(i), s)) && square_integrable_on(g, s) \226\134\146 l2product(s, g, (x : Real) => sum(t, (i : _) => f(i, x))) == sum(t, (i : _) => l2product(s, g, f(i)))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, square_integrable_on(f, s) && square_integrable_on(g, s) \226\134\146 l2product(s, (x : Real) => c * f(x), g) == c * l2product(s, f, g)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, square_integrable_on(f, s) && square_integrable_on(g, s) \226\134\146 l2product(s, f, (x : Real) => c * g(x)) == c * l2product(s, f, g)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, square_integrable_on(f, s) \226\134\146 l2norm(s, (x : Real) => c * f(x)) == abs(c) * l2norm(s, f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, square_integrable_on(f, s) \226\134\146 l2norm(s, (x : Real) => f(x) * c) == l2norm(s, f) * abs(c)
+      #|  -(x : Real) == -real_of_num(1) * x
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) \226\134\146 l2norm(s, (x : Real) => -f(x)) == l2norm(s, f)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, square_integrable_on(f, s) && square_integrable_on(g, s) \226\134\146 l2norm(s, (x : Real) => f(x) - g(x)) == l2norm(s, (x : Real) => g(x) - f(x))
+      #|  \226\136\128 f : (Real) -> Real, ((x : Cart[Real, Unit]) => lift(f(drop(x)))) == o(lift, o(f, drop))
+      #|  square_integrable_on((h : (Real) -> Real), (s : (Real) -> Bool))
+      #|  (h : (Real) -> Real) == o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Unit]) == o(lift, o(o(drop, o(g, lift)), drop))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (x : Real)
+      #|  real_summable((t : (Num) -> Bool), (i : Num) => l2norm((s : (Real) -> Bool), (f : (Num, Real) -> Real)(i)))
+      #|  (t : (Num) -> Bool)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  real_of_num(2)
+      #|  (n : Num) => o(lift, o((f : (Num, Real) -> Real)(n), drop))
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Num) -> Bool, (\226\136\128 i : Num, IN(i, t) \226\134\146 square_integrable_on(f(i), s)) && real_summable(t, (i : Num) => l2norm(s, f(i))) \226\134\146 (\226\136\131 g : (Real) -> Real, square_integrable_on(g, s) && op_minus_minus_minus_gt((n : Num) => l2norm(s, (x : Real) => sum(INTER(t, op_dot_dot(0, n)), (i : Num) => f(i, x)) - g(x)), real_of_num(0), sequentially))
+      #|  (h : (Real) -> Real)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x - real_of_num(0)) == x
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, ((x : Cart[Real, Unit]) => o(lift, o(f, drop), x) - o(lift, o(g, drop), x)) == o(lift, o((y : Real) => f(y) - g(y), drop))
+      #|  square_integrable_on((h : (Real) -> Real), (s : (Real) -> Bool))
+      #|  (h : (Real) -> Real) == o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Unit]) == o(lift, o(o(drop, o(g, lift)), drop))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  real_of_num(2)
+      #|  (n : Num) => o(lift, o((f : (Num, Real) -> Real)(n), drop))
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 i : Num, square_integrable_on(f(i), s)) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 m : Num, \226\136\128 n : Num, m >= N && n >= N \226\134\146 l2norm(s, (x : Real) => f(m, x) - f(n, x)) < e)) \226\134\146 (\226\136\131 g : (Real) -> Real, square_integrable_on(g, s) && op_minus_minus_minus_gt((n : Num) => l2norm(s, (x : Real) => f(n, x) - g(x)), real_of_num(0), sequentially))
+      #|  (h : (Real) -> Real)
+      #|  (x : Real) < (e : Real) \226\134\146 x == (y : Real) \226\134\146 y < e
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  (e : Real)
+      #|  real_of_num(2)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 e : Real, real_measurable(s) && square_integrable_on(f, s) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Real) -> Real, real_continuous_on(g, UNIV) && square_integrable_on(g, s) && l2norm(s, (x : Real) => f(x) - g(x)) < e)
+      #|  (abs((x : Real)) <= x) == (real_of_num(0) <= x)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_measurable(s) && square_integrable_on(f, s) \226\134\146 absolutely_real_integrable_on(f, s) && pow(real_integral(s, f), 2) <= real_measure(s) * real_integral(s, (x : Real) => pow(f(x), 2))
+      #|  (orthonormal_system : ((Real) -> Bool, (_, Real) -> Real) -> Bool)((s : (Real) -> Bool), (w : (_, Real) -> Real)) == (\226\136\128 m : _, \226\136\128 n : _, l2product(s, w(m), w(n)) == (if m == n { real_of_num(1) } else { real_of_num(0) }))
+      #|  (orthonormal_coefficient : ((Real) -> Bool, (Num, Real) -> Real, (Real) -> Real, Num) -> Real)((s : (Real) -> Bool), (w : (Num, Real) -> Real), (f : (Real) -> Real), (n : Num)) == l2product(s, w(n), f)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 w : (_, Real) -> Real, orthonormal_system(s, w) \226\134\146 (\226\136\128 i : _, l2norm(s, w(i)) == real_of_num(1))
+      #|  (x' : Real) == (x : Real) && (b : Real) - real_of_num(2) * x == (c : Real) \226\134\146 (a : Real) - x - (x' - b) == a + c
+      #|  square_integrable_on((x : Real) => sum((t : (Num) -> Bool), (i : Num) => (a : (Num) -> Real)(i) * (w : (Num, Real) -> Real)(i, x)), (s : (Real) -> Bool))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 w : (Num, Real) -> Real, \226\136\128 a : (Num) -> Real, \226\136\128 f : (Real) -> Real, \226\136\128 t : (Num) -> Bool, orthonormal_system(s, w) && (\226\136\128 i : Num, square_integrable_on(w(i), s)) && square_integrable_on(f, s) && FINITE(t) \226\134\146 pow(l2norm(s, (x : Real) => f(x) - sum(t, (i : Num) => a(i) * w(i, x))), 2) == pow(l2norm(s, f), 2) + (sum(t, (i : Num) => pow(a(i), 2)) - real_of_num(2) * sum(t, (i : Num) => a(i) * orthonormal_coefficient(s, w, f, i)))
+      #|  (pow((b : Real), 2) - real_of_num(2) * (b * b) <= pow((a : Real), 2) - real_of_num(2) * (a * b)) == (real_of_num(0) <= pow(a - b, 2))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 w : (Num, Real) -> Real, \226\136\128 a : (Num) -> Real, \226\136\128 f : (Real) -> Real, \226\136\128 t : (Num) -> Bool, orthonormal_system(s, w) && (\226\136\128 i : Num, square_integrable_on(w(i), s)) && square_integrable_on(f, s) && FINITE(t) \226\134\146 l2norm(s, (x : Real) => f(x) - sum(t, (i : Num) => orthonormal_coefficient(s, w, f, i) * w(i, x))) <= l2norm(s, (x : Real) => f(x) - sum(t, (i : Num) => a(i) * w(i, x)))
+      #|  real_of_num(0) <= (p : Real) \226\134\146 p == (x : Real) - (y : Real) \226\134\146 y <= x
+      #|  (a : Real) + ((b : Real) - real_of_num(2) * b) == a - b
+      #|  orthonormal_coefficient((s : (Real) -> Bool), (w : (Num, Real) -> Real), (f : (Real) -> Real))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 w : (Num, Real) -> Real, \226\136\128 f : (Real) -> Real, \226\136\128 t : (Num) -> Bool, orthonormal_system(s, w) && (\226\136\128 i : Num, square_integrable_on(w(i), s)) && square_integrable_on(f, s) && FINITE(t) \226\134\146 sum(t, (i : Num) => pow(orthonormal_coefficient(s, w, f, i), 2)) <= pow(l2norm(s, f), 2)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(INTER((u : (_) -> Bool), s), INTER(u, t))
+      #|  real_of_num(0) <= (x : Real) && x <= (y : Real) \226\134\146 abs(x) <= y
+      #|  INTER((t : (Num) -> Bool), op_dot_dot(0, (n : Num)))
+      #|  (f : (Real) -> Real)
+      #|  (w : (Num, Real) -> Real)
+      #|  (s : (Real) -> Bool)
+      #|  (n : Num)
+      #|  pow(l2norm((s : (Real) -> Bool), (f : (Real) -> Real)), 2)
+      #|  (n : Num) => sum(INTER((t : (Num) -> Bool), op_dot_dot(0, n)), (i : Num) => pow(orthonormal_coefficient((s : (Real) -> Bool), (w : (Num, Real) -> Real), (f : (Real) -> Real), i), 2))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 w : (Num, Real) -> Real, \226\136\128 f : (Real) -> Real, \226\136\128 t : (Num) -> Bool, orthonormal_system(s, w) && (\226\136\128 i : Num, square_integrable_on(w(i), s)) && square_integrable_on(f, s) \226\134\146 real_summable(t, (i : Num) => pow(orthonormal_coefficient(s, w, f, i), 2))
+      #|  (a : Real) + ((b : Real) - real_of_num(2) * b) == a - b
+      #|  orthonormal_coefficient((s : (Real) -> Bool), (w : (Num, Real) -> Real), (f : (Real) -> Real))
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 w : (Num, Real) -> Real, \226\136\128 a : _, \226\136\128 f : (Real) -> Real, \226\136\128 t : (Num) -> Bool, orthonormal_system(s, w) && (\226\136\128 i : Num, square_integrable_on(w(i), s)) && square_integrable_on(f, s) && FINITE(t) \226\134\146 pow(l2norm(s, (x : Real) => f(x) - sum(t, (i : Num) => orthonormal_coefficient(s, w, f, i) * w(i, x))), 2) == pow(l2norm(s, f), 2) - sum(t, (i : Num) => pow(orthonormal_coefficient(s, w, f, i), 2))
+      #|  (x : Real) <= abs(x)
+      #|  (x : Real) <= (y : Real) \226\134\146 y < (e : Real) \226\134\146 x < e
+      #|  IN((i : Num), (t : (Num) -> Bool))
+      #|  (i : Num)
+      #|  ((a : Real) - (b : Real) == (c : Real)) == (b + c == a)
+      #|  (h : (Num) -> Real)
+      #|  \226\136\128 f : (Num) -> Real, sum(INTER((t : (Num) -> Bool), op_dot_dot(0, (n : Num))), f) - sum(INTER(t, op_dot_dot(0, (m : Num))), f) == sum(INTER(t, op_dot_dot(m + 1, n)), f)
+      #|  (m : Num)
+      #|  (n : Num)
       #|  2
-      #|  N:num <= n
-      #|  N:num <= m
-      #|  n:num
-      #|  m:num
-      #|  N:num
-      #|  (e:real) pow 2
-      #|  t:num->bool
-      #|  e:real
-      #|  forall s w f t.\n    orthonormal_system s w /\\ (forall i. (w i) square_integrable_on s) /\\\n    f square_integrable_on s\n    ==> ?g. g square_integrable_on s /\\\n            ((\\n. l2norm s\n                    (\\x. sum (t INTER (0..n))\n                             (\\i. orthonormal_coefficient s w f i * w i x) -\n                         g(x))) ---> &0) sequentially
-      #|  n:num
-      #|  j:num
-      #|  i:num
-      #|  \\n. l2product s (w i)\n     (\\x. (f x - sum (t INTER (0..n)) (\\i. l2product s (w i) f * w i x)) +\n          (sum (t INTER (0..n)) (\\i. l2product s (w i) f * w i x) - g x))
+      #|  (N : Num) <= (n : Num)
+      #|  (N : Num) <= (m : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (N : Num)
+      #|  pow((e : Real), 2)
+      #|  (t : (Num) -> Bool)
+      #|  (e : Real)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 w : (Num, Real) -> Real, \226\136\128 f : (Real) -> Real, \226\136\128 t : (Num) -> Bool, orthonormal_system(s, w) && (\226\136\128 i : Num, square_integrable_on(w(i), s)) && square_integrable_on(f, s) \226\134\146 (\226\136\131 g : (Real) -> Real, square_integrable_on(g, s) && op_minus_minus_minus_gt((n : Num) => l2norm(s, (x : Real) => sum(INTER(t, op_dot_dot(0, n)), (i : Num) => orthonormal_coefficient(s, w, f, i) * w(i, x)) - g(x)), real_of_num(0), sequentially))
+      #|  (n : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (n : Num) => l2product((s : (Real) -> Bool), (w : (Num, Real) -> Real)((i : Num)), (x : Real) => (f : (Real) -> Real)(x) - sum(INTER((t : (Num) -> Bool), op_dot_dot(0, n)), (i : Num) => l2product(s, w(i), f) * w(i, x)) + (sum(INTER(t, op_dot_dot(0, n)), (i : Num) => l2product(s, w(i), f) * w(i, x)) - (g : (Real) -> Real)(x)))
       #|  sequentially
-      #|  i:num
-      #|  g:real->real
-      #|  t:num->bool
-      #|  forall s w f t.\n    orthonormal_system s w /\\ (forall i. (w i) square_integrable_on s) /\\\n    f square_integrable_on s\n    ==> ?g. g square_integrable_on s /\\\n            (forall i. i IN t\n                 ==> orthonormal_coefficient s w (\\x. f x - g x) i = &0) /\\\n            ((\\n. l2norm s\n                   (\\x. sum (t INTER (0..n))\n                            (\\i. orthonormal_coefficient s w f i * w i x) -\n                        g(x))) ---> &0) sequentially
-      #|  x:real
-      #|  &0 <= pi ==> --pi <= pi
+      #|  (i : Num)
+      #|  (g : (Real) -> Real)
+      #|  (t : (Num) -> Bool)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 w : (Num, Real) -> Real, \226\136\128 f : (Real) -> Real, \226\136\128 t : (Num) -> Bool, orthonormal_system(s, w) && (\226\136\128 i : Num, square_integrable_on(w(i), s)) && square_integrable_on(f, s) \226\134\146 (\226\136\131 g : (Real) -> Real, square_integrable_on(g, s) && (\226\136\128 i : Num, IN(i, t) \226\134\146 orthonormal_coefficient(s, w, (x : Real) => f(x) - g(x), i) == real_of_num(0)) && op_minus_minus_minus_gt((n : Num) => l2norm(s, (x : Real) => sum(INTER(t, op_dot_dot(0, n)), (i : Num) => orthonormal_coefficient(s, w, f, i) * w(i, x)) - g(x)), real_of_num(0), sequentially))
+      #|  (x : Real)
+      #|  real_of_num(0) <= pi \226\134\146 -pi <= pi
       #|  pi
-      #|  --pi
-      #|  \\x. sin(&n * x)
-      #|  \\x. --(inv(&n) * cos(&n * x))
-      #|  n = 0
-      #|  forall n. ((\\x. sin(&n * x)) has_real_integral &0) (real_interval[--pi,pi])
-      #|  forall c. (\\x. sin(c * x)) real_integrable_on real_interval[--pi,pi]
-      #|  forall n. real_integral (real_interval[--pi,pi]) (\\x. sin(&n * x)) = &0
-      #|  x:real
-      #|  &0 <= pi ==> --pi <= pi
+      #|  -pi
+      #|  (x : Real) => sin(real_of_num((n : Num)) * x)
+      #|  (x : Real) => -(inv(real_of_num((n : Num))) * cos(real_of_num(n) * x))
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, has_real_integral((x : Real) => sin(real_of_num(n) * x), real_of_num(0), real_interval([(-pi, pi)]))
+      #|  \226\136\128 c : Real, real_integrable_on((x : Real) => sin(c * x), real_interval([(-pi, pi)]))
+      #|  \226\136\128 n : Num, real_integral(real_interval([(-pi, pi)]), (x : Real) => sin(real_of_num(n) * x)) == real_of_num(0)
+      #|  (x : Real)
+      #|  real_of_num(0) <= pi \226\134\146 -pi <= pi
       #|  pi
-      #|  --pi
-      #|  \\x. cos(&n * x)
-      #|  \\x. inv(&n) * sin(&n * x)
-      #|  &2 * pi = &1 * (pi - --pi)
-      #|  n = 0
-      #|  forall n. ((\\x. cos(&n * x)) has_real_integral (if n = 0 then &2 * pi else &0))\n       (real_interval[--pi,pi])
-      #|  forall c. (\\x. cos(c * x)) real_integrable_on real_interval[--pi,pi]
-      #|  forall n. real_integral (real_interval[--pi,pi]) (\\x. cos(&n * x)) =\n       if n = 0 then &2 * pi else &0
-      #|  (a + a) * inv(&2) = a
-      #|  n = 0
-      #|  n:num <= m ==> (m - n = 0 <=> m = n)
-      #|  m:num
-      #|  n:num
-      #|  forall m n. real_integral (real_interval[--pi,pi])\n           (\\x. cos(&m * x) * cos(&n * x)) =\n                (if m = n then if n = 0 then &2 * pi else pi else &0) /\\\n         real_integral (real_interval[--pi,pi])\n           (\\x. cos(&m * x) * sin(&n * x)) = &0 /\\\n         real_integral (real_interval[--pi,pi])\n           (\\x. sin(&m * x) * cos(&n * x)) = &0 /\\\n         real_integral (real_interval[--pi,pi])\n           (\\x. sin(&m * x) * sin(&n * x)) =\n              (if m = n /\\ ~(n = 0) then pi else &0)
-      #|  forall m n a b.\n      (\\x. cos(&m * x) * cos(&n * x)) real_integrable_on real_interval[a,b] /\\\n      (\\x. cos(&m * x) * sin(&n * x)) real_integrable_on real_interval[a,b] /\\\n      (\\x. sin(&m * x) * cos(&n * x)) real_integrable_on real_interval[a,b] /\\\n      (\\x. sin(&m * x) * sin(&n * x)) real_integrable_on real_interval[a,b]
-      #|  trigonometric_set n =\n    if n = 0 then \\x. &1 / sqrt(&2 * pi)\n    else if ODD n then \\x. sin(&(n DIV 2 + 1) * x) / sqrt(pi)\n    else \\x. cos(&(n DIV 2) * x) / sqrt(pi)
-      #|  (2 * n + 2) DIV 2 = n + 1
-      #|  (2 * n + 1) DIV 2 = n
-      #|  trigonometric_set 0 = (\\x. cos(&0 * x) / sqrt(&2 * pi)) /\\\n   trigonometric_set (2 * n + 1) = (\\x. sin(&(n + 1) * x) / sqrt(pi)) /\\\n   trigonometric_set (2 * n + 2) = (\\x. cos(&(n + 1) * x) / sqrt(pi))
-      #|  2 * SUC k = 2 * k + 2
-      #|  forall k. trigonometric_set(2 * k) =\n        if k = 0 then \\x. &1 / sqrt(&2 * pi)\n        else \\x. cos(&k * x) / sqrt pi
-      #|  SUC(2 * n) = 2 * n + 1 /\\ SUC(2 * n + 1) = 2 * n + 2
-      #|  n:num
-      #|  n:num
-      #|  (forall n:num. P 0) /\\ (forall n. P(2 * n + 1)) /\\ (forall n. P(2 * n + 2)) ==> forall n. P n
-      #|  0 = a + b <=> a = 0 /\\ b = 0
-      #|  F ==> p
-      #|  m:num = n
-      #|  a / k * b / l:real = (inv(k) * inv(l)) * a * b
-      #|  n:num
-      #|  m:num
-      #|  orthonormal_system (real_interval[--pi,pi]) trigonometric_set
-      #|  forall i. (trigonometric_set i) square_integrable_on real_interval[--pi,pi]
-      #|  norm(z:complex) = &1
-      #|  (x + pi) + pi = x + &2 * pi
-      #|  w = Cx(&0)
-      #|  w:complex
-      #|  &1
-      #|  Cx o f o (\\x. x + pi) o Im o clog o (--)
-      #|  &0 <= Re z \\/ Re z < &0
-      #|  forall f. f real_continuous_on (:real) /\\ (forall x. f(x + &2 * pi) = f x)\n         ==> forall z. norm z = &1\n                 ==> (f o Im o clog) real_continuous\n                     at z within {w | norm w = &1}
-      #|  w = Cx(&0)
-      #|  w:complex
-      #|  &1
-      #|  a /\\ b /\\ c /\\ d ==> e <=> a /\\ b /\\ c ==> d ==> e
-      #|  z:complex
-      #|  g:real->real
-      #|  g:real->real
-      #|  pi - --pi = &2 * pi
+      #|  -pi
+      #|  (x : Real) => cos(real_of_num((n : Num)) * x)
+      #|  (x : Real) => inv(real_of_num((n : Num))) * sin(real_of_num(n) * x)
+      #|  real_of_num(2) * pi == real_of_num(1) * (pi - -pi)
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, has_real_integral((x : Real) => cos(real_of_num(n) * x), if n == 0 { real_of_num(2) * pi } else { real_of_num(0) }, real_interval([(-pi, pi)]))
+      #|  \226\136\128 c : Real, real_integrable_on((x : Real) => cos(c * x), real_interval([(-pi, pi)]))
+      #|  \226\136\128 n : Num, real_integral(real_interval([(-pi, pi)]), (x : Real) => cos(real_of_num(n) * x)) == (if n == 0 { real_of_num(2) * pi } else { real_of_num(0) })
+      #|  ((a : Real) + a) * inv(real_of_num(2)) == a
+      #|  (n : Num) == 0
+      #|  (n : Num) <= (m : Num) \226\134\146 (m - n == 0) == (m == n)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, real_integral(real_interval([(-pi, pi)]), (x : Real) => cos(real_of_num(m) * x) * cos(real_of_num(n) * x)) == (if m == n { if n == 0 { real_of_num(2) * pi } else { pi } } else { real_of_num(0) }) && real_integral(real_interval([(-pi, pi)]), (x : Real) => cos(real_of_num(m) * x) * sin(real_of_num(n) * x)) == real_of_num(0) && real_integral(real_interval([(-pi, pi)]), (x : Real) => sin(real_of_num(m) * x) * cos(real_of_num(n) * x)) == real_of_num(0) && real_integral(real_interval([(-pi, pi)]), (x : Real) => sin(real_of_num(m) * x) * sin(real_of_num(n) * x)) == (if m == n && !(n == 0) { pi } else { real_of_num(0) })
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on((x : Real) => cos(real_of_num(m) * x) * cos(real_of_num(n) * x), real_interval([(a, b)])) && real_integrable_on((x : Real) => cos(real_of_num(m) * x) * sin(real_of_num(n) * x), real_interval([(a, b)])) && real_integrable_on((x : Real) => sin(real_of_num(m) * x) * cos(real_of_num(n) * x), real_interval([(a, b)])) && real_integrable_on((x : Real) => sin(real_of_num(m) * x) * sin(real_of_num(n) * x), real_interval([(a, b)]))
+      #|  (trigonometric_set : (Num, Real) -> Real)((n : Num)) == (if n == 0 { (x : Real) => real_of_num(1) / sqrt(real_of_num(2) * pi) } else { if ODD(n) { (x : Real) => sin(real_of_num(DIV(n, 2) + 1) * x) / sqrt(pi) } else { (x : Real) => cos(real_of_num(DIV(n, 2)) * x) / sqrt(pi) } })
+      #|  DIV(2 * (n : Num) + 2, 2) == n + 1
+      #|  DIV(2 * (n : Num) + 1, 2) == n
+      #|  trigonometric_set(0) == ((x : Real) => cos(real_of_num(0) * x) / sqrt(real_of_num(2) * pi)) && trigonometric_set(2 * (n : Num) + 1) == ((x : Real) => sin(real_of_num(n + 1) * x) / sqrt(pi)) && trigonometric_set(2 * n + 2) == ((x : Real) => cos(real_of_num(n + 1) * x) / sqrt(pi))
+      #|  2 * SUC((k : Num)) == 2 * k + 2
+      #|  \226\136\128 k : Num, trigonometric_set(2 * k) == (if k == 0 { (x : Real) => real_of_num(1) / sqrt(real_of_num(2) * pi) } else { (x : Real) => cos(real_of_num(k) * x) / sqrt(pi) })
+      #|  SUC(2 * (n : Num)) == 2 * n + 1 && SUC(2 * n + 1) == 2 * n + 2
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (\226\136\128 n : Num, (P : (Num) -> Bool)(0)) && (\226\136\128 n : Num, P(2 * n + 1)) && (\226\136\128 n : Num, P(2 * n + 2)) \226\134\146 (\226\136\128 n : Num, P(n))
+      #|  (0 == (a : Num) + (b : Num)) == (a == 0 && b == 0)
+      #|  false \226\134\146 (p : Bool)
+      #|  (m : Num) == (n : Num)
+      #|  (a : Real) / (k : Real) * ((b : Real) / (l : Real)) == inv(k) * inv(l) * (a * b)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  orthonormal_system(real_interval([(-pi, pi)]), trigonometric_set)
+      #|  \226\136\128 i : Num, square_integrable_on(trigonometric_set(i), real_interval([(-pi, pi)]))
+      #|  norm((z : Cart[Real, Tybit0[Unit]])) == real_of_num(1)
+      #|  (x : Real) + pi + pi == x + real_of_num(2) * pi
+      #|  (w : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(1)
+      #|  o(Cx, o((f : (Real) -> Real), o((x : Real) => x + pi, o(Im, o(clog, op_minus_minus)))))
+      #|  real_of_num(0) <= Re((z : Cart[Real, Tybit0[Unit]])) || Re(z) < real_of_num(0)
+      #|  \226\136\128 f : (Real) -> Real, real_continuous_on(f, UNIV) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) \226\134\146 (\226\136\128 z : Cart[Real, Tybit0[Unit]], norm(z) == real_of_num(1) \226\134\146 real_continuous(o(f, o(Im, clog)), within(at(z), {(w : Cart[Real, Tybit0[Unit]]) | norm(w) == real_of_num(1)})))
+      #|  (w : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(1)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) \226\134\146 (e : Bool)) == (a && b && c \226\134\146 d \226\134\146 e)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (g : (Real) -> Real)
+      #|  (g : (Real) -> Real)
+      #|  pi - -pi == real_of_num(2) * pi
       #|  pi
-      #|  --pi
-      #|  f:real->real
-      #|  forall f. f real_continuous_on real_interval[--pi,pi] /\\ f(--pi) = f pi\n         ==> forall z. norm z = &1\n                 ==> (f o Im o clog) real_continuous\n                     at z within {w | norm w = &1}
-      #|  r = --pi
-      #|  r = --pi
-      #|  x = x' ==> abs(x - y) < e ==> abs(x' - y) < e
-      #|  cexp(ii * Cx r)
-      #|  r:real
-      #|  b:num->real
-      #|  a:num->real
-      #|  n:num
-      #|  cos x = cos(&1 * x) /\\ sin x = sin(&1 * x)
-      #|  g:complex->real
-      #|  forall f:complex->real. poly2 f ==> trigpoly(\\x.  f(cexp(ii * Cx x)))
-      #|  (ai * si + bi * ci) * (aj * sj + bj * cj):real =\n     ((ai * aj) * (si * sj) + (bi * bj) * (ci * cj)) +\n     ((ai * bj) * (si * cj) + (aj * bi) * (ci * sj))
-      #|  j:num
-      #|  i:num
-      #|  forall f g:real->real. trigpoly f /\\ trigpoly g ==> trigpoly(\\x. f x * g x)
-      #|  x - y:real = x + --(&1) * y
-      #|  x / &2 = inv(&2) * x
-      #|  forall i j. trigpoly(\\x. sin(&i * x) * sin(&j * x)) /\\\n          trigpoly(\\x. sin(&i * x) * cos(&j * x)) /\\\n          trigpoly(\\x. cos(&i * x) * sin(&j * x)) /\\\n          trigpoly(\\x. cos(&i * x) * cos(&j * x))
-      #|  \\i:num. if i = k then &1 else &0
-      #|  \\i:num. &0
-      #|  k:num
-      #|  k:num
-      #|  forall i. trigpoly(\\x. cos(&i * x))
-      #|  \\i:num. &0
-      #|  \\i:num. if i = k then &1 else &0
-      #|  k:num
-      #|  k:num
-      #|  forall i. trigpoly(\\x. sin(&i * x))
-      #|  \\i. c * (b:num->real) i
-      #|  \\i. c * (a:num->real) i
-      #|  n:num
-      #|  b:num->real
-      #|  a:num->real
-      #|  n:num
-      #|  forall f:real->real c. trigpoly f ==> trigpoly (\\x. c * f x)
-      #|  forall f s:num->bool. FINITE s /\\ (forall i. i IN s ==> trigpoly(f i))\n                    ==> trigpoly(\\x:real. sum s (\\i. f i x))
-      #|  s = t ==> sum s f = sum t f
-      #|  a:real = e /\\ b = g /\\ c = f /\\ d = h\n      ==> (a + b) + (c + d) = (e + f) + (g + h)
-      #|  (\\n. (if n <= n1 then b1 n else &0) +\n            (if n <= n2 then b2 n else &0)):num->real
-      #|  (\\n. (if n <= n1 then a1 n else &0) +\n             (if n <= n2 then a2 n else &0)):num->real
-      #|  MAX n1 n2
-      #|  b2:num->real
-      #|  a2:num->real
-      #|  n2:num
-      #|  b1:num->real
-      #|  a1:num->real
-      #|  n1:num
-      #|  forall f g:real->real. trigpoly f /\\ trigpoly g ==> trigpoly(\\x. f x + g x)
-      #|  (\\n. c):num->real
-      #|  (\\n. &0):num->real
+      #|  -pi
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, real_continuous_on(f, real_interval([(-pi, pi)])) && f(-pi) == f(pi) \226\134\146 (\226\136\128 z : Cart[Real, Tybit0[Unit]], norm(z) == real_of_num(1) \226\134\146 real_continuous(o(f, o(Im, clog)), within(at(z), {(w : Cart[Real, Tybit0[Unit]]) | norm(w) == real_of_num(1)})))
+      #|  (r : Real) == -pi
+      #|  (r : Real) == -pi
+      #|  (x : Real) == (x' : Real) \226\134\146 abs(x - (y : Real)) < (e : Real) \226\134\146 abs(x' - y) < e
+      #|  cexp(ii * Cx((r : Real)))
+      #|  (r : Real)
+      #|  (b : (Num) -> Real)
+      #|  (a : (Num) -> Real)
+      #|  (n : Num)
+      #|  cos((x : Real)) == cos(real_of_num(1) * x) && sin(x) == sin(real_of_num(1) * x)
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Real)
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Real, (poly2 : ((Cart[Real, Tybit0[Unit]]) -> Real) -> Bool)(f) \226\134\146 (trigpoly : ((Real) -> Real) -> Bool)((x : Real) => f(cexp(ii * Cx(x))))
+      #|  ((ai : Real) * (si : Real) + (bi : Real) * (ci : Real)) * ((aj : Real) * (sj : Real) + (bj : Real) * (cj : Real)) == ai * aj * (si * sj) + bi * bj * (ci * cj) + (ai * bj * (si * cj) + aj * bi * (ci * sj))
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, (trigpoly : ((Real) -> Real) -> Bool)(f) && trigpoly(g) \226\134\146 trigpoly((x : Real) => f(x) * g(x))
+      #|  (x : Real) - (y : Real) == x + -real_of_num(1) * y
+      #|  (x : Real) / real_of_num(2) == inv(real_of_num(2)) * x
+      #|  \226\136\128 i : Num, \226\136\128 j : Num, (trigpoly : ((Real) -> Real) -> Bool)((x : Real) => sin(real_of_num(i) * x) * sin(real_of_num(j) * x)) && trigpoly((x : Real) => sin(real_of_num(i) * x) * cos(real_of_num(j) * x)) && trigpoly((x : Real) => cos(real_of_num(i) * x) * sin(real_of_num(j) * x)) && trigpoly((x : Real) => cos(real_of_num(i) * x) * cos(real_of_num(j) * x))
+      #|  (i : Num) => if i == (k : Num) { real_of_num(1) } else { real_of_num(0) }
+      #|  (i : Num) => real_of_num(0)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  \226\136\128 i : Num, (trigpoly : ((Real) -> Real) -> Bool)((x : Real) => cos(real_of_num(i) * x))
+      #|  (i : Num) => real_of_num(0)
+      #|  (i : Num) => if i == (k : Num) { real_of_num(1) } else { real_of_num(0) }
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  \226\136\128 i : Num, (trigpoly : ((Real) -> Real) -> Bool)((x : Real) => sin(real_of_num(i) * x))
+      #|  (i : Num) => (c : Real) * (b : (Num) -> Real)(i)
+      #|  (i : Num) => (c : Real) * (a : (Num) -> Real)(i)
+      #|  (n : Num)
+      #|  (b : (Num) -> Real)
+      #|  (a : (Num) -> Real)
+      #|  (n : Num)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 c : Real, (trigpoly : ((Real) -> Real) -> Bool)(f) \226\134\146 trigpoly((x : Real) => c * f(x))
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 s : (Num) -> Bool, FINITE(s) && (\226\136\128 i : Num, IN(i, s) \226\134\146 (trigpoly : ((Real) -> Real) -> Bool)(f(i))) \226\134\146 trigpoly((x : Real) => sum(s, (i : Num) => f(i, x)))
+      #|  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 sum(s, (f : (_) -> Real)) == sum(t, f)
+      #|  (a : Real) == (e : Real) && (b : Real) == (g : Real) && (c : Real) == (f : Real) && (d : Real) == (h : Real) \226\134\146 a + b + (c + d) == e + f + (g + h)
+      #|  (n : Num) => (if n <= (n1 : Num) { (b1 : (Num) -> Real)(n) } else { real_of_num(0) }) + (if n <= (n2 : Num) { (b2 : (Num) -> Real)(n) } else { real_of_num(0) })
+      #|  (n : Num) => (if n <= (n1 : Num) { (a1 : (Num) -> Real)(n) } else { real_of_num(0) }) + (if n <= (n2 : Num) { (a2 : (Num) -> Real)(n) } else { real_of_num(0) })
+      #|  MAX((n1 : Num), (n2 : Num))
+      #|  (b2 : (Num) -> Real)
+      #|  (a2 : (Num) -> Real)
+      #|  (n2 : Num)
+      #|  (b1 : (Num) -> Real)
+      #|  (a1 : (Num) -> Real)
+      #|  (n1 : Num)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, (trigpoly : ((Real) -> Real) -> Bool)(f) && trigpoly(g) \226\134\146 trigpoly((x : Real) => f(x) + g(x))
+      #|  (n : Num) => (c : Real)
+      #|  (n : Num) => real_of_num(0)
       #|  0
-      #|  c:real
-      #|  forall c:real. trigpoly(\\x:real. c)
-      #|  trigpoly =\n     \\f. ?n a b.\n         f = \\x. sum(0..n) (\\k. a k * sin(&k * x) +  b k * cos(&k * x))
-      #|  g:complex->real
-      #|  e:real
-      #|  (f:real->real) o Im o clog
+      #|  (c : Real)
+      #|  \226\136\128 c : Real, (trigpoly : ((Real) -> Real) -> Bool)((x : Real) => c)
+      #|  (trigpoly : ((Real) -> Real) -> Bool) == ((f : (Real) -> Real) => \226\136\131 n : Num, \226\136\131 a : (Num) -> Real, \226\136\131 b : (Num) -> Real, f == ((x : Real) => sum(op_dot_dot(0, n), (k : Num) => a(k) * sin(real_of_num(k) * x) + b(k) * cos(real_of_num(k) * x))))
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Real)
+      #|  (e : Real)
+      #|  o((f : (Real) -> Real), o(Im, clog))
       #|  Im
       #|  Re
-      #|  z:complex
-      #|  w:complex
-      #|  (forall x f. P f ==> R f x) ==> (forall f. P f ==> forall x. Q x ==> R f x)
-      #|  {x | p x} = {x | x IN UNIV /\\ p x}
-      #|  {z:complex | norm z = &1}
-      #|  poly2:(complex->real)->bool
-      #|  (forall c. poly2 (\\x. c)) /\\\n    (forall p q. poly2 p /\\ poly2 q ==> poly2 (\\x. p x + q x)) /\\\n    (forall p q. poly2 p /\\ poly2 q ==> poly2 (\\x. p x * q x)) /\\\n    poly2 Re /\\ poly2 Im
-      #|  forall f e. f real_continuous_on real_interval[--pi,pi] /\\\n         f(--pi) = f pi /\\ &0 < e\n         ==> ?n a b.\n                forall x. x IN real_interval[--pi,pi]\n                    ==> abs(f x - sum(0..n) (\\k. a k * sin(&k * x) +\n                                                 b k * cos(&k * x))) < e
-      #|  {a:real}
-      #|  real_interval[a,b]
-      #|  abs(i - l) < e ==> &0 <= i /\\ l = &0 ==> i < e
-      #|  e = sqrt(e pow 2)
-      #|  inv(&M)
-      #|  inv(&n + &1) < b - a
-      #|  &0 < &n + &1
-      #|  \\x. if x <= a + inv(&n + &1)\n                 then ((&n + &1) * d) * ((a + inv(&n + &1)) - x) else &0
-      #|  n:num
-      #|  M + N:num
-      #|  ?n:num. N <= n /\\ M <= n
-      #|  M:num
-      #|  b - a:real
-      #|  N:num
-      #|  (e:real) pow 2
-      #|  inv(&n + &1) <= inv(&N)
-      #|  F ==> p
-      #|  n:num
-      #|  N:num
-      #|  x - a:real
-      #|  &0 < &n + &1
-      #|  &0 < x ==> (x * d) * inv x = d
-      #|  &0 <= &n + &1
-      #|  x:real = a
-      #|  x:real
-      #|  &0 < &n + &1
-      #|  &0 <= &1 - x * y <=> y * x <= &1
-      #|  abs(&n + &1) = &n + &1
-      #|  d * x <= d <=> &0 <= d * (&1 - x)
-      #|  (a * b) * c:real = b * a * c
-      #|  x:real
-      #|  k:num
-      #|  real_interval[a,b]
-      #|  \\x:real. (d:real) pow 2
-      #|  \\x:real. if x = a then d pow 2 else &0
-      #|  \\n x. (if x <= a + inv(&n + &1)\n                    then ((&n + &1) * d) * ((a + inv(&n + &1)) - x) else &0)\n                   pow 2
-      #|  \\x. ((&n + &1) * d) * ((a + inv(&n + &1)) - x)
-      #|  x:real = a + inv(&n + &1)
-      #|  x:real
-      #|  real_interval[a,b] = real_interval[a,a + inv(&n + &1)] UNION\n                             real_interval[a + inv(&n + &1),b]
-      #|  a + inv(&n + &1) <= b
-      #|  a < a + inv(&n + &1)
-      #|  n:num
-      #|  forall n. (\\x. if x <= a + inv(&n + &1)\n             then ((&n + &1) * d) * ((a + inv(&n + &1)) - x) else &0)\n        real_continuous_on real_interval[a,b]
-      #|  forall a b d e.\n        a < b /\\ &0 < e\n        ==> ?f. f real_continuous_on real_interval[a,b] /\\\n                f(a) = d /\\ f(b) = &0 /\\\n                l2norm (real_interval[a,b]) f < e
-      #|  y < e / &2 /\\ z < e / &2 ==> x <= y + z ==> x < e
-      #|  f - (g + h):real = (f - g) + --h
-      #|  (:real)
-      #|  \\x. (g:real->real) x + h x
-      #|  h square_integrable_on real_interval[a,b]
-      #|  h:real->real
-      #|  e / &2
-      #|  (g:real->real) b - g a
-      #|  b:real
-      #|  a:real
-      #|  g:real->real
-      #|  e / &2
-      #|  real_interval[a,b]
-      #|  f:real->real
-      #|  forall f a b e.\n        f square_integrable_on real_interval[a,b] /\\ a < b /\\ &0 < e\n        ==> ?g. g real_continuous_on real_interval[a,b] /\\\n                g b = g a /\\\n                g square_integrable_on real_interval[a,b] /\\\n                l2norm (real_interval[a,b]) (\\x. f x - g x) < e
-      #|  --pi <= pi <=> &0 <= pi
-      #|  abs x < e ==> abs(x) <= abs e
-      #|  x:real
-      #|  real_integral(real_interval[--pi,pi]) (\\x. (e / &6) pow 2)
-      #|  (\\x. g x - sum(0..n) (\\k. u k * sin(&k * x) + v k * cos(&k * x)))\n    square_integrable_on (real_interval[--pi,pi])
-      #|  x < e / &2 /\\ y <= e / &2 ==> x + y < e
-      #|  (f - g) + (g - h):real = f - h
-      #|  l2norm (real_interval[--pi,pi]) (\\x. f x - g x) +\n              l2norm (real_interval[--pi,pi]) (\\x. g x - sum(0..n)\n                   (\\k. u k * sin(&k * x) + v k * cos(&k * x)))
-      #|  forall n u v. (\\x. sum(0..n) (\\k. u k * sin(&k * x) + v k * cos(&k * x)))\n            square_integrable_on (real_interval[--pi,pi])
-      #|  v:num->real
-      #|  u:num->real
-      #|  n:num
-      #|  e / &6
-      #|  g:real->real
-      #|  g:real->real
-      #|  --pi < pi <=> &0 < pi
-      #|  e / &2
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (\226\136\128 x : _, \226\136\128 f : _, (P : (_) -> Bool)(f) \226\134\146 (R : (_, _) -> Bool)(f, x)) \226\134\146 (\226\136\128 f : _, P(f) \226\134\146 (\226\136\128 x : _, (Q : (_) -> Bool)(x) \226\134\146 R(f, x)))
+      #|  {(x : _) | (p : (_) -> Bool)(x)} == {(x : _) | IN(x, UNIV) && p(x)}
+      #|  {(z : Cart[Real, Tybit0[Unit]]) | norm(z) == real_of_num(1)}
+      #|  (poly2 : ((Cart[Real, Tybit0[Unit]]) -> Real) -> Bool)
+      #|  (\226\136\128 c : Real, (poly2 : ((Cart[Real, Tybit0[Unit]]) -> Real) -> Bool)((x : Cart[Real, Tybit0[Unit]]) => c)) && (\226\136\128 p : (Cart[Real, Tybit0[Unit]]) -> Real, \226\136\128 q : (Cart[Real, Tybit0[Unit]]) -> Real, poly2(p) && poly2(q) \226\134\146 poly2((x : Cart[Real, Tybit0[Unit]]) => p(x) + q(x))) && (\226\136\128 p : (Cart[Real, Tybit0[Unit]]) -> Real, \226\136\128 q : (Cart[Real, Tybit0[Unit]]) -> Real, poly2(p) && poly2(q) \226\134\146 poly2((x : Cart[Real, Tybit0[Unit]]) => p(x) * q(x))) && poly2(Re) && poly2(Im)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 e : Real, real_continuous_on(f, real_interval([(-pi, pi)])) && f(-pi) == f(pi) && real_of_num(0) < e \226\134\146 (\226\136\131 n : Num, \226\136\131 a : (Num) -> Real, \226\136\131 b : (Num) -> Real, \226\136\128 x : Real, IN(x, real_interval([(-pi, pi)])) \226\134\146 abs(f(x) - sum(op_dot_dot(0, n), (k : Num) => a(k) * sin(real_of_num(k) * x) + b(k) * cos(real_of_num(k) * x))) < e)
+      #|  {(a : Real)}
+      #|  real_interval([((a : Real), (b : Real))])
+      #|  abs((i : Real) - (l : Real)) < (e : Real) \226\134\146 real_of_num(0) <= i && l == real_of_num(0) \226\134\146 i < e
+      #|  (e : Real) == sqrt(pow(e, 2))
+      #|  inv(real_of_num((M : Num)))
+      #|  inv(real_of_num((n : Num)) + real_of_num(1)) < (b : Real) - (a : Real)
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+      #|  (x : Real) => if x <= (a : Real) + inv(real_of_num((n : Num)) + real_of_num(1)) { (real_of_num(n) + real_of_num(1)) * (d : Real) * (a + inv(real_of_num(n) + real_of_num(1)) - x) } else { real_of_num(0) }
+      #|  (n : Num)
+      #|  (M : Num) + (N : Num)
+      #|  \226\136\131 n : Num, (N : Num) <= n && (M : Num) <= n
+      #|  (M : Num)
+      #|  (b : Real) - (a : Real)
+      #|  (N : Num)
+      #|  pow((e : Real), 2)
+      #|  inv(real_of_num((n : Num)) + real_of_num(1)) <= inv(real_of_num((N : Num)))
+      #|  false \226\134\146 (p : Bool)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (x : Real) - (a : Real)
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+      #|  real_of_num(0) < (x : Real) \226\134\146 x * (d : Real) * inv(x) == d
+      #|  real_of_num(0) <= real_of_num((n : Num)) + real_of_num(1)
+      #|  (x : Real) == (a : Real)
+      #|  (x : Real)
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+      #|  (real_of_num(0) <= real_of_num(1) - (x : Real) * (y : Real)) == (y * x <= real_of_num(1))
+      #|  abs(real_of_num((n : Num)) + real_of_num(1)) == real_of_num(n) + real_of_num(1)
+      #|  ((d : Real) * (x : Real) <= d) == (real_of_num(0) <= d * (real_of_num(1) - x))
+      #|  (a : Real) * (b : Real) * (c : Real) == b * (a * c)
+      #|  (x : Real)
+      #|  (k : Num)
+      #|  real_interval([((a : Real), (b : Real))])
+      #|  (x : Real) => pow((d : Real), 2)
+      #|  (x : Real) => if x == (a : Real) { pow((d : Real), 2) } else { real_of_num(0) }
+      #|  (n : Num) => (x : Real) => pow(if x <= (a : Real) + inv(real_of_num(n) + real_of_num(1)) { (real_of_num(n) + real_of_num(1)) * (d : Real) * (a + inv(real_of_num(n) + real_of_num(1)) - x) } else { real_of_num(0) }, 2)
+      #|  (x : Real) => (real_of_num((n : Num)) + real_of_num(1)) * (d : Real) * ((a : Real) + inv(real_of_num(n) + real_of_num(1)) - x)
+      #|  (x : Real) == (a : Real) + inv(real_of_num((n : Num)) + real_of_num(1))
+      #|  (x : Real)
+      #|  real_interval([((a : Real), (b : Real))]) == UNION(real_interval([(a, a + inv(real_of_num((n : Num)) + real_of_num(1)))]), real_interval([(a + inv(real_of_num(n) + real_of_num(1)), b)]))
+      #|  (a : Real) + inv(real_of_num((n : Num)) + real_of_num(1)) <= (b : Real)
+      #|  (a : Real) < a + inv(real_of_num((n : Num)) + real_of_num(1))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, real_continuous_on((x : Real) => if x <= (a : Real) + inv(real_of_num(n) + real_of_num(1)) { (real_of_num(n) + real_of_num(1)) * (d : Real) * (a + inv(real_of_num(n) + real_of_num(1)) - x) } else { real_of_num(0) }, real_interval([(a, (b : Real))]))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 d : Real, \226\136\128 e : Real, a < b && real_of_num(0) < e \226\134\146 (\226\136\131 f : (Real) -> Real, real_continuous_on(f, real_interval([(a, b)])) && f(a) == d && f(b) == real_of_num(0) && l2norm(real_interval([(a, b)]), f) < e)
+      #|  (y : Real) < (e : Real) / real_of_num(2) && (z : Real) < e / real_of_num(2) \226\134\146 (x : Real) <= y + z \226\134\146 x < e
+      #|  (f : Real) - ((g : Real) + (h : Real)) == f - g + -h
+      #|  (UNIV : (Real) -> Bool)
+      #|  (x : Real) => (g : (Real) -> Real)(x) + (h : (Real) -> Real)(x)
+      #|  square_integrable_on((h : (Real) -> Real), real_interval([((a : Real), (b : Real))]))
+      #|  (h : (Real) -> Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  (g : (Real) -> Real)((b : Real)) - g((a : Real))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (g : (Real) -> Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  real_interval([((a : Real), (b : Real))])
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 e : Real, square_integrable_on(f, real_interval([(a, b)])) && a < b && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Real) -> Real, real_continuous_on(g, real_interval([(a, b)])) && g(b) == g(a) && square_integrable_on(g, real_interval([(a, b)])) && l2norm(real_interval([(a, b)]), (x : Real) => f(x) - g(x)) < e)
+      #|  (-pi <= pi) == (real_of_num(0) <= pi)
+      #|  abs((x : Real)) < (e : Real) \226\134\146 abs(x) <= abs(e)
+      #|  (x : Real)
+      #|  real_integral(real_interval([(-pi, pi)]), (x : Real) => pow((e : Real) / real_of_num(6), 2))
+      #|  square_integrable_on((x : Real) => (g : (Real) -> Real)(x) - sum(op_dot_dot(0, (n : Num)), (k : Num) => (u : (Num) -> Real)(k) * sin(real_of_num(k) * x) + (v : (Num) -> Real)(k) * cos(real_of_num(k) * x)), real_interval([(-pi, pi)]))
+      #|  (x : Real) < (e : Real) / real_of_num(2) && (y : Real) <= e / real_of_num(2) \226\134\146 x + y < e
+      #|  (f : Real) - (g : Real) + (g - (h : Real)) == f - h
+      #|  l2norm(real_interval([(-pi, pi)]), (x : Real) => (f : (Real) -> Real)(x) - (g : (Real) -> Real)(x)) + l2norm(real_interval([(-pi, pi)]), (x : Real) => g(x) - sum(op_dot_dot(0, (n : Num)), (k : Num) => (u : (Num) -> Real)(k) * sin(real_of_num(k) * x) + (v : (Num) -> Real)(k) * cos(real_of_num(k) * x)))
+      #|  \226\136\128 n : Num, \226\136\128 u : (Num) -> Real, \226\136\128 v : (Num) -> Real, square_integrable_on((x : Real) => sum(op_dot_dot(0, n), (k : Num) => u(k) * sin(real_of_num(k) * x) + v(k) * cos(real_of_num(k) * x)), real_interval([(-pi, pi)]))
+      #|  (v : (Num) -> Real)
+      #|  (u : (Num) -> Real)
+      #|  (n : Num)
+      #|  (e : Real) / real_of_num(6)
+      #|  (g : (Real) -> Real)
+      #|  (g : (Real) -> Real)
+      #|  (-pi < pi) == (real_of_num(0) < pi)
+      #|  (e : Real) / real_of_num(2)
       #|  pi
-      #|  --pi
-      #|  f:real->real
-      #|  forall f e. f square_integrable_on real_interval[--pi,pi] /\\ &0 < e\n         ==> ?n a b.\n                l2norm (real_interval[--pi,pi])\n                       (\\x. f x - sum(0..n) (\\k. a k * sin(&k * x) +\n                                                 b k * cos(&k * x))) < e
-      #|  &0 < s ==> (s * b) * c / s = b * c
-      #|  SUC(2 * SUC i - 1) DIV 2 = SUC i
-      #|  1 <= i /\\ i <= n ==> 2 * i - 1 <= 2 * n
-      #|  ~(2 * n + 1 <= 2 * n)
-      #|  1 <= SUC n /\\ 2 * SUC n - 1 = 2 * n + 1
+      #|  -pi
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 e : Real, square_integrable_on(f, real_interval([(-pi, pi)])) && real_of_num(0) < e \226\134\146 (\226\136\131 n : Num, \226\136\131 a : (Num) -> Real, \226\136\131 b : (Num) -> Real, l2norm(real_interval([(-pi, pi)]), (x : Real) => f(x) - sum(op_dot_dot(0, n), (k : Num) => a(k) * sin(real_of_num(k) * x) + b(k) * cos(real_of_num(k) * x))) < e)
+      #|  real_of_num(0) < (s : Real) \226\134\146 s * (b : Real) * ((c : Real) / s) == b * c
+      #|  DIV(SUC(2 * SUC((i : Num)) - 1), 2) == SUC(i)
+      #|  1 <= (i : Num) && i <= (n : Num) \226\134\146 2 * i - 1 <= 2 * n
+      #|  !(2 * (n : Num) + 1 <= 2 * n)
+      #|  1 <= SUC((n : Num)) && 2 * SUC(n) - 1 == 2 * n + 1
       #|  1
-      #|  2 * i + 1 = 2 * (i + 1) - 1
-      #|  &0 < s ==> (s * b) * c / s = b * c
-      #|  (2 * i + 2) DIV 2 = SUC i
-      #|  2 * (SUC i) = 2 * i + 2
-      #|  &0 < s ==> (s * b) * c / s = b * c
-      #|  2 * i <= 2 * n <=> i <= n
-      #|  x:real
-      #|  x < e ==> y = x ==> y < e
-      #|  (\\k. if k = 0 then sqrt(&2 * pi) * b 0\n         else if EVEN k then sqrt pi * b(k DIV 2)\n         else if k <= 2 * n then sqrt pi * a((k + 1) DIV 2)\n         else &0):num->real
-      #|  0 = 2 * 0
-      #|  2 * n + 1
-      #|  b:num->real
-      #|  a:num->real
-      #|  n:num
-      #|  forall f e. f square_integrable_on real_interval[--pi,pi] /\\ &0 < e\n         ==> ?n a.\n                l2norm (real_interval[--pi,pi])\n                       (\\x. f x -\n                            sum(0..n) (\\k. a k * trigonometric_set k x))\n                < e
-      #|  fourier_coefficient =\n    orthonormal_coefficient (real_interval[--pi,pi]) trigonometric_set
-      #|  x:real
-      #|  x < e ==> y = x ==> y < e
-      #|  &0 <= x /\\ a < e ==> x <= a ==> abs x < e
-      #|  0..m
-      #|  f:real->real
-      #|  (\\i. if i <= n then a i else &0):num->real
+      #|  2 * (i : Num) + 1 == 2 * (i + 1) - 1
+      #|  real_of_num(0) < (s : Real) \226\134\146 s * (b : Real) * ((c : Real) / s) == b * c
+      #|  DIV(2 * (i : Num) + 2, 2) == SUC(i)
+      #|  2 * SUC((i : Num)) == 2 * i + 2
+      #|  real_of_num(0) < (s : Real) \226\134\146 s * (b : Real) * ((c : Real) / s) == b * c
+      #|  (2 * (i : Num) <= 2 * (n : Num)) == (i <= n)
+      #|  (x : Real)
+      #|  (x : Real) < (e : Real) \226\134\146 (y : Real) == x \226\134\146 y < e
+      #|  (k : Num) => if k == 0 { sqrt(real_of_num(2) * pi) * (b : (Num) -> Real)(0) } else { if EVEN(k) { sqrt(pi) * b(DIV(k, 2)) } else { if k <= 2 * (n : Num) { sqrt(pi) * (a : (Num) -> Real)(DIV(k + 1, 2)) } else { real_of_num(0) } } }
+      #|  0 == 2 * 0
+      #|  2 * (n : Num) + 1
+      #|  (b : (Num) -> Real)
+      #|  (a : (Num) -> Real)
+      #|  (n : Num)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 e : Real, square_integrable_on(f, real_interval([(-pi, pi)])) && real_of_num(0) < e \226\134\146 (\226\136\131 n : Num, \226\136\131 a : (Num) -> Real, l2norm(real_interval([(-pi, pi)]), (x : Real) => f(x) - sum(op_dot_dot(0, n), (k : Num) => a(k) * trigonometric_set(k, x))) < e)
+      #|  (fourier_coefficient : ((Real) -> Real, Num) -> Real) == orthonormal_coefficient(real_interval([(-pi, pi)]), trigonometric_set)
+      #|  (x : Real)
+      #|  (x : Real) < (e : Real) \226\134\146 (y : Real) == x \226\134\146 y < e
+      #|  real_of_num(0) <= (x : Real) && (a : Real) < (e : Real) \226\134\146 x <= a \226\134\146 abs(x) < e
+      #|  op_dot_dot(0, (m : Num))
+      #|  (f : (Real) -> Real)
+      #|  (i : Num) => if i <= (n : Num) { (a : (Num) -> Real)(i) } else { real_of_num(0) }
       #|  trigonometric_set
-      #|  real_interval[--pi,pi]
-      #|  m:num
-      #|  a:num->real
-      #|  n:num
-      #|  e:real
-      #|  f:real->real
-      #|  e:real
-      #|  forall f. f square_integrable_on real_interval[--pi,pi]\n       ==> ((\\n. l2norm (real_interval[--pi,pi])\n                        (\\x. f(x) - sum(0..n) (\\i. fourier_coefficient f i *\n                                                   trigonometric_set i x)))\n            ---> &0) sequentially
-      #|  &1 <= x ==> &1 <= &1 * abs x
-      #|  &1
-      #|  &0 < &2 * x <=> &0 < x
-      #|  &0 < x ==> &0 < abs x
-      #|  n:num
-      #|  n:num
-      #|  &1
-      #|  n:num
-      #|  n:num
-      #|  (:real)
-      #|  forall f n. f absolutely_real_integrable_on real_interval[--pi,pi]\n         ==> (\\x. trigonometric_set n x * f x)\n             absolutely_real_integrable_on real_interval[--pi,pi]
-      #|  forall f n. f absolutely_real_integrable_on real_interval[--pi,pi]\n         ==> (\\x. trigonometric_set n x * f x)\n             real_integrable_on real_interval[--pi,pi]
-      #|  n:num
-      #|  n:num
-      #|  &1
-      #|  n:num
-      #|  n:num
-      #|  (:real)
-      #|  (forall f k. f absolutely_real_integrable_on real_interval[--pi,pi]\n          ==> (\\x. sin(k * x) * f x) absolutely_real_integrable_on\n              real_interval[--pi,pi]) /\\\n   (forall f k. f absolutely_real_integrable_on real_interval[--pi,pi]\n          ==> (\\x. cos(k * x) * f x) absolutely_real_integrable_on\n              real_interval[--pi,pi])
-      #|  forall f. f absolutely_real_integrable_on real_interval[--pi,pi]\n       ==> f real_integrable_on real_interval[--pi,pi] /\\\n           (forall k. (\\x. cos(k * x) * f x) real_integrable_on\n                real_interval[--pi,pi]) /\\\n           (forall k. (\\x. sin(k * x) * f x) real_integrable_on\n                real_interval[--pi,pi])
-      #|  forall f. f square_integrable_on real_interval[--pi,pi]\n       ==> f real_integrable_on real_interval[--pi,pi] /\\\n           (forall k. (\\x. cos(k * x) * f x) real_integrable_on\n                real_interval[--pi,pi]) /\\\n           (forall k. (\\x. sin(k * x) * f x) real_integrable_on\n                real_interval[--pi,pi])
-      #|  (\\x. f x - (drop o g o lift) x) absolutely_real_integrable_on s
-      #|  x < e ==> x = y ==> y < e
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  drop o g o lift
-      #|  g:real^1->real^1
-      #|  e:real
-      #|  &1:real
-      #|  IMAGE lift s
-      #|  lift o f o drop
-      #|  forall f s e. real_measurable s /\\ f absolutely_real_integrable_on s /\\ &0 < e\n           ==> ?g. g real_continuous_on (:real) /\\\n                   g absolutely_real_integrable_on s /\\\n                   real_integral s (\\x. abs(f x - g x)) < e
-      #|  (:num)
-      #|  forall s w f.\n        orthonormal_system s w /\\\n        (forall i. w i square_integrable_on s) /\\\n        f square_integrable_on s\n        ==> (orthonormal_coefficient s w f ---> &0) sequentially
-      #|  &1 <= x ==> &1 <= &1 * abs x
-      #|  &1
-      #|  &0 < &2 * x <=> &0 < x
-      #|  &0 < x ==> &0 < abs x
-      #|  n:num
-      #|  n:num
-      #|  (\\x. (f:real->real) x - g x) absolutely_real_integrable_on\n                  real_interval[--pi,pi]
-      #|  abs(x - y) <= r ==> abs(abs x - abs y) <= r
-      #|  x < e / &2 ==> abs(y - z) <= x ==> y < e / &2 ==> z < e
-      #|  N:num <= n
-      #|  n:num
-      #|  N:num
-      #|  e / &2
-      #|  (:real)
-      #|  g:real->real
+      #|  real_interval([(-pi, pi)])
+      #|  (m : Num)
+      #|  (a : (Num) -> Real)
+      #|  (n : Num)
+      #|  (e : Real)
+      #|  (f : (Real) -> Real)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Real) -> Real, square_integrable_on(f, real_interval([(-pi, pi)])) \226\134\146 op_minus_minus_minus_gt((n : Num) => l2norm(real_interval([(-pi, pi)]), (x : Real) => f(x) - sum(op_dot_dot(0, n), (i : Num) => fourier_coefficient(f, i) * trigonometric_set(i, x))), real_of_num(0), sequentially)
+      #|  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(1) <= real_of_num(1) * abs(x)
+      #|  real_of_num(1)
+      #|  (real_of_num(0) < real_of_num(2) * (x : Real)) == (real_of_num(0) < x)
+      #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) < abs(x)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  real_of_num(1)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (UNIV : (Real) -> Bool)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) \226\134\146 absolutely_real_integrable_on((x : Real) => trigonometric_set(n, x) * f(x), real_interval([(-pi, pi)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) \226\134\146 real_integrable_on((x : Real) => trigonometric_set(n, x) * f(x), real_interval([(-pi, pi)]))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  real_of_num(1)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (\226\136\128 f : (Real) -> Real, \226\136\128 k : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) \226\134\146 absolutely_real_integrable_on((x : Real) => sin(k * x) * f(x), real_interval([(-pi, pi)]))) && (\226\136\128 f : (Real) -> Real, \226\136\128 k : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) \226\134\146 absolutely_real_integrable_on((x : Real) => cos(k * x) * f(x), real_interval([(-pi, pi)])))
+      #|  \226\136\128 f : (Real) -> Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) \226\134\146 real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 k : Real, real_integrable_on((x : Real) => cos(k * x) * f(x), real_interval([(-pi, pi)]))) && (\226\136\128 k : Real, real_integrable_on((x : Real) => sin(k * x) * f(x), real_interval([(-pi, pi)])))
+      #|  \226\136\128 f : (Real) -> Real, square_integrable_on(f, real_interval([(-pi, pi)])) \226\134\146 real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 k : Real, real_integrable_on((x : Real) => cos(k * x) * f(x), real_interval([(-pi, pi)]))) && (\226\136\128 k : Real, real_integrable_on((x : Real) => sin(k * x) * f(x), real_interval([(-pi, pi)])))
+      #|  absolutely_real_integrable_on((x : Real) => (f : (Real) -> Real)(x) - o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift), x), (s : (Real) -> Bool))
+      #|  (x : Real) < (e : Real) \226\134\146 x == (y : Real) \226\134\146 y < e
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, Unit])
+      #|  (e : Real)
+      #|  real_of_num(1)
+      #|  IMAGE(lift, (s : (Real) -> Bool))
+      #|  o(lift, o((f : (Real) -> Real), drop))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 e : Real, real_measurable(s) && absolutely_real_integrable_on(f, s) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Real) -> Real, real_continuous_on(g, UNIV) && absolutely_real_integrable_on(g, s) && real_integral(s, (x : Real) => abs(f(x) - g(x))) < e)
+      #|  (UNIV : (Num) -> Bool)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 w : (Num, Real) -> Real, \226\136\128 f : (Real) -> Real, orthonormal_system(s, w) && (\226\136\128 i : Num, square_integrable_on(w(i), s)) && square_integrable_on(f, s) \226\134\146 op_minus_minus_minus_gt(orthonormal_coefficient(s, w, f), real_of_num(0), sequentially)
+      #|  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(1) <= real_of_num(1) * abs(x)
+      #|  real_of_num(1)
+      #|  (real_of_num(0) < real_of_num(2) * (x : Real)) == (real_of_num(0) < x)
+      #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) < abs(x)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  absolutely_real_integrable_on((x : Real) => (f : (Real) -> Real)(x) - (g : (Real) -> Real)(x), real_interval([(-pi, pi)]))
+      #|  abs((x : Real) - (y : Real)) <= (r : Real) \226\134\146 abs(abs(x) - abs(y)) <= r
+      #|  (x : Real) < (e : Real) / real_of_num(2) \226\134\146 abs((y : Real) - (z : Real)) <= x \226\134\146 y < e / real_of_num(2) \226\134\146 z < e
+      #|  (N : Num) <= (n : Num)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (g : (Real) -> Real)
       #|  trigonometric_set
-      #|  real_interval[--pi,pi]
-      #|  g:real->real
-      #|  e / &2
-      #|  real_interval[--pi,pi]
-      #|  f:real->real
-      #|  e:real
-      #|  forall f. f absolutely_real_integrable_on real_interval[--pi,pi]\n       ==> (fourier_coefficient f ---> &0) sequentially
-      #|  &0 <= x /\\ x <= &4 ==> inv(&4) * abs x <= &1
-      #|  d <= e ==> x < d ==> x < e
-      #|  &0 < x ==> &0 < abs x
-      #|  a / sqrt pi * b = inv(sqrt pi) * a * b
-      #|  2 * n + 1
-      #|  n:num
-      #|  N + 1
-      #|  N:num
-      #|  e / &4
-      #|  e:real
-      #|  forall f. f absolutely_real_integrable_on real_interval[--pi,pi]\n       ==> ((\\n. real_integral (real_interval[--pi,pi])\n                                 (\\x. sin(&n * x) * f x)) ---> &0)\n              sequentially
-      #|  &0 <= x /\\ x <= &4 ==> inv(&4) * abs x <= &1
-      #|  d <= e ==> x < d ==> x < e
-      #|  &0 < x ==> &0 < abs x
-      #|  a / sqrt pi * b = inv(sqrt pi) * a * b
-      #|  2 * n + 2
-      #|  n:num
-      #|  N + 1
-      #|  N:num
-      #|  e / &4
-      #|  e:real
-      #|  forall f. f absolutely_real_integrable_on real_interval[--pi,pi]\n       ==> ((\\n. real_integral (real_interval[--pi,pi])\n                                 (\\x. cos(&n * x) * f x)) ---> &0)\n              sequentially
-      #|  n:num
-      #|  (\\n. real_integral (real_interval[--pi,pi])\n                          (\\x. sin(&n * x) * cos(&1 / &2 * x) * f x) +\n                   real_integral (real_interval[--pi,pi])\n                          (\\x. cos(&n * x) * sin(&1 / &2 * x) * f x))
-      #|  forall f. f absolutely_real_integrable_on real_interval[--pi,pi]\n       ==> ((\\n. real_integral (real_interval[--pi,pi])\n                               (\\x. sin((&n + &1 / &2) * x) * f x)) ---> &0)\n              sequentially
-      #|  e:real
-      #|  &1 <= x ==> &1 <= &1 * abs x
-      #|  &1
-      #|  &0 < &2 * x <=> &0 < x
-      #|  &0 < x ==> &0 < abs x
-      #|  r:num
-      #|  SUC(2 * n DIV 2)
-      #|  abs(x * y) <= abs(x) * &1 /\\ abs(x) < e ==> abs(x * y) < e
-      #|  abs(x - l) < e / &2 /\\ abs y < e / &2 ==> abs((x + y) - l) < e
-      #|  abs x < e / &2 ==> abs x < e
-      #|  n = 2 * n DIV 2 \\/ n = SUC(2 * n DIV 2)
-      #|  n:num
-      #|  N1 + 2 * N2 + 1
-      #|  N2:num
-      #|  &0 < e / &2
-      #|  N1:num
-      #|  e / &2
-      #|  e:real
+      #|  real_interval([(-pi, pi)])
+      #|  (g : (Real) -> Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  real_interval([(-pi, pi)])
+      #|  (f : (Real) -> Real)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Real) -> Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) \226\134\146 op_minus_minus_minus_gt(fourier_coefficient(f), real_of_num(0), sequentially)
+      #|  real_of_num(0) <= (x : Real) && x <= real_of_num(4) \226\134\146 inv(real_of_num(4)) * abs(x) <= real_of_num(1)
+      #|  (d : Real) <= (e : Real) \226\134\146 (x : Real) < d \226\134\146 x < e
+      #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) < abs(x)
+      #|  (a : Real) / sqrt(pi) * (b : Real) == inv(sqrt(pi)) * (a * b)
+      #|  2 * (n : Num) + 1
+      #|  (n : Num)
+      #|  (N : Num) + 1
+      #|  (N : Num)
+      #|  (e : Real) / real_of_num(4)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Real) -> Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) \226\134\146 op_minus_minus_minus_gt((n : Num) => real_integral(real_interval([(-pi, pi)]), (x : Real) => sin(real_of_num(n) * x) * f(x)), real_of_num(0), sequentially)
+      #|  real_of_num(0) <= (x : Real) && x <= real_of_num(4) \226\134\146 inv(real_of_num(4)) * abs(x) <= real_of_num(1)
+      #|  (d : Real) <= (e : Real) \226\134\146 (x : Real) < d \226\134\146 x < e
+      #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) < abs(x)
+      #|  (a : Real) / sqrt(pi) * (b : Real) == inv(sqrt(pi)) * (a * b)
+      #|  2 * (n : Num) + 2
+      #|  (n : Num)
+      #|  (N : Num) + 1
+      #|  (N : Num)
+      #|  (e : Real) / real_of_num(4)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Real) -> Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) \226\134\146 op_minus_minus_minus_gt((n : Num) => real_integral(real_interval([(-pi, pi)]), (x : Real) => cos(real_of_num(n) * x) * f(x)), real_of_num(0), sequentially)
+      #|  (n : Num)
+      #|  (n : Num) => real_integral(real_interval([(-pi, pi)]), (x : Real) => sin(real_of_num(n) * x) * (cos(real_of_num(1) / real_of_num(2) * x) * (f : (Real) -> Real)(x))) + real_integral(real_interval([(-pi, pi)]), (x : Real) => cos(real_of_num(n) * x) * (sin(real_of_num(1) / real_of_num(2) * x) * f(x)))
+      #|  \226\136\128 f : (Real) -> Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) \226\134\146 op_minus_minus_minus_gt((n : Num) => real_integral(real_interval([(-pi, pi)]), (x : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * x) * f(x)), real_of_num(0), sequentially)
+      #|  (e : Real)
+      #|  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(1) <= real_of_num(1) * abs(x)
+      #|  real_of_num(1)
+      #|  (real_of_num(0) < real_of_num(2) * (x : Real)) == (real_of_num(0) < x)
+      #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) < abs(x)
+      #|  (r : Num)
+      #|  SUC(2 * DIV((n : Num), 2))
+      #|  abs((x : Real) * (y : Real)) <= abs(x) * real_of_num(1) && abs(x) < (e : Real) \226\134\146 abs(x * y) < e
+      #|  abs((x : Real) - (l : Real)) < (e : Real) / real_of_num(2) && abs((y : Real)) < e / real_of_num(2) \226\134\146 abs(x + y - l) < e
+      #|  abs((x : Real)) < (e : Real) / real_of_num(2) \226\134\146 abs(x) < e
+      #|  (n : Num) == 2 * DIV(n, 2) || n == SUC(2 * DIV(n, 2))
+      #|  (n : Num)
+      #|  (N1 : Num) + (2 * (N2 : Num) + 1)
+      #|  (N2 : Num)
+      #|  real_of_num(0) < (e : Real) / real_of_num(2)
+      #|  (N1 : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  (e : Real)
       #|  forall f n t l.\n        f absolutely_real_integrable_on real_interval [--pi,pi]\n        ==> (((\\n. sum(0..2*n) (\\k. fourier_coefficient f k *\n                                    trigonometric_set k t)) ---> l)\n             sequentially <=>\n             ((\\n. sum(0..n) (\\k. fourier_coefficient f k *\n                                  trigonometric_set k t)) ---> l)\n             sequentially)
-      #|  x <= 2 * n DIV 2 + 1 /\\ ~(x <= n) ==> x = 2 * n DIV 2 + 1
-      #|  sum (2 * 0..2 * (n DIV 2) + 1)\n                 (\\k. fourier_coefficient f k * trigonometric_set k (&0))
-      #|  forall f n.\n     sum (0..n) (\\k. fourier_coefficient f k * trigonometric_set k (&0)) =\n     sum (0..n DIV 2)\n         (\\k. fourier_coefficient f (2 * k) * trigonometric_set (2 * k) (&0))
-      #|  2 * SUC i = 2 * i + 2
-      #|  forall f n.\n     sum (0..n) (\\k. fourier_coefficient f k * trigonometric_set k (&0)) =\n     (fourier_coefficient f 0 / sqrt(&2) +\n      sum (1..n DIV 2) (\\k. fourier_coefficient f (2 * k))) / sqrt pi
-      #|  (i * x) * i:real = x * i * i
-      #|  (a * b) * c:real = b * a * c
-      #|  2 * SUC i = 2 * i + 2
-      #|  ((a * b) * c) * d:real = b * a * c * d
-      #|  forall f n.\n      f absolutely_real_integrable_on real_interval[--pi,pi]\n      ==> sum (0..n) (\\k. fourier_coefficient f k * trigonometric_set k (&0)) =\n          (real_integral(real_interval[--pi,pi]) f / &2 +\n           sum(1..n DIV 2) (\\k. real_integral (real_interval[--pi,pi])\n                                              (\\x. cos(&k * x) * f x))) / pi
-      #|  forall f n.\n      f absolutely_real_integrable_on real_interval[--pi,pi]\n      ==> sum(0..n) (\\k. fourier_coefficient f k * trigonometric_set k (&0)) =\n          real_integral(real_interval[--pi,pi])\n           (\\x. (&1 / &2 + sum(1..n DIV 2) (\\k. cos(&k * x))) * f x) / pi
-      #|  forall f g i. f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n           g absolutely_real_integrable_on real_interval[--pi,pi]\n           ==> fourier_coefficient (\\x. f x + g x) i =\n                fourier_coefficient f i + fourier_coefficient g i
-      #|  forall f g i. f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n           g absolutely_real_integrable_on real_interval[--pi,pi]\n           ==> fourier_coefficient (\\x. f x - g x) i =\n                fourier_coefficient f i - fourier_coefficient g i
-      #|  inv(sqrt pi) * c
-      #|  n + 1
-      #|  n:num
-      #|  inv(sqrt pi) * c
-      #|  n + 1
-      #|  n:num
-      #|  &0 < s /\\ s pow 2 = &2 * pi ==> &2 * pi * inv(s) * c = c * s
-      #|  inv(sqrt(&2 * pi)) * c
+      #|  (x : Num) <= 2 * DIV((n : Num), 2) + 1 && !(x <= n) \226\134\146 x == 2 * DIV(n, 2) + 1
+      #|  sum(op_dot_dot(2 * 0, 2 * DIV((n : Num), 2) + 1), (k : Num) => fourier_coefficient((f : (Real) -> Real), k) * trigonometric_set(k, real_of_num(0)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, real_of_num(0))) == sum(op_dot_dot(0, DIV(n, 2)), (k : Num) => fourier_coefficient(f, 2 * k) * trigonometric_set(2 * k, real_of_num(0)))
+      #|  2 * SUC((i : Num)) == 2 * i + 2
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, real_of_num(0))) == (fourier_coefficient(f, 0) / sqrt(real_of_num(2)) + sum(op_dot_dot(1, DIV(n, 2)), (k : Num) => fourier_coefficient(f, 2 * k))) / sqrt(pi)
+      #|  (i : Real) * (x : Real) * i == x * (i * i)
+      #|  (a : Real) * (b : Real) * (c : Real) == b * (a * c)
+      #|  2 * SUC((i : Num)) == 2 * i + 2
+      #|  (a : Real) * (b : Real) * (c : Real) * (d : Real) == b * (a * (c * d))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) \226\134\146 sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, real_of_num(0))) == (real_integral(real_interval([(-pi, pi)]), f) / real_of_num(2) + sum(op_dot_dot(1, DIV(n, 2)), (k : Num) => real_integral(real_interval([(-pi, pi)]), (x : Real) => cos(real_of_num(k) * x) * f(x)))) / pi
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) \226\134\146 sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, real_of_num(0))) == real_integral(real_interval([(-pi, pi)]), (x : Real) => (real_of_num(1) / real_of_num(2) + sum(op_dot_dot(1, DIV(n, 2)), (k : Num) => cos(real_of_num(k) * x))) * f(x)) / pi
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 i : Num, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && absolutely_real_integrable_on(g, real_interval([(-pi, pi)])) \226\134\146 fourier_coefficient((x : Real) => f(x) + g(x), i) == fourier_coefficient(f, i) + fourier_coefficient(g, i)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 i : Num, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && absolutely_real_integrable_on(g, real_interval([(-pi, pi)])) \226\134\146 fourier_coefficient((x : Real) => f(x) - g(x), i) == fourier_coefficient(f, i) - fourier_coefficient(g, i)
+      #|  inv(sqrt(pi)) * (c : Real)
+      #|  (n : Num) + 1
+      #|  (n : Num)
+      #|  inv(sqrt(pi)) * (c : Real)
+      #|  (n : Num) + 1
+      #|  (n : Num)
+      #|  real_of_num(0) < (s : Real) && pow(s, 2) == real_of_num(2) * pi \226\134\146 real_of_num(2) * (pi * (inv(s) * (c : Real))) == c * s
+      #|  inv(sqrt(real_of_num(2) * pi)) * (c : Real)
       #|  0
-      #|  forall c i. fourier_coefficient (\\x. c) i =\n         if i = 0 then c * sqrt(&2 * pi) else &0
-      #|  (x + -- &n * a) + &n * a = x
-      #|  forall x n. f(x + &n * a) = (f:real->real) x
-      #|  forall f:real->real a.\n        (forall x. f(x + a) = f x) <=> (forall x n. integer n ==> f(x + n * a) = f x)
-      #|  x - c:real = y <=> x = y + c
-      #|  c:real
-      #|  &1
-      #|  forall f i a b c. (f has_real_integral i) (real_interval[a,b])\n                ==> ((\\x. f(x + c)) has_real_integral i)\n                    (real_interval[a - c,b - c])
-      #|  x + a - b:real
-      #|  x:real
-      #|  a - (a - b):real = b /\\ (a + c) - (a - b) = b + c
-      #|  a - b:real
-      #|  forall f i a b c.\n        (forall x. f(x + (b - a)) = f(x)) /\\\n        (f has_real_integral i) (real_interval[a,a+c])\n        ==> (f has_real_integral i) (real_interval[b,b+c])
-      #|  real_interval[a,b]
-      #|  a /\\ b /\\ c /\\ d ==> e <=>\n                  c /\\ d ==> a /\\ b ==> e
-      #|  a:real
-      #|  ((f has_real_integral (real_integral(real_interval[a,a+c]) f))\n     (real_interval[a,a+c]) /\\\n     (f has_real_integral (real_integral(real_interval[a+c,b]) f))\n     (real_interval[a+c,b])) /\\\n    ((f has_real_integral (real_integral(real_interval[a+c,b]) f))\n     (real_interval[a+c,b]) /\\\n     (f has_real_integral (real_integral(real_interval[a,a+c]) f))\n     (real_interval[b,b+c]))
-      #|  a:real = (a + c) - c /\\ b = (b + c) - c
-      #|  forall f i a b c.\n        (forall x. f(x + (b - a)) = f x) /\\ &0 <= c /\\ a + c <= b /\\\n        (f has_real_integral i) (real_interval[a,b])\n        ==> ((\\x. f(x + c)) has_real_integral i)\n             (real_interval[a,b])
-      #|  --(--a - --b):real = a - b
-      #|  --x + (a - b):real
-      #|  x:real
-      #|  --c:real
-      #|  --a:real
-      #|  --b:real
-      #|  i:real
-      #|  \\x. (f:real->real)(--x)
-      #|  &0 <= c
-      #|  forall f i a b c.\n        (forall x. f(x + (b - a)) = f x) /\\ abs(c) <= b - a /\\\n        (f has_real_integral i) (real_interval[a,b])\n        ==> ((\\x. f(x + c)) has_real_integral i)\n             (real_interval[a,b])
-      #|  a < b ==> x + (b - a) * (c / (b - a) - f) =\n                (x + c) + --f * (b - a)
-      #|  x:real
-      #|  a < b /\\ (b - a) * f < (b - a) * &1\n      ==> abs(b - a) * f <= b - a
-      #|  ((\\x. f(x + (b - a) * frac(c / (b - a)))) has_real_integral i)\n    (real_interval[a,b])
-      #|  b <= a \\/ a < b
-      #|  forall f i a b c.\n        (forall x. f(x + (b - a)) = f x) /\\\n        (f has_real_integral i) (real_interval[a,b])\n        ==> ((\\x. f(x + c)) has_real_integral i) (real_interval[a,b])
-      #|  forall f a b c.\n        (forall x. f(x + (b - a)) = f x) /\\\n        f real_integrable_on real_interval[a,b]\n        ==> (\\x. f(x + c)) real_integrable_on real_interval[a,b]
-      #|  f:real->real
-      #|  forall f a b c.\n        (forall x. f(x + (b - a)) = f x) /\\\n        f absolutely_real_integrable_on real_interval[a,b]\n        ==> (\\x. f(x + c)) absolutely_real_integrable_on real_interval[a,b]
-      #|  forall f a b c.\n        (forall x. f(x + (b - a)) = f x) /\\\n        f real_integrable_on real_interval[a,b]\n        ==> real_integral (real_interval[a,b]) (\\x. f(x + c)) =\n            real_integral (real_interval[a,b]) f
-      #|  (a * b) * c:real = a * c * b
-      #|  (x + t) - t:real = x
-      #|  n * ((x + &2 * pi) - t) = (&2 * n) * pi + n * (x - t)
-      #|  pi - --pi = &2 * pi
-      #|  &1
-      #|  n:num
-      #|  n:num
-      #|  (:real)
-      #|  (\\x. cos (&(n + 1) * (x - t)) * f x) real_integrable_on\n    real_interval[--pi,pi]
-      #|  t:real
+      #|  \226\136\128 c : Real, \226\136\128 i : Num, fourier_coefficient((x : Real) => c, i) == (if i == 0 { c * sqrt(real_of_num(2) * pi) } else { real_of_num(0) })
+      #|  (x : Real) + -real_of_num((n : Num)) * (a : Real) + real_of_num(n) * a == x
+      #|  \226\136\128 x : Real, \226\136\128 n : Num, (f : (Real) -> Real)(x + real_of_num(n) * (a : Real)) == f(x)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, (\226\136\128 x : Real, f(x + a) == f(x)) == (\226\136\128 x : Real, \226\136\128 n : Real, integer(n) \226\134\146 f(x + n * a) == f(x))
+      #|  ((x : Real) - (c : Real) == (y : Real)) == (x == y + c)
+      #|  (c : Real)
+      #|  real_of_num(1)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, has_real_integral(f, i, real_interval([(a, b)])) \226\134\146 has_real_integral((x : Real) => f(x + c), i, real_interval([(a - c, b - c)]))
+      #|  (x : Real) + ((a : Real) - (b : Real))
+      #|  (x : Real)
+      #|  (a : Real) - (a - (b : Real)) == b && a + (c : Real) - (a - b) == b + c
+      #|  (a : Real) - (b : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, (\226\136\128 x : Real, f(x + (b - a)) == f(x)) && has_real_integral(f, i, real_interval([(a, a + c)])) \226\134\146 has_real_integral(f, i, real_interval([(b, b + c)]))
+      #|  real_interval([((a : Real), (b : Real))])
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) \226\134\146 (e : Bool)) == (c && d \226\134\146 a && b \226\134\146 e)
+      #|  (a : Real)
+      #|  (has_real_integral((f : (Real) -> Real), real_integral(real_interval([((a : Real), a + (c : Real))]), f), real_interval([(a, a + c)])) && has_real_integral(f, real_integral(real_interval([(a + c, (b : Real))]), f), real_interval([(a + c, b)]))) && has_real_integral(f, real_integral(real_interval([(a + c, b)]), f), real_interval([(a + c, b)])) && has_real_integral(f, real_integral(real_interval([(a, a + c)]), f), real_interval([(b, b + c)]))
+      #|  (a : Real) == a + (c : Real) - c && (b : Real) == b + c - c
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, (\226\136\128 x : Real, f(x + (b - a)) == f(x)) && real_of_num(0) <= c && a + c <= b && has_real_integral(f, i, real_interval([(a, b)])) \226\134\146 has_real_integral((x : Real) => f(x + c), i, real_interval([(a, b)]))
+      #|  -(-(a : Real) - -(b : Real)) == a - b
+      #|  -(x : Real) + ((a : Real) - (b : Real))
+      #|  (x : Real)
+      #|  -(c : Real)
+      #|  -(a : Real)
+      #|  -(b : Real)
+      #|  (i : Real)
+      #|  (x : Real) => (f : (Real) -> Real)(-x)
+      #|  real_of_num(0) <= (c : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, (\226\136\128 x : Real, f(x + (b - a)) == f(x)) && abs(c) <= b - a && has_real_integral(f, i, real_interval([(a, b)])) \226\134\146 has_real_integral((x : Real) => f(x + c), i, real_interval([(a, b)]))
+      #|  (a : Real) < (b : Real) \226\134\146 (x : Real) + (b - a) * ((c : Real) / (b - a) - (f : Real)) == x + c + -f * (b - a)
+      #|  (x : Real)
+      #|  (a : Real) < (b : Real) && (b - a) * (f : Real) < (b - a) * real_of_num(1) \226\134\146 abs(b - a) * f <= b - a
+      #|  has_real_integral((x : Real) => (f : (Real) -> Real)(x + ((b : Real) - (a : Real)) * frac((c : Real) / (b - a))), (i : Real), real_interval([(a, b)]))
+      #|  (b : Real) <= (a : Real) || a < b
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, (\226\136\128 x : Real, f(x + (b - a)) == f(x)) && has_real_integral(f, i, real_interval([(a, b)])) \226\134\146 has_real_integral((x : Real) => f(x + c), i, real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, (\226\136\128 x : Real, f(x + (b - a)) == f(x)) && real_integrable_on(f, real_interval([(a, b)])) \226\134\146 real_integrable_on((x : Real) => f(x + c), real_interval([(a, b)]))
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, (\226\136\128 x : Real, f(x + (b - a)) == f(x)) && absolutely_real_integrable_on(f, real_interval([(a, b)])) \226\134\146 absolutely_real_integrable_on((x : Real) => f(x + c), real_interval([(a, b)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, (\226\136\128 x : Real, f(x + (b - a)) == f(x)) && real_integrable_on(f, real_interval([(a, b)])) \226\134\146 real_integral(real_interval([(a, b)]), (x : Real) => f(x + c)) == real_integral(real_interval([(a, b)]), f)
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (c * b)
+      #|  (x : Real) + (t : Real) - t == x
+      #|  (n : Real) * ((x : Real) + real_of_num(2) * pi - (t : Real)) == real_of_num(2) * n * pi + n * (x - t)
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  real_of_num(1)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (UNIV : (Real) -> Bool)
+      #|  real_integrable_on((x : Real) => cos(real_of_num((n : Num) + 1) * (x - (t : Real))) * (f : (Real) -> Real)(x), real_interval([(-pi, pi)]))
+      #|  (t : Real)
       #|  pi
-      #|  --pi
-      #|  real_integral (real_interval[--pi,pi])\n                   (\\x. cos(&(n + 1) * (x - t)) * f x)
-      #|  \\x. cos(&(n + 1) * (x - t)) * f x
-      #|  (cm - cp) / &2 * f + (cm + cp) / &2 * f = cm * f
-      #|  abs x <= &1 /\\ abs y <= &1 ==> abs((x + y) / &2) <= &1
-      #|  &1
-      #|  n:num
-      #|  n:num
-      #|  (:real)
-      #|  a * b * c:real = (a * c) * b
-      #|  (a * b) * c:real = b * a * c
-      #|  forall f n t. f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n           (forall x. f(x + &2 * pi) = f x)\n           ==> fourier_coefficient (\\x. f(x + t)) (2 * n + 2) *\n               trigonometric_set (2 * n + 2) (&0) =\n               fourier_coefficient f (2 * n + 1) *\n               trigonometric_set (2 * n + 1) t +\n               fourier_coefficient f (2 * n + 2) *\n               trigonometric_set (2 * n + 2) t
-      #|  (k + 1) + 1 = k + 2
-      #|  k:num
-      #|  1..2*n = 2*0+1..(2*(n-1)+1)+1
-      #|  n = 0
-      #|  pi - --pi = &2 * pi
-      #|  t:real
+      #|  -pi
+      #|  real_integral(real_interval([(-pi, pi)]), (x : Real) => cos(real_of_num((n : Num) + 1) * (x - (t : Real))) * (f : (Real) -> Real)(x))
+      #|  (x : Real) => cos(real_of_num((n : Num) + 1) * (x - (t : Real))) * (f : (Real) -> Real)(x)
+      #|  ((cm : Real) - (cp : Real)) / real_of_num(2) * (f : Real) + (cm + cp) / real_of_num(2) * f == cm * f
+      #|  abs((x : Real)) <= real_of_num(1) && abs((y : Real)) <= real_of_num(1) \226\134\146 abs((x + y) / real_of_num(2)) <= real_of_num(1)
+      #|  real_of_num(1)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (a : Real) * ((b : Real) * (c : Real)) == a * c * b
+      #|  (a : Real) * (b : Real) * (c : Real) == b * (a * c)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 t : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) \226\134\146 fourier_coefficient((x : Real) => f(x + t), 2 * n + 2) * trigonometric_set(2 * n + 2, real_of_num(0)) == fourier_coefficient(f, 2 * n + 1) * trigonometric_set(2 * n + 1, t) + fourier_coefficient(f, 2 * n + 2) * trigonometric_set(2 * n + 2, t)
+      #|  (k : Num) + 1 + 1 == k + 2
+      #|  (k : Num)
+      #|  op_dot_dot(1, 2 * (n : Num)) == op_dot_dot(2 * 0 + 1, 2 * (n - 1) + 1 + 1)
+      #|  (n : Num) == 0
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  (t : Real)
       #|  pi
-      #|  --pi
-      #|  \\x:real. &1 / sqrt(&2 * pi) * f x
-      #|  forall f n t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> sum(0..2*n) (\\k. fourier_coefficient f k *\n                             trigonometric_set k t) =\n            sum(0..2*n) (\\k. fourier_coefficient (\\x. f (x + t)) k *\n                             trigonometric_set k (&0))
-      #|  sum(0..n) (\\k. fourier_coefficient (\\x. f (x + t)) (2 * k) *\n                   trigonometric_set (2 * k) (&0) +\n                   fourier_coefficient (\\x. f (x + t)) (2 * k + 1) *\n                   trigonometric_set (2 * k + 1) (&0))
-      #|  forall f n t.\n        f absolutely_real_integrable_on real_interval [--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> sum(0..2*n) (\\k. fourier_coefficient f k *\n                             trigonometric_set k t) =\n            sum(0..n) (\\k. fourier_coefficient (\\x. f (x + t)) (2 * k) *\n                           trigonometric_set (2 * k) (&0))
-      #|  dirichlet_kernel n x =\n        if x = &0 then &n + &1 / &2\n        else sin((&n + &1 / &2) * x) / (&2 * sin(x / &2))
-      #|  ~(x * inv(&2) = &0)
-      #|  ~(x = &0) ==> inv(&2 * x) * x = inv(&2)
-      #|  forall x. abs(x) < &2 * pi ==> dirichlet_kernel 0 x = &1 / &2
-      #|  forall n x. dirichlet_kernel n (--x) = dirichlet_kernel n x
-      #|  f real_differentiable (atreal a) /\\ f(a) = b\n     ==> (f ---> b) (atreal a)
-      #|  &1
-      #|  \\x. cos(x / &2)
-      #|  \\x. (&k + &1 / &2) * cos((&k + &1 / &2) * x)
-      #|  &1
-      #|  &0 < abs(x - &0) <=> ~(x = &0)
-      #|  \\x. sin((&k + &1 / &2) * x) / (&2 * sin(x / &2))
-      #|  abs x
-      #|  x / &2
-      #|  (\\x. sin((&k + &1 / &2) * x) / (&2 * sin(x / &2)))\n      real_continuous atreal x
-      #|  x = &0
-      #|  x:real
-      #|  k:num
-      #|  forall n. (dirichlet_kernel n) real_continuous_on\n       real_interval(--(&2 * pi),&2 * pi)
-      #|  real_interval(--(&2 * pi),&2 * pi)
-      #|  forall n. (dirichlet_kernel n) real_continuous_on real_interval[--pi,pi]
-      #|  forall f n. f absolutely_real_integrable_on real_interval[--pi,pi]\n         ==> (\\x. dirichlet_kernel n x * f x)\n             absolutely_real_integrable_on real_interval[--pi,pi]
-      #|  (&n + &1) * x - x / &2 = (&n + &1 / &2) * x
-      #|  &1 * x - x / &2 = x / &2
-      #|  forall k x. &k * x + x * inv(&2) = (&(k + 1) * x - x * inv(&2))
-      #|  n = 0 \\/ 1 <= n
-      #|  forall n x. (&1 / &2 + sum(1..n) (\\k. cos(&k * x))) * sin(x / &2) =\n         sin((&n + &1 / &2) * x) / &2
-      #|  x / &2
-      #|  ~(y = &0) /\\ z * y = x / &2 ==> x / (&2 * y) = z
-      #|  forall n x. ~(x = &0) /\\ abs(x) < &2 * pi\n         ==> dirichlet_kernel n x = &1 / &2 + sum(1..n) (\\k. cos(&k * x))
-      #|  k:num
-      #|  k:num
-      #|  pi = (&1 / &2) * (pi - --pi)
-      #|  pi = pi + sum(1..n) (\\k. &0)
-      #|  &0 < pi /\\ --pi <= x /\\ x <= pi ==> abs(x) < &2 * pi
-      #|  {&0}
-      #|  \\x. &1 / &2 + sum(1..n) (\\k. cos(&k * x))
-      #|  forall n. (dirichlet_kernel n has_real_integral pi) (real_interval[--pi,pi])
-      #|  x = pi ==> x = &2 * y ==> y = pi / &2
-      #|  &0
+      #|  -pi
+      #|  (x : Real) => real_of_num(1) / sqrt(real_of_num(2) * pi) * (f : (Real) -> Real)(x)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 t : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) \226\134\146 sum(op_dot_dot(0, 2 * n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)) == sum(op_dot_dot(0, 2 * n), (k : Num) => fourier_coefficient((x : Real) => f(x + t), k) * trigonometric_set(k, real_of_num(0)))
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => fourier_coefficient((x : Real) => (f : (Real) -> Real)(x + (t : Real)), 2 * k) * trigonometric_set(2 * k, real_of_num(0)) + fourier_coefficient((x : Real) => f(x + t), 2 * k + 1) * trigonometric_set(2 * k + 1, real_of_num(0)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 t : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) \226\134\146 sum(op_dot_dot(0, 2 * n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)) == sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient((x : Real) => f(x + t), 2 * k) * trigonometric_set(2 * k, real_of_num(0)))
+      #|  (dirichlet_kernel : (Num, Real) -> Real)((n : Num), (x : Real)) == (if x == real_of_num(0) { real_of_num(n) + real_of_num(1) / real_of_num(2) } else { sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * x) / (real_of_num(2) * sin(x / real_of_num(2))) })
+      #|  !((x : Real) * inv(real_of_num(2)) == real_of_num(0))
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 inv(real_of_num(2) * x) * x == inv(real_of_num(2))
+      #|  \226\136\128 x : Real, abs(x) < real_of_num(2) * pi \226\134\146 dirichlet_kernel(0, x) == real_of_num(1) / real_of_num(2)
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, dirichlet_kernel(n, -x) == dirichlet_kernel(n, x)
+      #|  real_differentiable((f : (Real) -> Real), atreal((a : Real))) && f(a) == (b : Real) \226\134\146 op_minus_minus_minus_gt(f, b, atreal(a))
+      #|  real_of_num(1)
+      #|  (x : Real) => cos(x / real_of_num(2))
+      #|  (x : Real) => (real_of_num((k : Num)) + real_of_num(1) / real_of_num(2)) * cos((real_of_num(k) + real_of_num(1) / real_of_num(2)) * x)
+      #|  real_of_num(1)
+      #|  (real_of_num(0) < abs((x : Real) - real_of_num(0))) == !(x == real_of_num(0))
+      #|  (x : Real) => sin((real_of_num((k : Num)) + real_of_num(1) / real_of_num(2)) * x) / (real_of_num(2) * sin(x / real_of_num(2)))
+      #|  abs((x : Real))
+      #|  (x : Real) / real_of_num(2)
+      #|  real_continuous((x : Real) => sin((real_of_num((k : Num)) + real_of_num(1) / real_of_num(2)) * x) / (real_of_num(2) * sin(x / real_of_num(2))), atreal((x : Real)))
+      #|  (x : Real) == real_of_num(0)
+      #|  (x : Real)
+      #|  (k : Num)
+      #|  \226\136\128 n : Num, real_continuous_on(dirichlet_kernel(n), real_interval((-(real_of_num(2) * pi), real_of_num(2) * pi)))
+      #|  real_interval((-(real_of_num(2) * pi), real_of_num(2) * pi))
+      #|  \226\136\128 n : Num, real_continuous_on(dirichlet_kernel(n), real_interval([(-pi, pi)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) \226\134\146 absolutely_real_integrable_on((x : Real) => dirichlet_kernel(n, x) * f(x), real_interval([(-pi, pi)]))
+      #|  (real_of_num((n : Num)) + real_of_num(1)) * (x : Real) - x / real_of_num(2) == (real_of_num(n) + real_of_num(1) / real_of_num(2)) * x
+      #|  real_of_num(1) * (x : Real) - x / real_of_num(2) == x / real_of_num(2)
+      #|  \226\136\128 k : Num, \226\136\128 x : Real, real_of_num(k) * x + x * inv(real_of_num(2)) == real_of_num(k + 1) * x - x * inv(real_of_num(2))
+      #|  (n : Num) == 0 || 1 <= n
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, (real_of_num(1) / real_of_num(2) + sum(op_dot_dot(1, n), (k : Num) => cos(real_of_num(k) * x))) * sin(x / real_of_num(2)) == sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * x) / real_of_num(2)
+      #|  (x : Real) / real_of_num(2)
+      #|  !((y : Real) == real_of_num(0)) && (z : Real) * y == (x : Real) / real_of_num(2) \226\134\146 x / (real_of_num(2) * y) == z
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, !(x == real_of_num(0)) && abs(x) < real_of_num(2) * pi \226\134\146 dirichlet_kernel(n, x) == real_of_num(1) / real_of_num(2) + sum(op_dot_dot(1, n), (k : Num) => cos(real_of_num(k) * x))
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  pi == real_of_num(1) / real_of_num(2) * (pi - -pi)
+      #|  pi == pi + sum(op_dot_dot(1, (n : Num)), (k : Num) => real_of_num(0))
+      #|  real_of_num(0) < pi && -pi <= (x : Real) && x <= pi \226\134\146 abs(x) < real_of_num(2) * pi
+      #|  {real_of_num(0)}
+      #|  (x : Real) => real_of_num(1) / real_of_num(2) + sum(op_dot_dot(1, (n : Num)), (k : Num) => cos(real_of_num(k) * x))
+      #|  \226\136\128 n : Num, has_real_integral(dirichlet_kernel(n), pi, real_interval([(-pi, pi)]))
+      #|  (x : Real) == pi \226\134\146 x == real_of_num(2) * (y : Real) \226\134\146 y == pi / real_of_num(2)
+      #|  real_of_num(0)
       #|  pi
-      #|  --pi
-      #|  real_integral (real_interval [&0,pi]) (dirichlet_kernel n)
-      #|  real_integral (real_interval [&0,pi]) (dirichlet_kernel n)
-      #|  dirichlet_kernel n
+      #|  -pi
+      #|  real_integral(real_interval([(real_of_num(0), pi)]), dirichlet_kernel((n : Num)))
+      #|  real_integral(real_interval([(real_of_num(0), pi)]), dirichlet_kernel((n : Num)))
+      #|  dirichlet_kernel((n : Num))
       #|  pi
-      #|  &0
+      #|  real_of_num(0)
       #|  pi
-      #|  --pi
-      #|  dirichlet_kernel n
-      #|  forall n. (dirichlet_kernel n has_real_integral (pi / &2))\n       (real_interval[&0,pi])
-      #|  s * s:real = p ==> p * f * c = (c * s) * f * s
-      #|  k:num
-      #|  ~(y = &0) ==> (x / (&2 * y) = z <=> z * y = x / &2)
-      #|  a /\\ b /\\ ~d /\\ (~c ==> e)\n                         ==> (a /\\ b /\\ c ==> d) ==> e
-      #|  x / &2
-      #|  x = &0
-      #|  x - &1 / &2 = y <=> x = &1 / &2 + y
-      #|  sum(1..n) (\\k. inv pi * f(x + t) * cos(&k * x))
-      #|  d * f * i = (&1 * f) * inv(&2) * i + y <=> i * f * (d - &1 / &2) = y
-      #|  a * b * c * b:real = (a * c) * b pow 2
-      #|  x:real
-      #|  {}:real->bool
-      #|  pi - --pi = &2 * pi
-      #|  t:real
+      #|  -pi
+      #|  dirichlet_kernel((n : Num))
+      #|  \226\136\128 n : Num, has_real_integral(dirichlet_kernel(n), pi / real_of_num(2), real_interval([(real_of_num(0), pi)]))
+      #|  (s : Real) * s == (p : Real) \226\134\146 p * ((f : Real) * (c : Real)) == c * s * (f * s)
+      #|  (k : Num)
+      #|  !((y : Real) == real_of_num(0)) \226\134\146 ((x : Real) / (real_of_num(2) * y) == (z : Real)) == (z * y == x / real_of_num(2))
+      #|  (a : Bool) && (b : Bool) && !(d : Bool) && (!(c : Bool) \226\134\146 (e : Bool)) \226\134\146 (a && b && c \226\134\146 d) \226\134\146 e
+      #|  (x : Real) / real_of_num(2)
+      #|  (x : Real) == real_of_num(0)
+      #|  ((x : Real) - real_of_num(1) / real_of_num(2) == (y : Real)) == (x == real_of_num(1) / real_of_num(2) + y)
+      #|  sum(op_dot_dot(1, (n : Num)), (k : Num) => inv(pi) * ((f : (Real) -> Real)((x : Real) + (t : Real)) * cos(real_of_num(k) * x)))
+      #|  ((d : Real) * ((f : Real) * (i : Real)) == real_of_num(1) * f * (inv(real_of_num(2)) * i) + (y : Real)) == (i * (f * (d - real_of_num(1) / real_of_num(2))) == y)
+      #|  (a : Real) * ((b : Real) * ((c : Real) * b)) == a * c * pow(b, 2)
+      #|  (x : Real)
+      #|  ({} : (Real) -> Bool)
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  (t : Real)
       #|  pi
-      #|  --pi
-      #|  f:real->real
-      #|  fourier_coefficient (\\x. f(x + t)) 0 * &1 / sqrt(&2 * pi) +\n    sum (1..n) (\\k. fourier_coefficient (\\x. f(x + t)) (2 * k) / sqrt pi)
-      #|  forall f n t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> sum(0..2*n) (\\k. fourier_coefficient f k * trigonometric_set k t) =\n            real_integral (real_interval[--pi,pi])\n                          (\\x. dirichlet_kernel n x * f(x + t)) / pi
-      #|  l = (l * pi) / pi
-      #|  forall f t l.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> (((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> l) sequentially <=>\n            ((\\n. real_integral (real_interval[--pi,pi])\n                                (\\x. dirichlet_kernel n x * f(x + t)))\n             ---> pi * l) sequentially)
-      #|  {&0}
-      #|  forall n. real_integral (real_interval [--pi,pi])\n                        (\\x. dirichlet_kernel n x * (f(x + t) - f(t))) =\n          real_integral (real_interval [--pi,pi])\n                        (\\x. sin((&n + &1 / &2) * x) *\n                             inv(&2) * (f(x + t) - f(t)) / sin(x / &2))
-      #|  pi - --pi = &2 * pi
-      #|  t:real
+      #|  -pi
+      #|  (f : (Real) -> Real)
+      #|  fourier_coefficient((x : Real) => (f : (Real) -> Real)(x + (t : Real)), 0) * (real_of_num(1) / sqrt(real_of_num(2) * pi)) + sum(op_dot_dot(1, (n : Num)), (k : Num) => fourier_coefficient((x : Real) => f(x + t), 2 * k) / sqrt(pi))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 t : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) \226\134\146 sum(op_dot_dot(0, 2 * n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)) == real_integral(real_interval([(-pi, pi)]), (x : Real) => dirichlet_kernel(n, x) * f(x + t)) / pi
+      #|  (l : Real) == l * pi / pi
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 t : Real, \226\136\128 l : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)), l, sequentially) == op_minus_minus_minus_gt((n : Num) => real_integral(real_interval([(-pi, pi)]), (x : Real) => dirichlet_kernel(n, x) * f(x + t)), pi * l, sequentially)
+      #|  {real_of_num(0)}
+      #|  \226\136\128 n : Num, real_integral(real_interval([(-pi, pi)]), (x : Real) => dirichlet_kernel(n, x) * ((f : (Real) -> Real)(x + (t : Real)) - f(t))) == real_integral(real_interval([(-pi, pi)]), (x : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * x) * (inv(real_of_num(2)) * ((f(x + t) - f(t)) / sin(x / real_of_num(2)))))
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  (t : Real)
       #|  pi
-      #|  --pi
-      #|  f:real->real
-      #|  &0
-      #|  t:real
-      #|  \\x. (f:real->real)(x) - f(t)
-      #|  &0 < s ==> (f * s) * &1 / s = f
-      #|  s:real = u /\\ ft * t = x ==> (f0 - ft) * t + s = (f0 * t + u) - x
-      #|  n:num
+      #|  -pi
+      #|  (f : (Real) -> Real)
+      #|  real_of_num(0)
+      #|  (t : Real)
+      #|  (x : Real) => (f : (Real) -> Real)(x) - f((t : Real))
+      #|  real_of_num(0) < (s : Real) \226\134\146 (f : Real) * s * (real_of_num(1) / s) == f
+      #|  (s : Real) == (u : Real) && (ft : Real) * (t : Real) == (x : Real) \226\134\146 ((f0 : Real) - ft) * t + s == f0 * t + u - x
+      #|  (n : Num)
       #|  1
-      #|  (a ==> c) /\\ b ==> (a <=> b) ==> c
-      #|  pi - --pi = &2 * pi
-      #|  t:real
+      #|  ((a : Bool) \226\134\146 (c : Bool)) && (b : Bool) \226\134\146 a == b \226\134\146 c
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  (t : Real)
       #|  pi
-      #|  --pi
-      #|  f:real->real
-      #|  &0
-      #|  t:real
-      #|  \\x. (f:real->real)(x) - f(t)
-      #|  forall f t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (\\x. (f(x + t) - f(t)) / sin(x / &2))\n        absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> ((\\n. sum (0..n)\n                      (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> f(t)) sequentially
-      #|  &2 * pi * m = &2 * pi * n <=> pi = &0 \\/ m = n
-      #|  y / &2 = n * pi <=> &2 * pi * n = y
-      #|  {x | sin(x / &2) = &0} = IMAGE (\\n. &2 * pi * n) integer
-      #|  x <= a ==> x <= max a b
-      #|  x <= b ==> x <= max a b
-      #|  abs(x) < e
-      #|  &0
-      #|  &0 < x
-      #|  &0 < a
+      #|  -pi
+      #|  (f : (Real) -> Real)
+      #|  real_of_num(0)
+      #|  (t : Real)
+      #|  (x : Real) => (f : (Real) -> Real)(x) - f((t : Real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 t : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && absolutely_real_integrable_on((x : Real) => (f(x + t) - f(t)) / sin(x / real_of_num(2)), real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)), f(t), sequentially)
+      #|  (real_of_num(2) * (pi * (m : Real)) == real_of_num(2) * (pi * (n : Real))) == (pi == real_of_num(0) || m == n)
+      #|  ((y : Real) / real_of_num(2) == (n : Real) * pi) == (real_of_num(2) * (pi * n) == y)
+      #|  {(x : Real) | sin(x / real_of_num(2)) == real_of_num(0)} == IMAGE((n : Real) => real_of_num(2) * (pi * n), integer)
+      #|  (x : Real) <= (a : Real) \226\134\146 x <= max(a, (b : Real))
+      #|  (x : Real) <= (b : Real) \226\134\146 x <= max((a : Real), b)
+      #|  abs((x : Real)) < (e : Real)
+      #|  real_of_num(0)
+      #|  real_of_num(0) < (x : Real)
+      #|  real_of_num(0) < (a : Real)
       #|  pi
-      #|  &0
-      #|  \\x. x rpow (a - &1)
-      #|  \\x. inv(a) * x rpow a
-      #|  pi - --pi = &2 * pi
-      #|  t:real
+      #|  real_of_num(0)
+      #|  (x : Real) => rpow(x, (a : Real) - real_of_num(1))
+      #|  (x : Real) => inv((a : Real)) * rpow(x, a)
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  (t : Real)
       #|  pi
-      #|  --pi
-      #|  f:real->real
-      #|  \\x:real. max (B * abs(f(x + t) - f t))\n                           ((&4 * abs M) * abs(x) rpow (a - &1))
-      #|  B:real
-      #|  real_interval[--pi,pi]
-      #|  x / &2
-      #|  x:real
-      #|  real_bounded (IMAGE (\\x. inv(sin(x / &2)))\n                (real_interval[--pi,pi] DIFF real_interval(--e,e)))
-      #|  (x + t) - t:real = x
-      #|  M * abs((x + t) - t) rpow a
-      #|  a - &1 + &1 = a
-      #|  &4 = inv(&1 / &4)
-      #|  ~(x = &0)
-      #|  abs((f(x + t) - f t) / sin (x / &2)) =\n      abs(inv(sin(x / &2) / x)) * abs(f(x + t) - f t) / abs(x)
-      #|  abs(x - &1 / &2) < &1 / &4 ==> &1 / &4 <= abs(x)
-      #|  x:real
-      #|  x = &0
-      #|  sin(x / &2) = &0
-      #|  x:real
-      #|  min d e:real
-      #|  e:real
-      #|  &1 / &4
-      #|  ((\\x. sin(x / &2)) has_real_derivative w) (atreal (&0))
-      #|  ?e. &0 < e /\\\n         forall x. abs(x) < e\n             ==> abs((f (x + t) - f t) / sin (x / &2))\n                 <= &4 * abs M * abs(x) rpow (a - &1)
-      #|  forall f d M a t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f(x)) /\\\n        &0 < d /\\ &0 < a /\\\n        (forall x. abs(x - t) < d ==> abs(f x - f t) <= M * abs(x - t) rpow a)\n        ==> ((\\n. sum (0..n)\n                      (\\k. fourier_coefficient f k * trigonometric_set k t))\n             ---> f t) sequentially
-      #|  &1
-      #|  M:real
-      #|  d:real
-      #|  forall f d M t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f(x)) /\\\n        &0 < d /\\ (forall x. abs(x - t) < d ==> abs(f x - f t) <= M * abs(x - t))\n        ==> ((\\n. sum (0..n)\n                      (\\k. fourier_coefficient f k * trigonometric_set k t))\n             ---> f t) sequentially
-      #|  x:real
-      #|  x < t ==> &0 < abs(x - t)
-      #|  x:real
-      #|  t < x ==> &0 < abs(x - t)
-      #|  x = t \\/ t < x \\/ x < t
-      #|  x:real
-      #|  abs B1 + abs B2 + &1
-      #|  min d1 d2:real
-      #|  d2:real
-      #|  &1
-      #|  d1:real
-      #|  &1
-      #|  B2:real
-      #|  B1:real
-      #|  forall f t. f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n         (forall x. f(x + &2 * pi) = f(x)) /\\\n         f real_differentiable (atreal t within {x | t < x}) /\\\n         f real_differentiable (atreal t within {x | x < t})\n         ==> ((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> f t) sequentially
-      #|  f real_differentiable (atreal t)
-      #|  forall f t. f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n         (forall x. f(x + &2 * pi) = f(x)) /\\\n         f real_differentiable (atreal t)\n         ==> ((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> f t) sequentially
-      #|  pi - --pi = &2 * pi
-      #|  pi - --pi = &2 * pi
-      #|  forall f n c.\n        f absolutely_real_integrable_on real_interval [--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f(x))\n        ==> (\\x. dirichlet_kernel n x * f(t + x))\n            absolutely_real_integrable_on real_interval[--pi,pi] /\\\n            (\\x. dirichlet_kernel n x * f(t - x))\n            absolutely_real_integrable_on real_interval[--pi,pi] /\\\n            (\\x. dirichlet_kernel n x * c)\n            absolutely_real_integrable_on real_interval[--pi,pi]
-      #|  real_interval[--pi,pi]
-      #|  (a /\\ b /\\ c) /\\ (a /\\ b /\\ c ==> d /\\ e)\n    ==> a /\\ b /\\ c /\\ d /\\ e
-      #|  forall f n d c.\n        f absolutely_real_integrable_on real_interval [--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f(x)) /\\ d <= pi\n        ==> (\\x. dirichlet_kernel n x * f(t + x))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. dirichlet_kernel n x * f(t - x))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. dirichlet_kernel n x * c)\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. dirichlet_kernel n x * (f(t + x) + f(t - x)))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. dirichlet_kernel n x * ((f(t + x) + f(t - x)) - c))\n            absolutely_real_integrable_on real_interval[&0,d]
-      #|  c:real
+      #|  -pi
+      #|  (f : (Real) -> Real)
+      #|  (x : Real) => max((B : Real) * abs((f : (Real) -> Real)(x + (t : Real)) - f(t)), real_of_num(4) * abs((M : Real)) * rpow(abs(x), (a : Real) - real_of_num(1)))
+      #|  (B : Real)
+      #|  real_interval([(-pi, pi)])
+      #|  (x : Real) / real_of_num(2)
+      #|  (x : Real)
+      #|  real_bounded(IMAGE((x : Real) => inv(sin(x / real_of_num(2))), DIFF(real_interval([(-pi, pi)]), real_interval((-(e : Real), e)))))
+      #|  (x : Real) + (t : Real) - t == x
+      #|  (M : Real) * rpow(abs((x : Real) + (t : Real) - t), (a : Real))
+      #|  (a : Real) - real_of_num(1) + real_of_num(1) == a
+      #|  real_of_num(4) == inv(real_of_num(1) / real_of_num(4))
+      #|  !((x : Real) == real_of_num(0))
+      #|  abs(((f : (Real) -> Real)((x : Real) + (t : Real)) - f(t)) / sin(x / real_of_num(2))) == abs(inv(sin(x / real_of_num(2)) / x)) * (abs(f(x + t) - f(t)) / abs(x))
+      #|  abs((x : Real) - real_of_num(1) / real_of_num(2)) < real_of_num(1) / real_of_num(4) \226\134\146 real_of_num(1) / real_of_num(4) <= abs(x)
+      #|  (x : Real)
+      #|  (x : Real) == real_of_num(0)
+      #|  sin((x : Real) / real_of_num(2)) == real_of_num(0)
+      #|  (x : Real)
+      #|  min((d : Real), (e : Real))
+      #|  (e : Real)
+      #|  real_of_num(1) / real_of_num(4)
+      #|  has_real_derivative((x : Real) => sin(x / real_of_num(2)), (w : Real), atreal(real_of_num(0)))
+      #|  \226\136\131 e : Real, real_of_num(0) < e && (\226\136\128 x : Real, abs(x) < e \226\134\146 abs(((f : (Real) -> Real)(x + (t : Real)) - f(t)) / sin(x / real_of_num(2))) <= real_of_num(4) * (abs((M : Real)) * rpow(abs(x), (a : Real) - real_of_num(1))))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 d : Real, \226\136\128 M : Real, \226\136\128 a : Real, \226\136\128 t : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) && real_of_num(0) < d && real_of_num(0) < a && (\226\136\128 x : Real, abs(x - t) < d \226\134\146 abs(f(x) - f(t)) <= M * rpow(abs(x - t), a)) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)), f(t), sequentially)
+      #|  real_of_num(1)
+      #|  (M : Real)
+      #|  (d : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 d : Real, \226\136\128 M : Real, \226\136\128 t : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) && real_of_num(0) < d && (\226\136\128 x : Real, abs(x - t) < d \226\134\146 abs(f(x) - f(t)) <= M * abs(x - t)) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)), f(t), sequentially)
+      #|  (x : Real)
+      #|  (x : Real) < (t : Real) \226\134\146 real_of_num(0) < abs(x - t)
+      #|  (x : Real)
+      #|  (t : Real) < (x : Real) \226\134\146 real_of_num(0) < abs(x - t)
+      #|  (x : Real) == (t : Real) || t < x || x < t
+      #|  (x : Real)
+      #|  abs((B1 : Real)) + (abs((B2 : Real)) + real_of_num(1))
+      #|  min((d1 : Real), (d2 : Real))
+      #|  (d2 : Real)
+      #|  real_of_num(1)
+      #|  (d1 : Real)
+      #|  real_of_num(1)
+      #|  (B2 : Real)
+      #|  (B1 : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 t : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) && real_differentiable(f, within(atreal(t), {(x : Real) | t < x})) && real_differentiable(f, within(atreal(t), {(x : Real) | x < t})) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)), f(t), sequentially)
+      #|  real_differentiable((f : (Real) -> Real), atreal((t : Real)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 t : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) && real_differentiable(f, atreal(t)) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)), f(t), sequentially)
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 c : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) \226\134\146 absolutely_real_integrable_on((x : Real) => dirichlet_kernel(n, x) * f((t : Real) + x), real_interval([(-pi, pi)])) && absolutely_real_integrable_on((x : Real) => dirichlet_kernel(n, x) * f(t - x), real_interval([(-pi, pi)])) && absolutely_real_integrable_on((x : Real) => dirichlet_kernel(n, x) * c, real_interval([(-pi, pi)]))
+      #|  real_interval([(-pi, pi)])
+      #|  ((a : Bool) && (b : Bool) && (c : Bool)) && (a && b && c \226\134\146 (d : Bool) && (e : Bool)) \226\134\146 a && b && c && d && e
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 d : Real, \226\136\128 c : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) && d <= pi \226\134\146 absolutely_real_integrable_on((x : Real) => dirichlet_kernel(n, x) * f((t : Real) + x), real_interval([(real_of_num(0), d)])) && absolutely_real_integrable_on((x : Real) => dirichlet_kernel(n, x) * f(t - x), real_interval([(real_of_num(0), d)])) && absolutely_real_integrable_on((x : Real) => dirichlet_kernel(n, x) * c, real_interval([(real_of_num(0), d)])) && absolutely_real_integrable_on((x : Real) => dirichlet_kernel(n, x) * (f(t + x) + f(t - x)), real_interval([(real_of_num(0), d)])) && absolutely_real_integrable_on((x : Real) => dirichlet_kernel(n, x) * (f(t + x) + f(t - x) - c), real_interval([(real_of_num(0), d)]))
+      #|  (c : Real)
       #|  pi
-      #|  n:num
-      #|  f:real->real
-      #|  c:real
-      #|  pi / &2 * &2 * l = pi * l
-      #|  &2 * l
-      #|  n:num
-      #|  dirichlet_kernel n x * f(x + t) = dirichlet_kernel n x * f(t + x)
-      #|  pi - --pi = &2 * pi
-      #|  t:real
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  (c : Real)
+      #|  pi / real_of_num(2) * (real_of_num(2) * (l : Real)) == pi * l
+      #|  real_of_num(2) * (l : Real)
+      #|  (n : Num)
+      #|  dirichlet_kernel((n : Num), (x : Real)) * (f : (Real) -> Real)(x + (t : Real)) == dirichlet_kernel(n, x) * f(t + x)
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  (t : Real)
       #|  pi
-      #|  --pi
-      #|  f:real->real
-      #|  &0 < pi ==> x = y + pi * l ==> x / pi - l = y / pi
-      #|  forall f n t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> sum(0..2*n) (\\k. fourier_coefficient f k * trigonometric_set k t) -\n            l =\n            real_integral (real_interval[&0,pi])\n                          (\\x. dirichlet_kernel n x *\n                               ((f(t + x) + f(t - x)) - &2 * l)) / pi
-      #|  forall f t l.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> (((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> l) sequentially <=>\n            ((\\n. real_integral (real_interval[&0,pi])\n                                (\\x. dirichlet_kernel n x *\n                                     ((f(t + x) + f(t - x)) - &2 * l)))\n             ---> &0) sequentially)
-      #|  x:real
-      #|  &2 * pi * m = &2 * pi * n <=> pi = &0 \\/ m = n
-      #|  y / &2 = n * pi <=> &2 * pi * n = y
-      #|  {x | sin(x / &2) = &0} = IMAGE (\\n. &2 * pi * n) integer
-      #|  {x | abs x < d} = real_interval(--d,d)
-      #|  \\x:real. B * abs(f(x) - g(x))
-      #|  B:real
-      #|  real_interval[--pi,pi]
-      #|  x / &2
-      #|  x:real
-      #|  real_bounded (IMAGE (\\x. inv(sin(x / &2)))\n                (real_interval[--pi,pi] DIFF real_interval(--d,d)))
-      #|  {&0}
-      #|  forall n. real_integral (real_interval[--pi,pi])\n                      (\\x. dirichlet_kernel n x *\n                           (if abs x < d then &0 else f(x) - g(x))) =\n        real_integral (real_interval[--pi,pi])\n                      (\\x. sin((&n + &1 / &2) * x) *\n                           inv(&2) *\n                           (if abs x < d then &0 else f(x) - g(x)) /\n                           sin(x / &2))
-      #|  &0 = x - y <=> x = y
-      #|  x:real
-      #|  {}:real->bool
-      #|  n:num
-      #|  forall n. real_integral (real_interval[--pi,pi])\n                      (\\x. dirichlet_kernel n x * f(x)) -\n        real_integral (real_interval[--pi,pi])\n                      (\\x. dirichlet_kernel n x * g(x)) =\n        real_integral (real_interval[--pi,pi])\n                      (\\x. dirichlet_kernel n x *\n                           (if abs(x) < d then &0 else f(x) - g(x)))
-      #|  forall d f g.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        g absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        &0 < d /\\ (forall x. abs(x) < d ==> f x = g x)\n        ==> ((\\n. real_integral (real_interval[--pi,pi])\n                                (\\x. dirichlet_kernel n x * f(x)) -\n                  real_integral (real_interval[--pi,pi])\n                                (\\x. dirichlet_kernel n x * g(x)))\n             ---> &0) sequentially
-      #|  real_interval[--d,d] SUBSET real_interval[--pi,pi]
-      #|  a * (if p then b else &0) = if p then a * b else &0
-      #|  &0 < d /\\ d <= pi\n        ==> ((--pi <= x /\\ x <= pi) /\\ --d <= x /\\ x <= d <=>\n             --d <= x /\\ x <= d)
-      #|  (if p then if q then x else y else y) =\n                           (if p /\\ q then x else y)
-      #|  \\x. if x IN real_interval[--d,d] then f x else &0
-      #|  f:real->real
-      #|  d:real
-      #|  forall d f.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        &0 < d /\\ d <= pi\n        ==> ((\\n. real_integral (real_interval[--pi,pi])\n                                (\\x. dirichlet_kernel n x * f(x)) -\n                  real_integral (real_interval[--d,d])\n                                (\\x. dirichlet_kernel n x * f(x)))\n             ---> &0) sequentially
-      #|  pi - --pi = &2 * pi
-      #|  pi - --pi = &2 * pi
-      #|  d:real
-      #|  forall t d c f g.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        g absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f(x)) /\\ (forall x. g(x + &2 * pi) = g(x)) /\\\n        &0 < d /\\ (forall x. abs(x - t) < d ==> f x = g x)\n        ==> (((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> c) sequentially <=>\n             ((\\n. sum (0..n)\n                       (\\k. fourier_coefficient g k * trigonometric_set k t))\n              ---> c) sequentially)
-      #|  n:num
-      #|  n:num
-      #|  forall n. (\\x. dirichlet_kernel n x * f x) absolutely_real_integrable_on\n        real_interval[--d,d]
-      #|  n:num
-      #|  f:real->real
-      #|  n:num
-      #|  f:real->real
-      #|  d:real
-      #|  forall d f.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        &0 < d /\\ d <= pi\n        ==> ((\\n. real_integral (real_interval[&0,pi])\n                                (\\x. dirichlet_kernel n x * (f(x) + f(--x))) -\n                  real_integral (real_interval[&0,d])\n                                (\\x. dirichlet_kernel n x * (f(x) + f(--x))))\n             ---> &0) sequentially
-      #|  pi - --pi = &2 * pi
-      #|  forall x. (f:real->real)(t - x) = f(t + --x)
-      #|  (x + y) - &2 * l = (x - l) + (y - l)
-      #|  forall f t l d.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x) /\\ &0 < d /\\ d <= pi\n        ==> (((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> l) sequentially <=>\n            ((\\n. real_integral (real_interval[&0,d])\n                                (\\x. dirichlet_kernel n x *\n                                     ((f(t + x) + f(t - x)) - &2 * l)))\n             ---> &0) sequentially)
-      #|  {&0}
-      #|  forall f n s. real_integral s (\\x. dirichlet_kernel n x * f x) =\n           real_integral s (\\x. sin((&n + &1 / &2) * x) / (&2 * sin(x / &2)) *\n                                f x)
-      #|  {&0}
-      #|  forall f n s. (\\x. dirichlet_kernel n x * f x) real_integrable_on s <=>\n           (\\x. sin((&n + &1 / &2) * x) / (&2 * sin(x / &2)) * f x)\n           real_integrable_on s
-      #|  Cx x
+      #|  -pi
+      #|  (f : (Real) -> Real)
+      #|  real_of_num(0) < pi \226\134\146 (x : Real) == (y : Real) + pi * (l : Real) \226\134\146 x / pi - l == y / pi
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 t : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) \226\134\146 sum(op_dot_dot(0, 2 * n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)) - (l : Real) == real_integral(real_interval([(real_of_num(0), pi)]), (x : Real) => dirichlet_kernel(n, x) * (f(t + x) + f(t - x) - real_of_num(2) * l)) / pi
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 t : Real, \226\136\128 l : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)), l, sequentially) == op_minus_minus_minus_gt((n : Num) => real_integral(real_interval([(real_of_num(0), pi)]), (x : Real) => dirichlet_kernel(n, x) * (f(t + x) + f(t - x) - real_of_num(2) * l)), real_of_num(0), sequentially)
+      #|  (x : Real)
+      #|  (real_of_num(2) * (pi * (m : Real)) == real_of_num(2) * (pi * (n : Real))) == (pi == real_of_num(0) || m == n)
+      #|  ((y : Real) / real_of_num(2) == (n : Real) * pi) == (real_of_num(2) * (pi * n) == y)
+      #|  {(x : Real) | sin(x / real_of_num(2)) == real_of_num(0)} == IMAGE((n : Real) => real_of_num(2) * (pi * n), integer)
+      #|  {(x : Real) | abs(x) < (d : Real)} == real_interval((-d, d))
+      #|  (x : Real) => (B : Real) * abs((f : (Real) -> Real)(x) - (g : (Real) -> Real)(x))
+      #|  (B : Real)
+      #|  real_interval([(-pi, pi)])
+      #|  (x : Real) / real_of_num(2)
+      #|  (x : Real)
+      #|  real_bounded(IMAGE((x : Real) => inv(sin(x / real_of_num(2))), DIFF(real_interval([(-pi, pi)]), real_interval((-(d : Real), d)))))
+      #|  {real_of_num(0)}
+      #|  \226\136\128 n : Num, real_integral(real_interval([(-pi, pi)]), (x : Real) => dirichlet_kernel(n, x) * (if abs(x) < (d : Real) { real_of_num(0) } else { (f : (Real) -> Real)(x) - (g : (Real) -> Real)(x) })) == real_integral(real_interval([(-pi, pi)]), (x : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * x) * (inv(real_of_num(2)) * ((if abs(x) < d { real_of_num(0) } else { f(x) - g(x) }) / sin(x / real_of_num(2)))))
+      #|  (real_of_num(0) == (x : Real) - (y : Real)) == (x == y)
+      #|  (x : Real)
+      #|  ({} : (Real) -> Bool)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, real_integral(real_interval([(-pi, pi)]), (x : Real) => dirichlet_kernel(n, x) * (f : (Real) -> Real)(x)) - real_integral(real_interval([(-pi, pi)]), (x : Real) => dirichlet_kernel(n, x) * (g : (Real) -> Real)(x)) == real_integral(real_interval([(-pi, pi)]), (x : Real) => dirichlet_kernel(n, x) * (if abs(x) < (d : Real) { real_of_num(0) } else { f(x) - g(x) }))
+      #|  \226\136\128 d : Real, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && absolutely_real_integrable_on(g, real_interval([(-pi, pi)])) && real_of_num(0) < d && (\226\136\128 x : Real, abs(x) < d \226\134\146 f(x) == g(x)) \226\134\146 op_minus_minus_minus_gt((n : Num) => real_integral(real_interval([(-pi, pi)]), (x : Real) => dirichlet_kernel(n, x) * f(x)) - real_integral(real_interval([(-pi, pi)]), (x : Real) => dirichlet_kernel(n, x) * g(x)), real_of_num(0), sequentially)
+      #|  SUBSET(real_interval([(-(d : Real), d)]), real_interval([(-pi, pi)]))
+      #|  (a : Real) * (if (p : Bool) { (b : Real) } else { real_of_num(0) }) == (if p { a * b } else { real_of_num(0) })
+      #|  real_of_num(0) < (d : Real) && d <= pi \226\134\146 ((-pi <= (x : Real) && x <= pi) && -d <= x && x <= d) == (-d <= x && x <= d)
+      #|  (if (p : Bool) { if (q : Bool) { (x : _) } else { (y : _) } } else { y }) == (if p && q { x } else { y })
+      #|  (x : Real) => if IN(x, real_interval([(-(d : Real), d)])) { (f : (Real) -> Real)(x) } else { real_of_num(0) }
+      #|  (f : (Real) -> Real)
+      #|  (d : Real)
+      #|  \226\136\128 d : Real, \226\136\128 f : (Real) -> Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && real_of_num(0) < d && d <= pi \226\134\146 op_minus_minus_minus_gt((n : Num) => real_integral(real_interval([(-pi, pi)]), (x : Real) => dirichlet_kernel(n, x) * f(x)) - real_integral(real_interval([(-d, d)]), (x : Real) => dirichlet_kernel(n, x) * f(x)), real_of_num(0), sequentially)
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  (d : Real)
+      #|  \226\136\128 t : Real, \226\136\128 d : Real, \226\136\128 c : Real, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && absolutely_real_integrable_on(g, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) && (\226\136\128 x : Real, g(x + real_of_num(2) * pi) == g(x)) && real_of_num(0) < d && (\226\136\128 x : Real, abs(x - t) < d \226\134\146 f(x) == g(x)) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)), c, sequentially) == op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(g, k) * trigonometric_set(k, t)), c, sequentially)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, absolutely_real_integrable_on((x : Real) => dirichlet_kernel(n, x) * (f : (Real) -> Real)(x), real_interval([(-(d : Real), d)]))
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  (d : Real)
+      #|  \226\136\128 d : Real, \226\136\128 f : (Real) -> Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && real_of_num(0) < d && d <= pi \226\134\146 op_minus_minus_minus_gt((n : Num) => real_integral(real_interval([(real_of_num(0), pi)]), (x : Real) => dirichlet_kernel(n, x) * (f(x) + f(-x))) - real_integral(real_interval([(real_of_num(0), d)]), (x : Real) => dirichlet_kernel(n, x) * (f(x) + f(-x))), real_of_num(0), sequentially)
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  \226\136\128 x : Real, (f : (Real) -> Real)((t : Real) - x) == f(t + -x)
+      #|  (x : Real) + (y : Real) - real_of_num(2) * (l : Real) == x - l + (y - l)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 t : Real, \226\136\128 l : Real, \226\136\128 d : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) && real_of_num(0) < d && d <= pi \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)), l, sequentially) == op_minus_minus_minus_gt((n : Num) => real_integral(real_interval([(real_of_num(0), d)]), (x : Real) => dirichlet_kernel(n, x) * (f(t + x) + f(t - x) - real_of_num(2) * l)), real_of_num(0), sequentially)
+      #|  {real_of_num(0)}
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 s : (Real) -> Bool, real_integral(s, (x : Real) => dirichlet_kernel(n, x) * f(x)) == real_integral(s, (x : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * x) / (real_of_num(2) * sin(x / real_of_num(2))) * f(x))
+      #|  {real_of_num(0)}
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 s : (Real) -> Bool, real_integrable_on((x : Real) => dirichlet_kernel(n, x) * f(x), s) == real_integrable_on((x : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * x) / (real_of_num(2) * sin(x / real_of_num(2))) * f(x), s)
+      #|  Cx((x : Real))
       #|  0
-      #|  forall x. abs(sin(x) - x) <= abs(x) pow 3
-      #|  abs x
-      #|  forall x. ~(x = &0) ==> abs(sin(x) / x - &1) <= x pow 2
-      #|  &4 * x pow 3 <= x <=> x * x pow 2 <= x * (&1 / &2) pow 2
-      #|  &4 * x3 <= abs x ==> abs(s - x) <= x3 ==> abs(x) / &2 <= abs s
-      #|  x:real
-      #|  forall x. abs(x) <= &1 / &2  ==> abs(x) / &2 <= abs(sin x)
-      #|  x:real
-      #|  (x:real) pow 2
-      #|  abs(&1 - s * inv x) = abs(s / x - &1)
-      #|  x:real
-      #|  sin x = &0
-      #|  abs(sin x)
-      #|  forall x. ~(x = &0) /\\ abs x <= &1 / &2\n       ==> abs(inv(sin x) - inv x) <= &2 * abs x
-      #|  &2 * abs(x / &2)
+      #|  \226\136\128 x : Real, abs(sin(x) - x) <= pow(abs(x), 3)
+      #|  abs((x : Real))
+      #|  \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 abs(sin(x) / x - real_of_num(1)) <= pow(x, 2)
+      #|  (real_of_num(4) * pow((x : Real), 3) <= x) == (x * pow(x, 2) <= x * pow(real_of_num(1) / real_of_num(2), 2))
+      #|  real_of_num(4) * (x3 : Real) <= abs((x : Real)) \226\134\146 abs((s : Real) - x) <= x3 \226\134\146 abs(x) / real_of_num(2) <= abs(s)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, abs(x) <= real_of_num(1) / real_of_num(2) \226\134\146 abs(x) / real_of_num(2) <= abs(sin(x))
+      #|  (x : Real)
+      #|  pow((x : Real), 2)
+      #|  abs(real_of_num(1) - (s : Real) * inv((x : Real))) == abs(s / x - real_of_num(1))
+      #|  (x : Real)
+      #|  sin((x : Real)) == real_of_num(0)
+      #|  abs(sin((x : Real)))
+      #|  \226\136\128 x : Real, !(x == real_of_num(0)) && abs(x) <= real_of_num(1) / real_of_num(2) \226\134\146 abs(inv(sin(x)) - inv(x)) <= real_of_num(2) * abs(x)
+      #|  real_of_num(2) * abs((x : Real) / real_of_num(2))
       #|  abs(is - &2 * ix) <= &1 ==> abs(inv(&2) * is - ix) <= max B (&2)
-      #|  x = &0
-      #|  x <= B ==> x <= max B C
-      #|  abs(x) <= &1
-      #|  x:real
-      #|  max B (&2)
-      #|  B:real
-      #|  x / &2
-      #|  real_bounded(IMAGE (\\x. inv (&2 * sin (x / &2)) - inv x)\n                         (real_interval[--pi,-- &1] UNION\n                          real_interval[&1,pi]))
-      #|  &2 * x = &0 <=> x = &0
-      #|  inv x = &1 / x
-      #|  {x | x IN s} = s
-      #|  (if p x then a x * b x * c x else &0) =\n      a x * (if p x then b x else &0) * c x
-      #|  real_interval[&0,d] SUBSET real_interval[--pi,pi]
-      #|  ~(x = &0) ==> (&2 * y) / x = y / (x / &2)
-      #|  abs(z - &1) <= y ==> abs(&1 + y) <= B ==> abs(z) <= B
-      #|  x:real
-      #|  x = &0
-      #|  x:real
-      #|  B:real
-      #|  real_bounded (IMAGE (\\x. &1 + (x / &2) pow 2)\n                                      (real_interval[--pi,pi]))
-      #|  real_interval[--pi,pi]
-      #|  x / &2
-      #|  ~(x = &0) /\\ ~(y = &0) ==> a / x = a / (&2 * y) * (&2 * y) / x
-      #|  x:real
-      #|  {&0}
-      #|  \\x. dirichlet_kernel n x * (&2 * sin(x / &2)) / x *\n                      ((f(t + x) + f(t - x)) - &2 * l)
-      #|  real_interval[--pi,pi]
-      #|  sin(y) * (a - b) / x = sin(y) / x * (a - b)
-      #|  a * (inv y - inv x) * b:real = a / y * b - a / x * b
-      #|  n:num
+      #|  (x : Real) == real_of_num(0)
+      #|  (x : Real) <= (B : Real) \226\134\146 x <= max(B, (C : Real))
+      #|  abs((x : Real)) <= real_of_num(1)
+      #|  (x : Real)
+      #|  max((B : Real), real_of_num(2))
+      #|  (B : Real)
+      #|  (x : Real) / real_of_num(2)
+      #|  real_bounded(IMAGE((x : Real) => inv(real_of_num(2) * sin(x / real_of_num(2))) - inv(x), UNION(real_interval([(-pi, -real_of_num(1))]), real_interval([(real_of_num(1), pi)]))))
+      #|  (real_of_num(2) * (x : Real) == real_of_num(0)) == (x == real_of_num(0))
+      #|  inv((x : Real)) == real_of_num(1) / x
+      #|  {(x : _) | IN(x, (s : (_) -> Bool))} == s
+      #|  (if (p : (_) -> Bool)((x : _)) { (a : (_) -> Real)(x) * ((b : (_) -> Real)(x) * (c : (_) -> Real)(x)) } else { real_of_num(0) }) == a(x) * ((if p(x) { b(x) } else { real_of_num(0) }) * c(x))
+      #|  SUBSET(real_interval([(real_of_num(0), (d : Real))]), real_interval([(-pi, pi)]))
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 real_of_num(2) * (y : Real) / x == y / (x / real_of_num(2))
+      #|  abs((z : Real) - real_of_num(1)) <= (y : Real) \226\134\146 abs(real_of_num(1) + y) <= (B : Real) \226\134\146 abs(z) <= B
+      #|  (x : Real)
+      #|  (x : Real) == real_of_num(0)
+      #|  (x : Real)
+      #|  (B : Real)
+      #|  real_bounded(IMAGE((x : Real) => real_of_num(1) + pow(x / real_of_num(2), 2), real_interval([(-pi, pi)])))
+      #|  real_interval([(-pi, pi)])
+      #|  (x : Real) / real_of_num(2)
+      #|  !((x : Real) == real_of_num(0)) && !((y : Real) == real_of_num(0)) \226\134\146 (a : Real) / x == a / (real_of_num(2) * y) * (real_of_num(2) * y / x)
+      #|  (x : Real)
+      #|  {real_of_num(0)}
+      #|  (x : Real) => dirichlet_kernel((n : Num), x) * (real_of_num(2) * sin(x / real_of_num(2)) / x * ((f : (Real) -> Real)((t : Real) + x) + f(t - x) - real_of_num(2) * (l : Real)))
+      #|  real_interval([(-pi, pi)])
+      #|  sin((y : Real)) * (((a : Real) - (b : Real)) / (x : Real)) == sin(y) / x * (a - b)
+      #|  (a : Real) * ((inv((y : Real)) - inv((x : Real))) * (b : Real)) == a / y * b - a / x * b
+      #|  (n : Num)
       #|  1
-      #|  \\n. real_integral (real_interval[&0,d])\n                      (\\x. sin((&n + &1 / &2) * x) *\n                           (inv(&2 * sin(x / &2)) - inv x) *\n                           ((f(t + x) + f(t - x)) - &2 * l))
-      #|  pi - --pi = &2 * pi
-      #|  t:real
+      #|  (n : Num) => real_integral(real_interval([(real_of_num(0), (d : Real))]), (x : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * x) * ((inv(real_of_num(2) * sin(x / real_of_num(2))) - inv(x)) * ((f : (Real) -> Real)((t : Real) + x) + f(t - x) - real_of_num(2) * (l : Real))))
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  (t : Real)
       #|  pi
-      #|  --pi
-      #|  f:real->real
-      #|  d:real
-      #|  l:real
-      #|  t:real
-      #|  f:real->real
-      #|  forall f t l d.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x) /\\ &0 < d /\\ d <= pi\n        ==> (((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> l) sequentially <=>\n            ((\\n. real_integral (real_interval[&0,d])\n                                (\\x. sin((&n + &1 / &2) * x) *\n                                     ((f(t + x) + f(t - x)) - &2 * l) / x))\n             ---> &0) sequentially)
-      #|  x * y <= y <=> x * y <= &1 * y
-      #|  &0 <= x ==> abs x = x
-      #|  x:real
-      #|  d:real
-      #|  &0
-      #|  abs x < e / &2 ==> abs y <= x ==> abs y < e / &2
-      #|  dd:real
-      #|  real_integral(real_interval[&0,dd]) f +\n    real_integral(real_interval[dd,pi]) f =\n    real_integral(real_interval[&0,pi]) f /\\\n    abs(real_integral(real_interval[&0,dd]) f) < e / &2\n    ==> abs(real_integral(real_interval[dd,pi]) f - &0) < e / &2\n        ==> abs(real_integral(real_interval[&0,pi]) f) < e
-      #|  n:num
-      #|  n:num
-      #|  N:num
-      #|  e / &2
-      #|  (x - l) + (y - l) = (x + y) - &2 * l
-      #|  &0 < dd /\\ dd <= pi\n    ==> ((&0 <= x /\\ x <= pi) /\\ ~(abs x < dd) <=>\n         dd <= x /\\ x <= pi)
-      #|  (if p then if q then x else &0 else &0) =\n    (if p /\\ q then x else &0)
-      #|  s * (if p then &0 else y) = (if ~p then s * y else &0)
-      #|  (if p then &0 else a) - (if p then &0 else --b) =\n    (if p then &0 else a + b)
-      #|  x:real
-      #|  inv dd:real
-      #|  inv x = &1 / x
-      #|  abs x < d <=> --d < x /\\ x < d
-      #|  {x | ~P x} = UNIV DIFF {x | P x}
-      #|  (if P x /\\ Q x then a x * b x else &0) =\n     (if Q x then a x else &0) * (if P x then b x else &0)
-      #|  (if P x then if Q x then &0 else a x else &0) =\n                         (if P x /\\ ~Q x then a x else &0)
-      #|  \\x. if abs x < dd then &0\n                    else ((f:real->real)(t + x) - l) / x
-      #|  &1
-      #|  (forall n. (\\x. sin((&n + &1 / &2) * x) *\n           ((f(t + x) + f(t - x)) - &2 * l) / x) absolutely_real_integrable_on\n         real_interval[&0,dd]) /\\\n    (forall n. (\\x. sin((&n + &1 / &2) * x) *\n          ((f(t + x) + f(t - x)) - &2 * l) / x) absolutely_real_integrable_on\n         real_interval[dd,pi])
-      #|  real_interval[--pi,pi]
-      #|  x:real
-      #|  inv dd:real
-      #|  inv x = &1 / x
-      #|  (\\x. ((f(t + x) + f(t - x)) - &2 * l) / x) absolutely_real_integrable_on\n    real_interval[dd,pi]
-      #|  {}:real->bool
-      #|  p ==> q ==> r <=> q ==> p ==> r
-      #|  d:real
-      #|  &0:real
+      #|  -pi
+      #|  (f : (Real) -> Real)
+      #|  (d : Real)
+      #|  (l : Real)
+      #|  (t : Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 t : Real, \226\136\128 l : Real, \226\136\128 d : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) && real_of_num(0) < d && d <= pi \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)), l, sequentially) == op_minus_minus_minus_gt((n : Num) => real_integral(real_interval([(real_of_num(0), d)]), (x : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * x) * ((f(t + x) + f(t - x) - real_of_num(2) * l) / x)), real_of_num(0), sequentially)
+      #|  ((x : Real) * (y : Real) <= y) == (x * y <= real_of_num(1) * y)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+      #|  (x : Real)
+      #|  (d : Real)
+      #|  real_of_num(0)
+      #|  abs((x : Real)) < (e : Real) / real_of_num(2) \226\134\146 abs((y : Real)) <= x \226\134\146 abs(y) < e / real_of_num(2)
+      #|  (dd : Real)
+      #|  real_integral(real_interval([(real_of_num(0), (dd : Real))]), (f : (Real) -> Real)) + real_integral(real_interval([(dd, pi)]), f) == real_integral(real_interval([(real_of_num(0), pi)]), f) && abs(real_integral(real_interval([(real_of_num(0), dd)]), f)) < (e : Real) / real_of_num(2) \226\134\146 abs(real_integral(real_interval([(dd, pi)]), f) - real_of_num(0)) < e / real_of_num(2) \226\134\146 abs(real_integral(real_interval([(real_of_num(0), pi)]), f)) < e
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  (x : Real) - (l : Real) + ((y : Real) - l) == x + y - real_of_num(2) * l
+      #|  real_of_num(0) < (dd : Real) && dd <= pi \226\134\146 ((real_of_num(0) <= (x : Real) && x <= pi) && !(abs(x) < dd)) == (dd <= x && x <= pi)
+      #|  (if (p : Bool) { if (q : Bool) { (x : Real) } else { real_of_num(0) } } else { real_of_num(0) }) == (if p && q { x } else { real_of_num(0) })
+      #|  (s : Real) * (if (p : Bool) { real_of_num(0) } else { (y : Real) }) == (if !p { s * y } else { real_of_num(0) })
+      #|  (if (p : Bool) { real_of_num(0) } else { (a : Real) }) - (if p { real_of_num(0) } else { -(b : Real) }) == (if p { real_of_num(0) } else { a + b })
+      #|  (x : Real)
+      #|  inv((dd : Real))
+      #|  inv((x : Real)) == real_of_num(1) / x
+      #|  (abs((x : Real)) < (d : Real)) == (-d < x && x < d)
+      #|  {(x : _) | !(P : (_) -> Bool)(x)} == DIFF(UNIV, {(x : _) | P(x)})
+      #|  (if (P : (_) -> Bool)((x : _)) && (Q : (_) -> Bool)(x) { (a : (_) -> Real)(x) * (b : (_) -> Real)(x) } else { real_of_num(0) }) == (if Q(x) { a(x) } else { real_of_num(0) }) * (if P(x) { b(x) } else { real_of_num(0) })
+      #|  (if (P : (_) -> Bool)((x : _)) { if (Q : (_) -> Bool)(x) { real_of_num(0) } else { (a : (_) -> Real)(x) } } else { real_of_num(0) }) == (if P(x) && !Q(x) { a(x) } else { real_of_num(0) })
+      #|  (x : Real) => if abs(x) < (dd : Real) { real_of_num(0) } else { ((f : (Real) -> Real)((t : Real) + x) - (l : Real)) / x }
+      #|  real_of_num(1)
+      #|  (\226\136\128 n : Num, absolutely_real_integrable_on((x : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * x) * (((f : (Real) -> Real)((t : Real) + x) + f(t - x) - real_of_num(2) * (l : Real)) / x), real_interval([(real_of_num(0), (dd : Real))]))) && (\226\136\128 n : Num, absolutely_real_integrable_on((x : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * x) * ((f(t + x) + f(t - x) - real_of_num(2) * l) / x), real_interval([(dd, pi)])))
+      #|  real_interval([(-pi, pi)])
+      #|  (x : Real)
+      #|  inv((dd : Real))
+      #|  inv((x : Real)) == real_of_num(1) / x
+      #|  absolutely_real_integrable_on((x : Real) => ((f : (Real) -> Real)((t : Real) + x) + f(t - x) - real_of_num(2) * (l : Real)) / x, real_interval([((dd : Real), pi)]))
+      #|  ({} : (Real) -> Bool)
+      #|  ((p : Bool) \226\134\146 (q : Bool) \226\134\146 (r : Bool)) == (q \226\134\146 p \226\134\146 r)
+      #|  (d : Real)
+      #|  real_of_num(0)
       #|  pi
-      #|  --pi
-      #|  (\\x. ((f(t + x) + f(t - x)) - &2 * l) / x) absolutely_real_integrable_on\n    real_interval[&0,dd]
-      #|  pi - --pi = &2 * pi
-      #|  t:real
+      #|  -pi
+      #|  absolutely_real_integrable_on((x : Real) => ((f : (Real) -> Real)((t : Real) + x) + f(t - x) - real_of_num(2) * (l : Real)) / x, real_interval([(real_of_num(0), (dd : Real))]))
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  (t : Real)
       #|  pi
-      #|  --pi
-      #|  f:real->real
-      #|  &0 < dd /\\ dd <= d /\\ dd <= pi /\\ dd < k
-      #|  dd:real
-      #|  dd = min d (min (k / &2) pi)
-      #|  k:real
-      #|  e / &2
-      #|  &0
-      #|  e:real
+      #|  -pi
+      #|  (f : (Real) -> Real)
+      #|  real_of_num(0) < (dd : Real) && dd <= (d : Real) && dd <= pi && dd < (k : Real)
+      #|  (dd : Real)
+      #|  (dd : Real) == min((d : Real), min((k : Real) / real_of_num(2), pi))
+      #|  (k : Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  real_of_num(0)
+      #|  (e : Real)
       #|  pi
-      #|  l:real
-      #|  t:real
-      #|  f:real->real
-      #|  forall f t l d.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x) /\\\n        &0 < d /\\\n        (\\x. abs((f(t + x) + f(t - x)) - &2 * l) / x)\n        real_integrable_on real_interval[&0,d]\n        ==> ((\\n. sum (0..n)\n                      (\\k. fourier_coefficient f k * trigonometric_set k t))\n             ---> l) sequentially
-      #|  abs x <= &1 /\\ abs y <= &1 ==> abs(--y - --x) <= &2
-      #|  b:real
-      #|  a:real
-      #|  \\x. sin x
-      #|  \\x. --(cos x)
-      #|  a <= b
-      #|  forall a b. (\\x. sin x) real_integrable_on (real_interval[a,b]) /\\\n           abs(real_integral (real_interval[a,b]) (\\x. sin x)) <= &2
-      #|  inv b <= inv a /\\ abs x <= inv a * &2 /\\ abs y <= inv b * &2\n          ==> abs(x + y) <= &4 / a
-      #|  --(--(inv y) * x):real = x / y
-      #|  c:real
-      #|  b:real
-      #|  a:real
-      #|  \\x:real. --(inv x)
-      #|  \\x. sin x
-      #|  a <= b
-      #|  forall a b. &0 < a\n           ==> (\\x. sin x / x) real_integrable_on real_interval[a,b] /\\\n               abs(real_integral (real_interval[a,b])\n                                 (\\x. sin x / x)) <= &4 / a
-      #|  x pow 5 / &24 <= x pow 3 / &6 <=>\n      x pow 3 * x pow 2 <= x pow 3 * &2 pow 2
-      #|  e <= t ==> abs(sin x - (x + --t)) <= e ==> sin x <= x
-      #|  Cx x
+      #|  (l : Real)
+      #|  (t : Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 t : Real, \226\136\128 l : Real, \226\136\128 d : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) && real_of_num(0) < d && real_integrable_on((x : Real) => abs(f(t + x) + f(t - x) - real_of_num(2) * l) / x, real_interval([(real_of_num(0), d)])) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)), l, sequentially)
+      #|  abs((x : Real)) <= real_of_num(1) && abs((y : Real)) <= real_of_num(1) \226\134\146 abs(-y - -x) <= real_of_num(2)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => sin(x)
+      #|  (x : Real) => -cos(x)
+      #|  (a : Real) <= (b : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on((x : Real) => sin(x), real_interval([(a, b)])) && abs(real_integral(real_interval([(a, b)]), (x : Real) => sin(x))) <= real_of_num(2)
+      #|  inv((b : Real)) <= inv((a : Real)) && abs((x : Real)) <= inv(a) * real_of_num(2) && abs((y : Real)) <= inv(b) * real_of_num(2) \226\134\146 abs(x + y) <= real_of_num(4) / a
+      #|  -(-inv((y : Real)) * (x : Real)) == x / y
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => -inv(x)
+      #|  (x : Real) => sin(x)
+      #|  (a : Real) <= (b : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < a \226\134\146 real_integrable_on((x : Real) => sin(x) / x, real_interval([(a, b)])) && abs(real_integral(real_interval([(a, b)]), (x : Real) => sin(x) / x)) <= real_of_num(4) / a
+      #|  (pow((x : Real), 5) / real_of_num(24) <= pow(x, 3) / real_of_num(6)) == (pow(x, 3) * pow(x, 2) <= pow(x, 3) * pow(real_of_num(2), 2))
+      #|  (e : Real) <= (t : Real) \226\134\146 abs(sin((x : Real)) - (x + -t)) <= e \226\134\146 sin(x) <= x
+      #|  Cx((x : Real))
       #|  1
-      #|  x <= &1
-      #|  forall x. &0 <= x ==> sin(x) <= x
-      #|  s <= x /\\ &0 <= s ==> abs s <= abs x
-      #|  &0 <= x /\\ ~(x = &0) ==> &0 < abs x
-      #|  x = &0
-      #|  forall x. &0 <= x /\\ x <= &2 ==> abs(sin x / x) <= &1
-      #|  real_integral (real_interval [a,b]) (\\x. &1)
-      #|  (\\x. &1):real->real
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  a <= b
-      #|  forall a b. &0 <= a /\\ b <= &2\n           ==> (\\x. sin x / x) real_integrable_on real_interval[a,b] /\\\n               abs(real_integral (real_interval[a,b])\n                                 (\\x. sin x / x)) <= &2
-      #|  &0 < &2
-      #|  &2 = &4 / &2
-      #|  abs(x) <= &2 /\\ abs(y) <= &2 ==> abs(x + y) <= &4
-      #|  &2
-      #|  b:real
-      #|  a:real
-      #|  \\x. sin x / x
-      #|  &0 < &2
-      #|  &2
-      #|  b:real
-      #|  a:real
-      #|  \\x. sin x / x
-      #|  &2 <= a ==> &0 < a
-      #|  b:real
-      #|  a:real
-      #|  &2 <= a
-      #|  x <= &2 ==> x <= &4
-      #|  b <= &2
-      #|  forall a b. &0 <= a\n           ==> (\\x. sin x / x) real_integrable_on real_interval[a,b] /\\\n               abs(real_integral (real_interval[a,b]) (\\x. sin x / x)) <= &4
-      #|  &0 < c ==> c * inv c * i = i /\\ abs c = c
-      #|  &0 < c ==> c * s * inv c * inv x = s * inv x
-      #|  &0 < c ==> inv c * c * a = a
-      #|  c:real
-      #|  c:real
-      #|  c * b:real
-      #|  c * a:real
-      #|  a <= b
-      #|  forall a b c.\n       &0 <= a /\\ &0 < c\n       ==> (\\x. sin(c * x) / x) real_integrable_on real_interval[a,b] /\\\n           abs(real_integral (real_interval[a,b]) (\\x. sin(c * x) / x)) <= &4
-      #|  d:real
-      #|  forall f l d. &0 < d\n             ==> ((f ---> l) (atreal (&0) within real_interval[&0,d]) <=>\n                  (f ---> l) (atreal (&0) within {x | &0 <= x}))
-      #|  k:real
-      #|  x + y = z ==> abs(x) <= e / &2 ==> abs(y) < e / &2 ==> abs(z) < e
-      #|  n:num
-      #|  n:num
-      #|  N:num
-      #|  e / &2
-      #|  forall x. (--pi <= x /\\ x <= pi) /\\ k <= x /\\ x <= d <=>\n                    k <= x /\\ x <= d
-      #|  (if P then if Q then x else &0 else &0) =\n                       (if P /\\ Q then x else &0)
-      #|  (if P then s * (if Q then a else &0) else &0) =\n    (if P /\\ Q then s * a else &0)
-      #|  abs(if p then x else &0) = if p then abs x else &0
-      #|  \\x. if k <= x /\\ x <= d then h x / x else &0
-      #|  &1
-      #|  forall n. (\\x. sin((&n + &1 / &2) * x) * h x / x) absolutely_real_integrable_on\n        real_interval[k,d]
-      #|  real_interval[--pi,pi]
-      #|  inv k:real
-      #|  (\\x. h x / x) absolutely_real_integrable_on real_interval[k,d]
-      #|  pi - --pi = &2 * pi
-      #|  t:real
+      #|  (x : Real) <= real_of_num(1)
+      #|  \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 sin(x) <= x
+      #|  (s : Real) <= (x : Real) && real_of_num(0) <= s \226\134\146 abs(s) <= abs(x)
+      #|  real_of_num(0) <= (x : Real) && !(x == real_of_num(0)) \226\134\146 real_of_num(0) < abs(x)
+      #|  (x : Real) == real_of_num(0)
+      #|  \226\136\128 x : Real, real_of_num(0) <= x && x <= real_of_num(2) \226\134\146 abs(sin(x) / x) <= real_of_num(1)
+      #|  real_integral(real_interval([((a : Real), (b : Real))]), (x : Real) => real_of_num(1))
+      #|  (x : Real) => real_of_num(1)
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  (a : Real) <= (b : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) <= a && b <= real_of_num(2) \226\134\146 real_integrable_on((x : Real) => sin(x) / x, real_interval([(a, b)])) && abs(real_integral(real_interval([(a, b)]), (x : Real) => sin(x) / x)) <= real_of_num(2)
+      #|  real_of_num(0) < real_of_num(2)
+      #|  real_of_num(2) == real_of_num(4) / real_of_num(2)
+      #|  abs((x : Real)) <= real_of_num(2) && abs((y : Real)) <= real_of_num(2) \226\134\146 abs(x + y) <= real_of_num(4)
+      #|  real_of_num(2)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => sin(x) / x
+      #|  real_of_num(0) < real_of_num(2)
+      #|  real_of_num(2)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => sin(x) / x
+      #|  real_of_num(2) <= (a : Real) \226\134\146 real_of_num(0) < a
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  real_of_num(2) <= (a : Real)
+      #|  (x : Real) <= real_of_num(2) \226\134\146 x <= real_of_num(4)
+      #|  (b : Real) <= real_of_num(2)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) <= a \226\134\146 real_integrable_on((x : Real) => sin(x) / x, real_interval([(a, b)])) && abs(real_integral(real_interval([(a, b)]), (x : Real) => sin(x) / x)) <= real_of_num(4)
+      #|  real_of_num(0) < (c : Real) \226\134\146 c * (inv(c) * (i : Real)) == i && abs(c) == c
+      #|  real_of_num(0) < (c : Real) \226\134\146 c * ((s : Real) * (inv(c) * inv((x : Real)))) == s * inv(x)
+      #|  real_of_num(0) < (c : Real) \226\134\146 inv(c) * (c * (a : Real)) == a
+      #|  (c : Real)
+      #|  (c : Real)
+      #|  (c : Real) * (b : Real)
+      #|  (c : Real) * (a : Real)
+      #|  (a : Real) <= (b : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, real_of_num(0) <= a && real_of_num(0) < c \226\134\146 real_integrable_on((x : Real) => sin(c * x) / x, real_interval([(a, b)])) && abs(real_integral(real_interval([(a, b)]), (x : Real) => sin(c * x) / x)) <= real_of_num(4)
+      #|  (d : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, \226\136\128 d : Real, real_of_num(0) < d \226\134\146 op_minus_minus_minus_gt(f, l, within(atreal(real_of_num(0)), real_interval([(real_of_num(0), d)]))) == op_minus_minus_minus_gt(f, l, within(atreal(real_of_num(0)), {(x : Real) | real_of_num(0) <= x}))
+      #|  (k : Real)
+      #|  (x : Real) + (y : Real) == (z : Real) \226\134\146 abs(x) <= (e : Real) / real_of_num(2) \226\134\146 abs(y) < e / real_of_num(2) \226\134\146 abs(z) < e
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  \226\136\128 x : Real, ((-pi <= x && x <= pi) && (k : Real) <= x && x <= (d : Real)) == (k <= x && x <= d)
+      #|  (if (P : Bool) { if (Q : Bool) { (x : Real) } else { real_of_num(0) } } else { real_of_num(0) }) == (if P && Q { x } else { real_of_num(0) })
+      #|  (if (P : Bool) { (s : Real) * (if (Q : Bool) { (a : Real) } else { real_of_num(0) }) } else { real_of_num(0) }) == (if P && Q { s * a } else { real_of_num(0) })
+      #|  abs(if (p : Bool) { (x : Real) } else { real_of_num(0) }) == (if p { abs(x) } else { real_of_num(0) })
+      #|  (x : Real) => if (k : Real) <= x && x <= (d : Real) { (h : (Real) -> Real)(x) / x } else { real_of_num(0) }
+      #|  real_of_num(1)
+      #|  \226\136\128 n : Num, absolutely_real_integrable_on((x : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * x) * ((h : (Real) -> Real)(x) / x), real_interval([((k : Real), (d : Real))]))
+      #|  real_interval([(-pi, pi)])
+      #|  inv((k : Real))
+      #|  absolutely_real_integrable_on((x : Real) => (h : (Real) -> Real)(x) / x, real_interval([((k : Real), (d : Real))]))
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  (t : Real)
       #|  pi
-      #|  --pi
-      #|  f:real->real
-      #|  &0 < &n + &1 / &2
-      #|  abs(x) <= e / &16 * &4 /\\ abs(y) <= e / &16 * &4\n      ==> abs(x - y) <= e / &2
-      #|  s * (h - h') / x:real = s * h / x - s * h' / x
-      #|  c2:real
-      #|  h * s / x:real = s * h / x
-      #|  h < &0 ==> h' <= h ==> ~(abs h' < --h)
-      #|  min d (min x dd) / &2
-      #|  dd:real
-      #|  --((h2:real->real) x)
-      #|  (h2 ---> &0) (atreal (&0) within {x | &0 <= x})
-      #|  x:real
-      #|  &0 < &n + &1 / &2
-      #|  (h2:real->real) k
-      #|  &0
-      #|  k:real
-      #|  &0
-      #|  h2:real->real
-      #|  \\x. sin((&n + &1 / &2) * x) / x
-      #|  c1:real
-      #|  h * s / x:real = s * h / x
-      #|  h < &0 ==> h' <= h ==> ~(abs h' < --h)
-      #|  min d (min x dd) / &2
-      #|  dd:real
-      #|  --((h1:real->real) x)
-      #|  (h1 ---> &0) (atreal (&0) within {x | &0 <= x})
-      #|  x:real
-      #|  &0 < &n + &1 / &2
-      #|  (h1:real->real) k
-      #|  &0
-      #|  k:real
-      #|  &0
-      #|  h1:real->real
-      #|  \\x. sin((&n + &1 / &2) * x) / x
-      #|  n:num
-      #|  k:real
-      #|  min d (min k1 k2) / &2
-      #|  k2:real
-      #|  e / &16
-      #|  k1:real
-      #|  e / &16
-      #|  (h1 ---> &0) (atreal (&0) within {x | &0 <= x})
-      #|  (h2 ---> &0) (atreal (&0) within {x | &0 <= x})
-      #|  ?k. &0 < k /\\ k < d /\\ abs(h1 k) < e / &16 /\\ abs(h2 k) < e / &16
-      #|  (h2 ---> l) (atreal(&0) within real_interval[&0,d])
-      #|  (h1 ---> l) (atreal(&0) within real_interval[&0,d])
-      #|  x - l <= y - l <=> x <= y
-      #|  \\x. (h2:real->real)(x) - l
-      #|  \\x. (h1:real->real)(x) - l
-      #|  (h2 ---> l') (atreal(&0) within real_interval[&0,d])
-      #|  (h1 ---> l) (atreal(&0) within real_interval[&0,d])
-      #|  &1
-      #|  h:real->real
-      #|  atreal (&0) within {x | &0 <= x}
-      #|  l':real = l
-      #|  l':real
-      #|  &0
-      #|  d:real
-      #|  &0
-      #|  h2:real->real
-      #|  l:real
-      #|  &0
-      #|  d:real
-      #|  &0
-      #|  h1:real->real
-      #|  h2:real->real
-      #|  h1:real->real
-      #|  d:real
-      #|  &0
-      #|  h:real->real
-      #|  ?h1 h2.\n         (forall x y. x IN real_interval[&0,d] /\\ y IN real_interval[&0,d] /\\ x <= y\n                ==> h1 x <= h1 y) /\\\n         (forall x y. x IN real_interval[&0,d] /\\ y IN real_interval[&0,d] /\\ x <= y\n                ==> h2 x <= h2 y) /\\\n         (h1 ---> &0) (atreal (&0) within {x | &0 <= x}) /\\\n         (h2 ---> &0) (atreal (&0) within {x | &0 <= x}) /\\\n         (forall x. h x = h1 x - h2 x)
-      #|  ?k. &0 < k /\\ k < d /\\\n        forall n. (\\x. sin ((&n + &1 / &2) * x) * h x / x)\n            real_integrable_on real_interval[&0,k] /\\\n            abs(real_integral (real_interval[&0,k])\n                              (\\x. sin ((&n + &1 / &2) * x) * h x / x))\n              <= e / &2
-      #|  e:real
-      #|  d1:real
-      #|  &0 < e
-      #|  e:real
-      #|  d1:real
-      #|  &0 < e
-      #|  e:real
-      #|  l:real
-      #|  t:real
-      #|  t + d0:real
-      #|  t - d0:real
-      #|  f:real->real
-      #|  ?l. (f ---> l) (atreal t within {r | r >= t})
-      #|  d1:real
-      #|  &0 < e
-      #|  e:real
-      #|  d1:real
-      #|  &0 < e
-      #|  e:real
-      #|  l:real
-      #|  t:real
-      #|  t + d0:real
-      #|  t - d0:real
-      #|  f:real->real
-      #|  ?l. (f ---> l) (atreal t within {l | l <= t})
-      #|  (f' + f) - &2 * (l + l') / &2 = (f - l) + (f' - l')
-      #|  (h ---> &0) (atreal(&0) within {x | &0 <= x})
-      #|  a <= a' /\\ b' <= b ==> a - b <= a' - b'
-      #|  x - s <= y - s <=> x <= y
-      #|  \\x. ((f2:real->real)(t + x) - f1(t - x)) + s
-      #|  \\x. ((f1:real->real)(t + x) - f2(t - x)) - s
-      #|  f2:real->real
-      #|  f1:real->real
-      #|  h has_bounded_real_variation_on real_interval[&0,d]
-      #|  &0 < d
-      #|  d = min d0 pi
-      #|  h = \\u. ((f:real->real)(t + u) + f(t - u)) - &2 * s
-      #|  min d0 pi <= pi
-      #|  min d0 pi
-      #|  s:real
-      #|  t:real
-      #|  f:real->real
-      #|  s = (reallim (atreal t within {l | l <= t}) f +\n                   reallim (atreal t within {r | r >= t}) f) / &2
-      #|  d0:real
-      #|  t:real
-      #|  f:real->real
-      #|  forall f x d.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f x) /\\\n        &0 < d /\\\n        f has_bounded_real_variation_on real_interval[x - d,x + d]\n        ==> ((\\n. sum (0..n)\n                      (\\k. fourier_coefficient f k * trigonometric_set k x))\n             ---> ((reallim (atreal x within {l | l <= x}) f +\n                    reallim (atreal x within {r | r >= x}) f) / &2))\n            sequentially
-      #|  min d0 d1
-      #|  t - x:real
-      #|  x:real
-      #|  min d0 d1
-      #|  t + x:real
-      #|  x:real
-      #|  real_interval[-- &(2 * N + 1) * pi,&(2 * N + 1) * pi]
-      #|  N:num
-      #|  abs x + &3
-      #|  &2 * pi
-      #|  --((&2 + &2 * m) + &1) = &2 * --(m + &1) - &1
-      #|  --(&2 * m + &1) = &2 * --(m + &1) + &1
-      #|  --a <= b <=> &0 <= a + b
-      #|  --(&(2 * m + 1) * pi)
-      #|  &(2 * n + 1) * pi
-      #|  --(&((2 + 2 * m) + 1) * pi)
-      #|  f:real->real
-      #|  n:num
-      #|  forall m n. f has_bounded_real_variation_on\n            real_interval[--(&(2 * m + 1)) * pi,&(2 * n + 1) * pi]
-      #|  ((&2 + &2 * n) + &1) * pi = (&2 * (n + &1) + &1) * pi
-      #|  (&2 * n + &1) * pi = (&2 * (n + &1) - &1) * pi
-      #|  --pi = --(&1) * pi
-      #|  &(2 * n + 1) * pi
-      #|  &((2 + 2 * n) + 1) * pi
-      #|  --pi
-      #|  f:real->real
-      #|  forall n. f has_bounded_real_variation_on\n          real_interval[--pi,&(2 * n + 1) * pi]
-      #|  x + n * &2 * pi = &2 * n * pi + x
-      #|  --n:real
-      #|  x:real
-      #|  x:real
-      #|  &2 * --n * pi
-      #|  forall n. integer n\n          ==> f has_bounded_real_variation_on\n              real_interval [(&2 * n - &1) * pi,(&2 * n + &1) * pi]
-      #|  &1
-      #|  forall f x. f has_bounded_real_variation_on real_interval[--pi,pi] /\\\n         (forall x. f(x + &2 * pi) = f x)\n         ==> ((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k x))\n              ---> ((reallim (atreal x within {l | l <= x}) f +\n                     reallim (atreal x within {r | r >= x}) f) / &2))\n             sequentially
-      #|  fejer_kernel n x = if n = 0 then &0\n                      else sum(0..n-1) (\\r. dirichlet_kernel r x) / &n
-      #|  x / &2 + (&n + &1 / &2) * x = (&n + &1) * x
-      #|  x / &2 - (&n + &1 / &2) * x = --(&n * x)
-      #|  ~(s = &0) ==> &2 * s pow 2 * a / (&2 * s) = s * a
-      #|  ~(n = &0) /\\ ~(s = &0) /\\ &2 * s pow 2 * l = r\n    ==> l / n = r / (&2 * n * s pow 2)
-      #|  sin(x / &2) = &0
-      #|  x = &0
-      #|  n = 0
-      #|  fejer_kernel n x =\n        if n = 0 then &0\n        else if x = &0 then &n / &2\n        else sin(&n / &2 * x) pow 2 / (&2 * &n * sin(x / &2) pow 2)
-      #|  n = 0
-      #|  forall n. (fejer_kernel n) real_continuous_on\n       real_interval(--(&2 * pi),&2 * pi)
-      #|  real_interval(--(&2 * pi),&2 * pi)
-      #|  forall n. (fejer_kernel n) real_continuous_on real_interval[--pi,pi]
-      #|  forall f n. f absolutely_real_integrable_on real_interval[--pi,pi]\n         ==> (\\x. fejer_kernel n x * f x)\n             absolutely_real_integrable_on real_interval[--pi,pi]
-      #|  pi - --pi = &2 * pi
-      #|  pi - --pi = &2 * pi
-      #|  forall f n c.\n        f absolutely_real_integrable_on real_interval [--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f(x))\n        ==> (\\x. fejer_kernel n x * f(t + x))\n            absolutely_real_integrable_on real_interval[--pi,pi] /\\\n            (\\x. fejer_kernel n x * f(t - x))\n            absolutely_real_integrable_on real_interval[--pi,pi] /\\\n            (\\x. fejer_kernel n x * c)\n            absolutely_real_integrable_on real_interval[--pi,pi]
-      #|  real_interval[--pi,pi]
-      #|  (a /\\ b /\\ c) /\\ (a /\\ b /\\ c ==> d /\\ e)\n    ==> a /\\ b /\\ c /\\ d /\\ e
-      #|  forall f n d c.\n        f absolutely_real_integrable_on real_interval [--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f(x)) /\\ d <= pi\n        ==> (\\x. fejer_kernel n x * f(t + x))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. fejer_kernel n x * f(t - x))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. fejer_kernel n x * c)\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. fejer_kernel n x * (f(t + x) + f(t - x)))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. fejer_kernel n x * ((f(t + x) + f(t - x)) - c))\n            absolutely_real_integrable_on real_interval[&0,d]
-      #|  ~(n = &0) ==> s * f = n * s / n * f
-      #|  x:real
-      #|  n - 1
+      #|  -pi
+      #|  (f : (Real) -> Real)
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1) / real_of_num(2)
+      #|  abs((x : Real)) <= (e : Real) / real_of_num(16) * real_of_num(4) && abs((y : Real)) <= e / real_of_num(16) * real_of_num(4) \226\134\146 abs(x - y) <= e / real_of_num(2)
+      #|  (s : Real) * (((h : Real) - (h' : Real)) / (x : Real)) == s * (h / x) - s * (h' / x)
+      #|  (c2 : Real)
+      #|  (h : Real) * ((s : Real) / (x : Real)) == s * (h / x)
+      #|  (h : Real) < real_of_num(0) \226\134\146 (h' : Real) <= h \226\134\146 !(abs(h') < -h)
+      #|  min((d : Real), min((x : Real), (dd : Real))) / real_of_num(2)
+      #|  (dd : Real)
+      #|  -(h2 : (Real) -> Real)((x : Real))
+      #|  op_minus_minus_minus_gt((h2 : (Real) -> Real), real_of_num(0), within(atreal(real_of_num(0)), {(x : Real) | real_of_num(0) <= x}))
+      #|  (x : Real)
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1) / real_of_num(2)
+      #|  (h2 : (Real) -> Real)((k : Real))
+      #|  real_of_num(0)
+      #|  (k : Real)
+      #|  real_of_num(0)
+      #|  (h2 : (Real) -> Real)
+      #|  (x : Real) => sin((real_of_num((n : Num)) + real_of_num(1) / real_of_num(2)) * x) / x
+      #|  (c1 : Real)
+      #|  (h : Real) * ((s : Real) / (x : Real)) == s * (h / x)
+      #|  (h : Real) < real_of_num(0) \226\134\146 (h' : Real) <= h \226\134\146 !(abs(h') < -h)
+      #|  min((d : Real), min((x : Real), (dd : Real))) / real_of_num(2)
+      #|  (dd : Real)
+      #|  -(h1 : (Real) -> Real)((x : Real))
+      #|  op_minus_minus_minus_gt((h1 : (Real) -> Real), real_of_num(0), within(atreal(real_of_num(0)), {(x : Real) | real_of_num(0) <= x}))
+      #|  (x : Real)
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1) / real_of_num(2)
+      #|  (h1 : (Real) -> Real)((k : Real))
+      #|  real_of_num(0)
+      #|  (k : Real)
+      #|  real_of_num(0)
+      #|  (h1 : (Real) -> Real)
+      #|  (x : Real) => sin((real_of_num((n : Num)) + real_of_num(1) / real_of_num(2)) * x) / x
+      #|  (n : Num)
+      #|  (k : Real)
+      #|  min((d : Real), min((k1 : Real), (k2 : Real))) / real_of_num(2)
+      #|  (k2 : Real)
+      #|  (e : Real) / real_of_num(16)
+      #|  (k1 : Real)
+      #|  (e : Real) / real_of_num(16)
+      #|  op_minus_minus_minus_gt((h1 : (Real) -> Real), real_of_num(0), within(atreal(real_of_num(0)), {(x : Real) | real_of_num(0) <= x}))
+      #|  op_minus_minus_minus_gt((h2 : (Real) -> Real), real_of_num(0), within(atreal(real_of_num(0)), {(x : Real) | real_of_num(0) <= x}))
+      #|  \226\136\131 k : Real, real_of_num(0) < k && k < (d : Real) && abs((h1 : (Real) -> Real)(k)) < (e : Real) / real_of_num(16) && abs((h2 : (Real) -> Real)(k)) < e / real_of_num(16)
+      #|  op_minus_minus_minus_gt((h2 : (Real) -> Real), (l : Real), within(atreal(real_of_num(0)), real_interval([(real_of_num(0), (d : Real))])))
+      #|  op_minus_minus_minus_gt((h1 : (Real) -> Real), (l : Real), within(atreal(real_of_num(0)), real_interval([(real_of_num(0), (d : Real))])))
+      #|  ((x : Real) - (l : Real) <= (y : Real) - l) == (x <= y)
+      #|  (x : Real) => (h2 : (Real) -> Real)(x) - (l : Real)
+      #|  (x : Real) => (h1 : (Real) -> Real)(x) - (l : Real)
+      #|  op_minus_minus_minus_gt((h2 : (Real) -> Real), (l' : Real), within(atreal(real_of_num(0)), real_interval([(real_of_num(0), (d : Real))])))
+      #|  op_minus_minus_minus_gt((h1 : (Real) -> Real), (l : Real), within(atreal(real_of_num(0)), real_interval([(real_of_num(0), (d : Real))])))
+      #|  real_of_num(1)
+      #|  (h : (Real) -> Real)
+      #|  within(atreal(real_of_num(0)), {(x : Real) | real_of_num(0) <= x})
+      #|  (l' : Real) == (l : Real)
+      #|  (l' : Real)
+      #|  real_of_num(0)
+      #|  (d : Real)
+      #|  real_of_num(0)
+      #|  (h2 : (Real) -> Real)
+      #|  (l : Real)
+      #|  real_of_num(0)
+      #|  (d : Real)
+      #|  real_of_num(0)
+      #|  (h1 : (Real) -> Real)
+      #|  (h2 : (Real) -> Real)
+      #|  (h1 : (Real) -> Real)
+      #|  (d : Real)
+      #|  real_of_num(0)
+      #|  (h : (Real) -> Real)
+      #|  \226\136\131 h1 : (Real) -> Real, \226\136\131 h2 : (Real) -> Real, (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(real_of_num(0), (d : Real))])) && IN(y, real_interval([(real_of_num(0), d)])) && x <= y \226\134\146 h1(x) <= h1(y)) && (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, real_interval([(real_of_num(0), d)])) && IN(y, real_interval([(real_of_num(0), d)])) && x <= y \226\134\146 h2(x) <= h2(y)) && op_minus_minus_minus_gt(h1, real_of_num(0), within(atreal(real_of_num(0)), {(x : Real) | real_of_num(0) <= x})) && op_minus_minus_minus_gt(h2, real_of_num(0), within(atreal(real_of_num(0)), {(x : Real) | real_of_num(0) <= x})) && (\226\136\128 x : Real, (h : (Real) -> Real)(x) == h1(x) - h2(x))
+      #|  \226\136\131 k : Real, real_of_num(0) < k && k < (d : Real) && (\226\136\128 n : Num, real_integrable_on((x : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * x) * ((h : (Real) -> Real)(x) / x), real_interval([(real_of_num(0), k)])) && abs(real_integral(real_interval([(real_of_num(0), k)]), (x : Real) => sin((real_of_num(n) + real_of_num(1) / real_of_num(2)) * x) * (h(x) / x))) <= (e : Real) / real_of_num(2))
+      #|  (e : Real)
+      #|  (d1 : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  (d1 : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  (l : Real)
+      #|  (t : Real)
+      #|  (t : Real) + (d0 : Real)
+      #|  (t : Real) - (d0 : Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\131 l : Real, op_minus_minus_minus_gt((f : (Real) -> Real), l, within(atreal((t : Real)), {(r : Real) | r >= t}))
+      #|  (d1 : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  (d1 : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  (l : Real)
+      #|  (t : Real)
+      #|  (t : Real) + (d0 : Real)
+      #|  (t : Real) - (d0 : Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\131 l : Real, op_minus_minus_minus_gt((f : (Real) -> Real), l, within(atreal((t : Real)), {(l : Real) | l <= t}))
+      #|  (f' : Real) + (f : Real) - real_of_num(2) * (((l : Real) + (l' : Real)) / real_of_num(2)) == f - l + (f' - l')
+      #|  op_minus_minus_minus_gt((h : (Real) -> Real), real_of_num(0), within(atreal(real_of_num(0)), {(x : Real) | real_of_num(0) <= x}))
+      #|  (a : Real) <= (a' : Real) && (b' : Real) <= (b : Real) \226\134\146 a - b <= a' - b'
+      #|  ((x : Real) - (s : Real) <= (y : Real) - s) == (x <= y)
+      #|  (x : Real) => (f2 : (Real) -> Real)((t : Real) + x) - (f1 : (Real) -> Real)(t - x) + (s : Real)
+      #|  (x : Real) => (f1 : (Real) -> Real)((t : Real) + x) - (f2 : (Real) -> Real)(t - x) - (s : Real)
+      #|  (f2 : (Real) -> Real)
+      #|  (f1 : (Real) -> Real)
+      #|  has_bounded_real_variation_on((h : (Real) -> Real), real_interval([(real_of_num(0), (d : Real))]))
+      #|  real_of_num(0) < (d : Real)
+      #|  (d : Real) == min((d0 : Real), pi)
+      #|  (h : (Real) -> Real) == ((u : Real) => (f : (Real) -> Real)((t : Real) + u) + f(t - u) - real_of_num(2) * (s : Real))
+      #|  min((d0 : Real), pi) <= pi
+      #|  min((d0 : Real), pi)
+      #|  (s : Real)
+      #|  (t : Real)
+      #|  (f : (Real) -> Real)
+      #|  (s : Real) == (reallim(within(atreal((t : Real)), {(l : Real) | l <= t}), (f : (Real) -> Real)) + reallim(within(atreal(t), {(r : Real) | r >= t}), f)) / real_of_num(2)
+      #|  (d0 : Real)
+      #|  (t : Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, \226\136\128 d : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) && real_of_num(0) < d && has_bounded_real_variation_on(f, real_interval([(x - d, x + d)])) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, x)), (reallim(within(atreal(x), {(l : Real) | l <= x}), f) + reallim(within(atreal(x), {(r : Real) | r >= x}), f)) / real_of_num(2), sequentially)
+      #|  min((d0 : Real), (d1 : Real))
+      #|  (t : Real) - (x : Real)
+      #|  (x : Real)
+      #|  min((d0 : Real), (d1 : Real))
+      #|  (t : Real) + (x : Real)
+      #|  (x : Real)
+      #|  real_interval([(-real_of_num(2 * (N : Num) + 1) * pi, real_of_num(2 * N + 1) * pi)])
+      #|  (N : Num)
+      #|  abs((x : Real)) + real_of_num(3)
+      #|  real_of_num(2) * pi
+      #|  -(real_of_num(2) + real_of_num(2) * (m : Real) + real_of_num(1)) == real_of_num(2) * -(m + real_of_num(1)) - real_of_num(1)
+      #|  -(real_of_num(2) * (m : Real) + real_of_num(1)) == real_of_num(2) * -(m + real_of_num(1)) + real_of_num(1)
+      #|  (-(a : Real) <= (b : Real)) == (real_of_num(0) <= a + b)
+      #|  -(real_of_num(2 * (m : Num) + 1) * pi)
+      #|  real_of_num(2 * (n : Num) + 1) * pi
+      #|  -(real_of_num(2 + 2 * (m : Num) + 1) * pi)
+      #|  (f : (Real) -> Real)
+      #|  (n : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, has_bounded_real_variation_on((f : (Real) -> Real), real_interval([(-real_of_num(2 * m + 1) * pi, real_of_num(2 * n + 1) * pi)]))
+      #|  (real_of_num(2) + real_of_num(2) * (n : Real) + real_of_num(1)) * pi == (real_of_num(2) * (n + real_of_num(1)) + real_of_num(1)) * pi
+      #|  (real_of_num(2) * (n : Real) + real_of_num(1)) * pi == (real_of_num(2) * (n + real_of_num(1)) - real_of_num(1)) * pi
+      #|  -pi == -real_of_num(1) * pi
+      #|  real_of_num(2 * (n : Num) + 1) * pi
+      #|  real_of_num(2 + 2 * (n : Num) + 1) * pi
+      #|  -pi
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 n : Num, has_bounded_real_variation_on((f : (Real) -> Real), real_interval([(-pi, real_of_num(2 * n + 1) * pi)]))
+      #|  (x : Real) + (n : Real) * (real_of_num(2) * pi) == real_of_num(2) * (n * pi) + x
+      #|  -(n : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  real_of_num(2) * (-(n : Real) * pi)
+      #|  \226\136\128 n : Real, integer(n) \226\134\146 has_bounded_real_variation_on((f : (Real) -> Real), real_interval([((real_of_num(2) * n - real_of_num(1)) * pi, (real_of_num(2) * n + real_of_num(1)) * pi)]))
+      #|  real_of_num(1)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, has_bounded_real_variation_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, x)), (reallim(within(atreal(x), {(l : Real) | l <= x}), f) + reallim(within(atreal(x), {(r : Real) | r >= x}), f)) / real_of_num(2), sequentially)
+      #|  (fejer_kernel : (Num, Real) -> Real)((n : Num), (x : Real)) == (if n == 0 { real_of_num(0) } else { sum(op_dot_dot(0, n - 1), (r : Num) => dirichlet_kernel(r, x)) / real_of_num(n) })
+      #|  (x : Real) / real_of_num(2) + (real_of_num((n : Num)) + real_of_num(1) / real_of_num(2)) * x == (real_of_num(n) + real_of_num(1)) * x
+      #|  (x : Real) / real_of_num(2) - (real_of_num((n : Num)) + real_of_num(1) / real_of_num(2)) * x == -(real_of_num(n) * x)
+      #|  !((s : Real) == real_of_num(0)) \226\134\146 real_of_num(2) * (pow(s, 2) * ((a : Real) / (real_of_num(2) * s))) == s * a
+      #|  !((n : Real) == real_of_num(0)) && !((s : Real) == real_of_num(0)) && real_of_num(2) * (pow(s, 2) * (l : Real)) == (r : Real) \226\134\146 l / n == r / (real_of_num(2) * (n * pow(s, 2)))
+      #|  sin((x : Real) / real_of_num(2)) == real_of_num(0)
+      #|  (x : Real) == real_of_num(0)
+      #|  (n : Num) == 0
+      #|  fejer_kernel((n : Num), (x : Real)) == (if n == 0 { real_of_num(0) } else { if x == real_of_num(0) { real_of_num(n) / real_of_num(2) } else { pow(sin(real_of_num(n) / real_of_num(2) * x), 2) / (real_of_num(2) * (real_of_num(n) * pow(sin(x / real_of_num(2)), 2))) } })
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, real_continuous_on(fejer_kernel(n), real_interval((-(real_of_num(2) * pi), real_of_num(2) * pi)))
+      #|  real_interval((-(real_of_num(2) * pi), real_of_num(2) * pi))
+      #|  \226\136\128 n : Num, real_continuous_on(fejer_kernel(n), real_interval([(-pi, pi)]))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) \226\134\146 absolutely_real_integrable_on((x : Real) => fejer_kernel(n, x) * f(x), real_interval([(-pi, pi)]))
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 c : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) \226\134\146 absolutely_real_integrable_on((x : Real) => fejer_kernel(n, x) * f((t : Real) + x), real_interval([(-pi, pi)])) && absolutely_real_integrable_on((x : Real) => fejer_kernel(n, x) * f(t - x), real_interval([(-pi, pi)])) && absolutely_real_integrable_on((x : Real) => fejer_kernel(n, x) * c, real_interval([(-pi, pi)]))
+      #|  real_interval([(-pi, pi)])
+      #|  ((a : Bool) && (b : Bool) && (c : Bool)) && (a && b && c \226\134\146 (d : Bool) && (e : Bool)) \226\134\146 a && b && c && d && e
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 d : Real, \226\136\128 c : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) && d <= pi \226\134\146 absolutely_real_integrable_on((x : Real) => fejer_kernel(n, x) * f((t : Real) + x), real_interval([(real_of_num(0), d)])) && absolutely_real_integrable_on((x : Real) => fejer_kernel(n, x) * f(t - x), real_interval([(real_of_num(0), d)])) && absolutely_real_integrable_on((x : Real) => fejer_kernel(n, x) * c, real_interval([(real_of_num(0), d)])) && absolutely_real_integrable_on((x : Real) => fejer_kernel(n, x) * (f(t + x) + f(t - x)), real_interval([(real_of_num(0), d)])) && absolutely_real_integrable_on((x : Real) => fejer_kernel(n, x) * (f(t + x) + f(t - x) - c), real_interval([(real_of_num(0), d)]))
+      #|  !((n : Real) == real_of_num(0)) \226\134\146 (s : Real) * (f : Real) == n * (s / n * f)
+      #|  (x : Real)
+      #|  (n : Num) - 1
       #|  0
-      #|  l:real
-      #|  ~(n = &0) ==> (x / n - l = y <=> x - n * l = n * y)
-      #|  forall f n t.\n     f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n     (forall x. f (x + &2 * pi) = f x) /\\\n     0 < n\n     ==> sum(0..n-1) (\\r. sum (0..2*r)\n                              (\\k. fourier_coefficient f k *\n                                   trigonometric_set k t)) / &n - l =\n         real_integral (real_interval[&0,pi])\n                       (\\x. fejer_kernel n x *\n                            ((f(t + x) + f(t - x)) - &2 * l)) / pi
+      #|  (l : Real)
+      #|  !((n : Real) == real_of_num(0)) \226\134\146 ((x : Real) / n - (l : Real) == (y : Real)) == (x - n * l == n * y)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 t : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) && 0 < n \226\134\146 sum(op_dot_dot(0, n - 1), (r : Num) => sum(op_dot_dot(0, 2 * r), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t))) / real_of_num(n) - (l : Real) == real_integral(real_interval([(real_of_num(0), pi)]), (x : Real) => fejer_kernel(n, x) * (f(t + x) + f(t - x) - real_of_num(2) * l)) / pi
       #|  1
-      #|  forall f t l.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> (((\\n. sum(0..n-1) (\\r. sum (0..2*r)\n                                        (\\k. fourier_coefficient f k *\n                                             trigonometric_set k t)) / &n)\n               ---> l) sequentially <=>\n             ((\\n. real_integral (real_interval[&0,pi])\n                                 (\\x. fejer_kernel n x *\n                                      ((f(t + x) + f(t - x)) - &2 * l)))\n              ---> &0) sequentially)
-      #|  pi = sum(0..n-1) (\\r. pi) / &n
-      #|  n = 0
-      #|  forall n. (fejer_kernel n has_real_integral (if n = 0 then &0 else pi))\n       (real_interval[--pi,pi])
-      #|  pi / &2 = sum(0..n-1) (\\r. pi / &2) / &n
-      #|  n = 0
-      #|  forall n. (fejer_kernel n has_real_integral (if n = 0 then &0 else pi / &2))\n       (real_interval[&0,pi])
-      #|  forall n x. &0 <= fejer_kernel n x
-      #|  &0 < pi ==> pi / &2 * e / &2 / pi = e / &4
-      #|  e / &2 / pi
-      #|  real_interval[&0,pi]
-      #|  real_integral (real_interval[&0,pi])\n                    (\\x. fejer_kernel n x * e / &2 / pi)
-      #|  n:num
-      #|  abs x <= x <=> &0 <= x
-      #|  x:real
-      #|  &0
-      #|  k:real
-      #|  n:num
-      #|  \\x:real. e / &2 / pi
-      #|  {&0}
-      #|  \\x. fejer_kernel n x * h x
-      #|  {&0}
-      #|  real_integral (real_interval [&0,k]) (\\x. fejer_kernel n x * h x) =\n      real_integral (real_interval [&0,k])\n                    (\\x. fejer_kernel n x * (if x = &0 then &0 else h x))
-      #|  real_integral (real_interval[&0,k])\n                            (\\x. fejer_kernel n x * e / &2 / pi)
-      #|  abs x <= e / &2 ==> x + y = z ==> abs y < e / &2 ==> abs z < e
-      #|  k:real
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 t : Real, \226\136\128 l : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n - 1), (r : Num) => sum(op_dot_dot(0, 2 * r), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t))) / real_of_num(n), l, sequentially) == op_minus_minus_minus_gt((n : Num) => real_integral(real_interval([(real_of_num(0), pi)]), (x : Real) => fejer_kernel(n, x) * (f(t + x) + f(t - x) - real_of_num(2) * l)), real_of_num(0), sequentially)
+      #|  pi == sum(op_dot_dot(0, (n : Num) - 1), (r : Num) => pi) / real_of_num(n)
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, has_real_integral(fejer_kernel(n), if n == 0 { real_of_num(0) } else { pi }, real_interval([(-pi, pi)]))
+      #|  pi / real_of_num(2) == sum(op_dot_dot(0, (n : Num) - 1), (r : Num) => pi / real_of_num(2)) / real_of_num(n)
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, has_real_integral(fejer_kernel(n), if n == 0 { real_of_num(0) } else { pi / real_of_num(2) }, real_interval([(real_of_num(0), pi)]))
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, real_of_num(0) <= fejer_kernel(n, x)
+      #|  real_of_num(0) < pi \226\134\146 pi / real_of_num(2) * ((e : Real) / real_of_num(2) / pi) == e / real_of_num(4)
+      #|  (e : Real) / real_of_num(2) / pi
+      #|  real_interval([(real_of_num(0), pi)])
+      #|  real_integral(real_interval([(real_of_num(0), pi)]), (x : Real) => fejer_kernel((n : Num), x) * ((e : Real) / real_of_num(2) / pi))
+      #|  (n : Num)
+      #|  (abs((x : Real)) <= x) == (real_of_num(0) <= x)
+      #|  (x : Real)
+      #|  real_of_num(0)
+      #|  (k : Real)
+      #|  (n : Num)
+      #|  (x : Real) => (e : Real) / real_of_num(2) / pi
+      #|  {real_of_num(0)}
+      #|  (x : Real) => fejer_kernel((n : Num), x) * (h : (Real) -> Real)(x)
+      #|  {real_of_num(0)}
+      #|  real_integral(real_interval([(real_of_num(0), (k : Real))]), (x : Real) => fejer_kernel((n : Num), x) * (h : (Real) -> Real)(x)) == real_integral(real_interval([(real_of_num(0), k)]), (x : Real) => fejer_kernel(n, x) * (if x == real_of_num(0) { real_of_num(0) } else { h(x) }))
+      #|  real_integral(real_interval([(real_of_num(0), (k : Real))]), (x : Real) => fejer_kernel((n : Num), x) * ((e : Real) / real_of_num(2) / pi))
+      #|  abs((x : Real)) <= (e : Real) / real_of_num(2) \226\134\146 x + (y : Real) == (z : Real) \226\134\146 abs(y) < e / real_of_num(2) \226\134\146 abs(z) < e
+      #|  (k : Real)
       #|  pi
-      #|  &0
-      #|  \\x. fejer_kernel n x * h x
-      #|  n:num
-      #|  MAX a b <= x <=> a <= x /\\ b <= x
-      #|  n:num
-      #|  MAX 1 N
-      #|  N:num
-      #|  e / &2
-      #|  &1
-      #|  s * t * n * i * h:real = n * s * h * (t * i)
-      #|  \\x. sin(&n / &2 * x) pow 2 / (&2 * &n * sin(x / &2) pow 2) * h(x)
-      #|  \\x.  abs(h x) / (&2 * sin(x / &2) pow 2) * inv(&n)
-      #|  x = y /\\ &0 <= x ==> abs x <= y
-      #|  x <= y <=> x <= &1 * y
-      #|  x:real
-      #|  b /\\ (b ==> a) ==> a /\\ b
-      #|  &2 * x pow 2 = &0 <=> x = &0
-      #|  x:real
-      #|  pi - --pi = &2 * pi
-      #|  pi - --pi = &2 * pi
-      #|  real_interval[--pi,pi]
-      #|  (\\x. h x / (&2 * sin(x / &2) pow 2))\n      absolutely_real_integrable_on real_interval[k,pi]
-      #|  n:num
+      #|  real_of_num(0)
+      #|  (x : Real) => fejer_kernel((n : Num), x) * (h : (Real) -> Real)(x)
+      #|  (n : Num)
+      #|  (MAX((a : Num), (b : Num)) <= (x : Num)) == (a <= x && b <= x)
+      #|  (n : Num)
+      #|  MAX(1, (N : Num))
+      #|  (N : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  real_of_num(1)
+      #|  (s : Real) * ((t : Real) * ((n : Real) * ((i : Real) * (h : Real)))) == n * (s * (h * (t * i)))
+      #|  (x : Real) => pow(sin(real_of_num((n : Num)) / real_of_num(2) * x), 2) / (real_of_num(2) * (real_of_num(n) * pow(sin(x / real_of_num(2)), 2))) * (h : (Real) -> Real)(x)
+      #|  (x : Real) => abs((h : (Real) -> Real)(x)) / (real_of_num(2) * pow(sin(x / real_of_num(2)), 2)) * inv(real_of_num((n : Num)))
+      #|  (x : Real) == (y : Real) && real_of_num(0) <= x \226\134\146 abs(x) <= y
+      #|  ((x : Real) <= (y : Real)) == (x <= real_of_num(1) * y)
+      #|  (x : Real)
+      #|  (b : Bool) && (b \226\134\146 (a : Bool)) \226\134\146 a && b
+      #|  (real_of_num(2) * pow((x : Real), 2) == real_of_num(0)) == (x == real_of_num(0))
+      #|  (x : Real)
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  pi - -pi == real_of_num(2) * pi
+      #|  real_interval([(-pi, pi)])
+      #|  absolutely_real_integrable_on((x : Real) => (h : (Real) -> Real)(x) / (real_of_num(2) * pow(sin(x / real_of_num(2)), 2)), real_interval([((k : Real), pi)]))
+      #|  (n : Num)
       #|  1
-      #|  \\n. real_integral (real_interval[k,pi])\n                        (\\x. abs(h x) / (&2 * sin(x / &2) pow 2)) / &n
-      #|  ((\\n. real_integral (real_interval[k,pi])\n                        (\\x. fejer_kernel n x * h x))\n     ---> &0) sequentially
-      #|  min k pi / &2
-      #|  k:real
-      #|  e / &2 / pi
-      #|  (h ---> &0) (atreal (&0) within {x | &0 <= x})
-      #|  ?k. &0 < k /\\ k < pi /\\\n        (forall x. &0 < x /\\ x <= k ==> abs(h x) < e / &2 / pi)
-      #|  e:real
-      #|  d1:real
-      #|  &0 < e
-      #|  e:real
-      #|  (f ---> r) (atreal t within {x' | x' >= t})
-      #|  d1:real
-      #|  &0 < e
-      #|  e:real
-      #|  (f ---> l) (atreal t within {x' | x' <= t})
-      #|  (f' + f) - (l + l'):real = (f - l) + (f' - l')
-      #|  (h ---> &0) (atreal(&0) within {x | &0 <= x})
-      #|  h = \\u. ((f:real->real)(t + u) + f(t - u)) - (l + r)
-      #|  &2 * x / &2 = x
-      #|  r:real
-      #|  l:real
-      #|  t:real
-      #|  f:real->real
-      #|  forall f x l r.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f x) /\\\n        (f ---> l) (atreal x within {x' | x' <= x}) /\\\n        (f ---> r) (atreal x within {x' | x' >= x})\n        ==> ((\\n. sum(0..n-1) (\\m. sum (0..2*m)\n                                       (\\k. fourier_coefficient f k *\n                                            trigonometric_set k x)) / &n)\n             ---> (l + r) / &2)\n            sequentially
-      #|  t - x:real
-      #|  x:real
-      #|  t + x:real
-      #|  x:real
-      #|  x = (x + x) / &2
-      #|  forall f x l r.\n        f real_continuous_on (:real) /\\ (forall x. f(x + &2 * pi) = f x)\n        ==> ((\\n. sum(0..n-1) (\\m. sum (0..2*m)\n                                       (\\k. fourier_coefficient f k *\n                                            trigonometric_set k x)) / &n)\n             ---> f(x))\n            sequentially
+      #|  (n : Num) => real_integral(real_interval([((k : Real), pi)]), (x : Real) => abs((h : (Real) -> Real)(x)) / (real_of_num(2) * pow(sin(x / real_of_num(2)), 2))) / real_of_num(n)
+      #|  op_minus_minus_minus_gt((n : Num) => real_integral(real_interval([((k : Real), pi)]), (x : Real) => fejer_kernel(n, x) * (h : (Real) -> Real)(x)), real_of_num(0), sequentially)
+      #|  min((k : Real), pi) / real_of_num(2)
+      #|  (k : Real)
+      #|  (e : Real) / real_of_num(2) / pi
+      #|  op_minus_minus_minus_gt((h : (Real) -> Real), real_of_num(0), within(atreal(real_of_num(0)), {(x : Real) | real_of_num(0) <= x}))
+      #|  \226\136\131 k : Real, real_of_num(0) < k && k < pi && (\226\136\128 x : Real, real_of_num(0) < x && x <= k \226\134\146 abs((h : (Real) -> Real)(x)) < (e : Real) / real_of_num(2) / pi)
+      #|  (e : Real)
+      #|  (d1 : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((f : (Real) -> Real), (r : Real), within(atreal((t : Real)), {(x' : Real) | x' >= t}))
+      #|  (d1 : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((f : (Real) -> Real), (l : Real), within(atreal((t : Real)), {(x' : Real) | x' <= t}))
+      #|  (f' : Real) + (f : Real) - ((l : Real) + (l' : Real)) == f - l + (f' - l')
+      #|  op_minus_minus_minus_gt((h : (Real) -> Real), real_of_num(0), within(atreal(real_of_num(0)), {(x : Real) | real_of_num(0) <= x}))
+      #|  (h : (Real) -> Real) == ((u : Real) => (f : (Real) -> Real)((t : Real) + u) + f(t - u) - ((l : Real) + (r : Real)))
+      #|  real_of_num(2) * ((x : Real) / real_of_num(2)) == x
+      #|  (r : Real)
+      #|  (l : Real)
+      #|  (t : Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, \226\136\128 l : Real, \226\136\128 r : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) && op_minus_minus_minus_gt(f, l, within(atreal(x), {(x' : Real) | x' <= x})) && op_minus_minus_minus_gt(f, r, within(atreal(x), {(x' : Real) | x' >= x})) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n - 1), (m : Num) => sum(op_dot_dot(0, 2 * m), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, x))) / real_of_num(n), (l + r) / real_of_num(2), sequentially)
+      #|  (t : Real) - (x : Real)
+      #|  (x : Real)
+      #|  (t : Real) + (x : Real)
+      #|  (x : Real)
+      #|  (x : Real) == (x + x) / real_of_num(2)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, \226\136\128 l : _, \226\136\128 r : _, real_continuous_on(f, UNIV) && (\226\136\128 x : Real, f(x + real_of_num(2) * pi) == f(x)) \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n - 1), (m : Num) => sum(op_dot_dot(0, 2 * m), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, x))) / real_of_num(n), f(x), sequentially)
       #|SUM_NUMBERS =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(real,fun(real,bool)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\r:num. (#real_of_num:fun(num,real) r:num)))) ((#real_div:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))
       #|REAL_INTEGRABLE_REFLECT_AND_ADD =  |- (#forall:fun(fun(fun(real,real),bool),bool) (\f:fun(real,real). (#forall:fun(fun(real,bool),bool) (\a:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_integrable_on:fun(fun(real,real),fun(fun(real,bool),bool)) f:fun(real,real)) (#closed_real_interval:fun(list(prod(real,real)),fun(real,bool)) ((#CONS:fun(prod(real,real),fun(list(prod(real,real)),list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) (#real_neg:fun(real,real) a:real)) a:real)) #NIL:list(prod(real,real)))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_integrable_on:fun(fun(real,real),fun(fun(real,bool),bool)) f:fun(real,real)) (#closed_real_interval:fun(list(prod(real,real)),fun(real,bool)) ((#CONS:fun(prod(real,real),fun(list(prod(real,real)),list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) a:real)) #NIL:list(prod(real,real)))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_integrable_on:fun(fun(real,real),fun(fun(real,bool),bool)) (\x:real. (f:fun(real,real) (#real_neg:fun(real,real) x:real)))) (#closed_real_interval:fun(list(prod(real,real)),fun(real,bool)) ((#CONS:fun(prod(real,real),fun(list(prod(real,real)),list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) a:real)) #NIL:list(prod(real,real)))))) ((#real_integrable_on:fun(fun(real,real),fun(fun(real,bool),bool)) (\x:real. ((#real_add:fun(real,fun(real,real)) (f:fun(real,real) x:real)) (f:fun(real,real) (#real_neg:fun(real,real) x:real))))) (#closed_real_interval:fun(list(prod(real,real)),fun(real,bool)) ((#CONS:fun(prod(real,real),fun(list(prod(real,real)),list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) a:real)) #NIL:list(prod(real,real))))))))))))
       #|REAL_INTEGRAL_REFLECT_AND_ADD =  |- (#forall:fun(fun(fun(real,real),bool),bool) (\f:fun(real,real). (#forall:fun(fun(real,bool),bool) (\a:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_integrable_on:fun(fun(real,real),fun(fun(real,bool),bool)) f:fun(real,real)) (#closed_real_interval:fun(list(prod(real,real)),fun(real,bool)) ((#CONS:fun(prod(real,real),fun(list(prod(real,real)),list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) (#real_neg:fun(real,real) a:real)) a:real)) #NIL:list(prod(real,real)))))) ((#=:fun(real,fun(real,bool)) ((#real_integral:fun(fun(real,bool),fun(fun(real,real),real)) (#closed_real_interval:fun(list(prod(real,real)),fun(real,bool)) ((#CONS:fun(prod(real,real),fun(list(prod(real,real)),list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) (#real_neg:fun(real,real) a:real)) a:real)) #NIL:list(prod(real,real))))) f:fun(real,real))) ((#real_integral:fun(fun(real,bool),fun(fun(real,real),real)) (#closed_real_interval:fun(list(prod(real,real)),fun(real,bool)) ((#CONS:fun(prod(real,real),fun(list(prod(real,real)),list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) a:real)) #NIL:list(prod(real,real))))) (\x:real. ((#real_add:fun(real,fun(real,real)) (f:fun(real,real) x:real)) (f:fun(real,real) (#real_neg:fun(real,real) x:real)))))))))))
