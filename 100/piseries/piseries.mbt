@@ -114,11 +114,11 @@ fn step_6() -> Unit raise {
   let conv_step : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(fn(x26 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x26
   }, @list.List([@equal.gsym(@bool.conjunct2(@poly.poly()))]))
-  let t27 = @term_syntax.parse_term("op_plus")
+  let t27 = @term_syntax.parse_term("real_add")
   let is_add : (@kernel.Term) -> Bool raise = fn(x29 : @kernel.Term) -> Bool raise {
     ((x28 : @kernel.Term) => @basics.is_binop(t27, x28))(x29)
   }
-  let t30 = @term_syntax.parse_term("op_star")
+  let t30 = @term_syntax.parse_term("real_mul")
   let is_mul : (@kernel.Term) -> Bool raise = fn(x32 : @kernel.Term) -> Bool raise {
     ((x31 : @kernel.Term) => @basics.is_binop(t30, x31))(x32)
   }
@@ -831,7 +831,7 @@ fn step_13() -> Unit raise {
   let t502 = @tactics.match_mp_tac(@real.real_eq_rcancel_imp())
   let t500 = @simp.simp_tac(@list.List([@int.integer(), @calc_int.real_abs_neg(), @calc_int.real_abs_num(), @class.not_exists_thm()]))
   let t499 = @tactics.undisch_tac(@term_syntax.parse_term("!integer((x : Real))"))
-  let t493 = @term_syntax.parse_term("abs")
+  let t493 = @term_syntax.parse_term("real_abs")
   let t496 = @tactics.disj_cases_then(fn(x495 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x490 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s491 = @tactics.mp_tac(x490)
@@ -902,7 +902,7 @@ fn step_14() -> Unit raise {
   let t550 = @tactics.match_mp_tac(@real.real_eq_rcancel_imp())
   let t548 = @simp.simp_tac(@list.List([@int.integer(), @calc_int.real_abs_neg(), @calc_int.real_abs_num(), @class.not_exists_thm()]))
   let t547 = @tactics.undisch_tac(@term_syntax.parse_term("!integer((x : Real))"))
-  let t541 = @term_syntax.parse_term("abs")
+  let t541 = @term_syntax.parse_term("real_abs")
   let t544 = @tactics.disj_cases_then(fn(x543 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x538 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s539 = @tactics.mp_tac(x538)
