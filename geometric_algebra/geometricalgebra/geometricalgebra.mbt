@@ -909,7 +909,7 @@ pub fn geomalg_eq() -> @kernel.Thm {
 fn step_44() -> Unit raise {
   let t218 = @meson.meson_tac(@list.List([@clifford.codeset_setcode_bijections()]))
   let t219 = @tactics.then_tac(@simp.simp_tac(@list.List([setindex(), lambdaset(), @cart.lambda_beta(), @clifford.setcode_bounds(), dimindex_geomalg(), @equal.gsym(@iterate.in_numseg())])), t218)
-  geomalg_beta_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (setindex : (Cart[Real, Geomalg[P, Q, R]], (Num) -> Bool) -> Real)((lambdas : (((Num) -> Bool) -> Real) -> Cart[Real, Geomalg[P, Q, R]])((g : ((Num) -> Bool) -> Real)), s) == g(s)"), t219))
+  geomalg_beta_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (setindex : (Cart[Real, Geomalg[P, Q, R]], (Num) -> Bool) -> Real)((lambdaset : (((Num) -> Bool) -> Real) -> Cart[Real, Geomalg[P, Q, R]])((g : ((Num) -> Bool) -> Real)), s) == g(s)"), t219))
 }
 
 ///|
@@ -926,7 +926,7 @@ pub fn geomalg_beta() -> @kernel.Thm {
 fn step_45() -> Unit raise {
   let t220 = @meson.meson_tac(@list.List([]))
   let t221 = @tactics.then_tac(@simp.simp_tac(@list.List([geomalg_eq(), geomalg_beta()])), t220)
-  geomalg_unique_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Cart[Real, Geomalg[P, Q, R]], ∀ g : ((Num) -> Bool) -> Real, (∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (setindex : (Cart[Real, Geomalg[P, Q, R]], (Num) -> Bool) -> Real)(m, s) == g(s)) → (lambdas : (((Num) -> Bool) -> Real) -> Cart[Real, Geomalg[P, Q, R]])(g) == m"), t221))
+  geomalg_unique_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Cart[Real, Geomalg[P, Q, R]], ∀ g : ((Num) -> Bool) -> Real, (∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (setindex : (Cart[Real, Geomalg[P, Q, R]], (Num) -> Bool) -> Real)(m, s) == g(s)) → (lambdaset : (((Num) -> Bool) -> Real) -> Cart[Real, Geomalg[P, Q, R]])(g) == m"), t221))
 }
 
 ///|
@@ -942,7 +942,7 @@ pub fn geomalg_unique() -> @kernel.Thm {
 /// GEOMALG_ETA
 fn step_46() -> Unit raise {
   let t222 = @simp.simp_tac(@list.List([geomalg_eq(), geomalg_beta()]))
-  geomalg_eta_c.set(@tactics.prove(@term_syntax.parse_term("lambdas((s : (Num) -> Bool) => setindex((m : Cart[Real, Geomalg[_, _, _]]), s)) == m"), t222))
+  geomalg_eta_c.set(@tactics.prove(@term_syntax.parse_term("lambdaset((s : (Num) -> Bool) => setindex((m : Cart[Real, Geomalg[_, _, _]]), s)) == m"), t222))
 }
 
 ///|
@@ -1022,7 +1022,7 @@ pub fn geomalg_vsum_component() -> @kernel.Thm {
 /// GEOMALG_VSUM
 fn step_51() -> Unit raise {
   let t227 = @simp.simp_tac(@list.List([geomalg_eq(), geomalg_beta(), geomalg_vsum_component()]))
-  geomalg_vsum_c.set(@tactics.prove(@term_syntax.parse_term("∀ t : (_) -> Bool, ∀ f : (_) -> Cart[Real, Geomalg[_, _, _]], vsum(t, f) == lambdas((s : (Num) -> Bool) => sum(t, (x : _) => setindex(f(x), s)))"), t227))
+  geomalg_vsum_c.set(@tactics.prove(@term_syntax.parse_term("∀ t : (_) -> Bool, ∀ f : (_) -> Cart[Real, Geomalg[_, _, _]], vsum(t, f) == lambdaset((s : (Num) -> Bool) => sum(t, (x : _) => setindex(f(x), s)))"), t227))
 }
 
 ///|
@@ -1066,7 +1066,7 @@ pub fn mvbasis() -> @kernel.Thm {
 fn step_55() -> Unit raise {
   let t228 = @meson.meson_tac(@list.List([]))
   let t229 = @tactics.then_tac(@simp.simp_tac(@list.List([mvbasis(), @sets.in_elim_thm(), geomalg_beta()])), t228)
-  mvbasis_component_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (setindex : (Cart[Real, Geomalg[P, Q, R]], (Num) -> Bool) -> Real)((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(t), s) == (if s == t { real_of_num(1) } else { real_of_num(0) })"), t229))
+  mvbasis_component_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (setindex : (Cart[Real, Geomalg[P, Q, R]], (Num) -> Bool) -> Real)((mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(t), s) == (if s == t { real_of_num(1) } else { real_of_num(0) })"), t229))
 }
 
 ///|
@@ -1083,7 +1083,7 @@ pub fn mvbasis_component() -> @kernel.Thm {
 fn step_56() -> Unit raise {
   let t230 = @meson.meson_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("!(real_of_num(1) == real_of_num(0))"))]))
   let t231 = @tactics.then_tac(@simp.simp_tac(@list.List([geomalg_eq(), mvbasis_component(), geomalg_vec_component()])), t230)
-  mvbasis_eq_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s) == (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0)) == !SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))"), t231))
+  mvbasis_eq_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ((mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s) == (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0)) == !SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))"), t231))
 }
 
 ///|
@@ -1099,7 +1099,7 @@ pub fn mvbasis_eq_0() -> @kernel.Thm {
 /// MVBASIS_NONZERO
 fn step_57() -> Unit raise {
   let t232 = @simp.rewrite_tac(@list.List([mvbasis_eq_0()]))
-  mvbasis_nonzero_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → !((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s) == (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0))"), t232))
+  mvbasis_nonzero_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → !((mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s) == (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0))"), t232))
 }
 
 ///|
@@ -1130,7 +1130,7 @@ fn step_58() -> Unit raise {
   }, @list.List([@theorems.eq_sym_eq()]))
   let t233 = @tactics.repeat_tac(@tactics.strip_tac)
   let t243 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([geomalg_eq(), geomalg_vsum_component(), geomalg_mul_component(), mvbasis_component()])), t233), t241), t242)
-  mvbasis_expansion_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[P, Q, R]], (vsum : (((Num) -> Bool) -> Bool, ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])({(s : (Num) -> Bool) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))}, (s : (Num) -> Bool) => (op_pct : (Real, Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((setindex : (Cart[Real, Geomalg[P, Q, R]], (Num) -> Bool) -> Real)(x, s), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s))) == x"), t243))
+  mvbasis_expansion_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[P, Q, R]], (vsum : (((Num) -> Bool) -> Bool, ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])({(s : (Num) -> Bool) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))}, (s : (Num) -> Bool) => (op_pct : (Real, Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((setindex : (Cart[Real, Geomalg[P, Q, R]], (Num) -> Bool) -> Real)(x, s), (mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s))) == x"), t243))
 }
 
 ///|
@@ -1160,7 +1160,7 @@ fn step_59() -> Unit raise {
   }, @list.List([@equal.gsym(mvbasis_expansion())]))
   let t244 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : Cart[Real, Geomalg[P, Q, R]])"))
   let t256 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_univ()])), t244), t248), t249), t250), t251), t252), t253), t254), t255)
-  span_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("(span : ((Cart[Real, Geomalg[P, Q, R]]) -> Bool, Cart[Real, Geomalg[P, Q, R]]) -> Bool)({(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))}) == (UNIV : (Cart[Real, Geomalg[P, Q, R]]) -> Bool)"), t256))
+  span_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("(span : ((Cart[Real, Geomalg[P, Q, R]]) -> Bool, Cart[Real, Geomalg[P, Q, R]]) -> Bool)({(mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))}) == (UNIV : (Cart[Real, Geomalg[P, Q, R]]) -> Bool)"), t256))
 }
 
 ///|
@@ -1179,7 +1179,7 @@ fn step_60() -> Unit raise {
   let t257 = @equal.gsym(@clifford.forall_setcode())
   let t258 = @simp.rewrite_tac(@list.List([@equal.gsym(@iterate.in_numseg()), dimindex_geomalg(), t257]))
   let t260 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([mvbasis(), @vectors.basis(), lambdaset(), @cart.cart_eq(), @cart.lambda_beta()])), t258), t259)
-  mvbasis_basis_c.set(@tactics.prove(@term_syntax.parse_term("SUBSET((s : (Num) -> Bool), op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s) == (basis : (Num) -> Cart[Real, Geomalg[P, Q, R]])(setcode(s))"), t260))
+  mvbasis_basis_c.set(@tactics.prove(@term_syntax.parse_term("SUBSET((s : (Num) -> Bool), op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s) == (basis : (Num) -> Cart[Real, Geomalg[P, Q, R]])(setcode(s))"), t260))
 }
 
 ///|
@@ -1207,7 +1207,7 @@ fn step_61() -> Unit raise {
   })
   let t261 = @tactics.repeat_tac(@tactics.strip_tac)
   let t271 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([mvbasis(), geomalg_eq(), geomalg_beta()])), t261), t268), t269), t270)
-  mvbasis_inj_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && SUBSET(t, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(t) → s == t"), t271))
+  mvbasis_inj_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && SUBSET(t, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && (mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s) == (mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(t) → s == t"), t271))
 }
 
 ///|
@@ -1236,7 +1236,7 @@ fn step_62() -> Unit raise {
   })
   let t272 = @tactics.repeat_tac(@tactics.strip_tac)
   let t283 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([mvbasis(), geomalg_eq(), geomalg_beta()])), t272), t279), t280), t281), t282)
-  mvbasis_inj_sing_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, ∀ j : Num, IN(i, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && IN(j, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({i}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({j}) → i == j"), t283))
+  mvbasis_inj_sing_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, ∀ j : Num, IN(i, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && IN(j, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && (mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({i}) == (mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({j}) → i == j"), t283))
 }
 
 ///|
@@ -1255,7 +1255,7 @@ fn step_63() -> Unit raise {
   let t285 = @simp.rewrite_tac(@list.List([setindex()]))
   let t284 = @simp.simp_tac(@list.List([mvbasis_basis()]))
   let t287 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t284), t285), t286)
-  dot_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[P, Q, R]], ∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (dot : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Real)((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s), x) == (setindex : (Cart[Real, Geomalg[P, Q, R]], (Num) -> Bool) -> Real)(x, s) && (dot : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Real)(x, (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s)) == (setindex : (Cart[Real, Geomalg[P, Q, R]], (Num) -> Bool) -> Real)(x, s)"), t287))
+  dot_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[P, Q, R]], ∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (dot : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Real)((mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s), x) == (setindex : (Cart[Real, Geomalg[P, Q, R]], (Num) -> Bool) -> Real)(x, s) && (dot : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Real)(x, (mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s)) == (setindex : (Cart[Real, Geomalg[P, Q, R]], (Num) -> Bool) -> Real)(x, s)"), t287))
 }
 
 ///|
@@ -1271,7 +1271,7 @@ pub fn dot_mvbasis() -> @kernel.Thm {
 /// DOT_MVBASIS_MVBASIS
 fn step_64() -> Unit raise {
   let t288 = @simp.simp_tac(@list.List([dot_mvbasis(), mvbasis_component()]))
-  dot_mvbasis_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && SUBSET(t, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (dot : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Real)((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(t)) == (if s == t { real_of_num(1) } else { real_of_num(0) })"), t288))
+  dot_mvbasis_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && SUBSET(t, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (dot : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Real)((mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s), (mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(t)) == (if s == t { real_of_num(1) } else { real_of_num(0) })"), t288))
 }
 
 ///|
@@ -1293,7 +1293,7 @@ fn step_65() -> Unit raise {
   let t290 = @tactics.repeat_tac(@tactics.strip_tac)
   let t289 = @simp.once_rewrite_tac(@list.List([@class.cond_rand()]))
   let t295 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([mvbasis(), @vectors.dot(), lambdaset(), @cart.lambda_beta()])), t289), t290), t291), t292), t293), t294)
-  dot_mvbasis_mvbasis_unequal_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, !(s == t) → (dot : (Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Real)((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])(s), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])(t)) == real_of_num(0)"), t295))
+  dot_mvbasis_mvbasis_unequal_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, !(s == t) → (dot : (Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Real)((mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])(s), (mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])(t)) == real_of_num(0)"), t295))
 }
 
 ///|
@@ -1330,7 +1330,7 @@ fn step_66() -> Unit raise {
   let t306 = @list.List([@sets.set_tac(@list.List([])), @tactics.all_tac])
   let t305 = @simp.rewrite_tac(@list.List([@theorems.right_exists_and_thm()]))
   let t304 = @simp.simp_tac(@list.List([@sets.finite_image(), @sets.finite_inter(), @iterate.finite_numseg(), @sets.finite_powerset()]))
-  let t303 = @tactics.exists_tac(@term_syntax.parse_term("(IMAGE : (((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]], ((Num) -> Bool) -> Bool, Cart[Real, Geomalg[P, Q, R]]) -> Bool)((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]]), INTER({(t : (Num) -> Bool) | SUBSET(t, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))}, (s : ((Num) -> Bool) -> Bool)))"))
+  let t303 = @tactics.exists_tac(@term_syntax.parse_term("(IMAGE : (((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]], ((Num) -> Bool) -> Bool, Cart[Real, Geomalg[P, Q, R]]) -> Bool)((mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]]), INTER({(t : (Num) -> Bool) | SUBSET(t, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))}, (s : ((Num) -> Bool) -> Bool)))"))
   let t302 = @simp.rewrite_tac(@list.List([@vectors.span_explicit(), @sets.in_elim_thm()]))
   let t300 = @meson.meson_tac(@list.List([]))
   let t299 = @simp.simp_tac(@list.List([@sets.forall_in_image(), mvbasis_component()]))
@@ -1354,7 +1354,7 @@ fn step_66() -> Unit raise {
       })(x316))
     })(x317)(x317)
   }), @tactics.ants_tac), t320), t324), t325), t326), t327), t328), t329), t330)
-  in_span_image_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[P, Q, R]], ∀ s : ((Num) -> Bool) -> Bool, (IN : (Cart[Real, Geomalg[P, Q, R]], (Cart[Real, Geomalg[P, Q, R]]) -> Bool) -> Bool)(x, (span : ((Cart[Real, Geomalg[P, Q, R]]) -> Bool, Cart[Real, Geomalg[P, Q, R]]) -> Bool)((IMAGE : (((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]], ((Num) -> Bool) -> Bool, Cart[Real, Geomalg[P, Q, R]]) -> Bool)((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]]), s))) == (∀ t : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(t, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && !(IN : ((Num) -> Bool, ((Num) -> Bool) -> Bool) -> Bool)(t, s) → (setindex : (Cart[Real, Geomalg[P, Q, R]], (Num) -> Bool) -> Real)(x, t) == real_of_num(0))"), t331))
+  in_span_image_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[P, Q, R]], ∀ s : ((Num) -> Bool) -> Bool, (IN : (Cart[Real, Geomalg[P, Q, R]], (Cart[Real, Geomalg[P, Q, R]]) -> Bool) -> Bool)(x, (span : ((Cart[Real, Geomalg[P, Q, R]]) -> Bool, Cart[Real, Geomalg[P, Q, R]]) -> Bool)((IMAGE : (((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]], ((Num) -> Bool) -> Bool, Cart[Real, Geomalg[P, Q, R]]) -> Bool)((mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]]), s))) == (∀ t : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(t, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && !(IN : ((Num) -> Bool, ((Num) -> Bool) -> Bool) -> Bool)(t, s) → (setindex : (Cart[Real, Geomalg[P, Q, R]], (Num) -> Bool) -> Real)(x, t) == real_of_num(0))"), t331))
 }
 
 ///|
@@ -1372,13 +1372,13 @@ fn step_67() -> Unit raise {
   let t337 = @tactics.match_accept_tac(@vectors.independent_stdbasis())
   let t335 = @meson.meson_tac(@list.List([@clifford.codeset_setcode_bijections(), mvbasis_basis()]))
   let t336 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_thm(), @equal.gsym(@iterate.in_numseg()), dimindex_geomalg()])), t335), @tactics.all_tac])
-  let t338 = @tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@term_syntax.parse_term("{(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))} == {(basis : (Num) -> Cart[Real, Geomalg[P, Q, R]])((i : Num)) | 1 <= i && i <= (dimindex : ((Geomalg[P, Q, R]) -> Bool) -> Num)((UNIV : (Geomalg[P, Q, R]) -> Bool))}"), fn(x332 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t338 = @tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@term_syntax.parse_term("{(mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))} == {(basis : (Num) -> Cart[Real, Geomalg[P, Q, R]])((i : Num)) | 1 <= i && i <= (dimindex : ((Geomalg[P, Q, R]) -> Bool) -> Num)((UNIV : (Geomalg[P, Q, R]) -> Bool))}"), fn(x332 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s333 = @tactics.subst1_tac(x332)
     fn(x334 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s333(x334)
     }
   }), t336), t337)
-  independent_stdmvbasis_c.set(@tactics.prove(@term_syntax.parse_term("(independent : ((Cart[Real, Geomalg[P, Q, R]]) -> Bool) -> Bool)({(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))})"), t338))
+  independent_stdmvbasis_c.set(@tactics.prove(@term_syntax.parse_term("(independent : ((Cart[Real, Geomalg[P, Q, R]]) -> Bool) -> Bool)({(mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))})"), t338))
 }
 
 ///|
@@ -1405,9 +1405,9 @@ fn step_68() -> Unit raise {
   let t342 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_image(), @sets.in_elim_thm()]))
   let t341 = @simp.once_rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("{(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x)} == IMAGE(f, {(x : _) | P(x)})"))]))
   let t340 = @simp.rewrite_tac(@list.List([independent_stdmvbasis()]))
-  let t339 = @tactics.exists_tac(@term_syntax.parse_term("{(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))}"))
+  let t339 = @tactics.exists_tac(@term_syntax.parse_term("{(mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))}"))
   let t350 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@vectors.independent_mono()), t339), t340), t341), t342), t343), t347), t348), t349)
-  independent_stdmvbasis_sing_c.set(@tactics.prove(@term_syntax.parse_term("(independent : ((Cart[Real, Geomalg[P, Q, R]]) -> Bool) -> Bool)({(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({(i : Num)}) | 1 <= i && i <= (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))})"), t350))
+  independent_stdmvbasis_sing_c.set(@tactics.prove(@term_syntax.parse_term("(independent : ((Cart[Real, Geomalg[P, Q, R]]) -> Bool) -> Bool)({(mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({(i : Num)}) | 1 <= i && i <= (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))})"), t350))
 }
 
 ///|
@@ -1428,14 +1428,14 @@ fn step_69() -> Unit raise {
   let t357 = @simp.simp_tac(@list.List([@equal.gsym(@clifford.forall_setcode()), dimindex_geomalg(), t356]))
   let t355 = @simp.simp_tac(@list.List([@cart.cart_eq(), @cart.lambda_beta(), @vectors.basis_component()]))
   let t359 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([mvbasis(), lambdaset()])), t355), t357), t358), @tactics.all_tac])
-  let t354 = @tactics.subgoal_then(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])((s : (Num) -> Bool)) == (basis : (Num) -> Cart[Real, Geomalg[P, Q, R]])(setcode(s))"), fn(x351 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t354 = @tactics.subgoal_then(@term_syntax.parse_term("(mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])((s : (Num) -> Bool)) == (basis : (Num) -> Cart[Real, Geomalg[P, Q, R]])(setcode(s))"), fn(x351 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s352 = @tactics.subst1_tac(x351)
     fn(x353 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s352(x353)
     }
   })
   let t361 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t354), t359), t360)
-  norm_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (norm : (Cart[Real, Geomalg[P, Q, R]]) -> Real)((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s)) == real_of_num(1)"), t361))
+  norm_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (norm : (Cart[Real, Geomalg[P, Q, R]]) -> Real)((mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s)) == real_of_num(1)"), t361))
 }
 
 ///|
@@ -1452,7 +1452,7 @@ pub fn norm_mvbasis() -> @kernel.Thm {
 fn step_70() -> Unit raise {
   let t369 = @meson.asm_meson_tac(@list.List([]))
   let t368 = @simp.asm_rewrite_tac(@list.List([span_mvbasis(), @sets.subset_refl(), @sets.in_elim_thm()]))
-  let t367 = @tactics.exists_tac(@term_syntax.parse_term("{(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))}"))
+  let t367 = @tactics.exists_tac(@term_syntax.parse_term("{(mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))}"))
   let t366 = @tactics.match_mp_tac(@vectors.linear_eq())
   let t365 = @tactics.subgoal_then(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[P, Q, R]], IN(x, UNIV) → (f : (Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, N])(x) == (g : (Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, N])(x)"), fn(x362 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x362
@@ -1477,8 +1477,8 @@ pub fn linear_eq_mvbasis() -> @kernel.Thm {
 fn step_71() -> Unit raise {
   let t379 = @meson.asm_meson_tac(@list.List([]))
   let t378 = @simp.asm_rewrite_tac(@list.List([span_mvbasis(), @sets.subset_refl(), @sets.in_elim_thm()]))
-  let t377 = @tactics.exists_tac(@term_syntax.parse_term("{(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P', Q', R']])((t : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(t, op_dot_dot(1, (pdimindex : ((P') -> Bool) -> Num)((UNIV : (P') -> Bool)) + ((pdimindex : ((Q') -> Bool) -> Num)((UNIV : (Q') -> Bool)) + (pdimindex : ((R') -> Bool) -> Num)((UNIV : (R') -> Bool)))))}"))
-  let t376 = @tactics.exists_tac(@term_syntax.parse_term("{(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))}"))
+  let t377 = @tactics.exists_tac(@term_syntax.parse_term("{(mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P', Q', R']])((t : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(t, op_dot_dot(1, (pdimindex : ((P') -> Bool) -> Num)((UNIV : (P') -> Bool)) + ((pdimindex : ((Q') -> Bool) -> Num)((UNIV : (Q') -> Bool)) + (pdimindex : ((R') -> Bool) -> Num)((UNIV : (R') -> Bool)))))}"))
+  let t376 = @tactics.exists_tac(@term_syntax.parse_term("{(mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])((s : (Num) -> Bool)) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))))}"))
   let t375 = @tactics.match_mp_tac(@vectors.bilinear_eq())
   let t374 = @tactics.subgoal_then(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[P, Q, R]], ∀ y : Cart[Real, Geomalg[P', Q', R']], IN(x, UNIV) && IN(y, UNIV) → (f : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P', Q', R']]) -> Cart[Real, N])(x, y) == (g : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P', Q', R']]) -> Cart[Real, N])(x, y)"), fn(x371 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x371
@@ -1511,7 +1511,7 @@ fn step_72() -> Unit raise {
     }
   }, @list.List([@equal.gsym(mvbasis_expansion())]))
   let t388 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t384), t385), t386), t387)
-  mvbasis_extension_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (Cart[Real, Geomalg[P, Q, R]]) -> Bool, (∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → P((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s))) && (∀ c : Real, ∀ x : Cart[Real, Geomalg[P, Q, R]], P(x) → P((op_pct : (Real, Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(c, x))) && (∀ x : Cart[Real, Geomalg[P, Q, R]], ∀ y : Cart[Real, Geomalg[P, Q, R]], P(x) && P(y) → P(x + y)) → (∀ x : Cart[Real, Geomalg[P, Q, R]], P(x))"), t388))
+  mvbasis_extension_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (Cart[Real, Geomalg[P, Q, R]]) -> Bool, (∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → P((mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s))) && (∀ c : Real, ∀ x : Cart[Real, Geomalg[P, Q, R]], P(x) → P((op_pct : (Real, Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(c, x))) && (∀ x : Cart[Real, Geomalg[P, Q, R]], ∀ y : Cart[Real, Geomalg[P, Q, R]], P(x) && P(y) → P(x + y)) → (∀ x : Cart[Real, Geomalg[P, Q, R]], P(x))"), t388))
 }
 
 ///|
@@ -1555,7 +1555,7 @@ pub fn multivect() -> @kernel.Thm {
 fn step_76() -> Unit raise {
   let t389 = @simp.simp_tac(@list.List([@iterate.finite_numseg(), @vectors.vsum_add(), @vectors.vsum_lmul()]))
   let t390 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.linear(), multivect(), @vectors.vector_add_component(), @vectors.vector_mul_component(), @vectors.vector_add_rdistrib(), @equal.gsym(@vectors.vector_mul_assoc())])), t389)
-  linear_multivect_c.set(@tactics.prove(@term_syntax.parse_term("(linear : ((Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]]) -> Bool)((multivec : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]]))"), t390))
+  linear_multivect_c.set(@tactics.prove(@term_syntax.parse_term("(linear : ((Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]]) -> Bool)((multivect : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]]))"), t390))
 }
 
 ///|
@@ -1570,7 +1570,7 @@ pub fn linear_multivect() -> @kernel.Thm {
 ///|
 /// MULTIVECT_ADD
 fn step_77() -> Unit raise {
-  let t391 = @bool.ispec(@term_syntax.parse_term("(multivec : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])"), @vectors.linear())
+  let t391 = @bool.ispec(@term_syntax.parse_term("(multivect : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])"), @vectors.linear())
   multivect_add_c.set(@bool.conjunct1(@simp.rewrite_rule(@list.List([linear_multivect()]))(t391)))
 }
 
@@ -1586,7 +1586,7 @@ pub fn multivect_add() -> @kernel.Thm {
 ///|
 /// MULTIVECT_MUL
 fn step_78() -> Unit raise {
-  let t392 = @bool.ispec(@term_syntax.parse_term("(multivec : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])"), @vectors.linear())
+  let t392 = @bool.ispec(@term_syntax.parse_term("(multivect : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])"), @vectors.linear())
   multivect_mul_c.set(@bool.conjunct2(@simp.rewrite_rule(@list.List([linear_multivect()]))(t392)))
 }
 
@@ -1634,7 +1634,7 @@ fn step_80() -> Unit raise {
     }
   })
   let t407 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([multivect()]))), t397), t400), t401), t402), t403), t404), @list.List([@tactics.all_tac, @int.asm_arith_tac])), t405), @class.cond_cases_tac), t406)
-  multivect_basis_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, (multivec : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((basis : (Num) -> Cart[Real, Trip_fin_sum[P, Q, R]])(i)) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({i})"), t407))
+  multivect_basis_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, (multivect : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((basis : (Num) -> Cart[Real, Trip_fin_sum[P, Q, R]])(i)) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({i})"), t407))
 }
 
 ///|
@@ -1718,7 +1718,7 @@ fn step_81() -> Unit raise {
   let t409 = @simp.rewrite_tac(@list.List([multivect()]))
   let t408 = @list.List([@tactics.then_tac(@tactics.disch_tac, @simp.asm_rewrite_tac(@list.List([multivect_0()]))), @tactics.all_tac])
   let t458 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t408), t409), t410), t411), t412), t413), t420), t423), t424), t425), t426), @tactics.strip_tac), t427), @tactics.conj_tac), t450), t454), t455), t456), t457)
-  multivect_eq_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Trip_fin_sum[P, Q, R]], 1 <= (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))) → (x == (vec : (Num) -> Cart[Real, Trip_fin_sum[P, Q, R]])(0)) == ((multivec : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(x) == (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0))"), t458))
+  multivect_eq_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Trip_fin_sum[P, Q, R]], 1 <= (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))) → (x == (vec : (Num) -> Cart[Real, Trip_fin_sum[P, Q, R]])(0)) == ((multivect : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(x) == (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0))"), t458))
 }
 
 ///|
@@ -1739,7 +1739,7 @@ fn step_82() -> Unit raise {
   let t459 = @equal.gsym(@realarith.real_sub_0())
   let t460 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@vectors.vector_sub_eq()), t459]))
   let t464 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t460), t462), t463)
-  multivect_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Trip_fin_sum[P, Q, R]], ∀ y : Cart[Real, Trip_fin_sum[P, Q, R]], 1 <= (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))) → (x == y) == ((multivec : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(x) == (multivec : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(y))"), t464))
+  multivect_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Trip_fin_sum[P, Q, R]], ∀ y : Cart[Real, Trip_fin_sum[P, Q, R]], 1 <= (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))) → (x == y) == ((multivect : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(x) == (multivect : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(y))"), t464))
 }
 
 ///|
@@ -1782,7 +1782,7 @@ pub fn multivectorga() -> @kernel.Thm {
 /// FORALL_MULTIVECTORGA_VEC0
 fn step_86() -> Unit raise {
   let t465 = @meson.meson_tac(@list.List([multivectorga(), geomalg_vec_component()]))
-  forall_multivectorga_vec0_c.set(@tactics.prove(@term_syntax.parse_term("∀ k : Num, (multivector : (Num, Cart[Real, Geomalg[P, Q, R]]) -> Bool)(k, (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0))"), t465))
+  forall_multivectorga_vec0_c.set(@tactics.prove(@term_syntax.parse_term("∀ k : Num, (multivectorga : (Num, Cart[Real, Geomalg[P, Q, R]]) -> Bool)(k, (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0))"), t465))
 }
 
 ///|
@@ -1826,7 +1826,7 @@ pub fn grade_geomalg() -> @kernel.Thm {
 fn step_90() -> Unit raise {
   let t466 = @meson.meson_tac(@list.List([]))
   let t467 = @tactics.then_tac(@simp.simp_tac(@list.List([multivectorga(), grade_geomalg(), geomalg_beta(), @theorems.imp_conj()])), t466)
-  geomalg_grade_c.set(@tactics.prove(@term_syntax.parse_term("∀ k : Num, ∀ x : Cart[Real, Geomalg[_, _, _]], multivector(k, grade(k, x))"), t467))
+  geomalg_grade_c.set(@tactics.prove(@term_syntax.parse_term("∀ k : Num, ∀ x : Cart[Real, Geomalg[_, _, _]], multivector(k, grade_geomalg(k, x))"), t467))
 }
 
 ///|
@@ -1842,7 +1842,7 @@ pub fn geomalg_grade() -> @kernel.Thm {
 /// GRADE_ADD_GEOMALG
 fn step_91() -> Unit raise {
   let t468 = @tactics.then_tac(@simp.simp_tac(@list.List([grade_geomalg(), geomalg_eq(), geomalg_add_component(), geomalg_beta(), @vectors.cond_component()])), @calc_rat.real_arith_tac)
-  grade_add_geomalg_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[_, _, _]], ∀ y : Cart[Real, Geomalg[_, _, _]], ∀ k : Num, grade(k, x + y) == grade(k, x) + grade(k, y)"), t468))
+  grade_add_geomalg_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[_, _, _]], ∀ y : Cart[Real, Geomalg[_, _, _]], ∀ k : Num, grade_geomalg(k, x + y) == grade_geomalg(k, x) + grade_geomalg(k, y)"), t468))
 }
 
 ///|
@@ -1858,7 +1858,7 @@ pub fn grade_add_geomalg() -> @kernel.Thm {
 /// GRADE_CMUL_GEOMALG
 fn step_92() -> Unit raise {
   let t469 = @tactics.then_tac(@simp.simp_tac(@list.List([grade_geomalg(), geomalg_eq(), geomalg_mul_component(), geomalg_beta(), @vectors.cond_component()])), @calc_rat.real_arith_tac)
-  grade_cmul_geomalg_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : Real, ∀ x : Cart[Real, Geomalg[_, _, _]], ∀ k : Num, grade(k, op_pct(c, x)) == op_pct(c, grade(k, x))"), t469))
+  grade_cmul_geomalg_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : Real, ∀ x : Cart[Real, Geomalg[_, _, _]], ∀ k : Num, grade_geomalg(k, op_pct(c, x)) == op_pct(c, grade_geomalg(k, x))"), t469))
 }
 
 ///|
@@ -2246,7 +2246,7 @@ pub fn geomga_mul() -> @kernel.Thm {
 fn step_112() -> Unit raise {
   let t552 = @tactics.match_accept_tac(bilinear_productga())
   let t553 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@equal.gsym(@class.fun_eq_thm()), @class.eta_ax()]))(geomga_mul())])), t552)
-  bilinear_geomga_c.set(@tactics.prove(@term_syntax.parse_term("(bilinear : ((Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]]) -> Bool)((op_star : (Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]]))"), t553))
+  bilinear_geomga_c.set(@tactics.prove(@term_syntax.parse_term("(bilinear : ((Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]]) -> Bool)((geomga_mul : (Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]]))"), t553))
 }
 
 ///|
@@ -2421,7 +2421,7 @@ fn step_121() -> Unit raise {
       @tactics.then_tac(@tactics.match_mp_tac(@theorems.eq_trans()), t579)
     })(x580)(x580)
   }), @tactics.conj_tac), t584), t585), t586), t587), t588)
-  geomga_assoc_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[P, Q, R]], ∀ y : Cart[Real, Geomalg[P, Q, R]], ∀ z : Cart[Real, Geomalg[P, Q, R]], x * (y * z) == x * y * z"), t589))
+  geomga_assoc_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[P, Q, R]], ∀ y : Cart[Real, Geomalg[P, Q, R]], ∀ z : Cart[Real, Geomalg[P, Q, R]], geomga_mul(x, geomga_mul(y, z)) == geomga_mul(geomga_mul(x, y), z)"), t589))
 }
 
 ///|
@@ -2465,7 +2465,7 @@ pub fn outerga() -> @kernel.Thm {
 fn step_125() -> Unit raise {
   let t590 = @tactics.match_accept_tac(bilinear_productga())
   let t591 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@equal.gsym(@class.fun_eq_thm()), @class.eta_ax()]))(outerga())])), t590)
-  bilinear_outerga_c.set(@tactics.prove(@term_syntax.parse_term("(bilinear : ((Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]]) -> Bool)((outer : (Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]]))"), t591))
+  bilinear_outerga_c.set(@tactics.prove(@term_syntax.parse_term("(bilinear : ((Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]]) -> Bool)((outerga : (Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]]))"), t591))
 }
 
 ///|
@@ -2625,7 +2625,7 @@ fn step_134() -> Unit raise {
   let t601 = @tactics.repeat_tac(@tactics.gen_tac)
   let t600 = @tactics.match_mp_tac(productga_associative())
   let t616 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([outerga()])), t600), t601), t604), t607), t608), t609), t610), @tactics.ap_term_tac), t611), t612), t613), t614), t615)
-  outerga_assoc_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[P, Q, R]], ∀ y : Cart[Real, Geomalg[P, Q, R]], ∀ z : Cart[Real, Geomalg[P, Q, R]], outer(x, outer(y, z)) == outer(outer(x, y), z)"), t616))
+  outerga_assoc_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[P, Q, R]], ∀ y : Cart[Real, Geomalg[P, Q, R]], ∀ z : Cart[Real, Geomalg[P, Q, R]], outerga(x, outerga(y, z)) == outerga(outerga(x, y), z)"), t616))
 }
 
 ///|
@@ -2732,7 +2732,7 @@ pub fn scalarinner() -> @kernel.Thm {
 fn step_144() -> Unit raise {
   let t617 = @tactics.match_accept_tac(bilinear_productga())
   let t618 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@equal.gsym(@class.fun_eq_thm()), @class.eta_ax()]))(innerga())])), t617)
-  bilinear_innerga_c.set(@tactics.prove(@term_syntax.parse_term("(bilinear : ((Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]]) -> Bool)((inner : (Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]]))"), t618))
+  bilinear_innerga_c.set(@tactics.prove(@term_syntax.parse_term("(bilinear : ((Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]]) -> Bool)((innerga : (Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]]))"), t618))
 }
 
 ///|
@@ -3402,7 +3402,7 @@ fn step_183() -> Unit raise {
   let t688 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([]))])
   let t687 = @simp.rewrite_tac(@list.List([innerga(), productga_mvbasis()]))
   let t693 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t687), @class.cond_cases_tac), t688), @class.cond_cases_tac), t689), t690), @tactics.ap_term_tac), @tactics.ap_term_tac), t691), t692)
-  inner_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (inner : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(t)) == (if SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && SUBSET(t, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && !(s == {}) && !(t == {}) && (SUBSET(s, t) || SUBSET(t, s)) { (op_pct : (Real, Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(pow(-real_of_num(1), CARD({((i : Num), (j : Num)) | IN(i, s) && IN(j, t) && i > j})) * (pow(-real_of_num(1), CARD(INTER(op_dot_dot((pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + 1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + (pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool))), INTER(s, t)))) * pow(real_of_num(0), CARD(INTER(op_dot_dot((pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + 1), (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))), INTER(s, t))))), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(SYMDIFF(s, t))) } else { (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0) })"), t693))
+  inner_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (innerga : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(t)) == (if SUBSET(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && SUBSET(t, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && !(s == {}) && !(t == {}) && (SUBSET(s, t) || SUBSET(t, s)) { (op_pct : (Real, Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(pow(-real_of_num(1), CARD({((i : Num), (j : Num)) | IN(i, s) && IN(j, t) && i > j})) * (pow(-real_of_num(1), CARD(INTER(op_dot_dot((pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + 1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + (pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool))), INTER(s, t)))) * pow(real_of_num(0), CARD(INTER(op_dot_dot((pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + 1), (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))), INTER(s, t))))), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(SYMDIFF(s, t))) } else { (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0) })"), t693))
 }
 
 ///|
@@ -3908,7 +3908,7 @@ fn step_185() -> Unit raise {
   let t888 = @simp.asm_rewrite_tac(@list.List([@theorems.conj_assoc(), @theorems.and_clauses(), @sets.in_sing(), @sets.set_rule(@term_syntax.parse_term("!({(i : _)} == {})"))]))
   let t887 = @simp.rewrite_tac(@list.List([innerga(), productga_mvbasis_sing(), @iterate.in_numseg()]))
   let t1007 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t887), @class.cond_cases_tac), t888), t889), t890), t894), t897), t898), @class.cond_cases_tac), @list.List([@tactics.all_tac, @class.cond_cases_tac])), t899), t924), @tactics.ap_thm_tac), @tactics.ap_term_tac), t948), @tactics.binop_tac), t982), @tactics.ap_term_tac), t1004), t1005), t1006)
-  inner_mvbasis_sing_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, ∀ j : Num, (inner : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({j})) == (if IN(i, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && IN(j, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && i == j { if IN(i, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)))) { (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({}) } else { if IN(i, op_dot_dot((pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + 1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + (pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)))) { -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({}) } else { (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0) } } } else { (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0) })"), t1007))
+  inner_mvbasis_sing_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, ∀ j : Num, (innerga : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({j})) == (if IN(i, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && IN(j, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && i == j { if IN(i, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)))) { (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({}) } else { if IN(i, op_dot_dot((pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + 1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + (pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)))) { -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({}) } else { (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0) } } } else { (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0) })"), t1007))
 }
 
 ///|
@@ -4027,7 +4027,7 @@ fn step_190() -> Unit raise {
   let t1045 = @meson.asm_meson_tac(@list.List([]))
   let t1044 = @simp.asm_rewrite_tac(@list.List([geom_mvbasis(), inner_mvbasis()]))
   let t1046 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @class.cond_cases_tac), t1044), t1045)
-  mvbasis_inner_geom_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (inner : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(t)) == (if !(s == {}) && !(t == {}) && (SUBSET(s, t) || SUBSET(t, s)) { (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(t) } else { (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0) })"), t1046))
+  mvbasis_inner_geom_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (innerga : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(t)) == (if !(s == {}) && !(t == {}) && (SUBSET(s, t) || SUBSET(t, s)) { (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(t) } else { (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0) })"), t1046))
 }
 
 ///|
@@ -4408,7 +4408,7 @@ fn step_204() -> Unit raise {
   let t1198 = @class.asm_cases_tac(@term_syntax.parse_term("(i : Num) == (j : Num)"))
   let t1197 = @simp.asm_rewrite_tac(@list.List([inner_mvbasis_sing()]))
   let t1200 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1197), t1198), t1199)
-  inner_mvbasis_skewsym_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, ∀ j : Num, (inner : (Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])({j})) == (inner : (Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])({j}), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])({i}))"), t1200))
+  inner_mvbasis_skewsym_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, ∀ j : Num, (innerga : (Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])({j})) == (innerga : (Cart[Real, Geomalg[_, _, _]], Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])({j}), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])({i}))"), t1200))
 }
 
 ///|
@@ -4431,7 +4431,7 @@ fn step_205() -> Unit raise {
     }
   })
   let t1206 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([inner_mvbasis_sing()]))), @class.cond_cases_tac), t1204), t1205), @int.arith_tac)
-  inner_mvbasis_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, (inner : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({i})) == (if IN(i, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)))) { (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({}) } else { if IN(i, op_dot_dot((pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + 1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + (pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)))) { -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({}) } else { (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0) } })"), t1206))
+  inner_mvbasis_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, (innerga : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({i})) == (if IN(i, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)))) { (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({}) } else { if IN(i, op_dot_dot((pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + 1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + (pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)))) { -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({}) } else { (vec : (Num) -> Cart[Real, Geomalg[P, Q, R]])(0) } })"), t1206))
 }
 
 ///|
@@ -4472,7 +4472,7 @@ fn step_207() -> Unit raise {
   let t1208 = @simp.simp_tac(@list.List([@iterate.finite_numseg(), @sets.finite_cross(), @equal.gsym(@vectors.vsum_add())]))
   let t1207 = @simp.simp_tac(@list.List([@iterate.finite_numseg(), bilinear_innerga(), bilinear_outerga(), bilinear_geomga(), @vectors.bilinear_vsum()]))
   let t1217 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([multivect()])), t1207), t1208), t1209), t1210), t1211), t1212), t1213), t1214), @tactics.ap_term_tac), t1215), @class.cond_cases_tac), t1216)
-  vector_geom_eq_outer_add_inner_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Trip_fin_sum[P, Q, R]], ∀ y : Cart[Real, Trip_fin_sum[P, Q, R]], multivec(x) * multivec(y) == outer(multivec(x), multivec(y)) + inner(multivec(x), multivec(y))"), t1217))
+  vector_geom_eq_outer_add_inner_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Trip_fin_sum[P, Q, R]], ∀ y : Cart[Real, Trip_fin_sum[P, Q, R]], multivec(x) * multivec(y) == outer(multivec(x), multivec(y)) + innerga(multivec(x), multivec(y))"), t1217))
 }
 
 ///|
@@ -4634,13 +4634,13 @@ fn step_210() -> Unit raise {
   let t1274 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1273 = @simp.rewrite_tac(@list.List([innerga_rmul(), innerga_lmul(), @vectors.vector_mul_assoc()]))
   let t1286 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@vectors.vsum_eq()), t1273), t1274), t1275), t1276), t1284), t1285), @tactics.all_tac])
-  let t1272 = @tactics.exists_tac(@term_syntax.parse_term("(vsum : ((Num) -> Bool, (Num) -> Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))), (i : Num) => (op_pct : (Real, Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((op_dollar : (Cart[Real, Trip_fin_sum[P, Q, R]], Num) -> Real)((x : Cart[Real, Trip_fin_sum[P, Q, R]]), i) * (op_dollar : (Cart[Real, Trip_fin_sum[P, Q, R]], Num) -> Real)(x, i), (inner : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({i}))))"))
+  let t1272 = @tactics.exists_tac(@term_syntax.parse_term("(vsum : ((Num) -> Bool, (Num) -> Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool)))), (i : Num) => (op_pct : (Real, Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((op_dollar : (Cart[Real, Trip_fin_sum[P, Q, R]], Num) -> Real)((x : Cart[Real, Trip_fin_sum[P, Q, R]]), i) * (op_dollar : (Cart[Real, Trip_fin_sum[P, Q, R]], Num) -> Real)(x, i), (innerga : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])({i}))))"))
   let t1271 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t1270 = @simp.simp_tac(@list.List([@iterate.finite_numseg(), @equal.gsym(@vectors.vsum_vsum_product())]))
   let t1269 = @simp.rewrite_tac(@list.List([@sets.cross()]))
   let t1268 = @simp.simp_tac(@list.List([@iterate.finite_numseg(), bilinear_innerga(), @vectors.bilinear_vsum()]))
   let t1310 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([multivect()]))), t1268), t1269), t1270), t1271), t1272), @tactics.conj_tac), t1286), t1287), t1288), @tactics.binop_tac), t1291), t1299), t1300), t1302), t1303), t1304), @tactics.conj_tac), t1305), t1306), @tactics.conj_tac), t1307), t1308), t1309)
-  vector_innerga_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Trip_fin_sum[P, Q, R]], (inner : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((multivec : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(x), (multivec : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(x)) == (op_pct : (Real, Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, Trip_fin_sum[P, Q, R]], Num) -> Real)(x, i) * (op_dollar : (Cart[Real, Trip_fin_sum[P, Q, R]], Num) -> Real)(x, i)) - (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, Trip_fin_sum[P, Q, R]], Num) -> Real)(x, i + (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool))) * (op_dollar : (Cart[Real, Trip_fin_sum[P, Q, R]], Num) -> Real)(x, i + (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)))), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(({} : (Num) -> Bool)))"), t1310))
+  vector_innerga_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Trip_fin_sum[P, Q, R]], (innerga : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((multivec : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(x), (multivec : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(x)) == (op_pct : (Real, Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, Trip_fin_sum[P, Q, R]], Num) -> Real)(x, i) * (op_dollar : (Cart[Real, Trip_fin_sum[P, Q, R]], Num) -> Real)(x, i)) - (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, Trip_fin_sum[P, Q, R]], Num) -> Real)(x, i + (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool))) * (op_dollar : (Cart[Real, Trip_fin_sum[P, Q, R]], Num) -> Real)(x, i + (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)))), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(({} : (Num) -> Bool)))"), t1310))
 }
 
 ///|
@@ -4656,7 +4656,7 @@ pub fn vector_innerga_refl() -> @kernel.Thm {
 /// VECTOR_GEOMGA_INNER_REFL_EQ
 fn step_211() -> Unit raise {
   let t1311 = @simp.rewrite_tac(@list.List([vector_geom_eq_outer_add_inner(), vector_outerga_refl(), @vectors.vector_add_lid()]))
-  vector_geomga_inner_refl_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Trip_fin_sum[P, Q, R]], multivec(x) * multivec(x) == inner(multivec(x), multivec(x))"), t1311))
+  vector_geomga_inner_refl_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Trip_fin_sum[P, Q, R]], multivec(x) * multivec(x) == innerga(multivec(x), multivec(x))"), t1311))
 }
 
 ///|
@@ -5195,7 +5195,7 @@ pub fn mvinvertible_right_inverse() -> @kernel.Thm {
 ///|
 /// is_null
 fn step_235() -> Unit raise {
-  is_null_c.set(@pair.new_definition(@term_syntax.parse_term("(is_null : (Cart[Real, Geomalg[P, Q, R]]) -> Bool)((x : Cart[Real, Geomalg[P, Q, R]])) == (inner(x, x) == vec(0))")))
+  is_null_c.set(@pair.new_definition(@term_syntax.parse_term("(is_null : (Cart[Real, Geomalg[P, Q, R]]) -> Bool)((x : Cart[Real, Geomalg[P, Q, R]])) == (innerga(x, x) == vec(0))")))
 }
 
 ///|
@@ -5492,7 +5492,7 @@ fn step_246() -> Unit raise {
   let t1538 = @simp.once_rewrite_tac(@list.List([@class.cond_rand()]))
   let t1537 = @simp.simp_tac(@list.List([mvbasis_component()]))
   let t1541 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([outergamorphism()])), t1537), t1538), t1539), t1540)
-  outermorphism_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Trip_fin_sum[S, T, U]], ∀ s : (Num) -> Bool, ∀ t : _, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (outermorphism : ((Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Trip_fin_sum[S, T, U]], Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[S, T, U]])(f, (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s)) == (seqiterate : ((Cart[Real, Geomalg[S, T, U]], Cart[Real, Geomalg[S, T, U]]) -> Cart[Real, Geomalg[S, T, U]], (Num) -> Bool, (Num) -> Cart[Real, Geomalg[S, T, U]]) -> Cart[Real, Geomalg[S, T, U]])((outer : (Cart[Real, Geomalg[S, T, U]], Cart[Real, Geomalg[S, T, U]]) -> Cart[Real, Geomalg[S, T, U]]), s, (o : ((Cart[Real, Trip_fin_sum[S, T, U]]) -> Cart[Real, Geomalg[S, T, U]], (Num) -> Cart[Real, Trip_fin_sum[S, T, U]], Num) -> Cart[Real, Geomalg[S, T, U]])((multivec : (Cart[Real, Trip_fin_sum[S, T, U]]) -> Cart[Real, Geomalg[S, T, U]]), (o : ((Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Trip_fin_sum[S, T, U]], (Num) -> Cart[Real, Trip_fin_sum[P, Q, R]], Num) -> Cart[Real, Trip_fin_sum[S, T, U]])(f, (basis : (Num) -> Cart[Real, Trip_fin_sum[P, Q, R]]))))"), t1541))
+  outermorphism_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Trip_fin_sum[S, T, U]], ∀ s : (Num) -> Bool, ∀ t : _, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → (outergamorphism : ((Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Trip_fin_sum[S, T, U]], Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[S, T, U]])(f, (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s)) == (seqiterate : ((Cart[Real, Geomalg[S, T, U]], Cart[Real, Geomalg[S, T, U]]) -> Cart[Real, Geomalg[S, T, U]], (Num) -> Bool, (Num) -> Cart[Real, Geomalg[S, T, U]]) -> Cart[Real, Geomalg[S, T, U]])((outer : (Cart[Real, Geomalg[S, T, U]], Cart[Real, Geomalg[S, T, U]]) -> Cart[Real, Geomalg[S, T, U]]), s, (o : ((Cart[Real, Trip_fin_sum[S, T, U]]) -> Cart[Real, Geomalg[S, T, U]], (Num) -> Cart[Real, Trip_fin_sum[S, T, U]], Num) -> Cart[Real, Geomalg[S, T, U]])((multivec : (Cart[Real, Trip_fin_sum[S, T, U]]) -> Cart[Real, Geomalg[S, T, U]]), (o : ((Cart[Real, Trip_fin_sum[P, Q, R]]) -> Cart[Real, Trip_fin_sum[S, T, U]], (Num) -> Cart[Real, Trip_fin_sum[P, Q, R]], Num) -> Cart[Real, Trip_fin_sum[S, T, U]])(f, (basis : (Num) -> Cart[Real, Trip_fin_sum[P, Q, R]]))))"), t1541))
 }
 
 ///|
@@ -5509,7 +5509,7 @@ pub fn outermorphism_mvbasis() -> @kernel.Thm {
 fn step_247() -> Unit raise {
   let t1542 = @simp.rewrite_tac(@list.List([neutral_outerga()]))
   let t1543 = @tactics.then_tac(@simp.simp_tac(@list.List([outermorphism_mvbasis(), @sets.empty_subset(), @clifford.seqiterate_clauses()])), t1542)
-  outermorphism_mvbasis_empty_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Trip_fin_sum[_, _, _]]) -> Cart[Real, Trip_fin_sum[_, _, _]], outermorphism(f, mbasis({})) == mbasis({})"), t1543))
+  outermorphism_mvbasis_empty_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Trip_fin_sum[_, _, _]]) -> Cart[Real, Trip_fin_sum[_, _, _]], outergamorphism(f, mbasis({})) == mbasis({})"), t1543))
 }
 
 ///|
@@ -6782,7 +6782,7 @@ fn step_271() -> Unit raise {
   let t2263 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2262 = @simp.simp_tac(@list.List([geomalg_beta(), geomalg_eq()]))
   let t2266 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([reversionga()])), t2262), t2263), t2264), @class.cond_cases_tac), t2265)
-  reversion_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, (reversion : (Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])(s)) == (op_pct : (Real, Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]])(pow(-real_of_num(1), DIV(CARD(s) * (CARD(s) - 1), 2)), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])(s))"), t2266))
+  reversion_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, (reversionga : (Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])(s)) == (op_pct : (Real, Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]])(pow(-real_of_num(1), DIV(CARD(s) * (CARD(s) - 1), 2)), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])(s))"), t2266))
 }
 
 ///|
@@ -6800,7 +6800,7 @@ fn step_272() -> Unit raise {
   let t2268 = @simp.simp_tac(@list.List([geomalg_add_component(), geomalg_mul_component(), geomalg_beta()]))
   let t2267 = @simp.simp_tac(@list.List([geomalg_beta(), geomalg_eq()]))
   let t2269 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([reversionga()])), t2267), t2268), @calc_rat.real_arith_tac)
-  reversionga_linear_c.set(@tactics.prove(@term_syntax.parse_term("(∀ x : Cart[Real, Geomalg[_, _, _]], ∀ y : Cart[Real, Geomalg[_, _, _]], reversion(x + y) == reversion(x) + reversion(y)) && (∀ c : Real, ∀ x : Cart[Real, Geomalg[_, _, _]], reversion(op_pct(c, x)) == op_pct(c, reversion(x)))"), t2269))
+  reversionga_linear_c.set(@tactics.prove(@term_syntax.parse_term("(∀ x : Cart[Real, Geomalg[_, _, _]], ∀ y : Cart[Real, Geomalg[_, _, _]], reversionga(x + y) == reversionga(x) + reversionga(y)) && (∀ c : Real, ∀ x : Cart[Real, Geomalg[_, _, _]], reversionga(op_pct(c, x)) == op_pct(c, reversionga(x)))"), t2269))
 }
 
 ///|
@@ -6830,7 +6830,7 @@ pub fn reversion_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// Geometric_Algebra/geometricalgebra.ml:2336
 fn step_274() -> Unit raise {
-  ignore(reversion_conv(@term_syntax.parse_term("(reversion : (Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])({1}) + (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])({1, 2}))")))
+  ignore(reversion_conv(@term_syntax.parse_term("(reversionga : (Cart[Real, Geomalg[_, _, _]]) -> Cart[Real, Geomalg[_, _, _]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])({1}) + (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[_, _, _]])({1, 2}))")))
 }
 
 ///|
@@ -6853,7 +6853,7 @@ fn step_275() -> Unit raise {
   let t2271 = @simp.rewrite_tac(@list.List([@equal.gsym(@vectors.vsum_lmul())]))
   let t2270 = @simp.simp_tac(@list.List([geomalg_eq(), geomalg_beta(), @equal.gsym(geomalg_mul_component())]))
   let t2284 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([reversionga(), multivect()])), t2270), t2271), t2272), t2273), t2274), t2275), t2276), t2277), @class.cond_cases_tac), t2283), @calc_rat.real_arith_tac)
-  reversion_vector_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Trip_fin_sum[P, Q, R]], multivec(x) == reversion(multivec(x))"), t2284))
+  reversion_vector_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Trip_fin_sum[P, Q, R]], multivec(x) == reversionga(multivec(x))"), t2284))
 }
 
 ///|
@@ -6902,7 +6902,7 @@ fn step_276() -> Unit raise {
     })(x2291))
   }, @list.List([vector_outerga_skewsym()]))
   let t2313 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2292), t2293), t2294), t2295), t2296), t2297), t2298), t2299), t2300), t2301), t2302), t2303), t2304), @class.cond_cases_tac), t2312)
-  reversion_vector_outer_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Trip_fin_sum[P, Q, R]], ∀ y : Cart[Real, Trip_fin_sum[P, Q, R]], reversion(outer(multivec(x), multivec(y))) == outer(multivec(y), multivec(x))"), t2313))
+  reversion_vector_outer_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Trip_fin_sum[P, Q, R]], ∀ y : Cart[Real, Trip_fin_sum[P, Q, R]], reversionga(outer(multivec(x), multivec(y))) == outer(multivec(y), multivec(x))"), t2313))
 }
 
 ///|
@@ -6922,7 +6922,7 @@ fn step_277() -> Unit raise {
   let t2315 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2314 = @simp.simp_tac(@list.List([geomalg_eq(), geomalg_beta()]))
   let t2318 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([reversionga()]))), t2314), t2315), t2316), @class.cond_cases_tac), t2317)
-  reversion_mbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, (reversion : (Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s)) == (op_pct : (Real, Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(pow(-real_of_num(1), DIV(CARD(s) * (CARD(s) - 1), 2)), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s))"), t2318))
+  reversion_mbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, (reversionga : (Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s)) == (op_pct : (Real, Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, Geomalg[P, Q, R]])(pow(-real_of_num(1), DIV(CARD(s) * (CARD(s) - 1), 2)), (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s))"), t2318))
 }
 
 ///|
@@ -7066,7 +7066,7 @@ fn step_279() -> Unit raise {
   let t2329 = @simp.rewrite_tac(@list.List([@vectors.bilinear(), @vectors.linear(), outerga_radd(), outerga_ladd(), outerga_lmul(), outerga_rmul(), reversionga_linear(), reversion_mbasis()]))
   let t2328 = @tactics.match_mp_tac(bilinear_eq_mvbasis())
   let t2413 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@class.fun_eq_thm())])), t2328), t2329), t2330), t2331), t2332), @class.cond_cases_tac), t2333), t2334), @class.cond_cases_tac), t2335), t2336), t2338), t2339), @tactics.ap_term_tac), t2343), t2344), t2348), t2364), t2368), t2369), t2370), t2372), @tactics.ants_tac), t2373), t2377), t2378), t2379), t2380), t2382), t2383), @tactics.ap_thm_tac), @tactics.ap_term_tac), t2385), @tactics.ants_tac), t2386), t2391), t2392), t2396), t2407), t2408), @tactics.conj_tac), t2410), t2411), t2412)
-  reversion_outerga_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[P, Q, R]], ∀ y : Cart[Real, Geomalg[P, Q, R]], reversion(outer(x, y)) == outer(reversion(y), reversion(x))"), t2413))
+  reversion_outerga_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[P, Q, R]], ∀ y : Cart[Real, Geomalg[P, Q, R]], reversionga(outer(x, y)) == outer(reversionga(y), reversionga(x))"), t2413))
 }
 
 ///|
@@ -7114,7 +7114,7 @@ fn step_280() -> Unit raise {
   let t2415 = @equal.gsym(@bool.specl(@list.List([@term_syntax.parse_term("1"), t2414]), @iterate.numseg_empty()))
   let t2419 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@int.arith_rule(@term_syntax.parse_term("0 < 1"))]))(t2415)])), t2416), t2417), t2418), @tactics.all_tac])
   let t2439 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t2419), t2427), t2428), t2429), t2430), t2434), t2435), @tactics.ap_term_tac), t2436), t2437), @tactics.ap_term_tac), @tactics.ap_term_tac), @tactics.ap_term_tac), t2438), @int.arith_tac)
-  reversion_seqiterate_outerga_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : (Num) -> Cart[Real, Trip_fin_sum[P, Q, R]], ∀ k : Num, reversion(seqiterate(outer, op_dot_dot(1, k), o(multivec, a))) == seqiterate(outer, op_dot_dot(1, k), o(multivec, o(a, (i : Num) => SUC(k) - i)))"), t2439))
+  reversion_seqiterate_outerga_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : (Num) -> Cart[Real, Trip_fin_sum[P, Q, R]], ∀ k : Num, reversionga(seqiterate(outer, op_dot_dot(1, k), o(multivec, a))) == seqiterate(outer, op_dot_dot(1, k), o(multivec, o(a, (i : Num) => SUC(k) - i)))"), t2439))
 }
 
 ///|
