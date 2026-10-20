@@ -82172,10 +82172,10 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  (w : Cart[Real, Unit])
       #|  (w : Cart[Real, Unit])
       #|  (abs((e : Real) / real_of_num(2)) < e) == (real_of_num(0) < e)
-      #|  dist(((a : Cart[Real, N]) - (b : Cart[Real, N]), a)) == norm(b)
+      #|  distance(((a : Cart[Real, N]) - (b : Cart[Real, N]), a)) == norm(b)
       #|  :real
       #|  :real
-      #|  dist(((a : Cart[Real, N]) + (b : Cart[Real, N]), a)) == norm(b)
+      #|  distance(((a : Cart[Real, N]) + (b : Cart[Real, N]), a)) == norm(b)
       #|  :real
       #|  :real
       #|  (f : (Cart[Real, Unit]) -> Cart[Real, Unit])((z : Cart[Real, Unit])) - lift((e : Real) / real_of_num(2))
@@ -83360,7 +83360,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  !IN((x : Cart[Real, N]), connected_component(DIFF(UNIV, (s : (Cart[Real, N]) -> Bool)), (a : Cart[Real, N])))
       #|  (inv((x : Real)) * x == real_of_num(1)) == !(x == real_of_num(0))
       #|  real_of_num(0) < (r : Real) \226\134\146 abs(r) == r && (r * (x : Real) == r) == (x == real_of_num(1))
-      #|  dist(((a : Cart[Real, N]), a + (x : Cart[Real, N]))) == norm(x)
+      #|  distance(((a : Cart[Real, N]), a + (x : Cart[Real, N]))) == norm(x)
       #|  :real
       #|  :real
       #|  (r : Real)
@@ -83694,7 +83694,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  pi / real_of_num(2)
       #|  (b : Cart[Real, N])
       #|  (a : Cart[Real, N])
-      #|  dist(((a : Cart[Real, _]), (x : Cart[Real, _]))) < (d : Real) && dist(((b : Cart[Real, _]), x)) < (e : Real) \226\134\146 dist((a, b)) < real_of_num(2) * d || dist((a, b)) < real_of_num(2) * e
+      #|  distance(((a : Cart[Real, _]), (x : Cart[Real, _]))) < (d : Real) && distance(((b : Cart[Real, _]), x)) < (e : Real) \226\134\146 distance((a, b)) < real_of_num(2) * d || distance((a, b)) < real_of_num(2) * e
       #|  :real
       #|  :real
       #|  ((p : Bool) && (q : Bool)) && p && (r : Bool) \226\134\146 q && r
@@ -83744,7 +83744,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  real_of_num(1) / real_of_num(5)
       #|  (x : Cart[Real, N])
       #|  continuous_on((h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]), (t : (Cart[Real, N]) -> Bool))
-      #|  \226\136\128 x : Cart[Real, N], IN(x, (t : (Cart[Real, N]) -> Bool)) \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 y : Cart[Real, N], IN(y, (s : (Cart[Real, N]) -> Bool)) && dist((x, y)) < d \226\134\146 norm((f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(y) / f(x) - Cx(real_of_num(1))) < real_of_num(1) / real_of_num(7)) && (\226\136\128 z : Cart[Real, N], IN(z, t) && dist((x, z)) < real_of_num(2) * d \226\134\146 norm((h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(z) - h(x)) < real_of_num(1) / real_of_num(5)))
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (t : (Cart[Real, N]) -> Bool)) \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 y : Cart[Real, N], IN(y, (s : (Cart[Real, N]) -> Bool)) && distance((x, y)) < d \226\134\146 norm((f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(y) / f(x) - Cx(real_of_num(1))) < real_of_num(1) / real_of_num(7)) && (\226\136\128 z : Cart[Real, N], IN(z, t) && distance((x, z)) < real_of_num(2) * d \226\134\146 norm((h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(z) - h(x)) < real_of_num(1) / real_of_num(5)))
       #|  (h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
       #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, continuous_on(f, s) && SUBSET(t, s) && (\226\136\131 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], continuous_on(g, t) && (\226\136\128 x : Cart[Real, N], IN(x, t) \226\134\146 f(x) == cexp(g(x)))) \226\134\146 (\226\136\131 u : (Cart[Real, N]) -> Bool, SUBSET(t, u) && open_in(subtopology(euclidean, s), u) && (\226\136\131 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], continuous_on(g, u) && (\226\136\128 x : Cart[Real, N], IN(x, u) \226\134\146 f(x) == cexp(g(x)))))
       #|  (borsukian : ((Cart[Real, N]) -> Bool) -> Bool)((s : (Cart[Real, N]) -> Bool)) == (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], continuous_on(f, s) && SUBSET(IMAGE(f, s), DIFF(UNIV, {Cx(real_of_num(0))})) \226\134\146 (\226\136\131 a : Cart[Real, Tybit0[Unit]], homotopic_with((h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]) => true, (subtopology(euclidean, s), subtopology(euclidean, DIFF(UNIV, {Cx(real_of_num(0))}))), f, (x : Cart[Real, N]) => a)))
@@ -84174,12 +84174,12 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  !IN((x : _), (s : (_) -> Bool)) == IN(x, DIFF(UNIV, s))
       #|  (c : (Cart[Real, N]) -> Bool)
       #|  (d : Real)
-      #|  ((k : Real) + dist(((p : Cart[Real, N]), (q : Cart[Real, N])))) / real_of_num(2)
+      #|  ((k : Real) + distance(((p : Cart[Real, N]), (q : Cart[Real, N])))) / real_of_num(2)
       #|  (p : Cart[Real, N])
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  INTER((d : (Cart[Real, N]) -> Bool), cball(((x : Cart[Real, N]), (r : Real)))) == {} \226\134\146 SUBSET(ball((x, r)), cball((x, r))) \226\134\146 INTER(ball((x, r)), d) == {}
       #|  (d : (Cart[Real, N]) -> Bool)
-      #|  DIFF(UNIV, ball(((p : Cart[Real, N]), ((k : Real) + dist((p, (q : Cart[Real, N])))) / real_of_num(2))))
+      #|  DIFF(UNIV, ball(((p : Cart[Real, N]), ((k : Real) + distance((p, (q : Cart[Real, N])))) / real_of_num(2))))
       #|  \226\136\128 t : (_) -> Bool, !IN((x : _), t) && SUBSET((s : (_) -> Bool), t) \226\134\146 !IN(x, s)
       #|  !(q : Bool) && ((p : Bool) \226\134\146 (r : Bool)) \226\134\146 p || q \226\134\146 r
       #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
@@ -84188,7 +84188,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  closure(DIFF(ball(((p : Cart[Real, N]), (d : Real))), (s : (Cart[Real, N]) -> Bool)))
       #|  \226\136\128 s : (_) -> Bool, SUBSET(s, (t : (_) -> Bool)) && IN((x : _), s) \226\134\146 IN(x, t)
       #|  UNION({(x : _) | IN(x, (s : (_) -> Bool)) && !(P : (_) -> Bool)(x)}, {(x : _) | IN(x, s) && P(x)}) == s
-      #|  IN((q : Cart[Real, N]), closure(UNION(UNIONS({(c : (Cart[Real, N]) -> Bool) | IN(c, components(DIFF(cball(((p : Cart[Real, N]), (d : Real))), (s : (Cart[Real, N]) -> Bool)))) && !(INTER(closure(c), cball((p, ((k : Real) + dist((p, q))) / real_of_num(2)))) == {})}), UNIONS({(c : (Cart[Real, N]) -> Bool) | IN(c, components(DIFF(cball((p, d)), s))) && INTER(closure(c), cball((p, (k + dist((p, q))) / real_of_num(2)))) == {}}))))
+      #|  IN((q : Cart[Real, N]), closure(UNION(UNIONS({(c : (Cart[Real, N]) -> Bool) | IN(c, components(DIFF(cball(((p : Cart[Real, N]), (d : Real))), (s : (Cart[Real, N]) -> Bool)))) && !(INTER(closure(c), cball((p, ((k : Real) + distance((p, q))) / real_of_num(2)))) == {})}), UNIONS({(c : (Cart[Real, N]) -> Bool) | IN(c, components(DIFF(cball((p, d)), s))) && INTER(closure(c), cball((p, (k + distance((p, q))) / real_of_num(2)))) == {}}))))
       #|  \226\136\131 c : (Cart[Real, N]) -> Bool, IN(c, components(DIFF(cball(((p : Cart[Real, N]), (d : Real))), (s : (Cart[Real, N]) -> Bool)))) && IN((q : Cart[Real, N]), closure(c))
       #|  (q : Cart[Real, N])
       #|  SUBSET(ball(((p : Cart[Real, N]), (k : Real))), cball((p, (e : Real))))
@@ -84210,7 +84210,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  inf(INSERT((k : Real), INSERT((d : Real) / real_of_num(2), IMAGE((c : (Cart[Real, N]) -> Bool) => setdist(({(p : Cart[Real, N])}, c)), {(c : (Cart[Real, N]) -> Bool) | IN(c, components(DIFF(cball((p, d)), (s : (Cart[Real, N]) -> Bool)))) && !(INTER(closure(c), cball((p, d / real_of_num(2)))) == {}) && !IN(p, closure(c))}))))
       #|  (k : Real)
       #|  (p : Cart[Real, N])
-      #|  \226\136\131 k : Real, real_of_num(0) < k && k <= (d : Real) && (\226\136\128 x : Cart[Real, N], !IN(x, (u : (Cart[Real, N]) -> Bool)) \226\134\146 k <= dist(((p : Cart[Real, N]), x))) && (\226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], IN(c, components(DIFF(cball((p, d)), (s : (Cart[Real, N]) -> Bool)))) && !IN(p, closure(c)) && IN(x, c) \226\134\146 k <= dist((p, x)))
+      #|  \226\136\131 k : Real, real_of_num(0) < k && k <= (d : Real) && (\226\136\128 x : Cart[Real, N], !IN(x, (u : (Cart[Real, N]) -> Bool)) \226\134\146 k <= distance(((p : Cart[Real, N]), x))) && (\226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], IN(c, components(DIFF(cball((p, d)), (s : (Cart[Real, N]) -> Bool)))) && !IN(p, closure(c)) && IN(x, c) \226\134\146 k <= distance((p, x)))
       #|  compact((sd : (Cart[Real, N]) -> Bool))
       #|  SUBSET((s : (Cart[Real, N]) -> Bool), (sd : (Cart[Real, N]) -> Bool))
       #|  IN(vec(0), (t : (Cart[Real, _]) -> Bool)) && (\226\136\128 x : Cart[Real, N], (f : (Cart[Real, N], Cart[Real, _]) -> Cart[Real, N])(x, vec(0)) == x) \226\134\146 SUBSET((s : (Cart[Real, N]) -> Bool), {f((x : Cart[Real, N]), (y : Cart[Real, _])) | IN(x, s) && IN(y, t)})
@@ -84225,7 +84225,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  (d' : Real)
       #|  (e : Real)
       #|  (p : Cart[Real, N])
-      #|  norm((l : Cart[Real, N])) == dist(((x : Cart[Real, N]), x + l))
+      #|  norm((l : Cart[Real, N])) == distance(((x : Cart[Real, N]), x + l))
       #|  :real
       #|  :real
       #|  real_of_num(0) < (s : Real) && s <= (e : Real) \226\134\146 !(e <= s / real_of_num(2))
@@ -84237,7 +84237,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  SUBSET({(f : (_, _) -> _)((x : _), (y : _)) | IN(x, {}) && (P : (_) -> Bool)(y)}, (u : (_) -> Bool))
       #|  (s : (Cart[Real, N]) -> Bool) == {}
       #|  \226\136\131 d : Real, real_of_num(0) < d && SUBSET({(x : Cart[Real, N]) + (l : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(l, cball((vec(0), d)))}, (u : (Cart[Real, N]) -> Bool))
-      #|  \226\136\131 d : Real, real_of_num(0) < d && d < (e : Real) && SUBSET({(x : Cart[Real, N]) + (l : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(l, cball((vec(0), d)))}, (u : (Cart[Real, N]) -> Bool)) && (\226\136\128 y : Cart[Real, N], dist(((p : Cart[Real, N]), y)) <= d \226\134\146 dist((p, (r : (Cart[Real, N]) -> Cart[Real, N])(y))) <= e)
+      #|  \226\136\131 d : Real, real_of_num(0) < d && d < (e : Real) && SUBSET({(x : Cart[Real, N]) + (l : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(l, cball((vec(0), d)))}, (u : (Cart[Real, N]) -> Bool)) && (\226\136\128 y : Cart[Real, N], distance(((p : Cart[Real, N]), y)) <= d \226\134\146 distance((p, (r : (Cart[Real, N]) -> Cart[Real, N])(y))) <= e)
       #|  IN((p : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
       #|  SUBSET(frontier((s : (Cart[Real, N]) -> Bool)), s)
       #|  (r : (Cart[Real, N]) -> Cart[Real, N])
