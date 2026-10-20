@@ -10265,260 +10265,260 @@ test "Logic/givensem matches Logic/givensem.ml" {
       #|0..0..1..3..solved at 8
       #|0..0..2..4..solved at 8
       #|Logic/givensem quotations (254):
-      #|  forall v:num->A. holds M v (interp cl)
-      #|  i:num->term
-      #|  clause cl /\\ clause cl' /\\ (forall v. holds M v (interp cl)) /\\ cl subsumes cl'\n   ==> forall v:num->A. holds M v (interp cl')
-      #|  isaresolvent_sem M cl (c1,c2) <=>\n        isaresolvent cl (c1,c2) /\\\n        (~(forall v:num->num. holds M v (interp c1)) \\/\n         ~(forall v. holds M v (interp c2)))
-      #|  allresolvents_sem M s1 s2 =\n        {c | ?c1 c2. c1 IN s1 /\\ c2 IN s2 /\\ isaresolvent_sem M c (c1,c2)}
-      #|  allntresolvents_sem M s1 s2 =\n        {r | r IN allresolvents_sem M s1 s2 /\\ ~(tautologous r)}
-      #|  forall c1 c2 cl.\n        clause c1 /\\ clause c2 /\\ isaresolvent_sem M cl (c2,c1)\n        ==> ?cl'. isaresolvent_sem M cl' (c1,c2) /\\ cl' subsumes cl
-      #|  c2:form->bool
-      #|  c1:form->bool
-      #|  c1:form->bool
-      #|  c2:form->bool
-      #|  cl:form->bool
-      #|  (forall c. c IN A ==> clause c) /\\ (forall c. c IN B ==> clause c)\n   ==> (allresolvents_sem M A B) SUBSUMES (allresolvents_sem M B A)
-      #|  (allresolvents_sem M (A UNION B) C =\n        (allresolvents_sem M A C) UNION (allresolvents_sem M B C)) /\\\n   (allresolvents_sem M A (B UNION C) =\n        (allresolvents_sem M A B) UNION (allresolvents_sem M A C))
-      #|  A UNION B = (A UNION A) UNION B
-      #|  a UNION b UNION c UNION d UNION e UNION f =\n    a UNION b UNION d UNION (c UNION e) UNION f
-      #|  (forall c. c IN B ==> clause(c)) /\\\n   (forall c. c IN C ==> clause(c))\n   ==> ((allresolvents_sem M B (A UNION B)) UNION\n        (allresolvents_sem M C (A UNION B UNION C)))\n       SUBSUMES (allresolvents_sem M(B UNION C) (A UNION B UNION C))
-      #|  resolvents_sem M cl cls =\n        list_of_set(allresolvents_sem M {cl} (set_of_list cls))
-      #|  forall p q r. clause p /\\ clause q /\\ isaresolvent_sem M r (p,q) ==> clause r
-      #|  (forall c. c IN s ==> clause c) /\\ (forall c. c IN t ==> clause c)\n   ==> forall c. c IN allresolvents_sem M s t ==> clause c
-      #|  {c | isaresolvent c (c1,c2)}
-      #|  forall c1 c2. clause(c1) /\\ clause(c2)\n           ==> FINITE {c | isaresolvent_sem M c (c1,c2)}
-      #|  allresolvents s t
-      #|  forall s t. FINITE(s) /\\ FINITE(t) /\\\n         (forall c. c IN s ==> clause c) /\\\n         (forall c. c IN t ==> clause c)\n         ==> FINITE(allresolvents_sem M s t)
-      #|  step_sem M (used,unused) =\n        if unused = [] then (used,unused) else\n        let new = resolvents_sem M (HD unused) (CONS (HD unused) used) in\n        (insert (HD unused) used,\n         ITLIST (incorporate (HD unused)) new (TL unused))
-      #|  (step_sem M(used,[]) = (used,[])) /\\\n   (step_sem M(used,CONS cl cls) =\n        let new = resolvents_sem M cl (CONS cl used) in\n        insert cl used,ITLIST (incorporate cl) new cls)
-      #|  (given_sem M 0 p = p) /\\\n   (given_sem M (SUC n) p = step_sem M (given_sem M n p))
-      #|  Used_SEM M init n = set_of_list(FST(given_sem M n init))
-      #|  Unused_SEM M init n = set_of_list(SND(given_sem M n init))
-      #|  (Sub_SEM M init 0 = {}) /\\\n   (Sub_SEM M init (SUC n) =\n        if SND(given_sem M n init) = [] then Sub_SEM M init n\n        else HD(SND(given_sem M n init)) INSERT (Sub_SEM M init n))
-      #|  (forall c. c IN B ==> clause(c)) /\\\n   (forall c. c IN C ==> clause(c))\n   ==> ((allntresolvents_sem M B (A UNION B)) UNION\n        (allntresolvents_sem M C (A UNION B UNION C)))\n       SUBSUMES (allntresolvents_sem M (B UNION C) (A UNION B UNION C))
-      #|  (allntresolvents_sem M (A UNION B) C =\n        (allntresolvents_sem M A C) UNION (allntresolvents_sem M B C)) /\\\n   (allntresolvents_sem M A (B UNION C) =\n        (allntresolvents_sem M A B) UNION (allntresolvents_sem M A C))
-      #|  ppp:(form->bool)list#(form->bool)list
-      #|  ppp = given_sem M n (used,unused)
-      #|  forall used unused n.\n        Used_SEM M(used,unused) n =\n        set_of_list(used) UNION Sub_SEM M (used,unused) n
-      #|  x INSERT s = s UNION {x}
-      #|  (x INSERT s) UNION t = (s UNION (t UNION {x})) UNION (t UNION {x})
-      #|  s UNION t = (s UNION t) UNION t
-      #|  s UNION {x} = (x INSERT s) UNION {x}
-      #|  (h INSERT s) UNION t = (s UNION t) UNION {h}
-      #|  set_of_list(CONS h (ITLIST (incorporate cl) t cls)) UNION {cl}
-      #|  ITLIST (incorporate cl) t cls
-      #|  h:form->bool
-      #|  cl:form->bool
-      #|  set_of_list (ITLIST (incorporate cl) t cls) UNION {cl}
-      #|  ITLIST (incorporate cl) t cls
-      #|  h:form->bool
-      #|  cl:form->bool
-      #|  tautologous h
-      #|  forall c. c IN set_of_list (CONS cl cls) ==> clause c
-      #|  added:(form->bool)list
-      #|  new:(form->bool)list
-      #|  (b ==> a /\\ c) ==> a ==> b ==> c
-      #|  forall c. c IN set_of_list (ITLIST (incorporate cl) new cls)\n                     ==> clause c
-      #|  forall c. MEM c new ==> clause c
-      #|  set_of_list(list_of_set\n                        (allresolvents_sem M {cl}\n                                       (set_of_list(CONS cl used0)))) =\n                  allresolvents_sem M {cl} (set_of_list(CONS cl used0))
-      #|  allntresolvents_sem M {cl} (set_of_list used0 UNION {cl}) =\n    set_of_list(FILTER (\\c. ~(tautologous c)) new)
-      #|  set_of_list(used:(form->bool)list) UNION sub0 =\n                set_of_list(used0)
-      #|  set_of_list(ITLIST (incorporate cl) t cls)
-      #|  ITLIST (incorporate cl) t cls
-      #|  h:form->bool
-      #|  cl:form->bool
-      #|  forall c. c IN set_of_list (CONS cl cls) ==> clause c
-      #|  added:(form->bool)list
-      #|  new:(form->bool)list
-      #|  (b ==> a /\\ c) ==> a ==> b ==> c
-      #|  forall c. c IN set_of_list (ITLIST (incorporate cl) new cls)\n                     ==> clause c
-      #|  forall c. MEM c new ==> clause c
-      #|  sub0 UNION set_of_list(CONS (cl:form->bool) cls)
-      #|  allntresolvents_sem M sub0 (set_of_list(used) UNION sub0) UNION\n    allntresolvents_sem M {cl} (set_of_list(used) UNION sub0 UNION {cl})
-      #|  forall c. c IN set_of_list (CONS cl cls) ==> clause c
-      #|  more:(form->bool)list
-      #|  new:(form->bool)list
-      #|  forall c. MEM c new ==> clause c
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  forall c. MEM c (list_of_set (allresolvents_sem M {cl}\n                                (cl INSERT set_of_list used0))) <=>\n                      c IN (allresolvents_sem M {cl}\n                             (cl INSERT set_of_list used0))
-      #|  forall c. MEM c new ==> clause c
-      #|  b /\\ a /\\ c ==> a /\\ b /\\ c
-      #|  forall c. c IN set_of_list (CONS cl cls) ==> clause c
-      #|  clause cl
-      #|  cls:(form->bool)list
-      #|  cl:form->bool
-      #|  unused0:(form->bool)list
-      #|  sub0 = Sub_SEM M (used,unused) n
-      #|  unused0 = SND(ppp:(form->bool)list#(form->bool)list)
-      #|  used0 = FST(ppp:(form->bool)list#(form->bool)list)
-      #|  ppp:(form->bool)list#(form->bool)list
-      #|  ppp = given_sem M n (used,unused)
-      #|  allntresolvents_sem M {} (set_of_list used)
-      #|  allresolvents_sem M {} (set_of_list used) = {}
-      #|  allresolvents_sem M {} (Used_SEM M (used,unused) 0)
-      #|  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall n. (forall c. c IN Used_SEM M(used,unused) n ==> clause c) /\\\n                (forall c. c IN Unused_SEM M(used,unused) n ==> clause c) /\\\n                (forall c. c IN Sub_SEM M (used,unused) n ==> clause c) /\\\n                (Sub_SEM M (used,unused) n UNION Unused_SEM M(used,unused) n)\n                 SUBSUMES\n                 allntresolvents_sem M\n                         (Sub_SEM M (used,unused) n)\n                         (set_of_list(used) UNION Sub_SEM M (used,unused) n)
-      #|  d:num
-      #|  d:num
-      #|  d:num
-      #|  forall init m n. m <= n ==> (Sub_SEM M init m) SUBSET (Sub_SEM M init n)
-      #|  forall init m n. m <= n ==> (Sub_SEM M init n) SUBSUMES (Sub_SEM M init m)
-      #|  forall cl current. LENGTH current <= LENGTH(replace cl current)
-      #|  forall gcl cl current. LENGTH current <= LENGTH(incorporate gcl cl current)
-      #|  k:(form->bool)list
-      #|  (resolvents_sem M (HD (CONS h t))\n                (CONS (HD (CONS h t))\n                      (FST (given_sem M (m + n) (used,unused)))))
-      #|  x <= y ==> SUC x + n <= SUC(y + n)
-      #|  l:(form->bool)list
-      #|  SND (given_sem M (m + n) (used,unused))
-      #|  ~(SND (given_sem M (m + n) (used,unused)) = [])
-      #|  LENGTH (SND (given_sem M (m + n) (used,unused))) + n
-      #|  m <= n ==> m <= SUC n
-      #|  given_sem M (m + n) (used,unused)
-      #|  unused:(form->bool)list
-      #|  used:(form->bool)list
-      #|  forall init m n.\n        LENGTH(SND(given_sem M m init))\n        <= LENGTH (SND(given_sem M (m + n) init)) + n
-      #|  given_sem M (m + n) (used,unused)
-      #|  forall used unused m n.\n        (SND (given_sem M m (used,unused)) = [])\n        ==> (SND (given_sem M (m + n) (used,unused)) = [])
-      #|  forall cl current n.\n        n < LENGTH current\n        ==> (EL n (replace cl current)) subsumes (EL n current)
-      #|  forall gcl cl current n.\n        n < LENGTH current\n        ==> (EL n (incorporate gcl cl current)) subsumes (EL n current)
-      #|  forall cl current.\n        (forall c. MEM c current ==> clause c) /\\ clause cl\n        ==> forall c. MEM c (replace cl current) ==> clause c
-      #|  (forall c. MEM c current ==> clause c) /\\ clause cl\n   ==> forall c. MEM c (incorporate gcl cl current) ==> clause c
-      #|  (forall c. MEM c current ==> clause c) /\\ clause cl /\\ p < LENGTH current\n   ==> clause (EL p (incorporate gcl cl current))
-      #|  forall current gcl new.\n        (forall c. MEM c current ==> clause c) /\\\n        (forall c. MEM c new ==> clause c)\n        ==> forall c. MEM c (ITLIST (incorporate gcl) new current)\n                ==> clause c
-      #|  forall gcl current lis.\n        LENGTH(current) <= LENGTH(ITLIST (incorporate gcl) lis current)
-      #|  k:(form->bool)list
-      #|  t':(form->bool)list
-      #|  p < LENGTH(t:(form->bool)list)
-      #|  a /\\ b /\\ c ==> d <=> a /\\ b ==> c ==> d
-      #|  p:num
-      #|  p:num
-      #|  new:(form->bool)list
-      #|  new:(form->bool)list
-      #|  p:num
-      #|  n + k:num
-      #|  forall c. MEM c new ==> clause c
-      #|  l:(form->bool)list
-      #|  SND(given_sem M m (used,unused))
-      #|  ~(SND (given_sem M m (used,unused)) = [])
-      #|  l:(form->bool)list
-      #|  SND(given_sem M m (used,unused))
-      #|  ~(SND(given_sem M m (used,unused)) = [])
-      #|  gcl IN Unused_SEM M(used,unused) m
-      #|  clause gcl
-      #|  forall c. MEM c (list_of_set (allresolvents_sem M {gcl}\n                          (gcl INSERT Used_SEM M (used,unused) m))) <=>\n                      c IN (allresolvents_sem M {gcl}\n                           (gcl INSERT Used_SEM M (used,unused) m))
-      #|  gcl = HD (SND (given_sem M m (used,unused)))
-      #|  forall c. MEM c new ==> clause c
-      #|  forall c. MEM c (SND (given_sem M m (used,unused))) ==> clause c
-      #|  SUC (n + k) < LENGTH (SND (given_sem M m (used,unused)))
-      #|  SUC (n + k) < LENGTH (SND (given_sem M m (used,unused)))
-      #|  given_sem M m (used,unused)
-      #|  SUC (n + k) < LENGTH (SND (given_sem M m (used,unused)))
-      #|  SUC k
-      #|  m:num
-      #|  (used:(form->bool)list,unused:(form->bool)list)
-      #|  (EL n (SND (given_sem M (SUC (m + k)) (used,unused)))) IN\n                  Unused_SEM M(used,unused) (SUC(m + k))
-      #|  a /\\ b /\\ c ==> d <=> a /\\ c ==> b ==> d
-      #|  SUC x < lm ==> lm <= lm1 + 1 ==> x < lm1
+      #|  \226\136\128 v : (Num) -> A, holds((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v, interp((cl : (Form) -> Bool)))
+      #|  (i : (Num) -> Term)
+      #|  clause((cl : (Form) -> Bool)) && clause((cl' : (Form) -> Bool)) && (\226\136\128 v : (Num) -> A, holds((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v, interp(cl))) && subsumes(cl, cl') \226\134\146 (\226\136\128 v : (Num) -> A, holds(M, v, interp(cl')))
+      #|  (isaresolvent_sem : (((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool), (Form) -> Bool, ((Form) -> Bool, (Form) -> Bool)) -> Bool)((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (cl : (Form) -> Bool), ((c1 : (Form) -> Bool), (c2 : (Form) -> Bool))) == (isaresolvent(cl, (c1, c2)) && (!(\226\136\128 v : (Num) -> Num, holds(M, v, interp(c1))) || !(\226\136\128 v : (Num) -> Num, holds(M, v, interp(c2)))))
+      #|  (allresolvents_sem : (((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool), ((Form) -> Bool) -> Bool, ((Form) -> Bool) -> Bool, (Form) -> Bool) -> Bool)((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (s1 : ((Form) -> Bool) -> Bool), (s2 : ((Form) -> Bool) -> Bool)) == {(c : (Form) -> Bool) | \226\136\131 c1 : (Form) -> Bool, \226\136\131 c2 : (Form) -> Bool, IN(c1, s1) && IN(c2, s2) && isaresolvent_sem(M, c, (c1, c2))}
+      #|  (allntresolvents_sem : (((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool), ((Form) -> Bool) -> Bool, ((Form) -> Bool) -> Bool, (Form) -> Bool) -> Bool)((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (s1 : ((Form) -> Bool) -> Bool), (s2 : ((Form) -> Bool) -> Bool)) == {(r : (Form) -> Bool) | IN(r, allresolvents_sem(M, s1, s2)) && !tautologous(r)}
+      #|  \226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, \226\136\128 cl : (Form) -> Bool, clause(c1) && clause(c2) && isaresolvent_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), cl, (c2, c1)) \226\134\146 (\226\136\131 cl' : (Form) -> Bool, isaresolvent_sem(M, cl', (c1, c2)) && subsumes(cl', cl))
+      #|  (c2 : (Form) -> Bool)
+      #|  (c1 : (Form) -> Bool)
+      #|  (c1 : (Form) -> Bool)
+      #|  (c2 : (Form) -> Bool)
+      #|  (cl : (Form) -> Bool)
+      #|  (\226\136\128 c : (Form) -> Bool, IN(c, (A : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, (B : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) \226\134\146 SUBSUMES(allresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), A, B), allresolvents_sem(M, B, A))
+      #|  allresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), UNION((A : ((Form) -> Bool) -> Bool), (B : ((Form) -> Bool) -> Bool)), (C : ((Form) -> Bool) -> Bool)) == UNION(allresolvents_sem(M, A, C), allresolvents_sem(M, B, C)) && allresolvents_sem(M, A, UNION(B, C)) == UNION(allresolvents_sem(M, A, B), allresolvents_sem(M, A, C))
+      #|  UNION((A : (_) -> Bool), (B : (_) -> Bool)) == UNION(UNION(A, A), B)
+      #|  UNION((a : (_) -> Bool), UNION((b : (_) -> Bool), UNION((c : (_) -> Bool), UNION((d : (_) -> Bool), UNION((e : (_) -> Bool), (f : (_) -> Bool)))))) == UNION(a, UNION(b, UNION(d, UNION(UNION(c, e), f))))
+      #|  (\226\136\128 c : (Form) -> Bool, IN(c, (B : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, (C : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) \226\134\146 SUBSUMES(UNION(allresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), B, UNION((A : ((Form) -> Bool) -> Bool), B)), allresolvents_sem(M, C, UNION(A, UNION(B, C)))), allresolvents_sem(M, UNION(B, C), UNION(A, UNION(B, C))))
+      #|  (resolvents_sem : (((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool), (Form) -> Bool, List[(Form) -> Bool]) -> List[(Form) -> Bool])((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (cl : (Form) -> Bool), (cls : List[(Form) -> Bool])) == list_of_set(allresolvents_sem(M, {cl}, set_of_list(cls)))
+      #|  \226\136\128 p : (Form) -> Bool, \226\136\128 q : (Form) -> Bool, \226\136\128 r : (Form) -> Bool, clause(p) && clause(q) && isaresolvent_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), r, (p, q)) \226\134\146 clause(r)
+      #|  (\226\136\128 c : (Form) -> Bool, IN(c, (s : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, (t : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) \226\134\146 (\226\136\128 c : (Form) -> Bool, IN(c, allresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), s, t)) \226\134\146 clause(c))
+      #|  {(c : (Form) -> Bool) | isaresolvent(c, ((c1 : (Form) -> Bool), (c2 : (Form) -> Bool)))}
+      #|  \226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, clause(c1) && clause(c2) \226\134\146 FINITE({(c : (Form) -> Bool) | isaresolvent_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), c, (c1, c2))})
+      #|  allresolvents((s : ((Form) -> Bool) -> Bool), (t : ((Form) -> Bool) -> Bool))
+      #|  \226\136\128 s : ((Form) -> Bool) -> Bool, \226\136\128 t : ((Form) -> Bool) -> Bool, FINITE(s) && FINITE(t) && (\226\136\128 c : (Form) -> Bool, IN(c, s) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, t) \226\134\146 clause(c)) \226\134\146 FINITE(allresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), s, t))
+      #|  (step_sem : (((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool), (List[(Form) -> Bool], List[(Form) -> Bool])) -> (List[(Form) -> Bool], List[(Form) -> Bool]))((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))) == (if unused == NIL { (used, unused) } else { LET((new : List[(Form) -> Bool]) => LET_END((insert(HD(unused), used), ITLIST(incorporate(HD(unused)), new, TL(unused)))), resolvents_sem(M, HD(unused), CONS(HD(unused), used))) })
+      #|  step_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), ((used : List[(Form) -> Bool]), NIL)) == (used, NIL) && step_sem(M, (used, CONS((cl : (Form) -> Bool), (cls : List[(Form) -> Bool])))) == LET((new : List[(Form) -> Bool]) => LET_END((insert(cl, used), ITLIST(incorporate(cl), new, cls))), resolvents_sem(M, cl, CONS(cl, used)))
+      #|  (given_sem : (((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool), Num, (List[(Form) -> Bool], List[(Form) -> Bool])) -> (List[(Form) -> Bool], List[(Form) -> Bool]))((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), 0, (p : (List[(Form) -> Bool], List[(Form) -> Bool]))) == p && given_sem(M, SUC((n : Num)), p) == step_sem(M, given_sem(M, n, p))
+      #|  (Used_SEM : (((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool), (List[(Form) -> Bool], List[(Form) -> Bool]), Num, (Form) -> Bool) -> Bool)((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (init : (List[(Form) -> Bool], List[(Form) -> Bool])), (n : Num)) == set_of_list(FST(given_sem(M, n, init)))
+      #|  (Unused_SEM : (((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool), (List[(Form) -> Bool], List[(Form) -> Bool]), Num, (Form) -> Bool) -> Bool)((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (init : (List[(Form) -> Bool], List[(Form) -> Bool])), (n : Num)) == set_of_list(SND(given_sem(M, n, init)))
+      #|  (Sub_SEM : (((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool), (List[(Form) -> Bool], List[(Form) -> Bool]), Num, (Form) -> Bool) -> Bool)((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (init : (List[(Form) -> Bool], List[(Form) -> Bool])), 0) == {} && Sub_SEM(M, init, SUC((n : Num))) == (if SND(given_sem(M, n, init)) == NIL { Sub_SEM(M, init, n) } else { INSERT(HD(SND(given_sem(M, n, init))), Sub_SEM(M, init, n)) })
+      #|  (\226\136\128 c : (Form) -> Bool, IN(c, (B : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, (C : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) \226\134\146 SUBSUMES(UNION(allntresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), B, UNION((A : ((Form) -> Bool) -> Bool), B)), allntresolvents_sem(M, C, UNION(A, UNION(B, C)))), allntresolvents_sem(M, UNION(B, C), UNION(A, UNION(B, C))))
+      #|  allntresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), UNION((A : ((Form) -> Bool) -> Bool), (B : ((Form) -> Bool) -> Bool)), (C : ((Form) -> Bool) -> Bool)) == UNION(allntresolvents_sem(M, A, C), allntresolvents_sem(M, B, C)) && allntresolvents_sem(M, A, UNION(B, C)) == UNION(allntresolvents_sem(M, A, B), allntresolvents_sem(M, A, C))
+      #|  (ppp : (List[(Form) -> Bool], List[(Form) -> Bool]))
+      #|  (ppp : (List[(Form) -> Bool], List[(Form) -> Bool])) == given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))
+      #|  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], \226\136\128 n : Num, Used_SEM((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (used, unused), n) == UNION(set_of_list(used), Sub_SEM(M, (used, unused), n))
+      #|  INSERT((x : _), (s : (_) -> Bool)) == UNION(s, {x})
+      #|  UNION(INSERT((x : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == UNION(UNION(s, UNION(t, {x})), UNION(t, {x}))
+      #|  UNION((s : (_) -> Bool), (t : (_) -> Bool)) == UNION(UNION(s, t), t)
+      #|  UNION((s : (_) -> Bool), {(x : _)}) == UNION(INSERT(x, s), {x})
+      #|  UNION(INSERT((h : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == UNION(UNION(s, t), {h})
+      #|  UNION(set_of_list(CONS((h : (Form) -> Bool), ITLIST(incorporate((cl : (Form) -> Bool)), (t : List[(Form) -> Bool]), (cls : List[(Form) -> Bool])))), {cl})
+      #|  ITLIST(incorporate((cl : (Form) -> Bool)), (t : List[(Form) -> Bool]), (cls : List[(Form) -> Bool]))
+      #|  (h : (Form) -> Bool)
+      #|  (cl : (Form) -> Bool)
+      #|  UNION(set_of_list(ITLIST(incorporate((cl : (Form) -> Bool)), (t : List[(Form) -> Bool]), (cls : List[(Form) -> Bool]))), {cl})
+      #|  ITLIST(incorporate((cl : (Form) -> Bool)), (t : List[(Form) -> Bool]), (cls : List[(Form) -> Bool]))
+      #|  (h : (Form) -> Bool)
+      #|  (cl : (Form) -> Bool)
+      #|  tautologous((h : (Form) -> Bool))
+      #|  \226\136\128 c : (Form) -> Bool, IN(c, set_of_list(CONS((cl : (Form) -> Bool), (cls : List[(Form) -> Bool])))) \226\134\146 clause(c)
+      #|  (added : List[(Form) -> Bool])
+      #|  (new : List[(Form) -> Bool])
+      #|  ((b : Bool) \226\134\146 (a : Bool) && (c : Bool)) \226\134\146 a \226\134\146 b \226\134\146 c
+      #|  \226\136\128 c : (Form) -> Bool, IN(c, set_of_list(ITLIST(incorporate((cl : (Form) -> Bool)), (new : List[(Form) -> Bool]), (cls : List[(Form) -> Bool])))) \226\134\146 clause(c)
+      #|  \226\136\128 c : (Form) -> Bool, MEM(c, (new : List[(Form) -> Bool])) \226\134\146 clause(c)
+      #|  set_of_list(list_of_set(allresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), {(cl : (Form) -> Bool)}, set_of_list(CONS(cl, (used0 : List[(Form) -> Bool])))))) == allresolvents_sem(M, {cl}, set_of_list(CONS(cl, used0)))
+      #|  allntresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), {(cl : (Form) -> Bool)}, UNION(set_of_list((used0 : List[(Form) -> Bool])), {cl})) == set_of_list(FILTER((c : (Form) -> Bool) => !tautologous(c), (new : List[(Form) -> Bool])))
+      #|  UNION(set_of_list((used : List[(Form) -> Bool])), (sub0 : ((Form) -> Bool) -> Bool)) == set_of_list((used0 : List[(Form) -> Bool]))
+      #|  set_of_list(ITLIST(incorporate((cl : (Form) -> Bool)), (t : List[(Form) -> Bool]), (cls : List[(Form) -> Bool])))
+      #|  ITLIST(incorporate((cl : (Form) -> Bool)), (t : List[(Form) -> Bool]), (cls : List[(Form) -> Bool]))
+      #|  (h : (Form) -> Bool)
+      #|  (cl : (Form) -> Bool)
+      #|  \226\136\128 c : (Form) -> Bool, IN(c, set_of_list(CONS((cl : (Form) -> Bool), (cls : List[(Form) -> Bool])))) \226\134\146 clause(c)
+      #|  (added : List[(Form) -> Bool])
+      #|  (new : List[(Form) -> Bool])
+      #|  ((b : Bool) \226\134\146 (a : Bool) && (c : Bool)) \226\134\146 a \226\134\146 b \226\134\146 c
+      #|  \226\136\128 c : (Form) -> Bool, IN(c, set_of_list(ITLIST(incorporate((cl : (Form) -> Bool)), (new : List[(Form) -> Bool]), (cls : List[(Form) -> Bool])))) \226\134\146 clause(c)
+      #|  \226\136\128 c : (Form) -> Bool, MEM(c, (new : List[(Form) -> Bool])) \226\134\146 clause(c)
+      #|  UNION((sub0 : ((Form) -> Bool) -> Bool), set_of_list(CONS((cl : (Form) -> Bool), (cls : List[(Form) -> Bool]))))
+      #|  UNION(allntresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (sub0 : ((Form) -> Bool) -> Bool), UNION(set_of_list((used : List[(Form) -> Bool])), sub0)), allntresolvents_sem(M, {(cl : (Form) -> Bool)}, UNION(set_of_list(used), UNION(sub0, {cl}))))
+      #|  \226\136\128 c : (Form) -> Bool, IN(c, set_of_list(CONS((cl : (Form) -> Bool), (cls : List[(Form) -> Bool])))) \226\134\146 clause(c)
+      #|  (more : List[(Form) -> Bool])
+      #|  (new : List[(Form) -> Bool])
+      #|  \226\136\128 c : (Form) -> Bool, MEM(c, (new : List[(Form) -> Bool])) \226\134\146 clause(c)
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  \226\136\128 c : (Form) -> Bool, MEM(c, list_of_set(allresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), {(cl : (Form) -> Bool)}, INSERT(cl, set_of_list((used0 : List[(Form) -> Bool])))))) == IN(c, allresolvents_sem(M, {cl}, INSERT(cl, set_of_list(used0))))
+      #|  \226\136\128 c : (Form) -> Bool, MEM(c, (new : List[(Form) -> Bool])) \226\134\146 clause(c)
+      #|  (b : Bool) && (a : Bool) && (c : Bool) \226\134\146 a && b && c
+      #|  \226\136\128 c : (Form) -> Bool, IN(c, set_of_list(CONS((cl : (Form) -> Bool), (cls : List[(Form) -> Bool])))) \226\134\146 clause(c)
+      #|  clause((cl : (Form) -> Bool))
+      #|  (cls : List[(Form) -> Bool])
+      #|  (cl : (Form) -> Bool)
+      #|  (unused0 : List[(Form) -> Bool])
+      #|  (sub0 : ((Form) -> Bool) -> Bool) == Sub_SEM((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])), (n : Num))
+      #|  (unused0 : List[(Form) -> Bool]) == SND((ppp : (List[(Form) -> Bool], List[(Form) -> Bool])))
+      #|  (used0 : List[(Form) -> Bool]) == FST((ppp : (List[(Form) -> Bool], List[(Form) -> Bool])))
+      #|  (ppp : (List[(Form) -> Bool], List[(Form) -> Bool]))
+      #|  (ppp : (List[(Form) -> Bool], List[(Form) -> Bool])) == given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))
+      #|  allntresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), {}, set_of_list((used : List[(Form) -> Bool])))
+      #|  allresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), {}, set_of_list((used : List[(Form) -> Bool]))) == {}
+      #|  allresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), {}, Used_SEM(M, ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])), 0))
+      #|  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, used) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, unused) \226\134\146 clause(c)) \226\134\146 (\226\136\128 n : Num, (\226\136\128 c : (Form) -> Bool, IN(c, Used_SEM((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (used, unused), n)) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, Unused_SEM(M, (used, unused), n)) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, Sub_SEM(M, (used, unused), n)) \226\134\146 clause(c)) && SUBSUMES(UNION(Sub_SEM(M, (used, unused), n), Unused_SEM(M, (used, unused), n)), allntresolvents_sem(M, Sub_SEM(M, (used, unused), n), UNION(set_of_list(used), Sub_SEM(M, (used, unused), n)))))
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  \226\136\128 init : (List[(Form) -> Bool], List[(Form) -> Bool]), \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSET(Sub_SEM((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), init, m), Sub_SEM(M, init, n))
+      #|  \226\136\128 init : (List[(Form) -> Bool], List[(Form) -> Bool]), \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSUMES(Sub_SEM((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), init, n), Sub_SEM(M, init, m))
+      #|  \226\136\128 cl : (Form) -> Bool, \226\136\128 current : List[(Form) -> Bool], LENGTH(current) <= LENGTH(replace(cl, current))
+      #|  \226\136\128 gcl : (Form) -> Bool, \226\136\128 cl : (Form) -> Bool, \226\136\128 current : List[(Form) -> Bool], LENGTH(current) <= LENGTH(incorporate(gcl, cl, current))
+      #|  (k : List[(Form) -> Bool])
+      #|  resolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), HD(CONS((h : (Form) -> Bool), (t : List[(Form) -> Bool]))), CONS(HD(CONS(h, t)), FST(given_sem(M, (m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))))
+      #|  (x : Num) <= (y : Num) \226\134\146 SUC(x) + (n : Num) <= SUC(y + n)
+      #|  (l : List[(Form) -> Bool])
+      #|  SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+      #|  !(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+      #|  LENGTH(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))) + n
+      #|  (m : Num) <= (n : Num) \226\134\146 m <= SUC(n)
+      #|  given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))
+      #|  (unused : List[(Form) -> Bool])
+      #|  (used : List[(Form) -> Bool])
+      #|  \226\136\128 init : (List[(Form) -> Bool], List[(Form) -> Bool]), \226\136\128 m : Num, \226\136\128 n : Num, LENGTH(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), m, init))) <= LENGTH(SND(given_sem(M, m + n, init))) + n
+      #|  given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))
+      #|  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], \226\136\128 m : Num, \226\136\128 n : Num, SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), m, (used, unused))) == NIL \226\134\146 SND(given_sem(M, m + n, (used, unused))) == NIL
+      #|  \226\136\128 cl : (Form) -> Bool, \226\136\128 current : List[(Form) -> Bool], \226\136\128 n : Num, n < LENGTH(current) \226\134\146 subsumes(EL(n, replace(cl, current)), EL(n, current))
+      #|  \226\136\128 gcl : (Form) -> Bool, \226\136\128 cl : (Form) -> Bool, \226\136\128 current : List[(Form) -> Bool], \226\136\128 n : Num, n < LENGTH(current) \226\134\146 subsumes(EL(n, incorporate(gcl, cl, current)), EL(n, current))
+      #|  \226\136\128 cl : (Form) -> Bool, \226\136\128 current : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, current) \226\134\146 clause(c)) && clause(cl) \226\134\146 (\226\136\128 c : (Form) -> Bool, MEM(c, replace(cl, current)) \226\134\146 clause(c))
+      #|  (\226\136\128 c : (Form) -> Bool, MEM(c, (current : List[(Form) -> Bool])) \226\134\146 clause(c)) && clause((cl : (Form) -> Bool)) \226\134\146 (\226\136\128 c : (Form) -> Bool, MEM(c, incorporate((gcl : (Form) -> Bool), cl, current)) \226\134\146 clause(c))
+      #|  (\226\136\128 c : (Form) -> Bool, MEM(c, (current : List[(Form) -> Bool])) \226\134\146 clause(c)) && clause((cl : (Form) -> Bool)) && (p : Num) < LENGTH(current) \226\134\146 clause(EL(p, incorporate((gcl : (Form) -> Bool), cl, current)))
+      #|  \226\136\128 current : List[(Form) -> Bool], \226\136\128 gcl : (Form) -> Bool, \226\136\128 new : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, current) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, new) \226\134\146 clause(c)) \226\134\146 (\226\136\128 c : (Form) -> Bool, MEM(c, ITLIST(incorporate(gcl), new, current)) \226\134\146 clause(c))
+      #|  \226\136\128 gcl : (Form) -> Bool, \226\136\128 current : List[(Form) -> Bool], \226\136\128 lis : List[(Form) -> Bool], LENGTH(current) <= LENGTH(ITLIST(incorporate(gcl), lis, current))
+      #|  (k : List[(Form) -> Bool])
+      #|  (t' : List[(Form) -> Bool])
+      #|  (p : Num) < LENGTH((t : List[(Form) -> Bool]))
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (a && b \226\134\146 c \226\134\146 d)
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (new : List[(Form) -> Bool])
+      #|  (new : List[(Form) -> Bool])
+      #|  (p : Num)
+      #|  (n : Num) + (k : Num)
+      #|  \226\136\128 c : (Form) -> Bool, MEM(c, (new : List[(Form) -> Bool])) \226\134\146 clause(c)
+      #|  (l : List[(Form) -> Bool])
+      #|  SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+      #|  !(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+      #|  (l : List[(Form) -> Bool])
+      #|  SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+      #|  !(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+      #|  IN((gcl : (Form) -> Bool), Unused_SEM((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])), (m : Num)))
+      #|  clause((gcl : (Form) -> Bool))
+      #|  \226\136\128 c : (Form) -> Bool, MEM(c, list_of_set(allresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), {(gcl : (Form) -> Bool)}, INSERT(gcl, Used_SEM(M, ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])), (m : Num)))))) == IN(c, allresolvents_sem(M, {gcl}, INSERT(gcl, Used_SEM(M, (used, unused), m))))
+      #|  (gcl : (Form) -> Bool) == HD(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))
+      #|  \226\136\128 c : (Form) -> Bool, MEM(c, (new : List[(Form) -> Bool])) \226\134\146 clause(c)
+      #|  \226\136\128 c : (Form) -> Bool, MEM(c, SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))) \226\134\146 clause(c)
+      #|  SUC((n : Num) + (k : Num)) < LENGTH(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))
+      #|  SUC((n : Num) + (k : Num)) < LENGTH(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))
+      #|  given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))
+      #|  SUC((n : Num) + (k : Num)) < LENGTH(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))
+      #|  SUC((k : Num))
+      #|  (m : Num)
+      #|  ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))
+      #|  IN(EL((n : Num), SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), SUC((m : Num) + (k : Num)), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))), Unused_SEM(M, (used, unused), SUC(m + k)))
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (a && c \226\134\146 b \226\134\146 d)
+      #|  SUC((x : Num)) < (lm : Num) \226\134\146 lm <= (lm1 : Num) + 1 \226\134\146 x < lm1
       #|  1
-      #|  m:num
-      #|  (used:(form->bool)list,unused:(form->bool)list)
-      #|  n:num
-      #|  SUC m
-      #|  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall k m n. n + k < LENGTH(SND(given_sem M m (used,unused)))\n                    ==> (EL n (SND(given_sem M (m + k) (used,unused))))\n                    subsumes (EL (n + k) (SND(given_sem M m (used,unused))))
-      #|  x INSERT s = {x} UNION s
-      #|  ~(LENGTH (SND (given_sem M m (used,unused))) <= n)
-      #|  unused:(form->bool)list
-      #|  used:(form->bool)list
-      #|  n = 0 + n
-      #|  HD(SND(given_sem M (m + n) (used,unused))) subsumes\n    (EL n (SND (given_sem M m (used,unused))))
-      #|  SND (given_sem M m (used,unused))
-      #|  n:num
-      #|  x:form->bool
-      #|  x:form->bool
-      #|  set_of_list (FIRSTN (SUC n) (SND (given_sem M m (used,unused))))
-      #|  l:(form->bool)list
-      #|  SND (given_sem M (m + n) (used,unused))
-      #|  ~(SND (given_sem M (m + n) (used,unused)) = [])
-      #|  (HD(SND (given_sem M (m + n) (used,unused)))) IN\n      Unused_SEM M(used,unused) (m + n)
-      #|  c:form->bool
-      #|  set_of_list(FIRSTN n (SND (given_sem M m (used,unused)))) UNION\n    {(EL n (SND (given_sem M m (used,unused))))}
-      #|  set_of_list(FIRSTN n (SND (given_sem M m (used,unused))))
-      #|  LENGTH(SND (given_sem M m (used,unused))) <= n
-      #|  ~(SND (given_sem M m (used,unused)) = [])
-      #|  {(HD (SND (given_sem M m (used,unused))))} UNION\n    set_of_list(FIRSTN n (TL (SND (given_sem M m (used,unused))))) =\n    set_of_list(FIRSTN (SUC n) (SND (given_sem M m (used,unused))))
-      #|  s UNION t UNION u = t UNION u UNION s
-      #|  l:(form->bool)list
-      #|  SND(given_sem M(m + n) (used,unused))
-      #|  ~(SND(given_sem M (m + n) (used,unused)) = [])
-      #|  HD(SND(given_sem M (m + n) (used,unused))) IN\n      Unused_SEM M (used,unused) (m + n)
-      #|  HD(SND (given_sem M (m + n) (used,unused))) INSERT\n    (Sub_SEM M (used,unused) m UNION\n     set_of_list (FIRSTN n (SND (given_sem M m (used,unused)))))
-      #|  LENGTH(SND (given_sem M (m + n) (used,unused))) + n
-      #|  LENGTH(SND (given_sem M m (used,unused))) <= n
-      #|  FIRSTN (SUC n) (SND(given_sem M m (used,unused))) =\n                  FIRSTN n (SND(given_sem M m (used,unused)))
-      #|  forall m n. Sub_SEM M (used,unused) (m + n) SUBSUMES\n          Sub_SEM M (used,unused) m UNION\n          set_of_list(FIRSTN n (SND(given_sem M m (used,unused))))
-      #|  (forall c. MEM c used ==> clause c) /\\\n   (forall c. MEM c unused ==> clause c)\n   ==> forall n. Sub_SEM M (used,unused)\n              (n + LENGTH(SND(given_sem M n (used,unused))))\n           SUBSUMES (Sub_SEM M (used,unused) n UNION\n                     Unused_SEM M(used,unused) n)
-      #|  x <= n ==> x <= SUC n
-      #|  (break_sem M init 0 = LENGTH(SND(given_sem M 0 init))) /\\\n   (break_sem M init (SUC n) =\n        break_sem M init n +\n        LENGTH(SND(given_sem M (break_sem M init n) init)))
-      #|  level_sem M init n = Sub_SEM M init (break_sem M init n)
+      #|  (m : Num)
+      #|  ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))
+      #|  (n : Num)
+      #|  SUC((m : Num))
+      #|  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, used) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, unused) \226\134\146 clause(c)) \226\134\146 (\226\136\128 k : Num, \226\136\128 m : Num, \226\136\128 n : Num, n + k < LENGTH(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), m, (used, unused)))) \226\134\146 subsumes(EL(n, SND(given_sem(M, m + k, (used, unused)))), EL(n + k, SND(given_sem(M, m, (used, unused))))))
+      #|  INSERT((x : _), (s : (_) -> Bool)) == UNION({x}, s)
+      #|  !(LENGTH(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))) <= (n : Num))
+      #|  (unused : List[(Form) -> Bool])
+      #|  (used : List[(Form) -> Bool])
+      #|  (n : Num) == 0 + n
+      #|  subsumes(HD(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))), EL(n, SND(given_sem(M, m, (used, unused)))))
+      #|  SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+      #|  (n : Num)
+      #|  (x : (Form) -> Bool)
+      #|  (x : (Form) -> Bool)
+      #|  set_of_list(FIRSTN(SUC((n : Num)), SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))))
+      #|  (l : List[(Form) -> Bool])
+      #|  SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+      #|  !(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+      #|  IN(HD(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))), Unused_SEM(M, (used, unused), m + n))
+      #|  (c : (Form) -> Bool)
+      #|  UNION(set_of_list(FIRSTN((n : Num), SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))), {EL(n, SND(given_sem(M, m, (used, unused))))})
+      #|  set_of_list(FIRSTN((n : Num), SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))))
+      #|  LENGTH(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))) <= (n : Num)
+      #|  !(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+      #|  UNION({HD(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))}, set_of_list(FIRSTN((n : Num), TL(SND(given_sem(M, m, (used, unused))))))) == set_of_list(FIRSTN(SUC(n), SND(given_sem(M, m, (used, unused)))))
+      #|  UNION((s : (_) -> Bool), UNION((t : (_) -> Bool), (u : (_) -> Bool))) == UNION(t, UNION(u, s))
+      #|  (l : List[(Form) -> Bool])
+      #|  SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+      #|  !(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+      #|  IN(HD(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))), Unused_SEM(M, (used, unused), m + n))
+      #|  INSERT(HD(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))), UNION(Sub_SEM(M, (used, unused), m), set_of_list(FIRSTN(n, SND(given_sem(M, m, (used, unused)))))))
+      #|  LENGTH(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))) + n
+      #|  LENGTH(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))) <= (n : Num)
+      #|  FIRSTN(SUC((n : Num)), SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))) == FIRSTN(n, SND(given_sem(M, m, (used, unused))))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, SUBSUMES(Sub_SEM((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])), m + n), UNION(Sub_SEM(M, (used, unused), m), set_of_list(FIRSTN(n, SND(given_sem(M, m, (used, unused)))))))
+      #|  (\226\136\128 c : (Form) -> Bool, MEM(c, (used : List[(Form) -> Bool])) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, (unused : List[(Form) -> Bool])) \226\134\146 clause(c)) \226\134\146 (\226\136\128 n : Num, SUBSUMES(Sub_SEM((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (used, unused), n + LENGTH(SND(given_sem(M, n, (used, unused))))), UNION(Sub_SEM(M, (used, unused), n), Unused_SEM(M, (used, unused), n))))
+      #|  (x : Num) <= (n : Num) \226\134\146 x <= SUC(n)
+      #|  (break_sem : (((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool), (List[(Form) -> Bool], List[(Form) -> Bool]), Num) -> Num)((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (init : (List[(Form) -> Bool], List[(Form) -> Bool])), 0) == LENGTH(SND(given_sem(M, 0, init))) && break_sem(M, init, SUC((n : Num))) == break_sem(M, init, n) + LENGTH(SND(given_sem(M, break_sem(M, init, n), init)))
+      #|  (level_sem : (((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool), (List[(Form) -> Bool], List[(Form) -> Bool]), Num, (Form) -> Bool) -> Bool)((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (init : (List[(Form) -> Bool], List[(Form) -> Bool])), (n : Num)) == Sub_SEM(M, init, break_sem(M, init, n))
       #|  0
-      #|  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> level_sem M (used,unused) 0 SUBSUMES set_of_list(unused)
-      #|  Sub_SEM M (used,unused) (break_sem M(used,unused) n) UNION\n              Unused_SEM M(used,unused) (break_sem M(used,unused) n)
-      #|  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall n. level_sem M (used,unused) (SUC n) SUBSUMES\n                allntresolvents_sem M (level_sem M (used,unused) (n))\n                                (set_of_list(used) UNION\n                                 level_sem M (used,unused) (n))
-      #|  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall n c. c IN (level_sem M (used,unused) n) ==> clause c
-      #|  forall init m d. break_sem M init m <= break_sem M init (m + d)
-      #|  forall init m n. m <= n ==> break_sem M init m <= break_sem M init n
-      #|  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall m n. m <= n\n                  ==> level_sem M (used,unused) m SUBSET level_sem M (used,unused) n
-      #|  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall m n. m <= n\n                  ==> level_sem M (used,unused) n SUBSUMES level_sem M (used,unused) m
-      #|  forall p p' q r.\n        clause p /\\ clause p' /\\ clause q /\\\n        p' subsumes p /\\ isaresolvent_sem M r (p,q)\n        ==> p' subsumes r \\/\n            ?r'. isaresolvent_sem M r' (p',q) /\\ r' subsumes r
-      #|  r'':form->bool
-      #|  q':form->bool
-      #|  p:form->bool
-      #|  r'':form->bool
-      #|  r':form->bool
-      #|  r':form->bool
-      #|  p:form->bool
-      #|  q':form->bool
-      #|  q:form->bool
-      #|  r':form->bool
-      #|  r:form->bool
-      #|  p:form->bool
-      #|  q:form->bool
-      #|  forall p q q' r.\n        clause p /\\ clause q /\\ clause q' /\\\n        q' subsumes q /\\ isaresolvent_sem M r (p,q)\n        ==> q' subsumes r \\/\n            ?r'. isaresolvent_sem M r' (p,q') /\\ r' subsumes r
-      #|  r':form->bool
-      #|  q':form->bool
-      #|  p':form->bool
-      #|  p:form->bool
-      #|  r':form->bool
-      #|  r:form->bool
-      #|  q':form->bool
-      #|  q:form->bool
-      #|  p:form->bool
-      #|  forall p p' q q' r.\n        clause p /\\ clause p' /\\ clause q /\\ clause q' /\\\n        p' subsumes p /\\ q' subsumes q /\\ isaresolvent_sem M r (p,q)\n        ==> p' subsumes r \\/ q' subsumes r \\/\n            ?r'. isaresolvent_sem M r' (p',q') /\\ r' subsumes r
-      #|  forall s t u.\n      (forall c. c IN s ==> clause c) /\\\n      (forall c. c IN t ==> clause c) /\\\n      (forall c. c IN u ==> clause c) /\\\n      s SUBSUMES t\n      ==> (s UNION (allresolvents_sem M s u)) SUBSUMES\n          (allresolvents_sem M t u)
-      #|  forall s t u.\n      (forall c. c IN s ==> clause c) /\\\n      (forall c. c IN t ==> clause c) /\\\n      (forall c. c IN u ==> clause c) /\\\n      t SUBSUMES u\n      ==> (t UNION (allresolvents_sem M s t)) SUBSUMES\n          (allresolvents_sem M s u)
-      #|  s UNION (allresolvents_sem M s t')
-      #|  forall s t s' t'.\n      (forall c. c IN s ==> clause c) /\\\n      (forall c. c IN s' ==> clause c) /\\\n      (forall c. c IN t ==> clause c) /\\\n      (forall c. c IN t' ==> clause c) /\\\n      s SUBSUMES s' /\\ t SUBSUMES t'\n      ==> (s UNION t UNION (allresolvents_sem M s t)) SUBSUMES\n          (allresolvents_sem M s' t')
-      #|  forall p q r.\n      clause p /\\ clause q /\\\n      tautologous(p) /\\ isaresolvent_sem M r (p,q)\n      ==> tautologous(r) \\/ q subsumes r
-      #|  forall p q. p subsumes q /\\ tautologous(p) ==> tautologous(q)
-      #|  forall p q r.\n      clause p /\\ clause q /\\\n      tautologous(p) /\\ isaresolvent_sem M r (q,p)\n      ==> tautologous(r) \\/ q subsumes r
-      #|  x < n ==> x < SUC n
-      #|  l:(form->bool)list
-      #|  SND (given_sem M n (used,unused))
-      #|  ~(SND (given_sem M n (used,unused)) = [])
-      #|  MEM c (TL (SND (given_sem M n (used,unused))))
-      #|  MEM c (SND (given_sem M n (used,unused)))
-      #|  x < n ==> x < SUC n
-      #|  given_sem M n (used,unused)
-      #|  forall used unused c n.\n        MEM c (SND(given_sem M n (used,unused)))\n        ==> MEM c unused \\/\n            ?m. m < n /\\\n                MEM c (resolvents_sem M\n                         (HD(SND(given_sem M m (used,unused))))\n                         (CONS (HD(SND(given_sem M m (used,unused))))\n                               (FST(given_sem M m (used,unused)))))
-      #|  forall l. ~(l = []) ==> MEM (HD l) l
-      #|  l:(form->bool)list
-      #|  SND (given_sem M n (used,unused))
-      #|  ~(SND (given_sem M n (used,unused)) = [])
-      #|  x < n ==> x < SUC n
-      #|  MEM c (SND(given_sem M n (used,unused)))
-      #|  x < n ==> x < SUC n
-      #|  x < n ==> x < SUC n
-      #|  forall used unused c n.\n        c IN Sub_SEM M (used,unused) n\n        ==> MEM c unused \\/\n            ?m. m < n /\\\n                MEM c (resolvents_sem M\n                         (HD(SND(given_sem M m (used,unused))))\n                         (CONS (HD(SND(given_sem M m (used,unused))))\n                               (FST(given_sem M m (used,unused)))))
-      #|  forall used unused c n.\n        c IN level_sem M (used,unused) n\n        ==> MEM c unused \\/\n            ?m. MEM c (resolvents_sem M\n                         (HD(SND(given_sem M m (used,unused))))\n                         (CONS (HD(SND(given_sem M m (used,unused))))\n                               (FST(given_sem M m (used,unused)))))
+      #|  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, used) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, unused) \226\134\146 clause(c)) \226\134\146 SUBSUMES(level_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (used, unused), 0), set_of_list(unused))
+      #|  UNION(Sub_SEM((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])), break_sem(M, (used, unused), (n : Num))), Unused_SEM(M, (used, unused), break_sem(M, (used, unused), n)))
+      #|  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, used) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, unused) \226\134\146 clause(c)) \226\134\146 (\226\136\128 n : Num, SUBSUMES(level_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (used, unused), SUC(n)), allntresolvents_sem(M, level_sem(M, (used, unused), n), UNION(set_of_list(used), level_sem(M, (used, unused), n)))))
+      #|  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, used) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, unused) \226\134\146 clause(c)) \226\134\146 (\226\136\128 n : Num, \226\136\128 c : (Form) -> Bool, IN(c, level_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (used, unused), n)) \226\134\146 clause(c))
+      #|  \226\136\128 init : (List[(Form) -> Bool], List[(Form) -> Bool]), \226\136\128 m : Num, \226\136\128 d : Num, break_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), init, m) <= break_sem(M, init, m + d)
+      #|  \226\136\128 init : (List[(Form) -> Bool], List[(Form) -> Bool]), \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 break_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), init, m) <= break_sem(M, init, n)
+      #|  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, used) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, unused) \226\134\146 clause(c)) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSET(level_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (used, unused), m), level_sem(M, (used, unused), n)))
+      #|  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, used) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, unused) \226\134\146 clause(c)) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSUMES(level_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (used, unused), n), level_sem(M, (used, unused), m)))
+      #|  \226\136\128 p : (Form) -> Bool, \226\136\128 p' : (Form) -> Bool, \226\136\128 q : (Form) -> Bool, \226\136\128 r : (Form) -> Bool, clause(p) && clause(p') && clause(q) && subsumes(p', p) && isaresolvent_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), r, (p, q)) \226\134\146 subsumes(p', r) || (\226\136\131 r' : (Form) -> Bool, isaresolvent_sem(M, r', (p', q)) && subsumes(r', r))
+      #|  (r'' : (Form) -> Bool)
+      #|  (q' : (Form) -> Bool)
+      #|  (p : (Form) -> Bool)
+      #|  (r'' : (Form) -> Bool)
+      #|  (r' : (Form) -> Bool)
+      #|  (r' : (Form) -> Bool)
+      #|  (p : (Form) -> Bool)
+      #|  (q' : (Form) -> Bool)
+      #|  (q : (Form) -> Bool)
+      #|  (r' : (Form) -> Bool)
+      #|  (r : (Form) -> Bool)
+      #|  (p : (Form) -> Bool)
+      #|  (q : (Form) -> Bool)
+      #|  \226\136\128 p : (Form) -> Bool, \226\136\128 q : (Form) -> Bool, \226\136\128 q' : (Form) -> Bool, \226\136\128 r : (Form) -> Bool, clause(p) && clause(q) && clause(q') && subsumes(q', q) && isaresolvent_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), r, (p, q)) \226\134\146 subsumes(q', r) || (\226\136\131 r' : (Form) -> Bool, isaresolvent_sem(M, r', (p, q')) && subsumes(r', r))
+      #|  (r' : (Form) -> Bool)
+      #|  (q' : (Form) -> Bool)
+      #|  (p' : (Form) -> Bool)
+      #|  (p : (Form) -> Bool)
+      #|  (r' : (Form) -> Bool)
+      #|  (r : (Form) -> Bool)
+      #|  (q' : (Form) -> Bool)
+      #|  (q : (Form) -> Bool)
+      #|  (p : (Form) -> Bool)
+      #|  \226\136\128 p : (Form) -> Bool, \226\136\128 p' : (Form) -> Bool, \226\136\128 q : (Form) -> Bool, \226\136\128 q' : (Form) -> Bool, \226\136\128 r : (Form) -> Bool, clause(p) && clause(p') && clause(q) && clause(q') && subsumes(p', p) && subsumes(q', q) && isaresolvent_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), r, (p, q)) \226\134\146 subsumes(p', r) || subsumes(q', r) || (\226\136\131 r' : (Form) -> Bool, isaresolvent_sem(M, r', (p', q')) && subsumes(r', r))
+      #|  \226\136\128 s : ((Form) -> Bool) -> Bool, \226\136\128 t : ((Form) -> Bool) -> Bool, \226\136\128 u : ((Form) -> Bool) -> Bool, (\226\136\128 c : (Form) -> Bool, IN(c, s) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, t) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, u) \226\134\146 clause(c)) && SUBSUMES(s, t) \226\134\146 SUBSUMES(UNION(s, allresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), s, u)), allresolvents_sem(M, t, u))
+      #|  \226\136\128 s : ((Form) -> Bool) -> Bool, \226\136\128 t : ((Form) -> Bool) -> Bool, \226\136\128 u : ((Form) -> Bool) -> Bool, (\226\136\128 c : (Form) -> Bool, IN(c, s) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, t) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, u) \226\134\146 clause(c)) && SUBSUMES(t, u) \226\134\146 SUBSUMES(UNION(t, allresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), s, t)), allresolvents_sem(M, s, u))
+      #|  UNION((s : ((Form) -> Bool) -> Bool), allresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), s, (t' : ((Form) -> Bool) -> Bool)))
+      #|  \226\136\128 s : ((Form) -> Bool) -> Bool, \226\136\128 t : ((Form) -> Bool) -> Bool, \226\136\128 s' : ((Form) -> Bool) -> Bool, \226\136\128 t' : ((Form) -> Bool) -> Bool, (\226\136\128 c : (Form) -> Bool, IN(c, s) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, s') \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, t) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, t') \226\134\146 clause(c)) && SUBSUMES(s, s') && SUBSUMES(t, t') \226\134\146 SUBSUMES(UNION(s, UNION(t, allresolvents_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), s, t))), allresolvents_sem(M, s', t'))
+      #|  \226\136\128 p : (Form) -> Bool, \226\136\128 q : (Form) -> Bool, \226\136\128 r : (Form) -> Bool, clause(p) && clause(q) && tautologous(p) && isaresolvent_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), r, (p, q)) \226\134\146 tautologous(r) || subsumes(q, r)
+      #|  \226\136\128 p : (Form) -> Bool, \226\136\128 q : (Form) -> Bool, subsumes(p, q) && tautologous(p) \226\134\146 tautologous(q)
+      #|  \226\136\128 p : (Form) -> Bool, \226\136\128 q : (Form) -> Bool, \226\136\128 r : (Form) -> Bool, clause(p) && clause(q) && tautologous(p) && isaresolvent_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), r, (q, p)) \226\134\146 tautologous(r) || subsumes(q, r)
+      #|  (x : Num) < (n : Num) \226\134\146 x < SUC(n)
+      #|  (l : List[(Form) -> Bool])
+      #|  SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+      #|  !(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+      #|  MEM((c : (Form) -> Bool), TL(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))))
+      #|  MEM((c : (Form) -> Bool), SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))
+      #|  (x : Num) < (n : Num) \226\134\146 x < SUC(n)
+      #|  given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))
+      #|  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], \226\136\128 c : (Form) -> Bool, \226\136\128 n : Num, MEM(c, SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), n, (used, unused)))) \226\134\146 MEM(c, unused) || (\226\136\131 m : Num, m < n && MEM(c, resolvents_sem(M, HD(SND(given_sem(M, m, (used, unused)))), CONS(HD(SND(given_sem(M, m, (used, unused)))), FST(given_sem(M, m, (used, unused)))))))
+      #|  \226\136\128 l : List[_], !(l == NIL) \226\134\146 MEM(HD(l), l)
+      #|  (l : List[(Form) -> Bool])
+      #|  SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+      #|  !(SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+      #|  (x : Num) < (n : Num) \226\134\146 x < SUC(n)
+      #|  MEM((c : (Form) -> Bool), SND(given_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))
+      #|  (x : Num) < (n : Num) \226\134\146 x < SUC(n)
+      #|  (x : Num) < (n : Num) \226\134\146 x < SUC(n)
+      #|  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], \226\136\128 c : (Form) -> Bool, \226\136\128 n : Num, IN(c, Sub_SEM((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (used, unused), n)) \226\134\146 MEM(c, unused) || (\226\136\131 m : Num, m < n && MEM(c, resolvents_sem(M, HD(SND(given_sem(M, m, (used, unused)))), CONS(HD(SND(given_sem(M, m, (used, unused)))), FST(given_sem(M, m, (used, unused)))))))
+      #|  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], \226\136\128 c : (Form) -> Bool, \226\136\128 n : Num, IN(c, level_sem((M : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool)), (used, unused), n)) \226\134\146 MEM(c, unused) || (\226\136\131 m : Num, MEM(c, resolvents_sem(M, HD(SND(given_sem(M, m, (used, unused)))), CONS(HD(SND(given_sem(M, m, (used, unused)))), FST(given_sem(M, m, (used, unused)))))))
       #|HOLDS_INTERP_SUBSUME =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#clause:fun(fun(form,bool),bool) cl:fun(form,bool))) ((#/\:fun(bool,fun(bool,bool)) (#clause:fun(fun(form,bool),bool) cl':fun(form,bool))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun(num,'A),bool),bool) (\v:fun(num,'A). (((#holds:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),fun(form,bool))) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A)) (#interp:fun(fun(form,bool),form) cl:fun(form,bool)))))) ((#subsumes:fun(fun(form,bool),fun(fun(form,bool),bool)) cl:fun(form,bool)) cl':fun(form,bool)))))) (#forall:fun(fun(fun(num,'A),bool),bool) (\v:fun(num,'A). (((#holds:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),fun(form,bool))) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A)) (#interp:fun(fun(form,bool),form) cl':fun(form,bool))))))
       #|isaresolvent_sem =  |- (#forall:fun(fun(fun(form,bool),bool),bool) (\cl:fun(form,bool). (#forall:fun(fun(fun(form,bool),bool),bool) (\c1:fun(form,bool). (#forall:fun(fun(prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))),bool),bool) (\M:prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))). (#forall:fun(fun(fun(form,bool),bool),bool) (\c2:fun(form,bool). ((#=:fun(bool,fun(bool,bool)) (((#isaresolvent_sem:fun(prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))),fun(fun(form,bool),fun(prod(fun(form,bool),fun(form,bool)),bool))) M:prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool))))) cl:fun(form,bool)) ((#,:fun(fun(form,bool),fun(fun(form,bool),prod(fun(form,bool),fun(form,bool)))) c1:fun(form,bool)) c2:fun(form,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#isaresolvent:fun(fun(form,bool),fun(prod(fun(form,bool),fun(form,bool)),bool)) cl:fun(form,bool)) ((#,:fun(fun(form,bool),fun(fun(form,bool),prod(fun(form,bool),fun(form,bool)))) c1:fun(form,bool)) c2:fun(form,bool)))) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#forall:fun(fun(fun(num,num),bool),bool) (\v:fun(num,num). (((#holds:fun(prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))),fun(fun(num,num),fun(form,bool))) M:prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool))))) v:fun(num,num)) (#interp:fun(fun(form,bool),form) c1:fun(form,bool))))))) (#~:fun(bool,bool) (#forall:fun(fun(fun(num,num),bool),bool) (\v:fun(num,num). (((#holds:fun(prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))),fun(fun(num,num),fun(form,bool))) M:prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool))))) v:fun(num,num)) (#interp:fun(fun(form,bool),form) c2:fun(form,bool)))))))))))))))))
       #|allresolvents_sem =  |- (#forall:fun(fun(fun(fun(form,bool),bool),bool),bool) (\s1:fun(fun(form,bool),bool). (#forall:fun(fun(fun(fun(form,bool),bool),bool),bool) (\s2:fun(fun(form,bool),bool). (#forall:fun(fun(prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))),bool),bool) (\M:prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))). ((#=:fun(fun(fun(form,bool),bool),fun(fun(fun(form,bool),bool),bool)) (((#allresolvents_sem:fun(prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))),fun(fun(fun(form,bool),bool),fun(fun(fun(form,bool),bool),fun(fun(form,bool),bool)))) M:prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool))))) s1:fun(fun(form,bool),bool)) s2:fun(fun(form,bool),bool))) (#GSPEC:fun(fun(fun(form,bool),bool),fun(fun(form,bool),bool)) (\GEN%PVAR%1:fun(form,bool). (#?:fun(fun(fun(form,bool),bool),bool) (\c:fun(form,bool). (((#SETSPEC:fun(fun(form,bool),fun(bool,fun(fun(form,bool),bool))) GEN%PVAR%1:fun(form,bool)) (#?:fun(fun(fun(form,bool),bool),bool) (\c1:fun(form,bool). (#?:fun(fun(fun(form,bool),bool),bool) (\c2:fun(form,bool). ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(fun(form,bool),fun(fun(fun(form,bool),bool),bool)) c1:fun(form,bool)) s1:fun(fun(form,bool),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(fun(form,bool),fun(fun(fun(form,bool),bool),bool)) c2:fun(form,bool)) s2:fun(fun(form,bool),bool))) (((#isaresolvent_sem:fun(prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))),fun(fun(form,bool),fun(prod(fun(form,bool),fun(form,bool)),bool))) M:prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool))))) c:fun(form,bool)) ((#,:fun(fun(form,bool),fun(fun(form,bool),prod(fun(form,bool),fun(form,bool)))) c1:fun(form,bool)) c2:fun(form,bool)))))))))) c:fun(form,bool)))))))))))))
