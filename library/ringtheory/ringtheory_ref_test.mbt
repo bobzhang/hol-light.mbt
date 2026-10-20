@@ -28824,12 +28824,12 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|5 basis elements and 0 critical pairs
       #|Generating HOL version of scaled proof
       #|Library/ringtheory quotations (7052):
-      #|  (\\x y. ARB):A->A->A
-      #|  (\\x y. ARB):A->A->A
-      #|  (\\x. ARB):A->A
-      #|  ARB:A
-      #|  ARB:A
-      #|  {ARB:A}
+      #|  (x : A) => (y : A) => (ARB : A)
+      #|  (x : A) => (y : A) => (ARB : A)
+      #|  (x : A) => (ARB : A)
+      #|  (ARB : A)
+      #|  (ARB : A)
+      #|  {(ARB : A)}
       #|  ?s (z:A) w n a m.\n          z IN s /\\\n          w IN s /\\\n          (forall x. x IN s ==> n x IN s) /\\\n          (forall x y. x IN s /\\ y IN s ==> a x y IN s) /\\\n          (forall x y. x IN s /\\ y IN s ==> m x y IN s) /\\\n          (forall x y. x IN s /\\ y IN s ==> a x y = a y x) /\\\n          (forall x y z. x IN s /\\ y IN s /\\ z IN s ==> a x (a y z) = a (a x y) z) /\\\n          (forall x. x IN s ==> a z x = x) /\\\n          (forall x. x IN s ==> a (n x) x = z) /\\\n          (forall x y. x IN s /\\ y IN s ==> m x y = m y x) /\\\n          (forall x y z. x IN s /\\ y IN s /\\ z IN s ==> m x (m y z) = m (m x y) z) /\\\n          (forall x. x IN s ==> m w x = x) /\\\n          (forall x y z. x IN s /\\ y IN s /\\ z IN s\n                   ==>  m x (a y z) = a (m x y) (m x z))
       #|  (ring_carrier:(A)ring->A->bool) =\n    \\r. FST(ring_operations r)
       #|  (ring_0:(A)ring->A) =\n    \\r. FST(SND(ring_operations r))
@@ -28837,11 +28837,11 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  (ring_neg:(A)ring->A->A) =\n    \\r. FST(SND(SND(SND(ring_operations r))))
       #|  (ring_add:(A)ring->A->A->A) =\n    \\r. FST(SND(SND(SND(SND(ring_operations r)))))
       #|  (ring_mul:(A)ring->A->A->A) =\n    \\r. SND(SND(SND(SND(SND(ring_operations r)))))
-      #|  ring_sub r x y = ring_add r x (ring_neg r y)
+      #|  (ring_sub : (Ring[_], _, _) -> _)((r : Ring[_]), (x : _), (y : _)) == ring_add(r, x, ring_neg(r, y))
       #|  forall r r':A ring.\n        r = r' <=>\n        ring_carrier r = ring_carrier r' /\\\n        ring_0 r = ring_0 r' /\\\n        ring_1 r = ring_1 r' /\\\n        ring_neg r = ring_neg r' /\\\n        ring_add r = ring_add r' /\\\n        ring_mul r = ring_mul r'
       #|  (forall x. f(g x) = x) /\\ (forall y. P y <=> g(f y) = y) ==> forall x. P(g x)
-      #|  forall r:A ring. ring_0 r IN ring_carrier r
-      #|  forall r:A ring. ring_1 r IN ring_carrier r
+      #|  \226\136\128 r : Ring[A], IN(ring_0(r), ring_carrier(r))
+      #|  \226\136\128 r : Ring[A], IN(ring_1(r), ring_carrier(r))
       #|  forall r x:A. x IN ring_carrier r ==> ring_neg r x IN ring_carrier r
       #|  forall r x y:A. x IN ring_carrier r /\\ y IN ring_carrier r\n             ==> ring_add r x y IN ring_carrier r
       #|  forall r x y:A. x IN ring_carrier r /\\ y IN ring_carrier r\n             ==> ring_sub r x y IN ring_carrier r
@@ -28860,7 +28860,7 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r x:A. x IN ring_carrier r ==> ring_add r x (ring_neg r x) = ring_0 r
       #|  forall r:A ring.\n        (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r\n               ==> ring_add r x y = ring_add r y x) /\\\n        (forall x y z. x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                 z IN ring_carrier r\n                 ==> ring_add r (ring_add r x y) z =\n                     ring_add r x (ring_add r y z)) /\\\n        (forall x y z. x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                 z IN ring_carrier r\n                 ==> ring_add r x (ring_add r y z) =\n                     ring_add r y (ring_add r x z))
       #|  forall r:A ring.\n        (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r\n               ==> ring_mul r x y = ring_mul r y x) /\\\n        (forall x y z. x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                 z IN ring_carrier r\n                 ==> ring_mul r (ring_mul r x y) z =\n                     ring_mul r x (ring_mul r y z)) /\\\n        (forall x y z. x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                 z IN ring_carrier r\n                 ==> ring_mul r x (ring_mul r y z) =\n                     ring_mul r y (ring_mul r x z))
-      #|  \\y:A. ring_add r (ring_neg r x) y
+      #|  (y : A) => ring_add((r : Ring[A]), ring_neg(r, (x : A)), y)
       #|  forall r x y z:A.\n        x IN ring_carrier r /\\ y IN ring_carrier r /\\ z IN ring_carrier r\n        ==> (ring_add r x y = ring_add r x z <=> y = z)
       #|  forall r x y z:A.\n        x IN ring_carrier r /\\ y IN ring_carrier r /\\ z IN ring_carrier r\n        ==> (ring_add r x z = ring_add r y z <=> x = y)
       #|  forall r x y z:A.\n        x IN ring_carrier r /\\ y IN ring_carrier r /\\ z IN ring_carrier r /\\\n        ring_add r x y = ring_add r x z\n        ==> y = z
@@ -28875,7 +28875,7 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r x:A. x IN ring_carrier r ==> ring_neg r (ring_neg r x) = x
       #|  forall r x y:A.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> (ring_neg r x = y <=> ring_neg r y = x)
       #|  forall r x y:A.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> (ring_neg r x = ring_neg r y <=> x = y)
-      #|  forall r:A ring. ring_neg r (ring_0 r) = ring_0 r
+      #|  \226\136\128 r : Ring[A], ring_neg(r, ring_0(r)) == ring_0(r)
       #|  forall r x:A.\n        x IN ring_carrier r\n        ==> (ring_neg r x = ring_0 r <=> x = ring_0 r)
       #|  (x:A) IN ring_carrier r /\\ ring_add r x x = x ==> x = ring_0 r
       #|  forall r x:A. x IN ring_carrier r ==> ring_mul r (ring_0 r) x = ring_0 r
@@ -28894,319 +28894,319 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r x y z:A.\n        x IN ring_carrier r /\\ y IN ring_carrier r /\\ z IN ring_carrier r\n        ==> (ring_sub r x y = z <=> x = ring_add r z y)
       #|  forall r (a:A) b c.\n     a IN ring_carrier r /\\ b IN ring_carrier r /\\ c IN ring_carrier r\n     ==> ring_add r (ring_sub r a b) (ring_sub r b c) =\n         ring_sub r a c
       #|  forall r x y:A.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> ring_neg r (ring_sub r x y) = ring_sub r y x
-      #|  forall r:A ring. ~(ring_carrier r = {})
-      #|  trivial_ring r <=> ring_carrier r = {ring_0 r}
-      #|  forall r:A ring. trivial_ring r ==> FINITE(ring_carrier r)
+      #|  \226\136\128 r : Ring[A], !(ring_carrier(r) == {})
+      #|  (trivial_ring : (Ring[_]) -> Bool)((r : Ring[_])) == (ring_carrier(r) == {ring_0(r)})
+      #|  \226\136\128 r : Ring[A], trivial_ring(r) \226\134\146 FINITE(ring_carrier(r))
       #|  forall r:A ring. trivial_ring r <=> ring_carrier r SUBSET {ring_0 r}
-      #|  c IN s ==> (s = {c} <=> ?a. s = {a})
+      #|  IN((c : _), (s : (_) -> Bool)) \226\134\146 (s == {c}) == (\226\136\131 a : _, s == {a})
       #|  forall r:A ring. trivial_ring r <=> ?a. ring_carrier r = {a}
-      #|  (?a. s = {a}) <=> (?a. s SUBSET {a}) /\\ ~(s = {})
+      #|  (\226\136\131 a : _, (s : (_) -> Bool) == {a}) == ((\226\136\131 a : _, SUBSET(s, {a})) && !(s == {}))
       #|  forall r:A ring. trivial_ring r <=> ?a. ring_carrier r SUBSET {a}
-      #|  forall r:A ring. trivial_ring r <=> ring_1 r = ring_0 r
+      #|  \226\136\128 r : Ring[A], trivial_ring(r) == (ring_1(r) == ring_0(r))
       #|  forall r:A ring. ring_carrier r HAS_SIZE 1 <=> trivial_ring r
       #|  forall r:A ring. trivial_ring r <=> ring_carrier(r) HAS_SIZE 1
-      #|  r:A ring
-      #|  r:A ring
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  b:A
-      #|  a:A
+      #|  (r : Ring[A])
+      #|  (r : Ring[A])
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (b : A)
+      #|  (a : A)
       #|  forall r:A ring.\n        ring_carrier r HAS_SIZE 2 <=>\n        ~(trivial_ring r) /\\\n        ring_carrier r = {ring_0 r,ring_1 r}
       #|  singleton_ring (a:A) = ring({a},a,a,(\\x. a),(\\x y. a),(\\x y. a))
       #|  (forall a:A. ring_carrier(singleton_ring a) = {a}) /\\\n   (forall a:A. ring_0(singleton_ring a) = a) /\\\n   (forall a:A. ring_1(singleton_ring a) = a) /\\\n   (forall a:A. ring_neg(singleton_ring a) = \\x. a) /\\\n   (forall a:A. ring_add(singleton_ring a) = \\x y. a) /\\\n   (forall a:A. ring_mul(singleton_ring a) = \\x y. a)
-      #|  forall a:A. trivial_ring(singleton_ring a)
-      #|  forall a:A. FINITE(ring_carrier(singleton_ring a))
+      #|  \226\136\128 a : A, trivial_ring(singleton_ring(a))
+      #|  \226\136\128 a : A, FINITE(ring_carrier(singleton_ring(a)))
       #|  ring_of_num (r:A ring) 0 = ring_0 r /\\\n  ring_of_num (r:A ring) (SUC n) = ring_add r (ring_of_num r n) (ring_1 r)
       #|  ring_of_int (r:A ring) n =\n        if &0 <= n then ring_of_num r (num_of_int n)\n        else ring_neg r (ring_of_num r (num_of_int(--n)))
-      #|  forall(r:A ring) n. ring_of_num r n IN ring_carrier r
-      #|  forall(r:A ring) n. ring_of_int r n IN ring_carrier r
-      #|  forall(r:A ring) n. ring_of_int r (&n) = ring_of_num r n
-      #|  forall r:A ring. ring_of_num r 0 = ring_0 r
+      #|  \226\136\128 r : Ring[A], \226\136\128 n : Num, IN(ring_of_num(r, n), ring_carrier(r))
+      #|  \226\136\128 r : Ring[A], \226\136\128 n : Int, IN(ring_of_int(r, n), ring_carrier(r))
+      #|  \226\136\128 r : Ring[A], \226\136\128 n : Num, ring_of_int(r, int_of_num(n)) == ring_of_num(r, n)
+      #|  \226\136\128 r : Ring[A], ring_of_num(r, 0) == ring_0(r)
       #|  1
-      #|  forall r:A ring. ring_of_num r 1 = ring_1 r
+      #|  \226\136\128 r : Ring[A], ring_of_num(r, 1) == ring_1(r)
       #|  forall(r:A ring) m n.\n      ring_of_num r (m + n) = ring_add r (ring_of_num r m) (ring_of_num r n)
       #|  forall(r:A ring) m n.\n      ring_of_num r (m * n) = ring_mul r (ring_of_num r m) (ring_of_num r n)
-      #|  forall r:A ring. ring_of_int r (&0) = ring_0 r
-      #|  forall r:A ring. ring_of_int r (&1) = ring_1 r
-      #|  &0:int <= -- &n <=> &n:int = &0
+      #|  \226\136\128 r : Ring[A], ring_of_int(r, int_of_num(0)) == ring_0(r)
+      #|  \226\136\128 r : Ring[A], ring_of_int(r, int_of_num(1)) == ring_1(r)
+      #|  (int_of_num(0) <= -int_of_num((n : Num))) == (int_of_num(n) == int_of_num(0))
       #|  (forall(r:A ring) n. ring_of_int r (&n) = ring_of_num r n) /\\\n   (forall(r:A ring) n. ring_of_int r (-- &n) = ring_neg r (ring_of_num r n))
       #|  forall(r:A ring) n. ring_of_int r (--n) = ring_neg r (ring_of_int r n)
       #|  x IN ring_carrier r /\\ y IN ring_carrier r /\\ ring_add r x y = z\n    ==> ring_add r y x = z
       #|  forall x y. x IN ring_carrier r /\\ y IN ring_carrier r\n         ==> ring_add r (ring_neg r x) y = ring_add r y (ring_neg r x)
       #|  (&a + &b:int = -- &c <=> &a:int = &0 /\\ &b:int = &0 /\\ &c:int = &0) /\\\n    (forall m n p. m + --n:int = &p <=> m = n + &p) /\\\n    (forall m n p. m + --n:int = -- &p <=> m + &p = n)
-      #|  --b + a:int = a + --b
+      #|  -(b : Int) + (a : Int) == a + -b
       #|  forall(r:A ring) m n p.\n        m + n = p ==>\n      ring_of_int r p = ring_add r (ring_of_int r m) (ring_of_int r n)
       #|  forall(r:A ring) m n.\n      ring_of_int r (m + n) = ring_add r (ring_of_int r m) (ring_of_int r n)
       #|  forall(r:A ring) m n.\n      ring_of_int r (m * n) = ring_mul r (ring_of_int r m) (ring_of_int r n)
       #|  forall(r:A ring) m n.\n      ring_of_int r (m - n) = ring_sub r (ring_of_int r m) (ring_of_int r n)
-      #|  \\n. ring_of_num r n:A
-      #|  \\x:A. x = ring_0 r
+      #|  (n : Num) => ring_of_num((r : Ring[A]), n)
+      #|  (x : A) => x == ring_0((r : Ring[A]))
       #|  forall r:A ring. ?p. forall n. ring_of_num r n = ring_0 r <=> p divides n
       #|  (forall n:num. n divides n) /\\ (forall n. 0 divides n <=> n = 0)
       #|  forall r:A ring. ring_char r = 0 <=> forall n. ring_of_num r n = ring_0 r <=> n = 0
-      #|  forall r:A ring. ring_char r = 1 <=> trivial_ring r
+      #|  \226\136\128 r : Ring[A], (ring_char(r) == 1) == trivial_ring(r)
       #|  forall(r:A ring) n.\n        ring_of_int r n = ring_0 r <=> &(ring_char r) divides n
       #|  forall(r:A ring) m n.\n        ring_of_int r m = ring_of_int r n <=> (m == n) (mod &(ring_char r))
       #|  forall(r:A ring) m n.\n        ring_of_num r m = ring_of_num r n <=> (m == n) (mod (ring_char r))
       #|  forall(f:A ring) n. ring_of_int f (n rem &(ring_char f)) = ring_of_int f n
       #|  forall(f:A ring) n. ring_of_num f (n MOD ring_char f) = ring_of_num f n
-      #|  forall r:A ring. ring_of_num r (ring_char r) = ring_0 r
-      #|  (:num)
-      #|  ring_of_num r:num->A
+      #|  \226\136\128 r : Ring[A], ring_of_num(r, ring_char(r)) == ring_0(r)
+      #|  (UNIV : (Num) -> Bool)
+      #|  ring_of_num((r : Ring[A]))
       #|  forall r:A ring. ring_char r = 0 ==> INFINITE(ring_carrier r)
       #|  forall r:A ring. FINITE(ring_carrier r) ==> ~(ring_char r = 0)
       #|  forall m n p:num. m divides n /\\ n divides p ==> m divides p
-      #|  forall n:num. n divides n
+      #|  \226\136\128 n : Num, divides(n, n)
       #|  forall(r:A ring) p.\n        ring_char r = p <=> forall n. ring_of_num r n = ring_0 r <=> p divides n
       #|  ring_pow r x 0 = ring_1 r /\\\n  ring_pow r x (SUC n) = ring_mul r x (ring_pow r x n)
       #|  forall r (x:A) n. x IN ring_carrier r ==> ring_pow r x n IN ring_carrier r
       #|  forall r k. ring_pow r (ring_0 r) k = if k = 0 then ring_1 r else ring_0 r
-      #|  forall r (x:A). ring_pow r x 0 = ring_1 r
+      #|  \226\136\128 r : Ring[A], \226\136\128 x : A, ring_pow(r, x, 0) == ring_1(r)
       #|  1
-      #|  forall r x:A. x IN ring_carrier r ==> ring_pow r x 1 = x
+      #|  \226\136\128 r : Ring[A], \226\136\128 x : A, IN(x, ring_carrier(r)) \226\134\146 ring_pow(r, x, 1) == x
       #|  1
       #|  2
       #|  forall r x:A. x IN ring_carrier r ==> ring_pow r x 2 = ring_mul r x x
-      #|  forall n. ring_pow r (ring_1 r) n = ring_1 r
+      #|  \226\136\128 n : Num, ring_pow((r : Ring[_]), ring_1(r), n) == ring_1(r)
       #|  forall r (x:A) m n.\n        x IN ring_carrier r\n        ==> ring_pow r x (m + n) =\n            ring_mul r (ring_pow r x m) (ring_pow r x n)
       #|  forall r (x:A) m n.\n        x IN ring_carrier r\n        ==> ring_pow r x (m * n) = ring_pow r (ring_pow r x m) n
       #|  forall r (x:A) m n.\n        x IN ring_carrier r\n        ==> ring_pow r (ring_pow r x m) n = ring_pow r x (m * n)
       #|  forall r (x:A) (y:A) n.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> ring_pow r (ring_mul r x y) n =\n            ring_mul r (ring_pow r x n) (ring_pow r y n)
       #|  forall(r:A ring) m n.\n        ring_of_num r (m EXP n) = ring_pow r (ring_of_num r m) n
       #|  forall(r:A ring) x n.\n        ring_of_int r (x pow n) = ring_pow r (ring_of_int r x) n
-      #|  n:num
+      #|  (n : Num)
       #|  forall r (x:A) n.\n        x IN ring_carrier r\n        ==> ring_pow r (ring_neg r x) n =\n            if EVEN n then ring_pow r x n else ring_neg r (ring_pow r x n)
       #|  forall r (x:A) n.\n        x IN ring_carrier r /\\ ring_mul r x x = x\n        ==> ring_pow r x n = if n = 0 then ring_1 r else x
       #|  (forall(r:A ring).\n     ring_0 r = ring_of_num r 0) /\\\n   (forall(r:A ring).\n     ring_1 r = ring_of_num r 1) /\\\n   (forall(r:A ring) m n.\n     ring_add r (ring_of_num r m) (ring_of_num r n) = ring_of_num r (m + n)) /\\\n   (forall(r:A ring) m n.\n     ring_mul r (ring_of_num r m) (ring_of_num r n) = ring_of_num r (m * n)) /\\\n   (forall(r:A ring) m n.\n     ring_pow r (ring_of_num r m) n = ring_of_num r (m EXP n))
       #|  (forall(r:A ring).\n     ring_0 r = ring_of_int r (&0)) /\\\n   (forall(r:A ring).\n     ring_1 r = ring_of_int r (&1)) /\\\n   (forall(r:A ring) n.\n     ring_neg r (ring_of_int r n) = ring_of_int r (--n)) /\\\n   (forall(r:A ring) m n.\n     ring_add r (ring_of_int r m) (ring_of_int r n) = ring_of_int r (m + n)) /\\\n   (forall(r:A ring) m n.\n     ring_sub r (ring_of_int r m) (ring_of_int r n) = ring_of_int r (m - n)) /\\\n   (forall(r:A ring) m n.\n     ring_mul r (ring_of_int r m) (ring_of_int r n) = ring_of_int r (m * n)) /\\\n   (forall(r:A ring) m n.\n     ring_pow r (ring_of_int r m) n = ring_of_int r (m pow n))
       #|  ring_sum r s (f:K->A) =\n        iterate (\\x y. if x IN ring_carrier r /\\ y IN ring_carrier r\n                       then ring_add r x y\n                       else if x IN ring_carrier r then y\n                       else if y IN ring_carrier r then x\n                       else @z:A. ~(z IN ring_carrier r))\n                {x | x IN s /\\ f(x) IN ring_carrier r} f
-      #|  ring_0 r:A
-      #|  x:A
+      #|  ring_0((r : Ring[A]))
+      #|  (x : A)
       #|  forall r:A ring.\n        neutral (\\x y. if x IN ring_carrier r /\\ y IN ring_carrier r\n                       then ring_add r x y\n                       else if x IN ring_carrier r then y\n                       else if y IN ring_carrier r then x\n                       else @z. ~(z IN ring_carrier r)) = ring_0 r
-      #|  (z:A) IN ring_carrier r
-      #|  (y:A) IN ring_carrier r
-      #|  (x:A) IN ring_carrier r
-      #|  z:A
-      #|  y:A
-      #|  x:A
+      #|  IN((z : A), ring_carrier((r : Ring[A])))
+      #|  IN((y : A), ring_carrier((r : Ring[A])))
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
+      #|  (z : A)
+      #|  (y : A)
+      #|  (x : A)
       #|  forall r:A ring.\n        monoidal (\\x y. if x IN ring_carrier r /\\ y IN ring_carrier r\n                        then ring_add r x y\n                        else if x IN ring_carrier r then y\n                         else if y IN ring_carrier r then x\n                        else @z. ~(z IN ring_carrier r))
-      #|  r:C ring
-      #|  \\x:B. x IN ring_carrier r
-      #|  forall r s (f:K->A). ring_sum r s f IN ring_carrier r
+      #|  (r : Ring[C])
+      #|  (x : B) => IN(x, ring_carrier((r : Ring[B])))
+      #|  \226\136\128 r : Ring[A], \226\136\128 s : (K) -> Bool, \226\136\128 f : (K) -> A, IN(ring_sum(r, s, f), ring_carrier(r))
       #|  forall s f. ring_sum r {a | a IN s /\\ f a IN ring_carrier r} f = ring_sum r s f
       #|  forall s (f:K->A).\n        ring_sum r {a | a IN s /\\ ~(f a = ring_0 r)} f = ring_sum r s f
-      #|  ((p /\\ q) /\\ r) /\\ q <=> p /\\ r /\\ q
+      #|  ((((p : Bool) && (q : Bool)) && (r : Bool)) && q) == (p && r && q)
       #|  forall r k (f:K->A).\n        INFINITE {i | i IN k /\\ f i IN ring_carrier r /\\ ~(f i = ring_0 r)}\n        ==> ring_sum r k f = ring_0 r
-      #|  {x | x IN {} /\\ P x} = {}
+      #|  {(x : _) | IN(x, {}) && (P : (_) -> Bool)(x)} == {}
       #|  (forall r f:K->A. ring_sum r {} f = ring_0 r) /\\\n   (forall r x (f:K->A) s.\n          FINITE s\n          ==> ring_sum r (x INSERT s) f =\n              (if f(x) IN ring_carrier r ==> x IN s\n               then ring_sum r s f else ring_add r (f x) (ring_sum r s f)))
       #|  forall r (f:K->A) a.\n        ring_sum r {a} f = if f a IN ring_carrier r then f a else ring_0 r
-      #|  ~(SUC n <= n)
-      #|  m <= SUC n
-      #|  m = 0
+      #|  !(SUC((n : Num)) <= n)
+      #|  (m : Num) <= SUC((n : Num))
+      #|  (m : Num) == 0
       #|  (forall r m f:num->A.\n        ring_sum r (m..0) f =\n        if m = 0 /\\ f 0 IN ring_carrier r then f 0 else ring_0 r) /\\\n   (forall r m n f:num->A.\n        ring_sum r (m..SUC n) f =\n        if m <= SUC n /\\ f(SUC n) IN ring_carrier r\n        then ring_add r (f(SUC n)) (ring_sum r (m..n) f)\n        else ring_sum r (m..n) f)
       #|  (forall r m f:num->A.\n        ring_sum r (m..0) f =\n        if m = 0 /\\ f 0 IN ring_carrier r then f 0 else ring_0 r) /\\\n   (forall r m n f:num->A.\n        ring_sum r (m..SUC n) f =\n        if m <= SUC n /\\ f(SUC n) IN ring_carrier r\n        then ring_add r (ring_sum r (m..n) f) (f(SUC n))\n        else ring_sum r (m..n) f)
-      #|  ~(n + 1 <= n)
+      #|  !((n : Num) + 1 <= n)
       #|  forall r (f:num->A) m n.\n        m <= n\n        ==> ring_sum r (m..n) f =\n            if f m IN ring_carrier r\n            then ring_add r (f m) (ring_sum r (m+1..n) f)\n            else ring_sum r (m+1..n) f
-      #|  n <= n - 1 <=> n = 0
+      #|  ((n : Num) <= n - 1) == (n == 0)
       #|  forall r (f:num->A) m n.\n        0 < n /\\ m <= n\n        ==> ring_sum r (m..n) f =\n            if f n IN ring_carrier r\n            then ring_add r (ring_sum r (m..n-1) f) (f n)\n            else ring_sum r (m..n-1) f
-      #|  r:C ring
+      #|  (r : Ring[C])
       #|  forall r (f:K->A) s t.\n        FINITE s /\\ FINITE t /\\ DISJOINT s t\n        ==> ring_sum r (s UNION t) f =\n            ring_add r (ring_sum r s f) (ring_sum r t f)
-      #|  r:C ring
+      #|  (r : Ring[C])
       #|  forall r (f:K->A) s t.\n        FINITE s /\\ t SUBSET s\n        ==> ring_sum r (s DIFF t) f =\n            ring_sub r (ring_sum r s f) (ring_sum r t f)
-      #|  r:C ring
+      #|  (r : Ring[C])
       #|  forall r (f:K->A) s t.\n        FINITE s /\\ FINITE t\n        ==> ring_add r (ring_sum r s f) (ring_sum r t f) =\n            ring_add r (ring_sum r (s UNION t) f)\n                       (ring_sum r (s INTER t) f)
-      #|  r:C ring
-      #|  {a | a IN s /\\ (f:K->A) a IN ring_carrier r}
-      #|  f:K->A
-      #|  \\x:A. x IN ring_carrier r /\\ P x
+      #|  (r : Ring[C])
+      #|  {(a : K) | IN(a, (s : (K) -> Bool)) && IN((f : (K) -> A)(a), ring_carrier((r : Ring[A])))}
+      #|  (f : (K) -> A)
+      #|  (x : A) => IN(x, ring_carrier((r : Ring[A]))) && (P : (A) -> Bool)(x)
       #|  forall r P (f:K->A) s.\n        P(ring_0 r) /\\\n        (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\ P x /\\ P y\n               ==> P(ring_add r x y)) /\\\n        (forall a. a IN s ==> P(f a))\n        ==> P(ring_sum r s f)
-      #|  p /\\ q /\\ r ==> s <=> p /\\ q ==> r ==> s
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (p && q \226\134\146 r \226\134\146 s)
       #|  forall r R (f:K->A) g s.\n        R (ring_0 r) (ring_0 r)/\\\n        (forall x y x' y'. x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                     x' IN ring_carrier r /\\ y' IN ring_carrier r /\\\n                     R x y /\\ R x' y'\n                     ==> R (ring_add r x x') (ring_add r y y')) /\\\n        FINITE s /\\\n        (forall a. a IN s\n             ==> (f a IN ring_carrier r <=> g a IN ring_carrier r) /\\\n                 R (f a) (g a))\n        ==> R (ring_sum r s f) (ring_sum r s g)
-      #|  s = {} ==> ring_sum r s f = ring_0 r
+      #|  (s : (_) -> Bool) == {} \226\134\146 ring_sum((r : Ring[_]), s, (f : (_) -> _)) == ring_0(r)
       #|  forall r (f:K->A) s.\n        (forall a. a IN s /\\ f a IN ring_carrier r ==> f a = ring_0 r)\n        ==> ring_sum r s f = ring_0 r
-      #|  forall r s. ring_sum r s (\\i:K. ring_0 r):A = ring_0 r
-      #|  s = (a:K) INSERT t
-      #|  t = s DELETE (a:K)
-      #|  (a:K) IN s
+      #|  \226\136\128 r : Ring[A], \226\136\128 s : (K) -> Bool, ring_sum(r, s, (i : K) => ring_0(r)) == ring_0(r)
+      #|  (s : (K) -> Bool) == INSERT((a : K), (t : (K) -> Bool))
+      #|  (t : (K) -> Bool) == DELETE((s : (K) -> Bool), (a : K))
+      #|  IN((a : K), (s : (K) -> Bool))
       #|  forall r (f:K->A) s a.\n        FINITE s /\\ a IN s /\\ f a IN ring_carrier r\n        ==> ring_sum r (s DELETE a) f = ring_sub r (ring_sum r s f) (f a)
       #|  forall r (f:K->A) s.\n        FINITE s /\\\n        (forall a. a IN s ==> f a IN ring_carrier r)\n        ==> ring_sum r s (\\x. ring_neg r (f x)) =\n            ring_neg r (ring_sum r s f)
       #|  forall r (f:K->A) (g:K->A) s.\n        FINITE s /\\\n        (forall a. a IN s ==> f a IN ring_carrier r /\\ g a IN ring_carrier r)\n        ==> ring_sum r s (\\x. ring_add r (f x) (g x)) =\n            ring_add r (ring_sum r s f) (ring_sum r s g)
       #|  forall r (f:K->A) (g:K->A) s.\n        FINITE s /\\\n        (forall a. a IN s ==> f a IN ring_carrier r /\\ g a IN ring_carrier r)\n        ==> ring_sum r s (\\x. ring_sub r (f x) (g x)) =\n            ring_sub r (ring_sum r s f) (ring_sum r s g)
-      #|  r:C ring
+      #|  (r : Ring[C])
       #|  {a | a IN s /\\ (g:K->A) a IN ring_carrier r} =\n    {a | a IN s /\\ (f:K->A) a IN ring_carrier r}
       #|  forall r (f:K->A) g s.\n        (forall a. a IN s ==> f a = g a) ==> ring_sum r s f = ring_sum r s g
-      #|  i IN s ==> {j | j IN s /\\ j = i} = {i}
-      #|  ~((p /\\ q) /\\ ~q)
-      #|  (a:A) IN ring_carrier r
-      #|  a:A = ring_0 r
+      #|  IN((i : _), (s : (_) -> Bool)) \226\134\146 {(j : _) | IN(j, s) && j == i} == {i}
+      #|  !(((p : Bool) && (q : Bool)) && !q)
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  (a : A) == ring_0((r : Ring[A]))
       #|  ~(i IN s) ==> {j | (j IN s /\\ j = i /\\ P j) /\\ Q j} = {}
-      #|  (i:K) IN s
-      #|  (if p then q else T) <=> p ==> q
+      #|  IN((i : K), (s : (K) -> Bool))
+      #|  (if (p : Bool) { (q : Bool) } else { true }) == (p \226\134\146 q)
       #|  forall r s (i:K) (a:A).\n        ring_sum r s (\\j. if j = i then a else ring_0 r) =\n        if i IN s /\\ a IN ring_carrier r then a else ring_0 r
       #|  forall r (f:K->A) c s.\n        c IN ring_carrier r /\\\n        FINITE s /\\\n        (forall a. a IN s ==> f a IN ring_carrier r)\n        ==> ring_sum r s (\\x. ring_mul r c (f x)) =\n            ring_mul r c (ring_sum r s f)
       #|  forall r (f:K->A) c s.\n        c IN ring_carrier r /\\\n        FINITE s /\\\n        (forall a. a IN s ==> f a IN ring_carrier r)\n        ==> ring_sum r s (\\x. ring_mul r (f x) c) =\n            ring_mul r (ring_sum r s f) c
       #|  forall r (f:K->L->A) s t.\n        FINITE s /\\ FINITE t /\\\n        (forall i j. i IN s /\\ j IN t ==> f i j IN ring_carrier r)\n        ==> ring_sum r s (\\i. ring_sum r t (f i)) =\n            ring_sum r t (\\j. ring_sum r s (\\i. f i j))
-      #|  r:C ring
-      #|  n:num
-      #|  m:num
-      #|  x:num->A
+      #|  (r : Ring[C])
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (x : (Num) -> A)
       #|  {x | P x /\\ f x IN s} = {x | P x /\\ (P x ==> f x IN s)}
       #|  ~(n < m)\n    ==> forall j. 0 <= j /\\ j <= n - m ==> (x:num->A) (n - j) IN ring_carrier r
       #|  forall r (x:num->A) m n.\n        (forall i. m <= i /\\ i <= n ==> x i IN ring_carrier r)\n        ==> ring_sum r (m..n) x =\n            if n < m then ring_0 r\n            else ring_sum r (0..n-m) (\\i. x(n - i))
-      #|  i:K
+      #|  (i : K)
       #|  monoidal op /\\ s = t /\\ (forall i. i IN s ==> f i = g i)\n    ==> iterate op s f = iterate op t g
-      #|  t' = t /\\ s' = s ==> s = t ==> s' = t'
-      #|  r:D ring
-      #|  x:K->L->A
-      #|  t:K->L->bool
-      #|  s:K->bool
+      #|  (t' : _) == (t : _) && (s' : _) == (s : _) \226\134\146 s == t \226\134\146 s' == t'
+      #|  (r : Ring[D])
+      #|  (x : (K, L) -> A)
+      #|  (t : (K, L) -> Bool)
+      #|  (s : (K) -> Bool)
       #|  forall r s t (x:K->L->A).\n        FINITE s /\\\n        (forall i. i IN s ==> FINITE(t i)) /\\\n        (forall i j. i IN s /\\ j IN t i ==> x i j IN ring_carrier r)\n        ==> ring_sum r s (\\i. ring_sum r (t i) (x i)) =\n            ring_sum r {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)
       #|  forall r (f:K->A) u v.\n        u SUBSET v /\\ (forall x. x IN v /\\ ~(x IN u) ==> f x = ring_0 r)\n        ==> ring_sum r v f = ring_sum r u f
       #|  ring_sum r s' f = ring_sum r s' f' /\\\n    ring_sum r s f' = ring_sum r s' f'\n    ==> ring_sum r s' f = ring_sum r s f'
       #|  forall P r s (f:K->A).\n        ring_sum r {x | x IN s /\\ P x} f =\n        ring_sum r s (\\x. if P x then f x else ring_0 r)
-      #|  {x:K | x IN s /\\ ~P x}
-      #|  {x:K | x IN s /\\ P x}
-      #|  \\x. if P x then (f:K->A) x else g x
-      #|  r:A ring
+      #|  {(x : K) | IN(x, (s : (K) -> Bool)) && !(P : (K) -> Bool)(x)}
+      #|  {(x : K) | IN(x, (s : (K) -> Bool)) && (P : (K) -> Bool)(x)}
+      #|  (x : K) => if (P : (K) -> Bool)(x) { (f : (K) -> A)(x) } else { (g : (K) -> A)(x) }
+      #|  (r : Ring[A])
       #|  forall r s P (f:K->A) g.\n        FINITE s\n        ==> ring_sum r s (\\x. if P x then f x else g x) =\n            ring_add r (ring_sum r {x | x IN s /\\ P x} f)\n                       (ring_sum r {x | x IN s /\\ ~P x} g)
-      #|  r:C ring
+      #|  (r : Ring[C])
       #|  forall r (f:K->L) (g:L->A) s.\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> ring_sum r (IMAGE f s) g = ring_sum r s (g o f)
-      #|  ring_sum r s ((g:L->A) o (h:K->L))
+      #|  ring_sum((r : Ring[A]), (s : (K) -> Bool), o((g : (L) -> A), (h : (K) -> L)))
       #|  forall r s t (f:K->A) (g:L->A) h k.\n        (forall y. y IN t ==> k y IN s /\\ h (k y) = y) /\\\n        (forall x. x IN s ==> h x IN t /\\ k (h x) = x /\\ g (h x) = f x)\n        ==> ring_sum r s f = ring_sum r t g
       #|  forall p r (f:num->A) m n.\n        ring_sum r (m+p..n+p) f = ring_sum r (m..n) (\\i. f(i + p))
       #|  forall(r:A ring) (c:A) (s:B->bool).\n        FINITE s /\\ c IN ring_carrier r\n        ==> ring_sum r s (\\i. c) = ring_mul r (ring_of_num r (CARD s)) c
       #|  (x IN s /\\ f x = a) /\\ P x <=>\n                        x IN {x | x IN s /\\ f x = a} /\\ P x
       #|  (x IN s /\\ y IN t) /\\ a = b <=> (x IN s /\\ a = b) /\\ y IN t
-      #|  r:C ring
-      #|  {x | x IN s /\\ (g:K->A) x IN ring_carrier r}
-      #|  g:K->A
-      #|  f:K->B
+      #|  (r : Ring[C])
+      #|  {(x : K) | IN(x, (s : (K) -> Bool)) && IN((g : (K) -> A)(x), ring_carrier((r : Ring[A])))}
+      #|  (g : (K) -> A)
+      #|  (f : (K) -> B)
       #|  forall r (f:K->B) (g:K->A) s.\n         FINITE s\n         ==> ring_sum r s g =\n             ring_sum r (IMAGE f s)\n                        (\\y. ring_sum r {x | x IN s /\\ f x = y} g)
-      #|  k <= n ==> SUC n - k = SUC(n - k)
-      #|  ring_sum r (m+1..n+1) (\\i. f i)
+      #|  (k : Num) <= (n : Num) \226\134\146 SUC(n) - k == SUC(n - k)
+      #|  ring_sum((r : Ring[_]), op_dot_dot((m : Num) + 1, (n : Num) + 1), (i : Num) => (f : (Num) -> _)(i))
       #|  a IN ring_carrier r /\\ b IN ring_carrier r /\\ c IN ring_carrier r /\\\n    d IN ring_carrier r /\\ e IN ring_carrier r /\\\n    a = e /\\ b = ring_add r c d\n    ==> ring_add r a b = ring_add r c (ring_add r d e)
-      #|  0 <= n + 1
+      #|  0 <= (n : Num) + 1
       #|  forall r n x y:A.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> ring_pow r (ring_add r x y) n =\n            ring_sum r (0..n)\n              (\\k. ring_mul r (ring_of_num r (binom(n,k)))\n                    (ring_mul r (ring_pow r x k) (ring_pow r y (n - k))))
       #|  x = ring_0 r /\\ y IN ring_carrier r ==> ring_mul r x y = ring_0 r
-      #|  i:num
+      #|  (i : Num)
       #|  forall(r:A ring) x y.\n        prime(ring_char r) /\\\n        x IN ring_carrier r /\\ y IN ring_carrier r\n         ==> ring_pow r (ring_add r x y) (ring_char r) =\n             ring_add r (ring_pow r x (ring_char r))\n                        (ring_pow r y (ring_char r))
-      #|  i <= n ==> i <= SUC n
-      #|  n <= SUC n
+      #|  (i : Num) <= (n : Num) \226\134\146 i <= SUC(n)
+      #|  (n : Num) <= SUC(n)
       #|  forall r (f:num->A) n.\n          (forall i. i <= n + 1 ==> f i IN ring_carrier r)\n          ==> ring_sum r (0..n) (\\k. ring_sub r (f k) (f(SUC k))) =\n              ring_sub r (f 0) (f(SUC n))
-      #|  d:num
-      #|  \\i. (f:num->A)(i + m)
-      #|  r:A ring
-      #|  d:num
+      #|  (d : Num)
+      #|  (i : Num) => (f : (Num) -> A)(i + (m : Num))
+      #|  (r : Ring[A])
+      #|  (d : Num)
       #|  forall r (f:num->A) m n.\n        (forall i. m <= i /\\ i <= n + 1 ==> f i IN ring_carrier r)\n        ==> ring_sum r (m..n) (\\k. ring_sub r (f k) (f(k + 1))) =\n            if m <= n then ring_sub r (f m) (f(n + 1)) else ring_0 r
-      #|  ring_neg (r:A ring)
+      #|  ring_neg((r : Ring[A]))
       #|  forall r (f:num->A) m n.\n        (forall i. m <= i /\\ i <= n + 1 ==> f i IN ring_carrier r)\n        ==> ring_sum r (m..n) (\\k. ring_sub r (f(k + 1)) (f k)) =\n            if m <= n then ring_sub r (f(n + 1)) (f m) else ring_0 r
-      #|  i <= n ==> SUC n - i = SUC(n - i)
-      #|  i:num
-      #|  n:num
+      #|  (i : Num) <= (n : Num) \226\134\146 SUC(n) - i == SUC(n - i)
+      #|  (i : Num)
+      #|  (n : Num)
       #|  0
       #|  \\i. ring_mul r (ring_pow r x i:A) (ring_pow r y (SUC n - i))
-      #|  r:A ring
+      #|  (r : Ring[A])
       #|  forall(r:A ring) x y n.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> ring_mul r (ring_sub r x y)\n             (ring_sum r (0..n)\n                (\\i. ring_mul r (ring_pow r x i) (ring_pow r y (n - i)))) =\n             ring_sub r (ring_pow r x (SUC n)) (ring_pow r y (SUC n))
-      #|  n:num
-      #|  ring_1 r:A
-      #|  x:A
-      #|  r:A ring
+      #|  (n : Num)
+      #|  ring_1((r : Ring[A]))
+      #|  (x : A)
+      #|  (r : Ring[A])
       #|  forall r (x:A) n.\n        x IN ring_carrier r\n        ==> ring_mul r (ring_sub r x (ring_1 r))\n                       (ring_sum r (0..n) (\\i. ring_pow r x i)) =\n            ring_sub r (ring_pow r x (SUC n)) (ring_1 r)
       #|  forall r (f:K->A) g s.\n    (forall a. a IN s ==> f a = g a) ==> ring_sum r s (\\i. f i) = ring_sum r s g
       #|  ring_product r s (f:K->A) =\n        iterate (\\x y. if x IN ring_carrier r /\\ y IN ring_carrier r\n                       then ring_mul r x y\n                       else if x IN ring_carrier r then y\n                       else if y IN ring_carrier r then x\n                       else @z:A. ~(z IN ring_carrier r))\n                {x | x IN s /\\ f(x) IN ring_carrier r} f
-      #|  ring_1 r:A
-      #|  x:A
+      #|  ring_1((r : Ring[A]))
+      #|  (x : A)
       #|  forall r:A ring.\n        neutral (\\x y. if x IN ring_carrier r /\\ y IN ring_carrier r\n                       then ring_mul r x y\n                       else if x IN ring_carrier r then y\n                       else if y IN ring_carrier r then x\n                       else @z. ~(z IN ring_carrier r)) = ring_1 r
-      #|  (z:A) IN ring_carrier r
-      #|  (y:A) IN ring_carrier r
-      #|  (x:A) IN ring_carrier r
-      #|  z:A
-      #|  y:A
-      #|  x:A
+      #|  IN((z : A), ring_carrier((r : Ring[A])))
+      #|  IN((y : A), ring_carrier((r : Ring[A])))
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
+      #|  (z : A)
+      #|  (y : A)
+      #|  (x : A)
       #|  forall r:A ring.\n        monoidal (\\x y. if x IN ring_carrier r /\\ y IN ring_carrier r\n                        then ring_mul r x y\n                        else if x IN ring_carrier r then y\n                         else if y IN ring_carrier r then x\n                        else @z. ~(z IN ring_carrier r))
-      #|  r:C ring
-      #|  \\x:B. x IN ring_carrier r
-      #|  forall r s (f:K->A). ring_product r s f IN ring_carrier r
+      #|  (r : Ring[C])
+      #|  (x : B) => IN(x, ring_carrier((r : Ring[B])))
+      #|  \226\136\128 r : Ring[A], \226\136\128 s : (K) -> Bool, \226\136\128 f : (K) -> A, IN(ring_product(r, s, f), ring_carrier(r))
       #|  forall s f. ring_product r {a | a IN s /\\ f a IN ring_carrier r} f =\n         ring_product r s f
       #|  forall s (f:K->A).\n        ring_product r {a | a IN s /\\ ~(f a = ring_1 r)} f =\n        ring_product r s f
-      #|  ((p /\\ q) /\\ r) /\\ q <=> p /\\ r /\\ q
+      #|  ((((p : Bool) && (q : Bool)) && (r : Bool)) && q) == (p && r && q)
       #|  forall r k (f:K->A).\n        INFINITE {i | i IN k /\\ f i IN ring_carrier r /\\ ~(f i = ring_1 r)}\n        ==> ring_product r k f = ring_1 r
-      #|  {x | x IN {} /\\ P x} = {}
+      #|  {(x : _) | IN(x, {}) && (P : (_) -> Bool)(x)} == {}
       #|  (forall r f:K->A. ring_product r {} f = ring_1 r) /\\\n   (forall r x (f:K->A) s.\n          FINITE s\n          ==> ring_product r (x INSERT s) f =\n              (if f(x) IN ring_carrier r ==> x IN s\n               then ring_product r s f\n               else ring_mul r (f x) (ring_product r s f)))
       #|  forall r (f:K->A) a.\n       ring_product r {a} f = if f a IN ring_carrier r then f a else ring_1 r
-      #|  ~(SUC n <= n)
-      #|  m <= SUC n
-      #|  m = 0
+      #|  !(SUC((n : Num)) <= n)
+      #|  (m : Num) <= SUC((n : Num))
+      #|  (m : Num) == 0
       #|  (forall r m f:num->A.\n        ring_product r (m..0) f =\n        if m = 0 /\\ f 0 IN ring_carrier r then f 0 else ring_1 r) /\\\n   (forall r m n f:num->A.\n        ring_product r (m..SUC n) f =\n        if m <= SUC n /\\ f(SUC n) IN ring_carrier r\n        then ring_mul r (f(SUC n)) (ring_product r (m..n) f)\n        else ring_product r (m..n) f)
       #|  (forall r m f:num->A.\n        ring_product r (m..0) f =\n        if m = 0 /\\ f 0 IN ring_carrier r then f 0 else ring_1 r) /\\\n   (forall r m n f:num->A.\n        ring_product r (m..SUC n) f =\n        if m <= SUC n /\\ f(SUC n) IN ring_carrier r\n        then ring_mul r (ring_product r (m..n) f) (f(SUC n))\n        else ring_product r (m..n) f)
-      #|  ~(n + 1 <= n)
+      #|  !((n : Num) + 1 <= n)
       #|  forall r (f:num->A) m n.\n        m <= n\n        ==> ring_product r (m..n) f =\n            if f m IN ring_carrier r\n            then ring_mul r (f m) (ring_product r (m+1..n) f)\n            else ring_product r (m+1..n) f
-      #|  r:C ring
+      #|  (r : Ring[C])
       #|  forall r (f:K->A) s t.\n        FINITE s /\\ FINITE t /\\ DISJOINT s t\n        ==> ring_product r (s UNION t) f =\n            ring_mul r (ring_product r s f) (ring_product r t f)
-      #|  r:C ring
+      #|  (r : Ring[C])
       #|  forall r (f:K->A) s t.\n        FINITE s /\\ FINITE t\n        ==> ring_mul r (ring_product r s f) (ring_product r t f) =\n            ring_mul r (ring_product r (s UNION t) f)\n                       (ring_product r (s INTER t) f)
-      #|  r:C ring
+      #|  (r : Ring[C])
       #|  {a | a IN s /\\ (f:K->A) a IN ring_carrier r}
-      #|  f:K->A
-      #|  \\x:A. x IN ring_carrier r /\\ P x
+      #|  (f : (K) -> A)
+      #|  (x : A) => IN(x, ring_carrier((r : Ring[A]))) && (P : (A) -> Bool)(x)
       #|  forall r P (f:K->A) s.\n        P(ring_1 r) /\\\n        (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\ P x /\\ P y\n               ==> P(ring_mul r x y)) /\\\n        (forall a. a IN s ==> P(f a))\n        ==> P(ring_product r s f)
-      #|  p /\\ q /\\ r ==> s <=> p /\\ q ==> r ==> s
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (p && q \226\134\146 r \226\134\146 s)
       #|  forall r R (f:K->A) g s.\n        R (ring_1 r) (ring_1 r)/\\\n        (forall x y x' y'. x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                     x' IN ring_carrier r /\\ y' IN ring_carrier r /\\\n                     R x y /\\ R x' y'\n                     ==> R (ring_mul r x x') (ring_mul r y y')) /\\\n        FINITE s /\\\n        (forall a. a IN s\n             ==> (f a IN ring_carrier r <=> g a IN ring_carrier r) /\\\n                 R (f a) (g a))\n        ==> R (ring_product r s f) (ring_product r s g)
-      #|  s = {} ==> ring_product r s f = ring_1 r
+      #|  (s : (_) -> Bool) == {} \226\134\146 ring_product((r : Ring[_]), s, (f : (_) -> _)) == ring_1(r)
       #|  forall r (f:K->A) s.\n        (forall a. a IN s /\\ f a IN ring_carrier r ==> f a = ring_1 r)\n        ==> ring_product r s f = ring_1 r
       #|  forall r s. ring_product r s (\\i:K. ring_1 r):A = ring_1 r
-      #|  s:K->bool
-      #|  s:K->bool
-      #|  FINITE(s:K->bool)
-      #|  FINITE(s:K->bool)
-      #|  (\\x. ring_0 r):K->A
-      #|  s:K->bool
-      #|  r:A ring
-      #|  trivial_ring(r:A ring)
+      #|  (s : (K) -> Bool)
+      #|  (s : (K) -> Bool)
+      #|  FINITE((s : (K) -> Bool))
+      #|  FINITE((s : (K) -> Bool))
+      #|  (x : K) => ring_0((r : Ring[A]))
+      #|  (s : (K) -> Bool)
+      #|  (r : Ring[A])
+      #|  trivial_ring((r : Ring[A]))
       #|  forall r s. ring_product r s (\\i:K. ring_0 r):A =\n         if s = {} \\/ INFINITE s then ring_1 r else ring_0 r
       #|  forall r (f:K->A) (g:K->A) s.\n        FINITE s /\\\n        (forall a. a IN s ==> f a IN ring_carrier r /\\ g a IN ring_carrier r)\n        ==> ring_product r s (\\x. ring_mul r (f x) (g x)) =\n            ring_mul r (ring_product r s f) (ring_product r s g)
-      #|  r:C ring
+      #|  (r : Ring[C])
       #|  {a | a IN s /\\ (g:K->A) a IN ring_carrier r} =\n    {a | a IN s /\\ (f:K->A) a IN ring_carrier r}
       #|  forall r (f:K->A) g s.\n       (forall a. a IN s ==> f a = g a) ==> ring_product r s f = ring_product r s g
-      #|  i IN s ==> {j | j IN s /\\ j = i} = {i}
-      #|  ~((p /\\ q) /\\ ~q)
-      #|  (a:A) IN ring_carrier r
-      #|  a:A = ring_1 r
+      #|  IN((i : _), (s : (_) -> Bool)) \226\134\146 {(j : _) | IN(j, s) && j == i} == {i}
+      #|  !(((p : Bool) && (q : Bool)) && !q)
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  (a : A) == ring_1((r : Ring[A]))
       #|  ~(i IN s) ==> {j | (j IN s /\\ j = i /\\ P j) /\\ Q j} = {}
-      #|  (i:K) IN s
-      #|  (if p then q else T) <=> p ==> q
+      #|  IN((i : K), (s : (K) -> Bool))
+      #|  (if (p : Bool) { (q : Bool) } else { true }) == (p \226\134\146 q)
       #|  forall r s (i:K) (a:A).\n        ring_product r s (\\j. if j = i then a else ring_1 r) =\n        if i IN s /\\ a IN ring_carrier r then a else ring_1 r
-      #|  t:K->bool
-      #|  a:K
+      #|  (t : (K) -> Bool)
+      #|  (a : K)
       #|  forall r (x:A) (s:K->bool).\n     FINITE s /\\ x IN ring_carrier r\n     ==> ring_product r s (\\i. x) = ring_pow r x (CARD s)
       #|  ring_product r s (\\y:A. ring_mul r x y) =\n     ring_mul r (ring_product r s (\\y:A. x)) (ring_product r s (\\y:A. y))
       #|  forall r (x:A) (s:A->bool).\n     FINITE s /\\ x IN ring_carrier r /\\\n     (forall y. y IN s ==> y IN ring_carrier r)\n     ==> ring_product r s (\\y. ring_mul r x y) =\n         ring_mul r (ring_pow r x (CARD s)) (ring_product r s (\\y. y))
       #|  forall r (f:K->L->A) s t.\n        FINITE s /\\ FINITE t /\\\n        (forall i j. i IN s /\\ j IN t ==> f i j IN ring_carrier r)\n        ==> ring_product r s (\\i. ring_product r t (f i)) =\n            ring_product r t (\\j. ring_product r s (\\i. f i j))
-      #|  r:C ring
-      #|  n:num
-      #|  m:num
-      #|  x:num->A
+      #|  (r : Ring[C])
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (x : (Num) -> A)
       #|  {x | P x /\\ f x IN s} = {x | P x /\\ (P x ==> f x IN s)}
       #|  ~(n < m)\n    ==> forall j. 0 <= j /\\ j <= n - m ==> (x:num->A) (n - j) IN ring_carrier r
       #|  forall r (x:num->A) m n.\n        (forall i. m <= i /\\ i <= n ==> x i IN ring_carrier r)\n        ==> ring_product r (m..n) x =\n            if n < m then ring_1 r\n            else ring_product r (0..n-m) (\\i. x(n - i))
       #|  forall r (f:K->A) u v.\n        u SUBSET v /\\ (forall x. x IN v /\\ ~(x IN u) ==> f x = ring_1 r)\n        ==> ring_product r v f = ring_product r u f
       #|  ring_product r s' f = ring_product r s' f' /\\\n    ring_product r s f' = ring_product r s' f'\n    ==> ring_product r s' f = ring_product r s f'
       #|  forall P r s (f:K->A).\n        ring_product r {x | x IN s /\\ P x} f =\n        ring_product r s (\\x. if P x then f x else ring_1 r)
-      #|  {x:K | x IN s /\\ ~P x}
-      #|  {x:K | x IN s /\\ P x}
-      #|  \\x. if P x then (f:K->A) x else g x
-      #|  r:A ring
+      #|  {(x : K) | IN(x, (s : (K) -> Bool)) && !(P : (K) -> Bool)(x)}
+      #|  {(x : K) | IN(x, (s : (K) -> Bool)) && (P : (K) -> Bool)(x)}
+      #|  (x : K) => if (P : (K) -> Bool)(x) { (f : (K) -> A)(x) } else { (g : (K) -> A)(x) }
+      #|  (r : Ring[A])
       #|  forall r s P (f:K->A) g.\n        FINITE s\n        ==> ring_product r s (\\x. if P x then f x else g x) =\n            ring_mul r (ring_product r {x | x IN s /\\ P x} f)\n                       (ring_product r {x | x IN s /\\ ~P x} g)
-      #|  r:C ring
+      #|  (r : Ring[C])
       #|  forall r (f:K->L) (g:L->A) s.\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> ring_product r (IMAGE f s) g = ring_product r s (g o f)
-      #|  ring_product r s ((g:L->A) o (h:K->L))
+      #|  ring_product((r : Ring[A]), (s : (K) -> Bool), o((g : (L) -> A), (h : (K) -> L)))
       #|  forall r s t (f:K->A) (g:L->A) h k.\n        (forall y. y IN t ==> k y IN s /\\ h (k y) = y) /\\\n        (forall x. x IN s ==> h x IN t /\\ k (h x) = x /\\ g (h x) = f x)\n        ==> ring_product r s f = ring_product r t g
       #|  forall p r (f:num->A) m n.\n        ring_product r (m+p..n+p) f = ring_product r (m..n) (\\i. f(i + p))
       #|  (x IN s /\\ f x = a) /\\ P x <=>\n                        x IN {x | x IN s /\\ f x = a} /\\ P x
       #|  (x IN s /\\ y IN t) /\\ a = b <=> (x IN s /\\ a = b) /\\ y IN t
-      #|  r:C ring
+      #|  (r : Ring[C])
       #|  {x | x IN s /\\ (g:K->A) x IN ring_carrier r}
-      #|  g:K->A
-      #|  f:K->B
+      #|  (g : (K) -> A)
+      #|  (f : (K) -> B)
       #|  forall r (f:K->B) (g:K->A) s.\n         FINITE s\n         ==> ring_product r s g =\n             ring_product r (IMAGE f s)\n                            (\\y. ring_product r {x | x IN s /\\ f x = y} g)
       #|  forall(r:A ring) s (e:K->num) a.\n      FINITE s /\\ a IN ring_carrier r\n      ==> ring_pow r a (nsum s e) = ring_product r s (\\i. ring_pow r a (e i))
       #|  forall r (f:K->A) g s.\n    (forall a. a IN s ==> f a = g a)\n    ==> ring_product r s (\\i. f i) = ring_product r s g
@@ -29218,35 +29218,35 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  ring_associates r (a:A) b <=> ring_divides r a b /\\ ring_divides r b a
       #|  ring_coprime r (a:A,b) <=>\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\\n        forall d. ring_divides r d a /\\ ring_divides r d b ==> ring_unit r d
       #|  ring_inv r (a:A) =\n        if ring_unit r a\n        then @x. x IN ring_carrier r /\\ ring_mul r a x = ring_1 r\n        else ring_0 r
-      #|  ring_div r (a:A) b = ring_mul r a (ring_inv r b)
+      #|  (ring_div : (Ring[A], A, A) -> A)((r : Ring[A]), (a : A), (b : A)) == ring_mul(r, a, ring_inv(r, b))
       #|  forall r a b:A.\n        ring_divides r a b <=>\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\\n        ?x. x IN ring_carrier r /\\ b = ring_mul r x a
       #|  forall r a b:A.\n        ring_divides r a b\n        ==> a IN ring_carrier r /\\ b IN ring_carrier r
-      #|  forall r a:A. ring_zerodivisor r a ==> a IN ring_carrier r
-      #|  forall r a:A. ring_regular r a ==> a IN ring_carrier r
-      #|  forall r a:A. ring_nilpotent r a ==> a IN ring_carrier r
-      #|  forall r a:A. ring_unit r a ==> a IN ring_carrier r
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, ring_zerodivisor(r, a) \226\134\146 IN(a, ring_carrier(r))
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, ring_regular(r, a) \226\134\146 IN(a, ring_carrier(r))
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, ring_nilpotent(r, a) \226\134\146 IN(a, ring_carrier(r))
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, ring_unit(r, a) \226\134\146 IN(a, ring_carrier(r))
       #|  forall r a a':A. ring_associates r a a'\n              ==> a IN ring_carrier r /\\ a' IN ring_carrier r
       #|  forall r a b:A.\n        ring_coprime r (a,b)\n        ==> a IN ring_carrier r /\\ b IN ring_carrier r
-      #|  (a:A) IN ring_carrier r
-      #|  ring_unit r (a:A)
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  ring_unit((r : Ring[A]), (a : A))
       #|  (forall r a:A. a IN ring_carrier r ==> (ring_inv r a) IN ring_carrier r) /\\\n   (forall r a:A. ring_unit r a ==> ring_mul r a (ring_inv r a) = ring_1 r)
       #|  forall r a:A. ring_unit r a ==> ring_mul r (ring_inv r a) a = ring_1 r
       #|  forall r a b:A. a IN ring_carrier r /\\ b IN ring_carrier r\n             ==> ring_div r a b IN ring_carrier r
       #|  (forall(r:A ring). ring_0 r IN ring_carrier r) /\\\n   (forall(r:A ring). ring_1 r IN ring_carrier r) /\\\n   (forall(r:A ring) n. ring_of_num r n IN ring_carrier r) /\\\n   (forall(r:A ring) x. x IN ring_carrier r ==> ring_neg r x IN ring_carrier r) /\\\n   (forall(r:A ring) x. x IN ring_carrier r ==> ring_inv r x IN ring_carrier r) /\\\n   (forall(r:A ring) x y.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> ring_add r x y IN ring_carrier r) /\\\n   (forall(r:A ring) x y.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> ring_sub r x y IN ring_carrier r) /\\\n   (forall(r:A ring) x y.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> ring_mul r x y IN ring_carrier r) /\\\n   (forall(r:A ring) x y.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> ring_div r x y IN ring_carrier r) /\\\n   (forall(r:A ring) x n. x IN ring_carrier r\n                     ==> ring_pow r x n IN ring_carrier r)
-      #|  ring_mul r (ring_mul r a c) b:A
-      #|  ring_mul r (ring_mul r a b) c:A
-      #|  c:A
+      #|  ring_mul((r : Ring[A]), ring_mul(r, (a : A), (c : A)), (b : A))
+      #|  ring_mul((r : Ring[A]), ring_mul(r, (a : A), (b : A)), (c : A))
+      #|  (c : A)
       #|  forall r a b:A.\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\\n        ring_mul r a b = ring_1 r\n        ==> ring_inv r a = b
       #|  forall r a b:A.\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\\n        ring_mul r a b = ring_1 r\n        ==> ring_inv r b = a
-      #|  forall r:A ring. ring_inv r (ring_1 r) = ring_1 r
+      #|  \226\136\128 r : Ring[A], ring_inv(r, ring_1(r)) == ring_1(r)
       #|  forall r x:A. x IN ring_carrier r ==> ring_div r x (ring_1 r) = x
       #|  forall(r:A ring) x.\n        x IN ring_carrier r ==> ring_div r (ring_1 r) x = ring_inv r x
-      #|  forall r x:A. ~ring_unit r x ==> ring_inv r x = ring_0 r
+      #|  \226\136\128 r : Ring[A], \226\136\128 x : A, !ring_unit(r, x) \226\134\146 ring_inv(r, x) == ring_0(r)
       #|  ring_mul r (ring_mul r a (ring_inv r a))\n               (ring_mul r b (ring_inv r b)):A
-      #|  ~ring_unit r (b:A)
-      #|  ring_unit r (b:A)
-      #|  ~ring_unit r (a:A)
-      #|  ring_unit r (a:A)
+      #|  !ring_unit((r : Ring[A]), (b : A))
+      #|  ring_unit((r : Ring[A]), (b : A))
+      #|  !ring_unit((r : Ring[A]), (a : A))
+      #|  ring_unit((r : Ring[A]), (a : A))
       #|  forall r a b:A.\n        a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> ring_inv r (ring_mul r a b) =\n            ring_mul r (ring_inv r a) (ring_inv r b)
       #|  forall r (x:A) n.\n        x IN ring_carrier r\n        ==> ring_inv r (ring_pow r x n) = ring_pow r (ring_inv r x) n
       #|  forall r (x:A) n.\n        x IN ring_carrier r\n        ==> ring_pow r (ring_inv r x) n = ring_inv r (ring_pow r x n)
@@ -29254,53 +29254,53 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r x:A.\n        x IN ring_carrier r\n        ==> (ring_mul r x (ring_inv r x) = ring_1 r <=> ring_unit r x)
       #|  forall r x:A.\n        x IN ring_carrier r\n        ==> (ring_mul r (ring_inv r x) x = ring_1 r <=> ring_unit r x)
       #|  forall r a:A. ring_unit r a <=> ring_divides r a (ring_1 r)
-      #|  forall r:A ring. ring_unit r (ring_0 r) <=> trivial_ring r
-      #|  x:A
-      #|  forall r:A ring. ring_inv r (ring_0 r) = ring_0 r
-      #|  ring_1 r:A
-      #|  forall r:A ring. ring_unit r (ring_1 r)
-      #|  ring_neg r x':A
-      #|  x':A
-      #|  forall r x:A. ring_unit r x ==> ring_unit r (ring_neg r x)
+      #|  \226\136\128 r : Ring[A], ring_unit(r, ring_0(r)) == trivial_ring(r)
+      #|  (x : A)
+      #|  \226\136\128 r : Ring[A], ring_inv(r, ring_0(r)) == ring_0(r)
+      #|  ring_1((r : Ring[A]))
+      #|  \226\136\128 r : Ring[A], ring_unit(r, ring_1(r))
+      #|  ring_neg((r : Ring[A]), (x' : A))
+      #|  (x' : A)
+      #|  \226\136\128 r : Ring[A], \226\136\128 x : A, ring_unit(r, x) \226\134\146 ring_unit(r, ring_neg(r, x))
       #|  forall r x:A.\n        x IN ring_carrier r\n        ==> (ring_unit r (ring_neg r x) <=> ring_unit r x)
-      #|  ring_inv r (x':A)
-      #|  x':A
-      #|  forall r x:A. ring_unit r x ==> ring_unit r (ring_inv r x)
+      #|  ring_inv((r : Ring[A]), (x' : A))
+      #|  (x' : A)
+      #|  \226\136\128 r : Ring[A], \226\136\128 x : A, ring_unit(r, x) \226\134\146 ring_unit(r, ring_inv(r, x))
       #|  ring_mul r (ring_mul r x x') (ring_mul r y y'):A
-      #|  ring_mul r x' y':A
-      #|  y':A
-      #|  x':A
+      #|  ring_mul((r : Ring[A]), (x' : A), (y' : A))
+      #|  (y' : A)
+      #|  (x' : A)
       #|  forall r x y:A. ring_unit r x /\\ ring_unit r y ==> ring_unit r (ring_mul r x y)
       #|  forall r x y:A. ring_unit r x /\\ ring_unit r y ==> ring_unit r (ring_div r x y)
       #|  forall r a b:A.\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\\n        ring_mul r a b = ring_1 r\n        ==> ring_unit r a /\\ ring_unit r b
       #|  forall r x y:A.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> (ring_unit r (ring_mul r x y) <=> ring_unit r x /\\ ring_unit r y)
       #|  forall r (a:A) n. ring_unit r a ==> ring_unit r (ring_pow r a n)
       #|  forall r (a:A) n.\n        a IN ring_carrier r\n        ==> (ring_unit r (ring_pow r a n) <=> n = 0 \\/ ring_unit r a)
-      #|  ring_mul r c b:A
-      #|  c:A
+      #|  ring_mul((r : Ring[A]), (c : A), (b : A))
+      #|  (c : A)
       #|  forall r a b:A. ring_unit r a /\\ b IN ring_carrier r ==> ring_divides r a b
       #|  forall r u v:A. ring_unit r u /\\ ring_divides r v u ==> ring_unit r v
       #|  forall r k (f:K->A).\n        FINITE k\n        ==> (ring_unit r (ring_product r k f) <=>\n             forall i. i IN k /\\ f i IN ring_carrier r ==> ring_unit r (f i))
-      #|  ring_mul r (ring_inv r a:A)
+      #|  ring_mul((r : Ring[A]), ring_inv(r, (a : A)))
       #|  forall r (a:A) x y.\n        x IN ring_carrier r /\\ y IN ring_carrier r /\\\n        ring_unit r a /\\\n        ring_mul r a x = ring_mul r a y\n        ==> x = y
       #|  forall r (a:A) x y.\n        x IN ring_carrier r /\\ y IN ring_carrier r /\\\n        ring_unit r a /\\\n        ring_mul r x a = ring_mul r y a\n        ==> x = y
-      #|  forall r a:A. ring_divides r a a <=> a IN ring_carrier r
-      #|  ring_mul r x y:A
-      #|  y:A
-      #|  x:A
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, ring_divides(r, a, a) == IN(a, ring_carrier(r))
+      #|  ring_mul((r : Ring[A]), (x : A), (y : A))
+      #|  (y : A)
+      #|  (x : A)
       #|  forall r a b c:A.\n        ring_divides r a b /\\ ring_divides r b c ==> ring_divides r a c
       #|  forall r a b:A.\n        ring_divides r a b <=>\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\\n        forall d. d IN ring_carrier r /\\ ring_divides r d a ==> ring_divides r d b
       #|  forall r a b:A.\n    ring_divides r a b /\\ ring_divides r b a <=> ring_associates r a b
       #|  forall r a b:A. ring_associates r a b ==> ring_divides r a b
       #|  forall r a:A. ring_divides r a (ring_0 r) <=> a IN ring_carrier r
-      #|  forall r a:A. ring_divides r (ring_0 r) a <=> a = ring_0 r
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, ring_divides(r, ring_0(r), a) == (a == ring_0(r))
       #|  forall r a:A. ring_divides r (ring_1 r) a <=> a IN ring_carrier r
       #|  forall r a:A. ring_divides r a (ring_1 r) <=> ring_unit r a
       #|  forall r a:A. ring_unit r a <=> forall b. b IN ring_carrier r ==> ring_divides r a b
       #|  forall r a b d:A.\n        ring_divides r d a /\\ ring_divides r d b\n        ==> ring_divides r d (ring_add r a b)
       #|  forall r a b d:A.\n        ring_divides r d a /\\ ring_divides r d b\n        ==> ring_divides r d (ring_sub r a b)
-      #|  ring_neg r x:A
-      #|  x:A
+      #|  ring_neg((r : Ring[A]), (x : A))
+      #|  (x : A)
       #|  forall r a d:A. ring_divides r d a ==> ring_divides r (ring_neg r d) a
       #|  forall r a d:A. ring_divides r d a ==> ring_divides r d (ring_neg r a)
       #|  (forall r x y:A. x IN ring_carrier r /\\ y IN ring_carrier r\n              ==> (ring_divides r (ring_neg r x) y <=> ring_divides r x y)) /\\\n   (forall r x y:A. x IN ring_carrier r /\\ y IN ring_carrier r\n              ==> (ring_divides r x (ring_neg r y) <=> ring_divides r x y))
@@ -29308,17 +29308,17 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r a b d:A.\n        a IN ring_carrier r /\\ ring_divides r d b\n        ==> ring_divides r d (ring_mul r a b)
       #|  forall r d a x:A.\n        x IN ring_carrier r /\\ d IN ring_carrier r /\\\n        ring_divides r (ring_mul r x d) a\n        ==> ring_divides r d a
       #|  forall r d a x:A.\n        x IN ring_carrier r /\\ d IN ring_carrier r /\\\n        ring_divides r (ring_mul r d x) a\n        ==> ring_divides r d a
-      #|  ring_mul r u v:A
-      #|  v:A
-      #|  u:A
+      #|  ring_mul((r : Ring[A]), (u : A), (v : A))
+      #|  (v : A)
+      #|  (u : A)
       #|  forall r a b c d:A.\n        ring_divides r a b /\\ ring_divides r c d\n        ==> ring_divides r (ring_mul r a c) (ring_mul r b d)
       #|  forall r a b c:A.\n        a IN ring_carrier r /\\ ring_divides r b c\n        ==> ring_divides r (ring_mul r a b) (ring_mul r a c)
       #|  forall r a b c:A.\n        ring_divides r a b /\\ c IN ring_carrier r\n        ==> ring_divides r (ring_mul r a c) (ring_mul r b c)
-      #|  n:num
+      #|  (n : Num)
       #|  forall r (a:A) b n.\n     a IN ring_carrier r /\\ b IN ring_carrier r /\\ ~(n = 0)\n     ==> ring_divides r (ring_sub r a b)\n           (ring_sub r (ring_pow r a n) (ring_pow r b n))
       #|  forall(r:A ring) (f:K->A) (g:K->A) s.\n          FINITE s /\\ (forall i. i IN s ==> ring_divides r (f i) (g i))\n          ==> ring_divides r (ring_product r s f) (ring_product r s g)
-      #|  t:K->bool = s UNION u
-      #|  u:K->bool = t DIFF s
+      #|  (t : (K) -> Bool) == UNION((s : (K) -> Bool), (u : (K) -> Bool))
+      #|  (u : (K) -> Bool) == DIFF((t : (K) -> Bool), (s : (K) -> Bool))
       #|  forall r (f:K->A) s t.\n        FINITE t /\\ s SUBSET t\n        ==> ring_divides r (ring_product r s f) (ring_product r t f)
       #|  forall r a:A. ring_associates r a a <=> a IN ring_carrier r
       #|  forall r a b:A. ring_associates r a b <=> ring_associates r b a
@@ -29334,29 +29334,29 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r k (f:K->A) g.\n        FINITE k /\\\n        (forall i. i IN k ==> ring_associates r (f i) (g i))\n        ==> ring_associates r (ring_product r k f) (ring_product r k g)
       #|  forall r:A ring. ring_zerodivisor r (ring_0 r) <=> ~trivial_ring r
       #|  forall r:A ring. ring_regular r (ring_0 r) <=> trivial_ring r
-      #|  forall r:A ring. ~(ring_zerodivisor r (ring_1 r))
-      #|  forall r:A ring. ring_regular r (ring_1 r)
-      #|  y:A
+      #|  \226\136\128 r : Ring[A], !ring_zerodivisor(r, ring_1(r))
+      #|  \226\136\128 r : Ring[A], ring_regular(r, ring_1(r))
+      #|  (y : A)
       #|  forall r a x:A.\n        a IN ring_carrier r /\\ ring_zerodivisor r x\n        ==> ring_zerodivisor r (ring_mul r a x)
       #|  forall r x a:A.\n        ring_zerodivisor r x /\\ a IN ring_carrier r\n        ==> ring_zerodivisor r (ring_mul r x a)
-      #|  ring_mul r x z:A
-      #|  ring_mul r x z:A = ring_0 r
-      #|  z:A
+      #|  ring_mul((r : Ring[A]), (x : A), (z : A))
+      #|  ring_mul((r : Ring[A]), (x : A), (z : A)) == ring_0(r)
+      #|  (z : A)
       #|  forall r x y:A.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> (ring_zerodivisor r (ring_mul r x y) <=>\n             ring_zerodivisor r x \\/ ring_zerodivisor r y)
       #|  forall r (x:A) n.\n        x IN ring_carrier r\n        ==> (ring_zerodivisor r (ring_pow r x n) <=>\n             ~(n = 0) /\\ ring_zerodivisor r x)
       #|  forall r x y:A.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> (ring_regular r (ring_mul r x y) <=>\n             ring_regular r x /\\ ring_regular r y)
       #|  forall r (x:A) n.\n        x IN ring_carrier r\n        ==> (ring_regular r (ring_pow r x n) <=> n = 0 \\/ ring_regular r x)
       #|  forall r x y:A.\n        ring_regular r x /\\ ring_regular r y\n        ==> ring_regular r (ring_mul r x y)
-      #|  ring_neg r x:A = ring_mul r (ring_neg r (ring_1 r)) x
+      #|  ring_neg((r : Ring[A]), (x : A)) == ring_mul(r, ring_neg(r, ring_1(r)), x)
       #|  forall r x:A. ring_zerodivisor r x ==> ring_zerodivisor r (ring_neg r x)
       #|  forall r x:A.\n        x IN ring_carrier r\n        ==> (ring_zerodivisor r (ring_neg r x) <=> ring_zerodivisor r x)
       #|  forall r x:A. ring_regular r x ==> ring_regular r (ring_neg r x)
       #|  forall r x:A.\n        x IN ring_carrier r\n        ==> (ring_regular r (ring_neg r x) <=> ring_regular r x)
-      #|  ring_zerodivisor (r:A ring)
-      #|  forall r x:A. ring_zerodivisor r x ==> ~(ring_unit r x)
-      #|  forall r a:A. ring_unit r a ==> ring_regular r a
+      #|  ring_zerodivisor((r : Ring[A]))
+      #|  \226\136\128 r : Ring[A], \226\136\128 x : A, ring_zerodivisor(r, x) \226\134\146 !ring_unit(r, x)
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, ring_unit(r, a) \226\134\146 ring_regular(r, a)
       #|  forall r u v:A. ring_unit r u ==> (ring_divides r v u <=> ring_unit r v)
-      #|  forall r a:A. ring_coprime r (a,a) <=> ring_unit r a
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, ring_coprime(r, (a, a)) == ring_unit(r, a)
       #|  forall r a b:A. ring_coprime r (a,b) <=> ring_coprime r (b,a)
       #|  (forall r a:A. ring_coprime r (ring_0 r,a) <=> ring_unit r a) /\\\n   (forall r a:A. ring_coprime r (a,ring_0 r) <=> ring_unit r a)
       #|  forall r:A ring. ring_coprime r (ring_0 r,ring_0 r) <=> trivial_ring r
@@ -29369,35 +29369,35 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r a a':A.\n        ring_associates r a a' ==> (ring_unit r a <=> ring_unit r a')
       #|  forall r a a':A.\n        ring_associates r a a' ==> (a = ring_0 r <=> a' = ring_0 r)
       #|  forall r a b a' b':A.\n        ring_associates r a a' /\\ ring_associates r b b'\n        ==> (ring_coprime r (a,b) <=> ring_coprime r (a',b'))
-      #|  u:A
+      #|  (u : A)
       #|  forall r a a':A.\n        ring_associates r a a'\n        ==> (ring_zerodivisor r a <=> ring_zerodivisor r a')
       #|  forall r a a':A.\n        ring_associates r a a'\n        ==> (ring_regular r a <=> ring_regular r a')
       #|  forall r a a':A.\n        ring_associates r a a'\n        ==> (ring_nilpotent r a <=> ring_nilpotent r a')
-      #|  ~(1 = 0)
-      #|  forall r. ring_nilpotent r (ring_0 r)
-      #|  ~(1 = 0)
+      #|  !(1 == 0)
+      #|  \226\136\128 r : Ring[_], ring_nilpotent(r, ring_0(r))
+      #|  !(1 == 0)
       #|  forall r:A ring. ring_nilpotent r (ring_1 r) <=> trivial_ring r
-      #|  r:A ring
+      #|  (r : Ring[A])
       #|  1
-      #|  n = 0
-      #|  n:num
+      #|  (n : Num) == 0
+      #|  (n : Num)
       #|  forall r a:A.\n        ring_nilpotent r a <=>\n        a IN ring_carrier r /\\ ?n. ring_pow r a n = ring_0 r
-      #|  m:num
+      #|  (m : Num)
       #|  forall r (x:A) n.\n        x IN ring_carrier r /\\ ~(n = 0)\n        ==> (ring_nilpotent r (ring_pow r x n) <=> ring_nilpotent r x)
-      #|  n = 0
-      #|  ring_pow r (a:A) n = ring_0 r
-      #|  n:num
-      #|  (a:A) IN ring_carrier r
+      #|  (n : Num) == 0
+      #|  ring_pow((r : Ring[A]), (a : A), (n : Num)) == ring_0(r)
+      #|  (n : Num)
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
       #|  forall r a:A. ~trivial_ring r /\\ ring_nilpotent r a ==> ring_zerodivisor r a
       #|  forall r x:A. ring_nilpotent r x ==> ring_nilpotent r (ring_neg r x)
       #|  forall r x:A.\n        x IN ring_carrier r\n        ==> (ring_nilpotent r (ring_neg r x) <=> ring_nilpotent r x)
-      #|  (a:A) IN ring_carrier r
-      #|  a:A = ring_mul r (ring_mul r a a) (ring_inv r a)
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  (a : A) == ring_mul((r : Ring[A]), ring_mul(r, a, a), ring_inv(r, a))
       #|  forall r a:A. ring_unit r a /\\ ring_mul r a a = a <=> a = ring_1 r
       #|  (s:A->bool) subring_of (r:A ring) <=>\n        s SUBSET ring_carrier r /\\\n        ring_0 r IN s /\\\n        ring_1 r IN s /\\\n        (forall x. x IN s ==> ring_neg r x IN s) /\\\n        (forall x y. x IN s /\\ y IN s ==> ring_add r x y IN s) /\\\n        (forall x y. x IN s /\\ y IN s ==> ring_mul r x y IN s)
       #|  subring_generated r (s:A->bool) =\n      ring(INTERS {h | h subring_of r /\\ (ring_carrier r INTER s) SUBSET h},\n           ring_0 r,ring_1 r,ring_neg r,ring_add r,ring_mul r)
-      #|  forall r h:A->bool. h subring_of r ==> ring_0 r IN h
-      #|  forall r h:A->bool. h subring_of r ==> ring_1 r IN h
+      #|  \226\136\128 r : Ring[A], \226\136\128 h : (A) -> Bool, subring_of(h, r) \226\134\146 IN(ring_0(r), h)
+      #|  \226\136\128 r : Ring[A], \226\136\128 h : (A) -> Bool, subring_of(h, r) \226\134\146 IN(ring_1(r), h)
       #|  forall r h x:A. h subring_of r /\\ x IN h ==> ring_neg r x IN h
       #|  forall r h x y:A. h subring_of r /\\ x IN h /\\ y IN h ==> ring_add r x y IN h
       #|  forall r h x y:A. h subring_of r /\\ x IN h /\\ y IN h ==> ring_mul r x y IN h
@@ -29405,21 +29405,21 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r h (x:A) n. h subring_of r /\\ x IN h ==> ring_pow r x n IN h
       #|  forall(r:A ring) s n. s subring_of r ==> ring_of_num r n IN s
       #|  forall(r:A ring) s n. s subring_of r ==> ring_of_int r n IN s
-      #|  \\x:A. x IN h
-      #|  r:A ring
+      #|  (x : A) => IN(x, (h : (A) -> Bool))
+      #|  (r : Ring[A])
       #|  forall r h (f:K->A) s.\n        h subring_of r /\\ (forall a. a IN s ==> f a IN h) ==> ring_sum r s f IN h
-      #|  \\x:A. x IN h
-      #|  r:A ring
+      #|  (x : A) => IN(x, (h : (A) -> Bool))
+      #|  (r : Ring[A])
       #|  forall r h (f:K->A) s.\n      h subring_of r /\\ (forall a. a IN s ==> f a IN h) ==> ring_product r s f IN h
       #|  forall r (gs:(A->bool)->bool).\n        (forall g. g IN gs ==> g subring_of r) /\\ ~(gs = {})\n        ==> (INTERS gs) subring_of r
       #|  forall r g h:A->bool.\n        g subring_of r /\\ h subring_of r ==> (g INTER h) subring_of r
       #|  forall r (u:(A->bool)->bool).\n        ~(u = {}) /\\\n        (forall h. h IN u ==> h subring_of r) /\\\n        (forall g h. g IN u /\\ h IN u ==> g SUBSET h \\/ h SUBSET g)\n        ==> (UNIONS u) subring_of r
       #|  forall r s:A->bool. s subring_of r ==> s SUBSET ring_carrier r
-      #|  forall r s:A->bool. s subring_of r ==> ~(s = {})
-      #|  forall r:A ring. (ring_carrier r) subring_of r
+      #|  \226\136\128 r : Ring[A], \226\136\128 s : (A) -> Bool, subring_of(s, r) \226\134\146 !(s == {})
+      #|  \226\136\128 r : Ring[A], subring_of(ring_carrier(r), r)
       #|  forall r:A ring. { ring_of_int r x | x IN (:int)} subring_of r
       #|  forall r s:A->bool.\n        s subring_of r ==> { ring_of_int r x | x IN (:int)} SUBSET s
-      #|  ring_carrier r:A->bool
+      #|  ring_carrier((r : Ring[A]))
       #|  (forall r s:A->bool.\n        ring_carrier (subring_generated r s) =\n          INTERS {h | h subring_of r /\\ (ring_carrier r INTER s) SUBSET h}) /\\\n   (forall r s:A->bool. ring_0 (subring_generated r s) = ring_0 r) /\\\n   (forall r s:A->bool. ring_1 (subring_generated r s) = ring_1 r) /\\\n   (forall r s:A->bool. ring_neg (subring_generated r s) = ring_neg r) /\\\n   (forall r s:A->bool. ring_add (subring_generated r s) = ring_add r) /\\\n   (forall r s:A->bool. ring_mul (subring_generated r s) = ring_mul r)
       #|  forall r s:A->bool.\n        subring_generated r s = r <=>\n        ring_carrier(subring_generated r s) = ring_carrier r
       #|  forall r s:A->bool. ring_sub (subring_generated r s) = ring_sub r
@@ -29432,40 +29432,40 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r s x y:A.\n        x IN ring_carrier (subring_generated r s) /\\\n        y IN ring_carrier (subring_generated r s)\n        ==> ring_add r x y IN ring_carrier (subring_generated r s)
       #|  forall r s x y:A.\n        x IN ring_carrier (subring_generated r s) /\\\n        y IN ring_carrier (subring_generated r s)\n        ==> ring_mul r x y IN ring_carrier (subring_generated r s)
       #|  forall r s (x:A) n.\n        x IN ring_carrier (subring_generated r s)\n        ==> ring_pow r x n IN ring_carrier (subring_generated r s)
-      #|  g INTER g INTER s = g INTER s
+      #|  INTER((g : (_) -> Bool), INTER(g, (s : (_) -> Bool))) == INTER(g, s)
       #|  forall r s:A->bool.\n        subring_generated r s =\n        subring_generated r (ring_carrier r INTER s)
-      #|  ring_carrier r:A->bool
+      #|  ring_carrier((r : Ring[A]))
       #|  forall r s:A->bool. ring_carrier(subring_generated r s) subring_of r
       #|  forall r s t:A->bool.\n        s SUBSET t\n        ==> ring_carrier(subring_generated r s) SUBSET\n            ring_carrier(subring_generated r t)
       #|  forall r h s:A->bool.\n        s SUBSET h /\\ h subring_of r\n        ==> ring_carrier(subring_generated r s) SUBSET h
       #|  forall r s t:A->bool.\n        s SUBSET ring_carrier(subring_generated r t) /\\\n        t SUBSET ring_carrier(subring_generated r s)\n        ==> subring_generated r s = subring_generated r t
-      #|  s:A->bool
-      #|  {x:A | x IN ring_carrier r /\\ P x}
-      #|  r:A ring
-      #|  s:A->bool
-      #|  ring_carrier r INTER (s:A->bool)
+      #|  (s : (A) -> Bool)
+      #|  {(x : A) | IN(x, ring_carrier((r : Ring[A]))) && (P : (A) -> Bool)(x)}
+      #|  (r : Ring[A])
+      #|  (s : (A) -> Bool)
+      #|  INTER(ring_carrier((r : Ring[A])), (s : (A) -> Bool))
       #|  ring_carrier r INTER (s:A->bool) SUBSET ring_carrier r
       #|  forall r P s:A->bool.\n        (forall x. x IN ring_carrier r /\\ x IN s ==> P x) /\\\n        P(ring_0 r) /\\\n        P(ring_1 r) /\\\n        (forall x. P x ==> P(ring_neg r x)) /\\\n        (forall x y. P x /\\ P y ==> P(ring_add r x y)) /\\\n        (forall x y. P x /\\ P y ==> P(ring_mul r x y))\n        ==> forall x. x IN ring_carrier(subring_generated r s) ==> P x
       #|  forall x. x IN ring_carrier (subring_generated r s)\n        ==> (x:A) IN ring_carrier r /\\ P x
       #|  forall r P s:A->bool.\n        (forall x. x IN ring_carrier r /\\ x IN s ==> P x) /\\\n        P(ring_0 r) /\\\n        P(ring_1 r) /\\\n        (forall x. x IN ring_carrier r /\\ P x ==> P(ring_neg r x)) /\\\n        (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\ P x /\\ P y\n               ==> P(ring_add r x y)) /\\\n        (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\ P x /\\ P y\n               ==> P(ring_mul r x y))\n        ==> forall x. x IN ring_carrier(subring_generated r s) ==> P x
-      #|  a IN s ==> INTERS s SUBSET a
+      #|  IN((a : (_) -> Bool), (s : ((_) -> Bool) -> Bool)) \226\134\146 SUBSET(INTERS(s), a)
       #|  forall r h:A->bool.\n        ring_carrier (subring_generated r h) SUBSET ring_carrier r
       #|  forall r h k:A->bool.\n        h subring_of (subring_generated r k) <=>\n        h subring_of r /\\ h SUBSET ring_carrier(subring_generated r k)
       #|  forall r s:A->bool.\n    subring_generated r s = r <=>\n    ring_carrier r SUBSET ring_carrier(subring_generated r s)
       #|  forall r s:A->bool.\n        FINITE(ring_carrier r)\n        ==> FINITE(ring_carrier(subring_generated r s))
       #|  forall r h:A->bool.\n     ring_carrier r INTER h SUBSET ring_carrier(subring_generated r h)
       #|  forall r s t:A->bool.\n        s SUBSET ring_carrier r /\\ s SUBSET t\n        ==> s SUBSET ring_carrier(subring_generated r t)
-      #|  h:A->bool
-      #|  x:A
-      #|  h SUBSET g ==> g INTER h = h
+      #|  (h : (A) -> Bool)
+      #|  (x : A)
+      #|  SUBSET((h : (_) -> Bool), (g : (_) -> Bool)) \226\134\146 INTER(g, h) == h
       #|  forall r h:A->bool.\n        h subring_of r ==> ring_carrier (subring_generated r h) = h
       #|  forall r h s:A->bool.\n        h subring_of r\n        ==> (ring_carrier(subring_generated r s) SUBSET h <=>\n             ring_carrier r INTER s SUBSET h)
       #|  forall r h k:A->bool.\n        k subring_of r\n        ==> (h subring_of (subring_generated r k) <=>\n             h subring_of r /\\ h SUBSET k)
-      #|  forall r:A ring. subring_generated r (ring_carrier r) = r
+      #|  \226\136\128 r : Ring[A], subring_generated(r, ring_carrier(r)) == r
       #|  forall r g h:A->bool.\n        g subring_of r /\\ g SUBSET h\n        ==> g subring_of (subring_generated r h)
-      #|  s SUBSET t <=> t INTER s = s
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) == (INTER(t, s) == s)
       #|  forall r s:A->bool.\n        s SUBSET ring_carrier r\n        ==> s SUBSET ring_carrier(subring_generated r s)
-      #|  u SUBSET s ==> u INTER s = u
+      #|  SUBSET((u : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 INTER(u, s) == u
       #|  forall r s:A->bool. ring_carrier r SUBSET s ==> subring_generated r s = r
       #|  forall r s x:A.\n        s SUBSET ring_carrier r /\\ x IN s\n        ==> x IN ring_carrier(subring_generated r s)
       #|  forall r s x:A.\n        x IN ring_carrier r /\\ x IN s\n        ==> x IN ring_carrier(subring_generated r s)
@@ -29474,15 +29474,15 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r s:A->bool.\n        subring_generated r (ring_carrier(subring_generated r s)) =\n        subring_generated r s
       #|  p /\\ (q \\/ r) ==> s <=> (q ==> p ==> s) /\\ (p /\\ r ==> s)
       #|  forall r s:A->bool.\n        subring_generated r (ring_0 r INSERT s) = subring_generated r s
-      #|  s:A->bool
-      #|  r:A ring
-      #|  h INTER ring_carrier (subring_generated r s):A->bool
-      #|  h:A->bool
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
+      #|  INTER((h : (A) -> Bool), ring_carrier(subring_generated((r : Ring[A]), (s : (A) -> Bool))))
+      #|  (h : (A) -> Bool)
       #|  forall r s t:A->bool.\n        ring_carrier(subring_generated (subring_generated r s) t) SUBSET\n        ring_carrier(subring_generated r t)
       #|  forall r s t:A->bool.\n        s SUBSET ring_carrier(subring_generated r t)\n        ==> subring_generated (subring_generated r t) s =\n            subring_generated r s
-      #|  t:A->bool
-      #|  t:A->bool
-      #|  r:A ring
+      #|  (t : (A) -> Bool)
+      #|  (t : (A) -> Bool)
+      #|  (r : Ring[A])
       #|  forall r s t:A->bool.\n        s SUBSET t\n        ==> subring_generated (subring_generated r t) s =\n            subring_generated r s
       #|  forall r s t:A->bool.\n        s subring_of r /\\ t subring_of r\n        ==> subring_generated (subring_generated r s) t =\n            subring_generated r (s INTER t)
       #|  forall r s t:A->bool.\n        s SUBSET t\n        ==> subring_generated (subring_generated r t)\n                               (ring_carrier (subring_generated r s)) =\n            subring_generated r s
@@ -29490,29 +29490,29 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r s t:A->bool.\n        subring_generated r (s UNION ring_carrier(subring_generated r t)) =\n        subring_generated r (s UNION t)
       #|  forall r s t:A->bool.\n        subring_generated r (ring_carrier(subring_generated r s) UNION\n                              ring_carrier(subring_generated r t)) =\n        subring_generated r (s UNION t)
       #|  forall r s:A->bool. ring_char(subring_generated r s) = ring_char r
-      #|  x IN s ==> s SUBSET t ==> x IN t
-      #|  t1 UNION t2:A->bool
-      #|  t2:A->bool
-      #|  t1:A->bool
-      #|  y:A
-      #|  x:A
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
+      #|  UNION((t1 : (A) -> Bool), (t2 : (A) -> Bool))
+      #|  (t2 : (A) -> Bool)
+      #|  (t1 : (A) -> Bool)
+      #|  (y : A)
+      #|  (x : A)
       #|  forall r s x:A.\n        x IN ring_carrier(subring_generated r s)\n        ==> ?t. FINITE t /\\\n                t SUBSET s /\\\n                x IN ring_carrier(subring_generated r t)
       #|  forall r s:A->bool.\n        ring_carrier(subring_generated r s) =\n        UNIONS { ring_carrier(subring_generated r t) | t |\n                 FINITE t /\\ t SUBSET s}
-      #|  x IN s ==> s SUBSET t ==> x IN t
-      #|  t1 UNION t2:A->bool
-      #|  t2:A->bool
-      #|  t1:A->bool
-      #|  u:A->bool
-      #|  x:A
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
+      #|  UNION((t1 : (A) -> Bool), (t2 : (A) -> Bool))
+      #|  (t2 : (A) -> Bool)
+      #|  (t1 : (A) -> Bool)
+      #|  (u : (A) -> Bool)
+      #|  (x : A)
       #|  forall r s (u:A->bool).\n        FINITE u /\\ u SUBSET ring_carrier(subring_generated r s)\n        ==> ?t. FINITE t /\\\n                t SUBSET s /\\\n                u SUBSET ring_carrier(subring_generated r t)
       #|  forall r:A ring.\n        subring_generated r { ring_of_int r x | x IN (:int)} =\n        subring_generated r {ring_0 r}
       #|  forall r:A ring.\n        ring_carrier(subring_generated r {ring_0 r}) =\n        { ring_of_int r x | x IN (:int)}
       #|  ring_ideal (r:A ring) j <=>\n        j SUBSET ring_carrier r /\\\n        ring_0 r IN j /\\\n        (forall x. x IN j ==> ring_neg r x IN j) /\\\n        (forall x y. x IN j /\\ y IN j ==> ring_add r x y IN j) /\\\n        (forall x y. x IN ring_carrier r /\\ y IN j ==> ring_mul r x y IN j)
       #|  forall r j:A->bool.\n        ring_ideal r j <=>\n        j SUBSET ring_carrier r /\\\n        ring_0 r IN j /\\\n        (forall x y. x IN j /\\ y IN j ==> ring_add r x y IN j) /\\\n        (forall x y. x IN ring_carrier r /\\ y IN j ==> ring_mul r x y IN j)
       #|  forall r s:A->bool. ring_ideal r s ==> s SUBSET ring_carrier r
-      #|  forall r s:A->bool. ring_ideal r s ==> ~(s = {})
-      #|  forall r:A ring. ring_ideal r {ring_0 r}
-      #|  forall r h:A->bool. ring_ideal r h ==> ring_0 r IN h
+      #|  \226\136\128 r : Ring[A], \226\136\128 s : (A) -> Bool, ring_ideal(r, s) \226\134\146 !(s == {})
+      #|  \226\136\128 r : Ring[A], ring_ideal(r, {ring_0(r)})
+      #|  \226\136\128 r : Ring[A], \226\136\128 h : (A) -> Bool, ring_ideal(r, h) \226\134\146 IN(ring_0(r), h)
       #|  forall r h x:A. ring_ideal r h /\\ x IN h ==> ring_neg r x IN h
       #|  forall r h x y:A. ring_ideal r h /\\ x IN h /\\ y IN h ==> ring_add r x y IN h
       #|  forall r h x y:A. ring_ideal r h /\\ x IN h /\\ y IN h ==> ring_sub r x y IN h
@@ -29520,12 +29520,12 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r h x y:A.\n     ring_ideal r h /\\ x IN ring_carrier r /\\ y IN h ==> ring_mul r x y IN h
       #|  forall r h x y:A.\n     ring_ideal r h /\\ x IN h /\\ y IN ring_carrier r ==> ring_mul r x y IN h
       #|  forall r j a b:A. ring_ideal r j /\\ a IN j /\\ ring_divides r a b ==> b IN j
-      #|  n = 0
-      #|  n:num
-      #|  (x:A) IN ring_carrier r
+      #|  (n : Num) == 0
+      #|  (n : Num)
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
       #|  forall r j (x:A) n.\n        ring_ideal r j /\\ x IN j /\\ ~(n = 0) ==> ring_pow r x n IN j
-      #|  \\x:A. x IN j
-      #|  r:A ring
+      #|  (x : A) => IN(x, (j : (A) -> Bool))
+      #|  (r : Ring[A])
       #|  forall r j s (f:K->A).\n        ring_ideal r j /\\ (forall i. i IN s ==> f i IN j) ==> ring_sum r s f IN j
       #|  forall r j a a'.\n        ring_ideal r j /\\ ring_associates r a a'\n        ==> (a IN j <=> a' IN j)
       #|  forall r (gs:(A->bool)->bool).\n        (forall g. g IN gs ==> ring_ideal r g) /\\ ~(gs = {})\n        ==> ring_ideal r (INTERS gs)
@@ -29533,16 +29533,16 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r (u:(A->bool)->bool).\n        ~(u = {}) /\\\n        (forall h. h IN u ==> ring_ideal r h) /\\\n        (forall g h. g IN u /\\ h IN u ==> g SUBSET h \\/ h SUBSET g)\n        ==> ring_ideal r (UNIONS u)
       #|  forall(r:A ring) j.\n        ring_ideal r j ==> (j = ring_carrier r <=> ring_1 r IN j)
       #|  forall(r:A ring) j.\n        ring_ideal r j\n        ==> (j = ring_carrier r <=> ?u. ring_unit r u /\\ u IN j)
-      #|  forall r:A ring. ring_ideal r {ring_0 r}
-      #|  forall r:A ring. ring_ideal r (ring_carrier r)
+      #|  \226\136\128 r : Ring[A], ring_ideal(r, {ring_0(r)})
+      #|  \226\136\128 r : Ring[A], ring_ideal(r, ring_carrier(r))
       #|  forall r s j:A->bool.\n        s subring_of r /\\ ring_ideal r j\n        ==> (ring_ideal (subring_generated r s) j <=> j SUBSET s)
       #|  forall r s j:A->bool.\n        s subring_of r /\\ ring_ideal r j /\\ j SUBSET s\n        ==> ring_ideal (subring_generated r s) j
       #|  forall r s j:A->bool.\n        s subring_of r /\\ ring_ideal r j\n        ==> ring_ideal (subring_generated r s) (s INTER j)
       #|  forall r s j:A->bool.\n        s subring_of r /\\ ring_ideal r j\n        ==> ring_ideal (subring_generated r s) (j INTER s)
-      #|  ring_setneg (r:A ring) s = {ring_neg r x | x IN s}
+      #|  (ring_setneg : (Ring[A], (A) -> Bool, A) -> Bool)((r : Ring[A]), (s : (A) -> Bool)) == {ring_neg(r, (x : A)) | IN(x, s)}
       #|  ring_setadd (r:A ring) s t = {ring_add r x y | x IN s /\\ y IN t}
       #|  ring_setmul (r:A ring) s t = {ring_mul r x y | x IN s /\\ y IN t}
-      #|  forall r s x:A. x IN s ==> ring_neg r x IN ring_setneg r s
+      #|  \226\136\128 r : Ring[A], \226\136\128 s : (A) -> Bool, \226\136\128 x : A, IN(x, s) \226\134\146 IN(ring_neg(r, x), ring_setneg(r, s))
       #|  forall r s t x y:A.\n        x IN s /\\ y IN t ==> ring_add r x y IN ring_setadd r s t
       #|  forall r s t x y:A.\n        x IN s /\\ y IN t ==> ring_mul r x y IN ring_setmul r s t
       #|  forall r s s':A->bool.\n        s SUBSET s' ==> ring_setneg r s SUBSET ring_setneg r s'
@@ -29550,12 +29550,12 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r s t s' t':A->bool.\n        s SUBSET s' /\\ t SUBSET t'\n        ==> ring_setmul r s t SUBSET ring_setmul r s' t'
       #|  forall r s:A->bool.\n        s subring_of r <=>\n        s SUBSET ring_carrier r /\\\n        ring_0 r IN s /\\\n        ring_1 r IN s /\\\n        ring_setneg r s SUBSET s /\\\n        ring_setadd r s s SUBSET s /\\\n        ring_setmul r s s SUBSET s
       #|  forall r j:A->bool.\n        ring_ideal r j <=>\n        j SUBSET ring_carrier r /\\\n        ring_0 r IN j /\\\n        ring_setneg r j SUBSET j /\\\n        ring_setadd r j j SUBSET j /\\\n        ring_setmul r (ring_carrier r) j SUBSET j
-      #|  forall r s:A->bool. ring_setneg r s = {} <=> s = {}
+      #|  \226\136\128 r : Ring[A], \226\136\128 s : (A) -> Bool, (ring_setneg(r, s) == {}) == (s == {})
       #|  forall r s t:A->bool. ring_setadd r s t = {} <=> s = {} \\/ t = {}
       #|  forall r s t:A->bool. ring_setmul r s t = {} <=> s = {} \\/ t = {}
-      #|  forall r x:A. ring_setneg r {x} = {ring_neg r x}
-      #|  forall r x y:A. ring_setadd r {x} {y} = {ring_add r x y}
-      #|  forall r x y:A. ring_setmul r {x} {y} = {ring_mul r x y}
+      #|  \226\136\128 r : Ring[A], \226\136\128 x : A, ring_setneg(r, {x}) == {ring_neg(r, x)}
+      #|  \226\136\128 r : Ring[A], \226\136\128 x : A, \226\136\128 y : A, ring_setadd(r, {x}, {y}) == {ring_add(r, x, y)}
+      #|  \226\136\128 r : Ring[A], \226\136\128 x : A, \226\136\128 y : A, ring_setmul(r, {x}, {y}) == {ring_mul(r, x, y)}
       #|  forall r s:A->bool.\n        s SUBSET ring_carrier r ==> ring_setneg r s SUBSET ring_carrier r
       #|  forall r s t:A->bool.\n        s SUBSET ring_carrier r /\\ t SUBSET ring_carrier r\n        ==>  ring_setadd r s t SUBSET ring_carrier r
       #|  forall r s t:A->bool.\n        s SUBSET ring_carrier r /\\ t SUBSET ring_carrier r\n        ==>  ring_setmul r s t SUBSET ring_carrier r
@@ -29583,65 +29583,65 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r s t u:A->bool.\n        s SUBSET ring_carrier r /\\ t SUBSET ring_carrier r /\\\n        u SUBSET ring_carrier r\n        ==> ring_setmul r s (ring_setadd r t u) SUBSET\n            ring_setadd r (ring_setmul r s t) (ring_setmul r s u)
       #|  forall r s t u:A->bool.\n        s SUBSET ring_carrier r /\\ t SUBSET ring_carrier r /\\\n        u SUBSET ring_carrier r\n        ==> ring_setmul r (ring_setadd r s t) u SUBSET\n            ring_setadd r (ring_setmul r s u) (ring_setmul r t u)
       #|  (forall x. x IN s ==> f x IN s /\\ f(f x) = x) ==> {f x | x IN s} = s
-      #|  forall r j:A->bool. ring_ideal r j ==> ring_setneg r j = j
+      #|  \226\136\128 r : Ring[A], \226\136\128 j : (A) -> Bool, ring_ideal(r, j) \226\134\146 ring_setneg(r, j) == j
       #|  (forall x. x IN s ==> f x IN s /\\ f(f x) = x) ==> {f x | x IN s} = s
-      #|  forall r s:A->bool. s subring_of r ==> ring_setneg r s = s
-      #|  ring_add r (ring_neg r y) x:A
-      #|  y:A
-      #|  y:A
-      #|  x:A
+      #|  \226\136\128 r : Ring[A], \226\136\128 s : (A) -> Bool, subring_of(s, r) \226\134\146 ring_setneg(r, s) == s
+      #|  ring_add((r : Ring[A]), ring_neg(r, (y : A)), (x : A))
+      #|  (y : A)
+      #|  (y : A)
+      #|  (x : A)
       #|  forall r j s:A->bool.\n        (ring_ideal r j \\/ j subring_of r) /\\\n        s SUBSET j /\\ ~(s = {}) ==> ring_setadd r s j = j
       #|  forall r j s:A->bool.\n        (ring_ideal r j \\/ j subring_of r) /\\\n        s SUBSET j /\\ ~(s = {}) ==> ring_setadd r j s = j
-      #|  ring_0 r:A
-      #|  x:A
-      #|  x:A
-      #|  s:A->bool = {}
+      #|  ring_0((r : Ring[A]))
+      #|  (x : A)
+      #|  (x : A)
+      #|  (s : (A) -> Bool) == {}
       #|  forall r j s:A->bool.\n        (ring_ideal r j \\/ j subring_of r) /\\ s SUBSET ring_carrier r\n        ==> (ring_setadd r s j = j <=> s SUBSET j /\\ ~(s = {}))
       #|  forall r j s:A->bool.\n        (ring_ideal r j \\/ j subring_of r) /\\\n        s SUBSET ring_carrier r\n        ==> (ring_setadd r j s = j <=> s SUBSET j /\\ ~(s = {}))
       #|  forall r j:A->bool.\n        (ring_ideal r j \\/ j subring_of r) ==> ring_setadd r j j = j
-      #|  ring_1 r:A
-      #|  a:A
-      #|  a:A
+      #|  ring_1((r : Ring[A]))
+      #|  (a : A)
+      #|  (a : A)
       #|  forall r s:A->bool.\n        s subring_of r ==> ring_setmul r s s = s
       #|  forall r j s t:A->bool.\n        ring_ideal r j /\\ s SUBSET j /\\ t SUBSET j\n        ==> ring_setadd r s t SUBSET j
       #|  ring_setadd r (ring_setadd r j j) (ring_setadd r s t):A->bool
       #|  forall r j s t:A->bool.\n        (ring_ideal r j \\/ j subring_of r) /\\\n        s SUBSET ring_carrier r /\\ t SUBSET ring_carrier r\n        ==> ring_setadd r (ring_setadd r j s) (ring_setadd r j t) =\n            ring_setadd r j (ring_setadd r s t)
       #|  ring_setadd r (ring_setadd r s t) (ring_setadd r j j) :A->bool
       #|  forall r j s t:A->bool.\n        (ring_ideal r j \\/ j subring_of r) /\\\n        s SUBSET ring_carrier r /\\ t SUBSET ring_carrier r\n        ==> ring_setadd r (ring_setadd r s j) (ring_setadd r t j) =\n            ring_setadd r (ring_setadd r s t) j
-      #|  b:A
-      #|  a:A
+      #|  (b : A)
+      #|  (a : A)
       #|  ring_add r (ring_mul r x y)\n                (ring_add r (ring_mul r a y) (ring_mul r x b)):A
       #|  {f x y |x,y| x IN s /\\ y IN {g w z | w IN t /\\ z IN u}} =\n    {f x (g y z) | x IN s /\\ y IN t /\\ z IN u}
-      #|  b:A
-      #|  y:A
-      #|  a:A
-      #|  x:A
+      #|  (b : A)
+      #|  (y : A)
+      #|  (a : A)
+      #|  (x : A)
       #|  forall r j s t:A->bool.\n        ring_ideal r j /\\\n        s SUBSET ring_carrier r /\\ t SUBSET ring_carrier r\n        ==> ring_setmul r (ring_setadd r j s) (ring_setadd r j t) SUBSET\n            ring_setadd r j (ring_setmul r s t)
       #|  forall r j s t:A->bool.\n        ring_ideal r j /\\\n        s SUBSET ring_carrier r /\\ t SUBSET ring_carrier r\n        ==> ring_setmul r (ring_setadd r s j) (ring_setadd r t j) SUBSET\n            ring_setadd r (ring_setmul r s t) j
       #|  forall r j s t:A->bool.\n        ring_ideal r j /\\\n        (s SUBSET j /\\ t SUBSET ring_carrier r \\/\n         s SUBSET ring_carrier r /\\ t SUBSET j)\n        ==> ring_setmul r s t SUBSET j
-      #|  ring_setadd r {ring_neg r x:A}
+      #|  ring_setadd((r : Ring[A]), {ring_neg(r, (x : A))})
       #|  forall r s t x:A.\n        x IN ring_carrier r /\\\n        s SUBSET ring_carrier r /\\ t SUBSET ring_carrier r\n        ==> (ring_setadd r {x} s = ring_setadd r {x} t <=> s = t)
       #|  forall r s t x:A.\n        x IN ring_carrier r /\\ s SUBSET ring_carrier r /\\\n        t SUBSET ring_carrier r\n        ==> (ring_setadd r s {x} = ring_setadd r t {x} <=> s = t)
       #|  ring_setadd r (ring_setadd r j {x}) {ring_neg r y}  =\n    ring_setadd r (ring_setadd r j {y:A}) {ring_neg r y}
-      #|  (j:A->bool) SUBSET ring_carrier r
+      #|  SUBSET((j : (A) -> Bool), ring_carrier((r : Ring[A])))
       #|  forall r j x y:A.\n        x IN ring_carrier r /\\ y IN ring_carrier r /\\\n        (ring_ideal r j \\/ j subring_of r)\n        ==> (ring_setadd r j {x} = ring_setadd r j {y} <=>\n             ring_sub r x y IN j)
       #|  forall r j x y:A.\n        x IN ring_carrier r /\\ y IN ring_carrier r /\\\n        (ring_ideal r j \\/ j subring_of r)\n        ==> (ring_setadd r {x} j = ring_setadd r {y} j <=>\n             ring_sub r x y IN j)
-      #|  ring_add r y1 y2:A
-      #|  ring_add r x1 x2:A
-      #|  y2:A
-      #|  x2:A
-      #|  y1:A
-      #|  x1:A
-      #|  ring_0 r:A
+      #|  ring_add((r : Ring[A]), (y1 : A), (y2 : A))
+      #|  ring_add((r : Ring[A]), (x1 : A), (x2 : A))
+      #|  (y2 : A)
+      #|  (x2 : A)
+      #|  (y1 : A)
+      #|  (x1 : A)
+      #|  ring_0((r : Ring[A]))
       #|  forall r j k:A->bool.\n        ring_ideal r j /\\ ring_ideal r k\n        ==> ring_ideal r (ring_setadd r j k)
-      #|  ring_mul r x y:A
+      #|  ring_mul((r : Ring[A]), (x : A), (y : A))
       #|  ring_add r (ring_mul r a b)\n                       (ring_add r (ring_mul r y a) (ring_mul r x b)):A
-      #|  ring_add r x y:A
-      #|  ring_add r a b:A
-      #|  y:A
-      #|  b:A
-      #|  x:A
-      #|  a:A
+      #|  ring_add((r : Ring[A]), (x : A), (y : A))
+      #|  ring_add((r : Ring[A]), (a : A), (b : A))
+      #|  (y : A)
+      #|  (b : A)
+      #|  (x : A)
+      #|  (a : A)
       #|  forall r j s:A->bool.\n        ring_ideal r j /\\ s subring_of r\n        ==> (ring_setadd r j s) subring_of r
       #|  forall r j s:A->bool.\n        ring_ideal r j /\\ s subring_of r\n        ==> (ring_setadd r s j) subring_of r
       #|  forall r i j:A->bool.\n        ring_ideal r i /\\ ring_ideal r j\n        ==> ring_ideal r {x | x IN ring_carrier r /\\\n                              ring_setmul r {x} j SUBSET i}
@@ -29649,113 +29649,113 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r (a:A) j.\n        a IN ring_carrier r /\\ ring_ideal r j\n        ==> ring_ideal r {x | x IN ring_carrier r /\\ ring_mul r a x IN j}
       #|  forall r j k. ring_ideal r j /\\ ring_ideal r k\n           ==> (ring_setadd r j k = ring_carrier r <=>\n                ?a b. a IN j /\\ b IN k /\\ ring_add r a b = ring_1 r)
       #|  ideal_generated r (s:A->bool) =\n     INTERS {j | ring_ideal r j /\\ (ring_carrier r INTER s) SUBSET j}
-      #|  g INTER g INTER s = g INTER s
+      #|  INTER((g : (_) -> Bool), INTER(g, (s : (_) -> Bool))) == INTER(g, s)
       #|  forall r s:A->bool.\n        ideal_generated r s =\n        ideal_generated r (ring_carrier r INTER s)
-      #|  ring_carrier r:A->bool
-      #|  forall r s:A->bool. ring_ideal r (ideal_generated r s)
-      #|  forall r s:A->bool. ~(ideal_generated r s = {})
+      #|  ring_carrier((r : Ring[A]))
+      #|  \226\136\128 r : Ring[A], \226\136\128 s : (A) -> Bool, ring_ideal(r, ideal_generated(r, s))
+      #|  \226\136\128 r : Ring[A], \226\136\128 s : (A) -> Bool, !(ideal_generated(r, s) == {})
       #|  forall r s t:A->bool.\n        s SUBSET t\n        ==> ideal_generated r s SUBSET ideal_generated r t
       #|  forall r h s:A->bool.\n        s SUBSET h /\\ ring_ideal r h ==> ideal_generated r s SUBSET h
-      #|  s:A->bool
-      #|  {x:A | x IN ring_carrier r /\\ P x}
-      #|  r:A ring
-      #|  s:A->bool
-      #|  ring_carrier r INTER (s:A->bool)
+      #|  (s : (A) -> Bool)
+      #|  {(x : A) | IN(x, ring_carrier((r : Ring[A]))) && (P : (A) -> Bool)(x)}
+      #|  (r : Ring[A])
+      #|  (s : (A) -> Bool)
+      #|  INTER(ring_carrier((r : Ring[A])), (s : (A) -> Bool))
       #|  ring_carrier r INTER (s:A->bool) SUBSET ring_carrier r
       #|  forall r P s:A->bool.\n        (forall x. x IN ring_carrier r /\\ x IN s ==> P x) /\\\n        P(ring_0 r) /\\\n        (forall x. P x ==> P(ring_neg r x)) /\\\n        (forall x y. P x /\\ P y ==> P(ring_add r x y)) /\\\n        (forall x y. x IN ring_carrier r /\\ P y ==> P(ring_mul r x y))\n        ==> forall x. x IN ideal_generated r s ==> P x
       #|  forall x. x IN ideal_generated r s ==> (x:A) IN ring_carrier r /\\ P x
       #|  forall r P s:A->bool.\n        (forall x. x IN ring_carrier r /\\ x IN s ==> P x) /\\\n        P(ring_0 r) /\\\n        (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\ P x /\\ P y\n               ==> P(ring_add r x y)) /\\\n        (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\ P y\n               ==> P(ring_mul r x y))\n        ==> forall x. x IN ideal_generated r s ==> P x
-      #|  a IN s ==> INTERS s SUBSET a
+      #|  IN((a : (_) -> Bool), (s : ((_) -> Bool) -> Bool)) \226\134\146 SUBSET(INTERS(s), a)
       #|  forall r h:A->bool.\n         ideal_generated r h SUBSET ring_carrier r
       #|  forall r s:A->bool.\n        FINITE(ring_carrier r)\n        ==> FINITE(ideal_generated r s)
       #|  forall r h:A->bool.\n     ring_carrier r INTER h SUBSET (ideal_generated r h)
       #|  forall r h s:A->bool.\n        ring_ideal r h\n        ==> (ideal_generated r s SUBSET h <=>\n             ring_carrier r INTER s SUBSET h)
       #|  forall r s t:A->bool.\n        ideal_generated r s SUBSET ideal_generated r t <=>\n        ring_carrier r INTER s SUBSET ideal_generated r t
-      #|  h:A->bool
-      #|  x:A
-      #|  h SUBSET g ==> g INTER h = h
+      #|  (h : (A) -> Bool)
+      #|  (x : A)
+      #|  SUBSET((h : (_) -> Bool), (g : (_) -> Bool)) \226\134\146 INTER(g, h) == h
       #|  forall r h:A->bool.\n        ring_ideal r h ==> ideal_generated r h = h
       #|  forall r h:A->bool. ideal_generated r h = h <=> ring_ideal r h
       #|  forall r:A ring. ideal_generated r (ring_carrier r) = ring_carrier r
-      #|  s SUBSET t <=> t INTER s = s
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) == (INTER(t, s) == s)
       #|  forall r s:A->bool. s SUBSET ring_carrier r ==> s SUBSET (ideal_generated r s)
-      #|  u SUBSET s ==> u INTER s = u
+      #|  SUBSET((u : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 INTER(u, s) == u
       #|  forall r s:A->bool.\n        ring_carrier r SUBSET s ==> ideal_generated r s = ring_carrier r
       #|  forall r s x:A.\n        s SUBSET ring_carrier r /\\ x IN s\n        ==> x IN ideal_generated r s
       #|  forall r s x:A.\n        x IN ring_carrier r /\\ x IN s\n        ==> x IN ideal_generated r s
       #|  forall r s:A->bool.\n        ideal_generated r (ideal_generated r s) =\n        ideal_generated r s
       #|  p /\\ (q \\/ r) ==> s <=> (q ==> p ==> s) /\\ (p /\\ r ==> s)
       #|  forall r s:A->bool.\n        ideal_generated r (ring_0 r INSERT s) = ideal_generated r s
-      #|  forall r:A ring. ideal_generated r {ring_0 r} = {ring_0 r}
-      #|  forall r:A ring. ideal_generated r {} = {ring_0 r}
+      #|  \226\136\128 r : Ring[A], ideal_generated(r, {ring_0(r)}) == {ring_0(r)}
+      #|  \226\136\128 r : Ring[A], ideal_generated(r, {}) == {ring_0(r)}
       #|  forall r a:A.\n        a IN ring_carrier r\n        ==> ideal_generated r {a} = {x | ring_divides r a x}
       #|  forall r a:A.\n      a IN ring_carrier r\n      ==> ideal_generated r {a} = {ring_mul r a x | x | x IN ring_carrier r}
       #|  forall r x y:A. x IN ring_carrier r\n             ==> (y IN ideal_generated r {x} <=> ring_divides r x y)
       #|  forall r x y:A. ring_divides r x y ==> y IN ideal_generated r {x}
       #|  forall r x:A. x IN ideal_generated r {x} <=> x IN ring_carrier r
       #|  forall r a:A.\n        a IN ring_carrier r\n        ==> (ideal_generated r {a} = ring_carrier r <=> ring_unit r a)
-      #|  x IN s ==> s INTER {x} = {x}
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 INTER(s, {x}) == {x}
       #|  forall r a b:A.\n        a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> (ideal_generated r {a} SUBSET ideal_generated r {b} <=>\n             ring_divides r b a)
       #|  forall r a b:A.\n        a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> (ideal_generated r {a} = ideal_generated r {b} <=>\n             ring_associates r b a)
-      #|  s PSUBSET t <=> s SUBSET t /\\ ~(t SUBSET s)
+      #|  PSUBSET((s : (_) -> Bool), (t : (_) -> Bool)) == (SUBSET(s, t) && !SUBSET(t, s))
       #|  forall r a b:A.\n        a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> (ideal_generated r {a} PSUBSET ideal_generated r {b} <=>\n             ring_divides r b a /\\ ~(ring_divides r a b))
-      #|  ~(a IN s) ==> s INTER {a} = {}
-      #|  (a:A) IN ring_carrier r
+      #|  !IN((a : _), (s : (_) -> Bool)) \226\134\146 INTER(s, {a}) == {}
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
       #|  forall r a:A. ideal_generated r {a} = {ring_0 r} <=>\n           a IN ring_carrier r ==> a = ring_0 r
       #|  forall r a:A. a IN ring_carrier r\n           ==> ideal_generated r {a} = ring_setmul r {a} (ring_carrier r)
       #|  forall r a:A. a IN ring_carrier r\n           ==> ideal_generated r {a} = ring_setmul r (ring_carrier r) {a}
       #|  ring_setmul r (ring_setmul r (ring_carrier r) (ring_carrier r))\n                  {ring_mul r a b}:A->bool
       #|  forall r a b:A.\n        a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> ring_setmul r (ideal_generated r {a}) (ideal_generated r {b}) =\n            ideal_generated r {ring_mul r a b}
-      #|  z IN u ==> u SUBSET v ==> z IN v
-      #|  y:A
-      #|  x:A
-      #|  z:A
-      #|  ring_0 r:A
-      #|  ring_0 r:A
-      #|  z:A
-      #|  z:A
+      #|  IN((z : _), (u : (_) -> Bool)) \226\134\146 SUBSET(u, (v : (_) -> Bool)) \226\134\146 IN(z, v)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (z : A)
+      #|  ring_0((r : Ring[A]))
+      #|  ring_0((r : Ring[A]))
+      #|  (z : A)
+      #|  (z : A)
       #|  forall r s t:A->bool.\n        ideal_generated r (s UNION t) =\n        ring_setadd r (ideal_generated r s) (ideal_generated r t)
       #|  forall r s a:A.\n        ideal_generated r (a INSERT s) =\n        ring_setadd r (ideal_generated r {a}) (ideal_generated r s)
       #|  forall r a b:A.\n        a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> ideal_generated r {a,b} =\n            { ring_add r (ring_mul r a x) (ring_mul r b y) | x,y |\n              x IN ring_carrier r /\\ y IN ring_carrier r}
       #|  forall r s t:A->bool.\n        s SUBSET ring_carrier r /\\ t SUBSET ring_carrier r\n        ==> ideal_generated r (ring_setadd r s t) SUBSET\n            ideal_generated r (s UNION t)
-      #|  forall r s a:A. IMAGE (ring_mul r a) = ring_setmul r {a}
+      #|  \226\136\128 r : Ring[A], \226\136\128 s : _, \226\136\128 a : A, IMAGE(ring_mul(r, a)) == ring_setmul(r, {a})
       #|  forall r j a:A.\n        ring_ideal r j /\\ a IN ring_carrier r\n        ==> ring_ideal r (IMAGE (ring_mul r a) j)
       #|  forall r s a:A.\n        s SUBSET ring_carrier r /\\ a IN ring_carrier r\n        ==> ideal_generated r (IMAGE (ring_mul r a) s) =\n            IMAGE (ring_mul r a) (ideal_generated r s)
-      #|  k UNION l:A->bool
-      #|  l:A->bool
-      #|  k:A->bool
-      #|  y:A
-      #|  x:A
-      #|  {}:A->bool
-      #|  {x:A}
-      #|  x:A
-      #|  x:A
-      #|  x:A
-      #|  x:A
+      #|  UNION((k : (A) -> Bool), (l : (A) -> Bool))
+      #|  (l : (A) -> Bool)
+      #|  (k : (A) -> Bool)
+      #|  (y : A)
+      #|  (x : A)
+      #|  ({} : (A) -> Bool)
+      #|  {(x : A)}
+      #|  (x : A)
+      #|  (x : A)
+      #|  (x : A)
+      #|  (x : A)
       #|  forall r j:A->bool.\n        ideal_generated r j =\n        UNIONS {ideal_generated r k | FINITE k /\\ k SUBSET j}
       #|  forall r j:A->bool.\n        ideal_generated r j =\n        UNIONS { ideal_generated r k | k |\n                 FINITE k /\\ k SUBSET j /\\ k SUBSET ring_carrier r}
-      #|  (\\i. ring_mul r a (c i)):K->A
-      #|  c:K->A
-      #|  a:A
-      #|  (\\i. ring_add r (c i) (d i)):K->A
-      #|  d:K->A
-      #|  c:K->A
-      #|  (\\i. ring_neg r (c i)):K->A
-      #|  c:K->A
-      #|  (\\i. ring_0 r):K->A
-      #|  (\\j. if j = i then ring_1 r else ring_0 r):K->A
-      #|  i:K
+      #|  (i : K) => ring_mul((r : Ring[A]), (a : A), (c : (K) -> A)(i))
+      #|  (c : (K) -> A)
+      #|  (a : A)
+      #|  (i : K) => ring_add((r : Ring[A]), (c : (K) -> A)(i), (d : (K) -> A)(i))
+      #|  (d : (K) -> A)
+      #|  (c : (K) -> A)
+      #|  (i : K) => ring_neg((r : Ring[A]), (c : (K) -> A)(i))
+      #|  (c : (K) -> A)
+      #|  (i : K) => ring_0((r : Ring[A]))
+      #|  (j : K) => if j == (i : K) { ring_1((r : Ring[A])) } else { ring_0(r) }
+      #|  (i : K)
       #|  forall r k (f:K->A).\n        FINITE k /\\ IMAGE f k SUBSET ring_carrier r\n        ==> ideal_generated r (IMAGE f k) =\n            { ring_sum r k (\\i. ring_mul r (c i) (f i)) | c |\n              forall i. i IN k ==> c i IN ring_carrier r }
       #|  forall r k:A->bool.\n        FINITE k /\\ k SUBSET ring_carrier r\n        ==> ideal_generated r k =\n            { ring_sum r k (\\i. ring_mul r (c i) i) | c |\n              forall i. i IN k ==> c i IN ring_carrier r }
-      #|  p /\\ q <=> ~(p ==> ~q)
-      #|  y:A
+      #|  ((p : Bool) && (q : Bool)) == !(p \226\134\146 !q)
+      #|  (y : A)
       #|  forall r s:A->bool.\n        ideal_generated r s =\n        { ring_sum r k (\\i. ring_mul r (c i) i) | k,c |\n          FINITE k /\\ k SUBSET s /\\ k SUBSET ring_carrier r /\\\n          (forall i. i IN k ==> c i IN ring_carrier r) }
       #|  integral_domain (r:A ring) <=>\n        ~(ring_1 r = ring_0 r) /\\\n        (forall x y. x IN ring_carrier r /\\\n               y IN ring_carrier r /\\\n               ring_mul r x y = ring_0 r\n               ==> x = ring_0 r \\/ y = ring_0 r)
       #|  field (r:A ring) <=>\n        ~(ring_1 r = ring_0 r) /\\\n        forall x. x IN ring_carrier r /\\ ~(x = ring_0 r)\n            ==> ?y. y IN ring_carrier r /\\\n                    ring_mul r x y = ring_1 r
-      #|  forall r:A ring. integral_domain r ==> ~(trivial_ring r)
-      #|  forall r:A ring. field r ==> ~(trivial_ring r)
+      #|  \226\136\128 r : Ring[A], integral_domain(r) \226\134\146 !trivial_ring(r)
+      #|  \226\136\128 r : Ring[A], field(r) \226\134\146 !trivial_ring(r)
       #|  forall r:A ring. integral_domain r ==> ~(ring_1 r = ring_0 r)
-      #|  forall f:A ring. field f ==> ~(ring_1 f = ring_0 f)
+      #|  \226\136\128 f : Ring[A], field(f) \226\134\146 !(ring_1(f) == ring_0(f))
       #|  forall r:A ring.\n        integral_domain r <=>\n        ~(ring_1 r = ring_0 r) /\\\n        forall x. ring_zerodivisor r x ==> x = ring_0 r
       #|  forall r:A ring.\n        integral_domain r <=>\n        ~(ring_1 r = ring_0 r) /\\\n        forall x. ring_regular r x <=> x IN ring_carrier r /\\ ~(x = ring_0 r)
       #|  forall r a:A.\n        integral_domain r\n        ==> (ring_zerodivisor r a <=> a = ring_0 r)
@@ -29764,15 +29764,15 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r (a:A) n.\n        integral_domain r /\\ a IN ring_carrier r\n        ==> (ring_pow r a n = ring_0 r <=> a = ring_0 r /\\ ~(n = 0))
       #|  forall r a:A. integral_domain r ==> (ring_nilpotent r a <=> a = ring_0 r)
       #|  forall r k (f:K->A).\n        integral_domain r /\\ FINITE k\n        ==> (ring_product r k f = ring_0 r <=> ?i. i IN k /\\ f i = ring_0 r)
-      #|  ring_sub r x y:A
-      #|  a:A
+      #|  ring_sub((r : Ring[A]), (x : A), (y : A))
+      #|  (a : A)
       #|  forall r a x y:A.\n        integral_domain r /\\\n        a IN ring_carrier r /\\ ~(a = ring_0 r) /\\\n        x IN ring_carrier r /\\ y IN ring_carrier r /\\\n        ring_mul r a x = ring_mul r a y\n        ==> x = y
       #|  forall r a x y:A.\n        integral_domain r /\\\n        a IN ring_carrier r /\\\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> (ring_mul r a x = ring_mul r a y <=>\n             a = ring_0 r \\/ x = y)
       #|  forall r a x y:A.\n        integral_domain r /\\\n        a IN ring_carrier r /\\ ~(a = ring_0 r) /\\\n        x IN ring_carrier r /\\ y IN ring_carrier r /\\\n        ring_mul r x a = ring_mul r y a\n        ==> x = y
       #|  forall r a x y:A.\n        integral_domain r /\\\n        a IN ring_carrier r /\\\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> (ring_mul r x a = ring_mul r y a <=>\n             x = y \\/ a = ring_0 r)
-      #|  (d:A) IN ring_carrier r
-      #|  d:A
-      #|  a:A = ring_0 r
+      #|  IN((d : A), ring_carrier((r : Ring[A])))
+      #|  (d : A)
+      #|  (a : A) == ring_0((r : Ring[A]))
       #|  forall r a b c:A.\n        integral_domain r /\\\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\ c IN ring_carrier r\n        ==> (ring_divides r (ring_mul r a b) (ring_mul r a c) <=>\n             a = ring_0 r \\/ ring_divides r b c)
       #|  forall r a b c:A.\n        integral_domain r /\\\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\ c IN ring_carrier r\n        ==> (ring_divides r (ring_mul r a c) (ring_mul r b c) <=>\n             ring_divides r a b \\/ c = ring_0 r)
       #|  forall r a b c:A.\n        integral_domain r /\\\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\ c IN ring_carrier r\n        ==> (ring_associates r (ring_mul r a b) (ring_mul r a c) <=>\n             a = ring_0 r \\/ ring_associates r b c)
@@ -29788,56 +29788,56 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r a b:A.\n        field r\n        ==> (ring_divides r a b <=>\n             a IN ring_carrier r /\\ b IN ring_carrier r /\\\n             (a = ring_0 r ==> b = ring_0 r))
       #|  forall r a b:A.\n        field r\n        ==> (ring_associates r a b <=>\n             a IN ring_carrier r /\\ b IN ring_carrier r /\\\n             (a = ring_0 r <=> b = ring_0 r))
       #|  forall r a b:A.\n        field r\n        ==> (ring_coprime r (a,b) <=>\n             a IN ring_carrier r /\\ b IN ring_carrier r /\\\n             ~(a = ring_0 r /\\ b = ring_0 r))
-      #|  ring_mul r x (ring_mul r y y'):A
-      #|  y':A
-      #|  y:A = ring_0 r
-      #|  y:A
-      #|  y:A
-      #|  x:A
-      #|  forall r:A ring. field r ==> integral_domain r
+      #|  ring_mul((r : Ring[A]), (x : A), ring_mul(r, (y : A), (y' : A)))
+      #|  (y' : A)
+      #|  (y : A) == ring_0((r : Ring[A]))
+      #|  (y : A)
+      #|  (y : A)
+      #|  (x : A)
+      #|  \226\136\128 r : Ring[A], field(r) \226\134\146 integral_domain(r)
       #|  forall r a:A. field r ==> (ring_zerodivisor r a <=> a = ring_0 r)
       #|  forall r a:A. field r\n           ==> (ring_regular r a <=> a IN ring_carrier r /\\ ~(a = ring_0 r))
       #|  forall r a:A. field r ==> (ring_nilpotent r a <=> a = ring_0 r)
       #|  forall r a b:A.\n        field r /\\ a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> (ring_mul r a b = ring_0 r <=> a = ring_0 r \\/ b = ring_0 r)
       #|  forall r (a:A) n.\n        field r /\\ a IN ring_carrier r\n        ==> (ring_pow r a n = ring_0 r <=> a = ring_0 r /\\ ~(n = 0))
       #|  forall r k (f:K->A).\n        field r /\\ FINITE k\n        ==> (ring_product r k f = ring_0 r <=> ?i. i IN k /\\ f i = ring_0 r)
-      #|  r:A ring
-      #|  \\x:A. ring_mul r a x
-      #|  ring_carrier r:A->bool
-      #|  a:A
+      #|  (r : Ring[A])
+      #|  (x : A) => ring_mul((r : Ring[A]), (a : A), x)
+      #|  ring_carrier((r : Ring[A]))
+      #|  (a : A)
       #|  forall r:A ring. FINITE(ring_carrier r) /\\ integral_domain r ==> field r
       #|  forall r:A ring.\n        FINITE(ring_carrier r) ==> (integral_domain r <=> field r)
-      #|  m = m * n <=> m * n = m * 1
-      #|  n:num = m * n * d <=> n = n * m * d
-      #|  forall n:num. n divides n
-      #|  ring_of_num r n:A
-      #|  ring_of_num r m:A
-      #|  n:num
-      #|  m:num
-      #|  ring_char(r:A ring) = 0
+      #|  ((m : Num) == m * (n : Num)) == (m * n == m * 1)
+      #|  ((n : Num) == (m : Num) * (n * (d : Num))) == (n == n * (m * d))
+      #|  \226\136\128 n : Num, divides(n, n)
+      #|  ring_of_num((r : Ring[A]), (n : Num))
+      #|  ring_of_num((r : Ring[A]), (m : Num))
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  ring_char((r : Ring[A])) == 0
       #|  forall r:A ring.\n        integral_domain r ==> ring_char r = 0 \\/ prime(ring_char r)
-      #|  (q ==> p) /\\ (p ==> r) ==> (p \\/ q ==> r)
+      #|  ((q : Bool) \226\134\146 (p : Bool)) && (p \226\134\146 (r : Bool)) \226\134\146 p || q \226\134\146 r
       #|  forall(r:A ring) m n.\n        integral_domain r \\/ field r\n        ==> (ring_char r divides m * n <=>\n             ring_char r divides m \\/ ring_char r divides n)
-      #|  0 divides n <=> n = 0
-      #|  (n:num) divides n
-      #|  (q ==> p) /\\ (p ==> r) ==> (p \\/ q ==> r)
+      #|  divides(0, (n : Num)) == (n == 0)
+      #|  divides((n : Num), n)
+      #|  ((q : Bool) \226\134\146 (p : Bool)) && (p \226\134\146 (r : Bool)) \226\134\146 p || q \226\134\146 r
       #|  forall(r:A ring) p.\n        (integral_domain r \\/ field r) /\\ prime p\n        ==> (ring_char r divides p <=> ring_char r = p)
       #|  forall r:A ring.\n        integral_domain r /\\ FINITE(ring_carrier r) ==> prime(ring_char r)
-      #|  s:A->bool
-      #|  r:A ring
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
       #|  forall r s:A->bool.\n        integral_domain r ==> integral_domain (subring_generated r s)
-      #|  ring_mul r a u:A = b
-      #|  a:A
-      #|  r:A ring
-      #|  v:A
-      #|  u:A
-      #|  (b:A) IN ring_carrier r
-      #|  (a:A) IN ring_carrier r
-      #|  a:A = ring_0 r
+      #|  ring_mul((r : Ring[A]), (a : A), (u : A)) == (b : A)
+      #|  (a : A)
+      #|  (r : Ring[A])
+      #|  (v : A)
+      #|  (u : A)
+      #|  IN((b : A), ring_carrier((r : Ring[A])))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  (a : A) == ring_0((r : Ring[A]))
       #|  forall r a b:A.\n        integral_domain r\n        ==> (ring_associates r a b <=>\n             a IN ring_carrier r /\\ b IN ring_carrier r /\\\n             ?u. ring_unit r u /\\ ring_mul r a u = b)
       #|  forall r:A ring.\n        ring_carrier r = {ring_0 r,ring_1 r}\n        ==> (integral_domain r <=> ~(ring_1 r = ring_0 r))
       #|  forall r:A ring.\n        ring_carrier r = {ring_0 r,ring_1 r}\n        ==> (field r <=> ~(ring_1 r = ring_0 r))
-      #|  (x:A) IN ring_carrier r
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
       #|  forall r. ring_carrier r = (:A)\n          ==> (forall x y z. ring_add r x (ring_add r y z) =\n                       ring_add r (ring_add r x y) z) /\\\n              (forall x y. ring_add r x y = ring_add r y x) /\\\n              (forall x. ring_add r (ring_of_int r (&0)) x = x) /\\\n              (forall x y z. ring_mul r x (ring_mul r y z) =\n                       ring_mul r (ring_mul r x y) z) /\\\n              (forall x y. ring_mul r x y = ring_mul r y x) /\\\n              (forall x. ring_mul r (ring_of_int r (&1)) x = x) /\\\n              (forall x. ring_mul r (ring_of_int r (&0)) x = ring_of_int r (&0)) /\\\n              (forall x y z. ring_mul r x (ring_add r y z) =\n                       ring_add r (ring_mul r x y) (ring_mul r x z)) /\\\n              (forall x. ring_pow r x 0 = ring_of_int r (&1)) /\\\n              (forall x n. ring_pow r x (SUC n) = ring_mul r x (ring_pow r x n))
       #|  forall r. ring_carrier r = (:A)\n          ==> (forall x. ring_neg r x = ring_mul r (ring_of_int r (-- &1)) x) /\\\n              (forall x y. ring_sub r x y =\n                     ring_add r x (ring_mul r (ring_of_int r (-- &1)) y))
       #|  ring_0 r = ring_of_int r (&0) /\\\n     ring_1 r = ring_of_int r (&1)
@@ -29845,22 +29845,22 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  q:num
       #|  0
       #|  1
-      #|  r:A ring
+      #|  (r : Ring[A])
       #|  integral_domain r\n     ==> ring_carrier r = (:A)\n         ==> (forall x. ring_mul r (ring_of_int r (&0)) x = ring_of_int r (&0)) /\\\n             (forall x y z. ring_add r x y = ring_add r x z <=> y = z) /\\\n             (forall w x y z.\n                      ring_add r (ring_mul r w y) (ring_mul r x z) =\n                      ring_add r (ring_mul r w z) (ring_mul r x y) <=>\n                      w = x \\/ y = z)
-      #|  ring_of_int r n :A = ring_of_int r n <=> T
+      #|  (ring_of_int((r : Ring[A]), (n : Int)) == ring_of_int(r, n)) == true
       #|  integral_domain (r:A ring)\n     ==> (ring_of_int r (&1) = ring_of_int r (&0) <=> F)
       #|  integral_domain (r:A ring)\n     ==> (ring_of_int r (&0) = ring_of_int r (&1) <=> F)
       #|  (ring_of_int r m :A = ring_of_int r n <=> F) <=>\n     ~(&(ring_char r) divides (m - n))
       #|  (&(ring_char(r:A ring)) divides --(&n) <=> ring_char r divides n) /\\\n     (&(ring_char(r:A ring)) divides &n <=> ring_char r divides n)
-      #|  ring_of_int (r:A ring)
+      #|  ring_of_int((r : Ring[A]))
       #|  ring_0 r:A = ring_of_int r (&0) /\\\n     ring_1 r:A = ring_of_int r (&1)
-      #|  ring_pow(r:A ring)
-      #|  ring_div(r:A ring)
-      #|  ring_mul(r:A ring)
-      #|  ring_inv(r:A ring)
-      #|  ring_sub(r:A ring)
-      #|  ring_add(r:A ring)
-      #|  ring_neg(r:A ring)
+      #|  ring_pow((r : Ring[A]))
+      #|  ring_div((r : Ring[A]))
+      #|  ring_mul((r : Ring[A]))
+      #|  ring_inv((r : Ring[A]))
+      #|  ring_sub((r : Ring[A]))
+      #|  ring_add((r : Ring[A]))
+      #|  ring_neg((r : Ring[A]))
       #|  ring_homomorphism (r,r') (f:A->B) <=>\n        IMAGE f (ring_carrier r) SUBSET ring_carrier r' /\\\n        f (ring_0 r) = ring_0 r' /\\\n        f (ring_1 r) = ring_1 r' /\\\n        (forall x. x IN ring_carrier r\n             ==> f(ring_neg r x) = ring_neg r' (f x)) /\\\n        (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r\n               ==> f(ring_add r x y) = ring_add r' (f x) (f y)) /\\\n        (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r\n               ==> f(ring_mul r x y) = ring_mul r' (f x) (f y))
       #|  ring_monomorphism (r,r') (f:A->B) <=>\n        ring_homomorphism (r,r') f /\\\n        forall x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\ f x = f y\n             ==> x = y
       #|  ring_epimorphism (r,r') (f:A->B) <=>\n        ring_homomorphism (r,r') f /\\\n        IMAGE f (ring_carrier r) = ring_carrier r'
@@ -29878,11 +29878,11 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r r' (f:A->B) g.\n        ring_isomorphisms (r,r') (f,g) <=> ring_isomorphisms(r',r) (g,f)
       #|  forall(f:A->B) g r r'.\n        ring_isomorphisms (r,r') (f,g) ==> ring_isomorphism (r,r') f
       #|  forall(f:A->B) g r r'.\n        ring_isomorphisms (r,r') (f,g) ==> ring_isomorphism (r',r) g
-      #|  ring_neg r x:A
-      #|  x:A
-      #|  ring_0 r:A
-      #|  ring_0 r:A
-      #|  p /\\ (p ==> q) ==> p /\\ q
+      #|  ring_neg((r : Ring[A]), (x : A))
+      #|  (x : A)
+      #|  ring_0((r : Ring[A]))
+      #|  ring_0((r : Ring[A]))
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
       #|  forall r r' f:A->B.\n        ring_homomorphism (r,r') (f:A->B) <=>\n        IMAGE f (ring_carrier r) SUBSET ring_carrier r' /\\\n        f(ring_1 r) = ring_1 r' /\\\n        (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r\n               ==> f(ring_add r x y) = ring_add r' (f x) (f y)) /\\\n        (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r\n               ==> f(ring_mul r x y) = ring_mul r' (f x) (f y))
       #|  forall r r' (f:A->B) g.\n        ring_isomorphisms(r,r') (f,g) <=>\n        ring_homomorphism(r,r') f /\\\n        (forall x. x IN ring_carrier r ==> g(f x) = x) /\\\n        (forall y. y IN ring_carrier r' ==> g y IN ring_carrier r /\\ f(g y) = y)
       #|  forall r r' (f:A->B) x.\n    ring_homomorphism (r,r') f /\\ x IN ring_carrier r\n    ==> f x IN ring_carrier r'
@@ -29893,9 +29893,9 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r r' (f:A->B).\n        ring_homomorphism(r,r') f\n        ==> forall x y. x IN ring_carrier r /\\ y IN ring_carrier r\n                  ==> f(ring_mul r x y) = ring_mul r' (f x) (f y)
       #|  forall r r' (f:A->B).\n        ring_homomorphism(r,r') f\n        ==> forall x y. x IN ring_carrier r /\\ y IN ring_carrier r\n                  ==> f(ring_sub r x y) = ring_sub r' (f x) (f y)
       #|  forall r r' (f:A->B).\n        ring_homomorphism(r,r') f\n        ==> forall x n. x IN ring_carrier r\n                  ==> f(ring_pow r x n) = ring_pow r' (f x) n
-      #|  (x:A) IN ring_carrier r
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
       #|  forall r r' (f:A->B).\n        ring_homomorphism (r,r') f\n        ==> forall x. ring_unit r x ==> f(ring_inv r x) = ring_inv r' (f x)
-      #|  x:A = ring_0 r
+      #|  (x : A) == ring_0((r : Ring[A]))
       #|  forall r r' (f:A->B).\n        field r /\\ ring_homomorphism (r,r') f\n        ==> forall x. x IN ring_carrier r ==> f(ring_inv r x) = ring_inv r' (f x)
       #|  forall r r' (f:A->B).\n        field r /\\ ring_homomorphism (r,r') f\n        ==> forall x y. x IN ring_carrier r /\\ y IN ring_carrier r\n                  ==> f(ring_div r x y) = ring_div r' (f x) (f y)
       #|  forall r r' (f:A->B).\n        ring_homomorphism(r,r') f\n        ==> forall n. f(ring_of_num r n) = ring_of_num r' n
@@ -29903,15 +29903,15 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r r' (f:A->B).\n        ring_homomorphism(r,r') f ==> ring_char r' divides ring_char r
       #|  forall r r' (f:A->B).\n        ring_homomorphism(r,r') f\n        ==> forall(h:K->A) k.\n                FINITE k /\\ (forall i. i IN k ==> h i IN ring_carrier r)\n                ==> f(ring_sum r k h) = ring_sum r' k (f o h)
       #|  forall r r' (f:A->B).\n        ring_homomorphism(r,r') f\n        ==> forall(h:K->A) k.\n                FINITE k /\\ (forall i. i IN k ==> h i IN ring_carrier r)\n                ==> f(ring_product r k h) = ring_product r' k (f o h)
-      #|  r:A ring
+      #|  (r : Ring[A])
       #|  ring_homomorphism(r,r') f /\\ x = ring_0 r /\\ y = ring_0 r'\n    ==> f x = y
-      #|  FINITE {a | a IN k /\\ ~((h:K->A) a = ring_0 r)}
-      #|  p /\\ ~q <=> ~(p ==> q)
+      #|  FINITE({(a : K) | IN(a, (k : (K) -> Bool)) && !((h : (K) -> A)(a) == ring_0((r : Ring[A])))})
+      #|  ((p : Bool) && !(q : Bool)) == !(p \226\134\146 q)
       #|  forall r r' (f:A->B).\n        ring_monomorphism(r,r') f\n        ==> forall(h:K->A) k.\n                (forall i. i IN k ==> h i IN ring_carrier r)\n                ==> f(ring_sum r k h) = ring_sum r' k (f o h)
-      #|  r:A ring
+      #|  (r : Ring[A])
       #|  ring_homomorphism(r,r') f /\\ x = ring_1 r /\\ y = ring_1 r'\n    ==> f x = y
-      #|  FINITE {a | a IN k /\\ ~((h:K->A) a = ring_1 r)}
-      #|  p /\\ ~q <=> ~(p ==> q)
+      #|  FINITE({(a : K) | IN(a, (k : (K) -> Bool)) && !((h : (K) -> A)(a) == ring_1((r : Ring[A])))})
+      #|  ((p : Bool) && !(q : Bool)) == !(p \226\134\146 q)
       #|  forall r r' (f:A->B).\n        ring_monomorphism(r,r') f\n        ==> forall(h:K->A) k.\n                (forall i. i IN k ==> h i IN ring_carrier r)\n                ==> f(ring_product r k h) = ring_product r' k (f o h)
       #|  forall r r' (f:A->B) (h:K->A) k.\n        ring_monomorphism(r,r') f\n        ==> f(ring_sum r k h) =\n            ring_sum r' {i | i IN k /\\ h i IN ring_carrier r} (f o h)
       #|  forall r r' (f:A->B) (h:K->A) k.\n        ring_monomorphism(r,r') f\n        ==> f(ring_product r k h) =\n            ring_product r' {i | i IN k /\\ h i IN ring_carrier r} (f o h)
@@ -29920,18 +29920,18 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(f:A->B) r r'. ring_epimorphism(r,r') f ==> ring_homomorphism(r,r') f
       #|  forall r r' (f:A->B) x y.\n        ring_monomorphism(r,r') f /\\\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> (f x = f y <=> x = y)
       #|  forall r r' (f:A->B) x.\n        ring_monomorphism(r,r') f /\\\n        x IN ring_carrier r\n        ==> (f x = ring_0 r' <=> x = ring_0 r)
-      #|  forall r:A ring. ring_homomorphism (r,r) (\\x. x)
-      #|  forall r:A ring. ring_homomorphism (r,r) I
-      #|  forall r:A ring. ring_monomorphism (r,r) (\\x. x)
-      #|  forall r:A ring. ring_monomorphism (r,r) I
-      #|  forall r:A ring. ring_epimorphism (r,r) (\\x. x)
-      #|  forall r:A ring. ring_epimorphism (r,r) I
+      #|  \226\136\128 r : Ring[A], ring_homomorphism((r, r), (x : A) => x)
+      #|  \226\136\128 r : Ring[A], ring_homomorphism((r, r), I)
+      #|  \226\136\128 r : Ring[A], ring_monomorphism((r, r), (x : A) => x)
+      #|  \226\136\128 r : Ring[A], ring_monomorphism((r, r), I)
+      #|  \226\136\128 r : Ring[A], ring_epimorphism((r, r), (x : A) => x)
+      #|  \226\136\128 r : Ring[A], ring_epimorphism((r, r), I)
       #|  forall r:A ring. ring_isomorphisms (r,r) ((\\x. x),(\\x. x))
-      #|  forall r:A ring. ring_isomorphisms (r,r) (I,I)
-      #|  forall r:A ring. ring_isomorphism (r,r) (\\x. x)
-      #|  forall r:A ring. ring_isomorphism (r,r) I
-      #|  forall r:A ring. ring_automorphism r (\\x. x)
-      #|  forall r:A ring. ring_automorphism r I
+      #|  \226\136\128 r : Ring[A], ring_isomorphisms((r, r), (I, I))
+      #|  \226\136\128 r : Ring[A], ring_isomorphism((r, r), (x : A) => x)
+      #|  \226\136\128 r : Ring[A], ring_isomorphism((r, r), I)
+      #|  \226\136\128 r : Ring[A], ring_automorphism(r, (x : A) => x)
+      #|  \226\136\128 r : Ring[A], ring_automorphism(r, I)
       #|  forall r1 r2 r3 (f:A->B) (g:B->C).\n        ring_homomorphism(r1,r2) f /\\ ring_homomorphism(r2,r3) g\n        ==> ring_homomorphism(r1,r3) (g o f)
       #|  forall r1 r2 r3 (f:A->B) (g:B->C).\n        ring_monomorphism(r1,r2) f /\\ ring_monomorphism(r2,r3) g\n        ==> ring_monomorphism(r1,r3) (g o f)
       #|  forall(f:A->B) (g:B->C) A B C.\n        ring_homomorphism(A,B) f /\\ ring_homomorphism(B,C) g /\\\n        ring_monomorphism(A,C) (g o f)\n        ==> ring_monomorphism(A,B) f
@@ -29940,39 +29940,39 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r r' (f:A->B) g.\n        ring_homomorphism(r,r') f /\\\n        (forall x. x IN ring_carrier r ==> g(f x) = x)\n        ==> ring_monomorphism (r,r') f
       #|  forall r r' (f:A->B) g.\n        ring_homomorphism(r,r') f /\\\n        ring_homomorphism(r',r) g /\\\n        (forall x. x IN ring_carrier r ==> g(f x) = x)\n        ==> ring_epimorphism (r',r) g
       #|  forall r r' h (f:A->B).\n        ring_homomorphism (r,r') f /\\ IMAGE f (ring_carrier r) SUBSET h\n        ==> ring_homomorphism (r,subring_generated r' h) f
-      #|  s:B->bool
-      #|  r':B ring
+      #|  (s : (B) -> Bool)
+      #|  (r' : Ring[B])
       #|  forall(f:A->B) r r' s.\n      ring_homomorphism(r,subring_generated r' s) f <=>\n      ring_homomorphism(r,r') f /\\\n      IMAGE f (ring_carrier r) SUBSET ring_carrier(subring_generated r' s)
       #|  forall r r' h (f:A->B).\n        h subring_of r'\n        ==> (ring_homomorphism (r,subring_generated r' h) f <=>\n             ring_homomorphism (r,r') f /\\\n             IMAGE f (ring_carrier r) SUBSET h)
-      #|  s:A->bool
-      #|  r:A ring
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
       #|  forall(f:A->B) r r' s.\n        ring_homomorphism (r,r') f\n        ==> ring_homomorphism(subring_generated r s,r') f
-      #|  s:A->bool
-      #|  r:A ring
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
       #|  forall(f:A->B) r r' s.\n        ring_monomorphism (r,r') f\n        ==> ring_monomorphism(subring_generated r s,r') f
       #|  forall r s:A->bool. ring_homomorphism(subring_generated r s,r) (\\x. x)
       #|  forall r s:A->bool. ring_monomorphism(subring_generated r s,r) (\\x. x)
-      #|  s:A->bool
-      #|  r:A ring
-      #|  p ==> q <=> p ==> p /\\ q
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == (p \226\134\146 p && q)
       #|  forall r r' s t (f:A->B).\n      ring_homomorphism(r,r') f /\\ IMAGE f s SUBSET t\n      ==> ring_homomorphism(subring_generated r s,subring_generated r' t) f
       #|  forall r s g h (f:A->B).\n      ring_homomorphism(r,s) f /\\ IMAGE f (ring_carrier r INTER g) SUBSET h\n      ==> ring_homomorphism(subring_generated r g,subring_generated s h) f
       #|  forall r r' s (f:A->B).\n        ring_monomorphism (r,r') f /\\ IMAGE f (ring_carrier r) SUBSET s\n        ==> ring_monomorphism (r,subring_generated r' s) f
-      #|  s:A->bool
-      #|  r:A ring
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
       #|  forall r r' s t (f:A->B).\n      ring_monomorphism(r,r') f /\\ IMAGE f s SUBSET t\n      ==> ring_monomorphism(subring_generated r s,subring_generated r' t) f
       #|  forall r r' t (f:A->B).\n        ring_monomorphism(r,subring_generated r' t) f\n        ==> ring_monomorphism(r,r') f
       #|  forall r s k (f:K->A).\n      ring_sum (subring_generated r s) k f =\n      ring_sum r {x | x IN k /\\ f x IN ring_carrier(subring_generated r s)} f
       #|  forall r s k (f:K->A).\n        s subring_of r\n        ==> ring_sum (subring_generated r s) k f =\n            ring_sum r {x | x IN k /\\ f x IN s} f
       #|  forall r s k (f:K->A).\n      ring_product (subring_generated r s) k f =\n      ring_product r\n        {x | x IN k /\\ f x IN ring_carrier(subring_generated r s)} f
       #|  forall r s k (f:K->A).\n        s subring_of r\n        ==> ring_product (subring_generated r s) k f =\n            ring_product r {x | x IN k /\\ f x IN s} f
-      #|  IMAGE (f:A->B) s
-      #|  s:A->bool
-      #|  s:A->bool
-      #|  r:A ring
+      #|  IMAGE((f : (A) -> B), (s : (A) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
       #|  forall r r' (f:A->B) s.\n        ring_homomorphism(r,r') f /\\ s SUBSET ring_carrier r\n        ==> ring_carrier (subring_generated r' (IMAGE f s)) =\n            IMAGE f (ring_carrier(subring_generated r s))
       #|  forall r r' (f:A->B).\n        ring_homomorphism(r,r') f /\\ s SUBSET ring_carrier r\n        ==> ring_epimorphism(subring_generated r s,\n                             subring_generated r' (IMAGE f s)) f
-      #|  IMAGE (f:A->B) (ring_carrier r) = ring_carrier r'
+      #|  IMAGE((f : (A) -> B), ring_carrier((r : Ring[A]))) == ring_carrier((r' : Ring[B]))
       #|  forall r r' f:A->B.\n      ring_isomorphism (r,r') (f:A->B) <=>\n      ring_homomorphism (r,r') f /\\\n      IMAGE f (ring_carrier r) = ring_carrier r' /\\\n      (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\ f x = f y\n             ==> x = y)
       #|  forall r r' f:A->B.\n      ring_isomorphism (r,r') (f:A->B) <=>\n      ring_homomorphism (r,r') f /\\\n      ring_carrier r' SUBSET IMAGE f (ring_carrier r) /\\\n      (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\ f x = f y\n             ==> x = y)
       #|  forall r r' (f:A->B) h.\n        ring_homomorphism (r,r') f /\\ h subring_of r\n        ==> IMAGE f h subring_of r'
@@ -29996,75 +29996,75 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(f:A->B) r r'. ring_isomorphism(r,r') f ==> ring_homomorphism(r,r') f
       #|  forall r (f:A->A). ring_automorphism r f ==> ring_endomorphism r f
       #|  forall r r' (f:A->B) g.\n        ring_isomorphisms (r,r') (f,g) <=>\n        ring_isomorphism (r,r') f /\\\n        ring_isomorphism (r',r) g /\\\n        (forall x. x IN ring_carrier r ==> g (f x) = x) /\\\n        (forall y. y IN ring_carrier r' ==> f (g y) = y)
-      #|  f:A->B
-      #|  ring_carrier r':B->bool
-      #|  ring_carrier r:A->bool
+      #|  (f : (A) -> B)
+      #|  ring_carrier((r' : Ring[B]))
+      #|  ring_carrier((r : Ring[A]))
       #|  forall r r' (f:A->B).\n        FINITE(ring_carrier r) /\\ FINITE(ring_carrier r') /\\\n        CARD(ring_carrier r) = CARD(ring_carrier r')\n        ==> (ring_isomorphism(r,r') f <=> ring_monomorphism(r,r') f)
-      #|  f:A->B
-      #|  ring_carrier r':B->bool
-      #|  ring_carrier r:A->bool
+      #|  (f : (A) -> B)
+      #|  ring_carrier((r' : Ring[B]))
+      #|  ring_carrier((r : Ring[A]))
       #|  forall r r' (f:A->B).\n        FINITE(ring_carrier r) /\\ FINITE(ring_carrier r') /\\\n        CARD(ring_carrier r) = CARD(ring_carrier r')\n        ==> (ring_isomorphism(r,r') f <=> ring_epimorphism(r,r') f)
       #|  forall r r' g h (f:A->B) f'.\n      ring_isomorphisms(r,r') (f,f') /\\\n      IMAGE f g SUBSET h /\\ IMAGE f' h SUBSET g\n      ==> ring_isomorphisms (subring_generated r g,subring_generated r' h)\n                             (f,f')
       #|  forall r s g h (f:A->B) f'.\n      ring_isomorphisms(r,s) (f,f') /\\\n      IMAGE f (ring_carrier r INTER g) SUBSET h /\\\n      IMAGE f' (ring_carrier s INTER h) SUBSET g\n      ==> ring_isomorphisms (subring_generated r g,subring_generated s h)\n                             (f,f')
-      #|  f':B->A
+      #|  (f' : (B) -> A)
       #|  forall r r' g h (f:A->B).\n      ring_isomorphism(r,r') f /\\ g SUBSET ring_carrier r /\\ IMAGE f g = h\n      ==> ring_isomorphism(subring_generated r g,subring_generated r' h) f
       #|  forall r1 r2 r3 (f1:A->B) (f2:B->C) g1 g2.\n        ring_isomorphisms(r1,r2) (f1,g1) /\\ ring_isomorphisms(r2,r3) (f2,g2)\n        ==> ring_isomorphisms(r1,r3) (f2 o f1,g1 o g2)
       #|  forall r1 r2 r3 (f:A->B) (g:B->C).\n        ring_isomorphism(r1,r2) f /\\ ring_isomorphism(r2,r3) g\n        ==> ring_isomorphism(r1,r3) (g o f)
       #|  forall(f:A->B) (g:B->C) A B C.\n        ring_homomorphism(A,B) f /\\ ring_homomorphism(B,C) g /\\\n        ring_isomorphism(A,C) (g o f)\n        ==> ring_monomorphism(A,B) f /\\ ring_epimorphism(B,C) g
-      #|  (g:B->C) o f o (f':B->A)
-      #|  f':B->A
-      #|  p /\\ (p ==> q) ==> p /\\ q
+      #|  o((g : (B) -> C), o((f : (A) -> B), (f' : (B) -> A)))
+      #|  (f' : (B) -> A)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
       #|  forall(f:A->B) (g:B->C) A B C.\n        ring_epimorphism (A,B) f /\\\n        ring_homomorphism (B,C) g /\\\n        ring_isomorphism (A,C) (g o f)\n        ==> ring_isomorphism (A,B) f /\\ ring_isomorphism (B,C) g
-      #|  (g':C->B) o g o (f:A->B)
-      #|  g':C->B
-      #|  q /\\ (q ==> p) ==> p /\\ q
+      #|  o((g' : (C) -> B), o((g : (B) -> C), (f : (A) -> B)))
+      #|  (g' : (C) -> B)
+      #|  (q : Bool) && (q \226\134\146 (p : Bool)) \226\134\146 p && q
       #|  forall(f:A->B) (g:B->C) A B C.\n        ring_homomorphism (A,B) f /\\\n        ring_monomorphism (B,C) g /\\\n        ring_isomorphism (A,C) (g o f)\n        ==> ring_isomorphism (A,B) f /\\ ring_isomorphism (B,C) g
-      #|  forall y. y IN ring_carrier r' ==> (f:A->B)(g y) = y
+      #|  \226\136\128 y : B, IN(y, ring_carrier((r' : Ring[B]))) \226\134\146 (f : (A) -> B)((g : (B) -> A)(y)) == y
       #|  forall y. y IN ring_carrier r' ==> (g:B->A) y IN ring_carrier r
-      #|  f:A->B
+      #|  (f : (A) -> B)
       #|  forall(f:A->B) g r r'.\n        ring_isomorphism(r,r') f /\\\n        (forall x. x IN ring_carrier r ==> g(f x) = x)\n        ==> ring_isomorphism(r',r) g
-      #|  r':B ring
-      #|  r':B ring
-      #|  IMAGE f s = {a} ==> forall x. x IN s ==> f x = a
-      #|  r:A ring
+      #|  (r' : Ring[B])
+      #|  (r' : Ring[B])
+      #|  IMAGE((f : (_) -> _), (s : (_) -> Bool)) == {(a : _)} \226\134\146 (\226\136\128 x : _, IN(x, s) \226\134\146 f(x) == a)
+      #|  (r : Ring[A])
       #|  forall(f:A->B) r r'.\n        trivial_ring r\n        ==> (ring_homomorphism(r,r') f <=>\n             trivial_ring r' /\\ IMAGE f (ring_carrier r) = {ring_0 r'})
       #|  forall(f:A->B) r r'.\n        trivial_ring r\n        ==> (ring_monomorphism (r,r') f <=> ring_homomorphism (r,r') f)
-      #|  r:A ring
+      #|  (r : Ring[A])
       #|  forall(f:A->B) r r'.\n        trivial_ring r'\n        ==> (ring_monomorphism (r,r') f <=>\n             ring_homomorphism (r,r') f /\\ trivial_ring r)
       #|  forall(f:A->B) r r'.\n        trivial_ring r\n        ==> (ring_epimorphism (r,r') f <=>\n             ring_homomorphism (r,r') f /\\ trivial_ring r')
-      #|  r':B ring
-      #|  r:A ring
+      #|  (r' : Ring[B])
+      #|  (r : Ring[A])
       #|  forall(f:A->B) r r'.\n        trivial_ring r'\n        ==> (ring_epimorphism (r,r') f <=>\n             ring_homomorphism (r,r') f)
       #|  forall r r' f:A->B.\n        ring_monomorphism (r,r') f /\\ trivial_ring r' ==> trivial_ring r
       #|  forall r r' f:A->B.\n        ring_homomorphism(r,r') f /\\ trivial_ring r ==> trivial_ring r'
       #|  forall r r' f:A->B.\n        ring_monomorphism (r,r') f\n        ==> (trivial_ring r <=> trivial_ring r')
-      #|  n:num
+      #|  (n : Num)
       #|  forall r r' (f:A->B) a.\n        ring_homomorphism (r,r') f /\\ ring_nilpotent r a\n        ==> ring_nilpotent r' (f a)
       #|  forall r r' (f:A->B) a.\n        ring_monomorphism(r,r') f /\\ a IN ring_carrier r\n        ==> (ring_nilpotent r' (f a) <=> ring_nilpotent r a)
       #|  forall r r' (f:A->B).\n        ring_monomorphism(r,r') f ==> ring_char r = ring_char r'
       #|  r isomorphic_ring r' <=> ?f:A->B. ring_isomorphism (r,r') f
       #|  forall r r' f:A->B. ring_isomorphism (r,r') f ==> r isomorphic_ring r'
-      #|  \\x:A. x
-      #|  forall r:A ring. r isomorphic_ring r
-      #|  forall r r':A ring. r = r' ==> r isomorphic_ring r'
+      #|  (x : A) => x
+      #|  \226\136\128 r : Ring[A], isomorphic_ring(r, r)
+      #|  \226\136\128 r : Ring[A], \226\136\128 r' : Ring[A], r == r' \226\134\146 isomorphic_ring(r, r')
       #|  forall(r:A ring) (r':B ring). r isomorphic_ring r' <=> r' isomorphic_ring r
       #|  forall(r1:A ring) (r2:B ring) (r3:C ring).\n        r1 isomorphic_ring r2 /\\ r2 isomorphic_ring r3\n        ==> r1 isomorphic_ring r3
       #|  forall(r:A ring) (r':B ring).\n        r isomorphic_ring r' ==> (trivial_ring r <=> trivial_ring r')
-      #|  (\\x. b):A->B
-      #|  b:B
-      #|  a:A
+      #|  (x : A) => (b : B)
+      #|  (b : B)
+      #|  (a : A)
       #|  forall(r:A ring) (r':B ring).\n        trivial_ring r ==> (r isomorphic_ring r' <=> trivial_ring r')
       #|  (forall(r:A ring) (r':B ring).\n        trivial_ring r ==> (r isomorphic_ring r' <=> trivial_ring r')) /\\\n   (forall(r:A ring) (r':B ring).\n        trivial_ring r' ==> (r isomorphic_ring r' <=> trivial_ring r))
       #|  forall(r:A ring) (r':B ring).\n        trivial_ring r /\\ trivial_ring r'\n        ==> r isomorphic_ring r'
       #|  (forall(r:A ring) (b:B).\n        r isomorphic_ring singleton_ring b <=> trivial_ring r) /\\\n   (forall a:A (r:B ring).\n        singleton_ring a isomorphic_ring r <=> trivial_ring r)
-      #|  f:A->B
+      #|  (f : (A) -> B)
       #|  forall r r' (f:A->B).\n        ring_monomorphism(r,r') f ==> ring_carrier r <=_c ring_carrier r'
-      #|  f:A->B
+      #|  (f : (A) -> B)
       #|  forall r r' (f:A->B).\n        ring_epimorphism(r,r') f ==> ring_carrier r' <=_c ring_carrier r
       #|  forall r r' (f:A->B).\n        ring_isomorphism(r,r') f ==> ring_carrier r =_c ring_carrier r'
       #|  forall(r:A ring) (r':B ring).\n        r isomorphic_ring r' ==> ring_carrier r =_c ring_carrier r'
       #|  forall(r:A ring) (r':B ring).\n        r isomorphic_ring r'\n        ==> (FINITE(ring_carrier r) <=> FINITE(ring_carrier r'))
-      #|  (~p <=> ~q) <=> (p <=> q)
+      #|  (!(p : Bool) == !(q : Bool)) == (p == q)
       #|  forall(r:A ring) (r':B ring).\n        r isomorphic_ring r'\n        ==> (INFINITE(ring_carrier r) <=> INFINITE(ring_carrier r'))
       #|  forall r r' (f:A->B).\n        ring_monomorphism(r,r') f /\\ FINITE(ring_carrier r')\n        ==> FINITE(ring_carrier r)
       #|  forall r r' (f:A->B).\n        ring_epimorphism(r,r') f /\\ FINITE(ring_carrier r)\n        ==> FINITE(ring_carrier r')
@@ -30072,50 +30072,50 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(r:A ring) (r':B ring) n.\n        r isomorphic_ring r'\n        ==> (ring_carrier r HAS_SIZE n <=> ring_carrier r' HAS_SIZE n)
       #|  forall(G:A ring) (H:B ring).\n        G isomorphic_ring H /\\\n        (FINITE(ring_carrier G) \\/ FINITE(ring_carrier H))\n        ==> CARD(ring_carrier G) = CARD(ring_carrier H)
       #|  forall(r:A ring) (r':B ring).\n        r isomorphic_ring r' ==> ring_char r = ring_char r'
-      #|  g:B->A
-      #|  r':B ring
-      #|  s = IMAGE (f:A->B) (ring_carrier r)
+      #|  (g : (B) -> A)
+      #|  (r' : Ring[B])
+      #|  (s : (B) -> Bool) == IMAGE((f : (A) -> B), ring_carrier((r : Ring[A])))
       #|  ring_carrier r' = s /\\\n    ring_0 r' = (f:A->B) (ring_0 r) /\\\n    ring_1 r' = f (ring_1 r) /\\\n    ring_neg r' = (\\x. f(ring_neg r (g x))) /\\\n    ring_add r' = (\\x1 x2. f(ring_add r (g x1) (g x2))) /\\\n    ring_mul r' = (\\x1 x2. f(ring_mul r (g x1) (g x2)))
       #|  r' = ring(s:B->bool,\n              f (ring_0 r:A),\n              f (ring_1 r),\n              (\\x. f(ring_neg r (g x))),\n              (\\x1 x2. f(ring_add r (g x1) (g x2))),\n              (\\x1 x2. f(ring_mul r (g x1) (g x2))))
       #|  (forall x. x IN ring_carrier r ==> (f:A->B) x IN s) /\\\n    (forall y. y IN s ==> g y IN ring_carrier r /\\ f(g y) = y)
-      #|  s = IMAGE (f:A->B) (ring_carrier r)
-      #|  g:B->A
+      #|  (s : (B) -> Bool) == IMAGE((f : (A) -> B), ring_carrier((r : Ring[A])))
+      #|  (g : (B) -> A)
       #|  forall(f:A->B) r.\n        (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\ f x = f y\n               ==> x = y)\n        ==> ?r'. ring_isomorphism(r,r') f
-      #|  r:A ring
-      #|  f:A->B
-      #|  g:B->A
-      #|  f:A->B
+      #|  (r : Ring[A])
+      #|  (f : (A) -> B)
+      #|  (g : (B) -> A)
+      #|  (f : (A) -> B)
       #|  forall(r:A ring) (s:B->bool).\n        (?r'. ring_carrier r' = s /\\ r isomorphic_ring r') <=>\n        ring_carrier r =_c s
-      #|  u:B->bool
-      #|  r:A ring
-      #|  u:B->bool
+      #|  (u : (B) -> Bool)
+      #|  (r : Ring[A])
+      #|  (u : (B) -> Bool)
       #|  forall(r:A ring) (s:B->bool).\n        ring_carrier r <=_c s\n        ==> ?r':B ring. ring_carrier r' SUBSET s /\\ r isomorphic_ring r'
       #|  ring_kernel (r,r') (f:A->B) =\n    {x | x IN ring_carrier r /\\ f x = ring_0 r'}
       #|  ring_image (r:A ring,r':B ring) (f:A->B) = IMAGE f (ring_carrier r)
       #|  forall r r' (f:A->B).\n        ring_homomorphism(r,r') f\n        ==> ring_0 r IN ring_kernel (r,r') f
       #|  forall r r' (f:A->B).\n        ring_homomorphism(r,r') f ==> ~(ring_kernel (r,r') f = {})
       #|  forall r r' (f:A->B). ring_kernel (r,r') f SUBSET ring_carrier r
-      #|  ring_sub r x y:A
-      #|  y:A
-      #|  x:A
-      #|  ring_0 r:A
-      #|  x:A
-      #|  x:A
-      #|  (p /\\ q <=> p /\\ r) <=> p ==> (q <=> r)
+      #|  ring_sub((r : Ring[A]), (x : A), (y : A))
+      #|  (y : A)
+      #|  (x : A)
+      #|  ring_0((r : Ring[A]))
+      #|  (x : A)
+      #|  (x : A)
+      #|  (((p : Bool) && (q : Bool)) == (p && (r : Bool))) == (p \226\134\146 q == r)
       #|  forall r r' (f:A->B).\n        ring_monomorphism(r,r') f <=>\n        ring_homomorphism(r,r') f /\\\n        ring_kernel (r,r') f = {ring_0 r}
-      #|  r:A ring
+      #|  (r : Ring[A])
       #|  forall r r' (f:A->B).\n        ring_monomorphism(r,r') f <=>\n        ring_homomorphism(r,r') f /\\\n        forall x. x IN ring_carrier r /\\ f x = ring_0 r' ==> x = ring_0 r
       #|  forall r r' f:A->B.\n        ring_monomorphism (r,r') f <=>\n        ring_homomorphism (r,r') f /\\\n        forall x. x IN ring_carrier r ==> (f x = ring_0 r' <=> x = ring_0 r)
       #|  forall r r' (f:A->B).\n        ring_epimorphism(r,r') f <=>\n        ring_homomorphism(r,r') f /\\\n        ring_image (r,r') f = ring_carrier r'
       #|  forall r r' (f:A->B).\n        ring_epimorphism(r,r') f <=>\n        ring_homomorphism(r,r') f /\\\n        ring_carrier r' SUBSET ring_image (r,r') f
       #|  forall r r' (f:A->B).\n        ring_isomorphism (r,r') f <=>\n        ring_homomorphism(r,r') f /\\\n        ring_kernel (r,r') f = {ring_0 r} /\\\n        ring_image (r,r') f = ring_carrier r'
-      #|  r:A ring
-      #|  ring_homomorphism (r,r') (f:A->B)
+      #|  (r : Ring[A])
+      #|  ring_homomorphism(((r : Ring[A]), (r' : Ring[B])), (f : (A) -> B))
       #|  forall r r' (f:A->B).\n      ring_isomorphism (r,r') f <=>\n      IMAGE f (ring_carrier r) = ring_carrier r' /\\\n      f (ring_1 r) = ring_1 r' /\\\n      (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r\n             ==> f(ring_add r x y) = ring_add r' (f x) (f y)) /\\\n      (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r\n             ==> f(ring_mul r x y) = ring_mul r' (f x) (f y)) /\\\n      (forall x. x IN ring_carrier r /\\ f x = ring_0 r' ==> x = ring_0 r)
-      #|  ring_add r (ring_neg r x:A)
+      #|  ring_add((r : Ring[A]), ring_neg(r, (x : A)))
       #|  forall g. IMAGE f s SUBSET t /\\ IMAGE g t SUBSET s /\\ (forall y. y IN t ==> f(g y) = y)\n        ==> t = IMAGE f s
       #|  IMAGE (ring_add r x) (ring_kernel(r,r') (f:A->B))
-      #|  x:A
+      #|  (x : A)
       #|  forall r r' (f:A->B).\n        ring_homomorphism(r,r') f\n        ==> ring_image(r,r') f *_c ring_kernel(r,r') f =_c ring_carrier r
       #|  forall r r' (f:A->B).\n        ring_homomorphism(r,r') f ==> ring_ideal r (ring_kernel (r,r') f)
       #|  forall r r' (f:A->B).\n        ring_homomorphism(r,r') f ==> (ring_image (r,r') f) subring_of r'
@@ -30123,135 +30123,135 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r r' s (f:A->B).\n        ring_image (r,subring_generated r' s) f = ring_image(r,r') f
       #|  forall r r' s f:A->B.\n        s subring_of r\n        ==> ring_kernel(subring_generated r s,r') f =\n            ring_kernel(r,r') f INTER s
       #|  forall r r' s f:A->B.\n        s subring_of r\n        ==> ring_image(subring_generated r s,r') f =\n            ring_image(r,r') f INTER IMAGE f s
-      #|  ring_homomorphism (r,r') (f:A->B)
+      #|  ring_homomorphism(((r : Ring[A]), (r' : Ring[B])), (f : (A) -> B))
       #|  forall(f:A->B) r r'.\n        ring_isomorphism(r,subring_generated r' (ring_image (r,r') f)) f <=>\n        ring_monomorphism(r,r') f
       #|  forall P Q.\n        (forall r r'. r isomorphic_ring r' ==> (P r <=> Q r')) /\\\n        (forall r s. Q r ==> Q(subring_generated r s))\n        ==> forall r r' (f:A->B). ring_monomorphism(r,r') f /\\ Q r' ==> P r
       #|  forall r r' (f:A->B).\n        ring_homomorphism (r,r') f /\\ trivial_ring r\n        ==> ring_kernel (r,r') f = ring_carrier r
       #|  forall r r' (f:A->B).\n        ring_homomorphism (r,r') f /\\ trivial_ring r\n        ==> ring_image (r,r') f = {ring_0 r'}
       #|  forall r r' (f:A->B).\n        ring_homomorphism (r,r') f /\\ trivial_ring r'\n        ==> ring_kernel (r,r') f = ring_carrier r
       #|  forall r r' (f:A->B).\n        ring_homomorphism (r,r') f /\\ trivial_ring r'\n        ==> ring_image (r,r') f = ring_carrier r'
-      #|  (x:A) IN ring_carrier r
-      #|  y:A
-      #|  x:A
-      #|  ring_add r (ring_sub r z x) x:A
-      #|  ring_sub r z x:A
-      #|  (x:A) IN ring_carrier r
-      #|  x:A
-      #|  z:A
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
+      #|  (y : A)
+      #|  (x : A)
+      #|  ring_add((r : Ring[A]), ring_sub(r, (z : A), (x : A)), x)
+      #|  ring_sub((r : Ring[A]), (z : A), (x : A))
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
+      #|  (x : A)
+      #|  (z : A)
       #|  forall r r' (f:A->B) s.\n        ring_homomorphism(r,r') f /\\ s SUBSET ring_carrier r\n        ==> {x | x IN ring_carrier r /\\ f x IN IMAGE f s} =\n            ring_setadd r s (ring_kernel(r,r') f)
       #|  forall r r' (f:A->B) t.\n        ring_homomorphism(r,r') f\n        ==> IMAGE f {x | x IN ring_carrier r /\\ f x IN t} =\n            t INTER (ring_image(r,r') f)
       #|  forall r r' (f:A->B) s.\n        ring_homomorphism(r,r') f /\\\n        ring_kernel(r,r') f SUBSET s /\\\n        (ring_ideal r s \\/ s subring_of r)\n        ==> {x | x IN ring_carrier r /\\ f x IN IMAGE f s} = s
       #|  forall r r' (f:A->B) t.\n        ring_homomorphism(r,r') f /\\ t SUBSET ring_image(r,r') f\n        ==> IMAGE f {x | x IN ring_carrier r /\\ f x IN t} = t
-      #|  {x | x IN ring_carrier r /\\ (f:A->B) x IN k}
+      #|  {(x : A) | IN(x, ring_carrier((r : Ring[A]))) && IN((f : (A) -> B)(x), (k : (B) -> Bool))}
       #|  forall r r' (f:A->B) k.\n        ring_epimorphism(r,r') f\n        ==> (ring_ideal r' k <=>\n             ?j. ring_ideal r j /\\\n                 ring_kernel(r,r') f SUBSET j /\\\n                 {x | x IN ring_carrier r /\\ f x IN k} = j /\\\n                 IMAGE f j = k)
-      #|  {x | x IN ring_carrier r /\\ (f:A->B) x IN t}
+      #|  {(x : A) | IN(x, ring_carrier((r : Ring[A]))) && IN((f : (A) -> B)(x), (t : (B) -> Bool))}
       #|  forall r r' (f:A->B) t.\n        ring_epimorphism(r,r') f\n        ==> (t subring_of r' <=>\n             ?s. s subring_of r /\\\n                 ring_kernel(r,r') f SUBSET s /\\\n                 {x | x IN ring_carrier r /\\ f x IN t} = s /\\\n                 IMAGE f s = t)
-      #|  k:B->bool
-      #|  y:A = ring_add r (ring_sub r y x) x
-      #|  y:A
-      #|  x:A
+      #|  (k : (B) -> Bool)
+      #|  (y : A) == ring_add((r : Ring[A]), ring_sub(r, y, (x : A)), x)
+      #|  (y : A)
+      #|  (x : A)
       #|  j SUBSET s /\\ (forall x y. x IN j /\\ y IN s /\\ f x = f y ==> y IN j)\n      ==> {x | x IN s /\\ f x IN IMAGE f j} = j
-      #|  IMAGE (f:A->B) j
+      #|  IMAGE((f : (A) -> B), (j : (A) -> Bool))
       #|  forall r r' (f:A->B) j.\n        ring_epimorphism(r,r') f\n        ==> (ring_ideal r j /\\ ring_kernel(r,r') f SUBSET j <=>\n             ?k. ring_ideal r' k /\\\n                 {x | x IN ring_carrier r /\\ f x IN k} = j /\\\n                 IMAGE f j = k)
-      #|  k:B->bool
-      #|  y:A = ring_add r (ring_sub r y x) x
-      #|  y:A
-      #|  x:A
+      #|  (k : (B) -> Bool)
+      #|  (y : A) == ring_add((r : Ring[A]), ring_sub(r, y, (x : A)), x)
+      #|  (y : A)
+      #|  (x : A)
       #|  j SUBSET s /\\ (forall x y. x IN j /\\ y IN s /\\ f x = f y ==> y IN j)\n      ==> {x | x IN s /\\ f x IN IMAGE f j} = j
-      #|  IMAGE (f:A->B) j
+      #|  IMAGE((f : (A) -> B), (j : (A) -> Bool))
       #|  forall r r' (f:A->B) j.\n        ring_epimorphism(r,r') f\n        ==> (j subring_of r /\\ ring_kernel(r,r') f SUBSET j <=>\n             ?k. k subring_of r' /\\\n                 {x | x IN ring_carrier r /\\ f x IN k} = j /\\\n                 IMAGE f j = k)
       #|  j = {x | x IN ring_carrier r /\\ (f:A->B) x IN IMAGE f j}
       #|  forall r r' (f:A->B) j.\n        ring_isomorphism(r,r') f /\\ j SUBSET ring_carrier r\n        ==> (ring_ideal r' (IMAGE f j) <=> ring_ideal r j)
-      #|  z:A
+      #|  (z : A)
       #|  forall r r' (f:A->B) x y.\n        ring_homomorphism(r,r') f /\\ ring_divides r x y\n        ==> ring_divides r' (f x) (f y)
       #|  forall r r' (f:A->B) x y.\n        ring_homomorphism(r,r') f /\\ ring_associates r x y\n        ==> ring_associates r' (f x) (f y)
       #|  forall r r' (f:A->B) u.\n        ring_homomorphism(r,r') f /\\ ring_unit r u ==> ring_unit r' (f u)
       #|  forall r r' (f:A->B) x y.\n        ring_isomorphism(r,r') f /\\ x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> (ring_divides r' (f x) (f y) <=> ring_divides r x y)
       #|  forall r r' (f:A->B) x y.\n        ring_isomorphism(r,r') f /\\ x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> (ring_associates r' (f x) (f y) <=> ring_associates r x y)
       #|  forall r r' (f:A->B) u.\n        ring_isomorphism(r,r') f /\\ u IN ring_carrier r\n        ==> (ring_unit r' (f u) <=> ring_unit r u)
-      #|  (f:A->B) b
-      #|  b:A
+      #|  (f : (A) -> B)((b : A))
+      #|  (b : A)
       #|  forall r r' (f:A->B) a.\n        ring_monomorphism(r,r') f /\\ ring_zerodivisor r a\n        ==> ring_zerodivisor r' (f a)
       #|  forall r r' (f:A->B) a.\n        ring_isomorphism(r,r') f /\\ a IN ring_carrier r\n        ==> (ring_zerodivisor r' (f a) <=> ring_zerodivisor r a)
       #|  forall r r' (f:A->B) a.\n        ring_isomorphism(r,r') f /\\ a IN ring_carrier r\n        ==> (ring_regular r' (f a) <=> ring_regular r a)
-      #|  ring_carrier r' = IMAGE (f:A->B) (ring_carrier r)
-      #|  f:A->B
+      #|  ring_carrier((r' : Ring[B])) == IMAGE((f : (A) -> B), ring_carrier((r : Ring[A])))
+      #|  (f : (A) -> B)
       #|  forall(r:A ring) (r':B ring).\n        r isomorphic_ring r' ==> integral_domain r ==> integral_domain r'
       #|  forall(r:A ring) (r':B ring).\n         r isomorphic_ring r' ==> (integral_domain r <=> integral_domain r')
       #|  forall r r' (f:A->B).\n        ring_monomorphism(r,r') f /\\ integral_domain r' ==> integral_domain r
-      #|  r:A ring
-      #|  x:A
+      #|  (r : Ring[A])
+      #|  (x : A)
       #|  forall r r' (f:A->B).\n      ring_epimorphism(r,r') f /\\ field r /\\ ~(trivial_ring r') ==> field r'
       #|  ~(trivial_ring(r:A ring)) /\\ ~(trivial_ring(r':B ring))
       #|  forall(r:A ring) (r':B ring).\n        r isomorphic_ring r' ==> (field r <=> field r')
-      #|  x2:A
-      #|  x1:A
-      #|  g:A->C
-      #|  r3:C ring
-      #|  r1:A ring
-      #|  x2:A
-      #|  x1:A
-      #|  f:A->B
-      #|  r2:B ring
-      #|  r1:A ring
+      #|  (x2 : A)
+      #|  (x1 : A)
+      #|  (g : (A) -> C)
+      #|  (r3 : Ring[C])
+      #|  (r1 : Ring[A])
+      #|  (x2 : A)
+      #|  (x1 : A)
+      #|  (f : (A) -> B)
+      #|  (r2 : Ring[B])
+      #|  (r1 : Ring[A])
       #|  ring_mul r2 ((f:A->B) x1) (f x2) = f(ring_mul r1 x1 x2)
-      #|  x2:A
-      #|  x1:A
-      #|  x2:A
-      #|  x1:A
-      #|  g:A->C
-      #|  r3:C ring
-      #|  r1:A ring
-      #|  x2:A
-      #|  x1:A
-      #|  f:A->B
-      #|  r2:B ring
-      #|  r1:A ring
+      #|  (x2 : A)
+      #|  (x1 : A)
+      #|  (x2 : A)
+      #|  (x1 : A)
+      #|  (g : (A) -> C)
+      #|  (r3 : Ring[C])
+      #|  (r1 : Ring[A])
+      #|  (x2 : A)
+      #|  (x1 : A)
+      #|  (f : (A) -> B)
+      #|  (r2 : Ring[B])
+      #|  (r1 : Ring[A])
       #|  ring_add r2 ((f:A->B) x1) (f x2) = f(ring_add r1 x1 x2)
-      #|  x2:A
-      #|  x1:A
-      #|  x:A
-      #|  g:A->C
-      #|  r3:C ring
-      #|  r1:A ring
-      #|  x:A
-      #|  f:A->B
-      #|  r2:B ring
-      #|  r1:A ring
-      #|  ring_neg r2 ((f:A->B) x) = f(ring_neg r1 x)
-      #|  x:A
-      #|  g:A->C
-      #|  r3:C ring
-      #|  r1:A ring
-      #|  f:A->B
-      #|  r2:B ring
-      #|  r1:A ring
-      #|  ring_1 (r2:B ring) = (f:A->B)(ring_1 r1)
-      #|  g:A->C
-      #|  r3:C ring
-      #|  r1:A ring
-      #|  f:A->B
-      #|  r2:B ring
-      #|  r1:A ring
-      #|  ring_0 (r2:B ring) = (f:A->B)(ring_0 r1)
-      #|  x:A
-      #|  IMAGE (f:A->B) (ring_carrier r1) = ring_carrier r2
-      #|  h:B->C
-      #|  h:B->C
+      #|  (x2 : A)
+      #|  (x1 : A)
+      #|  (x : A)
+      #|  (g : (A) -> C)
+      #|  (r3 : Ring[C])
+      #|  (r1 : Ring[A])
+      #|  (x : A)
+      #|  (f : (A) -> B)
+      #|  (r2 : Ring[B])
+      #|  (r1 : Ring[A])
+      #|  ring_neg((r2 : Ring[B]), (f : (A) -> B)((x : A))) == f(ring_neg((r1 : Ring[A]), x))
+      #|  (x : A)
+      #|  (g : (A) -> C)
+      #|  (r3 : Ring[C])
+      #|  (r1 : Ring[A])
+      #|  (f : (A) -> B)
+      #|  (r2 : Ring[B])
+      #|  (r1 : Ring[A])
+      #|  ring_1((r2 : Ring[B])) == (f : (A) -> B)(ring_1((r1 : Ring[A])))
+      #|  (g : (A) -> C)
+      #|  (r3 : Ring[C])
+      #|  (r1 : Ring[A])
+      #|  (f : (A) -> B)
+      #|  (r2 : Ring[B])
+      #|  (r1 : Ring[A])
+      #|  ring_0((r2 : Ring[B])) == (f : (A) -> B)(ring_0((r1 : Ring[A])))
+      #|  (x : A)
+      #|  IMAGE((f : (A) -> B), ring_carrier((r1 : Ring[A]))) == ring_carrier((r2 : Ring[B]))
+      #|  (h : (B) -> C)
+      #|  (h : (B) -> C)
       #|  ?h:B->C. forall x:A. x IN ring_carrier r1 ==> (g:A->C) x = h((f:A->B) x)
-      #|  y:A
-      #|  x:A
-      #|  g:A->C
-      #|  r3:C ring
-      #|  r1:A ring
+      #|  (y : A)
+      #|  (x : A)
+      #|  (g : (A) -> C)
+      #|  (r3 : Ring[C])
+      #|  (r1 : Ring[A])
       #|  ring_sub r1 (x:A) y IN ring_kernel(r1:A ring,r3:C ring) (g:A->C)
       #|  ring_sub r1 (x:A) y IN ring_kernel(r1:A ring,r2:B ring) (f:A->B)
-      #|  y:A
-      #|  x:A
-      #|  f:A->B
-      #|  r2:B ring
-      #|  r1:A ring
-      #|  (f:A->B)(ring_sub r1 x y) = ring_0 r2
+      #|  (y : A)
+      #|  (x : A)
+      #|  (f : (A) -> B)
+      #|  (r2 : Ring[B])
+      #|  (r1 : Ring[A])
+      #|  (f : (A) -> B)(ring_sub((r1 : Ring[A]), (x : A), (y : A))) == ring_0((r2 : Ring[B]))
       #|  forall x y:A. x IN ring_carrier r1 /\\ y IN ring_carrier r1 /\\\n            (f:A->B) x = f y ==> (g:A->C) x = g y
       #|  (forall x:A. x IN ring_carrier r1 ==> (f:A->B) x IN ring_carrier r2)
       #|  forall r1 r2 r3 (f:A->B) (g:A->C).\n        ring_epimorphism(r1,r2) f /\\ ring_homomorphism(r1,r3) g /\\\n        ring_kernel(r1,r2) f SUBSET ring_kernel(r1,r3) g\n        ==> ?h. ring_homomorphism(r2,r3) h /\\\n                forall x. x IN ring_carrier r1 ==> h(f x) = g x
@@ -30273,15 +30273,15 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(A:A ring) (B:B ring). ring_homomorphism (prod_ring A B,B) SND
       #|  forall(A:A ring) (B:B ring). ring_epimorphism (prod_ring A B,A) FST
       #|  forall(A:A ring) (B:B ring). ring_epimorphism (prod_ring A B,B) SND
-      #|  G:A ring
+      #|  (G : Ring[A])
       #|  forall(G:A ring) (H:B ring).\n        ring_isomorphism (prod_ring G H,G) FST <=> trivial_ring H
-      #|  H:B ring
+      #|  (H : Ring[B])
       #|  forall(G:A ring) (H:B ring).\n        ring_isomorphism (prod_ring G H,H) SND <=> trivial_ring G
       #|  forall(r:A ring) (r':B ring).\n        ring_isomorphisms (prod_ring r r',prod_ring r' r)\n                           ((\\(x,y). y,x),(\\(y,x). x,y))
       #|  forall(r:A ring) (r':B ring).\n        prod_ring r r' isomorphic_ring prod_ring r' r
       #|  forall(r:A ring) (r':B ring) (K:C ring).\n        prod_ring r r' isomorphic_ring K <=>\n        prod_ring r' r isomorphic_ring K
       #|  forall(r:A ring) (r':B ring) (K:C ring).\n        r isomorphic_ring prod_ring r' K <=>\n        r isomorphic_ring prod_ring K r'
-      #|  SND:A#B->B
+      #|  (SND : ((A, B)) -> B)
       #|  forall(G:A ring) (H:B ring).\n        trivial_ring G ==> (prod_ring G H isomorphic_ring H)
       #|  (forall(G:A ring) (H:B ring).\n        trivial_ring G ==> (prod_ring G H isomorphic_ring H)) /\\\n   (forall(G:A ring) (H:B ring).\n        trivial_ring H ==> (prod_ring G H isomorphic_ring G)) /\\\n   (forall(G:A ring) (H:B ring).\n        trivial_ring G ==> (H isomorphic_ring prod_ring G H)) /\\\n   (forall(G:A ring) (H:B ring).\n        trivial_ring H ==> (G isomorphic_ring prod_ring G H))
       #|  forall(r:A ring) (r':B ring).\n        trivial_ring(prod_ring r r') <=>\n        trivial_ring r /\\ trivial_ring r'
@@ -30290,25 +30290,25 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(r1:A ring) (r2:B ring) s1 s2.\n        s1 subring_of r1 /\\ s2 subring_of r2\n        ==> (prod_ring (subring_generated r1 s1) (subring_generated r2 s2) =\n             subring_generated (prod_ring r1 r2) (s1 CROSS s2))
       #|  forall(r1:A ring) (r2:B ring) s1 s2.\n        ring_ideal (prod_ring r1 r2) (s1 CROSS s2) <=>\n        ring_ideal r1 s1 /\\ ring_ideal r2 s2
       #|  (a:A),(b:B) =\n    ring_add r1 (ring_mul r1 (ring_1 r1) a) (ring_mul r1 (ring_0 r1) x),\n    ring_add r2 (ring_mul r2 (ring_0 r2) y) (ring_mul r2 (ring_1 r2) b)
-      #|  x:A
-      #|  y:B
-      #|  b:B
-      #|  a:A
-      #|  IMAGE SND (k:A#B->bool)
-      #|  IMAGE FST (k:A#B->bool)
+      #|  (x : A)
+      #|  (y : B)
+      #|  (b : B)
+      #|  (a : A)
+      #|  IMAGE(SND, (k : ((A, B)) -> Bool))
+      #|  IMAGE(FST, (k : ((A, B)) -> Bool))
       #|  forall r1 r2 (k:A#B->bool).\n        ring_ideal (prod_ring r1 r2) k <=>\n        ?j1 j2. ring_ideal r1 j1 /\\ ring_ideal r2 j2 /\\\n                j1 CROSS j2 = k
-      #|  r2:B ring
-      #|  r1:A ring
-      #|  r2:B ring
-      #|  r1:A ring
-      #|  j2:B->bool
-      #|  j1:A->bool
+      #|  (r2 : Ring[B])
+      #|  (r1 : Ring[A])
+      #|  (r2 : Ring[B])
+      #|  (r1 : Ring[A])
+      #|  (j2 : (B) -> Bool)
+      #|  (j1 : (A) -> Bool)
       #|  ideal_generated (prod_ring r1 r2) (t:A#B->bool)
-      #|  r2:B ring
-      #|  r1:A ring
+      #|  (r2 : Ring[B])
+      #|  (r1 : Ring[A])
       #|  forall(r1:A ring) (r2:B ring) t.\n        t SUBSET ring_carrier(prod_ring r1 r2)\n        ==> ideal_generated (prod_ring r1 r2) t =\n             (ideal_generated r1 (IMAGE FST t)) CROSS\n             (ideal_generated r2 (IMAGE SND t))
-      #|  s2:B->bool = {}
-      #|  s1:A->bool = {}
+      #|  (s2 : (B) -> Bool) == {}
+      #|  (s1 : (A) -> Bool) == {}
       #|  forall(r1:A ring) (r2:B ring) s1 s2.\n        s1 SUBSET ring_carrier r1 /\\ s2 SUBSET ring_carrier r2\n        ==> ideal_generated (prod_ring r1 r2) (s1 CROSS s2) =\n            if s1 = {} \\/ s2 = {} then {ring_0(prod_ring r1 r2)}\n            else (ideal_generated r1 s1) CROSS (ideal_generated r2 s2)
       #|  forall r1 r2 (a:A) (b:B) n.\n        ring_pow (prod_ring r1 r2) (a,b) n =\n        (ring_pow r1 a n,ring_pow r2 b n)
       #|  forall r1 r2 (a:A) (b:B) c d.\n        ring_divides (prod_ring r1 r2) (a,b) (c,d) <=>\n        ring_divides r1 a c /\\ ring_divides r2 b d
@@ -30317,176 +30317,176 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r1 r2 (a:A) (b:B) c d.\n        ring_associates (prod_ring r1 r2) (a,b) (c,d) <=>\n        ring_associates r1 a c /\\ ring_associates r2 b d
       #|  forall r1 r2 (a:A) (b:B).\n        ring_zerodivisor (prod_ring r1 r2) (a,b) <=>\n        ring_zerodivisor r1 a /\\ b IN ring_carrier r2 \\/\n        a IN ring_carrier r1 /\\ ring_zerodivisor r2 b
       #|  forall r1 r2 (a:A) (b:B).\n        ring_regular (prod_ring r1 r2) (a,b) <=>\n        ring_regular r1 a /\\ ring_regular r2 b
-      #|  m + n:num
-      #|  n:num
-      #|  m:num
-      #|  (b:B) IN ring_carrier r2
-      #|  (a:A) IN ring_carrier r1
+      #|  (m : Num) + (n : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  IN((b : B), ring_carrier((r2 : Ring[B])))
+      #|  IN((a : A), ring_carrier((r1 : Ring[A])))
       #|  forall r1 r2 (a:A) (b:B).\n        ring_nilpotent (prod_ring r1 r2) (a,b) <=>\n        ring_nilpotent r1 a /\\ ring_nilpotent r2 b
       #|  product_ring k (r:K->A ring) =\n        ring(cartesian_product k (\\i. ring_carrier(r i)),\n              RESTRICTION k (\\i. ring_0 (r i)),\n              RESTRICTION k (\\i. ring_1 (r i)),\n              (\\x. RESTRICTION k (\\i. ring_neg (r i) (x i))),\n              (\\x y. RESTRICTION k (\\i. ring_add (r i) (x i) (y i))),\n              (\\x y. RESTRICTION k (\\i. ring_mul (r i) (x i) (y i))))
       #|  (forall k (r:K->A ring).\n        ring_carrier(product_ring k r) =\n          cartesian_product k (\\i. ring_carrier(r i))) /\\\n   (forall k (r:K->A ring).\n        ring_0 (product_ring k r) =\n          RESTRICTION k (\\i. ring_0 (r i))) /\\\n   (forall k (r:K->A ring).\n        ring_1 (product_ring k r) =\n          RESTRICTION k (\\i. ring_1 (r i))) /\\\n   (forall k (r:K->A ring).\n        ring_neg (product_ring k r) =\n          \\x. RESTRICTION k (\\i. ring_neg (r i) (x i))) /\\\n   (forall k (r:K->A ring).\n        ring_add (product_ring k r) =\n          (\\x y. RESTRICTION k (\\i. ring_add (r i) (x i) (y i)))) /\\\n   (forall k (r:K->A ring).\n        ring_mul (product_ring k r) =\n          (\\x y. RESTRICTION k (\\i. ring_mul (r i) (x i) (y i))))
       #|  forall k (r:K->A ring).\n        trivial_ring(product_ring k r) <=>\n        forall i. i IN k ==> trivial_ring(r i)
       #|  \\y. RESTRICTION k (\\i. (g:K->B->A) i (y i))
-      #|  \\x. RESTRICTION k (\\i. (f:K->A->B) i (x i))
-      #|  g:K->B->A
-      #|  f:K->A->B
+      #|  (x : (K) -> A) => RESTRICTION((k : (K) -> Bool), (i : K) => (f : (K, A) -> B)(i, x(i)))
+      #|  (g : (K, B) -> A)
+      #|  (f : (K, A) -> B)
       #|  forall(r:K->A ring) (r':K->B ring) k.\n        (forall i. i IN k ==> (r i) isomorphic_ring (r' i))\n        ==> (product_ring k r) isomorphic_ring (product_ring k r')
       #|  forall x. x IN ring_carrier r ==> EXTENSIONAL k ((f:A->K->B) x)
-      #|  f IN EXTENSIONAL s <=> EXTENSIONAL s f
+      #|  IN((f : (_) -> _), EXTENSIONAL((s : (_) -> Bool))) == EXTENSIONAL(s, f)
       #|  forall r k s (f:A->K->B).\n        ring_homomorphism(r,product_ring k s) f <=>\n        IMAGE f (ring_carrier r) SUBSET EXTENSIONAL k /\\\n        forall i. i IN k ==> ring_homomorphism (r,s i) (\\x. f x i)
-      #|  s SUBSET P <=> forall x. x IN s ==> P x
+      #|  SUBSET((s : (_) -> Bool), (P : (_) -> Bool)) == (\226\136\128 x : _, IN(x, s) \226\134\146 P(x))
       #|  forall r s (f:A->K->B).\n        ring_homomorphism(r,product_ring (:K) s) f <=>\n        forall i. ring_homomorphism (r,s i) (\\x. f x i)
       #|  forall k (r:K->A ring) a i.\n        RESTRICTION k (\\j. if j = i then a else ring_0 (r j)) IN\n        ring_carrier(product_ring k r) <=>\n        i IN k ==> a IN ring_carrier(r i)
       #|  forall(k:K->bool) (r:A ring).\n     ring_homomorphism (r,product_ring k (\\i. r)) (\\x. RESTRICTION k (\\i. x))
       #|  forall(r:A ring).\n        ring_homomorphism (r,product_ring (:K) (\\i. r)) (\\x i. x)
-      #|  k:K->bool = {}
+      #|  (k : (K) -> Bool) == {}
       #|  forall(k:K->bool) (r:A ring).\n     ring_monomorphism (r,product_ring k (\\i. r))\n                       (\\x. RESTRICTION k (\\i. x)) <=>\n     k = {} ==> trivial_ring r
       #|  forall(r:A ring).\n        ring_monomorphism (r,product_ring (:K) (\\i. r)) (\\x i. x)
-      #|  \\x:K->A. x
-      #|  r:K->A ring
-      #|  k:K->bool
-      #|  product_ring k (r:K->A ring)
+      #|  (x : (K) -> A) => x
+      #|  (r : (K) -> Ring[A])
+      #|  (k : (K) -> Bool)
+      #|  product_ring((k : (K) -> Bool), (r : (K) -> Ring[A]))
       #|  forall(r:K->A ring) k i.\n        i IN k ==> ring_homomorphism (product_ring k r,r i) (\\x. x i)
       #|  forall(r:K->A ring) k i.\n        i IN k ==> ring_epimorphism (product_ring k r,r i) (\\x. x i)
       #|  forall r k. ring_isomorphism (product_ring {k} r,r k) (\\x. x k)
-      #|  cartesian_product k (h:K->A->bool) = {}
+      #|  cartesian_product((k : (K) -> Bool), (h : (K, A) -> Bool)) == {}
       #|  forall k h r:K->A ring.\n        (cartesian_product k h) subring_of (product_ring k r) <=>\n        forall i. i IN k ==> (h i) subring_of (r i)
       #|  forall k r (h:K->A->bool).\n        (forall i. i IN k ==> (h i) subring_of (r i))\n        ==> product_ring k (\\i. subring_generated (r i) (h i)) =\n            subring_generated (product_ring k r) (cartesian_product k h)
       #|  forall k (r:K->A ring).\n        FINITE(ring_carrier(product_ring k r)) <=>\n        FINITE {i | i IN k /\\ ~trivial_ring(r i)} /\\\n        forall i. i IN k ==> FINITE(ring_carrier(r i))
-      #|  cartesian_product k (h:K->A->bool) = {}
+      #|  cartesian_product((k : (K) -> Bool), (h : (K, A) -> Bool)) == {}
       #|  forall k h r:K->A ring.\n        ring_ideal (product_ring k r) (cartesian_product k h) <=>\n        forall i. i IN k ==> ring_ideal (r i) (h i)
       #|  forall k r t (f:L->K->A).\n        FINITE t /\\\n        (forall a. a IN t ==> (f a) IN ring_carrier(product_ring k r))\n        ==> ring_sum (product_ring k r) t f =\n            RESTRICTION k (\\i. ring_sum (r i) t (\\a. f a i))
-      #|  b:K = a
-      #|  b:K
-      #|  trivial_ring((r:K->A ring) a)
+      #|  (b : K) == (a : K)
+      #|  (b : K)
+      #|  trivial_ring((r : (K) -> Ring[A])((a : K)))
       #|  ring_sum ((r:K->A ring) a)\n             {i | i IN k /\\ ~trivial_ring (r i)}\n             (\\i:K. if i = a then f a else ring_0(r a))
-      #|  a:K
-      #|  a:K
-      #|  i:K
+      #|  (a : K)
+      #|  (a : K)
+      #|  (i : K)
       #|  f = ring_sum (product_ring k (r:K->A ring))\n                 {i | i IN k /\\ ~trivial_ring(r i)}\n                 (\\i. ring_mul (product_ring k r) (g i)\n                               (RESTRICTION k (\\j. if j = i then ring_1 (r i)\n                                                   else ring_0 (r j))))
       #|  forall i j. i IN k /\\ j IN k ==> (g:K->K->A) i j IN ring_carrier(r j)
-      #|  g:K->K->A
-      #|  f:K->A
-      #|  f:K->A
-      #|  \\i. IMAGE (\\x. x i) (t:(K->A)->bool)
+      #|  (g : (K, K) -> A)
+      #|  (f : (K) -> A)
+      #|  (f : (K) -> A)
+      #|  (i : K) => IMAGE((x : (K) -> A) => x(i), (t : ((K) -> A) -> Bool))
       #|  forall(r:K->A ring) k t.\n        FINITE {i | i IN k /\\ ~trivial_ring(r i)}\n        ==> (ring_ideal (product_ring k r) t <=>\n             ?j. (forall i. i IN k ==> ring_ideal (r i) (j i)) /\\\n                 cartesian_product k j = t)
-      #|  i:K
-      #|  k:K->bool
-      #|  r:K->A ring
-      #|  i:K
-      #|  j:K->A->bool
+      #|  (i : K)
+      #|  (k : (K) -> Bool)
+      #|  (r : (K) -> Ring[A])
+      #|  (i : K)
+      #|  (j : (K, A) -> Bool)
       #|  ideal_generated (product_ring k r) (t:(K->A)->bool)
-      #|  k:K->bool
-      #|  r:K->A ring
+      #|  (k : (K) -> Bool)
+      #|  (r : (K) -> Ring[A])
       #|  forall(r:K->A ring) k t.\n      FINITE {i | i IN k /\\ ~trivial_ring(r i)} /\\\n      t SUBSET ring_carrier(product_ring k r)\n      ==> ideal_generated (product_ring k r) t =\n          cartesian_product k (\\i. ideal_generated (r i) (IMAGE (\\x. x i) t))
       #|  forall(r:K->A ring) k s.\n        FINITE {i | i IN k /\\ ~trivial_ring(r i)} /\\\n        (forall i. i IN k ==> (s i) SUBSET ring_carrier(r i))\n        ==> ideal_generated (product_ring k r) (cartesian_product k s) =\n            if cartesian_product k s = {} then {ring_0(product_ring k r)}\n            else cartesian_product k (\\i. ideal_generated (r i) (s i))
       #|  forall k (r:K->A ring) x n.\n        ring_pow (product_ring k r) x n =\n        RESTRICTION k (\\i. ring_pow (r i) (x i) n)
-      #|  EXTENSIONAL k (y:K->A)
-      #|  EXTENSIONAL k (x:K->A)
+      #|  EXTENSIONAL((k : (K) -> Bool), (y : (K) -> A))
+      #|  EXTENSIONAL((k : (K) -> Bool), (x : (K) -> A))
       #|  forall k (r:K->A ring) x y.\n        ring_divides (product_ring k r) x y <=>\n        EXTENSIONAL k x /\\ EXTENSIONAL k y /\\\n        forall i. i IN k ==> ring_divides (r i) (x i) (y i)
       #|  forall k (r:K->A ring) x y.\n        ring_associates (product_ring k r) x y <=>\n        EXTENSIONAL k x /\\ EXTENSIONAL k y /\\\n        forall i. i IN k ==> ring_associates (r i) (x i) (y i)
       #|  RESTRICTION k (\\j:K. if j = i then (x:A) else ring_0 (r j))
-      #|  x:A
-      #|  i:K
-      #|  y:K->A
-      #|  (x:K->A) IN ring_carrier (product_ring k r)
+      #|  (x : A)
+      #|  (i : K)
+      #|  (y : (K) -> A)
+      #|  IN((x : (K) -> A), ring_carrier(product_ring((k : (K) -> Bool), (r : (K) -> Ring[A]))))
       #|  forall k (r:K->A ring) x.\n        ring_zerodivisor (product_ring k r) x <=>\n        x IN ring_carrier (product_ring k r) /\\\n        ?i. i IN k /\\ ring_zerodivisor (r i) (x i)
       #|  forall k (r:K->A ring) x.\n        ring_regular (product_ring k r) x <=>\n        EXTENSIONAL k x /\\\n        forall i. i IN k ==> ring_regular (r i) (x i)
-      #|  (x:K->A) IN ring_carrier(product_ring k r)
+      #|  IN((x : (K) -> A), ring_carrier(product_ring((k : (K) -> Bool), (r : (K) -> Ring[A]))))
       #|  forall q'. (p ==> q') /\\ (q' ==> q) /\\ (q' /\\ s ==> r) /\\\n         (q /\\ r ==> q') /\\ (p <=> q' /\\ s)\n         ==> (p <=> q /\\ r /\\ s)
       #|  forall k (r:K->A ring) x.\n        ring_nilpotent (product_ring k r) x <=>\n        EXTENSIONAL k x /\\\n        (forall i. i IN k ==> ring_nilpotent (r i) (x i)) /\\\n        (?n. ~(n = 0) /\\ forall i. i IN k ==> ring_pow (r i) (x i) n = ring_0(r i))
-      #|  SUC(m + d) = m + SUC d
-      #|  d:num
-      #|  i:K
-      #|  i:K
-      #|  SUC n
-      #|  n:num
-      #|  IMAGE (m:K->num) k
-      #|  m:K->num
+      #|  SUC((m : Num) + (d : Num)) == m + SUC(d)
+      #|  (d : Num)
+      #|  (i : K)
+      #|  (i : K)
+      #|  SUC((n : Num))
+      #|  (n : Num)
+      #|  IMAGE((m : (K) -> Num), (k : (K) -> Bool))
+      #|  (m : (K) -> Num)
       #|  forall k (r:K->A ring) x.\n        FINITE k\n        ==> (ring_nilpotent (product_ring k r) x <=>\n             EXTENSIONAL k x /\\\n             forall i. i IN k ==> ring_nilpotent (r i) (x i))
       #|  \\((f:K->A),g) x. if x IN k then f x else g x
-      #|  \\(f:K->A). RESTRICTION k f,RESTRICTION l f
+      #|  (f : (K) -> A) => (RESTRICTION((k : (K) -> Bool), f), RESTRICTION((l : (K) -> Bool), f))
       #|  forall(f:K->A ring) k l.\n        DISJOINT k l\n        ==> product_ring (k UNION l) f isomorphic_ring\n            prod_ring (product_ring k f) (product_ring l f)
       #|  forall(r:K->A ring) k. product_ring {k} r isomorphic_ring r k
       #|  \\x. RESTRICTION k (\\i. if trivial_ring((r:K->A ring) i)\n                            then ring_0(r i) else x i)
       #|  \\x:K->A. RESTRICTION {i | i IN k /\\ ~trivial_ring((r:K->A ring) i)} x
       #|  forall k (r:K->A ring).\n        product_ring {i | i IN k /\\ ~trivial_ring(r i)} r isomorphic_ring\n        product_ring k r
-      #|  r = s ==> r isomorphic_ring s
+      #|  (r : Ring[_]) == (s : Ring[_]) \226\134\146 isomorphic_ring(r, s)
       #|  forall k l (r:K->A ring).\n        (forall i. i IN (k DIFF l) UNION (l DIFF k) ==> trivial_ring(r i))\n        ==> product_ring k r isomorphic_ring product_ring l r
-      #|  (r':L->B ring) (f(i:K))
-      #|  (r:K->A ring) (g(j:L))
-      #|  i:K
-      #|  j:L
+      #|  (r' : (L) -> Ring[B])((f : (K) -> L)((i : K)))
+      #|  (r : (K) -> Ring[A])((g : (L) -> K)((j : L)))
+      #|  (i : K)
+      #|  (j : L)
       #|  \\(y:L->B). RESTRICTION s (\\i:K. (k:K->B->A) i (y (f i)))
       #|  \\(x:K->A). RESTRICTION t (\\j:L. (h:K->A->B) (g j) (x (g j)))
-      #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
-      #|  k:K->B->A
-      #|  h:K->A->B
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
+      #|  (k : (K, B) -> A)
+      #|  (h : (K, A) -> B)
       #|  forall s (r:K->A ring) t (r':L->B ring) f g.\n        (forall x. x IN s ==> f(x) IN t /\\ g(f x) = x) /\\\n        (forall y. y IN t ==> g(y) IN s /\\ f(g y) = y) /\\\n        (forall i. i IN s ==> (r i) isomorphic_ring r'(f i))\n        ==> product_ring s r isomorphic_ring product_ring t r'
       #|  forall(f:K->A ring) k l.\n        DISJOINT k l\n        ==> ring_isomorphisms\n                (product_ring (k UNION l) f,\n                 prod_ring (product_ring k f) (product_ring l f))\n                ((\\f. RESTRICTION k f,RESTRICTION l f),\n                 (\\(f,g) x. if x IN k then f x else g x))
       #|  forall(f:K->A ring) k l.\n        DISJOINT k l\n        ==> ring_isomorphism\n                (product_ring (k UNION l) f,\n                 prod_ring (product_ring k f) (product_ring l f))\n                (\\f. RESTRICTION k f,RESTRICTION l f)
-      #|  (i:K) INSERT k = {i} UNION k
+      #|  INSERT((i : K), (k : (K) -> Bool)) == UNION({i}, k)
       #|  prod_ring (product_ring {i} f) (product_ring k (f:K->A ring))
       #|  forall(f:K->A ring) i k.\n        ~(i IN k)\n        ==> product_ring (i INSERT k) f isomorphic_ring\n            prod_ring (f i) (product_ring k f)
-      #|  R:A ring
-      #|  {f x | x IN s} = {} <=> s = {}
-      #|  {ring_carrier r:A->bool | r IN c}
-      #|  x IN s /\\ y IN s <=> {x,y} SUBSET s
+      #|  (R : Ring[A])
+      #|  ({(f : (_) -> _)((x : _)) | IN(x, (s : (_) -> Bool))} == {}) == (s == {})
+      #|  {ring_carrier((r : Ring[A])) | IN(r, (c : (Ring[A]) -> Bool))}
+      #|  (IN((x : _), (s : (_) -> Bool)) && IN((y : _), s)) == SUBSET({x, y}, s)
       #|  ring_carrier R = UNIONS {ring_carrier r | r IN c} /\\\n    ring_0 R:A = r0 /\\\n    ring_1 R = r1 /\\\n    ring_neg R = neg /\\\n    ring_add R = add /\\\n    ring_mul R = mul
       #|  R = ring(UNIONS {ring_carrier r:A->bool | r IN c},\n                       r0,r1,neg,add,mul)
       #|  (forall r. r IN c ==> r0:A = ring_0 r) /\\\n    (forall r. r IN c ==> r1 = ring_1 r) /\\\n    (forall r x. r IN c /\\ x IN ring_carrier r ==> neg x = ring_neg r x) /\\\n    (forall r x y. r IN c /\\ x IN ring_carrier r /\\ y IN ring_carrier r\n              ==> add x y = ring_add r x y) /\\\n    (forall r x y. r IN c /\\ x IN ring_carrier r /\\ y IN ring_carrier r\n              ==> mul x y = ring_mul r x y)
       #|  mul = \\x y:A.\n            let r = @r. r IN c /\\ x IN ring_carrier r /\\ y IN ring_carrier r in\n            ring_mul r x y
       #|  add = \\x y:A.\n            let r = @r. r IN c /\\ x IN ring_carrier r /\\ y IN ring_carrier r in\n            ring_add r x y
       #|  neg = \\x:A. let r = @r. r IN c /\\ x IN ring_carrier r in\n                 ring_neg r x
-      #|  r1:A = let r = @r. r IN c in ring_1 r
-      #|  r0:A = let r = @r. r IN c in ring_0 r
+      #|  (r1 : A) == LET((r : Ring[A]) => LET_END(ring_1(r)), select((r : Ring[A]) => IN(r, (c : (Ring[A]) -> Bool))))
+      #|  (r0 : A) == LET((r : Ring[A]) => LET_END(ring_0(r)), select((r : Ring[A]) => IN(r, (c : (Ring[A]) -> Bool))))
       #|  forall c:(A ring->bool).\n        ~(c = {}) /\\\n        (forall r r'. r IN c /\\ r' IN c\n                ==> ?R. R IN c /\\\n                        ring_monomorphism(r,R) I /\\\n                        ring_monomorphism(r',R) I)\n        ==> ?R. ring_carrier R = UNIONS {ring_carrier r | r IN c} /\\\n                forall r. r IN c ==> ring_monomorphism(r,R) I
       #|  forall r r' (f:A->B).\n          ring_monomorphism(r,r') f\n          ==> (forall x x' y y'.\n                  (x IN ring_carrier r /\\ f x = x') /\\\n                  (y IN ring_carrier r /\\ f y = y')\n                  ==> (x = y <=> x' = y')) /\\\n              (forall x. x IN ring_carrier r\n                   ==> x IN ring_carrier r /\\ f x = f x) /\\\n              (ring_0 r IN ring_carrier r /\\ f(ring_0 r) = ring_0 r') /\\\n              (ring_1 r IN ring_carrier r /\\ f(ring_1 r) = ring_1 r') /\\\n              (forall n. ring_of_num r n IN ring_carrier r /\\\n                   f(ring_of_num r n) = ring_of_num r' n) /\\\n              (forall n. ring_of_int r n IN ring_carrier r /\\\n                   f(ring_of_int r n) = ring_of_int r' n) /\\\n              (forall x x'. x IN ring_carrier r /\\ f x = x'\n                      ==> ring_neg r x IN ring_carrier r /\\\n                          f(ring_neg r x) = ring_neg r' x') /\\\n              (forall n x x'.\n                  x IN ring_carrier r /\\ f x = x'\n                  ==> ring_pow r x n IN ring_carrier r /\\\n                      f(ring_pow r x n) = ring_pow r' x' n) /\\\n              (forall x x' y y'.\n                  (x IN ring_carrier r /\\ f x = x') /\\\n                  (y IN ring_carrier r /\\ f y = y')\n                  ==> ring_add r x y IN ring_carrier r /\\\n                      f(ring_add r x y) = ring_add r' x' y') /\\\n              (forall x x' y y'.\n                  (x IN ring_carrier r /\\ f x = x') /\\\n                  (y IN ring_carrier r /\\ f y = y')\n                  ==> ring_sub r x y IN ring_carrier r /\\\n                      f(ring_sub r x y) = ring_sub r' x' y') /\\\n              (forall x x' y y'.\n                  (x IN ring_carrier r /\\ f x = x') /\\\n                  (y IN ring_carrier r /\\ f y = y')\n                  ==> ring_mul r x y IN ring_carrier r /\\\n                      f(ring_mul r x y) = ring_mul r' x' y')
-      #|  (:B)
-      #|  (:A)
-      #|  {ring_0 r:A,ring_1 r:A}
+      #|  (UNIV : (B) -> Bool)
+      #|  (UNIV : (A) -> Bool)
+      #|  {ring_0((r : Ring[A])), ring_1(r)}
       #|  forall r:A ring.\n            ~(trivial_ring r) /\\ INFINITE(:B) /\\ (:A) <=_c (:B)\n            ==> ring_carrier(product_ring (:B) (\\i. r)) =_c (:B->bool)
-      #|  product_ring (:num#A) (\\i. (r:A ring))
-      #|  (f:(num#A->A)->num#A->bool) o (\\x i. x)
-      #|  f:(num#A->A)->num#A->bool
-      #|  r':(num#A->bool)ring
-      #|  \\x:A. 0,x
-      #|  (:num#A->bool)
-      #|  product_ring (:num#A) (\\i. (r:A ring))
-      #|  (\\x. one):A->1
-      #|  singleton_ring one
-      #|  trivial_ring(r:A ring)
+      #|  product_ring(UNIV, (i : (Num, A)) => (r : Ring[A]))
+      #|  o((f : (((Num, A)) -> A, (Num, A)) -> Bool), (x : A) => (i : (Num, A)) => x)
+      #|  (f : (((Num, A)) -> A, (Num, A)) -> Bool)
+      #|  (r' : Ring[((Num, A)) -> Bool])
+      #|  (x : A) => (0, x)
+      #|  (UNIV : (((Num, A)) -> Bool) -> Bool)
+      #|  product_ring(UNIV, (i : (Num, A)) => (r : Ring[A]))
+      #|  (x : A) => one
+      #|  singleton_ring(one)
+      #|  trivial_ring((r : Ring[A]))
       #|  forall r:A ring.\n          (?r' f. ring_carrier r' = (:1) /\\\n                  ring_monomorphism(r,r') f) \\/\n          (?r' f. ring_carrier r' = (:num#A->bool) /\\\n                  ring_monomorphism(r,r') f)
       #|  ring_0 r = ring_of_int r (&0) /\\\n       ring_1 r = ring_of_int r (&1)
       #|  ring_carrier r = (:A)\n       ==> (x = y <=> ring_sub r x y = ring_of_int r (&0))
-      #|  ring_of_int r (&0):A
+      #|  ring_of_int((r : Ring[A]), int_of_num(0))
       #|  ring_carrier r = (:A)\n       ==> p = ring_of_int r (&0) ==> forall c. ring_mul r c p = ring_of_int r (&0)
       #|  ring_carrier r = (:A)\n       ==> p = ring_of_int r (&0) /\\ q = ring_of_int r (&0)\n           ==> ring_add r p q = ring_of_int r (&0)
-      #|  (p ==> q) /\\ (p' ==> q) <=> p \\/ p' ==> q
-      #|  p \\/ ~q <=> q ==> p
-      #|  ~p \\/ ~q <=> ~(p /\\ q)
-      #|  p ==> q <=> (p \\/ q <=> q)
-      #|  p:bool
-      #|  q:bool
-      #|  T
+      #|  (((p : Bool) \226\134\146 (q : Bool)) && ((p' : Bool) \226\134\146 q)) == (p || p' \226\134\146 q)
+      #|  ((p : Bool) || !(q : Bool)) == (q \226\134\146 p)
+      #|  (!(p : Bool) || !(q : Bool)) == !(p && q)
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == ((p || q) == q)
+      #|  (p : Bool)
+      #|  (q : Bool)
+      #|  true
       #|  ring_coset (r:A ring) j = \\a. {ring_add r a x | x IN j}
-      #|  forall r s a:A. ring_coset r s a = ring_setadd r {a} s
+      #|  \226\136\128 r : Ring[A], \226\136\128 s : (A) -> Bool, \226\136\128 a : A, ring_coset(r, s, a) == ring_setadd(r, {a}, s)
       #|  forall r t x:A.\n        x IN ring_carrier r /\\ t SUBSET ring_carrier r\n        ==> ring_coset r t x SUBSET ring_carrier r
       #|  forall r t:A->bool.\n        t SUBSET ring_carrier r ==> ring_coset r t (ring_0 r) = t
       #|  forall r x:A. x IN ring_carrier r ==> ring_coset r {ring_0 r} x = {x}
       #|  forall r x:A. x IN ring_carrier r\n           ==> ring_coset r (ring_carrier r) x = ring_carrier r
       #|  forall r j x y:A.\n        (ring_ideal r j \\/ j subring_of r) /\\\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> (ring_coset r j x = ring_coset r j y <=> ring_sub r x y IN j)
       #|  forall r j x:A.\n        (ring_ideal r j \\/ j subring_of r) /\\ x IN ring_carrier r\n        ==> (ring_coset r j x = j <=> x IN j)
-      #|  forall r j x:A. ring_coset r j x = {} <=> j = {}
+      #|  \226\136\128 r : Ring[A], \226\136\128 j : (A) -> Bool, \226\136\128 x : A, (ring_coset(r, j, x) == {}) == (j == {})
       #|  forall r j x:A. ring_ideal r j \\/ j subring_of r ==> ~(ring_coset r j x = {})
       #|  forall r j x:A.\n      (ring_ideal r j \\/ j subring_of r) /\\ x IN ring_carrier r\n      ==> x IN ring_coset r j x
       #|  forall r j:A->bool.\n        ring_ideal r j \\/ j subring_of r\n        ==> UNIONS {ring_coset r j x |x| x IN ring_carrier r} =\n            ring_carrier r
-      #|  \\x:A. ring_sub r x u
-      #|  v:A
-      #|  u:A
+      #|  (x : A) => ring_sub((r : Ring[A]), x, (u : A))
+      #|  (v : A)
+      #|  (u : A)
       #|  ~DISJOINT s t <=> ?x. x IN s /\\ ?y. y IN t /\\ x = y
       #|  forall r j x y:A.\n        (ring_ideal r j \\/ j subring_of r) /\\\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> (ring_coset r j x = ring_coset r j y <=>\n             ~(DISJOINT (ring_coset r j x) (ring_coset r j y)))
-      #|  ~(DISJOINT s t) <=> ?a. a IN s /\\ a IN t
+      #|  !DISJOINT((s : (_) -> Bool), (t : (_) -> Bool)) == (\226\136\131 a : _, IN(a, s) && IN(a, t))
       #|  forall r j x y:A.\n        (ring_ideal r j \\/ j subring_of r) /\\\n        x IN ring_carrier r /\\\n        y IN ring_carrier r\n        ==> (x IN ring_coset r j y <=>\n             ring_coset r j x = ring_coset r j y)
       #|  forall r j x y:A.\n           (ring_ideal r j \\/ j subring_of r) /\\\n           x IN ring_carrier r /\\\n           y IN ring_carrier r\n           ==> (ring_coset r j x y <=> ring_coset r j x = ring_coset r j y)
       #|  forall r j x y:A.\n        (ring_ideal r j \\/ j subring_of r) /\\\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> (DISJOINT (ring_coset r j x) (ring_coset r j y) <=>\n             ~(ring_coset r j x = ring_coset r j y))
@@ -30494,20 +30494,20 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  ring_setadd r {ring_sub r y x:A} (ring_coset r j x)
       #|  forall r j x y:A.\n        (ring_ideal r j \\/ j subring_of r) /\\\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> IMAGE (\\a. ring_add r (ring_sub r y x) a)\n                  (ring_coset r j x) =\n            ring_coset r j y
       #|  forall f g. (IMAGE f s = t /\\ IMAGE g t = s) /\\\n           (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n     ==> s =_c t
-      #|  \\a:A. ring_add r (ring_sub r x y) a
-      #|  \\a:A. ring_add r (ring_sub r y x) a
+      #|  (a : A) => ring_add((r : Ring[A]), ring_sub(r, (x : A), (y : A)), a)
+      #|  (a : A) => ring_add((r : Ring[A]), ring_sub(r, (y : A), (x : A)), a)
       #|  forall r j x y:A.\n        (ring_ideal r j \\/ j subring_of r) /\\\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> ring_coset r j x =_c ring_coset r j y
       #|  forall r j x:A.\n        (ring_ideal r j \\/ j subring_of r) /\\\n        x IN ring_carrier r\n        ==> ring_coset r j x =_c j
-      #|  FINITE(j:A->bool)
+      #|  FINITE((j : (A) -> Bool))
       #|  forall r j:A->bool.\n        FINITE(ring_carrier r) /\\\n        (ring_ideal r j \\/ j subring_of r)\n        ==> CARD {ring_coset r j x |x| x IN ring_carrier r} * CARD j =\n            CARD(ring_carrier r)
       #|  forall r j:A->bool.\n        FINITE(ring_carrier r) /\\\n        (ring_ideal r j \\/ j subring_of r)\n        ==> (CARD j) divides CARD(ring_carrier r)
-      #|  n rem &(ring_char(r:A ring))
-      #|  n:int
+      #|  rem((n : Int), int_of_num(ring_char((r : Ring[A]))))
+      #|  (n : Int)
       #|  forall r:A ring.\n        ~(ring_char r = 0)\n        ==> { ring_of_int r x | x IN (:int) } =\n            { ring_of_num r n | n |  n < ring_char r }
       #|  forall r:A ring.\n        ~(ring_char r = 0)\n        ==> {ring_of_int r n | n IN (:int)} HAS_SIZE ring_char r
       #|  forall r:A ring.\n        ~(ring_char r = 0)\n        ==> CARD {ring_of_int r n | n IN (:int)} = ring_char r
       #|  forall r:A ring. FINITE {ring_of_int r n | n IN (:int)} <=> ~(ring_char r = 0)
-      #|  ring_char r = CARD {ring_of_int r n:A | n IN (:int)}
+      #|  ring_char((r : Ring[A])) == CARD({ring_of_int(r, (n : Int)) | IN(n, UNIV)})
       #|  forall r:A ring.\n        FINITE(ring_carrier r) ==> ring_char r divides CARD(ring_carrier r)
       #|  CARD(ring_carrier r) = CARD(ring_image (r,r') (f:A->B))
       #|  forall r r' (f:A->B).\n        ring_monomorphism(r,r') f /\\ FINITE(ring_carrier r')\n        ==> CARD(ring_carrier r) divides CARD(ring_carrier r')
@@ -30522,40 +30522,40 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  {f x y | x,y | x IN {s x | P x} /\\ y IN {s f | Q f}} =\n    {f (s x) (s y) | P x /\\ Q y}
       #|  forall(r:K->A ring) k s t.\n        ring_setadd (product_ring k r)\n                     (cartesian_product k s) (cartesian_product k t) =\n        cartesian_product k (\\i. ring_setadd (r i) (s i) (t i))
       #|  (forall x. x IN s ==> f x = g x) ==> {f x | x IN s} = {g x | x IN s}
-      #|  {f x y | x,y | x IN {a} /\\ P y} = {f a x | P x}
+      #|  {(f : (_, _) -> _)((x : _), (y : _)) | IN(x, {(a : _)}) && (P : (_) -> Bool)(y)} == {f(a, (x : _)) | P(x)}
       #|  forall(r:K->A ring) j x k.\n        ring_coset (product_ring k r) (cartesian_product k j) x =\n        cartesian_product k (\\i. ring_coset (r i) (j i) (x i))
       #|  forall r s:A->bool.\n        ring_setneg (subring_generated r s) = ring_setneg r
       #|  forall r s:A->bool.\n        ring_setadd (subring_generated r s) = ring_setadd r
-      #|  ring_neg r x:A
-      #|  x:A
-      #|  {f x | x IN {g a | P a}} = {f (g a) | P a}
+      #|  ring_neg((r : Ring[A]), (x : A))
+      #|  (x : A)
+      #|  {(f : (_) -> _)((x : _)) | IN(x, {(g : (_) -> _)((a : _)) | (P : (_) -> Bool)(a)})} == {f(g((a : _))) | P(a)}
       #|  forall r j a:A.\n        a IN ring_carrier r /\\ (ring_ideal r j \\/ j subring_of r)\n        ==> ring_setneg r (ring_coset r j a) = ring_coset r j (ring_neg r a)
       #|  forall r j a b:A.\n        (ring_ideal r j \\/ j subring_of r) /\\\n        a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> ring_setadd r (ring_coset r j a) (ring_coset r j b) =\n            ring_coset r j (ring_add r a b)
       #|  forall r j a b:A.\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\ ring_ideal r j\n        ==> ring_setmul r (ring_coset r j a) (ring_coset r j b)\n            SUBSET ring_coset r j (ring_mul r a b)
-      #|  ring_neg r z:A
-      #|  ring_mul r a (ring_neg r z):A
-      #|  z:A
-      #|  ring_neg r z:A
-      #|  z:A
-      #|  w:A
-      #|  y:A
+      #|  ring_neg((r : Ring[A]), (z : A))
+      #|  ring_mul((r : Ring[A]), (a : A), ring_neg(r, (z : A)))
+      #|  (z : A)
+      #|  ring_neg((r : Ring[A]), (z : A))
+      #|  (z : A)
+      #|  (w : A)
+      #|  (y : A)
       #|  forall r a x:A.\n        a IN ring_carrier r /\\ x IN ring_carrier r\n        ==> ring_coset r (ideal_generated r {a}) x =\n            {y | y IN ring_carrier r /\\\n                 ring_divides r a (ring_sub r x y)}
       #|  forall r a x y:A.\n        a IN ring_carrier r /\\ x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> (ring_coset r (ideal_generated r {a}) x =\n             ring_coset r (ideal_generated r {a}) y <=>\n             ring_divides r a (ring_sub r x y))
       #|  quotient_ring (r:A ring) j =\n        ring({ring_coset r j a | a | a IN ring_carrier r},\n             ring_coset r j (ring_0 r:A),\n             ring_coset r j (ring_1 r),\n             ring_setneg r,\n             ring_setadd r,\n             (\\s t. ring_setadd r (ring_setmul r s t) j))
-      #|  z:A
-      #|  ring_0 r:A
-      #|  ring_0 r:A
-      #|  z:A
+      #|  (z : A)
+      #|  ring_0((r : Ring[A]))
+      #|  ring_0((r : Ring[A]))
+      #|  (z : A)
       #|  ring_add r (ring_mul r x b)\n       (ring_add r (ring_mul r a y) (ring_add r (ring_mul r x y) z)):A
-      #|  z:A
-      #|  y:A
-      #|  x:A
+      #|  (z : A)
+      #|  (y : A)
+      #|  (x : A)
       #|  {f x y | x IN {g a b | P a b} /\\ y IN t} =\n       {f (g a b) y | P a b /\\ y IN t}
       #|  {f x y | x IN {g a | P a} /\\ y IN {h b | Q b}} =\n      {f (g a) (h b) | P a /\\ Q b}
       #|  forall r j a b:A.\n          ring_ideal r j /\\ a IN ring_carrier r /\\ b IN ring_carrier r\n          ==> ring_setadd r\n                (ring_setmul r (ring_coset r j a) (ring_coset r j b)) j =\n              ring_coset r j (ring_mul r a b)
-      #|  /\\
-      #|  (q ==> p) /\\ q ==> p /\\ q
-      #|  ring_ideal r (j:A->bool)
+      #|  op_slash_bslash
+      #|  ((q : Bool) \226\134\146 (p : Bool)) && q \226\134\146 p && q
+      #|  ring_ideal((r : Ring[A]), (j : (A) -> Bool))
       #|  (forall r j:A->bool.\n        ring_ideal r j\n        ==> ring_homomorphism (r,quotient_ring r j) (ring_coset r j)) /\\\n   (forall r j:A->bool.\n        ring_ideal r j\n        ==> ring_carrier (quotient_ring r j) =\n            {ring_coset r j a | a | a IN ring_carrier r}) /\\\n   (forall r j:A->bool.\n        ring_ideal r j\n        ==> ring_0 (quotient_ring r j) = ring_coset r j (ring_0 r)) /\\\n   (forall r j:A->bool.\n        ring_ideal r j\n        ==> ring_1 (quotient_ring r j) = ring_coset r j (ring_1 r)) /\\\n   (forall r j:A->bool.\n        ring_ideal r j ==> ring_neg (quotient_ring r j) = ring_setneg r) /\\\n   (forall r j:A->bool.\n        ring_ideal r j ==> ring_add (quotient_ring r j) = ring_setadd r) /\\\n   (forall r j:A->bool.\n        ring_ideal r j\n        ==> ring_mul (quotient_ring r j) =\n            (\\s t. ring_setadd r (ring_setmul r s t) j))
       #|  forall r j:A->bool.\n        ring_ideal r j\n        ==> ring_epimorphism (r,quotient_ring r j) (ring_coset r j)
       #|  forall r j:A->bool.\n        ring_ideal r j\n        ==> ring_carrier (quotient_ring r j) =\n            {ring_coset r j a | a | a IN ring_carrier r}
@@ -30567,115 +30567,115 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r j:A->bool.\n        ring_ideal r j\n        ==> ring_kernel(r,quotient_ring r j) (ring_coset r j) = j
       #|  forall r j:A->bool.\n    ring_ideal r j ==> ring_carrier(quotient_ring r j) <=_c ring_carrier r
       #|  forall r j:A->bool.\n        FINITE(ring_carrier r) /\\ ring_ideal r j\n        ==> CARD(ring_carrier(quotient_ring r j)) divides\n            CARD(ring_carrier r)
-      #|  g:(A->bool)->B
+      #|  (g : ((A) -> Bool) -> B)
       #|  forall r r' j (f:A->B).\n        ring_homomorphism (r,r') f /\\ ring_ideal r j /\\\n        (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\\n               ring_coset r j x = ring_coset r j y\n               ==> f x = f y)\n        ==> ?g. ring_homomorphism(quotient_ring r j,r') g /\\\n                forall x. x IN ring_carrier r ==> g(ring_coset r j x) = f x
-      #|  ring_sub r x y:A
-      #|  y:A
-      #|  x:A
+      #|  ring_sub((r : Ring[A]), (x : A), (y : A))
+      #|  (y : A)
+      #|  (x : A)
       #|  forall r r' j (f:A->B).\n        ring_homomorphism (r,r') f /\\\n        ring_ideal r j /\\\n        j SUBSET ring_kernel(r,r') f\n        ==> ?g. ring_homomorphism(quotient_ring r j,r') g /\\\n                forall x. x IN ring_carrier r ==> g(ring_coset r j x) = f x
-      #|  f:A->B
-      #|  j:A->bool
-      #|  r':B ring
-      #|  r:A ring
+      #|  (f : (A) -> B)
+      #|  (j : (A) -> Bool)
+      #|  (r' : Ring[B])
+      #|  (r : Ring[A])
       #|  forall r r' j (f:A->B).\n        ring_epimorphism (r,r') f /\\\n        ring_ideal r j /\\\n        j SUBSET ring_kernel(r,r') f\n        ==> ?g. ring_epimorphism(quotient_ring r j,r') g /\\\n                forall x. x IN ring_carrier r ==> g(ring_coset r j x) = f x
-      #|  g:(A->bool)->B
-      #|  ring_kernel (r,r') (f:A->B)
+      #|  (g : ((A) -> Bool) -> B)
+      #|  ring_kernel(((r : Ring[A]), (r' : Ring[B])), (f : (A) -> B))
       #|  forall r r' (f:A->B).\n        ring_homomorphism(r,r') f\n        ==> (quotient_ring r (ring_kernel (r,r') f)) isomorphic_ring\n            (subring_generated r' (ring_image (r,r') f))
       #|  forall r r' (f:A->B).\n        ring_epimorphism(r,r') f\n        ==> (quotient_ring r (ring_kernel(r,r') f)) isomorphic_ring r'
-      #|  ring_add r x y:A = ring_add r y x
-      #|  x:A
-      #|  (x:A) IN ring_carrier r /\\ y IN ring_carrier r
-      #|  y:A
-      #|  x:A
+      #|  ring_add((r : Ring[A]), (x : A), (y : A)) == ring_add(r, y, x)
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((r : Ring[A]))) && IN((y : A), ring_carrier(r))
+      #|  (y : A)
+      #|  (x : A)
       #|  subring_generated r s =\n    subring_generated (subring_generated r (ring_setadd r s j)) (s:A->bool)
-      #|  x:A
-      #|  ring_coset r (j:A->bool)
+      #|  (x : A)
+      #|  ring_coset((r : Ring[A]), (j : (A) -> Bool))
       #|  quotient_ring (subring_generated r (ring_setadd r s (j:A->bool))) j
-      #|  subring_generated r s:A ring
-      #|  (p /\\ q) /\\ (p /\\ q ==> r) ==> p /\\ q /\\ r
+      #|  subring_generated((r : Ring[A]), (s : (A) -> Bool))
+      #|  ((p : Bool) && (q : Bool)) && (p && q \226\134\146 (r : Bool)) \226\134\146 p && q && r
       #|  forall r s j:A->bool.\n        s subring_of r /\\ ring_ideal r j\n        ==> ring_ideal (subring_generated r (ring_setadd r s j)) j /\\\n            ring_ideal (subring_generated r s) (s INTER j) /\\\n            quotient_ring (subring_generated r (ring_setadd r s j)) j\n            isomorphic_ring\n            quotient_ring (subring_generated r s) (s INTER j)
-      #|  p /\\ q <=> ~(p ==> ~q)
+      #|  ((p : Bool) && (q : Bool)) == !(p \226\134\146 !q)
       #|  {y | y IN {f x | P x} /\\ Q y} = IMAGE f {x | P x /\\ Q(f x)}
-      #|  s = t ==> s isomorphic_ring t
-      #|  g:(A->bool)->(A->bool)
-      #|  ring_coset r (k:A->bool)
-      #|  j:A->bool
-      #|  quotient_ring r (k:A->bool)
-      #|  r:A ring
+      #|  (s : Ring[_]) == (t : Ring[_]) \226\134\146 isomorphic_ring(s, t)
+      #|  (g : ((A) -> Bool, A) -> Bool)
+      #|  ring_coset((r : Ring[A]), (k : (A) -> Bool))
+      #|  (j : (A) -> Bool)
+      #|  quotient_ring((r : Ring[A]), (k : (A) -> Bool))
+      #|  (r : Ring[A])
       #|  forall r j k:A->bool.\n        ring_ideal r j /\\ ring_ideal r k /\\ j SUBSET k\n        ==> quotient_ring (quotient_ring r j) (IMAGE (ring_coset r j) k)\n             isomorphic_ring quotient_ring r k
       #|  forall(r:A ring) j t.\n        ring_ideal r j\n        ==> (t subring_of (quotient_ring r j) <=>\n             ?s. s subring_of r /\\ j SUBSET s /\\\n                 {x | x IN ring_carrier r /\\ ring_coset r j x IN t} = s /\\\n                 IMAGE (ring_coset r j) s = t)
       #|  forall(r:A ring) j k.\n        ring_ideal r j\n        ==> (ring_ideal (quotient_ring r j) k <=>\n             ?i. ring_ideal r i /\\ j SUBSET i /\\\n                 {x | x IN ring_carrier r /\\ ring_coset r j x IN k} = i /\\\n                 IMAGE (ring_coset r j) i = k)
-      #|  (x:A) IN ring_carrier r
-      #|  x:A
-      #|  r':B ring
-      #|  ring_coset r' k o (f:A->B)
-      #|  quotient_ring r' (k:B->bool)
-      #|  r:A ring
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
+      #|  (x : A)
+      #|  (r' : Ring[B])
+      #|  o(ring_coset((r' : Ring[B]), (k : (B) -> Bool)), (f : (A) -> B))
+      #|  quotient_ring((r' : Ring[B]), (k : (B) -> Bool))
+      #|  (r : Ring[A])
       #|  forall r r' (f:A->B) j k.\n        ring_epimorphism(r,r') f /\\\n        ring_ideal r' k /\\ {x | x IN ring_carrier r /\\ f x IN k} = j\n        ==> quotient_ring r j isomorphic_ring quotient_ring r' k
-      #|  f:A->B
+      #|  (f : (A) -> B)
       #|  forall r r' (f:A->B) j k.\n        ring_epimorphism(r,r') f /\\\n        ring_ideal r j /\\ ring_kernel (r,r') f SUBSET j /\\ IMAGE f j = k\n        ==> quotient_ring r j isomorphic_ring quotient_ring r' k
       #|  ring_prime r (p:A) <=>\n        p IN ring_carrier r /\\ ~(p = ring_0 r) /\\ ~(ring_unit r p) /\\\n        forall a b. a IN ring_carrier r /\\\n              b IN ring_carrier r /\\\n              ring_divides r p (ring_mul r a b)\n              ==> ring_divides r p a \\/ ring_divides r p b
       #|  ring_irreducible r (p:A) <=>\n        p IN ring_carrier r /\\ ~(p = ring_0 r) /\\ ~(ring_unit r p) /\\\n        forall a b. a IN ring_carrier r /\\\n              b IN ring_carrier r /\\\n              ring_mul r a b = p\n              ==> ring_unit r a \\/ ring_unit r b
-      #|  forall r a:A. ring_prime r a ==> a IN ring_carrier r
-      #|  forall r a:A. ring_irreducible r a ==> a IN ring_carrier r
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, ring_prime(r, a) \226\134\146 IN(a, ring_carrier(r))
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, ring_irreducible(r, a) \226\134\146 IN(a, ring_carrier(r))
       #|  forall r x:A.\n        x IN ring_carrier r\n        ==> (ring_prime r (ring_neg r x) <=> ring_prime r x)
-      #|  b:A
-      #|  ring_neg r a:A
-      #|  b:A
-      #|  a:A
+      #|  (b : A)
+      #|  ring_neg((r : Ring[A]), (a : A))
+      #|  (b : A)
+      #|  (a : A)
       #|  forall r x:A.\n        x IN ring_carrier r\n        ==> (ring_irreducible r (ring_neg r x) <=> ring_irreducible r x)
-      #|  forall r p:A. ring_prime r p ==> ~trivial_ring r
-      #|  forall r p:A. ring_irreducible r p ==> ~trivial_ring r
-      #|  a:A = ring_0 r
-      #|  (a:A) IN ring_carrier r
-      #|  forall r a:A. field r ==> ~(ring_prime r a)
-      #|  a:A = ring_0 r
-      #|  (a:A) IN ring_carrier r
-      #|  forall r a:A. field r ==> ~(ring_irreducible r a)
+      #|  \226\136\128 r : Ring[A], \226\136\128 p : A, ring_prime(r, p) \226\134\146 !trivial_ring(r)
+      #|  \226\136\128 r : Ring[A], \226\136\128 p : A, ring_irreducible(r, p) \226\134\146 !trivial_ring(r)
+      #|  (a : A) == ring_0((r : Ring[A]))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, field(r) \226\134\146 !ring_prime(r, a)
+      #|  (a : A) == ring_0((r : Ring[A]))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, field(r) \226\134\146 !ring_irreducible(r, a)
       #|  forall r a a':A.\n        ring_associates r a a' ==> (ring_prime r a <=> ring_prime r a')
-      #|  x:A
-      #|  p:A
-      #|  x:A
+      #|  (x : A)
+      #|  (p : A)
+      #|  (x : A)
       #|  forall r p q:A.\n        ~(ring_unit r p) /\\\n        ring_irreducible r q /\\\n        ring_divides r p q\n        ==> ring_associates r p q
       #|  forall r p q:A.\n        ring_prime r p /\\\n        ring_irreducible r q /\\\n        ring_divides r p q\n        ==> ring_prime r q
       #|  forall r p a b:A.\n        ring_prime r p /\\ a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> (ring_divides r p (ring_mul r a b) <=>\n             ring_divides r p a \\/ ring_divides r p b)
       #|  forall r p (x:A) n.\n        ring_prime r p /\\ x IN ring_carrier r /\\\n        ring_divides r p (ring_pow r x n)\n        ==> ring_divides r p x
       #|  forall r p k (f:K->A).\n        ring_prime r p /\\ FINITE k /\\ (forall i. i IN k ==> f i IN ring_carrier r)\n        ==> (ring_divides r p (ring_product r k f) <=>\n             ?i. i IN k /\\ ring_divides r p (f i))
-      #|  p:A
-      #|  r:A ring
-      #|  x:A
-      #|  b:A
-      #|  a:A
-      #|  b:A
-      #|  a:A
+      #|  (p : A)
+      #|  (r : Ring[A])
+      #|  (x : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (b : A)
+      #|  (a : A)
       #|  forall r p:A. integral_domain r /\\ ring_prime r p ==> ring_irreducible r p
-      #|  x:A
-      #|  r:A ring
-      #|  u:A
-      #|  ring_unit r (x:A)
-      #|  y:A
-      #|  x:A
-      #|  (p ==> (q <=> q')) ==> (p /\\ q <=> p /\\ q')
+      #|  (x : A)
+      #|  (r : Ring[A])
+      #|  (u : A)
+      #|  ring_unit((r : Ring[A]), (x : A))
+      #|  (y : A)
+      #|  (x : A)
+      #|  ((p : Bool) \226\134\146 (q : Bool) == (q' : Bool)) \226\134\146 (p && q) == (p && q')
       #|  forall r a:A.\n        integral_domain r\n        ==> (ring_irreducible r a <=>\n             a IN ring_carrier r /\\\n             ~(a = ring_0 r) /\\\n             ~ring_unit r a /\\\n             forall d. ring_divides r d a\n                 ==> ring_unit r d \\/ ring_divides r a d)
       #|  forall r a:A.\n        integral_domain r\n        ==> (ring_irreducible r a <=>\n             a IN ring_carrier r /\\\n             ~(a = ring_0 r) /\\\n             ~ring_unit r a /\\\n             forall d. ring_divides r d a\n                 ==> ring_unit r d \\/ ring_associates r d a)
-      #|  c:A
-      #|  b:A
-      #|  c:A
-      #|  b:A
+      #|  (c : A)
+      #|  (b : A)
+      #|  (c : A)
+      #|  (b : A)
       #|  forall r a:A.\n         integral_domain r\n         ==> (ring_irreducible r a <=>\n              a IN ring_carrier r /\\\n              ~(a = ring_0 r) /\\\n              ~ring_unit r a /\\\n              forall b c. b IN ring_carrier r /\\ c IN ring_carrier r /\\\n                    ring_mul r b c = a\n                    ==> ring_divides r a b \\/ ring_divides r a c)
       #|  forall r a a':A.\n        integral_domain r /\\ ring_associates r a a'\n        ==> (ring_irreducible r a <=> ring_irreducible r a')
-      #|  p:A
-      #|  r:A ring
-      #|  y:A
-      #|  y:A
-      #|  x:A
-      #|  a:A
-      #|  x:A
+      #|  (p : A)
+      #|  (r : Ring[A])
+      #|  (y : A)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (a : A)
+      #|  (x : A)
       #|  forall r p a b:A.\n        integral_domain r /\\ ring_prime r p /\\\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\ ~(ring_divides r p a)\n        ==> (ring_divides r a (ring_mul r p b) <=> ring_divides r a b)
       #|  forall r p a b:A.\n        integral_domain r /\\ ring_prime r p /\\\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\ ~(ring_divides r p a)\n        ==> (ring_divides r a (ring_mul r b p) <=> ring_divides r a b)
       #|  forall r p a:A.\n        ring_irreducible r p /\\ a IN ring_carrier r\n        ==> ring_divides r p a \\/ ring_coprime r (p,a)
-      #|  p:A
-      #|  (a:A) IN ring_carrier r
+      #|  (p : A)
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
       #|  forall r p a:A.\n        ring_irreducible r p\n        ==> (ring_coprime r (p,a) <=>\n             a IN ring_carrier r /\\ ~(ring_divides r p a))
       #|  forall r p q:A.\n        ring_irreducible r p /\\ ring_irreducible r q\n        ==> ring_coprime r (p,q) \\/ ring_associates r p q
       #|  forall r p a:A.\n        integral_domain r /\\ ring_prime r p /\\ a IN ring_carrier r\n        ==> ring_divides r p a \\/ ring_coprime r (p,a)
@@ -30684,136 +30684,136 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r p q:A.\n        integral_domain r /\\ ring_prime r p /\\ ring_prime r q\n        ==> (ring_divides r p q <=> ring_associates r p q)
       #|  forall r r' (f:A->B) a.\n        ring_isomorphism(r,r') f /\\ a IN ring_carrier r\n        ==> (ring_prime r' (f a) <=> ring_prime r a)
       #|  forall r r' (f:A->B) a.\n        ring_isomorphism(r,r') f /\\ a IN ring_carrier r\n        ==> (ring_irreducible r' (f a) <=> ring_irreducible r a)
-      #|  x'':A
-      #|  ring_divides r a (ring_mul r b (x':A))
-      #|  ring_divides r a (x':A)
+      #|  (x'' : A)
+      #|  ring_divides((r : Ring[A]), (a : A), ring_mul(r, (b : A), (x' : A)))
+      #|  ring_divides((r : Ring[A]), (a : A), (x' : A))
       #|  forall r a b x:A.\n        ring_prime r a /\\ ~(ring_divides r a b) /\\\n        ring_divides r a x /\\ ring_divides r b x\n        ==> ring_divides r (ring_mul r a b) x
       #|  forall r p q x:A.\n        ring_prime r p /\\ q IN ring_carrier r /\\ ~(ring_divides r p q)\n        ==> (ring_divides r (ring_mul r p q) x <=>\n             ring_divides r p x /\\ ring_divides r q x)
-      #|  s:K->bool
-      #|  i:K
-      #|  (x:A) IN ring_carrier r
+      #|  (s : (K) -> Bool)
+      #|  (i : K)
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
       #|  forall r p (s:K->bool) x:A.\n        FINITE s /\\\n        x IN ring_carrier r /\\\n        (forall i. i IN s ==> ring_prime r (p i)) /\\\n        pairwise (\\i j. ~ring_divides r (p i) (p j)) s\n        ==> (ring_divides r (ring_product r s p) x <=>\n             forall i. i IN s ==> ring_divides r (p i) x)
       #|  forall r p (s:K->bool) x:A.\n        integral_domain r /\\\n        FINITE s /\\\n        x IN ring_carrier r /\\\n        (forall i. i IN s ==> ring_prime r (p i)) /\\\n        pairwise (\\i j. ~ring_associates r (p i) (p j)) s\n        ==> (ring_divides r (ring_product r s p) x <=>\n             forall i. i IN s ==> ring_divides r (p i) x)
-      #|  t = (j:L) INSERT u
-      #|  u = t DELETE (j:L)
-      #|  a IN ring_carrier r /\\ b = a ==> ring_divides r a b
+      #|  (t : (L) -> Bool) == INSERT((j : L), (u : (L) -> Bool))
+      #|  (u : (L) -> Bool) == DELETE((t : (L) -> Bool), (j : L))
+      #|  IN((a : _), ring_carrier((r : Ring[_]))) && (b : _) == a \226\134\146 ring_divides(r, a, b)
       #|  ring_mul r ((g:L->A) j) (ring_product r (t DELETE j) g)
       #|  ring_divides r (ring_mul r (f i) (ring_product r s (f:K->A)))\n                   (ring_mul r (f i) (ring_product r (t DELETE (j:L)) g))
-      #|  \\k. if k = i then j else (h:K->L) k
-      #|  h:K->L
-      #|  ring_associates r ((f:K->A) i) ((g:L->A) j)
-      #|  g:L->A
-      #|  t DELETE (j:L)
-      #|  j:L
-      #|  f:K->A
-      #|  g:L->A
-      #|  t:L->bool
-      #|  f:K->A
-      #|  s:K->bool
-      #|  i:K
+      #|  (k : K) => if k == (i : K) { (j : L) } else { (h : (K) -> L)(k) }
+      #|  (h : (K) -> L)
+      #|  ring_associates((r : Ring[A]), (f : (K) -> A)((i : K)), (g : (L) -> A)((j : L)))
+      #|  (g : (L) -> A)
+      #|  DELETE((t : (L) -> Bool), (j : L))
+      #|  (j : L)
+      #|  (f : (K) -> A)
+      #|  (g : (L) -> A)
+      #|  (t : (L) -> Bool)
+      #|  (f : (K) -> A)
+      #|  (s : (K) -> Bool)
+      #|  (i : K)
       #|  forall r s (f:K->A) t (g:L->A).\n        integral_domain r /\\\n        FINITE s /\\ (forall i. i IN s ==> ring_prime r (f i)) /\\\n        FINITE t /\\ (forall j. j IN t ==> ring_irreducible r (g j)) /\\\n        ring_divides r (ring_product r s f) (ring_product r t g)\n        ==> ?h. IMAGE h s SUBSET t /\\\n                (forall i j. i IN s /\\ j IN s /\\ h i = h j ==> i = j) /\\\n                (forall i. i IN s ==> ring_associates r (f i) (g(h i)))
-      #|  ring_product r (IMAGE (h:K->L) s) (g:L->A)
-      #|  h:K->L
+      #|  ring_product((r : Ring[A]), IMAGE((h : (K) -> L), (s : (K) -> Bool)), (g : (L) -> A))
+      #|  (h : (K) -> L)
       #|  forall r s (f:K->A) t (g:L->A).\n        integral_domain r /\\\n        FINITE s /\\ (forall i. i IN s ==> ring_prime r (f i)) /\\\n        FINITE t /\\ (forall j. j IN t ==> ring_irreducible r (g j))\n        ==> (ring_divides r (ring_product r s f) (ring_product r t g) <=>\n             ?h. IMAGE h s SUBSET t /\\\n                 (forall i j. i IN s /\\ j IN s /\\ h i = h j ==> i = j) /\\\n                 (forall i. i IN s ==> ring_associates r (f i) (g(h i))))
-      #|  CARD(IMAGE (h:K->L) s)
-      #|  h:K->L
+      #|  CARD(IMAGE((h : (K) -> L), (s : (K) -> Bool)))
+      #|  (h : (K) -> L)
       #|  forall r s (f:K->A) t (g:L->A).\n        integral_domain r /\\\n        FINITE s /\\ (forall i. i IN s ==> ring_prime r (f i)) /\\\n        FINITE t /\\ (forall j. j IN t ==> ring_irreducible r (g j)) /\\\n        ring_divides r (ring_product r s f) (ring_product r t g)\n        ==> CARD s <= CARD t
-      #|  s SUBSET t ==> s UNION (t DIFF s) = t
-      #|  DISJOINT s (t DIFF s)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 UNION(s, DIFF(t, s)) == t
+      #|  DISJOINT((s : (_) -> Bool), DIFF((t : (_) -> Bool), s))
       #|  ring_mul r (ring_product r (IMAGE h s) g)\n               (ring_product r (t DIFF IMAGE (h:K->L) s) g):A
       #|  ring_associates r\n        (ring_product r s (f:K->A))\n        (ring_mul r (ring_product r s f)\n                    (ring_product r (t DIFF IMAGE (h:K->L) s) g))
-      #|  s SUBSET t /\\ (~(t DIFF s = {}) ==> F) ==> s = t
-      #|  h:K->L
-      #|  g:L->A
-      #|  t:L->bool
-      #|  f:K->A
-      #|  s:K->bool
-      #|  r:A ring
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) && (!(DIFF(t, s) == {}) \226\134\146 false) \226\134\146 s == t
+      #|  (h : (K) -> L)
+      #|  (g : (L) -> A)
+      #|  (t : (L) -> Bool)
+      #|  (f : (K) -> A)
+      #|  (s : (K) -> Bool)
+      #|  (r : Ring[A])
       #|  forall r s (f:K->A) t (g:L->A).\n        integral_domain r /\\\n        FINITE s /\\ (forall i. i IN s ==> ring_prime r (f i)) /\\\n        FINITE t /\\ (forall j. j IN t ==> ring_irreducible r (g j)) /\\\n        ring_associates r (ring_product r s f) (ring_product r t g)\n        ==> ?h. IMAGE h s = t /\\\n                (forall i j. i IN s /\\ j IN s /\\ h i = h j ==> i = j) /\\\n                (forall i. i IN s ==> ring_associates r (f i) (g(h i)))
-      #|  k:L->K
-      #|  h:K->L
+      #|  (k : (L) -> K)
+      #|  (h : (K) -> L)
       #|  forall r s (f:K->A) t (g:L->A).\n        integral_domain r /\\\n        FINITE s /\\ (forall i. i IN s ==> ring_prime r (f i)) /\\\n        FINITE t /\\ (forall j. j IN t ==> ring_irreducible r (g j)) /\\\n        ring_associates r (ring_product r s f) (ring_product r t g)\n        ==> ?h k. IMAGE h s = t /\\ IMAGE k t = s /\\\n                  (forall i. i IN s ==> k(h i) = i) /\\\n                  (forall j. j IN t ==> h(k j) = j) /\\\n                  (forall i. i IN s ==> ring_associates r (f i) (g(h i))) /\\\n                  (forall j. j IN t ==> ring_associates r (g j) (f(k j)))
-      #|  IMAGE (h:K->L) s = t
+      #|  IMAGE((h : (K) -> L), (s : (K) -> Bool)) == (t : (L) -> Bool)
       #|  forall r s (f:K->A) t (g:L->A).\n        integral_domain r /\\\n        FINITE s /\\ (forall i. i IN s ==> ring_prime r (f i)) /\\\n        FINITE t /\\ (forall j. j IN t ==> ring_irreducible r (g j))\n        ==> (ring_associates r (ring_product r s f) (ring_product r t g) <=>\n             ?h k. IMAGE h s = t /\\ IMAGE k t = s /\\\n                   (forall i. i IN s ==> k(h i) = i) /\\\n                   (forall j. j IN t ==> h(k j) = j) /\\\n                   (forall i. i IN s ==> ring_associates r (f i) (g(h i))) /\\\n                   (forall j. j IN t ==> ring_associates r (g j) (f(k j))))
       #|  forall r s (f:K->A) t (g:L->A).\n        integral_domain r /\\\n        FINITE s /\\ (forall i. i IN s ==> ring_prime r (f i)) /\\\n        FINITE t /\\ (forall j. j IN t ==> ring_irreducible r (g j))\n        ==> (ring_associates r (ring_product r s f) (ring_product r t g) <=>\n             ?h. IMAGE h s = t /\\\n                 (forall i j. i IN s /\\ j IN s /\\ h i = h j ==> i = j) /\\\n                 (forall i. i IN s ==> ring_associates r (f i) (g(h i))))
       #|  forall r s (f:K->A) t (g:L->A).\n        integral_domain r /\\\n        FINITE s /\\ (forall i. i IN s ==> ring_prime r (f i)) /\\\n        FINITE t /\\ (forall j. j IN t ==> ring_irreducible r (g j)) /\\\n        ring_associates r (ring_product r s f) (ring_product r t g)\n        ==> CARD s = CARD t
-      #|  CARD(IMAGE (h:K->L) s)
-      #|  h:K->L
-      #|  (?x. P x) /\\ ~(?x. Q x) ==> ?x. P x /\\ ~Q x
+      #|  CARD(IMAGE((h : (K) -> L), (s : (K) -> Bool)))
+      #|  (h : (K) -> L)
+      #|  (\226\136\131 x : _, (P : (_) -> Bool)(x)) && !(\226\136\131 x : _, (Q : (_) -> Bool)(x)) \226\134\146 (\226\136\131 x : _, P(x) && !Q(x))
       #|  ring_divides r x y /\\ ~(ring_divides r y x) <=>\n    ring_divides r x y /\\ ~(ring_associates r x y)
       #|  forall r s (f:K->A) t (g:L->A).\n        integral_domain r /\\\n        FINITE s /\\ (forall i. i IN s ==> ring_prime r (f i)) /\\\n        FINITE t /\\ (forall j. j IN t ==> ring_irreducible r (g j)) /\\\n        ring_divides r (ring_product r s f) (ring_product r t g) /\\\n        ~(ring_divides r (ring_product r t g) (ring_product r s f))\n        ==> CARD s < CARD t
       #|  ring_squarefree (r:A ring) (a:A) <=>\n  a IN ring_carrier r /\\\n  forall q. q IN ring_carrier r /\\ ring_divides r (ring_pow r q 2) a\n      ==> ring_unit r q
       #|  forall r (a:A). ring_squarefree r a ==> a IN ring_carrier r
-      #|  ~(2 = 0)
-      #|  ring_pow r (q:A) 2
-      #|  a:A
-      #|  r:A ring
-      #|  forall r (a:A). ring_unit r a ==> ring_squarefree r a
-      #|  forall r:A ring. ring_squarefree r (ring_1 r)
+      #|  !(2 == 0)
+      #|  ring_pow((r : Ring[A]), (q : A), 2)
+      #|  (a : A)
+      #|  (r : Ring[A])
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, ring_unit(r, a) \226\134\146 ring_squarefree(r, a)
+      #|  \226\136\128 r : Ring[A], ring_squarefree(r, ring_1(r))
       #|  forall r d (a:A).\n        ring_squarefree r a /\\ ring_divides r d a\n        ==> ring_squarefree r d
       #|  forall r a (b:A).\n        ring_associates r a b\n        ==> (ring_squarefree r a <=> ring_squarefree r b)
       #|  forall r:A ring. ring_squarefree r (ring_0 r) <=> trivial_ring r
       #|  forall r (a:A). ~trivial_ring r /\\ ring_squarefree r a ==> ~(a = ring_0 r)
-      #|  ring_mul r (q:A) e
-      #|  q:A
-      #|  e:A
-      #|  ring_divides r (ring_pow r (q:A) 2) a
-      #|  q:A
+      #|  ring_mul((r : Ring[A]), (q : A), (e : A))
+      #|  (q : A)
+      #|  (e : A)
+      #|  ring_divides((r : Ring[A]), ring_pow(r, (q : A), 2), (a : A))
+      #|  (q : A)
       #|  forall r (a:A). ring_irreducible r a ==> ring_squarefree r a
       #|  forall r (a:A). integral_domain r /\\ ring_prime r a ==> ring_squarefree r a
       #|  forall r a p:A.\n        ring_squarefree r a /\\ ring_prime r p\n        ==> ~ring_divides r (ring_pow r p 2) a
-      #|  ring_mul r (q:A) x
-      #|  q:A
-      #|  ring_divides r (ring_pow r (q:A) 2) a
-      #|  q:A
+      #|  ring_mul((r : Ring[A]), (q : A), (x : A))
+      #|  (q : A)
+      #|  ring_divides((r : Ring[A]), ring_pow(r, (q : A), 2), (a : A))
+      #|  (q : A)
       #|  forall r (a:A).\n     ring_squarefree r a <=>\n     a IN ring_carrier r /\\\n     forall b c. b IN ring_carrier r /\\ c IN ring_carrier r /\\ ring_mul r b c = a\n           ==> ring_coprime r (b,c)
       #|  forall r (a:A).\n     ring_squarefree r a <=>\n     a IN ring_carrier r /\\\n     forall b c. b IN ring_carrier r /\\ c IN ring_carrier r /\\\n           ring_divides r (ring_mul r b c) a\n           ==> ring_coprime r (b,c)
       #|  forall r a (b:A).\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\\n        ring_squarefree r (ring_mul r a b)\n        ==> ring_coprime r (a,b) /\\\n            ring_squarefree r a /\\ ring_squarefree r b
-      #|  k = 2 + (k - 2)
-      #|  a:A
-      #|  k = 1
-      #|  k = 0
-      #|  ring_unit r (a:A)
+      #|  (k : Num) == 2 + (k - 2)
+      #|  (a : A)
+      #|  (k : Num) == 1
+      #|  (k : Num) == 0
+      #|  ring_unit((r : Ring[A]), (a : A))
       #|  forall r (a:A) k.\n        a IN ring_carrier r\n        ==> (ring_squarefree r (ring_pow r a k) <=>\n             ring_unit r a \\/ k = 0 \\/ ring_squarefree r a /\\ k = 1)
       #|  ring_multsys (r:A ring) s <=>\n        s SUBSET ring_carrier r /\\\n        ring_1 r IN s /\\\n        (forall x y. x IN s /\\ y IN s ==> ring_mul r x y IN s)
       #|  (forall r s x:A. ring_multsys r s /\\ x IN s ==> x IN ring_carrier r) /\\\n   (forall r s:A->bool. ring_multsys r s ==> ring_1 r IN s) /\\\n   (forall r s x y:A. ring_multsys r s /\\ x IN s /\\ y IN s\n                ==> ring_mul r x y IN s)
       #|  forall r s:A->bool. ring_multsys r s ==> s SUBSET ring_carrier r
-      #|  forall r s:A->bool. ring_multsys r s ==> ~(s = {})
-      #|  forall r:A ring. ring_multsys r {ring_1 r}
-      #|  forall r:A ring. ring_multsys r (ring_carrier r)
+      #|  \226\136\128 r : Ring[A], \226\136\128 s : (A) -> Bool, ring_multsys(r, s) \226\134\146 !(s == {})
+      #|  \226\136\128 r : Ring[A], ring_multsys(r, {ring_1(r)})
+      #|  \226\136\128 r : Ring[A], ring_multsys(r, ring_carrier(r))
       #|  forall r:A ring.\n        ring_multsys r {a | ring_regular r a}
       #|  forall r:A ring.\n        ring_multsys r (ring_carrier r DIFF {ring_0 r}) <=>\n        integral_domain r
       #|  forall r x:A. x IN ring_carrier r\n           ==> ring_multsys r {ring_pow r x n | n IN (:num)}
-      #|  forall r:A ring. ring_multsys r {u | ring_unit r u}
+      #|  \226\136\128 r : Ring[A], ring_multsys(r, {(u : A) | ring_unit(r, u)})
       #|  forall r x:A.\n        x IN ring_carrier r /\\ ring_mul r x x = x\n        ==> ring_multsys r {ring_1 r,x}
       #|  forall r gs.\n         (forall g. g IN gs ==> ring_multsys r g) /\\ ~(gs = {})\n         ==> ring_multsys r (INTERS gs)
       #|  forall r s t:A->bool.\n        ring_multsys r s /\\ ring_multsys r t ==> ring_multsys r (s INTER t)
       #|  forall r s (x:A) n.\n        ring_multsys r s /\\ x IN s ==> ring_pow r x n IN s
-      #|  n:num
-      #|  x:A
+      #|  (n : Num)
+      #|  (x : A)
       #|  forall r s:A->bool.\n        ring_multsys r s\n        ==> ((?x. ring_nilpotent r x /\\ x IN s) <=> ring_0 r IN s)
       #|  ring_localequiv r s (a,b) (a',b') <=>\n        a IN ring_carrier r /\\ a' IN ring_carrier r /\\ b IN s /\\ b' IN s /\\\n        ?u. u IN s /\\\n            ring_mul r u (ring_sub r (ring_mul r a b') (ring_mul r a' b)) =\n            ring_0 r
       #|  forall r s a b a' b':A.\n      ring_multsys r s\n      ==> (ring_localequiv r s (a,b) (a',b') <=>\n           a IN ring_carrier r /\\ a' IN ring_carrier r /\\\n           b IN ring_carrier r /\\ b' IN ring_carrier r /\\\n           b IN s /\\ b' IN s /\\\n           ?u. u IN s /\\\n               ring_mul r u (ring_sub r (ring_mul r a b') (ring_mul r a' b)) =\n               ring_0 r)
-      #|  (b:A) IN s
-      #|  (a:A) IN ring_carrier r
+      #|  IN((b : A), (s : (A) -> Bool))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
       #|  forall r s a b:A.\n        ring_multsys r s\n        ==> (ring_localequiv r s (a,b) (a,b) <=>\n             a IN ring_carrier r /\\ b IN s)
-      #|  u:A
+      #|  (u : A)
       #|  forall r s a b a' b':A.\n        ring_multsys r s\n        ==> (ring_localequiv r s (a,b) (a',b') <=>\n             ring_localequiv r s (a',b') (a,b))
-      #|  ring_mul r b' (ring_mul r u v):A
-      #|  v:A
-      #|  u:A
+      #|  ring_mul((r : Ring[A]), (b' : A), ring_mul(r, (u : A), (v : A)))
+      #|  (v : A)
+      #|  (u : A)
       #|  forall r s a b a' b' a'' b'':A.\n        ring_multsys r s /\\\n        ring_localequiv r s (a,b) (a',b') /\\\n        ring_localequiv r s (a',b') (a'',b'')\n        ==> ring_localequiv r s (a,b) (a'',b'')
       #|  forall r s a b a' b'.\n        ring_multsys r s /\\\n        a IN ring_carrier r /\\ a' IN ring_carrier r /\\ b IN s /\\ b' IN s\n        ==> (ring_localequiv r s (a,b) (a',b') <=>\n             ring_localequiv r s (a,b) = ring_localequiv r s (a',b'))
-      #|  u:A
-      #|  u:A
+      #|  (u : A)
+      #|  (u : A)
       #|  forall r s a b a' b':A.\n        ring_multsys r s /\\\n        ring_localequiv r s (a,b) (a',b')\n        ==> ring_localequiv r s (ring_neg r a,b) (ring_neg r a',b')
-      #|  ring_mul r u v:A
-      #|  v:A
-      #|  u:A
+      #|  ring_mul((r : Ring[A]), (u : A), (v : A))
+      #|  (v : A)
+      #|  (u : A)
       #|  forall r s a1 b1 a1' b1' a2 b2 a2' b2':A.\n        ring_multsys r s /\\\n        ring_localequiv r s (a1,b1) (a1',b1') /\\\n        ring_localequiv r s (a2,b2) (a2',b2')\n        ==> ring_localequiv r s\n             (ring_add r (ring_mul r a1 b2) (ring_mul r a2 b1),\n              ring_mul r b1 b2)\n             (ring_add r (ring_mul r a1' b2') (ring_mul r a2' b1'),\n              ring_mul r b1' b2')
-      #|  ring_mul r u v:A
-      #|  v:A
-      #|  u:A
+      #|  ring_mul((r : Ring[A]), (u : A), (v : A))
+      #|  (v : A)
+      #|  (u : A)
       #|  forall r s a1 b1 a1' b1' a2 b2 a2' b2':A.\n        ring_multsys r s /\\\n        ring_localequiv r s (a1,b1) (a1',b1') /\\\n        ring_localequiv r s (a2,b2) (a2',b2')\n        ==> ring_localequiv r s\n             (ring_mul r a1 a2,ring_mul r b1 b2)\n             (ring_mul r a1' a2',ring_mul r b1' b2')
       #|  ring_localization (r:A ring) s =\n        ring({ring_localequiv r s (a,b) |a,b| a IN ring_carrier r /\\ b IN s},\n             ring_localequiv r s (ring_0 r,ring_1 r),\n             ring_localequiv r s (ring_1 r,ring_1 r),\n             (@f. forall a b. a IN ring_carrier r /\\ b IN s\n                      ==> f (ring_localequiv r s (a,b)) =\n                          ring_localequiv r s (ring_neg r a,b)),\n             (@f. forall a1 b1 a2 b2.\n                        a1 IN ring_carrier r /\\ b1 IN s /\\\n                        a2 IN ring_carrier r /\\ b2 IN s\n                        ==> f (ring_localequiv r s (a1,b1))\n                              (ring_localequiv r s (a2,b2)) =\n                            ring_localequiv r s\n                             (ring_add r (ring_mul r a1 b2) (ring_mul r a2 b1),\n                              ring_mul r b1 b2)),\n             (@f. forall a1 b1 a2 b2.\n                        a1 IN ring_carrier r /\\ b1 IN s /\\\n                        a2 IN ring_carrier r /\\ b2 IN s\n                        ==> f (ring_localequiv r s (a1,b1))\n                              (ring_localequiv r s (a2,b2)) =\n                            ring_localequiv r s\n                              (ring_mul r a1 a2,ring_mul r b1 b2)))
       #|  (forall x y. P x y ==> g (r x) (r y) = r (f x y)) <=>\n      (forall w z x y. P x y /\\ r x = w /\\ r y = z ==> g w z = r (f x y))
@@ -30831,242 +30831,242 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  ~
       #|  F
       #|  forall r s:A->bool.\n          ring_multsys r s\n          ==> ?f. forall a b. a IN ring_carrier r /\\ b IN s\n                        ==> f (ring_localequiv r s (a,b)) =\n                            ring_localequiv r s (ring_neg r a,b)
-      #|  ring_localequiv (r:A ring) s
+      #|  ring_localequiv((r : Ring[A]), (s : (A) -> Bool))
       #|  forall r s:A->bool.\n          ring_multsys r s\n          ==> ?f. forall a1 b1 a2 b2.\n                        a1 IN ring_carrier r /\\ b1 IN s /\\\n                        a2 IN ring_carrier r /\\ b2 IN s\n                        ==> f (ring_localequiv r s (a1,b1))\n                              (ring_localequiv r s (a2,b2)) =\n                            ring_localequiv r s\n                              (ring_mul r a1 a2,ring_mul r b1 b2)
-      #|  ring_localequiv (r:A ring) s
+      #|  ring_localequiv((r : Ring[A]), (s : (A) -> Bool))
       #|  forall r s:A->bool.\n          ring_multsys r s\n          ==> ?f. forall a1 b1 a2 b2.\n                        a1 IN ring_carrier r /\\ b1 IN s /\\\n                        a2 IN ring_carrier r /\\ b2 IN s\n                        ==> f (ring_localequiv r s (a1,b1))\n                              (ring_localequiv r s (a2,b2)) =\n                            ring_localequiv r s\n                             (ring_add r (ring_mul r a1 b2) (ring_mul r a2 b1),\n                              ring_mul r b1 b2)
-      #|  ring_1 r:A
-      #|  s:A->bool
-      #|  r:A ring
-      #|  ring_mul r b1 b2:A
-      #|  ring_add r (ring_mul r a1 b2) (ring_mul r a2 b1):A
-      #|  b2:A
-      #|  a2:A
-      #|  b1:A
-      #|  a1:A
-      #|  /\\
-      #|  (p ==> q) /\\ p ==> p /\\ q
+      #|  ring_1((r : Ring[A]))
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
+      #|  ring_mul((r : Ring[A]), (b1 : A), (b2 : A))
+      #|  ring_add((r : Ring[A]), ring_mul(r, (a1 : A), (b2 : A)), ring_mul(r, (a2 : A), (b1 : A)))
+      #|  (b2 : A)
+      #|  (a2 : A)
+      #|  (b1 : A)
+      #|  (a1 : A)
+      #|  op_slash_bslash
+      #|  ((p : Bool) \226\134\146 (q : Bool)) && p \226\134\146 p && q
       #|  lmul =  @f. forall a1 b1 a2 b2:A.\n                        a1 IN ring_carrier r /\\ b1 IN s /\\\n                        a2 IN ring_carrier r /\\ b2 IN s\n                        ==> f (ring_localequiv r s (a1,b1))\n                              (ring_localequiv r s (a2,b2)) =\n                            ring_localequiv r s\n                             (ring_mul r a1 a2,ring_mul r b1 b2)
       #|  ladd =  @f. forall a1 b1 a2 b2:A.\n                        a1 IN ring_carrier r /\\ b1 IN s /\\\n                        a2 IN ring_carrier r /\\ b2 IN s\n                        ==> f (ring_localequiv r s (a1,b1))\n                              (ring_localequiv r s (a2,b2)) =\n                            ring_localequiv r s\n                             (ring_add r (ring_mul r a1 b2) (ring_mul r a2 b1),\n                              ring_mul r b1 b2)
       #|  lneg = @f. forall a b:A. a IN ring_carrier r /\\ b IN s\n                        ==> f (ring_localequiv r s (a,b)) =\n                            ring_localequiv r s (ring_neg r a,b)
-      #|  ring_multsys r (s:A->bool)
+      #|  ring_multsys((r : Ring[A]), (s : (A) -> Bool))
       #|  ((forall r s:A->bool.\n         ring_multsys r s\n         ==> ring_carrier (ring_localization r s) =\n             { ring_localequiv r s (a,b) |a,b|\n               a IN ring_carrier r /\\ b IN s}) /\\\n    (forall r s:A->bool.\n         ring_multsys r s\n         ==> ring_0 (ring_localization r s) =\n             ring_localequiv r s (ring_0 r,ring_1 r)) /\\\n    (forall r s:A->bool.\n         ring_multsys r s\n         ==> ring_1 (ring_localization r s) =\n             ring_localequiv r s (ring_1 r,ring_1 r)) /\\\n    (forall r s:A->bool.\n         ring_multsys r s\n         ==> ring_neg (ring_localization r s) =\n             @f. forall a b. a IN ring_carrier r /\\ b IN s\n                       ==> f (ring_localequiv r s (a,b)) =\n                           ring_localequiv r s (ring_neg r a,b)) /\\\n    (forall r s:A->bool.\n         ring_multsys r s\n         ==> ring_add (ring_localization r s) =\n             @f. forall a1 b1 a2 b2.\n                        a1 IN ring_carrier r /\\ b1 IN s /\\\n                        a2 IN ring_carrier r /\\ b2 IN s\n                        ==> f (ring_localequiv r s (a1,b1))\n                              (ring_localequiv r s (a2,b2)) =\n                            ring_localequiv r s\n                             (ring_add r (ring_mul r a1 b2) (ring_mul r a2 b1),\n                              ring_mul r b1 b2)) /\\\n     (forall r s:A->bool.\n         ring_multsys r s\n         ==> ring_mul (ring_localization r s) =\n             @f. forall a1 b1 a2 b2.\n                        a1 IN ring_carrier r /\\ b1 IN s /\\\n                        a2 IN ring_carrier r /\\ b2 IN s\n                        ==> f (ring_localequiv r s (a1,b1))\n                              (ring_localequiv r s (a2,b2)) =\n                            ring_localequiv r s\n                              (ring_mul r a1 a2,ring_mul r b1 b2))) /\\\n   ((forall r s a b:A.\n        ring_multsys r s /\\ a IN ring_carrier r /\\ b IN s\n        ==> ring_neg (ring_localization r s) (ring_localequiv r s (a,b)) =\n            ring_localequiv r s (ring_neg r a,b)) /\\\n    (forall r s a1 b1 a2 b2:A.\n        ring_multsys r s /\\\n        a1 IN ring_carrier r /\\ b1 IN s /\\\n        a2 IN ring_carrier r /\\ b2 IN s\n        ==> ring_add (ring_localization r s)\n             (ring_localequiv r s (a1,b1)) (ring_localequiv r s (a2,b2)) =\n            ring_localequiv r s\n             (ring_add r (ring_mul r a1 b2) (ring_mul r a2 b1),\n              ring_mul r b1 b2)) /\\\n    (forall r s a1 b1 a2 b2:A.\n        ring_multsys r s /\\\n        a1 IN ring_carrier r /\\ b1 IN s /\\\n        a2 IN ring_carrier r /\\ b2 IN s\n        ==> ring_mul (ring_localization r s)\n             (ring_localequiv r s (a1,b1)) (ring_localequiv r s (a2,b2)) =\n            ring_localequiv r s (ring_mul r a1 a2, ring_mul r b1 b2)))
       #|  forall r s:A->bool.\n        ring_multsys r s\n        ==> ring_carrier (ring_localization r s) =\n             { ring_localequiv r s (a,b) |a,b|\n               a IN ring_carrier r /\\ b IN s}
       #|  forall r s:A->bool.\n        ring_multsys r s\n        ==> ring_0 (ring_localization r s) =\n             ring_localequiv r s (ring_0 r,ring_1 r)
       #|  forall r s:A->bool.\n        ring_multsys r s\n        ==> ring_1 (ring_localization r s) =\n             ring_localequiv r s (ring_1 r,ring_1 r)
-      #|  ring_1 r:A
+      #|  ring_1((r : Ring[A]))
       #|  forall r s a:A.\n        ring_multsys r s /\\ a IN s\n        ==> ring_localequiv r s (a,a) = ring_1(ring_localization r s)
       #|  forall r s:A->bool.\n        ring_multsys r s\n        ==> (trivial_ring(ring_localization r s) <=> ring_0 r IN s)
       #|  forall r s a b:A.\n        ring_multsys r s /\\ a IN ring_carrier r /\\ b IN s\n        ==> ring_localequiv r s (a,b) IN ring_carrier(ring_localization r s)
-      #|  ring_1 r:A
-      #|  ring_localequiv r s (b:A,a)
+      #|  ring_1((r : Ring[A]))
+      #|  ring_localequiv((r : Ring[A]), (s : (A) -> Bool), ((b : A), (a : A)))
       #|  forall r s a b:A.\n        ring_multsys r s /\\ a IN s /\\ b IN s\n        ==> ring_unit (ring_localization r s) (ring_localequiv r s (a,b))
-      #|  t:A
-      #|  b':A
-      #|  a':A
+      #|  (t : A)
+      #|  (b' : A)
+      #|  (a' : A)
       #|  forall(r:A ring) s a b.\n       ring_multsys r s /\\\n       (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\ ring_mul r x y IN s\n              ==> x IN s /\\ y IN s) /\\\n       a IN ring_carrier r /\\ b IN s\n       ==> (ring_unit (ring_localization r s) (ring_localequiv r s (a,b)) <=>\n            a IN s)
-      #|  b:A
-      #|  a:A
+      #|  (b : A)
+      #|  (a : A)
       #|  (forall x. x IN ring_carrier r ==> ring_unit r x ==> P x)\n    ==> ring_unit r c ==> P c
       #|  forall(r:A ring) s c.\n      ring_multsys r s /\\\n      (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\ ring_mul r x y IN s\n             ==> x IN s /\\ y IN s)\n      ==> (ring_unit (ring_localization r s) c <=>\n           ?a b. a IN s /\\ b IN s /\\ c = ring_localequiv r s (a,b))
       #|  forall r s a b:A.\n        ring_multsys r s /\\ a IN ring_carrier r /\\ b IN s\n        ==> (ring_localequiv r s (a,b) = ring_0(ring_localization r s) <=>\n             ?c. c IN s /\\ ring_mul r c a = ring_0 r)
-      #|  ring_mul r b d:A
-      #|  ring_add r (ring_mul r a d) (ring_mul r c b):A
-      #|  d:A
-      #|  c:A
-      #|  b:A
-      #|  a:A
+      #|  ring_mul((r : Ring[A]), (b : A), (d : A))
+      #|  ring_add((r : Ring[A]), ring_mul(r, (a : A), (d : A)), ring_mul(r, (c : A), (b : A)))
+      #|  (d : A)
+      #|  (c : A)
+      #|  (b : A)
+      #|  (a : A)
       #|  forall r s (j:A->bool).\n        ring_multsys r s /\\ ring_ideal r j\n        ==> ring_ideal (ring_localization r s)\n                       {ring_localequiv r s (a,b) |a,b| a IN j /\\ b IN s}
       #|  ring_fractionate r s = \\x:A. ring_localequiv r s (x,ring_1 r)
       #|  forall r s a:A.\n        ring_multsys r s /\\ a IN ring_carrier r\n        ==> ring_fractionate r s a IN ring_carrier (ring_localization r s)
       #|  forall r s a:A.\n        ring_multsys r s /\\ a IN s\n        ==> ring_unit (ring_localization r s) (ring_fractionate r s a)
       #|  forall r s a:A.\n        ring_multsys r s /\\ a IN ring_carrier r\n        ==> (ring_fractionate r s a = ring_0(ring_localization r s) <=>\n             ?c. c IN s /\\ ring_mul r c a = ring_0 r)
       #|  forall r s:A->bool.\n      ring_multsys r s\n      ==> ring_homomorphism (r,ring_localization r s) (ring_fractionate r s)
-      #|  ring_sub r x y:A
-      #|  a:A
-      #|  a:A
-      #|  y:A
-      #|  x:A
-      #|  a:A
-      #|  ring_0 r:A
-      #|  x:A
-      #|  x:A
-      #|  a:A
+      #|  ring_sub((r : Ring[A]), (x : A), (y : A))
+      #|  (a : A)
+      #|  (a : A)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (a : A)
+      #|  ring_0((r : Ring[A]))
+      #|  (x : A)
+      #|  (x : A)
+      #|  (a : A)
       #|  forall r s:A->bool.\n      ring_multsys r s\n      ==> (ring_monomorphism (r,ring_localization r s)\n                             (ring_fractionate r s) <=>\n           s SUBSET {a | ring_regular r a})
-      #|  ring_sub r (ring_1 r) (ring_mul r z y):A
-      #|  ring_regular r (u:A)
-      #|  u:A
-      #|  z:A
-      #|  (y:A) IN s
-      #|  y:A
-      #|  ring_1 r:A
-      #|  ring_1 r:A
-      #|  ring_mul r a x:A
-      #|  x:A
-      #|  (?x. P x /\\ Q x) <=> ~(forall x. Q x ==> ~P x)
+      #|  ring_sub((r : Ring[A]), ring_1(r), ring_mul(r, (z : A), (y : A)))
+      #|  ring_regular((r : Ring[A]), (u : A))
+      #|  (u : A)
+      #|  (z : A)
+      #|  IN((y : A), (s : (A) -> Bool))
+      #|  (y : A)
+      #|  ring_1((r : Ring[A]))
+      #|  ring_1((r : Ring[A]))
+      #|  ring_mul((r : Ring[A]), (a : A), (x : A))
+      #|  (x : A)
+      #|  (\226\136\131 x : _, (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)) == !(\226\136\128 x : _, Q(x) \226\134\146 !P(x))
       #|  (r ==> p) /\\ (r ==> q) /\\ (p ==> q ==> r) ==> (p /\\ q <=> r)
       #|  forall r s:A->bool.\n      ring_multsys r s\n      ==> (ring_isomorphism (r,ring_localization r s)\n                            (ring_fractionate r s) <=>\n           s SUBSET {a | ring_unit r a})
-      #|  b:A
-      #|  b:A
-      #|  a:A
-      #|  ring_fractionate r (s:A->bool)
+      #|  (b : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  ring_fractionate((r : Ring[A]), (s : (A) -> Bool))
       #|  forall r s:A->bool.\n        ring_multsys r s /\\ s SUBSET {x | ring_unit r x}\n        ==> (ring_localization r s) isomorphic_ring r
       #|  ring_unit r' ((f:A->B) b1) /\\ ring_unit r' ((f:A->B) b2)
-      #|  b2:A
-      #|  a2:A
-      #|  b1:A
-      #|  a1:A
-      #|  g:(A#A->bool)->B
-      #|  ring_mul r' (ring_inv r' ((f:A->B) u)) o f
-      #|  u:A
+      #|  (b2 : A)
+      #|  (a2 : A)
+      #|  (b1 : A)
+      #|  (a1 : A)
+      #|  (g : (((A, A)) -> Bool) -> B)
+      #|  o(ring_mul((r' : Ring[B]), ring_inv(r', (f : (A) -> B)((u : A)))), f)
+      #|  (u : A)
       #|  ring_mul r y1 (ring_inv r y1) = ring_1 r /\\\n      ring_mul r y2 (ring_inv r y2) = ring_1 r /\\\n      ring_mul r x1 y2 = ring_mul r x2 y1\n      ==> ring_mul r x1 (ring_inv r y1) = ring_mul r x2 (ring_inv r y2)
-      #|  b2:A
-      #|  a2:A
-      #|  b1:A
-      #|  a1:A
+      #|  (b2 : A)
+      #|  (a2 : A)
+      #|  (b1 : A)
+      #|  (a1 : A)
       #|  ?g. forall a b. a IN ring_carrier r /\\ b IN s\n              ==> g (ring_localequiv r s (a,b)) =\n                  ring_mul r' ((f:A->B) a) (ring_inv r' (f b))
       #|  forall r s r' (f:A->B).\n      ring_multsys r s /\\\n      ring_homomorphism (r,r') f /\\\n      (forall x. x IN s ==> ring_unit r' (f x))\n      ==> ?g. ring_homomorphism(ring_localization r s,r') g /\\\n              forall x. x IN ring_carrier r ==> g (ring_fractionate r s x) = f x
       #|  forall r s a b:A.\n        ring_multsys r s /\\ a IN ring_carrier r /\\ b IN s\n        ==> ring_localequiv r s (a,b) =\n            ring_mul (ring_localization r s)\n                     (ring_fractionate r s a)\n                     (ring_localequiv r s (ring_1 r,b))
-      #|  (b:A) IN ring_carrier r
+      #|  IN((b : A), ring_carrier((r : Ring[A])))
       #|  forall r s a b:A.\n        ring_multsys r s /\\ a IN ring_carrier r /\\ b IN s\n        ==> ring_localequiv r s (a,b) =\n            ring_div (ring_localization r s)\n                     (ring_fractionate r s a)\n                     (ring_fractionate r s b)
-      #|  ring_1 r:A
-      #|  (b:A) IN ring_carrier r /\\ ring_1 r IN s
+      #|  ring_1((r : Ring[A]))
+      #|  IN((b : A), ring_carrier((r : Ring[A]))) && IN(ring_1(r), (s : (A) -> Bool))
       #|  forall r s a b:A.\n     ring_multsys r s /\\ a IN ring_carrier r /\\ b IN s\n     ==> ring_mul (ring_localization r s)\n                  (ring_fractionate r s b) (ring_localequiv r s (a,b)) =\n         ring_fractionate r s a
-      #|  ring_1 r:A
-      #|  (b:A) IN ring_carrier r /\\ ring_1 r IN s
+      #|  ring_1((r : Ring[A]))
+      #|  IN((b : A), ring_carrier((r : Ring[A]))) && IN(ring_1(r), (s : (A) -> Bool))
       #|  forall r s a b:A.\n     ring_multsys r s /\\ a IN ring_carrier r /\\ b IN s\n     ==> ring_mul (ring_localization r s)\n                  (ring_localequiv r s (a,b)) (ring_fractionate r s b) =\n         ring_fractionate r s a
-      #|  ring_localequiv r s (a:A,b):(A#A)->bool
-      #|  ring_fractionate r s (b:A):(A#A)->bool
-      #|  g:((A#A)->bool)->B
-      #|  r':B ring
-      #|  ring_localization r (s:A->bool)
-      #|  ring_localequiv r s (a:A,b):(A#A)->bool
-      #|  ring_fractionate r s (b:A):(A#A)->bool
-      #|  f:((A#A)->bool)->B
-      #|  r':B ring
-      #|  ring_localization r (s:A->bool)
+      #|  ring_localequiv((r : Ring[A]), (s : (A) -> Bool), ((a : A), (b : A)))
+      #|  ring_fractionate((r : Ring[A]), (s : (A) -> Bool), (b : A))
+      #|  (g : (((A, A)) -> Bool) -> B)
+      #|  (r' : Ring[B])
+      #|  ring_localization((r : Ring[A]), (s : (A) -> Bool))
+      #|  ring_localequiv((r : Ring[A]), (s : (A) -> Bool), ((a : A), (b : A)))
+      #|  ring_fractionate((r : Ring[A]), (s : (A) -> Bool), (b : A))
+      #|  (f : (((A, A)) -> Bool) -> B)
+      #|  (r' : Ring[B])
+      #|  ring_localization((r : Ring[A]), (s : (A) -> Bool))
       #|  (g:((A#A)->bool)->B)(ring_fractionate r s (b:A)) =\n      f(ring_fractionate r s b)
       #|  ring_mul r' ((g:((A#A)->bool)->B)(ring_fractionate r s b))\n     (f(ring_localequiv r s (a:A,b))) =\n    (f:((A#A)->bool)->B)(ring_fractionate r s a) /\\\n    ring_mul r' ((g:((A#A)->bool)->B)(ring_fractionate r s b))\n     (g(ring_localequiv r s (a:A,b))) =\n    g(ring_fractionate r s a)
-      #|  ring_localization r (s:A->bool)
+      #|  ring_localization((r : Ring[A]), (s : (A) -> Bool))
       #|  ring_localequiv r s (a:A,b) IN ring_carrier(ring_localization r s)
-      #|  (g:((A#A)->bool)->B)(ring_fractionate r s (b:A))
-      #|  r':B ring
-      #|  (b:A) IN ring_carrier r
-      #|  b:A
-      #|  a:A
+      #|  (g : (((A, A)) -> Bool) -> B)(ring_fractionate((r : Ring[A]), (s : (A) -> Bool), (b : A)))
+      #|  (r' : Ring[B])
+      #|  IN((b : A), ring_carrier((r : Ring[A])))
+      #|  (b : A)
+      #|  (a : A)
       #|  forall r s r' (f:((A#A)->bool)->B) g.\n     ring_multsys r s /\\\n     ring_homomorphism(ring_localization r s, r') f /\\\n     ring_homomorphism(ring_localization r s, r') g /\\\n     (forall x. x IN ring_carrier r\n          ==> f(ring_fractionate r s x) = g(ring_fractionate r s x))\n     ==> forall y. y IN ring_carrier(ring_localization r s) ==> f y = g y
-      #|  b:A
-      #|  a:A
+      #|  (b : A)
+      #|  (a : A)
       #|  ring_mul (r':B ring) y (ring_mul r' (alpha (b:A)) (x:B)) =\n        ring_mul r' (ring_mul r' y (alpha b)) x /\\\n        ring_mul (r':B ring) (g (ring_localequiv r s (a:A,b)))\n                             (ring_mul r' (alpha b) (x:B)) =\n        ring_mul r' (ring_mul r' (g (ring_localequiv r s (a,b))) (alpha b)) x
       #|  ring_mul (r':B ring) (g (ring_localequiv r s (a:A,b)))\n                           (ring_mul r' (alpha b) (x:B))
       #|  ring_mul (r':B ring) y (ring_mul r' (alpha (b:A)) (x:B))
       #|  g (ring_localequiv r s (a:A,b)) IN ring_carrier (r':B ring)
-      #|  ring_unit (r':B ring) (alpha (b:A))
-      #|  b:A
-      #|  a:A
+      #|  ring_unit((r' : Ring[B]), (alpha : (A) -> B)((b : A)))
+      #|  (b : A)
+      #|  (a : A)
       #|  ring_mul (r':B ring) y (alpha b) =\n                  ring_mul r' (g (ring_localequiv r s (a:A,b))) (alpha b)
       #|  ring_localequiv r s (a:A,b) IN ring_carrier (ring_localization r s)
-      #|  ring_localequiv r s (a:A,b)
-      #|  b:A
-      #|  a:A
-      #|  y:B
-      #|  y:B
-      #|  a:A
-      #|  b:A
-      #|  a:A
-      #|  s:A->bool
-      #|  r:A ring
-      #|  z = ring_localequiv r s (a:A,b)
-      #|  b:A
-      #|  a:A
-      #|  (alpha:A->B) a = ring_0 r'
+      #|  ring_localequiv((r : Ring[A]), (s : (A) -> Bool), ((a : A), (b : A)))
+      #|  (b : A)
+      #|  (a : A)
+      #|  (y : B)
+      #|  (y : B)
+      #|  (a : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
+      #|  (z : ((A, A)) -> Bool) == ring_localequiv((r : Ring[A]), (s : (A) -> Bool), ((a : A), (b : A)))
+      #|  (b : A)
+      #|  (a : A)
+      #|  (alpha : (A) -> B)((a : A)) == ring_0((r' : Ring[B]))
       #|  (z:A#A->bool) IN ring_carrier (ring_localization r s)
       #|  ?a:A b:A. a IN ring_carrier r /\\ b IN s /\\\n                           z = ring_localequiv r s (a,b)
-      #|  z:A#A->bool
-      #|  ring_fractionate r s (b:A)
-      #|  ring_localequiv r s (a:A,b)
-      #|  g:(A#A->bool)->B
-      #|  r':B ring
-      #|  ring_localization r s:(A#A->bool)ring
-      #|  g:(A#A->bool)->B
-      #|  b:A
-      #|  a:A
-      #|  s:A->bool
-      #|  r:A ring
+      #|  (z : ((A, A)) -> Bool)
+      #|  ring_fractionate((r : Ring[A]), (s : (A) -> Bool), (b : A))
+      #|  ring_localequiv((r : Ring[A]), (s : (A) -> Bool), ((a : A), (b : A)))
+      #|  (g : (((A, A)) -> Bool) -> B)
+      #|  (r' : Ring[B])
+      #|  ring_localization((r : Ring[A]), (s : (A) -> Bool))
+      #|  (g : (((A, A)) -> Bool) -> B)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
       #|  forall a b. a IN ring_carrier r /\\ b IN s\n          ==> ring_mul r' (g (ring_localequiv r s (a,b))) (alpha b) =\n              (alpha:A->B) a
-      #|  forall b:A. b IN s ==> b IN ring_carrier r
-      #|  g:(A#A->bool)->B
-      #|  g:(A#A->bool)->B
-      #|  alpha:A->B
-      #|  r':B ring
-      #|  s:A->bool
-      #|  r:A ring
+      #|  \226\136\128 b : A, IN(b, (s : (A) -> Bool)) \226\134\146 IN(b, ring_carrier((r : Ring[A])))
+      #|  (g : (((A, A)) -> Bool) -> B)
+      #|  (g : (((A, A)) -> Bool) -> B)
+      #|  (alpha : (A) -> B)
+      #|  (r' : Ring[B])
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
       #|  forall r:A ring s (r':B ring) alpha.\n        ring_multsys r s /\\\n        ring_homomorphism (r,r') alpha /\\\n        (forall x. x IN s ==> ring_unit r' (alpha x)) /\\\n        (forall y. y IN ring_carrier r'\n             ==> ?a b. a IN ring_carrier r /\\ b IN s /\\\n                       ring_mul r' y (alpha b) = alpha a) /\\\n        (forall x. x IN ring_carrier r\n             ==> (alpha x = ring_0 r' <=>\n                  ?c. c IN s /\\ ring_mul r c x = ring_0 r))\n        ==> r' isomorphic_ring ring_localization r s
-      #|  ring_0 r:A
-      #|  ring_0 r:A
-      #|  ring_0 r:A
-      #|  ring_0 r:A
-      #|  ring_1 r:A
-      #|  c:A
-      #|  ring_mul r c (x:A)
-      #|  ring_1 r:A
-      #|  x:A
-      #|  s:A->bool
-      #|  r:A ring
-      #|  (c:A) IN ring_carrier r
-      #|  c:A
-      #|  ring_mul r c (x:A)
-      #|  c:A
+      #|  ring_0((r : Ring[A]))
+      #|  ring_0((r : Ring[A]))
+      #|  ring_0((r : Ring[A]))
+      #|  ring_0((r : Ring[A]))
+      #|  ring_1((r : Ring[A]))
+      #|  (c : A)
+      #|  ring_mul((r : Ring[A]), (c : A), (x : A))
+      #|  ring_1((r : Ring[A]))
+      #|  (x : A)
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
+      #|  IN((c : A), ring_carrier((r : Ring[A])))
+      #|  (c : A)
+      #|  ring_mul((r : Ring[A]), (c : A), (x : A))
+      #|  (c : A)
       #|  ring_mul r u (ring_sub r (ring_mul r x b) (ring_mul r a (ring_1 r))):A =\n       ring_0 r\n       ==> ring_mul r (ring_mul r u b) x =\n           ring_mul r u (ring_mul r a (ring_1 r))
       #|  ring_mul r (ring_mul r u b) (x:A) =\n                  ring_mul r u (ring_mul r a (ring_1 r))
-      #|  ring_mul r u (b:A)
-      #|  u:A
-      #|  b:A
-      #|  a:A
-      #|  ring_1 r:A
-      #|  x:A
-      #|  s:A->bool
-      #|  r:A ring
-      #|  ring_localequiv r (s:A->bool) (x,ring_1 r) (a,b)
-      #|  (b:A) IN ring_carrier r
-      #|  (a:A) IN ring_carrier r
-      #|  b:A
-      #|  a:A
-      #|  (j:A->bool) SUBSET ring_carrier r
-      #|  (s:A->bool) SUBSET ring_carrier r /\\ ring_1 r IN s
+      #|  ring_mul((r : Ring[A]), (u : A), (b : A))
+      #|  (u : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  ring_1((r : Ring[A]))
+      #|  (x : A)
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
+      #|  ring_localequiv((r : Ring[A]), (s : (A) -> Bool), ((x : A), ring_1(r)), ((a : A), (b : A)))
+      #|  IN((b : A), ring_carrier((r : Ring[A])))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  (b : A)
+      #|  (a : A)
+      #|  SUBSET((j : (A) -> Bool), ring_carrier((r : Ring[A])))
+      #|  SUBSET((s : (A) -> Bool), ring_carrier((r : Ring[A]))) && IN(ring_1(r), s)
       #|  forall r s (j:A->bool) x.\n     ring_multsys r s /\\ ring_ideal r j /\\ x IN ring_carrier r\n     ==> (ring_fractionate r s x IN\n          {ring_localequiv r s (a,b) | a,b | a IN j /\\ b IN s}\n          <=> ?c. c IN s /\\ ring_mul r c x IN j)
-      #|  r:A ring
-      #|  (a:A) IN ring_carrier r /\\ (b:A) IN ring_carrier r
-      #|  b:A
-      #|  a:A
+      #|  (r : Ring[A])
+      #|  IN((a : A), ring_carrier((r : Ring[A]))) && IN((b : A), ring_carrier(r))
+      #|  (b : A)
+      #|  (a : A)
       #|  forall r s (u:A->bool).\n        ring_multsys r s /\\ u SUBSET ring_carrier r\n        ==> ideal_generated (ring_localization r s)\n                            (IMAGE (ring_fractionate r s) u) =\n            {ring_localequiv r s (a,b) | a,b |\n             a IN ideal_generated r u /\\ b IN s}
       #|  fraction_ring (r:A ring) = ring_localization r {a | ring_regular r a}
       #|  forall r a b:A.\n        a IN ring_carrier r /\\ ring_regular r b\n        ==> (ring_localequiv r {x | ring_regular r x} (a,b) =\n             ring_0(fraction_ring r) <=>\n             a = ring_0 r)
       #|  forall r a:A.\n        a IN ring_carrier r\n        ==> (ring_fractionate r {x | ring_regular r x} a =\n             ring_0(fraction_ring r) <=>\n             a = ring_0 r)
       #|  forall r:A ring.\n      ring_monomorphism (r,fraction_ring r)\n                        (ring_fractionate r {a | ring_regular r a})
       #|  forall r r' (f:A->B).\n      ring_homomorphism (r,r') f /\\\n      (forall x. ring_regular r x ==> ring_unit r' (f x))\n      ==> ?g. ring_homomorphism(fraction_ring r,r') g /\\\n              forall x. x IN ring_carrier r\n                  ==> g (ring_fractionate r {a | ring_regular r a} x) = f x
-      #|  ring_fractionate r {x | ring_regular r x} (c:A)
-      #|  ring_regular r (b:A)
-      #|  c:A
+      #|  ring_fractionate((r : Ring[A]), {(x : A) | ring_regular(r, x)}, (c : A))
+      #|  ring_regular((r : Ring[A]), (b : A))
+      #|  (c : A)
       #|  (~r ==> p) /\\ (r ==> q) /\\ (q ==> ~p)\n    ==> (p <=> ~r) /\\ (q <=> r)
-      #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
+      #|  (((p : Bool) \226\134\146 (q : Bool)) && (p \226\134\146 (r : Bool))) == (p \226\134\146 q && r)
       #|  (forall r a b:A.\n        a IN ring_carrier r /\\ ring_regular r b\n        ==> (ring_unit (fraction_ring r)\n                       (ring_localequiv r {x | ring_regular r x} (a,b)) <=>\n             ring_regular r a)) /\\\n   (forall r a b:A.\n        a IN ring_carrier r /\\ ring_regular r b\n        ==> (ring_zerodivisor (fraction_ring r)\n                       (ring_localequiv r {x | ring_regular r x} (a,b)) <=>\n             ring_zerodivisor r a))
       #|  (forall a. a IN ring_carrier r ==> (ring_unit r a <=> ring_regular r a))\n      ==> forall a. ring_unit r a <=> ring_regular r a
       #|  forall(r:A ring) a.\n        ring_unit (fraction_ring r) a <=> ring_regular (fraction_ring r) a
       #|  forall(r:A ring) a.\n        a IN ring_carrier(fraction_ring r)\n        ==> ring_unit (fraction_ring r) a \\/\n            ring_zerodivisor (fraction_ring r) a
       #|  forall r:A ring. trivial_ring(fraction_ring r) <=> trivial_ring r
-      #|  r:A ring
+      #|  (r : Ring[A])
       #|  forall r:A ring. field(fraction_ring r) <=> integral_domain r
-      #|  r:A ring
+      #|  (r : Ring[A])
       #|  forall r:A ring. integral_domain(fraction_ring r) <=> integral_domain r
-      #|  r:A ring
-      #|  (a1:A) = ring_0 r \\/ a2 = ring_0 r
-      #|  u:A
-      #|  (b1:A) IN ring_carrier r /\\ b2 IN ring_carrier r
-      #|  b2:A
-      #|  a2:A
-      #|  b1:A
-      #|  a1:A
+      #|  (r : Ring[A])
+      #|  (a1 : A) == ring_0((r : Ring[A])) || (a2 : A) == ring_0(r)
+      #|  (u : A)
+      #|  IN((b1 : A), ring_carrier((r : Ring[A]))) && IN((b2 : A), ring_carrier(r))
+      #|  (b2 : A)
+      #|  (a2 : A)
+      #|  (b1 : A)
+      #|  (a1 : A)
       #|  forall r s:A->bool.\n     integral_domain r /\\ ring_multsys r s /\\ ~(ring_0 r IN s)\n     ==> integral_domain (ring_localization r s)
       #|  proper_ideal (r:A ring) j <=>\n        ring_ideal r j /\\ j PSUBSET ring_carrier r
       #|  principal_ideal (r:A ring) j <=>\n        ?a. a IN ring_carrier r /\\ ideal_generated r {a} = j
@@ -31075,75 +31075,75 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  maximal_ideal (r:A ring) j <=>\n        proper_ideal r j /\\ ~(?j'. proper_ideal r j' /\\ j PSUBSET j')
       #|  PID (r:A ring) <=>\n        integral_domain r /\\\n        forall j. ring_ideal r j ==> principal_ideal r j
       #|  noetherian_ring (r:A ring) <=>\n        forall j. ring_ideal r j ==> finitely_generated_ideal r j
-      #|  forall r j:A->bool. proper_ideal r j ==> ring_ideal r j
+      #|  \226\136\128 r : Ring[A], \226\136\128 j : (A) -> Bool, proper_ideal(r, j) \226\134\146 ring_ideal(r, j)
       #|  forall r s:A->bool. proper_ideal r s ==> s SUBSET ring_carrier r
       #|  forall r s:A->bool. proper_ideal r s ==> s PSUBSET ring_carrier r
-      #|  forall r j:A->bool. principal_ideal r j ==> ring_ideal r j
+      #|  \226\136\128 r : Ring[A], \226\136\128 j : (A) -> Bool, principal_ideal(r, j) \226\134\146 ring_ideal(r, j)
       #|  forall r s:A->bool. principal_ideal r s ==> s SUBSET ring_carrier r
       #|  forall r j:A->bool. finitely_generated_ideal r j ==> ring_ideal r j
       #|  forall r s:A->bool. finitely_generated_ideal r s ==> s SUBSET ring_carrier r
       #|  forall(r:A ring) j.\n        finitely_generated_ideal r j <=>\n        ?s. FINITE s /\\ s SUBSET j /\\ s SUBSET ring_carrier r /\\\n            ideal_generated r s = j
-      #|  forall r j:A->bool. prime_ideal r j ==> proper_ideal r j
-      #|  forall r j:A->bool. prime_ideal r j ==> ring_ideal r j
+      #|  \226\136\128 r : Ring[A], \226\136\128 j : (A) -> Bool, prime_ideal(r, j) \226\134\146 proper_ideal(r, j)
+      #|  \226\136\128 r : Ring[A], \226\136\128 j : (A) -> Bool, prime_ideal(r, j) \226\134\146 ring_ideal(r, j)
       #|  forall r j:A->bool. prime_ideal r j ==> j SUBSET ring_carrier r
       #|  forall r j:A->bool. prime_ideal r j ==> j PSUBSET ring_carrier r
-      #|  forall r j:A->bool. maximal_ideal r j ==> proper_ideal r j
-      #|  forall r j:A->bool. maximal_ideal r j ==> ring_ideal r j
+      #|  \226\136\128 r : Ring[A], \226\136\128 j : (A) -> Bool, maximal_ideal(r, j) \226\134\146 proper_ideal(r, j)
+      #|  \226\136\128 r : Ring[A], \226\136\128 j : (A) -> Bool, maximal_ideal(r, j) \226\134\146 ring_ideal(r, j)
       #|  forall r j:A->bool. maximal_ideal r j ==> j SUBSET ring_carrier r
       #|  forall r j:A->bool. maximal_ideal r j ==> j PSUBSET ring_carrier r
-      #|  r:A ring
+      #|  (r : Ring[A])
       #|  forall r:A ring. proper_ideal r {ring_0 r} <=> ~trivial_ring r
-      #|  {a:A}
-      #|  a:A
+      #|  {(a : A)}
+      #|  (a : A)
       #|  forall r j:A->bool. principal_ideal r j ==> finitely_generated_ideal r j
-      #|  forall r:A ring. PID r ==> integral_domain r
-      #|  forall r:A ring. PID r ==> noetherian_ring r
-      #|  ~(x IN s) ==> s INTER {x} = {}
-      #|  (a:A) IN ring_carrier r
-      #|  a:A
+      #|  \226\136\128 r : Ring[A], PID(r) \226\134\146 integral_domain(r)
+      #|  \226\136\128 r : Ring[A], PID(r) \226\134\146 noetherian_ring(r)
+      #|  !IN((x : _), (s : (_) -> Bool)) \226\134\146 INTER(s, {x}) == {}
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  (a : A)
       #|  forall(r:A ring) j.\n        principal_ideal (r:A ring) j <=> ?a. ideal_generated r {a} = j
-      #|  forall r a:A. principal_ideal r (ideal_generated r {a})
-      #|  forall r:A ring. principal_ideal r {ring_0 r}
-      #|  forall r:A ring. finitely_generated_ideal r {ring_0 r}
-      #|  ring_1 r:A
-      #|  forall r:A ring. principal_ideal r (ring_carrier r)
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, principal_ideal(r, ideal_generated(r, {a}))
+      #|  \226\136\128 r : Ring[A], principal_ideal(r, {ring_0(r)})
+      #|  \226\136\128 r : Ring[A], finitely_generated_ideal(r, {ring_0(r)})
+      #|  ring_1((r : Ring[A]))
+      #|  \226\136\128 r : Ring[A], principal_ideal(r, ring_carrier(r))
       #|  forall r:A ring. finitely_generated_ideal r (ring_carrier r)
       #|  forall(r:A ring) j.\n        proper_ideal r j <=> ring_ideal r j /\\ ~(j = ring_carrier r)
-      #|  ~(s PSUBSET s)
+      #|  !PSUBSET((s : (_) -> Bool), s)
       #|  forall r:A ring. ring_ideal r j /\\ ~(principal_ideal r j) ==> proper_ideal r j
       #|  forall r:A ring.\n      ring_ideal r j /\\ ~(finitely_generated_ideal r j) ==> proper_ideal r j
-      #|  (ring_carrier r INTER s):A->bool
-      #|  s:A->bool
+      #|  INTER(ring_carrier((r : Ring[A])), (s : (A) -> Bool))
+      #|  (s : (A) -> Bool)
       #|  forall(r:A ring) j.\n        finitely_generated_ideal (r:A ring) j <=>\n        ?s. FINITE s /\\ ideal_generated r s = j
       #|  forall(r:A ring) s.\n        FINITE s ==> finitely_generated_ideal r (ideal_generated r s)
-      #|  s UNION t:A->bool
-      #|  t:A->bool
-      #|  s:A->bool
+      #|  UNION((s : (A) -> Bool), (t : (A) -> Bool))
+      #|  (t : (A) -> Bool)
+      #|  (s : (A) -> Bool)
       #|  forall r j k:A->bool.\n        finitely_generated_ideal r j /\\ finitely_generated_ideal r k\n        ==> finitely_generated_ideal r (ring_setadd r j k)
       #|  forall(r:A ring) j. proper_ideal r j <=> ring_ideal r j /\\ ~(ring_1 r IN j)
-      #|  DISJOINT u {x | P x} <=> ~(?x. P x /\\ x IN u)
+      #|  DISJOINT((u : (_) -> Bool), {(x : _) | (P : (_) -> Bool)(x)}) == !(\226\136\131 x : _, P(x) && IN(x, u))
       #|  forall(r:A ring) j.\n        proper_ideal r j <=> ring_ideal r j /\\ DISJOINT j {u | ring_unit r u}
       #|  t SUBSET {x | x IN s /\\ P x} <=> t SUBSET s /\\ forall x. x IN t ==> P x
       #|  forall r j:A->bool.\n        proper_ideal r j\n        ==> j SUBSET {x | x IN ring_carrier r /\\ ~(ring_unit r x)}
       #|  forall r (u:(A->bool)->bool).\n        ~(u = {}) /\\\n        (forall h. h IN u ==> proper_ideal r h) /\\\n        (forall g h. g IN u /\\ h IN u ==> g SUBSET h \\/ h SUBSET g)\n        ==> proper_ideal r (UNIONS u)
-      #|  r:A ring
-      #|  {ring_0 r:A}
-      #|  j:A->bool
-      #|  r:A ring
-      #|  j:A->bool
+      #|  (r : Ring[A])
+      #|  {ring_0((r : Ring[A]))}
+      #|  (j : (A) -> Bool)
+      #|  (r : Ring[A])
+      #|  (j : (A) -> Bool)
       #|  forall(r:A ring). (?j. proper_ideal r j) <=> ~(trivial_ring r)
       #|  forall r r' (f:A->B) j.\n         ring_epimorphism (r,r') f /\\ finitely_generated_ideal r j\n         ==> finitely_generated_ideal r' (IMAGE f j)
       #|  forall r r' (f:A->B) j.\n         ring_epimorphism (r,r') f /\\ principal_ideal r j\n         ==> principal_ideal r' (IMAGE f j)
-      #|  IMAGE (ring_fractionate (r:A ring) s) k
-      #|  k:A->bool
+      #|  IMAGE(ring_fractionate((r : Ring[A]), (s : (A) -> Bool)), (k : (A) -> Bool))
+      #|  (k : (A) -> Bool)
       #|  forall r s (j:A->bool).\n        ring_multsys r s /\\ finitely_generated_ideal r j\n        ==> finitely_generated_ideal (ring_localization r s)\n              {ring_localequiv r s (a,b) | a,b | a IN j /\\ b IN s}
-      #|  ring_fractionate (r:A ring) s a
-      #|  a:A
+      #|  ring_fractionate((r : Ring[A]), (s : (A) -> Bool), (a : A))
+      #|  (a : A)
       #|  forall r s (j:A->bool).\n        ring_multsys r s /\\ principal_ideal r j\n        ==> principal_ideal (ring_localization r s)\n              {ring_localequiv r s (a,b) | a,b | a IN j /\\ b IN s}
       #|  forall r r' (f:A->B) j.\n        ring_homomorphism(r,r') f /\\ proper_ideal r' j\n        ==> proper_ideal r {x | x IN ring_carrier r /\\ f x IN j}
-      #|  (ring_1 r':B) IN k
+      #|  IN(ring_1((r' : Ring[B])), (k : (B) -> Bool))
       #|  forall r r' (f:A->B) j k.\n         ring_homomorphism (r,r') f /\\\n         ring_ideal r' k /\\\n         {x | x IN ring_carrier r /\\ f x IN k} = j\n         ==> (proper_ideal r j <=> proper_ideal r' k)
-      #|  f:A->B
+      #|  (f : (A) -> B)
       #|  (q ==> p) /\\ (q' ==> p') /\\ (p' ==> (q' <=> q))\n    ==> (p' <=> p) ==> (q' <=> q)
       #|  forall r r' (f:A->B) j.\n        ring_isomorphism(r,r') f /\\ j SUBSET ring_carrier r\n        ==> (proper_ideal r' (IMAGE f j) <=> proper_ideal r j)
       #|  forall r r' (f:A->B) j.\n        ring_homomorphism(r,r') f /\\ prime_ideal r' j\n        ==> prime_ideal r {x | x IN ring_carrier r /\\ f x IN j}
@@ -31151,7 +31151,7 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r j x:A.\n        prime_ideal r j /\\ ring_unit r x ==> ~(x IN j)
       #|  forall r j x y:A.\n        prime_ideal r j /\\ x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> (ring_mul r x y IN j <=> x IN j \\/ y IN j)
       #|  forall r j (x:A) n.\n        prime_ideal r j /\\ x IN ring_carrier r\n        ==> (ring_pow r x n IN j <=> ~(n = 0) /\\ x IN j)
-      #|  \\j'. proper_ideal (r:A ring) j' /\\ j SUBSET j'
+      #|  (j' : (A) -> Bool) => proper_ideal((r : Ring[A]), j') && SUBSET((j : (A) -> Bool), j')
       #|  forall(r:A ring) j.\n        proper_ideal r j ==> ?j'. maximal_ideal r j' /\\ j SUBSET j'
       #|  forall r:A ring. (?j. maximal_ideal r j) <=> ~(trivial_ring r)
       #|  forall r j:A->bool.\n        prime_ideal r j ==> ring_multsys r (ring_carrier r DIFF j)
@@ -31159,1613 +31159,1613 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r j:A->bool.\n        prime_ideal r j\n        ==> ring_multsys r (ring_carrier r DIFF j) /\\\n            (forall x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                   ring_mul r x y IN ring_carrier r DIFF j\n                   ==> x IN ring_carrier r DIFF j /\\\n                       y IN ring_carrier r DIFF j)
       #|  DISJOINT j s ==> z IN s /\\ j' SUBSET j ==> z IN j' ==> F
       #|  (P ==> a IN t ==> F) ==> (s SUBSET t ==> a IN s ==> ~P)
-      #|  r:A ring
-      #|  y:A
-      #|  x:A
+      #|  (r : Ring[A])
+      #|  (y : A)
+      #|  (x : A)
       #|  ~DISJOINT t s /\\ ~DISJOINT u s ==> P <=>\n         forall x y. x IN s /\\ y IN s ==> x IN t /\\ y IN u ==> P
-      #|  b:A
-      #|  a:A
+      #|  (b : A)
+      #|  (a : A)
       #|  forall a. a IN s /\\ ~(a IN j) /\\\n           j SUBSET ring_setadd r j s /\\ s SUBSET ring_setadd r j s\n           ==> j PSUBSET ring_setadd r j s
       #|  (p /\\ p') /\\ (q /\\ q' ==> r) ==> (p ==> q) ==> (p' ==> q') ==> r
-      #|  b:A
-      #|  a:A
+      #|  (b : A)
+      #|  (a : A)
       #|  DISJOINT j s\n      ==> j SUBSET c /\\ s SUBSET c /\\ ~(s = {}) ==> j PSUBSET c
       #|  forall r s j:A->bool.\n        ring_multsys r s /\\\n        ring_ideal r j /\\ DISJOINT j s /\\\n        (forall j'. ring_ideal r j' /\\ j PSUBSET j' ==> ~DISJOINT j' s)\n        ==> prime_ideal r j
-      #|  ring_setadd r j (ideal_generated r {a:A})
-      #|  ring_setadd r j (ideal_generated r {a:A})
-      #|  ring_setadd r j (ideal_generated r {a:A})
-      #|  ring_setadd r j (ideal_generated r {a:A})
-      #|  ring_setadd r j (ideal_generated r {a:A})
-      #|  ring_setadd r j (ideal_generated r {b:A})
-      #|  {ring_1 r:A}
-      #|  forall r j:A->bool. maximal_ideal r j ==> prime_ideal r j
-      #|  s PSUBSET t /\\ t SUBSET u ==> s PSUBSET u
+      #|  ring_setadd((r : Ring[A]), (j : (A) -> Bool), ideal_generated(r, {(a : A)}))
+      #|  ring_setadd((r : Ring[A]), (j : (A) -> Bool), ideal_generated(r, {(a : A)}))
+      #|  ring_setadd((r : Ring[A]), (j : (A) -> Bool), ideal_generated(r, {(a : A)}))
+      #|  ring_setadd((r : Ring[A]), (j : (A) -> Bool), ideal_generated(r, {(a : A)}))
+      #|  ring_setadd((r : Ring[A]), (j : (A) -> Bool), ideal_generated(r, {(a : A)}))
+      #|  ring_setadd((r : Ring[A]), (j : (A) -> Bool), ideal_generated(r, {(b : A)}))
+      #|  {ring_1((r : Ring[A]))}
+      #|  \226\136\128 r : Ring[A], \226\136\128 j : (A) -> Bool, maximal_ideal(r, j) \226\134\146 prime_ideal(r, j)
+      #|  PSUBSET((s : (_) -> Bool), (t : (_) -> Bool)) && SUBSET(t, (u : (_) -> Bool)) \226\134\146 PSUBSET(s, u)
       #|  forall r j:A->bool.\n        maximal_ideal r j <=>\n        prime_ideal r j /\\ ~(?j'. prime_ideal r j' /\\ j PSUBSET j')
       #|  forall r:A ring. prime_ideal r {ring_0 r} <=> integral_domain r
-      #|  (a:A) IN ring_carrier r
-      #|  {z} PSUBSET s ==> ?a. z IN s /\\ a IN s /\\ ~(a = z)
-      #|  a:A
-      #|  j:A->bool
-      #|  a:A
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  PSUBSET({(z : _)}, (s : (_) -> Bool)) \226\134\146 (\226\136\131 a : _, IN(z, s) && IN(a, s) && !(a == z))
+      #|  (a : A)
+      #|  (j : (A) -> Bool)
+      #|  (a : A)
       #|  forall x. x IN a /\\ ring_0 r IN a /\\ ~(x = ring_0 r) /\\ (P ==> Q)\n            ==> ~(~P /\\ {ring_0 r} PSUBSET a) ==> Q
-      #|  ideal_generated r {a:A}
-      #|  a:A
-      #|  ring_1 r:A = ring_0 r
-      #|  forall r:A ring. maximal_ideal r {ring_0 r} <=> field r
+      #|  ideal_generated((r : Ring[A]), {(a : A)})
+      #|  (a : A)
+      #|  ring_1((r : Ring[A])) == ring_0(r)
+      #|  \226\136\128 r : Ring[A], maximal_ideal(r, {ring_0(r)}) == field(r)
       #|  forall(r:A ring) j.\n        proper_ideal r j ==> ?j'. prime_ideal r j' /\\ j SUBSET j'
-      #|  forall r:A ring. (?j. prime_ideal r j) <=> ~trivial_ring r
-      #|  s:A->bool
-      #|  k:A->bool
+      #|  \226\136\128 r : Ring[A], (\226\136\131 j : (A) -> Bool, prime_ideal(r, j)) == !trivial_ring(r)
+      #|  (s : (A) -> Bool)
+      #|  (k : (A) -> Bool)
       #|  \\j'. ring_ideal (r:A ring) j' /\\ j SUBSET j' /\\ DISJOINT j' s
       #|  forall r s j:A->bool.\n        ring_ideal r j /\\ ring_multsys r s /\\ DISJOINT j s\n        ==> ?j'. prime_ideal r j' /\\ j SUBSET j' /\\ DISJOINT j' s
-      #|  {ring_0 r:A}
-      #|  s:A->bool
-      #|  r:A ring
+      #|  {ring_0((r : Ring[A]))}
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
       #|  forall r s:A->bool.\n           ring_multsys r s /\\ ~(ring_0 r IN s)\n           ==> ?j. prime_ideal r j /\\ DISJOINT j s
       #|  forall r s t:A->bool.\n      ring_setadd r s t = IMAGE (\\(x,y). ring_add r x y) (s CROSS t)
       #|  forall r s:A#A->bool.\n      IMAGE (\\(x,y). ring_add r x y) s SUBSET\n      ring_setadd r (IMAGE FST s) (IMAGE SND s)
-      #|  w:A
-      #|  w:A
+      #|  (w : A)
+      #|  (w : A)
       #|  G SUBSET s ==> (forall x. x IN s ==> P x) ==> (forall x. x IN G ==> P x)
-      #|  s SUBSET t ==> x IN s ==> x IN t
-      #|  x IN ideal_generated r (IMAGE FST (G:A#A->bool))
-      #|  x IN ideal_generated r {a:A}
-      #|  (x:A) = ring_sub r (ring_add r x y) y
-      #|  (x:A) IN j
-      #|  y:A
-      #|  x:A
-      #|  y:A
-      #|  x:A
-      #|  z:A
-      #|  z:A
-      #|  p ==> q ==> r <=> q ==> p ==> r
-      #|  (z:A) IN j
-      #|  t SUBSET u /\\ s SUBSET t /\\ x IN s ==> x IN u
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 IN((x : _), s) \226\134\146 IN(x, t)
+      #|  IN((x : A), ideal_generated((r : Ring[A]), IMAGE(FST, (G : ((A, A)) -> Bool))))
+      #|  IN((x : A), ideal_generated((r : Ring[A]), {(a : A)}))
+      #|  (x : A) == ring_sub((r : Ring[A]), ring_add(r, x, (y : A)), y)
+      #|  IN((x : A), (j : (A) -> Bool))
+      #|  (y : A)
+      #|  (x : A)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (z : A)
+      #|  (z : A)
+      #|  ((p : Bool) \226\134\146 (q : Bool) \226\134\146 (r : Bool)) == (q \226\134\146 p \226\134\146 r)
+      #|  IN((z : A), (j : (A) -> Bool))
+      #|  SUBSET((t : (_) -> Bool), (u : (_) -> Bool)) && SUBSET((s : (_) -> Bool), t) && IN((x : _), s) \226\134\146 IN(x, u)
       #|  G SUBSET s ==> (forall x. x IN s ==> P x) ==> (forall x. x IN G ==> P x)
-      #|  r:A ring
-      #|  z IN ideal_generated r ((a:A) INSERT j)
-      #|  z:A
+      #|  (r : Ring[A])
+      #|  IN((z : A), ideal_generated((r : Ring[A]), INSERT((a : A), (j : (A) -> Bool))))
+      #|  (z : A)
       #|  G SUBSET s ==> (forall x. x IN s ==> P x) ==> (forall x. x IN G ==> P x)
       #|  j SUBSET r /\\ s SUBSET j /\\ (s SUBSET j ==> j SUBSET k)\n    ==> s SUBSET r /\\ r INTER s SUBSET j /\\ j SUBSET k
-      #|  IMAGE (ring_mul r a) H UNION IMAGE SND (G:A#A->bool)
-      #|  H:A->bool
-      #|  p /\\ (p ==> ~q) ==> (p ==> q) ==> F
-      #|  K:A->bool
+      #|  UNION(IMAGE(ring_mul((r : Ring[A]), (a : A)), (H : (A) -> Bool)), IMAGE(SND, (G : ((A, A)) -> Bool)))
+      #|  (H : (A) -> Bool)
+      #|  (p : Bool) && (p \226\134\146 !(q : Bool)) \226\134\146 (p \226\134\146 q) \226\134\146 false
+      #|  (K : (A) -> Bool)
       #|  K = {x:A | x IN ring_carrier r /\\ ring_mul r a x IN j}
-      #|  G:A#A->bool
-      #|  a:A
-      #|  p /\\ (p ==> ~q) ==> (p ==> q) ==> F
-      #|  J:A->bool
-      #|  J = ideal_generated r ((a:A) INSERT j)
-      #|  p \\/ q <=> ~(~p /\\ ~q)
-      #|  b:A
-      #|  a:A
+      #|  (G : ((A, A)) -> Bool)
+      #|  (a : A)
+      #|  (p : Bool) && (p \226\134\146 !(q : Bool)) \226\134\146 (p \226\134\146 q) \226\134\146 false
+      #|  (J : (A) -> Bool)
+      #|  (J : (A) -> Bool) == ideal_generated((r : Ring[A]), INSERT((a : A), (j : (A) -> Bool)))
+      #|  ((p : Bool) || (q : Bool)) == !(!p && !q)
+      #|  (b : A)
+      #|  (a : A)
       #|  forall r j:A->bool.\n      ring_ideal r j /\\ ~finitely_generated_ideal r j /\\\n      (forall j'. ring_ideal r j' /\\ j PSUBSET j' ==> finitely_generated_ideal r j')\n      ==> prime_ideal r j
-      #|  ~(a IN s) ==> s INTER {a} = {}
-      #|  (a:A) IN ring_carrier r
+      #|  !IN((a : _), (s : (_) -> Bool)) \226\134\146 INTER(s, {a}) == {}
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
       #|  forall r a:A. prime_ideal r (ideal_generated r {a}) <=>\n           if ~(a IN ring_carrier r) \\/ a = ring_0 r then integral_domain r\n           else ring_prime r a
       #|  forall r a:A.\n        ring_prime r a <=>\n        a IN ring_carrier r /\\ ~(a = ring_0 r) /\\\n        prime_ideal r (ideal_generated r {a})
       #|  forall r a:A.\n        a IN ring_carrier r\n        ==> (proper_ideal r (ideal_generated r {a}) <=> ~(ring_unit r a))
-      #|  a IN p ==> p SUBSET j ==> a IN j
-      #|  j:A->bool
-      #|  ideal_generated r {a:A}
-      #|  r:A ring
+      #|  IN((a : _), (p : (_) -> Bool)) \226\134\146 SUBSET(p, (j : (_) -> Bool)) \226\134\146 IN(a, j)
+      #|  (j : (A) -> Bool)
+      #|  ideal_generated((r : Ring[A]), {(a : A)})
+      #|  (r : Ring[A])
       #|  forall r a:A. a IN ring_carrier r /\\ ~(ring_unit r a)\n           ==> ?j. maximal_ideal r j /\\ a IN j
-      #|  a:A
+      #|  (a : A)
       #|  forall r:A ring.\n        UNIONS {j | maximal_ideal r j} =\n        {x | x IN ring_carrier r /\\ ~(ring_unit r x)}
       #|  (forall s. P s ==> Q s) /\\ (forall s. Q s ==> ?s'. P s' /\\ s SUBSET s')\n              ==> UNIONS {x | Q x} = UNIONS {x | P x}
       #|  forall r:A ring.\n        UNIONS {j | proper_ideal r j} =\n        {x | x IN ring_carrier r /\\ ~(ring_unit r x)}
       #|  forall r:A ring.\n        UNIONS {j | prime_ideal r j} =\n        {x | x IN ring_carrier r /\\ ~(ring_unit r x)}
-      #|  ring_1 r:A
-      #|  (p /\\ q <=> p) <=> p ==> q
+      #|  ring_1((r : Ring[A]))
+      #|  (((p : Bool) && (q : Bool)) == p) == (p \226\134\146 q)
       #|  forall r:A ring.\n        proper_ideal r {x | x IN ring_carrier r /\\ ~(ring_unit r x)} <=>\n        ring_ideal r {x | x IN ring_carrier r /\\ ~(ring_unit r x)}
-      #|  (p /\\ q <=> p) <=> p ==> q
+      #|  (((p : Bool) && (q : Bool)) == p) == (p \226\134\146 q)
       #|  forall r:A ring.\n        maximal_ideal r {x | x IN ring_carrier r /\\ ~(ring_unit r x)} <=>\n        ring_ideal r {x | x IN ring_carrier r /\\ ~(ring_unit r x)}
       #|  forall r:A ring.\n        prime_ideal r {x | x IN ring_carrier r /\\ ~(ring_unit r x)} <=>\n        ring_ideal r {x | x IN ring_carrier r /\\ ~(ring_unit r x)}
       #|  forall r:A ring.\n        ring_ideal r {x | x IN ring_carrier r /\\ ~(ring_unit r x)} <=>\n        ~trivial_ring r /\\\n        forall x y. x IN ring_carrier r /\\ ~(ring_unit r x) /\\\n              y IN ring_carrier r /\\ ~(ring_unit r y)\n              ==> ~(ring_unit r (ring_add r x y))
-      #|  u:A
-      #|  a:A
-      #|  u:A
-      #|  a:A
+      #|  (u : A)
+      #|  (a : A)
+      #|  (u : A)
+      #|  (a : A)
       #|  forall r p:A.\n        ring_irreducible r p\n        ==> proper_ideal r (ideal_generated r {p}) /\\\n            ~(?j. principal_ideal r j /\\\n                  proper_ideal r j /\\\n                  ideal_generated r {p} PSUBSET j)
-      #|  ideal_generated r {d:A}
-      #|  d:A
-      #|  p:A = ring_0 r
-      #|  (p:A) IN ring_carrier r
+      #|  ideal_generated((r : Ring[A]), {(d : A)})
+      #|  (d : A)
+      #|  (p : A) == ring_0((r : Ring[A]))
+      #|  IN((p : A), ring_carrier((r : Ring[A])))
       #|  forall r p:A.\n        integral_domain r\n        ==> (ring_irreducible r p <=>\n             p IN ring_carrier r /\\ ~(p = ring_0 r) /\\\n             proper_ideal r (ideal_generated r {p}) /\\\n             ~(?j. principal_ideal r j /\\\n                   proper_ideal r j /\\\n                   ideal_generated r {p} PSUBSET j))
       #|  forall r p:A.\n        integral_domain r /\\\n        p IN ring_carrier r /\\ ~(p = ring_0 r) /\\\n        maximal_ideal r (ideal_generated r {p})\n        ==> ring_irreducible r p
       #|  forall r p:A.\n        PID r\n        ==> (ring_irreducible r p <=>\n             p IN ring_carrier r /\\ ~(p = ring_0 r) /\\\n             maximal_ideal r (ideal_generated r {p}))
-      #|  ~(p IN s) ==> s INTER {p} = {}
-      #|  (p:A) IN ring_carrier r
+      #|  !IN((p : _), (s : (_) -> Bool)) \226\134\146 INTER(s, {p}) == {}
+      #|  IN((p : A), ring_carrier((r : Ring[A])))
       #|  forall r p:A.\n        PID r\n        ==> (maximal_ideal r (ideal_generated r {p}) <=>\n             if ~(p IN ring_carrier r) \\/ p = ring_0 r then field r\n             else ring_irreducible r p)
       #|  forall r p:A. PID r ==> (ring_irreducible r p <=> ring_prime r p)
-      #|  ~((p /\\ q) /\\ r) <=> p ==> ~r \\/ ~q
+      #|  !(((p : Bool) && (q : Bool)) && (r : Bool)) == (p \226\134\146 !r || !q)
       #|  forall r:A ring.\n        field r <=>\n        ~(trivial_ring r) /\\\n        forall j. ring_ideal r j ==> j = {ring_0 r} \\/ j = ring_carrier r
       #|  forall r:A ring.\n        field r <=>\n        ~(trivial_ring r) /\\\n        forall j. ring_ideal r j <=> j = {ring_0 r} \\/ j = ring_carrier r
       #|  forall r:A ring. field r <=>\n               ~(trivial_ring r) /\\\n               forall j. proper_ideal r j ==> j = {ring_0 r}
       #|  forall r:A ring. field r <=>\n               ~(trivial_ring r) /\\\n               forall j. proper_ideal r j <=> j = {ring_0 r}
       #|  forall r:A ring. field r <=>\n               ~(trivial_ring r) /\\\n               forall j. proper_ideal r j ==> maximal_ideal r j
-      #|  a:A
-      #|  r:A ring
-      #|  b:A
+      #|  (a : A)
+      #|  (r : Ring[A])
+      #|  (b : A)
       #|  2
-      #|  a:A
-      #|  ideal_generated r {ring_pow r (a:A) 2}
-      #|  r:A ring
-      #|  (p ==> q) ==> r <=> (~p ==> r) /\\ (q ==> r)
-      #|  ideal_generated r {ring_pow r (a:A) 2}
-      #|  a:A
+      #|  (a : A)
+      #|  ideal_generated((r : Ring[A]), {ring_pow(r, (a : A), 2)})
+      #|  (r : Ring[A])
+      #|  (((p : Bool) \226\134\146 (q : Bool)) \226\134\146 (r : Bool)) == ((!p \226\134\146 r) && (q \226\134\146 r))
+      #|  ideal_generated((r : Ring[A]), {ring_pow(r, (a : A), 2)})
+      #|  (a : A)
       #|  forall r:A ring. field r <=>\n               ~(trivial_ring r) /\\\n               forall j. proper_ideal r j ==> prime_ideal r j
-      #|  forall r:A ring. field r ==> PID r
-      #|  forall r:A ring. field r ==> noetherian_ring r
-      #|  a:A
-      #|  principal_ideal r (j:A->bool)
+      #|  \226\136\128 r : Ring[A], field(r) \226\134\146 PID(r)
+      #|  \226\136\128 r : Ring[A], field(r) \226\134\146 noetherian_ring(r)
+      #|  (a : A)
+      #|  principal_ideal((r : Ring[A]), (j : (A) -> Bool))
       #|  forall r j:A->bool.\n        PID r /\\ ~(j = {ring_0 r})\n        ==> (maximal_ideal r j <=> prime_ideal r j)
-      #|  a:A
-      #|  ring_mul r u c:A
-      #|  r:A ring
-      #|  u:A
+      #|  (a : A)
+      #|  ring_mul((r : Ring[A]), (u : A), (c : A))
+      #|  (r : Ring[A])
+      #|  (u : A)
       #|  ideal_generated r (a INSERT k) = s\n      ==> (a INSERT k) SUBSET ideal_generated r (a INSERT k) /\\\n          s INTER k SUBSET t\n          ==> k SUBSET t
-      #|  {x | P x /\\ f x IN k} = s ==> d IN s ==> f d IN k
+      #|  {(x : _) | (P : (_) -> Bool)(x) && IN((f : (_) -> _)(x), (k : (_) -> Bool))} == (s : (_) -> Bool) \226\134\146 IN((d : _), s) \226\134\146 IN(f(d), k)
       #|  ring_mul r (ring_mul r a x) d:A = ring_mul r x (ring_mul r d a)
-      #|  (y:A) IN ring_carrier r
-      #|  y:A
-      #|  x:A
-      #|  (c:A) IN ring_carrier r
-      #|  c:A
-      #|  c:A
-      #|  c:A
-      #|  a IN s ==> s INTER {a} = {a}
-      #|  ring_mul r c d:A
-      #|  d:A
-      #|  b:A
+      #|  IN((y : A), ring_carrier((r : Ring[A])))
+      #|  (y : A)
+      #|  (x : A)
+      #|  IN((c : A), ring_carrier((r : Ring[A])))
+      #|  (c : A)
+      #|  (c : A)
+      #|  (c : A)
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 INTER(s, {a}) == {a}
+      #|  ring_mul((r : Ring[A]), (c : A), (d : A))
+      #|  (d : A)
+      #|  (b : A)
       #|  {x:A | x IN ring_carrier r /\\ ring_mul r x a IN k}
-      #|  c:A
-      #|  a:A
-      #|  s SUBSET a INSERT s
-      #|  (a:A) INSERT k
-      #|  ideal_generated r ((a:A) INSERT k)
-      #|  (p /\\ ~q) /\\ r ==> s <=> p /\\ r /\\ ~s ==> q
-      #|  p \\/ q <=> ~(~p /\\ ~q)
-      #|  b:A
-      #|  a:A
-      #|  k:A->bool
-      #|  k:A->bool
-      #|  ideal_generated r {a:A} = i
-      #|  i:A->bool
-      #|  a:A
-      #|  a:A
-      #|  c:(A->bool)->bool
-      #|  \\j:A->bool. ring_ideal r j /\\ ~principal_ideal r j
-      #|  (forall x. P x ==> Q x) <=> ~(?x. P x /\\ ~Q x)
+      #|  (c : A)
+      #|  (a : A)
+      #|  SUBSET((s : (_) -> Bool), INSERT((a : _), s))
+      #|  INSERT((a : A), (k : (A) -> Bool))
+      #|  ideal_generated((r : Ring[A]), INSERT((a : A), (k : (A) -> Bool)))
+      #|  (((p : Bool) && !(q : Bool)) && (r : Bool) \226\134\146 (s : Bool)) == (p && r && !s \226\134\146 q)
+      #|  ((p : Bool) || (q : Bool)) == !(!p && !q)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (k : (A) -> Bool)
+      #|  (k : (A) -> Bool)
+      #|  ideal_generated((r : Ring[A]), {(a : A)}) == (i : (A) -> Bool)
+      #|  (i : (A) -> Bool)
+      #|  (a : A)
+      #|  (a : A)
+      #|  (c : ((A) -> Bool) -> Bool)
+      #|  (j : (A) -> Bool) => ring_ideal((r : Ring[A]), j) && !principal_ideal(r, j)
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 (Q : (_) -> Bool)(x)) == !(\226\136\131 x : _, P(x) && !Q(x))
       #|  forall r:A ring. PID r <=>\n              integral_domain r /\\\n              (forall j. prime_ideal r j ==> principal_ideal r j)
       #|  forall r j:A->bool.\n        ring_ideal r j\n        ==> (trivial_ring (quotient_ring r j) <=> ~proper_ideal r j)
       #|  forall r j:A->bool.\n        ring_ideal r j\n        ==> (integral_domain(quotient_ring r j) <=> prime_ideal r j)
       #|  x IN j /\\\n        ring_add r a (ring_add r x (ring_neg r a)) = x\n        ==> (ring_add r a (ring_add r x (ring_neg r a))) IN j
-      #|  (x:A) IN ring_carrier r
-      #|  z:A
-      #|  z:A
-      #|  y:A
-      #|  x:A
-      #|  x IN s ==> s SUBSET t ==> x IN t
-      #|  ~(a IN j) ==> a IN s ==> ~(j = s)
-      #|  q /\\ (~p ==> r) ==> ~(p /\\ q) ==> r
-      #|  ring_setadd r j (ideal_generated r {a:A})
-      #|  a:A
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
+      #|  (z : A)
+      #|  (z : A)
+      #|  (y : A)
+      #|  (x : A)
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
+      #|  !IN((a : _), (j : (_) -> Bool)) \226\134\146 IN(a, (s : (_) -> Bool)) \226\134\146 !(j == s)
+      #|  (q : Bool) && (!(p : Bool) \226\134\146 (r : Bool)) \226\134\146 !(p && q) \226\134\146 r
+      #|  ring_setadd((r : Ring[A]), (j : (A) -> Bool), ideal_generated(r, {(a : A)}))
+      #|  (a : A)
       #|  ring_1 r:A =\n      ring_sub r (ring_mul r a b) (ring_sub r (ring_mul r a b) (ring_1 r))
-      #|  ~((ring_1 r:A) IN k)
-      #|  b:A
-      #|  (a:A) IN ring_carrier r
-      #|  a:A
-      #|  a:A
-      #|  k:A->bool
-      #|  (ring_1 r:A) IN j
-      #|  (?x. P x /\\ Q x) <=> ~(forall x. P x ==> ~Q x)
+      #|  !IN(ring_1((r : Ring[A])), (k : (A) -> Bool))
+      #|  (b : A)
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  (a : A)
+      #|  (a : A)
+      #|  (k : (A) -> Bool)
+      #|  IN(ring_1((r : Ring[A])), (j : (A) -> Bool))
+      #|  (\226\136\131 x : _, (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)) == !(\226\136\128 x : _, P(x) \226\134\146 !Q(x))
       #|  forall r j:A->bool.\n        ring_ideal r j ==> (field(quotient_ring r j) <=> maximal_ideal r j)
-      #|  f:A->B
-      #|  f:A->B
-      #|  r':B ring
-      #|  r:A ring
+      #|  (f : (A) -> B)
+      #|  (f : (A) -> B)
+      #|  (r' : Ring[B])
+      #|  (r : Ring[A])
       #|  forall r r' (f:A->B) j k.\n           ring_epimorphism (r,r') f /\\\n           ring_ideal r' k /\\\n           {x | x IN ring_carrier r /\\ f x IN k} = j\n        ==> (prime_ideal r j <=> prime_ideal r' k)
-      #|  f:A->B
+      #|  (f : (A) -> B)
       #|  (q ==> p) /\\ (q' ==> p') /\\ (p' ==> (q' <=> q))\n    ==> (p' <=> p) ==> (q' <=> q)
       #|  forall r r' (f:A->B) j.\n        ring_isomorphism(r,r') f /\\ j SUBSET ring_carrier r\n        ==> (prime_ideal r' (IMAGE f j) <=> prime_ideal r j)
-      #|  f:A->B
-      #|  f:A->B
-      #|  r':B ring
-      #|  r:A ring
+      #|  (f : (A) -> B)
+      #|  (f : (A) -> B)
+      #|  (r' : Ring[B])
+      #|  (r : Ring[A])
       #|  forall r r' (f:A->B) j k.\n           ring_epimorphism (r,r') f /\\\n           ring_ideal r' k /\\\n           {x | x IN ring_carrier r /\\ f x IN k} = j\n        ==> (maximal_ideal r j <=> maximal_ideal r' k)
-      #|  f:A->B
-      #|  maximal_ideal r' (j:B->bool)
+      #|  (f : (A) -> B)
+      #|  maximal_ideal((r' : Ring[B]), (j : (B) -> Bool))
       #|  forall r r' (f:A->B) j.\n        ring_epimorphism(r,r') f /\\ maximal_ideal r' j\n        ==> maximal_ideal r {x | x IN ring_carrier r /\\ f x IN j}
-      #|  f:A->B
+      #|  (f : (A) -> B)
       #|  (q ==> p) /\\ (q' ==> p') /\\ (p' ==> (q' <=> q))\n    ==> (p' <=> p) ==> (q' <=> q)
       #|  forall r r' (f:A->B) j.\n        ring_isomorphism(r,r') f /\\ j SUBSET ring_carrier r\n        ==> (maximal_ideal r' (IMAGE f j) <=> maximal_ideal r j)
-      #|  f:A->B
-      #|  r':B ring
-      #|  r:A ring
-      #|  {f a} = IMAGE f {a}
-      #|  (f:A->B) a
-      #|  a:A
-      #|  IMAGE (g:B->A) k
-      #|  g:B->A
-      #|  f:A->B
-      #|  k:B->bool
+      #|  (f : (A) -> B)
+      #|  (r' : Ring[B])
+      #|  (r : Ring[A])
+      #|  {(f : (_) -> _)((a : _))} == IMAGE(f, {a})
+      #|  (f : (A) -> B)((a : A))
+      #|  (a : A)
+      #|  IMAGE((g : (B) -> A), (k : (B) -> Bool))
+      #|  (g : (B) -> A)
+      #|  (f : (A) -> B)
+      #|  (k : (B) -> Bool)
       #|  forall(r:A ring) (r':B ring).\n        r isomorphic_ring r' ==> PID r ==> PID r'
       #|  forall(r:A ring) (r':B ring).\n        r isomorphic_ring r' ==> (PID r <=> PID r')
-      #|  ring_kernel(r,r') (f:A->B)
+      #|  ring_kernel(((r : Ring[A]), (r' : Ring[B])), (f : (A) -> B))
       #|  forall r r' (f:A->B).\n        ring_homomorphism(r,r') f /\\ field r\n        ==> (forall x. x IN ring_carrier r ==> f x = ring_0 r') \\/\n            ring_monomorphism(r,r') f
       #|  forall r r' (f:A->B).\n        ring_epimorphism(r,r') f /\\ field r\n        ==> (forall x. x IN ring_carrier r ==> f x = ring_0 r') \\/\n            ring_isomorphism(r,r') f
-      #|  ring_coset r (j:A->bool)
-      #|  quotient_ring r (j:A->bool)
-      #|  j:A->bool
+      #|  ring_coset((r : Ring[A]), (j : (A) -> Bool))
+      #|  quotient_ring((r : Ring[A]), (j : (A) -> Bool))
+      #|  (j : (A) -> Bool)
       #|  forall r:A ring.\n        ~(trivial_ring r)\n        ==> ?s (f:A->A->bool). ring_epimorphism(r,s) f /\\ field s
-      #|  h:A->B
-      #|  l:B ring
-      #|  k:A ring
+      #|  (h : (A) -> B)
+      #|  (l : Ring[B])
+      #|  (k : Ring[A])
       #|  forall(k:A ring) (l:B ring) (h:A->B).\n        field k /\\ ring_homomorphism(k,l) h /\\ ~(trivial_ring l)\n        ==> ring_monomorphism(k,l) h
       #|  radical r j = {x:A | x IN ring_carrier r /\\\n                       ?n. ~(n = 0) /\\ ring_pow r x n IN j}
       #|  1
       #|  forall r j:A->bool. j SUBSET radical r j <=> j SUBSET ring_carrier r
       #|  forall r j k:A->bool. j SUBSET k ==> radical r j SUBSET radical r k
-      #|  y:A
-      #|  x:A
+      #|  (y : A)
+      #|  (x : A)
       #|  k:num <= m + n ==> k = m + (k - m) \\/ (m + n) - k = n + (m - k)
-      #|  k:num
-      #|  m + n:num
-      #|  m:num
-      #|  n:num
-      #|  y:A
-      #|  x:A
-      #|  x:A
+      #|  (k : Num)
+      #|  (m : Num) + (n : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (x : A)
       #|  1
       #|  forall r j:A->bool. ring_ideal r j ==> ring_ideal r (radical r j)
       #|  forall r:A ring. radical r {ring_0 r} = {x | ring_nilpotent r x}
-      #|  ~(1 = 0)
+      #|  !(1 == 0)
       #|  forall r:A ring. radical r (ring_carrier r) = ring_carrier r
-      #|  ~P 0 ==> ((?n. ~(n = 0) /\\ P n) <=> (?n. P n))
-      #|  (x:A) IN ring_carrier r
-      #|  x:A
-      #|  j:A->bool = ring_carrier r
+      #|  !(P : (Num) -> Bool)(0) \226\134\146 (\226\136\131 n : Num, !(n == 0) && P(n)) == (\226\136\131 n : Num, P(n))
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
+      #|  (x : A)
+      #|  (j : (A) -> Bool) == ring_carrier((r : Ring[A]))
       #|  forall r j:A->bool.\n      ring_ideal r j\n      ==> radical r j = {x | x IN ring_carrier r /\\ ?n. ring_pow r x n IN j}
-      #|  m:num
+      #|  (m : Num)
       #|  forall r j (x:A) n.\n        ring_ideal r j /\\ x IN ring_carrier r /\\ ~(n = 0)\n        ==> (ring_pow r x n IN radical r j <=> x IN radical r j)
       #|  forall r:A ring. integral_domain r ==> radical r {ring_0 r} = {ring_0 r}
       #|  forall r:A ring. field r ==> radical r {ring_0 r} = {ring_0 r}
-      #|  DISJOINT k {f n | n IN (:num)} ==> ~(f 1 IN k)
-      #|  k:A->bool
-      #|  (~p ==> r) /\\ ~q ==> (p ==> q) ==> r
-      #|  j:A->bool
-      #|  {ring_pow r (x:A) n | n IN (:num)}
-      #|  r:A ring
-      #|  j:A->bool
-      #|  r:A ring
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  x:A
+      #|  DISJOINT((k : (_) -> Bool), {(f : (Num) -> _)((n : Num)) | IN(n, UNIV)}) \226\134\146 !IN(f(1), k)
+      #|  (k : (A) -> Bool)
+      #|  (!(p : Bool) \226\134\146 (r : Bool)) && !(q : Bool) \226\134\146 (p \226\134\146 q) \226\134\146 r
+      #|  (j : (A) -> Bool)
+      #|  {ring_pow((r : Ring[A]), (x : A), (n : Num)) | IN(n, UNIV)}
+      #|  (r : Ring[A])
+      #|  (j : (A) -> Bool)
+      #|  (r : Ring[A])
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (x : A)
       #|  forall r j:A->bool.\n        ring_ideal r j\n        ==> radical r j = if j = ring_carrier r then ring_carrier r\n                          else INTERS {k | prime_ideal r k /\\ j SUBSET k}
-      #|  trivial_ring(r:A ring)
+      #|  trivial_ring((r : Ring[A]))
       #|  forall r:A ring.\n        radical r {ring_0 r} =\n        if trivial_ring r then {ring_0 r}\n        else INTERS {j | prime_ideal r j}
       #|  forall r:A ring.\n    ~(trivial_ring r) ==> INTERS {j | prime_ideal r j} = radical r {ring_0 r}
-      #|  n:num
+      #|  (n : Num)
       #|  1
-      #|  n * m:num
-      #|  m:num
-      #|  n:num
-      #|  (a:A) IN ring_carrier r
-      #|  a:A
-      #|  forall r j:A->bool. radical r (radical r j) = radical r j
+      #|  (n : Num) * (m : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  (a : A)
+      #|  \226\136\128 r : Ring[A], \226\136\128 j : (A) -> Bool, radical(r, radical(r, j)) == radical(r, j)
       #|  forall r j:A->bool.\n        ring_ideal r j\n        ==> (radical r j = ring_carrier r <=> j = ring_carrier r)
       #|  forall r j:A->bool.\n        ring_ideal r j\n        ==> (proper_ideal r (radical r j) <=> proper_ideal r j)
       #|  forall r u:(A->bool)->bool.\n        radical r (UNIONS u) = UNIONS {radical r j | j IN u}
       #|  forall r j k:A->bool.\n        radical r (j UNION k) = radical r j UNION radical r k
-      #|  m + n:num
-      #|  n:num
-      #|  m:num
-      #|  (x:A) IN ring_carrier r
-      #|  x:A
+      #|  (m : Num) + (n : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
+      #|  (x : A)
       #|  forall r j k:A->bool.\n        ring_ideal r j /\\ ring_ideal r k\n        ==> radical r (j INTER k) = radical r j INTER radical r k
       #|  forall r j k:A->bool.\n        ring_ideal r j /\\ ring_ideal r k\n        ==> radical r (ring_setadd r (radical r j) (radical r k)) =\n            radical r (ring_setadd r j k)
       #|  forall r j k:A->bool.\n        ring_ideal r j /\\ ring_ideal r k\n        ==> (ring_setadd r (radical r j) (radical r k) = ring_carrier r <=>\n             ring_setadd r j k = ring_carrier r)
-      #|  forall r j:A->bool. prime_ideal r j ==> radical r j = j
+      #|  \226\136\128 r : Ring[A], \226\136\128 j : (A) -> Bool, prime_ideal(r, j) \226\134\146 radical(r, j) == j
       #|  forall r j k:A->bool.\n        j SUBSET ring_carrier r /\\ prime_ideal r k\n        ==> (radical r j SUBSET k <=> j SUBSET k)
       #|  forall r j k:A->bool.\n        ring_ideal r j /\\ prime_ideal r k\n        ==> (radical r j SUBSET k <=> j SUBSET k)
       #|  forall r j:A->bool. prime_ideal r j ==> {x | ring_nilpotent r x} SUBSET j
-      #|  r:A ring
+      #|  (r : Ring[A])
       #|  forall r x y:A.\n        ring_nilpotent r x /\\ ring_nilpotent r y\n        ==> ring_nilpotent r (ring_add r x y)
-      #|  r:A ring
+      #|  (r : Ring[A])
       #|  forall r x y:A.\n        x IN ring_carrier r /\\ ring_nilpotent r y\n        ==> ring_nilpotent r (ring_mul r x y)
       #|  forall r x y:A.\n        ring_nilpotent r x /\\ y IN ring_carrier r\n        ==> ring_nilpotent r (ring_mul r x y)
       #|  forall r x y:A.\n        ring_nilpotent r x /\\ ring_nilpotent r y\n        ==> ring_nilpotent r (ring_sub r x y)
       #|  forall(r:A ring) (f:K->A) s.\n        FINITE s /\\ (forall i. i IN s ==> ring_nilpotent r (f i))\n        ==> ring_nilpotent r (ring_sum r s f)
-      #|  ring_mul r w (ring_pow r z n):A
-      #|  n:num
-      #|  forall n. ~(ring_mul r (ring_pow r z n) w:A = ring_0 r)
-      #|  w:A
-      #|  p <=> ~p ==> F
-      #|  z:A
-      #|  x:A
-      #|  r:A ring
+      #|  ring_mul((r : Ring[A]), (w : A), ring_pow(r, (z : A), (n : Num)))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, !(ring_mul((r : Ring[A]), ring_pow(r, (z : A), n), (w : A)) == ring_0(r))
+      #|  (w : A)
+      #|  (p : Bool) == (!p \226\134\146 false)
+      #|  (z : A)
+      #|  (x : A)
+      #|  (r : Ring[A])
       #|  (p ==> q) /\\ (p /\\ q ==> r /\\ s) /\\ p ==> p /\\ q /\\ r /\\ s
       #|  (forall r w z:A.\n        ring_zerodivisor r w /\\ ring_nilpotent r z\n        ==> ring_zerodivisor r (ring_add r w z)) /\\\n   (forall r w z:A.\n        ring_nilpotent r z /\\ ring_zerodivisor r w\n        ==> ring_zerodivisor r (ring_add r z w)) /\\\n   (forall r w z:A.\n        ring_zerodivisor r w /\\ ring_nilpotent r z\n        ==> ring_zerodivisor r (ring_sub r w z)) /\\\n   (forall r w z:A.\n        ring_nilpotent r z /\\ ring_zerodivisor r w\n        ==> ring_zerodivisor r (ring_sub r z w))
-      #|  x:A = ring_sub r (ring_add r x z) z
-      #|  ring_regular r (x:A)
-      #|  z:A
-      #|  x:A
-      #|  r:A ring
+      #|  (x : A) == ring_sub((r : Ring[A]), ring_add(r, x, (z : A)), z)
+      #|  ring_regular((r : Ring[A]), (x : A))
+      #|  (z : A)
+      #|  (x : A)
+      #|  (r : Ring[A])
       #|  (p ==> q) /\\ (p /\\ q ==> r /\\ s) /\\ p ==> p /\\ q /\\ r /\\ s
       #|  (forall r w z:A.\n        ring_regular r w /\\ ring_nilpotent r z\n        ==> ring_regular r (ring_add r w z)) /\\\n   (forall r w z:A.\n        ring_nilpotent r z /\\ ring_regular r w\n        ==> ring_regular r (ring_add r z w)) /\\\n   (forall r w z:A.\n        ring_regular r w /\\ ring_nilpotent r z\n        ==> ring_regular r (ring_sub r w z)) /\\\n   (forall r w z:A.\n        ring_nilpotent r z /\\ ring_regular r w\n        ==> ring_regular r (ring_sub r z w))
-      #|  k:num
-      #|  n:num
-      #|  ~(n = 0)
-      #|  ring_1 r = ring_sub r (ring_1 r) (ring_0 r)
-      #|  ring_sum r {i | i < n} (\\i. ring_pow r z i):A
-      #|  n:num
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  !((n : Num) == 0)
+      #|  ring_1((r : Ring[_])) == ring_sub(r, ring_1(r), ring_0(r))
+      #|  ring_sum((r : Ring[A]), {(i : Num) | i < (n : Num)}, (i : Num) => ring_pow(r, (z : A), i))
+      #|  (n : Num)
       #|  z IN ring_carrier r\n     ==> ring_add r (ring_1 r) z = ring_sub r (ring_1 r) (ring_neg r z)
-      #|  (q ==> p) /\\ q ==> p /\\ p /\\ q
+      #|  ((q : Bool) \226\134\146 (p : Bool)) && q \226\134\146 p && p && q
       #|  z IN ring_carrier r\n     ==> ring_add r z (ring_1 r) = ring_add r (ring_1 r) z /\\\n         ring_sub r z (ring_1 r) = ring_neg r (ring_sub r (ring_1 r) z)
       #|  (forall r z:A. ring_nilpotent r z ==> ring_unit r (ring_add r (ring_1 r) z)) /\\\n   (forall r z:A. ring_nilpotent r z ==> ring_unit r (ring_add r z (ring_1 r))) /\\\n   (forall r z:A. ring_nilpotent r z ==> ring_unit r (ring_sub r (ring_1 r) z)) /\\\n   (forall r z:A. ring_nilpotent r z ==> ring_unit r (ring_sub r z (ring_1 r)))
       #|  u IN ring_carrier r /\\ v IN ring_carrier r /\\ z IN ring_carrier r /\\\n    ring_mul r u v:A = ring_1 r\n    ==> ring_add r u z =\n        ring_mul r u (ring_add r (ring_1 r) (ring_mul r v z)) /\\\n        ring_add r z u =\n        ring_mul r u (ring_add r (ring_1 r) (ring_mul r v z)) /\\\n        ring_sub r u z =\n        ring_mul r u (ring_sub r (ring_1 r) (ring_mul r v z)) /\\\n        ring_sub r z u =\n        ring_mul r u (ring_neg r\n           (ring_sub r (ring_1 r) (ring_mul r v z)))
-      #|  v:A
+      #|  (v : A)
       #|  (forall r u z:A. ring_unit r u /\\ ring_nilpotent r z\n              ==> ring_unit r (ring_add r u z)) /\\\n   (forall r u z:A. ring_nilpotent r z /\\ ring_unit r u\n              ==> ring_unit r (ring_add r z u)) /\\\n   (forall r u z:A. ring_unit r u /\\ ring_nilpotent r z\n              ==> ring_unit r (ring_sub r u z)) /\\\n   (forall r u z:A. ring_nilpotent r z /\\ ring_unit r u\n              ==> ring_unit r (ring_sub r z u))
       #|  forall r x:A. ring_unit r x /\\ ring_nilpotent r x <=>\n           trivial_ring r /\\ x = ring_0 r
-      #|  trivial_ring(r:A ring)
+      #|  trivial_ring((r : Ring[A]))
       #|  forall r:A ring.\n        (?!j. prime_ideal r j) <=>\n        ~(trivial_ring r) /\\\n        forall x. x IN ring_carrier r ==> ring_unit r x \\/ ring_nilpotent r x
       #|  UFD (r:A ring) <=>\n        integral_domain r /\\\n        forall j. prime_ideal r j /\\ ~(j = {ring_0 r})\n            ==> ?p. ring_prime r p /\\ p IN j
-      #|  forall r:A ring. UFD r ==> integral_domain r
-      #|  p:A
-      #|  j:A->bool
-      #|  j:A->bool
-      #|  forall r:A ring. PID r ==> UFD r
-      #|  forall r:A ring. field r ==> UFD r
+      #|  \226\136\128 r : Ring[A], UFD(r) \226\134\146 integral_domain(r)
+      #|  (p : A)
+      #|  (j : (A) -> Bool)
+      #|  (j : (A) -> Bool)
+      #|  \226\136\128 r : Ring[A], PID(r) \226\134\146 UFD(r)
+      #|  \226\136\128 r : Ring[A], field(r) \226\134\146 UFD(r)
       #|  {x | x IN ring_carrier r /\\ (f:A->B) x IN k}
-      #|  k:B->bool
-      #|  f:A->B
+      #|  (k : (B) -> Bool)
+      #|  (f : (A) -> B)
       #|  forall(r:A ring) (r':B ring).\n        r isomorphic_ring r' ==> UFD r ==> UFD r'
       #|  forall(r:A ring) (r':B ring). r isomorphic_ring r' ==> (UFD r <=> UFD r')
-      #|  ~(SUC n <= n)
+      #|  !(SUC((n : Num)) <= n)
       #|  ring_associates r x z ==> y = x ==> ring_associates r y z
-      #|  1 <= SUC n
-      #|  \\i. if i = SUC n then p else (q:num->A) i
-      #|  SUC n
-      #|  q:num->A
-      #|  n:num
-      #|  z:A
-      #|  p:A
-      #|  ~(1 <= i /\\ i <= 0)
+      #|  1 <= SUC((n : Num))
+      #|  (i : Num) => if i == SUC((n : Num)) { (p : A) } else { (q : (Num) -> A)(i) }
+      #|  SUC((n : Num))
+      #|  (q : (Num) -> A)
+      #|  (n : Num)
+      #|  (z : A)
+      #|  (p : A)
+      #|  !(1 <= (i : Num) && i <= 0)
       #|  0
-      #|  1 <= SUC n
-      #|  SUC m <= n ==> m <= n
-      #|  forall m:num. m <= n ==> ring_product r (1..m) p:A IN pp
-      #|  u:A
-      #|  p:num->A
-      #|  n:num
-      #|  z:A
-      #|  ring_carrier r:A->bool
+      #|  1 <= SUC((n : Num))
+      #|  SUC((m : Num)) <= (n : Num) \226\134\146 m <= n
+      #|  \226\136\128 m : Num, m <= (n : Num) \226\134\146 IN(ring_product((r : Ring[A]), op_dot_dot(1, m), (p : (Num) -> A)), (pp : (A) -> Bool))
+      #|  (u : A)
+      #|  (p : (Num) -> A)
+      #|  (n : Num)
+      #|  (z : A)
+      #|  ring_carrier((r : Ring[A]))
       #|  (forall x. R x ==> Q x) /\\ (forall x. Q x ==> R x)\n    ==> ((forall x. P x ==> Q x) <=> (forall x. P x ==> R x))
       #|  ?z:A. z IN j /\\ z IN ring_carrier r /\\\n              ~(z = ring_0 r) /\\ ~(ring_unit r z)
-      #|  j:A->bool
-      #|  ring_mul r x (ring_1 r):A
-      #|  j:A->bool
-      #|  j:A->bool
-      #|  DISJOINT s t <=> forall x. x IN s ==> ~(x IN t)
-      #|  ideal_generated r {x:A}
-      #|  pp:A->bool
-      #|  r:A ring
-      #|  (x:A) IN pp
-      #|  x:A
-      #|  ring_carrier r:A->bool
-      #|  (p:A) IN j
-      #|  a:A
-      #|  p:A
+      #|  (j : (A) -> Bool)
+      #|  ring_mul((r : Ring[A]), (x : A), ring_1(r))
+      #|  (j : (A) -> Bool)
+      #|  (j : (A) -> Bool)
+      #|  DISJOINT((s : (_) -> Bool), (t : (_) -> Bool)) == (\226\136\128 x : _, IN(x, s) \226\134\146 !IN(x, t))
+      #|  ideal_generated((r : Ring[A]), {(x : A)})
+      #|  (pp : (A) -> Bool)
+      #|  (r : Ring[A])
+      #|  IN((x : A), (pp : (A) -> Bool))
+      #|  (x : A)
+      #|  ring_carrier((r : Ring[A]))
+      #|  IN((p : A), (j : (A) -> Bool))
+      #|  (a : A)
+      #|  (p : A)
       #|  forall j. prime_ideal r j\n          ==> forall x:A. x IN pp\n                    ==> x IN j /\\ ~(ring_unit r x)\n                         ==> ?p. ring_prime r p /\\ p IN pp /\\ p IN j
       #|  forall x:A. x IN ring_carrier r /\\ ~(x = ring_0 r) ==> x IN pp
-      #|  p:A
-      #|  r:A ring
-      #|  (x:A) IN pp /\\ w IN pp
-      #|  (w:A) IN pp /\\ y IN pp
-      #|  w:A
-      #|  y:A
-      #|  x:A
-      #|  y:A
-      #|  x:A
-      #|  z:A
-      #|  p:A
+      #|  (p : A)
+      #|  (r : Ring[A])
+      #|  IN((x : A), (pp : (A) -> Bool)) && IN((w : A), pp)
+      #|  IN((w : A), (pp : (A) -> Bool)) && IN((y : A), pp)
+      #|  (w : A)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (z : A)
+      #|  (p : A)
       #|  forall z:A. z IN pp\n            ==> forall x y:A. x IN ring_carrier r /\\\n                        y IN ring_carrier r /\\\n                        ring_mul r x y = z\n                        ==> x IN pp /\\ y IN pp
       #|  forall x:A. x IN pp ==> forall y. y IN pp ==> ring_mul r x y IN pp
       #|  forall x y:A. x IN ring_carrier r /\\ y IN ring_carrier r\n            ==> (ring_mul r x y IN pp <=> x IN pp /\\ y IN pp)
-      #|  forall p:A. ring_prime r p ==> p IN pp
-      #|  (q ==> p) /\\ q ==> p /\\ q
+      #|  \226\136\128 p : A, ring_prime((r : Ring[A]), p) \226\134\146 IN(p, (pp : (A) -> Bool))
+      #|  ((q : Bool) \226\134\146 (p : Bool)) && q \226\134\146 p && q
       #|  (forall x u:A. x IN pp /\\ ring_unit r u ==> ring_mul r x u IN pp) /\\\n    (forall u x:A. ring_unit r u /\\ x IN pp ==> ring_mul r u x IN pp)
-      #|  forall x:A. x IN pp ==> x IN ring_carrier r
-      #|  pp:A->bool
+      #|  \226\136\128 x : A, IN(x, (pp : (A) -> Bool)) \226\134\146 IN(x, ring_carrier((r : Ring[A])))
+      #|  (pp : (A) -> Bool)
       #|  (forall u:A. ring_unit r u ==> pp u) /\\\n    forall p a. ring_prime r p /\\ pp a ==> pp (ring_mul r p a)
-      #|  pp:A->bool
-      #|  integral_domain(r:A ring)
+      #|  (pp : (A) -> Bool)
+      #|  integral_domain((r : Ring[A]))
       #|  forall r:A ring.\n        UFD r <=>\n        integral_domain r /\\\n        forall x. x IN ring_carrier r /\\ ~(x = ring_0 r)\n            ==> ?n p. (forall i. 1 <= i /\\ i <= n ==> ring_prime r (p i)) /\\\n                      ring_associates r (ring_product r (1..n) p) x
-      #|  ~(1 <= i /\\ i <= 0)
+      #|  !(1 <= (i : Num) && i <= 0)
       #|  0
-      #|  ring_unit r (x:A)
-      #|  ~(SUC n <= n)
-      #|  1 <= SUC n
+      #|  ring_unit((r : Ring[A]), (x : A))
+      #|  !(SUC((n : Num)) <= n)
+      #|  1 <= SUC((n : Num))
       #|  f (f u q) p' = f (f q p') u /\\ p' = p\n        ==> f (f u q) p = f (f q p') u
-      #|  1 <= SUC n
-      #|  SUC n
-      #|  i:num
-      #|  1 <= SUC n
+      #|  1 <= SUC((n : Num))
+      #|  SUC((n : Num))
+      #|  (i : Num)
+      #|  1 <= SUC((n : Num))
       #|  \\i. if i = SUC n then ring_mul r u (p(SUC n):A) else p i
-      #|  u:A
-      #|  1 <= SUC n
-      #|  p:num->A
-      #|  n:num
-      #|  1 <= SUC n
-      #|  x:A
-      #|  x:A
-      #|  integral_domain(r:A ring)
+      #|  (u : A)
+      #|  1 <= SUC((n : Num))
+      #|  (p : (Num) -> A)
+      #|  (n : Num)
+      #|  1 <= SUC((n : Num))
+      #|  (x : A)
+      #|  (x : A)
+      #|  integral_domain((r : Ring[A]))
       #|  forall r:A ring.\n        UFD r <=>\n        integral_domain r /\\\n        forall x. x IN ring_carrier r /\\ ~(x = ring_0 r) /\\ ~(ring_unit r x)\n            ==> ?n p. 1 <= n /\\\n                      (forall i. 1 <= i /\\ i <= n ==> ring_prime r (p i)) /\\\n                      ring_product r (1..n) p = x
-      #|  n = 0 \\/ 1 <= n
-      #|  xs:num->A
-      #|  n:num
-      #|  x:A
+      #|  (n : Num) == 0 || 1 <= n
+      #|  (xs : (Num) -> A)
+      #|  (n : Num)
+      #|  (x : A)
       #|  forall r x:A.\n        UFD r /\\ x IN ring_carrier r /\\ ~(x = ring_0 r) /\\ ~(ring_unit r x)\n        ==> ?p. ring_prime r p /\\ ring_divides r p x
       #|  forall r p:A. UFD r ==> (ring_irreducible r p <=> ring_prime r p)
-      #|  forall p:A. ring_irreducible r p <=> ring_prime r p
+      #|  \226\136\128 p : A, ring_irreducible((r : Ring[A]), p) == ring_prime(r, p)
       #|  forall r:A ring.\n        UFD r <=>\n        integral_domain r /\\\n        (forall p. ring_irreducible r p ==> ring_prime r p) /\\\n        (forall x. x IN ring_carrier r /\\ ~(x = ring_0 r)\n             ==> ?n p. (forall i. 1 <= i /\\ i <= n ==> ring_irreducible r (p i)) /\\\n                       ring_associates r (ring_product r (1..n) p) x)
-      #|  forall p:A. ring_irreducible r p <=> ring_prime r p
+      #|  \226\136\128 p : A, ring_irreducible((r : Ring[A]), p) == ring_prime(r, p)
       #|  forall r:A ring.\n        UFD r <=>\n        integral_domain r /\\\n        (forall p. ring_irreducible r p ==> ring_prime r p) /\\\n        (forall x. x IN ring_carrier r /\\ ~(x = ring_0 r) /\\ ~(ring_unit r x)\n             ==> ?n p. 1 <= n /\\\n                       (forall i. 1 <= i /\\ i <= n ==> ring_irreducible r (p i)) /\\\n                       ring_product r (1..n) p = x)
       #|  1 <= k /\\ k <= a + b /\\ ~(k <= a)\n        ==> 1 <= k - a /\\ k - a <= b
-      #|  ring_product r (1..n_b) (p_b:num->A)
+      #|  ring_product((r : Ring[A]), op_dot_dot(1, (n_b : Num)), (p_b : (Num) -> A))
       #|  1 <= k /\\ k <= a + b /\\ ~(k <= a)\n        ==> 1 <= k - a /\\ k - a <= b
-      #|  ~p ==> p ==> q
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
       #|  ring_product r {f(k:num) - n_a} (p_b:num->A)
-      #|  (p_ab:num->A) k
-      #|  ring_product r (1..n_a) (p_a:num->A)
-      #|  ~p ==> p ==> q
-      #|  ring_product r {f(k:num)} (p_a:num->A)
-      #|  (p_ab:num->A) k
-      #|  k:num
-      #|  f:num->num
+      #|  (p_ab : (Num) -> A)((k : Num))
+      #|  ring_product((r : Ring[A]), op_dot_dot(1, (n_a : Num)), (p_a : (Num) -> A))
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  ring_product((r : Ring[A]), {(f : (Num) -> Num)((k : Num))}, (p_a : (Num) -> A))
+      #|  (p_ab : (Num) -> A)((k : Num))
+      #|  (k : Num)
+      #|  (f : (Num) -> Num)
       #|  y IN ring_carrier r /\\ x = y ==> ring_associates r x y
-      #|  ring_mul r a b:A = ring_mul r p c
-      #|  1 <= n + 1
-      #|  1 <= SUC n_c /\\ SUC n_c <= SUC n_c
-      #|  ?k. 1 <= k /\\ k <= n_ab /\\ f(k) = SUC n_c
-      #|  f:num->num
+      #|  ring_mul((r : Ring[A]), (a : A), (b : A)) == ring_mul(r, (p : A), (c : A))
+      #|  1 <= (n : Num) + 1
+      #|  1 <= SUC((n_c : Num)) && SUC(n_c) <= SUC(n_c)
+      #|  \226\136\131 k : Num, 1 <= k && k <= (n_ab : Num) && (f : (Num) -> Num)(k) == SUC((n_c : Num))
+      #|  (f : (Num) -> Num)
       #|  ?k. 1 <= k /\\ k <= n_ab /\\\n                    ring_associates r (p_ab k) (p:A)
-      #|  ~(SUC n <= n)
+      #|  !(SUC((n : Num)) <= n)
       #|  y IN ring_carrier r /\\ x = y ==> ring_associates r x y
-      #|  1 <= SUC n
-      #|  p_c:num->A
-      #|  n_c:num
-      #|  p_b:num->A
-      #|  n_b:num
-      #|  p_a:num->A
-      #|  n_a:num
-      #|  p_ab:num->A
-      #|  n_ab:num
-      #|  c:A = ring_0 r
-      #|  b:A = ring_0 r
-      #|  a:A = ring_0 r
-      #|  c:A
-      #|  b:A
-      #|  a:A
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  p:A
-      #|  q:num->A
-      #|  1..m
-      #|  p:num->A
-      #|  1..n
-      #|  r:A ring
-      #|  q:num->A
-      #|  m:num
-      #|  p:num->A
-      #|  n:num
-      #|  x:A
-      #|  x:A
+      #|  1 <= SUC((n : Num))
+      #|  (p_c : (Num) -> A)
+      #|  (n_c : Num)
+      #|  (p_b : (Num) -> A)
+      #|  (n_b : Num)
+      #|  (p_a : (Num) -> A)
+      #|  (n_a : Num)
+      #|  (p_ab : (Num) -> A)
+      #|  (n_ab : Num)
+      #|  (c : A) == ring_0((r : Ring[A]))
+      #|  (b : A) == ring_0((r : Ring[A]))
+      #|  (a : A) == ring_0((r : Ring[A]))
+      #|  (c : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (p : A)
+      #|  (q : (Num) -> A)
+      #|  op_dot_dot(1, (m : Num))
+      #|  (p : (Num) -> A)
+      #|  op_dot_dot(1, (n : Num))
+      #|  (r : Ring[A])
+      #|  (q : (Num) -> A)
+      #|  (m : Num)
+      #|  (p : (Num) -> A)
+      #|  (n : Num)
+      #|  (x : A)
+      #|  (x : A)
       #|  forall r:A ring.\n     UFD r <=>\n     integral_domain r /\\\n     forall x. x IN ring_carrier r /\\ ~(x = ring_0 r)\n         ==> ?n p. (forall i. 1 <= i /\\ i <= n ==> ring_irreducible r (p i)) /\\\n                   ring_associates r (ring_product r (1..n) p) x /\\\n                   forall m q. (forall j. 1 <= j /\\ j <= m ==> ring_irreducible r (q j)) /\\\n                         ring_associates r (ring_product r (1..m) q) x\n                         ==> ?f. IMAGE f (1..n) = 1..m /\\\n                                 (forall i j. 1 <= i /\\ i <= n /\\ 1 <= j /\\ j <= n\n                                        ==> (f i = f j <=> i = j)) /\\\n                                 (forall i. 1 <= i /\\ i <= n\n                                      ==> ring_associates r (p i) (q(f i)))
-      #|  ring_mul r a b:A
-      #|  ring_mul r a b:A
-      #|  ring_mul r a b:A
-      #|  ring_mul r a b:A
-      #|  ring_mul r a b:A
-      #|  ring_mul r a b:A
-      #|  ring_mul r a b:A
-      #|  ring_mul r a b:A
-      #|  ring_mul r a b:A
-      #|  ring_mul r a b:A
-      #|  ring_mul r a b:A
-      #|  ring_mul r a b:A
-      #|  ring_mul r a b:A
-      #|  a:A
-      #|  b:A
-      #|  c:A
+      #|  ring_mul((r : Ring[A]), (a : A), (b : A))
+      #|  ring_mul((r : Ring[A]), (a : A), (b : A))
+      #|  ring_mul((r : Ring[A]), (a : A), (b : A))
+      #|  ring_mul((r : Ring[A]), (a : A), (b : A))
+      #|  ring_mul((r : Ring[A]), (a : A), (b : A))
+      #|  ring_mul((r : Ring[A]), (a : A), (b : A))
+      #|  ring_mul((r : Ring[A]), (a : A), (b : A))
+      #|  ring_mul((r : Ring[A]), (a : A), (b : A))
+      #|  ring_mul((r : Ring[A]), (a : A), (b : A))
+      #|  ring_mul((r : Ring[A]), (a : A), (b : A))
+      #|  ring_mul((r : Ring[A]), (a : A), (b : A))
+      #|  ring_mul((r : Ring[A]), (a : A), (b : A))
+      #|  ring_mul((r : Ring[A]), (a : A), (b : A))
+      #|  (a : A)
+      #|  (b : A)
+      #|  (c : A)
       #|  \\i. if i = SUC n_c then p else (p_c:num->A) i
-      #|  SUC n_c
+      #|  SUC((n_c : Num))
       #|  \\i. if i = SUC n_c then p else (p_c:num->A) i
-      #|  SUC n_c
+      #|  SUC((n_c : Num))
       #|  \\i. if i = SUC n_c then p else (p_c:num->A) i
-      #|  SUC n_c
+      #|  SUC((n_c : Num))
       #|  \\i. if i = SUC n_c then p else (p_c:num->A) i
-      #|  SUC n_c
+      #|  SUC((n_c : Num))
       #|  \\i. if i = SUC n_c then p else (p_c:num->A) i
-      #|  SUC n_c
+      #|  SUC((n_c : Num))
       #|  \\i. if i = SUC n_c then p else (p_c:num->A) i
-      #|  SUC n_c
+      #|  SUC((n_c : Num))
       #|  \\i. if i = SUC n_c then p else (p_c:num->A) i
-      #|  SUC n_c
+      #|  SUC((n_c : Num))
       #|  \\i. if i <= n_a then (p_a:num->A) i else p_b(i - n_a)
-      #|  n_a + n_b:num
-      #|  d:A
-      #|  r:A ring
-      #|  ring_unit r (d:A)
-      #|  d:A = ring_0 r
-      #|  d:A
-      #|  a:A = ring_0 r /\\ b = ring_0 r
+      #|  (n_a : Num) + (n_b : Num)
+      #|  (d : A)
+      #|  (r : Ring[A])
+      #|  ring_unit((r : Ring[A]), (d : A))
+      #|  (d : A) == ring_0((r : Ring[A]))
+      #|  (d : A)
+      #|  (a : A) == ring_0((r : Ring[A])) && (b : A) == ring_0(r)
       #|  forall r a b:A.\n        UFD r\n        ==> (ring_coprime r (a,b) <=>\n             a IN ring_carrier r /\\ b IN ring_carrier r /\\\n             ~(a = ring_0 r /\\ b = ring_0 r) /\\\n             forall p. ring_prime r p\n                 ==> ~(ring_divides r p a /\\ ring_divides r p b))
-      #|  1 <= SUC n
-      #|  1 <= SUC n
-      #|  a:A
+      #|  1 <= SUC((n : Num))
+      #|  1 <= SUC((n : Num))
+      #|  (a : A)
       #|  forall(p:num->A) n.\n        (forall i. 1 <= i /\\ i <= n ==> ring_prime r (p i))\n        ==> P(ring_product r (1..n) p)
-      #|  ring_unit r (a:A)
-      #|  a:A = ring_0 r
+      #|  ring_unit((r : Ring[A]), (a : A))
+      #|  (a : A) == ring_0((r : Ring[A]))
       #|  forall r P:A->bool.\n        UFD r /\\\n        P(ring_0 r) /\\\n        (forall u. ring_unit r u ==> P u) /\\\n        (forall p a. ring_prime r p /\\ a IN ring_carrier r /\\ P a\n               ==> P(ring_mul r p a))\n        ==> forall a. a IN ring_carrier r ==> P a
-      #|  d':A
-      #|  ring_divides r (p:A) e
-      #|  ring_divides r (p:A) e
-      #|  (e:A) IN ring_carrier r
-      #|  e:A
-      #|  d:A
-      #|  b:A
-      #|  ring_mul r p d:A
-      #|  d:A
-      #|  n:A
-      #|  n:A
-      #|  b:A
-      #|  p:A
-      #|  r:A ring
-      #|  b:A
-      #|  m:A
-      #|  p:A
+      #|  (d' : A)
+      #|  ring_divides((r : Ring[A]), (p : A), (e : A))
+      #|  ring_divides((r : Ring[A]), (p : A), (e : A))
+      #|  IN((e : A), ring_carrier((r : Ring[A])))
+      #|  (e : A)
+      #|  (d : A)
+      #|  (b : A)
+      #|  ring_mul((r : Ring[A]), (p : A), (d : A))
+      #|  (d : A)
+      #|  (n : A)
+      #|  (n : A)
+      #|  (b : A)
+      #|  (p : A)
+      #|  (r : Ring[A])
+      #|  (b : A)
+      #|  (m : A)
+      #|  (p : A)
       #|  forall r a b:A.\n        UFD r /\\ a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> ?d. d IN ring_carrier r /\\\n                ring_divides r d a /\\ ring_divides r d b /\\\n                forall d'. ring_divides r d' a /\\ ring_divides r d' b\n                     ==> ring_divides r d' d
-      #|  s SUBSET t ==> ~(s PSUBSET t) ==> s = t
-      #|  j:A->bool
-      #|  ideal_generated r {p:A}
-      #|  p:A
-      #|  (p:A) IN ring_carrier r
-      #|  p:A
-      #|  j:A->bool
-      #|  j = {ring_0 r:A}
-      #|  j:A->bool
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !PSUBSET(s, t) \226\134\146 s == t
+      #|  (j : (A) -> Bool)
+      #|  ideal_generated((r : Ring[A]), {(p : A)})
+      #|  (p : A)
+      #|  IN((p : A), ring_carrier((r : Ring[A])))
+      #|  (p : A)
+      #|  (j : (A) -> Bool)
+      #|  (j : (A) -> Bool) == {ring_0((r : Ring[A]))}
+      #|  (j : (A) -> Bool)
       #|  forall r:A ring.\n        PID r <=>\n        UFD r /\\\n        forall j. prime_ideal r j /\\ ~(j = {ring_0 r}) ==> maximal_ideal r j
-      #|  ring_1 r:A
-      #|  ring_localequiv r s (x:A,b)
-      #|  (b:A) IN ring_carrier r /\\ ring_1 r IN s
+      #|  ring_1((r : Ring[A]))
+      #|  ring_localequiv((r : Ring[A]), (s : (A) -> Bool), ((x : A), (b : A)))
+      #|  IN((b : A), ring_carrier((r : Ring[A]))) && IN(ring_1(r), (s : (A) -> Bool))
       #|  forall r s p a b:A.\n     ring_multsys r s /\\ ring_divides r p a /\\ b IN s\n     ==> ring_divides (ring_localization r s)\n           (ring_fractionate r s p) (ring_localequiv r s (a,b))
-      #|  r:A ring
+      #|  (r : Ring[A])
       #|  ring_divides (ring_localization r (s:A->bool))\n      (ring_fractionate r s p) (ring_fractionate r s s3)
       #|  ring_divides r (p:A) x1 \\/ ring_divides r p x2
       #|  ring_divides r (p:A) (ring_mul r x1 x2) \\/ ring_divides r p s3
       #|  ring_divides r (p:A) (ring_mul r (ring_mul r x1 x2) s3)
       #|  ring_sub r (ring_mul r (ring_mul r (x1:A) x2) s3)\n       (ring_mul r (ring_mul r p x3) (ring_mul r s1 s2))
-      #|  u:A
-      #|  r:A ring
+      #|  (u : A)
+      #|  (r : Ring[A])
       #|  ring_mul r (ring_mul r (x1:A) x2) s3 =\n     ring_mul r (ring_mul r p x3) (ring_mul r s1 s2)
-      #|  (u:A) IN ring_carrier r /\\ ~(u = ring_0 (r:A ring))
-      #|  u:A
+      #|  IN((u : A), ring_carrier((r : Ring[A]))) && !(u == ring_0(r))
+      #|  (u : A)
       #|  ring_localequiv r (s:A->bool)\n      (ring_mul r x1 x2, ring_mul r s1 s2) (ring_mul r p x3, s3)
-      #|  ring_1 r:A
+      #|  ring_1((r : Ring[A]))
       #|  ring_mul (ring_localization r (s:A->bool)) (ring_fractionate r s p) dd =\n     ring_localequiv r s (ring_mul r p x3, s3)
       #|  dd IN ring_carrier\n     (ring_localization r (s:A->bool))
       #|  ?x3:A. ?s3:A. x3 IN ring_carrier r /\\ s3 IN s /\\\n       s3 IN ring_carrier r /\\\n       dd = ring_localequiv r (s:A->bool) (x3,s3)
       #|  ?dd:(A#A->bool).\n       dd IN ring_carrier (ring_localization r (s:A->bool)) /\\\n       ring_localequiv r s (ring_mul r x1 x2, ring_mul r s1 s2) =\n       ring_mul (ring_localization r s) (ring_fractionate r s p) dd
       #|  (s1:A) IN ring_carrier r /\\ s2 IN ring_carrier r /\\\n     ring_mul r s1 s2 IN s
-      #|  s2:A
-      #|  x2:A
-      #|  s1:A
-      #|  x1:A
-      #|  (p:A) IN ring_carrier r /\\ ring_1 r IN (s:A->bool)
-      #|  ring_fractionate r (s:A->bool) p
-      #|  ring_fractionate r (s:A->bool) p IN j
-      #|  p:A
-      #|  ?(p:A). ring_prime r p /\\ p IN jj
-      #|  a0:A
-      #|  a0 = ring_0 (r:A ring)
-      #|  b0:A
-      #|  a0:A
+      #|  (s2 : A)
+      #|  (x2 : A)
+      #|  (s1 : A)
+      #|  (x1 : A)
+      #|  IN((p : A), ring_carrier((r : Ring[A]))) && IN(ring_1(r), (s : (A) -> Bool))
+      #|  ring_fractionate((r : Ring[A]), (s : (A) -> Bool), (p : A))
+      #|  IN(ring_fractionate((r : Ring[A]), (s : (A) -> Bool), (p : A)), (j : (((A, A)) -> Bool) -> Bool))
+      #|  (p : A)
+      #|  \226\136\131 p : A, ring_prime((r : Ring[A]), p) && IN(p, (jj : (A) -> Bool))
+      #|  (a0 : A)
+      #|  (a0 : A) == ring_0((r : Ring[A]))
+      #|  (b0 : A)
+      #|  (a0 : A)
       #|  y IN ring_carrier (ring_localization r (s:A->bool))
-      #|  y:(A#A->bool)
+      #|  (y : ((A, A)) -> Bool)
       #|  (j:(A#A->bool)->bool) =\n      {ring_0 (ring_localization r (s:A->bool))}
-      #|  ~(jj = {ring_0 (r:A ring)})
-      #|  j:(A#A->bool)->bool
-      #|  ring_fractionate r (s:A->bool)
-      #|  ring_localization r (s:A->bool)
-      #|  r:A ring
-      #|  prime_ideal (r:A ring) jj
+      #|  !((jj : (A) -> Bool) == {ring_0((r : Ring[A]))})
+      #|  (j : (((A, A)) -> Bool) -> Bool)
+      #|  ring_fractionate((r : Ring[A]), (s : (A) -> Bool))
+      #|  ring_localization((r : Ring[A]), (s : (A) -> Bool))
+      #|  (r : Ring[A])
+      #|  prime_ideal((r : Ring[A]), (jj : (A) -> Bool))
       #|  jj = {x:A | x IN ring_carrier r /\\\n    ring_fractionate r s x IN j}
-      #|  j:((A#A->bool)->bool)
-      #|  integral_domain (r:A ring)
+      #|  (j : (((A, A)) -> Bool) -> Bool)
+      #|  integral_domain((r : Ring[A]))
       #|  forall r s:A->bool.\n     UFD r /\\ ring_multsys r s /\\ ~(ring_0 r IN s)\n     ==> UFD (ring_localization r s)
-      #|  j INTER s = {} ==> y IN j /\\ x IN s ==> ~(x = y)
-      #|  (u:A) IN ring_carrier r
-      #|  u:A
+      #|  INTER((j : (_) -> Bool), (s : (_) -> Bool)) == {} \226\134\146 IN((y : _), j) && IN((x : _), s) \226\134\146 !(x == y)
+      #|  IN((u : A), ring_carrier((r : Ring[A])))
+      #|  (u : A)
       #|  (a:A) IN ring_carrier r /\\ b IN ring_carrier r /\\ ring_1 r IN s
-      #|  b:A
-      #|  a:A
+      #|  (b : A)
+      #|  (a : A)
       #|  forall r s (j:A->bool).\n     ring_multsys r s /\\ ring_ideal r j /\\ j INTER s = {}\n     ==> proper_ideal (ring_localization r s)\n          {ring_localequiv r s (a,b) | a,b | a IN j /\\ b IN s}
-      #|  (x IN p ==> a IN p) /\\ y IN p ==> x = y ==> a IN p
-      #|  (u:A) IN ring_carrier r
-      #|  u:A
-      #|  (a':A) IN ring_carrier r
-      #|  b':A
-      #|  a':A
+      #|  (IN((x : _), (p : (_) -> Bool)) \226\134\146 IN((a : _), p)) && IN((y : _), p) \226\134\146 x == y \226\134\146 IN(a, p)
+      #|  IN((u : A), ring_carrier((r : Ring[A])))
+      #|  (u : A)
+      #|  IN((a' : A), ring_carrier((r : Ring[A])))
+      #|  (b' : A)
+      #|  (a' : A)
       #|  forall r (s:A->bool) p a b.\n       ring_multsys r s /\\ prime_ideal r p /\\ p INTER s = {} /\\\n       a IN ring_carrier r /\\ b IN s\n       ==> (ring_localequiv r s (a,b) IN\n            {ring_localequiv r s (a',b') | a',b' | a' IN p /\\ b' IN s}\n            <=> a IN p)
       #|  forall r s (p:A->bool) x.\n     ring_multsys r s /\\ prime_ideal r p /\\ p INTER s = {} /\\\n     x IN ring_carrier r\n     ==> (ring_fractionate r s x IN\n          {ring_localequiv r s (a,b) | a,b | a IN p /\\ b IN s}\n          <=> x IN p)
-      #|  ring_mul r b1 (b2:A) IN s
-      #|  b2:A
-      #|  a2:A
-      #|  b1:A
-      #|  a1:A
+      #|  IN(ring_mul((r : Ring[A]), (b1 : A), (b2 : A)), (s : (A) -> Bool))
+      #|  (b2 : A)
+      #|  (a2 : A)
+      #|  (b1 : A)
+      #|  (a1 : A)
       #|  forall r s (p:A->bool).\n     ring_multsys r s /\\ prime_ideal r p /\\ p INTER s = {}\n     ==> prime_ideal (ring_localization r s)\n          {ring_localequiv r s (a,b) | a,b | a IN p /\\ b IN s}
-      #|  ring_localization r (s:A->bool)
-      #|  ring_multsys r (s:A->bool)
-      #|  ring_1 r:A
+      #|  ring_localization((r : Ring[A]), (s : (A) -> Bool))
+      #|  ring_multsys((r : Ring[A]), (s : (A) -> Bool))
+      #|  ring_1((r : Ring[A]))
       #|  ring_localequiv r s\n         (ring_mul r (ring_1 r) a, ring_mul r b (ring_1 r)) (a:A, b)
       #|  ring_localequiv r s (a:A,b) =\n     ring_mul (ring_localization r (s:A->bool))\n              (ring_localequiv r s (ring_1 r, b))\n              (ring_fractionate r s a)
-      #|  s:A->bool
-      #|  r:A ring
-      #|  ring_1 r IN (s:A->bool)
-      #|  (b:A) IN ring_carrier r
-      #|  z:(A#A->bool)
-      #|  ring_localization r (s:A->bool)
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
+      #|  IN(ring_1((r : Ring[A])), (s : (A) -> Bool))
+      #|  IN((b : A), ring_carrier((r : Ring[A])))
+      #|  (z : ((A, A)) -> Bool)
+      #|  ring_localization((r : Ring[A]), (s : (A) -> Bool))
       #|  ring_fractionate r s (a:A) =\n      ring_mul (ring_localization r (s:A->bool)) z (ring_fractionate r s b)
-      #|  b:A
-      #|  a:A
-      #|  b:A
-      #|  a:A
-      #|  ring_multsys r (s:A->bool)
-      #|  (z:(A#A->bool)) IN ring_carrier(ring_localization r s)
-      #|  z:(A#A->bool)
-      #|  ring_localization r (s:A->bool)
-      #|  c:A
-      #|  s:A->bool
-      #|  r:A ring
-      #|  c:A
-      #|  q:(A#A->bool)->bool
-      #|  ring_fractionate r (s:A->bool)
-      #|  ring_localization r (s:A->bool)
-      #|  r:A ring
-      #|  a /\\ b /\\ (a ==> c) ==> a /\\ b /\\ c
-      #|  ring_ideal (ring_localization r (s:A->bool)) q
+      #|  (b : A)
+      #|  (a : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  ring_multsys((r : Ring[A]), (s : (A) -> Bool))
+      #|  IN((z : ((A, A)) -> Bool), ring_carrier(ring_localization((r : Ring[A]), (s : (A) -> Bool))))
+      #|  (z : ((A, A)) -> Bool)
+      #|  ring_localization((r : Ring[A]), (s : (A) -> Bool))
+      #|  (c : A)
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
+      #|  (c : A)
+      #|  (q : (((A, A)) -> Bool) -> Bool)
+      #|  ring_fractionate((r : Ring[A]), (s : (A) -> Bool))
+      #|  ring_localization((r : Ring[A]), (s : (A) -> Bool))
+      #|  (r : Ring[A])
+      #|  (a : Bool) && (b : Bool) && (a \226\134\146 (c : Bool)) \226\134\146 a && b && c
+      #|  ring_ideal(ring_localization((r : Ring[A]), (s : (A) -> Bool)), (q : (((A, A)) -> Bool) -> Bool))
       #|  {a:A | a IN ring_carrier r /\\ ring_fractionate r s a IN q}
       #|  forall r (s:A->bool) q.\n        ring_multsys r s /\\\n        prime_ideal (ring_localization r s) q\n        ==> ?p. prime_ideal r p /\\ p INTER s = {} /\\\n                q = {ring_localequiv r s (a,b) | a,b | a IN p /\\ b IN s}
-      #|  (x:A) IN ring_carrier r
-      #|  x:A
-      #|  p:A->bool
-      #|  s:A->bool
-      #|  r:A ring
-      #|  x:A
-      #|  ring_ideal (r:A ring) p
-      #|  p:A->bool
-      #|  Q:(A#A->bool)->bool
-      #|  s:A->bool
-      #|  r:A ring
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
+      #|  (x : A)
+      #|  (p : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
+      #|  (x : A)
+      #|  ring_ideal((r : Ring[A]), (p : (A) -> Bool))
+      #|  (p : (A) -> Bool)
+      #|  (Q : (((A, A)) -> Bool) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
       #|  forall r:A ring s Q.\n      ring_multsys r s\n      ==> (prime_ideal (ring_localization r s) Q <=>\n           ?p. prime_ideal r p /\\ p INTER s = {} /\\\n               {x | x IN ring_carrier r /\\ ring_fractionate r s x IN Q} = p /\\\n               {ring_localequiv r s (a,b) | a,b | a IN p /\\ b IN s} = Q)
       #|  euclidean_ring r <=>\n        ?n:A->num.\n            forall a b. a IN ring_carrier r /\\ b IN ring_carrier r /\\ ~(b = ring_0 r)\n                  ==> ?q t. q IN ring_carrier r /\\ t IN ring_carrier r /\\\n                            ring_add r (ring_mul r b q) t = a /\\\n                            (t = ring_0 r \\/ n(t) < n(b))
-      #|  p:A
-      #|  b:A
-      #|  ring_sub r a (ring_mul r b q):A
-      #|  ring_sub r a (ring_mul r b q):A
-      #|  q:A
-      #|  p ==> ~q <=> q ==> ~p
+      #|  (p : A)
+      #|  (b : A)
+      #|  ring_sub((r : Ring[A]), (a : A), ring_mul(r, (b : A), (q : A)))
+      #|  ring_sub((r : Ring[A]), (a : A), ring_mul(r, (b : A), (q : A)))
+      #|  (q : A)
+      #|  ((p : Bool) \226\134\146 !(q : Bool)) == (q \226\134\146 !p)
       #|  \\m. m IN IMAGE (n:A->num)\n              {ring_sub r a (ring_mul r b q) | q | q IN ring_carrier r}
       #|  (forall x. ~(P x /\\ a = f x)) <=> forall x. P x ==> ~(f x = a)
-      #|  ring_0 r:A
-      #|  ring_divides r b (a:A)
-      #|  t:num < b ==> b <= a /\\ u = t ==> u < a
-      #|  t:A = ring_0 r
-      #|  t:A
-      #|  q:A
-      #|  b:A
-      #|  a:A
-      #|  b:A
-      #|  a:A
-      #|  n:A->num
+      #|  ring_0((r : Ring[A]))
+      #|  ring_divides((r : Ring[A]), (b : A), (a : A))
+      #|  (t : Num) < (b : Num) \226\134\146 b <= (a : Num) && (u : Num) == t \226\134\146 u < a
+      #|  (t : A) == ring_0((r : Ring[A]))
+      #|  (t : A)
+      #|  (q : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (n : (A) -> Num)
       #|  forall r:A ring.\n        euclidean_ring r <=>\n        ?n:A->num.\n            forall a b. a IN ring_carrier r /\\ b IN ring_carrier r /\\\n                  ~(b = ring_0 r) /\\ n(b) <= n(a)\n                  ==> ?q. q IN ring_carrier r /\\\n                          (ring_mul r b q = a \\/\n                           n(ring_sub r a (ring_mul r b q)) < n a)
-      #|  ring_1 r:A
-      #|  t:A
-      #|  p \\/ q ==> p \\/ ~p /\\ q
-      #|  t:A
-      #|  ring_mul r ((dd:A->A) b) q
-      #|  t:A
-      #|  q:A
-      #|  ring_mul r b (dd b):A
-      #|  a:A
+      #|  ring_1((r : Ring[A]))
+      #|  (t : A)
+      #|  (p : Bool) || (q : Bool) \226\134\146 p || !p && q
+      #|  (t : A)
+      #|  ring_mul((r : Ring[A]), (dd : (A) -> A)((b : A)), (q : A))
+      #|  (t : A)
+      #|  (q : A)
+      #|  ring_mul((r : Ring[A]), (b : A), (dd : (A) -> A)(b))
+      #|  (a : A)
       #|  forall a b. a IN ring_carrier r /\\ b IN ring_carrier r /\\ ~(b = ring_0 r)\n          ==> (?q t.\n                   q IN ring_carrier r /\\\n                   t IN ring_carrier r /\\\n                   ring_add r (ring_mul r b q) t = a /\\\n                   (t = ring_0 r \\/ (n:A->num) t < n b))
-      #|  b:A
-      #|  a:A
-      #|  a:A = ring_0 r
-      #|  c:A
-      #|  b:A
-      #|  a:A
-      #|  (n:A->num) o (\\x. ring_mul r x (dd x))
-      #|  dd:A->A
-      #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
-      #|  p ==> ~q <=> q ==> ~p
-      #|  ring_1 r:A
-      #|  p <=> p /\\ T
-      #|  a:A
+      #|  (b : A)
+      #|  (a : A)
+      #|  (a : A) == ring_0((r : Ring[A]))
+      #|  (c : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  o((n : (A) -> Num), (x : A) => ring_mul((r : Ring[A]), x, (dd : (A) -> A)(x)))
+      #|  (dd : (A) -> A)
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
+      #|  ((p : Bool) \226\134\146 !(q : Bool)) == (q \226\134\146 !p)
+      #|  ring_1((r : Ring[A]))
+      #|  (p : Bool) == (p && true)
+      #|  (a : A)
       #|  forall a. a IN ring_carrier r /\\ ~(a = ring_0 r)\n        ==> ?m. m IN { (n:A->num) (ring_mul r a b) | b |\n                       b IN ring_carrier r /\\ ~(ring_mul r a b = ring_0 r)}
-      #|  r:A ring
-      #|  n:A->num
+      #|  (r : Ring[A])
+      #|  (n : (A) -> Num)
       #|  forall r:A ring.\n        euclidean_ring r <=>\n         ?n:A->num.\n           (forall a b. ring_divides r a b /\\ (b = ring_0 r ==> a = ring_0 r)\n                  ==> n(a) <= n(b)) /\\\n           (forall a b. a IN ring_carrier r /\\ b IN ring_carrier r /\\ ~(b = ring_0 r)\n                   ==> ?q t. q IN ring_carrier r /\\ t IN ring_carrier r /\\\n                            ring_add r (ring_mul r b q) t = a /\\\n                            (t = ring_0 r \\/ n(t) < n(b)))
       #|  t = ring_add r (ring_neg r (ring_mul r b q))\n                               (ring_add r (ring_mul r b q) t):A
-      #|  p ==> ~p ==> q
-      #|  t:A
-      #|  t:A = ring_0 r
-      #|  t:A
-      #|  q:A
-      #|  b:A
-      #|  a:A
-      #|  (a:A) IN ring_carrier r
-      #|  a:A
-      #|  (b:A) IN ring_carrier r
-      #|  b:A
-      #|  p ==> ~q <=> q ==> ~p
-      #|  j:A->bool
-      #|  r:A ring
-      #|  p /\\ (q ==> r) ==> (p <=> q) ==> r
-      #|  \\m. m IN IMAGE (n:A->num) (j DELETE ring_0 r)
-      #|  j = {ring_0 r:A}
-      #|  n:A->num
+      #|  (p : Bool) \226\134\146 !p \226\134\146 (q : Bool)
+      #|  (t : A)
+      #|  (t : A) == ring_0((r : Ring[A]))
+      #|  (t : A)
+      #|  (q : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  (a : A)
+      #|  IN((b : A), ring_carrier((r : Ring[A])))
+      #|  (b : A)
+      #|  ((p : Bool) \226\134\146 !(q : Bool)) == (q \226\134\146 !p)
+      #|  (j : (A) -> Bool)
+      #|  (r : Ring[A])
+      #|  (p : Bool) && ((q : Bool) \226\134\146 (r : Bool)) \226\134\146 p == q \226\134\146 r
+      #|  (m : Num) => IN(m, IMAGE((n : (A) -> Num), DELETE((j : (A) -> Bool), ring_0((r : Ring[A])))))
+      #|  (j : (A) -> Bool) == {ring_0((r : Ring[A]))}
+      #|  (n : (A) -> Num)
       #|  forall r j:A->bool. euclidean_ring r /\\ ring_ideal r j ==> principal_ideal r j
       #|  forall r:A ring. integral_domain r /\\ euclidean_ring r ==> PID r
-      #|  u:A = ring_0 r
-      #|  u:A
-      #|  q:A
-      #|  a:A
-      #|  b:A
-      #|  b:A
-      #|  p ==> ~q <=> q ==> ~p
-      #|  a:A
+      #|  (u : A) == ring_0((r : Ring[A]))
+      #|  (u : A)
+      #|  (q : A)
+      #|  (a : A)
+      #|  (b : A)
+      #|  (b : A)
+      #|  ((p : Bool) \226\134\146 !(q : Bool)) == (q \226\134\146 !p)
+      #|  (a : A)
       #|  \\m. m IN IMAGE (n:A->num)\n                   {x | x IN ring_carrier r /\\\n                        ~(x = ring_0 r) /\\ ~ring_unit r x}
-      #|  n:A->num
+      #|  (n : (A) -> Num)
       #|  forall r:A ring.\n        euclidean_ring r /\\ ~trivial_ring r /\\ ~field r\n        ==> ?a. a IN ring_carrier r /\\ ~(a = ring_0 r) /\\ ~(ring_unit r a) /\\\n                forall b. b IN ring_carrier r\n                    ==> ?u. (ring_unit r u \\/ u = ring_0 r) /\\\n                            ring_divides r a (ring_sub r b u)
-      #|  t':A
-      #|  t:A
-      #|  t':A
-      #|  p ==> ~q <=> q ==> ~p
+      #|  (t' : A)
+      #|  (t : A)
+      #|  (t' : A)
+      #|  ((p : Bool) \226\134\146 !(q : Bool)) == (q \226\134\146 !p)
       #|  v = minimal p.\n          p IN IMAGE n {x | x IN ring_carrier r /\\ (f:A->B) x = f t}
       #|  \\p:num. p IN IMAGE n {x | x IN ring_carrier r /\\ (f:A->B) x = f t}
-      #|  t:A
-      #|  q:A
-      #|  b':A
-      #|  a:A
-      #|  b:A
-      #|  b':A
-      #|  p ==> ~q <=> q ==> ~p
-      #|  c:num
+      #|  (t : A)
+      #|  (q : A)
+      #|  (b' : A)
+      #|  (a : A)
+      #|  (b : A)
+      #|  (b' : A)
+      #|  ((p : Bool) \226\134\146 !(q : Bool)) == (q \226\134\146 !p)
+      #|  (c : Num)
       #|  minimal p. p IN IMAGE n {x | x IN ring_carrier r /\\ (f:A->B) x = f b}
       #|  \\p:num. p IN IMAGE n {x | x IN ring_carrier r /\\ (f:A->B) x = f b}
-      #|  b:A
-      #|  a:A
+      #|  (b : A)
+      #|  (a : A)
       #|  \\y. minimal p.\n    p IN IMAGE n {x | x IN ring_carrier r /\\ (f:A->B) x = y}
-      #|  n:A->num
+      #|  (n : (A) -> Num)
       #|  forall r r' (f:A->B).\n        ring_epimorphism(r,r') f /\\ euclidean_ring r ==> euclidean_ring r'
       #|  forall r j:A->bool.\n        euclidean_ring r /\\ ring_ideal r j\n        ==> euclidean_ring (quotient_ring r j)
       #|  forall(r:A ring) (r':B ring).\n        r isomorphic_ring r' ==> (euclidean_ring r <=> euclidean_ring r')
-      #|  ideal_generated r k:A->bool
-      #|  (s:num->A->bool) (SUC m) SUBSET s(m)
-      #|  m:num
+      #|  ideal_generated((r : Ring[A]), (k : (A) -> Bool))
+      #|  SUBSET((s : (Num, A) -> Bool)(SUC((m : Num))), s(m))
+      #|  (m : Num)
       #|  (forall m n. m <= n ==> (s:num->A->bool) m SUBSET s n)\n        ==> forall m n. s m SUBSET s n \\/ s n SUBSET s m
-      #|  k:A->bool
-      #|  IMAGE (s:num->A->bool) (:num)
-      #|  k:A->bool
+      #|  (k : (A) -> Bool)
+      #|  IMAGE((s : (Num, A) -> Bool), UNIV)
+      #|  (k : (A) -> Bool)
       #|  (forall m n. m <= n ==> (s:num->A->bool) m SUBSET s n)\n        ==> forall m n. s m SUBSET s n \\/ s n SUBSET s m
-      #|  UNIONS (IMAGE (s:num->A->bool) (:num))
-      #|  s:num->A->bool
-      #|  a:A
-      #|  s SUBSET a INSERT s
-      #|  (a:A) INSERT k
-      #|  a:A
-      #|  ~(s SUBSET t) <=> ?x. x IN s /\\ ~(x IN t)
-      #|  (p /\\ q) /\\ (~r ==> s) ==> ~(p /\\ q /\\ r) ==> s
-      #|  k:A->bool
-      #|  k:A->bool
-      #|  n:num
-      #|  \\n. ideal_generated r ((s:num->A->bool) n)
+      #|  UNIONS(IMAGE((s : (Num, A) -> Bool), UNIV))
+      #|  (s : (Num, A) -> Bool)
+      #|  (a : A)
+      #|  SUBSET((s : (_) -> Bool), INSERT((a : _), s))
+      #|  INSERT((a : A), (k : (A) -> Bool))
+      #|  (a : A)
+      #|  !SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) == (\226\136\131 x : _, IN(x, s) && !IN(x, t))
+      #|  ((p : Bool) && (q : Bool)) && (!(r : Bool) \226\134\146 (s : Bool)) \226\134\146 !(p && q && r) \226\134\146 s
+      #|  (k : (A) -> Bool)
+      #|  (k : (A) -> Bool)
+      #|  (n : Num)
+      #|  (n : Num) => ideal_generated((r : Ring[A]), (s : (Num, A) -> Bool)(n))
       #|  ?s:num->A->bool.\n        (forall n. FINITE(s n) /\\ s n SUBSET j) /\\\n        (forall n. ideal_generated r (s n) PSUBSET ideal_generated r (s(SUC n)))
-      #|  j:A->bool
-      #|  (~p ==> ~q) /\\ (p ==> q) ==> (p <=> q)
+      #|  (j : (A) -> Bool)
+      #|  (!(p : Bool) \226\134\146 !(q : Bool)) && (p \226\134\146 q) \226\134\146 p == q
       #|  forall r:A ring.\n        noetherian_ring r <=>\n        WF(\\j j'. ring_ideal r j /\\ ring_ideal r j' /\\ j' PSUBSET j)
       #|  forall r:A ring.\n        noetherian_ring r <=>\n        ~(?j. (forall n. ring_ideal r (j n)) /\\\n              (forall n. j n PSUBSET j(n + 1)))
       #|  forall r:A ring.\n        noetherian_ring r <=>\n        forall u. ~(u = {}) /\\ (forall j. j IN u ==> ring_ideal r j)\n            ==> ?k. k IN u /\\ forall j. j IN u ==> ~(k PSUBSET j)
-      #|  IMAGE (f:A->B) s
-      #|  s:A->bool
-      #|  j:A->bool
-      #|  j:A->bool
-      #|  k:B->bool
+      #|  IMAGE((f : (A) -> B), (s : (A) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  (j : (A) -> Bool)
+      #|  (j : (A) -> Bool)
+      #|  (k : (B) -> Bool)
       #|  forall r r' (f:A->B).\n        ring_epimorphism(r,r') f /\\ noetherian_ring r\n        ==> noetherian_ring r'
       #|  forall r j:A->bool.\n        noetherian_ring r /\\ ring_ideal r j\n        ==> noetherian_ring (quotient_ring r j)
       #|  forall(r:A ring) (r':B ring).\n         r isomorphic_ring r' ==> (noetherian_ring r <=> noetherian_ring r')
       #|  (ring_0 r1 INSERT s1:A->bool) CROSS\n              (ring_0 r2 INSERT s2:B->bool)
-      #|  s2:B->bool
-      #|  s1:A->bool
-      #|  k1:A->bool
-      #|  k2:B->bool
-      #|  k2:B->bool
-      #|  k1:A->bool
-      #|  k:A#B->bool
+      #|  (s2 : (B) -> Bool)
+      #|  (s1 : (A) -> Bool)
+      #|  (k1 : (A) -> Bool)
+      #|  (k2 : (B) -> Bool)
+      #|  (k2 : (B) -> Bool)
+      #|  (k1 : (A) -> Bool)
+      #|  (k : ((A, B)) -> Bool)
       #|  forall(r1:A ring) (r2:B ring).\n        noetherian_ring(prod_ring r1 r2) <=>\n        noetherian_ring r1 /\\ noetherian_ring r2
       #|  cartesian_product k\n                (\\i. ring_0 ((r:K->A ring) i) INSERT s i)
-      #|  s:K->(A->bool)
-      #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
+      #|  (s : (K, A) -> Bool)
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
       #|  forall i. i IN k ==> finitely_generated_ideal ((r:K->A ring) i) (j i)
-      #|  j:K->A->bool
-      #|  d:(K->A)->bool
-      #|  a:K
-      #|  (a:K) INSERT k'
+      #|  (j : (K, A) -> Bool)
+      #|  (d : ((K) -> A) -> Bool)
+      #|  (a : K)
+      #|  INSERT((a : K), (k' : (K) -> Bool))
       #|  RESTRICTION k\n                    (\\i. if i IN a INSERT k' then ring_1(r i)\n                         else ring_0((r:K->A ring) i))
-      #|  a:K
+      #|  (a : K)
       #|  ~({i | i IN k /\\ ~trivial_ring ((r:K->A ring) i)} SUBSET k')
       #|  ideal_generated r s = s'\n          ==> s SUBSET ideal_generated r s /\\ (forall x. x IN s' ==> P x)\n              ==> forall x. x IN s ==> P x
-      #|  FINITE(k':K->bool)
+      #|  FINITE((k' : (K) -> Bool))
       #|  k' = UNIONS {{i | i IN k /\\ ~(y i = ring_0((r:K->A ring) i))} | y |\n                       y IN s}
-      #|  (i:K) IN k
-      #|  i:K
+      #|  IN((i : K), (k : (K) -> Bool))
+      #|  (i : K)
       #|  forall x. x IN ideal_generated (product_ring k (r:K->A ring)) s\n            ==> {i | i IN k /\\ ~(x i = ring_0(r i))} SUBSET\n                UNIONS {{i | i IN k /\\ ~(y i = ring_0(r i))} | y |\n                        y IN s}
-      #|  s:(K->A)->bool
-      #|  (i:K) IN k
-      #|  i:K
-      #|  (forall x. x IN s ==> F) ==> FINITE s
+      #|  (s : ((K) -> A) -> Bool)
+      #|  IN((i : K), (k : (K) -> Bool))
+      #|  (i : K)
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 false) \226\134\146 FINITE(s)
       #|  {x | x IN ring_carrier(product_ring k (r:K->A ring)) /\\\n           FINITE {i | i IN k /\\ ~(x i = ring_0(r i))}}
-      #|  FINITE s <=> ~INFINITE s
+      #|  FINITE((s : (_) -> Bool)) == !INFINITE(s)
       #|  forall(r:K->A ring) k.\n        noetherian_ring(product_ring k r) <=>\n        FINITE {i | i IN k /\\ ~trivial_ring(r i)} /\\\n        forall i. i IN k ==> noetherian_ring (r i)
-      #|  k:A->bool
-      #|  finitely_generated_ideal r (j:A->bool)
-      #|  j:A->bool
-      #|  k:A->bool
-      #|  c:(A->bool)->bool
-      #|  k:A->bool
-      #|  c:(A->bool)->bool
+      #|  (k : (A) -> Bool)
+      #|  finitely_generated_ideal((r : Ring[A]), (j : (A) -> Bool))
+      #|  (j : (A) -> Bool)
+      #|  (k : (A) -> Bool)
+      #|  (c : ((A) -> Bool) -> Bool)
+      #|  (k : (A) -> Bool)
+      #|  (c : ((A) -> Bool) -> Bool)
       #|  \\j:A->bool. ring_ideal r j /\\ ~finitely_generated_ideal r j
-      #|  (forall x. P x ==> Q x) <=> ~(?x. P x /\\ ~Q x)
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 (Q : (_) -> Bool)(x)) == !(\226\136\131 x : _, P(x) && !Q(x))
       #|  forall r:A ring.\n        noetherian_ring r <=>\n        forall j. prime_ideal r j ==> finitely_generated_ideal r j
-      #|  p:A->bool
-      #|  j:(A#A->bool)->bool
-      #|  j:(A#A->bool)->bool
+      #|  (p : (A) -> Bool)
+      #|  (j : (((A, A)) -> Bool) -> Bool)
+      #|  (j : (((A, A)) -> Bool) -> Bool)
       #|  forall r (s:A->bool).\n        ring_multsys r s /\\ noetherian_ring r\n        ==> noetherian_ring (ring_localization r s)
       #|  :A
       #|  :B->bool
-      #|  g:(A->bool)->A
+      #|  (g : ((A) -> Bool) -> A)
       #|  ?g. forall j. principal_ideal r j\n              ==> g j IN ring_carrier r /\\ ideal_generated r {g j:A} = j
-      #|  y:A
-      #|  x:A
-      #|  \\x:A. ideal_generated r {x}
+      #|  (y : A)
+      #|  (x : A)
+      #|  (x : A) => ideal_generated((r : Ring[A]), {x})
       #|  forall r:A ring.\n    WF (\\j j'. principal_ideal r j /\\ principal_ideal r j' /\\ j' PSUBSET j) <=>\n    WF (\\x y. ring_divides r x y /\\ ~(ring_divides r y x))
-      #|  (p:A->num->A) y
-      #|  1..n(y:A)
-      #|  (p:A->num->A) x
-      #|  1..n(x:A)
-      #|  r:A ring
-      #|  y:A = ring_0 r
-      #|  x:A = ring_0 r
-      #|  (x:A) IN ring_carrier r /\\ y IN ring_carrier r
-      #|  y:A
-      #|  x:A
-      #|  \\x. (if x = ring_0 r then 1 else 0),(n:A->num) x
-      #|  p:A->num->A
-      #|  n:A->num
+      #|  (p : (A, Num) -> A)((y : A))
+      #|  op_dot_dot(1, (n : (A) -> Num)((y : A)))
+      #|  (p : (A, Num) -> A)((x : A))
+      #|  op_dot_dot(1, (n : (A) -> Num)((x : A)))
+      #|  (r : Ring[A])
+      #|  (y : A) == ring_0((r : Ring[A]))
+      #|  (x : A) == ring_0((r : Ring[A]))
+      #|  IN((x : A), ring_carrier((r : Ring[A]))) && IN((y : A), ring_carrier(r))
+      #|  (y : A)
+      #|  (x : A)
+      #|  (x : A) => (if x == ring_0((r : Ring[A])) { 1 } else { 0 }, (n : (A) -> Num)(x))
+      #|  (p : (A, Num) -> A)
+      #|  (n : (A) -> Num)
       #|  forall r:A ring.\n        noetherian_ring r \\/ UFD r\n        ==> WF (\\x y. ring_divides r x y /\\ ~(ring_divides r y x))
-      #|  x:A
-      #|  x:A
-      #|  x:A
-      #|  x:A
-      #|  x:A
-      #|  x:A
-      #|  x:A
-      #|  y:A
+      #|  (x : A)
+      #|  (x : A)
+      #|  (x : A)
+      #|  (x : A)
+      #|  (x : A)
+      #|  (x : A)
+      #|  (x : A)
+      #|  (y : A)
       #|  forall r:A ring.\n        noetherian_ring r \\/ UFD r\n        ==> WF (\\j j'. principal_ideal r j /\\ principal_ideal r j' /\\\n                       j' PSUBSET j)
       #|  forall r P:A->bool.\n        WF (\\x y. ring_divides r x y /\\ ~(ring_divides r y x)) /\\\n        (forall a. a IN ring_carrier r /\\\n             (forall d. ring_divides r d a /\\ ~(ring_divides r a d) ==> P d)\n             ==> P a)\n        ==> forall a. a IN ring_carrier r ==> P a
       #|  forall r P:A->bool.\n        (noetherian_ring r \\/ UFD r) /\\\n        (forall a. a IN ring_carrier r /\\\n             (forall d. ring_divides r d a /\\ ~(ring_divides r a d) ==> P d)\n             ==> P a)\n        ==> forall a. a IN ring_carrier r ==> P a
       #|  y IN ring_carrier r /\\ x = y ==> ring_associates r x y
-      #|  1 <= n + 1
-      #|  \\i. if i <= n1 then (p1:num->A) i else p2(i - n1)
-      #|  n1 + n2:num
-      #|  p2:num->A
-      #|  n2:num
-      #|  p1:num->A
-      #|  n1:num
-      #|  ~(a:A = ring_0 r)
-      #|  c:A
-      #|  b:A
-      #|  (\\i. a):num->A
+      #|  1 <= (n : Num) + 1
+      #|  (i : Num) => if i <= (n1 : Num) { (p1 : (Num) -> A)(i) } else { (p2 : (Num) -> A)(i - n1) }
+      #|  (n1 : Num) + (n2 : Num)
+      #|  (p2 : (Num) -> A)
+      #|  (n2 : Num)
+      #|  (p1 : (Num) -> A)
+      #|  (n1 : Num)
+      #|  !((a : A) == ring_0((r : Ring[A])))
+      #|  (c : A)
+      #|  (b : A)
+      #|  (i : Num) => (a : A)
       #|  1
-      #|  ring_irreducible r (a:A)
-      #|  (\\i. ring_0 r):num->A
+      #|  ring_irreducible((r : Ring[A]), (a : A))
+      #|  (i : Num) => ring_0((r : Ring[A]))
       #|  0
-      #|  ring_unit r (a:A)
-      #|  a:A
+      #|  ring_unit((r : Ring[A]), (a : A))
+      #|  (a : A)
       #|  forall r a:A.\n        integral_domain r /\\\n        WF (\\x y. ring_divides r x y /\\ ~ring_divides r y x) /\\\n        a IN ring_carrier r /\\ ~(a = ring_0 r)\n        ==> ?n p. (forall i. 1 <= i /\\ i <= n ==> ring_irreducible r (p i)) /\\\n                  ring_associates r (ring_product r (1..n) p) a
-      #|  b:A
-      #|  b:A
-      #|  b:A
-      #|  b:A
-      #|  b:A
-      #|  b:A
-      #|  b:A
-      #|  b:A
-      #|  c:A
-      #|  1 <= SUC n
-      #|  q(SUC n):A
-      #|  1 <= SUC n
-      #|  q(SUC n):A
-      #|  q:num->A
-      #|  n:num
-      #|  1 <= SUC n
-      #|  x:A
-      #|  r:A ring
+      #|  (b : A)
+      #|  (b : A)
+      #|  (b : A)
+      #|  (b : A)
+      #|  (b : A)
+      #|  (b : A)
+      #|  (b : A)
+      #|  (b : A)
+      #|  (c : A)
+      #|  1 <= SUC((n : Num))
+      #|  (q : (Num) -> A)(SUC((n : Num)))
+      #|  1 <= SUC((n : Num))
+      #|  (q : (Num) -> A)(SUC((n : Num)))
+      #|  (q : (Num) -> A)
+      #|  (n : Num)
+      #|  1 <= SUC((n : Num))
+      #|  (x : A)
+      #|  (r : Ring[A])
       #|  forall r x:A.\n        integral_domain r /\\\n        WF (\\x y. ring_divides r x y /\\ ~ring_divides r y x) /\\\n        x IN ring_carrier r /\\ ~(x = ring_0 r) /\\ ~(ring_unit r x)\n        ==> ?p. ring_irreducible r p /\\ ring_divides r p x
       #|  forall r a:A.\n        integral_domain r /\\\n        (noetherian_ring r \\/ UFD r) /\\\n        a IN ring_carrier r /\\ ~(a = ring_0 r)\n        ==> ?n p. (forall i. 1 <= i /\\ i <= n ==> ring_irreducible r (p i)) /\\\n                  ring_associates r (ring_product r (1..n) p) a
       #|  forall r x:A.\n        (integral_domain r /\\ noetherian_ring r \\/ UFD r) /\\\n        x IN ring_carrier r /\\ ~(x = ring_0 r) /\\ ~(ring_unit r x)\n        ==> ?p. ring_irreducible r p /\\ ring_divides r p x
       #|  forall r:A ring.\n        UFD r <=>\n        integral_domain r /\\\n        (forall p. ring_irreducible r p ==> ring_prime r p) /\\\n        WF (\\x y. ring_divides r x y /\\ ~ring_divides r y x)
       #|  ring_gcd (r:A ring) (a,b) =\n        if a IN ring_carrier r /\\ b IN ring_carrier r ==> ring_coprime r (a,b)\n        then ring_1 r\n        else if ?d. d IN IMAGE (ring_of_num r) (:num) /\\\n                    ring_divides r d a /\\\n                    ring_divides r d b /\\\n                    forall d'. ring_divides r d' a /\\ ring_divides r d' b\n                         ==> ring_divides r d' d\n        then @d. d IN IMAGE (ring_of_num r) (:num) /\\\n                 ring_divides r d a /\\\n                 ring_divides r d b /\\\n                 forall d'. ring_divides r d' a /\\ ring_divides r d' b\n                      ==> ring_divides r d' d\n        else if ?d. d IN ring_carrier r /\\\n                    ring_divides r d a /\\\n                    ring_divides r d b /\\\n                    forall d'. ring_divides r d' a /\\ ring_divides r d' b\n                         ==> ring_divides r d' d\n        then @d. d IN ring_carrier r /\\\n                 ring_divides r d a /\\\n                 ring_divides r d b /\\\n                 forall d'. ring_divides r d' a /\\ ring_divides r d' b\n                      ==> ring_divides r d' d\n        else @d. ring_divides r d a /\\ ring_divides r d b /\\\n                 ~(ring_unit r d)
-      #|  s SUBSET t ==> x IN s ==> x IN t
-      #|  ring_coprime r (a:A,b)
-      #|  (b:A) IN ring_carrier r
-      #|  (a:A) IN ring_carrier r
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 IN((x : _), s) \226\134\146 IN(x, t)
+      #|  ring_coprime((r : Ring[A]), ((a : A), (b : A)))
+      #|  IN((b : A), ring_carrier((r : Ring[A])))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
       #|  forall r a b:A.\n        ring_gcd r (a,b) IN ring_carrier r /\\\n        ring_divides r (ring_gcd r (a,b)) a /\\\n        ring_divides r (ring_gcd r (a,b)) b /\\\n        (forall d'. ring_divides r d' a /\\ ring_divides r d' b\n              ==> ring_divides r d' (ring_gcd r (a,b))) <=>\n        ?d. d IN ring_carrier r /\\\n            ring_divides r d a /\\ ring_divides r d b /\\\n            forall d'. ring_divides r d' a /\\ ring_divides r d' b\n                 ==> ring_divides r d' d
-      #|  b:A
-      #|  a:A
-      #|  r:A ring
+      #|  (b : A)
+      #|  (a : A)
+      #|  (r : Ring[A])
       #|  forall r a b d:A.\n        ring_divides r d a /\\ ring_divides r d b /\\\n        (forall d'. ring_divides r d' a /\\ ring_divides r d' b\n              ==> ring_divides r d' d)\n        ==> ring_associates r (ring_gcd r (a,b)) d
       #|  forall r a:A. a IN ring_carrier r ==> ring_associates r (ring_gcd r (a,a)) a
-      #|  (?x. P x) ==> (forall x. P x ==> Q x) ==> ~(forall x. ~(Q x))
-      #|  ~p ==> p ==> q
-      #|  (p ==> r) /\\ (~q ==> r) ==> (p <=> q) ==> r
-      #|  b:A
-      #|  a:A
-      #|  r:A ring
-      #|  forall r a b:A. ring_gcd r (a,b) IN ring_carrier r
-      #|  ring_1 r:A
+      #|  (\226\136\131 x : _, (P : (_) -> Bool)(x)) \226\134\146 (\226\136\128 x : _, P(x) \226\134\146 (Q : (_) -> Bool)(x)) \226\134\146 !(\226\136\128 x : _, !Q(x))
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  ((p : Bool) \226\134\146 (r : Bool)) && (!(q : Bool) \226\134\146 r) \226\134\146 p == q \226\134\146 r
+      #|  (b : A)
+      #|  (a : A)
+      #|  (r : Ring[A])
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, \226\136\128 b : A, IN(ring_gcd(r, (a, b)), ring_carrier(r))
+      #|  ring_1((r : Ring[A]))
       #|  ring_divides r d a /\\ ring_divides r d b /\\ q <=>\n                    (ring_divides r d a /\\ ring_divides r d b) /\\ q
-      #|  p /\\ q /\\ r /\\ s <=> p /\\ (q /\\ r) /\\ s
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) && (s : Bool)) == (p && (q && r) && s)
       #|  (forall d. P d ==> Q d) ==> (forall d. ~(P d) ==> Q d) ==> (forall d. Q d)
       #|  forall r a b a' b':A.\n        (forall d. d IN ring_carrier r\n             ==> (ring_divides r d a /\\ ring_divides r d b <=>\n                  ring_divides r d a' /\\ ring_divides r d b'))\n        ==> ring_gcd r (a,b) = ring_gcd r (a',b')
-      #|  forall r a b:A. ring_gcd r (a,b) = ring_gcd r (b,a)
-      #|  (?x. P x) ==> (forall x. P x ==> Q x) ==> ~(forall x. ~(Q x))
-      #|  ~p ==> p ==> q
-      #|  (p ==> r) /\\ (~q ==> r) ==> (p <=> q) ==> r
-      #|  b:A
-      #|  a:A
-      #|  r:A ring
+      #|  \226\136\128 r : Ring[A], \226\136\128 a : A, \226\136\128 b : A, ring_gcd(r, (a, b)) == ring_gcd(r, (b, a))
+      #|  (\226\136\131 x : _, (P : (_) -> Bool)(x)) \226\134\146 (\226\136\128 x : _, P(x) \226\134\146 (Q : (_) -> Bool)(x)) \226\134\146 !(\226\136\128 x : _, !Q(x))
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  ((p : Bool) \226\134\146 (r : Bool)) && (!(q : Bool) \226\134\146 r) \226\134\146 p == q \226\134\146 r
+      #|  (b : A)
+      #|  (a : A)
+      #|  (r : Ring[A])
       #|  (forall r a b:A. ring_divides r (ring_gcd r (a,b)) a <=> a IN ring_carrier r) /\\\n   (forall r a b:A. ring_divides r (ring_gcd r (a,b)) b <=> b IN ring_carrier r)
-      #|  (?x. P x) ==> (forall x. P x ==> Q x) ==> ~(forall x. ~(Q x))
-      #|  ~p ==> p ==> q
-      #|  d:A
-      #|  d:A
-      #|  (p ==> r) /\\ (~q ==> r) ==> (p <=> q) ==> r
-      #|  b:A
-      #|  a:A
-      #|  r:A ring
+      #|  (\226\136\131 x : _, (P : (_) -> Bool)(x)) \226\134\146 (\226\136\128 x : _, P(x) \226\134\146 (Q : (_) -> Bool)(x)) \226\134\146 !(\226\136\128 x : _, !Q(x))
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  (d : A)
+      #|  (d : A)
+      #|  ((p : Bool) \226\134\146 (r : Bool)) && (!(q : Bool) \226\134\146 r) \226\134\146 p == q \226\134\146 r
+      #|  (b : A)
+      #|  (a : A)
+      #|  (r : Ring[A])
       #|  forall r a b:A.\n        ring_unit r (ring_gcd r (a,b)) <=>\n        a IN ring_carrier r /\\ b IN ring_carrier r ==> ring_coprime r (a,b)
       #|  forall r a b:A.\n        ring_gcd r (a,b) = ring_1 r <=>\n        a IN ring_carrier r /\\ b IN ring_carrier r ==> ring_coprime r (a,b)
       #|  forall r a b d:A.\n        UFD r /\\ ring_divides r d a /\\ ring_divides r d b\n        ==> ring_divides r d (ring_gcd r (a,b))
       #|  forall r a b d:A.\n        UFD r /\\ a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> (ring_divides r d (ring_gcd r (a,b)) <=>\n             ring_divides r d a /\\ ring_divides r d b)
-      #|  forall r:A ring. ring_gcd r (ring_0 r,ring_0 r) = ring_0 r
+      #|  \226\136\128 r : Ring[A], ring_gcd(r, (ring_0(r), ring_0(r))) == ring_0(r)
       #|  forall r a b:A.\n        field r /\\ a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> ring_gcd r (a,b) =\n            if a = ring_0 r /\\ b = ring_0 r then ring_0 r else ring_1 r
       #|  bezout_ring (r:A ring) <=>\n        forall j. finitely_generated_ideal r j ==> principal_ideal r j
       #|  forall r j:A->bool.\n        bezout_ring (r:A ring)\n        ==> (finitely_generated_ideal r j <=> principal_ideal r j)
-      #|  forall r:A ring. PID r ==> bezout_ring r
-      #|  forall r:A ring. field r ==> bezout_ring r
-      #|  b:A
-      #|  s:A->bool
-      #|  a:A
+      #|  \226\136\128 r : Ring[A], PID(r) \226\134\146 bezout_ring(r)
+      #|  \226\136\128 r : Ring[A], field(r) \226\134\146 bezout_ring(r)
+      #|  (b : A)
+      #|  (s : (A) -> Bool)
+      #|  (a : A)
       #|  forall s:A->bool.\n        FINITE s\n        ==> s SUBSET ring_carrier r\n            ==> principal_ideal r (ideal_generated r s)
       #|  forall r:A ring.\n        bezout_ring r <=>\n        forall a b. a IN ring_carrier r /\\ b IN ring_carrier r\n              ==> principal_ideal r (ideal_generated r {a,b})
-      #|  {a,b} = {a} UNION {b}
-      #|  b:A
-      #|  a:A
+      #|  {(a : _), (b : _)} == UNION({a}, {b})
+      #|  (b : A)
+      #|  (a : A)
       #|  forall r:A ring.\n        bezout_ring r <=>\n        forall j k. principal_ideal r j /\\ principal_ideal r k\n              ==> principal_ideal r (ring_setadd r j k)
       #|  forall r:A ring. PID r <=>\n              integral_domain r /\\\n              noetherian_ring r /\\\n              bezout_ring r
-      #|  d:A
-      #|  d:A
-      #|  {a:A,b}
-      #|  ideal_generated r {a:A,b}
+      #|  (d : A)
+      #|  (d : A)
+      #|  {(a : A), (b : A)}
+      #|  ideal_generated((r : Ring[A]), {(a : A), (b : A)})
       #|  forall r a b:A.\n        bezout_ring r /\\ a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> ?d. d IN ring_carrier r /\\\n                ring_divides r d a /\\ ring_divides r d b /\\\n                ?x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                      ring_add r (ring_mul r a x) (ring_mul r b y) = d
-      #|  b:A
-      #|  a:A
-      #|  r:A ring
+      #|  (b : A)
+      #|  (a : A)
+      #|  (r : Ring[A])
       #|  forall r a b:A.\n        (UFD r \\/ bezout_ring r) /\\\n        a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> ?d. d IN ring_carrier r /\\\n                ring_divides r d a /\\ ring_divides r d b /\\\n                forall d'. ring_divides r d' a /\\ ring_divides r d' b\n                     ==> ring_divides r d' d
-      #|  ring_mul r y u:A
-      #|  ring_mul r x u:A
-      #|  u:A
-      #|  d:A
-      #|  b:A
-      #|  a:A
-      #|  r:A ring
-      #|  y:A
-      #|  x:A
-      #|  d:A
-      #|  b:A
-      #|  a:A
-      #|  r:A ring
+      #|  ring_mul((r : Ring[A]), (y : A), (u : A))
+      #|  ring_mul((r : Ring[A]), (x : A), (u : A))
+      #|  (u : A)
+      #|  (d : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (r : Ring[A])
+      #|  (y : A)
+      #|  (x : A)
+      #|  (d : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (r : Ring[A])
       #|  forall r a b:A.\n        bezout_ring r /\\\n        a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> ?x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                  ring_add r (ring_mul r a x) (ring_mul r b y) =\n                  ring_gcd r (a,b)
-      #|  v:A
-      #|  u:A
-      #|  d:A
-      #|  b:A
-      #|  a:A
-      #|  b:A
-      #|  a:A
-      #|  ring_gcd r (a:A,b)
+      #|  (v : A)
+      #|  (u : A)
+      #|  (d : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  ring_gcd((r : Ring[A]), ((a : A), (b : A)))
       #|  forall r:A ring.\n        bezout_ring r <=>\n        forall a b. a IN ring_carrier r /\\ b IN ring_carrier r\n              ==> ?d x y. d IN ring_carrier r /\\\n                          x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                          ring_add r (ring_mul r a x) (ring_mul r b y) = d /\\\n                          ring_divides r d a /\\ ring_divides r d b
-      #|  b:A
-      #|  a:A
-      #|  r:A ring
-      #|  (b:A) IN ring_carrier r
-      #|  (a:A) IN ring_carrier r
+      #|  (b : A)
+      #|  (a : A)
+      #|  (r : Ring[A])
+      #|  IN((b : A), ring_carrier((r : Ring[A])))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
       #|  forall r a b:A.\n        bezout_ring r\n        ==> (ring_coprime r (a,b) <=>\n             a IN ring_carrier r /\\ b IN ring_carrier r /\\\n             ?x y. x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                   ring_add r (ring_mul r a x) (ring_mul r b y) = ring_1 r)
-      #|  (b:A) IN ring_carrier r
-      #|  (a:A) IN ring_carrier r
+      #|  IN((b : A), ring_carrier((r : Ring[A])))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
       #|  forall r a b:A.\n        bezout_ring r\n        ==> (ring_coprime r (a,b) <=>\n             a IN ring_carrier r /\\\n             b IN ring_carrier r /\\\n             ring_setadd r (ideal_generated r {a}) (ideal_generated r {b}) =\n             ring_carrier r)
       #|  forall r j k:A->bool.\n        bezout_ring r /\\ ring_ideal r j /\\ ring_ideal r k\n        ==> (ring_setadd r j k = ring_carrier r <=>\n             ?a b. a IN j /\\ b IN k /\\ ring_coprime r (a,b))
       #|  forall r a b d:A.\n        (UFD r \\/ bezout_ring r) /\\ ring_divides r d a /\\ ring_divides r d b\n        ==> ring_divides r d (ring_gcd r (a,b))
       #|  forall r a b d:A.\n        (UFD r \\/ bezout_ring r) /\\ a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> (ring_divides r d (ring_gcd r (a,b)) <=>\n             ring_divides r d a /\\ ring_divides r d b)
-      #|  b:A = ring_mul r b (ring_1 r:A)
-      #|  y:A
-      #|  x:A
-      #|  a:A
-      #|  p:A
-      #|  p \\/ q <=> ~p ==> q
-      #|  b:A
-      #|  a:A
+      #|  (b : A) == ring_mul((r : Ring[A]), b, ring_1(r))
+      #|  (y : A)
+      #|  (x : A)
+      #|  (a : A)
+      #|  (p : A)
+      #|  ((p : Bool) || (q : Bool)) == (!p \226\134\146 q)
+      #|  (b : A)
+      #|  (a : A)
       #|  forall r p:A. bezout_ring r /\\ ring_irreducible r p ==> ring_prime r p
       #|  forall r p:A. integral_domain r /\\ bezout_ring r\n           ==> (ring_irreducible r p <=> ring_prime r p)
-      #|  b:A
-      #|  a:A
-      #|  r:A ring
-      #|  ring_gcd r (a,b):A
-      #|  (b:A) IN ring_carrier r
-      #|  b:A
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  a:A
-      #|  \\x:A. x IN j
-      #|  j:A->bool
+      #|  (b : A)
+      #|  (a : A)
+      #|  (r : Ring[A])
+      #|  ring_gcd((r : Ring[A]), ((a : A), (b : A)))
+      #|  IN((b : A), ring_carrier((r : Ring[A])))
+      #|  (b : A)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (a : A)
+      #|  (x : A) => IN(x, (j : (A) -> Bool))
+      #|  (j : (A) -> Bool)
       #|  forall r:A ring.\n        PID r <=>\n        integral_domain r /\\\n        bezout_ring r /\\\n        WF (\\x y. ring_divides r x y /\\ ~ring_divides r y x)
-      #|  forall r:A ring. PID r <=> UFD r /\\ bezout_ring r
+      #|  \226\136\128 r : Ring[A], PID(r) == (UFD(r) && bezout_ring(r))
       #|  forall r:A ring.\n        PID r <=>\n        integral_domain r /\\\n        bezout_ring r /\\\n        forall x. x IN ring_carrier r /\\ ~(x = ring_0 r)\n            ==> ?n p. (forall i. 1 <= i /\\ i <= n ==> ring_irreducible r (p i)) /\\\n                      ring_associates r (ring_product r (1..n) p) x
-      #|  s:A->bool
-      #|  s:A->bool
-      #|  (forall x. a = x ==> P x) <=> P a
+      #|  (s : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (\226\136\128 x : _, (a : _) == x \226\134\146 (P : (_) -> Bool)(x)) == P(a)
       #|  forall r r' (f:A->B).\n        ring_epimorphism(r,r') f /\\ bezout_ring r ==> bezout_ring r'
       #|  forall r j:A->bool.\n        bezout_ring r /\\ ring_ideal r j\n        ==> bezout_ring (quotient_ring r j)
       #|  forall(r:A ring) (r':B ring).\n        r isomorphic_ring r' ==> (bezout_ring r <=> bezout_ring r')
-      #|  f:A->B
+      #|  (f : (A) -> B)
       #|  forall r s (f:A->B) a b.\n     ring_homomorphism(r,s) f /\\\n     bezout_ring r /\\\n     ring_coprime r (a,b)\n     ==> ring_coprime s (f a, f b)
-      #|  ring_1 r:A
-      #|  ring_fractionate r s (ring_mul r q y:A)
-      #|  ring_fractionate r s (ring_mul r p x:A)
-      #|  ring_fractionate r s (d:A)
-      #|  y:A
-      #|  x:A
-      #|  d:A
-      #|  b:A
-      #|  a:A
-      #|  q:A
-      #|  b:A
-      #|  p:A
-      #|  a:A
+      #|  ring_1((r : Ring[A]))
+      #|  ring_fractionate((r : Ring[A]), (s : (A) -> Bool), ring_mul(r, (q : A), (y : A)))
+      #|  ring_fractionate((r : Ring[A]), (s : (A) -> Bool), ring_mul(r, (p : A), (x : A)))
+      #|  ring_fractionate((r : Ring[A]), (s : (A) -> Bool), (d : A))
+      #|  (y : A)
+      #|  (x : A)
+      #|  (d : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (q : A)
+      #|  (b : A)
+      #|  (p : A)
+      #|  (a : A)
       #|  forall r (s:A->bool).\n        ring_multsys r s /\\ bezout_ring r\n        ==> bezout_ring (ring_localization r s)
       #|  forall r s:A->bool.\n        ring_multsys r s /\\ PID r /\\ ~(ring_0 r IN s)\n        ==> PID (ring_localization r s)
       #|  ring_divides r (ring_mul r c d) (ring_mul r c e:A)
-      #|  d:A
-      #|  e:A
+      #|  (d : A)
+      #|  (e : A)
       #|  ring_divides r (c:A) (ring_gcd r (ring_mul r c a,ring_mul r c b))
-      #|  c:A = ring_0 r
-      #|  integral_domain(r:A ring)
+      #|  (c : A) == ring_0((r : Ring[A]))
+      #|  integral_domain((r : Ring[A]))
       #|  forall r a b c:A.\n        (UFD r \\/ integral_domain r /\\ bezout_ring r) /\\\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\ c IN ring_carrier r\n        ==> ring_associates r (ring_gcd r (ring_mul r c a,ring_mul r c b))\n                              (ring_mul r c (ring_gcd r (a,b)))
       #|  forall r a b c:A.\n        (UFD r \\/ integral_domain r /\\ bezout_ring r) /\\\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\ c IN ring_carrier r\n        ==> ring_associates r (ring_gcd r (ring_mul r a c,ring_mul r b c))\n                              (ring_mul r (ring_gcd r (a,b)) c)
-      #|  b:A = ring_mul r (ring_gcd r (a,c)) b
-      #|  (c:A) IN ring_carrier r
-      #|  integral_domain(r:A ring)
+      #|  (b : A) == ring_mul((r : Ring[A]), ring_gcd(r, ((a : A), (c : A))), b)
+      #|  IN((c : A), ring_carrier((r : Ring[A])))
+      #|  integral_domain((r : Ring[A]))
       #|  forall r a b c:A.\n        (UFD r \\/ integral_domain r /\\ bezout_ring r) /\\\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\\n        ring_divides r c (ring_mul r a b) /\\ ring_coprime r (a,c)\n        ==> ring_divides r c b
-      #|  c:A
-      #|  a:A
-      #|  b:A
-      #|  r:A ring
+      #|  (c : A)
+      #|  (a : A)
+      #|  (b : A)
+      #|  (r : Ring[A])
       #|  forall r a b c:A.\n        (UFD r \\/ integral_domain r /\\ bezout_ring r) /\\\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\\n        ring_divides r c (ring_mul r a b) /\\ ring_coprime r (b,c)\n        ==> ring_divides r c a
-      #|  c:A = ring_mul r (ring_gcd r (a,b)) c
-      #|  (c:A) IN ring_carrier r
-      #|  (b:A) IN ring_carrier r
-      #|  (a:A) IN ring_carrier r
-      #|  integral_domain(r:A ring)
+      #|  (c : A) == ring_mul((r : Ring[A]), ring_gcd(r, ((a : A), (b : A))), c)
+      #|  IN((c : A), ring_carrier((r : Ring[A])))
+      #|  IN((b : A), ring_carrier((r : Ring[A])))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  integral_domain((r : Ring[A]))
       #|  forall r a b c:A.\n        (UFD r \\/ integral_domain r /\\ bezout_ring r) /\\\n        ring_coprime r (a,b) /\\ ring_divides r a c /\\ ring_divides r b c\n        ==> ring_divides r (ring_mul r a b) c
       #|  forall r a b c:A.\n        (UFD r \\/ integral_domain r /\\ bezout_ring r) /\\\n        ring_coprime r (a,b)\n        ==> (ring_divides r (ring_mul r a b) c <=>\n             ring_divides r a c /\\ ring_divides r b c)
-      #|  a:A
-      #|  (d:A) IN ring_carrier r
-      #|  d:A
-      #|  integral_domain(r:A ring)
+      #|  (a : A)
+      #|  IN((d : A), ring_carrier((r : Ring[A])))
+      #|  (d : A)
+      #|  integral_domain((r : Ring[A]))
       #|  forall r a b c:A.\n        (UFD r \\/ integral_domain r /\\ bezout_ring r) /\\\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\ c IN ring_carrier r\n        ==> (ring_coprime r (ring_mul r a b,c) <=>\n             ring_coprime r (a,c) /\\ ring_coprime r (b,c))
       #|  forall r a b c:A.\n        (UFD r \\/ integral_domain r /\\ bezout_ring r) /\\\n        a IN ring_carrier r /\\ b IN ring_carrier r /\\ c IN ring_carrier r\n        ==> (ring_coprime r (a,ring_mul r b c) <=>\n             ring_coprime r (a,b) /\\ ring_coprime r (a,c))
-      #|  (f:K->A) x IN ring_carrier r
+      #|  IN((f : (K) -> A)((x : K)), ring_carrier((r : Ring[A])))
       #|  forall r (a:A) (f:K->A) s.\n     (UFD r \\/ integral_domain r /\\ bezout_ring r) /\\\n     a IN ring_carrier r /\\ FINITE s /\\\n     (forall i. i IN s ==> f i IN ring_carrier r)\n     ==> (ring_coprime r (a, ring_product r s f) <=>\n          forall i. i IN s ==> ring_coprime r (a, f i))
       #|  forall r (a:A) (f:K->A) s.\n     (UFD r \\/ integral_domain r /\\ bezout_ring r) /\\\n     a IN ring_carrier r /\\ FINITE s /\\\n     (forall i. i IN s ==> ring_coprime r (a, f i))\n     ==> ring_coprime r (a, ring_product r s f)
       #|  forall r a (b:A) n.\n     (UFD r \\/ integral_domain r /\\ bezout_ring r) /\\\n     a IN ring_carrier r /\\ b IN ring_carrier r /\\\n     ring_coprime r (a, b)\n     ==> ring_coprime r (a, ring_pow r b n)
       #|  forall r a (b:A) n.\n     (UFD r \\/ integral_domain r /\\ bezout_ring r) /\\\n     a IN ring_carrier r /\\ b IN ring_carrier r /\\\n     ring_coprime r (a, b)\n     ==> ring_coprime r (ring_pow r a n, b)
-      #|  forall i. i IN s ==> (p:K->A) i IN ring_carrier r
-      #|  s:K->bool
-      #|  i:K
-      #|  (x:A) IN ring_carrier r
+      #|  \226\136\128 i : K, IN(i, (s : (K) -> Bool)) \226\134\146 IN((p : (K) -> A)(i), ring_carrier((r : Ring[A])))
+      #|  (s : (K) -> Bool)
+      #|  (i : K)
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
       #|  forall r p (s:K->bool) x:A.\n        (UFD r \\/ integral_domain r /\\ bezout_ring r) /\\\n        FINITE s /\\\n        x IN ring_carrier r /\\\n        pairwise (\\i j. ring_coprime r (p i,p j)) s\n        ==> ((forall i. i IN s ==> ring_divides r (p i) x) <=>\n             (forall i. i IN s ==> p i IN ring_carrier r) /\\\n             ring_divides r (ring_product r s p) x)
       #|  forall r p (s:K->bool) x:A.\n        (UFD r \\/ integral_domain r /\\ bezout_ring r) /\\\n        FINITE s /\\\n        x IN ring_carrier r /\\\n        (forall i. i IN s ==> p i IN ring_carrier r) /\\\n        pairwise (\\i j. ring_coprime r (p i,p j)) s\n        ==> (ring_divides r (ring_product r s p) x <=>\n             forall i. i IN s ==> ring_divides r (p i) x)
-      #|  b:A
-      #|  a:A
+      #|  (b : A)
+      #|  (a : A)
       #|  forall r (a:A) b. ring_squarefree r a \\/ ring_squarefree r b\n               ==> ring_squarefree r (ring_gcd r (a,b))
-      #|  ring_divides r (ring_pow r (p:A) 2) (ring_pow r q 2)
-      #|  p:A
-      #|  p:A
-      #|  q:A
-      #|  r:A ring
-      #|  ~(2 = 0)
-      #|  q:A = ring_0 r
-      #|  ring_unit r (q:A)
-      #|  q:A
+      #|  ring_divides((r : Ring[A]), ring_pow(r, (p : A), 2), ring_pow(r, (q : A), 2))
+      #|  (p : A)
+      #|  (p : A)
+      #|  (q : A)
+      #|  (r : Ring[A])
+      #|  !(2 == 0)
+      #|  (q : A) == ring_0((r : Ring[A]))
+      #|  ring_unit((r : Ring[A]), (q : A))
+      #|  (q : A)
       #|  forall r (a:A). UFD r /\\ a IN ring_carrier r /\\ ~(a = ring_0 r)\n             ==> (ring_squarefree r a <=>\n                  forall p. ring_prime r p ==> ~ring_divides r (ring_pow r p 2) a)
       #|  forall r (a:A).\n        UFD r /\\ a IN ring_carrier r /\\ ~(a = ring_0 r)\n        ==> (ring_squarefree r a <=>\n             forall p. ring_prime r p /\\ ring_divides r p a\n                 ==> ~ring_divides r (ring_pow r p 2) a)
       #|  ring_squarefree r x <=> x IN ring_carrier r /\\ ring_squarefree r x
-      #|  ~trivial_ring (r:A ring)
+      #|  !trivial_ring((r : Ring[A]))
       #|  forall r q n:A.\n        UFD r /\\ ring_squarefree r q /\\ ~(q = ring_0 r) /\\ n IN ring_carrier r\n        ==> (ring_divides r q n <=>\n             forall p. ring_prime r p /\\ ring_divides r p q ==> ring_divides r p n)
-      #|  a:A = ring_0 r
+      #|  (a : A) == ring_0((r : Ring[A]))
       #|  forall r (a:A) x n.\n        UFD r /\\ ring_squarefree r a /\\ x IN ring_carrier r /\\\n        ring_divides r a (ring_pow r x n)\n        ==> ring_divides r a x
-      #|  ?m. n = SUC m
-      #|  x:A
+      #|  \226\136\131 m : Num, (n : Num) == SUC(m)
+      #|  (x : A)
       #|  forall r (a:A) x n.\n        UFD r /\\ ring_squarefree r a /\\ x IN ring_carrier r /\\ ~(n = 0)\n        ==> (ring_divides r a (ring_pow r x n) <=> ring_divides r a x)
       #|  forall r (a:A) b.\n        UFD r /\\ ring_squarefree r a /\\\n        b IN ring_carrier r /\\ ring_divides r a (ring_pow r b 2)\n        ==> ring_divides r a b
-      #|  a:A
-      #|  b:A
-      #|  p:A
-      #|  ring_squarefree r (b:A)
-      #|  ring_squarefree r (a:A)
+      #|  (a : A)
+      #|  (b : A)
+      #|  (p : A)
+      #|  ring_squarefree((r : Ring[A]), (b : A))
+      #|  ring_squarefree((r : Ring[A]), (a : A))
       #|  ~(a:A = ring_0 r) /\\ ~(b = ring_0 r) /\\ ~(ring_mul r a b = ring_0 r)
       #|  forall r a (b:A).\n        UFD r /\\ a IN ring_carrier r /\\ b IN ring_carrier r\n        ==> (ring_squarefree r (ring_mul r a b) <=>\n             ring_coprime r (a,b) /\\\n             ring_squarefree r a /\\ ring_squarefree r b)
       #|  ~((f:K->A) x = ring_0 r) /\\ ~(ring_product r s f = ring_0 r)
-      #|  integral_domain (r:A ring)
-      #|  (f:K->A) x IN ring_carrier r
+      #|  integral_domain((r : Ring[A]))
+      #|  IN((f : (K) -> A)((x : K)), ring_carrier((r : Ring[A])))
       #|  forall r (f:K->A) s.\n     UFD r /\\ FINITE s /\\\n     (forall i. i IN s ==> f i IN ring_carrier r) /\\\n     ~(ring_product r s f = ring_0 r)\n     ==> (ring_squarefree r (ring_product r s f) <=>\n          pairwise (\\i j. ring_coprime r (f i, f j)) s /\\\n          forall i. i IN s ==> ring_squarefree r (f i))
       #|  ring_mul r p q:A = ring_mul r (ring_mul r (ring_1 r) p) q
-      #|  q:A
-      #|  ring_mul r p q:A
-      #|  q:A
-      #|  p:A
+      #|  (q : A)
+      #|  ring_mul((r : Ring[A]), (p : A), (q : A))
+      #|  (q : A)
+      #|  (p : A)
       #|  ((p ==> q) /\\ (q ==> r)) /\\ (r ==> p) ==> (p <=> q) /\\ (p <=> r)
-      #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
+      #|  (((p : Bool) \226\134\146 (q : Bool)) && (p \226\134\146 (r : Bool))) == (p \226\134\146 q && r)
       #|  (forall r (a:A).\n        UFD r /\\ a IN ring_carrier r\n        ==> (ring_squarefree r a <=>\n             ~(a = ring_0 r) /\\\n             forall b k. b IN ring_carrier r /\\ ring_divides r a (ring_pow r b k)\n                   ==> ring_divides r a b)) /\\\n   (forall r (a:A).\n        UFD r /\\ a IN ring_carrier r\n        ==> (ring_squarefree r a <=>\n             ~(a = ring_0 r) /\\\n             forall b. b IN ring_carrier r /\\ ring_divides r a (ring_pow r b 2)\n                 ==> ring_divides r a b))
-      #|  t:A
-      #|  ring_mul r p (s:A)
-      #|  ring_mul r p t:A
-      #|  s':A
-      #|  ring_divides r (p:A) s
-      #|  (p:A) IN ring_carrier r /\\ s IN ring_carrier r
-      #|  integral_domain (r:A ring)
-      #|  t:A
-      #|  s:A
-      #|  (u:A) IN ring_carrier r
-      #|  ring_1 r:A
-      #|  u:A
-      #|  u:A
-      #|  ~(2 = 0)
-      #|  ring_0 r:A
-      #|  ring_1 r:A
+      #|  (t : A)
+      #|  ring_mul((r : Ring[A]), (p : A), (s : A))
+      #|  ring_mul((r : Ring[A]), (p : A), (t : A))
+      #|  (s' : A)
+      #|  ring_divides((r : Ring[A]), (p : A), (s : A))
+      #|  IN((p : A), ring_carrier((r : Ring[A]))) && IN((s : A), ring_carrier(r))
+      #|  integral_domain((r : Ring[A]))
+      #|  (t : A)
+      #|  (s : A)
+      #|  IN((u : A), ring_carrier((r : Ring[A])))
+      #|  ring_1((r : Ring[A]))
+      #|  (u : A)
+      #|  (u : A)
+      #|  !(2 == 0)
+      #|  ring_0((r : Ring[A]))
+      #|  ring_1((r : Ring[A]))
       #|  forall r (a:A). UFD r /\\ a IN ring_carrier r\n             ==> ?s t. ring_squarefree r s /\\\n                       t IN ring_carrier r /\\\n                       ring_mul r s (ring_pow r t 2) = a
       #|  boolean_ring (r:A ring) <=>\n        forall x. x IN ring_carrier r ==> ring_mul r x x = x
       #|  forall r x:A.\n        boolean_ring r /\\ x IN ring_carrier r\n        ==> ring_mul r x x = x
       #|  ring_mul r (ring_add r x x) (ring_add r x x):A
-      #|  ring_add r x x :A
-      #|  r:A ring
+      #|  ring_add((r : Ring[A]), (x : A), x)
+      #|  (r : Ring[A])
       #|  forall r x:A.\n        boolean_ring r /\\ x IN ring_carrier r\n        ==> ring_add r x x = ring_0 r
       #|  forall r x:A. boolean_ring r /\\ x IN ring_carrier r ==> ring_neg r x = x
       #|  forall r (x:A) n.\n        boolean_ring r /\\ x IN ring_carrier r\n        ==> ring_pow r x n = if n = 0 then ring_1 r else x
-      #|  ODD n
-      #|  n:num
+      #|  ODD((n : Num))
+      #|  (n : Num)
       #|  forall(r:A ring) n.\n        boolean_ring r\n        ==> ring_of_num r n = if ODD n then ring_1 r else ring_0 r
-      #|  (forall n:num. m divides n <=> p divides n) ==> m = p
+      #|  (\226\136\128 n : Num, divides((m : Num), n) == divides((p : Num), n)) \226\134\146 m == p
       #|  forall r:A ring.\n        boolean_ring r ==> ring_char r = if trivial_ring r then 1 else 2
-      #|  ring_mul r x (ring_mul r x y):A
-      #|  y:A
+      #|  ring_mul((r : Ring[A]), (x : A), ring_mul(r, x, (y : A)))
+      #|  (y : A)
       #|  forall r x:A. boolean_ring r ==> (ring_unit r x <=> x = ring_1 r)
-      #|  ring_sub r (x:A) (ring_1 r)
-      #|  x:A = ring_1 r
+      #|  ring_sub((r : Ring[A]), (x : A), ring_1(r))
+      #|  (x : A) == ring_1((r : Ring[A]))
       #|  forall r x:A.\n        boolean_ring r\n        ==> (ring_zerodivisor r x <=> x IN ring_carrier r /\\ ~(x = ring_1 r))
       #|  forall r x:A.\n        boolean_ring r ==> (ring_regular r x <=> x = ring_1 r)
-      #|  forall r x:A. boolean_ring r ==> ~(ring_irreducible r x)
-      #|  z:A
-      #|  (y:A) IN ring_carrier r
-      #|  (x:A) IN ring_carrier r
+      #|  \226\136\128 r : Ring[A], \226\136\128 x : A, boolean_ring(r) \226\134\146 !ring_irreducible(r, x)
+      #|  (z : A)
+      #|  IN((y : A), ring_carrier((r : Ring[A])))
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
       #|  forall r x y:A.\n        boolean_ring r\n        ==> (ring_divides r x y <=>\n             x IN ring_carrier r /\\ y IN ring_carrier r /\\\n             ring_mul r x y = y)
-      #|  ~(1 = 0)
+      #|  !(1 == 0)
       #|  forall r x:A. boolean_ring r ==> (ring_nilpotent r x <=> x = ring_0 r)
       #|  forall r j:A->bool.\n        boolean_ring r /\\ ring_ideal r j ==> radical r j = j
-      #|  forall r:A ring. trivial_ring r ==> boolean_ring r
+      #|  \226\136\128 r : Ring[A], trivial_ring(r) \226\134\146 boolean_ring(r)
       #|  forall r:A ring. ring_carrier r = {ring_0 r,ring_1 r} ==> boolean_ring r
       #|  forall r:A ring. ring_carrier r HAS_SIZE 2 ==> boolean_ring r
       #|  forall r r'. r isomorphic_ring r' ==> (boolean_ring r <=> boolean_ring r')
       #|  forall r r' (f:A->B).\n        ring_epimorphism(r,r') f /\\ boolean_ring r ==> boolean_ring r'
       #|  forall r j:A->bool.\n        boolean_ring r /\\ ring_ideal r j\n        ==> boolean_ring (quotient_ring r j)
-      #|  s:A->bool
-      #|  r:A ring
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
       #|  forall r s:A->bool. boolean_ring r ==> boolean_ring (subring_generated r s)
       #|  forall r r' (f:A->B).\n        ring_monomorphism(r,r') f /\\ boolean_ring r' ==> boolean_ring r
       #|  forall(r1:A ring) (r2:B ring).\n        boolean_ring (prod_ring r1 r2) <=>\n        boolean_ring r1 /\\ boolean_ring r2
       #|  forall k (r:K->A ring).\n        boolean_ring (product_ring k r) <=>\n        forall i. i IN k ==> boolean_ring (r i)
       #|  ring_add r (ring_mul r x y) (ring_mul r y y):A =\n      ring_add r (ring_mul r y y) (ring_mul r x y)
       #|  ring_mul r (ring_mul r x y) x:A = ring_mul r y (ring_mul r x x)
-      #|  y:A
-      #|  x:A
-      #|  ring_add r (ring_add r x y) (ring_mul r x y):A
-      #|  y:A
-      #|  x:A
-      #|  forall r:A ring. boolean_ring r ==> bezout_ring r
+      #|  (y : A)
+      #|  (x : A)
+      #|  ring_add((r : Ring[A]), ring_add(r, (x : A), (y : A)), ring_mul(r, x, y))
+      #|  (y : A)
+      #|  (x : A)
+      #|  \226\136\128 r : Ring[A], boolean_ring(r) \226\134\146 bezout_ring(r)
       #|  (forall a. a IN s /\\ ~(a = z) <=> a = w) ==> s SUBSET {w,z}
-      #|  p ==> q <=> p ==> p ==> q
-      #|  ring_ideal r (j:A->bool)
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == (p \226\134\146 p \226\134\146 q)
+      #|  ring_ideal((r : Ring[A]), (j : (A) -> Bool))
       #|  forall r j:A->bool.\n           boolean_ring r ==> (maximal_ideal r j <=> prime_ideal r j)
       #|  forall r x:A.\n        boolean_ring r\n        ==> (ring_multsys r {ring_1 r,x} <=> x IN ring_carrier r)
-      #|  ring_mul r x z:A
-      #|  r:A ring
-      #|  x:A
-      #|  r:A ring
+      #|  ring_mul((r : Ring[A]), (x : A), (z : A))
+      #|  (r : Ring[A])
+      #|  (x : A)
+      #|  (r : Ring[A])
       #|  z:A = ring_sub r (ring_add r z (ring_mul r x z)) (ring_mul r x z)
-      #|  ~((z:A) IN j)
-      #|  ring_add r z (ring_mul r x z):A
-      #|  ?z:A. z IN ring_carrier r /\\ ~(z IN j)
-      #|  (x:A) IN ring_carrier r
+      #|  !IN((z : A), (j : (A) -> Bool))
+      #|  ring_add((r : Ring[A]), (z : A), ring_mul(r, (x : A), z))
+      #|  \226\136\131 z : A, IN(z, ring_carrier((r : Ring[A]))) && !IN(z, (j : (A) -> Bool))
+      #|  IN((x : A), ring_carrier((r : Ring[A])))
       #|  forall r j x:A.\n        boolean_ring r /\\ proper_ideal r j /\\ x IN j\n        ==> ?y. y IN ring_carrier r DIFF j /\\ ring_mul r x y = ring_0 r
-      #|  ring_sub r x (ring_1 r):A
-      #|  x:A
-      #|  x:A
+      #|  ring_sub((r : Ring[A]), (x : A), ring_1(r))
+      #|  (x : A)
+      #|  (x : A)
       #|  a IN s /\\ b IN s /\\ (forall c. c IN s /\\ ~(c = a) /\\ ~(c = b) ==> F)\n    ==> s = {a,b}
       #|  forall r:A ring.\n        boolean_ring r /\\ integral_domain r <=> ring_carrier r HAS_SIZE 2
-      #|  local_ring (r:A ring) <=> ?!j. maximal_ideal r j
-      #|  forall r:A ring. local_ring r ==> ~trivial_ring r
+      #|  (local_ring : (Ring[A]) -> Bool)((r : Ring[A])) == existsunique((j : (A) -> Bool) => maximal_ideal(r, j))
+      #|  \226\136\128 r : Ring[A], local_ring(r) \226\134\146 !trivial_ring(r)
       #|  {x:A | x IN ring_carrier r /\\ ~(ring_unit r x)}
-      #|  s = t <=> s SUBSET t /\\ ~(s PSUBSET t)
-      #|  j:A->bool
-      #|  {x:A | x IN ring_carrier r /\\ ~(ring_unit r x)}
-      #|  UNIONS u = t ==> ((?a. u = {a}) <=> u = {t})
-      #|  (?!x. P x) <=> ?a. {x | P x} = {a}
+      #|  ((s : (_) -> Bool) == (t : (_) -> Bool)) == (SUBSET(s, t) && !PSUBSET(s, t))
+      #|  (j : (A) -> Bool)
+      #|  {(x : A) | IN(x, ring_carrier((r : Ring[A]))) && !ring_unit(r, x)}
+      #|  UNIONS((u : ((_) -> Bool) -> Bool)) == (t : (_) -> Bool) \226\134\146 (\226\136\131 a : (_) -> Bool, u == {a}) == (u == {t})
+      #|  existsunique((x : _) => (P : (_) -> Bool)(x)) == (\226\136\131 a : _, {(x : _) | P(x)} == {a})
       #|  forall r:A ring.\n        local_ring (r:A ring) <=>\n        ring_ideal r {x | x IN ring_carrier r /\\ ~(ring_unit r x)}
-      #|  forall r:A ring. field r ==> local_ring r
-      #|  forall r:A ring. (?!j. prime_ideal r j) ==> local_ring r
+      #|  \226\136\128 r : Ring[A], field(r) \226\134\146 local_ring(r)
+      #|  \226\136\128 r : Ring[A], existsunique((j : (A) -> Bool) => prime_ideal(r, j)) \226\134\146 local_ring(r)
       #|  {x | x IN ring_carrier r /\\ (f:A->B) x IN k}
-      #|  {x | x IN ring_carrier r /\\ (f:A->B) x IN j}
-      #|  j:B->bool
-      #|  k:B->bool
+      #|  {(x : A) | IN(x, ring_carrier((r : Ring[A]))) && IN((f : (A) -> B)(x), (j : (B) -> Bool))}
+      #|  (j : (B) -> Bool)
+      #|  (k : (B) -> Bool)
       #|  forall r r' (f:A->B).\n        ring_epimorphism(r,r') f /\\ local_ring r /\\ ~trivial_ring r'\n        ==> local_ring r'
       #|  forall r j:A->bool.\n        local_ring r /\\ proper_ideal r j\n        ==> local_ring (quotient_ring r j)
       #|  forall(r:A ring) (r':B ring).\n        r isomorphic_ring r' ==> (local_ring r <=> local_ring r')
-      #|  q ==> ~(p /\\ ~q)
-      #|  s:A->bool
-      #|  r:A ring
-      #|  p /\\ ~q /\\ r /\\ ~s <=> p /\\ r /\\ ~q /\\ ~s
-      #|  s:A->bool = ring_carrier r DIFF j
+      #|  (q : Bool) \226\134\146 !((p : Bool) && !q)
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
+      #|  ((p : Bool) && !(q : Bool) && (r : Bool) && !(s : Bool)) == (p && r && !q && !s)
+      #|  (s : (A) -> Bool) == DIFF(ring_carrier((r : Ring[A])), (j : (A) -> Bool))
       #|  forall r j:A->bool.\n        prime_ideal r j\n        ==> local_ring(ring_localization r (ring_carrier r DIFF j))
       #|  forall r (p:A->bool).\n     noetherian_ring r /\\ prime_ideal r p\n     ==> noetherian_ring(ring_localization r (ring_carrier r DIFF p)) /\\\n         local_ring(ring_localization r (ring_carrier r DIFF p))
       #|  vnregular_ring (r:A ring) <=>\n        forall a. a IN ring_carrier r\n            ==> ?x. x IN ring_carrier r /\\\n                    ring_mul r a (ring_mul r x a) = a
-      #|  x:A = ring_0 r
-      #|  ring_inv r x:A
-      #|  x:A
-      #|  forall r:A ring. field r ==> vnregular_ring r
-      #|  x:A
-      #|  x:A
-      #|  forall r:A ring. boolean_ring r ==> vnregular_ring r
-      #|  x:A
-      #|  a:A
-      #|  a:A
+      #|  (x : A) == ring_0((r : Ring[A]))
+      #|  ring_inv((r : Ring[A]), (x : A))
+      #|  (x : A)
+      #|  \226\136\128 r : Ring[A], field(r) \226\134\146 vnregular_ring(r)
+      #|  (x : A)
+      #|  (x : A)
+      #|  \226\136\128 r : Ring[A], boolean_ring(r) \226\134\146 vnregular_ring(r)
+      #|  (x : A)
+      #|  (a : A)
+      #|  (a : A)
       #|  forall r r' (f:A->B).\n        ring_epimorphism(r,r') f /\\ vnregular_ring r ==> vnregular_ring r'
       #|  forall r j:A->bool.\n        vnregular_ring r /\\ ring_ideal r j\n        ==> vnregular_ring (quotient_ring r j)
       #|  forall(r:A ring) (r':B ring).\n        r isomorphic_ring r' ==> (vnregular_ring r <=> vnregular_ring r')
       #|  forall(r1:A ring) (r2:B ring).\n        vnregular_ring(prod_ring r1 r2) <=>\n        vnregular_ring r1 /\\ vnregular_ring r2
       #|  forall(r:K->A ring) k.\n        vnregular_ring(product_ring k r) <=>\n        forall i. i IN k ==> vnregular_ring (r i)
-      #|  n:num
-      #|  ring_mul r y x:A
-      #|  r:A ring
-      #|  y:A
-      #|  x:A
+      #|  (n : Num)
+      #|  ring_mul((r : Ring[A]), (y : A), (x : A))
+      #|  (r : Ring[A])
+      #|  (y : A)
+      #|  (x : A)
       #|  forall r (x:A) n.\n        vnregular_ring r /\\ x IN ring_carrier r /\\ ring_pow r x n = ring_0 r\n        ==> x = ring_0 r
       #|  forall r x:A.\n        vnregular_ring r ==> (ring_nilpotent r x <=> x = ring_0 r)
-      #|  ring_sub r (ring_mul r a b) (ring_1 r):A
-      #|  b:A
-      #|  a:A
+      #|  ring_sub((r : Ring[A]), ring_mul(r, (a : A), (b : A)), ring_1(r))
+      #|  (b : A)
+      #|  (a : A)
       #|  forall r a:A. vnregular_ring r ==> (ring_regular r a <=> ring_unit r a)
       #|  forall r:A ring.\n        vnregular_ring r /\\ integral_domain r <=> field r
-      #|  z:A
-      #|  z:A
-      #|  y:A
-      #|  e:A
-      #|  ideal_generated r {x:A}
-      #|  x:A
-      #|  x:A
-      #|  ring_mul r y x:A
-      #|  y:A
-      #|  x:A
-      #|  x:A
-      #|  j:A->bool
+      #|  (z : A)
+      #|  (z : A)
+      #|  (y : A)
+      #|  (e : A)
+      #|  ideal_generated((r : Ring[A]), {(x : A)})
+      #|  (x : A)
+      #|  (x : A)
+      #|  ring_mul((r : Ring[A]), (y : A), (x : A))
+      #|  (y : A)
+      #|  (x : A)
+      #|  (x : A)
+      #|  (j : (A) -> Bool)
       #|  forall r:A ring.\n        vnregular_ring r <=>\n        forall j. principal_ideal r j\n            ==> ?e. e IN ring_carrier r /\\\n                    ring_mul r e e = e /\\\n                    j = ideal_generated r {e}
-      #|  i:A
-      #|  e:A
-      #|  t SUBSET u ==> s INTER t SUBSET u
-      #|  ring_sub r (ring_add r e i) (ring_mul r e i):A
-      #|  i:A
-      #|  e:A
-      #|  k:A->bool
-      #|  j:A->bool
-      #|  forall r:A ring. vnregular_ring r ==> bezout_ring r
-      #|  j:A->bool
-      #|  j:A->bool
-      #|  j:A->bool
-      #|  k:A->bool
+      #|  (i : A)
+      #|  (e : A)
+      #|  SUBSET((t : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 SUBSET(INTER((s : (_) -> Bool), t), u)
+      #|  ring_sub((r : Ring[A]), ring_add(r, (e : A), (i : A)), ring_mul(r, e, i))
+      #|  (i : A)
+      #|  (e : A)
+      #|  (k : (A) -> Bool)
+      #|  (j : (A) -> Bool)
+      #|  \226\136\128 r : Ring[A], vnregular_ring(r) \226\134\146 bezout_ring(r)
+      #|  (j : (A) -> Bool)
+      #|  (j : (A) -> Bool)
+      #|  (j : (A) -> Bool)
+      #|  (k : (A) -> Bool)
       #|  forall r:A ring.\n        vnregular_ring r <=>\n        forall j. finitely_generated_ideal r j\n            ==> ?e. e IN ring_carrier r /\\\n                    ring_mul r e e = e /\\\n                    j = ideal_generated r {e}
       #|  forall r j:A->bool.\n        vnregular_ring r /\\ ring_ideal r j ==> ring_setmul r j j = j
-      #|  ring_mul r x (ring_mul r a x):A
-      #|  x:A
-      #|  a:A
-      #|  a:A
+      #|  ring_mul((r : Ring[A]), (x : A), ring_mul(r, (a : A), x))
+      #|  (x : A)
+      #|  (a : A)
+      #|  (a : A)
       #|  forall r:A ring.\n        vnregular_ring (r:A ring) <=>\n        forall a. a IN ring_carrier r\n            ==> ?x. x IN ring_carrier r /\\\n                    ring_mul r a (ring_mul r x a) = a /\\\n                    ring_mul r x (ring_mul r a x) = x
       #|  (forall a x y. P a /\\ R a x /\\ R a y ==> x = y)\n    ==> ((forall a. P a ==> ?x. R a x) <=> (forall a. P a ==> ?!x. R a x))
       #|  forall r:A ring.\n        vnregular_ring (r:A ring) <=>\n        forall a. a IN ring_carrier r\n            ==> ?!x. x IN ring_carrier r /\\\n                     ring_mul r a (ring_mul r x a) = a /\\\n                     ring_mul r x (ring_mul r a x) = x
-      #|  ring_1 r:A
-      #|  ring_fractionate r s (ring_mul r p x:A)
-      #|  x:A
-      #|  a:A
-      #|  p:A
-      #|  a:A
+      #|  ring_1((r : Ring[A]))
+      #|  ring_fractionate((r : Ring[A]), (s : (A) -> Bool), ring_mul(r, (p : A), (x : A)))
+      #|  (x : A)
+      #|  (a : A)
+      #|  (p : A)
+      #|  (a : A)
       #|  forall r s:A->bool.\n        vnregular_ring r /\\ ring_multsys r s\n        ==> vnregular_ring (ring_localization r s)
       #|  forall r:A ring.\n        vnregular_ring r ==> (fraction_ring r) isomorphic_ring r
       #|  bool_ring = ring((:bool),F,T,I,(\\x y. ~(x <=> y)),(/\\))
       #|  ring_carrier bool_ring = (:bool) /\\\n   ring_0 bool_ring = F /\\\n   ring_1 bool_ring = T /\\\n   ring_neg bool_ring = I /\\\n   ring_add bool_ring = (\\x y. ~(x <=> y)) /\\\n   ring_mul bool_ring = (/\\)
-      #|  field bool_ring
-      #|  ~trivial_ring bool_ring
-      #|  boolean_ring bool_ring
-      #|  integral_domain bool_ring
-      #|  ring_carrier bool_ring HAS_SIZE 2
-      #|  s = {a,b} ==> x IN s /\\ ~(x = b) ==> x = a
+      #|  field(bool_ring)
+      #|  !trivial_ring(bool_ring)
+      #|  boolean_ring(bool_ring)
+      #|  integral_domain(bool_ring)
+      #|  HAS_SIZE(ring_carrier(bool_ring), 2)
+      #|  (s : (_) -> Bool) == {(a : _), (b : _)} \226\134\146 IN((x : _), s) && !(x == b) \226\134\146 x == a
       #|  x IN ring_carrier r /\\ y IN ring_carrier r /\\\n    ring_add r x y = ring_0 r\n    ==> y = ring_neg r x /\\ ring_0 r = ring_add r x y
-      #|  (\\p. if p then ring_1 r else ring_0 r):bool->A
+      #|  (p : Bool) => if p { ring_1((r : Ring[A])) } else { ring_0(r) }
       #|  (forall r:A ring. r isomorphic_ring bool_ring <=> ring_carrier r HAS_SIZE 2) /\\\n   (forall r:A ring. bool_ring isomorphic_ring r <=> ring_carrier r HAS_SIZE 2)
-      #|  integer_ring = ring((:int),&0,&1,( -- ),( + ),( * ))
+      #|  (integer_ring : Ring[Int]) == ring((UNIV, int_of_num(0), int_of_num(1), op_minus_minus, op_plus, op_star))
       #|  ring_carrier integer_ring = (:int) /\\\n   ring_0 integer_ring = &0 /\\\n   ring_1 integer_ring = &1 /\\\n   ring_neg integer_ring = ( -- ) /\\\n   ring_add integer_ring = ( + ) /\\\n   ring_mul integer_ring = ( * )
-      #|  forall q:int n. ring_pow integer_ring q n = q pow n
+      #|  \226\136\128 q : Int, \226\136\128 n : Num, ring_pow(integer_ring, q, n) == pow(q, n)
       #|  forall x. ring_unit integer_ring x <=> x = &1 \\/ x = -- &1
-      #|  forall a b. ring_divides integer_ring a b <=> a divides b
-      #|  ~trivial_ring integer_ring
-      #|  &2:int
-      #|  ~field integer_ring
+      #|  \226\136\128 a : Int, \226\136\128 b : Int, ring_divides(integer_ring, a, b) == divides(a, b)
+      #|  !trivial_ring(integer_ring)
+      #|  int_of_num(2)
+      #|  !field(integer_ring)
       #|  forall r:A ring. ring_homomorphism (integer_ring,r) (ring_of_int r)
-      #|  forall x:int. x divides x
-      #|  forall x:int. &0 divides x <=> x = &0
+      #|  \226\136\128 x : Int, divides(x, x)
+      #|  \226\136\128 x : Int, divides(int_of_num(0), x) == (x == int_of_num(0))
       #|  forall r:A ring. ring_monomorphism (integer_ring,r) (ring_of_int r) <=>\n              ring_char r = 0
-      #|  integral_domain integer_ring
-      #|  b:int
-      #|  a:int
-      #|  a rem b:int
-      #|  a div b:int
-      #|  b:int
-      #|  a:int
-      #|  num_of_int o abs
-      #|  euclidean_ring integer_ring
-      #|  PID integer_ring
-      #|  UFD integer_ring
-      #|  bezout_ring integer_ring
-      #|  ring_of_num integer_ring = int_of_num
-      #|  ring_of_int integer_ring = I
-      #|  ring_char integer_ring = 0
-      #|  ring_coprime integer_ring = coprime
+      #|  integral_domain(integer_ring)
+      #|  (b : Int)
+      #|  (a : Int)
+      #|  rem((a : Int), (b : Int))
+      #|  div((a : Int), (b : Int))
+      #|  (b : Int)
+      #|  (a : Int)
+      #|  o(num_of_int, abs)
+      #|  euclidean_ring(integer_ring)
+      #|  PID(integer_ring)
+      #|  UFD(integer_ring)
+      #|  bezout_ring(integer_ring)
+      #|  ring_of_num(integer_ring) == int_of_num
+      #|  ring_of_int(integer_ring) == I
+      #|  ring_char(integer_ring) == 0
+      #|  ring_coprime(integer_ring) == coprime
       #|  forall x y. ring_associates integer_ring x y <=> x = y \\/ x = --y
       #|  (n:int) divides a /\\ n divides b ==> n divides gcd(a,b)
       #|  &0:int <= x /\\ &0 <= y /\\ (x = y \\/ x = --y) ==> x = y
-      #|  n:num
+      #|  (n : Num)
       #|  P x /\\ (forall x'. P x' ==> x' = x)\n    ==> (if ?x. P x then @x. P x else a) = x
       #|  &0:int <= x /\\ (x = &1 \\/ x = -- &1) ==> &1 = x
-      #|  b:int
-      #|  a:int
-      #|  ring_gcd integer_ring = gcd
+      #|  (b : Int)
+      #|  (a : Int)
+      #|  ring_gcd(integer_ring) == gcd
       #|  forall n. ideal_generated integer_ring {n} = {x | n divides x}
       #|  forall n. ring_coset integer_ring (ideal_generated integer_ring {n}) = mod n
       #|  integer_mod_ring n =\n        if n = 0 then integer_ring else\n        ring({m | &0 <= m /\\ m < &n},\n             &0,\n             &1 rem &n,\n             (\\a. --a rem &n),\n             (\\a b. (a + b) rem &n),\n             (\\a b. (a * b) rem &n))
-      #|  &n:int
-      #|  m:int
-      #|  m:int
-      #|  n:num
+      #|  int_of_num((n : Num))
+      #|  (m : Int)
+      #|  (m : Int)
+      #|  (n : Num)
       #|  ring_carrier (integer_mod_ring 0) = (:int) /\\\n   (forall n. 0 < n\n        ==> ring_carrier(integer_mod_ring n) = {m | &0 <= m /\\ m < &n}) /\\\n   (forall n. ring_0 (integer_mod_ring n) = &0) /\\\n   (forall n. ring_1 (integer_mod_ring n) = &1 rem &n) /\\\n   (forall n. ring_neg (integer_mod_ring n) = (\\a. --a rem &n)) /\\\n   (forall n. ring_add (integer_mod_ring n) = (\\a b. (a + b) rem &n)) /\\\n   (forall n. ring_mul (integer_mod_ring n) = (\\a b. (a * b) rem &n))
-      #|  n = 0
+      #|  (n : Num) == 0
       #|  forall n a. a IN ring_carrier(integer_mod_ring n) <=>\n         &n:int = &0 \\/ &0 <= a /\\ a < &n
       #|  (forall x. x IN s ==> f x = x) /\\ (forall x. f x IN s) ==> s = IMAGE f UNIV
-      #|  n = 0
+      #|  (n : Num) == 0
       #|  forall n. ring_carrier (integer_mod_ring n) = IMAGE (\\x. x rem &n) (:int)
-      #|  n = 0
-      #|  forall n x. x rem &n IN ring_carrier(integer_mod_ring n)
-      #|  integer_mod_ring 0 = integer_ring
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, \226\136\128 x : Int, IN(rem(x, int_of_num(n)), ring_carrier(integer_mod_ring(n)))
+      #|  integer_mod_ring(0) == integer_ring
       #|  forall n. ring_sub (integer_mod_ring n) = \\a b. (a - b) rem &n
       #|  forall n a k. ring_pow (integer_mod_ring n) a k = (a pow k) rem &n
-      #|  forall n k. ring_of_num (integer_mod_ring n) k = &k rem &n
-      #|  forall n x. ring_of_int (integer_mod_ring n) x = x rem &n
+      #|  \226\136\128 n : Num, \226\136\128 k : Num, ring_of_num(integer_mod_ring(n), k) == rem(int_of_num(k), int_of_num(n))
+      #|  \226\136\128 n : Num, \226\136\128 x : Int, ring_of_int(integer_mod_ring(n), x) == rem(x, int_of_num(n))
       #|  ring_carrier (integer_mod_ring 0) = (:int) /\\\n   (forall n. 0 < n\n        ==> ring_carrier(integer_mod_ring n) = {m | &0 <= m /\\ m < &n}) /\\\n   (forall n. ring_0 (integer_mod_ring n) = &0) /\\\n   (forall n. ring_1 (integer_mod_ring n) = &1 rem &n) /\\\n   (forall n. ring_neg (integer_mod_ring n) = (\\a. --a rem &n)) /\\\n   (forall n. ring_add (integer_mod_ring n) = (\\a b. (a + b) rem &n)) /\\\n   (forall n. ring_sub (integer_mod_ring n) = (\\a b. (a - b) rem &n)) /\\\n   (forall n. ring_mul (integer_mod_ring n) = (\\a b. (a * b) rem &n)) /\\\n   (forall n. ring_pow (integer_mod_ring n) = (\\a k. (a pow k) rem &n)) /\\\n   (forall n. ring_of_num (integer_mod_ring n) = (\\k. &k rem &n)) /\\\n   (forall n. ring_of_int (integer_mod_ring n) = \\x. x rem &n)
-      #|  (d:int) divides x <=> (x == &0) (mod d)
-      #|  forall n. ring_char (integer_mod_ring n) = n
-      #|  x rem &n
-      #|  x:int
+      #|  divides((d : Int), (x : Int)) == op_eq_eq(x, int_of_num(0), mod(d))
+      #|  \226\136\128 n : Num, ring_char(integer_mod_ring(n)) == n
+      #|  rem((x : Int), int_of_num((n : Num)))
+      #|  (x : Int)
       #|  gcd(a,n) divides b <=> ?x:int. (a * x == b) (mod n)
       #|  (p /\\ q ==> (r <=> s)) ==> (p /\\ q /\\ r <=> p /\\ q /\\ s)
-      #|  n = 0
+      #|  (n : Num) == 0
       #|  forall n a b. ring_divides (integer_mod_ring n) a b <=>\n           a IN ring_carrier(integer_mod_ring n) /\\\n           b IN ring_carrier(integer_mod_ring n) /\\\n           gcd(a,&n) divides b
       #|  &0:int <= x /\\ &0 <= y ==> (x = y \\/ x = --y <=> x = y)
       #|  gcd(x:int,n) divides y /\\ gcd(y,n) divides x <=>\n    gcd(x,n) divides gcd(y,n) /\\ gcd(y,n) divides gcd(x,n)
-      #|  y IN ring_carrier (integer_mod_ring n)
-      #|  x IN ring_carrier (integer_mod_ring n)
+      #|  IN((y : Int), ring_carrier(integer_mod_ring((n : Num))))
+      #|  IN((x : Int), ring_carrier(integer_mod_ring((n : Num))))
       #|  forall n x y. ring_associates (integer_mod_ring n) x y <=>\n           x IN ring_carrier(integer_mod_ring n) /\\\n           y IN ring_carrier(integer_mod_ring n) /\\\n           gcd(x,&n) = gcd(y,&n)
-      #|  coprime(x:int,y) <=> gcd(x,y) divides &1
-      #|  n = 1
-      #|  n = 0
+      #|  coprime(((x : Int), (y : Int))) == divides(gcd((x, y)), int_of_num(1))
+      #|  (n : Num) == 1
+      #|  (n : Num) == 0
       #|  forall n x. ring_unit (integer_mod_ring n) x <=>\n         x IN ring_carrier(integer_mod_ring n) /\\ coprime(x,&n)
-      #|  x:int = &1 ==> ~(x = &0)
-      #|  n = 1
-      #|  n = 0
-      #|  forall n. trivial_ring (integer_mod_ring n) <=> n = 1
-      #|  n = 0
+      #|  (x : Int) == int_of_num(1) \226\134\146 !(x == int_of_num(0))
+      #|  (n : Num) == 1
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, trivial_ring(integer_mod_ring(n)) == (n == 1)
+      #|  (n : Num) == 0
       #|  forall n. FINITE(ring_carrier(integer_mod_ring n)) <=> ~(n = 0)
-      #|  {m:int | &0 <= m /\\ m < &n} = IMAGE (&) {i | i < n}
+      #|  {(m : Int) | int_of_num(0) <= m && m < int_of_num((n : Num))} == IMAGE(int_of_num, {(i : Num) | i < n})
       #|  forall n. ~(n = 0) ==> CARD(ring_carrier(integer_mod_ring n)) = n
-      #|  e:num
-      #|  e:num
-      #|  coprime(d:num,n) ==> d divides n ==> coprime(d,d)
-      #|  0 divides n <=> n = 0
-      #|  d:num
-      #|  d:num
-      #|  n = 1
+      #|  (e : Num)
+      #|  (e : Num)
+      #|  coprime(((d : Num), (n : Num))) \226\134\146 divides(d, n) \226\134\146 coprime((d, d))
+      #|  divides(0, (n : Num)) == (n == 0)
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  (n : Num) == 1
       #|  2
-      #|  n = 0
-      #|  forall n. field (integer_mod_ring n) <=> prime n
-      #|  n = 1
-      #|  n = 0
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, field(integer_mod_ring(n)) == prime(n)
+      #|  (n : Num) == 1
+      #|  (n : Num) == 0
       #|  forall n. integral_domain (integer_mod_ring n) <=> n = 0 \\/ prime n
-      #|  (x:int == x) (mod p)
-      #|  &p:int
+      #|  op_eq_eq((x : Int), x, mod((p : Int)))
+      #|  int_of_num((p : Num))
       #|  forall p:int. q divides p /\\ (x == y) (mod p) ==> (x == y) (mod q)
       #|  forall(r:A ring) p.\n        ring_homomorphism (integer_mod_ring p,r) (ring_of_int r) <=>\n        ring_char r divides p
-      #|  &0 divides x <=> x:int = &0
-      #|  p = 0
+      #|  divides(int_of_num(0), (x : Int)) == (x == int_of_num(0))
+      #|  (p : Num) == 0
       #|  forall(r:A ring) p.\n        ring_monomorphism (integer_mod_ring p,r) (ring_of_int r) <=>\n        ring_char r = p
-      #|  ring_of_int (r:A ring)
+      #|  ring_of_int((r : Ring[A]))
       #|  forall(r:A ring) p.\n        (?f. ring_homomorphism(integer_mod_ring p,r) f) <=>\n        ring_char r divides p
-      #|  ring_of_int (r:A ring)
+      #|  ring_of_int((r : Ring[A]))
       #|  forall(r:A ring) p.\n        (?f. ring_monomorphism(integer_mod_ring p,r) f) <=>\n        ring_char r = p
       #|  forall p m n.\n        ring_homomorphism (integer_mod_ring m,integer_mod_ring n)\n                          (\\x. x rem &n) <=>\n        n divides m
       #|  forall p i j.\n        i <= j\n        ==> ring_homomorphism\n              (integer_mod_ring (p EXP j),integer_mod_ring (p EXP i))\n              (\\x. x rem &p pow i)
       #|  forall m n.\n        ring_homomorphism\n         (integer_mod_ring (m * n),\n          prod_ring (integer_mod_ring m) (integer_mod_ring n))\n         (\\a. (a rem &m),(a rem &n))
-      #|  lcm(&m,&n):int
-      #|  (&0:int == x) (mod n) <=> n divides x
-      #|  &0:int
-      #|  &0:int
-      #|  &1:int
-      #|  n = 0
-      #|  &0:int
-      #|  &1:int
-      #|  m = 0
+      #|  lcm((int_of_num((m : Num)), int_of_num((n : Num))))
+      #|  op_eq_eq(int_of_num(0), (x : Int), mod((n : Int))) == divides(n, x)
+      #|  int_of_num(0)
+      #|  int_of_num(0)
+      #|  int_of_num(1)
+      #|  (n : Num) == 0
+      #|  int_of_num(0)
+      #|  int_of_num(1)
+      #|  (m : Num) == 0
       #|  s SUBSET IMAGE f UNIV <=> forall y. y IN s ==> ?x. f x = y
       #|  forall m n. ring_isomorphism\n          (integer_mod_ring (m * n),\n           prod_ring (integer_mod_ring m) (integer_mod_ring n))\n          (\\a. (a rem &m),(a rem &n)) <=>\n         coprime(m,n)
-      #|  (forall f. P f ==> P g) ==> ((?f. P f) <=> P g)
+      #|  (\226\136\128 f : _, (P : (_) -> Bool)(f) \226\134\146 P((g : _))) \226\134\146 (\226\136\131 f : _, P(f)) == P(g)
       #|  forall m n. integer_mod_ring(m * n) isomorphic_ring\n         prod_ring (integer_mod_ring m) (integer_mod_ring n) <=>\n         coprime(m,n)
       #|  (?x:int. (a * x * a == a) (mod n)) <=> gcd(a pow 2,n) divides a
       #|  forall n. vnregular_ring(integer_mod_ring n) <=> squarefree n
-      #|  &n:int
-      #|  (x:int == x) (mod n)
-      #|  a rem (&n)
-      #|  a:int
-      #|  (x == y) (mod(&0)) <=> x:int = y
-      #|  n = 0
-      #|  (x:int == x) (mod n)
-      #|  (x:int == x) (mod n)
-      #|  (d:int) divides x - y <=> (x == y) (mod d)
+      #|  int_of_num((n : Num))
+      #|  op_eq_eq((x : Int), x, mod((n : Int)))
+      #|  rem((a : Int), int_of_num((n : Num)))
+      #|  (a : Int)
+      #|  op_eq_eq((x : Int), (y : Int), mod(int_of_num(0))) == (x == y)
+      #|  (n : Num) == 0
+      #|  op_eq_eq((x : Int), x, mod((n : Int)))
+      #|  op_eq_eq((x : Int), x, mod((n : Int)))
+      #|  divides((d : Int), (x : Int) - (y : Int)) == op_eq_eq(x, y, mod(d))
       #|  (s SUBSET t /\\ P) /\\ (s = t /\\ Q) <=>\n                        s SUBSET t /\\ t SUBSET s /\\ P /\\ Q
       #|  ring_coset integer_ring (ideal_generated integer_ring {&n})
       #|  quotient_ring integer_ring (ideal_generated integer_ring {&n})\n   isomorphic_ring integer_mod_ring n
-      #|  ring_char(r:A ring) = 0
-      #|  ring_char(r:A ring)
-      #|  r:A ring
+      #|  ring_char((r : Ring[A])) == 0
+      #|  ring_char((r : Ring[A]))
+      #|  (r : Ring[A])
       #|  forall r:A ring.\n        ring_isomorphism\n         (integer_mod_ring (ring_char r),\n          subring_generated r {ring_of_int r n | n IN (:int)})\n         (ring_of_int r)
-      #|  ring_of_int r:int->A
+      #|  ring_of_int((r : Ring[A]))
       #|  forall r:A ring. subring_generated r {ring_of_int r n | n IN (:int)}\n              isomorphic_ring (integer_mod_ring (ring_char r))
-      #|  r:A ring
+      #|  (r : Ring[A])
       #|  forall r:A ring.\n        field(subring_generated r {ring_of_int r n | n IN (:int)}) <=>\n        prime(ring_char r)
-      #|  p:int
-      #|  p:int
-      #|  p:int
-      #|  a:num < n
-      #|  n = 0
-      #|  coprime(a:num,n)
+      #|  (p : Int)
+      #|  (p : Int)
+      #|  (p : Int)
+      #|  (a : Num) < (n : Num)
+      #|  (n : Num) == 0
+      #|  coprime(((a : Num), (n : Num)))
       #|  forall n a. ring_inv (integer_mod_ring n) (&a) =\n         if (n = 0 \\/ ~(n = 1) /\\ a < n) /\\ coprime(a,n)\n         then &(inverse_mod n a) else &0
       #|  ring_0 (integer_mod_ring n) = &0 /\\\n     ring_1 (integer_mod_ring n) = &1 rem &n /\\\n     ring_of_num (integer_mod_ring n) m = &m rem &n /\\\n     ring_neg (integer_mod_ring n) (&a) = --(&a) rem &n /\\\n     ring_add (integer_mod_ring n) (&a) (&b) = (&a + &b) rem &n /\\\n     ring_sub (integer_mod_ring n) (&a) (&b) = (&a - &b) rem &n /\\\n     ring_mul (integer_mod_ring n) (&a) (&b) = (&a * &b) rem &n /\\\n     ring_pow (integer_mod_ring n) (&a) k = (&a pow k) rem &n
       #|  ring_div (integer_mod_ring n) (&a) (&b) =\n        if (n = 0 \\/ ~(n = 1) /\\ b < n) /\\ coprime(b,n)\n         then (&a * &(inverse_mod n b)) rem &n else &0
-      #|  real_ring = ring((:real),&0,&1,( -- ),( + ),( * ))
+      #|  (real_ring : Ring[Real]) == ring((UNIV, real_of_num(0), real_of_num(1), op_minus_minus, op_plus, op_star))
       #|  ring_carrier real_ring = (:real) /\\\n   ring_0 real_ring = &0 /\\\n   ring_1 real_ring = &1 /\\\n   ring_neg real_ring = ( -- ) /\\\n   ring_add real_ring = ( + ) /\\\n   ring_mul real_ring = ( * )
-      #|  field real_ring
-      #|  integral_domain real_ring
-      #|  ring_of_num real_ring = real_of_num
-      #|  ring_of_int real_ring = real_of_int
-      #|  ring_char real_ring = 0
-      #|  ring_sub real_ring = (-)
-      #|  ring_inv real_ring = inv
-      #|  ring_div real_ring = (/)
-      #|  ring_pow real_ring = (pow)
+      #|  field(real_ring)
+      #|  integral_domain(real_ring)
+      #|  ring_of_num(real_ring) == real_of_num
+      #|  ring_of_int(real_ring) == real_of_int
+      #|  ring_char(real_ring) == 0
+      #|  ring_sub(real_ring) == op_minus
+      #|  ring_inv(real_ring) == inv
+      #|  ring_div(real_ring) == op_slash
+      #|  ring_pow(real_ring) == pow
       #|  ring_carrier real_ring = (:real) /\\\n   ring_0 real_ring = &0 /\\\n   ring_1 real_ring = &1 /\\\n   ring_neg real_ring = ( -- ) /\\\n   ring_add real_ring = ( + ) /\\\n   ring_mul real_ring = ( * ) /\\\n   ring_of_num real_ring = real_of_num /\\\n   ring_sub real_ring = (-) /\\\n   ring_inv real_ring = inv /\\\n   ring_div real_ring = (/) /\\\n   ring_pow real_ring = (pow)
-      #|  monomial_1 = \\i:V. 0
+      #|  (monomial_1 : (V) -> Num) == ((i : V) => 0)
       #|  monomial_mul (m1:V->num) (m2:V->num) =\n     \\i. m1 i + m2 i
       #|  monomial_div (m1:V->num) (m2:V->num) =\n     \\i. m1 i - m2 i
       #|  monomial_restrict s (m:V->num) = \\i. if i IN s then m i else 0
       #|  monomial_divides (m1:V->num) (m2:V->num) <=> forall i. m1 i <= m2 i
-      #|  monomial_var (v:V) = \\i. if i = v then 1 else 0
-      #|  monomial_vars m = {i:V | ~(m i = 0)}
-      #|  monomial_deg m = nsum (monomial_vars m) (m:V->num)
+      #|  (monomial_var : (V, V) -> Num)((v : V)) == ((i : V) => if i == v { 1 } else { 0 })
+      #|  (monomial_vars : ((V) -> Num, V) -> Bool)((m : (V) -> Num)) == {(i : V) | !(m(i) == 0)}
+      #|  (monomial_deg : ((V) -> Num) -> Num)((m : (V) -> Num)) == nsum(monomial_vars(m), m)
       #|  monomial (s:V->bool) m <=>\n     FINITE(monomial_vars m) /\\ (monomial_vars m) SUBSET s
-      #|  forall m1 m2:V->num. m1 = m2 <=> forall x. m1 x = m2 x
-      #|  forall m:V->num. FINITE(:V) ==> FINITE(monomial_vars m)
-      #|  forall m:1->num. FINITE(monomial_vars m)
-      #|  forall m:V->num. monomial_deg m = nsum UNIV m
-      #|  ~(1 = 0)
+      #|  \226\136\128 m1 : (V) -> Num, \226\136\128 m2 : (V) -> Num, (m1 == m2) == (\226\136\128 x : V, m1(x) == m2(x))
+      #|  \226\136\128 m : (V) -> Num, (FINITE : ((V) -> Bool) -> Bool)((UNIV : (V) -> Bool)) \226\134\146 (FINITE : ((V) -> Bool) -> Bool)((monomial_vars : ((V) -> Num, V) -> Bool)(m))
+      #|  \226\136\128 m : (Unit) -> Num, FINITE(monomial_vars(m))
+      #|  \226\136\128 m : (V) -> Num, monomial_deg(m) == nsum(UNIV, m)
+      #|  !(1 == 0)
       #|  (forall v:V. ~(monomial_var v = monomial_1)) /\\\n   (forall v:V. ~(monomial_1 = monomial_var v))
-      #|  monomial_vars (monomial_1:V->num) = {}
-      #|  forall m:V->num. monomial_vars m = {} <=> m = monomial_1
+      #|  (monomial_vars : ((V) -> Num, V) -> Bool)((monomial_1 : (V) -> Num)) == ({} : (V) -> Bool)
+      #|  \226\136\128 m : (V) -> Num, (monomial_vars(m) == {}) == (m == monomial_1)
       #|  forall m1 m2:V->num.\n        monomial_vars(monomial_mul m1 m2) =\n        monomial_vars m1 UNION monomial_vars m2
-      #|  forall v:V. monomial_vars(monomial_var v) = {v}
+      #|  \226\136\128 v : V, monomial_vars(monomial_var(v)) == {v}
       #|  forall s m:V->num.\n        monomial_vars(monomial_restrict s m) = s INTER monomial_vars m
       #|  forall(m:V->num) s.\n        monomial s (monomial_restrict s m) <=>\n        FINITE(s INTER monomial_vars m)
       #|  forall s m:V->num. monomial s m ==> monomial_restrict s m = m
       #|  forall s t (m:V->num).\n        monomial s m /\\ s SUBSET t ==> monomial t m
-      #|  forall s m. monomial s m ==> monomial (:V) m
-      #|  forall s:V->bool. monomial s monomial_1
+      #|  \226\136\128 s : (V) -> Bool, \226\136\128 m : (V) -> Num, monomial(s, m) \226\134\146 monomial(UNIV, m)
+      #|  \226\136\128 s : (V) -> Bool, monomial(s, monomial_1)
       #|  {x | ~(P x /\\ Q x)} = {x | ~P x} UNION {x | ~Q x}
       #|  forall(s:V->bool) m1 m2.\n        monomial s (monomial_mul m1 m2) <=> monomial s m1 /\\ monomial s m2
       #|  forall(m1:V->num) m2 s.\n        monomial_restrict s (monomial_mul m1 m2) =\n        monomial_mul (monomial_restrict s m1) (monomial_restrict s m2)
-      #|  (i:V) IN v
-      #|  (i:V) IN u
-      #|  i:V
-      #|  DISJOINT s t <=> forall x. ~(x IN s /\\ x IN t)
+      #|  IN((i : V), (v : (V) -> Bool))
+      #|  IN((i : V), (u : (V) -> Bool))
+      #|  (i : V)
+      #|  DISJOINT((s : (_) -> Bool), (t : (_) -> Bool)) == (\226\136\128 x : _, !(IN(x, s) && IN(x, t)))
       #|  forall(m:V->num) u v.\n        DISJOINT u v\n        ==> monomial_mul (monomial_restrict u m) (monomial_restrict v m) =\n            monomial_restrict (u UNION v) m
       #|  s SUBSET t ==> FINITE t /\\ t SUBSET u ==> FINITE s /\\ s SUBSET u
       #|  forall(s:V->bool) d m.\n        monomial s m /\\ monomial_divides d m ==> monomial s d
-      #|  ~(if p then F else T) <=> p
+      #|  !(if (p : Bool) { false } else { true }) == p
       #|  forall(s:V->bool) v. monomial s (monomial_var v) <=> v IN s
       #|  forall(s:V->bool) m. FINITE s ==> monomial s (monomial_restrict s m)
-      #|  monomial (:V) m <=> FINITE(monomial_vars m)
-      #|  forall m:1->num. monomial (:1) m
-      #|  monomial_deg (monomial_1:V->num) = 0
-      #|  forall v:V. monomial_deg (monomial_var v) = 1
+      #|  monomial(UNIV, (m : (V) -> Num)) == FINITE(monomial_vars(m))
+      #|  \226\136\128 m : (Unit) -> Num, monomial(UNIV, m)
+      #|  (monomial_deg : ((V) -> Num) -> Num)((monomial_1 : (V) -> Num)) == 0
+      #|  \226\136\128 v : V, monomial_deg(monomial_var(v)) == 1
       #|  forall m. monomial (:V) m ==> (monomial_deg m = 0 <=> m = monomial_1)
       #|  forall s m. monomial s m ==> (monomial_deg m = 0 <=> m = monomial_1)
-      #|  forall m d:V->num. monomial_divides (monomial_div m d) m
+      #|  \226\136\128 m : (V) -> Num, \226\136\128 d : (V) -> Num, monomial_divides(monomial_div(m, d), m)
       #|  forall s m d:V->num. monomial s m ==> monomial s (monomial_div m d)
-      #|  forall m:V->num. monomial_divides monomial_1 m
-      #|  a:num = b + m <=> m = a - b /\\ b <= a
+      #|  \226\136\128 m : (V) -> Num, monomial_divides(monomial_1, m)
+      #|  ((a : Num) == (b : Num) + (m : Num)) == (m == a - b && b <= a)
       #|  forall m1 m2:V->num.\n        monomial_divides m1 m2 <=> ?m. m2 = monomial_mul m1 m
-      #|  (if p  then q else true) <=> p ==> q
+      #|  (if (p : Bool) { (q : Bool) } else { true }) == (p \226\134\146 q)
       #|  forall m1 m2 x:V.\n        monomial_divides (monomial_var x) (monomial_mul m1 m2) <=>\n        monomial_divides (monomial_var x) m1 \\/\n        monomial_divides (monomial_var x) m2
-      #|  (if p then x else y) <=> (p ==> x) /\\ (~p ==> y)
+      #|  (if (p : Bool) { (x : Bool) } else { (y : Bool) }) == ((p \226\134\146 x) && (!p \226\134\146 y))
       #|  forall m1 m2 x:V.\n        monomial_mul m1 m2 = monomial_var x <=>\n        m1 = monomial_var x /\\ m2 = monomial_1 \\/\n        m1 = monomial_1 /\\ m2 = monomial_var x
-      #|  {i | ~(P i /\\ Q i)} = {i | ~P i} UNION {i | ~Q i}
+      #|  {(i : _) | !((P : (_) -> Bool)(i) && (Q : (_) -> Bool)(i))} == UNION({(i : _) | !P(i)}, {(i : _) | !Q(i)})
       #|  forall(m1:V->num) m2.\n        monomial (:V) m1 /\\ monomial (:V) m2\n        ==> monomial_deg(monomial_mul m1 m2) =\n            monomial_deg m1 + monomial_deg m2
-      #|  {i | ~(P i /\\ Q i)} = {i | ~P i} UNION {i | ~Q i}
-      #|  m:V->num
+      #|  {(i : _) | !((P : (_) -> Bool)(i) && (Q : (_) -> Bool)(i))} == UNION({(i : _) | !P(i)}, {(i : _) | !Q(i)})
+      #|  (m : (V) -> Num)
       #|  forall(m1:V->num) m2.\n        monomial (:V) m2 /\\\n        monomial_divides m1 m2\n        ==> monomial_deg m1 <= monomial_deg m2
-      #|  1 = 0
-      #|  forall v w:V. monomial_var v = monomial_var w <=> v = w
-      #|  forall m:V->num. monomial_mul monomial_1 m = m
-      #|  forall m:V->num. monomial_mul m monomial_1 = m
+      #|  1 == 0
+      #|  \226\136\128 v : V, \226\136\128 w : V, (monomial_var(v) == monomial_var(w)) == (v == w)
+      #|  \226\136\128 m : (V) -> Num, monomial_mul(monomial_1, m) == m
+      #|  \226\136\128 m : (V) -> Num, monomial_mul(m, monomial_1) == m
       #|  forall m1 m2:V->num.\n        monomial_mul m1 m2 = monomial_mul m2 m1
       #|  forall m1 m2 m3:V->num.\n        monomial_mul m1 (monomial_mul m2 m3) =\n        monomial_mul (monomial_mul m1 m2) m3
       #|  (forall m1 m2. monomial_mul m1 m2 = monomial_mul m2 m1) /\\\n   (forall m1 m2 m3. monomial_mul (monomial_mul m1 m2) m3 =\n            monomial_mul m1 (monomial_mul m2 m3)) /\\\n   (forall m1 m2 m3. monomial_mul m1 (monomial_mul m2 m3) =\n            monomial_mul m2 (monomial_mul m1 m3))
       #|  forall m1 m2:V->num.\n        monomial_mul m1 m2 = monomial_1 <=>\n        m1 = monomial_1 /\\ m2 = monomial_1
       #|  forall m m1 m2:V->num. monomial_mul m m1 = monomial_mul m m2 <=> m1 = m2
       #|  forall m m1 m2:V->num. monomial_mul m1 m = monomial_mul m2 m <=> m1 = m2
-      #|  forall m:V->num. monomial_divides m m
+      #|  \226\136\128 m : (V) -> Num, monomial_divides(m, m)
       #|  forall m1 m2 m3:V->num.\n        monomial_divides m1 m2 /\\ monomial_divides m2 m3\n        ==> monomial_divides m1 m3
       #|  forall m1 m2:V->num.\n        monomial_divides m1 m2 /\\ monomial_divides m2 m1 <=> m1 = m2
       #|  forall d m1 m2:V->num.\n        monomial_divides d m2 ==> monomial_divides d (monomial_mul m1 m2)
@@ -32774,42 +32774,42 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall m1 m2:V->num.\n        monomial_divides m2 m1 ==> monomial_mul m2 (monomial_div m1 m2) = m1
       #|  forall m1 m2:V->num.\n        monomial_mul (monomial_div m1 m2) m2 = m1 <=> monomial_divides m2 m1
       #|  forall m1 m2:V->num.\n        monomial_divides m2 m1 ==> monomial_mul (monomial_div m1 m2) m2 = m1
-      #|  v:V
+      #|  (v : V)
       #|  forall m v:V. monomial_divides (monomial_var v) m <=> v IN monomial_vars m
       #|  forall d m:V->num.\n        monomial_divides d m ==> monomial_vars d SUBSET monomial_vars m
-      #|  cartesian_product UNIV (\\i:V. 0..m i)
-      #|  monomial_vars m:V->bool
-      #|  monomial_var:V->V->num
+      #|  cartesian_product(UNIV, (i : V) => op_dot_dot(0, (m : (V) -> Num)(i)))
+      #|  monomial_vars((m : (V) -> Num))
+      #|  (monomial_var : (V, V) -> Num)
       #|  forall m:V->num. FINITE {d | monomial_divides d m} <=> FINITE(monomial_vars m)
       #|  {d:V->num | monomial_divides d m} CROSS {d | monomial_divides d m}
-      #|  n + m - n:num = m <=> n <= m
-      #|  \\v. (m:V->num) v - n v
-      #|  n:V->num
-      #|  n:V->num
-      #|  FST:(V->num)#(V->num)->V->num
+      #|  ((n : Num) + ((m : Num) - n) == m) == (n <= m)
+      #|  (v : V) => (m : (V) -> Num)(v) - (n : (V) -> Num)(v)
+      #|  (n : (V) -> Num)
+      #|  (n : (V) -> Num)
+      #|  (FST : (((V) -> Num, (V) -> Num), V) -> Num)
       #|  forall m:V->num. FINITE {(m1,m2) | monomial_mul m1 m2 = m} <=>\n              FINITE(monomial_vars m)
       #|  monomial_deg(monomial_mul (monomial_var v)\n                              (monomial_div m (monomial_var v)):V->num)
-      #|  v:V
-      #|  monomial_div m (monomial_var(v:V))
-      #|  v:V
-      #|  ~(monomial_vars(m:V->num) = {})
-      #|  m:V->num
-      #|  d:num
+      #|  (v : V)
+      #|  monomial_div((m : (V) -> Num), monomial_var((v : V)))
+      #|  (v : V)
+      #|  !(monomial_vars((m : (V) -> Num)) == {})
+      #|  (m : (V) -> Num)
+      #|  (d : Num)
       #|  forall d m:V->num. monomial s m /\\ monomial_deg m = d ==> P m
       #|  forall s (P:(V->num)->bool).\n        P monomial_1 /\\\n        (forall m v. monomial s m /\\ P m /\\ v IN s\n               ==> P(monomial_mul (monomial_var v) m))\n        ==> forall m. monomial s m ==> P m
       #|  forall i. monomial_vars(\\v:1. i) = if i = 0 then {} else {one}
-      #|  forall i. monomial_deg(\\v:1. i) = i
+      #|  \226\136\128 i : Num, monomial_deg((v : Unit) => i) == i
       #|  forall n. monomial_mul (monomial_var (one:1)) (\\v:1. n) = (\\v:1. n + 1)
-      #|  m:1->num = (\\v:1. m one)
-      #|  forall m:1->num. monomial_deg m = m one
+      #|  (m : (Unit) -> Num) == ((v : Unit) => m(one))
+      #|  \226\136\128 m : (Unit) -> Num, monomial_deg(m) == m(one)
       #|  ring_powerseries r p <=>\n        (forall m. p m IN ring_carrier r) /\\\n        forall m. INFINITE(monomial_vars m) ==> p m = ring_0 r
       #|  ring_polynomial r p <=>\n        ring_powerseries r p /\\ FINITE {m | ~(p m = ring_0 r)}
       #|  forall r (p:(V->num)->A). ring_polynomial r p ==> ring_powerseries r p
       #|  poly_vars r p = UNIONS { monomial_vars m | ~(p m = ring_0 r)}
       #|  poly_const (r:A ring) (c:A) =\n        \\m:V->num. if m = monomial_1 then c else ring_0 r
-      #|  poly_0 (r:A ring) = poly_const r (ring_0 r)
-      #|  poly_1 (r:A ring) = poly_const r (ring_1 r)
-      #|  poly_neg (r:A ring) p = \\m:V->num. ring_neg r (p m)
+      #|  (poly_0 : (Ring[A], (_) -> Num) -> A)((r : Ring[A])) == poly_const(r, ring_0(r))
+      #|  (poly_1 : (Ring[A], (_) -> Num) -> A)((r : Ring[A])) == poly_const(r, ring_1(r))
+      #|  (poly_neg : (Ring[A], ((V) -> Num) -> A, (V) -> Num) -> A)((r : Ring[A]), (p : ((V) -> Num) -> A)) == ((m : (V) -> Num) => ring_neg(r, p(m)))
       #|  poly_add (r:A ring) p1 p2 = \\m:V->num. ring_add r (p1 m) (p2 m)
       #|  poly_sub (r:A ring) p1 p2 = \\m:V->num. ring_sub r (p1 m) (p2 m)
       #|  poly_mul (r:A ring) p1 p2 =\n        \\m:V->num. ring_sum r {(m1,m2) | monomial_mul m1 m2 = m}\n                              (\\(m1,m2). ring_mul r (p1 m1) (p2 m2))
@@ -32817,111 +32817,111 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r (p:(V->num)->A) q. poly_sub r p q = poly_add r p (poly_neg r q)
       #|  forall r p m. ring_powerseries r p /\\ ~(p m:A = ring_0 r) ==> monomial (:V) m
       #|  forall r p m. ring_polynomial r p /\\ ~(p m:A = ring_0 r) ==> monomial (:V) m
-      #|  forall r. poly_0 r :(V->num)->A = \\m. ring_0 r
+      #|  \226\136\128 r : Ring[A], poly_0(r) == ((m : (V) -> Num) => ring_0(r))
       #|  forall r:A ring. poly_const r (ring_0 r):(V->num)->A = poly_0 r
       #|  forall r:A ring. poly_const r (ring_1 r):(V->num)->A = poly_1 r
       #|  forall r c. ring_powerseries r (poly_const r c :(V->num)->A) <=>\n         c IN ring_carrier r
-      #|  forall r v. ring_powerseries r (poly_var r v:(V->num)->A)
-      #|  forall r. ring_powerseries r (poly_0 r:(V->num)->A)
-      #|  forall r. ring_powerseries r (poly_1 r:(V->num)->A)
+      #|  \226\136\128 r : Ring[A], \226\136\128 v : V, ring_powerseries(r, poly_var(r, v))
+      #|  \226\136\128 r : Ring[A], (ring_powerseries : (Ring[A], ((V) -> Num) -> A) -> Bool)(r, (poly_0 : (Ring[A], (V) -> Num) -> A)(r))
+      #|  \226\136\128 r : Ring[A], (ring_powerseries : (Ring[A], ((V) -> Num) -> A) -> Bool)(r, (poly_1 : (Ring[A], (V) -> Num) -> A)(r))
       #|  forall(r:A ring) (v:V).\n     (poly_var r v:(V->num)->A) monomial_1 = ring_0 r
       #|  forall r (p:(V->num)->A).\n        ring_powerseries r p ==> ring_powerseries r (poly_neg r p)
       #|  forall r p1 (p2:(V->num)->A).\n        ring_powerseries r p1 /\\ ring_powerseries r p2\n        ==> ring_powerseries r (poly_add r p1 p2)
       #|  forall r p1 (p2:(V->num)->A).\n        ring_powerseries r p1 /\\ ring_powerseries r p2\n        ==> ring_powerseries r (poly_sub r p1 p2)
-      #|  m:V->num
+      #|  (m : (V) -> Num)
       #|  forall r p1 (p2:(V->num)->A).\n        ring_powerseries r p1 /\\ ring_powerseries r p2\n        ==> ring_powerseries r (poly_mul r p1 p2)
-      #|  {(monomial_1:V->num)}
-      #|  q ==> (p /\\ q <=> p)
+      #|  {(monomial_1 : (V) -> Num)}
+      #|  (q : Bool) \226\134\146 ((p : Bool) && q) == p
       #|  forall r c. ring_polynomial r (poly_const r c :(V->num)->A) <=>\n         c IN ring_carrier r
-      #|  {(monomial_var v:V->num)}
-      #|  forall r v. ring_polynomial r (poly_var r v:(V->num)->A)
+      #|  {monomial_var((v : V))}
+      #|  \226\136\128 r : Ring[A], \226\136\128 v : V, ring_polynomial(r, poly_var(r, v))
       #|  forall(r:A ring) (v:V) c.\n        poly_var r v = poly_const r c <=> trivial_ring r /\\ c = ring_0 r
-      #|  monomial_1:V->num
-      #|  monomial_var (v:V)
-      #|  forall r. ring_polynomial r (poly_0 r:(V->num)->A)
-      #|  forall r. ring_polynomial r (poly_1 r:(V->num)->A)
+      #|  (monomial_1 : (V) -> Num)
+      #|  monomial_var((v : V))
+      #|  \226\136\128 r : Ring[A], (ring_polynomial : (Ring[A], ((V) -> Num) -> A) -> Bool)(r, (poly_0 : (Ring[A], (V) -> Num) -> A)(r))
+      #|  \226\136\128 r : Ring[A], (ring_polynomial : (Ring[A], ((V) -> Num) -> A) -> Bool)(r, (poly_1 : (Ring[A], (V) -> Num) -> A)(r))
       #|  forall r (p:(V->num)->A).\n        ring_polynomial r p ==> ring_polynomial r (poly_neg r p)
       #|  forall r p1 (p2:(V->num)->A).\n        ring_polynomial r p1 /\\ ring_polynomial r p2\n        ==> ring_polynomial r (poly_add r p1 p2)
       #|  forall r p1 (p2:(V->num)->A).\n        ring_polynomial r p1 /\\ ring_polynomial r p2\n        ==> ring_polynomial r (poly_sub r p1 p2)
-      #|  m2:V->num
-      #|  m1:V->num
-      #|  m2:V->num
-      #|  m1:V->num
-      #|  m:V->num
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
+      #|  (m : (V) -> Num)
       #|  { monomial_mul m1 m2 |\n                m1 IN {m | ~((p1:(V->num)->A) m = ring_0 r)} /\\\n                m2 IN {m | ~((p2:(V->num)->A) m = ring_0 r)}}
       #|  forall r p1 (p2:(V->num)->A).\n        ring_polynomial r p1 /\\ ring_polynomial r p2\n        ==> ring_polynomial r (poly_mul r p1 p2)
-      #|  m:V->num
+      #|  (m : (V) -> Num)
       #|  forall r p1 (p2:(V->num)->A).\n        ring_powerseries r p1 /\\ ring_powerseries r p2\n        ==> poly_add r p1 p2 = poly_add r p2 p1
-      #|  m:V->num
+      #|  (m : (V) -> Num)
       #|  forall r p1 p2 (p3:(V->num)->A).\n      ring_powerseries r p1 /\\\n      ring_powerseries r p2 /\\\n      ring_powerseries r p3\n      ==> poly_add r p1 (poly_add r p2 p3) = poly_add r (poly_add r p1 p2) p3
-      #|  m:V->num
+      #|  (m : (V) -> Num)
       #|  forall r (p:(V->num)->A).\n        ring_powerseries r p\n        ==> poly_add r (poly_0 r) p = p
       #|  forall r (p:(V->num)->A).\n        ring_powerseries r p\n        ==> poly_add r p (poly_0 r) = p
-      #|  m:V->num
+      #|  (m : (V) -> Num)
       #|  forall r (p:(V->num)->A).\n        ring_powerseries r p\n        ==> poly_add r (poly_neg r p) p = poly_0 r
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  \\(m:V->num,m':V->num). (m',m)
-      #|  m:V->num
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  GABS((f : (((V) -> Num, (V) -> Num)) -> ((V) -> Num, (V) -> Num)) => \226\136\128 m : (V) -> Num, \226\136\128 m' : (V) -> Num, GEQ(f((m, m')), (m', m)))
+      #|  (m : (V) -> Num)
       #|  forall r p1 (p2:(V->num)->A).\n        ring_powerseries r p1 /\\ ring_powerseries r p2\n        ==> poly_mul r p1 p2 = poly_mul r p2 p1
-      #|  m2:V->num
-      #|  m1:V->num
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
       #|  x = ring_0 r /\\ y = ring_0 r /\\ z = ring_0 r\n      ==> z = ring_add r x y
-      #|  FINITE(monomial_vars(m:V->num))
-      #|  m:V->num
+      #|  FINITE(monomial_vars((m : (V) -> Num)))
+      #|  (m : (V) -> Num)
       #|  forall r p1 p2 (p3:(V->num)->A).\n      ring_powerseries r p1 /\\\n      ring_powerseries r p2 /\\\n      ring_powerseries r p3\n      ==> poly_mul r p1 (poly_add r p2 p3) =\n          poly_add r (poly_mul r p1 p2) (poly_mul r p1 p3)
-      #|  {(monomial_1:V->num,m:V->num)}
+      #|  {((monomial_1 : (V) -> Num), (m : (V) -> Num))}
       #|  forall t. ring_sum r t f = a /\\ ring_sum r s f = ring_sum r t f\n        ==> ring_sum r s f = a
-      #|  m:V->num
+      #|  (m : (V) -> Num)
       #|  forall r (p:(V->num)->A).\n        ring_powerseries r p\n        ==> poly_mul r (poly_1 r) p = p
       #|  forall r (p:(V->num)->A).\n        ring_powerseries r p\n        ==> poly_mul r p (poly_1 r) = p
       #|  \\(m1:V->num,m3:V->num,m4:V->num). (m1,monomial_mul m3 m4),(m3,m4)
       #|  \\((m1:V->num,m2:V->num),(m3:V->num,m4:V->num)). (m1,m3,m4)
-      #|  m2:V->num
-      #|  m1:V->num
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
       #|  \\(m1:V->num,m:V->num) (m2:V->num,m3:V->num).\n          ring_mul (r:A ring) (p1 m1)\n                   (ring_mul r (p2 m2) (p3 m3))
       #|  \\(m1:V->num,m). {m2,m3 | monomial_mul m2 m3:V->num = m}
-      #|  {m1,m2 | monomial_mul m1 m2:V->num = m}
-      #|  r:A ring
+      #|  {((m1 : (V) -> Num), (m2 : (V) -> Num)) | monomial_mul(m1, m2) == (m : (V) -> Num)}
+      #|  (r : Ring[A])
       #|  x IN ring_carrier r /\\ y = ring_0 r\n          ==> ring_mul r x y = ring_0 r
       #|  ring_sum r s f = ring_0 r /\\ ring_sum r t g = ring_0 r\n        ==> ring_sum r s f = ring_sum r t g
-      #|  FINITE(monomial_vars m:V->bool)
-      #|  m:V->num
+      #|  FINITE(monomial_vars((m : (V) -> Num)))
+      #|  (m : (V) -> Num)
       #|  forall r p1 p2 (p3:(V->num)->A).\n      ring_powerseries r p1 /\\ ring_powerseries r p2 /\\ ring_powerseries r p3\n      ==> poly_mul r p1 (poly_mul r p2 p3) =\n          \\m. ring_sum r\n               {(m1,m2,m3) | monomial_mul m1 (monomial_mul m2 m3) = m}\n               (\\(m1,m2,m3). ring_mul r (p1 m1) (ring_mul r (p2 m2) (p3 m3)))
-      #|  \\(m3:V->num,m1:V->num,m2:V->num). m1,m2,m3
-      #|  \\(m1:V->num,m2:V->num,m3:V->num). m3,m1,m2
-      #|  m:V->num
+      #|  GABS((f : (((V) -> Num, (V) -> Num, (V) -> Num)) -> ((V) -> Num, (V) -> Num, (V) -> Num)) => \226\136\128 m3 : (V) -> Num, \226\136\128 m1 : (V) -> Num, \226\136\128 m2 : (V) -> Num, GEQ(f((m3, m1, m2)), (m1, m2, m3)))
+      #|  GABS((f : (((V) -> Num, (V) -> Num, (V) -> Num)) -> ((V) -> Num, (V) -> Num, (V) -> Num)) => \226\136\128 m1 : (V) -> Num, \226\136\128 m2 : (V) -> Num, \226\136\128 m3 : (V) -> Num, GEQ(f((m1, m2, m3)), (m3, m1, m2)))
+      #|  (m : (V) -> Num)
       #|  forall r p1 p2 (p3:(V->num)->A).\n      ring_powerseries r p1 /\\ ring_powerseries r p2 /\\ ring_powerseries r p3\n      ==> poly_mul r p1 (poly_mul r p2 p3) = poly_mul r (poly_mul r p1 p2) p3
       #|  (forall r (p:(V->num)->A).\n        ring_powerseries r p ==> poly_mul r p (poly_0 r) = poly_0 r) /\\\n   (forall r (q:(V->num)->A).\n        ring_powerseries r q ==> poly_mul r (poly_0 r) q = poly_0 r)
       #|  (forall r (p:(V->num)->A).\n        ring_polynomial r p ==> poly_mul r p (poly_0 r) = poly_0 r) /\\\n   (forall r (q:(V->num)->A).\n        ring_polynomial r q ==> poly_mul r (poly_0 r) q = poly_0 r)
-      #|  {x,y | x = a /\\ y = b} = {(a,b)}
+      #|  {((x : _), (y : _)) | x == (a : _) && y == (b : _)} == {(a, b)}
       #|  forall r (p:(V->num)->A) q.\n        ring_powerseries r p /\\ ring_powerseries r q\n        ==> poly_mul r p q monomial_1 =\n            ring_mul r (p monomial_1) (q monomial_1)
       #|  forall r (p:(V->num)->A) q.\n        ring_polynomial r p /\\ ring_polynomial r q\n        ==> poly_mul r p q monomial_1 =\n            ring_mul r (p monomial_1) (q monomial_1)
-      #|  {f x y | x = a /\\ y = b} = {f a b}
+      #|  {(f : (_, _) -> _)((x : _), (y : _)) | x == (a : _) && y == (b : _)} == {f(a, b)}
       #|  monomial_mul m1 m2 = m /\\ m1 = monomial_1 <=>\n     m1 = monomial_1 /\\ m2 = m
       #|  {p | p IN {f x y |x,y| P x y} /\\ Q p} =\n                        {f x y |x,y| P x y /\\ Q(f x y)}
-      #|  m:V->num
+      #|  (m : (V) -> Num)
       #|  forall r c (p:(V->num)->A).\n        c IN ring_carrier r /\\ ring_powerseries r p\n        ==> poly_mul r (poly_const r c) p = \\m. ring_mul r c (p m)
       #|  forall r c (p:(V->num)->A).\n        c IN ring_carrier r /\\ ring_polynomial r p\n        ==> poly_mul r (poly_const r c) p = \\m. ring_mul r c (p m)
       #|  monomial_mul m1 m2 = m <=> monomial_divides m1 m /\\ monomial_div m m1 = m2
-      #|  {f a b |P a b /\\ a = c} = IMAGE (f c) {b | P c b}
+      #|  {(f : (_, _) -> _)((a : _), (b : _)) | (P : (_, _) -> Bool)(a, b) && a == (c : _)} == IMAGE(f(c), {(b : _) | P(c, b)})
       #|  {x | x IN {f a b | P a b} /\\ Q x} =\n                        {f a b |a,b| P a b /\\ Q(f a b)}
-      #|  m:V->num
+      #|  (m : (V) -> Num)
       #|  forall r (p:(V->num)->A) x.\n        ring_powerseries r p\n        ==> poly_mul r (poly_var r x) p =\n            \\m. if monomial_divides (monomial_var x) m\n                then p(monomial_div m (monomial_var x))\n                else ring_0 r
       #|  forall r (p:(V->num)->A) x.\n        ring_powerseries r p\n        ==> poly_mul r p (poly_var r x) =\n            \\m. if monomial_divides (monomial_var x) m\n                then p(monomial_div m (monomial_var x))\n                else ring_0 r
       #|  forall r (p:(V->num)->A) x.\n        ring_polynomial r p\n        ==> poly_mul r (poly_var r x) p =\n            \\m. if monomial_divides (monomial_var x) m\n                then p(monomial_div m (monomial_var x))\n                else ring_0 r
       #|  forall r (p:(V->num)->A) x.\n        ring_polynomial r p\n        ==> poly_mul r p (poly_var r x) =\n            \\m. if monomial_divides (monomial_var x) m\n                then p(monomial_div m (monomial_var x))\n                else ring_0 r
-      #|  c:A = ring_0 r
-      #|  ~(if p then q else T) <=> p /\\ ~q
-      #|  forall(r:A ring) c. poly_vars r (poly_const r c) = {}
-      #|  forall r:A ring. poly_vars r (poly_0 r) = {}
-      #|  forall r:A ring. poly_vars r (poly_1 r) = {}
-      #|  ~(if p then q else T) <=> p /\\ ~q
+      #|  (c : A) == ring_0((r : Ring[A]))
+      #|  !(if (p : Bool) { (q : Bool) } else { true }) == (p && !q)
+      #|  \226\136\128 r : Ring[A], \226\136\128 c : A, (poly_vars : (Ring[A], ((_) -> Num) -> A, _) -> Bool)(r, (poly_const : (Ring[A], A, (_) -> Num) -> A)(r, c)) == ({} : (_) -> Bool)
+      #|  \226\136\128 r : Ring[A], (poly_vars : (Ring[A], ((_) -> Num) -> A, _) -> Bool)(r, (poly_0 : (Ring[A], (_) -> Num) -> A)(r)) == ({} : (_) -> Bool)
+      #|  \226\136\128 r : Ring[A], (poly_vars : (Ring[A], ((_) -> Num) -> A, _) -> Bool)(r, (poly_1 : (Ring[A], (_) -> Num) -> A)(r)) == ({} : (_) -> Bool)
+      #|  !(if (p : Bool) { (q : Bool) } else { true }) == (p && !q)
       #|  forall(r:A ring) (v:V).\n        poly_vars r (poly_var r v) =\n        if trivial_ring r then {} else {v}
       #|  forall r (p:(V->num)->A).\n        ring_powerseries r p ==> poly_vars r (poly_neg r p) = poly_vars r p
       #|  forall r (p1:(V->num)->A) (p2:(V->num)->A).\n        ring_powerseries r p1 /\\ ring_powerseries r p2\n        ==> poly_vars r (poly_add r p1 p2) SUBSET\n            poly_vars r p1 UNION poly_vars r p2
       #|  ~(ring_mul r x y = ring_0 r)\n    ==> x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> ~(x = ring_0 r) /\\ ~(y = ring_0 r)
-      #|  m:V->num
-      #|  x:V
+      #|  (m : (V) -> Num)
+      #|  (x : V)
       #|  forall r (p1:(V->num)->A) (p2:(V->num)->A).\n        ring_powerseries r p1 /\\ ring_powerseries r p2\n        ==> poly_vars r (poly_mul r p1 p2) SUBSET\n            poly_vars r p1 UNION poly_vars r p2
       #|  forall r (p:(V->num)->A). ring_polynomial r p ==> FINITE(poly_vars r p)
       #|  powser_ring (r:A ring) (s:V->bool) =\n        ring({p | ring_powerseries r p /\\ poly_vars r p SUBSET s},\n             poly_0 r,poly_1 r,poly_neg r,poly_add r,poly_mul r)
@@ -32935,12 +32935,12 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r s:A->bool. ring_monomorphism(poly_ring r s,powser_ring r s) (\\x. x)
       #|  (forall(r:A ring) (s:V->bool).\n        ring_carrier(poly_ring r s) =\n        {p | ring_polynomial r p /\\ poly_vars r p SUBSET s}) /\\\n   (forall(r:A ring) (s:V->bool). ring_0(poly_ring r s) = poly_0 r) /\\\n   (forall(r:A ring) (s:V->bool). ring_1(poly_ring r s) = poly_1 r) /\\\n   (forall(r:A ring) (s:V->bool). ring_neg(poly_ring r s) = poly_neg r) /\\\n   (forall(r:A ring) (s:V->bool). ring_add(poly_ring r s) = poly_add r) /\\\n   (forall(r:A ring) (s:V->bool). ring_mul(poly_ring r s) = poly_mul r)
       #|  forall(r:A ring) (v:V->bool) p.\n        p IN ring_carrier(poly_ring r v)\n        ==> p IN ring_carrier(powser_ring r v)
-      #|  poly_pow (r:A ring) = ring_pow (powser_ring r (:V))
+      #|  (poly_pow : (Ring[A], ((V) -> Num) -> A, Num, (V) -> Num) -> A)((r : Ring[A])) == ring_pow(powser_ring(r, UNIV))
       #|  (forall r p. poly_pow r (p:(V->num)->A) 0 = poly_1 r) /\\\n   (forall r p n. poly_pow r (p:(V->num)->A) (SUC n) =\n            poly_mul r p (poly_pow r p n))
-      #|  forall r:A ring. poly_pow r = ring_pow (poly_ring r (:V))
+      #|  \226\136\128 r : Ring[A], (poly_pow : (Ring[A], ((V) -> Num) -> A, Num, (V) -> Num) -> A)(r) == (ring_pow : (Ring[((V) -> Num) -> A], ((V) -> Num) -> A, Num, (V) -> Num) -> A)((poly_ring : (Ring[A], (V) -> Bool) -> Ring[((V) -> Num) -> A])(r, (UNIV : (V) -> Bool)))
       #|  forall r (p:(V->num)->A) n.\n        ring_powerseries r p ==> ring_powerseries r (poly_pow r p n)
       #|  forall r (p:(V->num)->A) n.\n        ring_polynomial r p ==> ring_polynomial r (poly_pow r p n)
-      #|  forall r n. poly_pow r (poly_1 r:(V->num)->A) n = poly_1 r
+      #|  \226\136\128 r : Ring[A], \226\136\128 n : Num, (poly_pow : (Ring[A], ((V) -> Num) -> A, Num, (V) -> Num) -> A)(r, (poly_1 : (Ring[A], (V) -> Num) -> A)(r), n) == (poly_1 : (Ring[A], (V) -> Num) -> A)(r)
       #|  forall r n. poly_pow r (poly_0 r:(V->num)->A) n =\n         if n = 0 then poly_1 r else poly_0 r
       #|  forall r (p:(V->num)->A) n.\n        ring_powerseries r p\n        ==> poly_vars r (poly_pow r p n) SUBSET poly_vars r p
       #|  (forall(r:A ring) (s:V->bool).\n        ring_carrier(powser_ring r s) =\n        {p | ring_powerseries r p /\\ poly_vars r p SUBSET s}) /\\\n   (forall(r:A ring) (s:V->bool). ring_0(powser_ring r s) = poly_0 r) /\\\n   (forall(r:A ring) (s:V->bool). ring_1(powser_ring r s) = poly_1 r) /\\\n   (forall(r:A ring) (s:V->bool). ring_neg(powser_ring r s) = poly_neg r) /\\\n   (forall(r:A ring) (s:V->bool). ring_add(powser_ring r s) = poly_add r) /\\\n   (forall(r:A ring) (s:V->bool). ring_sub(powser_ring r s) = poly_sub r) /\\\n   (forall(r:A ring) (s:V->bool). ring_mul(powser_ring r s) = poly_mul r) /\\\n   (forall(r:A ring) (s:V->bool). ring_pow(powser_ring r s) = poly_pow r)
@@ -32965,9 +32965,9 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(r:A ring) (v:V->bool) p.\n        p IN ring_carrier(poly_ring r v)\n        ==> p IN ring_carrier(poly_ring r (poly_vars r p))
       #|  forall r v (p:(V->num)->A).\n        p IN ring_carrier(poly_ring r v)\n        ==> ?w. FINITE w /\\ w SUBSET v /\\ p IN ring_carrier(poly_ring r w)
       #|  ring_0 r INSERT IMAGE (p:(V->num)->A) {m | ~(p m = ring_0 r)}
-      #|  IMAGE (p:(V->num)->A) UNIV
-      #|  s:A->bool
-      #|  r:A ring
+      #|  IMAGE((p : ((V) -> Num) -> A), UNIV)
+      #|  (s : (A) -> Bool)
+      #|  (r : Ring[A])
       #|  forall r s v (p:(V->num)->A).\n        p IN ring_carrier(poly_ring (subring_generated r s) v)\n        ==> ?t. FINITE t /\\\n                t SUBSET s /\\\n                p IN ring_carrier(poly_ring (subring_generated r t) v)
       #|  forall(r:A ring) (s:V->bool) i.\n        poly_var r i IN ring_carrier(poly_ring r s) <=>\n        trivial_ring r \\/ i IN s
       #|  forall(r:A ring) i. poly_var r i IN ring_carrier (poly_ring r (:V))
@@ -32975,12 +32975,12 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(r:A ring) (s:V->bool) i.\n        poly_var r i IN ring_carrier(powser_ring r s) <=>\n        trivial_ring r \\/ i IN s
       #|  forall(r:A ring) i. poly_var r i IN ring_carrier (powser_ring r (:V))
       #|  forall(r:A ring) (s:V->bool) c.\n        poly_const r c IN ring_carrier(powser_ring r s) <=>\n        c IN ring_carrier r
-      #|  m:V->num
+      #|  (m : (V) -> Num)
       #|  forall r x. poly_const r (ring_neg r x):(V->num)->A =\n         poly_neg r (poly_const r x)
-      #|  m:V->num
+      #|  (m : (V) -> Num)
       #|  forall r x y.\n        poly_const r (ring_add r x y):(V->num)->A =\n        poly_add r (poly_const r x) (poly_const r y)
       #|  x IN ring_carrier r /\\ y IN ring_carrier r\n    ==> ring_mul r (if p then x else ring_0 r)\n                    (if q then y else ring_0 r) =\n        (if p /\\ q then ring_mul r x y else ring_0 r)
-      #|  m:V->num
+      #|  (m : (V) -> Num)
       #|  forall r x y.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> poly_const r (ring_mul r x y):(V->num)->A =\n            poly_mul r (poly_const r x) (poly_const r y)
       #|  forall(r:A ring) (s:V->bool) n.\n        ring_of_num (powser_ring r s) n = poly_const r (ring_of_num r n)
       #|  forall(r:A ring) (s:V->bool) n.\n        ring_of_num (poly_ring r s) n = poly_const r (ring_of_num r n)
@@ -32988,14 +32988,14 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r x y. poly_const r x :(V->num)->A = poly_const r y <=> x = y
       #|  forall r x. poly_const r x :(V->num)->A = poly_0 r <=> x = ring_0 r
       #|  forall r x. poly_const r x :(V->num)->A = poly_1 r <=> x = ring_1 r
-      #|  monomial_div (monomial_mul m1 m2) m1 = m2
-      #|  monomial_mul (monomial_var(x:V)) m
-      #|  m:V->num
+      #|  monomial_div(monomial_mul((m1 : (_) -> Num), (m2 : (_) -> Num)), m1) == m2
+      #|  monomial_mul(monomial_var((x : V)), (m : (V) -> Num))
+      #|  (m : (V) -> Num)
       #|  (p ==> q) /\\ p ==> p /\\ q
       #|  (forall(r:A ring) p (x:V).\n        ring_powerseries r p\n        ==> (poly_mul r (poly_var r x) p = poly_0 r <=> p = poly_0 r)) /\\\n   (forall(r:A ring) p (x:V).\n        ring_powerseries r p\n        ==> (poly_mul r p (poly_var r x) = poly_0 r <=> p = poly_0 r))
-      #|  k:num
-      #|  k:num
-      #|  (p ==> q) /\\ p ==> p /\\ q
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  ((p : Bool) \226\134\146 (q : Bool)) && p \226\134\146 p && q
       #|  (forall(r:A ring) p (x:V) k.\n        ring_powerseries r p\n        ==> (poly_mul r (poly_pow r (poly_var r x) k) p = poly_0 r <=>\n             p = poly_0 r)) /\\\n   (forall(r:A ring) p (x:V) k.\n        ring_powerseries r p\n        ==> (poly_mul r p (poly_pow r (poly_var r x) k) = poly_0 r <=>\n             p = poly_0 r))
       #|  forall(r:A ring) (s:V->bool).\n        ring_homomorphism (r,poly_ring r s) (poly_const r)
       #|  forall(r:A ring) (s:V->bool).\n        ring_monomorphism (r,poly_ring r s) (poly_const r)
@@ -33006,52 +33006,52 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(r:A ring) (s:V->bool) f (k:K->bool).\n        FINITE k /\\\n        (forall i. i IN k ==> f i IN ring_carrier(poly_ring r s))\n        ==> ring_sum (poly_ring r s) k f = \\m. ring_sum r k (\\i. f i m)
       #|  ring_mul r (if p then ring_1 r else ring_0 r)\n               (if q then ring_1 r else ring_0 r) =\n    if p /\\ q then ring_1 r else ring_0 r
       #|  forall(r:A ring) (s:V->bool) i k.\n        ring_pow (poly_ring r s) (poly_var r i) k =\n        \\m. if m = (\\j. if j = i then k else 0)\n            then ring_1 r else ring_0 r
-      #|  j:V = i
-      #|  j:V
+      #|  (j : V) == (i : V)
+      #|  (j : V)
       #|  ring_mul r (if p then ring_1 r else ring_0 r)\n               (if q then ring_1 r else ring_0 r) =\n    if p /\\ q then ring_1 r else ring_0 r
-      #|  ~p ==> p ==> q
-      #|  k:V->bool
-      #|  i:V
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  (k : (V) -> Bool)
+      #|  (i : V)
       #|  forall(r:A ring) (s:V->bool) m k.\n        FINITE k /\\ k SUBSET s\n        ==> ring_product (poly_ring r s) k\n                         (\\i. ring_pow (poly_ring r s) (poly_var r i) (m i)) =\n            \\m'. if m' = (\\i. if i IN k then m i else 0)\n                 then ring_1 r else ring_0 r
-      #|  k:V->bool
-      #|  \\i:V. 1
-      #|  s:V->bool
-      #|  r:A ring
+      #|  (k : (V) -> Bool)
+      #|  (i : V) => 1
+      #|  (s : (V) -> Bool)
+      #|  (r : Ring[A])
       #|  forall(r:A ring) (s:V->bool) k.\n        FINITE k /\\ k SUBSET s\n        ==> ring_product (poly_ring r s) k (poly_var r) =\n            \\m. if m = (\\i. if i IN k then 1 else 0)\n                then ring_1 r else ring_0 r
-      #|  (if ~(m = 0) then m else 0) = m
+      #|  (if !((m : Num) == 0) { m } else { 0 }) == m
       #|  forall(r:A ring) (s:V->bool) m.\n          FINITE(monomial_vars m) /\\ monomial_vars m SUBSET s\n          ==> ring_product (poly_ring r s) (monomial_vars m)\n                 (\\i. ring_pow (poly_ring r s) (poly_var r i) (m i)) =\n               \\m'. if m' = m then ring_1 r else ring_0 r
       #|  x IN ring_carrier r\n      ==> ring_mul r (if p then x else ring_0 r)\n                     (if q then ring_1 r else ring_0 r) =\n           (if p /\\ q then x else ring_0 r)
-      #|  m':V->num
+      #|  (m' : (V) -> Num)
       #|  ring_sum r {m | ~((p:(V->num)->A) m = ring_0 r)}\n               (\\m'. ring_mul (poly_ring r s) (poly_const r (p m'))\n                         (\\m''. if m'' = m'\n                                then ring_1 r else ring_0 r) (m:V->num))
-      #|  m:V->num
+      #|  (m : (V) -> Num)
       #|  forall(r:A ring) (s:V->bool) p.\n       p IN ring_carrier (poly_ring r s)\n       ==> ring_sum (poly_ring r s) {m | ~(p m = ring_0 r)}\n             (\\m. ring_mul (poly_ring r s)\n                   (poly_const r (p m))\n                   (ring_product (poly_ring r s) (monomial_vars m)\n                     (\\i. ring_pow (poly_ring r s) (poly_var r i) (m i)))) =\n           p
-      #|  ring_1 r:A
-      #|  n:num
-      #|  (m:V->num) i
-      #|  ois:V->bool
-      #|  i:V
-      #|  ring_1 r:A
-      #|  l:V->bool
-      #|  monomial_vars m:V->bool
-      #|  FINITE(monomial_vars m:V->bool)
-      #|  (monomial_vars m:V->bool) SUBSET s
-      #|  poly_0 r:(V->num)->A = ring_0(poly_ring r s)
-      #|  ring_0 r:A
-      #|  (p:(V->num)->A) m = ring_0 r
-      #|  ms:(V->num)->bool
-      #|  m:V->num
-      #|  ring_0 r:A
-      #|  k:(V->num)->bool
-      #|  {m | ~((p:(V->num)->A) m = ring_0 r)}
-      #|  FINITE {m | ~((p:(V->num)->A) m = ring_0 r)}
+      #|  ring_1((r : Ring[A]))
+      #|  (n : Num)
+      #|  (m : (V) -> Num)((i : V))
+      #|  (ois : (V) -> Bool)
+      #|  (i : V)
+      #|  ring_1((r : Ring[A]))
+      #|  (l : (V) -> Bool)
+      #|  monomial_vars((m : (V) -> Num))
+      #|  FINITE(monomial_vars((m : (V) -> Num)))
+      #|  SUBSET(monomial_vars((m : (V) -> Num)), (s : (V) -> Bool))
+      #|  poly_0((r : Ring[A])) == ring_0(poly_ring(r, (s : (V) -> Bool)))
+      #|  ring_0((r : Ring[A]))
+      #|  (p : ((V) -> Num) -> A)((m : (V) -> Num)) == ring_0((r : Ring[A]))
+      #|  (ms : ((V) -> Num) -> Bool)
+      #|  (m : (V) -> Num)
+      #|  ring_0((r : Ring[A]))
+      #|  (k : ((V) -> Num) -> Bool)
+      #|  {(m : (V) -> Num) | !((p : ((V) -> Num) -> A)(m) == ring_0((r : Ring[A])))}
+      #|  FINITE({(m : (V) -> Num) | !((p : ((V) -> Num) -> A)(m) == ring_0((r : Ring[A])))})
       #|  forall(r:A ring) (s:V->bool) P.\n        (forall c. c IN ring_carrier r ==> P(poly_const r c)) /\\\n        (forall i. i IN s ==> P(poly_var r i)) /\\\n        (forall x y. P x /\\ P y ==> P(ring_add (poly_ring r s) x y)) /\\\n        (forall x y. P x /\\ P y ==> P(ring_mul (poly_ring r s) x y))\n        ==> forall p. p IN ring_carrier(poly_ring r s) ==> P p
-      #|  p ==> q <=> p ==> p /\\ q
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == (p \226\134\146 p && q)
       #|  forall(r:A ring) (s:V->bool) P.\n        (forall c. c IN ring_carrier r ==> P(poly_const r c)) /\\\n        (forall i. i IN s ==> P(poly_var r i)) /\\\n        (forall x y. x IN ring_carrier(poly_ring r s) /\\\n               y IN ring_carrier(poly_ring r s) /\\\n               P x /\\ P y\n               ==> P(ring_add (poly_ring r s) x y)) /\\\n        (forall x y. x IN ring_carrier(poly_ring r s) /\\\n               y IN ring_carrier(poly_ring r s) /\\\n               P x /\\ P y ==> P(ring_mul (poly_ring r s) x y))\n        ==> forall p. p IN ring_carrier(poly_ring r s) ==> P p
       #|  forall(r:A ring) (r':B ring) (s:V->bool) f g.\n        ring_homomorphism(poly_ring r s,r') f /\\\n        ring_homomorphism(poly_ring r s,r') g /\\\n        (forall c. c IN ring_carrier r ==> f(poly_const r c) = g(poly_const r c)) /\\\n        (forall i. i IN s ==> f(poly_var r i) = g(poly_var r i))\n        ==> forall p. p IN ring_carrier(poly_ring r s) ==> f p = g p
       #|  forall(r:A ring) (s:V->bool). trivial_ring(powser_ring r s) <=> trivial_ring r
       #|  forall(r:A ring) (s:V->bool). trivial_ring(poly_ring r s) <=> trivial_ring r
-      #|  (:V)
-      #|  r:A ring
+      #|  (UNIV : (V) -> Bool)
+      #|  (r : Ring[A])
       #|  forall r (p:(V->num)->A).\n     ring_powerseries r p /\\ trivial_ring r ==> p = poly_0 r
       #|  forall r (p:(V->num)->A).\n        ring_polynomial r p /\\ trivial_ring r ==> p = poly_0 r
       #|  forall(r:A ring) (s:V->bool).\n        ring_carrier(powser_ring r s) =\n        {p | (forall m. p m IN ring_carrier r) /\\\n             (forall m. ~(monomial s m) ==> p m = ring_0 r)}
@@ -33068,43 +33068,43 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r r' (h:A->B) p (x:V->B). poly_extend (r,r') h x p IN ring_carrier r'
       #|  forall s r r' (h:A->B) p (x:V->B).\n        ring_homomorphism(r,r') h /\\\n        {m | ~(p m = ring_0 r)} SUBSET s\n        ==> poly_extend (r,r') h x (p:(V->num)->A) =\n            ring_sum r' s (\\m. ring_mul r' (h (p m))\n                                (ring_product r' (monomial_vars m)\n                                         (\\i. ring_pow r' (x i) (m i))))
       #|  forall(h:A->B) r s (v:V->bool) x p.\n        p IN ring_carrier(poly_ring r v) /\\ ring_homomorphism (r,s) h\n        ==> poly_extend (r,s) h x p =\n            ring_sum s {m | monomial v m}\n                       (\\m. ring_mul s (h (p m))\n                                  (ring_product s (monomial_vars m)\n                                           (\\i. ring_pow s (x i) (m i))))
-      #|  c:A = ring_0 r
-      #|  ~(if p then q else T) <=> p /\\ ~q
+      #|  (c : A) == ring_0((r : Ring[A]))
+      #|  !(if (p : Bool) { (q : Bool) } else { true }) == (p && !q)
       #|  forall r r' (h:A->B) (x:V->B) c.\n        ring_homomorphism(r,r') h /\\ c IN ring_carrier r\n        ==> poly_extend (r,r') h x (poly_const r c) = h c
       #|  forall r r' (h:A->B) (x:V->B).\n        ring_homomorphism(r,r') h\n        ==> poly_extend (r,r') h x (poly_0 r) = ring_0 r'
       #|  forall r r' (h:A->B) (x:V->B).\n        ring_homomorphism(r,r') h\n        ==> poly_extend (r,r') h x (poly_1 r) = ring_1 r'
-      #|  ~(if p then q else T) <=> p /\\ ~q
-      #|  a IN s ==> (s = {z} /\\ P) /\\ b IN s ==> a = b
-      #|  trivial_ring (r:A ring)
+      #|  !(if (p : Bool) { (q : Bool) } else { true }) == (p && !q)
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 (s == {(z : _)} && (P : Bool)) && IN((b : _), s) \226\134\146 a == b
+      #|  trivial_ring((r : Ring[A]))
       #|  forall r r' (h:A->B) (x:V->B) i.\n        ring_homomorphism(r,r') h /\\ x i IN ring_carrier r'\n        ==> poly_extend (r,r') h x (poly_var r i) = x i
       #|  forall r r' (h:A->B) (x:V->B) p.\n      ring_homomorphism(r,r') h /\\ ring_polynomial r p\n      ==> poly_extend (r,r') h x (poly_neg r p) =\n          ring_neg r' (poly_extend (r,r') h x p)
-      #|  h:A->B
-      #|  r':B ring
-      #|  r:A ring
+      #|  (h : (A) -> B)
+      #|  (r' : Ring[B])
+      #|  (r : Ring[A])
       #|  {m | ~((p1:(V->num)->A) m = ring_0 r)} UNION\n                  {m | ~((p2:(V->num)->A) m = ring_0 r)}
       #|  forall r r' (h:A->B) (x:V->B) p1 p2.\n      ring_homomorphism(r,r') h /\\\n      ring_polynomial r p1 /\\ ring_polynomial r p2\n      ==> poly_extend (r,r') h x (poly_add r p1 p2) =\n          ring_add r' (poly_extend (r,r') h x p1) (poly_extend (r,r') h x p2)
       #|  forall r r' (h:A->B) (x:V->B) p1 p2.\n      ring_homomorphism(r,r') h /\\\n      ring_polynomial r p1 /\\ ring_polynomial r p2\n      ==> poly_extend (r,r') h x (poly_sub r p1 p2) =\n          ring_sub r' (poly_extend (r,r') h x p1) (poly_extend (r,r') h x p2)
-      #|  {x,y | P x y} = IMAGE (\\(x,y). y,x) {x,y | P y x}
-      #|  i:V
-      #|  ~INFINITE s <=> FINITE s
+      #|  {((x : _), (y : _)) | (P : (_, _) -> Bool)(x, y)} == IMAGE(GABS((f : ((_, _)) -> (_, _)) => \226\136\128 x : _, \226\136\128 y : _, GEQ(f((x, y)), (y, x))), {((x : _), (y : _)) | P(y, x)})
+      #|  (i : V)
+      #|  !INFINITE((s : (_) -> Bool)) == FINITE(s)
       #|  (ring_product r s f = ring_product r u f /\\\n     ring_product r t g = ring_product r u g) /\\\n    ring_mul r (ring_product r u f) (ring_product r u g) =\n    ring_product r u h\n    ==> ring_mul r (ring_product r s f) (ring_product r t g) =\n        ring_product r u h
       #|  a IN ring_carrier r /\\ b IN ring_carrier r /\\ c IN ring_carrier r /\\\n    x IN ring_carrier r /\\ y IN ring_carrier r /\\\n    ring_mul r a b = c\n    ==> ring_mul r (ring_mul r x y) c =\n        ring_mul r (ring_mul r x a) (ring_mul r y b)
-      #|  m2:V->num
-      #|  m1:V->num
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
       #|  rsum s f = rsum t f /\\ rsum t f = rsum t g\n    ==> rsum s f = rsum t g
-      #|  ~INFINITE s <=> FINITE s
-      #|  m2:V->num
-      #|  m1:V->num
-      #|  p2:(V->num)->A
-      #|  p1:(V->num)->A
-      #|  r:A ring
-      #|  INFINITE(monomial_vars m:V->bool)
-      #|  m:V->num
-      #|  s = {} ==> ring_sum r s f = ring_0 r
+      #|  !INFINITE((s : (_) -> Bool)) == FINITE(s)
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
+      #|  (p2 : ((V) -> Num) -> A)
+      #|  (p1 : ((V) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  INFINITE(monomial_vars((m : (V) -> Num)))
+      #|  (m : (V) -> Num)
+      #|  (s : (_) -> Bool) == {} \226\134\146 ring_sum((r : Ring[_]), s, (f : (_) -> _)) == ring_0(r)
       #|  (rsum UNIV f = rsum s f /\\ rsum UNIV g = rsum t g) /\\\n    rsum UNIV f = rsum UNIV g\n    ==> rsum s f = rsum t g
       #|  {z | z IN {x,y | P x y} /\\ Q z} = {x,y | P x y /\\ Q(x,y)}
-      #|  \\(m1:V->num,m2). monomial_mul m1 m2
-      #|  r':B ring
+      #|  GABS((f : (((V) -> Num, (V) -> Num), V) -> Num) => \226\136\128 m1 : (V) -> Num, \226\136\128 m2 : (V) -> Num, GEQ(f((m1, m2)), monomial_mul(m1, m2)))
+      #|  (r' : Ring[B])
       #|  forall r r' (h:A->B) (x:V->B) p1 p2.\n      ring_homomorphism(r,r') h /\\\n      ring_polynomial r p1 /\\ ring_polynomial r p2 /\\\n      (forall i. i IN poly_vars r p1 UNION poly_vars r p2 ==> x i IN ring_carrier r')\n      ==> poly_extend (r,r') h x (poly_mul r p1 p2) =\n          ring_mul r' (poly_extend (r,r') h x p1) (poly_extend (r,r') h x p2)
       #|  forall r r' (h:A->B) (x:V->B) p n.\n      ring_homomorphism(r,r') h /\\\n      ring_polynomial r p /\\\n      (forall i. i IN poly_vars r p ==> x i IN ring_carrier r')\n      ==> poly_extend (r,r') h x (poly_pow r p n) =\n          ring_pow r' (poly_extend (r,r') h x p) n
       #|  forall r r' s (h:A->B) (x:V->B).\n        ring_homomorphism(r,r') h /\\\n        (forall i. i IN s ==> x i IN ring_carrier r')\n        ==> ring_homomorphism (poly_ring r s,r') (poly_extend(r,r') h x)
@@ -33112,179 +33112,179 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(r:A ring) (r':B ring) h (v:V->bool) (s:W->bool) f x.\n        ring_homomorphism(r,r') h /\\\n        (forall i. i IN v ==> x i IN ring_carrier r') /\\\n        FINITE s /\\\n        (forall a. a IN s ==> f a IN ring_carrier(poly_ring r v))\n        ==> poly_extend (r,r') h x (ring_sum (poly_ring r v) s f) =\n            ring_sum r' s (\\a. poly_extend (r,r') h x (f a))
       #|  poly_extend (r:A ring,r':B ring) (h:A->B) (x:V->B)\n      (ring_product (poly_ring r (v:V->bool)) (s:W->bool)\n        (f:W->(V->num)->A)) =\n    ring_product r' s\n      (poly_extend (r,r') h x o f)
       #|  forall(r:A ring) (r':B ring) h (v:V->bool) (s:W->bool) f x.\n        ring_homomorphism(r,r') h /\\\n        (forall i. i IN v ==> x i IN ring_carrier r') /\\\n        FINITE s /\\\n        (forall a. a IN s ==> f a IN ring_carrier(poly_ring r v))\n        ==> poly_extend (r,r') h x (ring_product (poly_ring r v) s f) =\n            ring_product r' s (\\a. poly_extend (r,r') h x (f a))
-      #|  i:V
-      #|  i:V
-      #|  i:V
-      #|  r':B ring
+      #|  (i : V)
+      #|  (i : V)
+      #|  (i : V)
+      #|  (r' : Ring[B])
       #|  forall r r' s (h:A->B) (x:V->B) k p.\n        ring_homomorphism(r,r') h /\\\n        ring_homomorphism(poly_ring r s,r') k /\\\n        (forall a. a IN ring_carrier r ==> k(poly_const r a) = h a) /\\\n        (forall i. i IN s ==> k(poly_var r i) = x i) /\\\n        p IN ring_carrier(poly_ring r s)\n        ==> poly_extend(r,r') h x p = k p
       #|  forall r r' s (h:A->B) k (x:V->B) y p.\n        (forall i. i IN s ==> x i IN ring_carrier r') /\\\n        (forall a. a IN ring_carrier r ==> h a = k a) /\\\n        (forall i. i IN s ==> x i = y i) /\\\n        p IN ring_carrier(poly_ring r s)\n        ==> poly_extend(r,r') h x p = poly_extend(r,r') k y p
-      #|  s:V->bool
+      #|  (s : (V) -> Bool)
       #|  forall(r:A ring) (s:V->bool) p.\n        p IN ring_carrier(poly_ring r s)\n        ==> poly_extend (r,poly_ring r s) (poly_const r) (poly_var r) p = p
-      #|  r':B ring
-      #|  x:V
-      #|  r':B ring
-      #|  c:A
-      #|  r':B ring
-      #|  r':B ring
-      #|  poly_ring (r':B ring) (t:W->bool)
-      #|  r'':C ring
+      #|  (r' : Ring[B])
+      #|  (x : V)
+      #|  (r' : Ring[B])
+      #|  (c : A)
+      #|  (r' : Ring[B])
+      #|  (r' : Ring[B])
+      #|  poly_ring((r' : Ring[B]), (t : (W) -> Bool))
+      #|  (r'' : Ring[C])
       #|  forall r s r' t r'' (f:A->B) (g:B->C) (h:V->W) k p.\n        ring_homomorphism(r,r') f /\\\n        ring_homomorphism(r',r'') g /\\\n        IMAGE h s SUBSET t /\\\n        IMAGE k t SUBSET ring_carrier r'' /\\\n        p IN ring_carrier(poly_ring r s)\n        ==> poly_extend (r',r'') g k\n             (poly_extend (r,poly_ring r' t)\n                 (poly_const r' o f) (poly_var r' o h) p) =\n            poly_extend (r,r'') (g o f) (k o h) p
-      #|  v:V
-      #|  m:V->num
-      #|  m:V->num
+      #|  (v : V)
+      #|  (m : (V) -> Num)
+      #|  (m : (V) -> Num)
       #|  forall(r:A ring) (s:B ring) (t:C ring) h v x f (p:(V->num)->A).\n        ring_homomorphism(r,s) h /\\\n        ring_homomorphism(s,t) f /\\\n        IMAGE x v SUBSET ring_carrier s /\\\n        p IN ring_carrier(poly_ring r v)\n        ==> f(poly_extend (r,s) h x p) = poly_extend (r,t) (f o h) (f o x) p
-      #|  (p:(V->num)->A) monomial_1 = ring_0 r
-      #|  p /\\ (q \\/ r) <=> ~(p ==> ~q /\\ ~r)
+      #|  (p : ((V) -> Num) -> A)(monomial_1) == ring_0((r : Ring[A]))
+      #|  ((p : Bool) && ((q : Bool) || (r : Bool))) == !(p \226\134\146 !q && !r)
       #|  forall r s (h:A->B) (p:(V->num)->A).\n        ring_homomorphism (r,s) h /\\\n        ring_powerseries r p\n        ==> poly_extend (r,s) h (\\x. ring_0 s) p = h(p monomial_1)
       #|  forall r s (v:V->bool) (h:A->B) p.\n        ring_homomorphism (r,s) h /\\\n        p IN ring_carrier (poly_ring r v)\n        ==> poly_extend (r,s) h (\\x. ring_0 s) p = h(p monomial_1)
       #|  forall r r' (s:V->bool) (h:A->B).\n        ring_homomorphism(r,r') h\n        ==> ring_homomorphism (powser_ring r s,r')\n                              (poly_extend(r,r') h (\\i. ring_0 r'))
-      #|  x:V
-      #|  m:V->num
-      #|  p:(V->num)->A
+      #|  (x : V)
+      #|  (m : (V) -> Num)
+      #|  (p : ((V) -> Num) -> A)
       #|  forall(r:A ring) (s:V->bool).\n      subring_generated (poly_ring r s)\n       ({poly_const r c |c| c IN ring_carrier r} UNION\n        {poly_var r x | x IN s}) =\n       poly_ring r s
-      #|  r':B ring
+      #|  (r' : Ring[B])
       #|  forall(f:((V->num)->A)->B) g r v r'.\n        ring_homomorphism (poly_ring r v,r') f /\\\n        ring_homomorphism (poly_ring r v,r') g /\\\n        (forall c. c IN ring_carrier r ==> f(poly_const r c) = g(poly_const r c)) /\\\n        (forall x. x IN v ==> f(poly_var r x) = g(poly_var r x))\n        ==> forall p. p IN ring_carrier(poly_ring r v) ==> f p = g p
       #|  forall(r:A ring).\n        subring_generated (poly_ring r (:1))\n         (poly_var r one INSERT IMAGE (poly_const r) (ring_carrier r)) =\n        poly_ring r (:1)
       #|  {poly_const (k:A ring) c | c | c IN ring_carrier k} UNION\n                  {poly_var k (x:V) | x IN s}
-      #|  poly_extend(k,l) (f:A->B) (a:V->B)
-      #|  l:B ring
-      #|  poly_ring (k:A ring) (s:V->bool)
+      #|  poly_extend(((k : Ring[A]), (l : Ring[B])), (f : (A) -> B), (a : (V) -> B))
+      #|  (l : Ring[B])
+      #|  poly_ring((k : Ring[A]), (s : (V) -> Bool))
       #|  forall(f:A->B) k l (s:V->bool) a.\n        ring_homomorphism(k,l) f /\\\n        (forall i. i IN s ==> a i IN ring_carrier l)\n        ==> IMAGE (poly_extend(k,l) f a) (ring_carrier(poly_ring k s)) =\n            ring_carrier\n             (subring_generated l (IMAGE a s UNION IMAGE f (ring_carrier k)))
       #|  forall(f:A->B) k l a.\n        ring_homomorphism(k,l) f /\\ a IN ring_carrier l\n        ==> IMAGE (poly_extend(k,l) f (\\v. a))\n                  (ring_carrier(poly_ring k (:1))) =\n            ring_carrier\n             (subring_generated l (a INSERT IMAGE f (ring_carrier k)))
-      #|  (p ==> r) ==> p /\\ ~(p /\\ r) ==> s
-      #|  i:V
-      #|  m:V->num
-      #|  m:V->num
+      #|  ((p : Bool) \226\134\146 (r : Bool)) \226\134\146 p && !(p && r) \226\134\146 (s : Bool)
+      #|  (i : V)
+      #|  (m : (V) -> Num)
+      #|  (m : (V) -> Num)
       #|  {x | P x /\\ Q x} = {x | P x} <=> forall x. P x ==> Q x
       #|  s = t /\\ (forall x. x IN t ==> f x = g x)\n    ==> ring_sum r s f = ring_sum r t g
-      #|  forall i. i IN v ==> (x:V->B) i IN ring_carrier r'
+      #|  \226\136\128 i : V, IN(i, (v : (V) -> Bool)) \226\134\146 IN((x : (V) -> B)(i), ring_carrier((r' : Ring[B])))
       #|  forall r r' s (h:A->B) v (x:V->B) p.\n        p IN ring_carrier(poly_ring r v) /\\\n        ring_homomorphism(r,subring_generated r' s) h /\\\n        (forall i. i IN v ==> x i IN ring_carrier(subring_generated r' s))\n        ==> poly_extend (r,subring_generated r' s) h x p =\n            poly_extend (r,r') h x p
-      #|  (p:(V->num)->A) monomial_1
-      #|  p:(V->num)->A
+      #|  (p : ((V) -> Num) -> A)(monomial_1)
+      #|  (p : ((V) -> Num) -> A)
       #|  (forall r. ring_isomorphism (r,powser_ring r {})\n                         (poly_const r:A->(V->num)->A)) /\\\n   (forall r. ring_isomorphism (r,poly_ring r {})\n                         (poly_const r:A->(V->num)->A))
       #|  (forall r. (powser_ring r {}:((V->num)->A)ring) isomorphic_ring r) /\\\n   (forall r. r isomorphic_ring (powser_ring r {}:((V->num)->A)ring))
       #|  (forall r. (poly_ring r {}:((V->num)->A)ring) isomorphic_ring r) /\\\n   (forall r. r isomorphic_ring (poly_ring r {}:((V->num)->A)ring))
-      #|  monomial_mul m1 m2:W->num = m
-      #|  IMAGE (j:W->V) {i:W | ~(m2 i = 0)}
-      #|  IMAGE (j:W->V) {i:W | ~(m1 i = 0)}
-      #|  IMAGE (j:W->V) {i:W | ~(m2 i = 0)}
-      #|  IMAGE (j:W->V) {i:W | ~(m1 i = 0)}
+      #|  monomial_mul((m1 : (W) -> Num), (m2 : (W) -> Num)) == (m : (W) -> Num)
+      #|  IMAGE((j : (W) -> V), {(i : W) | !((m2 : (W) -> Num)(i) == 0)})
+      #|  IMAGE((j : (W) -> V), {(i : W) | !((m1 : (W) -> Num)(i) == 0)})
+      #|  IMAGE((j : (W) -> V), {(i : W) | !((m2 : (W) -> Num)(i) == 0)})
+      #|  IMAGE((j : (W) -> V), {(i : W) | !((m1 : (W) -> Num)(i) == 0)})
       #|  monomial_mul m1 m2 = m\n      ==> (INFINITE(monomial_vars(monomial_mul m1 m2)) <=>\n           INFINITE(monomial_vars m))
       #|  x IN ring_carrier r /\\ y IN ring_carrier r /\\\n      (x = ring_0 r \\/ y = ring_0 r)\n      ==> ring_mul r x y = ring_0 r
-      #|  ring_0 r':B
-      #|  m2:W->num
-      #|  m1:W->num
-      #|  h:(W->num)#(W->num)->A
-      #|  f:A->B
-      #|  r':B ring
-      #|  r:A ring
-      #|  h:(W->num)#(W->num)->A
-      #|  FINITE(monomial_vars m:W->bool)
+      #|  ring_0((r' : Ring[B]))
+      #|  (m2 : (W) -> Num)
+      #|  (m1 : (W) -> Num)
+      #|  (h : (((W) -> Num, (W) -> Num)) -> A)
+      #|  (f : (A) -> B)
+      #|  (r' : Ring[B])
+      #|  (r : Ring[A])
+      #|  (h : (((W) -> Num, (W) -> Num)) -> A)
+      #|  FINITE(monomial_vars((m : (W) -> Num)))
       #|  0
-      #|  (w:W) IN s'
-      #|  w:W
-      #|  j:W->V
-      #|  forall j. (forall x. P(j x) ==> Q x) ==> (forall x. P x) ==> (forall x. Q x)
-      #|  m2':W->num
-      #|  m1':W->num
-      #|  m2:W->num
-      #|  m1:W->num
-      #|  \\w. if w IN s' then m2 ((j:W->V) w) else 0
-      #|  \\w. if w IN s' then m1 ((j:W->V) w) else 0
-      #|  m2:V->num
-      #|  m1:V->num
+      #|  IN((w : W), (s' : (W) -> Bool))
+      #|  (w : W)
+      #|  (j : (W) -> V)
+      #|  \226\136\128 j : (_) -> _, (\226\136\128 x : _, (P : (_) -> Bool)(j(x)) \226\134\146 (Q : (_) -> Bool)(x)) \226\134\146 (\226\136\128 x : _, P(x)) \226\134\146 (\226\136\128 x : _, Q(x))
+      #|  (m2' : (W) -> Num)
+      #|  (m1' : (W) -> Num)
+      #|  (m2 : (W) -> Num)
+      #|  (m1 : (W) -> Num)
+      #|  (w : W) => if IN(w, (s' : (W) -> Bool)) { (m2 : (V) -> Num)((j : (W) -> V)(w)) } else { 0 }
+      #|  (w : W) => if IN(w, (s' : (W) -> Bool)) { (m1 : (V) -> Num)((j : (W) -> V)(w)) } else { 0 }
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
       #|  {m1,m2 | monomial_mul m1 m2 = (\\v. if v IN s then m (i v) else 0)} =\n    IMAGE (\\(m1,m2). (\\v. if v IN s then m1 ((i:V->W) v) else 0),\n                     (\\v. if v IN s then m2 (i v) else 0))\n          {m1,m2 | monomial_mul m1 m2 = m}
-      #|  m2:W->num
-      #|  m1:W->num
-      #|  {i:W | ~(m i = 0)} SUBSET s'
-      #|  m:W->num
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
-      #|  f:A->B
-      #|  r':B ring
-      #|  r:A ring
-      #|  {i:W | ~(m i = 0)} SUBSET s'
-      #|  m:W->num
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
-      #|  ~p ==> p ==> q
-      #|  m = \\v:W. 0
-      #|  m:W->num
-      #|  IMAGE (j:W->V) {i | ~(m i = 0)}
-      #|  m:W->num
-      #|  p:(V->num)->A
-      #|  n = m /\\ g(f(p m)) = p m ==> g(f(p n)) = p m
-      #|  ~((if p then x else 0) = 0) <=> p /\\ ~(x = 0)
-      #|  IMAGE (i:V->W) {i | ~(m i = 0)}
-      #|  m:V->num
-      #|  q:(W->num)->B
+      #|  (m2 : (W) -> Num)
+      #|  (m1 : (W) -> Num)
+      #|  SUBSET({(i : W) | !((m : (W) -> Num)(i) == 0)}, (s' : (W) -> Bool))
+      #|  (m : (W) -> Num)
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (f : (A) -> B)
+      #|  (r' : Ring[B])
+      #|  (r : Ring[A])
+      #|  SUBSET({(i : W) | !((m : (W) -> Num)(i) == 0)}, (s' : (W) -> Bool))
+      #|  (m : (W) -> Num)
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  (m : (W) -> Num) == ((v : W) => 0)
+      #|  (m : (W) -> Num)
+      #|  IMAGE((j : (W) -> V), {(i : W) | !((m : (W) -> Num)(i) == 0)})
+      #|  (m : (W) -> Num)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (n : _) == (m : _) && (g : (_) -> _)((f : (_) -> _)((p : (_) -> _)(m))) == p(m) \226\134\146 g(f(p(n))) == p(m)
+      #|  !((if (p : Bool) { (x : Num) } else { 0 }) == 0) == (p && !(x == 0))
+      #|  IMAGE((i : (V) -> W), {(i : V) | !((m : (V) -> Num)(i) == 0)})
+      #|  (m : (V) -> Num)
+      #|  (q : ((W) -> Num) -> B)
       #|  forall r r' s s' (f:A->B) g (i:V->W) j.\n        ring_isomorphisms(r,r') (f,g) /\\\n        (forall x. x IN s ==> i(x) IN s' /\\ j(i x) = x) /\\\n        (forall y. y IN s' ==> j(y) IN s /\\ i(j y) = y)\n        ==> ring_isomorphisms (powser_ring r s,powser_ring r' s')\n            ((\\p m. if monomial_vars m SUBSET s'\n                    then f(p(\\v. if v IN s then m(i v) else 0))\n                    else ring_0 r'),\n             (\\q m. if monomial_vars m SUBSET s\n                    then g(q(\\v. if v IN s' then m(j v) else 0))\n                    else ring_0 r))
       #|  forall(r:A ring) (s:V->bool) (r':B ring) (s':W->bool).\n        r isomorphic_ring r' /\\ s =_c s'\n        ==> (powser_ring r s) isomorphic_ring (powser_ring r' s')
-      #|  ~p ==> (q ==> p) ==> ~q
-      #|  \\v. if v IN s' then m((j:W->V) v) else 0
-      #|  \\v. if v IN s then m((i:V->W) v) else 0
-      #|  m:V->num
-      #|  m:W->num
+      #|  !(p : Bool) \226\134\146 ((q : Bool) \226\134\146 p) \226\134\146 !q
+      #|  (v : W) => if IN(v, (s' : (W) -> Bool)) { (m : (V) -> Num)((j : (W) -> V)(v)) } else { 0 }
+      #|  (v : V) => if IN(v, (s : (V) -> Bool)) { (m : (W) -> Num)((i : (V) -> W)(v)) } else { 0 }
+      #|  (m : (V) -> Num)
+      #|  (m : (W) -> Num)
       #|  IMAGE (\\m v. if v IN s then m((i:V->W) v) else 0)\n                      {m | ~(p m:B = ring_0 r')}
       #|  IMAGE (\\m v. if v IN s' then m((j:W->V) v) else 0)\n                      {m | ~(p m:A = ring_0 r)}
-      #|  p:(W->num)->B
-      #|  p:(V->num)->A
-      #|  ~((if p then x else z) = z) <=> p /\\ ~(x = z)
+      #|  (p : ((W) -> Num) -> B)
+      #|  (p : ((V) -> Num) -> A)
+      #|  !((if (p : Bool) { (x : _) } else { (z : _) }) == z) == (p && !(x == z))
       #|  (forall x. P x /\\ Q x /\\ R x /\\ P'(f x) /\\ R'(f x) ==> Q'(f x))\n    ==> IMAGE f {x | P x /\\ R x} SUBSET {y | P' y /\\ R' y}\n        ==> IMAGE f {x | (P x /\\ Q x) /\\ R x} SUBSET\n                    {y | (P' y /\\ Q' y) /\\ R' y}
       #|  ring_isomorphisms (r,r') (f,g)\n    ==> IMAGE f (ring_carrier r) SUBSET ring_carrier r' /\\\n        IMAGE g (ring_carrier r') SUBSET ring_carrier r
       #|  forall r r' s s' (f:A->B) g (i:V->W) j.\n        ring_isomorphisms(r,r') (f,g) /\\\n        (forall x. x IN s ==> i(x) IN s' /\\ j(i x) = x) /\\\n        (forall y. y IN s' ==> j(y) IN s /\\ i(j y) = y)\n        ==> ring_isomorphisms (poly_ring r s,poly_ring r' s')\n            ((\\p m. if monomial_vars m SUBSET s'\n                    then f(p(\\v. if v IN s then m(i v) else 0))\n                    else ring_0 r'),\n             (\\q m. if monomial_vars m SUBSET s\n                    then g(q(\\v. if v IN s' then m(j v) else 0))\n                    else ring_0 r))
       #|  forall(r:A ring) (s:V->bool) (r':B ring) (s':W->bool).\n        r isomorphic_ring r' /\\ s =_c s'\n        ==> (poly_ring r s) isomorphic_ring (poly_ring r' s')
-      #|  (i:V) IN v
-      #|  (i:V) IN u
-      #|  i:V
-      #|  i:V
+      #|  IN((i : V), (v : (V) -> Bool))
+      #|  IN((i : V), (u : (V) -> Bool))
+      #|  (i : V)
+      #|  (i : V)
       #|  x = x' /\\ y = y'\n     ==> ring_mul r (p x) (q y) = ring_mul r (p x') (q y')
-      #|  DISJOINT (u:V->bool) v
+      #|  DISJOINT((u : (V) -> Bool), (v : (V) -> Bool))
       #|  \\((m1,n1),(m1',n1')). (monomial_mul m1 m1':V->num,\n                                     monomial_mul n1 n1':V->num)
       #|  (\\(m',n'). (monomial_restrict u m',monomial_restrict u n'),\n                         (monomial_restrict v m',monomial_restrict v n'))\n              :(V->num)#(V->num)->((V->num)#(V->num))#((V->num)#(V->num))
       #|  {f x y | (x IN {g a b | P a b} /\\ y IN {h c d | Q c d}) /\\ R x y} =\n    {f (g a b) (h c d) |a,b,c,d| P a b /\\ Q c d /\\ R (g a b) (h c d)}
       #|  {x | x IN {f a b | P a b} /\\ Q x} = {f a b |a,b| P a b /\\ Q(f a b)}
       #|  x IN ring_carrier r /\\ y IN ring_carrier r\n    ==> ring_mul r (if p then x else ring_0 r) (if q then y else ring_0 r) =\n        if p /\\ q then ring_mul r x y else ring_0 r
-      #|  ~monomial (v:V->bool) n
-      #|  md:V->num
-      #|  mc:V->num
-      #|  mb:V->num
-      #|  ma:V->num
-      #|  monomial (v:V->bool) n
-      #|  n:V->num
-      #|  ~monomial (u:V->bool) m
+      #|  !monomial((v : (V) -> Bool), (n : (V) -> Num))
+      #|  (md : (V) -> Num)
+      #|  (mc : (V) -> Num)
+      #|  (mb : (V) -> Num)
+      #|  (ma : (V) -> Num)
+      #|  monomial((v : (V) -> Bool), (n : (V) -> Num))
+      #|  (n : (V) -> Num)
+      #|  !monomial((u : (V) -> Bool), (m : (V) -> Num))
       #|  (x IN ring_carrier r /\\ y IN ring_carrier r) /\\\n        (x = ring_0 r \\/ y = ring_0 r)\n        ==> ring_mul r x y = ring_0 r
-      #|  mb:V->num
-      #|  ma:V->num
+      #|  (mb : (V) -> Num)
+      #|  (ma : (V) -> Num)
       #|  ring_0 (powser_ring r t) m = ring_0 r /\\\n      ring_sum (powser_ring r t) s f = ring_0 (powser_ring r t)\n      ==> ring_0 r = ring_sum (powser_ring r t) s f m
-      #|  n:V->num
-      #|  monomial u (m:V->num)
-      #|  m:V->num
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
-      #|  m2:V->num
-      #|  m1:V->num
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
-      #|  m2:V->num = monomial_1
-      #|  m1:V->num = monomial_1
-      #|  m2:V->num
-      #|  m1:V->num
-      #|  p:(V->num)->A
-      #|  i:V
-      #|  m2:V->num
-      #|  m1:V->num
-      #|  q:(V->num)->(V->num)->A
+      #|  (n : (V) -> Num)
+      #|  monomial((u : (V) -> Bool), (m : (V) -> Num))
+      #|  (m : (V) -> Num)
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (m2 : (V) -> Num) == monomial_1
+      #|  (m1 : (V) -> Num) == monomial_1
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (i : V)
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
+      #|  (q : ((V) -> Num, (V) -> Num) -> A)
       #|  {x | x IN s /\\ P x} = {x | x IN {y | P y} /\\ x IN s}
-      #|  ~((if p then x else 0) = 0) <=> p /\\ ~(x = 0)
-      #|  m:V->num
-      #|  p:(V->num)->A
-      #|  u:V->bool
-      #|  v:V->bool
+      #|  !((if (p : Bool) { (x : Num) } else { 0 }) == 0) == (p && !(x == 0))
+      #|  (m : (V) -> Num)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (u : (V) -> Bool)
+      #|  (v : (V) -> Bool)
       #|  r:A ring
       #|  forall(r:A ring) u v:V->bool.\n        DISJOINT u v\n        ==> ring_isomorphisms\n             (powser_ring (powser_ring r u) v,powser_ring r (u UNION v))\n             ((\\p m. if monomial (u UNION v) m\n                     then p (monomial_restrict v m) (monomial_restrict u m)\n                     else ring_0 r),\n              (\\p m1 m2. if monomial v m1 /\\ monomial u m2\n                         then p(monomial_mul m1 m2) else ring_0 r))
-      #|  FINITE o (monomial_vars:(V->num)->V->bool)
-      #|  monomial_vars:(V->num)->V->bool
+      #|  (o : (((V) -> Bool) -> Bool, ((V) -> Num, V) -> Bool, (V) -> Num) -> Bool)((FINITE : ((V) -> Bool) -> Bool), (monomial_vars : ((V) -> Num, V) -> Bool))
+      #|  (monomial_vars : ((V) -> Num, V) -> Bool)
       #|  forall(r:A ring) u v:V->bool.\n        DISJOINT u v\n        ==> powser_ring (powser_ring r u) v isomorphic_ring\n            powser_ring r (u UNION v)
       #|  DISJOINT {f x | x IN s} {g y | y IN t} <=>\n      forall x y. x IN s /\\ y IN t ==> ~(f x = g y)
       #|  powser_ring (r:A ring) ((u:U->bool) +_c (v:V->bool))
@@ -33295,143 +33295,143 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(r:A ring) s t (v:V->bool).\n        s SUBSET t\n        ==> ring_carrier (poly_ring (subring_generated r s) v) SUBSET\n            ring_carrier (poly_ring (subring_generated r t) v)
       #|  forall(r:A ring) s (v:V->bool).\n        ring_carrier(powser_ring (subring_generated r s) v) SUBSET\n        ring_carrier(powser_ring r v)
       #|  forall(r:A ring) s (v:V->bool).\n        ring_carrier(poly_ring (subring_generated r s) v) SUBSET\n        ring_carrier(poly_ring r v)
-      #|  \\x:A. x IN s
-      #|  r:A ring
-      #|  m:V->num
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
+      #|  (x : A) => IN(x, (s : (A) -> Bool))
+      #|  (r : Ring[A])
+      #|  (m : (V) -> Num)
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
       #|  forall r (s:A->bool) (v:V->bool).\n        s subring_of r\n        ==> ring_carrier (powser_ring r v) INTER {p | forall m. p m IN s}\n            subring_of powser_ring r v
-      #|  \\x:A. x IN s
-      #|  r:A ring
-      #|  m:V->num
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
+      #|  (x : A) => IN(x, (s : (A) -> Bool))
+      #|  (r : Ring[A])
+      #|  (m : (V) -> Num)
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
       #|  forall r (s:A->bool) (v:V->bool).\n        s subring_of r\n        ==> ring_carrier (poly_ring r v) INTER {p | forall m. p m IN s}\n            subring_of poly_ring r v
       #|  (forall y. y IN t ==> y IN s) /\\ s SUBSET t <=> s = t
-      #|  {x | x IN s /\\ P x} = s <=> forall x. x IN s ==> P x
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
-      #|  (p /\\ q) /\\ r <=> q /\\ (r /\\ p)
+      #|  ({(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)} == s) == (\226\136\128 x : _, IN(x, s) \226\134\146 P(x))
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (((p : Bool) && (q : Bool)) && (r : Bool)) == (q && r && p)
       #|  forall r (s:A->bool) (v:V->bool).\n        s subring_of r\n        ==> ring_isomorphisms\n             (powser_ring (subring_generated r s) v,\n              subring_generated (powser_ring r v) {p | forall m. p m IN s})\n             (I,I)
-      #|  I:((V->num)->A)->((V->num)->A)
+      #|  (I : (((V) -> Num) -> A, (V) -> Num) -> A)
       #|  forall r (s:A->bool) (v:V->bool).\n        s subring_of r\n        ==> (powser_ring (subring_generated r s) v) isomorphic_ring\n            (subring_generated (powser_ring r v) {p | forall m. p m IN s})
       #|  (forall y. y IN t ==> y IN s) /\\ s SUBSET t <=> s = t
-      #|  {x | x IN s /\\ P x} = s <=> forall x. x IN s ==> P x
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
-      #|  (p /\\ q) /\\ r <=> q /\\ (r /\\ p)
+      #|  ({(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)} == s) == (\226\136\128 x : _, IN(x, s) \226\134\146 P(x))
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (((p : Bool) && (q : Bool)) && (r : Bool)) == (q && r && p)
       #|  forall r (s:A->bool) (v:V->bool).\n        s subring_of r\n        ==> ring_isomorphisms\n             (poly_ring (subring_generated r s) v,\n              subring_generated (poly_ring r v) {p | forall m. p m IN s})\n             (I,I)
-      #|  I:((V->num)->A)->((V->num)->A)
+      #|  (I : (((V) -> Num) -> A, (V) -> Num) -> A)
       #|  forall r (s:A->bool) (v:V->bool).\n        s subring_of r\n        ==> (poly_ring (subring_generated r s) v) isomorphic_ring\n            (subring_generated (poly_ring r v) {p | forall m. p m IN s})
-      #|  monomial_mul m n:V->num
-      #|  n:V->num
+      #|  monomial_mul((m : (V) -> Num), (n : (V) -> Num))
+      #|  (n : (V) -> Num)
       #|  UNIONS { {d | monomial_divides d m} |\n                 m IN {m | ~((p:(V->num)->A) m = ring_0 r)}}
-      #|  m:V->num
-      #|  monomial_mul n p:V->num
-      #|  p:V->num
-      #|  ~((if p then x else z) = z) <=> p /\\ ~(x = z)
-      #|  n:V->num
+      #|  (m : (V) -> Num)
+      #|  monomial_mul((n : (V) -> Num), (p : (V) -> Num))
+      #|  (p : (V) -> Num)
+      #|  !((if (p : Bool) { (x : _) } else { (z : _) }) == z) == (p && !(x == z))
+      #|  (n : (V) -> Num)
       #|  UNIONS { {d | monomial_divides d m} |\n                 m IN {m | ~((p:(V->num)->A) m = ring_0 r)}}
-      #|  p:(V->num)->A
-      #|  i:V
-      #|  monomial_restrict u m:V->num
-      #|  monomial_restrict v m:V->num
-      #|  m:V->num
+      #|  (p : ((V) -> Num) -> A)
+      #|  (i : V)
+      #|  monomial_restrict((u : (V) -> Bool), (m : (V) -> Num))
+      #|  monomial_restrict((v : (V) -> Bool), (m : (V) -> Num))
+      #|  (m : (V) -> Num)
       #|  { monomial_mul m1 m2 |\n        m1 IN {m | ~(p m = ring_0 (powser_ring r u))} /\\\n        m2 IN {m | ~((p:(V->num)->(V->num)->A) m1 m = ring_0 r)}}
       #|  p:(V->num)->(V->num)->A
-      #|  ~((if p then x else z) = z) <=> p /\\ ~(x = z)
+      #|  !((if (p : Bool) { (x : _) } else { (z : _) }) == z) == (p && !(x == z))
       #|  (forall x. x IN s /\\ x IN s' ==> f x IN t')\n    ==> IMAGE f s SUBSET t\n        ==> IMAGE f (s INTER s') SUBSET t INTER t'
-      #|  p /\\ (p ==> q) ==> p /\\ q
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
       #|  t subring_of poly_ring r s ==> t subring_of powser_ring r s
-      #|  s INTER s INTER t = s INTER t
+      #|  INTER((s : (_) -> Bool), INTER(s, (t : (_) -> Bool))) == INTER(s, t)
       #|  subring_generated (poly_ring (powser_ring r u) v)\n     {p:(V->num)->(V->num)->A | forall m. p m IN ring_carrier (poly_ring r u)}
       #|  forall(r:A ring) u v:V->bool.\n        DISJOINT u v\n        ==> ring_isomorphisms\n             (poly_ring (poly_ring r u) v,poly_ring r (u UNION v))\n             ((\\p m. if monomial (u UNION v) m\n                     then p (monomial_restrict v m) (monomial_restrict u m)\n                     else ring_0 r),\n              (\\p m1 m2. if monomial v m1 /\\ monomial u m2\n                         then p(monomial_mul m1 m2) else ring_0 r))
       #|  forall(r:A ring) u v:V->bool.\n        DISJOINT u v\n        ==> poly_ring (poly_ring r u) v isomorphic_ring\n            poly_ring r (u UNION v)
       #|  DISJOINT {f x | x IN s} {g y | y IN t} <=>\n      forall x y. x IN s /\\ y IN t ==> ~(f x = g y)
       #|  poly_ring (r:A ring) ((u:U->bool) +_c (v:V->bool))
       #|  forall(r:A ring) (r':B ring) (u:U->bool) (v:V->bool) (w:W->bool).\n        r isomorphic_ring r' /\\ u +_c v =_c w\n        ==> poly_ring (poly_ring r u) v isomorphic_ring poly_ring r' w
-      #|  i:V
+      #|  (i : V)
       #|  (h:A->B)(p(monomial_mul m1 m2:V->num)) IN ring_carrier s
-      #|  (i:V) IN v
-      #|  (i:V) IN u
-      #|  i:V
-      #|  DISJOINT s t ==> forall x. ~(x IN s /\\ x IN t)
-      #|  monomial_mul m2 m1:V->num = monomial_mul m1 m2
-      #|  m1:V->num
+      #|  IN((i : V), (v : (V) -> Bool))
+      #|  IN((i : V), (u : (V) -> Bool))
+      #|  (i : V)
+      #|  DISJOINT((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 (\226\136\128 x : _, !(IN(x, s) && IN(x, t)))
+      #|  monomial_mul((m2 : (V) -> Num), (m1 : (V) -> Num)) == monomial_mul(m1, m2)
+      #|  (m1 : (V) -> Num)
       #|  m2:V->num
-      #|  monomial_restrict u m:V->num
-      #|  r /\\ (r ==> q) /\\ (q ==> p) ==> (p /\\ q) /\\ r
-      #|  monomial (u UNION v) (m:V->num)
-      #|  m:V->num
+      #|  monomial_restrict((u : (V) -> Bool), (m : (V) -> Num))
+      #|  (r : Bool) && (r \226\134\146 (q : Bool)) && (q \226\134\146 (p : Bool)) \226\134\146 (p && q) && r
+      #|  monomial(UNION((u : (V) -> Bool), (v : (V) -> Bool)), (m : (V) -> Num))
+      #|  (m : (V) -> Num)
       #|  \\m:V->num. monomial_restrict v m,monomial_restrict u m
-      #|  \\((m2:V->num),m1). monomial_mul m1 m2
-      #|  m1:V->num
-      #|  m2:V->num
-      #|  m1:V->num
-      #|  m2:V->num
-      #|  monomial_mul m1 m2:V->num
-      #|  m1:V->num
-      #|  m2:V->num
+      #|  GABS((f : (((V) -> Num, (V) -> Num), V) -> Num) => \226\136\128 m2 : (V) -> Num, \226\136\128 m1 : (V) -> Num, GEQ(f((m2, m1)), monomial_mul(m1, m2)))
+      #|  (m1 : (V) -> Num)
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
+      #|  (m2 : (V) -> Num)
+      #|  monomial_mul((m1 : (V) -> Num), (m2 : (V) -> Num))
+      #|  (m1 : (V) -> Num)
+      #|  (m2 : (V) -> Num)
       #|  UNIONS { {d | monomial_divides d m} |\n                ~((p:(V->num)->A) m = ring_0 r)}
-      #|  m1:V->num
+      #|  (m1 : (V) -> Num)
       #|  (FINITE s /\\ (forall x. x IN s ==> FINITE(t x))) /\\\n    (FINITE s /\\ (forall x. x IN s ==> FINITE(t x))\n     ==> ring_sum r s (\\x. ring_mul r (ring_sum r (t x)  (f x)) (c x)) =\n         ring_sum r s (\\x. ring_sum r (t x) (\\y. ring_mul r (f x y) (c x))) /\\\n         ring_sum r s (\\x. ring_sum r (t x) (\\y. ring_mul r (f x y) (c x))) = w)\n    ==> ring_sum r s (\\x. ring_mul r (ring_sum r (t x) (f x)) (c x)) = w
       #|  forall(h:A->B) r s u v x (p:(V->num)->A).\n        p IN ring_carrier(poly_ring r (u UNION v)) /\\\n        DISJOINT u v /\\\n        ring_homomorphism (r,s) h\n        ==> poly_extend (poly_ring r u,s) (poly_extend (r,s) h x) x\n                        (\\m1 m2. if monomial v m1 /\\ monomial u m2\n                                 then p (monomial_mul m1 m2)\n                                 else ring_0 r) =\n            poly_extend (r,s) h x p
       #|  poly_reindex (r:R ring) (q:(Y->num)->R) (f:X->Y) (A:X->bool) (B:Y->bool) =\n  \\m. if monomial_vars m SUBSET A\n      then q (\\b. if b IN B then m (@a. a IN A /\\ f a = b) else 0)\n      else ring_0 r
-      #|  j:W->V
-      #|  i:V->W
-      #|  \\x:A. x
-      #|  \\x:A. x
-      #|  t:W->bool
-      #|  s:V->bool
-      #|  r:A ring
-      #|  r:A ring
+      #|  (j : (W) -> V)
+      #|  (i : (V) -> W)
+      #|  (x : A) => x
+      #|  (x : A) => x
+      #|  (t : (W) -> Bool)
+      #|  (s : (V) -> Bool)
+      #|  (r : Ring[A])
+      #|  (r : Ring[A])
       #|  forall(r:A ring) s t (i:V->W) j.\n        (forall x. x IN s ==> i(x) IN t /\\ j(i x) = x) /\\\n        (forall y. y IN t ==> j(y) IN s /\\ i(j y) = y)\n        ==> ring_isomorphisms (powser_ring r s,powser_ring r t)\n                              ((\\p. poly_reindex r p j t s),\n                               (\\q. poly_reindex r q i s t))
-      #|  i:W->V
-      #|  j:V->W
-      #|  s:W->bool
-      #|  t:V->bool
-      #|  r:A ring
-      #|  j:V->W
+      #|  (i : (W) -> V)
+      #|  (j : (V) -> W)
+      #|  (s : (W) -> Bool)
+      #|  (t : (V) -> Bool)
+      #|  (r : Ring[A])
+      #|  (j : (V) -> W)
       #|  forall(r:A ring) s t (i:W->V).\n        BIJ i s t\n        ==> ring_isomorphism (powser_ring r t,powser_ring r s)\n                             (\\q. poly_reindex r q i s t)
-      #|  j:W->V
-      #|  i:V->W
-      #|  \\x:A. x
-      #|  \\x:A. x
-      #|  t:W->bool
-      #|  s:V->bool
-      #|  r:A ring
-      #|  r:A ring
+      #|  (j : (W) -> V)
+      #|  (i : (V) -> W)
+      #|  (x : A) => x
+      #|  (x : A) => x
+      #|  (t : (W) -> Bool)
+      #|  (s : (V) -> Bool)
+      #|  (r : Ring[A])
+      #|  (r : Ring[A])
       #|  forall(r:A ring) s t (i:V->W) j.\n        (forall x. x IN s ==> i(x) IN t /\\ j(i x) = x) /\\\n        (forall y. y IN t ==> j(y) IN s /\\ i(j y) = y)\n        ==> ring_isomorphisms (poly_ring r s,poly_ring r t)\n                              ((\\p. poly_reindex r p j t s),\n                               (\\q. poly_reindex r q i s t))
       #|  forall(r:R ring) A B q f:X->Y.\n       poly_vars r q SUBSET B\n       ==> poly_vars r (poly_reindex r q f A B) SUBSET A
-      #|  i:W->V
-      #|  j:V->W
-      #|  s:W->bool
-      #|  t:V->bool
-      #|  r:A ring
-      #|  j:V->W
+      #|  (i : (W) -> V)
+      #|  (j : (V) -> W)
+      #|  (s : (W) -> Bool)
+      #|  (t : (V) -> Bool)
+      #|  (r : Ring[A])
+      #|  (j : (V) -> W)
       #|  forall(r:A ring) s t (i:W->V).\n        BIJ i s t\n        ==> ring_isomorphism (poly_ring r t,poly_ring r s)\n                             (\\q. poly_reindex r q i s t)
-      #|  i:V
-      #|  i:V
-      #|  (if p then x else 0) = 0 <=> p ==> x = 0
-      #|  m:V->num = monomial_1
-      #|  m:V->num
+      #|  (i : V)
+      #|  (i : V)
+      #|  ((if (p : Bool) { (x : Num) } else { 0 }) == 0) == (p \226\134\146 x == 0)
+      #|  (m : (V) -> Num) == monomial_1
+      #|  (m : (V) -> Num)
       #|  forall(r:A ring) f (s:V->bool) (t:W->bool) a.\n        BIJ f s t ==> poly_reindex r (poly_const r a) f s t = poly_const r a
-      #|  i:V
-      #|  i:V = x
-      #|  (f:V->W) i
-      #|  i:V
-      #|  F ==> p
-      #|  p ==> (if p then x else y) = x
-      #|  m:V->num = monomial_var x
-      #|  m:V->num
+      #|  (i : V)
+      #|  (i : V) == (x : V)
+      #|  (f : (V) -> W)((i : V))
+      #|  (i : V)
+      #|  false \226\134\146 (p : Bool)
+      #|  (p : Bool) \226\134\146 (if p { (x : _) } else { (y : _) }) == x
+      #|  (m : (V) -> Num) == monomial_var((x : V))
+      #|  (m : (V) -> Num)
       #|  forall(r:A ring) f (s:V->bool) (t:W->bool) x.\n        BIJ f s t /\\ x IN s\n        ==> poly_reindex r (poly_var r (f x)) f s t = poly_var r x
-      #|  ~(q m = z) ==> m = m' ==> ~(q m' = z)
-      #|  m:Y->num
+      #|  !((q : (_) -> _)((m : _)) == (z : _)) \226\134\146 m == (m' : _) \226\134\146 !(q(m') == z)
+      #|  (m : (Y) -> Num)
       #|  \\b:Y. if b IN B then m(@a:X. a IN A /\\ f a = b) else 0
-      #|  m:X->num
+      #|  (m : (X) -> Num)
       #|  forall(r:R ring) A B q f:X->Y.\n        BIJ f A B /\\ poly_vars r q SUBSET B\n        ==> {m | ~((poly_reindex r q f A B) m = ring_0 r)} =\n            IMAGE (\\m. \\a. if a IN A then m (f a) else 0)\n                  {m | ~(q m = ring_0 r)}
       #|  monomial_vars (m:Y->num) =\n    IMAGE f (monomial_vars (\\a:X. if a IN A then m(f a) else 0))
-      #|  m:Y->num
+      #|  (m : (Y) -> Num)
       #|  forall(h:R->S) r s A B q f:X->Y c:Y->S.\n        BIJ f A B /\\ poly_vars r q SUBSET B\n        ==> poly_extend (r,s) h (c o f) (poly_reindex r q f A B) =\n            poly_extend (r,s) h c q
       #|  \\/
       #|  \\/
@@ -33457,32 +33457,32 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  \\/
       #|  ~
       #|  F
-      #|  {i:X | ~(m i = 0)}
-      #|  f:X->Y
+      #|  {(i : X) | !((m : (X) -> Num)(i) == 0)}
+      #|  (f : (X) -> Y)
       #|  forall(r:R ring) A B q f:X->Y.\n        BIJ f A B /\\ ring_powerseries r q\n        ==> ring_powerseries r (poly_reindex r q f A B)
       #|  forall(r:A ring) (t:V->bool) s.\n     t SUBSET s\n     ==> ring_homomorphism (poly_ring r t,poly_ring r s) I
-      #|  (if p then z else x) = z <=> p \\/ x = z
+      #|  ((if (p : Bool) { (z : _) } else { (x : _) }) == z) == (p || x == z)
       #|  (p:(V->num)->A) IN ring_carrier (poly_ring r s)
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  q':(V->num)->A
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (q' : ((V) -> Num) -> A)
       #|  q' = \\m. if p m = ring_0 r then ring_0 r else (q:(V->num)->A) m
-      #|  q:(V->num)->A
+      #|  (q : ((V) -> Num) -> A)
       #|  forall(r:A ring) (s:V->bool) c (p:(V->num)->A).\n        p IN ring_carrier(poly_ring r s) /\\\n        (forall m. ring_divides r c (p m))\n        ==> ring_divides (poly_ring r s) (poly_const r c) p
-      #|  (q:(V->num)->A) m
-      #|  q:(V->num)->A
+      #|  (q : ((V) -> Num) -> A)((m : (V) -> Num))
+      #|  (q : ((V) -> Num) -> A)
       #|  forall(r:A ring) (s:V->bool) c (p:(V->num)->A) m.\n        ring_divides (poly_ring r s) (poly_const r c) p\n        ==> ring_divides r c (p m)
       #|  forall(r:A ring) (s:V->bool) c (p:(V->num)->A).\n        ring_divides (poly_ring r s) (poly_const r c) p <=>\n        p IN ring_carrier(poly_ring r s) /\\\n        (forall m. ring_divides r c (p m))
       #|  forall(r:A ring) (s:V->bool) c d.\n        ring_divides (poly_ring r s) (poly_const r c) (poly_const r d) <=>\n        ring_divides r c d
-      #|  poset(monomial_divides:(V->num)->(V->num)->bool)
-      #|  fld(monomial_divides) = (:V->num)
-      #|  monomial_div n m:V->num
-      #|  monomial_1:V->num
-      #|  m:V->num
+      #|  (poset : (((V) -> Num, (V) -> Num) -> Bool) -> Bool)((monomial_divides : ((V) -> Num, (V) -> Num) -> Bool))
+      #|  (fld : (((V) -> Num, (V) -> Num) -> Bool, (V) -> Num) -> Bool)((monomial_divides : ((V) -> Num, (V) -> Num) -> Bool)) == (UNIV : ((V) -> Num) -> Bool)
+      #|  monomial_div((n : (V) -> Num), (m : (V) -> Num))
+      #|  (monomial_1 : (V) -> Num)
+      #|  (m : (V) -> Num)
       #|  forall(<<=) (s:V->bool).\n     (forall m. monomial s m ==> monomial_1 <<= m) /\\\n     (forall m n p. monomial s m /\\ monomial s n /\\ monomial s p /\\ n <<= p\n              ==> monomial_mul m n <<= monomial_mul m p)\n     ==> forall m n. monomial s m /\\ monomial s n /\\ monomial_divides m n\n               ==> m <<= n
       #|  0 <= 0
-      #|  monomial (s:V->bool)
-      #|  s:V->bool
-      #|  (<=):num->num->bool
+      #|  monomial((s : (V) -> Bool))
+      #|  (s : (V) -> Bool)
+      #|  op_lt_eq
       #|  \\m (n:V->num). monomial s m /\\ monomial s n /\\\n                             monomial_divides m n
       #|  forall(<<=) (s:V->bool).\n       FINITE s /\\ qoset(<<=) /\\ fld(<<=) SUBSET {m | monomial s m} /\\\n       (forall m n. monomial s m /\\ monomial s n /\\ monomial_divides m n ==> m <<= n)\n       ==> wqoset(<<=)
       #|  forall(<<=) (s:V->bool).\n       FINITE s /\\ qoset(<<=) /\\ fld(<<=) SUBSET {m | monomial s m} /\\\n       (forall m n. monomial s m /\\ monomial s n /\\ monomial_divides m n ==> m <<= n)\n       ==> WF(strictly(<<=))
@@ -33496,17 +33496,17 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(<<=):V->V->bool. monomial_lt (properly(<<=)) = monomial_lt (<<=)
       #|  forall(<<):V->V->bool.\n        monomial_le (\\x y. x << y \\/ x = y) = monomial_le (<<)
       #|  forall(<<):V->V->bool. monomial_lt (\\x y. x << y \\/ x = y) = monomial_lt (<<)
-      #|  monomial_1:V->num
+      #|  (monomial_1 : (V) -> Num)
       #|  forall(<<=) m. monomial_le (<<=) m m <=> monomial (:V) m
       #|  forall(<<) m:V->num. ~(monomial_lt (<<) m m)
       #|  forall(<<) m1 m2:V->num. monomial_lt (<<) m1 m2 ==> monomial_le (<<) m1 m2
       #|  forall(<<) m1 m2:V->num.\n        monomial_le (<<) m1 m2 <=>\n        monomial_lt (<<) m1 m2 \\/\n        monomial (:V) m1 /\\ monomial (:V) m2 /\\ m1 = m2
-      #|  monomial_mul mb md:V->num
-      #|  monomial_mul ma mc:V->num
-      #|  md:V->num
-      #|  mc:V->num
-      #|  mb:V->num
-      #|  ma:V->num
+      #|  monomial_mul((mb : (V) -> Num), (md : (V) -> Num))
+      #|  monomial_mul((ma : (V) -> Num), (mc : (V) -> Num))
+      #|  (md : (V) -> Num)
+      #|  (mc : (V) -> Num)
+      #|  (mb : (V) -> Num)
+      #|  (ma : (V) -> Num)
       #|  forall(<<=) m1 m2 m3:V->num.\n        monomial_le (<<=) m1 m2 /\\ monomial_le (<<=) m2 m3\n        ==> monomial_le (<<=) m1 m3
       #|  forall(<<=):V->V->bool. qoset(monomial_le (<<=))
       #|  forall(<<=). fld(monomial_le(<<=)) = {m | monomial (:V) m}
@@ -33514,50 +33514,50 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(<<=) m m1 m2:V->num.\n        monomial_le (<<=) (monomial_mul m1 m) (monomial_mul m2 m) <=>\n        monomial (:V) m /\\ monomial_le (<<=) m1 m2
       #|  forall(<<=) m m1 m2:V->num.\n        monomial_lt (<<=) (monomial_mul m m1) (monomial_mul m m2) <=>\n        monomial (:V) m /\\ monomial_lt (<<=) m1 m2
       #|  forall(<<=) m m1 m2:V->num.\n        monomial_lt (<<=) (monomial_mul m1 m) (monomial_mul m2 m) <=>\n        monomial (:V) m /\\ monomial_lt (<<=) m1 m2
-      #|  monomial_mul m1' m2:V->num
+      #|  monomial_mul((m1' : (V) -> Num), (m2 : (V) -> Num))
       #|  forall(<<=) m1 m1' m2 m2':V->num.\n         monomial_le (<<=) m1 m1' /\\\n         monomial_le (<<=) m2 m2'\n        ==> monomial_le (<<=) (monomial_mul m1 m2) (monomial_mul m1' m2')
-      #|  monomial_1:V->num
-      #|  monomial_div m d:V->num
+      #|  (monomial_1 : (V) -> Num)
+      #|  monomial_div((m : (V) -> Num), (d : (V) -> Num))
       #|  forall m d:V->num. monomial (:V) m /\\ monomial_divides d m\n                ==> monomial_le (<<=) d m
       #|  forall(<<=) (m:V->num).\n        monomial_le (<<=) monomial_1 m <=> monomial (:V) m
-      #|  monomial_var(v:V)
-      #|  monomial_var(w:V)
-      #|  v:V = w
+      #|  monomial_var((v : V))
+      #|  monomial_var((w : V))
+      #|  (v : V) == (w : V)
       #|  forall(<<=) v w:V.\n    v <<= w ==> monomial_le (<<=) (monomial_var v) (monomial_var w)
       #|  forall(<<=) v w:V.\n    properly(<<=) v w ==> monomial_lt (<<=) (monomial_var v) (monomial_var w)
-      #|  k:V
-      #|  ((i:V) <<= (k:V)):bool
-      #|  k:V
-      #|  j:V
+      #|  (k : V)
+      #|  (op_lt_lt_eq : (V, V) -> Bool)((i : V), (k : V))
+      #|  (k : V)
+      #|  (j : V)
       #|  forall i:V. ~(mb i = 0) ==> (?j. ~(ma j = 0) /\\ i <<= j /\\ ~(i = j))
-      #|  j:V
-      #|  a <= b /\\ ~(a = 0) ==> ~(b = 0)
-      #|  a < b ==> ~(b = 0)
+      #|  (j : V)
+      #|  (a : Num) <= (b : Num) && !(a == 0) \226\134\146 !(b == 0)
+      #|  (a : Num) < (b : Num) \226\134\146 !(b == 0)
       #|  {j:V | j IN monomial_vars mb /\\ (i:V) <<= j}
-      #|  \\x y:V. x = y \\/ x <<= y
-      #|  (?x. P x /\\ Q x) <=> ~(forall x. P x ==> ~Q x)
-      #|  i:V
+      #|  (x : V) => (y : V) => x == y || (op_lt_lt_eq : (V, V) -> Bool)(x, y)
+      #|  (\226\136\131 x : _, (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)) == !(\226\136\128 x : _, P(x) \226\134\146 !Q(x))
+      #|  (i : V)
       #|  a + b:num = c + d ==> (b < d <=> c < a) /\\ (a < c <=> d < b)
       #|  forall i. (ma:V->num) i < mb i ==> (?j. i <<= j /\\ mb j < ma j)
-      #|  mb:V->num
-      #|  ma:V->num
-      #|  ~(a - b = 0) <=> b < a
-      #|  i:V
-      #|  monomial_vars(m1:V->num)
-      #|  monomial_vars(m2:V->num)
-      #|  \\i. (m1:V->num) i - m2 i
-      #|  \\i. (m2:V->num) i - m1 i
-      #|  FINITE(monomial_vars m2:V->bool)
-      #|  FINITE(monomial_vars m1:V->bool)
-      #|  m2:V->num
-      #|  m1:V->num
+      #|  (mb : (V) -> Num)
+      #|  (ma : (V) -> Num)
+      #|  !((a : Num) - (b : Num) == 0) == (b < a)
+      #|  (i : V)
+      #|  monomial_vars((m1 : (V) -> Num))
+      #|  monomial_vars((m2 : (V) -> Num))
+      #|  (i : V) => (m1 : (V) -> Num)(i) - (m2 : (V) -> Num)(i)
+      #|  (i : V) => (m2 : (V) -> Num)(i) - (m1 : (V) -> Num)(i)
+      #|  FINITE(monomial_vars((m2 : (V) -> Num)))
+      #|  FINITE(monomial_vars((m1 : (V) -> Num)))
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
       #|  forall(<<=):V->V->bool.\n        poset(<<=)\n        ==> monomial_le (<<=) =\n            \\m1 m2. monomial (:V) m1 /\\ monomial (:V) m2 /\\\n                    forall i. m2 i < m1 i ==> ?j. i <<= j /\\ m1 j < m2 j
-      #|  monomial_vars(monomial_mul m1 m2:V->num)
-      #|  {i | (m2:V->num) i < m1 i}
-      #|  {i | (m1:V->num) i < m2 i}
-      #|  \\x y:V. x = y \\/ x <<= y
+      #|  monomial_vars(monomial_mul((m1 : (V) -> Num), (m2 : (V) -> Num)))
+      #|  {(i : V) | (m2 : (V) -> Num)(i) < (m1 : (V) -> Num)(i)}
+      #|  {(i : V) | (m1 : (V) -> Num)(i) < (m2 : (V) -> Num)(i)}
+      #|  (x : V) => (y : V) => x == y || (op_lt_lt_eq : (V, V) -> Bool)(x, y)
       #|  ~(~({i | P i} = {})) /\\ ~(~({i | Q i} = {}))\n    ==> forall i. ~(P i) /\\ ~(Q i)
-      #|  m:num = n <=> ~(m < n) /\\ ~(n < m)
+      #|  ((m : Num) == (n : Num)) == (!(m < n) && !(n < m))
       #|  forall(<<=) m1 m2:V->num.\n        poset(<<=) /\\\n        monomial_le (<<=) m1 m2 /\\\n        monomial_le (<<=) m2 m1\n        ==> m1 = m2
       #|  \\/
       #|  \\/
@@ -33737,35 +33737,35 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  \\/
       #|  \\/
       #|  F
-      #|  ~(p /\\ ~q /\\ r) <=> r /\\ p ==> q
+      #|  !((p : Bool) && !(q : Bool) && (r : Bool)) == (r && p \226\134\146 q)
       #|  forall(<<=) m1 m2.\n        poset(<<=)\n        ==> ~(monomial_le (<<=) m1 m2 /\\ monomial_lt (<<=) m2 m1)
-      #|  ~((~p /\\ q) /\\ r) <=> q /\\ r ==> p
+      #|  !((!(p : Bool) && (q : Bool)) && (r : Bool)) == (q && r \226\134\146 p)
       #|  forall(<<=) m1 m2.\n        poset(<<=)\n        ==> ~(monomial_lt (<<=) m1 m2 /\\ monomial_le (<<=) m2 m1)
       #|  forall(<<=) m1 m2.\n        poset(<<=)\n        ==> ~(monomial_lt (<<=) m1 m2 /\\ monomial_lt (<<=) m2 m1)
       #|  forall(<<=) m1 m2 m3:V->num.\n        poset(<<=) /\\\n        monomial_le (<<=) m1 m2 /\\\n        monomial_lt (<<=) m2 m3\n        ==> monomial_lt (<<=) m1 m3
       #|  forall(<<=) m1 m2 m3.\n        poset(<<=) /\\\n        monomial_lt (<<=) m1 m2 /\\\n        monomial_le (<<=) m2 m3\n        ==> monomial_lt (<<=) m1 m3
       #|  forall(<<=) m1 m2 m3.\n        poset(<<=) /\\\n        monomial_lt (<<=) m1 m2 /\\\n        monomial_lt (<<=) m2 m3\n        ==> monomial_lt (<<=) m1 m3
-      #|  monomial_mul m1' m2:V->num
+      #|  monomial_mul((m1' : (V) -> Num), (m2 : (V) -> Num))
       #|  forall(<<=) m1 m1' m2 m2':V->num.\n        poset(<<=) /\\\n        monomial_le (<<=) m1 m1' /\\ monomial_lt (<<=) m2 m2'\n        ==> monomial_lt (<<=) (monomial_mul m1 m2) (monomial_mul m1' m2')
       #|  forall(<<=) m1 m1' m2 m2':V->num.\n        poset(<<=) /\\\n        monomial_lt (<<=) m1 m1' /\\ monomial_le (<<=) m2 m2'\n        ==> monomial_lt (<<=) (monomial_mul m1 m2) (monomial_mul m1' m2')
       #|  forall(<<=) m1 m1' m2 m2':V->num.\n        poset(<<=) /\\\n        monomial_lt (<<=) m1 m1' /\\ monomial_lt (<<=) m2 m2'\n        ==> monomial_lt (<<=) (monomial_mul m1 m2) (monomial_mul m1' m2')
       #|  forall(<<=):V->V->bool. poset(<<=) ==> poset(monomial_le(<<=))
       #|  (if p then 1 else 0) < (if q then 1 else 0) <=> ~p /\\ q
-      #|  0 < 1 /\\ ~(1 < 0)
+      #|  0 < 1 && !(1 < 0)
       #|  forall(<<=) v w.\n        poset(<<=) /\\ fld(<<=) = (:V)\n        ==> (monomial_le (<<=) (monomial_var v) (monomial_var w) <=>\n             v <<= w)
       #|  (if p then 1 else 0) < (if q then 1 else 0) <=> ~p /\\ q
-      #|  0 < 1 /\\ ~(1 < 0)
-      #|  v:V = w
+      #|  0 < 1 && !(1 < 0)
+      #|  (v : V) == (w : V)
       #|  forall(<<=) v w:V.\n        poset(<<=)\n        ==> (monomial_lt (<<=) (monomial_var v) (monomial_var w) <=>\n             v <<= w /\\ ~(v = w))
-      #|  j:V
-      #|  i:V
-      #|  j:V
-      #|  ~(a:num = b) /\\ ~(a < b) ==> b < a
-      #|  i:V
-      #|  {i | ~((m1:V->num) i = m2 i)}
-      #|  (<<=):V->V->bool
-      #|  (p ==> (q <=> r)) ==> (p /\\ q <=> p /\\ r)
-      #|  m1:V->num = m2
+      #|  (j : V)
+      #|  (i : V)
+      #|  (j : V)
+      #|  !((a : Num) == (b : Num)) && !(a < b) \226\134\146 b < a
+      #|  (i : V)
+      #|  {(i : V) | !((m1 : (V) -> Num)(i) == (m2 : (V) -> Num)(i))}
+      #|  (op_lt_lt_eq : (V, V) -> Bool)
+      #|  ((p : Bool) \226\134\146 (q : Bool) == (r : Bool)) \226\134\146 (p && q) == (p && r)
+      #|  (m1 : (V) -> Num) == (m2 : (V) -> Num)
       #|  forall(<<=) m1 m2.\n        toset (<<=) /\\ fld (<<=) = (:V)\n        ==> (monomial_lt (<<=) m1 m2 <=>\n             monomial (:V) m1 /\\ monomial (:V) m2 /\\\n             ?i. m1 i < m2 i /\\ forall j. properly (<<=) i j ==> m1 j = m2 j)
       #|  \\/
       #|  \\/
@@ -33790,370 +33790,370 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  \\/
       #|  F
       #|  forall(<<=) m1 m2.\n        toset (<<=) /\\ fld (<<=) = (:V)\n        ==> (monomial_le (<<=) m1 m2 <=>\n             monomial (:V) m1 /\\ monomial (:V) m2 /\\\n             (m1 = m2 \\/\n              ?i. m1 i < m2 i /\\ forall j. properly (<<=) i j ==> m1 j = m2 j))
-      #|  ~(m:num = n) ==> m < n \\/ n < m
-      #|  i:V
-      #|  monomial_vars(x:V->num) UNION monomial_vars y
-      #|  {i | ~((x:V->num) i = y i)}
-      #|  (<<=):V->V->bool
-      #|  x:V->num = y
-      #|  (i:V) <<= (j:V) \\/ j <<= i
-      #|  j:V
-      #|  i:V
-      #|  i:V
-      #|  j:V
-      #|  (i:V) <<= (j:V) \\/ j <<= i
-      #|  j:V
-      #|  i:V
-      #|  z:V->num
-      #|  y:V->num
-      #|  x:V->num
+      #|  !((m : Num) == (n : Num)) \226\134\146 m < n || n < m
+      #|  (i : V)
+      #|  UNION(monomial_vars((x : (V) -> Num)), monomial_vars((y : (V) -> Num)))
+      #|  {(i : V) | !((x : (V) -> Num)(i) == (y : (V) -> Num)(i))}
+      #|  (op_lt_lt_eq : (V, V) -> Bool)
+      #|  (x : (V) -> Num) == (y : (V) -> Num)
+      #|  (op_lt_lt_eq : (V, V) -> Bool)((i : V), (j : V)) || op_lt_lt_eq(j, i)
+      #|  (j : V)
+      #|  (i : V)
+      #|  (i : V)
+      #|  (j : V)
+      #|  (op_lt_lt_eq : (V, V) -> Bool)((i : V), (j : V)) || op_lt_lt_eq(j, i)
+      #|  (j : V)
+      #|  (i : V)
+      #|  (z : (V) -> Num)
+      #|  (y : (V) -> Num)
+      #|  (x : (V) -> Num)
       #|  forall(<<=). toset (<<=) /\\ fld (<<=) = (:V) ==> toset(monomial_le (<<=))
-      #|  k:V->num
-      #|  k:V->num
-      #|  monomial {b:V | b << (a:V)} k
-      #|  monomial_div (n:V->num) n0
+      #|  (k : (V) -> Num)
+      #|  (k : (V) -> Num)
+      #|  monomial({(b : V) | (op_lt_lt : (V, V) -> Bool)(b, (a : V))}, (k : (V) -> Num))
+      #|  monomial_div((n : (V) -> Num), (n0 : (V) -> Num))
       #|  ?k:V->num. monomial {b | b << (a:V)} k /\\ n = monomial_mul k n0
-      #|  n0:V->num = m0
-      #|  (n0:V->num) IN w
-      #|  j:V = a
-      #|  j:V
-      #|  i:V = a
-      #|  j:V = a
-      #|  j:V
-      #|  i:V = a
-      #|  i:V
-      #|  i:V
-      #|  monomial_le (<<) (n0:V->num) m0
+      #|  (n0 : (V) -> Num) == (m0 : (V) -> Num)
+      #|  IN((n0 : (V) -> Num), (w : ((V) -> Num) -> Bool))
+      #|  (j : V) == (a : V)
+      #|  (j : V)
+      #|  (i : V) == (a : V)
+      #|  (j : V) == (a : V)
+      #|  (j : V)
+      #|  (i : V) == (a : V)
+      #|  (i : V)
+      #|  (i : V)
+      #|  monomial_le((op_lt_lt : (V, V) -> Bool), (n0 : (V) -> Num), (m0 : (V) -> Num))
       #|  n0:V->num = \\b. if m0(b) < n(b) /\\ b << (a:V) then m0(b) else n b
-      #|  i:V
-      #|  n = monomial_mul (monomial_var a) (n0:V->num)
+      #|  (i : V)
+      #|  (n : (V) -> Num) == monomial_mul(monomial_var((a : V)), (n0 : (V) -> Num))
       #|  n0:V->num = \\b. if b = a then m0(a) else (n:V->num) b
-      #|  (n:V->num)(a) = m0(a) + 1
-      #|  n:V->num
-      #|  m0:V->num
-      #|  a:V
+      #|  (n : (V) -> Num)((a : V)) == (m0 : (V) -> Num)(a) + 1
+      #|  (n : (V) -> Num)
+      #|  (m0 : (V) -> Num)
+      #|  (a : V)
       #|  (forall x y. Q x y ==> R x y) ==> (forall x y. P x y /\\ Q x y ==> R x y)
-      #|  a ==> b <=> a ==> a /\\ b
+      #|  ((a : Bool) \226\134\146 (b : Bool)) == (a \226\134\146 a && b)
       #|  forall P. (forall m. m IN w /\\ (forall m'. monomial_lt (<<) m' m ==> P m') ==> P m)\n           ==> forall m:V->num. m IN w ==> P m
-      #|  forall m:V->num. m IN w ==> P m
-      #|  P:(V->num)->bool
-      #|  forall m. monomial (:V) m ==> m IN w
-      #|  forall m:V->num. w m <=> m IN w
+      #|  \226\136\128 m : (V) -> Num, IN(m, (w : ((V) -> Num) -> Bool)) \226\134\146 (P : ((V) -> Num) -> Bool)(m)
+      #|  (P : ((V) -> Num) -> Bool)
+      #|  \226\136\128 m : (V) -> Num, monomial(UNIV, m) \226\134\146 IN(m, (w : ((V) -> Num) -> Bool))
+      #|  \226\136\128 m : (V) -> Num, (w : ((V) -> Num) -> Bool)(m) == IN(m, w)
       #|  forall m. monomial (:V) m /\\ (forall m'. monomial_lt (<<) m' m ==> w m') ==> w m
-      #|  w:(V->num)->bool
-      #|  (<<):V->V->bool
+      #|  (w : ((V) -> Num) -> Bool)
+      #|  (op_lt_lt : (V, V) -> Bool)
       #|  forall x:V z:V. x <<< z ==> x << z \\/ ?y:V. x <<< y /\\ y << z
-      #|  \\y:V. ?z:V. P z /\\ z <<< y
-      #|  P:V->bool
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  monomial_lt((<<<):V->V->bool)
+      #|  (y : V) => \226\136\131 z : V, (P : (V) -> Bool)(z) && (op_lt_lt_lt : (V, V) -> Bool)(z, y)
+      #|  (P : (V) -> Bool)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  monomial_lt((op_lt_lt_lt : (V, V) -> Bool))
       #|  (forall x y. x << y ==> x <<< y) /\\\n      (forall(x:V) y z. x <<< y /\\ y <<< z ==> x <<< z)
-      #|  (<<<):V->V->bool
-      #|  (<<):V->V->bool
+      #|  (op_lt_lt_lt : (V, V) -> Bool)
+      #|  (op_lt_lt : (V, V) -> Bool)
       #|  forall(<<):V->V->bool.\n        WF(<<) /\\\n        (\\m1 m2. monomial (:V) m1 /\\ monomial (:V) m2 /\\\n                 forall i. m2 i < m1 i ==> ?j. i << j /\\ m1 j < m2 j) =\n        monomial_le (<<)\n        ==> WF(monomial_lt(<<))
       #|  forall(<<):V->V->bool. WF(<<) ==> WF(monomial_lt(<<))
-      #|  (<<=):V->V->bool
+      #|  (op_lt_lt_eq : (V, V) -> Bool)
       #|  forall(<<=). woset(<<=) /\\ fld(<<=) = (:V) ==> woset(monomial_le(<<=))
-      #|  (\\v. z):1->A
-      #|  (f:1->A) one
-      #|  forall P. (?f. P (f one) f) <=> (?z:A. P z (\\v. z))
-      #|  (p <=> q) <=> (~p <=> ~q)
-      #|  forall P. (forall f. P (f one) f) <=> (forall z:A. P z (\\v. z))
-      #|  (\\v:1. a:A) = (\\v. b) <=> a = b
-      #|  forall f:1->num c. f = (\\v:1. c) <=> f one = c
-      #|  forall m:1->num. m = (\\v:1. m one)
-      #|  (\\v:1. (m:1->num) one) = m
-      #|  (m:1->num) one
-      #|  m:1->num
-      #|  IMAGE (\\(d:num) (v:1). d) {d | P(\\v:1. d)}
-      #|  (\\v:1. d):1->num
-      #|  d:num
-      #|  IMAGE (\\(m:1->num). m one) {m | P m}
+      #|  (v : Unit) => (z : A)
+      #|  (f : (Unit) -> A)(one)
+      #|  \226\136\128 P : (A, (Unit) -> A) -> Bool, (\226\136\131 f : (Unit) -> A, P(f(one), f)) == (\226\136\131 z : A, P(z, (v : Unit) => z))
+      #|  ((p : Bool) == (q : Bool)) == (!p == !q)
+      #|  \226\136\128 P : (A, (Unit) -> A) -> Bool, (\226\136\128 f : (Unit) -> A, P(f(one), f)) == (\226\136\128 z : A, P(z, (v : Unit) => z))
+      #|  (((v : Unit) => (a : A)) == ((v : Unit) => (b : A))) == (a == b)
+      #|  \226\136\128 f : (Unit) -> Num, \226\136\128 c : Num, (f == ((v : Unit) => c)) == (f(one) == c)
+      #|  \226\136\128 m : (Unit) -> Num, m == ((v : Unit) => m(one))
+      #|  ((v : Unit) => (m : (Unit) -> Num)(one)) == m
+      #|  (m : (Unit) -> Num)(one)
+      #|  (m : (Unit) -> Num)
+      #|  IMAGE((d : Num) => (v : Unit) => d, {(d : Num) | (P : ((Unit) -> Num) -> Bool)((v : Unit) => d)})
+      #|  (v : Unit) => (d : Num)
+      #|  (d : Num)
+      #|  IMAGE((m : (Unit) -> Num) => m(one), {(m : (Unit) -> Num) | (P : ((Unit) -> Num) -> Bool)(m)})
       #|  forall P. FINITE {m:1->num | P m} <=> FINITE {d:num | P(\\v:1. d)}
-      #|  i:num
-      #|  (m1:1->num) one
-      #|  m2:1->num
-      #|  m1:1->num
+      #|  (i : Num)
+      #|  (m1 : (Unit) -> Num)(one)
+      #|  (m2 : (Unit) -> Num)
+      #|  (m1 : (Unit) -> Num)
       #|  forall n. {(m1,m2) | monomial_mul m1 m2 = (\\v:1. n)} =\n       IMAGE (\\i. ((\\v:1. i), (\\v:1. n - i))) (0..n)
-      #|  coeff = \\i (p:(1->num)->A). p(\\v:1. i)
-      #|  forall i (p:(1->num)->A). coeff i p = p(\\v:1. i)
-      #|  forall p:(1->num)->A. coeff 0 p = p(monomial_1)
-      #|  m:1->num = (\\v:1. (m:1->num) one)
-      #|  m:1->num
+      #|  (coeff : (Num, ((Unit) -> Num) -> A) -> A) == ((i : Num) => (p : ((Unit) -> Num) -> A) => p((v : Unit) => i))
+      #|  \226\136\128 i : Num, \226\136\128 p : ((Unit) -> Num) -> A, coeff(i, p) == p((v : Unit) => i)
+      #|  \226\136\128 p : ((Unit) -> Num) -> A, coeff(0, p) == p(monomial_1)
+      #|  (m : (Unit) -> Num) == ((v : Unit) => m(one))
+      #|  (m : (Unit) -> Num)
       #|  forall(p:(1->num)->A) q. (forall d. coeff d p = coeff d q) <=> p = q
       #|  forall r p. ring_polynomial r p <=>\n         ring_powerseries r p /\\ FINITE {i | ~(coeff i p:A = ring_0 r)}
-      #|  (m:1->num) one
-      #|  m:1->num
+      #|  (m : (Unit) -> Num)(one)
+      #|  (m : (Unit) -> Num)
       #|  forall r (p:(1->num)->A).\n        ring_powerseries r p <=> (forall d. coeff d p IN ring_carrier r)
       #|  forall r (p:(1->num)->A) d.\n        ring_powerseries r p ==> coeff d p IN ring_carrier r
       #|  forall r (p:(1->num)->A) d.\n        ring_polynomial r p ==> coeff d p IN ring_carrier r
       #|  forall r (p:(1->num)->A).\n        ring_polynomial r p <=>\n        (forall d. coeff d p IN ring_carrier r) /\\\n        FINITE {d | ~(coeff d p = ring_0 r)}
-      #|  forall(h:A->B) p i. coeff i (h o p) = h(coeff i p)
+      #|  \226\136\128 h : (A) -> B, \226\136\128 p : ((Unit) -> Num) -> A, \226\136\128 i : Num, coeff(i, o(h, p)) == h(coeff(i, p))
       #|  forall r c d. coeff d (poly_const r c :(1->num)->A) =\n           if d = 0 then c else ring_0 r
-      #|  forall r d. coeff d (poly_0 r :(1->num)->A) = ring_0 r
+      #|  \226\136\128 r : Ring[A], \226\136\128 d : Num, coeff(d, poly_0(r)) == ring_0(r)
       #|  forall r d. coeff d (poly_1 r :(1->num)->A) =\n         if d = 0 then ring_1 r else ring_0 r
       #|  forall r d x. coeff d (poly_var r x) = if d = 1 then ring_1 r else ring_0 r
       #|  forall r p d. coeff d (poly_neg r p :(1->num)->A) = ring_neg r (coeff d p)
       #|  forall r p q d. coeff d (poly_add r p q :(1->num)->A) =\n             ring_add r (coeff d p) (coeff d q)
       #|  forall r p q d. coeff d (poly_sub r p q :(1->num)->A) =\n             ring_sub r (coeff d p) (coeff d q)
-      #|  \\(i:num,j:num). (\\v:1. i),(\\v:1. j)
-      #|  \\(m1,m2). m1 one:num,m2 one:num
+      #|  GABS((f : ((Num, Num)) -> ((Unit) -> Num, (Unit) -> Num)) => \226\136\128 i : Num, \226\136\128 j : Num, GEQ(f((i, j)), ((v : Unit) => i, (v : Unit) => j)))
+      #|  GABS((f : (((Unit) -> Num, (Unit) -> Num)) -> (Num, Num)) => \226\136\128 m1 : (Unit) -> Num, \226\136\128 m2 : (Unit) -> Num, GEQ(f((m1, m2)), (m1(one), m2(one))))
       #|  forall(r:A ring) p q d.\n        coeff d (poly_mul r p q :(1->num)->A) =\n        ring_sum r {i,j | i,j | i + j = d}\n                   (\\(i,j). ring_mul r (coeff i p) (coeff j q))
       #|  forall r p q d. coeff d (poly_mul r p q :(1->num)->A) =\n             ring_sum r (0..d)\n                        (\\a. ring_mul r (coeff a p) (coeff (d - a) q))
-      #|  k:num
+      #|  (k : Num)
       #|  one
-      #|  (:1)
-      #|  r:A ring
+      #|  (UNIV : (Unit) -> Bool)
+      #|  (r : Ring[A])
       #|  forall(r:A ring) x k d.\n        coeff d (poly_pow r (poly_var r x) k) =\n        if d = k then ring_1 r else ring_0 r
-      #|  a:num
+      #|  (a : Num)
       #|  forall a. ring_mul r (if a = 0 then c else ring_0 r)\n                    (coeff (d - a) (p:(1->num)->A)) =\n        if a = 0 then ring_mul r c (coeff d p) else ring_0 r
       #|  forall r c (p:(1->num)->A) d.\n        c IN ring_carrier r /\\ ring_powerseries r p\n        ==> coeff d (poly_mul r (poly_const r c) p) =\n            ring_mul r c (coeff d p)
       #|  forall r c (p:(1->num)->A) d.\n        c IN ring_carrier r /\\ ring_powerseries r p\n        ==> coeff d (poly_mul r p (poly_const r c)) =\n            ring_mul r (coeff d p) c
-      #|  1 <= d <=> ~(d = 0)
+      #|  (1 <= (d : Num)) == !(d == 0)
       #|  forall r (p:(1->num)->A) x d.\n        ring_powerseries r p\n        ==> coeff d (poly_mul r (poly_var r x) p) =\n            if d = 0 then ring_0 r else coeff (d - 1) p
       #|  forall r (p:(1->num)->A) x d.\n        ring_powerseries r p\n        ==> coeff d (poly_mul r p (poly_var r x)) =\n            if d = 0 then ring_0 r else coeff (d - 1) p
       #|  forall r (p:(1->num)->A) x k d.\n        ring_powerseries r p\n        ==> coeff d (poly_mul r (poly_pow r (poly_var r x) k) p) =\n            if d < k then ring_0 r else coeff (d - k) p
       #|  forall r (p:(1->num)->A) x k d.\n        ring_powerseries r p\n        ==> coeff d (poly_mul r p (poly_pow r (poly_var r x) k)) =\n            if d < k then ring_0 r else coeff (d - k) p
-      #|  m:1->num = (\\v:1. m one)
-      #|  m:1->num
+      #|  (m : (Unit) -> Num) == ((v : Unit) => m(one))
+      #|  (m : (Unit) -> Num)
       #|  forall r (p:(1->num)->R) q.\n      poly_mul r p q =\n      \\m. ring_sum r (0..m one)\n              (\\i. ring_mul r (coeff i p) (coeff (m one - i) q))
       #|  forall r G (p:(1->num)->A).\n        ring_polynomial r p /\\\n        (forall d. coeff d p IN ring_carrier(subring_generated r G))\n        ==> ring_polynomial (subring_generated r G) p
       #|  forall r (p:(1->num)->A).\n        ring_polynomial r p ==> FINITE {d | ~(coeff d p = ring_0 r)}
-      #|  {d:num | d <= n}
+      #|  {(d : Num) | d <= (n : Num)}
       #|  forall r (p:(1->num)->A) n.\n        ring_powerseries r p /\\\n        (forall d. ~(coeff d p = ring_0 r) ==> d <= n)\n        ==> ring_polynomial r p
-      #|  ~(coeff d (p:(1->num)->A) = ring_0 r)
-      #|  n <= d:num
-      #|  d:num
-      #|  n:num
+      #|  !(coeff((d : Num), (p : ((Unit) -> Num) -> A)) == ring_0((r : Ring[A])))
+      #|  (n : Num) <= (d : Num)
+      #|  (d : Num)
+      #|  (n : Num)
       #|  forall r (p:(1->num)->A) n.\n        ring_powerseries r p /\\\n        (forall d. n <= d ==> coeff d p = ring_0 r)\n        ==> ring_polynomial r p
       #|  poly_deg r (p:(V->num)->A) =\n        minimal d. forall m. ~(p m = ring_0 r) ==> monomial_deg m <= d
       #|  forall r s (p:(V->num)->A).\n        poly_deg (subring_generated r s) p = poly_deg r p
-      #|  (if p then q else T) <=> p ==> q
-      #|  forall r c. poly_deg r (poly_const r c:(V->num)->A) = 0
-      #|  forall r. poly_deg r (poly_0 r:(V->num)->A) = 0
-      #|  forall r. poly_deg r (poly_1 r:(V->num)->A) = 0
-      #|  monomial_deg:(V->num)->num
+      #|  (if (p : Bool) { (q : Bool) } else { true }) == (p \226\134\146 q)
+      #|  \226\136\128 r : Ring[A], \226\136\128 c : A, (poly_deg : (Ring[A], ((V) -> Num) -> A) -> Num)(r, (poly_const : (Ring[A], A, (V) -> Num) -> A)(r, c)) == 0
+      #|  \226\136\128 r : Ring[A], (poly_deg : (Ring[A], ((V) -> Num) -> A) -> Num)(r, (poly_0 : (Ring[A], (V) -> Num) -> A)(r)) == 0
+      #|  \226\136\128 r : Ring[A], (poly_deg : (Ring[A], ((V) -> Num) -> A) -> Num)(r, (poly_1 : (Ring[A], (V) -> Num) -> A)(r)) == 0
+      #|  (monomial_deg : ((V) -> Num) -> Num)
       #|  forall r (p:(V->num)->A) n.\n        ring_polynomial r p\n        ==> (poly_deg r p <= n <=>\n             forall m. ~(p m = ring_0 r) ==> monomial_deg m <= n)
       #|  forall r (p:(V->num)->A) n.\n        ring_polynomial r p /\\\n        (forall m. ~(p m = ring_0 r) ==> monomial_deg m <= n)\n        ==> poly_deg r p <= n
       #|  forall r (p:(V->num)->A) m.\n        ring_polynomial r p /\\ ~(p m = ring_0 r)\n        ==> monomial_deg m <= poly_deg r p
-      #|  n = 0
-      #|  n <= x <=> n = 0 \\/ ~(x <= n - 1)
+      #|  (n : Num) == 0
+      #|  ((n : Num) <= (x : Num)) == (n == 0 || !(x <= n - 1))
       #|  forall r (p:(V->num)->A) n.\n        ring_polynomial r p\n        ==> (n <= poly_deg r p <=>\n             n = 0 \\/ ?m. ~(p m = ring_0 r) /\\ n <= monomial_deg m)
       #|  forall r (p:(V->num)->A) m n.\n        ring_polynomial r p /\\\n        ~(p m = ring_0 r) /\\ n <= monomial_deg m\n        ==> n <= poly_deg r p
-      #|  (\\v:1. d):(1->num)
-      #|  poly_deg r (p:(1->num)->A)
-      #|  p:(1->num)->A
-      #|  r:A ring
+      #|  (v : Unit) => (d : Num)
+      #|  poly_deg((r : Ring[A]), (p : ((Unit) -> Num) -> A))
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
       #|  forall r (p:(1->num)->A) d.\n     ring_polynomial r p /\\ poly_deg r p < d\n     ==> coeff d p = ring_0 r
-      #|  poly_deg r (p:(V->num)->A) = 0
+      #|  poly_deg((r : Ring[A]), (p : ((V) -> Num) -> A)) == 0
       #|  (forall m. Q m ==> monomial_deg m <= n) /\\ ~(forall m. Q m ==> monomial_deg m < n)\n    ==> ?m. Q m /\\ monomial_deg m = n
       #|  forall r (p:(V->num)->A).\n        ring_polynomial r p /\\ ~(p = poly_0 r)\n        ==> ?m. ~(p m = ring_0 r) /\\ monomial_deg m = poly_deg r p
-      #|  p:(V->num)->A
-      #|  r:A ring
+      #|  (p : ((V) -> Num) -> A)
+      #|  (r : Ring[A])
       #|  ~(p m = ring_0 r) /\\ monomial_deg m = d <=>\n    m IN {m | ~(p m = ring_0 r) /\\ monomial_deg m = d}
       #|  forall(<<=) r (p:(V->num)->A).\n        toset(<<=) /\\ fld(<<=) = (:V) /\\\n        ring_polynomial r p /\\ ~(p = poly_0 r)\n        ==> ?m. ~(p m = ring_0 r) /\\ monomial_deg m = poly_deg r p /\\\n                forall m'. ~(p m' = ring_0 r) /\\ monomial_deg m' = poly_deg r p\n                     ==> monomial_le(<<=) m' m
       #|  forall(<<=) r (p:(V->num)->A).\n        toset(<<=) /\\ fld(<<=) = (:V) /\\\n        ring_polynomial r p /\\ ~(p = poly_0 r)\n        ==> ?m. ~(p m = ring_0 r) /\\ monomial_deg m = poly_deg r p /\\\n                forall m'. ~(p m' = ring_0 r) /\\ monomial_deg m' = poly_deg r p /\\\n                     ~(m' = m)\n                     ==> monomial_lt(<<=) m' m
       #|  forall r (p:(V->num)->A).\n      ring_polynomial r p\n      ==> (poly_deg r p = 0 <=> p = poly_const r (p monomial_1))
-      #|  (p:(V->num)->A) monomial_1
+      #|  (p : ((V) -> Num) -> A)(monomial_1)
       #|  forall r (p:(V->num)->A).\n      ring_polynomial r p\n      ==> (poly_deg r p = 0 <=>\n           ?c. c IN ring_carrier r /\\ p = poly_const r c)
       #|  forall r (p:(V->num)->A) n.\n        ring_polynomial r p\n        ==> (poly_deg r p = n <=>\n             (forall m. ~(p m = ring_0 r) ==> monomial_deg m <= n) /\\\n             (n = 0 \\/ ?m. ~(p m = ring_0 r) /\\ monomial_deg m = n))
       #|  forall r (p:(V->num)->A) n.\n        ring_polynomial r p /\\\n        (forall m. ~(p m = ring_0 r) ==> monomial_deg m <= n) /\\\n        (n = 0 \\/ ?m. ~(p m = ring_0 r) /\\ monomial_deg m = n)\n        ==> poly_deg r p = n
       #|  forall r. poly_deg r (poly_var r v:(V->num)->A) =\n       if ring_1 r = ring_0 r then 0 else 1
-      #|  ~(coeff d (p:(1->num)->A) = ring_0 r)
-      #|  monomial_deg (\\v:1. d) <= poly_deg r (p:(1->num)->A)
+      #|  !(coeff((d : Num), (p : ((Unit) -> Num) -> A)) == ring_0((r : Ring[A])))
+      #|  monomial_deg((v : Unit) => (d : Num)) <= poly_deg((r : Ring[A]), (p : ((Unit) -> Num) -> A))
       #|  forall r (p:(1->num)->A) d.\n        ring_polynomial r p /\\ ~(coeff d p = ring_0 r)\n        ==> d <= poly_deg r p
       #|  forall r (p:(1->num)->A) n d.\n        ring_polynomial r p /\\ poly_deg r p <= n /\\\n        ~(coeff d p = ring_0 r)\n        ==> d <= n
       #|  forall r (p:(1->num)->A) n.\n        ring_polynomial r p\n        ==> (poly_deg r p <= n <=>\n             forall d. ~(coeff d p = ring_0 r) ==> d <= n)
-      #|  n:num
-      #|  ring_polynomial r (p:(1->num)->A)
+      #|  (n : Num)
+      #|  ring_polynomial((r : Ring[A]), (p : ((Unit) -> Num) -> A))
       #|  forall r (p:(1->num)->A) n.\n        ring_powerseries r p /\\\n        (forall d. ~(coeff d p = ring_0 r) ==> d <= n)\n        ==> poly_deg r p <= n
       #|  forall r (p:(1->num)->A) n.\n        ring_polynomial r p\n        ==> (n <= poly_deg r p <=>\n             n = 0 \\/ ?d. ~(coeff d p = ring_0 r) /\\ n <= d)
       #|  forall r (p:(1->num)->A) d n.\n        ring_polynomial r p /\\\n        ~(coeff d p = ring_0 r) /\\ n <= d\n        ==> n <= poly_deg r p
       #|  forall r (p:(1->num)->A) n.\n        ring_polynomial r p\n        ==> (poly_deg r p = n <=>\n             (forall d. ~(coeff d p = ring_0 r) ==> d <= n) /\\\n             (n = 0 \\/ ~(coeff n p = ring_0 r)))
-      #|  n:num
-      #|  ring_polynomial r (p:(1->num)->A)
+      #|  (n : Num)
+      #|  ring_polynomial((r : Ring[A]), (p : ((Unit) -> Num) -> A))
       #|  forall r (p:(1->num)->A) n.\n        ring_powerseries r p /\\\n        (forall d. ~(coeff d p = ring_0 r) ==> d <= n) /\\\n        ~(coeff n p = ring_0 r)\n        ==> poly_deg r p = n
       #|  forall r (p:(1->num)->A) n.\n        ring_polynomial r p /\\\n        poly_deg r p <= n /\\\n        ~(coeff n p = ring_0 r)\n        ==> poly_deg r p = n
       #|  forall r (p:K->(1->num)->A) d (s:K->bool).\n        FINITE s /\\ (forall x. x IN s ==> ring_powerseries r (p x))\n        ==> coeff d (ring_sum (powser_ring r (:1)) s p) =\n            ring_sum r s (\\x. coeff d (p x))
       #|  forall r (p:K->(1->num)->A) d (s:K->bool).\n        FINITE s /\\ (forall x. x IN s ==> ring_polynomial r (p x))\n        ==> coeff d (ring_sum (poly_ring r (:1)) s p) =\n            ring_sum r s (\\x. coeff d (p x))
       #|  forall r (p:(V->num)->A).\n        ring_polynomial r p ==> poly_deg r (poly_neg r p) = poly_deg r p
-      #|  x <= MAX m n <=> x <= m \\/ x <= n
+      #|  ((x : Num) <= MAX((m : Num), (n : Num))) == (x <= m || x <= n)
       #|  forall r (p:(V->num)->A) q.\n        ring_polynomial r p /\\ ring_polynomial r q\n        ==> poly_deg r (poly_add r p q) <= MAX (poly_deg r p) (poly_deg r q)
       #|  forall r (p:(V->num)->A) q.\n        ring_polynomial r p /\\ ring_polynomial r q\n        ==> poly_deg r (poly_sub r p q) <= MAX (poly_deg r p) (poly_deg r q)
-      #|  ring_sub r (ring_add r x y) y:A = x
-      #|  ring_sub r (ring_add r x y) x:A = y
-      #|  q:(V->num)->A
-      #|  poly_add r p q:(V->num)->A
-      #|  r:A ring
-      #|  p:(V->num)->A
-      #|  poly_add r p q:(V->num)->A
-      #|  r:A ring
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
-      #|  r:A ring
+      #|  ring_sub((r : Ring[A]), ring_add(r, (x : A), (y : A)), y) == x
+      #|  ring_sub((r : Ring[A]), ring_add(r, (x : A), (y : A)), x) == y
+      #|  (q : ((V) -> Num) -> A)
+      #|  poly_add((r : Ring[A]), (p : ((V) -> Num) -> A), (q : ((V) -> Num) -> A))
+      #|  (r : Ring[A])
+      #|  (p : ((V) -> Num) -> A)
+      #|  poly_add((r : Ring[A]), (p : ((V) -> Num) -> A), (q : ((V) -> Num) -> A))
+      #|  (r : Ring[A])
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (r : Ring[A])
       #|  forall r (p:(V->num)->A) q.\n        ring_polynomial r p /\\ ring_polynomial r q /\\\n        ~(poly_deg r p = poly_deg r q)\n        ==> poly_deg r (poly_add r p q) = MAX (poly_deg r p) (poly_deg r q)
       #|  forall r (p:(V->num)->A) q.\n        ring_polynomial r p /\\ ring_polynomial r q /\\\n        ~(poly_deg r p = poly_deg r q)\n        ==> poly_deg r (poly_sub r p q) = MAX (poly_deg r p) (poly_deg r q)
       #|  (p:(V->num)->A) m1 IN ring_carrier r /\\\n    (q:(V->num)->A) m2 IN ring_carrier r /\\\n    ~(p m1 = ring_0 r) /\\ ~(q m2 = ring_0 r)
-      #|  m2:V->num
-      #|  m1:V->num
-      #|  ~(p /\\ q ==> r) <=> p /\\ q /\\ ~r
-      #|  m:V->num
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
+      #|  !((p : Bool) && (q : Bool) \226\134\146 (r : Bool)) == (p && q && !r)
+      #|  (m : (V) -> Num)
       #|  forall r (p:(V->num)->A) q.\n        ring_polynomial r p /\\ ring_polynomial r q\n        ==> poly_deg r (poly_mul r p q) <= poly_deg r p + poly_deg r q
       #|  forall(r:A ring) (p:(V->num)->A) n.\n        ring_polynomial r p\n        ==> poly_deg r (poly_pow r p n) <= n * poly_deg r p
-      #|  l:V->V->bool
-      #|  forall l. monomial_lt l m n ==> ~(m = n)
-      #|  n2:V->num = m2
-      #|  n1:V->num = m1
+      #|  (l : (V, V) -> Bool)
+      #|  \226\136\128 l : (_, _) -> Bool, monomial_lt(l, (m : (_) -> Num), (n : (_) -> Num)) \226\134\146 !(m == n)
+      #|  (n2 : (V) -> Num) == (m2 : (V) -> Num)
+      #|  (n1 : (V) -> Num) == (m1 : (V) -> Num)
       #|  x + y:num = m + n ==> x <= m /\\ y <= n ==> x = m /\\ y = n
       #|  (monomial_deg m = monomial_deg m' ==> ~p ==> ~(m = m'))\n    ==> m = m' ==> p
-      #|  monomial (:V) n1 /\\ monomial (:V) n2
-      #|  (q:(V->num)->A) n2 = ring_0 r
-      #|  (p:(V->num)->A) n1 = ring_0 r
-      #|  n2:V->num
-      #|  n1:V->num
-      #|  (m1:V->num,m2:V->num)
+      #|  monomial(UNIV, (n1 : (V) -> Num)) && monomial(UNIV, (n2 : (V) -> Num))
+      #|  (q : ((V) -> Num) -> A)((n2 : (V) -> Num)) == ring_0((r : Ring[A]))
+      #|  (p : ((V) -> Num) -> A)((n1 : (V) -> Num)) == ring_0((r : Ring[A]))
+      #|  (n2 : (V) -> Num)
+      #|  (n1 : (V) -> Num)
+      #|  ((m1 : (V) -> Num), (m2 : (V) -> Num))
       #|  forall m. ring_sum r t f = ring_sum r {m} f /\\ ~(ring_sum r {m} f = a)\n        ==> ~(ring_sum r t f = a)
-      #|  monomial (:V) m1 /\\ monomial (:V) m2
-      #|  monomial_mul m1 m2:V->num
-      #|  m2:V->num
-      #|  m1:V->num
-      #|  r:A ring
-      #|  l:V->V->bool
-      #|  l:V->V->bool
-      #|  (:V)
-      #|  q:(V->num)->A = poly_0 r
+      #|  monomial(UNIV, (m1 : (V) -> Num)) && monomial(UNIV, (m2 : (V) -> Num))
+      #|  monomial_mul((m1 : (V) -> Num), (m2 : (V) -> Num))
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
+      #|  (r : Ring[A])
+      #|  (l : (V, V) -> Bool)
+      #|  (l : (V, V) -> Bool)
+      #|  (UNIV : (V) -> Bool)
+      #|  (q : ((V) -> Num) -> A) == poly_0((r : Ring[A]))
       #|  forall r (p:(V->num)->A) q.\n        integral_domain r /\\ ring_polynomial r p /\\ ring_polynomial r q /\\\n        (p = poly_0 r <=> q = poly_0 r)\n        ==> poly_deg r (poly_mul r p q) = poly_deg r p + poly_deg r q
-      #|  p:(V->num)->A
-      #|  q:(V->num)->A
-      #|  (p:(1->num)->A) = poly_0 (r:A ring)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((Unit) -> Num) -> A) == poly_0((r : Ring[A]))
       #|  forall r (c:A) (p:(1->num)->A).\n     integral_domain r /\\\n     c IN ring_carrier r /\\ ~(c = ring_0 r) /\\\n     ring_polynomial r p\n     ==> poly_deg r (poly_mul r (poly_const r c) p) = poly_deg r p
       #|  coeff ((poly_deg r (p:(1->num)->A) + poly_deg r q) - a)\n              (q:(1->num)->A) = ring_0 (r:A ring)
-      #|  coeff a (p:(1->num)->A) = ring_0 (r:A ring)
-      #|  poly_deg r (p:(1->num)->A) < a
-      #|  a:num
+      #|  coeff((a : Num), (p : ((Unit) -> Num) -> A)) == ring_0((r : Ring[A]))
+      #|  poly_deg((r : Ring[A]), (p : ((Unit) -> Num) -> A)) < (a : Num)
+      #|  (a : Num)
       #|  ring_sum (r:A ring) (0..poly_deg r p + poly_deg r q)\n      (\\a. ring_mul r (coeff a p)\n                      (coeff ((poly_deg r p + poly_deg r q) - a) q)) =\n     ring_sum r (0..poly_deg r p + poly_deg r q)\n      (\\a. if a = poly_deg r p\n           then ring_mul r (coeff (poly_deg r p) p) (coeff (poly_deg r q) q)\n           else ring_0 r)
       #|  forall r (p:(1->num)->A) q.\n     ring_polynomial r p /\\ ring_polynomial r q\n     ==> coeff (poly_deg r p + poly_deg r q) (poly_mul r p q) =\n         ring_mul r (coeff (poly_deg r p) p) (coeff (poly_deg r q) q)
       #|  forall r (p:(1->num)->A) q.\n     ring_polynomial r p /\\ ring_polynomial r q /\\\n     ~(ring_mul r (coeff (poly_deg r p) p) (coeff (poly_deg r q) q) =\n       ring_0 r)\n     ==> poly_deg r (poly_mul r p q) = poly_deg r p + poly_deg r q
-      #|  monomial_div (monomial_mul m1 m2) m1 = m2
-      #|  monomial_mul (monomial_var (x:V)) m
-      #|  monomial (:V) m
-      #|  m:V->num
-      #|  p:(V->num)->A
-      #|  r:A ring
+      #|  monomial_div(monomial_mul((m1 : (_) -> Num), (m2 : (_) -> Num)), m1) == m2
+      #|  monomial_mul(monomial_var((x : V)), (m : (V) -> Num))
+      #|  monomial(UNIV, (m : (V) -> Num))
+      #|  (m : (V) -> Num)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (r : Ring[A])
       #|  forall(r:A ring) p (x:V).\n        ring_polynomial r p\n        ==> poly_deg r (poly_mul r (poly_var r x) p) =\n            if p = poly_0 r then 0 else poly_deg r p + 1
       #|  forall(r:A ring) p (x:V).\n        ring_polynomial r p\n        ==> poly_deg r (poly_mul r p (poly_var r x)) =\n            if p = poly_0 r then 0 else poly_deg r p + 1
-      #|  p:(V->num)->A = poly_0 r
+      #|  (p : ((V) -> Num) -> A) == poly_0((r : Ring[A]))
       #|  forall(r:A ring) p (x:V) k.\n        ring_polynomial r p\n        ==> poly_deg r (poly_mul r (poly_pow r (poly_var r x) k) p) =\n            if p = poly_0 r then 0 else poly_deg r p + k
       #|  forall(r:A ring) p (x:V) k.\n        ring_polynomial r p\n        ==> poly_deg r (poly_mul r p (poly_pow r (poly_var r x) k)) =\n            if p = poly_0 r then 0 else poly_deg r p + k
-      #|  d:A
-      #|  c:A
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
-      #|  r:A ring
-      #|  p \\/ q <=> ~(~p /\\ ~q)
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
+      #|  (d : A)
+      #|  (c : A)
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  ((p : Bool) || (q : Bool)) == !(!p && !q)
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
       #|  forall(r:A ring) (s:V->bool).\n        integral_domain(poly_ring r s) <=> integral_domain r
-      #|  n:num
-      #|  p:(V->num)->A
-      #|  poly_ring (r:A ring) (:V)
-      #|  p:(V->num)->A = poly_0 r
+      #|  (n : Num)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (poly_ring : (Ring[A], (V) -> Bool) -> Ring[((V) -> Num) -> A])((r : Ring[A]), (UNIV : (V) -> Bool))
+      #|  (p : ((V) -> Num) -> A) == poly_0((r : Ring[A]))
       #|  forall(r:A ring) (p:(V->num)->A) n.\n        integral_domain r /\\\n        ring_polynomial r p\n        ==> poly_deg r (poly_pow r p n) = n * poly_deg r p
       #|  poly_deg r (poly_mul r (p:(V->num)->A) (x:(V->num)->A)) =\n     poly_deg r p + poly_deg r x
-      #|  ~(q:(V->num)->A = poly_0 r)
+      #|  !((q : ((V) -> Num) -> A) == poly_0((r : Ring[A])))
       #|  ~((p:(V->num)->A) = poly_0 r) /\\ ~((x:(V->num)->A) = poly_0 r)
       #|  forall(r:A ring) (v:V->bool) p q.\n        integral_domain r /\\\n        ring_divides (poly_ring r v) p q /\\\n        ~(q = poly_0 r)\n        ==> poly_deg r p <= poly_deg r q
-      #|  a <= n /\\ b <= n /\\ c <= MAX a b ==> c <= n
+      #|  (a : Num) <= (n : Num) && (b : Num) <= n && (c : Num) <= MAX(a, b) \226\134\146 c <= n
       #|  forall r s p (q:(V->num)->A) n.\n        p IN ring_carrier(poly_ring r s) /\\\n        q IN ring_carrier(poly_ring r s) /\\\n        poly_deg r p <= n /\\ poly_deg r q <= n\n        ==> poly_deg r (ring_add (poly_ring r s) p q) <= n
-      #|  a <= n /\\ b <= n /\\ c <= MAX a b ==> c <= n
+      #|  (a : Num) <= (n : Num) && (b : Num) <= n && (c : Num) <= MAX(a, b) \226\134\146 c <= n
       #|  forall r s p (q:(V->num)->A) n.\n        p IN ring_carrier(poly_ring r s) /\\\n        q IN ring_carrier(poly_ring r s) /\\\n        poly_deg r p <= n /\\ poly_deg r q <= n\n        ==> poly_deg r (ring_sub (poly_ring r s) p q) <= n
       #|  forall r s (f:K->(V->num)->A) k n.\n        FINITE k /\\\n        (forall i. i IN k\n             ==> f i IN ring_carrier(poly_ring r s) /\\ poly_deg r (f i) <= n)\n        ==> poly_deg r (ring_sum (poly_ring r s) k f) <= n
       #|  (forall m. ~((if m = a then w else z) = z) ==> P m) <=> (w = z \\/ P a)
       #|  forall(r:A ring) (s:V->bool) i k.\n        poly_deg r (ring_pow (poly_ring r s) (poly_var r i) k) =\n        if ring_1 r = ring_0 r then 0 else k
-      #|  monomial v (m2:V->num)
-      #|  m2:V->num
-      #|  v:V->bool
-      #|  monomial_mul m1 m2:V->num
-      #|  m1:V->num
-      #|  m2:V->num
-      #|  monomial_restrict v m:V->num
-      #|  v:V->bool
-      #|  monomial_restrict (u:V->bool) m
-      #|  monomial_restrict (v:V->bool) m
-      #|  monomial (u UNION v) (m:V->num)
-      #|  m:V->num
-      #|  ~((if p then x else z) = z) <=> p /\\ ~(x = z)
-      #|  v:V->bool
-      #|  u:V->bool
-      #|  r:A ring
+      #|  monomial((v : (V) -> Bool), (m2 : (V) -> Num))
+      #|  (m2 : (V) -> Num)
+      #|  (v : (V) -> Bool)
+      #|  monomial_mul((m1 : (V) -> Num), (m2 : (V) -> Num))
+      #|  (m1 : (V) -> Num)
+      #|  (m2 : (V) -> Num)
+      #|  monomial_restrict((v : (V) -> Bool), (m : (V) -> Num))
+      #|  (v : (V) -> Bool)
+      #|  monomial_restrict((u : (V) -> Bool), (m : (V) -> Num))
+      #|  monomial_restrict((v : (V) -> Bool), (m : (V) -> Num))
+      #|  monomial(UNION((u : (V) -> Bool), (v : (V) -> Bool)), (m : (V) -> Num))
+      #|  (m : (V) -> Num)
+      #|  !((if (p : Bool) { (x : _) } else { (z : _) }) == z) == (p && !(x == z))
+      #|  (v : (V) -> Bool)
+      #|  (u : (V) -> Bool)
+      #|  (r : Ring[A])
       #|  forall r u v (p:(V->num)->A).\n        DISJOINT u v /\\\n        p IN ring_carrier(poly_ring r (u UNION v))\n        ==> (poly_deg (poly_ring r u)\n              (\\m1 m2. if monomial v m1 /\\ monomial u m2\n                       then p(monomial_mul m1 m2) else ring_0 r) = 0 <=>\n             poly_vars r p SUBSET u)
       #|  (f:((V->num)->A)->((V->num)->(V->num)->A)) p2
       #|  (f:((V->num)->A)->((V->num)->(V->num)->A)) p1
-      #|  poly_ring (r:A ring) (s:V->bool)
+      #|  poly_ring((r : Ring[A]), (s : (V) -> Bool))
       #|  ~(q /\\ s) /\\ (~(p /\\ r) ==> t)\n   ==> (p <=> q) ==> (r <=> s) ==> t
-      #|  f:((V->num)->A)->((V->num)->(V->num)->A)
-      #|  t DELETE a = s ==> a IN t ==> s UNION {a} = t
-      #|  {a:V}
-      #|  s:V->bool
-      #|  r:A ring
-      #|  {a:V}
-      #|  s:V->bool
-      #|  r:A ring
-      #|  s SUBSET t ==> forall a. ~(a IN s) ==> s SUBSET t DELETE a
-      #|  a:V
+      #|  (f : (((V) -> Num) -> A, (V) -> Num, (V) -> Num) -> A)
+      #|  DELETE((t : (_) -> Bool), (a : _)) == (s : (_) -> Bool) \226\134\146 IN(a, t) \226\134\146 UNION(s, {a}) == t
+      #|  {(a : V)}
+      #|  (s : (V) -> Bool)
+      #|  (r : Ring[A])
+      #|  {(a : V)}
+      #|  (s : (V) -> Bool)
+      #|  (r : Ring[A])
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 (\226\136\128 a : _, !IN(a, s) \226\134\146 SUBSET(s, DELETE(t, a)))
+      #|  (a : V)
       #|  s = (poly_vars (r:A ring) p1 UNION poly_vars r p2) DELETE (a:V)
-      #|  a:V
-      #|  t = s <=> t SUBSET s /\\ ~(t PSUBSET s)
+      #|  (a : V)
+      #|  ((t : (_) -> Bool) == (s : (_) -> Bool)) == (SUBSET(t, s) && !PSUBSET(t, s))
       #|  (p <=> q) <=> p /\\ q \\/ ~p /\\ ~q
       #|  forall r p1 (p2:(V->num)->A).\n        integral_domain r /\\\n        ring_polynomial r p1 /\\ ring_polynomial r p2 /\\\n        (p1 = poly_0 r <=> p2 = poly_0 r)\n        ==> poly_vars r (poly_mul r p1 p2) =\n            poly_vars r p1 UNION poly_vars r p2
-      #|  p1:(V->num)->A
-      #|  p2:(V->num)->A
-      #|  poly_mul r p1 p2:(V->num)->A
-      #|  p1:(V->num)->A
-      #|  p2:(V->num)->A
-      #|  p2:(V->num)->A
-      #|  p1:(V->num)->A
-      #|  p1:(V->num)->A
-      #|  p2:(V->num)->A
-      #|  n:num
-      #|  p:(V->num)->A
-      #|  poly_ring (r:A ring) (:V)
-      #|  p:(V->num)->A = poly_0 r
+      #|  (p1 : ((V) -> Num) -> A)
+      #|  (p2 : ((V) -> Num) -> A)
+      #|  poly_mul((r : Ring[A]), (p1 : ((V) -> Num) -> A), (p2 : ((V) -> Num) -> A))
+      #|  (p1 : ((V) -> Num) -> A)
+      #|  (p2 : ((V) -> Num) -> A)
+      #|  (p2 : ((V) -> Num) -> A)
+      #|  (p1 : ((V) -> Num) -> A)
+      #|  (p1 : ((V) -> Num) -> A)
+      #|  (p2 : ((V) -> Num) -> A)
+      #|  (n : Num)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (poly_ring : (Ring[A], (V) -> Bool) -> Ring[((V) -> Num) -> A])((r : Ring[A]), (UNIV : (V) -> Bool))
+      #|  (p : ((V) -> Num) -> A) == poly_0((r : Ring[A]))
       #|  forall r (p:(V->num)->A) n.\n        integral_domain r /\\ ring_polynomial r p\n        ==> poly_vars r (poly_pow r p n) =\n            if n = 0 then {} else poly_vars r p
       #|  {x | ~(f x = k x)} SUBSET s <=>\n    IMAGE f s SUBSET UNIV /\\ {x | ~(f x = k x)} SUBSET s
       #|  FINITE s ==> (FINITE t /\\ t SUBSET s <=> t SUBSET s)
       #|  forall s:V->bool. FINITE s /\\ ~(s = {}) ==> {m | monomial s m} =_c (:num)
-      #|  ~(1 = 0)
+      #|  !(1 == 0)
       #|  {m | FINITE {i | ~(m i = 0)} /\\ {i | ~(m i = 0)} SUBSET s} =\n    {m | IMAGE m s SUBSET (:num) /\\\n         {i | ~(m i = 0)} SUBSET s /\\\n         FINITE {i | ~(m i = 0)}}
-      #|  forall s:V->bool. INFINITE s ==> {m | monomial s m} =_c s
-      #|  s:V->bool
+      #|  \226\136\128 s : (V) -> Bool, INFINITE(s) \226\134\146 op_eq_us_c({(m : (V) -> Num) | monomial(s, m)}, s)
+      #|  (s : (V) -> Bool)
       #|  forall s:V->bool. COUNTABLE s /\\ ~(s = {}) ==> {m | monomial s m} =_c (:num)
-      #|  r:A ring
-      #|  (\\m. ring_0 r):(V->num)->A
-      #|  ring_carrier r:A->bool
-      #|  {m | monomial (s:V->bool) m}
+      #|  (r : Ring[A])
+      #|  (m : (V) -> Num) => ring_0((r : Ring[A]))
+      #|  ring_carrier((r : Ring[A]))
+      #|  {(m : (V) -> Num) | monomial((s : (V) -> Bool), m)}
       #|  forall(r:A ring) (s:V->bool).\n        COUNTABLE s /\\ ~(s = {})\n        ==> ring_carrier(powser_ring r s) =_c (ring_carrier r) ^_c (:num)
       #|  forall(r:A ring) (s:V->bool).\n        FINITE s /\\ ~(s = {})\n        ==> ring_carrier(powser_ring r s) =_c (ring_carrier r) ^_c (:num)
-      #|  r:A ring
-      #|  (\\m. ring_0 r):(V->num)->A
-      #|  ring_carrier r:A->bool
-      #|  {m | monomial (s:V->bool) m}
+      #|  (r : Ring[A])
+      #|  (m : (V) -> Num) => ring_0((r : Ring[A]))
+      #|  ring_carrier((r : Ring[A]))
+      #|  {(m : (V) -> Num) | monomial((s : (V) -> Bool), m)}
       #|  forall(r:A ring) (s:V->bool).\n        INFINITE s\n        ==> ring_carrier(powser_ring r s) =_c (ring_carrier r) ^_c s
-      #|  r:A ring
-      #|  (\\m. ring_0 r):(V->num)->A
-      #|  ring_carrier r:A->bool
-      #|  {m | monomial (s:V->bool) m}
+      #|  (r : Ring[A])
+      #|  (m : (V) -> Num) => ring_0((r : Ring[A]))
+      #|  ring_carrier((r : Ring[A]))
+      #|  {(m : (V) -> Num) | monomial((s : (V) -> Bool), m)}
       #|  forall(r:A ring) (s:V->bool).\n        ~trivial_ring r /\\ COUNTABLE s /\\ ~(s = {})\n        ==> ring_carrier(poly_ring r s) =_c (ring_carrier r) *_c (:num)
       #|  forall(r:A ring) (s:V->bool).\n        ~trivial_ring r /\\ FINITE s /\\ ~(s = {})\n        ==> ring_carrier(poly_ring r s) =_c (ring_carrier r) *_c (:num)
-      #|  r:A ring
-      #|  (\\m. ring_0 r):(V->num)->A
-      #|  ring_carrier r:A->bool
-      #|  {m | monomial (s:V->bool) m}
+      #|  (r : Ring[A])
+      #|  (m : (V) -> Num) => ring_0((r : Ring[A]))
+      #|  ring_carrier((r : Ring[A]))
+      #|  {(m : (V) -> Num) | monomial((s : (V) -> Bool), m)}
       #|  forall(r:A ring) (s:V->bool).\n        ~trivial_ring r /\\ INFINITE s\n        ==> ring_carrier(poly_ring r s) =_c (ring_carrier r) *_c s
-      #|  poly_evaluate r p (x:V->A) = poly_extend (r,r) I x p
-      #|  forall r p (x:V->A). poly_evaluate r p x IN ring_carrier r
-      #|  forall r (x:V->A). poly_evaluate r (poly_0 r) x = ring_0 r
-      #|  forall r (x:V->A). poly_evaluate r (poly_1 r) x = ring_1 r
+      #|  (poly_evaluate : (Ring[A], ((V) -> Num) -> A, (V) -> A) -> A)((r : Ring[A]), (p : ((V) -> Num) -> A), (x : (V) -> A)) == poly_extend((r, r), I, x, p)
+      #|  \226\136\128 r : Ring[A], \226\136\128 p : ((V) -> Num) -> A, \226\136\128 x : (V) -> A, IN(poly_evaluate(r, p, x), ring_carrier(r))
+      #|  \226\136\128 r : Ring[A], \226\136\128 x : (V) -> A, poly_evaluate(r, poly_0(r), x) == ring_0(r)
+      #|  \226\136\128 r : Ring[A], \226\136\128 x : (V) -> A, poly_evaluate(r, poly_1(r), x) == ring_1(r)
       #|  forall(r:A ring) (i:V) x.\n        x i IN ring_carrier r ==> poly_evaluate r (poly_var r i) x = x i
       #|  forall r a (x:V->A).\n        a IN ring_carrier r ==> poly_evaluate r (poly_const r a) x = a
       #|  forall r p q (x:V->A).\n        ring_polynomial r p /\\ ring_polynomial r q\n        ==> poly_evaluate r (poly_add r p q) x =\n            ring_add r (poly_evaluate r p x) (poly_evaluate r q x)
@@ -34163,32 +34163,32 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(r:A ring) (v:V->bool) (s:W->bool) f x.\n        (forall i. i IN v ==> x i IN ring_carrier r) /\\\n        FINITE s /\\\n        (forall a. a IN s ==> f a IN ring_carrier(poly_ring r v))\n        ==> poly_evaluate r (ring_sum (poly_ring r v) s f) x =\n            ring_sum r s (\\a. poly_evaluate r (f a) x)
       #|  forall(r:A ring) (v:V->bool) (s:W->bool) f x.\n        (forall i. i IN v ==> x i IN ring_carrier r) /\\\n        FINITE s /\\\n        (forall a. a IN s ==> f a IN ring_carrier(poly_ring r v))\n        ==> poly_evaluate r (ring_product (poly_ring r v) s f) x =\n            ring_product r s (\\a. poly_evaluate r (f a) x)
       #|  forall r s (x:V->A).\n        IMAGE x s SUBSET ring_carrier r\n        ==> ring_homomorphism (poly_ring r s,r) (\\p. poly_evaluate r p x)
-      #|  poly_const r a:(V->num)->A
-      #|  a:A
+      #|  (poly_const : (Ring[A], A, (V) -> Num) -> A)((r : Ring[A]), (a : A))
+      #|  (a : A)
       #|  forall r s (x:V->A).\n        IMAGE x s SUBSET ring_carrier r\n        ==> ring_epimorphism (poly_ring r s,r) (\\p. poly_evaluate r p x)
-      #|  p:(V->num)->A
-      #|  f:A->B
-      #|  x:V->A
-      #|  v:V->bool
-      #|  I:A->A
-      #|  s:B ring
-      #|  r:A ring
-      #|  r:A ring
+      #|  (p : ((V) -> Num) -> A)
+      #|  (f : (A) -> B)
+      #|  (x : (V) -> A)
+      #|  (v : (V) -> Bool)
+      #|  (I : (A) -> A)
+      #|  (s : Ring[B])
+      #|  (r : Ring[A])
+      #|  (r : Ring[A])
       #|  forall(r:A ring) (s:B ring) (x:V->A) f v p.\n        ring_homomorphism (r,s) f /\\\n        IMAGE x v SUBSET ring_carrier r /\\\n        p IN ring_carrier (poly_ring r v)\n        ==> f(poly_evaluate r p x) = poly_evaluate s (f o p) (f o x)
       #|  forall r s (f:A->B) (x:V->B) p.\n        ring_homomorphism(r,s) f\n        ==> poly_extend (r,s) f x p = poly_evaluate s (f o p) x
-      #|  s:V->bool
+      #|  (s : (V) -> Bool)
       #|  forall r s (p:(V->num)->A) x y.\n        (forall i. i IN s ==> x i IN ring_carrier r) /\\\n        (forall i. i IN s ==> x i = y i) /\\\n        p IN ring_carrier(poly_ring r s)\n        ==> poly_evaluate r p x = poly_evaluate r p y
       #|  forall r (p:(V->num)->A).\n        ring_powerseries r p\n        ==> poly_evaluate r p (\\x. ring_0 r) = p monomial_1
       #|  forall r v (p:(V->num)->A).\n        p IN ring_carrier (poly_ring r v)\n        ==> poly_evaluate r p (\\x. ring_0 r) = p monomial_1
       #|  forall(r:A ring) (s:V->bool).\n        ring_homomorphism (powser_ring r s,r)\n                          (\\p. poly_evaluate r p (\\i. ring_0 r))
-      #|  poly_const r a:(V->num)->A
-      #|  a:A
+      #|  (poly_const : (Ring[A], A, (V) -> Num) -> A)((r : Ring[A]), (a : A))
+      #|  (a : A)
       #|  forall(r:A ring) (s:V->bool).\n        ring_epimorphism (powser_ring r s,r)\n                         (\\p. poly_evaluate r p (\\i. ring_0 r))
       #|  forall(r:R ring) A B q f:X->Y c:Y->R.\n        BIJ f A B /\\ poly_vars r q SUBSET B\n        ==> poly_evaluate r (poly_reindex r q f A B) (c o f) =\n            poly_evaluate r q c
       #|  poly_eval (r:A ring) p x = poly_evaluate r p (\\v:1. x)
-      #|  forall r p (x:A). poly_eval r p x IN ring_carrier r
-      #|  forall(r:A ring) x. poly_eval r (poly_0 r) x = ring_0 r
-      #|  forall(r:A ring) x. poly_eval r (poly_1 r) x = ring_1 r
+      #|  \226\136\128 r : Ring[A], \226\136\128 p : ((Unit) -> Num) -> A, \226\136\128 x : A, IN(poly_eval(r, p, x), ring_carrier(r))
+      #|  \226\136\128 r : Ring[A], \226\136\128 x : A, poly_eval(r, poly_0(r), x) == ring_0(r)
+      #|  \226\136\128 r : Ring[A], \226\136\128 x : A, poly_eval(r, poly_1(r), x) == ring_1(r)
       #|  forall(r:A ring) x.\n        x IN ring_carrier r ==> poly_eval r (poly_var r one) x = x
       #|  forall(r:A ring) a x.\n        a IN ring_carrier r ==> poly_eval r (poly_const r a) x = a
       #|  forall(r:A ring) p q x.\n        ring_polynomial r p /\\ ring_polynomial r q\n        ==> poly_eval r (poly_add r p q) x =\n            ring_add r (poly_eval r p x) (poly_eval r q x)
@@ -34199,57 +34199,57 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(r:A ring) (s:W->bool) (f:W->(1->num)->A) (x:A).\n        x IN ring_carrier r /\\ FINITE s /\\\n        (forall a. a IN s ==> f a IN ring_carrier(poly_ring r (:1)))\n        ==> poly_eval r (ring_product (poly_ring r (:1)) s f) x =\n            ring_product r s (\\a. poly_eval r (f a) x)
       #|  forall r s x:A.\n        x IN ring_carrier r\n        ==> ring_homomorphism (poly_ring r s,r) (\\p. poly_eval r p x)
       #|  forall r s x:A.\n        x IN ring_carrier r\n        ==> ring_epimorphism (poly_ring r s,r) (\\p. poly_eval r p x)
-      #|  p:(1->num)->A
-      #|  (:1)
-      #|  f:A->B
-      #|  (\\v. x):1->A
-      #|  s:B ring
-      #|  r:A ring
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (UNIV : (Unit) -> Bool)
+      #|  (f : (A) -> B)
+      #|  (v : Unit) => (x : A)
+      #|  (s : Ring[B])
+      #|  (r : Ring[A])
       #|  forall(r:A ring) (s:B ring) x f p.\n        ring_homomorphism (r,s) f /\\\n        x IN ring_carrier r /\\\n        p IN ring_carrier (poly_ring r (:1))\n        ==> f(poly_eval r p x) = poly_eval s (f o p) (f x)
-      #|  i:num
-      #|  r /\\ (r ==> (q <=> p)) ==> ~p ==> ~q /\\ r
-      #|  m:1->num
-      #|  \\m:1->num. m one
-      #|  \\(i:num) (v:1). i
-      #|  i:num
-      #|  i:num
-      #|  {i | ~((p:(1->num)->A) (\\v. i) = ring_0 r)}
+      #|  (i : Num)
+      #|  (r : Bool) && (r \226\134\146 (q : Bool) == (p : Bool)) \226\134\146 !p \226\134\146 !q && r
+      #|  (m : (Unit) -> Num)
+      #|  (m : (Unit) -> Num) => m(one)
+      #|  (i : Num) => (v : Unit) => i
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  {(i : Num) | !((p : ((Unit) -> Num) -> A)((v : Unit) => i) == ring_0((r : Ring[A])))}
       #|  forall t. t SUBSET s /\\ (forall x. x IN s /\\ ~(x IN t) ==> f x = ring_0 r) /\\\n         ring_sum r t f = p\n        ==> p = ring_sum r s f
       #|  forall r r' (h:A->B) x p.\n      ring_homomorphism(r,r') h /\\ x one IN ring_carrier r' /\\\n      p IN ring_carrier (poly_ring r (:1))\n      ==> poly_extend (r,r') h x p =\n          ring_sum r' (0..poly_deg r p)\n                      (\\i. ring_mul r' (h(coeff i p)) (ring_pow r' (x one) i))
       #|  forall(r:A ring) x p.\n        x IN ring_carrier r /\\\n        p IN ring_carrier (poly_ring r (:1))\n        ==> poly_eval r p x =\n            ring_sum r (0..poly_deg r p)\n                       (\\i. ring_mul r (coeff i p) (ring_pow r x i))
-      #|  p:(1->num)->A
-      #|  (:1)
-      #|  r:A ring
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (UNIV : (Unit) -> Bool)
+      #|  (r : Ring[A])
       #|  forall r (p:(1->num)->A).\n        p IN ring_carrier (poly_ring r (:1))\n        ==> p = ring_sum\n                  (poly_ring r (:1)) (0..poly_deg r p)\n                  (\\i. ring_mul (poly_ring r (:1))\n                         (poly_const r (coeff i p))\n                         (ring_pow (poly_ring r (:1)) (poly_var r one) i))
       #|  forall(r:A ring) p.\n        ring_powerseries r p\n        ==> poly_eval r p (ring_0 r) = coeff 0 p
       #|  forall(r:A ring) p.\n        p IN ring_carrier (poly_ring r (:1))\n        ==> poly_eval r p (ring_0 r) = coeff 0 p
       #|  forall(r:A ring) s. ring_homomorphism (powser_ring r s,r)\n                                    (\\p. poly_eval r p (ring_0 r))
       #|  forall(r:A ring) s. ring_epimorphism (powser_ring r s,r)\n                                   (\\p. poly_eval r p (ring_0 r))
-      #|  \\p. poly_eval r p (ring_0 r:A)
+      #|  (p : ((Unit) -> Num) -> A) => poly_eval((r : Ring[A]), p, ring_0(r))
       #|  forall(r:A ring) s. ring_homomorphism (powser_ring r s,r) (coeff 0)
-      #|  \\p. poly_eval r p (ring_0 r:A)
+      #|  (p : ((Unit) -> Num) -> A) => poly_eval((r : Ring[A]), p, ring_0(r))
       #|  forall(r:A ring) s. ring_homomorphism (poly_ring r s,r) (coeff 0)
-      #|  \\p. poly_eval r p (ring_0 r:A)
+      #|  (p : ((Unit) -> Num) -> A) => poly_eval((r : Ring[A]), p, ring_0(r))
       #|  forall(r:A ring) s. ring_epimorphism (powser_ring r s,r) (coeff 0)
-      #|  \\p. poly_eval r p (ring_0 r:A)
+      #|  (p : ((Unit) -> Num) -> A) => poly_eval((r : Ring[A]), p, ring_0(r))
       #|  forall(r:A ring) s. ring_epimorphism (poly_ring r s,r) (coeff 0)
-      #|  i:num
-      #|  p:(1->num)->A
-      #|  r:A ring
-      #|  coeff i (p:(1->num)->A) = ring_0 r
-      #|  coeff i (p:(1->num)->A) = ring_0 r
-      #|  i:num
+      #|  (i : Num)
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  coeff((i : Num), (p : ((Unit) -> Num) -> A)) == ring_0((r : Ring[A]))
+      #|  coeff((i : Num), (p : ((Unit) -> Num) -> A)) == ring_0((r : Ring[A]))
+      #|  (i : Num)
       #|  poly_eval r (p:(1->num)->A) x =\n   ring_sum r (0..poly_deg r p)\n             (\\i. ring_mul r (coeff i p) (ring_pow r x i))
-      #|  (p:(1->num)->A) IN ring_carrier(poly_ring r (:1))
+      #|  IN((p : ((Unit) -> Num) -> A), ring_carrier(poly_ring((r : Ring[A]), UNIV)))
       #|  forall r (p:(1->num)->A) x n.\n        ring_polynomial r p /\\\n        x IN ring_carrier r /\\\n        poly_deg r p <= n\n        ==> poly_eval r p x =\n            ring_sum r (0..n)\n                       (\\d. ring_mul r (coeff d p) (ring_pow r x d))
-      #|  a:A
-      #|  l:A ring
-      #|  subring_generated l k:A ring
-      #|  I:A->A
+      #|  (a : A)
+      #|  (l : Ring[A])
+      #|  subring_generated((l : Ring[A]), (k : (A) -> Bool))
+      #|  (I : (A) -> A)
       #|  forall l k a:A.\n        k subring_of l /\\ a IN ring_carrier l\n        ==> IMAGE (\\p. poly_eval l p a)\n                  (ring_carrier(poly_ring (subring_generated l k) (:1))) =\n            ring_carrier (subring_generated l (a INSERT k))
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  \\m. (p:(1->num)->A) (\\v. m one + 1)
-      #|  ring_polynomial r (p:(1->num)->A)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (m : (Unit) -> Num) => (p : ((Unit) -> Num) -> A)((v : Unit) => m(one) + 1)
+      #|  ring_polynomial((r : Ring[A]), (p : ((Unit) -> Num) -> A))
       #|  forall(r:A ring) p.\n        ring_divides (poly_ring r (:1)) (poly_var r one) p <=>\n        ring_polynomial r p /\\ coeff 0 p = ring_0 r
       #|  forall r s (f:A->B) (p:(V->num)->A).\n        ring_homomorphism(r,s) f /\\ ring_powerseries r p\n        ==> ring_powerseries s (f o p)
       #|  forall r s (v:V->bool) (f:A->B) p.\n        ring_homomorphism(r,s) f /\\\n        p IN ring_carrier(powser_ring r v)\n        ==> (f o p) IN ring_carrier(powser_ring s v)
@@ -34259,622 +34259,622 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r s (f:A->B) (p:(V->num)->A).\n        ring_monomorphism (r,s) f /\\ ring_polynomial r p\n        ==> poly_deg s (f o p) = poly_deg r p
       #|  forall r s (f:A->B) (p:(V->num)->A).\n        ring_monomorphism (r,s) f /\\ ring_polynomial r p\n        ==> (f o p = poly_0 s <=> p = poly_0 r)
       #|  f(ring_0 r) = ring_0 s\n      ==> x = ring_0 r /\\ y = ring_0 s ==> f x = y
-      #|  FINITE(monomial_vars(m:V->num))
-      #|  m:V->num
+      #|  FINITE(monomial_vars((m : (V) -> Num)))
+      #|  (m : (V) -> Num)
       #|  (forall r s (f:A->B) (v:V->bool).\n        ring_homomorphism (r,s) f\n        ==> ring_homomorphism (powser_ring r v,powser_ring s v) (\\p. f o p)) /\\\n   (forall r s (f:A->B) (v:V->bool).\n        ring_homomorphism (r,s) f\n        ==> ring_homomorphism (poly_ring r v,poly_ring s v) (\\p. f o p))
       #|  (forall r s (f:A->B) (v:V->bool).\n        ring_monomorphism (r,s) f\n        ==> ring_monomorphism (powser_ring r v,powser_ring s v) (\\p. f o p)) /\\\n   (forall r s (f:A->B) (v:V->bool).\n        ring_monomorphism (r,s) f\n        ==> ring_monomorphism (poly_ring r v,poly_ring s v) (\\p. f o p))
-      #|  (g:B->A) o (p:(V->num)->B)
-      #|  p:(V->num)->B
-      #|  \\y. if y = ring_0 s then ring_0 r else (g:B->A) y
-      #|  g:B->A
+      #|  o((g : (B) -> A), (p : ((V) -> Num) -> B))
+      #|  (p : ((V) -> Num) -> B)
+      #|  (y : B) => if y == ring_0((s : Ring[B])) { ring_0((r : Ring[A])) } else { (g : (B) -> A)(y) }
+      #|  (g : (B) -> A)
       #|  (?g. Q g) /\\ (forall g. Q g ==> ?h. P h /\\ Q h) ==> ?g. P g /\\ Q g
       #|  ?g:B->A. g(ring_0 s) = ring_0 r /\\\n             forall y. y IN ring_carrier s ==> g(y) IN ring_carrier r /\\ f(g y) = y
       #|  (forall r s (f:A->B) (v:V->bool).\n        ring_epimorphism (r,s) f\n        ==> ring_epimorphism (powser_ring r v,powser_ring s v) (\\p. f o p)) /\\\n   (forall r s (f:A->B) (v:V->bool).\n        ring_epimorphism (r,s) f\n        ==> ring_epimorphism (poly_ring r v,poly_ring s v) (\\p. f o p))
       #|  forall r s (f:A->B) (v:V->bool).\n        ring_isomorphism (r,s) f\n        ==> ring_isomorphism (powser_ring r v,powser_ring s v) (\\p. f o p)
       #|  forall r s (f:A->B) (v:V->bool).\n        ring_isomorphism (r,s) f\n        ==> ring_isomorphism (poly_ring r v,poly_ring s v) (\\p. f o p)
-      #|  m:V->num
+      #|  (m : (V) -> Num)
       #|  forall(r:A ring) (r':B ring) (f:A->B) (i:V).\n        ring_homomorphism(r,r') f\n        ==> f o poly_var r i = poly_var r' i
-      #|  m:V->num
+      #|  (m : (V) -> Num)
       #|  forall(r:A ring) (r':B ring) (f:A->B) (c:A).\n        ring_homomorphism(r,r') f /\\ c IN ring_carrier r\n        ==> f o (poly_const r c:(V->num)->A) = poly_const r' (f c)
-      #|  p:(V->num)->A
-      #|  (:V)
-      #|  f:A->B
-      #|  r':B ring
-      #|  r:A ring
+      #|  (p : ((V) -> Num) -> A)
+      #|  (UNIV : (V) -> Bool)
+      #|  (f : (A) -> B)
+      #|  (r' : Ring[B])
+      #|  (r : Ring[A])
       #|  forall(r:A ring) (r':B ring) (f:A->B) (p:(V->num)->A).\n        ring_homomorphism(r,r') f /\\ ring_powerseries r p\n        ==> f o poly_neg r p = poly_neg r' (f o p)
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
-      #|  (:V)
-      #|  f:A->B
-      #|  r':B ring
-      #|  r:A ring
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
-      #|  (:V)
-      #|  f:A->B
-      #|  r':B ring
-      #|  r:A ring
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
-      #|  (:V)
-      #|  f:A->B
-      #|  r':B ring
-      #|  r:A ring
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (UNIV : (V) -> Bool)
+      #|  (f : (A) -> B)
+      #|  (r' : Ring[B])
+      #|  (r : Ring[A])
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (UNIV : (V) -> Bool)
+      #|  (f : (A) -> B)
+      #|  (r' : Ring[B])
+      #|  (r : Ring[A])
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (UNIV : (V) -> Bool)
+      #|  (f : (A) -> B)
+      #|  (r' : Ring[B])
+      #|  (r : Ring[A])
       #|  (forall(r:A ring) (r':B ring) (f:A->B)\n        (p:(V->num)->A) (q:(V->num)->A).\n        ring_homomorphism(r,r') f /\\\n        ring_powerseries r p /\\ ring_powerseries r q\n        ==> f o poly_mul r p q =\n            poly_mul r' (f o p) (f o q)) /\\\n   (forall(r:A ring) (r':B ring) (f:A->B)\n        (p:(V->num)->A) (q:(V->num)->A).\n        ring_homomorphism(r,r') f /\\\n        ring_powerseries r p /\\ ring_powerseries r q\n        ==> f o poly_sub r p q =\n            poly_sub r' (f o p) (f o q)) /\\\n   (forall(r:A ring) (r':B ring) (f:A->B)\n        (p:(V->num)->A) (q:(V->num)->A).\n        ring_homomorphism(r,r') f /\\\n        ring_powerseries r p /\\ ring_powerseries r q\n        ==> f o poly_add r p q =\n            poly_add r' (f o p) (f o q))
-      #|  n:num
-      #|  p:(V->num)->A
-      #|  (:V)
-      #|  f:A->B
-      #|  r':B ring
-      #|  r:A ring
+      #|  (n : Num)
+      #|  (p : ((V) -> Num) -> A)
+      #|  (UNIV : (V) -> Bool)
+      #|  (f : (A) -> B)
+      #|  (r' : Ring[B])
+      #|  (r : Ring[A])
       #|  forall(r:A ring) (r':B ring) (f:A->B) (p:(V->num)->A) n.\n        ring_homomorphism(r,r') f /\\ ring_powerseries r p\n        ==> f o poly_pow r p n = poly_pow r' (f o p) n
-      #|  l:V->V->bool
-      #|  m' = m ==> forall l. ~monomial_lt l m m'
-      #|  ~p ==> p ==> q
-      #|  (q:(V->num)->A) nq = ring_0 r
-      #|  (p:(V->num)->A) np = ring_0 r
-      #|  nq:V->num
-      #|  np:V->num
-      #|  (mp:V->num),(mq:V->num)
+      #|  (l : (V, V) -> Bool)
+      #|  (m' : (_) -> Num) == (m : (_) -> Num) \226\134\146 (\226\136\128 l : (_, _) -> Bool, !monomial_lt(l, m, m'))
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  (q : ((V) -> Num) -> A)((nq : (V) -> Num)) == ring_0((r : Ring[A]))
+      #|  (p : ((V) -> Num) -> A)((np : (V) -> Num)) == ring_0((r : Ring[A]))
+      #|  (nq : (V) -> Num)
+      #|  (np : (V) -> Num)
+      #|  ((mp : (V) -> Num), (mq : (V) -> Num))
       #|  forall m. ~(ring_sum r {m} f = z) /\\ ring_sum r s f = ring_sum r {m} f\n        ==> ~(ring_sum r s f = z)
-      #|  monomial_mul mp mq:V->num
-      #|  mq:V->num
-      #|  mp:V->num
-      #|  l:V->V->bool
-      #|  (:V)
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
+      #|  monomial_mul((mp : (V) -> Num), (mq : (V) -> Num))
+      #|  (mq : (V) -> Num)
+      #|  (mp : (V) -> Num)
+      #|  (l : (V, V) -> Bool)
+      #|  (UNIV : (V) -> Bool)
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
       #|  forall(r:A ring) (s:V->bool).\n        integral_domain(powser_ring r s) <=> integral_domain r
-      #|  {m | ~((p:(V->num)->A) m = ring_0 r)}
-      #|  {m | ~((q:(V->num)->A) m = ring_0 r)}
-      #|  r:A ring
-      #|  poly_const r c:(V->num)->A
-      #|  s:V->bool
-      #|  r:A ring
+      #|  {(m : (V) -> Num) | !((p : ((V) -> Num) -> A)(m) == ring_0((r : Ring[A])))}
+      #|  {(m : (V) -> Num) | !((q : ((V) -> Num) -> A)(m) == ring_0((r : Ring[A])))}
+      #|  (r : Ring[A])
+      #|  (poly_const : (Ring[A], A, (V) -> Num) -> A)((r : Ring[A]), (c : A))
+      #|  (s : (V) -> Bool)
+      #|  (r : Ring[A])
       #|  forall r s c. ring_unit (poly_ring r s) (poly_const r c:(V->num)->A) <=>\n           ring_unit r c
-      #|  poly_deg r:((V->num)->A)->num
-      #|  q:(V->num)->A = ring_0(poly_ring r s)
-      #|  p:(V->num)->A = ring_0(poly_ring r s)
-      #|  q:(V->num)->A
-      #|  p:(V->num)->A
+      #|  (poly_deg : (Ring[A], ((V) -> Num) -> A) -> Num)((r : Ring[A]))
+      #|  (q : ((V) -> Num) -> A) == ring_0(poly_ring((r : Ring[A]), (s : (V) -> Bool)))
+      #|  (p : ((V) -> Num) -> A) == ring_0(poly_ring((r : Ring[A]), (s : (V) -> Bool)))
+      #|  (q : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
       #|  (forall x. Q(f x) <=> P x) /\\ (forall y. Q y ==> ?x. y = f x)\n    ==> (Q y <=> ?x. P x /\\ y = f x)
       #|  forall r s (p:(V->num)->A).\n        integral_domain r\n        ==> (ring_unit (poly_ring r s) p <=>\n             ?c. ring_unit r c /\\ p = poly_const r c)
-      #|  r:A ring
-      #|  m:V->num
-      #|  m:V->num
-      #|  poly_ring (r:A ring) (s:V->bool)
+      #|  (r : Ring[A])
+      #|  (m : (V) -> Num)
+      #|  (m : (V) -> Num)
+      #|  poly_ring((r : Ring[A]), (s : (V) -> Bool))
       #|  ring_nilpotent\n        (poly_ring (quotient_ring r j) s)\n        (ring_coset r (j:A->bool) o (p:(V->num)->A))
-      #|  j:A->bool
-      #|  (p:(V->num)->A) m
-      #|  r:A ring
-      #|  m:V->num
-      #|  (p:(V->num)->A) IN ring_carrier(poly_ring r s)
+      #|  (j : (A) -> Bool)
+      #|  (p : ((V) -> Num) -> A)((m : (V) -> Num))
+      #|  (r : Ring[A])
+      #|  (m : (V) -> Num)
+      #|  IN((p : ((V) -> Num) -> A), ring_carrier(poly_ring((r : Ring[A]), (s : (V) -> Bool))))
       #|  forall r s (p:(V->num)->A).\n        ring_nilpotent (poly_ring r s) p <=>\n        p IN ring_carrier(poly_ring r s) /\\ (forall m. ring_nilpotent r (p m))
-      #|  r:A ring
-      #|  m:V->num
+      #|  (r : Ring[A])
+      #|  (m : (V) -> Num)
       #|  {x | P x} = a INSERT ({x | P x} DELETE a) <=> P a
       #|  {m | ~((p:(V->num)->A) m = ring_0 r)} =\n      monomial_1 INSERT ({m | ~(p m = ring_0 r)} DELETE monomial_1)
-      #|  trivial_ring (r:A ring)
-      #|  m:V->num
-      #|  c:A->bool
-      #|  poly_ring (r:A ring) (s:V->bool)
-      #|  ring_coset r (j:A->bool) o (p:(V->num)->A)
-      #|  s:V->bool
-      #|  quotient_ring r (j:A->bool)
-      #|  j:A->bool
-      #|  (p:(V->num)->A) m
-      #|  r:A ring
-      #|  m:V->num
-      #|  s:V->bool
-      #|  r:A ring
-      #|  (p:(V->num)->A) IN ring_carrier(poly_ring r s)
+      #|  trivial_ring((r : Ring[A]))
+      #|  (m : (V) -> Num)
+      #|  (c : (A) -> Bool)
+      #|  poly_ring((r : Ring[A]), (s : (V) -> Bool))
+      #|  o(ring_coset((r : Ring[A]), (j : (A) -> Bool)), (p : ((V) -> Num) -> A))
+      #|  (s : (V) -> Bool)
+      #|  quotient_ring((r : Ring[A]), (j : (A) -> Bool))
+      #|  (j : (A) -> Bool)
+      #|  (p : ((V) -> Num) -> A)((m : (V) -> Num))
+      #|  (r : Ring[A])
+      #|  (m : (V) -> Num)
+      #|  (s : (V) -> Bool)
+      #|  (r : Ring[A])
+      #|  IN((p : ((V) -> Num) -> A), ring_carrier(poly_ring((r : Ring[A]), (s : (V) -> Bool))))
       #|  forall r s (p:(V->num)->A).\n        ring_unit (poly_ring r s) p <=>\n        p IN ring_carrier(poly_ring r s) /\\\n        ring_unit r (p monomial_1) /\\\n        (forall m. ~(m = monomial_1) ==> ring_nilpotent r (p m))
       #|  forall(r:A ring) p.\n        ring_unit (poly_ring r (:1)) p <=>\n        p IN ring_carrier (poly_ring r (:1)) /\\\n        ring_unit r (coeff 0 p) /\\\n        forall i. 0 < i ==> ring_nilpotent r (coeff i p)
-      #|  trivial_ring(r:A ring)
+      #|  trivial_ring((r : Ring[A]))
       #|  forall(r:A ring) (v:V->bool) x.\n        ring_unit (poly_ring r v) (poly_var r x) <=> trivial_ring r
-      #|  poly_var (r:A ring) (x:V)
-      #|  trivial_ring(r:A ring)
-      #|  x:V
-      #|  s:V->bool = {}
+      #|  poly_var((r : Ring[A]), (x : V))
+      #|  trivial_ring((r : Ring[A]))
+      #|  (x : V)
+      #|  (s : (V) -> Bool) == {}
       #|  forall(r:A ring) (s:V->bool). field(poly_ring r s) <=> field r /\\ s = {}
       #|  forall(r:A ring) (s:V->bool) p.\n        integral_domain r /\\ ring_unit (poly_ring r s) p ==> poly_deg r p = 0
       #|  forall(f:A ring) (s:V->bool) p.\n        field f /\\ ring_polynomial f p\n        ==> (poly_deg f p = 0 <=>\n             ring_unit(poly_ring f s) p \\/ p = ring_0(poly_ring f s))
       #|  forall(k:A ring) p.\n        field k /\\ ring_irreducible (poly_ring k (:1)) p\n        ==> ~(poly_deg k p = 0)
-      #|  a + b = 1 ==> a = 0 \\/ b = 0
-      #|  poly_deg f (p:(V->num)->A) = 1
-      #|  r:(V->num)->A = poly_0 f
-      #|  q:(V->num)->A = poly_0 f
-      #|  r:(V->num)->A
-      #|  q:(V->num)->A
-      #|  ~(1 = 0)
-      #|  (p /\\ q) /\\ (p /\\ q ==> r) ==> p /\\ q /\\ r
+      #|  (a : Num) + (b : Num) == 1 \226\134\146 a == 0 || b == 0
+      #|  poly_deg((f : Ring[A]), (p : ((V) -> Num) -> A)) == 1
+      #|  (r : ((V) -> Num) -> A) == poly_0((f : Ring[A]))
+      #|  (q : ((V) -> Num) -> A) == poly_0((f : Ring[A]))
+      #|  (r : ((V) -> Num) -> A)
+      #|  (q : ((V) -> Num) -> A)
+      #|  !(1 == 0)
+      #|  ((p : Bool) && (q : Bool)) && (p && q \226\134\146 (r : Bool)) \226\134\146 p && q && r
       #|  forall(f:A ring) (s:V->bool) p.\n    field f /\\ p IN ring_carrier(poly_ring f s) /\\ poly_deg f p = 1\n    ==> ring_irreducible (poly_ring f s) p
-      #|  ring_mul r b a:A
-      #|  b:A
-      #|  a:A
-      #|  d:A
-      #|  ring_sub r a c:A
-      #|  c:A
-      #|  b:A
-      #|  a:A
+      #|  ring_mul((r : Ring[A]), (b : A), (a : A))
+      #|  (b : A)
+      #|  (a : A)
+      #|  (d : A)
+      #|  ring_sub((r : Ring[A]), (a : A), (c : A))
+      #|  (c : A)
+      #|  (b : A)
+      #|  (a : A)
       #|  forall w x z:A.\n     w IN ring_carrier r /\\ x IN ring_carrier r /\\ z IN ring_carrier r /\\\n     (forall z. z IN ring_carrier r\n          ==> ?y. y IN ring_carrier r /\\\n                  ring_mul r x y = z)\n     ==> ?y. y IN ring_carrier r /\\\n             ring_add r (ring_mul r x y) z = w
-      #|  monomial s (m:V->num)
-      #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
-      #|  m:V->num
-      #|  q:(V->num)->A
-      #|  m1:V->num = monomial_1
-      #|  m2:V->num
-      #|  m1:V->num
-      #|  (p ==> (q <=> r)) ==> (p ==> q <=> p ==> r)
-      #|  l:V->V->bool
-      #|  (:V)
+      #|  monomial((s : (V) -> Bool), (m : (V) -> Num))
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
+      #|  (m : (V) -> Num)
+      #|  (q : ((V) -> Num) -> A)
+      #|  (m1 : (V) -> Num) == monomial_1
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
+      #|  ((p : Bool) \226\134\146 (q : Bool) == (r : Bool)) \226\134\146 (p \226\134\146 q) == (p \226\134\146 r)
+      #|  (l : (V, V) -> Bool)
+      #|  (UNIV : (V) -> Bool)
       #|  x IN ring_carrier r /\\ y IN ring_carrier r\n       ==> x = ring_add r y (ring_sub r x y)
       #|  forall(q:(V->num)->A) m.\n      monomial s m /\\\n      (forall m. p m IN ring_carrier r) /\\\n      (forall m. q m IN ring_carrier r)\n      ==> ring_sum r {m1,m2 | monomial_mul m1 m2 = m}\n                     (\\(m1,m2). ring_mul r (p m1) (q m2)) =\n          ring_add r (ring_mul r (p monomial_1) (q m))\n                     (ring_sum r ({m1,m2 | monomial_mul m1 m2 = m} DELETE\n                                  (monomial_1,m))\n                                 (\\(m1,m2). ring_mul r (p m1) (q m2)))
-      #|  s:V->bool
-      #|  r:A ring
-      #|  p /\\ q <=> ~(p ==> ~q)
-      #|  {f x y | x = a /\\ y = b} = {f a b}
-      #|  monomial_1:V->num
-      #|  (q:(V->num)->A) monomial_1
-      #|  q:(V->num)->A
+      #|  (s : (V) -> Bool)
+      #|  (r : Ring[A])
+      #|  ((p : Bool) && (q : Bool)) == !(p \226\134\146 !q)
+      #|  {(f : (_, _) -> _)((x : _), (y : _)) | x == (a : _) && y == (b : _)} == {f(a, b)}
+      #|  (monomial_1 : (V) -> Num)
+      #|  (q : ((V) -> Num) -> A)(monomial_1)
+      #|  (q : ((V) -> Num) -> A)
       #|  forall(r:A ring) (s:V->bool) p.\n        ring_unit (powser_ring r s) p <=>\n        p IN ring_carrier(powser_ring r s) /\\\n        ring_unit r (p monomial_1)
       #|  forall(r:A ring) (s:V->bool).\n        local_ring r ==> local_ring(powser_ring r s)
-      #|  \\p. poly_eval (r:A ring) p (ring_0 r)
-      #|  r:A ring
-      #|  poly_ring (r:A ring) (:1)
+      #|  (p : ((Unit) -> Num) -> A) => poly_eval((r : Ring[A]), p, ring_0(r))
+      #|  (r : Ring[A])
+      #|  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool))
       #|  (i ==> ~t) /\\ (p ==> ~t) ==> (p <=> if t then i else p)
       #|  prime_ideal (poly_ring (r:A ring) (:1))\n     (ideal_generated (poly_ring r (:1)) {poly_var r one})
       #|  forall(r:A ring).\n        ring_prime (poly_ring r (:1)) (poly_var r one) <=>\n        integral_domain r
-      #|  x:V
-      #|  (:1)
-      #|  {x:V}
-      #|  (\\v:V. one)
-      #|  r:A ring
-      #|  poly_var (r:A ring) one
-      #|  (\\v:V. one)
-      #|  (:1)
-      #|  {x:V}
-      #|  r:A ring
-      #|  BIJ (\\v:V. one) {x} (:1)
-      #|  r:A ring
+      #|  (x : V)
+      #|  (UNIV : (Unit) -> Bool)
+      #|  {(x : V)}
+      #|  (v : V) => one
+      #|  (r : Ring[A])
+      #|  poly_var((r : Ring[A]), one)
+      #|  (v : V) => one
+      #|  (UNIV : (Unit) -> Bool)
+      #|  {(x : V)}
+      #|  (r : Ring[A])
+      #|  BIJ((v : V) => one, {(x : V)}, UNIV)
+      #|  (r : Ring[A])
       #|  forall(r:A ring) x:V.\n          ring_prime (poly_ring r {x}) (poly_var r x) <=>\n          integral_domain r
-      #|  m2 = monomial_var (x:V)
-      #|  m2:V->num
-      #|  m1:V->num
-      #|  x:V
-      #|  poly_ring (r:A ring) (v DELETE (x:V))
-      #|  poly_var r x:(V->num)->A
-      #|  x IN v ==> v DELETE x UNION {x} = v
-      #|  {x:V}
-      #|  v DELETE (x:V)
-      #|  r:A ring
-      #|  (x:V) IN v
+      #|  (m2 : (V) -> Num) == monomial_var((x : V))
+      #|  (m2 : (V) -> Num)
+      #|  (m1 : (V) -> Num)
+      #|  (x : V)
+      #|  poly_ring((r : Ring[A]), DELETE((v : (V) -> Bool), (x : V)))
+      #|  poly_var((r : Ring[A]), (x : V))
+      #|  IN((x : _), (v : (_) -> Bool)) \226\134\146 UNION(DELETE(v, x), {x}) == v
+      #|  {(x : V)}
+      #|  DELETE((v : (V) -> Bool), (x : V))
+      #|  (r : Ring[A])
+      #|  IN((x : V), (v : (V) -> Bool))
       #|  forall(r:A ring) v x:V.\n        ring_prime (poly_ring r v) (poly_var r x) <=>\n        integral_domain r /\\ x IN v
       #|  forall(r:A ring) v x:V.\n        integral_domain r /\\ x IN v\n        ==> ring_irreducible (poly_ring r v) (poly_var r x)
-      #|  \\(ff:(V->num)->(A->bool)). ff (m:V->num)
-      #|  m:V->num
+      #|  (ff : ((V) -> Num, A) -> Bool) => ff((m : (V) -> Num))
+      #|  (m : (V) -> Num)
       #|  poly_ring (quotient_ring (r:A ring) (j:A->bool)) (s:V->bool)
       #|  (\\q:(V->num)->A. ring_coset r (j:A->bool) o q) (f:(V->num)->A) =\n     ring_0 (poly_ring (quotient_ring r j) (s:V->bool)) \\/\n     (\\q:(V->num)->A. ring_coset r (j:A->bool) o q) (g:(V->num)->A) =\n     ring_0 (poly_ring (quotient_ring r j) s)
-      #|  poly_ring (r:A ring) (s:V->bool)
+      #|  poly_ring((r : Ring[A]), (s : (V) -> Bool))
       #|  ring_divides (poly_ring (quotient_ring r (j:A->bool)) (s:V->bool))\n       ((\\q:(V->num)->A. ring_coset r j o q) (poly_const r p))\n       ((\\q. ring_coset r j o q)\n          (ring_mul (poly_ring r s) (f:(V->num)->A) g))
       #|  (\\q:(V->num)->A. ring_coset r (j:A->bool) o q)\n      (ring_mul (poly_ring r (s:V->bool)) (f:(V->num)->A) g) =\n     ring_0 (poly_ring (quotient_ring r j) s)
       #|  (forall m:V->num. ring_divides r p ((f:(V->num)->A) m)) \\/\n     (forall m. ring_divides r p ((g:(V->num)->A) m))
-      #|  g:(V->num)->A
-      #|  f:(V->num)->A
-      #|  m:V->num
+      #|  (g : ((V) -> Num) -> A)
+      #|  (f : ((V) -> Num) -> A)
+      #|  (m : (V) -> Num)
       #|  (\\q:(V->num)->A. ring_coset r (j:A->bool) o q) (poly_const r p) =\n     ring_0 (poly_ring (quotient_ring r j) (s:V->bool))
       #|  ring_homomorphism (poly_ring r (s:V->bool),\n       poly_ring (quotient_ring r (j:A->bool)) s)\n      (\\q:(V->num)->A. ring_coset r j o q)
       #|  integral_domain\n      (poly_ring (quotient_ring r (j:A->bool)) (s:V->bool))
-      #|  ring_ideal r (j:A->bool)
-      #|  j = ideal_generated r {p:A}
-      #|  (poly_const r b):(V->num)->A
-      #|  (poly_const r a):(V->num)->A
-      #|  b:A
-      #|  a:A
-      #|  p:A = ring_0 r
-      #|  (p:A) IN ring_carrier r
+      #|  ring_ideal((r : Ring[A]), (j : (A) -> Bool))
+      #|  (j : (A) -> Bool) == ideal_generated((r : Ring[A]), {(p : A)})
+      #|  (poly_const : (Ring[A], A, (V) -> Num) -> A)((r : Ring[A]), (b : A))
+      #|  (poly_const : (Ring[A], A, (V) -> Num) -> A)((r : Ring[A]), (a : A))
+      #|  (b : A)
+      #|  (a : A)
+      #|  (p : A) == ring_0((r : Ring[A]))
+      #|  IN((p : A), ring_carrier((r : Ring[A])))
       #|  forall(r:A ring) (s:V->bool) p.\n     ring_prime (poly_ring r s) (poly_const r p) <=> ring_prime r p
-      #|  b:A
-      #|  a:A
-      #|  v:(V->num)->A
-      #|  u:(V->num)->A
-      #|  r:A ring
-      #|  v:(V->num)->A = poly_0 r
-      #|  u:(V->num)->A = poly_0 r
+      #|  (b : A)
+      #|  (a : A)
+      #|  (v : ((V) -> Num) -> A)
+      #|  (u : ((V) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  (v : ((V) -> Num) -> A) == poly_0((r : Ring[A]))
+      #|  (u : ((V) -> Num) -> A) == poly_0((r : Ring[A]))
       #|  ring_polynomial r (u:(V->num)->A) /\\\n      ring_polynomial r (v:(V->num)->A)
-      #|  v:(V->num)->A
+      #|  (v : ((V) -> Num) -> A)
       #|  u:(V->num)->A
-      #|  (poly_const r b):(V->num)->A
-      #|  (poly_const r a):(V->num)->A
-      #|  b:A
-      #|  a:A
-      #|  (p:A) IN ring_carrier r
+      #|  (poly_const : (Ring[A], A, (V) -> Num) -> A)((r : Ring[A]), (b : A))
+      #|  (poly_const : (Ring[A], A, (V) -> Num) -> A)((r : Ring[A]), (a : A))
+      #|  (b : A)
+      #|  (a : A)
+      #|  IN((p : A), ring_carrier((r : Ring[A])))
       #|  forall(r:A ring) (s:V->bool) p.\n        integral_domain r\n        ==> (ring_irreducible (poly_ring r s) (poly_const r p) <=>\n             ring_irreducible r p)
-      #|  poly_const (r:A ring) (a:A):(1->num)->A
-      #|  poly_var (r:A ring) (one:1):(1->num)->A
-      #|  r:A ring
+      #|  (poly_const : (Ring[A], A, (Unit) -> Num) -> A)((r : Ring[A]), (a : A))
+      #|  poly_var((r : Ring[A]), one)
+      #|  (r : Ring[A])
       #|  forall r (a:A).\n     ~trivial_ring r /\\ a IN ring_carrier r\n     ==> poly_deg r (poly_sub r (poly_var r (one:1)) (poly_const r a)) = 1
-      #|  a:A
-      #|  r:A ring
+      #|  (a : A)
+      #|  (r : Ring[A])
       #|  forall r (a:A).\n     ~trivial_ring r /\\ a IN ring_carrier r\n     ==> ~(poly_sub r (poly_var r (one:1))\n                       (poly_const r a) = poly_0 r)
       #|  forall r (a:A).\n        a IN ring_carrier r\n        ==> poly_sub r (poly_var r (one:1)) (poly_const r a)\n            IN ring_carrier(poly_ring r (:1))
-      #|  ring_add r (ring_mul r d y) (ring_mul r e x'):A
-      #|  ring_add r d e:A
-      #|  e:A
-      #|  d:A
+      #|  ring_add((r : Ring[A]), ring_mul(r, (d : A), (y : A)), ring_mul(r, (e : A), (x' : A)))
+      #|  ring_add((r : Ring[A]), (d : A), (e : A))
+      #|  (e : A)
+      #|  (d : A)
       #|  forall r a x x' y y':A.\n      x IN ring_carrier r /\\ x' IN ring_carrier r /\\\n      y IN ring_carrier r /\\ y' IN ring_carrier r /\\\n      ring_divides r a (ring_sub r x x') /\\\n      ring_divides r a (ring_sub r y y')\n      ==> ring_divides r a (ring_sub r (ring_add r x y) (ring_add r x' y')) /\\\n          ring_divides r a (ring_sub r (ring_mul r x y) (ring_mul r x' y'))
-      #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
+      #|  (((p : Bool) \226\134\146 (q : Bool)) && (p \226\134\146 (r : Bool))) == (p \226\134\146 q && r)
       #|  forall r (a:A) p.\n        a IN ring_carrier r /\\ p IN ring_carrier(poly_ring r (:1))\n        ==> ring_divides (poly_ring r (:1))\n              (poly_sub r (poly_var r one) (poly_const r a))\n              (poly_sub r p (poly_const r (poly_eval r p a)))
-      #|  p:(1->num)->A
-      #|  a:A
-      #|  r:A ring
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (a : A)
+      #|  (r : Ring[A])
       #|  forall r (a:A) p.\n        a IN ring_carrier r /\\\n        p IN ring_carrier(poly_ring r (:1)) /\\\n        poly_eval r p a = ring_0 r\n        ==> ring_divides (poly_ring r (:1))\n                         (poly_sub r (poly_var r one) (poly_const r a)) p
-      #|  q:(1->num)->A
+      #|  (q : ((Unit) -> Num) -> A)
       #|  forall r (a:A) p.\n        a IN ring_carrier r /\\\n        p IN ring_carrier(poly_ring r (:1))\n        ==> (ring_divides (poly_ring r (:1))\n                          (poly_sub r (poly_var r one) (poly_const r a)) p <=>\n             poly_eval r p a = ring_0 r)
       #|  poly_deg (r:A ring)\n         (poly_sub r (poly_var r (one:1)) (poly_const r (a:A))) = 1
-      #|  q:(1->num)->A
+      #|  (q : ((Unit) -> Num) -> A)
       #|  poly_sub (r:A ring) (poly_var r (one:1))\n              (poly_const r (a:A)):(1->num)->A
-      #|  r:A ring
-      #|  ~trivial_ring (r:A ring)
+      #|  (r : Ring[A])
+      #|  !trivial_ring((r : Ring[A]))
       #|  forall r (a:A) (q:(1->num)->A).\n      integral_domain r /\\ a IN ring_carrier r /\\\n      q IN ring_carrier(poly_ring r (:1)) /\\ ~(q = poly_0 r)\n      ==> poly_deg r\n           (poly_mul r (poly_sub r (poly_var r (one:1)) (poly_const r a)) q) =\n          poly_deg r q + 1
-      #|  x:A
+      #|  (x : A)
       #|  forall x. x IN ring_carrier r\n          ==> (poly_eval r p x = ring_0 r <=>\n               poly_eval r q x = ring_0 r \\/ x:A = a)
       #|  {x:A | x IN ring_carrier r /\\ poly_eval r p x = ring_0 r} =\n    a INSERT {x | x IN ring_carrier r /\\ poly_eval r q x = ring_0 r}
-      #|  q < q + 1
-      #|  q:(1->num)->A
-      #|  ~(1 = 0)
+      #|  (q : Num) < q + 1
+      #|  (q : ((Unit) -> Num) -> A)
+      #|  !(1 == 0)
       #|  poly_deg r (p:(1->num)->A) = poly_deg r (q:(1->num)->A) + 1
       #|  poly_deg r (poly_sub r (poly_var r one) (poly_const r a):(1->num)->A) = 1
-      #|  ~(q:(1->num)->A = ring_0 (poly_ring r (:1)))
-      #|  q:(1->num)->A
-      #|  p:(1->num)->A
-      #|  a:A
-      #|  r:A ring
-      #|  a:A
+      #|  !((q : ((Unit) -> Num) -> A) == ring_0(poly_ring((r : Ring[A]), UNIV)))
+      #|  (q : ((Unit) -> Num) -> A)
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (a : A)
+      #|  (r : Ring[A])
+      #|  (a : A)
       #|  {x:A | x IN ring_carrier r /\\ poly_eval r p x = ring_0 r} = {}
-      #|  r:A ring
-      #|  poly_deg r (p:(1->num)->A)
+      #|  (r : Ring[A])
+      #|  poly_deg((r : Ring[A]), (p : ((Unit) -> Num) -> A))
       #|  forall(r:A ring) p.\n        integral_domain r /\\\n        p IN ring_carrier(poly_ring r (:1)) /\\\n        ~(p = ring_0 (poly_ring r (:1)))\n        ==> FINITE {x | x IN ring_carrier r /\\ poly_eval r p x = ring_0 r} /\\\n            CARD {x | x IN ring_carrier r /\\ poly_eval r p x = ring_0 r}\n            <= poly_deg r p
-      #|  INFINITE(ring_carrier (r:A ring))
+      #|  INFINITE(ring_carrier((r : Ring[A])))
       #|  {x:A | x IN ring_carrier r /\\ poly_eval r p x = ring_0 r} =\n    ring_carrier (r:A ring)
-      #|  p:(1->num)->A
-      #|  r:A ring
-      #|  (~p ==> F) ==> p
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
       #|  forall r:A ring p.\n        integral_domain r /\\ INFINITE(ring_carrier r) /\\\n        p IN ring_carrier(poly_ring r (:1)) /\\\n        (forall x. x IN ring_carrier r ==> poly_eval r p x = ring_0 r)\n        ==> p = ring_0 (poly_ring r (:1))
-      #|  p:(1->num)->A
-      #|  r:A ring
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
       #|  forall r (p:(1->num)->A).\n        p IN ring_carrier(poly_ring r (:1)) /\\ ~(p = ring_0(poly_ring r (:1)))\n        ==> ~(coeff (poly_deg r p) p = ring_0 r)
-      #|  i:num
-      #|  ~(n = 0) /\\ x <= n - 1 ==> x < n
+      #|  (i : Num)
+      #|  !((n : Num) == 0) && (x : Num) <= n - 1 \226\134\146 x < n
       #|  t IN ring_carrier r /\\ q IN ring_carrier r /\\ P q\n    ==> ring_add r q t = p\n     ==> ?q. q IN ring_carrier r /\\ (P q \\/ Q q) /\\ ring_add r t q = p
-      #|  ring_0(poly_ring r (:1)):(1->num)->A
-      #|  n = 0
-      #|  n = poly_deg r (p:(1->num)->A)
+      #|  (ring_0 : (Ring[((Unit) -> Num) -> A], (Unit) -> Num) -> A)((poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool)))
+      #|  (n : Num) == 0
+      #|  (n : Num) == poly_deg((r : Ring[A]), (p : ((Unit) -> Num) -> A))
       #|  forall r (p:(1->num)->A).\n        p IN ring_carrier(poly_ring r (:1)) /\\ ~(p = ring_0(poly_ring r (:1)))\n        ==> ?q. q IN ring_carrier(poly_ring r (:1)) /\\\n                (poly_deg r q < poly_deg r p \\/\n                 q = ring_0(poly_ring r (:1))) /\\\n                ring_add (poly_ring r (:1))\n                         (ring_mul (poly_ring r (:1))\n                                   (poly_const r (coeff (poly_deg r p) p))\n                                   (ring_pow (poly_ring r (:1))\n                                              (poly_var r one) (poly_deg r p)))\n                         q = p
-      #|  p:(1->num)->A
-      #|  r:A ring
-      #|  ~(p = ring_0(poly_ring r (:1)) :(1->num)->A) ==> F
-      #|  (p:(1->num)->A) IN ring_carrier(poly_ring r (:1))
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  !((p : ((Unit) -> Num) -> A) == ring_0(poly_ring((r : Ring[A]), UNIV))) \226\134\146 false
+      #|  IN((p : ((Unit) -> Num) -> A), ring_carrier(poly_ring((r : Ring[A]), UNIV)))
       #|  forall r (p:(1->num)->A).\n        ring_polynomial r p\n        ==> (coeff (poly_deg r p) p = ring_0 r <=> p = poly_0 r)
-      #|  ~(n = 0) ==> (d <= n - 1 <=> d <= n /\\ ~(d = n))
-      #|  ~(n = 0) ==> (x < n <=> x <= n - 1)
-      #|  n = 0
+      #|  !((n : Num) == 0) \226\134\146 ((d : Num) <= n - 1) == (d <= n && !(d == n))
+      #|  !((n : Num) == 0) \226\134\146 ((x : Num) < n) == (x <= n - 1)
+      #|  (n : Num) == 0
       #|  forall r (p:(1->num)->A) n.\n        ring_polynomial r p /\\\n        (p = poly_0 r ==> 0 < n) /\\\n        poly_deg r p <= n /\\\n        coeff n p = ring_0 r\n        ==> poly_deg r p < n
-      #|  d:(1->num)->A = poly_0 r
-      #|  d:(1->num)->A
+      #|  (d : ((Unit) -> Num) -> A) == poly_0((r : Ring[A]))
+      #|  (d : ((Unit) -> Num) -> A)
       #|  forall(r:A ring) p q.\n        ring_regular r (coeff (poly_deg r p) p) /\\\n        ring_divides (poly_ring r (:1)) p q /\\\n        ~(q = poly_0 r)\n        ==> poly_deg r p <= poly_deg r q
       #|  s:num < m ==> m <= n /\\ q <= n - m ==> q + s <= n - 1
-      #|  ~(n = 0) ==> (x < n <=> x <= n - 1)
-      #|  p \\/ q ==> (q ==> p) ==> p
+      #|  !((n : Num) == 0) \226\134\146 ((x : Num) < n) == (x <= n - 1)
+      #|  (p : Bool) || (q : Bool) \226\134\146 (q \226\134\146 p) \226\134\146 p
       #|  poly_deg r t < n \\/ t:(1->num)->A = ring_0(poly_ring r (:1))
-      #|  m:num <= n
-      #|  n = 0
+      #|  (m : Num) <= (n : Num)
+      #|  (n : Num) == 0
       #|  ~(ring_sub (poly_ring r (:1)) t\n               (ring_mul (poly_ring r (:1)) q s):(1->num)->A =\n      ring_0 (poly_ring r (:1)))
-      #|  ((d:(1->num)->A) (\\v. m))
-      #|  r:A ring
+      #|  (d : ((Unit) -> Num) -> A)((v : Unit) => (m : Num))
+      #|  (r : Ring[A])
       #|  ring_mul r pnm pm = pn /\\ ring_mul r xy y = x\n      ==> ring_mul r (ring_mul r xy pnm)\n                     (ring_mul r y pm) = ring_mul r x pn
       #|  ring_mul r q y = x\n      ==> ring_sub r (ring_add r x t) (ring_mul r q (ring_add r y s)) =\n          ring_sub r t (ring_mul r q s)
       #|  ring_sub (poly_ring r (:1)) p\n             (ring_mul (poly_ring r (:1)) q d):(1->num)->A =\n    ring_sub (poly_ring r (:1)) t\n             (ring_mul (poly_ring r (:1)) q s)
-      #|  t:(1->num)->A
-      #|  s:(1->num)->A
-      #|  d:(1->num)->A
-      #|  r:A ring
-      #|  p:(1->num)->A
-      #|  r:A ring
-      #|  ring_add r q (ring_sub r p q) = p
-      #|  ring_add (poly_ring r (:1)) q s:(1->num)->A
-      #|  s:(1->num)->A
-      #|  t:(1->num)->A
-      #|  p ==> q ==> r ==> s <=> q ==> p /\\ r ==> s
+      #|  (t : ((Unit) -> Num) -> A)
+      #|  (s : ((Unit) -> Num) -> A)
+      #|  (d : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  ring_add((r : Ring[_]), (q : _), ring_sub(r, (p : _), q)) == p
+      #|  ring_add(poly_ring((r : Ring[A]), UNIV), (q : ((Unit) -> Num) -> A), (s : ((Unit) -> Num) -> A))
+      #|  (s : ((Unit) -> Num) -> A)
+      #|  (t : ((Unit) -> Num) -> A)
+      #|  ((p : Bool) \226\134\146 (q : Bool) \226\134\146 (r : Bool) \226\134\146 (s : Bool)) == (q \226\134\146 p && r \226\134\146 s)
       #|  ring_sub (poly_ring r (:1)) p\n             (ring_mul (poly_ring r (:1)) q d):(1->num)->A
-      #|  ring_0 (poly_ring r (:1)):(1->num)->A
-      #|  q:(1->num)->A
+      #|  (ring_0 : (Ring[((Unit) -> Num) -> A], (Unit) -> Num) -> A)((poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool)))
+      #|  (q : ((Unit) -> Num) -> A)
       #|  ring_sub (poly_ring r (:1)) p\n             (ring_mul (poly_ring r (:1)) q d):(1->num)->A =\n    ring_0 (poly_ring r (:1))
-      #|  (q:(1->num)->A) IN ring_carrier (poly_ring r (:1))
+      #|  IN((q : ((Unit) -> Num) -> A), ring_carrier(poly_ring((r : Ring[A]), UNIV)))
       #|  q = ring_mul (poly_ring r (:1))\n                  (poly_const r (ring_div r (p(\\v:1. n)) (d(\\v:1. m)):A))\n                           (ring_pow (poly_ring r (:1))\n                                     (poly_var r one) (n - m))
       #|  (p:(1->num)->A) (\\v. n) IN ring_carrier r /\\\n    (d:(1->num)->A) (\\v. m) IN ring_carrier r
-      #|  (:1)
-      #|  r:A ring
-      #|  ~p ==> p ==> q
-      #|  ring_unit r ((d:(1->num)->A) (\\v. m))
-      #|  d:(1->num)->A = ring_0(poly_ring r (:1))
-      #|  ring_0(poly_ring r (:1)):(1->num)->A
-      #|  p:(1->num)->A = ring_0(poly_ring r (:1))
-      #|  p:(1->num)->A
-      #|  poly_0 r:(1->num)->A
-      #|  n:num < m
-      #|  m = poly_deg r (d:(1->num)->A)
-      #|  p:(1->num)->A
-      #|  n:num
+      #|  (UNIV : (Unit) -> Bool)
+      #|  (r : Ring[A])
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  ring_unit((r : Ring[A]), (d : ((Unit) -> Num) -> A)((v : Unit) => (m : Num)))
+      #|  (d : ((Unit) -> Num) -> A) == ring_0(poly_ring((r : Ring[A]), UNIV))
+      #|  (ring_0 : (Ring[((Unit) -> Num) -> A], (Unit) -> Num) -> A)((poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool)))
+      #|  (p : ((Unit) -> Num) -> A) == ring_0(poly_ring((r : Ring[A]), UNIV))
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (poly_0 : (Ring[A], (Unit) -> Num) -> A)((r : Ring[A]))
+      #|  (n : Num) < (m : Num)
+      #|  (m : Num) == poly_deg((r : Ring[A]), (d : ((Unit) -> Num) -> A))
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (n : Num)
       #|  (forall n p. poly_deg r p = n ==> p IN ring_carrier(poly_ring r u) ==> P p)\n    ==> p IN ring_carrier(poly_ring r u) ==> P p
       #|  forall(r:A ring) p d.\n     p IN ring_carrier(poly_ring r (:1)) /\\\n     d IN ring_carrier(poly_ring r (:1)) /\\\n     ring_unit r (coeff (poly_deg r d) d)\n     ==> ?q t. q IN ring_carrier(poly_ring r (:1)) /\\\n               t IN ring_carrier(poly_ring r (:1)) /\\\n               (poly_deg r t < poly_deg r d \\/ t = ring_0(poly_ring r (:1))) /\\\n               ring_add (poly_ring r (:1))\n                        (ring_mul (poly_ring r (:1)) q d) t = p
-      #|  coeff (poly_deg f d) (d:(1->num)->A)
+      #|  coeff(poly_deg((f : Ring[A]), (d : ((Unit) -> Num) -> A)), d)
       #|  forall(f:A ring) p d.\n     field f /\\\n     p IN ring_carrier(poly_ring f (:1)) /\\\n     d IN ring_carrier(poly_ring f (:1)) /\\\n     ~(d = ring_0(poly_ring f (:1)))\n     ==> ?q t. q IN ring_carrier(poly_ring f (:1)) /\\\n               t IN ring_carrier(poly_ring f (:1)) /\\\n               (poly_deg f t < poly_deg f d \\/ t = ring_0(poly_ring f (:1))) /\\\n               ring_add (poly_ring f (:1))\n                        (ring_mul (poly_ring f (:1)) q d) t = p
-      #|  b:(1->num)->A
-      #|  a:(1->num)->A
-      #|  f:A ring
-      #|  b:(1->num)->A
-      #|  a:(1->num)->A
-      #|  poly_deg f:((1->num)->A)->num
+      #|  (b : ((Unit) -> Num) -> A)
+      #|  (a : ((Unit) -> Num) -> A)
+      #|  (f : Ring[A])
+      #|  (b : ((Unit) -> Num) -> A)
+      #|  (a : ((Unit) -> Num) -> A)
+      #|  (poly_deg : (Ring[A], ((Unit) -> Num) -> A) -> Num)((f : Ring[A]))
       #|  forall(f:A ring). field f ==> euclidean_ring(poly_ring f (:1))
-      #|  forall(f:A ring). field f ==> PID(poly_ring f (:1))
+      #|  \226\136\128 f : Ring[A], (field : (Ring[A]) -> Bool)(f) \226\134\146 (PID : (Ring[((Unit) -> Num) -> A]) -> Bool)((poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])(f, (UNIV : (Unit) -> Bool)))
       #|  ring_mul (k:A ring) (d:A) (poly_eval k (p:(1->num)->A) (c:A)) =\n     ring_0 k
       #|  \\(pp:(1->num)->A). poly_eval (k:A ring) pp (c:A)
       #|  poly_add (k:A ring) (poly_mul k q p) (t:(1->num)->A) =\n     poly_var k (one:1)
-      #|  c:A
-      #|  ~(d:A = ring_0 k)
-      #|  q:(1->num)->A
-      #|  k:A ring
+      #|  (c : A)
+      #|  !((d : A) == ring_0((k : Ring[A])))
+      #|  (q : ((Unit) -> Num) -> A)
+      #|  (k : Ring[A])
       #|  ?d:A. d IN ring_carrier k /\\ (q:(1->num)->A) = poly_const (k:A ring) d
-      #|  \\(pp:(1->num)->A). poly_deg (k:A ring) pp
+      #|  (pp : ((Unit) -> Num) -> A) => poly_deg((k : Ring[A]), pp)
       #|  poly_add (k:A ring) (poly_mul k q p) (t:(1->num)->A) =\n       poly_var k (one:1)
       #|  poly_deg (k:A ring)\n       (poly_add k (poly_mul k q p) (t:(1->num)->A)) =\n       MAX (poly_deg k (poly_mul k q p)) (poly_deg k t)
       #|  poly_deg (k:A ring) (poly_mul k q p:(1->num)->A) =\n       poly_deg k q + poly_deg k p
-      #|  poly_deg (k:A ring) (q:(1->num)->A) = 0
-      #|  \\(pp:(1->num)->A). poly_deg (k:A ring) pp
+      #|  poly_deg((k : Ring[A]), (q : ((Unit) -> Num) -> A)) == 0
+      #|  (pp : ((Unit) -> Num) -> A) => poly_deg((k : Ring[A]), pp)
       #|  poly_add (k:A ring) (poly_mul k q p) t =\n                 poly_var k (one:1)
-      #|  ~(q:(1->num)->A = poly_0 k)
-      #|  t:(1->num)->A
-      #|  k:A ring
+      #|  !((q : ((Unit) -> Num) -> A) == poly_0((k : Ring[A])))
+      #|  (t : ((Unit) -> Num) -> A)
+      #|  (k : Ring[A])
       #|  ?c:A. c IN ring_carrier k /\\ (t:(1->num)->A) = poly_const (k:A ring) c
-      #|  poly_deg (k:A ring) (t:(1->num)->A) = 0
-      #|  t:(1->num)->A
-      #|  q:(1->num)->A
-      #|  p:(1->num)->A
-      #|  poly_var (k:A ring) (one:1):(1->num)->A
-      #|  k:A ring
-      #|  ~(p = ring_0(poly_ring (k:A ring) (:1)))
+      #|  poly_deg((k : Ring[A]), (t : ((Unit) -> Num) -> A)) == 0
+      #|  (t : ((Unit) -> Num) -> A)
+      #|  (q : ((Unit) -> Num) -> A)
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  poly_var((k : Ring[A]), one)
+      #|  (k : Ring[A])
+      #|  !((p : ((Unit) -> Num) -> A) == ring_0(poly_ring((k : Ring[A]), UNIV)))
       #|  integral_domain (k:A ring) /\\\n    ~trivial_ring (k:A ring)
       #|  forall k (p:(1->num)->A). field k /\\\n        p IN ring_carrier(poly_ring k (:1)) /\\ poly_deg k p = 1\n        ==> ?x. x IN ring_carrier k /\\ poly_eval k p x = ring_0 k
       #|  poly_div (r:A ring) p d =\n    if ring_unit r (coeff (poly_deg r d) d)\n    then @q. q IN ring_carrier(poly_ring r (:1)) /\\\n             ?t. t IN ring_carrier(poly_ring r (:1)) /\\\n                 (poly_deg r t < poly_deg r d \\/\n                  t = ring_0(poly_ring r (:1))) /\\\n                 ring_add (poly_ring r (:1))\n                          (ring_mul (poly_ring r (:1)) q d) t = p\n    else ring_0(poly_ring r (:1))
       #|  poly_rem (r:A ring) p d =\n        ring_sub (poly_ring r (:1))\n                 p (ring_mul (poly_ring r (:1)) (poly_div r p d) d)
-      #|  ring_sub r p x = t <=> ring_add r x t = p
-      #|  poly_rem (r:A ring) p d = t
-      #|  t:(1->num)->A
-      #|  poly_div (r:A ring) p d
+      #|  (ring_sub((r : Ring[_]), (p : _), (x : _)) == (t : _)) == (ring_add(r, x, t) == p)
+      #|  poly_rem((r : Ring[A]), (p : ((Unit) -> Num) -> A), (d : ((Unit) -> Num) -> A)) == (t : ((Unit) -> Num) -> A)
+      #|  (t : ((Unit) -> Num) -> A)
+      #|  poly_div((r : Ring[A]), (p : ((Unit) -> Num) -> A), (d : ((Unit) -> Num) -> A))
       #|  forall(r:A ring) p d.\n        p IN ring_carrier(poly_ring r (:1)) /\\\n        d IN ring_carrier(poly_ring r (:1)) /\\\n        ring_unit r (coeff (poly_deg r d) d)\n        ==> poly_div r p d IN ring_carrier(poly_ring r (:1)) /\\\n            poly_rem r p d IN ring_carrier(poly_ring r (:1)) /\\\n            (poly_deg r (poly_rem r p d) < poly_deg r d \\/\n             poly_rem r p d = ring_0(poly_ring r (:1))) /\\\n            ring_add (poly_ring r (:1))\n                     (ring_mul (poly_ring r (:1)) (poly_div r p d) d)\n                     (poly_rem r p d) = p
-      #|  ring_unit r (coeff (poly_deg r d) d:A)
+      #|  ring_unit((r : Ring[A]), coeff(poly_deg(r, (d : ((Unit) -> Num) -> A)), d))
       #|  forall(r:A ring) p d.\n        p IN ring_carrier(poly_ring r (:1)) /\\\n        d IN ring_carrier(poly_ring r (:1))\n        ==> poly_div r p d IN ring_carrier(poly_ring r (:1))
       #|  forall(r:A ring) p d.\n        ring_polynomial r p /\\ ring_polynomial r d\n        ==> ring_polynomial r (poly_div r p d)
       #|  forall(r:A ring) p d.\n        p IN ring_carrier(poly_ring r (:1)) /\\\n        d IN ring_carrier(poly_ring r (:1))\n        ==> poly_rem r p d IN ring_carrier(poly_ring r (:1))
       #|  forall(r:A ring) p d.\n        ring_polynomial r p /\\ ring_polynomial r d\n        ==> ring_polynomial r (poly_rem r p d)
-      #|  R:((1->num)->A)ring
-      #|  poly_ring (r:A ring) (:1)
-      #|  ring_unit r (coeff (poly_deg r d) d:A)
+      #|  (R : Ring[((Unit) -> Num) -> A])
+      #|  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool))
+      #|  ring_unit((r : Ring[A]), coeff(poly_deg(r, (d : ((Unit) -> Num) -> A)), d))
       #|  forall(r:A ring) p d.\n        p IN ring_carrier(poly_ring r (:1)) /\\\n        d IN ring_carrier(poly_ring r (:1))\n        ==> ring_add (poly_ring r (:1))\n                     (ring_mul (poly_ring r (:1)) (poly_div r p d) d)\n                     (poly_rem r p d) = p
       #|  forall(r:A ring) p d.\n        p IN ring_carrier(poly_ring r (:1)) /\\\n        d IN ring_carrier(poly_ring r (:1)) /\\\n        ring_unit r (coeff (poly_deg r d) d)\n        ==> poly_deg r (poly_rem r p d) < poly_deg r d \\/\n            poly_rem r p d = ring_0(poly_ring r (:1))
       #|  forall(k:A ring) p d.\n        field k /\\\n        p IN ring_carrier(poly_ring k (:1)) /\\\n        d IN ring_carrier(poly_ring k (:1)) /\\\n        ~(d = ring_0(poly_ring k (:1)))\n        ==> poly_deg k (poly_rem k p d) < poly_deg k d \\/\n            poly_rem k p d = ring_0(poly_ring k (:1))
-      #|  R:((1->num)->A)ring
-      #|  poly_ring (r:A ring) (:1)
-      #|  poly_div (r:A ring) p d
+      #|  (R : Ring[((Unit) -> Num) -> A])
+      #|  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool))
+      #|  poly_div((r : Ring[A]), (p : ((Unit) -> Num) -> A), (d : ((Unit) -> Num) -> A))
       #|  forall(r:A ring) p d.\n        p IN ring_carrier(poly_ring r (:1)) /\\\n        d IN ring_carrier(poly_ring r (:1))\n        ==> ring_divides (poly_ring r (:1)) d\n               (ring_sub (poly_ring r (:1)) p (poly_rem r p d))
-      #|  q:(1->num)->A
-      #|  p:(1->num)->A
-      #|  r:A ring
-      #|  ring_sub (poly_ring (r:A ring) (:1)) p q
-      #|  d:(1->num)->A
-      #|  r:A ring
+      #|  (q : ((Unit) -> Num) -> A)
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  ring_sub(poly_ring((r : Ring[A]), UNIV), (p : ((Unit) -> Num) -> A), (q : ((Unit) -> Num) -> A))
+      #|  (d : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
       #|  forall(r:A ring) p q d.\n          p IN ring_carrier(poly_ring r (:1)) /\\\n          q IN ring_carrier(poly_ring r (:1)) /\\\n          d IN ring_carrier(poly_ring r (:1)) /\\\n          ring_regular r (coeff (poly_deg r d) d) /\\\n          poly_deg r p < poly_deg r d /\\\n          poly_deg r q < poly_deg r d /\\\n          ring_divides (poly_ring r (:1))\n                       d (ring_sub (poly_ring r (:1)) p q)\n          ==> p = q
-      #|  R = poly_ring (r:A ring) (:1)
-      #|  q:(1->num)->A
-      #|  r:A ring
+      #|  (R : Ring[((Unit) -> Num) -> A]) == poly_ring((r : Ring[A]), UNIV)
+      #|  (q : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
       #|  p /\\ q ==> r /\\ s ==> t <=> p /\\ r ==> s /\\ q ==> t
       #|  forall p. p IN ring_carrier (poly_ring (r:A ring) (:1))\n        ==> (poly_deg r p < poly_deg r q \\/ p = ring_0 (poly_ring r (:1)) <=>\n             poly_deg r p < poly_deg r (q:(1->num)->A))
-      #|  poly_deg r (q:(1->num)->A) = 0
-      #|  q:(1->num)->A
-      #|  p:(1->num)->A
-      #|  r:A ring
-      #|  q:(1->num)->A
-      #|  p:(1->num)->A
-      #|  r:A ring
-      #|  R:((1->num)->A)ring
-      #|  poly_ring (r:A ring) (:1)
+      #|  poly_deg((r : Ring[A]), (q : ((Unit) -> Num) -> A)) == 0
+      #|  (q : ((Unit) -> Num) -> A)
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  (q : ((Unit) -> Num) -> A)
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  (R : Ring[((Unit) -> Num) -> A])
+      #|  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool))
       #|  forall(r:A ring) p q t.\n        p IN ring_carrier(poly_ring r (:1)) /\\\n        q IN ring_carrier(poly_ring r (:1)) /\\\n        t IN ring_carrier(poly_ring r (:1))\n        ==> (poly_rem r p q = t <=>\n             if ring_unit r (coeff (poly_deg r q) q) then\n                (poly_deg r t < poly_deg r q \\/\n                 t = ring_0(poly_ring r (:1))) /\\\n                ring_divides (poly_ring r (:1))\n                             q (ring_sub (poly_ring r (:1)) p t)\n             else p = t)
-      #|  x = ring_add r (ring_sub r x y) y
+      #|  (x : _) == ring_add((r : Ring[_]), ring_sub(r, x, (y : _)), y)
       #|  (p:num->(1->num)->A) n = poly_add r (poly_sub r (p n) q) q
-      #|  n:num
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  poly_sub r ((p:num->(1->num)->A) n) q
-      #|  n:num
-      #|  q:(1->num)->A
+      #|  (n : Num)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  poly_sub((r : Ring[A]), (p : (Num, (Unit) -> Num) -> A)((n : Num)), (q : ((Unit) -> Num) -> A))
+      #|  (n : Num)
+      #|  (q : ((Unit) -> Num) -> A)
       #|  ring_mul (poly_ring (r:A ring) (:1)) (poly_const r u) s
-      #|  s:(1->num)->A
-      #|  v:A
-      #|  u:A
-      #|  ring_add (poly_ring (r:A ring) (:1)) s t
-      #|  t:(1->num)->A
-      #|  s:(1->num)->A
-      #|  v:A
-      #|  u:A
-      #|  poly_0 r:(1->num)->A
-      #|  m:num <= n ==> m + n - m = n /\\ n - (n - m) = m
-      #|  ~(d:num < d - a)
+      #|  (s : ((Unit) -> Num) -> A)
+      #|  (v : A)
+      #|  (u : A)
+      #|  ring_add(poly_ring((r : Ring[A]), UNIV), (s : ((Unit) -> Num) -> A), (t : ((Unit) -> Num) -> A))
+      #|  (t : ((Unit) -> Num) -> A)
+      #|  (s : ((Unit) -> Num) -> A)
+      #|  (v : A)
+      #|  (u : A)
+      #|  (poly_0 : (Ring[A], (Unit) -> Num) -> A)((r : Ring[A]))
+      #|  (m : Num) <= (n : Num) \226\134\146 m + (n - m) == n && n - (n - m) == m
+      #|  !((d : Num) < d - (a : Num))
       #|  poly_mul r (poly_pow r (poly_var r one)\n                                         (poly_deg r (p n) - poly_deg r (p m)))\n                             ((p:num->(1->num)->A) m)
-      #|  m:num
-      #|  coeff d ((p:num->(1->num)->A) n)
+      #|  (m : Num)
+      #|  coeff((d : Num), (p : (Num, (Unit) -> Num) -> A)((n : Num)))
       #|  forall c. c IN ideal_generated r {coeff (poly_deg r (p m)) (p m) | m < n}\n       ==> ?q. q IN ideal_generated (poly_ring r (:1)) {p m | m:num < n} /\\\n               poly_deg (r:A ring) q <= d /\\ coeff d q = c
       #|  (forall n. ~(p n IN s n)) ==> s m SUBSET s n ==> ~(p n IN s m)
       #|  forall m. m < n ==> poly_deg r ((p:num->(1->num)->A) m) <= poly_deg r (p n)
       #|  forall m d. coeff d ((p:num->(1->num)->A) m) IN ring_carrier r
-      #|  forall m. ring_polynomial r ((p:num->(1->num)->A) m)
-      #|  d = poly_deg r ((p:num->(1->num)->A) n)
-      #|  coeff (poly_deg r (p(n:num))) (p n):A
-      #|  forall x. x IN t /\\ ~(x IN s) ==> ~(s = t)
-      #|  n:num
+      #|  \226\136\128 m : Num, ring_polynomial((r : Ring[A]), (p : (Num, (Unit) -> Num) -> A)(m))
+      #|  (d : Num) == poly_deg((r : Ring[A]), (p : (Num, (Unit) -> Num) -> A)((n : Num)))
+      #|  coeff(poly_deg((r : Ring[A]), (p : (Num, (Unit) -> Num) -> A)((n : Num))), p(n))
+      #|  \226\136\128 x : _, IN(x, (t : (_) -> Bool)) && !IN(x, (s : (_) -> Bool)) \226\134\146 !(s == t)
+      #|  (n : Num)
       #|  \\n:num. ideal_generated (r:A ring)\n               {coeff (poly_deg r (p m)) (p m) | m < n}
       #|  forall n. ideal_generated (poly_ring (r:A ring) (:1)) {p m | m:num < n} SUBSET j
-      #|  n:num
-      #|  p:num->(1->num)->A
-      #|  i SUBSET j /\\ ~(i = j) ==> ~(j DIFF i = {})
+      #|  (n : Num)
+      #|  (p : (Num, (Unit) -> Num) -> A)
+      #|  SUBSET((i : (_) -> Bool), (j : (_) -> Bool)) && !(i == j) \226\134\146 !(DIFF(j, i) == {})
       #|  \\d. d IN IMAGE (poly_deg (r:A ring))\n                (j DIFF ideal_generated (poly_ring r (:1)) {p m | m:num < n})
-      #|  n:num
-      #|  p:num->(1->num)->A
-      #|  {f x | P x} = {y | ?x. ~(P x ==> ~(f x = y))}
+      #|  (n : Num)
+      #|  (p : (Num, (Unit) -> Num) -> A)
+      #|  {(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x)} == {(y : _) | \226\136\131 x : _, !(P(x) \226\134\146 !(f(x) == y))}
       #|  \\(p:num->(1->num)->A) n q.\n        q IN j DIFF ideal_generated (poly_ring r (:1)) {p m | m < n} /\\\n        forall q'. q' IN j DIFF ideal_generated (poly_ring r (:1)) {p m | m < n}\n             ==> poly_deg r q <= poly_deg r q'
       #|  (?x. P x /\\ Q x /\\ R x) <=> ~(forall x. P x /\\ Q x ==> ~R x)
-      #|  j:((1->num)->A)->bool
-      #|  r:A ring
-      #|  (:1)
+      #|  (j : (((Unit) -> Num) -> A) -> Bool)
+      #|  (r : Ring[A])
+      #|  (UNIV : (Unit) -> Bool)
       #|  forall r:A ring.\n     noetherian_ring (poly_ring r (:1)) <=> noetherian_ring r
-      #|  m:num
+      #|  (m : Num)
       #|  \\p:(V->num)->A. poly_evaluate r p\n          (\\i. if i = v(n:num) then ring_1 r else ring_0 r) = ring_0 r
-      #|  forall P. ~P a /\\ (forall y. y IN s ==> P y) ==> ~(a IN s)
-      #|  i < n + 1 <=> i < n \\/ i = n
-      #|  poly_var r (v(n:num)):(V->num)->A
-      #|  i < n + 1 <=> i < n \\/ i = n
-      #|  n:num
+      #|  \226\136\128 P : (_) -> Bool, !P((a : _)) && (\226\136\128 y : _, IN(y, (s : (_) -> Bool)) \226\134\146 P(y)) \226\134\146 !IN(a, s)
+      #|  ((i : Num) < (n : Num) + 1) == (i < n || i == n)
+      #|  poly_var((r : Ring[A]), (v : (Num) -> V)((n : Num)))
+      #|  ((i : Num) < (n : Num) + 1) == (i < n || i == n)
+      #|  (n : Num)
       #|  (\\n. ideal_generated (poly_ring r s) {poly_var r (v i) | i < n})\n    :num->((V->num)->A)->bool
-      #|  v:num->V
-      #|  s:V->bool
-      #|  trivial_ring(r:A ring)
-      #|  s:V->bool
-      #|  x:V
-      #|  s:V->bool
-      #|  s:V->bool
-      #|  FINITE(s:V->bool)
-      #|  FINITE(s:V->bool)
+      #|  (v : (Num) -> V)
+      #|  (s : (V) -> Bool)
+      #|  trivial_ring((r : Ring[A]))
+      #|  (s : (V) -> Bool)
+      #|  (x : V)
+      #|  (s : (V) -> Bool)
+      #|  (s : (V) -> Bool)
+      #|  FINITE((s : (V) -> Bool))
+      #|  FINITE((s : (V) -> Bool))
       #|  forall(r:A ring) (s:V->bool).\n      noetherian_ring (poly_ring r s) <=>\n      noetherian_ring r /\\ (FINITE s \\/ trivial_ring r)
-      #|  j:num
-      #|  i:(1->num)->A
-      #|  d:num
-      #|  d:num = n
-      #|  d:num
+      #|  (j : Num)
+      #|  (i : ((Unit) -> Num) -> A)
+      #|  (d : Num)
+      #|  (d : Num) == (n : Num)
+      #|  (d : Num)
       #|  ring_add r x (ring_mul r c n) = y\n      ==> ring_sub r (ring_mul r y i) (ring_mul r x i) =\n          ring_mul r n (ring_mul r c i)
-      #|  i:(1->num)->A
+      #|  (i : ((Unit) -> Num) -> A)
       #|  ring_sub r y y2 = y1\n      ==> ring_add r (ring_mul r (ring_mul r x n) q) y =\n          ring_add r (ring_add r (ring_mul r n (ring_mul r x q)) y1) y2
       #|  ring_powerseries r q /\\ p = poly_0 r\n        ==> poly_mul r p q = poly_0 r
-      #|  i:(1->num)->A
+      #|  (i : ((Unit) -> Num) -> A)
       #|  ring_powerseries r p /\\ q = poly_0 r ==> poly_add r p q = p
       #|  forall n. poly_add r (poly_mul r (poly_pow r (poly_var r one) n) (q n))\n                   (ring_sum (powser_ring r (:1)) k\n                        (\\i. poly_mul (r:A ring) (cf' n i) i)) =\n        p
       #|  forall(n:num) g:(1->num)->A. g IN k ==> ring_powerseries r (cf' n g:(1->num)->A)
       #|  forall g n d. coeff d ((cf':num->((1->num)->A)->(1->num)->A) n g) =\n            (if d < n then coeff d (cf g) else ring_0 r)
       #|  cf':num->((1->num)->A)->(1->num)->A =\n              \\n i m. if m one < n then cf i m else ring_0 r
-      #|  g:(1->num)->A
+      #|  (g : ((Unit) -> Num) -> A)
       #|  p = ring_sum (powser_ring (r:A ring) (:1)) k\n                 (\\i. ring_mul (powser_ring r (:1)) (cf i) i)
       #|  forall g:(1->num)->A. g IN k ==> ring_powerseries r (cf g:(1->num)->A)
-      #|  forall g k. coeff k (cf g) = (c:((1->num)->A)->num->A) g k
-      #|  cf:((1->num)->A)->(1->num)->A = \\i m. c i (m one)
-      #|  R = powser_ring (r:A ring) (:1)
+      #|  \226\136\128 g : ((Unit) -> Num) -> A, \226\136\128 k : Num, coeff(k, (cf : (((Unit) -> Num) -> A, (Unit) -> Num) -> A)(g)) == (c : (((Unit) -> Num) -> A, Num) -> A)(g, k)
+      #|  (cf : (((Unit) -> Num) -> A, (Unit) -> Num) -> A) == ((i : ((Unit) -> Num) -> A) => (m : (Unit) -> Num) => (c : (((Unit) -> Num) -> A, Num) -> A)(i, m(one)))
+      #|  (R : Ring[((Unit) -> Num) -> A]) == powser_ring((r : Ring[A]), UNIV)
       #|  poly_add r x y = z\n      ==> poly_sub r z y IN j /\\\n          poly_sub r (poly_add r x y) y = x\n          ==> x IN j
-      #|  n:num
-      #|  (q:num->(1->num)->A) (SUC n)
-      #|  poly_var (r:A ring) one
-      #|  (q:num->(1->num)->A) (SUC n) IN j
-      #|  (q:num->(1->num)->A) (SUC n)
-      #|  n:num
-      #|  (q:num->(1->num)->A) n
-      #|  n:num
+      #|  (n : Num)
+      #|  (q : (Num, (Unit) -> Num) -> A)(SUC((n : Num)))
+      #|  poly_var((r : Ring[A]), one)
+      #|  IN((q : (Num, (Unit) -> Num) -> A)(SUC((n : Num))), (j : (((Unit) -> Num) -> A) -> Bool))
+      #|  (q : (Num, (Unit) -> Num) -> A)(SUC((n : Num)))
+      #|  (n : Num)
+      #|  (q : (Num, (Unit) -> Num) -> A)((n : Num))
+      #|  (n : Num)
       #|  forall n. ring_powerseries r (q n:(1->num)->A) /\\\n        q n IN j /\\\n        (forall i. i IN k ==> c i n IN ring_carrier r) /\\\n        poly_add r (poly_mul r (poly_var r one) (q(SUC n)))\n                   (ring_sum (powser_ring r (:1)) k\n                             (\\i. poly_mul r (poly_const r (c i n)) i)) =\n        q n
       #|  c = \\i (n:num). (tc:((1->num)->A)->((1->num)->A)->A) (q n) i
       #|  q 0 = p /\\\n    (forall n. q(SUC n) = (h:((1->num)->A)->(1->num)->A) (q n))
-      #|  ring_powerseries r (p:(1->num)->A)
-      #|  p:(1->num)->A
-      #|  k:((1->num)->A)->bool
-      #|  p:(1->num)->A
-      #|  p:(1->num)->A
+      #|  ring_powerseries((r : Ring[A]), (p : ((Unit) -> Num) -> A))
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (k : (((Unit) -> Num) -> A) -> Bool)
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (p : ((Unit) -> Num) -> A)
       #|  poly_var (r:A ring) one INSERT k
-      #|  poly_var (r:A ring) one IN j
-      #|  tc:((1->num)->A)->((1->num)->A)->A
-      #|  h:((1->num)->A)->(1->num)->A
-      #|  i:num
-      #|  q:(1->num)->A
-      #|  ring_powerseries r (d:(1->num)->A)
+      #|  IN(poly_var((r : Ring[A]), one), (j : (((Unit) -> Num) -> A) -> Bool))
+      #|  (tc : (((Unit) -> Num) -> A, ((Unit) -> Num) -> A) -> A)
+      #|  (h : (((Unit) -> Num) -> A, (Unit) -> Num) -> A)
+      #|  (i : Num)
+      #|  (q : ((Unit) -> Num) -> A)
+      #|  ring_powerseries((r : Ring[A]), (d : ((Unit) -> Num) -> A))
       #|  ring_powerseries r (q:(1->num)->A) /\\\n      forall i. coeff i q = coeff (i + 1) d
-      #|  q = \\m. coeff (m one + 1) (d:(1->num)->A)
-      #|  ring_powerseries r (d:(1->num)->A)
-      #|  d:(1->num)->A = poly_sub r p h
-      #|  ring_powerseries r (h:(1->num)->A)
+      #|  (q : ((Unit) -> Num) -> A) == ((m : (Unit) -> Num) => coeff(m(one) + 1, (d : ((Unit) -> Num) -> A)))
+      #|  ring_powerseries((r : Ring[A]), (d : ((Unit) -> Num) -> A))
+      #|  (d : ((Unit) -> Num) -> A) == poly_sub((r : Ring[A]), (p : ((Unit) -> Num) -> A), (h : ((Unit) -> Num) -> A))
+      #|  ring_powerseries((r : Ring[A]), (h : ((Unit) -> Num) -> A))
       #|  h = ring_sum (powser_ring (r:A ring) (:1)) k\n                   (\\i. poly_mul r (poly_const r (c i)) i)
-      #|  c:((1->num)->A)->A
+      #|  (c : (((Unit) -> Num) -> A) -> A)
       #|  coeff 0 (p:(1->num)->A) IN ideal_generated r (IMAGE (coeff 0) k)
-      #|  ring_powerseries r (p:(1->num)->A)
+      #|  ring_powerseries((r : Ring[A]), (p : ((Unit) -> Num) -> A))
       #|  p:(1->num)->A
       #|  forall p. p IN j\n        ==> ?q c. ring_powerseries (r:A ring) q /\\\n                  (forall i. i IN k ==> c i IN ring_carrier r) /\\\n                  poly_add r (poly_mul r (poly_var r one) q)\n                    (ring_sum (powser_ring r (:1)) k\n                              (\\i. poly_mul r (poly_const r (c i)) i)) = p
-      #|  forall i:(1->num)->A. i IN k ==> ring_powerseries r i
-      #|  k:((1->num)->A)->bool
+      #|  \226\136\128 i : ((Unit) -> Num) -> A, IN(i, (k : (((Unit) -> Num) -> A) -> Bool)) \226\134\146 ring_powerseries((r : Ring[A]), i)
+      #|  (k : (((Unit) -> Num) -> A) -> Bool)
       #|  forall(r:A ring) j.\n        prime_ideal (powser_ring r (:1)) j\n        ==> (finitely_generated_ideal (powser_ring r (:1)) j <=>\n             finitely_generated_ideal r (IMAGE (coeff 0) j))
-      #|  SUC d
-      #|  j:((1->num)->A)->bool
+      #|  SUC((d : Num))
+      #|  (j : (((Unit) -> Num) -> A) -> Bool)
       #|  forall r:A ring.\n     noetherian_ring (powser_ring r (:1)) <=> noetherian_ring r
-      #|  m:num
+      #|  (m : Num)
       #|  \\p. (p:(V->num)->A) (monomial_var(v(n:num))) = ring_0 r
-      #|  forall P. ~P a /\\ (forall y. y IN s ==> P y) ==> ~(a IN s)
-      #|  i < n + 1 <=> i < n \\/ i = n
-      #|  poly_var r (v(n:num)):(V->num)->A
-      #|  i < n + 1 <=> i < n \\/ i = n
-      #|  n:num
+      #|  \226\136\128 P : (_) -> Bool, !P((a : _)) && (\226\136\128 y : _, IN(y, (s : (_) -> Bool)) \226\134\146 P(y)) \226\134\146 !IN(a, s)
+      #|  ((i : Num) < (n : Num) + 1) == (i < n || i == n)
+      #|  poly_var((r : Ring[A]), (v : (Num) -> V)((n : Num)))
+      #|  ((i : Num) < (n : Num) + 1) == (i < n || i == n)
+      #|  (n : Num)
       #|  (\\n. ideal_generated (powser_ring r s) {poly_var r (v i) | i < n})\n    :num->((V->num)->A)->bool
-      #|  v:num->V
-      #|  s:V->bool
-      #|  trivial_ring(r:A ring)
-      #|  s:V->bool
-      #|  x:V
-      #|  s:V->bool
-      #|  s:V->bool
-      #|  FINITE(s:V->bool)
-      #|  FINITE(s:V->bool)
+      #|  (v : (Num) -> V)
+      #|  (s : (V) -> Bool)
+      #|  trivial_ring((r : Ring[A]))
+      #|  (s : (V) -> Bool)
+      #|  (x : V)
+      #|  (s : (V) -> Bool)
+      #|  (s : (V) -> Bool)
+      #|  FINITE((s : (V) -> Bool))
+      #|  FINITE((s : (V) -> Bool))
       #|  forall(r:A ring) (s:V->bool).\n      noetherian_ring (powser_ring r s) <=>\n      noetherian_ring r /\\ (FINITE s \\/ trivial_ring r)
       #|  monic (r:A ring) (p:(1->num)->A) <=> coeff (poly_deg r p) p = ring_1 r
-      #|  forall r:A ring. monic r (poly_1 r)
-      #|  forall r:A ring. monic r (poly_0 r) <=> trivial_ring r
+      #|  \226\136\128 r : Ring[A], monic(r, poly_1(r))
+      #|  \226\136\128 r : Ring[A], monic(r, poly_0(r)) == trivial_ring(r)
       #|  forall r:A ring p.\n     ring_polynomial r p /\\ monic r p /\\ ~trivial_ring r\n     ==> ~(p = poly_0 r)
       #|  forall r:A ring p.\n        ring_powerseries r p /\\ trivial_ring r ==> monic r p
-      #|  forall r c:A. monic r (poly_const r c) <=> c = ring_1 r
+      #|  \226\136\128 r : Ring[A], \226\136\128 c : A, monic(r, poly_const(r, c)) == (c == ring_1(r))
       #|  forall r:A ring p.\n     ring_polynomial r p /\\ monic r p /\\ poly_deg r p = 0\n     ==> p = poly_1 r
-      #|  forall r:A ring. monic r (poly_var r one)
+      #|  \226\136\128 r : Ring[A], monic(r, poly_var(r, one))
       #|  forall r:A ring s p. monic (subring_generated r s) p <=> monic r p
-      #|  trivial_ring(r:A ring)
+      #|  trivial_ring((r : Ring[A]))
       #|  forall r (p:(1->num)->A) q.\n     ring_polynomial r p /\\ ring_polynomial r q /\\\n     monic r p /\\ monic r q\n     ==> poly_deg r (poly_mul r p q) = poly_deg r p + poly_deg r q
-      #|  monic (r:A ring) (q:(1->num)->A)
-      #|  monic (r:A ring) (p:(1->num)->A)
+      #|  monic((r : Ring[A]), (q : ((Unit) -> Num) -> A))
+      #|  monic((r : Ring[A]), (p : ((Unit) -> Num) -> A))
       #|  forall r p q:(1->num)->A.\n     ring_polynomial r p /\\ ring_polynomial r q /\\ monic r p /\\ monic r q\n     ==> monic r (poly_mul r p q)
       #|  forall r (p:(1->num)->A) n.\n     ring_polynomial r p /\\ monic r p ==> monic r (poly_pow r p n)
-      #|  (f:K->(1->num)->A) x IN ring_carrier(poly_ring r (:1))
-      #|  t:K->bool
-      #|  x:K
+      #|  IN((f : (K, (Unit) -> Num) -> A)((x : K)), ring_carrier(poly_ring((r : Ring[A]), UNIV)))
+      #|  (t : (K) -> Bool)
+      #|  (x : K)
       #|  forall r (f:K->(1->num)->A) s.\n     FINITE s /\\\n     (forall i. i IN s ==> ring_polynomial r (f i)) /\\\n     (forall i. i IN s ==> monic r (f i))\n     ==> monic r (ring_product (poly_ring r (:1)) s f)
-      #|  ~(p:(1->num)->A = poly_0 r)
-      #|  (c:A) IN ring_carrier r /\\ ~(c = ring_0 r)
-      #|  monic r (q:(1->num)->A)
-      #|  c:A
-      #|  u:(1->num)->A
-      #|  q:(1->num)->A
-      #|  p:(1->num)->A
-      #|  poly_ring (r:A ring) (:1)
+      #|  !((p : ((Unit) -> Num) -> A) == poly_0((r : Ring[A])))
+      #|  IN((c : A), ring_carrier((r : Ring[A]))) && !(c == ring_0(r))
+      #|  monic((r : Ring[A]), (q : ((Unit) -> Num) -> A))
+      #|  (c : A)
+      #|  (u : ((Unit) -> Num) -> A)
+      #|  (q : ((Unit) -> Num) -> A)
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool))
       #|  ring_polynomial r (p:(1->num)->A) /\\ ring_polynomial r (q:(1->num)->A)
       #|  forall r p q:(1->num)->A.\n        integral_domain r /\\\n        monic r p /\\ monic r q /\\ ring_associates (poly_ring r (:1)) p q\n        ==> p = q
-      #|  p:(1->num)->A = poly_0 r
+      #|  (p : ((Unit) -> Num) -> A) == poly_0((r : Ring[A]))
       #|  forall r (p:(1->num)->A).\n     integral_domain r /\\\n     ring_polynomial r p /\\\n     ring_unit r (coeff (poly_deg r p) p)\n     ==> monic r (poly_mul r\n                    (poly_const r (ring_inv r (coeff (poly_deg r p) p))) p)
-      #|  poly_mul f (poly_const f c_inv) (p:(1->num)->A)
-      #|  (c_inv:A) IN ring_carrier f
-      #|  c_inv = ring_inv (f:A ring) (coeff (poly_deg f p) p)
-      #|  ring_unit (f:A ring) (coeff (poly_deg f p) p)
-      #|  ~(coeff (poly_deg (f:A ring) p) p = ring_0 f)
-      #|  coeff (poly_deg (f:A ring) p) p IN ring_carrier f
-      #|  integral_domain (f:A ring)
+      #|  poly_mul((f : Ring[A]), poly_const(f, (c_inv : A)), (p : ((Unit) -> Num) -> A))
+      #|  IN((c_inv : A), ring_carrier((f : Ring[A])))
+      #|  (c_inv : A) == ring_inv((f : Ring[A]), coeff(poly_deg(f, (p : ((Unit) -> Num) -> A)), p))
+      #|  ring_unit((f : Ring[A]), coeff(poly_deg(f, (p : ((Unit) -> Num) -> A)), p))
+      #|  !(coeff(poly_deg((f : Ring[A]), (p : ((Unit) -> Num) -> A)), p) == ring_0(f))
+      #|  IN(coeff(poly_deg((f : Ring[A]), (p : ((Unit) -> Num) -> A)), p), ring_carrier(f))
+      #|  integral_domain((f : Ring[A]))
       #|  forall f (p:(1->num)->A).\n     field f /\\ ring_polynomial f p /\\ ~(p = poly_0 f)\n     ==> ?q. ring_polynomial f q /\\\n             monic f q /\\\n             ring_associates (poly_ring f (:1)) p q /\\\n             poly_deg f q = poly_deg f p
-      #|  p:(1->num)->A
-      #|  f:A ring
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (f : Ring[A])
       #|  ring_polynomial (f:A ring) (p:(1->num)->A) /\\\n                ~(p = poly_0 f)
       #|  forall f (p:(1->num)->A).\n     field f /\\ ring_irreducible (poly_ring f (:1)) p\n     ==> ?q. ring_polynomial f q /\\\n             monic f q /\\\n             ring_irreducible (poly_ring f (:1)) q /\\\n             ring_associates (poly_ring f (:1)) p q /\\\n             poly_deg f q = poly_deg f p
       #|  forall r (p:(1->num)->A) q.\n     integral_domain r /\\\n     monic r p /\\ monic r q /\\\n     ring_irreducible (poly_ring r (:1)) p /\\\n     ring_irreducible (poly_ring r (:1)) q /\\\n     ~(p = q)\n     ==> ring_coprime (poly_ring r (:1)) (p, q)
@@ -34882,72 +34882,72 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  poly_recip (r:A ring) p =\n        \\m. if m one <= poly_deg r p then p(\\v:1. poly_deg r p - m one)\n            else ring_0 r
       #|  forall(r:A ring) p i.\n        coeff i (poly_recip r p) =\n        if i <= poly_deg r p then coeff (poly_deg r p - i) p else ring_0 r
       #|  forall(r:A ring) p.\n        ring_powerseries r p ==> ring_powerseries r (poly_recip r p)
-      #|  poly_deg r (p:(1->num)->A)
+      #|  poly_deg((r : Ring[A]), (p : ((Unit) -> Num) -> A))
       #|  forall(r:A ring) p. ring_polynomial r p ==> ring_polynomial r (poly_recip r p)
       #|  forall(r:A ring) p.\n        p IN ring_carrier(poly_ring r (:1))\n        ==> poly_recip r p IN ring_carrier(poly_ring r (:1))
       #|  forall(r:A ring) p.\n        ring_polynomial r p\n        ==> (coeff 0 (poly_recip r p) = ring_0 r <=> p = poly_0 r)
       #|  forall(r:A ring) p.\n        ring_polynomial r p\n        ==> poly_deg r (poly_recip r p) <= poly_deg r p
       #|  forall(r:A ring) p.\n        ring_polynomial r p /\\ ~(coeff 0 p = ring_0 r)\n        ==> poly_deg r (poly_recip r p) = poly_deg r p
-      #|  p - d:num <= p
-      #|  d:num <= p ==> p - (p - d) = d
+      #|  (p : Num) - (d : Num) <= p
+      #|  (d : Num) <= (p : Num) \226\134\146 p - (p - d) == d
       #|  forall(r:A ring) p.\n        ring_polynomial r p /\\ ~(coeff 0 p = ring_0 r)\n        ==> poly_recip r (poly_recip r p) = p
-      #|  n - m:num <= n
-      #|  poly_deg r (p:(1->num)->A) - d
-      #|  poly_recip (r:A ring) p
-      #|  r:A ring
+      #|  (n : Num) - (m : Num) <= n
+      #|  poly_deg((r : Ring[A]), (p : ((Unit) -> Num) -> A)) - (d : Num)
+      #|  poly_recip((r : Ring[A]), (p : ((Unit) -> Num) -> A))
+      #|  (r : Ring[A])
       #|  forall(r:A ring) x p.\n      ring_polynomial r p\n      ==> poly_mul r (poly_pow r (poly_var r x)\n                                 (poly_deg r p - poly_deg r (poly_recip r p)))\n                     (poly_recip r (poly_recip r p)) = p
       #|  poly_pow r (poly_var (r:A ring) one)\n                         (poly_deg r p - poly_deg r (poly_recip r p))
       #|  forall(r:A ring) p.\n      ring_polynomial r p\n      ==> ring_divides (poly_ring r (:1)) (poly_recip r (poly_recip r p)) p
       #|  forall r c:A. poly_recip r (poly_const r c) = poly_const r c
       #|  forall(r:A ring) p.\n        integral_domain r /\\\n        ring_unit (poly_ring r (:1)) p\n        ==> ring_unit (poly_ring r (:1)) (poly_recip r p)
       #|  forall(r:A ring) p.\n        integral_domain r /\\ ring_polynomial r p /\\ ~(coeff 0 p = ring_0 r)\n        ==> (ring_unit (poly_ring r (:1)) (poly_recip r p) <=>\n             ring_unit (poly_ring r (:1)) p)
-      #|  forall(r:A ring). poly_recip r (poly_0 r) = poly_0 r
+      #|  \226\136\128 r : Ring[A], poly_recip(r, poly_0(r)) == poly_0(r)
       #|  forall(r:A ring) p.\n        ring_polynomial r p\n        ==> (poly_recip r p = poly_0 r <=> p = poly_0 r)
       #|  forall(r:A ring) p.\n        ring_polynomial r p\n        ==> (poly_recip r (poly_recip r p) = p <=>\n             coeff 0 p = ring_0 r ==> p = poly_0 r)
-      #|  forall(r:A ring). poly_recip r (poly_1 r) = poly_1 r
+      #|  \226\136\128 r : Ring[A], poly_recip(r, poly_1(r)) == poly_1(r)
       #|  forall(r:A ring) p.\n        ring_polynomial r p\n        ==> poly_recip r (poly_neg r p) = poly_neg r (poly_recip r p)
-      #|  i:num <= n ==> n - (n - i) = i
-      #|  j <= poly_deg r (q:(1->num)->A)
-      #|  i <= poly_deg r (p:(1->num)->A)
-      #|  j:num
-      #|  i:num
-      #|  n - i:num <= n
+      #|  (i : Num) <= (n : Num) \226\134\146 n - (n - i) == i
+      #|  (j : Num) <= poly_deg((r : Ring[A]), (q : ((Unit) -> Num) -> A))
+      #|  (i : Num) <= poly_deg((r : Ring[A]), (p : ((Unit) -> Num) -> A))
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (n : Num) - (i : Num) <= n
       #|  \\(i,j). poly_deg r (p:(1->num)->A) - i,\n              poly_deg r (q:(1->num)->A) - j
-      #|  n:num
+      #|  (n : Num)
       #|  poly_deg r (poly_mul r p q:(1->num)->A) = poly_deg r p + poly_deg r q
-      #|  q:(1->num)->A = poly_0 r
-      #|  p:(1->num)->A = poly_0 r
+      #|  (q : ((Unit) -> Num) -> A) == poly_0((r : Ring[A]))
+      #|  (p : ((Unit) -> Num) -> A) == poly_0((r : Ring[A]))
       #|  forall(r:A ring) p q.\n      ring_polynomial r p /\\\n      ring_polynomial r q /\\\n      (ring_mul r (coeff (poly_deg r p) p) (coeff (poly_deg r q) q) = ring_0 r\n       ==> coeff (poly_deg r p) p = ring_0 r \\/\n           coeff (poly_deg r q) q = ring_0 r)\n      ==> poly_recip r (poly_mul r p q) =\n          poly_mul r (poly_recip r p) (poly_recip r q)
       #|  forall(r:A ring) p q.\n        integral_domain r /\\\n        ring_polynomial r p /\\\n        ring_polynomial r q\n        ==> poly_recip r (poly_mul r p q) =\n            poly_mul r (poly_recip r p) (poly_recip r q)
-      #|  poly_recip (r:A ring) s
-      #|  s:(1->num)->A
+      #|  poly_recip((r : Ring[A]), (s : ((Unit) -> Num) -> A))
+      #|  (s : ((Unit) -> Num) -> A)
       #|  forall(r:A ring) p q.\n        integral_domain r /\\\n        ring_divides (poly_ring r (:1)) p q\n        ==> ring_divides (poly_ring r (:1)) (poly_recip r p) (poly_recip r q)
       #|  forall(r:A ring) p q.\n        integral_domain r /\\\n        ring_polynomial r q /\\\n        ring_divides (poly_ring r (:1)) p (poly_recip r q)\n        ==> ring_divides (poly_ring r (:1)) (poly_recip r p) q
       #|  forall(r:A ring) p q.\n    integral_domain r /\\\n    ring_polynomial r p /\\ ring_polynomial r q /\\\n    ~(coeff 0 p = ring_0 r)\n    ==> (ring_divides (poly_ring r (:1)) (poly_recip r p) (poly_recip r q) <=>\n         ring_divides (poly_ring r (:1)) p q)
-      #|  poly_recip (r:A ring) e
-      #|  poly_recip (r:A ring) d
-      #|  e:(1->num)->A
-      #|  d:(1->num)->A
+      #|  poly_recip((r : Ring[A]), (e : ((Unit) -> Num) -> A))
+      #|  poly_recip((r : Ring[A]), (d : ((Unit) -> Num) -> A))
+      #|  (e : ((Unit) -> Num) -> A)
+      #|  (d : ((Unit) -> Num) -> A)
       #|  forall(r:A ring) p.\n        integral_domain r /\\ ~(coeff 0 p = ring_0 r) /\\\n        ring_prime (poly_ring r (:1)) p\n        ==> ring_prime (poly_ring r (:1)) (poly_recip r p)
       #|  forall(r:A ring) p.\n        integral_domain r /\\ ring_polynomial r p /\\ ~(coeff 0 p = ring_0 r)\n        ==> (ring_prime (poly_ring r (:1)) (poly_recip r p) <=>\n             ring_prime (poly_ring r (:1)) p)
-      #|  poly_recip (r:A ring) e
-      #|  poly_recip (r:A ring) d
-      #|  coeff 0 e:A = ring_0 r
-      #|  coeff 0 d:A = ring_0 r
-      #|  coeff 0:((1->num)->A)->A
-      #|  e:(1->num)->A
-      #|  d:(1->num)->A
+      #|  poly_recip((r : Ring[A]), (e : ((Unit) -> Num) -> A))
+      #|  poly_recip((r : Ring[A]), (d : ((Unit) -> Num) -> A))
+      #|  coeff(0, (e : ((Unit) -> Num) -> A)) == ring_0((r : Ring[A]))
+      #|  coeff(0, (d : ((Unit) -> Num) -> A)) == ring_0((r : Ring[A]))
+      #|  (coeff : (Num, ((Unit) -> Num) -> A) -> A)(0)
+      #|  (e : ((Unit) -> Num) -> A)
+      #|  (d : ((Unit) -> Num) -> A)
       #|  forall(r:A ring) p.\n        integral_domain r /\\ ~(coeff 0 p = ring_0 r) /\\\n        ring_irreducible (poly_ring r (:1)) p\n        ==> ring_irreducible (poly_ring r (:1)) (poly_recip r p)
       #|  forall(r:A ring) p.\n        integral_domain r /\\ ring_polynomial r p /\\ ~(coeff 0 p = ring_0 r)\n        ==> (ring_irreducible (poly_ring r (:1)) (poly_recip r p) <=>\n             ring_irreducible (poly_ring r (:1)) p)
       #|  \\x:A. ring_pow r x (poly_deg r (p:(1->num)->A) - i)
-      #|  i:num <= p ==> (p - i) + i = p
-      #|  i:num
-      #|  poly_deg r (p:(1->num)->A) - i
-      #|  i:num
-      #|  i:num
-      #|  poly_recip (r:A ring) p
-      #|  r:A ring
-      #|  i:num
+      #|  (i : Num) <= (p : Num) \226\134\146 p - i + i == p
+      #|  (i : Num)
+      #|  poly_deg((r : Ring[A]), (p : ((Unit) -> Num) -> A)) - (i : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  poly_recip((r : Ring[A]), (p : ((Unit) -> Num) -> A))
+      #|  (r : Ring[A])
+      #|  (i : Num)
       #|  ring_sum r t g = ring_sum r s g /\\\n    ring_sum r s f = ring_sum r s g\n    ==> ring_sum r s f = ring_sum r t g
       #|  forall r p x:A.\n        ring_polynomial r p /\\ ring_unit r x\n        ==> poly_eval r (poly_recip r p) x =\n            ring_mul r (ring_pow r x (poly_deg r p))\n                       (poly_eval r p (ring_inv r x))
       #|  poly_deriv (r:A ring) (p:(1->num)->A) =\n    \\m:1->num. ring_mul r (ring_of_num r (SUC(m one)))\n                          (coeff (SUC(m one)) p)
@@ -34955,311 +34955,311 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(r:A ring) p d.\n     coeff d (poly_deriv r p) =\n     ring_mul r (ring_of_num r (d + 1)) (coeff (d + 1) p)
       #|  forall(r:A ring) p.\n     ring_powerseries r p ==> ring_powerseries r (poly_deriv r p)
       #|  forall(r:A ring) p.\n      p IN ring_carrier(powser_ring r (:1))\n      ==> poly_deriv r p IN ring_carrier(powser_ring r (:1))
-      #|  n < x ==> n < x + 1
+      #|  (n : Num) < (x : Num) \226\134\146 n < x + 1
       #|  forall(r:A ring) p.\n     ring_polynomial r p ==> ring_polynomial r (poly_deriv r p)
       #|  forall(r:A ring) p.\n      p IN ring_carrier(poly_ring r (:1))\n      ==> poly_deriv r p IN ring_carrier(poly_ring r (:1))
-      #|  d + 1
-      #|  d + 1 <= i ==> d <= i - 1
+      #|  (d : Num) + 1
+      #|  (d : Num) + 1 <= (i : Num) \226\134\146 d <= i - 1
       #|  forall(r:A ring) p.\n    ring_polynomial r p ==> poly_deg r (poly_deriv r p) <= poly_deg r p - 1
-      #|  ~(n = 0) ==> n - 1 + 1 = n
-      #|  poly_deg r (p:(1->num)->A) = 0
+      #|  !((n : Num) == 0) \226\134\146 n - 1 + 1 == n
+      #|  poly_deg((r : Ring[A]), (p : ((Unit) -> Num) -> A)) == 0
       #|  forall(r:A ring) (p:(1->num)->A).\n        integral_domain r /\\ ring_char r = 0 /\\ ring_polynomial r p\n        ==> poly_deg r (poly_deriv r p) = poly_deg r p - 1
-      #|  poly_deg k (p:(1->num)->A) - 1
+      #|  poly_deg((k : Ring[A]), (p : ((Unit) -> Num) -> A)) - 1
       #|  forall(k:A ring) p.\n    integral_domain k /\\ ring_char k = 0 /\\\n    ring_polynomial k p /\\\n    1 <= poly_deg k p\n    ==> ~(poly_deriv k p = poly_0 k)
       #|  forall(r:A ring) c. poly_deriv r (poly_const r c) = poly_0 r
-      #|  forall(r:A ring). poly_deriv r (poly_0 r) = poly_0 r
-      #|  forall(r:A ring). poly_deriv r (poly_1 r) = poly_0 r
-      #|  d + 1 = 1 <=> d = 0
+      #|  \226\136\128 r : Ring[A], poly_deriv(r, poly_0(r)) == poly_0(r)
+      #|  \226\136\128 r : Ring[A], poly_deriv(r, poly_1(r)) == poly_0(r)
+      #|  ((d : Num) + 1 == 1) == (d == 0)
       #|  forall(r:A ring). poly_deriv r (poly_var r (one:1)) = poly_const r (ring_1 r)
       #|  forall(r:A ring) p q.\n     ring_powerseries r p /\\ ring_powerseries r q\n     ==> poly_deriv r (poly_add r p q) =\n         poly_add r (poly_deriv r p) (poly_deriv r q)
       #|  forall(r:A ring) p.\n     ring_powerseries r p\n     ==> poly_deriv r (poly_neg r p) = poly_neg r (poly_deriv r p)
       #|  forall(r:A ring) p q.\n     ring_powerseries r p /\\ ring_powerseries r q\n     ==> poly_deriv r (poly_sub r p q) =\n         poly_sub r (poly_deriv r p) (poly_deriv r q)
       #|  forall(r:A ring) c p.\n     c IN ring_carrier r /\\ ring_powerseries r p\n     ==> poly_deriv r (poly_mul r (poly_const r c) p) =\n         poly_mul r (poly_const r c) (poly_deriv r p)
       #|  forall(k:A ring) (l:B ring) (h:A->B) (p:(1->num)->A).\n    ring_homomorphism(k,l) h /\\ ring_powerseries k p\n    ==> poly_deriv l (h o p) = h o poly_deriv k p
-      #|  n + 1 = i + (n - i + 1)
-      #|  (n + 1) - i = n - i + 1
-      #|  i:num
+      #|  (n : Num) + 1 == (i : Num) + (n - i + 1)
+      #|  (n : Num) + 1 - (i : Num) == n - i + 1
+      #|  (i : Num)
       #|  t0' = t0 /\\ t1' = t1 /\\ ring_add r s2 s3 = s1\n      ==> ring_add r t0 (ring_add r s1 t1) =\n          ring_add r (ring_add r s2 t1') (ring_add r t0' s3)
-      #|  0 < n + 1 /\\ 0 + 1 <= n + 1
+      #|  0 < (n : Num) + 1 && 0 + 1 <= n + 1
       #|  1
-      #|  n - i = (n + 1) - (i + 1)
-      #|  n:num
+      #|  (n : Num) - (i : Num) == n + 1 - (i + 1)
+      #|  (n : Num)
       #|  forall(r:A ring) p q.\n        ring_powerseries r p /\\ ring_powerseries r q\n        ==> poly_deriv r (poly_mul r p q) =\n            poly_add r (poly_mul r (poly_deriv r p) q)\n                       (poly_mul r p (poly_deriv r q))
-      #|  d:num
+      #|  (d : Num)
       #|  forall(r:A ring) (f:B->(1->num)->A) s.\n        FINITE s /\\ (forall x. x IN s ==> ring_powerseries r (f x))\n        ==> poly_deriv r (ring_sum (powser_ring r (:1)) s f) =\n            ring_sum (powser_ring r (:1)) s (\\x. poly_deriv r (f x))
       #|  ~(i IN k) /\\ j IN k ==> (i INSERT k) DELETE j = i INSERT (k DELETE j)
-      #|  ~(i IN k) ==> (i INSERT k) DELETE i = k
-      #|  k:K->bool
-      #|  i:K
+      #|  !IN((i : _), (k : (_) -> Bool)) \226\134\146 DELETE(INSERT(i, k), i) == k
+      #|  (k : (K) -> Bool)
+      #|  (i : K)
       #|  forall(r:A ring) (f:K->(1->num)->A) s.\n        FINITE s /\\ (forall x. x IN s ==> ring_powerseries r (f x))\n        ==> poly_deriv r (ring_product (powser_ring r (:1)) s f) =\n            ring_sum (powser_ring r (:1)) s\n               (\\x. poly_mul r (poly_deriv r (f x))\n                    (ring_product (powser_ring r (:1))\n                                  (s DELETE x) f))
-      #|  1..n
-      #|  (\\i. p):num->(1->num)->A
-      #|  r:A ring
+      #|  op_dot_dot(1, (n : Num))
+      #|  (i : Num) => (p : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
       #|  forall(r:A ring) (p:(1->num)->A) n.\n        ring_powerseries r p\n        ==> poly_deriv r (poly_pow r p n) =\n            poly_mul r (poly_const r (ring_of_num r n))\n                       (poly_mul r (poly_deriv r p) (poly_pow r p (n - 1)))
-      #|  n:num
-      #|  poly_var (r:A ring) (one:1)
-      #|  r:A ring
+      #|  (n : Num)
+      #|  poly_var((r : Ring[A]), one)
+      #|  (r : Ring[A])
       #|  forall(r:A ring) n.\n    poly_deriv r (poly_pow r (poly_var r one) n) =\n    ring_mul (poly_ring r (:1))\n      (poly_const r (ring_of_num r n))\n      (poly_pow r (poly_var r one) (n - 1))
-      #|  (:1)
-      #|  d <= d' /\\ ~(d = 0) ==> d' <= d - 1 ==> F
-      #|  p:(1->num)->A
-      #|  r:A ring
-      #|  ~p ==> p \\/ q ==> q
+      #|  (UNIV : (Unit) -> Bool)
+      #|  (d : Num) <= (d' : Num) && !(d == 0) \226\134\146 d' <= d - 1 \226\134\146 false
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  !(p : Bool) \226\134\146 p || (q : Bool) \226\134\146 q
       #|  forall(r:A ring) p.\n    integral_domain r /\\ ring_char r = 0 /\\\n    ring_irreducible(poly_ring r (:1)) p /\\ ~(poly_deg r p = 0)\n    ==> ring_coprime(poly_ring r (:1)) (p, poly_deriv r p)
       #|  forall(k:A ring) p.\n        field k /\\ ring_char k = 0 /\\\n        ring_irreducible(poly_ring k (:1)) p\n        ==> ring_coprime(poly_ring k (:1)) (p, poly_deriv k p)
-      #|  R = poly_ring (r:A ring) (:1)
+      #|  (R : Ring[((Unit) -> Num) -> A]) == poly_ring((r : Ring[A]), UNIV)
       #|  poly_add r (poly_mul r (poly_const r (ring_of_num r 2:A))\n                           (poly_mul r (poly_deriv r p) q))\n               (poly_mul r p (poly_deriv r q)):(1->num)->A
-      #|  q:(1->num)->A
+      #|  (q : ((Unit) -> Num) -> A)
       #|  forall(r:A ring) (p:(1->num)->A) f.\n        ring_polynomial r p /\\\n        ring_divides (poly_ring r (:1)) (poly_pow r p 2) f\n        ==> ring_divides (poly_ring r (:1)) p (poly_deriv r f)
-      #|  d:(1->num)->A
+      #|  (d : ((Unit) -> Num) -> A)
       #|  forall(r:A ring) p a.\n    a IN ring_carrier r /\\\n    ring_divides (poly_ring r (:1))\n         (poly_pow r (poly_sub r (poly_var r one) (poly_const r a)) 2) p\n    ==> poly_eval r (poly_deriv r p) a = ring_0 r
       #|  ring_divides (poly_ring (k:A ring) (:1))\n      (q:(1->num)->A) (poly_deriv k p)
-      #|  ring_pow (poly_ring (k:A ring) (:1)) (q:(1->num)->A) 2
+      #|  ring_pow(poly_ring((k : Ring[A]), UNIV), (q : ((Unit) -> Num) -> A), 2)
       #|  ring_divides (poly_ring (k:A ring) (:1)) (q:(1->num)->A) (p:(1->num)->A)
-      #|  q:(1->num)->A
+      #|  (q : ((Unit) -> Num) -> A)
       #|  forall(k:A ring) p.\n        ring_coprime(poly_ring k (:1)) (p, poly_deriv k p)\n        ==> ring_squarefree (poly_ring k (:1)) p
-      #|  R = poly_ring (k:A ring) (:1)
+      #|  (R : Ring[((Unit) -> Num) -> A]) == poly_ring((k : Ring[A]), UNIV)
       #|  ring_sub (poly_ring (k:A ring) (:1)) d (poly_deriv k s)
-      #|  d:(1->num)->A
-      #|  s:(1->num)->A
-      #|  p:(1->num)->A
-      #|  k:A ring
-      #|  poly_deriv (k:A ring) p
-      #|  p:(1->num)->A
-      #|  k:A ring
-      #|  s:(1->num)->A
+      #|  (d : ((Unit) -> Num) -> A)
+      #|  (s : ((Unit) -> Num) -> A)
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (k : Ring[A])
+      #|  poly_deriv((k : Ring[A]), (p : ((Unit) -> Num) -> A))
+      #|  (p : ((Unit) -> Num) -> A)
+      #|  (k : Ring[A])
+      #|  (s : ((Unit) -> Num) -> A)
       #|  forall(k:A ring) (p:(1->num)->A) f.\n        field k /\\ ring_char k = 0 /\\\n        ring_irreducible (poly_ring k (:1)) p\n        ==> (ring_divides (poly_ring k (:1)) p f /\\\n             ring_divides (poly_ring k (:1)) p (poly_deriv k f) <=>\n             ring_divides (poly_ring k (:1)) (poly_pow k p 2) f)
-      #|  q:(1->num)->A
-      #|  q:(1->num)->A
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  d:(1->num)->A
-      #|  poly_ring (k:A ring) (:1)
-      #|  p <=> ~p ==> F
-      #|  d = ring_0(poly_ring (k:A ring) (:1))
-      #|  d:(1->num)->A
+      #|  (q : ((Unit) -> Num) -> A)
+      #|  (q : ((Unit) -> Num) -> A)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (d : ((Unit) -> Num) -> A)
+      #|  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((k : Ring[A]), (UNIV : (Unit) -> Bool))
+      #|  (p : Bool) == (!p \226\134\146 false)
+      #|  (d : ((Unit) -> Num) -> A) == ring_0(poly_ring((k : Ring[A]), UNIV))
+      #|  (d : ((Unit) -> Num) -> A)
       #|  forall(k:A ring) p.\n        field k /\\ ring_char k = 0 /\\\n        ring_squarefree (poly_ring k (:1)) p\n        ==> ring_coprime(poly_ring k (:1)) (p, poly_deriv k p)
       #|  forall(k:A ring) p.\n    field k /\\ ring_char k = 0\n    ==> (ring_coprime(poly_ring k (:1)) (p, poly_deriv k p) <=>\n         ring_squarefree (poly_ring k (:1)) p)
-      #|  d + q < 2 * d + q <=> ~(d = 0)
+      #|  ((d : Num) + (q : Num) < 2 * d + q) == !(d == 0)
       #|  poly_deg k (d:(1->num)->A) + poly_deg k (q:(1->num)->A)
-      #|  x:A
+      #|  (x : A)
       #|  CARD{x | x IN ring_carrier k /\\ poly_eval k (d:(1->num)->A) x = ring_0 k} +\n    CARD{x | x IN ring_carrier k /\\ poly_eval k (q:(1->num)->A) x = ring_0 k}
-      #|  a:num = b ==> a < b ==> F
-      #|  (~p ==> F) ==> p
-      #|  q:(1->num)->A = ring_0 (poly_ring k (:1))
-      #|  d:(1->num)->A = ring_0 (poly_ring k (:1))
-      #|  q:(1->num)->A
-      #|  d:(1->num)->A
+      #|  (a : Num) == (b : Num) \226\134\146 a < b \226\134\146 false
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  (q : ((Unit) -> Num) -> A) == ring_0(poly_ring((k : Ring[A]), UNIV))
+      #|  (d : ((Unit) -> Num) -> A) == ring_0(poly_ring((k : Ring[A]), UNIV))
+      #|  (q : ((Unit) -> Num) -> A)
+      #|  (d : ((Unit) -> Num) -> A)
       #|  forall(k:A ring) p.\n    field k /\\\n    p IN ring_carrier (poly_ring k (:1)) /\\\n    ~(p = ring_0 (poly_ring k (:1))) /\\\n    CARD {x | x IN ring_carrier k /\\ poly_eval k p x = ring_0 k} = poly_deg k p\n    ==> ring_squarefree (poly_ring k (:1)) p
-      #|  (poly_const r (pp:A)):(V->num)->A
-      #|  poly_ring (r:A ring) (s:V->bool)
+      #|  (poly_const : (Ring[A], A, (V) -> Num) -> A)((r : Ring[A]), (pp : A))
+      #|  poly_ring((r : Ring[A]), (s : (V) -> Bool))
       #|  ring_mul (poly_ring r (s:V->bool)) (poly_const r (dd:A)) (a:(V->num)->A) =\n    ring_mul (poly_ring r s) (f:(V->num)->A) (h':(V->num)->A)
-      #|  h':(V->num)->A
-      #|  h:(V->num)->A
-      #|  f:(V->num)->A
+      #|  (h' : ((V) -> Num) -> A)
+      #|  (h : ((V) -> Num) -> A)
+      #|  (f : ((V) -> Num) -> A)
       #|  ring_prime (poly_ring r (s:V->bool)) (poly_const r (pp:A))
-      #|  h:(V->num)->A
+      #|  (h : ((V) -> Num) -> A)
       #|  ring_mul (poly_ring r (s:V->bool))\n     (poly_const r (ring_mul r (pp:A) dd)) a =\n    ring_mul (poly_ring r s) (poly_const r pp)\n     (ring_mul (poly_ring r s) (poly_const r dd) (a:(V->num)->A))
-      #|  dd:A
-      #|  pp:A
+      #|  (dd : A)
+      #|  (pp : A)
       #|  ring_mul (poly_ring r (s:V->bool))\n    (poly_const r (u:A)) (a:(V->num)->A)
-      #|  u:A
-      #|  c:A
+      #|  (u : A)
+      #|  (c : A)
       #|  forall c:A. c IN ring_carrier r\n   ==> (c = ring_0 r \\/\n        (ring_divides (poly_ring r (s:V->bool)) f\n          (ring_mul (poly_ring r s) (poly_const r c) a)\n         ==> ring_divides (poly_ring r s) f a))
       #|  forall(r:A ring) (s:V->bool) f a c.\n     UFD r /\\ f IN ring_carrier(poly_ring r s) /\\\n     a IN ring_carrier(poly_ring r s) /\\ c IN ring_carrier r /\\\n     (forall p. ring_prime r p\n          ==> ~ring_divides (poly_ring r s)\n                ((poly_const r p):(V->num)->A) f) /\\\n     ring_divides (poly_ring r s) f\n       (ring_mul (poly_ring r s) (poly_const r c) a)\n     ==> c = ring_0 r \\/ ring_divides (poly_ring r s) f a
       #|  poly_deg (r:A ring) (ff:(1->num)->A) =\n       poly_deg r (poly_const r (pp:A):(1->num)->A) +\n       poly_deg r (x:(1->num)->A)
       #|  (pp:A) IN ring_carrier r /\\ ~(pp = ring_0 r) /\\\n       (x:(1->num)->A) IN j /\\ ~(x = ring_0(poly_ring (r:A ring) (:1)))
-      #|  x:(1->num)->A
+      #|  (x : ((Unit) -> Num) -> A)
       #|  forall(r:A ring) j (ff:(1->num)->A) pp.\n       integral_domain r /\\ prime_ideal (poly_ring r (:1)) j /\\\n       (forall c:A. c IN ring_carrier r /\\\n         (poly_const r c:(1->num)->A) IN j ==> c = ring_0 r) /\\\n       ff IN ring_carrier(poly_ring r (:1)) /\\ ff IN j /\\\n       ~(ff = ring_0(poly_ring r (:1))) /\\ ring_prime r pp /\\\n       ring_divides (poly_ring r (:1)) (poly_const r pp:(1->num)->A) ff\n       ==> ?ff':(1->num)->A.\n         ff' IN ring_carrier(poly_ring r (:1)) /\\ ff' IN j /\\\n         ~(ff' = ring_0(poly_ring r (:1))) /\\\n         poly_deg r ff' = poly_deg r ff /\\\n         ff = ring_mul (poly_ring r (:1)) (poly_const r pp) ff'
-      #|  f:(1->num)->A
-      #|  (f:(1->num)->A) (\\v:1. poly_deg r f)
-      #|  ff':(1->num)->A
+      #|  (f : ((Unit) -> Num) -> A)
+      #|  (f : ((Unit) -> Num) -> A)((v : Unit) => poly_deg((r : Ring[A]), f))
+      #|  (ff' : ((Unit) -> Num) -> A)
       #|  (a:A) = ring_mul (r:A ring) pp\n      ((ff':(1->num)->A) (\\v:1. poly_deg r ff'))
-      #|  (ff':(1->num)->A) (\\v:1. poly_deg r ff')
+      #|  (ff' : ((Unit) -> Num) -> A)((v : Unit) => poly_deg((r : Ring[A]), ff'))
       #|  (ff':(1->num)->A) (\\v:1. poly_deg r ff') IN ring_carrier (r:A ring) /\\\n      ~(ff' (\\v:1. poly_deg r ff') = ring_0 (r:A ring))
       #|  forall m:(1->num). (ff:(1->num)->A) m =\n     ring_mul (r:A ring) pp ((ff':(1->num)->A) m)
       #|  (pp:A) IN ring_carrier r /\\ ~ring_unit (r:A ring) (pp:A)
-      #|  ff':(1->num)->A
-      #|  pp:A
-      #|  ff:(1->num)->A
-      #|  j:((1->num)->A)->bool
-      #|  r:A ring
-      #|  pp:A
-      #|  ff:(1->num)->A
+      #|  (ff' : ((Unit) -> Num) -> A)
+      #|  (pp : A)
+      #|  (ff : ((Unit) -> Num) -> A)
+      #|  (j : (((Unit) -> Num) -> A) -> Bool)
+      #|  (r : Ring[A])
+      #|  (pp : A)
+      #|  (ff : ((Unit) -> Num) -> A)
       #|  forall p:A. ring_prime r p ==>\n     ~ring_divides (poly_ring r (:1)) (poly_const r p :(1->num)->A) ff
-      #|  ff:(1->num)->A
-      #|  a:A
+      #|  (ff : ((Unit) -> Num) -> A)
+      #|  (a : A)
       #|  forall(a:A). a IN ring_carrier r ==>\n       forall(ff:(1->num)->A).\n         ff IN ring_carrier(poly_ring r (:1)) /\\ ff IN j /\\\n         ~(ff = ring_0(poly_ring r (:1))) /\\ ff(\\v:1. poly_deg r ff) = a\n         ==> ?(g:(1->num)->A).\n           g IN ring_carrier(poly_ring r (:1)) /\\ g IN j /\\\n           ~(g = ring_0(poly_ring r (:1))) /\\\n           (forall p:A. ring_prime r p ==>\n             ~ring_divides (poly_ring r (:1))\n               (poly_const r p :(1->num)->A) g) /\\\n           poly_deg r g = poly_deg r ff
       #|  forall(r:A ring) j (f:(1->num)->A).\n     UFD r /\\ prime_ideal (poly_ring r (:1)) j /\\\n     (forall c:A. c IN ring_carrier r /\\\n       (poly_const r c:(1->num)->A) IN j ==> c = ring_0 r) /\\\n     f IN ring_carrier(poly_ring r (:1)) /\\ f IN j /\\\n     ~(f = ring_0(poly_ring r (:1)))\n     ==> ?g:(1->num)->A.\n           g IN ring_carrier(poly_ring r (:1)) /\\ g IN j /\\\n           ~(g = ring_0(poly_ring r (:1))) /\\\n           (forall p. ring_prime r p\n                ==> ~ring_divides (poly_ring r (:1)) (poly_const r p) g) /\\\n           poly_deg r g = poly_deg r f
-      #|  f:(1->num)->A
-      #|  (f:(1->num)->A) (\\v:1. poly_deg r f)
-      #|  g:(1->num)->A
-      #|  poly_const r (c':A):(1->num)->A
-      #|  poly_const r (q:A):(1->num)->A
-      #|  poly_ring (r:A ring) (:1)
-      #|  c':A
-      #|  q:A
-      #|  r:A ring
-      #|  g:(1->num)->A
-      #|  ring_mul r (q:A) c'
-      #|  g:(1->num)->A
-      #|  c':A
-      #|  ff':(1->num)->A
+      #|  (f : ((Unit) -> Num) -> A)
+      #|  (f : ((Unit) -> Num) -> A)((v : Unit) => poly_deg((r : Ring[A]), f))
+      #|  (g : ((Unit) -> Num) -> A)
+      #|  (poly_const : (Ring[A], A, (Unit) -> Num) -> A)((r : Ring[A]), (c' : A))
+      #|  (poly_const : (Ring[A], A, (Unit) -> Num) -> A)((r : Ring[A]), (q : A))
+      #|  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool))
+      #|  (c' : A)
+      #|  (q : A)
+      #|  (r : Ring[A])
+      #|  (g : ((Unit) -> Num) -> A)
+      #|  ring_mul((r : Ring[A]), (q : A), (c' : A))
+      #|  (g : ((Unit) -> Num) -> A)
+      #|  (c' : A)
+      #|  (ff' : ((Unit) -> Num) -> A)
       #|  (a:A) = ring_mul (r:A ring) q\n      ((ff':(1->num)->A) (\\v:1. poly_deg r ff'))
-      #|  (ff':(1->num)->A) (\\v:1. poly_deg r ff')
+      #|  (ff' : ((Unit) -> Num) -> A)((v : Unit) => poly_deg((r : Ring[A]), ff'))
       #|  (ff':(1->num)->A) (\\v:1. poly_deg r ff') IN\n     ring_carrier (r:A ring) /\\\n     ~(ff' (\\v:1. poly_deg r ff') = ring_0 (r:A ring))
       #|  poly_deg (r:A ring) (ff:(1->num)->A) =\n       poly_deg r (poly_const r (q:A):(1->num)->A) +\n       poly_deg r (ff':(1->num)->A)
       #|  poly_deg r (ff':(1->num)->A) =\n     poly_deg r (ff:(1->num)->A)
       #|  forall m:(1->num). (ff:(1->num)->A) m =\n     ring_mul (r:A ring) q ((ff':(1->num)->A) m)
-      #|  ~(ff' = ring_0(poly_ring r (:1)):(1->num)->A)
+      #|  !((ff' : ((Unit) -> Num) -> A) == ring_0(poly_ring((r : Ring[A]), UNIV)))
       #|  (q:A) IN ring_carrier r /\\ ~(q = ring_0 r) /\\\n     ~ring_unit r q
-      #|  ff':(1->num)->A
-      #|  q:A
+      #|  (ff' : ((Unit) -> Num) -> A)
+      #|  (q : A)
       #|  poly_const r (ring_1 (r:A ring)):(1->num)->A =\n        ring_1(poly_ring r (:1))
-      #|  ff:(1->num)->A
-      #|  ring_1 r:A
+      #|  (ff : ((Unit) -> Num) -> A)
+      #|  ring_1((r : Ring[A]))
       #|  forall p:A. ring_prime r p ==>\n     ~ring_divides (poly_ring r (:1))\n       (poly_const r p :(1->num)->A) ff
-      #|  ff:(1->num)->A
-      #|  a:A
+      #|  (ff : ((Unit) -> Num) -> A)
+      #|  (a : A)
       #|  forall(a:A). a IN ring_carrier (r:A ring) ==>\n     forall(ff:(1->num)->A).\n       ff IN ring_carrier(poly_ring r (:1)) /\\\n       ~(ff = ring_0(poly_ring r (:1))) /\\\n       ff(\\v:1. poly_deg r ff) = a\n       ==> ?(c:A) (g:(1->num)->A).\n             c IN ring_carrier r /\\ ~(c = ring_0 r) /\\\n             g IN ring_carrier(poly_ring r (:1)) /\\\n             ~(g = ring_0(poly_ring r (:1))) /\\\n             ff = ring_mul (poly_ring r (:1))\n               (poly_const r c) g /\\\n             poly_deg r g = poly_deg r ff /\\\n             (forall p:A. ring_prime r p ==>\n               ~ring_divides (poly_ring r (:1))\n                 (poly_const r p :(1->num)->A) g)
       #|  forall(r:A ring) (f:(1->num)->A).\n     UFD r /\\\n     f IN ring_carrier(poly_ring r (:1)) /\\\n     ~(f = ring_0(poly_ring r (:1)))\n     ==> ?(c:A) (g:(1->num)->A).\n           c IN ring_carrier r /\\ ~(c = ring_0 r) /\\\n           g IN ring_carrier(poly_ring r (:1)) /\\\n           ~(g = ring_0(poly_ring r (:1))) /\\\n           f = ring_mul (poly_ring r (:1)) (poly_const r c) g /\\\n           poly_deg r g = poly_deg r f /\\\n           (forall p. ring_prime r p\n                ==> ~ring_divides (poly_ring r (:1))\n                      (poly_const r p) g)
-      #|  t:V->bool
+      #|  (t : (V) -> Bool)
       #|  monomial_restrict (u:V->bool) (m:V->num) = monomial_1
-      #|  monomial (s:V->bool) (m:V->num)
-      #|  m:V->num
+      #|  monomial((s : (V) -> Bool), (m : (V) -> Num))
+      #|  (m : (V) -> Num)
       #|  forall(r:A ring) (t:V->bool) u s (q:(V->num)->A).\n          DISJOINT t u /\\ t UNION u = s /\\ q IN ring_carrier (poly_ring r t)\n          ==> (\\p m.\n                   if monomial s m\n                   then p (monomial_restrict u m) (monomial_restrict t m)\n                   else ring_0 r)\n              (poly_const (poly_ring r t) q) = q
-      #|  q:(V->num)->A
-      #|  s:V->bool
-      #|  u:V->bool
-      #|  t:V->bool
-      #|  r:A ring
+      #|  (q : ((V) -> Num) -> A)
+      #|  (s : (V) -> Bool)
+      #|  (u : (V) -> Bool)
+      #|  (t : (V) -> Bool)
+      #|  (r : Ring[A])
       #|  poly_const (poly_ring r (t:V->bool) :((V->num)->A) ring)\n          (q:(V->num)->A) :(V->num)->(V->num)->A
-      #|  u:V->bool
-      #|  t:V->bool
-      #|  r:A ring
+      #|  (u : (V) -> Bool)
+      #|  (t : (V) -> Bool)
+      #|  (r : Ring[A])
       #|  ring_isomorphism\n     (poly_ring (poly_ring r (t:V->bool) :((V->num)->A) ring) u,\n      poly_ring r (s:V->bool) :((V->num)->A) ring)\n     (\\p (m:V->num).\n       if monomial s m\n       then (p:(V->num)->(V->num)->A)\n             (monomial_restrict u m) (monomial_restrict t m)\n       else ring_0 r)
-      #|  q:(V->num)->A
-      #|  u:V->bool
-      #|  poly_ring r (t:V->bool) :((V->num)->A) ring
-      #|  (q:(V->num)->A) IN ring_carrier(poly_ring r t)
-      #|  DISJOINT (t:V->bool) u /\\ t UNION u = s
-      #|  u = s DIFF (t:V->bool)
+      #|  (q : ((V) -> Num) -> A)
+      #|  (u : (V) -> Bool)
+      #|  poly_ring((r : Ring[A]), (t : (V) -> Bool))
+      #|  IN((q : ((V) -> Num) -> A), ring_carrier(poly_ring((r : Ring[A]), (t : (V) -> Bool))))
+      #|  DISJOINT((t : (V) -> Bool), (u : (V) -> Bool)) && UNION(t, u) == (s : (V) -> Bool)
+      #|  (u : (V) -> Bool) == DIFF((s : (V) -> Bool), (t : (V) -> Bool))
       #|  forall(r:A ring) (t:V->bool) s (q:(V->num)->A).\n     t SUBSET s /\\ ring_prime (poly_ring r t) q\n     ==> ring_prime (poly_ring r s) q
-      #|  ideal_generated (poly_ring r (:1)) {g:(1->num)->A} = j
-      #|  g:(1->num)->A
+      #|  ideal_generated(poly_ring((r : Ring[A]), UNIV), {(g : ((Unit) -> Num) -> A)}) == (j : (((Unit) -> Num) -> A) -> Bool)
+      #|  (g : ((Unit) -> Num) -> A)
       #|  (x:(1->num)->A) IN ring_carrier rr /\\ y IN ring_carrier rr\n         ==> x = ring_add rr (ring_sub rr x y) y
       #|  ring_mul (poly_ring r (:1)) (poly_const r aa) hh =\n        ring_add (poly_ring r (:1)) hh'\n         (ring_mul (poly_ring r (:1)) qterm (g:(1->num)->A)):(1->num)->A
-      #|  hh':(1->num)->A
-      #|  ~(nn = 0) /\\ x <= nn - 1 ==> x < nn
+      #|  (hh' : ((Unit) -> Num) -> A)
+      #|  !((nn : Num) == 0) && (x : Num) <= nn - 1 \226\134\146 x < nn
       #|  s:num < m ==> m <= n /\\ q <= n - m ==> q + s <= n - 1
       #|  poly_deg r (qg:(1->num)->A) <\n           poly_deg r (g:(1->num)->A)
       #|  qg:(1->num)->A = ring_0(poly_ring r (:1))
       #|  poly_deg r (ring_mul (poly_ring r (:1))\n          qterm (qg:(1->num)->A)) <= nn - 1
-      #|  poly_deg r (qhh:(1->num)->A)
-      #|  poly_deg r (qhh:(1->num)->A) < nn
+      #|  poly_deg((r : Ring[A]), (qhh : ((Unit) -> Num) -> A))
+      #|  poly_deg((r : Ring[A]), (qhh : ((Unit) -> Num) -> A)) < (nn : Num)
       #|  qhh:(1->num)->A = ring_0(poly_ring r (:1))
       #|  poly_deg r (ring_mul (poly_ring r (:1))\n          (poly_const r aa) (qhh:(1->num)->A)) <= nn - 1
       #|  ~((g:(1->num)->A) =\n               ring_0(poly_ring r (:1)))
-      #|  (c0:A) = ring_0 r
-      #|  c0:A
+      #|  (c0 : A) == ring_0((r : Ring[A]))
+      #|  (c0 : A)
       #|  (g:(1->num)->A) IN ring_carrier(poly_ring r (:1))
-      #|  ~(poly_deg (r:A ring) (g:(1->num)->A) = 0)
+      #|  !(poly_deg((r : Ring[A]), (g : ((Unit) -> Num) -> A)) == 0)
       #|  ~(nn = 0) /\\\n          kk + poly_deg (r:A ring) (g:(1->num)->A) = nn
       #|  ring_mul (rr:(((1->num)->A)ring)) xk xdg = xn\n           ==> ring_sub rr\n            (ring_mul rr a (ring_add rr (ring_mul rr b xn) t))\n            (ring_mul rr (ring_mul rr b xk)\n             (ring_add rr (ring_mul rr a xdg) s)) =\n           ring_sub rr (ring_mul rr a t)\n            (ring_mul rr (ring_mul rr b xk) s)
       #|  (hh':(1->num)->A) =\n          ring_sub (poly_ring r (:1))\n           (ring_mul (poly_ring r (:1)) (poly_const r aa) qhh)\n           (ring_mul (poly_ring r (:1)) qterm (qg:(1->num)->A))
       #|  ring_mul (poly_ring r (:1))\n           (ring_pow (poly_ring r (:1)) (poly_var r (one:1)) kk)\n           (ring_pow (poly_ring r (:1)) (poly_var r one)\n             (poly_deg (r:A ring) (g:(1->num)->A))) =\n          ring_pow (poly_ring r (:1)) (poly_var r one) nn
-      #|  qhh:(1->num)->A
-      #|  hh:(1->num)->A
-      #|  r:A ring
-      #|  qg:(1->num)->A
-      #|  g:(1->num)->A
-      #|  r:A ring
-      #|  poly_deg r (hh':(1->num)->A)
-      #|  hh':(1->num)->A = ring_0(poly_ring r (:1))
+      #|  (qhh : ((Unit) -> Num) -> A)
+      #|  (hh : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  (qg : ((Unit) -> Num) -> A)
+      #|  (g : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  poly_deg((r : Ring[A]), (hh' : ((Unit) -> Num) -> A))
+      #|  (hh' : ((Unit) -> Num) -> A) == ring_0(poly_ring((r : Ring[A]), UNIV))
       #|  ring_divides (poly_ring r (:1))\n        (g:(1->num)->A) (hh':(1->num)->A)
       #|  (hh':(1->num)->A) IN\n        ring_carrier(poly_ring r (:1)) /\\ hh' IN j
       #|  (qterm:(1->num)->A) IN\n        ring_carrier(poly_ring r (:1))
       #|  hh':(1->num)->A = ring_sub (poly_ring r (:1))\n        (ring_mul (poly_ring r (:1)) (poly_const r aa) hh)\n        (ring_mul (poly_ring r (:1)) qterm (g:(1->num)->A))
       #|  qterm:(1->num)->A = ring_mul (poly_ring r (:1))\n        (poly_const r bb) (ring_pow (poly_ring r (:1))\n          (poly_var r (one:1)) kk)
-      #|  aa:A
-      #|  hh:(1->num)->A
-      #|  g:(1->num)->A
-      #|  (:1)
-      #|  r:A ring
+      #|  (aa : A)
+      #|  (hh : ((Unit) -> Num) -> A)
+      #|  (g : ((Unit) -> Num) -> A)
+      #|  (UNIV : (Unit) -> Bool)
+      #|  (r : Ring[A])
       #|  ring_divides (poly_ring r (:1)) (g:(1->num)->A)\n         (ring_mul (poly_ring r (:1)) (poly_const r aa) hh)
       #|  (aa:A) IN ring_carrier r /\\ ~(aa = ring_0 (r:A ring)) /\\\n        (bb:A) IN ring_carrier r /\\ ~(bb = ring_0 (r:A ring))
-      #|  kk = nn - poly_deg r (g:(1->num)->A)
-      #|  bb:A = (hh:(1->num)->A) (\\v:1. poly_deg r hh)
-      #|  aa:A = (g:(1->num)->A) (\\v:1. poly_deg r g)
+      #|  (kk : Num) == (nn : Num) - poly_deg((r : Ring[A]), (g : ((Unit) -> Num) -> A))
+      #|  (bb : A) == (hh : ((Unit) -> Num) -> A)((v : Unit) => poly_deg((r : Ring[A]), hh))
+      #|  (aa : A) == (g : ((Unit) -> Num) -> A)((v : Unit) => poly_deg((r : Ring[A]), g))
       #|  poly_deg r (g:(1->num)->A) <=\n        poly_deg r (hh:(1->num)->A)
-      #|  hh:(1->num)->A = ring_0(poly_ring r (:1))
+      #|  (hh : ((Unit) -> Num) -> A) == ring_0(poly_ring((r : Ring[A]), UNIV))
       #|  (hh:(1->num)->A) IN\n        ring_carrier(poly_ring r (:1))
-      #|  hh:(1->num)->A
-      #|  nn:num
+      #|  (hh : ((Unit) -> Num) -> A)
+      #|  (nn : Num)
       #|  forall nn (hh:(1->num)->A). hh IN j /\\ poly_deg (r:A ring) hh = nn\n          ==> ring_divides (poly_ring r (:1)) (g:(1->num)->A) hh
-      #|  g:(1->num)->A
-      #|  h0:(1->num)->A
-      #|  g0:(1->num)->A
-      #|  g0:(1->num)->A
-      #|  f:(1->num)->A
-      #|  j:((1->num)->A)->bool
-      #|  r:A ring
+      #|  (g : ((Unit) -> Num) -> A)
+      #|  (h0 : ((Unit) -> Num) -> A)
+      #|  (g0 : ((Unit) -> Num) -> A)
+      #|  (g0 : ((Unit) -> Num) -> A)
+      #|  (f : ((Unit) -> Num) -> A)
+      #|  (j : (((Unit) -> Num) -> A) -> Bool)
+      #|  (r : Ring[A])
       #|  ?g:(1->num)->A.\n          g IN ring_carrier(poly_ring r (:1)) /\\ g IN j /\\\n          ~(g = ring_0(poly_ring r (:1))) /\\\n          (forall p. ring_prime r p\n               ==> ~ring_divides (poly_ring r (:1)) (poly_const r p) g) /\\\n          (forall h. h IN j /\\ ~(h = ring_0(poly_ring r (:1)))\n               ==> poly_deg r g <= poly_deg r h)
-      #|  poly_deg r (h:(1->num)->A)
-      #|  f0:(1->num)->A
-      #|  f0:(1->num)->A
-      #|  n:num
-      #|  poly_ring (r:A ring) (:1)
+      #|  poly_deg((r : Ring[A]), (h : ((Unit) -> Num) -> A))
+      #|  (f0 : ((Unit) -> Num) -> A)
+      #|  (f0 : ((Unit) -> Num) -> A)
+      #|  (n : Num)
+      #|  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool))
       #|  ?n. ?f:(1->num)->A. f IN ring_carrier(poly_ring r (:1)) /\\\n           f IN j /\\ ~(f = ring_0(poly_ring r (:1))) /\\\n           poly_deg r f = n
       #|  ?f:(1->num)->A.\n          f IN ring_carrier(poly_ring r (:1)) /\\ f IN j /\\\n          ~(f = ring_0(poly_ring r (:1))) /\\\n          forall h. h IN j /\\ ~(h = ring_0(poly_ring r (:1)))\n              ==> poly_deg r f <= poly_deg r h
       #|  ring_ideal (poly_ring (r:A ring) (:1)) j /\\\n        j SUBSET ring_carrier (poly_ring r (:1))
       #|  ?g:(1->num)->A.\n         g IN ring_carrier(poly_ring r (:1)) /\\ g IN j /\\\n         ~(g = ring_0(poly_ring r (:1))) /\\\n         (forall p. ring_prime r p\n              ==> ~ring_divides (poly_ring r (:1)) (poly_const r p) g) /\\\n         (forall h. h IN j ==> ring_divides (poly_ring r (:1)) g h)
-      #|  ~(p /\\ ~q /\\ r) <=> p /\\ r ==> q
-      #|  poly_const (r:A ring) p:(1->num)->A
-      #|  p:A
-      #|  c:A
-      #|  j:((1->num)->A)->bool
-      #|  poly_const (r:A ring):A->(1->num)->A
-      #|  poly_ring (r:A ring) (:1)
-      #|  r:A ring
+      #|  !((p : Bool) && !(q : Bool) && (r : Bool)) == (p && r \226\134\146 q)
+      #|  (poly_const : (Ring[A], A, (Unit) -> Num) -> A)((r : Ring[A]), (p : A))
+      #|  (p : A)
+      #|  (c : A)
+      #|  (j : (((Unit) -> Num) -> A) -> Bool)
+      #|  (poly_const : (Ring[A], A, (Unit) -> Num) -> A)((r : Ring[A]))
+      #|  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool))
+      #|  (r : Ring[A])
       #|  prime_ideal (r:A ring)\n        {x | x IN ring_carrier r /\\ (poly_const r x:(1->num)->A) IN j} /\\\n       ~({x:A | x IN ring_carrier r /\\\n         (poly_const r x:(1->num)->A) IN j} = {ring_0 r})
-      #|  c:A
+      #|  (c : A)
       #|  ?c:A. c IN ring_carrier r /\\ ~(c = ring_0 r) /\\\n      (poly_const r c:(1->num)->A) IN j
-      #|  j:((1->num)->A)->bool
-      #|  forall(r:A ring). UFD r ==> UFD(poly_ring r (:1))
-      #|  (a:V) INSERT t = t UNION {a}
-      #|  (\\x:1. a:V)
+      #|  (j : (((Unit) -> Num) -> A) -> Bool)
+      #|  \226\136\128 r : Ring[A], (UFD : (Ring[A]) -> Bool)(r) \226\134\146 (UFD : (Ring[((Unit) -> Num) -> A]) -> Bool)((poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])(r, (UNIV : (Unit) -> Bool)))
+      #|  INSERT((a : V), (t : (V) -> Bool)) == UNION(t, {a})
+      #|  (x : Unit) => (a : V)
       #|  poly_ring (poly_ring r (t:V->bool) :((V->num)->A) ring) {a:V}
       #|  poly_ring (poly_ring r (t:V->bool) :((V->num)->A) ring) (:1)\n      isomorphic_ring poly_ring r ((a:V) INSERT t) :((V->num)->A) ring
-      #|  poly_ring r (t:V->bool) :((V->num)->A) ring
-      #|  t:V->bool
-      #|  a:V
-      #|  r:A ring
-      #|  s:V->bool
-      #|  s:V->bool
-      #|  s:V->bool
+      #|  poly_ring((r : Ring[A]), (t : (V) -> Bool))
+      #|  (t : (V) -> Bool)
+      #|  (a : V)
+      #|  (r : Ring[A])
+      #|  (s : (V) -> Bool)
+      #|  (s : (V) -> Bool)
+      #|  (s : (V) -> Bool)
       #|  forall(r:A ring) (s:V->bool).\n       UFD r /\\ FINITE s ==> UFD (poly_ring r s)
-      #|  p:(V->num)->A
-      #|  s:V->bool
-      #|  w:V->bool
-      #|  r:A ring
-      #|  p:(V->num)->A
-      #|  p:(V->num)->A
+      #|  (p : ((V) -> Num) -> A)
+      #|  (s : (V) -> Bool)
+      #|  (w : (V) -> Bool)
+      #|  (r : Ring[A])
+      #|  (p : ((V) -> Num) -> A)
+      #|  (p : ((V) -> Num) -> A)
       #|  {x:(V->num)->A |\n      x IN ring_carrier(poly_ring r w) /\\ x IN j}
-      #|  w:V->bool
-      #|  r:A ring
+      #|  (w : (V) -> Bool)
+      #|  (r : Ring[A])
       #|  ~({x:(V->num)->A | x IN ring_carrier(poly_ring r w) /\\\n                        x IN j} =\n     {ring_0(poly_ring r (w:V->bool))})
-      #|  j:((V->num)->A)->bool
-      #|  I:((V->num)->A)->((V->num)->A)
-      #|  poly_ring r (s:V->bool) :((V->num)->A) ring
+      #|  (j : (((V) -> Num) -> A) -> Bool)
+      #|  (I : (((V) -> Num) -> A, (V) -> Num) -> A)
+      #|  poly_ring((r : Ring[A]), (s : (V) -> Bool))
       #|  poly_ring r (w:V->bool) :((V->num)->A) ring
       #|  prime_ideal (poly_ring r (w:V->bool))\n    {x:(V->num)->A | x IN ring_carrier(poly_ring r w) /\\\n                      x IN j}
       #|  ring_0(poly_ring r (w:V->bool)) =\n    ring_0(poly_ring r (s:V->bool)) :(V->num)->A
-      #|  w:V->bool
-      #|  q:(V->num)->A
-      #|  s:V->bool
-      #|  r:A ring
+      #|  (w : (V) -> Bool)
+      #|  (q : ((V) -> Num) -> A)
+      #|  (s : (V) -> Bool)
+      #|  (r : Ring[A])
       #|  ?q:(V->num)->A. q IN ring_carrier(poly_ring r s) /\\\n    q IN j /\\ ~(q = ring_0(poly_ring r (s:V->bool)))
-      #|  j:((V->num)->A)->bool
+      #|  (j : (((V) -> Num) -> A) -> Bool)
       #|  forall(r:A ring) (s:V->bool). UFD r ==> UFD(poly_ring r s)
       #|  poly_const (fraction_ring (r:A ring))\n        (ring_mul (fraction_ring r)\n          ((frc:A->(A#A->bool)) c1) (frc c2)) =\n       ring_mul (poly_ring (fraction_ring r) (:1))\n        (poly_const (fraction_ring r) (frc c1))\n        (poly_const (fraction_ring r) (frc c2))
       #|  (frc:A->(A#A->bool)) c1 IN\n       ring_carrier(fraction_ring (r:A ring)) /\\\n       frc c2 IN ring_carrier(fraction_ring r)
@@ -35269,148 +35269,148 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  (a:B) IN ring_carrier r /\\ b IN ring_carrier r /\\\n      x IN ring_carrier r /\\ y IN ring_carrier r\n      ==> ring_mul r (ring_mul r a b) (ring_mul r x y) =\n          ring_mul r (ring_mul r a x) (ring_mul r b y)
       #|  ring_homomorphism (poly_ring (r:A ring) (:1),\n          poly_ring (fraction_ring r) (:1))\n         (\\p:(1->num)->A. (frc:A->(A#A->bool)) o p)
       #|  (frc:A->(A#A->bool)) o\n       ring_mul (poly_ring (r:A ring) (:1)) (g1:(1->num)->A) g2 =\n      ring_mul (poly_ring (fraction_ring r) (:1))\n        (frc o g1) (frc o g2)
-      #|  ring_mul (poly_ring r (:1)) (g1:(1->num)->A) g2
-      #|  ring_mul r c1 (c2:A)
-      #|  g2:(1->num)->A
-      #|  c2:A
-      #|  g1:(1->num)->A
-      #|  c1:A
+      #|  ring_mul(poly_ring((r : Ring[A]), UNIV), (g1 : ((Unit) -> Num) -> A), (g2 : ((Unit) -> Num) -> A))
+      #|  ring_mul((r : Ring[A]), (c1 : A), (c2 : A))
+      #|  (g2 : ((Unit) -> Num) -> A)
+      #|  (c2 : A)
+      #|  (g1 : ((Unit) -> Num) -> A)
+      #|  (c1 : A)
       #|  (a:B) IN ring_carrier r /\\ b IN ring_carrier r /\\\n      x IN ring_carrier r /\\ y IN ring_carrier r\n      ==> ring_mul r (ring_mul r a b) (ring_add r x y) =\n          ring_add r\n            (ring_mul r b (ring_mul r a x))\n            (ring_mul r a (ring_mul r b y))
       #|  ring_homomorphism (poly_ring (r:A ring) (:1),\n          poly_ring (fraction_ring r) (:1))\n         (\\p:(1->num)->A. (frc:A->(A#A->bool)) o p)
       #|  (frc:A->(A#A->bool)) o\n       ring_add (poly_ring (r:A ring) (:1))\n        (ring_mul (poly_ring r (:1)) (poly_const r c2) g1)\n        (ring_mul (poly_ring r (:1)) (poly_const r c1)\n          (g2:(1->num)->A)) =\n      ring_add (poly_ring (fraction_ring r) (:1))\n        (ring_mul (poly_ring (fraction_ring r) (:1))\n          (poly_const (fraction_ring r) ((frc:A->(A#A->bool)) c2))\n          (frc o g1))\n        (ring_mul (poly_ring (fraction_ring r) (:1))\n          (poly_const (fraction_ring r) (frc c1)) (frc o g2))
       #|  ring_add (poly_ring r (:1))\n       (ring_mul (poly_ring r (:1)) (poly_const (r:A ring) c2)\n         (g1:(1->num)->A))\n       (ring_mul (poly_ring r (:1)) (poly_const r c1) g2)
-      #|  ring_mul r c1 (c2:A)
-      #|  g2:(1->num)->A
-      #|  c2:A
-      #|  g1:(1->num)->A
-      #|  c1:A
+      #|  ring_mul((r : Ring[A]), (c1 : A), (c2 : A))
+      #|  (g2 : ((Unit) -> Num) -> A)
+      #|  (c2 : A)
+      #|  (g1 : ((Unit) -> Num) -> A)
+      #|  (c1 : A)
       #|  (frc:A->(A#A->bool)) (ring_1 r) =\n       ring_1 (fraction_ring (r:A ring))
       #|  poly_const (fraction_ring (r:A ring))\n       ((frc:A->(A#A->bool)) (ring_1 r)) =\n      ring_1 (poly_ring (fraction_ring r) (:1))
       #|  (frc:A->(A#A->bool)) o\n       (poly_var (r:A ring) (i:1) :(1->num)->A) =\n      poly_var (fraction_ring r) i
-      #|  (poly_var (r:A ring) (i:1) :(1->num)->A)
-      #|  ring_1 (r:A ring)
-      #|  i:1
-      #|  (poly_const (r:A ring) a :(1->num)->A)
-      #|  b:A
+      #|  poly_var((r : Ring[A]), (i : Unit))
+      #|  ring_1((r : Ring[A]))
+      #|  (i : Unit)
+      #|  (poly_const : (Ring[A], A, (Unit) -> Num) -> A)((r : Ring[A]), (a : A))
+      #|  (b : A)
       #|  ring_fractionate (r:A ring) {a | ring_regular r a} =\n        (frc:A->(A#A->bool))
       #|  ring_mul (fraction_ring (r:A ring))\n       ((frc:A->(A#A->bool)) b) (alpha:A#A->bool) = frc a
       #|  (frc:A->(A#A->bool)) b IN ring_carrier(fraction_ring (r:A ring))
-      #|  (b:A) IN ring_carrier r /\\ ~(b = ring_0 r)
+      #|  IN((b : A), ring_carrier((r : Ring[A]))) && !(b == ring_0(r))
       #|  (alpha:A#A->bool) IN ring_carrier(fraction_ring (r:A ring))
       #|  ?a b:A. a IN ring_carrier r /\\ ring_regular r b /\\\n       (alpha:A#A->bool) =\n       ring_localequiv r {a | ring_regular r a} (a,b)
-      #|  alpha:A#A->bool
+      #|  (alpha : ((A, A)) -> Bool)
       #|  forall c:A. c IN ring_carrier r\n     ==> (frc:A->(A#A->bool)) o\n          ((poly_const (r:A ring) c) :(1->num)->A) =\n          poly_const (fraction_ring r) ((frc:A->(A#A->bool)) c)
       #|  ring_homomorphism(r:A ring,fraction_ring r) (frc:A->(A#A->bool))
       #|  forall x:A. x IN ring_carrier r\n     ==> (frc:A->(A#A->bool)) x IN\n         ring_carrier(fraction_ring (r:A ring))
-      #|  ring_multsys (r:A ring) {a | ring_regular r a}
+      #|  ring_multsys((r : Ring[A]), {(a : A) | ring_regular(r, a)})
       #|  ring_homomorphism (poly_ring (r:A ring) (:1),\n       poly_ring (fraction_ring r) (:1))\n      (\\p:(1->num)->A. (frc:A->(A#A->bool)) o p)
       #|  ring_homomorphism(r:A ring,fraction_ring r) (frc:A->(A#A->bool))
-      #|  (:1)
-      #|  fraction_ring (r:A ring)
-      #|  q:(1->num)->(A#A->bool)
-      #|  q:(1->num)->(A#A->bool)
-      #|  frc = ring_fractionate r {a:A | ring_regular r a}
+      #|  (UNIV : (Unit) -> Bool)
+      #|  fraction_ring((r : Ring[A]))
+      #|  (q : ((Unit) -> Num, (A, A)) -> Bool)
+      #|  (q : ((Unit) -> Num, (A, A)) -> Bool)
+      #|  (frc : (A, (A, A)) -> Bool) == ring_fractionate((r : Ring[A]), {(a : A) | ring_regular(r, a)})
       #|  forall(r:A ring) q.\n     integral_domain r /\\\n     q IN ring_carrier(poly_ring (fraction_ring r) (:1))\n     ==> ?c g. c IN ring_carrier r /\\\n               ~(c = ring_0 r) /\\\n               g IN ring_carrier(poly_ring r (:1)) /\\\n               ring_mul (poly_ring (fraction_ring r) (:1))\n                 (poly_const (fraction_ring r)\n                   (ring_fractionate r\n                     {a | ring_regular r a} c))\n                 q =\n               ring_fractionate r\n                 {a | ring_regular r a} o g
-      #|  (a:A) IN ring_carrier r
-      #|  (a:A) IN ring_carrier r
-      #|  (a:A) IN ring_carrier r
-      #|  (a:A) IN ring_carrier r
-      #|  (a:A) IN ring_carrier r
-      #|  (a:A) IN ring_carrier r
-      #|  (a:A) IN ring_carrier r
-      #|  (a:A) IN ring_carrier r
-      #|  (a:A) IN ring_carrier r
-      #|  g2:(1->num)->A
-      #|  (poly_const (r:A ring) c1 :(1->num)->A)
-      #|  g1:(1->num)->A
-      #|  (poly_const (r:A ring) c2 :(1->num)->A)
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  IN((a : A), ring_carrier((r : Ring[A])))
+      #|  (g2 : ((Unit) -> Num) -> A)
+      #|  (poly_const : (Ring[A], A, (Unit) -> Num) -> A)((r : Ring[A]), (c1 : A))
+      #|  (g1 : ((Unit) -> Num) -> A)
+      #|  (poly_const : (Ring[A], A, (Unit) -> Num) -> A)((r : Ring[A]), (c2 : A))
       #|  ring_mul (poly_ring r (:1))\n            (poly_const r c1) (g2:(1->num)->A)
       #|  ring_mul (poly_ring (r:A ring) (:1))\n            (poly_const r c2) (g1:(1->num)->A)
-      #|  g2:(1->num)->A
-      #|  g1:(1->num)->A
-      #|  g:(1->num)->A
-      #|  h:(1->num)->A
+      #|  (g2 : ((Unit) -> Num) -> A)
+      #|  (g1 : ((Unit) -> Num) -> A)
+      #|  (g : ((Unit) -> Num) -> A)
+      #|  (h : ((Unit) -> Num) -> A)
       #|  ring_divides (poly_ring r (:1)) g f /\\\n      ring_divides (poly_ring r (:1)) (h:(1->num)->A) f
       #|  ring_homomorphism (poly_ring r (:1),\n            poly_ring (fraction_ring r) (:1))\n           (\\p:(1->num)->A. (frc:A->(A#A->bool)) o p)
-      #|  (frc:A->(A#A->bool)) o (h:(1->num)->A)
-      #|  (frc:A->(A#A->bool)) o (g:(1->num)->A)
+      #|  o((frc : (A, (A, A)) -> Bool), (h : ((Unit) -> Num) -> A))
+      #|  o((frc : (A, (A, A)) -> Bool), (g : ((Unit) -> Num) -> A))
       #|  ring_unit (poly_ring (fraction_ring r) (:1))\n       ((frc:A->(A#A->bool)) o (g:(1->num)->A)) \\/\n      ring_unit (poly_ring (fraction_ring r) (:1))\n       (frc o (h:(1->num)->A))
       #|  ring_divides (poly_ring r (:1))\n           (poly_const (r:A ring) p) (f:(1->num)->A)
-      #|  p:A
+      #|  (p : A)
       #|  forall p:A. ring_prime r p\n           ==> ~ring_divides (poly_ring r (:1))\n                 (poly_const r p) f
       #|  ring_divides (poly_ring r (:1))\n           (poly_const (r:A ring) p) (f:(1->num)->A)
-      #|  c:A
+      #|  (c : A)
       #|  forall m:(1->num). ring_divides (r:A ring) p ((f:(1->num)->A) m)
       #|  forall m:(1->num). ring_divides (r:A ring) c ((f:(1->num)->A) m)
-      #|  ring_divides (poly_ring r (:1)) (g':(1->num)->A) f
+      #|  ring_divides(poly_ring((r : Ring[A]), UNIV), (g' : ((Unit) -> Num) -> A), (f : ((Unit) -> Num) -> A))
       #|  ring_divides (poly_ring r (:1))\n           (poly_const (r:A ring) c) (f:(1->num)->A)
-      #|  p:A
-      #|  c:A
-      #|  r:A ring
-      #|  ring_unit r (c:A)
+      #|  (p : A)
+      #|  (c : A)
+      #|  (r : Ring[A])
+      #|  ring_unit((r : Ring[A]), (c : A))
       #|  (g':(1->num)->A) = ring_0(poly_ring (r:A ring) (:1))
       #|  c = ring_0 (r:A ring)
-      #|  ring_unit (r:A ring) (c:A)
-      #|  c:A
+      #|  ring_unit((r : Ring[A]), (c : A))
+      #|  (c : A)
       #|  ?c:(A#A->bool).\n            ring_unit (fraction_ring (r:A ring)) c /\\\n            (frc:A->(A#A->bool)) o (g':(1->num)->A) =\n            poly_const (fraction_ring r) c
-      #|  poly_deg r (g':(1->num)->A) = 0
+      #|  poly_deg((r : Ring[A]), (g' : ((Unit) -> Num) -> A)) == 0
       #|  poly_deg (fraction_ring r)\n         ((frc:A->(A#A->bool)) o (g':(1->num)->A)) = poly_deg r g'
-      #|  ring_polynomial r (g':(1->num)->A)
-      #|  g':(1->num)->A
+      #|  ring_polynomial((r : Ring[A]), (g' : ((Unit) -> Num) -> A))
+      #|  (g' : ((Unit) -> Num) -> A)
       #|  forall g':(1->num)->A.\n       g' IN ring_carrier(poly_ring r (:1)) /\\\n       ring_divides (poly_ring r (:1)) g' f /\\\n       ring_unit (poly_ring (fraction_ring r) (:1))\n         ((frc:A->(A#A->bool)) o g')\n       ==> ring_unit (poly_ring r (:1)) g'
-      #|  h:(1->num)->A
-      #|  g:(1->num)->A
-      #|  f:(1->num)->A
-      #|  \\p:(1->num)->A. (frc:A->(A#A->bool)) o p
-      #|  poly_ring (fraction_ring (r:A ring)) (:1)
-      #|  poly_ring (r:A ring) (:1)
-      #|  f:(1->num)->A
-      #|  \\p:(1->num)->A. (frc:A->(A#A->bool)) o p
-      #|  poly_ring (fraction_ring (r:A ring)) (:1)
-      #|  poly_ring (r:A ring) (:1)
-      #|  ~(f = ring_0(poly_ring (r:A ring) (:1)))
-      #|  h1:(1->num)->A
-      #|  c2:A
-      #|  h':(1->num)->(A#A->bool)
-      #|  g1:(1->num)->A
-      #|  c1:A
-      #|  g':(1->num)->(A#A->bool)
-      #|  c:A
-      #|  frc:A->(A#A->bool)
-      #|  fraction_ring (r:A ring)
-      #|  r:A ring
-      #|  field(fraction_ring (r:A ring))
+      #|  (h : ((Unit) -> Num) -> A)
+      #|  (g : ((Unit) -> Num) -> A)
+      #|  (f : ((Unit) -> Num) -> A)
+      #|  (p : ((Unit) -> Num) -> A) => o((frc : (A, (A, A)) -> Bool), p)
+      #|  (poly_ring : (Ring[((A, A)) -> Bool], (Unit) -> Bool) -> Ring[((Unit) -> Num, (A, A)) -> Bool])((fraction_ring : (Ring[A]) -> Ring[((A, A)) -> Bool])((r : Ring[A])), (UNIV : (Unit) -> Bool))
+      #|  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool))
+      #|  (f : ((Unit) -> Num) -> A)
+      #|  (p : ((Unit) -> Num) -> A) => o((frc : (A, (A, A)) -> Bool), p)
+      #|  (poly_ring : (Ring[((A, A)) -> Bool], (Unit) -> Bool) -> Ring[((Unit) -> Num, (A, A)) -> Bool])((fraction_ring : (Ring[A]) -> Ring[((A, A)) -> Bool])((r : Ring[A])), (UNIV : (Unit) -> Bool))
+      #|  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool))
+      #|  !((f : ((Unit) -> Num) -> A) == ring_0(poly_ring((r : Ring[A]), UNIV)))
+      #|  (h1 : ((Unit) -> Num) -> A)
+      #|  (c2 : A)
+      #|  (h' : ((Unit) -> Num, (A, A)) -> Bool)
+      #|  (g1 : ((Unit) -> Num) -> A)
+      #|  (c1 : A)
+      #|  (g' : ((Unit) -> Num, (A, A)) -> Bool)
+      #|  (c : A)
+      #|  (frc : (A, (A, A)) -> Bool)
+      #|  fraction_ring((r : Ring[A]))
+      #|  (r : Ring[A])
+      #|  field(fraction_ring((r : Ring[A])))
       #|  ring_unit (poly_ring (fraction_ring (r:A ring)) (:1))\n         (poly_const (fraction_ring r)\n           ((frc:A->(A#A->bool)) c) :(1->num)->(A#A->bool))
-      #|  (frc:A->(A#A->bool)) o (q:(1->num)->A)
+      #|  o((frc : (A, (A, A)) -> Bool), (q : ((Unit) -> Num) -> A))
       #|  ring_divides (poly_ring (fraction_ring (r:A ring)) (:1))\n         (b':(1->num)->(A#A->bool))\n         (poly_const (fraction_ring r)\n           ((frc:A->(A#A->bool)) c) :(1->num)->(A#A->bool))
       #|  (frc:A->(A#A->bool)) o (q:(1->num)->A) IN\n         ring_carrier(poly_ring (fraction_ring (r:A ring)) (:1))
       #|  (b':(1->num)->(A#A->bool)) IN\n         ring_carrier(poly_ring (fraction_ring (r:A ring)) (:1))
       #|  (a':(1->num)->(A#A->bool)) IN\n         ring_carrier(poly_ring (fraction_ring (r:A ring)) (:1))
       #|  ring_mul (poly_ring (fraction_ring (r:A ring)) (:1))\n         (a':(1->num)->(A#A->bool)) (b':(1->num)->(A#A->bool)) =\n         (frc:A->(A#A->bool)) o (f:(1->num)->A)
-      #|  q:(1->num)->A
-      #|  f:(1->num)->A
-      #|  \\p:(1->num)->A. (frc:A->(A#A->bool)) o p
-      #|  poly_ring (fraction_ring (r:A ring)) (:1)
-      #|  poly_ring (r:A ring) (:1)
+      #|  (q : ((Unit) -> Num) -> A)
+      #|  (f : ((Unit) -> Num) -> A)
+      #|  (p : ((Unit) -> Num) -> A) => o((frc : (A, (A, A)) -> Bool), p)
+      #|  (poly_ring : (Ring[((A, A)) -> Bool], (Unit) -> Bool) -> Ring[((Unit) -> Num, (A, A)) -> Bool])((fraction_ring : (Ring[A]) -> Ring[((A, A)) -> Bool])((r : Ring[A])), (UNIV : (Unit) -> Bool))
+      #|  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool))
       #|  (a:(1->num)->A) = ring_mul (poly_ring (r:A ring) (:1))\n         (f:(1->num)->A) (q:(1->num)->A)
       #|  (poly_const (fraction_ring (r:A ring))\n           ((frc:A->(A#A->bool)) c) :(1->num)->(A#A->bool)) IN\n           ring_carrier(poly_ring (fraction_ring r) (:1))
       #|  (a':(1->num)->(A#A->bool)) IN\n           ring_carrier(poly_ring (fraction_ring (r:A ring)) (:1))
       #|  ring_mul (poly_ring (fraction_ring (r:A ring)) (:1))\n           (poly_const (fraction_ring r)\n             ((frc:A->(A#A->bool)) c) :(1->num)->(A#A->bool))\n           (a':(1->num)->(A#A->bool)) = frc o (a:(1->num)->A)
-      #|  (frc:A->(A#A->bool)) o (a:(1->num)->A)
-      #|  a':(1->num)->(A#A->bool)
+      #|  o((frc : (A, (A, A)) -> Bool), (a : ((Unit) -> Num) -> A))
+      #|  (a' : ((Unit) -> Num, (A, A)) -> Bool)
       #|  poly_ring (fraction_ring (r:A ring)) (:1)
       #|  (poly_const (fraction_ring (r:A ring))\n         ((frc:A->(A#A->bool)) c) :(1->num)->(A#A->bool)) =\n        ring_mul (poly_ring (fraction_ring r) (:1))\n         (b':(1->num)->(A#A->bool)) (frc o (q:(1->num)->A))
       #|  (poly_const (fraction_ring (r:A ring))\n         ((frc:A->(A#A->bool)) c) :(1->num)->(A#A->bool)) IN\n        ring_carrier(poly_ring (fraction_ring r) (:1))
       #|  (frc:A->(A#A->bool)) o (q:(1->num)->A) IN\n        ring_carrier(poly_ring (fraction_ring (r:A ring)) (:1))
-      #|  q:(1->num)->A
+      #|  (q : ((Unit) -> Num) -> A)
       #|  forall a' b' (c:A) (a:(1->num)->A).\n        a' IN ring_carrier\n          (poly_ring (fraction_ring (r:A ring)) (:1)) /\\\n        b' IN ring_carrier\n          (poly_ring (fraction_ring r) (:1)) /\\\n        ~(a' = ring_0\n          (poly_ring (fraction_ring r) (:1))) /\\\n        ring_mul (poly_ring (fraction_ring r) (:1)) a' b' =\n        (frc:A->(A#A->bool)) o (f:(1->num)->A) /\\\n        c IN ring_carrier r /\\ ~(c = ring_0 r) /\\\n        a IN ring_carrier(poly_ring r (:1)) /\\\n        ring_mul (poly_ring (fraction_ring r) (:1))\n          (poly_const (fraction_ring r) ((frc:A->(A#A->bool)) c))\n          a' = frc o a /\\\n        ring_divides (poly_ring r (:1)) f a\n        ==> ring_unit\n              (poly_ring (fraction_ring r) (:1)) b'
       #|  ring_mul (poly_ring (fraction_ring (r:A ring)) (:1))\n         (g':(1->num)->(A#A->bool)) (h':(1->num)->(A#A->bool)) =\n        (frc:A->(A#A->bool)) o (f:(1->num)->A)
       #|  ~((h':(1->num)->(A#A->bool)) =\n           ring_0(poly_ring (fraction_ring (r:A ring)) (:1)))
       #|  ~((g':(1->num)->(A#A->bool)) =\n           ring_0(poly_ring (fraction_ring (r:A ring)) (:1)))
-      #|  field(fraction_ring (r:A ring))
-      #|  h':(1->num)->(A#A->bool)
-      #|  g':(1->num)->(A#A->bool)
-      #|  fraction_ring (r:A ring)
+      #|  field(fraction_ring((r : Ring[A])))
+      #|  (h' : ((Unit) -> Num, (A, A)) -> Bool)
+      #|  (g' : ((Unit) -> Num, (A, A)) -> Bool)
+      #|  fraction_ring((r : Ring[A]))
       #|  ring_polynomial (fraction_ring r)\n         (g':(1->num)->(A#A->bool)) /\\\n        ring_polynomial (fraction_ring r)\n         (h':(1->num)->(A#A->bool))
       #|  poly_deg (fraction_ring r) (g':(1->num)->(A#A->bool)) +\n      poly_deg (fraction_ring r) (h':(1->num)->(A#A->bool)) =\n      poly_deg (r:A ring) (f:(1->num)->A)
       #|  (g':(1->num)->(A#A->bool)) IN\n          ring_carrier(poly_ring (fraction_ring (r:A ring)) (:1))
@@ -35418,10 +35418,10 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  ring_mul (poly_ring (fraction_ring (r:A ring)) (:1))\n         (g':(1->num)->(A#A->bool)) (h':(1->num)->(A#A->bool)) =\n        (frc:A->(A#A->bool)) o (f:(1->num)->A)
       #|  ~((frc:A->(A#A->bool)) o (f:(1->num)->A) =\n        ring_0(poly_ring (fraction_ring (r:A ring)) (:1)))
       #|  ~((g':(1->num)->(A#A->bool)) =\n       ring_0(poly_ring (fraction_ring (r:A ring)) (:1))) /\\\n      ~((h':(1->num)->(A#A->bool)) =\n       ring_0(poly_ring (fraction_ring r) (:1)))
-      #|  h1:(1->num)->A
-      #|  g1:(1->num)->A
-      #|  f:(1->num)->A
-      #|  poly_ring (r:A ring) (:1)
+      #|  (h1 : ((Unit) -> Num) -> A)
+      #|  (g1 : ((Unit) -> Num) -> A)
+      #|  (f : ((Unit) -> Num) -> A)
+      #|  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool))
       #|  ring_divides (poly_ring r (:1)) (f:(1->num)->A) g1 \\/\n      ring_divides (poly_ring r (:1)) f h1
       #|  forall r a b c d:A.\n            a IN ring_carrier r /\\ b IN ring_carrier r /\\\n            c IN ring_carrier r /\\ d IN ring_carrier r\n            ==> ring_mul r (ring_mul r a b) (ring_mul r c d) =\n                ring_mul r (ring_mul r a c) (ring_mul r b d)
       #|  poly_const (fraction_ring (r:A ring)) ((frc:A->(A#A->bool)) c1) IN\n        ring_carrier(poly_ring (fraction_ring r) (:1)) /\\\n        poly_const (fraction_ring r) ((frc:A->(A#A->bool)) c2) IN\n        ring_carrier(poly_ring (fraction_ring r) (:1))
@@ -35433,134 +35433,134 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  ring_homomorphism (poly_ring r (:1),\n          poly_ring (fraction_ring r) (:1))\n         (\\p:(1->num)->A. (frc:A->(A#A->bool)) o p)
       #|  ring_mul (poly_ring (r:A ring) (:1))\n          (poly_const r (ring_mul r c1 c2)) (f:(1->num)->A)
       #|  ring_mul (poly_ring (r:A ring) (:1))\n          (g1:(1->num)->A) (h1:(1->num)->A)
-      #|  \\p:(1->num)->A. (frc:A->(A#A->bool)) o p
-      #|  poly_ring (fraction_ring (r:A ring)) (:1)
-      #|  poly_ring (r:A ring) (:1)
-      #|  c2:A
-      #|  c1:A
-      #|  ring_monomorphism(r:A ring,fraction_ring r) frc
-      #|  (frc:A->(A#A->bool)) c2
-      #|  (frc:A->(A#A->bool)) c1
-      #|  (:1)
-      #|  fraction_ring (r:A ring)
-      #|  ring_mul (r:A ring) c1 c2
+      #|  (p : ((Unit) -> Num) -> A) => o((frc : (A, (A, A)) -> Bool), p)
+      #|  (poly_ring : (Ring[((A, A)) -> Bool], (Unit) -> Bool) -> Ring[((Unit) -> Num, (A, A)) -> Bool])((fraction_ring : (Ring[A]) -> Ring[((A, A)) -> Bool])((r : Ring[A])), (UNIV : (Unit) -> Bool))
+      #|  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool))
+      #|  (c2 : A)
+      #|  (c1 : A)
+      #|  ring_monomorphism(((r : Ring[A]), fraction_ring(r)), (frc : (A, (A, A)) -> Bool))
+      #|  (frc : (A, (A, A)) -> Bool)((c2 : A))
+      #|  (frc : (A, (A, A)) -> Bool)((c1 : A))
+      #|  (UNIV : (Unit) -> Bool)
+      #|  fraction_ring((r : Ring[A]))
+      #|  ring_mul((r : Ring[A]), (c1 : A), (c2 : A))
       #|  (frc:A->(A#A->bool)) o poly_const (r:A ring) (ring_mul r c1 c2) =\n        ring_mul (poly_ring (fraction_ring r) (:1))\n         (poly_const (fraction_ring r) ((frc:A->(A#A->bool)) c1))\n         (poly_const (fraction_ring r) (frc c2))
       #|  poly_const (r:A ring) (ring_mul r c1 c2) IN\n        ring_carrier(poly_ring r (:1))
       #|  forall c:A. c IN ring_carrier r\n        ==> (frc:A->(A#A->bool)) o\n             ((poly_const (r:A ring) c) :(1->num)->A) =\n            poly_const (fraction_ring r) ((frc:A->(A#A->bool)) c)
       #|  ring_mul (poly_ring r (:1)) (g1:(1->num)->A) h1 =\n      ring_mul (poly_ring r (:1))\n       (poly_const r (ring_mul r c1 c2)) (f:(1->num)->A)
       #|  ring_fractionate (r:A ring) {a | ring_regular r a} =\n      (frc:A->(A#A->bool))
-      #|  h1:(1->num)->A
-      #|  c2:A
-      #|  h':(1->num)->(A#A->bool)
-      #|  r:A ring
-      #|  g1:(1->num)->A
-      #|  c1:A
-      #|  g':(1->num)->(A#A->bool)
-      #|  r:A ring
+      #|  (h1 : ((Unit) -> Num) -> A)
+      #|  (c2 : A)
+      #|  (h' : ((Unit) -> Num, (A, A)) -> Bool)
+      #|  (r : Ring[A])
+      #|  (g1 : ((Unit) -> Num) -> A)
+      #|  (c1 : A)
+      #|  (g' : ((Unit) -> Num, (A, A)) -> Bool)
+      #|  (r : Ring[A])
       #|  ring_irreducible (poly_ring r (:1)) (f:(1->num)->A)
-      #|  ring_prime (poly_ring r (:1)) (f:(1->num)->A)
-      #|  h':(1->num)->(A#A->bool)
-      #|  g':(1->num)->(A#A->bool)
+      #|  ring_prime(poly_ring((r : Ring[A]), UNIV), (f : ((Unit) -> Num) -> A))
+      #|  (h' : ((Unit) -> Num, (A, A)) -> Bool)
+      #|  (g' : ((Unit) -> Num, (A, A)) -> Bool)
       #|  poly_deg (fraction_ring r)\n         ((frc:A->(A#A->bool)) o (f:(1->num)->A)) = poly_deg r f
-      #|  1 <= poly_deg (r:A ring) (f:(1->num)->A)
+      #|  1 <= poly_deg((r : Ring[A]), (f : ((Unit) -> Num) -> A))
       #|  ?c:(A#A->bool).\n          ring_unit (fraction_ring (r:A ring)) c /\\\n          (frc:A->(A#A->bool)) o (f:(1->num)->A) =\n          poly_const (fraction_ring r) c
-      #|  f:(1->num)->A
-      #|  \\p:(1->num)->A. (frc:A->(A#A->bool)) o p
-      #|  poly_ring (fraction_ring (r:A ring)) (:1)
-      #|  poly_ring (r:A ring) (:1)
+      #|  (f : ((Unit) -> Num) -> A)
+      #|  (p : ((Unit) -> Num) -> A) => o((frc : (A, (A, A)) -> Bool), p)
+      #|  (poly_ring : (Ring[((A, A)) -> Bool], (Unit) -> Bool) -> Ring[((Unit) -> Num, (A, A)) -> Bool])((fraction_ring : (Ring[A]) -> Ring[((A, A)) -> Bool])((r : Ring[A])), (UNIV : (Unit) -> Bool))
+      #|  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((r : Ring[A]), (UNIV : (Unit) -> Bool))
       #|  ~((frc:A->(A#A->bool)) o (f:(1->num)->A) =\n       ring_0(poly_ring (fraction_ring (r:A ring)) (:1)))
       #|  (frc:A->(A#A->bool)) o (f:(1->num)->A) IN\n      ring_carrier(poly_ring (fraction_ring r) (:1))
       #|  integral_domain\n       (poly_ring (fraction_ring (r:A ring)) (:1))
       #|  forall p:(1->num)->A. p IN ring_carrier(poly_ring r (:1))\n     ==> (frc:A->(A#A->bool)) o p IN\n         ring_carrier(poly_ring (fraction_ring r) (:1))
       #|  ring_homomorphism (poly_ring r (:1),\n       poly_ring (fraction_ring r) (:1))\n      (\\p:(1->num)->A. (frc:A->(A#A->bool)) o p)
       #|  poly_deg (fraction_ring r)\n      ((frc:A->(A#A->bool)) o (f:(1->num)->A)) = poly_deg r f
-      #|  ring_polynomial r (f:(1->num)->A)
+      #|  ring_polynomial((r : Ring[A]), (f : ((Unit) -> Num) -> A))
       #|  ring_monomorphism (poly_ring r (:1),\n       poly_ring (fraction_ring r) (:1))\n      (\\p:(1->num)->A. (frc:A->(A#A->bool)) o p)
-      #|  ring_monomorphism(r:A ring,fraction_ring r) frc
+      #|  ring_monomorphism(((r : Ring[A]), fraction_ring(r)), (frc : (A, (A, A)) -> Bool))
       #|  forall x:A. x IN ring_carrier r\n     ==> (frc:A->(A#A->bool)) x IN\n         ring_carrier(fraction_ring r)
-      #|  ring_monomorphism (r:A ring,fraction_ring r) frc
-      #|  field(fraction_ring (r:A ring))
-      #|  integral_domain (r:A ring)
+      #|  ring_monomorphism(((r : Ring[A]), fraction_ring(r)), (frc : (A, (A, A)) -> Bool))
+      #|  field(fraction_ring((r : Ring[A])))
+      #|  integral_domain((r : Ring[A]))
       #|  frc:A->(A#A->bool) =\n     ring_fractionate r {a | ring_regular r a}
       #|  forall(r:A ring) f.\n     UFD r /\\\n     f IN ring_carrier(poly_ring r (:1)) /\\\n     1 <= poly_deg r f /\\\n     (forall p. ring_prime r p\n          ==> ~ring_divides (poly_ring r (:1))\n                (poly_const r p) f)\n     ==> (ring_irreducible (poly_ring r (:1)) f <=>\n          ring_irreducible\n            (poly_ring (fraction_ring r) (:1))\n            (ring_fractionate r\n              {a | ring_regular r a} o f))
-      #|  f:(1->num)->A
+      #|  (f : ((Unit) -> Num) -> A)
       #|  ((poly_const (r:A ring) (ring_mul r c1 c2)):(1->num)->A)
-      #|  h1:(1->num)->A
-      #|  g1:(1->num)->A
+      #|  (h1 : ((Unit) -> Num) -> A)
+      #|  (g1 : ((Unit) -> Num) -> A)
       #|  forall(r:A ring) (q:(1->num)->A) k.\n       q IN ring_carrier(poly_ring r (:1))\n       ==> (ring_mul (poly_ring r (:1)) (poly_var r one) q)\n           (\\v:1. k + 1) = q(\\v:1. k)
-      #|  k:num
-      #|  b:(1->num)->A
-      #|  a':(1->num)->A
-      #|  r:A ring
-      #|  d - 1
-      #|  (b:(1->num)->A) monomial_1
-      #|  (a':(1->num)->A) monomial_1
-      #|  r:A ring
+      #|  (k : Num)
+      #|  (b : ((Unit) -> Num) -> A)
+      #|  (a' : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  (d : Num) - 1
+      #|  (b : ((Unit) -> Num) -> A)(monomial_1)
+      #|  (a' : ((Unit) -> Num) -> A)(monomial_1)
+      #|  (r : Ring[A])
       #|  (a':(1->num)->A) monomial_1 IN ring_carrier r /\\\n        (b:(1->num)->A) monomial_1 IN ring_carrier r
-      #|  ~(d = 0)
-      #|  1 <= poly_deg r (b:(1->num)->A)
-      #|  0 + 1 = 1
+      #|  !((d : Num) == 0)
+      #|  1 <= poly_deg((r : Ring[A]), (b : ((Unit) -> Num) -> A))
+      #|  0 + 1 == 1
       #|  (ring_mul (poly_ring r (:1))\n           (a':(1->num)->A) b) monomial_1 =\n         (ring_mul (poly_ring r (:1)) a b)\n           (\\v:1. 0 + 1)
-      #|  b:(1->num)->A
-      #|  a':(1->num)->A
-      #|  r:A ring
+      #|  (b : ((Unit) -> Num) -> A)
+      #|  (a' : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
       #|  ring_mul r ((a':(1->num)->A) monomial_1)\n                    (b monomial_1) =\n         (ring_mul (poly_ring r (:1)) a' b)\n           (monomial_1:(1->num))
       #|  ring_mul r ((a':(1->num)->A) monomial_1)\n                   ((b:(1->num)->A) monomial_1) = ring_0 r
       #|  ring_polynomial r (a':(1->num)->A) /\\\n        ring_polynomial r (b:(1->num)->A)
-      #|  (a':(1->num)->A) monomial_1 = ring_0 r
+      #|  (a' : ((Unit) -> Num) -> A)(monomial_1) == ring_0((r : Ring[A]))
       #|  ring_mul (poly_ring r (:1)) (a:(1->num)->A) b =\n        ring_mul (poly_ring r (:1)) (poly_var r one)\n          (ring_mul (poly_ring r (:1)) a' b)
-      #|  k:num
+      #|  (k : Num)
       #|  forall k. (ring_mul (poly_ring r (:1))\n             (a':(1->num)->A) b)(\\v:1. k) =\n           (ring_mul (poly_ring r (:1)) a b)(\\v:1. k + 1)
       #|  poly_mul r (poly_var r (one:1)) (a':(1->num)->A) =\n        (a:(1->num)->A)
-      #|  ~(a' = ring_0(poly_ring r (:1)):(1->num)->A)
-      #|  a':(1->num)->A
-      #|  poly_var r (one:1):(1->num)->A
-      #|  r:A ring
+      #|  !((a' : ((Unit) -> Num) -> A) == ring_0(poly_ring((r : Ring[A]), UNIV)))
+      #|  (a' : ((Unit) -> Num) -> A)
+      #|  poly_var((r : Ring[A]), one)
+      #|  (r : Ring[A])
       #|  ring_polynomial r (poly_var r (one:1):(1->num)->A) /\\\n        ring_polynomial r (a':(1->num)->A)
-      #|  poly_deg r (a':(1->num)->A) = d - 1
-      #|  ~(a = ring_0(poly_ring r (:1)):(1->num)->A)
-      #|  ~(a' = ring_0(poly_ring r (:1)):(1->num)->A)
-      #|  a':(1->num)->A
+      #|  poly_deg((r : Ring[A]), (a' : ((Unit) -> Num) -> A)) == (d : Num) - 1
+      #|  !((a : ((Unit) -> Num) -> A) == ring_0(poly_ring((r : Ring[A]), UNIV)))
+      #|  !((a' : ((Unit) -> Num) -> A) == ring_0(poly_ring((r : Ring[A]), UNIV)))
+      #|  (a' : ((Unit) -> Num) -> A)
       #|  ring_divides (poly_ring r (:1))\n      (poly_var r (one:1)) (a:(1->num)->A)
-      #|  a:(1->num)->A
-      #|  r:A ring
-      #|  d = 0
-      #|  ~trivial_ring(r:A ring)
-      #|  b:(1->num)->A
-      #|  a:(1->num)->A
-      #|  r:A ring
-      #|  d:num
+      #|  (a : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  (d : Num) == 0
+      #|  !trivial_ring((r : Ring[A]))
+      #|  (b : ((Unit) -> Num) -> A)
+      #|  (a : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  (d : Num)
       #|  forall d (r:A ring) (a:(1->num)->A) (b:(1->num)->A).\n       integral_domain r /\\\n       a IN ring_carrier(poly_ring r (:1)) /\\\n       b IN ring_carrier(poly_ring r (:1)) /\\\n       ~(a = ring_0(poly_ring r (:1))) /\\\n       ~(b = ring_0(poly_ring r (:1))) /\\\n       ~(b monomial_1 = ring_0 r) /\\\n       a monomial_1 = ring_0 r /\\\n       1 <= poly_deg r b /\\\n       poly_deg r a = d /\\\n       (forall k. k < d + poly_deg r b\n            ==> (ring_mul (poly_ring r (:1)) a b)\n                (\\v:1. k) = ring_0 r)\n       ==> F
-      #|  ring_coset r j o (g:(1->num)->A)
-      #|  ring_coset r j o (h:(1->num)->A)
-      #|  quotient_ring (r:A ring) j
-      #|  poly_deg r (h:(1->num)->A)
+      #|  o(ring_coset((r : Ring[A]), (j : (A) -> Bool)), (g : ((Unit) -> Num) -> A))
+      #|  o(ring_coset((r : Ring[A]), (j : (A) -> Bool)), (h : ((Unit) -> Num) -> A))
+      #|  quotient_ring((r : Ring[A]), (j : (A) -> Bool))
+      #|  poly_deg((r : Ring[A]), (h : ((Unit) -> Num) -> A))
       #|  poly_deg r (h:(1->num)->A) +\n     poly_deg r (g:(1->num)->A) = poly_deg r (f:(1->num)->A)
       #|  ring_mul (poly_ring (quotient_ring (r:A ring) j) (:1))\n      (ring_coset r j o (g:(1->num)->A)) (ring_coset r j o h) =\n     ring_coset r j o (f:(1->num)->A)
       #|  ring_mul (poly_ring (quotient_ring (r:A ring) j) (:1))\n     (ring_coset r j o (h:(1->num)->A)) (ring_coset r j o g) =\n    ring_coset r j o (f:(1->num)->A)
       #|  ~(ring_coset r j ((g:(1->num)->A) monomial_1) =\n     ring_0(quotient_ring (r:A ring) j))
-      #|  ring_coset r j o (h:(1->num)->A)
-      #|  ring_coset r j o (g:(1->num)->A)
-      #|  quotient_ring (r:A ring) j
-      #|  poly_deg r (g:(1->num)->A)
+      #|  o(ring_coset((r : Ring[A]), (j : (A) -> Bool)), (h : ((Unit) -> Num) -> A))
+      #|  o(ring_coset((r : Ring[A]), (j : (A) -> Bool)), (g : ((Unit) -> Num) -> A))
+      #|  quotient_ring((r : Ring[A]), (j : (A) -> Bool))
+      #|  poly_deg((r : Ring[A]), (g : ((Unit) -> Num) -> A))
       #|  ~(ring_coset r j ((h:(1->num)->A) monomial_1) =\n     ring_0(quotient_ring (r:A ring) j))
       #|  ring_divides r (p:A) ((g:(1->num)->A) monomial_1) /\\\n     ring_divides r p ((h:(1->num)->A) monomial_1)
       #|  ~ring_divides r (ring_pow r (p:A) 2)\n       ((f:(1->num)->A) monomial_1)
       #|  ~(ring_coset r j ((g:(1->num)->A) monomial_1) =\n     ring_0(quotient_ring (r:A ring) j) /\\\n   ring_coset r j ((h:(1->num)->A) monomial_1) =\n     ring_0(quotient_ring r j))
       #|  ring_coset r j ((h:(1->num)->A) monomial_1):A->bool
       #|  ring_coset r j ((g:(1->num)->A) monomial_1):A->bool
-      #|  quotient_ring (r:A ring) j
+      #|  quotient_ring((r : Ring[A]), (j : (A) -> Bool))
       #|  ring_coset r j ((g:(1->num)->A) monomial_1) =\n     ring_0(quotient_ring (r:A ring) j) \\/\n   ring_coset r j ((h:(1->num)->A) monomial_1) =\n     ring_0(quotient_ring r j)
       #|  (f:(1->num)->A) monomial_1 =\n     ring_mul r ((g:(1->num)->A) monomial_1)\n       ((h:(1->num)->A) monomial_1)
       #|  ring_mul r\n     ((g:(1->num)->A) monomial_1) ((h:(1->num)->A) monomial_1)
-      #|  (h:(1->num)->A) monomial_1
-      #|  (g:(1->num)->A) monomial_1
+      #|  (h : ((Unit) -> Num) -> A)(monomial_1)
+      #|  (g : ((Unit) -> Num) -> A)(monomial_1)
       #|  ring_mul (quotient_ring (r:A ring) j)\n     (ring_coset r j ((g:(1->num)->A) monomial_1))\n     (ring_coset r j ((h:(1->num)->A) monomial_1)) =\n   ring_0(quotient_ring r j)
       #|  poly_deg (quotient_ring (r:A ring) j)\n     (ring_coset r j o (g:(1->num)->A)) = poly_deg r g /\\\n   poly_deg (quotient_ring r j)\n     (ring_coset r j o (h:(1->num)->A)) = poly_deg r h
       #|  poly_0 (quotient_ring (r:A ring) j) =\n      ring_0(poly_ring (quotient_ring r j) (:1))\n       :(1->num)->(A->bool)
-      #|  ring_coset r j o (h:(1->num)->A)
-      #|  ring_coset r j o (g:(1->num)->A)
-      #|  quotient_ring (r:A ring) j
+      #|  o(ring_coset((r : Ring[A]), (j : (A) -> Bool)), (h : ((Unit) -> Num) -> A))
+      #|  o(ring_coset((r : Ring[A]), (j : (A) -> Bool)), (g : ((Unit) -> Num) -> A))
+      #|  quotient_ring((r : Ring[A]), (j : (A) -> Bool))
       #|  poly_deg (quotient_ring (r:A ring) j)\n     (ring_coset r j o (g:(1->num)->A)) +\n   poly_deg (quotient_ring r j)\n     (ring_coset r j o (h:(1->num)->A)) =\n   poly_deg r (f:(1->num)->A)
       #|  poly_deg (quotient_ring (r:A ring) j)\n     (ring_coset r j o (g:(1->num)->A)) <= poly_deg r g /\\\n   poly_deg (quotient_ring r j)\n     (ring_coset r j o (h:(1->num)->A)) <= poly_deg r h
       #|  ring_mul (poly_ring (quotient_ring (r:A ring) j) (:1))\n     (ring_coset r j o (g:(1->num)->A)) (ring_coset r j o h) =\n    ring_coset r j o (f:(1->num)->A)
@@ -35568,314 +35568,314 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  ~(ring_coset r j o (g:(1->num)->A) =\n     ring_0(poly_ring (quotient_ring r j) (:1))\n      :(1->num)->(A->bool)) /\\\n   ~(ring_coset r j o (h:(1->num)->A) =\n     ring_0(poly_ring (quotient_ring r j) (:1))\n      :(1->num)->(A->bool))
       #|  ~((ring_coset r j o (f:(1->num)->A))\n        (\\v:1. poly_deg r f) =\n        ring_0(quotient_ring (r:A ring) j))
       #|  ~(ring_coset r j o (f:(1->num)->A) =\n     ring_0(poly_ring (quotient_ring r j) (:1))\n      :(1->num)->(A->bool))
-      #|  poly_deg r (f:(1->num)->A)
-      #|  (\\v:1. poly_deg r (f:(1->num)->A)):1->num
-      #|  ring_coset r j o (f:(1->num)->A)
-      #|  quotient_ring (r:A ring) j
+      #|  poly_deg((r : Ring[A]), (f : ((Unit) -> Num) -> A))
+      #|  (v : Unit) => poly_deg((r : Ring[A]), (f : ((Unit) -> Num) -> A))
+      #|  o(ring_coset((r : Ring[A]), (j : (A) -> Bool)), (f : ((Unit) -> Num) -> A))
+      #|  quotient_ring((r : Ring[A]), (j : (A) -> Bool))
       #|  poly_deg (quotient_ring (r:A ring) j)\n     (ring_coset r j o (f:(1->num)->A)) = poly_deg r f
       #|  ring_polynomial (quotient_ring (r:A ring) j)\n       (ring_coset r j o (g:(1->num)->A)) /\\\n     ring_polynomial (quotient_ring r j)\n       (ring_coset r j o (h:(1->num)->A)) /\\\n     ring_polynomial (quotient_ring r j)\n       (ring_coset r j o (f:(1->num)->A))
-      #|  (f:(1->num)->A) (\\v:1. poly_deg r f)
+      #|  (f : ((Unit) -> Num) -> A)((v : Unit) => poly_deg((r : Ring[A]), f))
       #|  ~((ring_coset r j o (f:(1->num)->A))\n       (\\v:1. poly_deg r f) =\n       ring_0(quotient_ring (r:A ring) j))
-      #|  (f:(1->num)->A) (\\v:1. k)
-      #|  k:num
+      #|  (f : ((Unit) -> Num) -> A)((v : Unit) => (k : Num))
+      #|  (k : Num)
       #|  forall k. k < poly_deg r (f:(1->num)->A)\n         ==> (ring_coset r j o f) (\\v:1. k) =\n             ring_0(quotient_ring (r:A ring) j)
       #|  ring_mul (poly_ring (quotient_ring (r:A ring) j) (:1))\n       (ring_coset r j o (g:(1->num)->A))\n       (ring_coset r j o h) =\n      ring_coset r j o (f:(1->num)->A)
       #|  poly_mul (quotient_ring (r:A ring) j)\n      (ring_coset r j o (g:(1->num)->A))\n      (ring_coset r j o (h:(1->num)->A)) =\n     ring_coset r j o (f:(1->num)->A)
-      #|  h:(1->num)->A
-      #|  g:(1->num)->A
+      #|  (h : ((Unit) -> Num) -> A)
+      #|  (g : ((Unit) -> Num) -> A)
       #|  ring_mul (poly_ring (quotient_ring (r:A ring) j) (:1))\n      (ring_coset r j o (g:(1->num)->A))\n      (ring_coset r j o h) =\n     ring_coset r j o (f:(1->num)->A)
       #|  ring_coset r j o (g:(1->num)->A) IN\n       ring_carrier(poly_ring (quotient_ring r j) (:1)) /\\\n     ring_coset r j o (h:(1->num)->A) IN\n       ring_carrier(poly_ring (quotient_ring r j) (:1)) /\\\n     ring_coset r j o (f:(1->num)->A) IN\n       ring_carrier(poly_ring (quotient_ring r j) (:1))
-      #|  h:(1->num)->A
-      #|  g:(1->num)->A
-      #|  r:A ring
+      #|  (h : ((Unit) -> Num) -> A)
+      #|  (g : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
       #|  (f:(1->num)->A) monomial_1 =\n     ring_mul r ((g:(1->num)->A) monomial_1)\n       ((h:(1->num)->A) monomial_1)
       #|  poly_0 (r:A ring) =\n       ring_0(poly_ring r (:1)):(1->num)->A
-      #|  h:(1->num)->A
-      #|  g:(1->num)->A
-      #|  r:A ring
+      #|  (h : ((Unit) -> Num) -> A)
+      #|  (g : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
       #|  poly_deg r (g:(1->num)->A) +\n     poly_deg r (h:(1->num)->A) = poly_deg r (f:(1->num)->A)
-      #|  ring_mul (poly_ring r (:1)) (g:(1->num)->A) h = f
-      #|  poly_mul r (g:(1->num)->A) h = f
+      #|  ring_mul(poly_ring((r : Ring[A]), UNIV), (g : ((Unit) -> Num) -> A), (h : ((Unit) -> Num) -> A)) == (f : ((Unit) -> Num) -> A)
+      #|  poly_mul((r : Ring[A]), (g : ((Unit) -> Num) -> A), (h : ((Unit) -> Num) -> A)) == (f : ((Unit) -> Num) -> A)
       #|  (forall m:1->num. (g:(1->num)->A) m IN ring_carrier r) /\\\n     (forall m:1->num. (h:(1->num)->A) m IN ring_carrier r) /\\\n     (forall m:1->num. (f:(1->num)->A) m IN ring_carrier r)
       #|  ring_homomorphism (poly_ring r (:1),\n       poly_ring (quotient_ring (r:A ring) j) (:1))\n      (\\q:(1->num)->A. ring_coset r j o q)
       #|  ring_homomorphism (r, quotient_ring (r:A ring) j)\n      (ring_coset r j)
-      #|  a:A
+      #|  (a : A)
       #|  forall a:A. a IN ring_carrier r\n           ==> (ring_coset r j a = ring_0(quotient_ring r j) <=>\n                ring_divides r p a)
-      #|  integral_domain(quotient_ring (r:A ring) j)
-      #|  ring_ideal (r:A ring) j
-      #|  prime_ideal (r:A ring) j
-      #|  j = ideal_generated (r:A ring) {p:A}
-      #|  (p:A) IN ring_carrier r /\\ ~(p = ring_0 r)
+      #|  integral_domain(quotient_ring((r : Ring[A]), (j : (A) -> Bool)))
+      #|  ring_ideal((r : Ring[A]), (j : (A) -> Bool))
+      #|  prime_ideal((r : Ring[A]), (j : (A) -> Bool))
+      #|  (j : (A) -> Bool) == ideal_generated((r : Ring[A]), {(p : A)})
+      #|  IN((p : A), ring_carrier((r : Ring[A]))) && !(p == ring_0(r))
       #|  ring_polynomial r (g:(1->num)->A) /\\\n     ring_polynomial r (h:(1->num)->A) /\\\n     ring_polynomial r (f:(1->num)->A)
-      #|  ~(poly_deg r (h:(1->num)->A) = 0)
-      #|  ~(poly_deg r (g:(1->num)->A) = 0)
+      #|  !(poly_deg((r : Ring[A]), (h : ((Unit) -> Num) -> A)) == 0)
+      #|  !(poly_deg((r : Ring[A]), (g : ((Unit) -> Num) -> A)) == 0)
       #|  ~(g = ring_0(poly_ring r (:1)):(1->num)->A) /\\\n     ~(h = ring_0(poly_ring r (:1)):(1->num)->A)
-      #|  poly_deg r (h:(1->num)->A) = 0
-      #|  poly_deg r (g:(1->num)->A) = 0
-      #|  h:(1->num)->A
-      #|  g:(1->num)->A
+      #|  poly_deg((r : Ring[A]), (h : ((Unit) -> Num) -> A)) == 0
+      #|  poly_deg((r : Ring[A]), (g : ((Unit) -> Num) -> A)) == 0
+      #|  (h : ((Unit) -> Num) -> A)
+      #|  (g : ((Unit) -> Num) -> A)
       #|  forall(r:A ring) p (f:(1->num)->A).\n     integral_domain r /\\ ring_prime r p /\\\n     f IN ring_carrier(poly_ring r (:1)) /\\\n     1 <= poly_deg r f /\\\n     ~ring_divides r p (coeff (poly_deg r f) f) /\\\n     (forall k. k < poly_deg r f ==> ring_divides r p (coeff k f)) /\\\n     ~ring_divides r (ring_pow r p 2) (f monomial_1)\n     ==> forall g h. g IN ring_carrier(poly_ring r (:1)) /\\\n               h IN ring_carrier(poly_ring r (:1)) /\\\n               ring_mul (poly_ring r (:1)) g h = f\n               ==> poly_deg r g = 0 \\/ poly_deg r h = 0
-      #|  h:(1->num)->A
-      #|  g:(1->num)->A
-      #|  f:(1->num)->A
-      #|  p:A
-      #|  r:A ring
-      #|  h:(1->num)->A
-      #|  g:(1->num)->A
-      #|  f:(1->num)->A
-      #|  (:1)
-      #|  r:A ring
-      #|  1 <= poly_deg r (f:(1->num)->A)
-      #|  poly_const r (c:A):(1->num)->A
-      #|  q:A
-      #|  q:A
-      #|  c:A
-      #|  r:A ring
-      #|  f = ring_0(poly_ring r (:1)):(1->num)->A
-      #|  x < 1 <=> x = 0
-      #|  1 <= poly_deg r (f:(1->num)->A)
-      #|  ~(c:A = ring_0 r)
-      #|  ring_unit r (c:A)
-      #|  d:(1->num)->A
-      #|  r:A ring
+      #|  (h : ((Unit) -> Num) -> A)
+      #|  (g : ((Unit) -> Num) -> A)
+      #|  (f : ((Unit) -> Num) -> A)
+      #|  (p : A)
+      #|  (r : Ring[A])
+      #|  (h : ((Unit) -> Num) -> A)
+      #|  (g : ((Unit) -> Num) -> A)
+      #|  (f : ((Unit) -> Num) -> A)
+      #|  (UNIV : (Unit) -> Bool)
+      #|  (r : Ring[A])
+      #|  1 <= poly_deg((r : Ring[A]), (f : ((Unit) -> Num) -> A))
+      #|  (poly_const : (Ring[A], A, (Unit) -> Num) -> A)((r : Ring[A]), (c : A))
+      #|  (q : A)
+      #|  (q : A)
+      #|  (c : A)
+      #|  (r : Ring[A])
+      #|  (f : ((Unit) -> Num) -> A) == ring_0(poly_ring((r : Ring[A]), UNIV))
+      #|  ((x : Num) < 1) == (x == 0)
+      #|  1 <= poly_deg((r : Ring[A]), (f : ((Unit) -> Num) -> A))
+      #|  !((c : A) == ring_0((r : Ring[A])))
+      #|  ring_unit((r : Ring[A]), (c : A))
+      #|  (d : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
       #|  ?c:A. c IN ring_carrier r /\\\n           d:(1->num)->A = poly_const r c
-      #|  d:(1->num)->A
+      #|  (d : ((Unit) -> Num) -> A)
       #|  forall d:(1->num)->A.\n      d IN ring_carrier(poly_ring r (:1)) /\\\n      ring_divides (poly_ring r (:1)) d f /\\\n      poly_deg r d = 0\n      ==> ring_unit (poly_ring r (:1)) d
       #|  forall(r:A ring) p (f:(1->num)->A).\n     UFD r /\\ ring_prime r p /\\\n     f IN ring_carrier(poly_ring r (:1)) /\\\n     1 <= poly_deg r f /\\\n     ~ring_divides r p (coeff (poly_deg r f) f) /\\\n     (forall k. k < poly_deg r f ==> ring_divides r p (coeff k f)) /\\\n     ~ring_divides r (ring_pow r p 2) (f monomial_1) /\\\n     (forall q. ring_prime r q\n          ==> ~ring_divides (poly_ring r (:1))\n                (poly_const r q) f)\n     ==> ring_irreducible (poly_ring r (:1)) f
       #|  (frc:A->(A#A->bool)) o (f:(1->num)->A) =\n       ring_mul (poly_ring (fraction_ring r) (:1))\n         (poly_const (fraction_ring r) (frc c))\n         (frc o (g:(1->num)->A))
-      #|  (frc:A->(A#A->bool)) o (f:(1->num)->A)
-      #|  (frc:A->(A#A->bool)) o (g:(1->num)->A)
-      #|  poly_ring (fraction_ring (r:A ring)) (:1)
+      #|  o((frc : (A, (A, A)) -> Bool), (f : ((Unit) -> Num) -> A))
+      #|  o((frc : (A, (A, A)) -> Bool), (g : ((Unit) -> Num) -> A))
+      #|  (poly_ring : (Ring[((A, A)) -> Bool], (Unit) -> Bool) -> Ring[((Unit) -> Num, (A, A)) -> Bool])((fraction_ring : (Ring[A]) -> Ring[((A, A)) -> Bool])((r : Ring[A])), (UNIV : (Unit) -> Bool))
       #|  ring_homomorphism (poly_ring r (:1),\n        poly_ring (fraction_ring r) (:1))\n        (\\p:(1->num)->A. (frc:A->(A#A->bool)) o p)
       #|  (frc:A->(A#A->bool)) o (g:(1->num)->A) IN\n     ring_carrier(poly_ring (fraction_ring r) (:1))
-      #|  fraction_ring (r:A ring)
+      #|  fraction_ring((r : Ring[A]))
       #|  ring_unit (poly_ring (fraction_ring (r:A ring)) (:1))\n      (poly_const (fraction_ring r) ((frc:A->(A#A->bool)) c)\n       :(1->num)->(A#A->bool))
-      #|  g:(1->num)->A
-      #|  poly_const r (c:A):(1->num)->A
+      #|  (g : ((Unit) -> Num) -> A)
+      #|  (poly_const : (Ring[A], A, (Unit) -> Num) -> A)((r : Ring[A]), (c : A))
       #|  ring_homomorphism (poly_ring r (:1),\n        poly_ring (fraction_ring r) (:1))\n        (\\p:(1->num)->A. (frc:A->(A#A->bool)) o p)
       #|  f = ring_mul (poly_ring r (:1))\n        (poly_const r (c:A)) (g:(1->num)->A)
       #|  (frc:A->(A#A->bool)) o\n         poly_const (r:A ring) c =\n       poly_const (fraction_ring r) (frc c)\n       :(1->num)->(A#A->bool)
       #|  (frc:A->(A#A->bool)) o (f:(1->num)->A) =\n     ring_mul (poly_ring (fraction_ring r) (:1))\n       (poly_const (fraction_ring r) (frc c))\n       (frc o (g:(1->num)->A))
       #|  ring_fractionate (r:A ring) {a | ring_regular r a} =\n       (frc:A->(A#A->bool))
-      #|  g:(1->num)->A
-      #|  r:A ring
+      #|  (g : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
       #|  ring_irreducible\n      (poly_ring (fraction_ring r) (:1))\n      ((frc:A->(A#A->bool)) o (g:(1->num)->A))
-      #|  p:A
-      #|  ring_irreducible (poly_ring r (:1)) (g:(1->num)->A)
-      #|  monomial_1:(1->num)
+      #|  (p : A)
+      #|  ring_irreducible(poly_ring((r : Ring[A]), UNIV), (g : ((Unit) -> Num) -> A))
+      #|  (monomial_1 : (Unit) -> Num)
       #|  ~ring_divides r (ring_pow r (p:A) 2)\n        ((f:(1->num)->A) monomial_1)
       #|  ~ring_divides r (ring_pow r (p:A) 2)\n       ((g:(1->num)->A) monomial_1)
-      #|  (\\v:1. k):(1->num)
+      #|  (v : Unit) => (k : Num)
       #|  ring_divides r p\n        (ring_mul r (c:A) ((g:(1->num)->A) (\\v:1. k)))
-      #|  k:num
+      #|  (k : Num)
       #|  forall k. k < n ==>\n     ring_divides r (p:A) ((g:(1->num)->A) (\\v:1. k))
-      #|  (\\v:1. (n:num))
+      #|  (v : Unit) => (n : Num)
       #|  ~ring_divides r (p:A)\n        ((f:(1->num)->A) (\\v:1. n))
-      #|  ~ring_divides r (p:A) ((g:(1->num)->A) (\\v:1. n))
-      #|  (\\v:1. (n:num))
+      #|  !ring_divides((r : Ring[A]), (p : A), (g : ((Unit) -> Num) -> A)((v : Unit) => (n : Num)))
+      #|  (v : Unit) => (n : Num)
       #|  ~ring_divides r (p:A)\n        ((f:(1->num)->A) (\\v:1. n))
-      #|  ~ring_divides r (p:A) c
-      #|  (g:(1->num)->A) (\\v:1. n) IN ring_carrier r
-      #|  (p:A) IN ring_carrier r
-      #|  poly_deg r (g:(1->num)->A) = n
-      #|  n = poly_deg r (f:(1->num)->A)
+      #|  !ring_divides((r : Ring[A]), (p : A), (c : A))
+      #|  IN((g : ((Unit) -> Num) -> A)((v : Unit) => (n : Num)), ring_carrier((r : Ring[A])))
+      #|  IN((p : A), ring_carrier((r : Ring[A])))
+      #|  poly_deg((r : Ring[A]), (g : ((Unit) -> Num) -> A)) == (n : Num)
+      #|  (n : Num) == poly_deg((r : Ring[A]), (f : ((Unit) -> Num) -> A))
       #|  forall m:(1->num). (f:(1->num)->A) m =\n     ring_mul (r:A ring) c ((g:(1->num)->A) m)
-      #|  g:(1->num)->A
-      #|  c:A
-      #|  f:(1->num)->A
-      #|  r:A ring
-      #|  1 <= poly_deg r (f:(1->num)->A)
-      #|  ~(f = ring_0(poly_ring r (:1)):(1->num)->A)
-      #|  ring_homomorphism (r:A ring,fraction_ring r) frc
+      #|  (g : ((Unit) -> Num) -> A)
+      #|  (c : A)
+      #|  (f : ((Unit) -> Num) -> A)
+      #|  (r : Ring[A])
+      #|  1 <= poly_deg((r : Ring[A]), (f : ((Unit) -> Num) -> A))
+      #|  !((f : ((Unit) -> Num) -> A) == ring_0(poly_ring((r : Ring[A]), UNIV)))
+      #|  ring_homomorphism(((r : Ring[A]), fraction_ring(r)), (frc : (A, (A, A)) -> Bool))
       #|  forall x:A. x IN ring_carrier r\n     ==> (frc:A->(A#A->bool)) x IN\n         ring_carrier(fraction_ring r)
       #|  ring_homomorphism (poly_ring r (:1),\n       poly_ring (fraction_ring (r:A ring)) (:1))\n      (\\p:(1->num)->A. (frc:A->(A#A->bool)) o p)
-      #|  ring_homomorphism (r:A ring,fraction_ring r) frc
-      #|  ring_monomorphism (r:A ring,fraction_ring r) frc
-      #|  field(fraction_ring (r:A ring))
+      #|  ring_homomorphism(((r : Ring[A]), fraction_ring(r)), (frc : (A, (A, A)) -> Bool))
+      #|  ring_monomorphism(((r : Ring[A]), fraction_ring(r)), (frc : (A, (A, A)) -> Bool))
+      #|  field(fraction_ring((r : Ring[A])))
       #|  frc:A->(A#A->bool) =\n     ring_fractionate r {a | ring_regular r a}
       #|  forall(r:A ring) p (f:(1->num)->A).\n     UFD r /\\ ring_prime r p /\\\n     f IN ring_carrier(poly_ring r (:1)) /\\\n     1 <= poly_deg r f /\\\n     ~ring_divides r p (coeff (poly_deg r f) f) /\\\n     (forall k. k < poly_deg r f ==> ring_divides r p (coeff k f)) /\\\n     ~ring_divides r (ring_pow r p 2) (f monomial_1)\n     ==> ring_irreducible\n           (poly_ring (fraction_ring r) (:1))\n           (ring_fractionate r {a | ring_regular r a} o f)
-      #|  \\n. ring_pow r (x:A) n
-      #|  \\y. (x:A) IN ring_carrier r ==> y = ring_1 r
+      #|  (n : Num) => ring_pow((r : Ring[A]), (x : A), n)
+      #|  (y : A) => IN((x : A), ring_carrier((r : Ring[A]))) \226\134\146 y == ring_1(r)
       #|  forall r x:A. ?d. forall n. x IN ring_carrier r ==> ring_pow r x n = ring_1 r <=>\n                     d divides n
       #|  forall r (x:A) n.\n        x IN ring_carrier r\n        ==> (ring_pow r x n = ring_1 r <=> ring_order r x divides n)
       #|  (forall n:num. n divides n) /\\ (forall n. 0 divides n <=> n = 0)
       #|  forall r (x:A).\n        x IN ring_carrier r\n        ==> (ring_order r x = 0 <=>\n             forall n. ring_pow r x n = ring_1 r <=> n = 0)
       #|  forall r (x:A).\n        x IN ring_carrier r\n        ==> (ring_order r x = 1 <=> x = ring_1 r)
-      #|  (n:num) divides n
+      #|  divides((n : Num), n)
       #|  forall r (x:A) d.\n        x IN ring_carrier r\n        ==> (ring_order r x = d <=>\n             forall n. ring_pow r x n = ring_1 r <=> d divides n)
       #|  forall r (x:A). x IN ring_carrier r ==> ring_pow r x (ring_order r x) = ring_1 r
-      #|  forall r:A ring. ring_order r (ring_1 r) = 1
+      #|  \226\136\128 r : Ring[A], ring_order(r, ring_1(r)) == 1
       #|  forall r (x:A) m n.\n        x IN ring_carrier r\n        ==> (ring_pow r x (gcd(m,n)) = ring_1 r <=>\n             ring_pow r x m = ring_1 r /\\ ring_pow r x n = ring_1 r)
       #|  forall r (x:A) m n.\n        x IN ring_carrier r /\\ coprime(m,n)\n        ==> (ring_pow r x m = ring_1 r /\\ ring_pow r x n = ring_1 r <=>\n             x = ring_1 r)
       #|  forall r (x:A) y n.\n        x IN ring_carrier r /\\ y IN ring_carrier r /\\\n        ring_order r x divides n /\\ ring_order r y divides n\n        ==> ring_order r (ring_mul r x y) divides n
       #|  forall r (x:A) y.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> ring_order r (ring_mul r x y) divides\n            (ring_order r x * ring_order r y)
       #|  forall r (x:A) y.\n        x IN ring_carrier r /\\ y IN ring_carrier r\n        ==> ring_order r (ring_mul r x y) divides\n            lcm(ring_order r x,ring_order r y)
-      #|  ring_pow r (x:A) (d * k DIV d + k MOD d)
+      #|  ring_pow((r : Ring[A]), (x : A), (d : Num) * DIV((k : Num), d) + MOD(k, d))
       #|  forall r (x:A) d k.\n        x IN ring_carrier r /\\ ring_pow r x d = ring_1 r\n        ==> ring_pow r x k = ring_pow r x (k MOD d)
       #|  forall r (x:A) n.\n        x IN ring_carrier r\n        ==> ring_pow r x (n MOD ring_order r x) = ring_pow r x n
-      #|  ~(k = 0)
+      #|  !((k : Num) == 0)
       #|  forall r (x:A) k. x IN ring_carrier r /\\ ~(k = 0) /\\\n    k divides ring_order r x\n    ==> ring_order r (ring_pow r x k) = ring_order r x DIV k
-      #|  ~(k = 0)
-      #|  gcd(d,k) = 0 <=> d = 0 /\\ k = 0
-      #|  m:num
-      #|  gcd(d:num,k) divides d
-      #|  d:num
-      #|  ring_order r (x:A)
-      #|  n:num
+      #|  !((k : Num) == 0)
+      #|  (gcd(((d : Num), (k : Num))) == 0) == (d == 0 && k == 0)
+      #|  (m : Num)
+      #|  divides(gcd(((d : Num), (k : Num))), d)
+      #|  (d : Num)
+      #|  ring_order((r : Ring[A]), (x : A))
+      #|  (n : Num)
       #|  forall r (x:A) k. x IN ring_carrier r\n    ==> ring_order r (ring_pow r x k) =\n        if k = 0 then 1\n        else ring_order r x DIV gcd(ring_order r x,k)
       #|  forall r (x:A) n. x IN ring_carrier r\n    ==> ring_order r (ring_pow r x n) divides ring_order r x
-      #|  1 divides n /\\ n divides n
+      #|  divides(1, (n : Num)) && divides(n, n)
       #|  forall r (x:A) p. x IN ring_carrier r /\\ prime p\n    ==> (ring_order r x = p <=>\n         ~(x = ring_1 r) /\\ ring_pow r x p = ring_1 r)
       #|  (ring_mul r (ring_pow r x m) (ring_pow r y m) = ring_pow r x m /\\\n     ring_mul r (ring_pow r x n) (ring_pow r y n) = ring_pow r (y:A) n) /\\\n    (ring_mul r (ring_pow r x m) (ring_pow r y m) = ring_1 r /\\\n     ring_mul r (ring_pow r x n) (ring_pow r y n) = ring_1 r)\n    ==> ring_pow r x m = ring_1 r /\\ ring_pow r y n = ring_1 r
       #|  (a:num) divides (b * c) /\\ b divides (a * c) /\\ coprime(a,b)\n    ==> (a * b) divides c
       #|  forall r (x:A) y.\n        x IN ring_carrier r /\\ y IN ring_carrier r /\\\n        coprime(ring_order r x, ring_order r y)\n        ==> ring_order r (ring_mul r x y) = ring_order r x * ring_order r y
       #|  forall r:A ring.\n        prime(ring_char r)\n        ==> ring_endomorphism r (\\x. ring_pow r x (ring_char r))
-      #|  x:A
+      #|  (x : A)
       #|  forall r:A ring.\n        prime(ring_char r) /\\ (forall x. ring_nilpotent r x ==> x = ring_0 r)\n        ==> ring_monomorphism (r,r) (\\x. ring_pow r x (ring_char r))
       #|  forall(r:A ring).\n        integral_domain r /\\ prime(ring_char r)\n        ==> ring_monomorphism (r,r) (\\x. ring_pow r x (ring_char r))
       #|  forall r:A ring.\n        field r /\\ FINITE(ring_carrier r)\n        ==> ring_automorphism r (\\x. ring_pow r x (ring_char r))
-      #|  x:A
+      #|  (x : A)
       #|  {x | x IN s /\\ P x} = {x | x IN s /\\ Q x} <=>\n                        forall x. x IN s ==> (P x <=> Q x)
       #|  s = t ==> FINITE s /\\ CARD s <= n ==> FINITE t /\\ CARD t <= n
-      #|  p = ring_0(poly_ring r s) ==> poly_deg r p = 0
-      #|  ~(x = 0) ==> MAX x 1 = x
+      #|  (p : ((_) -> Num) -> _) == ring_0(poly_ring((r : Ring[_]), (s : (_) -> Bool))) \226\134\146 poly_deg(r, p) == 0
+      #|  !((x : Num) == 0) \226\134\146 MAX(x, 1) == x
       #|  poly_deg r (ring_sub (poly_ring r (:1)) q (poly_var r one)) =\n     ring_char(r:A ring)
-      #|  q IN ring_carrier(poly_ring (r:A ring) (:1))
+      #|  IN((q : ((Unit) -> Num) -> A), ring_carrier(poly_ring((r : Ring[A]), UNIV)))
       #|  ring_sub (poly_ring (r:A ring) (:1)) q (poly_var r one)
-      #|  r:A ring
-      #|  q = poly_pow (r:A ring) (poly_var r one) (ring_char r)
-      #|  CARD {ring_of_int r n:A | n IN (:int)} = ring_char r
-      #|  p /\\ q /\\ r <=> q /\\ p /\\ r
+      #|  (r : Ring[A])
+      #|  (q : ((Unit) -> Num) -> A) == poly_pow((r : Ring[A]), poly_var(r, one), ring_char(r))
+      #|  CARD({ring_of_int((r : Ring[A]), (n : Int)) | IN(n, UNIV)}) == ring_char(r)
+      #|  ((p : Bool) && (q : Bool) && (r : Bool)) == (q && p && r)
       #|  forall r:A ring.\n        integral_domain r /\\ prime(ring_char r)\n        ==> { x | x IN ring_carrier r /\\ ring_pow r x (ring_char r) = x} =\n            { ring_of_int r n | n IN (:int)}
-      #|  poly_ring (r:A ring) (:num#A)
-      #|  integral_domain(poly_ring (r:A ring) (:num#A))
-      #|  (f:((num#A->num)->A)->num#A) o poly_const (r:A ring)
-      #|  f:((num#A->num)->A)->num#A
-      #|  r':(num#A)ring
-      #|  {0} *_c (:A)
-      #|  (:A)
-      #|  (:num#A)
-      #|  r:A ring
-      #|  (:num#A)
-      #|  poly_ring (r:A ring) (:num#A)
+      #|  (poly_ring : (Ring[A], ((Num, A)) -> Bool) -> Ring[(((Num, A)) -> Num) -> A])((r : Ring[A]), (UNIV : ((Num, A)) -> Bool))
+      #|  (integral_domain : (Ring[(((Num, A)) -> Num) -> A]) -> Bool)((poly_ring : (Ring[A], ((Num, A)) -> Bool) -> Ring[(((Num, A)) -> Num) -> A])((r : Ring[A]), (UNIV : ((Num, A)) -> Bool)))
+      #|  o((f : ((((Num, A)) -> Num) -> A) -> (Num, A)), poly_const((r : Ring[A])))
+      #|  (f : ((((Num, A)) -> Num) -> A) -> (Num, A))
+      #|  (r' : Ring[(Num, A)])
+      #|  (op_star_us_c : ((Num) -> Bool, (A) -> Bool, (Num, A)) -> Bool)({0}, (UNIV : (A) -> Bool))
+      #|  (UNIV : (A) -> Bool)
+      #|  (UNIV : ((Num, A)) -> Bool)
+      #|  (r : Ring[A])
+      #|  (UNIV : ((Num, A)) -> Bool)
+      #|  (poly_ring : (Ring[A], ((Num, A)) -> Bool) -> Ring[(((Num, A)) -> Num) -> A])((r : Ring[A]), (UNIV : ((Num, A)) -> Bool))
       #|  forall r:A ring.\n        integral_domain r\n        ==> ?r' f. integral_domain r' /\\\n                   ring_carrier r' = (:num#A) /\\\n                   ring_monomorphism(r,r') f
-      #|  p ==> q <=> ~p \\/ q
-      #|  ~p ==> q <=> p \\/ q
-      #|  p ==> q <=> (p \\/ q <=> q)
-      #|  p:bool
-      #|  q:bool
-      #|  T
-      #|  ring_inv r (ring_sub r x y):A
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == (!p || q)
+      #|  (!(p : Bool) \226\134\146 (q : Bool)) == (p || q)
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == ((p || q) == q)
+      #|  (p : Bool)
+      #|  (q : Bool)
+      #|  true
+      #|  ring_inv((r : Ring[A]), ring_sub(r, (x : A), (y : A)))
       #|  forall x y:A. ~(x = y)\n               ==> forall r. field r /\\ x IN ring_carrier r /\\ y IN ring_carrier r\n                        ==> ?z. z IN ring_carrier r /\\\n                                ring_mul r (ring_sub r x y) z = ring_1 r
-      #|  f:A ring
-      #|  ring_inv f (x:A)
-      #|  t:A = ring_0 f
-      #|  p /\\ q /\\ r <=> q /\\ p /\\ r
+      #|  (f : Ring[A])
+      #|  ring_inv((f : Ring[A]), (x : A))
+      #|  (t : A) == ring_0((f : Ring[A]))
+      #|  ((p : Bool) && (q : Bool) && (r : Bool)) == (q && p && r)
       #|  forall f t:A.\n            field f\n            ==> t IN ring_carrier f\n                ==> ring_inv f t = ring_0 f /\\ t = ring_0 f \\/\n                    (?z. z IN ring_carrier f /\\\n                         ring_inv f t = z /\\ ring_mul f t z = ring_1 f)
-      #|  (~(a = b) ==> F) ==> a = b
+      #|  (!((a : _) == (b : _)) \226\134\146 false) \226\134\146 a == b
       #|  forall f x:A. field f /\\ x IN ring_carrier f\n           ==> (ring_inv f x = ring_0 f <=> x = ring_0 f)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  forall f x y:A. field f /\\ x IN ring_carrier f /\\ y IN ring_carrier f\n           ==> (ring_div f x y = ring_0 f <=> x = ring_0 f \\/ y = ring_0 f)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  forall f:A ring.\n    field f\n    ==> (forall x y n. x IN ring_carrier f /\\ y IN ring_carrier f\n                 ==> ring_pow f (ring_div f x y) n =\n                     ring_div f (ring_pow f x n) (ring_pow f y n)) /\\\n        (forall x1 y1 x2 y2.\n                x1 IN ring_carrier f /\\ x2 IN ring_carrier f /\\\n                y1 IN ring_carrier f /\\ y2 IN ring_carrier f\n                ==> ring_div f (ring_div f x1 y1) (ring_div f x2 y2) =\n                    ring_div f (ring_mul f x1 y2) (ring_mul f x2 y1)) /\\\n        (forall x1 x2 y. x1 IN ring_carrier f /\\ x2 IN ring_carrier f /\\\n                   y IN ring_carrier f /\\ ~(y = ring_0 f)\n                   ==> ring_add f (ring_div f x1 y) (ring_div f x2 y) =\n                       ring_div f (ring_add f x1 x2) y /\\\n                       ring_sub f (ring_div f x1 y) (ring_div f x2 y) =\n                       ring_div f (ring_sub f x1 x2) y /\\\n                       (ring_div f x1 y = ring_div f x2 y <=> x1 = x2) /\\\n                       ring_add f (ring_div f x1 y) x2 =\n                       ring_div f (ring_add f x1 (ring_mul f x2 y)) y /\\\n                       ring_add f x1 (ring_div f x2 y) =\n                       ring_div f (ring_add f (ring_mul f x1 y) x2) y /\\\n                       ring_sub f (ring_div f x1 y) x2 =\n                       ring_div f (ring_sub f x1 (ring_mul f x2 y)) y /\\\n                       ring_sub f x1 (ring_div f x2 y) =\n                       ring_div f (ring_sub f (ring_mul f x1 y) x2) y /\\\n                       ring_mul f (ring_div f x1 y) x2 =\n                       ring_div f (ring_mul f x1 x2) y /\\\n                       ring_mul f x1 (ring_div f x2 y) =\n                       ring_div f (ring_mul f x1 x2) y /\\\n                       (ring_div f x1 y = x2 <=> x1 = ring_mul f x2 y) /\\\n                       (x1 = ring_div f x2 y <=> ring_mul f x1 y = x2)) /\\\n        (forall x y. x IN ring_carrier f /\\ y IN ring_carrier f /\\\n               ~(x = ring_0 f) /\\ ~(y = ring_0 f)\n               ==> ~(ring_mul f x y = ring_0 f)) /\\\n        (forall x n. x IN ring_carrier f /\\ ~(x = ring_0 f)\n               ==> ~(ring_pow f x n = ring_0 f))
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  a ==> b /\\ c <=> (a ==> b) /\\ (a ==> c)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  ((a : Bool) \226\134\146 (b : Bool) && (c : Bool)) == ((a \226\134\146 b) && (a \226\134\146 c))
       #|ring_tybij =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(ring('A),bool),bool) (\a:ring('A). ((#=:fun(ring('A),fun(ring('A),bool)) (#ring:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),ring('A)) (#ring_operations:fun(ring('A),prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))) a:ring('A)))) a:ring('A))))) (#forall:fun(fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),bool),bool) (\r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))). ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) (#FST:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),'A) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) (#FST:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),'A) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))))))) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) ((#FST:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),fun('A,'A)) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))))))) x:'A)) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) (((#FST:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) x:'A) y:'A)) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) (((#SND:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) x:'A) y:'A)) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))))))) ((#=:fun('A,fun('A,bool)) (((#FST:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) x:'A) y:'A)) (((#FST:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) y:'A) x:'A)))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. (#forall:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) z:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) ((#=:fun('A,fun('A,bool)) (((#FST:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) x:'A) (((#FST:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) y:'A) z:'A))) (((#FST:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) (((#FST:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) x:'A) y:'A)) z:'A)))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#=:fun('A,fun('A,bool)) (((#FST:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) (#FST:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),'A) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) x:'A)) x:'A))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#=:fun('A,fun('A,bool)) (((#FST:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) ((#FST:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),fun('A,'A)) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))))))) x:'A)) x:'A)) (#FST:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),'A) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))))))) ((#=:fun('A,fun('A,bool)) (((#SND:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) x:'A) y:'A)) (((#SND:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) y:'A) x:'A)))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. (#forall:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) z:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) ((#=:fun('A,fun('A,bool)) (((#SND:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) x:'A) (((#SND:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) y:'A) z:'A))) (((#SND:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) (((#SND:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) x:'A) y:'A)) z:'A)))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#=:fun('A,fun('A,bool)) (((#SND:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) (#FST:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),'A) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))))))) x:'A)) x:'A))))) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. (#forall:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) z:'A) (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) ((#=:fun('A,fun('A,bool)) (((#SND:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) x:'A) (((#FST:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) y:'A) z:'A))) (((#FST:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) (((#SND:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) x:'A) y:'A)) (((#SND:fun(prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))),fun('A,fun('A,'A))) (#SND:fun(prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))) (#SND:fun(prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))),prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))) (#SND:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))))) x:'A) z:'A))))))))))))))))))))))) ((#=:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),bool)) (#ring_operations:fun(ring('A),prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))) (#ring:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),ring('A)) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))))) r:prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))))))))
       #|ring_carrier =  |- ((#=:fun(fun(ring('A),fun('A,bool)),fun(fun(ring('A),fun('A,bool)),bool)) #ring_carrier:fun(ring('A),fun('A,bool))) (\r:ring('A). (#FST:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),fun('A,bool)) (#ring_operations:fun(ring('A),prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))) r:ring('A)))))
       #|ring_0 =  |- ((#=:fun(fun(ring('A),'A),fun(fun(ring('A),'A),bool)) #ring_0:fun(ring('A),'A)) (\r:ring('A). (#FST:fun(prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))),'A) (#SND:fun(prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A))))))) (#ring_operations:fun(ring('A),prod(fun('A,bool),prod('A,prod('A,prod(fun('A,'A),prod(fun('A,fun('A,'A)),fun('A,fun('A,'A)))))))) r:ring('A))))))
