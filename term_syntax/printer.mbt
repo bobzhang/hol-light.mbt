@@ -422,7 +422,7 @@ fn Printer::comb(
   // only a numeral in canonical form is written in decimal
   if (try @basics.dest_numeral(t) catch { _ => None } noraise { n => Some(n) })
     is Some(n) &&
-    (try @nums.mk_numeral(n) == t catch { _ => false }) {
+    canonical_numeral(t) {
     return @num.string_of_num(n)
   }
   let (head, args) = @basics.strip_comb(t)
@@ -497,6 +497,23 @@ fn Printer::comb(
       wrap(s, SIMPLE, ctx)
     }
   }
+}
+
+///|
+/// Whether the numeral `t` (one `dest_numeral` reads) is in the form
+/// `mk_numeral` builds: NUMERAL _0, or bits with no leading zero (the bit
+/// applied to _0 is BIT1). Written here so that the term syntax depends on
+/// nothing loaded after the parser (nums), which every package with
+/// quotations may use.
+fn canonical_numeral(t : @kernel.Term) -> Bool {
+  guard t is Comb(Const("NUMERAL", _), bits) else { return false }
+  let mut b = bits
+  let mut innermost = ""
+  while b is Comb(Const(("BIT0" | "BIT1") as bit, _), rest) {
+    innermost = bit
+    b = rest
+  }
+  b is Const("_0", _) && (innermost == "" || innermost == "BIT1")
 }
 
 ///|

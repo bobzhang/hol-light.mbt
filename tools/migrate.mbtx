@@ -50,6 +50,10 @@ let gen_test : String = "migrate_gen_test.mbt"
 let call_prefix : String = "@parser.parse_term(\""
 
 ///|
+/// The package that installs the hook while a package is recorded.
+let hook_pkg : String = "migrate_hook"
+
+///|
 /// The string the body of a MoonBit string literal denotes.
 fn unquote(body : String) -> String raise {
   let cs = body.to_array()
@@ -452,11 +456,47 @@ async fn record(
   } else {
     "(match given.get(site) { Some(s) => { @term_syntax.check_spelling(old, s); Some(s) }; None => None })"
   }
+  let hook_dir = pkg + "/" + hook_pkg
+  let hook_path = "bobzhang/hol_light/" + pkg + "/" + hook_pkg
+  // restore everything, each step whatever the others do, before any change
+  defer {
+    for f in [test_file, hook_dir + "/hook.mbt", hook_dir + "/moon.pkg"] {
+      @fs.remove(f) catch {
+        _ => ()
+      }
+    }
+    @fs.rmdir(hook_dir) catch {
+      _ => ()
+    }
+    @fs.write_file(pkg_file, pkg_src) catch {
+      _ => ()
+    }
+    for p in sources {
+      @fs.write_file(p.0, p.1) catch {
+        _ => ()
+      }
+    }
+  }
+  // The hook is installed by the init of a package the target package
+  // imports while it is recorded: package inits run in dependency order, so
+  // it is in place before the target's own init, which loads the core
+  // packages (sets, arith, ...); the others load in load(). Wasm cannot
+  // print during init, so the records are kept and the test prints them.
+  @fs.mkdir(hook_dir) catch {
+    _ => ()
+  }
   @fs.write_file(
-    test_file,
+    hook_dir + "/moon.pkg",
+    "import {\n  \"bobzhang/hol_light/parser\",\n  \"bobzhang/hol_light/term_syntax\",\n}\n",
+  )
+  @fs.write_file(
+    hook_dir + "/hook.mbt",
     (
       $|///|
-      $|test "migrate quotations" {
+      $|pub let records : Array[(Int, Int, String)] = []
+      $|
+      $|///|
+      $|fn init {
       $|  let given : Map[Int, String] = \{given_src}
       $|  @parser.quotation_hook.val = Some(fn(site, old, tm) {
       $|    if site >= 0 {
@@ -466,30 +506,31 @@ async fn record(
       $|        _ => Some(\{u})
       $|      }
       $|      if new is Some(new) {
-      $|        println("@@Q " + [site.to_json(), at.to_json(), new.to_json()].to_json().stringify())
+      $|        records.push((site, at, new))
       $|      }
       $|    }
       $|  })
-      $|  @\{pkg_alias}.load()
-      $|  @parser.quotation_hook.val = None
+      $|}
+      $|
+    ),
+  )
+  let has_load = sources.iter().any(p => declares_load(p.1))
+  let load_call = if has_load { "  @" + pkg_alias + ".load()\n" } else { "" }
+  @fs.write_file(
+    test_file,
+    (
+      $|///|
+      $|test "migrate quotations" {
+      $|\{load_call}  @parser.quotation_hook.val = None
+      $|  for r in @\{hook_pkg}.records {
+      $|    println("@@Q " + [r.0.to_json(), r.1.to_json(), r.2.to_json()].to_json().stringify())
+      $|  }
       $|  println("@@T " + @parser.theory_trace(\{t}).to_json().stringify())
       $|}
       $|
     ),
   )
-  let extra = "  \"bobzhang/hol_light/term_syntax\",\n  \"bobzhang/hol_light/parser\",\n"
-  let new_pkg = match pkg_src.find("} for \"test\"") {
-    Some(i) => pkg_src[:i].to_owned() + extra + pkg_src[i:].to_owned()
-    None => pkg_src + "\nimport {\n" + extra + "} for \"test\"\n"
-  }
-  @fs.write_file(pkg_file, new_pkg)
-  defer {
-    @fs.remove(test_file)
-    @fs.write_file(pkg_file, pkg_src)
-    for p in sources {
-      @fs.write_file(p.0, p.1)
-    }
-  }
+  @fs.write_file(pkg_file, with_hook_imports(pkg_src, hook_path))
   let mut site = 0
   for p in sources {
     let (text, n) = rewrite_calls(p.1.to_array(), (k, body) => Some(
@@ -520,6 +561,10 @@ async fn record(
   let passed = results is [{ "message": String(""), .. }]
   guard code == 0 && passed && trace is Some(trace) else {
     fail("loading the package did not finish (exit \{code}):\n" + tail_of(out))
+  }
+  // a package with quotations that recorded no trace did not load
+  if trace.is_empty() && sources.iter().any(p => !calls(p.1.to_array()).is_empty()) {
+    fail("the theory \{theory} recorded no quotation: the package did not load (no load() found?)")
   }
   { trace, runs }
 }
@@ -608,6 +653,72 @@ fn expected_file(src : String) -> String? {
     }
   }
   None
+}
+
+///|
+/// Whether `src` declares `pub fn load` (spaces allowed before the
+/// parameters).
+fn declares_load(src : String) -> Bool {
+  let cs = src.to_array()
+  let pre = "pub fn load".to_array()
+  for i in 0..<(cs.length() - pre.length()) {
+    if cs[i:i + pre.length()] == pre[:] {
+      let mut j = i + pre.length()
+      while j < cs.length() && cs[j] is (' ' | '\t') {
+        j += 1
+      }
+      if j < cs.length() && cs[j] == '(' {
+        return true
+      }
+    }
+  }
+  false
+}
+
+///|
+/// `pkg_src` (a moon.pkg) with `hook` in its own import block, wherever
+/// that is (a new one if it has none), and with the parser and `hook` in
+/// its test imports.
+fn with_hook_imports(pkg_src : String, hook : String) -> String {
+  let lines = pkg_src.split("\n").map(l => l.to_owned()).to_array()
+  let entry = "  \"" + hook + "\","
+  let mut main = -1
+  let mut test_block = -1
+  let mut i = 0
+  while i < lines.length() {
+    if lines[i] == "import {" {
+      let mut j = i + 1
+      while j < lines.length() && !lines[j].has_prefix("}") {
+        j += 1
+      }
+      if j < lines.length() && lines[j] == "}" && main < 0 {
+        main = i
+      } else if j < lines.length() && lines[j] == "} for \"test\"" && test_block < 0 {
+        test_block = i
+      }
+      i = j
+    }
+    i += 1
+  }
+  let out = []
+  for k, l in lines {
+    out.push(l)
+    if k == main {
+      out.push(entry)
+    }
+    if k == test_block {
+      out.push("  \"bobzhang/hol_light/parser\",")
+      out.push(entry)
+    }
+  }
+  let mut text = out.join("\n")
+  if main < 0 {
+    text = "import {\n" + entry + "\n}\n\n" + text
+  }
+  if test_block < 0 {
+    text = text + "\nimport {\n  \"bobzhang/hol_light/parser\",\n" + entry + "\n} for \"test\"\n"
+  }
+  text
 }
 
 ///|
