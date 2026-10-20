@@ -81932,241 +81932,241 @@ test "Examples/division_algebras matches Examples/division_algebras.ml" {
       #|0..0..solved at 2
       #|0..0..5..15..58..229..solved at 271
       #|Examples/division_algebras quotations (235):
-      #|  \\x:real^N. x$2
-      #|  x + --c % y:real^N = vec 0 <=> x = c % y
-      #|  basis 2 + --c % basis 1:real^N = vec 0 \\/ w:real^N = vec 0
-      #|  ~(w:real^N = vec 0)
-      #|  ?w. v = (m:real^N->real^N->real^N) (basis 1) w
-      #|  v:real^N = vec 0
-      #|  c:real
-      #|  v:real^N
-      #|  (m:real^N->real^N->real^N) (basis 2) o (g:real^N->real^N)
-      #|  x + --(&1) % y:real^N = vec 0 <=> x = y
-      #|  basis 1:real^N = vec 0 \\/ x + --(&1) % y:real^N = vec 0
-      #|  y:real^N
-      #|  x:real^N
-      #|  ?g. linear g /\\\n        (forall x. g (m (basis 1) x) = x) /\\\n        (forall x. (m:real^N->real^N->real^N) (basis 1) (g x) = x)
-      #|  ~(n = 1) ==> 1 <= n ==> 2 <= n
-      #|  dimindex(:N) = 1
-      #|  forall m:real^N->real^N->real^N.\n        bilinear m /\\ (forall x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> dimindex(:N) = 1 \\/ EVEN(dimindex(:N))
-      #|  x = --(&1) % x <=> x:real^N = vec 0
-      #|  x:real^N
-      #|  ~(s SUBSET {a}) <=> ?x. x IN s /\\ ~(x = a)
-      #|  3 <= n ==> ~(n = 0)
-      #|  g:real^N->real^N
-      #|  x:real^N
-      #|  v = IMAGE (f:real^N->real^N) u
-      #|  g:real^N->real^N
-      #|  v:real^N->bool
-      #|  u:real^N->bool
-      #|  x + --(&1) % y:real^N = vec 0 <=> x = y
-      #|  x:real^N = vec 0 \\/ y + --(&1) % z:real^N = vec 0
-      #|  &2 % x:real^N = &2 % y <=> x = y
-      #|  z:real^N
-      #|  y:real^N
-      #|  x:real^N = y ==> x + y = &2 % y
-      #|  z:real^N
-      #|  &1
-      #|  s:real^N->bool
-      #|  x:real^N
-      #|  \\x:real^N. x
-      #|  \\x:real^N. x
-      #|  \\x:real^N. x
-      #|  \\x:real^N. x
-      #|  m:real^N->real^N->real^N
-      #|  x:real^N
-      #|  a:real^N
-      #|  s:real^N->bool
-      #|  s DELETE (vec 0:real^N)
-      #|  \\x h. &2 % (m:real^N->real^N->real^N) h x
-      #|  f:real^N->real^N
-      #|  a:real^N
-      #|  ~(x = &0) ==> x pow 2 * inv x * inv x = &1
-      #|  x IN k ==> y = x ==> y IN k
-      #|  norm((f:real^N->real^N) (inv(norm x) % x))
-      #|  ~((f:real^N->real^N) x = vec 0) /\\ ~(x = vec 0)
-      #|  x:real^N
-      #|  sqrt(B / norm((f:real^N->real^N) a))
-      #|  B:real
-      #|  &0 < norm((f:real^N->real^N) a)
-      #|  a:real^N = vec 0
-      #|  a:real^N
-      #|  vec 0:real^N
-      #|  IMAGE (f:real^N->real^N) (sphere(vec 0,&1))
-      #|  (f:real^N->real^N) continuous_on UNIV
-      #|  {x | x IN s DELETE vec 0 /\\ (f:real^N->real^N) x IN k} =\n      s INTER {x | x IN UNIV /\\ (f:real^N->real^N) x IN k}
-      #|  k:real^N->bool
-      #|  x + y:real^N = x <=> y = vec 0
-      #|  forall x. (f:real^N->real^N) x = vec 0 <=> x = vec 0
-      #|  s DELETE (vec 0:real^N)
-      #|  s DELETE (vec 0:real^N)
-      #|  f:real^N->real^N
-      #|  f:real^N->real^N = \\x. m x x
-      #|  (forall x y c. (m:real^N->real^N->real^N) x (c % y) = c % m x y) /\\\n    (forall x y z. m x (y + z) = m x y + m x z)
-      #|  n <= 2 <=> ~(3 <= n)
-      #|  forall m:real^N->real^N->real^N s.\n        bilinear m /\\\n        subspace s /\\\n        (forall x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0) /\\\n        (forall x y. x IN s /\\ y IN s ==> m x y IN s /\\ m x y = m y x)\n        ==> dim s <= 2
-      #|  x:real^N
-      #|  --(&1) % x:real^N
-      #|  m:real^N->real^N->real^N
-      #|  1 <= n /\\ n <= 2 ==> n = 1 \\/ n = 2
-      #|  forall m:real^N->real^N->real^N.\n        bilinear m /\\\n        (forall x y. m x y = m y x) /\\\n        (forall x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> dimindex(:N) IN {1,2}
-      #|  x + --(&1) % x:real^N = vec 0
-      #|  x - y:real^N = x + --(&1) % y
-      #|  forall x. (e:real^N = vec 0 \\/ m e x - x:real^N = vec 0) /\\\n        (m x e - x = vec 0 \\/ e = vec 0)
-      #|  x + --(&1) % y = vec 0 <=> x:real^N = y
-      #|  basis 1:real^N = vec 0 \\/\n                (m:real^N->real^N->real^N) e e + --(&1) % e = vec 0
-      #|  e:real^N = vec 0
-      #|  e:real^N
-      #|  forall x y. (m:real^N->real^N->real^N) (basis 1) x + -- &1 % m (basis 1) y =\n            m (basis 1) (x + -- &1 % y)
-      #|  x:real^N = y <=> x + -- &1 % y = vec 0
-      #|  (m:real^N->real^N->real^N) (basis 1)
-      #|  ?e. (m:real^N->real^N->real^N) (basis 1) e = basis 1
-      #|  ~(basis 1:real^N = vec 0)
-      #|  forall m:real^N->real^N->real^N.\n        bilinear m /\\\n        (forall x y. m (m x x) y = m x (m x y)) /\\\n        (forall x y. m (m x y) y = m x (m y y)) /\\\n        (forall x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> ?e. (forall x. m e x = x) /\\ (forall x. m x e = x)
-      #|  forall m:real^N->real^N->real^N.\n        bilinear m /\\\n        (forall x y z. m (m x y) z = m x (m y z)) /\\\n        (forall x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> ?e. (forall x. m e x = x) /\\ (forall x. m x e = x)
-      #|  dim{m i i:real^N,i,e}
-      #|  ~(basis 1:real^N = vec 0)
-      #|  ~(e:real^N = vec 0)
-      #|  forall w z:real^N. w IN C /\\ z IN C ==> m (m i w) (m i z) = m i (m (m w z) i)
-      #|  y:real^N
-      #|  (m:real^N->real^N->real^N) i x = m x i /\\ m i y = m y i
-      #|  (p ==> (q <=> r)) ==> (p ==> q) ==> (p ==> r)
-      #|  y:real^N
-      #|  (r /\\ s) /\\ (p ==> q) /\\ p ==> p /\\ q /\\ r /\\ s
-      #|  p ==> q <=> p ==> p /\\ q
-      #|  (p ==> q) /\\ p ==> p /\\ q
-      #|  (x:real^N) IN C
-      #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
-      #|  x:real^N
-      #|  forall x. x IN C ==> (m:real^N->real^N->real^N) i x = m x i
-      #|  C:real^N->bool
-      #|  m:real^N->real^N->real^N
-      #|  (i:real^N) IN C
-      #|  forall x:real^N. C x <=> x IN C
-      #|  (forall x:real^N. x IN {e} ==> C x) /\\\n     (forall x. C x ==> C(m i x)) /\\\n     (forall x. C x ==> C(m x i)) /\\\n     (forall c x. C x ==> C(c % x)) /\\\n     (forall x y. C x /\\ C y ==> C(x + y))
-      #|  C:real^N->bool
-      #|  {e,i} = {i,e}
-      #|  i IN span {e:real^N}
-      #|  i:real^N
-      #|  x - y:real^N = x + --(&1) % y
-      #|  x + y - z:real^N = y <=> z = x
-      #|  x - y:real^N = x + --(&1) % y
-      #|  (A:real^N#real^N#real^N->real^N)(y,m z z,x) +\n        m (A(x,y,z)) z - A(x,y,m z z)
-      #|  (A:real^N#real^N#real^N->real^N)(y,m z z,x) - A(m y z,z,x)
-      #|  forall x:real^N y:real^N z:real^N. A(m z x,y,z) = m (A(x,y,z)) z
-      #|  x:real^N = --y <=> x + y = vec 0
-      #|  (A:real^N#real^N#real^N->real^N)(x + z,y,x + z) = vec 0
-      #|  --(A:real^N#real^N#real^N->real^N)(z,y,x)
-      #|  forall x y z. (A:real^N#real^N#real^N->real^N)(x,y,z) = A(y,z,x)
-      #|  (A:real^N#real^N#real^N->real^N)(x + y,x + y,z) = vec 0
-      #|  forall x y z. --(A:real^N#real^N#real^N->real^N)(x,y,z) = A(y,x,z)
-      #|  (forall x y. (A:real^N#real^N#real^N->real^N)(x,x,y) = vec 0) /\\\n      (forall x y. (A:real^N#real^N#real^N->real^N)(x,y,y) = vec 0) /\\\n      (forall x y. (A:real^N#real^N#real^N->real^N)(x,y,x) = vec 0) /\\\n      (forall w x y z. (A:real^N#real^N#real^N->real^N)(w + x,y,z) =\n                 A(w,y,z) + A(x,y,z)) /\\\n      (forall w x y z. A(w,x + y,z) = A(w,x,z) + A(w,y,z)) /\\\n      (forall w x y z. A(w,x,y + z) = A(w,x,y) + A(w,x,z))
-      #|  A = \\(x:real^N,y,z). m x (m y z) - m (m x y) z
-      #|  forall x y z:real^N. m (m z x) (m y z) = m z (m (m x y) z)
-      #|  forall x y:real^N. m (m x y) y = m x (m y y)
-      #|  forall x y:real^N. m (m x y) x = m x (m y x)
-      #|  e:real^N
-      #|  m:real^N->real^N->real^N
-      #|  forall m:real^N->real^N->real^N.\n        bilinear m /\\\n        (forall x y. m (m x x) y = m x (m x y)) /\\\n        (forall x y. m (m x y) y = m x (m y y)) /\\\n        (forall x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> ?e. (forall x. m e x = x) /\\ (forall x. m x e = x) /\\\n                (forall x. m x x IN span {e,x})
-      #|  x + y:real^N
-      #|  x:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  x:real^N
-      #|  y:real^N
-      #|  subspace s /\\ subspace t /\\ span s = span t ==> s = t
-      #|  IMAGE f c SUBSET d /\\ IMAGE f d SUBSET c /\\\n   (forall x y. f x = f y ==> x = y) /\\\n   IMAGE f (IMAGE f c) = c\n   ==> d = IMAGE f c
-      #|  forall x y z. (m:real^N->real^N->real^N) (m x y) z = m x (m y z)
-      #|  --x:real^N = y <=> x = --y
-      #|  (k:real^N) IN D
-      #|  IMAGE ((m:real^N->real^N->real^N) k) C SUBSET D /\\\n    IMAGE ((m:real^N->real^N->real^N) k) D SUBSET C
-      #|  D = IMAGE ((m:real^N->real^N->real^N) k) C
-      #|  k:real^N = vec 0 \\/ x + --(&1) % y:real^N = vec 0
-      #|  y:real^N
-      #|  x:real^N
-      #|  forall x y. (m:real^N->real^N->real^N) k x = m k y <=> x = y
-      #|  linear((m:real^N->real^N->real^N) k)
-      #|  k:real^N
-      #|  ~(s SUBSET {z}) <=> ?a. a IN s /\\ ~(a = z)
-      #|  2 + d = 4 <=> d = 2
-      #|  dim(D:real^N->bool) = 0
-      #|  forall x y z. (m:real^N->real^N->real^N) (m x y) z = m x (m y z)
-      #|  inv(&2) % (x + m i (m x i)):real^N
-      #|  inv(&2) % (x + --(&1) % m i (m x i)):real^N
-      #|  x:real^N
-      #|  s = UNIV <=> forall x. x IN s
-      #|  dim(C UNION D:real^N->bool) = dimindex(:N)
-      #|  a:real^N = b /\\ --a = b <=> a = vec 0 /\\ b = vec 0
-      #|  C INTER D:real^N->bool = {vec 0}
-      #|  D:real^N->bool
-      #|  C:real^N->bool
-      #|  subspace(D:real^N->bool)
-      #|  --x:real^N = y <=> x = --y
-      #|  subspace(C:real^N->bool) /\\ subspace(D:real^N->bool)
-      #|  D = {x | --((m:real^N->real^N->real^N) i x) = m x i}
-      #|  {k:real^N,i,e}
-      #|  k:real^N
-      #|  t SUBSET s /\\ (forall a. a IN s /\\ ~(a IN t) ==> F) ==> s = t
-      #|  {x | (m:real^N->real^N->real^N) i x = m x i} = C
-      #|  j:real^N
-      #|  span{j:real^N,e} = span{i,e}
-      #|  ~(i:real^N = vec 0)
-      #|  &0 <= x ==> ~(x + &1 = &0)
-      #|  c % c % e:real^N = --e <=> (c pow 2 + &1) % e = vec 0
-      #|  (m:real^N->real^N->real^N) i i = --e
-      #|  c:real
-      #|  ~(i IN span {e:real^N})
-      #|  j + x % e:real^N = y % e ==> j = (y - x) % e
-      #|  ~(j IN span{e:real^N})
-      #|  (x % e + --y % k) + (y % k + w % z % e):real^N = (x + w * z) % e
-      #|  sqrt(b + a pow 2 / &4)
-      #|  (?c:real. P c \\/ P(--c)) ==> ?c. P c
-      #|  k:real^N = --c % e <=> k + c % e = vec 0
-      #|  ?c. k:real^N = --c % e
-      #|  &0 <= --x /\\ ~(x = &0) <=> ~(&0 <= x)
-      #|  x pow 2 = --y /\\ ~(y = &0) ==> inv x pow 2 * y = --(&1)
-      #|  inv(sqrt(--(b + a pow 2 / &4))) % k:real^N
-      #|  (k:real^N) IN C
-      #|  (m:real^N->real^N->real^N) k k = (b + a pow 2 / &4) % e
-      #|  k:real^N = j + (--a / &2) % e
-      #|  b:real
-      #|  a:real
-      #|  (m:real^N->real^N->real^N) j j IN C
-      #|  ?i. i IN C /\\ (m:real^N->real^N->real^N) i i = --e
-      #|  {m j j:real^N,j,e}
-      #|  (~p ==> F) ==> p
-      #|  forall x y:real^N. x IN C /\\ y IN C ==> m x y IN C
-      #|  dim(C:real^N->bool) = 2
-      #|  subspace(C:real^N->bool)
-      #|  (e:real^N) IN C /\\ j IN C
-      #|  C = span{j:real^N,e}
-      #|  (forall x. (m:real^N->real^N->real^N) x (vec 0) = vec 0) /\\\n    (forall x. (m:real^N->real^N->real^N) (vec 0) x = vec 0)
-      #|  m:real^N->real^N->real^N
-      #|  C:real^N->bool = {}
-      #|  dim(C:real^N->bool)
-      #|  (z:real^N) IN C
-      #|  z:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  (m:real^N->real^N->real^N) (m x z) y
-      #|  (m:real^N->real^N->real^N) (m z x) y
-      #|  y:real^N
-      #|  x:real^N
-      #|  z:real^N
-      #|  forall x y. x IN C /\\ y IN C ==> (m:real^N->real^N->real^N) x y = m y x
-      #|  forall x:real^N. C x <=> x IN C
-      #|  (forall x:real^N. x IN s ==> C x) /\\\n      (forall c x. C x ==> C(c % x)) /\\\n      (forall x y. C x /\\ C y ==> C(x + y)) /\\\n      (forall x y. C x /\\ C y ==> C(m x y))
-      #|  C:real^N->bool
-      #|  forall s. (forall x y. x IN s /\\ y IN s ==> (m:real^N->real^N->real^N) x y = m y x)\n        ==> dim s <= 2
-      #|  j:real^N
-      #|  ~(s = UNIV) ==> ?x. ~(x IN s)
-      #|  dim:(real^N->bool)->num
-      #|  span {e} = (:real^N)
-      #|  ~(basis 1:real^N = vec 0)
-      #|  ~(e:real^N = vec 0)
-      #|  e:real^N
-      #|  m:real^N->real^N->real^N
-      #|  forall m:real^N->real^N->real^N.\n        bilinear m /\\\n        (forall x y z. m (m x y) z = m x (m y z)) /\\\n        (forall x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> dimindex(:N) IN {1,2,4}
+      #|  (x : Cart[Real, N]) => op_dollar(x, 2)
+      #|  ((x : Cart[Real, N]) + op_pct(-(c : Real), (y : Cart[Real, N])) == vec(0)) == (x == op_pct(c, y))
+      #|  (basis : (Num) -> Cart[Real, N])(2) + (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(-(c : Real), (basis : (Num) -> Cart[Real, N])(1)) == (vec : (Num) -> Cart[Real, N])(0) || (w : Cart[Real, N]) == (vec : (Num) -> Cart[Real, N])(0)
+      #|  !((w : Cart[Real, N]) == vec(0))
+      #|  \226\136\131 w : Cart[Real, N], (v : Cart[Real, N]) == (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(basis(1), w)
+      #|  (v : Cart[Real, N]) == vec(0)
+      #|  (c : Real)
+      #|  (v : Cart[Real, N])
+      #|  o((m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(basis(2)), (g : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  ((x : Cart[Real, N]) + op_pct(-real_of_num(1), (y : Cart[Real, N])) == vec(0)) == (x == y)
+      #|  (basis : (Num) -> Cart[Real, N])(1) == (vec : (Num) -> Cart[Real, N])(0) || (x : Cart[Real, N]) + (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(-real_of_num(1), (y : Cart[Real, N])) == (vec : (Num) -> Cart[Real, N])(0)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  \226\136\131 g : (Cart[Real, N]) -> Cart[Real, N], linear(g) && (\226\136\128 x : Cart[Real, N], g((m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(basis(1), x)) == x) && (\226\136\128 x : Cart[Real, N], m(basis(1), g(x)) == x)
+      #|  !((n : Num) == 1) \226\134\146 1 <= n \226\134\146 2 <= n
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) == 1
+      #|  \226\136\128 m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], (bilinear : ((Cart[Real, N], Cart[Real, N]) -> Cart[Real, N]) -> Bool)(m) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], m(x, y) == (vec : (Num) -> Cart[Real, N])(0) \226\134\146 x == (vec : (Num) -> Cart[Real, N])(0) || y == (vec : (Num) -> Cart[Real, N])(0)) \226\134\146 (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) == 1 || EVEN((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))
+      #|  ((x : Cart[Real, N]) == op_pct(-real_of_num(1), x)) == (x == vec(0))
+      #|  (x : Cart[Real, N])
+      #|  !SUBSET((s : (_) -> Bool), {(a : _)}) == (\226\136\131 x : _, IN(x, s) && !(x == a))
+      #|  3 <= (n : Num) \226\134\146 !(n == 0)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (v : (Cart[Real, N]) -> Bool) == IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (u : (Cart[Real, N]) -> Bool))
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  ((x : Cart[Real, N]) + op_pct(-real_of_num(1), (y : Cart[Real, N])) == vec(0)) == (x == y)
+      #|  (x : Cart[Real, N]) == vec(0) || (y : Cart[Real, N]) + op_pct(-real_of_num(1), (z : Cart[Real, N])) == vec(0)
+      #|  (op_pct(real_of_num(2), (x : Cart[Real, N])) == op_pct(real_of_num(2), (y : Cart[Real, N]))) == (x == y)
+      #|  (z : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N]) == (y : Cart[Real, N]) \226\134\146 x + y == op_pct(real_of_num(2), y)
+      #|  (z : Cart[Real, N])
+      #|  real_of_num(1)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N]) => x
+      #|  (x : Cart[Real, N]) => x
+      #|  (x : Cart[Real, N]) => x
+      #|  (x : Cart[Real, N]) => x
+      #|  (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  DELETE((s : (Cart[Real, N]) -> Bool), vec(0))
+      #|  (x : Cart[Real, N]) => (h : Cart[Real, N]) => op_pct(real_of_num(2), (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(h, x))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 pow(x, 2) * (inv(x) * inv(x)) == real_of_num(1)
+      #|  IN((x : _), (k : (_) -> Bool)) \226\134\146 (y : _) == x \226\134\146 IN(y, k)
+      #|  norm((f : (Cart[Real, N]) -> Cart[Real, N])(op_pct(inv(norm((x : Cart[Real, N]))), x)))
+      #|  !((f : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])) == vec(0)) && !(x == vec(0))
+      #|  (x : Cart[Real, N])
+      #|  sqrt((B : Real) / norm((f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N]))))
+      #|  (B : Real)
+      #|  real_of_num(0) < norm((f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N])))
+      #|  (a : Cart[Real, N]) == vec(0)
+      #|  (a : Cart[Real, N])
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), sphere((vec(0), real_of_num(1))))
+      #|  continuous_on((f : (Cart[Real, N]) -> Cart[Real, N]), UNIV)
+      #|  {(x : Cart[Real, N]) | IN(x, DELETE((s : (Cart[Real, N]) -> Bool), vec(0))) && IN((f : (Cart[Real, N]) -> Cart[Real, N])(x), (k : (Cart[Real, N]) -> Bool))} == INTER(s, {(x : Cart[Real, N]) | IN(x, UNIV) && IN(f(x), k)})
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  ((x : Cart[Real, N]) + (y : Cart[Real, N]) == x) == (y == vec(0))
+      #|  \226\136\128 x : Cart[Real, N], ((f : (Cart[Real, N]) -> Cart[Real, N])(x) == vec(0)) == (x == vec(0))
+      #|  DELETE((s : (Cart[Real, N]) -> Bool), vec(0))
+      #|  DELETE((s : (Cart[Real, N]) -> Bool), vec(0))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N]) == ((x : Cart[Real, N]) => (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x, x))
+      #|  (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 c : Real, (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x, op_pct(c, y)) == op_pct(c, m(x, y))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 z : Cart[Real, N], m(x, y + z) == m(x, y) + m(x, z))
+      #|  ((n : Num) <= 2) == !(3 <= n)
+      #|  \226\136\128 m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, bilinear(m) && subspace(s) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], m(x, y) == vec(0) \226\134\146 x == vec(0) || y == vec(0)) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) \226\134\146 IN(m(x, y), s) && m(x, y) == m(y, x)) \226\134\146 dim(s) <= 2
+      #|  (x : Cart[Real, N])
+      #|  op_pct(-real_of_num(1), (x : Cart[Real, N]))
+      #|  (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  1 <= (n : Num) && n <= 2 \226\134\146 n == 1 || n == 2
+      #|  \226\136\128 m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], (bilinear : ((Cart[Real, N], Cart[Real, N]) -> Cart[Real, N]) -> Bool)(m) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], m(x, y) == m(y, x)) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], m(x, y) == (vec : (Num) -> Cart[Real, N])(0) \226\134\146 x == (vec : (Num) -> Cart[Real, N])(0) || y == (vec : (Num) -> Cart[Real, N])(0)) \226\134\146 (IN : (Num, (Num) -> Bool) -> Bool)((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), {1, 2})
+      #|  (x : Cart[Real, N]) + op_pct(-real_of_num(1), x) == vec(0)
+      #|  (x : Cart[Real, N]) - (y : Cart[Real, N]) == x + op_pct(-real_of_num(1), y)
+      #|  \226\136\128 x : Cart[Real, N], ((e : Cart[Real, N]) == vec(0) || (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(e, x) - x == vec(0)) && (m(x, e) - x == vec(0) || e == vec(0))
+      #|  ((x : Cart[Real, N]) + op_pct(-real_of_num(1), (y : Cart[Real, N])) == vec(0)) == (x == y)
+      #|  (basis : (Num) -> Cart[Real, N])(1) == (vec : (Num) -> Cart[Real, N])(0) || (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((e : Cart[Real, N]), e) + (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(-real_of_num(1), e) == (vec : (Num) -> Cart[Real, N])(0)
+      #|  (e : Cart[Real, N]) == vec(0)
+      #|  (e : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(basis(1), x) + op_pct(-real_of_num(1), m(basis(1), y)) == m(basis(1), x + op_pct(-real_of_num(1), y))
+      #|  ((x : Cart[Real, N]) == (y : Cart[Real, N])) == (x + op_pct(-real_of_num(1), y) == vec(0))
+      #|  (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(basis(1))
+      #|  \226\136\131 e : Cart[Real, N], (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(basis(1), e) == basis(1)
+      #|  !((basis : (Num) -> Cart[Real, N])(1) == (vec : (Num) -> Cart[Real, N])(0))
+      #|  \226\136\128 m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], bilinear(m) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], m(m(x, x), y) == m(x, m(x, y))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], m(m(x, y), y) == m(x, m(y, y))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], m(x, y) == vec(0) \226\134\146 x == vec(0) || y == vec(0)) \226\134\146 (\226\136\131 e : Cart[Real, N], (\226\136\128 x : Cart[Real, N], m(e, x) == x) && (\226\136\128 x : Cart[Real, N], m(x, e) == x))
+      #|  \226\136\128 m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], bilinear(m) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 z : Cart[Real, N], m(m(x, y), z) == m(x, m(y, z))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], m(x, y) == vec(0) \226\134\146 x == vec(0) || y == vec(0)) \226\134\146 (\226\136\131 e : Cart[Real, N], (\226\136\128 x : Cart[Real, N], m(e, x) == x) && (\226\136\128 x : Cart[Real, N], m(x, e) == x))
+      #|  dim({(m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((i : Cart[Real, N]), i), i, (e : Cart[Real, N])})
+      #|  !((basis : (Num) -> Cart[Real, N])(1) == (vec : (Num) -> Cart[Real, N])(0))
+      #|  !((e : Cart[Real, N]) == vec(0))
+      #|  \226\136\128 w : Cart[Real, N], \226\136\128 z : Cart[Real, N], IN(w, (C : (Cart[Real, N]) -> Bool)) && IN(z, C) \226\134\146 (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(m((i : Cart[Real, N]), w), m(i, z)) == m(i, m(m(w, z), i))
+      #|  (y : Cart[Real, N])
+      #|  (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((i : Cart[Real, N]), (x : Cart[Real, N])) == m(x, i) && m(i, (y : Cart[Real, N])) == m(y, i)
+      #|  ((p : Bool) \226\134\146 (q : Bool) == (r : Bool)) \226\134\146 (p \226\134\146 q) \226\134\146 p \226\134\146 r
+      #|  (y : Cart[Real, N])
+      #|  ((r : Bool) && (s : Bool)) && ((p : Bool) \226\134\146 (q : Bool)) && p \226\134\146 p && q && r && s
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == (p \226\134\146 p && q)
+      #|  ((p : Bool) \226\134\146 (q : Bool)) && p \226\134\146 p && q
+      #|  IN((x : Cart[Real, N]), (C : (Cart[Real, N]) -> Bool))
+      #|  (((p : Bool) \226\134\146 (q : Bool)) && (p \226\134\146 (r : Bool))) == (p \226\134\146 q && r)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (C : (Cart[Real, N]) -> Bool)) \226\134\146 (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((i : Cart[Real, N]), x) == m(x, i)
+      #|  (C : (Cart[Real, N]) -> Bool)
+      #|  (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  IN((i : Cart[Real, N]), (C : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 x : Cart[Real, N], (C : (Cart[Real, N]) -> Bool)(x) == IN(x, C)
+      #|  (\226\136\128 x : Cart[Real, N], IN(x, {(e : Cart[Real, N])}) \226\134\146 (C : (Cart[Real, N]) -> Bool)(x)) && (\226\136\128 x : Cart[Real, N], C(x) \226\134\146 C((m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((i : Cart[Real, N]), x))) && (\226\136\128 x : Cart[Real, N], C(x) \226\134\146 C(m(x, i))) && (\226\136\128 c : Real, \226\136\128 x : Cart[Real, N], C(x) \226\134\146 C(op_pct(c, x))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], C(x) && C(y) \226\134\146 C(x + y))
+      #|  (C : (Cart[Real, N]) -> Bool)
+      #|  {(e : _), (i : _)} == {i, e}
+      #|  IN((i : Cart[Real, N]), span({(e : Cart[Real, N])}))
+      #|  (i : Cart[Real, N])
+      #|  (x : Cart[Real, N]) - (y : Cart[Real, N]) == x + op_pct(-real_of_num(1), y)
+      #|  ((x : Cart[Real, N]) + ((y : Cart[Real, N]) - (z : Cart[Real, N])) == y) == (z == x)
+      #|  (x : Cart[Real, N]) - (y : Cart[Real, N]) == x + op_pct(-real_of_num(1), y)
+      #|  (A : ((Cart[Real, N], Cart[Real, N], Cart[Real, N])) -> Cart[Real, N])(((y : Cart[Real, N]), (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((z : Cart[Real, N]), z), (x : Cart[Real, N]))) + (m(A((x, y, z)), z) - A((x, y, m(z, z))))
+      #|  (A : ((Cart[Real, N], Cart[Real, N], Cart[Real, N])) -> Cart[Real, N])(((y : Cart[Real, N]), (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((z : Cart[Real, N]), z), (x : Cart[Real, N]))) - A((m(y, z), z, x))
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 z : Cart[Real, N], (A : ((Cart[Real, N], Cart[Real, N], Cart[Real, N])) -> Cart[Real, N])(((m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(z, x), y, z)) == m(A((x, y, z)), z)
+      #|  ((x : Cart[Real, N]) == -(y : Cart[Real, N])) == (x + y == vec(0))
+      #|  (A : ((Cart[Real, N], Cart[Real, N], Cart[Real, N])) -> Cart[Real, N])(((x : Cart[Real, N]) + (z : Cart[Real, N]), (y : Cart[Real, N]), x + z)) == vec(0)
+      #|  -(A : ((Cart[Real, N], Cart[Real, N], Cart[Real, N])) -> Cart[Real, N])(((z : Cart[Real, N]), (y : Cart[Real, N]), (x : Cart[Real, N])))
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 z : Cart[Real, N], (A : ((Cart[Real, N], Cart[Real, N], Cart[Real, N])) -> Cart[Real, N])((x, y, z)) == A((y, z, x))
+      #|  (A : ((Cart[Real, N], Cart[Real, N], Cart[Real, N])) -> Cart[Real, N])(((x : Cart[Real, N]) + (y : Cart[Real, N]), x + y, (z : Cart[Real, N]))) == vec(0)
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 z : Cart[Real, N], -(A : ((Cart[Real, N], Cart[Real, N], Cart[Real, N])) -> Cart[Real, N])((x, y, z)) == A((y, x, z))
+      #|  (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], (A : ((Cart[Real, N], Cart[Real, N], Cart[Real, N])) -> Cart[Real, N])((x, x, y)) == vec(0)) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], A((x, y, y)) == vec(0)) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], A((x, y, x)) == vec(0)) && (\226\136\128 w : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 z : Cart[Real, N], A((w + x, y, z)) == A((w, y, z)) + A((x, y, z))) && (\226\136\128 w : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 z : Cart[Real, N], A((w, x + y, z)) == A((w, x, z)) + A((w, y, z))) && (\226\136\128 w : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 z : Cart[Real, N], A((w, x, y + z)) == A((w, x, y)) + A((w, x, z)))
+      #|  (A : ((Cart[Real, N], Cart[Real, N], Cart[Real, N])) -> Cart[Real, N]) == GABS((f : ((Cart[Real, N], Cart[Real, N], Cart[Real, N])) -> Cart[Real, N]) => \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 z : Cart[Real, N], GEQ(f((x, y, z)), (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x, m(y, z)) - m(m(x, y), z)))
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 z : Cart[Real, N], (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(m(z, x), m(y, z)) == m(z, m(m(x, y), z))
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(m(x, y), y) == m(x, m(y, y))
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(m(x, y), x) == m(x, m(y, x))
+      #|  (e : Cart[Real, N])
+      #|  (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], bilinear(m) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], m(m(x, x), y) == m(x, m(x, y))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], m(m(x, y), y) == m(x, m(y, y))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], m(x, y) == vec(0) \226\134\146 x == vec(0) || y == vec(0)) \226\134\146 (\226\136\131 e : Cart[Real, N], (\226\136\128 x : Cart[Real, N], m(e, x) == x) && (\226\136\128 x : Cart[Real, N], m(x, e) == x) && (\226\136\128 x : Cart[Real, N], IN(m(x, x), span({e, x}))))
+      #|  (x : Cart[Real, N]) + (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  subspace((s : (Cart[Real, _]) -> Bool)) && subspace((t : (Cart[Real, _]) -> Bool)) && span(s) == span(t) \226\134\146 s == t
+      #|  SUBSET(IMAGE((f : (_) -> _), (c : (_) -> Bool)), (d : (_) -> Bool)) && SUBSET(IMAGE(f, d), c) && (\226\136\128 x : _, \226\136\128 y : _, f(x) == f(y) \226\134\146 x == y) && IMAGE(f, IMAGE(f, c)) == c \226\134\146 d == IMAGE(f, c)
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 z : Cart[Real, N], (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(m(x, y), z) == m(x, m(y, z))
+      #|  (-(x : Cart[Real, N]) == (y : Cart[Real, N])) == (x == -y)
+      #|  IN((k : Cart[Real, N]), (D : (Cart[Real, N]) -> Bool))
+      #|  SUBSET(IMAGE((m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((k : Cart[Real, N])), (C : (Cart[Real, N]) -> Bool)), (D : (Cart[Real, N]) -> Bool)) && SUBSET(IMAGE(m(k), D), C)
+      #|  (D : (Cart[Real, N]) -> Bool) == IMAGE((m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((k : Cart[Real, N])), (C : (Cart[Real, N]) -> Bool))
+      #|  (k : Cart[Real, N]) == vec(0) || (x : Cart[Real, N]) + op_pct(-real_of_num(1), (y : Cart[Real, N])) == vec(0)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], ((m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((k : Cart[Real, N]), x) == m(k, y)) == (x == y)
+      #|  linear((m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((k : Cart[Real, N])))
+      #|  (k : Cart[Real, N])
+      #|  !SUBSET((s : (_) -> Bool), {(z : _)}) == (\226\136\131 a : _, IN(a, s) && !(a == z))
+      #|  (2 + (d : Num) == 4) == (d == 2)
+      #|  dim((D : (Cart[Real, N]) -> Bool)) == 0
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 z : Cart[Real, N], (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(m(x, y), z) == m(x, m(y, z))
+      #|  op_pct(inv(real_of_num(2)), (x : Cart[Real, N]) + (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((i : Cart[Real, N]), m(x, i)))
+      #|  op_pct(inv(real_of_num(2)), (x : Cart[Real, N]) + op_pct(-real_of_num(1), (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((i : Cart[Real, N]), m(x, i))))
+      #|  (x : Cart[Real, N])
+      #|  ((s : (_) -> Bool) == UNIV) == (\226\136\128 x : _, IN(x, s))
+      #|  (dim : ((Cart[Real, N]) -> Bool) -> Num)((UNION : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((C : (Cart[Real, N]) -> Bool), (D : (Cart[Real, N]) -> Bool))) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  ((a : Cart[Real, N]) == (b : Cart[Real, N]) && -a == b) == (a == vec(0) && b == vec(0))
+      #|  INTER((C : (Cart[Real, N]) -> Bool), (D : (Cart[Real, N]) -> Bool)) == {vec(0)}
+      #|  (D : (Cart[Real, N]) -> Bool)
+      #|  (C : (Cart[Real, N]) -> Bool)
+      #|  subspace((D : (Cart[Real, N]) -> Bool))
+      #|  (-(x : Cart[Real, N]) == (y : Cart[Real, N])) == (x == -y)
+      #|  subspace((C : (Cart[Real, N]) -> Bool)) && subspace((D : (Cart[Real, N]) -> Bool))
+      #|  (D : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | -(m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((i : Cart[Real, N]), x) == m(x, i)}
+      #|  {(k : Cart[Real, N]), (i : Cart[Real, N]), (e : Cart[Real, N])}
+      #|  (k : Cart[Real, N])
+      #|  SUBSET((t : (_) -> Bool), (s : (_) -> Bool)) && (\226\136\128 a : _, IN(a, s) && !IN(a, t) \226\134\146 false) \226\134\146 s == t
+      #|  {(x : Cart[Real, N]) | (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((i : Cart[Real, N]), x) == m(x, i)} == (C : (Cart[Real, N]) -> Bool)
+      #|  (j : Cart[Real, N])
+      #|  span({(j : Cart[Real, N]), (e : Cart[Real, N])}) == span({(i : Cart[Real, N]), e})
+      #|  !((i : Cart[Real, N]) == vec(0))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 !(x + real_of_num(1) == real_of_num(0))
+      #|  (op_pct((c : Real), op_pct(c, (e : Cart[Real, N]))) == -e) == (op_pct(pow(c, 2) + real_of_num(1), e) == vec(0))
+      #|  (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((i : Cart[Real, N]), i) == -(e : Cart[Real, N])
+      #|  (c : Real)
+      #|  !IN((i : Cart[Real, N]), span({(e : Cart[Real, N])}))
+      #|  (j : Cart[Real, N]) + op_pct((x : Real), (e : Cart[Real, N])) == op_pct((y : Real), e) \226\134\146 j == op_pct(y - x, e)
+      #|  !IN((j : Cart[Real, N]), span({(e : Cart[Real, N])}))
+      #|  op_pct((x : Real), (e : Cart[Real, N])) + op_pct(-(y : Real), (k : Cart[Real, N])) + (op_pct(y, k) + op_pct((w : Real), op_pct((z : Real), e))) == op_pct(x + w * z, e)
+      #|  sqrt((b : Real) + pow((a : Real), 2) / real_of_num(4))
+      #|  (\226\136\131 c : Real, (P : (Real) -> Bool)(c) || P(-c)) \226\134\146 (\226\136\131 c : Real, P(c))
+      #|  ((k : Cart[Real, N]) == op_pct(-(c : Real), (e : Cart[Real, N]))) == (k + op_pct(c, e) == vec(0))
+      #|  \226\136\131 c : Real, (k : Cart[Real, N]) == op_pct(-c, (e : Cart[Real, N]))
+      #|  (real_of_num(0) <= -(x : Real) && !(x == real_of_num(0))) == !(real_of_num(0) <= x)
+      #|  pow((x : Real), 2) == -(y : Real) && !(y == real_of_num(0)) \226\134\146 pow(inv(x), 2) * y == -real_of_num(1)
+      #|  op_pct(inv(sqrt(-((b : Real) + pow((a : Real), 2) / real_of_num(4)))), (k : Cart[Real, N]))
+      #|  IN((k : Cart[Real, N]), (C : (Cart[Real, N]) -> Bool))
+      #|  (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((k : Cart[Real, N]), k) == op_pct((b : Real) + pow((a : Real), 2) / real_of_num(4), (e : Cart[Real, N]))
+      #|  (k : Cart[Real, N]) == (j : Cart[Real, N]) + op_pct(-(a : Real) / real_of_num(2), (e : Cart[Real, N]))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  IN((m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((j : Cart[Real, N]), j), (C : (Cart[Real, N]) -> Bool))
+      #|  \226\136\131 i : Cart[Real, N], IN(i, (C : (Cart[Real, N]) -> Bool)) && (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(i, i) == -(e : Cart[Real, N])
+      #|  {(m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((j : Cart[Real, N]), j), j, (e : Cart[Real, N])}
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, (C : (Cart[Real, N]) -> Bool)) && IN(y, C) \226\134\146 IN((m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x, y), C)
+      #|  dim((C : (Cart[Real, N]) -> Bool)) == 2
+      #|  subspace((C : (Cart[Real, N]) -> Bool))
+      #|  IN((e : Cart[Real, N]), (C : (Cart[Real, N]) -> Bool)) && IN((j : Cart[Real, N]), C)
+      #|  (C : (Cart[Real, N]) -> Bool) == span({(j : Cart[Real, N]), (e : Cart[Real, N])})
+      #|  (\226\136\128 x : Cart[Real, N], (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x, vec(0)) == vec(0)) && (\226\136\128 x : Cart[Real, N], m(vec(0), x) == vec(0))
+      #|  (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  (C : (Cart[Real, N]) -> Bool) == {}
+      #|  dim((C : (Cart[Real, N]) -> Bool))
+      #|  IN((z : Cart[Real, N]), (C : (Cart[Real, N]) -> Bool))
+      #|  (z : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(m((x : Cart[Real, N]), (z : Cart[Real, N])), (y : Cart[Real, N]))
+      #|  (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(m((z : Cart[Real, N]), (x : Cart[Real, N])), (y : Cart[Real, N]))
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, (C : (Cart[Real, N]) -> Bool)) && IN(y, C) \226\134\146 (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x, y) == m(y, x)
+      #|  \226\136\128 x : Cart[Real, N], (C : (Cart[Real, N]) -> Bool)(x) == IN(x, C)
+      #|  (\226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 (C : (Cart[Real, N]) -> Bool)(x)) && (\226\136\128 c : Real, \226\136\128 x : Cart[Real, N], C(x) \226\134\146 C(op_pct(c, x))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], C(x) && C(y) \226\134\146 C(x + y)) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], C(x) && C(y) \226\134\146 C((m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x, y)))
+      #|  (C : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) \226\134\146 (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(x, y) == m(y, x)) \226\134\146 dim(s) <= 2
+      #|  (j : Cart[Real, N])
+      #|  !((s : (_) -> Bool) == UNIV) \226\134\146 (\226\136\131 x : _, !IN(x, s))
+      #|  (dim : ((Cart[Real, N]) -> Bool) -> Num)
+      #|  span({(e : Cart[Real, N])}) == UNIV
+      #|  !((basis : (Num) -> Cart[Real, N])(1) == (vec : (Num) -> Cart[Real, N])(0))
+      #|  !((e : Cart[Real, N]) == vec(0))
+      #|  (e : Cart[Real, N])
+      #|  (m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 m : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N], (bilinear : ((Cart[Real, N], Cart[Real, N]) -> Cart[Real, N]) -> Bool)(m) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 z : Cart[Real, N], m(m(x, y), z) == m(x, m(y, z))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], m(x, y) == (vec : (Num) -> Cart[Real, N])(0) \226\134\146 x == (vec : (Num) -> Cart[Real, N])(0) || y == (vec : (Num) -> Cart[Real, N])(0)) \226\134\146 (IN : (Num, (Num) -> Bool) -> Bool)((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), {1, 2, 4})
       #|DIVISION_ALGEBRA =  |- (#forall:fun(fun(fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))),bool),bool) (\m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#bilinear:fun(fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))),bool) m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))))) (#forall:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N))) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) x:cart(real,'N)) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) y:cart(real,'N)) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num))))))))))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#EVEN:fun(num,bool) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))))))
       #|COMMUTATIVE_DIVISION_ALGEBRA_GEN =  |- (#forall:fun(fun(fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))),bool),bool) (\m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))). (#forall:fun(fun(fun(cart(real,'N),bool),bool),bool) (\s:fun(cart(real,'N),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#bilinear:fun(fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))),bool) m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))))) ((#/\:fun(bool,fun(bool,bool)) (#subspace:fun(fun(cart(real,'N),bool),bool) s:fun(cart(real,'N),bool))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N))) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) x:cart(real,'N)) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) y:cart(real,'N)) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))))))))) (#forall:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) s:fun(cart(real,'N),bool))) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) y:cart(real,'N)) s:fun(cart(real,'N),bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N))) s:fun(cart(real,'N),bool))) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N))) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) y:cart(real,'N)) x:cart(real,'N))))))))))))) ((#<=:fun(num,fun(num,bool)) (#dim:fun(fun(cart(real,'N),bool),num) s:fun(cart(real,'N),bool))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
       #|COMMUTATIVE_DIVISION_ALGEBRA =  |- (#forall:fun(fun(fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))),bool),bool) (\m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#bilinear:fun(fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))),bool) m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N))) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) y:cart(real,'N)) x:cart(real,'N)))))))) (#forall:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N))) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) x:cart(real,'N)) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) y:cart(real,'N)) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))))))))))) ((#IN:fun(num,fun(fun(num,bool),bool)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) ((#INSERT:fun(num,fun(fun(num,bool),fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#INSERT:fun(num,fun(fun(num,bool),fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) #EMPTY:fun(num,bool)))))))
