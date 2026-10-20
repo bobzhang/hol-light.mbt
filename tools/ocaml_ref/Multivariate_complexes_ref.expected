@@ -73720,543 +73720,543 @@ Warning: inventing type variables
 Warning: inventing type variables
 Multivariate/complexes quotations (538):
   :real^2
-  vector_neg:complex->complex
-  vector_add:complex->complex->complex
-  vector_sub:complex->complex->complex
-  complex_mul:complex->complex->complex
-  complex_div:complex->complex->complex
-  complex_pow:complex->num->complex
-  complex_inv:complex->complex
-  Re(z:complex) = z$1
-  Im(z:complex) = z$2
-  complex(x,y) = vector[x;y]:complex
-  Cx(a) = complex(a,&0)
-  ii = complex(&0,&1)
-  w * z = complex(Re(w) * Re(z) - Im(w) * Im(z),\n                   Re(w) * Im(z) + Im(w) * Re(z))
-  inv(z) = complex(Re(z) / (Re(z) pow 2 + Im(z) pow 2),\n                    --(Im(z)) / (Re(z) pow 2 + Im(z) pow 2))
-  w / z = w * inv(z)
-  (x pow 0 = Cx(&1)) /\\\n   (forall n. x pow (SUC n) = x * x pow n)
+  (op_minus_minus : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (op_plus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (op_minus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (complex_mul : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (complex_div : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (complex_pow : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]])
+  (complex_inv : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (Re : (Cart[Real, Tybit0[Unit]]) -> Real)((z : Cart[Real, Tybit0[Unit]])) == op_dollar(z, 1)
+  (Im : (Cart[Real, Tybit0[Unit]]) -> Real)((z : Cart[Real, Tybit0[Unit]])) == op_dollar(z, 2)
+  (complex : ((Real, Real)) -> Cart[Real, Tybit0[Unit]])(((x : Real), (y : Real))) == vector([x, y])
+  (Cx : (Real) -> Cart[Real, Tybit0[Unit]])((a : Real)) == complex((a, real_of_num(0)))
+  (ii : Cart[Real, Tybit0[Unit]]) == complex((real_of_num(0), real_of_num(1)))
+  (complex_mul : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])) == complex((Re(w) * Re(z) - Im(w) * Im(z), Re(w) * Im(z) + Im(w) * Re(z)))
+  (complex_inv : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z : Cart[Real, Tybit0[Unit]])) == complex((Re(z) / (pow(Re(z), 2) + pow(Im(z), 2)), -Im(z) / (pow(Re(z), 2) + pow(Im(z), 2))))
+  (complex_div : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])) == w * inv(z)
+  (complex_pow : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, Tybit0[Unit]]), 0) == Cx(real_of_num(1)) && (\226\136\128 n : Num, complex_pow(x, SUC(n)) == x * complex_pow(x, n))
   :P
   :P
   \\n. n + 1
   \\n. n + 1
   \\n. n + 1
-  (Re(complex(x,y)) = x)
-  Im(complex(x,y)) = y
-  forall w z. (w = z) <=> (Re(w) = Re(z)) /\\ (Im(w) = Im(z))
-  forall z. complex(Re(z),Im(z)) = z
-  forall x y:real. x + y = &0 ==> &0 <= x /\\ &0 <= y ==> x = &0 /\\ y = &0
-  z = Cx(&0) <=> Re(z) pow 2 + Im(z) pow 2 = &0
-  (forall z. P z) <=> (forall x y. P(complex(x,y)))
-  (?z. P z) <=> (?x y. P(complex(x,y)))
-  --z = complex(--(Re(z)),--(Im(z)))
-  w + z = complex(Re(w) + Re(z),Im(w) + Im(z))
-  (w:complex) - z = w + --z
-  norm(z) = sqrt(Re(z) pow 2 + Im(z) pow 2)
-  norm(z) pow 2 = Re(z) pow 2 + Im(z) pow 2
-  forall x y. x + y = y + x
-  forall x y z. x + y + z = (x + y) + z
-  forall x. Cx(&0) + x = x
-  forall x. --x + x = Cx(&0)
-  forall x y. x * y = y * x
-  forall x y z. x * y * z = (x * y) * z
-  forall x. Cx(&1) * x = x
-  forall x y z. x * (y + z) = x * y + x * z
-  (m + n = n + m) /\\ ((m + n) + p = m + n + p) /\\ (m + n + p = n + m + p)
-  (m * n = n * m) /\\ ((m * n) * p = m * n * p) /\\ (m * n * p = n * m * p)
-  forall x. x + Cx(&0) = x
-  forall x. x * Cx(&1) = x
-  forall x. x + --x = Cx(&0)
-  forall x y z. (x + y) * z = x * z + y * z
-  forall x y z. (x + y = x + z) <=> (y = z)
-  forall x y z. (x + z = y + z) <=> (x = y)
-  forall x. x * Cx(&0) = Cx(&0)
-  forall x. Cx(&0) * x = Cx(&0)
-  forall x. --(--x) = x
-  forall x y. x * --y = --(x * y)
-  forall x y. --x * y = --(x * y)
-  forall x y. --(x + y) = --x + --y
-  --Cx(&0) = Cx(&0)
-  forall x y. (x + y = x) <=> (y = Cx(&0))
-  forall x y. (x + y = y) <=> (x = Cx(&0))
-  forall x y. (x + y = Cx(&0)) <=> (x = --y)
-  forall x y. (x + y = Cx(&0)) <=> (y = --x)
-  forall x y. --(x * y) = --x * y
-  forall x y. --(x * y) = x * --y
-  forall x y. --x * --y = x * y
-  forall x y. x - y + y = x
-  forall x y. y + x - y = x
-  forall x. x - x = Cx(&0)
-  forall x y. (x - y = Cx(&0)) <=> (x = y)
-  forall x. (--x = Cx(&0)) <=> (x = Cx(&0))
-  forall x y. --(x - y) = y - x
-  forall x y. (x + y) - x = y
-  forall x y. (--x = y) <=> (x = --y)
-  forall x. --x = --Cx(&1) * x
-  forall x y. x - y - x = --y
-  forall a b c d. (a + b) - (c + d) = a - c + b - d
-  forall x. Cx(&0) - x = --x
-  forall x. x - Cx(&0) = x
-  forall x y. --x - y = --(x + y)
-  forall x y. x - --y = x + y
-  forall x y. --x - --y = y - x
-  forall a b c. a - b + b - c = a - c
-  forall x y z. (x = y - z) <=> (x + z = y)
-  forall x y z. (x - y = z) <=> (x = z + y)
-  forall x y. x - (x - y) = y
-  forall x y. x - (x + y) = --y
-  forall x y. (x + y) * (x - y) = x * x - y * y
-  forall x y. (--x = --y) <=> (x = y)
-  forall x y z. x * (y - z) = x * y - x * z
-  forall x y z. (x - y) * z = x * z - y * z
-  forall x. Cx(&2) * x = x + x
-  ~(ii = Cx(&0))
-  forall z. ~(z = Cx(&0)) ==> (inv(z) * z = Cx(&1))
-  forall x y. (x * y = Cx(&0)) <=> (x = Cx(&0)) \\/ (y = Cx(&0))
-  forall z. ~(z = Cx(&0)) ==> (z * inv(z) = Cx(&1))
-  forall x. ~(x = Cx(&0)) ==> (x / x = Cx(&1))
-  vec 0 = Cx(&0)
-  forall c x. c % x = Cx(c) * x
-  forall x m n. x pow (m + n) = x pow m * x pow n
-  forall x m n. (x pow m) pow n = x pow (m * n)
+  Re(complex(((x : Real), (y : Real)))) == x
+  Im(complex(((x : Real), (y : Real)))) == y
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (w == z) == (Re(w) == Re(z) && Im(w) == Im(z))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], complex((Re(z), Im(z))) == z
+  \226\136\128 x : Real, \226\136\128 y : Real, x + y == real_of_num(0) \226\134\146 real_of_num(0) <= x && real_of_num(0) <= y \226\134\146 x == real_of_num(0) && y == real_of_num(0)
+  ((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) == (pow(Re(z), 2) + pow(Im(z), 2) == real_of_num(0))
+  (\226\136\128 z : Cart[Real, Tybit0[Unit]], (P : (Cart[Real, Tybit0[Unit]]) -> Bool)(z)) == (\226\136\128 x : Real, \226\136\128 y : Real, P(complex((x, y))))
+  (\226\136\131 z : Cart[Real, Tybit0[Unit]], (P : (Cart[Real, Tybit0[Unit]]) -> Bool)(z)) == (\226\136\131 x : Real, \226\136\131 y : Real, P(complex((x, y))))
+  -(z : Cart[Real, Tybit0[Unit]]) == complex((-Re(z), -Im(z)))
+  (w : Cart[Real, Tybit0[Unit]]) + (z : Cart[Real, Tybit0[Unit]]) == complex((Re(w) + Re(z), Im(w) + Im(z)))
+  (w : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]]) == w + -z
+  norm((z : Cart[Real, Tybit0[Unit]])) == sqrt(pow(Re(z), 2) + pow(Im(z), 2))
+  pow(norm((z : Cart[Real, Tybit0[Unit]])), 2) == pow(Re(z), 2) + pow(Im(z), 2)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], x + y == y + x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], x + (y + z) == x + y + z
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], Cx(real_of_num(0)) + x == x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], -x + x == Cx(real_of_num(0))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], x * y == y * x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], x * (y * z) == x * y * z
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], Cx(real_of_num(1)) * x == x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], x * (y + z) == x * y + x * z
+  (m : Cart[Real, Tybit0[Unit]]) + (n : Cart[Real, Tybit0[Unit]]) == n + m && m + n + (p : Cart[Real, Tybit0[Unit]]) == m + (n + p) && m + (n + p) == n + (m + p)
+  (m : Cart[Real, Tybit0[Unit]]) * (n : Cart[Real, Tybit0[Unit]]) == n * m && m * n * (p : Cart[Real, Tybit0[Unit]]) == m * (n * p) && m * (n * p) == n * (m * p)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], x + Cx(real_of_num(0)) == x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], x * Cx(real_of_num(1)) == x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], x + -x == Cx(real_of_num(0))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (x + y) * z == x * z + y * z
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (x + y == x + z) == (y == z)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (x + z == y + z) == (x == y)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], x * Cx(real_of_num(0)) == Cx(real_of_num(0))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], Cx(real_of_num(0)) * x == Cx(real_of_num(0))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], --x == x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], x * -y == -(x * y)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], -x * y == -(x * y)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], -(x + y) == -x + -y
+  -Cx(real_of_num(0)) == Cx(real_of_num(0))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], (x + y == x) == (y == Cx(real_of_num(0)))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], (x + y == y) == (x == Cx(real_of_num(0)))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], (x + y == Cx(real_of_num(0))) == (x == -y)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], (x + y == Cx(real_of_num(0))) == (y == -x)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], -(x * y) == -x * y
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], -(x * y) == x * -y
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], -x * -y == x * y
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], x - y + y == x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], y + (x - y) == x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], x - x == Cx(real_of_num(0))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], (x - y == Cx(real_of_num(0))) == (x == y)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], (-x == Cx(real_of_num(0))) == (x == Cx(real_of_num(0)))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], -(x - y) == y - x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], x + y - x == y
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], (-x == y) == (x == -y)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], -x == -Cx(real_of_num(1)) * x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], x - y - x == -y
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 d : Cart[Real, Tybit0[Unit]], a + b - (c + d) == a - c + (b - d)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], Cx(real_of_num(0)) - x == -x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], x - Cx(real_of_num(0)) == x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], -x - y == -(x + y)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], x - -y == x + y
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], -x - -y == y - x
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], a - b + (b - c) == a - c
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (x == y - z) == (x + z == y)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (x - y == z) == (x == z + y)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], x - (x - y) == y
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], x - (x + y) == -y
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], (x + y) * (x - y) == x * x - y * y
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], (-x == -y) == (x == y)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], x * (y - z) == x * y - x * z
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (x - y) * z == x * z - y * z
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], Cx(real_of_num(2)) * x == x + x
+  !(ii == Cx(real_of_num(0)))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], !(z == Cx(real_of_num(0))) \226\134\146 inv(z) * z == Cx(real_of_num(1))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], (x * y == Cx(real_of_num(0))) == (x == Cx(real_of_num(0)) || y == Cx(real_of_num(0)))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], !(z == Cx(real_of_num(0))) \226\134\146 z * inv(z) == Cx(real_of_num(1))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], !(x == Cx(real_of_num(0))) \226\134\146 x / x == Cx(real_of_num(1))
+  vec(0) == Cx(real_of_num(0))
+  \226\136\128 c : Real, \226\136\128 x : Cart[Real, Tybit0[Unit]], op_pct(c, x) == Cx(c) * x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, pow(x, m + n) == pow(x, m) * pow(x, n)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, pow(pow(x, m), n) == pow(x, m * n)
   1
-  forall x. x pow 1 = x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], pow(x, 1) == x
   2
-  forall x. x pow 2 = x * x
-  EVEN n
-  forall x n. (--x) pow n = if EVEN n then x pow n else --(x pow n)
-  forall n. Cx(&1) pow n = Cx(&1)
-  forall x y n. (x * y) pow n = (x pow n) * (y pow n)
-  ii pow 2 = --Cx(&1)
-  forall x n. (x pow n = Cx(&0)) <=> (x = Cx(&0)) /\\ ~(n = 0)
-  forall n. Cx(&0) pow n = if n = 0 then Cx(&1) else Cx(&0)
-  forall x y. (Cx(x) = Cx(y)) <=> (x = y)
-  forall x. Cx(--x) = --(Cx(x))
-  forall x y. Cx(x + y) = Cx(x) + Cx(y)
-  forall x y. Cx(x - y) = Cx(x) - Cx(y)
-  x = &0
-  forall x. Cx(inv x) = inv(Cx x)
-  forall x y. Cx(x * y) = Cx(x) * Cx(y)
-  forall x n. Cx(x pow n) = Cx(x) pow n
-  forall x y. Cx(x / y) = Cx(x) / Cx(y)
-  forall x. Cx(abs x) = Cx(norm(Cx(x)))
-  forall x. norm(Cx(x)) = abs(x)
-  forall x y. dist(Cx x,Cx y) = abs(x - y)
-  forall x. Re(Cx x) = x
-  forall x. Re(--x) = --Re(x)
-  forall x y. Re(x + y) = Re(x) + Re(y)
-  forall x y. Re(x - y) = Re(x) - Re(y)
-  forall x. Im(Cx x) = &0
-  forall x. Im(--x) = --Im(x)
-  forall x y. Im(x + y) = Im(x) + Im(y)
-  forall x y. Im(x - y) = Im(x) - Im(y)
-  forall z. z = Cx(Re z) + ii * Cx(Im z)
-  forall x y. complex(x,y) = Cx(x) + ii * Cx(y)
-  Re ii = &0
-  Im ii = &1
-  forall z. Re(z * ii) = --(Im z) /\\ Re(ii * z) = --(Im z)
-  forall z. Im(z * ii) = Re z /\\ Im(ii * z) = Re z
-  norm ii = &1
-  forall a z. Re(a % z) = a * Re z
-  forall a z. Im(a % z) = a * Im z
-  forall x z. Re(Cx(x) * z) = x * Re z /\\\n         Re(z * Cx(x)) = Re z * x
-  forall x z. Im(Cx(x) * z) = x * Im z /\\\n         Im(z * Cx(x)) = Im z * x
-  forall z x. Re(z / Cx(x)) = Re(z) / x
-  forall z x. Im(z / Cx(x)) = Im(z) / x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], pow(x, 2) == x * x
+  EVEN((n : Num))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, pow(-x, n) == (if EVEN(n) { pow(x, n) } else { -pow(x, n) })
+  \226\136\128 n : Num, pow(Cx(real_of_num(1)), n) == Cx(real_of_num(1))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, pow(x * y, n) == pow(x, n) * pow(y, n)
+  pow(ii, 2) == -Cx(real_of_num(1))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, (pow(x, n) == Cx(real_of_num(0))) == (x == Cx(real_of_num(0)) && !(n == 0))
+  \226\136\128 n : Num, pow(Cx(real_of_num(0)), n) == (if n == 0 { Cx(real_of_num(1)) } else { Cx(real_of_num(0)) })
+  \226\136\128 x : Real, \226\136\128 y : Real, (Cx(x) == Cx(y)) == (x == y)
+  \226\136\128 x : Real, Cx(-x) == -Cx(x)
+  \226\136\128 x : Real, \226\136\128 y : Real, Cx(x + y) == Cx(x) + Cx(y)
+  \226\136\128 x : Real, \226\136\128 y : Real, Cx(x - y) == Cx(x) - Cx(y)
+  (x : Real) == real_of_num(0)
+  \226\136\128 x : Real, Cx(inv(x)) == inv(Cx(x))
+  \226\136\128 x : Real, \226\136\128 y : Real, Cx(x * y) == Cx(x) * Cx(y)
+  \226\136\128 x : Real, \226\136\128 n : Num, Cx(pow(x, n)) == pow(Cx(x), n)
+  \226\136\128 x : Real, \226\136\128 y : Real, Cx(x / y) == Cx(x) / Cx(y)
+  \226\136\128 x : Real, Cx(abs(x)) == Cx(norm(Cx(x)))
+  \226\136\128 x : Real, norm(Cx(x)) == abs(x)
+  \226\136\128 x : Real, \226\136\128 y : Real, dist((Cx(x), Cx(y))) == abs(x - y)
+  \226\136\128 x : Real, Re(Cx(x)) == x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], Re(-x) == -Re(x)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], Re(x + y) == Re(x) + Re(y)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], Re(x - y) == Re(x) - Re(y)
+  \226\136\128 x : Real, Im(Cx(x)) == real_of_num(0)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], Im(-x) == -Im(x)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], Im(x + y) == Im(x) + Im(y)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], Im(x - y) == Im(x) - Im(y)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], z == Cx(Re(z)) + ii * Cx(Im(z))
+  \226\136\128 x : Real, \226\136\128 y : Real, complex((x, y)) == Cx(x) + ii * Cx(y)
+  Re(ii) == real_of_num(0)
+  Im(ii) == real_of_num(1)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], Re(z * ii) == -Im(z) && Re(ii * z) == -Im(z)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], Im(z * ii) == Re(z) && Im(ii * z) == Re(z)
+  norm(ii) == real_of_num(1)
+  \226\136\128 a : Real, \226\136\128 z : Cart[Real, Tybit0[Unit]], Re(op_pct(a, z)) == a * Re(z)
+  \226\136\128 a : Real, \226\136\128 z : Cart[Real, Tybit0[Unit]], Im(op_pct(a, z)) == a * Im(z)
+  \226\136\128 x : Real, \226\136\128 z : Cart[Real, Tybit0[Unit]], Re(Cx(x) * z) == x * Re(z) && Re(z * Cx(x)) == Re(z) * x
+  \226\136\128 x : Real, \226\136\128 z : Cart[Real, Tybit0[Unit]], Im(Cx(x) * z) == x * Im(z) && Im(z * Cx(x)) == Im(z) * x
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, Re(z / Cx(x)) == Re(z) / x
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, Im(z / Cx(x)) == Im(z) / x
   Cx
   Cx
   Cx
-  x:real
-  n:num
-  (forall x y z. x + (y + z) = (x + y) + z) /\\\n   (forall x y. x + y = y + x) /\\\n   (forall x. Cx(&0) + x = x) /\\\n   (forall x y z. x * (y * z) = (x * y) * z) /\\\n   (forall x y. x * y = y * x) /\\\n   (forall x. Cx(&1) * x = x) /\\\n   (forall x. Cx(&0) * x = Cx(&0)) /\\\n   (forall x y z. x * (y + z) = x * y + x * z) /\\\n   (forall x. x pow 0 = Cx(&1)) /\\\n   (forall x n. x pow (SUC n) = x * x pow n)
-  (forall x. --x = Cx(-- &1) * x) /\\\n   (forall x y. x - y = x + Cx(-- &1) * y)
+  (x : Real)
+  (n : Num)
+  (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], x + (y + z) == x + y + z) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], x + y == y + x) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], Cx(real_of_num(0)) + x == x) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], x * (y * z) == x * y * z) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], x * y == y * x) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], Cx(real_of_num(1)) * x == x) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], Cx(real_of_num(0)) * x == Cx(real_of_num(0))) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], x * (y + z) == x * y + x * z) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], pow(x, 0) == Cx(real_of_num(1))) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, pow(x, SUC(n)) == x * pow(x, n))
+  (\226\136\128 x : Cart[Real, Tybit0[Unit]], -x == Cx(-real_of_num(1)) * x) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], x - y == x + Cx(-real_of_num(1)) * y)
   p:num
   q:num
   0
   1
-  (--):complex->complex
-  inv:complex->complex
-  (+):complex->complex->complex
-  (-):complex->complex->complex
-  (*):complex->complex->complex
-  (/):complex->complex->complex
-  (pow):complex->num->complex
-  (w * y + x * z = w * z + x * y) <=>\n      (w - x) * (y - z) = Cx(&0)
-  (forall x. Cx(&0) * x = Cx(&0)) /\\\n     (forall x y z. (x + y = x + z) <=> (y = z)) /\\\n     (forall w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
-  ~(Cx(&1) = Cx(&0))
-  forall x y:complex. ~(x = y) <=> ?z. (x - y) * z = Cx(&1)
-  ii * ii + Cx(&1) = Cx(&0)
-  (pow):complex->num->complex
-  (/):complex->complex->complex
-  (*):complex->complex->complex
-  (inv):complex->complex
-  (-):complex->complex->complex
-  (+):complex->complex->complex
-  (--):complex->complex
+  op_minus_minus
+  inv
+  op_plus
+  op_minus
+  op_star
+  op_slash
+  pow
+  ((w : Cart[Real, Tybit0[Unit]]) * (y : Cart[Real, Tybit0[Unit]]) + (x : Cart[Real, Tybit0[Unit]]) * (z : Cart[Real, Tybit0[Unit]]) == w * z + x * y) == ((w - x) * (y - z) == Cx(real_of_num(0)))
+  (\226\136\128 x : Cart[Real, Tybit0[Unit]], Cx(real_of_num(0)) * x == Cx(real_of_num(0))) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (x + y == x + z) == (y == z)) && (\226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (w * y + x * z == w * z + x * y) == (w == x || y == z))
+  !(Cx(real_of_num(1)) == Cx(real_of_num(0)))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], !(x == y) == (\226\136\131 z : Cart[Real, Tybit0[Unit]], (x - y) * z == Cx(real_of_num(1)))
+  ii * ii + Cx(real_of_num(1)) == Cx(real_of_num(0))
+  pow
+  op_slash
+  op_star
+  inv
+  op_minus
+  op_plus
+  op_minus_minus
   ii
-  inv(Cx(&0)) = Cx(&0)
-  inv(Cx(&1)) = Cx(&1)
-  z = Cx(&0)
-  w = Cx(&0)
-  forall w z. inv(w * z) = inv(w) * inv(z)
-  forall x n. (inv x) pow n = inv(x pow n)
-  inv(x):complex
-  x:complex
-  x = Cx(&0)
-  forall x:complex. inv(inv x) = x
-  forall w z:complex. inv(w / z) = z / w
-  forall w z:complex. inv w = inv z <=> w = z
-  real_sgn (Re z pow 2 + Im z pow 2) = &1
-  z = Cx(&0)
-  forall z. real_sgn(Re(inv z)) = real_sgn(Re z)
-  forall z. &0 < Re(inv z) <=> &0 < Re z
-  forall z. &0 <= Re(inv z) <=> &0 <= Re z
-  forall x y z. (x * y = x * z) <=> (x = Cx(&0)) \\/ (y = z)
-  forall x y z. (x * z = y * z) <=> (x = y) \\/ (z = Cx(&0))
-  inv((x:complex) pow n)
-  (T ==> p) <=> p
-  ~(x pow n = Cx(&0)) <=>\n        ~((x:complex) = Cx(&0)) \\/\n        (Cx(&n) = Cx(&0)) \\/\n        ~(x pow n = Cx(&0))
-  (/\\)
-  inv:complex->complex
-  (/):complex->complex->complex
-  forall z. z / Cx(&1) = z
-  forall x y. ~(y = Cx(&0)) ==> y * x / y = x
-  forall x y. ~(y = Cx(&0)) ==> x / y * y = x
-  inv ii = --ii
-  x = Cx(&0)
-  forall x. inv x = Cx(&0) <=> x = Cx(&0)
-  x = Cx(&0)
-  forall x:complex. inv(--x) = --(inv x)
-  forall x:complex. --(inv x) = inv(--x)
-  x = Cx(&0)
-  forall x. inv x = Cx(&1) <=> x = Cx(&1)
-  forall w z. w / z = Cx(&0) <=> w = Cx(&0) \\/ z = Cx(&0)
-  forall x y n. (x / y) pow n = (x pow n) / (y pow n)
-  ~(x pow k = Cx(&0))
-  ~(x = Cx(&0))
-  ~(k = 0)
-  x:complex pow (n - k) * x pow k =\n  x pow n / x pow k * x pow k
-  forall x:complex n k:num.\n      ~(x= Cx(&0)) /\\ k <= n /\\ ~(k = 0)\n      ==> x pow (n - k) = x pow n / x pow k
-  ~(b = Cx(&0)) ==> (a / b = c <=> b * c = a)
-  ~(b = Cx(&0)) /\\ ~(c = Cx(&0))\n     ==> (a / b = inv c <=> a * c = b)
-  forall z m n. ~(z = Cx(&0))\n           ==> z pow m / z pow n =\n               if n <= m then z pow (m - n) else inv(z pow (n - m))
-  forall z. (norm z = &0) <=> (z = Cx(&0))
-  forall n. norm(Cx(&n)) = &n
-  norm(Cx(&0)) = &0
-  forall z. &0 < norm(z) <=> ~(z = Cx(&0))
-  forall w z. norm(w * z) = norm(w) * norm(z)
-  forall z n. norm(z pow n) = norm(z) pow n
-  a * a * b * b:real = (a * b) * (a * b)
-  Re z * Re z + Im z * Im z = &0
-  (r * d) * r * d + (--i * d) * --i * d =\n                          (r * r + i * i) * d * d:real
-  forall z. norm(inv z) = inv(norm z)
-  forall w z. norm(w / z) = norm(w) / norm(z)
-  forall w z. norm(w) <= norm(w + z) + norm(z)
-  a - b <= x /\\ b - a <= x ==> abs(a - b) <= x:real
-  forall w z. abs(norm w - norm z) <= norm(w - z)
-  norm:complex->real
-  forall z n. z pow n = Cx(&1) ==> norm(z) = &1 \\/ n = 0
-  cnj(z) = complex(Re(z),--(Im(z)))
-  forall w z. (cnj(w) = cnj(z)) <=> (w = z)
-  forall z. cnj(cnj z) = z
-  forall x. cnj(Cx x) = Cx x
-  forall z. norm(cnj z) = norm(z)
-  forall z. cnj(--z) = --(cnj z)
-  forall z. cnj(inv z) = inv(cnj z)
-  forall w z. cnj(w + z) = cnj(w) + cnj(z)
-  forall w z. cnj(w - z) = cnj(w) - cnj(z)
-  forall w z. cnj(w * z) = cnj(w) * cnj(z)
-  forall w z. cnj(w / z) = cnj(w) / cnj(z)
-  forall z n. cnj(z pow n) = cnj(z) pow n
-  forall z. Re(cnj z) = Re z
-  forall z. Im(cnj z) = --Im z
-  forall x z. cnj z = Cx x <=> z = Cx x
-  forall z. cnj z = Cx(&0) <=> z = Cx(&0)
-  (forall z. z + cnj z = Cx(&2 * Re z)) /\\ (forall z. cnj z + z = Cx(&2 * Re z))
-  cnj ii = --ii
-  forall z. Cx(Re z) = (z + cnj z) / Cx(&2)
-  forall z. Cx(Im z) = --ii * (z - cnj z) / Cx(&2)
-  (forall z. P(cnj z)) <=> (forall z. P z)
-  (?z. P(cnj z)) <=> (?z. P z)
-  forall z. Cx(norm z) pow 2 = z * cnj z
-  forall z. cnj z * z = Cx(norm(z)) pow 2 /\\ z * cnj z = Cx(norm(z)) pow 2
-  x * y = z /\\ ~(x = Cx(&0)) /\\ ~(z = Cx(&0)) ==> inv x = y / z
-  z = Cx(&0)
-  forall z. inv z = cnj z / Cx(norm z) pow 2
-  forall a b. a / b = (a * cnj b) / Cx(norm b) pow 2
-  b = Cx(&0)
-  forall a b. Re(a / b) = &0 <=> Re(a * cnj b) = &0
-  b = Cx(&0)
-  forall a b. Im(a / b) = &0 <=> Im(a * cnj b) = &0
-  &0 < a * x <=> &0 * x < a * x
-  b = Cx(&0)
-  forall a b. &0 < Re(a / b) <=> &0 < Re(a * cnj b)
-  &0 < a * x <=> &0 * x < a * x
-  b = Cx(&0)
-  forall a b. &0 < Im(a / b) <=> &0 < Im(a * cnj b)
-  &0 <= x <=> &0 < x \\/ x = &0
-  forall a b. &0 <= Re(a / b) <=> &0 <= Re(a * cnj b)
-  &0 <= x <=> &0 < x \\/ x = &0
-  forall a b. &0 <= Im(a / b) <=> &0 <= Im(a * cnj b)
-  forall a b. Re(a / b) <= &0 <=> Re(a * cnj b) <= &0
-  forall a b. Im(a / b) <= &0 <=> Im(a * cnj b) <= &0
-  forall a b. Re(a / b) < &0 <=> Re(a * cnj b) < &0
-  forall a b. Im(a / b) < &0 <=> Im(a * cnj b) < &0
-  z:complex
-  Cx(&1)
-  forall z. &0 <= Im(inv z) <=> Im(z) <= &0
-  forall z. Im(inv z) <= &0 <=> &0 <= Im(z)
-  &0 < a <=> ~(a <= &0)
-  forall z. &0 < Im(inv z) <=> Im(z) < &0
-  a < &0 <=> ~(&0 <= a)
-  forall z. Im(inv z) < &0 <=> &0 < Im(z)
-  forall z. Im(inv z) = &0 <=> Im(z) = &0
-  x < &0 <=> ~(&0 <= x)
-  forall w z. real_sgn(Re(w / z)) = real_sgn(Re(w * cnj z))
-  x < &0 <=> ~(&0 <= x)
-  forall w z. real_sgn(Im(w / z)) = real_sgn(Im(w * cnj z))
-  forall z. abs(Re(z)) <= norm(z) /\\ abs(Im(z)) <= norm(z)
-  z:complex
-  forall z. norm(z) <= abs(Re z) + abs(Im z)
-  z:complex
-  x * x / &2 * y = (x pow 2) / &2 * y
-  sqrt(&2)
-  forall z. sqrt(&2) / &2 * (abs(Re z) + abs(Im z)) <= norm z
-  csqrt(z) = if Im(z) = &0 then\n                if &0 <= Re(z) then complex(sqrt(Re(z)),&0)\n                else complex(&0,sqrt(--Re(z)))\n              else complex(sqrt((norm(z) + Re(z)) / &2),\n                           (Im(z) / abs(Im(z))) *\n                           sqrt((norm(z) - Re(z)) / &2))
-  &2 * (i * a') * a * h = i * (&2 * h) * a * a'
-  (a * b) * a' * b = (a * a') * (b * b:real)
-  (m + r) - (m - r) = r * &2
-  z:complex
-  &0 <= norm(z) + Re(z) /\\ &0 <= norm(z) - Re(z)
-  (s * s - (i * s') * (i * s') = s * s - (i * i) * (s' * s')) /\\\n    (s * i * s' + (i * s')* s = &2 * i * s * s')
-  ~(&0 <= x) ==> &0 <= --x
-  forall z. csqrt(z) pow 2 = z
-  forall x. &0 <= x ==> Cx(sqrt x) = csqrt(Cx x)
-  forall x. &0 <= x ==> csqrt(Cx x) = Cx(sqrt x)
-  csqrt(Cx(&0)) = Cx(&0)
-  csqrt(Cx(&1)) = Cx(&1)
-  &0 < x <=> &0 <= x /\\ ~(x = &0)
-  abs(y) < x ==> &0 < (x + y) / &2
-  forall z. &0 < Re(csqrt(z)) \\/ Re(csqrt(z)) = &0 /\\ &0 <= Im(csqrt(z))
-  forall z. &0 <= Re(csqrt z)
-  (s:complex) pow 2
+  inv(Cx(real_of_num(0))) == Cx(real_of_num(0))
+  inv(Cx(real_of_num(1))) == Cx(real_of_num(1))
+  (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+  (w : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], inv(w * z) == inv(w) * inv(z)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, pow(inv(x), n) == inv(pow(x, n))
+  inv((x : Cart[Real, Tybit0[Unit]]))
+  (x : Cart[Real, Tybit0[Unit]])
+  (x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], inv(inv(x)) == x
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], inv(w / z) == z / w
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (inv(w) == inv(z)) == (w == z)
+  real_sgn(pow(Re((z : Cart[Real, Tybit0[Unit]])), 2) + pow(Im(z), 2)) == real_of_num(1)
+  (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], real_sgn(Re(inv(z))) == real_sgn(Re(z))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], (real_of_num(0) < Re(inv(z))) == (real_of_num(0) < Re(z))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], (real_of_num(0) <= Re(inv(z))) == (real_of_num(0) <= Re(z))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (x * y == x * z) == (x == Cx(real_of_num(0)) || y == z)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (x * z == y * z) == (x == y || z == Cx(real_of_num(0)))
+  inv(pow((x : Cart[Real, Tybit0[Unit]]), (n : Num)))
+  (true \226\134\146 (p : Bool)) == p
+  !(pow((x : Cart[Real, Tybit0[Unit]]), (n : Num)) == Cx(real_of_num(0))) == (!(x == Cx(real_of_num(0))) || Cx(real_of_num(n)) == Cx(real_of_num(0)) || !(pow(x, n) == Cx(real_of_num(0))))
+  op_slash_bslash
+  inv
+  op_slash
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], z / Cx(real_of_num(1)) == z
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], !(y == Cx(real_of_num(0))) \226\134\146 y * (x / y) == x
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], !(y == Cx(real_of_num(0))) \226\134\146 x / y * y == x
+  inv(ii) == -ii
+  (x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], (inv(x) == Cx(real_of_num(0))) == (x == Cx(real_of_num(0)))
+  (x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], inv(-x) == -inv(x)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], -inv(x) == inv(-x)
+  (x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], (inv(x) == Cx(real_of_num(1))) == (x == Cx(real_of_num(1)))
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (w / z == Cx(real_of_num(0))) == (w == Cx(real_of_num(0)) || z == Cx(real_of_num(0)))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, pow(x / y, n) == pow(x, n) / pow(y, n)
+  !(pow((x : Cart[Real, Tybit0[Unit]]), (k : Num)) == Cx(real_of_num(0)))
+  !((x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+  !((k : Num) == 0)
+  pow((x : Cart[Real, Tybit0[Unit]]), (n : Num) - (k : Num)) * pow(x, k) == pow(x, n) / pow(x, k) * pow(x, k)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, \226\136\128 k : Num, !(x == Cx(real_of_num(0))) && k <= n && !(k == 0) \226\134\146 pow(x, n - k) == pow(x, n) / pow(x, k)
+  !((b : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 ((a : Cart[Real, Tybit0[Unit]]) / b == (c : Cart[Real, Tybit0[Unit]])) == (b * c == a)
+  !((b : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) && !((c : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 ((a : Cart[Real, Tybit0[Unit]]) / b == inv(c)) == (a * c == b)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, !(z == Cx(real_of_num(0))) \226\134\146 pow(z, m) / pow(z, n) == (if n <= m { pow(z, m - n) } else { inv(pow(z, n - m)) })
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], (norm(z) == real_of_num(0)) == (z == Cx(real_of_num(0)))
+  \226\136\128 n : Num, norm(Cx(real_of_num(n))) == real_of_num(n)
+  norm(Cx(real_of_num(0))) == real_of_num(0)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], (real_of_num(0) < norm(z)) == !(z == Cx(real_of_num(0)))
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(w * z) == norm(w) * norm(z)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, norm(pow(z, n)) == pow(norm(z), n)
+  (a : Real) * (a * ((b : Real) * b)) == a * b * (a * b)
+  Re((z : Cart[Real, Tybit0[Unit]])) * Re(z) + Im(z) * Im(z) == real_of_num(0)
+  (r : Real) * (d : Real) * (r * d) + -(i : Real) * d * (-i * d) == (r * r + i * i) * (d * d)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(inv(z)) == inv(norm(z))
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(w / z) == norm(w) / norm(z)
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(w) <= norm(w + z) + norm(z)
+  (a : Real) - (b : Real) <= (x : Real) && b - a <= x \226\134\146 abs(a - b) <= x
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], abs(norm(w) - norm(z)) <= norm(w - z)
+  (norm : (Cart[Real, Tybit0[Unit]]) -> Real)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, pow(z, n) == Cx(real_of_num(1)) \226\134\146 norm(z) == real_of_num(1) || n == 0
+  (cnj : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z : Cart[Real, Tybit0[Unit]])) == complex((Re(z), -Im(z)))
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (cnj(w) == cnj(z)) == (w == z)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], cnj(cnj(z)) == z
+  \226\136\128 x : Real, cnj(Cx(x)) == Cx(x)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(cnj(z)) == norm(z)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], cnj(-z) == -cnj(z)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], cnj(inv(z)) == inv(cnj(z))
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], cnj(w + z) == cnj(w) + cnj(z)
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], cnj(w - z) == cnj(w) - cnj(z)
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], cnj(w * z) == cnj(w) * cnj(z)
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], cnj(w / z) == cnj(w) / cnj(z)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, cnj(pow(z, n)) == pow(cnj(z), n)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], Re(cnj(z)) == Re(z)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], Im(cnj(z)) == -Im(z)
+  \226\136\128 x : Real, \226\136\128 z : Cart[Real, Tybit0[Unit]], (cnj(z) == Cx(x)) == (z == Cx(x))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], (cnj(z) == Cx(real_of_num(0))) == (z == Cx(real_of_num(0)))
+  (\226\136\128 z : Cart[Real, Tybit0[Unit]], z + cnj(z) == Cx(real_of_num(2) * Re(z))) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], cnj(z) + z == Cx(real_of_num(2) * Re(z)))
+  cnj(ii) == -ii
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], Cx(Re(z)) == (z + cnj(z)) / Cx(real_of_num(2))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], Cx(Im(z)) == -ii * ((z - cnj(z)) / Cx(real_of_num(2)))
+  (\226\136\128 z : Cart[Real, Tybit0[Unit]], (P : (Cart[Real, Tybit0[Unit]]) -> Bool)(cnj(z))) == (\226\136\128 z : Cart[Real, Tybit0[Unit]], P(z))
+  (\226\136\131 z : Cart[Real, Tybit0[Unit]], (P : (Cart[Real, Tybit0[Unit]]) -> Bool)(cnj(z))) == (\226\136\131 z : Cart[Real, Tybit0[Unit]], P(z))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], pow(Cx(norm(z)), 2) == z * cnj(z)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], cnj(z) * z == pow(Cx(norm(z)), 2) && z * cnj(z) == pow(Cx(norm(z)), 2)
+  (x : Cart[Real, Tybit0[Unit]]) * (y : Cart[Real, Tybit0[Unit]]) == (z : Cart[Real, Tybit0[Unit]]) && !(x == Cx(real_of_num(0))) && !(z == Cx(real_of_num(0))) \226\134\146 inv(x) == y / z
+  (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], inv(z) == cnj(z) / pow(Cx(norm(z)), 2)
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], a / b == a * cnj(b) / pow(Cx(norm(b)), 2)
+  (b : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], (Re(a / b) == real_of_num(0)) == (Re(a * cnj(b)) == real_of_num(0))
+  (b : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], (Im(a / b) == real_of_num(0)) == (Im(a * cnj(b)) == real_of_num(0))
+  (real_of_num(0) < (a : Real) * (x : Real)) == (real_of_num(0) * x < a * x)
+  (b : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], (real_of_num(0) < Re(a / b)) == (real_of_num(0) < Re(a * cnj(b)))
+  (real_of_num(0) < (a : Real) * (x : Real)) == (real_of_num(0) * x < a * x)
+  (b : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], (real_of_num(0) < Im(a / b)) == (real_of_num(0) < Im(a * cnj(b)))
+  (real_of_num(0) <= (x : Real)) == (real_of_num(0) < x || x == real_of_num(0))
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], (real_of_num(0) <= Re(a / b)) == (real_of_num(0) <= Re(a * cnj(b)))
+  (real_of_num(0) <= (x : Real)) == (real_of_num(0) < x || x == real_of_num(0))
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], (real_of_num(0) <= Im(a / b)) == (real_of_num(0) <= Im(a * cnj(b)))
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], (Re(a / b) <= real_of_num(0)) == (Re(a * cnj(b)) <= real_of_num(0))
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], (Im(a / b) <= real_of_num(0)) == (Im(a * cnj(b)) <= real_of_num(0))
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], (Re(a / b) < real_of_num(0)) == (Re(a * cnj(b)) < real_of_num(0))
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], (Im(a / b) < real_of_num(0)) == (Im(a * cnj(b)) < real_of_num(0))
+  (z : Cart[Real, Tybit0[Unit]])
+  Cx(real_of_num(1))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], (real_of_num(0) <= Im(inv(z))) == (Im(z) <= real_of_num(0))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], (Im(inv(z)) <= real_of_num(0)) == (real_of_num(0) <= Im(z))
+  (real_of_num(0) < (a : Real)) == !(a <= real_of_num(0))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], (real_of_num(0) < Im(inv(z))) == (Im(z) < real_of_num(0))
+  ((a : Real) < real_of_num(0)) == !(real_of_num(0) <= a)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], (Im(inv(z)) < real_of_num(0)) == (real_of_num(0) < Im(z))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], (Im(inv(z)) == real_of_num(0)) == (Im(z) == real_of_num(0))
+  ((x : Real) < real_of_num(0)) == !(real_of_num(0) <= x)
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], real_sgn(Re(w / z)) == real_sgn(Re(w * cnj(z)))
+  ((x : Real) < real_of_num(0)) == !(real_of_num(0) <= x)
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], real_sgn(Im(w / z)) == real_sgn(Im(w * cnj(z)))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], abs(Re(z)) <= norm(z) && abs(Im(z)) <= norm(z)
+  (z : Cart[Real, Tybit0[Unit]])
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(z) <= abs(Re(z)) + abs(Im(z))
+  (z : Cart[Real, Tybit0[Unit]])
+  (x : Real) * (x / real_of_num(2) * (y : Real)) == pow(x, 2) / real_of_num(2) * y
+  sqrt(real_of_num(2))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], sqrt(real_of_num(2)) / real_of_num(2) * (abs(Re(z)) + abs(Im(z))) <= norm(z)
+  (csqrt : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z : Cart[Real, Tybit0[Unit]])) == (if Im(z) == real_of_num(0) { if real_of_num(0) <= Re(z) { complex((sqrt(Re(z)), real_of_num(0))) } else { complex((real_of_num(0), sqrt(-Re(z)))) } } else { complex((sqrt((norm(z) + Re(z)) / real_of_num(2)), Im(z) / abs(Im(z)) * sqrt((norm(z) - Re(z)) / real_of_num(2)))) })
+  real_of_num(2) * ((i : Real) * (a' : Real) * ((a : Real) * (h : Real))) == i * (real_of_num(2) * h * (a * a'))
+  (a : Real) * (b : Real) * ((a' : Real) * b) == a * a' * (b * b)
+  (m : Real) + (r : Real) - (m - r) == r * real_of_num(2)
+  (z : Cart[Real, Tybit0[Unit]])
+  real_of_num(0) <= norm((z : Cart[Real, Tybit0[Unit]])) + Re(z) && real_of_num(0) <= norm(z) - Re(z)
+  (s : Real) * s - (i : Real) * (s' : Real) * (i * s') == s * s - i * i * (s' * s') && s * (i * s') + i * s' * s == real_of_num(2) * (i * (s * s'))
+  !(real_of_num(0) <= (x : Real)) \226\134\146 real_of_num(0) <= -x
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], pow(csqrt(z), 2) == z
+  \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 Cx(sqrt(x)) == csqrt(Cx(x))
+  \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 csqrt(Cx(x)) == Cx(sqrt(x))
+  csqrt(Cx(real_of_num(0))) == Cx(real_of_num(0))
+  csqrt(Cx(real_of_num(1))) == Cx(real_of_num(1))
+  (real_of_num(0) < (x : Real)) == (real_of_num(0) <= x && !(x == real_of_num(0)))
+  abs((y : Real)) < (x : Real) \226\134\146 real_of_num(0) < (x + y) / real_of_num(2)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], real_of_num(0) < Re(csqrt(z)) || Re(csqrt(z)) == real_of_num(0) && real_of_num(0) <= Im(csqrt(z))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], real_of_num(0) <= Re(csqrt(z))
+  pow((s : Cart[Real, Tybit0[Unit]]), 2)
   Im
   Re
-  --z = z <=> z = Cx(&0)
-  a pow 2 = b pow 2 <=> a = b \\/ a = --b:complex
-  (s:complex) pow 2
-  forall s z. s pow 2 = z /\\ (&0 < Re s \\/ Re s = &0 /\\ &0 <= Im s)\n         ==> csqrt z = s
-  forall z. &0 < Re z \\/ Re(z) = &0 /\\ &0 <= Im(z) ==> csqrt(z pow 2) = z
-  z:complex
-  forall z. csqrt z = Cx(&0) <=> z = Cx(&0)
-  forall w z. w dot z = Re(w * cnj z)
-  forall w z. cnj w dot cnj z = w dot z
-  forall c. linear (\\x. c * x)
-  bilinear( * )
-  linear cnj
-  orthogonal_transformation cnj
-  forall f:real^N->complex c. linear f ==> linear (\\x. c * f x)
-  forall f:real^N->complex c. linear f ==> linear (\\x. f x * c)
-  forall w z. (w dot z) pow 2 + ((ii * w) dot z) pow 2 =\n          norm(w) pow 2 * norm(z) pow 2
-  basis 1 = Cx(&1) /\\ basis 2 = ii
-  complex(matrix(f:complex->complex)$1$1,matrix f$2$1)
-  forall f:complex->complex.\n        (?c. f = \\z. c * z) <=>\n        linear f /\\\n        (matrix f)$1$1 = (matrix f)$2$2 /\\\n        (matrix f)$1$2 = --((matrix f)$2$1)
-  forall f:complex->complex.\n        (?c. f = \\z. c * z) <=> linear f /\\ f(ii) = ii * f(Cx(&1))
-  Cx(&1)
-  norm(c:complex) = &1
-  c * v:real = v <=> c = &1 \\/ v = &0
-  forall c. orthogonal_transformation(\\z. c * z) <=> norm c = &1
-  Cx(&1)
-  norm(c:complex) = &1
-  c * v:real = v <=> c = &1 \\/ v = &0
-  f:complex->complex = \\z. c * z
-  c:complex
-  p /\\ q /\\ r <=> (q /\\ p) /\\ r
-  (forall z. norm(f z) = norm z) /\\ (?c. f = \\z:complex. c * z)
-  forall f:complex->complex.\n        orthogonal_transformation f /\\ det(matrix f) = &1 <=>\n        ?c. norm c = &1 /\\ f = \\z. c * z
-  f:complex->complex
-  (f:complex->complex) o cnj
-  (f:complex->complex) = (f o cnj) o cnj
-  forall c. (f = \\z. c * cnj z) = (f o cnj = \\z. c * z)
-  forall f:complex->complex.\n        orthogonal_transformation f /\\ det(matrix f) = -- &1 <=>\n        ?c. norm c = &1 /\\ f = \\z. c * cnj z
-  forall f:complex->complex.\n        orthogonal_transformation f <=>\n        ?c. norm c = &1 /\\ ((f = \\z. c * z) \\/ (f = \\z. c * cnj z))
-  forall f s. FINITE s ==> Re(vsum s f) = sum s (\\x. Re(f x))
-  forall f s. FINITE s ==> Im(vsum s f) = sum s (\\x. Im(f x))
-  forall c f s. FINITE(s) ==> vsum s (\\x. c * f x) = c * vsum s f
-  forall c f s. FINITE(s) ==> vsum s (\\x. f x * c) = vsum s f * c
-  forall f:A->real s. vsum s (\\a. Cx(f a)) = Cx(sum s f)
-  forall f s. FINITE s ==> cnj(vsum s f) = vsum s (\\x. cnj(f x))
-  forall f m n. vsum (m..n) (\\a. Cx(f a)) = Cx(sum (m..n) f)
-  1 <= n /\\ x <= n - 1\n     ==> n - 1 - x = n - (x + 1) /\\ SUC(n - 1 - x) = n - x
-  (x - y) * (a * b):complex = (x * a) * b - a * (y * b)
-  forall x y n.\n        1 <= n ==> x pow n - y pow n =\n                   (x - y) * vsum(0..n-1) (\\i. x pow i * y pow (n - 1 - i))
-  Cx(&1)
-  x:complex
-  forall x n. 1 <= n\n         ==> x pow n - Cx(&1) = (x - Cx(&1)) * vsum(0..n-1) (\\i. x pow i)
-  forall x n. 1 <= n\n         ==> Cx(&1) - x pow n = (Cx(&1) - x) * vsum(0..n-1) (\\i. x pow i)
-  real z <=> Im z = &0
-  forall z. real z <=> Cx(Re z) = z
-  forall z. real z <=> cnj z = z
-  forall z. real z ==> cnj z = z
-  forall z. real z <=> ?x. z = Cx x
-  (forall z. real z ==> P z) <=> (forall x. P(Cx x))
-  (?z. real z /\\ P z) <=> (?x. P(Cx x))
-  forall x. real(Cx x)
-  forall x z. real(Cx x * z) <=> x = &0 \\/ real z
-  forall w z. real w /\\ real z ==> real(w + z)
-  forall z. real z ==> real(--z)
-  forall w z. real w /\\ real z ==> real(w - z)
-  forall w z. real w /\\ real z ==> real(w * z)
-  forall z n. real z ==> real(z pow n)
-  forall z. real z ==> real(inv z)
-  forall z. real(inv z) = real z
-  forall w z. real w /\\ real z ==> real(w / z)
-  forall f s. FINITE s /\\ (forall a. a IN s ==> real(f a)) ==> real(vsum s f)
-  (forall z. real(z * cnj z)) /\\ (forall z. real(cnj z * z))
-  forall a b x. x IN segment[a,b] /\\ real a /\\ real b ==> real x
-  ~(a:real = b)
-  (a - x:real) / (a - b)
-  &0 < a - b
-  (x - a:real) / (b - a)
-  &0 < b - a
-  a <= b \\/ b <= a
-  (&1 - u) * a + u * b <= b <=> &0 <= (&1 - u) * (b - a)
-  (&1 - u) * a + u * b <= a <=> &0 <= u * (a - b)
-  b <= (&1 - u) * a + u * b <=> &0 <= (&1 - u) * (a - b)
-  a <= (&1 - u) * a + u * b <=> &0 <= u * (b - a)
-  u:real
-  &0
-  x:real = b
-  (&1 - u) * b + u * b = b
-  a:real = b
-  forall a b x. Cx(x) IN segment[Cx(a),Cx(b)] <=>\n                a <= x /\\ x <= b \\/ b <= x /\\ x <= a
-  real x
-  forall a b x.\n        x IN segment[Cx a,Cx b] <=>\n        Im(x) = &0 /\\ (a <= Re x /\\ Re x <= b \\/ b <= Re x /\\ Re x <= a)
-  &0 <= x /\\ &0 <= y /\\ ~(x = &0 /\\ y = &0) ==> &0 < x + y
-  forall a b x. x IN segment[a,b] /\\ &0 < Re a /\\ &0 < Re b ==> &0 < Re x
-  convex real
-  forall s. IMAGE Cx s = {z | real z /\\ Re(z) IN s}
-  subspace real
-  real = {x | real x}
-  dim real = 1
-  interior real = {}
-  forall z. real z ==> norm(z) = abs(Re z)
-  forall z. real z /\\ &0 <= Re z ==> norm(z) = Re(z)
-  forall f s. FINITE s /\\ (forall x. x IN s ==> real(f x) /\\ &0 <= Re(f x))\n         ==> norm(vsum s f) = sum s (\\x. Re(f x))
-  x:real = y ==> y <= x
-  sum s (\\x. Re((g:A->complex) x))
-  sum s (\\x. norm((f:A->complex) x))
-  forall s f:A->complex g:A->complex.\n        FINITE s /\\ (forall x. x IN s ==> real(g x) /\\ norm(f x) <= Re(g x))\n        ==> norm(vsum s f) <= norm(vsum s g)
-  norm(vsum t (g:A->complex)) = sum t (\\x. Re(g x)) /\\\n    norm(vsum s g) = sum s (\\x. Re(g x))
-  norm(vsum t (g:A->complex))
-  forall f:A->complex g:A->complex s t.\n        FINITE s /\\ t SUBSET s /\\\n        (forall x. x IN s ==> real(g x) /\\ norm(f x) <= Re(g x))\n        ==> norm(vsum t f) <= norm(vsum s g)
-  forall x n. (Cx(&1) - x) * vsum(0..n) (\\i. x pow i) = Cx(&1) - x pow (SUC n)
-  m <= n ==> (SUC(n - m) + m = SUC n)
-  forall x m n. m <= n\n           ==> ((Cx(&1) - x) * vsum(m..n) (\\i. x pow i) =\n                x pow m - x pow (SUC n))
-  ~(z = Cx(&1)) /\\ (Cx(&1) - z) * x = y ==> x = y / (Cx(&1) - z)
-  n < m \\/ ~(n < m) /\\ m <= n:num
-  forall x m n.\n        vsum(m..n) (\\i. x pow i) =\n                if n < m then Cx(&0)\n                else if x = Cx(&1) then Cx(&((n + 1) - m))\n                else (x pow m - x pow (SUC n)) / (Cx(&1) - x)
-  ~(m + n < m:num)
-  forall x m n. vsum(m..m+n) (\\i. x pow i) =\n                if x = Cx(&1) then Cx(&n) + Cx(&1)\n                else x pow m * (Cx(&1) - x pow (SUC n)) / (Cx(&1) - x)
-  a - b - c:num = a - (b + c)
-  \\(x:num,y:num). (y,x)
-  a * x * s:complex = x * a * s
-  forall a x y n.\n   1 <= n\n   ==> vsum(0..n) (\\i. a i * x pow i) - vsum(0..n) (\\i. a i * y pow i) =\n       (x - y) *\n       vsum(0..n-1) (\\j. vsum(j+1..n) (\\i. a i * y pow (i - j - 1)) * x pow j)
-  \\k. j + k + 1
-  \\i. i - (j + 1)
-  j:num
-  forall a x y n.\n    1 <= n\n    ==> vsum(0..n) (\\i. a i * x pow i) - vsum(0..n) (\\i. a i * y pow i) =\n        (x - y) *\n        vsum(0..n-1) (\\j. vsum(0..n-j-1) (\\k. a(j+k+1) * y pow k) * x pow j)
-  \\j. vsum (j + 1..n) (\\i. c i * a pow (i - j - 1))
-  \\i:num. Cx(&0)
-  n = 0
-  forall a c n. ?b. forall z. vsum(0..n) (\\i. c(i) * z pow i) =\n                   (z - a) * vsum(0..n-1) (\\i. b(i) * z pow i) +\n                    vsum(0..n) (\\i. c(i) * a pow i)
-  forall a c n. vsum(0..n) (\\i. c(i) * a pow i) = Cx(&0)\n           ==> ?b. forall z. vsum(0..n) (\\i. c(i) * z pow i) =\n                      (z - a) * vsum(0..n-1) (\\i. b(i) * z pow i)
-  (n + 1) + 1 = 1 + n + 1
-  a + norm(y) <= b ==> norm(x) <= a ==> norm(x + y) <= b
+  (-(z : Cart[Real, Tybit0[Unit]]) == z) == (z == Cx(real_of_num(0)))
+  (pow((a : Cart[Real, Tybit0[Unit]]), 2) == pow((b : Cart[Real, Tybit0[Unit]]), 2)) == (a == b || a == -b)
+  pow((s : Cart[Real, Tybit0[Unit]]), 2)
+  \226\136\128 s : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], pow(s, 2) == z && (real_of_num(0) < Re(s) || Re(s) == real_of_num(0) && real_of_num(0) <= Im(s)) \226\134\146 csqrt(z) == s
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], real_of_num(0) < Re(z) || Re(z) == real_of_num(0) && real_of_num(0) <= Im(z) \226\134\146 csqrt(pow(z, 2)) == z
+  (z : Cart[Real, Tybit0[Unit]])
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], (csqrt(z) == Cx(real_of_num(0))) == (z == Cx(real_of_num(0)))
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], dot(w, z) == Re(w * cnj(z))
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], dot(cnj(w), cnj(z)) == dot(w, z)
+  \226\136\128 c : Cart[Real, Tybit0[Unit]], linear((x : Cart[Real, Tybit0[Unit]]) => c * x)
+  bilinear(op_star)
+  linear(cnj)
+  orthogonal_transformation(cnj)
+  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], linear(f) \226\134\146 linear((x : Cart[Real, N]) => c * f(x))
+  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], linear(f) \226\134\146 linear((x : Cart[Real, N]) => f(x) * c)
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], pow(dot(w, z), 2) + pow(dot(ii * w, z), 2) == pow(norm(w), 2) * pow(norm(z), 2)
+  basis(1) == Cx(real_of_num(1)) && basis(2) == ii
+  complex((op_dollar(op_dollar(matrix((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])), 1), 1), op_dollar(op_dollar(matrix(f), 2), 1)))
+  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], (\226\136\131 c : Cart[Real, Tybit0[Unit]], f == ((z : Cart[Real, Tybit0[Unit]]) => c * z)) == (linear(f) && op_dollar(op_dollar(matrix(f), 1), 1) == op_dollar(op_dollar(matrix(f), 2), 2) && op_dollar(op_dollar(matrix(f), 1), 2) == -op_dollar(op_dollar(matrix(f), 2), 1))
+  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], (\226\136\131 c : Cart[Real, Tybit0[Unit]], f == ((z : Cart[Real, Tybit0[Unit]]) => c * z)) == (linear(f) && f(ii) == ii * f(Cx(real_of_num(1))))
+  Cx(real_of_num(1))
+  norm((c : Cart[Real, Tybit0[Unit]])) == real_of_num(1)
+  ((c : Real) * (v : Real) == v) == (c == real_of_num(1) || v == real_of_num(0))
+  \226\136\128 c : Cart[Real, Tybit0[Unit]], orthogonal_transformation((z : Cart[Real, Tybit0[Unit]]) => c * z) == (norm(c) == real_of_num(1))
+  Cx(real_of_num(1))
+  norm((c : Cart[Real, Tybit0[Unit]])) == real_of_num(1)
+  ((c : Real) * (v : Real) == v) == (c == real_of_num(1) || v == real_of_num(0))
+  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == ((z : Cart[Real, Tybit0[Unit]]) => (c : Cart[Real, Tybit0[Unit]]) * z)
+  (c : Cart[Real, Tybit0[Unit]])
+  ((p : Bool) && (q : Bool) && (r : Bool)) == ((q && p) && r)
+  (\226\136\128 z : Cart[Real, Tybit0[Unit]], norm((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z)) == norm(z)) && (\226\136\131 c : Cart[Real, Tybit0[Unit]], f == ((z : Cart[Real, Tybit0[Unit]]) => c * z))
+  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], (orthogonal_transformation(f) && det(matrix(f)) == real_of_num(1)) == (\226\136\131 c : Cart[Real, Tybit0[Unit]], norm(c) == real_of_num(1) && f == ((z : Cart[Real, Tybit0[Unit]]) => c * z))
+  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  o((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), cnj)
+  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == o(o(f, cnj), cnj)
+  \226\136\128 c : Cart[Real, Tybit0[Unit]], ((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == ((z : Cart[Real, Tybit0[Unit]]) => c * cnj(z))) == (o(f, cnj) == ((z : Cart[Real, Tybit0[Unit]]) => c * z))
+  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], (orthogonal_transformation(f) && det(matrix(f)) == -real_of_num(1)) == (\226\136\131 c : Cart[Real, Tybit0[Unit]], norm(c) == real_of_num(1) && f == ((z : Cart[Real, Tybit0[Unit]]) => c * cnj(z)))
+  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], orthogonal_transformation(f) == (\226\136\131 c : Cart[Real, Tybit0[Unit]], norm(c) == real_of_num(1) && (f == ((z : Cart[Real, Tybit0[Unit]]) => c * z) || f == ((z : Cart[Real, Tybit0[Unit]]) => c * cnj(z))))
+  \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 Re(vsum(s, f)) == sum(s, (x : _) => Re(f(x)))
+  \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 Im(vsum(s, f)) == sum(s, (x : _) => Im(f(x)))
+  \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 vsum(s, (x : _) => c * f(x)) == c * vsum(s, f)
+  \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 vsum(s, (x : _) => f(x) * c) == vsum(s, f) * c
+  \226\136\128 f : (A) -> Real, \226\136\128 s : (A) -> Bool, vsum(s, (a : A) => Cx(f(a))) == Cx(sum(s, f))
+  \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 cnj(vsum(s, f)) == vsum(s, (x : _) => cnj(f(x)))
+  \226\136\128 f : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, vsum(op_dot_dot(m, n), (a : Num) => Cx(f(a))) == Cx(sum(op_dot_dot(m, n), f))
+  1 <= (n : Num) && (x : Num) <= n - 1 \226\134\146 n - 1 - x == n - (x + 1) && SUC(n - 1 - x) == n - x
+  ((x : Cart[Real, Tybit0[Unit]]) - (y : Cart[Real, Tybit0[Unit]])) * ((a : Cart[Real, Tybit0[Unit]]) * (b : Cart[Real, Tybit0[Unit]])) == x * a * b - a * (y * b)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, 1 <= n \226\134\146 pow(x, n) - pow(y, n) == (x - y) * vsum(op_dot_dot(0, n - 1), (i : Num) => pow(x, i) * pow(y, n - 1 - i))
+  Cx(real_of_num(1))
+  (x : Cart[Real, Tybit0[Unit]])
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, 1 <= n \226\134\146 pow(x, n) - Cx(real_of_num(1)) == (x - Cx(real_of_num(1))) * vsum(op_dot_dot(0, n - 1), (i : Num) => pow(x, i))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, 1 <= n \226\134\146 Cx(real_of_num(1)) - pow(x, n) == (Cx(real_of_num(1)) - x) * vsum(op_dot_dot(0, n - 1), (i : Num) => pow(x, i))
+  (real : (Cart[Real, Tybit0[Unit]]) -> Bool)((z : Cart[Real, Tybit0[Unit]])) == (Im(z) == real_of_num(0))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], real(z) == (Cx(Re(z)) == z)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], real(z) == (cnj(z) == z)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], real(z) \226\134\146 cnj(z) == z
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], real(z) == (\226\136\131 x : Real, z == Cx(x))
+  (\226\136\128 z : Cart[Real, Tybit0[Unit]], real(z) \226\134\146 (P : (Cart[Real, Tybit0[Unit]]) -> Bool)(z)) == (\226\136\128 x : Real, P(Cx(x)))
+  (\226\136\131 z : Cart[Real, Tybit0[Unit]], real(z) && (P : (Cart[Real, Tybit0[Unit]]) -> Bool)(z)) == (\226\136\131 x : Real, P(Cx(x)))
+  \226\136\128 x : Real, real(Cx(x))
+  \226\136\128 x : Real, \226\136\128 z : Cart[Real, Tybit0[Unit]], real(Cx(x) * z) == (x == real_of_num(0) || real(z))
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], real(w) && real(z) \226\134\146 real(w + z)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], real(z) \226\134\146 real(-z)
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], real(w) && real(z) \226\134\146 real(w - z)
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], real(w) && real(z) \226\134\146 real(w * z)
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, real(z) \226\134\146 real(pow(z, n))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], real(z) \226\134\146 real(inv(z))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], real(inv(z)) == real(z)
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], real(w) && real(z) \226\134\146 real(w / z)
+  \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 a : _, IN(a, s) \226\134\146 real(f(a))) \226\134\146 real(vsum(s, f))
+  (\226\136\128 z : Cart[Real, Tybit0[Unit]], real(z * cnj(z))) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], real(cnj(z) * z))
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, segment([(a, b)])) && real(a) && real(b) \226\134\146 real(x)
+  !((a : Real) == (b : Real))
+  ((a : Real) - (x : Real)) / (a - (b : Real))
+  real_of_num(0) < (a : Real) - (b : Real)
+  ((x : Real) - (a : Real)) / ((b : Real) - a)
+  real_of_num(0) < (b : Real) - (a : Real)
+  (a : Real) <= (b : Real) || b <= a
+  ((real_of_num(1) - (u : Real)) * (a : Real) + u * (b : Real) <= b) == (real_of_num(0) <= (real_of_num(1) - u) * (b - a))
+  ((real_of_num(1) - (u : Real)) * (a : Real) + u * (b : Real) <= a) == (real_of_num(0) <= u * (a - b))
+  ((b : Real) <= (real_of_num(1) - (u : Real)) * (a : Real) + u * b) == (real_of_num(0) <= (real_of_num(1) - u) * (a - b))
+  ((a : Real) <= (real_of_num(1) - (u : Real)) * a + u * (b : Real)) == (real_of_num(0) <= u * (b - a))
+  (u : Real)
+  real_of_num(0)
+  (x : Real) == (b : Real)
+  (real_of_num(1) - (u : Real)) * (b : Real) + u * b == b
+  (a : Real) == (b : Real)
+  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Real, IN(Cx(x), segment([(Cx(a), Cx(b))])) == (a <= x && x <= b || b <= x && x <= a)
+  real((x : Cart[Real, Tybit0[Unit]]))
+  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, segment([(Cx(a), Cx(b))])) == (Im(x) == real_of_num(0) && (a <= Re(x) && Re(x) <= b || b <= Re(x) && Re(x) <= a))
+  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) && !(x == real_of_num(0) && y == real_of_num(0)) \226\134\146 real_of_num(0) < x + y
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, segment([(a, b)])) && real_of_num(0) < Re(a) && real_of_num(0) < Re(b) \226\134\146 real_of_num(0) < Re(x)
+  convex(real)
+  \226\136\128 s : (Real) -> Bool, IMAGE(Cx, s) == {(z : Cart[Real, Tybit0[Unit]]) | real(z) && IN(Re(z), s)}
+  subspace(real)
+  real == {(x : Cart[Real, Tybit0[Unit]]) | real(x)}
+  dim(real) == 1
+  interior(real) == {}
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], real(z) \226\134\146 norm(z) == abs(Re(z))
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], real(z) && real_of_num(0) <= Re(z) \226\134\146 norm(z) == Re(z)
+  \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 x : _, IN(x, s) \226\134\146 real(f(x)) && real_of_num(0) <= Re(f(x))) \226\134\146 norm(vsum(s, f)) == sum(s, (x : _) => Re(f(x)))
+  (x : Real) == (y : Real) \226\134\146 y <= x
+  sum((s : (A) -> Bool), (x : A) => Re((g : (A) -> Cart[Real, Tybit0[Unit]])(x)))
+  sum((s : (A) -> Bool), (x : A) => norm((f : (A) -> Cart[Real, Tybit0[Unit]])(x)))
+  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (A) -> Cart[Real, Tybit0[Unit]], FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 real(g(x)) && norm(f(x)) <= Re(g(x))) \226\134\146 norm(vsum(s, f)) <= norm(vsum(s, g))
+  norm(vsum((t : (A) -> Bool), (g : (A) -> Cart[Real, Tybit0[Unit]]))) == sum(t, (x : A) => Re(g(x))) && norm(vsum((s : (A) -> Bool), g)) == sum(s, (x : A) => Re(g(x)))
+  norm(vsum((t : (A) -> Bool), (g : (A) -> Cart[Real, Tybit0[Unit]])))
+  \226\136\128 f : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, FINITE(s) && SUBSET(t, s) && (\226\136\128 x : A, IN(x, s) \226\134\146 real(g(x)) && norm(f(x)) <= Re(g(x))) \226\134\146 norm(vsum(t, f)) <= norm(vsum(s, g))
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, (Cx(real_of_num(1)) - x) * vsum(op_dot_dot(0, n), (i : Num) => pow(x, i)) == Cx(real_of_num(1)) - pow(x, SUC(n))
+  (m : Num) <= (n : Num) \226\134\146 SUC(n - m) + m == SUC(n)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 (Cx(real_of_num(1)) - x) * vsum(op_dot_dot(m, n), (i : Num) => pow(x, i)) == pow(x, m) - pow(x, SUC(n))
+  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1))) && (Cx(real_of_num(1)) - z) * (x : Cart[Real, Tybit0[Unit]]) == (y : Cart[Real, Tybit0[Unit]]) \226\134\146 x == y / (Cx(real_of_num(1)) - z)
+  (n : Num) < (m : Num) || !(n < m) && m <= n
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, vsum(op_dot_dot(m, n), (i : Num) => pow(x, i)) == (if n < m { Cx(real_of_num(0)) } else { if x == Cx(real_of_num(1)) { Cx(real_of_num(n + 1 - m)) } else { (pow(x, m) - pow(x, SUC(n))) / (Cx(real_of_num(1)) - x) } })
+  !((m : Num) + (n : Num) < m)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, vsum(op_dot_dot(m, m + n), (i : Num) => pow(x, i)) == (if x == Cx(real_of_num(1)) { Cx(real_of_num(n)) + Cx(real_of_num(1)) } else { pow(x, m) * ((Cx(real_of_num(1)) - pow(x, SUC(n))) / (Cx(real_of_num(1)) - x)) })
+  (a : Num) - (b : Num) - (c : Num) == a - (b + c)
+  GABS((f : ((Num, Num)) -> (Num, Num)) => \226\136\128 x : Num, \226\136\128 y : Num, GEQ(f((x, y)), (y, x)))
+  (a : Cart[Real, Tybit0[Unit]]) * ((x : Cart[Real, Tybit0[Unit]]) * (s : Cart[Real, Tybit0[Unit]])) == x * (a * s)
+  \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, 1 <= n \226\134\146 vsum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i)) - vsum(op_dot_dot(0, n), (i : Num) => a(i) * pow(y, i)) == (x - y) * vsum(op_dot_dot(0, n - 1), (j : Num) => vsum(op_dot_dot(j + 1, n), (i : Num) => a(i) * pow(y, i - j - 1)) * pow(x, j))
+  (k : Num) => (j : Num) + (k + 1)
+  (i : Num) => i - ((j : Num) + 1)
+  (j : Num)
+  \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, 1 <= n \226\134\146 vsum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i)) - vsum(op_dot_dot(0, n), (i : Num) => a(i) * pow(y, i)) == (x - y) * vsum(op_dot_dot(0, n - 1), (j : Num) => vsum(op_dot_dot(0, n - j - 1), (k : Num) => a(j + (k + 1)) * pow(y, k)) * pow(x, j))
+  (j : Num) => vsum(op_dot_dot(j + 1, (n : Num)), (i : Num) => (c : (Num) -> Cart[Real, Tybit0[Unit]])(i) * pow((a : Cart[Real, Tybit0[Unit]]), i - j - 1))
+  (i : Num) => Cx(real_of_num(0))
+  (n : Num) == 0
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, \226\136\131 b : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], vsum(op_dot_dot(0, n), (i : Num) => c(i) * pow(z, i)) == (z - a) * vsum(op_dot_dot(0, n - 1), (i : Num) => b(i) * pow(z, i)) + vsum(op_dot_dot(0, n), (i : Num) => c(i) * pow(a, i))
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, vsum(op_dot_dot(0, n), (i : Num) => c(i) * pow(a, i)) == Cx(real_of_num(0)) \226\134\146 (\226\136\131 b : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], vsum(op_dot_dot(0, n), (i : Num) => c(i) * pow(z, i)) == (z - a) * vsum(op_dot_dot(0, n - 1), (i : Num) => b(i) * pow(z, i)))
+  (n : Num) + 1 + 1 == 1 + (n + 1)
+  (a : Real) + norm((y : Cart[Real, Tybit0[Unit]])) <= (b : Real) \226\134\146 norm((x : Cart[Real, Tybit0[Unit]])) <= a \226\134\146 norm(x + y) <= b
   :real
   :real
-  z:complex
-  z:complex
-  max M ((&1 / &2 + norm(c(n+1):complex)) / e)
-  M:real
-  &0 < &1 / &2
-  norm(c 0:complex) / e
-  forall c n e. &0 < e\n           ==> ?M. forall z. M <= norm(z)\n                       ==> norm(vsum(0..n) (\\i. c(i) * z pow i))\n                               <= e * norm(z) pow (n + 1)
-  norm(z:complex) pow 1
-  c * x - c / &2 * x = x * c / &2
-  abs b + &1 <= norm(y) - a ==> norm(x) <= a ==> b <= norm(y + x)
+  (z : Cart[Real, Tybit0[Unit]])
+  (z : Cart[Real, Tybit0[Unit]])
+  max((M : Real), (real_of_num(1) / real_of_num(2) + norm((c : (Num) -> Cart[Real, Tybit0[Unit]])((n : Num) + 1))) / (e : Real))
+  (M : Real)
+  real_of_num(0) < real_of_num(1) / real_of_num(2)
+  norm((c : (Num) -> Cart[Real, Tybit0[Unit]])(0)) / (e : Real)
+  \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 M : Real, \226\136\128 z : Cart[Real, Tybit0[Unit]], M <= norm(z) \226\134\146 norm(vsum(op_dot_dot(0, n), (i : Num) => c(i) * pow(z, i))) <= e * pow(norm(z), n + 1))
+  pow(norm((z : Cart[Real, Tybit0[Unit]])), 1)
+  (c : Real) * (x : Real) - c / real_of_num(2) * x == x * (c / real_of_num(2))
+  abs((b : Real)) + real_of_num(1) <= norm((y : Cart[Real, Tybit0[Unit]])) - (a : Real) \226\134\146 norm((x : Cart[Real, Tybit0[Unit]])) <= a \226\134\146 b <= norm(y + x)
   :real
   :real
-  z:complex
-  z:complex
-  max M (max (&1) ((abs B + &1) / (norm(c(n:num):complex) / &2)))
-  B:real
-  M:real
-  ~(n = 0) ==> ~(n <= n - 1)
-  norm(c(n:num):complex) / &2
-  n - 1
-  c:num->complex
-  n - 1
-  c(n:num) = Cx(&0)
-  0 <= n
-  n = 0
-  n:num
-  forall c n. (forall k. k IN 1..n ==> c(k) = Cx(&0)) \\/\n         forall B. eventually (\\z. norm(vsum(0..n) (\\i. c(i) * z pow i)) >= B)\n                        at_infinity
+  (z : Cart[Real, Tybit0[Unit]])
+  (z : Cart[Real, Tybit0[Unit]])
+  max((M : Real), max(real_of_num(1), (abs((B : Real)) + real_of_num(1)) / (norm((c : (Num) -> Cart[Real, Tybit0[Unit]])((n : Num))) / real_of_num(2))))
+  (B : Real)
+  (M : Real)
+  !((n : Num) == 0) \226\134\146 !(n <= n - 1)
+  norm((c : (Num) -> Cart[Real, Tybit0[Unit]])((n : Num))) / real_of_num(2)
+  (n : Num) - 1
+  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+  (n : Num) - 1
+  (c : (Num) -> Cart[Real, Tybit0[Unit]])((n : Num)) == Cx(real_of_num(0))
+  0 <= (n : Num)
+  (n : Num) == 0
+  (n : Num)
+  \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, (\226\136\128 k : Num, IN(k, op_dot_dot(1, n)) \226\134\146 c(k) == Cx(real_of_num(0))) || (\226\136\128 B : Real, eventually((z : Cart[Real, Tybit0[Unit]]) => norm(vsum(op_dot_dot(0, n), (i : Num) => c(i) * pow(z, i))) >= B, at_infinity))
   :N
   :2
-  b:real
-  b:real
-  ~a ==> a ==> b
-  &1
-  Cx(&0)
-  SUC n
-  c:num->complex
-  b:num->complex
-  {z | z = a \\/ P z} = a INSERT {z | P z}
-  b:num->complex
-  a:complex
-  {z | vsum(0..SUC n) (\\i. c(i) * z pow i) = Cx(&0)} = {}
-  c 0 = Cx(&0)
-  ~a ==> b <=> a \\/ b
-  forall n c. ~(forall i. i IN 0..n ==> c(i) = Cx(&0))\n         ==> FINITE {z | vsum(0..n) (\\i. c(i) * z pow i) = Cx(&0)} /\\\n             CARD {z | vsum(0..n) (\\i. c(i) * z pow i) = Cx(&0)} <= n
-  {x | T} = (:complex)
-  a /\\ ~b <=> ~(a ==> b)
-  forall n c. FINITE {x | vsum(0..n) (\\i. c i * x pow i) = Cx(&0)} <=>\n         ?i. i IN 0..n /\\ ~(c i = Cx(&0))
-  {x | T} = (:complex)
-  p <=> ~ ~p
-  forall n c. (forall z. vsum(0..n) (\\i. c i * z pow i) = Cx(&0)) <=>\n         (forall i. i IN 0..n ==> c i = Cx(&0))
-  (forall n. P n) <=> P 0 /\\ (forall n. ~(n = 0) ==> P n)
-  (c - k) + s = Cx(&0) <=> c + s = k
-  forall x. vsum(0..n) (\\i. (if i = 0 then c 0 - k else c i) * x pow i) =\n        Cx(&0)
-  forall n c k. (forall z. vsum(0..n) (\\i. c i * z pow i) = k) <=>\n           c 0 = k /\\ (forall i. i IN 1..n ==> c i = Cx(&0))
-  cproduct = iterate (( * ):complex->complex->complex)
-  neutral(( * ):complex->complex->complex) = Cx(&1)
-  monoidal(( * ):complex->complex->complex)
-  (forall f. cproduct {} f = Cx(&1)) /\\\n   (forall x f s. FINITE(s)\n            ==> (cproduct (x INSERT s) f =\n                 if x IN s then cproduct s f else f(x) * cproduct s f))
-  forall f s. FINITE s ==> (cproduct s f = Cx(&0) <=> ?x. x IN s /\\ f(x) = Cx(&0))
-  forall f s. FINITE s ==> cproduct s (\\x. inv(f x)) = inv(cproduct s f)
-  forall f g s. FINITE s\n           ==> cproduct s (\\x. f x * g x) = cproduct s f * cproduct s g
-  forall f s. (forall x:A. x IN s ==> (f(x) = Cx(&1))) ==> (cproduct s f = Cx(&1))
-  forall s. cproduct s (\\n. Cx(&1)) = Cx(&1)
-  forall f s n. FINITE s\n           ==> cproduct s (\\x. f x pow n) = (cproduct s f) pow n
-  forall f s. FINITE s ==> norm(cproduct s f) = product s (\\x. norm(f x))
-  forall f g s. (forall x. x IN s ==> (f x = g x)) ==> cproduct s f = cproduct s g
-  forall f x. cproduct {x} f = f(x)
-  ~(SUC n <= n)
-  (forall m. cproduct(m..0) f = if m = 0 then f(0) else Cx(&1)) /\\\n   (forall m n. cproduct(m..SUC n) f = if m <= SUC n then cproduct(m..n) f * f(SUC n)\n                                 else cproduct(m..n) f)
-  forall f m n. 0 < n /\\ m <= n ==> cproduct(m..n) f = cproduct(m..n-1) f * (f n)
-  forall f m n. m <= n ==> cproduct(m..n) f = f m * cproduct(m + 1..n) f
-  forall f g s. (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> (x = y))\n           ==> (cproduct (IMAGE f s) g = cproduct s (g o f))
-  forall f m p. cproduct(m+p..n+p) f = cproduct(m..n) (\\i. f(i + p))
-  forall c s. FINITE s ==> cproduct s (\\x. c) = c pow (CARD s)
-  forall c m n. cproduct (m..n) (\\x. c) = c pow ((n + 1) - m)
-  forall f m n. cproduct(2*m..2*n+1) f = cproduct(m..n) (\\i. f(2*i) * f(2*i+1))
-  forall x m n. cproduct(m..n) x =\n           if n < m then Cx(&1) else cproduct(0..n-m) (\\i. x(n - i))
-  forall f s. FINITE s ==> cnj(cproduct s f) = cproduct s (\\i. cnj(f i))
-  forall f s. FINITE s ==> Cx(product s f) = cproduct s (\\i. Cx(f i))
-  forall f:A->complex u v.\n        u SUBSET v /\\ (forall x. x IN v /\\ ~(x IN u) ==> f(x) = Cx(&1))\n        ==> cproduct v f = cproduct u f
-  forall f s t. FINITE s /\\ FINITE t /\\ DISJOINT s t\n           ==> (cproduct (s UNION t) f = cproduct s f * cproduct t f)
-  (forall f g s.   (forall x. x IN s ==> f(x) = g(x))\n              ==> cproduct s (\\i. f(i)) = cproduct s g) /\\\n   (forall f g a b. (forall i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> cproduct(a..b) (\\i. f(i)) = cproduct(a..b) g) /\\\n   (forall f g p.   (forall x. p x ==> f x = g x)\n              ==> cproduct {y | p y} (\\i. f(i)) = cproduct {y | p y} g)
+  (b : Real)
+  (b : Real)
+  !(a : Bool) \226\134\146 a \226\134\146 (b : Bool)
+  real_of_num(1)
+  Cx(real_of_num(0))
+  SUC((n : Num))
+  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+  (b : (Num) -> Cart[Real, Tybit0[Unit]])
+  {(z : _) | z == (a : _) || (P : (_) -> Bool)(z)} == INSERT(a, {(z : _) | P(z)})
+  (b : (Num) -> Cart[Real, Tybit0[Unit]])
+  (a : Cart[Real, Tybit0[Unit]])
+  {(z : Cart[Real, Tybit0[Unit]]) | vsum(op_dot_dot(0, SUC((n : Num))), (i : Num) => (c : (Num) -> Cart[Real, Tybit0[Unit]])(i) * pow(z, i)) == Cx(real_of_num(0))} == {}
+  (c : (Num) -> Cart[Real, Tybit0[Unit]])(0) == Cx(real_of_num(0))
+  (!(a : Bool) \226\134\146 (b : Bool)) == (a || b)
+  \226\136\128 n : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], !(\226\136\128 i : Num, IN(i, op_dot_dot(0, n)) \226\134\146 c(i) == Cx(real_of_num(0))) \226\134\146 FINITE({(z : Cart[Real, Tybit0[Unit]]) | vsum(op_dot_dot(0, n), (i : Num) => c(i) * pow(z, i)) == Cx(real_of_num(0))}) && CARD({(z : Cart[Real, Tybit0[Unit]]) | vsum(op_dot_dot(0, n), (i : Num) => c(i) * pow(z, i)) == Cx(real_of_num(0))}) <= n
+  {(x : Cart[Real, Tybit0[Unit]]) | true} == UNIV
+  ((a : Bool) && !(b : Bool)) == !(a \226\134\146 b)
+  \226\136\128 n : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], FINITE({(x : Cart[Real, Tybit0[Unit]]) | vsum(op_dot_dot(0, n), (i : Num) => c(i) * pow(x, i)) == Cx(real_of_num(0))}) == (\226\136\131 i : Num, IN(i, op_dot_dot(0, n)) && !(c(i) == Cx(real_of_num(0))))
+  {(x : Cart[Real, Tybit0[Unit]]) | true} == UNIV
+  (p : Bool) == !!p
+  \226\136\128 n : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], (\226\136\128 z : Cart[Real, Tybit0[Unit]], vsum(op_dot_dot(0, n), (i : Num) => c(i) * pow(z, i)) == Cx(real_of_num(0))) == (\226\136\128 i : Num, IN(i, op_dot_dot(0, n)) \226\134\146 c(i) == Cx(real_of_num(0)))
+  (\226\136\128 n : Num, (P : (Num) -> Bool)(n)) == (P(0) && (\226\136\128 n : Num, !(n == 0) \226\134\146 P(n)))
+  ((c : Cart[Real, Tybit0[Unit]]) - (k : Cart[Real, Tybit0[Unit]]) + (s : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) == (c + s == k)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], vsum(op_dot_dot(0, (n : Num)), (i : Num) => (if i == 0 { (c : (Num) -> Cart[Real, Tybit0[Unit]])(0) - (k : Cart[Real, Tybit0[Unit]]) } else { c(i) }) * pow(x, i)) == Cx(real_of_num(0))
+  \226\136\128 n : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 k : Cart[Real, Tybit0[Unit]], (\226\136\128 z : Cart[Real, Tybit0[Unit]], vsum(op_dot_dot(0, n), (i : Num) => c(i) * pow(z, i)) == k) == (c(0) == k && (\226\136\128 i : Num, IN(i, op_dot_dot(1, n)) \226\134\146 c(i) == Cx(real_of_num(0))))
+  (cproduct : ((_) -> Bool, (_) -> Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == iterate(op_star)
+  neutral(op_star) == Cx(real_of_num(1))
+  monoidal(op_star)
+  (\226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], cproduct({}, f) == Cx(real_of_num(1))) && (\226\136\128 x : _, \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 cproduct(INSERT(x, s), f) == (if IN(x, s) { cproduct(s, f) } else { f(x) * cproduct(s, f) }))
+  \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 (cproduct(s, f) == Cx(real_of_num(0))) == (\226\136\131 x : _, IN(x, s) && f(x) == Cx(real_of_num(0)))
+  \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 cproduct(s, (x : _) => inv(f(x))) == inv(cproduct(s, f))
+  \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 cproduct(s, (x : _) => f(x) * g(x)) == cproduct(s, f) * cproduct(s, g)
+  \226\136\128 f : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (A) -> Bool, (\226\136\128 x : A, IN(x, s) \226\134\146 f(x) == Cx(real_of_num(1))) \226\134\146 cproduct(s, f) == Cx(real_of_num(1))
+  \226\136\128 s : (_) -> Bool, cproduct(s, (n : _) => Cx(real_of_num(1))) == Cx(real_of_num(1))
+  \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, \226\136\128 n : Num, FINITE(s) \226\134\146 cproduct(s, (x : _) => pow(f(x), n)) == pow(cproduct(s, f), n)
+  \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 norm(cproduct(s, f)) == product(s, (x : _) => norm(f(x)))
+  \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, (\226\136\128 x : _, IN(x, s) \226\134\146 f(x) == g(x)) \226\134\146 cproduct(s, f) == cproduct(s, g)
+  \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : _, cproduct({x}, f) == f(x)
+  !(SUC((n : Num)) <= n)
+  (\226\136\128 m : Num, cproduct(op_dot_dot(m, 0), (f : (Num) -> Cart[Real, Tybit0[Unit]])) == (if m == 0 { f(0) } else { Cx(real_of_num(1)) })) && (\226\136\128 m : Num, \226\136\128 n : Num, cproduct(op_dot_dot(m, SUC(n)), f) == (if m <= SUC(n) { cproduct(op_dot_dot(m, n), f) * f(SUC(n)) } else { cproduct(op_dot_dot(m, n), f) }))
+  \226\136\128 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, 0 < n && m <= n \226\134\146 cproduct(op_dot_dot(m, n), f) == cproduct(op_dot_dot(m, n - 1), f) * f(n)
+  \226\136\128 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 cproduct(op_dot_dot(m, n), f) == f(m) * cproduct(op_dot_dot(m + 1, n), f)
+  \226\136\128 f : (_) -> _, \226\136\128 g : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, (\226\136\128 x : _, \226\136\128 y : _, IN(x, s) && IN(y, s) && f(x) == f(y) \226\134\146 x == y) \226\134\146 cproduct(IMAGE(f, s), g) == cproduct(s, o(g, f))
+  \226\136\128 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 p : Num, cproduct(op_dot_dot(m + p, (n : Num) + p), f) == cproduct(op_dot_dot(m, n), (i : Num) => f(i + p))
+  \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 cproduct(s, (x : _) => c) == pow(c, CARD(s))
+  \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, cproduct(op_dot_dot(m, n), (x : Num) => c) == pow(c, n + 1 - m)
+  \226\136\128 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, cproduct(op_dot_dot(2 * m, 2 * n + 1), f) == cproduct(op_dot_dot(m, n), (i : Num) => f(2 * i) * f(2 * i + 1))
+  \226\136\128 x : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, cproduct(op_dot_dot(m, n), x) == (if n < m { Cx(real_of_num(1)) } else { cproduct(op_dot_dot(0, n - m), (i : Num) => x(n - i)) })
+  \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 cnj(cproduct(s, f)) == cproduct(s, (i : _) => cnj(f(i)))
+  \226\136\128 f : (_) -> Real, \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 Cx(product(s, f)) == cproduct(s, (i : _) => Cx(f(i)))
+  \226\136\128 f : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 u : (A) -> Bool, \226\136\128 v : (A) -> Bool, SUBSET(u, v) && (\226\136\128 x : A, IN(x, v) && !IN(x, u) \226\134\146 f(x) == Cx(real_of_num(1))) \226\134\146 cproduct(v, f) == cproduct(u, f)
+  \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, FINITE(s) && FINITE(t) && DISJOINT(s, t) \226\134\146 cproduct(UNION(s, t), f) == cproduct(s, f) * cproduct(t, f)
+  (\226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (_) -> Bool, (\226\136\128 x : _, IN(x, s) \226\134\146 f(x) == g(x)) \226\134\146 cproduct(s, (i : _) => f(i)) == cproduct(s, g)) && (\226\136\128 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Num, \226\136\128 b : Num, (\226\136\128 i : Num, a <= i && i <= b \226\134\146 f(i) == g(i)) \226\134\146 cproduct(op_dot_dot(a, b), (i : Num) => f(i)) == cproduct(op_dot_dot(a, b), g)) && (\226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 p : (_) -> Bool, (\226\136\128 x : _, p(x) \226\134\146 f(x) == g(x)) \226\134\146 cproduct({(y : _) | p(y)}, (i : _) => f(i)) == cproduct({(y : _) | p(y)}, g))
 RE_DEF =  |- (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#=:fun(real,fun(real,bool)) (#Re:fun(cart(real,tybit0(1)),real) z:cart(real,tybit0(1)))) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) z:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
 IM_DEF =  |- (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#=:fun(real,fun(real,bool)) (#Im:fun(cart(real,tybit0(1)),real) z:cart(real,tybit0(1)))) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) z:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
 complex =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (#complex:fun(prod(real,real),cart(real,tybit0(1))) ((#,:fun(real,fun(real,prod(real,real))) x:real) y:real))) (#vector:fun(list(real),cart(real,tybit0(1))) ((#CONS:fun(real,fun(list(real),list(real))) x:real) ((#CONS:fun(real,fun(list(real),list(real))) y:real) #NIL:list(real)))))))))
