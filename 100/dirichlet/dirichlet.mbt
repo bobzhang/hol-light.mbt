@@ -3315,7 +3315,7 @@ fn step_67() -> Unit raise {
   let t2035 = @simp.simp_tac(@list.List([@complexes.re_vsum(), @iterate.finite_numseg(), @complexes.re_mul_cx(), @equal.gsym(@complexes.cx_pow())]))
   let t2034 = @simp.rewrite_tac(@list.List([@complexes.complex_norm_ge_re_im()]))
   let t2033 = @tactics.match_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("(a : Real) <= Re((z : Cart[Real, Tybit0[Unit]])) && abs(Re(z)) <= norm(z) → a <= norm(z)")))
-  let t2032 = @tactics.match_mp_tac(@vectors.norm_arith(@term_syntax.parse_term("(B : Real) + real_of_num(1) <= norm((x : Cart[Real, _])) → norm((y : Cart[Real, _])) <= B → !(dist((x, y)) < real_of_num(1))")))
+  let t2032 = @tactics.match_mp_tac(@vectors.norm_arith(@term_syntax.parse_term("(B : Real) + real_of_num(1) <= norm((x : Cart[Real, _])) → norm((y : Cart[Real, _])) <= B → !(distance((x, y)) < real_of_num(1))")))
   let t2031 = @tactics.undisch_tac(@term_syntax.parse_term("norm((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(Cx((t : Real)))) <= (B : Real)"))
   let t2030 = @simp.asm_rewrite_tac(@list.List([]))
   let t2026 = @term_syntax.parse_term("(n : Num)")
