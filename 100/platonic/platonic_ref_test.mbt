@@ -62615,7 +62615,7 @@ test "100/platonic matches 100/platonic.ml" {
       #|  ((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(x1 : Real), (x2 : Real), (x3 : Real)]) == (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)) == (x1 == real_of_num(0) && x2 == real_of_num(0) && x3 == real_of_num(0))
       #|  op_slash_bslash
       #|  (dot : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Real)((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(x1 : Real), (x2 : Real), (x3 : Real)]), (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(y1 : Real), (y2 : Real), (y3 : Real)])) == x1 * y1 + (x2 * y2 + x3 * y3)
-      #|  op_plus
+      #|  real_add
       #|  real_of_num(5)
       #|  inv((real_of_num(1) + sqrt(real_of_num(5))) / real_of_num(2)) == -real_of_num(1) / real_of_num(2) + real_of_num(1) / real_of_num(2) * sqrt(real_of_num(5))
       #|  -((a : Real) + (b : Real) * sqrt(real_of_num(5))) == -a + -b * sqrt(real_of_num(5))
@@ -63209,7 +63209,7 @@ test "100/platonic matches 100/platonic.ml" {
       #|  (f : (Cart[Real, N]) -> Cart[Real, N])
       #|  (d : Cart[Real, N]) - (c : Cart[Real, N])
       #|  (b : Cart[Real, N]) - (a : Cart[Real, N])
-      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], \226\136\128 d : Cart[Real, N], dist((a, b)) == dist((c, d)) \226\134\146 congruent(segment([(a, b)]), segment([(c, d)]))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], \226\136\128 d : Cart[Real, N], distance((a, b)) == distance((c, d)) \226\134\146 congruent(segment([(a, b)]), segment([(c, d)]))
       #|  :real
       #|  :real
       #|  :real
@@ -63218,7 +63218,7 @@ test "100/platonic matches 100/platonic.ml" {
       #|  :real
       #|  (op_minus : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])
       #|  (dot : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Real)
-      #|  op_lt_eq
+      #|  real_le
       #|  true
       #|  (a11 : Real)
       #|  (a12 : Real)
