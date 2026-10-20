@@ -6912,324 +6912,324 @@ test "Rqe/inferisign_thms matches Rqe/inferisign_thms.ml" {
       #|Warning: inventing type variables
       #|0..0..0..0..solved at 4
       #|Rqe/inferisign_thms quotations (318):
-      #|  x3
-      #|  x3
-      #|  x1 < x3 ==> x3 < x2 ==> (forall x. x1 < x /\\ x < x2 ==> P x) ==>\n    (forall x. x1 < x /\\ x < x3 ==> P x) /\\\n    (forall x. (x = x3) ==> P x) /\\\n    (forall x. x3 < x /\\ x < x2 ==> P x)
-      #|  x''
-      #|  x'
-      #|  x < x''' /\\  x''' < y
-      #|  x'':real
-      #|  x':real
-      #|  poly_diff p
-      #|  z
-      #|  x' < x''
-      #|  (y - z) * poly (poly_diff p) x'' < &0
-      #|  &0 < y - z
-      #|  poly p y - poly p z < &0
-      #|  y:real
-      #|  z:real
-      #|  p:real list
-      #|  &0 < z - x
-      #|  &0 < (z - x) * poly (poly_diff p) x'
-      #|  &0 < poly p z - poly p x
-      #|  z:real
-      #|  x:real
-      #|  p:real list
-      #|  x < y <=> ~(y <= x)
-      #|  forall x y p. x < y /\\ poly p x < &0 /\\ poly p y < &0 /\\\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (forall z. x < z /\\ z < y ==> poly p z < &0)
-      #|  forall x y p. x < y ==> poly p x < &0 ==> poly p y < &0 ==>\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (forall z. x < z /\\ z < y ==> poly p z < &0)
-      #|  x''
-      #|  x'
-      #|  x < x''' /\\  x''' < y
-      #|  x'':real
-      #|  x':real
-      #|  poly_diff p
-      #|  z
-      #|  x' < x''
-      #|  &0 < (y - z) * poly (poly_diff p) x''
-      #|  &0 < y - z
-      #|  &0 < poly p y - poly p z
-      #|  y:real
-      #|  z:real
-      #|  p:real list
-      #|  &0 < z - x
-      #|  (z - x) * poly (poly_diff p) x' < &0
-      #|  poly p z - poly p x < &0
-      #|  z:real
-      #|  x:real
-      #|  p:real list
-      #|  x < y <=> ~(y <= x)
-      #|  forall x y p. x < y /\\ &0 < poly p x /\\ &0 < poly p y /\\\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (forall z. x < z /\\ z < y ==> &0 < poly p z)
-      #|  forall x y p. x < y ==> poly p x > &0 ==> poly p y > &0 ==>\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (forall z. x < z /\\ z < y ==> poly p z > &0)
-      #|  z
-      #|  X
-      #|  x < M /\\  M < y
-      #|  M:real
-      #|  (x:real = y) <=> (y = x)
-      #|  z:real
-      #|  X:real
-      #|  p:real list
-      #|  M
-      #|  X
-      #|  N
-      #|  x < K /\\  K < y
-      #|  K:real
-      #|  M:real
-      #|  N:real
-      #|  poly_diff p
-      #|  z
-      #|  N < M
-      #|  (y - z) * poly (poly_diff p) M < &0
-      #|  &0 < y - z
-      #|  poly p y - poly p z < &0
-      #|  M:real
-      #|  y:real
-      #|  z:real
-      #|  p:real list
-      #|  &0 < z - X
-      #|  &0 < (z - X) * poly (poly_diff p) N
-      #|  N:real
-      #|  z:real
-      #|  X:real
-      #|  p:real list
-      #|  x < y <=> ~(y < x \\/ (x = y))
-      #|  X
-      #|  z
-      #|  x < M /\\  M < y
-      #|  M:real
-      #|  (x:real = y) <=> (y = x)
-      #|  X:real
-      #|  z:real
-      #|  p:real list
-      #|  X
-      #|  M
-      #|  N
-      #|  x < K /\\  K < y
-      #|  K:real
-      #|  M:real
-      #|  N:real
-      #|  poly_diff p
-      #|  z
-      #|  N < M
-      #|  &0 < (X - z) * poly (poly_diff p) M
-      #|  &0 < X - z
-      #|  &0 < &0 - poly p z
-      #|  M:real
-      #|  X:real
-      #|  z:real
-      #|  p:real list
-      #|  &0 < z - x
-      #|  (z - x) * poly (poly_diff p) N < &0
-      #|  poly p z - poly p x < &0
-      #|  N:real
-      #|  z:real
-      #|  x:real
-      #|  p:real list
-      #|  x < y <=> ~(y < x \\/ (x = y))
-      #|  X
-      #|  X:real
-      #|  y:real
-      #|  x:real
-      #|  p:real list
-      #|  forall x y p. x < y /\\ &0 < poly p x /\\ poly p y < &0 /\\\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\ (poly p X = &0) /\\\n              (forall z. x < z /\\ z < X ==> &0 < poly p z) /\\\n              (forall z. X < z /\\ z < y ==> poly p z < &0)
-      #|  X
-      #|  p:real list
-      #|  y:real
-      #|  x:real
-      #|  forall x y p. x < y ==> poly p x > &0 ==> poly p y < &0 ==>\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\\n              (forall z. (z = X) ==> (poly p z = &0)) /\\\n              (forall z. x < z /\\ z < X ==> poly p z > &0) /\\\n              (forall z. X < z /\\ z < y ==> poly p z < &0)
-      #|  z
-      #|  X
-      #|  x < M /\\  M < y
-      #|  M:real
-      #|  (x:real = y) <=> (y = x)
-      #|  z:real
-      #|  X:real
-      #|  p:real list
-      #|  M
-      #|  X
-      #|  N
-      #|  x < K /\\  K < y
-      #|  K:real
-      #|  M:real
-      #|  N:real
-      #|  poly_diff p
-      #|  z
-      #|  N < M
-      #|  &0 < (y - z) * poly (poly_diff p) M
-      #|  &0 < y - z
-      #|  &0 < poly p y - poly p z
-      #|  M:real
-      #|  y:real
-      #|  z:real
-      #|  p:real list
-      #|  &0 < z - X
-      #|  (z - X) * poly (poly_diff p) N < &0
-      #|  N:real
-      #|  z:real
-      #|  X:real
-      #|  p:real list
-      #|  x < y <=> ~(y < x \\/ (x = y))
-      #|  X
-      #|  z
-      #|  x < M /\\  M < y
-      #|  M:real
-      #|  (x:real = y) <=> (y = x)
-      #|  X:real
-      #|  z:real
-      #|  p:real list
-      #|  X
-      #|  M
-      #|  N
-      #|  x < K /\\  K < y
-      #|  K:real
-      #|  M:real
-      #|  N:real
-      #|  poly_diff p
-      #|  z
-      #|  N < M
-      #|  (X - z) * poly (poly_diff p) M < &0
-      #|  &0 < X - z
-      #|  &0 - poly p z < &0
-      #|  M:real
-      #|  X:real
-      #|  z:real
-      #|  p:real list
-      #|  &0 < z - x
-      #|  &0 < (z - x) * poly (poly_diff p) N
-      #|  &0 < poly p z - poly p x
-      #|  N:real
-      #|  z:real
-      #|  x:real
-      #|  p:real list
-      #|  x < y <=> ~(y < x \\/ (x = y))
-      #|  X
-      #|  X:real
-      #|  y:real
-      #|  x:real
-      #|  p:real list
-      #|  forall x y p. x < y /\\ poly p x < &0 /\\ &0 < poly p y /\\\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\ (poly p X = &0) /\\\n              (forall z. x < z /\\ z < X ==> poly p z < &0) /\\\n              (forall z. X < z /\\ z < y ==> &0 < poly p z)
-      #|  X
-      #|  p:real list
-      #|  y:real
-      #|  x:real
-      #|  forall x y p. x < y ==> poly p x < &0 ==> poly p y > &0 ==>\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\\n              (forall z. (z = X) ==> (poly p z = &0)) /\\\n              (forall z. x < z /\\ z < X ==> poly p z < &0) /\\\n              (forall z. X < z /\\ z < y ==> poly p z > &0)
-      #|  (forall x. x1 < x /\\ x < x2 ==> poly p x < &0) ==> (forall x. x1 < x /\\ x < x2 ==> ~(poly p x = &0))
-      #|  (forall x. x1 < x /\\ x < x2 ==> poly p x > &0) ==> (forall x. x1 < x /\\ x < x2 ==> ~(poly p x = &0))
-      #|  x':real
-      #|  &0 < y - x
-      #|  poly p y - poly p x = &0
-      #|  forall x y p. x < y ==> (poly p x = &0) ==> (poly p y = &0) ==>\n       (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==> F
-      #|  p:real list
-      #|  z
-      #|  p:real list
-      #|  y:real
-      #|  z:real
-      #|  x''
-      #|  x'
-      #|  x < x''' /\\  x''' < y
-      #|  x'':real
-      #|  x':real
-      #|  poly_diff p
-      #|  z
-      #|  x' < x''
-      #|  (y - z) * poly (poly_diff p) x'' < &0
-      #|  &0 < y - z
-      #|  &0 - poly p z < &0
-      #|  y:real
-      #|  z:real
-      #|  p:real list
-      #|  (z - x) * poly (poly_diff p) x' < &0
-      #|  &0 < z - x
-      #|  (z - x) * poly (poly_diff p) x' > &0
-      #|  poly p z - poly p x > &0
-      #|  z:real
-      #|  x:real
-      #|  p:real list
-      #|  x <= y <=> (x < y \\/ (x = y))
-      #|  x < y <=> ~(y <= x)
-      #|  forall x y p. x < y ==> poly p x < &0 ==> (poly p y = &0) ==>\n     (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (forall z. x < z /\\ z < y ==> poly p z < &0)
-      #|  z
-      #|  p:real list
-      #|  y:real
-      #|  z:real
-      #|  x''
-      #|  x'
-      #|  x < x''' /\\  x''' < y
-      #|  x'':real
-      #|  x':real
-      #|  poly_diff p
-      #|  z
-      #|  x' < x''
-      #|  (y - z) * poly (poly_diff p) x'' > &0
-      #|  &0 < y - z
-      #|  &0 - poly p z > &0
-      #|  y:real
-      #|  z:real
-      #|  p:real list
-      #|  &0 < (z - x) * poly (poly_diff p) x'
-      #|  &0 < z - x
-      #|  (z - x) * poly (poly_diff p) x' < &0
-      #|  poly p z - poly p x < &0
-      #|  z:real
-      #|  x:real
-      #|  p:real list
-      #|  x >= y <=> (x > y \\/ (x = y))
-      #|  x > y <=> ~(y >= x)
-      #|  forall x y p. x < y ==> poly p x > &0 ==> (poly p y = &0) ==>\n     (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (forall z. x < z /\\ z < y ==> poly p z > &0)
-      #|  z
-      #|  p:real list
-      #|  z:real
-      #|  x:real
-      #|  x''
-      #|  x'
-      #|  x < x''' /\\  x''' < y
-      #|  x'':real
-      #|  x':real
-      #|  poly_diff p
-      #|  z
-      #|  x' < x''
-      #|  (y - z) * poly (poly_diff p) x'' < &0
-      #|  &0 < y - z
-      #|  poly p y - poly p z < &0
-      #|  y:real
-      #|  z:real
-      #|  p:real list
-      #|  &0 > (z - x) * poly (poly_diff p) x'
-      #|  &0 < z - x
-      #|  (z - x) * poly (poly_diff p) x' > &0
-      #|  poly p z - &0 > &0
-      #|  z:real
-      #|  x:real
-      #|  p:real list
-      #|  x <= y <=> (x < y \\/ (x = y))
-      #|  x < y <=> ~(y <= x)
-      #|  forall x y p. x < y ==> (poly p x = &0) ==> (poly p y < &0) ==>\n     (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (forall z. x < z /\\ z < y ==> poly p z < &0)
-      #|  z
-      #|  p:real list
-      #|  z:real
-      #|  x:real
-      #|  x'
-      #|  x''
-      #|  x < x''' /\\  x''' < y
-      #|  x':real
-      #|  x'':real
-      #|  poly_diff p
-      #|  z
-      #|  x'' < x'
-      #|  (z - x) * poly (poly_diff p) x'' < &0
-      #|  &0 < z - x
-      #|  poly p z - &0 < &0
-      #|  z:real
-      #|  x:real
-      #|  p:real list
-      #|  (y - z) * poly (poly_diff p) x' > &0
-      #|  poly p y - poly p z > &0
-      #|  y:real
-      #|  z:real
-      #|  p:real list
-      #|  x >= y <=> (x > y \\/ (x = y))
-      #|  x > y <=> ~(y >= x)
-      #|  forall x y p. x < y ==> (poly p x = &0) ==> (poly p y > &0) ==>\n     (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (forall z. x < z /\\ z < y ==> poly p z > &0)
+      #|  (x3 : _)
+      #|  (x3 : _)
+      #|  (x1 : Real) < (x3 : Real) \226\134\146 x3 < (x2 : Real) \226\134\146 (\226\136\128 x : Real, x1 < x && x < x2 \226\134\146 (P : (Real) -> Bool)(x)) \226\134\146 (\226\136\128 x : Real, x1 < x && x < x3 \226\134\146 P(x)) && (\226\136\128 x : Real, x == x3 \226\134\146 P(x)) && (\226\136\128 x : Real, x3 < x && x < x2 \226\134\146 P(x))
+      #|  (x'' : _)
+      #|  (x' : _)
+      #|  (x : Real) < (x''' : Real) && x''' < (y : Real)
+      #|  (x'' : Real)
+      #|  (x' : Real)
+      #|  poly_diff((p : List[Real]))
+      #|  (z : _)
+      #|  (x' : Real) < (x'' : Real)
+      #|  ((y : Real) - (z : Real)) * poly(poly_diff((p : List[Real])), (x'' : Real)) < real_of_num(0)
+      #|  real_of_num(0) < (y : Real) - (z : Real)
+      #|  poly((p : List[Real]), (y : Real)) - poly(p, (z : Real)) < real_of_num(0)
+      #|  (y : Real)
+      #|  (z : Real)
+      #|  (p : List[Real])
+      #|  real_of_num(0) < (z : Real) - (x : Real)
+      #|  real_of_num(0) < ((z : Real) - (x : Real)) * poly(poly_diff((p : List[Real])), (x' : Real))
+      #|  real_of_num(0) < poly((p : List[Real]), (z : Real)) - poly(p, (x : Real))
+      #|  (z : Real)
+      #|  (x : Real)
+      #|  (p : List[Real])
+      #|  ((x : Real) < (y : Real)) == !(y <= x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 p : List[Real], x < y && poly(p, x) < real_of_num(0) && poly(p, y) < real_of_num(0) && (\226\136\128 z : Real, x < z && z < y \226\134\146 !(poly(poly_diff(p), z) == real_of_num(0))) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 poly(p, z) < real_of_num(0))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 p : List[Real], x < y \226\134\146 poly(p, x) < real_of_num(0) \226\134\146 poly(p, y) < real_of_num(0) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 !(poly(poly_diff(p), z) == real_of_num(0))) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 poly(p, z) < real_of_num(0))
+      #|  (x'' : _)
+      #|  (x' : _)
+      #|  (x : Real) < (x''' : Real) && x''' < (y : Real)
+      #|  (x'' : Real)
+      #|  (x' : Real)
+      #|  poly_diff((p : List[Real]))
+      #|  (z : _)
+      #|  (x' : Real) < (x'' : Real)
+      #|  real_of_num(0) < ((y : Real) - (z : Real)) * poly(poly_diff((p : List[Real])), (x'' : Real))
+      #|  real_of_num(0) < (y : Real) - (z : Real)
+      #|  real_of_num(0) < poly((p : List[Real]), (y : Real)) - poly(p, (z : Real))
+      #|  (y : Real)
+      #|  (z : Real)
+      #|  (p : List[Real])
+      #|  real_of_num(0) < (z : Real) - (x : Real)
+      #|  ((z : Real) - (x : Real)) * poly(poly_diff((p : List[Real])), (x' : Real)) < real_of_num(0)
+      #|  poly((p : List[Real]), (z : Real)) - poly(p, (x : Real)) < real_of_num(0)
+      #|  (z : Real)
+      #|  (x : Real)
+      #|  (p : List[Real])
+      #|  ((x : Real) < (y : Real)) == !(y <= x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 p : List[Real], x < y && real_of_num(0) < poly(p, x) && real_of_num(0) < poly(p, y) && (\226\136\128 z : Real, x < z && z < y \226\134\146 !(poly(poly_diff(p), z) == real_of_num(0))) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 real_of_num(0) < poly(p, z))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 p : List[Real], x < y \226\134\146 poly(p, x) > real_of_num(0) \226\134\146 poly(p, y) > real_of_num(0) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 !(poly(poly_diff(p), z) == real_of_num(0))) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 poly(p, z) > real_of_num(0))
+      #|  (z : _)
+      #|  (X : _)
+      #|  (x : Real) < (M : Real) && M < (y : Real)
+      #|  (M : Real)
+      #|  ((x : Real) == (y : Real)) == (y == x)
+      #|  (z : Real)
+      #|  (X : Real)
+      #|  (p : List[Real])
+      #|  (M : _)
+      #|  (X : _)
+      #|  (N : _)
+      #|  (x : Real) < (K : Real) && K < (y : Real)
+      #|  (K : Real)
+      #|  (M : Real)
+      #|  (N : Real)
+      #|  poly_diff((p : List[Real]))
+      #|  (z : _)
+      #|  (N : Real) < (M : Real)
+      #|  ((y : Real) - (z : Real)) * poly(poly_diff((p : List[Real])), (M : Real)) < real_of_num(0)
+      #|  real_of_num(0) < (y : Real) - (z : Real)
+      #|  poly((p : List[Real]), (y : Real)) - poly(p, (z : Real)) < real_of_num(0)
+      #|  (M : Real)
+      #|  (y : Real)
+      #|  (z : Real)
+      #|  (p : List[Real])
+      #|  real_of_num(0) < (z : Real) - (X : Real)
+      #|  real_of_num(0) < ((z : Real) - (X : Real)) * poly(poly_diff((p : List[Real])), (N : Real))
+      #|  (N : Real)
+      #|  (z : Real)
+      #|  (X : Real)
+      #|  (p : List[Real])
+      #|  ((x : Real) < (y : Real)) == !(y < x || x == y)
+      #|  (X : _)
+      #|  (z : _)
+      #|  (x : Real) < (M : Real) && M < (y : Real)
+      #|  (M : Real)
+      #|  ((x : Real) == (y : Real)) == (y == x)
+      #|  (X : Real)
+      #|  (z : Real)
+      #|  (p : List[Real])
+      #|  (X : _)
+      #|  (M : _)
+      #|  (N : _)
+      #|  (x : Real) < (K : Real) && K < (y : Real)
+      #|  (K : Real)
+      #|  (M : Real)
+      #|  (N : Real)
+      #|  poly_diff((p : List[Real]))
+      #|  (z : _)
+      #|  (N : Real) < (M : Real)
+      #|  real_of_num(0) < ((X : Real) - (z : Real)) * poly(poly_diff((p : List[Real])), (M : Real))
+      #|  real_of_num(0) < (X : Real) - (z : Real)
+      #|  real_of_num(0) < real_of_num(0) - poly((p : List[Real]), (z : Real))
+      #|  (M : Real)
+      #|  (X : Real)
+      #|  (z : Real)
+      #|  (p : List[Real])
+      #|  real_of_num(0) < (z : Real) - (x : Real)
+      #|  ((z : Real) - (x : Real)) * poly(poly_diff((p : List[Real])), (N : Real)) < real_of_num(0)
+      #|  poly((p : List[Real]), (z : Real)) - poly(p, (x : Real)) < real_of_num(0)
+      #|  (N : Real)
+      #|  (z : Real)
+      #|  (x : Real)
+      #|  (p : List[Real])
+      #|  ((x : Real) < (y : Real)) == !(y < x || x == y)
+      #|  (X : _)
+      #|  (X : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (p : List[Real])
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 p : List[Real], x < y && real_of_num(0) < poly(p, x) && poly(p, y) < real_of_num(0) && (\226\136\128 z : Real, x < z && z < y \226\134\146 !(poly(poly_diff(p), z) == real_of_num(0))) \226\134\146 (\226\136\131 X : Real, x < X && X < y && poly(p, X) == real_of_num(0) && (\226\136\128 z : Real, x < z && z < X \226\134\146 real_of_num(0) < poly(p, z)) && (\226\136\128 z : Real, X < z && z < y \226\134\146 poly(p, z) < real_of_num(0)))
+      #|  (X : _)
+      #|  (p : List[Real])
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 p : List[Real], x < y \226\134\146 poly(p, x) > real_of_num(0) \226\134\146 poly(p, y) < real_of_num(0) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 !(poly(poly_diff(p), z) == real_of_num(0))) \226\134\146 (\226\136\131 X : Real, x < X && X < y && (\226\136\128 z : Real, z == X \226\134\146 poly(p, z) == real_of_num(0)) && (\226\136\128 z : Real, x < z && z < X \226\134\146 poly(p, z) > real_of_num(0)) && (\226\136\128 z : Real, X < z && z < y \226\134\146 poly(p, z) < real_of_num(0)))
+      #|  (z : _)
+      #|  (X : _)
+      #|  (x : Real) < (M : Real) && M < (y : Real)
+      #|  (M : Real)
+      #|  ((x : Real) == (y : Real)) == (y == x)
+      #|  (z : Real)
+      #|  (X : Real)
+      #|  (p : List[Real])
+      #|  (M : _)
+      #|  (X : _)
+      #|  (N : _)
+      #|  (x : Real) < (K : Real) && K < (y : Real)
+      #|  (K : Real)
+      #|  (M : Real)
+      #|  (N : Real)
+      #|  poly_diff((p : List[Real]))
+      #|  (z : _)
+      #|  (N : Real) < (M : Real)
+      #|  real_of_num(0) < ((y : Real) - (z : Real)) * poly(poly_diff((p : List[Real])), (M : Real))
+      #|  real_of_num(0) < (y : Real) - (z : Real)
+      #|  real_of_num(0) < poly((p : List[Real]), (y : Real)) - poly(p, (z : Real))
+      #|  (M : Real)
+      #|  (y : Real)
+      #|  (z : Real)
+      #|  (p : List[Real])
+      #|  real_of_num(0) < (z : Real) - (X : Real)
+      #|  ((z : Real) - (X : Real)) * poly(poly_diff((p : List[Real])), (N : Real)) < real_of_num(0)
+      #|  (N : Real)
+      #|  (z : Real)
+      #|  (X : Real)
+      #|  (p : List[Real])
+      #|  ((x : Real) < (y : Real)) == !(y < x || x == y)
+      #|  (X : _)
+      #|  (z : _)
+      #|  (x : Real) < (M : Real) && M < (y : Real)
+      #|  (M : Real)
+      #|  ((x : Real) == (y : Real)) == (y == x)
+      #|  (X : Real)
+      #|  (z : Real)
+      #|  (p : List[Real])
+      #|  (X : _)
+      #|  (M : _)
+      #|  (N : _)
+      #|  (x : Real) < (K : Real) && K < (y : Real)
+      #|  (K : Real)
+      #|  (M : Real)
+      #|  (N : Real)
+      #|  poly_diff((p : List[Real]))
+      #|  (z : _)
+      #|  (N : Real) < (M : Real)
+      #|  ((X : Real) - (z : Real)) * poly(poly_diff((p : List[Real])), (M : Real)) < real_of_num(0)
+      #|  real_of_num(0) < (X : Real) - (z : Real)
+      #|  real_of_num(0) - poly((p : List[Real]), (z : Real)) < real_of_num(0)
+      #|  (M : Real)
+      #|  (X : Real)
+      #|  (z : Real)
+      #|  (p : List[Real])
+      #|  real_of_num(0) < (z : Real) - (x : Real)
+      #|  real_of_num(0) < ((z : Real) - (x : Real)) * poly(poly_diff((p : List[Real])), (N : Real))
+      #|  real_of_num(0) < poly((p : List[Real]), (z : Real)) - poly(p, (x : Real))
+      #|  (N : Real)
+      #|  (z : Real)
+      #|  (x : Real)
+      #|  (p : List[Real])
+      #|  ((x : Real) < (y : Real)) == !(y < x || x == y)
+      #|  (X : _)
+      #|  (X : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (p : List[Real])
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 p : List[Real], x < y && poly(p, x) < real_of_num(0) && real_of_num(0) < poly(p, y) && (\226\136\128 z : Real, x < z && z < y \226\134\146 !(poly(poly_diff(p), z) == real_of_num(0))) \226\134\146 (\226\136\131 X : Real, x < X && X < y && poly(p, X) == real_of_num(0) && (\226\136\128 z : Real, x < z && z < X \226\134\146 poly(p, z) < real_of_num(0)) && (\226\136\128 z : Real, X < z && z < y \226\134\146 real_of_num(0) < poly(p, z)))
+      #|  (X : _)
+      #|  (p : List[Real])
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 p : List[Real], x < y \226\134\146 poly(p, x) < real_of_num(0) \226\134\146 poly(p, y) > real_of_num(0) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 !(poly(poly_diff(p), z) == real_of_num(0))) \226\134\146 (\226\136\131 X : Real, x < X && X < y && (\226\136\128 z : Real, z == X \226\134\146 poly(p, z) == real_of_num(0)) && (\226\136\128 z : Real, x < z && z < X \226\134\146 poly(p, z) < real_of_num(0)) && (\226\136\128 z : Real, X < z && z < y \226\134\146 poly(p, z) > real_of_num(0)))
+      #|  (\226\136\128 x : Real, (x1 : Real) < x && x < (x2 : Real) \226\134\146 poly((p : List[Real]), x) < real_of_num(0)) \226\134\146 (\226\136\128 x : Real, x1 < x && x < x2 \226\134\146 !(poly(p, x) == real_of_num(0)))
+      #|  (\226\136\128 x : Real, (x1 : Real) < x && x < (x2 : Real) \226\134\146 poly((p : List[Real]), x) > real_of_num(0)) \226\134\146 (\226\136\128 x : Real, x1 < x && x < x2 \226\134\146 !(poly(p, x) == real_of_num(0)))
+      #|  (x' : Real)
+      #|  real_of_num(0) < (y : Real) - (x : Real)
+      #|  poly((p : List[Real]), (y : Real)) - poly(p, (x : Real)) == real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 p : List[Real], x < y \226\134\146 poly(p, x) == real_of_num(0) \226\134\146 poly(p, y) == real_of_num(0) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 !(poly(poly_diff(p), z) == real_of_num(0))) \226\134\146 false
+      #|  (p : List[Real])
+      #|  (z : _)
+      #|  (p : List[Real])
+      #|  (y : Real)
+      #|  (z : Real)
+      #|  (x'' : _)
+      #|  (x' : _)
+      #|  (x : Real) < (x''' : Real) && x''' < (y : Real)
+      #|  (x'' : Real)
+      #|  (x' : Real)
+      #|  poly_diff((p : List[Real]))
+      #|  (z : _)
+      #|  (x' : Real) < (x'' : Real)
+      #|  ((y : Real) - (z : Real)) * poly(poly_diff((p : List[Real])), (x'' : Real)) < real_of_num(0)
+      #|  real_of_num(0) < (y : Real) - (z : Real)
+      #|  real_of_num(0) - poly((p : List[Real]), (z : Real)) < real_of_num(0)
+      #|  (y : Real)
+      #|  (z : Real)
+      #|  (p : List[Real])
+      #|  ((z : Real) - (x : Real)) * poly(poly_diff((p : List[Real])), (x' : Real)) < real_of_num(0)
+      #|  real_of_num(0) < (z : Real) - (x : Real)
+      #|  ((z : Real) - (x : Real)) * poly(poly_diff((p : List[Real])), (x' : Real)) > real_of_num(0)
+      #|  poly((p : List[Real]), (z : Real)) - poly(p, (x : Real)) > real_of_num(0)
+      #|  (z : Real)
+      #|  (x : Real)
+      #|  (p : List[Real])
+      #|  ((x : Real) <= (y : Real)) == (x < y || x == y)
+      #|  ((x : Real) < (y : Real)) == !(y <= x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 p : List[Real], x < y \226\134\146 poly(p, x) < real_of_num(0) \226\134\146 poly(p, y) == real_of_num(0) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 !(poly(poly_diff(p), z) == real_of_num(0))) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 poly(p, z) < real_of_num(0))
+      #|  (z : _)
+      #|  (p : List[Real])
+      #|  (y : Real)
+      #|  (z : Real)
+      #|  (x'' : _)
+      #|  (x' : _)
+      #|  (x : Real) < (x''' : Real) && x''' < (y : Real)
+      #|  (x'' : Real)
+      #|  (x' : Real)
+      #|  poly_diff((p : List[Real]))
+      #|  (z : _)
+      #|  (x' : Real) < (x'' : Real)
+      #|  ((y : Real) - (z : Real)) * poly(poly_diff((p : List[Real])), (x'' : Real)) > real_of_num(0)
+      #|  real_of_num(0) < (y : Real) - (z : Real)
+      #|  real_of_num(0) - poly((p : List[Real]), (z : Real)) > real_of_num(0)
+      #|  (y : Real)
+      #|  (z : Real)
+      #|  (p : List[Real])
+      #|  real_of_num(0) < ((z : Real) - (x : Real)) * poly(poly_diff((p : List[Real])), (x' : Real))
+      #|  real_of_num(0) < (z : Real) - (x : Real)
+      #|  ((z : Real) - (x : Real)) * poly(poly_diff((p : List[Real])), (x' : Real)) < real_of_num(0)
+      #|  poly((p : List[Real]), (z : Real)) - poly(p, (x : Real)) < real_of_num(0)
+      #|  (z : Real)
+      #|  (x : Real)
+      #|  (p : List[Real])
+      #|  ((x : Real) >= (y : Real)) == (x > y || x == y)
+      #|  ((x : Real) > (y : Real)) == !(y >= x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 p : List[Real], x < y \226\134\146 poly(p, x) > real_of_num(0) \226\134\146 poly(p, y) == real_of_num(0) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 !(poly(poly_diff(p), z) == real_of_num(0))) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 poly(p, z) > real_of_num(0))
+      #|  (z : _)
+      #|  (p : List[Real])
+      #|  (z : Real)
+      #|  (x : Real)
+      #|  (x'' : _)
+      #|  (x' : _)
+      #|  (x : Real) < (x''' : Real) && x''' < (y : Real)
+      #|  (x'' : Real)
+      #|  (x' : Real)
+      #|  poly_diff((p : List[Real]))
+      #|  (z : _)
+      #|  (x' : Real) < (x'' : Real)
+      #|  ((y : Real) - (z : Real)) * poly(poly_diff((p : List[Real])), (x'' : Real)) < real_of_num(0)
+      #|  real_of_num(0) < (y : Real) - (z : Real)
+      #|  poly((p : List[Real]), (y : Real)) - poly(p, (z : Real)) < real_of_num(0)
+      #|  (y : Real)
+      #|  (z : Real)
+      #|  (p : List[Real])
+      #|  real_of_num(0) > ((z : Real) - (x : Real)) * poly(poly_diff((p : List[Real])), (x' : Real))
+      #|  real_of_num(0) < (z : Real) - (x : Real)
+      #|  ((z : Real) - (x : Real)) * poly(poly_diff((p : List[Real])), (x' : Real)) > real_of_num(0)
+      #|  poly((p : List[Real]), (z : Real)) - real_of_num(0) > real_of_num(0)
+      #|  (z : Real)
+      #|  (x : Real)
+      #|  (p : List[Real])
+      #|  ((x : Real) <= (y : Real)) == (x < y || x == y)
+      #|  ((x : Real) < (y : Real)) == !(y <= x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 p : List[Real], x < y \226\134\146 poly(p, x) == real_of_num(0) \226\134\146 poly(p, y) < real_of_num(0) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 !(poly(poly_diff(p), z) == real_of_num(0))) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 poly(p, z) < real_of_num(0))
+      #|  (z : _)
+      #|  (p : List[Real])
+      #|  (z : Real)
+      #|  (x : Real)
+      #|  (x' : _)
+      #|  (x'' : _)
+      #|  (x : Real) < (x''' : Real) && x''' < (y : Real)
+      #|  (x' : Real)
+      #|  (x'' : Real)
+      #|  poly_diff((p : List[Real]))
+      #|  (z : _)
+      #|  (x'' : Real) < (x' : Real)
+      #|  ((z : Real) - (x : Real)) * poly(poly_diff((p : List[Real])), (x'' : Real)) < real_of_num(0)
+      #|  real_of_num(0) < (z : Real) - (x : Real)
+      #|  poly((p : List[Real]), (z : Real)) - real_of_num(0) < real_of_num(0)
+      #|  (z : Real)
+      #|  (x : Real)
+      #|  (p : List[Real])
+      #|  ((y : Real) - (z : Real)) * poly(poly_diff((p : List[Real])), (x' : Real)) > real_of_num(0)
+      #|  poly((p : List[Real]), (y : Real)) - poly(p, (z : Real)) > real_of_num(0)
+      #|  (y : Real)
+      #|  (z : Real)
+      #|  (p : List[Real])
+      #|  ((x : Real) >= (y : Real)) == (x > y || x == y)
+      #|  ((x : Real) > (y : Real)) == !(y >= x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 p : List[Real], x < y \226\134\146 poly(p, x) == real_of_num(0) \226\134\146 poly(p, y) > real_of_num(0) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 !(poly(poly_diff(p), z) == real_of_num(0))) \226\134\146 (\226\136\128 z : Real, x < z && z < y \226\134\146 poly(p, z) > real_of_num(0))
       #|inferisign_lem00 =  |- ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x1:real) x3:real)) ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x3:real) x2:real)) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x1:real) x:real)) ((#real_lt:fun(real,fun(real,bool)) x:real) x2:real))) (P:fun(real,bool) x:real))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x1:real) x:real)) ((#real_lt:fun(real,fun(real,bool)) x:real) x3:real))) (P:fun(real,bool) x:real))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) x:real) x3:real)) (P:fun(real,bool) x:real))))) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x3:real) x:real)) ((#real_lt:fun(real,fun(real,bool)) x:real) x2:real))) (P:fun(real,bool) x:real)))))))))
       #|neg_neg_neq_thm =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. (#forall:fun(fun(list(real),bool),bool) (\p:list(real). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) p:list(real)) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) p:list(real)) y:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) (#forall:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)) ((#real_lt:fun(real,fun(real,bool)) z:real) y:real))) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) (#poly_diff:fun(list(real),list(real)) p:list(real))) z:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))) (#forall:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)) ((#real_lt:fun(real,fun(real,bool)) z:real) y:real))) ((#real_lt:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) p:list(real)) z:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))))))))
       #|neg_neg_neq_thm2 =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. (#forall:fun(fun(list(real),bool),bool) (\p:list(real). ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)) ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) p:list(real)) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) p:list(real)) y:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)) ((#real_lt:fun(real,fun(real,bool)) z:real) y:real))) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) (#poly_diff:fun(list(real),list(real)) p:list(real))) z:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))) (#forall:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)) ((#real_lt:fun(real,fun(real,bool)) z:real) y:real))) ((#real_lt:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) p:list(real)) z:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))))))))
