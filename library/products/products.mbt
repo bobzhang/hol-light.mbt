@@ -14,7 +14,7 @@ fn step_2() -> Unit raise {
   )
   nproduct_support_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f s. nproduct (support ( * ) f s) f = nproduct s f"),
+      @term_syntax.parse_term("∀ f : (_) -> Num, ∀ s : (_) -> Bool, nproduct(support(op_star, f, s), f) == nproduct(s, f)"),
       t1,
     ),
   )
@@ -132,7 +132,7 @@ fn step_6() -> Unit raise {
       nproduct_union(),
       @iterate.disjoint_numseg(),
       @iterate.finite_numseg(),
-      @int.arith_rule(@parser.parse_term("x < x + 1")),
+      @int.arith_rule(@term_syntax.parse_term("(x : Num) < x + 1")),
     ]),
   )
   nproduct_add_split_c.set(
@@ -278,7 +278,7 @@ fn step_10() -> Unit raise {
     ]),
   )
   nproduct_sing_c.set(
-    @tactics.prove(@parser.parse_term("forall f x. nproduct {x} f = f(x)"), t16),
+    @tactics.prove(@term_syntax.parse_term("∀ f : (_) -> Num, ∀ x : _, nproduct({x}, f) == f(x)"), t16),
   )
 }
 
@@ -298,7 +298,7 @@ fn step_11() -> Unit raise {
     @list.List([@iterate.numseg_sing(), nproduct_sing()]),
   )
   nproduct_sing_numseg_c.set(
-    @tactics.prove(@parser.parse_term("forall f n. nproduct(n..n) f = f(n)"), t17),
+    @tactics.prove(@term_syntax.parse_term("∀ f : (Num) -> Num, ∀ n : Num, nproduct(op_dot_dot(n, n), f) == f(n)"), t17),
   )
 }
 
@@ -318,7 +318,7 @@ pub fn nproduct_sing_numseg() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t20 = @simp.rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("~(SUC n <= n)")),
+      @int.arith_rule(@term_syntax.parse_term("!(SUC((n : Num)) <= n)")),
       @arith.mult_ac(),
     ]),
   )
@@ -866,7 +866,7 @@ fn step_28() -> Unit raise {
   )
   nproduct_const_numseg_1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c n. nproduct(1..n) (\\x. c) = c EXP n"),
+      @term_syntax.parse_term("∀ c : Num, ∀ n : Num, nproduct(op_dot_dot(1, n), (x : Num) => c) == EXP(c, n)"),
       t55,
     ),
   )
@@ -888,7 +888,7 @@ pub fn nproduct_const_numseg_1() -> @kernel.Thm {
 fn step_29() -> Unit raise {
   let t56 = @simp.simp_tac(@list.List([nproduct_eq_1()]))
   nproduct_one_c.set(
-    @tactics.prove(@parser.parse_term("forall s. nproduct s (\\n. 1) = 1"), t56),
+    @tactics.prove(@term_syntax.parse_term("∀ s : (_) -> Bool, nproduct(s, (n : _) => 1) == 1"), t56),
   )
 }
 
@@ -907,7 +907,7 @@ fn step_30() -> Unit raise {
   let t65 = @simp.asm_simp_tac(
     @list.List([@iterate.neutral_mul(), @equal.gsym(@iterate.nproduct())]),
   )
-  let t61 = @parser.parse_term("P:num->bool")
+  let t61 = @term_syntax.parse_term("(P : (Num) -> Bool)")
   let t64 = @tactics.disch_then(fn(
     x63 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1016,7 +1016,7 @@ fn step_31() -> Unit raise {
   )
   let t68 = @drule.match_mp(@iterate.iterate_related())(@iterate.monoidal_mul())
   let t69 = @tactics.mp_tac(
-    @bool.ispec(@parser.parse_term("R:num->num->bool"), t68),
+    @bool.ispec(@term_syntax.parse_term("(R : (Num, Num) -> Bool)"), t68),
   )
   let t67 = @tactics.repeat_tac(@tactics.disch_tac)
   let t72 = @tactics.then_tac(
@@ -1067,7 +1067,7 @@ fn step_32() -> Unit raise {
   let t81 = @simp.asm_simp_tac(
     @list.List([@iterate.neutral_mul(), @equal.gsym(@iterate.nproduct())]),
   )
-  let t77 = @parser.parse_term("P:num->bool")
+  let t77 = @term_syntax.parse_term("(P : (Num) -> Bool)")
   let t80 = @tactics.disch_then(fn(
     x79 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1178,7 +1178,7 @@ fn step_33() -> Unit raise {
     @iterate.monoidal_mul(),
   )
   let t85 = @tactics.mp_tac(
-    @bool.ispec(@parser.parse_term("R:num->num->bool"), t84),
+    @bool.ispec(@term_syntax.parse_term("(R : (Num, Num) -> Bool)"), t84),
   )
   let t83 = @tactics.repeat_tac(@tactics.disch_tac)
   let t88 = @tactics.then_tac(
@@ -1229,13 +1229,13 @@ fn step_34() -> Unit raise {
   let t95 = @tactics.conv_tac(@int.number_rule)
   let t94 = @tactics.disch_then(@tactics.match_mp_tac)
   let t93 = @simp.asm_rewrite_tac(@list.List([]))
-  let t89 = @parser.parse_term("s:A->bool")
-  let t90 = @parser.parse_term("g:A->num")
-  let t91 = @parser.parse_term("f:A->num")
+  let t89 = @term_syntax.parse_term("(s : (A) -> Bool)")
+  let t90 = @term_syntax.parse_term("(g : (A) -> Num)")
+  let t91 = @term_syntax.parse_term("(f : (A) -> Num)")
   let t92 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("\\x y:num. (x == y) (mod n)"),
+        @term_syntax.parse_term("(x : Num) => (y : Num) => op_eq_eq(x, y, mod((n : Num)))"),
         t91,
         t90,
         t89,
@@ -1515,7 +1515,7 @@ pub fn nproduct_delete() -> @kernel.Thm {
 fn step_42() -> Unit raise {
   let t114 = @simp.asm_rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("1 <= SUC n")),
+      @int.arith_rule(@term_syntax.parse_term("1 <= SUC((n : Num))")),
       @arith.mult_sym(),
     ]),
   )
@@ -1530,7 +1530,7 @@ fn step_42() -> Unit raise {
   )
   nproduct_fact_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. nproduct(1..n) (\\m. m) = FACT n"),
+      @term_syntax.parse_term("∀ n : Num, nproduct(op_dot_dot(1, n), (m : Num) => m) == FACT(n)"),
       t115,
     ),
   )
@@ -1634,7 +1634,7 @@ fn step_45() -> Unit raise {
         @tactics.then_tac(
           @tactics.then_tac(
             @simp.rewrite_tac(
-              @list.List([@int.arith_rule(@parser.parse_term("1 <= SUC n"))]),
+              @list.List([@int.arith_rule(@term_syntax.parse_term("1 <= SUC((n : Num))"))]),
             ),
             t183,
           ),
@@ -1649,9 +1649,9 @@ fn step_45() -> Unit raise {
   let t177 = @meson.asm_meson_tac(@list.List([]))
   let t176 = @tactics.try_tac(@int.asm_arith_tac)
   let t175 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(@arith.not_lt())]))
-  let t174 = @class.asm_cases_tac(@parser.parse_term("(n:num) < i"))
+  let t174 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) < (i : Num)"))
   let t173 = @simp.asm_rewrite_tac(@list.List([]))
-  let t169 = @parser.parse_term("i:num")
+  let t169 = @term_syntax.parse_term("(i : Num)")
   let t172 = @tactics.repeat_tac(
     @tactics.first_x_assum(fn(
       x171 : @kernel.Thm,
@@ -1729,7 +1729,7 @@ fn step_45() -> Unit raise {
           @tactics.then_tac(
             @tactics.then_tac(
               @tactics.then_tac(
-                @tactics.x_gen_tac(@parser.parse_term("i:num")),
+                @tactics.x_gen_tac(@term_syntax.parse_term("(i : Num)")),
                 @tactics.strip_tac,
               ),
               t172,
@@ -1745,9 +1745,9 @@ fn step_45() -> Unit raise {
     t177,
   )
   let t165 = @simp.asm_rewrite_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("1 <= SUC n"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("1 <= SUC((n : Num))"))]),
   )
-  let t162 = @parser.parse_term("SUC n")
+  let t162 = @term_syntax.parse_term("SUC((n : Num))")
   let t179 = @list.List([
     @tactics.then_tac(
       @tactics.repeat_tac(
@@ -1824,10 +1824,10 @@ fn step_45() -> Unit raise {
     ),
     t178,
   ])
-  let t158 = @tactics.x_gen_tac(@parser.parse_term("w:A^N"))
-  let t157 = @tactics.x_gen_tac(@parser.parse_term("b:A"))
-  let t156 = @tactics.x_gen_tac(@parser.parse_term("v:A^N"))
-  let t155 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
+  let t158 = @tactics.x_gen_tac(@term_syntax.parse_term("(w : Cart[A, N])"))
+  let t157 = @tactics.x_gen_tac(@term_syntax.parse_term("(b : A)"))
+  let t156 = @tactics.x_gen_tac(@term_syntax.parse_term("(v : Cart[A, N])"))
+  let t155 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
   let t154 = @simp.simp_tac(@list.List([@cart.lambda_beta()]))
   let t153 = @simp.rewrite_tac(
     @list.List([@theorems.imp_imp(), @pair.pair_eq(), @cart.cart_eq()]),
@@ -1886,12 +1886,12 @@ fn step_45() -> Unit raise {
     t187,
   )
   let t149 = @int.arith_rule(
-    @parser.parse_term("n < i /\\ ~(i = SUC n) ==> SUC n < i"),
+    @term_syntax.parse_term("(n : Num) < (i : Num) && !(i == SUC(n)) → SUC(n) < i"),
   )
   let t150 = @meson.asm_meson_tac(
     @list.List([
       @arith.le(),
-      @int.arith_rule(@parser.parse_term("1 <= SUC n")),
+      @int.arith_rule(@term_syntax.parse_term("1 <= SUC((n : Num))")),
       t149,
     ]),
   )
@@ -1899,15 +1899,15 @@ fn step_45() -> Unit raise {
     @list.List([
       @cart.cart_eq(),
       @cart.lambda_beta(),
-      @int.arith_rule(@parser.parse_term("i <= n ==> ~(i = SUC n)")),
+      @int.arith_rule(@term_syntax.parse_term("(i : Num) <= (n : Num) → !(i == SUC(n))")),
     ]),
   )
   let t147 = @tactics.exists_tac(
-    @parser.parse_term("(lambda i. if i = SUC n then @x. F else (v:A^N)$i):A^N"),
+    @term_syntax.parse_term("(lambda : ((Num) -> A) -> Cart[A, N])((i : Num) => if i == SUC((n : Num)) { (select : ((A) -> Bool) -> A)((x : A) => false) } else { (op_dollar : (Cart[A, N], Num) -> A)((v : Cart[A, N]), i) })"),
   )
-  let t146 = @tactics.exists_tac(@parser.parse_term("(v:A^N)$(SUC n)"))
+  let t146 = @tactics.exists_tac(@term_syntax.parse_term("op_dollar((v : Cart[A, N]), SUC((n : Num)))"))
   let t145 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
-  let t144 = @tactics.x_gen_tac(@parser.parse_term("v:A^N"))
+  let t144 = @tactics.x_gen_tac(@term_syntax.parse_term("(v : Cart[A, N])"))
   let t151 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -2003,7 +2003,7 @@ fn step_45() -> Unit raise {
   let t136 = @tactics.match_mp_tac(
     @meson.meson(
       @list.List([]),
-      @parser.parse_term("forall t. t = s /\\ t HAS_SIZE n ==> s HAS_SIZE n"),
+      @term_syntax.parse_term("∀ t : (_) -> Bool, t == (s : (_) -> Bool) && HAS_SIZE(t, (n : Num)) → HAS_SIZE(s, n)"),
     ),
   )
   let t134 = @simp.simp_tac(
@@ -2054,7 +2054,7 @@ fn step_45() -> Unit raise {
   let t130 = @simp.simp_tac(
     @list.List([
       @int.arith_rule(
-        @parser.parse_term("1 <= i /\\ i <= n /\\ 0 < i <=> 1 <= i /\\ i <= n"),
+        @term_syntax.parse_term("(1 <= (i : Num) && i <= (n : Num) && 0 < i) == (1 <= i && i <= n)"),
       ),
     ]),
   )
@@ -2065,7 +2065,7 @@ fn step_45() -> Unit raise {
           @simp.rewrite_tac(
             @list.List([
               @int.arith_rule(
-                @parser.parse_term("1 <= i /\\ i <= n /\\ i <= 0 <=> F"),
+                @term_syntax.parse_term("(1 <= (i : Num) && i <= (n : Num) && i <= 0) == false"),
               ),
             ]),
           ),
@@ -2083,7 +2083,7 @@ fn step_45() -> Unit raise {
   let t128 = @simp.rewrite_tac(
     @list.List([@arith.le_refl(), @arith.let_antisym()]),
   )
-  let t124 = @parser.parse_term("dimindex(:N)")
+  let t124 = @term_syntax.parse_term("(dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))")
   let t127 = @tactics.subgoal_then(
     @parser.parse_term(
       "forall n. n <= dimindex(:N)\n        ==> {v:A^N | (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ i <= n\n                          ==> P i (v$i)) /\\\n                     (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ n < i\n                          ==> v$i = @x. F)}\n            HAS_SIZE nproduct(1..n) m",
@@ -2217,7 +2217,7 @@ fn step_46() -> Unit raise {
   let t191 = @tactics.match_mp_tac(
     @meson.meson(
       @list.List([@sets.has_size()]),
-      @parser.parse_term("s HAS_SIZE n ==> CARD s = n"),
+      @term_syntax.parse_term("HAS_SIZE((s : (_) -> Bool), (n : Num)) → CARD(s) == n"),
     ),
   )
   let t194 = @tactics.then_tac(
@@ -2274,7 +2274,7 @@ fn step_48() -> Unit raise {
   )
   iproduct_support_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f s. iproduct (support ( * ) f s) f = iproduct s f"),
+      @term_syntax.parse_term("∀ f : (_) -> Int, ∀ s : (_) -> Bool, iproduct(support(op_star, f, s), f) == iproduct(s, f)"),
       t198,
     ),
   )
@@ -2398,7 +2398,7 @@ fn step_52() -> Unit raise {
       iproduct_union(),
       @iterate.disjoint_numseg(),
       @iterate.finite_numseg(),
-      @int.arith_rule(@parser.parse_term("x < x + 1")),
+      @int.arith_rule(@term_syntax.parse_term("(x : Num) < x + 1")),
     ]),
   )
   iproduct_add_split_c.set(
@@ -2618,7 +2618,7 @@ fn step_58() -> Unit raise {
     ]),
   )
   iproduct_sing_c.set(
-    @tactics.prove(@parser.parse_term("forall f x. iproduct {x} f = f(x)"), t217),
+    @tactics.prove(@term_syntax.parse_term("∀ f : (_) -> Int, ∀ x : _, iproduct({x}, f) == f(x)"), t217),
   )
 }
 
@@ -2638,7 +2638,7 @@ fn step_59() -> Unit raise {
     @list.List([@iterate.numseg_sing(), iproduct_sing()]),
   )
   iproduct_sing_numseg_c.set(
-    @tactics.prove(@parser.parse_term("forall f n. iproduct(n..n) f = f(n)"), t218),
+    @tactics.prove(@term_syntax.parse_term("∀ f : (Num) -> Int, ∀ n : Num, iproduct(op_dot_dot(n, n), f) == f(n)"), t218),
   )
 }
 
@@ -2658,7 +2658,7 @@ pub fn iproduct_sing_numseg() -> @kernel.Thm {
 fn step_60() -> Unit raise {
   let t221 = @simp.rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("~(SUC n <= n)")),
+      @int.arith_rule(@term_syntax.parse_term("!(SUC((n : Num)) <= n)")),
       @int.int_mul_ac(),
     ]),
   )
@@ -3219,7 +3219,7 @@ fn step_76() -> Unit raise {
   )
   iproduct_const_numseg_1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c n. iproduct(1..n) (\\x. c) = c pow n"),
+      @term_syntax.parse_term("∀ c : Int, ∀ n : Num, iproduct(op_dot_dot(1, n), (x : Num) => c) == pow(c, n)"),
       t256,
     ),
   )
@@ -3329,7 +3329,7 @@ pub fn iproduct_neg_numseg_1() -> @kernel.Thm {
 fn step_80() -> Unit raise {
   let t262 = @simp.simp_tac(@list.List([iproduct_eq_1()]))
   iproduct_one_c.set(
-    @tactics.prove(@parser.parse_term("forall s. iproduct s (\\n. &1) = &1"), t262),
+    @tactics.prove(@term_syntax.parse_term("∀ s : (_) -> Bool, iproduct(s, (n : _) => int_of_num(1)) == int_of_num(1)"), t262),
   )
 }
 
@@ -3448,7 +3448,7 @@ fn step_83() -> Unit raise {
   let t283 = @simp.asm_simp_tac(
     @list.List([@iterate.neutral_int_mul(), @equal.gsym(@iterate.iproduct())]),
   )
-  let t279 = @parser.parse_term("P:int->bool")
+  let t279 = @term_syntax.parse_term("(P : (Int) -> Bool)")
   let t282 = @tactics.disch_then(fn(
     x281 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3559,7 +3559,7 @@ fn step_84() -> Unit raise {
     @iterate.monoidal_int_mul(),
   )
   let t287 = @tactics.mp_tac(
-    @bool.ispec(@parser.parse_term("R:int->int->bool"), t286),
+    @bool.ispec(@term_syntax.parse_term("(R : (Int, Int) -> Bool)"), t286),
   )
   let t285 = @tactics.repeat_tac(@tactics.disch_tac)
   let t290 = @tactics.then_tac(
@@ -3610,7 +3610,7 @@ fn step_85() -> Unit raise {
   let t299 = @simp.asm_simp_tac(
     @list.List([@iterate.neutral_int_mul(), @equal.gsym(@iterate.iproduct())]),
   )
-  let t295 = @parser.parse_term("P:int->bool")
+  let t295 = @term_syntax.parse_term("(P : (Int) -> Bool)")
   let t298 = @tactics.disch_then(fn(
     x297 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3723,7 +3723,7 @@ fn step_86() -> Unit raise {
     @iterate.monoidal_int_mul(),
   )
   let t303 = @tactics.mp_tac(
-    @bool.ispec(@parser.parse_term("R:int->int->bool"), t302),
+    @bool.ispec(@term_syntax.parse_term("(R : (Int, Int) -> Bool)"), t302),
   )
   let t301 = @tactics.repeat_tac(@tactics.disch_tac)
   let t306 = @tactics.then_tac(
@@ -4147,7 +4147,7 @@ fn step_99() -> Unit raise {
   )
   product_support_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f s. product (support ( * ) f s) f = product s f"),
+      @term_syntax.parse_term("∀ f : (_) -> Real, ∀ s : (_) -> Bool, product(support(op_star, f, s), f) == product(s, f)"),
       t334,
     ),
   )
@@ -4268,7 +4268,7 @@ fn step_103() -> Unit raise {
       product_union(),
       @iterate.disjoint_numseg(),
       @iterate.finite_numseg(),
-      @int.arith_rule(@parser.parse_term("x < x + 1")),
+      @int.arith_rule(@term_syntax.parse_term("(x : Num) < x + 1")),
     ]),
   )
   product_add_split_c.set(
@@ -4482,7 +4482,7 @@ fn step_109() -> Unit raise {
     ]),
   )
   product_sing_c.set(
-    @tactics.prove(@parser.parse_term("forall f x. product {x} f = f(x)"), t353),
+    @tactics.prove(@term_syntax.parse_term("∀ f : (_) -> Real, ∀ x : _, product({x}, f) == f(x)"), t353),
   )
 }
 
@@ -4502,7 +4502,7 @@ fn step_110() -> Unit raise {
     @list.List([@iterate.numseg_sing(), product_sing()]),
   )
   product_sing_numseg_c.set(
-    @tactics.prove(@parser.parse_term("forall f n. product(n..n) f = f(n)"), t354),
+    @tactics.prove(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ n : Num, product(op_dot_dot(n, n), f) == f(n)"), t354),
   )
 }
 
@@ -4522,7 +4522,7 @@ pub fn product_sing_numseg() -> @kernel.Thm {
 fn step_111() -> Unit raise {
   let t357 = @simp.rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("~(SUC n <= n)")),
+      @int.arith_rule(@term_syntax.parse_term("!(SUC((n : Num)) <= n)")),
       @real.real_mul_ac(),
     ]),
   )
@@ -5080,7 +5080,7 @@ fn step_127() -> Unit raise {
   )
   product_const_numseg_1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c n. product(1..n) (\\x. c) = c pow n"),
+      @term_syntax.parse_term("∀ c : Real, ∀ n : Num, product(op_dot_dot(1, n), (x : Num) => c) == pow(c, n)"),
       t392,
     ),
   )
@@ -5274,7 +5274,7 @@ pub fn product_div_numseg() -> @kernel.Thm {
 fn step_134() -> Unit raise {
   let t402 = @simp.simp_tac(@list.List([product_eq_1()]))
   product_one_c.set(
-    @tactics.prove(@parser.parse_term("forall s. product s (\\n. &1) = &1"), t402),
+    @tactics.prove(@term_syntax.parse_term("∀ s : (_) -> Bool, product(s, (n : _) => real_of_num(1)) == real_of_num(1)"), t402),
   )
 }
 
@@ -5393,7 +5393,7 @@ fn step_137() -> Unit raise {
   let t423 = @simp.asm_simp_tac(
     @list.List([@iterate.neutral_real_mul(), @equal.gsym(@iterate.product())]),
   )
-  let t419 = @parser.parse_term("P:real->bool")
+  let t419 = @term_syntax.parse_term("(P : (Real) -> Bool)")
   let t422 = @tactics.disch_then(fn(
     x421 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -5502,7 +5502,7 @@ fn step_138() -> Unit raise {
     @iterate.monoidal_real_mul(),
   )
   let t427 = @tactics.mp_tac(
-    @bool.ispec(@parser.parse_term("R:real->real->bool"), t426),
+    @bool.ispec(@term_syntax.parse_term("(R : (Real, Real) -> Bool)"), t426),
   )
   let t425 = @tactics.repeat_tac(@tactics.disch_tac)
   let t430 = @tactics.then_tac(
@@ -5553,7 +5553,7 @@ fn step_139() -> Unit raise {
   let t439 = @simp.asm_simp_tac(
     @list.List([@iterate.neutral_real_mul(), @equal.gsym(@iterate.product())]),
   )
-  let t435 = @parser.parse_term("P:real->bool")
+  let t435 = @term_syntax.parse_term("(P : (Real) -> Bool)")
   let t438 = @tactics.disch_then(fn(
     x437 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -5666,7 +5666,7 @@ fn step_140() -> Unit raise {
     @iterate.monoidal_real_mul(),
   )
   let t443 = @tactics.mp_tac(
-    @bool.ispec(@parser.parse_term("R:real->real->bool"), t442),
+    @bool.ispec(@term_syntax.parse_term("(R : (Real, Real) -> Bool)"), t442),
   )
   let t441 = @tactics.repeat_tac(@tactics.disch_tac)
   let t446 = @tactics.then_tac(
