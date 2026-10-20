@@ -13009,90 +13009,90 @@ Warning: inventing type variables
 Warning: inventing type variables
 0..0..2..7..18..55..149..384..1013..2503..solved at 3131
 Arithmetic/fol quotations (84):
-  (x |-> a) (v:A->B) = \\y. if y = x then a else v(y)
-  (termval v Z = 0) /\\\n   (termval v (V n) = v(n)) /\\\n   (termval v (Suc t) = SUC (termval v t)) /\\\n   (termval v (s ++ t) = termval v s + termval v t) /\\\n   (termval v (s ** t) = termval v s * termval v t)
-  (holds v False <=> F) /\\\n   (holds v True <=> T) /\\\n   (holds v (s === t) <=> (termval v s = termval v t)) /\\\n   (holds v (s << t) <=> (termval v s < termval v t)) /\\\n   (holds v (s <<= t) <=> (termval v s <= termval v t)) /\\\n   (holds v (Not p) <=> ~(holds v p)) /\\\n   (holds v (p && q) <=> holds v p /\\ holds v q) /\\\n   (holds v (p || q) <=> holds v p \\/ holds v q) /\\\n   (holds v (p --> q) <=> holds v p ==> holds v q) /\\\n   (holds v (p <-> q) <=> (holds v p <=> holds v q)) /\\\n   (holds v (!! x p) <=> forall a. holds ((x|->a) v) p) /\\\n   (holds v (?? x p) <=> ?a. holds ((x|->a) v) p)
-  arithtrue p <=> forall v. holds v p
-  forall v x y a. ((x |-> y) v) a = if a = x then y else v(a)
-  forall v x y. (x |-> y) v x = y
-  forall v a b x. (x |-> a) ((x |-> b) v) = (x |-> a) v
-  forall v x. (x |-> v(x)) v = v
-  forall x. (forall v a. P((x |-> a) v)) <=> (forall v. P v)
-  forall v x y a b.\n     ~(x = y) ==> ((x |-> a) ((y |-> b) v) = (y |-> b) ((x |-> a) v))
-  forall v x. v x = t ==> (x |-> t) v = v
-  (x |=> a) = (x |-> a) V
-  forall x y a. (x |=> a) y = if y = x then a else V(y)
-  forall x. (x |=> V x) = V
-  (FVT Z = {}) /\\\n   (FVT (V n) = {n}) /\\\n   (FVT (Suc t) = FVT t) /\\\n   (FVT (s ++ t) = (FVT s) UNION (FVT t)) /\\\n   (FVT (s ** t) = (FVT s) UNION (FVT t))
-  (FV False = {}) /\\\n   (FV True = {}) /\\\n   (FV (s === t) = (FVT s) UNION (FVT t)) /\\\n   (FV (s << t) = (FVT s) UNION (FVT t)) /\\\n   (FV (s <<= t) = (FVT s) UNION (FVT t)) /\\\n   (FV (Not p) = FV p) /\\\n   (FV (p && q) = (FV p) UNION (FV q)) /\\\n   (FV (p || q) = (FV p) UNION (FV q)) /\\\n   (FV (p --> q) = (FV p) UNION (FV q)) /\\\n   (FV (p <-> q) = (FV p) UNION (FV q)) /\\\n   (FV (!!x p) = (FV p) DELETE x) /\\\n   (FV (??x p) = (FV p) DELETE x)
-  forall t. FINITE(FVT t)
-  forall p. FINITE(FV p)
-  (forall p q. axiom(p --> (q --> p))) /\\\n  (forall p q r. axiom((p --> q --> r) --> (p --> q) --> (p --> r))) /\\\n  (forall p. axiom(((p --> False) --> False) --> p)) /\\\n  (forall x p q. axiom((!!x (p --> q)) --> (!!x p) --> (!!x q))) /\\\n  (forall x p. ~(x IN FV p) ==> axiom(p --> !!x p)) /\\\n  (forall x t. ~(x IN FVT t) ==> axiom(??x (V x === t))) /\\\n  (forall t. axiom(t === t)) /\\\n  (forall s t. axiom((s === t) --> (Suc s === Suc t))) /\\\n  (forall s t u v. axiom(s === t --> u === v --> s ++ u === t ++ v)) /\\\n  (forall s t u v. axiom(s === t --> u === v --> s ** u === t ** v)) /\\\n  (forall s t u v. axiom(s === t --> u === v --> s === u --> t === v)) /\\\n  (forall s t u v. axiom(s === t --> u === v --> s << u --> t << v)) /\\\n  (forall s t u v. axiom(s === t --> u === v --> s <<= u --> t <<= v)) /\\\n  (forall p q. axiom((p <-> q) --> p --> q)) /\\\n  (forall p q. axiom((p <-> q) --> q --> p)) /\\\n  (forall p q. axiom((p --> q) --> (q --> p) --> (p <-> q))) /\\\n  axiom(True <-> (False --> False)) /\\\n  (forall p. axiom(Not p <-> (p --> False))) /\\\n  (forall p q. axiom((p && q) <-> (p --> q --> False) --> False)) /\\\n  (forall p q. axiom((p || q) <-> Not(Not p && Not q))) /\\\n  (forall x p. axiom((??x p) <-> Not(!!x (Not p))))
-  (forall p. axiom p \\/ p IN A ==> A |-- p) /\\\n   (forall p q. A |-- (p --> q) /\\ A |-- p ==> A |-- q) /\\\n   (forall p x. A |-- p ==> A |-- (!!x p))
-  forall t v v'. (forall x. x IN FVT(t) ==> (v'(x) = v(x)))\n            ==> (termval v' t = termval v t)
-  forall p v v'.\n      (forall x. x IN (FV p) ==> (v'(x) = v(x)))\n      ==> (holds v' p <=> holds v p)
-  forall v x a t. ~(x IN FVT t) ==> (termval ((x |-> a) v) t = termval v t)
-  forall v x a p. ~(x IN FV p) ==> (holds ((x |-> a) v) p <=> holds v p)
-  termval v t
-  forall p. axiom p ==> arithtrue p
-  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-  forall A p. (forall q. q IN A ==> arithtrue q) /\\ A |-- p ==> arithtrue p
-  forall x y. MAX x y = MAX y x
-  forall x y z. MAX x (MAX y z) = MAX (MAX x y) z
-  SETMAX s = ITSET MAX s 0
-  VARIANT s = SETMAX s + 1
-  y <= x
-  x:num <= y
-  y:num <= s
-  x:num <= s
-  (SETMAX {} = 0) /\\\n   (forall x s. FINITE s ==>\n           (SETMAX (x INSERT s) = if x IN s then SETMAX s\n                                  else MAX x (SETMAX s)))
-  forall s. FINITE s ==> forall x. x IN s ==> x <= SETMAX s
-  (SETMAX {} = 0) /\\\n   (forall x s. FINITE s ==>\n           (SETMAX (x INSERT s) = MAX x (SETMAX s)))
-  (x INSERT s) UNION t = x INSERT (s UNION t)
-  forall t. FINITE(t) ==> forall s. FINITE(s) ==>\n                        (SETMAX(s UNION t) = MAX (SETMAX s) (SETMAX t))
-  forall s t. FINITE(s UNION t)\n         ==> (SETMAX(s UNION t) = MAX (SETMAX s) (SETMAX t))
-  ~(x + 1 <= x)
-  forall s:num->bool. FINITE(s) ==> ~(VARIANT(s) IN s)
-  forall p. ~(VARIANT(FV p) IN FV(p))
-  forall s t. FINITE s /\\ t SUBSET s ==> ~(VARIANT(s) IN t)
-  (termsubst v Z = Z) /\\\n  (forall x. termsubst v (V x) = v(x)) /\\\n  (forall t. termsubst v (Suc t) = Suc(termsubst v t)) /\\\n  (forall s t. termsubst v (s ++ t) = termsubst v s ++ termsubst v t) /\\\n  (forall s t. termsubst v (s ** t) = termsubst v s ** termsubst v t)
-  forall v i t. termval v (termsubst i t) = termval (termval v o i) t
-  forall i j t. termsubst j (termsubst i t) = termsubst (termsubst j o i) t
-  forall t. termsubst V t = t
-  forall t v v'. (forall x. x IN (FVT t) ==> (v'(x) = v(x)))\n            ==> (termsubst v' t = termsubst v t)
-  forall t i. FVT(termsubst i t) = {x | ?y. y IN FVT(t) /\\ x IN FVT(i y)}
-  forall x s t. ~(x IN FVT t) ==> (termsubst (x |=> s) t = t)
-  forall v t. (forall x. x IN FVT t ==> v x = V x) ==> termsubst v t = t
-  (formsubst v False = False) /\\\n   (formsubst v True = True) /\\\n   (formsubst v (s === t) = termsubst v s === termsubst v t) /\\\n   (formsubst v (s << t) = termsubst v s << termsubst v t) /\\\n   (formsubst v (s <<= t) = termsubst v s <<= termsubst v t) /\\\n   (formsubst v (Not p) = Not(formsubst v p)) /\\\n   (formsubst v (p && q) = formsubst v p && formsubst v q) /\\\n   (formsubst v (p || q) = formsubst v p || formsubst v q) /\\\n   (formsubst v (p --> q) = formsubst v p --> formsubst v q) /\\\n   (formsubst v (p <-> q) = formsubst v p <-> formsubst v q) /\\\n   (formsubst v (!!x q) =\n        let z = if ?y. y IN FV(!!x q) /\\ x IN FVT(v(y))\n                then VARIANT(FV(formsubst ((x |-> V x) v) q)) else x in\n        !!z (formsubst ((x |-> V(z)) v) q)) /\\\n   (formsubst v (??x q) =\n        let z = if ?y. y IN FV(??x q) /\\ x IN FVT(v(y))\n                then VARIANT(FV(formsubst ((x |-> V x) v) q)) else x in\n        ??z (formsubst ((x |-> V(z)) v) q))
-  formsubst ((x |-> V x) i) p
-  ~(?y. y IN (FV(p) DELETE x) /\\ z IN FVT(i y))
-  i:num->term
-  p:form
-  x:num
-  forall p. (forall i. FV(formsubst i p) = {x | ?y. y IN FV(p) /\\ x IN FVT(i y)}) /\\\n       (forall i v. holds v (formsubst i p) = holds (termval v o i) p)
-  forall p i. FV(formsubst i p) = {x | ?y. y IN FV(p) /\\ x IN FVT(i y)}
-  forall p i v. holds v (formsubst i p) <=> holds (termval v o i) p
-  a /\\ (a ==> b) ==> a /\\ b
-  j:num->term
-  i:num->term
-  p:form
-  x:num
-  forall p i j. (forall x. x IN FV(p) ==> (i(x) = j(x)))\n           ==> (formsubst i p = formsubst j p)
-  forall p. formsubst V p = p
-  forall v p. (forall x. x IN FV(p) ==> v x = V x) ==> formsubst v p = p
-  safe_for x v <=> forall y. x IN FVT(v y) ==> y = x
-  forall x. safe_for x V
-  forall v x y t. safe_for x v /\\ (x IN FVT t ==> y = x)\n             ==> safe_for x ((y |-> t) v)
-  forall x y t. safe_for x (y |=> t) <=> x IN FVT t ==> y = x
-  (forall v x p. safe_for x v\n            ==> formsubst v (!! x p) = !!x (formsubst ((x |-> V x) v) p)) /\\\n   (forall v x p. safe_for x v\n            ==> formsubst v (?? x p) = ??x (formsubst ((x |-> V x) v) p))
-  qsubst (x,t) p = ??x (V x === t && p)
-  forall x n p. FV(qsubst (x,t) p) = (FV(p) UNION FVT(t)) DELETE x
-  forall v z. termval ((x |-> z) v) t = termval v t
+  (op_bar_minus_gt : (A, B, (A) -> B, A) -> B)((x : A), (a : B), (v : (A) -> B)) == ((y : A) => if y == x { a } else { v(y) })
+  (termval : ((Num) -> Num, Term) -> Num)((v : (Num) -> Num), Z) == 0 && termval(v, V((n : Num))) == v(n) && termval(v, Suc((t : Term))) == SUC(termval(v, t)) && termval(v, op_plus_plus((s : Term), t)) == termval(v, s) + termval(v, t) && termval(v, op_star_star(s, t)) == termval(v, s) * termval(v, t)
+  (holds : ((Num) -> Num, Form) -> Bool)((v : (Num) -> Num), False) == false && holds(v, True) == true && holds(v, op_eq_eq_eq((s : Term), (t : Term))) == (termval(v, s) == termval(v, t)) && holds(v, op_lt_lt(s, t)) == (termval(v, s) < termval(v, t)) && holds(v, op_lt_lt_eq(s, t)) == (termval(v, s) <= termval(v, t)) && holds(v, Not((p : Form))) == !holds(v, p) && holds(v, op_amp_amp(p, (q : Form))) == (holds(v, p) && holds(v, q)) && holds(v, op_bar_bar(p, q)) == (holds(v, p) || holds(v, q)) && holds(v, op_minus_minus_gt(p, q)) == (holds(v, p) \226\134\146 holds(v, q)) && holds(v, op_lt_minus_gt(p, q)) == (holds(v, p) == holds(v, q)) && holds(v, op_bang_bang((x : Num), p)) == (\226\136\128 a : Num, holds(op_bar_minus_gt(x, a, v), p)) && holds(v, op_q_q(x, p)) == (\226\136\131 a : Num, holds(op_bar_minus_gt(x, a, v), p))
+  (arithtrue : (Form) -> Bool)((p : Form)) == (\226\136\128 v : (Num) -> Num, holds(v, p))
+  \226\136\128 v : (_) -> _, \226\136\128 x : _, \226\136\128 y : _, \226\136\128 a : _, op_bar_minus_gt(x, y, v, a) == (if a == x { y } else { v(a) })
+  \226\136\128 v : (_) -> _, \226\136\128 x : _, \226\136\128 y : _, op_bar_minus_gt(x, y, v, x) == y
+  \226\136\128 v : (_) -> _, \226\136\128 a : _, \226\136\128 b : _, \226\136\128 x : _, op_bar_minus_gt(x, a, op_bar_minus_gt(x, b, v)) == op_bar_minus_gt(x, a, v)
+  \226\136\128 v : (_) -> _, \226\136\128 x : _, op_bar_minus_gt(x, v(x), v) == v
+  \226\136\128 x : _, (\226\136\128 v : (_) -> _, \226\136\128 a : _, (P : ((_) -> _) -> Bool)(op_bar_minus_gt(x, a, v))) == (\226\136\128 v : (_) -> _, P(v))
+  \226\136\128 v : (_) -> _, \226\136\128 x : _, \226\136\128 y : _, \226\136\128 a : _, \226\136\128 b : _, !(x == y) \226\134\146 op_bar_minus_gt(x, a, op_bar_minus_gt(y, b, v)) == op_bar_minus_gt(y, b, op_bar_minus_gt(x, a, v))
+  \226\136\128 v : (_) -> _, \226\136\128 x : _, v(x) == (t : _) \226\134\146 op_bar_minus_gt(x, t, v) == v
+  (op_bar_eq_gt : (Num, Term, Num) -> Term)((x : Num), (a : Term)) == op_bar_minus_gt(x, a, V)
+  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 a : Term, op_bar_eq_gt(x, a, y) == (if y == x { a } else { V(y) })
+  \226\136\128 x : Num, op_bar_eq_gt(x, V(x)) == V
+  (FVT : (Term, Num) -> Bool)(Z) == {} && FVT(V((n : Num))) == {n} && FVT(Suc((t : Term))) == FVT(t) && FVT(op_plus_plus((s : Term), t)) == UNION(FVT(s), FVT(t)) && FVT(op_star_star(s, t)) == UNION(FVT(s), FVT(t))
+  (FV : (Form, Num) -> Bool)(False) == {} && FV(True) == {} && FV(op_eq_eq_eq((s : Term), (t : Term))) == UNION(FVT(s), FVT(t)) && FV(op_lt_lt(s, t)) == UNION(FVT(s), FVT(t)) && FV(op_lt_lt_eq(s, t)) == UNION(FVT(s), FVT(t)) && FV(Not((p : Form))) == FV(p) && FV(op_amp_amp(p, (q : Form))) == UNION(FV(p), FV(q)) && FV(op_bar_bar(p, q)) == UNION(FV(p), FV(q)) && FV(op_minus_minus_gt(p, q)) == UNION(FV(p), FV(q)) && FV(op_lt_minus_gt(p, q)) == UNION(FV(p), FV(q)) && FV(op_bang_bang((x : Num), p)) == DELETE(FV(p), x) && FV(op_q_q(x, p)) == DELETE(FV(p), x)
+  \226\136\128 t : Term, FINITE(FVT(t))
+  \226\136\128 p : Form, FINITE(FV(p))
+  (\226\136\128 p : Form, \226\136\128 q : Form, (axiom : (Form) -> Bool)(op_minus_minus_gt(p, op_minus_minus_gt(q, p)))) && (\226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, axiom(op_minus_minus_gt(op_minus_minus_gt(p, op_minus_minus_gt(q, r)), op_minus_minus_gt(op_minus_minus_gt(p, q), op_minus_minus_gt(p, r))))) && (\226\136\128 p : Form, axiom(op_minus_minus_gt(op_minus_minus_gt(op_minus_minus_gt(p, False), False), p))) && (\226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 q : Form, axiom(op_minus_minus_gt(op_bang_bang(x, op_minus_minus_gt(p, q)), op_minus_minus_gt(op_bang_bang(x, p), op_bang_bang(x, q))))) && (\226\136\128 x : Num, \226\136\128 p : Form, !IN(x, FV(p)) \226\134\146 axiom(op_minus_minus_gt(p, op_bang_bang(x, p)))) && (\226\136\128 x : Num, \226\136\128 t : Term, !IN(x, FVT(t)) \226\134\146 axiom(op_q_q(x, op_eq_eq_eq(V(x), t)))) && (\226\136\128 t : Term, axiom(op_eq_eq_eq(t, t))) && (\226\136\128 s : Term, \226\136\128 t : Term, axiom(op_minus_minus_gt(op_eq_eq_eq(s, t), op_eq_eq_eq(Suc(s), Suc(t))))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, axiom(op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(u, v), op_eq_eq_eq(op_plus_plus(s, u), op_plus_plus(t, v)))))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, axiom(op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(u, v), op_eq_eq_eq(op_star_star(s, u), op_star_star(t, v)))))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, axiom(op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(u, v), op_minus_minus_gt(op_eq_eq_eq(s, u), op_eq_eq_eq(t, v)))))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, axiom(op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(u, v), op_minus_minus_gt(op_lt_lt(s, u), op_lt_lt(t, v)))))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, axiom(op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(u, v), op_minus_minus_gt(op_lt_lt_eq(s, u), op_lt_lt_eq(t, v)))))) && (\226\136\128 p : Form, \226\136\128 q : Form, axiom(op_minus_minus_gt(op_lt_minus_gt(p, q), op_minus_minus_gt(p, q)))) && (\226\136\128 p : Form, \226\136\128 q : Form, axiom(op_minus_minus_gt(op_lt_minus_gt(p, q), op_minus_minus_gt(q, p)))) && (\226\136\128 p : Form, \226\136\128 q : Form, axiom(op_minus_minus_gt(op_minus_minus_gt(p, q), op_minus_minus_gt(op_minus_minus_gt(q, p), op_lt_minus_gt(p, q))))) && axiom(op_lt_minus_gt(True, op_minus_minus_gt(False, False))) && (\226\136\128 p : Form, axiom(op_lt_minus_gt(Not(p), op_minus_minus_gt(p, False)))) && (\226\136\128 p : Form, \226\136\128 q : Form, axiom(op_lt_minus_gt(op_amp_amp(p, q), op_minus_minus_gt(op_minus_minus_gt(p, op_minus_minus_gt(q, False)), False)))) && (\226\136\128 p : Form, \226\136\128 q : Form, axiom(op_lt_minus_gt(op_bar_bar(p, q), Not(op_amp_amp(Not(p), Not(q)))))) && (\226\136\128 x : Num, \226\136\128 p : Form, axiom(op_lt_minus_gt(op_q_q(x, p), Not(op_bang_bang(x, Not(p))))))
+  (\226\136\128 p : Form, axiom(p) || IN(p, (A : (Form) -> Bool)) \226\134\146 (op_bar_minus_minus : ((Form) -> Bool, Form) -> Bool)(A, p)) && (\226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, q)) && op_bar_minus_minus(A, p) \226\134\146 op_bar_minus_minus(A, q)) && (\226\136\128 p : Form, \226\136\128 x : Num, op_bar_minus_minus(A, p) \226\134\146 op_bar_minus_minus(A, op_bang_bang(x, p)))
+  \226\136\128 t : Term, \226\136\128 v : (Num) -> Num, \226\136\128 v' : (Num) -> Num, (\226\136\128 x : Num, IN(x, FVT(t)) \226\134\146 v'(x) == v(x)) \226\134\146 termval(v', t) == termval(v, t)
+  \226\136\128 p : Form, \226\136\128 v : (Num) -> Num, \226\136\128 v' : (Num) -> Num, (\226\136\128 x : Num, IN(x, FV(p)) \226\134\146 v'(x) == v(x)) \226\134\146 holds(v', p) == holds(v, p)
+  \226\136\128 v : (Num) -> Num, \226\136\128 x : Num, \226\136\128 a : Num, \226\136\128 t : Term, !IN(x, FVT(t)) \226\134\146 termval(op_bar_minus_gt(x, a, v), t) == termval(v, t)
+  \226\136\128 v : (Num) -> Num, \226\136\128 x : Num, \226\136\128 a : Num, \226\136\128 p : Form, !IN(x, FV(p)) \226\134\146 holds(op_bar_minus_gt(x, a, v), p) == holds(v, p)
+  termval((v : (Num) -> Num), (t : Term))
+  \226\136\128 p : Form, axiom(p) \226\134\146 arithtrue(p)
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, (\226\136\128 q : Form, IN(q, A) \226\134\146 arithtrue(q)) && op_bar_minus_minus(A, p) \226\134\146 arithtrue(p)
+  \226\136\128 x : Num, \226\136\128 y : Num, MAX(x, y) == MAX(y, x)
+  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 z : Num, MAX(x, MAX(y, z)) == MAX(MAX(x, y), z)
+  (SETMAX : ((Num) -> Bool) -> Num)((s : (Num) -> Bool)) == ITSET(MAX, s, 0)
+  (VARIANT : ((Num) -> Bool) -> Num)((s : (Num) -> Bool)) == SETMAX(s) + 1
+  (y : Num) <= (x : Num)
+  (x : Num) <= (y : Num)
+  (y : Num) <= (s : Num)
+  (x : Num) <= (s : Num)
+  SETMAX({}) == 0 && (\226\136\128 x : Num, \226\136\128 s : (Num) -> Bool, FINITE(s) \226\134\146 SETMAX(INSERT(x, s)) == (if IN(x, s) { SETMAX(s) } else { MAX(x, SETMAX(s)) }))
+  \226\136\128 s : (Num) -> Bool, FINITE(s) \226\134\146 (\226\136\128 x : Num, IN(x, s) \226\134\146 x <= SETMAX(s))
+  SETMAX({}) == 0 && (\226\136\128 x : Num, \226\136\128 s : (Num) -> Bool, FINITE(s) \226\134\146 SETMAX(INSERT(x, s)) == MAX(x, SETMAX(s)))
+  UNION(INSERT((x : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(x, UNION(s, t))
+  \226\136\128 t : (Num) -> Bool, FINITE(t) \226\134\146 (\226\136\128 s : (Num) -> Bool, FINITE(s) \226\134\146 SETMAX(UNION(s, t)) == MAX(SETMAX(s), SETMAX(t)))
+  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, FINITE(UNION(s, t)) \226\134\146 SETMAX(UNION(s, t)) == MAX(SETMAX(s), SETMAX(t))
+  !((x : Num) + 1 <= x)
+  \226\136\128 s : (Num) -> Bool, FINITE(s) \226\134\146 !IN(VARIANT(s), s)
+  \226\136\128 p : Form, !IN(VARIANT(FV(p)), FV(p))
+  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, FINITE(s) && SUBSET(t, s) \226\134\146 !IN(VARIANT(s), t)
+  (termsubst : ((Num) -> Term, Term) -> Term)((v : (Num) -> Term), Z) == Z && (\226\136\128 x : Num, termsubst(v, V(x)) == v(x)) && (\226\136\128 t : Term, termsubst(v, Suc(t)) == Suc(termsubst(v, t))) && (\226\136\128 s : Term, \226\136\128 t : Term, termsubst(v, op_plus_plus(s, t)) == op_plus_plus(termsubst(v, s), termsubst(v, t))) && (\226\136\128 s : Term, \226\136\128 t : Term, termsubst(v, op_star_star(s, t)) == op_star_star(termsubst(v, s), termsubst(v, t)))
+  \226\136\128 v : (Num) -> Num, \226\136\128 i : (Num) -> Term, \226\136\128 t : Term, termval(v, termsubst(i, t)) == termval(o(termval(v), i), t)
+  \226\136\128 i : (Num) -> Term, \226\136\128 j : (Num) -> Term, \226\136\128 t : Term, termsubst(j, termsubst(i, t)) == termsubst(o(termsubst(j), i), t)
+  \226\136\128 t : Term, termsubst(V, t) == t
+  \226\136\128 t : Term, \226\136\128 v : (Num) -> Term, \226\136\128 v' : (Num) -> Term, (\226\136\128 x : Num, IN(x, FVT(t)) \226\134\146 v'(x) == v(x)) \226\134\146 termsubst(v', t) == termsubst(v, t)
+  \226\136\128 t : Term, \226\136\128 i : (Num) -> Term, FVT(termsubst(i, t)) == {(x : Num) | \226\136\131 y : Num, IN(y, FVT(t)) && IN(x, FVT(i(y)))}
+  \226\136\128 x : Num, \226\136\128 s : Term, \226\136\128 t : Term, !IN(x, FVT(t)) \226\134\146 termsubst(op_bar_eq_gt(x, s), t) == t
+  \226\136\128 v : (Num) -> Term, \226\136\128 t : Term, (\226\136\128 x : Num, IN(x, FVT(t)) \226\134\146 v(x) == V(x)) \226\134\146 termsubst(v, t) == t
+  (formsubst : ((Num) -> Term, Form) -> Form)((v : (Num) -> Term), False) == False && formsubst(v, True) == True && formsubst(v, op_eq_eq_eq((s : Term), (t : Term))) == op_eq_eq_eq(termsubst(v, s), termsubst(v, t)) && formsubst(v, op_lt_lt(s, t)) == op_lt_lt(termsubst(v, s), termsubst(v, t)) && formsubst(v, op_lt_lt_eq(s, t)) == op_lt_lt_eq(termsubst(v, s), termsubst(v, t)) && formsubst(v, Not((p : Form))) == Not(formsubst(v, p)) && formsubst(v, op_amp_amp(p, (q : Form))) == op_amp_amp(formsubst(v, p), formsubst(v, q)) && formsubst(v, op_bar_bar(p, q)) == op_bar_bar(formsubst(v, p), formsubst(v, q)) && formsubst(v, op_minus_minus_gt(p, q)) == op_minus_minus_gt(formsubst(v, p), formsubst(v, q)) && formsubst(v, op_lt_minus_gt(p, q)) == op_lt_minus_gt(formsubst(v, p), formsubst(v, q)) && formsubst(v, op_bang_bang((x : Num), q)) == LET((z : Num) => LET_END(op_bang_bang(z, formsubst(op_bar_minus_gt(x, V(z), v), q))), if (\226\136\131 y : Num, IN(y, FV(op_bang_bang(x, q))) && IN(x, FVT(v(y)))) { VARIANT(FV(formsubst(op_bar_minus_gt(x, V(x), v), q))) } else { x }) && formsubst(v, op_q_q(x, q)) == LET((z : Num) => LET_END(op_q_q(z, formsubst(op_bar_minus_gt(x, V(z), v), q))), if (\226\136\131 y : Num, IN(y, FV(op_q_q(x, q))) && IN(x, FVT(v(y)))) { VARIANT(FV(formsubst(op_bar_minus_gt(x, V(x), v), q))) } else { x })
+  formsubst(op_bar_minus_gt((x : Num), V(x), (i : (Num) -> Term)), (p : Form))
+  !(\226\136\131 y : Num, IN(y, DELETE(FV((p : Form)), (x : Num))) && IN((z : Num), FVT((i : (Num) -> Term)(y))))
+  (i : (Num) -> Term)
+  (p : Form)
+  (x : Num)
+  \226\136\128 p : Form, (\226\136\128 i : (Num) -> Term, FV(formsubst(i, p)) == {(x : Num) | \226\136\131 y : Num, IN(y, FV(p)) && IN(x, FVT(i(y)))}) && (\226\136\128 i : (Num) -> Term, \226\136\128 v : (Num) -> Num, holds(v, formsubst(i, p)) == holds(o(termval(v), i), p))
+  \226\136\128 p : Form, \226\136\128 i : (Num) -> Term, FV(formsubst(i, p)) == {(x : Num) | \226\136\131 y : Num, IN(y, FV(p)) && IN(x, FVT(i(y)))}
+  \226\136\128 p : Form, \226\136\128 i : (Num) -> Term, \226\136\128 v : (Num) -> Num, holds(v, formsubst(i, p)) == holds(o(termval(v), i), p)
+  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+  (j : (Num) -> Term)
+  (i : (Num) -> Term)
+  (p : Form)
+  (x : Num)
+  \226\136\128 p : Form, \226\136\128 i : (Num) -> Term, \226\136\128 j : (Num) -> Term, (\226\136\128 x : Num, IN(x, FV(p)) \226\134\146 i(x) == j(x)) \226\134\146 formsubst(i, p) == formsubst(j, p)
+  \226\136\128 p : Form, formsubst(V, p) == p
+  \226\136\128 v : (Num) -> Term, \226\136\128 p : Form, (\226\136\128 x : Num, IN(x, FV(p)) \226\134\146 v(x) == V(x)) \226\134\146 formsubst(v, p) == p
+  (safe_for : (Num, (Num) -> Term) -> Bool)((x : Num), (v : (Num) -> Term)) == (\226\136\128 y : Num, IN(x, FVT(v(y))) \226\134\146 y == x)
+  \226\136\128 x : Num, safe_for(x, V)
+  \226\136\128 v : (Num) -> Term, \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 t : Term, safe_for(x, v) && (IN(x, FVT(t)) \226\134\146 y == x) \226\134\146 safe_for(x, op_bar_minus_gt(y, t, v))
+  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 t : Term, safe_for(x, op_bar_eq_gt(y, t)) == (IN(x, FVT(t)) \226\134\146 y == x)
+  (\226\136\128 v : (Num) -> Term, \226\136\128 x : Num, \226\136\128 p : Form, safe_for(x, v) \226\134\146 formsubst(v, op_bang_bang(x, p)) == op_bang_bang(x, formsubst(op_bar_minus_gt(x, V(x), v), p))) && (\226\136\128 v : (Num) -> Term, \226\136\128 x : Num, \226\136\128 p : Form, safe_for(x, v) \226\134\146 formsubst(v, op_q_q(x, p)) == op_q_q(x, formsubst(op_bar_minus_gt(x, V(x), v), p)))
+  (qsubst : ((Num, Term), Form) -> Form)(((x : Num), (t : Term)), (p : Form)) == op_q_q(x, op_amp_amp(op_eq_eq_eq(V(x), t), p))
+  \226\136\128 x : Num, \226\136\128 n : _, \226\136\128 p : Form, FV(qsubst((x, (t : Term)), p)) == DELETE(UNION(FV(p), FVT(t)), x)
+  \226\136\128 v : (Num) -> Num, \226\136\128 z : Num, termval(op_bar_minus_gt((x : Num), z, v), (t : Term)) == termval(v, t)
   forall v t p v. ~(x IN FVT(t))\n             ==> (holds v (qsubst (x,t) p) <=>\n                  holds ((x |-> termval v t) v) p)
-  (numeral 0 = Z) /\\\n   (forall n. numeral (SUC n) = Suc(numeral n))
-  forall v n. termval v (numeral n) = n
-  forall n. FVT(numeral n) = {}
-  closed p <=> (FV p = {})
+  (numeral : (Num) -> Term)(0) == Z && (\226\136\128 n : Num, numeral(SUC(n)) == Suc(numeral(n)))
+  \226\136\128 v : (Num) -> Num, \226\136\128 n : Num, termval(v, numeral(n)) == n
+  \226\136\128 n : Num, FVT(numeral(n)) == {}
+  (closed : (Form) -> Bool)((p : Form)) == (FV(p) == {})
 term_INDUCT =  |- (#forall:fun(fun(fun(term,bool),bool),bool) (\P:fun(term,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(term,bool) #Z:term)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\a:num. (P:fun(term,bool) (#V:fun(num,term) a:num))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(term,bool),bool) (\a:term. ((#==>:fun(bool,fun(bool,bool)) (P:fun(term,bool) a:term)) (P:fun(term,bool) (#Suc:fun(term,term) a:term)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(term,bool),bool) (\a0:term. (#forall:fun(fun(term,bool),bool) (\a1:term. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(term,bool) a0:term)) (P:fun(term,bool) a1:term))) (P:fun(term,bool) ((#++:fun(term,fun(term,term)) a0:term) a1:term)))))))) (#forall:fun(fun(term,bool),bool) (\a0:term. (#forall:fun(fun(term,bool),bool) (\a1:term. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(term,bool) a0:term)) (P:fun(term,bool) a1:term))) (P:fun(term,bool) ((#**:fun(term,fun(term,term)) a0:term) a1:term)))))))))))) (#forall:fun(fun(term,bool),bool) (\x:term. (P:fun(term,bool) x:term))))))
 term_RECURSION =  |- (#forall:fun(fun('Z,bool),bool) (\f0:'Z. (#forall:fun(fun(fun(num,'Z),bool),bool) (\f1:fun(num,'Z). (#forall:fun(fun(fun(term,fun('Z,'Z)),bool),bool) (\f2:fun(term,fun('Z,'Z)). (#forall:fun(fun(fun(term,fun(term,fun('Z,fun('Z,'Z)))),bool),bool) (\f3:fun(term,fun(term,fun('Z,fun('Z,'Z)))). (#forall:fun(fun(fun(term,fun(term,fun('Z,fun('Z,'Z)))),bool),bool) (\f4:fun(term,fun(term,fun('Z,fun('Z,'Z)))). (#?:fun(fun(fun(term,'Z),bool),bool) (\fn:fun(term,'Z). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(term,'Z) #Z:term)) f0:'Z)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\a:num. ((#=:fun('Z,fun('Z,bool)) (fn:fun(term,'Z) (#V:fun(num,term) a:num))) (f1:fun(num,'Z) a:num))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(term,bool),bool) (\a:term. ((#=:fun('Z,fun('Z,bool)) (fn:fun(term,'Z) (#Suc:fun(term,term) a:term))) ((f2:fun(term,fun('Z,'Z)) a:term) (fn:fun(term,'Z) a:term)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(term,bool),bool) (\a0:term. (#forall:fun(fun(term,bool),bool) (\a1:term. ((#=:fun('Z,fun('Z,bool)) (fn:fun(term,'Z) ((#++:fun(term,fun(term,term)) a0:term) a1:term))) ((((f3:fun(term,fun(term,fun('Z,fun('Z,'Z)))) a0:term) a1:term) (fn:fun(term,'Z) a0:term)) (fn:fun(term,'Z) a1:term)))))))) (#forall:fun(fun(term,bool),bool) (\a0:term. (#forall:fun(fun(term,bool),bool) (\a1:term. ((#=:fun('Z,fun('Z,bool)) (fn:fun(term,'Z) ((#**:fun(term,fun(term,term)) a0:term) a1:term))) ((((f4:fun(term,fun(term,fun('Z,fun('Z,'Z)))) a0:term) a1:term) (fn:fun(term,'Z) a0:term)) (fn:fun(term,'Z) a1:term)))))))))))))))))))))))
 term_CASES =  |- (#forall:fun(fun(term,bool),bool) (\x:term. ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(term,fun(term,bool)) x:term) #Z:term)) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\a:num. ((#=:fun(term,fun(term,bool)) x:term) (#V:fun(num,term) a:num))))) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun(term,bool),bool) (\a:term. ((#=:fun(term,fun(term,bool)) x:term) (#Suc:fun(term,term) a:term))))) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun(term,bool),bool) (\a0:term. (#?:fun(fun(term,bool),bool) (\a1:term. ((#=:fun(term,fun(term,bool)) x:term) ((#++:fun(term,fun(term,term)) a0:term) a1:term))))))) (#?:fun(fun(term,bool),bool) (\a0:term. (#?:fun(fun(term,bool),bool) (\a1:term. ((#=:fun(term,fun(term,bool)) x:term) ((#**:fun(term,fun(term,term)) a0:term) a1:term))))))))))))
