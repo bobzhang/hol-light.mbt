@@ -61910,7 +61910,7 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  dot((a : Cart[Real, N]), (v : Cart[Real, N])) < (b : Real) || dot(a, v) > b
       #|  (abs((e : Real)) / real_of_num(2) < e) == (real_of_num(0) < e)
       #|  (x : Cart[Real, N]) - op_pct((a : Real), (y : Cart[Real, N]) - (z : Cart[Real, N])) == x + op_pct(a, z - y)
-      #|  dist(((u : Cart[Real, N]) - (a : Cart[Real, N]), u)) == norm(a)
+      #|  distance(((u : Cart[Real, N]) - (a : Cart[Real, N]), u)) == norm(a)
       #|  :real
       #|  :real
       #|  (u : Cart[Real, N]) - op_pct((e : Real) / real_of_num(2) / norm((v : Cart[Real, N]) - u), v - u)
@@ -62100,7 +62100,7 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  !(relative_interior((f : (Cart[Real, N]) -> Bool)) == {})
       #|  (h : (Cart[Real, N]) -> Bool)
       #|  IN((x : Cart[Real, N]) + op_pct((e : Real) / norm((y : Cart[Real, N]) - x), x - y), (s : (Cart[Real, N]) -> Bool))
-      #|  dist(((x : Cart[Real, N]), x + (r : Cart[Real, N]))) == norm(r)
+      #|  distance(((x : Cart[Real, N]), x + (r : Cart[Real, N]))) == norm(r)
       #|  :real
       #|  :real
       #|  IN((x : Cart[Real, N]), hull(affine, (f : (Cart[Real, N]) -> Bool))) && IN((y : Cart[Real, N]), hull(affine, f))
