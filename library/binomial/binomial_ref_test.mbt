@@ -5834,77 +5834,77 @@ test "Library/binomial matches Library/binomial.ml" {
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  forall n. binom(0,n) = if n = 0 then 1 else 0
-      #|  n < k ==> n < SUC(k)
-      #|  forall n k. n < k ==> binom(n,k) = 0
-      #|  forall n. binom(n,n) = 1
+      #|  \226\136\128 n : Num, binom((0, n)) == (if n == 0 { 1 } else { 0 })
+      #|  (n : Num) < (k : Num) \226\134\146 n < SUC(k)
+      #|  \226\136\128 n : Num, \226\136\128 k : Num, n < k \226\134\146 binom((n, k)) == 0
+      #|  \226\136\128 n : Num, binom((n, n)) == 1
       #|  1
-      #|  forall n. binom(n,1) = n
-      #|  SUC k
-      #|  forall n k. FACT n * FACT k * binom(n+k,k) = FACT(n + k)
-      #|  k:num
-      #|  d:num
-      #|  d:num
-      #|  forall n k. binom(n,k) = 0 <=> n < k
-      #|  binom(n,SUC n) = 0
-      #|  forall n. binom(SUC n,n) = SUC n
-      #|  ~(c = 0) ==> n <= b ==> n + 1 <= c + b
-      #|  n:num
-      #|  m = 0
-      #|  forall m n. 1 <= m /\\ m < n ==> n <= binom(n,m)
-      #|  k:num
-      #|  d:num
-      #|  k:num
-      #|  d:num
-      #|  k:num
-      #|  d + 1
-      #|  d:num
-      #|  n < k ==> n + 1 = k \\/ n + 1 < k
-      #|  n < k:num
+      #|  \226\136\128 n : Num, binom((n, 1)) == n
+      #|  SUC((k : Num))
+      #|  \226\136\128 n : Num, \226\136\128 k : Num, FACT(n) * (FACT(k) * binom((n + k, k))) == FACT(n + k)
+      #|  (k : Num)
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  \226\136\128 n : Num, \226\136\128 k : Num, (binom((n, k)) == 0) == (n < k)
+      #|  binom(((n : Num), SUC(n))) == 0
+      #|  \226\136\128 n : Num, binom((SUC(n), n)) == SUC(n)
+      #|  !((c : Num) == 0) \226\134\146 (n : Num) <= (b : Num) \226\134\146 n + 1 <= c + b
+      #|  (n : Num)
+      #|  (m : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, 1 <= m && m < n \226\134\146 n <= binom((n, m))
+      #|  (k : Num)
+      #|  (d : Num)
+      #|  (k : Num)
+      #|  (d : Num)
+      #|  (k : Num)
+      #|  (d : Num) + 1
+      #|  (d : Num)
+      #|  (n : Num) < (k : Num) \226\134\146 n + 1 == k || n + 1 < k
+      #|  (n : Num) < (k : Num)
       #|  forall n k. ((n + 1) - k) * binom(n + 1,k) = (n + 1) * binom(n,k)
-      #|  k:num
-      #|  d:num
-      #|  k + 1
-      #|  d:num
-      #|  k:num
-      #|  d + 1
-      #|  d:num
-      #|  n < k + 1 ==> n = k \\/ n < k
-      #|  n < k + 1
+      #|  (k : Num)
+      #|  (d : Num)
+      #|  (k : Num) + 1
+      #|  (d : Num)
+      #|  (k : Num)
+      #|  (d : Num) + 1
+      #|  (d : Num)
+      #|  (n : Num) < (k : Num) + 1 \226\134\146 n == k || n < k
+      #|  (n : Num) < (k : Num) + 1
       #|  forall n k. (k + 1) * binom(n,k + 1) = (n - k) * binom(n,k)
       #|  forall P. (forall n. P n 0) /\\\n         (forall k. P 0 (SUC k)) /\\\n         (forall n k. P n (SUC k) /\\ P n k ==> P (SUC n) (SUC k))\n         ==> forall m n. P m n
-      #|  p /\\ q /\\ r <=> ~(p /\\ q ==> ~r)
+      #|  ((p : Bool) && (q : Bool) && (r : Bool)) == !(p && q \226\134\146 !r)
       #|  {y | y IN t UNION IMAGE f s /\\ P y} =\n      {y | y IN t /\\ P y} UNION IMAGE f {x | x IN s /\\ P(f x)}
       #|  ~(a IN t)\n     ==> {u | u SUBSET (a:A INSERT t) /\\ u HAS_SIZE (SUC m)} =\n         {u | u SUBSET t /\\ u HAS_SIZE (SUC m)} UNION\n         IMAGE (\\u. a INSERT u) {u | u SUBSET t /\\ u HAS_SIZE m}
-      #|  ~(a:A IN t)
-      #|  ~(a:A IN t)
-      #|  t:A->bool
-      #|  a:A
-      #|  m:num
-      #|  n:num
-      #|  {}:A->bool
+      #|  !IN((a : A), (t : (A) -> Bool))
+      #|  !IN((a : A), (t : (A) -> Bool))
+      #|  (t : (A) -> Bool)
+      #|  (a : A)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  ({} : (A) -> Bool)
       #|  forall n m s:A->bool.\n        s HAS_SIZE n ==> {t | t SUBSET s /\\ t HAS_SIZE m} HAS_SIZE binom(n,m)
-      #|  k:num
+      #|  (k : Num)
       #|  forall s k. FINITE s ==> CARD {t | t SUBSET s /\\ t HAS_SIZE k} = binom(CARD s,k)
-      #|  k <= n ==> SUC n - k = SUC(n - k)
-      #|  nsum(m+1..n+1) (\\i. f i)
-      #|  a:num = e /\\ b = c + d ==> a + b = c + d + e
-      #|  0 <= n + 1
+      #|  (k : Num) <= (n : Num) \226\134\146 SUC(n) - k == SUC(n - k)
+      #|  nsum(op_dot_dot((m : Num) + 1, (n : Num) + 1), (i : Num) => (f : (Num) -> Num)(i))
+      #|  (a : Num) == (e : Num) && (b : Num) == (c : Num) + (d : Num) \226\134\146 a + b == c + (d + e)
+      #|  0 <= (n : Num) + 1
       #|  forall n x y.\n      (x + y) EXP n = nsum(0..n) (\\k. binom(n,k) * x EXP k * y EXP (n - k))
-      #|  k <= n ==> SUC n - k = SUC(n - k)
-      #|  sum(m+1..n+1) (\\i. f i)
-      #|  a:real = e /\\ b = c + d ==> a + b = c + d + e
-      #|  0 <= n + 1
+      #|  (k : Num) <= (n : Num) \226\134\146 SUC(n) - k == SUC(n - k)
+      #|  sum(op_dot_dot((m : Num) + 1, (n : Num) + 1), (i : Num) => (f : (Num) -> Real)(i))
+      #|  (a : Real) == (e : Real) && (b : Real) == (c : Real) + (d : Real) \226\134\146 a + b == c + (d + e)
+      #|  0 <= (n : Num) + 1
       #|  forall n x y.\n     (x + y) pow n = sum(0..n) (\\k. &(binom(n,k)) * x pow k * y pow (n - k))
-      #|  k <= n:num
-      #|  k:num
-      #|  n:num
+      #|  (k : Num) <= (n : Num)
+      #|  (k : Num)
+      #|  (n : Num)
       #|  ~(k = n + 1) ==> n < k /\\ n + 1 < k \\/ k <= n /\\ k <= n + 1
       #|  forall n k. &(binom(n + 1,k)):real =\n           if k = n + 1 then &1\n           else (&n + &1) / (&n + &1 - &k) * &(binom(n,k))
-      #|  k:num
-      #|  n:num
-      #|  n < k ==> n < k + 1
-      #|  n:num < k \\/ k <= n
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  (n : Num) < (k : Num) \226\134\146 n < k + 1
+      #|  (n : Num) < (k : Num) || k <= n
       #|  forall n k. &(binom(n,k+1)):real = (&n - &k) / (&k + &1) * &(binom(n,k))
       #|  forall n k. &(binom(n,k)):real =\n             if k <= n then &(FACT n) / (&(FACT(n - k)) * &(FACT k))\n             else &0
       #|  forall p k. &(binom(p + 1,k + 1)):real = (&p + &1) / (&k + &1) * &(binom(p,k))
@@ -5912,39 +5912,39 @@ test "Library/binomial matches Library/binomial.ml" {
       #|  forall p k. (k = 0 ==> p = 0) ==> k * binom(p,k) = p * binom(p - 1,k - 1)
       #|  0
       #|  forall n k. binom(n,k) =\n            if k <= n then FACT(n) DIV (FACT(n - k) * FACT(k))\n            else 0
-      #|  k = 0
-      #|  forall n k. n divides gcd(n,k) * binom(n,k)
-      #|  coprime(n,k) <=> gcd(n,k) = 1
-      #|  forall n k. coprime(n,k) ==> n divides binom (n,k)
-      #|  (p:num) divides n
+      #|  (k : Num) == 0
+      #|  \226\136\128 n : Num, \226\136\128 k : Num, divides(n, gcd((n, k)) * binom((n, k)))
+      #|  coprime(((n : Num), (k : Num))) == (gcd((n, k)) == 1)
+      #|  \226\136\128 n : Num, \226\136\128 k : Num, coprime((n, k)) \226\134\146 divides(n, binom((n, k)))
+      #|  divides((p : Num), (n : Num))
       #|  forall n p. prime p /\\ 0 < n /\\ n < p ==> p divides binom(p,n)
-      #|  k:num <= n ==> n - (n - k) = k
-      #|  n - k:num <= n
-      #|  ~(k <= n) ==> n - k = 0
+      #|  (k : Num) <= (n : Num) \226\134\146 n - (n - k) == k
+      #|  (n : Num) - (k : Num) <= n
+      #|  !((k : Num) <= (n : Num)) \226\134\146 n - k == 0
       #|  forall n k. binom(n,n-k) = if k <= n then binom(n,k) else 1
-      #|  m - k:num
-      #|  n - k:num
-      #|  n - m:num
-      #|  m:num
-      #|  n:num
-      #|  k:num <= m /\\ m <= n ==> n - k - (m - k) = n - m
-      #|  F ==> p
-      #|  F ==> p
-      #|  n:num < m
+      #|  (m : Num) - (k : Num)
+      #|  (n : Num) - (k : Num)
+      #|  (n : Num) - (m : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (k : Num) <= (m : Num) && m <= (n : Num) \226\134\146 n - k - (m - k) == n - m
+      #|  false \226\134\146 (p : Bool)
+      #|  false \226\134\146 (p : Bool)
+      #|  (n : Num) < (m : Num)
       #|  forall m n k. k <= m\n           ==> binom(n,m) * binom(m,k) = binom(n,k) * binom(n - k,m - k)
       #|  c * d:real = a * b ==> a * z * b * x * y = c * (d * z * x) * y
       #|  j:num <= k /\\ k <= n ==> (n - j) - (k - j) = n - k
-      #|  (\\(x,y). x + y,x):num#num->num#num
-      #|  (\\(x,y). y,x - y):num#num->num#num
+      #|  GABS((f : ((Num, Num)) -> (Num, Num)) => \226\136\128 x : Num, \226\136\128 y : Num, GEQ(f((x, y)), (x + y, x)))
+      #|  GABS((f : ((Num, Num)) -> (Num, Num)) => \226\136\128 x : Num, \226\136\128 y : Num, GEQ(f((x, y)), (y, x - y)))
       #|  forall c n x y. sum (0..n)\n               (\\k.  &(binom(n,k)) *\n                     sum(0..k)\n                        (\\l. &(binom(k,l)) * c l * x pow (k - l)) *\n                     y pow (n - k)) =\n           sum (0..n) (\\k. &(binom(n,k)) * c k * (x + y) pow (n - k))
       #|  binom(n,k) = y\n     ==> k <= n\n         ==> (SUC n) * y = ((n + 1) - k) * x ==> binom(SUC n,k) = x
-      #|  n < k ==> binom(n,k) = 0
-      #|  binom(n,n) = 1
-      #|  k <= n ==> binom(n,k) = binom(n,n - k)
-      #|  k:num
-      #|  n:num
-      #|  x:num
-      #|  y:num
+      #|  (n : Num) < (k : Num) \226\134\146 binom((n, k)) == 0
+      #|  binom(((n : Num), n)) == 1
+      #|  (k : Num) <= (n : Num) \226\134\146 binom((n, k)) == binom((n, n - k))
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  (x : Num)
+      #|  (y : Num)
       #|  binom
       #|binom =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#binom:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) n:num) (#NUMERAL:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\k:num. ((#=:fun(num,fun(num,bool)) (#binom:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) (#NUMERAL:fun(num,num) #_0:num)) (#SUC:fun(num,num) k:num)))) (#NUMERAL:fun(num,num) #_0:num))))) (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\k:num. ((#=:fun(num,fun(num,bool)) (#binom:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) (#SUC:fun(num,num) n:num)) (#SUC:fun(num,num) k:num)))) ((#+:fun(num,fun(num,num)) (#binom:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) n:num) (#SUC:fun(num,num) k:num)))) (#binom:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) n:num) k:num))))))))))
       #|BINOM_0 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#binom:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) (#NUMERAL:fun(num,num) #_0:num)) n:num))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num)))))
