@@ -50,6 +50,16 @@ let gen_test : String = "migrate_gen_test.mbt"
 let call_prefix : String = "@parser.parse_term(\""
 
 ///|
+/// The migrations merged or to be merged (--pairs <file>): a theory's trace
+/// records quotations of its dependencies' functions, so a golden can have
+/// a line of a quotation another package migrated, which then reads the new
+/// spelling; such a line is accepted (and rewritten) when it is one of
+/// these.
+let known_migrations : Ref[Map[String, Array[(String, String)]]] = Ref::{
+  val: Map::new(),
+}
+
+///|
 /// The package that installs the hook while a package is recorded.
 let hook_pkg : String = "migrate_hook"
 
@@ -631,6 +641,34 @@ fn same_block(a : Array[String], b : Array[String]) -> Bool {
 }
 
 ///|
+/// Whether the golden's lines `a` are this run's `b` up to one renaming of
+/// counters, except lines that are an old quotation (in `a`) and its
+/// migration (in `b`) by known_migrations: for each line, whether it is
+/// one; None if any line is neither.
+fn migrated_lines(a : Array[String], b : Array[String], prefix : String) -> Array[Bool]? {
+  let renaming = { there: Map::new(), back: Map::new() }
+  let flags = []
+  for k in 0..<a.length() {
+    if renaming.same(a[k], b[k]) {
+      flags.push(false)
+      continue
+    }
+    let g = a[k][prefix.length():].to_owned()
+    let r = b[k][prefix.length():].to_owned()
+    let ok = known_migrations.val
+      .get(masked(g))
+      .unwrap_or([])
+      .iter()
+      .any(m => m.1 == r && renaming.same(g, m.0))
+    if !ok {
+      return None
+    }
+    flags.push(true)
+  }
+  Some(flags)
+}
+
+///|
 /// The lines testkit's show_theory_trace prints for `t` (a quotation parsed
 /// 10000 times or more in a row is shown once, with the count).
 fn render(t : Array[String]) -> Array[String] {
@@ -676,7 +714,25 @@ async fn rewrite_trace(
   let mut i = 0
   while i < lines.length() {
     out.push(lines[i])
-    if lines[i] == header && i + old_lines.length() < lines.length() &&
+    let cross = if lines[i] == header &&
+      i + old_lines.length() < lines.length() &&
+      !same_block(lines[i + 1:i + 1 + old_lines.length()].to_array(), old_lines) &&
+      old_lines.length() == new_lines.length() {
+      migrated_lines(lines[i + 1:i + 1 + old_lines.length()].to_array(), old_lines, prefix)
+    } else {
+      None
+    }
+    if cross is Some(flags) {
+      // other packages' migrated quotations: their lines read the new
+      // spelling, as this run does
+      for k in 0..<new_lines.length() {
+        out.push(
+          if flags[k] || new_lines[k] != old_lines[k] { new_lines[k] } else { lines[i + 1 + k] },
+        )
+      }
+      i += 1 + old_lines.length()
+      found += 1
+    } else if lines[i] == header && i + old_lines.length() < lines.length() &&
       same_block(lines[i + 1:i + 1 + old_lines.length()].to_array(), old_lines) {
       if old_lines.length() == new_lines.length() {
         // a line that does not change keeps the golden's numbering
@@ -1310,6 +1366,25 @@ fn Renaming::same(self : Renaming, a : String, b : String) -> Bool {
 }
 
 ///|
+/// The migrations in `pairs_file` (old literal, new literal, tab-separated,
+/// one a line), as trace lines print them, indexed by the old line up to
+/// counters.
+async fn load_migrations(pairs_file : String) -> Map[String, Array[(String, String)]] {
+  let migrations : Map[String, Array[(String, String)]] = Map::new()
+  for line in read(pairs_file).split("\n") {
+    guard line.find("\t") is Some(t) else { continue }
+    let old = "  " + ocaml_escaped(unquote(line[:t].to_owned()))
+    let new = "  " + ocaml_escaped(unquote(line[t + 1:].to_owned()))
+    let key = masked(old)
+    match migrations.get(key) {
+      Some(a) => a.push((old, new))
+      None => migrations[key] = [(old, new)]
+    }
+  }
+  migrations
+}
+
+///|
 /// `--sync-trace <package dir> <pairs>`: a theory's trace records the
 /// quotations that its dependencies' functions parse while it loads, so
 /// migrating them changes its golden too. `pairs` lists every migration
@@ -1324,18 +1399,7 @@ async fn sync_trace(pkg : String, pairs_file : String) -> Unit {
     fail("the working tree is not clean; commit or stash first:\n" + status)
   }
   // the migrations, as trace lines print them
-  // indexed by the old line up to counters
-  let migrations : Map[String, Array[(String, String)]] = Map::new()
-  for line in read(pairs_file).split("\n") {
-    guard line.find("\t") is Some(t) else { continue }
-    let old = "  " + ocaml_escaped(unquote(line[:t].to_owned()))
-    let new = "  " + ocaml_escaped(unquote(line[t + 1:].to_owned()))
-    let key = masked(old)
-    match migrations.get(key) {
-      Some(a) => a.push((old, new))
-      None => migrations[key] = [(old, new)]
-    }
-  }
+  let migrations = load_migrations(pairs_file)
   let theory = theory_of(pkg)
   let rec = record(pkg, theory, [])
   let now = render(rec.trace)
@@ -1421,7 +1485,18 @@ async fn sync_trace(pkg : String, pairs_file : String) -> Unit {
 
 ///|
 async fn main {
-  let args = @env.args()
+  let all = @env.args()
+  let args = []
+  let mut i = 0
+  while i < all.length() {
+    if all[i] == "--pairs" && i + 1 < all.length() {
+      known_migrations.val = load_migrations(all[i + 1])
+      i += 2
+    } else {
+      args.push(all[i])
+      i += 1
+    }
+  }
   guard args.length() >= 2 else {
     fail("usage: moon run tools/migrate.mbtx -- [--retrace] <package dir>")
   }
