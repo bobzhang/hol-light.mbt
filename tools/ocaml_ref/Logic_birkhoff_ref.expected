@@ -10336,232 +10336,232 @@ Warning: inventing type variables
 0..0..1..2..5..8..15..26..47..88..133..202..290..389..514..661..823..1042..1296..1578..1924..2318..2746..3216..3760..4380..5153..6042..solved at 6559
 0..0..1..2..7..16..solved at 22
 Logic/birkhoff quotations (226):
-  forall l1 l2. ALL2 P l1 l2 <=> ALL2 (\\x y. P y x) l2 l1
-  forall f l1 l2. ALL2 (\\x y. f x = f y) l1 l2 ==> (MAP f l1 = MAP f l2)
-  forall i s t. formsubst i (s === t) = (termsubst i s === termsubst i t)
-  terms UNIV = UNIV
-  Atom p [Fn f (REPLICATE n (V x))]
-  functions_form(Atom p [Fn f (REPLICATE n (V x))])
-  n:num
-  f:num
-  functions UNIV = UNIV
-  Atom p (REPLICATE n (V x))
-  predicates_form(Atom p (REPLICATE n (V x)))
-  n:num
-  p:num
-  predicates UNIV = UNIV
-  language UNIV = UNIV,UNIV
-  forall s t u v. ((s === t) = (u === v)) <=> (s = u) /\\ (t = v)
-  forall s t u v. ((s === t) = (u === v)) <=> (u = s) /\\ (v = t)
-  (forall s t. s === t IN E ==> E |- s === t) /\\\n   (forall t. E |- t === t) /\\\n   (forall s t. E |- s === t ==> E |- t === s) /\\\n   (forall s t u. E |- s === t /\\ E |- t === u ==> E |- s === u) /\\\n   (forall f a b. ALL2 (\\l r. E |- l === r) a b ==> E |- Fn f a === Fn f b) /\\\n   (forall s t i. E |- s === t ==> E |- formsubst i (s === t))
-  (forall s t i. s === t IN E ==> E |-- formsubst i (s === t)) /\\\n    (forall s t i. s === t IN E ==> E |-- formsubst i (t === s)) /\\\n    (forall t. E |-- t === t) /\\\n    (forall s t u. E |-- s === t /\\ E |-- t === u ==> E |-- s === u) /\\\n    (forall f a b. ALL2 (\\l r. E |-- l === r) a b ==> E |-- Fn f a === Fn f b)
-  forall E a. E |-- a ==> forall s t. (a = (s === t)) ==> E |-- t === s
-  forall E a. E |-- a\n         ==> forall i s t. (a = (s === t)) ==> (E |-- formsubst i (s === t))
-  (forall a. E |- a ==> forall s t. (a = (s === t)) ==> E |-- s === t) /\\\n    (forall a. E |-- a ==> forall s t. (a = (s === t)) ==> E |- s === t)
-  forall E s t. (E |-- s === t) <=> (E |- s === t)
-  (forall s t i. s === t IN E ==> E |--_axiom formsubst i (s === t)) /\\\n    (forall s t i. s === t IN E ==> E |--_axiom formsubst i (t === s))
-  (forall s t. E |--_axiom s === t ==> E |--_achain s === t) /\\\n    (forall s t. E |--_cong s === t ==> E |--_cchain s === t) /\\\n    (forall s t u. E |--_axiom s === t /\\ E |--- t === u ==> E |--_achain s === u) /\\\n    (forall s t u. E |--_cong s === t /\\ E |--_achain t === u\n             ==> E |--_cchain s === u) /\\\n    (forall f a b. ALL2 (\\l r. E |--- l === r) a b\n             ==> E |--_cong Fn f a === Fn f b) /\\\n    (forall s t. (s = t) \\/ E |--_achain s === t \\/ E |--_cchain s === t\n           ==> E |--- s === t)
-  a:term list
-  b:term list
-  c:term list
-  ALL2 (\\l r. E |--- l === r) b c
-  ALL2 (\\l r. forall u. E |--- r === u ==> E |--- l === u) a b
-  Fn f c
-  a /\\ b /\\ c ==> d <=> a ==> b ==> c ==> d
-  c:term list
-  s:term
-  a:term list
-  b:term list
-  c:term list
-  ALL2 (\\l r. E |--- l === r) b c
-  ALL2 (\\l r. forall u. E |--- r === u ==> E |--- l === u) a b
-  a /\\ b /\\ c ==> d <=> a ==> b ==> c ==> d
-  c:term list
-  a /\\ b <=> ~(a ==> ~b)
-  Fn f b
-  a /\\ b <=> ~(a ==> ~b)
-  u:term
-  forall E a. E |-- a\n         ==> E |-- a /\\\n             E |--- a /\\\n             forall u s t. (a = (s === t))\n                     ==> E |--- t === u ==> E |--- s === u
-  forall a. E |--_axiom a ==> forall s t. (a = (s === t)) ==> E |- s === t
-  (forall a. E |--_achain a ==> forall s t. (a = (s === t)) ==> E |- s === t) /\\\n    (forall a. E |--_cchain a ==> forall s t. (a = (s === t)) ==> E |- s === t) /\\\n    (forall a. E |--_cong a ==> forall s t. (a = (s === t)) ==> E |- s === t) /\\\n    (forall a. E |--- a ==> forall s t. (a = (s === t)) ==> E |- s === t)
-  forall E s t. (E |--- s === t) <=> (E |- s === t)
-  (subterms (V x) = {(V x)}) /\\\n   (subterms (Fn f args) =\n        (Fn f args) INSERT (LIST_UNION (MAP subterms args)))
-  subtermsa (Atom P args) = LIST_UNION (MAP subterms args)
-  subtermss E = UNIONS {subtermsa p | p IN E}
-  forall t. t IN subterms t
-  esubterms E s t =\n        subtermss ((s === t) INSERT {formsubst i p |i,p| p IN E})
-  (forall s t. E |--_axiom s === t ==> E |--_sachain s === t) /\\\n    (forall s t. E |--_scong s === t ==> E |--_scchain s === t) /\\\n    (forall s t u. E |--_axiom s === t /\\ E |---- t === u /\\ t IN esubterms E s u\n             ==> E |--_sachain s === u) /\\\n    (forall s t u. E |--_scong s === t /\\ E |--_sachain t === u /\\ t IN esubterms E s u\n             ==> E |--_scchain s === u) /\\\n    (forall f a b. ALL2 (\\l r. E |---- l === r) a b\n             ==> E |--_scong Fn f a === Fn f b) /\\\n    (forall s t. (s = t) \\/ E |--_sachain s === t \\/ E |--_scchain s === t\n           ==> E |---- s === t)
-  s === t
-  subterms s UNION subterms t
-  forall u. u IN subterms s ==> u IN esubterms E s t
-  s === t
-  subterms s UNION subterms t
-  forall u. u IN subterms t ==> u IN esubterms E s t
-  subtermsa (formsubst i (s === t))
-  forall a. E |--_axiom a\n       ==> forall s t. (a = (s === t))\n                 ==> forall u v. s IN esubterms E u v
-  forall a. E |--_sachain a\n       ==> forall s t. (a = (s === t))\n                 ==> forall u v. s IN esubterms E u v
-  t:term
-  subtermsa (formsubst i (v === w))
-  i:num->term
-  w:term
-  v:term
-  t:term
-  (forall a. E |--_achain a ==> forall s t. (a = (s === t)) ==> E |--_sachain s === t) /\\\n   (forall a. E |--_cchain a ==> forall s t. (a = (s === t)) ==> E |--_scchain s === t) /\\\n   (forall a. E |--_cong a ==> forall s t. (a = (s === t)) ==> E |--_scong s === t) /\\\n   (forall a. E |--- a ==> forall s t. (a = (s === t)) ==> E |---- s === t)
-  (forall a. E |--_sachain a ==> forall s t. (a = (s === t)) ==> E |--_achain s === t) /\\\n    (forall a. E |--_scchain a ==> forall s t. (a = (s === t)) ==> E |--_cchain s === t) /\\\n    (forall a. E |--_scong a ==> forall s t. (a = (s === t)) ==> E |--_cong s === t) /\\\n    (forall a. E |---- a ==> forall s t. (a = (s === t)) ==> E |--- s === t)
-  forall E s t. (E |--- s === t) <=> (E |---- s === t)
-  forall E s t. (E |--- s === t) <=> (E |- s === t)
-  Eqclause_Func (f,n) =\n      set_of_list\n        (CONS (Fn f (MAP FST (Varpairs n)) === Fn f (MAP SND (Varpairs n)))\n              (MAP (\\(s,t). Not(s === t)) (Varpairs n)))
-  Eqclause_Pred (p,n) =\n       set_of_list\n        (CONS (Atom p (MAP SND (Varpairs n)))\n              (CONS (Not(Atom p (MAP FST (Varpairs n))))\n                    (MAP (\\(s,t). Not(s === t)) (Varpairs n))))
-  Eqclauses L =\n     {(V 0 === V 0)} INSERT\n     {(Not(V 0 === V 1)), (Not(V 2 === V 1)), (V 0 === V 2)} INSERT\n     ({Eqclause_Func fa | fa IN FST L} UNION\n      {Eqclause_Pred pa | pa IN SND L})
-  l:(term#term)list
-  Varpairs n
-  (~a <=> b) ==> (c \\/ a <=> b ==> c)
-  (a ==> (b <=> c)) ==> (a ==> b <=> a ==> c)
-  v:num->A
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  forall M f n. ~(Dom M :A->bool = {})\n           ==> (M satisfies {(interp(Eqclause_Func (f,n)))} <=>\n                M satisfies {(Eqaxiom_Func (f,n))})
-  Eqaxiom_Pred_imp (p,n) =\n        uclose\n         (ITLIST (&&) (MAP (\\(s,t). s === t) (Varpairs n)) True\n          --> Atom p (MAP FST (Varpairs n))\n              --> Atom p (MAP SND (Varpairs n)))
-  a INSERT s = {a} UNION s
-  n:num
-  n:num
-  holds M (v:num->A) (V(2 * n + 1) === V(2 * n))
-  n:num
-  n:num
-  w:num->A
-  forall v:num->A x y. valuation M v\n                   ==> (holds M v (V x === V y) <=> holds M v (V y === V x))
-  a /\\ (x <=> b) /\\ (y <=> c) /\\ (d <=> e)\n    ==> x ==> y ==> (a ==> b ==> c ==> d) ==> e
-  holds M (v:num->A)\n             (ITLIST (&&) (MAP (\\(s,t). s === t) (Varpairs n)) True)
-  Pred M p (MAP (termval M (v:num->A)) (MAP SND (Varpairs n)))
-  \\x. if EVEN(x) then v(x + 1):A else v(x - 1)
-  v:num->A
-  l:(term#term)list
-  Varpairs n
-  (~c <=> d) ==> (a \\/ ~b \\/ c <=> d ==> b ==> a)
-  (a ==> (b <=> c)) ==> (a ==> b <=> a ==> c)
-  v:num->A
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  forall v:num->A. valuation M v ==> holds M v (Eqaxiom_Pred_imp(p,n))
-  forall p n. (forall v:num->A. valuation M v\n                      ==> holds M v (interp(Eqclause_Pred(p,n)))) <=>\n          (forall v:num->A. valuation M v\n                      ==> holds M v (Eqaxiom_Pred(p,n)))
-  (a' <=> a) /\\ (a ==> (b' <=> b)) ==> (a' /\\ b' <=> a /\\ b)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  (a' <=> a) /\\ (a ==> (b' <=> b)) ==> (a' /\\ b' <=> a /\\ b)
-  (a' <=> a) /\\ (a ==> (b' <=> b)) ==> (a' /\\ b' <=> a /\\ b)
-  forall M L. ~(Dom M :A->bool = {})\n         ==> (M satisfies (IMAGE interp (Eqclauses L)) <=>\n              M satisfies (Eqaxioms L))
-  \\n. if n = 2 then (w:num->A)(x) else w(y)
-  \\n. if n = 2 then (w:num->A)(y) else w(x)
-  forall n. functions(set_of_list (MAP (\\(s,t). Not(s === t)) (Varpairs n))) = {}
-  n:num
-  n:num
-  (LIST_UNION (MAP functions_term (MAP FST (Varpairs n))) = {}) /\\\n    (LIST_UNION (MAP functions_term (MAP SND (Varpairs n))) = {})
-  (forall f n. functions_term(Fn f (MAP FST (Varpairs n))) = {(f,n)}) /\\\n   (forall f n. functions_term(Fn f (MAP SND (Varpairs n))) = {(f,n)})
-  n:num
-  n:num
-  (LIST_UNION (MAP functions_term (MAP FST (Varpairs n))) = {}) /\\\n    (LIST_UNION (MAP functions_term (MAP SND (Varpairs n))) = {})
-  (forall p n. functions_form(Atom p (MAP FST (Varpairs n))) = {}) /\\\n   (forall p n. functions_form(Atom p (MAP SND (Varpairs n))) = {})
-  n:num
-  f:num
+  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], ALL2((P : (_, _) -> Bool), l1, l2) == ALL2((x : _) => (y : _) => P(y, x), l2, l1)
+  \226\136\128 f : (_) -> _, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], ALL2((x : _) => (y : _) => f(x) == f(y), l1, l2) \226\134\146 MAP(f, l1) == MAP(f, l2)
+  \226\136\128 i : (Num) -> Term, \226\136\128 s : Term, \226\136\128 t : Term, formsubst(i, op_eq_eq_eq(s, t)) == op_eq_eq_eq(termsubst(i, s), termsubst(i, t))
+  terms(UNIV) == UNIV
+  Atom((p : Num), [Fn((f : Num), REPLICATE((n : Num), V((x : Num))))])
+  functions_form(Atom((p : Num), [Fn((f : Num), REPLICATE((n : Num), V((x : Num))))]))
+  (n : Num)
+  (f : Num)
+  functions(UNIV) == UNIV
+  Atom((p : Num), REPLICATE((n : Num), V((x : Num))))
+  predicates_form(Atom((p : Num), REPLICATE((n : Num), V((x : Num)))))
+  (n : Num)
+  (p : Num)
+  predicates(UNIV) == UNIV
+  language(UNIV) == (UNIV, UNIV)
+  \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, (op_eq_eq_eq(s, t) == op_eq_eq_eq(u, v)) == (s == u && t == v)
+  \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, (op_eq_eq_eq(s, t) == op_eq_eq_eq(u, v)) == (u == s && v == t)
+  (\226\136\128 s : Term, \226\136\128 t : Term, IN(op_eq_eq_eq(s, t), (E : (Form) -> Bool)) \226\134\146 (op_bar_minus : ((Form) -> Bool, Form) -> Bool)(E, op_eq_eq_eq(s, t))) && (\226\136\128 t : Term, op_bar_minus(E, op_eq_eq_eq(t, t))) && (\226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus(E, op_eq_eq_eq(s, t)) \226\134\146 op_bar_minus(E, op_eq_eq_eq(t, s))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, op_bar_minus(E, op_eq_eq_eq(s, t)) && op_bar_minus(E, op_eq_eq_eq(t, u)) \226\134\146 op_bar_minus(E, op_eq_eq_eq(s, u))) && (\226\136\128 f : Num, \226\136\128 a : List[Term], \226\136\128 b : List[Term], ALL2((l : Term) => (r : Term) => op_bar_minus(E, op_eq_eq_eq(l, r)), a, b) \226\134\146 op_bar_minus(E, op_eq_eq_eq(Fn(f, a), Fn(f, b)))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 i : (Num) -> Term, op_bar_minus(E, op_eq_eq_eq(s, t)) \226\134\146 op_bar_minus(E, formsubst(i, op_eq_eq_eq(s, t))))
+  (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 i : (Num) -> Term, IN(op_eq_eq_eq(s, t), (E : (Form) -> Bool)) \226\134\146 (op_bar_minus_minus : ((Form) -> Bool, Form) -> Bool)(E, formsubst(i, op_eq_eq_eq(s, t)))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 i : (Num) -> Term, IN(op_eq_eq_eq(s, t), E) \226\134\146 op_bar_minus_minus(E, formsubst(i, op_eq_eq_eq(t, s)))) && (\226\136\128 t : Term, op_bar_minus_minus(E, op_eq_eq_eq(t, t))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, op_bar_minus_minus(E, op_eq_eq_eq(s, t)) && op_bar_minus_minus(E, op_eq_eq_eq(t, u)) \226\134\146 op_bar_minus_minus(E, op_eq_eq_eq(s, u))) && (\226\136\128 f : Num, \226\136\128 a : List[Term], \226\136\128 b : List[Term], ALL2((l : Term) => (r : Term) => op_bar_minus_minus(E, op_eq_eq_eq(l, r)), a, b) \226\134\146 op_bar_minus_minus(E, op_eq_eq_eq(Fn(f, a), Fn(f, b))))
+  \226\136\128 E : (Form) -> Bool, \226\136\128 a : Form, op_bar_minus_minus(E, a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus_minus(E, op_eq_eq_eq(t, s)))
+  \226\136\128 E : (Form) -> Bool, \226\136\128 a : Form, op_bar_minus_minus(E, a) \226\134\146 (\226\136\128 i : (Num) -> Term, \226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus_minus(E, formsubst(i, op_eq_eq_eq(s, t))))
+  (\226\136\128 a : Form, op_bar_minus((E : (Form) -> Bool), a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus_minus(E, op_eq_eq_eq(s, t)))) && (\226\136\128 a : Form, op_bar_minus_minus(E, a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus(E, op_eq_eq_eq(s, t))))
+  \226\136\128 E : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus(E, op_eq_eq_eq(s, t)) == op_bar_minus(E, op_eq_eq_eq(s, t))
+  (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 i : (Num) -> Term, IN(op_eq_eq_eq(s, t), (E : (Form) -> Bool)) \226\134\146 (op_bar_minus_minus_us_axiom : ((Form) -> Bool, Form) -> Bool)(E, formsubst(i, op_eq_eq_eq(s, t)))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 i : (Num) -> Term, IN(op_eq_eq_eq(s, t), E) \226\134\146 op_bar_minus_minus_us_axiom(E, formsubst(i, op_eq_eq_eq(t, s))))
+  (\226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus_us_axiom((E : (Form) -> Bool), op_eq_eq_eq(s, t)) \226\134\146 (op_bar_minus_minus_us_achain : ((Form) -> Bool, Form) -> Bool)(E, op_eq_eq_eq(s, t))) && (\226\136\128 s : Term, \226\136\128 t : Term, (op_bar_minus_minus_us_cong : ((Form) -> Bool, Form) -> Bool)(E, op_eq_eq_eq(s, t)) \226\134\146 (op_bar_minus_minus_us_cchain : ((Form) -> Bool, Form) -> Bool)(E, op_eq_eq_eq(s, t))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, op_bar_minus_minus_us_axiom(E, op_eq_eq_eq(s, t)) && (op_bar_minus_minus_minus : ((Form) -> Bool, Form) -> Bool)(E, op_eq_eq_eq(t, u)) \226\134\146 op_bar_minus_minus_us_achain(E, op_eq_eq_eq(s, u))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, op_bar_minus_minus_us_cong(E, op_eq_eq_eq(s, t)) && op_bar_minus_minus_us_achain(E, op_eq_eq_eq(t, u)) \226\134\146 op_bar_minus_minus_us_cchain(E, op_eq_eq_eq(s, u))) && (\226\136\128 f : Num, \226\136\128 a : List[Term], \226\136\128 b : List[Term], ALL2((l : Term) => (r : Term) => op_bar_minus_minus_minus(E, op_eq_eq_eq(l, r)), a, b) \226\134\146 op_bar_minus_minus_us_cong(E, op_eq_eq_eq(Fn(f, a), Fn(f, b)))) && (\226\136\128 s : Term, \226\136\128 t : Term, s == t || op_bar_minus_minus_us_achain(E, op_eq_eq_eq(s, t)) || op_bar_minus_minus_us_cchain(E, op_eq_eq_eq(s, t)) \226\134\146 op_bar_minus_minus_minus(E, op_eq_eq_eq(s, t)))
+  (a : List[Term])
+  (b : List[Term])
+  (c : List[Term])
+  ALL2((l : Term) => (r : Term) => op_bar_minus_minus_minus((E : (Form) -> Bool), op_eq_eq_eq(l, r)), (b : List[Term]), (c : List[Term]))
+  ALL2((l : Term) => (r : Term) => \226\136\128 u : Term, op_bar_minus_minus_minus((E : (Form) -> Bool), op_eq_eq_eq(r, u)) \226\134\146 op_bar_minus_minus_minus(E, op_eq_eq_eq(l, u)), (a : List[Term]), (b : List[Term]))
+  Fn((f : Num), (c : List[Term]))
+  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (a \226\134\146 b \226\134\146 c \226\134\146 d)
+  (c : List[Term])
+  (s : Term)
+  (a : List[Term])
+  (b : List[Term])
+  (c : List[Term])
+  ALL2((l : Term) => (r : Term) => op_bar_minus_minus_minus((E : (Form) -> Bool), op_eq_eq_eq(l, r)), (b : List[Term]), (c : List[Term]))
+  ALL2((l : Term) => (r : Term) => \226\136\128 u : Term, op_bar_minus_minus_minus((E : (Form) -> Bool), op_eq_eq_eq(r, u)) \226\134\146 op_bar_minus_minus_minus(E, op_eq_eq_eq(l, u)), (a : List[Term]), (b : List[Term]))
+  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (a \226\134\146 b \226\134\146 c \226\134\146 d)
+  (c : List[Term])
+  ((a : Bool) && (b : Bool)) == !(a \226\134\146 !b)
+  Fn((f : Num), (b : List[Term]))
+  ((a : Bool) && (b : Bool)) == !(a \226\134\146 !b)
+  (u : Term)
+  \226\136\128 E : (Form) -> Bool, \226\136\128 a : Form, op_bar_minus_minus(E, a) \226\134\146 op_bar_minus_minus(E, a) && op_bar_minus_minus_minus(E, a) && (\226\136\128 u : Term, \226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus_minus_minus(E, op_eq_eq_eq(t, u)) \226\134\146 op_bar_minus_minus_minus(E, op_eq_eq_eq(s, u)))
+  \226\136\128 a : Form, op_bar_minus_minus_us_axiom((E : (Form) -> Bool), a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus(E, op_eq_eq_eq(s, t)))
+  (\226\136\128 a : Form, op_bar_minus_minus_us_achain((E : (Form) -> Bool), a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus(E, op_eq_eq_eq(s, t)))) && (\226\136\128 a : Form, op_bar_minus_minus_us_cchain(E, a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus(E, op_eq_eq_eq(s, t)))) && (\226\136\128 a : Form, op_bar_minus_minus_us_cong(E, a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus(E, op_eq_eq_eq(s, t)))) && (\226\136\128 a : Form, op_bar_minus_minus_minus(E, a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus(E, op_eq_eq_eq(s, t))))
+  \226\136\128 E : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus_minus(E, op_eq_eq_eq(s, t)) == op_bar_minus(E, op_eq_eq_eq(s, t))
+  (subterms : (Term, Term) -> Bool)(V((x : Num))) == {V(x)} && subterms(Fn((f : Num), (args : List[Term]))) == INSERT(Fn(f, args), LIST_UNION(MAP(subterms, args)))
+  (subtermsa : (Form, Term) -> Bool)(Atom((P : Num), (args : List[Term]))) == LIST_UNION(MAP(subterms, args))
+  (subtermss : ((Form) -> Bool, Term) -> Bool)((E : (Form) -> Bool)) == UNIONS({subtermsa((p : Form)) | IN(p, E)})
+  \226\136\128 t : Term, IN(t, subterms(t))
+  (esubterms : ((Form) -> Bool, Term, Term, Term) -> Bool)((E : (Form) -> Bool), (s : Term), (t : Term)) == subtermss(INSERT(op_eq_eq_eq(s, t), {formsubst(i, p) | i : (Num) -> Term, p : Form | IN(p, E)}))
+  (\226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus_us_axiom((E : (Form) -> Bool), op_eq_eq_eq(s, t)) \226\134\146 (op_bar_minus_minus_us_sachain : ((Form) -> Bool, Form) -> Bool)(E, op_eq_eq_eq(s, t))) && (\226\136\128 s : Term, \226\136\128 t : Term, (op_bar_minus_minus_us_scong : ((Form) -> Bool, Form) -> Bool)(E, op_eq_eq_eq(s, t)) \226\134\146 (op_bar_minus_minus_us_scchain : ((Form) -> Bool, Form) -> Bool)(E, op_eq_eq_eq(s, t))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, op_bar_minus_minus_us_axiom(E, op_eq_eq_eq(s, t)) && (op_bar_minus_minus_minus_minus : ((Form) -> Bool, Form) -> Bool)(E, op_eq_eq_eq(t, u)) && IN(t, esubterms(E, s, u)) \226\134\146 op_bar_minus_minus_us_sachain(E, op_eq_eq_eq(s, u))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, op_bar_minus_minus_us_scong(E, op_eq_eq_eq(s, t)) && op_bar_minus_minus_us_sachain(E, op_eq_eq_eq(t, u)) && IN(t, esubterms(E, s, u)) \226\134\146 op_bar_minus_minus_us_scchain(E, op_eq_eq_eq(s, u))) && (\226\136\128 f : Num, \226\136\128 a : List[Term], \226\136\128 b : List[Term], ALL2((l : Term) => (r : Term) => op_bar_minus_minus_minus_minus(E, op_eq_eq_eq(l, r)), a, b) \226\134\146 op_bar_minus_minus_us_scong(E, op_eq_eq_eq(Fn(f, a), Fn(f, b)))) && (\226\136\128 s : Term, \226\136\128 t : Term, s == t || op_bar_minus_minus_us_sachain(E, op_eq_eq_eq(s, t)) || op_bar_minus_minus_us_scchain(E, op_eq_eq_eq(s, t)) \226\134\146 op_bar_minus_minus_minus_minus(E, op_eq_eq_eq(s, t)))
+  op_eq_eq_eq((s : Term), (t : Term))
+  UNION(subterms((s : Term)), subterms((t : Term)))
+  \226\136\128 u : Term, IN(u, subterms((s : Term))) \226\134\146 IN(u, esubterms((E : (Form) -> Bool), s, (t : Term)))
+  op_eq_eq_eq((s : Term), (t : Term))
+  UNION(subterms((s : Term)), subterms((t : Term)))
+  \226\136\128 u : Term, IN(u, subterms((t : Term))) \226\134\146 IN(u, esubterms((E : (Form) -> Bool), (s : Term), t))
+  subtermsa(formsubst((i : (Num) -> Term), op_eq_eq_eq((s : Term), (t : Term))))
+  \226\136\128 a : Form, op_bar_minus_minus_us_axiom((E : (Form) -> Bool), a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 (\226\136\128 u : Term, \226\136\128 v : Term, IN(s, esubterms(E, u, v))))
+  \226\136\128 a : Form, op_bar_minus_minus_us_sachain((E : (Form) -> Bool), a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 (\226\136\128 u : Term, \226\136\128 v : Term, IN(s, esubterms(E, u, v))))
+  (t : Term)
+  subtermsa(formsubst((i : (Num) -> Term), op_eq_eq_eq((v : Term), (w : Term))))
+  (i : (Num) -> Term)
+  (w : Term)
+  (v : Term)
+  (t : Term)
+  (\226\136\128 a : Form, op_bar_minus_minus_us_achain((E : (Form) -> Bool), a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus_minus_us_sachain(E, op_eq_eq_eq(s, t)))) && (\226\136\128 a : Form, op_bar_minus_minus_us_cchain(E, a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus_minus_us_scchain(E, op_eq_eq_eq(s, t)))) && (\226\136\128 a : Form, op_bar_minus_minus_us_cong(E, a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus_minus_us_scong(E, op_eq_eq_eq(s, t)))) && (\226\136\128 a : Form, op_bar_minus_minus_minus(E, a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus_minus_minus_minus(E, op_eq_eq_eq(s, t))))
+  (\226\136\128 a : Form, op_bar_minus_minus_us_sachain((E : (Form) -> Bool), a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus_minus_us_achain(E, op_eq_eq_eq(s, t)))) && (\226\136\128 a : Form, op_bar_minus_minus_us_scchain(E, a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus_minus_us_cchain(E, op_eq_eq_eq(s, t)))) && (\226\136\128 a : Form, op_bar_minus_minus_us_scong(E, a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus_minus_us_cong(E, op_eq_eq_eq(s, t)))) && (\226\136\128 a : Form, op_bar_minus_minus_minus_minus(E, a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus_minus_minus(E, op_eq_eq_eq(s, t))))
+  \226\136\128 E : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus_minus(E, op_eq_eq_eq(s, t)) == op_bar_minus_minus_minus_minus(E, op_eq_eq_eq(s, t))
+  \226\136\128 E : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus_minus(E, op_eq_eq_eq(s, t)) == op_bar_minus(E, op_eq_eq_eq(s, t))
+  (Eqclause_Func : ((Num, Num), Form) -> Bool)(((f : Num), (n : Num))) == set_of_list(CONS(op_eq_eq_eq(Fn(f, MAP(FST, Varpairs(n))), Fn(f, MAP(SND, Varpairs(n)))), MAP(GABS((f : ((Term, Term)) -> Form) => \226\136\128 s : Term, \226\136\128 t : Term, GEQ(f((s, t)), Not(op_eq_eq_eq(s, t)))), Varpairs(n))))
+  (Eqclause_Pred : ((Num, Num), Form) -> Bool)(((p : Num), (n : Num))) == set_of_list(CONS(Atom(p, MAP(SND, Varpairs(n))), CONS(Not(Atom(p, MAP(FST, Varpairs(n)))), MAP(GABS((f : ((Term, Term)) -> Form) => \226\136\128 s : Term, \226\136\128 t : Term, GEQ(f((s, t)), Not(op_eq_eq_eq(s, t)))), Varpairs(n)))))
+  (Eqclauses : ((((Num, Num)) -> Bool, ((Num, Num)) -> Bool), (Form) -> Bool) -> Bool)((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool))) == INSERT({op_eq_eq_eq(V(0), V(0))}, INSERT({Not(op_eq_eq_eq(V(0), V(1))), Not(op_eq_eq_eq(V(2), V(1))), op_eq_eq_eq(V(0), V(2))}, UNION({Eqclause_Func((fa : (Num, Num))) | IN(fa, FST(L))}, {Eqclause_Pred((pa : (Num, Num))) | IN(pa, SND(L))})))
+  (l : List[(Term, Term)])
+  Varpairs((n : Num))
+  !(a : Bool) == (b : Bool) \226\134\146 ((c : Bool) || a) == (b \226\134\146 c)
+  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a \226\134\146 b) == (a \226\134\146 c)
+  (v : (Num) -> A)
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 f : Num, \226\136\128 n : Num, !(Dom(M) == {}) \226\134\146 satisfies(M, {interp(Eqclause_Func((f, n)))}) == satisfies(M, {Eqaxiom_Func((f, n))})
+  (Eqaxiom_Pred_imp : ((Num, Num)) -> Form)(((p : Num), (n : Num))) == uclose(op_minus_minus_gt(ITLIST(op_amp_amp, MAP(GABS((f : ((Term, Term)) -> Form) => \226\136\128 s : Term, \226\136\128 t : Term, GEQ(f((s, t)), op_eq_eq_eq(s, t))), Varpairs(n)), True), op_minus_minus_gt(Atom(p, MAP(FST, Varpairs(n))), Atom(p, MAP(SND, Varpairs(n))))))
+  INSERT((a : _), (s : (_) -> Bool)) == UNION({a}, s)
+  (n : Num)
+  (n : Num)
+  holds((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A), op_eq_eq_eq(V(2 * (n : Num) + 1), V(2 * n)))
+  (n : Num)
+  (n : Num)
+  (w : (Num) -> A)
+  \226\136\128 v : (Num) -> A, \226\136\128 x : Num, \226\136\128 y : Num, valuation((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v) \226\134\146 holds(M, v, op_eq_eq_eq(V(x), V(y))) == holds(M, v, op_eq_eq_eq(V(y), V(x)))
+  (a : Bool) && (x : Bool) == (b : Bool) && (y : Bool) == (c : Bool) && (d : Bool) == (e : Bool) \226\134\146 x \226\134\146 y \226\134\146 (a \226\134\146 b \226\134\146 c \226\134\146 d) \226\134\146 e
+  holds((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A), ITLIST(op_amp_amp, MAP(GABS((f : ((Term, Term)) -> Form) => \226\136\128 s : Term, \226\136\128 t : Term, GEQ(f((s, t)), op_eq_eq_eq(s, t))), Varpairs((n : Num))), True))
+  Pred((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (p : Num), MAP(termval(M, (v : (Num) -> A)), MAP(SND, Varpairs((n : Num)))))
+  (x : Num) => if EVEN(x) { (v : (Num) -> A)(x + 1) } else { v(x - 1) }
+  (v : (Num) -> A)
+  (l : List[(Term, Term)])
+  Varpairs((n : Num))
+  !(c : Bool) == (d : Bool) \226\134\146 ((a : Bool) || !(b : Bool) || c) == (d \226\134\146 b \226\134\146 a)
+  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a \226\134\146 b) == (a \226\134\146 c)
+  (v : (Num) -> A)
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  \226\136\128 v : (Num) -> A, valuation((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v) \226\134\146 holds(M, v, Eqaxiom_Pred_imp(((p : Num), (n : Num))))
+  \226\136\128 p : Num, \226\136\128 n : Num, (\226\136\128 v : (Num) -> A, valuation((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v) \226\134\146 holds(M, v, interp(Eqclause_Pred((p, n))))) == (\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, Eqaxiom_Pred((p, n))))
+  (a' : Bool) == (a : Bool) && (a \226\134\146 (b' : Bool) == (b : Bool)) \226\134\146 (a' && b') == (a && b)
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  (a' : Bool) == (a : Bool) && (a \226\134\146 (b' : Bool) == (b : Bool)) \226\134\146 (a' && b') == (a && b)
+  (a' : Bool) == (a : Bool) && (a \226\134\146 (b' : Bool) == (b : Bool)) \226\134\146 (a' && b') == (a && b)
+  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool), !(Dom(M) == {}) \226\134\146 satisfies(M, IMAGE(interp, Eqclauses(L))) == satisfies(M, Eqaxioms(L))
+  (n : Num) => if n == 2 { (w : (Num) -> A)((x : Num)) } else { w((y : Num)) }
+  (n : Num) => if n == 2 { (w : (Num) -> A)((y : Num)) } else { w((x : Num)) }
+  \226\136\128 n : Num, functions(set_of_list(MAP(GABS((f : ((Term, Term)) -> Form) => \226\136\128 s : Term, \226\136\128 t : Term, GEQ(f((s, t)), Not(op_eq_eq_eq(s, t)))), Varpairs(n)))) == {}
+  (n : Num)
+  (n : Num)
+  LIST_UNION(MAP(functions_term, MAP(FST, Varpairs((n : Num))))) == {} && LIST_UNION(MAP(functions_term, MAP(SND, Varpairs(n)))) == {}
+  (\226\136\128 f : Num, \226\136\128 n : Num, functions_term(Fn(f, MAP(FST, Varpairs(n)))) == {(f, n)}) && (\226\136\128 f : Num, \226\136\128 n : Num, functions_term(Fn(f, MAP(SND, Varpairs(n)))) == {(f, n)})
+  (n : Num)
+  (n : Num)
+  LIST_UNION(MAP(functions_term, MAP(FST, Varpairs((n : Num))))) == {} && LIST_UNION(MAP(functions_term, MAP(SND, Varpairs(n)))) == {}
+  (\226\136\128 p : Num, \226\136\128 n : Num, functions_form(Atom(p, MAP(FST, Varpairs(n)))) == {}) && (\226\136\128 p : Num, \226\136\128 n : Num, functions_form(Atom(p, MAP(SND, Varpairs(n)))) == {})
+  (n : Num)
+  (f : Num)
   forall fn. functions_form(interp(Eqclause_Func fn)) = {fn}
-  n:num
-  p:num
-  forall pn. functions_form(interp(Eqclause_Pred pn)) = {}
-  a /\\ b /\\ c <=> a /\\ ~(b ==> ~c)
-  (a /\\ b) /\\ c /\\ d <=> b /\\ a /\\ c /\\ d
-  a /\\ b <=> ~(a ==> ~b)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  n:num
-  f:num
-  functions(IMAGE interp (Eqclauses(language s))) = functions s
-  functions_form(Not(uclose p)) = functions_form p
-  predicates_form(Not(uclose p)) = predicates_form p
-  functions(p INSERT s) = functions(Not(uclose p) INSERT s)
-  predicates(p INSERT s) = predicates(Not(uclose p) INSERT s)
-  language(p INSERT s) = language (Not(uclose p) INSERT s)
-  (forall m. p m /\\ q m /\\ r m /\\ s m ==> t m) <=>\n  ~(?m. p m /\\ q m /\\ r m /\\ s m /\\ ~(t m))
-  (x INSERT s) UNION t = x INSERT (s UNION t)
-  (a ==> c) /\\ (b ==> ~c) /\\ (d ==> ~c)\n      ==> ((a \\/ b \\/ d) /\\ c <=> a)
-  {p | p IN\n     Atom f (MAP SND (Varpairs n)) INSERT\n       Not (Atom f (MAP FST (Varpairs n))) INSERT\n       set_of_list (MAP (\\(s,t). Not (s === t)) (Varpairs n)) /\\\n       positive p} =\n    {(Atom f (MAP SND (Varpairs n)))}
-  (a ==> c) /\\ (b ==> ~c) ==> ((a \\/ b) /\\ c <=> a)
-  {p | p IN\n       (Fn f (MAP FST (Varpairs n)) === Fn f (MAP SND (Varpairs n))) INSERT\n       set_of_list (MAP (\\(s,t). Not (s === t)) (Varpairs n)) /\\\n       positive p} =\n      {(Fn f (MAP FST (Varpairs n)) === Fn f (MAP SND (Varpairs n)))}
-  n:num
-  f:num
-  {p | p IN {(Not (V 0 === V 1)), (Not (V 2 === V 1)), (V 0 === V 2)} /\\\n           positive p} = {(V 0 === V 2)}
-  {p | (p = V 0 === V 0) /\\ positive p} = {(V 0 === V 0)}
-  forall L cl. cl IN Eqclauses L ==> definite cl
-  ~(p /\\ ~p)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  IMAGE (~~) (cl DELETE\n        (Fn f (MAP FST (Varpairs n)) === Fn f (MAP SND (Varpairs n)))) =\n     {(s === t) | MEM (s,t) (Varpairs n)}
-  conclusion cl = (Fn f (MAP FST (Varpairs n)) ===\n                     Fn f (MAP SND (Varpairs n)))
-  n:num
-  f:num
-  (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-  ~(p /\\ ~p)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
+  (n : Num)
+  (p : Num)
+  \226\136\128 pn : (Num, Num), functions_form(interp(Eqclause_Pred(pn))) == {}
+  ((a : Bool) && (b : Bool) && (c : Bool)) == (a && !(b \226\134\146 !c))
+  (((a : Bool) && (b : Bool)) && (c : Bool) && (d : Bool)) == (b && a && c && d)
+  ((a : Bool) && (b : Bool)) == !(a \226\134\146 !b)
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  (n : Num)
+  (f : Num)
+  functions(IMAGE(interp, Eqclauses(language((s : (Form) -> Bool))))) == functions(s)
+  functions_form(Not(uclose((p : Form)))) == functions_form(p)
+  predicates_form(Not(uclose((p : Form)))) == predicates_form(p)
+  functions(INSERT((p : Form), (s : (Form) -> Bool))) == functions(INSERT(Not(uclose(p)), s))
+  predicates(INSERT((p : Form), (s : (Form) -> Bool))) == predicates(INSERT(Not(uclose(p)), s))
+  language(INSERT((p : Form), (s : (Form) -> Bool))) == language(INSERT(Not(uclose(p)), s))
+  (\226\136\128 m : _, (p : (_) -> Bool)(m) && (q : (_) -> Bool)(m) && (r : (_) -> Bool)(m) && (s : (_) -> Bool)(m) \226\134\146 (t : (_) -> Bool)(m)) == !(\226\136\131 m : _, p(m) && q(m) && r(m) && s(m) && !t(m))
+  UNION(INSERT((x : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(x, UNION(s, t))
+  ((a : Bool) \226\134\146 (c : Bool)) && ((b : Bool) \226\134\146 !c) && ((d : Bool) \226\134\146 !c) \226\134\146 ((a || b || d) && c) == a
+  {(p : Form) | IN(p, INSERT(Atom((f : Num), MAP(SND, Varpairs((n : Num)))), INSERT(Not(Atom(f, MAP(FST, Varpairs(n)))), set_of_list(MAP(GABS((f : ((Term, Term)) -> Form) => \226\136\128 s : Term, \226\136\128 t : Term, GEQ(f((s, t)), Not(op_eq_eq_eq(s, t)))), Varpairs(n)))))) && positive(p)} == {Atom(f, MAP(SND, Varpairs(n)))}
+  ((a : Bool) \226\134\146 (c : Bool)) && ((b : Bool) \226\134\146 !c) \226\134\146 ((a || b) && c) == a
+  {(p : Form) | IN(p, INSERT(op_eq_eq_eq(Fn((f : Num), MAP(FST, Varpairs((n : Num)))), Fn(f, MAP(SND, Varpairs(n)))), set_of_list(MAP(GABS((f : ((Term, Term)) -> Form) => \226\136\128 s : Term, \226\136\128 t : Term, GEQ(f((s, t)), Not(op_eq_eq_eq(s, t)))), Varpairs(n))))) && positive(p)} == {op_eq_eq_eq(Fn(f, MAP(FST, Varpairs(n))), Fn(f, MAP(SND, Varpairs(n))))}
+  (n : Num)
+  (f : Num)
+  {(p : Form) | IN(p, {Not(op_eq_eq_eq(V(0), V(1))), Not(op_eq_eq_eq(V(2), V(1))), op_eq_eq_eq(V(0), V(2))}) && positive(p)} == {op_eq_eq_eq(V(0), V(2))}
+  {(p : Form) | p == op_eq_eq_eq(V(0), V(0)) && positive(p)} == {op_eq_eq_eq(V(0), V(0))}
+  \226\136\128 L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool), \226\136\128 cl : (Form) -> Bool, IN(cl, Eqclauses(L)) \226\134\146 definite(cl)
+  !((p : Bool) && !p)
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  IMAGE(op_tilde_tilde, DELETE((cl : (Form) -> Bool), op_eq_eq_eq(Fn((f : Num), MAP(FST, Varpairs((n : Num)))), Fn(f, MAP(SND, Varpairs(n)))))) == {op_eq_eq_eq((s : Term), (t : Term)) | MEM((s, t), Varpairs(n))}
+  conclusion((cl : (Form) -> Bool)) == op_eq_eq_eq(Fn((f : Num), MAP(FST, Varpairs((n : Num)))), Fn(f, MAP(SND, Varpairs(n))))
+  (n : Num)
+  (f : Num)
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  !((p : Bool) && !p)
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
   1
   2
-  IMAGE (~~) (cl DELETE (Atom 0 (MAP SND (Varpairs 2)))) =\n       {(V 2 === V 0), (V 2 === V 3), (V 0 === V 1)}
+  IMAGE(op_tilde_tilde, DELETE((cl : (Form) -> Bool), Atom(0, MAP(SND, Varpairs(2))))) == {op_eq_eq_eq(V(2), V(0)), op_eq_eq_eq(V(2), V(3)), op_eq_eq_eq(V(0), V(1))}
   1
   2
-  n = 2
-  LENGTH:(term)list->num
-  n = 2
-  formsubst i (Atom p (MAP SND (Varpairs n))) = si === ti
-  conclusion cl = Atom p (MAP SND (Varpairs n))
-  n:num
-  p:num
-  (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-  IMAGE ~~\n         ({(Not(V 0 === V 1)), (Not(V 2 === V 1)), (V 0 === V 2)}\n          DELETE (V 0 === V 2)) =\n        {(V 0 === V 1), (V 2 === V 1)}
-  (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  conclusion {(Not (V 0 === V 1)), (Not(V 2 === V 1)), (V 0 === V 2)} =\n        (V 0 === V 2)
-  conclusion {(V 0 === V 0)} = (V 0 === V 0)
-  {p | (p = s0 === t0) /\\ positive p} = {(s0 === t0)}
-  b /\\ (b ==> a) ==> a /\\ b
-  conclusion {(s0 === t0)} = (s0 === t0)
-  t0:term
-  s0:term
-  e:form
-  formsubst i (conclusion cl) = si === ti
-  e:form
-  cl IN {{e} | e IN E} UNION Eqclauses (language ((s === t) INSERT E))
-  ti:term
-  si:term
-  (a /\\ c ==> d) ==> a /\\ b /\\ c ==> d
-  ns:num list
-  i:num->term
-  cl:form->bool
-  s === t
-  forall n p. ibackchain\n                ({{e} | e IN E} UNION Eqclauses (language ((s === t) INSERT E)))\n                n p\n          ==> forall s t. (p = (s === t)) ==> E |- s === t
-  {p | (p = u === v) /\\ positive p} = {(u === v)}
-  v:term
-  u:term
-  e:form
-  (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-  (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  V 0
-  (w /\\ x ==> a1) /\\ (w ==> b1) /\\\n              (w ==> b1 ==> y ==> c1 /\\ d1) /\\ (w ==> e1 ==> z)\n              ==> (a1 /\\ b1 /\\ c1 /\\ d1 ==> e1) ==> w /\\ x /\\ y ==> z
-  C:(term->bool)#\n           ((num->((term)list->term))#(num->((term)list->bool)))
-  atom(s === t)
-  v:num->term
-  functions(IMAGE interp\n           ({{e} | e IN E} UNION Eqclauses (language ((s === t) INSERT E)))) =\n      functions((s === t) INSERT E)
-  (a /\\ b) /\\ c <=> b /\\ a /\\ c
-  (a /\\ b) /\\ c <=> b /\\ a /\\ c
-  UNIONS {functions p | p IN {{e} | e IN E}}
-  functions (IMAGE interp {{e} | e IN E}) = functions E
-  b /\\ c /\\ a ==> (a /\\ b ==> (c <=> d)) ==> d
-  s === t
-  {{e} | e IN E} UNION\n       Eqclauses(language ((s === t) INSERT E))
-  ?n. ibackchain ({{e} | e IN E} UNION\n                    Eqclauses(language ((s === t) INSERT E)))\n                   n (s === t)
-  a /\\ b /\\ (b ==> c) <=> a /\\ b /\\ c
-  a /\\ b /\\ c <=> a /\\ b /\\ (b ==> c)
-  a /\\ b /\\ c /\\ (b ==> d) <=> a /\\ b /\\ c /\\ d
-  a /\\ b /\\ c /\\ d <=> a /\\ b /\\ c /\\ (b ==> d)
-  forall E s t. (forall e. e IN E ==> ?s t. e = (s === t)) /\\\n           (forall M. interpretation (language((s === t) INSERT E)) M /\\\n                ~(Dom M :term->bool = {}) /\\\n                normal (functions ((s === t) INSERT E)) M /\\\n                M satisfies E\n                ==> M satisfies {(s === t)})\n           ==> E |- s === t
-  UNIV:(num#num)->bool
-  ALL2 (\\l r. forall v:num->A. valuation M v\n                             ==> (termval M v l = termval M v r)) a b
-  forall M:(A->bool)#(num->((A)list->A))#(num->((A)list->bool)).\n        normal UNIV (M) /\\ interpretation (UNIV,UNIV) (M) /\\\n        (forall v p. valuation M v /\\ p IN E ==> holds M v p)\n        ==> forall a. E |- a\n                ==> forall s t. (a = (s === t))\n                          ==> forall v. valuation M v ==> holds M v (s === t)
-  forall E s t. E |- s === t\n           ==> forall M:(A->bool)#(num->((A)list->A))#(num->((A)list->bool)).\n                        normal UNIV (M) /\\ interpretation (UNIV,UNIV) (M) /\\\n                        M satisfies E\n                        ==> M satisfies {(s === t)}
+  (n : Num) == 2
+  (LENGTH : (List[Term]) -> Num)
+  (n : Num) == 2
+  formsubst((i : (Num) -> Term), Atom((p : Num), MAP(SND, Varpairs((n : Num))))) == op_eq_eq_eq((si : Term), (ti : Term))
+  conclusion((cl : (Form) -> Bool)) == Atom((p : Num), MAP(SND, Varpairs((n : Num))))
+  (n : Num)
+  (p : Num)
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  IMAGE(op_tilde_tilde, DELETE({Not(op_eq_eq_eq(V(0), V(1))), Not(op_eq_eq_eq(V(2), V(1))), op_eq_eq_eq(V(0), V(2))}, op_eq_eq_eq(V(0), V(2)))) == {op_eq_eq_eq(V(0), V(1)), op_eq_eq_eq(V(2), V(1))}
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  conclusion({Not(op_eq_eq_eq(V(0), V(1))), Not(op_eq_eq_eq(V(2), V(1))), op_eq_eq_eq(V(0), V(2))}) == op_eq_eq_eq(V(0), V(2))
+  conclusion({op_eq_eq_eq(V(0), V(0))}) == op_eq_eq_eq(V(0), V(0))
+  {(p : Form) | p == op_eq_eq_eq((s0 : Term), (t0 : Term)) && positive(p)} == {op_eq_eq_eq(s0, t0)}
+  (b : Bool) && (b \226\134\146 (a : Bool)) \226\134\146 a && b
+  conclusion({op_eq_eq_eq((s0 : Term), (t0 : Term))}) == op_eq_eq_eq(s0, t0)
+  (t0 : Term)
+  (s0 : Term)
+  (e : Form)
+  formsubst((i : (Num) -> Term), conclusion((cl : (Form) -> Bool))) == op_eq_eq_eq((si : Term), (ti : Term))
+  (e : Form)
+  IN((cl : (Form) -> Bool), UNION({{(e : Form)} | IN(e, (E : (Form) -> Bool))}, Eqclauses(language(INSERT(op_eq_eq_eq((s : Term), (t : Term)), E)))))
+  (ti : Term)
+  (si : Term)
+  ((a : Bool) && (c : Bool) \226\134\146 (d : Bool)) \226\134\146 a && (b : Bool) && c \226\134\146 d
+  (ns : List[Num])
+  (i : (Num) -> Term)
+  (cl : (Form) -> Bool)
+  op_eq_eq_eq((s : Term), (t : Term))
+  \226\136\128 n : Num, \226\136\128 p : Form, ibackchain(UNION({{(e : Form)} | IN(e, (E : (Form) -> Bool))}, Eqclauses(language(INSERT(op_eq_eq_eq((s : Term), (t : Term)), E)))), n, p) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, p == op_eq_eq_eq(s, t) \226\134\146 op_bar_minus(E, op_eq_eq_eq(s, t)))
+  {(p : Form) | p == op_eq_eq_eq((u : Term), (v : Term)) && positive(p)} == {op_eq_eq_eq(u, v)}
+  (v : Term)
+  (u : Term)
+  (e : Form)
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  V(0)
+  ((w : Bool) && (x : Bool) \226\134\146 (a1 : Bool)) && (w \226\134\146 (b1 : Bool)) && (w \226\134\146 b1 \226\134\146 (y : Bool) \226\134\146 (c1 : Bool) && (d1 : Bool)) && (w \226\134\146 (e1 : Bool) \226\134\146 (z : Bool)) \226\134\146 (a1 && b1 && c1 && d1 \226\134\146 e1) \226\134\146 w && x && y \226\134\146 z
+  (C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))
+  atom(op_eq_eq_eq((s : Term), (t : Term)))
+  (v : (Num) -> Term)
+  functions(IMAGE(interp, UNION({{(e : Form)} | IN(e, (E : (Form) -> Bool))}, Eqclauses(language(INSERT(op_eq_eq_eq((s : Term), (t : Term)), E)))))) == functions(INSERT(op_eq_eq_eq(s, t), E))
+  (((a : Bool) && (b : Bool)) && (c : Bool)) == (b && a && c)
+  (((a : Bool) && (b : Bool)) && (c : Bool)) == (b && a && c)
+  UNIONS({functions((p : (Form) -> Bool)) | IN(p, {{(e : Form)} | IN(e, (E : (Form) -> Bool))})})
+  functions(IMAGE(interp, {{(e : Form)} | IN(e, (E : (Form) -> Bool))})) == functions(E)
+  (b : Bool) && (c : Bool) && (a : Bool) \226\134\146 (a && b \226\134\146 c == (d : Bool)) \226\134\146 d
+  op_eq_eq_eq((s : Term), (t : Term))
+  UNION({{(e : Form)} | IN(e, (E : (Form) -> Bool))}, Eqclauses(language(INSERT(op_eq_eq_eq((s : Term), (t : Term)), E))))
+  \226\136\131 n : Num, ibackchain(UNION({{(e : Form)} | IN(e, (E : (Form) -> Bool))}, Eqclauses(language(INSERT(op_eq_eq_eq((s : Term), (t : Term)), E)))), n, op_eq_eq_eq(s, t))
+  ((a : Bool) && (b : Bool) && (b \226\134\146 (c : Bool))) == (a && b && c)
+  ((a : Bool) && (b : Bool) && (c : Bool)) == (a && b && (b \226\134\146 c))
+  ((a : Bool) && (b : Bool) && (c : Bool) && (b \226\134\146 (d : Bool))) == (a && b && c && d)
+  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool)) == (a && b && c && (b \226\134\146 d))
+  \226\136\128 E : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, (\226\136\128 e : Form, IN(e, E) \226\134\146 (\226\136\131 s : Term, \226\136\131 t : Term, e == op_eq_eq_eq(s, t))) && (\226\136\128 M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), interpretation(language(INSERT(op_eq_eq_eq(s, t), E)), M) && !(Dom(M) == {}) && normal(functions(INSERT(op_eq_eq_eq(s, t), E)), M) && satisfies(M, E) \226\134\146 satisfies(M, {op_eq_eq_eq(s, t)})) \226\134\146 op_bar_minus(E, op_eq_eq_eq(s, t))
+  (UNIV : ((Num, Num)) -> Bool)
+  ALL2((l : Term) => (r : Term) => \226\136\128 v : (Num) -> A, valuation((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v) \226\134\146 termval(M, v, l) == termval(M, v, r), (a : List[Term]), (b : List[Term]))
+  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), normal(UNIV, M) && interpretation((UNIV, UNIV), M) && (\226\136\128 v : (Num) -> A, \226\136\128 p : Form, valuation(M, v) && IN(p, (E : (Form) -> Bool)) \226\134\146 holds(M, v, p)) \226\134\146 (\226\136\128 a : Form, op_bar_minus(E, a) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, a == op_eq_eq_eq(s, t) \226\134\146 (\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, op_eq_eq_eq(s, t)))))
+  \226\136\128 E : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus(E, op_eq_eq_eq(s, t)) \226\134\146 (\226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), normal(UNIV, M) && interpretation((UNIV, UNIV), M) && satisfies(M, E) \226\134\146 satisfies(M, {op_eq_eq_eq(s, t)}))
 ALL2_SYM =  |- (#forall:fun(fun(list('?1),bool),bool) (\l1:list('?1). (#forall:fun(fun(list('?2),bool),bool) (\l2:list('?2). ((#=:fun(bool,fun(bool,bool)) (((#ALL2:fun(fun('?1,fun('?2,bool)),fun(list('?1),fun(list('?2),bool))) P:fun('?1,fun('?2,bool))) l1:list('?1)) l2:list('?2))) (((#ALL2:fun(fun('?2,fun('?1,bool)),fun(list('?2),fun(list('?1),bool))) (\x:'?2. (\y:'?1. ((P:fun('?1,fun('?2,bool)) y:'?1) x:'?2)))) l2:list('?2)) l1:list('?1)))))))
 MAP_EQ_ALL2 =  |- (#forall:fun(fun(fun('?3,'?4),bool),bool) (\f:fun('?3,'?4). (#forall:fun(fun(list('?3),bool),bool) (\l1:list('?3). (#forall:fun(fun(list('?3),bool),bool) (\l2:list('?3). ((#==>:fun(bool,fun(bool,bool)) (((#ALL2:fun(fun('?3,fun('?3,bool)),fun(list('?3),fun(list('?3),bool))) (\x:'?3. (\y:'?3. ((#=:fun('?4,fun('?4,bool)) (f:fun('?3,'?4) x:'?3)) (f:fun('?3,'?4) y:'?3))))) l1:list('?3)) l2:list('?3))) ((#=:fun(list('?4),fun(list('?4),bool)) ((#MAP:fun(fun('?3,'?4),fun(list('?3),list('?4))) f:fun('?3,'?4)) l1:list('?3))) ((#MAP:fun(fun('?3,'?4),fun(list('?3),list('?4))) f:fun('?3,'?4)) l2:list('?3))))))))))
 FORMSUBST_EQ =  |- (#forall:fun(fun(fun(num,term),bool),bool) (\i:fun(num,term). (#forall:fun(fun(term,bool),bool) (\s:term. (#forall:fun(fun(term,bool),bool) (\t:term. ((#=:fun(form,fun(form,bool)) ((#formsubst:fun(fun(num,term),fun(form,form)) i:fun(num,term)) ((#===:fun(term,fun(term,form)) s:term) t:term))) ((#===:fun(term,fun(term,form)) ((#termsubst:fun(fun(num,term),fun(term,term)) i:fun(num,term)) s:term)) ((#termsubst:fun(fun(num,term),fun(term,term)) i:fun(num,term)) t:term)))))))))
