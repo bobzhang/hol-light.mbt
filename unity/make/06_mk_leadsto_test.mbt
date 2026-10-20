@@ -6167,12 +6167,12 @@ test "Unity/mk_leadsto matches Unity/mk_leadsto.ml" {
       #|  :bool
       #|  forall p:'a->bool. (?i:num. p = P i) ==> (p LEADSTO q)Pr
       #|  (P:num->'a->bool)i
-      #|  i:num
+      #|  (i : Num)
       #|  (forall p:'a->bool. (?i. p = P i) ==> (p LEADSTO q)Pr) =\n    (forall i:num. ((P i) LEADSTO q)Pr)
       #|  (p:'a->bool) s
       #|  p = (P:num->'a->bool)i
-      #|  i:num
-      #|  x:num
+      #|  (i : Num)
+      #|  (x : Num)
       #|  (P:num->'a->bool)x
       #|  forall s. ((?*) (P:num->'a->bool))s <=> (LUB(\\p. ?i. p = P i))s
       #|  \\p. ?i. (p = (P:num->'a->bool)i)
@@ -6479,7 +6479,7 @@ test "Unity/mk_leadsto matches Unity/mk_leadsto.ml" {
       #|  forall st Pr. ((q:'a->bool) LEADSTO r)(CONS st Pr)
       #|  forall(p:'a->bool) q r st Pr.\n        (p LEADSTO q)(CONS st Pr) /\\ (forall s. q s ==> r s)\n              ==> (p LEADSTO r)(CONS st Pr)
       #|  forall i. (((P:num->'a->bool) i) LEADSTO q)Pr
-      #|  SUC i
+      #|  SUC((i : Num))
       #|  (( \\<=/*  (P:num->'a->bool) i) LEADSTO q)Pr
       #|  Pr:('a->'a)list
       #|  q:'a->bool
@@ -6491,7 +6491,7 @@ test "Unity/mk_leadsto matches Unity/mk_leadsto.ml" {
       #|  False:'a->bool
       #|  forall(p:'a->bool) st Pr. (False LEADSTO p) (CONS st Pr)
       #|  forall i. (((P:num->'a->bool) i) LEADSTO q)(CONS st Pr)
-      #|  i:num
+      #|  (i : Num)
       #|  (( \\</*  (P:num->'a->bool) i) LEADSTO q)(CONS st Pr)
       #|  CONS (st:'a->'a) Pr
       #|  q:'a->bool
@@ -6815,11 +6815,11 @@ test "Unity/mk_leadsto matches Unity/mk_leadsto.ml" {
       #|  LESSmetric (M:'a->num) m = \\s. M s < m
       #|  \\n. (((p:'a->bool) /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)
       #|  forall(M:'a->num) m. (p /\\* (M EQmetric m)) = ((\\i. p /\\* (M EQmetric i))m)
-      #|  n < m
-      #|  m:num
-      #|  n:num
+      #|  (n : Num) < (m : Num)
+      #|  (m : Num)
+      #|  (n : Num)
       #|  forall n. n < (SUC m) ==>\n           (((p:'a->bool) /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)
-      #|  n:num
+      #|  (n : Num)
       #|  forall(p:'a->bool) q st Pr M m.\n       (forall n. n < (SUC m) ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)) ==>\n             (forall n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr))
       #|  ((p /\\* (M EQmetric m)) LEADSTO q)(CONS (st:'a->'a) Pr)
       #|  (( \\</* (\\i. p /\\* (M EQmetric i))m) LEADSTO q)\n                    (CONS (st:'a->'a) Pr)
@@ -6828,7 +6828,7 @@ test "Unity/mk_leadsto matches Unity/mk_leadsto.ml" {
       #|  (p:'a->bool) /\\* (M EQmetric m)
       #|   \\</* (\\i. (p:'a->bool) /\\* (M EQmetric i))m
       #|  forall n. n < (SUC m) ==> ((p /\\* (M EQmetric n)) LEADSTO q)\n                         (CONS (st:'a->'a) Pr)
-      #|  m:num
+      #|  (m : Num)
       #|  forall n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)\n                         (CONS (st:'a->'a) Pr)
       #|  (forall n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr))\n                    ==> (( \\</* (\\i. p /\\* (M EQmetric i))m) LEADSTO q)\n                         (CONS (st:'a->'a) Pr)
       #|  forall(p:'a->bool) q st Pr M m.\n      (forall n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q) (CONS st Pr)) ==>\n         (( \\</*  (\\i. p /\\* (M EQmetric i))m) LEADSTO q) (CONS st Pr)
@@ -6836,7 +6836,7 @@ test "Unity/mk_leadsto matches Unity/mk_leadsto.ml" {
       #|  forall s:'a. (M LESSmetric m)s =  \\</* (\\i. M EQmetric i)m s
       #|  forall s:'a. (M LESSmetric m)s =  \\</* (\\i. M EQmetric i)m s
       #|  forall M:'a->num. (forall m s. (M LESSmetric m)s = ( \\</*  (\\i. M EQmetric i) m) s)
-      #|  m:num
+      #|  (m : Num)
       #|  M:'a->num
       #|  forall(M:'a->num) m. (M LESSmetric m) = ( \\</*  (\\i. M EQmetric i) m)
       #|  forall(p:'a->bool) M q Pr.\n   (forall m. ((p /\\* (M EQmetric m)) LEADSTO ((p /\\* (M LESSmetric m)) \\/* q))Pr)\n      ==> (forall m. ((p /\\* (M EQmetric m)) LEADSTO\n               ((p /\\* ( \\</* (\\i. M EQmetric i)m)) \\/* q))Pr)
@@ -6855,10 +6855,10 @@ test "Unity/mk_leadsto matches Unity/mk_leadsto.ml" {
       #|  p:'a->bool
       #|  forall n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)\n                   (CONS (st:'a->'a) Pr)
       #|  forall(p:'a->bool) q st Pr M.\n       (forall m. ((p /\\* (M EQmetric m)) LEADSTO\n           ((p /\\* (M LESSmetric m)) \\/* q)) (CONS st Pr)) ==>\n       (forall m. (forall n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)) ==>\n                   ((p /\\* (M EQmetric m)) LEADSTO q) (CONS st Pr))
-      #|  m:num
+      #|  (m : Num)
       #|  forall(p:'a->bool) q st Pr M.\n       (forall m. ((p /\\* (M EQmetric m)) LEADSTO\n            ((p /\\* (M LESSmetric m)) \\/* q)) (CONS st Pr)) ==>\n                (forall m. ((p /\\* (M EQmetric m)) LEADSTO q) (CONS st Pr))
-      #|  x:num
-      #|  x:num
+      #|  (x : Num)
+      #|  (x : Num)
       #|  forall(p:'a->bool) M s.\n     (p /\\* ((?*) (\\n. M EQmetric n)))s = ((?*) (\\i. p /\\* (M EQmetric i)))s
       #|  M:'a->num
       #|  p:'a->bool
@@ -6964,9 +6964,9 @@ test "Unity/mk_leadsto matches Unity/mk_leadsto.ml" {
       #|  /<=\\* (Q:num->('a->bool))i
       #|  ((/<=\\* (Q:num->'a->bool) i) UNLESS r)(CONS st Pr)
       #|  forall i. (((Q:num->('a->bool)) i) UNLESS r)(CONS st Pr)
-      #|  SUC i
+      #|  SUC((i : Num))
       #|  forall i. (((P:num->('a->bool)) i) LEADSTO ((Q i) \\/* r))(CONS st Pr)
-      #|  SUC i
+      #|  SUC((i : Num))
       #|  forall i. ((/<=\\* (Q:num->'a->bool) i) UNLESS r)(CONS st Pr)
       #|  forall(P:num->('a->bool)) Q r st Pr.\n       (forall i. ((P i) LEADSTO ((Q i) \\/* r)) (CONS st Pr)) /\\\n       (forall i. ((Q i) UNLESS r) (CONS st Pr)) ==>\n         (forall i. ((/<=\\* P i) LEADSTO ((/<=\\* Q i) \\/* r)) (CONS st Pr))
       #|  (q:'a->bool) /\\* q'
@@ -7107,11 +7107,11 @@ test "Unity/mk_leadsto matches Unity/mk_leadsto.ml" {
       #|  CONS st Pr:('a->'a)list
       #|  B:num->('a->bool)
       #|  Q:num->('a->bool)
-      #|  i:num
+      #|  (i : Num)
       #|  forall i. (((Q:num->('a->bool)) i) UNLESS (B i))(CONS st Pr)
-      #|  SUC i
+      #|  SUC((i : Num))
       #|  forall i.(((P:num->('a->bool))i) LEADSTO ((Q i) \\/* (R i)))(CONS st Pr)
-      #|  SUC i
+      #|  SUC((i : Num))
       #|  (Q:num->('a->bool)) 0 \\/* R 0 \\/* B 0
       #|  (Q:num->('a->bool)) 0 \\/* R 0
       #|  (P:num->('a->bool)) 0
