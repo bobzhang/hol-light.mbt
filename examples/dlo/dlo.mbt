@@ -9,7 +9,7 @@ fn step_1() -> Unit raise {
 ///|
 /// list_conj
 fn step_2() -> Unit raise {
-  let t_tm = @parser.parse_term("T")
+  let t_tm = @term_syntax.parse_term("true")
   list_conj_c.set(fn(x1 : @list.List[@kernel.Term]) -> @kernel.Term raise {
     let l = x1
     if @list.List::is_empty(l) {
@@ -34,7 +34,7 @@ pub fn list_conj(x : @list.List[@kernel.Term]) -> @kernel.Term raise {
 ///|
 /// mk_lt
 fn step_3() -> Unit raise {
-  let t5 = @parser.parse_term("(<)")
+  let t5 = @term_syntax.parse_term("op_lt")
   mk_lt_c.set(fn(x8 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
     fn(x9 : @kernel.Term) -> @kernel.Term raise {
       ((x6 : @kernel.Term, x7 : @kernel.Term) => @basics.mk_binop(t5, x6, x7))(x8, x9)
@@ -54,7 +54,7 @@ pub fn mk_lt(x : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
 ///|
 /// DOUBLE_NEG_CONV
 fn step_4() -> Unit raise {
-  let dn_thm = @class.taut(@parser.parse_term("forall x. ~(~ x) <=> x"))
+  let dn_thm = @class.taut(@term_syntax.parse_term("∀ x : Bool, !!x == x"))
   let dn_conv : (@kernel.Term) -> @kernel.Thm raise = fn(x10 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x10
     let tm_p = @basics.dest_neg(@basics.dest_neg(tm))
@@ -75,7 +75,7 @@ pub fn double_neg_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// IMP_CONV
 fn step_5() -> Unit raise {
-  let i_thm = @class.taut(@parser.parse_term("forall a b. (a ==> b) <=> (~a \\/ b)"))
+  let i_thm = @class.taut(@term_syntax.parse_term("∀ a : Bool, ∀ b : Bool, (a → b) == (!a || b)"))
   let i_conv : (@kernel.Term) -> @kernel.Thm raise = fn(x11 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x11
     let (a, b) = @basics.dest_imp(tm)
@@ -96,7 +96,7 @@ pub fn imp_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// BEQ_CONV
 fn step_6() -> Unit raise {
-  let beq_thm = @class.taut(@parser.parse_term("forall a b. (a = b) <=> (a /\\ b \\/ ~a /\\ ~b)"))
+  let beq_thm = @class.taut(@term_syntax.parse_term("∀ a : Bool, ∀ b : Bool, (a == b) == (a && b || !a && !b)"))
   let beq_conv_1 : (@kernel.Term) -> @kernel.Thm raise = fn(x12 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x12
     let (a, b) = @kernel.dest_eq(tm)
@@ -117,7 +117,7 @@ pub fn beq_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// NEG_AND_CONV
 fn step_7() -> Unit raise {
-  let na_thm = @class.taut(@parser.parse_term("forall a b. ~(a /\\ b) <=> (~a \\/ ~b)"))
+  let na_thm = @class.taut(@term_syntax.parse_term("∀ a : Bool, ∀ b : Bool, !(a && b) == (!a || !b)"))
   let na_conv : (@kernel.Term) -> @kernel.Thm raise = fn(x13 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x13
     let (a, b) = @basics.dest_conj(@basics.dest_neg(tm))
@@ -138,7 +138,7 @@ pub fn neg_and_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// NEG_OR_CONV
 fn step_8() -> Unit raise {
-  let no_thm = @class.taut(@parser.parse_term("forall a b. ~(a \\/ b) <=> (~a /\\ ~b)"))
+  let no_thm = @class.taut(@term_syntax.parse_term("∀ a : Bool, ∀ b : Bool, !(a || b) == (!a && !b)"))
   let no_conv : (@kernel.Term) -> @kernel.Thm raise = fn(x14 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x14
     let (a, b) = @basics.dest_disj(@basics.dest_neg(tm))
@@ -159,7 +159,7 @@ pub fn neg_or_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// NEG_IMP_CONV
 fn step_9() -> Unit raise {
-  let ni_thm = @class.taut(@parser.parse_term("forall a b. ~(a ==> b) <=> (a /\\ ~b)"))
+  let ni_thm = @class.taut(@term_syntax.parse_term("∀ a : Bool, ∀ b : Bool, !(a → b) == (a && !b)"))
   let ni_conv : (@kernel.Term) -> @kernel.Thm raise = fn(x15 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x15
     let (a, b) = @basics.dest_imp(@basics.dest_neg(tm))
@@ -180,7 +180,7 @@ pub fn neg_imp_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// NEG_BEQ_CONV
 fn step_10() -> Unit raise {
-  let nbeq_thm = @class.taut(@parser.parse_term("forall a b. ~(a = b) <=> (a /\\ ~b \\/ ~a /\\ b)"))
+  let nbeq_thm = @class.taut(@term_syntax.parse_term("∀ a : Bool, ∀ b : Bool, !(a == b) == (a && !b || !a && b)"))
   let nbeq_conv : (@kernel.Term) -> @kernel.Thm raise = fn(x16 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x16
     let (a, b) = @kernel.dest_eq(@basics.dest_neg(tm))
@@ -235,7 +235,7 @@ pub fn is_cases(x : @kernel.Term) -> Bool raise {
 ///|
 /// CASES_CONV
 fn step_12() -> Unit raise {
-  let c_thm = @class.taut(@parser.parse_term("forall p q0 q1. ~(p /\\ q0 \\/ ~p /\\ q1) <=> (p /\\ ~q0 \\/ ~p /\\ ~q1)"))
+  let c_thm = @class.taut(@term_syntax.parse_term("∀ p : Bool, ∀ q0 : Bool, ∀ q1 : Bool, !(p && q0 || !p && q1) == (p && !q0 || !p && !q1)"))
   let cc : (@kernel.Term) -> @kernel.Thm raise = fn(x19 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x19
     let (p, q0, q1) = dest_cases(tm)
@@ -258,15 +258,15 @@ pub fn cases_conv(x : @kernel.Term) -> @kernel.Thm raise {
 fn step_13() -> Unit raise {
   let t20 = @simp.rewrite_tac(@list.List([@class.not_forall_thm(), @class.not_imp(), @theorems.conj_assoc()]))
   let t21 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.exists_unique_thm(), @class.de_morgan_thm(), @class.not_exists_thm()])), t20)
-  let not_exists_unique_thm = @tactics.prove(@parser.parse_term("~(?!x. P x) <=> (forall x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')"), t21)
-  let t22 = @class.taut(@parser.parse_term("~(p /\\ q \\/ ~p /\\ r) <=> p /\\ ~q \\/ ~p /\\ ~r"))
-  let t23 = @class.taut(@parser.parse_term("(p = q) <=> (p /\\ q) \\/ (~p /\\ ~q)"))
-  let t24 = @class.taut(@parser.parse_term("~(p = q) <=> (p /\\ ~q) \\/ (~p /\\ q)"))
-  let t25 = @class.taut(@parser.parse_term("p ==> q <=> ~p \\/ q"))
-  let t26 = @class.taut(@parser.parse_term("~(p ==> q) <=> p /\\ ~q"))
-  let t27 = @class.taut(@parser.parse_term("~(p \\/ q) <=> ~p /\\ ~q"))
-  let t28 = @class.taut(@parser.parse_term("~(p /\\ q) <=> ~p \\/ ~q"))
-  let tauts = @list.List([@class.taut(@parser.parse_term("~(~p) <=> p")), t28, t27, t26, t25, @class.not_forall_thm(), @class.not_exists_thm(), @theorems.exists_unique_thm(), not_exists_unique_thm, t24, t23, t22])
+  let not_exists_unique_thm = @tactics.prove(@term_syntax.parse_term("!existsunique((x : _) => (P : (_) -> Bool)(x)) == ((∀ x : _, !P(x)) || (∃ x : _, ∃ x' : _, P(x) && P(x') && !(x == x')))"), t21)
+  let t22 = @class.taut(@term_syntax.parse_term("!((p : Bool) && (q : Bool) || !p && (r : Bool)) == (p && !q || !p && !r)"))
+  let t23 = @class.taut(@term_syntax.parse_term("((p : Bool) == (q : Bool)) == (p && q || !p && !q)"))
+  let t24 = @class.taut(@term_syntax.parse_term("!((p : Bool) == (q : Bool)) == (p && !q || !p && q)"))
+  let t25 = @class.taut(@term_syntax.parse_term("((p : Bool) → (q : Bool)) == (!p || q)"))
+  let t26 = @class.taut(@term_syntax.parse_term("!((p : Bool) → (q : Bool)) == (p && !q)"))
+  let t27 = @class.taut(@term_syntax.parse_term("!((p : Bool) || (q : Bool)) == (!p && !q)"))
+  let t28 = @class.taut(@term_syntax.parse_term("!((p : Bool) && (q : Bool)) == (!p || !q)"))
+  let tauts = @list.List([@class.taut(@term_syntax.parse_term("!!(p : Bool) == p")), t28, t27, t26, t25, @class.not_forall_thm(), @class.not_exists_thm(), @theorems.exists_unique_thm(), not_exists_unique_thm, t24, t23, t22])
   qe_simplify_conv_c.set(@simp.gen_rewrite_conv(fn(x29 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s30 = @equal.top_sweep_conv(x29)
     fn(x31 : @kernel.Term) -> @kernel.Thm raise {
@@ -287,8 +287,8 @@ pub fn qe_simplify_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// CNNF_CONV
 fn step_14() -> Unit raise {
-  let refl_conj = @kernel.refl(@parser.parse_term("(/\\)"))
-  let refl_disj = @kernel.refl(@parser.parse_term("(\\/)"))
+  let refl_conj = @kernel.refl(@term_syntax.parse_term("op_slash_bslash"))
+  let refl_disj = @kernel.refl(@term_syntax.parse_term("op_bslash_slash"))
   cnnf_conv_c.set(fn(x32 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let lfn_conv = x32
     fn cnnf_conv_1(x34 : @kernel.Term) -> @kernel.Thm raise {
@@ -401,7 +401,7 @@ pub fn cnnf_conv(x : (@kernel.Term) -> @kernel.Thm raise) -> @equal.Conv raise {
 ///|
 /// MINL
 fn step_15() -> Unit raise {
-  let t43 = @parser.parse_term("(MINL [] default = default) /\\\n   (MINL (CONS h t) default = min h (MINL t default))")
+  let t43 = @term_syntax.parse_term("(MINL : (List[Real], Real) -> Real)(NIL, (default : Real)) == default && MINL(CONS((h : Real), (t : List[Real])), default) == min(h, MINL(t, default))")
   minl_c.set(@recursion.new_recursive_definition(@ind_types.list_recursion())(t43))
 }
 
@@ -417,7 +417,7 @@ pub fn minl() -> @kernel.Thm {
 ///|
 /// MAXL
 fn step_16() -> Unit raise {
-  let t44 = @parser.parse_term("(MAXL [] default = default) /\\\n   (MAXL (CONS h t) default = max h (MAXL t default))")
+  let t44 = @term_syntax.parse_term("(MAXL : (List[Real], Real) -> Real)(NIL, (default : Real)) == default && MAXL(CONS((h : Real), (t : List[Real])), default) == max(h, MAXL(t, default))")
   maxl_c.set(@recursion.new_recursive_definition(@ind_types.list_recursion())(t44))
 }
 
@@ -435,7 +435,7 @@ pub fn maxl() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   let t45 = @meson.meson_tac(@list.List([@realarith.real_let_trans(), @realax.real_le_total()]))
   let t46 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@realax.real_max()])), t45)
-  max_lt_c.set(@tactics.prove(@parser.parse_term("forall x y z. max x y < z <=> x < z /\\ y < z"), t46))
+  max_lt_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (max(x, y) < z) == (x < z && y < z)"), t46))
 }
 
 ///|
@@ -452,7 +452,7 @@ pub fn max_lt() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t47 = @meson.meson_tac(@list.List([@realarith.real_lte_trans(), @realax.real_le_total()]))
   let t48 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@realax.real_min()])), t47)
-  min_gt_c.set(@tactics.prove(@parser.parse_term("forall x y z. x < real_min y z <=> x < y /\\ x < z"), t48))
+  min_gt_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x < min(y, z)) == (x < y && x < z)"), t48))
 }
 
 ///|
@@ -469,11 +469,11 @@ pub fn min_gt() -> @kernel.Thm {
 fn step_19() -> Unit raise {
   let t53 = @meson.asm_meson_tac(@list.List([max_lt()]))
   let t52 = @simp.rewrite_tac(@list.List([@lists.all(), maxl(), max_lt()]))
-  let t50 = @parser.parse_term("t:real list")
-  let t51 = @tactics.spec_tac(@parser.parse_term("t:real list"), t50)
+  let t50 = @term_syntax.parse_term("(t : List[Real])")
+  let t51 = @tactics.spec_tac(@term_syntax.parse_term("(t : List[Real])"), t50)
   let t49 = @simp.rewrite_tac(@list.List([maxl(), @lists.all()]))
   let t54 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), t49), t51), @lists.list_induct_tac), t52), t53)
-  all_lt_lemma_c.set(@tactics.prove(@parser.parse_term("forall left x lefts. ALL (\\l. l < x) (CONS left lefts) <=> MAXL lefts left < x"), t54))
+  all_lt_lemma_c.set(@tactics.prove(@term_syntax.parse_term("∀ left : Real, ∀ x : Real, ∀ lefts : List[Real], ALL((l : Real) => l < x, CONS(left, lefts)) == (MAXL(lefts, left) < x)"), t54))
 }
 
 ///|
@@ -490,11 +490,11 @@ pub fn all_lt_lemma() -> @kernel.Thm {
 fn step_20() -> Unit raise {
   let t59 = @meson.asm_meson_tac(@list.List([min_gt()]))
   let t58 = @simp.rewrite_tac(@list.List([@lists.all(), minl(), min_gt()]))
-  let t56 = @parser.parse_term("t:real list")
-  let t57 = @tactics.spec_tac(@parser.parse_term("t:real list"), t56)
+  let t56 = @term_syntax.parse_term("(t : List[Real])")
+  let t57 = @tactics.spec_tac(@term_syntax.parse_term("(t : List[Real])"), t56)
   let t55 = @simp.rewrite_tac(@list.List([minl(), @lists.all()]))
   let t60 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), t55), t57), @lists.list_induct_tac), t58), t59)
-  all_gt_lemma_c.set(@tactics.prove(@parser.parse_term("forall right x rights.\n        ALL (\\r. x < r) (CONS right rights) <=> x < MINL rights right"), t60))
+  all_gt_lemma_c.set(@tactics.prove(@term_syntax.parse_term("∀ right : Real, ∀ x : Real, ∀ rights : List[Real], ALL((r : Real) => x < r, CONS(right, rights)) == (x < MINL(rights, right))"), t60))
 }
 
 ///|
@@ -516,9 +516,9 @@ fn step_21() -> Unit raise {
     }
   })
   let t62 = @simp.simp_tac(@list.List([@real.real_lt_ldiv_eq(), @real.real_lt_rdiv_eq(), @real.real_of_num_lt(), @calc_num.arith()]))
-  let t61 = @tactics.exists_tac(@parser.parse_term("(x + y) / &2"))
+  let t61 = @tactics.exists_tac(@term_syntax.parse_term("((x : Real) + (y : Real)) / real_of_num(2)"))
   let t67 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t61), t62), t66), @calc_rat.real_arith_tac)
-  real_dense_c.set(@tactics.prove(@parser.parse_term("forall x y. x < y ==> ?z. x < z /\\ z < y"), t67))
+  real_dense_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, x < y → (∃ z : Real, x < z && z < y)"), t67))
 }
 
 ///|
@@ -533,8 +533,8 @@ pub fn real_dense() -> @kernel.Thm {
 ///|
 /// REAL_LT_EXISTS
 fn step_22() -> Unit raise {
-  let t68 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.exists_tac(@parser.parse_term("x + &1"))), @calc_rat.real_arith_tac)
-  real_lt_exists_c.set(@tactics.prove(@parser.parse_term("forall x. ?y. x < y"), t68))
+  let t68 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.exists_tac(@term_syntax.parse_term("(x : Real) + real_of_num(1)"))), @calc_rat.real_arith_tac)
+  real_lt_exists_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, ∃ y : Real, x < y"), t68))
 }
 
 ///|
@@ -549,8 +549,8 @@ pub fn real_lt_exists() -> @kernel.Thm {
 ///|
 /// REAL_GT_EXISTS
 fn step_23() -> Unit raise {
-  let t69 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.exists_tac(@parser.parse_term("x - &1"))), @calc_rat.real_arith_tac)
-  real_gt_exists_c.set(@tactics.prove(@parser.parse_term("forall x. ?y. y < x"), t69))
+  let t69 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.exists_tac(@term_syntax.parse_term("(x : Real) - real_of_num(1)"))), @calc_rat.real_arith_tac)
+  real_gt_exists_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, ∃ y : Real, y < x"), t69))
 }
 
 ///|
@@ -565,8 +565,8 @@ pub fn real_gt_exists() -> @kernel.Thm {
 ///|
 /// LFN_DLO_CONV
 fn step_24() -> Unit raise {
-  let t70 = @calc_rat.real_arith(@parser.parse_term("~(s = t) <=> (s < t \\/ t < s)"))
-  lfn_dlo_conv_c.set(@simp.pure_rewrite_conv(@list.List([@calc_rat.real_arith(@parser.parse_term("~(s < t) <=> ((s = t) \\/ (t < s))")), t70])))
+  let t70 = @calc_rat.real_arith(@term_syntax.parse_term("!((s : Real) == (t : Real)) == (s < t || t < s)"))
+  lfn_dlo_conv_c.set(@simp.pure_rewrite_conv(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("!((s : Real) < (t : Real)) == (s == t || t < s)")), t70])))
 }
 
 ///|
@@ -583,7 +583,7 @@ pub fn lfn_dlo_conv(x : @kernel.Term) -> @kernel.Thm raise {
 fn step_25() -> Unit raise {
   let t71 = @meson.meson_tac(@list.List([real_lt_exists()]))
   let t72 = @tactics.then_tac(@simp.rewrite_tac(@list.List([all_lt_lemma()])), t71)
-  proforma_left_c.set(@tactics.prove(@parser.parse_term("forall l ls. (?x. ALL (\\l. l < x) (CONS l ls)) <=> T"), t72))
+  proforma_left_c.set(@tactics.prove(@term_syntax.parse_term("∀ l : Real, ∀ ls : List[Real], (∃ x : Real, ALL((l : Real) => l < x, CONS(l, ls))) == true"), t72))
 }
 
 ///|
@@ -600,7 +600,7 @@ pub fn proforma_left() -> @kernel.Thm {
 fn step_26() -> Unit raise {
   let t73 = @meson.meson_tac(@list.List([real_gt_exists()]))
   let t74 = @tactics.then_tac(@simp.rewrite_tac(@list.List([all_gt_lemma()])), t73)
-  proforma_right_c.set(@tactics.prove(@parser.parse_term("forall r rs. (?x. ALL (\\r. x < r) (CONS r rs)) <=> T"), t74))
+  proforma_right_c.set(@tactics.prove(@term_syntax.parse_term("∀ r : Real, ∀ rs : List[Real], (∃ x : Real, ALL((r : Real) => x < r, CONS(r, rs))) == true"), t74))
 }
 
 ///|
@@ -617,7 +617,7 @@ pub fn proforma_right() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   let t75 = @meson.meson_tac(@list.List([real_dense(), @realarith.real_lt_trans()]))
   let t76 = @tactics.then_tac(@simp.rewrite_tac(@list.List([all_lt_lemma(), all_gt_lemma()])), t75)
-  proforma_both_c.set(@tactics.prove(@parser.parse_term("forall l ls r rs.\n        (?x. ALL (\\l. l < x) (CONS l ls) /\\ ALL (\\r. x < r) (CONS r rs)) <=>\n        ALL (\\l. ALL (\\r. l < r) (CONS r rs)) (CONS l ls)"), t76))
+  proforma_both_c.set(@tactics.prove(@term_syntax.parse_term("∀ l : Real, ∀ ls : List[Real], ∀ r : Real, ∀ rs : List[Real], (∃ x : Real, ALL((l : Real) => l < x, CONS(l, ls)) && ALL((r : Real) => x < r, CONS(r, rs))) == ALL((l : Real) => ALL((r : Real) => l < r, CONS(r, rs)), CONS(l, ls))"), t76))
 }
 
 ///|
@@ -651,7 +651,7 @@ pub fn mk_rlist(x : @list.List[@kernel.Term]) -> @kernel.Term raise {
 ///|
 /// expand_all
 fn step_29() -> Unit raise {
-  let t78 = @class.taut(@parser.parse_term("a /\\ T <=> a"))
+  let t78 = @class.taut(@term_syntax.parse_term("((a : Bool) && true) == a"))
   expand_all_c.set(@simp.pure_rewrite_rule(@list.List([@lists.all(), @theorems.beta_thm(), @equal.gsym(@theorems.conj_assoc()), t78])))
 }
 
@@ -700,7 +700,7 @@ pub fn dlo_eq_conv(x79 : @kernel.Term) -> @kernel.Thm raise {
 /// eq_triv_conv
 fn step_30() -> Unit raise {
   let t87 = @meson.meson_tac(@list.List([]))
-  let pth_triv = @tactics.prove(@parser.parse_term("((?x. x = x) <=> T) /\\\n     ((?x. x = t) <=> T) /\\\n     ((?x. t = x) <=> T) /\\\n     ((?x. (x = t) /\\ P x) <=> P t) /\\\n     ((?x. (t = x) /\\ P x) <=> P t)"), t87)
+  let pth_triv = @tactics.prove(@term_syntax.parse_term("(∃ x : _, x == x) == true && (∃ x : _, x == (t : _)) == true && (∃ x : _, t == x) == true && (∃ x : _, x == t && (P : (_) -> Bool)(x)) == P(t) && (∃ x : _, t == x && P(x)) == P(t)"), t87)
   eq_triv_conv_c.set(@simp.gen_rewrite_conv(fn(x88 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x88
   }, @list.List([pth_triv])))
@@ -719,7 +719,7 @@ pub fn eq_triv_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// eq_refl_conv
 fn step_31() -> Unit raise {
   let t89 = @meson.meson_tac(@list.List([]))
-  let pth_refl = @tactics.prove(@parser.parse_term("(?x. (x = x) /\\ P x) <=> (?x. P x)"), t89)
+  let pth_refl = @tactics.prove(@term_syntax.parse_term("(∃ x : _, x == x && (P : (_) -> Bool)(x)) == (∃ x : _, P(x))"), t89)
   eq_refl_conv_c.set(@simp.gen_rewrite_conv(fn(x90 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x90
   }, @list.List([pth_refl])))
@@ -799,9 +799,9 @@ pub fn dlobasic_conv(x94 : @kernel.Term) -> @kernel.Thm raise {
 /// `AFN_DLO_CONV`
 pub fn[TA] afn_dlo_conv(x96 : TA) -> @equal.Conv raise {
   let vars = x96
-  let t98 = @calc_rat.real_arith(@parser.parse_term("s > t <=> t < s"))
-  let t99 = @calc_rat.real_arith(@parser.parse_term("s >= t <=> ~(s < t)"))
-  @simp.pure_rewrite_conv(@list.List([@calc_rat.real_arith(@parser.parse_term("s <= t <=> ~(t < s)")), t99, t98]))
+  let t98 = @calc_rat.real_arith(@term_syntax.parse_term("((s : Real) > (t : Real)) == (t < s)"))
+  let t99 = @calc_rat.real_arith(@term_syntax.parse_term("((s : Real) >= (t : Real)) == !(s < t)"))
+  @simp.pure_rewrite_conv(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("((s : Real) <= (t : Real)) == !(t < s)")), t99, t98]))
 }
 
 ///|
@@ -822,7 +822,7 @@ pub fn dest_binop_op(x100 : @kernel.Term) -> ((@kernel.Term, @kernel.Term, @kern
 /// forall_thm
 fn step_33() -> Unit raise {
   let t101 = @meson.meson_tac(@list.List([]))
-  forall_thm_c.set(@tactics.prove(@parser.parse_term("forall P. (forall x. P x) <=> ~ (?x. ~ P x)"), t101))
+  forall_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, (∀ x : _, P(x)) == !(∃ x : _, !P(x))"), t101))
 }
 
 ///|
@@ -882,7 +882,7 @@ pub fn push_exists_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// not_tm
 fn step_37() -> Unit raise {
-  not_tm_c.set(@parser.parse_term("(~)"))
+  not_tm_c.set(@term_syntax.parse_term("op_tilde"))
 }
 
 ///|
@@ -897,7 +897,7 @@ pub fn not_tm() -> @kernel.Term {
 ///|
 /// or_tm
 fn step_38() -> Unit raise {
-  or_tm_c.set(@parser.parse_term("(\\/)"))
+  or_tm_c.set(@term_syntax.parse_term("op_bslash_slash"))
 }
 
 ///|
@@ -912,7 +912,7 @@ pub fn or_tm() -> @kernel.Term {
 ///|
 /// t_tm
 fn step_39() -> Unit raise {
-  t_tm_c.set(@parser.parse_term("T"))
+  t_tm_c.set(@term_syntax.parse_term("true"))
 }
 
 ///|
@@ -927,7 +927,7 @@ pub fn t_tm() -> @kernel.Term {
 ///|
 /// f_tm
 fn step_40() -> Unit raise {
-  f_tm_c.set(@parser.parse_term("F"))
+  f_tm_c.set(@term_syntax.parse_term("false"))
 }
 
 ///|
@@ -1056,35 +1056,35 @@ pub fn qelim_dlo_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// tests
 fn step_42() -> Unit raise {
-  let t127 = @parser.parse_term("forall x y. x <= y \\/ x < y")
-  let t128 = @parser.parse_term("forall x y. x <= y \\/ x > y")
-  let t129 = @parser.parse_term("forall a b. ?x. ~(x = a) \\/ ~(x = b) \\/ (a = b:real)")
-  let t130 = @parser.parse_term("forall x. x < a ==> x <= b")
-  let t131 = @parser.parse_term("forall x. x < a ==> x < b")
-  let t132 = @parser.parse_term("forall a b. (forall x. x < a ==> x < b) <=> (a <= b)")
-  let t133 = @parser.parse_term("?z. z < x /\\ x < y")
-  let t134 = @parser.parse_term("forall x y . x < y")
-  let t135 = @parser.parse_term("forall y. x < y /\\ y < z ==> w < z")
-  let t136 = @parser.parse_term("forall x y z. ?u. u < x /\\ u < y /\\ u < z")
-  let t137 = @parser.parse_term("?z. x < z /\\ z <= y")
-  let t138 = @parser.parse_term("?z. x <= z /\\ z <= y")
-  let t139 = @parser.parse_term("?z. x < z /\\ z < y")
-  let t140 = @parser.parse_term("?x.(x = x) /\\ (x = y)")
-  let t141 = @parser.parse_term("?x. x = x:real")
-  let t142 = @parser.parse_term("forall x y. ~(x = y) ==> ?u. u < x /\\ (y < u \\/ x < y)")
-  let t143 = @parser.parse_term("forall x y. x < y ==> ?z. x < z /\\ z < y")
-  let t144 = @parser.parse_term("forall x y. ?z. z < x /\\ z < y")
-  let t145 = @parser.parse_term("forall x y. ?z. z < x /\\ x < y")
-  let t146 = @parser.parse_term("?x y. x < y /\\ y < x")
-  let t147 = @parser.parse_term("forall x y. x < y \\/ (x = y) \\/ y < x")
-  let t148 = @parser.parse_term("forall x y. x < y \\/ (x = y) \\/ y < x")
-  let t149 = @parser.parse_term("forall x y z. x < y /\\ y < z ==> x < z")
-  let t150 = @parser.parse_term("forall x. ?y. x < y")
-  let t151 = @parser.parse_term("forall a b. (forall x. (x < a) <=> (x < b)) <=> (a = b)")
-  let t152 = @parser.parse_term("forall x. x < a ==> x < b")
-  let t153 = @parser.parse_term("?z. x < z /\\ z < y")
-  let t154 = @parser.parse_term("?z. x < x /\\ z < y")
-  tests_c.set(@list.List([@parser.parse_term("forall x y. ?z. z < x /\\ z < y"), t154, t153, t152, t151, t150, t149, t148, t147, t146, t145, t144, t143, t142, t141, t140, t139, t138, t137, t136, t135, t134, t133, t132, t131, t130, t129, t128, t127]))
+  let t127 = @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x <= y || x < y")
+  let t128 = @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x <= y || x > y")
+  let t129 = @term_syntax.parse_term("∀ a : Real, ∀ b : Real, ∃ x : Real, !(x == a) || !(x == b) || a == b")
+  let t130 = @term_syntax.parse_term("∀ x : Real, x < (a : Real) → x <= (b : Real)")
+  let t131 = @term_syntax.parse_term("∀ x : Real, x < (a : Real) → x < (b : Real)")
+  let t132 = @term_syntax.parse_term("∀ a : Real, ∀ b : Real, (∀ x : Real, x < a → x < b) == (a <= b)")
+  let t133 = @term_syntax.parse_term("∃ z : Real, z < (x : Real) && x < (y : Real)")
+  let t134 = @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x < y")
+  let t135 = @term_syntax.parse_term("∀ y : Real, (x : Real) < y && y < (z : Real) → (w : Real) < z")
+  let t136 = @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, ∃ u : Real, u < x && u < y && u < z")
+  let t137 = @term_syntax.parse_term("∃ z : Real, (x : Real) < z && z <= (y : Real)")
+  let t138 = @term_syntax.parse_term("∃ z : Real, (x : Real) <= z && z <= (y : Real)")
+  let t139 = @term_syntax.parse_term("∃ z : Real, (x : Real) < z && z < (y : Real)")
+  let t140 = @term_syntax.parse_term("∃ x : _, x == x && x == (y : _)")
+  let t141 = @term_syntax.parse_term("∃ x : Real, x == x")
+  let t142 = @term_syntax.parse_term("∀ x : Real, ∀ y : Real, !(x == y) → (∃ u : Real, u < x && (y < u || x < y))")
+  let t143 = @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x < y → (∃ z : Real, x < z && z < y)")
+  let t144 = @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∃ z : Real, z < x && z < y")
+  let t145 = @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∃ z : Real, z < x && x < y")
+  let t146 = @term_syntax.parse_term("∃ x : Real, ∃ y : Real, x < y && y < x")
+  let t147 = @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x < y || x == y || y < x")
+  let t148 = @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x < y || x == y || y < x")
+  let t149 = @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, x < y && y < z → x < z")
+  let t150 = @term_syntax.parse_term("∀ x : Real, ∃ y : Real, x < y")
+  let t151 = @term_syntax.parse_term("∀ a : Real, ∀ b : Real, (∀ x : Real, (x < a) == (x < b)) == (a == b)")
+  let t152 = @term_syntax.parse_term("∀ x : Real, x < (a : Real) → x < (b : Real)")
+  let t153 = @term_syntax.parse_term("∃ z : Real, (x : Real) < z && z < (y : Real)")
+  let t154 = @term_syntax.parse_term("∃ z : Real, (x : Real) < x && z < (y : Real)")
+  tests_c.set(@list.List([@term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∃ z : Real, z < x && z < y"), t154, t153, t152, t151, t150, t149, t148, t147, t146, t145, t144, t143, t142, t141, t140, t139, t138, t137, t136, t135, t134, t133, t132, t131, t130, t129, t128, t127]))
 }
 
 ///|
