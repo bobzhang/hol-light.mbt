@@ -5,7 +5,7 @@
 fn step_1() -> Unit raise {
   let t1 = @sets.set_tac(@list.List([]))
   let t2 = @tactics.then_tac(
-    @tactics.exists_tac(@parser.parse_term("({}:A->bool,(\\x:A->bool. x))")),
+    @tactics.exists_tac(@term_syntax.parse_term("(({} : (A) -> Bool), (x : (A) -> Bool) => x)")),
     t1,
   )
   let eth = @tactics.prove(
@@ -54,7 +54,7 @@ pub fn matroid_set() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   matroid_span_c.set(
     @pair.new_definition(
-      @parser.parse_term("matroid_span = \\m:A matroid. SND(dest_matroid m)"),
+      @term_syntax.parse_term("(matroid_span : (Matroid[A], (A) -> Bool, A) -> Bool) == ((m : Matroid[A]) => SND(dest_matroid(m)))"),
     ),
   )
 }
@@ -138,7 +138,7 @@ pub fn matroid_span_exchange() -> @kernel.Thm {
 /// MATROID_SPAN_SUBSET, MATROID_SPAN_SUPERSET, MATROID_SPAN_MONO, MATROID_SPAN_SPAN, MATROID_SPAN_FINITARY, MATROID_SPAN_EXCHANGE
 fn step_4() -> Unit raise {
   let t11 = @bool.conjunct2(matroid_tybij())
-  let t12 = @bool.spec(@parser.parse_term("dest_matroid(m:A matroid)"), t11)
+  let t12 = @bool.spec(@term_syntax.parse_term("dest_matroid((m : Matroid[A]))"), t11)
   let t6 = @simp.once_rewrite_rule(@list.List([@class.fun_eq_thm()]))
   let t7 = @simp.rewrite_rule(@list.List([]))
   let t10 = @lib.map(
@@ -150,7 +150,7 @@ fn step_4() -> Unit raise {
   let t13 = @simp.rewrite_rule(t10.prepend(@bool.conjunct1(matroid_tybij())))(
     t12,
   )
-  let t3 = @parser.parse_term("m:A matroid")
+  let t3 = @term_syntax.parse_term("(m : Matroid[A])")
   match
     ((x5 : @list.List[@kernel.Thm]) => {
       @lib.map((x4 : @kernel.Thm) => @bool.gen(t3, x4), x5)
@@ -594,7 +594,7 @@ fn step_17() -> Unit raise {
   let t45 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t44 = @tactics.match_mp_tac(matroid_span_mono())
   let t41 = @drule.match_mp(
-    @sets.set_rule(@parser.parse_term("x IN s ==> s SUBSET t ==> x IN t")),
+    @sets.set_rule(@term_syntax.parse_term("IN((x : _), (s : (_) -> Bool)) → SUBSET(s, (t : (_) -> Bool)) → IN(x, t)")),
   )
   let t43 = @tactics.first_x_assum(fn(
     x42 : @kernel.Thm,
@@ -672,11 +672,11 @@ fn step_18() -> Unit raise {
   let t50 = @simp.asm_rewrite_tac(
     @list.List([@sets.union_subset(), @sets.subset_union()]),
   )
-  let t47 = @parser.parse_term("s UNION t:A->bool")
-  let t48 = @parser.parse_term("t:A->bool")
+  let t47 = @term_syntax.parse_term("UNION((s : (A) -> Bool), (t : (A) -> Bool))")
+  let t48 = @term_syntax.parse_term("(t : (A) -> Bool)")
   let t49 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t48, t47]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t48, t47]),
       matroid_span_subset_eq(),
     ),
   )
@@ -717,7 +717,7 @@ fn step_19() -> Unit raise {
   let t54 = @tactics.then_tac(
     @simp.once_rewrite_tac(
       @list.List([
-        @sets.set_rule(@parser.parse_term("x INSERT s = {x} UNION s")),
+        @sets.set_rule(@term_syntax.parse_term("INSERT((x : _), (s : (_) -> Bool)) == UNION({x}, s)")),
       ]),
     ),
     t53,
@@ -842,7 +842,7 @@ fn step_22() -> Unit raise {
     @tactics.match_mp_tac(t79(x80))
   })
   let t77 = @drule.match_mp(
-    @sets.set_rule(@parser.parse_term("x IN s ==> s SUBSET t ==> x IN t")),
+    @sets.set_rule(@term_syntax.parse_term("IN((x : _), (s : (_) -> Bool)) → SUBSET(s, (t : (_) -> Bool)) → IN(x, t)")),
   )
   let t82 = @list.List([
     @tactics.first_x_assum(fn(
@@ -873,18 +873,18 @@ fn step_22() -> Unit raise {
   let t76 = @simp.asm_rewrite_tac(
     @list.List([@sets.finite_union(), @sets.union_subset()]),
   )
-  let t75 = @tactics.exists_tac(@parser.parse_term("t UNION u:A->bool"))
-  let t74 = @tactics.x_gen_tac(@parser.parse_term("u:A->bool"))
+  let t75 = @tactics.exists_tac(@term_syntax.parse_term("UNION((t : (A) -> Bool), (u : (A) -> Bool))"))
+  let t74 = @tactics.x_gen_tac(@term_syntax.parse_term("(u : (A) -> Bool)"))
   let t73 = @simp.asm_rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
-  let t70 = @parser.parse_term("x:A")
-  let t71 = @parser.parse_term("s:A->bool")
+  let t70 = @term_syntax.parse_term("(x : A)")
+  let t71 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t72 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t71, t70]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t71, t70]),
       matroid_span_finitary(),
     ),
   )
-  let t69 = @tactics.x_gen_tac(@parser.parse_term("t:A->bool"))
+  let t69 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : (A) -> Bool)"))
   let t68 = @simp.asm_rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
   let t67 = @tactics.disch_then(
     @tactics.conjuncts_then2(
@@ -937,10 +937,10 @@ fn step_22() -> Unit raise {
       @tactics.strip_assume_tac,
     ),
   )
-  let t62 = @parser.parse_term("k:A->bool")
+  let t62 = @term_syntax.parse_term("(k : (A) -> Bool)")
   let t63 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("x:A"), t62]),
+    @list.List([@term_syntax.parse_term("(x : A)"), t62]),
   )
   let t61 = @list.List([
     @meson.meson_tac(@list.List([@sets.finite_empty(), @sets.empty_subset()])),
@@ -1059,7 +1059,7 @@ fn step_23() -> Unit raise {
     t106,
   ])
   let t105 = @simp.rewrite_tac(@list.List([]))
-  let t101 = @parser.parse_term("\\s. s SUBSET u /\\ (x:A) IN matroid_span m s")
+  let t101 = @term_syntax.parse_term("(s : (A) -> Bool) => SUBSET(s, (u : (A) -> Bool)) && IN((x : A), matroid_span((m : Matroid[A]), s))")
   let t104 = @tactics.disch_then(fn(
     x103 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1199,16 +1199,16 @@ fn step_23() -> Unit raise {
     })(t94(x95))
   })
   let t90 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("u:A->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(u : (A) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
   let t89 = @simp.asm_rewrite_tac(@list.List([]))
-  let t86 = @parser.parse_term("x:A")
-  let t87 = @parser.parse_term("s:A->bool")
+  let t86 = @term_syntax.parse_term("(x : A)")
+  let t87 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t88 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t87, t86]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t87, t86]),
       matroid_span_finitary(),
     ),
   )
@@ -1589,7 +1589,7 @@ fn step_36() -> Unit raise {
   )
   matroid_independent_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m:A matroid. matroid_independent m {}"),
+      @term_syntax.parse_term("∀ m : Matroid[A], matroid_independent(m, {})"),
       t122,
     ),
   )
@@ -1610,15 +1610,15 @@ pub fn matroid_independent_empty() -> @kernel.Thm {
 /// MATROID_INDEPENDENT_MONO
 fn step_37() -> Unit raise {
   let t136 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t133 = @parser.parse_term("t DELETE (x:A)")
-  let t134 = @parser.parse_term("s DELETE (x:A)")
+  let t133 = @term_syntax.parse_term("DELETE((t : (A) -> Bool), (x : A))")
+  let t134 = @term_syntax.parse_term("DELETE((s : (A) -> Bool), (x : A))")
   let t135 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t134, t133]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t134, t133]),
       matroid_span_mono(),
     ),
   )
-  let t129 = @parser.parse_term("x:A")
+  let t129 = @term_syntax.parse_term("(x : A)")
   let t132 = @tactics.first_x_assum(fn(
     x131 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1687,7 +1687,7 @@ fn step_37() -> Unit raise {
       }
     })(((x130 : @kernel.Thm) => @bool.spec(t129, x130))(x131))
   })
-  let t125 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t125 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t124 = @list.List([
     @tactics.asm_tac(@sets.set_tac)(@list.List([])),
     @tactics.all_tac,
@@ -1747,7 +1747,7 @@ fn step_38() -> Unit raise {
   let t173 = @simp.asm_rewrite_tac(
     @list.List([@sets.in_insert(), @class.contrapos_thm()]),
   )
-  let t167 = @parser.parse_term("x:A")
+  let t167 = @term_syntax.parse_term("(x : A)")
   let t171 = @tactics.disch_then(fn(
     x170 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1846,7 +1846,7 @@ fn step_38() -> Unit raise {
     ),
     t171,
   ])
-  let t159 = @parser.parse_term("(x:A) INSERT t")
+  let t159 = @term_syntax.parse_term("INSERT((x : A), (t : (A) -> Bool))")
   let t162 = @tactics.first_x_assum(fn(
     x161 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2013,19 +2013,19 @@ fn step_38() -> Unit raise {
       ),
     ),
   )
-  let t148 = @tactics.x_gen_tac(@parser.parse_term("t:A->bool"))
+  let t148 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : (A) -> Bool)"))
   let t146 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
   let t147 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t146])
-  let t143 = @parser.parse_term("x:A")
-  let t144 = @parser.parse_term("s DELETE (x:A)")
+  let t143 = @term_syntax.parse_term("(x : A)")
+  let t144 = @term_syntax.parse_term("DELETE((s : (A) -> Bool), (x : A))")
   let t145 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t144, t143]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t144, t143]),
       matroid_span_finitary(),
     ),
   )
   let t142 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t141 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t141 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t140 = @simp.asm_rewrite_tac(@list.List([]))
   let t138 = @tactics.then_tac(
     @simp.asm_rewrite_tac(@list.List([matroid_independent()])),
@@ -2172,15 +2172,15 @@ fn step_40() -> Unit raise {
   let t209 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t208 = @simp.asm_simp_tac(
     @list.List([
-      @sets.set_rule(@parser.parse_term("b IN s ==> b INSERT (s DELETE b) = s")),
+      @sets.set_rule(@term_syntax.parse_term("IN((b : _), (s : (_) -> Bool)) → INSERT(b, DELETE(s, b)) == s")),
     ]),
   )
-  let t204 = @parser.parse_term("b:A")
-  let t205 = @parser.parse_term("a:A")
-  let t206 = @parser.parse_term("s DELETE (b:A)")
+  let t204 = @term_syntax.parse_term("(b : A)")
+  let t205 = @term_syntax.parse_term("(a : A)")
+  let t206 = @term_syntax.parse_term("DELETE((s : (A) -> Bool), (b : A))")
   let t207 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t206, t205, t204]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t206, t205, t204]),
       matroid_span_exchange(),
     ),
   )
@@ -2196,11 +2196,11 @@ fn step_40() -> Unit raise {
   let t202 = @simp.asm_simp_tac(
     @list.List([
       @sets.set_rule(
-        @parser.parse_term("~(a IN s) ==> (a INSERT s) DELETE a = s"),
+        @term_syntax.parse_term("!IN((a : _), (s : (_) -> Bool)) → DELETE(INSERT(a, s), a) == s"),
       ),
     ]),
   )
-  let t201 = @class.asm_cases_tac(@parser.parse_term("b:A = a"))
+  let t201 = @class.asm_cases_tac(@term_syntax.parse_term("(b : A) == (a : A)"))
   let t199 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t198 = @tactics.match_mp_tac(matroid_span_mono())
   let t200 = @list.List([
@@ -2208,14 +2208,14 @@ fn step_40() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.match_mp_tac(
-          @sets.set_rule(@parser.parse_term("s SUBSET t ==> a IN s ==> a IN t")),
+          @sets.set_rule(@term_syntax.parse_term("SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) → IN((a : _), s) → IN(a, t)")),
         ),
         t198,
       ),
       t199,
     ),
   ])
-  let t197 = @tactics.x_gen_tac(@parser.parse_term("b:A"))
+  let t197 = @tactics.x_gen_tac(@term_syntax.parse_term("(b : A)"))
   let t196 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
@@ -2226,23 +2226,23 @@ fn step_40() -> Unit raise {
   let t195 = @simp.rewrite_tac(
     @list.List([
       @class.taut(
-        @parser.parse_term("(~p /\\ q <=> q' /\\ ~p) <=> ~p ==> (q <=> q')"),
+        @term_syntax.parse_term("((!(p : Bool) && (q : Bool)) == ((q' : Bool) && !p)) == (!p → q == q')"),
       ),
     ]),
   )
   let t194 = @simp.asm_simp_tac(
     @list.List([
       @sets.set_rule(
-        @parser.parse_term("~(a IN s) ==> (a INSERT s) DELETE a = s"),
+        @term_syntax.parse_term("!IN((a : _), (s : (_) -> Bool)) → DELETE(INSERT(a, s), a) == s"),
       ),
     ]),
   )
   let t193 = @simp.asm_rewrite_tac(@list.List([]))
   let t192 = @class.asm_cases_tac(
-    @parser.parse_term("(s:A->bool) SUBSET matroid_set m"),
+    @term_syntax.parse_term("SUBSET((s : (A) -> Bool), matroid_set((m : Matroid[A])))"),
   )
   let t191 = @simp.asm_rewrite_tac(@list.List([]))
-  let t190 = @class.asm_cases_tac(@parser.parse_term("(a:A) IN matroid_set m"))
+  let t190 = @class.asm_cases_tac(@term_syntax.parse_term("IN((a : A), matroid_set((m : Matroid[A])))"))
   let t189 = @simp.rewrite_tac(
     @list.List([
       matroid_independent(),
@@ -2251,7 +2251,7 @@ fn step_40() -> Unit raise {
     ]),
   )
   let t188 = @simp.asm_simp_tac(
-    @list.List([@sets.set_rule(@parser.parse_term("a IN s ==> a INSERT s = s"))]),
+    @list.List([@sets.set_rule(@term_syntax.parse_term("IN((a : _), (s : (_) -> Bool)) → INSERT(a, s) == s"))]),
   )
   let t210 = @tactics.then_tac(
     @tactics.then_tac(
@@ -2344,15 +2344,15 @@ pub fn matroid_independent_insert() -> @kernel.Thm {
 /// MATROID_SPAN_PSUBSET_INDEPENDENT
 fn step_41() -> Unit raise {
   let t241 = @tactics.asm_tac(@sets.set_tac)(@list.List([matroid_span_inc()]))
-  let t238 = @parser.parse_term("t DELETE (x:A)")
-  let t239 = @parser.parse_term("s:A->bool")
+  let t238 = @term_syntax.parse_term("DELETE((t : (A) -> Bool), (x : A))")
+  let t239 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t240 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("m:A matroid"), t239, t238]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t239, t238]),
       matroid_span_mono(),
     ),
   )
-  let t237 = @tactics.exists_tac(@parser.parse_term("(x:A)"))
+  let t237 = @tactics.exists_tac(@term_syntax.parse_term("(x : A)"))
   let t236 = @simp.asm_simp_tac(
     @list.List([@sets.psubset_alt(), matroid_span_mono()]),
   )
@@ -2364,7 +2364,7 @@ fn step_41() -> Unit raise {
     },
     @list.List([matroid_independent()]),
   )
-  let t228 = @parser.parse_term("x:A")
+  let t228 = @term_syntax.parse_term("(x : A)")
   let t233 = @tactics.conjuncts_then2(
     fn(
       x222 : @kernel.Thm,
@@ -2552,7 +2552,7 @@ fn step_41() -> Unit raise {
           s219(x220)
         }
       },
-      @tactics.x_choose_then(@parser.parse_term("x:A"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(x : A)"))(
         @tactics.strip_assume_tac,
       ),
     ),
@@ -2749,19 +2749,19 @@ fn step_42() -> Unit raise {
       }
     })(t252(x253))
   })
-  let t246 = @parser.parse_term("s:A->bool")
-  let t247 = @parser.parse_term("t:A->bool")
+  let t246 = @term_syntax.parse_term("(s : (A) -> Bool)")
+  let t247 = @term_syntax.parse_term("(t : (A) -> Bool)")
   let t248 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t247, t246]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t247, t246]),
       subset_matroid_span(),
     ),
   )
-  let t243 = @parser.parse_term("t:A->bool")
-  let t244 = @parser.parse_term("s:A->bool")
+  let t243 = @term_syntax.parse_term("(t : (A) -> Bool)")
+  let t244 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t245 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t244, t243]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t244, t243]),
       matroid_span_psubset_independent(),
     ),
   )
@@ -2800,15 +2800,15 @@ pub fn matroid_span_psubset_explicit() -> @kernel.Thm {
 /// MATROID_SPANNING_SUBSET_INDEPENDENT
 fn step_43() -> Unit raise {
   let t280 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t277 = @parser.parse_term("s DELETE (a:A)")
-  let t278 = @parser.parse_term("t:A->bool")
+  let t277 = @term_syntax.parse_term("DELETE((s : (A) -> Bool), (a : A))")
+  let t278 = @term_syntax.parse_term("(t : (A) -> Bool)")
   let t279 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t278, t277]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t278, t277]),
       matroid_span_mono(),
     ),
   )
-  let t273 = @parser.parse_term("a:A")
+  let t273 = @term_syntax.parse_term("(a : A)")
   let t276 = @tactics.disch_then(
     @tactics.conjuncts_then2(
       fn(
@@ -3003,7 +3003,7 @@ fn step_43() -> Unit raise {
       }
     })(t264(x265))
   })
-  let t259 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
+  let t259 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
   let t258 = @simp.rewrite_tac(@list.List([@sets.subset()]))
   let t257 = @tactics.repeat_tac(@tactics.strip_tac)
   let t281 = @tactics.then_tac(
@@ -3065,14 +3065,14 @@ fn step_44() -> Unit raise {
     ]),
   )
   let t286 = @tactics.match_mp_tac(
-    @sets.set_rule(@parser.parse_term("s SUBSET t ==> ~(t PSUBSET s)")),
+    @sets.set_rule(@term_syntax.parse_term("SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) → !PSUBSET(t, s)")),
   )
   let t285 = @simp.asm_rewrite_tac(@list.List([]))
-  let t282 = @parser.parse_term("t:A->bool")
-  let t283 = @parser.parse_term("s:A->bool")
+  let t282 = @term_syntax.parse_term("(t : (A) -> Bool)")
+  let t283 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t284 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t283, t282]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t283, t282]),
       matroid_span_psubset_independent(),
     ),
   )
@@ -3115,11 +3115,11 @@ fn step_45() -> Unit raise {
   )
   let t308 = @simp.asm_rewrite_tac(
     @list.List([
-      @sets.set_rule(@parser.parse_term("s PSUBSET x INSERT s <=> ~(x IN s)")),
+      @sets.set_rule(@term_syntax.parse_term("PSUBSET((s : (_) -> Bool), INSERT((x : _), s)) == !IN(x, s)")),
     ]),
   )
   let t307 = @simp.asm_rewrite_tac(@list.List([matroid_independent_insert()]))
-  let t303 = @parser.parse_term("(x:A) INSERT s")
+  let t303 = @term_syntax.parse_term("INSERT((x : A), (s : (A) -> Bool))")
   let t306 = @tactics.first_x_assum(fn(
     x305 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3188,7 +3188,7 @@ fn step_45() -> Unit raise {
       }
     })(((x304 : @kernel.Thm) => @bool.spec(t303, x304))(x305))
   })
-  let t299 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t299 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t298 = @simp.rewrite_tac(@list.List([@sets.subset()]))
   let t297 = @simp.asm_simp_tac(@list.List([subset_matroid_span()]))
   let t296 = @simp.asm_simp_tac(@list.List([matroid_span_mono()]))
@@ -3469,7 +3469,7 @@ fn step_47() -> Unit raise {
   let t342 = @simp.rewrite_tac(
     @list.List([matroid_spanning(), @class.not_imp()]),
   )
-  let t338 = @parser.parse_term("s DELETE (x:A)")
+  let t338 = @term_syntax.parse_term("DELETE((s : (A) -> Bool), (x : A))")
   let t341 = @tactics.first_x_assum(fn(
     x340 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3539,7 +3539,7 @@ fn step_47() -> Unit raise {
     })(((x339 : @kernel.Thm) => @bool.spec(t338, x339))(x340))
   })
   let t334 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t333 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t333 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t332 = @simp.asm_rewrite_tac(@list.List([matroid_independent()]))
   let t329 = @drule.match_mp(matroid_spanning_imp_subset())
   let t331 = @tactics.first_assum(fn(
@@ -3676,15 +3676,15 @@ pub fn matroid_basis_eq_minimal_spanning() -> @kernel.Thm {
 /// MATROID_INDEPENDENT_CHAIN
 fn step_48() -> Unit raise {
   let t354 = @meson.asm_meson_tac(@list.List([matroid_independent_mono()]))
-  let t352 = @parser.parse_term("s:A->bool")
+  let t352 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t353 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("c:(A->bool)->bool"), t352]),
+      @list.List([@term_syntax.parse_term("(c : ((A) -> Bool) -> Bool)"), t352]),
       @sets.finite_subset_unions_chain(),
     ),
   )
   let t350 = @tactics.then_tac(
-    @tactics.x_gen_tac(@parser.parse_term("s:A->bool")),
+    @tactics.x_gen_tac(@term_syntax.parse_term("(s : (A) -> Bool)")),
     @tactics.strip_tac,
   )
   let t349 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
@@ -3703,7 +3703,7 @@ fn step_48() -> Unit raise {
   let t347 = @simp.asm_rewrite_tac(
     @list.List([@sets.unions_0(), matroid_independent_empty()]),
   )
-  let t346 = @class.asm_cases_tac(@parser.parse_term("c:(A->bool)->bool = {}"))
+  let t346 = @class.asm_cases_tac(@term_syntax.parse_term("(c : ((A) -> Bool) -> Bool) == {}"))
   let t355 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.thenl(
@@ -3748,15 +3748,15 @@ pub fn matroid_independent_chain() -> @kernel.Thm {
 /// MATROID_SPAN_CHAIN
 fn step_49() -> Unit raise {
   let t373 = @tactics.asm_tac(@sets.set_tac)(@list.List([matroid_span_mono()]))
-  let t371 = @parser.parse_term("t:A->bool")
+  let t371 = @term_syntax.parse_term("(t : (A) -> Bool)")
   let t372 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("c:(A->bool)->bool"), t371]),
+      @list.List([@term_syntax.parse_term("(c : ((A) -> Bool) -> Bool)"), t371]),
       @sets.finite_subset_unions_chain(),
     ),
   )
   let t370 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("t:A->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(t : (A) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -3849,7 +3849,7 @@ fn step_49() -> Unit raise {
     ),
     t360,
   )
-  let t357 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
+  let t357 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
   let t362 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.subset()])), t357),
@@ -3911,7 +3911,7 @@ fn step_50() -> Unit raise {
   ])
   let t406 = @simp.asm_rewrite_tac(@list.List([]))
   let t405 = @simp.asm_rewrite_tac(@list.List([matroid_independent_insert()]))
-  let t401 = @parser.parse_term("(x:A) INSERT b")
+  let t401 = @term_syntax.parse_term("INSERT((x : A), (b : (A) -> Bool))")
   let t404 = @tactics.first_x_assum(fn(
     x403 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3980,7 +3980,7 @@ fn step_50() -> Unit raise {
       }
     })(((x402 : @kernel.Thm) => @bool.spec(t401, x402))(x403))
   })
-  let t397 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t397 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t409 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -4005,7 +4005,7 @@ fn step_50() -> Unit raise {
   )
   let t396 = @simp.asm_simp_tac(@list.List([matroid_span_superset()]))
   let t395 = @simp.asm_rewrite_tac(@list.List([@sets.union_subset()]))
-  let t394 = @parser.parse_term("s UNION t:A->bool")
+  let t394 = @term_syntax.parse_term("UNION((s : (A) -> Bool), (t : (A) -> Bool))")
   let t410 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(@tactics.trans_tac(@sets.subset_trans())(t394), t395),
@@ -4092,7 +4092,7 @@ fn step_50() -> Unit raise {
     })(t388(x389))
   })
   let t384 = @simp.asm_rewrite_tac(@list.List([]))
-  let t381 = @tactics.x_gen_tac(@parser.parse_term("b:A->bool"))
+  let t381 = @tactics.x_gen_tac(@term_syntax.parse_term("(b : (A) -> Bool)"))
   let t382 = @tactics.then_tac(
     @tactics.match_mp_tac(@theorems.mono_exists()),
     t381,
@@ -4101,7 +4101,7 @@ fn step_50() -> Unit raise {
   let t379 = @simp.asm_simp_tac(
     @list.List([matroid_independent_chain(), @sets.union_subset()]),
   )
-  let t378 = @tactics.x_gen_tac(@parser.parse_term("c:(A->bool)->bool"))
+  let t378 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : ((A) -> Bool) -> Bool)"))
   let t377 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t383 = @list.List([
     @tactics.then_tac(
@@ -4112,7 +4112,7 @@ fn step_50() -> Unit raise {
               @tactics.conj_tac,
               @list.List([
                 @tactics.then_tac(
-                  @tactics.exists_tac(@parser.parse_term("s:A->bool")),
+                  @tactics.exists_tac(@term_syntax.parse_term("(s : (A) -> Bool)")),
                   t377,
                 ),
                 @tactics.all_tac,
@@ -4199,11 +4199,11 @@ pub fn matroid_intermediate_span() -> @kernel.Thm {
 /// MATROID_INTERMEDIATE_BASIS
 fn step_51() -> Unit raise {
   let t416 = @meson.asm_meson_tac(@list.List([matroid_independent()]))
-  let t413 = @parser.parse_term("t:A->bool")
-  let t414 = @parser.parse_term("s:A->bool")
+  let t413 = @term_syntax.parse_term("(t : (A) -> Bool)")
+  let t414 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t415 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t414, t413]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t414, t413]),
       matroid_intermediate_span(),
     ),
   )
@@ -4244,11 +4244,11 @@ pub fn matroid_intermediate_basis() -> @kernel.Thm {
 fn step_52() -> Unit raise {
   let t422 = @meson.meson_tac(@list.List([]))
   let t421 = @simp.asm_rewrite_tac(@list.List([matroid_spanning_set()]))
-  let t418 = @parser.parse_term("matroid_set m:A->bool")
-  let t419 = @parser.parse_term("s:A->bool")
+  let t418 = @term_syntax.parse_term("matroid_set((m : Matroid[A]))")
+  let t419 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t420 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t419, t418]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t419, t418]),
       matroid_intermediate_basis(),
     ),
   )
@@ -4291,7 +4291,7 @@ fn step_53() -> Unit raise {
   )
   matroid_basis_exists_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(m:A matroid). ?b. matroid_basis m b"),
+      @term_syntax.parse_term("∀ m : Matroid[A], ∃ b : (A) -> Bool, matroid_basis(m, b)"),
       t424,
     ),
   )
@@ -4315,11 +4315,11 @@ fn step_54() -> Unit raise {
   let t428 = @simp.asm_rewrite_tac(
     @list.List([matroid_independent_empty(), @sets.union_empty()]),
   )
-  let t425 = @parser.parse_term("s:A->bool")
-  let t426 = @parser.parse_term("{}:A->bool")
+  let t425 = @term_syntax.parse_term("(s : (A) -> Bool)")
+  let t426 = @term_syntax.parse_term("({} : (A) -> Bool)")
   let t427 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t426, t425]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t426, t425]),
       matroid_intermediate_basis(),
     ),
   )
@@ -4363,16 +4363,16 @@ fn step_55() -> Unit raise {
       @sets.union_empty(),
     ]),
   )
-  let t439 = @parser.parse_term("s:A->bool")
-  let t440 = @parser.parse_term("{}:A->bool")
+  let t439 = @term_syntax.parse_term("(s : (A) -> Bool)")
+  let t440 = @term_syntax.parse_term("({} : (A) -> Bool)")
   let t441 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t440, t439]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t440, t439]),
       matroid_intermediate_span(),
     ),
   )
   let t438 = @simp.asm_rewrite_tac(@list.List([]))
-  let t437 = @class.asm_cases_tac(@parser.parse_term("(x:A) IN s"))
+  let t437 = @class.asm_cases_tac(@term_syntax.parse_term("IN((x : A), (s : (A) -> Bool))"))
   let t436 = @list.List([
     @tactics.disch_tac,
     @meson.asm_meson_tac(
@@ -4386,13 +4386,13 @@ fn step_55() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("~(if p then T else ~x) <=> ~p /\\ x"),
+        @term_syntax.parse_term("!(if (p : Bool) { true } else { !(x : Bool) }) == (!p && x)"),
       ),
     ]),
   )
   let t433 = @simp.once_rewrite_tac(
     @list.List([
-      @class.taut(@parser.parse_term("p /\\ q /\\ r <=> ~(q ==> ~(p /\\ r))")),
+      @class.taut(@term_syntax.parse_term("((p : Bool) && (q : Bool) && (r : Bool)) == !(q → !(p && r))")),
     ]),
   )
   let t432 = @simp.asm_rewrite_tac(@list.List([@sets.insert_subset()]))
@@ -4476,7 +4476,7 @@ fn step_56() -> Unit raise {
   )
   let t522 = @simp.asm_simp_tac(
     @list.List([
-      @sets.set_rule(@parser.parse_term("y IN v ==> y INSERT (v DELETE y) = v")),
+      @sets.set_rule(@term_syntax.parse_term("IN((y : _), (v : (_) -> Bool)) → INSERT(y, DELETE(v, y)) == v")),
     ]),
   )
   let t521 = @tactics.match_mp_tac(matroid_span_exchange())
@@ -4488,7 +4488,7 @@ fn step_56() -> Unit raise {
     @simp.rewrite_tac(@list.List([@sets.sing_subset()])),
     t519,
   ])
-  let t516 = @parser.parse_term("matroid_span m ((x:A) INSERT (v DELETE y))")
+  let t516 = @term_syntax.parse_term("matroid_span((m : Matroid[A]), INSERT((x : A), DELETE((v : (A) -> Bool), (y : A))))")
   let t517 = @tactics.trans_tac(@sets.subset_trans())(t516)
   let t514 = @tactics.asm_tac(@sets.set_tac)(
     @list.List([matroid_span_subset()]),
@@ -4512,7 +4512,7 @@ fn step_56() -> Unit raise {
     @simp.asm_simp_tac(@list.List([matroid_span_superset()])),
     @tactics.all_tac,
   ])
-  let t505 = @parser.parse_term("matroid_span (m:A matroid) (t DIFF u UNION s)")
+  let t505 = @term_syntax.parse_term("matroid_span((m : Matroid[A]), UNION(DIFF((t : (A) -> Bool), (u : (A) -> Bool)), (s : (A) -> Bool)))")
   let t506 = @tactics.trans_tac(@sets.subset_trans())(t505)
   let t504 = @list.List([
     @tactics.asm_tac(@sets.set_tac)(@list.List([matroid_span_subset()])),
@@ -4532,7 +4532,7 @@ fn step_56() -> Unit raise {
       @sets.finite_insert(),
     ]),
   )
-  let t499 = @simp.abbrev_tac(@parser.parse_term("n = CARD(s:A->bool)"))
+  let t499 = @simp.abbrev_tac(@term_syntax.parse_term("(n : Num) == CARD((s : (A) -> Bool))"))
   let t496 = @simp.gen_rewrite_rule(
     fn(
       x495 : (@kernel.Term) -> @kernel.Thm raise,
@@ -4564,8 +4564,8 @@ fn step_56() -> Unit raise {
   ) raise) raise {
     @tactics.strip_assume_tac(t496(x497))
   })
-  let t494 = @tactics.exists_tac(@parser.parse_term("(y:A) INSERT u"))
-  let t493 = @tactics.x_gen_tac(@parser.parse_term("y:A"))
+  let t494 = @tactics.exists_tac(@term_syntax.parse_term("INSERT((y : A), (u : (A) -> Bool))"))
+  let t493 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : A)"))
   let t491 = @simp.rewrite_tac(
     @list.List([@sets.in_diff(), @theorems.left_imp_exists_thm()]),
   )
@@ -4575,7 +4575,7 @@ fn step_56() -> Unit raise {
   let t489 = @simp.asm_simp_tac(
     @list.List([
       @sets.set_rule(
-        @parser.parse_term("~(x IN s) ==> (x INSERT s) DELETE x = s"),
+        @term_syntax.parse_term("!IN((x : _), (s : (_) -> Bool)) → DELETE(INSERT(x, s), x) == s"),
       ),
     ]),
   )
@@ -4746,7 +4746,7 @@ fn step_56() -> Unit raise {
   ) raise) raise {
     t479(t478(x480))
   })
-  let t474 = @tactics.x_gen_tac(@parser.parse_term("v:A->bool"))
+  let t474 = @tactics.x_gen_tac(@term_syntax.parse_term("(v : (A) -> Bool)"))
   let t472 = @simp.asm_rewrite_tac(
     @list.List([@theorems.left_imp_exists_thm()]),
   )
@@ -4755,16 +4755,16 @@ fn step_56() -> Unit raise {
     t472,
   ])
   let t471 = @simp.asm_rewrite_tac(@list.List([]))
-  let t468 = @parser.parse_term("x:A")
-  let t469 = @parser.parse_term("t DIFF u UNION s:A->bool")
+  let t468 = @term_syntax.parse_term("(x : A)")
+  let t469 = @term_syntax.parse_term("UNION(DIFF((t : (A) -> Bool), (u : (A) -> Bool)), (s : (A) -> Bool))")
   let t470 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t469, t468]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t469, t468]),
       matroid_span_finitary_minimal(),
     ),
   )
   let t466 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("u:A->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(u : (A) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -4772,7 +4772,7 @@ fn step_56() -> Unit raise {
     @meson.asm_meson_tac(
       @list.List([
         matroid_independent_mono(),
-        @sets.set_rule(@parser.parse_term("s SUBSET x INSERT s")),
+        @sets.set_rule(@term_syntax.parse_term("SUBSET((s : (_) -> Bool), INSERT((x : _), s))")),
       ]),
     ),
     t466,
@@ -4860,11 +4860,11 @@ fn step_56() -> Unit raise {
   })
   let t456 = @simp.rewrite_tac(@list.List([@sets.insert_subset()]))
   let t453 = @simp.rewrite_tac(@list.List([@theorems.imp_imp()]))
-  let t452 = @parser.parse_term("s:A->bool")
+  let t452 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t454 = @tactics.then_tac(
     @tactics.map_every(
       @tactics.x_gen_tac,
-      @list.List([@parser.parse_term("x:A"), t452]),
+      @list.List([@term_syntax.parse_term("(x : A)"), t452]),
     ),
     t453,
   )
@@ -4872,7 +4872,7 @@ fn step_56() -> Unit raise {
   let t450 = @simp.rewrite_tac(
     @list.List([@sets.has_size(), @sets.finite_empty(), @sets.empty_subset()]),
   )
-  let t449 = @tactics.exists_tac(@parser.parse_term("{}:A->bool"))
+  let t449 = @tactics.exists_tac(@term_syntax.parse_term("({} : (A) -> Bool)"))
   let t455 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -5086,7 +5086,7 @@ fn step_57() -> Unit raise {
     @list.List([
       @sets.finite_subset(),
       @sets.card_subset(),
-      @int.arith_rule(@parser.parse_term("m <= n ==> ~(n + 1 = m)")),
+      @int.arith_rule(@term_syntax.parse_term("(m : Num) <= (n : Num) → !(n + 1 == m)")),
     ]),
   )
   let t541 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
@@ -5099,17 +5099,17 @@ fn step_57() -> Unit raise {
   let t538 = @simp.asm_rewrite_tac(
     @list.List([@class.not_imp(), @sets.has_size()]),
   )
-  let t535 = @parser.parse_term("t:A->bool")
-  let t536 = @parser.parse_term("u:A->bool")
+  let t535 = @term_syntax.parse_term("(t : (A) -> Bool)")
+  let t536 = @term_syntax.parse_term("(u : (A) -> Bool)")
   let t537 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t536, t535]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t536, t535]),
       matroid_steinitz_exchange(),
     ),
   )
   let t532 = @drule.match_mp(@sets.choose_subset_strong())
   let t529 = @simp.rewrite_rule(@list.List([@sets.has_size()]))
-  let t530 = @tactics.x_choose_then(@parser.parse_term("u:A->bool"))(
+  let t530 = @tactics.x_choose_then(@term_syntax.parse_term("(u : (A) -> Bool)"))(
     @tactics.strip_assume_tac,
   )
   let t534 = @tactics.first_assum(fn(
@@ -5158,10 +5158,10 @@ fn step_57() -> Unit raise {
     })(t532(x533))
   })
   let t528 = @simp.rewrite_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("~(a <= b) <=> b + 1 <= a"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("!((a : Num) <= (b : Num)) == (b + 1 <= a)"))]),
   )
   let t527 = @simp.rewrite_tac(
-    @list.List([@class.taut(@parser.parse_term("p /\\ q <=> ~(p ==> ~q)"))]),
+    @list.List([@class.taut(@term_syntax.parse_term("((p : Bool) && (q : Bool)) == !(p → !q)"))]),
   )
   let t543 = @tactics.thenl(
     @tactics.then_tac(
@@ -5443,7 +5443,7 @@ fn step_62() -> Unit raise {
   )
   let t588 = @tactics.match_mp_tac(matroid_span_mono())
   let t585 = @drule.match_mp(
-    @sets.set_rule(@parser.parse_term("x IN t ==> t SUBSET s ==> x IN s")),
+    @sets.set_rule(@term_syntax.parse_term("IN((x : _), (t : (_) -> Bool)) → SUBSET(t, (s : (_) -> Bool)) → IN(x, s)")),
   )
   let t587 = @tactics.first_x_assum(fn(
     x586 : @kernel.Thm,
@@ -5469,7 +5469,7 @@ fn step_62() -> Unit raise {
     @tactics.match_mp_tac(t585(x586))
   })
   let t584 = @simp.asm_rewrite_tac(@list.List([]))
-  let t580 = @parser.parse_term("x:A")
+  let t580 = @term_syntax.parse_term("(x : A)")
   let t583 = @tactics.first_x_assum(fn(
     x582 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -5538,7 +5538,7 @@ fn step_62() -> Unit raise {
       }
     })(((x581 : @kernel.Thm) => @bool.spec(t580, x581))(x582))
   })
-  let t576 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t576 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t575 = @simp.rewrite_tac(@list.List([@sets.subset()]))
   let t574 = @list.List([
     @tactics.asm_tac(@sets.set_tac)(@list.List([matroid_independent()])),
@@ -5715,15 +5715,15 @@ fn step_62() -> Unit raise {
     ),
   )
   let t565 = @simp.asm_rewrite_tac(@list.List([]))
-  let t562 = @parser.parse_term("s:A->bool")
-  let t563 = @parser.parse_term("UNIONS {(k:A->A->bool) x | x IN t}")
+  let t562 = @term_syntax.parse_term("(s : (A) -> Bool)")
+  let t563 = @term_syntax.parse_term("UNIONS({(k : (A, A) -> Bool)((x : A)) | IN(x, (t : (A) -> Bool))})")
   let t564 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t563, t562]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t563, t562]),
       matroid_span_psubset_independent(),
     ),
   )
-  let t559 = @parser.parse_term("k:A->A->bool")
+  let t559 = @term_syntax.parse_term("(k : (A, A) -> Bool)")
   let t561 = @tactics.disch_then((x560 : @kernel.Thm) => {
     @tactics.x_choose_tac(t559, x560)
   })
@@ -5832,17 +5832,17 @@ fn step_62() -> Unit raise {
   let t615 = @meson.asm_meson_tac(@list.List([]))
   let t614 = @tactics.match_mp_tac(lemma)
   let t613 = @simp.asm_simp_tac(@list.List([@card.card_le_subset()]))
-  let t611 = @parser.parse_term("b:A->bool")
+  let t611 = @term_syntax.parse_term("(b : (A) -> Bool)")
   let t612 = @tactics.trans_tac(@card.card_le_trans())(t611)
-  let t610 = @tactics.x_gen_tac(@parser.parse_term("b:A->bool"))
+  let t610 = @tactics.x_gen_tac(@term_syntax.parse_term("(b : (A) -> Bool)"))
   let t609 = @simp.asm_rewrite_tac(
     @list.List([@theorems.left_imp_exists_thm()]),
   )
-  let t606 = @parser.parse_term("t:A->bool")
-  let t607 = @parser.parse_term("s:A->bool")
+  let t606 = @term_syntax.parse_term("(t : (A) -> Bool)")
+  let t607 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t608 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t607, t606]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t607, t606]),
       matroid_intermediate_span(),
     ),
   )
@@ -5858,7 +5858,7 @@ fn step_62() -> Unit raise {
     ),
     t604,
   ])
-  let t603 = @class.asm_cases_tac(@parser.parse_term("FINITE(t:A->bool)"))
+  let t603 = @class.asm_cases_tac(@term_syntax.parse_term("FINITE((t : (A) -> Bool))"))
   let t616 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -6047,7 +6047,7 @@ pub fn matroid_independent_spanning_finite() -> @kernel.Thm {
 fn step_67() -> Unit raise {
   let t660 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t659 = @simp.rewrite_tac(@list.List([matroid_dependent()]))
-  let t655 = @parser.parse_term("v:A->bool")
+  let t655 = @term_syntax.parse_term("(v : (A) -> Bool)")
   let t658 = @tactics.first_x_assum(fn(
     x657 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6116,7 +6116,7 @@ fn step_67() -> Unit raise {
       }
     })(((x656 : @kernel.Thm) => @bool.spec(t655, x656))(x657))
   })
-  let t651 = @tactics.x_gen_tac(@parser.parse_term("v:A->bool"))
+  let t651 = @tactics.x_gen_tac(@term_syntax.parse_term("(v : (A) -> Bool)"))
   let t650 = @tactics.repeat_tac(
     @tactics.thenl(
       @tactics.conj_tac,
@@ -6323,16 +6323,16 @@ fn step_67() -> Unit raise {
           s630(x631)
         }
       },
-      @tactics.x_choose_then(@parser.parse_term("u:A->bool"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(u : (A) -> Bool)"))(
         @tactics.strip_assume_tac,
       ),
     ),
   )
   let t628 = @simp.asm_rewrite_tac(@list.List([]))
-  let t626 = @parser.parse_term("s:A->bool")
+  let t626 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t627 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t626]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t626]),
       matroid_dependent_finitary(),
     ),
   )
@@ -6415,7 +6415,7 @@ fn step_68() -> Unit raise {
   let t694 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t693 = @simp.rewrite_tac(
     @list.List([
-      @sets.set_rule(@parser.parse_term("s DELETE a DELETE b = s DIFF {a,b}")),
+      @sets.set_rule(@term_syntax.parse_term("DELETE(DELETE((s : (_) -> Bool), (a : _)), (b : _)) == DIFF(s, {a, b})")),
     ]),
   )
   let t692 = @simp.asm_simp_tac(
@@ -6428,7 +6428,7 @@ fn step_68() -> Unit raise {
       ),
     ]),
   )
-  let t687 = @parser.parse_term("b:A")
+  let t687 = @term_syntax.parse_term("(b : A)")
   let t691 = @tactics.disch_then(fn(
     x690 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6522,10 +6522,10 @@ fn step_68() -> Unit raise {
   let t683 = @simp.asm_rewrite_tac(
     @list.List([
       matroid_independent(),
-      @sets.set_rule(@parser.parse_term("s DELETE a PSUBSET s <=> a IN s")),
+      @sets.set_rule(@term_syntax.parse_term("PSUBSET(DELETE((s : (_) -> Bool), (a : _)), s) == IN(a, s)")),
     ]),
   )
-  let t679 = @parser.parse_term("s DELETE (a:A)")
+  let t679 = @term_syntax.parse_term("DELETE((s : (A) -> Bool), (a : A))")
   let t682 = @tactics.first_x_assum(fn(
     x681 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6594,30 +6594,30 @@ fn step_68() -> Unit raise {
       }
     })(((x680 : @kernel.Thm) => @bool.spec(t679, x680))(x681))
   })
-  let t672 = @parser.parse_term("b:A")
-  let t673 = @parser.parse_term("a:A")
-  let t674 = @parser.parse_term("s DIFF {a:A,b}")
+  let t672 = @term_syntax.parse_term("(b : A)")
+  let t673 = @term_syntax.parse_term("(a : A)")
+  let t674 = @term_syntax.parse_term("DIFF((s : (A) -> Bool), {(a : A), (b : A)})")
   let t675 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t674, t673, t672]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t674, t673, t672]),
       matroid_span_exchange(),
     ),
   )
   let t671 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
-  let t670 = @class.asm_cases_tac(@parser.parse_term("a:A = b"))
-  let t669 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
+  let t670 = @class.asm_cases_tac(@term_syntax.parse_term("(a : A) == (b : A)"))
+  let t669 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
   let t668 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("b:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(b : A)"))(@tactics.strip_assume_tac),
   )
   let t667 = @list.List([
     @tactics.all_tac,
     @tactics.asm_tac(@sets.set_tac)(@list.List([])),
   ])
   let t666 = @simp.asm_rewrite_tac(@list.List([@sets.not_in_empty()]))
-  let t665 = @class.asm_cases_tac(@parser.parse_term("s:A->bool = {}"))
+  let t665 = @class.asm_cases_tac(@term_syntax.parse_term("(s : (A) -> Bool) == {}"))
   let t664 = @simp.asm_rewrite_tac(@list.List([]))
   let t663 = @class.asm_cases_tac(
-    @parser.parse_term("(s:A->bool) SUBSET matroid_set m"),
+    @term_syntax.parse_term("SUBSET((s : (A) -> Bool), matroid_set((m : Matroid[A])))"),
   )
   let t662 = @simp.rewrite_tac(@list.List([matroid_dependent_v1()]))
   let t695 = @tactics.then_tac(
@@ -6853,7 +6853,7 @@ fn step_72() -> Unit raise {
   )
   matroid_subspace_set_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m:A matroid. matroid_subspace m (matroid_set m)"),
+      @term_syntax.parse_term("∀ m : Matroid[A], matroid_subspace(m, matroid_set(m))"),
       t705,
     ),
   )
@@ -7052,7 +7052,7 @@ fn step_75() -> Unit raise {
     ),
   )
   let t720 = @simp.asm_rewrite_tac(@list.List([]))
-  let t716 = @parser.parse_term("s:A->bool")
+  let t716 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t719 = @tactics.first_x_assum(fn(
     x718 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -7122,7 +7122,7 @@ fn step_75() -> Unit raise {
     })(((x717 : @kernel.Thm) => @bool.spec(t716, x717))(x718))
   })
   let t711 = @tactics.then_tac(
-    @tactics.x_gen_tac(@parser.parse_term("s:A->bool")),
+    @tactics.x_gen_tac(@term_syntax.parse_term("(s : (A) -> Bool)")),
     @tactics.strip_tac,
   )
   let t712 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t711])
@@ -7425,10 +7425,10 @@ fn step_84() -> Unit raise {
   ])
   let t763 = @tactics.repeat_tac(@tactics.strip_tac)
   let t762 = @simp.rewrite_tac(@list.List([@sets.inter_subset()]))
-  let t760 = @parser.parse_term("matroid_set m INTER s:A->bool")
+  let t760 = @term_syntax.parse_term("INTER(matroid_set((m : Matroid[A])), (s : (A) -> Bool))")
   let t761 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t760]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t760]),
       matroid_span_subset(),
     ),
   )
@@ -7523,7 +7523,7 @@ fn step_85() -> Unit raise {
   let t772 = @simp.simp_tac(
     @list.List([
       matroid_subspace(),
-      @sets.set_rule(@parser.parse_term("s SUBSET u ==> u INTER s = s")),
+      @sets.set_rule(@term_syntax.parse_term("SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) → INTER(u, s) == s")),
     ]),
   )
   let t773 = @tactics.then_tac(
@@ -7557,7 +7557,7 @@ fn step_86() -> Unit raise {
       submatroid(),
       matroid_span_span(),
       matroid_span_subset(),
-      @sets.set_rule(@parser.parse_term("t SUBSET s ==> s INTER t = t")),
+      @sets.set_rule(@term_syntax.parse_term("SUBSET((t : (_) -> Bool), (s : (_) -> Bool)) → INTER(s, t) == t")),
     ]),
   )
   submatroid_span_c.set(
@@ -7627,7 +7627,7 @@ fn step_88() -> Unit raise {
   )
   submatroid_set_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m:A matroid. submatroid m (matroid_set m) = m"),
+      @term_syntax.parse_term("∀ m : Matroid[A], submatroid(m, matroid_set(m)) == m"),
       t777,
     ),
   )
@@ -8041,14 +8041,14 @@ fn step_94() -> Unit raise {
     })(@equal.sym(x821))
   })
   let t817 = @simp.asm_simp_tac(@list.List([matroid_independent_imp_subset()]))
-  let t815 = @parser.parse_term("t:A->bool")
-  let t816 = @parser.parse_term("s:A->bool")
+  let t815 = @term_syntax.parse_term("(t : (A) -> Bool)")
+  let t816 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t829 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.mp_tac(
           @bool.ispecl(
-            @list.List([@parser.parse_term("m:A matroid"), t816, t815]),
+            @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t816, t815]),
             matroid_span_union_eq(),
           ),
         ),
@@ -8064,7 +8064,7 @@ fn step_94() -> Unit raise {
     @tactics.all_tac,
   ])
   let t812 = @simp.asm_rewrite_tac(@list.List([]))
-  let t809 = @tactics.x_gen_tac(@parser.parse_term("u:A->bool"))
+  let t809 = @tactics.x_gen_tac(@term_syntax.parse_term("(u : (A) -> Bool)"))
   let t810 = @tactics.then_tac(
     @tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_exists()), t809),
     @tactics.strip_tac,
@@ -8078,16 +8078,16 @@ fn step_94() -> Unit raise {
   let t808 = @simp.asm_simp_tac(
     @list.List([@sets.card_subset(), @sets.subset_union()]),
   )
-  let t805 = @parser.parse_term("s UNION t:A->bool")
-  let t806 = @parser.parse_term("b:A->bool")
+  let t805 = @term_syntax.parse_term("UNION((s : (A) -> Bool), (t : (A) -> Bool))")
+  let t806 = @term_syntax.parse_term("(b : (A) -> Bool)")
   let t807 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("CARD(t:A->bool)"), t806, t805]),
+      @list.List([@term_syntax.parse_term("CARD((t : (A) -> Bool))"), t806, t805]),
       @sets.choose_subset_between(),
     ),
   )
   let t804 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("b:A->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(b : (A) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -8100,11 +8100,11 @@ fn step_94() -> Unit raise {
       matroid_span_superset(),
     ]),
   )
-  let t800 = @parser.parse_term("t:A->bool")
-  let t801 = @parser.parse_term("s:A->bool")
+  let t800 = @term_syntax.parse_term("(t : (A) -> Bool)")
+  let t801 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t802 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("submatroid m (t:A->bool)"), t801, t800]),
+      @list.List([@term_syntax.parse_term("submatroid((m : Matroid[A]), (t : (A) -> Bool))"), t801, t800]),
       matroid_intermediate_basis(),
     ),
   )
@@ -8187,9 +8187,9 @@ fn step_95() -> Unit raise {
     @simp.rewrite_rule(@list.List([@sets.has_size()])),
   )
   let t839 = @simp.once_rewrite_tac(@list.List([@sets.union_comm()]))
-  let t838 = @tactics.exists_tac(@parser.parse_term("t DIFF u:A->bool"))
+  let t838 = @tactics.exists_tac(@term_syntax.parse_term("DIFF((t : (A) -> Bool), (u : (A) -> Bool))"))
   let t836 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("u:A->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(u : (A) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -8199,11 +8199,11 @@ fn step_95() -> Unit raise {
     ),
     t836,
   ])
-  let t833 = @parser.parse_term("t:A->bool")
-  let t834 = @parser.parse_term("s:A->bool")
+  let t833 = @term_syntax.parse_term("(t : (A) -> Bool)")
+  let t834 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t835 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:(A)matroid"), t834, t833]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t834, t833]),
       matroid_steinitz_exchange(),
     ),
   )
@@ -8744,11 +8744,11 @@ fn step_110() -> Unit raise {
   let t892 = @tactics.asm_tac(@sets.set_tac)(
     @list.List([matroid_span_subset(), matroid_span_superset()]),
   )
-  let t889 = @parser.parse_term("c:A->bool")
-  let t890 = @parser.parse_term("b:A->bool")
+  let t889 = @term_syntax.parse_term("(c : (A) -> Bool)")
+  let t890 = @term_syntax.parse_term("(b : (A) -> Bool)")
   let t891 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t890, t889]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t890, t889]),
       matroid_independent_card_le_span_finite(),
     ),
   )
@@ -8829,10 +8829,10 @@ fn step_110() -> Unit raise {
     @tactics.disch_tac,
   ])
   let t878 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")),
   )
   let t875 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("c:A->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(c : (A) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -8866,7 +8866,7 @@ fn step_110() -> Unit raise {
   let t870 = @simp.rewrite_tac(
     @list.List([
       @simp.once_rewrite_rule(
-        @list.List([@class.taut(@parser.parse_term("p /\\ q <=> ~(p ==> ~q)"))]),
+        @list.List([@class.taut(@term_syntax.parse_term("((p : Bool) && (q : Bool)) == !(p → !q)"))]),
       )(matroid_finite_dim()),
     ]),
   )
@@ -9093,7 +9093,7 @@ fn step_114() -> Unit raise {
   )
   matroid_finite_dim_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m:A matroid. matroid_finite_dim m {}"),
+      @term_syntax.parse_term("∀ m : Matroid[A], matroid_finite_dim(m, {})"),
       t900,
     ),
   )
@@ -9153,13 +9153,13 @@ fn step_116() -> Unit raise {
   let t908 = @simp.asm_rewrite_tac(
     @list.List([@sets.union_subset(), @sets.finite_union()]),
   )
-  let t907 = @tactics.exists_tac(@parser.parse_term("b UNION c:A->bool"))
-  let t905 = @tactics.x_choose_then(@parser.parse_term("c:A->bool"))(
+  let t907 = @tactics.exists_tac(@term_syntax.parse_term("UNION((b : (A) -> Bool), (c : (A) -> Bool))"))
+  let t905 = @tactics.x_choose_then(@term_syntax.parse_term("(c : (A) -> Bool)"))(
     @tactics.strip_assume_tac,
   )
   let t906 = @tactics.disch_then(
     @tactics.conjuncts_then2(
-      @tactics.x_choose_then(@parser.parse_term("b:A->bool"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(b : (A) -> Bool)"))(
         @tactics.strip_assume_tac,
       ),
       t905,
@@ -9227,7 +9227,7 @@ fn step_117() -> Unit raise {
     ]),
   )
   let t911 = @simp.once_rewrite_tac(
-    @list.List([@sets.set_rule(@parser.parse_term("a INSERT s = {a} UNION s"))]),
+    @list.List([@sets.set_rule(@term_syntax.parse_term("INSERT((a : _), (s : (_) -> Bool)) == UNION({a}, s)"))]),
   )
   let t913 = @tactics.then_tac(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t911),
@@ -9542,7 +9542,7 @@ fn step_123() -> Unit raise {
     t944,
   ])
   let t943 = @tactics.subgoal_then(
-    @parser.parse_term("(s:A->bool) SUBSET matroid_set m"),
+    @term_syntax.parse_term("SUBSET((s : (A) -> Bool), matroid_set((m : Matroid[A])))"),
     fn(
       x940 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -9590,7 +9590,7 @@ fn step_123() -> Unit raise {
       }
     },
   )
-  let t939 = @tactics.exists_tac(@parser.parse_term("b:A->bool"))
+  let t939 = @tactics.exists_tac(@term_syntax.parse_term("(b : (A) -> Bool)"))
   let t938 = @tactics.match_mp_tac(matroid_dimension_unique())
   let t937 = @simp.rewrite_tac(@list.List([matroid_dim()]))
   let t947 = @tactics.then_tac(
@@ -9706,7 +9706,7 @@ fn step_124() -> Unit raise {
     })(t954(x955))
   })
   let t950 = @simp.asm_rewrite_tac(@list.List([]))
-  let t949 = @tactics.exists_tac(@parser.parse_term("b:A->bool"))
+  let t949 = @tactics.exists_tac(@term_syntax.parse_term("(b : (A) -> Bool)"))
   let t948 = @tactics.match_mp_tac(matroid_dim_unique_alt())
   let t958 = @tactics.then_tac(
     @tactics.then_tac(
@@ -9836,7 +9836,7 @@ fn step_128() -> Unit raise {
   )
   let t965 = @simp.asm_rewrite_tac(@list.List([]))
   let t964 = @class.asm_cases_tac(
-    @parser.parse_term("(s:A->bool) SUBSET matroid_set m"),
+    @term_syntax.parse_term("SUBSET((s : (A) -> Bool), matroid_set((m : Matroid[A])))"),
   )
   let t963 = @simp.rewrite_tac(@list.List([matroid_finite_dim()]))
   let t968 = @tactics.then_tac(
@@ -9881,7 +9881,7 @@ fn step_129() -> Unit raise {
   )
   let t971 = @simp.asm_rewrite_tac(@list.List([]))
   let t970 = @class.asm_cases_tac(
-    @parser.parse_term("(s:A->bool) SUBSET matroid_set m"),
+    @term_syntax.parse_term("SUBSET((s : (A) -> Bool), matroid_set((m : Matroid[A])))"),
   )
   let t969 = @simp.rewrite_tac(
     @list.List([matroid_finite_dim_basis(), @sets.has_size()]),
@@ -9986,16 +9986,16 @@ fn step_132() -> Unit raise {
   let t989 = @simp.asm_rewrite_tac(
     @list.List([matroid_basis(), @sets.has_size()]),
   )
-  let t988 = @tactics.exists_tac(@parser.parse_term("c:A->bool"))
+  let t988 = @tactics.exists_tac(@term_syntax.parse_term("(c : (A) -> Bool)"))
   let t987 = @tactics.match_mp_tac(matroid_dimension_unique())
   let t985 = @meson.asm_meson_tac(
     @list.List([@sets.card_subset(), @arith.le_trans()]),
   )
   let t986 = @list.List([@tactics.match_mp_tac(@arith.eq_imp_le()), t985])
-  let t983 = @parser.parse_term("CARD(c:A->bool)")
+  let t983 = @term_syntax.parse_term("CARD((c : (A) -> Bool))")
   let t984 = @tactics.trans_tac(@arith.le_trans())(t983)
   let t982 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("c:A->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(c : (A) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -10151,11 +10151,11 @@ pub fn matroid_dimension_finite_le() -> @kernel.Thm {
 /// MATROID_DIM_LE
 fn step_134() -> Unit raise {
   let t1013 = @simp.asm_simp_tac(@list.List([matroid_span_superset()]))
-  let t1010 = @parser.parse_term("c:A->bool")
-  let t1011 = @parser.parse_term("s:A->bool")
+  let t1010 = @term_syntax.parse_term("(c : (A) -> Bool)")
+  let t1011 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t1012 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t1011, t1010]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t1011, t1010]),
       matroid_dim_eq_card_gen(),
     ),
   )
@@ -10163,16 +10163,16 @@ fn step_134() -> Unit raise {
     @tactics.asm_tac(@sets.set_tac)(@list.List([])),
     @tactics.strip_tac,
   ])
-  let t1006 = @parser.parse_term("b:A->bool")
-  let t1007 = @parser.parse_term("c:A->bool")
+  let t1006 = @term_syntax.parse_term("(b : (A) -> Bool)")
+  let t1007 = @term_syntax.parse_term("(c : (A) -> Bool)")
   let t1008 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t1007, t1006]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t1007, t1006]),
       matroid_independent_card_le_span_finite(),
     ),
   )
   let t1005 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("c:A->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(c : (A) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -10252,7 +10252,7 @@ fn step_134() -> Unit raise {
     t1003,
   ])
   let t997 = @tactics.subgoal_then(
-    @parser.parse_term("(s:A->bool) SUBSET matroid_set m"),
+    @term_syntax.parse_term("SUBSET((s : (A) -> Bool), matroid_set((m : Matroid[A])))"),
     fn(
       x994 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -10730,16 +10730,16 @@ fn step_147() -> Unit raise {
       @arith.le_trans(),
     ]),
   )
-  let t1043 = @parser.parse_term("t:A->bool")
-  let t1044 = @parser.parse_term("s:A->bool")
+  let t1043 = @term_syntax.parse_term("(t : (A) -> Bool)")
+  let t1044 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t1045 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t1044, t1043]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t1044, t1043]),
       matroid_dim_le_card_gen(),
     ),
   )
   let t1042 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t1041 = @tactics.x_gen_tac(@parser.parse_term("t:A->bool"))
+  let t1041 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : (A) -> Bool)"))
   let t1040 = @tactics.disch_then(fn(
     x1039 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -10770,10 +10770,10 @@ fn step_147() -> Unit raise {
       matroid_span_superset(),
     ]),
   )
-  let t1036 = @parser.parse_term("s:A->bool")
+  let t1036 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t1037 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("submatroid m (s:A->bool)"), t1036]),
+      @list.List([@term_syntax.parse_term("submatroid((m : Matroid[A]), (s : (A) -> Bool))"), t1036]),
       matroid_basis_eq_minimal_spanning(),
     ),
   )
@@ -10890,7 +10890,7 @@ fn step_148() -> Unit raise {
       @sets.empty_subset(),
     ]),
   )
-  let t1049 = @tactics.exists_tac(@parser.parse_term("{}:A->bool"))
+  let t1049 = @tactics.exists_tac(@term_syntax.parse_term("({} : (A) -> Bool)"))
   let t1051 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -10903,7 +10903,7 @@ fn step_148() -> Unit raise {
   )
   matroid_dim_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m:A matroid. matroid_dim m {} = 0"),
+      @term_syntax.parse_term("∀ m : Matroid[A], matroid_dim(m, {}) == 0"),
       t1051,
     ),
   )
@@ -10932,7 +10932,7 @@ fn step_149() -> Unit raise {
     @simp.asm_simp_tac(@list.List([matroid_span_superset()])),
     t1081,
   ])
-  let t1078 = @parser.parse_term("matroid_span m b:A->bool")
+  let t1078 = @term_syntax.parse_term("matroid_span((m : Matroid[A]), (b : (A) -> Bool))")
   let t1079 = @tactics.trans_tac(@sets.subset_trans())(t1078)
   let t1076 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t1077 = @list.List([
@@ -10959,9 +10959,9 @@ fn step_149() -> Unit raise {
       matroid_independent_insert(),
     ]),
   )
-  let t1069 = @tactics.exists_tac(@parser.parse_term("(x:A) INSERT b"))
+  let t1069 = @tactics.exists_tac(@term_syntax.parse_term("INSERT((x : A), (b : (A) -> Bool))"))
   let t1068 = @tactics.match_mp_tac(matroid_dim_unique())
-  let t1067 = @tactics.x_gen_tac(@parser.parse_term("b:A->bool"))
+  let t1067 = @tactics.x_gen_tac(@term_syntax.parse_term("(b : (A) -> Bool)"))
   let t1066 = @simp.asm_rewrite_tac(
     @list.List([@theorems.left_imp_exists_thm(), @sets.has_size()]),
   )
@@ -11213,26 +11213,26 @@ fn step_150() -> Unit raise {
     @list.List([matroid_dim_span(), matroid_span_superset()]),
   )
   let t1104 = @simp.asm_rewrite_tac(@list.List([@arith.le_refl()]))
-  let t1102 = @parser.parse_term("t:A->bool")
+  let t1102 = @term_syntax.parse_term("(t : (A) -> Bool)")
   let t1103 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t1102]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t1102]),
       matroid_dim_span(),
     ),
   )
-  let t1100 = @parser.parse_term("b:A->bool")
+  let t1100 = @term_syntax.parse_term("(b : (A) -> Bool)")
   let t1101 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t1100]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t1100]),
       matroid_dim_eq_card(),
     ),
   )
-  let t1096 = @parser.parse_term("CARD(b:A->bool)")
-  let t1097 = @parser.parse_term("b:A->bool")
-  let t1098 = @parser.parse_term("s:A->bool")
+  let t1096 = @term_syntax.parse_term("CARD((b : (A) -> Bool))")
+  let t1097 = @term_syntax.parse_term("(b : (A) -> Bool)")
+  let t1098 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t1099 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("m:A matroid"), t1098, t1097, t1096]),
+      @list.List([@term_syntax.parse_term("(m : Matroid[A])"), t1098, t1097, t1096]),
       matroid_dim_finite_le(),
     ),
   )
@@ -11284,7 +11284,7 @@ fn step_150() -> Unit raise {
           s1092(x1093)
         }
       },
-      @tactics.x_choose_then(@parser.parse_term("b:A->bool"))(fn(
+      @tactics.x_choose_then(@term_syntax.parse_term("(b : (A) -> Bool)"))(fn(
         x1094 : @kernel.Thm,
       ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
         (
@@ -11503,24 +11503,24 @@ fn step_153() -> Unit raise {
     @tactics.all_tac,
     @meson.asm_meson_tac(@list.List([matroid_dim_span(), @arith.le_refl()])),
   ])
-  let t1136 = @parser.parse_term("matroid_dim m (matroid_span m t:A->bool)")
+  let t1136 = @term_syntax.parse_term("matroid_dim((m : Matroid[A]), matroid_span(m, (t : (A) -> Bool)))")
   let t1137 = @tactics.trans_tac(@arith.le_trans())(t1136)
   let t1135 = @list.List([
     @simp.asm_simp_tac(
       @list.List([
         matroid_dim_insert(),
-        @int.arith_rule(@parser.parse_term("n < n + 1")),
+        @int.arith_rule(@term_syntax.parse_term("(n : Num) < n + 1")),
       ]),
     ),
     @tactics.all_tac,
   ])
-  let t1133 = @parser.parse_term("matroid_dim m ((a:A) INSERT s)")
+  let t1133 = @term_syntax.parse_term("matroid_dim((m : Matroid[A]), INSERT((a : A), (s : (A) -> Bool)))")
   let t1134 = @tactics.trans_tac(@arith.lte_trans())(t1133)
   let t1132 = @list.List([
     @tactics.all_tac,
     @meson.asm_meson_tac(@list.List([matroid_span_subset(), @sets.subset()])),
   ])
-  let t1131 = @class.asm_cases_tac(@parser.parse_term("(a:A) IN matroid_set m"))
+  let t1131 = @class.asm_cases_tac(@term_syntax.parse_term("IN((a : A), matroid_set((m : Matroid[A])))"))
   let t1130 = @list.List([
     @meson.asm_meson_tac(
       @list.List([matroid_finite_dim_span(), matroid_finite_dim_mono()]),
@@ -11528,7 +11528,7 @@ fn step_153() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1129 = @tactics.subgoal_then(
-    @parser.parse_term("matroid_finite_dim m (s:A->bool)"),
+    @term_syntax.parse_term("matroid_finite_dim((m : Matroid[A]), (s : (A) -> Bool))"),
     fn(
       x1126 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -11624,7 +11624,7 @@ fn step_153() -> Unit raise {
           s1123(x1124)
         }
       },
-      @tactics.x_choose_then(@parser.parse_term("a:A"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(a : A)"))(
         @tactics.strip_assume_tac,
       ),
     ),
@@ -11953,15 +11953,15 @@ fn step_157() -> Unit raise {
       @list.List([matroid_independent_mono(), @sets.subset()]),
     ),
   ])
-  let t1152 = @parser.parse_term("b:A->bool")
+  let t1152 = @term_syntax.parse_term("(b : (A) -> Bool)")
   let t1153 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("n:num"), t1152]),
+      @list.List([@term_syntax.parse_term("(n : Num)"), t1152]),
       @sets.choose_subset_strong(),
     ),
   )
   let t1148 = @drule.match_mp(matroid_subset_contains_basis())
-  let t1149 = @tactics.x_choose_then(@parser.parse_term("b:A->bool"))(
+  let t1149 = @tactics.x_choose_then(@term_syntax.parse_term("(b : (A) -> Bool)"))(
     @tactics.strip_assume_tac,
   )
   let t1151 = @tactics.first_assum(fn(
@@ -12042,7 +12042,7 @@ fn step_158() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1168 = @tactics.subgoal_then(
-    @parser.parse_term("(b:A->bool) SUBSET matroid_set m"),
+    @term_syntax.parse_term("SUBSET((b : (A) -> Bool), matroid_set((m : Matroid[A])))"),
     fn(
       x1165 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -12091,11 +12091,11 @@ fn step_158() -> Unit raise {
     },
   )
   let t1164 = @tactics.exists_tac(
-    @parser.parse_term("matroid_span m b:A->bool"),
+    @term_syntax.parse_term("matroid_span((m : Matroid[A]), (b : (A) -> Bool))"),
   )
   let t1161 = @drule.match_mp(matroid_choose_subset())
   let t1158 = @simp.rewrite_rule(@list.List([@sets.has_size()]))
-  let t1159 = @tactics.x_choose_then(@parser.parse_term("b:A->bool"))(
+  let t1159 = @tactics.x_choose_then(@term_syntax.parse_term("(b : (A) -> Bool)"))(
     @tactics.strip_assume_tac,
   )
   let t1163 = @tactics.first_assum(fn(
@@ -12196,7 +12196,7 @@ fn step_159() -> Unit raise {
     t1205,
   ])
   let t1204 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1203 = @tactics.x_gen_tac(@parser.parse_term("c:A->bool"))
+  let t1203 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : (A) -> Bool)"))
   let t1207 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -12329,16 +12329,16 @@ fn step_159() -> Unit raise {
     t1207,
   ])
   let t1191 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1188 = @parser.parse_term("d:A->bool")
-  let t1189 = @parser.parse_term("b:A->bool")
+  let t1188 = @term_syntax.parse_term("(d : (A) -> Bool)")
+  let t1189 = @term_syntax.parse_term("(b : (A) -> Bool)")
   let t1190 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("n:num"), t1189, t1188]),
+      @list.List([@term_syntax.parse_term("(n : Num)"), t1189, t1188]),
       @sets.choose_subset_between(),
     ),
   )
   let t1184 = @drule.match_mp(matroid_independent_extends_to_basis())
-  let t1185 = @tactics.x_choose_then(@parser.parse_term("d:A->bool"))(
+  let t1185 = @tactics.x_choose_then(@term_syntax.parse_term("(d : (A) -> Bool)"))(
     @tactics.strip_assume_tac,
   )
   let t1187 = @tactics.first_assum(fn(
@@ -12365,7 +12365,7 @@ fn step_159() -> Unit raise {
     t1185(t1184(x1186))
   })
   let t1183 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("b:A->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(b : (A) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -12545,7 +12545,7 @@ fn step_160() -> Unit raise {
     ]),
   )
   let t1218 = @simp.rewrite_tac(@list.List([@sets.has_size()]))
-  let t1217 = @tactics.x_gen_tac(@parser.parse_term("t:A->bool"))
+  let t1217 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : (A) -> Bool)"))
   let t1216 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t1213 = @drule.match_mp(matroid_lowdim_expand_basis())
   let t1215 = @tactics.first_assum(fn(
