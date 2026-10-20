@@ -7820,10 +7820,10 @@ Warning: inventing type variables
 0..0..1..3..solved at 7
 Warning: inventing type variables
 Model/syntax quotations (290):
-  domain (Fun s t) = s
-  codomain (Fun s t) = t
-  (forall n ty. (Var n ty) has_type ty) /\\\n   (forall ty. (Equal ty) has_type (Fun ty (Fun ty Bool))) /\\\n   (forall ty. (Select ty) has_type (Fun (Fun ty Bool) ty)) /\\\n   (forall s t dty rty. s has_type (Fun dty rty) /\\ t has_type dty\n                  ==> (Comb s t) has_type rty) /\\\n   (forall n dty t rty. t has_type rty ==> (Abs n dty t) has_type (Fun dty rty))
-  welltyped tm <=> ?ty. tm has_type ty
+  (domain : (Type) -> Type)(Fun((s : Type), (t : Type))) == s
+  (codomain : (Type) -> Type)(Fun((s : Type), (t : Type))) == t
+  (\226\136\128 n : List[Char], \226\136\128 ty : Type, (has_type : (Term, Type) -> Bool)(Var(n, ty), ty)) && (\226\136\128 ty : Type, has_type(Equal(ty), Fun(ty, Fun(ty, Bool)))) && (\226\136\128 ty : Type, has_type(Select(ty), Fun(Fun(ty, Bool), ty))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 dty : Type, \226\136\128 rty : Type, has_type(s, Fun(dty, rty)) && has_type(t, dty) \226\134\146 has_type(Comb(s, t), rty)) && (\226\136\128 n : List[Char], \226\136\128 dty : Type, \226\136\128 t : Term, \226\136\128 rty : Type, has_type(t, rty) \226\134\146 has_type(Abs(n, dty, t), Fun(dty, rty)))
+  (welltyped : (Term) -> Bool)((tm : Term)) == (\226\136\131 ty : Type, has_type(tm, ty))
   (typeof (Var n ty) = ty) /\\\n  (typeof (Equal ty) = Fun ty (Fun ty Bool)) /\\\n  (typeof (Select ty) = Fun (Fun ty Bool) ty) /\\\n  (typeof (Comb s t) = codomain (typeof s)) /\\\n  (typeof (Abs n ty t) = Fun ty (typeof t))
   :P
   :P
@@ -7835,12 +7835,12 @@ Model/syntax quotations (290):
   (+):num->num->num
   (+):num->num->num
   (+):num->num->num
-  forall tm ty. tm has_type ty ==> (typeof tm = ty)
-  forall tm. welltyped tm <=> tm has_type (typeof tm)
-  (forall n ty. welltyped(Var n ty)) /\\\n   (forall ty. welltyped(Equal ty)) /\\\n   (forall ty. welltyped(Select ty)) /\\\n   (forall s t. welltyped (Comb s t) <=>\n            welltyped s /\\ welltyped t /\\\n            ?rty. typeof s = Fun (typeof t) rty) /\\\n   (forall n ty t. welltyped (Abs n ty t) = welltyped t)
-  (s === t) = Comb (Comb (Equal(typeof s)) s) t
-  forall s t. (s === t) has_type Bool\n         <=> welltyped s /\\ welltyped t /\\ (typeof s = typeof t)
-  (ALPHAVARS [] tmp <=> (FST tmp = SND tmp)) /\\\n   (ALPHAVARS (CONS tp oenv) tmp <=>\n        (tmp = tp) \\/\n        ~(FST tp = FST tmp) /\\ ~(SND tp = SND tmp) /\\ ALPHAVARS oenv tmp)
+  \226\136\128 tm : Term, \226\136\128 ty : Type, has_type(tm, ty) \226\134\146 op_typeof(tm) == ty
+  \226\136\128 tm : Term, welltyped(tm) == has_type(tm, op_typeof(tm))
+  (\226\136\128 n : List[Char], \226\136\128 ty : Type, welltyped(Var(n, ty))) && (\226\136\128 ty : Type, welltyped(Equal(ty))) && (\226\136\128 ty : Type, welltyped(Select(ty))) && (\226\136\128 s : Term, \226\136\128 t : Term, welltyped(Comb(s, t)) == (welltyped(s) && welltyped(t) && (\226\136\131 rty : Type, op_typeof(s) == Fun(op_typeof(t), rty)))) && (\226\136\128 n : List[Char], \226\136\128 ty : Type, \226\136\128 t : Term, welltyped(Abs(n, ty, t)) == welltyped(t))
+  (op_eq_eq_eq : (Term, Term) -> Term)((s : Term), (t : Term)) == Comb(Comb(Equal(op_typeof(s)), s), t)
+  \226\136\128 s : Term, \226\136\128 t : Term, has_type(op_eq_eq_eq(s, t), Bool) == (welltyped(s) && welltyped(t) && op_typeof(s) == op_typeof(t))
+  (ALPHAVARS : (List[(_, _)], (_, _)) -> Bool)(NIL, (tmp : (_, _))) == (FST(tmp) == SND(tmp)) && ALPHAVARS(CONS((tp : (_, _)), (oenv : List[(_, _)])), tmp) == (tmp == tp || !(FST(tp) == FST(tmp)) && !(SND(tp) == SND(tmp)) && ALPHAVARS(oenv, tmp))
   :P
   :P
   :P
@@ -7852,18 +7852,18 @@ Model/syntax quotations (290):
   \\n. n + 1
   \\n. n + 1
   \\n. n + 1
-  (forall env x1 ty1 x2 ty2.\n       ALPHAVARS env (Var x1 ty1,Var x2 ty2)\n       ==> RACONV env (Var x1 ty1,Var x2 ty2)) /\\\n  (forall env ty. RACONV env (Equal ty,Equal ty)) /\\\n  (forall env ty. RACONV env (Select ty,Select ty)) /\\\n  (forall env s1 t1 s2 t2.\n       RACONV env (s1,s2) /\\ RACONV env (t1,t2)\n       ==> RACONV env (Comb s1 t1,Comb s2 t2)) /\\\n  (forall env x1 ty1 t1 x2 ty2 t2.\n       (ty1 = ty2) /\\ RACONV (CONS ((Var x1 ty1),(Var x2 ty2)) env) (t1,t2)\n       ==> RACONV env (Abs x1 ty1 t1,Abs x2 ty2 t2))
-  (RACONV env (Var x1 ty1,Var x2 ty2) <=>\n        ALPHAVARS env (Var x1 ty1,Var x2 ty2)) /\\\n   (RACONV env (Var x1 ty1,Equal ty2) <=> F) /\\\n   (RACONV env (Var x1 ty1,Select ty2) <=> F) /\\\n   (RACONV env (Var x1 ty1,Comb l2 r2) <=> F) /\\\n   (RACONV env (Var x1 ty1,Abs x2 ty2 t2) <=> F) /\\\n   (RACONV env (Equal ty1,Var x2 ty2) <=> F) /\\\n   (RACONV env (Equal ty1,Equal ty2) <=> (ty1 = ty2)) /\\\n   (RACONV env (Equal ty1,Select ty2) <=> F) /\\\n   (RACONV env (Equal ty1,Comb l2 r2) <=> F) /\\\n   (RACONV env (Equal ty1,Abs x2 ty2 t2) <=> F) /\\\n   (RACONV env (Select ty1,Var x2 ty2) <=> F) /\\\n   (RACONV env (Select ty1,Equal ty2) <=> F) /\\\n   (RACONV env (Select ty1,Select ty2) <=> (ty1 = ty2)) /\\\n   (RACONV env (Select ty1,Comb l2 r2) <=> F) /\\\n   (RACONV env (Select ty1,Abs x2 ty2 t2) <=> F) /\\\n   (RACONV env (Comb l1 r1,Var x2 ty2) <=> F) /\\\n   (RACONV env (Comb l1 r1,Equal ty2) <=> F) /\\\n   (RACONV env (Comb l1 r1,Select ty2) <=> F) /\\\n   (RACONV env (Comb l1 r1,Comb l2 r2) <=>\n        RACONV env (l1,l2) /\\ RACONV env (r1,r2)) /\\\n   (RACONV env (Comb l1 r1,Abs x2 ty2 t2) <=> F) /\\\n   (RACONV env (Abs x1 ty1 t1,Var x2 ty2) <=> F) /\\\n   (RACONV env (Abs x1 ty1 t1,Equal ty2) <=> F) /\\\n   (RACONV env (Abs x1 ty1 t1,Select ty2) <=> F) /\\\n   (RACONV env (Abs x1 ty1 t1,Comb l2 r2) <=> F) /\\\n   (RACONV env (Abs x1 ty1 t1,Abs x2 ty2 t2) <=>\n        (ty1 = ty2) /\\ RACONV (CONS (Var x1 ty1,Var x2 ty2) env) (t1,t2))
-  ACONV t1 t2 <=> RACONV [] (t1,t2)
-  forall env t. ALL (\\(s,t). s = t) env ==> ALPHAVARS env (t,t)
-  forall t env. ALL (\\(s,t). s = t) env ==> RACONV env (t,t)
-  forall t. ACONV t t
-  forall env s t. ALPHAVARS env (s,t) /\\\n             ALL (\\(x,y). welltyped x /\\ welltyped y /\\\n                          (typeof x = typeof y)) env /\\\n             welltyped s /\\ welltyped t\n           ==> (typeof s = typeof t)
-  forall env p. RACONV env p\n           ==> ALL (\\(x,y). welltyped x /\\ welltyped y /\\\n                        (typeof x = typeof y)) env /\\\n               welltyped (FST p) /\\ welltyped (SND p)\n               ==> (typeof (FST p) = typeof (SND p))
-  (s:term,t:term)
-  []:(term#term)list
-  forall s t. ACONV s t ==> welltyped s /\\ welltyped t ==> (typeof s = typeof t)
-  (TERM_UNION [] l2 = l2) /\\\n  (TERM_UNION (CONS h t) l2 =\n        let subun = TERM_UNION t l2 in\n        if EX (ACONV h) subun then subun else CONS h subun)
+  (\226\136\128 env : List[(Term, Term)], \226\136\128 x1 : List[Char], \226\136\128 ty1 : Type, \226\136\128 x2 : List[Char], \226\136\128 ty2 : Type, ALPHAVARS(env, (Var(x1, ty1), Var(x2, ty2))) \226\134\146 (RACONV : (List[(Term, Term)], (Term, Term)) -> Bool)(env, (Var(x1, ty1), Var(x2, ty2)))) && (\226\136\128 env : List[(Term, Term)], \226\136\128 ty : Type, RACONV(env, (Equal(ty), Equal(ty)))) && (\226\136\128 env : List[(Term, Term)], \226\136\128 ty : Type, RACONV(env, (Select(ty), Select(ty)))) && (\226\136\128 env : List[(Term, Term)], \226\136\128 s1 : Term, \226\136\128 t1 : Term, \226\136\128 s2 : Term, \226\136\128 t2 : Term, RACONV(env, (s1, s2)) && RACONV(env, (t1, t2)) \226\134\146 RACONV(env, (Comb(s1, t1), Comb(s2, t2)))) && (\226\136\128 env : List[(Term, Term)], \226\136\128 x1 : List[Char], \226\136\128 ty1 : Type, \226\136\128 t1 : Term, \226\136\128 x2 : List[Char], \226\136\128 ty2 : Type, \226\136\128 t2 : Term, ty1 == ty2 && RACONV(CONS((Var(x1, ty1), Var(x2, ty2)), env), (t1, t2)) \226\134\146 RACONV(env, (Abs(x1, ty1, t1), Abs(x2, ty2, t2))))
+  RACONV((env : List[(Term, Term)]), (Var((x1 : List[Char]), (ty1 : Type)), Var((x2 : List[Char]), (ty2 : Type)))) == ALPHAVARS(env, (Var(x1, ty1), Var(x2, ty2))) && RACONV(env, (Var(x1, ty1), Equal(ty2))) == false && RACONV(env, (Var(x1, ty1), Select(ty2))) == false && RACONV(env, (Var(x1, ty1), Comb((l2 : Term), (r2 : Term)))) == false && RACONV(env, (Var(x1, ty1), Abs(x2, ty2, (t2 : Term)))) == false && RACONV(env, (Equal(ty1), Var(x2, ty2))) == false && RACONV(env, (Equal(ty1), Equal(ty2))) == (ty1 == ty2) && RACONV(env, (Equal(ty1), Select(ty2))) == false && RACONV(env, (Equal(ty1), Comb(l2, r2))) == false && RACONV(env, (Equal(ty1), Abs(x2, ty2, t2))) == false && RACONV(env, (Select(ty1), Var(x2, ty2))) == false && RACONV(env, (Select(ty1), Equal(ty2))) == false && RACONV(env, (Select(ty1), Select(ty2))) == (ty1 == ty2) && RACONV(env, (Select(ty1), Comb(l2, r2))) == false && RACONV(env, (Select(ty1), Abs(x2, ty2, t2))) == false && RACONV(env, (Comb((l1 : Term), (r1 : Term)), Var(x2, ty2))) == false && RACONV(env, (Comb(l1, r1), Equal(ty2))) == false && RACONV(env, (Comb(l1, r1), Select(ty2))) == false && RACONV(env, (Comb(l1, r1), Comb(l2, r2))) == (RACONV(env, (l1, l2)) && RACONV(env, (r1, r2))) && RACONV(env, (Comb(l1, r1), Abs(x2, ty2, t2))) == false && RACONV(env, (Abs(x1, ty1, (t1 : Term)), Var(x2, ty2))) == false && RACONV(env, (Abs(x1, ty1, t1), Equal(ty2))) == false && RACONV(env, (Abs(x1, ty1, t1), Select(ty2))) == false && RACONV(env, (Abs(x1, ty1, t1), Comb(l2, r2))) == false && RACONV(env, (Abs(x1, ty1, t1), Abs(x2, ty2, t2))) == (ty1 == ty2 && RACONV(CONS((Var(x1, ty1), Var(x2, ty2)), env), (t1, t2)))
+  (ACONV : (Term, Term) -> Bool)((t1 : Term), (t2 : Term)) == RACONV(NIL, (t1, t2))
+  \226\136\128 env : List[(_, _)], \226\136\128 t : _, ALL(GABS((f : ((_, _)) -> Bool) => \226\136\128 s : _, \226\136\128 t : _, GEQ(f((s, t)), s == t)), env) \226\134\146 ALPHAVARS(env, (t, t))
+  \226\136\128 t : Term, \226\136\128 env : List[(Term, Term)], ALL(GABS((f : ((Term, Term)) -> Bool) => \226\136\128 s : Term, \226\136\128 t : Term, GEQ(f((s, t)), s == t)), env) \226\134\146 RACONV(env, (t, t))
+  \226\136\128 t : Term, ACONV(t, t)
+  \226\136\128 env : List[(Term, Term)], \226\136\128 s : Term, \226\136\128 t : Term, ALPHAVARS(env, (s, t)) && ALL(GABS((f : ((Term, Term)) -> Bool) => \226\136\128 x : Term, \226\136\128 y : Term, GEQ(f((x, y)), welltyped(x) && welltyped(y) && op_typeof(x) == op_typeof(y))), env) && welltyped(s) && welltyped(t) \226\134\146 op_typeof(s) == op_typeof(t)
+  \226\136\128 env : List[(Term, Term)], \226\136\128 p : (Term, Term), RACONV(env, p) \226\134\146 ALL(GABS((f : ((Term, Term)) -> Bool) => \226\136\128 x : Term, \226\136\128 y : Term, GEQ(f((x, y)), welltyped(x) && welltyped(y) && op_typeof(x) == op_typeof(y))), env) && welltyped(FST(p)) && welltyped(SND(p)) \226\134\146 op_typeof(FST(p)) == op_typeof(SND(p))
+  ((s : Term), (t : Term))
+  (NIL : List[(Term, Term)])
+  \226\136\128 s : Term, \226\136\128 t : Term, ACONV(s, t) \226\134\146 welltyped(s) && welltyped(t) \226\134\146 op_typeof(s) == op_typeof(t)
+  (TERM_UNION : (List[Term], List[Term]) -> List[Term])(NIL, (l2 : List[Term])) == l2 && TERM_UNION(CONS((h : Term), (t : List[Term])), l2) == LET((subun : List[Term]) => LET_END(if EX(ACONV(h), subun) { subun } else { CONS(h, subun) }), TERM_UNION(t, l2))
   :P
   :P
   :P
@@ -7877,10 +7877,10 @@ Model/syntax quotations (290):
   \\n. n + 1
   (+):num->num->num
   (+):num->num->num
-  forall l1 l2 x. MEM x (TERM_UNION l1 l2) ==> MEM x l1 \\/ MEM x l2
-  forall l1 l2 x. MEM x l1 \\/ MEM x l2\n             ==> ?y. MEM y (TERM_UNION l1 l2) /\\ ACONV x y
-  ALL (\\a. a has_type Bool) l1 /\\ ALL (\\a. a has_type Bool) l2\n   ==> ALL (\\a. a has_type Bool) (TERM_UNION l1 l2)
-  (VFREE_IN v (Var x ty) <=> (Var x ty = v)) /\\\n   (VFREE_IN v (Equal ty) <=> (Equal ty = v)) /\\\n   (VFREE_IN v (Select ty) <=> (Select ty = v)) /\\\n   (VFREE_IN v (Comb s t) <=> VFREE_IN v s \\/ VFREE_IN v t) /\\\n   (VFREE_IN v (Abs x ty t) <=> ~(Var x ty = v) /\\ VFREE_IN v t)
+  \226\136\128 l1 : List[Term], \226\136\128 l2 : List[Term], \226\136\128 x : Term, MEM(x, TERM_UNION(l1, l2)) \226\134\146 MEM(x, l1) || MEM(x, l2)
+  \226\136\128 l1 : List[Term], \226\136\128 l2 : List[Term], \226\136\128 x : Term, MEM(x, l1) || MEM(x, l2) \226\134\146 (\226\136\131 y : Term, MEM(y, TERM_UNION(l1, l2)) && ACONV(x, y))
+  ALL((a : Term) => has_type(a, Bool), (l1 : List[Term])) && ALL((a : Term) => has_type(a, Bool), (l2 : List[Term])) \226\134\146 ALL((a : Term) => has_type(a, Bool), TERM_UNION(l1, l2))
+  (VFREE_IN : (Term, Term) -> Bool)((v : Term), Var((x : List[Char]), (ty : Type))) == (Var(x, ty) == v) && VFREE_IN(v, Equal(ty)) == (Equal(ty) == v) && VFREE_IN(v, Select(ty)) == (Select(ty) == v) && VFREE_IN(v, Comb((s : Term), (t : Term))) == (VFREE_IN(v, s) || VFREE_IN(v, t)) && VFREE_IN(v, Abs(x, ty, t)) == (!(Var(x, ty) == v) && VFREE_IN(v, t))
   :P
   :P
   :P
@@ -7900,60 +7900,12 @@ Model/syntax quotations (290):
   (+):num->num->num
   (+):num->num->num
   (+):num->num->num
-  forall env p. RACONV env p\n           ==> forall x ty. VFREE_IN (Var x ty) (FST p) /\\\n                      ~(?y. MEM (Var x ty,y) env) <=>\n                      VFREE_IN (Var x ty) (SND p) /\\\n                      ~(?y. MEM (y,Var x ty) env)
+  \226\136\128 env : List[(Term, Term)], \226\136\128 p : (Term, Term), RACONV(env, p) \226\134\146 (\226\136\128 x : List[Char], \226\136\128 ty : Type, (VFREE_IN(Var(x, ty), FST(p)) && !(\226\136\131 y : Term, MEM((Var(x, ty), y), env))) == (VFREE_IN(Var(x, ty), SND(p)) && !(\226\136\131 y : Term, MEM((y, Var(x, ty)), env))))
   forall s t x t. ACONV s t ==> (VFREE_IN (Var x ty) s <=> VFREE_IN (Var x ty) t)
-  (REV_ASSOCD a [] d = d) /\\\n   (REV_ASSOCD a (CONS (x,y) t) d =\n        if y = a then x else REV_ASSOCD a t d)
+  (REV_ASSOCD : (_, List[(_, _)], _) -> _)((a : _), NIL, (d : _)) == d && REV_ASSOCD(a, CONS(((x : _), (y : _)), (t : List[(_, _)])), d) == (if y == a { x } else { REV_ASSOCD(a, t, d) })
   :P
   :P
-  (TYPE_SUBST i (Tyvar v) = REV_ASSOCD (Tyvar v) i (Tyvar v)) /\\\n  (TYPE_SUBST i Bool = Bool) /\\\n  (TYPE_SUBST i Ind = Ind) /\\\n  (TYPE_SUBST i (Fun ty1 ty2) = Fun (TYPE_SUBST i ty1) (TYPE_SUBST i ty2))
-  :P
-  :P
-  :P
-  :P
-  \\n. n + 1
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
-  {x | P x \\/ Q x} = {x | P x} UNION {x | Q x}
-  {x | a = x} = {a}
-  forall t. FINITE {x | VFREE_IN x t}
-  Var x ty
-  x:string
-  IMAGE (\\(Var x ty). x) {x | VFREE_IN x t}
-  forall t ty. FINITE {x | VFREE_IN (Var x ty) t}
-  ty:type
-  t:term
-  forall t x:string ty. ?x'. ~(VFREE_IN (Var x' ty) t)
-  (VSUBST ilist (Var x ty) = REV_ASSOCD (Var x ty) ilist (Var x ty)) /\\\n   (VSUBST ilist (Equal ty) = Equal ty) /\\\n   (VSUBST ilist (Select ty) = Select ty) /\\\n   (VSUBST ilist (Comb s t) = Comb (VSUBST ilist s) (VSUBST ilist t)) /\\\n   (VSUBST ilist (Abs x ty t) =\n        let ilist' = FILTER (\\(s',s). ~(s = Var x ty)) ilist in\n        let t' = VSUBST ilist' t in\n        if EX (\\(s',s). VFREE_IN (Var x ty) s' /\\ VFREE_IN s t) ilist'\n        then let z = VARIANT t' x ty in\n             let ilist'' = CONS (Var z ty,Var x ty) ilist' in\n             Abs z ty (VSUBST ilist'' t)\n        else Abs x ty t')
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
-  :P
+  (TYPE_SUBST : (List[(Type, Type)], Type) -> Type)((i : List[(Type, Type)]), Tyvar((v : List[Char]))) == REV_ASSOCD(Tyvar(v), i, Tyvar(v)) && TYPE_SUBST(i, Bool) == Bool && TYPE_SUBST(i, Ind) == Ind && TYPE_SUBST(i, Fun((ty1 : Type), (ty2 : Type))) == Fun(TYPE_SUBST(i, ty1), TYPE_SUBST(i, ty2))
   :P
   :P
   :P
@@ -7966,6 +7918,48 @@ Model/syntax quotations (290):
   (+):num->num->num
   (+):num->num->num
   (+):num->num->num
+  (+):num->num->num
+  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
+  {(x : _) | (P : (_) -> Bool)(x) || (Q : (_) -> Bool)(x)} == UNION({(x : _) | P(x)}, {(x : _) | Q(x)})
+  {(x : _) | (a : _) == x} == {a}
+  \226\136\128 t : Term, FINITE({(x : Term) | VFREE_IN(x, t)})
+  Var((x : List[Char]), (ty : Type))
+  (x : List[Char])
+  IMAGE(GABS((f : (Term) -> List[Char]) => \226\136\128 x : List[Char], \226\136\128 ty : Type, GEQ(f(Var(x, ty)), x)), {(x : Term) | VFREE_IN(x, (t : Term))})
+  \226\136\128 t : Term, \226\136\128 ty : Type, FINITE({(x : List[Char]) | VFREE_IN(Var(x, ty), t)})
+  (ty : Type)
+  (t : Term)
+  \226\136\128 t : Term, \226\136\128 x : List[Char], \226\136\128 ty : Type, \226\136\131 x' : List[Char], !VFREE_IN(Var(x', ty), t)
+  (VSUBST : (List[(Term, Term)], Term) -> Term)((ilist : List[(Term, Term)]), Var((x : List[Char]), (ty : Type))) == REV_ASSOCD(Var(x, ty), ilist, Var(x, ty)) && VSUBST(ilist, Equal(ty)) == Equal(ty) && VSUBST(ilist, Select(ty)) == Select(ty) && VSUBST(ilist, Comb((s : Term), (t : Term))) == Comb(VSUBST(ilist, s), VSUBST(ilist, t)) && VSUBST(ilist, Abs(x, ty, t)) == LET((ilist' : List[(Term, Term)]) => LET_END(LET((t' : Term) => LET_END(if EX(GABS((f : ((Term, Term)) -> Bool) => \226\136\128 s' : Term, \226\136\128 s : Term, GEQ(f((s', s)), VFREE_IN(Var(x, ty), s') && VFREE_IN(s, t))), ilist') { LET((z : List[Char]) => LET_END(LET((ilist'' : List[(Term, Term)]) => LET_END(Abs(z, ty, VSUBST(ilist'', t))), CONS((Var(z, ty), Var(x, ty)), ilist'))), VARIANT(t', x, ty)) } else { Abs(x, ty, t') }), VSUBST(ilist', t))), FILTER(GABS((f : ((Term, Term)) -> Bool) => \226\136\128 s' : Term, \226\136\128 s : Term, GEQ(f((s', s)), !(s == Var(x, ty)))), ilist))
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  :P
+  \\n. n + 1
+  \\n. n + 1
   (+):num->num->num
   (+):num->num->num
   \\n. n + 1
@@ -7983,51 +7977,57 @@ Model/syntax quotations (290):
   \\n. n + 1
   (+):num->num->num
   (+):num->num->num
-  rty:type
-  ilist:(term#term)list
-  fty:type
-  t:term
-  ty:type
-  x:string
-  dty:type
-  dty:type
-  t:term
-  s:term
-  aty:type
-  y:string
-  ilist:(term#term)list
-  u:term
-  s:term
-  (Var x ty) has_type tty
-  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-  tty:type
-  ty:type
-  x:string
-  forall tm ty ilist.\n        tm has_type ty /\\\n        (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> (VSUBST ilist tm) has_type ty
+  (+):num->num->num
+  (+):num->num->num
+  (+):num->num->num
+  \\n. n + 1
+  (+):num->num->num
+  (+):num->num->num
+  (rty : Type)
+  (ilist : List[(Term, Term)])
+  (fty : Type)
+  (t : Term)
+  (ty : Type)
+  (x : List[Char])
+  (dty : Type)
+  (dty : Type)
+  (t : Term)
+  (s : Term)
+  (aty : Type)
+  (y : List[Char])
+  (ilist : List[(Term, Term)])
+  (u : Term)
+  (s : Term)
+  has_type(Var((x : List[Char]), (ty : Type)), (tty : Type))
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  (tty : Type)
+  (ty : Type)
+  (x : List[Char])
+  \226\136\128 tm : Term, \226\136\128 ty : Type, \226\136\128 ilist : List[(Term, Term)], has_type(tm, ty) && (\226\136\128 s : Term, \226\136\128 s' : Term, MEM((s', s), ilist) \226\134\146 (\226\136\131 x : List[Char], \226\136\131 ty : Type, s == Var(x, ty) && has_type(s', ty))) \226\134\146 has_type(VSUBST(ilist, tm), ty)
   forall tm ty ilist.\n        welltyped tm /\\\n        (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> welltyped (VSUBST ilist tm)
-  (P:A->bool) x
-  l:(B#A)list
-  x:A
-  y:B
-  forall l:(B#A)list a b d.\n        REV_ASSOCD a (FILTER (\\(y,x). P x) l) b =\n            if P a then REV_ASSOCD a l b else b
-  l:(term#term)list
-  ilist:(term#term)list
-  ty:type
-  x:string
-  VSUBST ilist' t
-  (a ==> ~c) /\\ (~a ==> (b <=> c)) ==> (~(~a ==> ~b) <=> c)
-  (if b then F else c) <=> ~b /\\ c
-  ~a /\\ b <=> ~(~a ==> ~b)
-  (if ~b then x:bool else y) <=> (if b then y else x)
-  t:term
-  ty:type
-  x:string
-  forall tm u uty ilist.\n      VFREE_IN (Var u uty) (VSUBST ilist tm) <=>\n        ?y ty. VFREE_IN (Var y ty) tm /\\\n               VFREE_IN (Var u uty) (REV_ASSOCD (Var y ty) ilist (Var y ty))
-  (IS_RESULT(Clash t) = F) /\\\n  (IS_RESULT(Result t) = T)
-  (IS_CLASH(Clash t) = T) /\\\n  (IS_CLASH(Result t) = F)
-  RESULT(Result t) = t
-  CLASH(Clash t) = t
-  (sizeof (Var x ty) = 1) /\\\n  (sizeof (Equal ty) = 1) /\\\n  (sizeof (Select ty) = 1) /\\\n  (sizeof (Comb s t) = 1 + sizeof s + sizeof t) /\\\n  (sizeof (Abs x ty t) = 2 + sizeof t)
+  (P : (A) -> Bool)((x : A))
+  (l : List[(B, A)])
+  (x : A)
+  (y : B)
+  \226\136\128 l : List[(B, A)], \226\136\128 a : A, \226\136\128 b : B, \226\136\128 d : _, REV_ASSOCD(a, FILTER(GABS((f : ((B, A)) -> Bool) => \226\136\128 y : B, \226\136\128 x : A, GEQ(f((y, x)), (P : (A) -> Bool)(x))), l), b) == (if P(a) { REV_ASSOCD(a, l, b) } else { b })
+  (l : List[(Term, Term)])
+  (ilist : List[(Term, Term)])
+  (ty : Type)
+  (x : List[Char])
+  VSUBST((ilist' : List[(Term, Term)]), (t : Term))
+  ((a : Bool) \226\134\146 !(c : Bool)) && (!a \226\134\146 (b : Bool) == c) \226\134\146 !(!a \226\134\146 !b) == c
+  (if (b : Bool) { false } else { (c : Bool) }) == (!b && c)
+  (!(a : Bool) && (b : Bool)) == !(!a \226\134\146 !b)
+  (if !(b : Bool) { (x : Bool) } else { (y : Bool) }) == (if b { y } else { x })
+  (t : Term)
+  (ty : Type)
+  (x : List[Char])
+  \226\136\128 tm : Term, \226\136\128 u : List[Char], \226\136\128 uty : Type, \226\136\128 ilist : List[(Term, Term)], VFREE_IN(Var(u, uty), VSUBST(ilist, tm)) == (\226\136\131 y : List[Char], \226\136\131 ty : Type, VFREE_IN(Var(y, ty), tm) && VFREE_IN(Var(u, uty), REV_ASSOCD(Var(y, ty), ilist, Var(y, ty))))
+  (IS_RESULT : (Result) -> Bool)(Clash((t : Term))) == false && IS_RESULT(Result(t)) == true
+  (IS_CLASH : (Result) -> Bool)(Clash((t : Term))) == true && IS_CLASH(Result(t)) == false
+  (RESULT : (Result) -> Term)(Result((t : Term))) == t
+  (CLASH : (Result) -> Term)(Clash((t : Term))) == t
+  (sizeof : (Term) -> Num)(Var((x : List[Char]), (ty : Type))) == 1 && sizeof(Equal(ty)) == 1 && sizeof(Select(ty)) == 1 && sizeof(Comb((s : Term), (t : Term))) == 1 + (sizeof(s) + sizeof(t)) && sizeof(Abs(x, ty, t)) == 2 + sizeof(t)
   :P
   :P
   :P
@@ -8041,18 +8041,18 @@ Model/syntax quotations (290):
   (+):num->num->num
   (+):num->num->num
   (+):num->num->num
-  ilist:(term#term)list
-  t:term
-  ty:type
-  x:string
-  l:(term#term)list
-  s:term
-  s':term
-  ty:type
-  x:string
-  forall t ilist. (forall s' s. MEM (s',s) ilist ==> ?x ty. s' = Var x ty)\n             ==> (sizeof (VSUBST ilist t) = sizeof t)
-  MEASURE(\\(env:(term#term)list,tyin:(type#type)list,t).\n                        sizeof t)
-  ?INST_CORE.\n  (forall env tyin x ty.\n        INST_CORE env tyin (Var x ty) =\n          let tm = Var x ty\n          and tm' = Var x (TYPE_SUBST tyin ty) in\n         if REV_ASSOCD tm' env tm = tm then Result tm' else Clash tm') /\\\n  (forall env tyin ty.\n        INST_CORE env tyin (Equal ty) = Result(Equal(TYPE_SUBST tyin ty))) /\\\n  (forall env tyin ty.\n        INST_CORE env tyin (Select ty) = Result(Select(TYPE_SUBST tyin ty))) /\\\n  (forall env tyin s t.\n        INST_CORE env tyin (Comb s t) =\n            let sres = INST_CORE env tyin s in\n            if IS_CLASH sres then sres else\n            let tres = INST_CORE env tyin t in\n            if IS_CLASH tres then tres else\n            let s' = RESULT sres and t' = RESULT tres in\n            Result (Comb s' t')) /\\\n  (forall env tyin x ty t.\n        INST_CORE env tyin (Abs x ty t) =\n            let ty' = TYPE_SUBST tyin ty in\n            let env' = CONS (Var x ty,Var x ty') env in\n            let tres = INST_CORE env' tyin t in\n            if IS_RESULT tres then Result(Abs x ty' (RESULT tres)) else\n            let w = CLASH tres in\n            if ~(w = Var x ty') then tres else\n            let x' = VARIANT (RESULT(INST_CORE [] tyin t)) x ty' in\n            INST_CORE env tyin (Abs x' ty (VSUBST [Var x' ty,Var x ty] t)))
+  (ilist : List[(Term, Term)])
+  (t : Term)
+  (ty : Type)
+  (x : List[Char])
+  (l : List[(Term, Term)])
+  (s : Term)
+  (s' : Term)
+  (ty : Type)
+  (x : List[Char])
+  \226\136\128 t : Term, \226\136\128 ilist : List[(Term, Term)], (\226\136\128 s' : Term, \226\136\128 s : Term, MEM((s', s), ilist) \226\134\146 (\226\136\131 x : List[Char], \226\136\131 ty : Type, s' == Var(x, ty))) \226\134\146 sizeof(VSUBST(ilist, t)) == sizeof(t)
+  MEASURE(GABS((f : ((List[(Term, Term)], List[(Type, Type)], Term)) -> Num) => \226\136\128 env : List[(Term, Term)], \226\136\128 tyin : List[(Type, Type)], \226\136\128 t : Term, GEQ(f((env, tyin, t)), sizeof(t))))
+  \226\136\131 INST_CORE : (List[(Term, Term)], List[(Type, Type)], Term) -> Result, (\226\136\128 env : List[(Term, Term)], \226\136\128 tyin : List[(Type, Type)], \226\136\128 x : List[Char], \226\136\128 ty : Type, INST_CORE(env, tyin, Var(x, ty)) == LET((tm : Term) => (tm' : Term) => LET_END(if REV_ASSOCD(tm', env, tm) == tm { Result(tm') } else { Clash(tm') }), Var(x, ty), Var(x, TYPE_SUBST(tyin, ty)))) && (\226\136\128 env : List[(Term, Term)], \226\136\128 tyin : List[(Type, Type)], \226\136\128 ty : Type, INST_CORE(env, tyin, Equal(ty)) == Result(Equal(TYPE_SUBST(tyin, ty)))) && (\226\136\128 env : List[(Term, Term)], \226\136\128 tyin : List[(Type, Type)], \226\136\128 ty : Type, INST_CORE(env, tyin, Select(ty)) == Result(Select(TYPE_SUBST(tyin, ty)))) && (\226\136\128 env : List[(Term, Term)], \226\136\128 tyin : List[(Type, Type)], \226\136\128 s : Term, \226\136\128 t : Term, INST_CORE(env, tyin, Comb(s, t)) == LET((sres : Result) => LET_END(if IS_CLASH(sres) { sres } else { LET((tres : Result) => LET_END(if IS_CLASH(tres) { tres } else { LET((s' : Term) => (t' : Term) => LET_END(Result(Comb(s', t'))), RESULT(sres), RESULT(tres)) }), INST_CORE(env, tyin, t)) }), INST_CORE(env, tyin, s))) && (\226\136\128 env : List[(Term, Term)], \226\136\128 tyin : List[(Type, Type)], \226\136\128 x : List[Char], \226\136\128 ty : Type, \226\136\128 t : Term, INST_CORE(env, tyin, Abs(x, ty, t)) == LET((ty' : Type) => LET_END(LET((env' : List[(Term, Term)]) => LET_END(LET((tres : Result) => LET_END(if IS_RESULT(tres) { Result(Abs(x, ty', RESULT(tres))) } else { LET((w : Term) => LET_END(if !(w == Var(x, ty')) { tres } else { LET((x' : List[Char]) => LET_END(INST_CORE(env, tyin, Abs(x', ty, VSUBST([(Var(x', ty), Var(x, ty))], t)))), VARIANT(RESULT(INST_CORE(NIL, tyin, t)), x, ty')) }), CLASH(tres)) }), INST_CORE(env', tyin, t))), CONS((Var(x, ty), Var(x, ty')), env))), TYPE_SUBST(tyin, ty)))
   :P
   :P
   :P
@@ -8106,10 +8106,10 @@ Model/syntax quotations (290):
   :P
   :P
   :P
-  INST tyin tm = RESULT(INST_CORE [] tyin tm)
-  forall r. ~(IS_RESULT r) <=> IS_CLASH r
-  (let x = t in P x) = P t
-  (forall t. welltyped t ==> [] |- t === t) /\\\n  (forall asl1 asl2 l m1 m2 r.\n        asl1 |- l === m1 /\\ asl2 |- m2 === r /\\ ACONV m1 m2\n        ==> TERM_UNION asl1 asl2 |- l === r) /\\\n  (forall asl1 l1 r1 asl2 l2 r2.\n        asl1 |- l1 === r1 /\\ asl2 |- l2 === r2 /\\ welltyped(Comb l1 l2)\n        ==> TERM_UNION asl1 asl2 |- Comb l1 l2 === Comb r1 r2) /\\\n  (forall asl x ty l r.\n        ~(EX (VFREE_IN (Var x ty)) asl) /\\ asl |- l === r\n        ==> asl |- (Abs x ty l) === (Abs x ty r)) /\\\n  (forall x ty t. welltyped t ==> [] |- Comb (Abs x ty t) (Var x ty) === t) /\\\n  (forall p. p has_type Bool ==> [p] |- p) /\\\n  (forall asl1 asl2 p q p'.\n        asl1 |- p === q /\\ asl2 |- p' /\\ ACONV p p'\n        ==> TERM_UNION asl1 asl2 |- q) /\\\n  (forall asl1 asl2 c1 c2.\n        asl1 |- c1 /\\ asl2 |- c2\n        ==> TERM_UNION (FILTER((~) o ACONV c2) asl1)\n                       (FILTER((~) o ACONV c1) asl2)\n               |- c1 === c2) /\\\n  (forall tyin asl p. asl |- p ==> MAP (INST tyin) asl |- INST tyin p) /\\\n  (forall ilist asl p.\n      (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty) /\\\n      asl |- p ==> MAP (VSUBST ilist) asl |- VSUBST ilist p)
+  (INST : (List[(Type, Type)], Term) -> Term)((tyin : List[(Type, Type)]), (tm : Term)) == RESULT(INST_CORE(NIL, tyin, tm))
+  \226\136\128 r : Result, !IS_RESULT(r) == IS_CLASH(r)
+  LET((x : _) => LET_END((P : (_) -> _)(x)), (t : _)) == P(t)
+  (\226\136\128 t : Term, welltyped(t) \226\134\146 (op_bar_minus : (List[Term], Term) -> Bool)(NIL, op_eq_eq_eq(t, t))) && (\226\136\128 asl1 : List[Term], \226\136\128 asl2 : List[Term], \226\136\128 l : Term, \226\136\128 m1 : Term, \226\136\128 m2 : Term, \226\136\128 r : Term, op_bar_minus(asl1, op_eq_eq_eq(l, m1)) && op_bar_minus(asl2, op_eq_eq_eq(m2, r)) && ACONV(m1, m2) \226\134\146 op_bar_minus(TERM_UNION(asl1, asl2), op_eq_eq_eq(l, r))) && (\226\136\128 asl1 : List[Term], \226\136\128 l1 : Term, \226\136\128 r1 : Term, \226\136\128 asl2 : List[Term], \226\136\128 l2 : Term, \226\136\128 r2 : Term, op_bar_minus(asl1, op_eq_eq_eq(l1, r1)) && op_bar_minus(asl2, op_eq_eq_eq(l2, r2)) && welltyped(Comb(l1, l2)) \226\134\146 op_bar_minus(TERM_UNION(asl1, asl2), op_eq_eq_eq(Comb(l1, l2), Comb(r1, r2)))) && (\226\136\128 asl : List[Term], \226\136\128 x : List[Char], \226\136\128 ty : Type, \226\136\128 l : Term, \226\136\128 r : Term, !EX(VFREE_IN(Var(x, ty)), asl) && op_bar_minus(asl, op_eq_eq_eq(l, r)) \226\134\146 op_bar_minus(asl, op_eq_eq_eq(Abs(x, ty, l), Abs(x, ty, r)))) && (\226\136\128 x : List[Char], \226\136\128 ty : Type, \226\136\128 t : Term, welltyped(t) \226\134\146 op_bar_minus(NIL, op_eq_eq_eq(Comb(Abs(x, ty, t), Var(x, ty)), t))) && (\226\136\128 p : Term, has_type(p, Bool) \226\134\146 op_bar_minus([p], p)) && (\226\136\128 asl1 : List[Term], \226\136\128 asl2 : List[Term], \226\136\128 p : Term, \226\136\128 q : Term, \226\136\128 p' : Term, op_bar_minus(asl1, op_eq_eq_eq(p, q)) && op_bar_minus(asl2, p') && ACONV(p, p') \226\134\146 op_bar_minus(TERM_UNION(asl1, asl2), q)) && (\226\136\128 asl1 : List[Term], \226\136\128 asl2 : List[Term], \226\136\128 c1 : Term, \226\136\128 c2 : Term, op_bar_minus(asl1, c1) && op_bar_minus(asl2, c2) \226\134\146 op_bar_minus(TERM_UNION(FILTER(o(op_tilde, ACONV(c2)), asl1), FILTER(o(op_tilde, ACONV(c1)), asl2)), op_eq_eq_eq(c1, c2))) && (\226\136\128 tyin : List[(Type, Type)], \226\136\128 asl : List[Term], \226\136\128 p : Term, op_bar_minus(asl, p) \226\134\146 op_bar_minus(MAP(INST(tyin), asl), INST(tyin, p))) && (\226\136\128 ilist : List[(Term, Term)], \226\136\128 asl : List[Term], \226\136\128 p : Term, (\226\136\128 s : Term, \226\136\128 s' : Term, MEM((s', s), ilist) \226\134\146 (\226\136\131 x : List[Char], \226\136\131 ty : Type, s == Var(x, ty) && has_type(s', ty))) && op_bar_minus(asl, p) \226\134\146 op_bar_minus(MAP(VSUBST(ilist), asl), VSUBST(ilist, p)))
 type_INDUCT =  |- (#forall:fun(fun(fun(type,bool),bool),bool) (\P:fun(type,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(list(char),bool),bool) (\a:list(char). (P:fun(type,bool) (#Tyvar:fun(list(char),type) a:list(char)))))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(type,bool) #Bool:type)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(type,bool) #Ind:type)) (#forall:fun(fun(type,bool),bool) (\a0:type. (#forall:fun(fun(type,bool),bool) (\a1:type. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(type,bool) a0:type)) (P:fun(type,bool) a1:type))) (P:fun(type,bool) ((#Fun:fun(type,fun(type,type)) a0:type) a1:type))))))))))) (#forall:fun(fun(type,bool),bool) (\x:type. (P:fun(type,bool) x:type))))))
 type_RECURSION =  |- (#forall:fun(fun(fun(list(char),'Z),bool),bool) (\f0:fun(list(char),'Z). (#forall:fun(fun('Z,bool),bool) (\f1:'Z. (#forall:fun(fun('Z,bool),bool) (\f2:'Z. (#forall:fun(fun(fun(type,fun(type,fun('Z,fun('Z,'Z)))),bool),bool) (\f3:fun(type,fun(type,fun('Z,fun('Z,'Z)))). (#?:fun(fun(fun(type,'Z),bool),bool) (\fn:fun(type,'Z). ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(list(char),bool),bool) (\a:list(char). ((#=:fun('Z,fun('Z,bool)) (fn:fun(type,'Z) (#Tyvar:fun(list(char),type) a:list(char)))) (f0:fun(list(char),'Z) a:list(char)))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(type,'Z) #Bool:type)) f1:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(type,'Z) #Ind:type)) f2:'Z)) (#forall:fun(fun(type,bool),bool) (\a0:type. (#forall:fun(fun(type,bool),bool) (\a1:type. ((#=:fun('Z,fun('Z,bool)) (fn:fun(type,'Z) ((#Fun:fun(type,fun(type,type)) a0:type) a1:type))) ((((f3:fun(type,fun(type,fun('Z,fun('Z,'Z)))) a0:type) a1:type) (fn:fun(type,'Z) a0:type)) (fn:fun(type,'Z) a1:type))))))))))))))))))))
 type_DISTINCT =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(list(char),bool),bool) (\a:list(char). (#~:fun(bool,bool) ((#=:fun(type,fun(type,bool)) (#Tyvar:fun(list(char),type) a:list(char))) #Bool:type))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(list(char),bool),bool) (\a:list(char). (#~:fun(bool,bool) ((#=:fun(type,fun(type,bool)) (#Tyvar:fun(list(char),type) a:list(char))) #Ind:type))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(list(char),bool),bool) (\a:list(char). (#forall:fun(fun(type,bool),bool) (\a0':type. (#forall:fun(fun(type,bool),bool) (\a1':type. (#~:fun(bool,bool) ((#=:fun(type,fun(type,bool)) (#Tyvar:fun(list(char),type) a:list(char))) ((#Fun:fun(type,fun(type,type)) a0':type) a1':type)))))))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(type,fun(type,bool)) #Bool:type) #Ind:type))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(type,bool),bool) (\a0':type. (#forall:fun(fun(type,bool),bool) (\a1':type. (#~:fun(bool,bool) ((#=:fun(type,fun(type,bool)) #Bool:type) ((#Fun:fun(type,fun(type,type)) a0':type) a1':type)))))))) (#forall:fun(fun(type,bool),bool) (\a0':type. (#forall:fun(fun(type,bool),bool) (\a1':type. (#~:fun(bool,bool) ((#=:fun(type,fun(type,bool)) #Ind:type) ((#Fun:fun(type,fun(type,type)) a0':type) a1':type))))))))))))
