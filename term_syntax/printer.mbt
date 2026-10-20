@@ -658,11 +658,15 @@ fn Printer::comprehension(
 /// `t` in the term syntax: `parse_term(print_term(t))` is `t` again, up to
 /// the names of bound variables and invented type variables (`same_term`).
 pub fn print_term(t : @kernel.Term) -> String raise Unprintable {
-  print_term_with(t, sets=true)
+  print_term_with(t, sets=true, overloads=[true, false])
 }
 
 ///|
-fn print_term_with(t : @kernel.Term, sets~ : Bool) -> String raise Unprintable {
+fn print_term_with(
+  t : @kernel.Term,
+  sets~ : Bool,
+  overloads~ : Array[Bool],
+) -> String raise Unprintable {
   let vars = @basics.variables(t).to_array()
   let fixed = vars
     .map(v => @kernel.tyvars(@kernel.type_of(v)))
@@ -681,7 +685,7 @@ fn print_term_with(t : @kernel.Term, sets~ : Bool) -> String raise Unprintable {
   // they are connected to it, so the reading is checked).
   let mut first_error : Unprintable? = None
   let mut printed = false
-  for overloads in [true, false] {
+  for overloads in overloads {
     for all_constants in [false, true] {
       let s = print(overloads, all_constants) catch {
         e => {
@@ -748,22 +752,26 @@ pub fn same_term(a : @kernel.Term, b : @kernel.Term) -> Bool {
 /// theorems of a migrated package print as before.
 pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintable {
   // set notation, else the sets as written (GSPEC(...)), which an old
-  // quotation may spell out
+  // quotation may spell out; overloaded names, else constants by their own
+  // names, which read the same under any overload priority (a quotation of
+  // real_le written <=. must not become <=)
   let mut error = Unprintable("term")
   for sets in [true, false] {
-    let s = print_term_with(t, sets~) catch {
-      e => {
-        error = e
-        continue
+    for overloads in [[true, false], [false]] {
+      let s = print_term_with(t, sets~, overloads~) catch {
+        e => {
+          error = e
+          continue
+        }
       }
-    }
-    check_spelling(old, s) catch {
-      e => {
-        error = e
-        continue
+      check_spelling(old, s) catch {
+        e => {
+          error = e
+          continue
+        }
       }
+      return s
     }
-    return s
   }
   raise error
 }
@@ -776,12 +784,47 @@ pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintab
 /// differ in name; one invented before (which the environment may share)
 /// must be the same.
 pub fn check_spelling(old : String, s : String) -> Unit raise Unprintable {
-  let from = @preterm.type_var_counter()
-  let (a, na) = @parser.reread_term(old) catch {
-    _ => raise Unprintable("quotation that does not read back")
+  check_spelling_now(old, s)
+  // a quotation in a function may run later, under another overload
+  // priority (prioritize_num(), ...): the spelling must read as the
+  // quotation does under each of them, not only under the current one
+  let saved = @printer.the_interface.val
+  defer {
+    @printer.the_interface.val = saved
   }
-  let (b, nb) = reread(s) catch {
-    _ => raise Unprintable("term that does not read back")
+  for name in priority_types {
+    @printer.the_interface.val = saved
+    // read without @parser.parse_type, which records into the trace
+    let ty = @preterm.type_of_pretype(@parser.parse_pretype(@lexer.lex(name)).0) catch {
+      _ => continue
+    }
+    @preterm.prioritize_overload(ty) catch {
+      _ => continue
+    }
+    check_spelling_now(old, s) catch {
+      Unprintable(m) => raise Unprintable(m + " under the overload priority of " + name)
+    }
+  }
+}
+
+///|
+/// The types whose overload priority a quotation may run under
+/// (prioritize_num, prioritize_int, prioritize_real, prioritize_complex,
+/// prioritize_vector); those not defined yet are skipped.
+let priority_types : Array[String] = ["num", "int", "real", "complex", "real^N"]
+
+///|
+/// `check_spelling` under the current overload priority. A quotation that
+/// does not read at all must not read in the term syntax either.
+fn check_spelling_now(old : String, s : String) -> Unit raise Unprintable {
+  let from = @preterm.type_var_counter()
+  let a = try Some(@parser.reread_term(old)) catch { _ => None }
+  let b = try Some(reread(s)) catch { _ => None }
+  let (a, na, b, nb) = match (a, b) {
+    (Some((a, na)), Some((b, nb))) => (a, na, b, nb)
+    (None, None) => return
+    (None, Some(_)) => raise Unprintable("term that reads where the quotation does not")
+    (Some(_), None) => raise Unprintable("term that does not read back")
   }
   if canonical_invented(b, from~) != canonical_invented(a, from~) {
     raise Unprintable("term whose bound variables the syntax renames")
