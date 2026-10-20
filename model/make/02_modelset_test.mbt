@@ -8115,171 +8115,171 @@ test "Model/modelset matches Model/modelset.ml" {
       #|0..0..1..solved at 4
       #|0..0..solved at 2
       #|Model/modelset quotations (165):
-      #|  (forall x y. (f x = f y) ==> (x = y)) <=> (forall x y. (f x = f y) <=> (x = y))
-      #|  (x |-> a) (v:A->B) = \\y. if y = x then a else v(y)
-      #|  forall v x y a. ((x |-> y) v) a = if a = x then y else v(a)
-      #|  forall v x y. (x |-> y) v x = y
-      #|  forall v a b x. (x |-> a) ((x |-> b) v) = (x |-> a) v
-      #|  forall v x. (x |-> v(x)) v = v
-      #|  forall x. (forall v a. P((x |-> a) v)) = (forall v. P v)
-      #|  forall v x y a b.\n     ~(x = y) ==> ((x |-> a) ((y |-> b) v) = (y |-> b) ((x |-> a) v))
-      #|  ?x. x IN @s:num->bool. ~(s = {}) /\\ FINITE s
-      #|  ?x:num. x IN UNIV
-      #|  forall s. s <_c UNIV:I->bool <=> FINITE s
-      #|  UNIV = IMAGE mk_ind (@s. ~(s = {}) /\\ FINITE s)
-      #|  UNIV:ind_model->bool <_c UNIV:I->bool /\\\n   (forall s:A->bool. s <_c UNIV:I->bool ==> {t | t SUBSET s} <_c UNIV:I->bool)
-      #|  n:num
-      #|  CARD(UNIV:I->bool) - 1
-      #|  a - 1 < b ==> ~(a = 0) ==> a <= b
-      #|  ~(n = 0) ==> n - 1 < n
-      #|  ~(CARD(UNIV:I->bool) = 0)
-      #|  {n | n < CARD(UNIV:I->bool) - 1}
-      #|  INFINITE(UNIV:I->bool)
-      #|  (a = b) ==> a ==> b
-      #|  UNIV:I#I->bool <=_c UNIV:I->bool
-      #|  ?f:I#I->I. forall x y. (f x = f y) ==> (x = y)
-      #|  UNIV:bool->bool = {F,T}
-      #|  FINITE(UNIV:bool->bool)
-      #|  UNIV:bool->bool <_c UNIV:I->bool
-      #|  ?f:bool->I. forall x y. (f x = f y) ==> (x = y)
-      #|  ?f:ind_model->I. forall x y. (f x = f y) ==> (x = y)
-      #|  forall s:I->bool.\n        s <_c UNIV:I->bool\n        ==> ?f:(I->bool)->I. forall t u. t SUBSET s /\\ u SUBSET s /\\ (f t = f u)\n                                   ==> (t = u)
-      #|  (setlevel Ur_bool = IMAGE I_BOOL UNIV) /\\\n  (setlevel Ur_ind = IMAGE I_IND UNIV) /\\\n  (setlevel (Cartprod l1 l2) =\n           IMAGE I_PAIR {x,y | x IN setlevel l1 /\\ y IN setlevel l2}) /\\\n  (setlevel (Powerset l) = IMAGE (I_SET (setlevel l))\n                                 {s | s SUBSET (setlevel l)})
-      #|  setlevel l1 *_c setlevel l2
-      #|  l2:setlevel
-      #|  l1:setlevel
-      #|  {s | s SUBSET (setlevel l)}
-      #|  l:setlevel
-      #|  UNIV:ind_model->bool
-      #|  UNIV:bool->bool
-      #|  forall l. setlevel l <_c UNIV:I->bool
-      #|  forall l s t. s SUBSET setlevel l /\\ t SUBSET setlevel l /\\\n          (I_SET (setlevel l) s = I_SET (setlevel l) t)\n          ==> (s = t)
-      #|  universe = {(t,x) | x IN setlevel t}
-      #|  Ur_bool,I_BOOL T
-      #|  ?a. a IN universe
-      #|  forall l e. e IN setlevel l <=> (dest_V(mk_V(l,e)) = (l,e))
-      #|  droplevel(Powerset l) = l
-      #|  (isasetlevel Ur_bool = F) /\\\n  (isasetlevel Ur_ind = F) /\\\n  (isasetlevel (Cartprod l1 l2) = F) /\\\n  (isasetlevel (Powerset l) = T)
-      #|  level x = FST(dest_V x)
-      #|  element x = SND(dest_V x)
-      #|  forall x. (element x) IN setlevel(level x)
-      #|  forall x. mk_V(level x,element x) = x
-      #|  set x = @s. s SUBSET (setlevel(droplevel(level x))) /\\\n              (I_SET (setlevel(droplevel(level x))) s = element x)
-      #|  isaset x <=> ?l. level x = Powerset l
-      #|  x <: s <=> (level s = Powerset(level x)) /\\ (element x) IN (set s)
-      #|  s <=: t <=> (level s = level t) /\\ forall x. x <: s ==> x <: t
-      #|  forall x s. x <: s ==> isaset s
-      #|  forall l. ?x. x IN setlevel l
-      #|  forall l. ?s. level s = l
-      #|  e IN setlevel l\n   ==> (level(mk_V(l,e)) = l) /\\ (element(mk_V(l,e)) = e)
-      #|  I_SET (setlevel l) s IN setlevel(Powerset l)
-      #|  I_SET (setlevel l) s IN setlevel(Powerset l)
-      #|  s SUBSET setlevel l\n   ==> (set(mk_V(Powerset l,I_SET (setlevel l) s)) = s) /\\\n       (level(mk_V(Powerset l,I_SET (setlevel l) s)) = Powerset l) /\\\n       (element(mk_V(Powerset l,I_SET (setlevel l) s)) = I_SET (setlevel l) s)
-      #|  mk_V(Powerset l,I_SET (setlevel l) {})
-      #|  l:setlevel
-      #|  forall l. ?s. (level s = l) /\\ forall x. ~(x <: s)
-      #|  x:V
-      #|  {i | i IN u /\\ p (mk_V (l,i))} SUBSET (setlevel l)
-      #|  mk_V(Powerset l,\n                   I_SET(setlevel l)\n                   {i | i IN u /\\ p(mk_V(l,i))})
-      #|  u:I->bool
-      #|  s:V
-      #|  l:setlevel
-      #|  isaset s
-      #|  forall s p. ?t. (level t = level s) /\\ forall x. x <: t <=> x <: s /\\ p x
-      #|  mk_V(Powerset l,I_SET (setlevel l) (setlevel l))
-      #|  forall l. ?s. (level s = Powerset l) /\\\n           forall x. x <: s <=> (level x = l) /\\ element(x) IN setlevel l
-      #|  s:V
-      #|  l:setlevel
-      #|  forall s. isaset s\n       ==> (set s) SUBSET (setlevel(droplevel(level s))) /\\\n           (I_SET (setlevel(droplevel(level s))) (set s) = element s)
-      #|  forall s. isaset s ==> set(s) SUBSET setlevel(droplevel(level s))
-      #|  t:V
-      #|  level s
-      #|  u:V
-      #|  \\v. forall x. x <: v ==> x <: s
-      #|  t:V
-      #|  Powerset l
-      #|  t:V
-      #|  l:setlevel
-      #|  isaset s
-      #|  forall s. ?t. (level t = Powerset(level s)) /\\ forall x. x <: t <=> x <=: s
-      #|  pair x y =\n        mk_V(Cartprod (level x) (level y),I_PAIR(element x,element y))
-      #|  forall x y l m. x IN setlevel l /\\ y IN setlevel m\n             ==> I_PAIR(x,y) IN setlevel (Cartprod l m)
-      #|  dest_V(mk_V(Cartprod (level x) (level y),I_PAIR(element x,element y))) =\n        Cartprod (level x) (level y),I_PAIR(element x,element y)
+      #|  (\226\136\128 x : _, \226\136\128 y : _, (f : (_) -> _)(x) == f(y) \226\134\146 x == y) == (\226\136\128 x : _, \226\136\128 y : _, (f(x) == f(y)) == (x == y))
+      #|  (op_bar_minus_gt : (A, B, (A) -> B, A) -> B)((x : A), (a : B), (v : (A) -> B)) == ((y : A) => if y == x { a } else { v(y) })
+      #|  \226\136\128 v : (_) -> _, \226\136\128 x : _, \226\136\128 y : _, \226\136\128 a : _, op_bar_minus_gt(x, y, v, a) == (if a == x { y } else { v(a) })
+      #|  \226\136\128 v : (_) -> _, \226\136\128 x : _, \226\136\128 y : _, op_bar_minus_gt(x, y, v, x) == y
+      #|  \226\136\128 v : (_) -> _, \226\136\128 a : _, \226\136\128 b : _, \226\136\128 x : _, op_bar_minus_gt(x, a, op_bar_minus_gt(x, b, v)) == op_bar_minus_gt(x, a, v)
+      #|  \226\136\128 v : (_) -> _, \226\136\128 x : _, op_bar_minus_gt(x, v(x), v) == v
+      #|  \226\136\128 x : _, (\226\136\128 v : (_) -> _, \226\136\128 a : _, (P : ((_) -> _) -> Bool)(op_bar_minus_gt(x, a, v))) == (\226\136\128 v : (_) -> _, P(v))
+      #|  \226\136\128 v : (_) -> _, \226\136\128 x : _, \226\136\128 y : _, \226\136\128 a : _, \226\136\128 b : _, !(x == y) \226\134\146 op_bar_minus_gt(x, a, op_bar_minus_gt(y, b, v)) == op_bar_minus_gt(y, b, op_bar_minus_gt(x, a, v))
+      #|  \226\136\131 x : Num, IN(x, select((s : (Num) -> Bool) => !(s == {}) && FINITE(s)))
+      #|  \226\136\131 x : Num, IN(x, UNIV)
+      #|  \226\136\128 s : (_) -> Bool, (op_lt_us_c : ((_) -> Bool, (I) -> Bool) -> Bool)(s, (UNIV : (I) -> Bool)) == (FINITE : ((_) -> Bool) -> Bool)(s)
+      #|  UNIV == IMAGE(mk_ind, select((s : (Num) -> Bool) => !(s == {}) && FINITE(s)))
+      #|  (op_lt_us_c : ((Ind_model) -> Bool, (I) -> Bool) -> Bool)((UNIV : (Ind_model) -> Bool), (UNIV : (I) -> Bool)) && (\226\136\128 s : (A) -> Bool, (op_lt_us_c : ((A) -> Bool, (I) -> Bool) -> Bool)(s, (UNIV : (I) -> Bool)) \226\134\146 (op_lt_us_c : (((A) -> Bool) -> Bool, (I) -> Bool) -> Bool)({(t : (A) -> Bool) | (SUBSET : ((A) -> Bool, (A) -> Bool) -> Bool)(t, s)}, (UNIV : (I) -> Bool)))
+      #|  (n : Num)
+      #|  (CARD : ((I) -> Bool) -> Num)((UNIV : (I) -> Bool)) - 1
+      #|  (a : Num) - 1 < (b : Num) \226\134\146 !(a == 0) \226\134\146 a <= b
+      #|  !((n : Num) == 0) \226\134\146 n - 1 < n
+      #|  !((CARD : ((I) -> Bool) -> Num)((UNIV : (I) -> Bool)) == 0)
+      #|  {(n : Num) | n < (CARD : ((I) -> Bool) -> Num)((UNIV : (I) -> Bool)) - 1}
+      #|  (INFINITE : ((I) -> Bool) -> Bool)((UNIV : (I) -> Bool))
+      #|  (a : Bool) == (b : Bool) \226\134\146 a \226\134\146 b
+      #|  (op_lt_eq_us_c : (((I, I)) -> Bool, (I) -> Bool) -> Bool)((UNIV : ((I, I)) -> Bool), (UNIV : (I) -> Bool))
+      #|  \226\136\131 f : ((I, I)) -> I, \226\136\128 x : (I, I), \226\136\128 y : (I, I), f(x) == f(y) \226\134\146 x == y
+      #|  UNIV == {false, true}
+      #|  (FINITE : ((Bool) -> Bool) -> Bool)((UNIV : (Bool) -> Bool))
+      #|  (op_lt_us_c : ((Bool) -> Bool, (I) -> Bool) -> Bool)((UNIV : (Bool) -> Bool), (UNIV : (I) -> Bool))
+      #|  \226\136\131 f : (Bool) -> I, \226\136\128 x : Bool, \226\136\128 y : Bool, f(x) == f(y) \226\134\146 x == y
+      #|  \226\136\131 f : (Ind_model) -> I, \226\136\128 x : Ind_model, \226\136\128 y : Ind_model, f(x) == f(y) \226\134\146 x == y
+      #|  \226\136\128 s : (I) -> Bool, (op_lt_us_c : ((I) -> Bool, (I) -> Bool) -> Bool)(s, (UNIV : (I) -> Bool)) \226\134\146 (\226\136\131 f : ((I) -> Bool) -> I, \226\136\128 t : (I) -> Bool, \226\136\128 u : (I) -> Bool, (SUBSET : ((I) -> Bool, (I) -> Bool) -> Bool)(t, s) && (SUBSET : ((I) -> Bool, (I) -> Bool) -> Bool)(u, s) && f(t) == f(u) \226\134\146 t == u)
+      #|  (setlevel : (Setlevel, I) -> Bool)(Ur_bool) == IMAGE(I_BOOL, UNIV) && setlevel(Ur_ind) == IMAGE(I_IND, UNIV) && setlevel(Cartprod((l1 : Setlevel), (l2 : Setlevel))) == IMAGE(I_PAIR, {((x : I), (y : I)) | IN(x, setlevel(l1)) && IN(y, setlevel(l2))}) && setlevel(Powerset((l : Setlevel))) == IMAGE(I_SET(setlevel(l)), {(s : (I) -> Bool) | SUBSET(s, setlevel(l))})
+      #|  op_star_us_c(setlevel((l1 : Setlevel)), setlevel((l2 : Setlevel)))
+      #|  (l2 : Setlevel)
+      #|  (l1 : Setlevel)
+      #|  {(s : (I) -> Bool) | SUBSET(s, setlevel((l : Setlevel)))}
+      #|  (l : Setlevel)
+      #|  (UNIV : (Ind_model) -> Bool)
+      #|  (UNIV : (Bool) -> Bool)
+      #|  \226\136\128 l : Setlevel, (op_lt_us_c : ((I) -> Bool, (I) -> Bool) -> Bool)(setlevel(l), (UNIV : (I) -> Bool))
+      #|  \226\136\128 l : Setlevel, \226\136\128 s : (I) -> Bool, \226\136\128 t : (I) -> Bool, SUBSET(s, setlevel(l)) && SUBSET(t, setlevel(l)) && I_SET(setlevel(l), s) == I_SET(setlevel(l), t) \226\134\146 s == t
+      #|  (universe : ((Setlevel, I)) -> Bool) == {((t : Setlevel), (x : I)) | IN(x, setlevel(t))}
+      #|  (Ur_bool, I_BOOL(true))
+      #|  \226\136\131 a : (Setlevel, I), IN(a, universe)
+      #|  \226\136\128 l : Setlevel, \226\136\128 e : I, IN(e, setlevel(l)) == (dest_V(mk_V((l, e))) == (l, e))
+      #|  (droplevel : (Setlevel) -> Setlevel)(Powerset((l : Setlevel))) == l
+      #|  (isasetlevel : (Setlevel) -> Bool)(Ur_bool) == false && isasetlevel(Ur_ind) == false && isasetlevel(Cartprod((l1 : Setlevel), (l2 : Setlevel))) == false && isasetlevel(Powerset((l : Setlevel))) == true
+      #|  (level : (V) -> Setlevel)((x : V)) == FST(dest_V(x))
+      #|  (element : (V) -> I)((x : V)) == SND(dest_V(x))
+      #|  \226\136\128 x : V, IN(element(x), setlevel(level(x)))
+      #|  \226\136\128 x : V, mk_V((level(x), element(x))) == x
+      #|  (set : (V, I) -> Bool)((x : V)) == select((s : (I) -> Bool) => SUBSET(s, setlevel(droplevel(level(x)))) && I_SET(setlevel(droplevel(level(x))), s) == element(x))
+      #|  (isaset : (V) -> Bool)((x : V)) == (\226\136\131 l : Setlevel, level(x) == Powerset(l))
+      #|  (op_lt_colon : (V, V) -> Bool)((x : V), (s : V)) == (level(s) == Powerset(level(x)) && IN(element(x), set(s)))
+      #|  (op_lt_eq_colon : (V, V) -> Bool)((s : V), (t : V)) == (level(s) == level(t) && (\226\136\128 x : V, op_lt_colon(x, s) \226\134\146 op_lt_colon(x, t)))
+      #|  \226\136\128 x : V, \226\136\128 s : V, op_lt_colon(x, s) \226\134\146 isaset(s)
+      #|  \226\136\128 l : Setlevel, \226\136\131 x : I, IN(x, setlevel(l))
+      #|  \226\136\128 l : Setlevel, \226\136\131 s : V, level(s) == l
+      #|  IN((e : I), setlevel((l : Setlevel))) \226\134\146 level(mk_V((l, e))) == l && element(mk_V((l, e))) == e
+      #|  IN(I_SET(setlevel((l : Setlevel)), (s : (I) -> Bool)), setlevel(Powerset(l)))
+      #|  IN(I_SET(setlevel((l : Setlevel)), (s : (I) -> Bool)), setlevel(Powerset(l)))
+      #|  SUBSET((s : (I) -> Bool), setlevel((l : Setlevel))) \226\134\146 set(mk_V((Powerset(l), I_SET(setlevel(l), s)))) == s && level(mk_V((Powerset(l), I_SET(setlevel(l), s)))) == Powerset(l) && element(mk_V((Powerset(l), I_SET(setlevel(l), s)))) == I_SET(setlevel(l), s)
+      #|  mk_V((Powerset((l : Setlevel)), I_SET(setlevel(l), {})))
+      #|  (l : Setlevel)
+      #|  \226\136\128 l : Setlevel, \226\136\131 s : V, level(s) == l && (\226\136\128 x : V, !op_lt_colon(x, s))
+      #|  (x : V)
+      #|  SUBSET({(i : I) | IN(i, (u : (I) -> Bool)) && (p : (V) -> Bool)(mk_V(((l : Setlevel), i)))}, setlevel(l))
+      #|  mk_V((Powerset((l : Setlevel)), I_SET(setlevel(l), {(i : I) | IN(i, (u : (I) -> Bool)) && (p : (V) -> Bool)(mk_V((l, i)))})))
+      #|  (u : (I) -> Bool)
+      #|  (s : V)
+      #|  (l : Setlevel)
+      #|  isaset((s : V))
+      #|  \226\136\128 s : V, \226\136\128 p : (V) -> Bool, \226\136\131 t : V, level(t) == level(s) && (\226\136\128 x : V, op_lt_colon(x, t) == (op_lt_colon(x, s) && p(x)))
+      #|  mk_V((Powerset((l : Setlevel)), I_SET(setlevel(l), setlevel(l))))
+      #|  \226\136\128 l : Setlevel, \226\136\131 s : V, level(s) == Powerset(l) && (\226\136\128 x : V, op_lt_colon(x, s) == (level(x) == l && IN(element(x), setlevel(l))))
+      #|  (s : V)
+      #|  (l : Setlevel)
+      #|  \226\136\128 s : V, isaset(s) \226\134\146 SUBSET(set(s), setlevel(droplevel(level(s)))) && I_SET(setlevel(droplevel(level(s))), set(s)) == element(s)
+      #|  \226\136\128 s : V, isaset(s) \226\134\146 SUBSET(set(s), setlevel(droplevel(level(s))))
+      #|  (t : V)
+      #|  level((s : V))
+      #|  (u : V)
+      #|  (v : V) => \226\136\128 x : V, op_lt_colon(x, v) \226\134\146 op_lt_colon(x, (s : V))
+      #|  (t : V)
+      #|  Powerset((l : Setlevel))
+      #|  (t : V)
+      #|  (l : Setlevel)
+      #|  isaset((s : V))
+      #|  \226\136\128 s : V, \226\136\131 t : V, level(t) == Powerset(level(s)) && (\226\136\128 x : V, op_lt_colon(x, t) == op_lt_eq_colon(x, s))
+      #|  (pair : (V, V) -> V)((x : V), (y : V)) == mk_V((Cartprod(level(x), level(y)), I_PAIR((element(x), element(y)))))
+      #|  \226\136\128 x : I, \226\136\128 y : I, \226\136\128 l : Setlevel, \226\136\128 m : Setlevel, IN(x, setlevel(l)) && IN(y, setlevel(m)) \226\134\146 IN(I_PAIR((x, y)), setlevel(Cartprod(l, m)))
+      #|  dest_V(mk_V((Cartprod(level((x : V)), level((y : V))), I_PAIR((element(x), element(y)))))) == (Cartprod(level(x), level(y)), I_PAIR((element(x), element(y))))
       #|  dest_V
-      #|  forall x1 y1 x2 y2. (pair x1 y1 = pair x2 y2) <=> (x1 = x2) /\\ (y1 = y2)
+      #|  \226\136\128 x1 : V, \226\136\128 y1 : V, \226\136\128 x2 : V, \226\136\128 y2 : V, (pair(x1, y1) == pair(x2, y2)) == (x1 == x2 && y1 == y2)
       #|  dest_V
-      #|  forall x y. level(pair x y) = Cartprod (level x) (level y)
-      #|  fst p = @x. ?y. p = pair x y
-      #|  snd p = @y. ?x. p = pair x y
-      #|  forall x y. (fst(pair x y) = x) /\\ (snd(pair x y) = y)
-      #|  (a ==> b) /\\ (c ==> a) ==> ((a /\\ b) /\\ c <=> c)
-      #|  z:V
-      #|  w:V
-      #|  \\z. ?x y. (z = pair x y) /\\ x <: s /\\ y <: t
-      #|  u:V
-      #|  u:V
-      #|  Cartprod l m
-      #|  ?m. (level t = Powerset m)
-      #|  isaset t
-      #|  ?l. (level s = Powerset l)
-      #|  isaset s
-      #|  forall s t. ?u. (level u =\n                  Powerset(Cartprod (droplevel(level s))\n                                    (droplevel(level t)))) /\\\n                 forall z. z <: u <=> ?x y. (z = pair x y) /\\ x <: s /\\ y <: t
-      #|  e IN setlevel l
-      #|  mk_V(l,e)
-      #|  l:setlevel
-      #|  forall s. isaset s /\\ e IN set(s)\n       ==> ?x. (e = element x) /\\ (level s = Powerset(level x)) /\\ x <: s
-      #|  level s = level t
-      #|  isaset s /\\ isaset t\n   ==> (s <=: t <=> (level s = level t) /\\ set(s) SUBSET set(t))
-      #|  t:V
-      #|  s:V
-      #|  forall s t. isaset s /\\ isaset t /\\ s <=: t /\\ t <=: s ==> (s = t)
-      #|  forall s t. isaset s /\\ isaset t /\\ (level s = level t) /\\ (forall x. x <: s <=> x <: t)\n         ==> (s = t)
-      #|  forall s t. (?x. x <: s) /\\ (?x. x <: t) /\\ (forall x. x <: s <=> x <: t)\n         ==> (s = t)
-      #|  \\x. ?u. x <: u /\\ u <: s
-      #|  t:V
-      #|  t:V
-      #|  m:setlevel
-      #|  m:setlevel
-      #|  l:setlevel
-      #|  ?m. l = Powerset m
-      #|  l:setlevel
-      #|  droplevel(level s)
-      #|  isaset s
-      #|  forall s. ?t. (level t = droplevel(level s)) /\\\n           forall x. x <: t <=> ?u. x <: u /\\ u <: s
-      #|  True = mk_V(Ur_bool,I_BOOL T)
-      #|  False = mk_V(Ur_bool,I_BOOL F)
-      #|  boolset =\n     mk_V(Powerset Ur_bool,I_SET (setlevel Ur_bool) (setlevel Ur_bool))
-      #|  forall b. (I_BOOL b) IN setlevel Ur_bool
-      #|  IMAGE I_BOOL UNIV = {I_BOOL F,I_BOOL T}
-      #|  forall x. x <: boolset <=> (x = True) \\/ (x = False)
-      #|  forall b. (I_BOOL b) IN setlevel Ur_bool
+      #|  \226\136\128 x : V, \226\136\128 y : V, level(pair(x, y)) == Cartprod(level(x), level(y))
+      #|  (fst : (V) -> V)((p : V)) == select((x : V) => \226\136\131 y : V, p == pair(x, y))
+      #|  (snd : (V) -> V)((p : V)) == select((y : V) => \226\136\131 x : V, p == pair(x, y))
+      #|  \226\136\128 x : V, \226\136\128 y : V, fst(pair(x, y)) == x && snd(pair(x, y)) == y
+      #|  ((a : Bool) \226\134\146 (b : Bool)) && ((c : Bool) \226\134\146 a) \226\134\146 ((a && b) && c) == c
+      #|  (z : V)
+      #|  (w : V)
+      #|  (z : V) => \226\136\131 x : V, \226\136\131 y : V, z == pair(x, y) && op_lt_colon(x, (s : V)) && op_lt_colon(y, (t : V))
+      #|  (u : V)
+      #|  (u : V)
+      #|  Cartprod((l : Setlevel), (m : Setlevel))
+      #|  \226\136\131 m : Setlevel, level((t : V)) == Powerset(m)
+      #|  isaset((t : V))
+      #|  \226\136\131 l : Setlevel, level((s : V)) == Powerset(l)
+      #|  isaset((s : V))
+      #|  \226\136\128 s : V, \226\136\128 t : V, \226\136\131 u : V, level(u) == Powerset(Cartprod(droplevel(level(s)), droplevel(level(t)))) && (\226\136\128 z : V, op_lt_colon(z, u) == (\226\136\131 x : V, \226\136\131 y : V, z == pair(x, y) && op_lt_colon(x, s) && op_lt_colon(y, t)))
+      #|  IN((e : I), setlevel((l : Setlevel)))
+      #|  mk_V(((l : Setlevel), (e : I)))
+      #|  (l : Setlevel)
+      #|  \226\136\128 s : V, isaset(s) && IN((e : I), set(s)) \226\134\146 (\226\136\131 x : V, e == element(x) && level(s) == Powerset(level(x)) && op_lt_colon(x, s))
+      #|  level((s : V)) == level((t : V))
+      #|  isaset((s : V)) && isaset((t : V)) \226\134\146 op_lt_eq_colon(s, t) == (level(s) == level(t) && SUBSET(set(s), set(t)))
+      #|  (t : V)
+      #|  (s : V)
+      #|  \226\136\128 s : V, \226\136\128 t : V, isaset(s) && isaset(t) && op_lt_eq_colon(s, t) && op_lt_eq_colon(t, s) \226\134\146 s == t
+      #|  \226\136\128 s : V, \226\136\128 t : V, isaset(s) && isaset(t) && level(s) == level(t) && (\226\136\128 x : V, op_lt_colon(x, s) == op_lt_colon(x, t)) \226\134\146 s == t
+      #|  \226\136\128 s : V, \226\136\128 t : V, (\226\136\131 x : V, op_lt_colon(x, s)) && (\226\136\131 x : V, op_lt_colon(x, t)) && (\226\136\128 x : V, op_lt_colon(x, s) == op_lt_colon(x, t)) \226\134\146 s == t
+      #|  (x : V) => \226\136\131 u : V, op_lt_colon(x, u) && op_lt_colon(u, (s : V))
+      #|  (t : V)
+      #|  (t : V)
+      #|  (m : Setlevel)
+      #|  (m : Setlevel)
+      #|  (l : Setlevel)
+      #|  \226\136\131 m : Setlevel, (l : Setlevel) == Powerset(m)
+      #|  (l : Setlevel)
+      #|  droplevel(level((s : V)))
+      #|  isaset((s : V))
+      #|  \226\136\128 s : V, \226\136\131 t : V, level(t) == droplevel(level(s)) && (\226\136\128 x : V, op_lt_colon(x, t) == (\226\136\131 u : V, op_lt_colon(x, u) && op_lt_colon(u, s)))
+      #|  (True : V) == mk_V((Ur_bool, I_BOOL(true)))
+      #|  (False : V) == mk_V((Ur_bool, I_BOOL(false)))
+      #|  (boolset : V) == mk_V((Powerset(Ur_bool), I_SET(setlevel(Ur_bool), setlevel(Ur_bool))))
+      #|  \226\136\128 b : Bool, IN(I_BOOL(b), setlevel(Ur_bool))
+      #|  IMAGE(I_BOOL, UNIV) == {I_BOOL(false), I_BOOL(true)}
+      #|  \226\136\128 x : V, op_lt_colon(x, boolset) == (x == True || x == False)
+      #|  \226\136\128 b : Bool, IN(I_BOOL(b), setlevel(Ur_bool))
       #|  dest_V
-      #|  ~(True = False)
-      #|  forall x y. x <: boolset /\\ y <: boolset /\\\n         ((x = True) <=> (y = True))\n         ==> (x = y)
-      #|  indset = mk_V(Powerset Ur_ind,I_SET (setlevel Ur_ind) (setlevel Ur_ind))
-      #|  forall i. (I_IND i) IN setlevel Ur_ind
-      #|  \\i. mk_V(Ur_ind,I_IND i)
-      #|  ?f. (forall i:ind_model. f(i) <: indset) /\\ (forall i j. (f i = f j) ==> (i = j))
-      #|  ?x. x <: indset
-      #|  ?ch. forall s. (?x. x <: s) ==> ch(s) <: s
-      #|  forall x s. x <: powerset s <=> x <=: s
-      #|  forall z s t. z <: cartproduct s t <=> ?x y. (z = pair x y) /\\ x <: s /\\ y <: t
-      #|  forall p s x. x <: s suchthat p <=> x <: s /\\ p x
-      #|  (?x. x <: s) /\\ (?y. y <: t) ==> ?z. z <: cartproduct s t
-      #|  funspace s t =\n      powerset(cartproduct s t) suchthat\n      (\\u. forall x. x <: s ==> ?!y. pair x y <: u)
-      #|  apply f x = @y. pair x y <: f
+      #|  !(True == False)
+      #|  \226\136\128 x : V, \226\136\128 y : V, op_lt_colon(x, boolset) && op_lt_colon(y, boolset) && (x == True) == (y == True) \226\134\146 x == y
+      #|  (indset : V) == mk_V((Powerset(Ur_ind), I_SET(setlevel(Ur_ind), setlevel(Ur_ind))))
+      #|  \226\136\128 i : Ind_model, IN(I_IND(i), setlevel(Ur_ind))
+      #|  (i : Ind_model) => mk_V((Ur_ind, I_IND(i)))
+      #|  \226\136\131 f : (Ind_model) -> V, (\226\136\128 i : Ind_model, op_lt_colon(f(i), indset)) && (\226\136\128 i : Ind_model, \226\136\128 j : Ind_model, f(i) == f(j) \226\134\146 i == j)
+      #|  \226\136\131 x : V, op_lt_colon(x, indset)
+      #|  \226\136\131 ch : (V) -> V, \226\136\128 s : V, (\226\136\131 x : V, op_lt_colon(x, s)) \226\134\146 op_lt_colon(ch(s), s)
+      #|  \226\136\128 x : V, \226\136\128 s : V, op_lt_colon(x, powerset(s)) == op_lt_eq_colon(x, s)
+      #|  \226\136\128 z : V, \226\136\128 s : V, \226\136\128 t : V, op_lt_colon(z, cartproduct(s, t)) == (\226\136\131 x : V, \226\136\131 y : V, z == pair(x, y) && op_lt_colon(x, s) && op_lt_colon(y, t))
+      #|  \226\136\128 p : (V) -> Bool, \226\136\128 s : V, \226\136\128 x : V, op_lt_colon(x, suchthat(s, p)) == (op_lt_colon(x, s) && p(x))
+      #|  (\226\136\131 x : V, op_lt_colon(x, (s : V))) && (\226\136\131 y : V, op_lt_colon(y, (t : V))) \226\134\146 (\226\136\131 z : V, op_lt_colon(z, cartproduct(s, t)))
+      #|  (funspace : (V, V) -> V)((s : V), (t : V)) == suchthat(powerset(cartproduct(s, t)), (u : V) => \226\136\128 x : V, op_lt_colon(x, s) \226\134\146 existsunique((y : V) => op_lt_colon(pair(x, y), u)))
+      #|  (apply : (V, V) -> V)((f : V), (x : V)) == select((y : V) => op_lt_colon(pair(x, y), f))
       #|  abstract s t f =\n        (cartproduct s t) suchthat (\\z. forall x y. (pair x y = z) ==> (y = f x))
-      #|  forall x s t. x <: s /\\ f(x) <: t ==> (apply(abstract s t f) x = f(x))
-      #|  forall f x s t. x <: s /\\ f <: funspace s t ==> apply f x <: t
+      #|  \226\136\128 x : V, \226\136\128 s : V, \226\136\128 t : V, op_lt_colon(x, s) && op_lt_colon((f : (V) -> V)(x), t) \226\134\146 apply(op_abstract(s, t, f), x) == f(x)
+      #|  \226\136\128 f : V, \226\136\128 x : V, \226\136\128 s : V, \226\136\128 t : V, op_lt_colon(x, s) && op_lt_colon(f, funspace(s, t)) \226\134\146 op_lt_colon(apply(f, x), t)
       #|  forall f x s t. (forall x. x <: s ==> f(x) <: t)\n             ==> abstract s t f <: funspace s t
-      #|  abstract s t (\\x. @y. y <: t)
-      #|  forall s t. ((?x. x <: s) ==> (?y. y <: t)) ==> ?f. f <: funspace s t
-      #|  (a /\\ b /\\ c) /\\ d <=> ~(a ==> b /\\ c ==> ~d)
-      #|  forall s t1 t2 f g.\n        (?x. x <: s) /\\\n        (forall x. x <: s ==> f(x) <: t1 /\\ g(x) <: t2 /\\ (f x = g x))\n        ==> (abstract s t1 f = abstract s t2 g)
-      #|  boolean b = if b then True else False
-      #|  holds s x <=> (apply s x = True)
-      #|  forall b. boolean b <: boolset
-      #|  forall b. (boolean b = True) <=> b
+      #|  op_abstract((s : V), (t : V), (x : V) => select((y : V) => op_lt_colon(y, t)))
+      #|  \226\136\128 s : V, \226\136\128 t : V, ((\226\136\131 x : V, op_lt_colon(x, s)) \226\134\146 (\226\136\131 y : V, op_lt_colon(y, t))) \226\134\146 (\226\136\131 f : V, op_lt_colon(f, funspace(s, t)))
+      #|  (((a : Bool) && (b : Bool) && (c : Bool)) && (d : Bool)) == !(a \226\134\146 b && c \226\134\146 !d)
+      #|  \226\136\128 s : V, \226\136\128 t1 : V, \226\136\128 t2 : V, \226\136\128 f : (V) -> V, \226\136\128 g : (V) -> V, (\226\136\131 x : V, op_lt_colon(x, s)) && (\226\136\128 x : V, op_lt_colon(x, s) \226\134\146 op_lt_colon(f(x), t1) && op_lt_colon(g(x), t2) && f(x) == g(x)) \226\134\146 op_abstract(s, t1, f) == op_abstract(s, t2, g)
+      #|  (boolean : (Bool) -> V)((b : Bool)) == (if b { True } else { False })
+      #|  (holds : (V, V) -> Bool)((s : V), (x : V)) == (apply(s, x) == True)
+      #|  \226\136\128 b : Bool, op_lt_colon(boolean(b), boolset)
+      #|  \226\136\128 b : Bool, (boolean(b) == True) == b
       #|INJ_LEMMA =  |- ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun('?1,bool),bool) (\x:'?1. (#forall:fun(fun('?1,bool),bool) (\y:'?1. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('?2,fun('?2,bool)) (f:fun('?1,'?2) x:'?1)) (f:fun('?1,'?2) y:'?1))) ((#=:fun('?1,fun('?1,bool)) x:'?1) y:'?1))))))) (#forall:fun(fun('?1,bool),bool) (\x:'?1. (#forall:fun(fun('?1,bool),bool) (\y:'?1. ((#=:fun(bool,fun(bool,bool)) ((#=:fun('?2,fun('?2,bool)) (f:fun('?1,'?2) x:'?1)) (f:fun('?1,'?2) y:'?1))) ((#=:fun('?1,fun('?1,bool)) x:'?1) y:'?1)))))))
       #|valmod =  |- (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('B,bool),bool) (\a:'B. (#forall:fun(fun(fun('A,'B),bool),bool) (\v:fun('A,'B). ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) (((#|->:fun('A,fun('B,fun(fun('A,'B),fun('A,'B)))) x:'A) a:'B) v:fun('A,'B))) (\y:'A. (((#COND:fun(bool,fun('B,fun('B,'B))) ((#=:fun('A,fun('A,bool)) y:'A) x:'A)) a:'B) (v:fun('A,'B) y:'A))))))))))
       #|VALMOD =  |- (#forall:fun(fun(fun('?3,'?4),bool),bool) (\v:fun('?3,'?4). (#forall:fun(fun('?3,bool),bool) (\x:'?3. (#forall:fun(fun('?4,bool),bool) (\y:'?4. (#forall:fun(fun('?3,bool),bool) (\a:'?3. ((#=:fun('?4,fun('?4,bool)) ((((#|->:fun('?3,fun('?4,fun(fun('?3,'?4),fun('?3,'?4)))) x:'?3) y:'?4) v:fun('?3,'?4)) a:'?3)) (((#COND:fun(bool,fun('?4,fun('?4,'?4))) ((#=:fun('?3,fun('?3,bool)) a:'?3) x:'?3)) y:'?4) (v:fun('?3,'?4) a:'?3)))))))))))
