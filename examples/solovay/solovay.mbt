@@ -697,7 +697,7 @@ fn step_26() -> Unit raise {
 ///|
 /// Examples/solovay.ml:365
 fn step_27() -> Unit raise {
-  ignore(@tactics.g(@term_syntax.parse_term("∀ b : Cart[Real, N], ∀ a : Cart[Real, N], ∀ d : Cart[Real, N], !(d == vec(0)) → dist((a, b + d)) > dist((a, b)) || dist((a, b - d)) > dist((a, b))")))
+  ignore(@tactics.g(@term_syntax.parse_term("∀ b : Cart[Real, N], ∀ a : Cart[Real, N], ∀ d : Cart[Real, N], !(d == vec(0)) → distance((a, b + d)) > distance((a, b)) || distance((a, b - d)) > distance((a, b))")))
 }
 
 ///|
