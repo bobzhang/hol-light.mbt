@@ -63577,2724 +63577,2724 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|0..0..0..1..solved at 5
       #|0..0..solved at 4
       #|Multivariate/degree quotations (2718):
-      #|  brouwer_degree1 n (f:real^N->real^N) =\n        if 1 <= n /\\ n <= dimindex(:N)\n        then brouwer_degree2 (n - 1)\n              ((\\x i. if 1 <= i /\\ i <= n then x$i else &0) o\n               f o\n               (\\x. lambda i. if 1 <= i /\\ i <= n then x i else &0))\n        else &1
-      #|  brouwer_degree (f:real^N->real^N) = brouwer_degree1 (dimindex(:N)) f
-      #|  h':real^N->num->real = \\x i. if 1 <= i /\\ i <= n then x$i else &0
-      #|  h:(num->real)->real^N =\n      \\x. lambda i. if 1 <= i /\\ i <= n then x i else &0
-      #|  n:num
-      #|  forall n f g:real^N->real^N.\n        (forall x. x IN sphere(vec 0,&1) INTER span(IMAGE basis (1..n))\n             ==> f x = g x)\n        ==> brouwer_degree1 n f = brouwer_degree1 n g
-      #|  n - 1
-      #|  h':real^N->num->real = \\x i. if 1 <= i /\\ i <= n then x$i else &0
-      #|  h:(num->real)->real^N =\n      \\x. lambda i. if 1 <= i /\\ i <= n then x i else &0
-      #|  n:num
-      #|  forall n. brouwer_degree1 n (\\x:real^N. x) = &1
-      #|  h':real^N->num->real = \\x i. if 1 <= i /\\ i <= n then x$i else &0
-      #|  h:(num->real)->real^N =\n      \\x. lambda i. if 1 <= i /\\ i <= n then x i else &0
-      #|  n:num
-      #|  forall n f g:real^N->real^N.\n        f continuous_on (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) /\\\n        g continuous_on (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) /\\\n        IMAGE f (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) SUBSET\n                (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) /\\\n        IMAGE g (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) SUBSET\n                (sphere(vec 0,&1) INTER span(IMAGE basis (1..n)))\n        ==> brouwer_degree1 n (g o f) =\n            brouwer_degree1 n g * brouwer_degree1 n f
-      #|  h':real^N->num->real = \\x i. if 1 <= i /\\ i <= n then x$i else &0
-      #|  h:(num->real)->real^N =\n      \\x. lambda i. if 1 <= i /\\ i <= n then x i else &0
-      #|  n:num
-      #|  forall n f g:real^N->real^N.\n     homotopic_with (\\x. T)\n      (subtopology euclidean (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))),\n       subtopology euclidean (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))))\n      f g\n     ==> brouwer_degree1 n f = brouwer_degree1 n g
-      #|  forall n a:real^N.\n      1 <= n /\\ n <= dimindex(:N) ==> brouwer_degree1 n (\\x. a) = &0
-      #|  i <= dimindex(:N)
-      #|  1 <= i /\\ i <= n
-      #|  i:num
-      #|  x:num->real
-      #|  n - 1
-      #|  j = 1
-      #|  j:num
-      #|  brouwer_degree1 n (reflect_along (basis 1:real^N))
-      #|  forall n a:real^N.\n        1 <= n /\\ n <= dimindex(:N) /\\\n        a IN span(IMAGE basis (1..n)) DELETE vec 0\n        ==> brouwer_degree1 n (reflect_along a) = -- &1
-      #|  (h':real^N->num->real) a
-      #|  forall a. a IN t /\\ ~(a IN s) ==> ~(s = t)
-      #|  a:real^N
-      #|  h':real^N->num->real = \\x i. if 1 <= i /\\ i <= n then x$i else &0
-      #|  h:(num->real)->real^N =\n      \\x. lambda i. if 1 <= i /\\ i <= n then x i else &0
-      #|  n:num
-      #|  forall n (f:real^N->real^N).\n        1 <= n /\\ n <= dimindex(:N) /\\\n        f continuous_on (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) /\\\n        IMAGE f (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) PSUBSET\n                (sphere(vec 0,&1) INTER span(IMAGE basis (1..n)))\n        ==> brouwer_degree1 n f = &0
-      #|  forall f g:real^N->real^N.\n        (forall x. x IN sphere(vec 0,&1) ==> f x = g x)\n        ==> brouwer_degree f = brouwer_degree g
-      #|  brouwer_degree (\\x:real^N. x) = &1
-      #|  forall f g:real^N->real^N.\n        f continuous_on sphere(vec 0,&1) /\\\n        g continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET sphere(vec 0,&1) /\\\n        IMAGE g (sphere(vec 0,&1)) SUBSET sphere(vec 0,&1)\n        ==> brouwer_degree (g o f) = brouwer_degree g * brouwer_degree f
-      #|  forall f g:real^N->real^N.\n     homotopic_with (\\x. T)\n      (subtopology euclidean (sphere(vec 0,&1)),\n       subtopology euclidean (sphere(vec 0,&1)))\n      f g\n     ==> brouwer_degree f = brouwer_degree g
-      #|  forall a:real^N. brouwer_degree (\\x. a) = &0
-      #|  forall a:real^N. ~(a = vec 0) ==> brouwer_degree (reflect_along a) = -- &1
-      #|  forall(f:real^N->real^N).\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) PSUBSET sphere(vec 0,&1)\n        ==> brouwer_degree f = &0
-      #|  \\f:real^N->real^N. T
-      #|  reflect_along(basis 1):real^N->real^N
-      #|  I:real^N->real^N
-      #|  f:real^N->real^N
-      #|  forall(f:real^N->real^N).\n        orthogonal_transformation f\n        ==> real_of_int(brouwer_degree f) = det(matrix f)
-      #|  orthogonal_transformation:(real^N->real^N)->bool
-      #|  forall f g:real^N->real^N.\n        orthogonal_transformation f /\\ orthogonal_transformation g\n        ==> (homotopic_with (\\x. T)\n              (subtopology euclidean (sphere (vec 0,&1)),\n               subtopology euclidean (sphere (vec 0,&1))) f g <=>\n             det(matrix f) = det(matrix g))
-      #|  orthogonal_transformation:(real^N->real^N)->bool
-      #|  ~(z IN s)\n        ==> forall f. a IN IMAGE f s ==> a IN IMAGE f (UNIV DELETE z)
-      #|  s SUBSET UNIV DELETE z <=> ~(z IN s)
-      #|  (:real^N) DELETE vec 0
-      #|  \\f:real^N->real^N. T
-      #|  \\f:real^N->real^N. T
-      #|  (\\x. inv(norm x) % x) o (g:real^N->real^N)
-      #|  (\\x. inv(norm x) % x) o (f:real^N->real^N)
-      #|  forall f g:real^N->real^N.\n        orthogonal_transformation f /\\ orthogonal_transformation g\n        ==> (homotopic_with (\\x. T)\n              (subtopology euclidean ((:real^N) DELETE vec 0),\n               subtopology euclidean ((:real^N) DELETE vec 0))\n              f g <=>\n             det(matrix f) = det(matrix g))
-      #|  forall f g:real^N->real^N.\n        orthogonal_transformation f /\\ orthogonal_transformation g /\\\n        homotopic_with (\\x. T)\n          (subtopology euclidean (sphere (vec 0,&1)),\n           subtopology euclidean (sphere (vec 0,&1))) f g\n        ==> det(matrix f) = det(matrix g)
-      #|  matrix_inv P:real^N^N
-      #|  P:real^N^N
-      #|  U:real^N^N
-      #|  forall f:real^N->real^N.\n        linear f /\\ ~(det(matrix f) = &0)\n        ==> ?P. positive_definite P /\\\n                orthogonal_transformation ((\\x. P ** x) o f)
-      #|  x = &1 /\\ y = &1 ==> x * a = y * b ==> a = b
+      #|  (brouwer_degree1 : (Num, (Cart[Real, N]) -> Cart[Real, N]) -> Int)((n : Num), (f : (Cart[Real, N]) -> Cart[Real, N])) == (if 1 <= n && n <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) { brouwer_degree2(n - 1, (o : ((Cart[Real, N], Num) -> Real, ((Num) -> Real) -> Cart[Real, N], (Num) -> Real, Num) -> Real)((x : Cart[Real, N]) => (i : Num) => if 1 <= i && i <= n { (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) } else { real_of_num(0) }, (o : ((Cart[Real, N]) -> Cart[Real, N], ((Num) -> Real) -> Cart[Real, N], (Num) -> Real) -> Cart[Real, N])(f, (x : (Num) -> Real) => (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if 1 <= i && i <= n { x(i) } else { real_of_num(0) })))) } else { int_of_num(1) })
+      #|  (brouwer_degree : ((Cart[Real, N]) -> Cart[Real, N]) -> Int)((f : (Cart[Real, N]) -> Cart[Real, N])) == (brouwer_degree1 : (Num, (Cart[Real, N]) -> Cart[Real, N]) -> Int)((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)), f)
+      #|  (h' : (Cart[Real, N], Num) -> Real) == ((x : Cart[Real, N]) => (i : Num) => if 1 <= i && i <= (n : Num) { op_dollar(x, i) } else { real_of_num(0) })
+      #|  (h : ((Num) -> Real) -> Cart[Real, N]) == ((x : (Num) -> Real) => lambda((i : Num) => if 1 <= i && i <= (n : Num) { x(i) } else { real_of_num(0) }))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], (\226\136\128 x : Cart[Real, N], IN(x, INTER(sphere((vec(0), real_of_num(1))), span(IMAGE(basis, op_dot_dot(1, n))))) \226\134\146 f(x) == g(x)) \226\134\146 brouwer_degree1(n, f) == brouwer_degree1(n, g)
+      #|  (n : Num) - 1
+      #|  (h' : (Cart[Real, N], Num) -> Real) == ((x : Cart[Real, N]) => (i : Num) => if 1 <= i && i <= (n : Num) { op_dollar(x, i) } else { real_of_num(0) })
+      #|  (h : ((Num) -> Real) -> Cart[Real, N]) == ((x : (Num) -> Real) => lambda((i : Num) => if 1 <= i && i <= (n : Num) { x(i) } else { real_of_num(0) }))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, brouwer_degree1(n, (x : Cart[Real, N]) => x) == int_of_num(1)
+      #|  (h' : (Cart[Real, N], Num) -> Real) == ((x : Cart[Real, N]) => (i : Num) => if 1 <= i && i <= (n : Num) { op_dollar(x, i) } else { real_of_num(0) })
+      #|  (h : ((Num) -> Real) -> Cart[Real, N]) == ((x : (Num) -> Real) => lambda((i : Num) => if 1 <= i && i <= (n : Num) { x(i) } else { real_of_num(0) }))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], continuous_on(f, INTER(sphere((vec(0), real_of_num(1))), span(IMAGE(basis, op_dot_dot(1, n))))) && continuous_on(g, INTER(sphere((vec(0), real_of_num(1))), span(IMAGE(basis, op_dot_dot(1, n))))) && SUBSET(IMAGE(f, INTER(sphere((vec(0), real_of_num(1))), span(IMAGE(basis, op_dot_dot(1, n))))), INTER(sphere((vec(0), real_of_num(1))), span(IMAGE(basis, op_dot_dot(1, n))))) && SUBSET(IMAGE(g, INTER(sphere((vec(0), real_of_num(1))), span(IMAGE(basis, op_dot_dot(1, n))))), INTER(sphere((vec(0), real_of_num(1))), span(IMAGE(basis, op_dot_dot(1, n))))) \226\134\146 brouwer_degree1(n, o(g, f)) == brouwer_degree1(n, g) * brouwer_degree1(n, f)
+      #|  (h' : (Cart[Real, N], Num) -> Real) == ((x : Cart[Real, N]) => (i : Num) => if 1 <= i && i <= (n : Num) { op_dollar(x, i) } else { real_of_num(0) })
+      #|  (h : ((Num) -> Real) -> Cart[Real, N]) == ((x : (Num) -> Real) => lambda((i : Num) => if 1 <= i && i <= (n : Num) { x(i) } else { real_of_num(0) }))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, INTER(sphere((vec(0), real_of_num(1))), span(IMAGE(basis, op_dot_dot(1, n))))), subtopology(euclidean, INTER(sphere((vec(0), real_of_num(1))), span(IMAGE(basis, op_dot_dot(1, n)))))), f, g) \226\134\146 brouwer_degree1(n, f) == brouwer_degree1(n, g)
+      #|  \226\136\128 n : Num, \226\136\128 a : Cart[Real, N], 1 <= n && n <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (brouwer_degree1 : (Num, (Cart[Real, N]) -> Cart[Real, N]) -> Int)(n, (x : Cart[Real, N]) => a) == int_of_num(0)
+      #|  (i : Num) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  1 <= (i : Num) && i <= (n : Num)
+      #|  (i : Num)
+      #|  (x : (Num) -> Real)
+      #|  (n : Num) - 1
+      #|  (j : Num) == 1
+      #|  (j : Num)
+      #|  (brouwer_degree1 : (Num, (Cart[Real, N]) -> Cart[Real, N]) -> Int)((n : Num), (reflect_along : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((basis : (Num) -> Cart[Real, N])(1)))
+      #|  \226\136\128 n : Num, \226\136\128 a : Cart[Real, N], 1 <= n && n <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(a, (DELETE : ((Cart[Real, N]) -> Bool, Cart[Real, N], Cart[Real, N]) -> Bool)((span : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((IMAGE : ((Num) -> Cart[Real, N], (Num) -> Bool, Cart[Real, N]) -> Bool)((basis : (Num) -> Cart[Real, N]), op_dot_dot(1, n))), (vec : (Num) -> Cart[Real, N])(0))) \226\134\146 (brouwer_degree1 : (Num, (Cart[Real, N]) -> Cart[Real, N]) -> Int)(n, (reflect_along : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(a)) == -int_of_num(1)
+      #|  (h' : (Cart[Real, N], Num) -> Real)((a : Cart[Real, N]))
+      #|  \226\136\128 a : _, IN(a, (t : (_) -> Bool)) && !IN(a, (s : (_) -> Bool)) \226\134\146 !(s == t)
+      #|  (a : Cart[Real, N])
+      #|  (h' : (Cart[Real, N], Num) -> Real) == ((x : Cart[Real, N]) => (i : Num) => if 1 <= i && i <= (n : Num) { op_dollar(x, i) } else { real_of_num(0) })
+      #|  (h : ((Num) -> Real) -> Cart[Real, N]) == ((x : (Num) -> Real) => lambda((i : Num) => if 1 <= i && i <= (n : Num) { x(i) } else { real_of_num(0) }))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], 1 <= n && n <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (continuous_on : ((Cart[Real, N]) -> Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(f, (INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), real_of_num(1))), (span : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((IMAGE : ((Num) -> Cart[Real, N], (Num) -> Bool, Cart[Real, N]) -> Bool)((basis : (Num) -> Cart[Real, N]), op_dot_dot(1, n))))) && (PSUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((IMAGE : ((Cart[Real, N]) -> Cart[Real, N], (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(f, (INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), real_of_num(1))), (span : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((IMAGE : ((Num) -> Cart[Real, N], (Num) -> Bool, Cart[Real, N]) -> Bool)((basis : (Num) -> Cart[Real, N]), op_dot_dot(1, n))))), (INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), real_of_num(1))), (span : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((IMAGE : ((Num) -> Cart[Real, N], (Num) -> Bool, Cart[Real, N]) -> Bool)((basis : (Num) -> Cart[Real, N]), op_dot_dot(1, n))))) \226\134\146 (brouwer_degree1 : (Num, (Cart[Real, N]) -> Cart[Real, N]) -> Int)(n, f) == int_of_num(0)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], (\226\136\128 x : Cart[Real, N], IN(x, sphere((vec(0), real_of_num(1)))) \226\134\146 f(x) == g(x)) \226\134\146 brouwer_degree(f) == brouwer_degree(g)
+      #|  brouwer_degree((x : Cart[Real, N]) => x) == int_of_num(1)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], continuous_on(f, sphere((vec(0), real_of_num(1)))) && continuous_on(g, sphere((vec(0), real_of_num(1)))) && SUBSET(IMAGE(f, sphere((vec(0), real_of_num(1)))), sphere((vec(0), real_of_num(1)))) && SUBSET(IMAGE(g, sphere((vec(0), real_of_num(1)))), sphere((vec(0), real_of_num(1)))) \226\134\146 brouwer_degree(o(g, f)) == brouwer_degree(g) * brouwer_degree(f)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, sphere((vec(0), real_of_num(1)))), subtopology(euclidean, sphere((vec(0), real_of_num(1))))), f, g) \226\134\146 brouwer_degree(f) == brouwer_degree(g)
+      #|  \226\136\128 a : Cart[Real, N], brouwer_degree((x : Cart[Real, N]) => a) == int_of_num(0)
+      #|  \226\136\128 a : Cart[Real, N], !(a == vec(0)) \226\134\146 brouwer_degree(reflect_along(a)) == -int_of_num(1)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], continuous_on(f, sphere((vec(0), real_of_num(1)))) && PSUBSET(IMAGE(f, sphere((vec(0), real_of_num(1)))), sphere((vec(0), real_of_num(1)))) \226\134\146 brouwer_degree(f) == int_of_num(0)
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N]) => true
+      #|  (reflect_along : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((basis : (Num) -> Cart[Real, N])(1))
+      #|  (I : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(f) \226\134\146 real_of_int(brouwer_degree(f)) == det(matrix(f))
+      #|  (orthogonal_transformation : ((Cart[Real, N]) -> Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(f) && orthogonal_transformation(g) \226\134\146 homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, sphere((vec(0), real_of_num(1)))), subtopology(euclidean, sphere((vec(0), real_of_num(1))))), f, g) == (det(matrix(f)) == det(matrix(g)))
+      #|  (orthogonal_transformation : ((Cart[Real, N]) -> Cart[Real, N]) -> Bool)
+      #|  !IN((z : _), (s : (_) -> Bool)) \226\134\146 (\226\136\128 f : (_) -> _, IN((a : _), IMAGE(f, s)) \226\134\146 IN(a, IMAGE(f, DELETE(UNIV, z))))
+      #|  SUBSET((s : (_) -> Bool), DELETE(UNIV, (z : _))) == !IN(z, s)
+      #|  (DELETE : ((Cart[Real, N]) -> Bool, Cart[Real, N], Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), (vec : (Num) -> Cart[Real, N])(0))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N]) => true
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N]) => true
+      #|  o((x : Cart[Real, N]) => op_pct(inv(norm(x)), x), (g : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  o((x : Cart[Real, N]) => op_pct(inv(norm(x)), x), (f : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(f) && orthogonal_transformation(g) \226\134\146 homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, DELETE(UNIV, vec(0))), subtopology(euclidean, DELETE(UNIV, vec(0)))), f, g) == (det(matrix(f)) == det(matrix(g)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(f) && orthogonal_transformation(g) && homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, sphere((vec(0), real_of_num(1)))), subtopology(euclidean, sphere((vec(0), real_of_num(1))))), f, g) \226\134\146 det(matrix(f)) == det(matrix(g))
+      #|  matrix_inv((P : Cart[Cart[Real, N], N]))
+      #|  (P : Cart[Cart[Real, N], N])
+      #|  (U : Cart[Cart[Real, N], N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], linear(f) && !(det(matrix(f)) == real_of_num(0)) \226\134\146 (\226\136\131 P : Cart[Cart[Real, N], N], positive_definite(P) && orthogonal_transformation(o((x : Cart[Real, N]) => matrix_vector_mul(P, x), f)))
+      #|  (x : Real) == real_of_num(1) && (y : Real) == real_of_num(1) \226\134\146 x * (a : Real) == y * (b : Real) \226\134\146 a == b
       #|  real_sgn
-      #|  (:real^N) DELETE vec 0
-      #|  \\f:real^N->real^N. linear f /\\ positive_definite(matrix f)
-      #|  \\f:real^N->real^N. T
-      #|  (\\x. (Q:real^N^N) ** x) o (g:real^N->real^N)
-      #|  (\\x. (P:real^N^N) ** x) o (f:real^N->real^N)
-      #|  Q:real^N^N
-      #|  P:real^N^N
-      #|  f:real^N->real^N
-      #|  g:real^N->real^N
-      #|  IMAGE f (UNIV DELETE w) SUBSET UNIV DELETE z <=>\n     ~(?x. ~(x = w) /\\ f x = z)
-      #|  forall f g:real^N->real^N.\n     linear f /\\ linear g /\\\n     homotopic_with (\\x. T)\n       (subtopology euclidean ((:real^N) DELETE vec 0),\n        subtopology euclidean ((:real^N) DELETE vec 0)) f g\n     ==> real_sgn(det(matrix f)) = real_sgn(det(matrix g))
-      #|  IMAGE f (UNIV DELETE a) SUBSET UNIV DELETE a\n    ==> forall x. f x = a ==> x = a
-      #|  g:real^N->real^N
-      #|  f:real^N->real^N
-      #|  forall f g:real^N->real^N.\n     linear f /\\ linear g /\\\n     homotopic_with (\\x. T)\n        (subtopology euclidean ((:real^N) DELETE vec 0),\n         subtopology euclidean ((:real^N) DELETE vec 0)) f g\n     ==> &0 < det(matrix f) * det(matrix g)
-      #|  \\x:real^N. x
-      #|  &1
-      #|  sphere(vec 0:real^N,&1)
-      #|  \\x:real^N. --x
-      #|  f:real^N->real^N
-      #|  (~p ==> F) ==> p
-      #|  forall f:real^N->real^N.\n        ODD(dimindex(:N)) /\\\n        homotopic_with (\\x. T)\n         (subtopology euclidean (sphere(vec 0,&1)),\n          subtopology euclidean (sphere(vec 0,&1))) (\\x. x) f\n        ==> ?x. x IN sphere(vec 0,&1) /\\ f x = x
-      #|  (~p ==> q) ==> p \\/ q
-      #|  forall f:real^N->real^N.\n        ODD(dimindex(:N)) /\\\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET sphere(vec 0,&1)\n        ==> ?x. x IN sphere(vec 0,&1) /\\ (f x = --x \\/ f x = x)
-      #|  x + y * --z = x - z * y
-      #|  a + --x * --y:real = x * y + a
-      #|  m = 2 * n ==> 1 <= m ==> m = (2 * (n - 1) + 1) + 1
-      #|  1..dimindex(:N) = 2*0+1..(2 * (n - 1) + 1) + 1
-      #|  (\\x. lambda i. if EVEN(i) then --(x$(i-1)) else x$(i+1)):\n                real^N->real^N
-      #|  n:num
-      #|  r % x:real^N
-      #|  x:real^N
-      #|  a:real^N = --x <=> --a = x
-      #|  x:real^N
-      #|  r % x:real^N
-      #|  x:real^N
-      #|  \\x. inv(norm(f(r % x))) % (f:real^N->real^N) (r % x)
-      #|  (q ==> p) /\\ (p ==> r) /\\ (r ==> q)\n    ==> (p <=> r) /\\ (q <=> r)
-      #|  &0 < r
-      #|  (\\x. basis 1):real^N->real^N
-      #|  r = &0
-      #|  r < &0
-      #|  r:real
-      #|  (forall r. (?f. f continuous_on sphere(vec 0:real^N,r) /\\\n             (forall x. x IN sphere(vec 0,r)\n                  ==> ~(f x = vec 0) /\\ orthogonal x (f x))) <=>\n        r <= &0 \\/ EVEN(dimindex(:N))) /\\\n   (forall r. (?f. f continuous_on sphere(vec 0:real^N,r) /\\\n             IMAGE f (sphere(vec 0,r)) SUBSET sphere(vec 0,r) /\\\n             (forall x. x IN sphere(vec 0,r)\n                  ==> ~(f x = vec 0) /\\ orthogonal x (f x))) <=>\n        r < &0 \\/ &0 < r /\\ EVEN(dimindex(:N)))
-      #|  (%) (norm((f:real^N->real^N) v)):real^N->real^N
-      #|  v:real^N
-      #|  \\x. inv(norm(f x)) % (f:real^N->real^N) x
-      #|  forall v. norm v = &1 ==> ~((f:real^N->real^N) v = vec 0)
-      #|  forall f:real^N->real^N.\n        ODD(dimindex(:N)) /\\ f continuous_on sphere(vec 0:real^N,&1)\n        ==> ?v c. v IN sphere(vec 0,&1) /\\ f v = c % v
-      #|  orthogonal_transformation(f:real^N->real^N)\n      ==> forall x. norm x = a ==> norm(f x) = a
-      #|  &1
-      #|  sphere(vec 0:real^N,&1)
-      #|  \\x:real^N. --x
-      #|  \\x:real^N. (A:real^N^N) ** x
-      #|  forall v:real^N. v IN sphere (vec 0,&1) ==> ~(A ** v = v)
-      #|  forall A:real^N^N.\n        ODD(dimindex(:N)) /\\ rotation_matrix A\n        ==> ?v. norm v = &1 /\\ A ** v = v
-      #|  retraction (s,t) (r:real^N->real^N) <=>\n        t SUBSET s /\\ r continuous_on s /\\ (IMAGE r s SUBSET t) /\\\n        (forall x. x IN t ==> (r x = x))
-      #|  t retract_of s <=> ?r. retraction (s,t) r
-      #|  forall r s t:real^N->bool.\n        retraction_maps (subtopology euclidean s,subtopology euclidean t)\n                        (r,I) <=>\n   retraction (s,t) r
-      #|  forall s t:real^N->bool.\n        t retract_of_space (subtopology euclidean s) <=> t retract_of s
-      #|  forall s t r. retraction (s,t) r <=>\n           t SUBSET s /\\\n           r continuous_on s /\\\n           IMAGE r s = t /\\\n           (forall x. x IN t ==> r x = x)
-      #|  (f:real^M->real^N) o (r:real^M->real^M)
-      #|  r:real^M->real^M
-      #|  forall f:real^M->real^N u s t.\n        s retract_of t /\\ f continuous_on s /\\ IMAGE f s SUBSET u\n        ==> ?g. g continuous_on t /\\ IMAGE g t SUBSET u /\\\n                (forall x. x IN s ==> g x = f x)
-      #|  forall r s t. retraction (s,t) r ==> forall x. x IN s ==> (r(r(x)) = r(x))
-      #|  forall f:real^N->real^N s.\n        f continuous_on s /\\ IMAGE f s SUBSET s /\\\n        (forall x. x IN s ==> f(f x) = f x)\n        ==> retraction (s,IMAGE f s) f
-      #|  forall r s s' t. retraction (s,t) r /\\ t SUBSET s' /\\ s' SUBSET s\n              ==> retraction (s',t) r
-      #|  forall s s' t. t retract_of s /\\ t SUBSET s' /\\ s' SUBSET s\n            ==> t retract_of s'
-      #|  --a + a + x:real^N = x
-      #|  --a + a + x:real^N = x
-      #|  --a + a + x:real^N = x
-      #|  (\\x:real^N. a + x) o r o (\\x:real^N. --a + x)
-      #|  r:real^N->real^N
-      #|  forall a t s:real^N->bool.\n        t retract_of s\n        ==> (IMAGE (\\x. a + x) t) retract_of (IMAGE (\\x. a + x) s)
-      #|  --a + a + x:real^N = x
-      #|  --a:real^N
-      #|  forall a t s:real^N->bool.\n        (IMAGE (\\x. a + x) t) retract_of (IMAGE (\\x. a + x) s) <=>\n        t retract_of s
-      #|  forall x y. (f:real^M->real^N) x = f y ==> x = y
-      #|  (f:real^M->real^N) o r o (g:real^N->real^M)
-      #|  g:real^N->real^M
-      #|  f:real^M->real^N
-      #|  r:real^M->real^M
-      #|  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y) /\\ t retract_of s\n        ==> (IMAGE f t) retract_of (IMAGE f s)
-      #|  forall s. s = IMAGE (h:real^N->real^M) (IMAGE (f:real^M->real^N) s)
-      #|  h:real^N->real^M
-      #|  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y) /\\ (forall y. ?x. f x = y)\n        ==> ((IMAGE f t) retract_of (IMAGE f s) <=> t retract_of s)
-      #|  forall s. retraction (s,s) (\\x. x)
-      #|  forall s. s retract_of s
-      #|  forall s t:real^N->bool.\n        convex t /\\ closed t /\\ ~(t = {}) /\\ t SUBSET s\n        ==> retraction (s,t) (closest_point t)
-      #|  forall s t. s retract_of t ==> s SUBSET t
-      #|  s:real^N->bool = {}
-      #|  s:real^N->bool
-      #|  (forall s:real^N->bool. {} retract_of s <=> s = {}) /\\\n   (forall s:real^N->bool. s retract_of {} <=> s = {})
-      #|  (\\y. x):real^N->real^N
-      #|  forall s x:real^N. {x} retract_of s <=> x IN s
-      #|  (\\x. a):real^N->real^N
-      #|  \\x:real^N. x
-      #|  \\x:real^N. if x IN s then x else a
-      #|  a:real^N
-      #|  s:real^N->bool = {}
-      #|  forall s t:real^N->bool.\n        open_in (subtopology euclidean (s UNION t)) s /\\\n        open_in (subtopology euclidean (s UNION t)) t /\\\n        DISJOINT s t /\\ (s = {} ==> t = {})\n        ==> s retract_of (s UNION t)
-      #|  forall s t:real^N->bool.\n        s INTER closure t = {} /\\ t INTER closure s = {} /\\\n        (s = {} ==> t = {})\n        ==> s retract_of (s UNION t)
-      #|  p /\\ q /\\ r /\\ s <=> (r /\\ p /\\ q) /\\ s
-      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        DISJOINT s t /\\ (s = {} ==> t = {})\n        ==> s retract_of (s UNION t)
-      #|  forall f g s t u:real^N->bool.\n        retraction (s,t) f /\\ retraction (t,u) g\n        ==> retraction (s,u) (g o f)
-      #|  forall s t u:real^N->bool.\n        s retract_of t /\\ t retract_of u ==> s retract_of u
-      #|  s = {x:real^N | x IN t /\\ lift(norm(r x - x)) = vec 0}
-      #|  r:real^N->real^N
-      #|  forall s t:real^N->bool.\n        s retract_of t ==> closed_in (subtopology euclidean t) s
-      #|  (r:real^N->real^N) o (h:real^(1,N)finite_sum->real^N)
-      #|  (r:real^N->real^N) a
-      #|  h:real^(1,N)finite_sum->real^N
-      #|  a:real^N
-      #|  r:real^N->real^N
-      #|  forall s t:real^N->bool. contractible t /\\ s retract_of t ==> contractible s
-      #|  forall s t:real^N->bool. compact t /\\ s retract_of t ==> compact s
-      #|  forall s t. closed t /\\ s retract_of t ==> closed s
-      #|  forall s t:real^N->bool. connected t /\\ s retract_of t ==> connected s
-      #|  forall s t:real^N->bool. path_connected t /\\ s retract_of t ==> path_connected s
-      #|  \\x:real^N. x
-      #|  r:real^N->real^N
-      #|  forall s t:real^N->bool.\n       simply_connected t /\\ s retract_of t ==> simply_connected s
-      #|  \\x:real^N. x
-      #|  r:real^N->real^N
-      #|  p /\\ q /\\ r /\\ s <=> p /\\ q /\\ T /\\ r /\\ s /\\ T
-      #|  forall s t:real^N->bool u:real^M->bool.\n        t retract_of s /\\\n        (forall f g. f continuous_on u /\\ IMAGE f u SUBSET s /\\\n               g continuous_on u /\\ IMAGE g u SUBSET s\n               ==> homotopic_with (\\x. T)\n                     (subtopology euclidean u,subtopology euclidean s)  f g)\n        ==> (forall f g. f continuous_on u /\\ IMAGE f u SUBSET t /\\\n                   g continuous_on u /\\ IMAGE g u SUBSET t\n                   ==> homotopic_with (\\x. T)\n                       (subtopology euclidean u,subtopology euclidean t) f g)
-      #|  \\x:real^N. x
-      #|  r:real^N->real^N
-      #|  p /\\ q <=> p /\\ q /\\ T
-      #|  forall s t:real^N->bool u:real^M->bool.\n        t retract_of s /\\\n        (forall f. f continuous_on u /\\ IMAGE f u SUBSET s\n             ==> ?c. homotopic_with (\\x. T)\n                      (subtopology euclidean u,subtopology euclidean s)\n                      f (\\x. c))\n        ==> (forall f. f continuous_on u /\\ IMAGE f u SUBSET t\n                 ==> ?c. homotopic_with (\\x. T)\n                          (subtopology euclidean u,subtopology euclidean t)\n                          f (\\x. c))
-      #|  \\x:real^N. x
-      #|  r:real^N->real^N
-      #|  p /\\ q /\\ r /\\ s <=> p /\\ q /\\ T /\\ r /\\ s /\\ T
-      #|  forall s t:real^N->bool u:real^M->bool.\n        t retract_of s /\\\n        (forall f g. f continuous_on s /\\ IMAGE f s SUBSET u /\\\n               g continuous_on s /\\ IMAGE g s SUBSET u\n               ==> homotopic_with (\\x. T)\n                    (subtopology euclidean s,subtopology euclidean u)  f g)\n        ==> (forall f g. f continuous_on t /\\ IMAGE f t SUBSET u /\\\n                   g continuous_on t /\\ IMAGE g t SUBSET u\n                   ==> homotopic_with (\\x. T)\n                       (subtopology euclidean t,subtopology euclidean u) f g)
-      #|  \\x:real^N. x
-      #|  r:real^N->real^N
-      #|  p /\\ q <=> p /\\ q /\\ T
-      #|  forall s t:real^N->bool u:real^M->bool.\n        t retract_of s /\\\n        (forall f. f continuous_on s /\\ IMAGE f s SUBSET u\n             ==> ?c. homotopic_with (\\x. T)\n                      (subtopology euclidean s,subtopology euclidean u)\n                      f (\\x. c))\n        ==> (forall f. f continuous_on t /\\ IMAGE f t SUBSET u\n                 ==> ?c. homotopic_with (\\x. T)\n                          (subtopology euclidean t,subtopology euclidean u)\n                          f (\\x. c))
-      #|  \\x:real^N. x
-      #|  forall r s t:real^N->bool.\n    retraction (s,t) r\n    ==> forall u. u SUBSET t\n            ==> (open_in (subtopology euclidean s) {x | x IN s /\\ r x IN u} <=>\n                 open_in (subtopology euclidean t) u)
-      #|  forall s t:real^N->bool.\n        s retract_of t /\\ locally connected t ==> locally connected s
-      #|  forall s t:real^N->bool.\n        s retract_of t /\\ locally path_connected t\n        ==> locally path_connected s
-      #|  forall s t:real^N->bool.\n        locally compact s /\\ t retract_of s ==> locally compact t
-      #|  \\z. pastecart ((f:real^M->real^M) (fstcart z))\n                            ((g:real^N->real^N) (sndcart z))
-      #|  g:real^N->real^N
-      #|  f:real^M->real^M
-      #|  forall s:real^M->bool s' t:real^N->bool t'.\n        s retract_of s' /\\ t retract_of t'\n        ==> (s PCROSS t) retract_of (s' PCROSS t')
-      #|  \\x. sndcart((r:real^(M,N)finite_sum->real^(M,N)finite_sum)\n                            (pastecart a x))
-      #|  ?a:real^M. a IN s
-      #|  \\x. fstcart((r:real^(M,N)finite_sum->real^(M,N)finite_sum)\n                            (pastecart x b))
-      #|  ?b:real^N. b IN t
-      #|  r:real^(M,N)finite_sum->real^(M,N)finite_sum
-      #|  t':real^N->bool = {}
-      #|  t:real^N->bool = {}
-      #|  s':real^M->bool = {}
-      #|  s:real^M->bool = {}
-      #|  forall s s':real^M->bool t t':real^N->bool.\n        s PCROSS t retract_of s' PCROSS t' <=>\n        (s = {} \\/ t = {}) /\\ (s' = {} \\/ t' = {}) \\/\n        s retract_of s' /\\ t retract_of t'
-      #|  (r:real^N->real^N) o (h:real^(1,M)finite_sum->real^N)
-      #|  r:real^N->real^N
-      #|  h:real^(1,M)finite_sum->real^N
-      #|  forall f:real^M->real^N g s t u.\n        IMAGE f s SUBSET t /\\ IMAGE g s SUBSET t /\\ t retract_of u /\\\n        homotopic_with (\\x. T)\n         (subtopology euclidean s,subtopology euclidean u) f g\n        ==> homotopic_with (\\x. T)\n             (subtopology euclidean s,subtopology euclidean t) f g
-      #|  sphere(vec 0:real^N,&1)
-      #|  reflect_along (basis 1:real^N)
-      #|  I:real^N->real^N
-      #|  b:real^N = vec 0
-      #|  b:real^N
-      #|  b:real^N
-      #|  norm(b:real^N) <= &0 <=> b = vec 0
+      #|  (DELETE : ((Cart[Real, N]) -> Bool, Cart[Real, N], Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), (vec : (Num) -> Cart[Real, N])(0))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N]) => linear(f) && positive_definite(matrix(f))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N]) => true
+      #|  o((x : Cart[Real, N]) => matrix_vector_mul((Q : Cart[Cart[Real, N], N]), x), (g : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  o((x : Cart[Real, N]) => matrix_vector_mul((P : Cart[Cart[Real, N], N]), x), (f : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  (Q : Cart[Cart[Real, N], N])
+      #|  (P : Cart[Cart[Real, N], N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  SUBSET(IMAGE((f : (_) -> _), DELETE(UNIV, (w : _))), DELETE(UNIV, (z : _))) == !(\226\136\131 x : _, !(x == w) && f(x) == z)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], linear(f) && linear(g) && homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, DELETE(UNIV, vec(0))), subtopology(euclidean, DELETE(UNIV, vec(0)))), f, g) \226\134\146 real_sgn(det(matrix(f))) == real_sgn(det(matrix(g)))
+      #|  SUBSET(IMAGE((f : (_) -> _), DELETE(UNIV, (a : _))), DELETE(UNIV, a)) \226\134\146 (\226\136\128 x : _, f(x) == a \226\134\146 x == a)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], linear(f) && linear(g) && homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, DELETE(UNIV, vec(0))), subtopology(euclidean, DELETE(UNIV, vec(0)))), f, g) \226\134\146 real_of_num(0) < det(matrix(f)) * det(matrix(g))
+      #|  (x : Cart[Real, N]) => x
+      #|  real_of_num(1)
+      #|  (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), real_of_num(1)))
+      #|  (x : Cart[Real, N]) => -x
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], ODD((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) && (homotopic_with : (((Cart[Real, N]) -> Cart[Real, N]) -> Bool, (Topology[Cart[Real, N]], Topology[Cart[Real, N]]), (Cart[Real, N]) -> Cart[Real, N], (Cart[Real, N]) -> Cart[Real, N]) -> Bool)((x : (Cart[Real, N]) -> Cart[Real, N]) => true, ((subtopology : (Topology[Cart[Real, N]], (Cart[Real, N]) -> Bool) -> Topology[Cart[Real, N]])((euclidean : Topology[Cart[Real, N]]), (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), real_of_num(1)))), (subtopology : (Topology[Cart[Real, N]], (Cart[Real, N]) -> Bool) -> Topology[Cart[Real, N]])((euclidean : Topology[Cart[Real, N]]), (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), real_of_num(1))))), (x : Cart[Real, N]) => x, f) \226\134\146 (\226\136\131 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), real_of_num(1)))) && f(x) == x)
+      #|  (!(p : Bool) \226\134\146 (q : Bool)) \226\134\146 p || q
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], ODD((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) && (continuous_on : ((Cart[Real, N]) -> Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(f, (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), real_of_num(1)))) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((IMAGE : ((Cart[Real, N]) -> Cart[Real, N], (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(f, (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), real_of_num(1)))), (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), real_of_num(1)))) \226\134\146 (\226\136\131 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), real_of_num(1)))) && (f(x) == -x || f(x) == x))
+      #|  (x : Real) + (y : Real) * -(z : Real) == x - z * y
+      #|  (a : Real) + -(x : Real) * -(y : Real) == x * y + a
+      #|  (m : Num) == 2 * (n : Num) \226\134\146 1 <= m \226\134\146 m == 2 * (n - 1) + 1 + 1
+      #|  op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) == op_dot_dot(2 * 0 + 1, 2 * ((n : Num) - 1) + 1 + 1)
+      #|  (x : Cart[Real, N]) => (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if EVEN(i) { -(op_dollar : (Cart[Real, N], Num) -> Real)(x, i - 1) } else { (op_dollar : (Cart[Real, N], Num) -> Real)(x, i + 1) })
+      #|  (n : Num)
+      #|  op_pct((r : Real), (x : Cart[Real, N]))
+      #|  (x : Cart[Real, N])
+      #|  ((a : Cart[Real, N]) == -(x : Cart[Real, N])) == (-a == x)
+      #|  (x : Cart[Real, N])
+      #|  op_pct((r : Real), (x : Cart[Real, N]))
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N]) => op_pct(inv(norm((f : (Cart[Real, N]) -> Cart[Real, N])(op_pct((r : Real), x)))), f(op_pct(r, x)))
+      #|  ((q : Bool) \226\134\146 (p : Bool)) && (p \226\134\146 (r : Bool)) && (r \226\134\146 q) \226\134\146 p == r && q == r
+      #|  real_of_num(0) < (r : Real)
+      #|  (x : Cart[Real, N]) => (basis : (Num) -> Cart[Real, N])(1)
+      #|  (r : Real) == real_of_num(0)
+      #|  (r : Real) < real_of_num(0)
+      #|  (r : Real)
+      #|  (\226\136\128 r : Real, (\226\136\131 f : (Cart[Real, N]) -> Cart[Real, N], (continuous_on : ((Cart[Real, N]) -> Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(f, (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), r))) && (\226\136\128 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), r))) \226\134\146 !(f(x) == (vec : (Num) -> Cart[Real, N])(0)) && (orthogonal : (Cart[Real, N], Cart[Real, N]) -> Bool)(x, f(x)))) == (r <= real_of_num(0) || EVEN((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))) && (\226\136\128 r : Real, (\226\136\131 f : (Cart[Real, N]) -> Cart[Real, N], (continuous_on : ((Cart[Real, N]) -> Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(f, (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), r))) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((IMAGE : ((Cart[Real, N]) -> Cart[Real, N], (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(f, (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), r))), (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), r))) && (\226\136\128 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), r))) \226\134\146 !(f(x) == (vec : (Num) -> Cart[Real, N])(0)) && (orthogonal : (Cart[Real, N], Cart[Real, N]) -> Bool)(x, f(x)))) == (r < real_of_num(0) || real_of_num(0) < r && EVEN((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))))
+      #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((norm : (Cart[Real, N]) -> Real)((f : (Cart[Real, N]) -> Cart[Real, N])((v : Cart[Real, N]))))
+      #|  (v : Cart[Real, N])
+      #|  (x : Cart[Real, N]) => op_pct(inv(norm((f : (Cart[Real, N]) -> Cart[Real, N])(x))), f(x))
+      #|  \226\136\128 v : Cart[Real, N], norm(v) == real_of_num(1) \226\134\146 !((f : (Cart[Real, N]) -> Cart[Real, N])(v) == vec(0))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], ODD((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) && (continuous_on : ((Cart[Real, N]) -> Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(f, (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), real_of_num(1)))) \226\134\146 (\226\136\131 v : Cart[Real, N], \226\136\131 c : Real, (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(v, (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), real_of_num(1)))) && f(v) == (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(c, v))
+      #|  orthogonal_transformation((f : (Cart[Real, N]) -> Cart[Real, N])) \226\134\146 (\226\136\128 x : Cart[Real, N], norm(x) == (a : Real) \226\134\146 norm(f(x)) == a)
+      #|  real_of_num(1)
+      #|  (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), real_of_num(1)))
+      #|  (x : Cart[Real, N]) => -x
+      #|  (x : Cart[Real, N]) => matrix_vector_mul((A : Cart[Cart[Real, N], N]), x)
+      #|  \226\136\128 v : Cart[Real, N], IN(v, sphere((vec(0), real_of_num(1)))) \226\134\146 !(matrix_vector_mul((A : Cart[Cart[Real, N], N]), v) == v)
+      #|  \226\136\128 A : Cart[Cart[Real, N], N], ODD((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) && (rotation_matrix : (Cart[Cart[Real, N], N]) -> Bool)(A) \226\134\146 (\226\136\131 v : Cart[Real, N], (norm : (Cart[Real, N]) -> Real)(v) == real_of_num(1) && (matrix_vector_mul : (Cart[Cart[Real, N], N], Cart[Real, N]) -> Cart[Real, N])(A, v) == v)
+      #|  (retraction : (((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool), (Cart[Real, N]) -> Cart[Real, N]) -> Bool)(((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)), (r : (Cart[Real, N]) -> Cart[Real, N])) == (SUBSET(t, s) && continuous_on(r, s) && SUBSET(IMAGE(r, s), t) && (\226\136\128 x : Cart[Real, N], IN(x, t) \226\134\146 r(x) == x))
+      #|  (retract_of : ((Cart[Real, _]) -> Bool, (Cart[Real, _]) -> Bool) -> Bool)((t : (Cart[Real, _]) -> Bool), (s : (Cart[Real, _]) -> Bool)) == (\226\136\131 r : (Cart[Real, _]) -> Cart[Real, _], retraction((s, t), r))
+      #|  \226\136\128 r : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, retraction_maps((subtopology(euclidean, s), subtopology(euclidean, t)), (r, I)) == retraction((s, t), r)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, retract_of_space(t, subtopology(euclidean, s)) == retract_of(t, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, \226\136\128 r : (Cart[Real, _]) -> Cart[Real, _], retraction((s, t), r) == (SUBSET(t, s) && continuous_on(r, s) && IMAGE(r, s) == t && (\226\136\128 x : Cart[Real, _], IN(x, t) \226\134\146 r(x) == x))
+      #|  o((f : (Cart[Real, M]) -> Cart[Real, N]), (r : (Cart[Real, M]) -> Cart[Real, M]))
+      #|  (r : (Cart[Real, M]) -> Cart[Real, M])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, retract_of(s, t) && continuous_on(f, s) && SUBSET(IMAGE(f, s), u) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], continuous_on(g, t) && SUBSET(IMAGE(g, t), u) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 g(x) == f(x)))
+      #|  \226\136\128 r : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, retraction((s, t), r) \226\134\146 (\226\136\128 x : Cart[Real, _], IN(x, s) \226\134\146 r(r(x)) == r(x))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, continuous_on(f, s) && SUBSET(IMAGE(f, s), s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 f(f(x)) == f(x)) \226\134\146 retraction((s, IMAGE(f, s)), f)
+      #|  \226\136\128 r : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 s' : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, retraction((s, t), r) && SUBSET(t, s') && SUBSET(s', s) \226\134\146 retraction((s', t), r)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 s' : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, retract_of(t, s) && SUBSET(t, s') && SUBSET(s', s) \226\134\146 retract_of(t, s')
+      #|  -(a : Cart[Real, N]) + (a + (x : Cart[Real, N])) == x
+      #|  -(a : Cart[Real, N]) + (a + (x : Cart[Real, N])) == x
+      #|  -(a : Cart[Real, N]) + (a + (x : Cart[Real, N])) == x
+      #|  o((x : Cart[Real, N]) => (a : Cart[Real, N]) + x, o((r : (Cart[Real, N]) -> Cart[Real, N]), (x : Cart[Real, N]) => -a + x))
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, retract_of(t, s) \226\134\146 retract_of(IMAGE((x : Cart[Real, N]) => a + x, t), IMAGE((x : Cart[Real, N]) => a + x, s))
+      #|  -(a : Cart[Real, N]) + (a + (x : Cart[Real, N])) == x
+      #|  -(a : Cart[Real, N])
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, retract_of(IMAGE((x : Cart[Real, N]) => a + x, t), IMAGE((x : Cart[Real, N]) => a + x, s)) == retract_of(t, s)
+      #|  \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], (f : (Cart[Real, M]) -> Cart[Real, N])(x) == f(y) \226\134\146 x == y
+      #|  o((f : (Cart[Real, M]) -> Cart[Real, N]), o((r : (Cart[Real, M]) -> Cart[Real, M]), (g : (Cart[Real, N]) -> Cart[Real, M])))
+      #|  (g : (Cart[Real, N]) -> Cart[Real, M])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (r : (Cart[Real, M]) -> Cart[Real, M])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) && retract_of(t, s) \226\134\146 retract_of(IMAGE(f, t), IMAGE(f, s))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, s == IMAGE((h : (Cart[Real, N]) -> Cart[Real, M]), IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), s))
+      #|  (h : (Cart[Real, N]) -> Cart[Real, M])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) && (\226\136\128 y : Cart[Real, N], \226\136\131 x : Cart[Real, M], f(x) == y) \226\134\146 retract_of(IMAGE(f, t), IMAGE(f, s)) == retract_of(t, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, retraction((s, s), (x : Cart[Real, _]) => x)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, retract_of(s, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, convex(t) && closed(t) && !(t == {}) && SUBSET(t, s) \226\134\146 retraction((s, t), closest_point(t))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, retract_of(s, t) \226\134\146 SUBSET(s, t)
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (\226\136\128 s : (Cart[Real, N]) -> Bool, retract_of({}, s) == (s == {})) && (\226\136\128 s : (Cart[Real, N]) -> Bool, retract_of(s, {}) == (s == {}))
+      #|  (y : Cart[Real, N]) => (x : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], retract_of({x}, s) == IN(x, s)
+      #|  (x : Cart[Real, N]) => (a : Cart[Real, N])
+      #|  (x : Cart[Real, N]) => x
+      #|  (x : Cart[Real, N]) => if IN(x, (s : (Cart[Real, N]) -> Bool)) { x } else { (a : Cart[Real, N]) }
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, UNION(s, t)), s) && open_in(subtopology(euclidean, UNION(s, t)), t) && DISJOINT(s, t) && (s == {} \226\134\146 t == {}) \226\134\146 retract_of(s, UNION(s, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, INTER(s, closure(t)) == {} && INTER(t, closure(s)) == {} && (s == {} \226\134\146 t == {}) \226\134\146 retract_of(s, UNION(s, t))
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) && (s : Bool)) == ((r && p && q) && s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, UNION(s, t)), s) && closed_in(subtopology(euclidean, UNION(s, t)), t) && DISJOINT(s, t) && (s == {} \226\134\146 t == {}) \226\134\146 retract_of(s, UNION(s, t))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, retraction((s, t), f) && retraction((t, u), g) \226\134\146 retraction((s, u), o(g, f))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, retract_of(s, t) && retract_of(t, u) \226\134\146 retract_of(s, u)
+      #|  (s : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | IN(x, (t : (Cart[Real, N]) -> Bool)) && lift(norm((r : (Cart[Real, N]) -> Cart[Real, N])(x) - x)) == vec(0)}
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, retract_of(s, t) \226\134\146 closed_in(subtopology(euclidean, t), s)
+      #|  o((r : (Cart[Real, N]) -> Cart[Real, N]), (h : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N]))
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N]))
+      #|  (h : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, contractible(t) && retract_of(s, t) \226\134\146 contractible(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, compact(t) && retract_of(s, t) \226\134\146 compact(s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, closed(t) && retract_of(s, t) \226\134\146 closed(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, connected(t) && retract_of(s, t) \226\134\146 connected(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, path_connected(t) && retract_of(s, t) \226\134\146 path_connected(s)
+      #|  (x : Cart[Real, N]) => x
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, simply_connected(t) && retract_of(s, t) \226\134\146 simply_connected(s)
+      #|  (x : Cart[Real, N]) => x
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) && (s : Bool)) == (p && q && true && r && s && true)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, M]) -> Bool, retract_of(t, s) && (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], continuous_on(f, u) && SUBSET(IMAGE(f, u), s) && continuous_on(g, u) && SUBSET(IMAGE(g, u), s) \226\134\146 homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, u), subtopology(euclidean, s)), f, g)) \226\134\146 (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], continuous_on(f, u) && SUBSET(IMAGE(f, u), t) && continuous_on(g, u) && SUBSET(IMAGE(g, u), t) \226\134\146 homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, u), subtopology(euclidean, t)), f, g))
+      #|  (x : Cart[Real, N]) => x
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  ((p : Bool) && (q : Bool)) == (p && q && true)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, M]) -> Bool, retract_of(t, s) && (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], continuous_on(f, u) && SUBSET(IMAGE(f, u), s) \226\134\146 (\226\136\131 c : Cart[Real, N], homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, u), subtopology(euclidean, s)), f, (x : Cart[Real, M]) => c))) \226\134\146 (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], continuous_on(f, u) && SUBSET(IMAGE(f, u), t) \226\134\146 (\226\136\131 c : Cart[Real, N], homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, u), subtopology(euclidean, t)), f, (x : Cart[Real, M]) => c)))
+      #|  (x : Cart[Real, N]) => x
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) && (s : Bool)) == (p && q && true && r && s && true)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, M]) -> Bool, retract_of(t, s) && (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, M], continuous_on(f, s) && SUBSET(IMAGE(f, s), u) && continuous_on(g, s) && SUBSET(IMAGE(g, s), u) \226\134\146 homotopic_with((x : (Cart[Real, N]) -> Cart[Real, M]) => true, (subtopology(euclidean, s), subtopology(euclidean, u)), f, g)) \226\134\146 (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, M], continuous_on(f, t) && SUBSET(IMAGE(f, t), u) && continuous_on(g, t) && SUBSET(IMAGE(g, t), u) \226\134\146 homotopic_with((x : (Cart[Real, N]) -> Cart[Real, M]) => true, (subtopology(euclidean, t), subtopology(euclidean, u)), f, g))
+      #|  (x : Cart[Real, N]) => x
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  ((p : Bool) && (q : Bool)) == (p && q && true)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, M]) -> Bool, retract_of(t, s) && (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, M], continuous_on(f, s) && SUBSET(IMAGE(f, s), u) \226\134\146 (\226\136\131 c : Cart[Real, M], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, M]) => true, (subtopology(euclidean, s), subtopology(euclidean, u)), f, (x : Cart[Real, N]) => c))) \226\134\146 (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, M], continuous_on(f, t) && SUBSET(IMAGE(f, t), u) \226\134\146 (\226\136\131 c : Cart[Real, M], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, M]) => true, (subtopology(euclidean, t), subtopology(euclidean, u)), f, (x : Cart[Real, N]) => c)))
+      #|  (x : Cart[Real, N]) => x
+      #|  \226\136\128 r : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, retraction((s, t), r) \226\134\146 (\226\136\128 u : (Cart[Real, N]) -> Bool, SUBSET(u, t) \226\134\146 open_in(subtopology(euclidean, s), {(x : Cart[Real, N]) | IN(x, s) && IN(r(x), u)}) == open_in(subtopology(euclidean, t), u))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, retract_of(s, t) && locally(connected, t) \226\134\146 locally(connected, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, retract_of(s, t) && locally(path_connected, t) \226\134\146 locally(path_connected, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, locally(compact, s) && retract_of(t, s) \226\134\146 locally(compact, t)
+      #|  (z : Cart[Real, Finite_sum[M, N]]) => pastecart((f : (Cart[Real, M]) -> Cart[Real, M])(fstcart(z)), (g : (Cart[Real, N]) -> Cart[Real, N])(sndcart(z)))
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, M])
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 s' : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 t' : (Cart[Real, N]) -> Bool, retract_of(s, s') && retract_of(t, t') \226\134\146 retract_of(PCROSS(s, t), PCROSS(s', t'))
+      #|  (x : Cart[Real, N]) => sndcart((r : (Cart[Real, Finite_sum[M, N]]) -> Cart[Real, Finite_sum[M, N]])(pastecart((a : Cart[Real, M]), x)))
+      #|  \226\136\131 a : Cart[Real, M], IN(a, (s : (Cart[Real, M]) -> Bool))
+      #|  (x : Cart[Real, M]) => fstcart((r : (Cart[Real, Finite_sum[M, N]]) -> Cart[Real, Finite_sum[M, N]])(pastecart(x, (b : Cart[Real, N]))))
+      #|  \226\136\131 b : Cart[Real, N], IN(b, (t : (Cart[Real, N]) -> Bool))
+      #|  (r : (Cart[Real, Finite_sum[M, N]]) -> Cart[Real, Finite_sum[M, N]])
+      #|  (t' : (Cart[Real, N]) -> Bool) == {}
+      #|  (t : (Cart[Real, N]) -> Bool) == {}
+      #|  (s' : (Cart[Real, M]) -> Bool) == {}
+      #|  (s : (Cart[Real, M]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 s' : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 t' : (Cart[Real, N]) -> Bool, retract_of(PCROSS(s, t), PCROSS(s', t')) == ((s == {} || t == {}) && (s' == {} || t' == {}) || retract_of(s, s') && retract_of(t, t'))
+      #|  o((r : (Cart[Real, N]) -> Cart[Real, N]), (h : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N]))
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (h : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, SUBSET(IMAGE(f, s), t) && SUBSET(IMAGE(g, s), t) && retract_of(t, u) && homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, u)), f, g) \226\134\146 homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, t)), f, g)
+      #|  (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), real_of_num(1)))
+      #|  (reflect_along : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])((basis : (Num) -> Cart[Real, N])(1))
+      #|  (I : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (b : Cart[Real, N]) == vec(0)
+      #|  (b : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (norm((b : Cart[Real, N])) <= real_of_num(0)) == (b == vec(0))
       #|  :real
       #|  :real
-      #|  b:real^N
-      #|  r < &0
-      #|  a:real^N
-      #|  forall a:real^N r. contractible(sphere(a,r)) <=> r <= &0
-      #|  forall a:real^N e. &0 < e ==> ~(sphere(a,e) retract_of cball(a,e))
-      #|  x:real^N
-      #|  &0 <= b /\\ x <= a ==> &0 <= (a + b) - x
-      #|  a - x - (y - x):real^N = a - y
-      #|  &0 <= x / &2 <=> &0 <= x
-      #|  &0 <= &2 * x <=> &0 <= x
-      #|  &2 * a - s = &0 <=> s = &2 * a
-      #|  x + a:real^N = x <=> a = vec 0
-      #|  x:real^N
-      #|  ~(a = &0) /\\ e = b pow 2 - &4 * a * c /\\ x = (b - s) / (&2 * a)\n      ==> s pow 2 = e ==> a * x pow 2 - b * x + c = &0
-      #|  sqrt(s(x:real^N)) pow 2 = s x
-      #|  (a + u * u * b) - &2 * u * c = d <=>\n      b * u pow 2 - (&2 * c) * u + (a - d) = &0
-      #|  (x - y:real^N) dot (x - y) = (x dot x + y dot y) - &2 * x dot y
-      #|  a - (x + y):real^N = (a - x) - y
-      #|  x:real^N
-      #|  \\x:real^N. x + (&2 * ((a - x) dot (f x - x)) - sqrt(s x)) /\n                             (&2 * ((f x - x) dot (f x - x))) % (f x - x)
-      #|  x:real^N
-      #|  forall x:real^N. x IN cball(a,e) ==> &0 <= s x
-      #|  s = \\x:real^N.  &4 * ((a - x:real^N) dot (f x - x)) pow 2 +\n                &4 * (e pow 2 - norm(a - x) pow 2) * norm(f x - x) pow 2
-      #|  a:real^N
-      #|  (?x. P x /\\ Q x) <=> ~(forall x. P x ==> ~Q x)
-      #|  forall f:real^N->real^N a e.\n        &0 < e /\\\n        f continuous_on cball(a,e) /\\\n        IMAGE f (cball(a,e)) SUBSET cball(a,e)\n        ==> ?x. x IN cball(a,e) /\\ f x = x
+      #|  (b : Cart[Real, N])
+      #|  (r : Real) < real_of_num(0)
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, contractible(sphere((a, r))) == (r <= real_of_num(0))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 e : Real, real_of_num(0) < e \226\134\146 !retract_of(sphere((a, e)), cball((a, e)))
+      #|  (x : Cart[Real, N])
+      #|  real_of_num(0) <= (b : Real) && (x : Real) <= (a : Real) \226\134\146 real_of_num(0) <= a + b - x
+      #|  (a : Cart[Real, N]) - (x : Cart[Real, N]) - ((y : Cart[Real, N]) - x) == a - y
+      #|  (real_of_num(0) <= (x : Real) / real_of_num(2)) == (real_of_num(0) <= x)
+      #|  (real_of_num(0) <= real_of_num(2) * (x : Real)) == (real_of_num(0) <= x)
+      #|  (real_of_num(2) * (a : Real) - (s : Real) == real_of_num(0)) == (s == real_of_num(2) * a)
+      #|  ((x : Cart[Real, N]) + (a : Cart[Real, N]) == x) == (a == vec(0))
+      #|  (x : Cart[Real, N])
+      #|  !((a : Real) == real_of_num(0)) && (e : Real) == pow((b : Real), 2) - real_of_num(4) * (a * (c : Real)) && (x : Real) == (b - (s : Real)) / (real_of_num(2) * a) \226\134\146 pow(s, 2) == e \226\134\146 a * pow(x, 2) - b * x + c == real_of_num(0)
+      #|  pow(sqrt((s : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))), 2) == s(x)
+      #|  ((a : Real) + (u : Real) * (u * (b : Real)) - real_of_num(2) * (u * (c : Real)) == (d : Real)) == (b * pow(u, 2) - real_of_num(2) * c * u + (a - d) == real_of_num(0))
+      #|  dot((x : Cart[Real, N]) - (y : Cart[Real, N]), x - y) == dot(x, x) + dot(y, y) - real_of_num(2) * dot(x, y)
+      #|  (a : Cart[Real, N]) - ((x : Cart[Real, N]) + (y : Cart[Real, N])) == a - x - y
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N]) => x + op_pct((real_of_num(2) * dot((a : Cart[Real, N]) - x, (f : (Cart[Real, N]) -> Cart[Real, N])(x) - x) - sqrt((s : (Cart[Real, N]) -> Real)(x))) / (real_of_num(2) * dot(f(x) - x, f(x) - x)), f(x) - x)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], IN(x, cball(((a : Cart[Real, N]), (e : Real)))) \226\134\146 real_of_num(0) <= (s : (Cart[Real, N]) -> Real)(x)
+      #|  (s : (Cart[Real, N]) -> Real) == ((x : Cart[Real, N]) => real_of_num(4) * pow(dot((a : Cart[Real, N]) - x, (f : (Cart[Real, N]) -> Cart[Real, N])(x) - x), 2) + real_of_num(4) * ((pow((e : Real), 2) - pow(norm(a - x), 2)) * pow(norm(f(x) - x), 2)))
+      #|  (a : Cart[Real, N])
+      #|  (\226\136\131 x : _, (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)) == !(\226\136\128 x : _, P(x) \226\134\146 !Q(x))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 a : Cart[Real, N], \226\136\128 e : Real, real_of_num(0) < e && continuous_on(f, cball((a, e))) && SUBSET(IMAGE(f, cball((a, e))), cball((a, e))) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, cball((a, e))) && f(x) == x)
       #|  :real
-      #|  x:real^N
-      #|  closest_point s x:real^N
-      #|  x:real^N
-      #|  s:real^N->bool
-      #|  ?x:real^N. x IN cball(vec 0,e) /\\ (f o closest_point s) x = x
-      #|  dist(vec 0,x) = norm(x)
+      #|  (x : Cart[Real, N])
+      #|  closest_point((s : (Cart[Real, N]) -> Bool), (x : Cart[Real, N]))
+      #|  (x : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\131 x : Cart[Real, N], IN(x, cball((vec(0), (e : Real)))) && o((f : (Cart[Real, N]) -> Cart[Real, N]), closest_point((s : (Cart[Real, N]) -> Bool)), x) == x
+      #|  dist((vec(0), (x : Cart[Real, _]))) == norm(x)
       #|  :real
       #|  :real
-      #|  ?e. &0 < e /\\ s SUBSET cball(vec 0:real^N,e)
-      #|  forall f:real^N->real^N s.\n        compact s /\\ convex s /\\ ~(s = {}) /\\\n        f continuous_on s /\\ IMAGE f s SUBSET s\n        ==> ?x. x IN s /\\ f x = x
-      #|  forall f:real^N->real^N s.\n        compact s /\\ convex s /\\ ~(interior s = {}) /\\\n        f continuous_on s /\\ IMAGE f s SUBSET s\n        ==> ?x. x IN s /\\ f x = x
-      #|  forall f:real^N->real^N.\n        f continuous_on (interval [vec 0,vec 1]) /\\\n        IMAGE f (interval [vec 0,vec 1]) SUBSET (interval [vec 0,vec 1])\n        ==> ?x. x IN interval[vec 0,vec 1] /\\ f x = x
-      #|  a + (if p then --x else x) = a <=> x = &0
-      #|  m:num
-      #|  a:real^N
-      #|  a:real^N
-      #|  (x:real^N) IN box
-      #|  (x:real^N)$m
-      #|  &1 - (x:real^N)$m
-      #|  setdist(b(m:num),{x:real^N})
-      #|  z IN segment(x:real^N,y)
-      #|  z:real^N = y
-      #|  z:real^N = x
-      #|  z:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  s SUBSET t DIFF u <=> s SUBSET t /\\ forall x y. x IN s ==> ~(x IN u)
-      #|  box:real^N->bool
-      #|  segment[x,y] INTER (v:num->real^N->bool) m
-      #|  segment[x,y] INTER (u:num->real^N->bool) m
-      #|  y:real^N
-      #|  x:real^N
-      #|  segment[x:real^N,y] SUBSET box
-      #|  forall i. n < i ==> 1 <= i
-      #|  (x:real^N) IN box
-      #|  y IN (l:num->real^N->bool) m
-      #|  y:real^N = lambda i. if i = m then &0 else (x:real^N)$i
-      #|  forall i. n < i ==> 1 <= i
-      #|  (x:real^N) IN box
-      #|  y IN (r:num->real^N->bool) m
-      #|  y:real^N = lambda i. if i = m then &1 else (x:real^N)$i
-      #|  x <= &1 /\\ &0 <= y ==> x + --y <= &1
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  x IN (u:num->real^N->bool) m /\\ ~(x IN v m) \\/\n      x IN v m /\\ ~(x IN u m)
-      #|  x IN (b:num->real^N->bool) m
-      #|  m:num
-      #|  forall i. n < i ==> 1 <= i
-      #|  x:real^N
-      #|  x IN (b:num->real^N->bool) m
-      #|  x:real^N
-      #|  box = (box DIFF (u:num->real^N->bool) m) UNION (box DIFF v m)
-      #|  m:num <= n
-      #|  m:num
-      #|  box:real^N->bool
-      #|  f:real^N->real^N
-      #|  (f:real^N->real^N) =\n      \\x. x +\n          lambda i. if n < i then &0\n                    else if x IN v i then --setdist({x},b i)\n                    else setdist({x},b i)
-      #|  (v:num->real^N->bool) i
-      #|  (u:num->real^N->bool) i
-      #|  i:num
-      #|  forall i. 1 <= i /\\ i <= n ==> ~(b i:real^N->bool = {})
-      #|  t SUBSET s /\\ ~(t = {}) ==> ~(s INTER t = {})
-      #|  n - n - w:int = --w
-      #|  n:num
-      #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
-      #|  v:num->real^N->bool
-      #|  u:num->real^N->bool
-      #|  b:num->real^N->bool
-      #|  (forall x. P x /\\ Q x ==> F)\n         ==> DISJOINT (b INTER {x | P x}) (b INTER {x | Q x})
-      #|  1 <= i /\\ ~(i = 1) ==> 1 <= i - 1
-      #|  n - (i - w) - w:int = n - i
-      #|  i - 1
-      #|  i = 1
-      #|  b INTER s INTER t = s INTER b INTER t
-      #|  1 <= i /\\ i <= n
-      #|  i:num
-      #|  b:num->real^N->bool
-      #|  1 <= i ==> (x <= i - 1 <=> x < i)
-      #|  ?b:num->real^N->bool.\n       (forall i. closed_in (subtopology euclidean box) (b i)) /\\\n       (forall i. 1 <= i /\\ i <= n\n            ==> dimension(box INTER INTERS (IMAGE b (1..i))) <= &n - &i - &1 /\\\n                ?u v. open_in (subtopology euclidean box) u /\\\n                      open_in (subtopology euclidean box) v /\\\n                      DISJOINT u v /\\\n                      u UNION v = box DIFF b i /\\\n                      l i SUBSET u /\\\n                      r i SUBSET v)
-      #|  (lambda j. if j = i then &1 else &0):real^N
-      #|  vec 0:real^N
-      #|  (forall i:num. 1 <= i /\\ i <= n ==> ~(l i:real^N->bool = {})) /\\\n    (forall i:num. 1 <= i /\\ i <= n ==> ~(r i:real^N->bool = {}))
-      #|  r = \\i. box INTER {x:real^N | x$i = &1}
-      #|  l = \\i. box INTER {x:real^N | x$i = &0}
-      #|  box = interval[vec 0:real^N,vec 1] INTER span(IMAGE basis (1..n))
-      #|  vec 0:real^N
-      #|  ~(box:real^N->bool = {}) /\\ convex(box:real^N->bool) /\\ compact box
-      #|  n:int <= d <=> ~(d <= n - &1)
-      #|  1 <= n
-      #|  n <= dimindex(:N)
-      #|  box:real^N->bool
-      #|  dimension(box:real^N->bool)
-      #|  box = {x:real^N | (forall i. 1 <= i /\\ i <= dimindex(:N)\n                           ==> &0 <= x$i /\\ x$i <= &1) /\\\n                      (forall i. n < i /\\ i <= dimindex(:N) ==> x$i = &0)}
-      #|  dim(IMAGE basis (1..n):real^N->bool) = n
-      #|  u:real^N->bool
-      #|  span(IMAGE basis (1..n)):real^N->bool
-      #|  u:real^N->bool
-      #|  u:real^N->bool
-      #|  t:real^N->bool
-      #|  relative_interior s:real^N->bool
-      #|  1 <= n
-      #|  s:real^N->bool
-      #|  dimension(relative_interior s:real^N->bool)
-      #|  nn:int
-      #|  nn:int
-      #|  d ==> p ==> q /\\ r ==> s <=> q ==> d /\\ p /\\ r ==> s
-      #|  nn = aff_dim(s:real^N->bool)
-      #|  s:real^N->bool
-      #|  &0 <= aff_dim(s:real^N->bool) /\\ &1 <= aff_dim s
-      #|  aff_dim(s:real^N->bool) = &0
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool. convex s ==> dimension s = aff_dim s
-      #|  forall s:real^N->bool. aff_dim s = dimension(affine hull s)
-      #|  forall s:real^N->bool. aff_dim s = dimension(convex hull s)
-      #|  forall s:real^N->bool. subspace s ==> dimension s = &(dim s)
-      #|  forall s:real^N->bool. &(dim s) = dimension(span s)
-      #|  a:real^N
-      #|  dimension(affine hull u INTER ball(a:real^N,min d e))
-      #|  e:real
-      #|  a:real^N
-      #|  d:real
-      #|  a:real^N
-      #|  s:real^N->bool
-      #|  u:real^N->bool
-      #|  forall u s:real^N->bool.\n        convex u /\\ open_in (subtopology euclidean u) s\n        ==> dimension s = if s = {} then -- &1 else aff_dim u
-      #|  forall s:real^N->bool.\n        open s ==> dimension s = if s = {} then -- &1 else &(dimindex(:N))
-      #|  dimension(:real^N) = &(dimindex(:N))
-      #|  dimension(interior(s:real^N->bool))
-      #|  forall s:real^N->bool. ~(interior s = {}) ==> dimension s = &(dimindex(:N))
-      #|  dimindex(:N) - n
-      #|  x:int < N - n - (N - (n + &1)) <=> x <= &0
-      #|  d2:int < n2 ==> d1 < N - n2 ==> d1 + d2 + &1 < N
-      #|  {x | Q x \\/ R x} = {x | Q x} UNION {x | R x}
-      #|  SUC n <= N ==> (a <= N - n <=> a = N - n \\/ a <= N - SUC n)
-      #|  n:num
-      #|  x:real^N
-      #|  n:num
-      #|  dimindex(:N) - n
-      #|  dimindex(:N) - n <= dimindex(:N)
-      #|  n = dimindex(:N) - (dimindex(:N) - n)
-      #|  n:num
-      #|  SUC n
-      #|  x:int <= &0 /\\ y <= n ==> x + y + &1 <= n + &1
-      #|  {x | Q x \\/ R x} = {x | Q x} UNION {x | R x}
-      #|  n:num
+      #|  \226\136\131 e : Real, real_of_num(0) < e && SUBSET((s : (Cart[Real, N]) -> Bool), cball((vec(0), e)))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) && convex(s) && !(s == {}) && continuous_on(f, s) && SUBSET(IMAGE(f, s), s) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, s) && f(x) == x)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) && convex(s) && !(interior(s) == {}) && continuous_on(f, s) && SUBSET(IMAGE(f, s), s) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, s) && f(x) == x)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], continuous_on(f, interval([(vec(0), vec(1))])) && SUBSET(IMAGE(f, interval([(vec(0), vec(1))])), interval([(vec(0), vec(1))])) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, interval([(vec(0), vec(1))])) && f(x) == x)
+      #|  ((a : Real) + (if (p : Bool) { -(x : Real) } else { x }) == a) == (x == real_of_num(0))
+      #|  (m : Num)
+      #|  (a : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  IN((x : Cart[Real, N]), (box : (Cart[Real, N]) -> Bool))
+      #|  op_dollar((x : Cart[Real, N]), (m : Num))
+      #|  real_of_num(1) - op_dollar((x : Cart[Real, N]), (m : Num))
+      #|  setdist(((b : (Num, Cart[Real, N]) -> Bool)((m : Num)), {(x : Cart[Real, N])}))
+      #|  IN((z : Cart[Real, N]), segment(((x : Cart[Real, N]), (y : Cart[Real, N]))))
+      #|  (z : Cart[Real, N]) == (y : Cart[Real, N])
+      #|  (z : Cart[Real, N]) == (x : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  SUBSET((s : (_) -> Bool), DIFF((t : (_) -> Bool), (u : (_) -> Bool))) == (SUBSET(s, t) && (\226\136\128 x : _, \226\136\128 y : _, IN(x, s) \226\134\146 !IN(x, u)))
+      #|  (box : (Cart[Real, N]) -> Bool)
+      #|  INTER(segment([((x : Cart[Real, N]), (y : Cart[Real, N]))]), (v : (Num, Cart[Real, N]) -> Bool)((m : Num)))
+      #|  INTER(segment([((x : Cart[Real, N]), (y : Cart[Real, N]))]), (u : (Num, Cart[Real, N]) -> Bool)((m : Num)))
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  SUBSET(segment([((x : Cart[Real, N]), (y : Cart[Real, N]))]), (box : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 i : Num, (n : Num) < i \226\134\146 1 <= i
+      #|  IN((x : Cart[Real, N]), (box : (Cart[Real, N]) -> Bool))
+      #|  IN((y : Cart[Real, N]), (l : (Num, Cart[Real, N]) -> Bool)((m : Num)))
+      #|  (y : Cart[Real, N]) == lambda((i : Num) => if i == (m : Num) { real_of_num(0) } else { op_dollar((x : Cart[Real, N]), i) })
+      #|  \226\136\128 i : Num, (n : Num) < i \226\134\146 1 <= i
+      #|  IN((x : Cart[Real, N]), (box : (Cart[Real, N]) -> Bool))
+      #|  IN((y : Cart[Real, N]), (r : (Num, Cart[Real, N]) -> Bool)((m : Num)))
+      #|  (y : Cart[Real, N]) == lambda((i : Num) => if i == (m : Num) { real_of_num(1) } else { op_dollar((x : Cart[Real, N]), i) })
+      #|  (x : Real) <= real_of_num(1) && real_of_num(0) <= (y : Real) \226\134\146 x + -y <= real_of_num(1)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  IN((x : Cart[Real, N]), (u : (Num, Cart[Real, N]) -> Bool)((m : Num))) && !IN(x, (v : (Num, Cart[Real, N]) -> Bool)(m)) || IN(x, v(m)) && !IN(x, u(m))
+      #|  IN((x : Cart[Real, N]), (b : (Num, Cart[Real, N]) -> Bool)((m : Num)))
+      #|  (m : Num)
+      #|  \226\136\128 i : Num, (n : Num) < i \226\134\146 1 <= i
+      #|  (x : Cart[Real, N])
+      #|  IN((x : Cart[Real, N]), (b : (Num, Cart[Real, N]) -> Bool)((m : Num)))
+      #|  (x : Cart[Real, N])
+      #|  (box : (Cart[Real, N]) -> Bool) == UNION(DIFF(box, (u : (Num, Cart[Real, N]) -> Bool)((m : Num))), DIFF(box, (v : (Num, Cart[Real, N]) -> Bool)(m)))
+      #|  (m : Num) <= (n : Num)
+      #|  (m : Num)
+      #|  (box : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N]) == ((x : Cart[Real, N]) => x + lambda((i : Num) => if (n : Num) < i { real_of_num(0) } else { if IN(x, (v : (Num, Cart[Real, N]) -> Bool)(i)) { -setdist(({x}, (b : (Num, Cart[Real, N]) -> Bool)(i))) } else { setdist(({x}, b(i))) } }))
+      #|  (v : (Num, Cart[Real, N]) -> Bool)((i : Num))
+      #|  (u : (Num, Cart[Real, N]) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, 1 <= i && i <= (n : Num) \226\134\146 !((b : (Num, Cart[Real, N]) -> Bool)(i) == {})
+      #|  SUBSET((t : (_) -> Bool), (s : (_) -> Bool)) && !(t == {}) \226\134\146 !(INTER(s, t) == {})
+      #|  (n : Int) - n - (w : Int) == -w
+      #|  (n : Num)
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
+      #|  (v : (Num, Cart[Real, N]) -> Bool)
+      #|  (u : (Num, Cart[Real, N]) -> Bool)
+      #|  (b : (Num, Cart[Real, N]) -> Bool)
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x) \226\134\146 false) \226\134\146 DISJOINT(INTER((b : (_) -> Bool), {(x : _) | P(x)}), INTER(b, {(x : _) | Q(x)}))
+      #|  1 <= (i : Num) && !(i == 1) \226\134\146 1 <= i - 1
+      #|  (n : Int) - ((i : Int) - (w : Int)) - w == n - i
+      #|  (i : Num) - 1
+      #|  (i : Num) == 1
+      #|  INTER((b : (_) -> Bool), INTER((s : (_) -> Bool), (t : (_) -> Bool))) == INTER(s, INTER(b, t))
+      #|  1 <= (i : Num) && i <= (n : Num)
+      #|  (i : Num)
+      #|  (b : (Num, Cart[Real, N]) -> Bool)
+      #|  1 <= (i : Num) \226\134\146 ((x : Num) <= i - 1) == (x < i)
+      #|  \226\136\131 b : (Num, Cart[Real, N]) -> Bool, (\226\136\128 i : Num, closed_in(subtopology(euclidean, (box : (Cart[Real, N]) -> Bool)), b(i))) && (\226\136\128 i : Num, 1 <= i && i <= (n : Num) \226\134\146 dimension(INTER(box, INTERS(IMAGE(b, op_dot_dot(1, i))))) <= int_of_num(n) - int_of_num(i) - int_of_num(1) && (\226\136\131 u : (Cart[Real, N]) -> Bool, \226\136\131 v : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, box), u) && open_in(subtopology(euclidean, box), v) && DISJOINT(u, v) && UNION(u, v) == DIFF(box, b(i)) && SUBSET((l : (Num, Cart[Real, N]) -> Bool)(i), u) && SUBSET((r : (Num, Cart[Real, N]) -> Bool)(i), v)))
+      #|  (lambda : ((Num) -> Real) -> Cart[Real, N])((j : Num) => if j == (i : Num) { real_of_num(1) } else { real_of_num(0) })
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (\226\136\128 i : Num, 1 <= i && i <= (n : Num) \226\134\146 !((l : (Num, Cart[Real, N]) -> Bool)(i) == {})) && (\226\136\128 i : Num, 1 <= i && i <= n \226\134\146 !((r : (Num, Cart[Real, N]) -> Bool)(i) == {}))
+      #|  (r : (Num, Cart[Real, N]) -> Bool) == ((i : Num) => INTER((box : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, i) == real_of_num(1)}))
+      #|  (l : (Num, Cart[Real, N]) -> Bool) == ((i : Num) => INTER((box : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, i) == real_of_num(0)}))
+      #|  (box : (Cart[Real, N]) -> Bool) == INTER(interval([(vec(0), vec(1))]), span(IMAGE(basis, op_dot_dot(1, (n : Num)))))
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  !((box : (Cart[Real, N]) -> Bool) == {}) && convex(box) && compact(box)
+      #|  ((n : Int) <= (d : Int)) == !(d <= n - int_of_num(1))
+      #|  1 <= (n : Num)
+      #|  (n : Num) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  (box : (Cart[Real, N]) -> Bool)
+      #|  dimension((box : (Cart[Real, N]) -> Bool))
+      #|  (box : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 real_of_num(0) <= (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) && (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) <= real_of_num(1)) && (\226\136\128 i : Num, (n : Num) < i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) == real_of_num(0))}
+      #|  (dim : ((Cart[Real, N]) -> Bool) -> Num)((IMAGE : ((Num) -> Cart[Real, N], (Num) -> Bool, Cart[Real, N]) -> Bool)((basis : (Num) -> Cart[Real, N]), op_dot_dot(1, (n : Num)))) == n
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (span : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((IMAGE : ((Num) -> Cart[Real, N], (Num) -> Bool, Cart[Real, N]) -> Bool)((basis : (Num) -> Cart[Real, N]), op_dot_dot(1, (n : Num))))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  relative_interior((s : (Cart[Real, N]) -> Bool))
+      #|  1 <= (n : Num)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  dimension(relative_interior((s : (Cart[Real, N]) -> Bool)))
+      #|  (nn : Int)
+      #|  (nn : Int)
+      #|  ((d : Bool) \226\134\146 (p : Bool) \226\134\146 (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (q \226\134\146 d && p && r \226\134\146 s)
+      #|  (nn : Int) == aff_dim((s : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  int_of_num(0) <= aff_dim((s : (Cart[Real, N]) -> Bool)) && int_of_num(1) <= aff_dim(s)
+      #|  aff_dim((s : (Cart[Real, N]) -> Bool)) == int_of_num(0)
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) \226\134\146 dimension(s) == aff_dim(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, aff_dim(s) == dimension(hull(affine, s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, aff_dim(s) == dimension(hull(convex, s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, subspace(s) \226\134\146 dimension(s) == int_of_num(dim(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, int_of_num(dim(s)) == dimension(span(s))
+      #|  (a : Cart[Real, N])
+      #|  dimension(INTER(hull(affine, (u : (Cart[Real, N]) -> Bool)), ball(((a : Cart[Real, N]), min((d : Real), (e : Real))))))
+      #|  (e : Real)
+      #|  (a : Cart[Real, N])
+      #|  (d : Real)
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, convex(u) && open_in(subtopology(euclidean, u), s) \226\134\146 dimension(s) == (if s == {} { -int_of_num(1) } else { aff_dim(u) })
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (open : ((Cart[Real, N]) -> Bool) -> Bool)(s) \226\134\146 (dimension : ((Cart[Real, N]) -> Bool) -> Int)(s) == (if s == ({} : (Cart[Real, N]) -> Bool) { -int_of_num(1) } else { int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) })
+      #|  (dimension : ((Cart[Real, N]) -> Bool) -> Int)((UNIV : (Cart[Real, N]) -> Bool)) == int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))
+      #|  dimension(interior((s : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, !((interior : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s) == ({} : (Cart[Real, N]) -> Bool)) \226\134\146 (dimension : ((Cart[Real, N]) -> Bool) -> Int)(s) == int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - (n : Num)
+      #|  ((x : Int) < (N : Int) - (n : Int) - (N - (n + int_of_num(1)))) == (x <= int_of_num(0))
+      #|  (d2 : Int) < (n2 : Int) \226\134\146 (d1 : Int) < (N : Int) - n2 \226\134\146 d1 + (d2 + int_of_num(1)) < N
+      #|  {(x : _) | (Q : (_) -> Bool)(x) || (R : (_) -> Bool)(x)} == UNION({(x : _) | Q(x)}, {(x : _) | R(x)})
+      #|  SUC((n : Num)) <= (N : Num) \226\134\146 ((a : Num) <= N - n) == (a == N - n || a <= N - SUC(n))
+      #|  (n : Num)
+      #|  (x : Cart[Real, N])
+      #|  (n : Num)
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - (n : Num)
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - (n : Num) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  (n : Num) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - ((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - n)
+      #|  (n : Num)
+      #|  SUC((n : Num))
+      #|  (x : Int) <= int_of_num(0) && (y : Int) <= (n : Int) \226\134\146 x + (y + int_of_num(1)) <= n + int_of_num(1)
+      #|  {(x : _) | (Q : (_) -> Bool)(x) || (R : (_) -> Bool)(x)} == UNION({(x : _) | Q(x)}, {(x : _) | R(x)})
+      #|  (n : Num)
       #|  0
-      #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
-      #|  forall n. n <= dimindex(:N)\n       ==> dimension\n           {x:real^N | CARD {i | i IN 1..dimindex(:N) /\\ rational(x$i)} <= n} =\n           &n
-      #|  1 <= N /\\ n <= N ==> (~(n = N) <=> n <= N - 1)
-      #|  {x | x IN s} = s
-      #|  (forall x. P x ==> Q x) <=> {x | P x /\\ Q x} = {x | P x}
-      #|  x:real^N
-      #|  n - 1 <= n
-      #|  dimindex(:N) - 1
-      #|  dimension((:real^N) DIFF\n             { x | forall i. 1 <= i /\\ i <= dimindex(:N) ==> rational(x$i)}) =\n   &(dimindex(:N)) - &1
-      #|  i:num
-      #|  dist(y:real^N,x)
-      #|  (lambda i. if i IN 1..n then (y:real^N)$i else &0):real^N
-      #|  y:real^N
-      #|  &0 < e
-      #|  e:real
-      #|  x IN (:real^N)
-      #|  x:real^N
-      #|  closure(span(IMAGE basis (1..n)) INTER\n             {x:real^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> rational(x$i)}) =\n     span(IMAGE basis (1..n))
-      #|  1 <= N /\\ n <= N ==> (N - 1 + 1) - (N - n) <= n
-      #|  c:int <= n ==> d <= c - &1 ==> d < n
-      #|  c < n ==> c <= n - 1
-      #|  i:num
-      #|  i:num
-      #|  CARD(n+1..dimindex(:N))
-      #|  x:real^N
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
+      #|  \226\136\128 n : Num, n <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (dimension : ((Cart[Real, N]) -> Bool) -> Int)({(x : Cart[Real, N]) | (CARD : ((Num) -> Bool) -> Num)({(i : Num) | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && rational((op_dollar : (Cart[Real, N], Num) -> Real)(x, i))}) <= n}) == int_of_num(n)
+      #|  1 <= (N : Num) && (n : Num) <= N \226\134\146 !(n == N) == (n <= N - 1)
+      #|  {(x : _) | IN(x, (s : (_) -> Bool))} == s
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 (Q : (_) -> Bool)(x)) == ({(x : _) | P(x) && Q(x)} == {(x : _) | P(x)})
+      #|  (x : Cart[Real, N])
+      #|  (n : Num) - 1 <= n
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - 1
+      #|  (dimension : ((Cart[Real, N]) -> Bool) -> Int)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 rational((op_dollar : (Cart[Real, N], Num) -> Real)(x, i))})) == int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) - int_of_num(1)
+      #|  (i : Num)
+      #|  dist(((y : Cart[Real, N]), (x : Cart[Real, N])))
+      #|  (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (n : Num))) { (op_dollar : (Cart[Real, N], Num) -> Real)((y : Cart[Real, N]), i) } else { real_of_num(0) })
+      #|  (y : Cart[Real, N])
+      #|  real_of_num(0) < (e : Real)
+      #|  (e : Real)
+      #|  IN((x : Cart[Real, N]), UNIV)
+      #|  (x : Cart[Real, N])
+      #|  (closure : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((span : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((IMAGE : ((Num) -> Cart[Real, N], (Num) -> Bool, Cart[Real, N]) -> Bool)((basis : (Num) -> Cart[Real, N]), op_dot_dot(1, (n : Num)))), {(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 rational((op_dollar : (Cart[Real, N], Num) -> Real)(x, i))})) == (span : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((IMAGE : ((Num) -> Cart[Real, N], (Num) -> Bool, Cart[Real, N]) -> Bool)((basis : (Num) -> Cart[Real, N]), op_dot_dot(1, n)))
+      #|  1 <= (N : Num) && (n : Num) <= N \226\134\146 N - 1 + 1 - (N - n) <= n
+      #|  (c : Int) <= (n : Int) \226\134\146 (d : Int) <= c - int_of_num(1) \226\134\146 d < n
+      #|  (c : Num) < (n : Num) \226\134\146 c <= n - 1
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  CARD(op_dot_dot((n : Num) + 1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (x : Cart[Real, N])
       #|  dimension(UNIONS\n         {{x:real^N |\n             {i | i IN 1..dimindex (:N) /\\ rational (x$i)} HAS_SIZE m} |\n          m IN (dimindex(:N)-n)..dimindex(:N)-1})
-      #|  forall n. n <= dimindex(:N)\n          ==> dimension(span(IMAGE basis (1..n)) DIFF\n                {x:real^N | forall i. i IN 1..dimindex(:N) ==> rational(x$i)}) < &n
-      #|  g:real^N->real^N
-      #|  f:real^N->real^N
-      #|  d':int = d ==> d < n ==> d' < n
-      #|  n:num
-      #|  g:real^N->real^N
-      #|  f:real^N->real^N
-      #|  t SUBSET s ==> s INTER t = t
-      #|  s:real^N->bool
-      #|  span(IMAGE basis (1..n)) INTER\n     {x:real^N | forall i. i IN 1..dimindex(:N) ==> rational(x$i)}
-      #|  s:real^N->bool
-      #|  n:num
-      #|  s:real^N->bool
-      #|  c:real^N->bool
-      #|  c:real^N->bool
-      #|  ~(c:real^N->bool = {})
-      #|  COUNTABLE(c:real^N->bool)
-      #|  closure c:real^N->bool = affine hull c
-      #|  (s:real^N->bool) SUBSET affine hull s
-      #|  dimension(s:real^N->bool)
-      #|  aff_dim c <= dimension(affine hull c DIFF c:real^N->bool)
-      #|  affine hull c:real^N->bool = affine hull s
-      #|  t SUBSET u ==> s INTER t SUBSET u
-      #|  t SUBSET u ==> s DIFF t = {} ==> s SUBSET u
-      #|  closure c:real^N->bool = affine hull s
-      #|  c:real^N->bool
-      #|  affine hull s DIFF s:real^N->bool
-      #|  i:int <= s /\\ s <= u ==> i = u ==> s = u
-      #|  relative_interior s:real^N->bool
-      #|  affine hull s:real^N->bool
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool.\n        dimension s = aff_dim s <=> s = {} \\/ ~(relative_interior s = {})
-      #|  s:int < a <=> s <= a /\\ ~(s = a)
-      #|  forall s:real^N->bool. dimension s < aff_dim s <=>\n                    ~(s = {}) /\\ relative_interior s = {}
-      #|  subtopology euclidean u interior_of s:real^N->bool
-      #|  u:real^N->bool
-      #|  dimension(subtopology euclidean u interior_of s:real^N->bool)
-      #|  s SUBSET t ==> ~(s = {}) ==> ~(t = {})
-      #|  s = u ==> forall a:int. s <= a /\\ a <= u ==> a = u /\\ s = a
-      #|  aff_dim(s:real^N->bool)
-      #|  s:real^N->bool = {}
-      #|  u:real^N->bool = {}
-      #|  forall u s:real^N->bool.\n        convex u /\\ s SUBSET u\n        ==> (dimension s = aff_dim u <=>\n             s = {} /\\ u = {} \\/\n             ~(subtopology euclidean u interior_of s = {}))
-      #|  u:real^N->bool = {}
-      #|  forall u s:real^N->bool.\n        convex u /\\ s SUBSET u\n        ==> (dimension s < aff_dim u <=>\n             ~(u = {}) /\\ subtopology euclidean u interior_of s = {})
-      #|  s:real^N->bool
-      #|  forall a. d:int = n ==> d <= a /\\ a <= n ==> a = n
-      #|  aff_dim(s:real^N->bool)
-      #|  ~(-- &1:int = &n)
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool. dimension s = &(dimindex(:N)) <=> ~(interior s = {})
-      #|  forall s:real^N->bool. dimension s < &(dimindex(:N)) <=> interior s = {}
-      #|  IMAGE f c SUBSET s\n      ==> s INTER (IMAGE f (c DIFF i)) = IMAGE f (c DIFF i)
-      #|  d:int <= n - &2 ==> d' = d ==> d' <= n - &1 - &1
-      #|  u = IMAGE (\\x:real^N. c % x) u
-      #|  IMAGE (\\x:real^N. c % x) (subtopology euclidean u closure_of s)
-      #|  vec 0:real^N
-      #|  IMAGE (\\x:real^N. c % x) s
-      #|  u SUBSET s ==> t INTER u SUBSET s
-      #|  closure s:real^N->bool
-      #|  IMAGE (\\x. d / r % x) (cball(vec 0:real^N,r)) INTER u
-      #|  cball(vec 0:real^N,d) INTER u
-      #|  d / r:real
-      #|  d:real
-      #|  vec 0:real^N
-      #|  u:real^N->bool
-      #|  s INTER v:real^N->bool
-      #|  vec 0:real^N
-      #|  r:real
-      #|  ?c. &0 < c /\\\n        IMAGE (\\x:real^N. c % x) (subtopology euclidean u closure_of s)\n        SUBSET s /\\\n        IMAGE (\\x:real^N. c % x) (subtopology euclidean u closure_of s)\n        SUBSET v
-      #|  affine(u:real^N->bool)
-      #|  (vec 0:real^N) IN u
-      #|  a:real^N
-      #|  a:real^N
-      #|  v:real^N->bool
-      #|  aff_dim(u:real^N->bool) - &1
-      #|  s:real^N->bool
-      #|  u:real^N->bool
-      #|  x:int <= n - &1 ==> ~(x = n)
-      #|  s:real^N->bool
-      #|  u:real^N->bool
-      #|  relative_frontier s:real^N->bool =\n    subtopology euclidean u frontier_of s
-      #|  s SUBSET u ==> s DIFF t SUBSET u
-      #|  ~(u:int <= &0) ==> ~(u = &0)
-      #|  aff_dim(relative_frontier s:real^N->bool)
-      #|  d:int < n /\\ ~(d <= n - &2) ==> d = n - &1
-      #|  s:int <= &0 ==> -- &1 <= s /\\ ~(s = -- &1) ==> s = &0
-      #|  aff_dim(u:real^N->bool) <= &0
-      #|  u:real^N->bool
-      #|  s:real^N->bool
-      #|  forall u s:real^N->bool.\n        affine u /\\ open_in (subtopology euclidean u) s /\\ bounded s\n        ==> dimension(relative_frontier s) =\n            if s = {} then -- &1 else aff_dim u - &1
-      #|  u:real^N->bool
-      #|  (:real^N)
-      #|  forall u:real^N->bool.\n        open u /\\ bounded u\n        ==> dimension(frontier u) =\n            if u = {} then -- &1 else &(dimindex(:N)) - &1
-      #|  i z = z ==> z INSERT IMAGE i (s DELETE z) = z INSERT IMAGE i s
-      #|  z INSERT w = z INSERT y\n    ==> w = x DELETE z ==> z INSERT y = z INSERT x
-      #|  c SUBSET u ==> (u DELETE z) INTER c = c DELETE z
-      #|  s DELETE a = s INTER (s DELETE a)
-      #|  s:real^N->bool
-      #|  &0 < r
-      #|  x:real^N = vec 0
-      #|  x:real^N
-      #|  (forall x. x IN s ==> i(i x) = x) /\\\n    t SUBSET s /\\ a INSERT (IMAGE i s) = a INSERT u\n    ==> a INSERT IMAGE i (s DIFF t) = a INSERT (u DIFF IMAGE i t)
-      #|  ~p ==> ~(q /\\ r) <=> ~p /\\ r ==> ~q
-      #|  connected(u:real^N->bool)
-      #|  vec 0:real^N
-      #|  (?a:real^N. ~(s = {}) /\\ ~(t = {}) /\\ (a INSERT s = a INSERT t))\n    ==> dimension s = dimension t
-      #|  subtopology euclidean u closure_of s SUBSET (u:real^N->bool)
-      #|  IMAGE (i:real^N->real^N) (subtopology euclidean u frontier_of s)
-      #|  subtopology euclidean u frontier_of s:real^N->bool
-      #|  affine hull (IMAGE (i:real^N->real^N) s) = u
-      #|  affine hull s:real^N->bool = u
-      #|  ~(x = &0) ==> r pow 2 / x pow 2 * x = (r * r) / x
-      #|  x:real^N = vec 0
-      #|  x IN s ==> s SUBSET t ==> x IN t
-      #|  b INTER u SUBSET u DIFF c\n        ==> c SUBSET u /\\ x IN c ==> x IN UNIV DIFF b
-      #|  x IN (:real^N) DIFF cball(vec 0,r)
-      #|  x:real^N
-      #|  cball(vec 0:real^N,r) INTER u
-      #|  u DELETE (vec 0:real^N)
-      #|  open_in (subtopology euclidean u) (IMAGE (i:real^N->real^N) s)
-      #|  (vec 0:real^N) IN s
-      #|  ~(x IN s) ==> t SUBSET s ==> ~(x IN t)
-      #|  s SUBSET u DELETE (vec 0:real^N)
-      #|  IMAGE (i:real^N->real^N) s
-      #|  u:real^N->bool
-      #|  &0 < r
-      #|  x:real^N
-      #|  u DELETE (vec 0:real^N)
-      #|  i:real^N->real^N
-      #|  i = \\x:real^N. r pow 2 / norm x pow 2 % x
-      #|  r:real
-      #|  vec 0:real^N
-      #|  u:real^N->bool
-      #|  u DIFF subtopology euclidean u closure_of s:real^N->bool
-      #|  affine(u:real^N->bool)
-      #|  z:real^N
-      #|  s SUBSET u /\\ ~(s = u) ==> ?x. x IN u /\\ ~(x IN s)
-      #|  ?z:real^N. z IN u /\\ ~(z IN subtopology euclidean u closure_of s)
-      #|  bounded(s:real^N->bool)
-      #|  forall u s:real^N->bool.\n        affine u /\\ open_in (subtopology euclidean u) s /\\\n        ~(s = {}) /\\ ~(subtopology euclidean u closure_of s = u)\n        ==> dimension(relative_frontier s) = aff_dim u - &1
-      #|  u:real^N->bool
-      #|  (:real^N)
-      #|  forall u:real^N->bool.\n        open u /\\ ~(u = {}) /\\ ~(closure u = (:real^N))\n        ==> dimension(frontier u) = &(dimindex(:N)) - &1
-      #|  relative_interior s:real^N->bool
-      #|  affine hull s:real^N->bool
-      #|  forall s:real^N->bool.\n        convex s /\\ bounded s /\\ ~(s = {})\n        ==> dimension(relative_frontier s) = aff_dim s - &1
-      #|  a:real^N
-      #|  t:real^N->bool = {}
-      #|  forall a:real^N r t.\n        &0 < r /\\ affine t /\\ a IN t\n        ==> dimension(sphere(a,r) INTER t) = aff_dim t - &1
-      #|  s = s INTER UNIV
-      #|  r:real = &0
-      #|  forall a:real^N r. dimension(sphere(a,r)) =\n                if &0 < r then &(dimindex(:N)) - &1\n                else if r = &0 then &0 else -- &1
-      #|  u DIFF u INTER s = u DIFF s
-      #|  subtopology euclidean u closure_of u2:real^N->bool
-      #|  u DIFF subtopology euclidean u closure_of u1:real^N->bool
-      #|  subtopology euclidean (u:real^N->bool)
-      #|  dimension(d:real^N->bool)
-      #|  forall x. d:int <= x /\\ x < n ==> ~(d = n)
-      #|  subtopology euclidean u closure_of u2:real^N->bool
-      #|  forall t. s SUBSET t /\\ t SUBSET u /\\ ~(t = u)\n        ==> ~(s = u)
-      #|  v:real^N->bool
-      #|  u:real^N->bool
-      #|  open_in (subtopology euclidean u) (v:real^N->bool)
-      #|  ~(v:real^N->bool = {})
-      #|  v:real^N->bool
-      #|  u:real^N->bool
-      #|  v:real^N->bool = u DIFF closure u1
-      #|  u1 UNION u2:real^N->bool = u DIFF d
-      #|  (u:real^N->bool) SUBSET closure u1 UNION closure u2
-      #|  u1 UNION u2 = u DIFF d ==> u INTER u1 = u1 /\\ u INTER u2 = u2
-      #|  u2:real^N->bool
-      #|  u1:real^N->bool
-      #|  d:int <= u - &2 ==> d' <= d ==> d' < u
-      #|  p ==> (p <=> q /\\ r) ==> r
-      #|  u INTER d:real^N->bool
-      #|  u:real^N->bool
-      #|  subtopology euclidean u interior_of d:real^N->bool = {}
-      #|  d:real^N->bool
-      #|  u:real^N->bool
-      #|  forall u s:real^N->bool.\n          affine u /\\ dimension s <= aff_dim u - &2 ==> connected(u DIFF s)
-      #|  g:real^N->real^N
-      #|  f:real^N->real^N
-      #|  dimension(ball(x:real^N,r) INTER u INTER t)
-      #|  dimension(t:real^N->bool)
-      #|  IMAGE (f:real^N->real^N) (ball(x,r) INTER u INTER t)
-      #|  u:real^N->bool
-      #|  g:real^N->real^N
-      #|  f:real^N->real^N
-      #|  x:real^N
-      #|  affine hull (u INTER ball(x:real^N,r)) = affine hull u
-      #|  u:real^N->bool
-      #|  ball(x:real^N,r) INTER u
-      #|  ball(x:real^N,r) INTER u
-      #|  r:real
-      #|  x:real^N
-      #|  x:real^N
-      #|  u DIFF t:real^N->bool
-      #|  d:int <= u - &2 ==> d' <= d ==> ~(d' = u)
-      #|  ~p ==> p ==> q
-      #|  s SUBSET u ==> s INTER (u DIFF t) = s DIFF t
-      #|  s SUBSET u /\\ u DIFF closure(u DIFF t) = {}\n          ==> s INTER closure (u DIFF t) = s
-      #|  u DIFF closure(u DIFF t):real^N->bool
-      #|  u:real^N->bool
-      #|  u:real^N->bool
-      #|  u DIFF t:real^N->bool
-      #|  s:real^N->bool
-      #|  forall u s t:real^N->bool.\n          affine u /\\ open_in (subtopology euclidean u) s /\\\n          connected s /\\ dimension t <= aff_dim u - &2\n          ==> connected(s DIFF t)
-      #|  affine hull c DIFF t:real^N->bool
-      #|  d:int <= u - &2 ==> d' <= d ==> ~(d' = u)
-      #|  ~p ==> p ==> q
-      #|  c SUBSET closure c /\\ s SUBSET c ==> s SUBSET s INTER closure c
-      #|  closure s:real^N->bool
-      #|  s:real^N->bool
-      #|  c:real^N->bool
-      #|  relative_interior c:real^N->bool
-      #|  s:real^N->bool
-      #|  relative_interior c SUBSET c /\\ c SUBSET u /\\\n        u DIFF closure(u DIFF t) = {}\n        ==> (relative_interior c INTER s) INTER closure (u DIFF t) =\n            relative_interior c INTER s /\\\n            (relative_interior c INTER s) INTER (u DIFF t) =\n            (relative_interior c INTER s) DIFF t
-      #|  affine hull c DIFF closure(affine hull c DIFF t):real^N->bool
-      #|  affine hull c:real^N->bool
-      #|  affine hull c:real^N->bool
-      #|  affine hull c DIFF t:real^N->bool
-      #|  relative_interior c INTER s:real^N->bool
-      #|  c:real^N->bool
-      #|  s:real^N->bool
-      #|  c:real^N->bool
-      #|  affine hull s:real^N->bool
-      #|  c:real^N->bool
-      #|  relative_interior c:real^N->bool
-      #|  open_in (subtopology euclidean (affine hull c))\n            (relative_interior c INTER s:real^N->bool)
-      #|  (relative_interior c INTER s) DIFF t:real^N->bool
-      #|  s:real^N->bool = {}
-      #|  forall c s t:real^N->bool.\n        convex c /\\ open_in (subtopology euclidean c) s /\\\n        connected s /\\ dimension t <= aff_dim c - &2\n        ==> connected(s DIFF t)
-      #|  s:real^N->bool
-      #|  forall s t:real^N->bool.\n        convex s /\\ dimension t <= aff_dim s - &2 ==> connected(s DIFF t)
-      #|  affine hull s:real^N->bool
-      #|  forall s t:real^N->bool.\n        open_in (subtopology euclidean (affine hull s)) s /\\\n        connected s /\\\n        dimension t <= aff_dim s - &2\n        ==> connected(s DIFF t)
-      #|  s:real^N->bool = {}
-      #|  forall s t:real^N->bool.\n        open s /\\ connected s /\\ dimension t <= &(dimindex(:N)) - &2\n        ==> connected(s DIFF t)
-      #|  forall s:real^N->bool t.\n        convex s /\\ ~(interior s = {}) /\\ dimension t <= &(dimindex(:N)) - &2\n        ==> connected(s DIFF t)
-      #|  forall s:real^N->bool.\n        dimension s <= &(dimindex(:N)) - &2 ==> connected((:real^N) DIFF s)
-      #|  s SUBSET t <=> s INTER t = s
-      #|  s DIFF t = s INTER (UNIV DIFF t)
-      #|  forall s t:real^N->bool.\n          open s /\\ interior t = {} ==> s SUBSET closure(s DIFF t)
-      #|  interior t:real^N->bool = {}
-      #|  t:real^N->bool
-      #|  closure(interior s):real^N->bool
-      #|  s:real^N->bool
-      #|  interior s DIFF t:real^N->bool
-      #|  forall s:real^N->bool t.\n        s SUBSET closure(interior s) /\\\n        connected(interior s) /\\\n        dimension t <= &(dimindex(:N)) - &2\n        ==> connected(s DIFF t)
-      #|  AR(s:real^N->bool) <=>\n        forall u s':real^(N,1)finite_sum->bool.\n                s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n                ==> s' retract_of u
-      #|  ANR(s:real^N->bool) <=>\n        forall u s':real^(N,1)finite_sum->bool.\n                s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n                ==> ?t. open_in (subtopology euclidean u) t /\\\n                        s' retract_of t
-      #|  ENR s <=> ?u. open u /\\ s retract_of u
-      #|  (h:real^(N,1)finite_sum->real^N) o r o\n              (f':real^M->real^(N,1)finite_sum)
-      #|  r:real^(N,1)finite_sum->real^(N,1)finite_sum
-      #|  f':real^M->real^(N,1)finite_sum
-      #|  t:real^M->bool
-      #|  u:real^M->bool
-      #|  c:real^(N,1)finite_sum->bool
-      #|  (g:real^N->real^(N,1)finite_sum) o (f:real^M->real^N)
-      #|  h:real^(N,1)finite_sum->real^N
-      #|  g:real^N->real^(N,1)finite_sum
-      #|  s':real^(N,1)finite_sum->bool
-      #|  c:real^(N,1)finite_sum->bool
-      #|  x:int < y + &1 <=> x <= y
-      #|  ?c s':real^(N,1)finite_sum->bool.\n        convex c /\\ ~(c = {}) /\\ closed_in (subtopology euclidean c) s' /\\\n        (s:real^N->bool) homeomorphic s'
-      #|  forall f:real^M->real^N u t s.\n        AR s /\\ f continuous_on t /\\ IMAGE f t SUBSET s /\\\n        closed_in (subtopology euclidean u) t\n        ==> ?g. g continuous_on u /\\ IMAGE g u SUBSET s /\\\n                forall x. x IN t ==> g x = f x
-      #|  (g:real^N->real^M) o (h':real^M->real^N)
-      #|  h':real^M->real^N
-      #|  s:real^N->bool
-      #|  s':real^M->bool
-      #|  u:real^M->bool
-      #|  h:real^M->real^N
-      #|  h:real^M->real^N
-      #|  g:real^N->real^M
-      #|  forall s:real^N->bool u s':real^M->bool.\n        AR s /\\ s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n        ==> s' retract_of u
-      #|  forall s:real^N->bool s':real^M->bool.\n    AR s /\\ s homeomorphic s' /\\ closed s' ==> s' retract_of (:real^M)
-      #|  (g:real^N->real^(N,1)finite_sum) o\n              (h':real^(N,1)finite_sum->real^N)
-      #|  h':real^(N,1)finite_sum->real^N
-      #|  t:real^(N,1)finite_sum->bool
-      #|  u:real^(N,1)finite_sum->bool
-      #|  h:real^(N,1)finite_sum->real^N
-      #|  h:real^(N,1)finite_sum->real^N
-      #|  g:real^N->real^(N,1)finite_sum
-      #|  t:real^(N,1)finite_sum->bool
-      #|  u:real^(N,1)finite_sum->bool
-      #|  forall s:real^N->bool.\n        (forall f:real^(N,1)finite_sum->real^N u t.\n             f continuous_on t /\\ IMAGE f t SUBSET s /\\\n             closed_in (subtopology euclidean u) t\n             ==> ?g. g continuous_on u /\\ IMAGE g u SUBSET s /\\\n                     forall x. x IN t ==> g x = f x)\n        ==> AR s
-      #|  forall s:real^N->bool.\n        AR s <=>\n        (forall f:real^(N,1)finite_sum->real^N u t.\n             f continuous_on t /\\ IMAGE f t SUBSET s /\\\n             closed_in (subtopology euclidean u) t\n             ==> ?g. g continuous_on u /\\ IMAGE g u SUBSET s /\\\n                     forall x. x IN t ==> g x = f x)
-      #|  forall s u:real^N->bool.\n        AR s /\\ closed_in (subtopology euclidean u) s ==> s retract_of u
-      #|  s:real^M->bool
-      #|  forall s:real^M->bool t:real^N->bool.\n      s homeomorphic t /\\ AR t ==> AR s
-      #|  forall s:real^M->bool t:real^N->bool.\n      s homeomorphic t ==> (AR s <=> AR t)
-      #|  forall a:real^N s. AR(IMAGE (\\x. a + x) s) <=> AR s
-      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (AR(IMAGE f s) <=> AR s)
-      #|  g:real^N->real^M
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N g s t k.\n        homeomorphism (s,t) (f,g) /\\ k SUBSET s\n        ==> (AR(IMAGE f k) <=> AR k)
-      #|  (h:real^(N,1)finite_sum->real^N) o r o\n              (f':real^M->real^(N,1)finite_sum)
-      #|  {x | x IN u /\\ (f':real^M->real^(N,1)finite_sum) x IN d}
-      #|  r:real^(N,1)finite_sum->real^(N,1)finite_sum
-      #|  f':real^M->real^(N,1)finite_sum
-      #|  t:real^M->bool
-      #|  u:real^M->bool
-      #|  c:real^(N,1)finite_sum->bool
-      #|  (g:real^N->real^(N,1)finite_sum) o (f:real^M->real^N)
-      #|  h:real^(N,1)finite_sum->real^N
-      #|  g:real^N->real^(N,1)finite_sum
-      #|  d:real^(N,1)finite_sum->bool
-      #|  s':real^(N,1)finite_sum->bool
-      #|  c:real^(N,1)finite_sum->bool
-      #|  x:int < y + &1 <=> x <= y
-      #|  ?c s':real^(N,1)finite_sum->bool.\n        convex c /\\ ~(c = {}) /\\ closed_in (subtopology euclidean c) s' /\\\n        (s:real^N->bool) homeomorphic s'
-      #|  forall f:real^M->real^N u t s.\n        ANR s /\\ f continuous_on t /\\ IMAGE f t SUBSET s /\\\n        closed_in (subtopology euclidean u) t\n        ==> ?v g. t SUBSET v /\\ open_in (subtopology euclidean u) v /\\\n                  g continuous_on v /\\ IMAGE g v SUBSET s /\\\n                  forall x. x IN t ==> g x = f x
-      #|  (g:real^N->real^M) o (h':real^M->real^N)
-      #|  h':real^M->real^N
-      #|  v:real^M->bool
-      #|  s:real^N->bool
-      #|  s':real^M->bool
-      #|  u:real^M->bool
-      #|  h:real^M->real^N
-      #|  h:real^M->real^N
-      #|  g:real^N->real^M
-      #|  forall s:real^N->bool u s':real^M->bool.\n        ANR s /\\ s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n        ==> ?v. open_in (subtopology euclidean u) v /\\\n                s' retract_of v
-      #|  forall s:real^N->bool s':real^M->bool.\n    ANR s /\\ s homeomorphic s' /\\ closed s' ==> ?v. open v /\\ s' retract_of v
-      #|  (g:real^N->real^(N,1)finite_sum) o\n              (h':real^(N,1)finite_sum->real^N)
-      #|  h':real^(N,1)finite_sum->real^N
-      #|  v:real^(N,1)finite_sum->bool
-      #|  t:real^(N,1)finite_sum->bool
-      #|  u:real^(N,1)finite_sum->bool
-      #|  h:real^(N,1)finite_sum->real^N
-      #|  h:real^(N,1)finite_sum->real^N
-      #|  g:real^N->real^(N,1)finite_sum
-      #|  t:real^(N,1)finite_sum->bool
-      #|  u:real^(N,1)finite_sum->bool
-      #|  forall s:real^N->bool.\n        (forall f:real^(N,1)finite_sum->real^N u t.\n             f continuous_on t /\\ IMAGE f t SUBSET s /\\\n             closed_in (subtopology euclidean u) t\n             ==> ?v g. t SUBSET v /\\ open_in  (subtopology euclidean u) v /\\\n                       g continuous_on v /\\ IMAGE g v SUBSET s /\\\n                       forall x. x IN t ==> g x = f x)\n        ==> ANR s
-      #|  forall s:real^N->bool.\n        ANR s <=>\n        (forall f:real^(N,1)finite_sum->real^N u t.\n             f continuous_on t /\\ IMAGE f t SUBSET s /\\\n             closed_in (subtopology euclidean u) t\n             ==> ?v g. t SUBSET v /\\ open_in  (subtopology euclidean u) v /\\\n                       g continuous_on v /\\ IMAGE g v SUBSET s /\\\n                       forall x. x IN t ==> g x = f x)
-      #|  u DIFF w:real^M->bool
-      #|  w:real^M->bool
-      #|  v:real^M->bool
-      #|  u:real^M->bool
-      #|  u DIFF z:real^M->bool
-      #|  s':real^M->bool
-      #|  ?z. open_in (subtopology euclidean u) z /\\\n                    (s':real^M->bool) retract_of z
-      #|  forall s:real^N->bool u s':real^M->bool.\n        ANR s /\\ s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n        ==> ?v w. open_in (subtopology euclidean u) v /\\\n                  closed_in (subtopology euclidean u) w /\\\n                  s' SUBSET v /\\ v SUBSET w /\\ s' retract_of w
-      #|  g:real^M->real^N
-      #|  u DIFF z:real^M->bool
-      #|  z:real^M->bool
-      #|  w:real^M->bool
-      #|  u:real^M->bool
-      #|  u DIFF v:real^M->bool
-      #|  t:real^M->bool
-      #|  ?v g. t SUBSET v /\\ open_in (subtopology euclidean u) v /\\\n          g continuous_on v /\\ IMAGE g v SUBSET s /\\\n          forall x. x IN t ==> g x = (f:real^M->real^N) x
-      #|  forall f:real^M->real^N u t s.\n        ANR s /\\ f continuous_on t /\\ IMAGE f t SUBSET s /\\\n        closed_in (subtopology euclidean u) t\n        ==> ?v w g. open_in (subtopology euclidean u) v /\\\n                    closed_in (subtopology euclidean u) w /\\\n                    t SUBSET v /\\ v SUBSET w /\\\n                    g continuous_on w /\\ IMAGE g w SUBSET s /\\\n                    forall x. x IN t ==> g x = f x
-      #|  forall s:real^N->bool u.\n        ANR s /\\ closed_in (subtopology euclidean u) s\n        ==> ?v. open_in (subtopology euclidean u) v /\\\n                s retract_of v
-      #|  forall s:real^N->bool u.\n        ANR s /\\ closed_in (subtopology euclidean u) s\n        ==> ?v w. open_in (subtopology euclidean u) v /\\\n                  closed_in (subtopology euclidean u) w /\\\n                  s SUBSET v /\\ v SUBSET w /\\ s retract_of w
-      #|  s:real^M->bool
-      #|  forall s:real^M->bool t:real^N->bool.\n      s homeomorphic t /\\ ANR t ==> ANR s
-      #|  forall s:real^M->bool t:real^N->bool.\n      s homeomorphic t ==> (ANR s <=> ANR t)
-      #|  forall a:real^N s. ANR(IMAGE (\\x. a + x) s) <=> ANR s
-      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (ANR(IMAGE f s) <=> ANR s)
-      #|  g:real^N->real^M
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N g s t k.\n        homeomorphism (s,t) (f,g) /\\ k SUBSET s\n        ==> (ANR(IMAGE f k) <=> ANR k)
-      #|  forall x:real^M. x IN t ==> x IN c
-      #|  forall x:real^M. x IN u ==> x IN s
-      #|  IMAGE h u2 SUBSET v ==> u SUBSET u2 ==> IMAGE h u SUBSET v
-      #|  h:real^(1,M)finite_sum->real^N
-      #|  u:real^M->bool
-      #|  u2:real^(1,M)finite_sum->bool
-      #|  s:real^M->bool
-      #|  c:real^M->bool
-      #|  interval[vec 0:real^1,vec 1]
-      #|  h:real^(1,M)finite_sum->real^N
-      #|  u2:real^(1,M)finite_sum->bool
-      #|  x:real^1 = vec 1
-      #|  x:real^1
-      #|  interval[vec 0:real^1,vec 1] PCROSS (s:real^M->bool)
-      #|  {a,b} = {a} UNION {b}
-      #|  v:real^N->bool
-      #|  interval[vec 0,vec 1] PCROSS c UNION\n     {vec 0:real^1,vec 1} PCROSS (s:real^M->bool)
-      #|  (interval[vec 0,vec 1] PCROSS s):real^(1,M)finite_sum->bool
-      #|  fg:real^(1,M)finite_sum->real^N
-      #|  fg:real^(1,M)finite_sum->real^N =\n        \\x. if fstcart x = vec 1 then g(sndcart x) else f(sndcart x)
-      #|  closed_in (subtopology euclidean s) (c:real^M->bool)
-      #|  c = {x | x IN s /\\ (f:real^M->real^N) x = g x}
-      #|  forall f g:real^M->real^N s t v.\n        ANR v /\\\n        f continuous_on s /\\ IMAGE f s SUBSET v /\\\n        g continuous_on s /\\ IMAGE g s SUBSET v /\\\n        t SUBSET s /\\ (forall x. x IN t ==> f x = g x)\n        ==> ?u. open_in (subtopology euclidean s) u /\\ t SUBSET u /\\\n                homotopic_with (\\h. forall x. x IN t ==> h x = f x)\n                 (subtopology euclidean u,subtopology euclidean v) f g
-      #|  (W:real^N->bool) SUBSET K /\\ Y SUBSET W
-      #|  (f:real^M->real^N) o r o (h:real^N->real^M)
-      #|  r:real^M->real^M
-      #|  (:real^M)
-      #|  W:real^N->bool
-      #|  {x | x IN W /\\ (h:real^N->real^M) x IN U}
-      #|  h:real^N->real^M
-      #|  Y:real^N->bool
-      #|  W:real^N->bool
-      #|  g:real^N->real^M
-      #|  g:real^N->real^M
-      #|  f:real^M->real^N
-      #|  K INTER W:real^N->bool
-      #|  W:real^N->bool
-      #|  ?W:real^N->bool.\n        open_in (subtopology euclidean K) W /\\\n        closed_in (subtopology euclidean W) Y
-      #|  locally compact (Y:real^N->bool)
-      #|  U:real^M->bool
-      #|  K:real^N->bool
-      #|  Y:real^N->bool
-      #|  X:real^M->bool
-      #|  forall s:real^M->bool s':real^N->bool u.\n        ENR s /\\ s homeomorphic s' /\\ s' SUBSET u\n        ==> ?t'. open_in (subtopology euclidean u) t' /\\ s' retract_of t'
-      #|  forall s:real^M->bool s':real^N->bool.\n        ENR s /\\ s homeomorphic s' ==> ?t'. open t' /\\ s' retract_of t'
-      #|  s:real^M->bool
-      #|  t:real^N->bool
-      #|  t:real^N->bool
-      #|  s:real^M->bool
-      #|  forall s:real^M->bool t:real^N->bool.\n      s homeomorphic t ==> (ENR s <=> ENR t)
-      #|  forall a:real^N s. ENR(IMAGE (\\x. a + x) s) <=> ENR s
-      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (ENR(IMAGE f s) <=> ENR s)
-      #|  g:real^N->real^M
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N g s t k.\n        homeomorphism (s,t) (f,g) /\\ k SUBSET s\n        ==> (ENR(IMAGE f k) <=> ENR k)
-      #|  forall s:real^N->bool. AR s ==> ANR s
-      #|  forall s:real^N->bool. ENR s ==> ANR s
-      #|  t:real^(N,1)finite_sum->bool
-      #|  (:real^(N,1)finite_sum)
-      #|  ?t. closed t /\\\n          (s:real^N->bool) homeomorphic (t:real^(N,1)finite_sum->bool)
-      #|  forall s:real^N->bool. ENR s <=> ANR s /\\ locally compact s
-      #|  w:real^(N,1)finite_sum->bool = (w DIFF v) UNION (w DIFF v')
-      #|  \\x. if (x:real^(N,1)finite_sum) IN w DIFF v then a\n        else (h:real^(1,N)finite_sum->real^N) (pastecart (e x) (g x))
-      #|  e:real^(N,1)finite_sum->real^1
-      #|  vec 1:real^1
-      #|  vec 0:real^1
-      #|  w:real^(N,1)finite_sum->bool
-      #|  w DIFF v:real^(N,1)finite_sum->bool
-      #|  t:real^(N,1)finite_sum->bool
-      #|  v':real^(N,1)finite_sum->bool
-      #|  v:real^(N,1)finite_sum->bool
-      #|  w:real^(N,1)finite_sum->bool
-      #|  w DIFF u:real^(N,1)finite_sum->bool
-      #|  t:real^(N,1)finite_sum->bool
-      #|  g:real^(N,1)finite_sum->real^N
-      #|  u:real^(N,1)finite_sum->bool
-      #|  t:real^(N,1)finite_sum->bool
-      #|  w:real^(N,1)finite_sum->bool
-      #|  f:real^(N,1)finite_sum->real^N
-      #|  t:real^(N,1)finite_sum->bool
-      #|  w:real^(N,1)finite_sum->bool
-      #|  f:real^(N,1)finite_sum->real^N
-      #|  h:real^(1,N)finite_sum->real^N
-      #|  a:real^N
-      #|  s':real^(N,1)finite_sum->bool
-      #|  c:real^(N,1)finite_sum->bool
-      #|  x:int < y + &1 <=> x <= y
-      #|  ?c s':real^(N,1)finite_sum->bool.\n          convex c /\\ ~(c = {}) /\\ closed_in (subtopology euclidean c) s' /\\\n          (s:real^N->bool) homeomorphic s'
-      #|  forall s:real^N->bool. AR s <=> ANR s /\\ contractible s /\\ ~(s = {})
-      #|  (r:real^N->real^N) o (g:real^(N,1)finite_sum->real^N)
-      #|  g:real^(N,1)finite_sum->real^N
-      #|  r:real^N->real^N
-      #|  forall s t:real^N->bool. ANR t /\\ s retract_of t ==> ANR s
-      #|  forall s t:real^N->bool. AR t /\\ s retract_of t ==> AR s
-      #|  forall s t:real^N->bool. ENR t /\\ s retract_of t ==> ENR s
-      #|  (:real^N)
-      #|  forall s:real^N->bool. s retract_of (:real^N) <=> AR s /\\ closed s
-      #|  forall s. compact s /\\ AR s <=> compact s /\\ s retract_of (:real^N)
-      #|  ~(AR({}:real^N->bool))
-      #|  forall s:real^N->bool. AR s ==> ~(s = {})
-      #|  ENR {}
-      #|  ANR {}
-      #|  forall s:real^N->bool. convex s /\\ ~(s = {}) ==> AR s
-      #|  forall s:real^N->bool. convex s ==> ANR s
-      #|  forall s:real^N->bool. is_interval s ==> ENR s
-      #|  forall s:real^N->bool. closed s /\\ convex s ==> ENR s
-      #|  AR(:real^N)
-      #|  ANR(:real^N)
-      #|  ENR(:real^N)
-      #|  forall a:real^N. AR {a}
-      #|  forall a:real^N. ANR {a}
-      #|  forall a:real^N. ENR {a}
-      #|  w:real^(N,1)finite_sum->bool
-      #|  {x | x IN w /\\ (g:real^(N,1)finite_sum->real^N) x IN s}
-      #|  w:real^(N,1)finite_sum->bool
-      #|  g:real^(N,1)finite_sum->real^N
-      #|  forall s t:real^N->bool.\n        open_in (subtopology euclidean t) s /\\ ANR t ==> ANR s
-      #|  forall s t:real^N->bool.\n        open_in (subtopology euclidean t) s /\\ ENR t ==> ENR s
-      #|  forall s t u:real^N->bool.\n        s retract_of t /\\ open_in (subtopology euclidean u) t /\\ ANR u\n        ==> ANR s
-      #|  forall s t u:real^N->bool.\n        s retract_of t /\\ open_in (subtopology euclidean u) t /\\ ENR u\n        ==> ENR s
-      #|  forall s. ANR(s) ==> ANR(relative_interior s)
-      #|  forall s a:real^N. ANR(s) ==> ANR(s DELETE a)
-      #|  forall s. ENR(s) ==> ENR(relative_interior s)
-      #|  forall s a:real^N. ENR(s) ==> ENR(s DELETE a)
-      #|  forall s:real^N->bool. open s ==> ENR s
-      #|  forall s:real^N->bool. open s ==> ANR s
-      #|  forall a:real^N r. ANR(ball(a,r))
-      #|  forall a:real^N r. ENR(ball(a,r))
-      #|  forall a:real^N r. AR(ball(a,r)) <=> &0 < r
-      #|  forall a:real^N r. ANR(cball(a,r))
-      #|  forall a:real^N r. ENR(cball(a,r))
-      #|  forall a:real^N r. AR(cball(a,r)) <=> &0 <= r
-      #|  (forall a b:real^N. ANR(interval[a,b])) /\\ (forall a b:real^N. ANR(interval(a,b)))
-      #|  (forall a b:real^N. ENR(interval[a,b])) /\\ (forall a b:real^N. ENR(interval(a,b)))
-      #|  (forall a b:real^N. AR(interval[a,b]) <=> ~(interval[a,b] = {})) /\\\n   (forall a b:real^N. AR(interval(a,b)) <=> ~(interval(a,b) = {}))
-      #|  forall s. ANR(interior s)
-      #|  forall s. ENR(interior s)
-      #|  forall s:real^N->bool. AR s ==> contractible s
-      #|  forall s:real^N->bool. AR s ==> path_connected s
-      #|  forall s:real^N->bool. AR s ==> connected s
-      #|  forall s:real^N->bool. ENR s ==> locally compact s
-      #|  s':real^(N,1)finite_sum->bool
-      #|  c:real^(N,1)finite_sum->bool
-      #|  x:int < y + &1 <=> x <= y
-      #|  ?c s':real^(N,1)finite_sum->bool.\n        convex c /\\ ~(c = {}) /\\ closed_in (subtopology euclidean c) s' /\\\n        (s:real^N->bool) homeomorphic s'
-      #|  forall s:real^N->bool. ANR s ==> locally path_connected s
-      #|  forall s:real^N->bool. ANR s ==> locally connected s
-      #|  forall s:real^N->bool. AR s ==> locally path_connected s
-      #|  forall s:real^N->bool. AR s ==> locally connected s
-      #|  forall s:real^N->bool. ENR s ==> locally path_connected s
-      #|  forall s:real^N->bool. ENR s ==> locally connected s
-      #|  forall s:real^N->bool. ANR s ==> COUNTABLE(components s)
-      #|  forall s:real^N->bool t.\n        ANR s ==> COUNTABLE {connected_component s x | x IN t}
-      #|  forall s:real^N->bool t.\n        ANR s ==> COUNTABLE {path_component s x | x IN t}
-      #|  forall s:real^N->bool. ANR s /\\ compact s ==> FINITE(components s)
-      #|  forall s:real^N->bool. ENR s /\\ compact s ==> FINITE(components s)
-      #|  \\x:real^((M,N)finite_sum,1)finite_sum.\n        pastecart (g x:real^M) (h x:real^N)
-      #|  w1 INTER w2:real^((M,N)finite_sum,1)finite_sum->bool
-      #|  g:real^((M,N)finite_sum,1)finite_sum->real^M
-      #|  w1:real^((M,N)finite_sum,1)finite_sum->bool
-      #|  h:real^((M,N)finite_sum,1)finite_sum->real^N
-      #|  w2:real^((M,N)finite_sum,1)finite_sum->bool
-      #|  t:real^N->bool
-      #|  c:real^((M,N)finite_sum,1)finite_sum->bool
-      #|  u:real^((M,N)finite_sum,1)finite_sum->bool
-      #|  sndcart o (f:real^((M,N)finite_sum,1)finite_sum->real^(M,N)finite_sum)
-      #|  s:real^M->bool
-      #|  c:real^((M,N)finite_sum,1)finite_sum->bool
-      #|  u:real^((M,N)finite_sum,1)finite_sum->bool
-      #|  fstcart o (f:real^((M,N)finite_sum,1)finite_sum->real^(M,N)finite_sum)
-      #|  c:real^((M,N)finite_sum,1)finite_sum->bool
-      #|  u:real^((M,N)finite_sum,1)finite_sum->bool
-      #|  f:real^((M,N)finite_sum,1)finite_sum->real^(M,N)finite_sum
-      #|  forall s:real^M->bool t:real^N->bool. ANR s /\\ ANR t ==> ANR(s PCROSS t)
-      #|  \\x:real^(M,N)finite_sum. pastecart (a:real^M) (sndcart x)
-      #|  \\x:real^(M,N)finite_sum. pastecart (fstcart x) (b:real^N)
-      #|  ANR ({a:real^M} PCROSS (t:real^N->bool))
-      #|  a:real^M
-      #|  ~(s:real^M->bool = {})
-      #|  ANR ((s:real^M->bool) PCROSS {b:real^N})
-      #|  b:real^N
-      #|  ~(t:real^N->bool = {})
-      #|  t:real^N->bool = {}
-      #|  s:real^M->bool = {}
-      #|  forall s:real^M->bool t:real^N->bool.\n        ANR(s PCROSS t) <=> s = {} \\/ t = {} \\/ ANR s /\\ ANR t
-      #|  forall s:real^M->bool t:real^N->bool. AR s /\\ AR t ==> AR(s PCROSS t)
-      #|  forall s:real^M->bool t:real^N->bool. ENR s /\\ ENR t ==> ENR(s PCROSS t)
-      #|  forall s:real^M->bool t:real^N->bool.\n        ENR(s PCROSS t) <=> s = {} \\/ t = {} \\/ ENR s /\\ ENR t
-      #|  forall s:real^M->bool t:real^N->bool.\n        AR(s PCROSS t) <=> AR s /\\ AR t /\\ ~(s = {}) /\\ ~(t = {})
-      #|  p /\\ ~p \\/ q /\\ p <=> p /\\ q
-      #|  u:real^N->bool = s' UNION t'
-      #|  (r:real^N->real^N) x
-      #|  x:real^N
-      #|  \\x. if x IN s' then (g:real^N->real^N) x else h x
-      #|  ?h:real^N->real^N.\n          h continuous_on u /\\\n          IMAGE h u SUBSET t /\\\n          forall x. x IN w UNION t ==> h x = r x
-      #|  ?g:real^N->real^N.\n          g continuous_on u /\\\n          IMAGE g u SUBSET s /\\\n          forall x. x IN w UNION s ==> g x = r x
-      #|  u:real^N->bool
-      #|  (r:real^N->real^N) continuous_on  (w UNION s UNION t)
-      #|  IMAGE (r:real^N->real^N) (w UNION s) SUBSET s /\\\n      IMAGE (r:real^N->real^N) (w UNION t) SUBSET t
-      #|  r = \\x:real^N. if x IN w then r0 x else x
-      #|  closed_in (subtopology euclidean u) (w:real^N->bool)
-      #|  s' INTER t':real^N->bool = w
-      #|  ~(s = {}) /\\ (p <=> s = {} \\/ x IN s) ==> p ==> x IN s
-      #|  &0 = setdist p <=> setdist p = &0
-      #|  forall x:real^N. x IN w ==> (x IN s <=> x IN t)
-      #|  r0:real^N->real^N
-      #|  u:real^N->bool
-      #|  s INTER t:real^N->bool
-      #|  (s INTER t:real^N->bool) retract_of w
-      #|  (s:real^N->bool) SUBSET s' /\\ (t:real^N->bool) SUBSET t'
-      #|  a <= drop(lift x) <=> lift x IN {x | a <= drop x}
-      #|  closed_in (subtopology euclidean u) (s':real^N->bool) /\\\n                  closed_in (subtopology euclidean u) (t':real^N->bool)
-      #|  w = {x:real^N | x IN u /\\ setdist({x},s) = setdist({x},t)}
-      #|  t' = {x:real^N | x IN u /\\ setdist({x},t) <= setdist({x},s)}
-      #|  s' = {x:real^N | x IN u /\\ setdist({x},s) <= setdist({x},t)}
-      #|  (s:real^N->bool) SUBSET u /\\ t SUBSET u
-      #|  s INTER t:real^N->bool = {}
-      #|  forall s t u:real^N->bool.\n        closed_in (subtopology euclidean u) s /\\\n        closed_in (subtopology euclidean u) t /\\\n        AR s /\\ AR t /\\ AR(s INTER t)\n        ==> (s UNION t) retract_of u
-      #|  g:real^(N,1)finite_sum->real^N
-      #|  f:real^N->real^(N,1)finite_sum
-      #|  AR(s INTER t:real^N->bool)
-      #|  AR(t:real^N->bool)
-      #|  AR(s:real^N->bool)
-      #|  {x | x IN c /\\ (g:real^(N,1)finite_sum->real^N) x IN s} UNION\n    {x | x IN c /\\ (g:real^(N,1)finite_sum->real^N) x IN t} = c
-      #|  s UNION t:real^N->bool
-      #|  c:real^(N,1)finite_sum->bool
-      #|  closed_in (subtopology euclidean u)\n              {x | x IN c /\\ (g:real^(N,1)finite_sum->real^N) x IN s} /\\\n    closed_in (subtopology euclidean u)\n              {x | x IN c /\\ (g:real^(N,1)finite_sum->real^N) x IN t}
-      #|  g:real^(N,1)finite_sum->real^N
-      #|  f:real^N->real^(N,1)finite_sum
-      #|  c:real^(N,1)finite_sum->bool
-      #|  u:real^(N,1)finite_sum->bool
-      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        AR(s) /\\ AR(t) /\\ AR(s INTER t)\n        ==> AR(s UNION t)
-      #|  (x:real^M) IN s1 \\/ x IN s2
-      #|  x:real^M
-      #|  n INTER s INTER n = n INTER s
-      #|  f':real^M->real^N
-      #|  (x:real^M) IN v
-      #|  x:real^M
-      #|  m < n /\\ (m = 0 \\/ m = 1) /\\ (n = 0 \\/ n = 1) <=>\n        m = 0 /\\ n = 1
-      #|  n:num
-      #|  m:num
-      #|  s:real^M->bool
-      #|  s:real^M->bool
-      #|  s SUBSET u ==> u INTER s = s
-      #|  euclidean
-      #|  closed_in a b /\\ c <=> ~(closed_in a b ==> ~c)
-      #|  {0,1}
-      #|  \\i. if i = 0 then s1 INTER n:real^M->bool else s2 INTER n
-      #|  \\i. if i = 0 then (g1:real^M->real^N) else g2
-      #|  euclidean:(real^N)topology
-      #|  subtopology euclidean (n:real^M->bool)
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  n:real^M->bool
-      #|  n:real^M->bool = s DIFF (k UNION w1 UNION w2)
-      #|  t INTER w1 = {} /\\ v' INTER w1:real^M->bool = {} /\\\n    t INTER w2 = {} /\\ v' INTER w2 = {}
-      #|  closed_in (subtopology euclidean s) (w1:real^M->bool) /\\\n    closed_in (subtopology euclidean s) (w2:real^M->bool)
-      #|  w2:real^M->bool = s2 DIFF v2
-      #|  w1:real^M->bool = s1 DIFF v1
-      #|  g2:real^M->real^N
-      #|  v2:real^M->bool
-      #|  u2:real^N->bool
-      #|  t INTER s2 UNION v':real^M->bool
-      #|  s:real^M->bool
-      #|  f2:real^M->real^N
-      #|  g1:real^M->real^N
-      #|  v1:real^M->bool
-      #|  u1:real^N->bool
-      #|  t INTER s1 UNION v':real^M->bool
-      #|  s:real^M->bool
-      #|  f1:real^M->real^N
-      #|  f2:real^M->real^N
-      #|  f1:real^M->real^N
-      #|  (s UNION t) INTER s = s /\\ (s UNION t) INTER t = t
-      #|  m < n /\\ (m = 0 \\/ m = 1) /\\ (n = 0 \\/ n = 1) <=>\n          m = 0 /\\ n = 1
-      #|  n:num
-      #|  m:num
-      #|  s:real^M->bool
-      #|  u INTER s = s /\\ closed_in (subtopology top u) (u INTER s)\n          ==> closed_in (subtopology top u) s
-      #|  (s UNION t) INTER t = t
-      #|  (p /\\ q) /\\ r <=> q /\\ p /\\ r
-      #|  (s UNION t) INTER s = s /\\ (s UNION t) INTER t = t
-      #|  m < n /\\ (m = 0 \\/ m = 1) /\\ (n = 0 \\/ n = 1) <=>\n          m = 0 /\\ n = 1
-      #|  n:num
-      #|  m:num
-      #|  s:real^M->bool
-      #|  u INTER s = s /\\ closed_in (subtopology top u) (u INTER s)\n          ==> closed_in (subtopology top u) s
-      #|  (s UNION t) INTER t = t
-      #|  (p /\\ q) /\\ r <=> q /\\ p /\\ r
-      #|  s SUBSET u ==> u INTER s = s
-      #|  euclidean
-      #|  closed_in a b /\\ c <=> ~(closed_in a b ==> ~c)
-      #|  {0,1}
-      #|  \\i. if i = 0 then t INTER s1:real^M->bool else v'
-      #|  \\i. if i = 0 then (f:real^M->real^N) else h
-      #|  euclidean:(real^N)topology
-      #|  subtopology euclidean ((t INTER s1) UNION v':real^M->bool)
-      #|  {0,1}
-      #|  \\i. if i = 0 then t INTER s2:real^M->bool else v'
-      #|  \\i. if i = 0 then (f:real^M->real^N) else h
-      #|  euclidean:(real^N)topology
-      #|  subtopology euclidean ((t INTER s2) UNION v':real^M->bool)
-      #|  k INTER t:real^M->bool = {}
-      #|  closed_in (subtopology euclidean s) (k:real^M->bool)
-      #|  closed_in (subtopology euclidean (s1 INTER s2)) (k:real^M->bool)
-      #|  k:real^M->bool = (s1 INTER s2) DIFF v
-      #|  s:real^M->bool
-      #|  s DIFF t = s DIFF (s INTER t)
-      #|  s:real^M->bool
-      #|  g:real^M->real^N
-      #|  (s1 INTER s2) DIFF w':real^M->bool
-      #|  (s1 INTER s2) INTER w:real^M->bool
-      #|  w':real^M->bool
-      #|  w:real^M->bool
-      #|  s:real^M->bool
-      #|  s DIFF v:real^M->bool
-      #|  t INTER s1 INTER s2:real^M->bool
-      #|  g:real^M->real^N
-      #|  v:real^M->bool
-      #|  u1 INTER u2:real^N->bool
-      #|  t INTER s1 INTER s2:real^M->bool
-      #|  s:real^M->bool
-      #|  f:real^M->real^N
-      #|  ?v v' h.\n        t INTER s1 INTER s2 SUBSET v /\\ v SUBSET v' /\\\n        open_in (subtopology euclidean (s1 INTER s2)) v /\\\n        closed_in (subtopology euclidean (s1 INTER s2)) v' /\\\n        h continuous_on v' /\\ IMAGE h v' SUBSET u1 INTER u2 /\\\n        forall x. x IN v' INTER t ==> (h:real^M->real^N) x = f x
-      #|  forall f:real^M->real^N s t u s1 s2 u1 u2.\n        f continuous_on t /\\ IMAGE f t SUBSET u /\\\n        ANR u1 /\\ ANR u2 /\\ ANR(u1 INTER u2) /\\ u1 UNION u2 = u /\\\n        closed_in (subtopology euclidean s) t /\\\n        closed_in (subtopology euclidean s) s1 /\\\n        closed_in (subtopology euclidean s) s2 /\\\n        s1 UNION s2 = s /\\\n        IMAGE f (t INTER s1) SUBSET u1 /\\\n        IMAGE f (t INTER s2) SUBSET u2\n        ==> ?v g. t SUBSET v /\\\n                  open_in (subtopology euclidean s) v /\\\n                  g continuous_on v /\\ IMAGE g v SUBSET u /\\\n                  forall x. x IN t ==> g x = f x
-      #|  y1 UNION y2:real^N->bool
-      #|  t:real^(N,1)finite_sum->bool
-      #|  s:real^(N,1)finite_sum->bool
-      #|  &0 < x <=> &0 <= x /\\ ~(x = &0)
-      #|  (f:real^(N,1)finite_sum->real^N) x IN y1
-      #|  (f:real^(N,1)finite_sum->real^N) x IN y2
-      #|  (~p ==> F) ==> p
-      #|  x:real^(N,1)finite_sum
-      #|  &0 <= drop x <=> x IN {y | &0 <= drop y}
-      #|  x <= y <=> &0 <= drop(lift(y - x))
-      #|  y2:real^N->bool
-      #|  y1:real^N->bool
-      #|  b2:real^(N,1)finite_sum->bool
-      #|  b1:real^(N,1)finite_sum->bool
-      #|  b2 = {x | x IN s /\\\n               setdist({x},\n                   {x | x IN t /\\ (f:real^(N,1)finite_sum->real^N) x IN y2})\n             <= setdist({x},{x | x IN t /\\ f x IN y1})}
-      #|  b1 = {x | x IN s /\\\n               setdist({x},\n                   {x | x IN t /\\ (f:real^(N,1)finite_sum->real^N) x IN y1})\n             <= setdist({x},{x | x IN t /\\ f x IN y2})}
-      #|  y2:real^N->bool
-      #|  t:real^(N,1)finite_sum->bool
-      #|  s:real^(N,1)finite_sum->bool
-      #|  f:real^(N,1)finite_sum->real^N
-      #|  IMAGE (f:real^(N,1)finite_sum->real^N) t SUBSET y2
-      #|  y1:real^N->bool
-      #|  t:real^(N,1)finite_sum->bool
-      #|  s:real^(N,1)finite_sum->bool
-      #|  f:real^(N,1)finite_sum->real^N
-      #|  IMAGE (f:real^(N,1)finite_sum->real^N) t SUBSET y1
-      #|  t:real^(N,1)finite_sum->bool
-      #|  s:real^(N,1)finite_sum->bool
-      #|  f:real^(N,1)finite_sum->real^N
-      #|  yn:real^N->bool
-      #|  closed_in (subtopology euclidean (y1 UNION y2)) (y1:real^N->bool) /\\\n    closed_in (subtopology euclidean (y1 UNION y2)) (y2:real^N->bool)
-      #|  yn:real^N->bool
-      #|  y2:real^N->bool
-      #|  y1:real^N->bool
-      #|  forall s t:real^N->bool u.\n        closed_in (subtopology euclidean u) s /\\\n        closed_in (subtopology euclidean u) t /\\\n        ANR(s) /\\ ANR(t) /\\ ANR(s INTER t)\n        ==> ANR(s UNION t)
-      #|  forall s t u:real^N->bool.\n        closed_in (subtopology euclidean u) s /\\\n        closed_in (subtopology euclidean u) t /\\\n        ENR(s) /\\ ENR(t) /\\ ENR(s INTER t)\n        ==> ENR(s UNION t)
-      #|  forall s t:real^N->bool.\n        closed s /\\ closed t /\\ AR(s) /\\ AR(t) /\\ AR(s INTER t)\n        ==> AR(s UNION t)
-      #|  forall s t:real^N->bool.\n        closed s /\\ closed t /\\ ANR(s) /\\ ANR(t) /\\ ANR(s INTER t)\n        ==> ANR(s UNION t)
-      #|  forall s t:real^N->bool.\n        closed s /\\ closed t /\\ ENR(s) /\\ ENR(t) /\\ ENR(s INTER t)\n        ==> ENR(s UNION t)
-      #|  forall s t. s retract_of (:real^N) /\\\n         t retract_of (:real^N) /\\\n         (s INTER t) retract_of (:real^N)\n         ==> (s UNION t) retract_of (:real^N)
-      #|  \\x:real^N. if x IN s then x else r x
-      #|  r:real^N->real^N
-      #|  (s UNION t) retract_of (u:real^N->bool)
-      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        (s UNION t) retract_of u /\\ (s INTER t) retract_of t\n        ==> s retract_of u
-      #|  s UNION t:real^N->bool
-      #|  t:real^N->bool
-      #|  s UNION t:real^N->bool
-      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        AR(s UNION t) /\\ AR(s INTER t)\n        ==> AR(s)
-      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        AR(s UNION t) /\\ AR(s INTER t)\n        ==> AR(s) /\\ AR(t)
-      #|  forall s t:real^N->bool.\n        closed s /\\ closed t /\\ AR(s UNION t) /\\ AR(s INTER t)\n        ==> AR(s) /\\ AR(t)
-      #|  closed_in(subtopology euclidean (s UNION t)) (t:real^N->bool)
-      #|  closed_in(subtopology euclidean (s UNION t)) (s:real^N->bool)
-      #|  s UNION u:real^N->bool = s UNION (u INTER t)
-      #|  \\x:real^N. if x IN s then x else r x
-      #|  r:real^N->real^N
-      #|  s UNION u:real^N->bool =\n      ((s UNION t) DIFF t) UNION u
-      #|  s UNION u:real^N->bool
-      #|  u:real^N->bool
-      #|  s UNION t:real^N->bool
-      #|  s INTER t:real^N->bool
-      #|  s UNION t:real^N->bool
-      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        ANR(s UNION t) /\\ ANR(s INTER t)\n        ==> ANR(s)
-      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        ANR(s UNION t) /\\ ANR(s INTER t)\n        ==> ANR(s) /\\ ANR(t)
-      #|  forall s t:real^N->bool.\n        closed s /\\ closed t /\\ ANR(s UNION t) /\\ ANR(s INTER t)\n        ==> ANR(s) /\\ ANR(t)
-      #|  t:(real^N->bool)->bool
-      #|  c:real^N->bool
-      #|  t:(real^N->bool)->bool
-      #|  t:(real^N->bool)->bool
-      #|  p ==> q /\\ r ==> s <=> q ==> p ==> r ==> s
-      #|  CARD(t:(real^N->bool)->bool)
-      #|  forall t:(real^N->bool)->bool.\n        FINITE t /\\ (forall c. c IN t ==> closed c /\\ convex c) ==> ANR(UNIONS t)
-      #|  s = UNIONS {{a:real^N} | a IN s}
-      #|  forall s:real^N->bool. FINITE s ==> ANR s
-      #|  {a} INTER s = {a} \\/ {a} INTER s = {}
-      #|  a INSERT s = {a} UNION s
-      #|  forall s a:real^N. closed s /\\ ANR s ==> ANR(a INSERT s)
-      #|  forall tr. triangulation tr ==> ANR(UNIONS tr)
-      #|  forall c. simplicial_complex c ==>  ANR(UNIONS c)
-      #|  forall s x:real^N. ANR(s) ==> ANR(path_component s x)
-      #|  forall s x:real^N. ANR(s) ==> ANR(connected_component s x)
-      #|  forall s:real^N->bool.\n        ANR s /\\ c IN components s ==> ANR c
-      #|  (x:real^(N,1)finite_sum) IN t2
-      #|  x:real^(N,1)finite_sum
-      #|  (x:real^(N,1)finite_sum) IN t1
-      #|  x:real^(N,1)finite_sum
-      #|  forall x. x <= &1 / &2 \\/ x >= &1 / &2
-      #|  u1 UNION u2:real^N->bool
-      #|  u1:real^N->bool
-      #|  u2:real^N->bool
-      #|  u1:real^N->bool
-      #|  { x:real^(N,1)finite_sum | x IN s /\\ l x IN {y | drop y >= &1 / &2}}
-      #|  { x:real^(N,1)finite_sum | x IN s /\\ l x IN {y | drop y <= &1 / &2}}
-      #|  l:real^(N,1)finite_sum->real^1
-      #|  u1 UNION u2:real^N->bool
-      #|  t:real^(N,1)finite_sum->bool
-      #|  vec 0:real^1
-      #|  vec 1:real^1
-      #|  s:real^(N,1)finite_sum->bool
-      #|  t2:real^(N,1)finite_sum->bool
-      #|  t1:real^(N,1)finite_sum->bool
-      #|  t2 = {x | x IN t /\\ ~((f:real^(N,1)finite_sum->real^N)(x) IN u2)}
-      #|  t1 = {x | x IN t /\\ ~((f:real^(N,1)finite_sum->real^N)(x) IN u1)}
-      #|  t:real^(N,1)finite_sum->bool
-      #|  s:real^(N,1)finite_sum->bool
-      #|  f:real^(N,1)finite_sum->real^N
-      #|  un:real^N->bool
-      #|  open_in (subtopology euclidean (u1 UNION u2)) (u1:real^N->bool) /\\\n    open_in (subtopology euclidean (u1 UNION u2)) (u2:real^N->bool)
-      #|  un:real^N->bool
-      #|  u2:real^N->bool
-      #|  u1:real^N->bool
-      #|  forall s t u:real^N->bool.\n        open_in (subtopology euclidean u) s /\\\n        open_in (subtopology euclidean u) t /\\\n        ANR(s) /\\ ANR(t)\n        ==> ANR(s UNION t)
-      #|  IMAGE f s SUBSET t\n        ==> {x | x IN s /\\ ~(f x IN u)} =\n            {x | x IN s /\\ f x IN t DIFF u}
-      #|  IMAGE f s SUBSET t\n        ==> {x | x IN s /\\ ~(f x IN u)} =\n            {x | x IN s /\\ f x IN t DIFF u}
-      #|  IMAGE f s SUBSET t\n        ==> {x | x IN s /\\ ~(f x IN u)} =\n            {x | x IN s /\\ f x IN t DIFF u}
-      #|  IMAGE f s SUBSET t\n        ==> {x | x IN s /\\ ~(f x IN u)} =\n            {x | x IN s /\\ f x IN t DIFF u}
-      #|  IMAGE f s SUBSET t\n        ==> {x | x IN s /\\ ~(f x IN u)} =\n            {x | x IN s /\\ f x IN t DIFF u}
-      #|  IMAGE f s SUBSET t\n        ==> {x | x IN s /\\ ~(f x IN u)} =\n            {x | x IN s /\\ f x IN t DIFF u}
-      #|  IMAGE f s SUBSET t\n        ==> {x | x IN s /\\ ~(f x IN u)} =\n            {x | x IN s /\\ f x IN t DIFF u}
-      #|  IMAGE f s SUBSET t\n        ==> {x | x IN s /\\ ~(f x IN u)} =\n            {x | x IN s /\\ f x IN t DIFF u}
-      #|  forall s t u:real^N->bool.\n        open_in (subtopology euclidean u) s /\\\n        open_in (subtopology euclidean u) t /\\\n        ENR(s) /\\ ENR(t)\n        ==> ENR(s UNION t)
-      #|  u:real^N->bool
-      #|  x:real^(N,1)finite_sum
-      #|  ?u. u IN f /\\ x IN\n                          (a:(real^N->bool)->real^(N,1)finite_sum->bool) u
-      #|  x:real^(N,1)finite_sum
-      #|  u:real^N->bool
-      #|  x:real^(N,1)finite_sum
-      #|  x:real^(N,1)finite_sum
-      #|  u:real^N->bool
-      #|  x IN (a:(real^N->bool)->real^(N,1)finite_sum->bool) u
-      #|  u:real^N->bool
-      #|  x:real^(N,1)finite_sum
-      #|  IMAGE g t SUBSET u\n          ==> {x | x IN t /\\ g x IN u} SUBSET x ==> t SUBSET x
-      #|  UNIONS(IMAGE (\\u. v u INTER\n                          (w:(real^N->bool)->real^(N,1)finite_sum->bool) u)\n                     f)
-      #|  h:real^(N,1)finite_sum->real^N
-      #|  u:real^N->bool = u'
-      #|  u':real^N->bool
-      #|  u:real^N->bool
-      #|  u':real^N->bool
-      #|  s:real^(N,1)finite_sum->bool
-      #|  u:real^N->bool
-      #|  s SUBSET u ==> u INTER s = s
-      #|  euclidean
-      #|  open_in a b /\\ c <=> ~(open_in a b ==> ~c)
-      #|  f:(real^N->bool)->bool
-      #|  \\u. v u INTER (w:(real^N->bool)->real^(N,1)finite_sum->bool) u
-      #|  h:(real^N->bool)->real^(N,1)finite_sum->real^N
-      #|  euclidean:(real^N)topology
-      #|  subtopology euclidean\n        (UNIONS(IMAGE (\\u. v u INTER\n                         (w:(real^N->bool)->real^(N,1)finite_sum->bool) u)\n                    f))
-      #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
-      #|  h:(real^N->bool)->real^(N,1)finite_sum->real^N
-      #|  w:(real^N->bool)->real^(N,1)finite_sum->bool
-      #|  forall u. u IN (f:(real^N->bool)->bool)\n          ==> ?v h. a u SUBSET v /\\\n                    open_in (subtopology euclidean s) v /\\\n                    (h:real^(N,1)finite_sum->real^N) continuous_on v /\\\n                    IMAGE h v SUBSET u /\\\n                    (forall x. x IN a u ==> h x = g x)
-      #|  s SUBSET t /\\ DISJOINT s u ==> s SUBSET t DIFF u
-      #|  b <= c /\\ d <= a ==> ~(a < b /\\ c < d)
-      #|  (x:real^(N,1)finite_sum) IN s
-      #|  x:real^(N,1)finite_sum
-      #|  u2:real^N->bool
-      #|  u1:real^N->bool
-      #|  pairwise (\\i j. DISJOINT\n                  ((v:(real^N->bool)->real^(N,1)finite_sum->bool) i) (v j))\n               f
-      #|  s SUBSET t /\\ ~(s = t) ==> ~(t DIFF s = {})
-      #|  x IN (a:(real^N->bool)->real^(N,1)finite_sum->bool) u
-      #|  UNIONS f:real^N->bool
-      #|  t:real^(N,1)finite_sum->bool
-      #|  &0 < x <=> &0 <= x /\\ ~(x = &0)
-      #|  x:real^(N,1)finite_sum
-      #|  forall u. u IN f\n          ==> (a:(real^N->bool)->real^(N,1)finite_sum->bool) u SUBSET v u
-      #|  &0 < drop x <=> x IN {y | &0 < drop y}
-      #|  x < y <=> &0 < drop(lift(y - x))
-      #|  forall u. u IN f\n          ==> open_in (subtopology euclidean s)\n                      ((v:(real^N->bool)->real^(N,1)finite_sum->bool) u)
-      #|  v = \\u. if a u = {} then {}\n              else { x:real^(N,1)finite_sum |\n                     x IN s /\\\n                     setdist({x},a(u:real^N->bool)) < setdist({x},t DIFF a u)}
-      #|  pairwise (\\i j. DISJOINT\n                  ((a:(real^N->bool)->real^(N,1)finite_sum->bool) i) (a j))\n               f
-      #|  u:real^N->bool = UNIONS f DIFF UNIONS(f DELETE u)
-      #|  UNIONS f:real^N->bool
-      #|  t:real^(N,1)finite_sum->bool
-      #|  forall u. u IN f\n          ==> closed_in (subtopology euclidean s)\n                        ((a:(real^N->bool)->real^(N,1)finite_sum->bool) u)
-      #|  (a:(real^N->bool)->real^(N,1)finite_sum->bool) u = t
-      #|  t:real^(N,1)finite_sum->bool
-      #|  s:real^(N,1)finite_sum->bool
-      #|  g:real^(N,1)finite_sum->real^N
-      #|  ANR(u:real^N->bool)
-      #|  u:real^N->bool
-      #|  ?u. u IN f /\\ (a:(real^N->bool)->real^(N,1)finite_sum->bool) u = t
-      #|  a = \\u. {x | x IN t /\\ (g:real^(N,1)finite_sum->real^N) x IN u}
-      #|  t:real^(N,1)finite_sum->bool
-      #|  s:real^(N,1)finite_sum->bool
-      #|  g:real^(N,1)finite_sum->real^N
-      #|  forall f:(real^N->bool)->bool.\n          pairwise DISJOINT f /\\\n          (forall u. u IN f ==> ANR u) /\\\n          (forall u. u IN f ==> open_in (subtopology euclidean (UNIONS f)) u)\n          ==> ANR(UNIONS f)
-      #|  u UNION UNIONS f:real^N->bool
-      #|  v:real^N->bool
-      #|  u UNION UNIONS f:real^N->bool
-      #|  f:(real^N->bool)->bool
-      #|  u:real^N->bool
-      #|  forall f:(real^N->bool)->bool.\n          FINITE f /\\\n          (forall u. u IN f ==> ANR u) /\\\n          (forall u. u IN f ==> open_in (subtopology euclidean (UNIONS f)) u)\n          ==> ANR(UNIONS f)
-      #|  s INTER closure((w:num->real^N->bool) p)
-      #|  p:num
-      #|   m:num
-      #|  n:num
-      #|  m:num <= n
-      #|  SUC(SUC n) = n + 2
-      #|  p:num
-      #|  m:num
-      #|  r m SUBSET s /\\ r m SUBSET w m /\\\n       w m SUBSET w n /\\ w n SUBSET closure(w n)\n       ==> DISJOINT (r m) (w(n + 2) DIFF s INTER closure(w n))
-      #|  m:num
-      #|  2 * m + 1
-      #|  n:num
-      #|  2 * n + 1
-      #|  m <= n ==> 2 * m + 1 <= 2 * n + 1
-      #|  m:num
-      #|  2 * m
-      #|  n:num
-      #|  2 * n
-      #|  m <= n ==> 2 * m <= 2 * n
-      #|  n:num
-      #|  (2 * n + 2) + 1 = (2 * n + 1) + 2
-      #|  2 * SUC n = 2 * n + 2
-      #|  m:num
-      #|  s:real^N->bool
-      #|  n:num
-      #|  s:real^N->bool
-      #|  UNIONS (IMAGE (\\x. r (2 * x)) (:num)) UNION\n      UNIONS (IMAGE (\\x. r (2 * x + 1)) (:num)):real^N->bool
-      #|  (:num) = IMAGE (\\n. 2 * n) (:num) UNION IMAGE (\\n. 2 * n + 1) (:num)
-      #|  SUC(SUC n) = n + 2
-      #|  SUC n
-      #|  SUC(SUC n) = n + 2
-      #|  n:num
-      #|  x:real^N
-      #|  UNIONS (IMAGE w (:num)):real^N->bool = UNIONS(IMAGE r (:num))
-      #|  forall n. ANR((r:num->real^N->bool) n)
-      #|  forall n. open_in (subtopology euclidean s) ((r:num->real^N->bool) n)
-      #|  s SUBSET t ==> s INTER t INTER u = s INTER u
-      #|  closed u /\\ s INTER t INTER u = s INTER u\n        ==> closed_in (subtopology euclidean s) (s INTER t INTER u)
-      #|  s DIFF t = s DIFF (s INTER t)
-      #|  SUC(SUC n) = n + 2
-      #|  n:num
-      #|  forall n. open_in (subtopology euclidean (w n)) ((r:num->real^N->bool) n)
-      #|  ?r:num->real^N->bool.\n          r 0 = w 0 /\\\n          r 1 = w 1 /\\\n          (forall n. r(n + 2) = w(n + 2) DIFF (s INTER closure(w n)))
-      #|  (forall m n:num. m <= n ==> v m SUBSET v n)\n            ==> v b SUBSET v(a + b)
-      #|  s SUBSET t ==> u DIFF t SUBSET u DIFF s
-      #|  a < b ==> x <= a /\\ b <= y ==> x < y
-      #|  m + n:num
-      #|  m:num
-      #|  inv(&2)
-      #|  s:real^N->bool
-      #|  &0 < x <=> &0 <= x /\\ ~(x = &0)
-      #|  &0 < setdist ({x:real^N},s DIFF v(n:num))
-      #|  ?n:num. (x:real^N) IN v n
-      #|  x:real^N
-      #|  s:real^N->bool = UNIONS(IMAGE w (:num))
-      #|  b < a /\\ x <= y ==> a <= x ==> b < y
-      #|  x:real^N
-      #|  &0 <= drop x <=> x IN {y | &0 <= drop y}
-      #|  x <= y <=> &0 <= drop(lift(y - x))
-      #|  {x:real^N | x IN s /\\ inv(&2 pow n) <= setdist({x},s DIFF v n)}
-      #|  forall n. s INTER closure(w n) SUBSET (w:num->real^N->bool)(SUC n)
-      #|  s:real^N->bool
-      #|  (v:num->real^N->bool) n
-      #|  forall n. ANR((w:num->real^N->bool) n)
-      #|  p /\\ q ==> r <=> p /\\ ~r ==> ~q
-      #|  x:real^N
-      #|  forall n. (w:num->real^N->bool) n SUBSET v n
-      #|  &0 < drop x <=> x IN {y | &0 < drop y}
-      #|  x < y <=> &0 < drop(lift(y - x))
-      #|  forall n. open_in (subtopology euclidean s) ((w:num->real^N->bool) n)
-      #|  w = \\n:num. {x:real^N | x IN s /\\\n                              inv(&2 pow n) < setdist({x},s DIFF v n)}
-      #|  ?n:num. s:real^N->bool = v n
-      #|  s:real^N->bool = UNIONS(IMAGE v (:num))
-      #|  forall v:num->real^N->bool.\n          (forall n. v(n) SUBSET v(SUC n)) /\\\n          (forall n. open_in\n                (subtopology euclidean (UNIONS(IMAGE v (:num)))) (v n)) /\\\n          (forall n. ANR(v n))\n          ==> ANR(UNIONS(IMAGE v (:num)))
-      #|  m:num
-      #|  k:num
-      #|  k:num
-      #|  UNIONS(IMAGE v (:num)):real^N->bool = UNIONS(IMAGE u (:num))
-      #|  u:num->real^N->bool = \\n. UNIONS (IMAGE v (0..n))
-      #|  forall v:num->real^N->bool.\n          (forall n. open_in\n                (subtopology euclidean (UNIONS(IMAGE v (:num)))) (v n)) /\\\n          (forall n. ANR(v n))\n          ==> ANR(UNIONS(IMAGE v (:num)))
-      #|  (h:num->real^N->bool) n
-      #|  n:num
-      #|  x:real^N
-      #|  u:real^N->bool
-      #|  h:num->real^N->bool
-      #|  g:(real^N->bool)->bool
-      #|  g:(real^N->bool)->bool = {}
-      #|  g:(real^N->bool)->bool
-      #|  u:real^N->bool
-      #|  f:(real^N->bool)->bool
-      #|  forall f:(real^N->bool)->bool u.\n        (forall s. s IN f ==> ANR s) /\\\n        (forall s. s IN f ==> open_in (subtopology euclidean u) s)\n        ==> ANR(UNIONS f)
-      #|  forall f:(real^N->bool)->bool u.\n        (forall s. s IN f ==> ENR s) /\\\n        (forall s. s IN f ==> open_in (subtopology euclidean u) s)\n        ==> ENR(UNIONS f)
-      #|  s:real^N->bool
-      #|  w:real^N->bool
-      #|  w:real^N->bool
-      #|  u:real^N->bool
-      #|  x:real^N
-      #|  v:real^N->bool
-      #|  forall s:real^N->bool.\n        locally ANR s <=>\n        forall v x. open_in (subtopology euclidean s) v /\\ x IN v\n              ==> ?u. open_in (subtopology euclidean s) u /\\ ANR u /\\\n                      x IN u /\\ u SUBSET v
-      #|  s:real^N->bool
-      #|  w:real^N->bool
-      #|  v INTER w:real^N->bool
-      #|  w:real^N->bool
-      #|  x:real^N
-      #|  forall s:real^N->bool.\n        locally ANR s <=>\n        forall x. x IN s\n            ==> ?v. x IN v /\\ open_in (subtopology euclidean s) v /\\ ANR v
-      #|  s:real^N->bool
-      #|  v:real^N->bool
-      #|  UNIONS (IMAGE (f:real^N->real^N->bool) s) = s
-      #|  f:real^N->real^N->bool
-      #|  forall s:real^N->bool. locally ANR s <=> ANR s
-      #|  s:real^N->bool
-      #|  w:real^N->bool
-      #|  w:real^N->bool
-      #|  u:real^N->bool
-      #|  x:real^N
-      #|  v:real^N->bool
-      #|  forall s:real^N->bool.\n        locally ENR s <=>\n        forall v x. open_in (subtopology euclidean s) v /\\ x IN v\n              ==> ?u. open_in (subtopology euclidean s) u /\\ ENR u /\\\n                      x IN u /\\ u SUBSET v
-      #|  s:real^N->bool
-      #|  w:real^N->bool
-      #|  v INTER w:real^N->bool
-      #|  w:real^N->bool
-      #|  x:real^N
-      #|  forall s:real^N->bool.\n        locally ENR s <=>\n        forall x. x IN s\n            ==> ?v. x IN v /\\ open_in (subtopology euclidean s) v /\\ ENR v
-      #|  s:real^N->bool
-      #|  v:real^N->bool
-      #|  UNIONS (IMAGE (f:real^N->real^N->bool) s) = s
-      #|  f:real^N->real^N->bool
-      #|  forall s:real^N->bool. locally ENR s <=> ENR s
-      #|  forall p:real^M->real^N s c.\n        covering_space (c,p) s ==> (ANR s <=> ANR c)
-      #|  forall p:real^M->real^N s c.\n        covering_space (c,p) s /\\ ANR c ==> ANR s
-      #|  forall p:real^M->real^N s c.\n        covering_space (c,p) s ==> (ENR s <=> ENR c)
-      #|  forall p:real^M->real^N s c.\n        covering_space (c,p) s /\\ ENR c ==> ENR s
-      #|  u:real^N->bool
-      #|  ball(vec 0:real^N,r) INTER u
-      #|  u:real^N->bool
-      #|  r:real
-      #|  vec 0:real^N
-      #|  forall s:real^N->bool.\n        bounded s\n        ==> (ENR s <=> ?u. open u /\\ bounded u /\\ s retract_of u)
-      #|  t:real^M->bool
-      #|  s:real^M->bool
-      #|  forall s:real^M->bool s':real^N->bool t u.\n      s retract_of t /\\ convex t /\\ ~(t = {}) /\\\n      s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n      ==> s' retract_of u
-      #|  (:real^M)
-      #|  s:real^M->bool
-      #|  forall s s'. s retract_of (:real^M) /\\ s homeomorphic s' /\\ closed s'\n          ==> s' retract_of (:real^N)
-      #|  compact(s:real^M->bool) /\\ compact(s':real^N->bool)
-      #|  forall s s'. s homeomorphic s'\n          ==> (compact s /\\ s retract_of (:real^M) <=>\n               compact s' /\\ s' retract_of (:real^N))
-      #|  (r:real^N->real^N) o (g:real^M->real^N)
-      #|  r:real^N->real^N
-      #|  g:real^M->real^N
-      #|  c:real^M->bool
-      #|  s:real^M->bool
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N c s t.\n        f continuous_on c /\\ IMAGE f c SUBSET t /\\ t retract_of (:real^N) /\\\n        closed_in (subtopology euclidean s) c\n        ==> ?g. g continuous_on s /\\ IMAGE g (:real^M) SUBSET t /\\\n                forall x. x IN c ==> g x = f x
-      #|  t:real^N->bool
-      #|  (:real^M)
-      #|  s:real^M->bool
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N s t.\n        f continuous_on s /\\ IMAGE f s SUBSET t /\\ t retract_of (:real^N) /\\\n        closed s\n        ==> ?g. g continuous_on (:real^M) /\\ IMAGE g (:real^M) SUBSET t /\\\n                forall x. x IN s ==> g x = f x
-      #|  t:real^N->bool
-      #|  s:real^M->bool
-      #|  (:real^M)
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N s t.\n        f continuous_on s /\\ IMAGE f s SUBSET t /\\ ANR t /\\ closed s\n        ==> ?v g. s SUBSET v /\\ open v /\\ g continuous_on v /\\\n                  IMAGE g v SUBSET t /\\ forall x. x IN s ==> g x = f x
-      #|  u:real^N->bool
-      #|  t:real^M->bool
-      #|  s:real^M->bool
-      #|  g:real^M->real^N
-      #|  g:real^M->real^N
-      #|  k:real^M->bool
-      #|  v:real^M->bool
-      #|  c:real^M->bool
-      #|  s:real^M->bool
-      #|  v:real^M->bool
-      #|  g:real^M->real^N
-      #|  w:real^M->bool
-      #|  u:real^N->bool
-      #|  c:real^M->bool
-      #|  s:real^M->bool
-      #|  f:real^M->real^N
-      #|  f:real^M->real^N
-      #|  c:real^M->bool
-      #|  ?t g. open_in (subtopology euclidean s) t /\\\n          closed_in (subtopology euclidean s) t /\\\n          c SUBSET t /\\\n          (g:real^M->real^N) continuous_on t /\\ IMAGE g t SUBSET u /\\\n          forall x. x IN c ==> g x = f x
-      #|  forall f:real^M->real^N s c u.\n        (locally connected s \\/ compact s /\\ ANR u) /\\\n        c IN components s /\\\n        f continuous_on c /\\ IMAGE f c SUBSET u\n        ==> ?g. g continuous_on s /\\ IMAGE g s SUBSET u /\\\n                forall x. x IN c ==> g x = f x
-      #|  forall s t. (s UNION t) retract_of (:real^N) /\\\n         (s INTER t) retract_of (:real^N) /\\\n         closed s /\\ closed t\n         ==> s retract_of (:real^N)
-      #|  forall s:real^N->bool. ENR s ==> COUNTABLE(components s)
-      #|  forall s:real^N->bool t.\n        ENR s ==> COUNTABLE {connected_component s x | x | x IN t}
-      #|  forall s:real^N->bool.\n        ENR s ==> COUNTABLE {path_component s x | x | x IN s}
-      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        ENR(s UNION t) /\\ ENR(s INTER t)\n        ==> ENR s
-      #|  forall s t:real^N->bool.\n        closed s /\\ closed t /\\ ENR(s UNION t) /\\ ENR(s INTER t)\n        ==> ENR s
-      #|  s SUBSET closure s /\\ (:real^N) DIFF s SUBSET closure((:real^N) DIFF s)\n    ==> closure s UNION closure ((:real^N) DIFF s) = (:real^N)
-      #|  closure s UNION closure ((:real^N) DIFF s) = (:real^N)
-      #|  closure((:real^N) DIFF s)
-      #|  forall s:real^N->bool. ENR(frontier s) ==> ENR(closure s)
-      #|  forall s:real^N->bool. ANR(frontier s) ==> ANR(closure s)
-      #|  forall t:(real^N->bool)->bool.\n        FINITE t /\\ (forall c. c IN t ==> closed c /\\ convex c) ==> ENR(UNIONS t)
-      #|  forall s:real^N->bool. FINITE s ==> ENR s
-      #|  {a} INTER s = {a} \\/ {a} INTER s = {}
-      #|  a INSERT s = {a} UNION s
-      #|  forall s a:real^N. closed s /\\ ENR s ==> ENR(a INSERT s)
-      #|  forall tr. triangulation tr ==> ENR(UNIONS tr)
-      #|  forall c. simplicial_complex c ==>  ENR(UNIONS c)
-      #|  forall s x:real^N. ENR(s) ==> ENR(path_component s x)
-      #|  forall s x:real^N. ENR(s) ==> ENR(connected_component s x)
-      #|  forall s:real^N->bool.\n        ENR s /\\ c IN components s ==> ENR c
-      #|  u:real^N->bool
-      #|  forall s:real^N->bool. ENR s ==> ?t u. closed t /\\ open u /\\ s = t INTER u
-      #|  forall s:real^N->bool. ENR s ==> fsigma s
-      #|  forall s:real^N->bool. ENR s ==> gdelta s
-      #|  forall s:real^N->bool. is_interval s ==> fsigma s
-      #|  forall s:real^N->bool. is_interval s ==> gdelta s
-      #|  forall s. is_interval s ==> baire 1 (:real^N) (indicator s)
-      #|  (r ==> p) /\\ (p ==> q) /\\ (p ==> r) ==> (p <=> q /\\ r)
-      #|  forall s:real^N->bool.\n        ANR s <=>\n        COUNTABLE(components s) /\\\n        forall c. c IN components s\n            ==> open_in (subtopology euclidean s) c /\\ ANR c
-      #|  (r ==> p) /\\ (p ==> q) /\\ (p ==> r) ==> (p <=> q /\\ r)
-      #|  forall s:real^N->bool.\n        ENR s <=>\n        COUNTABLE(components s) /\\\n        forall c. c IN components s\n            ==> open_in (subtopology euclidean s) c /\\ ENR c
-      #|  s:real^N->bool
-      #|  t:real^N->bool
-      #|  u:real^M->bool
-      #|  forall s:real^N->bool t u:real^M->bool.\n        s homeomorphic u /\\ ~(s = {}) /\\ s SUBSET t /\\ convex u /\\ compact u\n        ==> s retract_of t
-      #|  g:real^1->real^N
-      #|  interval[vec 0:real^1,vec 1:real^1]
-      #|  s:real^N->bool
-      #|  path_image g:real^N->bool
-      #|  forall g s:real^N->bool.\n        arc g /\\ path_image g SUBSET s ==> (path_image g) retract_of s
-      #|  forall g:real^1->real^N. arc g ==> AR(path_image g)
-      #|  \\x. (dd:real^N->real)(x - a)
-      #|  inv((dd:real^N->real)(x - a))
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  x:real^N = (&1 - u) % a + u % (a + d % (x - a)) <=>\n                         (u * d - &1) % (x - a) = vec 0
-      #|  a = a + d <=> d:real^N = vec 0
-      #|  x:real^N
-      #|  a + x - a:real^N = x
-      #|  x IN closure s DIFF relative_interior s\n          ==> x IN closure s
-      #|  a + x - a:real^N = x
-      #|  x IN closure s DIFF relative_interior s\n          ==> ~(x IN relative_interior s)
-      #|  (dd:real^N->real)(x - a)
-      #|  a + d % (x - a):real^N = (&1 - u) % a + u % x <=>\n        (u - d) % (x - a) = vec 0
-      #|  a + dd(x - a) % (x - a):real^N
-      #|  a + dd(x - a) % (x - a):real^N
-      #|  x:real^N
-      #|  a:real^N
-      #|  s:real^N->bool
-      #|  ~(d < &1) /\\ ~(&1 < d) ==> d = &1
-      #|  dd(x - a:real^N) = &1
-      #|  x:real^N = a
-      #|  x:real^N
-      #|  a + x - a:real^N = x
-      #|  affine hull s:real^N->bool
-      #|  forall s t. s SUBSET t /\\ IMAGE f (t DELETE a) SUBSET u\n            ==> IMAGE f (s DELETE a) SUBSET u
-      #|  &0 < x ==> ~(x = &0 /\\ u = &1)
-      #|  (u = &0 \\/ d = &0) /\\ u = &1 <=> d = &0 /\\ u = &1
-      #|  &0 <= x /\\ &0 <= u /\\ u <= &1 /\\ ~(x = &0 /\\ u = &1)\n        ==> ~(&1 - u + x = &0)
-      #|  (&1 - u) % x + u % (a + d % (x - a)):real^N = a <=>\n        (&1 - u + u * d) % (x - a) = vec 0
-      #|  a + x - a:real^N = x
-      #|  &1 - u + u = &1
-      #|  --a + x:real^N = vec 0 <=> x = a
-      #|  a + --a + x:real^N = x
-      #|  a IN closure s /\\ ~(a IN relative_interior s)\n          ==> ~(a IN relative_interior s)
-      #|  a + b:real^N = (&1 - u) % a + u % c <=>\n                                  b = u % (c - a)
-      #|  (dd:real^N->real) (--a + x) / k
-      #|  a:real^N = a + k % (--a + x) <=>\n                                    k % (x - a) = vec 0
-      #|  a + dd(--a + x) % (--a + x):real^N
-      #|  a + k % (--a + x):real^N
-      #|  a:real^N
-      #|  s:real^N->bool
-      #|  --a + x:real^N = vec 0 <=> x = a
-      #|  a + --a + x:real^N = x
-      #|  x IN c DIFF i ==> x IN i ==> F
-      #|  ~(a < b) /\\ ~(b < a) ==> a = b
-      #|  --a + x:real^N = vec 0 <=> x = a
-      #|  a + --a + x:real^N = x
-      #|  y:real^N = --a + x <=> x = a + y
-      #|  x:real^N
-      #|  k:real
-      #|  --a + x:real^N = vec 0 <=> x = a
-      #|  vec 0:real^N = --a + x <=> x = a
-      #|  s SUBSET t ==> s DIFF u SUBSET t
-      #|  vec 0:real^N = --a + x <=> x = a
-      #|  s SUBSET t /\\ ~(a IN IMAGE f s)\n        ==> IMAGE f s SUBSET IMAGE f t DELETE a
-      #|  x - a:real^N = --a + x
-      #|  relative_frontier (IMAGE (\\x:real^N. x - a) s)
-      #|  (forall x y. f x = f y <=> x = y)\n                       ==> IMAGE f (s DELETE a) = IMAGE f s DELETE f a
-      #|  x - a:real^N = y - a <=> x = y
-      #|  affine hull s DELETE (a:real^N)
-      #|  ((\\x:real^N. a + dd x % x) o (\\x. x - a)) continuous_on t DELETE a
-      #|  \\x:real^N. a + dd(x - a) % (x - a)
-      #|  dd:real^N->real
-      #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
-      #|  (forall x. P x ==> ?d. &0 < d /\\ R d x)\n    ==> forall x. ?d. &0 < d /\\ (P x ==> R d x)
-      #|  a:real^N
-      #|  s:real^N->bool
-      #|  forall s t a:real^N.\n        convex s /\\ convex t /\\ bounded s /\\ a IN relative_interior s /\\\n        relative_frontier s SUBSET t /\\ t SUBSET affine hull s\n        ==> ?r. homotopic_with (\\x. T)\n                 (subtopology euclidean (t DELETE a),\n                  subtopology euclidean (t DELETE a)) (\\x. x) r /\\\n                retraction (t DELETE a,relative_frontier s) r /\\\n                (forall x. ?c. &0 < c /\\ r(x) - a = c % (x - a))
-      #|  s SUBSET u ==> s DIFF t SUBSET u
-      #|  a:real^N
-      #|  affine hull s:real^N->bool
-      #|  s:real^N->bool
-      #|  forall s a:real^N.\n        convex s /\\ bounded s /\\ a IN relative_interior s\n        ==> relative_frontier s retract_of (affine hull s DELETE a)
-      #|  forall s a:real^N.\n        convex s /\\ compact s /\\ a IN relative_interior s\n        ==> (s DIFF relative_interior s) retract_of\n            (affine hull s DELETE a)
-      #|  affine hull s DELETE (a:real^N)
-      #|  a:real^N
-      #|  relative_interior s:real^N->bool = {}
-      #|  forall s:real^N->bool.\n        convex s /\\ bounded s /\\ ~(aff_dim s = &1)\n        ==> path_connected(relative_frontier s)
-      #|  forall s:real^N->bool.\n        convex s /\\ bounded s /\\ ~(aff_dim s = &1)\n        ==> connected(relative_frontier s)
-      #|  closest_point (affine hull s:real^N->bool)
-      #|  (affine hull s) DELETE (a:real^N)
-      #|  (:real^N)
-      #|  {x | x IN (:real^N) /\\\n                   closest_point (affine hull s) x IN\n                   ((:real^N) DELETE a)}
-      #|  a:real^N
-      #|  ~(relative_interior s:real^N->bool = {})
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool. bounded s /\\ convex s ==> ENR(relative_frontier s)
-      #|  forall s:real^N->bool. bounded s /\\ convex s ==> ANR(relative_frontier s)
-      #|  a:real^N
-      #|  s:real^N->bool
-      #|  a IN s ==> ~(s = {})
-      #|  forall s a. convex s /\\ bounded s /\\ a IN interior s\n         ==> (frontier s) retract_of ((:real^N) DELETE a)
-      #|  forall a r b:real^N.\n      b IN ball(a,r) ==> sphere(a,r) retract_of ((:real^N) DELETE b)
-      #|  forall a r. &0 < r ==> sphere(a,r) retract_of ((:real^N) DELETE a)
-      #|  (:real^N) DELETE a
-      #|  &0 < r
-      #|  forall a:real^N r. ENR(sphere(a,r))
-      #|  forall a:real^N r. ANR(sphere(a,r))
-      #|  affine hull s:real^N->bool
-      #|  (affine hull s) DELETE (a:real^N)
-      #|  a:real^N
-      #|  relative_interior(s:real^N->bool) = {}
-      #|  relative_interior(s:real^N->bool) = {}
-      #|  forall s:real^N->bool.\n       bounded s /\\ convex s ==> locally path_connected (relative_frontier s)
-      #|  forall s:real^N->bool.\n       bounded s /\\ convex s ==> locally connected (relative_frontier s)
-      #|  closest_point(s:real^N->bool)
-      #|  forall s:real^N->bool t.\n        convex s /\\ closed s /\\ ~(s = {}) /\\ s SUBSET t\n        ==> ?r. retraction (t,s) r /\\\n                forall x. x IN (affine hull s) DIFF (relative_interior s)\n                    ==> r(x) IN relative_frontier s
-      #|  closest_point(s:real^N->bool)
-      #|  forall s:real^N->bool t.\n        convex s /\\ closed s /\\ ~(s = {}) /\\ s SUBSET t\n        ==> ?r. retraction (t,s) r /\\\n                (forall x. ~(x IN s) ==> r(x) IN frontier s)
-      #|  forall s:real^N->bool t.\n        convex s /\\ closed s /\\ ~(s = {}) /\\ s SUBSET t\n        ==> s retract_of t
-      #|  s:real^N->bool
-      #|  u:real^N->bool
-      #|  s:real^N->bool
-      #|  \\x:real^N. x
-      #|  forall s u:real^N->bool.\n        convex s /\\ ~(s = {}) /\\ closed_in (subtopology euclidean u) s\n        ==> s retract_of u
-      #|  (:real^N)
-      #|  &1
-      #|  vec 0:real^2
-      #|  g:real^1->real^N
-      #|  pathfinish g:real^N = pathstart g
-      #|  forall g:real^1->real^N. simple_path g ==> ENR(path_image g)
-      #|  forall g:real^1->real^N. simple_path g ==> ANR(path_image g)
-      #|  (a:real^M->real^1) x
-      #|  ~((x:real^M) IN s')
-      #|  (x:real^M) IN s'
-      #|  (h':real^(1,M)finite_sum->real^N) (pastecart (vec 1) x)
-      #|  x:real^M
-      #|  x:real^M
-      #|  x:real^M
-      #|  p * a <= p * &1 /\\ p <= &1 ==> p * a <= &1
-      #|  p ==> ~(p /\\ ~q) ==> q
-      #|  drop p % (a:real^M->real^1) x
-      #|  ~((x:real^M) IN s')
-      #|  (x:real^M) IN s'
-      #|  x:real^M
-      #|  p:real^1
-      #|  (h':real^(1,M)finite_sum->real^N) (pastecart (vec 0) x)
-      #|  pastecart (vec 0:real^1) (x:real^M) IN B
-      #|  x:real^M
-      #|  IMAGE k t SUBSET u\n                    ==> s SUBSET t ==> IMAGE k s SUBSET u
-      #|  (k:real^(1,M)finite_sum->real^N) o\n          (\\z. pastecart (drop(fstcart z) % a(sndcart z)) (sndcart z))
-      #|  (\\x. (k:real^(1,M)finite_sum->real^N) (pastecart (a x) x))
-      #|  a:real^M->real^1
-      #|  p:real^1
-      #|  x:real^M
-      #|  vec 0:real^1
-      #|  vec 1:real^1
-      #|  t:real^M->bool
-      #|  s':real^M->bool
-      #|  s:real^M->bool
-      #|  closed_in (subtopology euclidean t) (s':real^M->bool)
-      #|  s' = {x | ?u. u IN interval[vec 0,vec 1] /\\\n                              pastecart (u:real^1) (x:real^M) IN\n                              interval [vec 0,vec 1] PCROSS t DIFF V}
-      #|  (h':real^(1,M)finite_sum->real^N) o\n                    (r:real^(1,M)finite_sum->real^(1,M)finite_sum)
-      #|  r:real^(1,M)finite_sum->real^(1,M)finite_sum
-      #|  V:real^(1,M)finite_sum->bool
-      #|  interval[vec 0:real^1,vec 1] PCROSS (t:real^M->bool)
-      #|  a IN s ==> {a} INTER s = {a}
-      #|  s SUBSET t ==> t INTER s = s
-      #|  {vec 0:real^1} PCROSS (t:real^M->bool) UNION\n          interval[vec 0,vec 1] PCROSS s
-      #|  ANR(B:real^(1,M)finite_sum->bool)
-      #|  ?V k:real^(1,M)finite_sum->real^N.\n        B SUBSET V /\\\n        open_in (subtopology euclidean (interval [vec 0,vec 1] PCROSS t)) V /\\\n        k continuous_on V /\\\n        IMAGE k V SUBSET u /\\\n        (forall x. x IN B ==> k x = h' x)
-      #|  IMAGE (h':real^(1,M)finite_sum->real^N) B SUBSET u
-      #|  (p /\\ q) /\\ ~q <=> F
-      #|  (h':real^(1,M)finite_sum->real^N) continuous_on B
-      #|  closed_in (subtopology euclidean (interval[vec 0:real^1,vec 1] PCROSS t))\n              ({vec 0} PCROSS (t:real^M->bool)) /\\\n    closed_in (subtopology euclidean (interval[vec 0:real^1,vec 1] PCROSS t))\n              (interval[vec 0,vec 1] PCROSS s)
-      #|  B:real^(1,M)finite_sum->bool =\n       {vec 0} PCROSS t UNION interval[vec 0,vec 1] PCROSS s
-      #|  h' = \\z. if sndcart z IN s then (h:real^(1,M)finite_sum->real^N) z\n              else f(sndcart z)
-      #|  h:real^(1,M)finite_sum->real^N
-      #|  forall f:real^M->real^N g s t u.\n        closed_in (subtopology euclidean t) s /\\\n        (ANR s /\\ ANR t \\/ ANR u) /\\\n        f continuous_on t /\\ IMAGE f t SUBSET u /\\\n        homotopic_with (\\x. T)\n          (subtopology euclidean s,subtopology euclidean u) f g\n        ==> ?g'. homotopic_with (\\x. T)\n                  (subtopology euclidean t,subtopology euclidean u) f g' /\\\n                 g' continuous_on t /\\ IMAGE g' t SUBSET u /\\\n                 forall x. x IN s ==> g'(x) = g(x)
-      #|  forall f:real^M->real^N g s t u.\n        closed_in (subtopology euclidean t) s /\\\n        (ANR s /\\ ANR t \\/ ANR u) /\\\n        f continuous_on t /\\ IMAGE f t SUBSET u /\\\n        homotopic_with (\\x. T)\n         (subtopology euclidean s,subtopology euclidean u) f g\n        ==> ?g'. g' continuous_on t /\\ IMAGE g' t SUBSET u /\\\n                 forall x. x IN s ==> g'(x) = g(x)
-      #|  (:real^M)
-      #|  (\\x. c):real^M->real^N
-      #|  g:real^M->real^N
-      #|  c:real^N
-      #|  t:real^N->bool
-      #|  (:real^M)
-      #|  g:real^M->real^N
-      #|  (\\x. c):real^M->real^N
-      #|  forall f:real^M->real^N s t.\n      closed s /\\ f continuous_on s /\\ ~(s = {}) /\\ IMAGE f s SUBSET t /\\ ANR t\n      ==> ((?c. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean t)\n                 f (\\x. c)) <=>\n           (?g. g continuous_on (:real^M) /\\\n                IMAGE g (:real^M) SUBSET t /\\\n                forall x. x IN s ==> g x = f x))
-      #|  t:real^N->bool
-      #|  forall f:real^M->real^N s t.\n        closed s /\\ f continuous_on s /\\ ~(s = {}) /\\\n        IMAGE f s SUBSET relative_frontier t /\\ convex t /\\ bounded t\n        ==> ((?c. homotopic_with (\\x. T)\n                   (subtopology euclidean s,\n                    subtopology euclidean  (relative_frontier t)) f (\\x. c)) <=>\n             (?g. g continuous_on (:real^M) /\\\n                  IMAGE g (:real^M) SUBSET relative_frontier t /\\\n                  forall x. x IN s ==> g x = f x))
-      #|  (\\x. a):real^M->real^N
-      #|  \\y:real^(1,M)finite_sum. (a:real^N)
-      #|  a:real^N
-      #|  p /\\ q ==> (p <=> q)
-      #|  r:real
-      #|  a:real^N
-      #|  forall f:real^M->real^N s a r.\n     closed s /\\ f continuous_on s /\\ ~(s = {}) /\\ IMAGE f s SUBSET sphere(a,r)\n     ==> ((?c. homotopic_with (\\x. T)\n                (subtopology euclidean s,\n                 subtopology euclidean (sphere(a,r))) f (\\x. c)) <=>\n          (?g. g continuous_on (:real^M) /\\\n               IMAGE g (:real^M) SUBSET sphere(a,r) /\\\n               forall x. x IN s ==> g x = f x))
-      #|  forall s u:real^N->bool.\n      closed_in (subtopology euclidean u) s /\\\n      contractible s /\\ ~(s = {}) /\\ ANR s\n      ==> s retract_of u
-      #|  c:real^M->bool
-      #|  forall s t f g:real^M->real^N.\n        locally connected s /\\\n        (forall c. c IN components s\n             ==> homotopic_with (\\x. T)\n                   (subtopology euclidean c,subtopology euclidean t) f g)\n        ==> homotopic_with (\\x. T)\n             (subtopology euclidean s,subtopology euclidean t) f g
-      #|  b:real^N
-      #|  c:real^M->bool
-      #|  c:real^M->bool
-      #|  a:real^N
-      #|  c:real^M->bool
-      #|  c:real^M->bool
-      #|  ?a:real^N. a IN t
-      #|  components(s:real^M->bool) = {}
-      #|  forall f:real^M->real^N s t.\n        locally connected s /\\ path_connected t /\\\n        (forall c. c IN components s\n             ==> ?a. homotopic_with (\\x. T)\n                       (subtopology euclidean c,subtopology euclidean t)\n                       f (\\x. a))\n        ==> ?a. homotopic_with (\\x. T)\n                  (subtopology euclidean s,subtopology euclidean t)\n                  f (\\x. a)
-      #|  x:real^M
-      #|  k:real^(1,M)finite_sum->real^N
-      #|  t':real^M->bool
-      #|  w:real^(1,M)finite_sum->bool
-      #|  s:real^M->bool
-      #|  t:real^M->bool
-      #|  interval[vec 0:real^1,vec 1]
-      #|  k:real^(1,M)finite_sum->real^N
-      #|  w:real^(1,M)finite_sum->bool
-      #|  IMAGE f s SUBSET u ==> b IN s ==> f b IN u
-      #|  y:real^M
-      #|  x:real^1
-      #|  x:real^1 = vec 1
-      #|  x:real^1 = vec 0
-      #|  y:real^M
-      #|  x:real^1
-      #|  t UNION u SUBSET s UNION t UNION u
-      #|  interval[vec 0:real^1,vec 1] PCROSS (s:real^M->bool)
-      #|  {a,b} = {a} UNION {b}
-      #|  u:real^N->bool
-      #|  {vec 0:real^1,vec 1} PCROSS (s:real^M->bool) UNION\n     interval[vec 0,vec 1] PCROSS t
-      #|  interval[vec 0:real^1,vec 1] PCROSS (s:real^M->bool)
-      #|  h':real^(1,M)finite_sum->real^N
-      #|  h' = \\z. if fstcart z IN {vec 0} then f(sndcart z)\n             else if fstcart z IN {vec 1} then g(sndcart z)\n             else (h:real^(1,M)finite_sum->real^N) z
-      #|  h:real^(1,M)finite_sum->real^N
-      #|  forall f g:real^M->real^N s t u.\n        f continuous_on s /\\ IMAGE f s SUBSET u /\\\n        g continuous_on s /\\ IMAGE g s SUBSET u /\\\n        closed_in (subtopology euclidean s) t /\\ ANR u /\\\n        homotopic_with (\\x. T)\n         (subtopology euclidean t,subtopology euclidean u) f g\n        ==> ?v. t SUBSET v /\\\n                open_in (subtopology euclidean s) v /\\\n                homotopic_with (\\x. T)\n                 (subtopology euclidean v,subtopology euclidean u) f g
-      #|  s = UNIONS (IMAGE k (components(s:real^M->bool)))
-      #|  k:(real^M->bool)->(real^M->bool)
-      #|  k:real^M->bool
-      #|  v:real^M->bool
-      #|  c:real^M->bool
-      #|  s:real^M->bool
-      #|  v:real^M->bool
-      #|  u:real^M->bool
-      #|  t:real^N->bool
-      #|  c:real^M->bool
-      #|  s:real^M->bool
-      #|  g:real^M->real^N
-      #|  f:real^M->real^N
-      #|  c:real^M->bool
-      #|  c:real^M->bool
-      #|  c:real^M->bool
-      #|  forall c. c IN components s\n        ==> ?u. c SUBSET u /\\\n                closed_in (subtopology euclidean s) u /\\\n                open_in (subtopology euclidean s) u /\\\n                homotopic_with (\\x. T)\n                 (subtopology euclidean u,subtopology euclidean t)\n                 (f:real^M->real^N) g
-      #|  (q ==> r) /\\ (r ==> (q <=> s)) ==> (q <=> r /\\ s)
-      #|  forall s t f g:real^M->real^N.\n        (locally connected s \\/ compact s /\\ ANR t)\n        ==> (homotopic_with (\\x. T)\n               (subtopology euclidean s,subtopology euclidean t) f g <=>\n             f continuous_on s /\\ IMAGE f s SUBSET t /\\\n             g continuous_on s /\\ IMAGE g s SUBSET t /\\\n             forall c. c IN components s\n                 ==> homotopic_with (\\x. T)\n                      (subtopology euclidean c,subtopology euclidean t) f g)
-      #|  b:real^N
-      #|  d:real^M->bool
-      #|  d:real^M->bool
-      #|  a:real^N
-      #|  c:real^M->bool
-      #|  ?c:real^M->bool. c IN components s
-      #|  s:real^M->bool = {}
-      #|  (q ==> r) /\\ (r ==> (q <=> s)) ==> (q <=> r /\\ s)
-      #|  forall s t f:real^M->real^N.\n        (locally connected s \\/ compact s /\\ ANR t) /\\\n        path_connected t\n        ==> ((?a. homotopic_with (\\x. T)\n                   (subtopology euclidean s,subtopology euclidean t)\n                   f (\\x. a)) <=>\n             f continuous_on s /\\ IMAGE f s SUBSET t /\\\n             forall c. c IN components s\n                 ==> ?a. homotopic_with (\\x. T)\n                          (subtopology euclidean c,subtopology euclidean t)\n                          f (\\x. a))
-      #|  c:real^M->bool
-      #|  c:real^M->bool
-      #|  c:real^M->bool
-      #|  g':real^M->real^N
-      #|  f':real^M->real^N
-      #|  g':real^M->real^N
-      #|  f':real^M->real^N
-      #|  t:real^N->bool
-      #|  c:real^M->bool
-      #|  s:real^M->bool
-      #|  f:real^M->real^N
-      #|  t:real^N->bool
-      #|  c:real^M->bool
-      #|  s:real^M->bool
-      #|  g:real^M->real^N
-      #|  forall s:real^M->bool t:real^N->bool.\n        (locally connected s \\/ compact s /\\ ANR t)\n         ==> ((forall f g. f continuous_on s /\\ IMAGE f s SUBSET t /\\\n                     g continuous_on s /\\ IMAGE g s SUBSET t\n                     ==> homotopic_with (\\x. T)\n                          (subtopology euclidean s,subtopology euclidean t)\n                          f g) <=>\n              (forall c. c IN components s\n                   ==> (forall f g. f continuous_on c /\\ IMAGE f c SUBSET t /\\\n                              g continuous_on c /\\ IMAGE g c SUBSET t\n                              ==> homotopic_with (\\x. T)\n                                   (subtopology euclidean c,\n                                    subtopology euclidean t) f g)))
-      #|  forall s:real^M->bool t:real^N->bool.\n        (locally connected s \\/ compact s /\\ ANR t) /\\ path_connected t\n         ==> ((forall f. f continuous_on s /\\ IMAGE f s SUBSET t\n                   ==> ?a. homotopic_with (\\x. T)\n                            (subtopology euclidean s,\n                             subtopology euclidean t) f (\\x. a)) <=>\n              (forall c. c IN components s\n                   ==> (forall f. f continuous_on c /\\ IMAGE f c SUBSET t\n                            ==> ?a. homotopic_with (\\x. T)\n                                     (subtopology euclidean c,\n                                      subtopology euclidean t) f (\\x. a))))
-      #|  s = UNIONS (IMAGE (u:(real^M->bool)->real^M->bool) (components s))
-      #|  u:(real^M->bool)->real^M->bool
-      #|  a:real^N
-      #|  v:real^M->bool
-      #|  u:real^M->bool
-      #|  c:real^M->bool
-      #|  s:real^M->bool
-      #|  u:real^M->bool
-      #|  t:real^N->bool
-      #|  c:real^M->bool
-      #|  s:real^M->bool
-      #|  (\\x. a):real^M->real^N
-      #|  f:real^M->real^N
-      #|  a:real^N
-      #|  h:real^1->real^M
-      #|  g:real^M->real^1
-      #|  contractible(IMAGE (g:real^M->real^1) c)
-      #|  h:real^1->real^M
-      #|  g:real^M->real^1
-      #|  t:real^N->bool
-      #|  c:real^M->bool
-      #|  f:real^M->real^N
-      #|  forall c. c IN components s\n        ==> ?u. closed_in (subtopology euclidean s) u /\\\n                open_in (subtopology euclidean s) u /\\\n                c SUBSET u /\\\n                ?a. homotopic_with (\\x. T)\n                     (subtopology euclidean u,subtopology euclidean t)\n                     (f:real^M->real^N) (\\x. a)
-      #|  r:real^1->bool
-      #|  IMAGE (f:real^M->real^1) s
-      #|  g:real^1->real^M
-      #|  f:real^M->real^1
-      #|  p \\/ q ==> (p ==> q) ==> q
-      #|  path_connected(t:real^N->bool)
-      #|  forall f:real^M->real^N s t.\n        f continuous_on s /\\ IMAGE f s SUBSET t /\\\n        ANR t /\\ connected t /\\\n        (dimindex(:M) = 1 \\/ ?r:real^1->bool. s homeomorphic r)\n        ==> ?a. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean t) f (\\x. a)
-      #|  t:real^N->bool
-      #|  (\\x. x) o (r1:real^N->real^N)
-      #|  forall s t u r1 r2:real^N->real^N.\n        homotopic_with (\\x. T)\n          (subtopology euclidean s,subtopology euclidean s) (\\x. x) r1 /\\\n        retraction (s,t) r1 /\\\n        homotopic_with (\\x. T)\n          (subtopology euclidean t,subtopology euclidean t) (\\x. x) r2 /\\\n        retraction (t,u) r2\n        ==> homotopic_with (\\x. T)\n             (subtopology euclidean s,subtopology euclidean s)\n             (\\x. x) (r2 o r1) /\\\n            retraction (s,u) (r2 o r1)
-      #|  forall s t u:real^N->bool.\n        (?r. homotopic_with (\\x. T)\n              (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n             retraction (s,t) r) /\\\n        (?r. homotopic_with (\\x. T)\n              (subtopology euclidean t,subtopology euclidean t) (\\x. x) r /\\\n             retraction (t,u) r)\n        ==> ?r. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction (s,u) r
-      #|  forall s t:real^N->bool.\n        (?r. homotopic_with (\\x. T)\n              (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n             retraction(s,t) r)\n        ==> s homotopy_equivalent t
-      #|  t SUBSET s ==> s INTER t = t
-      #|  (t:real^N->bool) SUBSET s
-      #|  t:real^N->bool
-      #|  subtopology euclidean (s:real^N->bool)
-      #|  forall s t:real^N->bool.\n        (?r. homotopic_with (\\x. T)\n              (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n             retraction(s,t) r) <=>\n        t retract_of s /\\\n        ?f. homotopic_with (\\x. T)\n             (subtopology euclidean s,subtopology euclidean s) (\\x. x) f /\\\n            IMAGE f s SUBSET t
-      #|  h:real^(1,N)finite_sum->real^N
-      #|  (h:real^(1,N)finite_sum->real^N) o pastecart (vec 1)
-      #|  h:real^(1,N)finite_sum->real^N
-      #|  v:real^1 = vec 1
-      #|  y:real^N
-      #|  v:real^1
-      #|  u:real^1
-      #|  v:real^1 = vec 0
-      #|  y:real^N
-      #|  v:real^1
-      #|  u:real^1
-      #|  &1 - x <= &1 <=> &0 <= x
-      #|  (:real^1) PCROSS {vec 1:real^1} PCROSS (:real^N)
-      #|  (:real^1) PCROSS {vec 0:real^1} PCROSS (:real^N)
-      #|  {a,b} = {a} UNION {b}
-      #|  (:real^1) PCROSS (:real^1) PCROSS (c:real^N->bool)
-      #|  c:real^N->bool
-      #|  closed_in (subtopology euclidean s) (t:real^N->bool)
-      #|  (:real^1) PCROSS {vec 0:real^1,vec 1} PCROSS (:real^N)
-      #|  (if p then x else if q then y else r) =\n        (if p \\/ q then if p then x else y else r)
-      #|  &1 - x <= &1 <=> &0 <= x
-      #|  IMAGE f s SUBSET t ==> x IN s ==> f x IN t
-      #|  y:real^N
-      #|  v:real^1
-      #|  u:real^1
-      #|  g:real^(1,(1,N)finite_sum)finite_sum->real^N
-      #|  {a,b} = {a} UNION {b}
-      #|  s:real^N->bool
-      #|  interval[vec 0:real^1,vec 1] PCROSS (s:real^N->bool)
-      #|  {vec 0:real^1,vec 1} PCROSS (s:real^N->bool) UNION\n     interval[vec 0:real^1,vec 1] PCROSS (t:real^N->bool)
-      #|  \\x. (g:real^(1,(1,N)finite_sum)finite_sum->real^N) (pastecart (vec 1) x)
-      #|  f:real^(1,N)finite_sum->real^N
-      #|  g:real^(1,(1,N)finite_sum)finite_sum->real^N =\n     \\z. if fstcart(sndcart z) = vec 0 then (sndcart(sndcart z))\n         else if fstcart(sndcart z) = vec 1\n              then f(pastecart (vec 1 - fstcart z)\n                               (f(pastecart (vec 1) (sndcart(sndcart z)))))\n         else f(pastecart (lift(drop(fstcart(sndcart z)) *\n                                    (&1 - drop (fstcart z))))\n                          (sndcart(sndcart z)))
-      #|  f:real^(1,N)finite_sum->real^N
-      #|  forall s t:real^N->bool.\n        ANR s /\\\n        (?r. homotopic_with (\\x. T)\n              (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n             retraction(s,t) r)\n        ==> ?r. homotopic_with (\\h. forall x. x IN t ==> h x = x)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,t) r
-      #|  (b:real^N) IN s
-      #|  (a:real^N) IN s
-      #|  b:real^N
-      #|  (\\x. a):real^N->real^N
-      #|  ?a:real^N. a IN t
-      #|  t:real^N->bool = {}
-      #|  forall s t:real^N->bool.\n        contractible s /\\ t retract_of s\n        ==> ?r. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,t) r
-      #|  forall s t:real^N->bool.\n        contractible s /\\ AR t /\\ closed_in (subtopology euclidean s) t\n        ==> ?r. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,t) r
-      #|  forall s a:real^N.\n        contractible s /\\ a IN s\n        ==> ?r. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,{a}) r
-      #|  forall s t:real^N->bool.\n        AR s /\\ t retract_of s\n        ==> ?r. homotopic_with (\\h. forall x. x IN t ==> h x = x)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,t) r
-      #|  forall s t:real^N->bool.\n        AR s /\\ AR t /\\ closed_in (subtopology euclidean s) t\n        ==> ?r. homotopic_with (\\h. forall x. x IN t ==> h x = x)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,t) r
-      #|  {a:real^N}
-      #|  s:real^N->bool
-      #|  forall s a:real^N.\n        AR s /\\ a IN s\n        ==> ?r. homotopic_with (\\h. h a = a)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,{a}) r
-      #|  forall s t a:real^N.\n      convex s /\\ bounded s /\\ a IN relative_interior s /\\\n      convex t /\\ relative_frontier s SUBSET t /\\ t SUBSET affine hull s\n      ==> (relative_frontier s) homotopy_equivalent (t DELETE a)
-      #|  s SUBSET u ==> s DIFF t SUBSET u
-      #|  forall s a:real^N.\n      convex s /\\ bounded s /\\ a IN relative_interior s\n      ==> (relative_frontier s) homotopy_equivalent (affine hull s DELETE a)
-      #|  vec 0:real^N
-      #|  cball(vec 0:real^N,r)
-      #|  sphere(vec 0:real^N,r)
-      #|  c:real^N
-      #|  forall c a:real^N r.\n        &0 < r ==> ((:real^N) DELETE c) homotopy_equivalent sphere(a,r)
-      #|  (i:real^N->real^M) o (g:real^N->real^N) o (r:real^M->real^N)
-      #|  forall s:real^M->bool t:real^N->bool i r.\n     i continuous_on t /\\ IMAGE i t SUBSET s /\\\n     r continuous_on s /\\ IMAGE r s SUBSET t /\\\n     (forall y. y IN t ==> (r(i(y)) = y))\n     ==> (forall f. f continuous_on s /\\ IMAGE f s SUBSET s\n              ==> ?x. x IN s /\\ (f x = x))\n         ==> forall g. g continuous_on t /\\ IMAGE g t SUBSET t\n                 ==> ?y. y IN t /\\ (g y = y)
-      #|  forall s t. s homeomorphic t\n         ==> ((forall f. f continuous_on s /\\ IMAGE f s SUBSET s\n                   ==> ?x. x IN s /\\ (f x = x)) <=>\n              (forall g. g continuous_on t /\\ IMAGE g t SUBSET t\n                   ==> ?y. y IN t /\\ (g y = y)))
-      #|  \\x:real^N. x
-      #|  forall s t:real^N->bool.\n        t retract_of s /\\\n        (forall f. f continuous_on s /\\ IMAGE f s SUBSET s\n             ==> ?x. x IN s /\\ (f x = x))\n        ==> forall g. g continuous_on t /\\ IMAGE g t SUBSET t\n                ==> ?y. y IN t /\\ (g y = y)
-      #|  norm(x - a) = dist(a,x)
+      #|  \226\136\128 n : Num, n <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (dimension : ((Cart[Real, N]) -> Bool) -> Int)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((span : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((IMAGE : ((Num) -> Cart[Real, N], (Num) -> Bool, Cart[Real, N]) -> Bool)((basis : (Num) -> Cart[Real, N]), op_dot_dot(1, n))), {(x : Cart[Real, N]) | \226\136\128 i : Num, (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 rational((op_dollar : (Cart[Real, N], Num) -> Real)(x, i))})) < int_of_num(n)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (d' : Int) == (d : Int) \226\134\146 d < (n : Int) \226\134\146 d' < n
+      #|  (n : Num)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  SUBSET((t : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 INTER(s, t) == t
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((span : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((IMAGE : ((Num) -> Cart[Real, N], (Num) -> Bool, Cart[Real, N]) -> Bool)((basis : (Num) -> Cart[Real, N]), op_dot_dot(1, (n : Num)))), {(x : Cart[Real, N]) | \226\136\128 i : Num, (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 rational((op_dollar : (Cart[Real, N], Num) -> Real)(x, i))})
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (n : Num)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  !((c : (Cart[Real, N]) -> Bool) == {})
+      #|  COUNTABLE((c : (Cart[Real, N]) -> Bool))
+      #|  closure((c : (Cart[Real, N]) -> Bool)) == hull(affine, c)
+      #|  SUBSET((s : (Cart[Real, N]) -> Bool), hull(affine, s))
+      #|  dimension((s : (Cart[Real, N]) -> Bool))
+      #|  aff_dim((c : (Cart[Real, N]) -> Bool)) <= dimension(DIFF(hull(affine, c), c))
+      #|  hull(affine, (c : (Cart[Real, N]) -> Bool)) == hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  SUBSET((t : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 SUBSET(INTER((s : (_) -> Bool), t), u)
+      #|  SUBSET((t : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 DIFF((s : (_) -> Bool), t) == {} \226\134\146 SUBSET(s, u)
+      #|  closure((c : (Cart[Real, N]) -> Bool)) == hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  DIFF(hull(affine, (s : (Cart[Real, N]) -> Bool)), s)
+      #|  (i : Int) <= (s : Int) && s <= (u : Int) \226\134\146 i == u \226\134\146 s == u
+      #|  relative_interior((s : (Cart[Real, N]) -> Bool))
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (dimension(s) == aff_dim(s)) == (s == {} || !(relative_interior(s) == {}))
+      #|  ((s : Int) < (a : Int)) == (s <= a && !(s == a))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (dimension(s) < aff_dim(s)) == (!(s == {}) && relative_interior(s) == {})
+      #|  interior_of(subtopology(euclidean, (u : (Cart[Real, N]) -> Bool)), (s : (Cart[Real, N]) -> Bool))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  dimension(interior_of(subtopology(euclidean, (u : (Cart[Real, N]) -> Bool)), (s : (Cart[Real, N]) -> Bool)))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !(s == {}) \226\134\146 !(t == {})
+      #|  (s : Int) == (u : Int) \226\134\146 (\226\136\128 a : Int, s <= a && a <= u \226\134\146 a == u && s == a)
+      #|  aff_dim((s : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  (u : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, convex(u) && SUBSET(s, u) \226\134\146 (dimension(s) == aff_dim(u)) == (s == {} && u == {} || !(interior_of(subtopology(euclidean, u), s) == {}))
+      #|  (u : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, convex(u) && SUBSET(s, u) \226\134\146 (dimension(s) < aff_dim(u)) == (!(u == {}) && interior_of(subtopology(euclidean, u), s) == {})
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 a : Int, (d : Int) == (n : Int) \226\134\146 d <= a && a <= n \226\134\146 a == n
+      #|  aff_dim((s : (Cart[Real, N]) -> Bool))
+      #|  !(-int_of_num(1) == int_of_num((n : Num)))
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ((dimension : ((Cart[Real, N]) -> Bool) -> Int)(s) == int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) == !((interior : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s) == ({} : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ((dimension : ((Cart[Real, N]) -> Bool) -> Int)(s) < int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) == ((interior : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s) == ({} : (Cart[Real, N]) -> Bool))
+      #|  SUBSET(IMAGE((f : (_) -> _), (c : (_) -> Bool)), (s : (_) -> Bool)) \226\134\146 INTER(s, IMAGE(f, DIFF(c, (i : (_) -> Bool)))) == IMAGE(f, DIFF(c, i))
+      #|  (d : Int) <= (n : Int) - int_of_num(2) \226\134\146 (d' : Int) == d \226\134\146 d' <= n - int_of_num(1) - int_of_num(1)
+      #|  (u : (Cart[Real, N]) -> Bool) == IMAGE((x : Cart[Real, N]) => op_pct((c : Real), x), u)
+      #|  IMAGE((x : Cart[Real, N]) => op_pct((c : Real), x), closure_of(subtopology(euclidean, (u : (Cart[Real, N]) -> Bool)), (s : (Cart[Real, N]) -> Bool)))
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  IMAGE((x : Cart[Real, N]) => op_pct((c : Real), x), (s : (Cart[Real, N]) -> Bool))
+      #|  SUBSET((u : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 SUBSET(INTER((t : (_) -> Bool), u), s)
+      #|  closure((s : (Cart[Real, N]) -> Bool))
+      #|  INTER(IMAGE((x : Cart[Real, N]) => op_pct((d : Real) / (r : Real), x), cball((vec(0), r))), (u : (Cart[Real, N]) -> Bool))
+      #|  INTER(cball((vec(0), (d : Real))), (u : (Cart[Real, N]) -> Bool))
+      #|  (d : Real) / (r : Real)
+      #|  (d : Real)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  INTER((s : (Cart[Real, N]) -> Bool), (v : (Cart[Real, N]) -> Bool))
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (r : Real)
+      #|  \226\136\131 c : Real, real_of_num(0) < c && SUBSET(IMAGE((x : Cart[Real, N]) => op_pct(c, x), closure_of(subtopology(euclidean, (u : (Cart[Real, N]) -> Bool)), (s : (Cart[Real, N]) -> Bool))), s) && SUBSET(IMAGE((x : Cart[Real, N]) => op_pct(c, x), closure_of(subtopology(euclidean, u), s)), (v : (Cart[Real, N]) -> Bool))
+      #|  affine((u : (Cart[Real, N]) -> Bool))
+      #|  IN(vec(0), (u : (Cart[Real, N]) -> Bool))
+      #|  (a : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  aff_dim((u : (Cart[Real, N]) -> Bool)) - int_of_num(1)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (x : Int) <= (n : Int) - int_of_num(1) \226\134\146 !(x == n)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  relative_frontier((s : (Cart[Real, N]) -> Bool)) == frontier_of(subtopology(euclidean, (u : (Cart[Real, N]) -> Bool)), s)
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 SUBSET(DIFF(s, (t : (_) -> Bool)), u)
+      #|  !((u : Int) <= int_of_num(0)) \226\134\146 !(u == int_of_num(0))
+      #|  aff_dim(relative_frontier((s : (Cart[Real, N]) -> Bool)))
+      #|  (d : Int) < (n : Int) && !(d <= n - int_of_num(2)) \226\134\146 d == n - int_of_num(1)
+      #|  (s : Int) <= int_of_num(0) \226\134\146 -int_of_num(1) <= s && !(s == -int_of_num(1)) \226\134\146 s == int_of_num(0)
+      #|  aff_dim((u : (Cart[Real, N]) -> Bool)) <= int_of_num(0)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, affine(u) && open_in(subtopology(euclidean, u), s) && bounded(s) \226\134\146 dimension(relative_frontier(s)) == (if s == {} { -int_of_num(1) } else { aff_dim(u) - int_of_num(1) })
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (UNIV : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, (open : ((Cart[Real, N]) -> Bool) -> Bool)(u) && (bounded : ((Cart[Real, N]) -> Bool) -> Bool)(u) \226\134\146 (dimension : ((Cart[Real, N]) -> Bool) -> Int)((frontier : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(u)) == (if u == ({} : (Cart[Real, N]) -> Bool) { -int_of_num(1) } else { int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) - int_of_num(1) })
+      #|  (i : (_) -> _)((z : _)) == z \226\134\146 INSERT(z, IMAGE(i, DELETE((s : (_) -> Bool), z))) == INSERT(z, IMAGE(i, s))
+      #|  INSERT((z : _), (w : (_) -> Bool)) == INSERT(z, (y : (_) -> Bool)) \226\134\146 w == DELETE((x : (_) -> Bool), z) \226\134\146 INSERT(z, y) == INSERT(z, x)
+      #|  SUBSET((c : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 INTER(DELETE(u, (z : _)), c) == DELETE(c, z)
+      #|  DELETE((s : (_) -> Bool), (a : _)) == INTER(s, DELETE(s, a))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  real_of_num(0) < (r : Real)
+      #|  (x : Cart[Real, N]) == vec(0)
+      #|  (x : Cart[Real, N])
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (i : (_) -> _)(i(x)) == x) && SUBSET((t : (_) -> Bool), s) && INSERT((a : _), IMAGE(i, s)) == INSERT(a, (u : (_) -> Bool)) \226\134\146 INSERT(a, IMAGE(i, DIFF(s, t))) == INSERT(a, DIFF(u, IMAGE(i, t)))
+      #|  (!(p : Bool) \226\134\146 !((q : Bool) && (r : Bool))) == (!p && r \226\134\146 !q)
+      #|  connected((u : (Cart[Real, N]) -> Bool))
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (\226\136\131 a : Cart[Real, N], !((s : (Cart[Real, N]) -> Bool) == {}) && !((t : (Cart[Real, N]) -> Bool) == {}) && INSERT(a, s) == INSERT(a, t)) \226\134\146 dimension(s) == dimension(t)
+      #|  SUBSET(closure_of(subtopology(euclidean, (u : (Cart[Real, N]) -> Bool)), (s : (Cart[Real, N]) -> Bool)), u)
+      #|  IMAGE((i : (Cart[Real, N]) -> Cart[Real, N]), frontier_of(subtopology(euclidean, (u : (Cart[Real, N]) -> Bool)), (s : (Cart[Real, N]) -> Bool)))
+      #|  frontier_of(subtopology(euclidean, (u : (Cart[Real, N]) -> Bool)), (s : (Cart[Real, N]) -> Bool))
+      #|  hull(affine, IMAGE((i : (Cart[Real, N]) -> Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))) == (u : (Cart[Real, N]) -> Bool)
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool)) == (u : (Cart[Real, N]) -> Bool)
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 pow((r : Real), 2) / pow(x, 2) * x == r * r / x
+      #|  (x : Cart[Real, N]) == vec(0)
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
+      #|  SUBSET(INTER((b : (_) -> Bool), (u : (_) -> Bool)), DIFF(u, (c : (_) -> Bool))) \226\134\146 SUBSET(c, u) && IN((x : _), c) \226\134\146 IN(x, DIFF(UNIV, b))
+      #|  IN((x : Cart[Real, N]), DIFF(UNIV, cball((vec(0), (r : Real)))))
+      #|  (x : Cart[Real, N])
+      #|  INTER(cball((vec(0), (r : Real))), (u : (Cart[Real, N]) -> Bool))
+      #|  DELETE((u : (Cart[Real, N]) -> Bool), vec(0))
+      #|  open_in(subtopology(euclidean, (u : (Cart[Real, N]) -> Bool)), IMAGE((i : (Cart[Real, N]) -> Cart[Real, N]), (s : (Cart[Real, N]) -> Bool)))
+      #|  IN(vec(0), (s : (Cart[Real, N]) -> Bool))
+      #|  !IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET((t : (_) -> Bool), s) \226\134\146 !IN(x, t)
+      #|  SUBSET((s : (Cart[Real, N]) -> Bool), DELETE((u : (Cart[Real, N]) -> Bool), vec(0)))
+      #|  IMAGE((i : (Cart[Real, N]) -> Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  real_of_num(0) < (r : Real)
+      #|  (x : Cart[Real, N])
+      #|  DELETE((u : (Cart[Real, N]) -> Bool), vec(0))
+      #|  (i : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (i : (Cart[Real, N]) -> Cart[Real, N]) == ((x : Cart[Real, N]) => op_pct(pow((r : Real), 2) / pow(norm(x), 2), x))
+      #|  (r : Real)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  DIFF((u : (Cart[Real, N]) -> Bool), closure_of(subtopology(euclidean, u), (s : (Cart[Real, N]) -> Bool)))
+      #|  affine((u : (Cart[Real, N]) -> Bool))
+      #|  (z : Cart[Real, N])
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) && !(s == u) \226\134\146 (\226\136\131 x : _, IN(x, u) && !IN(x, s))
+      #|  \226\136\131 z : Cart[Real, N], IN(z, (u : (Cart[Real, N]) -> Bool)) && !IN(z, closure_of(subtopology(euclidean, u), (s : (Cart[Real, N]) -> Bool)))
+      #|  bounded((s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, affine(u) && open_in(subtopology(euclidean, u), s) && !(s == {}) && !(closure_of(subtopology(euclidean, u), s) == u) \226\134\146 dimension(relative_frontier(s)) == aff_dim(u) - int_of_num(1)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (UNIV : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, (open : ((Cart[Real, N]) -> Bool) -> Bool)(u) && !(u == ({} : (Cart[Real, N]) -> Bool)) && !((closure : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(u) == (UNIV : (Cart[Real, N]) -> Bool)) \226\134\146 (dimension : ((Cart[Real, N]) -> Bool) -> Int)((frontier : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(u)) == int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) - int_of_num(1)
+      #|  relative_interior((s : (Cart[Real, N]) -> Bool))
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && bounded(s) && !(s == {}) \226\134\146 dimension(relative_frontier(s)) == aff_dim(s) - int_of_num(1)
+      #|  (a : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, \226\136\128 t : (Cart[Real, N]) -> Bool, real_of_num(0) < r && affine(t) && IN(a, t) \226\134\146 dimension(INTER(sphere((a, r)), t)) == aff_dim(t) - int_of_num(1)
+      #|  (s : (_) -> Bool) == INTER(s, UNIV)
+      #|  (r : Real) == real_of_num(0)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, (dimension : ((Cart[Real, N]) -> Bool) -> Int)((sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)((a, r))) == (if real_of_num(0) < r { int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) - int_of_num(1) } else { if r == real_of_num(0) { int_of_num(0) } else { -int_of_num(1) } })
+      #|  DIFF((u : (_) -> Bool), INTER(u, (s : (_) -> Bool))) == DIFF(u, s)
+      #|  closure_of(subtopology(euclidean, (u : (Cart[Real, N]) -> Bool)), (u2 : (Cart[Real, N]) -> Bool))
+      #|  DIFF((u : (Cart[Real, N]) -> Bool), closure_of(subtopology(euclidean, u), (u1 : (Cart[Real, N]) -> Bool)))
+      #|  subtopology(euclidean, (u : (Cart[Real, N]) -> Bool))
+      #|  dimension((d : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 x : Int, (d : Int) <= x && x < (n : Int) \226\134\146 !(d == n)
+      #|  closure_of(subtopology(euclidean, (u : (Cart[Real, N]) -> Bool)), (u2 : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 t : (_) -> Bool, SUBSET((s : (_) -> Bool), t) && SUBSET(t, (u : (_) -> Bool)) && !(t == u) \226\134\146 !(s == u)
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  open_in(subtopology(euclidean, (u : (Cart[Real, N]) -> Bool)), (v : (Cart[Real, N]) -> Bool))
+      #|  !((v : (Cart[Real, N]) -> Bool) == {})
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (v : (Cart[Real, N]) -> Bool) == DIFF((u : (Cart[Real, N]) -> Bool), closure((u1 : (Cart[Real, N]) -> Bool)))
+      #|  UNION((u1 : (Cart[Real, N]) -> Bool), (u2 : (Cart[Real, N]) -> Bool)) == DIFF((u : (Cart[Real, N]) -> Bool), (d : (Cart[Real, N]) -> Bool))
+      #|  SUBSET((u : (Cart[Real, N]) -> Bool), UNION(closure((u1 : (Cart[Real, N]) -> Bool)), closure((u2 : (Cart[Real, N]) -> Bool))))
+      #|  UNION((u1 : (_) -> Bool), (u2 : (_) -> Bool)) == DIFF((u : (_) -> Bool), (d : (_) -> Bool)) \226\134\146 INTER(u, u1) == u1 && INTER(u, u2) == u2
+      #|  (u2 : (Cart[Real, N]) -> Bool)
+      #|  (u1 : (Cart[Real, N]) -> Bool)
+      #|  (d : Int) <= (u : Int) - int_of_num(2) \226\134\146 (d' : Int) <= d \226\134\146 d' < u
+      #|  (p : Bool) \226\134\146 p == ((q : Bool) && (r : Bool)) \226\134\146 r
+      #|  INTER((u : (Cart[Real, N]) -> Bool), (d : (Cart[Real, N]) -> Bool))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  interior_of(subtopology(euclidean, (u : (Cart[Real, N]) -> Bool)), (d : (Cart[Real, N]) -> Bool)) == {}
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, affine(u) && dimension(s) <= aff_dim(u) - int_of_num(2) \226\134\146 connected(DIFF(u, s))
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  dimension(INTER(ball(((x : Cart[Real, N]), (r : Real))), INTER((u : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))))
+      #|  dimension((t : (Cart[Real, N]) -> Bool))
+      #|  IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), INTER(ball(((x : Cart[Real, N]), (r : Real))), INTER((u : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  hull(affine, INTER((u : (Cart[Real, N]) -> Bool), ball(((x : Cart[Real, N]), (r : Real))))) == hull(affine, u)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  INTER(ball(((x : Cart[Real, N]), (r : Real))), (u : (Cart[Real, N]) -> Bool))
+      #|  INTER(ball(((x : Cart[Real, N]), (r : Real))), (u : (Cart[Real, N]) -> Bool))
+      #|  (r : Real)
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  DIFF((u : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  (d : Int) <= (u : Int) - int_of_num(2) \226\134\146 (d' : Int) <= d \226\134\146 !(d' == u)
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 INTER(s, DIFF(u, (t : (_) -> Bool))) == DIFF(s, t)
+      #|  SUBSET((s : (Cart[Real, _]) -> Bool), (u : (Cart[Real, _]) -> Bool)) && DIFF(u, closure(DIFF(u, (t : (Cart[Real, _]) -> Bool)))) == {} \226\134\146 INTER(s, closure(DIFF(u, t))) == s
+      #|  DIFF((u : (Cart[Real, N]) -> Bool), closure(DIFF(u, (t : (Cart[Real, N]) -> Bool))))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  DIFF((u : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, affine(u) && open_in(subtopology(euclidean, u), s) && connected(s) && dimension(t) <= aff_dim(u) - int_of_num(2) \226\134\146 connected(DIFF(s, t))
+      #|  DIFF(hull(affine, (c : (Cart[Real, N]) -> Bool)), (t : (Cart[Real, N]) -> Bool))
+      #|  (d : Int) <= (u : Int) - int_of_num(2) \226\134\146 (d' : Int) <= d \226\134\146 !(d' == u)
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  SUBSET((c : (Cart[Real, _]) -> Bool), closure(c)) && SUBSET((s : (Cart[Real, _]) -> Bool), c) \226\134\146 SUBSET(s, INTER(s, closure(c)))
+      #|  closure((s : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  relative_interior((c : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  SUBSET(relative_interior((c : (Cart[Real, _]) -> Bool)), c) && SUBSET(c, (u : (Cart[Real, _]) -> Bool)) && DIFF(u, closure(DIFF(u, (t : (Cart[Real, _]) -> Bool)))) == {} \226\134\146 INTER(INTER(relative_interior(c), (s : (Cart[Real, _]) -> Bool)), closure(DIFF(u, t))) == INTER(relative_interior(c), s) && INTER(INTER(relative_interior(c), s), DIFF(u, t)) == DIFF(INTER(relative_interior(c), s), t)
+      #|  DIFF(hull(affine, (c : (Cart[Real, N]) -> Bool)), closure(DIFF(hull(affine, c), (t : (Cart[Real, N]) -> Bool))))
+      #|  hull(affine, (c : (Cart[Real, N]) -> Bool))
+      #|  hull(affine, (c : (Cart[Real, N]) -> Bool))
+      #|  DIFF(hull(affine, (c : (Cart[Real, N]) -> Bool)), (t : (Cart[Real, N]) -> Bool))
+      #|  INTER(relative_interior((c : (Cart[Real, N]) -> Bool)), (s : (Cart[Real, N]) -> Bool))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  relative_interior((c : (Cart[Real, N]) -> Bool))
+      #|  open_in(subtopology(euclidean, hull(affine, (c : (Cart[Real, N]) -> Bool))), INTER(relative_interior(c), (s : (Cart[Real, N]) -> Bool)))
+      #|  DIFF(INTER(relative_interior((c : (Cart[Real, N]) -> Bool)), (s : (Cart[Real, N]) -> Bool)), (t : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, convex(c) && open_in(subtopology(euclidean, c), s) && connected(s) && dimension(t) <= aff_dim(c) - int_of_num(2) \226\134\146 connected(DIFF(s, t))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, convex(s) && dimension(t) <= aff_dim(s) - int_of_num(2) \226\134\146 connected(DIFF(s, t))
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, hull(affine, s)), s) && connected(s) && dimension(t) <= aff_dim(s) - int_of_num(2) \226\134\146 connected(DIFF(s, t))
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (open : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (connected : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (dimension : ((Cart[Real, N]) -> Bool) -> Int)(t) <= int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) - int_of_num(2) \226\134\146 (connected : ((Cart[Real, N]) -> Bool) -> Bool)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (convex : ((Cart[Real, N]) -> Bool) -> Bool)(s) && !((interior : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s) == ({} : (Cart[Real, N]) -> Bool)) && (dimension : ((Cart[Real, N]) -> Bool) -> Int)(t) <= int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) - int_of_num(2) \226\134\146 (connected : ((Cart[Real, N]) -> Bool) -> Bool)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (dimension : ((Cart[Real, N]) -> Bool) -> Int)(s) <= int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) - int_of_num(2) \226\134\146 (connected : ((Cart[Real, N]) -> Bool) -> Bool)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), s))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) == (INTER(s, t) == s)
+      #|  DIFF((s : (_) -> Bool), (t : (_) -> Bool)) == INTER(s, DIFF(UNIV, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, open(s) && interior(t) == {} \226\134\146 SUBSET(s, closure(DIFF(s, t)))
+      #|  interior((t : (Cart[Real, N]) -> Bool)) == {}
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  closure(interior((s : (Cart[Real, N]) -> Bool)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  DIFF(interior((s : (Cart[Real, N]) -> Bool)), (t : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(s, (closure : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((interior : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s))) && (connected : ((Cart[Real, N]) -> Bool) -> Bool)((interior : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s)) && (dimension : ((Cart[Real, N]) -> Bool) -> Int)(t) <= int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) - int_of_num(2) \226\134\146 (connected : ((Cart[Real, N]) -> Bool) -> Bool)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, t))
+      #|  (AR : ((Cart[Real, N]) -> Bool) -> Bool)((s : (Cart[Real, N]) -> Bool)) == (\226\136\128 u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, \226\136\128 s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, homeomorphic(s, s') && closed_in(subtopology(euclidean, u), s') \226\134\146 retract_of(s', u))
+      #|  (ANR : ((Cart[Real, N]) -> Bool) -> Bool)((s : (Cart[Real, N]) -> Bool)) == (\226\136\128 u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, \226\136\128 s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, homeomorphic(s, s') && closed_in(subtopology(euclidean, u), s') \226\134\146 (\226\136\131 t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, open_in(subtopology(euclidean, u), t) && retract_of(s', t)))
+      #|  (ENR : ((Cart[Real, _]) -> Bool) -> Bool)((s : (Cart[Real, _]) -> Bool)) == (\226\136\131 u : (Cart[Real, _]) -> Bool, open(u) && retract_of(s, u))
+      #|  o((h : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N]), o((r : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, Finite_sum[N, Unit]]), (f' : (Cart[Real, M]) -> Cart[Real, Finite_sum[N, Unit]])))
+      #|  (r : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, Finite_sum[N, Unit]])
+      #|  (f' : (Cart[Real, M]) -> Cart[Real, Finite_sum[N, Unit]])
+      #|  (t : (Cart[Real, M]) -> Bool)
+      #|  (u : (Cart[Real, M]) -> Bool)
+      #|  (c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  o((g : (Cart[Real, N]) -> Cart[Real, Finite_sum[N, Unit]]), (f : (Cart[Real, M]) -> Cart[Real, N]))
+      #|  (h : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, Finite_sum[N, Unit]])
+      #|  (s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  ((x : Int) < (y : Int) + int_of_num(1)) == (x <= y)
+      #|  \226\136\131 c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, \226\136\131 s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, convex(c) && !(c == {}) && closed_in(subtopology(euclidean, c), s') && homeomorphic((s : (Cart[Real, N]) -> Bool), s')
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 u : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, AR(s) && continuous_on(f, t) && SUBSET(IMAGE(f, t), s) && closed_in(subtopology(euclidean, u), t) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], continuous_on(g, u) && SUBSET(IMAGE(g, u), s) && (\226\136\128 x : Cart[Real, M], IN(x, t) \226\134\146 g(x) == f(x)))
+      #|  o((g : (Cart[Real, N]) -> Cart[Real, M]), (h' : (Cart[Real, M]) -> Cart[Real, N]))
+      #|  (h' : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s' : (Cart[Real, M]) -> Bool)
+      #|  (u : (Cart[Real, M]) -> Bool)
+      #|  (h : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (h : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, M])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, M]) -> Bool, \226\136\128 s' : (Cart[Real, M]) -> Bool, AR(s) && homeomorphic(s, s') && closed_in(subtopology(euclidean, u), s') \226\134\146 retract_of(s', u)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 s' : (Cart[Real, M]) -> Bool, AR(s) && homeomorphic(s, s') && closed(s') \226\134\146 retract_of(s', UNIV)
+      #|  o((g : (Cart[Real, N]) -> Cart[Real, Finite_sum[N, Unit]]), (h' : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N]))
+      #|  (h' : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (h : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (h : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, Finite_sum[N, Unit]])
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (\226\136\128 f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N], \226\136\128 u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, continuous_on(f, t) && SUBSET(IMAGE(f, t), s) && closed_in(subtopology(euclidean, u), t) \226\134\146 (\226\136\131 g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N], continuous_on(g, u) && SUBSET(IMAGE(g, u), s) && (\226\136\128 x : Cart[Real, Finite_sum[N, Unit]], IN(x, t) \226\134\146 g(x) == f(x)))) \226\134\146 AR(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, AR(s) == (\226\136\128 f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N], \226\136\128 u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, continuous_on(f, t) && SUBSET(IMAGE(f, t), s) && closed_in(subtopology(euclidean, u), t) \226\134\146 (\226\136\131 g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N], continuous_on(g, u) && SUBSET(IMAGE(g, u), s) && (\226\136\128 x : Cart[Real, Finite_sum[N, Unit]], IN(x, t) \226\134\146 g(x) == f(x))))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, AR(s) && closed_in(subtopology(euclidean, u), s) \226\134\146 retract_of(s, u)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, homeomorphic(s, t) && AR(t) \226\134\146 AR(s)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, homeomorphic(s, t) \226\134\146 AR(s) == AR(t)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, AR(IMAGE((x : Cart[Real, N]) => a + x, s)) == AR(s)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 AR(IMAGE(f, s)) == AR(s)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, M])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 k : (Cart[Real, M]) -> Bool, homeomorphism((s, t), (f, g)) && SUBSET(k, s) \226\134\146 AR(IMAGE(f, k)) == AR(k)
+      #|  o((h : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N]), o((r : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, Finite_sum[N, Unit]]), (f' : (Cart[Real, M]) -> Cart[Real, Finite_sum[N, Unit]])))
+      #|  {(x : Cart[Real, M]) | IN(x, (u : (Cart[Real, M]) -> Bool)) && IN((f' : (Cart[Real, M]) -> Cart[Real, Finite_sum[N, Unit]])(x), (d : (Cart[Real, Finite_sum[N, Unit]]) -> Bool))}
+      #|  (r : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, Finite_sum[N, Unit]])
+      #|  (f' : (Cart[Real, M]) -> Cart[Real, Finite_sum[N, Unit]])
+      #|  (t : (Cart[Real, M]) -> Bool)
+      #|  (u : (Cart[Real, M]) -> Bool)
+      #|  (c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  o((g : (Cart[Real, N]) -> Cart[Real, Finite_sum[N, Unit]]), (f : (Cart[Real, M]) -> Cart[Real, N]))
+      #|  (h : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, Finite_sum[N, Unit]])
+      #|  (d : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  ((x : Int) < (y : Int) + int_of_num(1)) == (x <= y)
+      #|  \226\136\131 c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, \226\136\131 s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, convex(c) && !(c == {}) && closed_in(subtopology(euclidean, c), s') && homeomorphic((s : (Cart[Real, N]) -> Bool), s')
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 u : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, ANR(s) && continuous_on(f, t) && SUBSET(IMAGE(f, t), s) && closed_in(subtopology(euclidean, u), t) \226\134\146 (\226\136\131 v : (Cart[Real, M]) -> Bool, \226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], SUBSET(t, v) && open_in(subtopology(euclidean, u), v) && continuous_on(g, v) && SUBSET(IMAGE(g, v), s) && (\226\136\128 x : Cart[Real, M], IN(x, t) \226\134\146 g(x) == f(x)))
+      #|  o((g : (Cart[Real, N]) -> Cart[Real, M]), (h' : (Cart[Real, M]) -> Cart[Real, N]))
+      #|  (h' : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (v : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s' : (Cart[Real, M]) -> Bool)
+      #|  (u : (Cart[Real, M]) -> Bool)
+      #|  (h : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (h : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, M])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, M]) -> Bool, \226\136\128 s' : (Cart[Real, M]) -> Bool, ANR(s) && homeomorphic(s, s') && closed_in(subtopology(euclidean, u), s') \226\134\146 (\226\136\131 v : (Cart[Real, M]) -> Bool, open_in(subtopology(euclidean, u), v) && retract_of(s', v))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 s' : (Cart[Real, M]) -> Bool, ANR(s) && homeomorphic(s, s') && closed(s') \226\134\146 (\226\136\131 v : (Cart[Real, M]) -> Bool, open(v) && retract_of(s', v))
+      #|  o((g : (Cart[Real, N]) -> Cart[Real, Finite_sum[N, Unit]]), (h' : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N]))
+      #|  (h' : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (v : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (h : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (h : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, Finite_sum[N, Unit]])
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (\226\136\128 f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N], \226\136\128 u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, continuous_on(f, t) && SUBSET(IMAGE(f, t), s) && closed_in(subtopology(euclidean, u), t) \226\134\146 (\226\136\131 v : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, \226\136\131 g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N], SUBSET(t, v) && open_in(subtopology(euclidean, u), v) && continuous_on(g, v) && SUBSET(IMAGE(g, v), s) && (\226\136\128 x : Cart[Real, Finite_sum[N, Unit]], IN(x, t) \226\134\146 g(x) == f(x)))) \226\134\146 ANR(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ANR(s) == (\226\136\128 f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N], \226\136\128 u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, continuous_on(f, t) && SUBSET(IMAGE(f, t), s) && closed_in(subtopology(euclidean, u), t) \226\134\146 (\226\136\131 v : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, \226\136\131 g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N], SUBSET(t, v) && open_in(subtopology(euclidean, u), v) && continuous_on(g, v) && SUBSET(IMAGE(g, v), s) && (\226\136\128 x : Cart[Real, Finite_sum[N, Unit]], IN(x, t) \226\134\146 g(x) == f(x))))
+      #|  DIFF((u : (Cart[Real, M]) -> Bool), (w : (Cart[Real, M]) -> Bool))
+      #|  (w : (Cart[Real, M]) -> Bool)
+      #|  (v : (Cart[Real, M]) -> Bool)
+      #|  (u : (Cart[Real, M]) -> Bool)
+      #|  DIFF((u : (Cart[Real, M]) -> Bool), (z : (Cart[Real, M]) -> Bool))
+      #|  (s' : (Cart[Real, M]) -> Bool)
+      #|  \226\136\131 z : (Cart[Real, M]) -> Bool, open_in(subtopology(euclidean, (u : (Cart[Real, M]) -> Bool)), z) && retract_of((s' : (Cart[Real, M]) -> Bool), z)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, M]) -> Bool, \226\136\128 s' : (Cart[Real, M]) -> Bool, ANR(s) && homeomorphic(s, s') && closed_in(subtopology(euclidean, u), s') \226\134\146 (\226\136\131 v : (Cart[Real, M]) -> Bool, \226\136\131 w : (Cart[Real, M]) -> Bool, open_in(subtopology(euclidean, u), v) && closed_in(subtopology(euclidean, u), w) && SUBSET(s', v) && SUBSET(v, w) && retract_of(s', w))
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  DIFF((u : (Cart[Real, M]) -> Bool), (z : (Cart[Real, M]) -> Bool))
+      #|  (z : (Cart[Real, M]) -> Bool)
+      #|  (w : (Cart[Real, M]) -> Bool)
+      #|  (u : (Cart[Real, M]) -> Bool)
+      #|  DIFF((u : (Cart[Real, M]) -> Bool), (v : (Cart[Real, M]) -> Bool))
+      #|  (t : (Cart[Real, M]) -> Bool)
+      #|  \226\136\131 v : (Cart[Real, M]) -> Bool, \226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], SUBSET((t : (Cart[Real, M]) -> Bool), v) && open_in(subtopology(euclidean, (u : (Cart[Real, M]) -> Bool)), v) && continuous_on(g, v) && SUBSET(IMAGE(g, v), (s : (Cart[Real, N]) -> Bool)) && (\226\136\128 x : Cart[Real, M], IN(x, t) \226\134\146 g(x) == (f : (Cart[Real, M]) -> Cart[Real, N])(x))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 u : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, ANR(s) && continuous_on(f, t) && SUBSET(IMAGE(f, t), s) && closed_in(subtopology(euclidean, u), t) \226\134\146 (\226\136\131 v : (Cart[Real, M]) -> Bool, \226\136\131 w : (Cart[Real, M]) -> Bool, \226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], open_in(subtopology(euclidean, u), v) && closed_in(subtopology(euclidean, u), w) && SUBSET(t, v) && SUBSET(v, w) && continuous_on(g, w) && SUBSET(IMAGE(g, w), s) && (\226\136\128 x : Cart[Real, M], IN(x, t) \226\134\146 g(x) == f(x)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, ANR(s) && closed_in(subtopology(euclidean, u), s) \226\134\146 (\226\136\131 v : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, u), v) && retract_of(s, v))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, ANR(s) && closed_in(subtopology(euclidean, u), s) \226\134\146 (\226\136\131 v : (Cart[Real, N]) -> Bool, \226\136\131 w : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, u), v) && closed_in(subtopology(euclidean, u), w) && SUBSET(s, v) && SUBSET(v, w) && retract_of(s, w))
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, homeomorphic(s, t) && ANR(t) \226\134\146 ANR(s)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, homeomorphic(s, t) \226\134\146 ANR(s) == ANR(t)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, ANR(IMAGE((x : Cart[Real, N]) => a + x, s)) == ANR(s)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 ANR(IMAGE(f, s)) == ANR(s)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, M])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 k : (Cart[Real, M]) -> Bool, homeomorphism((s, t), (f, g)) && SUBSET(k, s) \226\134\146 ANR(IMAGE(f, k)) == ANR(k)
+      #|  \226\136\128 x : Cart[Real, M], IN(x, (t : (Cart[Real, M]) -> Bool)) \226\134\146 IN(x, (c : (Cart[Real, M]) -> Bool))
+      #|  \226\136\128 x : Cart[Real, M], IN(x, (u : (Cart[Real, M]) -> Bool)) \226\134\146 IN(x, (s : (Cart[Real, M]) -> Bool))
+      #|  SUBSET(IMAGE((h : (_) -> _), (u2 : (_) -> Bool)), (v : (_) -> Bool)) \226\134\146 SUBSET((u : (_) -> Bool), u2) \226\134\146 SUBSET(IMAGE(h, u), v)
+      #|  (h : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N])
+      #|  (u : (Cart[Real, M]) -> Bool)
+      #|  (u2 : (Cart[Real, Finite_sum[Unit, M]]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
+      #|  (h : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N])
+      #|  (u2 : (Cart[Real, Finite_sum[Unit, M]]) -> Bool)
+      #|  (x : Cart[Real, Unit]) == vec(1)
+      #|  (x : Cart[Real, Unit])
+      #|  (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)((interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))]), (s : (Cart[Real, M]) -> Bool))
+      #|  {(a : _), (b : _)} == UNION({a}, {b})
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  (UNION : ((Cart[Real, Finite_sum[Unit, M]]) -> Bool, (Cart[Real, Finite_sum[Unit, M]]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)((PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)((interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))]), (c : (Cart[Real, M]) -> Bool)), (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)({(vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1)}, (s : (Cart[Real, M]) -> Bool)))
+      #|  (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)((interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))]), (s : (Cart[Real, M]) -> Bool))
+      #|  (fg : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N])
+      #|  (fg : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N]) == ((x : Cart[Real, Finite_sum[Unit, M]]) => if fstcart(x) == vec(1) { (g : (Cart[Real, M]) -> Cart[Real, N])(sndcart(x)) } else { (f : (Cart[Real, M]) -> Cart[Real, N])(sndcart(x)) })
+      #|  closed_in(subtopology(euclidean, (s : (Cart[Real, M]) -> Bool)), (c : (Cart[Real, M]) -> Bool))
+      #|  (c : (Cart[Real, M]) -> Bool) == {(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && (f : (Cart[Real, M]) -> Cart[Real, N])(x) == (g : (Cart[Real, M]) -> Cart[Real, N])(x)}
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 v : (Cart[Real, N]) -> Bool, ANR(v) && continuous_on(f, s) && SUBSET(IMAGE(f, s), v) && continuous_on(g, s) && SUBSET(IMAGE(g, s), v) && SUBSET(t, s) && (\226\136\128 x : Cart[Real, M], IN(x, t) \226\134\146 f(x) == g(x)) \226\134\146 (\226\136\131 u : (Cart[Real, M]) -> Bool, open_in(subtopology(euclidean, s), u) && SUBSET(t, u) && homotopic_with((h : (Cart[Real, M]) -> Cart[Real, N]) => \226\136\128 x : Cart[Real, M], IN(x, t) \226\134\146 h(x) == f(x), (subtopology(euclidean, u), subtopology(euclidean, v)), f, g))
+      #|  SUBSET((W : (Cart[Real, N]) -> Bool), (K : (Cart[Real, N]) -> Bool)) && SUBSET((Y : (Cart[Real, N]) -> Bool), W)
+      #|  o((f : (Cart[Real, M]) -> Cart[Real, N]), o((r : (Cart[Real, M]) -> Cart[Real, M]), (h : (Cart[Real, N]) -> Cart[Real, M])))
+      #|  (r : (Cart[Real, M]) -> Cart[Real, M])
+      #|  (UNIV : (Cart[Real, M]) -> Bool)
+      #|  (W : (Cart[Real, N]) -> Bool)
+      #|  {(x : Cart[Real, N]) | IN(x, (W : (Cart[Real, N]) -> Bool)) && IN((h : (Cart[Real, N]) -> Cart[Real, M])(x), (U : (Cart[Real, M]) -> Bool))}
+      #|  (h : (Cart[Real, N]) -> Cart[Real, M])
+      #|  (Y : (Cart[Real, N]) -> Bool)
+      #|  (W : (Cart[Real, N]) -> Bool)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, M])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, M])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  INTER((K : (Cart[Real, N]) -> Bool), (W : (Cart[Real, N]) -> Bool))
+      #|  (W : (Cart[Real, N]) -> Bool)
+      #|  \226\136\131 W : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, (K : (Cart[Real, N]) -> Bool)), W) && closed_in(subtopology(euclidean, W), (Y : (Cart[Real, N]) -> Bool))
+      #|  locally(compact, (Y : (Cart[Real, N]) -> Bool))
+      #|  (U : (Cart[Real, M]) -> Bool)
+      #|  (K : (Cart[Real, N]) -> Bool)
+      #|  (Y : (Cart[Real, N]) -> Bool)
+      #|  (X : (Cart[Real, M]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 s' : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, ENR(s) && homeomorphic(s, s') && SUBSET(s', u) \226\134\146 (\226\136\131 t' : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, u), t') && retract_of(s', t'))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 s' : (Cart[Real, N]) -> Bool, ENR(s) && homeomorphic(s, s') \226\134\146 (\226\136\131 t' : (Cart[Real, N]) -> Bool, open(t') && retract_of(s', t'))
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, homeomorphic(s, t) \226\134\146 ENR(s) == ENR(t)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, ENR(IMAGE((x : Cart[Real, N]) => a + x, s)) == ENR(s)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 ENR(IMAGE(f, s)) == ENR(s)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, M])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 k : (Cart[Real, M]) -> Bool, homeomorphism((s, t), (f, g)) && SUBSET(k, s) \226\134\146 ENR(IMAGE(f, k)) == ENR(k)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, AR(s) \226\134\146 ANR(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ENR(s) \226\134\146 ANR(s)
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (UNIV : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  \226\136\131 t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, closed(t) && homeomorphic((s : (Cart[Real, N]) -> Bool), t)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ENR(s) == (ANR(s) && locally(compact, s))
+      #|  (w : (Cart[Real, Finite_sum[N, Unit]]) -> Bool) == UNION(DIFF(w, (v : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)), DIFF(w, (v' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)))
+      #|  (x : Cart[Real, Finite_sum[N, Unit]]) => if IN(x, DIFF((w : (Cart[Real, Finite_sum[N, Unit]]) -> Bool), (v : (Cart[Real, Finite_sum[N, Unit]]) -> Bool))) { (a : Cart[Real, N]) } else { (h : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N])(pastecart((e : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, Unit])(x), (g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])(x))) }
+      #|  (e : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, Unit])
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (w : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  DIFF((w : (Cart[Real, Finite_sum[N, Unit]]) -> Bool), (v : (Cart[Real, Finite_sum[N, Unit]]) -> Bool))
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (v' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (v : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (w : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  DIFF((w : (Cart[Real, Finite_sum[N, Unit]]) -> Bool), (u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool))
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (w : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (w : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (h : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  ((x : Int) < (y : Int) + int_of_num(1)) == (x <= y)
+      #|  \226\136\131 c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, \226\136\131 s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, convex(c) && !(c == {}) && closed_in(subtopology(euclidean, c), s') && homeomorphic((s : (Cart[Real, N]) -> Bool), s')
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, AR(s) == (ANR(s) && contractible(s) && !(s == {}))
+      #|  o((r : (Cart[Real, N]) -> Cart[Real, N]), (g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N]))
+      #|  (g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, ANR(t) && retract_of(s, t) \226\134\146 ANR(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, AR(t) && retract_of(s, t) \226\134\146 AR(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, ENR(t) && retract_of(s, t) \226\134\146 ENR(s)
+      #|  (UNIV : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, retract_of(s, UNIV) == (AR(s) && closed(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (compact(s) && AR(s)) == (compact(s) && retract_of(s, UNIV))
+      #|  !(AR : ((Cart[Real, N]) -> Bool) -> Bool)(({} : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, AR(s) \226\134\146 !(s == {})
+      #|  (ENR : ((Cart[Real, _]) -> Bool) -> Bool)(({} : (Cart[Real, _]) -> Bool))
+      #|  (ANR : ((Cart[Real, _]) -> Bool) -> Bool)(({} : (Cart[Real, _]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && !(s == {}) \226\134\146 AR(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) \226\134\146 ANR(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, is_interval(s) \226\134\146 ENR(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, closed(s) && convex(s) \226\134\146 ENR(s)
+      #|  (AR : ((Cart[Real, N]) -> Bool) -> Bool)((UNIV : (Cart[Real, N]) -> Bool))
+      #|  (ANR : ((Cart[Real, N]) -> Bool) -> Bool)((UNIV : (Cart[Real, N]) -> Bool))
+      #|  (ENR : ((Cart[Real, N]) -> Bool) -> Bool)((UNIV : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 a : Cart[Real, N], AR({a})
+      #|  \226\136\128 a : Cart[Real, N], ANR({a})
+      #|  \226\136\128 a : Cart[Real, N], ENR({a})
+      #|  (w : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, (w : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) && IN((g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])(x), (s : (Cart[Real, N]) -> Bool))}
+      #|  (w : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, t), s) && ANR(t) \226\134\146 ANR(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, t), s) && ENR(t) \226\134\146 ENR(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, retract_of(s, t) && open_in(subtopology(euclidean, u), t) && ANR(u) \226\134\146 ANR(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, retract_of(s, t) && open_in(subtopology(euclidean, u), t) && ENR(u) \226\134\146 ENR(s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, ANR(s) \226\134\146 ANR(relative_interior(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], ANR(s) \226\134\146 ANR(DELETE(s, a))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, ENR(s) \226\134\146 ENR(relative_interior(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], ENR(s) \226\134\146 ENR(DELETE(s, a))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, open(s) \226\134\146 ENR(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, open(s) \226\134\146 ANR(s)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, ANR(ball((a, r)))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, ENR(ball((a, r)))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, AR(ball((a, r))) == (real_of_num(0) < r)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, ANR(cball((a, r)))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, ENR(cball((a, r)))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, AR(cball((a, r))) == (real_of_num(0) <= r)
+      #|  (\226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], ANR(interval([(a, b)]))) && (\226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], ANR(interval((a, b))))
+      #|  (\226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], ENR(interval([(a, b)]))) && (\226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], ENR(interval((a, b))))
+      #|  (\226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], AR(interval([(a, b)])) == !(interval([(a, b)]) == {})) && (\226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], AR(interval((a, b))) == !(interval((a, b)) == {}))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, ANR(interior(s))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, ENR(interior(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, AR(s) \226\134\146 contractible(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, AR(s) \226\134\146 path_connected(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, AR(s) \226\134\146 connected(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ENR(s) \226\134\146 locally(compact, s)
+      #|  (s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  ((x : Int) < (y : Int) + int_of_num(1)) == (x <= y)
+      #|  \226\136\131 c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, \226\136\131 s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, convex(c) && !(c == {}) && closed_in(subtopology(euclidean, c), s') && homeomorphic((s : (Cart[Real, N]) -> Bool), s')
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ANR(s) \226\134\146 locally(path_connected, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ANR(s) \226\134\146 locally(connected, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, AR(s) \226\134\146 locally(path_connected, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, AR(s) \226\134\146 locally(connected, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ENR(s) \226\134\146 locally(path_connected, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ENR(s) \226\134\146 locally(connected, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ANR(s) \226\134\146 COUNTABLE(components(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, ANR(s) \226\134\146 COUNTABLE({connected_component(s, (x : Cart[Real, N])) | IN(x, t)})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, ANR(s) \226\134\146 COUNTABLE({path_component(s, (x : Cart[Real, N])) | IN(x, t)})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ANR(s) && compact(s) \226\134\146 FINITE(components(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ENR(s) && compact(s) \226\134\146 FINITE(components(s))
+      #|  (x : Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) => pastecart((g : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Cart[Real, M])(x), (h : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Cart[Real, N])(x))
+      #|  INTER((w1 : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Bool), (w2 : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Bool))
+      #|  (g : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Cart[Real, M])
+      #|  (w1 : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Bool)
+      #|  (h : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Cart[Real, N])
+      #|  (w2 : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Bool)
+      #|  (u : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Bool)
+      #|  o(sndcart, (f : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Cart[Real, Finite_sum[M, N]]))
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (c : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Bool)
+      #|  (u : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Bool)
+      #|  o(fstcart, (f : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Cart[Real, Finite_sum[M, N]]))
+      #|  (c : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Bool)
+      #|  (u : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Bool)
+      #|  (f : (Cart[Real, Finite_sum[Finite_sum[M, N], Unit]]) -> Cart[Real, Finite_sum[M, N]])
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, ANR(s) && ANR(t) \226\134\146 ANR(PCROSS(s, t))
+      #|  (x : Cart[Real, Finite_sum[M, N]]) => pastecart((a : Cart[Real, M]), sndcart(x))
+      #|  (x : Cart[Real, Finite_sum[M, N]]) => pastecart(fstcart(x), (b : Cart[Real, N]))
+      #|  ANR(PCROSS({(a : Cart[Real, M])}, (t : (Cart[Real, N]) -> Bool)))
+      #|  (a : Cart[Real, M])
+      #|  !((s : (Cart[Real, M]) -> Bool) == {})
+      #|  ANR(PCROSS((s : (Cart[Real, M]) -> Bool), {(b : Cart[Real, N])}))
+      #|  (b : Cart[Real, N])
+      #|  !((t : (Cart[Real, N]) -> Bool) == {})
+      #|  (t : (Cart[Real, N]) -> Bool) == {}
+      #|  (s : (Cart[Real, M]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, ANR(PCROSS(s, t)) == (s == {} || t == {} || ANR(s) && ANR(t))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, AR(s) && AR(t) \226\134\146 AR(PCROSS(s, t))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, ENR(s) && ENR(t) \226\134\146 ENR(PCROSS(s, t))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, ENR(PCROSS(s, t)) == (s == {} || t == {} || ENR(s) && ENR(t))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, AR(PCROSS(s, t)) == (AR(s) && AR(t) && !(s == {}) && !(t == {}))
+      #|  ((p : Bool) && !p || (q : Bool) && p) == (p && q)
+      #|  (u : (Cart[Real, N]) -> Bool) == UNION((s' : (Cart[Real, N]) -> Bool), (t' : (Cart[Real, N]) -> Bool))
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N]))
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N]) => if IN(x, (s' : (Cart[Real, N]) -> Bool)) { (g : (Cart[Real, N]) -> Cart[Real, N])(x) } else { (h : (Cart[Real, N]) -> Cart[Real, N])(x) }
+      #|  \226\136\131 h : (Cart[Real, N]) -> Cart[Real, N], continuous_on(h, (u : (Cart[Real, N]) -> Bool)) && SUBSET(IMAGE(h, u), (t : (Cart[Real, N]) -> Bool)) && (\226\136\128 x : Cart[Real, N], IN(x, UNION((w : (Cart[Real, N]) -> Bool), t)) \226\134\146 h(x) == (r : (Cart[Real, N]) -> Cart[Real, N])(x))
+      #|  \226\136\131 g : (Cart[Real, N]) -> Cart[Real, N], continuous_on(g, (u : (Cart[Real, N]) -> Bool)) && SUBSET(IMAGE(g, u), (s : (Cart[Real, N]) -> Bool)) && (\226\136\128 x : Cart[Real, N], IN(x, UNION((w : (Cart[Real, N]) -> Bool), s)) \226\134\146 g(x) == (r : (Cart[Real, N]) -> Cart[Real, N])(x))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  continuous_on((r : (Cart[Real, N]) -> Cart[Real, N]), UNION((w : (Cart[Real, N]) -> Bool), UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))))
+      #|  SUBSET(IMAGE((r : (Cart[Real, N]) -> Cart[Real, N]), UNION((w : (Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool))), s) && SUBSET(IMAGE(r, UNION(w, (t : (Cart[Real, N]) -> Bool))), t)
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N]) == ((x : Cart[Real, N]) => if IN(x, (w : (Cart[Real, N]) -> Bool)) { (r0 : (Cart[Real, N]) -> Cart[Real, N])(x) } else { x })
+      #|  closed_in(subtopology(euclidean, (u : (Cart[Real, N]) -> Bool)), (w : (Cart[Real, N]) -> Bool))
+      #|  INTER((s' : (Cart[Real, N]) -> Bool), (t' : (Cart[Real, N]) -> Bool)) == (w : (Cart[Real, N]) -> Bool)
+      #|  !((s : (_) -> Bool) == {}) && (p : Bool) == (s == {} || IN((x : _), s)) \226\134\146 p \226\134\146 IN(x, s)
+      #|  (real_of_num(0) == setdist((p : ((Cart[Real, _]) -> Bool, (Cart[Real, _]) -> Bool)))) == (setdist(p) == real_of_num(0))
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (w : (Cart[Real, N]) -> Bool)) \226\134\146 IN(x, (s : (Cart[Real, N]) -> Bool)) == IN(x, (t : (Cart[Real, N]) -> Bool))
+      #|  (r0 : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  INTER((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  retract_of(INTER((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)), (w : (Cart[Real, N]) -> Bool))
+      #|  SUBSET((s : (Cart[Real, N]) -> Bool), (s' : (Cart[Real, N]) -> Bool)) && SUBSET((t : (Cart[Real, N]) -> Bool), (t' : (Cart[Real, N]) -> Bool))
+      #|  ((a : Real) <= drop(lift((x : Real)))) == IN(lift(x), {(x : Cart[Real, Unit]) | a <= drop(x)})
+      #|  closed_in(subtopology(euclidean, (u : (Cart[Real, N]) -> Bool)), (s' : (Cart[Real, N]) -> Bool)) && closed_in(subtopology(euclidean, u), (t' : (Cart[Real, N]) -> Bool))
+      #|  (w : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | IN(x, (u : (Cart[Real, N]) -> Bool)) && setdist(({x}, (s : (Cart[Real, N]) -> Bool))) == setdist(({x}, (t : (Cart[Real, N]) -> Bool)))}
+      #|  (t' : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | IN(x, (u : (Cart[Real, N]) -> Bool)) && setdist(({x}, (t : (Cart[Real, N]) -> Bool))) <= setdist(({x}, (s : (Cart[Real, N]) -> Bool)))}
+      #|  (s' : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | IN(x, (u : (Cart[Real, N]) -> Bool)) && setdist(({x}, (s : (Cart[Real, N]) -> Bool))) <= setdist(({x}, (t : (Cart[Real, N]) -> Bool)))}
+      #|  SUBSET((s : (Cart[Real, N]) -> Bool), (u : (Cart[Real, N]) -> Bool)) && SUBSET((t : (Cart[Real, N]) -> Bool), u)
+      #|  INTER((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, u), s) && closed_in(subtopology(euclidean, u), t) && AR(s) && AR(t) && AR(INTER(s, t)) \226\134\146 retract_of(UNION(s, t), u)
+      #|  (g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, Finite_sum[N, Unit]])
+      #|  AR(INTER((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)))
+      #|  AR((t : (Cart[Real, N]) -> Bool))
+      #|  AR((s : (Cart[Real, N]) -> Bool))
+      #|  UNION({(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, (c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) && IN((g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])(x), (s : (Cart[Real, N]) -> Bool))}, {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, c) && IN(g(x), (t : (Cart[Real, N]) -> Bool))}) == c
+      #|  UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  (c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  closed_in(subtopology(euclidean, (u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)), {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, (c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) && IN((g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])(x), (s : (Cart[Real, N]) -> Bool))}) && closed_in(subtopology(euclidean, u), {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, c) && IN(g(x), (t : (Cart[Real, N]) -> Bool))})
+      #|  (g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, Finite_sum[N, Unit]])
+      #|  (c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, UNION(s, t)), s) && closed_in(subtopology(euclidean, UNION(s, t)), t) && AR(s) && AR(t) && AR(INTER(s, t)) \226\134\146 AR(UNION(s, t))
+      #|  IN((x : Cart[Real, M]), (s1 : (Cart[Real, M]) -> Bool)) || IN(x, (s2 : (Cart[Real, M]) -> Bool))
+      #|  (x : Cart[Real, M])
+      #|  INTER((n : (_) -> Bool), INTER((s : (_) -> Bool), n)) == INTER(n, s)
+      #|  (f' : (Cart[Real, M]) -> Cart[Real, N])
+      #|  IN((x : Cart[Real, M]), (v : (Cart[Real, M]) -> Bool))
+      #|  (x : Cart[Real, M])
+      #|  ((m : Num) < (n : Num) && (m == 0 || m == 1) && (n == 0 || n == 1)) == (m == 0 && n == 1)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 INTER(u, s) == s
+      #|  (euclidean : Topology[Cart[Real, _]])
+      #|  (closed_in((a : Topology[_]), (b : (_) -> Bool)) && (c : Bool)) == !(closed_in(a, b) \226\134\146 !c)
+      #|  {0, 1}
+      #|  (i : Num) => if i == 0 { INTER((s1 : (Cart[Real, M]) -> Bool), (n : (Cart[Real, M]) -> Bool)) } else { INTER((s2 : (Cart[Real, M]) -> Bool), n) }
+      #|  (i : Num) => if i == 0 { (g1 : (Cart[Real, M]) -> Cart[Real, N]) } else { (g2 : (Cart[Real, M]) -> Cart[Real, N]) }
+      #|  (euclidean : Topology[Cart[Real, N]])
+      #|  subtopology(euclidean, (n : (Cart[Real, M]) -> Bool))
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (n : (Cart[Real, M]) -> Bool)
+      #|  (n : (Cart[Real, M]) -> Bool) == DIFF((s : (Cart[Real, M]) -> Bool), UNION((k : (Cart[Real, M]) -> Bool), UNION((w1 : (Cart[Real, M]) -> Bool), (w2 : (Cart[Real, M]) -> Bool))))
+      #|  INTER((t : (Cart[Real, M]) -> Bool), (w1 : (Cart[Real, M]) -> Bool)) == {} && INTER((v' : (Cart[Real, M]) -> Bool), w1) == {} && INTER(t, (w2 : (Cart[Real, M]) -> Bool)) == {} && INTER(v', w2) == {}
+      #|  closed_in(subtopology(euclidean, (s : (Cart[Real, M]) -> Bool)), (w1 : (Cart[Real, M]) -> Bool)) && closed_in(subtopology(euclidean, s), (w2 : (Cart[Real, M]) -> Bool))
+      #|  (w2 : (Cart[Real, M]) -> Bool) == DIFF((s2 : (Cart[Real, M]) -> Bool), (v2 : (Cart[Real, M]) -> Bool))
+      #|  (w1 : (Cart[Real, M]) -> Bool) == DIFF((s1 : (Cart[Real, M]) -> Bool), (v1 : (Cart[Real, M]) -> Bool))
+      #|  (g2 : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (v2 : (Cart[Real, M]) -> Bool)
+      #|  (u2 : (Cart[Real, N]) -> Bool)
+      #|  UNION(INTER((t : (Cart[Real, M]) -> Bool), (s2 : (Cart[Real, M]) -> Bool)), (v' : (Cart[Real, M]) -> Bool))
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (f2 : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (g1 : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (v1 : (Cart[Real, M]) -> Bool)
+      #|  (u1 : (Cart[Real, N]) -> Bool)
+      #|  UNION(INTER((t : (Cart[Real, M]) -> Bool), (s1 : (Cart[Real, M]) -> Bool)), (v' : (Cart[Real, M]) -> Bool))
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (f1 : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (f2 : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (f1 : (Cart[Real, M]) -> Cart[Real, N])
+      #|  INTER(UNION((s : (_) -> Bool), (t : (_) -> Bool)), s) == s && INTER(UNION(s, t), t) == t
+      #|  ((m : Num) < (n : Num) && (m == 0 || m == 1) && (n == 0 || n == 1)) == (m == 0 && n == 1)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  INTER((u : (_) -> Bool), (s : (_) -> Bool)) == s && closed_in(subtopology((top : Topology[_]), u), INTER(u, s)) \226\134\146 closed_in(subtopology(top, u), s)
+      #|  INTER(UNION((s : (_) -> Bool), (t : (_) -> Bool)), t) == t
+      #|  (((p : Bool) && (q : Bool)) && (r : Bool)) == (q && p && r)
+      #|  INTER(UNION((s : (_) -> Bool), (t : (_) -> Bool)), s) == s && INTER(UNION(s, t), t) == t
+      #|  ((m : Num) < (n : Num) && (m == 0 || m == 1) && (n == 0 || n == 1)) == (m == 0 && n == 1)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  INTER((u : (_) -> Bool), (s : (_) -> Bool)) == s && closed_in(subtopology((top : Topology[_]), u), INTER(u, s)) \226\134\146 closed_in(subtopology(top, u), s)
+      #|  INTER(UNION((s : (_) -> Bool), (t : (_) -> Bool)), t) == t
+      #|  (((p : Bool) && (q : Bool)) && (r : Bool)) == (q && p && r)
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 INTER(u, s) == s
+      #|  (euclidean : Topology[Cart[Real, _]])
+      #|  (closed_in((a : Topology[_]), (b : (_) -> Bool)) && (c : Bool)) == !(closed_in(a, b) \226\134\146 !c)
+      #|  {0, 1}
+      #|  (i : Num) => if i == 0 { INTER((t : (Cart[Real, M]) -> Bool), (s1 : (Cart[Real, M]) -> Bool)) } else { (v' : (Cart[Real, M]) -> Bool) }
+      #|  (i : Num) => if i == 0 { (f : (Cart[Real, M]) -> Cart[Real, N]) } else { (h : (Cart[Real, M]) -> Cart[Real, N]) }
+      #|  (euclidean : Topology[Cart[Real, N]])
+      #|  subtopology(euclidean, UNION(INTER((t : (Cart[Real, M]) -> Bool), (s1 : (Cart[Real, M]) -> Bool)), (v' : (Cart[Real, M]) -> Bool)))
+      #|  {0, 1}
+      #|  (i : Num) => if i == 0 { INTER((t : (Cart[Real, M]) -> Bool), (s2 : (Cart[Real, M]) -> Bool)) } else { (v' : (Cart[Real, M]) -> Bool) }
+      #|  (i : Num) => if i == 0 { (f : (Cart[Real, M]) -> Cart[Real, N]) } else { (h : (Cart[Real, M]) -> Cart[Real, N]) }
+      #|  (euclidean : Topology[Cart[Real, N]])
+      #|  subtopology(euclidean, UNION(INTER((t : (Cart[Real, M]) -> Bool), (s2 : (Cart[Real, M]) -> Bool)), (v' : (Cart[Real, M]) -> Bool)))
+      #|  INTER((k : (Cart[Real, M]) -> Bool), (t : (Cart[Real, M]) -> Bool)) == {}
+      #|  closed_in(subtopology(euclidean, (s : (Cart[Real, M]) -> Bool)), (k : (Cart[Real, M]) -> Bool))
+      #|  closed_in(subtopology(euclidean, INTER((s1 : (Cart[Real, M]) -> Bool), (s2 : (Cart[Real, M]) -> Bool))), (k : (Cart[Real, M]) -> Bool))
+      #|  (k : (Cart[Real, M]) -> Bool) == DIFF(INTER((s1 : (Cart[Real, M]) -> Bool), (s2 : (Cart[Real, M]) -> Bool)), (v : (Cart[Real, M]) -> Bool))
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  DIFF((s : (_) -> Bool), (t : (_) -> Bool)) == DIFF(s, INTER(s, t))
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  DIFF(INTER((s1 : (Cart[Real, M]) -> Bool), (s2 : (Cart[Real, M]) -> Bool)), (w' : (Cart[Real, M]) -> Bool))
+      #|  INTER(INTER((s1 : (Cart[Real, M]) -> Bool), (s2 : (Cart[Real, M]) -> Bool)), (w : (Cart[Real, M]) -> Bool))
+      #|  (w' : (Cart[Real, M]) -> Bool)
+      #|  (w : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  DIFF((s : (Cart[Real, M]) -> Bool), (v : (Cart[Real, M]) -> Bool))
+      #|  INTER((t : (Cart[Real, M]) -> Bool), INTER((s1 : (Cart[Real, M]) -> Bool), (s2 : (Cart[Real, M]) -> Bool)))
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (v : (Cart[Real, M]) -> Bool)
+      #|  INTER((u1 : (Cart[Real, N]) -> Bool), (u2 : (Cart[Real, N]) -> Bool))
+      #|  INTER((t : (Cart[Real, M]) -> Bool), INTER((s1 : (Cart[Real, M]) -> Bool), (s2 : (Cart[Real, M]) -> Bool)))
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\131 v : (Cart[Real, M]) -> Bool, \226\136\131 v' : (Cart[Real, M]) -> Bool, \226\136\131 h : (Cart[Real, M]) -> Cart[Real, N], SUBSET(INTER((t : (Cart[Real, M]) -> Bool), INTER((s1 : (Cart[Real, M]) -> Bool), (s2 : (Cart[Real, M]) -> Bool))), v) && SUBSET(v, v') && open_in(subtopology(euclidean, INTER(s1, s2)), v) && closed_in(subtopology(euclidean, INTER(s1, s2)), v') && continuous_on(h, v') && SUBSET(IMAGE(h, v'), INTER((u1 : (Cart[Real, N]) -> Bool), (u2 : (Cart[Real, N]) -> Bool))) && (\226\136\128 x : Cart[Real, M], IN(x, INTER(v', t)) \226\134\146 h(x) == (f : (Cart[Real, M]) -> Cart[Real, N])(x))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 s1 : (Cart[Real, M]) -> Bool, \226\136\128 s2 : (Cart[Real, M]) -> Bool, \226\136\128 u1 : (Cart[Real, N]) -> Bool, \226\136\128 u2 : (Cart[Real, N]) -> Bool, continuous_on(f, t) && SUBSET(IMAGE(f, t), u) && ANR(u1) && ANR(u2) && ANR(INTER(u1, u2)) && UNION(u1, u2) == u && closed_in(subtopology(euclidean, s), t) && closed_in(subtopology(euclidean, s), s1) && closed_in(subtopology(euclidean, s), s2) && UNION(s1, s2) == s && SUBSET(IMAGE(f, INTER(t, s1)), u1) && SUBSET(IMAGE(f, INTER(t, s2)), u2) \226\134\146 (\226\136\131 v : (Cart[Real, M]) -> Bool, \226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], SUBSET(t, v) && open_in(subtopology(euclidean, s), v) && continuous_on(g, v) && SUBSET(IMAGE(g, v), u) && (\226\136\128 x : Cart[Real, M], IN(x, t) \226\134\146 g(x) == f(x)))
+      #|  UNION((y1 : (Cart[Real, N]) -> Bool), (y2 : (Cart[Real, N]) -> Bool))
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (real_of_num(0) < (x : Real)) == (real_of_num(0) <= x && !(x == real_of_num(0)))
+      #|  IN((f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])((x : Cart[Real, Finite_sum[N, Unit]])), (y1 : (Cart[Real, N]) -> Bool))
+      #|  IN((f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])((x : Cart[Real, Finite_sum[N, Unit]])), (y2 : (Cart[Real, N]) -> Bool))
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  (x : Cart[Real, Finite_sum[N, Unit]])
+      #|  (real_of_num(0) <= drop((x : Cart[Real, Unit]))) == IN(x, {(y : Cart[Real, Unit]) | real_of_num(0) <= drop(y)})
+      #|  ((x : Real) <= (y : Real)) == (real_of_num(0) <= drop(lift(y - x)))
+      #|  (y2 : (Cart[Real, N]) -> Bool)
+      #|  (y1 : (Cart[Real, N]) -> Bool)
+      #|  (b2 : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (b1 : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (b2 : (Cart[Real, Finite_sum[N, Unit]]) -> Bool) == {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) && setdist(({x}, {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) && IN((f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])(x), (y2 : (Cart[Real, N]) -> Bool))})) <= setdist(({x}, {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, t) && IN(f(x), (y1 : (Cart[Real, N]) -> Bool))}))}
+      #|  (b1 : (Cart[Real, Finite_sum[N, Unit]]) -> Bool) == {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) && setdist(({x}, {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) && IN((f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])(x), (y1 : (Cart[Real, N]) -> Bool))})) <= setdist(({x}, {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, t) && IN(f(x), (y2 : (Cart[Real, N]) -> Bool))}))}
+      #|  (y2 : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  SUBSET(IMAGE((f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N]), (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)), (y2 : (Cart[Real, N]) -> Bool))
+      #|  (y1 : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  SUBSET(IMAGE((f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N]), (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)), (y1 : (Cart[Real, N]) -> Bool))
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (yn : (Cart[Real, N]) -> Bool)
+      #|  closed_in(subtopology(euclidean, UNION((y1 : (Cart[Real, N]) -> Bool), (y2 : (Cart[Real, N]) -> Bool))), y1) && closed_in(subtopology(euclidean, UNION(y1, y2)), y2)
+      #|  (yn : (Cart[Real, N]) -> Bool)
+      #|  (y2 : (Cart[Real, N]) -> Bool)
+      #|  (y1 : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, u), s) && closed_in(subtopology(euclidean, u), t) && ANR(s) && ANR(t) && ANR(INTER(s, t)) \226\134\146 ANR(UNION(s, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, u), s) && closed_in(subtopology(euclidean, u), t) && ENR(s) && ENR(t) && ENR(INTER(s, t)) \226\134\146 ENR(UNION(s, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed(s) && closed(t) && AR(s) && AR(t) && AR(INTER(s, t)) \226\134\146 AR(UNION(s, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed(s) && closed(t) && ANR(s) && ANR(t) && ANR(INTER(s, t)) \226\134\146 ANR(UNION(s, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed(s) && closed(t) && ENR(s) && ENR(t) && ENR(INTER(s, t)) \226\134\146 ENR(UNION(s, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, retract_of(s, UNIV) && retract_of(t, UNIV) && retract_of(INTER(s, t), UNIV) \226\134\146 retract_of(UNION(s, t), UNIV)
+      #|  (x : Cart[Real, N]) => if IN(x, (s : (Cart[Real, N]) -> Bool)) { x } else { (r : (Cart[Real, N]) -> Cart[Real, N])(x) }
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  retract_of(UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)), (u : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, UNION(s, t)), s) && closed_in(subtopology(euclidean, UNION(s, t)), t) && retract_of(UNION(s, t), (u : (Cart[Real, N]) -> Bool)) && retract_of(INTER(s, t), t) \226\134\146 retract_of(s, u)
+      #|  UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, UNION(s, t)), s) && closed_in(subtopology(euclidean, UNION(s, t)), t) && AR(UNION(s, t)) && AR(INTER(s, t)) \226\134\146 AR(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, UNION(s, t)), s) && closed_in(subtopology(euclidean, UNION(s, t)), t) && AR(UNION(s, t)) && AR(INTER(s, t)) \226\134\146 AR(s) && AR(t)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed(s) && closed(t) && AR(UNION(s, t)) && AR(INTER(s, t)) \226\134\146 AR(s) && AR(t)
+      #|  closed_in(subtopology(euclidean, UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))), t)
+      #|  closed_in(subtopology(euclidean, UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))), s)
+      #|  UNION((s : (Cart[Real, N]) -> Bool), (u : (Cart[Real, N]) -> Bool)) == UNION(s, INTER(u, (t : (Cart[Real, N]) -> Bool)))
+      #|  (x : Cart[Real, N]) => if IN(x, (s : (Cart[Real, N]) -> Bool)) { x } else { (r : (Cart[Real, N]) -> Cart[Real, N])(x) }
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  UNION((s : (Cart[Real, N]) -> Bool), (u : (Cart[Real, N]) -> Bool)) == UNION(DIFF(UNION(s, (t : (Cart[Real, N]) -> Bool)), t), u)
+      #|  UNION((s : (Cart[Real, N]) -> Bool), (u : (Cart[Real, N]) -> Bool))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  INTER((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, UNION(s, t)), s) && closed_in(subtopology(euclidean, UNION(s, t)), t) && ANR(UNION(s, t)) && ANR(INTER(s, t)) \226\134\146 ANR(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, UNION(s, t)), s) && closed_in(subtopology(euclidean, UNION(s, t)), t) && ANR(UNION(s, t)) && ANR(INTER(s, t)) \226\134\146 ANR(s) && ANR(t)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed(s) && closed(t) && ANR(UNION(s, t)) && ANR(INTER(s, t)) \226\134\146 ANR(s) && ANR(t)
+      #|  (t : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (t : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (t : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (q \226\134\146 p \226\134\146 r \226\134\146 s)
+      #|  CARD((t : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  \226\136\128 t : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(t) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, t) \226\134\146 closed(c) && convex(c)) \226\134\146 ANR(UNIONS(t))
+      #|  (s : (Cart[Real, N]) -> Bool) == UNIONS({{(a : Cart[Real, N])} | IN(a, s)})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(s) \226\134\146 ANR(s)
+      #|  INTER({(a : _)}, (s : (_) -> Bool)) == {a} || INTER({a}, s) == {}
+      #|  INSERT((a : _), (s : (_) -> Bool)) == UNION({a}, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], closed(s) && ANR(s) \226\134\146 ANR(INSERT(a, s))
+      #|  \226\136\128 tr : ((Cart[Real, _]) -> Bool) -> Bool, triangulation(tr) \226\134\146 ANR(UNIONS(tr))
+      #|  \226\136\128 c : ((Cart[Real, _]) -> Bool) -> Bool, simplicial_complex(c) \226\134\146 ANR(UNIONS(c))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], ANR(s) \226\134\146 ANR(path_component(s, x))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], ANR(s) \226\134\146 ANR(connected_component(s, x))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ANR(s) && IN((c : (Cart[Real, N]) -> Bool), components(s)) \226\134\146 ANR(c)
+      #|  IN((x : Cart[Real, Finite_sum[N, Unit]]), (t2 : (Cart[Real, Finite_sum[N, Unit]]) -> Bool))
+      #|  (x : Cart[Real, Finite_sum[N, Unit]])
+      #|  IN((x : Cart[Real, Finite_sum[N, Unit]]), (t1 : (Cart[Real, Finite_sum[N, Unit]]) -> Bool))
+      #|  (x : Cart[Real, Finite_sum[N, Unit]])
+      #|  \226\136\128 x : Real, x <= real_of_num(1) / real_of_num(2) || x >= real_of_num(1) / real_of_num(2)
+      #|  UNION((u1 : (Cart[Real, N]) -> Bool), (u2 : (Cart[Real, N]) -> Bool))
+      #|  (u1 : (Cart[Real, N]) -> Bool)
+      #|  (u2 : (Cart[Real, N]) -> Bool)
+      #|  (u1 : (Cart[Real, N]) -> Bool)
+      #|  {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) && IN((l : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, Unit])(x), {(y : Cart[Real, Unit]) | drop(y) >= real_of_num(1) / real_of_num(2)})}
+      #|  {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) && IN((l : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, Unit])(x), {(y : Cart[Real, Unit]) | drop(y) <= real_of_num(1) / real_of_num(2)})}
+      #|  (l : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, Unit])
+      #|  UNION((u1 : (Cart[Real, N]) -> Bool), (u2 : (Cart[Real, N]) -> Bool))
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (t2 : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (t1 : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (t2 : (Cart[Real, Finite_sum[N, Unit]]) -> Bool) == {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) && !IN((f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])(x), (u2 : (Cart[Real, N]) -> Bool))}
+      #|  (t1 : (Cart[Real, Finite_sum[N, Unit]]) -> Bool) == {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) && !IN((f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])(x), (u1 : (Cart[Real, N]) -> Bool))}
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (f : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (un : (Cart[Real, N]) -> Bool)
+      #|  open_in(subtopology(euclidean, UNION((u1 : (Cart[Real, N]) -> Bool), (u2 : (Cart[Real, N]) -> Bool))), u1) && open_in(subtopology(euclidean, UNION(u1, u2)), u2)
+      #|  (un : (Cart[Real, N]) -> Bool)
+      #|  (u2 : (Cart[Real, N]) -> Bool)
+      #|  (u1 : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, u), s) && open_in(subtopology(euclidean, u), t) && ANR(s) && ANR(t) \226\134\146 ANR(UNION(s, t))
+      #|  SUBSET(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 {(x : _) | IN(x, s) && !IN(f(x), (u : (_) -> Bool))} == {(x : _) | IN(x, s) && IN(f(x), DIFF(t, u))}
+      #|  SUBSET(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 {(x : _) | IN(x, s) && !IN(f(x), (u : (_) -> Bool))} == {(x : _) | IN(x, s) && IN(f(x), DIFF(t, u))}
+      #|  SUBSET(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 {(x : _) | IN(x, s) && !IN(f(x), (u : (_) -> Bool))} == {(x : _) | IN(x, s) && IN(f(x), DIFF(t, u))}
+      #|  SUBSET(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 {(x : _) | IN(x, s) && !IN(f(x), (u : (_) -> Bool))} == {(x : _) | IN(x, s) && IN(f(x), DIFF(t, u))}
+      #|  SUBSET(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 {(x : _) | IN(x, s) && !IN(f(x), (u : (_) -> Bool))} == {(x : _) | IN(x, s) && IN(f(x), DIFF(t, u))}
+      #|  SUBSET(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 {(x : _) | IN(x, s) && !IN(f(x), (u : (_) -> Bool))} == {(x : _) | IN(x, s) && IN(f(x), DIFF(t, u))}
+      #|  SUBSET(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 {(x : _) | IN(x, s) && !IN(f(x), (u : (_) -> Bool))} == {(x : _) | IN(x, s) && IN(f(x), DIFF(t, u))}
+      #|  SUBSET(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 {(x : _) | IN(x, s) && !IN(f(x), (u : (_) -> Bool))} == {(x : _) | IN(x, s) && IN(f(x), DIFF(t, u))}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, u), s) && open_in(subtopology(euclidean, u), t) && ENR(s) && ENR(t) \226\134\146 ENR(UNION(s, t))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, Finite_sum[N, Unit]])
+      #|  \226\136\131 u : (Cart[Real, N]) -> Bool, IN(u, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && IN((x : Cart[Real, Finite_sum[N, Unit]]), (a : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(u))
+      #|  (x : Cart[Real, Finite_sum[N, Unit]])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, Finite_sum[N, Unit]])
+      #|  (x : Cart[Real, Finite_sum[N, Unit]])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  IN((x : Cart[Real, Finite_sum[N, Unit]]), (a : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)((u : (Cart[Real, N]) -> Bool)))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, Finite_sum[N, Unit]])
+      #|  SUBSET(IMAGE((g : (_) -> _), (t : (_) -> Bool)), (u : (_) -> Bool)) \226\134\146 SUBSET({(x : _) | IN(x, t) && IN(g(x), u)}, (x : (_) -> Bool)) \226\134\146 SUBSET(t, x)
+      #|  UNIONS(IMAGE((u : (Cart[Real, N]) -> Bool) => INTER((v : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(u), (w : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(u)), (f : ((Cart[Real, N]) -> Bool) -> Bool)))
+      #|  (h : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool) == (u' : (Cart[Real, N]) -> Bool)
+      #|  (u' : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (u' : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 INTER(u, s) == s
+      #|  (euclidean : Topology[Cart[Real, _]])
+      #|  (open_in((a : Topology[_]), (b : (_) -> Bool)) && (c : Bool)) == !(open_in(a, b) \226\134\146 !c)
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool) => INTER((v : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(u), (w : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(u))
+      #|  (h : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (euclidean : Topology[Cart[Real, N]])
+      #|  subtopology(euclidean, UNIONS(IMAGE((u : (Cart[Real, N]) -> Bool) => INTER((v : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(u), (w : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(u)), (f : ((Cart[Real, N]) -> Bool) -> Bool))))
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
+      #|  (h : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  (w : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, IN(u, (f : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 (\226\136\131 v : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, \226\136\131 h : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N], SUBSET((a : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(u), v) && open_in(subtopology(euclidean, (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)), v) && continuous_on(h, v) && SUBSET(IMAGE(h, v), u) && (\226\136\128 x : Cart[Real, Finite_sum[N, Unit]], IN(x, a(u)) \226\134\146 h(x) == (g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])(x)))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) && DISJOINT(s, (u : (_) -> Bool)) \226\134\146 SUBSET(s, DIFF(t, u))
+      #|  (b : Real) <= (c : Real) && (d : Real) <= (a : Real) \226\134\146 !(a < b && c < d)
+      #|  IN((x : Cart[Real, Finite_sum[N, Unit]]), (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool))
+      #|  (x : Cart[Real, Finite_sum[N, Unit]])
+      #|  (u2 : (Cart[Real, N]) -> Bool)
+      #|  (u1 : (Cart[Real, N]) -> Bool)
+      #|  pairwise((i : (Cart[Real, N]) -> Bool) => (j : (Cart[Real, N]) -> Bool) => DISJOINT((v : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(i), v(j)), (f : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) && !(s == t) \226\134\146 !(DIFF(t, s) == {})
+      #|  IN((x : Cart[Real, Finite_sum[N, Unit]]), (a : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)((u : (Cart[Real, N]) -> Bool)))
+      #|  UNIONS((f : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (real_of_num(0) < (x : Real)) == (real_of_num(0) <= x && !(x == real_of_num(0)))
+      #|  (x : Cart[Real, Finite_sum[N, Unit]])
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, IN(u, (f : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 SUBSET((a : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(u), (v : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(u))
+      #|  (real_of_num(0) < drop((x : Cart[Real, Unit]))) == IN(x, {(y : Cart[Real, Unit]) | real_of_num(0) < drop(y)})
+      #|  ((x : Real) < (y : Real)) == (real_of_num(0) < drop(lift(y - x)))
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, IN(u, (f : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 open_in(subtopology(euclidean, (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)), (v : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(u))
+      #|  (v : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool) == ((u : (Cart[Real, N]) -> Bool) => if (a : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(u) == {} { {} } else { {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) && setdist(({x}, a(u))) < setdist(({x}, DIFF((t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool), a(u))))} })
+      #|  pairwise((i : (Cart[Real, N]) -> Bool) => (j : (Cart[Real, N]) -> Bool) => DISJOINT((a : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(i), a(j)), (f : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (u : (Cart[Real, N]) -> Bool) == DIFF(UNIONS((f : ((Cart[Real, N]) -> Bool) -> Bool)), UNIONS(DELETE(f, u)))
+      #|  UNIONS((f : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, IN(u, (f : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 closed_in(subtopology(euclidean, (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)), (a : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(u))
+      #|  (a : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)((u : (Cart[Real, N]) -> Bool)) == (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  ANR((u : (Cart[Real, N]) -> Bool))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  \226\136\131 u : (Cart[Real, N]) -> Bool, IN(u, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && (a : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool)(u) == (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (a : ((Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[N, Unit]]) -> Bool) == ((u : (Cart[Real, N]) -> Bool) => {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) && IN((g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])(x), u)})
+      #|  (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (g : (Cart[Real, Finite_sum[N, Unit]]) -> Cart[Real, N])
+      #|  \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, pairwise(DISJOINT, f) && (\226\136\128 u : (Cart[Real, N]) -> Bool, IN(u, f) \226\134\146 ANR(u)) && (\226\136\128 u : (Cart[Real, N]) -> Bool, IN(u, f) \226\134\146 open_in(subtopology(euclidean, UNIONS(f)), u)) \226\134\146 ANR(UNIONS(f))
+      #|  UNION((u : (Cart[Real, N]) -> Bool), UNIONS((f : ((Cart[Real, N]) -> Bool) -> Bool)))
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  UNION((u : (Cart[Real, N]) -> Bool), UNIONS((f : ((Cart[Real, N]) -> Bool) -> Bool)))
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && (\226\136\128 u : (Cart[Real, N]) -> Bool, IN(u, f) \226\134\146 ANR(u)) && (\226\136\128 u : (Cart[Real, N]) -> Bool, IN(u, f) \226\134\146 open_in(subtopology(euclidean, UNIONS(f)), u)) \226\134\146 ANR(UNIONS(f))
+      #|  INTER((s : (Cart[Real, N]) -> Bool), closure((w : (Num, Cart[Real, N]) -> Bool)((p : Num))))
+      #|  (p : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (m : Num) <= (n : Num)
+      #|  SUC(SUC((n : Num))) == n + 2
+      #|  (p : Num)
+      #|  (m : Num)
+      #|  SUBSET((r : (Num, Cart[Real, _]) -> Bool)((m : Num)), (s : (Cart[Real, _]) -> Bool)) && SUBSET(r(m), (w : (Num, Cart[Real, _]) -> Bool)(m)) && SUBSET(w(m), w((n : Num))) && SUBSET(w(n), closure(w(n))) \226\134\146 DISJOINT(r(m), DIFF(w(n + 2), INTER(s, closure(w(n)))))
+      #|  (m : Num)
+      #|  2 * (m : Num) + 1
+      #|  (n : Num)
+      #|  2 * (n : Num) + 1
+      #|  (m : Num) <= (n : Num) \226\134\146 2 * m + 1 <= 2 * n + 1
+      #|  (m : Num)
+      #|  2 * (m : Num)
+      #|  (n : Num)
+      #|  2 * (n : Num)
+      #|  (m : Num) <= (n : Num) \226\134\146 2 * m <= 2 * n
+      #|  (n : Num)
+      #|  2 * (n : Num) + 2 + 1 == 2 * n + 1 + 2
+      #|  2 * SUC((n : Num)) == 2 * n + 2
+      #|  (m : Num)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (n : Num)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  UNION(UNIONS(IMAGE((x : Num) => (r : (Num, Cart[Real, N]) -> Bool)(2 * x), UNIV)), UNIONS(IMAGE((x : Num) => r(2 * x + 1), UNIV)))
+      #|  UNIV == UNION(IMAGE((n : Num) => 2 * n, UNIV), IMAGE((n : Num) => 2 * n + 1, UNIV))
+      #|  SUC(SUC((n : Num))) == n + 2
+      #|  SUC((n : Num))
+      #|  SUC(SUC((n : Num))) == n + 2
+      #|  (n : Num)
+      #|  (x : Cart[Real, N])
+      #|  UNIONS(IMAGE((w : (Num, Cart[Real, N]) -> Bool), UNIV)) == UNIONS(IMAGE((r : (Num, Cart[Real, N]) -> Bool), UNIV))
+      #|  \226\136\128 n : Num, ANR((r : (Num, Cart[Real, N]) -> Bool)(n))
+      #|  \226\136\128 n : Num, open_in(subtopology(euclidean, (s : (Cart[Real, N]) -> Bool)), (r : (Num, Cart[Real, N]) -> Bool)(n))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 INTER(s, INTER(t, (u : (_) -> Bool))) == INTER(s, u)
+      #|  closed((u : (Cart[Real, _]) -> Bool)) && INTER((s : (Cart[Real, _]) -> Bool), INTER((t : (Cart[Real, _]) -> Bool), u)) == INTER(s, u) \226\134\146 closed_in(subtopology(euclidean, s), INTER(s, INTER(t, u)))
+      #|  DIFF((s : (_) -> Bool), (t : (_) -> Bool)) == DIFF(s, INTER(s, t))
+      #|  SUC(SUC((n : Num))) == n + 2
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, open_in(subtopology(euclidean, (w : (Num, Cart[Real, N]) -> Bool)(n)), (r : (Num, Cart[Real, N]) -> Bool)(n))
+      #|  \226\136\131 r : (Num, Cart[Real, N]) -> Bool, r(0) == (w : (Num, Cart[Real, N]) -> Bool)(0) && r(1) == w(1) && (\226\136\128 n : Num, r(n + 2) == DIFF(w(n + 2), INTER((s : (Cart[Real, N]) -> Bool), closure(w(n)))))
+      #|  (\226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSET((v : (Num, _) -> Bool)(m), v(n))) \226\134\146 SUBSET(v((b : Num)), v((a : Num) + b))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(DIFF((u : (_) -> Bool), t), DIFF(u, s))
+      #|  (a : Real) < (b : Real) \226\134\146 (x : Real) <= a && b <= (y : Real) \226\134\146 x < y
+      #|  (m : Num) + (n : Num)
+      #|  (m : Num)
+      #|  inv(real_of_num(2))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (real_of_num(0) < (x : Real)) == (real_of_num(0) <= x && !(x == real_of_num(0)))
+      #|  real_of_num(0) < setdist(({(x : Cart[Real, N])}, DIFF((s : (Cart[Real, N]) -> Bool), (v : (Num, Cart[Real, N]) -> Bool)((n : Num)))))
+      #|  \226\136\131 n : Num, IN((x : Cart[Real, N]), (v : (Num, Cart[Real, N]) -> Bool)(n))
+      #|  (x : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool) == UNIONS(IMAGE((w : (Num, Cart[Real, N]) -> Bool), UNIV))
+      #|  (b : Real) < (a : Real) && (x : Real) <= (y : Real) \226\134\146 a <= x \226\134\146 b < y
+      #|  (x : Cart[Real, N])
+      #|  (real_of_num(0) <= drop((x : Cart[Real, Unit]))) == IN(x, {(y : Cart[Real, Unit]) | real_of_num(0) <= drop(y)})
+      #|  ((x : Real) <= (y : Real)) == (real_of_num(0) <= drop(lift(y - x)))
+      #|  {(x : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && inv(pow(real_of_num(2), (n : Num))) <= setdist(({x}, DIFF(s, (v : (Num, Cart[Real, N]) -> Bool)(n))))}
+      #|  \226\136\128 n : Num, SUBSET(INTER((s : (Cart[Real, N]) -> Bool), closure((w : (Num, Cart[Real, N]) -> Bool)(n))), w(SUC(n)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (v : (Num, Cart[Real, N]) -> Bool)((n : Num))
+      #|  \226\136\128 n : Num, ANR((w : (Num, Cart[Real, N]) -> Bool)(n))
+      #|  ((p : Bool) && (q : Bool) \226\134\146 (r : Bool)) == (p && !r \226\134\146 !q)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 n : Num, SUBSET((w : (Num, Cart[Real, N]) -> Bool)(n), (v : (Num, Cart[Real, N]) -> Bool)(n))
+      #|  (real_of_num(0) < drop((x : Cart[Real, Unit]))) == IN(x, {(y : Cart[Real, Unit]) | real_of_num(0) < drop(y)})
+      #|  ((x : Real) < (y : Real)) == (real_of_num(0) < drop(lift(y - x)))
+      #|  \226\136\128 n : Num, open_in(subtopology(euclidean, (s : (Cart[Real, N]) -> Bool)), (w : (Num, Cart[Real, N]) -> Bool)(n))
+      #|  (w : (Num, Cart[Real, N]) -> Bool) == ((n : Num) => {(x : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && inv(pow(real_of_num(2), n)) < setdist(({x}, DIFF(s, (v : (Num, Cart[Real, N]) -> Bool)(n))))})
+      #|  \226\136\131 n : Num, (s : (Cart[Real, N]) -> Bool) == (v : (Num, Cart[Real, N]) -> Bool)(n)
+      #|  (s : (Cart[Real, N]) -> Bool) == UNIONS(IMAGE((v : (Num, Cart[Real, N]) -> Bool), UNIV))
+      #|  \226\136\128 v : (Num, Cart[Real, N]) -> Bool, (\226\136\128 n : Num, SUBSET(v(n), v(SUC(n)))) && (\226\136\128 n : Num, open_in(subtopology(euclidean, UNIONS(IMAGE(v, UNIV))), v(n))) && (\226\136\128 n : Num, ANR(v(n))) \226\134\146 ANR(UNIONS(IMAGE(v, UNIV)))
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  UNIONS(IMAGE((v : (Num, Cart[Real, N]) -> Bool), UNIV)) == UNIONS(IMAGE((u : (Num, Cart[Real, N]) -> Bool), UNIV))
+      #|  (u : (Num, Cart[Real, N]) -> Bool) == ((n : Num) => UNIONS(IMAGE((v : (Num, Cart[Real, N]) -> Bool), op_dot_dot(0, n))))
+      #|  \226\136\128 v : (Num, Cart[Real, N]) -> Bool, (\226\136\128 n : Num, open_in(subtopology(euclidean, UNIONS(IMAGE(v, UNIV))), v(n))) && (\226\136\128 n : Num, ANR(v(n))) \226\134\146 ANR(UNIONS(IMAGE(v, UNIV)))
+      #|  (h : (Num, Cart[Real, N]) -> Bool)((n : Num))
+      #|  (n : Num)
+      #|  (x : Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (h : (Num, Cart[Real, N]) -> Bool)
+      #|  (g : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (g : ((Cart[Real, N]) -> Bool) -> Bool) == {}
+      #|  (g : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, (\226\136\128 s : (Cart[Real, N]) -> Bool, IN(s, f) \226\134\146 ANR(s)) && (\226\136\128 s : (Cart[Real, N]) -> Bool, IN(s, f) \226\134\146 open_in(subtopology(euclidean, u), s)) \226\134\146 ANR(UNIONS(f))
+      #|  \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, (\226\136\128 s : (Cart[Real, N]) -> Bool, IN(s, f) \226\134\146 ENR(s)) && (\226\136\128 s : (Cart[Real, N]) -> Bool, IN(s, f) \226\134\146 open_in(subtopology(euclidean, u), s)) \226\134\146 ENR(UNIONS(f))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (w : (Cart[Real, N]) -> Bool)
+      #|  (w : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, locally(ANR, s) == (\226\136\128 v : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], open_in(subtopology(euclidean, s), v) && IN(x, v) \226\134\146 (\226\136\131 u : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, s), u) && ANR(u) && IN(x, u) && SUBSET(u, v)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (w : (Cart[Real, N]) -> Bool)
+      #|  INTER((v : (Cart[Real, N]) -> Bool), (w : (Cart[Real, N]) -> Bool))
+      #|  (w : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, locally(ANR, s) == (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 (\226\136\131 v : (Cart[Real, N]) -> Bool, IN(x, v) && open_in(subtopology(euclidean, s), v) && ANR(v)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  UNIONS(IMAGE((f : (Cart[Real, N], Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool))) == s
+      #|  (f : (Cart[Real, N], Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, locally(ANR, s) == ANR(s)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (w : (Cart[Real, N]) -> Bool)
+      #|  (w : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, locally(ENR, s) == (\226\136\128 v : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], open_in(subtopology(euclidean, s), v) && IN(x, v) \226\134\146 (\226\136\131 u : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, s), u) && ENR(u) && IN(x, u) && SUBSET(u, v)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (w : (Cart[Real, N]) -> Bool)
+      #|  INTER((v : (Cart[Real, N]) -> Bool), (w : (Cart[Real, N]) -> Bool))
+      #|  (w : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, locally(ENR, s) == (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 (\226\136\131 v : (Cart[Real, N]) -> Bool, IN(x, v) && open_in(subtopology(euclidean, s), v) && ENR(v)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  UNIONS(IMAGE((f : (Cart[Real, N], Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool))) == s
+      #|  (f : (Cart[Real, N], Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, locally(ENR, s) == ENR(s)
+      #|  \226\136\128 p : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, M]) -> Bool, covering_space((c, p), s) \226\134\146 ANR(s) == ANR(c)
+      #|  \226\136\128 p : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, M]) -> Bool, covering_space((c, p), s) && ANR(c) \226\134\146 ANR(s)
+      #|  \226\136\128 p : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, M]) -> Bool, covering_space((c, p), s) \226\134\146 ENR(s) == ENR(c)
+      #|  \226\136\128 p : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, M]) -> Bool, covering_space((c, p), s) && ENR(c) \226\134\146 ENR(s)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  INTER(ball((vec(0), (r : Real))), (u : (Cart[Real, N]) -> Bool))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (r : Real)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, bounded(s) \226\134\146 ENR(s) == (\226\136\131 u : (Cart[Real, N]) -> Bool, open(u) && bounded(u) && retract_of(s, u))
+      #|  (t : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 s' : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, retract_of(s, t) && convex(t) && !(t == {}) && homeomorphic(s, s') && closed_in(subtopology(euclidean, u), s') \226\134\146 retract_of(s', u)
+      #|  (UNIV : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 s' : (Cart[Real, N]) -> Bool, retract_of(s, UNIV) && homeomorphic(s, s') && closed(s') \226\134\146 retract_of(s', UNIV)
+      #|  compact((s : (Cart[Real, M]) -> Bool)) && compact((s' : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 s' : (Cart[Real, N]) -> Bool, homeomorphic(s, s') \226\134\146 (compact(s) && retract_of(s, UNIV)) == (compact(s') && retract_of(s', UNIV))
+      #|  o((r : (Cart[Real, N]) -> Cart[Real, N]), (g : (Cart[Real, M]) -> Cart[Real, N]))
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 c : (Cart[Real, M]) -> Bool, \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, continuous_on(f, c) && SUBSET(IMAGE(f, c), t) && retract_of(t, UNIV) && closed_in(subtopology(euclidean, s), c) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], continuous_on(g, s) && SUBSET(IMAGE(g, UNIV), t) && (\226\136\128 x : Cart[Real, M], IN(x, c) \226\134\146 g(x) == f(x)))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (UNIV : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, continuous_on(f, s) && SUBSET(IMAGE(f, s), t) && retract_of(t, UNIV) && closed(s) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], continuous_on(g, UNIV) && SUBSET(IMAGE(g, UNIV), t) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 g(x) == f(x)))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (UNIV : (Cart[Real, M]) -> Bool)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, continuous_on(f, s) && SUBSET(IMAGE(f, s), t) && ANR(t) && closed(s) \226\134\146 (\226\136\131 v : (Cart[Real, M]) -> Bool, \226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], SUBSET(s, v) && open(v) && continuous_on(g, v) && SUBSET(IMAGE(g, v), t) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 g(x) == f(x)))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (k : (Cart[Real, M]) -> Bool)
+      #|  (v : (Cart[Real, M]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (v : (Cart[Real, M]) -> Bool)
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (w : (Cart[Real, M]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  \226\136\131 t : (Cart[Real, M]) -> Bool, \226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], open_in(subtopology(euclidean, (s : (Cart[Real, M]) -> Bool)), t) && closed_in(subtopology(euclidean, s), t) && SUBSET((c : (Cart[Real, M]) -> Bool), t) && continuous_on(g, t) && SUBSET(IMAGE(g, t), (u : (Cart[Real, N]) -> Bool)) && (\226\136\128 x : Cart[Real, M], IN(x, c) \226\134\146 g(x) == (f : (Cart[Real, M]) -> Cart[Real, N])(x))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 c : (Cart[Real, M]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, (locally(connected, s) || compact(s) && ANR(u)) && IN(c, components(s)) && continuous_on(f, c) && SUBSET(IMAGE(f, c), u) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], continuous_on(g, s) && SUBSET(IMAGE(g, s), u) && (\226\136\128 x : Cart[Real, M], IN(x, c) \226\134\146 g(x) == f(x)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, retract_of(UNION(s, t), UNIV) && retract_of(INTER(s, t), UNIV) && closed(s) && closed(t) \226\134\146 retract_of(s, UNIV)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ENR(s) \226\134\146 COUNTABLE(components(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, ENR(s) \226\134\146 COUNTABLE({connected_component(s, (x : Cart[Real, N])) | IN(x, t)})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ENR(s) \226\134\146 COUNTABLE({path_component(s, x) | x : Cart[Real, N] | IN(x, s)})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, UNION(s, t)), s) && closed_in(subtopology(euclidean, UNION(s, t)), t) && ENR(UNION(s, t)) && ENR(INTER(s, t)) \226\134\146 ENR(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed(s) && closed(t) && ENR(UNION(s, t)) && ENR(INTER(s, t)) \226\134\146 ENR(s)
+      #|  SUBSET((s : (Cart[Real, N]) -> Bool), closure(s)) && SUBSET(DIFF(UNIV, s), closure(DIFF(UNIV, s))) \226\134\146 UNION(closure(s), closure(DIFF(UNIV, s))) == UNIV
+      #|  UNION(closure((s : (Cart[Real, N]) -> Bool)), closure(DIFF(UNIV, s))) == UNIV
+      #|  closure(DIFF(UNIV, (s : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ENR(frontier(s)) \226\134\146 ENR(closure(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ANR(frontier(s)) \226\134\146 ANR(closure(s))
+      #|  \226\136\128 t : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(t) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, t) \226\134\146 closed(c) && convex(c)) \226\134\146 ENR(UNIONS(t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(s) \226\134\146 ENR(s)
+      #|  INTER({(a : _)}, (s : (_) -> Bool)) == {a} || INTER({a}, s) == {}
+      #|  INSERT((a : _), (s : (_) -> Bool)) == UNION({a}, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], closed(s) && ENR(s) \226\134\146 ENR(INSERT(a, s))
+      #|  \226\136\128 tr : ((Cart[Real, _]) -> Bool) -> Bool, triangulation(tr) \226\134\146 ENR(UNIONS(tr))
+      #|  \226\136\128 c : ((Cart[Real, _]) -> Bool) -> Bool, simplicial_complex(c) \226\134\146 ENR(UNIONS(c))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], ENR(s) \226\134\146 ENR(path_component(s, x))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], ENR(s) \226\134\146 ENR(connected_component(s, x))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ENR(s) && IN((c : (Cart[Real, N]) -> Bool), components(s)) \226\134\146 ENR(c)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ENR(s) \226\134\146 (\226\136\131 t : (Cart[Real, N]) -> Bool, \226\136\131 u : (Cart[Real, N]) -> Bool, closed(t) && open(u) && s == INTER(t, u))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ENR(s) \226\134\146 fsigma(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ENR(s) \226\134\146 gdelta(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, is_interval(s) \226\134\146 fsigma(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, is_interval(s) \226\134\146 gdelta(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, is_interval(s) \226\134\146 baire(1, UNIV, indicator(s))
+      #|  ((r : Bool) \226\134\146 (p : Bool)) && (p \226\134\146 (q : Bool)) && (p \226\134\146 r) \226\134\146 p == (q && r)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ANR(s) == (COUNTABLE(components(s)) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, components(s)) \226\134\146 open_in(subtopology(euclidean, s), c) && ANR(c)))
+      #|  ((r : Bool) \226\134\146 (p : Bool)) && (p \226\134\146 (q : Bool)) && (p \226\134\146 r) \226\134\146 p == (q && r)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, ENR(s) == (COUNTABLE(components(s)) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, components(s)) \226\134\146 open_in(subtopology(euclidean, s), c) && ENR(c)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, M]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, M]) -> Bool, homeomorphic(s, u) && !(s == {}) && SUBSET(s, t) && convex(u) && compact(u) \226\134\146 retract_of(s, t)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  path_image((g : (Cart[Real, Unit]) -> Cart[Real, N]))
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, arc(g) && SUBSET(path_image(g), s) \226\134\146 retract_of(path_image(g), s)
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], arc(g) \226\134\146 AR(path_image(g))
+      #|  (x : Cart[Real, N]) => (dd : (Cart[Real, N]) -> Real)(x - (a : Cart[Real, N]))
+      #|  inv((dd : (Cart[Real, N]) -> Real)((x : Cart[Real, N]) - (a : Cart[Real, N])))
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  ((x : Cart[Real, N]) == op_pct(real_of_num(1) - (u : Real), (a : Cart[Real, N])) + op_pct(u, a + op_pct((d : Real), x - a))) == (op_pct(u * d - real_of_num(1), x - a) == vec(0))
+      #|  ((a : Cart[Real, N]) == a + (d : Cart[Real, N])) == (d == vec(0))
+      #|  (x : Cart[Real, N])
+      #|  (a : Cart[Real, N]) + ((x : Cart[Real, N]) - a) == x
+      #|  IN((x : Cart[Real, _]), DIFF(closure((s : (Cart[Real, _]) -> Bool)), relative_interior(s))) \226\134\146 IN(x, closure(s))
+      #|  (a : Cart[Real, N]) + ((x : Cart[Real, N]) - a) == x
+      #|  IN((x : Cart[Real, _]), DIFF(closure((s : (Cart[Real, _]) -> Bool)), relative_interior(s))) \226\134\146 !IN(x, relative_interior(s))
+      #|  (dd : (Cart[Real, N]) -> Real)((x : Cart[Real, N]) - (a : Cart[Real, N]))
+      #|  ((a : Cart[Real, N]) + op_pct((d : Real), (x : Cart[Real, N]) - a) == op_pct(real_of_num(1) - (u : Real), a) + op_pct(u, x)) == (op_pct(u - d, x - a) == vec(0))
+      #|  (a : Cart[Real, N]) + op_pct((dd : (Cart[Real, N]) -> Real)((x : Cart[Real, N]) - a), x - a)
+      #|  (a : Cart[Real, N]) + op_pct((dd : (Cart[Real, N]) -> Real)((x : Cart[Real, N]) - a), x - a)
+      #|  (x : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  !((d : Real) < real_of_num(1)) && !(real_of_num(1) < d) \226\134\146 d == real_of_num(1)
+      #|  (dd : (Cart[Real, N]) -> Real)((x : Cart[Real, N]) - (a : Cart[Real, N])) == real_of_num(1)
+      #|  (x : Cart[Real, N]) == (a : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (a : Cart[Real, N]) + ((x : Cart[Real, N]) - a) == x
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, SUBSET(s, t) && SUBSET(IMAGE((f : (_) -> _), DELETE(t, (a : _))), (u : (_) -> Bool)) \226\134\146 SUBSET(IMAGE(f, DELETE(s, a)), u)
+      #|  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0) && (u : Real) == real_of_num(1))
+      #|  (((u : Real) == real_of_num(0) || (d : Real) == real_of_num(0)) && u == real_of_num(1)) == (d == real_of_num(0) && u == real_of_num(1))
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (u : Real) && u <= real_of_num(1) && !(x == real_of_num(0) && u == real_of_num(1)) \226\134\146 !(real_of_num(1) - u + x == real_of_num(0))
+      #|  (op_pct(real_of_num(1) - (u : Real), (x : Cart[Real, N])) + op_pct(u, (a : Cart[Real, N]) + op_pct((d : Real), x - a)) == a) == (op_pct(real_of_num(1) - u + u * d, x - a) == vec(0))
+      #|  (a : Cart[Real, N]) + ((x : Cart[Real, N]) - a) == x
+      #|  real_of_num(1) - (u : Real) + u == real_of_num(1)
+      #|  (-(a : Cart[Real, N]) + (x : Cart[Real, N]) == vec(0)) == (x == a)
+      #|  (a : Cart[Real, N]) + (-a + (x : Cart[Real, N])) == x
+      #|  IN((a : Cart[Real, _]), closure((s : (Cart[Real, _]) -> Bool))) && !IN(a, relative_interior(s)) \226\134\146 !IN(a, relative_interior(s))
+      #|  ((a : Cart[Real, N]) + (b : Cart[Real, N]) == op_pct(real_of_num(1) - (u : Real), a) + op_pct(u, (c : Cart[Real, N]))) == (b == op_pct(u, c - a))
+      #|  (dd : (Cart[Real, N]) -> Real)(-(a : Cart[Real, N]) + (x : Cart[Real, N])) / (k : Real)
+      #|  ((a : Cart[Real, N]) == a + op_pct((k : Real), -a + (x : Cart[Real, N]))) == (op_pct(k, x - a) == vec(0))
+      #|  (a : Cart[Real, N]) + op_pct((dd : (Cart[Real, N]) -> Real)(-a + (x : Cart[Real, N])), -a + x)
+      #|  (a : Cart[Real, N]) + op_pct((k : Real), -a + (x : Cart[Real, N]))
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (-(a : Cart[Real, N]) + (x : Cart[Real, N]) == vec(0)) == (x == a)
+      #|  (a : Cart[Real, N]) + (-a + (x : Cart[Real, N])) == x
+      #|  IN((x : _), DIFF((c : (_) -> Bool), (i : (_) -> Bool))) \226\134\146 IN(x, i) \226\134\146 false
+      #|  !((a : Real) < (b : Real)) && !(b < a) \226\134\146 a == b
+      #|  (-(a : Cart[Real, N]) + (x : Cart[Real, N]) == vec(0)) == (x == a)
+      #|  (a : Cart[Real, N]) + (-a + (x : Cart[Real, N])) == x
+      #|  ((y : Cart[Real, N]) == -(a : Cart[Real, N]) + (x : Cart[Real, N])) == (x == a + y)
+      #|  (x : Cart[Real, N])
+      #|  (k : Real)
+      #|  (-(a : Cart[Real, N]) + (x : Cart[Real, N]) == vec(0)) == (x == a)
+      #|  (vec(0) == -(a : Cart[Real, N]) + (x : Cart[Real, N])) == (x == a)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(DIFF(s, (u : (_) -> Bool)), t)
+      #|  (vec(0) == -(a : Cart[Real, N]) + (x : Cart[Real, N])) == (x == a)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) && !IN((a : _), IMAGE((f : (_) -> _), s)) \226\134\146 SUBSET(IMAGE(f, s), DELETE(IMAGE(f, t), a))
+      #|  (x : Cart[Real, N]) - (a : Cart[Real, N]) == -a + x
+      #|  relative_frontier(IMAGE((x : Cart[Real, N]) => x - (a : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool)))
+      #|  (\226\136\128 x : _, \226\136\128 y : _, ((f : (_) -> _)(x) == f(y)) == (x == y)) \226\134\146 IMAGE(f, DELETE((s : (_) -> Bool), (a : _))) == DELETE(IMAGE(f, s), f(a))
+      #|  ((x : Cart[Real, N]) - (a : Cart[Real, N]) == (y : Cart[Real, N]) - a) == (x == y)
+      #|  DELETE(hull(affine, (s : (Cart[Real, N]) -> Bool)), (a : Cart[Real, N]))
+      #|  continuous_on(o((x : Cart[Real, N]) => (a : Cart[Real, N]) + op_pct((dd : (Cart[Real, N]) -> Real)(x), x), (x : Cart[Real, N]) => x - a), DELETE((t : (Cart[Real, N]) -> Bool), a))
+      #|  (x : Cart[Real, N]) => (a : Cart[Real, N]) + op_pct((dd : (Cart[Real, N]) -> Real)(x - a), x - a)
+      #|  (dd : (Cart[Real, N]) -> Real)
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (R : (Real, _) -> Bool)(d, x))) \226\134\146 (\226\136\128 x : _, \226\136\131 d : Real, real_of_num(0) < d && (P(x) \226\134\146 R(d, x)))
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], convex(s) && convex(t) && bounded(s) && IN(a, relative_interior(s)) && SUBSET(relative_frontier(s), t) && SUBSET(t, hull(affine, s)) \226\134\146 (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, DELETE(t, a)), subtopology(euclidean, DELETE(t, a))), (x : Cart[Real, N]) => x, r) && retraction((DELETE(t, a), relative_frontier(s)), r) && (\226\136\128 x : Cart[Real, N], \226\136\131 c : Real, real_of_num(0) < c && r(x) - a == op_pct(c, x - a)))
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 SUBSET(DIFF(s, (t : (_) -> Bool)), u)
+      #|  (a : Cart[Real, N])
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], convex(s) && bounded(s) && IN(a, relative_interior(s)) \226\134\146 retract_of(relative_frontier(s), DELETE(hull(affine, s), a))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], convex(s) && compact(s) && IN(a, relative_interior(s)) \226\134\146 retract_of(DIFF(s, relative_interior(s)), DELETE(hull(affine, s), a))
+      #|  DELETE(hull(affine, (s : (Cart[Real, N]) -> Bool)), (a : Cart[Real, N]))
+      #|  (a : Cart[Real, N])
+      #|  relative_interior((s : (Cart[Real, N]) -> Bool)) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && bounded(s) && !(aff_dim(s) == int_of_num(1)) \226\134\146 path_connected(relative_frontier(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && bounded(s) && !(aff_dim(s) == int_of_num(1)) \226\134\146 connected(relative_frontier(s))
+      #|  closest_point(hull(affine, (s : (Cart[Real, N]) -> Bool)))
+      #|  DELETE(hull(affine, (s : (Cart[Real, N]) -> Bool)), (a : Cart[Real, N]))
+      #|  (UNIV : (Cart[Real, N]) -> Bool)
+      #|  {(x : Cart[Real, N]) | IN(x, UNIV) && IN(closest_point(hull(affine, (s : (Cart[Real, N]) -> Bool)), x), DELETE(UNIV, (a : Cart[Real, N])))}
+      #|  (a : Cart[Real, N])
+      #|  !(relative_interior((s : (Cart[Real, N]) -> Bool)) == {})
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, bounded(s) && convex(s) \226\134\146 ENR(relative_frontier(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, bounded(s) && convex(s) \226\134\146 ANR(relative_frontier(s))
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 !(s == {})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], convex(s) && bounded(s) && IN(a, interior(s)) \226\134\146 retract_of(frontier(s), DELETE(UNIV, a))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, \226\136\128 b : Cart[Real, N], IN(b, ball((a, r))) \226\134\146 retract_of(sphere((a, r)), DELETE(UNIV, b))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, real_of_num(0) < r \226\134\146 retract_of(sphere((a, r)), DELETE(UNIV, a))
+      #|  DELETE(UNIV, (a : Cart[Real, N]))
+      #|  real_of_num(0) < (r : Real)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, ENR(sphere((a, r)))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, ANR(sphere((a, r)))
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  DELETE(hull(affine, (s : (Cart[Real, N]) -> Bool)), (a : Cart[Real, N]))
+      #|  (a : Cart[Real, N])
+      #|  relative_interior((s : (Cart[Real, N]) -> Bool)) == {}
+      #|  relative_interior((s : (Cart[Real, N]) -> Bool)) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, bounded(s) && convex(s) \226\134\146 locally(path_connected, relative_frontier(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, bounded(s) && convex(s) \226\134\146 locally(connected, relative_frontier(s))
+      #|  closest_point((s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, convex(s) && closed(s) && !(s == {}) && SUBSET(s, t) \226\134\146 (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], retraction((t, s), r) && (\226\136\128 x : Cart[Real, N], IN(x, DIFF(hull(affine, s), relative_interior(s))) \226\134\146 IN(r(x), relative_frontier(s))))
+      #|  closest_point((s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, convex(s) && closed(s) && !(s == {}) && SUBSET(s, t) \226\134\146 (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], retraction((t, s), r) && (\226\136\128 x : Cart[Real, N], !IN(x, s) \226\134\146 IN(r(x), frontier(s))))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, convex(s) && closed(s) && !(s == {}) && SUBSET(s, t) \226\134\146 retract_of(s, t)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N]) => x
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, convex(s) && !(s == {}) && closed_in(subtopology(euclidean, u), s) \226\134\146 retract_of(s, u)
+      #|  (UNIV : (Cart[Real, N]) -> Bool)
+      #|  real_of_num(1)
+      #|  (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  pathfinish((g : (Cart[Real, Unit]) -> Cart[Real, N])) == pathstart(g)
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], simple_path(g) \226\134\146 ENR(path_image(g))
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], simple_path(g) \226\134\146 ANR(path_image(g))
+      #|  (a : (Cart[Real, M]) -> Cart[Real, Unit])((x : Cart[Real, M]))
+      #|  !IN((x : Cart[Real, M]), (s' : (Cart[Real, M]) -> Bool))
+      #|  IN((x : Cart[Real, M]), (s' : (Cart[Real, M]) -> Bool))
+      #|  (h' : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N])(pastecart(vec(1), (x : Cart[Real, M])))
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M])
+      #|  (p : Real) * (a : Real) <= p * real_of_num(1) && p <= real_of_num(1) \226\134\146 p * a <= real_of_num(1)
+      #|  (p : Bool) \226\134\146 !(p && !(q : Bool)) \226\134\146 q
+      #|  op_pct(drop((p : Cart[Real, Unit])), (a : (Cart[Real, M]) -> Cart[Real, Unit])((x : Cart[Real, M])))
+      #|  !IN((x : Cart[Real, M]), (s' : (Cart[Real, M]) -> Bool))
+      #|  IN((x : Cart[Real, M]), (s' : (Cart[Real, M]) -> Bool))
+      #|  (x : Cart[Real, M])
+      #|  (p : Cart[Real, Unit])
+      #|  (h' : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N])(pastecart(vec(0), (x : Cart[Real, M])))
+      #|  IN(pastecart(vec(0), (x : Cart[Real, M])), (B : (Cart[Real, Finite_sum[Unit, M]]) -> Bool))
+      #|  (x : Cart[Real, M])
+      #|  SUBSET(IMAGE((k : (_) -> _), (t : (_) -> Bool)), (u : (_) -> Bool)) \226\134\146 SUBSET((s : (_) -> Bool), t) \226\134\146 SUBSET(IMAGE(k, s), u)
+      #|  o((k : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N]), (z : Cart[Real, Finite_sum[Unit, M]]) => pastecart(op_pct(drop(fstcart(z)), (a : (Cart[Real, M]) -> Cart[Real, Unit])(sndcart(z))), sndcart(z)))
+      #|  (x : Cart[Real, M]) => (k : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N])(pastecart((a : (Cart[Real, M]) -> Cart[Real, Unit])(x), x))
+      #|  (a : (Cart[Real, M]) -> Cart[Real, Unit])
+      #|  (p : Cart[Real, Unit])
+      #|  (x : Cart[Real, M])
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  (t : (Cart[Real, M]) -> Bool)
+      #|  (s' : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  closed_in(subtopology(euclidean, (t : (Cart[Real, M]) -> Bool)), (s' : (Cart[Real, M]) -> Bool))
+      #|  (s' : (Cart[Real, M]) -> Bool) == {(x : Cart[Real, M]) | \226\136\131 u : Cart[Real, Unit], IN(u, interval([(vec(0), vec(1))])) && IN(pastecart(u, x), DIFF(PCROSS(interval([(vec(0), vec(1))]), (t : (Cart[Real, M]) -> Bool)), (V : (Cart[Real, Finite_sum[Unit, M]]) -> Bool)))}
+      #|  o((h' : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N]), (r : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, Finite_sum[Unit, M]]))
+      #|  (r : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, Finite_sum[Unit, M]])
+      #|  (V : (Cart[Real, Finite_sum[Unit, M]]) -> Bool)
+      #|  (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)((interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))]), (t : (Cart[Real, M]) -> Bool))
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 INTER({a}, s) == {a}
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 INTER(t, s) == s
+      #|  (UNION : ((Cart[Real, Finite_sum[Unit, M]]) -> Bool, (Cart[Real, Finite_sum[Unit, M]]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)((PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)({(vec : (Num) -> Cart[Real, Unit])(0)}, (t : (Cart[Real, M]) -> Bool)), (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)((interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))]), (s : (Cart[Real, M]) -> Bool)))
+      #|  ANR((B : (Cart[Real, Finite_sum[Unit, M]]) -> Bool))
+      #|  \226\136\131 V : (Cart[Real, Finite_sum[Unit, M]]) -> Bool, \226\136\131 k : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N], SUBSET((B : (Cart[Real, Finite_sum[Unit, M]]) -> Bool), V) && open_in(subtopology(euclidean, PCROSS(interval([(vec(0), vec(1))]), (t : (Cart[Real, M]) -> Bool))), V) && continuous_on(k, V) && SUBSET(IMAGE(k, V), (u : (Cart[Real, N]) -> Bool)) && (\226\136\128 x : Cart[Real, Finite_sum[Unit, M]], IN(x, B) \226\134\146 k(x) == (h' : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N])(x))
+      #|  SUBSET(IMAGE((h' : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N]), (B : (Cart[Real, Finite_sum[Unit, M]]) -> Bool)), (u : (Cart[Real, N]) -> Bool))
+      #|  (((p : Bool) && (q : Bool)) && !q) == false
+      #|  continuous_on((h' : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N]), (B : (Cart[Real, Finite_sum[Unit, M]]) -> Bool))
+      #|  (closed_in : (Topology[Cart[Real, Finite_sum[Unit, M]]], (Cart[Real, Finite_sum[Unit, M]]) -> Bool) -> Bool)((subtopology : (Topology[Cart[Real, Finite_sum[Unit, M]]], (Cart[Real, Finite_sum[Unit, M]]) -> Bool) -> Topology[Cart[Real, Finite_sum[Unit, M]]])((euclidean : Topology[Cart[Real, Finite_sum[Unit, M]]]), (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)((interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))]), (t : (Cart[Real, M]) -> Bool))), (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)({(vec : (Num) -> Cart[Real, Unit])(0)}, t)) && (closed_in : (Topology[Cart[Real, Finite_sum[Unit, M]]], (Cart[Real, Finite_sum[Unit, M]]) -> Bool) -> Bool)((subtopology : (Topology[Cart[Real, Finite_sum[Unit, M]]], (Cart[Real, Finite_sum[Unit, M]]) -> Bool) -> Topology[Cart[Real, Finite_sum[Unit, M]]])((euclidean : Topology[Cart[Real, Finite_sum[Unit, M]]]), (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)((interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))]), t)), (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)((interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))]), (s : (Cart[Real, M]) -> Bool)))
+      #|  (B : (Cart[Real, Finite_sum[Unit, M]]) -> Bool) == UNION(PCROSS({vec(0)}, (t : (Cart[Real, M]) -> Bool)), PCROSS(interval([(vec(0), vec(1))]), (s : (Cart[Real, M]) -> Bool)))
+      #|  (h' : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N]) == ((z : Cart[Real, Finite_sum[Unit, M]]) => if IN(sndcart(z), (s : (Cart[Real, M]) -> Bool)) { (h : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N])(z) } else { (f : (Cart[Real, M]) -> Cart[Real, N])(sndcart(z)) })
+      #|  (h : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, t), s) && (ANR(s) && ANR(t) || ANR(u)) && continuous_on(f, t) && SUBSET(IMAGE(f, t), u) && homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, u)), f, g) \226\134\146 (\226\136\131 g' : (Cart[Real, M]) -> Cart[Real, N], homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, t), subtopology(euclidean, u)), f, g') && continuous_on(g', t) && SUBSET(IMAGE(g', t), u) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 g'(x) == g(x)))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, t), s) && (ANR(s) && ANR(t) || ANR(u)) && continuous_on(f, t) && SUBSET(IMAGE(f, t), u) && homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, u)), f, g) \226\134\146 (\226\136\131 g' : (Cart[Real, M]) -> Cart[Real, N], continuous_on(g', t) && SUBSET(IMAGE(g', t), u) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 g'(x) == g(x)))
+      #|  (UNIV : (Cart[Real, M]) -> Bool)
+      #|  (x : Cart[Real, M]) => (c : Cart[Real, N])
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (c : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (UNIV : (Cart[Real, M]) -> Bool)
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (x : Cart[Real, M]) => (c : Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed(s) && continuous_on(f, s) && !(s == {}) && SUBSET(IMAGE(f, s), t) && ANR(t) \226\134\146 (\226\136\131 c : Cart[Real, N], homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, t)), f, (x : Cart[Real, M]) => c)) == (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], continuous_on(g, UNIV) && SUBSET(IMAGE(g, UNIV), t) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 g(x) == f(x)))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed(s) && continuous_on(f, s) && !(s == {}) && SUBSET(IMAGE(f, s), relative_frontier(t)) && convex(t) && bounded(t) \226\134\146 (\226\136\131 c : Cart[Real, N], homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, relative_frontier(t))), f, (x : Cart[Real, M]) => c)) == (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], continuous_on(g, UNIV) && SUBSET(IMAGE(g, UNIV), relative_frontier(t)) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 g(x) == f(x)))
+      #|  (x : Cart[Real, M]) => (a : Cart[Real, N])
+      #|  (y : Cart[Real, Finite_sum[Unit, M]]) => (a : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (p : Bool) && (q : Bool) \226\134\146 p == q
+      #|  (r : Real)
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, closed(s) && continuous_on(f, s) && !(s == {}) && SUBSET(IMAGE(f, s), sphere((a, r))) \226\134\146 (\226\136\131 c : Cart[Real, N], homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, sphere((a, r)))), f, (x : Cart[Real, M]) => c)) == (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], continuous_on(g, UNIV) && SUBSET(IMAGE(g, UNIV), sphere((a, r))) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 g(x) == f(x)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, u), s) && contractible(s) && !(s == {}) && ANR(s) \226\134\146 retract_of(s, u)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], locally(connected, s) && (\226\136\128 c : (Cart[Real, M]) -> Bool, IN(c, components(s)) \226\134\146 homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, c), subtopology(euclidean, t)), f, g)) \226\134\146 homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, t)), f, g)
+      #|  (b : Cart[Real, N])
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  \226\136\131 a : Cart[Real, N], IN(a, (t : (Cart[Real, N]) -> Bool))
+      #|  components((s : (Cart[Real, M]) -> Bool)) == {}
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, locally(connected, s) && path_connected(t) && (\226\136\128 c : (Cart[Real, M]) -> Bool, IN(c, components(s)) \226\134\146 (\226\136\131 a : Cart[Real, N], homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, c), subtopology(euclidean, t)), f, (x : Cart[Real, M]) => a))) \226\134\146 (\226\136\131 a : Cart[Real, N], homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, t)), f, (x : Cart[Real, M]) => a))
+      #|  (x : Cart[Real, M])
+      #|  (k : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N])
+      #|  (t' : (Cart[Real, M]) -> Bool)
+      #|  (w : (Cart[Real, Finite_sum[Unit, M]]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (t : (Cart[Real, M]) -> Bool)
+      #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
+      #|  (k : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N])
+      #|  (w : (Cart[Real, Finite_sum[Unit, M]]) -> Bool)
+      #|  SUBSET(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (u : (_) -> Bool)) \226\134\146 IN((b : _), s) \226\134\146 IN(f(b), u)
+      #|  (y : Cart[Real, M])
+      #|  (x : Cart[Real, Unit])
+      #|  (x : Cart[Real, Unit]) == vec(1)
+      #|  (x : Cart[Real, Unit]) == vec(0)
+      #|  (y : Cart[Real, M])
+      #|  (x : Cart[Real, Unit])
+      #|  SUBSET(UNION((t : (_) -> Bool), (u : (_) -> Bool)), UNION((s : (_) -> Bool), UNION(t, u)))
+      #|  (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)((interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))]), (s : (Cart[Real, M]) -> Bool))
+      #|  {(a : _), (b : _)} == UNION({a}, {b})
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (UNION : ((Cart[Real, Finite_sum[Unit, M]]) -> Bool, (Cart[Real, Finite_sum[Unit, M]]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)((PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)({(vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1)}, (s : (Cart[Real, M]) -> Bool)), (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)((interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))]), (t : (Cart[Real, M]) -> Bool)))
+      #|  (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)((interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))]), (s : (Cart[Real, M]) -> Bool))
+      #|  (h' : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N])
+      #|  (h' : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N]) == ((z : Cart[Real, Finite_sum[Unit, M]]) => if IN(fstcart(z), {vec(0)}) { (f : (Cart[Real, M]) -> Cart[Real, N])(sndcart(z)) } else { if IN(fstcart(z), {vec(1)}) { (g : (Cart[Real, M]) -> Cart[Real, N])(sndcart(z)) } else { (h : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N])(z) } })
+      #|  (h : (Cart[Real, Finite_sum[Unit, M]]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, continuous_on(f, s) && SUBSET(IMAGE(f, s), u) && continuous_on(g, s) && SUBSET(IMAGE(g, s), u) && closed_in(subtopology(euclidean, s), t) && ANR(u) && homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, t), subtopology(euclidean, u)), f, g) \226\134\146 (\226\136\131 v : (Cart[Real, M]) -> Bool, SUBSET(t, v) && open_in(subtopology(euclidean, s), v) && homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, v), subtopology(euclidean, u)), f, g))
+      #|  (s : (Cart[Real, M]) -> Bool) == UNIONS(IMAGE((k : ((Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool), components(s)))
+      #|  (k : ((Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)
+      #|  (k : (Cart[Real, M]) -> Bool)
+      #|  (v : (Cart[Real, M]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (v : (Cart[Real, M]) -> Bool)
+      #|  (u : (Cart[Real, M]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  \226\136\128 c : (Cart[Real, M]) -> Bool, IN(c, components((s : (Cart[Real, M]) -> Bool))) \226\134\146 (\226\136\131 u : (Cart[Real, M]) -> Bool, SUBSET(c, u) && closed_in(subtopology(euclidean, s), u) && open_in(subtopology(euclidean, s), u) && homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, u), subtopology(euclidean, (t : (Cart[Real, N]) -> Bool))), (f : (Cart[Real, M]) -> Cart[Real, N]), (g : (Cart[Real, M]) -> Cart[Real, N])))
+      #|  ((q : Bool) \226\134\146 (r : Bool)) && (r \226\134\146 q == (s : Bool)) \226\134\146 q == (r && s)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], locally(connected, s) || compact(s) && ANR(t) \226\134\146 homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, t)), f, g) == (continuous_on(f, s) && SUBSET(IMAGE(f, s), t) && continuous_on(g, s) && SUBSET(IMAGE(g, s), t) && (\226\136\128 c : (Cart[Real, M]) -> Bool, IN(c, components(s)) \226\134\146 homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, c), subtopology(euclidean, t)), f, g)))
+      #|  (b : Cart[Real, N])
+      #|  (d : (Cart[Real, M]) -> Bool)
+      #|  (d : (Cart[Real, M]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  \226\136\131 c : (Cart[Real, M]) -> Bool, IN(c, components((s : (Cart[Real, M]) -> Bool)))
+      #|  (s : (Cart[Real, M]) -> Bool) == {}
+      #|  ((q : Bool) \226\134\146 (r : Bool)) && (r \226\134\146 q == (s : Bool)) \226\134\146 q == (r && s)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], (locally(connected, s) || compact(s) && ANR(t)) && path_connected(t) \226\134\146 (\226\136\131 a : Cart[Real, N], homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, t)), f, (x : Cart[Real, M]) => a)) == (continuous_on(f, s) && SUBSET(IMAGE(f, s), t) && (\226\136\128 c : (Cart[Real, M]) -> Bool, IN(c, components(s)) \226\134\146 (\226\136\131 a : Cart[Real, N], homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, c), subtopology(euclidean, t)), f, (x : Cart[Real, M]) => a))))
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (g' : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (f' : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (g' : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (f' : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, locally(connected, s) || compact(s) && ANR(t) \226\134\146 (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], continuous_on(f, s) && SUBSET(IMAGE(f, s), t) && continuous_on(g, s) && SUBSET(IMAGE(g, s), t) \226\134\146 homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, t)), f, g)) == (\226\136\128 c : (Cart[Real, M]) -> Bool, IN(c, components(s)) \226\134\146 (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], continuous_on(f, c) && SUBSET(IMAGE(f, c), t) && continuous_on(g, c) && SUBSET(IMAGE(g, c), t) \226\134\146 homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, c), subtopology(euclidean, t)), f, g)))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (locally(connected, s) || compact(s) && ANR(t)) && path_connected(t) \226\134\146 (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], continuous_on(f, s) && SUBSET(IMAGE(f, s), t) \226\134\146 (\226\136\131 a : Cart[Real, N], homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, t)), f, (x : Cart[Real, M]) => a))) == (\226\136\128 c : (Cart[Real, M]) -> Bool, IN(c, components(s)) \226\134\146 (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], continuous_on(f, c) && SUBSET(IMAGE(f, c), t) \226\134\146 (\226\136\131 a : Cart[Real, N], homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, c), subtopology(euclidean, t)), f, (x : Cart[Real, M]) => a))))
+      #|  (s : (Cart[Real, M]) -> Bool) == UNIONS(IMAGE((u : ((Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool), components(s)))
+      #|  (u : ((Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  (v : (Cart[Real, M]) -> Bool)
+      #|  (u : (Cart[Real, M]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (u : (Cart[Real, M]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (x : Cart[Real, M]) => (a : Cart[Real, N])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, M])
+      #|  (g : (Cart[Real, M]) -> Cart[Real, Unit])
+      #|  contractible(IMAGE((g : (Cart[Real, M]) -> Cart[Real, Unit]), (c : (Cart[Real, M]) -> Bool)))
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, M])
+      #|  (g : (Cart[Real, M]) -> Cart[Real, Unit])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, M]) -> Bool)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 c : (Cart[Real, M]) -> Bool, IN(c, components((s : (Cart[Real, M]) -> Bool))) \226\134\146 (\226\136\131 u : (Cart[Real, M]) -> Bool, closed_in(subtopology(euclidean, s), u) && open_in(subtopology(euclidean, s), u) && SUBSET(c, u) && (\226\136\131 a : Cart[Real, N], homotopic_with((x : (Cart[Real, M]) -> Cart[Real, N]) => true, (subtopology(euclidean, u), subtopology(euclidean, (t : (Cart[Real, N]) -> Bool))), (f : (Cart[Real, M]) -> Cart[Real, N]), (x : Cart[Real, M]) => a)))
+      #|  (r : (Cart[Real, Unit]) -> Bool)
+      #|  IMAGE((f : (Cart[Real, M]) -> Cart[Real, Unit]), (s : (Cart[Real, M]) -> Bool))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, M])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, Unit])
+      #|  (p : Bool) || (q : Bool) \226\134\146 (p \226\134\146 q) \226\134\146 q
+      #|  path_connected((t : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (continuous_on : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Bool) -> Bool)(f, s) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((IMAGE : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Bool, Cart[Real, N]) -> Bool)(f, s), t) && (ANR : ((Cart[Real, N]) -> Bool) -> Bool)(t) && (connected : ((Cart[Real, N]) -> Bool) -> Bool)(t) && ((dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) == 1 || (\226\136\131 r : (Cart[Real, Unit]) -> Bool, (homeomorphic : ((Cart[Real, M]) -> Bool, (Cart[Real, Unit]) -> Bool) -> Bool)(s, r))) \226\134\146 (\226\136\131 a : Cart[Real, N], (homotopic_with : (((Cart[Real, M]) -> Cart[Real, N]) -> Bool, (Topology[Cart[Real, M]], Topology[Cart[Real, N]]), (Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N]) -> Bool)((x : (Cart[Real, M]) -> Cart[Real, N]) => true, ((subtopology : (Topology[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Topology[Cart[Real, M]])((euclidean : Topology[Cart[Real, M]]), s), (subtopology : (Topology[Cart[Real, N]], (Cart[Real, N]) -> Bool) -> Topology[Cart[Real, N]])((euclidean : Topology[Cart[Real, N]]), t)), f, (x : Cart[Real, M]) => a))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  o((x : Cart[Real, N]) => x, (r1 : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 r1 : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 r2 : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, s)), (x : Cart[Real, N]) => x, r1) && retraction((s, t), r1) && homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, t), subtopology(euclidean, t)), (x : Cart[Real, N]) => x, r2) && retraction((t, u), r2) \226\134\146 homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, s)), (x : Cart[Real, N]) => x, o(r2, r1)) && retraction((s, u), o(r2, r1))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, s)), (x : Cart[Real, N]) => x, r) && retraction((s, t), r)) && (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, t), subtopology(euclidean, t)), (x : Cart[Real, N]) => x, r) && retraction((t, u), r)) \226\134\146 (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, s)), (x : Cart[Real, N]) => x, r) && retraction((s, u), r))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, s)), (x : Cart[Real, N]) => x, r) && retraction((s, t), r)) \226\134\146 homotopy_equivalent(s, t)
+      #|  SUBSET((t : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 INTER(s, t) == t
+      #|  SUBSET((t : (Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  subtopology(euclidean, (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, s)), (x : Cart[Real, N]) => x, r) && retraction((s, t), r)) == (retract_of(t, s) && (\226\136\131 f : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, s)), (x : Cart[Real, N]) => x, f) && SUBSET(IMAGE(f, s), t)))
+      #|  (h : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N])
+      #|  o((h : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N]), pastecart(vec(1)))
+      #|  (h : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N])
+      #|  (v : Cart[Real, Unit]) == vec(1)
+      #|  (y : Cart[Real, N])
+      #|  (v : Cart[Real, Unit])
+      #|  (u : Cart[Real, Unit])
+      #|  (v : Cart[Real, Unit]) == vec(0)
+      #|  (y : Cart[Real, N])
+      #|  (v : Cart[Real, Unit])
+      #|  (u : Cart[Real, Unit])
+      #|  (real_of_num(1) - (x : Real) <= real_of_num(1)) == (real_of_num(0) <= x)
+      #|  (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, Finite_sum[Unit, N]]) -> Bool, Cart[Real, Finite_sum[Unit, Finite_sum[Unit, N]]]) -> Bool)(UNIV, (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[Unit, N]]) -> Bool)({vec(1)}, (UNIV : (Cart[Real, N]) -> Bool)))
+      #|  (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, Finite_sum[Unit, N]]) -> Bool, Cart[Real, Finite_sum[Unit, Finite_sum[Unit, N]]]) -> Bool)(UNIV, (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[Unit, N]]) -> Bool)({vec(0)}, (UNIV : (Cart[Real, N]) -> Bool)))
+      #|  {(a : _), (b : _)} == UNION({a}, {b})
+      #|  (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, Finite_sum[Unit, N]]) -> Bool, Cart[Real, Finite_sum[Unit, Finite_sum[Unit, N]]]) -> Bool)((UNIV : (Cart[Real, Unit]) -> Bool), (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[Unit, N]]) -> Bool)((UNIV : (Cart[Real, Unit]) -> Bool), (c : (Cart[Real, N]) -> Bool)))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  closed_in(subtopology(euclidean, (s : (Cart[Real, N]) -> Bool)), (t : (Cart[Real, N]) -> Bool))
+      #|  (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, Finite_sum[Unit, N]]) -> Bool, Cart[Real, Finite_sum[Unit, Finite_sum[Unit, N]]]) -> Bool)(UNIV, (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[Unit, N]]) -> Bool)({vec(0), vec(1)}, (UNIV : (Cart[Real, N]) -> Bool)))
+      #|  (if (p : Bool) { (x : _) } else { if (q : Bool) { (y : _) } else { (r : _) } }) == (if p || q { if p { x } else { y } } else { r })
+      #|  (real_of_num(1) - (x : Real) <= real_of_num(1)) == (real_of_num(0) <= x)
+      #|  SUBSET(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 IN((x : _), s) \226\134\146 IN(f(x), t)
+      #|  (y : Cart[Real, N])
+      #|  (v : Cart[Real, Unit])
+      #|  (u : Cart[Real, Unit])
+      #|  (g : (Cart[Real, Finite_sum[Unit, Finite_sum[Unit, N]]]) -> Cart[Real, N])
+      #|  {(a : _), (b : _)} == UNION({a}, {b})
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[Unit, N]]) -> Bool)((interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))]), (s : (Cart[Real, N]) -> Bool))
+      #|  (UNION : ((Cart[Real, Finite_sum[Unit, N]]) -> Bool, (Cart[Real, Finite_sum[Unit, N]]) -> Bool, Cart[Real, Finite_sum[Unit, N]]) -> Bool)((PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[Unit, N]]) -> Bool)({(vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1)}, (s : (Cart[Real, N]) -> Bool)), (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, Finite_sum[Unit, N]]) -> Bool)((interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))]), (t : (Cart[Real, N]) -> Bool)))
+      #|  (x : Cart[Real, Finite_sum[Unit, N]]) => (g : (Cart[Real, Finite_sum[Unit, Finite_sum[Unit, N]]]) -> Cart[Real, N])(pastecart(vec(1), x))
+      #|  (f : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, Finite_sum[Unit, Finite_sum[Unit, N]]]) -> Cart[Real, N]) == ((z : Cart[Real, Finite_sum[Unit, Finite_sum[Unit, N]]]) => if fstcart(sndcart(z)) == vec(0) { sndcart(sndcart(z)) } else { if fstcart(sndcart(z)) == vec(1) { (f : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N])(pastecart(vec(1) - fstcart(z), f(pastecart(vec(1), sndcart(sndcart(z)))))) } else { f(pastecart(lift(drop(fstcart(sndcart(z))) * (real_of_num(1) - drop(fstcart(z)))), sndcart(sndcart(z)))) } })
+      #|  (f : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, ANR(s) && (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, s)), (x : Cart[Real, N]) => x, r) && retraction((s, t), r)) \226\134\146 (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((h : (Cart[Real, N]) -> Cart[Real, N]) => \226\136\128 x : Cart[Real, N], IN(x, t) \226\134\146 h(x) == x, (subtopology(euclidean, s), subtopology(euclidean, s)), (x : Cart[Real, N]) => x, r) && retraction((s, t), r))
+      #|  IN((b : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  IN((a : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (b : Cart[Real, N])
+      #|  (x : Cart[Real, N]) => (a : Cart[Real, N])
+      #|  \226\136\131 a : Cart[Real, N], IN(a, (t : (Cart[Real, N]) -> Bool))
+      #|  (t : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, contractible(s) && retract_of(t, s) \226\134\146 (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, s)), (x : Cart[Real, N]) => x, r) && retraction((s, t), r))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, contractible(s) && AR(t) && closed_in(subtopology(euclidean, s), t) \226\134\146 (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, s)), (x : Cart[Real, N]) => x, r) && retraction((s, t), r))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], contractible(s) && IN(a, s) \226\134\146 (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, s)), (x : Cart[Real, N]) => x, r) && retraction((s, {a}), r))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, AR(s) && retract_of(t, s) \226\134\146 (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((h : (Cart[Real, N]) -> Cart[Real, N]) => \226\136\128 x : Cart[Real, N], IN(x, t) \226\134\146 h(x) == x, (subtopology(euclidean, s), subtopology(euclidean, s)), (x : Cart[Real, N]) => x, r) && retraction((s, t), r))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, AR(s) && AR(t) && closed_in(subtopology(euclidean, s), t) \226\134\146 (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((h : (Cart[Real, N]) -> Cart[Real, N]) => \226\136\128 x : Cart[Real, N], IN(x, t) \226\134\146 h(x) == x, (subtopology(euclidean, s), subtopology(euclidean, s)), (x : Cart[Real, N]) => x, r) && retraction((s, t), r))
+      #|  {(a : Cart[Real, N])}
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], AR(s) && IN(a, s) \226\134\146 (\226\136\131 r : (Cart[Real, N]) -> Cart[Real, N], homotopic_with((h : (Cart[Real, N]) -> Cart[Real, N]) => h(a) == a, (subtopology(euclidean, s), subtopology(euclidean, s)), (x : Cart[Real, N]) => x, r) && retraction((s, {a}), r))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], convex(s) && bounded(s) && IN(a, relative_interior(s)) && convex(t) && SUBSET(relative_frontier(s), t) && SUBSET(t, hull(affine, s)) \226\134\146 homotopy_equivalent(relative_frontier(s), DELETE(t, a))
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 SUBSET(DIFF(s, (t : (_) -> Bool)), u)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], convex(s) && bounded(s) && IN(a, relative_interior(s)) \226\134\146 homotopy_equivalent(relative_frontier(s), DELETE(hull(affine, s), a))
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (cball : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), (r : Real)))
+      #|  (sphere : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), (r : Real)))
+      #|  (c : Cart[Real, N])
+      #|  \226\136\128 c : Cart[Real, N], \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, real_of_num(0) < r \226\134\146 homotopy_equivalent(DELETE(UNIV, c), sphere((a, r)))
+      #|  o((i : (Cart[Real, N]) -> Cart[Real, M]), o((g : (Cart[Real, N]) -> Cart[Real, N]), (r : (Cart[Real, M]) -> Cart[Real, N])))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 i : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 r : (Cart[Real, M]) -> Cart[Real, N], continuous_on(i, t) && SUBSET(IMAGE(i, t), s) && continuous_on(r, s) && SUBSET(IMAGE(r, s), t) && (\226\136\128 y : Cart[Real, N], IN(y, t) \226\134\146 r(i(y)) == y) \226\134\146 (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, M], continuous_on(f, s) && SUBSET(IMAGE(f, s), s) \226\134\146 (\226\136\131 x : Cart[Real, M], IN(x, s) && f(x) == x)) \226\134\146 (\226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], continuous_on(g, t) && SUBSET(IMAGE(g, t), t) \226\134\146 (\226\136\131 y : Cart[Real, N], IN(y, t) && g(y) == y))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, homeomorphic(s, t) \226\134\146 (\226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], continuous_on(f, s) && SUBSET(IMAGE(f, s), s) \226\134\146 (\226\136\131 x : Cart[Real, _], IN(x, s) && f(x) == x)) == (\226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], continuous_on(g, t) && SUBSET(IMAGE(g, t), t) \226\134\146 (\226\136\131 y : Cart[Real, _], IN(y, t) && g(y) == y))
+      #|  (x : Cart[Real, N]) => x
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, retract_of(t, s) && (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], continuous_on(f, s) && SUBSET(IMAGE(f, s), s) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, s) && f(x) == x)) \226\134\146 (\226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], continuous_on(g, t) && SUBSET(IMAGE(g, t), t) \226\134\146 (\226\136\131 y : Cart[Real, N], IN(y, t) && g(y) == y))
+      #|  norm((x : Cart[Real, _]) - (a : Cart[Real, _])) == dist((a, x))
       #|  :real
       #|  :real
-      #|  x:real^N
-      #|  dist(a,a + b) = norm b
+      #|  (x : Cart[Real, N])
+      #|  dist(((a : Cart[Real, _]), a + (b : Cart[Real, _]))) == norm(b)
       #|  :real
       #|  :real
-      #|  (\\x:real^N. lift(norm(x - a))) = (lift o norm) o (\\x. x - a)
-      #|  (\\y. a + B / norm(y - a) % (y - a)) o (q:real^N->real^N)
-      #|  B:real
-      #|  a:real^N
-      #|  frontier(s:real^N->bool) SUBSET t
-      #|  (x:real^N) IN t
-      #|  (x:real^N) IN s
-      #|  forall x. ~((q:real^N->real^N) x = a)
-      #|  a:real^N
-      #|  B:real
-      #|  s SUBSET closure s /\\ t SUBSET closure t /\\ s UNION t = UNIV\n      ==> closure s UNION closure t = UNIV
-      #|  closure(s) UNION closure((:real^N) DIFF s) = (:real^N)
-      #|  z:real^N
-      #|  p /\\ ~p <=> F
-      #|  (q:real^N->real^N) continuous_on\n      closure(s) UNION closure((:real^N) DIFF s)
-      #|  q = \\z:real^N. if z IN closure s then r(z) else z
-      #|  a:real^N
-      #|  ~(s SUBSET t) <=> ?x. x IN s /\\ ~(x IN t)
-      #|  forall s:real^N->bool t r.\n        bounded s /\\\n        frontier s SUBSET t /\\\n        r continuous_on (closure s) /\\\n        IMAGE r s SUBSET t /\\\n        (forall x. x IN t ==> r x = x)\n        ==> s SUBSET t
-      #|  s:real^N->bool
-      #|  r:real^N->real^N
-      #|  frontier s:real^N->bool
-      #|  s:real^N->bool
-      #|  r:real^N->real^N
-      #|  forall s:real^N->bool.\n        bounded s /\\ ~(interior s = {}) ==> ~((frontier s) retract_of s)
-      #|  (g:real^N->real^N) x = x
-      #|  x:real^N
-      #|  forall x. x IN cball (vec 0,r) ==> ~((g:real^N->real^N) x = p)
-      #|  (h:real^N->real^N) o (g:real^N->real^N)
-      #|  r:real
-      #|  vec 0:real^N
-      #|  ?h:real^N->real^N.\n        retraction (UNIV DELETE p,sphere(vec 0,r)) h
-      #|  p:real^N
-      #|  p /\\ ~p <=> F
-      #|  UNIV DIFF s SUBSET t ==> UNIV = s UNION t
-      #|  (:real^N) = s UNION closure((:real^N) DIFF s)
-      #|  (g:real^N->real^N) continuous_on (:real^N)
-      #|  g = \\x:real^N. if x IN s then f(x) else x
-      #|  r:real
-      #|  vec 0:real^N
-      #|  s UNION (IMAGE f s):real^N->bool
-      #|  forall f:real^N->real^N s.\n        compact s /\\ f continuous_on s /\\ (forall x. x IN frontier s ==> f x = x)\n        ==> s SUBSET IMAGE f s
-      #|  (:real^N) DELETE (vec 0)
-      #|  (:real^N) DIFF s
-      #|  (:real^N)
-      #|  vec 0:real^N
-      #|  r:real
-      #|  vec 0:real^N
-      #|  a:real^N
-      #|  a:real^N
-      #|  (forall x. x IN s ==> F) ==> s = {}
-      #|  forall s. bounded s /\\ ((:real^N) DIFF s) retract_of (:real^N) ==> s = {}
-      #|  &1 <= c ==> ~(c = &0)
-      #|  (&1 - u) + u = &1
-      #|  inv(c):real
-      #|  &1 - inv c
-      #|  x:real^N
-      #|  a:real^N
-      #|  ~((f:real^N->real^N) x IN s)
-      #|  x:real^N = (&1 - c) % a + c % y <=> x - a = c % (y - a)
-      #|  c:real
-      #|  (f:real^N->real^N) x
-      #|  c:real
-      #|  s:real^N->bool
-      #|  ~((f:real^N->real^N) x = a)
-      #|  f(x:real^N) = x
-      #|  x:real^N
-      #|  s:real^N->bool
-      #|  IMAGE r t SUBSET u ==> u SUBSET s /\\ y IN t ==> r y IN s
-      #|  x:real^N
-      #|  s:real^N->bool
-      #|  s:real^N->bool
-      #|  IMAGE (f:real^N->real^N) s =\n                s INTER IMAGE f s UNION\n                ((:real^N) DIFF interior s) INTER IMAGE f s
-      #|  s:real^N->bool
-      #|  (\\x. if x IN s then x else r x) o (f:real^N->real^N)
-      #|  r:real^N->real^N
-      #|  s SUBSET u ==> s DIFF t SUBSET u
-      #|  a IN s ==> ~(s = {})
-      #|  a:real^N
-      #|  affine hull s:real^N->bool
-      #|  s:real^N->bool
-      #|  s:real^N->bool = {}
-      #|  forall f s a:real^N.\n        f continuous_on s /\\ convex s /\\ compact s /\\ a IN interior s\n        ==> (?x. x IN s /\\ f x = x) \\/\n            (?x. x IN frontier s /\\ x IN segment(a,f x))
-      #|  x - a:real^N = y ==> x = a + y
-      #|  x - a:real^N = y ==> x = a + y
-      #|  x - a:real^N = y ==> x = a + y
-      #|  a:real^N = x + a - y <=> y = x
-      #|  x:real^N
-      #|  x + a - y:real^N = x <=> y = a
-      #|  a:real^N
-      #|  s:real^N->bool
-      #|  \\x:real^N. x + (a - f(x))
-      #|  forall f s a.\n        f continuous_on s /\\ convex s /\\ compact s /\\ a IN interior s /\\\n        IMAGE f s SUBSET (:real^N) DELETE a\n        ==> ?x. x IN frontier s /\\ a IN segment(x,f x)
-      #|  s:real^N->bool
-      #|  f:real^N->real^N
-      #|  forall f:real^N->real^N s a.\n       compact s /\\ a IN s /\\\n       f continuous_on s /\\ IMAGE f s SUBSET (:real^N) DELETE a\n       ==> ?x. x IN frontier s /\\ ~(f x = x)
-      #|  r:real^N->real^N
-      #|  (c:real^N->bool) SUBSET s
-      #|  closure(c:real^N->bool) SUBSET t
-      #|  frontier((:real^N) DIFF s)
-      #|  frontier(c:real^N->bool) SUBSET s
-      #|  forall s t c. closed s /\\ s retract_of t /\\\n           c IN components((:real^N) DIFF s) /\\ bounded c\n           ==> ~(c SUBSET t)
-      #|  bounded(c:real^N->bool)
-      #|  forall s t c. closed s /\\ s retract_of t /\\ bounded t /\\\n           c IN components((:real^N) DIFF s)\n           ==> ~(c SUBSET t)
-      #|  s SUBSET t ==> s DIFF u SUBSET t DIFF u
-      #|  s SUBSET t\n      ==> ~(c INTER s = {}) ==> ~(c INTER t = {})
-      #|  frontier((:real^N) DIFF s)
-      #|  ~(t = {}) /\\ t SUBSET u\n      ==> ~(u INTER (s UNION t) = {})
-      #|  s DIFF t = {} <=> s SUBSET t
-      #|  ~(c INTER frontier(u:real^N->bool) = {})
-      #|  c:real^N->bool
-      #|  (forall c. c IN s ==> P c) ==> {c | c IN s /\\ P c} = s
-      #|  (:real^N) DIFF s
-      #|  cball(vec 0:real^N,r) DIFF u
-      #|  r:real
-      #|  vec 0:real^N
-      #|  u:real^N->bool
-      #|  forall c. c IN components((:real^N) DIFF s) ==> ~(c SUBSET u)
-      #|  u:real^N->bool
-      #|  s:real^N->bool = {}
-      #|  forall s. compact s /\\ ENR s ==> FINITE(components((:real^N) DIFF s))
-      #|  forall s. compact s /\\ ANR s ==> FINITE(components((:real^N) DIFF s))
-      #|  p:real^N
-      #|  p:real^N
-      #|  u:real^N->bool
-      #|  (:real^N) DIFF s
-      #|  u = connected_component ((:real^N) DIFF s) p
-      #|  p:real^N
-      #|  ~(s SUBSET t) <=> ?p. p IN s /\\ ~(p IN t)
-      #|  ~((u:real^N->bool) SUBSET t)
-      #|  u:real^N->bool
-      #|  d:real^N->bool = {}
-      #|  (:real^N) DIFF s
-      #|  c':real^N->bool
-      #|  c:real^N->bool
-      #|  d:real^N->bool
-      #|  SUBSET
-      #|  forall s t. compact s /\\ s retract_of t /\\ bounded t\n         ==> components((:real^N) DIFF s) <=_c components((:real^N) DIFF t)
-      #|  CARD(components((:real^N) DIFF t))
-      #|  CARD{u:real^N->bool}
-      #|  n = 0 \\/ n = 1 <=> n <= 1
-      #|  s HAS_SIZE 1
-      #|  s SUBSET {a} <=> s = {} \\/ s = {a}
-      #|  FINITE(components((:real^N) DIFF s)) /\\\n    CARD(components((:real^N) DIFF s)) <= CARD(components((:real^N) DIFF t))
-      #|  t:real^N->bool
-      #|  s:real^N->bool
-      #|  FINITE(components((:real^N) DIFF t))
-      #|  u:real^N->bool
-      #|  forall s t. compact s /\\ s retract_of t /\\ bounded t /\\\n         connected((:real^N) DIFF t)\n         ==> connected((:real^N) DIFF s)
-      #|  &0 < r ==> ~(r < &0)
-      #|  cball(vec 0:real^N,r)
-      #|  g:real^N->real^N
-      #|  g:real^N->real^N
-      #|  s:real^N->bool
-      #|  cball(vec 0:real^N,r)
-      #|  s:real^N->bool
-      #|  f:real^N->real^N
-      #|  (\\x. a):real^N->real^N
-      #|  vec 0:real^N
-      #|  r:real
-      #|  forall f:real^N->real^N s.\n        compact s /\\ ~(s = {}) /\\ ANR s /\\\n        f continuous_on s /\\ IMAGE f s SUBSET s /\\\n        (?a. homotopic_with (\\x. T)\n              (subtopology euclidean s,subtopology euclidean s) f (\\x. a))\n        ==> ?x. x IN s /\\ f x = x
-      #|  forall f:real^N->real^N s.\n        compact s /\\ contractible s /\\ ~(s = {}) /\\ ANR s /\\\n        f continuous_on s /\\ IMAGE f s SUBSET s\n        ==> ?x. x IN s /\\ f x = x
-      #|  forall f a:real^N r c.\n     &0 < r /\\\n     homotopic_with (\\x. T)\n      (subtopology euclidean (sphere(a,r)),\n       subtopology euclidean (sphere(a,r))) f (\\x. c)\n     ==> ?x. x IN sphere(a,r) /\\ f x = x
-      #|  forall f s:real^N->bool.\n        compact s /\\ AR s /\\ f continuous_on s /\\ IMAGE f s SUBSET s\n         ==> ?x. x IN s /\\ f x = x
-      #|  forall f s. compact s /\\ s retract_of (:real^N) /\\\n         f continuous_on s /\\ IMAGE f s SUBSET s\n         ==> ?x. x IN s /\\ f x = x
-      #|  y:real^N
-      #|  x:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  (\\x. lift (max (&0) (e - norm (x - y:real^N)))) =\n       (\\x. (lambda i. max (lift(&0)$i) (lift(e - norm (x - y))$i)))
-      #|  y:real^N
-      #|  (\\x. inv(sum t (\\p. g p x)) % vsum t (\\p. g p x % p)):real^N->real^N
-      #|  x:real^N
-      #|  s SUBSET UNIONS (IMAGE (\\x:real^N. ball(x,e)) t)
-      #|  &0 < max (&0) b <=> &0 < b
-      #|  &0 <= max (&0) b
-      #|  forall x. x IN s ==> &0 < sum t (\\p. (g:real^N->real^N->real) p x)
-      #|  g = \\p x:real^N. max (&0) (e - norm(x - p))
-      #|  t:real^N->bool
-      #|  e:real
-      #|  forall s:real^N->bool e.\n        compact s /\\ &0 < e\n        ==> ?t f. FINITE t /\\ t SUBSET s /\\\n                  f continuous_on s /\\ IMAGE f s SUBSET (convex hull t) /\\\n                  (forall x. x IN s ==> norm(f x - x) < e)
-      #|  r:real
-      #|  a:real^M
-      #|  (g:real^N->real^M) o (h:real^M->real^N)
-      #|  h:real^M->real^N
-      #|  t:real^N->bool
-      #|  s:real^M->bool
-      #|  (:real^M)
-      #|  f:real^M->real^N
-      #|  r:real
-      #|  a:real^M
-      #|  forall f:real^M->real^N g:real^N->real^M s t.\n        f continuous_on s /\\ IMAGE f s SUBSET t /\\\n        g continuous_on t /\\ IMAGE g t SUBSET s /\\\n        compact s /\\ AR t\n        ==> ?x. x IN s /\\ g(f x) = x
-      #|  (p /\\ q ==> r) /\\ p ==> (p ==> q) ==> r
-      #|  s:real^N->bool
-      #|  closure(IMAGE (f:real^N->real^N) s)
-      #|  f:real^N->real^N
-      #|  \\x:real^N. x
-      #|  forall f s:real^N->bool.\n           s retract_of (:real^N) /\\\n           f continuous_on s /\\ IMAGE f s SUBSET s /\\ bounded(IMAGE f s)\n           ==> ?x. x IN s /\\ f x = x
-      #|  s:real^N->bool
-      #|  t:real^N->bool
-      #|  f:real^N->real^N
-      #|  \\x:real^N. x
-      #|  forall f s t:real^N->bool.\n     AR s /\\ f continuous_on s /\\ IMAGE f s SUBSET t /\\ t SUBSET s /\\ compact t\n     ==> ?x. x IN t /\\ f x = x
-      #|  t:real^N->bool
-      #|  s:real^N->bool
-      #|  f:real^N->real^N
-      #|  forall f s t:real^N->bool.\n        convex s /\\ ~(s = {}) /\\ t SUBSET s /\\ compact t /\\\n        f continuous_on s /\\ IMAGE f s SUBSET t\n        ==> ?x. x IN s /\\ f x = x
-      #|  closure(IMAGE (f:real^N->real^N) (:real^N))
-      #|  (:real^N)
-      #|  f:real^N->real^N
-      #|  forall f:real^N->real^N.\n        f continuous_on (:real^N) /\\ bounded (IMAGE f (:real^N))\n        ==> ?x. f x = x
-      #|  y:real^N
-      #|  IMAGE (r:real^N->real^N) (closure(IMAGE (f:real^N->real^N) s))
-      #|  s:real^N->bool
-      #|  (r:real^N->real^N) o (f:real^N->real^N)
-      #|  r:real^N->real^N
-      #|  (:real^N)
-      #|  s:real^N->bool
-      #|  forall f s:real^N->bool.\n        closed s /\\ convex s /\\ ~(s = {}) /\\\n        f continuous_on s /\\ bounded(IMAGE f s) /\\\n        IMAGE f (frontier s) SUBSET s\n        ==> ?x. x IN s /\\ f x = x
-      #|  v:real^N = c % v <=> (c - &1) % v = vec 0
-      #|  (%) (vec 1 dot ((A:real^N^N) ** x)):real^N->real^N
-      #|  vec 1 dot ((A:real^N^N) ** x)
-      #|  inv(norm x) % x:real^N
-      #|  x:real^N = vec 0
-      #|  x:real^N
-      #|  basis 1:real^N
-      #|  sum {i} (\\i. (x:real^N)$i)
-      #|  i:num
-      #|  x:real^N
-      #|  interval[vec 0:real^N,vec 1]
-      #|  &0 < x <=> &0 <= x /\\ ~(x = &0)
-      #|  x:real^N = vec 0
-      #|  x:real^N
-      #|  forall x. (forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i) /\\ vec 1 dot x = &1\n        ==> &0 < vec 1 dot ((A:real^N^N) ** x)
-      #|  forall x. (forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i)\n        ==> forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= ((A:real^N^N) ** x)$i
-      #|  {x:real^N | vec 1 dot x = &1} INTER\n     {x:real^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i}
-      #|  \\x:real^N. inv(vec 1 dot (A ** x)) % ((A:real^N^N) ** x)
-      #|  ~(~p /\\ q) <=> q ==> p
-      #|  &0
-      #|  inv(norm v) % v:real^N
-      #|  v:real^N
-      #|  ?v. ~(v = vec 0) /\\ (A:real^N^N) ** v = vec 0
-      #|  forall A:real^N^N.\n        (forall i j. 1 <= i /\\ i <= dimindex(:N) /\\ 1 <= j /\\ j <= dimindex(:N)\n               ==> &0 <= A$i$j)\n        ==> ?v c. norm v = &1 /\\ &0 <= c /\\ A ** v = c % v
-      #|  interval_bij (a:real^N,b:real^N) (u:real^N,v:real^N) (x:real^N) =\n    (lambda i. u$i + (x$i - a$i) / (b$i - a$i) * (v$i - u$i)):real^N
-      #|  interval_bij (a,b) (u,v) =\n        \\x. (lambda i. (v$i - u$i) / (b$i - a$i) * x$i) +\n            (lambda i. u$i - (v$i - u$i) / (b$i - a$i) * a$i)
-      #|  forall a b u v x. (interval_bij (a:real^N,b:real^N) (u:real^N,v:real^N))\n                  continuous at x
-      #|  forall a b u v s. interval_bij (a,b) (u,v) continuous_on s
-      #|  a <= x /\\ x <= b ==> x - a <= &1 * (b - a)
-      #|  (a:real^N)$i <= (b:real^N)$i
-      #|  u + x <= v <=> x <= &1 * (v - u)
-      #|  u <= u + x <=> &0 <= x
-      #|  forall a b u v x:real^N.\n        x IN interval[a,b] /\\ ~(interval[u,v] = {})\n        ==> (interval_bij (a,b) (u,v) x) IN interval[u,v]
-      #|  forall a b u v x:real^N.\n        (forall i. 1 <= i /\\ i <= dimindex(:N) ==> a$i < b$i /\\ u$i < v$i)\n        ==> interval_bij (a,b) (u,v) (interval_bij (u,v) (a,b) x) = x
-      #|  1..2
-      #|  infnorm (x:real^2) = max (abs(x$1)) (abs(x$2))
-      #|  infnorm (x:real^2) = &1 <=>\n        abs(x$1) <= &1 /\\ abs(x$2) <= &1 /\\\n        (x$1 = -- &1 \\/ x$1 = &1 \\/ x$2 = -- &1 \\/ x$2 = &1)
-      #|  infnorm (x:real^2) = &1 ==> abs(x$1) <= &1 /\\ abs(x$2) <= &1
-      #|  IMAGE f s SUBSET t ==> x IN s ==> f x IN t
-      #|  forall z:real^2. abs(z$1) <= &1 /\\ abs(z$2) <= &1 <=>\n                           z IN interval[--vec 1,vec 1]
-      #|  abs(x$1) <= &1 /\\ abs(x$2) <= &1 ==> ~(&0 < x$2 - &1)
-      #|  abs(x$1) <= &1 /\\ abs(x$2) <= &1 ==> ~(x$2 - -- &1 < &0)
-      #|  abs(x$1) <= &1 /\\ abs(x$2) <= &1 ==> ~(&1 - x$1 < &0)
-      #|  abs(x$1) <= &1 /\\ abs(x$2) <= &1 ==> ~(&0 < -- &1 - x$1)
-      #|  x = &1 ==> &0 < x
-      #|  x = -- &1 ==> x < &0
-      #|  --x = &1 ==> x < &0
-      #|  --x = -- &1 ==> &0 < x
-      #|  (forall x i. 1 <= i /\\ i <= 2 /\\ ~(x = vec 0)\n           ==> (&0 < ((sqprojection:real^2->real^2) x)$i <=> &0 < x$i)) /\\\n    (forall x i. 1 <= i /\\ i <= 2 /\\ ~(x = vec 0)\n           ==> ((sqprojection x)$i < &0 <=> x$i < &0))
-      #|  infnorm(x:real^2) = &1
-      #|  x:real^2
-      #|  x:real^2
-      #|  x:real^2
-      #|  interval[--vec 1:real^1,vec 1]
-      #|  interval[--vec 1,vec 1]:real^2->bool
-      #|  (\\w. (negatex:real^2->real^2)\n                       (sqprojection(f(lift(w$1)) - g(lift(w$2)):real^2)))\n                  :real^2->real^2
-      #|  forall z. ~(z = vec 0) ==> infnorm((sqprojection:real^2->real^2) z) = &1
-      #|  forall z:real^2. infnorm(negatex z:real^2) = infnorm z
-      #|  (negatex:real^2->real^2) = \\x. vector[--(x$1); x$2]
-      #|  sqprojection = \\z:real^2. inv(infnorm z) % z
-      #|  ~(a /\\ b /\\ c) <=> a /\\ b ==> ~c
-      #|  p <=> ~ ~p
-      #|  forall f:real^1->real^2 g:real^1->real^2.\n        IMAGE f (interval[--vec 1,vec 1]) SUBSET interval[--vec 1,vec 1] /\\\n        IMAGE g (interval[--vec 1,vec 1]) SUBSET interval[--vec 1,vec 1] /\\\n        f continuous_on interval[--vec 1,vec 1] /\\\n        g continuous_on interval[--vec 1,vec 1] /\\\n        f(--vec 1)$1 = -- &1 /\\ f(vec 1)$1 = &1 /\\\n        g(--vec 1)$2 = -- &1 /\\ g(vec 1)$2 = &1\n        ==> ?s t. s IN interval[--vec 1,vec 1] /\\\n                  t IN interval[--vec 1,vec 1] /\\\n                  f(s) = g(t)
-      #|  inv(&2) % (x + x) = x
-      #|  inv(&2) % (--x + x) = vec 0
-      #|  (iscale:real^1->real^1) continuous_on interval [--vec 1,vec 1]
-      #|  IMAGE (iscale:real^1->real^1) (interval[--vec 1,vec 1])\n    SUBSET interval[vec 0,vec 1]
-      #|  (g:real^1->real^2) o (iscale:real^1->real^1)
-      #|  (f:real^1->real^2) o (iscale:real^1->real^1)
-      #|  iscale = \\z:real^1. inv(&2) % (z + vec 1)
-      #|  forall f:real^1->real^2 g:real^1->real^2.\n        path f /\\ path g /\\\n        path_image f SUBSET interval[--vec 1,vec 1] /\\\n        path_image g SUBSET interval[--vec 1,vec 1] /\\\n        (pathstart f)$1 = -- &1 /\\ (pathfinish f)$1 = &1 /\\\n        (pathstart g)$2 = -- &1 /\\ (pathfinish g)$2 = &1\n        ==> ?z. z IN path_image f /\\ z IN path_image g
-      #|  (forall x. x IN s ==> g(f(x)) = x) ==> x IN IMAGE f s ==> g x IN s
-      #|  z:real^2
-      #|  interval_bij (a,b) (--vec 1,vec 1) o (g:real^1->real^2)
-      #|  interval_bij (a,b) (--vec 1,vec 1) o (f:real^1->real^2)
-      #|  (z:real^2) IN interval[a,b] /\\ g(vec 0:real^1) IN interval[a,b]
-      #|  vec 0:real^1
-      #|  z:real^2
-      #|  vec 0:real^1
-      #|  path_image g SUBSET interval[a:real^2,b]
-      #|  pathfinish(f:real^1->real^2)
-      #|  pathstart(f:real^1->real^2)
-      #|  ?z:real^2. z IN path_image f /\\ z$1 = (pathstart g:real^2)$1
-      #|  a <= b <=> b = a \\/ a < b
-      #|  (a:real^2)$2 <= (b:real^2)$2
-      #|  (z:real^2) IN interval[a,b] /\\ f(vec 0:real^1) IN interval[a,b]
-      #|  vec 0:real^1
-      #|  z:real^2
-      #|  vec 0:real^1
-      #|  path_image f SUBSET interval[a:real^2,b]
-      #|  pathfinish(g:real^1->real^2)
-      #|  pathstart(g:real^1->real^2)
-      #|  ?z:real^2. z IN path_image g /\\ z$2 = (pathstart f:real^2)$2
-      #|  a <= b <=> b = a \\/ a < b
-      #|  (a:real^2)$1 <= (b:real^2)$1
-      #|  s SUBSET t ==> ~(s = {}) ==> ~(t = {})
-      #|  ~(interval[a:real^2,b] = {})
-      #|  forall f g a b:real^2.\n        path f /\\ path g /\\\n        path_image f SUBSET interval[a,b] /\\\n        path_image g SUBSET interval[a,b] /\\\n        (pathstart f)$1 = a$1 /\\ (pathfinish f)$1 = b$1 /\\\n        (pathstart g)$2 = a$2 /\\ (pathfinish g)$2 = b$2\n        ==> ?z. z IN path_image f /\\ z IN path_image g
-      #|  interval_bij (--vec 1,vec 1) (a,b) (z:real^2)
-      #|  vec 0:real^2 = &0 % basis 2
-      #|  b:real^2
-      #|  a:real^2
-      #|  forall a:real^2 b:real^2 x:real^2.\n      a$1 = b$1\n      ==> (x IN segment[a,b] <=>\n           x$1 = a$1 /\\ x$1 = b$1 /\\\n           (a$2 <= x$2 /\\ x$2 <= b$2 \\/ b$2 <= x$2 /\\ x$2 <= a$2))
-      #|  vec 0:real^2 = &0 % basis 1
-      #|  b:real^2
-      #|  a:real^2
-      #|  forall a:real^2 b:real^2 x:real^2.\n      a$2 = b$2\n      ==> (x IN segment[a,b] <=>\n           x$2 = a$2 /\\ x$2 = b$2 /\\\n           (a$1 <= x$1 /\\ x$1 <= b$1 \\/ b$1 <= x$1 /\\ x$1 <= a$1))
-      #|  z:real^2
-      #|  path_image (g:real^1->real^2) SUBSET interval [a,b]
-      #|  z:real^2
-      #|  path_image (f:real^1->real^2) SUBSET interval [a,b]
-      #|  ~(z IN {x,y}) <=> ~(z = x) /\\ ~(z = y)
-      #|  forall f s:real^2->bool. path_image f UNION s =\n                       path_image f UNION (s DIFF {pathstart f,pathfinish f})
-      #|  z:real^2
-      #|  interval[a:real^2,b:real^2]
-      #|  s SUBSET u /\\ t SUBSET u ==> (s UNION t) SUBSET u
-      #|  vector[(b:real^2)$1 + &2; b$2 + &3]:real^2
-      #|  vector[(a:real^2)$1 - &2; a$2 - &3]:real^2
-      #|  linepath(vector[(pathstart g)$1; (pathstart g)$2 - &3],pathstart g) ++\n     (g:real^1->real^2) ++\n     linepath(pathfinish g,vector[(pathfinish g)$1;(a:real^2)$2 - &1]) ++\n     linepath(vector[(pathfinish g)$1;a$2 - &1],vector[b$1 + &1;a$2 - &1]) ++\n     linepath(vector[b$1 + &1;a$2 - &1],vector[(b:real^2)$1 + &1;b$2 + &3])
-      #|  linepath(vector[a$1 - &2;a$2 - &2],vector[(pathstart f)$1;a$2 - &2]) ++\n     linepath(vector[(pathstart f)$1;(a:real^2)$2 - &2],pathstart f) ++\n     (f:real^1->real^2) ++\n     linepath(pathfinish f,vector[(pathfinish f)$1;a$2 - &2]) ++\n     linepath(vector[(pathfinish f)$1;a$2 - &2],\n              vector[(b:real^2)$1 + &2;a$2 - &2])
-      #|  pathstart (f:real^1->real^2) IN interval[a,b] /\\\n    pathfinish f IN interval[a,b] /\\\n    pathstart g IN interval[a,b] /\\\n    pathfinish g IN interval[a,b]
-      #|  s SUBSET t ==> ~(s = {}) ==> ~(t = {})
-      #|  ~(interval[a:real^2,b] = {})
-      #|  forall f g a b:real^2.\n        path f /\\ path g /\\\n        path_image f SUBSET interval[a,b] /\\\n        path_image g SUBSET interval[a,b] /\\\n        (pathstart f)$2 = a$2 /\\ (pathfinish f)$2 = a$2 /\\\n        (pathstart g)$2 = a$2 /\\ (pathfinish g)$2 = a$2 /\\\n        (pathstart f)$1 < (pathstart g)$1 /\\\n        (pathstart g)$1 < (pathfinish f)$1 /\\\n        (pathfinish f)$1 < (pathfinish g)$1\n        ==> ?z. z IN path_image f /\\ z IN path_image g
-      #|  (s UNION t) UNION u =\n                                         u UNION t UNION s
-      #|  ~(c = {}) /\\ c SUBSET (:real^N) DIFF s ==> ~(c SUBSET s)
-      #|  (z:real^N) IN s
-      #|  z:real^N
-      #|  r:real^N->real^N
-      #|  s:real^N->bool
-      #|  connected_component ((:real^N) DIFF s) y
-      #|  r:real^N->real^N
-      #|  open((:real^N) DIFF s)
-      #|  y:real^N
-      #|  forall s c. compact s /\\ AR s /\\ c IN components((:real^N) DIFF s)\n         ==> ~bounded c
-      #|  s:real^N->bool
-      #|  forall s. 2 <= dimindex(:N) /\\ compact s /\\ AR s\n       ==> connected((:real^N) DIFF s)
-      #|  forall s:real^N->bool.\n        2 <= dimindex(:N) /\\ compact s /\\ AR s\n        ==> path_connected((:real^N) DIFF s)
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool t:real^M->bool.\n        2 <= dimindex(:N) /\\ s homeomorphic t /\\ convex t /\\ compact t\n        ==> connected((:real^N) DIFF s)
-      #|  forall s:real^N->bool t:real^M->bool.\n        2 <= dimindex(:N) /\\ s homeomorphic t /\\ convex t /\\ compact t\n        ==> path_connected((:real^N) DIFF s)
-      #|  (:real^N)
-      #|  forall p. arc p\n       ==> ?f. f continuous_on (:real^N) /\\\n               IMAGE f (:real^N) SUBSET path_image p /\\\n               (forall x. x IN path_image p ==> f x = x)
-      #|  p:real^1->real^N
-      #|  interval[vec 0:real^1,vec 1]
-      #|  path_image p:real^N->bool
-      #|  forall p. 2 <= dimindex(:N) /\\ arc p\n       ==> path_connected((:real^N) DIFF path_image p)
-      #|  forall p. 2 <= dimindex(:N) /\\ arc p\n       ==> connected((:real^N) DIFF path_image p)
-      #|  2 <= n <=> 1 <= n /\\ ~(n = 1)
-      #|  dimindex(:N) = 1
-      #|  forall p:real^1->real^N. arc p ==> inside(path_image p) = {}
-      #|  forall g x:real^N.\n        simple_path g /\\ x IN inside(path_image g)\n        ==> pathfinish g = pathstart g
-      #|  q:real^N
-      #|  c:real^N->bool
-      #|  cball(p:real^N,b) DIFF s
-      #|  closure c:real^N->bool
-      #|  f:real^N->real^N
-      #|  d > e ==> d <= x ==> ~(x <= e)
-      #|  x:real^N
-      #|  (x:real^N) IN h
-      #|  x:real^N
-      #|  ~(q IN IMAGE (f:real^N->real^N) (closure c))
-      #|  l IN cball(p:real^N,a)
-      #|  s DIFF t = {} <=> s SUBSET t
-      #|  d < (b - a) / &5 ==> &3 / &4 * (b - a) <= l\n      ==> abs(q - l) <= d ==> q > (b - a) / &2
-      #|  l:real^N
-      #|  q:real^N
-      #|  (:real^N) DIFF h
-      #|  setdist({q},(:real^N) DIFF h) > (b - a) / &2
-      #|  q:real^N
-      #|  (b - a) / &5
-      #|  l:real^N
-      #|  ~(closure c INTER cball(p:real^N,a) = {})
-      #|  x IN s ==> s SUBSET t ==> x IN t
-      #|  dist(x:real^N,r x) <= e / &4 /\\ norm(g x) <= e / &4\n      ==> dist(x,r x - g x) <= e / &2
+      #|  ((x : Cart[Real, N]) => lift(norm(x - (a : Cart[Real, N])))) == o(o(lift, norm), (x : Cart[Real, N]) => x - a)
+      #|  o((y : Cart[Real, N]) => (a : Cart[Real, N]) + op_pct((B : Real) / norm(y - a), y - a), (q : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  (B : Real)
+      #|  (a : Cart[Real, N])
+      #|  SUBSET(frontier((s : (Cart[Real, N]) -> Bool)), (t : (Cart[Real, N]) -> Bool))
+      #|  IN((x : Cart[Real, N]), (t : (Cart[Real, N]) -> Bool))
+      #|  IN((x : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 x : Cart[Real, N], !((q : (Cart[Real, N]) -> Cart[Real, N])(x) == (a : Cart[Real, N]))
+      #|  (a : Cart[Real, N])
+      #|  (B : Real)
+      #|  SUBSET((s : (Cart[Real, _]) -> Bool), closure(s)) && SUBSET((t : (Cart[Real, _]) -> Bool), closure(t)) && UNION(s, t) == UNIV \226\134\146 UNION(closure(s), closure(t)) == UNIV
+      #|  UNION(closure((s : (Cart[Real, N]) -> Bool)), closure(DIFF(UNIV, s))) == UNIV
+      #|  (z : Cart[Real, N])
+      #|  ((p : Bool) && !p) == false
+      #|  continuous_on((q : (Cart[Real, N]) -> Cart[Real, N]), UNION(closure((s : (Cart[Real, N]) -> Bool)), closure(DIFF(UNIV, s))))
+      #|  (q : (Cart[Real, N]) -> Cart[Real, N]) == ((z : Cart[Real, N]) => if IN(z, closure((s : (Cart[Real, N]) -> Bool))) { (r : (Cart[Real, N]) -> Cart[Real, N])(z) } else { z })
+      #|  (a : Cart[Real, N])
+      #|  !SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) == (\226\136\131 x : _, IN(x, s) && !IN(x, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 r : (Cart[Real, N]) -> Cart[Real, N], bounded(s) && SUBSET(frontier(s), t) && continuous_on(r, closure(s)) && SUBSET(IMAGE(r, s), t) && (\226\136\128 x : Cart[Real, N], IN(x, t) \226\134\146 r(x) == x) \226\134\146 SUBSET(s, t)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  frontier((s : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, bounded(s) && !(interior(s) == {}) \226\134\146 !retract_of(frontier(s), s)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])) == x
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], IN(x, cball((vec(0), (r : Real)))) \226\134\146 !((g : (Cart[Real, N]) -> Cart[Real, N])(x) == (p : Cart[Real, N]))
+      #|  o((h : (Cart[Real, N]) -> Cart[Real, N]), (g : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  (r : Real)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  \226\136\131 h : (Cart[Real, N]) -> Cart[Real, N], retraction((DELETE(UNIV, (p : Cart[Real, N])), sphere((vec(0), (r : Real)))), h)
+      #|  (p : Cart[Real, N])
+      #|  ((p : Bool) && !p) == false
+      #|  SUBSET(DIFF(UNIV, (s : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 UNIV == UNION(s, t)
+      #|  UNIV == UNION((s : (Cart[Real, N]) -> Bool), closure(DIFF(UNIV, s)))
+      #|  continuous_on((g : (Cart[Real, N]) -> Cart[Real, N]), UNIV)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N]) == ((x : Cart[Real, N]) => if IN(x, (s : (Cart[Real, N]) -> Bool)) { (f : (Cart[Real, N]) -> Cart[Real, N])(x) } else { x })
+      #|  (r : Real)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  UNION((s : (Cart[Real, N]) -> Bool), IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), s))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) && continuous_on(f, s) && (\226\136\128 x : Cart[Real, N], IN(x, frontier(s)) \226\134\146 f(x) == x) \226\134\146 SUBSET(s, IMAGE(f, s))
+      #|  (DELETE : ((Cart[Real, N]) -> Bool, Cart[Real, N], Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), (vec : (Num) -> Cart[Real, N])(0))
+      #|  DIFF(UNIV, (s : (Cart[Real, N]) -> Bool))
+      #|  (UNIV : (Cart[Real, N]) -> Bool)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (r : Real)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (a : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 false) \226\134\146 s == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, bounded(s) && retract_of(DIFF(UNIV, s), UNIV) \226\134\146 s == {}
+      #|  real_of_num(1) <= (c : Real) \226\134\146 !(c == real_of_num(0))
+      #|  real_of_num(1) - (u : Real) + u == real_of_num(1)
+      #|  inv((c : Real))
+      #|  real_of_num(1) - inv((c : Real))
+      #|  (x : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  !IN((f : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])), (s : (Cart[Real, N]) -> Bool))
+      #|  ((x : Cart[Real, N]) == op_pct(real_of_num(1) - (c : Real), (a : Cart[Real, N])) + op_pct(c, (y : Cart[Real, N]))) == (x - a == op_pct(c, y - a))
+      #|  (c : Real)
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N]))
+      #|  (c : Real)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  !((f : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])) == (a : Cart[Real, N]))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])) == x
+      #|  (x : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  SUBSET(IMAGE((r : (_) -> _), (t : (_) -> Bool)), (u : (_) -> Bool)) \226\134\146 SUBSET(u, (s : (_) -> Bool)) && IN((y : _), t) \226\134\146 IN(r(y), s)
+      #|  (x : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (s : (Cart[Real, N]) -> Bool)) == UNION(INTER(s, IMAGE(f, s)), INTER(DIFF(UNIV, interior(s)), IMAGE(f, s)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  o((x : Cart[Real, N]) => if IN(x, (s : (Cart[Real, N]) -> Bool)) { x } else { (r : (Cart[Real, N]) -> Cart[Real, N])(x) }, (f : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 SUBSET(DIFF(s, (t : (_) -> Bool)), u)
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 !(s == {})
+      #|  (a : Cart[Real, N])
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], continuous_on(f, s) && convex(s) && compact(s) && IN(a, interior(s)) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, s) && f(x) == x) || (\226\136\131 x : Cart[Real, N], IN(x, frontier(s)) && IN(x, segment((a, f(x)))))
+      #|  (x : Cart[Real, N]) - (a : Cart[Real, N]) == (y : Cart[Real, N]) \226\134\146 x == a + y
+      #|  (x : Cart[Real, N]) - (a : Cart[Real, N]) == (y : Cart[Real, N]) \226\134\146 x == a + y
+      #|  (x : Cart[Real, N]) - (a : Cart[Real, N]) == (y : Cart[Real, N]) \226\134\146 x == a + y
+      #|  ((a : Cart[Real, N]) == (x : Cart[Real, N]) + (a - (y : Cart[Real, N]))) == (y == x)
+      #|  (x : Cart[Real, N])
+      #|  ((x : Cart[Real, N]) + ((a : Cart[Real, N]) - (y : Cart[Real, N])) == x) == (y == a)
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N]) => x + ((a : Cart[Real, N]) - (f : (Cart[Real, N]) -> Cart[Real, N])(x))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], continuous_on(f, s) && convex(s) && compact(s) && IN(a, interior(s)) && SUBSET(IMAGE(f, s), DELETE(UNIV, a)) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, frontier(s)) && IN(a, segment((x, f(x)))))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], compact(s) && IN(a, s) && continuous_on(f, s) && SUBSET(IMAGE(f, s), DELETE(UNIV, a)) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, frontier(s)) && !(f(x) == x))
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  SUBSET((c : (Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool))
+      #|  SUBSET(closure((c : (Cart[Real, N]) -> Bool)), (t : (Cart[Real, N]) -> Bool))
+      #|  frontier(DIFF(UNIV, (s : (Cart[Real, N]) -> Bool)))
+      #|  SUBSET(frontier((c : (Cart[Real, N]) -> Bool)), (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, closed(s) && retract_of(s, t) && IN(c, components(DIFF(UNIV, s))) && bounded(c) \226\134\146 !SUBSET(c, t)
+      #|  bounded((c : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, closed(s) && retract_of(s, t) && bounded(t) && IN(c, components(DIFF(UNIV, s))) \226\134\146 !SUBSET(c, t)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(DIFF(s, (u : (_) -> Bool)), DIFF(t, u))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !(INTER((c : (_) -> Bool), s) == {}) \226\134\146 !(INTER(c, t) == {})
+      #|  frontier(DIFF(UNIV, (s : (Cart[Real, N]) -> Bool)))
+      #|  !((t : (_) -> Bool) == {}) && SUBSET(t, (u : (_) -> Bool)) \226\134\146 !(INTER(u, UNION((s : (_) -> Bool), t)) == {})
+      #|  (DIFF((s : (_) -> Bool), (t : (_) -> Bool)) == {}) == SUBSET(s, t)
+      #|  !(INTER((c : (Cart[Real, N]) -> Bool), frontier((u : (Cart[Real, N]) -> Bool))) == {})
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (\226\136\128 c : _, IN(c, (s : (_) -> Bool)) \226\134\146 (P : (_) -> Bool)(c)) \226\134\146 {(c : _) | IN(c, s) && P(c)} == s
+      #|  DIFF(UNIV, (s : (Cart[Real, N]) -> Bool))
+      #|  DIFF(cball((vec(0), (r : Real))), (u : (Cart[Real, N]) -> Bool))
+      #|  (r : Real)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, components(DIFF(UNIV, (s : (Cart[Real, N]) -> Bool)))) \226\134\146 !SUBSET(c, (u : (Cart[Real, N]) -> Bool))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) && ENR(s) \226\134\146 FINITE(components(DIFF(UNIV, s)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) && ANR(s) \226\134\146 FINITE(components(DIFF(UNIV, s)))
+      #|  (p : Cart[Real, N])
+      #|  (p : Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  DIFF(UNIV, (s : (Cart[Real, N]) -> Bool))
+      #|  (u : (Cart[Real, N]) -> Bool) == connected_component(DIFF(UNIV, (s : (Cart[Real, N]) -> Bool)), (p : Cart[Real, N]))
+      #|  (p : Cart[Real, N])
+      #|  !SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) == (\226\136\131 p : _, IN(p, s) && !IN(p, t))
+      #|  !SUBSET((u : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (d : (Cart[Real, N]) -> Bool) == {}
+      #|  DIFF(UNIV, (s : (Cart[Real, N]) -> Bool))
+      #|  (c' : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  (SUBSET : ((_) -> Bool, (_) -> Bool) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, compact(s) && retract_of(s, t) && bounded(t) \226\134\146 op_lt_eq_us_c(components(DIFF(UNIV, s)), components(DIFF(UNIV, t)))
+      #|  CARD(components(DIFF(UNIV, (t : (Cart[Real, N]) -> Bool))))
+      #|  CARD({(u : (Cart[Real, N]) -> Bool)})
+      #|  ((n : Num) == 0 || n == 1) == (n <= 1)
+      #|  HAS_SIZE((s : (_) -> Bool), 1)
+      #|  SUBSET((s : (_) -> Bool), {(a : _)}) == (s == {} || s == {a})
+      #|  FINITE(components(DIFF(UNIV, (s : (Cart[Real, N]) -> Bool)))) && CARD(components(DIFF(UNIV, s))) <= CARD(components(DIFF(UNIV, (t : (Cart[Real, N]) -> Bool))))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  FINITE(components(DIFF(UNIV, (t : (Cart[Real, N]) -> Bool))))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, compact(s) && retract_of(s, t) && bounded(t) && connected(DIFF(UNIV, t)) \226\134\146 connected(DIFF(UNIV, s))
+      #|  real_of_num(0) < (r : Real) \226\134\146 !(r < real_of_num(0))
+      #|  (cball : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), (r : Real)))
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (cball : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), (r : Real)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (x : Cart[Real, N]) => (a : Cart[Real, N])
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (r : Real)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) && !(s == {}) && ANR(s) && continuous_on(f, s) && SUBSET(IMAGE(f, s), s) && (\226\136\131 a : Cart[Real, N], homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, s), subtopology(euclidean, s)), f, (x : Cart[Real, N]) => a)) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, s) && f(x) == x)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) && contractible(s) && !(s == {}) && ANR(s) && continuous_on(f, s) && SUBSET(IMAGE(f, s), s) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, s) && f(x) == x)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, \226\136\128 c : Cart[Real, N], real_of_num(0) < r && homotopic_with((x : (Cart[Real, N]) -> Cart[Real, N]) => true, (subtopology(euclidean, sphere((a, r))), subtopology(euclidean, sphere((a, r)))), f, (x : Cart[Real, N]) => c) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, sphere((a, r))) && f(x) == x)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) && AR(s) && continuous_on(f, s) && SUBSET(IMAGE(f, s), s) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, s) && f(x) == x)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) && retract_of(s, UNIV) && continuous_on(f, s) && SUBSET(IMAGE(f, s), s) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, s) && f(x) == x)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  ((x : Cart[Real, N]) => lift(max(real_of_num(0), (e : Real) - norm(x - (y : Cart[Real, N]))))) == ((x : Cart[Real, N]) => lambda((i : Num) => max(op_dollar(lift(real_of_num(0)), i), op_dollar(lift(e - norm(x - y)), i))))
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N]) => op_pct(inv(sum((t : (Cart[Real, N]) -> Bool), (p : Cart[Real, N]) => (g : (Cart[Real, N], Cart[Real, N]) -> Real)(p, x))), vsum(t, (p : Cart[Real, N]) => op_pct(g(p, x), p)))
+      #|  (x : Cart[Real, N])
+      #|  SUBSET((s : (Cart[Real, N]) -> Bool), UNIONS(IMAGE((x : Cart[Real, N]) => ball((x, (e : Real))), (t : (Cart[Real, N]) -> Bool))))
+      #|  (real_of_num(0) < max(real_of_num(0), (b : Real))) == (real_of_num(0) < b)
+      #|  real_of_num(0) <= max(real_of_num(0), (b : Real))
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 real_of_num(0) < sum((t : (Cart[Real, N]) -> Bool), (p : Cart[Real, N]) => (g : (Cart[Real, N], Cart[Real, N]) -> Real)(p, x))
+      #|  (g : (Cart[Real, N], Cart[Real, N]) -> Real) == ((p : Cart[Real, N]) => (x : Cart[Real, N]) => max(real_of_num(0), (e : Real) - norm(x - p)))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (e : Real)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 e : Real, compact(s) && real_of_num(0) < e \226\134\146 (\226\136\131 t : (Cart[Real, N]) -> Bool, \226\136\131 f : (Cart[Real, N]) -> Cart[Real, N], FINITE(t) && SUBSET(t, s) && continuous_on(f, s) && SUBSET(IMAGE(f, s), hull(convex, t)) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 norm(f(x) - x) < e))
+      #|  (r : Real)
+      #|  (a : Cart[Real, M])
+      #|  o((g : (Cart[Real, N]) -> Cart[Real, M]), (h : (Cart[Real, M]) -> Cart[Real, N]))
+      #|  (h : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (UNIV : (Cart[Real, M]) -> Bool)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (r : Real)
+      #|  (a : Cart[Real, M])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, continuous_on(f, s) && SUBSET(IMAGE(f, s), t) && continuous_on(g, t) && SUBSET(IMAGE(g, t), s) && compact(s) && AR(t) \226\134\146 (\226\136\131 x : Cart[Real, M], IN(x, s) && g(f(x)) == x)
+      #|  ((p : Bool) && (q : Bool) \226\134\146 (r : Bool)) && p \226\134\146 (p \226\134\146 q) \226\134\146 r
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  closure(IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (s : (Cart[Real, N]) -> Bool)))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (x : Cart[Real, N]) => x
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, retract_of(s, UNIV) && continuous_on(f, s) && SUBSET(IMAGE(f, s), s) && bounded(IMAGE(f, s)) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, s) && f(x) == x)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (x : Cart[Real, N]) => x
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, AR(s) && continuous_on(f, s) && SUBSET(IMAGE(f, s), t) && SUBSET(t, s) && compact(t) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, t) && f(x) == x)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, convex(s) && !(s == {}) && SUBSET(t, s) && compact(t) && continuous_on(f, s) && SUBSET(IMAGE(f, s), t) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, s) && f(x) == x)
+      #|  closure(IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), UNIV))
+      #|  (UNIV : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], continuous_on(f, UNIV) && bounded(IMAGE(f, UNIV)) \226\134\146 (\226\136\131 x : Cart[Real, N], f(x) == x)
+      #|  (y : Cart[Real, N])
+      #|  IMAGE((r : (Cart[Real, N]) -> Cart[Real, N]), closure(IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  o((r : (Cart[Real, N]) -> Cart[Real, N]), (f : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (UNIV : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, closed(s) && convex(s) && !(s == {}) && continuous_on(f, s) && bounded(IMAGE(f, s)) && SUBSET(IMAGE(f, frontier(s)), s) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, s) && f(x) == x)
+      #|  ((v : Cart[Real, N]) == op_pct((c : Real), v)) == (op_pct(c - real_of_num(1), v) == vec(0))
+      #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((dot : (Cart[Real, N], Cart[Real, N]) -> Real)((vec : (Num) -> Cart[Real, N])(1), (matrix_vector_mul : (Cart[Cart[Real, N], N], Cart[Real, N]) -> Cart[Real, N])((A : Cart[Cart[Real, N], N]), (x : Cart[Real, N]))))
+      #|  dot(vec(1), matrix_vector_mul((A : Cart[Cart[Real, N], N]), (x : Cart[Real, N])))
+      #|  op_pct(inv(norm((x : Cart[Real, N]))), x)
+      #|  (x : Cart[Real, N]) == vec(0)
+      #|  (x : Cart[Real, N])
+      #|  (basis : (Num) -> Cart[Real, N])(1)
+      #|  sum({(i : Num)}, (i : Num) => op_dollar((x : Cart[Real, N]), i))
+      #|  (i : Num)
+      #|  (x : Cart[Real, N])
+      #|  (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([((vec : (Num) -> Cart[Real, N])(0), (vec : (Num) -> Cart[Real, N])(1))])
+      #|  (real_of_num(0) < (x : Real)) == (real_of_num(0) <= x && !(x == real_of_num(0)))
+      #|  (x : Cart[Real, N]) == vec(0)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 real_of_num(0) <= (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)) && (dot : (Cart[Real, N], Cart[Real, N]) -> Real)((vec : (Num) -> Cart[Real, N])(1), x) == real_of_num(1) \226\134\146 real_of_num(0) < (dot : (Cart[Real, N], Cart[Real, N]) -> Real)((vec : (Num) -> Cart[Real, N])(1), (matrix_vector_mul : (Cart[Cart[Real, N], N], Cart[Real, N]) -> Cart[Real, N])((A : Cart[Cart[Real, N], N]), x))
+      #|  \226\136\128 x : Cart[Real, N], (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 real_of_num(0) <= (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)) \226\134\146 (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 real_of_num(0) <= (op_dollar : (Cart[Real, N], Num) -> Real)((matrix_vector_mul : (Cart[Cart[Real, N], N], Cart[Real, N]) -> Cart[Real, N])((A : Cart[Cart[Real, N], N]), x), i))
+      #|  (INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)({(x : Cart[Real, N]) | (dot : (Cart[Real, N], Cart[Real, N]) -> Real)((vec : (Num) -> Cart[Real, N])(1), x) == real_of_num(1)}, {(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 real_of_num(0) <= (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)})
+      #|  (x : Cart[Real, N]) => op_pct(inv(dot(vec(1), matrix_vector_mul((A : Cart[Cart[Real, N], N]), x))), matrix_vector_mul(A, x))
+      #|  !(!(p : Bool) && (q : Bool)) == (q \226\134\146 p)
+      #|  real_of_num(0)
+      #|  op_pct(inv(norm((v : Cart[Real, N]))), v)
+      #|  (v : Cart[Real, N])
+      #|  \226\136\131 v : Cart[Real, N], !(v == vec(0)) && matrix_vector_mul((A : Cart[Cart[Real, N], N]), v) == vec(0)
+      #|  \226\136\128 A : Cart[Cart[Real, N], N], (\226\136\128 i : Num, \226\136\128 j : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= j && j <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 real_of_num(0) <= (op_dollar : (Cart[Real, N], Num) -> Real)((op_dollar : (Cart[Cart[Real, N], N], Num) -> Cart[Real, N])(A, i), j)) \226\134\146 (\226\136\131 v : Cart[Real, N], \226\136\131 c : Real, (norm : (Cart[Real, N]) -> Real)(v) == real_of_num(1) && real_of_num(0) <= c && (matrix_vector_mul : (Cart[Cart[Real, N], N], Cart[Real, N]) -> Cart[Real, N])(A, v) == (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(c, v))
+      #|  (interval_bij : ((Cart[Real, N], Cart[Real, N]), (Cart[Real, N], Cart[Real, N]), Cart[Real, N]) -> Cart[Real, N])(((a : Cart[Real, N]), (b : Cart[Real, N])), ((u : Cart[Real, N]), (v : Cart[Real, N])), (x : Cart[Real, N])) == lambda((i : Num) => op_dollar(u, i) + (op_dollar(x, i) - op_dollar(a, i)) / (op_dollar(b, i) - op_dollar(a, i)) * (op_dollar(v, i) - op_dollar(u, i)))
+      #|  interval_bij(((a : Cart[Real, _]), (b : Cart[Real, _])), ((u : Cart[Real, _]), (v : Cart[Real, _]))) == ((x : Cart[Real, _]) => lambda((i : Num) => (op_dollar(v, i) - op_dollar(u, i)) / (op_dollar(b, i) - op_dollar(a, i)) * op_dollar(x, i)) + lambda((i : Num) => op_dollar(u, i) - (op_dollar(v, i) - op_dollar(u, i)) / (op_dollar(b, i) - op_dollar(a, i)) * op_dollar(a, i)))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 u : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 x : Cart[Real, N], continuous(interval_bij((a, b), (u, v)), at(x))
+      #|  \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], \226\136\128 u : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, continuous_on(interval_bij((a, b), (u, v)), s)
+      #|  (a : Real) <= (x : Real) && x <= (b : Real) \226\134\146 x - a <= real_of_num(1) * (b - a)
+      #|  op_dollar((a : Cart[Real, N]), (i : Num)) <= op_dollar((b : Cart[Real, N]), i)
+      #|  ((u : Real) + (x : Real) <= (v : Real)) == (x <= real_of_num(1) * (v - u))
+      #|  ((u : Real) <= u + (x : Real)) == (real_of_num(0) <= x)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 u : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 x : Cart[Real, N], IN(x, interval([(a, b)])) && !(interval([(u, v)]) == {}) \226\134\146 IN(interval_bij((a, b), (u, v), x), interval([(u, v)]))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 u : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 x : Cart[Real, N], (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(a, i) < (op_dollar : (Cart[Real, N], Num) -> Real)(b, i) && (op_dollar : (Cart[Real, N], Num) -> Real)(u, i) < (op_dollar : (Cart[Real, N], Num) -> Real)(v, i)) \226\134\146 (interval_bij : ((Cart[Real, N], Cart[Real, N]), (Cart[Real, N], Cart[Real, N]), Cart[Real, N]) -> Cart[Real, N])((a, b), (u, v), (interval_bij : ((Cart[Real, N], Cart[Real, N]), (Cart[Real, N], Cart[Real, N]), Cart[Real, N]) -> Cart[Real, N])((u, v), (a, b), x)) == x
+      #|  op_dot_dot(1, 2)
+      #|  infnorm((x : Cart[Real, Tybit0[Unit]])) == max(abs(op_dollar(x, 1)), abs(op_dollar(x, 2)))
+      #|  (infnorm((x : Cart[Real, Tybit0[Unit]])) == real_of_num(1)) == (abs(op_dollar(x, 1)) <= real_of_num(1) && abs(op_dollar(x, 2)) <= real_of_num(1) && (op_dollar(x, 1) == -real_of_num(1) || op_dollar(x, 1) == real_of_num(1) || op_dollar(x, 2) == -real_of_num(1) || op_dollar(x, 2) == real_of_num(1)))
+      #|  infnorm((x : Cart[Real, Tybit0[Unit]])) == real_of_num(1) \226\134\146 abs(op_dollar(x, 1)) <= real_of_num(1) && abs(op_dollar(x, 2)) <= real_of_num(1)
+      #|  SUBSET(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 IN((x : _), s) \226\134\146 IN(f(x), t)
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], (abs(op_dollar(z, 1)) <= real_of_num(1) && abs(op_dollar(z, 2)) <= real_of_num(1)) == IN(z, interval([(-vec(1), vec(1))]))
+      #|  abs(op_dollar((x : Cart[Real, _]), 1)) <= real_of_num(1) && abs(op_dollar(x, 2)) <= real_of_num(1) \226\134\146 !(real_of_num(0) < op_dollar(x, 2) - real_of_num(1))
+      #|  abs(op_dollar((x : Cart[Real, _]), 1)) <= real_of_num(1) && abs(op_dollar(x, 2)) <= real_of_num(1) \226\134\146 !(op_dollar(x, 2) - -real_of_num(1) < real_of_num(0))
+      #|  abs(op_dollar((x : Cart[Real, _]), 1)) <= real_of_num(1) && abs(op_dollar(x, 2)) <= real_of_num(1) \226\134\146 !(real_of_num(1) - op_dollar(x, 1) < real_of_num(0))
+      #|  abs(op_dollar((x : Cart[Real, _]), 1)) <= real_of_num(1) && abs(op_dollar(x, 2)) <= real_of_num(1) \226\134\146 !(real_of_num(0) < -real_of_num(1) - op_dollar(x, 1))
+      #|  (x : Real) == real_of_num(1) \226\134\146 real_of_num(0) < x
+      #|  (x : Real) == -real_of_num(1) \226\134\146 x < real_of_num(0)
+      #|  -(x : Real) == real_of_num(1) \226\134\146 x < real_of_num(0)
+      #|  -(x : Real) == -real_of_num(1) \226\134\146 real_of_num(0) < x
+      #|  (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 i : Num, 1 <= i && i <= 2 && !(x == vec(0)) \226\134\146 (real_of_num(0) < op_dollar((sqprojection : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(x), i)) == (real_of_num(0) < op_dollar(x, i))) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 i : Num, 1 <= i && i <= 2 && !(x == vec(0)) \226\134\146 (op_dollar(sqprojection(x), i) < real_of_num(0)) == (op_dollar(x, i) < real_of_num(0)))
+      #|  infnorm((x : Cart[Real, Tybit0[Unit]])) == real_of_num(1)
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([(-(vec : (Num) -> Cart[Real, Unit])(1), (vec : (Num) -> Cart[Real, Unit])(1))])
+      #|  (interval : (List[(Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]])], Cart[Real, Tybit0[Unit]]) -> Bool)([(-(vec : (Num) -> Cart[Real, Tybit0[Unit]])(1), (vec : (Num) -> Cart[Real, Tybit0[Unit]])(1))])
+      #|  (w : Cart[Real, Tybit0[Unit]]) => (negatex : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((sqprojection : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(lift(op_dollar(w, 1))) - (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(lift(op_dollar(w, 2)))))
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], !(z == vec(0)) \226\134\146 infnorm((sqprojection : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z)) == real_of_num(1)
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], infnorm((negatex : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z)) == infnorm(z)
+      #|  (negatex : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == ((x : Cart[Real, Tybit0[Unit]]) => vector([-op_dollar(x, 1), op_dollar(x, 2)]))
+      #|  (sqprojection : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == ((z : Cart[Real, Tybit0[Unit]]) => op_pct(inv(infnorm(z)), z))
+      #|  !((a : Bool) && (b : Bool) && (c : Bool)) == (a && b \226\134\146 !c)
+      #|  (p : Bool) == !!p
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], SUBSET(IMAGE(f, interval([(-vec(1), vec(1))])), interval([(-vec(1), vec(1))])) && SUBSET(IMAGE(g, interval([(-vec(1), vec(1))])), interval([(-vec(1), vec(1))])) && continuous_on(f, interval([(-vec(1), vec(1))])) && continuous_on(g, interval([(-vec(1), vec(1))])) && op_dollar(f(-vec(1)), 1) == -real_of_num(1) && op_dollar(f(vec(1)), 1) == real_of_num(1) && op_dollar(g(-vec(1)), 2) == -real_of_num(1) && op_dollar(g(vec(1)), 2) == real_of_num(1) \226\134\146 (\226\136\131 s : Cart[Real, Unit], \226\136\131 t : Cart[Real, Unit], IN(s, interval([(-vec(1), vec(1))])) && IN(t, interval([(-vec(1), vec(1))])) && f(s) == g(t))
+      #|  op_pct(inv(real_of_num(2)), (x : Cart[Real, _]) + x) == x
+      #|  op_pct(inv(real_of_num(2)), -(x : Cart[Real, _]) + x) == vec(0)
+      #|  continuous_on((iscale : (Cart[Real, Unit]) -> Cart[Real, Unit]), interval([(-vec(1), vec(1))]))
+      #|  SUBSET(IMAGE((iscale : (Cart[Real, Unit]) -> Cart[Real, Unit]), interval([(-vec(1), vec(1))])), interval([(vec(0), vec(1))]))
+      #|  o((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), (iscale : (Cart[Real, Unit]) -> Cart[Real, Unit]))
+      #|  o((f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), (iscale : (Cart[Real, Unit]) -> Cart[Real, Unit]))
+      #|  (iscale : (Cart[Real, Unit]) -> Cart[Real, Unit]) == ((z : Cart[Real, Unit]) => op_pct(inv(real_of_num(2)), z + vec(1)))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], path(f) && path(g) && SUBSET(path_image(f), interval([(-vec(1), vec(1))])) && SUBSET(path_image(g), interval([(-vec(1), vec(1))])) && op_dollar(pathstart(f), 1) == -real_of_num(1) && op_dollar(pathfinish(f), 1) == real_of_num(1) && op_dollar(pathstart(g), 2) == -real_of_num(1) && op_dollar(pathfinish(g), 2) == real_of_num(1) \226\134\146 (\226\136\131 z : Cart[Real, Tybit0[Unit]], IN(z, path_image(f)) && IN(z, path_image(g)))
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (g : (_) -> _)((f : (_) -> _)(x)) == x) \226\134\146 IN((x : _), IMAGE(f, s)) \226\134\146 IN(g(x), s)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  o(interval_bij(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])), (-vec(1), vec(1))), (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  o(interval_bij(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])), (-vec(1), vec(1))), (f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  IN((z : Cart[Real, Tybit0[Unit]]), interval([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))])) && IN((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(vec(0)), interval([(a, b)]))
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  SUBSET(path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), interval([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]))
+      #|  pathfinish((f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  pathstart((f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\131 z : Cart[Real, Tybit0[Unit]], IN(z, path_image((f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))) && op_dollar(z, 1) == op_dollar(pathstart((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), 1)
+      #|  ((a : Real) <= (b : Real)) == (b == a || a < b)
+      #|  op_dollar((a : Cart[Real, Tybit0[Unit]]), 2) <= op_dollar((b : Cart[Real, Tybit0[Unit]]), 2)
+      #|  IN((z : Cart[Real, Tybit0[Unit]]), interval([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))])) && IN((f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(vec(0)), interval([(a, b)]))
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  SUBSET(path_image((f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), interval([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]))
+      #|  pathfinish((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  pathstart((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\131 z : Cart[Real, Tybit0[Unit]], IN(z, path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))) && op_dollar(z, 2) == op_dollar(pathstart((f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), 2)
+      #|  ((a : Real) <= (b : Real)) == (b == a || a < b)
+      #|  op_dollar((a : Cart[Real, Tybit0[Unit]]), 1) <= op_dollar((b : Cart[Real, Tybit0[Unit]]), 1)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !(s == {}) \226\134\146 !(t == {})
+      #|  !(interval([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]) == {})
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], path(f) && path(g) && SUBSET(path_image(f), interval([(a, b)])) && SUBSET(path_image(g), interval([(a, b)])) && op_dollar(pathstart(f), 1) == op_dollar(a, 1) && op_dollar(pathfinish(f), 1) == op_dollar(b, 1) && op_dollar(pathstart(g), 2) == op_dollar(a, 2) && op_dollar(pathfinish(g), 2) == op_dollar(b, 2) \226\134\146 (\226\136\131 z : Cart[Real, Tybit0[Unit]], IN(z, path_image(f)) && IN(z, path_image(g)))
+      #|  interval_bij((-vec(1), vec(1)), ((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])), (z : Cart[Real, Tybit0[Unit]]))
+      #|  (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0) == (op_pct : (Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(real_of_num(0), (basis : (Num) -> Cart[Real, Tybit0[Unit]])(2))
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], op_dollar(a, 1) == op_dollar(b, 1) \226\134\146 IN(x, segment([(a, b)])) == (op_dollar(x, 1) == op_dollar(a, 1) && op_dollar(x, 1) == op_dollar(b, 1) && (op_dollar(a, 2) <= op_dollar(x, 2) && op_dollar(x, 2) <= op_dollar(b, 2) || op_dollar(b, 2) <= op_dollar(x, 2) && op_dollar(x, 2) <= op_dollar(a, 2)))
+      #|  (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0) == (op_pct : (Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(real_of_num(0), (basis : (Num) -> Cart[Real, Tybit0[Unit]])(1))
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], op_dollar(a, 2) == op_dollar(b, 2) \226\134\146 IN(x, segment([(a, b)])) == (op_dollar(x, 2) == op_dollar(a, 2) && op_dollar(x, 2) == op_dollar(b, 2) && (op_dollar(a, 1) <= op_dollar(x, 1) && op_dollar(x, 1) <= op_dollar(b, 1) || op_dollar(b, 1) <= op_dollar(x, 1) && op_dollar(x, 1) <= op_dollar(a, 1)))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  SUBSET(path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), interval([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  SUBSET(path_image((f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), interval([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]))
+      #|  !IN((z : _), {(x : _), (y : _)}) == (!(z == x) && !(z == y))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, UNION(path_image(f), s) == UNION(path_image(f), DIFF(s, {pathstart(f), pathfinish(f)}))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  interval([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))])
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) && SUBSET((t : (_) -> Bool), u) \226\134\146 SUBSET(UNION(s, t), u)
+      #|  (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)((b : Cart[Real, Tybit0[Unit]]), 1) + real_of_num(2), (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)(b, 2) + real_of_num(3)])
+      #|  (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)((a : Cart[Real, Tybit0[Unit]]), 1) - real_of_num(2), (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)(a, 2) - real_of_num(3)])
+      #|  op_plus_plus(linepath((vector([op_dollar(pathstart((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), 1), op_dollar(pathstart(g), 2) - real_of_num(3)]), pathstart(g))), op_plus_plus(g, op_plus_plus(linepath((pathfinish(g), vector([op_dollar(pathfinish(g), 1), op_dollar((a : Cart[Real, Tybit0[Unit]]), 2) - real_of_num(1)]))), op_plus_plus(linepath((vector([op_dollar(pathfinish(g), 1), op_dollar(a, 2) - real_of_num(1)]), vector([op_dollar((b : Cart[Real, Tybit0[Unit]]), 1) + real_of_num(1), op_dollar(a, 2) - real_of_num(1)]))), linepath((vector([op_dollar(b, 1) + real_of_num(1), op_dollar(a, 2) - real_of_num(1)]), vector([op_dollar(b, 1) + real_of_num(1), op_dollar(b, 2) + real_of_num(3)])))))))
+      #|  op_plus_plus(linepath((vector([op_dollar((a : Cart[Real, Tybit0[Unit]]), 1) - real_of_num(2), op_dollar(a, 2) - real_of_num(2)]), vector([op_dollar(pathstart((f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), 1), op_dollar(a, 2) - real_of_num(2)]))), op_plus_plus(linepath((vector([op_dollar(pathstart(f), 1), op_dollar(a, 2) - real_of_num(2)]), pathstart(f))), op_plus_plus(f, op_plus_plus(linepath((pathfinish(f), vector([op_dollar(pathfinish(f), 1), op_dollar(a, 2) - real_of_num(2)]))), linepath((vector([op_dollar(pathfinish(f), 1), op_dollar(a, 2) - real_of_num(2)]), vector([op_dollar((b : Cart[Real, Tybit0[Unit]]), 1) + real_of_num(2), op_dollar(a, 2) - real_of_num(2)])))))))
+      #|  IN(pathstart((f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), interval([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))])) && IN(pathfinish(f), interval([(a, b)])) && IN(pathstart((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), interval([(a, b)])) && IN(pathfinish(g), interval([(a, b)]))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !(s == {}) \226\134\146 !(t == {})
+      #|  !(interval([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]) == {})
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], path(f) && path(g) && SUBSET(path_image(f), interval([(a, b)])) && SUBSET(path_image(g), interval([(a, b)])) && op_dollar(pathstart(f), 2) == op_dollar(a, 2) && op_dollar(pathfinish(f), 2) == op_dollar(a, 2) && op_dollar(pathstart(g), 2) == op_dollar(a, 2) && op_dollar(pathfinish(g), 2) == op_dollar(a, 2) && op_dollar(pathstart(f), 1) < op_dollar(pathstart(g), 1) && op_dollar(pathstart(g), 1) < op_dollar(pathfinish(f), 1) && op_dollar(pathfinish(f), 1) < op_dollar(pathfinish(g), 1) \226\134\146 (\226\136\131 z : Cart[Real, Tybit0[Unit]], IN(z, path_image(f)) && IN(z, path_image(g)))
+      #|  UNION(UNION((s : (_) -> Bool), (t : (_) -> Bool)), (u : (_) -> Bool)) == UNION(u, UNION(t, s))
+      #|  !((c : (Cart[Real, N]) -> Bool) == {}) && SUBSET(c, DIFF(UNIV, (s : (Cart[Real, N]) -> Bool))) \226\134\146 !SUBSET(c, s)
+      #|  IN((z : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (z : Cart[Real, N])
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  connected_component(DIFF(UNIV, (s : (Cart[Real, N]) -> Bool)), (y : Cart[Real, N]))
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  open(DIFF(UNIV, (s : (Cart[Real, N]) -> Bool)))
+      #|  (y : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, compact(s) && AR(s) && IN(c, components(DIFF(UNIV, s))) \226\134\146 !bounded(c)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, 2 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (compact : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (AR : ((Cart[Real, N]) -> Bool) -> Bool)(s) \226\134\146 (connected : ((Cart[Real, N]) -> Bool) -> Bool)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, 2 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (compact : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (AR : ((Cart[Real, N]) -> Bool) -> Bool)(s) \226\134\146 (path_connected : ((Cart[Real, N]) -> Bool) -> Bool)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), s))
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, 2 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (homeomorphic : ((Cart[Real, N]) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)(s, t) && (convex : ((Cart[Real, M]) -> Bool) -> Bool)(t) && (compact : ((Cart[Real, M]) -> Bool) -> Bool)(t) \226\134\146 (connected : ((Cart[Real, N]) -> Bool) -> Bool)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, 2 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (homeomorphic : ((Cart[Real, N]) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)(s, t) && (convex : ((Cart[Real, M]) -> Bool) -> Bool)(t) && (compact : ((Cart[Real, M]) -> Bool) -> Bool)(t) \226\134\146 (path_connected : ((Cart[Real, N]) -> Bool) -> Bool)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), s))
+      #|  (UNIV : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 p : (Cart[Real, Unit]) -> Cart[Real, N], arc(p) \226\134\146 (\226\136\131 f : (Cart[Real, N]) -> Cart[Real, N], continuous_on(f, UNIV) && SUBSET(IMAGE(f, UNIV), path_image(p)) && (\226\136\128 x : Cart[Real, N], IN(x, path_image(p)) \226\134\146 f(x) == x))
+      #|  (p : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
+      #|  path_image((p : (Cart[Real, Unit]) -> Cart[Real, N]))
+      #|  \226\136\128 p : (Cart[Real, Unit]) -> Cart[Real, N], 2 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (arc : ((Cart[Real, Unit]) -> Cart[Real, N]) -> Bool)(p) \226\134\146 (path_connected : ((Cart[Real, N]) -> Bool) -> Bool)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), (path_image : ((Cart[Real, Unit]) -> Cart[Real, N], Cart[Real, N]) -> Bool)(p)))
+      #|  \226\136\128 p : (Cart[Real, Unit]) -> Cart[Real, N], 2 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (arc : ((Cart[Real, Unit]) -> Cart[Real, N]) -> Bool)(p) \226\134\146 (connected : ((Cart[Real, N]) -> Bool) -> Bool)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), (path_image : ((Cart[Real, Unit]) -> Cart[Real, N], Cart[Real, N]) -> Bool)(p)))
+      #|  (2 <= (n : Num)) == (1 <= n && !(n == 1))
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) == 1
+      #|  \226\136\128 p : (Cart[Real, Unit]) -> Cart[Real, N], arc(p) \226\134\146 inside(path_image(p)) == {}
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 x : Cart[Real, N], simple_path(g) && IN(x, inside(path_image(g))) \226\134\146 pathfinish(g) == pathstart(g)
+      #|  (q : Cart[Real, N])
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  DIFF(cball(((p : Cart[Real, N]), (b : Real))), (s : (Cart[Real, N]) -> Bool))
+      #|  closure((c : (Cart[Real, N]) -> Bool))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (d : Real) > (e : Real) \226\134\146 d <= (x : Real) \226\134\146 !(x <= e)
+      #|  (x : Cart[Real, N])
+      #|  IN((x : Cart[Real, N]), (h : (Cart[Real, N]) -> Bool))
+      #|  (x : Cart[Real, N])
+      #|  !IN((q : Cart[Real, N]), IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), closure((c : (Cart[Real, N]) -> Bool))))
+      #|  IN((l : Cart[Real, N]), cball(((p : Cart[Real, N]), (a : Real))))
+      #|  (DIFF((s : (_) -> Bool), (t : (_) -> Bool)) == {}) == SUBSET(s, t)
+      #|  (d : Real) < ((b : Real) - (a : Real)) / real_of_num(5) \226\134\146 real_of_num(3) / real_of_num(4) * (b - a) <= (l : Real) \226\134\146 abs((q : Real) - l) <= d \226\134\146 q > (b - a) / real_of_num(2)
+      #|  (l : Cart[Real, N])
+      #|  (q : Cart[Real, N])
+      #|  DIFF(UNIV, (h : (Cart[Real, N]) -> Bool))
+      #|  setdist(({(q : Cart[Real, N])}, DIFF(UNIV, (h : (Cart[Real, N]) -> Bool)))) > ((b : Real) - (a : Real)) / real_of_num(2)
+      #|  (q : Cart[Real, N])
+      #|  ((b : Real) - (a : Real)) / real_of_num(5)
+      #|  (l : Cart[Real, N])
+      #|  !(INTER(closure((c : (Cart[Real, N]) -> Bool)), cball(((p : Cart[Real, N]), (a : Real)))) == {})
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
+      #|  dist(((x : Cart[Real, N]), (r : (Cart[Real, N]) -> Cart[Real, N])(x))) <= (e : Real) / real_of_num(4) && norm((g : (Cart[Real, N]) -> Cart[Real, N])(x)) <= e / real_of_num(4) \226\134\146 dist((x, r(x) - g(x))) <= e / real_of_num(2)
       #|  :real
       #|  :real
-      #|  x:real^N
-      #|  forall x:real^N. x IN closure c ==> dist(x,f x) <= (b - a) / &2
-      #|  forall x. x IN closure c INTER h ==> (f:real^N->real^N) x = r x
-      #|  forall x:real^N. x IN frontier c ==> f x = x
-      #|  f:real^N->real^N = \\x. r x - g' x
-      #|  g':real^N->real^N
-      #|  s SUBSET t ==> s DIFF u SUBSET t
-      #|  D:real^N->bool
-      #|  h UNION frontier c:real^N->bool
-      #|  cball(p:real^N,b)
-      #|  g:real^N->real^N
-      #|  IMAGE (g:real^N->real^N) (h UNION frontier c) SUBSET D
-      #|  D = cball(vec 0:real^N,(b - a) / &4)
-      #|  \\x:real^N. if x IN frontier c then r x - x else vec 0
-      #|  ?g. g continuous_on (h UNION frontier c) /\\\n        (forall x. x IN h ==> (g:real^N->real^N) x = vec 0) /\\\n        (forall x. x IN frontier c ==> g x = r x - x)
-      #|  h INTER g SUBSET s ==> f SUBSET g ==> h INTER f SUBSET s
-      #|  s DIFF t = s INTER (UNIV DIFF t)
-      #|  h INTER g SUBSET s ==> f SUBSET g ==> h INTER f SUBSET s
-      #|  (h:real^N->bool) INTER frontier c SUBSET s
-      #|  h = cball(p:real^N,a + &3 / &4 * (b - a))
-      #|  frontier c SUBSET (sd:real^N->bool)
-      #|  closure c SUBSET (sd:real^N->bool)
-      #|  (c:real^N->bool) SUBSET interior sd
-      #|  c:real^N->bool
-      #|  cball(p:real^N,b)
-      #|  FINITE {c | c IN components(cball(p:real^N,b) DIFF s) /\\\n                ~(c INTER (cball(p,b) DIFF interior sd) = {})}
-      #|  compact(sd:real^N->bool)
-      #|  (s:real^N->bool) SUBSET sd
-      #|  vec 0 IN t /\\ (forall x:real^N. f x (vec 0) = x)\n        ==> s SUBSET {f x y | x IN s /\\ y IN t}
-      #|  {x + e:real^N | x IN s /\\ e IN ball(vec 0,d)}
-      #|  (s:real^N->bool) SUBSET interior sd
-      #|  sd = {x + e:real^N | x IN s /\\ e IN cball(vec 0,d)}
-      #|  vec 0:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  &0 < e /\\ norm y <= e / &2 ==> dist(x:real^N,x + y) < e
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], IN(x, closure((c : (Cart[Real, N]) -> Bool))) \226\134\146 dist((x, (f : (Cart[Real, N]) -> Cart[Real, N])(x))) <= ((b : Real) - (a : Real)) / real_of_num(2)
+      #|  \226\136\128 x : Cart[Real, N], IN(x, INTER(closure((c : (Cart[Real, N]) -> Bool)), (h : (Cart[Real, N]) -> Bool))) \226\134\146 (f : (Cart[Real, N]) -> Cart[Real, N])(x) == (r : (Cart[Real, N]) -> Cart[Real, N])(x)
+      #|  \226\136\128 x : Cart[Real, N], IN(x, frontier((c : (Cart[Real, N]) -> Bool))) \226\134\146 (f : (Cart[Real, N]) -> Cart[Real, N])(x) == x
+      #|  (f : (Cart[Real, N]) -> Cart[Real, N]) == ((x : Cart[Real, N]) => (r : (Cart[Real, N]) -> Cart[Real, N])(x) - (g' : (Cart[Real, N]) -> Cart[Real, N])(x))
+      #|  (g' : (Cart[Real, N]) -> Cart[Real, N])
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(DIFF(s, (u : (_) -> Bool)), t)
+      #|  (D : (Cart[Real, N]) -> Bool)
+      #|  UNION((h : (Cart[Real, N]) -> Bool), frontier((c : (Cart[Real, N]) -> Bool)))
+      #|  cball(((p : Cart[Real, N]), (b : Real)))
+      #|  (g : (Cart[Real, N]) -> Cart[Real, N])
+      #|  SUBSET(IMAGE((g : (Cart[Real, N]) -> Cart[Real, N]), UNION((h : (Cart[Real, N]) -> Bool), frontier((c : (Cart[Real, N]) -> Bool)))), (D : (Cart[Real, N]) -> Bool))
+      #|  (D : (Cart[Real, N]) -> Bool) == cball((vec(0), ((b : Real) - (a : Real)) / real_of_num(4)))
+      #|  (x : Cart[Real, N]) => if IN(x, frontier((c : (Cart[Real, N]) -> Bool))) { (r : (Cart[Real, N]) -> Cart[Real, N])(x) - x } else { vec(0) }
+      #|  \226\136\131 g : (Cart[Real, N]) -> Cart[Real, N], continuous_on(g, UNION((h : (Cart[Real, N]) -> Bool), frontier((c : (Cart[Real, N]) -> Bool)))) && (\226\136\128 x : Cart[Real, N], IN(x, h) \226\134\146 g(x) == vec(0)) && (\226\136\128 x : Cart[Real, N], IN(x, frontier(c)) \226\134\146 g(x) == (r : (Cart[Real, N]) -> Cart[Real, N])(x) - x)
+      #|  SUBSET(INTER((h : (_) -> Bool), (g : (_) -> Bool)), (s : (_) -> Bool)) \226\134\146 SUBSET((f : (_) -> Bool), g) \226\134\146 SUBSET(INTER(h, f), s)
+      #|  DIFF((s : (_) -> Bool), (t : (_) -> Bool)) == INTER(s, DIFF(UNIV, t))
+      #|  SUBSET(INTER((h : (_) -> Bool), (g : (_) -> Bool)), (s : (_) -> Bool)) \226\134\146 SUBSET((f : (_) -> Bool), g) \226\134\146 SUBSET(INTER(h, f), s)
+      #|  SUBSET(INTER((h : (Cart[Real, N]) -> Bool), frontier((c : (Cart[Real, N]) -> Bool))), (s : (Cart[Real, N]) -> Bool))
+      #|  (h : (Cart[Real, N]) -> Bool) == cball(((p : Cart[Real, N]), (a : Real) + real_of_num(3) / real_of_num(4) * ((b : Real) - a)))
+      #|  SUBSET(frontier((c : (Cart[Real, N]) -> Bool)), (sd : (Cart[Real, N]) -> Bool))
+      #|  SUBSET(closure((c : (Cart[Real, N]) -> Bool)), (sd : (Cart[Real, N]) -> Bool))
+      #|  SUBSET((c : (Cart[Real, N]) -> Bool), interior((sd : (Cart[Real, N]) -> Bool)))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  cball(((p : Cart[Real, N]), (b : Real)))
+      #|  FINITE({(c : (Cart[Real, N]) -> Bool) | IN(c, components(DIFF(cball(((p : Cart[Real, N]), (b : Real))), (s : (Cart[Real, N]) -> Bool)))) && !(INTER(c, DIFF(cball((p, b)), interior((sd : (Cart[Real, N]) -> Bool)))) == {})})
+      #|  compact((sd : (Cart[Real, N]) -> Bool))
+      #|  SUBSET((s : (Cart[Real, N]) -> Bool), (sd : (Cart[Real, N]) -> Bool))
+      #|  IN(vec(0), (t : (Cart[Real, _]) -> Bool)) && (\226\136\128 x : Cart[Real, N], (f : (Cart[Real, N], Cart[Real, _]) -> Cart[Real, N])(x, vec(0)) == x) \226\134\146 SUBSET((s : (Cart[Real, N]) -> Bool), {f((x : Cart[Real, N]), (y : Cart[Real, _])) | IN(x, s) && IN(y, t)})
+      #|  {(x : Cart[Real, N]) + (e : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(e, ball((vec(0), (d : Real))))}
+      #|  SUBSET((s : (Cart[Real, N]) -> Bool), interior((sd : (Cart[Real, N]) -> Bool)))
+      #|  (sd : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) + (e : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(e, cball((vec(0), (d : Real))))}
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  real_of_num(0) < (e : Real) && norm((y : Cart[Real, N])) <= e / real_of_num(2) \226\134\146 dist(((x : Cart[Real, N]), x + y)) < e
       #|  :real
-      #|  dist(r x,r(x + y)) < e / &8 /\\ norm y <= e / &8 /\\ r x = x\n        ==> dist(x + y:real^N,r(x + y)) <= e / &4
-      #|  :real
-      #|  :real
-      #|  :real
-      #|  y:real^N
-      #|  x:real^N
-      #|  min d (min (e / &2) ((b - a) / &8))
-      #|  e:real
-      #|  (b - a) / &8
-      #|  (r:real^N->real^N) uniformly_continuous_on\n        {x + e | x IN s /\\ e IN cball(vec 0,d)}
-      #|  norm(e:real^N) = dist(x,x + e)
+      #|  dist(((r : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])), r(x + (y : Cart[Real, N])))) < (e : Real) / real_of_num(8) && norm(y) <= e / real_of_num(8) && r(x) == x \226\134\146 dist((x + y, r(x + y))) <= e / real_of_num(4)
       #|  :real
       #|  :real
-      #|  &0 < s /\\ s <= e ==> ~(e <= s / &2)
-      #|  e:real^N
-      #|  x:real^N
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  setdist(s,(:real^N) DIFF u) / &2
-      #|  u = (:real^N)
-      #|  {f x y | x IN {} /\\ P y} SUBSET u
-      #|  s:real^N->bool = {}
-      #|  ?d. &0 < d /\\ {x + e:real^N | x IN s /\\ e IN cball(vec 0,d)} SUBSET u
-      #|  ?d. &0 < d /\\ {x + e:real^N | x IN s /\\ e IN cball(vec 0,d)} SUBSET u /\\\n        forall w. w IN {x + e:real^N | x IN s /\\ e IN cball(vec 0,d)}\n            ==> dist(w,r w) <= (b - a) / &4
-      #|  r:real^N->real^N
-      #|  u:real^N->bool
-      #|  (:real^N)
-      #|  s:real^N->bool
-      #|  forall s p:real^N a b.\n        compact s /\\ ANR s /\\ a < b\n        ==> FINITE {c | c IN components(cball(p,b) DIFF s) /\\\n                        ~(closure c INTER cball(p,a) = {})}
+      #|  :real
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  min((d : Real), min((e : Real) / real_of_num(2), ((b : Real) - (a : Real)) / real_of_num(8)))
+      #|  (e : Real)
+      #|  ((b : Real) - (a : Real)) / real_of_num(8)
+      #|  uniformly_continuous_on((r : (Cart[Real, N]) -> Cart[Real, N]), {(x : Cart[Real, N]) + (e : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(e, cball((vec(0), (d : Real))))})
+      #|  norm((e : Cart[Real, N])) == dist(((x : Cart[Real, N]), x + e))
       #|  :real
       #|  :real
-      #|  d SUBSET c ==> p IN s DIFF c ==> ~(p IN d)
-      #|  (p:real^N) IN frontier c
-      #|  d:real^N->bool
-      #|  d INTER cball(x:real^N,r) = {} ==> ball(x,r) SUBSET cball(x,r)\n                  ==> ball(x,r) INTER d = {}
-      #|  d:real^N->bool
-      #|  (:real^N) DIFF ball(p,a / &2)
-      #|  forall t. ~(x IN t) /\\ s SUBSET t ==> ~(x IN s)
-      #|  ~p ==> q \\/ p ==> q
-      #|  x IN s ==> s SUBSET t ==> x IN t
-      #|  s SUBSET t ==> s INTER c SUBSET t INTER c
-      #|  closure(ball(p:real^N,a) INTER c)
-      #|  forall s. s SUBSET t /\\ x IN s ==> x IN t
-      #|  {x | x IN s /\\ ~P x} UNION {x | x IN s /\\ P x} = s
-      #|  p IN closure\n         (UNIONS {d | d IN components (cball(p:real^N,a) INTER c) /\\\n                      ~(closure d INTER cball (p,a / &2) = {})} UNION\n          UNIONS {d | d IN components (cball(p,a) INTER c) /\\\n                      closure d INTER cball (p,a / &2) = {}})
-      #|  s = t ==> forall x. x IN s ==> x IN t
-      #|  p:real^N
-      #|  d:real^N->bool
-      #|  c:real^N->bool
-      #|  cball(p:real^N,a)
-      #|  b DIFF s:real^N->bool
-      #|  d:real^N->bool
-      #|  {d | d IN components(cball(p,a) INTER c) /\\\n           ~(closure d INTER cball(p:real^N,a / &2) = {})}
-      #|  a:real
-      #|  a / &2
-      #|  p:real^N
-      #|  s:real^N->bool
-      #|  forall s p:real^N a b c.\n          compact s /\\ ANR s /\\\n          &0 < a /\\ cball(p,a) SUBSET b /\\\n          c IN components(b DIFF s) /\\\n          p IN frontier c\n          ==> ?d. d IN components(cball(p,a) INTER c) /\\ p IN frontier d
-      #|  (forall x. x IN i DELETE z ==> g x IN c)\n        ==> g z = p ==> IMAGE g i DELETE p SUBSET c
-      #|  a SUBSET g ==> g DELETE z SUBSET u ==> a DELETE z SUBSET u
-      #|  (forall x y. x IN i /\\ y IN i /\\ f x = f y ==> x = y)\n        ==> z IN i /\\ IMAGE f i DELETE f z SUBSET c\n            ==> (forall x. x IN i DELETE z ==> f x IN c)
-      #|  a:real^1->real^N
-      #|  p:real^N
-      #|  s DIFF t = s INTER (UNIV DIFF t)
-      #|  vec 1:real^1
-      #|  p:real^N
-      #|  pathfinish g:real^N
-      #|  reversepath g:real^1->real^N
-      #|  x:real^1
-      #|  (:real^1) DELETE vec 0
-      #|  x:real^1
-      #|  (u:num->real^N->bool) m
-      #|  forall s. s SUBSET t /\\ x IN s ==> x IN t
-      #|  cball(p:real^N,min a (inv(&2 pow m))) DIFF s
-      #|  forall s. s SUBSET t /\\ x IN s ==> x IN t
-      #|  min a (inv(&2 pow m))
-      #|  &1 <= &2
-      #|  inv(&2 pow m)
-      #|  inv(&2 pow n)
-      #|  h y = (f:num->real^1->real^N) m y
-      #|  ~(m + 1 <= m)
-      #|  m:num
-      #|  inv(&2 pow m)
-      #|  m':num
-      #|  m:num
-      #|  drop y
-      #|  inv(&2)
-      #|  \\n. drop y <= inv(&2 pow n)
-      #|  y:real^1
-      #|  inv(&2 pow n)
-      #|  n:num
-      #|  e:real
-      #|  inv(&2)
-      #|  e:real
-      #|  x:real^1 = vec 0
-      #|  x:real^1
-      #|  path g /\\ pathstart g = (p:real^N) /\\\n    (forall t. t IN interval[vec 0,vec 1] DELETE vec 0 ==> g t IN c)
-      #|  g = \\x. if x = vec 0 then p else (h:real^1->real^N) x
-      #|  h:real^1->real^N
-      #|  drop x = inv(&2 pow (SUC m))
-      #|  x:real^1
-      #|  n = SUC m
-      #|  &1 < &2
-      #|  SUC m < n
-      #|  (~(t = {}) ==> forall x. x IN s /\\ x IN t ==> P x)\n        ==> forall x. x IN s INTER t ==> P x
-      #|  n:num
-      #|  m:num
-      #|  s SUBSET t DELETE a <=> ~(a IN s) /\\ s SUBSET t
-      #|  n:num
-      #|  ~(m + 1 <= m)
-      #|  m + 1
-      #|  m:num
-      #|  inv(&2 pow m)
-      #|  m':num
-      #|  m:num
-      #|  drop y
-      #|  inv(&2)
+      #|  real_of_num(0) < (s : Real) && s <= (e : Real) \226\134\146 !(e <= s / real_of_num(2))
+      #|  (e : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  setdist(((s : (Cart[Real, N]) -> Bool), DIFF(UNIV, (u : (Cart[Real, N]) -> Bool)))) / real_of_num(2)
+      #|  (u : (Cart[Real, N]) -> Bool) == UNIV
+      #|  SUBSET({(f : (_, _) -> _)((x : _), (y : _)) | IN(x, {}) && (P : (_) -> Bool)(y)}, (u : (_) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\131 d : Real, real_of_num(0) < d && SUBSET({(x : Cart[Real, N]) + (e : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(e, cball((vec(0), d)))}, (u : (Cart[Real, N]) -> Bool))
+      #|  \226\136\131 d : Real, real_of_num(0) < d && SUBSET({(x : Cart[Real, N]) + (e : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(e, cball((vec(0), d)))}, (u : (Cart[Real, N]) -> Bool)) && (\226\136\128 w : Cart[Real, N], IN(w, {(x : Cart[Real, N]) + (e : Cart[Real, N]) | IN(x, s) && IN(e, cball((vec(0), d)))}) \226\134\146 dist((w, (r : (Cart[Real, N]) -> Cart[Real, N])(w))) <= ((b : Real) - (a : Real)) / real_of_num(4))
+      #|  (r : (Cart[Real, N]) -> Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (UNIV : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 p : Cart[Real, N], \226\136\128 a : Real, \226\136\128 b : Real, compact(s) && ANR(s) && a < b \226\134\146 FINITE({(c : (Cart[Real, N]) -> Bool) | IN(c, components(DIFF(cball((p, b)), s))) && !(INTER(closure(c), cball((p, a))) == {})})
+      #|  :real
+      #|  :real
+      #|  SUBSET((d : (_) -> Bool), (c : (_) -> Bool)) \226\134\146 IN((p : _), DIFF((s : (_) -> Bool), c)) \226\134\146 !IN(p, d)
+      #|  IN((p : Cart[Real, N]), frontier((c : (Cart[Real, N]) -> Bool)))
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  INTER((d : (Cart[Real, N]) -> Bool), cball(((x : Cart[Real, N]), (r : Real)))) == {} \226\134\146 SUBSET(ball((x, r)), cball((x, r))) \226\134\146 INTER(ball((x, r)), d) == {}
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  DIFF(UNIV, ball(((p : Cart[Real, N]), (a : Real) / real_of_num(2))))
+      #|  \226\136\128 t : (_) -> Bool, !IN((x : _), t) && SUBSET((s : (_) -> Bool), t) \226\134\146 !IN(x, s)
+      #|  !(p : Bool) \226\134\146 (q : Bool) || p \226\134\146 q
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(INTER(s, (c : (_) -> Bool)), INTER(t, c))
+      #|  closure(INTER(ball(((p : Cart[Real, N]), (a : Real))), (c : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\128 s : (_) -> Bool, SUBSET(s, (t : (_) -> Bool)) && IN((x : _), s) \226\134\146 IN(x, t)
+      #|  UNION({(x : _) | IN(x, (s : (_) -> Bool)) && !(P : (_) -> Bool)(x)}, {(x : _) | IN(x, s) && P(x)}) == s
+      #|  IN((p : Cart[Real, N]), closure(UNION(UNIONS({(d : (Cart[Real, N]) -> Bool) | IN(d, components(INTER(cball((p, (a : Real))), (c : (Cart[Real, N]) -> Bool)))) && !(INTER(closure(d), cball((p, a / real_of_num(2)))) == {})}), UNIONS({(d : (Cart[Real, N]) -> Bool) | IN(d, components(INTER(cball((p, a)), c))) && INTER(closure(d), cball((p, a / real_of_num(2)))) == {}}))))
+      #|  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 (\226\136\128 x : _, IN(x, s) \226\134\146 IN(x, t))
+      #|  (p : Cart[Real, N])
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  cball(((p : Cart[Real, N]), (a : Real)))
+      #|  DIFF((b : (Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool))
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  {(d : (Cart[Real, N]) -> Bool) | IN(d, components(INTER(cball(((p : Cart[Real, N]), (a : Real))), (c : (Cart[Real, N]) -> Bool)))) && !(INTER(closure(d), cball((p, a / real_of_num(2)))) == {})}
+      #|  (a : Real)
+      #|  (a : Real) / real_of_num(2)
+      #|  (p : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 p : Cart[Real, N], \226\136\128 a : Real, \226\136\128 b : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, compact(s) && ANR(s) && real_of_num(0) < a && SUBSET(cball((p, a)), b) && IN(c, components(DIFF(b, s))) && IN(p, frontier(c)) \226\134\146 (\226\136\131 d : (Cart[Real, N]) -> Bool, IN(d, components(INTER(cball((p, a)), c))) && IN(p, frontier(d)))
+      #|  (\226\136\128 x : _, IN(x, DELETE((i : (_) -> Bool), (z : _))) \226\134\146 IN((g : (_) -> _)(x), (c : (_) -> Bool))) \226\134\146 g(z) == (p : _) \226\134\146 SUBSET(DELETE(IMAGE(g, i), p), c)
+      #|  SUBSET((a : (_) -> Bool), (g : (_) -> Bool)) \226\134\146 SUBSET(DELETE(g, (z : _)), (u : (_) -> Bool)) \226\134\146 SUBSET(DELETE(a, z), u)
+      #|  (\226\136\128 x : _, \226\136\128 y : _, IN(x, (i : (_) -> Bool)) && IN(y, i) && (f : (_) -> _)(x) == f(y) \226\134\146 x == y) \226\134\146 IN((z : _), i) && SUBSET(DELETE(IMAGE(f, i), f(z)), (c : (_) -> Bool)) \226\134\146 (\226\136\128 x : _, IN(x, DELETE(i, z)) \226\134\146 IN(f(x), c))
+      #|  (a : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  (p : Cart[Real, N])
+      #|  DIFF((s : (_) -> Bool), (t : (_) -> Bool)) == INTER(s, DIFF(UNIV, t))
+      #|  (vec : (Num) -> Cart[Real, Unit])(1)
+      #|  (p : Cart[Real, N])
+      #|  pathfinish((g : (Cart[Real, Unit]) -> Cart[Real, N]))
+      #|  reversepath((g : (Cart[Real, Unit]) -> Cart[Real, N]))
+      #|  (x : Cart[Real, Unit])
+      #|  (DELETE : ((Cart[Real, Unit]) -> Bool, Cart[Real, Unit], Cart[Real, Unit]) -> Bool)((UNIV : (Cart[Real, Unit]) -> Bool), (vec : (Num) -> Cart[Real, Unit])(0))
+      #|  (x : Cart[Real, Unit])
+      #|  (u : (Num, Cart[Real, N]) -> Bool)((m : Num))
+      #|  \226\136\128 s : (_) -> Bool, SUBSET(s, (t : (_) -> Bool)) && IN((x : _), s) \226\134\146 IN(x, t)
+      #|  DIFF(cball(((p : Cart[Real, N]), min((a : Real), inv(pow(real_of_num(2), (m : Num)))))), (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (_) -> Bool, SUBSET(s, (t : (_) -> Bool)) && IN((x : _), s) \226\134\146 IN(x, t)
+      #|  min((a : Real), inv(pow(real_of_num(2), (m : Num))))
+      #|  real_of_num(1) <= real_of_num(2)
+      #|  inv(pow(real_of_num(2), (m : Num)))
+      #|  inv(pow(real_of_num(2), (n : Num)))
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, N])((y : Cart[Real, Unit])) == (f : (Num, Cart[Real, Unit]) -> Cart[Real, N])((m : Num), y)
+      #|  !((m : Num) + 1 <= m)
+      #|  (m : Num)
+      #|  inv(pow(real_of_num(2), (m : Num)))
+      #|  (m' : Num)
+      #|  (m : Num)
+      #|  drop((y : Cart[Real, Unit]))
+      #|  inv(real_of_num(2))
+      #|  (n : Num) => drop((y : Cart[Real, Unit])) <= inv(pow(real_of_num(2), n))
+      #|  (y : Cart[Real, Unit])
+      #|  inv(pow(real_of_num(2), (n : Num)))
+      #|  (n : Num)
+      #|  (e : Real)
+      #|  inv(real_of_num(2))
+      #|  (e : Real)
+      #|  (x : Cart[Real, Unit]) == vec(0)
+      #|  (x : Cart[Real, Unit])
+      #|  path((g : (Cart[Real, Unit]) -> Cart[Real, N])) && pathstart(g) == (p : Cart[Real, N]) && (\226\136\128 t : Cart[Real, Unit], IN(t, DELETE(interval([(vec(0), vec(1))]), vec(0))) \226\134\146 IN(g(t), (c : (Cart[Real, N]) -> Bool)))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, N]) == ((x : Cart[Real, Unit]) => if x == vec(0) { (p : Cart[Real, N]) } else { (h : (Cart[Real, Unit]) -> Cart[Real, N])(x) })
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  drop((x : Cart[Real, Unit])) == inv(pow(real_of_num(2), SUC((m : Num))))
+      #|  (x : Cart[Real, Unit])
+      #|  (n : Num) == SUC((m : Num))
+      #|  real_of_num(1) < real_of_num(2)
+      #|  SUC((m : Num)) < (n : Num)
+      #|  (!((t : (_) -> Bool) == {}) \226\134\146 (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) && IN(x, t) \226\134\146 (P : (_) -> Bool)(x))) \226\134\146 (\226\136\128 x : _, IN(x, INTER(s, t)) \226\134\146 P(x))
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  SUBSET((s : (_) -> Bool), DELETE((t : (_) -> Bool), (a : _))) == (!IN(a, s) && SUBSET(s, t))
+      #|  (n : Num)
+      #|  !((m : Num) + 1 <= m)
+      #|  (m : Num) + 1
+      #|  (m : Num)
+      #|  inv(pow(real_of_num(2), (m : Num)))
+      #|  (m' : Num)
+      #|  (m : Num)
+      #|  drop((y : Cart[Real, Unit]))
+      #|  inv(real_of_num(2))
       #|  0
-      #|  \\n. drop y <= inv(&2 pow n)
-      #|  y:real^1
-      #|  x - inv i < a ==> a <= inv(&2) * b ==> &2 * x - &2 / i <= b
-      #|  inv(&2 pow (SUC m))
-      #|  &2 * drop x - &2 / &2 pow n < drop x + inv(&2 pow n)
-      #|  r:num
-      #|  m:num
-      #|  ?x y. x IN {a,b,c} /\\ y IN {a,b,c} /\\ x + 2 <= y
-      #|  c:num
-      #|  b:num
-      #|  a:num
-      #|  (forall a b c. a IN s /\\ b IN s /\\ c IN s /\\ ~(a = b) /\\ ~(a = c) /\\ ~(b = c)\n                 ==> ?x y. x IN s /\\ y IN s /\\ x + 2 <= y) /\\\n        (forall x y. x IN s /\\ y IN s /\\ x + 2 <= y ==> F)\n        ==> ~(?a b c. a IN s /\\ b IN s /\\ c IN s /\\\n                  ~(a = b) /\\ ~(a = c) /\\ ~(b = c))
-      #|  ~(?a b c. a IN s /\\ b IN s /\\ c IN s /\\\n                  ~(a = b) /\\ ~(a = c) /\\ ~(b = c))\n        ==> ?a b. s SUBSET {a,b}
-      #|  (?a b. s SUBSET {a,b}) ==> FINITE s
-      #|  {i | ~(interval[lift(inv(&2 pow SUC i)),lift(inv(&2 pow i))] INTER\n               ball(x:real^1,inv(&2 pow n)) = {})}
-      #|  (interval[vec 0,vec 1] DELETE vec 0) INTER\n         ball(x:real^1,inv(&2 pow n))
-      #|  n:num
-      #|  drop x / &9
-      #|  inv(&2)
-      #|  x:real^1
-      #|  s SUBSET u ==> u INTER s = s
-      #|  euclidean
-      #|  closed_in a b /\\ c <=> ~(closed_in a b ==> ~c)
-      #|  (:num)
-      #|  \\n. interval[lift(inv(&2 pow (SUC n))),lift(inv(&2 pow n))]
-      #|  f:num->real^1->real^N
-      #|  subtopology euclidean (c:real^N->bool)
-      #|  subtopology euclidean (interval[vec 0:real^1,vec 1] DELETE (vec 0))
-      #|  f:num->real^1->real^N
-      #|  &0 < x ==> (&2 * x) * (inv x - inv(&2) * inv x) = &1
-      #|  x - &1 <= &1 <=> x <= &2
-      #|  IMAGE f i SUBSET u ==> s SUBSET i ==> IMAGE f s SUBSET u
-      #|  (f:real^1->real^N) o\n                  (\\x. &2 pow (SUC n) % (x - lift(inv(&2 pow (SUC n)))))
-      #|  f:real^1->real^N
-      #|  (u:num->real^N->bool) n
-      #|  cball(p:real^N,min a (inv(&2 pow n)))
-      #|  cball(p:real^N,min a (inv(&2 pow n))) DIFF s
-      #|  path_component (u n) (q n:real^N) (q(SUC n))
-      #|  n:num
-      #|  forall n. ?f. (f:real^1->real^N) continuous_on\n            interval[lift(inv(&2 pow (SUC n))),lift(inv(&2 pow n))] /\\\n            IMAGE f (interval[lift(inv(&2 pow (SUC n))),lift(inv(&2 pow n))])\n            SUBSET u n /\\\n            f(lift(inv(&2 pow n))) = q n /\\\n            f(lift(inv(&2 pow (SUC n)))) = q(SUC n)
-      #|  q:num->real^N
-      #|  forall n. ~((u:num->real^N->bool) n = {})
-      #|  (u:num->real^N->bool) n
-      #|  c:real^N->bool
-      #|  cball(p:real^N,min a (inv(&2 pow n)))
-      #|  b DIFF s:real^N->bool
-      #|  n:num
-      #|  forall n. u n IN components(cball(p:real^N,min a (inv(&2 pow n))) DIFF s)
-      #|  forall n. (u:num->real^N->bool) n SUBSET c
-      #|  u:num->real^N->bool
-      #|  n SUBSET s\n            ==> (b INTER n) INTER (b INTER s) INTER c =\n                (b INTER n) INTER c
-      #|  e:real^N->bool
-      #|  d:real^N->bool
-      #|  cball(p:real^N,min a (inv(&2 pow SUC n)))
-      #|  cball(p:real^N,min a (inv(&2 pow n))) INTER c
-      #|  e:real^N->bool
-      #|  d:real^N->bool
-      #|  c:real^N->bool
-      #|  cball(p:real^N,min a (inv(&2 pow n)))
-      #|  b DIFF s:real^N->bool
-      #|  x < y ==> min a x <= min a y
-      #|  n < SUC n
-      #|  &1 < &2
-      #|  d:real^N->bool
-      #|  cball(p:real^N,min a (inv(&2 pow n)))
-      #|  min a (inv(&2 pow (SUC n)))
-      #|  p:real^N
-      #|  s:real^N->bool
-      #|  d:real^N->bool
-      #|  n:num
-      #|  c:real^N->bool
-      #|  b:real^N->bool
-      #|  min a (&1)
-      #|  p:real^N
-      #|  s:real^N->bool
-      #|  ?u. (forall n. u n IN\n             components(cball(p:real^N,min a (inv(&2 pow n))) INTER c) /\\\n             p IN frontier(u n)) /\\\n        (forall n. u(SUC n) SUBSET u n)
-      #|  a:real
-      #|  forall s c p:real^N b.\n        compact s /\\ ANR s /\\\n        c IN components(b DIFF s) /\\ p IN frontier c /\\ p IN interior b\n        ==> ?g. arc g /\\ pathfinish g = p /\\\n                forall t. t IN interval[vec 0,vec 1] DELETE (vec 1) ==> g(t) IN c
-      #|  m + 1
-      #|  n:num
-      #|  (forall x. x IN i DELETE z ==> g x IN c)\n        ==> g z = p ==> IMAGE g i DELETE p SUBSET c
-      #|  a SUBSET g ==> g DELETE z SUBSET u ==> a DELETE z SUBSET u
-      #|  (forall x y. x IN i /\\ y IN i /\\ f x = f y ==> x = y)\n        ==> z IN i /\\ IMAGE f i DELETE f z SUBSET c\n            ==> (forall x. x IN i DELETE z ==> f x IN c)
-      #|  h:real^1->real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  g:real^1->real^N
-      #|  t:real^1
-      #|  forall t. t IN interval[vec 0,vec 1] DELETE vec 1\n        ==> (g:real^1->real^N) t IN c
-      #|  path(g:real^1->real^N)
-      #|  pathstart g:real^N = x /\\ pathfinish g = y
-      #|  g:real^1->real^N = g1 ++ g2
-      #|  g1:real^1->real^N
-      #|  c:real^N->bool
-      #|  path_component c (x:real^N) (pathstart g2)
-      #|  g2:real^1->real^N
-      #|  (:real^N)
-      #|  y:real^N
-      #|  c:real^N->bool
-      #|  s:real^N->bool
-      #|  forall s c x y.\n        compact s /\\ ANR s /\\\n        c IN components((:real^N) DIFF s) /\\ x IN c /\\ y IN frontier c\n        ==> ?g. arc g /\\ pathstart g = x /\\ pathfinish g = y /\\\n                forall t. t IN interval[vec 0,vec 1] DELETE (vec 1) ==> g(t) IN c
-      #|  d:real^N->bool
-      #|  c INTER u:real^N->bool
-      #|  r:real^1
-      #|  r:real^1 = vec 1
-      #|  r:real^1
-      #|  g:real^1->real^N
-      #|  pathstart g:real^N
-      #|  g:real^1->real^N
-      #|  (p:real^N) IN frontier c
-      #|  cball(p:real^N,b)
-      #|  p:real^N
-      #|  d:real^N->bool
-      #|  s:real^N->bool
-      #|  (:real^N) DIFF s
-      #|  (d:real^N->bool) SUBSET c
-      #|  (x:real^N) IN d
-      #|  x:real^N
-      #|  d IN components(cball(p:real^N,b) DIFF s)
-      #|  d = connected_component (cball(p:real^N,b) DIFF s) x
-      #|  x:real^N
-      #|  cball(p:real^N,b)
-      #|  ball(p:real^N,a)
-      #|  x:real^N
-      #|  p /\\ ~q ==> (p ==> ~r ==> q) ==> r
-      #|  d:real^N->bool
-      #|  x:real^N
-      #|  d:real^N->bool
-      #|  e / &2 < e <=> &0 < e
-      #|  {x | P x /\\ Q x /\\ R x} = {x | x IN {y | P y /\\ Q y} /\\ R x}
-      #|  e / &2 < e <=> &0 < e
-      #|  b:real
-      #|  b / &2
-      #|  p:real^N
-      #|  s:real^N->bool
-      #|  inf ((b / &2) INSERT\n             IMAGE (\\c. setdist({p:real^N},c))\n                   {c | c IN components (cball (p,b) DIFF s) /\\\n                        ~(closure c INTER cball (p,b / &2) = {}) /\\\n                        ~(p IN closure c)})
-      #|  ?a. &0 < a /\\ a < b /\\\n          forall d x. d IN components(cball(p,b) DIFF s) /\\\n                x IN d /\\ x IN ball(p:real^N,a)\n                ==> p IN closure d
-      #|  open(c:real^N->bool)
-      #|  b:real
-      #|  p:real^N
-      #|  forall s c u p.\n          compact s /\\ ANR s /\\ c IN components((:real^N) DIFF s) /\\\n          p IN frontier c /\\ open u /\\ p IN u\n          ==> ?v. open v /\\ p IN v /\\ v SUBSET u /\\\n                  forall y. y IN c INTER v\n                      ==> path_component ((p INSERT c) INTER u) p y
-      #|  (q:real^N) INSERT c INTER v
-      #|  (p:real^N) INSERT c INTER u
-      #|  r:real^N
-      #|  r:real^N
-      #|  w:real^N->bool
-      #|  c:real^N->bool
-      #|  w:real^N->bool
-      #|  q:real^N
-      #|  v:real^N->bool
-      #|  c:real^N->bool
-      #|  s:real^N->bool
-      #|  (p:real^N) INSERT c INTER u
-      #|  (q:real^N) IN closure c
-      #|  q:real^N
-      #|  t INTER v:real^N->bool
-      #|  v:real^N->bool
-      #|  p:real^N
-      #|  u:real^N->bool
-      #|  c:real^N->bool
-      #|  s:real^N->bool
-      #|  v:real^N->bool
-      #|  p:real^N
-      #|  c INTER u:real^N->bool
-      #|  c INTER u:real^N->bool
-      #|  (p:real^N) IN closure c
-      #|  u:real^N->bool
-      #|  p:real^N
-      #|  uu:real^N->bool
-      #|  open(c:real^N->bool)
-      #|  forall s c t.\n        compact s /\\\n        ANR s /\\\n        c IN components ((:real^N) DIFF s) /\\\n        c SUBSET t /\\\n        t SUBSET closure c\n        ==> locally path_connected t
-      #|  c:real^N->bool
-      #|  cball(p:real^N,b)
-      #|  c:real^N->bool
-      #|  r:real^1
-      #|  r:real^1 = vec 1
-      #|  r:real^1
-      #|  g:real^1->real^N
-      #|  pathstart g:real^N
-      #|  (p:real^N) INSERT c
-      #|  g:real^1->real^N
-      #|  cball(p:real^N,b)
-      #|  p:real^N
-      #|  c:real^N->bool
-      #|  s:real^N->bool
-      #|  (p:real^N) IN frontier s
-      #|  x:real^N
-      #|  c:real^N->bool
-      #|  c:real^N->bool
-      #|  x IN b ==> b SUBSET c ==> x IN c
-      #|  x IN UNIONS(components(cball(p:real^N,b) DIFF s))
-      #|  x:real^N
-      #|  cball(p:real^N,b)
-      #|  ball(p:real^N,a)
-      #|  x:real^N
-      #|  p /\\ ~q ==> (p ==> ~r ==> q) ==> r
-      #|  d:real^N->bool
-      #|  x:real^N
-      #|  d:real^N->bool
-      #|  e / &2 < e <=> &0 < e
-      #|  {x | P x /\\ Q x /\\ R x} = {x | x IN {y | P y /\\ Q y} /\\ R x}
-      #|  e / &2 < e <=> &0 < e
-      #|  b:real
-      #|  b / &2
-      #|  p:real^N
-      #|  s:real^N->bool
-      #|  inf ((b / &2) INSERT\n             IMAGE (\\c. setdist({p:real^N},c))\n                   {c | c IN components (cball (p,b) DIFF s) /\\\n                        ~(closure c INTER cball (p,b / &2) = {}) /\\\n                        ~(p IN closure c)})
-      #|  ?a. &0 < a /\\ a < b /\\\n          forall d x. d IN components(cball(p,b) DIFF s) /\\\n                x IN d /\\ x IN ball(p:real^N,a)\n                ==> p IN closure d
-      #|  b:real
-      #|  p:real^N
-      #|  forall s u p:real^N.\n          compact s /\\ ANR s /\\ p IN frontier s /\\ open u /\\ p IN u\n          ==> ?v. open v /\\ p IN v /\\ v SUBSET u /\\\n                  forall y. y IN v DIFF s\n                      ==> path_component (p INSERT (u DIFF s)) p y
-      #|  (p:real^N) INSERT (u DIFF s)
-      #|  (q:real^N) INSERT (v DIFF s)
-      #|  (p:real^N) INSERT (u DIFF s)
-      #|  r:real^N
-      #|  r:real^N
-      #|  w:real^N->bool
-      #|  s:real^N->bool
-      #|  w:real^N->bool
-      #|  q:real^N
-      #|  v:real^N->bool
-      #|  s:real^N->bool
-      #|  (q:real^N) IN s
-      #|  q:real^N
-      #|  t INTER v:real^N->bool
-      #|  v:real^N->bool
-      #|  p:real^N
-      #|  u:real^N->bool
-      #|  s:real^N->bool
-      #|  v:real^N->bool
-      #|  p:real^N
-      #|  u DIFF s:real^N->bool
-      #|  u DIFF s:real^N->bool
-      #|  (p:real^N) IN s
-      #|  u:real^N->bool
-      #|  p:real^N
-      #|  uu:real^N->bool
-      #|  forall s t. compact s /\\ ANR s /\\\n         (:real^N) DIFF s SUBSET t /\\ DISJOINT t (interior s)\n         ==> locally path_connected t
-      #|  path_image g:real^N->bool
-      #|  forall g s:real^N->bool.\n        2 <= dimindex(:N) /\\ simple_path g /\\\n        (:real^N) DIFF path_image g SUBSET s\n        ==> locally path_connected s
-      #|  i SUBSET p /\\ DISJOINT {a,b} i\n    ==> DISJOINT (UNIV DIFF (p DIFF {a,b})) i
-      #|  path_image g:real^N->bool
-      #|  forall g. simple_path g\n       ==> locally path_connected\n            ((:real^N) DIFF (path_image g DIFF {pathstart g,pathfinish g}))
-      #|  c:real^N->bool
-      #|  forall s c t.\n        compact s /\\ ANR s /\\ c IN components((:real^N) DIFF s) /\\\n        c SUBSET t /\\ t SUBSET closure c\n        ==> path_connected t
-      #|  (:real^N) DIFF path_image g
-      #|  forall g s:real^N->bool.\n        2 <= dimindex(:N) /\\ arc g /\\ (:real^N) DIFF path_image g SUBSET s\n        ==> path_connected s
-      #|  g:real^1->real^N
-      #|  forall g. 2 <= dimindex(:N) /\\ arc g\n       ==> path_connected\n            ((:real^N) DIFF (path_image g DIFF {pathstart g,pathfinish g}))
+      #|  (n : Num) => drop((y : Cart[Real, Unit])) <= inv(pow(real_of_num(2), n))
+      #|  (y : Cart[Real, Unit])
+      #|  (x : Real) - inv((i : Real)) < (a : Real) \226\134\146 a <= inv(real_of_num(2)) * (b : Real) \226\134\146 real_of_num(2) * x - real_of_num(2) / i <= b
+      #|  inv(pow(real_of_num(2), SUC((m : Num))))
+      #|  real_of_num(2) * drop((x : Cart[Real, Unit])) - real_of_num(2) / pow(real_of_num(2), (n : Num)) < drop(x) + inv(pow(real_of_num(2), n))
+      #|  (r : Num)
+      #|  (m : Num)
+      #|  \226\136\131 x : Num, \226\136\131 y : Num, IN(x, {(a : Num), (b : Num), (c : Num)}) && IN(y, {a, b, c}) && x + 2 <= y
+      #|  (c : Num)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (\226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 c : Num, IN(a, (s : (Num) -> Bool)) && IN(b, s) && IN(c, s) && !(a == b) && !(a == c) && !(b == c) \226\134\146 (\226\136\131 x : Num, \226\136\131 y : Num, IN(x, s) && IN(y, s) && x + 2 <= y)) && (\226\136\128 x : Num, \226\136\128 y : Num, IN(x, s) && IN(y, s) && x + 2 <= y \226\134\146 false) \226\134\146 !(\226\136\131 a : Num, \226\136\131 b : Num, \226\136\131 c : Num, IN(a, s) && IN(b, s) && IN(c, s) && !(a == b) && !(a == c) && !(b == c))
+      #|  !(\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, IN(a, (s : (_) -> Bool)) && IN(b, s) && IN(c, s) && !(a == b) && !(a == c) && !(b == c)) \226\134\146 (\226\136\131 a : _, \226\136\131 b : _, SUBSET(s, {a, b}))
+      #|  (\226\136\131 a : _, \226\136\131 b : _, SUBSET((s : (_) -> Bool), {a, b})) \226\134\146 FINITE(s)
+      #|  {(i : Num) | !(INTER(interval([(lift(inv(pow(real_of_num(2), SUC(i)))), lift(inv(pow(real_of_num(2), i))))]), ball(((x : Cart[Real, Unit]), inv(pow(real_of_num(2), (n : Num)))))) == {})}
+      #|  INTER(DELETE(interval([(vec(0), vec(1))]), vec(0)), ball(((x : Cart[Real, Unit]), inv(pow(real_of_num(2), (n : Num))))))
+      #|  (n : Num)
+      #|  drop((x : Cart[Real, Unit])) / real_of_num(9)
+      #|  inv(real_of_num(2))
+      #|  (x : Cart[Real, Unit])
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 INTER(u, s) == s
+      #|  (euclidean : Topology[Cart[Real, _]])
+      #|  (closed_in((a : Topology[_]), (b : (_) -> Bool)) && (c : Bool)) == !(closed_in(a, b) \226\134\146 !c)
+      #|  (UNIV : (Num) -> Bool)
+      #|  (n : Num) => interval([(lift(inv(pow(real_of_num(2), SUC(n)))), lift(inv(pow(real_of_num(2), n))))])
+      #|  (f : (Num, Cart[Real, Unit]) -> Cart[Real, N])
+      #|  subtopology(euclidean, (c : (Cart[Real, N]) -> Bool))
+      #|  (subtopology : (Topology[Cart[Real, Unit]], (Cart[Real, Unit]) -> Bool) -> Topology[Cart[Real, Unit]])((euclidean : Topology[Cart[Real, Unit]]), (DELETE : ((Cart[Real, Unit]) -> Bool, Cart[Real, Unit], Cart[Real, Unit]) -> Bool)((interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))]), (vec : (Num) -> Cart[Real, Unit])(0)))
+      #|  (f : (Num, Cart[Real, Unit]) -> Cart[Real, N])
+      #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(2) * x * (inv(x) - inv(real_of_num(2)) * inv(x)) == real_of_num(1)
+      #|  ((x : Real) - real_of_num(1) <= real_of_num(1)) == (x <= real_of_num(2))
+      #|  SUBSET(IMAGE((f : (_) -> _), (i : (_) -> Bool)), (u : (_) -> Bool)) \226\134\146 SUBSET((s : (_) -> Bool), i) \226\134\146 SUBSET(IMAGE(f, s), u)
+      #|  o((f : (Cart[Real, Unit]) -> Cart[Real, N]), (x : Cart[Real, Unit]) => op_pct(pow(real_of_num(2), SUC((n : Num))), x - lift(inv(pow(real_of_num(2), SUC(n))))))
+      #|  (f : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  (u : (Num, Cart[Real, N]) -> Bool)((n : Num))
+      #|  cball(((p : Cart[Real, N]), min((a : Real), inv(pow(real_of_num(2), (n : Num))))))
+      #|  DIFF(cball(((p : Cart[Real, N]), min((a : Real), inv(pow(real_of_num(2), (n : Num)))))), (s : (Cart[Real, N]) -> Bool))
+      #|  path_component((u : (Num, Cart[Real, N]) -> Bool)((n : Num)), (q : (Num) -> Cart[Real, N])(n), q(SUC(n)))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\131 f : (Cart[Real, Unit]) -> Cart[Real, N], continuous_on(f, interval([(lift(inv(pow(real_of_num(2), SUC(n)))), lift(inv(pow(real_of_num(2), n))))])) && SUBSET(IMAGE(f, interval([(lift(inv(pow(real_of_num(2), SUC(n)))), lift(inv(pow(real_of_num(2), n))))])), (u : (Num, Cart[Real, N]) -> Bool)(n)) && f(lift(inv(pow(real_of_num(2), n)))) == (q : (Num) -> Cart[Real, N])(n) && f(lift(inv(pow(real_of_num(2), SUC(n))))) == q(SUC(n))
+      #|  (q : (Num) -> Cart[Real, N])
+      #|  \226\136\128 n : Num, !((u : (Num, Cart[Real, N]) -> Bool)(n) == {})
+      #|  (u : (Num, Cart[Real, N]) -> Bool)((n : Num))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  cball(((p : Cart[Real, N]), min((a : Real), inv(pow(real_of_num(2), (n : Num))))))
+      #|  DIFF((b : (Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, IN((u : (Num, Cart[Real, N]) -> Bool)(n), components(DIFF(cball(((p : Cart[Real, N]), min((a : Real), inv(pow(real_of_num(2), n))))), (s : (Cart[Real, N]) -> Bool))))
+      #|  \226\136\128 n : Num, SUBSET((u : (Num, Cart[Real, N]) -> Bool)(n), (c : (Cart[Real, N]) -> Bool))
+      #|  (u : (Num, Cart[Real, N]) -> Bool)
+      #|  SUBSET((n : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 INTER(INTER((b : (_) -> Bool), n), INTER(INTER(b, s), (c : (_) -> Bool))) == INTER(INTER(b, n), c)
+      #|  (e : (Cart[Real, N]) -> Bool)
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  cball(((p : Cart[Real, N]), min((a : Real), inv(pow(real_of_num(2), SUC((n : Num)))))))
+      #|  INTER(cball(((p : Cart[Real, N]), min((a : Real), inv(pow(real_of_num(2), (n : Num)))))), (c : (Cart[Real, N]) -> Bool))
+      #|  (e : (Cart[Real, N]) -> Bool)
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  cball(((p : Cart[Real, N]), min((a : Real), inv(pow(real_of_num(2), (n : Num))))))
+      #|  DIFF((b : (Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool))
+      #|  (x : Real) < (y : Real) \226\134\146 min((a : Real), x) <= min(a, y)
+      #|  (n : Num) < SUC(n)
+      #|  real_of_num(1) < real_of_num(2)
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  cball(((p : Cart[Real, N]), min((a : Real), inv(pow(real_of_num(2), (n : Num))))))
+      #|  min((a : Real), inv(pow(real_of_num(2), SUC((n : Num)))))
+      #|  (p : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  (n : Num)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (b : (Cart[Real, N]) -> Bool)
+      #|  min((a : Real), real_of_num(1))
+      #|  (p : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\131 u : (Num, Cart[Real, N]) -> Bool, (\226\136\128 n : Num, IN(u(n), components(INTER(cball(((p : Cart[Real, N]), min((a : Real), inv(pow(real_of_num(2), n))))), (c : (Cart[Real, N]) -> Bool)))) && IN(p, frontier(u(n)))) && (\226\136\128 n : Num, SUBSET(u(SUC(n)), u(n)))
+      #|  (a : Real)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 p : Cart[Real, N], \226\136\128 b : (Cart[Real, N]) -> Bool, compact(s) && ANR(s) && IN(c, components(DIFF(b, s))) && IN(p, frontier(c)) && IN(p, interior(b)) \226\134\146 (\226\136\131 g : (Cart[Real, Unit]) -> Cart[Real, N], arc(g) && pathfinish(g) == p && (\226\136\128 t : Cart[Real, Unit], IN(t, DELETE(interval([(vec(0), vec(1))]), vec(1))) \226\134\146 IN(g(t), c)))
+      #|  (m : Num) + 1
+      #|  (n : Num)
+      #|  (\226\136\128 x : _, IN(x, DELETE((i : (_) -> Bool), (z : _))) \226\134\146 IN((g : (_) -> _)(x), (c : (_) -> Bool))) \226\134\146 g(z) == (p : _) \226\134\146 SUBSET(DELETE(IMAGE(g, i), p), c)
+      #|  SUBSET((a : (_) -> Bool), (g : (_) -> Bool)) \226\134\146 SUBSET(DELETE(g, (z : _)), (u : (_) -> Bool)) \226\134\146 SUBSET(DELETE(a, z), u)
+      #|  (\226\136\128 x : _, \226\136\128 y : _, IN(x, (i : (_) -> Bool)) && IN(y, i) && (f : (_) -> _)(x) == f(y) \226\134\146 x == y) \226\134\146 IN((z : _), i) && SUBSET(DELETE(IMAGE(f, i), f(z)), (c : (_) -> Bool)) \226\134\146 (\226\136\128 x : _, IN(x, DELETE(i, z)) \226\134\146 IN(f(x), c))
+      #|  (h : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  (t : Cart[Real, Unit])
+      #|  \226\136\128 t : Cart[Real, Unit], IN(t, DELETE(interval([(vec(0), vec(1))]), vec(1))) \226\134\146 IN((g : (Cart[Real, Unit]) -> Cart[Real, N])(t), (c : (Cart[Real, N]) -> Bool))
+      #|  path((g : (Cart[Real, Unit]) -> Cart[Real, N]))
+      #|  pathstart((g : (Cart[Real, Unit]) -> Cart[Real, N])) == (x : Cart[Real, N]) && pathfinish(g) == (y : Cart[Real, N])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, N]) == op_plus_plus((g1 : (Cart[Real, Unit]) -> Cart[Real, N]), (g2 : (Cart[Real, Unit]) -> Cart[Real, N]))
+      #|  (g1 : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  path_component((c : (Cart[Real, N]) -> Bool), (x : Cart[Real, N]), pathstart((g2 : (Cart[Real, Unit]) -> Cart[Real, N])))
+      #|  (g2 : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  (UNIV : (Cart[Real, N]) -> Bool)
+      #|  (y : Cart[Real, N])
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], compact(s) && ANR(s) && IN(c, components(DIFF(UNIV, s))) && IN(x, c) && IN(y, frontier(c)) \226\134\146 (\226\136\131 g : (Cart[Real, Unit]) -> Cart[Real, N], arc(g) && pathstart(g) == x && pathfinish(g) == y && (\226\136\128 t : Cart[Real, Unit], IN(t, DELETE(interval([(vec(0), vec(1))]), vec(1))) \226\134\146 IN(g(t), c)))
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  INTER((c : (Cart[Real, N]) -> Bool), (u : (Cart[Real, N]) -> Bool))
+      #|  (r : Cart[Real, Unit])
+      #|  (r : Cart[Real, Unit]) == vec(1)
+      #|  (r : Cart[Real, Unit])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  pathstart((g : (Cart[Real, Unit]) -> Cart[Real, N]))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  IN((p : Cart[Real, N]), frontier((c : (Cart[Real, N]) -> Bool)))
+      #|  cball(((p : Cart[Real, N]), (b : Real)))
+      #|  (p : Cart[Real, N])
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  DIFF(UNIV, (s : (Cart[Real, N]) -> Bool))
+      #|  SUBSET((d : (Cart[Real, N]) -> Bool), (c : (Cart[Real, N]) -> Bool))
+      #|  IN((x : Cart[Real, N]), (d : (Cart[Real, N]) -> Bool))
+      #|  (x : Cart[Real, N])
+      #|  IN((d : (Cart[Real, N]) -> Bool), components(DIFF(cball(((p : Cart[Real, N]), (b : Real))), (s : (Cart[Real, N]) -> Bool))))
+      #|  (d : (Cart[Real, N]) -> Bool) == connected_component(DIFF(cball(((p : Cart[Real, N]), (b : Real))), (s : (Cart[Real, N]) -> Bool)), (x : Cart[Real, N]))
+      #|  (x : Cart[Real, N])
+      #|  cball(((p : Cart[Real, N]), (b : Real)))
+      #|  ball(((p : Cart[Real, N]), (a : Real)))
+      #|  (x : Cart[Real, N])
+      #|  (p : Bool) && !(q : Bool) \226\134\146 (p \226\134\146 !(r : Bool) \226\134\146 q) \226\134\146 r
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  ((e : Real) / real_of_num(2) < e) == (real_of_num(0) < e)
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x) && (R : (_) -> Bool)(x)} == {(x : _) | IN(x, {(y : _) | P(y) && Q(y)}) && R(x)}
+      #|  ((e : Real) / real_of_num(2) < e) == (real_of_num(0) < e)
+      #|  (b : Real)
+      #|  (b : Real) / real_of_num(2)
+      #|  (p : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  inf(INSERT((b : Real) / real_of_num(2), IMAGE((c : (Cart[Real, N]) -> Bool) => setdist(({(p : Cart[Real, N])}, c)), {(c : (Cart[Real, N]) -> Bool) | IN(c, components(DIFF(cball((p, b)), (s : (Cart[Real, N]) -> Bool)))) && !(INTER(closure(c), cball((p, b / real_of_num(2)))) == {}) && !IN(p, closure(c))})))
+      #|  \226\136\131 a : Real, real_of_num(0) < a && a < (b : Real) && (\226\136\128 d : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], IN(d, components(DIFF(cball(((p : Cart[Real, N]), b)), (s : (Cart[Real, N]) -> Bool)))) && IN(x, d) && IN(x, ball((p, a))) \226\134\146 IN(p, closure(d)))
+      #|  open((c : (Cart[Real, N]) -> Bool))
+      #|  (b : Real)
+      #|  (p : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 p : Cart[Real, N], compact(s) && ANR(s) && IN(c, components(DIFF(UNIV, s))) && IN(p, frontier(c)) && open(u) && IN(p, u) \226\134\146 (\226\136\131 v : (Cart[Real, N]) -> Bool, open(v) && IN(p, v) && SUBSET(v, u) && (\226\136\128 y : Cart[Real, N], IN(y, INTER(c, v)) \226\134\146 path_component(INTER(INSERT(p, c), u), p, y)))
+      #|  INTER(INSERT((q : Cart[Real, N]), (c : (Cart[Real, N]) -> Bool)), (v : (Cart[Real, N]) -> Bool))
+      #|  INTER(INSERT((p : Cart[Real, N]), (c : (Cart[Real, N]) -> Bool)), (u : (Cart[Real, N]) -> Bool))
+      #|  (r : Cart[Real, N])
+      #|  (r : Cart[Real, N])
+      #|  (w : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (w : (Cart[Real, N]) -> Bool)
+      #|  (q : Cart[Real, N])
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  INTER(INSERT((p : Cart[Real, N]), (c : (Cart[Real, N]) -> Bool)), (u : (Cart[Real, N]) -> Bool))
+      #|  IN((q : Cart[Real, N]), closure((c : (Cart[Real, N]) -> Bool)))
+      #|  (q : Cart[Real, N])
+      #|  INTER((t : (Cart[Real, N]) -> Bool), (v : (Cart[Real, N]) -> Bool))
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  (p : Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  (p : Cart[Real, N])
+      #|  INTER((c : (Cart[Real, N]) -> Bool), (u : (Cart[Real, N]) -> Bool))
+      #|  INTER((c : (Cart[Real, N]) -> Bool), (u : (Cart[Real, N]) -> Bool))
+      #|  IN((p : Cart[Real, N]), closure((c : (Cart[Real, N]) -> Bool)))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (p : Cart[Real, N])
+      #|  (uu : (Cart[Real, N]) -> Bool)
+      #|  open((c : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, compact(s) && ANR(s) && IN(c, components(DIFF(UNIV, s))) && SUBSET(c, t) && SUBSET(t, closure(c)) \226\134\146 locally(path_connected, t)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  cball(((p : Cart[Real, N]), (b : Real)))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (r : Cart[Real, Unit])
+      #|  (r : Cart[Real, Unit]) == vec(1)
+      #|  (r : Cart[Real, Unit])
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  pathstart((g : (Cart[Real, Unit]) -> Cart[Real, N]))
+      #|  INSERT((p : Cart[Real, N]), (c : (Cart[Real, N]) -> Bool))
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  cball(((p : Cart[Real, N]), (b : Real)))
+      #|  (p : Cart[Real, N])
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  IN((p : Cart[Real, N]), frontier((s : (Cart[Real, N]) -> Bool)))
+      #|  (x : Cart[Real, N])
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  IN((x : _), (b : (_) -> Bool)) \226\134\146 SUBSET(b, (c : (_) -> Bool)) \226\134\146 IN(x, c)
+      #|  IN((x : Cart[Real, N]), UNIONS(components(DIFF(cball(((p : Cart[Real, N]), (b : Real))), (s : (Cart[Real, N]) -> Bool)))))
+      #|  (x : Cart[Real, N])
+      #|  cball(((p : Cart[Real, N]), (b : Real)))
+      #|  ball(((p : Cart[Real, N]), (a : Real)))
+      #|  (x : Cart[Real, N])
+      #|  (p : Bool) && !(q : Bool) \226\134\146 (p \226\134\146 !(r : Bool) \226\134\146 q) \226\134\146 r
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  ((e : Real) / real_of_num(2) < e) == (real_of_num(0) < e)
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x) && (R : (_) -> Bool)(x)} == {(x : _) | IN(x, {(y : _) | P(y) && Q(y)}) && R(x)}
+      #|  ((e : Real) / real_of_num(2) < e) == (real_of_num(0) < e)
+      #|  (b : Real)
+      #|  (b : Real) / real_of_num(2)
+      #|  (p : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  inf(INSERT((b : Real) / real_of_num(2), IMAGE((c : (Cart[Real, N]) -> Bool) => setdist(({(p : Cart[Real, N])}, c)), {(c : (Cart[Real, N]) -> Bool) | IN(c, components(DIFF(cball((p, b)), (s : (Cart[Real, N]) -> Bool)))) && !(INTER(closure(c), cball((p, b / real_of_num(2)))) == {}) && !IN(p, closure(c))})))
+      #|  \226\136\131 a : Real, real_of_num(0) < a && a < (b : Real) && (\226\136\128 d : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], IN(d, components(DIFF(cball(((p : Cart[Real, N]), b)), (s : (Cart[Real, N]) -> Bool)))) && IN(x, d) && IN(x, ball((p, a))) \226\134\146 IN(p, closure(d)))
+      #|  (b : Real)
+      #|  (p : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 p : Cart[Real, N], compact(s) && ANR(s) && IN(p, frontier(s)) && open(u) && IN(p, u) \226\134\146 (\226\136\131 v : (Cart[Real, N]) -> Bool, open(v) && IN(p, v) && SUBSET(v, u) && (\226\136\128 y : Cart[Real, N], IN(y, DIFF(v, s)) \226\134\146 path_component(INSERT(p, DIFF(u, s)), p, y)))
+      #|  INSERT((p : Cart[Real, N]), DIFF((u : (Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool)))
+      #|  INSERT((q : Cart[Real, N]), DIFF((v : (Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool)))
+      #|  INSERT((p : Cart[Real, N]), DIFF((u : (Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool)))
+      #|  (r : Cart[Real, N])
+      #|  (r : Cart[Real, N])
+      #|  (w : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (w : (Cart[Real, N]) -> Bool)
+      #|  (q : Cart[Real, N])
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  IN((q : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (q : Cart[Real, N])
+      #|  INTER((t : (Cart[Real, N]) -> Bool), (v : (Cart[Real, N]) -> Bool))
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  (p : Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  (p : Cart[Real, N])
+      #|  DIFF((u : (Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool))
+      #|  DIFF((u : (Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool))
+      #|  IN((p : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (p : Cart[Real, N])
+      #|  (uu : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, compact(s) && ANR(s) && SUBSET(DIFF(UNIV, s), t) && DISJOINT(t, interior(s)) \226\134\146 locally(path_connected, t)
+      #|  path_image((g : (Cart[Real, Unit]) -> Cart[Real, N]))
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, 2 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (simple_path : ((Cart[Real, Unit]) -> Cart[Real, N]) -> Bool)(g) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), (path_image : ((Cart[Real, Unit]) -> Cart[Real, N], Cart[Real, N]) -> Bool)(g)), s) \226\134\146 (locally : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((path_connected : ((Cart[Real, N]) -> Bool) -> Bool), s)
+      #|  SUBSET((i : (_) -> Bool), (p : (_) -> Bool)) && DISJOINT({(a : _), (b : _)}, i) \226\134\146 DISJOINT(DIFF(UNIV, DIFF(p, {a, b})), i)
+      #|  path_image((g : (Cart[Real, Unit]) -> Cart[Real, N]))
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], simple_path(g) \226\134\146 locally(path_connected, DIFF(UNIV, DIFF(path_image(g), {pathstart(g), pathfinish(g)})))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, compact(s) && ANR(s) && IN(c, components(DIFF(UNIV, s))) && SUBSET(c, t) && SUBSET(t, closure(c)) \226\134\146 path_connected(t)
+      #|  DIFF(UNIV, path_image((g : (Cart[Real, Unit]) -> Cart[Real, N])))
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, 2 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (arc : ((Cart[Real, Unit]) -> Cart[Real, N]) -> Bool)(g) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), (path_image : ((Cart[Real, Unit]) -> Cart[Real, N], Cart[Real, N]) -> Bool)(g)), s) \226\134\146 (path_connected : ((Cart[Real, N]) -> Bool) -> Bool)(s)
+      #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], 2 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (arc : ((Cart[Real, Unit]) -> Cart[Real, N]) -> Bool)(g) \226\134\146 (path_connected : ((Cart[Real, N]) -> Bool) -> Bool)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), (DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((path_image : ((Cart[Real, Unit]) -> Cart[Real, N], Cart[Real, N]) -> Bool)(g), {(pathstart : ((Cart[Real, Unit]) -> Cart[Real, N]) -> Cart[Real, N])(g), (pathfinish : ((Cart[Real, Unit]) -> Cart[Real, N]) -> Cart[Real, N])(g)})))
       #|brouwer_degree1 =  |- (#forall:fun(fun(fun(cart(real,'N),cart(real,'N)),bool),bool) (\f:fun(cart(real,'N),cart(real,'N)). (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(int,fun(int,bool)) ((#brouwer_degree1:fun(num,fun(fun(cart(real,'N),cart(real,'N)),int)) n:num) f:fun(cart(real,'N),cart(real,'N)))) (((#COND:fun(bool,fun(int,fun(int,int))) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#brouwer_degree2:fun(num,fun(fun(fun(num,real),fun(num,real)),int)) ((#-:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#o:fun(fun(cart(real,'N),fun(num,real)),fun(fun(fun(num,real),cart(real,'N)),fun(fun(num,real),fun(num,real)))) (\x:cart(real,'N). (\i:num. (((#COND:fun(bool,fun(real,fun(real,real))) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) n:num))) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) i:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))) ((#o:fun(fun(cart(real,'N),cart(real,'N)),fun(fun(fun(num,real),cart(real,'N)),fun(fun(num,real),cart(real,'N)))) f:fun(cart(real,'N),cart(real,'N))) (\x:fun(num,real). (#lambda:fun(fun(num,real),cart(real,'N)) (\i:num. (((#COND:fun(bool,fun(real,fun(real,real))) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) n:num))) (x:fun(num,real) i:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
       #|brouwer_degree =  |- (#forall:fun(fun(fun(cart(real,'N),cart(real,'N)),bool),bool) (\f:fun(cart(real,'N),cart(real,'N)). ((#=:fun(int,fun(int,bool)) (#brouwer_degree:fun(fun(cart(real,'N),cart(real,'N)),int) f:fun(cart(real,'N),cart(real,'N)))) ((#brouwer_degree1:fun(num,fun(fun(cart(real,'N),cart(real,'N)),int)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) f:fun(cart(real,'N),cart(real,'N))))))
       #|BROUWER_DEGREE1_EQ =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(fun(cart(real,'N),cart(real,'N)),bool),bool) (\f:fun(cart(real,'N),cart(real,'N)). (#forall:fun(fun(fun(cart(real,'N),cart(real,'N)),bool),bool) (\g:fun(cart(real,'N),cart(real,'N)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) ((#INTER:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) (#sphere:fun(prod(cart(real,'N),real),fun(cart(real,'N),bool)) ((#,:fun(cart(real,'N),fun(real,prod(cart(real,'N),real))) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#span:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) ((#IMAGE:fun(fun(num,cart(real,'N)),fun(fun(num,bool),fun(cart(real,'N),bool))) #basis:fun(num,cart(real,'N))) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)))))) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) (f:fun(cart(real,'N),cart(real,'N)) x:cart(real,'N))) (g:fun(cart(real,'N),cart(real,'N)) x:cart(real,'N))))))) ((#=:fun(int,fun(int,bool)) ((#brouwer_degree1:fun(num,fun(fun(cart(real,'N),cart(real,'N)),int)) n:num) f:fun(cart(real,'N),cart(real,'N)))) ((#brouwer_degree1:fun(num,fun(fun(cart(real,'N),cart(real,'N)),int)) n:num) g:fun(cart(real,'N),cart(real,'N)))))))))))
