@@ -79962,574 +79962,574 @@ Warning: inventing type variables
 0..0..1..solved at 4
 0..0..solved at 3
 Probability/measure quotations (568):
-  sigma_algebra (f:(A->bool)->bool) <=>\n   UNIONS f IN f /\\\n   (forall a. a IN f ==> (UNIONS f DIFF a) IN f) /\\\n   (forall s. s SUBSET f /\\ COUNTABLE s ==> UNIONS s IN f)
-  forall(f:(A->bool)->bool) a. a IN f ==> a SUBSET UNIONS f
-  forall(f:(A->bool)->bool). sigma_algebra f ==> UNIONS f IN f
-  {}:A->bool = UNIONS f DIFF UNIONS f
-  forall(f:(A->bool)->bool). sigma_algebra f ==> {} IN f
-  forall(f:(A->bool)->bool) a.\n      sigma_algebra f /\\ a IN f ==> (UNIONS f DIFF a) IN f
-  forall(f:(A->bool)->bool) s.\n      sigma_algebra f /\\ s SUBSET f /\\ COUNTABLE s ==> UNIONS s IN f
-  (a:A->bool) UNION b = UNIONS {a, b}
-  forall(f:(A->bool)->bool) a b.\n      sigma_algebra f /\\ a IN f /\\ b IN f ==> (a UNION b) IN f
-  b:A->bool
-  f:(A->bool)->bool
-  a:A->bool
-  f:(A->bool)->bool
-  (a:A->bool) INTER b =\n     UNIONS f DIFF ((UNIONS f DIFF a) UNION (UNIONS f DIFF b))
-  forall(f:(A->bool)->bool) a b.\n      sigma_algebra f /\\ a IN f /\\ b IN f ==> (a INTER b) IN f
-  a:A->bool
-  f:(A->bool)->bool
-  (a:A->bool) DIFF b = a INTER (UNIONS f DIFF b)
-  forall(f:(A->bool)->bool) a b.\n      sigma_algebra f /\\ a IN f /\\ b IN f ==> (a DIFF b) IN f
-  forall(f:(A->bool)->bool) s.\n      sigma_algebra f /\\ s SUBSET f /\\ FINITE s ==> UNIONS s IN f
-  x:A
-  forall(u:A->bool) s.\n      ~(s = {}) /\\ (forall a. a IN s ==> a SUBSET u)\n      ==> INTERS s = u DIFF UNIONS (IMAGE (\\a. u DIFF a) s)
-  INTERS s :A->bool = UNIONS f DIFF UNIONS (IMAGE (\\a. UNIONS f DIFF a) s)
-  forall(f:(A->bool)->bool) s.\n      sigma_algebra f /\\ s SUBSET f /\\ FINITE s /\\ ~(s = {})\n      ==> INTERS s IN f
-  INTERS s :A->bool = UNIONS f DIFF UNIONS (IMAGE (\\a. UNIONS f DIFF a) s)
-  forall(f:(A->bool)->bool) s.\n      sigma_algebra f /\\ s SUBSET f /\\ COUNTABLE s /\\ ~(s = {})\n      ==> INTERS s IN f
-  forall(f:(A->bool)->bool) a b.\n      sigma_algebra f /\\ a IN f /\\ b IN f\n      ==> ((a DIFF b) UNION (b DIFF a)) IN f
-  (x:A->bool) IN s ==> x SUBSET UNIONS s
-  UNIONS {s:A->bool | borel_in top s} = topspace top
-  forall top:A topology. sigma_algebra {s | borel_in top s}
-  ~({}:A->bool = {ARB:A})
-  UNIONS {(A:num->A->bool) n | n IN (:num)} = {}
-  forall n:num. (A:num->A->bool) n = {}
-  ~({}:A->bool = {ARB:A})
-  x:num
-  x:num
-  {k:num}
-  k:num
-  n:num = k
-  n:num
-  UNIONS {(A:num->A->bool) n | n IN (:num)} = {ARB:A}
-  k:num
-  n:num
-  n:num
-  n:num
-  forall n:num. ~(n = k) ==> (A:num->A->bool) n = {}
-  k:num
-  ?k:num. (A:num->A->bool) k = {ARB:A}
-  forall n:num. (A:num->A->bool) n = {} \\/ A n = {ARB:A}
-  forall n:num. (A:num->A->bool) n = {} \\/ A n = {ARB:A}
-  ~({}:A->bool = {ARB:A})
-  (UNIONS s:A->bool) = {} \\/ UNIONS s = {ARB:A}
-  UNIONS {({ARB:A}):A->bool, ({}:A->bool)}
-  (UNIONS s:A->bool) SUBSET {ARB:A}
-  {ARB:A} DIFF {ARB:A} = {}
-  (\\a:A->bool. if a = {ARB:A} then &1 else &0)
-  {({ARB:A}):A->bool, ({}:A->bool)}
-  ?ev:((A->bool)->bool) p:((A->bool)->real).\n          sigma_algebra ev /\\\n          (forall a. a IN ev ==> &0 <= p a) /\\\n          p (UNIONS ev) = &1 /\\\n          p {} = &0 /\\\n          (forall A:num->A->bool.\n             (forall n. A n IN ev) /\\\n             (forall i j. ~(i = j) ==> DISJOINT (A i) (A j))\n             ==> ((\\n. p(A n)) real_sums\n                  p(UNIONS {A n | n IN (:num)})) (from 0))
-  ~(n:num = k)
-  ~(n:num = k)
-  prob_events (p:(A)prob_space) = FST(prob_space_operations p)
-  prob (p:(A)prob_space) = SND(prob_space_operations p)
-  prob_carrier (p:(A)prob_space) = UNIONS(prob_events p)
-  (forall a. mk(dest a) = a) /\\ (forall r. P r <=> dest(mk r) = r)\n   ==> forall a. P(dest a)
-  p:A prob_space
-  forall p:A prob_space. sigma_algebra (prob_events p)
-  p:A prob_space
-  forall p:A prob_space a. a IN prob_events p ==> &0 <= prob p a
-  p:A prob_space
-  forall p:A prob_space. prob p (prob_carrier p) = &1
-  p:A prob_space
-  forall p:A prob_space. prob p {} = &0
-  p:A prob_space
-  forall p:A prob_space A.\n      (forall n. A n IN prob_events p) /\\\n      (forall i j. ~(i = j) ==> DISJOINT (A i) (A j))\n      ==> ((\\n. prob p (A n)) real_sums\n           prob p (UNIONS {A n | n IN (:num)})) (from 0)
-  p:A prob_space
-  forall p:A prob_space. prob_carrier p IN prob_events p
-  forall p:A prob_space. {} IN prob_events p
-  forall p:A prob_space a. a IN prob_events p\n      ==> (prob_carrier p DIFF a) IN prob_events p
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> (a UNION b) IN prob_events p
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> (a INTER b) IN prob_events p
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> (a DIFF b) IN prob_events p
-  forall p:A prob_space a. a IN prob_events p ==> a SUBSET prob_carrier p
-  ~(i = 0) /\\ ~(i = 1)
-  i:num
-  sum (2..N) (\\n. prob (p:A prob_space)\n     (if n = 0 then a else if n = 1 then b else ({}:A->bool))) = &0
-  N:num
+  (sigma_algebra : (((A) -> Bool) -> Bool) -> Bool)((f : ((A) -> Bool) -> Bool)) == (IN(UNIONS(f), f) && (\226\136\128 a : (A) -> Bool, IN(a, f) \226\134\146 IN(DIFF(UNIONS(f), a), f)) && (\226\136\128 s : ((A) -> Bool) -> Bool, SUBSET(s, f) && COUNTABLE(s) \226\134\146 IN(UNIONS(s), f)))
+  \226\136\128 f : ((A) -> Bool) -> Bool, \226\136\128 a : (A) -> Bool, IN(a, f) \226\134\146 SUBSET(a, UNIONS(f))
+  \226\136\128 f : ((A) -> Bool) -> Bool, sigma_algebra(f) \226\134\146 IN(UNIONS(f), f)
+  {} == DIFF(UNIONS((f : ((A) -> Bool) -> Bool)), UNIONS(f))
+  \226\136\128 f : ((A) -> Bool) -> Bool, sigma_algebra(f) \226\134\146 IN({}, f)
+  \226\136\128 f : ((A) -> Bool) -> Bool, \226\136\128 a : (A) -> Bool, sigma_algebra(f) && IN(a, f) \226\134\146 IN(DIFF(UNIONS(f), a), f)
+  \226\136\128 f : ((A) -> Bool) -> Bool, \226\136\128 s : ((A) -> Bool) -> Bool, sigma_algebra(f) && SUBSET(s, f) && COUNTABLE(s) \226\134\146 IN(UNIONS(s), f)
+  UNION((a : (A) -> Bool), (b : (A) -> Bool)) == UNIONS({a, b})
+  \226\136\128 f : ((A) -> Bool) -> Bool, \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, sigma_algebra(f) && IN(a, f) && IN(b, f) \226\134\146 IN(UNION(a, b), f)
+  (b : (A) -> Bool)
+  (f : ((A) -> Bool) -> Bool)
+  (a : (A) -> Bool)
+  (f : ((A) -> Bool) -> Bool)
+  INTER((a : (A) -> Bool), (b : (A) -> Bool)) == DIFF(UNIONS((f : ((A) -> Bool) -> Bool)), UNION(DIFF(UNIONS(f), a), DIFF(UNIONS(f), b)))
+  \226\136\128 f : ((A) -> Bool) -> Bool, \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, sigma_algebra(f) && IN(a, f) && IN(b, f) \226\134\146 IN(INTER(a, b), f)
+  (a : (A) -> Bool)
+  (f : ((A) -> Bool) -> Bool)
+  DIFF((a : (A) -> Bool), (b : (A) -> Bool)) == INTER(a, DIFF(UNIONS((f : ((A) -> Bool) -> Bool)), b))
+  \226\136\128 f : ((A) -> Bool) -> Bool, \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, sigma_algebra(f) && IN(a, f) && IN(b, f) \226\134\146 IN(DIFF(a, b), f)
+  \226\136\128 f : ((A) -> Bool) -> Bool, \226\136\128 s : ((A) -> Bool) -> Bool, sigma_algebra(f) && SUBSET(s, f) && FINITE(s) \226\134\146 IN(UNIONS(s), f)
+  (x : A)
+  \226\136\128 u : (A) -> Bool, \226\136\128 s : ((A) -> Bool) -> Bool, !(s == {}) && (\226\136\128 a : (A) -> Bool, IN(a, s) \226\134\146 SUBSET(a, u)) \226\134\146 INTERS(s) == DIFF(u, UNIONS(IMAGE((a : (A) -> Bool) => DIFF(u, a), s)))
+  INTERS((s : ((A) -> Bool) -> Bool)) == DIFF(UNIONS((f : ((A) -> Bool) -> Bool)), UNIONS(IMAGE((a : (A) -> Bool) => DIFF(UNIONS(f), a), s)))
+  \226\136\128 f : ((A) -> Bool) -> Bool, \226\136\128 s : ((A) -> Bool) -> Bool, sigma_algebra(f) && SUBSET(s, f) && FINITE(s) && !(s == {}) \226\134\146 IN(INTERS(s), f)
+  INTERS((s : ((A) -> Bool) -> Bool)) == DIFF(UNIONS((f : ((A) -> Bool) -> Bool)), UNIONS(IMAGE((a : (A) -> Bool) => DIFF(UNIONS(f), a), s)))
+  \226\136\128 f : ((A) -> Bool) -> Bool, \226\136\128 s : ((A) -> Bool) -> Bool, sigma_algebra(f) && SUBSET(s, f) && COUNTABLE(s) && !(s == {}) \226\134\146 IN(INTERS(s), f)
+  \226\136\128 f : ((A) -> Bool) -> Bool, \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, sigma_algebra(f) && IN(a, f) && IN(b, f) \226\134\146 IN(UNION(DIFF(a, b), DIFF(b, a)), f)
+  IN((x : (A) -> Bool), (s : ((A) -> Bool) -> Bool)) \226\134\146 SUBSET(x, UNIONS(s))
+  UNIONS({(s : (A) -> Bool) | borel_in((top : Topology[A]), s)}) == topspace(top)
+  \226\136\128 top : Topology[A], sigma_algebra({(s : (A) -> Bool) | borel_in(top, s)})
+  !(({} : (A) -> Bool) == {(ARB : A)})
+  UNIONS({(A : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}) == {}
+  \226\136\128 n : Num, (A : (Num, A) -> Bool)(n) == {}
+  !(({} : (A) -> Bool) == {(ARB : A)})
+  (x : Num)
+  (x : Num)
+  {(k : Num)}
+  (k : Num)
+  (n : Num) == (k : Num)
+  (n : Num)
+  UNIONS({(A : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}) == {ARB}
+  (k : Num)
+  (n : Num)
+  (n : Num)
+  (n : Num)
+  \226\136\128 n : Num, !(n == (k : Num)) \226\134\146 (A : (Num, A) -> Bool)(n) == {}
+  (k : Num)
+  \226\136\131 k : Num, (A : (Num, A) -> Bool)(k) == {ARB}
+  \226\136\128 n : Num, (A : (Num, A) -> Bool)(n) == {} || A(n) == {ARB}
+  \226\136\128 n : Num, (A : (Num, A) -> Bool)(n) == {} || A(n) == {ARB}
+  !(({} : (A) -> Bool) == {(ARB : A)})
+  UNIONS((s : ((A) -> Bool) -> Bool)) == {} || UNIONS(s) == {ARB}
+  (UNIONS : (((A) -> Bool) -> Bool, A) -> Bool)({{(ARB : A)}, ({} : (A) -> Bool)})
+  SUBSET(UNIONS((s : ((A) -> Bool) -> Bool)), {ARB})
+  (DIFF : ((A) -> Bool, (A) -> Bool, A) -> Bool)({(ARB : A)}, {(ARB : A)}) == ({} : (A) -> Bool)
+  (a : (A) -> Bool) => if a == {ARB} { real_of_num(1) } else { real_of_num(0) }
+  {{(ARB : A)}, ({} : (A) -> Bool)}
+  \226\136\131 ev : ((A) -> Bool) -> Bool, \226\136\131 p : ((A) -> Bool) -> Real, sigma_algebra(ev) && (\226\136\128 a : (A) -> Bool, IN(a, ev) \226\134\146 real_of_num(0) <= p(a)) && p(UNIONS(ev)) == real_of_num(1) && p({}) == real_of_num(0) && (\226\136\128 A : (Num, A) -> Bool, (\226\136\128 n : Num, IN(A(n), ev)) && (\226\136\128 i : Num, \226\136\128 j : Num, !(i == j) \226\134\146 DISJOINT(A(i), A(j))) \226\134\146 real_sums((n : Num) => p(A(n)), p(UNIONS({A((n : Num)) | IN(n, UNIV)})), from(0)))
+  !((n : Num) == (k : Num))
+  !((n : Num) == (k : Num))
+  (prob_events : (Prob_space[A], (A) -> Bool) -> Bool)((p : Prob_space[A])) == FST(prob_space_operations(p))
+  (prob : (Prob_space[A], (A) -> Bool) -> Real)((p : Prob_space[A])) == SND(prob_space_operations(p))
+  (prob_carrier : (Prob_space[A], A) -> Bool)((p : Prob_space[A])) == UNIONS(prob_events(p))
+  (\226\136\128 a : _, (mk : (_) -> _)((dest : (_) -> _)(a)) == a) && (\226\136\128 r : _, (P : (_) -> Bool)(r) == (dest(mk(r)) == r)) \226\134\146 (\226\136\128 a : _, P(dest(a)))
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], sigma_algebra(prob_events(p))
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, IN(a, prob_events(p)) \226\134\146 real_of_num(0) <= prob(p, a)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], prob(p, prob_carrier(p)) == real_of_num(1)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], prob(p, {}) == real_of_num(0)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 A : (Num, A) -> Bool, (\226\136\128 n : Num, IN(A(n), prob_events(p))) && (\226\136\128 i : Num, \226\136\128 j : Num, !(i == j) \226\134\146 DISJOINT(A(i), A(j))) \226\134\146 real_sums((n : Num) => prob(p, A(n)), prob(p, UNIONS({A((n : Num)) | IN(n, UNIV)})), from(0))
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], IN(prob_carrier(p), prob_events(p))
+  \226\136\128 p : Prob_space[A], IN({}, prob_events(p))
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, IN(a, prob_events(p)) \226\134\146 IN(DIFF(prob_carrier(p), a), prob_events(p))
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) \226\134\146 IN(UNION(a, b), prob_events(p))
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) \226\134\146 IN(INTER(a, b), prob_events(p))
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) \226\134\146 IN(DIFF(a, b), prob_events(p))
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, IN(a, prob_events(p)) \226\134\146 SUBSET(a, prob_carrier(p))
+  !((i : Num) == 0) && !(i == 1)
+  (i : Num)
+  sum(op_dot_dot(2, (N : Num)), (n : Num) => prob((p : Prob_space[A]), if n == 0 { (a : (A) -> Bool) } else { if n == 1 { (b : (A) -> Bool) } else { {} } })) == real_of_num(0)
+  (N : Num)
   1
-  \\n. prob (p:A prob_space) (if n = 0 then a\n                   else if n = 1 then b else ({}:A->bool))
-  N:num
+  (n : Num) => prob((p : Prob_space[A]), if n == 0 { (a : (A) -> Bool) } else { if n == 1 { (b : (A) -> Bool) } else { {} } })
+  (N : Num)
   0
-  \\n. prob (p:A prob_space) (if n = 0 then a\n                   else if n = 1 then b else ({}:A->bool))
-  N:num
+  (n : Num) => prob((p : Prob_space[A]), if n == 0 { (a : (A) -> Bool) } else { if n == 1 { (b : (A) -> Bool) } else { {} } })
+  (N : Num)
   1
-  ((\\n. prob p (if n = 0 then a\n                    else if n = 1 then b\n                    else ({}:A->bool))) real_sums\n      (prob p a + prob p b)) (from 0)
-  1
-  0
-  n:num
-  UNIONS {(if n = 0 then a\n               else if n = 1 then b\n               else ({}:A->bool)) | n IN (:num)} = a UNION b
-  j = 1
-  j = 1
-  i = 1
-  i = 1
-  j = 1
-  j = 0
-  i = 0
-  j:num
-  i:num
-  n:num
-  (\\n. if n = 0 then a\n                       else if n = 1 then b\n                       else ({}:A->bool)):num->A->bool
-  p:A prob_space
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ DISJOINT a b\n      ==> prob p (a UNION b) = prob p a + prob p b
-  prob_carrier p = a UNION (prob_carrier p DIFF a:A->bool)
-  prob p (prob_carrier p:A->bool) =\n      prob p a + prob p (prob_carrier p DIFF a)
-  a:A->bool SUBSET prob_carrier p
-  forall p:A prob_space a.\n      a IN prob_events p ==> prob p (prob_carrier p DIFF a) = &1 - prob p a
-  &0 <= y ==> &1 = x + y ==> x <= &1
-  &1 = prob p a + prob p (prob_carrier p DIFF a:A->bool)
-  forall p:A prob_space a. a IN prob_events p ==> prob p a <= &1
-  &0 <= y ==> x <= x + y
-  prob p (a UNION (b DIFF a):A->bool) = prob p a + prob p (b DIFF a)
-  b = a UNION (b DIFF a:A->bool)
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ a SUBSET b\n      ==> prob p a <= prob p b
-  b = (a INTER b) UNION (b DIFF a):A->bool
-  prob p (b:A->bool) = prob p (a INTER b) + prob p (b DIFF a)
-  prob p (a UNION (b DIFF a):A->bool) = prob p a + prob p (b DIFF a)
-  a UNION b = a UNION (b DIFF a):A->bool
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> prob p (a UNION b) = prob p a + prob p b - prob p (a INTER b)
-  ((a:A->bool) INTER b) INTER (a INTER c) = a INTER (b INTER c)
-  a INTER c:A->bool
-  a INTER b:A->bool
-  p:A prob_space
-  (a:A->bool) INTER (b UNION c) = (a INTER b) UNION (a INTER c)
-  c:A->bool
-  b:A->bool
-  p:A prob_space
-  b UNION c:A->bool
-  a:A->bool
-  p:A prob_space
-  forall p:A prob_space a b c.\n      a IN prob_events p /\\ b IN prob_events p /\\ c IN prob_events p\n      ==> prob p (a UNION b UNION c) =\n          prob p a + prob p b + prob p c -\n          prob p (a INTER b) - prob p (a INTER c) - prob p (b INTER c) +\n          prob p (a INTER b INTER c)
-  &0 <= z ==> x + y - z <= x + y
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> prob p (a UNION b) <= prob p a + prob p b
-  &0 <= ac /\\ &0 <= bc /\\ abc <= ab\n      ==> a + b + c - ab - ac - bc + abc <= a + b + c
-  forall p:A prob_space a b c.\n      a IN prob_events p /\\ b IN prob_events p /\\ c IN prob_events p\n      ==> prob p (a UNION b UNION c) <= prob p a + prob p b + prob p c
-  \\s:A->bool. s IN prob_events p
-  forall p:A prob_space A.\n      FINITE A /\\ A SUBSET prob_events p\n      ==> prob p (UNIONS A) =\n          sum {B | B SUBSET A /\\ ~(B = {})}\n              (\\B. (-- &1) pow (CARD B + 1) * prob p (INTERS B))
-  prob p (x:A->bool) + prob p (UNIONS A)
-  forall p:A prob_space A.\n      FINITE A /\\ A SUBSET prob_events p\n      ==> prob p (UNIONS A) <= sum A (prob p)
-  prob p ((a INTER b) UNION (a DIFF b):A->bool) =\n      prob p (a INTER b) + prob p (a DIFF b)
-  a:A->bool = (a INTER b) UNION (a DIFF b)
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> prob p (a DIFF b) = prob p a - prob p (a INTER b)
-  prob (p:A prob_space)
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ a SUBSET b\n      ==> prob p (b DIFF a) = prob p b - prob p a
-  p:A prob_space
-  forall p:A prob_space s.\n      s SUBSET prob_events p /\\ COUNTABLE s\n      ==> UNIONS s IN prob_events p
-  forall p:A prob_space s.\n      s SUBSET prob_events p /\\ FINITE s\n      ==> UNIONS s IN prob_events p
-  INTERS s:A->bool =\n      prob_carrier p DIFF UNIONS (IMAGE (\\a. prob_carrier p DIFF a) s)
-  forall p:A prob_space s.\n      s SUBSET prob_events p /\\ COUNTABLE s /\\ ~(s = {})\n      ==> INTERS s IN prob_events p
-  cond_prob (p:(A)prob_space) a b = prob p (a INTER b) / prob p b
-  prob p ((b:A->bool) INTER a) / prob p a * prob p a =\n      prob p (b INTER a)
-  prob p ((a:A->bool) INTER b) / prob p b * prob p b =\n      prob p (a INTER b)
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\\n      ~(prob p a = &0) /\\ ~(prob p b = &0)\n      ==> cond_prob p a b * prob p b = cond_prob p b a * prob p a
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ &0 < prob p b\n      ==> &0 <= cond_prob p a b /\\ cond_prob p a b <= &1
-  c SUBSET prob_carrier (p:A prob_space)
-  c:A->bool = (c INTER a) UNION (c INTER b)
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\\n      a UNION b = prob_carrier p /\\ DISJOINT a b\n      ==> forall c. c IN prob_events p\n              ==> prob p c = prob p (c INTER a) + prob p (c INTER b)
-  b:A->bool
-  a:A->bool
-  p:A prob_space
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\\n      prob p a = &0 /\\ prob p b = &0\n      ==> prob p (a UNION b) = &0
-  a UNION b:A->bool
-  p:A prob_space
-  b:A->bool
-  a:A->bool
-  p:A prob_space
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\\n      prob p a = &1 /\\ prob p b = &1\n      ==> prob p (a INTER b) = &1
-  a:A->bool
-  a INTER b:A->bool
-  p:A prob_space
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ prob p a = &0\n      ==> prob p (a INTER b) = &0
-  a UNION b:A->bool
-  a:A->bool
-  p:A prob_space
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ prob p a = &1\n      ==> prob p (a UNION b) = &1
-  a UNION b:A->bool
-  p:A prob_space
-  b:A->bool
-  a:A->bool
-  p:A prob_space
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> prob p a + prob p b - &1 <= prob p (a INTER b)
-  b INTER a = a INTER b:A->bool
-  a:A->bool
-  b:A->bool
-  p:A prob_space
-  b:A->bool
-  a:A->bool
-  p:A prob_space
-  b DIFF a:A->bool
-  a DIFF b:A->bool
-  p:A prob_space
-  DISJOINT (a DIFF b) (b DIFF a:A->bool)
-  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> prob p ((a DIFF b) UNION (b DIFF a)) =\n          prob p a + prob p b - &2 * prob p (a INTER b)
-  signed_measure (p:A prob_space) (mu:(A->bool)->real) <=>\n   mu {} = &0 /\\\n   (forall A. (forall n. A n IN prob_events p) /\\\n        (forall i j. ~(i = j) ==> DISJOINT (A i) (A j))\n        ==> ((\\n. mu(A n)) real_sums mu(UNIONS {A n | n IN (:num)})) (from 0))
-  positive_set (p:A prob_space) (mu:(A->bool)->real) (A:A->bool) <=>\n   A IN prob_events p /\\\n   (forall B. B IN prob_events p /\\ B SUBSET A ==> &0 <= mu B)
-  negative_set (p:A prob_space) (mu:(A->bool)->real) (A:A->bool) <=>\n   A IN prob_events p /\\\n   (forall B. B IN prob_events p /\\ B SUBSET A ==> mu B <= &0)
-  forall p:A prob_space mu. signed_measure p mu ==> mu {} = &0
-  ~(i = 0) /\\ ~(i = 1)
-  i:num
-  sum (2..N) (\\n. (mu:(A->bool)->real)\n    (if n = 0 then a else if n = 1 then b else ({}:A->bool))) = &0
-  N:num
-  1
-  \\n. (mu:(A->bool)->real) (if n = 0 then a\n                  else if n = 1 then b else ({}:A->bool))
-  N:num
-  0
-  \\n. (mu:(A->bool)->real) (if n = 0 then a\n                  else if n = 1 then b else ({}:A->bool))
-  N:num
-  1
-  ((\\n. (mu:(A->bool)->real) (if n = 0 then a\n                   else if n = 1 then b\n                   else ({}:A->bool))) real_sums\n     (mu a + mu b)) (from 0)
+  real_sums((n : Num) => prob((p : Prob_space[A]), if n == 0 { (a : (A) -> Bool) } else { if n == 1 { (b : (A) -> Bool) } else { {} } }), prob(p, a) + prob(p, b), from(0))
   1
   0
-  n:num
-  UNIONS {(if n = 0 then a\n              else if n = 1 then b\n              else ({}:A->bool)) | n IN (:num)} = a UNION b
-  j = 1
-  j = 1
-  i = 1
-  i = 1
-  j = 1
-  j = 0
-  i = 0
-  j:num
-  i:num
-  n:num
-  (\\n. if n = 0 then a\n          else if n = 1 then b\n          else ({}:A->bool)):num->A->bool
-  forall p:A prob_space mu a b.\n     signed_measure p mu /\\\n     a IN prob_events p /\\ b IN prob_events p /\\ DISJOINT a b\n     ==> mu(a UNION b) = mu a + mu b
-  b UNION (a DIFF b) = a:A->bool
-  a DIFF b:A->bool
-  b:A->bool
-  mu:(A->bool)->real
-  p:A prob_space
-  forall p:A prob_space mu a b.\n     signed_measure p mu /\\\n     a IN prob_events p /\\ b IN prob_events p /\\ b SUBSET a\n     ==> mu(a DIFF b) = mu a - mu b
-  p:A prob_space
-  forall p:A prob_space. signed_measure p (prob p)
-  B = {}:A->bool
-  forall p:A prob_space mu. signed_measure p mu ==> positive_set p mu {}
-  B = {}:A->bool
-  forall p:A prob_space mu. signed_measure p mu ==> negative_set p mu {}
-  forall p:A prob_space mu A B.\n     positive_set p mu A /\\ B IN prob_events p /\\ B SUBSET A\n     ==> positive_set p mu B
-  forall p:A prob_space mu A B.\n     negative_set p mu A /\\ B IN prob_events p /\\ B SUBSET A\n     ==> negative_set p mu B
-  B' INTER (B DIFF A) SUBSET B:A->bool
-  B' INTER A SUBSET A:A->bool
-  B' INTER (B DIFF A):A->bool
-  B' INTER A:A->bool
-  mu:(A->bool)->real
-  p:A prob_space
-  B' INTER (B DIFF A) IN prob_events (p:A prob_space)
-  B' INTER A IN prob_events (p:A prob_space)
-  B' = (B' INTER A) UNION (B' INTER (B DIFF A)):A->bool
-  forall p:A prob_space mu A B.\n     signed_measure p mu /\\ positive_set p mu A /\\ positive_set p mu B\n     ==> positive_set p mu (A UNION B)
-  B' INTER (B DIFF A) SUBSET B:A->bool
-  B' INTER A SUBSET A:A->bool
-  a <= &0 /\\ b <= &0 ==> a + b <= &0
-  B' INTER (B DIFF A):A->bool
-  B' INTER A:A->bool
-  mu:(A->bool)->real
-  p:A prob_space
-  B' INTER (B DIFF A) IN prob_events (p:A prob_space)
-  B' INTER A IN prob_events (p:A prob_space)
-  B' = (B' INTER A) UNION (B' INTER (B DIFF A)):A->bool
-  forall p:A prob_space mu A B.\n     signed_measure p mu /\\ negative_set p mu A /\\ negative_set p mu B\n     ==> negative_set p mu (A UNION B)
-  forall p:A prob_space A n.\n     (forall m. A m IN prob_events p)\n     ==> UNIONS(IMAGE A (0..n)) IN prob_events p
-  mu(B:A->bool):real
-  &0:real
-  from 0
-  \\n:num. mu((D:num->A->bool) n):real
-  \\n:num. &0:real
-  D:num->A->bool
-  n:num
-  forall n:num. &0 <= mu((D:num->A->bool) n)
-  forall n. (D:num->A->bool) n SUBSET A n
-  r:num
-  r:num
-  \\n:num. (x:A) IN A n
-  (x:A) IN B
-  B SUBSET UNIONS {(A:num->A->bool) n | n IN (:num)}
-  ?m:num. (x:A) IN A m
-  x:A
-  UNIONS {(D:num->A->bool) n | n IN (:num)} = B
-  j:num
-  i:num
-  j:num
-  i:num
-  ~((a /\\ b /\\ ~c) /\\ d /\\ e /\\ ~f) <=>\n     a /\\ b /\\ d /\\ e ==> c \\/ f
-  x:A
-  j:num
-  i:num
-  forall i j. ~(i = j) ==> DISJOINT ((D:num->A->bool) i) (D j)
-  IMAGE (A:num->A->bool) {j:num | j < n}
-  n:num
-  forall n:num. (D:num->A->bool) n IN prob_events p
-  D = \\n:num. B INTER ((A:num->A->bool) n DIFF\n                  UNIONS {A j | j:num < n}):A->bool
-  forall n:num. (A:num->A->bool) n IN prob_events p
-  forall p:A prob_space mu A.\n     signed_measure p mu /\\ (forall n. positive_set p mu (A n))\n     ==> positive_set p mu (UNIONS {A n | n IN (:num)})
-  (minimal) (\\n:num. (x:A) IN A n)
-  &0 <= mu(A DIFF B:A->bool)
-  B:A->bool
-  A:A->bool
-  mu:(A->bool)->real
-  p:A prob_space
-  forall p:A prob_space mu A B.\n     signed_measure p mu /\\ positive_set p mu A /\\\n     B IN prob_events p /\\ B SUBSET A\n     ==> &0 <= mu B /\\ mu B <= mu A
-  ~(n = 0) ==> 1 <= n
-  &(n - 1 + 1) = &n
-  B:A->bool
-  n - 1
-  n:num
-  &0 < --((mu:(A->bool)->real) B)
-  forall p:A prob_space mu S.\n     S IN prob_events p /\\ ~(positive_set p mu S)\n     ==> ?k D:A->bool. D IN prob_events p /\\ D SUBSET S /\\\n         (mu:(A->bool)->real) D <= --inv(&(k + 1))
-  N:num
-  N:num
-  N:num
-  inv(&m)
-  ((\\n:num. (mu:(A->bool)->real)((C:num->A->bool) n)) ---> &0)\n                sequentially
-  ~(m = 0)
-  n:num
-  n:num
-  --inv(&((minimal)\n     (\\k. ?E:A->bool. E IN prob_events (p:A prob_space) /\\ E SUBSET\n       (R:num->A->bool) n /\\\n       (mu:(A->bool)->real) E <= --inv(&(k + 1))) + 1))
-  (R:num->A->bool) n DIFF (R n DIFF (@D:A->bool. D IN prob_events p /\\ D SUBSET R n /\\\n       (mu:(A->bool)->real) D <= --inv(&((minimal)\n         (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n               mu E <= --inv(&(k + 1))) + 1)))) =\n      (@D:A->bool. D IN prob_events p /\\ D SUBSET R n /\\\n       mu D <= --inv(&((minimal)\n         (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n               mu E <= --inv(&(k + 1))) + 1)))
-  n:num
-  n:num
-  ?k:num. ?C:A->bool. C IN prob_events (p:A prob_space) /\\\n      C SUBSET (R:num->A->bool) n /\\\n      (mu:(A->bool)->real) C <= --inv(&(k + 1))
-  n:num
-  (C:num->A->bool) n = R n DIFF R(SUC n)
-  forall n:num. (mu:(A->bool)->real)((C:num->A->bool) n) <= --inv(&m)
-  ~(m = 0) ==> 1 <= m
-  &(m - 1 + 1) = &m
-  E:A->bool
-  m - 1
-  ~(m = 0) ==> 1 <= m
-  &(m - 1 + 1) = &m
-  E:A->bool
-  m - 1
-  \\k:num. ?D:A->bool. D IN prob_events (p:A prob_space) /\\\n       D SUBSET (R:num->A->bool) n /\\\n       (mu:(A->bool)->real) D <= --inv(&(k + 1))
-  forall n:num. (minimal)(\\k. ?D:A->bool. D IN prob_events (p:A prob_space) /\\\n       D SUBSET (R:num->A->bool) n /\\\n       (mu:(A->bool)->real) D <= --inv(&(k + 1))) <= m - 1
-  ~(m = 0) ==> 1 <= m
-  &(m - 1 + 1) = &m
-  E:A->bool
-  m - 1
-  forall n:num. hasneg((R:num->A->bool) n):bool
-  (mu:(A->bool)->real) E <= --inv(&m)
-  m:num
-  &0 < --((mu:(A->bool)->real) E)
-  A DIFF UC:A->bool
-  forall n:num. (E:A->bool) SUBSET (R:num->A->bool) n
-  E:A->bool
-  A DIFF UC:A->bool
-  UC:A->bool
-  A:A->bool
-  mu:(A->bool)->real
-  p:A prob_space
-  (mu:(A->bool)->real)(A DIFF UC:A->bool) = mu(A:A->bool) - mu(UC:A->bool)
-  &0:real
-  (mu:(A->bool)->real)(UC:A->bool)
-  from 0
-  \\n:num. &0:real
-  \\n:num. (mu:(A->bool)->real)((C:num->A->bool) n)
-  (mu:(A->bool)->real) UC <= &0
-  (R:num->A->bool) n DIFF R n = {}:A->bool
-  &0 < y ==> x <= --y ==> x <= &0
-  (R:num->A->bool) n INTER (@D:A->bool. D IN prob_events p /\\ D SUBSET R n /\\\n        (mu:(A->bool)->real) D <= --inv(&((minimal)\n          (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                mu E <= --inv(&(k + 1))) + 1))) =\n       (@D:A->bool. D IN prob_events p /\\ D SUBSET R n /\\\n        mu D <= --inv(&((minimal)\n          (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                mu E <= --inv(&(k + 1))) + 1)))
-  n:num
-  (R:num->A->bool) n DIFF (R n DIFF (@D:A->bool. D IN prob_events p /\\ D SUBSET R n /\\\n        (mu:(A->bool)->real) D <= --inv(&((minimal)\n          (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                mu E <= --inv(&(k + 1))) + 1)))) =\n       R n INTER (@D:A->bool. D IN prob_events p /\\ D SUBSET R n /\\\n        mu D <= --inv(&((minimal)\n          (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                mu E <= --inv(&(k + 1))) + 1)))
-  hasneg((R:num->A->bool) n):bool
-  n:num
-  (C:num->A->bool) n = R n DIFF R(SUC n)
-  forall n:num. (mu:(A->bool)->real)((C:num->A->bool) n) <= &0
-  (C:num->A->bool) n = R n DIFF R(SUC n)
-  n:num
-  ~((x:A) IN UC:A->bool)
-  (x:A) IN R(SUC n):A->bool
-  (x:A) IN R(n:num)
-  x:A
-  forall n:num. A DIFF UC SUBSET (R:num->A->bool) n
-  A DIFF UC IN prob_events (p:A prob_space)
-  UC SUBSET A:A->bool
-  (UC:A->bool) IN prob_events p
-  UC = UNIONS {(C:num->A->bool) n | n IN (:num)}
-  C:num->A->bool
-  ((\\n. (mu:(A->bool)->real)((C:num->A->bool) n))\n      real_sums mu(UNIONS {C n | n IN (:num)})) (from 0)
-  (R:num->A->bool) n
-  forall n:num. (C:num->A->bool) n SUBSET A
-  i:num
-  SUC j
-  j:num
-  SUC i
-  j:num
-  i:num
-  ~((a /\\ ~b) /\\ c /\\ ~d) <=> a /\\ c ==> b \\/ d
-  x:A
-  forall i j:num. ~(i = j) ==> DISJOINT ((C:num->A->bool) i) (C j)
-  forall n:num. (C:num->A->bool) n IN prob_events p
-  C = \\n:num. (R:num->A->bool) n DIFF R(SUC n)
-  (R:num->A->bool) n
-  forall m n:num. m <= n ==> (R:num->A->bool) n SUBSET R m
-  forall n:num. (R:num->A->bool)(SUC n) SUBSET R n
-  (R:num->A->bool) n
-  hasneg((R:num->A->bool) n):bool
-  forall n:num. (R:num->A->bool) n IN prob_events p /\\ R n SUBSET A
-  E:A->bool
-  \\D:A->bool. D IN prob_events (p:A prob_space) /\\\n       D SUBSET (R:num->A->bool) n /\\\n       (mu:(A->bool)->real) D <= --inv(&((minimal)\n         (\\k:num. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n               mu E <= --inv(&(k + 1))) + 1))
-  \\k:num. ?E:A->bool. E IN prob_events (p:A prob_space) /\\\n       E SUBSET (R:num->A->bool) n /\\\n       (mu:(A->bool)->real) E <= --inv(&(k + 1))
-  forall n:num. (hasneg:(A->bool)->bool)((R:num->A->bool) n)\n     ==> (@D:A->bool. D IN prob_events p /\\ D SUBSET R n /\\\n           (mu:(A->bool)->real) D <= --inv(&((minimal)\n             (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                   mu E <= --inv(&(k + 1))) + 1)))\n         IN prob_events p /\\\n         (@D:A->bool. D IN prob_events p /\\ D SUBSET R n /\\\n           mu D <= --inv(&((minimal)\n             (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                   mu E <= --inv(&(k + 1))) + 1)))\n         SUBSET R n /\\\n         mu(@D:A->bool. D IN prob_events p /\\ D SUBSET R n /\\\n              mu D <= --inv(&((minimal)\n                (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                      mu E <= --inv(&(k + 1))) + 1)))\n         <= --inv(&((minimal)\n              (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                    mu E <= --inv(&(k + 1))) + 1))
-  hasneg = \\S:A->bool.\n       ?k:num. ?C:A->bool. C IN prob_events (p:A prob_space) /\\\n       C SUBSET S /\\ (mu:(A->bool)->real) C <= --inv(&(k + 1))
-  R:num->A->bool
-  \\(S:A->bool) (n:num).\n       if (?k:num. ?C:A->bool. C IN prob_events (p:A prob_space) /\\\n           C SUBSET S /\\ (mu:(A->bool)->real) C <= --inv(&(k + 1)))\n       then S DIFF (@D:A->bool. D IN prob_events p /\\ D SUBSET S /\\\n                    mu D <= --inv(&((minimal)\n                      (\\k:num. ?E:A->bool. E IN prob_events p /\\\n                               E SUBSET S /\\ mu E <= --inv(&(k + 1))) + 1)))\n       else S
-  A:A->bool
-  A:A->bool
-  positive_set (p:A prob_space) mu (A:A->bool)
-  forall p:A prob_space mu A.\n     signed_measure p mu /\\ A IN prob_events p /\\ &0 < mu A\n     ==> ?B. B IN prob_events p /\\ B SUBSET A /\\\n             positive_set p mu B /\\ &0 < mu B
-  (mu:(A->bool)->real)(P:A->bool) <= &N
-  N:num
-  N:num
-  (mu:(A->bool)->real)(P:A->bool)
-  (mu:(A->bool)->real)((E:num->A->bool) n)
-  forall n:num. &n < (mu:(A->bool)->real)(P:A->bool)
-  (E:num->A->bool) n
-  P:A->bool
-  mu:(A->bool)->real
-  p:A prob_space
-  forall n:num. (mu:(A->bool)->real)((E:num->A->bool) n) <=\n    mu(P:A->bool)
-  positive_set (p:A prob_space) mu P
-  P = UNIONS {(E:num->A->bool) n | n IN (:num)}
-  E:num->A->bool
-  forall n:num. ?E:A->bool. positive_set (p:A prob_space) mu E /\\\n    &n < mu E
-  (~p ==> F) ==> p
-  forall p:A prob_space mu. signed_measure p mu\n     ==> ?B. forall E:A->bool. positive_set p mu E ==> mu E <= B
-  (P:A->bool) SUBSET prob_carrier p
-  &0 < (mu:(A->bool)->real)(Q:A->bool)
-  (mu:(A->bool)->real)(P:A->bool) = s
-  (mu:(A->bool)->real)(P UNION Q:A->bool) = mu P + mu Q
-  (mu:(A->bool)->real)(P UNION Q) <= s
-  (mu:(A->bool)->real)(P UNION Q) = mu P + mu Q
-  DISJOINT P (Q:A->bool)
-  positive_set (p:A prob_space) mu (P UNION Q)
-  Q:A->bool
-  B:A->bool
-  mu:(A->bool)->real
-  p:A prob_space
-  x <= &0 <=> ~(&0 < x)
-  B:A->bool
-  P:A->bool IN prob_events p
-  prob_carrier (p:A prob_space) DIFF P
-  P:A->bool
-  inv(&N) < s - (mu:(A->bool)->real)(P:A->bool)
-  inv(&(N + 1)) <= inv(&N)
-  s - inv(&(N + 1)) < (mu:(A->bool)->real)((E:num->A->bool) N)
-  N:num
-  s - inv(&(N + 1)) < (mu:(A->bool)->real)((E:num->A->bool) N)
-  ~(N = 0)
-  inv(&(N + 1)) <= inv(&N)
-  N:num
-  (mu:(A->bool)->real)(P:A->bool) < s
-  s - (mu:(A->bool)->real)(P:A->bool)
-  (E:num->A->bool) n
-  P:A->bool
-  mu:(A->bool)->real
-  p:A prob_space
-  forall n:num. (mu:(A->bool)->real)((E:num->A->bool) n) <= mu(P:A->bool)
-  a <= b /\\ b <= a ==> a = b
-  (mu:(A->bool)->real) P = s
-  UNIONS {(E:num->A->bool) n | n IN (:num)} =\n     UNIONS {(Pn:num->A->bool) n | n IN (:num)}
-  positive_set (p:A prob_space) mu P
-  P = UNIONS {(E:num->A->bool) n | n IN (:num)}
-  x:A
-  UNIONS {(Pn:num->A->bool) n | n IN (:num)} =\n     UNIONS {(E:num->A->bool) n | n IN (:num)}
-  UNIONS(IMAGE (E:num->A->bool) (0..n)) = (Pn:num->A->bool) n
-  forall n:num. positive_set (p:A prob_space) mu ((Pn:num->A->bool) n)
-  Pn = \\n:num. UNIONS(IMAGE (E:num->A->bool) (0..n))
-  E:num->A->bool
-  s - x < s <=> &0 < x
-  s - inv(&(n + 1)) < s
-  s - inv(&(n + 1))
-  {mu(E:A->bool) | E | positive_set (p:A prob_space) mu E}
-  forall n:num. ?E:A->bool. positive_set (p:A prob_space) mu E /\\\n      s - inv(&(n + 1)) < mu E
-  &0 <= s
-  forall E:A->bool. positive_set (p:A prob_space) mu E ==> mu E <= s
-  B:real
-  B:real
-  mu:(A->bool)->real
-  p:A prob_space
-  ?B. forall x:real. x IN {mu(E:A->bool) | E | positive_set (p:A prob_space) mu E}\n    ==> x <= B
-  {}:A->bool
-  &0
-  ~({mu(E:A->bool) | E | positive_set (p:A prob_space) mu E} = {})
-  s = sup {mu(E:A->bool) | E | positive_set (p:A prob_space) mu E}
-  forall p:A prob_space mu.\n     signed_measure p mu\n     ==> ?P N. positive_set p mu P /\\ negative_set p mu N /\\\n               DISJOINT P N /\\ P UNION N = prob_carrier p
-  hahn_pos_set (p:A prob_space) (mu:(A->bool)->real) =\n   @P. positive_set p mu P /\\\n       negative_set p mu (prob_carrier p DIFF P) /\\\n       P SUBSET prob_carrier p
-  prob_carrier (p:A prob_space) DIFF P = N:A->bool
-  P:A->bool
-  N:A->bool
-  P:A->bool
-  mu:(A->bool)->real
-  p:A prob_space
-  forall p:A prob_space mu. signed_measure p mu\n     ==> positive_set p mu (hahn_pos_set p mu) /\\\n         negative_set p mu (prob_carrier p DIFF hahn_pos_set p mu) /\\\n         hahn_pos_set p mu SUBSET prob_carrier p
-  jordan_pos (p:A prob_space) (mu:(A->bool)->real) (A:A->bool) =\n   mu(A INTER hahn_pos_set p mu)
-  jordan_neg (p:A prob_space) (mu:(A->bool)->real) (A:A->bool) =\n   --(mu(A INTER (prob_carrier p DIFF hahn_pos_set p mu)))
-  mu:(A->bool)->real
-  p:A prob_space
-  forall p:A prob_space mu A.\n     signed_measure p mu /\\ A IN prob_events p\n     ==> &0 <= jordan_pos p mu A
-  mu:(A->bool)->real
-  p:A prob_space
-  &0 <= --x <=> x <= &0
-  forall p:A prob_space mu A.\n     signed_measure p mu /\\ A IN prob_events p\n     ==> &0 <= jordan_neg p mu A
-  p:A prob_space
-  (A:A->bool) SUBSET prob_carrier p
-  (A:A->bool) = (A INTER P) UNION (A INTER (prob_carrier p DIFF P))
-  prob_carrier (p:A prob_space) DIFF P IN prob_events p
-  (P:A->bool) IN prob_events p
-  P = hahn_pos_set (p:A prob_space) mu
-  mu:(A->bool)->real
-  p:A prob_space
-  forall p:A prob_space mu A.\n     signed_measure p mu /\\ A IN prob_events p\n     ==> mu A = jordan_pos p mu A - jordan_neg p mu A
-  absolutely_continuous (p:A prob_space) (mu:(A->bool)->real) <=>\n   signed_measure p mu /\\\n   (forall A. A IN prob_events p /\\ prob p A = &0 ==> mu A = &0)
-  prob (p:A prob_space) A = &0
-  prob (p:A prob_space) B <= prob p A
-  &0 <= prob (p:A prob_space) B
-  forall p:A prob_space mu A.\n     absolutely_continuous p mu /\\ A IN prob_events p /\\ prob p A = &0\n     ==> forall B. B IN prob_events p /\\ B SUBSET A ==> mu B = &0
-  prob (p:A prob_space) A = &0
-  prob (p:A prob_space)\n       (A INTER (prob_carrier p DIFF hahn_pos_set p mu)) <= prob p A
-  &0 <= prob (p:A prob_space)\n       (A INTER (prob_carrier p DIFF hahn_pos_set p mu))
-  (A:A->bool) INTER (prob_carrier p DIFF hahn_pos_set p mu)\n      IN prob_events p
-  mu:(A->bool)->real
-  p:A prob_space
-  --x = &0 <=> x = &0
-  prob (p:A prob_space) A = &0
-  prob (p:A prob_space) (A INTER hahn_pos_set p mu) <= prob p A
-  &0 <= prob (p:A prob_space) (A INTER hahn_pos_set p mu)
-  (A:A->bool) INTER hahn_pos_set p mu IN prob_events p
-  mu:(A->bool)->real
-  p:A prob_space
-  (mu:(A->bool)->real)(A INTER hahn_pos_set p mu) = &0
-  forall p:A prob_space mu A.\n     absolutely_continuous p mu /\\ A IN prob_events p /\\ prob p A = &0\n     ==> jordan_pos p mu A = &0 /\\ jordan_neg p mu A = &0
-  j:num
-  i:num
-  \\n:num. (A:num->A->bool) n INTER H
-  UNIONS {(A:num->A->bool) n | n IN (:num)} INTER H =\n    UNIONS {A n INTER H | n IN (:num)}:A->bool
-  H:A->bool IN prob_events p
-  H = hahn_pos_set (p:A prob_space) mu
-  A:num->A->bool
-  {} INTER hahn_pos_set (p:A prob_space) mu = {}:A->bool
-  forall p:A prob_space mu. signed_measure p mu\n     ==> signed_measure p (jordan_pos p mu)
-  j:num
-  i:num
-  \\n:num. (A:num->A->bool) n INTER N
-  UNIONS {(A:num->A->bool) n | n IN (:num)} INTER N =\n    UNIONS {A n INTER N | n IN (:num)}:A->bool
-  N:A->bool IN prob_events p
-  N = prob_carrier (p:A prob_space) DIFF hahn_pos_set p mu
-  A:num->A->bool
-  (mu:(A->bool)->real) {} = &0
-  forall p:A prob_space mu. signed_measure p mu\n     ==> signed_measure p (jordan_neg p mu)
-  prob (p:A prob_space) A = &0
-  prob (p:A prob_space) (A INTER hahn_pos_set p mu)\n     <= prob p A
-  &0 <= prob (p:A prob_space)\n     (A INTER hahn_pos_set p mu)
-  (A:A->bool) INTER hahn_pos_set p mu IN prob_events p
-  forall p:A prob_space mu.\n     absolutely_continuous p mu\n     ==> absolutely_continuous p (jordan_pos p mu)
-  prob (p:A prob_space) A = &0
-  prob (p:A prob_space)\n     (A INTER (prob_carrier p DIFF hahn_pos_set p mu)) <= prob p A
-  &0 <= prob (p:A prob_space)\n     (A INTER (prob_carrier p DIFF hahn_pos_set p mu))
-  (A:A->bool) INTER (prob_carrier p DIFF hahn_pos_set p mu)\n     IN prob_events p
-  --x = &0 <=> x = &0
-  forall p:A prob_space mu.\n     absolutely_continuous p mu\n     ==> absolutely_continuous p (jordan_neg p mu)
+  (n : Num)
+  UNIONS({if (n : Num) == 0 { (a : (A) -> Bool) } else { if n == 1 { (b : (A) -> Bool) } else { {} } } | IN(n, UNIV)}) == UNION(a, b)
+  (j : Num) == 1
+  (j : Num) == 1
+  (i : Num) == 1
+  (i : Num) == 1
+  (j : Num) == 1
+  (j : Num) == 0
+  (i : Num) == 0
+  (j : Num)
+  (i : Num)
+  (n : Num)
+  (n : Num) => if n == 0 { (a : (A) -> Bool) } else { if n == 1 { (b : (A) -> Bool) } else { {} } }
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) && DISJOINT(a, b) \226\134\146 prob(p, UNION(a, b)) == prob(p, a) + prob(p, b)
+  prob_carrier((p : Prob_space[A])) == UNION((a : (A) -> Bool), DIFF(prob_carrier(p), a))
+  prob((p : Prob_space[A]), prob_carrier(p)) == prob(p, (a : (A) -> Bool)) + prob(p, DIFF(prob_carrier(p), a))
+  SUBSET((a : (A) -> Bool), prob_carrier((p : Prob_space[A])))
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, IN(a, prob_events(p)) \226\134\146 prob(p, DIFF(prob_carrier(p), a)) == real_of_num(1) - prob(p, a)
+  real_of_num(0) <= (y : Real) \226\134\146 real_of_num(1) == (x : Real) + y \226\134\146 x <= real_of_num(1)
+  real_of_num(1) == prob((p : Prob_space[A]), (a : (A) -> Bool)) + prob(p, DIFF(prob_carrier(p), a))
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, IN(a, prob_events(p)) \226\134\146 prob(p, a) <= real_of_num(1)
+  real_of_num(0) <= (y : Real) \226\134\146 (x : Real) <= x + y
+  prob((p : Prob_space[A]), UNION((a : (A) -> Bool), DIFF((b : (A) -> Bool), a))) == prob(p, a) + prob(p, DIFF(b, a))
+  (b : (A) -> Bool) == UNION((a : (A) -> Bool), DIFF(b, a))
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) && SUBSET(a, b) \226\134\146 prob(p, a) <= prob(p, b)
+  (b : (A) -> Bool) == UNION(INTER((a : (A) -> Bool), b), DIFF(b, a))
+  prob((p : Prob_space[A]), (b : (A) -> Bool)) == prob(p, INTER((a : (A) -> Bool), b)) + prob(p, DIFF(b, a))
+  prob((p : Prob_space[A]), UNION((a : (A) -> Bool), DIFF((b : (A) -> Bool), a))) == prob(p, a) + prob(p, DIFF(b, a))
+  UNION((a : (A) -> Bool), (b : (A) -> Bool)) == UNION(a, DIFF(b, a))
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) \226\134\146 prob(p, UNION(a, b)) == prob(p, a) + (prob(p, b) - prob(p, INTER(a, b)))
+  INTER(INTER((a : (A) -> Bool), (b : (A) -> Bool)), INTER(a, (c : (A) -> Bool))) == INTER(a, INTER(b, c))
+  INTER((a : (A) -> Bool), (c : (A) -> Bool))
+  INTER((a : (A) -> Bool), (b : (A) -> Bool))
+  (p : Prob_space[A])
+  INTER((a : (A) -> Bool), UNION((b : (A) -> Bool), (c : (A) -> Bool))) == UNION(INTER(a, b), INTER(a, c))
+  (c : (A) -> Bool)
+  (b : (A) -> Bool)
+  (p : Prob_space[A])
+  UNION((b : (A) -> Bool), (c : (A) -> Bool))
+  (a : (A) -> Bool)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, \226\136\128 c : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) && IN(c, prob_events(p)) \226\134\146 prob(p, UNION(a, UNION(b, c))) == prob(p, a) + (prob(p, b) + (prob(p, c) - prob(p, INTER(a, b)) - prob(p, INTER(a, c)) - prob(p, INTER(b, c)) + prob(p, INTER(a, INTER(b, c)))))
+  real_of_num(0) <= (z : Real) \226\134\146 (x : Real) + ((y : Real) - z) <= x + y
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) \226\134\146 prob(p, UNION(a, b)) <= prob(p, a) + prob(p, b)
+  real_of_num(0) <= (ac : Real) && real_of_num(0) <= (bc : Real) && (abc : Real) <= (ab : Real) \226\134\146 (a : Real) + ((b : Real) + ((c : Real) - ab - ac - bc + abc)) <= a + (b + c)
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, \226\136\128 c : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) && IN(c, prob_events(p)) \226\134\146 prob(p, UNION(a, UNION(b, c))) <= prob(p, a) + (prob(p, b) + prob(p, c))
+  (s : (A) -> Bool) => IN(s, prob_events((p : Prob_space[A])))
+  \226\136\128 p : Prob_space[A], \226\136\128 A : ((A) -> Bool) -> Bool, FINITE(A) && SUBSET(A, prob_events(p)) \226\134\146 prob(p, UNIONS(A)) == sum({(B : ((A) -> Bool) -> Bool) | SUBSET(B, A) && !(B == {})}, (B : ((A) -> Bool) -> Bool) => pow(-real_of_num(1), CARD(B) + 1) * prob(p, INTERS(B)))
+  prob((p : Prob_space[A]), (x : (A) -> Bool)) + prob(p, UNIONS((A : ((A) -> Bool) -> Bool)))
+  \226\136\128 p : Prob_space[A], \226\136\128 A : ((A) -> Bool) -> Bool, FINITE(A) && SUBSET(A, prob_events(p)) \226\134\146 prob(p, UNIONS(A)) <= sum(A, prob(p))
+  prob((p : Prob_space[A]), UNION(INTER((a : (A) -> Bool), (b : (A) -> Bool)), DIFF(a, b))) == prob(p, INTER(a, b)) + prob(p, DIFF(a, b))
+  (a : (A) -> Bool) == UNION(INTER(a, (b : (A) -> Bool)), DIFF(a, b))
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) \226\134\146 prob(p, DIFF(a, b)) == prob(p, a) - prob(p, INTER(a, b))
+  prob((p : Prob_space[A]))
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) && SUBSET(a, b) \226\134\146 prob(p, DIFF(b, a)) == prob(p, b) - prob(p, a)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 s : ((A) -> Bool) -> Bool, SUBSET(s, prob_events(p)) && COUNTABLE(s) \226\134\146 IN(UNIONS(s), prob_events(p))
+  \226\136\128 p : Prob_space[A], \226\136\128 s : ((A) -> Bool) -> Bool, SUBSET(s, prob_events(p)) && FINITE(s) \226\134\146 IN(UNIONS(s), prob_events(p))
+  INTERS((s : ((A) -> Bool) -> Bool)) == DIFF(prob_carrier((p : Prob_space[A])), UNIONS(IMAGE((a : (A) -> Bool) => DIFF(prob_carrier(p), a), s)))
+  \226\136\128 p : Prob_space[A], \226\136\128 s : ((A) -> Bool) -> Bool, SUBSET(s, prob_events(p)) && COUNTABLE(s) && !(s == {}) \226\134\146 IN(INTERS(s), prob_events(p))
+  (cond_prob : (Prob_space[A], (A) -> Bool, (A) -> Bool) -> Real)((p : Prob_space[A]), (a : (A) -> Bool), (b : (A) -> Bool)) == prob(p, INTER(a, b)) / prob(p, b)
+  prob((p : Prob_space[A]), INTER((b : (A) -> Bool), (a : (A) -> Bool))) / prob(p, a) * prob(p, a) == prob(p, INTER(b, a))
+  prob((p : Prob_space[A]), INTER((a : (A) -> Bool), (b : (A) -> Bool))) / prob(p, b) * prob(p, b) == prob(p, INTER(a, b))
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) && !(prob(p, a) == real_of_num(0)) && !(prob(p, b) == real_of_num(0)) \226\134\146 cond_prob(p, a, b) * prob(p, b) == cond_prob(p, b, a) * prob(p, a)
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) && real_of_num(0) < prob(p, b) \226\134\146 real_of_num(0) <= cond_prob(p, a, b) && cond_prob(p, a, b) <= real_of_num(1)
+  SUBSET((c : (A) -> Bool), prob_carrier((p : Prob_space[A])))
+  (c : (A) -> Bool) == UNION(INTER(c, (a : (A) -> Bool)), INTER(c, (b : (A) -> Bool)))
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) && UNION(a, b) == prob_carrier(p) && DISJOINT(a, b) \226\134\146 (\226\136\128 c : (A) -> Bool, IN(c, prob_events(p)) \226\134\146 prob(p, c) == prob(p, INTER(c, a)) + prob(p, INTER(c, b)))
+  (b : (A) -> Bool)
+  (a : (A) -> Bool)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) && prob(p, a) == real_of_num(0) && prob(p, b) == real_of_num(0) \226\134\146 prob(p, UNION(a, b)) == real_of_num(0)
+  UNION((a : (A) -> Bool), (b : (A) -> Bool))
+  (p : Prob_space[A])
+  (b : (A) -> Bool)
+  (a : (A) -> Bool)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) && prob(p, a) == real_of_num(1) && prob(p, b) == real_of_num(1) \226\134\146 prob(p, INTER(a, b)) == real_of_num(1)
+  (a : (A) -> Bool)
+  INTER((a : (A) -> Bool), (b : (A) -> Bool))
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) && prob(p, a) == real_of_num(0) \226\134\146 prob(p, INTER(a, b)) == real_of_num(0)
+  UNION((a : (A) -> Bool), (b : (A) -> Bool))
+  (a : (A) -> Bool)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) && prob(p, a) == real_of_num(1) \226\134\146 prob(p, UNION(a, b)) == real_of_num(1)
+  UNION((a : (A) -> Bool), (b : (A) -> Bool))
+  (p : Prob_space[A])
+  (b : (A) -> Bool)
+  (a : (A) -> Bool)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) \226\134\146 prob(p, a) + (prob(p, b) - real_of_num(1)) <= prob(p, INTER(a, b))
+  INTER((b : (A) -> Bool), (a : (A) -> Bool)) == INTER(a, b)
+  (a : (A) -> Bool)
+  (b : (A) -> Bool)
+  (p : Prob_space[A])
+  (b : (A) -> Bool)
+  (a : (A) -> Bool)
+  (p : Prob_space[A])
+  DIFF((b : (A) -> Bool), (a : (A) -> Bool))
+  DIFF((a : (A) -> Bool), (b : (A) -> Bool))
+  (p : Prob_space[A])
+  DISJOINT(DIFF((a : (A) -> Bool), (b : (A) -> Bool)), DIFF(b, a))
+  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) \226\134\146 prob(p, UNION(DIFF(a, b), DIFF(b, a))) == prob(p, a) + (prob(p, b) - real_of_num(2) * prob(p, INTER(a, b)))
+  (signed_measure : (Prob_space[A], ((A) -> Bool) -> Real) -> Bool)((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real)) == (mu({}) == real_of_num(0) && (\226\136\128 A : (Num, A) -> Bool, (\226\136\128 n : Num, IN(A(n), prob_events(p))) && (\226\136\128 i : Num, \226\136\128 j : Num, !(i == j) \226\134\146 DISJOINT(A(i), A(j))) \226\134\146 real_sums((n : Num) => mu(A(n)), mu(UNIONS({A((n : Num)) | IN(n, UNIV)})), from(0))))
+  (positive_set : (Prob_space[A], ((A) -> Bool) -> Real, (A) -> Bool) -> Bool)((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real), (A : (A) -> Bool)) == (IN(A, prob_events(p)) && (\226\136\128 B : (A) -> Bool, IN(B, prob_events(p)) && SUBSET(B, A) \226\134\146 real_of_num(0) <= mu(B)))
+  (negative_set : (Prob_space[A], ((A) -> Bool) -> Real, (A) -> Bool) -> Bool)((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real), (A : (A) -> Bool)) == (IN(A, prob_events(p)) && (\226\136\128 B : (A) -> Bool, IN(B, prob_events(p)) && SUBSET(B, A) \226\134\146 mu(B) <= real_of_num(0)))
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, signed_measure(p, mu) \226\134\146 mu({}) == real_of_num(0)
+  !((i : Num) == 0) && !(i == 1)
+  (i : Num)
+  sum(op_dot_dot(2, (N : Num)), (n : Num) => (mu : ((A) -> Bool) -> Real)(if n == 0 { (a : (A) -> Bool) } else { if n == 1 { (b : (A) -> Bool) } else { {} } })) == real_of_num(0)
+  (N : Num)
+  1
+  (n : Num) => (mu : ((A) -> Bool) -> Real)(if n == 0 { (a : (A) -> Bool) } else { if n == 1 { (b : (A) -> Bool) } else { {} } })
+  (N : Num)
+  0
+  (n : Num) => (mu : ((A) -> Bool) -> Real)(if n == 0 { (a : (A) -> Bool) } else { if n == 1 { (b : (A) -> Bool) } else { {} } })
+  (N : Num)
+  1
+  real_sums((n : Num) => (mu : ((A) -> Bool) -> Real)(if n == 0 { (a : (A) -> Bool) } else { if n == 1 { (b : (A) -> Bool) } else { {} } }), mu(a) + mu(b), from(0))
+  1
+  0
+  (n : Num)
+  UNIONS({if (n : Num) == 0 { (a : (A) -> Bool) } else { if n == 1 { (b : (A) -> Bool) } else { {} } } | IN(n, UNIV)}) == UNION(a, b)
+  (j : Num) == 1
+  (j : Num) == 1
+  (i : Num) == 1
+  (i : Num) == 1
+  (j : Num) == 1
+  (j : Num) == 0
+  (i : Num) == 0
+  (j : Num)
+  (i : Num)
+  (n : Num)
+  (n : Num) => if n == 0 { (a : (A) -> Bool) } else { if n == 1 { (b : (A) -> Bool) } else { {} } }
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, signed_measure(p, mu) && IN(a, prob_events(p)) && IN(b, prob_events(p)) && DISJOINT(a, b) \226\134\146 mu(UNION(a, b)) == mu(a) + mu(b)
+  UNION((b : (A) -> Bool), DIFF((a : (A) -> Bool), b)) == a
+  DIFF((a : (A) -> Bool), (b : (A) -> Bool))
+  (b : (A) -> Bool)
+  (mu : ((A) -> Bool) -> Real)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, signed_measure(p, mu) && IN(a, prob_events(p)) && IN(b, prob_events(p)) && SUBSET(b, a) \226\134\146 mu(DIFF(a, b)) == mu(a) - mu(b)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], signed_measure(p, prob(p))
+  (B : (A) -> Bool) == {}
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, signed_measure(p, mu) \226\134\146 positive_set(p, mu, {})
+  (B : (A) -> Bool) == {}
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, signed_measure(p, mu) \226\134\146 negative_set(p, mu, {})
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 A : (A) -> Bool, \226\136\128 B : (A) -> Bool, positive_set(p, mu, A) && IN(B, prob_events(p)) && SUBSET(B, A) \226\134\146 positive_set(p, mu, B)
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 A : (A) -> Bool, \226\136\128 B : (A) -> Bool, negative_set(p, mu, A) && IN(B, prob_events(p)) && SUBSET(B, A) \226\134\146 negative_set(p, mu, B)
+  SUBSET(INTER((B' : (A) -> Bool), DIFF((B : (A) -> Bool), (A : (A) -> Bool))), B)
+  SUBSET(INTER((B' : (A) -> Bool), (A : (A) -> Bool)), A)
+  INTER((B' : (A) -> Bool), DIFF((B : (A) -> Bool), (A : (A) -> Bool)))
+  INTER((B' : (A) -> Bool), (A : (A) -> Bool))
+  (mu : ((A) -> Bool) -> Real)
+  (p : Prob_space[A])
+  IN(INTER((B' : (A) -> Bool), DIFF((B : (A) -> Bool), (A : (A) -> Bool))), prob_events((p : Prob_space[A])))
+  IN(INTER((B' : (A) -> Bool), (A : (A) -> Bool)), prob_events((p : Prob_space[A])))
+  (B' : (A) -> Bool) == UNION(INTER(B', (A : (A) -> Bool)), INTER(B', DIFF((B : (A) -> Bool), A)))
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 A : (A) -> Bool, \226\136\128 B : (A) -> Bool, signed_measure(p, mu) && positive_set(p, mu, A) && positive_set(p, mu, B) \226\134\146 positive_set(p, mu, UNION(A, B))
+  SUBSET(INTER((B' : (A) -> Bool), DIFF((B : (A) -> Bool), (A : (A) -> Bool))), B)
+  SUBSET(INTER((B' : (A) -> Bool), (A : (A) -> Bool)), A)
+  (a : Real) <= real_of_num(0) && (b : Real) <= real_of_num(0) \226\134\146 a + b <= real_of_num(0)
+  INTER((B' : (A) -> Bool), DIFF((B : (A) -> Bool), (A : (A) -> Bool)))
+  INTER((B' : (A) -> Bool), (A : (A) -> Bool))
+  (mu : ((A) -> Bool) -> Real)
+  (p : Prob_space[A])
+  IN(INTER((B' : (A) -> Bool), DIFF((B : (A) -> Bool), (A : (A) -> Bool))), prob_events((p : Prob_space[A])))
+  IN(INTER((B' : (A) -> Bool), (A : (A) -> Bool)), prob_events((p : Prob_space[A])))
+  (B' : (A) -> Bool) == UNION(INTER(B', (A : (A) -> Bool)), INTER(B', DIFF((B : (A) -> Bool), A)))
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 A : (A) -> Bool, \226\136\128 B : (A) -> Bool, signed_measure(p, mu) && negative_set(p, mu, A) && negative_set(p, mu, B) \226\134\146 negative_set(p, mu, UNION(A, B))
+  \226\136\128 p : Prob_space[A], \226\136\128 A : (Num, A) -> Bool, \226\136\128 n : Num, (\226\136\128 m : Num, IN(A(m), prob_events(p))) \226\134\146 IN(UNIONS(IMAGE(A, op_dot_dot(0, n))), prob_events(p))
+  (mu : ((A) -> Bool) -> Real)((B : (A) -> Bool))
+  real_of_num(0)
+  from(0)
+  (n : Num) => (mu : ((A) -> Bool) -> Real)((D : (Num, A) -> Bool)(n))
+  (n : Num) => real_of_num(0)
+  (D : (Num, A) -> Bool)
+  (n : Num)
+  \226\136\128 n : Num, real_of_num(0) <= (mu : ((A) -> Bool) -> Real)((D : (Num, A) -> Bool)(n))
+  \226\136\128 n : Num, SUBSET((D : (Num, A) -> Bool)(n), (A : (Num, A) -> Bool)(n))
+  (r : Num)
+  (r : Num)
+  (n : Num) => IN((x : A), (A : (Num, A) -> Bool)(n))
+  IN((x : A), (B : (A) -> Bool))
+  SUBSET((B : (A) -> Bool), UNIONS({(A : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}))
+  \226\136\131 m : Num, IN((x : A), (A : (Num, A) -> Bool)(m))
+  (x : A)
+  UNIONS({(D : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}) == (B : (A) -> Bool)
+  (j : Num)
+  (i : Num)
+  (j : Num)
+  (i : Num)
+  !(((a : Bool) && (b : Bool) && !(c : Bool)) && (d : Bool) && (e : Bool) && !(f : Bool)) == (a && b && d && e \226\134\146 c || f)
+  (x : A)
+  (j : Num)
+  (i : Num)
+  \226\136\128 i : Num, \226\136\128 j : Num, !(i == j) \226\134\146 DISJOINT((D : (Num, A) -> Bool)(i), D(j))
+  IMAGE((A : (Num, A) -> Bool), {(j : Num) | j < (n : Num)})
+  (n : Num)
+  \226\136\128 n : Num, IN((D : (Num, A) -> Bool)(n), prob_events((p : Prob_space[A])))
+  (D : (Num, A) -> Bool) == ((n : Num) => INTER((B : (A) -> Bool), DIFF((A : (Num, A) -> Bool)(n), UNIONS({A((j : Num)) | j < n}))))
+  \226\136\128 n : Num, IN((A : (Num, A) -> Bool)(n), prob_events((p : Prob_space[A])))
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 A : (Num, A) -> Bool, signed_measure(p, mu) && (\226\136\128 n : Num, positive_set(p, mu, A(n))) \226\134\146 positive_set(p, mu, UNIONS({A((n : Num)) | IN(n, UNIV)}))
+  minimal((n : Num) => IN((x : A), (A : (Num, A) -> Bool)(n)))
+  real_of_num(0) <= (mu : ((A) -> Bool) -> Real)(DIFF((A : (A) -> Bool), (B : (A) -> Bool)))
+  (B : (A) -> Bool)
+  (A : (A) -> Bool)
+  (mu : ((A) -> Bool) -> Real)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 A : (A) -> Bool, \226\136\128 B : (A) -> Bool, signed_measure(p, mu) && positive_set(p, mu, A) && IN(B, prob_events(p)) && SUBSET(B, A) \226\134\146 real_of_num(0) <= mu(B) && mu(B) <= mu(A)
+  !((n : Num) == 0) \226\134\146 1 <= n
+  real_of_num((n : Num) - 1 + 1) == real_of_num(n)
+  (B : (A) -> Bool)
+  (n : Num) - 1
+  (n : Num)
+  real_of_num(0) < -(mu : ((A) -> Bool) -> Real)((B : (A) -> Bool))
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 S : (A) -> Bool, IN(S, prob_events(p)) && !positive_set(p, mu, S) \226\134\146 (\226\136\131 k : Num, \226\136\131 D : (A) -> Bool, IN(D, prob_events(p)) && SUBSET(D, S) && mu(D) <= -inv(real_of_num(k + 1)))
+  (N : Num)
+  (N : Num)
+  (N : Num)
+  inv(real_of_num((m : Num)))
+  op_minus_minus_minus_gt((n : Num) => (mu : ((A) -> Bool) -> Real)((C : (Num, A) -> Bool)(n)), real_of_num(0), sequentially)
+  !((m : Num) == 0)
+  (n : Num)
+  (n : Num)
+  -inv(real_of_num(minimal((k : Num) => \226\136\131 E : (A) -> Bool, IN(E, prob_events((p : Prob_space[A]))) && SUBSET(E, (R : (Num, A) -> Bool)((n : Num))) && (mu : ((A) -> Bool) -> Real)(E) <= -inv(real_of_num(k + 1))) + 1))
+  DIFF((R : (Num, A) -> Bool)((n : Num)), DIFF(R(n), select((D : (A) -> Bool) => IN(D, prob_events((p : Prob_space[A]))) && SUBSET(D, R(n)) && (mu : ((A) -> Bool) -> Real)(D) <= -inv(real_of_num(minimal((k : Num) => \226\136\131 E : (A) -> Bool, IN(E, prob_events(p)) && SUBSET(E, R(n)) && mu(E) <= -inv(real_of_num(k + 1))) + 1))))) == select((D : (A) -> Bool) => IN(D, prob_events(p)) && SUBSET(D, R(n)) && mu(D) <= -inv(real_of_num(minimal((k : Num) => \226\136\131 E : (A) -> Bool, IN(E, prob_events(p)) && SUBSET(E, R(n)) && mu(E) <= -inv(real_of_num(k + 1))) + 1)))
+  (n : Num)
+  (n : Num)
+  \226\136\131 k : Num, \226\136\131 C : (A) -> Bool, IN(C, prob_events((p : Prob_space[A]))) && SUBSET(C, (R : (Num, A) -> Bool)((n : Num))) && (mu : ((A) -> Bool) -> Real)(C) <= -inv(real_of_num(k + 1))
+  (n : Num)
+  (C : (Num, A) -> Bool)((n : Num)) == DIFF((R : (Num, A) -> Bool)(n), R(SUC(n)))
+  \226\136\128 n : Num, (mu : ((A) -> Bool) -> Real)((C : (Num, A) -> Bool)(n)) <= -inv(real_of_num((m : Num)))
+  !((m : Num) == 0) \226\134\146 1 <= m
+  real_of_num((m : Num) - 1 + 1) == real_of_num(m)
+  (E : (A) -> Bool)
+  (m : Num) - 1
+  !((m : Num) == 0) \226\134\146 1 <= m
+  real_of_num((m : Num) - 1 + 1) == real_of_num(m)
+  (E : (A) -> Bool)
+  (m : Num) - 1
+  (k : Num) => \226\136\131 D : (A) -> Bool, IN(D, prob_events((p : Prob_space[A]))) && SUBSET(D, (R : (Num, A) -> Bool)((n : Num))) && (mu : ((A) -> Bool) -> Real)(D) <= -inv(real_of_num(k + 1))
+  \226\136\128 n : Num, minimal((k : Num) => \226\136\131 D : (A) -> Bool, IN(D, prob_events((p : Prob_space[A]))) && SUBSET(D, (R : (Num, A) -> Bool)(n)) && (mu : ((A) -> Bool) -> Real)(D) <= -inv(real_of_num(k + 1))) <= (m : Num) - 1
+  !((m : Num) == 0) \226\134\146 1 <= m
+  real_of_num((m : Num) - 1 + 1) == real_of_num(m)
+  (E : (A) -> Bool)
+  (m : Num) - 1
+  \226\136\128 n : Num, (hasneg : ((A) -> Bool) -> Bool)((R : (Num, A) -> Bool)(n))
+  (mu : ((A) -> Bool) -> Real)((E : (A) -> Bool)) <= -inv(real_of_num((m : Num)))
+  (m : Num)
+  real_of_num(0) < -(mu : ((A) -> Bool) -> Real)((E : (A) -> Bool))
+  DIFF((A : (A) -> Bool), (UC : (A) -> Bool))
+  \226\136\128 n : Num, SUBSET((E : (A) -> Bool), (R : (Num, A) -> Bool)(n))
+  (E : (A) -> Bool)
+  DIFF((A : (A) -> Bool), (UC : (A) -> Bool))
+  (UC : (A) -> Bool)
+  (A : (A) -> Bool)
+  (mu : ((A) -> Bool) -> Real)
+  (p : Prob_space[A])
+  (mu : ((A) -> Bool) -> Real)(DIFF((A : (A) -> Bool), (UC : (A) -> Bool))) == mu(A) - mu(UC)
+  real_of_num(0)
+  (mu : ((A) -> Bool) -> Real)((UC : (A) -> Bool))
+  from(0)
+  (n : Num) => real_of_num(0)
+  (n : Num) => (mu : ((A) -> Bool) -> Real)((C : (Num, A) -> Bool)(n))
+  (mu : ((A) -> Bool) -> Real)((UC : (A) -> Bool)) <= real_of_num(0)
+  DIFF((R : (Num, A) -> Bool)((n : Num)), R(n)) == {}
+  real_of_num(0) < (y : Real) \226\134\146 (x : Real) <= -y \226\134\146 x <= real_of_num(0)
+  INTER((R : (Num, A) -> Bool)((n : Num)), select((D : (A) -> Bool) => IN(D, prob_events((p : Prob_space[A]))) && SUBSET(D, R(n)) && (mu : ((A) -> Bool) -> Real)(D) <= -inv(real_of_num(minimal((k : Num) => \226\136\131 E : (A) -> Bool, IN(E, prob_events(p)) && SUBSET(E, R(n)) && mu(E) <= -inv(real_of_num(k + 1))) + 1)))) == select((D : (A) -> Bool) => IN(D, prob_events(p)) && SUBSET(D, R(n)) && mu(D) <= -inv(real_of_num(minimal((k : Num) => \226\136\131 E : (A) -> Bool, IN(E, prob_events(p)) && SUBSET(E, R(n)) && mu(E) <= -inv(real_of_num(k + 1))) + 1)))
+  (n : Num)
+  DIFF((R : (Num, A) -> Bool)((n : Num)), DIFF(R(n), select((D : (A) -> Bool) => IN(D, prob_events((p : Prob_space[A]))) && SUBSET(D, R(n)) && (mu : ((A) -> Bool) -> Real)(D) <= -inv(real_of_num(minimal((k : Num) => \226\136\131 E : (A) -> Bool, IN(E, prob_events(p)) && SUBSET(E, R(n)) && mu(E) <= -inv(real_of_num(k + 1))) + 1))))) == INTER(R(n), select((D : (A) -> Bool) => IN(D, prob_events(p)) && SUBSET(D, R(n)) && mu(D) <= -inv(real_of_num(minimal((k : Num) => \226\136\131 E : (A) -> Bool, IN(E, prob_events(p)) && SUBSET(E, R(n)) && mu(E) <= -inv(real_of_num(k + 1))) + 1))))
+  (hasneg : ((A) -> Bool) -> Bool)((R : (Num, A) -> Bool)((n : Num)))
+  (n : Num)
+  (C : (Num, A) -> Bool)((n : Num)) == DIFF((R : (Num, A) -> Bool)(n), R(SUC(n)))
+  \226\136\128 n : Num, (mu : ((A) -> Bool) -> Real)((C : (Num, A) -> Bool)(n)) <= real_of_num(0)
+  (C : (Num, A) -> Bool)((n : Num)) == DIFF((R : (Num, A) -> Bool)(n), R(SUC(n)))
+  (n : Num)
+  !IN((x : A), (UC : (A) -> Bool))
+  IN((x : A), (R : (Num, A) -> Bool)(SUC((n : Num))))
+  IN((x : A), (R : (Num, A) -> Bool)((n : Num)))
+  (x : A)
+  \226\136\128 n : Num, SUBSET(DIFF((A : (A) -> Bool), (UC : (A) -> Bool)), (R : (Num, A) -> Bool)(n))
+  IN(DIFF((A : (A) -> Bool), (UC : (A) -> Bool)), prob_events((p : Prob_space[A])))
+  SUBSET((UC : (A) -> Bool), (A : (A) -> Bool))
+  IN((UC : (A) -> Bool), prob_events((p : Prob_space[A])))
+  (UC : (A) -> Bool) == UNIONS({(C : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)})
+  (C : (Num, A) -> Bool)
+  real_sums((n : Num) => (mu : ((A) -> Bool) -> Real)((C : (Num, A) -> Bool)(n)), mu(UNIONS({C((n : Num)) | IN(n, UNIV)})), from(0))
+  (R : (Num, A) -> Bool)((n : Num))
+  \226\136\128 n : Num, SUBSET((C : (Num, A) -> Bool)(n), (A : (A) -> Bool))
+  (i : Num)
+  SUC((j : Num))
+  (j : Num)
+  SUC((i : Num))
+  (j : Num)
+  (i : Num)
+  !(((a : Bool) && !(b : Bool)) && (c : Bool) && !(d : Bool)) == (a && c \226\134\146 b || d)
+  (x : A)
+  \226\136\128 i : Num, \226\136\128 j : Num, !(i == j) \226\134\146 DISJOINT((C : (Num, A) -> Bool)(i), C(j))
+  \226\136\128 n : Num, IN((C : (Num, A) -> Bool)(n), prob_events((p : Prob_space[A])))
+  (C : (Num, A) -> Bool) == ((n : Num) => DIFF((R : (Num, A) -> Bool)(n), R(SUC(n))))
+  (R : (Num, A) -> Bool)((n : Num))
+  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSET((R : (Num, A) -> Bool)(n), R(m))
+  \226\136\128 n : Num, SUBSET((R : (Num, A) -> Bool)(SUC(n)), R(n))
+  (R : (Num, A) -> Bool)((n : Num))
+  (hasneg : ((A) -> Bool) -> Bool)((R : (Num, A) -> Bool)((n : Num)))
+  \226\136\128 n : Num, IN((R : (Num, A) -> Bool)(n), prob_events((p : Prob_space[A]))) && SUBSET(R(n), (A : (A) -> Bool))
+  (E : (A) -> Bool)
+  (D : (A) -> Bool) => IN(D, prob_events((p : Prob_space[A]))) && SUBSET(D, (R : (Num, A) -> Bool)((n : Num))) && (mu : ((A) -> Bool) -> Real)(D) <= -inv(real_of_num(minimal((k : Num) => \226\136\131 E : (A) -> Bool, IN(E, prob_events(p)) && SUBSET(E, R(n)) && mu(E) <= -inv(real_of_num(k + 1))) + 1))
+  (k : Num) => \226\136\131 E : (A) -> Bool, IN(E, prob_events((p : Prob_space[A]))) && SUBSET(E, (R : (Num, A) -> Bool)((n : Num))) && (mu : ((A) -> Bool) -> Real)(E) <= -inv(real_of_num(k + 1))
+  \226\136\128 n : Num, (hasneg : ((A) -> Bool) -> Bool)((R : (Num, A) -> Bool)(n)) \226\134\146 IN(select((D : (A) -> Bool) => IN(D, prob_events((p : Prob_space[A]))) && SUBSET(D, R(n)) && (mu : ((A) -> Bool) -> Real)(D) <= -inv(real_of_num(minimal((k : Num) => \226\136\131 E : (A) -> Bool, IN(E, prob_events(p)) && SUBSET(E, R(n)) && mu(E) <= -inv(real_of_num(k + 1))) + 1))), prob_events(p)) && SUBSET(select((D : (A) -> Bool) => IN(D, prob_events(p)) && SUBSET(D, R(n)) && mu(D) <= -inv(real_of_num(minimal((k : Num) => \226\136\131 E : (A) -> Bool, IN(E, prob_events(p)) && SUBSET(E, R(n)) && mu(E) <= -inv(real_of_num(k + 1))) + 1))), R(n)) && mu(select((D : (A) -> Bool) => IN(D, prob_events(p)) && SUBSET(D, R(n)) && mu(D) <= -inv(real_of_num(minimal((k : Num) => \226\136\131 E : (A) -> Bool, IN(E, prob_events(p)) && SUBSET(E, R(n)) && mu(E) <= -inv(real_of_num(k + 1))) + 1)))) <= -inv(real_of_num(minimal((k : Num) => \226\136\131 E : (A) -> Bool, IN(E, prob_events(p)) && SUBSET(E, R(n)) && mu(E) <= -inv(real_of_num(k + 1))) + 1))
+  (hasneg : ((A) -> Bool) -> Bool) == ((S : (A) -> Bool) => \226\136\131 k : Num, \226\136\131 C : (A) -> Bool, IN(C, prob_events((p : Prob_space[A]))) && SUBSET(C, S) && (mu : ((A) -> Bool) -> Real)(C) <= -inv(real_of_num(k + 1)))
+  (R : (Num, A) -> Bool)
+  (S : (A) -> Bool) => (n : Num) => if (\226\136\131 k : Num, \226\136\131 C : (A) -> Bool, IN(C, prob_events((p : Prob_space[A]))) && SUBSET(C, S) && (mu : ((A) -> Bool) -> Real)(C) <= -inv(real_of_num(k + 1))) { DIFF(S, select((D : (A) -> Bool) => IN(D, prob_events(p)) && SUBSET(D, S) && mu(D) <= -inv(real_of_num(minimal((k : Num) => \226\136\131 E : (A) -> Bool, IN(E, prob_events(p)) && SUBSET(E, S) && mu(E) <= -inv(real_of_num(k + 1))) + 1)))) } else { S }
+  (A : (A) -> Bool)
+  (A : (A) -> Bool)
+  positive_set((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real), (A : (A) -> Bool))
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 A : (A) -> Bool, signed_measure(p, mu) && IN(A, prob_events(p)) && real_of_num(0) < mu(A) \226\134\146 (\226\136\131 B : (A) -> Bool, IN(B, prob_events(p)) && SUBSET(B, A) && positive_set(p, mu, B) && real_of_num(0) < mu(B))
+  (mu : ((A) -> Bool) -> Real)((P : (A) -> Bool)) <= real_of_num((N : Num))
+  (N : Num)
+  (N : Num)
+  (mu : ((A) -> Bool) -> Real)((P : (A) -> Bool))
+  (mu : ((A) -> Bool) -> Real)((E : (Num, A) -> Bool)((n : Num)))
+  \226\136\128 n : Num, real_of_num(n) < (mu : ((A) -> Bool) -> Real)((P : (A) -> Bool))
+  (E : (Num, A) -> Bool)((n : Num))
+  (P : (A) -> Bool)
+  (mu : ((A) -> Bool) -> Real)
+  (p : Prob_space[A])
+  \226\136\128 n : Num, (mu : ((A) -> Bool) -> Real)((E : (Num, A) -> Bool)(n)) <= mu((P : (A) -> Bool))
+  positive_set((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real), (P : (A) -> Bool))
+  (P : (A) -> Bool) == UNIONS({(E : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)})
+  (E : (Num, A) -> Bool)
+  \226\136\128 n : Num, \226\136\131 E : (A) -> Bool, positive_set((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real), E) && real_of_num(n) < mu(E)
+  (!(p : Bool) \226\134\146 false) \226\134\146 p
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, signed_measure(p, mu) \226\134\146 (\226\136\131 B : Real, \226\136\128 E : (A) -> Bool, positive_set(p, mu, E) \226\134\146 mu(E) <= B)
+  SUBSET((P : (A) -> Bool), prob_carrier((p : Prob_space[A])))
+  real_of_num(0) < (mu : ((A) -> Bool) -> Real)((Q : (A) -> Bool))
+  (mu : ((A) -> Bool) -> Real)((P : (A) -> Bool)) == (s : Real)
+  (mu : ((A) -> Bool) -> Real)(UNION((P : (A) -> Bool), (Q : (A) -> Bool))) == mu(P) + mu(Q)
+  (mu : ((A) -> Bool) -> Real)(UNION((P : (A) -> Bool), (Q : (A) -> Bool))) <= (s : Real)
+  (mu : ((A) -> Bool) -> Real)(UNION((P : (A) -> Bool), (Q : (A) -> Bool))) == mu(P) + mu(Q)
+  DISJOINT((P : (A) -> Bool), (Q : (A) -> Bool))
+  positive_set((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real), UNION((P : (A) -> Bool), (Q : (A) -> Bool)))
+  (Q : (A) -> Bool)
+  (B : (A) -> Bool)
+  (mu : ((A) -> Bool) -> Real)
+  (p : Prob_space[A])
+  ((x : Real) <= real_of_num(0)) == !(real_of_num(0) < x)
+  (B : (A) -> Bool)
+  IN((P : (A) -> Bool), prob_events((p : Prob_space[A])))
+  DIFF(prob_carrier((p : Prob_space[A])), (P : (A) -> Bool))
+  (P : (A) -> Bool)
+  inv(real_of_num((N : Num))) < (s : Real) - (mu : ((A) -> Bool) -> Real)((P : (A) -> Bool))
+  inv(real_of_num((N : Num) + 1)) <= inv(real_of_num(N))
+  (s : Real) - inv(real_of_num((N : Num) + 1)) < (mu : ((A) -> Bool) -> Real)((E : (Num, A) -> Bool)(N))
+  (N : Num)
+  (s : Real) - inv(real_of_num((N : Num) + 1)) < (mu : ((A) -> Bool) -> Real)((E : (Num, A) -> Bool)(N))
+  !((N : Num) == 0)
+  inv(real_of_num((N : Num) + 1)) <= inv(real_of_num(N))
+  (N : Num)
+  (mu : ((A) -> Bool) -> Real)((P : (A) -> Bool)) < (s : Real)
+  (s : Real) - (mu : ((A) -> Bool) -> Real)((P : (A) -> Bool))
+  (E : (Num, A) -> Bool)((n : Num))
+  (P : (A) -> Bool)
+  (mu : ((A) -> Bool) -> Real)
+  (p : Prob_space[A])
+  \226\136\128 n : Num, (mu : ((A) -> Bool) -> Real)((E : (Num, A) -> Bool)(n)) <= mu((P : (A) -> Bool))
+  (a : Real) <= (b : Real) && b <= a \226\134\146 a == b
+  (mu : ((A) -> Bool) -> Real)((P : (A) -> Bool)) == (s : Real)
+  UNIONS({(E : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}) == UNIONS({(Pn : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)})
+  positive_set((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real), (P : (A) -> Bool))
+  (P : (A) -> Bool) == UNIONS({(E : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)})
+  (x : A)
+  UNIONS({(Pn : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}) == UNIONS({(E : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)})
+  UNIONS(IMAGE((E : (Num, A) -> Bool), op_dot_dot(0, (n : Num)))) == (Pn : (Num, A) -> Bool)(n)
+  \226\136\128 n : Num, positive_set((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real), (Pn : (Num, A) -> Bool)(n))
+  (Pn : (Num, A) -> Bool) == ((n : Num) => UNIONS(IMAGE((E : (Num, A) -> Bool), op_dot_dot(0, n))))
+  (E : (Num, A) -> Bool)
+  ((s : Real) - (x : Real) < s) == (real_of_num(0) < x)
+  (s : Real) - inv(real_of_num((n : Num) + 1)) < s
+  (s : Real) - inv(real_of_num((n : Num) + 1))
+  {(mu : ((A) -> Bool) -> Real)(E) | E : (A) -> Bool | positive_set((p : Prob_space[A]), mu, E)}
+  \226\136\128 n : Num, \226\136\131 E : (A) -> Bool, positive_set((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real), E) && (s : Real) - inv(real_of_num(n + 1)) < mu(E)
+  real_of_num(0) <= (s : Real)
+  \226\136\128 E : (A) -> Bool, positive_set((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real), E) \226\134\146 mu(E) <= (s : Real)
+  (B : Real)
+  (B : Real)
+  (mu : ((A) -> Bool) -> Real)
+  (p : Prob_space[A])
+  \226\136\131 B : Real, \226\136\128 x : Real, IN(x, {(mu : ((A) -> Bool) -> Real)(E) | E : (A) -> Bool | positive_set((p : Prob_space[A]), mu, E)}) \226\134\146 x <= B
+  ({} : (A) -> Bool)
+  real_of_num(0)
+  !({(mu : ((A) -> Bool) -> Real)(E) | E : (A) -> Bool | positive_set((p : Prob_space[A]), mu, E)} == {})
+  (s : Real) == sup({(mu : ((A) -> Bool) -> Real)(E) | E : (A) -> Bool | positive_set((p : Prob_space[A]), mu, E)})
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, signed_measure(p, mu) \226\134\146 (\226\136\131 P : (A) -> Bool, \226\136\131 N : (A) -> Bool, positive_set(p, mu, P) && negative_set(p, mu, N) && DISJOINT(P, N) && UNION(P, N) == prob_carrier(p))
+  (hahn_pos_set : (Prob_space[A], ((A) -> Bool) -> Real, A) -> Bool)((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real)) == select((P : (A) -> Bool) => positive_set(p, mu, P) && negative_set(p, mu, DIFF(prob_carrier(p), P)) && SUBSET(P, prob_carrier(p)))
+  DIFF(prob_carrier((p : Prob_space[A])), (P : (A) -> Bool)) == (N : (A) -> Bool)
+  (P : (A) -> Bool)
+  (N : (A) -> Bool)
+  (P : (A) -> Bool)
+  (mu : ((A) -> Bool) -> Real)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, signed_measure(p, mu) \226\134\146 positive_set(p, mu, hahn_pos_set(p, mu)) && negative_set(p, mu, DIFF(prob_carrier(p), hahn_pos_set(p, mu))) && SUBSET(hahn_pos_set(p, mu), prob_carrier(p))
+  (jordan_pos : (Prob_space[A], ((A) -> Bool) -> Real, (A) -> Bool) -> Real)((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real), (A : (A) -> Bool)) == mu(INTER(A, hahn_pos_set(p, mu)))
+  (jordan_neg : (Prob_space[A], ((A) -> Bool) -> Real, (A) -> Bool) -> Real)((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real), (A : (A) -> Bool)) == -mu(INTER(A, DIFF(prob_carrier(p), hahn_pos_set(p, mu))))
+  (mu : ((A) -> Bool) -> Real)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 A : (A) -> Bool, signed_measure(p, mu) && IN(A, prob_events(p)) \226\134\146 real_of_num(0) <= jordan_pos(p, mu, A)
+  (mu : ((A) -> Bool) -> Real)
+  (p : Prob_space[A])
+  (real_of_num(0) <= -(x : Real)) == (x <= real_of_num(0))
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 A : (A) -> Bool, signed_measure(p, mu) && IN(A, prob_events(p)) \226\134\146 real_of_num(0) <= jordan_neg(p, mu, A)
+  (p : Prob_space[A])
+  SUBSET((A : (A) -> Bool), prob_carrier((p : Prob_space[A])))
+  (A : (A) -> Bool) == UNION(INTER(A, (P : (A) -> Bool)), INTER(A, DIFF(prob_carrier((p : Prob_space[A])), P)))
+  IN(DIFF(prob_carrier((p : Prob_space[A])), (P : (A) -> Bool)), prob_events(p))
+  IN((P : (A) -> Bool), prob_events((p : Prob_space[A])))
+  (P : (A) -> Bool) == hahn_pos_set((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real))
+  (mu : ((A) -> Bool) -> Real)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 A : (A) -> Bool, signed_measure(p, mu) && IN(A, prob_events(p)) \226\134\146 mu(A) == jordan_pos(p, mu, A) - jordan_neg(p, mu, A)
+  (absolutely_continuous : (Prob_space[A], ((A) -> Bool) -> Real) -> Bool)((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real)) == (signed_measure(p, mu) && (\226\136\128 A : (A) -> Bool, IN(A, prob_events(p)) && prob(p, A) == real_of_num(0) \226\134\146 mu(A) == real_of_num(0)))
+  prob((p : Prob_space[A]), (A : (A) -> Bool)) == real_of_num(0)
+  prob((p : Prob_space[A]), (B : (A) -> Bool)) <= prob(p, (A : (A) -> Bool))
+  real_of_num(0) <= prob((p : Prob_space[A]), (B : (A) -> Bool))
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 A : (A) -> Bool, absolutely_continuous(p, mu) && IN(A, prob_events(p)) && prob(p, A) == real_of_num(0) \226\134\146 (\226\136\128 B : (A) -> Bool, IN(B, prob_events(p)) && SUBSET(B, A) \226\134\146 mu(B) == real_of_num(0))
+  prob((p : Prob_space[A]), (A : (A) -> Bool)) == real_of_num(0)
+  prob((p : Prob_space[A]), INTER((A : (A) -> Bool), DIFF(prob_carrier(p), hahn_pos_set(p, (mu : ((A) -> Bool) -> Real))))) <= prob(p, A)
+  real_of_num(0) <= prob((p : Prob_space[A]), INTER((A : (A) -> Bool), DIFF(prob_carrier(p), hahn_pos_set(p, (mu : ((A) -> Bool) -> Real)))))
+  IN(INTER((A : (A) -> Bool), DIFF(prob_carrier((p : Prob_space[A])), hahn_pos_set(p, (mu : ((A) -> Bool) -> Real)))), prob_events(p))
+  (mu : ((A) -> Bool) -> Real)
+  (p : Prob_space[A])
+  (-(x : Real) == real_of_num(0)) == (x == real_of_num(0))
+  prob((p : Prob_space[A]), (A : (A) -> Bool)) == real_of_num(0)
+  prob((p : Prob_space[A]), INTER((A : (A) -> Bool), hahn_pos_set(p, (mu : ((A) -> Bool) -> Real)))) <= prob(p, A)
+  real_of_num(0) <= prob((p : Prob_space[A]), INTER((A : (A) -> Bool), hahn_pos_set(p, (mu : ((A) -> Bool) -> Real))))
+  IN(INTER((A : (A) -> Bool), hahn_pos_set((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real))), prob_events(p))
+  (mu : ((A) -> Bool) -> Real)
+  (p : Prob_space[A])
+  (mu : ((A) -> Bool) -> Real)(INTER((A : (A) -> Bool), hahn_pos_set((p : Prob_space[A]), mu))) == real_of_num(0)
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 A : (A) -> Bool, absolutely_continuous(p, mu) && IN(A, prob_events(p)) && prob(p, A) == real_of_num(0) \226\134\146 jordan_pos(p, mu, A) == real_of_num(0) && jordan_neg(p, mu, A) == real_of_num(0)
+  (j : Num)
+  (i : Num)
+  (n : Num) => INTER((A : (Num, A) -> Bool)(n), (H : (A) -> Bool))
+  INTER(UNIONS({(A : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}), (H : (A) -> Bool)) == UNIONS({INTER(A((n : Num)), H) | IN(n, UNIV)})
+  IN((H : (A) -> Bool), prob_events((p : Prob_space[A])))
+  (H : (A) -> Bool) == hahn_pos_set((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real))
+  (A : (Num, A) -> Bool)
+  INTER({}, hahn_pos_set((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real))) == {}
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, signed_measure(p, mu) \226\134\146 signed_measure(p, jordan_pos(p, mu))
+  (j : Num)
+  (i : Num)
+  (n : Num) => INTER((A : (Num, A) -> Bool)(n), (N : (A) -> Bool))
+  INTER(UNIONS({(A : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}), (N : (A) -> Bool)) == UNIONS({INTER(A((n : Num)), N) | IN(n, UNIV)})
+  IN((N : (A) -> Bool), prob_events((p : Prob_space[A])))
+  (N : (A) -> Bool) == DIFF(prob_carrier((p : Prob_space[A])), hahn_pos_set(p, (mu : ((A) -> Bool) -> Real)))
+  (A : (Num, A) -> Bool)
+  (mu : ((A) -> Bool) -> Real)({}) == real_of_num(0)
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, signed_measure(p, mu) \226\134\146 signed_measure(p, jordan_neg(p, mu))
+  prob((p : Prob_space[A]), (A : (A) -> Bool)) == real_of_num(0)
+  prob((p : Prob_space[A]), INTER((A : (A) -> Bool), hahn_pos_set(p, (mu : ((A) -> Bool) -> Real)))) <= prob(p, A)
+  real_of_num(0) <= prob((p : Prob_space[A]), INTER((A : (A) -> Bool), hahn_pos_set(p, (mu : ((A) -> Bool) -> Real))))
+  IN(INTER((A : (A) -> Bool), hahn_pos_set((p : Prob_space[A]), (mu : ((A) -> Bool) -> Real))), prob_events(p))
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, absolutely_continuous(p, mu) \226\134\146 absolutely_continuous(p, jordan_pos(p, mu))
+  prob((p : Prob_space[A]), (A : (A) -> Bool)) == real_of_num(0)
+  prob((p : Prob_space[A]), INTER((A : (A) -> Bool), DIFF(prob_carrier(p), hahn_pos_set(p, (mu : ((A) -> Bool) -> Real))))) <= prob(p, A)
+  real_of_num(0) <= prob((p : Prob_space[A]), INTER((A : (A) -> Bool), DIFF(prob_carrier(p), hahn_pos_set(p, (mu : ((A) -> Bool) -> Real)))))
+  IN(INTER((A : (A) -> Bool), DIFF(prob_carrier((p : Prob_space[A])), hahn_pos_set(p, (mu : ((A) -> Bool) -> Real)))), prob_events(p))
+  (-(x : Real) == real_of_num(0)) == (x == real_of_num(0))
+  \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, absolutely_continuous(p, mu) \226\134\146 absolutely_continuous(p, jordan_neg(p, mu))
 sigma_algebra =  |- (#forall:fun(fun(fun(fun('A,bool),bool),bool),bool) (\f:fun(fun('A,bool),bool). ((#=:fun(bool,fun(bool,bool)) (#sigma_algebra:fun(fun(fun('A,bool),bool),bool) f:fun(fun('A,bool),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) f:fun(fun('A,bool),bool))) f:fun(fun('A,bool),bool))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('A,bool),bool),bool) (\a:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) a:fun('A,bool)) f:fun(fun('A,bool),bool))) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) ((#DIFF:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) f:fun(fun('A,bool),bool))) a:fun('A,bool))) f:fun(fun('A,bool),bool)))))) (#forall:fun(fun(fun(fun('A,bool),bool),bool),bool) (\s:fun(fun('A,bool),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(fun('A,bool),bool),fun(fun(fun('A,bool),bool),bool)) s:fun(fun('A,bool),bool)) f:fun(fun('A,bool),bool))) (#COUNTABLE:fun(fun(fun('A,bool),bool),bool) s:fun(fun('A,bool),bool)))) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) s:fun(fun('A,bool),bool))) f:fun(fun('A,bool),bool))))))))))
 SIGMA_ALGEBRA_SUBSET =  |- (#forall:fun(fun(fun(fun('A,bool),bool),bool),bool) (\f:fun(fun('A,bool),bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\a:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) a:fun('A,bool)) f:fun(fun('A,bool),bool))) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) a:fun('A,bool)) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) f:fun(fun('A,bool),bool))))))))
 SIGMA_ALGEBRA_CARRIER =  |- (#forall:fun(fun(fun(fun('A,bool),bool),bool),bool) (\f:fun(fun('A,bool),bool). ((#==>:fun(bool,fun(bool,bool)) (#sigma_algebra:fun(fun(fun('A,bool),bool),bool) f:fun(fun('A,bool),bool))) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) f:fun(fun('A,bool),bool))) f:fun(fun('A,bool),bool)))))
