@@ -49766,7 +49766,7 @@ test "Examples/sylvester_gallai matches Examples/sylvester_gallai.ml" {
       #|  (c : Real)
       #|  (c : Cart[Real, Tybit0[Unit]])
       #|  (q : Cart[Real, Tybit0[Unit]])
-      #|  \226\136\128 p : Cart[Real, Tybit0[Unit]], \226\136\128 q : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], between(b, (q, c)) && !IN(p, hull(affine, {q, c})) && orthogonal(p - q, c - q) && !(c == b) && !(c == q) \226\134\146 !IN(b, hull(affine, {p, c})) && (\226\136\131 x : Cart[Real, Tybit0[Unit]], IN(x, hull(affine, {p, c})) && dist((b, x)) < dist((p, q)))
+      #|  \226\136\128 p : Cart[Real, Tybit0[Unit]], \226\136\128 q : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], between(b, (q, c)) && !IN(p, hull(affine, {q, c})) && orthogonal(p - q, c - q) && !(c == b) && !(c == q) \226\134\146 !IN(b, hull(affine, {p, c})) && (\226\136\131 x : Cart[Real, Tybit0[Unit]], IN(x, hull(affine, {p, c})) && distance((b, x)) < distance((p, q)))
       #|  abs((v : Real)) == real_of_num(0)
       #|  (v : Cart[Real, N])
       #|  (u : Cart[Real, N])
@@ -49781,7 +49781,7 @@ test "Examples/sylvester_gallai matches Examples/sylvester_gallai.ml" {
       #|  (real_of_num(0) < (x : Real)) == (real_of_num(0) <= x && !(x == real_of_num(0)))
       #|  (b : Cart[Real, Tybit0[Unit]])
       #|  hull(affine, {(p : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
-      #|  dist((closest_point(hull(affine, {(p : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}), (b : Cart[Real, Tybit0[Unit]])), b))
+      #|  distance((closest_point(hull(affine, {(p : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}), (b : Cart[Real, Tybit0[Unit]])), b))
       #|  (r : Cart[Real, Tybit0[Unit]])
       #|  (p : Cart[Real, Tybit0[Unit]])
       #|  (p : Cart[Real, Tybit0[Unit]])
@@ -49819,7 +49819,7 @@ test "Examples/sylvester_gallai matches Examples/sylvester_gallai.ml" {
       #|  ({(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)} == {}) == (\226\136\128 x : _, IN(x, s) \226\134\146 !P(x))
       #|  ((p : Bool) \226\134\146 (r : Bool)) && ((q : Bool) \226\134\146 r) \226\134\146 (!p \226\134\146 q) \226\134\146 r
       #|  ({(f : (_, _) -> _)((x : _), (y : _)) | IN(x, (s : (_) -> Bool)) && IN(y, (t : (_, _) -> Bool)(x))} == {}) == (s == {} || (\226\136\128 x : _, IN(x, s) \226\134\146 t(x) == {}))
-      #|  {dist((closest_point((l : (Cart[Real, Tybit0[Unit]]) -> Bool), (p : Cart[Real, Tybit0[Unit]])), p)) | IN(l, (L : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)) && IN(p, {(p : Cart[Real, Tybit0[Unit]]) | IN(p, (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) && real_of_num(0) < dist((closest_point(l, p), p))})}
+      #|  {distance((closest_point((l : (Cart[Real, Tybit0[Unit]]) -> Bool), (p : Cart[Real, Tybit0[Unit]])), p)) | IN(l, (L : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)) && IN(p, {(p : Cart[Real, Tybit0[Unit]]) | IN(p, (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) && real_of_num(0) < distance((closest_point(l, p), p))})}
       #|  (L : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool) == {}
       #|  (L : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool) == {}
       #|  {(f : (_, _) -> _)((x : _), (y : _)) | IN(x, (s : (_) -> Bool)) && IN(y, s) && (P : (_, _) -> Bool)(x, y)} == {f((x : _), (y : _)) | IN(x, s) && IN(y, {(y : _) | IN(y, s) && P(x, y)})}
