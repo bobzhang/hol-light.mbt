@@ -6893,152 +6893,152 @@ Warning: inventing type variables
 0..0..1..8..solved at 12
 0..0..1..solved at 4
 Rqe/inferpsign_thms quotations (146):
-  a pow n * p x = &0
-  &0 < a pow n
-  a pow n * p x > &0
-  &0 < a pow n
-  a pow n * p x < &0
-  &0 < a pow n
-  forall set p q c d a n.\n     (forall x. a pow n * p x = c x * q x + d x) ==>\n     a <> &0 ==>\n     EVEN n ==>\n       ((interpsign set q Zero) ==>\n        (interpsign set d Neg)  ==>\n         (interpsign set p Neg)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set d Pos)  ==>\n         (interpsign set p Pos)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set d Zero)  ==>\n         (interpsign set p Zero))
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  a pow n * p x = &0
-  a pow n * p x > &0
-  a pow n * p x < &0
-  a pow n > &0
-  forall set p q c d a n.\n     (forall x. a pow n * p x = c x * q x + d x) ==>\n     a > &0 ==>\n       ((interpsign set q Zero) ==>\n        (interpsign set d Neg)  ==>\n         (interpsign set p Neg)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set d Pos)  ==>\n         (interpsign set p Pos)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set d Zero)  ==>\n         (interpsign set p Zero))
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  a pow n * p x = &0
-  a pow n * p x < &0
-  a pow n * p x > &0
-  a pow n < &0
-  forall set p q c d a n.\n     (forall x. a pow n * p x = c x * q x + d x) ==>\n     a < &0 ==>\n     ODD n ==>\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. -- d x) Neg)  ==>\n         (interpsign set p Neg)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. -- d x) Pos)  ==>\n         (interpsign set p Pos)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. -- d x) Zero)  ==>\n         (interpsign set p Zero))
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  a pow n * p x = &0
-  d x = &0
-  a pow n * p x > &0
-  a pow n * p x < &0
-  d x > &0
-  a pow n * p x < &0
-  a pow n * p x < &0
-  d x < &0
-  a pow n > &0
-  a pow n * p x = &0
-  d x = &0
-  a pow n * p x < &0
-  a pow n * p x < &0
-  d x < &0
-  &0 < a pow n * p x
-  d x > &0
-  a pow n < &0
-  a < &0 \\/ a > &0 \\/ (a = &0)
-  forall set p q c d a n.\n     (forall x. a pow n * p x = c x * q x + d x) ==>\n     a <> &0 ==>\n     ODD n ==>\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. a * d x) Neg)  ==>\n         (interpsign set p Neg)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. a * d x) Pos)  ==>\n         (interpsign set p Pos)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. a * d x) Zero)  ==>\n         (interpsign set p Zero))
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  x:real
-  forall a q d d' set.\n     a < &0 ==>\n       ((interpsign set d Neg)  ==>\n        (interpsign set (\\x. a * d x) Pos)) /\\\n       ((interpsign set d Pos)  ==>\n         (interpsign set (\\x. a * d x) Neg)) /\\\n       ((interpsign set d Zero)  ==>\n         (interpsign set (\\x. a * d x) Zero))
-  forall a q d d' set.\n     a > &0 ==>\n       ((interpsign set d Neg)  ==>\n         (interpsign set (\\x. a * d x) Neg)) /\\\n       ((interpsign set d Pos)  ==>\n         (interpsign set (\\x. a * d x) Pos)) /\\\n       ((interpsign set d Zero)  ==>\n         (interpsign set (\\x. a * d x) Zero))
-  forall set p. (interpsign set p Unknown)
-  forall x. x > &0 ==> x <> &0
-  forall x. x < &0 ==> x <> &0
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) == real_of_num(0)
+  real_of_num(0) < pow((a : Real), (n : Num))
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) > real_of_num(0)
+  real_of_num(0) < pow((a : Real), (n : Num))
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) < real_of_num(0)
+  real_of_num(0) < pow((a : Real), (n : Num))
+  \226\136\128 set : (Real) -> Bool, \226\136\128 p : (Real) -> Real, \226\136\128 q : (Real) -> Real, \226\136\128 c : (Real) -> Real, \226\136\128 d : (Real) -> Real, \226\136\128 a : Real, \226\136\128 n : Num, (\226\136\128 x : Real, pow(a, n) * p(x) == c(x) * q(x) + d(x)) \226\134\146 op_lt_gt(a, real_of_num(0)) \226\134\146 EVEN(n) \226\134\146 (interpsign(set, q, Zero) \226\134\146 interpsign(set, d, Neg) \226\134\146 interpsign(set, p, Neg)) && (interpsign(set, q, Zero) \226\134\146 interpsign(set, d, Pos) \226\134\146 interpsign(set, p, Pos)) && (interpsign(set, q, Zero) \226\134\146 interpsign(set, d, Zero) \226\134\146 interpsign(set, p, Zero))
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) == real_of_num(0)
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) > real_of_num(0)
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) < real_of_num(0)
+  pow((a : Real), (n : Num)) > real_of_num(0)
+  \226\136\128 set : (Real) -> Bool, \226\136\128 p : (Real) -> Real, \226\136\128 q : (Real) -> Real, \226\136\128 c : (Real) -> Real, \226\136\128 d : (Real) -> Real, \226\136\128 a : Real, \226\136\128 n : Num, (\226\136\128 x : Real, pow(a, n) * p(x) == c(x) * q(x) + d(x)) \226\134\146 a > real_of_num(0) \226\134\146 (interpsign(set, q, Zero) \226\134\146 interpsign(set, d, Neg) \226\134\146 interpsign(set, p, Neg)) && (interpsign(set, q, Zero) \226\134\146 interpsign(set, d, Pos) \226\134\146 interpsign(set, p, Pos)) && (interpsign(set, q, Zero) \226\134\146 interpsign(set, d, Zero) \226\134\146 interpsign(set, p, Zero))
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) == real_of_num(0)
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) < real_of_num(0)
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) > real_of_num(0)
+  pow((a : Real), (n : Num)) < real_of_num(0)
+  \226\136\128 set : (Real) -> Bool, \226\136\128 p : (Real) -> Real, \226\136\128 q : (Real) -> Real, \226\136\128 c : (Real) -> Real, \226\136\128 d : (Real) -> Real, \226\136\128 a : Real, \226\136\128 n : Num, (\226\136\128 x : Real, pow(a, n) * p(x) == c(x) * q(x) + d(x)) \226\134\146 a < real_of_num(0) \226\134\146 ODD(n) \226\134\146 (interpsign(set, q, Zero) \226\134\146 interpsign(set, (x : Real) => -d(x), Neg) \226\134\146 interpsign(set, p, Neg)) && (interpsign(set, q, Zero) \226\134\146 interpsign(set, (x : Real) => -d(x), Pos) \226\134\146 interpsign(set, p, Pos)) && (interpsign(set, q, Zero) \226\134\146 interpsign(set, (x : Real) => -d(x), Zero) \226\134\146 interpsign(set, p, Zero))
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) == real_of_num(0)
+  (d : (_) -> Real)((x : _)) == real_of_num(0)
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) > real_of_num(0)
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) < real_of_num(0)
+  (d : (_) -> Real)((x : _)) > real_of_num(0)
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) < real_of_num(0)
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) < real_of_num(0)
+  (d : (_) -> Real)((x : _)) < real_of_num(0)
+  pow((a : Real), (n : Num)) > real_of_num(0)
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) == real_of_num(0)
+  (d : (_) -> Real)((x : _)) == real_of_num(0)
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) < real_of_num(0)
+  pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _)) < real_of_num(0)
+  (d : (_) -> Real)((x : _)) < real_of_num(0)
+  real_of_num(0) < pow((a : Real), (n : Num)) * (p : (_) -> Real)((x : _))
+  (d : (_) -> Real)((x : _)) > real_of_num(0)
+  pow((a : Real), (n : Num)) < real_of_num(0)
+  (a : Real) < real_of_num(0) || a > real_of_num(0) || a == real_of_num(0)
+  \226\136\128 set : (Real) -> Bool, \226\136\128 p : (Real) -> Real, \226\136\128 q : (Real) -> Real, \226\136\128 c : (Real) -> Real, \226\136\128 d : (Real) -> Real, \226\136\128 a : Real, \226\136\128 n : Num, (\226\136\128 x : Real, pow(a, n) * p(x) == c(x) * q(x) + d(x)) \226\134\146 op_lt_gt(a, real_of_num(0)) \226\134\146 ODD(n) \226\134\146 (interpsign(set, q, Zero) \226\134\146 interpsign(set, (x : Real) => a * d(x), Neg) \226\134\146 interpsign(set, p, Neg)) && (interpsign(set, q, Zero) \226\134\146 interpsign(set, (x : Real) => a * d(x), Pos) \226\134\146 interpsign(set, p, Pos)) && (interpsign(set, q, Zero) \226\134\146 interpsign(set, (x : Real) => a * d(x), Zero) \226\134\146 interpsign(set, p, Zero))
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  \226\136\128 a : Real, \226\136\128 q : _, \226\136\128 d : (Real) -> Real, \226\136\128 d' : _, \226\136\128 set : (Real) -> Bool, a < real_of_num(0) \226\134\146 (interpsign(set, d, Neg) \226\134\146 interpsign(set, (x : Real) => a * d(x), Pos)) && (interpsign(set, d, Pos) \226\134\146 interpsign(set, (x : Real) => a * d(x), Neg)) && (interpsign(set, d, Zero) \226\134\146 interpsign(set, (x : Real) => a * d(x), Zero))
+  \226\136\128 a : Real, \226\136\128 q : _, \226\136\128 d : (Real) -> Real, \226\136\128 d' : _, \226\136\128 set : (Real) -> Bool, a > real_of_num(0) \226\134\146 (interpsign(set, d, Neg) \226\134\146 interpsign(set, (x : Real) => a * d(x), Neg)) && (interpsign(set, d, Pos) \226\134\146 interpsign(set, (x : Real) => a * d(x), Pos)) && (interpsign(set, d, Zero) \226\134\146 interpsign(set, (x : Real) => a * d(x), Zero))
+  \226\136\128 set : (Real) -> Bool, \226\136\128 p : (Real) -> Real, interpsign(set, p, Unknown)
+  \226\136\128 x : Real, x > real_of_num(0) \226\134\146 op_lt_gt(x, real_of_num(0))
+  \226\136\128 x : Real, x < real_of_num(0) \226\134\146 op_lt_gt(x, real_of_num(0))
 EVEN_DIV_LEM =  |- (#forall:fun(fun(fun(real,bool),bool),bool) (\set:fun(real,bool). (#forall:fun(fun(fun(real,real),bool),bool) (\p:fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\q:fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\c:fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\d:fun(real,real). (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) a:real) n:num)) (p:fun(real,real) x:real))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (c:fun(real,real) x:real)) (q:fun(real,real) x:real))) (d:fun(real,real) x:real)))))) ((#==>:fun(bool,fun(bool,bool)) ((#<>:fun(real,fun(real,bool)) a:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#==>:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) q:fun(real,real)) #Zero:sign)) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) d:fun(real,real)) #Neg:sign)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) p:fun(real,real)) #Neg:sign)))) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) q:fun(real,real)) #Zero:sign)) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) d:fun(real,real)) #Pos:sign)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) p:fun(real,real)) #Pos:sign)))) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) q:fun(real,real)) #Zero:sign)) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) d:fun(real,real)) #Zero:sign)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) p:fun(real,real)) #Zero:sign))))))))))))))))))))))
 GT_DIV_LEM =  |- (#forall:fun(fun(fun(real,bool),bool),bool) (\set:fun(real,bool). (#forall:fun(fun(fun(real,real),bool),bool) (\p:fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\q:fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\c:fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\d:fun(real,real). (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) a:real) n:num)) (p:fun(real,real) x:real))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (c:fun(real,real) x:real)) (q:fun(real,real) x:real))) (d:fun(real,real) x:real)))))) ((#==>:fun(bool,fun(bool,bool)) ((#real_gt:fun(real,fun(real,bool)) a:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) q:fun(real,real)) #Zero:sign)) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) d:fun(real,real)) #Neg:sign)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) p:fun(real,real)) #Neg:sign)))) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) q:fun(real,real)) #Zero:sign)) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) d:fun(real,real)) #Pos:sign)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) p:fun(real,real)) #Pos:sign)))) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) q:fun(real,real)) #Zero:sign)) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) d:fun(real,real)) #Zero:sign)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) p:fun(real,real)) #Zero:sign)))))))))))))))))))))
 NEG_ODD_LEM =  |- (#forall:fun(fun(fun(real,bool),bool),bool) (\set:fun(real,bool). (#forall:fun(fun(fun(real,real),bool),bool) (\p:fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\q:fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\c:fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\d:fun(real,real). (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) a:real) n:num)) (p:fun(real,real) x:real))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (c:fun(real,real) x:real)) (q:fun(real,real) x:real))) (d:fun(real,real) x:real)))))) ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) a:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#==>:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) n:num)) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) q:fun(real,real)) #Zero:sign)) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) (\x:real. (#real_neg:fun(real,real) (d:fun(real,real) x:real)))) #Neg:sign)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) p:fun(real,real)) #Neg:sign)))) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) q:fun(real,real)) #Zero:sign)) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) (\x:real. (#real_neg:fun(real,real) (d:fun(real,real) x:real)))) #Pos:sign)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) p:fun(real,real)) #Pos:sign)))) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) q:fun(real,real)) #Zero:sign)) ((#==>:fun(bool,fun(bool,bool)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) (\x:real. (#real_neg:fun(real,real) (d:fun(real,real) x:real)))) #Zero:sign)) (((#interpsign:fun(fun(real,bool),fun(fun(real,real),fun(sign,bool))) set:fun(real,bool)) p:fun(real,real)) #Zero:sign))))))))))))))))))))))
