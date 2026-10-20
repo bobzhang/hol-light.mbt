@@ -46,7 +46,7 @@ pub fn my_rule_num(x : @kernel.Thm) -> @kernel.Thm raise {
 /// HD_A_CONS
 fn step_3() -> Unit raise {
   let t8 = @simp.rewrite_tac(@list.List([@lists.hd()]))
-  hd_a_cons_c.set(@tactics.prove(@parser.parse_term("HD (CONS (h:A) t) = h"), t8))
+  hd_a_cons_c.set(@tactics.prove(@term_syntax.parse_term("HD(CONS((h : A), (t : List[A]))) == h"), t8))
 }
 
 ///|
@@ -92,7 +92,7 @@ pub fn hd_conv(x13 : @kernel.Term) -> @kernel.Thm raise {
 /// EL_0'
 fn step_4() -> Unit raise {
   let t17 = @simp.rewrite_tac(@list.List([@lists.el(), @lists.hd()]))
-  let t18 = (@parser.parse_term("EL 0 (CONS (h:A) t) = h"), t17)
+  let t18 = (@term_syntax.parse_term("EL(0, CONS((h : A), (t : List[A]))) == h"), t17)
   el_0_p_c.set(my_rule_num((fn(x16 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x16.0, x16.1)
   })(t18)))
@@ -117,13 +117,13 @@ fn step_5() -> Unit raise {
       s24(x25)
     }
   })), @int.arith_tac), @tactics.all_tac])
-  let t28 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.strip_tac, @tactics.subgoal_then(@parser.parse_term("n = SUC m"), fn(x20 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t28 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.strip_tac, @tactics.subgoal_then(@term_syntax.parse_term("(n : Num) == SUC((m : Num))"), fn(x20 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s21 = @tactics.assume_tac(x20)
     fn(x22 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s21(x22)
     }
   })), t26), t27)
-  let t29 = (@parser.parse_term("0 < n /\\ PRE n = m ==> EL n (CONS (h:A) t) = EL m t"), t28)
+  let t29 = (@term_syntax.parse_term("0 < (n : Num) && PRE(n) == (m : Num) → EL(n, CONS((h : A), (t : List[A]))) == EL(m, t)"), t28)
   el_n_p_c.set(my_rule_num((fn(x19 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x19.0, x19.1)
   })(t29)))
@@ -199,8 +199,8 @@ pub fn el_conv(x47 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// FST'
 fn step_6() -> Unit raise {
-  let t49 = @parser.parse_term("y:B")
-  fst_p_c.set(@bool.ispecl(@list.List([@parser.parse_term("x:A"), t49]), @pair.fst()))
+  let t49 = @term_syntax.parse_term("(y : B)")
+  fst_p_c.set(@bool.ispecl(@list.List([@term_syntax.parse_term("(x : A)"), t49]), @pair.fst()))
 }
 
 ///|
@@ -215,8 +215,8 @@ pub fn fst_p() -> @kernel.Thm {
 ///|
 /// SND'
 fn step_7() -> Unit raise {
-  let t50 = @parser.parse_term("y:B")
-  snd_p_c.set(@bool.ispecl(@list.List([@parser.parse_term("x:A"), t50]), @pair.snd()))
+  let t50 = @term_syntax.parse_term("(y : B)")
+  snd_p_c.set(@bool.ispecl(@list.List([@term_syntax.parse_term("(x : A)"), t50]), @pair.snd()))
 }
 
 ///|
@@ -260,7 +260,7 @@ pub fn snd_conv(x57 : @kernel.Term) -> @kernel.Thm raise {
 /// LENGTH_0'
 fn step_8() -> Unit raise {
   let t64 = @simp.rewrite_tac(@list.List([@lists.length()]))
-  let t65 = (@parser.parse_term("LENGTH ([]:(A)list) = 0"), t64)
+  let t65 = (@term_syntax.parse_term("(LENGTH : (List[A]) -> Num)((NIL : List[A])) == 0"), t64)
   length_0_p_c.set(my_rule_num((fn(x63 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x63.0, x63.1)
   })(t65)))
@@ -279,7 +279,7 @@ pub fn length_0_p() -> @kernel.Thm {
 /// LENGTH_CONS'
 fn step_9() -> Unit raise {
   let t66 = @simp.rewrite_tac(@list.List([@lists.length()]))
-  length_cons_p_c.set(@tactics.prove(@parser.parse_term("LENGTH (CONS (h:A) t) = SUC (LENGTH t)"), t66))
+  length_cons_p_c.set(@tactics.prove(@term_syntax.parse_term("LENGTH(CONS((h : A), (t : List[A]))) == SUC(LENGTH(t))"), t66))
 }
 
 ///|
@@ -344,7 +344,7 @@ pub fn length_conv(x75 : @kernel.Term) -> @kernel.Thm raise {
 /// ZIP_0'
 fn step_10() -> Unit raise {
   let t78 = @simp.rewrite_tac(@list.List([@lists.zip()]))
-  zip_0_p_c.set(@tactics.prove(@parser.parse_term("ZIP ([]:(A)list) ([]:(B)list) = []"), t78))
+  zip_0_p_c.set(@tactics.prove(@term_syntax.parse_term("(ZIP : (List[A], List[B]) -> List[(A, B)])((NIL : List[A]), (NIL : List[B])) == (NIL : List[(A, B)])"), t78))
 }
 
 ///|
@@ -360,7 +360,7 @@ pub fn zip_0_p() -> @kernel.Thm {
 /// ZIP_CONS'
 fn step_11() -> Unit raise {
   let t79 = @simp.rewrite_tac(@list.List([@lists.zip()]))
-  zip_cons_p_c.set(@tactics.prove(@parser.parse_term("ZIP (CONS (h1:A) t1) (CONS (h2:B) t2) = CONS (h1, h2) (ZIP t1 t2)"), t79))
+  zip_cons_p_c.set(@tactics.prove(@term_syntax.parse_term("ZIP(CONS((h1 : A), (t1 : List[A])), CONS((h2 : B), (t2 : List[B]))) == CONS((h1, h2), ZIP(t1, t2))"), t79))
 }
 
 ///|
@@ -426,7 +426,7 @@ pub fn eval_zip(x80 : @kernel.Term, x81 : @kernel.Term) -> @kernel.Thm raise {
 /// ALL_0'
 fn step_12() -> Unit raise {
   let t96 = @simp.rewrite_tac(@list.List([@lists.all()]))
-  all_0_p_c.set(@tactics.prove(@parser.parse_term("ALL P ([]:(A)list) <=> T"), t96))
+  all_0_p_c.set(@tactics.prove(@term_syntax.parse_term("ALL((P : (A) -> Bool), NIL) == true"), t96))
 }
 
 ///|
@@ -442,7 +442,7 @@ pub fn all_0_p() -> @kernel.Thm {
 /// ALL_CONS_T'
 fn step_13() -> Unit raise {
   let t98 = @simp.rewrite_tac(@list.List([@lists.all()]))
-  let t99 = (@parser.parse_term("(P h <=> T) /\\ (ALL P t <=> T) ==> (ALL P (CONS (h:A) t) <=> T)"), t98)
+  let t99 = (@term_syntax.parse_term("(P : (A) -> Bool)((h : A)) == true && ALL(P, (t : List[A])) == true → ALL(P, CONS(h, t)) == true"), t98)
   all_cons_t_p_c.set(my_rule((fn(x97 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x97.0, x97.1)
   })(t99)))
@@ -461,7 +461,7 @@ pub fn all_cons_t_p() -> @kernel.Thm {
 /// ALL_CONS_F2'
 fn step_14() -> Unit raise {
   let t101 = @simp.simp_tac(@list.List([@lists.all()]))
-  let t102 = (@parser.parse_term("(ALL P t <=> F) ==> (ALL P (CONS (h:A) t) <=> F)"), t101)
+  let t102 = (@term_syntax.parse_term("ALL((P : (A) -> Bool), (t : List[A])) == false → ALL(P, CONS((h : A), t)) == false"), t101)
   all_cons_f2_p_c.set(my_rule((fn(x100 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x100.0, x100.1)
   })(t102)))
@@ -480,7 +480,7 @@ pub fn all_cons_f2_p() -> @kernel.Thm {
 /// ALL_CONS_F1'
 fn step_15() -> Unit raise {
   let t104 = @simp.simp_tac(@list.List([@lists.all()]))
-  let t105 = (@parser.parse_term("(P h <=> F) ==> (ALL P (CONS (h:A) t) <=> F)"), t104)
+  let t105 = (@term_syntax.parse_term("(P : (A) -> Bool)((h : A)) == false → ALL(P, CONS(h, (t : List[A]))) == false"), t104)
   all_cons_f1_p_c.set(my_rule((fn(x103 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x103.0, x103.1)
   })(t105)))
@@ -553,7 +553,7 @@ pub fn all_conv_univ(x106 : (@kernel.Term) -> @kernel.Thm raise, x107 : @kernel.
 /// ALL2_0'
 fn step_16() -> Unit raise {
   let t125 = @simp.rewrite_tac(@list.List([@lists.all2()]))
-  all2_0_p_c.set(@tactics.prove(@parser.parse_term("ALL2 P ([]:(A)list) ([]:(B)list) <=> T"), t125))
+  all2_0_p_c.set(@tactics.prove(@term_syntax.parse_term("ALL2((P : (A, B) -> Bool), NIL, NIL) == true"), t125))
 }
 
 ///|
@@ -569,7 +569,7 @@ pub fn all2_0_p() -> @kernel.Thm {
 /// ALL2_CONS_T'
 fn step_17() -> Unit raise {
   let t127 = @simp.rewrite_tac(@list.List([@lists.all2()]))
-  let t128 = (@parser.parse_term("(P h1 h2 <=> T) /\\ (ALL2 P t1 t2 <=> T) ==> \n\t\t\t\t       (ALL2 P (CONS (h1:A) t1) (CONS (h2:B) t2) <=> T)"), t127)
+  let t128 = (@term_syntax.parse_term("(P : (A, B) -> Bool)((h1 : A), (h2 : B)) == true && ALL2(P, (t1 : List[A]), (t2 : List[B])) == true → ALL2(P, CONS(h1, t1), CONS(h2, t2)) == true"), t127)
   all2_cons_t_p_c.set(my_rule((fn(x126 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x126.0, x126.1)
   })(t128)))
@@ -588,7 +588,7 @@ pub fn all2_cons_t_p() -> @kernel.Thm {
 /// ALL2_CONS_F2'
 fn step_18() -> Unit raise {
   let t130 = @simp.simp_tac(@list.List([@lists.all2()]))
-  let t131 = (@parser.parse_term("(ALL2 P t1 t2 <=> F) ==> \n\t\t\t\t\t(ALL2 P (CONS (h1:A) t1) (CONS (h2:B) t2) <=> F)"), t130)
+  let t131 = (@term_syntax.parse_term("ALL2((P : (A, B) -> Bool), (t1 : List[A]), (t2 : List[B])) == false → ALL2(P, CONS((h1 : A), t1), CONS((h2 : B), t2)) == false"), t130)
   all2_cons_f2_p_c.set(my_rule((fn(x129 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x129.0, x129.1)
   })(t131)))
@@ -607,7 +607,7 @@ pub fn all2_cons_f2_p() -> @kernel.Thm {
 /// ALL2_CONS_F1'
 fn step_19() -> Unit raise {
   let t133 = @simp.simp_tac(@list.List([@lists.all2()]))
-  let t134 = (@parser.parse_term("(P h1 h2 <=> F) ==> \n\t\t\t\t\t(ALL2 P (CONS (h1:A) t1) (CONS (h2:B) t2) <=> F)"), t133)
+  let t134 = (@term_syntax.parse_term("(P : (A, B) -> Bool)((h1 : A), (h2 : B)) == false → ALL2(P, CONS(h1, (t1 : List[A])), CONS(h2, (t2 : List[B]))) == false"), t133)
   all2_cons_f1_p_c.set(my_rule((fn(x132 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x132.0, x132.1)
   })(t134)))
@@ -696,7 +696,7 @@ pub fn all2_conv_univ(x135 : (@kernel.Term) -> @kernel.Thm raise, x136 : @kernel
 /// MEM_A_EMPTY
 fn step_20() -> Unit raise {
   let t159 = @simp.rewrite_tac(@list.List([@lists.mem()]))
-  mem_a_empty_c.set(@tactics.prove(@parser.parse_term("MEM (x:A) [] <=> F"), t159))
+  mem_a_empty_c.set(@tactics.prove(@term_syntax.parse_term("MEM((x : A), NIL) == false"), t159))
 }
 
 ///|
@@ -712,7 +712,7 @@ pub fn mem_a_empty() -> @kernel.Thm {
 /// MEM_A_HD
 fn step_21() -> Unit raise {
   let t160 = @simp.simp_tac(@list.List([@lists.mem()]))
-  mem_a_hd_c.set(my_rule(@tactics.prove(@parser.parse_term("(x = h <=> T) ==> (MEM (x:A) (CONS h t) <=> T)"), t160)))
+  mem_a_hd_c.set(my_rule(@tactics.prove(@term_syntax.parse_term("((x : A) == (h : A)) == true → MEM(x, CONS(h, (t : List[A]))) == true"), t160)))
 }
 
 ///|
@@ -728,7 +728,7 @@ pub fn mem_a_hd() -> @kernel.Thm {
 /// MEM_A_TL
 fn step_22() -> Unit raise {
   let t161 = @simp.simp_tac(@list.List([@lists.mem()]))
-  mem_a_tl_c.set(my_rule(@tactics.prove(@parser.parse_term("(x = h <=> F) ==> (MEM (x:A) (CONS h t) <=> MEM x t)"), t161)))
+  mem_a_tl_c.set(my_rule(@tactics.prove(@term_syntax.parse_term("((x : A) == (h : A)) == false → MEM(x, CONS(h, (t : List[A]))) == MEM(x, t)"), t161)))
 }
 
 ///|
@@ -798,7 +798,7 @@ pub fn mem_conv_univ(x171 : (@kernel.Term) -> @kernel.Thm raise, x172 : @kernel.
 /// FILTER_A_EMPTY
 fn step_23() -> Unit raise {
   let t174 = @simp.rewrite_tac(@list.List([@lists.filter()]))
-  filter_a_empty_c.set(@tactics.prove(@parser.parse_term("FILTER (P:A->bool) [] = []"), t174))
+  filter_a_empty_c.set(@tactics.prove(@term_syntax.parse_term("FILTER((P : (A) -> Bool), NIL) == NIL"), t174))
 }
 
 ///|
@@ -814,7 +814,7 @@ pub fn filter_a_empty() -> @kernel.Thm {
 /// FILTER_A_HD
 fn step_24() -> Unit raise {
   let t176 = @simp.simp_tac(@list.List([@lists.filter()]))
-  let t177 = (@parser.parse_term("(P h <=> T) ==> FILTER (P:A->bool) (CONS h t) = CONS h (FILTER P t)"), t176)
+  let t177 = (@term_syntax.parse_term("(P : (A) -> Bool)((h : A)) == true → FILTER(P, CONS(h, (t : List[A]))) == CONS(h, FILTER(P, t))"), t176)
   filter_a_hd_c.set(my_rule((fn(x175 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x175.0, x175.1)
   })(t177)))
@@ -833,7 +833,7 @@ pub fn filter_a_hd() -> @kernel.Thm {
 /// FILTER_A_TL
 fn step_25() -> Unit raise {
   let t179 = @simp.simp_tac(@list.List([@lists.filter()]))
-  let t180 = (@parser.parse_term("(P h <=> F) ==> FILTER (P:A->bool) (CONS h t) = FILTER P t"), t179)
+  let t180 = (@term_syntax.parse_term("(P : (A) -> Bool)((h : A)) == false → FILTER(P, CONS(h, (t : List[A]))) == FILTER(P, t)"), t179)
   filter_a_tl_c.set(my_rule((fn(x178 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x178.0, x178.1)
   })(t180)))
@@ -899,7 +899,7 @@ pub fn filter_conv_univ(x181 : (@kernel.Term) -> @kernel.Thm raise, x182 : @kern
 /// MAP_AB_EMPTY
 fn step_26() -> Unit raise {
   let t190 = @simp.rewrite_tac(@list.List([@lists.map()]))
-  map_ab_empty_c.set(@tactics.prove(@parser.parse_term("MAP (f:A->B) [] = []"), t190))
+  map_ab_empty_c.set(@tactics.prove(@term_syntax.parse_term("MAP((f : (A) -> B), NIL) == NIL"), t190))
 }
 
 ///|
@@ -915,7 +915,7 @@ pub fn map_ab_empty() -> @kernel.Thm {
 /// MAP_AB_CONS
 fn step_27() -> Unit raise {
   let t191 = @simp.rewrite_tac(@list.List([@lists.map()]))
-  map_ab_cons_c.set(@tactics.prove(@parser.parse_term("MAP (f:A->B) (CONS h t) = CONS (f h) (MAP f t)"), t191))
+  map_ab_cons_c.set(@tactics.prove(@term_syntax.parse_term("MAP((f : (A) -> B), CONS((h : A), (t : List[A]))) == CONS(f(h), MAP(f, t))"), t191))
 }
 
 ///|
@@ -968,7 +968,7 @@ pub fn map_conv_univ(x192 : (@kernel.Term) -> @kernel.Thm raise, x193 : @kernel.
 /// ALL_A_HD
 fn step_28() -> Unit raise {
   let t200 = @simp.simp_tac(@list.List([@lists.all()]))
-  all_a_hd_c.set(@bool.undisch_all(@tactics.prove(@parser.parse_term("ALL (P:A->bool) (CONS h t) ==> P h"), t200)))
+  all_a_hd_c.set(@bool.undisch_all(@tactics.prove(@term_syntax.parse_term("ALL((P : (A) -> Bool), CONS((h : A), (t : List[A]))) → P(h)"), t200)))
 }
 
 ///|
@@ -984,7 +984,7 @@ pub fn all_a_hd() -> @kernel.Thm {
 /// ALL_A_TL
 fn step_29() -> Unit raise {
   let t201 = @simp.simp_tac(@list.List([@lists.all()]))
-  all_a_tl_c.set(@bool.undisch_all(@tactics.prove(@parser.parse_term("ALL (P:A->bool) (CONS h t) ==> ALL P t"), t201)))
+  all_a_tl_c.set(@bool.undisch_all(@tactics.prove(@term_syntax.parse_term("ALL((P : (A) -> Bool), CONS((h : A), (t : List[A]))) → ALL(P, t)"), t201)))
 }
 
 ///|
@@ -1088,7 +1088,7 @@ pub fn select_all(x213 : @kernel.Thm, x214 : @list.List[Int64]) -> @list.List[@k
 /// SET_OF_LIST_A_EMPTY
 fn step_30() -> Unit raise {
   let t227 = @simp.rewrite_tac(@list.List([@sets.set_of_list()]))
-  set_of_list_a_empty_c.set(@tactics.prove(@parser.parse_term("set_of_list ([]:(A)list) = {}"), t227))
+  set_of_list_a_empty_c.set(@tactics.prove(@term_syntax.parse_term("(set_of_list : (List[A], A) -> Bool)((NIL : List[A])) == ({} : (A) -> Bool)"), t227))
 }
 
 ///|
@@ -1104,7 +1104,7 @@ pub fn set_of_list_a_empty() -> @kernel.Thm {
 /// SET_OF_LIST_A_H
 fn step_31() -> Unit raise {
   let t228 = @simp.rewrite_tac(@list.List([@sets.set_of_list()]))
-  set_of_list_a_h_c.set(@tactics.prove(@parser.parse_term("set_of_list [h:A] = {h}"), t228))
+  set_of_list_a_h_c.set(@tactics.prove(@term_syntax.parse_term("set_of_list([(h : A)]) == {h}"), t228))
 }
 
 ///|
@@ -1120,7 +1120,7 @@ pub fn set_of_list_a_h() -> @kernel.Thm {
 /// SET_OF_LIST_A_CONS
 fn step_32() -> Unit raise {
   let t229 = @simp.rewrite_tac(@list.List([@sets.set_of_list()]))
-  set_of_list_a_cons_c.set(@tactics.prove(@parser.parse_term("set_of_list (CONS (h:A) t) = h INSERT set_of_list t"), t229))
+  set_of_list_a_cons_c.set(@tactics.prove(@term_syntax.parse_term("set_of_list(CONS((h : A), (t : List[A]))) == INSERT(h, set_of_list(t))"), t229))
 }
 
 ///|
