@@ -67536,16 +67536,16 @@ EC/projective quotations (801):
   forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_curve (f,a,b) p\n        ==> projective_curve (f,a,b) (projective_neg (f,a,b) p)
   forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p\n        ==> weierstrass_of_projective f (projective_neg (f,a,b) p) =\n            weierstrass_neg (f,a,b) (weierstrass_of_projective f p)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   forall(f:A ring) a b p p'.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p /\\ projective_point f p' /\\ projective_eq f p p'\n        ==> projective_eq f\n              (projective_neg (f,a,b) p) (projective_neg (f,a,b) p')
   forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> weierstrass_of_projective f\n             (projective_neg (f,a,b) (projective_of_weierstrass f p)) =\n            weierstrass_neg (f,a,b) p
   forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> projective_eq f\n             (projective_of_weierstrass f (weierstrass_neg (f,a,b) p))\n             (projective_neg (f,a,b) (projective_of_weierstrass f p))
@@ -67564,753 +67564,753 @@ EC/projective quotations (801):
   f:A ring
   forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p /\\ projective_point f q\n        ==> weierstrass_of_projective f (projective_add (f,a,b) p q) =\n            weierstrass_add (f,a,b)\n             (weierstrass_of_projective f p)\n             (weierstrass_of_projective f q)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   forall(f:A ring) a b p p' q q'.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p /\\ projective_point f p' /\\\n        projective_point f q /\\ projective_point f q' /\\\n        projective_eq f p p' /\\ projective_eq f q q'\n        ==> projective_eq f\n              (projective_add (f,a,b) p q) (projective_add (f,a,b) p' q')
   forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p /\\ weierstrass_point f q\n        ==> weierstrass_of_projective f\n             (projective_add (f,a,b)\n               (projective_of_weierstrass f p)\n               (projective_of_weierstrass f q)) =\n            weierstrass_add (f,a,b) p q
   forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p /\\ weierstrass_point f q\n        ==> projective_eq f\n             (projective_of_weierstrass f (weierstrass_add (f,a,b) p q))\n             (projective_add (f,a,b)\n               (projective_of_weierstrass f p)\n               (projective_of_weierstrass f q))
