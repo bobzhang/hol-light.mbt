@@ -8306,260 +8306,260 @@ test "Model/semantics matches Model/semantics.ml" {
       #|0..0..1..solved at 4
       #|0..0..1..solved at 4
       #|Model/semantics quotations (254):
-      #|  (typeset tau (Tyvar s) = tau(s)) /\\\n   (typeset tau Bool = boolset) /\\\n   (typeset tau Ind = indset) /\\\n   (typeset tau (Fun a b) = funspace (typeset tau a) (typeset tau b))
-      #|  (semantics sigma tau (Var n ty) = sigma(n,ty)) /\\\n   (semantics sigma tau (Equal ty) =\n        abstract (typeset tau ty) (typeset tau (Fun ty Bool))\n                 (\\x. abstract (typeset tau ty) (typeset tau Bool)\n                               (\\y. boolean(x = y)))) /\\\n   (semantics sigma tau (Select ty) =\n        abstract (typeset tau (Fun ty Bool)) (typeset tau ty)\n                 (\\s. if ?x. x <: ((typeset tau ty) suchthat (holds s))\n                      then ch ((typeset tau ty) suchthat (holds s))\n                      else ch (typeset tau ty))) /\\\n   (semantics sigma tau (Comb s t) =\n        apply (semantics sigma tau s) (semantics sigma tau t)) /\\\n   (semantics sigma tau (Abs n ty t) =\n        abstract (typeset tau ty) (typeset tau (typeof t))\n                 (\\x. semantics (((n,ty) |-> x) sigma) tau t))
-      #|  type_valuation tau <=> forall x. (?y. y <: tau x)
-      #|  term_valuation tau sigma <=> forall n ty. sigma(n,ty) <: typeset tau ty
-      #|  forall sigma taut n ty x.\n        term_valuation tau sigma /\\ x <: typeset tau ty\n        ==> term_valuation tau (((n,ty) |-> x) sigma)
-      #|  forall tau ty. type_valuation tau ==> ?x. x <: typeset tau ty
-      #|  forall tm ty. tm has_type ty\n           ==> tm has_type ty /\\\n               forall sigma tau. type_valuation tau /\\ term_valuation tau sigma\n                           ==> (semantics sigma tau tm) <: (typeset tau ty)
-      #|  forall sigma tau tm ty.\n        type_valuation tau /\\ term_valuation tau sigma /\\ tm has_type ty\n        ==> (semantics sigma tau tm) <: (typeset tau ty)
-      #|  forall sigma tau s t.\n        s has_type (typeof s) /\\ t has_type (typeof s) /\\\n        type_valuation tau /\\ term_valuation tau sigma\n        ==> (semantics sigma tau (s === t) =\n             boolean(semantics sigma tau s = semantics sigma tau t))
-      #|  welltyped(s === t)
-      #|  forall sigma tau s t.\n        (s === t) has_type Bool /\\\n        type_valuation tau /\\ term_valuation tau sigma\n        ==> (semantics sigma tau (s === t) =\n             boolean(semantics sigma tau s = semantics sigma tau t))
-      #|  p has_type (Fun ty Bool) /\\\n   type_valuation tau /\\ term_valuation tau sigma\n   ==> (semantics sigma tau (Comb (Select ty) p) =\n        if ?x. x <: (typeset tau ty) suchthat (holds (semantics sigma tau p))\n        then ch((typeset tau ty) suchthat (holds (semantics sigma tau p)))\n        else ch(typeset tau ty))
-      #|  asms |= p <=> ALL (\\a. a has_type Bool) (CONS p asms) /\\\n                 forall sigma tau. type_valuation tau /\\\n                             term_valuation tau sigma /\\\n                              ALL (\\a. semantics sigma tau a = True) asms\n                              ==> (semantics sigma tau p = True)
-      #|  x:V
-      #|  forall env tp.\n        RACONV env tp\n        ==> forall sigma1 sigma2 tau.\n                type_valuation tau /\\\n                term_valuation tau sigma1 /\\ term_valuation tau sigma2 /\\\n                (forall x1 ty1 x2 ty2.\n                        ALPHAVARS env (Var x1 ty1,Var x2 ty2)\n                        ==> (semantics sigma1 tau (Var x1 ty1) =\n                             semantics sigma2 tau (Var x2 ty2)))\n                ==> welltyped(FST tp) /\\ welltyped(SND tp)\n                    ==> (semantics sigma1 tau (FST tp) =\n                         semantics sigma2 tau (SND tp))
-      #|  []:(term#term)list
-      #|  forall sigma tau s t.\n        type_valuation tau /\\ term_valuation tau sigma /\\\n         welltyped s /\\ welltyped t /\\ ACONV s t\n        ==> (semantics sigma tau s = semantics sigma tau t)
-      #|  s:term
-      #|  s:term
-      #|  r:term
-      #|  asl2:term list
-      #|  asl1:term list
-      #|  ALL (\\a. semantics sigma tau a = True) (TERM_UNION asl1 asl2)
-      #|  (p1 has_type Bool /\\ p2 has_type Bool\n   ==> q has_type Bool /\\\n       forall sigma tau. type_valuation tau /\\ term_valuation tau sigma /\\\n                   (semantics sigma tau p1 = True) /\\\n                   (semantics sigma tau p2 = True)\n                  ==> (semantics sigma tau q = True))\n   ==> (asl1 |= p1 /\\ asl2 |= p2 ==> TERM_UNION asl1 asl2 |= q)
-      #|  r:term
-      #|  r:term
-      #|  ty:type
-      #|  x:string
-      #|  x:V
-      #|  forall tau sigma1 sigma2 t.\n        type_valuation tau /\\\n        term_valuation tau sigma1 /\\ term_valuation tau sigma2 /\\\n        welltyped t /\\\n        (forall x ty. VFREE_IN (Var x ty) t ==> (sigma1(x,ty) = sigma2(x,ty)))\n        ==> (semantics sigma1 tau t = semantics sigma2 tau t)
-      #|  forall p. p has_type Bool ==> [p] |= p
-      #|  forall t. welltyped t ==> [] |= t === t
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  forall asl1 asl2 l m1 m2 r.\n        asl1 |= l === m1 /\\ asl2 |= m2 === r /\\ ACONV m1 m2\n        ==> TERM_UNION asl1 asl2 |= l === r
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  forall asl1 l1 r1 asl2 l2 r2.\n        asl1 |= l1 === r1 /\\ asl2 |= l2 === r2 /\\\n        (?rty. typeof l1 = Fun (typeof l2) rty)\n        ==> TERM_UNION asl1 asl2 |= Comb l1 l2 === Comb r1 r2
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  forall asl1 asl2 p q p'.\n        asl1 |= p === q /\\ asl2 |= p' /\\ ACONV p p'\n        ==> TERM_UNION asl1 asl2 |= q
-      #|  semantics (((x,ty) |-> sigma(x,ty)) sigma) tau t
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  forall x ty t. welltyped t ==> [] |= Comb (Abs x ty t) (Var x ty) === t
-      #|  p:term
-      #|  ALL (\\a. a has_type Bool) asl /\\\n                ALL (\\a. ~(VFREE_IN (Var x ty) a)) asl /\\\n                ALL (\\a. semantics sigma tau a = True) asl
-      #|  x:V
-      #|  typeof r = typeof l
-      #|  (l === r) has_type Bool
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  forall asl x ty l r.\n        ~(EX (VFREE_IN (Var x ty)) asl) /\\ asl |= l === r\n        ==> asl |= (Abs x ty l) === (Abs x ty r)
-      #|  MEM a (FILTER (\\x. ~ACONV c2 x) asl1) \\/\n     MEM a (FILTER (\\x. ~ACONV c1 x) asl2)
-      #|  ACONV c2 a
-      #|  ACONV c1 a
-      #|  a:term
-      #|  \n    (a1 /\\ b1 ==> c1) /\\ (a1 /\\ b1 /\\ c1 ==> a2 /\\ b2 ==> c2)\n    ==> a1 /\\ a2 /\\ b1 /\\ b2 ==> c1 /\\ c2
-      #|  forall asl1 asl2 p q.\n        asl1 |= c1 /\\ asl2 |= c2\n        ==> let asl1' = FILTER((~) o ACONV c2) asl1\n            and asl2' = FILTER((~) o ACONV c1) asl2 in\n            (TERM_UNION asl1' asl2') |= c1 === c2
-      #|  DEST_VAR (Var x ty) = (x,ty)
-      #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  forall ilist sigma tau.\n    type_valuation tau /\\ term_valuation tau sigma /\\\n    (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n    ==> term_valuation tau\n         (ITLIST (\\(t,x). DEST_VAR x |-> semantics sigma tau t) ilist sigma)
-      #|  (s:string = x) /\\ (sty:type = ty)
-      #|  sty:type
-      #|  s:string
-      #|  ilist:(term#term)list
-      #|  pp:term
-      #|  t:term
-      #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
+      #|  (typeset : ((List[Char]) -> V, Type) -> V)((tau : (List[Char]) -> V), Tyvar((s : List[Char]))) == tau(s) && typeset(tau, Bool) == boolset && typeset(tau, Ind) == indset && typeset(tau, Fun((a : Type), (b : Type))) == funspace(typeset(tau, a), typeset(tau, b))
+      #|  (semantics : (((List[Char], Type)) -> V, (List[Char]) -> V, Term) -> V)((sigma : ((List[Char], Type)) -> V), (tau : (List[Char]) -> V), Var((n : List[Char]), (ty : Type))) == sigma((n, ty)) && semantics(sigma, tau, Equal(ty)) == op_abstract(typeset(tau, ty), typeset(tau, Fun(ty, Bool)), (x : V) => op_abstract(typeset(tau, ty), typeset(tau, Bool), (y : V) => boolean(x == y))) && semantics(sigma, tau, Select(ty)) == op_abstract(typeset(tau, Fun(ty, Bool)), typeset(tau, ty), (s : V) => if (\226\136\131 x : V, op_lt_colon(x, suchthat(typeset(tau, ty), holds(s)))) { ch(suchthat(typeset(tau, ty), holds(s))) } else { ch(typeset(tau, ty)) }) && semantics(sigma, tau, Comb((s : Term), (t : Term))) == apply(semantics(sigma, tau, s), semantics(sigma, tau, t)) && semantics(sigma, tau, Abs(n, ty, t)) == op_abstract(typeset(tau, ty), typeset(tau, op_typeof(t)), (x : V) => semantics(op_bar_minus_gt((n, ty), x, sigma), tau, t))
+      #|  (type_valuation : ((_) -> V) -> Bool)((tau : (_) -> V)) == (\226\136\128 x : _, \226\136\131 y : V, op_lt_colon(y, tau(x)))
+      #|  (term_valuation : ((List[Char]) -> V, ((_, Type)) -> V) -> Bool)((tau : (List[Char]) -> V), (sigma : ((_, Type)) -> V)) == (\226\136\128 n : _, \226\136\128 ty : Type, op_lt_colon(sigma((n, ty)), typeset(tau, ty)))
+      #|  \226\136\128 sigma : ((_, Type)) -> V, \226\136\128 taut : _, \226\136\128 n : _, \226\136\128 ty : Type, \226\136\128 x : V, term_valuation((tau : (List[Char]) -> V), sigma) && op_lt_colon(x, typeset(tau, ty)) \226\134\146 term_valuation(tau, op_bar_minus_gt((n, ty), x, sigma))
+      #|  \226\136\128 tau : (List[Char]) -> V, \226\136\128 ty : Type, type_valuation(tau) \226\134\146 (\226\136\131 x : V, op_lt_colon(x, typeset(tau, ty)))
+      #|  \226\136\128 tm : Term, \226\136\128 ty : Type, has_type(tm, ty) \226\134\146 has_type(tm, ty) && (\226\136\128 sigma : ((List[Char], Type)) -> V, \226\136\128 tau : (List[Char]) -> V, type_valuation(tau) && term_valuation(tau, sigma) \226\134\146 op_lt_colon(semantics(sigma, tau, tm), typeset(tau, ty)))
+      #|  \226\136\128 sigma : ((List[Char], Type)) -> V, \226\136\128 tau : (List[Char]) -> V, \226\136\128 tm : Term, \226\136\128 ty : Type, type_valuation(tau) && term_valuation(tau, sigma) && has_type(tm, ty) \226\134\146 op_lt_colon(semantics(sigma, tau, tm), typeset(tau, ty))
+      #|  \226\136\128 sigma : ((List[Char], Type)) -> V, \226\136\128 tau : (List[Char]) -> V, \226\136\128 s : Term, \226\136\128 t : Term, has_type(s, op_typeof(s)) && has_type(t, op_typeof(s)) && type_valuation(tau) && term_valuation(tau, sigma) \226\134\146 semantics(sigma, tau, op_eq_eq_eq(s, t)) == boolean(semantics(sigma, tau, s) == semantics(sigma, tau, t))
+      #|  welltyped(op_eq_eq_eq((s : Term), (t : Term)))
+      #|  \226\136\128 sigma : ((List[Char], Type)) -> V, \226\136\128 tau : (List[Char]) -> V, \226\136\128 s : Term, \226\136\128 t : Term, has_type(op_eq_eq_eq(s, t), Bool) && type_valuation(tau) && term_valuation(tau, sigma) \226\134\146 semantics(sigma, tau, op_eq_eq_eq(s, t)) == boolean(semantics(sigma, tau, s) == semantics(sigma, tau, t))
+      #|  has_type((p : Term), Fun((ty : Type), Bool)) && type_valuation((tau : (List[Char]) -> V)) && term_valuation(tau, (sigma : ((List[Char], Type)) -> V)) \226\134\146 semantics(sigma, tau, Comb(Select(ty), p)) == (if (\226\136\131 x : V, op_lt_colon(x, suchthat(typeset(tau, ty), holds(semantics(sigma, tau, p))))) { ch(suchthat(typeset(tau, ty), holds(semantics(sigma, tau, p)))) } else { ch(typeset(tau, ty)) })
+      #|  (op_bar_eq : (List[Term], Term) -> Bool)((asms : List[Term]), (p : Term)) == (ALL((a : Term) => has_type(a, Bool), CONS(p, asms)) && (\226\136\128 sigma : ((List[Char], Type)) -> V, \226\136\128 tau : (List[Char]) -> V, type_valuation(tau) && term_valuation(tau, sigma) && ALL((a : Term) => semantics(sigma, tau, a) == True, asms) \226\134\146 semantics(sigma, tau, p) == True))
+      #|  (x : V)
+      #|  \226\136\128 env : List[(Term, Term)], \226\136\128 tp : (Term, Term), RACONV(env, tp) \226\134\146 (\226\136\128 sigma1 : ((List[Char], Type)) -> V, \226\136\128 sigma2 : ((List[Char], Type)) -> V, \226\136\128 tau : (List[Char]) -> V, type_valuation(tau) && term_valuation(tau, sigma1) && term_valuation(tau, sigma2) && (\226\136\128 x1 : List[Char], \226\136\128 ty1 : Type, \226\136\128 x2 : List[Char], \226\136\128 ty2 : Type, ALPHAVARS(env, (Var(x1, ty1), Var(x2, ty2))) \226\134\146 semantics(sigma1, tau, Var(x1, ty1)) == semantics(sigma2, tau, Var(x2, ty2))) \226\134\146 welltyped(FST(tp)) && welltyped(SND(tp)) \226\134\146 semantics(sigma1, tau, FST(tp)) == semantics(sigma2, tau, SND(tp)))
+      #|  (NIL : List[(Term, Term)])
+      #|  \226\136\128 sigma : ((List[Char], Type)) -> V, \226\136\128 tau : (List[Char]) -> V, \226\136\128 s : Term, \226\136\128 t : Term, type_valuation(tau) && term_valuation(tau, sigma) && welltyped(s) && welltyped(t) && ACONV(s, t) \226\134\146 semantics(sigma, tau, s) == semantics(sigma, tau, t)
+      #|  (s : Term)
+      #|  (s : Term)
+      #|  (r : Term)
+      #|  (asl2 : List[Term])
+      #|  (asl1 : List[Term])
+      #|  ALL((a : Term) => semantics((sigma : ((List[Char], Type)) -> V), (tau : (List[Char]) -> V), a) == True, TERM_UNION((asl1 : List[Term]), (asl2 : List[Term])))
+      #|  (has_type((p1 : Term), Bool) && has_type((p2 : Term), Bool) \226\134\146 has_type((q : Term), Bool) && (\226\136\128 sigma : ((List[Char], Type)) -> V, \226\136\128 tau : (List[Char]) -> V, type_valuation(tau) && term_valuation(tau, sigma) && semantics(sigma, tau, p1) == True && semantics(sigma, tau, p2) == True \226\134\146 semantics(sigma, tau, q) == True)) \226\134\146 op_bar_eq((asl1 : List[Term]), p1) && op_bar_eq((asl2 : List[Term]), p2) \226\134\146 op_bar_eq(TERM_UNION(asl1, asl2), q)
+      #|  (r : Term)
+      #|  (r : Term)
+      #|  (ty : Type)
+      #|  (x : List[Char])
+      #|  (x : V)
+      #|  \226\136\128 tau : (List[Char]) -> V, \226\136\128 sigma1 : ((List[Char], Type)) -> V, \226\136\128 sigma2 : ((List[Char], Type)) -> V, \226\136\128 t : Term, type_valuation(tau) && term_valuation(tau, sigma1) && term_valuation(tau, sigma2) && welltyped(t) && (\226\136\128 x : List[Char], \226\136\128 ty : Type, VFREE_IN(Var(x, ty), t) \226\134\146 sigma1((x, ty)) == sigma2((x, ty))) \226\134\146 semantics(sigma1, tau, t) == semantics(sigma2, tau, t)
+      #|  \226\136\128 p : Term, has_type(p, Bool) \226\134\146 op_bar_eq([p], p)
+      #|  \226\136\128 t : Term, welltyped(t) \226\134\146 op_bar_eq(NIL, op_eq_eq_eq(t, t))
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  \226\136\128 asl1 : List[Term], \226\136\128 asl2 : List[Term], \226\136\128 l : Term, \226\136\128 m1 : Term, \226\136\128 m2 : Term, \226\136\128 r : Term, op_bar_eq(asl1, op_eq_eq_eq(l, m1)) && op_bar_eq(asl2, op_eq_eq_eq(m2, r)) && ACONV(m1, m2) \226\134\146 op_bar_eq(TERM_UNION(asl1, asl2), op_eq_eq_eq(l, r))
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  \226\136\128 asl1 : List[Term], \226\136\128 l1 : Term, \226\136\128 r1 : Term, \226\136\128 asl2 : List[Term], \226\136\128 l2 : Term, \226\136\128 r2 : Term, op_bar_eq(asl1, op_eq_eq_eq(l1, r1)) && op_bar_eq(asl2, op_eq_eq_eq(l2, r2)) && (\226\136\131 rty : Type, op_typeof(l1) == Fun(op_typeof(l2), rty)) \226\134\146 op_bar_eq(TERM_UNION(asl1, asl2), op_eq_eq_eq(Comb(l1, l2), Comb(r1, r2)))
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  \226\136\128 asl1 : List[Term], \226\136\128 asl2 : List[Term], \226\136\128 p : Term, \226\136\128 q : Term, \226\136\128 p' : Term, op_bar_eq(asl1, op_eq_eq_eq(p, q)) && op_bar_eq(asl2, p') && ACONV(p, p') \226\134\146 op_bar_eq(TERM_UNION(asl1, asl2), q)
+      #|  semantics(op_bar_minus_gt(((x : List[Char]), (ty : Type)), (sigma : ((List[Char], Type)) -> V)((x, ty)), sigma), (tau : (List[Char]) -> V), (t : Term))
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  \226\136\128 x : List[Char], \226\136\128 ty : Type, \226\136\128 t : Term, welltyped(t) \226\134\146 op_bar_eq(NIL, op_eq_eq_eq(Comb(Abs(x, ty, t), Var(x, ty)), t))
+      #|  (p : Term)
+      #|  ALL((a : Term) => has_type(a, Bool), (asl : List[Term])) && ALL((a : Term) => !VFREE_IN(Var((x : List[Char]), (ty : Type)), a), asl) && ALL((a : Term) => semantics((sigma : ((List[Char], Type)) -> V), (tau : (List[Char]) -> V), a) == True, asl)
+      #|  (x : V)
+      #|  op_typeof((r : Term)) == op_typeof((l : Term))
+      #|  has_type(op_eq_eq_eq((l : Term), (r : Term)), Bool)
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  \226\136\128 asl : List[Term], \226\136\128 x : List[Char], \226\136\128 ty : Type, \226\136\128 l : Term, \226\136\128 r : Term, !EX(VFREE_IN(Var(x, ty)), asl) && op_bar_eq(asl, op_eq_eq_eq(l, r)) \226\134\146 op_bar_eq(asl, op_eq_eq_eq(Abs(x, ty, l), Abs(x, ty, r)))
+      #|  MEM((a : Term), FILTER((x : Term) => !ACONV((c2 : Term), x), (asl1 : List[Term]))) || MEM(a, FILTER((x : Term) => !ACONV((c1 : Term), x), (asl2 : List[Term])))
+      #|  ACONV((c2 : Term), (a : Term))
+      #|  ACONV((c1 : Term), (a : Term))
+      #|  (a : Term)
+      #|  ((a1 : Bool) && (b1 : Bool) \226\134\146 (c1 : Bool)) && (a1 && b1 && c1 \226\134\146 (a2 : Bool) && (b2 : Bool) \226\134\146 (c2 : Bool)) \226\134\146 a1 && a2 && b1 && b2 \226\134\146 c1 && c2
+      #|  \226\136\128 asl1 : List[Term], \226\136\128 asl2 : List[Term], \226\136\128 p : _, \226\136\128 q : _, op_bar_eq(asl1, (c1 : Term)) && op_bar_eq(asl2, (c2 : Term)) \226\134\146 LET((asl1' : List[Term]) => (asl2' : List[Term]) => LET_END(op_bar_eq(TERM_UNION(asl1', asl2'), op_eq_eq_eq(c1, c2))), FILTER(o(op_tilde, ACONV(c2)), asl1), FILTER(o(op_tilde, ACONV(c1)), asl2))
+      #|  (DEST_VAR : (Term) -> (List[Char], Type))(Var((x : List[Char]), (ty : Type))) == (x, ty)
+      #|  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+      #|  \226\136\128 ilist : List[(Term, Term)], \226\136\128 sigma : ((List[Char], Type)) -> V, \226\136\128 tau : (List[Char]) -> V, type_valuation(tau) && term_valuation(tau, sigma) && (\226\136\128 s : Term, \226\136\128 s' : Term, MEM((s', s), ilist) \226\134\146 (\226\136\131 x : List[Char], \226\136\131 ty : Type, s == Var(x, ty) && has_type(s', ty))) \226\134\146 term_valuation(tau, ITLIST(GABS((f : ((Term, Term), ((List[Char], Type)) -> V, (List[Char], Type)) -> V) => \226\136\128 t : Term, \226\136\128 x : Term, GEQ(f((t, x)), op_bar_minus_gt(DEST_VAR(x), semantics(sigma, tau, t)))), ilist, sigma))
+      #|  (s : List[Char]) == (x : List[Char]) && (sty : Type) == (ty : Type)
+      #|  (sty : Type)
+      #|  (s : List[Char])
+      #|  (ilist : List[(Term, Term)])
+      #|  (pp : Term)
+      #|  (t : Term)
+      #|  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
       #|  forall ilist sigma sem x ty y yty.\n     (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n     ==> (ITLIST (\\(t,x). DEST_VAR x |-> sem x t)\n           (FILTER (\\(s',s). ~(s = Var x ty)) ilist) sigma (y,yty) =\n          if (y = x) /\\ (yty = ty) then sigma(y,yty)\n          else ITLIST (\\(t,x). DEST_VAR x |-> sem x t) ilist sigma (y,yty))
       #|  forall l. (forall t x. MEM (t,x) l /\\ (f x = a) ==> (g x t = h x t)) /\\ (i a = j a)\n       ==> (ITLIST (\\(t,x). f(x) |-> g x t) l i a =\n            ITLIST (\\(t,x). f(x) |-> h x t) l j a)
-      #|  (v:string = u) /\\ (vty:type = uty) <=> (u = v) /\\ (uty = vty)
-      #|  vty:type
-      #|  v:string
-      #|  i:(term#term)list
-      #|  t2:term
-      #|  t1:term
-      #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  l:(term#term)list
-      #|  ilist:(term#term)list
-      #|  forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty
-      #|  REV_ASSOCD (Var u uty) ilist' (Var u uty) =\n    REV_ASSOCD (Var u uty) ilist (Var u uty)
-      #|  uty:type
-      #|  u:string
-      #|  ~(a /\\ b) = b ==> ~a
-      #|  ty:type
-      #|  x:string
-      #|  t':term
-      #|  (s':term,Var u uty)
-      #|  vty:type
-      #|  v:string
-      #|  DEST_VAR (Var w wty) = u,uty
-      #|  wty:type
-      #|  w:string
-      #|  MEM (s':term,s:term) ilist
-      #|  s:term
-      #|  s':term
-      #|  uty:type
-      #|  u:string
-      #|  a:V
-      #|  forall s s'. MEM (s',s) ilist'' ==> (?x ty. (s = Var x ty) /\\ s' has_type ty)
-      #|  forall s s'. MEM (s',s) ilist' ==> (?x ty. (s = Var x ty) /\\ s' has_type ty)
-      #|  welltyped t
-      #|  t:term
-      #|  ty:type
-      #|  x:string
-      #|  tty:type
-      #|  y:string
-      #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  ilist:(term#term)list
-      #|  s:term
-      #|  t:term
-      #|  ty:type
-      #|  x:string
+      #|  ((v : List[Char]) == (u : List[Char]) && (vty : Type) == (uty : Type)) == (u == v && uty == vty)
+      #|  (vty : Type)
+      #|  (v : List[Char])
+      #|  (i : List[(Term, Term)])
+      #|  (t2 : Term)
+      #|  (t1 : Term)
+      #|  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+      #|  (l : List[(Term, Term)])
+      #|  (ilist : List[(Term, Term)])
+      #|  \226\136\128 s : Term, \226\136\128 s' : Term, MEM((s', s), (ilist : List[(Term, Term)])) \226\134\146 (\226\136\131 x : List[Char], \226\136\131 ty : Type, s == Var(x, ty) && has_type(s', ty))
+      #|  REV_ASSOCD(Var((u : List[Char]), (uty : Type)), (ilist' : List[(Term, Term)]), Var(u, uty)) == REV_ASSOCD(Var(u, uty), (ilist : List[(Term, Term)]), Var(u, uty))
+      #|  (uty : Type)
+      #|  (u : List[Char])
+      #|  !((a : Bool) && (b : Bool)) == b \226\134\146 !a
+      #|  (ty : Type)
+      #|  (x : List[Char])
+      #|  (t' : Term)
+      #|  ((s' : Term), Var((u : List[Char]), (uty : Type)))
+      #|  (vty : Type)
+      #|  (v : List[Char])
+      #|  DEST_VAR(Var((w : List[Char]), (wty : Type))) == ((u : List[Char]), (uty : Type))
+      #|  (wty : Type)
+      #|  (w : List[Char])
+      #|  MEM(((s' : Term), (s : Term)), (ilist : List[(Term, Term)]))
+      #|  (s : Term)
+      #|  (s' : Term)
+      #|  (uty : Type)
+      #|  (u : List[Char])
+      #|  (a : V)
+      #|  \226\136\128 s : Term, \226\136\128 s' : Term, MEM((s', s), (ilist'' : List[(Term, Term)])) \226\134\146 (\226\136\131 x : List[Char], \226\136\131 ty : Type, s == Var(x, ty) && has_type(s', ty))
+      #|  \226\136\128 s : Term, \226\136\128 s' : Term, MEM((s', s), (ilist' : List[(Term, Term)])) \226\134\146 (\226\136\131 x : List[Char], \226\136\131 ty : Type, s == Var(x, ty) && has_type(s', ty))
+      #|  welltyped((t : Term))
+      #|  (t : Term)
+      #|  (ty : Type)
+      #|  (x : List[Char])
+      #|  (tty : Type)
+      #|  (y : List[Char])
+      #|  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+      #|  (ilist : List[(Term, Term)])
+      #|  (s : Term)
+      #|  (t : Term)
+      #|  (ty : Type)
+      #|  (x : List[Char])
       #|  forall tm sigma tau ilist.\n       welltyped tm /\\\n       (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n       ==> forall sigma tau. type_valuation tau /\\ term_valuation tau sigma\n                       ==> (semantics sigma tau (VSUBST ilist tm) =\n                            semantics\n                             (ITLIST\n                                (\\(t,x). DEST_VAR x |-> semantics sigma tau t)\n                                ilist sigma)\n                             tau tm)
-      #|  welltyped a
-      #|  a:term
-      #|  welltyped p
-      #|  ALL (\\a. a has_type Bool) (CONS p asl)
-      #|  forall ilist asl p.\n        (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> asl |= p ==> MAP (VSUBST ilist) asl |= VSUBST ilist p
-      #|  forall ty tau tyin.\n      typeset (\\s. typeset tau (REV_ASSOCD (Tyvar s) tyin (Tyvar s))) ty =\n      typeset tau (TYPE_SUBST tyin ty)
-      #|  kty:type
-      #|  k:string
-      #|  kty:type
-      #|  k:string
-      #|  yty:type
-      #|  y:string
-      #|  (VSUBST [Var x' ty,Var x ty] t) has_type (typeof t)
-      #|  (b ==> a) /\\ b ==> a /\\ b
-      #|  a:V
-      #|  ~(Var x ty = Var k kty)
-      #|  x /\\ (if p /\\ q then a else b) <=>\n                      p /\\ q /\\ a /\\ x \\/ b /\\ ~(p /\\ q) /\\ x
-      #|  x /\\ (if p then a /\\ b else c /\\ b) <=>\n                      b /\\ x /\\ (if p then a else c)
-      #|  kty:type
-      #|  k:string
-      #|  forall x'' ty'.\n           VFREE_IN (Var x'' ty') (VSUBST [Var x' ty,Var x ty] t)\n           ==> (REV_ASSOCD (Var x'' (TYPE_SUBST tyin ty')) env''\n                           (Var x'' ty') = Var x'' ty')
-      #|  kty:type
-      #|  k:string
-      #|  x /\\ (if p /\\ q then a else b) <=>\n                      p /\\ q /\\ a /\\ x \\/ b /\\ ~(p /\\ q) /\\ x
-      #|  x /\\ (if p then a /\\ b else c /\\ b) <=>\n                      b /\\ x /\\ (if p then a else c)
-      #|  kty:type
-      #|  k:string
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  (VSUBST [Var x' ty,Var x ty] t) has_type (typeof t)
-      #|  b /\\ (b ==> c /\\ a /\\ d) ==> a /\\ b /\\ c /\\ d
-      #|  t'':term
-      #|  ty':type
-      #|  x:string
-      #|  t':term
-      #|  kty:type
-      #|  k:string
-      #|  vty:type = ty
-      #|  ~p ==> p ==> q
-      #|  vty:type
-      #|  v:string
-      #|  ~(a /\\ b) <=> a ==> ~b
-      #|  ty':type
-      #|  x:string
-      #|  t':term
-      #|  VARIANT (RESULT (INST_CORE [] tyin t)) x ty' = x'
-      #|  t':term
-      #|  t < 2 + t
-      #|  sizeof t
-      #|  ures = INST_CORE env'' tyin (VSUBST[Var x' ty,Var x ty] t)
-      #|  env'' = CONS (Var x' ty,Var x' ty') env
+      #|  welltyped((a : Term))
+      #|  (a : Term)
+      #|  welltyped((p : Term))
+      #|  ALL((a : Term) => has_type(a, Bool), CONS((p : Term), (asl : List[Term])))
+      #|  \226\136\128 ilist : List[(Term, Term)], \226\136\128 asl : List[Term], \226\136\128 p : Term, (\226\136\128 s : Term, \226\136\128 s' : Term, MEM((s', s), ilist) \226\134\146 (\226\136\131 x : List[Char], \226\136\131 ty : Type, s == Var(x, ty) && has_type(s', ty))) \226\134\146 op_bar_eq(asl, p) \226\134\146 op_bar_eq(MAP(VSUBST(ilist), asl), VSUBST(ilist, p))
+      #|  \226\136\128 ty : Type, \226\136\128 tau : (List[Char]) -> V, \226\136\128 tyin : List[(Type, Type)], typeset((s : List[Char]) => typeset(tau, REV_ASSOCD(Tyvar(s), tyin, Tyvar(s))), ty) == typeset(tau, TYPE_SUBST(tyin, ty))
+      #|  (kty : Type)
+      #|  (k : List[Char])
+      #|  (kty : Type)
+      #|  (k : List[Char])
+      #|  (yty : Type)
+      #|  (y : List[Char])
+      #|  has_type(VSUBST([(Var((x' : List[Char]), (ty : Type)), Var((x : List[Char]), ty))], (t : Term)), op_typeof(t))
+      #|  ((b : Bool) \226\134\146 (a : Bool)) && b \226\134\146 a && b
+      #|  (a : V)
+      #|  !(Var((x : List[Char]), (ty : Type)) == Var((k : List[Char]), (kty : Type)))
+      #|  ((x : Bool) && (if (p : Bool) && (q : Bool) { (a : Bool) } else { (b : Bool) })) == (p && q && a && x || b && !(p && q) && x)
+      #|  ((x : Bool) && (if (p : Bool) { (a : Bool) && (b : Bool) } else { (c : Bool) && b })) == (b && x && (if p { a } else { c }))
+      #|  (kty : Type)
+      #|  (k : List[Char])
+      #|  \226\136\128 x'' : List[Char], \226\136\128 ty' : Type, VFREE_IN(Var(x'', ty'), VSUBST([(Var((x' : List[Char]), (ty : Type)), Var((x : List[Char]), ty))], (t : Term))) \226\134\146 REV_ASSOCD(Var(x'', TYPE_SUBST((tyin : List[(Type, Type)]), ty')), (env'' : List[(Term, Term)]), Var(x'', ty')) == Var(x'', ty')
+      #|  (kty : Type)
+      #|  (k : List[Char])
+      #|  ((x : Bool) && (if (p : Bool) && (q : Bool) { (a : Bool) } else { (b : Bool) })) == (p && q && a && x || b && !(p && q) && x)
+      #|  ((x : Bool) && (if (p : Bool) { (a : Bool) && (b : Bool) } else { (c : Bool) && b })) == (b && x && (if p { a } else { c }))
+      #|  (kty : Type)
+      #|  (k : List[Char])
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  has_type(VSUBST([(Var((x' : List[Char]), (ty : Type)), Var((x : List[Char]), ty))], (t : Term)), op_typeof(t))
+      #|  (b : Bool) && (b \226\134\146 (c : Bool) && (a : Bool) && (d : Bool)) \226\134\146 a && b && c && d
+      #|  (t'' : Term)
+      #|  (ty' : Type)
+      #|  (x : List[Char])
+      #|  (t' : Term)
+      #|  (kty : Type)
+      #|  (k : List[Char])
+      #|  (vty : Type) == (ty : Type)
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  (vty : Type)
+      #|  (v : List[Char])
+      #|  !((a : Bool) && (b : Bool)) == (a \226\134\146 !b)
+      #|  (ty' : Type)
+      #|  (x : List[Char])
+      #|  (t' : Term)
+      #|  VARIANT(RESULT(INST_CORE(NIL, (tyin : List[(Type, Type)]), (t : Term))), (x : List[Char]), (ty' : Type)) == (x' : List[Char])
+      #|  (t' : Term)
+      #|  (t : Num) < 2 + t
+      #|  sizeof((t : Term))
+      #|  (ures : Result) == INST_CORE((env'' : List[(Term, Term)]), (tyin : List[(Type, Type)]), VSUBST([(Var((x' : List[Char]), (ty : Type)), Var((x : List[Char]), ty))], (t : Term)))
+      #|  (env'' : List[(Term, Term)]) == CONS((Var((x' : List[Char]), (ty : Type)), Var(x', (ty' : Type))), (env : List[(Term, Term)]))
       #|  0
-      #|  zty:type
-      #|  z:string
-      #|  yty:type
-      #|  x:string
-      #|  y:string = x
-      #|  yty:type = ty
-      #|  y:string = x
-      #|  yty:type
-      #|  y:string
-      #|  forall u uty.\n         VFREE_IN (Var u uty) t' <=>\n         (?oty. VFREE_IN (Var u oty) t /\\ (uty = TYPE_SUBST tyin oty))
-      #|  yty:type
-      #|  y:string
-      #|  yty:type
-      #|  y:string
-      #|  tau:string->V
-      #|  (x,ty' |-> a) (sigma:(string#type)->V)
-      #|  (b ==> a) /\\ b ==> a /\\ b
-      #|  a:V
-      #|  VFREE_IN (Var x oty) t
-      #|  uty = TYPE_SUBST tyin oty
-      #|  oty:type
-      #|  u:string = x
-      #|  u:string = x
-      #|  uty:type
-      #|  u:string
-      #|  a /\\ b /\\ (b ==> c) ==> b /\\ a /\\ c
-      #|  t':term
+      #|  (zty : Type)
+      #|  (z : List[Char])
+      #|  (yty : Type)
+      #|  (x : List[Char])
+      #|  (y : List[Char]) == (x : List[Char])
+      #|  (yty : Type) == (ty : Type)
+      #|  (y : List[Char]) == (x : List[Char])
+      #|  (yty : Type)
+      #|  (y : List[Char])
+      #|  \226\136\128 u : List[Char], \226\136\128 uty : Type, VFREE_IN(Var(u, uty), (t' : Term)) == (\226\136\131 oty : Type, VFREE_IN(Var(u, oty), (t : Term)) && uty == TYPE_SUBST((tyin : List[(Type, Type)]), oty))
+      #|  (yty : Type)
+      #|  (y : List[Char])
+      #|  (yty : Type)
+      #|  (y : List[Char])
+      #|  (tau : (List[Char]) -> V)
+      #|  op_bar_minus_gt(((x : List[Char]), (ty' : Type)), (a : V), (sigma : ((List[Char], Type)) -> V))
+      #|  ((b : Bool) \226\134\146 (a : Bool)) && b \226\134\146 a && b
+      #|  (a : V)
+      #|  VFREE_IN(Var((x : List[Char]), (oty : Type)), (t : Term))
+      #|  (uty : Type) == TYPE_SUBST((tyin : List[(Type, Type)]), (oty : Type))
+      #|  (oty : Type)
+      #|  (u : List[Char]) == (x : List[Char])
+      #|  (u : List[Char]) == (x : List[Char])
+      #|  (uty : Type)
+      #|  (u : List[Char])
+      #|  (a : Bool) && (b : Bool) && (b \226\134\146 (c : Bool)) \226\134\146 b && a && c
+      #|  (t' : Term)
       #|  0
-      #|  tyin:(type#type)list
-      #|  env':(term#term)list
-      #|  t:term
-      #|  t < 2 + t
-      #|  sizeof t
-      #|  n = sizeof (Abs x ty t)
-      #|  t:term
-      #|  ty:type
-      #|  x:string
-      #|  Comb s' t'
-      #|  t':term
-      #|  s':term
-      #|  s < 1 + s + t /\\ t < 1 + s + t
-      #|  n = sizeof(Comb s t)
-      #|  t:term
-      #|  s:term
-      #|  forall n tm env tyin.\n        welltyped tm /\\ (sizeof tm = n) /\\\n        (forall s s'. MEM (s,s') env\n                ==> ?x ty. (s = Var x ty) /\\\n                           (s' = Var x (TYPE_SUBST tyin ty)))\n        ==> (?x ty. (INST_CORE env tyin tm =\n                     Clash(Var x (TYPE_SUBST tyin ty))) /\\\n                    VFREE_IN (Var x ty) tm /\\\n                    ~(REV_ASSOCD (Var x (TYPE_SUBST tyin ty))\n                                 env (Var x ty) = Var x ty)) \\/\n            (forall x ty. VFREE_IN (Var x ty) tm\n                    ==> (REV_ASSOCD (Var x (TYPE_SUBST tyin ty))\n                                 env (Var x ty) = Var x ty)) /\\\n            (?tm'. (INST_CORE env tyin tm = Result tm') /\\\n                   tm' has_type (TYPE_SUBST tyin (typeof tm)) /\\\n                   (forall u uty. VFREE_IN (Var u uty) tm' <=>\n                                ?oty. VFREE_IN (Var u oty) tm /\\\n                                      (uty = TYPE_SUBST tyin oty)) /\\\n                   forall sigma tau.\n                       type_valuation tau /\\ term_valuation tau sigma\n                       ==> (semantics sigma tau tm' =\n                            semantics\n                               (\\(x,ty). sigma(x,TYPE_SUBST tyin ty))\n                               (\\s. typeset tau (TYPE_SUBST tyin (Tyvar s)))\n                               tm))
-      #|  sizeof s
-      #|  sizeof t
-      #|  s:term
-      #|  t:term
-      #|  oty:type
-      #|  x:string
-      #|  oty:type
-      #|  x:string
-      #|  oty:type
-      #|  x:string
-      #|  oty:type
-      #|  x:string
-      #|  oty:type
-      #|  x:string
-      #|  oty:type
-      #|  x:string
-      #|  oty:type
-      #|  x:string
-      #|  oty:type
-      #|  x:string
-      #|  zty:type
-      #|  z:string
-      #|  tyin:(type#type)list
-      #|  []:(term#term)list
-      #|  t:term
-      #|  tyin:(type#type)list
-      #|  env'':(term#term)list
-      #|  VSUBST [Var x' ty,Var x ty] t
-      #|  tyin:(type#type)list
-      #|  []:(term#term)list
-      #|  tm:term
-      #|  sizeof tm
-      #|  forall tyin tm.\n        welltyped tm\n        ==> (INST tyin tm) has_type (TYPE_SUBST tyin (typeof tm)) /\\\n            (forall u uty. VFREE_IN (Var u uty) (INST tyin tm) <=>\n                         ?oty. VFREE_IN (Var u oty) tm /\\\n                               (uty = TYPE_SUBST tyin oty)) /\\\n            forall sigma tau.\n                type_valuation tau /\\ term_valuation tau sigma\n                ==> (semantics sigma tau (INST tyin tm) =\n                     semantics\n                        (\\(x,ty). sigma(x,TYPE_SUBST tyin ty))\n                        (\\s. typeset tau (TYPE_SUBST tyin (Tyvar s))) tm)
-      #|  welltyped a
-      #|  a:term
-      #|  welltyped p
-      #|  ALL (\\a. a has_type Bool) (CONS p asl)
-      #|  forall tyin asl p. asl |= p ==> MAP (INST tyin) asl |= INST tyin p
-      #|  forall asl p. asl |- p ==> asl |= p
-      #|  \\x:string. boolset
-      #|  ((x:string,Bool) |-> False) (((y,Bool) |-> True)\n                        (\\(x,ty). @a. a <: typeset (\\x. boolset) ty))
-      #|  y = VARIANT (Var x Bool) x Bool
+      #|  (tyin : List[(Type, Type)])
+      #|  (env' : List[(Term, Term)])
+      #|  (t : Term)
+      #|  (t : Num) < 2 + t
+      #|  sizeof((t : Term))
+      #|  (n : Num) == sizeof(Abs((x : List[Char]), (ty : Type), (t : Term)))
+      #|  (t : Term)
+      #|  (ty : Type)
+      #|  (x : List[Char])
+      #|  Comb((s' : Term), (t' : Term))
+      #|  (t' : Term)
+      #|  (s' : Term)
+      #|  (s : Num) < 1 + (s + (t : Num)) && t < 1 + (s + t)
+      #|  (n : Num) == sizeof(Comb((s : Term), (t : Term)))
+      #|  (t : Term)
+      #|  (s : Term)
+      #|  \226\136\128 n : Num, \226\136\128 tm : Term, \226\136\128 env : List[(Term, Term)], \226\136\128 tyin : List[(Type, Type)], welltyped(tm) && sizeof(tm) == n && (\226\136\128 s : Term, \226\136\128 s' : Term, MEM((s, s'), env) \226\134\146 (\226\136\131 x : List[Char], \226\136\131 ty : Type, s == Var(x, ty) && s' == Var(x, TYPE_SUBST(tyin, ty)))) \226\134\146 (\226\136\131 x : List[Char], \226\136\131 ty : Type, INST_CORE(env, tyin, tm) == Clash(Var(x, TYPE_SUBST(tyin, ty))) && VFREE_IN(Var(x, ty), tm) && !(REV_ASSOCD(Var(x, TYPE_SUBST(tyin, ty)), env, Var(x, ty)) == Var(x, ty))) || (\226\136\128 x : List[Char], \226\136\128 ty : Type, VFREE_IN(Var(x, ty), tm) \226\134\146 REV_ASSOCD(Var(x, TYPE_SUBST(tyin, ty)), env, Var(x, ty)) == Var(x, ty)) && (\226\136\131 tm' : Term, INST_CORE(env, tyin, tm) == Result(tm') && has_type(tm', TYPE_SUBST(tyin, op_typeof(tm))) && (\226\136\128 u : List[Char], \226\136\128 uty : Type, VFREE_IN(Var(u, uty), tm') == (\226\136\131 oty : Type, VFREE_IN(Var(u, oty), tm) && uty == TYPE_SUBST(tyin, oty))) && (\226\136\128 sigma : ((List[Char], Type)) -> V, \226\136\128 tau : (List[Char]) -> V, type_valuation(tau) && term_valuation(tau, sigma) \226\134\146 semantics(sigma, tau, tm') == semantics(GABS((f : ((List[Char], Type)) -> V) => \226\136\128 x : List[Char], \226\136\128 ty : Type, GEQ(f((x, ty)), sigma((x, TYPE_SUBST(tyin, ty))))), (s : List[Char]) => typeset(tau, TYPE_SUBST(tyin, Tyvar(s))), tm)))
+      #|  sizeof((s : Term))
+      #|  sizeof((t : Term))
+      #|  (s : Term)
+      #|  (t : Term)
+      #|  (oty : Type)
+      #|  (x : List[Char])
+      #|  (oty : Type)
+      #|  (x : List[Char])
+      #|  (oty : Type)
+      #|  (x : List[Char])
+      #|  (oty : Type)
+      #|  (x : List[Char])
+      #|  (oty : Type)
+      #|  (x : List[Char])
+      #|  (oty : Type)
+      #|  (x : List[Char])
+      #|  (oty : Type)
+      #|  (x : List[Char])
+      #|  (oty : Type)
+      #|  (x : List[Char])
+      #|  (zty : Type)
+      #|  (z : List[Char])
+      #|  (tyin : List[(Type, Type)])
+      #|  (NIL : List[(Term, Term)])
+      #|  (t : Term)
+      #|  (tyin : List[(Type, Type)])
+      #|  (env'' : List[(Term, Term)])
+      #|  VSUBST([(Var((x' : List[Char]), (ty : Type)), Var((x : List[Char]), ty))], (t : Term))
+      #|  (tyin : List[(Type, Type)])
+      #|  (NIL : List[(Term, Term)])
+      #|  (tm : Term)
+      #|  sizeof((tm : Term))
+      #|  \226\136\128 tyin : List[(Type, Type)], \226\136\128 tm : Term, welltyped(tm) \226\134\146 has_type(INST(tyin, tm), TYPE_SUBST(tyin, op_typeof(tm))) && (\226\136\128 u : List[Char], \226\136\128 uty : Type, VFREE_IN(Var(u, uty), INST(tyin, tm)) == (\226\136\131 oty : Type, VFREE_IN(Var(u, oty), tm) && uty == TYPE_SUBST(tyin, oty))) && (\226\136\128 sigma : ((List[Char], Type)) -> V, \226\136\128 tau : (List[Char]) -> V, type_valuation(tau) && term_valuation(tau, sigma) \226\134\146 semantics(sigma, tau, INST(tyin, tm)) == semantics(GABS((f : ((List[Char], Type)) -> V) => \226\136\128 x : List[Char], \226\136\128 ty : Type, GEQ(f((x, ty)), sigma((x, TYPE_SUBST(tyin, ty))))), (s : List[Char]) => typeset(tau, TYPE_SUBST(tyin, Tyvar(s))), tm))
+      #|  welltyped((a : Term))
+      #|  (a : Term)
+      #|  welltyped((p : Term))
+      #|  ALL((a : Term) => has_type(a, Bool), CONS((p : Term), (asl : List[Term])))
+      #|  \226\136\128 tyin : List[(Type, Type)], \226\136\128 asl : List[Term], \226\136\128 p : Term, op_bar_eq(asl, p) \226\134\146 op_bar_eq(MAP(INST(tyin), asl), INST(tyin, p))
+      #|  \226\136\128 asl : List[Term], \226\136\128 p : Term, op_bar_minus(asl, p) \226\134\146 op_bar_eq(asl, p)
+      #|  (x : List[Char]) => boolset
+      #|  op_bar_minus_gt(((x : List[Char]), Bool), False, op_bar_minus_gt(((y : List[Char]), Bool), True, GABS((f : ((List[Char], Type)) -> V) => \226\136\128 x : List[Char], \226\136\128 ty : Type, GEQ(f((x, ty)), select((a : V) => op_lt_colon(a, typeset((x : List[Char]) => boolset, ty)))))))
+      #|  (y : List[Char]) == VARIANT(Var((x : List[Char]), Bool), x, Bool)
       #|  Bool
-      #|  x:string
-      #|  Var x Bool
-      #|  Var x Bool === Var (VARIANT (Var x Bool) x Bool) Bool
-      #|  ?p. p has_type Bool /\\ ~([] |= p)
-      #|  ?p. p has_type Bool /\\ ~([] |- p)
+      #|  (x : List[Char])
+      #|  Var((x : List[Char]), Bool)
+      #|  op_eq_eq_eq(Var((x : List[Char]), Bool), Var(VARIANT(Var(x, Bool), x, Bool), Bool))
+      #|  \226\136\131 p : Term, has_type(p, Bool) && !op_bar_eq(NIL, p)
+      #|  \226\136\131 p : Term, has_type(p, Bool) && !op_bar_minus(NIL, p)
       #|typeset =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(V,fun(V,bool)) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) (#Tyvar:fun(list(char),type) s:list(char)))) (tau:fun(list(char),V) s:list(char)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(V,fun(V,bool)) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) #Bool:type)) #boolset:V)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(V,fun(V,bool)) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) #Ind:type)) #indset:V)) ((#=:fun(V,fun(V,bool)) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) ((#Fun:fun(type,fun(type,type)) a:type) b:type))) ((#funspace:fun(V,fun(V,V)) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) a:type)) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) b:type))))))
       #|semantics =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(V,fun(V,bool)) (((#semantics:fun(fun(prod(list(char),type),V),fun(fun(list(char),V),fun(term,V))) sigma:fun(prod(list(char),type),V)) tau:fun(list(char),V)) ((#Var:fun(list(char),fun(type,term)) n:list(char)) ty:type))) (sigma:fun(prod(list(char),type),V) ((#,:fun(list(char),fun(type,prod(list(char),type))) n:list(char)) ty:type)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(V,fun(V,bool)) (((#semantics:fun(fun(prod(list(char),type),V),fun(fun(list(char),V),fun(term,V))) sigma:fun(prod(list(char),type),V)) tau:fun(list(char),V)) (#Equal:fun(type,term) ty:type))) (((#abstract:fun(V,fun(V,fun(fun(V,V),V))) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) ty:type)) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) ((#Fun:fun(type,fun(type,type)) ty:type) #Bool:type))) (\x:V. (((#abstract:fun(V,fun(V,fun(fun(V,V),V))) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) ty:type)) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) #Bool:type)) (\y:V. (#boolean:fun(bool,V) ((#=:fun(V,fun(V,bool)) x:V) y:V)))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(V,fun(V,bool)) (((#semantics:fun(fun(prod(list(char),type),V),fun(fun(list(char),V),fun(term,V))) sigma:fun(prod(list(char),type),V)) tau:fun(list(char),V)) (#Select:fun(type,term) ty:type))) (((#abstract:fun(V,fun(V,fun(fun(V,V),V))) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) ((#Fun:fun(type,fun(type,type)) ty:type) #Bool:type))) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) ty:type)) (\s:V. (((#COND:fun(bool,fun(V,fun(V,V))) (#?:fun(fun(V,bool),bool) (\x:V. ((#<::fun(V,fun(V,bool)) x:V) ((#suchthat:fun(V,fun(fun(V,bool),V)) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) ty:type)) (#holds:fun(V,fun(V,bool)) s:V)))))) (#ch:fun(V,V) ((#suchthat:fun(V,fun(fun(V,bool),V)) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) ty:type)) (#holds:fun(V,fun(V,bool)) s:V)))) (#ch:fun(V,V) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) ty:type))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(V,fun(V,bool)) (((#semantics:fun(fun(prod(list(char),type),V),fun(fun(list(char),V),fun(term,V))) sigma:fun(prod(list(char),type),V)) tau:fun(list(char),V)) ((#Comb:fun(term,fun(term,term)) s:term) t:term))) ((#apply:fun(V,fun(V,V)) (((#semantics:fun(fun(prod(list(char),type),V),fun(fun(list(char),V),fun(term,V))) sigma:fun(prod(list(char),type),V)) tau:fun(list(char),V)) s:term)) (((#semantics:fun(fun(prod(list(char),type),V),fun(fun(list(char),V),fun(term,V))) sigma:fun(prod(list(char),type),V)) tau:fun(list(char),V)) t:term)))) ((#=:fun(V,fun(V,bool)) (((#semantics:fun(fun(prod(list(char),type),V),fun(fun(list(char),V),fun(term,V))) sigma:fun(prod(list(char),type),V)) tau:fun(list(char),V)) (((#Abs:fun(list(char),fun(type,fun(term,term))) n:list(char)) ty:type) t:term))) (((#abstract:fun(V,fun(V,fun(fun(V,V),V))) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) ty:type)) ((#typeset:fun(fun(list(char),V),fun(type,V)) tau:fun(list(char),V)) (#typeof:fun(term,type) t:term))) (\x:V. (((#semantics:fun(fun(prod(list(char),type),V),fun(fun(list(char),V),fun(term,V))) (((#|->:fun(prod(list(char),type),fun(V,fun(fun(prod(list(char),type),V),fun(prod(list(char),type),V)))) ((#,:fun(list(char),fun(type,prod(list(char),type))) n:list(char)) ty:type)) x:V) sigma:fun(prod(list(char),type),V))) tau:fun(list(char),V)) t:term))))))))
       #|type_valuation =  |- (#forall:fun(fun(fun('?1,V),bool),bool) (\tau:fun('?1,V). ((#=:fun(bool,fun(bool,bool)) (#type_valuation:fun(fun('?1,V),bool) tau:fun('?1,V))) (#forall:fun(fun('?1,bool),bool) (\x:'?1. (#?:fun(fun(V,bool),bool) (\y:V. ((#<::fun(V,fun(V,bool)) y:V) (tau:fun('?1,V) x:'?1)))))))))
