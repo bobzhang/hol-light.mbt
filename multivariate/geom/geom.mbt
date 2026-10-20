@@ -159,8 +159,8 @@ pub fn vector_angle_rmul() -> @kernel.Thm {
 /// VECTOR_ANGLE_LNEG
 fn step_11() -> Unit raise {
   let t24 = @tactics.conv_tac(@calc_rat.real_rat_reduce_conv)
-  let t25 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.vector_arith(@term_syntax.parse_term("-(x : Cart[Real, _]) == op_pct(-real_of_num(1), x)")), vector_angle_lmul()])), t24)
-  vector_angle_lneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], vector_angle(-x, y) == pi - vector_angle(x, y)"), t25))
+  let t25 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.vector_arith(@term_syntax.parse_term("vector_neg((x : Cart[Real, _])) == op_pct(real_neg(real_of_num(1)), x)")), vector_angle_lmul()])), t24)
+  vector_angle_lneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], vector_angle(vector_neg(x), y) == real_sub(pi, vector_angle(x, y))"), t25))
 }
 
 ///|
@@ -177,7 +177,7 @@ pub fn vector_angle_lneg() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t26 = @simp.rewrite_tac(@list.List([vector_angle_lneg()]))
   let t27 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([vector_angle_sym()])), t26)
-  vector_angle_rneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], vector_angle(x, -y) == pi - vector_angle(x, y)"), t27))
+  vector_angle_rneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], vector_angle(x, vector_neg(y)) == real_sub(pi, vector_angle(x, y))"), t27))
 }
 
 ///|
@@ -193,7 +193,7 @@ pub fn vector_angle_rneg() -> @kernel.Thm {
 /// VECTOR_ANGLE_NEG2
 fn step_13() -> Unit raise {
   let t28 = @tactics.then_tac(@simp.rewrite_tac(@list.List([vector_angle_lneg(), vector_angle_rneg()])), @calc_rat.real_arith_tac)
-  vector_angle_neg2_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], vector_angle(-x, -y) == vector_angle(x, y)"), t28))
+  vector_angle_neg2_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], vector_angle(vector_neg(x), vector_neg(y)) == vector_angle(x, y)"), t28))
 }
 
 ///|
@@ -364,7 +364,7 @@ pub fn vector_angle_eq_0() -> @kernel.Thm {
 ///|
 /// VECTOR_ANGLE_EQ_PI
 fn step_20() -> Unit raise {
-  let t91 = @simp.rewrite_tac(@list.List([@vectors.norm_neg(), @vectors.vector_arith(@term_syntax.parse_term("(-(x : Cart[Real, _]) == vec(0)) == (x == vec(0))"))]))
+  let t91 = @simp.rewrite_tac(@list.List([@vectors.norm_neg(), @vectors.vector_arith(@term_syntax.parse_term("(vector_neg((x : Cart[Real, _])) == vec(0)) == (x == vec(0))"))]))
   let t90 = @simp.simp_tac(@list.List([vector_angle_rneg(), @calc_rat.real_arith(@term_syntax.parse_term("(pi - (x : Real) == real_of_num(0)) == (x == pi)"))]))
   let t88 = @term_syntax.parse_term("-(y : Cart[Real, N])")
   let t89 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(x : Cart[Real, N])"), t88]), vector_angle_eq_0()))
@@ -589,7 +589,7 @@ fn step_28() -> Unit raise {
   let t183 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@topology.within_univ())]))
   let t181 = @simp.rewrite_tac(@list.List([@vectors.norm_cauchy_schwarz_div()]))
   let t180 = @tactics.match_mp_tac(@equal.gsym(@transcendentals.cx_acs()))
-  let t179 = @list.List([@meson.asm_meson_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("!(dist((vec(0), (x : Cart[Real, _]))) < norm(x))"))])), @tactics.all_tac])
+  let t179 = @list.List([@meson.asm_meson_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("!(distance((vec(0), (x : Cart[Real, _]))) < norm(x))"))])), @tactics.all_tac])
   let t182 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(z : Cart[Real, N])")), @tactics.disch_tac), @class.cond_cases_tac), t179), t180), t181), @tactics.all_tac])
   let t178 = @simp.asm_rewrite_tac(@list.List([@vectors.norm_pos_lt()]))
   let t176 = @term_syntax.parse_term("norm((x : Cart[Real, N]))")
@@ -1186,7 +1186,7 @@ pub fn vector_angle_preserving_eq_similarity_alt() -> @kernel.Thm {
 ///|
 /// angle
 fn step_51() -> Unit raise {
-  angle_c.set(@pair.new_definition(@term_syntax.parse_term("(angle : ((Cart[Real, _], Cart[Real, _], Cart[Real, _])) -> Real)(((a : Cart[Real, _]), (b : Cart[Real, _]), (c : Cart[Real, _]))) == vector_angle(a - b, c - b)")))
+  angle_c.set(@pair.new_definition(@term_syntax.parse_term("(angle : ((Cart[Real, _], Cart[Real, _], Cart[Real, _])) -> Real)(((a : Cart[Real, _]), (b : Cart[Real, _]), (c : Cart[Real, _]))) == vector_angle(vector_sub(a, b), vector_sub(c, b))")))
 }
 
 ///|
@@ -1225,7 +1225,7 @@ fn step_53() -> Unit raise {
 fn step_54() -> Unit raise {
   let t393 = @simp.rewrite_tac(@list.List([angle()]))
   let t394 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t393), @tactics.binop_tac), @vectors.vector_arith_tac)
-  angle_translation_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ c : Cart[Real, _], ∀ d : Cart[Real, _], angle((a + b, a + c, a + d)) == angle((b, c, d))"), t394))
+  angle_translation_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ c : Cart[Real, _], ∀ d : Cart[Real, _], angle((vector_add(a, b), vector_add(a, c), vector_add(a, d))) == angle((b, c, d))"), t394))
 }
 
 ///|
@@ -1263,7 +1263,7 @@ pub fn vector_angle_angle() -> @kernel.Thm {
 /// ANGLE_EQ_PI_DIST
 fn step_57() -> Unit raise {
   let t396 = @tactics.then_tac(@simp.rewrite_tac(@list.List([angle(), vector_angle_eq_pi_dist()])), @vectors.norm_arith_tac)
-  angle_eq_pi_dist_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], (angle((A, B, C)) == pi) == (!(A == B) && !(C == B) && dist((A, C)) == dist((A, B)) + dist((B, C)))"), t396))
+  angle_eq_pi_dist_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], (angle((A, B, C)) == pi) == (!(A == B) && !(C == B) && distance((A, C)) == distance((A, B)) + distance((B, C)))"), t396))
 }
 
 ///|
@@ -1295,7 +1295,7 @@ pub fn sin_angle_pos() -> @kernel.Thm {
 /// ANGLE
 fn step_59() -> Unit raise {
   let t398 = @simp.rewrite_tac(@list.List([angle(), @vectors.dist(), @equal.gsym(vector_angle_v1())]))
-  angle_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, _], ∀ B : Cart[Real, _], ∀ C : Cart[Real, _], dot(A - C, B - C) == dist((A, C)) * (dist((B, C)) * cos(angle((A, C, B))))"), t398))
+  angle_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, _], ∀ B : Cart[Real, _], ∀ C : Cart[Real, _], dot(vector_sub(A, C), vector_sub(B, C)) == real_mul(distance((A, C)), real_mul(distance((B, C)), cos(angle((A, C, B)))))"), t398))
 }
 
 ///|
@@ -1392,7 +1392,7 @@ pub fn cos_angle_eq() -> @kernel.Thm {
 /// ANGLE_EQ
 fn step_65() -> Unit raise {
   let t405 = @simp.simp_tac(@list.List([angle(), vector_angle_eq(), @vectors.vector_sub_eq()]))
-  angle_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ c : Cart[Real, _], ∀ a' : Cart[Real, _], ∀ b' : Cart[Real, _], ∀ c' : Cart[Real, _], !(a == b) && !(c == b) && !(a' == b') && !(c' == b') → (angle((a, b, c)) == angle((a', b', c'))) == (dot(a' - b', c' - b') * (norm(a - b) * norm(c - b)) == dot(a - b, c - b) * (norm(a' - b') * norm(c' - b')))"), t405))
+  angle_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ c : Cart[Real, _], ∀ a' : Cart[Real, _], ∀ b' : Cart[Real, _], ∀ c' : Cart[Real, _], !(a == b) && !(c == b) && !(a' == b') && !(c' == b') → (angle((a, b, c)) == angle((a', b', c'))) == (real_mul(dot(vector_sub(a', b'), vector_sub(c', b')), real_mul(vector_norm(vector_sub(a, b)), vector_norm(vector_sub(c, b)))) == real_mul(dot(vector_sub(a, b), vector_sub(c, b)), real_mul(vector_norm(vector_sub(a', b')), vector_norm(vector_sub(c', b')))))"), t405))
 }
 
 ///|
@@ -1565,7 +1565,7 @@ pub fn angle_eq_pi_left() -> @kernel.Thm {
 /// COS_ANGLE
 fn step_75() -> Unit raise {
   let t425 = @simp.rewrite_tac(@list.List([angle(), cos_vector_angle(), @vectors.vector_sub_eq()]))
-  cos_angle_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ c : Cart[Real, _], cos(angle((a, b, c))) == (if a == b || c == b { real_of_num(0) } else { dot(a - b, c - b) / (norm(a - b) * norm(c - b)) })"), t425))
+  cos_angle_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ c : Cart[Real, _], cos(angle((a, b, c))) == (if a == b || c == b { real_of_num(0) } else { real_div(dot(vector_sub(a, b), vector_sub(c, b)), real_mul(vector_norm(vector_sub(a, b)), vector_norm(vector_sub(c, b)))) })"), t425))
 }
 
 ///|
@@ -1581,7 +1581,7 @@ pub fn cos_angle() -> @kernel.Thm {
 /// SIN_ANGLE
 fn step_76() -> Unit raise {
   let t426 = @simp.rewrite_tac(@list.List([angle(), sin_vector_angle(), @vectors.vector_sub_eq()]))
-  sin_angle_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ c : Cart[Real, _], sin(angle((a, b, c))) == (if a == b || c == b { real_of_num(1) } else { sqrt(real_of_num(1) - pow(dot(a - b, c - b) / (norm(a - b) * norm(c - b)), 2)) })"), t426))
+  sin_angle_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ c : Cart[Real, _], sin(angle((a, b, c))) == (if a == b || c == b { real_of_num(1) } else { sqrt(real_sub(real_of_num(1), real_pow(real_div(dot(vector_sub(a, b), vector_sub(c, b)), real_mul(vector_norm(vector_sub(a, b)), vector_norm(vector_sub(c, b)))), 2))) })"), t426))
 }
 
 ///|
@@ -1597,7 +1597,7 @@ pub fn sin_angle() -> @kernel.Thm {
 /// SIN_SQUARED_ANGLE
 fn step_77() -> Unit raise {
   let t427 = @simp.rewrite_tac(@list.List([angle(), sin_squared_vector_angle(), @vectors.vector_sub_eq()]))
-  sin_squared_angle_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ c : Cart[Real, _], pow(sin(angle((a, b, c))), 2) == (if a == b || c == b { real_of_num(1) } else { real_of_num(1) - pow(dot(a - b, c - b) / (norm(a - b) * norm(c - b)), 2) })"), t427))
+  sin_squared_angle_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ c : Cart[Real, _], real_pow(sin(angle((a, b, c))), 2) == (if a == b || c == b { real_of_num(1) } else { real_sub(real_of_num(1), real_pow(real_div(dot(vector_sub(a, b), vector_sub(c, b)), real_mul(vector_norm(vector_sub(a, b)), vector_norm(vector_sub(c, b)))), 2)) })"), t427))
 }
 
 ///|
@@ -1632,7 +1632,7 @@ fn step_78() -> Unit raise {
   let t429 = @simp.rewrite_tac(@list.List([@vectors.dist_0(), angle(), @vectors.vector_sub_rzero()]))
   let t428 = @tactics.repeat_tac(@tactics.gen_tac)
   let t443 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@determinants.geom_origin_tac(@term_syntax.parse_term("(A : Cart[Real, N])")), t428), t429), t430), @tactics.disch_tac), t431), t442)
-  cos_adjacent_hypotenuse_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], orthogonal(A - B, C - B) → dist((A, C)) * cos(angle((B, A, C))) == dist((A, B))"), t443))
+  cos_adjacent_hypotenuse_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], orthogonal(A - B, C - B) → distance((A, C)) * cos(angle((B, A, C))) == distance((A, B))"), t443))
 }
 
 ///|
@@ -1654,7 +1654,7 @@ fn step_79() -> Unit raise {
   let t449 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@vectors.dist_refl(), @realax.real_div(), @realax.real_inv_0(), angle(), @vectors.vector_sub_refl(), vector_angle()])), t445), t448])
   let t444 = @class.asm_cases_tac(@term_syntax.parse_term("(A : Cart[Real, N]) == (C : Cart[Real, N])"))
   let t450 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t444), t449)
-  cos_adjacent_over_hypotenuse_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], orthogonal(A - B, C - B) → cos(angle((B, A, C))) == dist((A, B)) / dist((A, C))"), t450))
+  cos_adjacent_over_hypotenuse_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], orthogonal(A - B, C - B) → cos(angle((B, A, C))) == distance((A, B)) / distance((A, C))"), t450))
 }
 
 ///|
@@ -1707,7 +1707,7 @@ fn step_80() -> Unit raise {
   let t452 = @simp.asm_simp_tac(@list.List([@vectors.orthogonal_refl(), @vectors.vector_sub_eq(), @vectors.dist_refl(), @calc_int.real_mul_lzero()]))
   let t451 = @class.asm_cases_tac(@term_syntax.parse_term("(A : Cart[Real, N]) == (C : Cart[Real, N])"))
   let t479 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t451), t452), @tactics.disch_tac), t453), t454), t455), t461), t467), t469), t470), t471), t477), t478), @calc_rat.real_arith_tac)
-  sin_opposite_hypotenuse_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], orthogonal(A - B, C - B) → dist((A, C)) * sin(angle((B, A, C))) == dist((C, B))"), t479))
+  sin_opposite_hypotenuse_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], orthogonal(A - B, C - B) → distance((A, C)) * sin(angle((B, A, C))) == distance((C, B))"), t479))
 }
 
 ///|
@@ -1725,7 +1725,7 @@ fn step_81() -> Unit raise {
   let t481 = @simp.simp_tac(@list.List([sin_opposite_hypotenuse()]))
   let t480 = @simp.once_rewrite_tac(@list.List([@realax.real_mul_sym()]))
   let t482 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@real.real_eq_rdiv_eq(), @vectors.dist_pos_lt()])), t480), t481)
-  sin_opposite_over_hypotenuse_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], orthogonal(A - B, C - B) && !(A == C) → sin(angle((B, A, C))) == dist((C, B)) / dist((A, C))"), t482))
+  sin_opposite_over_hypotenuse_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], orthogonal(A - B, C - B) && !(A == C) → sin(angle((B, A, C))) == distance((C, B)) / distance((A, C))"), t482))
 }
 
 ///|
@@ -1770,7 +1770,7 @@ fn step_82() -> Unit raise {
   })
   let t483 = @simp.rewrite_tac(@list.List([@transcendentals.tan()]))
   let t504 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t483), t489), t495), t496), t501), t502), t503)
-  tan_opposite_adjacent_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], orthogonal(A - B, C - B) && !(A == B) → dist((A, B)) * tan(angle((B, A, C))) == dist((C, B))"), t504))
+  tan_opposite_adjacent_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], orthogonal(A - B, C - B) && !(A == B) → distance((A, B)) * tan(angle((B, A, C))) == distance((C, B))"), t504))
 }
 
 ///|
@@ -1792,7 +1792,7 @@ fn step_83() -> Unit raise {
   let t510 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([angle(), @vectors.vector_sub_refl(), vector_angle()])), t506), t509])
   let t505 = @class.asm_cases_tac(@term_syntax.parse_term("(A : Cart[Real, N]) == (B : Cart[Real, N])"))
   let t511 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t505), t510)
-  tan_opposite_over_adjacent_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], orthogonal(A - B, C - B) → tan(angle((B, A, C))) == dist((C, B)) / dist((A, B))"), t511))
+  tan_opposite_over_adjacent_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], orthogonal(A - B, C - B) → tan(angle((B, A, C))) == distance((C, B)) / distance((A, B))"), t511))
 }
 
 ///|
@@ -1810,7 +1810,7 @@ fn step_84() -> Unit raise {
   let t512 = @equal.gsym(vector_angle_v1())
   let t513 = @simp.rewrite_tac(@list.List([angle(), @simp.once_rewrite_rule(@list.List([@vectors.norm_sub()]))(@vectors.dist()), t512, @vectors.norm_pow_2()]))
   let t514 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t513), @vectors.vector_arith_tac)
-  law_of_cosines_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], pow(dist((B, C)), 2) == pow(dist((A, B)), 2) + pow(dist((A, C)), 2) - real_of_num(2) * (dist((A, B)) * (dist((A, C)) * cos(angle((B, A, C)))))"), t514))
+  law_of_cosines_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], pow(distance((B, C)), 2) == pow(distance((A, B)), 2) + pow(distance((A, C)), 2) - real_of_num(2) * (distance((A, B)) * (distance((A, C)) * cos(angle((B, A, C)))))"), t514))
 }
 
 ///|
@@ -1867,7 +1867,7 @@ fn step_85() -> Unit raise {
   let t516 = @tactics.exists_tac(@term_syntax.parse_term("2"))
   let t515 = @tactics.match_mp_tac(@real.real_pow_eq())
   let t547 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t515), t516), t517), t519), t520), t521), t522), t523), t526), t527), t528), t540), t541), t543), t544), t545), t546)
-  law_of_sines_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], sin(angle((A, B, C))) * dist((B, C)) == sin(angle((B, A, C))) * dist((A, C))"), t547))
+  law_of_sines_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], sin(angle((A, B, C))) * distance((B, C)) == sin(angle((B, A, C))) * distance((A, C))"), t547))
 }
 
 ///|
@@ -2111,8 +2111,8 @@ fn step_90() -> Unit raise {
       }
     })(t706(x707))
   })
-  let t700 = @simp.once_rewrite_tac(@list.List([@vectors.vector_arith(@term_syntax.parse_term("(op_pct(norm((A : Cart[Real, _]) - (B : Cart[Real, _])), (C : Cart[Real, _]) - B) == op_pct(norm(C - B), A - B)) == (op_pct(norm(A - B) - norm(C - B), C - B) == op_pct(norm(C - B), A - C))"))]))
-  let t701 = @simp.once_rewrite_tac(@list.List([@vectors.vector_arith(@term_syntax.parse_term("(op_pct(norm((A : Cart[Real, _]) - (B : Cart[Real, _])), (C : Cart[Real, _]) - B) == op_pct(norm(C - B), A - B)) == (op_pct(norm(C - B) - norm(A - B), A - B) == op_pct(norm(A - B), C - A))"))]))
+  let t700 = @simp.once_rewrite_tac(@list.List([@vectors.vector_arith(@term_syntax.parse_term("(op_pct(vector_norm(vector_sub((A : Cart[Real, _]), (B : Cart[Real, _]))), vector_sub((C : Cart[Real, _]), B)) == op_pct(vector_norm(vector_sub(C, B)), vector_sub(A, B))) == (op_pct(real_sub(vector_norm(vector_sub(A, B)), vector_norm(vector_sub(C, B))), vector_sub(C, B)) == op_pct(vector_norm(vector_sub(C, B)), vector_sub(A, C)))"))]))
+  let t701 = @simp.once_rewrite_tac(@list.List([@vectors.vector_arith(@term_syntax.parse_term("(op_pct(vector_norm(vector_sub((A : Cart[Real, _]), (B : Cart[Real, _]))), vector_sub((C : Cart[Real, _]), B)) == op_pct(vector_norm(vector_sub(C, B)), vector_sub(A, B))) == (op_pct(real_sub(vector_norm(vector_sub(C, B)), vector_norm(vector_sub(A, B))), vector_sub(A, B)) == op_pct(vector_norm(vector_sub(A, B)), vector_sub(C, A)))"))]))
   let t702 = @list.List([@simp.asm_rewrite_tac(@list.List([@vectors.vector_mul_lcancel(), @vectors.norm_eq_0(), @vectors.vector_sub_eq(), @vectors.vector_arith(@term_syntax.parse_term("((c : Cart[Real, N]) - (b : Cart[Real, N]) == (a : Cart[Real, N]) - b) == (a == c)"))])), t701, t700])
   let t697 = @term_syntax.parse_term("norm((C : Cart[Real, N]) - (B : Cart[Real, N]))")
   let t698 = @bool.ispecl(@list.List([@term_syntax.parse_term("norm((A : Cart[Real, N]) - (B : Cart[Real, N]))"), t697]), @real.real_lt_total())
@@ -2148,7 +2148,7 @@ fn step_90() -> Unit raise {
   let t673 = @list.List([@simp.asm_rewrite_tac(@list.List([angle(), vector_angle_eq_0(), @vectors.vector_sub_eq()])), @tactics.all_tac])
   let t672 = @class.asm_cases_tac(@term_syntax.parse_term("(A : Cart[Real, N]) == (B : Cart[Real, N])"))
   let t712 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t672), t673), t674), t675), t676), t677), @tactics.eq_tac), t692), t693), t699), t702), t708), t709), t710), t711)
-  angle_eq_0_dist_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], (angle((A, B, C)) == real_of_num(0)) == (!(A == B) && !(C == B) && (dist((A, B)) == dist((A, C)) + dist((C, B)) || dist((B, C)) == dist((A, C)) + dist((A, B))))"), t712))
+  angle_eq_0_dist_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], (angle((A, B, C)) == real_of_num(0)) == (!(A == B) && !(C == B) && (distance((A, B)) == distance((A, C)) + distance((C, B)) || distance((B, C)) == distance((A, C)) + distance((A, B))))"), t712))
 }
 
 ///|
@@ -2168,7 +2168,7 @@ fn step_91() -> Unit raise {
   let t715 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(A : Cart[Real, N])"), t714]), @vectors.dist_pos_le()))
   let t713 = @simp.rewrite_tac(@list.List([angle_eq_0_dist()]))
   let t717 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t713), @tactics.ap_term_tac), @tactics.ap_term_tac), t715), t716), @calc_rat.real_arith_tac)
-  angle_eq_0_dist_abs_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], (angle((A, B, C)) == real_of_num(0)) == (!(A == B) && !(C == B) && dist((A, C)) == abs(dist((A, B)) - dist((C, B))))"), t717))
+  angle_eq_0_dist_abs_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], (angle((A, B, C)) == real_of_num(0)) == (!(A == B) && !(C == B) && distance((A, C)) == abs(distance((A, B)) - distance((C, B))))"), t717))
 }
 
 ///|
@@ -2201,10 +2201,10 @@ fn step_92() -> Unit raise {
   let t722 = @simp.asm_simp_tac(@list.List([angle_refl_mid(), angle_refl()]))
   let t721 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@vectors.dist_eq_0()])))
   let t720 = @simp.asm_rewrite_tac(@list.List([]))
-  let t718 = @term_syntax.parse_term("dist(((B' : Cart[Real, N]), (C' : Cart[Real, N]))) == real_of_num(0)")
-  let t719 = @tactics.map_every(@class.asm_cases_tac, @list.List([@term_syntax.parse_term("dist(((A' : Cart[Real, N]), (B' : Cart[Real, N]))) == real_of_num(0)"), t718]))
+  let t718 = @term_syntax.parse_term("distance(((B' : Cart[Real, N]), (C' : Cart[Real, N]))) == real_of_num(0)")
+  let t719 = @tactics.map_every(@class.asm_cases_tac, @list.List([@term_syntax.parse_term("distance(((A' : Cart[Real, N]), (B' : Cart[Real, N]))) == real_of_num(0)"), t718]))
   let t736 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t719), t720), @tactics.strip_tac), t721), t722), t723), t726), t729), t733), t734), t735)
-  congruent_triangles_sss_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], dist((A, B)) == dist((A', B')) && dist((B, C)) == dist((B', C')) && dist((C, A)) == dist((C', A')) → angle((A, B, C)) == angle((A', B', C'))"), t736))
+  congruent_triangles_sss_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], distance((A, B)) == distance((A', B')) && distance((B, C)) == distance((B', C')) && distance((C, A)) == distance((C', A')) → angle((A, B, C)) == angle((A', B', C'))"), t736))
 }
 
 ///|
@@ -2235,7 +2235,7 @@ fn step_93() -> Unit raise {
   let t740 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(B : Cart[Real, M])"), t739, t738]), law_of_cosines()))
   let t737 = @simp.rewrite_tac(@list.List([@vectors.dist_eq()]))
   let t750 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t737), t740), t743), t747), t748), t749)
-  congruent_triangles_sas_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], dist((A, B)) == dist((A', B')) && angle((A, B, C)) == angle((A', B', C')) && dist((B, C)) == dist((B', C')) → dist((A, C)) == dist((A', C'))"), t750))
+  congruent_triangles_sas_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], distance((A, B)) == distance((A', B')) && angle((A, B, C)) == angle((A', B', C')) && distance((B, C)) == distance((B', C')) → distance((A, C)) == distance((A', C'))"), t750))
 }
 
 ///|
@@ -2300,7 +2300,7 @@ fn step_94() -> Unit raise {
   }), t755), @tactics.all_tac])
   let t751 = @class.asm_cases_tac(@term_syntax.parse_term("(A : Cart[Real, M]) == (B : Cart[Real, M])"))
   let t792 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t751), t756), @tactics.disch_tac), t760), t761), t765), t773), t774), @tactics.conj_tac), t791)
-  congruent_triangles_aas_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], angle((A, B, C)) == angle((A', B', C')) && angle((B, C, A)) == angle((B', C', A')) && dist((A, B)) == dist((A', B')) && !collinear({A, B, C}) → dist((A, C)) == dist((A', C')) && dist((B, C)) == dist((B', C'))"), t792))
+  congruent_triangles_aas_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], angle((A, B, C)) == angle((A', B', C')) && angle((B, C, A)) == angle((B', C', A')) && distance((A, B)) == distance((A', B')) && !collinear({A, B, C}) → distance((A, C)) == distance((A', C')) && distance((B, C)) == distance((B', C'))"), t792))
 }
 
 ///|
@@ -2349,7 +2349,7 @@ fn step_95() -> Unit raise {
   }), t797), @tactics.all_tac])
   let t793 = @class.asm_cases_tac(@term_syntax.parse_term("(A : Cart[Real, M]) == (B : Cart[Real, M])"))
   let t819 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t793), t798), t799), t803), t804), t807), t810), t811), t817), t818)
-  congruent_triangles_asa_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], angle((A, B, C)) == angle((A', B', C')) && dist((A, B)) == dist((A', B')) && angle((B, A, C)) == angle((B', A', C')) && !collinear({A, B, C}) → dist((A, C)) == dist((A', C'))"), t819))
+  congruent_triangles_asa_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], angle((A, B, C)) == angle((A', B', C')) && distance((A, B)) == distance((A', B')) && angle((B, A, C)) == angle((B', A', C')) && !collinear({A, B, C}) → distance((A, C)) == distance((A', C'))"), t819))
 }
 
 ///|
@@ -2365,7 +2365,7 @@ pub fn congruent_triangles_asa() -> @kernel.Thm {
 /// CONGRUENT_TRIANGLES_SSS_FULL
 fn step_96() -> Unit raise {
   let t820 = @meson.meson_tac(@list.List([congruent_triangles_sss(), @vectors.dist_sym(), angle_sym()]))
-  congruent_triangles_sss_full_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], dist((A, B)) == dist((A', B')) && dist((B, C)) == dist((B', C')) && dist((C, A)) == dist((C', A')) → dist((A, B)) == dist((A', B')) && dist((B, C)) == dist((B', C')) && dist((C, A)) == dist((C', A')) && angle((A, B, C)) == angle((A', B', C')) && angle((B, C, A)) == angle((B', C', A')) && angle((C, A, B)) == angle((C', A', B'))"), t820))
+  congruent_triangles_sss_full_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], distance((A, B)) == distance((A', B')) && distance((B, C)) == distance((B', C')) && distance((C, A)) == distance((C', A')) → distance((A, B)) == distance((A', B')) && distance((B, C)) == distance((B', C')) && distance((C, A)) == distance((C', A')) && angle((A, B, C)) == angle((A', B', C')) && angle((B, C, A)) == angle((B', C', A')) && angle((C, A, B)) == angle((C', A', B'))"), t820))
 }
 
 ///|
@@ -2381,7 +2381,7 @@ pub fn congruent_triangles_sss_full() -> @kernel.Thm {
 /// CONGRUENT_TRIANGLES_SAS_FULL
 fn step_97() -> Unit raise {
   let t821 = @meson.meson_tac(@list.List([congruent_triangles_sss(), @vectors.dist_sym(), angle_sym(), congruent_triangles_sas()]))
-  congruent_triangles_sas_full_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], dist((A, B)) == dist((A', B')) && angle((A, B, C)) == angle((A', B', C')) && dist((B, C)) == dist((B', C')) → dist((A, B)) == dist((A', B')) && dist((B, C)) == dist((B', C')) && dist((C, A)) == dist((C', A')) && angle((A, B, C)) == angle((A', B', C')) && angle((B, C, A)) == angle((B', C', A')) && angle((C, A, B)) == angle((C', A', B'))"), t821))
+  congruent_triangles_sas_full_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], distance((A, B)) == distance((A', B')) && angle((A, B, C)) == angle((A', B', C')) && distance((B, C)) == distance((B', C')) → distance((A, B)) == distance((A', B')) && distance((B, C)) == distance((B', C')) && distance((C, A)) == distance((C', A')) && angle((A, B, C)) == angle((A', B', C')) && angle((B, C, A)) == angle((B', C', A')) && angle((C, A, B)) == angle((C', A', B'))"), t821))
 }
 
 ///|
@@ -2397,7 +2397,7 @@ pub fn congruent_triangles_sas_full() -> @kernel.Thm {
 /// CONGRUENT_TRIANGLES_AAS_FULL
 fn step_98() -> Unit raise {
   let t822 = @meson.meson_tac(@list.List([congruent_triangles_sss(), @vectors.dist_sym(), angle_sym(), congruent_triangles_aas()]))
-  congruent_triangles_aas_full_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], angle((A, B, C)) == angle((A', B', C')) && angle((B, C, A)) == angle((B', C', A')) && dist((A, B)) == dist((A', B')) && !collinear({A, B, C}) → dist((A, B)) == dist((A', B')) && dist((B, C)) == dist((B', C')) && dist((C, A)) == dist((C', A')) && angle((A, B, C)) == angle((A', B', C')) && angle((B, C, A)) == angle((B', C', A')) && angle((C, A, B)) == angle((C', A', B'))"), t822))
+  congruent_triangles_aas_full_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], angle((A, B, C)) == angle((A', B', C')) && angle((B, C, A)) == angle((B', C', A')) && distance((A, B)) == distance((A', B')) && !collinear({A, B, C}) → distance((A, B)) == distance((A', B')) && distance((B, C)) == distance((B', C')) && distance((C, A)) == distance((C', A')) && angle((A, B, C)) == angle((A', B', C')) && angle((B, C, A)) == angle((B', C', A')) && angle((C, A, B)) == angle((C', A', B'))"), t822))
 }
 
 ///|
@@ -2413,7 +2413,7 @@ pub fn congruent_triangles_aas_full() -> @kernel.Thm {
 /// CONGRUENT_TRIANGLES_ASA_FULL
 fn step_99() -> Unit raise {
   let t823 = @meson.meson_tac(@list.List([congruent_triangles_asa(), congruent_triangles_sas_full(), @vectors.dist_sym(), angle_sym()]))
-  congruent_triangles_asa_full_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], angle((A, B, C)) == angle((A', B', C')) && dist((A, B)) == dist((A', B')) && angle((B, A, C)) == angle((B', A', C')) && !collinear({A, B, C}) → dist((A, B)) == dist((A', B')) && dist((B, C)) == dist((B', C')) && dist((C, A)) == dist((C', A')) && angle((A, B, C)) == angle((A', B', C')) && angle((B, C, A)) == angle((B', C', A')) && angle((C, A, B)) == angle((C', A', B'))"), t823))
+  congruent_triangles_asa_full_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, M], ∀ B : Cart[Real, M], ∀ C : Cart[Real, M], ∀ A' : Cart[Real, N], ∀ B' : Cart[Real, N], ∀ C' : Cart[Real, N], angle((A, B, C)) == angle((A', B', C')) && distance((A, B)) == distance((A', B')) && angle((B, A, C)) == angle((B', A', C')) && !collinear({A, B, C}) → distance((A, B)) == distance((A', B')) && distance((B, C)) == distance((B', C')) && distance((C, A)) == distance((C', A')) && angle((A, B, C)) == angle((A', B', C')) && angle((B, C, A)) == angle((B', C', A')) && angle((C, A, B)) == angle((C', A', B'))"), t823))
 }
 
 ///|
@@ -2599,7 +2599,7 @@ fn step_104() -> Unit raise {
   let t876 = @tactics.repeat_tac(@tactics.gen_tac)
   let t875 = @determinants.geom_origin_tac(@term_syntax.parse_term("(y : Cart[Real, N])"))
   let t916 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t875), t876), t877), t878), t881), t884), t885), t887), t892), t893), @tactics.ap_term_tac), t901), t903), t904), t905), t906), t908), @tactics.strip_tac), t911), t912), t913), @class.cond_cases_tac), t914), t915)
-  setdist_point_line_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, N], ∀ y : Cart[Real, N], ∀ z : Cart[Real, N], setdist(({x}, hull(affine, {y, z}))) == dist((x, y)) * sin(angle((x, y, z)))"), t916))
+  setdist_point_line_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, N], ∀ y : Cart[Real, N], ∀ z : Cart[Real, N], setdist(({x}, hull(affine, {y, z}))) == distance((x, y)) * sin(angle((x, y, z)))"), t916))
 }
 
 ///|
@@ -2629,7 +2629,7 @@ fn step_105() -> Unit raise {
   let t918 = @simp.rewrite_tac(@list.List([@vectors.vector_sub_rzero(), @vectors.vec_component(), @real.real_sub_rzero(), @vectors.dist_0()]))
   let t917 = @simp.rewrite_tac(@list.List([@measure.measure_triangle(), angle()]))
   let t931 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@determinants.geom_origin_tac(@term_syntax.parse_term("(a : Cart[Real, Tybit0[Unit]])")), t917), t918), t919), t920), t921), t922), t923), t924), t925), t926), t927), t928), t929), t930)
-  area_triangle_sin_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, Tybit0[Unit]], ∀ b : Cart[Real, Tybit0[Unit]], ∀ c : Cart[Real, Tybit0[Unit]], measure(hull(convex, {a, b, c})) == dist((a, b)) * (dist((a, c)) * sin(angle((b, a, c)))) / real_of_num(2)"), t931))
+  area_triangle_sin_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, Tybit0[Unit]], ∀ b : Cart[Real, Tybit0[Unit]], ∀ c : Cart[Real, Tybit0[Unit]], measure(hull(convex, {a, b, c})) == distance((a, b)) * (distance((a, c)) * sin(angle((b, a, c)))) / real_of_num(2)"), t931))
 }
 
 ///|
