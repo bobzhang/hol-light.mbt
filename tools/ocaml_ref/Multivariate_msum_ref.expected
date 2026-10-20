@@ -36919,11 +36919,11 @@ Multivariate/msum quotations (121):
   \226\136\128 s : (A) -> Bool, \226\136\128 P : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 g : (A) -> Cart[Cart[Real, M], N], FINITE(s) \226\134\146 msum(s, (x : A) => if P(x) { f(x) } else { g(x) }) == msum({(x : A) | IN(x, s) && P(x)}, f) + msum({(x : A) | IN(x, s) && !P(x)}, g)
   \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 x : A, msum({x}, f) == f(x)
   \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], vectorize(msum(s, f)) == vsum(s, (x : A) => vectorize(f(x)))
-  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], FINITE(s) \226\134\146 norm(msum(s, f)) <= sum(s, (x : A) => norm(f(x)))
-  sum((s : (A) -> Bool), (x : A) => norm((f : (A) -> Cart[Cart[Real, M], N])(x)))
-  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 g : (A) -> Real, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 norm(f(x)) <= g(x)) \226\134\146 norm(msum(s, f)) <= sum(s, g)
-  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 b : Real, FINITE(s) && sum(s, (a : A) => norm(f(a))) <= b \226\134\146 norm(msum(s, f)) <= b
-  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 b : Real, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 norm(f(x)) <= b) \226\134\146 norm(msum(s, f)) <= real_of_num(CARD(s)) * b
+  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], FINITE(s) \226\134\146 matrix_norm(msum(s, f)) <= sum(s, (x : A) => matrix_norm(f(x)))
+  sum((s : (A) -> Bool), (x : A) => matrix_norm((f : (A) -> Cart[Cart[Real, M], N])(x)))
+  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 g : (A) -> Real, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 matrix_norm(f(x)) <= g(x)) \226\134\146 matrix_norm(msum(s, f)) <= sum(s, g)
+  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 b : Real, FINITE(s) && sum(s, (a : A) => matrix_norm(f(a))) <= b \226\134\146 matrix_norm(msum(s, f)) <= b
+  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Cart[Cart[Real, M], N], \226\136\128 b : Real, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 matrix_norm(f(x)) <= b) \226\134\146 matrix_norm(msum(s, f)) <= real_of_num(CARD(s)) * b
   !(SUC((n : Num)) <= n)
   (\226\136\128 m : Num, msum(op_dot_dot(m, 0), (f : (Num) -> Cart[Cart[Real, M], N])) == (if m == 0 { f(0) } else { mat(0) })) && (\226\136\128 m : Num, \226\136\128 n : Num, msum(op_dot_dot(m, SUC(n)), f) == (if m <= SUC(n) { msum(op_dot_dot(m, n), f) + f(SUC(n)) } else { msum(op_dot_dot(m, n), f) }))
   \226\136\128 f : (Num) -> Cart[Cart[Real, M], N], \226\136\128 m : Num, \226\136\128 n : Num, 0 < n && m <= n \226\134\146 msum(op_dot_dot(m, n), f) == msum(op_dot_dot(m, n - 1), f) + f(n)
