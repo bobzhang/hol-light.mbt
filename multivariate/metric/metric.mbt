@@ -95834,7 +95834,7 @@ fn step_2497() -> Unit raise {
     })(((x47886 : @kernel.Thm) => @lib.check(fn(x47884 : @kernel.Thm) -> Bool raise {
       let th = x47884
       let t47885 = @kernel.concl(th)
-      @basics.free_in(@term_syntax.parse_term("real_interval"), t47885)
+      @basics.free_in(@term_syntax.parse_term("closed_real_interval"), t47885)
     }, x47886))(x47887))
   })
   let t47907 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t47888), t47889), @tactics.strip_tac), t47897), t47898), t47905), t47906), @calc_rat.real_arith_tac), @tactics.all_tac])
