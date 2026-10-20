@@ -83145,237 +83145,237 @@ test "100/pick matches 100/pick.ml" {
       #|0..0..solved at 2
       #|0..0..solved at 2
       #|100/pick quotations (1269):
-      #|  forall s:real^2->bool. collinear s ==> negligible s
-      #|  &1 - x - y
-      #|  y:real
-      #|  x:real
-      #|  y:real^N
-      #|  {c,a,b} = {a,b,c}
-      #|  forall a b:real^N.\n        convex hull {vec 0,a,b} =\n        {x % a + y % b | &0 <= x /\\ &0 <= y /\\ x + y <= &1}
-      #|  x + y + z = &1 <=> &1 - x - y = z
-      #|  a /\\ x = &1 /\\ b <=> x = &1 /\\ a /\\ b
-      #|  {c,a,b} = {a,b,c}
-      #|  forall a b:real^2.\n        ~(collinear {vec 0,a,b})\n        ==> interior(convex hull {vec 0,a,b}) =\n              {x % a + y % b | &0 < x /\\ &0 < y /\\ x + y < &1}
-      #|  (forall a:real^2. measure(convex hull {a}) = &0) /\\\n   (forall a b:real^2. measure(convex hull {a,b}) = &0)
-      #|  forall a b:real^2. negligible(segment[a,b])
-      #|  x:real^2
-      #|  x:real^2
-      #|  x:real^2
-      #|  d:real^2
-      #|  {a:real^2,b,c}
-      #|  x:real^2
-      #|  forall a b c d:real^2.\n        d IN convex hull {a,b,c}\n        ==> (convex hull {a,b,c} =\n             convex hull {d,b,c} UNION\n             convex hull {d,a,c} UNION\n             convex hull {d,a,b})
-      #|  s SUBSET u /\\ t SUBSET u ==> (s INTER t) SUBSET u
-      #|  d:real^2
-      #|  {a:real^2,b,c}
-      #|  forall f:(real^2->bool)->real a b c d.\n        (forall s t. compact s /\\ compact t\n               ==> f(s UNION t) = f(s) + f(t) - f(s INTER t)) /\\\n        ~(a = b) /\\ ~(a = c) /\\ ~(b = c) /\\\n        ~affine_dependent {a,b,c} /\\ d IN convex hull {a,b,c}\n        ==> f(convex hull {a,b,c}) =\n            (f(convex hull {a,b,d}) +\n             f(convex hull {a,c,d}) +\n             f(convex hull {b,c,d})) -\n            (f(convex hull {a,d}) +\n             f(convex hull {b,d}) +\n             f(convex hull {c,d})) +\n            f(convex hull {d})
-      #|  integral_vector(x:real^N) <=>\n        forall i. 1 <= i /\\ i <= dimindex(:N) ==> integer(x$i)
-      #|  forall n. integral_vector(vec n)
-      #|  forall i. integral_vector(basis i:real^N)
-      #|  forall x y:real^N.\n        integral_vector x /\\ integral_vector y ==> integral_vector(x + y)
-      #|  forall x y:real^N.\n        integral_vector x /\\ integral_vector y ==> integral_vector(x - y)
-      #|  (x + y) - x:real^N = y
-      #|  forall x y:real^N.\n        integral_vector x ==> (integral_vector(x + y) <=> integral_vector y)
-      #|  {x:real^N | forall i. 1 <= i /\\ i <= dimindex(:N)\n                       ==> integer(x$i) /\\\n                           (a:real^N)$i <= x$i /\\ x$i <= (b:real^N)$i}
-      #|  b:real^N
-      #|  a:real^N
-      #|  forall s:real^N->bool. bounded s ==> FINITE {x | x IN s /\\ integral_vector x}
-      #|  forall a b c:real^N. FINITE {x | x IN convex hull {a,b,c} /\\ integral_vector x}
-      #|  i:num
-      #|  x:real^N
-      #|  i:num
-      #|  basis j:real^N
-      #|  j:num
-      #|  i:num
-      #|  M = matrix(f:real^N->real^N)
-      #|  forall f:real^N->real^N.\n        linear f\n        ==> ((forall x. integral_vector x ==> integral_vector(f x)) <=>\n             (forall i j. 1 <= i /\\ i <= dimindex(:N) /\\\n                    1 <= j /\\ j <= dimindex(:N)\n                    ==> integer(matrix f$i$j)))
-      #|  abs:real->real
-      #|  det(matrix(f:real^N->real^N)) * det(matrix(g:real^N->real^N)) =\n    det(matrix(I:real^N->real^N))
-      #|  forall i j. 1 <= i /\\ i <= dimindex(:N) /\\\n          1 <= j /\\ j <= dimindex(:N)\n          ==> integer(matrix(g:real^N->real^N)$i$j)
-      #|  k:num
-      #|  forall y. y:real^N IN span(IMAGE f (:real^N))
-      #|  (b ==> a) /\\ b ==> a /\\ b
-      #|  ?g:real^N->real^N. linear g /\\ (forall x. g(f x) = x) /\\ (forall y. f(g y) = y)
-      #|  forall i j. 1 <= i /\\ i <= dimindex(:N) /\\\n          1 <= j /\\ j <= dimindex(:N)\n          ==> integer(matrix(f:real^N->real^N)$i$j)
-      #|  forall f:real^N->real^N.\n        linear f /\\ IMAGE f integral_vector = integral_vector\n        ==> abs(det(matrix f)) = &1
-      #|  v:real
-      #|  u:real
-      #|  x % a + y % b = b <=> x % a + (y - &1) % b = vec 0
-      #|  x % a + y % b = a <=> (x - &1) % a + y % b = vec 0
-      #|  v:real
-      #|  u:real
-      #|  &0 <= frac u /\\ &0 <= frac v /\\ frac u + frac v <= &1 \\/\n      &0 <= &1 - frac u /\\ &0 <= &1 - frac v /\\\n      (&1 - frac u) + (&1 - frac v) <= &1
-      #|  (&1 - u) % a + (&1 - v) % b = (a + b) - (u % a + v % b)
-      #|  u - x:real = y <=> u = x + y
-      #|  (x % a + y % b) - (u % a + v % b) = (x - u) % a + (y - v) % b
-      #|  integral_vector(x:real^2)
-      #|  integral_vector(b:real^2)
-      #|  integral_vector(a:real^2)
-      #|  integral_vector(floor u % a + floor v % b:real^2)
-      #|  b' /\\ (b' ==> b) /\\ (a \\/ a') /\\ (c \\/ c' ==> x)\n    ==> (a /\\ b ==> c) ==> (a' /\\ b' ==> c') ==> x
-      #|  (&1 - frac u) % a + (&1 - frac v) % b:real^2
-      #|  frac u % a + frac v % b:real^2
-      #|  v:real
-      #|  u:real
-      #|  (x:real^2) IN span{a,b}
-      #|  x:real^2
-      #|  integral_vector(b:real^2)
-      #|  integral_vector(a:real^2)
-      #|  \\x:real^2. transp(vector[a;b]:real^2^2) ** x
-      #|  {a:real^2,b}
-      #|  (:real^2)
-      #|  span{a,b} = (:real^2)
-      #|  a IN s ==> s SUBSET t ==> a IN t
-      #|  {c,a,b} = {c,b,a}
-      #|  ~collinear{vec 0:real^2, a, b}
-      #|  independent {a:real^2,b}
-      #|  a:real^2 = b
-      #|  b:real^2 = vec 0
-      #|  a:real^2 = vec 0
-      #|  forall a b:real^2.\n        {x | x IN convex hull {vec 0,a,b} /\\ integral_vector x} = {vec 0,a,b}\n        ==> measure(convex hull {vec 0,a,b}) =\n               if collinear {vec 0,a,b} then &0 else &1 / &2
-      #|  a:real^2
-      #|  a:real^2
-      #|  s = t ==> (forall x. x IN s <=> x IN t) /\\ s = t
-      #|  forall a b c:real^2.\n        {x | x IN convex hull {a,b,c} /\\ integral_vector x} = {a,b,c}\n        ==> measure(convex hull {a,b,c}) =\n               if collinear {a,b,c} then &0 else &1 / &2
-      #|  {x:real^2 | x IN {c} /\\ integral_vector x} = {c}
-      #|  segment[b:real^2,c] INTER segment[a,c] = {c}
-      #|  {x | x IN s /\\ P x} INTER {x | x IN t /\\ P x} =\n                          {x | x IN (s INTER t) /\\ P x}
-      #|  z:num <= x /\\ z = 1 ==> x + y = (x + y) - z + 1
-      #|  {x | x IN (s UNION t) /\\ P x} =\n     {x | x IN s /\\ P x} UNION {x | x IN t /\\ P x}
-      #|  segment[a:real^2,b] = segment[b,c] UNION segment[a,c]
-      #|  &0 = c - (a + b + c) / &2 + &1 / &2 <=> a + b = c + &1
-      #|  measure(segment[a:real^2,b]) = &0
-      #|  convex hull {a:real^2,b,c} = segment[a,b]
-      #|  forall a b c:real^2.\n        integral_vector a /\\ integral_vector b /\\ integral_vector c /\\\n        c IN segment[a,b]\n        ==> measure(convex hull {a,b,c}) =\n             &(CARD {x | x IN convex hull {a,b,c} /\\ integral_vector x}) -\n             (&(CARD {x | x IN convex hull {b,c} /\\ integral_vector x}) +\n              &(CARD {x | x IN convex hull {a,c} /\\ integral_vector x}) +\n              &(CARD {x | x IN convex hull {a,b} /\\ integral_vector x})) / &2 +\n             &1 / &2
-      #|  {x | x IN s /\\ P x} = s INTER P
-      #|  {x:real^2 | x IN convex hull {d} /\\ integral_vector x} = {d}
-      #|  {a:real^2,b,d}
-      #|  c:real^2
-      #|  {a:real^2,b,c}
-      #|  x IN convex hull {a:real^2,b,c}
-      #|  x:real^2
-      #|  convex hull {a:real^2,b,c} = convex hull bc
-      #|  bc:real^2->bool
-      #|  s SUBSET t ==> {x | x IN s /\\ P x} SUBSET {x | x IN t /\\ P x}
-      #|  {a:real^2,c,d}
-      #|  b:real^2
-      #|  {a:real^2,b,c}
-      #|  x IN convex hull {a:real^2,b,c}
-      #|  x:real^2
-      #|  convex hull {a:real^2,b,c} = convex hull bc
-      #|  bc:real^2->bool
-      #|  s SUBSET t ==> {x | x IN s /\\ P x} SUBSET {x | x IN t /\\ P x}
-      #|  {b:real^2,c,d}
-      #|  a:real^2
-      #|  {a:real^2,b,c}
-      #|  x IN convex hull {a:real^2,b,c}
-      #|  x:real^2
-      #|  convex hull {a:real^2,b,c} = convex hull bc
-      #|  bc:real^2->bool
-      #|  s SUBSET t ==> {x | x IN s /\\ P x} SUBSET {x | x IN t /\\ P x}
-      #|  x:num = (y + z) - w /\\ w <= z ==> x + w = y + z
-      #|  x:real = y + z - w <=> x + w = y + z
-      #|  {x | x IN (s INTER t) /\\ P x} =\n                          {x | x IN s /\\ P x} INTER {x | x IN t /\\ P x}
-      #|  {x | x IN (s UNION t) /\\ P x} =\n                          {x | x IN s /\\ P x} UNION {x | x IN t /\\ P x}
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  a:real^2
-      #|  \\s. &(CARD {x:real^2 | x IN s /\\ integral_vector x})
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  a:real^2
-      #|  measure:(real^2->bool)->real
-      #|  ~(s = t) ==> t SUBSET s ==> ?d. d IN s /\\ ~(d IN t)
-      #|  ?d:real^2. d IN convex hull {a, b, c} /\\ integral_vector d /\\\n               ~(d = a) /\\ ~(d = b) /\\ ~(d = c)
-      #|  ~collinear{a:real^2,b,c}
-      #|  ~(x IN s) ==> {x} INTER s = {}
-      #|  {x | x IN cs /\\ P x} = s\n         ==> t SUBSET s /\\ t SUBSET ct /\\ ct SUBSET cs /\\\n                (s DIFF t) INTER ct = {}\n             ==> {x | x IN ct /\\ P x} = t
-      #|  {x | x IN convex hull {b,c} /\\ integral_vector x} = {b,c} /\\\n      {x | x IN convex hull {a,c} /\\ integral_vector x} = {a,c} /\\\n      {x | x IN convex hull {a,b} /\\ integral_vector x} = {a:real^2,b}
-      #|  {x:real^2 | x IN convex hull {a, b, c} /\\ integral_vector x} =\n    {a,b,c}
-      #|  b:real^2 = c
-      #|  a:real^2 = c
-      #|  a:real^2 = b
-      #|  ~collinear{a:real^2,b,c}
-      #|  {x | x IN s /\\ P x} = s INTER P
-      #|  c:real^2
-      #|  b:real^2
-      #|  a:real^2
-      #|  b:real^2
-      #|  c:real^2
-      #|  a:real^2
-      #|  a:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  collinear{a:real^2,b,c}
-      #|  CARD {x:real^2 | x IN convex hull {a,b,c} /\\\n                                  integral_vector x}
-      #|  forall a b c:real^2.\n        integral_vector a /\\ integral_vector b /\\ integral_vector c\n        ==> measure(convex hull {a,b,c}) =\n             &(CARD {x | x IN convex hull {a,b,c} /\\ integral_vector x}) -\n             (&(CARD {x | x IN convex hull {b,c} /\\ integral_vector x}) +\n              &(CARD {x | x IN convex hull {a,c} /\\ integral_vector x}) +\n              &(CARD {x | x IN convex hull {a,b} /\\ integral_vector x})) / &2 +\n             &1 / &2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  a:real^2
-      #|  d:real^2
-      #|  b:real^2
-      #|  a:real^2
-      #|  {x | x IN s /\\ P x} = s INTER P
-      #|  c:num <= ca /\\ a <= ab /\\ b <= bc /\\\n      bc' + ac' + ab' + a + b + c = ab + bc + ca + 3\n      ==> bc' + ac' + ab' = (ab + (bc + ca) - c) - (b + a) + 3
-      #|  ~(a = b) ==> {b} INTER {a} = {}
-      #|  b:real^2 = a
-      #|  P a ==> {x | x IN {a} /\\ P x} = {a}
-      #|  segment[b:real^2,c] INTER segment [c,a] = {c} /\\\n      segment[a,b] INTER segment [b,c] = {b} /\\\n      segment[a,b] INTER segment [c,a] = {a}
-      #|  {x | x IN s /\\ P x} INTER {x | x IN t /\\ P x} =\n      {x | x IN (s INTER t) /\\ P x}
-      #|  {x | x IN (s UNION t) /\\ P x} =\n      {x | x IN s /\\ P x} UNION {x | x IN t /\\ P x}
-      #|  s SUBSET t ==> {x | x IN s /\\ P x} SUBSET {x | x IN t /\\ P x}
-      #|  y:num <= x /\\ x - y = z ==> z + y = x
-      #|  i + c = s /\\ ccc = c + &3\n    ==> s - ccc / &2 + &1 / &2 = i + c / &2 - &1
-      #|  {x | x IN (s DIFF t) /\\ P x} =\n    {x | x IN s /\\ P x} DIFF {x | x IN t /\\ P x}
-      #|  forall a b c:real^2.\n        integral_vector a /\\ integral_vector b /\\ integral_vector c\n        ==> measure(convex hull {a,b,c}) =\n                if collinear {a,b,c} then &0\n                else &(CARD {x | x IN interior(convex hull {a,b,c}) /\\\n                                 integral_vector x}) +\n                     &(CARD {x | x IN frontier(convex hull {a,b,c}) /\\\n                                 integral_vector x}) / &2 - &1
-      #|  forall a b x y:real^N.\n          collinear{y,a,b} /\\ between x (a,b) /\\\n          dist(y,x) < dist(x,b) /\\ dist(y,x) < dist(x,a)\n          ==> y IN segment(a,b)
+      #|  \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, collinear(s) \226\134\146 negligible(s)
+      #|  real_of_num(1) - (x : Real) - (y : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (y : Cart[Real, N])
+      #|  {(c : _), (a : _), (b : _)} == {a, b, c}
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], hull(convex, {vec(0), a, b}) == {op_pct((x : Real), a) + op_pct((y : Real), b) | real_of_num(0) <= x && real_of_num(0) <= y && x + y <= real_of_num(1)}
+      #|  ((x : Real) + ((y : Real) + (z : Real)) == real_of_num(1)) == (real_of_num(1) - x - y == z)
+      #|  ((a : Bool) && (x : Real) == real_of_num(1) && (b : Bool)) == (x == real_of_num(1) && a && b)
+      #|  {(c : _), (a : _), (b : _)} == {a, b, c}
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], !collinear({vec(0), a, b}) \226\134\146 interior(hull(convex, {vec(0), a, b})) == {op_pct((x : Real), a) + op_pct((y : Real), b) | real_of_num(0) < x && real_of_num(0) < y && x + y < real_of_num(1)}
+      #|  (\226\136\128 a : Cart[Real, Tybit0[Unit]], measure(hull(convex, {a})) == real_of_num(0)) && (\226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], measure(hull(convex, {a, b})) == real_of_num(0))
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], negligible(segment([(a, b)]))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 d : Cart[Real, Tybit0[Unit]], IN(d, hull(convex, {a, b, c})) \226\134\146 hull(convex, {a, b, c}) == UNION(hull(convex, {d, b, c}), UNION(hull(convex, {d, a, c}), hull(convex, {d, a, b})))
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) && SUBSET((t : (_) -> Bool), u) \226\134\146 SUBSET(INTER(s, t), u)
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}
+      #|  \226\136\128 f : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Real, \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 d : Cart[Real, Tybit0[Unit]], (\226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Tybit0[Unit]]) -> Bool, compact(s) && compact(t) \226\134\146 f(UNION(s, t)) == f(s) + (f(t) - f(INTER(s, t)))) && !(a == b) && !(a == c) && !(b == c) && !affine_dependent({a, b, c}) && IN(d, hull(convex, {a, b, c})) \226\134\146 f(hull(convex, {a, b, c})) == f(hull(convex, {a, b, d})) + (f(hull(convex, {a, c, d})) + f(hull(convex, {b, c, d}))) - (f(hull(convex, {a, d})) + (f(hull(convex, {b, d})) + f(hull(convex, {c, d})))) + f(hull(convex, {d}))
+      #|  (integral_vector : (Cart[Real, N]) -> Bool)((x : Cart[Real, N])) == (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 integer((op_dollar : (Cart[Real, N], Num) -> Real)(x, i)))
+      #|  \226\136\128 n : Num, (integral_vector : (Cart[Real, _]) -> Bool)((vec : (Num) -> Cart[Real, _])(n))
+      #|  \226\136\128 i : Num, (integral_vector : (Cart[Real, N]) -> Bool)((basis : (Num) -> Cart[Real, N])(i))
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], integral_vector(x) && integral_vector(y) \226\134\146 integral_vector(x + y)
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], integral_vector(x) && integral_vector(y) \226\134\146 integral_vector(x - y)
+      #|  (x : Cart[Real, N]) + (y : Cart[Real, N]) - x == y
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], integral_vector(x) \226\134\146 integral_vector(x + y) == integral_vector(y)
+      #|  {(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 integer((op_dollar : (Cart[Real, N], Num) -> Real)(x, i)) && (op_dollar : (Cart[Real, N], Num) -> Real)((a : Cart[Real, N]), i) <= (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) && (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) <= (op_dollar : (Cart[Real, N], Num) -> Real)((b : Cart[Real, N]), i)}
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, bounded(s) \226\134\146 FINITE({(x : Cart[Real, N]) | IN(x, s) && integral_vector(x)})
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], FINITE({(x : Cart[Real, N]) | IN(x, hull(convex, {a, b, c})) && integral_vector(x)})
+      #|  (i : Num)
+      #|  (x : Cart[Real, N])
+      #|  (i : Num)
+      #|  (basis : (Num) -> Cart[Real, N])((j : Num))
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (M : Cart[Cart[Real, N], N]) == matrix((f : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], (linear : ((Cart[Real, N]) -> Cart[Real, N]) -> Bool)(f) \226\134\146 (\226\136\128 x : Cart[Real, N], (integral_vector : (Cart[Real, N]) -> Bool)(x) \226\134\146 (integral_vector : (Cart[Real, N]) -> Bool)(f(x))) == (\226\136\128 i : Num, \226\136\128 j : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= j && j <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 integer((op_dollar : (Cart[Real, N], Num) -> Real)((op_dollar : (Cart[Cart[Real, N], N], Num) -> Cart[Real, N])((matrix : ((Cart[Real, N]) -> Cart[Real, N]) -> Cart[Cart[Real, N], N])(f), i), j)))
+      #|  abs
+      #|  (det : (Cart[Cart[Real, N], N]) -> Real)((matrix : ((Cart[Real, N]) -> Cart[Real, N]) -> Cart[Cart[Real, N], N])((f : (Cart[Real, N]) -> Cart[Real, N]))) * (det : (Cart[Cart[Real, N], N]) -> Real)((matrix : ((Cart[Real, N]) -> Cart[Real, N]) -> Cart[Cart[Real, N], N])((g : (Cart[Real, N]) -> Cart[Real, N]))) == (det : (Cart[Cart[Real, N], N]) -> Real)((matrix : ((Cart[Real, N]) -> Cart[Real, N]) -> Cart[Cart[Real, N], N])((I : (Cart[Real, N]) -> Cart[Real, N])))
+      #|  \226\136\128 i : Num, \226\136\128 j : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= j && j <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 integer((op_dollar : (Cart[Real, N], Num) -> Real)((op_dollar : (Cart[Cart[Real, N], N], Num) -> Cart[Real, N])((matrix : ((Cart[Real, N]) -> Cart[Real, N]) -> Cart[Cart[Real, N], N])((g : (Cart[Real, N]) -> Cart[Real, N])), i), j))
+      #|  (k : Num)
+      #|  \226\136\128 y : Cart[Real, N], IN(y, span(IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), UNIV)))
+      #|  ((b : Bool) \226\134\146 (a : Bool)) && b \226\134\146 a && b
+      #|  \226\136\131 g : (Cart[Real, N]) -> Cart[Real, N], linear(g) && (\226\136\128 x : Cart[Real, N], g((f : (Cart[Real, N]) -> Cart[Real, N])(x)) == x) && (\226\136\128 y : Cart[Real, N], f(g(y)) == y)
+      #|  \226\136\128 i : Num, \226\136\128 j : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= j && j <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 integer((op_dollar : (Cart[Real, N], Num) -> Real)((op_dollar : (Cart[Cart[Real, N], N], Num) -> Cart[Real, N])((matrix : ((Cart[Real, N]) -> Cart[Real, N]) -> Cart[Cart[Real, N], N])((f : (Cart[Real, N]) -> Cart[Real, N])), i), j))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], linear(f) && IMAGE(f, integral_vector) == integral_vector \226\134\146 abs(det(matrix(f))) == real_of_num(1)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (op_pct((x : Real), (a : Cart[Real, Tybit0[Unit]])) + op_pct((y : Real), (b : Cart[Real, Tybit0[Unit]])) == b) == (op_pct(x, a) + op_pct(y - real_of_num(1), b) == vec(0))
+      #|  (op_pct((x : Real), (a : Cart[Real, Tybit0[Unit]])) + op_pct((y : Real), (b : Cart[Real, Tybit0[Unit]])) == a) == (op_pct(x - real_of_num(1), a) + op_pct(y, b) == vec(0))
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  real_of_num(0) <= frac((u : Real)) && real_of_num(0) <= frac((v : Real)) && frac(u) + frac(v) <= real_of_num(1) || real_of_num(0) <= real_of_num(1) - frac(u) && real_of_num(0) <= real_of_num(1) - frac(v) && real_of_num(1) - frac(u) + (real_of_num(1) - frac(v)) <= real_of_num(1)
+      #|  op_pct(real_of_num(1) - (u : Real), (a : Cart[Real, Tybit0[Unit]])) + op_pct(real_of_num(1) - (v : Real), (b : Cart[Real, Tybit0[Unit]])) == a + b - (op_pct(u, a) + op_pct(v, b))
+      #|  ((u : Real) - (x : Real) == (y : Real)) == (u == x + y)
+      #|  op_pct((x : Real), (a : Cart[Real, Tybit0[Unit]])) + op_pct((y : Real), (b : Cart[Real, Tybit0[Unit]])) - (op_pct((u : Real), a) + op_pct((v : Real), b)) == op_pct(x - u, a) + op_pct(y - v, b)
+      #|  integral_vector((x : Cart[Real, Tybit0[Unit]]))
+      #|  integral_vector((b : Cart[Real, Tybit0[Unit]]))
+      #|  integral_vector((a : Cart[Real, Tybit0[Unit]]))
+      #|  integral_vector(op_pct(floor((u : Real)), (a : Cart[Real, Tybit0[Unit]])) + op_pct(floor((v : Real)), (b : Cart[Real, Tybit0[Unit]])))
+      #|  (b' : Bool) && (b' \226\134\146 (b : Bool)) && ((a : Bool) || (a' : Bool)) && ((c : Bool) || (c' : Bool) \226\134\146 (x : Bool)) \226\134\146 (a && b \226\134\146 c) \226\134\146 (a' && b' \226\134\146 c') \226\134\146 x
+      #|  op_pct(real_of_num(1) - frac((u : Real)), (a : Cart[Real, Tybit0[Unit]])) + op_pct(real_of_num(1) - frac((v : Real)), (b : Cart[Real, Tybit0[Unit]]))
+      #|  op_pct(frac((u : Real)), (a : Cart[Real, Tybit0[Unit]])) + op_pct(frac((v : Real)), (b : Cart[Real, Tybit0[Unit]]))
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), span({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])}))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  integral_vector((b : Cart[Real, Tybit0[Unit]]))
+      #|  integral_vector((a : Cart[Real, Tybit0[Unit]]))
+      #|  (x : Cart[Real, Tybit0[Unit]]) => matrix_vector_mul(transp(vector([(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])])), x)
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])}
+      #|  (UNIV : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  span({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])}) == UNIV
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(a, t)
+      #|  {(c : _), (a : _), (b : _)} == {c, b, a}
+      #|  !collinear({vec(0), (a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])})
+      #|  independent({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])})
+      #|  (a : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]]) == vec(0)
+      #|  (a : Cart[Real, Tybit0[Unit]]) == vec(0)
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], {(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {vec(0), a, b})) && integral_vector(x)} == {vec(0), a, b} \226\134\146 measure(hull(convex, {vec(0), a, b})) == (if collinear({vec(0), a, b}) { real_of_num(0) } else { real_of_num(1) / real_of_num(2) })
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 (\226\136\128 x : _, IN(x, s) == IN(x, t)) && s == t
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], {(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {a, b, c})) && integral_vector(x)} == {a, b, c} \226\134\146 measure(hull(convex, {a, b, c})) == (if collinear({a, b, c}) { real_of_num(0) } else { real_of_num(1) / real_of_num(2) })
+      #|  {(x : Cart[Real, Tybit0[Unit]]) | IN(x, {(c : Cart[Real, Tybit0[Unit]])}) && integral_vector(x)} == {c}
+      #|  INTER(segment([((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))]), segment([((a : Cart[Real, Tybit0[Unit]]), c)])) == {c}
+      #|  INTER({(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)}, {(x : _) | IN(x, (t : (_) -> Bool)) && P(x)}) == {(x : _) | IN(x, INTER(s, t)) && P(x)}
+      #|  (z : Num) <= (x : Num) && z == 1 \226\134\146 x + (y : Num) == x + y - z + 1
+      #|  {(x : _) | IN(x, UNION((s : (_) -> Bool), (t : (_) -> Bool))) && (P : (_) -> Bool)(x)} == UNION({(x : _) | IN(x, s) && P(x)}, {(x : _) | IN(x, t) && P(x)})
+      #|  segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]) == UNION(segment([(b, (c : Cart[Real, Tybit0[Unit]]))]), segment([(a, c)]))
+      #|  (real_of_num(0) == (c : Real) - ((a : Real) + ((b : Real) + c)) / real_of_num(2) + real_of_num(1) / real_of_num(2)) == (a + b == c + real_of_num(1))
+      #|  measure(segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))])) == real_of_num(0)
+      #|  hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}) == segment([(a, b)])
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], integral_vector(a) && integral_vector(b) && integral_vector(c) && IN(c, segment([(a, b)])) \226\134\146 measure(hull(convex, {a, b, c})) == real_of_num(CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {a, b, c})) && integral_vector(x)})) - (real_of_num(CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {b, c})) && integral_vector(x)})) + (real_of_num(CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {a, c})) && integral_vector(x)})) + real_of_num(CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {a, b})) && integral_vector(x)})))) / real_of_num(2) + real_of_num(1) / real_of_num(2)
+      #|  {(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)} == INTER(s, P)
+      #|  {(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {(d : Cart[Real, Tybit0[Unit]])})) && integral_vector(x)} == {d}
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]])}
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}) == hull(convex, (bc : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (bc : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET({(x : _) | IN(x, s) && (P : (_) -> Bool)(x)}, {(x : _) | IN(x, t) && P(x)})
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]])}
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}) == hull(convex, (bc : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (bc : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET({(x : _) | IN(x, s) && (P : (_) -> Bool)(x)}, {(x : _) | IN(x, t) && P(x)})
+      #|  {(b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]])}
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}) == hull(convex, (bc : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (bc : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET({(x : _) | IN(x, s) && (P : (_) -> Bool)(x)}, {(x : _) | IN(x, t) && P(x)})
+      #|  (x : Num) == (y : Num) + (z : Num) - (w : Num) && w <= z \226\134\146 x + w == y + z
+      #|  ((x : Real) == (y : Real) + ((z : Real) - (w : Real))) == (x + w == y + z)
+      #|  {(x : _) | IN(x, INTER((s : (_) -> Bool), (t : (_) -> Bool))) && (P : (_) -> Bool)(x)} == INTER({(x : _) | IN(x, s) && P(x)}, {(x : _) | IN(x, t) && P(x)})
+      #|  {(x : _) | IN(x, UNION((s : (_) -> Bool), (t : (_) -> Bool))) && (P : (_) -> Bool)(x)} == UNION({(x : _) | IN(x, s) && P(x)}, {(x : _) | IN(x, t) && P(x)})
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool) => real_of_num(CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, s) && integral_vector(x)}))
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (measure : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Real)
+      #|  !((s : (_) -> Bool) == (t : (_) -> Bool)) \226\134\146 SUBSET(t, s) \226\134\146 (\226\136\131 d : _, IN(d, s) && !IN(d, t))
+      #|  \226\136\131 d : Cart[Real, Tybit0[Unit]], IN(d, hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})) && integral_vector(d) && !(d == a) && !(d == b) && !(d == c)
+      #|  !collinear({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  !IN((x : _), (s : (_) -> Bool)) \226\134\146 INTER({x}, s) == {}
+      #|  {(x : _) | IN(x, (cs : (_) -> Bool)) && (P : (_) -> Bool)(x)} == (s : (_) -> Bool) \226\134\146 SUBSET((t : (_) -> Bool), s) && SUBSET(t, (ct : (_) -> Bool)) && SUBSET(ct, cs) && INTER(DIFF(s, t), ct) == {} \226\134\146 {(x : _) | IN(x, ct) && P(x)} == t
+      #|  {(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {(b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})) && integral_vector(x)} == {b, c} && {(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {(a : Cart[Real, Tybit0[Unit]]), c})) && integral_vector(x)} == {a, c} && {(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {a, b})) && integral_vector(x)} == {a, b}
+      #|  {(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})) && integral_vector(x)} == {a, b, c}
+      #|  (b : Cart[Real, Tybit0[Unit]]) == (c : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]]) == (c : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])
+      #|  !collinear({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  {(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)} == INTER(s, P)
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  collinear({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})) && integral_vector(x)})
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], integral_vector(a) && integral_vector(b) && integral_vector(c) \226\134\146 measure(hull(convex, {a, b, c})) == real_of_num(CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {a, b, c})) && integral_vector(x)})) - (real_of_num(CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {b, c})) && integral_vector(x)})) + (real_of_num(CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {a, c})) && integral_vector(x)})) + real_of_num(CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, hull(convex, {a, b})) && integral_vector(x)})))) / real_of_num(2) + real_of_num(1) / real_of_num(2)
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  {(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)} == INTER(s, P)
+      #|  (c : Num) <= (ca : Num) && (a : Num) <= (ab : Num) && (b : Num) <= (bc : Num) && (bc' : Num) + ((ac' : Num) + ((ab' : Num) + (a + (b + c)))) == ab + (bc + (ca + 3)) \226\134\146 bc' + (ac' + ab') == ab + (bc + ca - c) - (b + a) + 3
+      #|  !((a : _) == (b : _)) \226\134\146 INTER({b}, {a}) == {}
+      #|  (b : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])
+      #|  (P : (_) -> Bool)((a : _)) \226\134\146 {(x : _) | IN(x, {a}) && P(x)} == {a}
+      #|  INTER(segment([((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))]), segment([(c, (a : Cart[Real, Tybit0[Unit]]))])) == {c} && INTER(segment([(a, b)]), segment([(b, c)])) == {b} && INTER(segment([(a, b)]), segment([(c, a)])) == {a}
+      #|  INTER({(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)}, {(x : _) | IN(x, (t : (_) -> Bool)) && P(x)}) == {(x : _) | IN(x, INTER(s, t)) && P(x)}
+      #|  {(x : _) | IN(x, UNION((s : (_) -> Bool), (t : (_) -> Bool))) && (P : (_) -> Bool)(x)} == UNION({(x : _) | IN(x, s) && P(x)}, {(x : _) | IN(x, t) && P(x)})
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET({(x : _) | IN(x, s) && (P : (_) -> Bool)(x)}, {(x : _) | IN(x, t) && P(x)})
+      #|  (y : Num) <= (x : Num) && x - y == (z : Num) \226\134\146 z + y == x
+      #|  (i : Real) + (c : Real) == (s : Real) && (ccc : Real) == c + real_of_num(3) \226\134\146 s - ccc / real_of_num(2) + real_of_num(1) / real_of_num(2) == i + (c / real_of_num(2) - real_of_num(1))
+      #|  {(x : _) | IN(x, DIFF((s : (_) -> Bool), (t : (_) -> Bool))) && (P : (_) -> Bool)(x)} == DIFF({(x : _) | IN(x, s) && P(x)}, {(x : _) | IN(x, t) && P(x)})
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], integral_vector(a) && integral_vector(b) && integral_vector(c) \226\134\146 measure(hull(convex, {a, b, c})) == (if collinear({a, b, c}) { real_of_num(0) } else { real_of_num(CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, interior(hull(convex, {a, b, c}))) && integral_vector(x)})) + (real_of_num(CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, frontier(hull(convex, {a, b, c}))) && integral_vector(x)})) / real_of_num(2) - real_of_num(1)) })
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], collinear({y, a, b}) && between(x, (a, b)) && dist((y, x)) < dist((x, b)) && dist((y, x)) < dist((x, a)) \226\134\146 IN(y, segment((a, b)))
       #|  :real
       #|  :real
       #|  :real
@@ -83384,1036 +83384,1036 @@ test "100/pick matches 100/pick.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  ~(x = &0) <=> &0 < x \\/ &0 < --x
-      #|  (forall n. P(--n) <=> P (n)) /\\ (forall n. &0 < n dot x ==> P n)\n     ==> forall n:real^N. ~(n dot x = &0) ==> P n
-      #|  &0 < --x <=> x < &0
-      #|  x * y < &0 <=> &0 < x * --y
-      #|  &0 < x /\\ x < e ==> abs(min (&1 / &2) x) < e
-      #|  (x + a) - x:real^N = a
-      #|  norm(x - (x + a):real^N) = norm a
+      #|  !((x : Real) == real_of_num(0)) == (real_of_num(0) < x || real_of_num(0) < -x)
+      #|  (\226\136\128 n : Cart[Real, N], (P : (Cart[Real, N]) -> Bool)(-n) == P(n)) && (\226\136\128 n : Cart[Real, N], real_of_num(0) < dot(n, (x : Cart[Real, N])) \226\134\146 P(n)) \226\134\146 (\226\136\128 n : Cart[Real, N], !(dot(n, x) == real_of_num(0)) \226\134\146 P(n))
+      #|  (real_of_num(0) < -(x : Real)) == (x < real_of_num(0))
+      #|  ((x : Real) * (y : Real) < real_of_num(0)) == (real_of_num(0) < x * -y)
+      #|  real_of_num(0) < (x : Real) && x < (e : Real) \226\134\146 abs(min(real_of_num(1) / real_of_num(2), x)) < e
+      #|  (x : Cart[Real, N]) + (a : Cart[Real, N]) - x == a
+      #|  norm((x : Cart[Real, N]) - (x + (a : Cart[Real, N]))) == norm(a)
       #|  :real
       #|  :real
-      #|  {x,b,a} = {a,x,b}
-      #|  ((&1 - v) % x + v % b) - x:real^N = v % (b - x)
-      #|  u + v = &1 <=> u = &1 - v
-      #|  s INTER t = {} <=> forall x. x IN s ==> ~(x IN t)
-      #|  affine hull {x:real^2,b}
-      #|  forall t. t INTER u = {} /\\ s SUBSET t ==> s INTER u = {}
-      #|  p SUBSET (UNIV DIFF b) /\\ l INTER w = {}\n          ==> (b INTER w) SUBSET (UNIV DIFF (p UNION l))
-      #|  a - b < &0 <=> a < b
-      #|  ball(x,e) INTER {w:real^2 | n dot (w - x) < &0}
-      #|  &0 < x ==> ~(min (&1 / &2) x = &0)
-      #|  x + a:real^N = x <=> a = vec 0
-      #|  min (&1 / &2) (e / &2 / norm(c - x:real^2))
-      #|  x + a % (y - x):real^N = (&1 - a) % x + a % y
-      #|  segment (a,b) INTER segment (c,d) = {x:real^2}
-      #|  cd INTER p = {x}\n          ==> xd SUBSET cd\n              ==> (xd DELETE x) SUBSET (UNIV DIFF p)
-      #|  segment[x:real^2,c] DELETE x
-      #|  x + min (&1 / &2) (e / &2 / norm(c - x)) % (c - x):real^2
-      #|  &0 < x /\\ x < e ==> abs(min (&1 / &2) x) < e
-      #|  (x + a) - x:real^N = a
-      #|  norm(x - (x + a):real^N) = norm a
+      #|  {(x : _), (b : _), (a : _)} == {a, x, b}
+      #|  op_pct(real_of_num(1) - (v : Real), (x : Cart[Real, N])) + op_pct(v, (b : Cart[Real, N])) - x == op_pct(v, b - x)
+      #|  ((u : Real) + (v : Real) == real_of_num(1)) == (u == real_of_num(1) - v)
+      #|  (INTER((s : (_) -> Bool), (t : (_) -> Bool)) == {}) == (\226\136\128 x : _, IN(x, s) \226\134\146 !IN(x, t))
+      #|  hull(affine, {(x : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])})
+      #|  \226\136\128 t : (_) -> Bool, INTER(t, (u : (_) -> Bool)) == {} && SUBSET((s : (_) -> Bool), t) \226\134\146 INTER(s, u) == {}
+      #|  SUBSET((p : (_) -> Bool), DIFF(UNIV, (b : (_) -> Bool))) && INTER((l : (_) -> Bool), (w : (_) -> Bool)) == {} \226\134\146 SUBSET(INTER(b, w), DIFF(UNIV, UNION(p, l)))
+      #|  ((a : Real) - (b : Real) < real_of_num(0)) == (a < b)
+      #|  INTER(ball(((x : Cart[Real, Tybit0[Unit]]), (e : Real))), {(w : Cart[Real, Tybit0[Unit]]) | dot((n : Cart[Real, Tybit0[Unit]]), w - x) < real_of_num(0)})
+      #|  real_of_num(0) < (x : Real) \226\134\146 !(min(real_of_num(1) / real_of_num(2), x) == real_of_num(0))
+      #|  ((x : Cart[Real, N]) + (a : Cart[Real, N]) == x) == (a == vec(0))
+      #|  min(real_of_num(1) / real_of_num(2), (e : Real) / real_of_num(2) / norm((c : Cart[Real, Tybit0[Unit]]) - (x : Cart[Real, Tybit0[Unit]])))
+      #|  (x : Cart[Real, N]) + op_pct((a : Real), (y : Cart[Real, N]) - x) == op_pct(real_of_num(1) - a, x) + op_pct(a, y)
+      #|  INTER(segment(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))), segment(((c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]])))) == {(x : Cart[Real, Tybit0[Unit]])}
+      #|  INTER((cd : (_) -> Bool), (p : (_) -> Bool)) == {(x : _)} \226\134\146 SUBSET((xd : (_) -> Bool), cd) \226\134\146 SUBSET(DELETE(xd, x), DIFF(UNIV, p))
+      #|  DELETE(segment([((x : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))]), x)
+      #|  (x : Cart[Real, Tybit0[Unit]]) + op_pct(min(real_of_num(1) / real_of_num(2), (e : Real) / real_of_num(2) / norm((c : Cart[Real, Tybit0[Unit]]) - x)), c - x)
+      #|  real_of_num(0) < (x : Real) && x < (e : Real) \226\134\146 abs(min(real_of_num(1) / real_of_num(2), x)) < e
+      #|  (x : Cart[Real, N]) + (a : Cart[Real, N]) - x == a
+      #|  norm((x : Cart[Real, N]) - (x + (a : Cart[Real, N]))) == norm(a)
       #|  :real
       #|  :real
-      #|  {x,b,a} = {a,x,b}
-      #|  ((&1 - v) % x + v % b) - x:real^N = v % (b - x)
-      #|  u + v = &1 <=> u = &1 - v
-      #|  s INTER t = {} <=> forall x. x IN s ==> ~(x IN t)
-      #|  affine hull {x:real^2,b}
-      #|  forall t. t INTER u = {} /\\ s SUBSET t ==> s INTER u = {}
-      #|  p SUBSET (UNIV DIFF b) /\\ l INTER w = {}\n          ==> (b INTER w) SUBSET (UNIV DIFF (p UNION l))
-      #|  ball(x,e) INTER {w:real^2 | &0 < n dot (w - x)}
-      #|  &0 < x ==> ~(min (&1 / &2) x = &0)
-      #|  x + a:real^N = x <=> a = vec 0
-      #|  min (&1 / &2) (e / &2 / norm(d - x:real^2))
-      #|  x + a % (y - x):real^N = (&1 - a) % x + a % y
-      #|  segment (a,b) INTER segment (c,d) = {x:real^2}
-      #|  cd INTER p = {x}\n          ==> xd SUBSET cd\n              ==> (xd DELETE x) SUBSET (UNIV DIFF p)
-      #|  segment[x:real^2,d] DELETE x
-      #|  x + min (&1 / &2) (e / &2 / norm(d - x)) % (d - x):real^2
-      #|  d:real^2
-      #|  ~(y IN path_image(p ++ linepath(a:real^2,b)))
-      #|  ~p ==> p ==> q
-      #|  y:real^2
-      #|  forall y. y IN ball(x:real^2,e)\n          ==> y IN segment(a,b) \\/ &0 < n dot (y - x) \\/ n dot (y - x) < &0
-      #|  ~(a IN segment[c,d]) /\\ ~(b IN segment[c,d]) /\\\n      segment(a,b) INTER segment(c,d) = {x} /\\\n      segment(a,b) = segment[a,b] DIFF {a,b} /\\\n      segment(c,d) = segment[c,d] DIFF {c,d}\n      ==> segment[a,b] INTER segment(c,d) = {x}
-      #|  cd INTER p = {} /\\ l INTER (cd DIFF {c,d}) = {x}\n      ==> (cd DIFF {c,d}) INTER (p UNION l) = {x}
-      #|  {c,d} INTER p = {} /\\ (segment[c,d] DIFF {c,d}) INTER p = {x}\n      ==> segment[c,d] INTER p = {x}
-      #|  segment[c,d] INTER path_image(p ++ linepath(a,b)) = {x:real^2}
-      #|  y:real^2
-      #|  c:real^2
-      #|  forall y. dist(y,x) < e /\\ ~(y IN path_image(p ++ linepath (a,b)))\n        ==> connected_component\n             ((:real^2) DIFF path_image(p ++ linepath(a,b))) c y
-      #|  s SUBSET UNIV DIFF t <=> s INTER t = {}
-      #|  outside(path_image(p ++ linepath(a:real^2,b)))
-      #|  z:real^2
-      #|  z:real^2
-      #|  e:real
-      #|  x:real^2
-      #|  frontier(outside(path_image(p ++ linepath(a:real^2,b)))) =\n    path_image(p ++ linepath(a,b))
-      #|  s SUBSET UNIV DIFF t <=> s INTER t = {}
-      #|  inside(path_image(p ++ linepath(a:real^2,b)))
-      #|  w:real^2
-      #|  w:real^2
-      #|  e:real
-      #|  x:real^2
-      #|  frontier(inside(path_image(p ++ linepath(a:real^2,b)))) =\n    path_image(p ++ linepath(a,b))
-      #|  v:real^2
-      #|  u:real^2
-      #|  (x:real^2) IN path_image(p ++ linepath(a,b))
-      #|  s SUBSET UNIV DIFF t <=> s INTER t = {}
-      #|  outside(path_image(p ++ linepath(a:real^2,b)))
-      #|  inside(path_image(p ++ linepath(a:real^2,b)))
-      #|  inside (path_image (p ++ linepath (a,b))) UNION\n                  outside (path_image (p ++ linepath (a,b))) =\n                  (:real^2) DIFF path_image (p ++ linepath (a,b))
-      #|  v:real^2
-      #|  u:real^2
-      #|  forall u v. u IN inside(path_image(p ++ linepath(a,b))) /\\\n          v IN outside(path_image(p ++ linepath(a,b)))\n          ==> connected_component\n              ((:real^2) DIFF path_image (p ++ linepath (a,b))) u v
-      #|  p ++ linepath(a:real^2,b)
-      #|  t SUBSET UNIV DIFF s <=> t INTER s = {}
-      #|  ~(x IN s <=> y IN t)\n      ==> forall p. s UNION t = (:real^2) DIFF p /\\ {x,y} INTER p = {}\n              ==> x IN s /\\ y IN s \\/ x IN t /\\ y IN t
-      #|  path_image(p ++ linepath(a:real^2,b))
-      #|  ~(connected_component((:real^2) DIFF path_image(p ++ linepath (a,b))) c d)
-      #|  p ++ linepath(a:real^2,b)
-      #|  between (x:real^2) (a,b)
-      #|  collinear{y:real^2, x, b}
-      #|  x:real^2
-      #|  {y,a,b} = {a,b,y}
-      #|  x:real^2
-      #|  b - x:real^2
-      #|  y - x:real^2
-      #|  n:real^2
-      #|  ~(x < &0) /\\ ~(&0 < x) <=> x = &0
-      #|  (~c /\\ ~b ==> a) ==> a \\/ b \\/ c
-      #|  forall y. y IN ball(x:real^2,e)\n        ==> y IN segment(a,b) \\/\n            &0 < n dot (y - x) \\/\n            n dot (y - x) < &0
-      #|  --x < &0 <=> &0 < x
-      #|  d - ((&1 - u) % c + u % d):real^N = (&1 - u) % (d - c) /\\\n       c - ((&1 - u) % c + u % d) = --u % (d - c)
-      #|  (x:real^2) IN segment(c,d)
-      #|  &0 < n dot (d - x:real^2)
-      #|  n dot (c - x:real^2) < &0
-      #|  n:real^2
-      #|  n:real^2
-      #|  {a,b,c} = {c,b,a}
-      #|  {d:real^2,x,b,c}
-      #|  {a,b,c} = {c,b,a}
-      #|  {b:real^2,x,a,d}
-      #|  {a,b,c,d} = {b,d,a,c}
-      #|  ~collinear{a:real^2, b, c, d}
-      #|  b - x:real^2
-      #|  d - x:real^2
-      #|  n:real^2
-      #|  ~(n dot (d - x:real^2) = &0)
-      #|  ~collinear{a:real^2,b,c}
-      #|  ~collinear{a:real^2, b, c, d}
-      #|  (x:real^2) IN segment(a,b) /\\ x IN segment(c,d)
-      #|  n:real^2
-      #|  b - x:real^2
-      #|  {c,d} INTER (s UNION t) = {} <=>\n      (~(c IN s) /\\ ~(d IN s)) /\\ ~(c IN t) /\\ ~(d IN t)
-      #|  {c,d} INTER path_image(p ++ linepath(a:real^2,b)) = {}
-      #|  x IN segment(a:real^2,b) /\\ x IN segment(c,d)
-      #|  ~(c:real^2 = a) /\\ ~(c = b) /\\ ~(d = a) /\\ ~(d = b)
-      #|  ~(a IN segment[c:real^2,d]) /\\ ~(b IN segment[c,d])
-      #|  segment(d:real^2,c) = segment(c,d)
-      #|  c:real^2
-      #|  d:real^2
-      #|  b:real^2
-      #|  a:real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  a:real^2
-      #|  e = dist(x:real^2,cp)
-      #|  p INTER s SUBSET u ==> x IN (s DIFF u) ==> ~(x IN p)
-      #|  a = {x} ==> x IN a
-      #|  ~a ==> a /\\ b ==> c
-      #|  cp = x \\/ &0 < dist(x:real^2,cp)
+      #|  {(x : _), (b : _), (a : _)} == {a, x, b}
+      #|  op_pct(real_of_num(1) - (v : Real), (x : Cart[Real, N])) + op_pct(v, (b : Cart[Real, N])) - x == op_pct(v, b - x)
+      #|  ((u : Real) + (v : Real) == real_of_num(1)) == (u == real_of_num(1) - v)
+      #|  (INTER((s : (_) -> Bool), (t : (_) -> Bool)) == {}) == (\226\136\128 x : _, IN(x, s) \226\134\146 !IN(x, t))
+      #|  hull(affine, {(x : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])})
+      #|  \226\136\128 t : (_) -> Bool, INTER(t, (u : (_) -> Bool)) == {} && SUBSET((s : (_) -> Bool), t) \226\134\146 INTER(s, u) == {}
+      #|  SUBSET((p : (_) -> Bool), DIFF(UNIV, (b : (_) -> Bool))) && INTER((l : (_) -> Bool), (w : (_) -> Bool)) == {} \226\134\146 SUBSET(INTER(b, w), DIFF(UNIV, UNION(p, l)))
+      #|  INTER(ball(((x : Cart[Real, Tybit0[Unit]]), (e : Real))), {(w : Cart[Real, Tybit0[Unit]]) | real_of_num(0) < dot((n : Cart[Real, Tybit0[Unit]]), w - x)})
+      #|  real_of_num(0) < (x : Real) \226\134\146 !(min(real_of_num(1) / real_of_num(2), x) == real_of_num(0))
+      #|  ((x : Cart[Real, N]) + (a : Cart[Real, N]) == x) == (a == vec(0))
+      #|  min(real_of_num(1) / real_of_num(2), (e : Real) / real_of_num(2) / norm((d : Cart[Real, Tybit0[Unit]]) - (x : Cart[Real, Tybit0[Unit]])))
+      #|  (x : Cart[Real, N]) + op_pct((a : Real), (y : Cart[Real, N]) - x) == op_pct(real_of_num(1) - a, x) + op_pct(a, y)
+      #|  INTER(segment(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))), segment(((c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]])))) == {(x : Cart[Real, Tybit0[Unit]])}
+      #|  INTER((cd : (_) -> Bool), (p : (_) -> Bool)) == {(x : _)} \226\134\146 SUBSET((xd : (_) -> Bool), cd) \226\134\146 SUBSET(DELETE(xd, x), DIFF(UNIV, p))
+      #|  DELETE(segment([((x : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]]))]), x)
+      #|  (x : Cart[Real, Tybit0[Unit]]) + op_pct(min(real_of_num(1) / real_of_num(2), (e : Real) / real_of_num(2) / norm((d : Cart[Real, Tybit0[Unit]]) - x)), d - x)
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  !IN((y : Cart[Real, Tybit0[Unit]]), path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))))))
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 y : Cart[Real, Tybit0[Unit]], IN(y, ball(((x : Cart[Real, Tybit0[Unit]]), (e : Real)))) \226\134\146 IN(y, segment(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))) || real_of_num(0) < dot((n : Cart[Real, Tybit0[Unit]]), y - x) || dot(n, y - x) < real_of_num(0)
+      #|  !IN((a : Cart[Real, _]), segment([((c : Cart[Real, _]), (d : Cart[Real, _]))])) && !IN((b : Cart[Real, _]), segment([(c, d)])) && INTER(segment((a, b)), segment((c, d))) == {(x : Cart[Real, _])} && segment((a, b)) == DIFF(segment([(a, b)]), {a, b}) && segment((c, d)) == DIFF(segment([(c, d)]), {c, d}) \226\134\146 INTER(segment([(a, b)]), segment((c, d))) == {x}
+      #|  INTER((cd : (_) -> Bool), (p : (_) -> Bool)) == {} && INTER((l : (_) -> Bool), DIFF(cd, {(c : _), (d : _)})) == {(x : _)} \226\134\146 INTER(DIFF(cd, {c, d}), UNION(p, l)) == {x}
+      #|  INTER({(c : Cart[Real, _]), (d : Cart[Real, _])}, (p : (Cart[Real, _]) -> Bool)) == {} && INTER(DIFF(segment([(c, d)]), {c, d}), p) == {(x : Cart[Real, _])} \226\134\146 INTER(segment([(c, d)]), p) == {x}
+      #|  INTER(segment([((c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]]))]), path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))))) == {(x : Cart[Real, Tybit0[Unit]])}
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 y : Cart[Real, Tybit0[Unit]], dist((y, (x : Cart[Real, Tybit0[Unit]]))) < (e : Real) && !IN(y, path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))))) \226\134\146 connected_component(DIFF(UNIV, path_image(op_plus_plus(p, linepath((a, b))))), (c : Cart[Real, Tybit0[Unit]]), y)
+      #|  SUBSET((s : (_) -> Bool), DIFF(UNIV, (t : (_) -> Bool))) == (INTER(s, t) == {})
+      #|  outside(path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))))))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (e : Real)
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  frontier(outside(path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))))))) == path_image(op_plus_plus(p, linepath((a, b))))
+      #|  SUBSET((s : (_) -> Bool), DIFF(UNIV, (t : (_) -> Bool))) == (INTER(s, t) == {})
+      #|  inside(path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))))))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (e : Real)
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  frontier(inside(path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))))))) == path_image(op_plus_plus(p, linepath((a, b))))
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))))))
+      #|  SUBSET((s : (_) -> Bool), DIFF(UNIV, (t : (_) -> Bool))) == (INTER(s, t) == {})
+      #|  outside(path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))))))
+      #|  inside(path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))))))
+      #|  UNION(inside(path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))))), outside(path_image(op_plus_plus(p, linepath((a, b)))))) == DIFF(UNIV, path_image(op_plus_plus(p, linepath((a, b)))))
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 u : Cart[Real, Tybit0[Unit]], \226\136\128 v : Cart[Real, Tybit0[Unit]], IN(u, inside(path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))))))) && IN(v, outside(path_image(op_plus_plus(p, linepath((a, b)))))) \226\134\146 connected_component(DIFF(UNIV, path_image(op_plus_plus(p, linepath((a, b))))), u, v)
+      #|  op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))))
+      #|  SUBSET((t : (_) -> Bool), DIFF(UNIV, (s : (_) -> Bool))) == (INTER(t, s) == {})
+      #|  !(IN((x : Cart[Real, Tybit0[Unit]]), (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) == IN((y : Cart[Real, Tybit0[Unit]]), (t : (Cart[Real, Tybit0[Unit]]) -> Bool))) \226\134\146 (\226\136\128 p : (Cart[Real, Tybit0[Unit]]) -> Bool, UNION(s, t) == DIFF(UNIV, p) && INTER({x, y}, p) == {} \226\134\146 IN(x, s) && IN(y, s) || IN(x, t) && IN(y, t))
+      #|  path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))))
+      #|  !connected_component(DIFF(UNIV, path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))))), (c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]]))
+      #|  op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))))
+      #|  between((x : Cart[Real, Tybit0[Unit]]), ((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))
+      #|  collinear({(y : Cart[Real, Tybit0[Unit]]), (x : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])})
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  {(y : _), (a : _), (b : _)} == {a, b, y}
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]]) - (x : Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, Tybit0[Unit]]) - (x : Cart[Real, Tybit0[Unit]])
+      #|  (n : Cart[Real, Tybit0[Unit]])
+      #|  (!((x : Real) < real_of_num(0)) && !(real_of_num(0) < x)) == (x == real_of_num(0))
+      #|  (!(c : Bool) && !(b : Bool) \226\134\146 (a : Bool)) \226\134\146 a || b || c
+      #|  \226\136\128 y : Cart[Real, Tybit0[Unit]], IN(y, ball(((x : Cart[Real, Tybit0[Unit]]), (e : Real)))) \226\134\146 IN(y, segment(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))) || real_of_num(0) < dot((n : Cart[Real, Tybit0[Unit]]), y - x) || dot(n, y - x) < real_of_num(0)
+      #|  (-(x : Real) < real_of_num(0)) == (real_of_num(0) < x)
+      #|  (d : Cart[Real, N]) - (op_pct(real_of_num(1) - (u : Real), (c : Cart[Real, N])) + op_pct(u, d)) == op_pct(real_of_num(1) - u, d - c) && c - (op_pct(real_of_num(1) - u, c) + op_pct(u, d)) == op_pct(-u, d - c)
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), segment(((c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]]))))
+      #|  real_of_num(0) < dot((n : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]]) - (x : Cart[Real, Tybit0[Unit]]))
+      #|  dot((n : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]) - (x : Cart[Real, Tybit0[Unit]])) < real_of_num(0)
+      #|  (n : Cart[Real, Tybit0[Unit]])
+      #|  (n : Cart[Real, Tybit0[Unit]])
+      #|  {(a : _), (b : _), (c : _)} == {c, b, a}
+      #|  {(d : Cart[Real, Tybit0[Unit]]), (x : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}
+      #|  {(a : _), (b : _), (c : _)} == {c, b, a}
+      #|  {(b : Cart[Real, Tybit0[Unit]]), (x : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]])}
+      #|  {(a : _), (b : _), (c : _), (d : _)} == {b, d, a, c}
+      #|  !collinear({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]])})
+      #|  (b : Cart[Real, Tybit0[Unit]]) - (x : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]]) - (x : Cart[Real, Tybit0[Unit]])
+      #|  (n : Cart[Real, Tybit0[Unit]])
+      #|  !(dot((n : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]]) - (x : Cart[Real, Tybit0[Unit]])) == real_of_num(0))
+      #|  !collinear({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  !collinear({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]])})
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), segment(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))) && IN(x, segment(((c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]]))))
+      #|  (n : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]]) - (x : Cart[Real, Tybit0[Unit]])
+      #|  (INTER({(c : _), (d : _)}, UNION((s : (_) -> Bool), (t : (_) -> Bool))) == {}) == ((!IN(c, s) && !IN(d, s)) && !IN(c, t) && !IN(d, t))
+      #|  INTER({(c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]])}, path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))))) == {}
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), segment(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))) && IN(x, segment(((c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]]))))
+      #|  !((c : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])) && !(c == (b : Cart[Real, Tybit0[Unit]])) && !((d : Cart[Real, Tybit0[Unit]]) == a) && !(d == b)
+      #|  !IN((a : Cart[Real, Tybit0[Unit]]), segment([((c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]]))])) && !IN((b : Cart[Real, Tybit0[Unit]]), segment([(c, d)]))
+      #|  segment(((d : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))) == segment((c, d))
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (e : Real) == dist(((x : Cart[Real, Tybit0[Unit]]), (cp : Cart[Real, Tybit0[Unit]])))
+      #|  SUBSET(INTER((p : (_) -> Bool), (s : (_) -> Bool)), (u : (_) -> Bool)) \226\134\146 IN((x : _), DIFF(s, u)) \226\134\146 !IN(x, p)
+      #|  (a : (_) -> Bool) == {(x : _)} \226\134\146 IN(x, a)
+      #|  !(a : Bool) \226\134\146 a && (b : Bool) \226\134\146 (c : Bool)
+      #|  (cp : Cart[Real, Tybit0[Unit]]) == (x : Cart[Real, Tybit0[Unit]]) || real_of_num(0) < dist((x, cp))
       #|  :real
-      #|  cp:real^2
-      #|  a INSERT b INSERT c INSERT d INSERT s =\n                             {a,b,c,d} UNION s
-      #|  x:real^2
-      #|  (a:real^2) INSERT b INSERT c INSERT d INSERT path_image p
-      #|  linepath(a:real^2,b)
-      #|  p:real^1->real^2
-      #|  forall a b c d p x:real^2.\n        simple_path(p ++ linepath(a,b)) /\\\n        pathstart p = b /\\ pathfinish p = a /\\\n        segment(a,b) INTER segment(c,d) = {x} /\\\n        segment[c,d] INTER path_image p = {}\n        ==> (c IN inside(path_image(p ++ linepath(a,b))) <=>\n             d IN outside(path_image(p ++ linepath(a,b))))
-      #|  polygonal_path[] = linepath(vec 0,vec 0) /\\\n  polygonal_path[a] = linepath(a,a) /\\\n  polygonal_path [a;b] = linepath(a,b) /\\\n  polygonal_path (CONS a (CONS b (CONS c l))) =\n       linepath(a,b) ++ polygonal_path(CONS b (CONS c l))
+      #|  (cp : Cart[Real, Tybit0[Unit]])
+      #|  INSERT((a : _), INSERT((b : _), INSERT((c : _), INSERT((d : _), (s : (_) -> Bool))))) == UNION({a, b, c, d}, s)
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  INSERT((a : Cart[Real, Tybit0[Unit]]), INSERT((b : Cart[Real, Tybit0[Unit]]), INSERT((c : Cart[Real, Tybit0[Unit]]), INSERT((d : Cart[Real, Tybit0[Unit]]), path_image((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))))))
+      #|  linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))
+      #|  (p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 d : Cart[Real, Tybit0[Unit]], \226\136\128 p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], simple_path(op_plus_plus(p, linepath((a, b)))) && pathstart(p) == b && pathfinish(p) == a && INTER(segment((a, b)), segment((c, d))) == {x} && INTER(segment([(c, d)]), path_image(p)) == {} \226\134\146 IN(c, inside(path_image(op_plus_plus(p, linepath((a, b)))))) == IN(d, outside(path_image(op_plus_plus(p, linepath((a, b))))))
+      #|  (polygonal_path : (List[Cart[Real, _]], Cart[Real, Unit]) -> Cart[Real, _])(NIL) == linepath((vec(0), vec(0))) && polygonal_path([(a : Cart[Real, _])]) == linepath((a, a)) && polygonal_path([a, (b : Cart[Real, _])]) == linepath((a, b)) && polygonal_path(CONS(a, CONS(b, CONS((c : Cart[Real, _]), (l : List[Cart[Real, _]]))))) == op_plus_plus(linepath((a, b)), polygonal_path(CONS(b, CONS(c, l))))
       #|  :P
       #|  :P
       #|  \\n. n + 1
       #|  (+):num->num->num
       #|  (+):num->num->num
-      #|  forall a b p. ~(p = [])\n           ==> polygonal_path(CONS a (CONS b p)) =\n               linepath(a,b) ++ polygonal_path(CONS b p)
-      #|  forall a b p. polygonal_path (MAP (\\x. a + x) (CONS b p)) =\n         (\\x. a + x) o (polygonal_path (CONS b p))
-      #|  forall f p. linear f ==> polygonal_path (MAP f p) = f o polygonal_path p
-      #|  forall p. pathstart(polygonal_path p) = if p = [] then vec 0 else HD p
-      #|  forall p. pathfinish(polygonal_path p) = if p = [] then vec 0 else LAST p
-      #|  forall p:(real^N)list. set_of_list p SUBSET path_image (polygonal_path p)
-      #|  a:real^N
-      #|  p:(real^N)list
-      #|  c:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  forall p:(real^N)list. arc(polygonal_path p) ==> PAIRWISE (\\x y. ~(x = y)) p
-      #|  forall p:(real^N)list. path(polygonal_path p)
-      #|  forall p. ~(p = [])\n       ==> path_image(polygonal_path p) SUBSET convex hull (set_of_list p)
-      #|  a:real^N
-      #|  segment[d:real^N,e]
-      #|  (sab INTER p) SUBSET {b}\n          ==> forall sde a. sde SUBSET p /\\\n              ~(b IN sde) /\\ d IN sde /\\ a IN sde /\\ a IN sab\n              ==> F
-      #|  e:real^N
-      #|  d:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  c:real^N
-      #|  b:real^N
-      #|  x IN path_image(polygonal_path (CONS (b:real^N) (CONS c p)))
-      #|  p:(real^N)list = []
-      #|  3 <= SUC(SUC p) <=> ~(p = 0)
-      #|  x:real^N
-      #|  b:real^N
-      #|  path_image(polygonal_path (CONS (b:real^N) (CONS c p)))
-      #|  forall p b. (s INTER p) SUBSET {b} /\\\n      x IN p /\\ b IN s /\\ ~(x = b)\n      ==> ~(x IN s)
-      #|  b:real^N
-      #|  a:real^N
-      #|  x:real^N
-      #|  p:(real^N)list
-      #|  c:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  forall p x:real^N.\n        arc(polygonal_path p) /\\ 3 <= LENGTH p /\\\n        x IN path_image(polygonal_path p)\n        ==> ?a b. MEM a p /\\ MEM b p /\\ x IN segment[a,b] /\\\n                  segment[a,b] SUBSET path_image(polygonal_path p) /\\\n                  ~(pathstart(polygonal_path p) IN segment[a,b] /\\\n                    pathfinish(polygonal_path p) IN segment[a,b])
-      #|  forall p. ~(p = []) ==> set_of_list(CONS (LAST p) (BUTLAST p)) = set_of_list p
-      #|  ((q <=> p) /\\ (q' <=> p')) /\\ (p <=> p')\n      ==> (p <=> p') /\\ (q <=> q')
-      #|  (~p /\\ ~p') /\\ (q <=> q') ==> (p <=> p') /\\ (q <=> q')
-      #|  a:real^N = d
-      #|  2 <= SUC(SUC n)
-      #|  d:real^N
-      #|  d:real^N
-      #|  p:(real^N)list
-      #|  c:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  forall p d:real^N.\n        2 <= LENGTH p\n        ==> path_image(polygonal_path(APPEND p [d])) =\n            path_image(polygonal_path p ++ linepath(LAST p,d)) /\\\n            (arc(polygonal_path(APPEND p [d])) <=>\n             arc(polygonal_path p ++ linepath(LAST p,d))) /\\\n            (simple_path(polygonal_path(APPEND p [d])) <=>\n             simple_path(polygonal_path p ++ linepath(LAST p,d)))
-      #|  2 <= SUC(SUC n)
-      #|  p:(real^N)list
-      #|  c:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  forall p:(real^N)list.\n        2 <= LENGTH p /\\ LAST p = HD p\n        ==> path_image(polygonal_path(APPEND (TL p) [HD(TL p)])) =\n            path_image(polygonal_path p)
-      #|  2 <= SUC(SUC n)
-      #|  p:(real^N)list
-      #|  c:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  forall p:(real^N)list.\n        2 <= LENGTH p /\\ LAST p = HD p\n        ==> (simple_path(polygonal_path(APPEND (TL p) [HD(TL p)])) =\n             simple_path(polygonal_path p))
-      #|  0 < k ==> k - 1 < k /\\ k - (k - 1) = 1
-      #|  k - 1
-      #|  k - SUC i = k - i - 1
-      #|  forall i:num. i < k ==> P(k - i)
-      #|  forall P. (forall i. P i /\\ 0 < i ==> P(i - 1)) /\\ (?k. 0 < k /\\ P k)\n             ==> P 1
-      #|  0 < k ==> k - 1 + 1 = k
-      #|  ~(3 <= 0)
-      #|  ~(m:A list = [])
-      #|  APPEND (TL m) [HD(TL m):A]
-      #|  m:A list
-      #|  k:num
-      #|  l:A list
-      #|  i:num
-      #|  3 <= n ==> n - 2 + 1 = n - 1
-      #|  3 <= n ==> n - 2 < n - 1
-      #|  3 <= LENGTH(l:A list)
-      #|  (APPEND (TL l) [HD(TL l):A])
-      #|  LENGTH(l:A list) - 2
-      #|  i = 0 \\/ 0 < i
-      #|  i:num
-      #|  ~(3 <= 0)
-      #|  ~(l:A list = [])
-      #|  ?i l'. 0 < i /\\ i < LENGTH l' /\\ P l' /\\ EL i l' = (a:A)
-      #|  forall P l a:A.\n      (forall l. P(l) ==> 3 <= LENGTH l /\\ LAST l = HD l) /\\\n      (forall l. P(l) ==> P(APPEND (TL l) [HD(TL l)])) /\\\n      P l /\\ MEM a l\n      ==> ?l'. EL 1 l' = a /\\ P l'
+      #|  \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], \226\136\128 p : List[Cart[Real, _]], !(p == NIL) \226\134\146 polygonal_path(CONS(a, CONS(b, p))) == op_plus_plus(linepath((a, b)), polygonal_path(CONS(b, p)))
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 p : List[Cart[Real, Tybit0[Unit]]], polygonal_path(MAP((x : Cart[Real, Tybit0[Unit]]) => a + x, CONS(b, p))) == o((x : Cart[Real, Tybit0[Unit]]) => a + x, polygonal_path(CONS(b, p)))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 p : List[Cart[Real, _]], linear(f) \226\134\146 polygonal_path(MAP(f, p)) == o(f, polygonal_path(p))
+      #|  \226\136\128 p : List[Cart[Real, _]], pathstart(polygonal_path(p)) == (if p == NIL { vec(0) } else { HD(p) })
+      #|  \226\136\128 p : List[Cart[Real, _]], pathfinish(polygonal_path(p)) == (if p == NIL { vec(0) } else { LAST(p) })
+      #|  \226\136\128 p : List[Cart[Real, N]], SUBSET(set_of_list(p), path_image(polygonal_path(p)))
+      #|  (a : Cart[Real, N])
+      #|  (p : List[Cart[Real, N]])
+      #|  (c : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 p : List[Cart[Real, N]], arc(polygonal_path(p)) \226\134\146 PAIRWISE((x : Cart[Real, N]) => (y : Cart[Real, N]) => !(x == y), p)
+      #|  \226\136\128 p : List[Cart[Real, N]], path(polygonal_path(p))
+      #|  \226\136\128 p : List[Cart[Real, _]], !(p == NIL) \226\134\146 SUBSET(path_image(polygonal_path(p)), hull(convex, set_of_list(p)))
+      #|  (a : Cart[Real, N])
+      #|  segment([((d : Cart[Real, N]), (e : Cart[Real, N]))])
+      #|  SUBSET(INTER((sab : (_) -> Bool), (p : (_) -> Bool)), {(b : _)}) \226\134\146 (\226\136\128 sde : (_) -> Bool, \226\136\128 a : _, SUBSET(sde, p) && !IN(b, sde) && IN((d : _), sde) && IN(a, sde) && IN(a, sab) \226\134\146 false)
+      #|  (e : Cart[Real, N])
+      #|  (d : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (c : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  IN((x : Cart[Real, N]), path_image(polygonal_path(CONS((b : Cart[Real, N]), CONS((c : Cart[Real, N]), (p : List[Cart[Real, N]]))))))
+      #|  (p : List[Cart[Real, N]]) == NIL
+      #|  (3 <= SUC(SUC((p : Num)))) == !(p == 0)
+      #|  (x : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  path_image(polygonal_path(CONS((b : Cart[Real, N]), CONS((c : Cart[Real, N]), (p : List[Cart[Real, N]])))))
+      #|  \226\136\128 p : (_) -> Bool, \226\136\128 b : _, SUBSET(INTER((s : (_) -> Bool), p), {b}) && IN((x : _), p) && IN(b, s) && !(x == b) \226\134\146 !IN(x, s)
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (p : List[Cart[Real, N]])
+      #|  (c : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 p : List[Cart[Real, N]], \226\136\128 x : Cart[Real, N], arc(polygonal_path(p)) && 3 <= LENGTH(p) && IN(x, path_image(polygonal_path(p))) \226\134\146 (\226\136\131 a : Cart[Real, N], \226\136\131 b : Cart[Real, N], MEM(a, p) && MEM(b, p) && IN(x, segment([(a, b)])) && SUBSET(segment([(a, b)]), path_image(polygonal_path(p))) && !(IN(pathstart(polygonal_path(p)), segment([(a, b)])) && IN(pathfinish(polygonal_path(p)), segment([(a, b)]))))
+      #|  \226\136\128 p : List[_], !(p == NIL) \226\134\146 set_of_list(CONS(LAST(p), BUTLAST(p))) == set_of_list(p)
+      #|  ((q : Bool) == (p : Bool) && (q' : Bool) == (p' : Bool)) && p == p' \226\134\146 p == p' && q == q'
+      #|  (!(p : Bool) && !(p' : Bool)) && (q : Bool) == (q' : Bool) \226\134\146 p == p' && q == q'
+      #|  (a : Cart[Real, N]) == (d : Cart[Real, N])
+      #|  2 <= SUC(SUC((n : Num)))
+      #|  (d : Cart[Real, N])
+      #|  (d : Cart[Real, N])
+      #|  (p : List[Cart[Real, N]])
+      #|  (c : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 p : List[Cart[Real, N]], \226\136\128 d : Cart[Real, N], 2 <= LENGTH(p) \226\134\146 path_image(polygonal_path(APPEND(p, [d]))) == path_image(op_plus_plus(polygonal_path(p), linepath((LAST(p), d)))) && arc(polygonal_path(APPEND(p, [d]))) == arc(op_plus_plus(polygonal_path(p), linepath((LAST(p), d)))) && simple_path(polygonal_path(APPEND(p, [d]))) == simple_path(op_plus_plus(polygonal_path(p), linepath((LAST(p), d))))
+      #|  2 <= SUC(SUC((n : Num)))
+      #|  (p : List[Cart[Real, N]])
+      #|  (c : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 p : List[Cart[Real, N]], 2 <= LENGTH(p) && LAST(p) == HD(p) \226\134\146 path_image(polygonal_path(APPEND(TL(p), [HD(TL(p))]))) == path_image(polygonal_path(p))
+      #|  2 <= SUC(SUC((n : Num)))
+      #|  (p : List[Cart[Real, N]])
+      #|  (c : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 p : List[Cart[Real, N]], 2 <= LENGTH(p) && LAST(p) == HD(p) \226\134\146 simple_path(polygonal_path(APPEND(TL(p), [HD(TL(p))]))) == simple_path(polygonal_path(p))
+      #|  0 < (k : Num) \226\134\146 k - 1 < k && k - (k - 1) == 1
+      #|  (k : Num) - 1
+      #|  (k : Num) - SUC((i : Num)) == k - i - 1
+      #|  \226\136\128 i : Num, i < (k : Num) \226\134\146 (P : (Num) -> Bool)(k - i)
+      #|  \226\136\128 P : (Num) -> Bool, (\226\136\128 i : Num, P(i) && 0 < i \226\134\146 P(i - 1)) && (\226\136\131 k : Num, 0 < k && P(k)) \226\134\146 P(1)
+      #|  0 < (k : Num) \226\134\146 k - 1 + 1 == k
+      #|  !(3 <= 0)
+      #|  !((m : List[A]) == NIL)
+      #|  APPEND(TL((m : List[A])), [HD(TL(m))])
+      #|  (m : List[A])
+      #|  (k : Num)
+      #|  (l : List[A])
+      #|  (i : Num)
+      #|  3 <= (n : Num) \226\134\146 n - 2 + 1 == n - 1
+      #|  3 <= (n : Num) \226\134\146 n - 2 < n - 1
+      #|  3 <= LENGTH((l : List[A]))
+      #|  APPEND(TL((l : List[A])), [HD(TL(l))])
+      #|  LENGTH((l : List[A])) - 2
+      #|  (i : Num) == 0 || 0 < i
+      #|  (i : Num)
+      #|  !(3 <= 0)
+      #|  !((l : List[A]) == NIL)
+      #|  \226\136\131 i : Num, \226\136\131 l' : List[A], 0 < i && i < LENGTH(l') && (P : (List[A]) -> Bool)(l') && EL(i, l') == (a : A)
+      #|  \226\136\128 P : (List[A]) -> Bool, \226\136\128 l : List[A], \226\136\128 a : A, (\226\136\128 l : List[A], P(l) \226\134\146 3 <= LENGTH(l) && LAST(l) == HD(l)) && (\226\136\128 l : List[A], P(l) \226\134\146 P(APPEND(TL(l), [HD(TL(l))]))) && P(l) && MEM(a, l) \226\134\146 (\226\136\131 l' : List[A], EL(1, l') == a && P(l'))
       #|  1
-      #|  p:A list
-      #|  l':A list
-      #|  3 <= LENGTH(l':A list)
-      #|  EL 1 l' = (a:A)
-      #|  APPEND (TL l') [HD(TL l'):A]
-      #|  l':A list
-      #|  a:A
-      #|  l:A list
-      #|  P:A list->bool
-      #|  forall P l a:A.\n      (forall l. P(l) ==> 3 <= LENGTH l /\\ LAST l = HD l) /\\\n      (forall l. P(l) ==> P(APPEND (TL l) [HD(TL l)])) /\\\n      P l /\\ MEM a l\n      ==> ?l'. HD l' = a /\\ P l'
-      #|  x - y:complex
-      #|  (forall x y. x IN s /\\ y IN s ==> x = y) ==> ?a. s SUBSET {a}
-      #|  (?a. s SUBSET {a}) ==> FINITE s
-      #|  {x | p x /\\ q x /\\ (r x \\/ s x)} =\n    {x | p x /\\ q x /\\ r x} UNION {x | p x /\\ q x /\\ s x}
-      #|  forall x y. ~(x = y)\n         ==> FINITE {t | &0 <= t /\\ t < &2 * pi /\\\n                         (rotate2d t x)$2 = (rotate2d t y)$2}
-      #|  t:real
-      #|  INFINITE s ==> ~(s = {})
-      #|  {(x:real^2,y:real^2) | x IN s /\\ y IN s}
-      #|  INFINITE ({t | &0 <= t /\\ t < &2 * pi} DIFF\n              UNIONS (IMAGE (\\(x,y). {t | &0 <= t /\\ t < &2 * pi /\\\n                                          (rotate2d t x)$2 = (rotate2d t y)$2})\n                            ({(x,y) | x IN s /\\ y IN s /\\ ~(x = y)})))
-      #|  forall s. FINITE s ==> ?t. pairwise (\\x y. ~(x$2 = y$2)) (IMAGE (rotate2d t) s)
-      #|  MAP (rotate2d t) p
-      #|  MAP (rotate2d(--t))
-      #|  t:real
-      #|  set_of_list(p:(real^2)list)
-      #|  forall p:(real^2)list.\n        ?f q. (?g. orthogonal_transformation g /\\ f = MAP g) /\\\n              (forall x y. MEM x q /\\ MEM y q /\\ ~(x = y) ==> ~(x$2 = y$2)) /\\\n              f q = p
-      #|  (forall x. ?f:A->A y. transform f /\\ nice y /\\ f y = x)\n    ==> forall P. (forall f x. transform f ==> (P(f x) <=> P x)) /\\\n            (forall x. nice x ==> P x)\n            ==> forall x. P x
-      #|  dir:real^N = vec 0
-      #|  origin:real^N
-      #|  dir:real^N
-      #|  origin:real^N
-      #|  forall a c u v m:real^N.\n          collinear {a,c,u,v,m} /\\ m IN segment[u,v] /\\ m IN segment(a,c)\n          ==> u IN segment(a,c) \\/ v IN segment(a,c) \\/\n              segment[a,c] SUBSET segment[u,v]
-      #|  segment[a:real^2,c] SUBSET segment[u,v]
-      #|  (u % a + v % c) - b:real^N =\n        u % (a - b) + v % (c - b) + ((u + v) - &1) % b
-      #|  {a,v,c} = {a,c,v}
-      #|  collinear {a:real^2, v, c}
-      #|  v:real^2
-      #|  v:real^2
-      #|  (v:real^2) IN segment[a,c]
-      #|  MEM (v:real^2) (CONS c p)
-      #|  v IN segment(a:real^2,c)
-      #|  v:real^2
-      #|  u:real^2
-      #|  u:real^2
-      #|  (u:real^2) IN segment[a,c]
-      #|  MEM (u:real^2) (CONS c p)
-      #|  u IN segment(a:real^2,c)
-      #|  u:real^2
-      #|  {a:real^2,c,mx,u}
-      #|  {a:real^2,c}
-      #|  {a:real^2,b,c}
-      #|  {a,b,c} = {a,c,b}
-      #|  mx:real^2
-      #|  v:real^2
-      #|  u:real^2
-      #|  c:real^2
-      #|  a:real^2
-      #|  u:real^2
-      #|  collinear {a:real^2,v,c}
-      #|  u:real^2 = v
-      #|  u:real^2 = v
-      #|  {a:real^2,c,mx,u}
-      #|  mx:real^2
-      #|  collinear {c:real^2,u,v}
-      #|  {a:real^2,c,mx,u}
-      #|  mx:real^2
-      #|  collinear {a:real^2,u,v}
-      #|  {a,c,b} = {a,b,c}
-      #|  collinear {a:real^2,c,mx,u}
-      #|  v:real^2
-      #|  MEM (v:real^2) (CONS c p)
-      #|  mx:real^2 = v
-      #|  mx:real^2 = v
-      #|  u:real^2
-      #|  MEM (u:real^2) (CONS c p)
-      #|  mx:real^2 = u
-      #|  mx:real^2 = u
-      #|  n dot (c - b:real^2) = m
-      #|  n dot (y - b:real^2) = m
-      #|  n:real^2
-      #|  {a,b,c} = {a,c,b}
-      #|  y:real^2
-      #|  forall y:real^2. n dot (y - b) = m ==> collinear {a,y,c}
-      #|  collinear {a:real^2,mx,c} /\\ collinear {a,u,c}
-      #|  ~(m < m)
-      #|  m <= m
-      #|  mx:real^2
-      #|  forall mx. n dot (u - b) <= m /\\\n           ~(n dot (u - b) < n dot (c - b)) /\\\n           n dot (mx - b) = m /\\\n           n dot (mx - b) <= n dot (c - b)\n           ==> n dot (u - b) = m /\\ n dot (c - b) = m
-      #|  n dot (u - b) = m /\\ n dot (c - b) = m
-      #|  r * x + s * x < x <=> &0 < (&1 - r - s) * x
-      #|  (r % a + s % b + t % c) - b =\n      r % (a - b) + t % (c - b) + ((r + s + t) - &1) % b
-      #|  n dot (u - b:real^2) < n dot (c - b)
-      #|  &0 <= (&1 - q) * r + q * s <=> q * (r - s) <= r
-      #|  ((&1 - q) * rx + q * r) +\n      q * s +\n      ((&1 - q) * tx + q * t) =\n      (rx + tx) + q * ((r + s + t) - (rx + tx))
-      #|  q:real
-      #|  (&1 - q) * tx + q * t:real
-      #|  q * s:real
-      #|  (&1 - q) * rx + q * r
-      #|  &0 <= a /\\ &0 <= x /\\ &0 <= b ==> abs(min a (min b x)) <= x
-      #|  ~(x = y) ==> &0 < abs(x - y)
-      #|  abs x <= a ==> x <= a
-      #|  t:real = tx
-      #|  &0 <= a /\\ &0 <= x /\\ &0 <= b ==> abs(min a (min x b)) <= x
-      #|  ~(x = y) ==> &0 < abs(x - y)
-      #|  abs x <= a ==> x <= a
-      #|  r:real = rx
-      #|  min (&1 / &2)\n            (min (if rx:real = r then &1 / &2 else rx / abs(rx - r))\n                 (if tx:real = t then &1 / &2 else tx / abs(tx - t)))
-      #|  ?q. q * (rx - r) <= rx /\\\n          q * (tx - t) <= tx /\\\n          &0 < q /\\ q < &1
-      #|  &0 < rx /\\ rx < &1 /\\ &0 < tx /\\ tx < &1
-      #|  sx = &0
-      #|  tx:real
-      #|  sx:real
-      #|  rx:real
-      #|  p ==> ~p ==> q
-      #|  ~(mx IN interior(convex hull {a:real^2, b, c}))
-      #|  sx = &0
-      #|  n dot (b - b:real^2) = m
-      #|  rx = &0 /\\ tx = &0
-      #|  sx = &1
-      #|  sx = &0 /\\ rx = &0
-      #|  tx = &1
-      #|  n dot (b - b:real^2) = m
-      #|  ~q /\\ p ==> (p ==> q) ==> r
-      #|  mx:real^2
-      #|  segment[a:real^2,b] INTER path_image(polygonal_path(CONS c p))\n         SUBSET {a,b}
-      #|  tx = &0
-      #|  sx = &0 /\\ tx = &0
-      #|  rx = &1
-      #|  ~q /\\ p ==> (p ==> q) ==> r
-      #|  mx:real^2
-      #|  segment[b:real^2,c] INTER path_image(polygonal_path(CONS c p))\n         SUBSET {c}
-      #|  rx = &0
-      #|  tx:real
-      #|  sx:real
-      #|  rx:real
-      #|  mx IN convex hull {a:real^2,b,c}
-      #|  t:real
-      #|  s:real
-      #|  r:real
-      #|  u:real^2
-      #|  {a:real^2,b,c}
-      #|  &0 < x ==> abs(min (&1 / &2) x) <= x
-      #|  a - ((&1 - u) % a + u % b):real^N = u % (a - b)
-      #|  &0 < x ==> &0 < min (&1 / &2) x
-      #|  min (&1 / &2) (ee / norm(u - mx:real^2))
-      #|  (?x. (?u. P u /\\ Q u /\\ x = f u) /\\ R x) <=>\n        (?u. P u /\\ Q u /\\ R(f u))
-      #|  ee:real
-      #|  mx IN interior(convex hull {a:real^2,b,c})
-      #|  mx IN interior(convex hull {a:real^2,b,c})
-      #|  (&1 - t) * a < (&1 - t) * m /\\ t * b <= t * m\n          ==> ~((&1 - s) * m + s * m = (&1 - t) * a + t * b)
-      #|  ((&1 - u) % c + u % a) - b =\n            (&1 - u) % (c - b) + u % (a - b)
-      #|  \\x:real^2. n dot (x - b)
-      #|  t:real
-      #|  s:real
-      #|  y:real^2
-      #|  x >= b + e <=> e <= x - b
-      #|  {x:real^2 | (x:real^2)$2 >= (b:real^2)$2 + e}
-      #|  forall t. ~(b IN t) /\\ s SUBSET t ==> ~(b IN s)
-      #|  ~(x IN t) ==> s SUBSET t ==> ~(x IN s)
-      #|  CONS (c:real^2) p
-      #|  path_image(polygonal_path(CONS (c:real^2) p))
-      #|  segment[u:real^2,v]
-      #|  c:real^2
-      #|  b:real^2
-      #|  a:real^2
-      #|  forall a b c t u.\n                s SUBSET t /\\ t SUBSET u /\\\n                a IN ca /\\ c IN ca /\\\n                ab INTER u SUBSET {a,b} /\\ bc INTER u SUBSET {c} /\\\n                ~(b IN u) /\\ s INTER ca = {}\n                ==> s INTER (ab UNION bc UNION ca) = {}
-      #|  closure(segment(u:real^2,mx)) SUBSET convex hull {a,b,c}
-      #|  (s SUBSET c ==> u IN c) /\\ s INTER f = {} /\\ ~(s INTER c = {})\n      ==> (~(s INTER c = {}) /\\ ~(s DIFF c = {}) ==> ~(s INTER f = {}))\n          ==> u IN c
-      #|  convex hull {a:real^2,b,c}
-      #|  segment(u:real^2,mx)
-      #|  (a ==> b) /\\ a ==> a /\\ b
-      #|  mx:real^2 = u
-      #|  u:real^2
-      #|  MEM (u:real^2) (CONS c p)
-      #|  ~(u:real^2 = a) /\\ ~(u = c)
-      #|  n dot (u - b:real^2) < n dot (c - b)
-      #|  u:real^2
-      #|  v:real^2
-      #|  v:real^2
-      #|  u:real^2
-      #|  --x < --m ==> ~(x = m)
-      #|  ((&1 - u) % x + u % y) - a:real^N =\n        (&1 - u) % (x - a) + u % (y - a)
-      #|  (mx:real^2) IN segment[u,v]
-      #|  n dot (mx - b:real^2) = m
-      #|  n dot (u - b) <= m \\/ n dot (v - b:real^2) <= m
-      #|  v:real^2
-      #|  u:real^2
-      #|  3 <= SUC n <=> 2 <= n
-      #|  mx:real^2
-      #|  CONS (c:real^2) p
-      #|  ?u v:real^2.\n        MEM u (CONS c p) /\\ MEM v (CONS c p) /\\\n        mx IN segment[u,v] /\\\n        segment[u,v] SUBSET path_image(polygonal_path(CONS c p)) /\\\n        ~(a IN segment[u,v] /\\ c IN segment[u,v]) /\\\n        n dot (u - b) <= m
-      #|  segment(b:real^2,z)
-      #|  x >= b + e <=> e <= x - b
-      #|  e <= x - b <=> x >= b + e
-      #|  t SUBSET {x | P x} ==> s SUBSET t ==> forall x. x IN s ==> P x
-      #|  CONS (c:real^2) p
-      #|  s INTER t = {} <=> s SUBSET (UNIV DIFF t)
-      #|  {x | (x:real^2)$2 - (b:real^2)$2 < e}
-      #|  forall t. s SUBSET t /\\ u INTER t = {} ==> s INTER u = {}
-      #|  convex hull {a:real^2,b,c}
-      #|  forall s. i SUBSET s /\\ s SUBSET c\n          ==> c DIFF i = a UNION b UNION d ==> i INTER b = {}
-      #|  c:real^2
-      #|  b:real^2
-      #|  a:real^2
-      #|  interior(convex hull {a:real^2,b,c})
-      #|  forall t. s SUBSET t /\\ t INTER u = {} ==> s INTER u = {}
-      #|  convex hull {a:real^2,b,c}
-      #|  forall s. i SUBSET s /\\ s SUBSET c\n          ==> c DIFF i = a UNION b ==> i INTER a = {}
-      #|  c:real^2
-      #|  b:real^2
-      #|  a:real^2
-      #|  interior(convex hull {a:real^2,b,c})
-      #|  forall t. s SUBSET t /\\ t INTER u = {} ==> s INTER u = {}
-      #|  s SUBSET UNIV DIFF (a UNION b UNION c) <=>\n        s INTER a = {} /\\ s INTER b = {} /\\ s INTER c = {}
-      #|  interior(convex hull {a':real^2,b,c'})
-      #|  y:real^2
-      #|  &0 <= x ==> abs(min (&1 / &2) x) <= x
-      #|  abs(x$2) <= norm x /\\ norm x <= e / &2 /\\ &0 < e ==> x$2 < e
-      #|  min (&1 / &2) (e / &2 / norm (z - b:real^2))
-      #|  b + min (&1 / &2) (e / &2 / norm(z - b)) % (z - b):real^2
-      #|  (?y. y IN s /\\ P y) /\\ s SUBSET t\n        ==> ?y. y IN s /\\ y IN t /\\ P y
-      #|  interior(convex hull {a, b, c}) INTER {x:real^2 | x$2 - b$2 < e} =\n        interior(convex hull {a', b, c'})
-      #|  ?y:real^2. y IN segment(b,z) /\\ y IN interior(convex hull {a',b,c'})
-      #|  &0 < m * (&1 - t) /\\ m <= x ==> ~((&1 - s) * x + s * x = t * m)
-      #|  ((&1 - u) % c + u % a) - b =\n          (&1 - u) % (c - b) + u % (a - b)
-      #|  \\x:real^2. n dot (x - b)
-      #|  t:real
-      #|  s:real
-      #|  v:real^2
-      #|  s INTER a = {} /\\ s INTER b = {} /\\ s INTER c = {} /\\ s SUBSET u\n        ==> s SUBSET u DIFF (a UNION b UNION c)
-      #|  s SUBSET u ==> s DIFF (u DIFF t) SUBSET t
-      #|  (convex hull {a:real^2,b,c}) DIFF frontier(convex hull {a,b,c})
-      #|  segment(b:real^2,z) SUBSET interior(convex hull {a,b,c})
-      #|  t * m < m <=> &0 < m * (&1 - t)
-      #|  ((&1 - t) % a + t % b) - a:real^N = t % (b - a)
-      #|  t:real
-      #|  v IN segment(b:real^2,z)
-      #|  m <= n dot (v - b:real^2)
-      #|  v:real^2
-      #|  segment(b:real^2,z) INTER path_image(polygonal_path(CONS c p)) = {}
-      #|  segment(b:real^2,z) SUBSET convex hull {a,b,c}
-      #|  segment[b:real^2,z] SUBSET convex hull {a,b,c}
-      #|  v IN segment[b:real^2,c]
-      #|  v IN segment[a:real^2,b]
-      #|  v IN segment(b:real^2,z)
-      #|  v:real^2
-      #|  {a,b,c} = {b,a,c}
-      #|  ~collinear{b:real^2,c,z}
-      #|  ~collinear{b:real^2,a,z}
-      #|  v:real^2
-      #|  segment(b:real^2,z) INTER segment[a,b] = {} /\\\n      segment(b,z) INTER segment[b,c] = {}
-      #|  convex hull {a:real^2,b,c}
-      #|  forall c. x IN c /\\ ~(x IN (a INTER c)) /\\ ~(x IN (b INTER c))\n            ==> ~(x IN a) /\\ ~(x IN b)
-      #|  ~collinear{b:real^2,a,z} /\\ ~collinear{b,c,z}
-      #|  ~(z IN segment[a:real^2,b]) /\\ ~(z IN segment[b,c])
-      #|  (z:real^2) IN path_image(polygonal_path(CONS c p)) /\\\n      (z:real^2) IN path_image(polygonal_path p)
-      #|  ~(z:real^2 = a) /\\ ~(z = c)
-      #|  d:real^2
-      #|  w:real^2
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  z:real^2
-      #|  b:real^2
-      #|  ?z:real^2. MEM z p /\\\n               z IN (convex hull {a,b,c} DIFF {a,c}) /\\\n               n dot (z - b) = m
-      #|  b:real^2
-      #|  segment[b:real^2,c] INTER path_image (polygonal_path (CONS c p))\n      SUBSET {c}
-      #|  &0 < m
-      #|  m = (n:real^2) dot (mx - b)
-      #|  n dot (mx - b:real^2)
-      #|  y:real^2
-      #|  my:real^2
-      #|  ~(path_image(polygonal_path(CONS c p)) INTER\n                   convex hull {a, b, c} SUBSET {a:real^2, c})
-      #|  mx:real^2
-      #|  n dot (mx - b:real^2) <= n dot (c - b)
-      #|  mx:real^2
-      #|  ?mx:real^2.\n      ~(mx = a) /\\ ~(mx = c) /\\\n      mx IN path_image(polygonal_path(CONS c p)) INTER convex hull {a, b, c} /\\\n      (forall y. y IN\n           path_image(polygonal_path(CONS c p)) INTER convex hull {a, b, c}\n           ==> n dot (mx - b) <= n dot (y - b))
-      #|  (\\x:real^2. n dot (x - b)) = (\\x. n dot x) o (\\x. x - b)
-      #|  path_image (polygonal_path(CONS c p)) INTER convex hull {a:real^2,b,c}
-      #|  \\x:real^2. n dot (x - b)
-      #|  (&1 - u - v) * x + v * x <= x <=> &0 <= u * x
-      #|  (a + u % (b - a) + v % (c - a)) - b =\n      (&1 - u - v) % (a - b) + v % (c - b)
-      #|  forall y:real^2. y IN convex hull {a,b,c} ==> n dot (y - b) <= n dot (c - b)
-      #|  y:real^2 = b
-      #|  forall y:real^2. y IN convex hull {a,b,c} ==> &0 <= n dot (y - b)
-      #|  ~(a + r % (b - a) + s % (c - a):real^2 = b)
-      #|  r = &1 /\\ s = &0
-      #|  (&1 - u - v) * x + v * x = (&1 - u) * x
-      #|  s:real
-      #|  r:real
-      #|  (a + u % (b - a) + v % (c - a)) - b =\n      (&1 - u - v) % (a - b) + v % (c - b)
-      #|  forall y:real^2. y IN convex hull {a,b,c} /\\ ~(y = b) ==> &0 < n dot (y - b)
-      #|  x = y <=> y - x = &0
-      #|  n dot (a - b:real^2) = n dot (c - b)
-      #|  n:real^2
-      #|  p ==> ~p ==> q
-      #|  {a,b,c} = {a,c,b}
-      #|  ~collinear{a:real^2,b,c}
-      #|  --n:real^2
-      #|  n:real^2
-      #|  &0 < n dot (c - b) \\/ &0 < --(n dot (c - b)) \\/\n      (n:real^2) dot (c - b) = &0
-      #|  ?n:real^2. ~(n = vec 0) /\\ orthogonal n (c - a)
-      #|  ?n:real^2.\n        ~(n = vec 0) /\\ orthogonal n (c - a) /\\\n        &0 < n dot (c - b)
-      #|  {b:real^2,c}
-      #|  p ==> (p <=> q /\\ r /\\ s) ==> r
-      #|  convex hull{b:real^2,c}
-      #|  convex hull {a:real^2,b,c}
-      #|  {a:real^2,b}
-      #|  p ==> (p <=> q /\\ r /\\ s) ==> r
-      #|  convex hull{a:real^2,b}
-      #|  convex hull {a:real^2,b,c}
-      #|  s DIFF (t UNION u) = (s DIFF t) INTER (s DIFF u)
-      #|  y IN segment(a:real^2,c)
-      #|  y IN convex hull {b:real^2, c}
-      #|  y:real^2
-      #|  {a,b,c} = {b,c,a}
-      #|  ~collinear{a:real^2,b,c}
-      #|  y IN segment(a:real^2,c)
-      #|  y IN convex hull {a:real^2, b}
-      #|  y:real^2
-      #|  {a,b,c} = {b,a,c}
-      #|  ~collinear{a:real^2,b,c}
-      #|  s SUBSET t ==> x IN s /\\ P x ==> x IN t
-      #|  y IN segment(a:real^2,c)
-      #|  ~(d IN frontier(convex hull {a:real^2,b,c}))
-      #|  t INTER s SUBSET c\n        ==> c SUBSET (a UNION b)\n            ==> s DIFF (a UNION b) SUBSET UNIV DIFF (a UNION b UNION t)
-      #|  convex hull {a:real^2,b,c} DIFF (segment[a,b] UNION segment[b,c])
-      #|  segment[d:real^2,y]
-      #|  d:real^2
-      #|  y:real^2
-      #|  c:real^2
-      #|  a:real^2
-      #|  path_image(polygonal_path(CONS c p)) INTER\n    convex hull {a,b,c} SUBSET {a:real^2,c}
-      #|  ~affine_dependent{a:real^2,b,c}
-      #|  a:real^2
-      #|  d':real^2
-      #|  d:real^2
-      #|  y:real^2 = a
-      #|  y:real^2 = a
-      #|  b:real^2
-      #|  a:real^2
-      #|  y:real^2 = b
-      #|  y:real^2
-      #|  d':real^2
-      #|  d:real^2
-      #|  (y:real^2)$1 = (d:real^2)$1
-      #|  y:real^2
-      #|  s INTER (t UNION u) = {} <=>\n                        s INTER t = {} /\\ s INTER u = {}
-      #|  b:real^2
-      #|  a:real^2
-      #|  x IN s /\\ x IN t /\\ (forall y. y IN s /\\ y IN t ==> y = x)\n          ==> s INTER t = {x}
-      #|  path_image((polygonal_path (CONS c p) ++ linepath (a,b)) ++\n                   linepath(b:real^2,c)) =\n        path_image(linepath(a,b) ++ linepath(b:real^2,c) ++\n                   polygonal_path(CONS c p))
-      #|  x:real^2
-      #|  polygonal_path(CONS c p) ++ linepath(a:real^2,b)
-      #|  d':real^2
-      #|  d:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  c:real^2
-      #|  d':real^2
-      #|  d:real^2
-      #|  y:real^2 = c
-      #|  y:real^2 = c
-      #|  b:real^2
-      #|  a:real^2
-      #|  y:real^2 = b
-      #|  y:real^2
-      #|  d':real^2
-      #|  d:real^2
-      #|  (y:real^2)$1 = (d:real^2)$1
-      #|  y:real^2
-      #|  s INTER (t UNION u) = {} <=>\n                        s INTER t = {} /\\ s INTER u = {}
-      #|  b:real^2
-      #|  a:real^2
-      #|  x IN s /\\ x IN t /\\ (forall y. y IN s /\\ y IN t ==> y = x)\n          ==> s INTER t = {x}
-      #|  pathfinish(linepath(a,b) ++\n          linepath (b,c) ++ polygonal_path(CONS c p)):real^2 = a
-      #|  path_image((linepath(b:real^2,c) ++ polygonal_path(CONS c p)) ++\n                   linepath(a,b)) =\n        path_image(linepath(a,b) ++ linepath(b:real^2,c) ++\n                   polygonal_path(CONS c p))
-      #|  x:real^2
-      #|  linepath(b:real^2,c) ++ polygonal_path(CONS c p)
-      #|  d':real^2
-      #|  d:real^2
-      #|  b:real^2
-      #|  a:real^2
-      #|  x IN segment(b:real^2,a) UNION segment (b,c)
-      #|  (d:real^2) IN inside(path_image\n      (linepath(a,b) ++ linepath(b,c) ++ polygonal_path(CONS c p)))
-      #|  segment[a:real^2,b] INTER segment[b,c] SUBSET {a, b}
-      #|  segment(a:real^2,b) INTER segment(b,c) = {}
-      #|  pathfinish(polygonal_path p) = (a:real^2)
-      #|  y:real^2
-      #|  y:real^2
-      #|  y IN segment (d:real^2,x)
-      #|  ~(y IN interior(convex hull {a:real^2, b, c}))
-      #|  x:real^2
-      #|  x:real^2
-      #|  x IN segment (y:real^2,d)
-      #|  ~(x IN interior(convex hull {a:real^2, b, c}))
-      #|  &0 <= x /\\ &0 <= y ==> (x + y = &0 <=> x = &0 /\\ y = &0)
-      #|  d = (&1 - w) % ((&1 - u) % d + u % d') + w % ((&1 - v) % d + v % d') <=>\n        ((&1 - w) * u + w * v) % (d' - d) = vec 0
-      #|  (x:real^2) IN segment(d,d')
-      #|  (y:real^2) IN segment [d,d']
-      #|  (d:real^2) IN segment (x,y)
-      #|  y:real^2 = d
-      #|  (x:real^2) IN frontier(convex hull {a,b,c}) /\\\n      (y:real^2) IN frontier(convex hull {a,b,c})
-      #|  x:real^2 = y
-      #|  d':real^2
-      #|  d:real^2
-      #|  collinear {d:real^2,x,y}
-      #|  forall y:real^2. y IN segment[d,d'] /\\\n               y IN (segment (b,a) UNION segment (b,c))\n               ==> y = x
-      #|  ~(d':real^2 = d)
-      #|  d:real^2
-      #|  d:real^2
-      #|  (d:real^2) IN interior(convex hull {a', b, c'})
-      #|  (d:real^2) IN interior(convex hull {a,b,c})
-      #|  y:real^2
-      #|  d':real^2
-      #|  d:real^2
-      #|  y:real^2
-      #|  s INTER t = {} <=> forall x. x IN s ==> ~(x IN t)
-      #|  b + e <= x <=> e <= x - b
-      #|  convex hull(set_of_list(CONS c p)) :real^2->bool
-      #|  {x:real^2 | x$2 >= (b:real^2)$2 + e}
-      #|  forall u. t SUBSET u /\\ s INTER u = {} ==> s INTER t = {}
-      #|  segment[d:real^2,d'] INTER path_image(polygonal_path(CONS c p)) = {}
-      #|  x:real^2
-      #|  a':real^2
-      #|  c':real^2
-      #|  ~(x IN u) /\\ s SUBSET s' /\\ t SUBSET t'\n      ==> x IN (s UNION t UNION u) ==> x IN s' \\/ x IN t'
-      #|  (x:real^2) IN frontier(convex hull {a':real^2,b,c'})
-      #|  (x:real^2) IN (segment(b,a) UNION segment(b,c))
-      #|  ~(x:real^2 = a) /\\ ~(x = c)
-      #|  x:real^2
-      #|  d':real^2
-      #|  d:real^2
-      #|  (x:real^2)$2 < (b:real^2)$2 + e
-      #|  ~(x:real^2 = b)
-      #|  x:real^2
-      #|  d':real^2
-      #|  d:real^2
-      #|  (x:real^2)$1 = (d:real^2)$1
-      #|  (d':real^2)$1 = (d:real^2)$1
-      #|  closure(convex hull {a':real^2,b,c'}) = convex hull {a',b,c'}
-      #|  x:real^2 = d'
-      #|  x:real^2 = d
-      #|  x:real^2
-      #|  d':real^2
-      #|  d:real^2
-      #|  ~(segment[d:real^2,d'] INTER frontier(convex hull {a',b,c'}) = {})
-      #|  ~(d' IN convex hull {a':real^2,b,c'})
-      #|  {x | (x:real^2)$2 >= (b:real^2)$2}
-      #|  forall t. s SUBSET t /\\ ~(x IN t) ==> ~(x IN s)
-      #|  ~(d' IN convex hull {a:real^2,b,c})
-      #|  x:real^2
-      #|  c':real^2
-      #|  (c':real^2) IN segment[b,c]
-      #|  x:real^2
-      #|  a':real^2
-      #|  (a':real^2) IN segment[b,a]
-      #|  convex hull {a':real^2,b,c'} SUBSET convex hull {a,b,c}
-      #|  (d':real^2)$2 + &1 = (b:real^2)$2
-      #|  r * (e + b) + (&1 - (r + t)) * b + t * (e + b) < b + e <=>\n      (r + t) * e < &1 * e
-      #|  b < r * x + (&1 - (r + t)) * b + t * x <=> (r + t) * b < (r + t) * x
-      #|  r + s + t = &1 ==> s = &1 - (r + t)
-      #|  t:real
-      #|  s:real
-      #|  r:real
-      #|  (d:real^2) IN interior(convex hull {a',b,c'})
-      #|  (b:real^2)$2 < (d:real^2)$2 /\\ (d:real^2)$2 < (b:real^2)$2 + e
-      #|  b < a ==> ~(a - b = &0)
-      #|  ((&1 - u) * b + u * a) - b = u * (a - b)
-      #|  (a':real^2)$2 - (b:real^2)$2 = e /\\\n                (c':real^2)$2 - (b:real^2)$2 = e
-      #|  (d':real^2) IN outside(path_image\n        (linepath(a,b) ++ linepath(b,c) ++ polygonal_path(CONS c p)))
-      #|  d':real^2 = d - (&1 + (d:real^2)$2 - (b:real^2)$2) % basis 2
-      #|  (:real^2) DIFF {x | x$2 >= b$2} SUBSET\n    outside(path_image\n                 (linepath(a,b) ++ linepath(b,c) ++ polygonal_path(CONS c p)))
-      #|  convex hull(set_of_list(CONS (a:real^2) (CONS b (CONS c p))))
-      #|  path_image(polygonal_path(CONS a (CONS b (CONS c p))))\n     SUBSET {x:real^2 | x$2 >= b$2}
-      #|  &0 < k
-      #|  k / &2 % basis 1:real^2
-      #|  forall a. dist(x + a,y) < k / &2 /\\ norm(a) = k / &2 ==> dist(x,y) < k
+      #|  (p : List[A])
+      #|  (l' : List[A])
+      #|  3 <= LENGTH((l' : List[A]))
+      #|  EL(1, (l' : List[A])) == (a : A)
+      #|  APPEND(TL((l' : List[A])), [HD(TL(l'))])
+      #|  (l' : List[A])
+      #|  (a : A)
+      #|  (l : List[A])
+      #|  (P : (List[A]) -> Bool)
+      #|  \226\136\128 P : (List[A]) -> Bool, \226\136\128 l : List[A], \226\136\128 a : A, (\226\136\128 l : List[A], P(l) \226\134\146 3 <= LENGTH(l) && LAST(l) == HD(l)) && (\226\136\128 l : List[A], P(l) \226\134\146 P(APPEND(TL(l), [HD(TL(l))]))) && P(l) && MEM(a, l) \226\134\146 (\226\136\131 l' : List[A], HD(l') == a && P(l'))
+      #|  (x : Cart[Real, Tybit0[Unit]]) - (y : Cart[Real, Tybit0[Unit]])
+      #|  (\226\136\128 x : _, \226\136\128 y : _, IN(x, (s : (_) -> Bool)) && IN(y, s) \226\134\146 x == y) \226\134\146 (\226\136\131 a : _, SUBSET(s, {a}))
+      #|  (\226\136\131 a : _, SUBSET((s : (_) -> Bool), {a})) \226\134\146 FINITE(s)
+      #|  {(x : _) | (p : (_) -> Bool)(x) && (q : (_) -> Bool)(x) && ((r : (_) -> Bool)(x) || (s : (_) -> Bool)(x))} == UNION({(x : _) | p(x) && q(x) && r(x)}, {(x : _) | p(x) && q(x) && s(x)})
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], !(x == y) \226\134\146 FINITE({(t : Real) | real_of_num(0) <= t && t < real_of_num(2) * pi && op_dollar(rotate2d(t, x), 2) == op_dollar(rotate2d(t, y), 2)})
+      #|  (t : Real)
+      #|  INFINITE((s : (_) -> Bool)) \226\134\146 !(s == {})
+      #|  {((x : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]])) | IN(x, (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) && IN(y, s)}
+      #|  INFINITE(DIFF({(t : Real) | real_of_num(0) <= t && t < real_of_num(2) * pi}, UNIONS(IMAGE(GABS((f : ((Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]), Real) -> Bool) => \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], GEQ(f((x, y)), {(t : Real) | real_of_num(0) <= t && t < real_of_num(2) * pi && op_dollar(rotate2d(t, x), 2) == op_dollar(rotate2d(t, y), 2)})), {((x : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]])) | IN(x, (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) && IN(y, s) && !(x == y)}))))
+      #|  \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, FINITE(s) \226\134\146 (\226\136\131 t : Real, pairwise((x : Cart[Real, Tybit0[Unit]]) => (y : Cart[Real, Tybit0[Unit]]) => !(op_dollar(x, 2) == op_dollar(y, 2)), IMAGE(rotate2d(t), s)))
+      #|  MAP(rotate2d((t : Real)), (p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  MAP(rotate2d(-(t : Real)))
+      #|  (t : Real)
+      #|  set_of_list((p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  \226\136\128 p : List[Cart[Real, Tybit0[Unit]]], \226\136\131 f : (List[Cart[Real, Tybit0[Unit]]]) -> List[Cart[Real, Tybit0[Unit]]], \226\136\131 q : List[Cart[Real, Tybit0[Unit]]], (\226\136\131 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], orthogonal_transformation(g) && f == MAP(g)) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], MEM(x, q) && MEM(y, q) && !(x == y) \226\134\146 !(op_dollar(x, 2) == op_dollar(y, 2))) && f(q) == p
+      #|  (\226\136\128 x : A, \226\136\131 f : (A) -> A, \226\136\131 y : A, (transform : ((A) -> A) -> Bool)(f) && (nice : (A) -> Bool)(y) && f(y) == x) \226\134\146 (\226\136\128 P : (A) -> Bool, (\226\136\128 f : (A) -> A, \226\136\128 x : A, transform(f) \226\134\146 P(f(x)) == P(x)) && (\226\136\128 x : A, nice(x) \226\134\146 P(x)) \226\134\146 (\226\136\128 x : A, P(x)))
+      #|  (dir : Cart[Real, N]) == vec(0)
+      #|  (origin : Cart[Real, N])
+      #|  (dir : Cart[Real, N])
+      #|  (origin : Cart[Real, N])
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 c : Cart[Real, N], \226\136\128 u : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 m : Cart[Real, N], collinear({a, c, u, v, m}) && IN(m, segment([(u, v)])) && IN(m, segment((a, c))) \226\134\146 IN(u, segment((a, c))) || IN(v, segment((a, c))) || SUBSET(segment([(a, c)]), segment([(u, v)]))
+      #|  SUBSET(segment([((a : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))]), segment([((u : Cart[Real, Tybit0[Unit]]), (v : Cart[Real, Tybit0[Unit]]))]))
+      #|  op_pct((u : Real), (a : Cart[Real, N])) + op_pct((v : Real), (c : Cart[Real, N])) - (b : Cart[Real, N]) == op_pct(u, a - b) + (op_pct(v, c - b) + op_pct(u + v - real_of_num(1), b))
+      #|  {(a : _), (v : _), (c : _)} == {a, c, v}
+      #|  collinear({(a : Cart[Real, Tybit0[Unit]]), (v : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  IN((v : Cart[Real, Tybit0[Unit]]), segment([((a : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))]))
+      #|  MEM((v : Cart[Real, Tybit0[Unit]]), CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]])))
+      #|  IN((v : Cart[Real, Tybit0[Unit]]), segment(((a : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))))
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  IN((u : Cart[Real, Tybit0[Unit]]), segment([((a : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))]))
+      #|  MEM((u : Cart[Real, Tybit0[Unit]]), CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]])))
+      #|  IN((u : Cart[Real, Tybit0[Unit]]), segment(((a : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))))
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]), (mx : Cart[Real, Tybit0[Unit]]), (u : Cart[Real, Tybit0[Unit]])}
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}
+      #|  {(a : _), (b : _), (c : _)} == {a, c, b}
+      #|  (mx : Cart[Real, Tybit0[Unit]])
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  collinear({(a : Cart[Real, Tybit0[Unit]]), (v : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  (u : Cart[Real, Tybit0[Unit]]) == (v : Cart[Real, Tybit0[Unit]])
+      #|  (u : Cart[Real, Tybit0[Unit]]) == (v : Cart[Real, Tybit0[Unit]])
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]), (mx : Cart[Real, Tybit0[Unit]]), (u : Cart[Real, Tybit0[Unit]])}
+      #|  (mx : Cart[Real, Tybit0[Unit]])
+      #|  collinear({(c : Cart[Real, Tybit0[Unit]]), (u : Cart[Real, Tybit0[Unit]]), (v : Cart[Real, Tybit0[Unit]])})
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]), (mx : Cart[Real, Tybit0[Unit]]), (u : Cart[Real, Tybit0[Unit]])}
+      #|  (mx : Cart[Real, Tybit0[Unit]])
+      #|  collinear({(a : Cart[Real, Tybit0[Unit]]), (u : Cart[Real, Tybit0[Unit]]), (v : Cart[Real, Tybit0[Unit]])})
+      #|  {(a : _), (c : _), (b : _)} == {a, b, c}
+      #|  collinear({(a : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]), (mx : Cart[Real, Tybit0[Unit]]), (u : Cart[Real, Tybit0[Unit]])})
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  MEM((v : Cart[Real, Tybit0[Unit]]), CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]])))
+      #|  (mx : Cart[Real, Tybit0[Unit]]) == (v : Cart[Real, Tybit0[Unit]])
+      #|  (mx : Cart[Real, Tybit0[Unit]]) == (v : Cart[Real, Tybit0[Unit]])
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  MEM((u : Cart[Real, Tybit0[Unit]]), CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]])))
+      #|  (mx : Cart[Real, Tybit0[Unit]]) == (u : Cart[Real, Tybit0[Unit]])
+      #|  (mx : Cart[Real, Tybit0[Unit]]) == (u : Cart[Real, Tybit0[Unit]])
+      #|  dot((n : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]])) == (m : Real)
+      #|  dot((n : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]])) == (m : Real)
+      #|  (n : Cart[Real, Tybit0[Unit]])
+      #|  {(a : _), (b : _), (c : _)} == {a, c, b}
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 y : Cart[Real, Tybit0[Unit]], dot((n : Cart[Real, Tybit0[Unit]]), y - (b : Cart[Real, Tybit0[Unit]])) == (m : Real) \226\134\146 collinear({(a : Cart[Real, Tybit0[Unit]]), y, (c : Cart[Real, Tybit0[Unit]])})
+      #|  collinear({(a : Cart[Real, Tybit0[Unit]]), (mx : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}) && collinear({a, (u : Cart[Real, Tybit0[Unit]]), c})
+      #|  !((m : Real) < m)
+      #|  (m : Real) <= m
+      #|  (mx : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 mx : Cart[Real, Tybit0[Unit]], dot((n : Cart[Real, Tybit0[Unit]]), (u : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]])) <= (m : Real) && !(dot(n, u - b) < dot(n, (c : Cart[Real, Tybit0[Unit]]) - b)) && dot(n, mx - b) == m && dot(n, mx - b) <= dot(n, c - b) \226\134\146 dot(n, u - b) == m && dot(n, c - b) == m
+      #|  dot((n : Cart[Real, Tybit0[Unit]]), (u : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]])) == (m : Real) && dot(n, (c : Cart[Real, Tybit0[Unit]]) - b) == m
+      #|  ((r : Real) * (x : Real) + (s : Real) * x < x) == (real_of_num(0) < (real_of_num(1) - r - s) * x)
+      #|  op_pct((r : Real), (a : Cart[Real, Tybit0[Unit]])) + (op_pct((s : Real), (b : Cart[Real, Tybit0[Unit]])) + op_pct((t : Real), (c : Cart[Real, Tybit0[Unit]]))) - b == op_pct(r, a - b) + (op_pct(t, c - b) + op_pct(r + (s + t) - real_of_num(1), b))
+      #|  dot((n : Cart[Real, Tybit0[Unit]]), (u : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]])) < dot(n, (c : Cart[Real, Tybit0[Unit]]) - b)
+      #|  (real_of_num(0) <= (real_of_num(1) - (q : Real)) * (r : Real) + q * (s : Real)) == (q * (r - s) <= r)
+      #|  (real_of_num(1) - (q : Real)) * (rx : Real) + q * (r : Real) + (q * (s : Real) + ((real_of_num(1) - q) * (tx : Real) + q * (t : Real))) == rx + tx + q * (r + (s + t) - (rx + tx))
+      #|  (q : Real)
+      #|  (real_of_num(1) - (q : Real)) * (tx : Real) + q * (t : Real)
+      #|  (q : Real) * (s : Real)
+      #|  (real_of_num(1) - (q : Real)) * (rx : Real) + q * (r : Real)
+      #|  real_of_num(0) <= (a : Real) && real_of_num(0) <= (x : Real) && real_of_num(0) <= (b : Real) \226\134\146 abs(min(a, min(b, x))) <= x
+      #|  !((x : Real) == (y : Real)) \226\134\146 real_of_num(0) < abs(x - y)
+      #|  abs((x : Real)) <= (a : Real) \226\134\146 x <= a
+      #|  (t : Real) == (tx : Real)
+      #|  real_of_num(0) <= (a : Real) && real_of_num(0) <= (x : Real) && real_of_num(0) <= (b : Real) \226\134\146 abs(min(a, min(x, b))) <= x
+      #|  !((x : Real) == (y : Real)) \226\134\146 real_of_num(0) < abs(x - y)
+      #|  abs((x : Real)) <= (a : Real) \226\134\146 x <= a
+      #|  (r : Real) == (rx : Real)
+      #|  min(real_of_num(1) / real_of_num(2), min(if (rx : Real) == (r : Real) { real_of_num(1) / real_of_num(2) } else { rx / abs(rx - r) }, if (tx : Real) == (t : Real) { real_of_num(1) / real_of_num(2) } else { tx / abs(tx - t) }))
+      #|  \226\136\131 q : Real, q * ((rx : Real) - (r : Real)) <= rx && q * ((tx : Real) - (t : Real)) <= tx && real_of_num(0) < q && q < real_of_num(1)
+      #|  real_of_num(0) < (rx : Real) && rx < real_of_num(1) && real_of_num(0) < (tx : Real) && tx < real_of_num(1)
+      #|  (sx : Real) == real_of_num(0)
+      #|  (tx : Real)
+      #|  (sx : Real)
+      #|  (rx : Real)
+      #|  (p : Bool) \226\134\146 !p \226\134\146 (q : Bool)
+      #|  !IN((mx : Cart[Real, Tybit0[Unit]]), interior(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})))
+      #|  (sx : Real) == real_of_num(0)
+      #|  dot((n : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]) - b) == (m : Real)
+      #|  (rx : Real) == real_of_num(0) && (tx : Real) == real_of_num(0)
+      #|  (sx : Real) == real_of_num(1)
+      #|  (sx : Real) == real_of_num(0) && (rx : Real) == real_of_num(0)
+      #|  (tx : Real) == real_of_num(1)
+      #|  dot((n : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]) - b) == (m : Real)
+      #|  !(q : Bool) && (p : Bool) \226\134\146 (p \226\134\146 q) \226\134\146 (r : Bool)
+      #|  (mx : Cart[Real, Tybit0[Unit]])
+      #|  SUBSET(INTER(segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]), path_image(polygonal_path(CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))))), {a, b})
+      #|  (tx : Real) == real_of_num(0)
+      #|  (sx : Real) == real_of_num(0) && (tx : Real) == real_of_num(0)
+      #|  (rx : Real) == real_of_num(1)
+      #|  !(q : Bool) && (p : Bool) \226\134\146 (p \226\134\146 q) \226\134\146 (r : Bool)
+      #|  (mx : Cart[Real, Tybit0[Unit]])
+      #|  SUBSET(INTER(segment([((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))]), path_image(polygonal_path(CONS(c, (p : List[Cart[Real, Tybit0[Unit]]]))))), {c})
+      #|  (rx : Real) == real_of_num(0)
+      #|  (tx : Real)
+      #|  (sx : Real)
+      #|  (rx : Real)
+      #|  IN((mx : Cart[Real, Tybit0[Unit]]), hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}))
+      #|  (t : Real)
+      #|  (s : Real)
+      #|  (r : Real)
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}
+      #|  real_of_num(0) < (x : Real) \226\134\146 abs(min(real_of_num(1) / real_of_num(2), x)) <= x
+      #|  (a : Cart[Real, N]) - (op_pct(real_of_num(1) - (u : Real), a) + op_pct(u, (b : Cart[Real, N]))) == op_pct(u, a - b)
+      #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) < min(real_of_num(1) / real_of_num(2), x)
+      #|  min(real_of_num(1) / real_of_num(2), (ee : Real) / norm((u : Cart[Real, Tybit0[Unit]]) - (mx : Cart[Real, Tybit0[Unit]])))
+      #|  (\226\136\131 x : _, (\226\136\131 u : _, (P : (_) -> Bool)(u) && (Q : (_) -> Bool)(u) && x == (f : (_) -> _)(u)) && (R : (_) -> Bool)(x)) == (\226\136\131 u : _, P(u) && Q(u) && R(f(u)))
+      #|  (ee : Real)
+      #|  IN((mx : Cart[Real, Tybit0[Unit]]), interior(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})))
+      #|  IN((mx : Cart[Real, Tybit0[Unit]]), interior(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})))
+      #|  (real_of_num(1) - (t : Real)) * (a : Real) < (real_of_num(1) - t) * (m : Real) && t * (b : Real) <= t * m \226\134\146 !((real_of_num(1) - (s : Real)) * m + s * m == (real_of_num(1) - t) * a + t * b)
+      #|  op_pct(real_of_num(1) - (u : Real), (c : Cart[Real, Tybit0[Unit]])) + op_pct(u, (a : Cart[Real, Tybit0[Unit]])) - (b : Cart[Real, Tybit0[Unit]]) == op_pct(real_of_num(1) - u, c - b) + op_pct(u, a - b)
+      #|  (x : Cart[Real, Tybit0[Unit]]) => dot((n : Cart[Real, Tybit0[Unit]]), x - (b : Cart[Real, Tybit0[Unit]]))
+      #|  (t : Real)
+      #|  (s : Real)
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  ((x : Real) >= (b : Real) + (e : Real)) == (e <= x - b)
+      #|  {(x : Cart[Real, Tybit0[Unit]]) | op_dollar(x, 2) >= op_dollar((b : Cart[Real, Tybit0[Unit]]), 2) + (e : Real)}
+      #|  \226\136\128 t : (_) -> Bool, !IN((b : _), t) && SUBSET((s : (_) -> Bool), t) \226\134\146 !IN(b, s)
+      #|  !IN((x : _), (t : (_) -> Bool)) \226\134\146 SUBSET((s : (_) -> Bool), t) \226\134\146 !IN(x, s)
+      #|  CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  path_image(polygonal_path(CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))))
+      #|  segment([((u : Cart[Real, Tybit0[Unit]]), (v : Cart[Real, Tybit0[Unit]]))])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 a : _, \226\136\128 b : _, \226\136\128 c : _, \226\136\128 t : (_) -> Bool, \226\136\128 u : (_) -> Bool, SUBSET((s : (_) -> Bool), t) && SUBSET(t, u) && IN(a, (ca : (_) -> Bool)) && IN(c, ca) && SUBSET(INTER((ab : (_) -> Bool), u), {a, b}) && SUBSET(INTER((bc : (_) -> Bool), u), {c}) && !IN(b, u) && INTER(s, ca) == {} \226\134\146 INTER(s, UNION(ab, UNION(bc, ca))) == {}
+      #|  SUBSET(closure(segment(((u : Cart[Real, Tybit0[Unit]]), (mx : Cart[Real, Tybit0[Unit]])))), hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}))
+      #|  (SUBSET((s : (_) -> Bool), (c : (_) -> Bool)) \226\134\146 IN((u : _), c)) && INTER(s, (f : (_) -> Bool)) == {} && !(INTER(s, c) == {}) \226\134\146 (!(INTER(s, c) == {}) && !(DIFF(s, c) == {}) \226\134\146 !(INTER(s, f) == {})) \226\134\146 IN(u, c)
+      #|  hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  segment(((u : Cart[Real, Tybit0[Unit]]), (mx : Cart[Real, Tybit0[Unit]])))
+      #|  ((a : Bool) \226\134\146 (b : Bool)) && a \226\134\146 a && b
+      #|  (mx : Cart[Real, Tybit0[Unit]]) == (u : Cart[Real, Tybit0[Unit]])
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  MEM((u : Cart[Real, Tybit0[Unit]]), CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]])))
+      #|  !((u : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])) && !(u == (c : Cart[Real, Tybit0[Unit]]))
+      #|  dot((n : Cart[Real, Tybit0[Unit]]), (u : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]])) < dot(n, (c : Cart[Real, Tybit0[Unit]]) - b)
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  -(x : Real) < -(m : Real) \226\134\146 !(x == m)
+      #|  op_pct(real_of_num(1) - (u : Real), (x : Cart[Real, N])) + op_pct(u, (y : Cart[Real, N])) - (a : Cart[Real, N]) == op_pct(real_of_num(1) - u, x - a) + op_pct(u, y - a)
+      #|  IN((mx : Cart[Real, Tybit0[Unit]]), segment([((u : Cart[Real, Tybit0[Unit]]), (v : Cart[Real, Tybit0[Unit]]))]))
+      #|  dot((n : Cart[Real, Tybit0[Unit]]), (mx : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]])) == (m : Real)
+      #|  dot((n : Cart[Real, Tybit0[Unit]]), (u : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]])) <= (m : Real) || dot(n, (v : Cart[Real, Tybit0[Unit]]) - b) <= m
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  (3 <= SUC((n : Num))) == (2 <= n)
+      #|  (mx : Cart[Real, Tybit0[Unit]])
+      #|  CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  \226\136\131 u : Cart[Real, Tybit0[Unit]], \226\136\131 v : Cart[Real, Tybit0[Unit]], MEM(u, CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))) && MEM(v, CONS(c, p)) && IN((mx : Cart[Real, Tybit0[Unit]]), segment([(u, v)])) && SUBSET(segment([(u, v)]), path_image(polygonal_path(CONS(c, p)))) && !(IN((a : Cart[Real, Tybit0[Unit]]), segment([(u, v)])) && IN(c, segment([(u, v)]))) && dot((n : Cart[Real, Tybit0[Unit]]), u - (b : Cart[Real, Tybit0[Unit]])) <= (m : Real)
+      #|  segment(((b : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])))
+      #|  ((x : Real) >= (b : Real) + (e : Real)) == (e <= x - b)
+      #|  ((e : Real) <= (x : Real) - (b : Real)) == (x >= b + e)
+      #|  SUBSET((t : (_) -> Bool), {(x : _) | (P : (_) -> Bool)(x)}) \226\134\146 SUBSET((s : (_) -> Bool), t) \226\134\146 (\226\136\128 x : _, IN(x, s) \226\134\146 P(x))
+      #|  CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  (INTER((s : (_) -> Bool), (t : (_) -> Bool)) == {}) == SUBSET(s, DIFF(UNIV, t))
+      #|  {(x : Cart[Real, Tybit0[Unit]]) | op_dollar(x, 2) - op_dollar((b : Cart[Real, Tybit0[Unit]]), 2) < (e : Real)}
+      #|  \226\136\128 t : (_) -> Bool, SUBSET((s : (_) -> Bool), t) && INTER((u : (_) -> Bool), t) == {} \226\134\146 INTER(s, u) == {}
+      #|  hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  \226\136\128 s : (_) -> Bool, SUBSET((i : (_) -> Bool), s) && SUBSET(s, (c : (_) -> Bool)) \226\134\146 DIFF(c, i) == UNION((a : (_) -> Bool), UNION((b : (_) -> Bool), (d : (_) -> Bool))) \226\134\146 INTER(i, b) == {}
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  interior(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}))
+      #|  \226\136\128 t : (_) -> Bool, SUBSET((s : (_) -> Bool), t) && INTER(t, (u : (_) -> Bool)) == {} \226\134\146 INTER(s, u) == {}
+      #|  hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  \226\136\128 s : (_) -> Bool, SUBSET((i : (_) -> Bool), s) && SUBSET(s, (c : (_) -> Bool)) \226\134\146 DIFF(c, i) == UNION((a : (_) -> Bool), (b : (_) -> Bool)) \226\134\146 INTER(i, a) == {}
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  interior(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}))
+      #|  \226\136\128 t : (_) -> Bool, SUBSET((s : (_) -> Bool), t) && INTER(t, (u : (_) -> Bool)) == {} \226\134\146 INTER(s, u) == {}
+      #|  SUBSET((s : (_) -> Bool), DIFF(UNIV, UNION((a : (_) -> Bool), UNION((b : (_) -> Bool), (c : (_) -> Bool))))) == (INTER(s, a) == {} && INTER(s, b) == {} && INTER(s, c) == {})
+      #|  interior(hull(convex, {(a' : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c' : Cart[Real, Tybit0[Unit]])}))
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(min(real_of_num(1) / real_of_num(2), x)) <= x
+      #|  abs(op_dollar((x : Cart[Real, _]), 2)) <= norm(x) && norm(x) <= (e : Real) / real_of_num(2) && real_of_num(0) < e \226\134\146 op_dollar(x, 2) < e
+      #|  min(real_of_num(1) / real_of_num(2), (e : Real) / real_of_num(2) / norm((z : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]])))
+      #|  (b : Cart[Real, Tybit0[Unit]]) + op_pct(min(real_of_num(1) / real_of_num(2), (e : Real) / real_of_num(2) / norm((z : Cart[Real, Tybit0[Unit]]) - b)), z - b)
+      #|  (\226\136\131 y : _, IN(y, (s : (_) -> Bool)) && (P : (_) -> Bool)(y)) && SUBSET(s, (t : (_) -> Bool)) \226\134\146 (\226\136\131 y : _, IN(y, s) && IN(y, t) && P(y))
+      #|  INTER(interior(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})), {(x : Cart[Real, Tybit0[Unit]]) | op_dollar(x, 2) - op_dollar(b, 2) < (e : Real)}) == interior(hull(convex, {(a' : Cart[Real, Tybit0[Unit]]), b, (c' : Cart[Real, Tybit0[Unit]])}))
+      #|  \226\136\131 y : Cart[Real, Tybit0[Unit]], IN(y, segment(((b : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])))) && IN(y, interior(hull(convex, {(a' : Cart[Real, Tybit0[Unit]]), b, (c' : Cart[Real, Tybit0[Unit]])})))
+      #|  real_of_num(0) < (m : Real) * (real_of_num(1) - (t : Real)) && m <= (x : Real) \226\134\146 !((real_of_num(1) - (s : Real)) * x + s * x == t * m)
+      #|  op_pct(real_of_num(1) - (u : Real), (c : Cart[Real, Tybit0[Unit]])) + op_pct(u, (a : Cart[Real, Tybit0[Unit]])) - (b : Cart[Real, Tybit0[Unit]]) == op_pct(real_of_num(1) - u, c - b) + op_pct(u, a - b)
+      #|  (x : Cart[Real, Tybit0[Unit]]) => dot((n : Cart[Real, Tybit0[Unit]]), x - (b : Cart[Real, Tybit0[Unit]]))
+      #|  (t : Real)
+      #|  (s : Real)
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  INTER((s : (_) -> Bool), (a : (_) -> Bool)) == {} && INTER(s, (b : (_) -> Bool)) == {} && INTER(s, (c : (_) -> Bool)) == {} && SUBSET(s, (u : (_) -> Bool)) \226\134\146 SUBSET(s, DIFF(u, UNION(a, UNION(b, c))))
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 SUBSET(DIFF(s, DIFF(u, (t : (_) -> Bool))), t)
+      #|  DIFF(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}), frontier(hull(convex, {a, b, c})))
+      #|  SUBSET(segment(((b : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))), interior(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), b, (c : Cart[Real, Tybit0[Unit]])})))
+      #|  ((t : Real) * (m : Real) < m) == (real_of_num(0) < m * (real_of_num(1) - t))
+      #|  op_pct(real_of_num(1) - (t : Real), (a : Cart[Real, N])) + op_pct(t, (b : Cart[Real, N])) - a == op_pct(t, b - a)
+      #|  (t : Real)
+      #|  IN((v : Cart[Real, Tybit0[Unit]]), segment(((b : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))))
+      #|  (m : Real) <= dot((n : Cart[Real, Tybit0[Unit]]), (v : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]]))
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  INTER(segment(((b : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))), path_image(polygonal_path(CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))))) == {}
+      #|  SUBSET(segment(((b : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))), hull(convex, {(a : Cart[Real, Tybit0[Unit]]), b, (c : Cart[Real, Tybit0[Unit]])}))
+      #|  SUBSET(segment([((b : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))]), hull(convex, {(a : Cart[Real, Tybit0[Unit]]), b, (c : Cart[Real, Tybit0[Unit]])}))
+      #|  IN((v : Cart[Real, Tybit0[Unit]]), segment([((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))]))
+      #|  IN((v : Cart[Real, Tybit0[Unit]]), segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]))
+      #|  IN((v : Cart[Real, Tybit0[Unit]]), segment(((b : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))))
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  {(a : _), (b : _), (c : _)} == {b, a, c}
+      #|  !collinear({(b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])})
+      #|  !collinear({(b : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])})
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  INTER(segment(((b : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))), segment([((a : Cart[Real, Tybit0[Unit]]), b)])) == {} && INTER(segment((b, z)), segment([(b, (c : Cart[Real, Tybit0[Unit]]))])) == {}
+      #|  hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  \226\136\128 c : (_) -> Bool, IN((x : _), c) && !IN(x, INTER((a : (_) -> Bool), c)) && !IN(x, INTER((b : (_) -> Bool), c)) \226\134\146 !IN(x, a) && !IN(x, b)
+      #|  !collinear({(b : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])}) && !collinear({b, (c : Cart[Real, Tybit0[Unit]]), z})
+      #|  !IN((z : Cart[Real, Tybit0[Unit]]), segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))])) && !IN(z, segment([(b, (c : Cart[Real, Tybit0[Unit]]))]))
+      #|  IN((z : Cart[Real, Tybit0[Unit]]), path_image(polygonal_path(CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))))) && IN(z, path_image(polygonal_path(p)))
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])) && !(z == (c : Cart[Real, Tybit0[Unit]]))
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\131 z : Cart[Real, Tybit0[Unit]], MEM(z, (p : List[Cart[Real, Tybit0[Unit]]])) && IN(z, DIFF(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}), {a, c})) && dot((n : Cart[Real, Tybit0[Unit]]), z - b) == (m : Real)
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  SUBSET(INTER(segment([((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))]), path_image(polygonal_path(CONS(c, (p : List[Cart[Real, Tybit0[Unit]]]))))), {c})
+      #|  real_of_num(0) < (m : Real)
+      #|  (m : Real) == dot((n : Cart[Real, Tybit0[Unit]]), (mx : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]]))
+      #|  dot((n : Cart[Real, Tybit0[Unit]]), (mx : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]]))
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (my : Cart[Real, Tybit0[Unit]])
+      #|  !SUBSET(INTER(path_image(polygonal_path(CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]])))), hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), c})), {a, c})
+      #|  (mx : Cart[Real, Tybit0[Unit]])
+      #|  dot((n : Cart[Real, Tybit0[Unit]]), (mx : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]])) <= dot(n, (c : Cart[Real, Tybit0[Unit]]) - b)
+      #|  (mx : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\131 mx : Cart[Real, Tybit0[Unit]], !(mx == (a : Cart[Real, Tybit0[Unit]])) && !(mx == (c : Cart[Real, Tybit0[Unit]])) && IN(mx, INTER(path_image(polygonal_path(CONS(c, (p : List[Cart[Real, Tybit0[Unit]]])))), hull(convex, {a, (b : Cart[Real, Tybit0[Unit]]), c}))) && (\226\136\128 y : Cart[Real, Tybit0[Unit]], IN(y, INTER(path_image(polygonal_path(CONS(c, p))), hull(convex, {a, b, c}))) \226\134\146 dot((n : Cart[Real, Tybit0[Unit]]), mx - b) <= dot(n, y - b))
+      #|  ((x : Cart[Real, Tybit0[Unit]]) => dot((n : Cart[Real, Tybit0[Unit]]), x - (b : Cart[Real, Tybit0[Unit]]))) == o((x : Cart[Real, Tybit0[Unit]]) => dot(n, x), (x : Cart[Real, Tybit0[Unit]]) => x - b)
+      #|  INTER(path_image(polygonal_path(CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]])))), hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), c}))
+      #|  (x : Cart[Real, Tybit0[Unit]]) => dot((n : Cart[Real, Tybit0[Unit]]), x - (b : Cart[Real, Tybit0[Unit]]))
+      #|  ((real_of_num(1) - (u : Real) - (v : Real)) * (x : Real) + v * x <= x) == (real_of_num(0) <= u * x)
+      #|  (a : Cart[Real, Tybit0[Unit]]) + (op_pct((u : Real), (b : Cart[Real, Tybit0[Unit]]) - a) + op_pct((v : Real), (c : Cart[Real, Tybit0[Unit]]) - a)) - b == op_pct(real_of_num(1) - u - v, a - b) + op_pct(v, c - b)
+      #|  \226\136\128 y : Cart[Real, Tybit0[Unit]], IN(y, hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})) \226\134\146 dot((n : Cart[Real, Tybit0[Unit]]), y - b) <= dot(n, c - b)
+      #|  (y : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 y : Cart[Real, Tybit0[Unit]], IN(y, hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})) \226\134\146 real_of_num(0) <= dot((n : Cart[Real, Tybit0[Unit]]), y - b)
+      #|  !((a : Cart[Real, Tybit0[Unit]]) + (op_pct((r : Real), (b : Cart[Real, Tybit0[Unit]]) - a) + op_pct((s : Real), (c : Cart[Real, Tybit0[Unit]]) - a)) == b)
+      #|  (r : Real) == real_of_num(1) && (s : Real) == real_of_num(0)
+      #|  (real_of_num(1) - (u : Real) - (v : Real)) * (x : Real) + v * x == (real_of_num(1) - u) * x
+      #|  (s : Real)
+      #|  (r : Real)
+      #|  (a : Cart[Real, Tybit0[Unit]]) + (op_pct((u : Real), (b : Cart[Real, Tybit0[Unit]]) - a) + op_pct((v : Real), (c : Cart[Real, Tybit0[Unit]]) - a)) - b == op_pct(real_of_num(1) - u - v, a - b) + op_pct(v, c - b)
+      #|  \226\136\128 y : Cart[Real, Tybit0[Unit]], IN(y, hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})) && !(y == b) \226\134\146 real_of_num(0) < dot((n : Cart[Real, Tybit0[Unit]]), y - b)
+      #|  ((x : Real) == (y : Real)) == (y - x == real_of_num(0))
+      #|  dot((n : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]])) == dot(n, (c : Cart[Real, Tybit0[Unit]]) - b)
+      #|  (n : Cart[Real, Tybit0[Unit]])
+      #|  (p : Bool) \226\134\146 !p \226\134\146 (q : Bool)
+      #|  {(a : _), (b : _), (c : _)} == {a, c, b}
+      #|  !collinear({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  -(n : Cart[Real, Tybit0[Unit]])
+      #|  (n : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(0) < dot((n : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]])) || real_of_num(0) < -dot(n, c - b) || dot(n, c - b) == real_of_num(0)
+      #|  \226\136\131 n : Cart[Real, Tybit0[Unit]], !(n == vec(0)) && orthogonal(n, (c : Cart[Real, Tybit0[Unit]]) - (a : Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\131 n : Cart[Real, Tybit0[Unit]], !(n == vec(0)) && orthogonal(n, (c : Cart[Real, Tybit0[Unit]]) - (a : Cart[Real, Tybit0[Unit]])) && real_of_num(0) < dot(n, c - (b : Cart[Real, Tybit0[Unit]]))
+      #|  {(b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}
+      #|  (p : Bool) \226\134\146 p == ((q : Bool) && (r : Bool) && (s : Bool)) \226\134\146 r
+      #|  hull(convex, {(b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])}
+      #|  (p : Bool) \226\134\146 p == ((q : Bool) && (r : Bool) && (s : Bool)) \226\134\146 r
+      #|  hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])})
+      #|  hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  DIFF((s : (_) -> Bool), UNION((t : (_) -> Bool), (u : (_) -> Bool))) == INTER(DIFF(s, t), DIFF(s, u))
+      #|  IN((y : Cart[Real, Tybit0[Unit]]), segment(((a : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))))
+      #|  IN((y : Cart[Real, Tybit0[Unit]]), hull(convex, {(b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}))
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  {(a : _), (b : _), (c : _)} == {b, c, a}
+      #|  !collinear({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  IN((y : Cart[Real, Tybit0[Unit]]), segment(((a : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))))
+      #|  IN((y : Cart[Real, Tybit0[Unit]]), hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])}))
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  {(a : _), (b : _), (c : _)} == {b, a, c}
+      #|  !collinear({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 IN((x : _), s) && (P : (_) -> Bool)(x) \226\134\146 IN(x, t)
+      #|  IN((y : Cart[Real, Tybit0[Unit]]), segment(((a : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))))
+      #|  !IN((d : Cart[Real, Tybit0[Unit]]), frontier(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})))
+      #|  SUBSET(INTER((t : (_) -> Bool), (s : (_) -> Bool)), (c : (_) -> Bool)) \226\134\146 SUBSET(c, UNION((a : (_) -> Bool), (b : (_) -> Bool))) \226\134\146 SUBSET(DIFF(s, UNION(a, b)), DIFF(UNIV, UNION(a, UNION(b, t))))
+      #|  DIFF(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}), UNION(segment([(a, b)]), segment([(b, c)])))
+      #|  segment([((d : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]]))])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  SUBSET(INTER(path_image(polygonal_path(CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]])))), hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), c})), {a, c})
+      #|  !affine_dependent({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (d' : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (d' : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  op_dollar((y : Cart[Real, Tybit0[Unit]]), 1) == op_dollar((d : Cart[Real, Tybit0[Unit]]), 1)
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (INTER((s : (_) -> Bool), UNION((t : (_) -> Bool), (u : (_) -> Bool))) == {}) == (INTER(s, t) == {} && INTER(s, u) == {})
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  IN((x : _), (s : (_) -> Bool)) && IN(x, (t : (_) -> Bool)) && (\226\136\128 y : _, IN(y, s) && IN(y, t) \226\134\146 y == x) \226\134\146 INTER(s, t) == {x}
+      #|  path_image(op_plus_plus(op_plus_plus(polygonal_path(CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))), linepath((b, c)))) == path_image(op_plus_plus(linepath((a, b)), op_plus_plus(linepath((b, c)), polygonal_path(CONS(c, p)))))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  op_plus_plus(polygonal_path(CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))))
+      #|  (d' : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (d' : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, Tybit0[Unit]]) == (c : Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, Tybit0[Unit]]) == (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (d' : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  op_dollar((y : Cart[Real, Tybit0[Unit]]), 1) == op_dollar((d : Cart[Real, Tybit0[Unit]]), 1)
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (INTER((s : (_) -> Bool), UNION((t : (_) -> Bool), (u : (_) -> Bool))) == {}) == (INTER(s, t) == {} && INTER(s, u) == {})
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  IN((x : _), (s : (_) -> Bool)) && IN(x, (t : (_) -> Bool)) && (\226\136\128 y : _, IN(y, s) && IN(y, t) \226\134\146 y == x) \226\134\146 INTER(s, t) == {x}
+      #|  pathfinish(op_plus_plus(linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))), op_plus_plus(linepath((b, (c : Cart[Real, Tybit0[Unit]]))), polygonal_path(CONS(c, (p : List[Cart[Real, Tybit0[Unit]]])))))) == a
+      #|  path_image(op_plus_plus(op_plus_plus(linepath(((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))), polygonal_path(CONS(c, (p : List[Cart[Real, Tybit0[Unit]]])))), linepath(((a : Cart[Real, Tybit0[Unit]]), b)))) == path_image(op_plus_plus(linepath((a, b)), op_plus_plus(linepath((b, c)), polygonal_path(CONS(c, p)))))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  op_plus_plus(linepath(((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))), polygonal_path(CONS(c, (p : List[Cart[Real, Tybit0[Unit]]]))))
+      #|  (d' : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), UNION(segment(((b : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]))), segment((b, (c : Cart[Real, Tybit0[Unit]])))))
+      #|  IN((d : Cart[Real, Tybit0[Unit]]), inside(path_image(op_plus_plus(linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))), op_plus_plus(linepath((b, (c : Cart[Real, Tybit0[Unit]]))), polygonal_path(CONS(c, (p : List[Cart[Real, Tybit0[Unit]]]))))))))
+      #|  SUBSET(INTER(segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]), segment([(b, (c : Cart[Real, Tybit0[Unit]]))])), {a, b})
+      #|  INTER(segment(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))), segment((b, (c : Cart[Real, Tybit0[Unit]])))) == {}
+      #|  pathfinish(polygonal_path((p : List[Cart[Real, Tybit0[Unit]]]))) == (a : Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  IN((y : Cart[Real, Tybit0[Unit]]), segment(((d : Cart[Real, Tybit0[Unit]]), (x : Cart[Real, Tybit0[Unit]]))))
+      #|  !IN((y : Cart[Real, Tybit0[Unit]]), interior(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), segment(((y : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]]))))
+      #|  !IN((x : Cart[Real, Tybit0[Unit]]), interior(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})))
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 (x + y == real_of_num(0)) == (x == real_of_num(0) && y == real_of_num(0))
+      #|  ((d : Cart[Real, Tybit0[Unit]]) == op_pct(real_of_num(1) - (w : Real), op_pct(real_of_num(1) - (u : Real), d) + op_pct(u, (d' : Cart[Real, Tybit0[Unit]]))) + op_pct(w, op_pct(real_of_num(1) - (v : Real), d) + op_pct(v, d'))) == (op_pct((real_of_num(1) - w) * u + w * v, d' - d) == vec(0))
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), segment(((d : Cart[Real, Tybit0[Unit]]), (d' : Cart[Real, Tybit0[Unit]]))))
+      #|  IN((y : Cart[Real, Tybit0[Unit]]), segment([((d : Cart[Real, Tybit0[Unit]]), (d' : Cart[Real, Tybit0[Unit]]))]))
+      #|  IN((d : Cart[Real, Tybit0[Unit]]), segment(((x : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]]))))
+      #|  (y : Cart[Real, Tybit0[Unit]]) == (d : Cart[Real, Tybit0[Unit]])
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), frontier(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}))) && IN((y : Cart[Real, Tybit0[Unit]]), frontier(hull(convex, {a, b, c})))
+      #|  (x : Cart[Real, Tybit0[Unit]]) == (y : Cart[Real, Tybit0[Unit]])
+      #|  (d' : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  collinear({(d : Cart[Real, Tybit0[Unit]]), (x : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]])})
+      #|  \226\136\128 y : Cart[Real, Tybit0[Unit]], IN(y, segment([((d : Cart[Real, Tybit0[Unit]]), (d' : Cart[Real, Tybit0[Unit]]))])) && IN(y, UNION(segment(((b : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]))), segment((b, (c : Cart[Real, Tybit0[Unit]]))))) \226\134\146 y == (x : Cart[Real, Tybit0[Unit]])
+      #|  !((d' : Cart[Real, Tybit0[Unit]]) == (d : Cart[Real, Tybit0[Unit]]))
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  IN((d : Cart[Real, Tybit0[Unit]]), interior(hull(convex, {(a' : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c' : Cart[Real, Tybit0[Unit]])})))
+      #|  IN((d : Cart[Real, Tybit0[Unit]]), interior(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})))
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (d' : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (INTER((s : (_) -> Bool), (t : (_) -> Bool)) == {}) == (\226\136\128 x : _, IN(x, s) \226\134\146 !IN(x, t))
+      #|  ((b : Real) + (e : Real) <= (x : Real)) == (e <= x - b)
+      #|  hull(convex, set_of_list(CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))))
+      #|  {(x : Cart[Real, Tybit0[Unit]]) | op_dollar(x, 2) >= op_dollar((b : Cart[Real, Tybit0[Unit]]), 2) + (e : Real)}
+      #|  \226\136\128 u : (_) -> Bool, SUBSET((t : (_) -> Bool), u) && INTER((s : (_) -> Bool), u) == {} \226\134\146 INTER(s, t) == {}
+      #|  INTER(segment([((d : Cart[Real, Tybit0[Unit]]), (d' : Cart[Real, Tybit0[Unit]]))]), path_image(polygonal_path(CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))))) == {}
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (a' : Cart[Real, Tybit0[Unit]])
+      #|  (c' : Cart[Real, Tybit0[Unit]])
+      #|  !IN((x : _), (u : (_) -> Bool)) && SUBSET((s : (_) -> Bool), (s' : (_) -> Bool)) && SUBSET((t : (_) -> Bool), (t' : (_) -> Bool)) \226\134\146 IN(x, UNION(s, UNION(t, u))) \226\134\146 IN(x, s') || IN(x, t')
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), frontier(hull(convex, {(a' : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c' : Cart[Real, Tybit0[Unit]])})))
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), UNION(segment(((b : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]))), segment((b, (c : Cart[Real, Tybit0[Unit]])))))
+      #|  !((x : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])) && !(x == (c : Cart[Real, Tybit0[Unit]]))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (d' : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  op_dollar((x : Cart[Real, Tybit0[Unit]]), 2) < op_dollar((b : Cart[Real, Tybit0[Unit]]), 2) + (e : Real)
+      #|  !((x : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]]))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (d' : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  op_dollar((x : Cart[Real, Tybit0[Unit]]), 1) == op_dollar((d : Cart[Real, Tybit0[Unit]]), 1)
+      #|  op_dollar((d' : Cart[Real, Tybit0[Unit]]), 1) == op_dollar((d : Cart[Real, Tybit0[Unit]]), 1)
+      #|  closure(hull(convex, {(a' : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c' : Cart[Real, Tybit0[Unit]])})) == hull(convex, {a', b, c'})
+      #|  (x : Cart[Real, Tybit0[Unit]]) == (d' : Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Tybit0[Unit]]) == (d : Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (d' : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  !(INTER(segment([((d : Cart[Real, Tybit0[Unit]]), (d' : Cart[Real, Tybit0[Unit]]))]), frontier(hull(convex, {(a' : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c' : Cart[Real, Tybit0[Unit]])}))) == {})
+      #|  !IN((d' : Cart[Real, Tybit0[Unit]]), hull(convex, {(a' : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c' : Cart[Real, Tybit0[Unit]])}))
+      #|  {(x : Cart[Real, Tybit0[Unit]]) | op_dollar(x, 2) >= op_dollar((b : Cart[Real, Tybit0[Unit]]), 2)}
+      #|  \226\136\128 t : (_) -> Bool, SUBSET((s : (_) -> Bool), t) && !IN((x : _), t) \226\134\146 !IN(x, s)
+      #|  !IN((d' : Cart[Real, Tybit0[Unit]]), hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (c' : Cart[Real, Tybit0[Unit]])
+      #|  IN((c' : Cart[Real, Tybit0[Unit]]), segment([((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))]))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (a' : Cart[Real, Tybit0[Unit]])
+      #|  IN((a' : Cart[Real, Tybit0[Unit]]), segment([((b : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]))]))
+      #|  SUBSET(hull(convex, {(a' : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c' : Cart[Real, Tybit0[Unit]])}), hull(convex, {(a : Cart[Real, Tybit0[Unit]]), b, (c : Cart[Real, Tybit0[Unit]])}))
+      #|  op_dollar((d' : Cart[Real, Tybit0[Unit]]), 2) + real_of_num(1) == op_dollar((b : Cart[Real, Tybit0[Unit]]), 2)
+      #|  ((r : Real) * ((e : Real) + (b : Real)) + ((real_of_num(1) - (r + (t : Real))) * b + t * (e + b)) < b + e) == ((r + t) * e < real_of_num(1) * e)
+      #|  ((b : Real) < (r : Real) * (x : Real) + ((real_of_num(1) - (r + (t : Real))) * b + t * x)) == ((r + t) * b < (r + t) * x)
+      #|  (r : Real) + ((s : Real) + (t : Real)) == real_of_num(1) \226\134\146 s == real_of_num(1) - (r + t)
+      #|  (t : Real)
+      #|  (s : Real)
+      #|  (r : Real)
+      #|  IN((d : Cart[Real, Tybit0[Unit]]), interior(hull(convex, {(a' : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c' : Cart[Real, Tybit0[Unit]])})))
+      #|  op_dollar((b : Cart[Real, Tybit0[Unit]]), 2) < op_dollar((d : Cart[Real, Tybit0[Unit]]), 2) && op_dollar(d, 2) < op_dollar(b, 2) + (e : Real)
+      #|  (b : Real) < (a : Real) \226\134\146 !(a - b == real_of_num(0))
+      #|  (real_of_num(1) - (u : Real)) * (b : Real) + u * (a : Real) - b == u * (a - b)
+      #|  op_dollar((a' : Cart[Real, Tybit0[Unit]]), 2) - op_dollar((b : Cart[Real, Tybit0[Unit]]), 2) == (e : Real) && op_dollar((c' : Cart[Real, Tybit0[Unit]]), 2) - op_dollar(b, 2) == e
+      #|  IN((d' : Cart[Real, Tybit0[Unit]]), outside(path_image(op_plus_plus(linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))), op_plus_plus(linepath((b, (c : Cart[Real, Tybit0[Unit]]))), polygonal_path(CONS(c, (p : List[Cart[Real, Tybit0[Unit]]]))))))))
+      #|  (d' : Cart[Real, Tybit0[Unit]]) == (d : Cart[Real, Tybit0[Unit]]) - op_pct(real_of_num(1) + (op_dollar(d, 2) - op_dollar((b : Cart[Real, Tybit0[Unit]]), 2)), basis(2))
+      #|  SUBSET(DIFF(UNIV, {(x : Cart[Real, Tybit0[Unit]]) | op_dollar(x, 2) >= op_dollar((b : Cart[Real, Tybit0[Unit]]), 2)}), outside(path_image(op_plus_plus(linepath(((a : Cart[Real, Tybit0[Unit]]), b)), op_plus_plus(linepath((b, (c : Cart[Real, Tybit0[Unit]]))), polygonal_path(CONS(c, (p : List[Cart[Real, Tybit0[Unit]]]))))))))
+      #|  hull(convex, set_of_list(CONS((a : Cart[Real, Tybit0[Unit]]), CONS((b : Cart[Real, Tybit0[Unit]]), CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))))))
+      #|  SUBSET(path_image(polygonal_path(CONS((a : Cart[Real, Tybit0[Unit]]), CONS((b : Cart[Real, Tybit0[Unit]]), CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]])))))), {(x : Cart[Real, Tybit0[Unit]]) | op_dollar(x, 2) >= op_dollar(b, 2)})
+      #|  real_of_num(0) < (k : Real)
+      #|  (op_pct : (Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((k : Real) / real_of_num(2), (basis : (Num) -> Cart[Real, Tybit0[Unit]])(1))
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], dist(((x : Cart[Real, Tybit0[Unit]]) + a, (y : Cart[Real, Tybit0[Unit]]))) < (k : Real) / real_of_num(2) && norm(a) == k / real_of_num(2) \226\134\146 dist((x, y)) < k
       #|  :real
       #|  :real
-      #|  y:real^2
-      #|  k / &2
-      #|  &0 < k ==> ~(b + k / &2 = b)
-      #|  x + k / &2 % basis 1:real^2
-      #|  &0 < k
-      #|  dist(x,x + e) = norm e
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (k : Real) / real_of_num(2)
+      #|  real_of_num(0) < (k : Real) \226\134\146 !((b : Real) + k / real_of_num(2) == b)
+      #|  (x : Cart[Real, Tybit0[Unit]]) + op_pct((k : Real) / real_of_num(2), basis(1))
+      #|  real_of_num(0) < (k : Real)
+      #|  dist(((x : Cart[Real, Tybit0[Unit]]), x + (e : Cart[Real, Tybit0[Unit]]))) == norm(e)
       #|  :real
       #|  :real
-      #|  x + k / &2 % basis 1:real^2
-      #|  k:real
-      #|  x:real^2
-      #|  (x:real^2)$1 = (b:real^2)$1
-      #|  x:real^2
-      #|  ~(interior(convex hull {a':real^2,b,c'}) = {})
-      #|  ?d:real^2. d IN interior(convex hull {a',b,c'}) /\\ ~(d$1 = b$1)
-      #|  interior(convex hull {a,b,c}) INTER {x:real^2 | x$2 - b$2 < e} =\n    interior(convex hull {a',b,c'})
-      #|  (&1 - u) * b + u * a <= e + b <=> (a - b) * u <= e
-      #|  x:real^2
-      #|  c':real^2
-      #|  c' IN segment[b:real^2,c]
-      #|  x:real^2
-      #|  a':real^2
-      #|  a' IN segment[b:real^2,a]
-      #|  y < x /\\ &0 < e ==> s = (s * (x - y)) / e * e / (x - y)
-      #|  a / e + b / e:real = (a + b) / e
-      #|  (t * ((c:real^2)$2 - (b:real^2)$2)) / e
-      #|  (s * ((a:real^2)$2 - (b:real^2)$2)) / e
-      #|  ((&1 - u) % b + u % a) - b:real^N = u % (a - b)
-      #|  t:real
-      #|  s:real
-      #|  a + x:real^N = a + y <=> x = y
-      #|  {a,b,c} = {b,a,c}
-      #|  convex hull {a,b,c} INTER {x:real^2 | x$2 - b$2 <= e} =\n                convex hull {a',b,c'}
-      #|  {a':real^2,b,c'}
-      #|  ~affine_dependent{a':real^2,b,c'}
-      #|  ~collinear{a':real^2,b,c'}
-      #|  ~(a':real^2 = c')
-      #|  ~(a = &0) /\\ ~(c = &0)\n      ==> (a * c * x) pow 2 = (a * a * y) * (c * c * z)\n          ==> x pow 2 = y * z
-      #|  ((&1 - u) % b + u % a) - b = u % (a - b)
-      #|  ~collinear{a:real^2,b,c}
-      #|  ~collinear{a':real^2,b,c'}
-      #|  (&1 - u) % a + u % b = a <=> u % (b - a) = vec 0
-      #|  ~(a':real^2 = b) /\\ ~(c':real^2 = b)
-      #|  p /\\ q /\\ r <=> r /\\ p /\\ q
-      #|  (&1 - u) % a + u % b = (&1 - v) % a + v % b <=>\n      (u - v) % (b - a) = vec 0
-      #|  a' IN segment[b:real^2,a] /\\ c' IN segment[b,c]
-      #|  c':real^2 = (&1 - e / (c$2 - b$2)) % b + e / (c$2 - b$2) % c
-      #|  a':real^2 = (&1 - e / (a$2 - b$2)) % b + e / (a$2 - b$2) % a
-      #|  (d:real^2)$2 - (b:real^2)$2
-      #|  d:real^2
-      #|  a:real^2
-      #|  IMAGE (\\v. (v:real^2)$2 - (b:real^2)$2)\n                        (set_of_list(CONS a (CONS b (CONS c p)))\n                          DELETE b)
-      #|  ?e. &0 < e /\\\n         e <= (a:real^2)$2 - (b:real^2)$2 /\\\n         e <= (c:real^2)$2 - (b:real^2)$2 /\\\n         forall v. MEM v p ==> e <= (v:real^2)$2 - (b:real^2)$2
-      #|  s INTER t = t <=> t SUBSET s
-      #|  segment[a:real^2,b] INTER segment[b,c] = segment[b,c]
-      #|  (&1 - u) * b < (&1 - u) * c /\\ u * b < u * a\n        ==> ~(b = (&1 - u) * c + u * a)
-      #|  \\x:real^2. x$2
-      #|  u:real
-      #|  b IN segment[c:real^2,a]
-      #|  s INTER t = s <=> s SUBSET t
-      #|  segment[a:real^2,b] INTER segment[b,c] = segment[a,b]
-      #|  {a:real^2,b}
-      #|  FINITE(segment[a:real^2,b] INTER segment[b,c])
-      #|  ~collinear{a:real^2,b,c}
-      #|  (b:real^2)$2 < (a:real^2)$2 /\\\n                (b:real^2)$2 < (c:real^2)$2 /\\\n                (forall v. MEM v p ==> (b:real^2)$2 < (v:real^2)$2)
-      #|  (forall x. P x ==> ~(a = x)) <=> ~(P a)
-      #|  CONS (b:real^2) (CONS c p)
-      #|  a:real^2 = c
-      #|  s INTER (t UNION u) SUBSET v <=>\n                        s INTER t SUBSET v /\\ s INTER u SUBSET v
-      #|  polygonal_path(CONS (b:real^2) (CONS c p))
-      #|  linepath(a:real^2,b)
-      #|  MEM b (CONS a (CONS b l))
-      #|  b:real^2
-      #|  p:(real^2)list = []
-      #|  5 <= SUC(SUC(SUC n)) <=> ~(n = 0) /\\ 2 <= n
-      #|  b':real^2 = b
+      #|  (x : Cart[Real, Tybit0[Unit]]) + op_pct((k : Real) / real_of_num(2), basis(1))
+      #|  (k : Real)
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  op_dollar((x : Cart[Real, Tybit0[Unit]]), 1) == op_dollar((b : Cart[Real, Tybit0[Unit]]), 1)
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  !(interior(hull(convex, {(a' : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c' : Cart[Real, Tybit0[Unit]])})) == {})
+      #|  \226\136\131 d : Cart[Real, Tybit0[Unit]], IN(d, interior(hull(convex, {(a' : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c' : Cart[Real, Tybit0[Unit]])}))) && !(op_dollar(d, 1) == op_dollar(b, 1))
+      #|  INTER(interior(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})), {(x : Cart[Real, Tybit0[Unit]]) | op_dollar(x, 2) - op_dollar(b, 2) < (e : Real)}) == interior(hull(convex, {(a' : Cart[Real, Tybit0[Unit]]), b, (c' : Cart[Real, Tybit0[Unit]])}))
+      #|  ((real_of_num(1) - (u : Real)) * (b : Real) + u * (a : Real) <= (e : Real) + b) == ((a - b) * u <= e)
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (c' : Cart[Real, Tybit0[Unit]])
+      #|  IN((c' : Cart[Real, Tybit0[Unit]]), segment([((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))]))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (a' : Cart[Real, Tybit0[Unit]])
+      #|  IN((a' : Cart[Real, Tybit0[Unit]]), segment([((b : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]))]))
+      #|  (y : Real) < (x : Real) && real_of_num(0) < (e : Real) \226\134\146 (s : Real) == s * (x - y) / e * (e / (x - y))
+      #|  (a : Real) / (e : Real) + (b : Real) / e == (a + b) / e
+      #|  (t : Real) * (op_dollar((c : Cart[Real, Tybit0[Unit]]), 2) - op_dollar((b : Cart[Real, Tybit0[Unit]]), 2)) / (e : Real)
+      #|  (s : Real) * (op_dollar((a : Cart[Real, Tybit0[Unit]]), 2) - op_dollar((b : Cart[Real, Tybit0[Unit]]), 2)) / (e : Real)
+      #|  op_pct(real_of_num(1) - (u : Real), (b : Cart[Real, N])) + op_pct(u, (a : Cart[Real, N])) - b == op_pct(u, a - b)
+      #|  (t : Real)
+      #|  (s : Real)
+      #|  ((a : Cart[Real, N]) + (x : Cart[Real, N]) == a + (y : Cart[Real, N])) == (x == y)
+      #|  {(a : _), (b : _), (c : _)} == {b, a, c}
+      #|  INTER(hull(convex, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}), {(x : Cart[Real, Tybit0[Unit]]) | op_dollar(x, 2) - op_dollar(b, 2) <= (e : Real)}) == hull(convex, {(a' : Cart[Real, Tybit0[Unit]]), b, (c' : Cart[Real, Tybit0[Unit]])})
+      #|  {(a' : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c' : Cart[Real, Tybit0[Unit]])}
+      #|  !affine_dependent({(a' : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c' : Cart[Real, Tybit0[Unit]])})
+      #|  !collinear({(a' : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c' : Cart[Real, Tybit0[Unit]])})
+      #|  !((a' : Cart[Real, Tybit0[Unit]]) == (c' : Cart[Real, Tybit0[Unit]]))
+      #|  !((a : Real) == real_of_num(0)) && !((c : Real) == real_of_num(0)) \226\134\146 pow(a * (c * (x : Real)), 2) == a * (a * (y : Real)) * (c * (c * (z : Real))) \226\134\146 pow(x, 2) == y * z
+      #|  op_pct(real_of_num(1) - (u : Real), (b : Cart[Real, Tybit0[Unit]])) + op_pct(u, (a : Cart[Real, Tybit0[Unit]])) - b == op_pct(u, a - b)
+      #|  !collinear({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  !collinear({(a' : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c' : Cart[Real, Tybit0[Unit]])})
+      #|  (op_pct(real_of_num(1) - (u : Real), (a : Cart[Real, Tybit0[Unit]])) + op_pct(u, (b : Cart[Real, Tybit0[Unit]])) == a) == (op_pct(u, b - a) == vec(0))
+      #|  !((a' : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])) && !((c' : Cart[Real, Tybit0[Unit]]) == b)
+      #|  ((p : Bool) && (q : Bool) && (r : Bool)) == (r && p && q)
+      #|  (op_pct(real_of_num(1) - (u : Real), (a : Cart[Real, Tybit0[Unit]])) + op_pct(u, (b : Cart[Real, Tybit0[Unit]])) == op_pct(real_of_num(1) - (v : Real), a) + op_pct(v, b)) == (op_pct(u - v, b - a) == vec(0))
+      #|  IN((a' : Cart[Real, Tybit0[Unit]]), segment([((b : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]))])) && IN((c' : Cart[Real, Tybit0[Unit]]), segment([(b, (c : Cart[Real, Tybit0[Unit]]))]))
+      #|  (c' : Cart[Real, Tybit0[Unit]]) == op_pct(real_of_num(1) - (e : Real) / (op_dollar((c : Cart[Real, Tybit0[Unit]]), 2) - op_dollar((b : Cart[Real, Tybit0[Unit]]), 2)), b) + op_pct(e / (op_dollar(c, 2) - op_dollar(b, 2)), c)
+      #|  (a' : Cart[Real, Tybit0[Unit]]) == op_pct(real_of_num(1) - (e : Real) / (op_dollar((a : Cart[Real, Tybit0[Unit]]), 2) - op_dollar((b : Cart[Real, Tybit0[Unit]]), 2)), b) + op_pct(e / (op_dollar(a, 2) - op_dollar(b, 2)), a)
+      #|  op_dollar((d : Cart[Real, Tybit0[Unit]]), 2) - op_dollar((b : Cart[Real, Tybit0[Unit]]), 2)
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  IMAGE((v : Cart[Real, Tybit0[Unit]]) => op_dollar(v, 2) - op_dollar((b : Cart[Real, Tybit0[Unit]]), 2), DELETE(set_of_list(CONS((a : Cart[Real, Tybit0[Unit]]), CONS(b, CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))))), b))
+      #|  \226\136\131 e : Real, real_of_num(0) < e && e <= op_dollar((a : Cart[Real, Tybit0[Unit]]), 2) - op_dollar((b : Cart[Real, Tybit0[Unit]]), 2) && e <= op_dollar((c : Cart[Real, Tybit0[Unit]]), 2) - op_dollar(b, 2) && (\226\136\128 v : Cart[Real, Tybit0[Unit]], MEM(v, (p : List[Cart[Real, Tybit0[Unit]]])) \226\134\146 e <= op_dollar(v, 2) - op_dollar(b, 2))
+      #|  (INTER((s : (_) -> Bool), (t : (_) -> Bool)) == t) == SUBSET(t, s)
+      #|  INTER(segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]), segment([(b, (c : Cart[Real, Tybit0[Unit]]))])) == segment([(b, c)])
+      #|  (real_of_num(1) - (u : Real)) * (b : Real) < (real_of_num(1) - u) * (c : Real) && u * b < u * (a : Real) \226\134\146 !(b == (real_of_num(1) - u) * c + u * a)
+      #|  (x : Cart[Real, Tybit0[Unit]]) => op_dollar(x, 2)
+      #|  (u : Real)
+      #|  IN((b : Cart[Real, Tybit0[Unit]]), segment([((c : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]))]))
+      #|  (INTER((s : (_) -> Bool), (t : (_) -> Bool)) == s) == SUBSET(s, t)
+      #|  INTER(segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]), segment([(b, (c : Cart[Real, Tybit0[Unit]]))])) == segment([(a, b)])
+      #|  {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])}
+      #|  FINITE(INTER(segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]), segment([(b, (c : Cart[Real, Tybit0[Unit]]))])))
+      #|  !collinear({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  op_dollar((b : Cart[Real, Tybit0[Unit]]), 2) < op_dollar((a : Cart[Real, Tybit0[Unit]]), 2) && op_dollar(b, 2) < op_dollar((c : Cart[Real, Tybit0[Unit]]), 2) && (\226\136\128 v : Cart[Real, Tybit0[Unit]], MEM(v, (p : List[Cart[Real, Tybit0[Unit]]])) \226\134\146 op_dollar(b, 2) < op_dollar(v, 2))
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 !((a : _) == x)) == !P(a)
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]])))
+      #|  (a : Cart[Real, Tybit0[Unit]]) == (c : Cart[Real, Tybit0[Unit]])
+      #|  SUBSET(INTER((s : (_) -> Bool), UNION((t : (_) -> Bool), (u : (_) -> Bool))), (v : (_) -> Bool)) == (SUBSET(INTER(s, t), v) && SUBSET(INTER(s, u), v))
+      #|  polygonal_path(CONS((b : Cart[Real, Tybit0[Unit]]), CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))))
+      #|  linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))
+      #|  MEM((b : _), CONS((a : _), CONS(b, (l : List[_]))))
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (p : List[Cart[Real, Tybit0[Unit]]]) == NIL
+      #|  (5 <= SUC(SUC(SUC((n : Num))))) == (!(n == 0) && 2 <= n)
+      #|  (b' : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])
       #|  1
-      #|  p:(real^2)list
-      #|  c:real^2
-      #|  b':real^2
-      #|  a:real^2
-      #|  r:(real^2)list
-      #|  r:(real^2)list
-      #|  MEM (b:real^2) r
-      #|  r:(real^2)list
-      #|  simple_path(polygonal_path(q:(real^2)list))
-      #|  pathfinish(polygonal_path(q:(real^2)list)) =\n                pathstart(polygonal_path q)
-      #|  l:(real^2)list
-      #|  LENGTH(t:(real^2)list) - 1
+      #|  (p : List[Cart[Real, Tybit0[Unit]]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b' : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (r : List[Cart[Real, Tybit0[Unit]]])
+      #|  (r : List[Cart[Real, Tybit0[Unit]]])
+      #|  MEM((b : Cart[Real, Tybit0[Unit]]), (r : List[Cart[Real, Tybit0[Unit]]]))
+      #|  (r : List[Cart[Real, Tybit0[Unit]]])
+      #|  simple_path(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]])))
+      #|  pathfinish(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]]))) == pathstart(polygonal_path(q))
+      #|  (l : List[Cart[Real, Tybit0[Unit]]])
+      #|  LENGTH((t : List[Cart[Real, Tybit0[Unit]]])) - 1
       #|  0
-      #|  5 <= LENGTH(CONS (h:real^2) t)
-      #|  a IN s /\\ b IN s ==> s UNION {a} = b INSERT s
-      #|  l:(real^2)list
-      #|  l:(real^2)list
-      #|  ~(l:(real^2)list = [])
-      #|  5 <= LENGTH(q:(real^2)list)
-      #|  HD(l:(real^2)list) = LAST l
-      #|  LENGTH:(real^2)list->num
-      #|  ~(TL l:(real^2)list = [])
-      #|  l:(real^2)list = []
-      #|  l:(real^2)list
-      #|  q:(real^2)list = []
-      #|  5 <= LENGTH(q:(real^2)list)
-      #|  pathfinish(polygonal_path(q:(real^2)list)) =\n       pathstart(polygonal_path q)
-      #|  q:(real^2)list
-      #|  ?p:(real^2)list.\n        EL 1 p = b /\\ LAST p = HD p /\\\n        LENGTH p = LENGTH q /\\ set_of_list p = set_of_list q /\\\n        path_image(polygonal_path p) = path_image(polygonal_path q) /\\\n        simple_path(polygonal_path p) /\\\n        pathfinish(polygonal_path p) = pathstart(polygonal_path p)
-      #|  b:real^2
-      #|  q:(real^2)list = []
-      #|  5 <= LENGTH(q:(real^2)list)
-      #|  IMAGE (\\x:real^2. x$2) (set_of_list q)
-      #|  ?b:real^2. MEM b q /\\ forall d. MEM d q ==> b$2 <= d$2
-      #|  q:(real^2)list
-      #|  (forall x y. (?z. P z /\\ x = f z) ==> Q x y) <=>\n                         (forall z y. P z ==> Q (f z) y)
-      #|  forall p:(real^2)list.\n        simple_path(polygonal_path p) /\\\n        pathfinish(polygonal_path p) = pathstart(polygonal_path p) /\\\n        5 <= LENGTH p\n        ==> ?a b. ~(a = b) /\\ MEM a p /\\ MEM b p /\\\n                  segment(a,b) SUBSET inside(path_image(polygonal_path p))
-      #|  SUC(SUC n) = n + 2
-      #|  P a /\\ P b\n    ==> {x | x IN s UNION {a,b} /\\ P x} =\n        a INSERT b INSERT {x | x IN s /\\ P x}
-      #|  ~(a IN s) /\\ ~(b IN s) ==> (s UNION {a,b}) DIFF {a,b} = s
-      #|  (segment(a,b) UNION {a, b}) DIFF {a, b} = segment(a:real^2,b)
-      #|  x = y + &2 ==> &2 * x + &2 = &2 * y + &2 + &2 + &2
-      #|  P a /\\ P b /\\ a IN q /\\ b IN q /\\ a IN r /\\ b IN r\n      ==> (q INTER r) SUBSET {a,b}\n          ==> {x | x IN q /\\ P x} INTER {x | x IN r /\\ P x} = {a,b}
-      #|  {x:real^2 | x IN path_image(polygonal_path q) /\\ integral_vector x} INTER\n    {x | x IN path_image(polygonal_path r) /\\ integral_vector x} = {a,b}
-      #|  s SUBSET inside(q UNION r)\n      ==> s = c DIFF {a,b} /\\ a IN q /\\ b IN q /\\ a IN r /\\ b IN r /\\\n          inside(q UNION r) INTER (q UNION r) = {} /\\\n          P a /\\ P b /\\ a IN c /\\ b IN c\n          ==> {x | x IN c /\\ P x} INTER {x | x IN q /\\ P x} = {a,b} /\\\n              {x | x IN c /\\ P x} INTER {x | x IN r /\\ P x} = {a,b}
-      #|  {x | x IN segment[a,b] /\\ integral_vector x} INTER\n    {x | x IN path_image(polygonal_path q) /\\ integral_vector x} = {a,b} /\\\n    {x:real^2 | x IN segment[a,b] /\\ integral_vector x} INTER\n    {x | x IN path_image(polygonal_path r) /\\ integral_vector x} = {a,b}
-      #|  &2 * ab + qr = &2 * x + qab + rab + &2\n    ==> ((ab + q) - qab) + ((ab + r) - rab) =\n        &2 * x + ((q + r) - qr) + &2
-      #|  x:num <= y ==> x <= y + z
-      #|  {x | x IN (s UNION t) /\\ P x} =\n    {x | x IN s /\\ P x} UNION {x | x IN t /\\ P x}
-      #|  q + r = &2 * x + y + &2\n    ==> (iq + q / &2 - &1) + (ir + r / &2 - &1) =\n        ((iq + ir + x) + y / &2 - &1)
-      #|  inside(s UNION t) INTER (s UNION t) = {}\n      ==> {x | x IN inside(s UNION t) INTER (s DIFF ab) /\\ P x} = {}
-      #|  s = {} ==> CARD s = 0
-      #|  s UNION segment[a,b] = segment[a,b] UNION s
-      #|  {x | x IN s /\\ P x} INTER {x | x IN t /\\ P x} =\n      {x | x IN (s INTER t) /\\ P x}
-      #|  pr = 0 /\\ qrp = 0 ==> (q + (r + p) - pr) - qrp = q + r + p
-      #|  CARD({x | x IN inside(segment[a,b] UNION path_image(polygonal_path q)) /\\\n              integral_vector x} UNION\n         {x | x IN inside(segment[a,b] UNION path_image(polygonal_path r)) /\\\n              integral_vector x} UNION\n         {x | x IN segment[a,b] DIFF {a, b} /\\ integral_vector x}) =\n    CARD {x | x IN inside(segment[a,b] UNION path_image(polygonal_path q)) /\\\n              integral_vector x} +\n    CARD {x | x IN inside(segment[a,b] UNION path_image(polygonal_path r)) /\\\n              integral_vector x} +\n    CARD {x:real^2 | x IN segment[a,b] DIFF {a, b} /\\ integral_vector x}
-      #|  s UNION segment[a,b] = segment[a,b] UNION s
-      #|  segment[a:real^2,b]
-      #|  measure(inside(path_image(polygonal_path q) UNION segment[a:real^2,b])) +\n    measure(inside(path_image(polygonal_path r) UNION segment[a,b]))
-      #|  segment[a:real^2,b]
-      #|  measure(inside(path_image(polygonal_path q) UNION segment[a:real^2,b])) +\n    measure(inside(path_image (polygonal_path r) UNION segment [a,b]) UNION\n            segment [a,b] DIFF {a, b})
-      #|  {x | x IN (s UNION t) /\\ P x} =\n    {x | x IN s /\\ P x} UNION {x | x IN t /\\ P x}
-      #|  inside(path_image(polygonal_path q) UNION segment [a,b]) UNION\n    inside(path_image(polygonal_path r) UNION segment [a,b]) UNION\n    (segment [a:real^2,b] DIFF {a, b}) =\n    inside\n     (path_image(polygonal_path q) UNION path_image(polygonal_path r))
-      #|  a:real^2
-      #|  b:real^2
-      #|  segment(a:real^2,b) SUBSET\n    inside(path_image (polygonal_path q ++ polygonal_path r))
-      #|  measure:(real^2->bool)->real
-      #|  s SUBSET i\n        ==> inside(q UNION r) INTER (q UNION r) = {} /\\\n            inside(q UNION r) = i /\\\n            ~(s = {})\n            ==> ~((s UNION {a,b}) INTER inside(q UNION r) = {})
-      #|  a IN u /\\ b IN u /\\ inside(t UNION u) INTER (t UNION u) = {}\n        ==> s SUBSET inside(t UNION u)\n            ==> u INTER (s UNION {a,b}) = {a,b}
-      #|  segment(a:real^2,b) SUBSET\n        inside(path_image(polygonal_path q ++ polygonal_path r))
-      #|  a IN t /\\ b IN t /\\ inside(t UNION u) INTER (t UNION u) = {}\n        ==> s SUBSET inside(t UNION u)\n            ==> t INTER (s UNION {a,b}) = {a,b}
-      #|  segment(a:real^2,b) SUBSET\n        inside(path_image(polygonal_path q ++ polygonal_path r))
-      #|  s INTER t SUBSET {a,b} /\\\n        a IN s /\\ b IN s /\\ a IN t /\\ b IN t\n        ==> s INTER t = {a,b}
-      #|  simple_path(polygonal_path q ++ polygonal_path r :real^1->real^2)
-      #|  b:real^2
-      #|  a:real^2
-      #|  linepath(a:real^2,b)
-      #|  reversepath(polygonal_path r):real^1->real^2
-      #|  polygonal_path q:real^1->real^2
-      #|  inside(s UNION t) INTER (s UNION t) = {}\n      ==> t INTER inside(s UNION t) = {}
-      #|  s SUBSET i\n      ==> c INTER i = {}\n          ==> (s UNION {a,b}) INTER c SUBSET {a,b}
-      #|  simple_path(polygonal_path q ++ polygonal_path r :real^1->real^2)
-      #|  r:(real^2)list
-      #|  r:(real^2)list
-      #|  polygonal_path(CONS (a:real^2) r) = linepath(a,b) ++ polygonal_path r
-      #|  inside(s UNION t) INTER (s UNION t) = {}\n      ==> s INTER inside(s UNION t) = {}
-      #|  s SUBSET i\n      ==> c INTER i = {}\n          ==> (s UNION {a,b}) INTER c SUBSET {b,a}
-      #|  simple_path(polygonal_path q ++ polygonal_path r :real^1->real^2)
-      #|  q:(real^2)list
-      #|  q:(real^2)list
-      #|  polygonal_path(CONS (b:real^2) q) = linepath(b,a) ++ polygonal_path q
-      #|  2 <= LENGTH(r:(real^2)list)
-      #|  inside(t UNION s') INTER (t UNION s') = {} /\\ ~(s = {}) /\\ s SUBSET s'\n      ==> ~(s SUBSET inside(t UNION s'))
-      #|  segment(a:real^2,b) SUBSET\n                 inside(path_image(polygonal_path q ++ linepath(b,a)))
-      #|  a1:real^2 = a
-      #|  a0:real^2 = b
-      #|  3 <= SUC(SUC(SUC n))
-      #|  a1:real^2
-      #|  a0:real^2
-      #|  r:(real^2)list
-      #|  r:(real^2)list
-      #|  3 <= LENGTH(r:(real^2)list)
-      #|  2 <= LENGTH(q:(real^2)list)
-      #|  inside(s' UNION t) INTER (s' UNION t) = {} /\\ ~(s = {}) /\\ s SUBSET s'\n      ==> ~(s SUBSET inside(s' UNION t))
-      #|  segment(a:real^2,b) SUBSET\n                 inside(path_image(linepath(a,b) ++ polygonal_path r))
-      #|  a1:real^2 = b
-      #|  a0:real^2 = a
-      #|  3 <= SUC(SUC(SUC n))
-      #|  a1:real^2
-      #|  a0:real^2
-      #|  q:(real^2)list
-      #|  q:(real^2)list
-      #|  3 <= LENGTH(q:(real^2)list)
-      #|  simple_path(polygonal_path p :real^1->real^2)
-      #|  (set_of_list q UNION set_of_list r):real^2->bool = set_of_list p
-      #|  HD p = (a:real^2)
-      #|  MEM (b:real^2) p
-      #|  MEM (a:real^2) p
-      #|  forall x:real^2. MEM x p ==> integral_vector x
-      #|  integral_vector(a:real^2) /\\ integral_vector(b:real^2)
-      #|  n = LENGTH(p:(real^2)list)
-      #|  (set_of_list q UNION set_of_list r):real^2->bool = set_of_list p
-      #|  (forall x:real^2. MEM x q ==> integral_vector x) /\\\n    (forall x:real^2. MEM x r ==> integral_vector x)
-      #|  path_image(polygonal_path q ++ polygonal_path r):real^2->bool =\n                path_image(polygonal_path p)
-      #|  pathfinish (polygonal_path p) = (a:real^2)
-      #|  5 <= LENGTH(p:(real^2)list)
-      #|  pathstart(polygonal_path p) = (a:real^2)
-      #|  path_image(polygonal_path q ++ polygonal_path r) =\n        path_image(polygonal_path(CONS (x:real^2) (CONS y l)))
-      #|  arc(polygonal_path q ++ polygonal_path r:real^1->real^2)
-      #|  ~(pathfinish(polygonal_path(CONS (x:real^2) (CONS y l))) = a)
-      #|  pathfinish(polygonal_path(CONS (x:real^2) (CONS y l))) = a
-      #|  pathfinish(polygonal_path r) = (a:real^2)
-      #|  simple_path(linepath(a:real^2,x) ++\n                               polygonal_path (CONS x (CONS y l)))
-      #|  pathstart(polygonal_path(CONS x (CONS y l))) = (x:real^2)
-      #|  q:(real^2)list
-      #|  q:(real^2)list
-      #|  2 <= LENGTH(q:(real^2)list)
-      #|  pathstart(polygonal_path q) =\n         pathstart(polygonal_path (CONS (x:real^2) (CONS y l)))
-      #|  polygonal_path(CONS (a:real^2) q) =\n      linepath(a,x) ++ polygonal_path q
-      #|  2 <= LENGTH(q:(real^2)list)
-      #|  pathfinish(polygonal_path q) = (b:real^2)
-      #|  (a INSERT s) UNION t = a INSERT (s UNION t)
-      #|  r:(real^2)list
-      #|  CONS (a:real^2) q
-      #|  r:(real^2)list
-      #|  q:(real^2)list
-      #|  2 <= SUC(SUC n)
-      #|  n < SUC n
-      #|  CONS (x:real^2) (CONS y l)
-      #|  CONS (b:real^2) (CONS y l)
-      #|  [a:real^2;b]
-      #|  x:real^2 = b
-      #|  a:real^2 = b
-      #|  l:(real^2)list
-      #|  y:real^2
-      #|  x:real^2
-      #|  a:real^2
-      #|  p:(real^2)list
-      #|  p:(real^2)list
-      #|  LENGTH(p:(real^2)list)
-      #|  5 <= p ==> 2 <= p
-      #|  simple_path(polygonal_path p) /\\\n      2 <= LENGTH p /\\ MEM (b:real^2) p /\\\n      ~(pathstart(polygonal_path p) = b) /\\\n      ~(pathfinish(polygonal_path p) = b)
-      #|  ?q r. 2 <= LENGTH q /\\ 2 <= LENGTH r /\\\n          LENGTH q + LENGTH r = LENGTH p + 1 /\\\n          set_of_list q UNION set_of_list r = set_of_list p /\\\n          pathstart(polygonal_path q) = pathstart(polygonal_path p) /\\\n          pathfinish(polygonal_path q) = (b:real^2) /\\\n          pathstart(polygonal_path r) = b /\\\n          pathfinish(polygonal_path r) = pathfinish(polygonal_path p) /\\\n          simple_path(polygonal_path q ++ polygonal_path r) /\\\n          path_image(polygonal_path q ++ polygonal_path r) =\n          path_image(polygonal_path p)
-      #|  p:(real^2)list
-      #|  p':(real^2)list
-      #|  pathfinish(polygonal_path(p:(real^2)list)) =\n     pathstart(polygonal_path p)
-      #|  simple_path(polygonal_path(p:(real^2)list))
-      #|  LENGTH(p':(real^2)list) = LENGTH(p:(real^2)list)
-      #|  path_image(polygonal_path(p':(real^2)list)) =\n     path_image (polygonal_path p)
-      #|  set_of_list(p':(real^2)list) = set_of_list p
-      #|  forall x:real^2. MEM x p <=> MEM x p'
-      #|  l:(real^2)list
-      #|  LENGTH(t:(real^2)list) - 1
+      #|  5 <= LENGTH(CONS((h : Cart[Real, Tybit0[Unit]]), (t : List[Cart[Real, Tybit0[Unit]]])))
+      #|  IN((a : _), (s : (_) -> Bool)) && IN((b : _), s) \226\134\146 UNION(s, {a}) == INSERT(b, s)
+      #|  (l : List[Cart[Real, Tybit0[Unit]]])
+      #|  (l : List[Cart[Real, Tybit0[Unit]]])
+      #|  !((l : List[Cart[Real, Tybit0[Unit]]]) == NIL)
+      #|  5 <= LENGTH((q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  HD((l : List[Cart[Real, Tybit0[Unit]]])) == LAST(l)
+      #|  (LENGTH : (List[Cart[Real, Tybit0[Unit]]]) -> Num)
+      #|  !(TL((l : List[Cart[Real, Tybit0[Unit]]])) == NIL)
+      #|  (l : List[Cart[Real, Tybit0[Unit]]]) == NIL
+      #|  (l : List[Cart[Real, Tybit0[Unit]]])
+      #|  (q : List[Cart[Real, Tybit0[Unit]]]) == NIL
+      #|  5 <= LENGTH((q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  pathfinish(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]]))) == pathstart(polygonal_path(q))
+      #|  (q : List[Cart[Real, Tybit0[Unit]]])
+      #|  \226\136\131 p : List[Cart[Real, Tybit0[Unit]]], EL(1, p) == (b : Cart[Real, Tybit0[Unit]]) && LAST(p) == HD(p) && LENGTH(p) == LENGTH((q : List[Cart[Real, Tybit0[Unit]]])) && set_of_list(p) == set_of_list(q) && path_image(polygonal_path(p)) == path_image(polygonal_path(q)) && simple_path(polygonal_path(p)) && pathfinish(polygonal_path(p)) == pathstart(polygonal_path(p))
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (q : List[Cart[Real, Tybit0[Unit]]]) == NIL
+      #|  5 <= LENGTH((q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  IMAGE((x : Cart[Real, Tybit0[Unit]]) => op_dollar(x, 2), set_of_list((q : List[Cart[Real, Tybit0[Unit]]])))
+      #|  \226\136\131 b : Cart[Real, Tybit0[Unit]], MEM(b, (q : List[Cart[Real, Tybit0[Unit]]])) && (\226\136\128 d : Cart[Real, Tybit0[Unit]], MEM(d, q) \226\134\146 op_dollar(b, 2) <= op_dollar(d, 2))
+      #|  (q : List[Cart[Real, Tybit0[Unit]]])
+      #|  (\226\136\128 x : _, \226\136\128 y : _, (\226\136\131 z : _, (P : (_) -> Bool)(z) && x == (f : (_) -> _)(z)) \226\134\146 (Q : (_, _) -> Bool)(x, y)) == (\226\136\128 z : _, \226\136\128 y : _, P(z) \226\134\146 Q(f(z), y))
+      #|  \226\136\128 p : List[Cart[Real, Tybit0[Unit]]], simple_path(polygonal_path(p)) && pathfinish(polygonal_path(p)) == pathstart(polygonal_path(p)) && 5 <= LENGTH(p) \226\134\146 (\226\136\131 a : Cart[Real, Tybit0[Unit]], \226\136\131 b : Cart[Real, Tybit0[Unit]], !(a == b) && MEM(a, p) && MEM(b, p) && SUBSET(segment((a, b)), inside(path_image(polygonal_path(p)))))
+      #|  SUC(SUC((n : Num))) == n + 2
+      #|  (P : (_) -> Bool)((a : _)) && P((b : _)) \226\134\146 {(x : _) | IN(x, UNION((s : (_) -> Bool), {a, b})) && P(x)} == INSERT(a, INSERT(b, {(x : _) | IN(x, s) && P(x)}))
+      #|  !IN((a : _), (s : (_) -> Bool)) && !IN((b : _), s) \226\134\146 DIFF(UNION(s, {a, b}), {a, b}) == s
+      #|  DIFF(UNION(segment(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))), {a, b}), {a, b}) == segment((a, b))
+      #|  (x : Real) == (y : Real) + real_of_num(2) \226\134\146 real_of_num(2) * x + real_of_num(2) == real_of_num(2) * y + (real_of_num(2) + (real_of_num(2) + real_of_num(2)))
+      #|  (P : (_) -> Bool)((a : _)) && P((b : _)) && IN(a, (q : (_) -> Bool)) && IN(b, q) && IN(a, (r : (_) -> Bool)) && IN(b, r) \226\134\146 SUBSET(INTER(q, r), {a, b}) \226\134\146 INTER({(x : _) | IN(x, q) && P(x)}, {(x : _) | IN(x, r) && P(x)}) == {a, b}
+      #|  INTER({(x : Cart[Real, Tybit0[Unit]]) | IN(x, path_image(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]])))) && integral_vector(x)}, {(x : Cart[Real, Tybit0[Unit]]) | IN(x, path_image(polygonal_path((r : List[Cart[Real, Tybit0[Unit]]])))) && integral_vector(x)}) == {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])}
+      #|  SUBSET((s : (Cart[Real, _]) -> Bool), inside(UNION((q : (Cart[Real, _]) -> Bool), (r : (Cart[Real, _]) -> Bool)))) \226\134\146 s == DIFF((c : (Cart[Real, _]) -> Bool), {(a : Cart[Real, _]), (b : Cart[Real, _])}) && IN(a, q) && IN(b, q) && IN(a, r) && IN(b, r) && INTER(inside(UNION(q, r)), UNION(q, r)) == {} && (P : (Cart[Real, _]) -> Bool)(a) && P(b) && IN(a, c) && IN(b, c) \226\134\146 INTER({(x : Cart[Real, _]) | IN(x, c) && P(x)}, {(x : Cart[Real, _]) | IN(x, q) && P(x)}) == {a, b} && INTER({(x : Cart[Real, _]) | IN(x, c) && P(x)}, {(x : Cart[Real, _]) | IN(x, r) && P(x)}) == {a, b}
+      #|  INTER({(x : Cart[Real, Tybit0[Unit]]) | IN(x, segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))])) && integral_vector(x)}, {(x : Cart[Real, Tybit0[Unit]]) | IN(x, path_image(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]])))) && integral_vector(x)}) == {a, b} && INTER({(x : Cart[Real, Tybit0[Unit]]) | IN(x, segment([(a, b)])) && integral_vector(x)}, {(x : Cart[Real, Tybit0[Unit]]) | IN(x, path_image(polygonal_path((r : List[Cart[Real, Tybit0[Unit]]])))) && integral_vector(x)}) == {a, b}
+      #|  real_of_num(2) * (ab : Real) + (qr : Real) == real_of_num(2) * (x : Real) + ((qab : Real) + ((rab : Real) + real_of_num(2))) \226\134\146 ab + (q : Real) - qab + (ab + (r : Real) - rab) == real_of_num(2) * x + (q + r - qr + real_of_num(2))
+      #|  (x : Num) <= (y : Num) \226\134\146 x <= y + (z : Num)
+      #|  {(x : _) | IN(x, UNION((s : (_) -> Bool), (t : (_) -> Bool))) && (P : (_) -> Bool)(x)} == UNION({(x : _) | IN(x, s) && P(x)}, {(x : _) | IN(x, t) && P(x)})
+      #|  (q : Real) + (r : Real) == real_of_num(2) * (x : Real) + ((y : Real) + real_of_num(2)) \226\134\146 (iq : Real) + (q / real_of_num(2) - real_of_num(1)) + ((ir : Real) + (r / real_of_num(2) - real_of_num(1))) == iq + (ir + x) + (y / real_of_num(2) - real_of_num(1))
+      #|  INTER(inside(UNION((s : (Cart[Real, _]) -> Bool), (t : (Cart[Real, _]) -> Bool))), UNION(s, t)) == {} \226\134\146 {(x : Cart[Real, _]) | IN(x, INTER(inside(UNION(s, t)), DIFF(s, (ab : (Cart[Real, _]) -> Bool)))) && (P : (Cart[Real, _]) -> Bool)(x)} == {}
+      #|  (s : (_) -> Bool) == {} \226\134\146 CARD(s) == 0
+      #|  UNION((s : (Cart[Real, _]) -> Bool), segment([((a : Cart[Real, _]), (b : Cart[Real, _]))])) == UNION(segment([(a, b)]), s)
+      #|  INTER({(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)}, {(x : _) | IN(x, (t : (_) -> Bool)) && P(x)}) == {(x : _) | IN(x, INTER(s, t)) && P(x)}
+      #|  (pr : Num) == 0 && (qrp : Num) == 0 \226\134\146 (q : Num) + ((r : Num) + (p : Num) - pr) - qrp == q + (r + p)
+      #|  CARD(UNION({(x : Cart[Real, Tybit0[Unit]]) | IN(x, inside(UNION(segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]), path_image(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]])))))) && integral_vector(x)}, UNION({(x : Cart[Real, Tybit0[Unit]]) | IN(x, inside(UNION(segment([(a, b)]), path_image(polygonal_path((r : List[Cart[Real, Tybit0[Unit]]])))))) && integral_vector(x)}, {(x : Cart[Real, Tybit0[Unit]]) | IN(x, DIFF(segment([(a, b)]), {a, b})) && integral_vector(x)}))) == CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, inside(UNION(segment([(a, b)]), path_image(polygonal_path(q))))) && integral_vector(x)}) + (CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, inside(UNION(segment([(a, b)]), path_image(polygonal_path(r))))) && integral_vector(x)}) + CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, DIFF(segment([(a, b)]), {a, b})) && integral_vector(x)}))
+      #|  UNION((s : (Cart[Real, _]) -> Bool), segment([((a : Cart[Real, _]), (b : Cart[Real, _]))])) == UNION(segment([(a, b)]), s)
+      #|  segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))])
+      #|  measure(inside(UNION(path_image(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]]))), segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))])))) + measure(inside(UNION(path_image(polygonal_path((r : List[Cart[Real, Tybit0[Unit]]]))), segment([(a, b)]))))
+      #|  segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))])
+      #|  measure(inside(UNION(path_image(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]]))), segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))])))) + measure(UNION(inside(UNION(path_image(polygonal_path((r : List[Cart[Real, Tybit0[Unit]]]))), segment([(a, b)]))), DIFF(segment([(a, b)]), {a, b})))
+      #|  {(x : _) | IN(x, UNION((s : (_) -> Bool), (t : (_) -> Bool))) && (P : (_) -> Bool)(x)} == UNION({(x : _) | IN(x, s) && P(x)}, {(x : _) | IN(x, t) && P(x)})
+      #|  UNION(inside(UNION(path_image(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]]))), segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]))), UNION(inside(UNION(path_image(polygonal_path((r : List[Cart[Real, Tybit0[Unit]]]))), segment([(a, b)]))), DIFF(segment([(a, b)]), {a, b}))) == inside(UNION(path_image(polygonal_path(q)), path_image(polygonal_path(r))))
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  SUBSET(segment(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))), inside(path_image(op_plus_plus(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]])), polygonal_path((r : List[Cart[Real, Tybit0[Unit]]]))))))
+      #|  (measure : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Real)
+      #|  SUBSET((s : (Cart[Real, _]) -> Bool), (i : (Cart[Real, _]) -> Bool)) \226\134\146 INTER(inside(UNION((q : (Cart[Real, _]) -> Bool), (r : (Cart[Real, _]) -> Bool))), UNION(q, r)) == {} && inside(UNION(q, r)) == i && !(s == {}) \226\134\146 !(INTER(UNION(s, {(a : Cart[Real, _]), (b : Cart[Real, _])}), inside(UNION(q, r))) == {})
+      #|  IN((a : Cart[Real, _]), (u : (Cart[Real, _]) -> Bool)) && IN((b : Cart[Real, _]), u) && INTER(inside(UNION((t : (Cart[Real, _]) -> Bool), u)), UNION(t, u)) == {} \226\134\146 SUBSET((s : (Cart[Real, _]) -> Bool), inside(UNION(t, u))) \226\134\146 INTER(u, UNION(s, {a, b})) == {a, b}
+      #|  SUBSET(segment(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))), inside(path_image(op_plus_plus(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]])), polygonal_path((r : List[Cart[Real, Tybit0[Unit]]]))))))
+      #|  IN((a : Cart[Real, _]), (t : (Cart[Real, _]) -> Bool)) && IN((b : Cart[Real, _]), t) && INTER(inside(UNION(t, (u : (Cart[Real, _]) -> Bool))), UNION(t, u)) == {} \226\134\146 SUBSET((s : (Cart[Real, _]) -> Bool), inside(UNION(t, u))) \226\134\146 INTER(t, UNION(s, {a, b})) == {a, b}
+      #|  SUBSET(segment(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))), inside(path_image(op_plus_plus(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]])), polygonal_path((r : List[Cart[Real, Tybit0[Unit]]]))))))
+      #|  SUBSET(INTER((s : (_) -> Bool), (t : (_) -> Bool)), {(a : _), (b : _)}) && IN(a, s) && IN(b, s) && IN(a, t) && IN(b, t) \226\134\146 INTER(s, t) == {a, b}
+      #|  simple_path(op_plus_plus(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]])), polygonal_path((r : List[Cart[Real, Tybit0[Unit]]]))))
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))
+      #|  reversepath(polygonal_path((r : List[Cart[Real, Tybit0[Unit]]])))
+      #|  polygonal_path((q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  INTER(inside(UNION((s : (Cart[Real, _]) -> Bool), (t : (Cart[Real, _]) -> Bool))), UNION(s, t)) == {} \226\134\146 INTER(t, inside(UNION(s, t))) == {}
+      #|  SUBSET((s : (_) -> Bool), (i : (_) -> Bool)) \226\134\146 INTER((c : (_) -> Bool), i) == {} \226\134\146 SUBSET(INTER(UNION(s, {(a : _), (b : _)}), c), {a, b})
+      #|  simple_path(op_plus_plus(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]])), polygonal_path((r : List[Cart[Real, Tybit0[Unit]]]))))
+      #|  (r : List[Cart[Real, Tybit0[Unit]]])
+      #|  (r : List[Cart[Real, Tybit0[Unit]]])
+      #|  polygonal_path(CONS((a : Cart[Real, Tybit0[Unit]]), (r : List[Cart[Real, Tybit0[Unit]]]))) == op_plus_plus(linepath((a, (b : Cart[Real, Tybit0[Unit]]))), polygonal_path(r))
+      #|  INTER(inside(UNION((s : (Cart[Real, _]) -> Bool), (t : (Cart[Real, _]) -> Bool))), UNION(s, t)) == {} \226\134\146 INTER(s, inside(UNION(s, t))) == {}
+      #|  SUBSET((s : (_) -> Bool), (i : (_) -> Bool)) \226\134\146 INTER((c : (_) -> Bool), i) == {} \226\134\146 SUBSET(INTER(UNION(s, {(a : _), (b : _)}), c), {b, a})
+      #|  simple_path(op_plus_plus(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]])), polygonal_path((r : List[Cart[Real, Tybit0[Unit]]]))))
+      #|  (q : List[Cart[Real, Tybit0[Unit]]])
+      #|  (q : List[Cart[Real, Tybit0[Unit]]])
+      #|  polygonal_path(CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))) == op_plus_plus(linepath((b, (a : Cart[Real, Tybit0[Unit]]))), polygonal_path(q))
+      #|  2 <= LENGTH((r : List[Cart[Real, Tybit0[Unit]]]))
+      #|  INTER(inside(UNION((t : (Cart[Real, _]) -> Bool), (s' : (Cart[Real, _]) -> Bool))), UNION(t, s')) == {} && !((s : (Cart[Real, _]) -> Bool) == {}) && SUBSET(s, s') \226\134\146 !SUBSET(s, inside(UNION(t, s')))
+      #|  SUBSET(segment(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))), inside(path_image(op_plus_plus(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]])), linepath((b, a))))))
+      #|  (a1 : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])
+      #|  (a0 : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])
+      #|  3 <= SUC(SUC(SUC((n : Num))))
+      #|  (a1 : Cart[Real, Tybit0[Unit]])
+      #|  (a0 : Cart[Real, Tybit0[Unit]])
+      #|  (r : List[Cart[Real, Tybit0[Unit]]])
+      #|  (r : List[Cart[Real, Tybit0[Unit]]])
+      #|  3 <= LENGTH((r : List[Cart[Real, Tybit0[Unit]]]))
+      #|  2 <= LENGTH((q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  INTER(inside(UNION((s' : (Cart[Real, _]) -> Bool), (t : (Cart[Real, _]) -> Bool))), UNION(s', t)) == {} && !((s : (Cart[Real, _]) -> Bool) == {}) && SUBSET(s, s') \226\134\146 !SUBSET(s, inside(UNION(s', t)))
+      #|  SUBSET(segment(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))), inside(path_image(op_plus_plus(linepath((a, b)), polygonal_path((r : List[Cart[Real, Tybit0[Unit]]]))))))
+      #|  (a1 : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])
+      #|  (a0 : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])
+      #|  3 <= SUC(SUC(SUC((n : Num))))
+      #|  (a1 : Cart[Real, Tybit0[Unit]])
+      #|  (a0 : Cart[Real, Tybit0[Unit]])
+      #|  (q : List[Cart[Real, Tybit0[Unit]]])
+      #|  (q : List[Cart[Real, Tybit0[Unit]]])
+      #|  3 <= LENGTH((q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  simple_path(polygonal_path((p : List[Cart[Real, Tybit0[Unit]]])))
+      #|  UNION(set_of_list((q : List[Cart[Real, Tybit0[Unit]]])), set_of_list((r : List[Cart[Real, Tybit0[Unit]]]))) == set_of_list((p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  HD((p : List[Cart[Real, Tybit0[Unit]]])) == (a : Cart[Real, Tybit0[Unit]])
+      #|  MEM((b : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  MEM((a : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], MEM(x, (p : List[Cart[Real, Tybit0[Unit]]])) \226\134\146 integral_vector(x)
+      #|  integral_vector((a : Cart[Real, Tybit0[Unit]])) && integral_vector((b : Cart[Real, Tybit0[Unit]]))
+      #|  (n : Num) == LENGTH((p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  UNION(set_of_list((q : List[Cart[Real, Tybit0[Unit]]])), set_of_list((r : List[Cart[Real, Tybit0[Unit]]]))) == set_of_list((p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  (\226\136\128 x : Cart[Real, Tybit0[Unit]], MEM(x, (q : List[Cart[Real, Tybit0[Unit]]])) \226\134\146 integral_vector(x)) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], MEM(x, (r : List[Cart[Real, Tybit0[Unit]]])) \226\134\146 integral_vector(x))
+      #|  path_image(op_plus_plus(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]])), polygonal_path((r : List[Cart[Real, Tybit0[Unit]]])))) == path_image(polygonal_path((p : List[Cart[Real, Tybit0[Unit]]])))
+      #|  pathfinish(polygonal_path((p : List[Cart[Real, Tybit0[Unit]]]))) == (a : Cart[Real, Tybit0[Unit]])
+      #|  5 <= LENGTH((p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  pathstart(polygonal_path((p : List[Cart[Real, Tybit0[Unit]]]))) == (a : Cart[Real, Tybit0[Unit]])
+      #|  path_image(op_plus_plus(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]])), polygonal_path((r : List[Cart[Real, Tybit0[Unit]]])))) == path_image(polygonal_path(CONS((x : Cart[Real, Tybit0[Unit]]), CONS((y : Cart[Real, Tybit0[Unit]]), (l : List[Cart[Real, Tybit0[Unit]]])))))
+      #|  arc(op_plus_plus(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]])), polygonal_path((r : List[Cart[Real, Tybit0[Unit]]]))))
+      #|  !(pathfinish(polygonal_path(CONS((x : Cart[Real, Tybit0[Unit]]), CONS((y : Cart[Real, Tybit0[Unit]]), (l : List[Cart[Real, Tybit0[Unit]]]))))) == (a : Cart[Real, Tybit0[Unit]]))
+      #|  pathfinish(polygonal_path(CONS((x : Cart[Real, Tybit0[Unit]]), CONS((y : Cart[Real, Tybit0[Unit]]), (l : List[Cart[Real, Tybit0[Unit]]]))))) == (a : Cart[Real, Tybit0[Unit]])
+      #|  pathfinish(polygonal_path((r : List[Cart[Real, Tybit0[Unit]]]))) == (a : Cart[Real, Tybit0[Unit]])
+      #|  simple_path(op_plus_plus(linepath(((a : Cart[Real, Tybit0[Unit]]), (x : Cart[Real, Tybit0[Unit]]))), polygonal_path(CONS(x, CONS((y : Cart[Real, Tybit0[Unit]]), (l : List[Cart[Real, Tybit0[Unit]]]))))))
+      #|  pathstart(polygonal_path(CONS((x : Cart[Real, Tybit0[Unit]]), CONS((y : Cart[Real, Tybit0[Unit]]), (l : List[Cart[Real, Tybit0[Unit]]]))))) == x
+      #|  (q : List[Cart[Real, Tybit0[Unit]]])
+      #|  (q : List[Cart[Real, Tybit0[Unit]]])
+      #|  2 <= LENGTH((q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  pathstart(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]]))) == pathstart(polygonal_path(CONS((x : Cart[Real, Tybit0[Unit]]), CONS((y : Cart[Real, Tybit0[Unit]]), (l : List[Cart[Real, Tybit0[Unit]]])))))
+      #|  polygonal_path(CONS((a : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))) == op_plus_plus(linepath((a, (x : Cart[Real, Tybit0[Unit]]))), polygonal_path(q))
+      #|  2 <= LENGTH((q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  pathfinish(polygonal_path((q : List[Cart[Real, Tybit0[Unit]]]))) == (b : Cart[Real, Tybit0[Unit]])
+      #|  UNION(INSERT((a : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(a, UNION(s, t))
+      #|  (r : List[Cart[Real, Tybit0[Unit]]])
+      #|  CONS((a : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  (r : List[Cart[Real, Tybit0[Unit]]])
+      #|  (q : List[Cart[Real, Tybit0[Unit]]])
+      #|  2 <= SUC(SUC((n : Num)))
+      #|  (n : Num) < SUC(n)
+      #|  CONS((x : Cart[Real, Tybit0[Unit]]), CONS((y : Cart[Real, Tybit0[Unit]]), (l : List[Cart[Real, Tybit0[Unit]]])))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), CONS((y : Cart[Real, Tybit0[Unit]]), (l : List[Cart[Real, Tybit0[Unit]]])))
+      #|  [(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])]
+      #|  (x : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])
+      #|  (l : List[Cart[Real, Tybit0[Unit]]])
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (p : List[Cart[Real, Tybit0[Unit]]])
+      #|  (p : List[Cart[Real, Tybit0[Unit]]])
+      #|  LENGTH((p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  5 <= (p : Num) \226\134\146 2 <= p
+      #|  simple_path(polygonal_path((p : List[Cart[Real, Tybit0[Unit]]]))) && 2 <= LENGTH(p) && MEM((b : Cart[Real, Tybit0[Unit]]), p) && !(pathstart(polygonal_path(p)) == b) && !(pathfinish(polygonal_path(p)) == b)
+      #|  \226\136\131 q : List[Cart[Real, Tybit0[Unit]]], \226\136\131 r : List[Cart[Real, Tybit0[Unit]]], 2 <= LENGTH(q) && 2 <= LENGTH(r) && LENGTH(q) + LENGTH(r) == LENGTH((p : List[Cart[Real, Tybit0[Unit]]])) + 1 && UNION(set_of_list(q), set_of_list(r)) == set_of_list(p) && pathstart(polygonal_path(q)) == pathstart(polygonal_path(p)) && pathfinish(polygonal_path(q)) == (b : Cart[Real, Tybit0[Unit]]) && pathstart(polygonal_path(r)) == b && pathfinish(polygonal_path(r)) == pathfinish(polygonal_path(p)) && simple_path(op_plus_plus(polygonal_path(q), polygonal_path(r))) && path_image(op_plus_plus(polygonal_path(q), polygonal_path(r))) == path_image(polygonal_path(p))
+      #|  (p : List[Cart[Real, Tybit0[Unit]]])
+      #|  (p' : List[Cart[Real, Tybit0[Unit]]])
+      #|  pathfinish(polygonal_path((p : List[Cart[Real, Tybit0[Unit]]]))) == pathstart(polygonal_path(p))
+      #|  simple_path(polygonal_path((p : List[Cart[Real, Tybit0[Unit]]])))
+      #|  LENGTH((p' : List[Cart[Real, Tybit0[Unit]]])) == LENGTH((p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  path_image(polygonal_path((p' : List[Cart[Real, Tybit0[Unit]]]))) == path_image(polygonal_path((p : List[Cart[Real, Tybit0[Unit]]])))
+      #|  set_of_list((p' : List[Cart[Real, Tybit0[Unit]]])) == set_of_list((p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], MEM(x, (p : List[Cart[Real, Tybit0[Unit]]])) == MEM(x, (p' : List[Cart[Real, Tybit0[Unit]]]))
+      #|  (l : List[Cart[Real, Tybit0[Unit]]])
+      #|  LENGTH((t : List[Cart[Real, Tybit0[Unit]]])) - 1
       #|  0
-      #|  5 <= LENGTH(CONS (h:real^2) t)
-      #|  a IN s /\\ b IN s ==> s UNION {a} = b INSERT s
-      #|  l:(real^2)list
-      #|  l:(real^2)list
-      #|  ~(l:(real^2)list = [])
-      #|  5 <= LENGTH(p:(real^2)list)
-      #|  HD(l:(real^2)list) = LAST l
-      #|  LENGTH:(real^2)list->num
-      #|  ~(TL l:(real^2)list = [])
-      #|  l:(real^2)list = []
-      #|  l:(real^2)list
-      #|  p:(real^2)list = []
-      #|  5 <= LENGTH(p:(real^2)list)
-      #|  pathfinish(polygonal_path(p:(real^2)list)) =\n       pathstart(polygonal_path p)
-      #|  5 <= p ==> 3 <= p
-      #|  p:(real^2)list
-      #|  ?p':(real^2)list.\n        HD p' = a /\\\n        LENGTH p' = LENGTH p /\\\n        path_image(polygonal_path p') = path_image(polygonal_path p) /\\\n        set_of_list p' = set_of_list p /\\\n        simple_path(polygonal_path p') /\\\n        pathfinish(polygonal_path p') = pathstart(polygonal_path p')
-      #|  b:real^2
-      #|  a:real^2
-      #|  p:(real^2)list
-      #|  segment [b,c] SUBSET {a:real^2, b}
-      #|  segment [c,a] SUBSET {c:real^2}
-      #|  segment [b,c] SUBSET {c:real^2}
-      #|  s INTER t = t <=> t SUBSET s
-      #|  s INTER t = s <=> s SUBSET t
-      #|  segment[b:real^2,c] INTER segment [c,a] = segment[b,c] \\/\n      segment[b,c] INTER segment [c,a] = segment[c,a] \\/\n      segment[a,b] INTER segment [b,c] = segment[b,c]
-      #|  ~p ==> p ==> q
-      #|  d:real^2 = a
-      #|  ~(SUC(SUC(SUC(SUC(SUC n)))) <= 4)
-      #|  d:real^2
-      #|  a:real^2
-      #|  b:real^2
-      #|  c:real^2 = a
-      #|  c:real^2
-      #|  b:real^2
-      #|  a:real^2
-      #|  p:(real^2)list
-      #|  p:(real^2)list
-      #|  LENGTH(p:(real^2)list) <= 4
-      #|  LENGTH(p:(real^2)list) <= 4 \\/ 5 <= LENGTH p
-      #|  LENGTH(p:(real^2)list)
-      #|  forall p:(real^2)list.\n        (forall x. MEM x p ==> integral_vector x) /\\\n        simple_path (polygonal_path p) /\\\n        pathfinish (polygonal_path p) = pathstart (polygonal_path p)\n        ==> measure(inside(path_image(polygonal_path p))) =\n                &(CARD {x | x IN inside(path_image(polygonal_path p)) /\\\n                            integral_vector x}) +\n                &(CARD {x | x IN path_image(polygonal_path p) /\\\n                            integral_vector x}) / &2 - &1
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (b:real^2) q
-      #|  CONS (a:real^2) r
+      #|  5 <= LENGTH(CONS((h : Cart[Real, Tybit0[Unit]]), (t : List[Cart[Real, Tybit0[Unit]]])))
+      #|  IN((a : _), (s : (_) -> Bool)) && IN((b : _), s) \226\134\146 UNION(s, {a}) == INSERT(b, s)
+      #|  (l : List[Cart[Real, Tybit0[Unit]]])
+      #|  (l : List[Cart[Real, Tybit0[Unit]]])
+      #|  !((l : List[Cart[Real, Tybit0[Unit]]]) == NIL)
+      #|  5 <= LENGTH((p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  HD((l : List[Cart[Real, Tybit0[Unit]]])) == LAST(l)
+      #|  (LENGTH : (List[Cart[Real, Tybit0[Unit]]]) -> Num)
+      #|  !(TL((l : List[Cart[Real, Tybit0[Unit]]])) == NIL)
+      #|  (l : List[Cart[Real, Tybit0[Unit]]]) == NIL
+      #|  (l : List[Cart[Real, Tybit0[Unit]]])
+      #|  (p : List[Cart[Real, Tybit0[Unit]]]) == NIL
+      #|  5 <= LENGTH((p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  pathfinish(polygonal_path((p : List[Cart[Real, Tybit0[Unit]]]))) == pathstart(polygonal_path(p))
+      #|  5 <= (p : Num) \226\134\146 3 <= p
+      #|  (p : List[Cart[Real, Tybit0[Unit]]])
+      #|  \226\136\131 p' : List[Cart[Real, Tybit0[Unit]]], HD(p') == (a : Cart[Real, Tybit0[Unit]]) && LENGTH(p') == LENGTH((p : List[Cart[Real, Tybit0[Unit]]])) && path_image(polygonal_path(p')) == path_image(polygonal_path(p)) && set_of_list(p') == set_of_list(p) && simple_path(polygonal_path(p')) && pathfinish(polygonal_path(p')) == pathstart(polygonal_path(p'))
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (p : List[Cart[Real, Tybit0[Unit]]])
+      #|  SUBSET(segment([((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))]), {(a : Cart[Real, Tybit0[Unit]]), b})
+      #|  SUBSET(segment([((c : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]))]), {c})
+      #|  SUBSET(segment([((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))]), {c})
+      #|  (INTER((s : (_) -> Bool), (t : (_) -> Bool)) == t) == SUBSET(t, s)
+      #|  (INTER((s : (_) -> Bool), (t : (_) -> Bool)) == s) == SUBSET(s, t)
+      #|  INTER(segment([((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))]), segment([(c, (a : Cart[Real, Tybit0[Unit]]))])) == segment([(b, c)]) || INTER(segment([(b, c)]), segment([(c, a)])) == segment([(c, a)]) || INTER(segment([(a, b)]), segment([(b, c)])) == segment([(b, c)])
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  (d : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])
+      #|  !(SUC(SUC(SUC(SUC(SUC((n : Num)))))) <= 4)
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (p : List[Cart[Real, Tybit0[Unit]]])
+      #|  (p : List[Cart[Real, Tybit0[Unit]]])
+      #|  LENGTH((p : List[Cart[Real, Tybit0[Unit]]])) <= 4
+      #|  LENGTH((p : List[Cart[Real, Tybit0[Unit]]])) <= 4 || 5 <= LENGTH(p)
+      #|  LENGTH((p : List[Cart[Real, Tybit0[Unit]]]))
+      #|  \226\136\128 p : List[Cart[Real, Tybit0[Unit]]], (\226\136\128 x : Cart[Real, Tybit0[Unit]], MEM(x, p) \226\134\146 integral_vector(x)) && simple_path(polygonal_path(p)) && pathfinish(polygonal_path(p)) == pathstart(polygonal_path(p)) \226\134\146 measure(inside(path_image(polygonal_path(p)))) == real_of_num(CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, inside(path_image(polygonal_path(p)))) && integral_vector(x)})) + (real_of_num(CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, path_image(polygonal_path(p))) && integral_vector(x)})) / real_of_num(2) - real_of_num(1))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((b : Cart[Real, Tybit0[Unit]]), (q : List[Cart[Real, Tybit0[Unit]]]))
+      #|  CONS((a : Cart[Real, Tybit0[Unit]]), (r : List[Cart[Real, Tybit0[Unit]]]))
       #|COLLINEAR_IMP_NEGLIGIBLE =  |- (#forall:fun(fun(fun(cart(real,tybit0(1)),bool),bool),bool) (\s:fun(cart(real,tybit0(1)),bool). ((#==>:fun(bool,fun(bool,bool)) (#collinear:fun(fun(cart(real,tybit0(1)),bool),bool) s:fun(cart(real,tybit0(1)),bool))) (#negligible:fun(fun(cart(real,tybit0(1)),bool),bool) s:fun(cart(real,tybit0(1)),bool)))))
       #|CONVEX_HULL_3_0 =  |- (#forall:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\b:cart(real,'N). ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) ((#hull:fun(fun(fun(cart(real,'N),bool),bool),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) #convex:fun(fun(cart(real,'N),bool),bool)) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num))) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) a:cart(real,'N)) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) b:cart(real,'N)) #EMPTY:fun(cart(real,'N),bool)))))) (#GSPEC:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) (\GEN%PVAR%1:cart(real,'N). (#?:fun(fun(real,bool),bool) (\x:real. (#?:fun(fun(real,bool),bool) (\y:real. (((#SETSPEC:fun(cart(real,'N),fun(bool,fun(cart(real,'N),bool))) GEN%PVAR%1:cart(real,'N)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real)) ((#real_le:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) x:real) y:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) ((#%:fun(real,fun(cart(real,'N),cart(real,'N))) x:real) a:cart(real,'N))) ((#%:fun(real,fun(cart(real,'N),cart(real,'N))) y:real) b:cart(real,'N)))))))))))))))
       #|INTERIOR_CONVEX_HULL_3_0 =  |- (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\a:cart(real,tybit0(1)). (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\b:cart(real,tybit0(1)). ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#collinear:fun(fun(cart(real,tybit0(1)),bool),bool) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) (#vec:fun(num,cart(real,tybit0(1))) (#NUMERAL:fun(num,num) #_0:num))) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) a:cart(real,tybit0(1))) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) b:cart(real,tybit0(1))) #EMPTY:fun(cart(real,tybit0(1)),bool))))))) ((#=:fun(fun(cart(real,tybit0(1)),bool),fun(fun(cart(real,tybit0(1)),bool),bool)) (#interior:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) ((#hull:fun(fun(fun(cart(real,tybit0(1)),bool),bool),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) #convex:fun(fun(cart(real,tybit0(1)),bool),bool)) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) (#vec:fun(num,cart(real,tybit0(1))) (#NUMERAL:fun(num,num) #_0:num))) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) a:cart(real,tybit0(1))) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) b:cart(real,tybit0(1))) #EMPTY:fun(cart(real,tybit0(1)),bool))))))) (#GSPEC:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) (\GEN%PVAR%2:cart(real,tybit0(1)). (#?:fun(fun(real,bool),bool) (\x:real. (#?:fun(fun(real,bool),bool) (\y:real. (((#SETSPEC:fun(cart(real,tybit0(1)),fun(bool,fun(cart(real,tybit0(1)),bool))) GEN%PVAR%2:cart(real,tybit0(1))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real)) ((#real_lt:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) x:real) y:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#vector_add:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) ((#%:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) x:real) a:cart(real,tybit0(1)))) ((#%:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) y:real) b:cart(real,tybit0(1)))))))))))))))))
