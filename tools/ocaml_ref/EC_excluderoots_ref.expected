@@ -15402,34 +15402,34 @@ Translating certificate to HOL inferences
 Translating certificate to HOL inferences
 1 basis elements and 0 critical pairs
 EC/excluderoots quotations (28):
-  ~(p = 0) ==> SUC(p - 1) = p
-  (x EXP a == 1) (mod p) ==> (x * x EXP a == x) (mod p)
-  p:num
-  n:num
-  n:num
-  x:int
-  x rem &p
-  &0 <= x rem &p /\\ x rem &p < &p
-  coprime(b,p) ==> (b rem p == b) (mod p) ==> coprime(b rem p,p)
-  n:num
-  x:int
-  b rem &p
-  &0 <= b rem &p /\\ b rem &p < &p
-  ~(b rem &p = &0)
-  (b rem p == b) (mod p) /\\ coprime(b rem p,p) ==> coprime(b,p)
-  (x pow 3 + a * x + b:int == &0) (mod p)\n      ==> coprime(b,p) ==> coprime(x,p)
-  (xp == x) (mod p)\n      ==> (xp:int == c2 * x pow 2 + c1 * x + c0) (mod p)\n           ==> (&0 == c2 * x pow 2 + (c1 - &1) * x + c0) (mod p)
-  ((x pow 3 + a * x + b:int == &0) (mod &p)\n      ==> (x pow p == c2 * x pow 2 + c1 * x + c0) (mod &p))\n     ==> prime p\n         ==> ~(b rem &p = &0)\n             ==> ((x pow 3 + a * x + b == &0) (mod &p)\n                 ==> (&0 == c2 * x pow 2 + (c1 - &1) * x + c0) (mod &p))
-  (x pow 3 + a * x + b == &0) (mod p) /\\\n     (&0 == &1 * x pow 2 + c1 * x + c0) (mod p)\n     ==> (&0:int == &0 * x pow 2 +\n                    (a + c1 pow 2 - c0) * x + (b + c0 * c1)) (mod p)
-  (x pow 3 + a * x + b == &0) (mod p) /\\\n     (&0:int == &0 * x pow 2 + &1 * x + c0) (mod p)\n     ==> (&0:int == --c0 pow 3 - a * c0 + b) (mod p)
-  (x pow 3 + a * x + b:int == &0) (mod p)\n     ==> (y == c3 * x pow 3 + c2 * x pow 2 + c1 * x + c0) (mod p)\n         ==> (y == c2 * x pow 2 + (c1 - a * c3) * x + (c0 - b * c3)) (mod p)
-  (x pow 3 + a * x + b:int == &0) (mod p)\n     ==> (y == c4 * x pow 4 + c3 * x pow 3 + c2 * x pow 2 + c1 * x + c0) (mod p)\n         ==> (y == c3 * x pow 3 + (c2 - a * c4) * x pow 2 +\n                   (c1 - b * c4) * x + c0) (mod p)
-  (c2:int == c2') (mod p) /\\ (c1 == c1') (mod p) /\\ (c0 == c0') (mod p)\n      ==> (y:int == c2 * x pow 2 + c1 * x + c0) (mod p)\n          ==> (y:int == c2' * x pow 2 + c1' * x + c0') (mod p)
-  (y:int == c2 * x pow 2 + c1 * x + c0) (mod p)\n     ==> (y == c2 rem p * x pow 2 + c1 rem p * x + c0 rem p) (mod p)
-  ((x:int) pow n == c2 * x pow 2 + c1 * x + c0) (mod p)\n     ==> (x pow (n + 1) == c2 * x pow 3 + c1 * x pow 2 + c0 * x + &0) (mod p)
-  ((x:int) pow n == c2 * x pow 2 + c1 * x + c0) (mod p)\n     ==> (x pow (2 * n) ==\n          (c2 pow 2) * x pow 4 + (&2 * c1 * c2) * x pow 3 +\n          (c1 pow 2 + &2 * c0 * c2) * x pow 2 +\n          (&2 * c0 * c1) * x +\n          c0 pow 2) (mod p)
-  (y:int == c2 * x pow 2 + c1 * x + c0) (mod p)\n     ==> forall c. (c * y == (c * c2) * x pow 2 + (c * c1) * x + c * c0) (mod p)
-  forall p. ((x:int) pow 0 == &0 * x pow 2 + &0 * x + &1)\n                               (mod &p)
+  !((p : Num) == 0) \226\134\146 SUC(p - 1) == p
+  op_eq_eq(EXP((x : Num), (a : Num)), 1, mod((p : Num))) \226\134\146 op_eq_eq(x * EXP(x, a), x, mod(p))
+  (p : Num)
+  (n : Num)
+  (n : Num)
+  (x : Int)
+  rem((x : Int), int_of_num((p : Num)))
+  int_of_num(0) <= rem((x : Int), int_of_num((p : Num))) && rem(x, int_of_num(p)) < int_of_num(p)
+  coprime(((b : Int), (p : Int))) \226\134\146 op_eq_eq(rem(b, p), b, mod(p)) \226\134\146 coprime((rem(b, p), p))
+  (n : Num)
+  (x : Int)
+  rem((b : Int), int_of_num((p : Num)))
+  int_of_num(0) <= rem((b : Int), int_of_num((p : Num))) && rem(b, int_of_num(p)) < int_of_num(p)
+  !(rem((b : Int), int_of_num((p : Num))) == int_of_num(0))
+  op_eq_eq(rem((b : Int), (p : Int)), b, mod(p)) && coprime((rem(b, p), p)) \226\134\146 coprime((b, p))
+  op_eq_eq(pow((x : Int), 3) + ((a : Int) * x + (b : Int)), int_of_num(0), mod((p : Int))) \226\134\146 coprime((b, p)) \226\134\146 coprime((x, p))
+  op_eq_eq((xp : Int), (x : Int), mod((p : Int))) \226\134\146 op_eq_eq(xp, (c2 : Int) * pow(x, 2) + ((c1 : Int) * x + (c0 : Int)), mod(p)) \226\134\146 op_eq_eq(int_of_num(0), c2 * pow(x, 2) + ((c1 - int_of_num(1)) * x + c0), mod(p))
+  (op_eq_eq(pow((x : Int), 3) + ((a : Int) * x + (b : Int)), int_of_num(0), mod(int_of_num((p : Num)))) \226\134\146 op_eq_eq(pow(x, p), (c2 : Int) * pow(x, 2) + ((c1 : Int) * x + (c0 : Int)), mod(int_of_num(p)))) \226\134\146 prime(p) \226\134\146 !(rem(b, int_of_num(p)) == int_of_num(0)) \226\134\146 op_eq_eq(pow(x, 3) + (a * x + b), int_of_num(0), mod(int_of_num(p))) \226\134\146 op_eq_eq(int_of_num(0), c2 * pow(x, 2) + ((c1 - int_of_num(1)) * x + c0), mod(int_of_num(p)))
+  op_eq_eq(pow((x : Int), 3) + ((a : Int) * x + (b : Int)), int_of_num(0), mod((p : Int))) && op_eq_eq(int_of_num(0), int_of_num(1) * pow(x, 2) + ((c1 : Int) * x + (c0 : Int)), mod(p)) \226\134\146 op_eq_eq(int_of_num(0), int_of_num(0) * pow(x, 2) + ((a + (pow(c1, 2) - c0)) * x + (b + c0 * c1)), mod(p))
+  op_eq_eq(pow((x : Int), 3) + ((a : Int) * x + (b : Int)), int_of_num(0), mod((p : Int))) && op_eq_eq(int_of_num(0), int_of_num(0) * pow(x, 2) + (int_of_num(1) * x + (c0 : Int)), mod(p)) \226\134\146 op_eq_eq(int_of_num(0), pow(-c0, 3) - a * c0 + b, mod(p))
+  op_eq_eq(pow((x : Int), 3) + ((a : Int) * x + (b : Int)), int_of_num(0), mod((p : Int))) \226\134\146 op_eq_eq((y : Int), (c3 : Int) * pow(x, 3) + ((c2 : Int) * pow(x, 2) + ((c1 : Int) * x + (c0 : Int))), mod(p)) \226\134\146 op_eq_eq(y, c2 * pow(x, 2) + ((c1 - a * c3) * x + (c0 - b * c3)), mod(p))
+  op_eq_eq(pow((x : Int), 3) + ((a : Int) * x + (b : Int)), int_of_num(0), mod((p : Int))) \226\134\146 op_eq_eq((y : Int), (c4 : Int) * pow(x, 4) + ((c3 : Int) * pow(x, 3) + ((c2 : Int) * pow(x, 2) + ((c1 : Int) * x + (c0 : Int)))), mod(p)) \226\134\146 op_eq_eq(y, c3 * pow(x, 3) + ((c2 - a * c4) * pow(x, 2) + ((c1 - b * c4) * x + c0)), mod(p))
+  op_eq_eq((c2 : Int), (c2' : Int), mod((p : Int))) && op_eq_eq((c1 : Int), (c1' : Int), mod(p)) && op_eq_eq((c0 : Int), (c0' : Int), mod(p)) \226\134\146 op_eq_eq((y : Int), c2 * pow((x : Int), 2) + (c1 * x + c0), mod(p)) \226\134\146 op_eq_eq(y, c2' * pow(x, 2) + (c1' * x + c0'), mod(p))
+  op_eq_eq((y : Int), (c2 : Int) * pow((x : Int), 2) + ((c1 : Int) * x + (c0 : Int)), mod((p : Int))) \226\134\146 op_eq_eq(y, rem(c2, p) * pow(x, 2) + (rem(c1, p) * x + rem(c0, p)), mod(p))
+  op_eq_eq(pow((x : Int), (n : Num)), (c2 : Int) * pow(x, 2) + ((c1 : Int) * x + (c0 : Int)), mod((p : Int))) \226\134\146 op_eq_eq(pow(x, n + 1), c2 * pow(x, 3) + (c1 * pow(x, 2) + (c0 * x + int_of_num(0))), mod(p))
+  op_eq_eq(pow((x : Int), (n : Num)), (c2 : Int) * pow(x, 2) + ((c1 : Int) * x + (c0 : Int)), mod((p : Int))) \226\134\146 op_eq_eq(pow(x, 2 * n), pow(c2, 2) * pow(x, 4) + (int_of_num(2) * (c1 * c2) * pow(x, 3) + ((pow(c1, 2) + int_of_num(2) * (c0 * c2)) * pow(x, 2) + (int_of_num(2) * (c0 * c1) * x + pow(c0, 2)))), mod(p))
+  op_eq_eq((y : Int), (c2 : Int) * pow((x : Int), 2) + ((c1 : Int) * x + (c0 : Int)), mod((p : Int))) \226\134\146 (\226\136\128 c : Int, op_eq_eq(c * y, c * c2 * pow(x, 2) + (c * c1 * x + c * c0), mod(p)))
+  \226\136\128 p : Num, op_eq_eq(pow((x : Int), 0), int_of_num(0) * pow(x, 2) + (int_of_num(0) * x + int_of_num(1)), mod(int_of_num(p)))
 types = tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2
 constants = primefact order phi squarefree inverse_mod index ITER superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
 definitions = 270

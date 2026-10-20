@@ -46,9 +46,9 @@ pub fn num_modinv(x : @num.Num) -> ((@num.Num) -> @num.Num raise) raise {
 ///|
 /// EXCLUDE_MODULAR_CUBIC_ROOTS
 fn step_2() -> Unit raise {
-  let t73 = @simp.asm_simp_tac(@list.List([@prime.prime_imp_nz(), @int.arith_rule(@parser.parse_term("~(p = 0) ==> SUC(p - 1) = p"))]))
+  let t73 = @simp.asm_simp_tac(@list.List([@prime.prime_imp_nz(), @int.arith_rule(@term_syntax.parse_term("!((p : Num) == 0) → SUC(p - 1) == p"))]))
   let t72 = @simp.asm_simp_tac(@list.List([@equal.gsym(@bool.conjunct2(@arith.exp())), @int.cong_v1(), @arith.mod_lt()]))
-  let t69 = @drule.match_mp(@int.number_rule(@parser.parse_term("(x EXP a == 1) (mod p) ==> (x * x EXP a == x) (mod p)")))
+  let t69 = @drule.match_mp(@int.number_rule(@term_syntax.parse_term("op_eq_eq(EXP((x : Num), (a : Num)), 1, mod((p : Num))) → op_eq_eq(x * EXP(x, a), x, mod(p))")))
   let t71 = @tactics.disch_then(fn(x70 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x66 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s67 = @tactics.mp_tac(x66)
@@ -58,18 +58,18 @@ fn step_2() -> Unit raise {
     })(t69(x70))
   })
   let t65 = @simp.asm_rewrite_tac(@list.List([]))
-  let t63 = @parser.parse_term("p:num")
-  let t64 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("n:num"), t63]), @pocklington.fermat_little_prime()))
+  let t63 = @term_syntax.parse_term("(p : Num)")
+  let t64 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(n : Num)"), t63]), @pocklington.fermat_little_prime()))
   let t62 = @simp.rewrite_tac(@list.List([@int.int_of_num_pow(), @int.int_of_num_rem(), @int.int_of_num_eq()]))
   let t61 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t60 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
+  let t60 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t59 = @simp.rewrite_tac(@list.List([@int.int_pow_rem(), @equal.gsym(@int.num_coprime()), @int.int_of_num_lt()]))
   let t58 = @simp.rewrite_tac(@list.List([@equal.gsym(@int.int_forall_pos()), @theorems.imp_conj()]))
-  let t55 = @parser.parse_term("x:int")
-  let t56 = @tactics.spec_tac(@parser.parse_term("x rem &p"), t55)
+  let t55 = @term_syntax.parse_term("(x : Int)")
+  let t56 = @tactics.spec_tac(@term_syntax.parse_term("rem((x : Int), int_of_num((p : Num)))"), t55)
   let t54 = @simp.asm_simp_tac(@list.List([@int.int_of_num_eq(), @prime.prime_imp_nz(), @int.int_of_num_lt(), @arith.le_1()]))
   let t57 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@int.int_rem_pos_eq(), @int.int_lt_rem_eq()])), t54), t56])
-  let t53 = @tactics.subgoal_then(@parser.parse_term("&0 <= x rem &p /\\ x rem &p < &p"), fn(x50 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t53 = @tactics.subgoal_then(@term_syntax.parse_term("int_of_num(0) <= rem((x : Int), int_of_num((p : Num))) && rem(x, int_of_num(p)) < int_of_num(p)"), fn(x50 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s51 = @tactics.mp_tac(x50)
     fn(x52 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s51(x52)
@@ -78,7 +78,7 @@ fn step_2() -> Unit raise {
   let t49 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@int.int_pow_rem())]))
   let t48 = @simp.rewrite_tac(@list.List([@equal.gsym(@int.int_rem_eq())]))
   let t45 = @simp.rewrite_tac(@list.List([@int.int_rem_mod_self()]))
-  let t43 = @drule.match_mp(@int.integer_rule(@parser.parse_term("coprime(b,p) ==> (b rem p == b) (mod p) ==> coprime(b rem p,p)")))
+  let t43 = @drule.match_mp(@int.integer_rule(@term_syntax.parse_term("coprime(((b : Int), (p : Int))) → op_eq_eq(rem(b, p), b, mod(p)) → coprime((rem(b, p), p))")))
   let t46 = @tactics.then_tac(@tactics.disch_then(fn(x44 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x40 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s41 = @tactics.mp_tac(x40)
@@ -101,22 +101,22 @@ fn step_2() -> Unit raise {
   let t31 = @simp.rewrite_tac(@list.List([@equal.gsym(@int.num_coprime())]))
   let t30 = @tactics.repeat_tac(@tactics.disch_tac)
   let t29 = @simp.rewrite_tac(@list.List([@int.int_of_num_eq(), @int.int_of_num_lt()]))
-  let t28 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
+  let t28 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t27 = @simp.rewrite_tac(@list.List([@equal.gsym(@int.int_forall_pos()), @theorems.imp_conj()]))
-  let t24 = @parser.parse_term("x:int")
-  let t25 = @tactics.spec_tac(@parser.parse_term("b rem &p"), t24)
+  let t24 = @term_syntax.parse_term("(x : Int)")
+  let t25 = @tactics.spec_tac(@term_syntax.parse_term("rem((b : Int), int_of_num((p : Num)))"), t24)
   let t23 = @simp.asm_simp_tac(@list.List([@int.int_of_num_eq(), @prime.prime_imp_nz(), @int.int_of_num_lt(), @arith.le_1()]))
   let t26 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@int.int_rem_pos_eq(), @int.int_lt_rem_eq()])), t23), t25])
-  let t22 = @tactics.subgoal_then(@parser.parse_term("&0 <= b rem &p /\\ b rem &p < &p"), fn(x19 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t22 = @tactics.subgoal_then(@term_syntax.parse_term("int_of_num(0) <= rem((b : Int), int_of_num((p : Num))) && rem(b, int_of_num(p)) < int_of_num(p)"), fn(x19 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s20 = @tactics.mp_tac(x19)
     fn(x21 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s20(x21)
     }
   })
-  let t18 = @tactics.undisch_tac(@parser.parse_term("~(b rem &p = &0)"))
+  let t18 = @tactics.undisch_tac(@term_syntax.parse_term("!(rem((b : Int), int_of_num((p : Num))) == int_of_num(0))"))
   let t17 = @simp.rewrite_tac(@list.List([@int.int_rem_mod_self()]))
-  let t47 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.integer_rule(@parser.parse_term("(b rem p == b) (mod p) /\\ coprime(b rem p,p) ==> coprime(b,p)"))), t17), t18), t22), t26), t27), t28), t29), t30), t31), t32), t33), t39), @int.asm_arith_tac), t46])
-  let t14 = @drule.match_mp(@int.integer_rule(@parser.parse_term("(x pow 3 + a * x + b:int == &0) (mod p)\n      ==> coprime(b,p) ==> coprime(x,p)")))
+  let t47 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.integer_rule(@term_syntax.parse_term("op_eq_eq(rem((b : Int), (p : Int)), b, mod(p)) && coprime((rem(b, p), p)) → coprime((b, p))"))), t17), t18), t22), t26), t27), t28), t29), t30), t31), t32), t33), t39), @int.asm_arith_tac), t46])
+  let t14 = @drule.match_mp(@int.integer_rule(@term_syntax.parse_term("op_eq_eq(pow((x : Int), 3) + ((a : Int) * x + (b : Int)), int_of_num(0), mod((p : Int))) → coprime((b, p)) → coprime((x, p))")))
   let t16 = @tactics.first_x_assum(fn(x15 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x11 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s12 = @tactics.mp_tac(x11)
@@ -125,28 +125,28 @@ fn step_2() -> Unit raise {
       }
     })(t14(x15))
   })
-  let t10 = @tactics.match_mp_tac(@int.integer_rule(@parser.parse_term("(xp == x) (mod p)\n      ==> (xp:int == c2 * x pow 2 + c1 * x + c0) (mod p)\n           ==> (&0 == c2 * x pow 2 + (c1 - &1) * x + c0) (mod p)")))
+  let t10 = @tactics.match_mp_tac(@int.integer_rule(@term_syntax.parse_term("op_eq_eq((xp : Int), (x : Int), mod((p : Int))) → op_eq_eq(xp, (c2 : Int) * pow(x, 2) + ((c1 : Int) * x + (c0 : Int)), mod(p)) → op_eq_eq(int_of_num(0), c2 * pow(x, 2) + ((c1 - int_of_num(1)) * x + c0), mod(p))")))
   let t9 = @simp.asm_rewrite_tac(@list.List([]))
   let t74 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_then(fn(x6 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x6
     let t8 = @tactics.mp_tac(th)
     @tactics.then_tac(@tactics.repeat_tac(@tactics.disch_tac), t8)
   }), t9), t10), t16), @tactics.ants_tac), t47), t48), t49), t53), t57), t58), t59), t60), t61), t62), t64), t65), t71), t72), t73)
-  let lemma_flt = @tactics.prove(@parser.parse_term("((x pow 3 + a * x + b:int == &0) (mod &p)\n      ==> (x pow p == c2 * x pow 2 + c1 * x + c0) (mod &p))\n     ==> prime p\n         ==> ~(b rem &p = &0)\n             ==> ((x pow 3 + a * x + b == &0) (mod &p)\n                 ==> (&0 == c2 * x pow 2 + (c1 - &1) * x + c0) (mod &p))"), t74)
-  let lemma_tolin = @tactics.prove(@parser.parse_term("(x pow 3 + a * x + b == &0) (mod p) /\\\n     (&0 == &1 * x pow 2 + c1 * x + c0) (mod p)\n     ==> (&0:int == &0 * x pow 2 +\n                    (a + c1 pow 2 - c0) * x + (b + c0 * c1)) (mod p)"), @int.integer_tac)
-  let lemma_toconst = @tactics.prove(@parser.parse_term("(x pow 3 + a * x + b == &0) (mod p) /\\\n     (&0:int == &0 * x pow 2 + &1 * x + c0) (mod p)\n     ==> (&0:int == --c0 pow 3 - a * c0 + b) (mod p)"), @int.integer_tac)
-  let lemma_3_2 = @tactics.prove(@parser.parse_term("(x pow 3 + a * x + b:int == &0) (mod p)\n     ==> (y == c3 * x pow 3 + c2 * x pow 2 + c1 * x + c0) (mod p)\n         ==> (y == c2 * x pow 2 + (c1 - a * c3) * x + (c0 - b * c3)) (mod p)"), @int.integer_tac)
-  let lemma_4_3 = @tactics.prove(@parser.parse_term("(x pow 3 + a * x + b:int == &0) (mod p)\n     ==> (y == c4 * x pow 4 + c3 * x pow 3 + c2 * x pow 2 + c1 * x + c0) (mod p)\n         ==> (y == c3 * x pow 3 + (c2 - a * c4) * x pow 2 +\n                   (c1 - b * c4) * x + c0) (mod p)"), @int.integer_tac)
+  let lemma_flt = @tactics.prove(@term_syntax.parse_term("(op_eq_eq(pow((x : Int), 3) + ((a : Int) * x + (b : Int)), int_of_num(0), mod(int_of_num((p : Num)))) → op_eq_eq(pow(x, p), (c2 : Int) * pow(x, 2) + ((c1 : Int) * x + (c0 : Int)), mod(int_of_num(p)))) → prime(p) → !(rem(b, int_of_num(p)) == int_of_num(0)) → op_eq_eq(pow(x, 3) + (a * x + b), int_of_num(0), mod(int_of_num(p))) → op_eq_eq(int_of_num(0), c2 * pow(x, 2) + ((c1 - int_of_num(1)) * x + c0), mod(int_of_num(p)))"), t74)
+  let lemma_tolin = @tactics.prove(@term_syntax.parse_term("op_eq_eq(pow((x : Int), 3) + ((a : Int) * x + (b : Int)), int_of_num(0), mod((p : Int))) && op_eq_eq(int_of_num(0), int_of_num(1) * pow(x, 2) + ((c1 : Int) * x + (c0 : Int)), mod(p)) → op_eq_eq(int_of_num(0), int_of_num(0) * pow(x, 2) + ((a + (pow(c1, 2) - c0)) * x + (b + c0 * c1)), mod(p))"), @int.integer_tac)
+  let lemma_toconst = @tactics.prove(@term_syntax.parse_term("op_eq_eq(pow((x : Int), 3) + ((a : Int) * x + (b : Int)), int_of_num(0), mod((p : Int))) && op_eq_eq(int_of_num(0), int_of_num(0) * pow(x, 2) + (int_of_num(1) * x + (c0 : Int)), mod(p)) → op_eq_eq(int_of_num(0), pow(-c0, 3) - a * c0 + b, mod(p))"), @int.integer_tac)
+  let lemma_3_2 = @tactics.prove(@term_syntax.parse_term("op_eq_eq(pow((x : Int), 3) + ((a : Int) * x + (b : Int)), int_of_num(0), mod((p : Int))) → op_eq_eq((y : Int), (c3 : Int) * pow(x, 3) + ((c2 : Int) * pow(x, 2) + ((c1 : Int) * x + (c0 : Int))), mod(p)) → op_eq_eq(y, c2 * pow(x, 2) + ((c1 - a * c3) * x + (c0 - b * c3)), mod(p))"), @int.integer_tac)
+  let lemma_4_3 = @tactics.prove(@term_syntax.parse_term("op_eq_eq(pow((x : Int), 3) + ((a : Int) * x + (b : Int)), int_of_num(0), mod((p : Int))) → op_eq_eq((y : Int), (c4 : Int) * pow(x, 4) + ((c3 : Int) * pow(x, 3) + ((c2 : Int) * pow(x, 2) + ((c1 : Int) * x + (c0 : Int)))), mod(p)) → op_eq_eq(y, c3 * pow(x, 3) + ((c2 - a * c4) * pow(x, 2) + ((c1 - b * c4) * x + c0)), mod(p))"), @int.integer_tac)
   let t76 = @tactics.conv_tac(@int.integer_rule)
   let t75 = @simp.rewrite_tac(@list.List([@int.int_cong_rrem()]))
-  let t77 = @tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.integer_rule(@parser.parse_term("(c2:int == c2') (mod p) /\\ (c1 == c1') (mod p) /\\ (c0 == c0') (mod p)\n      ==> (y:int == c2 * x pow 2 + c1 * x + c0) (mod p)\n          ==> (y:int == c2' * x pow 2 + c1' * x + c0') (mod p)"))), t75), t76)
-  let lemma_rem = @tactics.prove(@parser.parse_term("(y:int == c2 * x pow 2 + c1 * x + c0) (mod p)\n     ==> (y == c2 rem p * x pow 2 + c1 rem p * x + c0 rem p) (mod p)"), t77)
+  let t77 = @tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.integer_rule(@term_syntax.parse_term("op_eq_eq((c2 : Int), (c2' : Int), mod((p : Int))) && op_eq_eq((c1 : Int), (c1' : Int), mod(p)) && op_eq_eq((c0 : Int), (c0' : Int), mod(p)) → op_eq_eq((y : Int), c2 * pow((x : Int), 2) + (c1 * x + c0), mod(p)) → op_eq_eq(y, c2' * pow(x, 2) + (c1' * x + c0'), mod(p))"))), t75), t76)
+  let lemma_rem = @tactics.prove(@term_syntax.parse_term("op_eq_eq((y : Int), (c2 : Int) * pow((x : Int), 2) + ((c1 : Int) * x + (c0 : Int)), mod((p : Int))) → op_eq_eq(y, rem(c2, p) * pow(x, 2) + (rem(c1, p) * x + rem(c0, p)), mod(p))"), t77)
   let t78 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@int.int_pow_add()])), @int.integer_tac)
-  let lemma_mulx = @tactics.prove(@parser.parse_term("((x:int) pow n == c2 * x pow 2 + c1 * x + c0) (mod p)\n     ==> (x pow (n + 1) == c2 * x pow 3 + c1 * x pow 2 + c0 * x + &0) (mod p)"), t78)
+  let lemma_mulx = @tactics.prove(@term_syntax.parse_term("op_eq_eq(pow((x : Int), (n : Num)), (c2 : Int) * pow(x, 2) + ((c1 : Int) * x + (c0 : Int)), mod((p : Int))) → op_eq_eq(pow(x, n + 1), c2 * pow(x, 3) + (c1 * pow(x, 2) + (c0 * x + int_of_num(0))), mod(p))"), t78)
   let t79 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.mult_2(), @int.int_pow_add()])), @int.integer_tac)
-  let lemma_sqr = @tactics.prove(@parser.parse_term("((x:int) pow n == c2 * x pow 2 + c1 * x + c0) (mod p)\n     ==> (x pow (2 * n) ==\n          (c2 pow 2) * x pow 4 + (&2 * c1 * c2) * x pow 3 +\n          (c1 pow 2 + &2 * c0 * c2) * x pow 2 +\n          (&2 * c0 * c1) * x +\n          c0 pow 2) (mod p)"), t79)
-  let lemma_mulc = @tactics.prove(@parser.parse_term("(y:int == c2 * x pow 2 + c1 * x + c0) (mod p)\n     ==> forall c. (c * y == (c * c2) * x pow 2 + (c * c1) * x + c * c0) (mod p)"), @int.integer_tac)
-  let pth0 = @int.integer_rule(@parser.parse_term("forall p. ((x:int) pow 0 == &0 * x pow 2 + &0 * x + &1)\n                               (mod &p)"))
+  let lemma_sqr = @tactics.prove(@term_syntax.parse_term("op_eq_eq(pow((x : Int), (n : Num)), (c2 : Int) * pow(x, 2) + ((c1 : Int) * x + (c0 : Int)), mod((p : Int))) → op_eq_eq(pow(x, 2 * n), pow(c2, 2) * pow(x, 4) + (int_of_num(2) * (c1 * c2) * pow(x, 3) + ((pow(c1, 2) + int_of_num(2) * (c0 * c2)) * pow(x, 2) + (int_of_num(2) * (c0 * c1) * x + pow(c0, 2)))), mod(p))"), t79)
+  let lemma_mulc = @tactics.prove(@term_syntax.parse_term("op_eq_eq((y : Int), (c2 : Int) * pow((x : Int), 2) + ((c1 : Int) * x + (c0 : Int)), mod((p : Int))) → (∀ c : Int, op_eq_eq(c * y, c * c2 * pow(x, 2) + (c * c1 * x + c * c0), mod(p)))"), @int.integer_tac)
+  let pth0 = @int.integer_rule(@term_syntax.parse_term("∀ p : Num, op_eq_eq(pow((x : Int), 0), int_of_num(0) * pow(x, 2) + (int_of_num(0) * x + int_of_num(1)), mod(int_of_num(p)))"))
   exclude_modular_cubic_roots_c.set(fn(x80 : @kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     let tm = x80
     fn(x81 : @kernel.Thm) -> @kernel.Thm raise {
