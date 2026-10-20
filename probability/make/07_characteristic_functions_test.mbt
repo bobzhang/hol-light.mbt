@@ -84419,1130 +84419,1130 @@ test "Probability/characteristic_functions matches Probability/characteristic_fu
       #|1 basis elements and 0 critical pairs
       #|Generating HOL version of proof
       #|Probability/characteristic_functions quotations (5000):
-      #|  simple_cdf (p:A prob_space) (X:A->real) (x:real) =\n   prob p {a | a IN prob_carrier p /\\ X a <= x}
-      #|  simple_char_fn_re (p:A prob_space) (X:A->real) (t:real) =\n   simple_expectation p (\\x. cos(t * X x))
-      #|  simple_char_fn_im (p:A prob_space) (X:A->real) (t:real) =\n   simple_expectation p (\\x. sin(t * X x))
-      #|  forall p:A prob_space (X:A->real).\n     simple_char_fn_re p X (&0) = &1 /\\ simple_char_fn_im p X (&0) = &0
-      #|  forall p:A prob_space (X:A->real) x.\n     simple_rv p X\n     ==> &0 <= simple_cdf p X x /\\ simple_cdf p X x <= &1
-      #|  z:A
-      #|  (X:A->real) z
-      #|  z:A
-      #|  y:real
-      #|  IMAGE (f:real->real)\n                     {(X:A->real) x | x IN prob_carrier p}
-      #|  {(X:A->real) x | x IN prob_carrier p}
-      #|  v:real
-      #|  s:A->bool
-      #|  (z:A) IN s
-      #|  v:real
-      #|  s:A->bool
-      #|  z:A
-      #|  (X:A->real) z
-      #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x = X z}
-      #|  z:A
-      #|  {x:A | x IN prob_carrier p /\\ (f:real->real)((X:A->real) x) <= a} =\n      UNIONS (IMAGE (\\v. {x | x IN prob_carrier p /\\ X x = v})\n                    {v | (?y:A. y IN prob_carrier p /\\ (X:A->real) y = v) /\\\n                         (f:real->real) v <= a})
-      #|  a:real
-      #|  forall p:A prob_space X (f:real->real).\n     simple_rv p X ==> simple_rv p (\\x. f(X x))
-      #|  c = simple_expectation (p:A prob_space) (\\x:A. c:real)
-      #|  forall p:A prob_space Y c.\n     simple_rv p Y /\\\n     (forall x. x IN prob_carrier p ==> Y x <= c)\n     ==> simple_expectation p Y <= c
-      #|  c = simple_expectation (p:A prob_space) (\\x:A. c:real)
-      #|  forall p:A prob_space Y c.\n     simple_rv p Y /\\\n     (forall x. x IN prob_carrier p ==> c <= Y x)\n     ==> c <= simple_expectation p Y
-      #|  t * (X:A->real) y
-      #|  y:A
-      #|  \\y:real. cos(t * y)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  -- &1
-      #|  \\x:A. cos(t * (X:A->real) x)
-      #|  p:A prob_space
-      #|  -- &1 <= simple_expectation (p:A prob_space) (\\x:A. cos(t * X x))
-      #|  t * (X:A->real) y
-      #|  y:A
-      #|  \\y:real. cos(t * y)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  &1
-      #|  \\x:A. cos(t * (X:A->real) x)
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space) (\\x:A. cos(t * X x)) <= &1
-      #|  forall p:A prob_space (X:A->real) t.\n     simple_rv p X ==> abs(simple_char_fn_re p X t) <= &1
-      #|  t * (X:A->real) y
-      #|  y:A
-      #|  \\y:real. sin(t * y)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  -- &1
-      #|  \\x:A. sin(t * (X:A->real) x)
-      #|  p:A prob_space
-      #|  -- &1 <= simple_expectation (p:A prob_space) (\\x:A. sin(t * X x))
-      #|  t * (X:A->real) y
-      #|  y:A
-      #|  \\y:real. sin(t * y)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  &1
-      #|  \\x:A. sin(t * (X:A->real) x)
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space) (\\x:A. sin(t * X x)) <= &1
-      #|  forall p:A prob_space (X:A->real) t.\n     simple_rv p X ==> abs(simple_char_fn_im p X t) <= &1
-      #|  forall x:real. sin(x) pow 2 <= x pow 2
-      #|  &2 * (x / &2) pow 2
-      #|  &1 - (&1 - &2 * s) = &2 * s
-      #|  &2 * x / &2 = x
-      #|  x / &2
-      #|  cos(x) = &1 - &2 * sin(x / &2) pow 2
-      #|  forall x:real. &1 - cos(x) <= x pow 2 / &2
-      #|  ~(u:real = (X:A->real) x)
-      #|  (X:A->real) x = u
-      #|  u:real
-      #|  sum (IMAGE (X:A->real) (prob_carrier p))\n                  (\\u. if u = X x then f(X x) else &0)
-      #|  forall u:real. f(u) * indicator_fn\n        {z:A | z IN prob_carrier p /\\ (X:A->real) z = u} x =\n      if X x = u then f(u) else &0
-      #|  x:A
-      #|  (X:A->real) x IN IMAGE X (prob_carrier p)
-      #|  FINITE (IMAGE (X:A->real) (prob_carrier p))
-      #|  forall p:A prob_space (X:A->real) (f:real->real) x.\n     simple_rv p X /\\ x IN prob_carrier p\n     ==> f(X x) =\n         sum (IMAGE X (prob_carrier p))\n             (\\u. f(u) * indicator_fn {z | z IN prob_carrier p /\\ X z = u} x)
-      #|  (f:real->real) u
-      #|  indicator_fn {z:A | z IN prob_carrier p /\\ (X:A->real) z = u}
-      #|  p:A prob_space
-      #|  {z:A | z IN prob_carrier p /\\ (X:A->real) z = u} IN prob_events p
-      #|  u:real
-      #|  u:real
-      #|  S:real->bool
-      #|  \\(u:real) (x:A). (f:real->real)(u) *\n        indicator_fn {z:A | z IN prob_carrier (p:A prob_space) /\\\n          (X:A->real) z = u} x
-      #|  p:A prob_space
-      #|  x:A
-      #|  simple_expectation (p:A prob_space) (\\x. (f:real->real)((X:A->real) x)) =\n     simple_expectation p (\\x. sum (S:real->bool)\n       (\\u. f(u) * indicator_fn {z | z IN prob_carrier p /\\ X z = u} x))
-      #|  FINITE (S:real->bool)
-      #|  S = IMAGE (X:A->real) (prob_carrier p)
-      #|  forall p:A prob_space (X:A->real) (f:real->real).\n     simple_rv p X\n     ==> simple_expectation p (\\x. f(X x)) =\n         sum (IMAGE X (prob_carrier p))\n             (\\u. f(u) * prob p {x | x IN prob_carrier p /\\ X x = u})
-      #|  \\u:real. &1
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  forall p:A prob_space (X:A->real).\n     simple_rv p X\n     ==> sum (IMAGE X (prob_carrier p))\n             (\\v. prob p {x | x IN prob_carrier p /\\ X x = v}) = &1
-      #|  \\v:real. v
-      #|  P:real->real
-      #|  V:real->bool
-      #|  (:real)
-      #|  f:real->real
-      #|  sum (V:real->bool) (\\v:real. (f:real->real) v * (P:real->real) v) =\n                sum V (\\v. P v * f v)
-      #|  sum (V:real->bool) (\\v:real. v * (P:real->real) v) =\n                sum V (\\v. P v * v)
-      #|  forall v:real. v IN V ==> &0 <= (P:real->real) v
-      #|  sum V (P:real->real) = &1
-      #|  FINITE (V:real->bool)
-      #|  simple_expectation (p:A prob_space) (\\a:A. (f:real->real)((X:A->real) a)) =\n     sum V (\\v:real. f v * (P:real->real) v)
-      #|  simple_expectation (p:A prob_space) (X:A->real) =\n     sum V (\\v:real. v * (P:real->real) v)
-      #|  P = \\v:real. prob (p:A prob_space) {x:A | x IN prob_carrier p /\\ (X:A->real) x = v}
-      #|  V = IMAGE (X:A->real) (prob_carrier p)
-      #|  forall p:A prob_space (X:A->real) (f:real->real).\n     simple_rv p X /\\ f real_convex_on (:real)\n     ==> f(simple_expectation p X) <=\n         simple_expectation p (\\a. f(X a))
-      #|  simple_expectation (p:A prob_space) (\\x:A. (g:real->real)((Y:A->real) x)) =\n     sum (RY:real->bool) (\\u. g(u) * prob p {x | x IN prob_carrier p /\\ Y x = u})
-      #|  simple_expectation (p:A prob_space) (\\x:A. (f:real->real)((X:A->real) x)) =\n     sum (RX:real->bool) (\\u. f(u) * prob p {x | x IN prob_carrier p /\\ X x = u})
-      #|  d = prob (p:A prob_space)\n      {z | z IN prob_carrier p /\\ (Y:A->real) z = v}
-      #|  c = prob (p:A prob_space)\n      {z | z IN prob_carrier p /\\ (X:A->real) z = u}
-      #|  b = (g:real->real) v
-      #|  a = (f:real->real) u
-      #|  (\\v:real. (f:real->real)(u) * (g:real->real)(v) *\n        (prob (p:A prob_space) {z | z IN prob_carrier p /\\ (X:A->real) z = u} *\n         prob p {z | z IN prob_carrier p /\\ (Y:A->real) z = v})) =\n      (\\v. (f(u) * prob p {z | z IN prob_carrier p /\\ X z = u}) *\n           (g(v) * prob p {z | z IN prob_carrier p /\\ Y z = v}))
-      #|  forall u:real. sum (RY:real->bool) (\\v:real.\n       (f:real->real)(u) * (g:real->real)(v) *\n       (prob (p:A prob_space) {z | z IN prob_carrier p /\\ (X:A->real) z = u} *\n        prob p {z | z IN prob_carrier p /\\ (Y:A->real) z = v})) =\n     (f(u) * prob p {z | z IN prob_carrier p /\\ X z = u}) *\n     sum RY (\\v. g(v) * prob p {z | z IN prob_carrier p /\\ Y z = v})
-      #|  v:real
-      #|  u:real
-      #|  sum (RX:real->bool) (\\u. sum (RY:real->bool) (\\v.\n       (f:real->real)(u) * (g:real->real)(v) *\n       prob (p:A prob_space)\n         {z | z IN prob_carrier p /\\ (X:A->real) z = u /\\ (Y:A->real) z = v})) =\n     sum RX (\\u. sum RY (\\v.\n       f(u) * g(v) *\n       (prob p {z | z IN prob_carrier p /\\ X z = u} *\n        prob p {z | z IN prob_carrier p /\\ Y z = v})))
-      #|  (f:real->real) u * (g:real->real) v
-      #|  indicator_fn {z:A | z IN prob_carrier (p:A prob_space) /\\\n        (X:A->real) z = u /\\ (Y:A->real) z = v}
-      #|  p:A prob_space
-      #|  {z:A | z IN prob_carrier p /\\ (X:A->real) z = u /\\\n       (Y:A->real) z = v} IN prob_events p
-      #|  v:real
-      #|  v:real
-      #|  RY:real->bool
-      #|  \\(v:real) (x:A). (f:real->real)(u) * (g:real->real)(v) *\n         indicator_fn {z:A | z IN prob_carrier (p:A prob_space) /\\\n           (X:A->real) z = u /\\ (Y:A->real) z = v} x
-      #|  p:A prob_space
-      #|  u:real
-      #|  sum (RX:real->bool) (\\u. simple_expectation (p:A prob_space) (\\x. sum (RY:real->bool)\n       (\\v. (f:real->real) u * (g:real->real) v *\n         indicator_fn {z | z IN prob_carrier p /\\ (X:A->real) z = u /\\\n           (Y:A->real) z = v} x))) =\n     sum RX (\\u. sum RY (\\v. f(u) * g(v) *\n       prob p {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v}))
-      #|  v:real
-      #|  RY:real->bool
-      #|  \\(v:real) (x:A). (f:real->real)(u) * (g:real->real)(v) *\n         indicator_fn {z:A | z IN prob_carrier (p:A prob_space) /\\\n           (X:A->real) z = u /\\ (Y:A->real) z = v} x
-      #|  p:A prob_space
-      #|  u:real
-      #|  RX:real->bool
-      #|  \\(u:real) (x:A). sum (RY:real->bool) (\\(v:real). (f:real->real)(u) * (g:real->real)(v) *\n        indicator_fn {z:A | z IN prob_carrier (p:A prob_space) /\\\n          (X:A->real) z = u /\\ (Y:A->real) z = v} x)
-      #|  p:A prob_space
-      #|  b = indicator_fn {z:A | z IN prob_carrier p /\\ (Y:A->real) z = v} (x:A)
-      #|  a = indicator_fn {z:A | z IN prob_carrier p /\\ (X:A->real) z = u} (x:A)
-      #|  {z:A | z IN prob_carrier p /\\ (X:A->real) z = u /\\ (Y:A->real) z = v} =\n      {z | z IN prob_carrier p /\\ X z = u} INTER\n      {z | z IN prob_carrier p /\\ Y z = v}
-      #|  v:real
-      #|  u:real
-      #|  (g:real->real)((Y:A->real) x) =\n      sum (RY:real->bool) (\\v. g(v) * indicator_fn\n        {z | z IN prob_carrier p /\\ Y z = v} x)
-      #|  (f:real->real)((X:A->real) x) =\n      sum (RX:real->bool) (\\u. f(u) * indicator_fn\n        {z | z IN prob_carrier p /\\ X z = u} x)
-      #|  x:A
-      #|  simple_expectation (p:A prob_space) (\\x. (f:real->real)((X:A->real) x) * (g:real->real)((Y:A->real) x)) =\n     simple_expectation p (\\x. sum (RX:real->bool) (\\u. sum (RY:real->bool)\n       (\\v. f(u) * g(v) * indicator_fn\n         {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v} x)))
-      #|  FINITE (RY:real->bool)
-      #|  FINITE (RX:real->bool)
-      #|  RY = IMAGE (Y:A->real) (prob_carrier p)
-      #|  RX = IMAGE (X:A->real) (prob_carrier p)
-      #|  forall p:A prob_space (X:A->real) (Y:A->real) (f:real->real) (g:real->real).\n     simple_rv p X /\\ simple_rv p Y /\\ indep_rv p X Y\n     ==> simple_expectation p (\\x. f(X x) * g(Y x)) =\n         simple_expectation p (\\x. f(X x)) *\n         simple_expectation p (\\x. g(Y x))
-      #|  \\v:real. sin(t * v)
-      #|  \\u:real. sin(t * u)
-      #|  Y:A->real
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. sin(t * (X:A->real) x) * sin(t * (Y:A->real) x)) =\n     simple_expectation p (\\x. sin(t * X x)) *\n     simple_expectation p (\\x. sin(t * Y x))
-      #|  \\v:real. cos(t * v)
-      #|  \\u:real. cos(t * u)
-      #|  Y:A->real
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. cos(t * (X:A->real) x) * cos(t * (Y:A->real) x)) =\n     simple_expectation p (\\x. cos(t * X x)) *\n     simple_expectation p (\\x. cos(t * Y x))
-      #|  \\x:A. sin(t * (X:A->real) x) * sin(t * (Y:A->real) x)
-      #|  \\x:A. cos(t * (X:A->real) x) * cos(t * (Y:A->real) x)
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. cos(t * (X:A->real) x) * cos(t * (Y:A->real) x) -\n              sin(t * X x) * sin(t * Y x)) =\n     simple_expectation p (\\x. cos(t * X x) * cos(t * Y x)) -\n     simple_expectation p (\\x. sin(t * X x) * sin(t * Y x))
-      #|  forall x:A. cos(t * ((X:A->real) x + (Y:A->real) x)) =\n           cos(t * X x) * cos(t * Y x) - sin(t * X x) * sin(t * Y x)
-      #|  simple_rv (p:A prob_space)\n       (\\x:A. sin(t * (X:A->real) x) * sin(t * (Y:A->real) x))
-      #|  simple_rv (p:A prob_space)\n       (\\x:A. cos(t * (X:A->real) x) * cos(t * (Y:A->real) x))
-      #|  \\y:real. sin(t * y)
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. sin(t * (Y:A->real) x))
-      #|  \\y:real. sin(t * y)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. sin(t * (X:A->real) x))
-      #|  \\y:real. cos(t * y)
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. cos(t * (Y:A->real) x))
-      #|  \\y:real. cos(t * y)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. cos(t * (X:A->real) x))
-      #|  forall p:A prob_space (X:A->real) (Y:A->real) t.\n     simple_rv p X /\\ simple_rv p Y /\\ indep_rv p X Y\n     ==> simple_char_fn_re p (\\x. X x + Y x) t =\n         simple_char_fn_re p X t * simple_char_fn_re p Y t -\n         simple_char_fn_im p X t * simple_char_fn_im p Y t
-      #|  \\v:real. sin(t * v)
-      #|  \\u:real. cos(t * u)
-      #|  Y:A->real
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. cos(t * (X:A->real) x) * sin(t * (Y:A->real) x)) =\n     simple_expectation p (\\x. cos(t * X x)) *\n     simple_expectation p (\\x. sin(t * Y x))
-      #|  \\v:real. cos(t * v)
-      #|  \\u:real. sin(t * u)
-      #|  Y:A->real
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. sin(t * (X:A->real) x) * cos(t * (Y:A->real) x)) =\n     simple_expectation p (\\x. sin(t * X x)) *\n     simple_expectation p (\\x. cos(t * Y x))
-      #|  \\x:A. cos(t * (X:A->real) x) * sin(t * (Y:A->real) x)
-      #|  \\x:A. sin(t * (X:A->real) x) * cos(t * (Y:A->real) x)
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. sin(t * (X:A->real) x) * cos(t * (Y:A->real) x) +\n              cos(t * X x) * sin(t * Y x)) =\n     simple_expectation p (\\x. sin(t * X x) * cos(t * Y x)) +\n     simple_expectation p (\\x. cos(t * X x) * sin(t * Y x))
-      #|  forall x:A. sin(t * ((X:A->real) x + (Y:A->real) x)) =\n           sin(t * X x) * cos(t * Y x) + cos(t * X x) * sin(t * Y x)
-      #|  simple_rv (p:A prob_space)\n       (\\x:A. cos(t * (X:A->real) x) * sin(t * (Y:A->real) x))
-      #|  simple_rv (p:A prob_space)\n       (\\x:A. sin(t * (X:A->real) x) * cos(t * (Y:A->real) x))
-      #|  \\y:real. sin(t * y)
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. sin(t * (Y:A->real) x))
-      #|  \\y:real. sin(t * y)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. sin(t * (X:A->real) x))
-      #|  \\y:real. cos(t * y)
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. cos(t * (Y:A->real) x))
-      #|  \\y:real. cos(t * y)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. cos(t * (X:A->real) x))
-      #|  forall p:A prob_space (X:A->real) (Y:A->real) t.\n     simple_rv p X /\\ simple_rv p Y /\\ indep_rv p X Y\n     ==> simple_char_fn_im p (\\x. X x + Y x) t =\n         simple_char_fn_re p X t * simple_char_fn_im p Y t +\n         simple_char_fn_im p X t * simple_char_fn_re p Y t
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  forall p:A prob_space (X:A->real).\n     simple_rv p X\n     ==> simple_expectation p X pow 2 <=\n         simple_expectation p (\\x. X x pow 2)
-      #|  t * (X:A->real) y
-      #|  y:A
-      #|  \\x:A. sin(t * (X:A->real) x) pow 2
-      #|  \\x:A. cos(t * (X:A->real) x) pow 2
-      #|  p:A prob_space
-      #|  \\y:real. sin(t * y) pow 2
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. sin(t * (X:A->real) x) pow 2)
-      #|  \\y:real. cos(t * y) pow 2
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. cos(t * (X:A->real) x) pow 2)
-      #|  simple_expectation (p:A prob_space) (\\x:A. cos(t * (X:A->real) x) pow 2) +\n     simple_expectation p (\\x. sin(t * X x) pow 2) =\n     simple_expectation p (\\x:A. &1)
-      #|  \\x:A. sin(t * (X:A->real) x)
-      #|  p:A prob_space
-      #|  \\x:A. cos(t * (X:A->real) x)
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space) (\\x:A. cos(t * (X:A->real) x) pow 2) +\n     simple_expectation p (\\x. sin(t * X x) pow 2)
-      #|  \\y:real. sin(t * y)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. sin(t * (X:A->real) x))
-      #|  \\y:real. cos(t * y)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. cos(t * (X:A->real) x))
-      #|  forall p:A prob_space (X:A->real) t.\n     simple_rv p X\n     ==> simple_char_fn_re p X t pow 2 + simple_char_fn_im p X t pow 2 <= &1
-      #|  forall r1:real s1:real r2:real s2:real.\n     (r1 * r2 - s1 * s2) pow 2 + (r1 * s2 + s1 * r2) pow 2 =\n     (r1 pow 2 + s1 pow 2) * (r2 pow 2 + s2 pow 2)
-      #|  k < n ==> k < SUC n
-      #|  i <= n ==> i <= SUC n
-      #|  i <= n ==> i <= SUC n
-      #|  simple_char_fn_re (p:A prob_space)\n        (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x)) t pow 2 +\n      simple_char_fn_im p (\\x. sum(0..n) (\\i. X i x)) t pow 2 =\n      (simple_char_fn_re p (X 0) t pow 2 +\n       simple_char_fn_im p (X 0) t pow 2) pow (SUC n)
-      #|  simple_char_fn_re (p:A prob_space) ((X:num->A->real) (SUC n)) t =\n      simple_char_fn_re p (X 0) t /\\\n      simple_char_fn_im p (X (SUC n)) t = simple_char_fn_im p (X 0) t
-      #|  t:real
-      #|  (X:num->A->real) (SUC n)
-      #|  \\x:A. sum(0..n) (\\i. (X:num->A->real) i x)
-      #|  p:A prob_space
-      #|  t:real
-      #|  (X:num->A->real) (SUC n)
-      #|  \\x:A. sum(0..n) (\\i. (X:num->A->real) i x)
-      #|  p:A prob_space
-      #|  n < SUC n
-      #|  indep_rv (p:A prob_space)\n     (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x)) (X (SUC n))
-      #|  simple_rv (p:A prob_space) ((X:num->A->real) (SUC n))
-      #|  i <= n ==> i <= SUC n
-      #|  simple_rv (p:A prob_space)\n     (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x))
-      #|  forall x:A. sum(0..SUC n) (\\i. (X:num->A->real) i x) =\n            sum(0..n) (\\i. X i x) + X (SUC n) x
-      #|  (\\x:A. sum(0..0) (\\i. (X:num->A->real) i x)) = X 0
-      #|  forall p:A prob_space (X:num->A->real) n t.\n     (forall i. i <= n ==> simple_rv p (X i)) /\\\n     (forall i. i <= n ==>\n        simple_char_fn_re p (X i) t = simple_char_fn_re p (X 0) t /\\\n        simple_char_fn_im p (X i) t = simple_char_fn_im p (X 0) t) /\\\n     (forall k. k < n ==> indep_rv p (\\x. sum(0..k) (\\i. X i x)) (X (SUC k)))\n     ==> simple_char_fn_re p (\\x. sum(0..n) (\\i. X i x)) t pow 2 +\n         simple_char_fn_im p (\\x. sum(0..n) (\\i. X i x)) t pow 2 =\n         (simple_char_fn_re p (X 0) t pow 2 +\n          simple_char_fn_im p (X 0) t pow 2) pow (SUC n)
+      #|  (simple_cdf : (Prob_space[A], (A) -> Real, Real) -> Real)((p : Prob_space[A]), (X : (A) -> Real), (x : Real)) == prob(p, {(a : A) | IN(a, prob_carrier(p)) && X(a) <= x})
+      #|  (simple_char_fn_re : (Prob_space[A], (A) -> Real, Real) -> Real)((p : Prob_space[A]), (X : (A) -> Real), (t : Real)) == simple_expectation(p, (x : A) => cos(t * X(x)))
+      #|  (simple_char_fn_im : (Prob_space[A], (A) -> Real, Real) -> Real)((p : Prob_space[A]), (X : (A) -> Real), (t : Real)) == simple_expectation(p, (x : A) => sin(t * X(x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, simple_char_fn_re(p, X, real_of_num(0)) == real_of_num(1) && simple_char_fn_im(p, X, real_of_num(0)) == real_of_num(0)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 x : Real, simple_rv(p, X) \226\134\146 real_of_num(0) <= simple_cdf(p, X, x) && simple_cdf(p, X, x) <= real_of_num(1)
+      #|  (z : A)
+      #|  (X : (A) -> Real)((z : A))
+      #|  (z : A)
+      #|  (y : Real)
+      #|  IMAGE((f : (Real) -> Real), {(X : (A) -> Real)((x : A)) | IN(x, prob_carrier((p : Prob_space[A])))})
+      #|  {(X : (A) -> Real)((x : A)) | IN(x, prob_carrier((p : Prob_space[A])))}
+      #|  (v : Real)
+      #|  (s : (A) -> Bool)
+      #|  IN((z : A), (s : (A) -> Bool))
+      #|  (v : Real)
+      #|  (s : (A) -> Bool)
+      #|  (z : A)
+      #|  (X : (A) -> Real)((z : A))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) == X((z : A))}
+      #|  (z : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (Real) -> Real)((X : (A) -> Real)(x)) <= (a : Real)} == UNIONS(IMAGE((v : Real) => {(x : A) | IN(x, prob_carrier(p)) && X(x) == v}, {(v : Real) | (\226\136\131 y : A, IN(y, prob_carrier(p)) && X(y) == v) && f(v) <= a}))
+      #|  (a : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 f : (Real) -> Real, simple_rv(p, X) \226\134\146 simple_rv(p, (x : A) => f(X(x)))
+      #|  (c : Real) == simple_expectation((p : Prob_space[A]), (x : A) => c)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, \226\136\128 c : Real, simple_rv(p, Y) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 Y(x) <= c) \226\134\146 simple_expectation(p, Y) <= c
+      #|  (c : Real) == simple_expectation((p : Prob_space[A]), (x : A) => c)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, \226\136\128 c : Real, simple_rv(p, Y) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 c <= Y(x)) \226\134\146 c <= simple_expectation(p, Y)
+      #|  (t : Real) * (X : (A) -> Real)((y : A))
+      #|  (y : A)
+      #|  (y : Real) => cos((t : Real) * y)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  -real_of_num(1)
+      #|  (x : A) => cos((t : Real) * (X : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  -real_of_num(1) <= simple_expectation((p : Prob_space[A]), (x : A) => cos((t : Real) * (X : (A) -> Real)(x)))
+      #|  (t : Real) * (X : (A) -> Real)((y : A))
+      #|  (y : A)
+      #|  (y : Real) => cos((t : Real) * y)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  real_of_num(1)
+      #|  (x : A) => cos((t : Real) * (X : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => cos((t : Real) * (X : (A) -> Real)(x))) <= real_of_num(1)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 t : Real, simple_rv(p, X) \226\134\146 abs(simple_char_fn_re(p, X, t)) <= real_of_num(1)
+      #|  (t : Real) * (X : (A) -> Real)((y : A))
+      #|  (y : A)
+      #|  (y : Real) => sin((t : Real) * y)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  -real_of_num(1)
+      #|  (x : A) => sin((t : Real) * (X : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  -real_of_num(1) <= simple_expectation((p : Prob_space[A]), (x : A) => sin((t : Real) * (X : (A) -> Real)(x)))
+      #|  (t : Real) * (X : (A) -> Real)((y : A))
+      #|  (y : A)
+      #|  (y : Real) => sin((t : Real) * y)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  real_of_num(1)
+      #|  (x : A) => sin((t : Real) * (X : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => sin((t : Real) * (X : (A) -> Real)(x))) <= real_of_num(1)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 t : Real, simple_rv(p, X) \226\134\146 abs(simple_char_fn_im(p, X, t)) <= real_of_num(1)
+      #|  \226\136\128 x : Real, pow(sin(x), 2) <= pow(x, 2)
+      #|  real_of_num(2) * pow((x : Real) / real_of_num(2), 2)
+      #|  real_of_num(1) - (real_of_num(1) - real_of_num(2) * (s : Real)) == real_of_num(2) * s
+      #|  real_of_num(2) * ((x : Real) / real_of_num(2)) == x
+      #|  (x : Real) / real_of_num(2)
+      #|  cos((x : Real)) == real_of_num(1) - real_of_num(2) * pow(sin(x / real_of_num(2)), 2)
+      #|  \226\136\128 x : Real, real_of_num(1) - cos(x) <= pow(x, 2) / real_of_num(2)
+      #|  !((u : Real) == (X : (A) -> Real)((x : A)))
+      #|  (X : (A) -> Real)((x : A)) == (u : Real)
+      #|  (u : Real)
+      #|  sum(IMAGE((X : (A) -> Real), prob_carrier((p : Prob_space[A]))), (u : Real) => if u == X((x : A)) { (f : (Real) -> Real)(X(x)) } else { real_of_num(0) })
+      #|  \226\136\128 u : Real, (f : (Real) -> Real)(u) * indicator_fn({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(z) == u}, (x : A)) == (if X(x) == u { f(u) } else { real_of_num(0) })
+      #|  (x : A)
+      #|  IN((X : (A) -> Real)((x : A)), IMAGE(X, prob_carrier((p : Prob_space[A]))))
+      #|  FINITE(IMAGE((X : (A) -> Real), prob_carrier((p : Prob_space[A]))))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 f : (Real) -> Real, \226\136\128 x : A, simple_rv(p, X) && IN(x, prob_carrier(p)) \226\134\146 f(X(x)) == sum(IMAGE(X, prob_carrier(p)), (u : Real) => f(u) * indicator_fn({(z : A) | IN(z, prob_carrier(p)) && X(z) == u}, x))
+      #|  (f : (Real) -> Real)((u : Real))
+      #|  indicator_fn({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(z) == (u : Real)})
+      #|  (p : Prob_space[A])
+      #|  IN({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(z) == (u : Real)}, prob_events(p))
+      #|  (u : Real)
+      #|  (u : Real)
+      #|  (S : (Real) -> Bool)
+      #|  (u : Real) => (x : A) => (f : (Real) -> Real)(u) * indicator_fn({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(z) == u}, x)
+      #|  (p : Prob_space[A])
+      #|  (x : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (f : (Real) -> Real)((X : (A) -> Real)(x))) == simple_expectation(p, (x : A) => sum((S : (Real) -> Bool), (u : Real) => f(u) * indicator_fn({(z : A) | IN(z, prob_carrier(p)) && X(z) == u}, x)))
+      #|  FINITE((S : (Real) -> Bool))
+      #|  (S : (Real) -> Bool) == IMAGE((X : (A) -> Real), prob_carrier((p : Prob_space[A])))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 f : (Real) -> Real, simple_rv(p, X) \226\134\146 simple_expectation(p, (x : A) => f(X(x))) == sum(IMAGE(X, prob_carrier(p)), (u : Real) => f(u) * prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) == u}))
+      #|  (u : Real) => real_of_num(1)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, simple_rv(p, X) \226\134\146 sum(IMAGE(X, prob_carrier(p)), (v : Real) => prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) == v})) == real_of_num(1)
+      #|  (v : Real) => v
+      #|  (P : (Real) -> Real)
+      #|  (V : (Real) -> Bool)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
+      #|  sum((V : (Real) -> Bool), (v : Real) => (f : (Real) -> Real)(v) * (P : (Real) -> Real)(v)) == sum(V, (v : Real) => P(v) * f(v))
+      #|  sum((V : (Real) -> Bool), (v : Real) => v * (P : (Real) -> Real)(v)) == sum(V, (v : Real) => P(v) * v)
+      #|  \226\136\128 v : Real, IN(v, (V : (Real) -> Bool)) \226\134\146 real_of_num(0) <= (P : (Real) -> Real)(v)
+      #|  sum((V : (Real) -> Bool), (P : (Real) -> Real)) == real_of_num(1)
+      #|  FINITE((V : (Real) -> Bool))
+      #|  simple_expectation((p : Prob_space[A]), (a : A) => (f : (Real) -> Real)((X : (A) -> Real)(a))) == sum((V : (Real) -> Bool), (v : Real) => f(v) * (P : (Real) -> Real)(v))
+      #|  simple_expectation((p : Prob_space[A]), (X : (A) -> Real)) == sum((V : (Real) -> Bool), (v : Real) => v * (P : (Real) -> Real)(v))
+      #|  (P : (Real) -> Real) == ((v : Real) => prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) == v}))
+      #|  (V : (Real) -> Bool) == IMAGE((X : (A) -> Real), prob_carrier((p : Prob_space[A])))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 f : (Real) -> Real, simple_rv(p, X) && real_convex_on(f, UNIV) \226\134\146 f(simple_expectation(p, X)) <= simple_expectation(p, (a : A) => f(X(a)))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (g : (Real) -> Real)((Y : (A) -> Real)(x))) == sum((RY : (Real) -> Bool), (u : Real) => g(u) * prob(p, {(x : A) | IN(x, prob_carrier(p)) && Y(x) == u}))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (f : (Real) -> Real)((X : (A) -> Real)(x))) == sum((RX : (Real) -> Bool), (u : Real) => f(u) * prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) == u}))
+      #|  (d : Real) == prob((p : Prob_space[A]), {(z : A) | IN(z, prob_carrier(p)) && (Y : (A) -> Real)(z) == (v : Real)})
+      #|  (c : Real) == prob((p : Prob_space[A]), {(z : A) | IN(z, prob_carrier(p)) && (X : (A) -> Real)(z) == (u : Real)})
+      #|  (b : Real) == (g : (Real) -> Real)((v : Real))
+      #|  (a : Real) == (f : (Real) -> Real)((u : Real))
+      #|  ((v : Real) => (f : (Real) -> Real)((u : Real)) * ((g : (Real) -> Real)(v) * (prob((p : Prob_space[A]), {(z : A) | IN(z, prob_carrier(p)) && (X : (A) -> Real)(z) == u}) * prob(p, {(z : A) | IN(z, prob_carrier(p)) && (Y : (A) -> Real)(z) == v})))) == ((v : Real) => f(u) * prob(p, {(z : A) | IN(z, prob_carrier(p)) && X(z) == u}) * (g(v) * prob(p, {(z : A) | IN(z, prob_carrier(p)) && Y(z) == v})))
+      #|  \226\136\128 u : Real, sum((RY : (Real) -> Bool), (v : Real) => (f : (Real) -> Real)(u) * ((g : (Real) -> Real)(v) * (prob((p : Prob_space[A]), {(z : A) | IN(z, prob_carrier(p)) && (X : (A) -> Real)(z) == u}) * prob(p, {(z : A) | IN(z, prob_carrier(p)) && (Y : (A) -> Real)(z) == v})))) == f(u) * prob(p, {(z : A) | IN(z, prob_carrier(p)) && X(z) == u}) * sum(RY, (v : Real) => g(v) * prob(p, {(z : A) | IN(z, prob_carrier(p)) && Y(z) == v}))
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  sum((RX : (Real) -> Bool), (u : Real) => sum((RY : (Real) -> Bool), (v : Real) => (f : (Real) -> Real)(u) * ((g : (Real) -> Real)(v) * prob((p : Prob_space[A]), {(z : A) | IN(z, prob_carrier(p)) && (X : (A) -> Real)(z) == u && (Y : (A) -> Real)(z) == v})))) == sum(RX, (u : Real) => sum(RY, (v : Real) => f(u) * (g(v) * (prob(p, {(z : A) | IN(z, prob_carrier(p)) && X(z) == u}) * prob(p, {(z : A) | IN(z, prob_carrier(p)) && Y(z) == v})))))
+      #|  (f : (Real) -> Real)((u : Real)) * (g : (Real) -> Real)((v : Real))
+      #|  indicator_fn({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(z) == (u : Real) && (Y : (A) -> Real)(z) == (v : Real)})
+      #|  (p : Prob_space[A])
+      #|  IN({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(z) == (u : Real) && (Y : (A) -> Real)(z) == (v : Real)}, prob_events(p))
+      #|  (v : Real)
+      #|  (v : Real)
+      #|  (RY : (Real) -> Bool)
+      #|  (v : Real) => (x : A) => (f : (Real) -> Real)((u : Real)) * ((g : (Real) -> Real)(v) * indicator_fn({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(z) == u && (Y : (A) -> Real)(z) == v}, x))
+      #|  (p : Prob_space[A])
+      #|  (u : Real)
+      #|  sum((RX : (Real) -> Bool), (u : Real) => simple_expectation((p : Prob_space[A]), (x : A) => sum((RY : (Real) -> Bool), (v : Real) => (f : (Real) -> Real)(u) * ((g : (Real) -> Real)(v) * indicator_fn({(z : A) | IN(z, prob_carrier(p)) && (X : (A) -> Real)(z) == u && (Y : (A) -> Real)(z) == v}, x))))) == sum(RX, (u : Real) => sum(RY, (v : Real) => f(u) * (g(v) * prob(p, {(z : A) | IN(z, prob_carrier(p)) && X(z) == u && Y(z) == v}))))
+      #|  (v : Real)
+      #|  (RY : (Real) -> Bool)
+      #|  (v : Real) => (x : A) => (f : (Real) -> Real)((u : Real)) * ((g : (Real) -> Real)(v) * indicator_fn({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(z) == u && (Y : (A) -> Real)(z) == v}, x))
+      #|  (p : Prob_space[A])
+      #|  (u : Real)
+      #|  (RX : (Real) -> Bool)
+      #|  (u : Real) => (x : A) => sum((RY : (Real) -> Bool), (v : Real) => (f : (Real) -> Real)(u) * ((g : (Real) -> Real)(v) * indicator_fn({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(z) == u && (Y : (A) -> Real)(z) == v}, x)))
+      #|  (p : Prob_space[A])
+      #|  (b : Real) == indicator_fn({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (Y : (A) -> Real)(z) == (v : Real)}, (x : A))
+      #|  (a : Real) == indicator_fn({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(z) == (u : Real)}, (x : A))
+      #|  {(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(z) == (u : Real) && (Y : (A) -> Real)(z) == (v : Real)} == INTER({(z : A) | IN(z, prob_carrier(p)) && X(z) == u}, {(z : A) | IN(z, prob_carrier(p)) && Y(z) == v})
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (g : (Real) -> Real)((Y : (A) -> Real)((x : A))) == sum((RY : (Real) -> Bool), (v : Real) => g(v) * indicator_fn({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && Y(z) == v}, x))
+      #|  (f : (Real) -> Real)((X : (A) -> Real)((x : A))) == sum((RX : (Real) -> Bool), (u : Real) => f(u) * indicator_fn({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && X(z) == u}, x))
+      #|  (x : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (f : (Real) -> Real)((X : (A) -> Real)(x)) * (g : (Real) -> Real)((Y : (A) -> Real)(x))) == simple_expectation(p, (x : A) => sum((RX : (Real) -> Bool), (u : Real) => sum((RY : (Real) -> Bool), (v : Real) => f(u) * (g(v) * indicator_fn({(z : A) | IN(z, prob_carrier(p)) && X(z) == u && Y(z) == v}, x)))))
+      #|  FINITE((RY : (Real) -> Bool))
+      #|  FINITE((RX : (Real) -> Bool))
+      #|  (RY : (Real) -> Bool) == IMAGE((Y : (A) -> Real), prob_carrier((p : Prob_space[A])))
+      #|  (RX : (Real) -> Bool) == IMAGE((X : (A) -> Real), prob_carrier((p : Prob_space[A])))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, simple_rv(p, X) && simple_rv(p, Y) && indep_rv(p, X, Y) \226\134\146 simple_expectation(p, (x : A) => f(X(x)) * g(Y(x))) == simple_expectation(p, (x : A) => f(X(x))) * simple_expectation(p, (x : A) => g(Y(x)))
+      #|  (v : Real) => sin((t : Real) * v)
+      #|  (u : Real) => sin((t : Real) * u)
+      #|  (Y : (A) -> Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => sin((t : Real) * (X : (A) -> Real)(x)) * sin(t * (Y : (A) -> Real)(x))) == simple_expectation(p, (x : A) => sin(t * X(x))) * simple_expectation(p, (x : A) => sin(t * Y(x)))
+      #|  (v : Real) => cos((t : Real) * v)
+      #|  (u : Real) => cos((t : Real) * u)
+      #|  (Y : (A) -> Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => cos((t : Real) * (X : (A) -> Real)(x)) * cos(t * (Y : (A) -> Real)(x))) == simple_expectation(p, (x : A) => cos(t * X(x))) * simple_expectation(p, (x : A) => cos(t * Y(x)))
+      #|  (x : A) => sin((t : Real) * (X : (A) -> Real)(x)) * sin(t * (Y : (A) -> Real)(x))
+      #|  (x : A) => cos((t : Real) * (X : (A) -> Real)(x)) * cos(t * (Y : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => cos((t : Real) * (X : (A) -> Real)(x)) * cos(t * (Y : (A) -> Real)(x)) - sin(t * X(x)) * sin(t * Y(x))) == simple_expectation(p, (x : A) => cos(t * X(x)) * cos(t * Y(x))) - simple_expectation(p, (x : A) => sin(t * X(x)) * sin(t * Y(x)))
+      #|  \226\136\128 x : A, cos((t : Real) * ((X : (A) -> Real)(x) + (Y : (A) -> Real)(x))) == cos(t * X(x)) * cos(t * Y(x)) - sin(t * X(x)) * sin(t * Y(x))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => sin((t : Real) * (X : (A) -> Real)(x)) * sin(t * (Y : (A) -> Real)(x)))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => cos((t : Real) * (X : (A) -> Real)(x)) * cos(t * (Y : (A) -> Real)(x)))
+      #|  (y : Real) => sin((t : Real) * y)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => sin((t : Real) * (Y : (A) -> Real)(x)))
+      #|  (y : Real) => sin((t : Real) * y)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => sin((t : Real) * (X : (A) -> Real)(x)))
+      #|  (y : Real) => cos((t : Real) * y)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => cos((t : Real) * (Y : (A) -> Real)(x)))
+      #|  (y : Real) => cos((t : Real) * y)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => cos((t : Real) * (X : (A) -> Real)(x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, \226\136\128 t : Real, simple_rv(p, X) && simple_rv(p, Y) && indep_rv(p, X, Y) \226\134\146 simple_char_fn_re(p, (x : A) => X(x) + Y(x), t) == simple_char_fn_re(p, X, t) * simple_char_fn_re(p, Y, t) - simple_char_fn_im(p, X, t) * simple_char_fn_im(p, Y, t)
+      #|  (v : Real) => sin((t : Real) * v)
+      #|  (u : Real) => cos((t : Real) * u)
+      #|  (Y : (A) -> Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => cos((t : Real) * (X : (A) -> Real)(x)) * sin(t * (Y : (A) -> Real)(x))) == simple_expectation(p, (x : A) => cos(t * X(x))) * simple_expectation(p, (x : A) => sin(t * Y(x)))
+      #|  (v : Real) => cos((t : Real) * v)
+      #|  (u : Real) => sin((t : Real) * u)
+      #|  (Y : (A) -> Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => sin((t : Real) * (X : (A) -> Real)(x)) * cos(t * (Y : (A) -> Real)(x))) == simple_expectation(p, (x : A) => sin(t * X(x))) * simple_expectation(p, (x : A) => cos(t * Y(x)))
+      #|  (x : A) => cos((t : Real) * (X : (A) -> Real)(x)) * sin(t * (Y : (A) -> Real)(x))
+      #|  (x : A) => sin((t : Real) * (X : (A) -> Real)(x)) * cos(t * (Y : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => sin((t : Real) * (X : (A) -> Real)(x)) * cos(t * (Y : (A) -> Real)(x)) + cos(t * X(x)) * sin(t * Y(x))) == simple_expectation(p, (x : A) => sin(t * X(x)) * cos(t * Y(x))) + simple_expectation(p, (x : A) => cos(t * X(x)) * sin(t * Y(x)))
+      #|  \226\136\128 x : A, sin((t : Real) * ((X : (A) -> Real)(x) + (Y : (A) -> Real)(x))) == sin(t * X(x)) * cos(t * Y(x)) + cos(t * X(x)) * sin(t * Y(x))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => cos((t : Real) * (X : (A) -> Real)(x)) * sin(t * (Y : (A) -> Real)(x)))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => sin((t : Real) * (X : (A) -> Real)(x)) * cos(t * (Y : (A) -> Real)(x)))
+      #|  (y : Real) => sin((t : Real) * y)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => sin((t : Real) * (Y : (A) -> Real)(x)))
+      #|  (y : Real) => sin((t : Real) * y)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => sin((t : Real) * (X : (A) -> Real)(x)))
+      #|  (y : Real) => cos((t : Real) * y)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => cos((t : Real) * (Y : (A) -> Real)(x)))
+      #|  (y : Real) => cos((t : Real) * y)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => cos((t : Real) * (X : (A) -> Real)(x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, \226\136\128 t : Real, simple_rv(p, X) && simple_rv(p, Y) && indep_rv(p, X, Y) \226\134\146 simple_char_fn_im(p, (x : A) => X(x) + Y(x), t) == simple_char_fn_re(p, X, t) * simple_char_fn_im(p, Y, t) + simple_char_fn_im(p, X, t) * simple_char_fn_re(p, Y, t)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, simple_rv(p, X) \226\134\146 pow(simple_expectation(p, X), 2) <= simple_expectation(p, (x : A) => pow(X(x), 2))
+      #|  (t : Real) * (X : (A) -> Real)((y : A))
+      #|  (y : A)
+      #|  (x : A) => pow(sin((t : Real) * (X : (A) -> Real)(x)), 2)
+      #|  (x : A) => pow(cos((t : Real) * (X : (A) -> Real)(x)), 2)
+      #|  (p : Prob_space[A])
+      #|  (y : Real) => pow(sin((t : Real) * y), 2)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => pow(sin((t : Real) * (X : (A) -> Real)(x)), 2))
+      #|  (y : Real) => pow(cos((t : Real) * y), 2)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => pow(cos((t : Real) * (X : (A) -> Real)(x)), 2))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => pow(cos((t : Real) * (X : (A) -> Real)(x)), 2)) + simple_expectation(p, (x : A) => pow(sin(t * X(x)), 2)) == simple_expectation(p, (x : A) => real_of_num(1))
+      #|  (x : A) => sin((t : Real) * (X : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  (x : A) => cos((t : Real) * (X : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => pow(cos((t : Real) * (X : (A) -> Real)(x)), 2)) + simple_expectation(p, (x : A) => pow(sin(t * X(x)), 2))
+      #|  (y : Real) => sin((t : Real) * y)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => sin((t : Real) * (X : (A) -> Real)(x)))
+      #|  (y : Real) => cos((t : Real) * y)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => cos((t : Real) * (X : (A) -> Real)(x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 t : Real, simple_rv(p, X) \226\134\146 pow(simple_char_fn_re(p, X, t), 2) + pow(simple_char_fn_im(p, X, t), 2) <= real_of_num(1)
+      #|  \226\136\128 r1 : Real, \226\136\128 s1 : Real, \226\136\128 r2 : Real, \226\136\128 s2 : Real, pow(r1 * r2 - s1 * s2, 2) + pow(r1 * s2 + s1 * r2, 2) == (pow(r1, 2) + pow(s1, 2)) * (pow(r2, 2) + pow(s2, 2))
+      #|  (k : Num) < (n : Num) \226\134\146 k < SUC(n)
+      #|  (i : Num) <= (n : Num) \226\134\146 i <= SUC(n)
+      #|  (i : Num) <= (n : Num) \226\134\146 i <= SUC(n)
+      #|  pow(simple_char_fn_re((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)), (t : Real)), 2) + pow(simple_char_fn_im(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), t), 2) == pow(pow(simple_char_fn_re(p, X(0), t), 2) + pow(simple_char_fn_im(p, X(0), t), 2), SUC(n))
+      #|  simple_char_fn_re((p : Prob_space[A]), (X : (Num, A) -> Real)(SUC((n : Num))), (t : Real)) == simple_char_fn_re(p, X(0), t) && simple_char_fn_im(p, X(SUC(n)), t) == simple_char_fn_im(p, X(0), t)
+      #|  (t : Real)
+      #|  (X : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (x : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x))
+      #|  (p : Prob_space[A])
+      #|  (t : Real)
+      #|  (X : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (x : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x))
+      #|  (p : Prob_space[A])
+      #|  (n : Num) < SUC(n)
+      #|  indep_rv((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)), X(SUC(n)))
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(SUC((n : Num))))
+      #|  (i : Num) <= (n : Num) \226\134\146 i <= SUC(n)
+      #|  simple_rv((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)))
+      #|  \226\136\128 x : A, sum(op_dot_dot(0, SUC((n : Num))), (i : Num) => (X : (Num, A) -> Real)(i, x)) == sum(op_dot_dot(0, n), (i : Num) => X(i, x)) + X(SUC(n), x)
+      #|  ((x : A) => sum(op_dot_dot(0, 0), (i : Num) => (X : (Num, A) -> Real)(i, x))) == X(0)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 t : Real, (\226\136\128 i : Num, i <= n \226\134\146 simple_rv(p, X(i))) && (\226\136\128 i : Num, i <= n \226\134\146 simple_char_fn_re(p, X(i), t) == simple_char_fn_re(p, X(0), t) && simple_char_fn_im(p, X(i), t) == simple_char_fn_im(p, X(0), t)) && (\226\136\128 k : Num, k < n \226\134\146 indep_rv(p, (x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)), X(SUC(k)))) \226\134\146 pow(simple_char_fn_re(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), t), 2) + pow(simple_char_fn_im(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), t), 2) == pow(pow(simple_char_fn_re(p, X(0), t), 2) + pow(simple_char_fn_im(p, X(0), t), 2), SUC(n))
       #|  1
-      #|  Cx x
+      #|  Cx((x : Real))
       #|  1
-      #|  forall x:real. abs(cos(x) - (&1 - x pow 2 / &2)) <= x pow 4 / &6
-      #|  t pow 4 / &6
-      #|  \\x:A. (X:A->real) x pow 4
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. t pow 4 * (X:A->real) x pow 4 / &6) =\n     simple_expectation p (\\x. (t pow 4 / &6) * X x pow 4)
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. t pow 4 * (X:A->real) x pow 4 / &6) =\n     t pow 4 * simple_expectation p (\\x. X x pow 4) / &6
-      #|  t * (X:A->real) a
-      #|  a:A
-      #|  \\y:real. t pow 4 * y pow 4 / &6
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n    (\\x:A. t pow 4 * (X:A->real) x pow 4 / &6)
-      #|  simple_expectation (p:A prob_space)\n    (\\x. abs(cos(t * (X:A->real) x) -\n             (&1 - t pow 2 * X x pow 2 / &2)))
-      #|  simple_expectation (p:A prob_space) (\\x:A. cos(t * (X:A->real) x)) -\n     simple_expectation p (\\x. &1 - t pow 2 * X x pow 2 / &2) =\n     simple_expectation p\n       (\\x. cos(t * X x) - (&1 - t pow 2 * X x pow 2 / &2))
-      #|  t pow 2 / &2
-      #|  \\x:A. (X:A->real) x pow 2
-      #|  p:A prob_space
-      #|  \\x:A. (t pow 2 / &2) * (X:A->real) x pow 2
-      #|  \\x:A. &1
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n        (\\x:A. &1 - t pow 2 * (X:A->real) x pow 2 / &2) =\n      simple_expectation p (\\x. &1 - (t pow 2 / &2) * X x pow 2)
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. &1 - t pow 2 * (X:A->real) x pow 2 / &2) =\n     &1 - t pow 2 * simple_expectation p (\\x. X x pow 2) / &2
-      #|  \\y:real. &1 - t pow 2 * y pow 2 / &2
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space)\n      (\\x:A. &1 - t pow 2 * (X:A->real) x pow 2 / &2)
-      #|  \\y:real. y pow 4
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. (X:A->real) x pow 4)
-      #|  \\y:real. y pow 2
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. (X:A->real) x pow 2)
-      #|  \\y:real. cos(t * y)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. cos(t * (X:A->real) x))
-      #|  forall p:A prob_space (X:A->real) t.\n    simple_rv p X\n    ==> abs(simple_char_fn_re p X t -\n            (&1 - t pow 2 * simple_expectation p (\\x. X x pow 2) / &2))\n        <= t pow 4 * simple_expectation p (\\x. X x pow 4) / &6
-      #|  log(inv(x:real)) = --log(x)
-      #|  &1 + (y - &1) = y
-      #|  inv(x:real) - &1
-      #|  log(inv(x:real)) <= inv(x) - &1
-      #|  forall x. &0 < x ==> &1 - inv(x) <= log(x)
-      #|  ~(&(SUC n) = &0)
-      #|  &(SUC n) * --(c / &(SUC n)) = --c
-      #|  --(c / &(SUC n))
-      #|  exp(--(c / &(SUC n))) pow (SUC n)
-      #|  forall c n. &0 <= c /\\ c < &(SUC n)\n         ==> (&1 - c / &(SUC n)) pow (SUC n) <= exp(--c)
-      #|  ~(&(SUC n) = &0) /\\ ~(&(SUC n) - c = &0)
-      #|  &(SUC n) * --(c / (&(SUC n) - c))
-      #|  ~(&(SUC n) = &0) /\\ ~(&(SUC n) - c = &0)
-      #|  a = b ==> b <= l ==> a <= l
-      #|  &1 - c / &(SUC n)
-      #|  --(c / (&(SUC n) - c)) <= log(&1 - c / &(SUC n))
-      #|  (&1 - c / &(SUC n)) pow (SUC n) =\n     exp(&(SUC n) * log(&1 - c / &(SUC n)))
-      #|  &0 < &(SUC n) - c
-      #|  &0 < &1 - c / &(SUC n)
-      #|  &0 < &(SUC n)
-      #|  forall c n. &0 <= c /\\ c < &(SUC n)\n         ==> exp(--(c * &(SUC n) / (&(SUC n) - c)))\n             <= (&1 - c / &(SUC n)) pow (SUC n)
-      #|  --(y:real)
-      #|  forall y. &1 - exp(--y) <= y
-      #|  exp(--a) - exp(--a) * exp(--y) =\n                exp(--a) * (&1 - exp(--y))
-      #|  forall a y. exp(--a) - exp(--(a + y)) <= exp(--a) * y
-      #|  c pow 2 / (&(SUC n) - c)
-      #|  c:real
-      #|  ~(&(SUC n) - c = &0)
-      #|  c * &(SUC n) / (&(SUC n) - c) = c + c pow 2 / (&(SUC n) - c)
-      #|  a <= b ==> c - b <= c - a
-      #|  exp(--c) - exp(--(c * &(SUC n) / (&(SUC n) - c)))
-      #|  &0 < &(SUC n) - c
-      #|  forall c n. &0 < c /\\ c < &(SUC n)\n         ==> exp(--c) - (&1 - c / &(SUC n)) pow (SUC n)\n             <= exp(--c) * c pow 2 / (&(SUC n) - c)
-      #|  &2 * (e * (&(SUC n) - c)) = e * (&2 * (&(SUC n) - c))
-      #|  &(SUC n) * e = e * &(SUC n)
-      #|  ~(e = &0)
-      #|  (&2 * exp(--c) * c pow 2 / e) * e =\n                 &2 * (exp(--c) * c pow 2)
-      #|  (&2 * exp(--c) * c pow 2 / e) * e < &(SUC n) * e
-      #|  &M
-      #|  &2 * exp(--c) * c pow 2 / e < &(SUC n)
-      #|  e * &(SUC n)
-      #|  &0 < &2
-      #|  exp(--c) * c pow 2 / (&(SUC n) - c) =\n                (exp(--c) * c pow 2) / (&(SUC n) - c)
-      #|  exp(--c) * c pow 2 / (&(SUC n) - c)
-      #|  abs((&1 - c / &(SUC n)) pow (SUC n) - exp(--c)) =\n                exp(--c) - (&1 - c / &(SUC n)) pow (SUC n)
-      #|  (&1 - c / &(SUC n)) pow (SUC n) <= exp(--c)
-      #|  &0 < &(SUC n) - c
-      #|  &K
-      #|  &2 * c < &(SUC n)
-      #|  &K
-      #|  c < &(SUC n)
-      #|  n:num
-      #|  M + K:num
-      #|  M:num
-      #|  &0 < &1
-      #|  &2 * exp(--c) * c pow 2 / e
-      #|  K:num
-      #|  &0 < &1
-      #|  &2 * c
-      #|  e:real
-      #|  forall c. &0 < c ==>\n   ((\\n. (&1 - c / &(SUC n)) pow (SUC n)) ---> exp(--c)) sequentially
-      #|  &n * abs(x - y) + abs(x - y)
-      #|  abs(x - y) * &1
-      #|  abs(x - y) * abs(y pow n) <= abs(x - y)
-      #|  &1 * (&n * abs(x - y))
-      #|  abs(x) * (&n * abs(x - y))
-      #|  abs(x) * abs(x pow n - y pow n) <= &n * abs(x - y)
-      #|  a - b = c + d ==> abs(a - b) <= abs c + abs d
-      #|  abs(x * (x pow n - y pow n)) +\n              abs((x - y) * y pow n)
-      #|  abs(y pow n) <= &1
-      #|  abs(x pow n - y pow n) <= &n * abs(x - y)
-      #|  forall n x y. abs(x) <= &1 /\\ abs(y) <= &1\n           ==> abs(x pow n - y pow n) <= &n * abs(x - y)
-      #|  abs((&1 - c / &(SUC n)) pow (SUC n) - exp(--c)) < e / &2
-      #|  &(SUC n) * abs((h:num->real) n) / &(SUC n) = abs(h n)
-      #|  (&1 - (c + (h:num->real) n) / &(SUC n)) -\n                 (&1 - c / &(SUC n)) = --(h n / &(SUC n))
-      #|  &(SUC n) * abs((&1 - (c + (h:num->real) n) / &(SUC n)) -\n               (&1 - c / &(SUC n)))
-      #|  &0 <= x ==> &1 - x <= &1
-      #|  x <= &2 ==> -- &1 <= &1 - x
-      #|  abs(&1 - c / &(SUC n)) <= &1
-      #|  &0 <= x ==> &1 - x <= &1
-      #|  x <= &2 ==> -- &1 <= &1 - x
-      #|  abs(&1 - (c + (h:num->real) n) / &(SUC n)) <= &1
-      #|  abs((h:num->real) n)
-      #|  abs((&1 - (c + (h:num->real) n) / &(SUC n)) pow (SUC n) -\n         (&1 - c / &(SUC n)) pow (SUC n)) < e / &2
-      #|  ~(&(SUC n) = &0)
-      #|  &0 < &(SUC n)
-      #|  &N4
-      #|  &2 * c < &(SUC n)
-      #|  abs((h:num->real) n - &0) < c
-      #|  abs((h:num->real) n) < c
-      #|  abs((h:num->real) n - &0) < e / &2
-      #|  abs((h:num->real) n) < e / &2
-      #|  n:num
-      #|  N1 + N2 + N3 + N4:num
-      #|  ((h:num->real) ---> &0) sequentially
-      #|  ?N4:num. &2 * c < &N4
-      #|  c:real
-      #|  ((h:num->real) ---> &0) sequentially
-      #|  ?N3:num. forall n. N3 <= n ==> abs((h:num->real) n - &0) < c
-      #|  e / &2
-      #|  ((h:num->real) ---> &0) sequentially
-      #|  ?N2:num. forall n. N2 <= n ==> abs((h:num->real) n - &0) < e / &2
-      #|  N1:num
-      #|  e / &2
-      #|  ((\\n. (&1 - c / &(SUC n)) pow (SUC n)) ---> exp(--c)) sequentially
-      #|  e:real
-      #|  forall c h. &0 < c /\\ ((h:num->real) ---> &0) sequentially\n         ==> ((\\n. (&1 - (c + h n) / &(SUC n)) pow (SUC n)) ---> exp(--c))\n             sequentially
-      #|  ~(&(SUC n) = &0)
-      #|  x:real = y ==> x <= y
-      #|  4 = 2 * 2
-      #|  &(SUC n) * ((t / sqrt(&(SUC n))) pow 4 *\n     simple_expectation (p:A prob_space) (\\x. (X:A->real) x pow 4) / &6)
-      #|  ~(&(SUC n) = &0)
-      #|  (t / sqrt (&(SUC n))) pow 2 * sigma_sq / &2 = c / &(SUC n)
-      #|  &(SUC n) * (&1 - simple_char_fn_re (p:A prob_space) (X:A->real)\n       (t / sqrt(&(SUC n)))) - c =\n      --(&(SUC n) * (simple_char_fn_re p X (t / sqrt(&(SUC n))) -\n        (&1 - (t / sqrt(&(SUC n))) pow 2 * sigma_sq / &2)))
-      #|  t / sqrt(&(SUC n))
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  ~(&(SUC n) = &0)
-      #|  (t / sqrt(&(SUC n))) pow 2 * sigma_sq / &2 = c / &(SUC n)
-      #|  &0 < &(SUC n)
-      #|  ~(&(SUC n) = &0)
-      #|  n:num
-      #|  \\n:num. t pow 4 * m4 / &6 * inv(&n + &1)
-      #|  ~(&(SUC n) = &0)
-      #|  ~(&(SUC n) = &0)
-      #|  n:num
-      #|  \\n. (&1 - (c + (h:num->real) n) / &(SUC n)) pow (SUC n)
-      #|  h = \\n:num. &(SUC n) *\n    (&1 - simple_char_fn_re (p:A prob_space) (X:A->real) (t / sqrt(&(SUC n)))) - c
-      #|  &0 < c
-      #|  c = t pow 2 * sigma_sq / &2
-      #|  t = &0
-      #|  m4 = simple_expectation (p:A prob_space)\n    (\\x. (X:A->real) x pow 4)
-      #|  sigma_sq = simple_expectation (p:A prob_space)\n    (\\x. (X:A->real) x pow 2)
-      #|  forall p:A prob_space (X:A->real) t.\n    simple_rv p X /\\\n    simple_expectation p X = &0 /\\\n    &0 < simple_expectation p (\\x. X x pow 2)\n    ==> ((\\n. simple_char_fn_re p X (t / sqrt(&(SUC n))) pow (SUC n))\n         ---> exp(--(t pow 2 * simple_expectation p (\\x. X x pow 2) / &2)))\n        sequentially
-      #|  forall R S r s P:real. R * r - S * s - r * P = r * (R - P) - S * s
-      #|  &1 * (&(SUC n) * abs s) + &1 * abs s
-      #|  abs(r * (R - r pow (SUC n))) + abs(S * s)
-      #|  forall R S r s:real n.\n     abs r <= &1 /\\ abs S <= &1 /\\\n     abs(R - r pow (SUC n)) <= &(SUC n) * abs s\n     ==> abs(R * r - S * s - r * r pow (SUC n))\n         <= &(SUC(SUC n)) * abs s
-      #|  simple_char_fn_re (p:A prob_space) ((X:num->A->real) (SUC n)) t =\n      simple_char_fn_re p (X 0) t /\\\n      simple_char_fn_im p (X (SUC n)) t = simple_char_fn_im p (X 0) t
-      #|  t:real
-      #|  (X:num->A->real) (SUC n)
-      #|  \\x:A. sum(0..n) (\\i. (X:num->A->real) i x)
-      #|  p:A prob_space
-      #|  indep_rv (p:A prob_space)\n     (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x)) (X (SUC n))
-      #|  simple_rv (p:A prob_space) ((X:num->A->real) (SUC n))
-      #|  simple_rv (p:A prob_space)\n     (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x))
-      #|  x:A
-      #|  (\\x:A. sum(0..SUC n) (\\i. (X:num->A->real) i x)) =\n                 (\\x. sum(0..n) (\\i. X i x) + X (SUC n) x)
-      #|  (\\x:A. sum(0..0) (\\i. (X:num->A->real) i x)) = X 0
-      #|  forall p:A prob_space (X:num->A->real) n t.\n     (forall i. i <= n ==> simple_rv p (X i)) /\\\n     (forall i. i <= n ==>\n        simple_char_fn_re p (X i) t = simple_char_fn_re p (X 0) t /\\\n        simple_char_fn_im p (X i) t = simple_char_fn_im p (X 0) t) /\\\n     (forall k. k < n ==> indep_rv p (\\x. sum(0..k) (\\i. X i x)) (X (SUC k)))\n     ==> abs(simple_char_fn_re p (\\x. sum(0..n) (\\i. X i x)) t -\n             simple_char_fn_re p (X 0) t pow (SUC n))\n         <= &(SUC n) * abs(simple_char_fn_im p (X 0) t)
-      #|  Cx x
+      #|  \226\136\128 x : Real, abs(cos(x) - (real_of_num(1) - pow(x, 2) / real_of_num(2))) <= pow(x, 4) / real_of_num(6)
+      #|  pow((t : Real), 4) / real_of_num(6)
+      #|  (x : A) => pow((X : (A) -> Real)(x), 4)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => pow((t : Real), 4) * (pow((X : (A) -> Real)(x), 4) / real_of_num(6))) == simple_expectation(p, (x : A) => pow(t, 4) / real_of_num(6) * pow(X(x), 4))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => pow((t : Real), 4) * (pow((X : (A) -> Real)(x), 4) / real_of_num(6))) == pow(t, 4) * (simple_expectation(p, (x : A) => pow(X(x), 4)) / real_of_num(6))
+      #|  (t : Real) * (X : (A) -> Real)((a : A))
+      #|  (a : A)
+      #|  (y : Real) => pow((t : Real), 4) * (pow(y, 4) / real_of_num(6))
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => pow((t : Real), 4) * (pow((X : (A) -> Real)(x), 4) / real_of_num(6)))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => abs(cos((t : Real) * (X : (A) -> Real)(x)) - (real_of_num(1) - pow(t, 2) * (pow(X(x), 2) / real_of_num(2)))))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => cos((t : Real) * (X : (A) -> Real)(x))) - simple_expectation(p, (x : A) => real_of_num(1) - pow(t, 2) * (pow(X(x), 2) / real_of_num(2))) == simple_expectation(p, (x : A) => cos(t * X(x)) - (real_of_num(1) - pow(t, 2) * (pow(X(x), 2) / real_of_num(2))))
+      #|  pow((t : Real), 2) / real_of_num(2)
+      #|  (x : A) => pow((X : (A) -> Real)(x), 2)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => pow((t : Real), 2) / real_of_num(2) * pow((X : (A) -> Real)(x), 2)
+      #|  (x : A) => real_of_num(1)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => real_of_num(1) - pow((t : Real), 2) * (pow((X : (A) -> Real)(x), 2) / real_of_num(2))) == simple_expectation(p, (x : A) => real_of_num(1) - pow(t, 2) / real_of_num(2) * pow(X(x), 2))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => real_of_num(1) - pow((t : Real), 2) * (pow((X : (A) -> Real)(x), 2) / real_of_num(2))) == real_of_num(1) - pow(t, 2) * (simple_expectation(p, (x : A) => pow(X(x), 2)) / real_of_num(2))
+      #|  (y : Real) => real_of_num(1) - pow((t : Real), 2) * (pow(y, 2) / real_of_num(2))
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => real_of_num(1) - pow((t : Real), 2) * (pow((X : (A) -> Real)(x), 2) / real_of_num(2)))
+      #|  (y : Real) => pow(y, 4)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => pow((X : (A) -> Real)(x), 4))
+      #|  (y : Real) => pow(y, 2)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => pow((X : (A) -> Real)(x), 2))
+      #|  (y : Real) => cos((t : Real) * y)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => cos((t : Real) * (X : (A) -> Real)(x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 t : Real, simple_rv(p, X) \226\134\146 abs(simple_char_fn_re(p, X, t) - (real_of_num(1) - pow(t, 2) * (simple_expectation(p, (x : A) => pow(X(x), 2)) / real_of_num(2)))) <= pow(t, 4) * (simple_expectation(p, (x : A) => pow(X(x), 4)) / real_of_num(6))
+      #|  log(inv((x : Real))) == -log(x)
+      #|  real_of_num(1) + ((y : Real) - real_of_num(1)) == y
+      #|  inv((x : Real)) - real_of_num(1)
+      #|  log(inv((x : Real))) <= inv(x) - real_of_num(1)
+      #|  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 real_of_num(1) - inv(x) <= log(x)
+      #|  !(real_of_num(SUC((n : Num))) == real_of_num(0))
+      #|  real_of_num(SUC((n : Num))) * -((c : Real) / real_of_num(SUC(n))) == -c
+      #|  -((c : Real) / real_of_num(SUC((n : Num))))
+      #|  pow(exp(-((c : Real) / real_of_num(SUC((n : Num))))), SUC(n))
+      #|  \226\136\128 c : Real, \226\136\128 n : Num, real_of_num(0) <= c && c < real_of_num(SUC(n)) \226\134\146 pow(real_of_num(1) - c / real_of_num(SUC(n)), SUC(n)) <= exp(-c)
+      #|  !(real_of_num(SUC((n : Num))) == real_of_num(0)) && !(real_of_num(SUC(n)) - (c : Real) == real_of_num(0))
+      #|  real_of_num(SUC((n : Num))) * -((c : Real) / (real_of_num(SUC(n)) - c))
+      #|  !(real_of_num(SUC((n : Num))) == real_of_num(0)) && !(real_of_num(SUC(n)) - (c : Real) == real_of_num(0))
+      #|  (a : Real) == (b : Real) \226\134\146 b <= (l : Real) \226\134\146 a <= l
+      #|  real_of_num(1) - (c : Real) / real_of_num(SUC((n : Num)))
+      #|  -((c : Real) / (real_of_num(SUC((n : Num))) - c)) <= log(real_of_num(1) - c / real_of_num(SUC(n)))
+      #|  pow(real_of_num(1) - (c : Real) / real_of_num(SUC((n : Num))), SUC(n)) == exp(real_of_num(SUC(n)) * log(real_of_num(1) - c / real_of_num(SUC(n))))
+      #|  real_of_num(0) < real_of_num(SUC((n : Num))) - (c : Real)
+      #|  real_of_num(0) < real_of_num(1) - (c : Real) / real_of_num(SUC((n : Num)))
+      #|  real_of_num(0) < real_of_num(SUC((n : Num)))
+      #|  \226\136\128 c : Real, \226\136\128 n : Num, real_of_num(0) <= c && c < real_of_num(SUC(n)) \226\134\146 exp(-(c * (real_of_num(SUC(n)) / (real_of_num(SUC(n)) - c)))) <= pow(real_of_num(1) - c / real_of_num(SUC(n)), SUC(n))
+      #|  -(y : Real)
+      #|  \226\136\128 y : Real, real_of_num(1) - exp(-y) <= y
+      #|  exp(-(a : Real)) - exp(-a) * exp(-(y : Real)) == exp(-a) * (real_of_num(1) - exp(-y))
+      #|  \226\136\128 a : Real, \226\136\128 y : Real, exp(-a) - exp(-(a + y)) <= exp(-a) * y
+      #|  pow((c : Real), 2) / (real_of_num(SUC((n : Num))) - c)
+      #|  (c : Real)
+      #|  !(real_of_num(SUC((n : Num))) - (c : Real) == real_of_num(0))
+      #|  (c : Real) * (real_of_num(SUC((n : Num))) / (real_of_num(SUC(n)) - c)) == c + pow(c, 2) / (real_of_num(SUC(n)) - c)
+      #|  (a : Real) <= (b : Real) \226\134\146 (c : Real) - b <= c - a
+      #|  exp(-(c : Real)) - exp(-(c * (real_of_num(SUC((n : Num))) / (real_of_num(SUC(n)) - c))))
+      #|  real_of_num(0) < real_of_num(SUC((n : Num))) - (c : Real)
+      #|  \226\136\128 c : Real, \226\136\128 n : Num, real_of_num(0) < c && c < real_of_num(SUC(n)) \226\134\146 exp(-c) - pow(real_of_num(1) - c / real_of_num(SUC(n)), SUC(n)) <= exp(-c) * (pow(c, 2) / (real_of_num(SUC(n)) - c))
+      #|  real_of_num(2) * ((e : Real) * (real_of_num(SUC((n : Num))) - (c : Real))) == e * (real_of_num(2) * (real_of_num(SUC(n)) - c))
+      #|  real_of_num(SUC((n : Num))) * (e : Real) == e * real_of_num(SUC(n))
+      #|  !((e : Real) == real_of_num(0))
+      #|  real_of_num(2) * (exp(-(c : Real)) * (pow(c, 2) / (e : Real))) * e == real_of_num(2) * (exp(-c) * pow(c, 2))
+      #|  real_of_num(2) * (exp(-(c : Real)) * (pow(c, 2) / (e : Real))) * e < real_of_num(SUC((n : Num))) * e
+      #|  real_of_num((M : Num))
+      #|  real_of_num(2) * (exp(-(c : Real)) * (pow(c, 2) / (e : Real))) < real_of_num(SUC((n : Num)))
+      #|  (e : Real) * real_of_num(SUC((n : Num)))
+      #|  real_of_num(0) < real_of_num(2)
+      #|  exp(-(c : Real)) * (pow(c, 2) / (real_of_num(SUC((n : Num))) - c)) == exp(-c) * pow(c, 2) / (real_of_num(SUC(n)) - c)
+      #|  exp(-(c : Real)) * (pow(c, 2) / (real_of_num(SUC((n : Num))) - c))
+      #|  abs(pow(real_of_num(1) - (c : Real) / real_of_num(SUC((n : Num))), SUC(n)) - exp(-c)) == exp(-c) - pow(real_of_num(1) - c / real_of_num(SUC(n)), SUC(n))
+      #|  pow(real_of_num(1) - (c : Real) / real_of_num(SUC((n : Num))), SUC(n)) <= exp(-c)
+      #|  real_of_num(0) < real_of_num(SUC((n : Num))) - (c : Real)
+      #|  real_of_num((K : Num))
+      #|  real_of_num(2) * (c : Real) < real_of_num(SUC((n : Num)))
+      #|  real_of_num((K : Num))
+      #|  (c : Real) < real_of_num(SUC((n : Num)))
+      #|  (n : Num)
+      #|  (M : Num) + (K : Num)
+      #|  (M : Num)
+      #|  real_of_num(0) < real_of_num(1)
+      #|  real_of_num(2) * (exp(-(c : Real)) * (pow(c, 2) / (e : Real)))
+      #|  (K : Num)
+      #|  real_of_num(0) < real_of_num(1)
+      #|  real_of_num(2) * (c : Real)
+      #|  (e : Real)
+      #|  \226\136\128 c : Real, real_of_num(0) < c \226\134\146 op_minus_minus_minus_gt((n : Num) => pow(real_of_num(1) - c / real_of_num(SUC(n)), SUC(n)), exp(-c), sequentially)
+      #|  real_of_num((n : Num)) * abs((x : Real) - (y : Real)) + abs(x - y)
+      #|  abs((x : Real) - (y : Real)) * real_of_num(1)
+      #|  abs((x : Real) - (y : Real)) * abs(pow(y, (n : Num))) <= abs(x - y)
+      #|  real_of_num(1) * (real_of_num((n : Num)) * abs((x : Real) - (y : Real)))
+      #|  abs((x : Real)) * (real_of_num((n : Num)) * abs(x - (y : Real)))
+      #|  abs((x : Real)) * abs(pow(x, (n : Num)) - pow((y : Real), n)) <= real_of_num(n) * abs(x - y)
+      #|  (a : Real) - (b : Real) == (c : Real) + (d : Real) \226\134\146 abs(a - b) <= abs(c) + abs(d)
+      #|  abs((x : Real) * (pow(x, (n : Num)) - pow((y : Real), n))) + abs((x - y) * pow(y, n))
+      #|  abs(pow((y : Real), (n : Num))) <= real_of_num(1)
+      #|  abs(pow((x : Real), (n : Num)) - pow((y : Real), n)) <= real_of_num(n) * abs(x - y)
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, \226\136\128 y : Real, abs(x) <= real_of_num(1) && abs(y) <= real_of_num(1) \226\134\146 abs(pow(x, n) - pow(y, n)) <= real_of_num(n) * abs(x - y)
+      #|  abs(pow(real_of_num(1) - (c : Real) / real_of_num(SUC((n : Num))), SUC(n)) - exp(-c)) < (e : Real) / real_of_num(2)
+      #|  real_of_num(SUC((n : Num))) * (abs((h : (Num) -> Real)(n)) / real_of_num(SUC(n))) == abs(h(n))
+      #|  real_of_num(1) - ((c : Real) + (h : (Num) -> Real)((n : Num))) / real_of_num(SUC(n)) - (real_of_num(1) - c / real_of_num(SUC(n))) == -(h(n) / real_of_num(SUC(n)))
+      #|  real_of_num(SUC((n : Num))) * abs(real_of_num(1) - ((c : Real) + (h : (Num) -> Real)(n)) / real_of_num(SUC(n)) - (real_of_num(1) - c / real_of_num(SUC(n))))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(1) - x <= real_of_num(1)
+      #|  (x : Real) <= real_of_num(2) \226\134\146 -real_of_num(1) <= real_of_num(1) - x
+      #|  abs(real_of_num(1) - (c : Real) / real_of_num(SUC((n : Num)))) <= real_of_num(1)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(1) - x <= real_of_num(1)
+      #|  (x : Real) <= real_of_num(2) \226\134\146 -real_of_num(1) <= real_of_num(1) - x
+      #|  abs(real_of_num(1) - ((c : Real) + (h : (Num) -> Real)((n : Num))) / real_of_num(SUC(n))) <= real_of_num(1)
+      #|  abs((h : (Num) -> Real)((n : Num)))
+      #|  abs(pow(real_of_num(1) - ((c : Real) + (h : (Num) -> Real)((n : Num))) / real_of_num(SUC(n)), SUC(n)) - pow(real_of_num(1) - c / real_of_num(SUC(n)), SUC(n))) < (e : Real) / real_of_num(2)
+      #|  !(real_of_num(SUC((n : Num))) == real_of_num(0))
+      #|  real_of_num(0) < real_of_num(SUC((n : Num)))
+      #|  real_of_num((N4 : Num))
+      #|  real_of_num(2) * (c : Real) < real_of_num(SUC((n : Num)))
+      #|  abs((h : (Num) -> Real)((n : Num)) - real_of_num(0)) < (c : Real)
+      #|  abs((h : (Num) -> Real)((n : Num))) < (c : Real)
+      #|  abs((h : (Num) -> Real)((n : Num)) - real_of_num(0)) < (e : Real) / real_of_num(2)
+      #|  abs((h : (Num) -> Real)((n : Num))) < (e : Real) / real_of_num(2)
+      #|  (n : Num)
+      #|  (N1 : Num) + ((N2 : Num) + ((N3 : Num) + (N4 : Num)))
+      #|  op_minus_minus_minus_gt((h : (Num) -> Real), real_of_num(0), sequentially)
+      #|  \226\136\131 N4 : Num, real_of_num(2) * (c : Real) < real_of_num(N4)
+      #|  (c : Real)
+      #|  op_minus_minus_minus_gt((h : (Num) -> Real), real_of_num(0), sequentially)
+      #|  \226\136\131 N3 : Num, \226\136\128 n : Num, N3 <= n \226\134\146 abs((h : (Num) -> Real)(n) - real_of_num(0)) < (c : Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  op_minus_minus_minus_gt((h : (Num) -> Real), real_of_num(0), sequentially)
+      #|  \226\136\131 N2 : Num, \226\136\128 n : Num, N2 <= n \226\134\146 abs((h : (Num) -> Real)(n) - real_of_num(0)) < (e : Real) / real_of_num(2)
+      #|  (N1 : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  op_minus_minus_minus_gt((n : Num) => pow(real_of_num(1) - (c : Real) / real_of_num(SUC(n)), SUC(n)), exp(-c), sequentially)
+      #|  (e : Real)
+      #|  \226\136\128 c : Real, \226\136\128 h : (Num) -> Real, real_of_num(0) < c && op_minus_minus_minus_gt(h, real_of_num(0), sequentially) \226\134\146 op_minus_minus_minus_gt((n : Num) => pow(real_of_num(1) - (c + h(n)) / real_of_num(SUC(n)), SUC(n)), exp(-c), sequentially)
+      #|  !(real_of_num(SUC((n : Num))) == real_of_num(0))
+      #|  (x : Real) == (y : Real) \226\134\146 x <= y
+      #|  4 == 2 * 2
+      #|  real_of_num(SUC((n : Num))) * (pow((t : Real) / sqrt(real_of_num(SUC(n))), 4) * (simple_expectation((p : Prob_space[A]), (x : A) => pow((X : (A) -> Real)(x), 4)) / real_of_num(6)))
+      #|  !(real_of_num(SUC((n : Num))) == real_of_num(0))
+      #|  pow((t : Real) / sqrt(real_of_num(SUC((n : Num)))), 2) * ((sigma_sq : Real) / real_of_num(2)) == (c : Real) / real_of_num(SUC(n))
+      #|  real_of_num(SUC((n : Num))) * (real_of_num(1) - simple_char_fn_re((p : Prob_space[A]), (X : (A) -> Real), (t : Real) / sqrt(real_of_num(SUC(n))))) - (c : Real) == -(real_of_num(SUC(n)) * (simple_char_fn_re(p, X, t / sqrt(real_of_num(SUC(n)))) - (real_of_num(1) - pow(t / sqrt(real_of_num(SUC(n))), 2) * ((sigma_sq : Real) / real_of_num(2)))))
+      #|  (t : Real) / sqrt(real_of_num(SUC((n : Num))))
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  !(real_of_num(SUC((n : Num))) == real_of_num(0))
+      #|  pow((t : Real) / sqrt(real_of_num(SUC((n : Num)))), 2) * ((sigma_sq : Real) / real_of_num(2)) == (c : Real) / real_of_num(SUC(n))
+      #|  real_of_num(0) < real_of_num(SUC((n : Num)))
+      #|  !(real_of_num(SUC((n : Num))) == real_of_num(0))
+      #|  (n : Num)
+      #|  (n : Num) => pow((t : Real), 4) * ((m4 : Real) / real_of_num(6) * inv(real_of_num(n) + real_of_num(1)))
+      #|  !(real_of_num(SUC((n : Num))) == real_of_num(0))
+      #|  !(real_of_num(SUC((n : Num))) == real_of_num(0))
+      #|  (n : Num)
+      #|  (n : Num) => pow(real_of_num(1) - ((c : Real) + (h : (Num) -> Real)(n)) / real_of_num(SUC(n)), SUC(n))
+      #|  (h : (Num) -> Real) == ((n : Num) => real_of_num(SUC(n)) * (real_of_num(1) - simple_char_fn_re((p : Prob_space[A]), (X : (A) -> Real), (t : Real) / sqrt(real_of_num(SUC(n))))) - (c : Real))
+      #|  real_of_num(0) < (c : Real)
+      #|  (c : Real) == pow((t : Real), 2) * ((sigma_sq : Real) / real_of_num(2))
+      #|  (t : Real) == real_of_num(0)
+      #|  (m4 : Real) == simple_expectation((p : Prob_space[A]), (x : A) => pow((X : (A) -> Real)(x), 4))
+      #|  (sigma_sq : Real) == simple_expectation((p : Prob_space[A]), (x : A) => pow((X : (A) -> Real)(x), 2))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 t : Real, simple_rv(p, X) && simple_expectation(p, X) == real_of_num(0) && real_of_num(0) < simple_expectation(p, (x : A) => pow(X(x), 2)) \226\134\146 op_minus_minus_minus_gt((n : Num) => pow(simple_char_fn_re(p, X, t / sqrt(real_of_num(SUC(n)))), SUC(n)), exp(-(pow(t, 2) * (simple_expectation(p, (x : A) => pow(X(x), 2)) / real_of_num(2)))), sequentially)
+      #|  \226\136\128 R : Real, \226\136\128 S : Real, \226\136\128 r : Real, \226\136\128 s : Real, \226\136\128 P : Real, R * r - S * s - r * P == r * (R - P) - S * s
+      #|  real_of_num(1) * (real_of_num(SUC((n : Num))) * abs((s : Real))) + real_of_num(1) * abs(s)
+      #|  abs((r : Real) * ((R : Real) - pow(r, SUC((n : Num))))) + abs((S : Real) * (s : Real))
+      #|  \226\136\128 R : Real, \226\136\128 S : Real, \226\136\128 r : Real, \226\136\128 s : Real, \226\136\128 n : Num, abs(r) <= real_of_num(1) && abs(S) <= real_of_num(1) && abs(R - pow(r, SUC(n))) <= real_of_num(SUC(n)) * abs(s) \226\134\146 abs(R * r - S * s - r * pow(r, SUC(n))) <= real_of_num(SUC(SUC(n))) * abs(s)
+      #|  simple_char_fn_re((p : Prob_space[A]), (X : (Num, A) -> Real)(SUC((n : Num))), (t : Real)) == simple_char_fn_re(p, X(0), t) && simple_char_fn_im(p, X(SUC(n)), t) == simple_char_fn_im(p, X(0), t)
+      #|  (t : Real)
+      #|  (X : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (x : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x))
+      #|  (p : Prob_space[A])
+      #|  indep_rv((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)), X(SUC(n)))
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(SUC((n : Num))))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)))
+      #|  (x : A)
+      #|  ((x : A) => sum(op_dot_dot(0, SUC((n : Num))), (i : Num) => (X : (Num, A) -> Real)(i, x))) == ((x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)) + X(SUC(n), x))
+      #|  ((x : A) => sum(op_dot_dot(0, 0), (i : Num) => (X : (Num, A) -> Real)(i, x))) == X(0)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 t : Real, (\226\136\128 i : Num, i <= n \226\134\146 simple_rv(p, X(i))) && (\226\136\128 i : Num, i <= n \226\134\146 simple_char_fn_re(p, X(i), t) == simple_char_fn_re(p, X(0), t) && simple_char_fn_im(p, X(i), t) == simple_char_fn_im(p, X(0), t)) && (\226\136\128 k : Num, k < n \226\134\146 indep_rv(p, (x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)), X(SUC(k)))) \226\134\146 abs(simple_char_fn_re(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), t) - pow(simple_char_fn_re(p, X(0), t), SUC(n))) <= real_of_num(SUC(n)) * abs(simple_char_fn_im(p, X(0), t))
+      #|  Cx((x : Real))
       #|  0
-      #|  forall x:real. abs(sin(x) - x) <= abs(x) pow 3 / &2
-      #|  \\y:real. abs(y) pow 3
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  abs(t) pow 3 / &2
-      #|  \\x:A. abs((X:A->real) x) pow 3
-      #|  p:A prob_space
-      #|  (\\x:A. abs(t * (X:A->real) x) pow 3 / &2) =\n     (\\x. (abs(t) pow 3 / &2) * abs(X x) pow 3)
-      #|  t * (X:A->real) a
-      #|  a:A
-      #|  \\y:real. abs(t * y) pow 3 / &2
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n    (\\x:A. abs(t * (X:A->real) x) pow 3 / &2)
-      #|  simple_expectation (p:A prob_space)\n    (\\x:A. abs(sin(t * (X:A->real) x) - t * X x))
-      #|  t:real
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space) (\\x:A. sin(t * (X:A->real) x) - t * X x) =\n      simple_expectation p (\\x. sin(t * X x)) -\n      simple_expectation p (\\x. t * X x)
-      #|  simple_expectation (p:A prob_space) (\\x:A. sin(t * (X:A->real) x)) =\n     simple_expectation p (\\x. sin(t * X x) - t * X x)
-      #|  \\y:real. sin(t * y)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. sin(t * (X:A->real) x))
-      #|  forall p:A prob_space (X:A->real) t.\n     simple_rv p X /\\ simple_expectation p X = &0\n     ==> abs(simple_char_fn_im p X t)\n         <= abs(t) pow 3 * simple_expectation p (\\x. abs(X x) pow 3) / &2
+      #|  \226\136\128 x : Real, abs(sin(x) - x) <= pow(abs(x), 3) / real_of_num(2)
+      #|  (y : Real) => pow(abs(y), 3)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  pow(abs((t : Real)), 3) / real_of_num(2)
+      #|  (x : A) => pow(abs((X : (A) -> Real)(x)), 3)
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => pow(abs((t : Real) * (X : (A) -> Real)(x)), 3) / real_of_num(2)) == ((x : A) => pow(abs(t), 3) / real_of_num(2) * pow(abs(X(x)), 3))
+      #|  (t : Real) * (X : (A) -> Real)((a : A))
+      #|  (a : A)
+      #|  (y : Real) => pow(abs((t : Real) * y), 3) / real_of_num(2)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => pow(abs((t : Real) * (X : (A) -> Real)(x)), 3) / real_of_num(2))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => abs(sin((t : Real) * (X : (A) -> Real)(x)) - t * X(x)))
+      #|  (t : Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => sin((t : Real) * (X : (A) -> Real)(x)) - t * X(x)) == simple_expectation(p, (x : A) => sin(t * X(x))) - simple_expectation(p, (x : A) => t * X(x))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => sin((t : Real) * (X : (A) -> Real)(x))) == simple_expectation(p, (x : A) => sin(t * X(x)) - t * X(x))
+      #|  (y : Real) => sin((t : Real) * y)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => sin((t : Real) * (X : (A) -> Real)(x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 t : Real, simple_rv(p, X) && simple_expectation(p, X) == real_of_num(0) \226\134\146 abs(simple_char_fn_im(p, X, t)) <= pow(abs(t), 3) * (simple_expectation(p, (x : A) => pow(abs(X(x)), 3)) / real_of_num(2))
       #|  0
-      #|  &1
-      #|  ((\\n. sqrt(inv(&(SUC n)))) ---> sqrt(&0)) sequentially
-      #|  ((\\n. inv(sqrt(&(SUC n)))) ---> &0) sequentially
+      #|  real_of_num(1)
+      #|  op_minus_minus_minus_gt((n : Num) => sqrt(inv(real_of_num(SUC(n)))), sqrt(real_of_num(0)), sequentially)
+      #|  op_minus_minus_minus_gt((n : Num) => inv(sqrt(real_of_num(SUC(n)))), real_of_num(0), sequentially)
       #|  :A
       #|  :num
       #|  :A
       #|  :num
       #|  :A
       #|  :num
-      #|  &0 < s /\\ &0 < n ==> n * (t / (n * s) * m / &2) = t * m / &2 * inv s
-      #|  x = y ==> x <= y
-      #|  3 = SUC(SUC(SUC 0))
-      #|  sqrt(&(SUC n)) pow 3 = &(SUC n) * sqrt(&(SUC n))
-      #|  &(SUC n)
-      #|  sqrt(&(SUC n)) * sqrt(&(SUC n)) = &(SUC n)
-      #|  &0 < sqrt(&(SUC n))
-      #|  abs(sqrt(&(SUC n))) = sqrt(&(SUC n))
-      #|  &(SUC n) * (abs(t / sqrt(&(SUC n))) pow 3 * m3 / &2)
-      #|  abs(&(SUC n)) = &(SUC n)
-      #|  t / sqrt(&(SUC n))
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  n:num
+      #|  real_of_num(0) < (s : Real) && real_of_num(0) < (n : Real) \226\134\146 n * ((t : Real) / (n * s) * ((m : Real) / real_of_num(2))) == t * (m / real_of_num(2) * inv(s))
+      #|  (x : Real) == (y : Real) \226\134\146 x <= y
+      #|  3 == SUC(SUC(SUC(0)))
+      #|  pow(sqrt(real_of_num(SUC((n : Num)))), 3) == real_of_num(SUC(n)) * sqrt(real_of_num(SUC(n)))
+      #|  real_of_num(SUC((n : Num)))
+      #|  sqrt(real_of_num(SUC((n : Num)))) * sqrt(real_of_num(SUC(n))) == real_of_num(SUC(n))
+      #|  real_of_num(0) < sqrt(real_of_num(SUC((n : Num))))
+      #|  abs(sqrt(real_of_num(SUC((n : Num))))) == sqrt(real_of_num(SUC(n)))
+      #|  real_of_num(SUC((n : Num))) * (pow(abs((t : Real) / sqrt(real_of_num(SUC(n)))), 3) * ((m3 : Real) / real_of_num(2)))
+      #|  abs(real_of_num(SUC((n : Num)))) == real_of_num(SUC(n))
+      #|  (t : Real) / sqrt(real_of_num(SUC((n : Num))))
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (n : Num)
       #|  0
-      #|  \\n. abs(t) pow 3 * m3 / &2 * inv(sqrt(&(SUC n)))
-      #|  m3 = simple_expectation (p:A prob_space)\n    (\\x. abs((X:A->real) x) pow 3)
-      #|  forall p:A prob_space (X:A->real) t.\n    simple_rv p X /\\ simple_expectation p X = &0\n    ==> ((\\n. &(SUC n) * abs(simple_char_fn_im p X (t / sqrt(&(SUC n)))))\n         ---> &0) sequentially
-      #|  t:real
-      #|  (X:num->A->real) 0
-      #|  p:A prob_space
-      #|  t:real
-      #|  (X:num->A->real) 0
-      #|  p:A prob_space
-      #|  t / sqrt(&(SUC n))
-      #|  n:num
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  n:num
+      #|  (n : Num) => pow(abs((t : Real)), 3) * ((m3 : Real) / real_of_num(2) * inv(sqrt(real_of_num(SUC(n)))))
+      #|  (m3 : Real) == simple_expectation((p : Prob_space[A]), (x : A) => pow(abs((X : (A) -> Real)(x)), 3))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 t : Real, simple_rv(p, X) && simple_expectation(p, X) == real_of_num(0) \226\134\146 op_minus_minus_minus_gt((n : Num) => real_of_num(SUC(n)) * abs(simple_char_fn_im(p, X, t / sqrt(real_of_num(SUC(n))))), real_of_num(0), sequentially)
+      #|  (t : Real)
+      #|  (X : (Num, A) -> Real)(0)
+      #|  (p : Prob_space[A])
+      #|  (t : Real)
+      #|  (X : (Num, A) -> Real)(0)
+      #|  (p : Prob_space[A])
+      #|  (t : Real) / sqrt(real_of_num(SUC((n : Num))))
+      #|  (n : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (n : Num)
       #|  0
-      #|  \\n. &(SUC n) * abs(simple_char_fn_im (p:A prob_space) (X 0)\n                           (t / sqrt(&(SUC n))))
+      #|  (n : Num) => real_of_num(SUC(n)) * abs(simple_char_fn_im((p : Prob_space[A]), (X : (Num, A) -> Real)(0), (t : Real) / sqrt(real_of_num(SUC(n)))))
       #|  :A
       #|  :num
-      #|  \\n. simple_char_fn_re (p:A prob_space) (X 0) (t / sqrt(&(SUC n))) pow (SUC n)
+      #|  (n : Num) => pow(simple_char_fn_re((p : Prob_space[A]), (X : (Num, A) -> Real)(0), (t : Real) / sqrt(real_of_num(SUC(n)))), SUC(n))
       #|  :A
       #|  :num
-      #|  forall p:A prob_space (X:num->A->real) t.\n    (forall n. simple_rv p (X n)) /\\\n    simple_expectation p (X 0) = &0 /\\\n    &0 < simple_expectation p (\\x. X 0 x pow 2) /\\\n    (forall i t. simple_char_fn_re p (X i) t = simple_char_fn_re p (X 0) t /\\\n           simple_char_fn_im p (X i) t = simple_char_fn_im p (X 0) t) /\\\n    (forall n k. k < n ==> indep_rv p (\\x. sum(0..k) (\\i. X i x)) (X (SUC k)))\n    ==> ((\\n. simple_char_fn_re p (\\x. sum(0..n) (\\i. X i x))\n                            (t / sqrt(&(SUC n))))\n         ---> exp(--(t pow 2 * simple_expectation p (\\x. X 0 x pow 2) / &2)))\n        sequentially
-      #|  forall a b P Q:real. (a + b) * P - a * Q = b * P + a * (P - Q)
-      #|  a * (&n * b)
-      #|  b * &1 + &1 * (&n * b)
-      #|  forall n a b. &0 <= a /\\ &0 <= b /\\ a + b <= &1\n           ==> (a + b) pow n - a pow n <= &n * b
-      #|  &0 < e ==> abs e = e
-      #|  (f:num->real) n
-      #|  n:num
-      #|  (f:num->real) n pow 2 < eps pow 2
-      #|  N:num
-      #|  N:num
-      #|  ?N:num. forall n. N <= n ==> abs((f:num->real) n pow 2) < eps pow 2
-      #|  eps:real
-      #|  forall(f:num->real). ((\\n. f(n) pow 2) ---> &0) sequentially\n                ==> (f ---> &0) sequentially
-      #|  forall x y:real. x pow 2 - y pow 2 = (x - y) * (x + y)
-      #|  d * &2
-      #|  forall x y d. abs(x - y) <= d /\\ abs(x) <= &1 /\\ abs(y) <= &1\n            ==> abs(x pow 2 - y pow 2) <= &2 * d
-      #|  abs x pow 2
-      #|  forall x. abs x <= &1 ==> x pow 2 <= abs x
-      #|  forall x:real m p. (x pow m) pow p = (x pow p) pow m
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 t : Real, (\226\136\128 n : Num, simple_rv(p, X(n))) && simple_expectation(p, X(0)) == real_of_num(0) && real_of_num(0) < simple_expectation(p, (x : A) => pow(X(0, x), 2)) && (\226\136\128 i : Num, \226\136\128 t : Real, simple_char_fn_re(p, X(i), t) == simple_char_fn_re(p, X(0), t) && simple_char_fn_im(p, X(i), t) == simple_char_fn_im(p, X(0), t)) && (\226\136\128 n : Num, \226\136\128 k : Num, k < n \226\134\146 indep_rv(p, (x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)), X(SUC(k)))) \226\134\146 op_minus_minus_minus_gt((n : Num) => simple_char_fn_re(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), t / sqrt(real_of_num(SUC(n)))), exp(-(pow(t, 2) * (simple_expectation(p, (x : A) => pow(X(0, x), 2)) / real_of_num(2)))), sequentially)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 P : Real, \226\136\128 Q : Real, (a + b) * P - a * Q == b * P + a * (P - Q)
+      #|  (a : Real) * (real_of_num((n : Num)) * (b : Real))
+      #|  (b : Real) * real_of_num(1) + real_of_num(1) * (real_of_num((n : Num)) * b)
+      #|  \226\136\128 n : Num, \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) <= a && real_of_num(0) <= b && a + b <= real_of_num(1) \226\134\146 pow(a + b, n) - pow(a, n) <= real_of_num(n) * b
+      #|  real_of_num(0) < (e : Real) \226\134\146 abs(e) == e
+      #|  (f : (Num) -> Real)((n : Num))
+      #|  (n : Num)
+      #|  pow((f : (Num) -> Real)((n : Num)), 2) < pow((eps : Real), 2)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  \226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 abs(pow((f : (Num) -> Real)(n), 2)) < pow((eps : Real), 2)
+      #|  (eps : Real)
+      #|  \226\136\128 f : (Num) -> Real, op_minus_minus_minus_gt((n : Num) => pow(f(n), 2), real_of_num(0), sequentially) \226\134\146 op_minus_minus_minus_gt(f, real_of_num(0), sequentially)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, pow(x, 2) - pow(y, 2) == (x - y) * (x + y)
+      #|  (d : Real) * real_of_num(2)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 d : Real, abs(x - y) <= d && abs(x) <= real_of_num(1) && abs(y) <= real_of_num(1) \226\134\146 abs(pow(x, 2) - pow(y, 2)) <= real_of_num(2) * d
+      #|  pow(abs((x : Real)), 2)
+      #|  \226\136\128 x : Real, abs(x) <= real_of_num(1) \226\134\146 pow(x, 2) <= abs(x)
+      #|  \226\136\128 x : Real, \226\136\128 m : Num, \226\136\128 p : Num, pow(pow(x, m), p) == pow(pow(x, p), m)
       #|  2
-      #|  SUC n
-      #|  r:real
-      #|  ((r pow 2 + s pow 2) pow SUC n - (r pow 2) pow SUC n) +\n              abs((r pow SUC n) pow 2 - R pow 2)
-      #|  forall R S' r s n.\n    R pow 2 + S' pow 2 = (r pow 2 + s pow 2) pow SUC n /\\\n    (r pow 2 + s pow 2) pow SUC n - (r pow 2) pow SUC n\n      <= &(SUC n) * abs s /\\\n    abs((r pow SUC n) pow 2 - R pow 2) <= &2 * &(SUC n) * abs s\n    ==> S' pow 2 <= &3 * &(SUC n) * abs s
-      #|  r:real
-      #|  R:real
-      #|  abs((r pow (SUC n)) pow 2 - R pow 2)\n                <= &2 * (&(SUC n) * abs s)
-      #|  &(SUC n) * s pow 2
-      #|  (r pow 2 + s pow 2) pow (SUC n) - (r pow 2) pow (SUC n)\n                <= &(SUC n) * abs s
-      #|  s pow 2 <= abs s
-      #|  (r pow 2 + s pow 2) pow (SUC n) - (r pow 2) pow (SUC n)\n                <= &(SUC n) * s pow 2
-      #|  t:real
-      #|  (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x))
-      #|  p:A prob_space
-      #|  abs(r pow (SUC n)) <= &1
-      #|  t:real
-      #|  (X:num->A->real) 0
-      #|  p:A prob_space
-      #|  t:real
-      #|  (X:num->A->real) 0
-      #|  p:A prob_space
-      #|  t:real
-      #|  (X:num->A->real) 0
-      #|  p:A prob_space
-      #|  t:real
-      #|  n:num
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  t:real
-      #|  n:num
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  S' = simple_char_fn_im (p:A prob_space)\n    (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x)) t
-      #|  R = simple_char_fn_re (p:A prob_space)\n    (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x)) t
-      #|  s = simple_char_fn_im (p:A prob_space) ((X:num->A->real) 0) t
-      #|  r = simple_char_fn_re (p:A prob_space) ((X:num->A->real) 0) t
-      #|  forall p:A prob_space (X:num->A->real) n t.\n     (forall i. i <= n ==> simple_rv p (X i)) /\\\n     (forall i. i <= n ==>\n        simple_char_fn_re p (X i) t = simple_char_fn_re p (X 0) t /\\\n        simple_char_fn_im p (X i) t = simple_char_fn_im p (X 0) t) /\\\n     (forall k. k < n ==> indep_rv p (\\x. sum(0..k) (\\i. X i x)) (X (SUC k)))\n     ==> simple_char_fn_im p (\\x. sum(0..n) (\\i. X i x)) t pow 2\n         <= &3 * (&(SUC n) * abs(simple_char_fn_im p (X 0) t))
-      #|  t:real
-      #|  (X:num->A->real) 0
-      #|  p:A prob_space
+      #|  SUC((n : Num))
+      #|  (r : Real)
+      #|  pow(pow((r : Real), 2) + pow((s : Real), 2), SUC((n : Num))) - pow(pow(r, 2), SUC(n)) + abs(pow(pow(r, SUC(n)), 2) - pow((R : Real), 2))
+      #|  \226\136\128 R : Real, \226\136\128 S' : Real, \226\136\128 r : Real, \226\136\128 s : Real, \226\136\128 n : Num, pow(R, 2) + pow(S', 2) == pow(pow(r, 2) + pow(s, 2), SUC(n)) && pow(pow(r, 2) + pow(s, 2), SUC(n)) - pow(pow(r, 2), SUC(n)) <= real_of_num(SUC(n)) * abs(s) && abs(pow(pow(r, SUC(n)), 2) - pow(R, 2)) <= real_of_num(2) * (real_of_num(SUC(n)) * abs(s)) \226\134\146 pow(S', 2) <= real_of_num(3) * (real_of_num(SUC(n)) * abs(s))
+      #|  (r : Real)
+      #|  (R : Real)
+      #|  abs(pow(pow((r : Real), SUC((n : Num))), 2) - pow((R : Real), 2)) <= real_of_num(2) * (real_of_num(SUC(n)) * abs((s : Real)))
+      #|  real_of_num(SUC((n : Num))) * pow((s : Real), 2)
+      #|  pow(pow((r : Real), 2) + pow((s : Real), 2), SUC((n : Num))) - pow(pow(r, 2), SUC(n)) <= real_of_num(SUC(n)) * abs(s)
+      #|  pow((s : Real), 2) <= abs(s)
+      #|  pow(pow((r : Real), 2) + pow((s : Real), 2), SUC((n : Num))) - pow(pow(r, 2), SUC(n)) <= real_of_num(SUC(n)) * pow(s, 2)
+      #|  (t : Real)
+      #|  (x : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x))
+      #|  (p : Prob_space[A])
+      #|  abs(pow((r : Real), SUC((n : Num)))) <= real_of_num(1)
+      #|  (t : Real)
+      #|  (X : (Num, A) -> Real)(0)
+      #|  (p : Prob_space[A])
+      #|  (t : Real)
+      #|  (X : (Num, A) -> Real)(0)
+      #|  (p : Prob_space[A])
+      #|  (t : Real)
+      #|  (X : (Num, A) -> Real)(0)
+      #|  (p : Prob_space[A])
+      #|  (t : Real)
+      #|  (n : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (t : Real)
+      #|  (n : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (S' : Real) == simple_char_fn_im((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)), (t : Real))
+      #|  (R : Real) == simple_char_fn_re((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)), (t : Real))
+      #|  (s : Real) == simple_char_fn_im((p : Prob_space[A]), (X : (Num, A) -> Real)(0), (t : Real))
+      #|  (r : Real) == simple_char_fn_re((p : Prob_space[A]), (X : (Num, A) -> Real)(0), (t : Real))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 t : Real, (\226\136\128 i : Num, i <= n \226\134\146 simple_rv(p, X(i))) && (\226\136\128 i : Num, i <= n \226\134\146 simple_char_fn_re(p, X(i), t) == simple_char_fn_re(p, X(0), t) && simple_char_fn_im(p, X(i), t) == simple_char_fn_im(p, X(0), t)) && (\226\136\128 k : Num, k < n \226\134\146 indep_rv(p, (x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)), X(SUC(k)))) \226\134\146 pow(simple_char_fn_im(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), t), 2) <= real_of_num(3) * (real_of_num(SUC(n)) * abs(simple_char_fn_im(p, X(0), t)))
+      #|  (t : Real)
+      #|  (X : (Num, A) -> Real)(0)
+      #|  (p : Prob_space[A])
       #|  :A
       #|  :num
-      #|  t / sqrt(&(SUC n))
-      #|  n:num
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  y:real
-      #|  forall y:real. abs(y pow 2) = y pow 2
-      #|  n:num
+      #|  (t : Real) / sqrt(real_of_num(SUC((n : Num))))
+      #|  (n : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (y : Real)
+      #|  \226\136\128 y : Real, abs(pow(y, 2)) == pow(y, 2)
+      #|  (n : Num)
       #|  0
-      #|  \\n. &3 *\n    (&(SUC n) * abs(simple_char_fn_im (p:A prob_space) ((X:num->A->real) 0)\n      (t / sqrt(&(SUC n)))))
+      #|  (n : Num) => real_of_num(3) * (real_of_num(SUC(n)) * abs(simple_char_fn_im((p : Prob_space[A]), (X : (Num, A) -> Real)(0), (t : Real) / sqrt(real_of_num(SUC(n))))))
       #|  :A
       #|  :num
-      #|  forall p:A prob_space (X:num->A->real) t.\n    (forall n. simple_rv p (X n)) /\\\n    simple_expectation p (X 0) = &0 /\\\n    &0 < simple_expectation p (\\x. X 0 x pow 2) /\\\n    (forall i t. simple_char_fn_re p (X i) t = simple_char_fn_re p (X 0) t /\\\n           simple_char_fn_im p (X i) t = simple_char_fn_im p (X 0) t) /\\\n    (forall n k. k < n ==> indep_rv p (\\x. sum(0..k) (\\i. X i x)) (X (SUC k)))\n    ==> ((\\n. simple_char_fn_im p (\\x. sum(0..n) (\\i. X i x))\n                            (t / sqrt(&(SUC n))))\n         ---> &0) sequentially
-      #|  forall p:A prob_space (X:num->A->real) t.\n    (forall n. simple_rv p (X n)) /\\\n    simple_expectation p (X 0) = &0 /\\\n    &0 < simple_expectation p (\\x. X 0 x pow 2) /\\\n    (forall i t. simple_char_fn_re p (X i) t = simple_char_fn_re p (X 0) t /\\\n           simple_char_fn_im p (X i) t = simple_char_fn_im p (X 0) t) /\\\n    (forall n k. k < n ==> indep_rv p (\\x. sum(0..k) (\\i. X i x)) (X (SUC k)))\n    ==> ((\\n. simple_char_fn_re p (\\x. sum(0..n) (\\i. X i x))\n                            (t / sqrt(&(SUC n))))\n         ---> exp(--(t pow 2 * simple_expectation p (\\x. X 0 x pow 2) / &2)))\n        sequentially /\\\n        ((\\n. simple_char_fn_im p (\\x. sum(0..n) (\\i. X i x))\n                            (t / sqrt(&(SUC n))))\n         ---> &0) sequentially
-      #|  &0 < sigma_sq
-      #|  sqrt sigma_sq pow 2 = sigma_sq
-      #|  exp(--(t pow 2 / &2)) =\n     exp(--((t / sqrt sigma_sq) pow 2 * sigma_sq / &2))
-      #|  forall m. t / (sqrt sigma_sq * sqrt(&(SUC m))) =\n                    (t / sqrt sigma_sq) / sqrt(&(SUC m))
-      #|  ~(sqrt sigma_sq = &0)
-      #|  &0 < sqrt sigma_sq
-      #|  &0 < sigma_sq
-      #|  sigma_sq = simple_expectation (p:A prob_space)\n       (\\x. (X:num->A->real) 0 x pow 2)
-      #|  forall p:A prob_space (X:num->A->real) t.\n    (forall n. simple_rv p (X n)) /\\\n    simple_expectation p (X 0) = &0 /\\\n    &0 < simple_expectation p (\\x. X 0 x pow 2) /\\\n    (forall i t. simple_char_fn_re p (X i) t = simple_char_fn_re p (X 0) t /\\\n           simple_char_fn_im p (X i) t = simple_char_fn_im p (X 0) t) /\\\n    (forall n k. k < n ==> indep_rv p (\\x. sum(0..k) (\\i. X i x)) (X (SUC k)))\n    ==> ((\\n. simple_char_fn_re p (\\x. sum(0..n) (\\i. X i x))\n              (t / (sqrt(simple_expectation p (\\x. X 0 x pow 2)) *\n                    sqrt(&(SUC n)))))\n         ---> exp(--(t pow 2 / &2)))\n        sequentially /\\\n        ((\\n. simple_char_fn_im p (\\x. sum(0..n) (\\i. X i x))\n              (t / (sqrt(simple_expectation p (\\x. X 0 x pow 2)) *\n                    sqrt(&(SUC n)))))\n         ---> &0) sequentially
-      #|  forall p:A prob_space (X:A->real).\n     simple_rv p X /\\ simple_expectation p X = &0\n     ==> simple_variance p X = simple_expectation p (\\x. X x pow 2)
-      #|  &0 < simple_expectation (p:A prob_space)\n    (\\x. (X:num->A->real) 0 x pow 2)
-      #|  simple_variance (p:A prob_space) ((X:num->A->real) 0) =\n                simple_expectation p (\\x. X 0 x pow 2)
-      #|  forall p:A prob_space (X:num->A->real) t.\n    (forall n. simple_rv p (X n)) /\\\n    simple_expectation p (X 0) = &0 /\\\n    &0 < simple_variance p (X 0) /\\\n    (forall i t. simple_char_fn_re p (X i) t = simple_char_fn_re p (X 0) t /\\\n           simple_char_fn_im p (X i) t = simple_char_fn_im p (X 0) t) /\\\n    (forall n k. k < n ==> indep_rv p (\\x. sum(0..k) (\\i. X i x)) (X (SUC k)))\n    ==> ((\\n. simple_char_fn_re p (\\x. sum(0..n) (\\i. X i x))\n              (t / (sqrt(simple_variance p (X 0)) * sqrt(&(SUC n)))))\n         ---> exp(--(t pow 2 / &2)))\n        sequentially /\\\n        ((\\n. simple_char_fn_im p (\\x. sum(0..n) (\\i. X i x))\n              (t / (sqrt(simple_variance p (X 0)) * sqrt(&(SUC n)))))\n         ---> &0) sequentially
-      #|  simple_mgf (p:A prob_space) (X:A->real) (s:real) =\n   simple_expectation p (\\x. exp(s * X x))
-      #|  \\y:real. exp(s * y)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  forall p:A prob_space (X:A->real) s.\n     simple_rv p X ==> simple_rv p (\\x. exp(s * X x))
-      #|  a:A
-      #|  forall p:A prob_space (X:A->real) s.\n     simple_rv p X ==> &0 <= simple_mgf p X s
-      #|  inv(exp(s * t)) = exp(--(s * t))
-      #|  x:A
-      #|  \\y:real. exp(s * y)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  exp(s * t)
-      #|  \\x:A. exp(s * (X:A->real) x)
-      #|  p:A prob_space
-      #|  (x:A) IN prob_carrier p
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x >= t} =\n                {x | x IN prob_carrier p /\\ exp(s * X x) >= exp(s * t)}
-      #|  forall p:A prob_space (X:A->real) s t.\n     simple_rv p X /\\ &0 < s\n     ==> prob p {x | x IN prob_carrier p /\\ X x >= t} <=\n         exp(--(s * t)) * simple_mgf p X s
-      #|  ~(b - a = &0)
-      #|  (:real)
-      #|  ~(b - a = &0)
-      #|  s * x:real = (b - x) / (b - a) * (s * a) + (x - a) / (b - a) * (s * b)
-      #|  ~(b - a = &0)
-      #|  forall s a b x:real. a < b /\\ a <= x /\\ x <= b\n     ==> exp(s * x) <= (b - x) / (b - a) * exp(s * a) +\n                        (x - a) / (b - a) * exp(s * b)
-      #|  A - B:real
-      #|  forall A B:real. &4 * A * B <= (A + B) pow 2
-      #|  &0 < &4
-      #|  ((A + B:real) pow 2) / &4
-      #|  &0 < (A + B:real) pow 2
-      #|  forall A B:real. &0 <= A /\\ &0 <= B /\\ &0 < A + B\n   ==> (A * B) / (A + B) pow 2 <= &1 / &4
-      #|  &0 < p * exp t
-      #|  p = &0
-      #|  forall p t:real. &0 <= p /\\ p <= &1 ==> &0 < &1 - p + p * exp t
-      #|  (p * (&1 - p) * exp t) / (&1 - p + p * exp t:real) pow 2 =\n     ((&1 - p) * (p * exp t)) / (&1 - p + p * exp t) pow 2
-      #|  forall p t:real. &0 <= p /\\ p <= &1\n   ==> (p * (&1 - p) * exp t) / (&1 - p + p * exp t) pow 2 <= &1 / &4
-      #|  forall p t:real. &0 <= p /\\ p <= &1 ==>\n    ((\\t. --p * t + log(&1 - p + p * exp t))\n     has_real_derivative\n     (--p + (p * exp t) / (&1 - p + p * exp t)))\n    (atreal t)
-      #|  ~(&1 - p + p * exp t = &0)
-      #|  &0 < x ==> ~(x = &0)
-      #|  ~(&1 - p + p * exp t = &0)
-      #|  forall p t:real. &0 <= p /\\ p <= &1 ==>\n    ((\\t. --p + (p * exp t) / (&1 - p + p * exp t))\n     has_real_derivative\n     ((p * (&1 - p) * exp t) / (&1 - p + p * exp t) pow 2))\n    (atreal t)
-      #|  &1 - p + p = &1
-      #|  forall p:real. --p * &0 + log(&1 - p + p * exp(&0)) = &0
-      #|  &1 - p + p = &1
-      #|  forall p:real. --p + (p * exp(&0)) / (&1 - p + p * exp(&0)) = &0
-      #|  &0 <= x /\\ x <= y ==> abs x <= y
-      #|  forall p t:real. &0 <= p /\\ p <= &1\n   ==> abs((p * (&1 - p) * exp t) / (&1 - p + p * exp t) pow 2) <= &1 / &4
-      #|  abs(t:real) pow 2 = t pow 2
-      #|  &1 / &4 * abs(t) pow 2 / &2
-      #|  abs(--p * t + log (&1 - p + p * exp t))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 t : Real, (\226\136\128 n : Num, simple_rv(p, X(n))) && simple_expectation(p, X(0)) == real_of_num(0) && real_of_num(0) < simple_expectation(p, (x : A) => pow(X(0, x), 2)) && (\226\136\128 i : Num, \226\136\128 t : Real, simple_char_fn_re(p, X(i), t) == simple_char_fn_re(p, X(0), t) && simple_char_fn_im(p, X(i), t) == simple_char_fn_im(p, X(0), t)) && (\226\136\128 n : Num, \226\136\128 k : Num, k < n \226\134\146 indep_rv(p, (x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)), X(SUC(k)))) \226\134\146 op_minus_minus_minus_gt((n : Num) => simple_char_fn_im(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), t / sqrt(real_of_num(SUC(n)))), real_of_num(0), sequentially)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 t : Real, (\226\136\128 n : Num, simple_rv(p, X(n))) && simple_expectation(p, X(0)) == real_of_num(0) && real_of_num(0) < simple_expectation(p, (x : A) => pow(X(0, x), 2)) && (\226\136\128 i : Num, \226\136\128 t : Real, simple_char_fn_re(p, X(i), t) == simple_char_fn_re(p, X(0), t) && simple_char_fn_im(p, X(i), t) == simple_char_fn_im(p, X(0), t)) && (\226\136\128 n : Num, \226\136\128 k : Num, k < n \226\134\146 indep_rv(p, (x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)), X(SUC(k)))) \226\134\146 op_minus_minus_minus_gt((n : Num) => simple_char_fn_re(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), t / sqrt(real_of_num(SUC(n)))), exp(-(pow(t, 2) * (simple_expectation(p, (x : A) => pow(X(0, x), 2)) / real_of_num(2)))), sequentially) && op_minus_minus_minus_gt((n : Num) => simple_char_fn_im(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), t / sqrt(real_of_num(SUC(n)))), real_of_num(0), sequentially)
+      #|  real_of_num(0) < (sigma_sq : Real)
+      #|  pow(sqrt((sigma_sq : Real)), 2) == sigma_sq
+      #|  exp(-(pow((t : Real), 2) / real_of_num(2))) == exp(-(pow(t / sqrt((sigma_sq : Real)), 2) * (sigma_sq / real_of_num(2))))
+      #|  \226\136\128 m : Num, (t : Real) / (sqrt((sigma_sq : Real)) * sqrt(real_of_num(SUC(m)))) == t / sqrt(sigma_sq) / sqrt(real_of_num(SUC(m)))
+      #|  !(sqrt((sigma_sq : Real)) == real_of_num(0))
+      #|  real_of_num(0) < sqrt((sigma_sq : Real))
+      #|  real_of_num(0) < (sigma_sq : Real)
+      #|  (sigma_sq : Real) == simple_expectation((p : Prob_space[A]), (x : A) => pow((X : (Num, A) -> Real)(0, x), 2))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 t : Real, (\226\136\128 n : Num, simple_rv(p, X(n))) && simple_expectation(p, X(0)) == real_of_num(0) && real_of_num(0) < simple_expectation(p, (x : A) => pow(X(0, x), 2)) && (\226\136\128 i : Num, \226\136\128 t : Real, simple_char_fn_re(p, X(i), t) == simple_char_fn_re(p, X(0), t) && simple_char_fn_im(p, X(i), t) == simple_char_fn_im(p, X(0), t)) && (\226\136\128 n : Num, \226\136\128 k : Num, k < n \226\134\146 indep_rv(p, (x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)), X(SUC(k)))) \226\134\146 op_minus_minus_minus_gt((n : Num) => simple_char_fn_re(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), t / (sqrt(simple_expectation(p, (x : A) => pow(X(0, x), 2))) * sqrt(real_of_num(SUC(n))))), exp(-(pow(t, 2) / real_of_num(2))), sequentially) && op_minus_minus_minus_gt((n : Num) => simple_char_fn_im(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), t / (sqrt(simple_expectation(p, (x : A) => pow(X(0, x), 2))) * sqrt(real_of_num(SUC(n))))), real_of_num(0), sequentially)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, simple_rv(p, X) && simple_expectation(p, X) == real_of_num(0) \226\134\146 simple_variance(p, X) == simple_expectation(p, (x : A) => pow(X(x), 2))
+      #|  real_of_num(0) < simple_expectation((p : Prob_space[A]), (x : A) => pow((X : (Num, A) -> Real)(0, x), 2))
+      #|  simple_variance((p : Prob_space[A]), (X : (Num, A) -> Real)(0)) == simple_expectation(p, (x : A) => pow(X(0, x), 2))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 t : Real, (\226\136\128 n : Num, simple_rv(p, X(n))) && simple_expectation(p, X(0)) == real_of_num(0) && real_of_num(0) < simple_variance(p, X(0)) && (\226\136\128 i : Num, \226\136\128 t : Real, simple_char_fn_re(p, X(i), t) == simple_char_fn_re(p, X(0), t) && simple_char_fn_im(p, X(i), t) == simple_char_fn_im(p, X(0), t)) && (\226\136\128 n : Num, \226\136\128 k : Num, k < n \226\134\146 indep_rv(p, (x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)), X(SUC(k)))) \226\134\146 op_minus_minus_minus_gt((n : Num) => simple_char_fn_re(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), t / (sqrt(simple_variance(p, X(0))) * sqrt(real_of_num(SUC(n))))), exp(-(pow(t, 2) / real_of_num(2))), sequentially) && op_minus_minus_minus_gt((n : Num) => simple_char_fn_im(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), t / (sqrt(simple_variance(p, X(0))) * sqrt(real_of_num(SUC(n))))), real_of_num(0), sequentially)
+      #|  (simple_mgf : (Prob_space[A], (A) -> Real, Real) -> Real)((p : Prob_space[A]), (X : (A) -> Real), (s : Real)) == simple_expectation(p, (x : A) => exp(s * X(x)))
+      #|  (y : Real) => exp((s : Real) * y)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 s : Real, simple_rv(p, X) \226\134\146 simple_rv(p, (x : A) => exp(s * X(x)))
+      #|  (a : A)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 s : Real, simple_rv(p, X) \226\134\146 real_of_num(0) <= simple_mgf(p, X, s)
+      #|  inv(exp((s : Real) * (t : Real))) == exp(-(s * t))
+      #|  (x : A)
+      #|  (y : Real) => exp((s : Real) * y)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  exp((s : Real) * (t : Real))
+      #|  (x : A) => exp((s : Real) * (X : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) >= (t : Real)} == {(x : A) | IN(x, prob_carrier(p)) && exp((s : Real) * X(x)) >= exp(s * t)}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 s : Real, \226\136\128 t : Real, simple_rv(p, X) && real_of_num(0) < s \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) >= t}) <= exp(-(s * t)) * simple_mgf(p, X, s)
+      #|  !((b : Real) - (a : Real) == real_of_num(0))
+      #|  (UNIV : (Real) -> Bool)
+      #|  !((b : Real) - (a : Real) == real_of_num(0))
+      #|  (s : Real) * (x : Real) == ((b : Real) - x) / (b - (a : Real)) * (s * a) + (x - a) / (b - a) * (s * b)
+      #|  !((b : Real) - (a : Real) == real_of_num(0))
+      #|  \226\136\128 s : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Real, a < b && a <= x && x <= b \226\134\146 exp(s * x) <= (b - x) / (b - a) * exp(s * a) + (x - a) / (b - a) * exp(s * b)
+      #|  (A : Real) - (B : Real)
+      #|  \226\136\128 A : Real, \226\136\128 B : Real, real_of_num(4) * (A * B) <= pow(A + B, 2)
+      #|  real_of_num(0) < real_of_num(4)
+      #|  pow((A : Real) + (B : Real), 2) / real_of_num(4)
+      #|  real_of_num(0) < pow((A : Real) + (B : Real), 2)
+      #|  \226\136\128 A : Real, \226\136\128 B : Real, real_of_num(0) <= A && real_of_num(0) <= B && real_of_num(0) < A + B \226\134\146 A * B / pow(A + B, 2) <= real_of_num(1) / real_of_num(4)
+      #|  real_of_num(0) < (p : Real) * exp((t : Real))
+      #|  (p : Real) == real_of_num(0)
+      #|  \226\136\128 p : Real, \226\136\128 t : Real, real_of_num(0) <= p && p <= real_of_num(1) \226\134\146 real_of_num(0) < real_of_num(1) - p + p * exp(t)
+      #|  (p : Real) * ((real_of_num(1) - p) * exp((t : Real))) / pow(real_of_num(1) - p + p * exp(t), 2) == (real_of_num(1) - p) * (p * exp(t)) / pow(real_of_num(1) - p + p * exp(t), 2)
+      #|  \226\136\128 p : Real, \226\136\128 t : Real, real_of_num(0) <= p && p <= real_of_num(1) \226\134\146 p * ((real_of_num(1) - p) * exp(t)) / pow(real_of_num(1) - p + p * exp(t), 2) <= real_of_num(1) / real_of_num(4)
+      #|  \226\136\128 p : Real, \226\136\128 t : Real, real_of_num(0) <= p && p <= real_of_num(1) \226\134\146 has_real_derivative((t : Real) => -p * t + log(real_of_num(1) - p + p * exp(t)), -p + p * exp(t) / (real_of_num(1) - p + p * exp(t)), atreal(t))
+      #|  !(real_of_num(1) - (p : Real) + p * exp((t : Real)) == real_of_num(0))
+      #|  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+      #|  !(real_of_num(1) - (p : Real) + p * exp((t : Real)) == real_of_num(0))
+      #|  \226\136\128 p : Real, \226\136\128 t : Real, real_of_num(0) <= p && p <= real_of_num(1) \226\134\146 has_real_derivative((t : Real) => -p + p * exp(t) / (real_of_num(1) - p + p * exp(t)), p * ((real_of_num(1) - p) * exp(t)) / pow(real_of_num(1) - p + p * exp(t), 2), atreal(t))
+      #|  real_of_num(1) - (p : Real) + p == real_of_num(1)
+      #|  \226\136\128 p : Real, -p * real_of_num(0) + log(real_of_num(1) - p + p * exp(real_of_num(0))) == real_of_num(0)
+      #|  real_of_num(1) - (p : Real) + p == real_of_num(1)
+      #|  \226\136\128 p : Real, -p + p * exp(real_of_num(0)) / (real_of_num(1) - p + p * exp(real_of_num(0))) == real_of_num(0)
+      #|  real_of_num(0) <= (x : Real) && x <= (y : Real) \226\134\146 abs(x) <= y
+      #|  \226\136\128 p : Real, \226\136\128 t : Real, real_of_num(0) <= p && p <= real_of_num(1) \226\134\146 abs(p * ((real_of_num(1) - p) * exp(t)) / pow(real_of_num(1) - p + p * exp(t), 2)) <= real_of_num(1) / real_of_num(4)
+      #|  pow(abs((t : Real)), 2) == pow(t, 2)
+      #|  real_of_num(1) / real_of_num(4) * (pow(abs((t : Real)), 2) / real_of_num(2))
+      #|  abs(-(p : Real) * (t : Real) + log(real_of_num(1) - p + p * exp(t)))
       #|  1 < 2
-      #|  2 * 1 = 2
-      #|  1 * 1 = 1
-      #|  SUC 1 = 2
-      #|  SUC 0 = 1
-      #|  ~(2 = 1)
-      #|  ~(2 = 0)
-      #|  1 = 1 <=> T
-      #|  ~(1 = 0)
-      #|  0 = 0 <=> T
-      #|  ~(3 <= 2)
-      #|  1 + 1 = 2
+      #|  2 * 1 == 2
+      #|  1 * 1 == 1
+      #|  SUC(1) == 2
+      #|  SUC(0) == 1
+      #|  !(2 == 1)
+      #|  !(2 == 0)
+      #|  (1 == 1) == true
+      #|  !(1 == 0)
+      #|  (0 == 0) == true
+      #|  !(3 <= 2)
+      #|  1 + 1 == 2
       #|  1 <= 1
-      #|  0 + 1 = 1
-      #|  1 + 1 = 2
-      #|  t:real
-      #|  &0
-      #|  ~(2 = 1)
-      #|  ~(2 = 0)
-      #|  1 + 1 = 2
-      #|  u:real
-      #|  ~(2 = 1)
-      #|  ~(2 = 0)
-      #|  1 + 1 = 2
-      #|  0 + 1 = 1
-      #|  1 = 1 <=> T
-      #|  1 = 0 <=> F
-      #|  0 = 0 <=> T
-      #|  i = 0 \\/ i = 1
-      #|  &1 / &4
-      #|  (:real)
+      #|  0 + 1 == 1
+      #|  1 + 1 == 2
+      #|  (t : Real)
+      #|  real_of_num(0)
+      #|  !(2 == 1)
+      #|  !(2 == 0)
+      #|  1 + 1 == 2
+      #|  (u : Real)
+      #|  !(2 == 1)
+      #|  !(2 == 0)
+      #|  1 + 1 == 2
+      #|  0 + 1 == 1
+      #|  (1 == 1) == true
+      #|  (1 == 0) == false
+      #|  (0 == 0) == true
+      #|  (i : Num) == 0 || i == 1
+      #|  real_of_num(1) / real_of_num(4)
+      #|  (UNIV : (Real) -> Bool)
       #|  1
-      #|  \\(i:num) (t:real).\n       if i = 0 then --p * t + log(&1 - p + p * exp t)\n       else if i = 1 then --p + (p * exp t) / (&1 - p + p * exp t)\n       else (p * (&1 - p) * exp t) / (&1 - p + p * exp t) pow 2
-      #|  forall p t:real. &0 <= p /\\ p <= &1\n   ==> --p * t + log(&1 - p + p * exp t) <= t pow 2 / &8
-      #|  e:real
-      #|  exp(--p * u)
-      #|  f:real
-      #|  exp(u:real)
-      #|  exp((&1 - p) * u) = exp(--p * u) * exp(u:real)
-      #|  &0 < &1 - p + p * exp u
-      #|  forall p u:real. &0 <= p /\\ p <= &1\n   ==> (&1 - p) * exp(--p * u) + p * exp((&1 - p) * u) =\n       exp(--p * u + log(&1 - p + p * exp u))
-      #|  (s * (b - a)) pow 2 / &8
-      #|  s * (b - a):real
-      #|  p:real
-      #|  ~(b - a = &0)
-      #|  s * b = (&1 - p) * (s * (b - a)):real
-      #|  ~(b - a = &0)
-      #|  s * a = --p * (s * (b - a)):real
-      #|  p <= &1
-      #|  &0 <= p
-      #|  p = (--a) / (b - a):real
-      #|  ~(b - a = &0)
-      #|  b / (b - a) = &1 - (--a) / (b - a):real
-      #|  ~(b - a = &0)
-      #|  &0 < b - a
-      #|  forall a b s:real. a <= &0 /\\ &0 <= b /\\ a < b\n     ==> b / (b - a) * exp(s * a) + (--a) / (b - a) * exp(s * b) <=\n         exp(s pow 2 * (b - a) pow 2 / &8)
-      #|  ~(b - a = &0)
-      #|  d:real
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  \\x:A. d * (X:A->real) x
-      #|  \\x:A. (c:real)
-      #|  p:A prob_space
-      #|  ~(b - a = &0)
-      #|  (b - (X:A->real) y) / (b - a) * exp(s * a) +\n               (X y - a) / (b - a) * exp(s * b)
-      #|  y:A
-      #|  simple_expectation (p:A prob_space) (\\x:A. c + d * (X:A->real) x)
-      #|  d = (exp(s * b) - exp(s * a)) / (b - a)
-      #|  c = (b * exp(s * a) - a * exp(s * b)) / (b - a)
-      #|  ~(b - a = &0)
-      #|  forall p:A prob_space (X:A->real) a b s.\n     simple_rv p X /\\\n     simple_expectation p X = &0 /\\\n     (forall x. x IN prob_carrier p ==> a <= X x /\\ X x <= b) /\\\n     a < b\n     ==> simple_mgf p X s <=\n         b / (b - a) * exp(s * a) + (--a) / (b - a) * exp(s * b)
-      #|  simple_expectation (p:A prob_space) (X:A->real) <=\n                  simple_expectation p (\\x:A. b:real)
-      #|  simple_expectation (p:A prob_space) (\\x:A. a:real) <=\n                  simple_expectation p (X:A->real)
-      #|  b / (b - a) * exp(s * a) + (--a) / (b - a) * exp(s * b)
-      #|  forall p:A prob_space (X:A->real) a b s.\n     simple_rv p X /\\\n     simple_expectation p X = &0 /\\\n     (forall x. x IN prob_carrier p ==> a <= X x /\\ X x <= b) /\\\n     a < b\n     ==> simple_mgf p X s <= exp(s pow 2 * (b - a) pow 2 / &8)
-      #|  exp(--(s * t)) * exp(s pow 2 * (b - a) pow 2 / &8)
-      #|  &0 < t
-      #|  &0 < (b - a) pow 2
-      #|  --(s * t) + s pow 2 * (b - a) pow 2 / &8 =\n     --(&2 * t pow 2 / (b - a) pow 2)
-      #|  exp(--(s * t)) * exp(s pow 2 * (b - a) pow 2 / &8) =\n     exp(--(s * t) + s pow 2 * (b - a) pow 2 / &8)
-      #|  exp(--(s * t)) * simple_mgf (p:A prob_space) (X:A->real) s
-      #|  prob (p:A prob_space) {x | x IN prob_carrier p /\\ (X:A->real) x >= t} <=\n     exp(--(s * t)) * exp(s pow 2 * (b - a) pow 2 / &8)
-      #|  exp(--(s * t)) * simple_mgf (p:A prob_space) (X:A->real) s <=\n     exp(--(s * t)) * exp(s pow 2 * (b - a) pow 2 / &8)
-      #|  simple_mgf (p:A prob_space) (X:A->real) s <=\n     exp(s pow 2 * (b - a) pow 2 / &8)
-      #|  prob (p:A prob_space) {x | x IN prob_carrier p /\\ (X:A->real) x >= t} <=\n     exp(--(s * t)) * simple_mgf p X s
-      #|  &0 < s
-      #|  ~((b - a) pow 2 = &0)
-      #|  &0 < (b - a) pow 2
-      #|  s = &4 * t / (b - a) pow 2
-      #|  forall p:A prob_space (X:A->real) a b t.\n     simple_rv p X /\\\n     simple_expectation p X = &0 /\\\n     (forall x. x IN prob_carrier p ==> a <= X x /\\ X x <= b) /\\\n     a < b /\\ &0 < t\n     ==> prob p {x | x IN prob_carrier p /\\ X x >= t} <=\n         exp(--(&2 * t pow 2 / (b - a) pow 2))
-      #|  \\v:real. exp(s * v)
-      #|  \\u:real. exp(s * u)
-      #|  Y:A->real
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  (\\x:A. exp(s * ((X:A->real) x + (Y:A->real) x))) =\n     (\\x. exp(s * X x) * exp(s * Y x))
-      #|  forall p:A prob_space (X:A->real) (Y:A->real) s.\n     simple_rv p X /\\ simple_rv p Y /\\ indep_rv p X Y\n     ==> simple_mgf p (\\x. X x + Y x) s = simple_mgf p X s * simple_mgf p Y s
-      #|  i <= n ==> i <= SUC n
-      #|  exp(s pow 2 * sum(0..n) (\\i. ((b:num->real) i - (a:num->real) i) pow 2) / &8) *\n              exp(s pow 2 * ((b:num->real) (SUC n) - (a:num->real) (SUC n)) pow 2 / &8)
-      #|  n < SUC n
-      #|  i <= n ==> i <= SUC n
-      #|  simple_mgf (p:A prob_space) (\\x:A. sum (0..n) (\\i. (X:num->A->real) i x) + X (SUC n) x) s =\n     simple_mgf p (\\x. sum(0..n) (\\i. X i x)) s * simple_mgf p (X (SUC n)) s
-      #|  simple_mgf (p:A prob_space) ((X:num->A->real) (SUC n)) s <=\n     exp(s pow 2 * ((b:num->real) (SUC n) - (a:num->real) (SUC n)) pow 2 / &8)
-      #|  simple_mgf (p:A prob_space) (\\x. sum(0..n) (\\i. (X:num->A->real) i x)) s <=\n     exp(s pow 2 * sum(0..n) (\\i. ((b:num->real) i - (a:num->real) i) pow 2) / &8)
-      #|  forall p:A prob_space (X:num->A->real) (a:num->real) (b:num->real) s n.\n     (forall i. i <= n ==> simple_rv p (X i)) /\\\n     (forall i. i <= n ==> simple_expectation p (X i) = &0) /\\\n     (forall i. i <= n ==> forall x. x IN prob_carrier p ==> a i <= X i x /\\ X i x <= b i) /\\\n     (forall i. i <= n ==> a i < b i) /\\\n     (forall k. k < n ==> indep_rv p (\\x. sum(0..k) (\\i. X i x)) (X (SUC k)))\n     ==> simple_mgf p (\\x. sum(0..n) (\\i. X i x)) s <=\n         exp(s pow 2 * sum(0..n) (\\i. (b i - a i) pow 2) / &8)
-      #|  &0 < t
-      #|  &0 < V
-      #|  exp(--(s * t)) * exp(s pow 2 * V / &8)
-      #|  exp(--(s * t)) * simple_mgf (p:A prob_space) (\\x. sum(0..n) (\\i. (X:num->A->real) i x)) s
-      #|  prob (p:A prob_space) {x | x IN prob_carrier p /\\ sum(0..n) (\\i. (X:num->A->real) i x) >= t} <=\n     exp(--(s * t)) * exp(s pow 2 * V / &8)
-      #|  simple_mgf (p:A prob_space) (\\x. sum(0..n) (\\i. (X:num->A->real) i x)) s <=\n     exp(s pow 2 * V / &8)
-      #|  prob (p:A prob_space) {x | x IN prob_carrier p /\\ sum(0..n) (\\i. (X:num->A->real) i x) >= t} <=\n     exp(--(s * t)) * simple_mgf p (\\x. sum(0..n) (\\i. X i x)) s
-      #|  &0 < s
-      #|  ~(V = &0)
-      #|  s = &4 * t / V
-      #|  V = sum(0..n) (\\i. ((b:num->real) i - (a:num->real) i) pow 2)
-      #|  forall p:A prob_space (X:num->A->real) (a:num->real) (b:num->real) t n.\n     (forall i. i <= n ==> simple_rv p (X i)) /\\\n     (forall i. i <= n ==> simple_expectation p (X i) = &0) /\\\n     (forall i. i <= n ==> forall x. x IN prob_carrier p ==> a i <= X i x /\\ X i x <= b i) /\\\n     (forall i. i <= n ==> a i < b i) /\\\n     (forall k. k < n ==> indep_rv p (\\x. sum(0..k) (\\i. X i x)) (X (SUC k))) /\\\n     &0 < t /\\ &0 < sum(0..n) (\\i. (b i - a i) pow 2)\n     ==> prob p {x | x IN prob_carrier p /\\ sum(0..n) (\\i. X i x) >= t} <=\n         exp(--(&2 * t pow 2 / sum(0..n) (\\i. (b i - a i) pow 2)))
-      #|  {x:A | x IN prob_carrier p /\\ Y x + d <= b} =\n     {x | x IN prob_carrier p /\\ Y x <= b - d}
-      #|  {x:A | x IN prob_carrier p /\\ X x + c <= a} =\n     {x | x IN prob_carrier p /\\ X x <= a - c}
-      #|  {x:A | x IN prob_carrier p /\\ X x + c <= a /\\ Y x + d <= b} =\n     {x | x IN prob_carrier p /\\ X x <= a - c /\\ Y x <= b - d}
-      #|  (\\x:A. d:real)
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  random_variable (p:A prob_space) (\\x:A. (Y:A->real) x + d)
-      #|  (\\x:A. c:real)
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  random_variable (p:A prob_space) (\\x:A. (X:A->real) x + c)
-      #|  forall p:A prob_space (X:A->real) (Y:A->real) c d.\n     indep_rv p X Y\n     ==> indep_rv p (\\x. X x + c) (\\x. Y x + d)
-      #|  (\\x:A. (X:num->A->real) (SUC k) x -\n         simple_expectation p (X (SUC k))) =\n      (\\x. X (SUC k) x + --simple_expectation p (X (SUC k)))
-      #|  (\\x:A. sum(0..k) (\\i. (X:num->A->real) i x -\n         simple_expectation p (X i))) =\n      (\\x. sum(0..k) (\\i. X i x) +\n           --sum(0..k) (\\i. simple_expectation p (X i)))
-      #|  (a:num->real) i < (b:num->real) i
-      #|  (a:num->real) i <= (X:num->A->real) i x /\\ X i x <= (b:num->real) i
-      #|  (\\x:A. simple_expectation p ((X:num->A->real) i))
-      #|  (X:num->A->real) i
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) ((X:num->A->real) i)
-      #|  forall i:num. ((b:num->real) i - simple_expectation p ((X:num->A->real) i)) -\n             ((a:num->real) i - simple_expectation p (X i)) = b i - a i
-      #|  n:num
-      #|  t:real
-      #|  \\i:num. (b:num->real) i - simple_expectation p ((X:num->A->real) i)
-      #|  \\i:num. (a:num->real) i - simple_expectation p ((X:num->A->real) i)
-      #|  \\i:num. \\x:A. (X:num->A->real) i x - simple_expectation p (X i)
-      #|  p:A prob_space
-      #|  forall x:A. sum(0..n) (\\i. (X:num->A->real) i x) -\n           sum(0..n) (\\i. simple_expectation p (X i)) =\n           sum(0..n) (\\i. X i x - simple_expectation p (X i))
-      #|  forall p:A prob_space (X:num->A->real) (a:num->real) (b:num->real) t n.\n     (forall i. i <= n ==> simple_rv p (X i)) /\\\n     (forall i. i <= n ==> forall x. x IN prob_carrier p ==> a i <= X i x /\\ X i x <= b i) /\\\n     (forall i. i <= n ==> a i < b i) /\\\n     (forall k. k < n ==> indep_rv p (\\x. sum(0..k) (\\i. X i x)) (X (SUC k))) /\\\n     &0 < t /\\ &0 < sum(0..n) (\\i. (b i - a i) pow 2)\n     ==> prob p {x | x IN prob_carrier p /\\\n           sum(0..n) (\\i. X i x) - sum(0..n) (\\i. simple_expectation p (X i)) >= t} <=\n         exp(--(&2 * t pow 2 / sum(0..n) (\\i. (b i - a i) pow 2)))
-      #|  a = b ==> a - b = &0
-      #|  simple_rv p (\\x:A. (X:num->A->real) (SUC n) x * indicator_fn (B:A->bool) x) /\\\n     simple_rv p (\\x. X n x * indicator_fn B x)
-      #|  (\\x:A. ((X:num->A->real) (SUC n) x - X n x) * indicator_fn (B:A->bool) x) =\n     (\\x. X (SUC n) x * indicator_fn B x - X n x * indicator_fn B x)
-      #|  (B:A->bool) IN prob_events p
-      #|  forall p:A prob_space FF (X:num->A->real) n (B:A->bool).\n     simple_martingale p FF X /\\ B IN FF n\n     ==> simple_expectation p\n           (\\x. (X (SUC n) x - X n x) * indicator_fn B x) = &0
-      #|  R:real->bool
-      #|  p:A prob_space
-      #|  u:real
-      #|  u:real
-      #|  x:A
-      #|  (Y:A->real) x
-      #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\ f((Y:A->real) x) <= v} =\n     UNIONS (IMAGE (\\u. {x | x IN prob_carrier p /\\ Y x = u})\n                   {u:real | u IN R /\\ (f:real->real) u <= v})
-      #|  FINITE (R:real->bool)
-      #|  R = IMAGE (Y:A->real) (prob_carrier p)
-      #|  v:real
-      #|  forall p:A prob_space G (Y:A->real) (f:real->real).\n     sub_sigma_algebra p G /\\ simple_rv p Y /\\ measurable_wrt p G Y\n     ==> measurable_wrt p G (\\x. f(Y x))
-      #|  A:A->bool
-      #|  n:num
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  (exp(s * b) - exp(s * a)) / (b - a)
-      #|  \\x:A. ((X:num->A->real) (SUC n) x - X n x) * indicator_fn (A:A->bool) x
-      #|  p:A prob_space
-      #|  b / (b - a) * exp(s * a) + --a / (b - a) * exp(s * b)
-      #|  indicator_fn (A:A->bool)
-      #|  p:A prob_space
-      #|  \\x:A. (exp(s * b) - exp(s * a)) / (b - a) *\n            (((X:num->A->real) (SUC n) x - X n x) * indicator_fn (A:A->bool) x)
-      #|  \\x:A. (b / (b - a) * exp(s * a) + --a / (b - a) * exp(s * b)) *\n            indicator_fn (A:A->bool) x
-      #|  p:A prob_space
-      #|  (\\x:A. ((b / (b - a) * exp(s * a) + --a / (b - a) * exp(s * b)) +\n              (exp(s * b) - exp(s * a)) / (b - a) *\n              ((X:num->A->real) (SUC n) x - X n x)) *\n             indicator_fn (A:A->bool) x) =\n      (\\x. (b / (b - a) * exp(s * a) + --a / (b - a) * exp(s * b)) *\n           indicator_fn A x +\n           (exp(s * b) - exp(s * a)) / (b - a) *\n           ((X (SUC n) x - X n x) * indicator_fn A x))
-      #|  simple_expectation (p:A prob_space)\n      (\\x:A. ((b / (b - a) * exp(s * a) + --a / (b - a) * exp(s * b)) +\n               (exp(s * b) - exp(s * a)) / (b - a) *\n               ((X:num->A->real) (SUC n) x - X n x)) *\n              indicator_fn (A:A->bool) x) =\n     (b / (b - a) * exp(s * a) + --a / (b - a) * exp(s * b)) * prob p A +\n     (exp(s * b) - exp(s * a)) / (b - a) *\n       simple_expectation p (\\x. (X (SUC n) x - X n x) * indicator_fn A x)
-      #|  ~(b - a = &0)
-      #|  x:A
-      #|  (b - ((X:num->A->real) (SUC n) x - X n x)) / (b - a) *\n                exp(s * a) +\n                ((X (SUC n) x - X n x) - a) / (b - a) * exp(s * b)
-      #|  x:A
-      #|  simple_expectation (p:A prob_space)\n      (\\x:A. ((b / (b - a) * exp(s * a) + --a / (b - a) * exp(s * b)) +\n               (exp(s * b) - exp(s * a)) / (b - a) *\n               ((X:num->A->real) (SUC n) x - X n x)) *\n              indicator_fn (A:A->bool) x)
-      #|  ~(b - a = &0)
-      #|  simple_rv p (\\x:A. (X:num->A->real) (SUC n) x - X n x)
-      #|  (A:A->bool) IN prob_events p
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real)\n     (n:num) (s:real) (a:real) (b:real) (A:A->bool).\n     simple_martingale p FF X /\\\n     A IN FF n /\\\n     (forall x. x IN prob_carrier p ==>\n        a <= X (SUC n) x - X n x /\\ X (SUC n) x - X n x <= b) /\\\n     a < b\n     ==> simple_expectation p\n           (\\x. exp(s * (X (SUC n) x - X n x)) * indicator_fn A x) <=\n         (b / (b - a) * exp(s * a) + --a / (b - a) * exp(s * b)) *\n         prob p A
-      #|  (b / (b - a) * exp(s * a) + --a / (b - a) * exp(s * b)) *\n              prob p (A:A->bool)
-      #|  x:A
-      #|  simple_expectation (p:A prob_space) (\\x:A. b)
-      #|  simple_expectation p\n      (\\x:A. (X:num->A->real) (SUC n) x - X n x) <= b
-      #|  x:A
-      #|  simple_expectation (p:A prob_space) (\\x:A. a)
-      #|  a <= simple_expectation p\n      (\\x:A. (X:num->A->real) (SUC n) x - X n x)
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  (X:num->A->real) n
-      #|  (X:num->A->real) (SUC n)
-      #|  p:A prob_space
-      #|  simple_expectation p (\\x:A. (X:num->A->real) (SUC n) x - X n x) = &0
-      #|  simple_rv p (\\x:A. (X:num->A->real) (SUC n) x - X n x)
-      #|  a <= &0 /\\ &0 <= b
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real)\n     (n:num) (s:real) (a:real) (b:real) (A:A->bool).\n     simple_martingale p FF X /\\\n     A IN FF n /\\\n     (forall x. x IN prob_carrier p ==>\n        a <= X (SUC n) x - X n x /\\ X (SUC n) x - X n x <= b) /\\\n     a < b\n     ==> simple_expectation p\n           (\\x. exp(s * (X (SUC n) x - X n x)) * indicator_fn A x) <=\n         exp(s pow 2 * (b - a) pow 2 / &8) * prob p A
-      #|  n:num
-      #|  SUC n
-      #|  u:real
-      #|  u:real
-      #|  indicator_fn {z:A | z IN prob_carrier p /\\ (Z:A->real) z = u}
-      #|  p:A prob_space
-      #|  u:real
-      #|  u:real
-      #|  S:real->bool
-      #|  \\u:real. \\x:A. u *\n        indicator_fn {z | z IN prob_carrier p /\\ (Z:A->real) z = u} x
-      #|  p:A prob_space
-      #|  w:A
-      #|  \\v:real. v
-      #|  Z:A->real
-      #|  p:A prob_space
-      #|  w:A
-      #|  simple_expectation p (Z:A->real) =\n     simple_expectation p (\\x. sum S (\\u. u *\n       indicator_fn {z | z IN prob_carrier p /\\ Z z = u} x))
-      #|  simple_expectation p (Z:A->real) =\n     sum S (\\u:real. u * prob p {z:A | z IN prob_carrier p /\\ Z z = u})
-      #|  u:real
-      #|  \\x:A. exp(s * ((X:num->A->real) (SUC n) x - X n x)) *\n       indicator_fn {z | z IN prob_carrier p /\\ (Z:A->real) z = u} x
-      #|  p:A prob_space
-      #|  u:real
-      #|  u:real
-      #|  S:real->bool
-      #|  \\u:real. \\x:A. u *\n        (exp(s * ((X:num->A->real) (SUC n) x - X n x)) *\n          indicator_fn {z | z IN prob_carrier p /\\ (Z:A->real) z = u} x)
-      #|  p:A prob_space
-      #|  simple_expectation p (\\x:A. (Z:A->real) x *\n       exp(s * ((X:num->A->real) (SUC n) x - X n x))) =\n     simple_expectation p (\\x. sum S (\\u. u *\n       (exp(s * (X (SUC n) x - X n x)) *\n         indicator_fn {z | z IN prob_carrier p /\\ Z z = u} x)))
-      #|  simple_expectation p (\\x:A. (Z:A->real) x *\n       exp(s * ((X:num->A->real) (SUC n) x - X n x))) =\n     sum S (\\u:real. u * simple_expectation p\n       (\\x. exp(s * (X (SUC n) x - X n x)) *\n         indicator_fn {z | z IN prob_carrier p /\\ Z z = u} x))
-      #|  u:real
-      #|  w:A
-      #|  \\v:real. v
-      #|  Z:A->real
-      #|  p:A prob_space
-      #|  w:A
-      #|  forall x:A. x IN prob_carrier p ==>\n       (Z:A->real) x * exp(s * ((X:num->A->real) (SUC n) x - X n x)) =\n       sum S (\\u. u * (exp(s * (X (SUC n) x - X n x)) *\n         indicator_fn {z | z IN prob_carrier p /\\ Z z = u} x))
-      #|  simple_rv p (\\x:A. exp(s * ((X:num->A->real) (SUC n) x - X n x)))
-      #|  forall u:real. u IN S ==> &0 <= u
-      #|  p:A prob_space
-      #|  forall u:real. {x:A | x IN prob_carrier p /\\ (Z:A->real) x = u} IN (FF:num->(A->bool)->bool) (n:num)
-      #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) n)
-      #|  FINITE (S:real->bool)
-      #|  S = IMAGE (Z:A->real) (prob_carrier p)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real)\n     (n:num) (s:real) (a:real) (b:real) (Z:A->real).\n     simple_martingale p FF X /\\\n     simple_rv p Z /\\ measurable_wrt p (FF n) Z /\\\n     (forall x. x IN prob_carrier p ==> &0 <= Z x) /\\\n     (forall x. x IN prob_carrier p ==>\n        a <= X (SUC n) x - X n x /\\ X (SUC n) x - X n x <= b) /\\\n     a < b\n     ==> simple_expectation p\n           (\\x. Z x * exp(s * (X (SUC n) x - X n x))) <=\n         exp(s pow 2 * (b - a) pow 2 / &8) * simple_expectation p Z
-      #|  exp(s pow 2 * ((b:num->real) (SUC n) - (a:num->real) (SUC n)) pow 2 / &8) *\n               exp(s pow 2 * sum (0..n) (\\i. ((b:num->real) i - (a:num->real) i) pow 2) / &8)
-      #|  exp(s pow 2 * ((b:num->real) (SUC n) - (a:num->real) (SUC n)) pow 2 / &8) *\n               simple_expectation p (Z:A->real)
-      #|  simple_expectation p (\\x:A. exp(s * ((X:num->A->real) (SUC(SUC n)) x - X 0 x))) =\n      simple_expectation p (\\x. (Z:A->real) x * exp(s * (X (SUC(SUC n)) x - X (SUC n) x)))
-      #|  FF:num->(A->bool)->bool
-      #|  simple_expectation p (\\x:A. (Z:A->real) x * exp(s * ((X:num->A->real) (SUC(SUC n)) x - X (SUC n) x))) <=\n      exp(s pow 2 * ((b:num->real) (SUC n) - (a:num->real) (SUC n)) pow 2 / &8) *\n      simple_expectation p Z
-      #|  forall x:A. x IN prob_carrier p ==> &0 <= Z x
-      #|  p:A prob_space
-      #|  p:A prob_space
-      #|  (\\x:A. exp(s * ((X:num->A->real) (SUC n) x - X 0 x))) =\n       (\\x. (\\v. exp(s * v)) ((\\x. X (SUC n) x - X 0 x) x))
-      #|  measurable_wrt p ((FF:num->(A->bool)->bool) (SUC n)) (Z:A->real)
-      #|  simple_rv p (Z:A->real)
-      #|  SUC n
+      #|  (i : Num) => (t : Real) => if i == 0 { -(p : Real) * t + log(real_of_num(1) - p + p * exp(t)) } else { if i == 1 { -p + p * exp(t) / (real_of_num(1) - p + p * exp(t)) } else { p * ((real_of_num(1) - p) * exp(t)) / pow(real_of_num(1) - p + p * exp(t), 2) } }
+      #|  \226\136\128 p : Real, \226\136\128 t : Real, real_of_num(0) <= p && p <= real_of_num(1) \226\134\146 -p * t + log(real_of_num(1) - p + p * exp(t)) <= pow(t, 2) / real_of_num(8)
+      #|  (e : Real)
+      #|  exp(-(p : Real) * (u : Real))
+      #|  (f : Real)
+      #|  exp((u : Real))
+      #|  exp((real_of_num(1) - (p : Real)) * (u : Real)) == exp(-p * u) * exp(u)
+      #|  real_of_num(0) < real_of_num(1) - (p : Real) + p * exp((u : Real))
+      #|  \226\136\128 p : Real, \226\136\128 u : Real, real_of_num(0) <= p && p <= real_of_num(1) \226\134\146 (real_of_num(1) - p) * exp(-p * u) + p * exp((real_of_num(1) - p) * u) == exp(-p * u + log(real_of_num(1) - p + p * exp(u)))
+      #|  pow((s : Real) * ((b : Real) - (a : Real)), 2) / real_of_num(8)
+      #|  (s : Real) * ((b : Real) - (a : Real))
+      #|  (p : Real)
+      #|  !((b : Real) - (a : Real) == real_of_num(0))
+      #|  (s : Real) * (b : Real) == (real_of_num(1) - (p : Real)) * (s * (b - (a : Real)))
+      #|  !((b : Real) - (a : Real) == real_of_num(0))
+      #|  (s : Real) * (a : Real) == -(p : Real) * (s * ((b : Real) - a))
+      #|  (p : Real) <= real_of_num(1)
+      #|  real_of_num(0) <= (p : Real)
+      #|  (p : Real) == -(a : Real) / ((b : Real) - a)
+      #|  !((b : Real) - (a : Real) == real_of_num(0))
+      #|  (b : Real) / (b - (a : Real)) == real_of_num(1) - -a / (b - a)
+      #|  !((b : Real) - (a : Real) == real_of_num(0))
+      #|  real_of_num(0) < (b : Real) - (a : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 s : Real, a <= real_of_num(0) && real_of_num(0) <= b && a < b \226\134\146 b / (b - a) * exp(s * a) + -a / (b - a) * exp(s * b) <= exp(pow(s, 2) * (pow(b - a, 2) / real_of_num(8)))
+      #|  !((b : Real) - (a : Real) == real_of_num(0))
+      #|  (d : Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (x : A) => (d : Real) * (X : (A) -> Real)(x)
+      #|  (x : A) => (c : Real)
+      #|  (p : Prob_space[A])
+      #|  !((b : Real) - (a : Real) == real_of_num(0))
+      #|  ((b : Real) - (X : (A) -> Real)((y : A))) / (b - (a : Real)) * exp((s : Real) * a) + (X(y) - a) / (b - a) * exp(s * b)
+      #|  (y : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (c : Real) + (d : Real) * (X : (A) -> Real)(x))
+      #|  (d : Real) == (exp((s : Real) * (b : Real)) - exp(s * (a : Real))) / (b - a)
+      #|  (c : Real) == ((b : Real) * exp((s : Real) * (a : Real)) - a * exp(s * b)) / (b - a)
+      #|  !((b : Real) - (a : Real) == real_of_num(0))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 s : Real, simple_rv(p, X) && simple_expectation(p, X) == real_of_num(0) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 a <= X(x) && X(x) <= b) && a < b \226\134\146 simple_mgf(p, X, s) <= b / (b - a) * exp(s * a) + -a / (b - a) * exp(s * b)
+      #|  simple_expectation((p : Prob_space[A]), (X : (A) -> Real)) <= simple_expectation(p, (x : A) => (b : Real))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (a : Real)) <= simple_expectation(p, (X : (A) -> Real))
+      #|  (b : Real) / (b - (a : Real)) * exp((s : Real) * a) + -a / (b - a) * exp(s * b)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 s : Real, simple_rv(p, X) && simple_expectation(p, X) == real_of_num(0) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 a <= X(x) && X(x) <= b) && a < b \226\134\146 simple_mgf(p, X, s) <= exp(pow(s, 2) * (pow(b - a, 2) / real_of_num(8)))
+      #|  exp(-((s : Real) * (t : Real))) * exp(pow(s, 2) * (pow((b : Real) - (a : Real), 2) / real_of_num(8)))
+      #|  real_of_num(0) < (t : Real)
+      #|  real_of_num(0) < pow((b : Real) - (a : Real), 2)
+      #|  -((s : Real) * (t : Real)) + pow(s, 2) * (pow((b : Real) - (a : Real), 2) / real_of_num(8)) == -(real_of_num(2) * (pow(t, 2) / pow(b - a, 2)))
+      #|  exp(-((s : Real) * (t : Real))) * exp(pow(s, 2) * (pow((b : Real) - (a : Real), 2) / real_of_num(8))) == exp(-(s * t) + pow(s, 2) * (pow(b - a, 2) / real_of_num(8)))
+      #|  exp(-((s : Real) * (t : Real))) * simple_mgf((p : Prob_space[A]), (X : (A) -> Real), s)
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) >= (t : Real)}) <= exp(-((s : Real) * t)) * exp(pow(s, 2) * (pow((b : Real) - (a : Real), 2) / real_of_num(8)))
+      #|  exp(-((s : Real) * (t : Real))) * simple_mgf((p : Prob_space[A]), (X : (A) -> Real), s) <= exp(-(s * t)) * exp(pow(s, 2) * (pow((b : Real) - (a : Real), 2) / real_of_num(8)))
+      #|  simple_mgf((p : Prob_space[A]), (X : (A) -> Real), (s : Real)) <= exp(pow(s, 2) * (pow((b : Real) - (a : Real), 2) / real_of_num(8)))
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) >= (t : Real)}) <= exp(-((s : Real) * t)) * simple_mgf(p, X, s)
+      #|  real_of_num(0) < (s : Real)
+      #|  !(pow((b : Real) - (a : Real), 2) == real_of_num(0))
+      #|  real_of_num(0) < pow((b : Real) - (a : Real), 2)
+      #|  (s : Real) == real_of_num(4) * ((t : Real) / pow((b : Real) - (a : Real), 2))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 t : Real, simple_rv(p, X) && simple_expectation(p, X) == real_of_num(0) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 a <= X(x) && X(x) <= b) && a < b && real_of_num(0) < t \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) >= t}) <= exp(-(real_of_num(2) * (pow(t, 2) / pow(b - a, 2))))
+      #|  (v : Real) => exp((s : Real) * v)
+      #|  (u : Real) => exp((s : Real) * u)
+      #|  (Y : (A) -> Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => exp((s : Real) * ((X : (A) -> Real)(x) + (Y : (A) -> Real)(x)))) == ((x : A) => exp(s * X(x)) * exp(s * Y(x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, \226\136\128 s : Real, simple_rv(p, X) && simple_rv(p, Y) && indep_rv(p, X, Y) \226\134\146 simple_mgf(p, (x : A) => X(x) + Y(x), s) == simple_mgf(p, X, s) * simple_mgf(p, Y, s)
+      #|  (i : Num) <= (n : Num) \226\134\146 i <= SUC(n)
+      #|  exp(pow((s : Real), 2) * (sum(op_dot_dot(0, (n : Num)), (i : Num) => pow((b : (Num) -> Real)(i) - (a : (Num) -> Real)(i), 2)) / real_of_num(8))) * exp(pow(s, 2) * (pow(b(SUC(n)) - a(SUC(n)), 2) / real_of_num(8)))
+      #|  (n : Num) < SUC(n)
+      #|  (i : Num) <= (n : Num) \226\134\146 i <= SUC(n)
+      #|  simple_mgf((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)) + X(SUC(n), x), (s : Real)) == simple_mgf(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), s) * simple_mgf(p, X(SUC(n)), s)
+      #|  simple_mgf((p : Prob_space[A]), (X : (Num, A) -> Real)(SUC((n : Num))), (s : Real)) <= exp(pow(s, 2) * (pow((b : (Num) -> Real)(SUC(n)) - (a : (Num) -> Real)(SUC(n)), 2) / real_of_num(8)))
+      #|  simple_mgf((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)), (s : Real)) <= exp(pow(s, 2) * (sum(op_dot_dot(0, n), (i : Num) => pow((b : (Num) -> Real)(i) - (a : (Num) -> Real)(i), 2)) / real_of_num(8)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 s : Real, \226\136\128 n : Num, (\226\136\128 i : Num, i <= n \226\134\146 simple_rv(p, X(i))) && (\226\136\128 i : Num, i <= n \226\134\146 simple_expectation(p, X(i)) == real_of_num(0)) && (\226\136\128 i : Num, i <= n \226\134\146 (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 a(i) <= X(i, x) && X(i, x) <= b(i))) && (\226\136\128 i : Num, i <= n \226\134\146 a(i) < b(i)) && (\226\136\128 k : Num, k < n \226\134\146 indep_rv(p, (x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)), X(SUC(k)))) \226\134\146 simple_mgf(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), s) <= exp(pow(s, 2) * (sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)) / real_of_num(8)))
+      #|  real_of_num(0) < (t : Real)
+      #|  real_of_num(0) < (V : Real)
+      #|  exp(-((s : Real) * (t : Real))) * exp(pow(s, 2) * ((V : Real) / real_of_num(8)))
+      #|  exp(-((s : Real) * (t : Real))) * simple_mgf((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)), s)
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)) >= (t : Real)}) <= exp(-((s : Real) * t)) * exp(pow(s, 2) * ((V : Real) / real_of_num(8)))
+      #|  simple_mgf((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)), (s : Real)) <= exp(pow(s, 2) * ((V : Real) / real_of_num(8)))
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)) >= (t : Real)}) <= exp(-((s : Real) * t)) * simple_mgf(p, (x : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, x)), s)
+      #|  real_of_num(0) < (s : Real)
+      #|  !((V : Real) == real_of_num(0))
+      #|  (s : Real) == real_of_num(4) * ((t : Real) / (V : Real))
+      #|  (V : Real) == sum(op_dot_dot(0, (n : Num)), (i : Num) => pow((b : (Num) -> Real)(i) - (a : (Num) -> Real)(i), 2))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 t : Real, \226\136\128 n : Num, (\226\136\128 i : Num, i <= n \226\134\146 simple_rv(p, X(i))) && (\226\136\128 i : Num, i <= n \226\134\146 simple_expectation(p, X(i)) == real_of_num(0)) && (\226\136\128 i : Num, i <= n \226\134\146 (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 a(i) <= X(i, x) && X(i, x) <= b(i))) && (\226\136\128 i : Num, i <= n \226\134\146 a(i) < b(i)) && (\226\136\128 k : Num, k < n \226\134\146 indep_rv(p, (x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)), X(SUC(k)))) && real_of_num(0) < t && real_of_num(0) < sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)) \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && sum(op_dot_dot(0, n), (i : Num) => X(i, x)) >= t}) <= exp(-(real_of_num(2) * (pow(t, 2) / sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)))))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (Y : (A) -> Real)(x) + (d : Real) <= (b : Real)} == {(x : A) | IN(x, prob_carrier(p)) && Y(x) <= b - d}
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) + (c : Real) <= (a : Real)} == {(x : A) | IN(x, prob_carrier(p)) && X(x) <= a - c}
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) + (c : Real) <= (a : Real) && (Y : (A) -> Real)(x) + (d : Real) <= (b : Real)} == {(x : A) | IN(x, prob_carrier(p)) && X(x) <= a - c && Y(x) <= b - d}
+      #|  (x : A) => (d : Real)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  random_variable((p : Prob_space[A]), (x : A) => (Y : (A) -> Real)(x) + (d : Real))
+      #|  (x : A) => (c : Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  random_variable((p : Prob_space[A]), (x : A) => (X : (A) -> Real)(x) + (c : Real))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, \226\136\128 c : Real, \226\136\128 d : Real, indep_rv(p, X, Y) \226\134\146 indep_rv(p, (x : A) => X(x) + c, (x : A) => Y(x) + d)
+      #|  ((x : A) => (X : (Num, A) -> Real)(SUC((k : Num)), x) - simple_expectation((p : Prob_space[A]), X(SUC(k)))) == ((x : A) => X(SUC(k), x) + -simple_expectation(p, X(SUC(k))))
+      #|  ((x : A) => sum(op_dot_dot(0, (k : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x) - simple_expectation((p : Prob_space[A]), X(i)))) == ((x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)) + -sum(op_dot_dot(0, k), (i : Num) => simple_expectation(p, X(i))))
+      #|  (a : (Num) -> Real)((i : Num)) < (b : (Num) -> Real)(i)
+      #|  (a : (Num) -> Real)((i : Num)) <= (X : (Num, A) -> Real)(i, (x : A)) && X(i, x) <= (b : (Num) -> Real)(i)
+      #|  (x : A) => simple_expectation((p : Prob_space[A]), (X : (Num, A) -> Real)((i : Num)))
+      #|  (X : (Num, A) -> Real)((i : Num))
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)((i : Num)))
+      #|  \226\136\128 i : Num, (b : (Num) -> Real)(i) - simple_expectation((p : Prob_space[A]), (X : (Num, A) -> Real)(i)) - ((a : (Num) -> Real)(i) - simple_expectation(p, X(i))) == b(i) - a(i)
+      #|  (n : Num)
+      #|  (t : Real)
+      #|  (i : Num) => (b : (Num) -> Real)(i) - simple_expectation((p : Prob_space[A]), (X : (Num, A) -> Real)(i))
+      #|  (i : Num) => (a : (Num) -> Real)(i) - simple_expectation((p : Prob_space[A]), (X : (Num, A) -> Real)(i))
+      #|  (i : Num) => (x : A) => (X : (Num, A) -> Real)(i, x) - simple_expectation((p : Prob_space[A]), X(i))
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 x : A, sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)) - sum(op_dot_dot(0, n), (i : Num) => simple_expectation((p : Prob_space[A]), X(i))) == sum(op_dot_dot(0, n), (i : Num) => X(i, x) - simple_expectation(p, X(i)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 t : Real, \226\136\128 n : Num, (\226\136\128 i : Num, i <= n \226\134\146 simple_rv(p, X(i))) && (\226\136\128 i : Num, i <= n \226\134\146 (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 a(i) <= X(i, x) && X(i, x) <= b(i))) && (\226\136\128 i : Num, i <= n \226\134\146 a(i) < b(i)) && (\226\136\128 k : Num, k < n \226\134\146 indep_rv(p, (x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)), X(SUC(k)))) && real_of_num(0) < t && real_of_num(0) < sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)) \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && sum(op_dot_dot(0, n), (i : Num) => X(i, x)) - sum(op_dot_dot(0, n), (i : Num) => simple_expectation(p, X(i))) >= t}) <= exp(-(real_of_num(2) * (pow(t, 2) / sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)))))
+      #|  (a : Real) == (b : Real) \226\134\146 a - b == real_of_num(0)
+      #|  simple_rv((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) * indicator_fn((B : (A) -> Bool), x)) && simple_rv(p, (x : A) => X(n, x) * indicator_fn(B, x))
+      #|  ((x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x)) * indicator_fn((B : (A) -> Bool), x)) == ((x : A) => X(SUC(n), x) * indicator_fn(B, x) - X(n, x) * indicator_fn(B, x))
+      #|  IN((B : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 B : (A) -> Bool, simple_martingale(p, FF, X) && IN(B, FF(n)) \226\134\146 simple_expectation(p, (x : A) => (X(SUC(n), x) - X(n, x)) * indicator_fn(B, x)) == real_of_num(0)
+      #|  (R : (Real) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (u : Real)
+      #|  (u : Real)
+      #|  (x : A)
+      #|  (Y : (A) -> Real)((x : A))
+      #|  (x : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (Real) -> Real)((Y : (A) -> Real)(x)) <= (v : Real)} == UNIONS(IMAGE((u : Real) => {(x : A) | IN(x, prob_carrier(p)) && Y(x) == u}, {(u : Real) | IN(u, (R : (Real) -> Bool)) && f(u) <= v}))
+      #|  FINITE((R : (Real) -> Bool))
+      #|  (R : (Real) -> Bool) == IMAGE((Y : (A) -> Real), prob_carrier((p : Prob_space[A])))
+      #|  (v : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 Y : (A) -> Real, \226\136\128 f : (Real) -> Real, sub_sigma_algebra(p, G) && simple_rv(p, Y) && measurable_wrt(p, G, Y) \226\134\146 measurable_wrt(p, G, (x : A) => f(Y(x)))
+      #|  (A : (A) -> Bool)
+      #|  (n : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (exp((s : Real) * (b : Real)) - exp(s * (a : Real))) / (b - a)
+      #|  (x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x)) * indicator_fn((A : (A) -> Bool), x)
+      #|  (p : Prob_space[A])
+      #|  (b : Real) / (b - (a : Real)) * exp((s : Real) * a) + -a / (b - a) * exp(s * b)
+      #|  indicator_fn((A : (A) -> Bool))
+      #|  (p : Prob_space[A])
+      #|  (x : A) => (exp((s : Real) * (b : Real)) - exp(s * (a : Real))) / (b - a) * (((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x)) * indicator_fn((A : (A) -> Bool), x))
+      #|  (x : A) => ((b : Real) / (b - (a : Real)) * exp((s : Real) * a) + -a / (b - a) * exp(s * b)) * indicator_fn((A : (A) -> Bool), x)
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => ((b : Real) / (b - (a : Real)) * exp((s : Real) * a) + -a / (b - a) * exp(s * b) + (exp(s * b) - exp(s * a)) / (b - a) * ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x))) * indicator_fn((A : (A) -> Bool), x)) == ((x : A) => (b / (b - a) * exp(s * a) + -a / (b - a) * exp(s * b)) * indicator_fn(A, x) + (exp(s * b) - exp(s * a)) / (b - a) * ((X(SUC(n), x) - X(n, x)) * indicator_fn(A, x)))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((b : Real) / (b - (a : Real)) * exp((s : Real) * a) + -a / (b - a) * exp(s * b) + (exp(s * b) - exp(s * a)) / (b - a) * ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x))) * indicator_fn((A : (A) -> Bool), x)) == (b / (b - a) * exp(s * a) + -a / (b - a) * exp(s * b)) * prob(p, A) + (exp(s * b) - exp(s * a)) / (b - a) * simple_expectation(p, (x : A) => (X(SUC(n), x) - X(n, x)) * indicator_fn(A, x))
+      #|  !((b : Real) - (a : Real) == real_of_num(0))
+      #|  (x : A)
+      #|  ((b : Real) - ((X : (Num, A) -> Real)(SUC((n : Num)), (x : A)) - X(n, x))) / (b - (a : Real)) * exp((s : Real) * a) + (X(SUC(n), x) - X(n, x) - a) / (b - a) * exp(s * b)
+      #|  (x : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((b : Real) / (b - (a : Real)) * exp((s : Real) * a) + -a / (b - a) * exp(s * b) + (exp(s * b) - exp(s * a)) / (b - a) * ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x))) * indicator_fn((A : (A) -> Bool), x))
+      #|  !((b : Real) - (a : Real) == real_of_num(0))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x))
+      #|  IN((A : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 s : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 A : (A) -> Bool, simple_martingale(p, FF, X) && IN(A, FF(n)) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 a <= X(SUC(n), x) - X(n, x) && X(SUC(n), x) - X(n, x) <= b) && a < b \226\134\146 simple_expectation(p, (x : A) => exp(s * (X(SUC(n), x) - X(n, x))) * indicator_fn(A, x)) <= (b / (b - a) * exp(s * a) + -a / (b - a) * exp(s * b)) * prob(p, A)
+      #|  ((b : Real) / (b - (a : Real)) * exp((s : Real) * a) + -a / (b - a) * exp(s * b)) * prob((p : Prob_space[A]), (A : (A) -> Bool))
+      #|  (x : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (b : Real))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x)) <= (b : Real)
+      #|  (x : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (a : Real))
+      #|  (a : Real) <= simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (X : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x)) == real_of_num(0)
+      #|  simple_rv((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x))
+      #|  (a : Real) <= real_of_num(0) && real_of_num(0) <= (b : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 s : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 A : (A) -> Bool, simple_martingale(p, FF, X) && IN(A, FF(n)) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 a <= X(SUC(n), x) - X(n, x) && X(SUC(n), x) - X(n, x) <= b) && a < b \226\134\146 simple_expectation(p, (x : A) => exp(s * (X(SUC(n), x) - X(n, x))) * indicator_fn(A, x)) <= exp(pow(s, 2) * (pow(b - a, 2) / real_of_num(8))) * prob(p, A)
+      #|  (n : Num)
+      #|  SUC((n : Num))
+      #|  (u : Real)
+      #|  (u : Real)
+      #|  indicator_fn({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (Z : (A) -> Real)(z) == (u : Real)})
+      #|  (p : Prob_space[A])
+      #|  (u : Real)
+      #|  (u : Real)
+      #|  (S : (Real) -> Bool)
+      #|  (u : Real) => (x : A) => u * indicator_fn({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (Z : (A) -> Real)(z) == u}, x)
+      #|  (p : Prob_space[A])
+      #|  (w : A)
+      #|  (v : Real) => v
+      #|  (Z : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (w : A)
+      #|  simple_expectation((p : Prob_space[A]), (Z : (A) -> Real)) == simple_expectation(p, (x : A) => sum((S : (Real) -> Bool), (u : Real) => u * indicator_fn({(z : A) | IN(z, prob_carrier(p)) && Z(z) == u}, x)))
+      #|  simple_expectation((p : Prob_space[A]), (Z : (A) -> Real)) == sum((S : (Real) -> Bool), (u : Real) => u * prob(p, {(z : A) | IN(z, prob_carrier(p)) && Z(z) == u}))
+      #|  (u : Real)
+      #|  (x : A) => exp((s : Real) * ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x))) * indicator_fn({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (Z : (A) -> Real)(z) == (u : Real)}, x)
+      #|  (p : Prob_space[A])
+      #|  (u : Real)
+      #|  (u : Real)
+      #|  (S : (Real) -> Bool)
+      #|  (u : Real) => (x : A) => u * (exp((s : Real) * ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x))) * indicator_fn({(z : A) | IN(z, prob_carrier((p : Prob_space[A]))) && (Z : (A) -> Real)(z) == u}, x))
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (Z : (A) -> Real)(x) * exp((s : Real) * ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x)))) == simple_expectation(p, (x : A) => sum((S : (Real) -> Bool), (u : Real) => u * (exp(s * (X(SUC(n), x) - X(n, x))) * indicator_fn({(z : A) | IN(z, prob_carrier(p)) && Z(z) == u}, x))))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (Z : (A) -> Real)(x) * exp((s : Real) * ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x)))) == sum((S : (Real) -> Bool), (u : Real) => u * simple_expectation(p, (x : A) => exp(s * (X(SUC(n), x) - X(n, x))) * indicator_fn({(z : A) | IN(z, prob_carrier(p)) && Z(z) == u}, x)))
+      #|  (u : Real)
+      #|  (w : A)
+      #|  (v : Real) => v
+      #|  (Z : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (w : A)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 (Z : (A) -> Real)(x) * exp((s : Real) * ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x))) == sum((S : (Real) -> Bool), (u : Real) => u * (exp(s * (X(SUC(n), x) - X(n, x))) * indicator_fn({(z : A) | IN(z, prob_carrier(p)) && Z(z) == u}, x)))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => exp((s : Real) * ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(n, x))))
+      #|  \226\136\128 u : Real, IN(u, (S : (Real) -> Bool)) \226\134\146 real_of_num(0) <= u
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 u : Real, IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (Z : (A) -> Real)(x) == u}, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  FINITE((S : (Real) -> Bool))
+      #|  (S : (Real) -> Bool) == IMAGE((Z : (A) -> Real), prob_carrier((p : Prob_space[A])))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 s : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 Z : (A) -> Real, simple_martingale(p, FF, X) && simple_rv(p, Z) && measurable_wrt(p, FF(n), Z) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= Z(x)) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 a <= X(SUC(n), x) - X(n, x) && X(SUC(n), x) - X(n, x) <= b) && a < b \226\134\146 simple_expectation(p, (x : A) => Z(x) * exp(s * (X(SUC(n), x) - X(n, x)))) <= exp(pow(s, 2) * (pow(b - a, 2) / real_of_num(8))) * simple_expectation(p, Z)
+      #|  exp(pow((s : Real), 2) * (pow((b : (Num) -> Real)(SUC((n : Num))) - (a : (Num) -> Real)(SUC(n)), 2) / real_of_num(8))) * exp(pow(s, 2) * (sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)) / real_of_num(8)))
+      #|  exp(pow((s : Real), 2) * (pow((b : (Num) -> Real)(SUC((n : Num))) - (a : (Num) -> Real)(SUC(n)), 2) / real_of_num(8))) * simple_expectation((p : Prob_space[A]), (Z : (A) -> Real))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => exp((s : Real) * ((X : (Num, A) -> Real)(SUC(SUC((n : Num))), x) - X(0, x)))) == simple_expectation(p, (x : A) => (Z : (A) -> Real)(x) * exp(s * (X(SUC(SUC(n)), x) - X(SUC(n), x))))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (Z : (A) -> Real)(x) * exp((s : Real) * ((X : (Num, A) -> Real)(SUC(SUC((n : Num))), x) - X(SUC(n), x)))) <= exp(pow(s, 2) * (pow((b : (Num) -> Real)(SUC(n)) - (a : (Num) -> Real)(SUC(n)), 2) / real_of_num(8))) * simple_expectation(p, Z)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 real_of_num(0) <= (Z : (A) -> Real)(x)
+      #|  (p : Prob_space[A])
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => exp((s : Real) * ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(0, x)))) == ((x : A) => ((v : Real) => exp(s * v))(((x : A) => X(SUC(n), x) - X(0, x))(x)))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (Z : (A) -> Real))
+      #|  simple_rv((p : Prob_space[A]), (Z : (A) -> Real))
+      #|  SUC((n : Num))
       #|  0
-      #|  simple_martingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real)
-      #|  simple_martingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real)
-      #|  (FF:num->(A->bool)->bool) 0
-      #|  p:A prob_space
-      #|  measurable_wrt p ((FF:num->(A->bool)->bool) (SUC n)) ((X:num->A->real) 0)
-      #|  simple_martingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real)
-      #|  measurable_wrt p ((FF:num->(A->bool)->bool) (SUC n)) ((X:num->A->real) (SUC n))
-      #|  simple_martingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real)
-      #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) (SUC n))
-      #|  simple_martingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real)
-      #|  forall k:num. simple_rv p ((X:num->A->real) k)
-      #|  Z = \\x:A. exp(s * ((X:num->A->real) (SUC n) x - X 0 x))
-      #|  w:A
-      #|  forall x:A. x IN prob_carrier p ==>\n       exp(s * ((X:num->A->real) (SUC(SUC n)) x - X 0 x)) =\n       exp(s * (X (SUC n) x - X 0 x)) * exp(s * (X (SUC(SUC n)) x - X (SUC n) x))
-      #|  simple_expectation p (\\x:A. exp(s * ((X:num->A->real) (SUC n) x - X 0 x))) <=\n      exp(s pow 2 * sum(0..n) (\\i. ((b:num->real) i - (a:num->real) i) pow 2) / &8)
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  (X:num->A->real) 0
-      #|  (X:num->A->real) (SUC 0)
-      #|  p:A prob_space
-      #|  s:real
-      #|  (b:num->real) 0
-      #|  (a:num->real) 0
-      #|  \\x:A. (X:num->A->real) (SUC 0) x - X 0 x
-      #|  p:A prob_space
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real)\n     (a:num->real) (b:num->real) (s:real) (n:num).\n     simple_martingale p FF X /\\\n     (forall i. i <= n ==>\n        forall x. x IN prob_carrier p ==>\n          a i <= X (SUC i) x - X i x /\\ X (SUC i) x - X i x <= b i) /\\\n     (forall i. i <= n ==> a i < b i)\n     ==> simple_expectation p (\\x. exp(s * (X (SUC n) x - X 0 x))) <=\n         exp(s pow 2 * sum(0..n) (\\i. (b i - a i) pow 2) / &8)
+      #|  simple_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  simple_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(0)
+      #|  (p : Prob_space[A])
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (X : (Num, A) -> Real)(0))
+      #|  simple_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (X : (Num, A) -> Real)(SUC(n)))
+      #|  simple_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))))
+      #|  simple_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  \226\136\128 k : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(k))
+      #|  (Z : (A) -> Real) == ((x : A) => exp((s : Real) * ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(0, x))))
+      #|  (w : A)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 exp((s : Real) * ((X : (Num, A) -> Real)(SUC(SUC((n : Num))), x) - X(0, x))) == exp(s * (X(SUC(n), x) - X(0, x))) * exp(s * (X(SUC(SUC(n)), x) - X(SUC(n), x)))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => exp((s : Real) * ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(0, x)))) <= exp(pow(s, 2) * (sum(op_dot_dot(0, n), (i : Num) => pow((b : (Num) -> Real)(i) - (a : (Num) -> Real)(i), 2)) / real_of_num(8)))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (X : (Num, A) -> Real)(0)
+      #|  (X : (Num, A) -> Real)(SUC(0))
+      #|  (p : Prob_space[A])
+      #|  (s : Real)
+      #|  (b : (Num) -> Real)(0)
+      #|  (a : (Num) -> Real)(0)
+      #|  (x : A) => (X : (Num, A) -> Real)(SUC(0), x) - X(0, x)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 s : Real, \226\136\128 n : Num, simple_martingale(p, FF, X) && (\226\136\128 i : Num, i <= n \226\134\146 (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 a(i) <= X(SUC(i), x) - X(i, x) && X(SUC(i), x) - X(i, x) <= b(i))) && (\226\136\128 i : Num, i <= n \226\134\146 a(i) < b(i)) \226\134\146 simple_expectation(p, (x : A) => exp(s * (X(SUC(n), x) - X(0, x)))) <= exp(pow(s, 2) * (sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)) / real_of_num(8)))
       #|  0
-      #|  SUC 0
-      #|  SUC n
-      #|  SUC n
+      #|  SUC(0)
+      #|  SUC((n : Num))
+      #|  SUC((n : Num))
       #|  0
-      #|  &0 < t
-      #|  &0 < V
-      #|  exp(--(s0 * t)) * exp(s0 pow 2 * V / &8)
-      #|  exp(--(s0 * t)) * simple_expectation p (\\x:A. exp(s0 * ((X:num->A->real) (SUC n) x - X 0 x)))
-      #|  prob (p:A prob_space) {x | x IN prob_carrier p /\\ (X:num->A->real) (SUC n) x - X 0 x >= t} <=\n     exp(--(s0 * t)) * exp(s0 pow 2 * V / &8)
-      #|  FF:num->(A->bool)->bool
-      #|  simple_expectation p (\\x:A. exp(s0 * ((X:num->A->real) (SUC n) x - X 0 x))) <=\n     exp(s0 pow 2 * V / &8)
-      #|  t:real
-      #|  s0:real
-      #|  \\x:A. (X:num->A->real) (SUC n) x - X 0 x
-      #|  p:A prob_space
-      #|  prob (p:A prob_space) {x | x IN prob_carrier p /\\ (X:num->A->real) (SUC n) x - X 0 x >= t} <=\n     exp(--(s0 * t)) * simple_expectation p (\\x. exp(s0 * (X (SUC n) x - X 0 x)))
-      #|  &0 < s0
-      #|  ~(V = &0)
-      #|  s0 = &4 * t / V
-      #|  V = sum(0..n) (\\i. ((b:num->real) i - (a:num->real) i) pow 2)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real)\n     (a:num->real) (b:num->real) (t:real) (n:num).\n     simple_martingale p FF X /\\\n     (forall i. i <= n ==>\n        forall x. x IN prob_carrier p ==>\n          a i <= X (SUC i) x - X i x /\\ X (SUC i) x - X i x <= b i) /\\\n     (forall i. i <= n ==> a i < b i) /\\\n     &0 < t /\\ &0 < sum(0..n) (\\i. (b i - a i) pow 2)\n     ==> prob p {x | x IN prob_carrier p /\\ X (SUC n) x - X 0 x >= t} <=\n         exp(--(&2 * t pow 2 / sum(0..n) (\\i. (b i - a i) pow 2)))
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  (X:A->real) (CHOICE (sigma_atom G (x:A))) = X x
-      #|  (x:A) IN sigma_atom G x
-      #|  sigma_atom G (x:A)
-      #|  y:real
-      #|  IMAGE (\\s. (X:A->real)(CHOICE s)) (G:(A->bool)->bool)
-      #|  forall p:A prob_space G (X:A->real).\n     sub_sigma_algebra p G /\\ measurable_wrt p G X /\\ FINITE G /\\\n     random_variable p X\n     ==> simple_rv p X
-      #|  indicator_fn (a:A->bool)
-      #|  (X:num->A->real) (SUC n)
-      #|  p:A prob_space
-      #|  indicator_fn (a:A->bool)
-      #|  (X:num->A->real) n
-      #|  p:A prob_space
-      #|  simple_rv p (\\x:A. X (n:num) x * indicator_fn (a:A->bool) x) /\\\n                 simple_rv p (\\x. X (SUC n) x * indicator_fn a x)
-      #|  (FF:num->(A->bool)->bool) n SUBSET\n        prob_events (p:A prob_space)
-      #|  n:num
-      #|  forall n:num. sub_sigma_algebra (p:A prob_space)\n        ((FF:num->(A->bool)->bool) n)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  a IN prob_events (p:A prob_space)
-      #|  n:num
-      #|  forall p:A prob_space FF X.\n     martingale p FF X /\\ (forall n. simple_rv p (X n))\n     ==> simple_martingale p FF X
-      #|  FF:num->(A->bool)->bool
-      #|  simple_martingale (p:A prob_space) FF (X:num->A->real)
-      #|  (FF:num->(A->bool)->bool) m
-      #|  forall m. simple_rv (p:A prob_space) ((X:num->A->real) m)
-      #|  forall m:num. integrable (p:A prob_space) ((X:num->A->real) m)
-      #|  adapted (p:A prob_space) FF (X:num->A->real)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real)\n     (a:num->real) (b:num->real) (t:real) (n:num).\n     martingale p FF X /\\\n     (forall n. FINITE (FF n)) /\\\n     (forall i. i <= n ==>\n        forall x. x IN prob_carrier p ==>\n          a i <= X (SUC i) x - X i x /\\ X (SUC i) x - X i x <= b i) /\\\n     (forall i. i <= n ==> a i < b i) /\\\n     &0 < t /\\ &0 < sum(0..n) (\\i. (b i - a i) pow 2)\n     ==> prob p {x | x IN prob_carrier p /\\ X (SUC n) x - X 0 x >= t} <=\n         exp(--(&2 * t pow 2 / sum(0..n) (\\i. (b i - a i) pow 2)))
-      #|  (Y:A->real) x
-      #|  indicator_fn (sigma_atom G (x:A))
-      #|  p:A prob_space
-      #|  z:A
-      #|  simple_expectation p (\\z. (Y:A->real) z * indicator_fn (sigma_atom G x) z) =\n     simple_expectation p (\\z. Y x * indicator_fn (sigma_atom G x) z)
-      #|  (x:A) IN UNIONS G
-      #|  sigma_algebra (G:(A->bool)->bool)
-      #|  sigma_atom G (x:A) IN prob_events p
-      #|  forall p:A prob_space G (Y:A->real) x.\n     sub_sigma_algebra p G /\\ FINITE G /\\ simple_rv p Y /\\\n     measurable_wrt p G Y /\\\n     x IN prob_carrier p /\\ ~(prob p (sigma_atom G x) = &0)\n     ==> simple_expectation p (\\z. Y z * indicator_fn (sigma_atom G x) z) =\n         Y x * prob p (sigma_atom G x)
-      #|  prob p (sigma_atom ((FF:num->(A->bool)->bool) n) (x:A))
-      #|  simple_cond_exp p ((FF:num->(A->bool)->bool) n)\n        ((X:num->A->real) (SUC n)) x
-      #|  (X:num->A->real) n x
-      #|  &0 < prob p (sigma_atom ((FF:num->(A->bool)->bool) n) (x:A))
-      #|  sigma_atom ((FF:num->(A->bool)->bool) n) (x:A)
-      #|  n:num
-      #|  simple_expectation p\n       (\\z. (X:num->A->real) n z *\n            indicator_fn (sigma_atom (FF n) x) z) <=\n     simple_expectation p\n       (\\z. X (SUC n) z * indicator_fn (sigma_atom (FF n) x) z)
-      #|  simple_expectation p\n       (\\z. simple_cond_exp p (FF n) ((X:num->A->real) (SUC n)) z *\n            indicator_fn (sigma_atom (FF n) x) z) =\n     simple_cond_exp p (FF n) (X (SUC n)) x *\n     prob p (sigma_atom ((FF:num->(A->bool)->bool) n) x)
-      #|  simple_expectation p\n       (\\z. simple_cond_exp p (FF n) ((X:num->A->real) (SUC n)) z *\n            indicator_fn (sigma_atom (FF n) x) z) =\n     simple_expectation p\n       (\\z. X (SUC n) z * indicator_fn (sigma_atom (FF n) x) z)
-      #|  simple_expectation p\n       (\\z. (X:num->A->real) n z *\n            indicator_fn (sigma_atom (FF n) x) z) =\n     X n x * prob p (sigma_atom ((FF:num->(A->bool)->bool) n) x)
-      #|  measurable_wrt p ((FF:num->(A->bool)->bool) n)\n      (simple_cond_exp p (FF n) ((X:num->A->real) (SUC n)))
-      #|  simple_rv p (simple_cond_exp p ((FF:num->(A->bool)->bool) n)\n                    ((X:num->A->real) (SUC n)))
-      #|  simple_rv p ((X:num->A->real) (SUC n))
-      #|  simple_rv p ((X:num->A->real) n)
-      #|  measurable_wrt p ((FF:num->(A->bool)->bool) n) ((X:num->A->real) n)
-      #|  sigma_atom ((FF:num->(A->bool)->bool) n) (x:A) IN prob_events p
-      #|  sigma_atom ((FF:num->(A->bool)->bool) n) (x:A) IN FF n
-      #|  (x:A) IN UNIONS ((FF:num->(A->bool)->bool) n)
-      #|  sub_sigma_algebra p ((FF:num->(A->bool)->bool) n)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) n x.\n     simple_submartingale p FF X /\\ FINITE (FF n) /\\\n     x IN prob_carrier p /\\ ~(prob p (sigma_atom (FF n) x) = &0)\n     ==> X n x <= simple_cond_exp p (FF n) (X (SUC n)) x
-      #|  1 <= SUC n
-      #|  (\\x:A. sum(1..SUC n) (\\k. (f:num->A->real) k x)) =\n      (\\x. sum(1..n) (\\k. f k x) + f (SUC n) x)
-      #|  ~(1 = 0)
-      #|  (\\x:A. sum(1..0) (\\k. (f:num->A->real) k x)) = (\\x. &0)
-      #|  forall p:A prob_space (f:num->A->real) n.\n     (forall k. 1 <= k /\\ k <= n ==> simple_rv p (f k))\n     ==> simple_rv p (\\x. sum(1..n) (\\k. f k x))
-      #|  (FF:num->(A->bool)->bool) n
-      #|  n <= SUC n
-      #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
-      #|  SUC n - 1 = n
-      #|  1 <= SUC n /\\ SUC n <= SUC n
-      #|  measurable_wrt p ((FF:num->(A->bool)->bool) n)\n     ((f:num->A->real) (SUC n))
-      #|  k <= n ==> k <= SUC n
-      #|  measurable_wrt p ((FF:num->(A->bool)->bool) n)\n     (\\x:A. sum(1..n) (\\k. (f:num->A->real) k x))
-      #|  1 <= SUC n /\\ SUC n <= SUC n
-      #|  simple_rv p ((f:num->A->real) (SUC n))
-      #|  k <= n ==> k <= SUC n
-      #|  simple_rv p (\\x:A. sum(1..n) (\\k. (f:num->A->real) k x))
-      #|  sub_sigma_algebra p ((FF:num->(A->bool)->bool) (SUC n))
-      #|  1 <= SUC n
-      #|  (\\x:A. sum(1..SUC n) (\\k. (f:num->A->real) k x)) =\n      (\\x. sum(1..n) (\\k. f k x) + f (SUC n) x)
-      #|  ~(1 = 0)
-      #|  (\\x:A. sum(1..0) (\\k. (f:num->A->real) k x)) = (\\x. &0)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (f:num->A->real) n.\n     filtration p FF /\\\n     (forall k. 1 <= k /\\ k <= n ==> simple_rv p (f k)) /\\\n     (forall k. 1 <= k /\\ k <= n ==> measurable_wrt p (FF (k-1)) (f k))\n     ==> measurable_wrt p (FF n) (\\x. sum(1..n) (\\k. f k x))
-      #|  simple_expectation p\n       (\\x:A. simple_cond_exp p G (X:A->real) x * indicator_fn a x) =\n     simple_expectation p (\\x. X x * indicator_fn a x)
-      #|  simple_expectation p\n       (\\x:A. (X:A->real) x * indicator_fn a x -\n              simple_cond_exp p G X x * indicator_fn a x) =\n     simple_expectation p (\\x. X x * indicator_fn a x) -\n     simple_expectation p (\\x. simple_cond_exp p G X x * indicator_fn a x)
-      #|  simple_expectation p\n       (\\x:A. ((X:A->real) x - simple_cond_exp p G X x) * indicator_fn a x) =\n     simple_expectation p\n       (\\x. X x * indicator_fn a x - simple_cond_exp p G X x * indicator_fn a x)
-      #|  simple_rv p (indicator_fn (a:A->bool))
-      #|  (a:A->bool) IN prob_events p
-      #|  simple_rv p (simple_cond_exp p G (X:A->real))
-      #|  forall p:A prob_space G (X:A->real) a.\n     sub_sigma_algebra p G /\\ FINITE G /\\ simple_rv p X /\\ a IN G\n     ==> simple_expectation p\n           (\\x. (X x - simple_cond_exp p G X x) * indicator_fn a x) = &0
-      #|  x <= y ==> a <= a + (y - x)
-      #|  SUC n - 1 = n
-      #|  1 <= SUC n
-      #|  ~(1 = 0)
-      #|  n:num
-      #|  simple_expectation p\n        (\\x:A. ((X:num->A->real) (SUC n) x -\n          simple_cond_exp p ((FF:num->(A->bool)->bool) n)\n            (X (SUC n)) x) * indicator_fn a x) = &0
-      #|  n:num
-      #|  simple_expectation p\n        (\\x:A. ((X:num->A->real) n x -\n          sum(1..n)(\\k. simple_cond_exp p\n            ((FF:num->(A->bool)->bool) (k-1)) (X k) x - X (k-1) x)) *\n          indicator_fn a x +\n          (X (SUC n) x - simple_cond_exp p (FF n) (X (SUC n)) x) *\n            indicator_fn a x) =\n      simple_expectation p\n        (\\x. (X n x - sum(1..n)(\\k. simple_cond_exp p (FF (k-1))\n            (X k) x - X (k-1) x)) * indicator_fn a x) +\n      simple_expectation p\n        (\\x. (X (SUC n) x - simple_cond_exp p (FF n) (X (SUC n)) x) *\n            indicator_fn a x)
-      #|  SUC n - 1 = n
-      #|  1 <= SUC n
-      #|  x:A
-      #|  simple_expectation p\n        (\\x:A. ((X:num->A->real) (SUC n) x -\n          sum(1..SUC n)(\\k. simple_cond_exp p\n            ((FF:num->(A->bool)->bool) (k-1)) (X k) x - X (k-1) x)) *\n          indicator_fn a x) =\n      simple_expectation p\n        (\\x. (X n x - sum(1..n)(\\k. simple_cond_exp p (FF (k-1))\n            (X k) x - X (k-1) x)) * indicator_fn a x +\n          (X (SUC n) x - simple_cond_exp p (FF n) (X (SUC n)) x) *\n            indicator_fn a x)
-      #|  simple_rv p (simple_cond_exp p ((FF:num->(A->bool)->bool) n)\n     ((X:num->A->real) (SUC n)))
-      #|  simple_rv p (indicator_fn (a:A->bool))
-      #|  (a:A->bool) IN prob_events p
-      #|  sub_sigma_algebra p ((FF:num->(A->bool)->bool) n)
-      #|  a:A->bool
-      #|  n:num
-      #|  n:num
-      #|  p:A prob_space
-      #|  n:num
-      #|  forall n. simple_rv p\n    (\\x:A. (X:num->A->real) n x -\n      sum(1..n)(\\k. simple_cond_exp p ((FF:num->(A->bool)->bool) (k-1))\n        (X k) x - X (k-1) x))
-      #|  k:num
-      #|  forall n. simple_rv p\n    (\\x:A. sum(1..n)\n      (\\k. simple_cond_exp p ((FF:num->(A->bool)->bool) (k-1))\n        ((X:num->A->real) k) x - X (k-1) x))
-      #|  p:A prob_space
-      #|  (X:num->A->real) k
-      #|  (FF:num->(A->bool)->bool) (k-1)
-      #|  p:A prob_space
-      #|  measurable_wrt p ((FF:num->(A->bool)->bool) (k-1))\n     (simple_cond_exp p (FF (k-1)) ((X:num->A->real) k))
-      #|  simple_rv p\n     (simple_cond_exp p ((FF:num->(A->bool)->bool) (k-1))\n       ((X:num->A->real) k))
-      #|  sub_sigma_algebra p ((FF:num->(A->bool)->bool) (k-1))
-      #|  forall k. 1 <= k ==>\n       simple_rv p (\\x:A. simple_cond_exp p ((FF:num->(A->bool)->bool) (k-1))\n         ((X:num->A->real) k) x - X (k-1) x) /\\\n       measurable_wrt p (FF (k-1))\n         (\\x. simple_cond_exp p (FF (k-1)) (X k) x - X (k-1) x)
-      #|  \\n (x:A). sum(1..n)\n    (\\k. simple_cond_exp p ((FF:num->(A->bool)->bool) (k-1))\n           ((X:num->A->real) k) x - X (k-1) x)
-      #|  \\n (x:A). (X:num->A->real) n x -\n    sum(1..n) (\\k. simple_cond_exp p ((FF:num->(A->bool)->bool) (k-1))\n                     ((X:num->A->real) k) x - X (k-1) x)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real).\n     simple_submartingale p FF X /\\ (forall n. FINITE (FF n))\n     ==> ?M A. simple_martingale p FF M /\\\n               simple_adapted p FF A /\\\n               (forall x. x IN prob_carrier p ==> A 0 x = &0) /\\\n               (forall n x. x IN prob_carrier p /\\\n                      ~(prob p (sigma_atom (FF n) x) = &0)\n                      ==> A (SUC n) x >= A n x) /\\\n               (forall n x. x IN prob_carrier p ==>\n                  X n x = M n x + A n x)
-      #|  (doob_compensator (p:A prob_space) (FF:num->(A->bool)->bool)\n     (X:num->A->real) 0 (x:A) = &0) /\\\n   (doob_compensator p FF X (SUC n) x =\n     doob_compensator p FF X n x +\n     simple_cond_exp p (FF n) (X (SUC n)) x - X n x)
+      #|  real_of_num(0) < (t : Real)
+      #|  real_of_num(0) < (V : Real)
+      #|  exp(-((s0 : Real) * (t : Real))) * exp(pow(s0, 2) * ((V : Real) / real_of_num(8)))
+      #|  exp(-((s0 : Real) * (t : Real))) * simple_expectation((p : Prob_space[A]), (x : A) => exp(s0 * ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(0, x))))
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (X : (Num, A) -> Real)(SUC((n : Num)), x) - X(0, x) >= (t : Real)}) <= exp(-((s0 : Real) * t)) * exp(pow(s0, 2) * ((V : Real) / real_of_num(8)))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => exp((s0 : Real) * ((X : (Num, A) -> Real)(SUC((n : Num)), x) - X(0, x)))) <= exp(pow(s0, 2) * ((V : Real) / real_of_num(8)))
+      #|  (t : Real)
+      #|  (s0 : Real)
+      #|  (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) - X(0, x)
+      #|  (p : Prob_space[A])
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (X : (Num, A) -> Real)(SUC((n : Num)), x) - X(0, x) >= (t : Real)}) <= exp(-((s0 : Real) * t)) * simple_expectation(p, (x : A) => exp(s0 * (X(SUC(n), x) - X(0, x))))
+      #|  real_of_num(0) < (s0 : Real)
+      #|  !((V : Real) == real_of_num(0))
+      #|  (s0 : Real) == real_of_num(4) * ((t : Real) / (V : Real))
+      #|  (V : Real) == sum(op_dot_dot(0, (n : Num)), (i : Num) => pow((b : (Num) -> Real)(i) - (a : (Num) -> Real)(i), 2))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 t : Real, \226\136\128 n : Num, simple_martingale(p, FF, X) && (\226\136\128 i : Num, i <= n \226\134\146 (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 a(i) <= X(SUC(i), x) - X(i, x) && X(SUC(i), x) - X(i, x) <= b(i))) && (\226\136\128 i : Num, i <= n \226\134\146 a(i) < b(i)) && real_of_num(0) < t && real_of_num(0) < sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)) \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(SUC(n), x) - X(0, x) >= t}) <= exp(-(real_of_num(2) * (pow(t, 2) / sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)))))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (X : (A) -> Real)(CHOICE(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)))) == X(x)
+      #|  IN((x : A), sigma_atom((G : ((A) -> Bool) -> Bool), x))
+      #|  sigma_atom((G : ((A) -> Bool) -> Bool), (x : A))
+      #|  (y : Real)
+      #|  IMAGE((s : (A) -> Bool) => (X : (A) -> Real)(CHOICE(s)), (G : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && measurable_wrt(p, G, X) && FINITE(G) && random_variable(p, X) \226\134\146 simple_rv(p, X)
+      #|  indicator_fn((a : (A) -> Bool))
+      #|  (X : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (p : Prob_space[A])
+      #|  indicator_fn((a : (A) -> Bool))
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn((a : (A) -> Bool), x)) && simple_rv(p, (x : A) => X(SUC(n), x) * indicator_fn(a, x))
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), prob_events((p : Prob_space[A])))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  IN((a : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (n : Num)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, martingale(p, FF, X) && (\226\136\128 n : Num, simple_rv(p, X(n))) \226\134\146 simple_martingale(p, FF, X)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  simple_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((m : Num))
+      #|  \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
+      #|  \226\136\128 m : Num, integrable((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
+      #|  adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 t : Real, \226\136\128 n : Num, martingale(p, FF, X) && (\226\136\128 n : Num, FINITE(FF(n))) && (\226\136\128 i : Num, i <= n \226\134\146 (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 a(i) <= X(SUC(i), x) - X(i, x) && X(SUC(i), x) - X(i, x) <= b(i))) && (\226\136\128 i : Num, i <= n \226\134\146 a(i) < b(i)) && real_of_num(0) < t && real_of_num(0) < sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)) \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(SUC(n), x) - X(0, x) >= t}) <= exp(-(real_of_num(2) * (pow(t, 2) / sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)))))
+      #|  (Y : (A) -> Real)((x : A))
+      #|  indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)))
+      #|  (p : Prob_space[A])
+      #|  (z : A)
+      #|  simple_expectation((p : Prob_space[A]), (z : A) => (Y : (A) -> Real)(z) * indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), z)) == simple_expectation(p, (z : A) => Y(x) * indicator_fn(sigma_atom(G, x), z))
+      #|  IN((x : A), UNIONS((G : ((A) -> Bool) -> Bool)))
+      #|  sigma_algebra((G : ((A) -> Bool) -> Bool))
+      #|  IN(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), prob_events((p : Prob_space[A])))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 Y : (A) -> Real, \226\136\128 x : A, sub_sigma_algebra(p, G) && FINITE(G) && simple_rv(p, Y) && measurable_wrt(p, G, Y) && IN(x, prob_carrier(p)) && !(prob(p, sigma_atom(G, x)) == real_of_num(0)) \226\134\146 simple_expectation(p, (z : A) => Y(z) * indicator_fn(sigma_atom(G, x), z)) == Y(x) * prob(p, sigma_atom(G, x))
+      #|  prob((p : Prob_space[A]), sigma_atom((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (x : A)))
+      #|  simple_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)), (x : A))
+      #|  (X : (Num, A) -> Real)((n : Num), (x : A))
+      #|  real_of_num(0) < prob((p : Prob_space[A]), sigma_atom((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (x : A)))
+      #|  sigma_atom((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (x : A))
+      #|  (n : Num)
+      #|  simple_expectation((p : Prob_space[A]), (z : A) => (X : (Num, A) -> Real)((n : Num), z) * indicator_fn(sigma_atom((FF : (Num, (A) -> Bool) -> Bool)(n), (x : A)), z)) <= simple_expectation(p, (z : A) => X(SUC(n), z) * indicator_fn(sigma_atom(FF(n), x), z))
+      #|  simple_expectation((p : Prob_space[A]), (z : A) => simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)), z) * indicator_fn(sigma_atom(FF(n), (x : A)), z)) == simple_cond_exp(p, FF(n), X(SUC(n)), x) * prob(p, sigma_atom(FF(n), x))
+      #|  simple_expectation((p : Prob_space[A]), (z : A) => simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)), z) * indicator_fn(sigma_atom(FF(n), (x : A)), z)) == simple_expectation(p, (z : A) => X(SUC(n), z) * indicator_fn(sigma_atom(FF(n), x), z))
+      #|  simple_expectation((p : Prob_space[A]), (z : A) => (X : (Num, A) -> Real)((n : Num), z) * indicator_fn(sigma_atom((FF : (Num, (A) -> Bool) -> Bool)(n), (x : A)), z)) == X(n, x) * prob(p, sigma_atom(FF(n), x))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), simple_cond_exp(p, FF(n), (X : (Num, A) -> Real)(SUC(n))))
+      #|  simple_rv((p : Prob_space[A]), simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n))))
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(SUC((n : Num))))
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)((n : Num)))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(n))
+      #|  IN(sigma_atom((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (x : A)), prob_events((p : Prob_space[A])))
+      #|  IN(sigma_atom((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (x : A)), FF(n))
+      #|  IN((x : A), UNIONS((FF : (Num, (A) -> Bool) -> Bool)((n : Num))))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 x : A, simple_submartingale(p, FF, X) && FINITE(FF(n)) && IN(x, prob_carrier(p)) && !(prob(p, sigma_atom(FF(n), x)) == real_of_num(0)) \226\134\146 X(n, x) <= simple_cond_exp(p, FF(n), X(SUC(n)), x)
+      #|  1 <= SUC((n : Num))
+      #|  ((x : A) => sum(op_dot_dot(1, SUC((n : Num))), (k : Num) => (f : (Num, A) -> Real)(k, x))) == ((x : A) => sum(op_dot_dot(1, n), (k : Num) => f(k, x)) + f(SUC(n), x))
+      #|  !(1 == 0)
+      #|  ((x : A) => sum(op_dot_dot(1, 0), (k : Num) => (f : (Num, A) -> Real)(k, x))) == ((x : A) => real_of_num(0))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 f : (Num, A) -> Real, \226\136\128 n : Num, (\226\136\128 k : Num, 1 <= k && k <= n \226\134\146 simple_rv(p, f(k))) \226\134\146 simple_rv(p, (x : A) => sum(op_dot_dot(1, n), (k : Num) => f(k, x)))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (n : Num) <= SUC(n)
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), FF(SUC(n)))
+      #|  SUC((n : Num)) - 1 == n
+      #|  1 <= SUC((n : Num)) && SUC(n) <= SUC(n)
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (f : (Num, A) -> Real)(SUC(n)))
+      #|  (k : Num) <= (n : Num) \226\134\146 k <= SUC(n)
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (x : A) => sum(op_dot_dot(1, n), (k : Num) => (f : (Num, A) -> Real)(k, x)))
+      #|  1 <= SUC((n : Num)) && SUC(n) <= SUC(n)
+      #|  simple_rv((p : Prob_space[A]), (f : (Num, A) -> Real)(SUC((n : Num))))
+      #|  (k : Num) <= (n : Num) \226\134\146 k <= SUC(n)
+      #|  simple_rv((p : Prob_space[A]), (x : A) => sum(op_dot_dot(1, (n : Num)), (k : Num) => (f : (Num, A) -> Real)(k, x)))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))))
+      #|  1 <= SUC((n : Num))
+      #|  ((x : A) => sum(op_dot_dot(1, SUC((n : Num))), (k : Num) => (f : (Num, A) -> Real)(k, x))) == ((x : A) => sum(op_dot_dot(1, n), (k : Num) => f(k, x)) + f(SUC(n), x))
+      #|  !(1 == 0)
+      #|  ((x : A) => sum(op_dot_dot(1, 0), (k : Num) => (f : (Num, A) -> Real)(k, x))) == ((x : A) => real_of_num(0))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 f : (Num, A) -> Real, \226\136\128 n : Num, filtration(p, FF) && (\226\136\128 k : Num, 1 <= k && k <= n \226\134\146 simple_rv(p, f(k))) && (\226\136\128 k : Num, 1 <= k && k <= n \226\134\146 measurable_wrt(p, FF(k - 1), f(k))) \226\134\146 measurable_wrt(p, FF(n), (x : A) => sum(op_dot_dot(1, n), (k : Num) => f(k, x)))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => simple_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) * indicator_fn((a : (A) -> Bool), x)) == simple_expectation(p, (x : A) => X(x) * indicator_fn(a, x))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (X : (A) -> Real)(x) * indicator_fn((a : (A) -> Bool), x) - simple_cond_exp(p, (G : ((A) -> Bool) -> Bool), X, x) * indicator_fn(a, x)) == simple_expectation(p, (x : A) => X(x) * indicator_fn(a, x)) - simple_expectation(p, (x : A) => simple_cond_exp(p, G, X, x) * indicator_fn(a, x))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((X : (A) -> Real)(x) - simple_cond_exp(p, (G : ((A) -> Bool) -> Bool), X, x)) * indicator_fn((a : (A) -> Bool), x)) == simple_expectation(p, (x : A) => X(x) * indicator_fn(a, x) - simple_cond_exp(p, G, X, x) * indicator_fn(a, x))
+      #|  simple_rv((p : Prob_space[A]), indicator_fn((a : (A) -> Bool)))
+      #|  IN((a : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  simple_rv((p : Prob_space[A]), simple_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 a : (A) -> Bool, sub_sigma_algebra(p, G) && FINITE(G) && simple_rv(p, X) && IN(a, G) \226\134\146 simple_expectation(p, (x : A) => (X(x) - simple_cond_exp(p, G, X, x)) * indicator_fn(a, x)) == real_of_num(0)
+      #|  (x : Real) <= (y : Real) \226\134\146 (a : Real) <= a + (y - x)
+      #|  SUC((n : Num)) - 1 == n
+      #|  1 <= SUC((n : Num))
+      #|  !(1 == 0)
+      #|  (n : Num)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), x)) * indicator_fn((a : (A) -> Bool), x)) == real_of_num(0)
+      #|  (n : Num)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)((n : Num), x) - sum(op_dot_dot(1, n), (k : Num) => simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(k - 1), X(k), x) - X(k - 1, x))) * indicator_fn((a : (A) -> Bool), x) + (X(SUC(n), x) - simple_cond_exp(p, FF(n), X(SUC(n)), x)) * indicator_fn(a, x)) == simple_expectation(p, (x : A) => (X(n, x) - sum(op_dot_dot(1, n), (k : Num) => simple_cond_exp(p, FF(k - 1), X(k), x) - X(k - 1, x))) * indicator_fn(a, x)) + simple_expectation(p, (x : A) => (X(SUC(n), x) - simple_cond_exp(p, FF(n), X(SUC(n)), x)) * indicator_fn(a, x))
+      #|  SUC((n : Num)) - 1 == n
+      #|  1 <= SUC((n : Num))
+      #|  (x : A)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - sum(op_dot_dot(1, SUC(n)), (k : Num) => simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(k - 1), X(k), x) - X(k - 1, x))) * indicator_fn((a : (A) -> Bool), x)) == simple_expectation(p, (x : A) => (X(n, x) - sum(op_dot_dot(1, n), (k : Num) => simple_cond_exp(p, FF(k - 1), X(k), x) - X(k - 1, x))) * indicator_fn(a, x) + (X(SUC(n), x) - simple_cond_exp(p, FF(n), X(SUC(n)), x)) * indicator_fn(a, x))
+      #|  simple_rv((p : Prob_space[A]), simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n))))
+      #|  simple_rv((p : Prob_space[A]), indicator_fn((a : (A) -> Bool)))
+      #|  IN((a : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  (a : (A) -> Bool)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (p : Prob_space[A])
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, simple_rv((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(n, x) - sum(op_dot_dot(1, n), (k : Num) => simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(k - 1), X(k), x) - X(k - 1, x)))
+      #|  (k : Num)
+      #|  \226\136\128 n : Num, simple_rv((p : Prob_space[A]), (x : A) => sum(op_dot_dot(1, n), (k : Num) => simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(k - 1), (X : (Num, A) -> Real)(k), x) - X(k - 1, x)))
+      #|  (p : Prob_space[A])
+      #|  (X : (Num, A) -> Real)((k : Num))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((k : Num) - 1)
+      #|  (p : Prob_space[A])
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num) - 1), simple_cond_exp(p, FF(k - 1), (X : (Num, A) -> Real)(k)))
+      #|  simple_rv((p : Prob_space[A]), simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((k : Num) - 1), (X : (Num, A) -> Real)(k)))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num) - 1))
+      #|  \226\136\128 k : Num, 1 <= k \226\134\146 simple_rv((p : Prob_space[A]), (x : A) => simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(k - 1), (X : (Num, A) -> Real)(k), x) - X(k - 1, x)) && measurable_wrt(p, FF(k - 1), (x : A) => simple_cond_exp(p, FF(k - 1), X(k), x) - X(k - 1, x))
+      #|  (n : Num) => (x : A) => sum(op_dot_dot(1, n), (k : Num) => simple_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k - 1), (X : (Num, A) -> Real)(k), x) - X(k - 1, x))
+      #|  (n : Num) => (x : A) => (X : (Num, A) -> Real)(n, x) - sum(op_dot_dot(1, n), (k : Num) => simple_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k - 1), X(k), x) - X(k - 1, x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, simple_submartingale(p, FF, X) && (\226\136\128 n : Num, FINITE(FF(n))) \226\134\146 (\226\136\131 M : (Num, A) -> Real, \226\136\131 A : (Num, A) -> Real, simple_martingale(p, FF, M) && simple_adapted(p, FF, A) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 A(0, x) == real_of_num(0)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) && !(prob(p, sigma_atom(FF(n), x)) == real_of_num(0)) \226\134\146 A(SUC(n), x) >= A(n, x)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 X(n, x) == M(n, x) + A(n, x)))
+      #|  (doob_compensator : (Prob_space[A], (Num, (A) -> Bool) -> Bool, (Num, A) -> Real, Num, A) -> Real)((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), 0, (x : A)) == real_of_num(0) && doob_compensator(p, FF, X, SUC((n : Num)), x) == doob_compensator(p, FF, X, n, x) + (simple_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x))
       #|  :P
       #|  :P
       #|  :P
@@ -85555,3870 +85555,3870 @@ test "Probability/characteristic_functions matches Probability/characteristic_fu
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  indicator_fn (a:A->bool)
-      #|  (X:num->A->real) (SUC n)
-      #|  p:A prob_space
-      #|  indicator_fn (a:A->bool)
-      #|  (X:num->A->real) n
-      #|  p:A prob_space
-      #|  simple_rv p (\\x:A. X (n:num) x * indicator_fn (a:A->bool) x) /\\\n                 simple_rv p (\\x. X (SUC n) x * indicator_fn a x)
-      #|  (FF:num->(A->bool)->bool) n SUBSET\n        prob_events (p:A prob_space)
-      #|  n:num
-      #|  forall n:num. sub_sigma_algebra (p:A prob_space)\n        ((FF:num->(A->bool)->bool) n)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  a IN prob_events (p:A prob_space)
-      #|  n:num
-      #|  forall p:A prob_space FF X.\n     submartingale p FF X /\\ (forall n. simple_rv p (X n))\n     ==> simple_submartingale p FF X
-      #|  simple_cond_exp (p:A prob_space) (FF (n:num)) ((X:num->A->real) (SUC n))
-      #|  doob_compensator (p:A prob_space) FF X n
-      #|  p:A prob_space
-      #|  (X:num->A->real) n
-      #|  \\x:A. doob_compensator p FF X n x + simple_cond_exp p (FF n) (X (SUC n)) x
-      #|  p:A prob_space
-      #|  (\\x:A. doob_compensator p FF X n x +\n         simple_cond_exp p (FF n) (X (SUC n)) x - X n x) =\n       (\\x. (doob_compensator p FF X n x +\n             simple_cond_exp p (FF n) (X (SUC n)) x) - X n x)
-      #|  simple_rv (p:A prob_space) (simple_cond_exp p (FF (n:num)) (X (SUC n)))
-      #|  doob_compensator (p:A prob_space) FF X (SUC n) =\n       (\\x:A. doob_compensator p FF X n x +\n              simple_cond_exp p (FF n) (X (SUC n)) x - X n x)
-      #|  simple_rv (p:A prob_space) (doob_compensator p FF X n)
-      #|  doob_compensator (p:A prob_space) FF X 0 = (\\x:A. &0)
-      #|  forall p:A prob_space FF X n.\n     simple_submartingale p FF X /\\ (forall n. FINITE (FF n))\n     ==> simple_rv p (doob_compensator p FF X n)
-      #|  simple_cond_exp (p:A prob_space) (FF (n:num)) ((X:num->A->real) (SUC n))
-      #|  doob_compensator (p:A prob_space) FF X n
-      #|  (FF:num->(A->bool)->bool) (SUC n)
-      #|  p:A prob_space
-      #|  (X:num->A->real) n
-      #|  \\x:A. doob_compensator p FF X n x + simple_cond_exp p (FF n) (X (SUC n)) x
-      #|  (FF:num->(A->bool)->bool) (SUC n)
-      #|  p:A prob_space
-      #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
-      #|  measurable_wrt (p:A prob_space) ((FF:num->(A->bool)->bool) n) ((X:num->A->real) n)
-      #|  measurable_wrt (p:A prob_space) ((FF:num->(A->bool)->bool) (SUC n)) ((X:num->A->real) n)
-      #|  n:num
-      #|  simple_adapted (p:A prob_space) FF X
-      #|  measurable_wrt (p:A prob_space) (FF n) ((X:num->A->real) n)
-      #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
-      #|  (X:num->A->real) (SUC n)
-      #|  (FF:num->(A->bool)->bool) n
-      #|  p:A prob_space
-      #|  measurable_wrt (p:A prob_space) (FF (SUC n)) (simple_cond_exp p (FF n) (X (SUC n)))
-      #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
-      #|  measurable_wrt p (FF n) (doob_compensator (p:A prob_space) FF X n)
-      #|  measurable_wrt (p:A prob_space) (FF (SUC n)) (doob_compensator p FF X n)
-      #|  measurable_wrt (p:A prob_space) (FF n) (doob_compensator p FF X n)
-      #|  simple_rv (p:A prob_space) (simple_cond_exp p (FF n) (X (SUC n)))
-      #|  simple_rv (p:A prob_space) (doob_compensator p FF X n)
-      #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) n)
-      #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) (SUC n))
-      #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
-      #|  simple_submartingale (p:A prob_space) FF X
-      #|  (\\x:A. doob_compensator p FF X n x +\n       simple_cond_exp p (FF n) (X (SUC n)) x - X n x) =\n     (\\x. (doob_compensator p FF X n x +\n           simple_cond_exp p (FF n) (X (SUC n)) x) - X n x)
-      #|  simple_submartingale (p:A prob_space) FF X
-      #|  doob_compensator (p:A prob_space) FF X 0 = (\\x:A. &0)
-      #|  forall p:A prob_space FF X n.\n     simple_submartingale p FF X /\\ (forall n. FINITE (FF n))\n     ==> measurable_wrt p (FF n) (doob_compensator p FF X n)
-      #|  SUC n
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  simple_cond_exp (p:A prob_space) (FF (n:num)) ((X:num->A->real) (SUC n))
-      #|  doob_compensator (p:A prob_space) FF X n
-      #|  (FF:num->(A->bool)->bool) n
-      #|  p:A prob_space
-      #|  (X:num->A->real) n
-      #|  \\x:A. doob_compensator p FF X n x + simple_cond_exp p (FF n) (X (SUC n)) x
-      #|  (FF:num->(A->bool)->bool) n
-      #|  p:A prob_space
-      #|  n:num
-      #|  simple_adapted (p:A prob_space) FF X
-      #|  measurable_wrt (p:A prob_space) (FF n) ((X:num->A->real) n)
-      #|  (X:num->A->real) (SUC n)
-      #|  (FF:num->(A->bool)->bool) n
-      #|  p:A prob_space
-      #|  measurable_wrt (p:A prob_space) (FF n) (simple_cond_exp p (FF n) (X (SUC n)))
-      #|  measurable_wrt (p:A prob_space) (FF n) (doob_compensator p FF X n)
-      #|  simple_rv (p:A prob_space) (simple_cond_exp p (FF n) (X (SUC n)))
-      #|  simple_rv (p:A prob_space) (doob_compensator p FF X n)
-      #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) n)
-      #|  simple_submartingale (p:A prob_space) FF X
-      #|  (\\x:A. doob_compensator p FF X n x +\n        simple_cond_exp p (FF n) (X (SUC n)) x - X n x) =\n      (\\x. (doob_compensator p FF X n x +\n            simple_cond_exp p (FF n) (X (SUC n)) x) - X n x)
+      #|  indicator_fn((a : (A) -> Bool))
+      #|  (X : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (p : Prob_space[A])
+      #|  indicator_fn((a : (A) -> Bool))
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)((n : Num), x) * indicator_fn((a : (A) -> Bool), x)) && simple_rv(p, (x : A) => X(SUC(n), x) * indicator_fn(a, x))
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), prob_events((p : Prob_space[A])))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  IN((a : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (n : Num)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, submartingale(p, FF, X) && (\226\136\128 n : Num, simple_rv(p, X(n))) \226\134\146 simple_submartingale(p, FF, X)
+      #|  simple_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)))
+      #|  doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num))
+      #|  (p : Prob_space[A])
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (x : A) => doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num), x) + simple_cond_exp(p, FF(n), X(SUC(n)), x)
+      #|  (p : Prob_space[A])
+      #|  ((x : A) => doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num), x) + (simple_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x))) == ((x : A) => doob_compensator(p, FF, X, n, x) + simple_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x))
+      #|  simple_rv((p : Prob_space[A]), simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n))))
+      #|  doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), SUC((n : Num))) == ((x : A) => doob_compensator(p, FF, X, n, x) + (simple_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x)))
+      #|  simple_rv((p : Prob_space[A]), doob_compensator(p, (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num)))
+      #|  doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), 0) == ((x : A) => real_of_num(0))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, simple_submartingale(p, FF, X) && (\226\136\128 n : Num, FINITE(FF(n))) \226\134\146 simple_rv(p, doob_compensator(p, FF, X, n))
+      #|  simple_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)))
+      #|  doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num)))
+      #|  (p : Prob_space[A])
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (x : A) => doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num), x) + simple_cond_exp(p, FF(n), X(SUC(n)), x)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num)))
+      #|  (p : Prob_space[A])
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), FF(SUC(n)))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(n))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (X : (Num, A) -> Real)(n))
+      #|  (n : Num)
+      #|  simple_adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(n))
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), FF(SUC(n)))
+      #|  (X : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), simple_cond_exp(p, FF(n), (X : (Num, A) -> Real)(SUC(n))))
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), FF(SUC(n)))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), doob_compensator(p, FF, (X : (Num, A) -> Real), n))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), doob_compensator(p, FF, (X : (Num, A) -> Real), n))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), doob_compensator(p, FF, (X : (Num, A) -> Real), n))
+      #|  simple_rv((p : Prob_space[A]), simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n))))
+      #|  simple_rv((p : Prob_space[A]), doob_compensator(p, (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num)))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))))
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), FF(SUC(n)))
+      #|  simple_submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  ((x : A) => doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num), x) + (simple_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x))) == ((x : A) => doob_compensator(p, FF, X, n, x) + simple_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x))
+      #|  simple_submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), 0) == ((x : A) => real_of_num(0))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, simple_submartingale(p, FF, X) && (\226\136\128 n : Num, FINITE(FF(n))) \226\134\146 measurable_wrt(p, FF(n), doob_compensator(p, FF, X, n))
+      #|  SUC((n : Num))
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  simple_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)))
+      #|  doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (x : A) => doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num), x) + simple_cond_exp(p, FF(n), X(SUC(n)), x)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  (n : Num)
+      #|  simple_adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(n))
+      #|  (X : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), simple_cond_exp(p, FF(n), (X : (Num, A) -> Real)(SUC(n))))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), doob_compensator(p, FF, (X : (Num, A) -> Real), n))
+      #|  simple_rv((p : Prob_space[A]), simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n))))
+      #|  simple_rv((p : Prob_space[A]), doob_compensator(p, (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num)))
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  simple_submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  ((x : A) => doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num), x) + (simple_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x))) == ((x : A) => doob_compensator(p, FF, X, n, x) + simple_cond_exp(p, FF(n), X(SUC(n)), x) - X(n, x))
       #|  0
-      #|  X:num->A->real
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  simple_submartingale (p:A prob_space) FF X
-      #|  doob_compensator (p:A prob_space) FF X 0 = (\\x:A. &0)
-      #|  forall p:A prob_space FF X.\n     simple_submartingale p FF X /\\ (forall n. FINITE (FF n))\n     ==> predictable p FF (doob_compensator p FF X)
-      #|  x <= y ==> a <= a + y - x
-      #|  forall p:A prob_space FF X n x.\n     simple_submartingale p FF X /\\ (forall n. FINITE (FF n)) /\\\n     x IN prob_carrier p /\\ ~(prob p (sigma_atom (FF n) x) = &0)\n     ==> doob_compensator p FF X n x <= doob_compensator p FF X (SUC n) x
-      #|  simple_expectation (p:A prob_space)\n    (\\x. (X (SUC n) x - simple_cond_exp p (FF n) (X (SUC n)) x) *\n         indicator_fn a x) = &0
-      #|  \\x:A. (X (SUC n) x - simple_cond_exp p (FF n) (X (SUC n)) x) * indicator_fn a x
-      #|  \\x:A. (X n x - doob_compensator p FF X n x) * indicator_fn a x
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n    (\\x. (X (SUC n) x - doob_compensator p FF X (SUC n) x) * indicator_fn a x) =\n    simple_expectation p\n    (\\x. (X n x - doob_compensator p FF X n x) * indicator_fn a x +\n         (X (SUC n) x - simple_cond_exp p (FF n) (X (SUC n)) x) * indicator_fn a x)
-      #|  simple_cond_exp (p:A prob_space) (FF (n:num)) (X (SUC n))
-      #|  (X:num->A->real) (SUC n)
-      #|  p:A prob_space
-      #|  indicator_fn (a:A->bool)
-      #|  \\x:A. X (SUC n) x - simple_cond_exp p (FF n) (X (SUC n)) x
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. (X (SUC n) x - simple_cond_exp p (FF n) (X (SUC n)) x) * indicator_fn a x)
-      #|  indicator_fn (a:A->bool)
-      #|  \\x:A. X n x - doob_compensator p FF X n x
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. (X n x - doob_compensator p FF X n x) * indicator_fn a x)
-      #|  simple_rv (p:A prob_space) (indicator_fn (a:A->bool))
-      #|  a IN prob_events (p:A prob_space)
-      #|  forall x:A. x IN prob_carrier p ==>\n    (X (SUC n) x - doob_compensator p FF X (SUC n) x) * indicator_fn a x =\n    (X n x - doob_compensator p FF X n x) * indicator_fn a x +\n    (X (SUC n) x - simple_cond_exp p (FF n) (X (SUC n)) x) * indicator_fn a x
-      #|  n:num
-      #|  n:num
-      #|  simple_adapted (p:A prob_space) FF X
-      #|  doob_compensator (p:A prob_space) FF X n
-      #|  (X:num->A->real) n
-      #|  (FF:num->(A->bool)->bool) n
-      #|  p:A prob_space
-      #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) n)
-      #|  doob_compensator (p:A prob_space) FF X n
-      #|  (X:num->A->real) n
-      #|  p:A prob_space
-      #|  forall n. simple_rv (p:A prob_space) (\\x:A. (X:num->A->real) n x - doob_compensator p FF X n x)
-      #|  forall n. simple_rv (p:A prob_space) (doob_compensator p FF X n)
-      #|  forall n. simple_rv (p:A prob_space) ((X:num->A->real) n)
-      #|  simple_adapted (p:A prob_space) FF X
-      #|  filtration (p:A prob_space) FF
-      #|  forall p:A prob_space FF X.\n     simple_submartingale p FF X /\\ (forall n. FINITE (FF n))\n     ==> simple_martingale p FF (\\n x. X n x - doob_compensator p FF X n x)
-      #|  simple_submartingale (p:A prob_space) FF X
-      #|  doob_compensator (p:A prob_space) FF X
-      #|  \\n (x:A). X n x - doob_compensator (p:A prob_space) FF X n x
-      #|  forall p:A prob_space FF X.\n     submartingale p FF X /\\ (forall n. FINITE (FF n)) /\\ (forall n. simple_rv p (X n))\n     ==> ?M A. martingale p FF M /\\\n               predictable p FF A /\\\n               (forall x. x IN prob_carrier p ==> A 0 x = &0) /\\\n               (forall n x. x IN prob_carrier p /\\\n                      ~(prob p (sigma_atom (FF n) x) = &0)\n                      ==> A n x <= A (SUC n) x) /\\\n               (forall n x. x IN prob_carrier p ==> X n x = M n x + A n x)
-      #|  (f:A->real) x
-      #|  indicator_fn (sigma_atom (G:(A->bool)->bool) (x:A))
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (indicator_fn (sigma_atom G (x:A)))
-      #|  sigma_atom (G:(A->bool)->bool) x IN prob_events (p:A prob_space)
-      #|  simple_expectation (p:A prob_space) (\\y. f y * indicator_fn (sigma_atom G x) y) =\n    simple_expectation p (\\y. f x * indicator_fn (sigma_atom G x) y)
-      #|  forall y:A. y IN prob_carrier (p:A prob_space) ==>\n    (f:A->real) y * indicator_fn (sigma_atom G x) y =\n    f x * indicator_fn (sigma_atom G x) y
-      #|  y:A
-      #|  x:A
-      #|  f:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall y:A. y IN sigma_atom G x ==> (f:A->real) y = f x
-      #|  x:A IN UNIONS (G:(A->bool)->bool)
-      #|  forall p:A prob_space G f x.\n     sub_sigma_algebra p G /\\ FINITE G /\\ simple_rv p f /\\\n     measurable_wrt p G f /\\ x IN prob_carrier p\n     ==> simple_expectation p (\\y. f y * indicator_fn (sigma_atom G x) y) =\n         f x * prob p (sigma_atom G x)
-      #|  (M:num->A->real) (SUC n) x * prob (p:A prob_space) (sigma_atom (FF n) x) =\n     M n x * prob p (sigma_atom (FF n) x)
-      #|  simple_expectation (p:A prob_space)\n     (\\x'. (M:num->A->real) n x' * indicator_fn (sigma_atom ((FF:num->(A->bool)->bool) n) x) x') =\n     M n x * prob p (sigma_atom (FF n) x)
-      #|  simple_expectation (p:A prob_space)\n     (\\x'. (M:num->A->real) (SUC n) x' * indicator_fn (sigma_atom ((FF:num->(A->bool)->bool) n) x) x') =\n     M (SUC n) x * prob p (sigma_atom (FF n) x)
-      #|  sigma_atom ((FF:num->(A->bool)->bool) n) (x:A)
-      #|  n:num
-      #|  simple_martingale (p:A prob_space) FF (M:num->A->real)
-      #|  simple_martingale (p:A prob_space) FF M
-      #|  measurable_wrt (p:A prob_space) ((FF:num->(A->bool)->bool) n) ((M:num->A->real) n)
-      #|  n:num
-      #|  predictable (p:A prob_space) FF M
-      #|  measurable_wrt (p:A prob_space) ((FF:num->(A->bool)->bool) n) ((M:num->A->real) (SUC n))
-      #|  forall k:num. simple_rv (p:A prob_space) ((M:num->A->real) k)
-      #|  sigma_atom ((FF:num->(A->bool)->bool) n) (x:A) IN FF n
-      #|  (M:num->A->real) n x = &0
-      #|  &0 <= prob (p:A prob_space) (sigma_atom ((FF:num->(A->bool)->bool) (SUC n)) (x:A))
-      #|  prob (p:A prob_space) (sigma_atom ((FF:num->(A->bool)->bool) (SUC n)) (x:A)) <=\n                  prob p (sigma_atom (FF n) x)
-      #|  ~(prob (p:A prob_space) (sigma_atom ((FF:num->(A->bool)->bool) (SUC n)) (x:A)) = &0)
-      #|  ~(prob (p:A prob_space) (sigma_atom ((FF:num->(A->bool)->bool) n) (x:A)) = &0)
-      #|  n:num
-      #|  forall k. sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) k)
-      #|  sigma_atom ((FF:num->(A->bool)->bool) n) (x:A) IN prob_events (p:A prob_space)
-      #|  SUC n
-      #|  forall k. sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) k)
-      #|  sigma_atom ((FF:num->(A->bool)->bool) (SUC n)) (x:A) IN prob_events (p:A prob_space)
-      #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
-      #|  sigma_atom ((FF:num->(A->bool)->bool) (SUC n)) x SUBSET sigma_atom (FF n) (x:A)
-      #|  x:A IN UNIONS ((FF:num->(A->bool)->bool) n)
-      #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
-      #|  forall k:num. sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) k)
-      #|  filtration (p:A prob_space) FF
-      #|  x:A
-      #|  forall p:A prob_space FF M.\n     simple_martingale p FF M /\\ predictable p FF M /\\ (forall n. FINITE (FF n)) /\\\n     (forall x. x IN prob_carrier p ==> M 0 x = &0)\n     ==> forall n x. x IN prob_carrier p /\\\n               ~(prob p (sigma_atom (FF n) x) = &0)\n               ==> M n x = &0
-      #|  H2:A->real
-      #|  H1:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. H1 x - H2 x)
-      #|  H2:A->real
-      #|  H1:A->real
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) H1 /\\ simple_rv p H2
-      #|  forall p:A prob_space G H1 H2.\n     sub_sigma_algebra p G /\\ simple_rv_wrt p G H1 /\\ simple_rv_wrt p G H2\n     ==> simple_rv_wrt p G (\\x. H1 x - H2 x)
-      #|  \\x:A. (M2:num->A->real) n x * indicator_fn (a:A->bool) x
-      #|  \\x:A. (M1:num->A->real) n x * indicator_fn (a:A->bool) x
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. ((M1:num->A->real) n x - (M2:num->A->real) n x) * indicator_fn (a:A->bool) x) =\n       simple_expectation p (\\x. M1 n x * indicator_fn a x - M2 n x * indicator_fn a x)
-      #|  simple_expectation (p:A prob_space)\n     (\\x:A. ((M1:num->A->real) n x - (M2:num->A->real) n x) * indicator_fn (a:A->bool) x) =\n     simple_expectation p (\\x. M1 n x * indicator_fn a x) -\n     simple_expectation p (\\x. M2 n x * indicator_fn a x)
-      #|  \\x:A. (M2:num->A->real) (SUC n) x * indicator_fn (a:A->bool) x
-      #|  \\x:A. (M1:num->A->real) (SUC n) x * indicator_fn (a:A->bool) x
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. ((M1:num->A->real) (SUC n) x - (M2:num->A->real) (SUC n) x) * indicator_fn (a:A->bool) x) =\n       simple_expectation p (\\x. M1 (SUC n) x * indicator_fn a x - M2 (SUC n) x * indicator_fn a x)
-      #|  simple_expectation (p:A prob_space)\n     (\\x:A. ((M1:num->A->real) (SUC n) x - (M2:num->A->real) (SUC n) x) * indicator_fn (a:A->bool) x) =\n     simple_expectation p (\\x. M1 (SUC n) x * indicator_fn a x) -\n     simple_expectation p (\\x. M2 (SUC n) x * indicator_fn a x)
-      #|  indicator_fn (a:A->bool)
-      #|  (M2:num->A->real) k
-      #|  p:A prob_space
-      #|  indicator_fn (a:A->bool)
-      #|  (M1:num->A->real) k
-      #|  p:A prob_space
-      #|  forall k:num. simple_rv (p:A prob_space) (\\x:A. (M1:num->A->real) k x * indicator_fn (a:A->bool) x) /\\\n                 simple_rv p (\\x. (M2:num->A->real) k x * indicator_fn a x)
-      #|  simple_rv (p:A prob_space) (indicator_fn (a:A->bool))
-      #|  n:num
-      #|  forall n:num. sub_sigma_algebra (p:A prob_space)\n        ((FF:num->(A->bool)->bool) n)
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  a IN prob_events (p:A prob_space)
-      #|  n:num
-      #|  simple_adapted (p:A prob_space) FF M2
-      #|  simple_adapted (p:A prob_space) FF M1
-      #|  (M2:num->A->real) n
-      #|  (M1:num->A->real) n
-      #|  (FF:num->(A->bool)->bool) n
-      #|  p:A prob_space
-      #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) n)
-      #|  (M2:num->A->real) n
-      #|  (M1:num->A->real) n
-      #|  p:A prob_space
-      #|  forall n. simple_rv (p:A prob_space) (\\x:A. (M1:num->A->real) n x - (M2:num->A->real) n x)
-      #|  forall p:A prob_space FF M1 M2.\n     simple_martingale p FF M1 /\\ simple_martingale p FF M2\n     ==> simple_martingale p FF (\\n x. M1 n x - M2 n x)
-      #|  (H2:num->A->real) (SUC n)
-      #|  (H1:num->A->real) (SUC n)
-      #|  (FF:num->(A->bool)->bool) n
-      #|  p:A prob_space
-      #|  (H2:num->A->real) 0
-      #|  (H1:num->A->real) 0
-      #|  (FF:num->(A->bool)->bool) 0
-      #|  p:A prob_space
-      #|  forall p:A prob_space FF H1 H2.\n     predictable p FF H1 /\\ predictable p FF H2 /\\ filtration p FF\n     ==> predictable p FF (\\n x. H1 n x - H2 n x)
-      #|  a - b = &0 ==> a = b
-      #|  (M1:num->A->real) n x - M2 n x = &0
-      #|  (A2:num->A->real) n x - A1 n x = &0
-      #|  \\n (x:A). (A2:num->A->real) n x - A1 n x
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  a = &0 /\\ b = &0 ==> a - b = &0
-      #|  forall x:A. x IN prob_carrier (p:A prob_space) ==>\n    (\\n x. (A2:num->A->real) n x - A1 n x) 0 x = &0
-      #|  simple_expectation (p:A prob_space)\n      (\\x. ((A2:num->A->real) n x - A1 n x) * indicator_fn (a:A->bool) x) =\n      simple_expectation p\n      (\\x. ((M1:num->A->real) n x - M2 n x) * indicator_fn a x)
-      #|  simple_expectation (p:A prob_space)\n      (\\x. ((A2:num->A->real) (SUC n) x - A1 (SUC n) x) * indicator_fn (a:A->bool) x) =\n      simple_expectation p\n      (\\x. ((M1:num->A->real) (SUC n) x - M2 (SUC n) x) * indicator_fn a x)
-      #|  k:num
-      #|  k:num
-      #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
-      #|  measurable_wrt (p:A prob_space) ((FF:num->(A->bool)->bool) n)\n        (\\x. (A2:num->A->real) (SUC n) x - A1 (SUC n) x)
-      #|  n:num
-      #|  simple_rv_wrt (p:A prob_space) ((FF:num->(A->bool)->bool) 0)\n        (\\x. (A2:num->A->real) 0 x - A1 0 x)
-      #|  k:num
-      #|  predictable (p:A prob_space) FF (\\n x. (A2:num->A->real) n x - A1 n x)
-      #|  k:num
-      #|  n:num
-      #|  (FF:num->(A->bool)->bool) n
-      #|  (FF:num->(A->bool)->bool) 0
-      #|  k:num
-      #|  predictable (p:A prob_space) FF (\\n x. (A2:num->A->real) n x - A1 n x)
-      #|  forall k:num. simple_rv (p:A prob_space) (\\x:A. (A2:num->A->real) k x - (A1:num->A->real) k x)
-      #|  simple_martingale (p:A prob_space) FF (\\n x. (M1:num->A->real) n x - M2 n x)
-      #|  simple_martingale (p:A prob_space) FF (\\n x. (A2:num->A->real) n x - A1 n x)
-      #|  simple_martingale (p:A prob_space) FF (\\n x. (M1:num->A->real) n x - M2 n x)
-      #|  x:A
-      #|  n:num
-      #|  forall n (x:A). x IN prob_carrier (p:A prob_space) ==>\n    (A2:num->A->real) n x - A1 n x = (M1:num->A->real) n x - M2 n x
-      #|  predictable (p:A prob_space) FF (\\n x. (A2:num->A->real) n x - A1 n x)
-      #|  filtration (p:A prob_space) FF
-      #|  forall p:A prob_space FF M1 A1 M2 A2.\n     (forall n. FINITE (FF n)) /\\\n     simple_martingale p FF M1 /\\ predictable p FF A1 /\\\n     (forall x. x IN prob_carrier p ==> A1 0 x = &0) /\\\n     simple_martingale p FF M2 /\\ predictable p FF A2 /\\\n     (forall x. x IN prob_carrier p ==> A2 0 x = &0) /\\\n     (forall n x. x IN prob_carrier p ==> M1 n x + A1 n x = M2 n x + A2 n x)\n     ==> forall n x. x IN prob_carrier p /\\\n               ~(prob p (sigma_atom (FF n) x) = &0)\n               ==> M1 n x = M2 n x /\\ A1 n x = A2 n x
-      #|  x:A
-      #|  (X:A->real) x
-      #|  y:real
-      #|  IMAGE (\\y:real. --y) {(X:A->real) x | x IN prob_carrier (p:A prob_space)}
-      #|  forall p:A prob_space G X.\n     sub_sigma_algebra p G /\\ simple_rv_wrt p G X\n     ==> simple_rv_wrt p G (\\x. --(X x))
-      #|  (\\x:A. --((H:num->A->real) 0 x)) = (\\x. --(H 0 x))
-      #|  forall p:A prob_space FF H.\n     filtration p FF /\\ predictable p FF H\n     ==> predictable p FF (\\n x. --((H:num->A->real) n x))
-      #|  E + E:real
-      #|  prob (p:A prob_space)\n     ({x:A | x IN prob_carrier p /\\ (X:num->A->real) (SUC n) x - X 0 x >= t} UNION\n      {x:A | x IN prob_carrier p /\\ X 0 x - X (SUC n) x >= t})
-      #|  prob (p:A prob_space) {x:A | x IN prob_carrier p /\\ (X:num->A->real) (SUC n) x - X 0 x >= t} +\n              prob p {x:A | x IN prob_carrier p /\\ X 0 x - X (SUC n) x >= t}
-      #|  random_variable (p:A prob_space) (\\x:A. (X:num->A->real) (SUC n) x - X 0 x)
-      #|  i:num
-      #|  x:A
-      #|  i:num
-      #|  forall i. i <= n ==> forall x:A. x IN prob_carrier (p:A prob_space) ==>\n      (a:num->real) i <= (X:num->A->real) (SUC i) x - X i x /\\\n      X (SUC i) x - X i x <= (b:num->real) i
-      #|  forall a b:real. (--a - --b) pow 2 = (b - a) pow 2
-      #|  n:num
-      #|  t:real
-      #|  \\i. --((a:num->real) i)
-      #|  \\i. --((b:num->real) i)
-      #|  \\n x:A. --((X:num->A->real) n x)
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall a b:real. --a - --b = b - a
-      #|  {x:A | x IN prob_carrier p /\\ (X:num->A->real) 0 x - X (SUC n) x >= t} =\n      {x | x IN prob_carrier p /\\\n       (\\n x. --(X:num->A->real) n x) (SUC n) x - (\\n x. --X n x) 0 x >= t}
-      #|  prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n       (X:num->A->real) 0 x - X (SUC n) x >= t} <= E
-      #|  FF:num->(A->bool)->bool
-      #|  prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n       (X:num->A->real) (SUC n) x - X 0 x >= t} <= E
-      #|  E = exp(--(&2 * t pow 2 / V))
-      #|  V = sum(0..n) (\\i. ((b:num->real) i - (a:num->real) i) pow 2)
-      #|  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real)\n     (a:num->real) (b:num->real) (t:real) (n:num).\n     martingale p FF X /\\\n     (forall n. FINITE (FF n)) /\\\n     (forall i. i <= n ==>\n        forall x. x IN prob_carrier p ==>\n          a i <= X (SUC i) x - X i x /\\ X (SUC i) x - X i x <= b i) /\\\n     (forall i. i <= n ==> a i < b i) /\\\n     &0 < t /\\ &0 < sum(0..n) (\\i. (b i - a i) pow 2)\n     ==> prob p {x | x IN prob_carrier p /\\\n                     abs(X (SUC n) x - X 0 x) >= t} <=\n         &2 * exp(--(&2 * t pow 2 / sum(0..n) (\\i. (b i - a i) pow 2)))
-      #|  n:num
-      #|  t:real
-      #|  b:num->real
-      #|  a:num->real
-      #|  (\\n. cond_exp p ((FF:num->(A->bool)->bool) n) (X:A->real))
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall p:A prob_space FF (X:A->real) (a:num->real) (b:num->real) (t:real) (n:num).\n     filtration p FF /\\ (forall n. FINITE (FF n)) /\\ integrable p X /\\\n     (forall i. i <= n ==>\n        forall x. x IN prob_carrier p ==>\n          a i <= cond_exp p (FF (SUC i)) X x -\n                 cond_exp p (FF i) X x /\\\n          cond_exp p (FF (SUC i)) X x -\n                 cond_exp p (FF i) X x <= b i) /\\\n     (forall i. i <= n ==> a i < b i) /\\\n     &0 < t /\\ &0 < sum(0..n) (\\i. (b i - a i) pow 2)\n     ==> prob p {x | x IN prob_carrier p /\\\n                     cond_exp p (FF (SUC n)) X x -\n                     cond_exp p (FF 0) X x >= t} <=\n         exp(--(&2 * t pow 2 / sum(0..n) (\\i. (b i - a i) pow 2)))
-      #|  n:num
-      #|  t:real
-      #|  b:num->real
-      #|  a:num->real
-      #|  (\\n. cond_exp p ((FF:num->(A->bool)->bool) n) (X:A->real))
-      #|  FF:num->(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall p:A prob_space FF (X:A->real) (a:num->real) (b:num->real) (t:real) (n:num).\n     filtration p FF /\\ (forall n. FINITE (FF n)) /\\ integrable p X /\\\n     (forall i. i <= n ==>\n        forall x. x IN prob_carrier p ==>\n          a i <= cond_exp p (FF (SUC i)) X x -\n                 cond_exp p (FF i) X x /\\\n          cond_exp p (FF (SUC i)) X x -\n                 cond_exp p (FF i) X x <= b i) /\\\n     (forall i. i <= n ==> a i < b i) /\\\n     &0 < t /\\ &0 < sum(0..n) (\\i. (b i - a i) pow 2)\n     ==> prob p {x | x IN prob_carrier p /\\\n                     abs(cond_exp p (FF (SUC n)) X x -\n                         cond_exp p (FF 0) X x) >= t} <=\n         &2 * exp(--(&2 * t pow 2 / sum(0..n) (\\i. (b i - a i) pow 2)))
-      #|  rv_sigma (p:A prob_space) (X:num->A->real) (n:num) =\n   {a | a SUBSET prob_carrier p /\\\n    forall x y. x IN prob_carrier p /\\ y IN prob_carrier p /\\\n           (forall k. k < n ==> (X:num->A->real) k x = X k y)\n           ==> (x IN a <=> y IN a)}
-      #|  y:A
-      #|  x:A
-      #|  t:A->bool
-      #|  t:A->bool
-      #|  t:A->bool
-      #|  s:(A->bool)->bool
-      #|  y:A
-      #|  x:A
-      #|  a:A->bool
-      #|  prob_carrier (p:A prob_space)
-      #|  z:A
-      #|  UNIONS {a | a SUBSET prob_carrier (p:A prob_space) /\\\n    (forall x y. x IN prob_carrier p /\\ y IN prob_carrier p /\\\n           (forall k. k < n ==> (X:num->A->real) k x = X k y)\n           ==> (x IN a <=> y IN a))} = prob_carrier p
-      #|  forall p:A prob_space X n. sigma_algebra (rv_sigma p X n)
-      #|  z:A
-      #|  w:A
-      #|  w:A
-      #|  ~(a:A->bool = {})
-      #|  z:A
-      #|  a = prob_carrier (p:A prob_space)
-      #|  a:A->bool = {}
-      #|  a:A->bool
-      #|  forall p:A prob_space X.\n     rv_sigma p X 0 = {{}:A->bool, prob_carrier p}
-      #|  a:A->bool
-      #|  forall p:A prob_space X m n. m <= n ==> rv_sigma p X m SUBSET rv_sigma p X n
-      #|  k:num
-      #|  v:real
-      #|  forall p:A prob_space X k n.\n     k < n ==> measurable_wrt p (rv_sigma p X n) (X k)
-      #|  prob_carrier (p:A prob_space)
-      #|  z:A
-      #|  forall p:A prob_space X n. UNIONS (rv_sigma p X n) = prob_carrier p
-      #|  rv_sigma_atom (p:A prob_space) (X:num->A->real) (n:num) (x:A) =\n   {y | y IN prob_carrier p /\\ forall k. k < n ==> X k y = X k x}
-      #|  x:A
-      #|  z:A
-      #|  t IN rv_sigma (p:A prob_space) (X:num->A->real) n
-      #|  t:A->bool
-      #|  {y:A | y IN prob_carrier p /\\ (X:num->A->real) k y = X k x}
-      #|  k:num
-      #|  prob_carrier (p:A prob_space)
-      #|  z:A
-      #|  forall p:A prob_space X n x.\n     sigma_algebra (rv_sigma p X n) /\\ x IN prob_carrier p\n     ==> sigma_atom (rv_sigma p X n) x = rv_sigma_atom p X n x
-      #|  k:num
-      #|  k:num
-      #|  forall p:A prob_space X n x.\n     (forall k. k < n ==> simple_rv p (X k)) /\\ x IN prob_carrier p\n     ==> rv_sigma_atom p X n x IN rv_sigma p X n
-      #|  x:A
-      #|  z:A
-      #|  (x:A) IN prob_carrier (p:A prob_space)
-      #|  (z:A) IN rv_sigma_atom (p:A prob_space) (X:num->A->real) n x
-      #|  z:A
-      #|  rv_sigma_atom (p:A prob_space) X n z
-      #|  z:A
-      #|  forall p:A prob_space X n a.\n     a IN rv_sigma p X n\n     ==> a = UNIONS {rv_sigma_atom p X n x | x | x IN a}
-      #|  n:num
-      #|  random_variable (p:A prob_space) ((X:num->A->real) n)
-      #|  x:A
-      #|  {y:A | y IN prob_carrier p /\\\n             forall k. k = n \\/ k < n ==> (X:num->A->real) k y = X k x} =\n      rv_sigma_atom p X n x INTER\n      {y | y IN prob_carrier p /\\ X n y = X n x}
-      #|  {y:A | y IN prob_carrier p} = prob_carrier p
-      #|  forall p:A prob_space X n x.\n     (forall k. k < n ==> simple_rv p (X k)) /\\ x IN prob_carrier p\n     ==> rv_sigma_atom p X n x IN prob_events p
-      #|  w:A
-      #|  w:A
-      #|  (X:num->A->real) n w
-      #|  rv_sigma_atom (p:A prob_space) X n w
-      #|  w:A
-      #|  s:A->bool
+      #|  (X : (Num, A) -> Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  simple_submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), 0) == ((x : A) => real_of_num(0))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, simple_submartingale(p, FF, X) && (\226\136\128 n : Num, FINITE(FF(n))) \226\134\146 predictable(p, FF, doob_compensator(p, FF, X))
+      #|  (x : Real) <= (y : Real) \226\134\146 (a : Real) <= a + (y - x)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 x : A, simple_submartingale(p, FF, X) && (\226\136\128 n : Num, FINITE(FF(n))) && IN(x, prob_carrier(p)) && !(prob(p, sigma_atom(FF(n), x)) == real_of_num(0)) \226\134\146 doob_compensator(p, FF, X, n, x) <= doob_compensator(p, FF, X, SUC(n), x)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), x)) * indicator_fn((a : (A) -> Bool), x)) == real_of_num(0)
+      #|  (x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - simple_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), x)) * indicator_fn((a : (A) -> Bool), x)
+      #|  (x : A) => ((X : (Num, A) -> Real)((n : Num), x) - doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), X, n, x)) * indicator_fn((a : (A) -> Bool), x)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - doob_compensator(p, (FF : (Num, (A) -> Bool) -> Bool), X, SUC(n), x)) * indicator_fn((a : (A) -> Bool), x)) == simple_expectation(p, (x : A) => (X(n, x) - doob_compensator(p, FF, X, n, x)) * indicator_fn(a, x) + (X(SUC(n), x) - simple_cond_exp(p, FF(n), X(SUC(n)), x)) * indicator_fn(a, x))
+      #|  simple_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (X : (Num, A) -> Real)(SUC(n)))
+      #|  (X : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (p : Prob_space[A])
+      #|  indicator_fn((a : (A) -> Bool))
+      #|  (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) - simple_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), x)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)(SUC((n : Num)), x) - simple_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), x)) * indicator_fn((a : (A) -> Bool), x))
+      #|  indicator_fn((a : (A) -> Bool))
+      #|  (x : A) => (X : (Num, A) -> Real)((n : Num), x) - doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), X, n, x)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => ((X : (Num, A) -> Real)((n : Num), x) - doob_compensator(p, (FF : (Num, (A) -> Bool) -> Bool), X, n, x)) * indicator_fn((a : (A) -> Bool), x))
+      #|  simple_rv((p : Prob_space[A]), indicator_fn((a : (A) -> Bool)))
+      #|  IN((a : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 ((X : (Num, A) -> Real)(SUC((n : Num)), x) - doob_compensator(p, (FF : (Num, (A) -> Bool) -> Bool), X, SUC(n), x)) * indicator_fn((a : (A) -> Bool), x) == (X(n, x) - doob_compensator(p, FF, X, n, x)) * indicator_fn(a, x) + (X(SUC(n), x) - simple_cond_exp(p, FF(n), X(SUC(n)), x)) * indicator_fn(a, x)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  simple_adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num))
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), (n : Num))
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, simple_rv((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(n, x) - doob_compensator(p, (FF : (Num, (A) -> Bool) -> Bool), X, n, x))
+      #|  \226\136\128 n : Num, simple_rv((p : Prob_space[A]), doob_compensator(p, (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real), n))
+      #|  \226\136\128 n : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  simple_adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, simple_submartingale(p, FF, X) && (\226\136\128 n : Num, FINITE(FF(n))) \226\134\146 simple_martingale(p, FF, (n : Num) => (x : A) => X(n, x) - doob_compensator(p, FF, X, n, x))
+      #|  simple_submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
+      #|  (n : Num) => (x : A) => (X : (Num, A) -> Real)(n, x) - doob_compensator((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), X, n, x)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, submartingale(p, FF, X) && (\226\136\128 n : Num, FINITE(FF(n))) && (\226\136\128 n : Num, simple_rv(p, X(n))) \226\134\146 (\226\136\131 M : (Num, A) -> Real, \226\136\131 A : (Num, A) -> Real, martingale(p, FF, M) && predictable(p, FF, A) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 A(0, x) == real_of_num(0)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) && !(prob(p, sigma_atom(FF(n), x)) == real_of_num(0)) \226\134\146 A(n, x) <= A(SUC(n), x)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 X(n, x) == M(n, x) + A(n, x)))
+      #|  (f : (A) -> Real)((x : A))
+      #|  indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)))
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A))))
+      #|  IN(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), prob_events((p : Prob_space[A])))
+      #|  simple_expectation((p : Prob_space[A]), (y : A) => (f : (A) -> Real)(y) * indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), y)) == simple_expectation(p, (y : A) => f(x) * indicator_fn(sigma_atom(G, x), y))
+      #|  \226\136\128 y : A, IN(y, prob_carrier((p : Prob_space[A]))) \226\134\146 (f : (A) -> Real)(y) * indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), y) == f(x) * indicator_fn(sigma_atom(G, x), y)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (f : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 y : A, IN(y, sigma_atom((G : ((A) -> Bool) -> Bool), (x : A))) \226\134\146 (f : (A) -> Real)(y) == f(x)
+      #|  IN((x : A), UNIONS((G : ((A) -> Bool) -> Bool)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, \226\136\128 x : A, sub_sigma_algebra(p, G) && FINITE(G) && simple_rv(p, f) && measurable_wrt(p, G, f) && IN(x, prob_carrier(p)) \226\134\146 simple_expectation(p, (y : A) => f(y) * indicator_fn(sigma_atom(G, x), y)) == f(x) * prob(p, sigma_atom(G, x))
+      #|  (M : (Num, A) -> Real)(SUC((n : Num)), (x : A)) * prob((p : Prob_space[A]), sigma_atom((FF : (Num, (A) -> Bool) -> Bool)(n), x)) == M(n, x) * prob(p, sigma_atom(FF(n), x))
+      #|  simple_expectation((p : Prob_space[A]), (x' : A) => (M : (Num, A) -> Real)((n : Num), x') * indicator_fn(sigma_atom((FF : (Num, (A) -> Bool) -> Bool)(n), (x : A)), x')) == M(n, x) * prob(p, sigma_atom(FF(n), x))
+      #|  simple_expectation((p : Prob_space[A]), (x' : A) => (M : (Num, A) -> Real)(SUC((n : Num)), x') * indicator_fn(sigma_atom((FF : (Num, (A) -> Bool) -> Bool)(n), (x : A)), x')) == M(SUC(n), x) * prob(p, sigma_atom(FF(n), x))
+      #|  sigma_atom((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (x : A))
+      #|  (n : Num)
+      #|  simple_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (M : (Num, A) -> Real))
+      #|  simple_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (M : (Num, A) -> Real))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (M : (Num, A) -> Real)(n))
+      #|  (n : Num)
+      #|  predictable((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (M : (Num, A) -> Real))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (M : (Num, A) -> Real)(SUC(n)))
+      #|  \226\136\128 k : Num, simple_rv((p : Prob_space[A]), (M : (Num, A) -> Real)(k))
+      #|  IN(sigma_atom((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (x : A)), FF(n))
+      #|  (M : (Num, A) -> Real)((n : Num), (x : A)) == real_of_num(0)
+      #|  real_of_num(0) <= prob((p : Prob_space[A]), sigma_atom((FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (x : A)))
+      #|  prob((p : Prob_space[A]), sigma_atom((FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (x : A))) <= prob(p, sigma_atom(FF(n), x))
+      #|  !(prob((p : Prob_space[A]), sigma_atom((FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (x : A))) == real_of_num(0))
+      #|  !(prob((p : Prob_space[A]), sigma_atom((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (x : A))) == real_of_num(0))
+      #|  (n : Num)
+      #|  \226\136\128 k : Num, sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k))
+      #|  IN(sigma_atom((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (x : A)), prob_events((p : Prob_space[A])))
+      #|  SUC((n : Num))
+      #|  \226\136\128 k : Num, sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k))
+      #|  IN(sigma_atom((FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (x : A)), prob_events((p : Prob_space[A])))
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), FF(SUC(n)))
+      #|  SUBSET(sigma_atom((FF : (Num, (A) -> Bool) -> Bool)(SUC((n : Num))), (x : A)), sigma_atom(FF(n), x))
+      #|  IN((x : A), UNIONS((FF : (Num, (A) -> Bool) -> Bool)((n : Num))))
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), FF(SUC(n)))
+      #|  \226\136\128 k : Num, sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  (x : A)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 M : (Num, A) -> Real, simple_martingale(p, FF, M) && predictable(p, FF, M) && (\226\136\128 n : Num, FINITE(FF(n))) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 M(0, x) == real_of_num(0)) \226\134\146 (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) && !(prob(p, sigma_atom(FF(n), x)) == real_of_num(0)) \226\134\146 M(n, x) == real_of_num(0))
+      #|  (H2 : (A) -> Real)
+      #|  (H1 : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => (H1 : (A) -> Real)(x) - (H2 : (A) -> Real)(x))
+      #|  (H2 : (A) -> Real)
+      #|  (H1 : (A) -> Real)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (H1 : (A) -> Real)) && simple_rv(p, (H2 : (A) -> Real))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 H1 : (A) -> Real, \226\136\128 H2 : (A) -> Real, sub_sigma_algebra(p, G) && simple_rv_wrt(p, G, H1) && simple_rv_wrt(p, G, H2) \226\134\146 simple_rv_wrt(p, G, (x : A) => H1(x) - H2(x))
+      #|  (x : A) => (M2 : (Num, A) -> Real)((n : Num), x) * indicator_fn((a : (A) -> Bool), x)
+      #|  (x : A) => (M1 : (Num, A) -> Real)((n : Num), x) * indicator_fn((a : (A) -> Bool), x)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((M1 : (Num, A) -> Real)((n : Num), x) - (M2 : (Num, A) -> Real)(n, x)) * indicator_fn((a : (A) -> Bool), x)) == simple_expectation(p, (x : A) => M1(n, x) * indicator_fn(a, x) - M2(n, x) * indicator_fn(a, x))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((M1 : (Num, A) -> Real)((n : Num), x) - (M2 : (Num, A) -> Real)(n, x)) * indicator_fn((a : (A) -> Bool), x)) == simple_expectation(p, (x : A) => M1(n, x) * indicator_fn(a, x)) - simple_expectation(p, (x : A) => M2(n, x) * indicator_fn(a, x))
+      #|  (x : A) => (M2 : (Num, A) -> Real)(SUC((n : Num)), x) * indicator_fn((a : (A) -> Bool), x)
+      #|  (x : A) => (M1 : (Num, A) -> Real)(SUC((n : Num)), x) * indicator_fn((a : (A) -> Bool), x)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((M1 : (Num, A) -> Real)(SUC((n : Num)), x) - (M2 : (Num, A) -> Real)(SUC(n), x)) * indicator_fn((a : (A) -> Bool), x)) == simple_expectation(p, (x : A) => M1(SUC(n), x) * indicator_fn(a, x) - M2(SUC(n), x) * indicator_fn(a, x))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((M1 : (Num, A) -> Real)(SUC((n : Num)), x) - (M2 : (Num, A) -> Real)(SUC(n), x)) * indicator_fn((a : (A) -> Bool), x)) == simple_expectation(p, (x : A) => M1(SUC(n), x) * indicator_fn(a, x)) - simple_expectation(p, (x : A) => M2(SUC(n), x) * indicator_fn(a, x))
+      #|  indicator_fn((a : (A) -> Bool))
+      #|  (M2 : (Num, A) -> Real)((k : Num))
+      #|  (p : Prob_space[A])
+      #|  indicator_fn((a : (A) -> Bool))
+      #|  (M1 : (Num, A) -> Real)((k : Num))
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 k : Num, simple_rv((p : Prob_space[A]), (x : A) => (M1 : (Num, A) -> Real)(k, x) * indicator_fn((a : (A) -> Bool), x)) && simple_rv(p, (x : A) => (M2 : (Num, A) -> Real)(k, x) * indicator_fn(a, x))
+      #|  simple_rv((p : Prob_space[A]), indicator_fn((a : (A) -> Bool)))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  IN((a : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (n : Num)
+      #|  simple_adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (M2 : (Num, A) -> Real))
+      #|  simple_adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (M1 : (Num, A) -> Real))
+      #|  (M2 : (Num, A) -> Real)((n : Num))
+      #|  (M1 : (Num, A) -> Real)((n : Num))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  sub_sigma_algebra((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  (M2 : (Num, A) -> Real)((n : Num))
+      #|  (M1 : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, simple_rv((p : Prob_space[A]), (x : A) => (M1 : (Num, A) -> Real)(n, x) - (M2 : (Num, A) -> Real)(n, x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 M1 : (Num, A) -> Real, \226\136\128 M2 : (Num, A) -> Real, simple_martingale(p, FF, M1) && simple_martingale(p, FF, M2) \226\134\146 simple_martingale(p, FF, (n : Num) => (x : A) => M1(n, x) - M2(n, x))
+      #|  (H2 : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (H1 : (Num, A) -> Real)(SUC((n : Num)))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  (H2 : (Num, A) -> Real)(0)
+      #|  (H1 : (Num, A) -> Real)(0)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(0)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 H1 : (Num, A) -> Real, \226\136\128 H2 : (Num, A) -> Real, predictable(p, FF, H1) && predictable(p, FF, H2) && filtration(p, FF) \226\134\146 predictable(p, FF, (n : Num) => (x : A) => H1(n, x) - H2(n, x))
+      #|  (a : Real) - (b : Real) == real_of_num(0) \226\134\146 a == b
+      #|  (M1 : (Num, A) -> Real)((n : Num), (x : A)) - (M2 : (Num, A) -> Real)(n, x) == real_of_num(0)
+      #|  (A2 : (Num, A) -> Real)((n : Num), (x : A)) - (A1 : (Num, A) -> Real)(n, x) == real_of_num(0)
+      #|  (n : Num) => (x : A) => (A2 : (Num, A) -> Real)(n, x) - (A1 : (Num, A) -> Real)(n, x)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  (a : Real) == real_of_num(0) && (b : Real) == real_of_num(0) \226\134\146 a - b == real_of_num(0)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 ((n : Num) => (x : A) => (A2 : (Num, A) -> Real)(n, x) - (A1 : (Num, A) -> Real)(n, x))(0, x) == real_of_num(0)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((A2 : (Num, A) -> Real)((n : Num), x) - (A1 : (Num, A) -> Real)(n, x)) * indicator_fn((a : (A) -> Bool), x)) == simple_expectation(p, (x : A) => ((M1 : (Num, A) -> Real)(n, x) - (M2 : (Num, A) -> Real)(n, x)) * indicator_fn(a, x))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => ((A2 : (Num, A) -> Real)(SUC((n : Num)), x) - (A1 : (Num, A) -> Real)(SUC(n), x)) * indicator_fn((a : (A) -> Bool), x)) == simple_expectation(p, (x : A) => ((M1 : (Num, A) -> Real)(SUC(n), x) - (M2 : (Num, A) -> Real)(SUC(n), x)) * indicator_fn(a, x))
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  SUBSET((FF : (Num, (A) -> Bool) -> Bool)((n : Num)), FF(SUC(n)))
+      #|  measurable_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (x : A) => (A2 : (Num, A) -> Real)(SUC(n), x) - (A1 : (Num, A) -> Real)(SUC(n), x))
+      #|  (n : Num)
+      #|  simple_rv_wrt((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(0), (x : A) => (A2 : (Num, A) -> Real)(0, x) - (A1 : (Num, A) -> Real)(0, x))
+      #|  (k : Num)
+      #|  predictable((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (n : Num) => (x : A) => (A2 : (Num, A) -> Real)(n, x) - (A1 : (Num, A) -> Real)(n, x))
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)(0)
+      #|  (k : Num)
+      #|  predictable((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (n : Num) => (x : A) => (A2 : (Num, A) -> Real)(n, x) - (A1 : (Num, A) -> Real)(n, x))
+      #|  \226\136\128 k : Num, simple_rv((p : Prob_space[A]), (x : A) => (A2 : (Num, A) -> Real)(k, x) - (A1 : (Num, A) -> Real)(k, x))
+      #|  simple_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (n : Num) => (x : A) => (M1 : (Num, A) -> Real)(n, x) - (M2 : (Num, A) -> Real)(n, x))
+      #|  simple_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (n : Num) => (x : A) => (A2 : (Num, A) -> Real)(n, x) - (A1 : (Num, A) -> Real)(n, x))
+      #|  simple_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (n : Num) => (x : A) => (M1 : (Num, A) -> Real)(n, x) - (M2 : (Num, A) -> Real)(n, x))
+      #|  (x : A)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 (A2 : (Num, A) -> Real)(n, x) - (A1 : (Num, A) -> Real)(n, x) == (M1 : (Num, A) -> Real)(n, x) - (M2 : (Num, A) -> Real)(n, x)
+      #|  predictable((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (n : Num) => (x : A) => (A2 : (Num, A) -> Real)(n, x) - (A1 : (Num, A) -> Real)(n, x))
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 M1 : (Num, A) -> Real, \226\136\128 A1 : (Num, A) -> Real, \226\136\128 M2 : (Num, A) -> Real, \226\136\128 A2 : (Num, A) -> Real, (\226\136\128 n : Num, FINITE(FF(n))) && simple_martingale(p, FF, M1) && predictable(p, FF, A1) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 A1(0, x) == real_of_num(0)) && simple_martingale(p, FF, M2) && predictable(p, FF, A2) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 A2(0, x) == real_of_num(0)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 M1(n, x) + A1(n, x) == M2(n, x) + A2(n, x)) \226\134\146 (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) && !(prob(p, sigma_atom(FF(n), x)) == real_of_num(0)) \226\134\146 M1(n, x) == M2(n, x) && A1(n, x) == A2(n, x))
+      #|  (x : A)
+      #|  (X : (A) -> Real)((x : A))
+      #|  (y : Real)
+      #|  IMAGE((y : Real) => -y, {(X : (A) -> Real)((x : A)) | IN(x, prob_carrier((p : Prob_space[A])))})
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, sub_sigma_algebra(p, G) && simple_rv_wrt(p, G, X) \226\134\146 simple_rv_wrt(p, G, (x : A) => -X(x))
+      #|  ((x : A) => -(H : (Num, A) -> Real)(0, x)) == ((x : A) => -H(0, x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 H : (Num, A) -> Real, filtration(p, FF) && predictable(p, FF, H) \226\134\146 predictable(p, FF, (n : Num) => (x : A) => -H(n, x))
+      #|  (E : Real) + E
+      #|  prob((p : Prob_space[A]), UNION({(x : A) | IN(x, prob_carrier(p)) && (X : (Num, A) -> Real)(SUC((n : Num)), x) - X(0, x) >= (t : Real)}, {(x : A) | IN(x, prob_carrier(p)) && X(0, x) - X(SUC(n), x) >= t}))
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (X : (Num, A) -> Real)(SUC((n : Num)), x) - X(0, x) >= (t : Real)}) + prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(0, x) - X(SUC(n), x) >= t})
+      #|  random_variable((p : Prob_space[A]), (x : A) => (X : (Num, A) -> Real)(SUC((n : Num)), x) - X(0, x))
+      #|  (i : Num)
+      #|  (x : A)
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, i <= (n : Num) \226\134\146 (\226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 (a : (Num) -> Real)(i) <= (X : (Num, A) -> Real)(SUC(i), x) - X(i, x) && X(SUC(i), x) - X(i, x) <= (b : (Num) -> Real)(i))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, pow(-a - -b, 2) == pow(b - a, 2)
+      #|  (n : Num)
+      #|  (t : Real)
+      #|  (i : Num) => -(a : (Num) -> Real)(i)
+      #|  (i : Num) => -(b : (Num) -> Real)(i)
+      #|  (n : Num) => (x : A) => -(X : (Num, A) -> Real)(n, x)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, -a - -b == b - a
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(0, x) - X(SUC((n : Num)), x) >= (t : Real)} == {(x : A) | IN(x, prob_carrier(p)) && ((n : Num) => (x : A) => -X(n, x))(SUC(n), x) - ((n : Num) => (x : A) => -X(n, x))(0, x) >= t}
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (X : (Num, A) -> Real)(0, x) - X(SUC((n : Num)), x) >= (t : Real)}) <= (E : Real)
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (X : (Num, A) -> Real)(SUC((n : Num)), x) - X(0, x) >= (t : Real)}) <= (E : Real)
+      #|  (E : Real) == exp(-(real_of_num(2) * (pow((t : Real), 2) / (V : Real))))
+      #|  (V : Real) == sum(op_dot_dot(0, (n : Num)), (i : Num) => pow((b : (Num) -> Real)(i) - (a : (Num) -> Real)(i), 2))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 t : Real, \226\136\128 n : Num, martingale(p, FF, X) && (\226\136\128 n : Num, FINITE(FF(n))) && (\226\136\128 i : Num, i <= n \226\134\146 (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 a(i) <= X(SUC(i), x) - X(i, x) && X(SUC(i), x) - X(i, x) <= b(i))) && (\226\136\128 i : Num, i <= n \226\134\146 a(i) < b(i)) && real_of_num(0) < t && real_of_num(0) < sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)) \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && abs(X(SUC(n), x) - X(0, x)) >= t}) <= real_of_num(2) * exp(-(real_of_num(2) * (pow(t, 2) / sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)))))
+      #|  (n : Num)
+      #|  (t : Real)
+      #|  (b : (Num) -> Real)
+      #|  (a : (Num) -> Real)
+      #|  (n : Num) => cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n), (X : (A) -> Real))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 t : Real, \226\136\128 n : Num, filtration(p, FF) && (\226\136\128 n : Num, FINITE(FF(n))) && integrable(p, X) && (\226\136\128 i : Num, i <= n \226\134\146 (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 a(i) <= cond_exp(p, FF(SUC(i)), X, x) - cond_exp(p, FF(i), X, x) && cond_exp(p, FF(SUC(i)), X, x) - cond_exp(p, FF(i), X, x) <= b(i))) && (\226\136\128 i : Num, i <= n \226\134\146 a(i) < b(i)) && real_of_num(0) < t && real_of_num(0) < sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)) \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && cond_exp(p, FF(SUC(n)), X, x) - cond_exp(p, FF(0), X, x) >= t}) <= exp(-(real_of_num(2) * (pow(t, 2) / sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)))))
+      #|  (n : Num)
+      #|  (t : Real)
+      #|  (b : (Num) -> Real)
+      #|  (a : (Num) -> Real)
+      #|  (n : Num) => cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n), (X : (A) -> Real))
+      #|  (FF : (Num, (A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 t : Real, \226\136\128 n : Num, filtration(p, FF) && (\226\136\128 n : Num, FINITE(FF(n))) && integrable(p, X) && (\226\136\128 i : Num, i <= n \226\134\146 (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 a(i) <= cond_exp(p, FF(SUC(i)), X, x) - cond_exp(p, FF(i), X, x) && cond_exp(p, FF(SUC(i)), X, x) - cond_exp(p, FF(i), X, x) <= b(i))) && (\226\136\128 i : Num, i <= n \226\134\146 a(i) < b(i)) && real_of_num(0) < t && real_of_num(0) < sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)) \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && abs(cond_exp(p, FF(SUC(n)), X, x) - cond_exp(p, FF(0), X, x)) >= t}) <= real_of_num(2) * exp(-(real_of_num(2) * (pow(t, 2) / sum(op_dot_dot(0, n), (i : Num) => pow(b(i) - a(i), 2)))))
+      #|  (rv_sigma : (Prob_space[A], (Num, A) -> Real, Num, (A) -> Bool) -> Bool)((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num)) == {(a : (A) -> Bool) | SUBSET(a, prob_carrier(p)) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, prob_carrier(p)) && IN(y, prob_carrier(p)) && (\226\136\128 k : Num, k < n \226\134\146 X(k, x) == X(k, y)) \226\134\146 IN(x, a) == IN(y, a))}
+      #|  (y : A)
+      #|  (x : A)
+      #|  (t : (A) -> Bool)
+      #|  (t : (A) -> Bool)
+      #|  (t : (A) -> Bool)
+      #|  (s : ((A) -> Bool) -> Bool)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (a : (A) -> Bool)
+      #|  prob_carrier((p : Prob_space[A]))
+      #|  (z : A)
+      #|  UNIONS({(a : (A) -> Bool) | SUBSET(a, prob_carrier((p : Prob_space[A]))) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, prob_carrier(p)) && IN(y, prob_carrier(p)) && (\226\136\128 k : Num, k < (n : Num) \226\134\146 (X : (Num, A) -> Real)(k, x) == X(k, y)) \226\134\146 IN(x, a) == IN(y, a))}) == prob_carrier(p)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, sigma_algebra(rv_sigma(p, X, n))
+      #|  (z : A)
+      #|  (w : A)
+      #|  (w : A)
+      #|  !((a : (A) -> Bool) == {})
+      #|  (z : A)
+      #|  (a : (A) -> Bool) == prob_carrier((p : Prob_space[A]))
+      #|  (a : (A) -> Bool) == {}
+      #|  (a : (A) -> Bool)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, rv_sigma(p, X, 0) == {{}, prob_carrier(p)}
+      #|  (a : (A) -> Bool)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSET(rv_sigma(p, X, m), rv_sigma(p, X, n))
+      #|  (k : Num)
+      #|  (v : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 k : Num, \226\136\128 n : Num, k < n \226\134\146 measurable_wrt(p, rv_sigma(p, X, n), X(k))
+      #|  prob_carrier((p : Prob_space[A]))
+      #|  (z : A)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, UNIONS(rv_sigma(p, X, n)) == prob_carrier(p)
+      #|  (rv_sigma_atom : (Prob_space[A], (Num, A) -> Real, Num, A, A) -> Bool)((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num), (x : A)) == {(y : A) | IN(y, prob_carrier(p)) && (\226\136\128 k : Num, k < n \226\134\146 X(k, y) == X(k, x))}
+      #|  (x : A)
+      #|  (z : A)
+      #|  IN((t : (A) -> Bool), rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num)))
+      #|  (t : (A) -> Bool)
+      #|  {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((k : Num), y) == X(k, (x : A))}
+      #|  (k : Num)
+      #|  prob_carrier((p : Prob_space[A]))
+      #|  (z : A)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 x : A, sigma_algebra(rv_sigma(p, X, n)) && IN(x, prob_carrier(p)) \226\134\146 sigma_atom(rv_sigma(p, X, n), x) == rv_sigma_atom(p, X, n, x)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 x : A, (\226\136\128 k : Num, k < n \226\134\146 simple_rv(p, X(k))) && IN(x, prob_carrier(p)) \226\134\146 IN(rv_sigma_atom(p, X, n, x), rv_sigma(p, X, n))
+      #|  (x : A)
+      #|  (z : A)
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  IN((z : A), rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num), (x : A)))
+      #|  (z : A)
+      #|  rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num), (z : A))
+      #|  (z : A)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 a : (A) -> Bool, IN(a, rv_sigma(p, X, n)) \226\134\146 a == UNIONS({rv_sigma_atom(p, X, n, (x : A)) | IN(x, a)})
+      #|  (n : Num)
+      #|  random_variable((p : Prob_space[A]), (X : (Num, A) -> Real)((n : Num)))
+      #|  (x : A)
+      #|  {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k == (n : Num) || k < n \226\134\146 (X : (Num, A) -> Real)(k, y) == X(k, (x : A)))} == INTER(rv_sigma_atom(p, X, n, x), {(y : A) | IN(y, prob_carrier(p)) && X(n, y) == X(n, x)})
+      #|  {(y : A) | IN(y, prob_carrier((p : Prob_space[A])))} == prob_carrier(p)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 x : A, (\226\136\128 k : Num, k < n \226\134\146 simple_rv(p, X(k))) && IN(x, prob_carrier(p)) \226\134\146 IN(rv_sigma_atom(p, X, n, x), prob_events(p))
+      #|  (w : A)
+      #|  (w : A)
+      #|  (X : (Num, A) -> Real)((n : Num), (w : A))
+      #|  rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num), (w : A))
+      #|  (w : A)
+      #|  (s : (A) -> Bool)
       #|  {(a:(A->bool)) INTER\n       {y:A | y IN prob_carrier p /\\ (X:num->A->real) n y = v} |\n       a,v |\n       a IN {rv_sigma_atom p X n z | z | z IN prob_carrier p} /\\\n       v IN {X n z | z | z IN prob_carrier p}}
-      #|  n:num
-      #|  FINITE {(X:num->A->real) n x | x | x IN prob_carrier p}
-      #|  FINITE {rv_sigma_atom (p:A prob_space) X n x | x |\n              x IN prob_carrier p}
-      #|  s:A->bool
-      #|  {prob_carrier (p:A prob_space)}
-      #|  forall p:A prob_space X n.\n     (forall k. k < n ==> simple_rv p (X k))\n     ==> FINITE {rv_sigma_atom p X n x | x | x IN prob_carrier p}
-      #|  {rv_sigma_atom (p:A prob_space) X n x | x |\n                x IN prob_carrier p}
-      #|  z:A
-      #|  s:A->bool
-      #|  a IN rv_sigma (p:A prob_space) (X:num->A->real) n
-      #|  (a:A->bool) SUBSET prob_carrier p
-      #|  a:A->bool
-      #|  n:num
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  a:A->bool = {}
-      #|  forall p:A prob_space X n a.\n     (forall k. k < n ==> simple_rv p (X k)) /\\ a IN rv_sigma p X n\n     ==> a IN prob_events p
-      #|  n:num
-      #|  X:num->A->real
-      #|  forall p:A prob_space X n.\n     (forall k. k < n ==> simple_rv p (X k))\n     ==> sub_sigma_algebra p (rv_sigma p X n)
-      #|  a IN rv_sigma (p:A prob_space) (X:num->A->real) n
-      #|  (a:A->bool) SUBSET prob_carrier p
-      #|  {rv_sigma_atom (p:A prob_space) X n x | x |\n                x IN (a:A->bool)}
-      #|  a:A->bool
-      #|  IMAGE UNIONS\n      {s:(A->bool)->bool |\n       s SUBSET {rv_sigma_atom (p:A prob_space) X n x | x |\n                 x IN prob_carrier p}}
-      #|  FINITE {rv_sigma_atom (p:A prob_space) X n x | x | x IN prob_carrier p}
-      #|  forall p:A prob_space X n.\n     (forall k. k < n ==> simple_rv p (X k))\n     ==> FINITE (rv_sigma p X n)
-      #|  forall p:A prob_space X n.\n     (forall k. k <= n ==> simple_rv p (X k))\n     ==> filtration p (\\k. rv_sigma p X (MIN k (SUC n)))
-      #|  y:A
-      #|  ~(prob (p:A prob_space) (prob_carrier p) = &0)
-      #|  x:A
+      #|  (n : Num)
+      #|  FINITE({(X : (Num, A) -> Real)((n : Num), (x : A)) | IN(x, prob_carrier((p : Prob_space[A])))})
+      #|  FINITE({rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num), x) | x : A | IN(x, prob_carrier(p))})
+      #|  (s : (A) -> Bool)
+      #|  {prob_carrier((p : Prob_space[A]))}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, (\226\136\128 k : Num, k < n \226\134\146 simple_rv(p, X(k))) \226\134\146 FINITE({rv_sigma_atom(p, X, n, x) | x : A | IN(x, prob_carrier(p))})
+      #|  {rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num), x) | x : A | IN(x, prob_carrier(p))}
+      #|  (z : A)
+      #|  (s : (A) -> Bool)
+      #|  IN((a : (A) -> Bool), rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num)))
+      #|  SUBSET((a : (A) -> Bool), prob_carrier((p : Prob_space[A])))
+      #|  (a : (A) -> Bool)
+      #|  (n : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (a : (A) -> Bool) == {}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 a : (A) -> Bool, (\226\136\128 k : Num, k < n \226\134\146 simple_rv(p, X(k))) && IN(a, rv_sigma(p, X, n)) \226\134\146 IN(a, prob_events(p))
+      #|  (n : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, (\226\136\128 k : Num, k < n \226\134\146 simple_rv(p, X(k))) \226\134\146 sub_sigma_algebra(p, rv_sigma(p, X, n))
+      #|  IN((a : (A) -> Bool), rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num)))
+      #|  SUBSET((a : (A) -> Bool), prob_carrier((p : Prob_space[A])))
+      #|  {rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num), (x : A)) | IN(x, (a : (A) -> Bool))}
+      #|  (a : (A) -> Bool)
+      #|  IMAGE(UNIONS, {(s : ((A) -> Bool) -> Bool) | SUBSET(s, {rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num), x) | x : A | IN(x, prob_carrier(p))})})
+      #|  FINITE({rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num), x) | x : A | IN(x, prob_carrier(p))})
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, (\226\136\128 k : Num, k < n \226\134\146 simple_rv(p, X(k))) \226\134\146 FINITE(rv_sigma(p, X, n))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, (\226\136\128 k : Num, k <= n \226\134\146 simple_rv(p, X(k))) \226\134\146 filtration(p, (k : Num) => rv_sigma(p, X, MIN(k, SUC(n))))
+      #|  (y : A)
+      #|  !(prob((p : Prob_space[A]), prob_carrier(p)) == real_of_num(0))
+      #|  (x : A)
       #|  0
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  sigma_atom (rv_sigma (p:A prob_space) X 0) x =\n                prob_carrier p
-      #|  forall p:A prob_space X f x.\n     integrable p f /\\ x IN prob_carrier p\n     ==> cond_exp p (rv_sigma p X 0) f x = expectation p f
-      #|  (f:A->real) x *\n      expectation (p:A prob_space)\n        (indicator_fn (sigma_atom G (x:A)))
-      #|  y:A
-      #|  expectation (p:A prob_space)\n     (\\y:A. (f:A->real) x * indicator_fn (sigma_atom G x) y)
-      #|  expectation p (\\y:A. (f:A->real) y * indicator_fn (sigma_atom G x) y) =\n     f x * prob p (sigma_atom G x)
-      #|  G:(A->bool)->bool
-      #|  p:A prob_space
-      #|  forall y:A. y IN sigma_atom G x ==> (f:A->real) y = f x
-      #|  G:(A->bool)->bool
-      #|  sigma_atom G (x:A) IN prob_events p
-      #|  forall p:A prob_space G (f:A->real) x.\n     sub_sigma_algebra p G /\\ FINITE G /\\ integrable p f /\\\n     measurable_wrt p G f /\\ x IN prob_carrier p /\\\n     ~(prob p (sigma_atom G x) = &0)\n     ==> cond_exp p G f x = f x
-      #|  mutually_indep_rv (p:A prob_space) (X:num->A->real) (n:num) <=>\n   (forall k. k <= n ==> random_variable p (X k)) /\\\n   (forall S f. FINITE S /\\ S SUBSET (0..n) /\\ ~(S = {})\n    ==> prob p (INTERS (IMAGE (\\k. {x | x IN prob_carrier p /\\\n                                         (X:num->A->real) k x = f k}) S)) =\n        product S (\\k. prob p {x | x IN prob_carrier p /\\\n                                    X k x = f k}))
-      #|  bounded_differences (p:A prob_space) (X:num->A->real)\n     (f:A->real) (c:num->real) (n:num) <=>\n   (forall i. i < n ==> &0 <= c i) /\\\n   (forall i x y. i < n /\\ x IN prob_carrier p /\\ y IN prob_carrier p /\\\n            (forall j. j < n /\\ ~(j = i) ==> (X:num->A->real) j x = X j y)\n            ==> abs(f x - f y) <= c i)
-      #|  &0 < product {k | k < m}\n  (\\k. prob (p:A prob_space) {y | y IN prob_carrier p /\\\n       (X:num->A->real) k y = X k x})
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  sigma_atom(rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), 0), (x : A)) == prob_carrier(p)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 f : (A) -> Real, \226\136\128 x : A, integrable(p, f) && IN(x, prob_carrier(p)) \226\134\146 cond_exp(p, rv_sigma(p, X, 0), f, x) == expectation(p, f)
+      #|  (f : (A) -> Real)((x : A)) * expectation((p : Prob_space[A]), indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), x)))
+      #|  (y : A)
+      #|  expectation((p : Prob_space[A]), (y : A) => (f : (A) -> Real)((x : A)) * indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), x), y))
+      #|  expectation((p : Prob_space[A]), (y : A) => (f : (A) -> Real)(y) * indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), y)) == f(x) * prob(p, sigma_atom(G, x))
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 y : A, IN(y, sigma_atom((G : ((A) -> Bool) -> Bool), (x : A))) \226\134\146 (f : (A) -> Real)(y) == f(x)
+      #|  (G : ((A) -> Bool) -> Bool)
+      #|  IN(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), prob_events((p : Prob_space[A])))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, \226\136\128 x : A, sub_sigma_algebra(p, G) && FINITE(G) && integrable(p, f) && measurable_wrt(p, G, f) && IN(x, prob_carrier(p)) && !(prob(p, sigma_atom(G, x)) == real_of_num(0)) \226\134\146 cond_exp(p, G, f, x) == f(x)
+      #|  (mutually_indep_rv : (Prob_space[A], (Num, A) -> Real, Num) -> Bool)((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num)) == ((\226\136\128 k : Num, k <= n \226\134\146 random_variable(p, X(k))) && (\226\136\128 S : (Num) -> Bool, \226\136\128 f : (Num) -> Real, FINITE(S) && SUBSET(S, op_dot_dot(0, n)) && !(S == {}) \226\134\146 prob(p, INTERS(IMAGE((k : Num) => {(x : A) | IN(x, prob_carrier(p)) && X(k, x) == f(k)}, S))) == product(S, (k : Num) => prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(k, x) == f(k)}))))
+      #|  (bounded_differences : (Prob_space[A], (Num, A) -> Real, (A) -> Real, (Num) -> Real, Num) -> Bool)((p : Prob_space[A]), (X : (Num, A) -> Real), (f : (A) -> Real), (c : (Num) -> Real), (n : Num)) == ((\226\136\128 i : Num, i < n \226\134\146 real_of_num(0) <= c(i)) && (\226\136\128 i : Num, \226\136\128 x : A, \226\136\128 y : A, i < n && IN(x, prob_carrier(p)) && IN(y, prob_carrier(p)) && (\226\136\128 j : Num, j < n && !(j == i) \226\134\146 X(j, x) == X(j, y)) \226\134\146 abs(f(x) - f(y)) <= c(i)))
+      #|  real_of_num(0) < product({(k : Num) | k < (m : Num)}, (k : Num) => prob((p : Prob_space[A]), {(y : A) | IN(y, prob_carrier(p)) && (X : (Num, A) -> Real)(k, y) == X(k, (x : A))}))
       #|  0
-      #|  mutually_indep_rv (p:A prob_space) X (n - 1)
-      #|  prob (p:A prob_space) (INTERS (IMAGE (\\k. {y | y IN prob_carrier p /\\\n    (X:num->A->real) k y = X k x}) {k | k < m})) =\n   product {k | k < m} (\\k. prob p {y | y IN prob_carrier p /\\ X k y = X k x})
-      #|  k:num
-      #|  {y:A | y IN prob_carrier p /\\\n       (X:num->A->real) k y = X k x}
-      #|  k:num
+      #|  mutually_indep_rv((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num) - 1)
+      #|  prob((p : Prob_space[A]), INTERS(IMAGE((k : Num) => {(y : A) | IN(y, prob_carrier(p)) && (X : (Num, A) -> Real)(k, y) == X(k, (x : A))}, {(k : Num) | k < (m : Num)}))) == product({(k : Num) | k < m}, (k : Num) => prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == X(k, x)}))
+      #|  (k : Num)
+      #|  {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((k : Num), y) == X(k, (x : A))}
+      #|  (k : Num)
       #|  0
-      #|  {y:A | y IN prob_carrier p /\\\n       (X:num->A->real) 0 y = X 0 x}
-      #|  s:A->bool
-      #|  z:A
-      #|  rv_sigma_atom (p:A prob_space) X m x =\n   INTERS (IMAGE (\\k. {y | y IN prob_carrier p /\\\n                           (X:num->A->real) k y = X k x}) {k | k < m})
-      #|  sigma_atom (rv_sigma (p:A prob_space) X m) x =\n                rv_sigma_atom p X m x
-      #|  forall p:A prob_space (X:num->A->real) m n x.\n     mutually_indep_rv p X (n - 1) /\\\n     (forall k z:A. k < n /\\ z IN prob_carrier p ==>\n       &0 < prob p {y | y IN prob_carrier p /\\ X k y = X k z}) /\\\n     x IN prob_carrier p /\\ 1 <= m /\\ m <= n /\\ 1 <= n\n     ==> ~(prob p (sigma_atom (rv_sigma p X m) x) = &0)
-      #|  n:num
-      #|  forall p:A prob_space (X:num->A->real) (f:A->real) n x.\n     mutually_indep_rv p X (n - 1) /\\\n     (forall k z:A. k < n /\\ z IN prob_carrier p ==>\n       &0 < prob p {y | y IN prob_carrier p /\\ X k y = X k z}) /\\\n     measurable_wrt p (rv_sigma p X n) f /\\\n     integrable p f /\\\n     (forall k. k < n ==> simple_rv p (X k)) /\\\n     1 <= n /\\ x IN prob_carrier p\n     ==> cond_exp p (rv_sigma p X n) f x = f x
-      #|  (x:A) IN t
-      #|  t:A->bool
-      #|  prob_carrier (p:A prob_space)
-      #|  z:A
-      #|  forall p:A prob_space X x. x IN prob_carrier p ==>\n     sigma_atom (rv_sigma p X 0) x = prob_carrier p
-      #|  gx - ci <= e / p /\\ e / p <= gx + ci
-      #|  forall gx ci e p. (gx - ci) * p <= e /\\ e <= (gx + ci) * p /\\ &0 < p\n     ==> --ci <= gx - e / p /\\ gx - e / p <= ci
-      #|  sigma_atom G (x:A) IN (G:(A->bool)->bool)
-      #|  (\\y:A. (if prob p (sigma_atom H y) = &0 then &0\n       else expectation p (\\y'. (f:A->real) y' * indicator_fn (sigma_atom H y) y') /\n            prob p (sigma_atom H y)) *\n      indicator_fn (sigma_atom G x) y) =\n    (\\y. cond_exp p H f y * indicator_fn (sigma_atom G x) y)
-      #|  forall p:A prob_space G H (f:A->real).\n     sub_sigma_algebra p G /\\ FINITE G /\\\n     sub_sigma_algebra p H /\\ FINITE H /\\\n     G SUBSET H /\\ integrable p f\n     ==> forall x. x IN prob_carrier p ==>\n       cond_exp p G (cond_exp p H f) x = cond_exp p G f x
-      #|  0..m
-      #|  forall p:A prob_space X m n. m <= n /\\ mutually_indep_rv p X n\n     ==> mutually_indep_rv p X m
-      #|  (\\w:A. (f:B->A->real) x w) = f x
-      #|  forall s:B->bool. FINITE s ==> forall f:B->A->real.\n    (forall x. x IN s ==> integrable p (f x))\n    ==> integrable p (\\w. sum s (\\x. f x w))
-      #|  forall p:A prob_space (s:B->bool) (f:B->A->real).\n     FINITE s /\\ (forall x. x IN s ==> integrable p (f x))\n     ==> integrable p (\\w. sum s (\\x. f x w))
-      #|  expectation p (\\w:A. (f:B->A->real) x w) = expectation p (f x)
-      #|  x:B
-      #|  (\\w:A. (f:B->A->real) x w) = f x
-      #|  expectation p (\\w:A. (f:B->A->real) x w + sum s (\\x. f x w)) =\n     expectation p (\\w. f x w) + expectation p (\\w. sum s (\\x. f x w))
-      #|  forall s:B->bool. FINITE s ==> forall f:B->A->real.\n    (forall x. x IN s ==> integrable p (f x))\n    ==> expectation p (\\w. sum s (\\x. f x w)) =\n        sum s (\\x. expectation p (f x))
-      #|  forall p:A prob_space (s:B->bool) (f:B->A->real).\n     FINITE s /\\ (forall x. x IN s ==> integrable p (f x))\n     ==> expectation p (\\w. sum s (\\x. f x w)) =\n         sum s (\\x. expectation p (f x))
-      #|  (X:num->A->real) m w = ff (m:num)
-      #|  m:num
-      #|  (X:num->A->real) k w = ff (k:num)
-      #|  k:num
-      #|  k:num
+      #|  {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(0, y) == X(0, (x : A))}
+      #|  (s : (A) -> Bool)
+      #|  (z : A)
+      #|  rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (m : Num), (x : A)) == INTERS(IMAGE((k : Num) => {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == X(k, x)}, {(k : Num) | k < m}))
+      #|  sigma_atom(rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (m : Num)), (x : A)) == rv_sigma_atom(p, X, m, x)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 x : A, mutually_indep_rv(p, X, n - 1) && (\226\136\128 k : Num, \226\136\128 z : A, k < n && IN(z, prob_carrier(p)) \226\134\146 real_of_num(0) < prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == X(k, z)})) && IN(x, prob_carrier(p)) && 1 <= m && m <= n && 1 <= n \226\134\146 !(prob(p, sigma_atom(rv_sigma(p, X, m), x)) == real_of_num(0))
+      #|  (n : Num)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 f : (A) -> Real, \226\136\128 n : Num, \226\136\128 x : A, mutually_indep_rv(p, X, n - 1) && (\226\136\128 k : Num, \226\136\128 z : A, k < n && IN(z, prob_carrier(p)) \226\134\146 real_of_num(0) < prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == X(k, z)})) && measurable_wrt(p, rv_sigma(p, X, n), f) && integrable(p, f) && (\226\136\128 k : Num, k < n \226\134\146 simple_rv(p, X(k))) && 1 <= n && IN(x, prob_carrier(p)) \226\134\146 cond_exp(p, rv_sigma(p, X, n), f, x) == f(x)
+      #|  IN((x : A), (t : (A) -> Bool))
+      #|  (t : (A) -> Bool)
+      #|  prob_carrier((p : Prob_space[A]))
+      #|  (z : A)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 sigma_atom(rv_sigma(p, X, 0), x) == prob_carrier(p)
+      #|  (gx : Real) - (ci : Real) <= (e : Real) / (p : Real) && e / p <= gx + ci
+      #|  \226\136\128 gx : Real, \226\136\128 ci : Real, \226\136\128 e : Real, \226\136\128 p : Real, (gx - ci) * p <= e && e <= (gx + ci) * p && real_of_num(0) < p \226\134\146 -ci <= gx - e / p && gx - e / p <= ci
+      #|  IN(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), G)
+      #|  ((y : A) => (if prob((p : Prob_space[A]), sigma_atom((H : ((A) -> Bool) -> Bool), y)) == real_of_num(0) { real_of_num(0) } else { expectation(p, (y' : A) => (f : (A) -> Real)(y') * indicator_fn(sigma_atom(H, y), y')) / prob(p, sigma_atom(H, y)) }) * indicator_fn(sigma_atom((G : ((A) -> Bool) -> Bool), (x : A)), y)) == ((y : A) => cond_exp(p, H, f, y) * indicator_fn(sigma_atom(G, x), y))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 H : ((A) -> Bool) -> Bool, \226\136\128 f : (A) -> Real, sub_sigma_algebra(p, G) && FINITE(G) && sub_sigma_algebra(p, H) && FINITE(H) && SUBSET(G, H) && integrable(p, f) \226\134\146 (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 cond_exp(p, G, cond_exp(p, H, f), x) == cond_exp(p, G, f, x))
+      #|  op_dot_dot(0, (m : Num))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n && mutually_indep_rv(p, X, n) \226\134\146 mutually_indep_rv(p, X, m)
+      #|  ((w : A) => (f : (B, A) -> Real)((x : B), w)) == f(x)
+      #|  \226\136\128 s : (B) -> Bool, FINITE(s) \226\134\146 (\226\136\128 f : (B, A) -> Real, (\226\136\128 x : B, IN(x, s) \226\134\146 integrable((p : Prob_space[A]), f(x))) \226\134\146 integrable(p, (w : A) => sum(s, (x : B) => f(x, w))))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 s : (B) -> Bool, \226\136\128 f : (B, A) -> Real, FINITE(s) && (\226\136\128 x : B, IN(x, s) \226\134\146 integrable(p, f(x))) \226\134\146 integrable(p, (w : A) => sum(s, (x : B) => f(x, w)))
+      #|  expectation((p : Prob_space[A]), (w : A) => (f : (B, A) -> Real)((x : B), w)) == expectation(p, f(x))
+      #|  (x : B)
+      #|  ((w : A) => (f : (B, A) -> Real)((x : B), w)) == f(x)
+      #|  expectation((p : Prob_space[A]), (w : A) => (f : (B, A) -> Real)((x : B), w) + sum((s : (B) -> Bool), (x : B) => f(x, w))) == expectation(p, (w : A) => f(x, w)) + expectation(p, (w : A) => sum(s, (x : B) => f(x, w)))
+      #|  \226\136\128 s : (B) -> Bool, FINITE(s) \226\134\146 (\226\136\128 f : (B, A) -> Real, (\226\136\128 x : B, IN(x, s) \226\134\146 integrable((p : Prob_space[A]), f(x))) \226\134\146 expectation(p, (w : A) => sum(s, (x : B) => f(x, w))) == sum(s, (x : B) => expectation(p, f(x))))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 s : (B) -> Bool, \226\136\128 f : (B, A) -> Real, FINITE(s) && (\226\136\128 x : B, IN(x, s) \226\134\146 integrable(p, f(x))) \226\134\146 expectation(p, (w : A) => sum(s, (x : B) => f(x, w))) == sum(s, (x : B) => expectation(p, f(x)))
+      #|  (X : (Num, A) -> Real)((m : Num), (w : A)) == (ff : (Num) -> Real)(m)
+      #|  (m : Num)
+      #|  (X : (Num, A) -> Real)((k : Num), (w : A)) == (ff : (Num) -> Real)(k)
+      #|  (k : Num)
+      #|  (k : Num)
       #|  0
-      #|  w:A
-      #|  k:num
-      #|  (w:A) IN S0
-      #|  k:num
-      #|  forall k:num. k <= m ==> (w:A) IN prob_carrier p /\\\n    (X:num->A->real) k w = ff k
-      #|  &0 < prob p (S0:A->bool)
-      #|  ?w:A. w IN S0
-      #|  x:A
-      #|  m:num
-      #|  k = m:num
-      #|  z:A
-      #|  k:num
-      #|  k:num
-      #|  mutually_indep_rv p (X:num->A->real) m
-      #|  prob p (INTERS (IMAGE (\\k:num. {w:A | w IN prob_carrier p /\\\n      (X:num->A->real) k w = ff k}) (0..m))) =\n     product (0..m) (\\k. prob p {w | w IN prob_carrier p /\\ X k w = ff k})
-      #|  &0 < prob p (S0:A->bool)
-      #|  S0 = INTERS (IMAGE (\\k:num. {w:A | w IN prob_carrier p /\\\n    (X:num->A->real) k w = ff k}) (0..m))
-      #|  ff = \\k:num. if k < m then (X:num->A->real) k z else X m x
-      #|  v IN IMAGE (\\w:A. (X:num->A->real) m w) (prob_carrier p)
-      #|  forall p:A prob_space (X:num->A->real) m (z:A) (v:real).\n     mutually_indep_rv p X m /\\\n     (forall k. k < SUC m ==> simple_rv p (X k)) /\\\n     (forall k w:A. k < SUC m /\\ w IN prob_carrier p ==>\n       &0 < prob p {y | y IN prob_carrier p /\\ X k y = X k w}) /\\\n     1 <= m /\\\n     z IN prob_carrier p /\\\n     v IN IMAGE (\\w. X m w) (prob_carrier p)\n     ==> ?w. w IN prob_carrier p /\\ (forall k. k < m ==> X k w = X k z) /\\ X m w = v
-      #|  prob (p:A prob_space)
-      #|  j = m:num
-      #|  (X:num->A->real) j wy = X j y
-      #|  (X:num->A->real) j wx = X j x
-      #|  j < m:num
-      #|  j:num
-      #|  wy:A
-      #|  wx:A
-      #|  i:num
-      #|  bounded_differences p (X:num->A->real) (f:A->real) c (SUC m)
-      #|  (wy:A) IN prob_carrier p /\\ (forall k. k < m ==>\n    (X:num->A->real) k wy = X k y) /\\ X m wy = v
-      #|  (wx:A) IN prob_carrier p /\\ (forall k. k < m ==>\n    (X:num->A->real) k wx = X k x) /\\ X m wx = v
-      #|  wy = @w:A. w IN prob_carrier p /\\ (forall k. k < m ==>\n    (X:num->A->real) k w = X k y) /\\ X m w = v
-      #|  wx = @w:A. w IN prob_carrier p /\\ (forall k. k < m ==>\n    (X:num->A->real) k w = X k x) /\\ X m w = v
-      #|  forall p:A prob_space (X:num->A->real) (f:A->real) (c:num->real) m i x y v.\n     bounded_differences p X f c (SUC m) /\\\n     mutually_indep_rv p X m /\\\n     (forall k. k < SUC m ==> simple_rv p (X k)) /\\\n     (forall k z:A. k < SUC m /\\ z IN prob_carrier p ==>\n       &0 < prob p {y | y IN prob_carrier p /\\ X k y = X k z}) /\\\n     i < m /\\ 1 <= m /\\\n     x IN prob_carrier p /\\ y IN prob_carrier p /\\\n     (forall j. j < m /\\ ~(j = i) ==> X j x = X j y) /\\\n     v IN IMAGE (\\w. X m w) (prob_carrier p)\n     ==> abs(f(@w. w IN prob_carrier p /\\ (forall k. k < m ==> X k w = X k x) /\\ X m w = v) -\n             f(@w. w IN prob_carrier p /\\ (forall k. k < m ==> X k w = X k y) /\\ X m w = v)) <= c i
-      #|  u:real
-      #|  ~(prob p (A:A->bool) = &0)
-      #|  (prob p (A:A->bool) * sum V (\\v:real. (fz:real->real) v * pv v)) /\n    prob p A = sum V (\\v. fz v * pv v)
-      #|  sum V (\\v:real. (fz:real->real) v * (prob p (A:A->bool) * pv v)) =\n       sum V (\\v. prob p A * (fz v * pv v))
-      #|  u:real
-      #|  forall v:real. v IN V ==>\n        prob p (A INTER {w:A | w IN prob_carrier p /\\\n          (X:num->A->real) m w = v}) = prob p A * pv v
-      #|  u:real
-      #|  sum V (\\v:real. (fz:real->real) v * prob p\n        (A INTER {w:A | w IN prob_carrier p /\\\n          (X:num->A->real) m w = v})) =\n       sum V (\\v. fz v * (prob p A * pv v))
-      #|  sum V (\\v:real. (fz:real->real) v * prob p\n      (A INTER {w:A | w IN prob_carrier p /\\ (X:num->A->real) m w = v})) =\n     prob p A * sum V (\\v. fz v * pv v)
-      #|  indicator_fn (A INTER {w':A | w' IN prob_carrier p /\\\n        (X:num->A->real) m w' = u})
-      #|  (fz:real->real) u
-      #|  p:A prob_space
-      #|  u:real
-      #|  (\\w:A. indicator_fn\n        (A INTER {w':A | w' IN prob_carrier p /\\\n          (X:num->A->real) m w' = x}) w) =\n        indicator_fn (A INTER {w' | w' IN prob_carrier p /\\ X m w' = x})
-      #|  x:real
-      #|  A = {w:A | w IN prob_carrier p /\\\n        (forall k. k < m ==> (X:num->A->real) k w = X k z)}
-      #|  \\v:real. \\w:A. (fz:real->real) v * indicator_fn\n        (A INTER {w':A | w' IN prob_carrier p /\\\n          (X:num->A->real) m w' = v}) w
-      #|  V:real->bool
-      #|  p:A prob_space
-      #|  expectation p (\\w:A. sum V (\\v:real. fz v * indicator_fn\n       (A INTER {w':A | w' IN prob_carrier p /\\\n         (X:num->A->real) m w' = v}) w)) =\n     sum V (\\v. fz v * prob p\n       (A INTER {w:A | w IN prob_carrier p /\\ X m w = v}))
-      #|  forall w:A. w IN prob_carrier p ==>\n      (f:A->real) w * indicator_fn A w =\n      sum V (\\v:real. fz v * indicator_fn\n        (A INTER {w':A | w' IN prob_carrier p /\\\n          (X:num->A->real) m w' = v}) w)
-      #|  expectation p (\\w:A. (f:A->real) w * indicator_fn A w) =\n     expectation p (\\w. sum V (\\v:real. fz v * indicator_fn\n       (A INTER {w':A | w' IN prob_carrier p /\\\n         (X:num->A->real) m w' = v}) w))
-      #|  ~((w:A) IN A INTER {w' | w' IN prob_carrier p /\\\n        (X:num->A->real) m w' = v})
-      #|  v:real
-      #|  A = {w:A | w IN prob_carrier p /\\\n        (forall k. k < m ==> (X:num->A->real) k w = X k z)}
-      #|  rv_sigma p (X:num->A->real) (SUC m)
-      #|  p:A prob_space
-      #|  ~(k < m:num)
-      #|  k < SUC m
-      #|  k:num = m
-      #|  k:num < m
-      #|  k:num
-      #|  sub_sigma_algebra p (rv_sigma p (X:num->A->real)\n                (SUC m))
-      #|  sigma_atom (rv_sigma p (X:num->A->real) (SUC m)) w =\n            rv_sigma_atom p X (SUC m) w
-      #|  (wt:A) IN sigma_atom (rv_sigma p (X:num->A->real)\n          (SUC m)) w
-      #|  (f:A->real) w = fz ((X:num->A->real) m w)
-      #|  w:A
-      #|  (wt:A) IN prob_carrier p /\\\n        (forall k. k < m ==> (X:num->A->real) k wt = X k z) /\\ X m wt = X m w
-      #|  wt:A = @w'. w' IN prob_carrier p /\\\n        (forall k. k < m ==> (X:num->A->real) k w' = X k z) /\\ X m w' = X m w
-      #|  v = (X:num->A->real) m w
-      #|  v:real
-      #|  (\\v:real. fz v *\n        (if w IN A INTER {w':A | w' IN prob_carrier p /\\\n          (X:num->A->real) m w' = v} then &1 else &0)) =\n        (\\v. if v = X m w then (fz:real->real) v else &0)
-      #|  w:A
-      #|  (X:num->A->real) m w IN V
-      #|  (w:A) IN A
-      #|  (w:A) IN prob_carrier p /\\\n        (forall k. k < m ==> (X:num->A->real) k w = X k z)
-      #|  A = {w:A | w IN prob_carrier p /\\\n        (forall k. k < m ==> (X:num->A->real) k w = X k z)}
-      #|  (w:A) IN A
-      #|  w:A
-      #|  forall w:A. w IN prob_carrier p ==>\n      (f:A->real) w * indicator_fn A w =\n      sum V (\\v:real. fz v * indicator_fn\n        (A INTER {w':A | w' IN prob_carrier p /\\\n          (X:num->A->real) m w' = v}) w)
-      #|  prob p {w:A | w IN prob_carrier p /\\\n      (forall k. k < m ==> (X:num->A->real) k w = X k z)} = prob p A
-      #|  1 <= m
-      #|  1 <= m
-      #|  1 <= m
-      #|  k:num < m
-      #|  k:num
-      #|  k:num
-      #|  1 <= m
+      #|  (w : A)
+      #|  (k : Num)
+      #|  IN((w : A), (S0 : (A) -> Bool))
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, k <= (m : Num) \226\134\146 IN((w : A), prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(k, w) == (ff : (Num) -> Real)(k)
+      #|  real_of_num(0) < prob((p : Prob_space[A]), (S0 : (A) -> Bool))
+      #|  \226\136\131 w : A, IN(w, (S0 : (A) -> Bool))
+      #|  (x : A)
+      #|  (m : Num)
+      #|  (k : Num) == (m : Num)
+      #|  (z : A)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  mutually_indep_rv((p : Prob_space[A]), (X : (Num, A) -> Real), (m : Num))
+      #|  prob((p : Prob_space[A]), INTERS(IMAGE((k : Num) => {(w : A) | IN(w, prob_carrier(p)) && (X : (Num, A) -> Real)(k, w) == (ff : (Num) -> Real)(k)}, op_dot_dot(0, (m : Num))))) == product(op_dot_dot(0, m), (k : Num) => prob(p, {(w : A) | IN(w, prob_carrier(p)) && X(k, w) == ff(k)}))
+      #|  real_of_num(0) < prob((p : Prob_space[A]), (S0 : (A) -> Bool))
+      #|  (S0 : (A) -> Bool) == INTERS(IMAGE((k : Num) => {(w : A) | IN(w, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(k, w) == (ff : (Num) -> Real)(k)}, op_dot_dot(0, (m : Num))))
+      #|  (ff : (Num) -> Real) == ((k : Num) => if k < (m : Num) { (X : (Num, A) -> Real)(k, (z : A)) } else { X(m, (x : A)) })
+      #|  IN((v : Real), IMAGE((w : A) => (X : (Num, A) -> Real)((m : Num), w), prob_carrier((p : Prob_space[A]))))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 m : Num, \226\136\128 z : A, \226\136\128 v : Real, mutually_indep_rv(p, X, m) && (\226\136\128 k : Num, k < SUC(m) \226\134\146 simple_rv(p, X(k))) && (\226\136\128 k : Num, \226\136\128 w : A, k < SUC(m) && IN(w, prob_carrier(p)) \226\134\146 real_of_num(0) < prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == X(k, w)})) && 1 <= m && IN(z, prob_carrier(p)) && IN(v, IMAGE((w : A) => X(m, w), prob_carrier(p))) \226\134\146 (\226\136\131 w : A, IN(w, prob_carrier(p)) && (\226\136\128 k : Num, k < m \226\134\146 X(k, w) == X(k, z)) && X(m, w) == v)
+      #|  prob((p : Prob_space[A]))
+      #|  (j : Num) == (m : Num)
+      #|  (X : (Num, A) -> Real)((j : Num), (wy : A)) == X(j, (y : A))
+      #|  (X : (Num, A) -> Real)((j : Num), (wx : A)) == X(j, (x : A))
+      #|  (j : Num) < (m : Num)
+      #|  (j : Num)
+      #|  (wy : A)
+      #|  (wx : A)
+      #|  (i : Num)
+      #|  bounded_differences((p : Prob_space[A]), (X : (Num, A) -> Real), (f : (A) -> Real), (c : (Num) -> Real), SUC((m : Num)))
+      #|  IN((wy : A), prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, wy) == X(k, (y : A))) && X(m, wy) == (v : Real)
+      #|  IN((wx : A), prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, wx) == X(k, (x : A))) && X(m, wx) == (v : Real)
+      #|  (wy : A) == select((w : A) => IN(w, prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (y : A))) && X(m, w) == (v : Real))
+      #|  (wx : A) == select((w : A) => IN(w, prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (x : A))) && X(m, w) == (v : Real))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 f : (A) -> Real, \226\136\128 c : (Num) -> Real, \226\136\128 m : Num, \226\136\128 i : Num, \226\136\128 x : A, \226\136\128 y : A, \226\136\128 v : Real, bounded_differences(p, X, f, c, SUC(m)) && mutually_indep_rv(p, X, m) && (\226\136\128 k : Num, k < SUC(m) \226\134\146 simple_rv(p, X(k))) && (\226\136\128 k : Num, \226\136\128 z : A, k < SUC(m) && IN(z, prob_carrier(p)) \226\134\146 real_of_num(0) < prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == X(k, z)})) && i < m && 1 <= m && IN(x, prob_carrier(p)) && IN(y, prob_carrier(p)) && (\226\136\128 j : Num, j < m && !(j == i) \226\134\146 X(j, x) == X(j, y)) && IN(v, IMAGE((w : A) => X(m, w), prob_carrier(p))) \226\134\146 abs(f(select((w : A) => IN(w, prob_carrier(p)) && (\226\136\128 k : Num, k < m \226\134\146 X(k, w) == X(k, x)) && X(m, w) == v)) - f(select((w : A) => IN(w, prob_carrier(p)) && (\226\136\128 k : Num, k < m \226\134\146 X(k, w) == X(k, y)) && X(m, w) == v))) <= c(i)
+      #|  (u : Real)
+      #|  !(prob((p : Prob_space[A]), (A : (A) -> Bool)) == real_of_num(0))
+      #|  prob((p : Prob_space[A]), (A : (A) -> Bool)) * sum((V : (Real) -> Bool), (v : Real) => (fz : (Real) -> Real)(v) * (pv : (Real) -> Real)(v)) / prob(p, A) == sum(V, (v : Real) => fz(v) * pv(v))
+      #|  sum((V : (Real) -> Bool), (v : Real) => (fz : (Real) -> Real)(v) * (prob((p : Prob_space[A]), (A : (A) -> Bool)) * (pv : (Real) -> Real)(v))) == sum(V, (v : Real) => prob(p, A) * (fz(v) * pv(v)))
+      #|  (u : Real)
+      #|  \226\136\128 v : Real, IN(v, (V : (Real) -> Bool)) \226\134\146 prob((p : Prob_space[A]), INTER((A : (A) -> Bool), {(w : A) | IN(w, prob_carrier(p)) && (X : (Num, A) -> Real)((m : Num), w) == v})) == prob(p, A) * (pv : (Real) -> Real)(v)
+      #|  (u : Real)
+      #|  sum((V : (Real) -> Bool), (v : Real) => (fz : (Real) -> Real)(v) * prob((p : Prob_space[A]), INTER((A : (A) -> Bool), {(w : A) | IN(w, prob_carrier(p)) && (X : (Num, A) -> Real)((m : Num), w) == v}))) == sum(V, (v : Real) => fz(v) * (prob(p, A) * (pv : (Real) -> Real)(v)))
+      #|  sum((V : (Real) -> Bool), (v : Real) => (fz : (Real) -> Real)(v) * prob((p : Prob_space[A]), INTER((A : (A) -> Bool), {(w : A) | IN(w, prob_carrier(p)) && (X : (Num, A) -> Real)((m : Num), w) == v}))) == prob(p, A) * sum(V, (v : Real) => fz(v) * (pv : (Real) -> Real)(v))
+      #|  indicator_fn(INTER((A : (A) -> Bool), {(w' : A) | IN(w', prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((m : Num), w') == (u : Real)}))
+      #|  (fz : (Real) -> Real)((u : Real))
+      #|  (p : Prob_space[A])
+      #|  (u : Real)
+      #|  ((w : A) => indicator_fn(INTER((A : (A) -> Bool), {(w' : A) | IN(w', prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((m : Num), w') == (x : Real)}), w)) == indicator_fn(INTER(A, {(w' : A) | IN(w', prob_carrier(p)) && X(m, w') == x}))
+      #|  (x : Real)
+      #|  (A : (A) -> Bool) == {(w : A) | IN(w, prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (z : A)))}
+      #|  (v : Real) => (w : A) => (fz : (Real) -> Real)(v) * indicator_fn(INTER((A : (A) -> Bool), {(w' : A) | IN(w', prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((m : Num), w') == v}), w)
+      #|  (V : (Real) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  expectation((p : Prob_space[A]), (w : A) => sum((V : (Real) -> Bool), (v : Real) => (fz : (Real) -> Real)(v) * indicator_fn(INTER((A : (A) -> Bool), {(w' : A) | IN(w', prob_carrier(p)) && (X : (Num, A) -> Real)((m : Num), w') == v}), w))) == sum(V, (v : Real) => fz(v) * prob(p, INTER(A, {(w : A) | IN(w, prob_carrier(p)) && X(m, w) == v})))
+      #|  \226\136\128 w : A, IN(w, prob_carrier((p : Prob_space[A]))) \226\134\146 (f : (A) -> Real)(w) * indicator_fn((A : (A) -> Bool), w) == sum((V : (Real) -> Bool), (v : Real) => (fz : (Real) -> Real)(v) * indicator_fn(INTER(A, {(w' : A) | IN(w', prob_carrier(p)) && (X : (Num, A) -> Real)((m : Num), w') == v}), w))
+      #|  expectation((p : Prob_space[A]), (w : A) => (f : (A) -> Real)(w) * indicator_fn((A : (A) -> Bool), w)) == expectation(p, (w : A) => sum((V : (Real) -> Bool), (v : Real) => (fz : (Real) -> Real)(v) * indicator_fn(INTER(A, {(w' : A) | IN(w', prob_carrier(p)) && (X : (Num, A) -> Real)((m : Num), w') == v}), w)))
+      #|  !IN((w : A), INTER((A : (A) -> Bool), {(w' : A) | IN(w', prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((m : Num), w') == (v : Real)}))
+      #|  (v : Real)
+      #|  (A : (A) -> Bool) == {(w : A) | IN(w, prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (z : A)))}
+      #|  rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), SUC((m : Num)))
+      #|  (p : Prob_space[A])
+      #|  !((k : Num) < (m : Num))
+      #|  (k : Num) < SUC((m : Num))
+      #|  (k : Num) == (m : Num)
+      #|  (k : Num) < (m : Num)
+      #|  (k : Num)
+      #|  sub_sigma_algebra((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), SUC((m : Num))))
+      #|  sigma_atom(rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), SUC((m : Num))), (w : A)) == rv_sigma_atom(p, X, SUC(m), w)
+      #|  IN((wt : A), sigma_atom(rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), SUC((m : Num))), (w : A)))
+      #|  (f : (A) -> Real)((w : A)) == (fz : (Real) -> Real)((X : (Num, A) -> Real)((m : Num), w))
+      #|  (w : A)
+      #|  IN((wt : A), prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, wt) == X(k, (z : A))) && X(m, wt) == X(m, (w : A))
+      #|  (wt : A) == select((w' : A) => IN(w', prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w') == X(k, (z : A))) && X(m, w') == X(m, (w : A)))
+      #|  (v : Real) == (X : (Num, A) -> Real)((m : Num), (w : A))
+      #|  (v : Real)
+      #|  ((v : Real) => (fz : (Real) -> Real)(v) * (if IN((w : A), INTER((A : (A) -> Bool), {(w' : A) | IN(w', prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((m : Num), w') == v})) { real_of_num(1) } else { real_of_num(0) })) == ((v : Real) => if v == X(m, w) { fz(v) } else { real_of_num(0) })
+      #|  (w : A)
+      #|  IN((X : (Num, A) -> Real)((m : Num), (w : A)), (V : (Real) -> Bool))
+      #|  IN((w : A), (A : (A) -> Bool))
+      #|  IN((w : A), prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (z : A)))
+      #|  (A : (A) -> Bool) == {(w : A) | IN(w, prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (z : A)))}
+      #|  IN((w : A), (A : (A) -> Bool))
+      #|  (w : A)
+      #|  \226\136\128 w : A, IN(w, prob_carrier((p : Prob_space[A]))) \226\134\146 (f : (A) -> Real)(w) * indicator_fn((A : (A) -> Bool), w) == sum((V : (Real) -> Bool), (v : Real) => (fz : (Real) -> Real)(v) * indicator_fn(INTER(A, {(w' : A) | IN(w', prob_carrier(p)) && (X : (Num, A) -> Real)((m : Num), w') == v}), w))
+      #|  prob((p : Prob_space[A]), {(w : A) | IN(w, prob_carrier(p)) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (z : A)))}) == prob(p, (A : (A) -> Bool))
+      #|  1 <= (m : Num)
+      #|  1 <= (m : Num)
+      #|  1 <= (m : Num)
+      #|  (k : Num) < (m : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  1 <= (m : Num)
       #|  0
-      #|  1 <= m
-      #|  k:num <= m - 1
-      #|  k:num
-      #|  w:A
-      #|  {w:A | w IN prob_carrier p /\\ (forall k. k < m ==> (X:num->A->real) k w = X k z)} =\n         INTERS(IMAGE (\\k. {w | w IN prob_carrier p /\\ X k w = X k z}) (0..m-1))
-      #|  product (0..m-1) (\\k. prob p {w:A | w IN prob_carrier p /\\\n        (X:num->A->real) k w = X k z}) =\n       prob p {w | w IN prob_carrier p /\\ (forall k. k < m ==> X k w = X k z)}
-      #|  1 <= m
-      #|  k <= m - 1
-      #|  k:num < m
-      #|  w:A
-      #|  k:num
-      #|  product (0..m-1) (\\k. prob p {w:A | w IN prob_carrier p /\\\n        (X:num->A->real) k w = (ff:num->real) k}) =\n       product (0..m-1) (\\k. prob p {w | w IN prob_carrier p /\\\n        X k w = X k z})
-      #|  (ff:num->real) m = v
-      #|  1 <= m
-      #|  ~(m IN 0..m-1)
-      #|  1 <= m
-      #|  0..m = m INSERT (0..m-1)
-      #|  1 <= m
-      #|  prob p (INTERS (IMAGE (\\k. {w:A | w IN prob_carrier p /\\\n        (X:num->A->real) k w = ff k}) (0..m))) =\n       product (0..m) (\\k. prob p {w | w IN prob_carrier p /\\ X k w = ff k})
-      #|  mutually_indep_rv p (X:num->A->real) m
-      #|  (\\k:num. if k < m then (X:num->A->real) k z else v) = ff
-      #|  m:num
-      #|  (\\k:num. if k < m then (X:num->A->real) k z else v) = ff
-      #|  j < m:num
-      #|  j:num
-      #|  j:num
-      #|  1 <= m
+      #|  1 <= (m : Num)
+      #|  (k : Num) <= (m : Num) - 1
+      #|  (k : Num)
+      #|  (w : A)
+      #|  {(w : A) | IN(w, prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (z : A)))} == INTERS(IMAGE((k : Num) => {(w : A) | IN(w, prob_carrier(p)) && X(k, w) == X(k, z)}, op_dot_dot(0, m - 1)))
+      #|  product(op_dot_dot(0, (m : Num) - 1), (k : Num) => prob((p : Prob_space[A]), {(w : A) | IN(w, prob_carrier(p)) && (X : (Num, A) -> Real)(k, w) == X(k, (z : A))})) == prob(p, {(w : A) | IN(w, prob_carrier(p)) && (\226\136\128 k : Num, k < m \226\134\146 X(k, w) == X(k, z))})
+      #|  1 <= (m : Num)
+      #|  (k : Num) <= (m : Num) - 1
+      #|  (k : Num) < (m : Num)
+      #|  (w : A)
+      #|  (k : Num)
+      #|  product(op_dot_dot(0, (m : Num) - 1), (k : Num) => prob((p : Prob_space[A]), {(w : A) | IN(w, prob_carrier(p)) && (X : (Num, A) -> Real)(k, w) == (ff : (Num) -> Real)(k)})) == product(op_dot_dot(0, m - 1), (k : Num) => prob(p, {(w : A) | IN(w, prob_carrier(p)) && X(k, w) == X(k, (z : A))}))
+      #|  (ff : (Num) -> Real)((m : Num)) == (v : Real)
+      #|  1 <= (m : Num)
+      #|  !IN((m : Num), op_dot_dot(0, m - 1))
+      #|  1 <= (m : Num)
+      #|  op_dot_dot(0, (m : Num)) == INSERT(m, op_dot_dot(0, m - 1))
+      #|  1 <= (m : Num)
+      #|  prob((p : Prob_space[A]), INTERS(IMAGE((k : Num) => {(w : A) | IN(w, prob_carrier(p)) && (X : (Num, A) -> Real)(k, w) == (ff : (Num) -> Real)(k)}, op_dot_dot(0, (m : Num))))) == product(op_dot_dot(0, m), (k : Num) => prob(p, {(w : A) | IN(w, prob_carrier(p)) && X(k, w) == ff(k)}))
+      #|  mutually_indep_rv((p : Prob_space[A]), (X : (Num, A) -> Real), (m : Num))
+      #|  ((k : Num) => if k < (m : Num) { (X : (Num, A) -> Real)(k, (z : A)) } else { (v : Real) }) == (ff : (Num) -> Real)
+      #|  (m : Num)
+      #|  ((k : Num) => if k < (m : Num) { (X : (Num, A) -> Real)(k, (z : A)) } else { (v : Real) }) == (ff : (Num) -> Real)
+      #|  (j : Num) < (m : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  1 <= (m : Num)
       #|  0
-      #|  (w:A) IN prob_carrier p
-      #|  ~(k < m:num)
-      #|  k <= m:num
-      #|  k:num = m
-      #|  k:num < m
-      #|  (w:A) IN A
-      #|  k:num
-      #|  w:A
-      #|  A INTER {w:A | w IN prob_carrier p /\\\n      (X:num->A->real) m w = v} =\n      INTERS(IMAGE (\\k. {w | w IN prob_carrier p /\\ X k w = ff k}) (0..m))
-      #|  ff:num->real = \\k. if k < m then (X:num->A->real) k z else v
-      #|  v:real
-      #|  forall v:real. v IN V ==>\n    prob p (A INTER {w:A | w IN prob_carrier p /\\ (X:num->A->real) m w = v}) =\n    prob p A * pv v
-      #|  sub_sigma_algebra p (rv_sigma p (X:num->A->real) (SUC m))
-      #|  m:num
-      #|  {w:A | w IN prob_carrier p /\\ (X:num->A->real) m w = v} IN\n      rv_sigma p X (SUC m)
-      #|  forall v:real. {w:A | w IN prob_carrier p /\\\n    (X:num->A->real) m w = v} IN prob_events p
-      #|  sub_sigma_algebra p (rv_sigma p (X:num->A->real) m)
-      #|  z:A
-      #|  m:num
-      #|  (X:num->A->real)
-      #|  p:A prob_space
-      #|  A = {w:A | w IN prob_carrier p /\\\n    (forall k. k < m ==> (X:num->A->real) k w = X k z)}
-      #|  sub_sigma_algebra p (rv_sigma p (X:num->A->real) m)
-      #|  A IN rv_sigma p (X:num->A->real) m
-      #|  (A:A->bool) IN prob_events p
-      #|  sub_sigma_algebra p (rv_sigma p (X:num->A->real) m)
-      #|  1 <= SUC m
-      #|  SUC m
-      #|  ~(prob p (A:A->bool) = &0)
-      #|  simple_rv p ((X:num->A->real) m)
-      #|  FINITE (V:real->bool)
-      #|  forall k:num. k < SUC m ==> simple_rv p ((X:num->A->real) k)
-      #|  m:num
-      #|  forall k:num. k < SUC m ==> simple_rv p ((X:num->A->real) k)
-      #|  simple_rv p ((X:num->A->real) m) /\\\n    (forall k:num. k < m ==> simple_rv p (X k))
-      #|  pv = \\v:real. prob p {w:A | w IN prob_carrier p /\\\n    (X:num->A->real) m w = v}
-      #|  fz = \\v:real. (f:A->real)(@w. w IN prob_carrier p /\\\n    (forall k. k < m ==> (X:num->A->real) k w = X k z) /\\ X m w = v)
-      #|  V = IMAGE (\\w:A. (X:num->A->real) m w) (prob_carrier p)
-      #|  A = sigma_atom (rv_sigma p (X:num->A->real) m) z
-      #|  forall p:A prob_space (X:num->A->real) (f:A->real) m (z:A).\n     mutually_indep_rv p X m /\\\n     measurable_wrt p (rv_sigma p X (SUC m)) f /\\\n     integrable p f /\\\n     (forall k. k < SUC m ==> simple_rv p (X k)) /\\\n     (forall k w:A. k < SUC m /\\ w IN prob_carrier p ==>\n       &0 < prob p {y | y IN prob_carrier p /\\ X k y = X k w}) /\\\n     1 <= m /\\\n     z IN prob_carrier p\n     ==> expectation p (\\w. f w * indicator_fn (sigma_atom (rv_sigma p X m) z) w) /\n         prob p (sigma_atom (rv_sigma p X m) z) =\n         sum (IMAGE (\\w. X m w) (prob_carrier p))\n           (\\v. f(@w. w IN prob_carrier p /\\ (forall k. k < m ==> X k w = X k z) /\\\n                  X m w = v) *\n                prob p {w | w IN prob_carrier p /\\ X m w = v})
-      #|  (\\w:A. (X:num->A->real) m w) = X m
-      #|  sum (V:real->bool) (pv:real->real) = &1
-      #|  sum (V:real->bool) (\\v:real. (c:num->real) i * pv v)
-      #|  abs(pv (v:real)) = pv v
-      #|  v:real
-      #|  forall v:real. v IN V ==>\n     abs((fx v - fy v) * pv v) <= (c:num->real) i * pv v
-      #|  sum V (\\v:real. abs((fx v - fy v) * pv v))
-      #|  x':A
-      #|  m:num
-      #|  v:real IN V
-      #|  v:real
-      #|  forall v:real. v IN V ==> &0 <= pv v
-      #|  sum V (\\v:real. fx v * pv v) - sum V (\\v. fy v * pv v) =\n                 sum V (\\v. (fx v - fy v) * pv v)
-      #|  (\\v. (f:A->real) (@w. w IN prob_carrier p /\\\n      (forall k. k < m ==> (X:num->A->real) k w = X k y) /\\ X m w = v)) =\n      (fy:real->real)
-      #|  forall v:real. (f:A->real)(@w:A. w IN prob_carrier p /\\\n     (forall k. k < m ==> (X:num->A->real) k w = X k y) /\\ X m w = v) = fy v
-      #|  (\\v. (f:A->real) (@w. w IN prob_carrier p /\\\n      (forall k. k < m ==> (X:num->A->real) k w = X k x) /\\ X m w = v)) =\n      (fx:real->real)
-      #|  forall v:real. (f:A->real)(@w:A. w IN prob_carrier p /\\\n     (forall k. k < m ==> (X:num->A->real) k w = X k x) /\\ X m w = v) = fx v
-      #|  fy = \\v:real. (f:A->real)(@w:A. w IN prob_carrier p /\\\n     (forall k. k < m ==> (X:num->A->real) k w = X k y) /\\ X m w = v)
-      #|  fx = \\v:real. (f:A->real)(@w:A. w IN prob_carrier p /\\\n     (forall k. k < m ==> (X:num->A->real) k w = X k x) /\\ X m w = v)
-      #|  expectation p (\\w:A. (f:A->real) w *\n        indicator_fn (sigma_atom (rv_sigma p (X:num->A->real) m) y) w) /\n      prob p (sigma_atom (rv_sigma p X m) y) =\n      sum V (\\v. f(@w. w IN prob_carrier p /\\ (forall k. k < m ==> X k w = X k y) /\\\n               X m w = v) * pv v)
-      #|  expectation p (\\w:A. (f:A->real) w *\n        indicator_fn (sigma_atom (rv_sigma p (X:num->A->real) m) x) w) /\n      prob p (sigma_atom (rv_sigma p X m) x) =\n      sum V (\\v. f(@w. w IN prob_carrier p /\\ (forall k. k < m ==> X k w = X k x) /\\\n               X m w = v) * pv v)
-      #|  SUC m - 1 = m
-      #|  SUC m
-      #|  ~(prob p (sigma_atom (rv_sigma p (X:num->A->real) m) y) = &0)
-      #|  SUC m - 1 = m
-      #|  SUC m
-      #|  ~(prob p (sigma_atom (rv_sigma p (X:num->A->real) m) x) = &0)
-      #|  {(X:num->A->real) m x' | x' IN prob_carrier p} =\n      IMAGE (\\w. X m w) (prob_carrier p)
-      #|  simple_rv p ((X:num->A->real) m)
-      #|  FINITE (V:real->bool)
-      #|  simple_rv p ((X:num->A->real) m)
-      #|  pv = \\v:real. prob p\n     {w:A | w IN prob_carrier p /\\ (X:num->A->real) m w = v}
-      #|  V = IMAGE (\\w:A. (X:num->A->real) m w) (prob_carrier p)
-      #|  forall p:A prob_space (X:num->A->real) (f:A->real) (c:num->real) (m:num).\n     mutually_indep_rv p X m /\\\n     bounded_differences p X f c (SUC m) /\\\n     measurable_wrt p (rv_sigma p X (SUC m)) f /\\\n     integrable p f /\\\n     (forall k. k < SUC m ==> simple_rv p (X k)) /\\\n     (forall k z:A. k < SUC m /\\ z IN prob_carrier p ==>\n       &0 < prob p {y | y IN prob_carrier p /\\ X k y = X k z}) /\\\n     1 <= m\n     ==> bounded_differences p X (cond_exp p (rv_sigma p X m) f) c m
-      #|  SUC i + SUC d - 1:num
-      #|  SUC i + SUC d = SUC m
-      #|  SUC i + SUC d - 1
-      #|  y:A
-      #|  x:A
-      #|  i:num
-      #|  c:num->real
-      #|  g:A->real
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  forall z:A. z IN prob_carrier p ==>\n       cond_exp p (rv_sigma p (X:num->A->real) (SUC i)) f z =\n       cond_exp p (rv_sigma p X (SUC i)) g z
-      #|  g = cond_exp p (rv_sigma p (X:num->A->real) m) f
-      #|  SUC i + SUC d = SUC m
-      #|  m = SUC i + d
-      #|  j < i:num
-      #|  x:A
-      #|  y:A
-      #|  i:num
-      #|  bounded_differences p X (f:A->real) c (SUC i)
-      #|  SUC (i + 0 - 1)
-      #|  SUC i
-      #|  cond_exp p (rv_sigma p (X:num->A->real) (SUC i)) f x =\n                 (f:A->real) x
-      #|  SUC (i + 0 - 1)
-      #|  SUC i
-      #|  cond_exp p (rv_sigma p (X:num->A->real) (SUC i)) f y =\n                 (f:A->real) y
-      #|  forall d. forall p:A prob_space (X:num->A->real) (f:A->real) (c:num->real) (i:num)\n     (x:A) (y:A).\n     mutually_indep_rv p X (SUC i + d - 1) /\\\n     bounded_differences p X f c (SUC i + d) /\\\n     measurable_wrt p (rv_sigma p X (SUC i + d)) f /\\\n     integrable p f /\\\n     (forall k. k < SUC i + d ==> simple_rv p (X k)) /\\\n     (forall k z:A. k < SUC i + d /\\ z IN prob_carrier p ==>\n       &0 < prob p {y | y IN prob_carrier p /\\ X k y = X k z}) /\\\n     x IN prob_carrier p /\\\n     y IN prob_carrier p /\\\n     (forall k. k < i ==> X k y = X k x)\n     ==> abs(cond_exp p (rv_sigma p X (SUC i)) f y -\n             cond_exp p (rv_sigma p X (SUC i)) f x) <= c i
-      #|  w:A
-      #|  forall y:A. y IN A ==> abs((g:A->real) y - g x) <= (c:num->real) i
-      #|  w:A
-      #|  expectation p (\\y:A. ((g:A->real) x + (c:num->real) i) *\n        indicator_fn (A:A->bool) y) =\n       ((g:A->real) x + (c:num->real) i) *\n       expectation p (indicator_fn (A:A->bool))
-      #|  ((g:A->real) x + (c:num->real) i) * prob p (A:A->bool) =\n      expectation p (\\y:A. ((g:A->real) x + (c:num->real) i) *\n        indicator_fn (A:A->bool) y)
-      #|  w:A
-      #|  forall y:A. y IN A ==> abs((g:A->real) y - g x) <= (c:num->real) i
-      #|  w:A
-      #|  expectation p (\\y:A. ((g:A->real) x - (c:num->real) i) *\n        indicator_fn (A:A->bool) y) =\n       ((g:A->real) x - (c:num->real) i) *\n       expectation p (indicator_fn (A:A->bool))
-      #|  ((g:A->real) x - (c:num->real) i) * prob p (A:A->bool) =\n      expectation p (\\y:A. ((g:A->real) x - (c:num->real) i) *\n        indicator_fn (A:A->bool) y)
-      #|  expectation p (\\y:A. (g:A->real) y * indicator_fn (A:A->bool) y) = e
-      #|  forall k:num. k < i ==> (X:num->A->real) k y = X k x
-      #|  1 <= d:num
-      #|  SUC i + d = n:num
-      #|  SUC i + d - 1 = n - 1:num
-      #|  y:A
-      #|  x:A
-      #|  i:num
-      #|  c:num->real
-      #|  f:A->real
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  d:num
-      #|  ~(SUC i = n:num)
-      #|  i < n:num
-      #|  n - SUC i
-      #|  ?d. SUC i + d = n:num /\\ 1 <= d
-      #|  cond_exp p (rv_sigma p (X:num->A->real) (SUC i)) f = g
-      #|  ~(j = i:num)
-      #|  j < n:num
-      #|  SUC i = n:num
-      #|  forall k:num. k < i ==> (X:num->A->real) k y = X k x
-      #|  y:A
-      #|  x:A
-      #|  i:num
-      #|  bounded_differences p (X:num->A->real) (f:A->real) c n
-      #|  w:A
-      #|  n:num
-      #|  f:A->real
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  SUC i = n:num
-      #|  cond_exp p (rv_sigma p (X:num->A->real) (SUC i)) f = g
-      #|  w:A
-      #|  forall w:A. w IN prob_carrier p ==> (g:A->real) w = (f:A->real) w
-      #|  SUC i = n:num
-      #|  i < n:num
-      #|  i:num
-      #|  forall k:num. k <= n ==> sub_sigma_algebra p (rv_sigma p (X:num->A->real) k) /\\ FINITE (rv_sigma p X k)
-      #|  x:A
-      #|  i:num
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  sigma_atom (rv_sigma p (X:num->A->real) i) x = A
-      #|  (y:A) IN A
-      #|  i = 0
-      #|  sigma_atom (rv_sigma p (X:num->A->real) i) x = A
-      #|  (A:A->bool) = prob_carrier p
-      #|  (y:A) IN A
-      #|  i = 0
-      #|  (y:A) IN prob_carrier p /\\\n     (forall k. k < i ==> (X:num->A->real) k y = X k x)
-      #|  y:A
-      #|  forall y:A. y IN A ==>\n    abs((g:A->real) y - g x) <= (c:num->real) i
-      #|  i < n:num
-      #|  SUC i
-      #|  forall k:num. k <= n ==> sub_sigma_algebra p (rv_sigma p (X:num->A->real) k) /\\ FINITE (rv_sigma p X k)
-      #|  cond_exp p (rv_sigma p (X:num->A->real) (SUC i)) f = g
-      #|  integrable p (g:A->real)
-      #|  ~(prob p (A:A->bool) = &0)
-      #|  A:A->bool
-      #|  p:A prob_space
-      #|  &0 < prob p (A:A->bool)
-      #|  sub_sigma_algebra p (rv_sigma p (X:num->A->real) i)
-      #|  i < n:num
-      #|  i:num
-      #|  forall k:num. k <= n ==> sub_sigma_algebra p (rv_sigma p (X:num->A->real) k) /\\ FINITE (rv_sigma p X k)
-      #|  i < n:num
-      #|  i:num
-      #|  forall k:num. k <= n ==> sub_sigma_algebra p (rv_sigma p (X:num->A->real) k) /\\ FINITE (rv_sigma p X k)
-      #|  sigma_atom (rv_sigma p (X:num->A->real) i) x = A
-      #|  A IN rv_sigma p (X:num->A->real) i
-      #|  i = 0
-      #|  sigma_atom (rv_sigma p (X:num->A->real) i) x = A
-      #|  (A:A->bool) = prob_carrier p
-      #|  i = 0
-      #|  (A:A->bool) IN prob_events p
-      #|  e = expectation p (\\y:A. (g:A->real) y * indicator_fn (A:A->bool) y)
-      #|  x:A
-      #|  i < n:num
-      #|  SUC i
-      #|  i < n:num
-      #|  SUC i
-      #|  i < n:num
-      #|  i:num
-      #|  i < n:num
-      #|  i:num
-      #|  forall k:num. k <= n ==> sub_sigma_algebra p (rv_sigma p (X:num->A->real) k) /\\ FINITE (rv_sigma p X k)
-      #|  f:A->real
-      #|  rv_sigma p (X:num->A->real) (SUC i)
-      #|  rv_sigma p (X:num->A->real) i
-      #|  p:A prob_space
-      #|  cond_exp p (rv_sigma p (X:num->A->real) (SUC i)) f = g
-      #|  cond_exp p (rv_sigma p (X:num->A->real) i) f x =\n     cond_exp p (rv_sigma p X i) g x
-      #|  ~(i = 0)
-      #|  i < n:num
-      #|  x:A
-      #|  n:num
-      #|  i:num
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  i = 0
-      #|  sigma_atom (rv_sigma p (X:num->A->real) i) x = A
-      #|  (A:A->bool) = prob_carrier p
-      #|  i = 0
-      #|  ~(prob p (A:A->bool) = &0)
-      #|  A = sigma_atom (rv_sigma p (X:num->A->real) i) x
-      #|  g = cond_exp p (rv_sigma p (X:num->A->real) (SUC i)) f
-      #|  rv_sigma (p:A prob_space) (X:num->A->real) i SUBSET\n    rv_sigma p X (SUC i)
-      #|  forall k. k <= n ==>\n    sub_sigma_algebra p (rv_sigma (p:A prob_space) (X:num->A->real) k) /\\\n    FINITE (rv_sigma p X k)
-      #|  abs(cond_exp p (rv_sigma p (X:num->A->real) (SUC i)) f x -\n    cond_exp p (rv_sigma p X i) f x) <= (c:num->real) i
-      #|  x:A
-      #|  i:num
-      #|  forall p:A prob_space (X:num->A->real) (f:A->real) (c:num->real) (n:num).\n     mutually_indep_rv p X (n - 1) /\\\n     bounded_differences p X f c n /\\\n     measurable_wrt p (rv_sigma p X n) f /\\\n     integrable p f /\\\n     (forall k. k < n ==> simple_rv p (X k)) /\\\n     (forall k z:A. k < n /\\ z IN prob_carrier p ==>\n       &0 < prob p {y | y IN prob_carrier p /\\ X k y = X k z}) /\\\n     1 <= n\n     ==> forall i. i < n ==>\n           forall x. x IN prob_carrier p ==>\n             --(c i) <= cond_exp p (rv_sigma p X (SUC i)) f x -\n                        cond_exp p (rv_sigma p X i) f x /\\\n             cond_exp p (rv_sigma p X (SUC i)) f x -\n                        cond_exp p (rv_sigma p X i) f x <= c i
+      #|  IN((w : A), prob_carrier((p : Prob_space[A])))
+      #|  !((k : Num) < (m : Num))
+      #|  (k : Num) <= (m : Num)
+      #|  (k : Num) == (m : Num)
+      #|  (k : Num) < (m : Num)
+      #|  IN((w : A), (A : (A) -> Bool))
+      #|  (k : Num)
+      #|  (w : A)
+      #|  INTER((A : (A) -> Bool), {(w : A) | IN(w, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((m : Num), w) == (v : Real)}) == INTERS(IMAGE((k : Num) => {(w : A) | IN(w, prob_carrier(p)) && X(k, w) == (ff : (Num) -> Real)(k)}, op_dot_dot(0, m)))
+      #|  (ff : (Num) -> Real) == ((k : Num) => if k < (m : Num) { (X : (Num, A) -> Real)(k, (z : A)) } else { (v : Real) })
+      #|  (v : Real)
+      #|  \226\136\128 v : Real, IN(v, (V : (Real) -> Bool)) \226\134\146 prob((p : Prob_space[A]), INTER((A : (A) -> Bool), {(w : A) | IN(w, prob_carrier(p)) && (X : (Num, A) -> Real)((m : Num), w) == v})) == prob(p, A) * (pv : (Real) -> Real)(v)
+      #|  sub_sigma_algebra((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), SUC((m : Num))))
+      #|  (m : Num)
+      #|  IN({(w : A) | IN(w, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((m : Num), w) == (v : Real)}, rv_sigma(p, X, SUC(m)))
+      #|  \226\136\128 v : Real, IN({(w : A) | IN(w, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((m : Num), w) == v}, prob_events(p))
+      #|  sub_sigma_algebra((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), (m : Num)))
+      #|  (z : A)
+      #|  (m : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (A : (A) -> Bool) == {(w : A) | IN(w, prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (z : A)))}
+      #|  sub_sigma_algebra((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), (m : Num)))
+      #|  IN((A : (A) -> Bool), rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (m : Num)))
+      #|  IN((A : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  sub_sigma_algebra((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), (m : Num)))
+      #|  1 <= SUC((m : Num))
+      #|  SUC((m : Num))
+      #|  !(prob((p : Prob_space[A]), (A : (A) -> Bool)) == real_of_num(0))
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)((m : Num)))
+      #|  FINITE((V : (Real) -> Bool))
+      #|  \226\136\128 k : Num, k < SUC((m : Num)) \226\134\146 simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(k))
+      #|  (m : Num)
+      #|  \226\136\128 k : Num, k < SUC((m : Num)) \226\134\146 simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(k))
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)((m : Num))) && (\226\136\128 k : Num, k < m \226\134\146 simple_rv(p, X(k)))
+      #|  (pv : (Real) -> Real) == ((v : Real) => prob((p : Prob_space[A]), {(w : A) | IN(w, prob_carrier(p)) && (X : (Num, A) -> Real)((m : Num), w) == v}))
+      #|  (fz : (Real) -> Real) == ((v : Real) => (f : (A) -> Real)(select((w : A) => IN(w, prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (z : A))) && X(m, w) == v)))
+      #|  (V : (Real) -> Bool) == IMAGE((w : A) => (X : (Num, A) -> Real)((m : Num), w), prob_carrier((p : Prob_space[A])))
+      #|  (A : (A) -> Bool) == sigma_atom(rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (m : Num)), (z : A))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 f : (A) -> Real, \226\136\128 m : Num, \226\136\128 z : A, mutually_indep_rv(p, X, m) && measurable_wrt(p, rv_sigma(p, X, SUC(m)), f) && integrable(p, f) && (\226\136\128 k : Num, k < SUC(m) \226\134\146 simple_rv(p, X(k))) && (\226\136\128 k : Num, \226\136\128 w : A, k < SUC(m) && IN(w, prob_carrier(p)) \226\134\146 real_of_num(0) < prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == X(k, w)})) && 1 <= m && IN(z, prob_carrier(p)) \226\134\146 expectation(p, (w : A) => f(w) * indicator_fn(sigma_atom(rv_sigma(p, X, m), z), w)) / prob(p, sigma_atom(rv_sigma(p, X, m), z)) == sum(IMAGE((w : A) => X(m, w), prob_carrier(p)), (v : Real) => f(select((w : A) => IN(w, prob_carrier(p)) && (\226\136\128 k : Num, k < m \226\134\146 X(k, w) == X(k, z)) && X(m, w) == v)) * prob(p, {(w : A) | IN(w, prob_carrier(p)) && X(m, w) == v}))
+      #|  ((w : A) => (X : (Num, A) -> Real)((m : Num), w)) == X(m)
+      #|  sum((V : (Real) -> Bool), (pv : (Real) -> Real)) == real_of_num(1)
+      #|  sum((V : (Real) -> Bool), (v : Real) => (c : (Num) -> Real)((i : Num)) * (pv : (Real) -> Real)(v))
+      #|  abs((pv : (Real) -> Real)((v : Real))) == pv(v)
+      #|  (v : Real)
+      #|  \226\136\128 v : Real, IN(v, (V : (Real) -> Bool)) \226\134\146 abs(((fx : (Real) -> Real)(v) - (fy : (Real) -> Real)(v)) * (pv : (Real) -> Real)(v)) <= (c : (Num) -> Real)((i : Num)) * pv(v)
+      #|  sum((V : (Real) -> Bool), (v : Real) => abs(((fx : (Real) -> Real)(v) - (fy : (Real) -> Real)(v)) * (pv : (Real) -> Real)(v)))
+      #|  (x' : A)
+      #|  (m : Num)
+      #|  IN((v : Real), (V : (Real) -> Bool))
+      #|  (v : Real)
+      #|  \226\136\128 v : Real, IN(v, (V : (Real) -> Bool)) \226\134\146 real_of_num(0) <= (pv : (Real) -> Real)(v)
+      #|  sum((V : (Real) -> Bool), (v : Real) => (fx : (Real) -> Real)(v) * (pv : (Real) -> Real)(v)) - sum(V, (v : Real) => (fy : (Real) -> Real)(v) * pv(v)) == sum(V, (v : Real) => (fx(v) - fy(v)) * pv(v))
+      #|  ((v : Real) => (f : (A) -> Real)(select((w : A) => IN(w, prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (y : A))) && X(m, w) == v))) == (fy : (Real) -> Real)
+      #|  \226\136\128 v : Real, (f : (A) -> Real)(select((w : A) => IN(w, prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (y : A))) && X(m, w) == v)) == (fy : (Real) -> Real)(v)
+      #|  ((v : Real) => (f : (A) -> Real)(select((w : A) => IN(w, prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (x : A))) && X(m, w) == v))) == (fx : (Real) -> Real)
+      #|  \226\136\128 v : Real, (f : (A) -> Real)(select((w : A) => IN(w, prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (x : A))) && X(m, w) == v)) == (fx : (Real) -> Real)(v)
+      #|  (fy : (Real) -> Real) == ((v : Real) => (f : (A) -> Real)(select((w : A) => IN(w, prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (y : A))) && X(m, w) == v)))
+      #|  (fx : (Real) -> Real) == ((v : Real) => (f : (A) -> Real)(select((w : A) => IN(w, prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (m : Num) \226\134\146 (X : (Num, A) -> Real)(k, w) == X(k, (x : A))) && X(m, w) == v)))
+      #|  expectation((p : Prob_space[A]), (w : A) => (f : (A) -> Real)(w) * indicator_fn(sigma_atom(rv_sigma(p, (X : (Num, A) -> Real), (m : Num)), (y : A)), w)) / prob(p, sigma_atom(rv_sigma(p, X, m), y)) == sum((V : (Real) -> Bool), (v : Real) => f(select((w : A) => IN(w, prob_carrier(p)) && (\226\136\128 k : Num, k < m \226\134\146 X(k, w) == X(k, y)) && X(m, w) == v)) * (pv : (Real) -> Real)(v))
+      #|  expectation((p : Prob_space[A]), (w : A) => (f : (A) -> Real)(w) * indicator_fn(sigma_atom(rv_sigma(p, (X : (Num, A) -> Real), (m : Num)), (x : A)), w)) / prob(p, sigma_atom(rv_sigma(p, X, m), x)) == sum((V : (Real) -> Bool), (v : Real) => f(select((w : A) => IN(w, prob_carrier(p)) && (\226\136\128 k : Num, k < m \226\134\146 X(k, w) == X(k, x)) && X(m, w) == v)) * (pv : (Real) -> Real)(v))
+      #|  SUC((m : Num)) - 1 == m
+      #|  SUC((m : Num))
+      #|  !(prob((p : Prob_space[A]), sigma_atom(rv_sigma(p, (X : (Num, A) -> Real), (m : Num)), (y : A))) == real_of_num(0))
+      #|  SUC((m : Num)) - 1 == m
+      #|  SUC((m : Num))
+      #|  !(prob((p : Prob_space[A]), sigma_atom(rv_sigma(p, (X : (Num, A) -> Real), (m : Num)), (x : A))) == real_of_num(0))
+      #|  {(X : (Num, A) -> Real)((m : Num), (x' : A)) | IN(x', prob_carrier((p : Prob_space[A])))} == IMAGE((w : A) => X(m, w), prob_carrier(p))
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)((m : Num)))
+      #|  FINITE((V : (Real) -> Bool))
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)((m : Num)))
+      #|  (pv : (Real) -> Real) == ((v : Real) => prob((p : Prob_space[A]), {(w : A) | IN(w, prob_carrier(p)) && (X : (Num, A) -> Real)((m : Num), w) == v}))
+      #|  (V : (Real) -> Bool) == IMAGE((w : A) => (X : (Num, A) -> Real)((m : Num), w), prob_carrier((p : Prob_space[A])))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 f : (A) -> Real, \226\136\128 c : (Num) -> Real, \226\136\128 m : Num, mutually_indep_rv(p, X, m) && bounded_differences(p, X, f, c, SUC(m)) && measurable_wrt(p, rv_sigma(p, X, SUC(m)), f) && integrable(p, f) && (\226\136\128 k : Num, k < SUC(m) \226\134\146 simple_rv(p, X(k))) && (\226\136\128 k : Num, \226\136\128 z : A, k < SUC(m) && IN(z, prob_carrier(p)) \226\134\146 real_of_num(0) < prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == X(k, z)})) && 1 <= m \226\134\146 bounded_differences(p, X, cond_exp(p, rv_sigma(p, X, m), f), c, m)
+      #|  SUC((i : Num)) + (SUC((d : Num)) - 1)
+      #|  SUC((i : Num)) + SUC((d : Num)) == SUC((m : Num))
+      #|  SUC((i : Num)) + (SUC((d : Num)) - 1)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (i : Num)
+      #|  (c : (Num) -> Real)
+      #|  (g : (A) -> Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 z : A, IN(z, prob_carrier((p : Prob_space[A]))) \226\134\146 cond_exp(p, rv_sigma(p, (X : (Num, A) -> Real), SUC((i : Num))), (f : (A) -> Real), z) == cond_exp(p, rv_sigma(p, X, SUC(i)), (g : (A) -> Real), z)
+      #|  (g : (A) -> Real) == cond_exp((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), (m : Num)), (f : (A) -> Real))
+      #|  SUC((i : Num)) + SUC((d : Num)) == SUC((m : Num))
+      #|  (m : Num) == SUC((i : Num)) + (d : Num)
+      #|  (j : Num) < (i : Num)
+      #|  (x : A)
+      #|  (y : A)
+      #|  (i : Num)
+      #|  bounded_differences((p : Prob_space[A]), (X : (Num, A) -> Real), (f : (A) -> Real), (c : (Num) -> Real), SUC((i : Num)))
+      #|  SUC((i : Num) + (0 - 1))
+      #|  SUC((i : Num))
+      #|  cond_exp((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), SUC((i : Num))), (f : (A) -> Real), (x : A)) == f(x)
+      #|  SUC((i : Num) + (0 - 1))
+      #|  SUC((i : Num))
+      #|  cond_exp((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), SUC((i : Num))), (f : (A) -> Real), (y : A)) == f(y)
+      #|  \226\136\128 d : Num, \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 f : (A) -> Real, \226\136\128 c : (Num) -> Real, \226\136\128 i : Num, \226\136\128 x : A, \226\136\128 y : A, mutually_indep_rv(p, X, SUC(i) + (d - 1)) && bounded_differences(p, X, f, c, SUC(i) + d) && measurable_wrt(p, rv_sigma(p, X, SUC(i) + d), f) && integrable(p, f) && (\226\136\128 k : Num, k < SUC(i) + d \226\134\146 simple_rv(p, X(k))) && (\226\136\128 k : Num, \226\136\128 z : A, k < SUC(i) + d && IN(z, prob_carrier(p)) \226\134\146 real_of_num(0) < prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == X(k, z)})) && IN(x, prob_carrier(p)) && IN(y, prob_carrier(p)) && (\226\136\128 k : Num, k < i \226\134\146 X(k, y) == X(k, x)) \226\134\146 abs(cond_exp(p, rv_sigma(p, X, SUC(i)), f, y) - cond_exp(p, rv_sigma(p, X, SUC(i)), f, x)) <= c(i)
+      #|  (w : A)
+      #|  \226\136\128 y : A, IN(y, (A : (A) -> Bool)) \226\134\146 abs((g : (A) -> Real)(y) - g((x : A))) <= (c : (Num) -> Real)((i : Num))
+      #|  (w : A)
+      #|  expectation((p : Prob_space[A]), (y : A) => ((g : (A) -> Real)((x : A)) + (c : (Num) -> Real)((i : Num))) * indicator_fn((A : (A) -> Bool), y)) == (g(x) + c(i)) * expectation(p, indicator_fn(A))
+      #|  ((g : (A) -> Real)((x : A)) + (c : (Num) -> Real)((i : Num))) * prob((p : Prob_space[A]), (A : (A) -> Bool)) == expectation(p, (y : A) => (g(x) + c(i)) * indicator_fn(A, y))
+      #|  (w : A)
+      #|  \226\136\128 y : A, IN(y, (A : (A) -> Bool)) \226\134\146 abs((g : (A) -> Real)(y) - g((x : A))) <= (c : (Num) -> Real)((i : Num))
+      #|  (w : A)
+      #|  expectation((p : Prob_space[A]), (y : A) => ((g : (A) -> Real)((x : A)) - (c : (Num) -> Real)((i : Num))) * indicator_fn((A : (A) -> Bool), y)) == (g(x) - c(i)) * expectation(p, indicator_fn(A))
+      #|  ((g : (A) -> Real)((x : A)) - (c : (Num) -> Real)((i : Num))) * prob((p : Prob_space[A]), (A : (A) -> Bool)) == expectation(p, (y : A) => (g(x) - c(i)) * indicator_fn(A, y))
+      #|  expectation((p : Prob_space[A]), (y : A) => (g : (A) -> Real)(y) * indicator_fn((A : (A) -> Bool), y)) == (e : Real)
+      #|  \226\136\128 k : Num, k < (i : Num) \226\134\146 (X : (Num, A) -> Real)(k, (y : A)) == X(k, (x : A))
+      #|  1 <= (d : Num)
+      #|  SUC((i : Num)) + (d : Num) == (n : Num)
+      #|  SUC((i : Num)) + ((d : Num) - 1) == (n : Num) - 1
+      #|  (y : A)
+      #|  (x : A)
+      #|  (i : Num)
+      #|  (c : (Num) -> Real)
+      #|  (f : (A) -> Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (d : Num)
+      #|  !(SUC((i : Num)) == (n : Num))
+      #|  (i : Num) < (n : Num)
+      #|  (n : Num) - SUC((i : Num))
+      #|  \226\136\131 d : Num, SUC((i : Num)) + d == (n : Num) && 1 <= d
+      #|  cond_exp((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), SUC((i : Num))), (f : (A) -> Real)) == (g : (A) -> Real)
+      #|  !((j : Num) == (i : Num))
+      #|  (j : Num) < (n : Num)
+      #|  SUC((i : Num)) == (n : Num)
+      #|  \226\136\128 k : Num, k < (i : Num) \226\134\146 (X : (Num, A) -> Real)(k, (y : A)) == X(k, (x : A))
+      #|  (y : A)
+      #|  (x : A)
+      #|  (i : Num)
+      #|  bounded_differences((p : Prob_space[A]), (X : (Num, A) -> Real), (f : (A) -> Real), (c : (Num) -> Real), (n : Num))
+      #|  (w : A)
+      #|  (n : Num)
+      #|  (f : (A) -> Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  SUC((i : Num)) == (n : Num)
+      #|  cond_exp((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), SUC((i : Num))), (f : (A) -> Real)) == (g : (A) -> Real)
+      #|  (w : A)
+      #|  \226\136\128 w : A, IN(w, prob_carrier((p : Prob_space[A]))) \226\134\146 (g : (A) -> Real)(w) == (f : (A) -> Real)(w)
+      #|  SUC((i : Num)) == (n : Num)
+      #|  (i : Num) < (n : Num)
+      #|  (i : Num)
+      #|  \226\136\128 k : Num, k <= (n : Num) \226\134\146 sub_sigma_algebra((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), k)) && FINITE(rv_sigma(p, X, k))
+      #|  (x : A)
+      #|  (i : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  sigma_atom(rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (i : Num)), (x : A)) == (A : (A) -> Bool)
+      #|  IN((y : A), (A : (A) -> Bool))
+      #|  (i : Num) == 0
+      #|  sigma_atom(rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (i : Num)), (x : A)) == (A : (A) -> Bool)
+      #|  (A : (A) -> Bool) == prob_carrier((p : Prob_space[A]))
+      #|  IN((y : A), (A : (A) -> Bool))
+      #|  (i : Num) == 0
+      #|  IN((y : A), prob_carrier((p : Prob_space[A]))) && (\226\136\128 k : Num, k < (i : Num) \226\134\146 (X : (Num, A) -> Real)(k, y) == X(k, (x : A)))
+      #|  (y : A)
+      #|  \226\136\128 y : A, IN(y, (A : (A) -> Bool)) \226\134\146 abs((g : (A) -> Real)(y) - g((x : A))) <= (c : (Num) -> Real)((i : Num))
+      #|  (i : Num) < (n : Num)
+      #|  SUC((i : Num))
+      #|  \226\136\128 k : Num, k <= (n : Num) \226\134\146 sub_sigma_algebra((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), k)) && FINITE(rv_sigma(p, X, k))
+      #|  cond_exp((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), SUC((i : Num))), (f : (A) -> Real)) == (g : (A) -> Real)
+      #|  integrable((p : Prob_space[A]), (g : (A) -> Real))
+      #|  !(prob((p : Prob_space[A]), (A : (A) -> Bool)) == real_of_num(0))
+      #|  (A : (A) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  real_of_num(0) < prob((p : Prob_space[A]), (A : (A) -> Bool))
+      #|  sub_sigma_algebra((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), (i : Num)))
+      #|  (i : Num) < (n : Num)
+      #|  (i : Num)
+      #|  \226\136\128 k : Num, k <= (n : Num) \226\134\146 sub_sigma_algebra((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), k)) && FINITE(rv_sigma(p, X, k))
+      #|  (i : Num) < (n : Num)
+      #|  (i : Num)
+      #|  \226\136\128 k : Num, k <= (n : Num) \226\134\146 sub_sigma_algebra((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), k)) && FINITE(rv_sigma(p, X, k))
+      #|  sigma_atom(rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (i : Num)), (x : A)) == (A : (A) -> Bool)
+      #|  IN((A : (A) -> Bool), rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (i : Num)))
+      #|  (i : Num) == 0
+      #|  sigma_atom(rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (i : Num)), (x : A)) == (A : (A) -> Bool)
+      #|  (A : (A) -> Bool) == prob_carrier((p : Prob_space[A]))
+      #|  (i : Num) == 0
+      #|  IN((A : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  (e : Real) == expectation((p : Prob_space[A]), (y : A) => (g : (A) -> Real)(y) * indicator_fn((A : (A) -> Bool), y))
+      #|  (x : A)
+      #|  (i : Num) < (n : Num)
+      #|  SUC((i : Num))
+      #|  (i : Num) < (n : Num)
+      #|  SUC((i : Num))
+      #|  (i : Num) < (n : Num)
+      #|  (i : Num)
+      #|  (i : Num) < (n : Num)
+      #|  (i : Num)
+      #|  \226\136\128 k : Num, k <= (n : Num) \226\134\146 sub_sigma_algebra((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), k)) && FINITE(rv_sigma(p, X, k))
+      #|  (f : (A) -> Real)
+      #|  rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), SUC((i : Num)))
+      #|  rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (i : Num))
+      #|  (p : Prob_space[A])
+      #|  cond_exp((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), SUC((i : Num))), (f : (A) -> Real)) == (g : (A) -> Real)
+      #|  cond_exp((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), (i : Num)), (f : (A) -> Real), (x : A)) == cond_exp(p, rv_sigma(p, X, i), (g : (A) -> Real), x)
+      #|  !((i : Num) == 0)
+      #|  (i : Num) < (n : Num)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (i : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (i : Num) == 0
+      #|  sigma_atom(rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (i : Num)), (x : A)) == (A : (A) -> Bool)
+      #|  (A : (A) -> Bool) == prob_carrier((p : Prob_space[A]))
+      #|  (i : Num) == 0
+      #|  !(prob((p : Prob_space[A]), (A : (A) -> Bool)) == real_of_num(0))
+      #|  (A : (A) -> Bool) == sigma_atom(rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (i : Num)), (x : A))
+      #|  (g : (A) -> Real) == cond_exp((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), SUC((i : Num))), (f : (A) -> Real))
+      #|  SUBSET(rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (i : Num)), rv_sigma(p, X, SUC(i)))
+      #|  \226\136\128 k : Num, k <= (n : Num) \226\134\146 sub_sigma_algebra((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), k)) && FINITE(rv_sigma(p, X, k))
+      #|  abs(cond_exp((p : Prob_space[A]), rv_sigma(p, (X : (Num, A) -> Real), SUC((i : Num))), (f : (A) -> Real), (x : A)) - cond_exp(p, rv_sigma(p, X, i), f, x)) <= (c : (Num) -> Real)(i)
+      #|  (x : A)
+      #|  (i : Num)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 f : (A) -> Real, \226\136\128 c : (Num) -> Real, \226\136\128 n : Num, mutually_indep_rv(p, X, n - 1) && bounded_differences(p, X, f, c, n) && measurable_wrt(p, rv_sigma(p, X, n), f) && integrable(p, f) && (\226\136\128 k : Num, k < n \226\134\146 simple_rv(p, X(k))) && (\226\136\128 k : Num, \226\136\128 z : A, k < n && IN(z, prob_carrier(p)) \226\134\146 real_of_num(0) < prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == X(k, z)})) && 1 <= n \226\134\146 (\226\136\128 i : Num, i < n \226\134\146 (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 -c(i) <= cond_exp(p, rv_sigma(p, X, SUC(i)), f, x) - cond_exp(p, rv_sigma(p, X, i), f, x) && cond_exp(p, rv_sigma(p, X, SUC(i)), f, x) - cond_exp(p, rv_sigma(p, X, i), f, x) <= c(i)))
       #|  0
-      #|  &0 < (c:num->real) i
-      #|  y:A
-      #|  i:num
-      #|  n:num
-      #|  c:num->real
-      #|  f:A->real
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  (if (i:num) <= n then i else n) = i
-      #|  (if SUC i <= n then SUC i else n) = SUC i
-      #|  y:A
-      #|  i:num
-      #|  (\\k. rv_sigma (p:A prob_space) (X:num->A->real)\n        (if k <= n then k else n)) =\n      (\\k. rv_sigma p X (MIN k (SUC (n - 1))))
-      #|  forall i:num. (c:num->real) i - --c i = &2 * c i
-      #|  SUC (n - 1) = n
-      #|  n - 1
-      #|  t:real
-      #|  c:num->real
-      #|  (\\i:num. --((c:num->real) i))
-      #|  f:A->real
-      #|  (\\k:num. rv_sigma p (X:num->A->real) (MIN k n))
-      #|  p:A prob_space
-      #|  rv_sigma (p:A prob_space) (X:num->A->real) n =\n                rv_sigma p X (MIN n n) /\\\n                rv_sigma p X 0 = rv_sigma p X (MIN 0 n)
-      #|  (y:A) IN prob_carrier p
-      #|  y:A
-      #|  {x:A | x IN prob_carrier p /\\ f x - expectation p f >= t} =\n   {x | x IN prob_carrier p /\\\n        cond_exp p (rv_sigma p (X:num->A->real) n) f x -\n        cond_exp p (rv_sigma p X 0) f x >= t}
-      #|  forall x:A. x IN prob_carrier p ==>\n   cond_exp p (rv_sigma p (X:num->A->real) 0) f x = expectation p f
-      #|  forall x:A. x IN prob_carrier p ==>\n   cond_exp p (rv_sigma p (X:num->A->real) n) f x = f x
-      #|  forall p:A prob_space (X:num->A->real) (f:A->real) (c:num->real) (n:num) (t:real).\n     mutually_indep_rv p X (n - 1) /\\\n     bounded_differences p X f c n /\\\n     measurable_wrt p (rv_sigma p X n) f /\\\n     integrable p f /\\\n     (forall k. k < n ==> simple_rv p (X k)) /\\\n     (forall k z:A. k < n /\\ z IN prob_carrier p ==>\n       &0 < prob p {y | y IN prob_carrier p /\\ X k y = X k z}) /\\\n     1 <= n /\\\n     (forall i. i < n ==> &0 < c i) /\\\n     &0 < t\n     ==> prob p {x | x IN prob_carrier p /\\\n                     f x - expectation p f >= t} <=\n         exp(--(&2 * t pow 2 /\n                sum(0..n-1) (\\i. (&2 * c i) pow 2)))
+      #|  real_of_num(0) < (c : (Num) -> Real)((i : Num))
+      #|  (y : A)
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  (c : (Num) -> Real)
+      #|  (f : (A) -> Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (if (i : Num) <= (n : Num) { i } else { n }) == i
+      #|  (if SUC((i : Num)) <= (n : Num) { SUC(i) } else { n }) == SUC(i)
+      #|  (y : A)
+      #|  (i : Num)
+      #|  ((k : Num) => rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), if k <= (n : Num) { k } else { n })) == ((k : Num) => rv_sigma(p, X, MIN(k, SUC(n - 1))))
+      #|  \226\136\128 i : Num, (c : (Num) -> Real)(i) - -c(i) == real_of_num(2) * c(i)
+      #|  SUC((n : Num) - 1) == n
+      #|  (n : Num) - 1
+      #|  (t : Real)
+      #|  (c : (Num) -> Real)
+      #|  (i : Num) => -(c : (Num) -> Real)(i)
+      #|  (f : (A) -> Real)
+      #|  (k : Num) => rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), MIN(k, (n : Num)))
+      #|  (p : Prob_space[A])
+      #|  rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num)) == rv_sigma(p, X, MIN(n, n)) && rv_sigma(p, X, 0) == rv_sigma(p, X, MIN(0, n))
+      #|  IN((y : A), prob_carrier((p : Prob_space[A])))
+      #|  (y : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) - expectation(p, f) >= (t : Real)} == {(x : A) | IN(x, prob_carrier(p)) && cond_exp(p, rv_sigma(p, (X : (Num, A) -> Real), (n : Num)), f, x) - cond_exp(p, rv_sigma(p, X, 0), f, x) >= t}
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 cond_exp(p, rv_sigma(p, (X : (Num, A) -> Real), 0), (f : (A) -> Real), x) == expectation(p, f)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 cond_exp(p, rv_sigma(p, (X : (Num, A) -> Real), (n : Num)), (f : (A) -> Real), x) == f(x)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 f : (A) -> Real, \226\136\128 c : (Num) -> Real, \226\136\128 n : Num, \226\136\128 t : Real, mutually_indep_rv(p, X, n - 1) && bounded_differences(p, X, f, c, n) && measurable_wrt(p, rv_sigma(p, X, n), f) && integrable(p, f) && (\226\136\128 k : Num, k < n \226\134\146 simple_rv(p, X(k))) && (\226\136\128 k : Num, \226\136\128 z : A, k < n && IN(z, prob_carrier(p)) \226\134\146 real_of_num(0) < prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == X(k, z)})) && 1 <= n && (\226\136\128 i : Num, i < n \226\134\146 real_of_num(0) < c(i)) && real_of_num(0) < t \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && f(x) - expectation(p, f) >= t}) <= exp(-(real_of_num(2) * (pow(t, 2) / sum(op_dot_dot(0, n - 1), (i : Num) => pow(real_of_num(2) * c(i), 2)))))
       #|  0
-      #|  &0 < (c:num->real) i
-      #|  y:A
-      #|  i:num
-      #|  n:num
-      #|  c:num->real
-      #|  f:A->real
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  (if (i:num) <= n then i else n) = i
-      #|  (if SUC i <= n then SUC i else n) = SUC i
-      #|  y:A
-      #|  i:num
-      #|  (\\k. rv_sigma (p:A prob_space) (X:num->A->real)\n        (if k <= n then k else n)) =\n      (\\k. rv_sigma p X (MIN k (SUC (n - 1))))
-      #|  forall i:num. (c:num->real) i - --c i = &2 * c i
-      #|  SUC (n - 1) = n
-      #|  n - 1
-      #|  t:real
-      #|  c:num->real
-      #|  (\\i:num. --((c:num->real) i))
-      #|  f:A->real
-      #|  (\\k:num. rv_sigma p (X:num->A->real) (MIN k n))
-      #|  p:A prob_space
-      #|  rv_sigma (p:A prob_space) (X:num->A->real) n =\n                rv_sigma p X (MIN n n) /\\\n                rv_sigma p X 0 = rv_sigma p X (MIN 0 n)
-      #|  (y:A) IN prob_carrier p
-      #|  y:A
-      #|  {x:A | x IN prob_carrier p /\\ abs(f x - expectation p f) >= t} =\n     {x | x IN prob_carrier p /\\\n          abs(cond_exp p (rv_sigma p (X:num->A->real) n) f x -\n              cond_exp p (rv_sigma p X 0) f x) >= t}
-      #|  forall x:A. x IN prob_carrier p ==>\n   cond_exp p (rv_sigma p (X:num->A->real) 0) f x = expectation p f
-      #|  forall x:A. x IN prob_carrier p ==>\n   cond_exp p (rv_sigma p (X:num->A->real) n) f x = f x
-      #|  forall p:A prob_space (X:num->A->real) (f:A->real) (c:num->real) (n:num) (t:real).\n     mutually_indep_rv p X (n - 1) /\\\n     bounded_differences p X f c n /\\\n     measurable_wrt p (rv_sigma p X n) f /\\\n     integrable p f /\\\n     (forall k. k < n ==> simple_rv p (X k)) /\\\n     (forall k z:A. k < n /\\ z IN prob_carrier p ==>\n       &0 < prob p {y | y IN prob_carrier p /\\ X k y = X k z}) /\\\n     1 <= n /\\\n     (forall i. i < n ==> &0 < c i) /\\\n     &0 < t\n     ==> prob p {x | x IN prob_carrier p /\\\n                     abs(f x - expectation p f) >= t} <=\n         &2 * exp(--(&2 * t pow 2 /\n                     sum(0..n-1) (\\i. (&2 * c i) pow 2)))
-      #|  x:A
-      #|  n:num
-      #|  forall n x:A. x IN prob_carrier (p:A prob_space) ==> --((X:num->A->real) n x) = (M':num->A->real) n x + (A':num->A->real) n x
-      #|  (A':num->A->real) n x <= A' (SUC n) x
-      #|  x:A
-      #|  filtration (p:A prob_space) FF
-      #|  \\n (x:A). --((A':num->A->real) n x)
-      #|  \\n (x:A). --((M':num->A->real) n x)
-      #|  A':num->A->real
-      #|  M':num->A->real
-      #|  submartingale (p:A prob_space) FF (\\n x. --((X:num->A->real) n x)) /\\\n    (forall n. FINITE ((FF:num->(A->bool)->bool) n)) /\\\n    (forall n. simple_rv (p:A prob_space) ((\\n x. --((X:num->A->real) n x)) n))
-      #|  forall p:A prob_space FF X.\n     supermartingale p FF X /\\\n     (forall n. FINITE (FF n)) /\\\n     (forall n. simple_rv p (X n))\n     ==> ?M A. martingale p FF M /\\\n               predictable p FF A /\\\n               (forall x. x IN prob_carrier p ==> A 0 x = &0) /\\\n               (forall n x. x IN prob_carrier p /\\\n                      ~(prob p (sigma_atom (FF n) x) = &0)\n                      ==> A (SUC n) x <= A n x) /\\\n               (forall n x. x IN prob_carrier p ==> X n x = M n x + A n x)
-      #|  m % (x:real^1)
-      #|  IMAGE (\\v:real^1. inv m % v) (:real^1) = (:real^1)
-      #|  &0 < m ==> abs m = m
-      #|  vec 0:real^1
-      #|  m:real
-      #|  (:real^1)
-      #|  lift(i:real)
-      #|  \\v:real^1. lift((f:real->real)(drop v))
-      #|  forall(f:real->real) i m.\n      (f has_real_integral i) (:real) /\\ &0 < m\n      ==> ((\\x. f(m * x)) has_real_integral inv(m) * i) (:real)
-      #|  x:real
-      #|  b:real
-      #|  a:real
-      #|  f:real->real
-      #|  forall f a b.\n     f real_continuous_on real_interval[a,b]\n     ==> forall x. x IN real_interval[a,b]\n         ==> ((\\u. real_integral (real_interval[a,u]) f pow 2)\n              has_real_derivative\n              (&2 * real_integral (real_interval[a,x]) f * f x))\n             (atreal x within real_interval[a,b])
+      #|  real_of_num(0) < (c : (Num) -> Real)((i : Num))
+      #|  (y : A)
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  (c : (Num) -> Real)
+      #|  (f : (A) -> Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (if (i : Num) <= (n : Num) { i } else { n }) == i
+      #|  (if SUC((i : Num)) <= (n : Num) { SUC(i) } else { n }) == SUC(i)
+      #|  (y : A)
+      #|  (i : Num)
+      #|  ((k : Num) => rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), if k <= (n : Num) { k } else { n })) == ((k : Num) => rv_sigma(p, X, MIN(k, SUC(n - 1))))
+      #|  \226\136\128 i : Num, (c : (Num) -> Real)(i) - -c(i) == real_of_num(2) * c(i)
+      #|  SUC((n : Num) - 1) == n
+      #|  (n : Num) - 1
+      #|  (t : Real)
+      #|  (c : (Num) -> Real)
+      #|  (i : Num) => -(c : (Num) -> Real)(i)
+      #|  (f : (A) -> Real)
+      #|  (k : Num) => rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), MIN(k, (n : Num)))
+      #|  (p : Prob_space[A])
+      #|  rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num)) == rv_sigma(p, X, MIN(n, n)) && rv_sigma(p, X, 0) == rv_sigma(p, X, MIN(0, n))
+      #|  IN((y : A), prob_carrier((p : Prob_space[A])))
+      #|  (y : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs((f : (A) -> Real)(x) - expectation(p, f)) >= (t : Real)} == {(x : A) | IN(x, prob_carrier(p)) && abs(cond_exp(p, rv_sigma(p, (X : (Num, A) -> Real), (n : Num)), f, x) - cond_exp(p, rv_sigma(p, X, 0), f, x)) >= t}
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 cond_exp(p, rv_sigma(p, (X : (Num, A) -> Real), 0), (f : (A) -> Real), x) == expectation(p, f)
+      #|  \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 cond_exp(p, rv_sigma(p, (X : (Num, A) -> Real), (n : Num)), (f : (A) -> Real), x) == f(x)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 f : (A) -> Real, \226\136\128 c : (Num) -> Real, \226\136\128 n : Num, \226\136\128 t : Real, mutually_indep_rv(p, X, n - 1) && bounded_differences(p, X, f, c, n) && measurable_wrt(p, rv_sigma(p, X, n), f) && integrable(p, f) && (\226\136\128 k : Num, k < n \226\134\146 simple_rv(p, X(k))) && (\226\136\128 k : Num, \226\136\128 z : A, k < n && IN(z, prob_carrier(p)) \226\134\146 real_of_num(0) < prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == X(k, z)})) && 1 <= n && (\226\136\128 i : Num, i < n \226\134\146 real_of_num(0) < c(i)) && real_of_num(0) < t \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && abs(f(x) - expectation(p, f)) >= t}) <= real_of_num(2) * exp(-(real_of_num(2) * (pow(t, 2) / sum(op_dot_dot(0, n - 1), (i : Num) => pow(real_of_num(2) * c(i), 2)))))
+      #|  (x : A)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 -(X : (Num, A) -> Real)(n, x) == (M' : (Num, A) -> Real)(n, x) + (A' : (Num, A) -> Real)(n, x)
+      #|  (A' : (Num, A) -> Real)((n : Num), (x : A)) <= A'(SUC(n), x)
+      #|  (x : A)
+      #|  filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
+      #|  (n : Num) => (x : A) => -(A' : (Num, A) -> Real)(n, x)
+      #|  (n : Num) => (x : A) => -(M' : (Num, A) -> Real)(n, x)
+      #|  (A' : (Num, A) -> Real)
+      #|  (M' : (Num, A) -> Real)
+      #|  submartingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (n : Num) => (x : A) => -(X : (Num, A) -> Real)(n, x)) && (\226\136\128 n : Num, FINITE(FF(n))) && (\226\136\128 n : Num, simple_rv(p, ((n : Num) => (x : A) => -X(n, x))(n)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, supermartingale(p, FF, X) && (\226\136\128 n : Num, FINITE(FF(n))) && (\226\136\128 n : Num, simple_rv(p, X(n))) \226\134\146 (\226\136\131 M : (Num, A) -> Real, \226\136\131 A : (Num, A) -> Real, martingale(p, FF, M) && predictable(p, FF, A) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 A(0, x) == real_of_num(0)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) && !(prob(p, sigma_atom(FF(n), x)) == real_of_num(0)) \226\134\146 A(SUC(n), x) <= A(n, x)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 X(n, x) == M(n, x) + A(n, x)))
+      #|  op_pct((m : Real), (x : Cart[Real, Unit]))
+      #|  IMAGE((v : Cart[Real, Unit]) => op_pct(inv((m : Real)), v), UNIV) == UNIV
+      #|  real_of_num(0) < (m : Real) \226\134\146 abs(m) == m
+      #|  (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (m : Real)
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  lift((i : Real))
+      #|  (v : Cart[Real, Unit]) => lift((f : (Real) -> Real)(drop(v)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 i : Real, \226\136\128 m : Real, has_real_integral(f, i, UNIV) && real_of_num(0) < m \226\134\146 has_real_integral((x : Real) => f(m * x), inv(m) * i, UNIV)
+      #|  (x : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_continuous_on(f, real_interval([(a, b)])) \226\134\146 (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 has_real_derivative((u : Real) => pow(real_integral(real_interval([(a, u)]), f), 2), real_of_num(2) * (real_integral(real_interval([(a, x)]), f) * f(x)), within(atreal(x), real_interval([(a, b)]))))
       #|  2
-      #|  x:real
-      #|  b:real
-      #|  a:real
-      #|  f:real->real
-      #|  b:real
-      #|  a:real
-      #|  \\x:real. &2 * real_integral (real_interval[a,x]) (f:real->real) * f x
-      #|  \\u:real. real_integral (real_interval[a,u]) (f:real->real) pow 2
-      #|  real_integral (real_interval[a,a]) (f:real->real) = &0
-      #|  real_integral (real_interval[a,b]) (f:real->real) pow 2 =\n    real_integral (real_interval[a,b]) f pow 2 -\n    real_integral (real_interval[a,a]) f pow 2
-      #|  forall f a b. f real_continuous_on real_interval[a,b] /\\ a <= b\n   ==> real_integral (real_interval[a,b]) f pow 2 =\n       real_integral (real_interval[a,b])\n         (\\x. &2 * real_integral (real_interval[a,x]) f * f x)
-      #|  pi / &4 = atn(&1) - atn(&0)
-      #|  ((\\t. inv(&1 + t pow 2)) has_real_integral (pi / &4))\n   (real_interval [&0, &1])
-      #|  ~(&2 * c = &0)
-      #|  x * exp(--(c * x pow 2)) =\n     --inv(&2 * c) * (--(c * &2 * x) * exp(--(c * x pow 2)))
-      #|  ~(&2 * c = &0)
-      #|  inv(&2 * c) * (exp(--(c * a pow 2)) - exp(--(c * b pow 2))) =\n     (--inv(&2 * c) * exp(--(c * b pow 2))) -\n     (--inv(&2 * c) * exp(--(c * a pow 2)))
-      #|  forall c a b. &0 < c /\\ a <= b\n   ==> ((\\x. x * exp(--(c * x pow 2)))\n        has_real_integral\n        (inv(&2 * c) * (exp(--(c * a pow 2)) - exp(--(c * b pow 2)))))\n       (real_interval[a,b])
-      #|  forall a b. (\\x. exp(--(x pow 2))) real_integrable_on real_interval[a,b]
-      #|  (\\x. exp(--(x pow 2))) real_continuous_on real_interval[a,b]
-      #|  inv(inv e + &1) * (inv e + &1) < e * (inv e + &1)
-      #|  e * inv e = &1
-      #|  inv(inv e + &1) * (inv e + &1) = &1
-      #|  &1 + x
-      #|  inv(e) + &1
-      #|  x:real
-      #|  exp x
-      #|  &1 + x
-      #|  inv(&1 + x)
-      #|  inv(inv(e) + &1)
-      #|  &0 < inv(e) + &1
-      #|  &0 < inv(e)
-      #|  abs(inv(exp x)) = inv(exp x)
-      #|  x:real
-      #|  inv(e) + &1
-      #|  e:real
-      #|  ((\\x. exp(--x)) ---> &0) at_posinfinity
-      #|  y:real
-      #|  &1
-      #|  y:real
-      #|  y:real
-      #|  y pow 2 >= N
-      #|  y:real
-      #|  max (&1) N
-      #|  N:real
-      #|  e:real
-      #|  e:real
-      #|  ((\\x. exp(--(x pow 2))) ---> &0) at_posinfinity
-      #|  t:real
-      #|  exp(--((B:real) pow 2))
-      #|  inv(&1 + (t:real) pow 2)
-      #|  &1
-      #|  t:real
-      #|  t:real
-      #|  (B:real) pow 2
-      #|  &1
-      #|  &1 + (t:real) pow 2
-      #|  exp(--(B pow 2)) * inv(&1 + t pow 2)
-      #|  forall B t. &0 <= t /\\ t <= &1\n    ==> exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2) <=\n        exp(--(B pow 2))
-      #|  a * (&1 - &0) = a
-      #|  t:real
-      #|  real_integral (real_interval[&0,&1])\n       (\\t. exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2)) <=\n      exp(--(B pow 2)) * (&1 - &0)
-      #|  abs(real_integral (real_interval[&0,&1])\n       (\\t. exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2))) =\n      real_integral (real_interval[&0,&1])\n       (\\t. exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2))
-      #|  t:real
-      #|  t:real
-      #|  &0 <= real_integral (real_interval[&0,&1])\n     (\\t. exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2))
-      #|  x:real
-      #|  (\\t. exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2))\n      real_integrable_on real_interval[&0,&1]
-      #|  B:real
-      #|  &0
-      #|  \\B:real. exp(--(B pow 2))
-      #|  ((\\B. real_integral (real_interval[&0,&1])\n          (\\t. exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2)))\n    ---> &0) at_posinfinity
-      #|  u:real
-      #|  (\\u. exp(--((c * u) pow 2)) * c) = (\\u. c * exp(--(c pow 2 * u pow 2)))
-      #|  {}:real->bool
-      #|  c:real
-      #|  &0
-      #|  &1
-      #|  &0
-      #|  \\u:real. c:real
-      #|  \\u:real. c * u
-      #|  \\t:real. exp(--(t pow 2))
-      #|  c:real
-      #|  forall x. &0 < x ==>\n   ((\\u. x * exp(--(x pow 2 * u pow 2)))\n    has_real_integral\n    real_integral (real_interval[&0,x]) (\\t. exp(--(t pow 2))))\n   (real_interval[&0,&1])
-      #|  &0 < &1 + u pow 2
-      #|  &2 * (inv(&2 * (&1 + u pow 2)) *\n     (exp(--((&1 + u pow 2) * &0 pow 2)) -\n      exp(--((&1 + u pow 2) * B pow 2)))) =\n     inv(&1 + u pow 2) * (&1 - exp(--((&1 + u pow 2) * B pow 2)))
-      #|  (\\x. &2 * (x * exp(--((&1 + u pow 2) * x pow 2)))) =\n     (\\x. &2 * x * exp(--((&1 + u pow 2) * x pow 2)))
-      #|  B:real
-      #|  &0
-      #|  &1 + u pow 2
-      #|  u:real
-      #|  &0 < &1 + u pow 2
-      #|  forall u B. &0 <= u /\\ &0 < B ==>\n   ((\\x. &2 * x * exp(--((&1 + u pow 2) * x pow 2)))\n    has_real_integral\n    inv(&1 + u pow 2) * (&1 - exp(--((&1 + u pow 2) * B pow 2))))\n   (real_interval[&0,B])
-      #|  &2
-      #|  lift(&0) :real^1 = vec 0
-      #|  forall(f:real->real) a. real_integral (real_interval[a,a]) f = &0
-      #|  forall a b. exp(--a) * exp(--b) = exp(--(a + b))
-      #|  lift o (drop:real^1->real) = I
-      #|  forall a b. IMAGE lift (real_interval[a,b]) = interval[lift a, lift b]
-      #|  (\\z:real^(1,1)finite_sum. lift(drop(fstcart z))) = fstcart
-      #|  (\\z:real^(1,1)finite_sum. lift(drop(sndcart z))) = sndcart
-      #|  (:real^1)
-      #|  forall s:real^1->bool. (lift o exp o drop) continuous_on s
-      #|  forall B. (\\t. exp(--(t pow 2))) real_continuous_on real_interval[&0,B]
-      #|  x':real
-      #|  forall x:real. (\\u. &2 * x * exp(--((&1 + u pow 2) * x pow 2)))\n            real_integrable_on real_interval[&0,&1]
-      #|  x:real
-      #|  forall B:real u. (\\x. &2 * x * exp(--((&1 + u pow 2) * x pow 2)))\n              real_integrable_on real_interval[&0,B]
-      #|  x:real
-      #|  B:real
-      #|  &0
-      #|  \\t:real. exp(--(t pow 2))
-      #|  forall B x. x IN real_interval[&0,B] ==>\n   ((\\u. real_integral(real_interval[&0,u]) (\\t. exp(--(t pow 2))))\n    has_real_derivative exp(--(x pow 2)))\n   (atreal x within real_interval[&0,B])
-      #|  real_interval[&0,B]
-      #|  x:real
-      #|  exp(--(x pow 2))
-      #|  \\x:real. real_integral(real_interval[&0,x]) (\\t. exp(--(t pow 2)))
-      #|  exp(--(x pow 2))
-      #|  \\x:real. real_integral(real_interval[&0,x]) (\\t. exp(--(t pow 2)))
-      #|  &2 * real_integral (real_interval[&0,x]) (\\t. exp(--(t pow 2))) *\n     exp(--(x pow 2)) =\n     real_integral (real_interval[&0,x]) (\\t. exp(--(t pow 2))) *\n     exp(--(x pow 2)) +\n     exp(--(x pow 2)) *\n     real_integral (real_interval[&0,x]) (\\t. exp(--(t pow 2)))
-      #|  (\\x. real_integral(real_interval[&0,x]) (\\t. exp(--(t pow 2))) pow 2) =\n     (\\x. real_integral(real_interval[&0,x]) (\\t. exp(--(t pow 2))) *\n          real_integral(real_interval[&0,x]) (\\t. exp(--(t pow 2))))
-      #|  x:real
-      #|  B:real
-      #|  &0
-      #|  \\x:real. &2 * real_integral(real_interval[&0,x])\n                    (\\t. exp(--(t pow 2))) * exp(--(x pow 2))
-      #|  \\x:real. real_integral(real_interval[&0,x]) (\\t. exp(--(t pow 2))) pow 2
-      #|  forall B. &0 <= B ==>\n   ((\\x. &2 * real_integral(real_interval[&0,x])\n                  (\\t. exp(--(t pow 2))) * exp(--(x pow 2)))\n    has_real_integral\n    (real_integral(real_interval[&0,B]) (\\t. exp(--(t pow 2))) pow 2))\n   (real_interval[&0,B])
-      #|  (&2 * exp(--(x pow 2))) *\n     real_integral(real_interval[&0,x]) (\\t. exp(--(t pow 2))) =\n     &2 * real_integral(real_interval[&0,x]) (\\t. exp(--(t pow 2))) *\n     exp(--(x pow 2))
-      #|  (&2 * exp(--(x pow 2))) * (x * exp(--(x pow 2 * u pow 2))) =\n       &2 * x * (exp(--(x pow 2)) * exp(--(x pow 2 * u pow 2)))
-      #|  u:real
-      #|  real_interval[&0,&1]
-      #|  (&2 * exp(--(x pow 2))) *\n      real_integral(real_interval[&0,x]) (\\t. exp(--(t pow 2)))
-      #|  \\u:real. &2 * x * exp(--((&1 + u pow 2) * x pow 2))
-      #|  \\u:real. (&2 * exp(--(x pow 2))) * (x * exp(--(x pow 2 * u pow 2)))
-      #|  x:real
-      #|  forall x. &0 < x ==>\n   ((\\u. &2 * x * exp(--((&1 + u pow 2) * x pow 2)))\n    has_real_integral\n    (&2 * real_integral(real_interval[&0,x]) (\\t. exp(--(t pow 2))) *\n     exp(--(x pow 2))))\n   (real_interval[&0,&1])
-      #|  &2 * exp(--(x pow 2))
-      #|  x:real
-      #|  forall x:real.\n   integral (interval[lift(&0),lift(&1)])\n     (\\u:real^1. lift(&2 * x * exp(--((&1 + drop u pow 2) * x pow 2)))) =\n   lift(real_integral (real_interval[&0,&1])\n     (\\u. &2 * x * exp(--((&1 + u pow 2) * x pow 2))))
-      #|  u:real
-      #|  B:real
-      #|  forall B u:real.\n   integral (interval[lift(&0),lift B])\n     (\\x:real^1. lift(&2 * drop x * exp(--((&1 + u pow 2) * drop x pow 2)))) =\n   lift(real_integral (real_interval[&0,B])\n     (\\x. &2 * x * exp(--((&1 + u pow 2) * x pow 2))))
-      #|  (lift o (\\z:real^(1,1)finite_sum. &1 + drop(sndcart z) pow 2)) =\n       (\\z. lift(&1) + lift(drop(sndcart z) pow 2))
-      #|  (\\z:real^(1,1)finite_sum.\n        lift((&1 + drop(sndcart z) pow 2) * drop(fstcart z) pow 2)) =\n      (\\z. (&1 + drop(sndcart z) pow 2) % lift(drop(fstcart z) pow 2))
-      #|  (\\z:real^(1,1)finite_sum.\n        lift(--((&1 + drop(sndcart z) pow 2) * drop(fstcart z) pow 2))) =\n      (\\z. --(lift((&1 + drop(sndcart z) pow 2) * drop(fstcart z) pow 2)))
-      #|  (\\z:real^(1,1)finite_sum.\n       lift(exp(--((&1 + drop(sndcart z) pow 2) * drop(fstcart z) pow 2)))) =\n     ((lift o exp o drop) :real^1->real^1) o\n     (\\z. lift(--((&1 + drop(sndcart z) pow 2) * drop(fstcart z) pow 2)))
-      #|  (lift o (\\z:real^(1,1)finite_sum. &2 * drop(fstcart z))) =\n      (\\z. &2 % (fstcart z:real^1))
-      #|  (\\z. lift(&2 * drop(fstcart z) *\n             exp(--((&1 + drop(sndcart z) pow 2) * drop(fstcart z) pow 2)))) =\n     (\\z:real^(1,1)finite_sum. (&2 * drop(fstcart z)) %\n             lift(exp(--((&1 + drop(sndcart z) pow 2) * drop(fstcart z) pow 2))))
-      #|  forall B. (\\z. lift(&2 * drop(fstcart z) *\n             exp(--((&1 + drop(sndcart z) pow 2) * drop(fstcart z) pow 2))))\n       continuous_on\n       (interval[pastecart (lift(&0)) (lift(&0)):real^(1,1)finite_sum,\n                 pastecart (lift B) (lift(&1))])
-      #|  x * a + a * (&1 - x) = a ==> x * a + a * (&1 - x) = a
-      #|  B pow 2 * (&1 + t pow 2) = (&1 + t pow 2) * B pow 2
-      #|  forall B t. exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2) +\n         inv(&1 + t pow 2) * (&1 - exp(--((&1 + t pow 2) * B pow 2))) =\n         inv(&1 + t pow 2)
-      #|  x:real
-      #|  forall B. (\\t. exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2))\n       real_integrable_on real_interval[&0,&1]
-      #|  x:real
-      #|  forall B. (\\u. inv(&1 + u pow 2) * (&1 - exp(--((&1 + u pow 2) * B pow 2))))\n       real_integrable_on real_interval[&0,&1]
-      #|  (\\u. inv(&1 + u pow 2) * (&1 - exp(--((&1 + u pow 2) * B pow 2))))\n     real_integrable_on real_interval[&0,&1]
-      #|  interval[lift(&0),lift(&1)]
-      #|  integral (interval[lift(&0),lift(&1)])\n       (lift o (\\u. inv(&1 + u pow 2) *\n         (&1 - exp(--((&1 + u pow 2) * B pow 2)))) o drop)
-      #|  (\\u:real^1. lift(real_integral (real_interval[&0,B])\n       (\\x. &2 * x * exp(--((&1 + drop u pow 2) * x pow 2)))))
-      #|  (lift o (\\u. inv(&1 + u pow 2) *\n       (&1 - exp(--((&1 + u pow 2) * B pow 2)))) o drop)
-      #|  u:real^1
+      #|  (x : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (x : Real) => real_of_num(2) * (real_integral(real_interval([((a : Real), x)]), (f : (Real) -> Real)) * f(x))
+      #|  (u : Real) => pow(real_integral(real_interval([((a : Real), u)]), (f : (Real) -> Real)), 2)
+      #|  real_integral(real_interval([((a : Real), a)]), (f : (Real) -> Real)) == real_of_num(0)
+      #|  pow(real_integral(real_interval([((a : Real), (b : Real))]), (f : (Real) -> Real)), 2) == pow(real_integral(real_interval([(a, b)]), f), 2) - pow(real_integral(real_interval([(a, a)]), f), 2)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, real_continuous_on(f, real_interval([(a, b)])) && a <= b \226\134\146 pow(real_integral(real_interval([(a, b)]), f), 2) == real_integral(real_interval([(a, b)]), (x : Real) => real_of_num(2) * (real_integral(real_interval([(a, x)]), f) * f(x)))
+      #|  pi / real_of_num(4) == atn(real_of_num(1)) - atn(real_of_num(0))
+      #|  has_real_integral((t : Real) => inv(real_of_num(1) + pow(t, 2)), pi / real_of_num(4), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  !(real_of_num(2) * (c : Real) == real_of_num(0))
+      #|  (x : Real) * exp(-((c : Real) * pow(x, 2))) == -inv(real_of_num(2) * c) * (-(c * (real_of_num(2) * x)) * exp(-(c * pow(x, 2))))
+      #|  !(real_of_num(2) * (c : Real) == real_of_num(0))
+      #|  inv(real_of_num(2) * (c : Real)) * (exp(-(c * pow((a : Real), 2))) - exp(-(c * pow((b : Real), 2)))) == -inv(real_of_num(2) * c) * exp(-(c * pow(b, 2))) - -inv(real_of_num(2) * c) * exp(-(c * pow(a, 2)))
+      #|  \226\136\128 c : Real, \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < c && a <= b \226\134\146 has_real_integral((x : Real) => x * exp(-(c * pow(x, 2))), inv(real_of_num(2) * c) * (exp(-(c * pow(a, 2))) - exp(-(c * pow(b, 2)))), real_interval([(a, b)]))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_integrable_on((x : Real) => exp(-pow(x, 2)), real_interval([(a, b)]))
+      #|  real_continuous_on((x : Real) => exp(-pow(x, 2)), real_interval([((a : Real), (b : Real))]))
+      #|  inv(inv((e : Real)) + real_of_num(1)) * (inv(e) + real_of_num(1)) < e * (inv(e) + real_of_num(1))
+      #|  (e : Real) * inv(e) == real_of_num(1)
+      #|  inv(inv((e : Real)) + real_of_num(1)) * (inv(e) + real_of_num(1)) == real_of_num(1)
+      #|  real_of_num(1) + (x : Real)
+      #|  inv((e : Real)) + real_of_num(1)
+      #|  (x : Real)
+      #|  exp((x : Real))
+      #|  real_of_num(1) + (x : Real)
+      #|  inv(real_of_num(1) + (x : Real))
+      #|  inv(inv((e : Real)) + real_of_num(1))
+      #|  real_of_num(0) < inv((e : Real)) + real_of_num(1)
+      #|  real_of_num(0) < inv((e : Real))
+      #|  abs(inv(exp((x : Real)))) == inv(exp(x))
+      #|  (x : Real)
+      #|  inv((e : Real)) + real_of_num(1)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((x : Real) => exp(-x), real_of_num(0), at_posinfinity)
+      #|  (y : Real)
+      #|  real_of_num(1)
+      #|  (y : Real)
+      #|  (y : Real)
+      #|  pow((y : Real), 2) >= (N : Real)
+      #|  (y : Real)
+      #|  max(real_of_num(1), (N : Real))
+      #|  (N : Real)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((x : Real) => exp(-pow(x, 2)), real_of_num(0), at_posinfinity)
+      #|  (t : Real)
+      #|  exp(-pow((B : Real), 2))
+      #|  inv(real_of_num(1) + pow((t : Real), 2))
+      #|  real_of_num(1)
+      #|  (t : Real)
+      #|  (t : Real)
+      #|  pow((B : Real), 2)
+      #|  real_of_num(1)
+      #|  real_of_num(1) + pow((t : Real), 2)
+      #|  exp(-pow((B : Real), 2)) * inv(real_of_num(1) + pow((t : Real), 2))
+      #|  \226\136\128 B : Real, \226\136\128 t : Real, real_of_num(0) <= t && t <= real_of_num(1) \226\134\146 exp(-(pow(B, 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2)) <= exp(-pow(B, 2))
+      #|  (a : Real) * (real_of_num(1) - real_of_num(0)) == a
+      #|  (t : Real)
+      #|  real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (t : Real) => exp(-(pow((B : Real), 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2))) <= exp(-pow(B, 2)) * (real_of_num(1) - real_of_num(0))
+      #|  abs(real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (t : Real) => exp(-(pow((B : Real), 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2)))) == real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (t : Real) => exp(-(pow(B, 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2)))
+      #|  (t : Real)
+      #|  (t : Real)
+      #|  real_of_num(0) <= real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (t : Real) => exp(-(pow((B : Real), 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2)))
+      #|  (x : Real)
+      #|  real_integrable_on((t : Real) => exp(-(pow((B : Real), 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2)), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  (B : Real)
+      #|  real_of_num(0)
+      #|  (B : Real) => exp(-pow(B, 2))
+      #|  op_minus_minus_minus_gt((B : Real) => real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (t : Real) => exp(-(pow(B, 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2))), real_of_num(0), at_posinfinity)
+      #|  (u : Real)
+      #|  ((u : Real) => exp(-pow((c : Real) * u, 2)) * c) == ((u : Real) => c * exp(-(pow(c, 2) * pow(u, 2))))
+      #|  ({} : (Real) -> Bool)
+      #|  (c : Real)
+      #|  real_of_num(0)
+      #|  real_of_num(1)
+      #|  real_of_num(0)
+      #|  (u : Real) => (c : Real)
+      #|  (u : Real) => (c : Real) * u
+      #|  (t : Real) => exp(-pow(t, 2))
+      #|  (c : Real)
+      #|  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 has_real_integral((u : Real) => x * exp(-(pow(x, 2) * pow(u, 2))), real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2))), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  real_of_num(0) < real_of_num(1) + pow((u : Real), 2)
+      #|  real_of_num(2) * (inv(real_of_num(2) * (real_of_num(1) + pow((u : Real), 2))) * (exp(-((real_of_num(1) + pow(u, 2)) * pow(real_of_num(0), 2))) - exp(-((real_of_num(1) + pow(u, 2)) * pow((B : Real), 2))))) == inv(real_of_num(1) + pow(u, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(u, 2)) * pow(B, 2))))
+      #|  ((x : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow((u : Real), 2)) * pow(x, 2))))) == ((x : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(u, 2)) * pow(x, 2)))))
+      #|  (B : Real)
+      #|  real_of_num(0)
+      #|  real_of_num(1) + pow((u : Real), 2)
+      #|  (u : Real)
+      #|  real_of_num(0) < real_of_num(1) + pow((u : Real), 2)
+      #|  \226\136\128 u : Real, \226\136\128 B : Real, real_of_num(0) <= u && real_of_num(0) < B \226\134\146 has_real_integral((x : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(u, 2)) * pow(x, 2)))), inv(real_of_num(1) + pow(u, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(u, 2)) * pow(B, 2)))), real_interval([(real_of_num(0), B)]))
+      #|  real_of_num(2)
+      #|  lift(real_of_num(0)) == vec(0)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, real_integral(real_interval([(a, a)]), f) == real_of_num(0)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, exp(-a) * exp(-b) == exp(-(a + b))
+      #|  o(lift, drop) == I
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, IMAGE(lift, real_interval([(a, b)])) == interval([(lift(a), lift(b))])
+      #|  ((z : Cart[Real, Finite_sum[Unit, Unit]]) => lift(drop(fstcart(z)))) == fstcart
+      #|  ((z : Cart[Real, Finite_sum[Unit, Unit]]) => lift(drop(sndcart(z)))) == sndcart
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, Unit]) -> Bool, continuous_on(o(lift, o(exp, drop)), s)
+      #|  \226\136\128 B : Real, real_continuous_on((t : Real) => exp(-pow(t, 2)), real_interval([(real_of_num(0), B)]))
+      #|  (x' : Real)
+      #|  \226\136\128 x : Real, real_integrable_on((u : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(u, 2)) * pow(x, 2)))), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  (x : Real)
+      #|  \226\136\128 B : Real, \226\136\128 u : Real, real_integrable_on((x : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(u, 2)) * pow(x, 2)))), real_interval([(real_of_num(0), B)]))
+      #|  (x : Real)
+      #|  (B : Real)
+      #|  real_of_num(0)
+      #|  (t : Real) => exp(-pow(t, 2))
+      #|  \226\136\128 B : Real, \226\136\128 x : Real, IN(x, real_interval([(real_of_num(0), B)])) \226\134\146 has_real_derivative((u : Real) => real_integral(real_interval([(real_of_num(0), u)]), (t : Real) => exp(-pow(t, 2))), exp(-pow(x, 2)), within(atreal(x), real_interval([(real_of_num(0), B)])))
+      #|  real_interval([(real_of_num(0), (B : Real))])
+      #|  (x : Real)
+      #|  exp(-pow((x : Real), 2))
+      #|  (x : Real) => real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2)))
+      #|  exp(-pow((x : Real), 2))
+      #|  (x : Real) => real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2)))
+      #|  real_of_num(2) * (real_integral(real_interval([(real_of_num(0), (x : Real))]), (t : Real) => exp(-pow(t, 2))) * exp(-pow(x, 2))) == real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2))) * exp(-pow(x, 2)) + exp(-pow(x, 2)) * real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2)))
+      #|  ((x : Real) => pow(real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2))), 2)) == ((x : Real) => real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2))) * real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2))))
+      #|  (x : Real)
+      #|  (B : Real)
+      #|  real_of_num(0)
+      #|  (x : Real) => real_of_num(2) * (real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2))) * exp(-pow(x, 2)))
+      #|  (x : Real) => pow(real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2))), 2)
+      #|  \226\136\128 B : Real, real_of_num(0) <= B \226\134\146 has_real_integral((x : Real) => real_of_num(2) * (real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2))) * exp(-pow(x, 2))), pow(real_integral(real_interval([(real_of_num(0), B)]), (t : Real) => exp(-pow(t, 2))), 2), real_interval([(real_of_num(0), B)]))
+      #|  real_of_num(2) * exp(-pow((x : Real), 2)) * real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2))) == real_of_num(2) * (real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2))) * exp(-pow(x, 2)))
+      #|  real_of_num(2) * exp(-pow((x : Real), 2)) * (x * exp(-(pow(x, 2) * pow((u : Real), 2)))) == real_of_num(2) * (x * (exp(-pow(x, 2)) * exp(-(pow(x, 2) * pow(u, 2)))))
+      #|  (u : Real)
+      #|  real_interval([(real_of_num(0), real_of_num(1))])
+      #|  real_of_num(2) * exp(-pow((x : Real), 2)) * real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2)))
+      #|  (u : Real) => real_of_num(2) * ((x : Real) * exp(-((real_of_num(1) + pow(u, 2)) * pow(x, 2))))
+      #|  (u : Real) => real_of_num(2) * exp(-pow((x : Real), 2)) * (x * exp(-(pow(x, 2) * pow(u, 2))))
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 has_real_integral((u : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(u, 2)) * pow(x, 2)))), real_of_num(2) * (real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2))) * exp(-pow(x, 2))), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  real_of_num(2) * exp(-pow((x : Real), 2))
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, integral(interval([(lift(real_of_num(0)), lift(real_of_num(1)))]), (u : Cart[Real, Unit]) => lift(real_of_num(2) * (x * exp(-((real_of_num(1) + pow(drop(u), 2)) * pow(x, 2)))))) == lift(real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (u : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(u, 2)) * pow(x, 2))))))
+      #|  (u : Real)
+      #|  (B : Real)
+      #|  \226\136\128 B : Real, \226\136\128 u : Real, integral(interval([(lift(real_of_num(0)), lift(B))]), (x : Cart[Real, Unit]) => lift(real_of_num(2) * (drop(x) * exp(-((real_of_num(1) + pow(u, 2)) * pow(drop(x), 2)))))) == lift(real_integral(real_interval([(real_of_num(0), B)]), (x : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(u, 2)) * pow(x, 2))))))
+      #|  o(lift, (z : Cart[Real, Finite_sum[Unit, Unit]]) => real_of_num(1) + pow(drop(sndcart(z)), 2)) == ((z : Cart[Real, Finite_sum[Unit, Unit]]) => lift(real_of_num(1)) + lift(pow(drop(sndcart(z)), 2)))
+      #|  ((z : Cart[Real, Finite_sum[Unit, Unit]]) => lift((real_of_num(1) + pow(drop(sndcart(z)), 2)) * pow(drop(fstcart(z)), 2))) == ((z : Cart[Real, Finite_sum[Unit, Unit]]) => op_pct(real_of_num(1) + pow(drop(sndcart(z)), 2), lift(pow(drop(fstcart(z)), 2))))
+      #|  ((z : Cart[Real, Finite_sum[Unit, Unit]]) => lift(-((real_of_num(1) + pow(drop(sndcart(z)), 2)) * pow(drop(fstcart(z)), 2)))) == ((z : Cart[Real, Finite_sum[Unit, Unit]]) => -lift((real_of_num(1) + pow(drop(sndcart(z)), 2)) * pow(drop(fstcart(z)), 2)))
+      #|  ((z : Cart[Real, Finite_sum[Unit, Unit]]) => lift(exp(-((real_of_num(1) + pow(drop(sndcart(z)), 2)) * pow(drop(fstcart(z)), 2))))) == o(o(lift, o(exp, drop)), (z : Cart[Real, Finite_sum[Unit, Unit]]) => lift(-((real_of_num(1) + pow(drop(sndcart(z)), 2)) * pow(drop(fstcart(z)), 2))))
+      #|  o(lift, (z : Cart[Real, Finite_sum[Unit, Unit]]) => real_of_num(2) * drop(fstcart(z))) == ((z : Cart[Real, Finite_sum[Unit, Unit]]) => op_pct(real_of_num(2), fstcart(z)))
+      #|  ((z : Cart[Real, Finite_sum[Unit, Unit]]) => lift(real_of_num(2) * (drop(fstcart(z)) * exp(-((real_of_num(1) + pow(drop(sndcart(z)), 2)) * pow(drop(fstcart(z)), 2)))))) == ((z : Cart[Real, Finite_sum[Unit, Unit]]) => op_pct(real_of_num(2) * drop(fstcart(z)), lift(exp(-((real_of_num(1) + pow(drop(sndcart(z)), 2)) * pow(drop(fstcart(z)), 2))))))
+      #|  \226\136\128 B : Real, continuous_on((z : Cart[Real, Finite_sum[Unit, Unit]]) => lift(real_of_num(2) * (drop(fstcart(z)) * exp(-((real_of_num(1) + pow(drop(sndcart(z)), 2)) * pow(drop(fstcart(z)), 2))))), interval([(pastecart(lift(real_of_num(0)), lift(real_of_num(0))), pastecart(lift(B), lift(real_of_num(1))))]))
+      #|  (x : Real) * (a : Real) + a * (real_of_num(1) - x) == a \226\134\146 x * a + a * (real_of_num(1) - x) == a
+      #|  pow((B : Real), 2) * (real_of_num(1) + pow((t : Real), 2)) == (real_of_num(1) + pow(t, 2)) * pow(B, 2)
+      #|  \226\136\128 B : Real, \226\136\128 t : Real, exp(-(pow(B, 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2)) + inv(real_of_num(1) + pow(t, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(t, 2)) * pow(B, 2)))) == inv(real_of_num(1) + pow(t, 2))
+      #|  (x : Real)
+      #|  \226\136\128 B : Real, real_integrable_on((t : Real) => exp(-(pow(B, 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2)), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  (x : Real)
+      #|  \226\136\128 B : Real, real_integrable_on((u : Real) => inv(real_of_num(1) + pow(u, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(u, 2)) * pow(B, 2)))), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  real_integrable_on((u : Real) => inv(real_of_num(1) + pow(u, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(u, 2)) * pow((B : Real), 2)))), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  interval([(lift(real_of_num(0)), lift(real_of_num(1)))])
+      #|  integral(interval([(lift(real_of_num(0)), lift(real_of_num(1)))]), o(lift, o((u : Real) => inv(real_of_num(1) + pow(u, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(u, 2)) * pow((B : Real), 2)))), drop)))
+      #|  (u : Cart[Real, Unit]) => lift(real_integral(real_interval([(real_of_num(0), (B : Real))]), (x : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(drop(u), 2)) * pow(x, 2))))))
+      #|  o(lift, o((u : Real) => inv(real_of_num(1) + pow(u, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(u, 2)) * pow((B : Real), 2)))), drop))
+      #|  (u : Cart[Real, Unit])
       #|  forall u:real^1. u IN interval[lift(&0),lift(&1)] ==>\n     (lift o (\\u. inv(&1 + u pow 2) *\n       (&1 - exp(--((&1 + u pow 2) * B pow 2)))) o drop) u =\n     lift(real_integral (real_interval[&0,B])\n       (\\x. &2 * x * exp(--((&1 + drop u pow 2) * x pow 2))))
-      #|  (lift o (\\u. inv(&1 + u pow 2) *\n       (&1 - exp(--((&1 + u pow 2) * B pow 2)))) o drop)\n     integrable_on interval[lift(&0),lift(&1)]
-      #|  B:real
-      #|  (lift o (\\u. inv(&1 + u pow 2) *\n       (&1 - exp(--((&1 + u pow 2) * B pow 2)))) o drop)\n     integrable_on interval[lift(&0),lift(&1)]
-      #|  (\\u. inv(&1 + u pow 2) * (&1 - exp(--((&1 + u pow 2) * B pow 2))))\n     real_integrable_on real_interval[&0,&1]
-      #|  B:real
-      #|  u:real^1
-      #|  forall u:real^1. u IN interval[lift(&0), lift(&1)] ==>\n     real_integral (real_interval[&0,B])\n       (\\x. &2 * x * exp(--((&1 + drop u pow 2) * x pow 2))) =\n     inv(&1 + drop u pow 2) * (&1 - exp(--((&1 + drop u pow 2) * B pow 2)))
-      #|  lift(&1):real^1
-      #|  lift(&0):real^1
-      #|  lift(B:real):real^1
-      #|  lift(&0):real^1
-      #|  \\x u:real^1. lift(&2 * drop x *\n        exp(--((&1 + drop u pow 2) * drop x pow 2)))
-      #|  integral (interval[lift(&0),lift B])\n      (\\x:real^1. integral (interval[lift(&0),lift(&1)])\n        (\\u:real^1. lift(&2 * drop x *\n          exp(--((&1 + drop u pow 2) * drop x pow 2))))) =\n     integral (interval[lift(&0),lift(&1)])\n      (\\u:real^1. integral (interval[lift(&0),lift B])\n        (\\x:real^1. lift(&2 * drop x *\n          exp(--((&1 + drop u pow 2) * drop x pow 2)))))
-      #|  x:real^1
-      #|  (lift o (\\x. real_integral (real_interval[&0,&1])\n       (\\u. &2 * x * exp(--((&1 + u pow 2) * x pow 2)))) o drop) =\n     (\\x:real^1. integral (interval[lift(&0),lift(&1)])\n       (\\u:real^1. lift(&2 * drop x * exp(--((&1 + drop u pow 2) *\n                                             drop x pow 2)))))
-      #|  (\\x. real_integral (real_interval[&0,&1])\n       (\\u. &2 * x * exp(--((&1 + u pow 2) * x pow 2))))\n     real_integrable_on real_interval[&0,B]
-      #|  real_integral (real_interval[&0,B]) (\\x. exp(--(x pow 2))) pow 2 =\n     real_integral (real_interval[&0,B])\n       (\\x. real_integral (real_interval[&0,&1])\n         (\\u. &2 * x * exp(--((&1 + u pow 2) * x pow 2))))
-      #|  (\\x. real_integral (real_interval[&0,&1])\n       (\\u. &2 * x * exp(--((&1 + u pow 2) * x pow 2))))\n     real_integrable_on real_interval[&0,B]
-      #|  real_interval[&0,B]
-      #|  real_integral (real_interval[&0,B]) (\\x. exp(--(x pow 2))) pow 2
-      #|  \\x:real. real_integral (real_interval[&0,&1])\n                 (\\u. &2 * x * exp(--((&1 + u pow 2) * x pow 2)))
-      #|  \\x:real. &2 * real_integral (real_interval[&0,x])\n                 (\\t. exp(--(t pow 2))) * exp(--(x pow 2))
-      #|  ((\\x. real_integral (real_interval[&0,&1])\n       (\\u. &2 * x * exp(--((&1 + u pow 2) * x pow 2))))\n     has_real_integral\n     (real_integral (real_interval[&0,B]) (\\x. exp(--(x pow 2))) pow 2))\n     (real_interval[&0,B])
-      #|  x = &0
-      #|  &0 < x
-      #|  x:real
-      #|  forall x:real. x IN real_interval[&0,B] ==>\n     &2 * real_integral (real_interval[&0,x]) (\\t. exp(--(t pow 2))) *\n       exp(--(x pow 2)) =\n     real_integral (real_interval[&0,&1])\n       (\\u. &2 * x * exp(--((&1 + u pow 2) * x pow 2)))
-      #|  B:real
-      #|  &0 <= B
-      #|  forall B. &0 < B ==>\n   real_integral (real_interval[&0,B])\n     (\\x. exp(--(x pow 2))) pow 2 =\n   real_integral (real_interval[&0,&1])\n     (\\u. inv(&1 + u pow 2) * (&1 - exp(--((&1 + u pow 2) * B pow 2))))
-      #|  (\\t. exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2) +\n          inv(&1 + t pow 2) * (&1 - exp(--((&1 + t pow 2) * B pow 2)))) =\n     (\\t. inv(&1 + t pow 2))
-      #|  real_interval[&0,&1]
-      #|  \\u. inv(&1 + u pow 2) * (&1 - exp(--((&1 + u pow 2) * B pow 2)))
-      #|  \\t. exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2)
-      #|  forall B. &0 < B\n   ==> real_integral (real_interval[&0,&1])\n         (\\t. exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2)) +\n       real_integral (real_interval[&0,B])\n         (\\x. exp(--(x pow 2))) pow 2 = pi / &4
-      #|  x:real
-      #|  forall B. &0 <= B ==>\n   &0 <= real_integral (real_interval[&0,B]) (\\x. exp(--(x pow 2)))
-      #|  B:real
-      #|  forall B. &0 < B ==>\n   real_integral (real_interval[&0,B])\n     (\\x. exp(--(x pow 2))) pow 2 =\n   pi / &4 -\n   real_integral (real_interval[&0,&1])\n     (\\t. exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2))
-      #|  t:real
-      #|  t:real
-      #|  x:real
-      #|  (\\t. exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2))\n     real_integrable_on real_interval[&0,&1]
-      #|  forall B. &0 <=\n   real_integral (real_interval[&0,&1])\n     (\\t. exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2))
-      #|  sqrt(pi) pow 2 = pi
-      #|  (sqrt(pi) / &2) pow 2 = pi / &4
-      #|  sqrt(pi) / &2
-      #|  abs(I_B - sqrt(pi) / &2) * (sqrt(pi) / &2) < e * sqrt(pi) / &2
-      #|  abs(I_B - sqrt(pi) / &2) * (sqrt(pi) / &2) <=\n     abs(I_B - sqrt(pi) / &2) * (I_B + sqrt(pi) / &2)
-      #|  (sqrt(pi) / &2 - I_B) * (I_B + sqrt(pi) / &2) =\n      (sqrt(pi) / &2) pow 2 - I_B pow 2
-      #|  abs(I_B - sqrt(pi) / &2) * (I_B + sqrt(pi) / &2) = H_B
-      #|  abs(I_B - sqrt(pi) / &2) = sqrt(pi) / &2 - I_B
-      #|  &0 < (I_B - sqrt(pi) / &2) * (I_B + sqrt(pi) / &2)
-      #|  ~(&0 < x) ==> x <= &0
-      #|  I_B - sqrt(pi) / &2 <= &0
-      #|  &0 < I_B + sqrt(pi) / &2
-      #|  sqrt(pi) / &2 <= I_B + sqrt(pi) / &2
-      #|  (I_B - sqrt(pi) / &2) * (I_B + sqrt(pi) / &2) =\n      I_B pow 2 - (sqrt(pi) / &2) pow 2
-      #|  (I_B - sqrt(pi) / &2) * (I_B + sqrt(pi) / &2) = --H_B
-      #|  (sqrt(pi) / &2) pow 2 = pi / &4
-      #|  H_B < e * sqrt(pi) / &2
-      #|  B:real
-      #|  abs(H_B - &0) < e * sqrt(pi) / &2
-      #|  &0 <= H_B
-      #|  I_B pow 2 = pi / &4 - H_B
-      #|  &0 <= I_B
-      #|  H_B = real_integral (real_interval[&0,&1])\n      (\\t. exp(--(B pow 2 * (&1 + t pow 2))) * inv(&1 + t pow 2))
-      #|  I_B = real_integral (real_interval[&0,B]) (\\x. exp(--(x pow 2)))
-      #|  B >= N
-      #|  &0 < B
-      #|  B:real
-      #|  max (&1) N
-      #|  N:real
-      #|  e * sqrt(pi) / &2
-      #|  &0 < sqrt(pi) / &2
-      #|  e:real
-      #|  ((\\B. real_integral (real_interval[&0,B])\n          (\\x. exp(--(x pow 2)))) ---> sqrt(pi) / &2) at_posinfinity
-      #|  sqrt pi = sqrt(pi) / &2 + sqrt(pi) / &2
-      #|  b:real
-      #|  abs(real_integral (real_interval[&0,b])\n           (\\x. exp(--(x pow 2))) - sqrt(pi) / &2) < e / &2
-      #|  --a:real
-      #|  abs(real_integral (real_interval[&0,--a])\n           (\\x. exp(--(x pow 2))) - sqrt(pi) / &2) < e / &2
-      #|  b >= N
-      #|  --a >= N
-      #|  --y:real
-      #|  y:real
-      #|  IMAGE (--) (real_interval[&0,--a]) = real_interval[a,&0]
-      #|  (forall x:real. exp(--((--x) pow 2)) = exp(--(x pow 2)))
-      #|  real_interval[&0,--a]
-      #|  \\x:real. exp(--(x pow 2))
-      #|  real_integral (real_interval[a,&0]) (\\x. exp(--(x pow 2))) =\n     real_integral (real_interval[&0,--a]) (\\x. exp(--(x pow 2)))
-      #|  real_integral (real_interval[a,b]) (\\x. exp(--(x pow 2))) =\n     real_integral (real_interval[a,&0]) (\\x. exp(--(x pow 2))) +\n     real_integral (real_interval[&0,b]) (\\x. exp(--(x pow 2)))
-      #|  a <= b:real
-      #|  a < &0
-      #|  &0 < b
-      #|  a <= --(max (&1) N) /\\ max (&1) N <= b
-      #|  b:real
-      #|  a:real
-      #|  max (&1) N
-      #|  N:real
-      #|  e / &2
-      #|  e:real
-      #|  ((\\x. exp(--(x pow 2))) has_real_integral sqrt pi) (:real)
-      #|  &0 < &2
-      #|  t:real
-      #|  \\x:real. exp(--((sqrt(a / &2) * x) pow 2))
-      #|  &0 < a
-      #|  sqrt(&2 * pi / a) = inv(sqrt(a / &2)) * sqrt pi
-      #|  &0 < sqrt(a / &2)
-      #|  forall a. &0 < a\n   ==> ((\\t. exp(--(a * t pow 2 / &2))) has_real_integral\n        sqrt(&2 * pi / a)) (:real)
-      #|  abs x <= x <=> &0 <= x
-      #|  exp(--(a * x pow 2 / &2)) * &1
-      #|  sqrt(&2 * pi / a)
-      #|  \\t:real. exp(--(a * t pow 2 / &2))
-      #|  forall a b. &0 < a\n   ==> (\\t. exp(--(a * t pow 2 / &2)) * cos(b * t))\n       real_integrable_on (:real)
-      #|  y + --y = &0
-      #|  y:real
-      #|  exp y * exp(--y)
-      #|  forall y. &0 <= y ==> y * exp(--y) <= &1
-      #|  ~(a = &0)
-      #|  x pow 2 * exp(--(a * x pow 2 / &4)) =\n                (&4 / a) *\n                ((a * x pow 2 / &4) * exp(--(a * x pow 2 / &4)))
-      #|  exp(--(a * x pow 2 / &2)) =\n                exp(--(a * x pow 2 / &4)) * exp(--(a * x pow 2 / &4))
-      #|  (a / &2) * x pow 2 / &2 = a * x pow 2 / &4
-      #|  forall a x. &0 < a\n   ==> x pow 2 * exp(--(a * x pow 2 / &2)) <=\n       (&4 / a) * exp(--((a / &2) * x pow 2 / &2))
-      #|  abs(x pow 2 * exp(--(a * x pow 2 / &2))) =\n                  x pow 2 * exp(--(a * x pow 2 / &2))
-      #|  sqrt(&2 * pi / (a / &2))
-      #|  \\t:real. (&4 / a) * exp(--((a / &2) * t pow 2 / &2))
-      #|  forall a. &0 < a\n   ==> (\\t. t pow 2 * exp(--(a * t pow 2 / &2)))\n       real_integrable_on (:real)
-      #|  x:real
-      #|  abs x * abs x
-      #|  x:real
-      #|  forall u. u <= &1 \\/ &1 <= u
-      #|  abs(x:real)
-      #|  forall x:real. abs x <= &1 + x pow 2
-      #|  (&1 + x pow 2) * exp(--(a * x pow 2 / &2))
-      #|  abs(exp(--(a * x pow 2 / &2))) = exp(--(a * x pow 2 / &2))
-      #|  abs x * exp(--(a * x pow 2 / &2))
-      #|  sqrt(&2 * pi / a)
-      #|  \\t:real. exp(--(a * t pow 2 / &2)) +\n                       t pow 2 * exp(--(a * t pow 2 / &2))
-      #|  forall a b. &0 < a\n   ==> (\\t. t * exp(--(a * t pow 2 / &2)) * sin(b * t))\n       real_integrable_on (:real)
-      #|  h:real
-      #|  abs h pow 2 = h pow 2
-      #|  abs h pow 2 / &2
-      #|  cos(x + h) - cos x + h * sin x =\n                cos(x + h) - (cos x + --(sin x) * h)
-      #|  (x + h) - x = h:real
-      #|  x + h:real
-      #|  x:real
-      #|  ~(2 = 1)
-      #|  ~(2 = 0)
-      #|  1 + 1 = 2
-      #|  u:real
-      #|  ~(2 = 1)
-      #|  ~(2 = 0)
-      #|  1 = 1 <=> T
-      #|  1 = 0 <=> F
-      #|  0 = 0 <=> T
-      #|  1 + 1 = 2
-      #|  0 + 1 = 1
-      #|  i = 0 \\/ i = 1
-      #|  &1
-      #|  (:real)
+      #|  integrable_on(o(lift, o((u : Real) => inv(real_of_num(1) + pow(u, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(u, 2)) * pow((B : Real), 2)))), drop)), interval([(lift(real_of_num(0)), lift(real_of_num(1)))]))
+      #|  (B : Real)
+      #|  integrable_on(o(lift, o((u : Real) => inv(real_of_num(1) + pow(u, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(u, 2)) * pow((B : Real), 2)))), drop)), interval([(lift(real_of_num(0)), lift(real_of_num(1)))]))
+      #|  real_integrable_on((u : Real) => inv(real_of_num(1) + pow(u, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(u, 2)) * pow((B : Real), 2)))), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  (B : Real)
+      #|  (u : Cart[Real, Unit])
+      #|  \226\136\128 u : Cart[Real, Unit], IN(u, interval([(lift(real_of_num(0)), lift(real_of_num(1)))])) \226\134\146 real_integral(real_interval([(real_of_num(0), (B : Real))]), (x : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(drop(u), 2)) * pow(x, 2))))) == inv(real_of_num(1) + pow(drop(u), 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(drop(u), 2)) * pow(B, 2))))
+      #|  lift(real_of_num(1))
+      #|  lift(real_of_num(0))
+      #|  lift((B : Real))
+      #|  lift(real_of_num(0))
+      #|  (x : Cart[Real, Unit]) => (u : Cart[Real, Unit]) => lift(real_of_num(2) * (drop(x) * exp(-((real_of_num(1) + pow(drop(u), 2)) * pow(drop(x), 2)))))
+      #|  integral(interval([(lift(real_of_num(0)), lift((B : Real)))]), (x : Cart[Real, Unit]) => integral(interval([(lift(real_of_num(0)), lift(real_of_num(1)))]), (u : Cart[Real, Unit]) => lift(real_of_num(2) * (drop(x) * exp(-((real_of_num(1) + pow(drop(u), 2)) * pow(drop(x), 2))))))) == integral(interval([(lift(real_of_num(0)), lift(real_of_num(1)))]), (u : Cart[Real, Unit]) => integral(interval([(lift(real_of_num(0)), lift(B))]), (x : Cart[Real, Unit]) => lift(real_of_num(2) * (drop(x) * exp(-((real_of_num(1) + pow(drop(u), 2)) * pow(drop(x), 2)))))))
+      #|  (x : Cart[Real, Unit])
+      #|  o(lift, o((x : Real) => real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (u : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(u, 2)) * pow(x, 2))))), drop)) == ((x : Cart[Real, Unit]) => integral(interval([(lift(real_of_num(0)), lift(real_of_num(1)))]), (u : Cart[Real, Unit]) => lift(real_of_num(2) * (drop(x) * exp(-((real_of_num(1) + pow(drop(u), 2)) * pow(drop(x), 2)))))))
+      #|  real_integrable_on((x : Real) => real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (u : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(u, 2)) * pow(x, 2))))), real_interval([(real_of_num(0), (B : Real))]))
+      #|  pow(real_integral(real_interval([(real_of_num(0), (B : Real))]), (x : Real) => exp(-pow(x, 2))), 2) == real_integral(real_interval([(real_of_num(0), B)]), (x : Real) => real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (u : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(u, 2)) * pow(x, 2))))))
+      #|  real_integrable_on((x : Real) => real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (u : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(u, 2)) * pow(x, 2))))), real_interval([(real_of_num(0), (B : Real))]))
+      #|  real_interval([(real_of_num(0), (B : Real))])
+      #|  pow(real_integral(real_interval([(real_of_num(0), (B : Real))]), (x : Real) => exp(-pow(x, 2))), 2)
+      #|  (x : Real) => real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (u : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(u, 2)) * pow(x, 2)))))
+      #|  (x : Real) => real_of_num(2) * (real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2))) * exp(-pow(x, 2)))
+      #|  has_real_integral((x : Real) => real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (u : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(u, 2)) * pow(x, 2))))), pow(real_integral(real_interval([(real_of_num(0), (B : Real))]), (x : Real) => exp(-pow(x, 2))), 2), real_interval([(real_of_num(0), B)]))
+      #|  (x : Real) == real_of_num(0)
+      #|  real_of_num(0) < (x : Real)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, IN(x, real_interval([(real_of_num(0), (B : Real))])) \226\134\146 real_of_num(2) * (real_integral(real_interval([(real_of_num(0), x)]), (t : Real) => exp(-pow(t, 2))) * exp(-pow(x, 2))) == real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (u : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(u, 2)) * pow(x, 2)))))
+      #|  (B : Real)
+      #|  real_of_num(0) <= (B : Real)
+      #|  \226\136\128 B : Real, real_of_num(0) < B \226\134\146 pow(real_integral(real_interval([(real_of_num(0), B)]), (x : Real) => exp(-pow(x, 2))), 2) == real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (u : Real) => inv(real_of_num(1) + pow(u, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(u, 2)) * pow(B, 2)))))
+      #|  ((t : Real) => exp(-(pow((B : Real), 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2)) + inv(real_of_num(1) + pow(t, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(t, 2)) * pow(B, 2))))) == ((t : Real) => inv(real_of_num(1) + pow(t, 2)))
+      #|  real_interval([(real_of_num(0), real_of_num(1))])
+      #|  (u : Real) => inv(real_of_num(1) + pow(u, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(u, 2)) * pow((B : Real), 2))))
+      #|  (t : Real) => exp(-(pow((B : Real), 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2))
+      #|  \226\136\128 B : Real, real_of_num(0) < B \226\134\146 real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (t : Real) => exp(-(pow(B, 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2))) + pow(real_integral(real_interval([(real_of_num(0), B)]), (x : Real) => exp(-pow(x, 2))), 2) == pi / real_of_num(4)
+      #|  (x : Real)
+      #|  \226\136\128 B : Real, real_of_num(0) <= B \226\134\146 real_of_num(0) <= real_integral(real_interval([(real_of_num(0), B)]), (x : Real) => exp(-pow(x, 2)))
+      #|  (B : Real)
+      #|  \226\136\128 B : Real, real_of_num(0) < B \226\134\146 pow(real_integral(real_interval([(real_of_num(0), B)]), (x : Real) => exp(-pow(x, 2))), 2) == pi / real_of_num(4) - real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (t : Real) => exp(-(pow(B, 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2)))
+      #|  (t : Real)
+      #|  (t : Real)
+      #|  (x : Real)
+      #|  real_integrable_on((t : Real) => exp(-(pow((B : Real), 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2)), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  \226\136\128 B : Real, real_of_num(0) <= real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (t : Real) => exp(-(pow(B, 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2)))
+      #|  pow(sqrt(pi), 2) == pi
+      #|  pow(sqrt(pi) / real_of_num(2), 2) == pi / real_of_num(4)
+      #|  sqrt(pi) / real_of_num(2)
+      #|  abs((I_B : Real) - sqrt(pi) / real_of_num(2)) * (sqrt(pi) / real_of_num(2)) < (e : Real) * (sqrt(pi) / real_of_num(2))
+      #|  abs((I_B : Real) - sqrt(pi) / real_of_num(2)) * (sqrt(pi) / real_of_num(2)) <= abs(I_B - sqrt(pi) / real_of_num(2)) * (I_B + sqrt(pi) / real_of_num(2))
+      #|  (sqrt(pi) / real_of_num(2) - (I_B : Real)) * (I_B + sqrt(pi) / real_of_num(2)) == pow(sqrt(pi) / real_of_num(2), 2) - pow(I_B, 2)
+      #|  abs((I_B : Real) - sqrt(pi) / real_of_num(2)) * (I_B + sqrt(pi) / real_of_num(2)) == (H_B : Real)
+      #|  abs((I_B : Real) - sqrt(pi) / real_of_num(2)) == sqrt(pi) / real_of_num(2) - I_B
+      #|  real_of_num(0) < ((I_B : Real) - sqrt(pi) / real_of_num(2)) * (I_B + sqrt(pi) / real_of_num(2))
+      #|  !(real_of_num(0) < (x : Real)) \226\134\146 x <= real_of_num(0)
+      #|  (I_B : Real) - sqrt(pi) / real_of_num(2) <= real_of_num(0)
+      #|  real_of_num(0) < (I_B : Real) + sqrt(pi) / real_of_num(2)
+      #|  sqrt(pi) / real_of_num(2) <= (I_B : Real) + sqrt(pi) / real_of_num(2)
+      #|  ((I_B : Real) - sqrt(pi) / real_of_num(2)) * (I_B + sqrt(pi) / real_of_num(2)) == pow(I_B, 2) - pow(sqrt(pi) / real_of_num(2), 2)
+      #|  ((I_B : Real) - sqrt(pi) / real_of_num(2)) * (I_B + sqrt(pi) / real_of_num(2)) == -(H_B : Real)
+      #|  pow(sqrt(pi) / real_of_num(2), 2) == pi / real_of_num(4)
+      #|  (H_B : Real) < (e : Real) * (sqrt(pi) / real_of_num(2))
+      #|  (B : Real)
+      #|  abs((H_B : Real) - real_of_num(0)) < (e : Real) * (sqrt(pi) / real_of_num(2))
+      #|  real_of_num(0) <= (H_B : Real)
+      #|  pow((I_B : Real), 2) == pi / real_of_num(4) - (H_B : Real)
+      #|  real_of_num(0) <= (I_B : Real)
+      #|  (H_B : Real) == real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (t : Real) => exp(-(pow((B : Real), 2) * (real_of_num(1) + pow(t, 2)))) * inv(real_of_num(1) + pow(t, 2)))
+      #|  (I_B : Real) == real_integral(real_interval([(real_of_num(0), (B : Real))]), (x : Real) => exp(-pow(x, 2)))
+      #|  (B : Real) >= (N : Real)
+      #|  real_of_num(0) < (B : Real)
+      #|  (B : Real)
+      #|  max(real_of_num(1), (N : Real))
+      #|  (N : Real)
+      #|  (e : Real) * (sqrt(pi) / real_of_num(2))
+      #|  real_of_num(0) < sqrt(pi) / real_of_num(2)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((B : Real) => real_integral(real_interval([(real_of_num(0), B)]), (x : Real) => exp(-pow(x, 2))), sqrt(pi) / real_of_num(2), at_posinfinity)
+      #|  sqrt(pi) == sqrt(pi) / real_of_num(2) + sqrt(pi) / real_of_num(2)
+      #|  (b : Real)
+      #|  abs(real_integral(real_interval([(real_of_num(0), (b : Real))]), (x : Real) => exp(-pow(x, 2))) - sqrt(pi) / real_of_num(2)) < (e : Real) / real_of_num(2)
+      #|  -(a : Real)
+      #|  abs(real_integral(real_interval([(real_of_num(0), -(a : Real))]), (x : Real) => exp(-pow(x, 2))) - sqrt(pi) / real_of_num(2)) < (e : Real) / real_of_num(2)
+      #|  (b : Real) >= (N : Real)
+      #|  -(a : Real) >= (N : Real)
+      #|  -(y : Real)
+      #|  (y : Real)
+      #|  IMAGE(op_minus_minus, real_interval([(real_of_num(0), -(a : Real))])) == real_interval([(a, real_of_num(0))])
+      #|  \226\136\128 x : Real, exp(-pow(-x, 2)) == exp(-pow(x, 2))
+      #|  real_interval([(real_of_num(0), -(a : Real))])
+      #|  (x : Real) => exp(-pow(x, 2))
+      #|  real_integral(real_interval([((a : Real), real_of_num(0))]), (x : Real) => exp(-pow(x, 2))) == real_integral(real_interval([(real_of_num(0), -a)]), (x : Real) => exp(-pow(x, 2)))
+      #|  real_integral(real_interval([((a : Real), (b : Real))]), (x : Real) => exp(-pow(x, 2))) == real_integral(real_interval([(a, real_of_num(0))]), (x : Real) => exp(-pow(x, 2))) + real_integral(real_interval([(real_of_num(0), b)]), (x : Real) => exp(-pow(x, 2)))
+      #|  (a : Real) <= (b : Real)
+      #|  (a : Real) < real_of_num(0)
+      #|  real_of_num(0) < (b : Real)
+      #|  (a : Real) <= -max(real_of_num(1), (N : Real)) && max(real_of_num(1), N) <= (b : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  max(real_of_num(1), (N : Real))
+      #|  (N : Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  (e : Real)
+      #|  has_real_integral((x : Real) => exp(-pow(x, 2)), sqrt(pi), UNIV)
+      #|  real_of_num(0) < real_of_num(2)
+      #|  (t : Real)
+      #|  (x : Real) => exp(-pow(sqrt((a : Real) / real_of_num(2)) * x, 2))
+      #|  real_of_num(0) < (a : Real)
+      #|  sqrt(real_of_num(2) * (pi / (a : Real))) == inv(sqrt(a / real_of_num(2))) * sqrt(pi)
+      #|  real_of_num(0) < sqrt((a : Real) / real_of_num(2))
+      #|  \226\136\128 a : Real, real_of_num(0) < a \226\134\146 has_real_integral((t : Real) => exp(-(a * (pow(t, 2) / real_of_num(2)))), sqrt(real_of_num(2) * (pi / a)), UNIV)
+      #|  (abs((x : Real)) <= x) == (real_of_num(0) <= x)
+      #|  exp(-((a : Real) * (pow((x : Real), 2) / real_of_num(2)))) * real_of_num(1)
+      #|  sqrt(real_of_num(2) * (pi / (a : Real)))
+      #|  (t : Real) => exp(-((a : Real) * (pow(t, 2) / real_of_num(2))))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < a \226\134\146 real_integrable_on((t : Real) => exp(-(a * (pow(t, 2) / real_of_num(2)))) * cos(b * t), UNIV)
+      #|  (y : Real) + -y == real_of_num(0)
+      #|  (y : Real)
+      #|  exp((y : Real)) * exp(-y)
+      #|  \226\136\128 y : Real, real_of_num(0) <= y \226\134\146 y * exp(-y) <= real_of_num(1)
+      #|  !((a : Real) == real_of_num(0))
+      #|  pow((x : Real), 2) * exp(-((a : Real) * (pow(x, 2) / real_of_num(4)))) == real_of_num(4) / a * (a * (pow(x, 2) / real_of_num(4)) * exp(-(a * (pow(x, 2) / real_of_num(4)))))
+      #|  exp(-((a : Real) * (pow((x : Real), 2) / real_of_num(2)))) == exp(-(a * (pow(x, 2) / real_of_num(4)))) * exp(-(a * (pow(x, 2) / real_of_num(4))))
+      #|  (a : Real) / real_of_num(2) * (pow((x : Real), 2) / real_of_num(2)) == a * (pow(x, 2) / real_of_num(4))
+      #|  \226\136\128 a : Real, \226\136\128 x : Real, real_of_num(0) < a \226\134\146 pow(x, 2) * exp(-(a * (pow(x, 2) / real_of_num(2)))) <= real_of_num(4) / a * exp(-(a / real_of_num(2) * (pow(x, 2) / real_of_num(2))))
+      #|  abs(pow((x : Real), 2) * exp(-((a : Real) * (pow(x, 2) / real_of_num(2))))) == pow(x, 2) * exp(-(a * (pow(x, 2) / real_of_num(2))))
+      #|  sqrt(real_of_num(2) * (pi / ((a : Real) / real_of_num(2))))
+      #|  (t : Real) => real_of_num(4) / (a : Real) * exp(-(a / real_of_num(2) * (pow(t, 2) / real_of_num(2))))
+      #|  \226\136\128 a : Real, real_of_num(0) < a \226\134\146 real_integrable_on((t : Real) => pow(t, 2) * exp(-(a * (pow(t, 2) / real_of_num(2)))), UNIV)
+      #|  (x : Real)
+      #|  abs((x : Real)) * abs(x)
+      #|  (x : Real)
+      #|  \226\136\128 u : Real, u <= real_of_num(1) || real_of_num(1) <= u
+      #|  abs((x : Real))
+      #|  \226\136\128 x : Real, abs(x) <= real_of_num(1) + pow(x, 2)
+      #|  (real_of_num(1) + pow((x : Real), 2)) * exp(-((a : Real) * (pow(x, 2) / real_of_num(2))))
+      #|  abs(exp(-((a : Real) * (pow((x : Real), 2) / real_of_num(2))))) == exp(-(a * (pow(x, 2) / real_of_num(2))))
+      #|  abs((x : Real)) * exp(-((a : Real) * (pow(x, 2) / real_of_num(2))))
+      #|  sqrt(real_of_num(2) * (pi / (a : Real)))
+      #|  (t : Real) => exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) + pow(t, 2) * exp(-(a * (pow(t, 2) / real_of_num(2))))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < a \226\134\146 real_integrable_on((t : Real) => t * (exp(-(a * (pow(t, 2) / real_of_num(2)))) * sin(b * t)), UNIV)
+      #|  (h : Real)
+      #|  pow(abs((h : Real)), 2) == pow(h, 2)
+      #|  pow(abs((h : Real)), 2) / real_of_num(2)
+      #|  cos((x : Real) + (h : Real)) - cos(x) + h * sin(x) == cos(x + h) - (cos(x) + -sin(x) * h)
+      #|  (x : Real) + (h : Real) - x == h
+      #|  (x : Real) + (h : Real)
+      #|  (x : Real)
+      #|  !(2 == 1)
+      #|  !(2 == 0)
+      #|  1 + 1 == 2
+      #|  (u : Real)
+      #|  !(2 == 1)
+      #|  !(2 == 0)
+      #|  (1 == 1) == true
+      #|  (1 == 0) == false
+      #|  (0 == 0) == true
+      #|  1 + 1 == 2
+      #|  0 + 1 == 1
+      #|  (i : Num) == 0 || i == 1
+      #|  real_of_num(1)
+      #|  (UNIV : (Real) -> Bool)
       #|  1
-      #|  \\(i:num) (t:real).\n       if i = 0 then cos t\n       else if i = 1 then --(sin t)\n       else --(cos t)
-      #|  forall x h. abs(cos(x + h) - cos x + h * sin x) <= h pow 2
-      #|  h:real
-      #|  abs h pow 2 = h pow 2
-      #|  abs h pow 2 / &2
-      #|  sin(x + h) - sin x - h * cos x =\n                sin(x + h) - (sin x + cos x * h)
-      #|  (x + h) - x = h:real
-      #|  x + h:real
-      #|  x:real
-      #|  i = 0 \\/ i = 1
-      #|  &1
-      #|  (:real)
+      #|  (i : Num) => (t : Real) => if i == 0 { cos(t) } else { if i == 1 { -sin(t) } else { -cos(t) } }
+      #|  \226\136\128 x : Real, \226\136\128 h : Real, abs(cos(x + h) - cos(x) + h * sin(x)) <= pow(h, 2)
+      #|  (h : Real)
+      #|  pow(abs((h : Real)), 2) == pow(h, 2)
+      #|  pow(abs((h : Real)), 2) / real_of_num(2)
+      #|  sin((x : Real) + (h : Real)) - sin(x) - h * cos(x) == sin(x + h) - (sin(x) + cos(x) * h)
+      #|  (x : Real) + (h : Real) - x == h
+      #|  (x : Real) + (h : Real)
+      #|  (x : Real)
+      #|  (i : Num) == 0 || i == 1
+      #|  real_of_num(1)
+      #|  (UNIV : (Real) -> Bool)
       #|  1
-      #|  \\(i:num) (t:real).\n       if i = 0 then sin t\n       else if i = 1 then cos t\n       else --(sin t)
-      #|  forall x h. abs(sin(x + h) - sin x - h * cos x) <= h pow 2
-      #|  abs(exp(--(a * t pow 2 / &2))) = exp(--(a * t pow 2 / &2))
-      #|  abs(inv a) = inv a
-      #|  forall a b t. &0 < a\n   ==> abs(--inv(a) * exp(--(a * t pow 2 / &2)) * sin(b * t))\n       <= inv(a) * exp(--(a * t pow 2 / &2))
-      #|  &0 < a
-      #|  forall a b t. &0 < a ==>\n   ((\\t. --inv(a) * exp(--(a * t pow 2 / &2)) * sin(b * t))\n    has_real_derivative\n    (t * exp(--(a * t pow 2 / &2)) * sin(b * t) -\n     b / a * exp(--(a * t pow 2 / &2)) * cos(b * t)))\n   (atreal t)
-      #|  x:real
-      #|  x < exp(x)
-      #|  forall x. &0 < x ==> exp(--x) < inv x
-      #|  (e:real) = inv(a) * (a * e)
-      #|  (inv((a:real)) * exp(--((a:real) * (B:real) / &2))):real
-      #|  inv(inv((a:real) * e))
-      #|  inv((a:real) * B / &2)
-      #|  exp(--((a:real) * B / &2)) < a * e
-      #|  &0 <= x ==> y <= x + y
-      #|  ~((e:real) = &0)
-      #|  ~((a:real) = &0)
-      #|  (a:real) * (&1 + &2 / (a pow 2 * e)) / &2 = a / &2 + inv(a * e)
-      #|  inv((a:real) * e) <= a * B / &2
-      #|  ~((e:real) = &0)
-      #|  ~((a:real) = &0)
-      #|  &0 < &2
-      #|  inv((a:real)) * exp(--(a * t pow 2 / &2)) <=\n     inv(a) * exp(--(a * (B:real) / &2))
-      #|  (B:real) <= t pow 2
-      #|  &0 < e
-      #|  &0 < a
-      #|  &0 < (a:real) * (e:real)
-      #|  &0 < B
-      #|  &0 < a
-      #|  &0 < (a:real) * (B:real) / &2
-      #|  &1 <= B
-      #|  &0 < B
-      #|  B <= B pow 2
-      #|  B <= abs(t)
-      #|  &0 < B
-      #|  B pow 2 <= t pow 2
-      #|  t:real
-      #|  &0 < B
-      #|  &1 <= B
-      #|  &0 < B
-      #|  &0 <= x ==> &1 <= &1 + x
-      #|  &1 <= B
-      #|  &0 < (a:real) pow 2 * (e:real)
-      #|  B = (&1 + &2 / ((a:real) pow 2 * (e:real))):real
-      #|  (&1 + &2 / ((a:real) pow 2 * (e:real))):real
-      #|  forall a e. &0 < a /\\ &0 < e\n   ==> ?B. &0 < B /\\\n           forall t. B <= abs(t) ==> inv(a) * exp(--(a * t pow 2 / &2)) < e
-      #|  (:real)
-      #|  \\t. (f:real->real) t - b / a * (g:real->real) t
-      #|  inv(a) * exp(--(a * c pow 2 / &2))
-      #|  inv(a) * exp(--(a * d pow 2 / &2))
-      #|  abs d < e / &2 /\\ abs c < e / &2 ==> abs(d - c) < e
-      #|  c <= d:real
-      #|  c <= --B /\\ B <= d
-      #|  d:real
-      #|  c:real
-      #|  B:real
-      #|  B:real
-      #|  e / &2
-      #|  a:real
-      #|  e:real
-      #|  ((\\t. (f:real->real) t - b / a * (g:real->real) t)\n      has_real_integral (&0)) (:real)
-      #|  forall c d. c <= d ==>\n     real_integral (real_interval[c,d])\n       (\\t. (f:real->real) t - b / a * (g:real->real) t) =\n     (Fa:real->real) d - Fa c
-      #|  forall c d. c <= d ==>\n     ((\\t. (f:real->real) t - b / a * (g:real->real) t)\n      has_real_integral ((Fa:real->real) d - Fa c)) (real_interval[c,d])
-      #|  (:real)
-      #|  (:real)
-      #|  forall c d. (\\t. (f:real->real) t - b / a * (g:real->real) t)\n           real_integrable_on real_interval[c,d]
-      #|  t:real
-      #|  forall t. abs((Fa:real->real) t) <= inv(a) * exp(--(a * t pow 2 / &2))
-      #|  t:real
-      #|  forall t. ((Fa:real->real) has_real_derivative\n          ((f:real->real) t - b / a * (g:real->real) t)) (atreal t)
-      #|  (g:real->real) real_integrable_on (:real)
-      #|  (f:real->real) real_integrable_on (:real)
-      #|  Fa = \\t:real. --inv(a) * exp(--(a * t pow 2 / &2)) * sin(b * t)
-      #|  g = \\t:real. exp(--(a * t pow 2 / &2)) * cos(b * t)
-      #|  f = \\t:real. t * exp(--(a * t pow 2 / &2)) * sin(b * t)
-      #|  forall a b. &0 < a\n   ==> real_integral (:real) (\\t. t * exp(--(a * t pow 2 / &2)) * sin(b * t)) =\n       (b / a) * real_integral (:real) (\\t. exp(--(a * t pow 2 / &2)) * cos(b * t))
-      #|  &0 <= x ==> &0 <= x + &1
-      #|  abs(y - b) * (C + &1) <= e / (C + &1) * (C + &1)
-      #|  ~(C + &1 = &0)
-      #|  C < C + &1
-      #|  abs(y - b) * (C + &1)
-      #|  y:real
-      #|  (y - b:real) pow 2 * C
-      #|  abs(y - b) * C
-      #|  ~(y - b = &0)
-      #|  (real_integral (:real)\n       (\\t. exp(--(a * t pow 2 / &2)) * cos(y * t)) -\n      real_integral (:real)\n       (\\t. exp(--(a * t pow 2 / &2)) * cos(b * t))) /\n     (y - b) -\n     (--(real_integral (:real)\n       (\\t. t * exp(--(a * t pow 2 / &2)) * sin(b * t))))\n     = (real_integral (:real)\n         (\\t. exp(--(a * t pow 2 / &2)) * cos(y * t)) -\n        real_integral (:real)\n         (\\t. exp(--(a * t pow 2 / &2)) * cos(b * t)) +\n        (y - b) * real_integral (:real)\n         (\\t. t * exp(--(a * t pow 2 / &2)) * sin(b * t))) /\n       (y - b)
-      #|  ~(y - b = &0)
-      #|  y:real
-      #|  e / (C + &1)
-      #|  e:real
-      #|  b + y - b:real = y
-      #|  (y - b) * t:real
-      #|  b * t:real
-      #|  exp(--(a * t pow 2 / &2)) *\n       ((y - b:real) pow 2 * t pow 2)
-      #|  t:real
-      #|  (\\t. exp(--(a * t pow 2 / &2)) *\n             (cos(y * t) - cos(b * t) + (y - b) * t * sin(b * t))) =\n        (\\t. (exp(--(a * t pow 2 / &2)) * cos(y * t) -\n              exp(--(a * t pow 2 / &2)) * cos(b * t)) +\n             (y - b) * (t * exp(--(a * t pow 2 / &2)) * sin(b * t)))
-      #|  real_integral (:real)\n     (\\t. (y - b) pow 2 *\n          (t pow 2 * exp(--(a * t pow 2 / &2))))
-      #|  (y - b) * real_integral (:real)\n        (\\t. t * exp(--(a * t pow 2 / &2)) * sin(b * t)) =\n       real_integral (:real)\n        (\\t. (y - b) * (t * exp(--(a * t pow 2 / &2)) * sin(b * t)))
-      #|  real_integral (:real)\n        (\\t. exp(--(a * t pow 2 / &2)) * cos(y * t)) -\n      real_integral (:real)\n        (\\t. exp(--(a * t pow 2 / &2)) * cos(b * t)) +\n      (y - b) * real_integral (:real)\n        (\\t. t * exp(--(a * t pow 2 / &2)) * sin(b * t)) =\n      real_integral (:real)\n        (\\t. exp(--(a * t pow 2 / &2)) *\n             (cos(y * t) - cos(b * t) + (y - b) * t * sin(b * t)))
-      #|  (\\t. exp(--(a * t pow 2 / &2)) * cos(y * t))\n      real_integrable_on (:real) /\\\n      (\\t. exp(--(a * t pow 2 / &2)) * cos(b * t))\n      real_integrable_on (:real) /\\\n      (\\t. t * exp(--(a * t pow 2 / &2)) * sin(b * t))\n      real_integrable_on (:real)
-      #|  y:real
-      #|  forall y. abs(real_integral (:real)\n             (\\t. exp(--(a * t pow 2 / &2)) * cos(y * t)) -\n            real_integral (:real)\n             (\\t. exp(--(a * t pow 2 / &2)) * cos(b * t)) +\n            (y - b) * real_integral (:real)\n             (\\t. t * exp(--(a * t pow 2 / &2)) * sin(b * t)))\n        <= (y - b) pow 2 * C
-      #|  &0 <= C
-      #|  C = real_integral (:real)\n      (\\t. t pow 2 * exp(--(a * t pow 2 / &2)))
-      #|  forall a b. &0 < a ==>\n   ((\\b. real_integral (:real) (\\t. exp(--(a * t pow 2 / &2)) * cos(b * t)))\n    has_real_derivative\n    (--(real_integral (:real)\n      (\\t. t * exp(--(a * t pow 2 / &2)) * sin(b * t)))))\n   (atreal b)
-      #|  forall(x:real) c e. ~(e = &0) /\\ x * e = c ==> x = c * inv e
-      #|  y:real
-      #|  a:real
-      #|  c:real
-      #|  (:real)
-      #|  f:real->real
-      #|  forall f c (a:real).\n    f a = c /\\\n    (forall x. (f has_real_derivative (&0)) (atreal x))\n    ==> forall x. f x = c
-      #|  (Ib:real->real) b * exp(b pow 2 / (&2 * a)) = (Fb:real->real) b
-      #|  forall x:real. (Fb:real->real) x = Fb (&0)
-      #|  &0 = (Ib:real->real) u * (u / a * exp(u pow 2 / (&2 * a))) +\n           (--(u / a * (Ib:real->real) u)) * exp(u pow 2 / (&2 * a))
-      #|  &0 < a
-      #|  ((\\u:real. exp(u pow 2 / (&2 * a))) has_real_derivative\n       (u / a * exp(u pow 2 / (&2 * a)))) (atreal u)
-      #|  ((Ib:real->real) has_real_derivative\n       (--(u / a * (Ib:real->real) u))) (atreal u)
-      #|  ((Ib:real->real) has_real_derivative\n      (--real_integral (:real)\n         (\\t. t * exp(--(a * t pow 2 / &2)) * sin(u * t))))\n      (atreal u)
-      #|  real_integral (:real)\n       (\\t. t * exp(--(a * t pow 2 / &2)) * sin(u * t)) =\n      u / a * (Ib:real->real) u
-      #|  u:real
-      #|  forall x:real. ((Fb:real->real) has_real_derivative (&0)) (atreal x)
-      #|  (Fb:real->real) (&0) = sqrt(&2 * pi / a)
-      #|  (Ib:real->real) (&0) = sqrt(&2 * pi / a)
-      #|  Fb = \\u:real. (Ib:real->real) u * exp(u pow 2 / (&2 * a))
-      #|  real_integral (:real)\n    (\\t. exp(--(a * t pow 2 / &2)) * cos(b * t)) = (Ib:real->real) b
-      #|  Ib = \\u:real. real_integral (:real)\n    (\\t. exp(--(a * t pow 2 / &2)) * cos(u * t))
-      #|  real_integral (:real) (\\t. exp(--(a * t pow 2 / &2)) * cos(b * t)) =\n     sqrt(&2 * pi / a) * exp(--(b pow 2 / (&2 * a)))
-      #|  (\\t. exp(--(a * t pow 2 / &2)) * cos(b * t)) real_integrable_on (:real)
-      #|  forall a b. &0 < a\n   ==> ((\\t. exp(--(a * t pow 2 / &2)) * cos(b * t)) has_real_integral\n        sqrt(&2 * pi / a) * exp(--(b pow 2 / (&2 * a)))) (:real)
-      #|  x = --x ==> x = &0
-      #|  real_integral (:real) f = &0
-      #|  ((\\t:real. --((f:real->real) t)) has_real_integral\n                 --(real_integral (:real) f)) (:real)
-      #|  --x:real
-      #|  IMAGE ((--):real->real) (:real) = (:real)
-      #|  (:real)
-      #|  real_integral (:real) (f:real->real)
-      #|  f:real->real
-      #|  ((\\t:real. --((f:real->real) t)) has_real_integral\n                 real_integral (:real) f) (:real)
-      #|  forall t:real. (f:real->real)(--t) = --(f t)
-      #|  (f has_real_integral real_integral (:real) f) (:real)
-      #|  abs x <= x <=> &0 <= x
-      #|  exp(--(a * x pow 2 / &2)) * &1
-      #|  sqrt(&2 * pi / a)
-      #|  \\t:real. exp(--(a * t pow 2 / &2))
-      #|  f real_integrable_on (:real)
-      #|  f = \\t:real. exp(--(a * t pow 2 / &2)) * sin(b * t)
-      #|  forall a b. &0 < a\n   ==> ((\\t. exp(--(a * t pow 2 / &2)) * sin(b * t)) has_real_integral\n        &0) (:real)
-      #|  x + x = y * z ==> x = y / &2 * z
-      #|  real_integral {t | &0 <= t} f =\n    sqrt(&2 * pi) / &2 * exp(--(b pow 2 / &2))
-      #|  (:real)
-      #|  f:real->real
-      #|  real_integral {t | &0 <= t} f + real_integral {t | &0 <= t} f =\n     sqrt(&2 * pi) * exp(--(b pow 2 / &2))
-      #|  {t:real | &0 <= t} UNION {t | t <= &0} = (:real)
-      #|  {t:real | &0 <= t} INTER {t | t <= &0} = {&0}
-      #|  (f has_real_integral (real_integral {t | &0 <= t} f +\n                           real_integral {t | &0 <= t} f))\n     ({t:real | &0 <= t} UNION {t | t <= &0})
-      #|  (\\x. (f:real->real)(--x)) = f
-      #|  --x:real
-      #|  IMAGE ((--):real->real) {t | &0 <= t} = {t:real | t <= &0}
-      #|  {t:real | &0 <= t}
-      #|  real_integral {t:real | &0 <= t} (f:real->real)
-      #|  f:real->real
-      #|  (f has_real_integral real_integral {t | &0 <= t} f)\n                {t:real | t <= &0}
-      #|  (:real)
-      #|  f real_integrable_on {t:real | t <= &0}
-      #|  (:real)
-      #|  f real_integrable_on {t | &0 <= t}
-      #|  f real_integrable_on (:real)
-      #|  forall t:real. (f:real->real)(--t) = f t
-      #|  b:real
-      #|  &1
-      #|  (f has_real_integral\n    sqrt(&2 * pi) * exp(--(b pow 2 / &2))) (:real)
-      #|  f = \\t:real. exp(--(t pow 2 / &2)) * cos(b * t)
-      #|  forall b. ((\\t. exp(--(t pow 2 / &2)) * cos(b * t)) has_real_integral\n        sqrt(&2 * pi) / &2 * exp(--(b pow 2 / &2))) {t | &0 <= t}
-      #|  std_normal_density (x:real) =\n   inv(sqrt(&2 * pi)) * exp(--(x pow 2 / &2))
-      #|  std_normal_cdf (x:real) =\n   real_integral {t | t <= x} std_normal_density
-      #|  forall x. &0 < std_normal_density x
-      #|  forall x. &0 <= std_normal_density x
-      #|  &1
-      #|  &0 < x ==> ~(x = &0)
-      #|  inv(sqrt(&2 * pi)) * sqrt(&2 * pi) = &1
-      #|  std_normal_density =\n    (\\x. inv(sqrt(&2 * pi)) * exp(--(x pow 2 / &2)))
-      #|  (std_normal_density has_real_integral &1) (:real)
-      #|  inv(sqrt(&2 * pi))
-      #|  &1
-      #|  std_normal_density real_integrable_on (:real)
-      #|  {t:real | t <= x}
-      #|  (:real)
+      #|  (i : Num) => (t : Real) => if i == 0 { sin(t) } else { if i == 1 { cos(t) } else { -sin(t) } }
+      #|  \226\136\128 x : Real, \226\136\128 h : Real, abs(sin(x + h) - sin(x) - h * cos(x)) <= pow(h, 2)
+      #|  abs(exp(-((a : Real) * (pow((t : Real), 2) / real_of_num(2))))) == exp(-(a * (pow(t, 2) / real_of_num(2))))
+      #|  abs(inv((a : Real))) == inv(a)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 t : Real, real_of_num(0) < a \226\134\146 abs(-inv(a) * (exp(-(a * (pow(t, 2) / real_of_num(2)))) * sin(b * t))) <= inv(a) * exp(-(a * (pow(t, 2) / real_of_num(2))))
+      #|  real_of_num(0) < (a : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 t : Real, real_of_num(0) < a \226\134\146 has_real_derivative((t : Real) => -inv(a) * (exp(-(a * (pow(t, 2) / real_of_num(2)))) * sin(b * t)), t * (exp(-(a * (pow(t, 2) / real_of_num(2)))) * sin(b * t)) - b / a * (exp(-(a * (pow(t, 2) / real_of_num(2)))) * cos(b * t)), atreal(t))
+      #|  (x : Real)
+      #|  (x : Real) < exp(x)
+      #|  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 exp(-x) < inv(x)
+      #|  (e : Real) == inv((a : Real)) * (a * e)
+      #|  inv((a : Real)) * exp(-(a * ((B : Real) / real_of_num(2))))
+      #|  inv(inv((a : Real) * (e : Real)))
+      #|  inv((a : Real) * ((B : Real) / real_of_num(2)))
+      #|  exp(-((a : Real) * ((B : Real) / real_of_num(2)))) < a * (e : Real)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 (y : Real) <= x + y
+      #|  !((e : Real) == real_of_num(0))
+      #|  !((a : Real) == real_of_num(0))
+      #|  (a : Real) * ((real_of_num(1) + real_of_num(2) / (pow(a, 2) * (e : Real))) / real_of_num(2)) == a / real_of_num(2) + inv(a * e)
+      #|  inv((a : Real) * (e : Real)) <= a * ((B : Real) / real_of_num(2))
+      #|  !((e : Real) == real_of_num(0))
+      #|  !((a : Real) == real_of_num(0))
+      #|  real_of_num(0) < real_of_num(2)
+      #|  inv((a : Real)) * exp(-(a * (pow((t : Real), 2) / real_of_num(2)))) <= inv(a) * exp(-(a * ((B : Real) / real_of_num(2))))
+      #|  (B : Real) <= pow((t : Real), 2)
+      #|  real_of_num(0) < (e : Real)
+      #|  real_of_num(0) < (a : Real)
+      #|  real_of_num(0) < (a : Real) * (e : Real)
+      #|  real_of_num(0) < (B : Real)
+      #|  real_of_num(0) < (a : Real)
+      #|  real_of_num(0) < (a : Real) * ((B : Real) / real_of_num(2))
+      #|  real_of_num(1) <= (B : Real)
+      #|  real_of_num(0) < (B : Real)
+      #|  (B : Real) <= pow(B, 2)
+      #|  (B : Real) <= abs((t : Real))
+      #|  real_of_num(0) < (B : Real)
+      #|  pow((B : Real), 2) <= pow((t : Real), 2)
+      #|  (t : Real)
+      #|  real_of_num(0) < (B : Real)
+      #|  real_of_num(1) <= (B : Real)
+      #|  real_of_num(0) < (B : Real)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(1) <= real_of_num(1) + x
+      #|  real_of_num(1) <= (B : Real)
+      #|  real_of_num(0) < pow((a : Real), 2) * (e : Real)
+      #|  (B : Real) == real_of_num(1) + real_of_num(2) / (pow((a : Real), 2) * (e : Real))
+      #|  real_of_num(1) + real_of_num(2) / (pow((a : Real), 2) * (e : Real))
+      #|  \226\136\128 a : Real, \226\136\128 e : Real, real_of_num(0) < a && real_of_num(0) < e \226\134\146 (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 t : Real, B <= abs(t) \226\134\146 inv(a) * exp(-(a * (pow(t, 2) / real_of_num(2)))) < e))
+      #|  (UNIV : (Real) -> Bool)
+      #|  (t : Real) => (f : (Real) -> Real)(t) - (b : Real) / (a : Real) * (g : (Real) -> Real)(t)
+      #|  inv((a : Real)) * exp(-(a * (pow((c : Real), 2) / real_of_num(2))))
+      #|  inv((a : Real)) * exp(-(a * (pow((d : Real), 2) / real_of_num(2))))
+      #|  abs((d : Real)) < (e : Real) / real_of_num(2) && abs((c : Real)) < e / real_of_num(2) \226\134\146 abs(d - c) < e
+      #|  (c : Real) <= (d : Real)
+      #|  (c : Real) <= -(B : Real) && B <= (d : Real)
+      #|  (d : Real)
+      #|  (c : Real)
+      #|  (B : Real)
+      #|  (B : Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  (a : Real)
+      #|  (e : Real)
+      #|  has_real_integral((t : Real) => (f : (Real) -> Real)(t) - (b : Real) / (a : Real) * (g : (Real) -> Real)(t), real_of_num(0), UNIV)
+      #|  \226\136\128 c : Real, \226\136\128 d : Real, c <= d \226\134\146 real_integral(real_interval([(c, d)]), (t : Real) => (f : (Real) -> Real)(t) - (b : Real) / (a : Real) * (g : (Real) -> Real)(t)) == (Fa : (Real) -> Real)(d) - Fa(c)
+      #|  \226\136\128 c : Real, \226\136\128 d : Real, c <= d \226\134\146 has_real_integral((t : Real) => (f : (Real) -> Real)(t) - (b : Real) / (a : Real) * (g : (Real) -> Real)(t), (Fa : (Real) -> Real)(d) - Fa(c), real_interval([(c, d)]))
+      #|  (UNIV : (Real) -> Bool)
+      #|  (UNIV : (Real) -> Bool)
+      #|  \226\136\128 c : Real, \226\136\128 d : Real, real_integrable_on((t : Real) => (f : (Real) -> Real)(t) - (b : Real) / (a : Real) * (g : (Real) -> Real)(t), real_interval([(c, d)]))
+      #|  (t : Real)
+      #|  \226\136\128 t : Real, abs((Fa : (Real) -> Real)(t)) <= inv((a : Real)) * exp(-(a * (pow(t, 2) / real_of_num(2))))
+      #|  (t : Real)
+      #|  \226\136\128 t : Real, has_real_derivative((Fa : (Real) -> Real), (f : (Real) -> Real)(t) - (b : Real) / (a : Real) * (g : (Real) -> Real)(t), atreal(t))
+      #|  real_integrable_on((g : (Real) -> Real), UNIV)
+      #|  real_integrable_on((f : (Real) -> Real), UNIV)
+      #|  (Fa : (Real) -> Real) == ((t : Real) => -inv((a : Real)) * (exp(-(a * (pow(t, 2) / real_of_num(2)))) * sin((b : Real) * t)))
+      #|  (g : (Real) -> Real) == ((t : Real) => exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) * cos((b : Real) * t))
+      #|  (f : (Real) -> Real) == ((t : Real) => t * (exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) * sin((b : Real) * t)))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < a \226\134\146 real_integral(UNIV, (t : Real) => t * (exp(-(a * (pow(t, 2) / real_of_num(2)))) * sin(b * t))) == b / a * real_integral(UNIV, (t : Real) => exp(-(a * (pow(t, 2) / real_of_num(2)))) * cos(b * t))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) <= x + real_of_num(1)
+      #|  abs((y : Real) - (b : Real)) * ((C : Real) + real_of_num(1)) <= (e : Real) / (C + real_of_num(1)) * (C + real_of_num(1))
+      #|  !((C : Real) + real_of_num(1) == real_of_num(0))
+      #|  (C : Real) < C + real_of_num(1)
+      #|  abs((y : Real) - (b : Real)) * ((C : Real) + real_of_num(1))
+      #|  (y : Real)
+      #|  pow((y : Real) - (b : Real), 2) * (C : Real)
+      #|  abs((y : Real) - (b : Real)) * (C : Real)
+      #|  !((y : Real) - (b : Real) == real_of_num(0))
+      #|  (real_integral(UNIV, (t : Real) => exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) * cos((y : Real) * t)) - real_integral(UNIV, (t : Real) => exp(-(a * (pow(t, 2) / real_of_num(2)))) * cos((b : Real) * t))) / (y - b) - -real_integral(UNIV, (t : Real) => t * (exp(-(a * (pow(t, 2) / real_of_num(2)))) * sin(b * t))) == (real_integral(UNIV, (t : Real) => exp(-(a * (pow(t, 2) / real_of_num(2)))) * cos(y * t)) - real_integral(UNIV, (t : Real) => exp(-(a * (pow(t, 2) / real_of_num(2)))) * cos(b * t)) + (y - b) * real_integral(UNIV, (t : Real) => t * (exp(-(a * (pow(t, 2) / real_of_num(2)))) * sin(b * t)))) / (y - b)
+      #|  !((y : Real) - (b : Real) == real_of_num(0))
+      #|  (y : Real)
+      #|  (e : Real) / ((C : Real) + real_of_num(1))
+      #|  (e : Real)
+      #|  (b : Real) + ((y : Real) - b) == y
+      #|  ((y : Real) - (b : Real)) * (t : Real)
+      #|  (b : Real) * (t : Real)
+      #|  exp(-((a : Real) * (pow((t : Real), 2) / real_of_num(2)))) * (pow((y : Real) - (b : Real), 2) * pow(t, 2))
+      #|  (t : Real)
+      #|  ((t : Real) => exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) * (cos((y : Real) * t) - cos((b : Real) * t) + (y - b) * (t * sin(b * t)))) == ((t : Real) => exp(-(a * (pow(t, 2) / real_of_num(2)))) * cos(y * t) - exp(-(a * (pow(t, 2) / real_of_num(2)))) * cos(b * t) + (y - b) * (t * (exp(-(a * (pow(t, 2) / real_of_num(2)))) * sin(b * t))))
+      #|  real_integral(UNIV, (t : Real) => pow((y : Real) - (b : Real), 2) * (pow(t, 2) * exp(-((a : Real) * (pow(t, 2) / real_of_num(2))))))
+      #|  ((y : Real) - (b : Real)) * real_integral(UNIV, (t : Real) => t * (exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) * sin(b * t))) == real_integral(UNIV, (t : Real) => (y - b) * (t * (exp(-(a * (pow(t, 2) / real_of_num(2)))) * sin(b * t))))
+      #|  real_integral(UNIV, (t : Real) => exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) * cos((y : Real) * t)) - real_integral(UNIV, (t : Real) => exp(-(a * (pow(t, 2) / real_of_num(2)))) * cos((b : Real) * t)) + (y - b) * real_integral(UNIV, (t : Real) => t * (exp(-(a * (pow(t, 2) / real_of_num(2)))) * sin(b * t))) == real_integral(UNIV, (t : Real) => exp(-(a * (pow(t, 2) / real_of_num(2)))) * (cos(y * t) - cos(b * t) + (y - b) * (t * sin(b * t))))
+      #|  real_integrable_on((t : Real) => exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) * cos((y : Real) * t), UNIV) && real_integrable_on((t : Real) => exp(-(a * (pow(t, 2) / real_of_num(2)))) * cos((b : Real) * t), UNIV) && real_integrable_on((t : Real) => t * (exp(-(a * (pow(t, 2) / real_of_num(2)))) * sin(b * t)), UNIV)
+      #|  (y : Real)
+      #|  \226\136\128 y : Real, abs(real_integral(UNIV, (t : Real) => exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) * cos(y * t)) - real_integral(UNIV, (t : Real) => exp(-(a * (pow(t, 2) / real_of_num(2)))) * cos((b : Real) * t)) + (y - b) * real_integral(UNIV, (t : Real) => t * (exp(-(a * (pow(t, 2) / real_of_num(2)))) * sin(b * t)))) <= pow(y - b, 2) * (C : Real)
+      #|  real_of_num(0) <= (C : Real)
+      #|  (C : Real) == real_integral(UNIV, (t : Real) => pow(t, 2) * exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < a \226\134\146 has_real_derivative((b : Real) => real_integral(UNIV, (t : Real) => exp(-(a * (pow(t, 2) / real_of_num(2)))) * cos(b * t)), -real_integral(UNIV, (t : Real) => t * (exp(-(a * (pow(t, 2) / real_of_num(2)))) * sin(b * t))), atreal(b))
+      #|  \226\136\128 x : Real, \226\136\128 c : Real, \226\136\128 e : Real, !(e == real_of_num(0)) && x * e == c \226\134\146 x == c * inv(e)
+      #|  (y : Real)
+      #|  (a : Real)
+      #|  (c : Real)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 c : Real, \226\136\128 a : Real, f(a) == c && (\226\136\128 x : Real, has_real_derivative(f, real_of_num(0), atreal(x))) \226\134\146 (\226\136\128 x : Real, f(x) == c)
+      #|  (Ib : (Real) -> Real)((b : Real)) * exp(pow(b, 2) / (real_of_num(2) * (a : Real))) == (Fb : (Real) -> Real)(b)
+      #|  \226\136\128 x : Real, (Fb : (Real) -> Real)(x) == Fb(real_of_num(0))
+      #|  real_of_num(0) == (Ib : (Real) -> Real)((u : Real)) * (u / (a : Real) * exp(pow(u, 2) / (real_of_num(2) * a))) + -(u / a * Ib(u)) * exp(pow(u, 2) / (real_of_num(2) * a))
+      #|  real_of_num(0) < (a : Real)
+      #|  has_real_derivative((u : Real) => exp(pow(u, 2) / (real_of_num(2) * (a : Real))), (u : Real) / a * exp(pow(u, 2) / (real_of_num(2) * a)), atreal(u))
+      #|  has_real_derivative((Ib : (Real) -> Real), -((u : Real) / (a : Real) * Ib(u)), atreal(u))
+      #|  has_real_derivative((Ib : (Real) -> Real), -real_integral(UNIV, (t : Real) => t * (exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) * sin((u : Real) * t))), atreal(u))
+      #|  real_integral(UNIV, (t : Real) => t * (exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) * sin((u : Real) * t))) == u / a * (Ib : (Real) -> Real)(u)
+      #|  (u : Real)
+      #|  \226\136\128 x : Real, has_real_derivative((Fb : (Real) -> Real), real_of_num(0), atreal(x))
+      #|  (Fb : (Real) -> Real)(real_of_num(0)) == sqrt(real_of_num(2) * (pi / (a : Real)))
+      #|  (Ib : (Real) -> Real)(real_of_num(0)) == sqrt(real_of_num(2) * (pi / (a : Real)))
+      #|  (Fb : (Real) -> Real) == ((u : Real) => (Ib : (Real) -> Real)(u) * exp(pow(u, 2) / (real_of_num(2) * (a : Real))))
+      #|  real_integral(UNIV, (t : Real) => exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) * cos((b : Real) * t)) == (Ib : (Real) -> Real)(b)
+      #|  (Ib : (Real) -> Real) == ((u : Real) => real_integral(UNIV, (t : Real) => exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) * cos(u * t)))
+      #|  real_integral(UNIV, (t : Real) => exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) * cos((b : Real) * t)) == sqrt(real_of_num(2) * (pi / a)) * exp(-(pow(b, 2) / (real_of_num(2) * a)))
+      #|  real_integrable_on((t : Real) => exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) * cos((b : Real) * t), UNIV)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < a \226\134\146 has_real_integral((t : Real) => exp(-(a * (pow(t, 2) / real_of_num(2)))) * cos(b * t), sqrt(real_of_num(2) * (pi / a)) * exp(-(pow(b, 2) / (real_of_num(2) * a))), UNIV)
+      #|  (x : Real) == -x \226\134\146 x == real_of_num(0)
+      #|  real_integral(UNIV, (f : (Real) -> Real)) == real_of_num(0)
+      #|  has_real_integral((t : Real) => -(f : (Real) -> Real)(t), -real_integral(UNIV, f), UNIV)
+      #|  -(x : Real)
+      #|  (IMAGE : ((Real) -> Real, (Real) -> Bool, Real) -> Bool)(op_minus_minus, (UNIV : (Real) -> Bool)) == (UNIV : (Real) -> Bool)
+      #|  (UNIV : (Real) -> Bool)
+      #|  real_integral(UNIV, (f : (Real) -> Real))
+      #|  (f : (Real) -> Real)
+      #|  has_real_integral((t : Real) => -(f : (Real) -> Real)(t), real_integral(UNIV, f), UNIV)
+      #|  \226\136\128 t : Real, (f : (Real) -> Real)(-t) == -f(t)
+      #|  has_real_integral((f : (Real) -> Real), real_integral(UNIV, f), UNIV)
+      #|  (abs((x : Real)) <= x) == (real_of_num(0) <= x)
+      #|  exp(-((a : Real) * (pow((x : Real), 2) / real_of_num(2)))) * real_of_num(1)
+      #|  sqrt(real_of_num(2) * (pi / (a : Real)))
+      #|  (t : Real) => exp(-((a : Real) * (pow(t, 2) / real_of_num(2))))
+      #|  real_integrable_on((f : (Real) -> Real), UNIV)
+      #|  (f : (Real) -> Real) == ((t : Real) => exp(-((a : Real) * (pow(t, 2) / real_of_num(2)))) * sin((b : Real) * t))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < a \226\134\146 has_real_integral((t : Real) => exp(-(a * (pow(t, 2) / real_of_num(2)))) * sin(b * t), real_of_num(0), UNIV)
+      #|  (x : Real) + x == (y : Real) * (z : Real) \226\134\146 x == y / real_of_num(2) * z
+      #|  real_integral({(t : Real) | real_of_num(0) <= t}, (f : (Real) -> Real)) == sqrt(real_of_num(2) * pi) / real_of_num(2) * exp(-(pow((b : Real), 2) / real_of_num(2)))
+      #|  (UNIV : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
+      #|  real_integral({(t : Real) | real_of_num(0) <= t}, (f : (Real) -> Real)) + real_integral({(t : Real) | real_of_num(0) <= t}, f) == sqrt(real_of_num(2) * pi) * exp(-(pow((b : Real), 2) / real_of_num(2)))
+      #|  UNION({(t : Real) | real_of_num(0) <= t}, {(t : Real) | t <= real_of_num(0)}) == UNIV
+      #|  INTER({(t : Real) | real_of_num(0) <= t}, {(t : Real) | t <= real_of_num(0)}) == {real_of_num(0)}
+      #|  has_real_integral((f : (Real) -> Real), real_integral({(t : Real) | real_of_num(0) <= t}, f) + real_integral({(t : Real) | real_of_num(0) <= t}, f), UNION({(t : Real) | real_of_num(0) <= t}, {(t : Real) | t <= real_of_num(0)}))
+      #|  ((x : Real) => (f : (Real) -> Real)(-x)) == f
+      #|  -(x : Real)
+      #|  IMAGE(op_minus_minus, {(t : Real) | real_of_num(0) <= t}) == {(t : Real) | t <= real_of_num(0)}
+      #|  {(t : Real) | real_of_num(0) <= t}
+      #|  real_integral({(t : Real) | real_of_num(0) <= t}, (f : (Real) -> Real))
+      #|  (f : (Real) -> Real)
+      #|  has_real_integral((f : (Real) -> Real), real_integral({(t : Real) | real_of_num(0) <= t}, f), {(t : Real) | t <= real_of_num(0)})
+      #|  (UNIV : (Real) -> Bool)
+      #|  real_integrable_on((f : (Real) -> Real), {(t : Real) | t <= real_of_num(0)})
+      #|  (UNIV : (Real) -> Bool)
+      #|  real_integrable_on((f : (Real) -> Real), {(t : Real) | real_of_num(0) <= t})
+      #|  real_integrable_on((f : (Real) -> Real), UNIV)
+      #|  \226\136\128 t : Real, (f : (Real) -> Real)(-t) == f(t)
+      #|  (b : Real)
+      #|  real_of_num(1)
+      #|  has_real_integral((f : (Real) -> Real), sqrt(real_of_num(2) * pi) * exp(-(pow((b : Real), 2) / real_of_num(2))), UNIV)
+      #|  (f : (Real) -> Real) == ((t : Real) => exp(-(pow(t, 2) / real_of_num(2))) * cos((b : Real) * t))
+      #|  \226\136\128 b : Real, has_real_integral((t : Real) => exp(-(pow(t, 2) / real_of_num(2))) * cos(b * t), sqrt(real_of_num(2) * pi) / real_of_num(2) * exp(-(pow(b, 2) / real_of_num(2))), {(t : Real) | real_of_num(0) <= t})
+      #|  (std_normal_density : (Real) -> Real)((x : Real)) == inv(sqrt(real_of_num(2) * pi)) * exp(-(pow(x, 2) / real_of_num(2)))
+      #|  (std_normal_cdf : (Real) -> Real)((x : Real)) == real_integral({(t : Real) | t <= x}, std_normal_density)
+      #|  \226\136\128 x : Real, real_of_num(0) < std_normal_density(x)
+      #|  \226\136\128 x : Real, real_of_num(0) <= std_normal_density(x)
+      #|  real_of_num(1)
+      #|  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+      #|  inv(sqrt(real_of_num(2) * pi)) * sqrt(real_of_num(2) * pi) == real_of_num(1)
+      #|  std_normal_density == ((x : Real) => inv(sqrt(real_of_num(2) * pi)) * exp(-(pow(x, 2) / real_of_num(2))))
+      #|  has_real_integral(std_normal_density, real_of_num(1), UNIV)
+      #|  inv(sqrt(real_of_num(2) * pi))
+      #|  real_of_num(1)
+      #|  real_integrable_on(std_normal_density, UNIV)
+      #|  {(t : Real) | t <= (x : Real)}
+      #|  (UNIV : (Real) -> Bool)
       #|  std_normal_density
-      #|  forall x. std_normal_density real_integrable_on {t | t <= x}
-      #|  forall x y. x <= y ==> std_normal_cdf x <= std_normal_cdf y
-      #|  &1
-      #|  real_integral {t:real | t <= x} std_normal_density
-      #|  (:real)
-      #|  {t:real | t <= x}
+      #|  \226\136\128 x : Real, real_integrable_on(std_normal_density, {(t : Real) | t <= x})
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 std_normal_cdf(x) <= std_normal_cdf(y)
+      #|  real_of_num(1)
+      #|  real_integral({(t : Real) | t <= (x : Real)}, std_normal_density)
+      #|  (UNIV : (Real) -> Bool)
+      #|  {(t : Real) | t <= (x : Real)}
       #|  std_normal_density
-      #|  forall x. &0 <= std_normal_cdf x /\\ std_normal_cdf x <= &1
-      #|  forall x. std_normal_density x <= inv(sqrt(&2 * pi))
-      #|  {x:real}
-      #|  (:real)
-      #|  {t:real | t <= y} = {t | t <= x} UNION real_interval[x,y]
-      #|  (std_normal_density has_real_integral\n    (real_integral {t:real | t <= x} std_normal_density +\n     real_integral (real_interval[x,y]) std_normal_density)) {t | t <= y}
-      #|  (std_normal_density has_real_integral\n    real_integral {t:real | t <= y} std_normal_density) {t | t <= y}
-      #|  forall x y. x <= y ==>\n    std_normal_cdf y =\n    std_normal_cdf x + real_integral (real_interval[x,y]) std_normal_density
-      #|  &0 < x ==> ~(x = &0)
-      #|  ~(sqrt(&2 * pi) = &0)
-      #|  inv(sqrt(&2 * pi)) * (e * sqrt(&2 * pi)) = e
-      #|  x':real
-      #|  x':real
-      #|  (:real)
+      #|  \226\136\128 x : Real, real_of_num(0) <= std_normal_cdf(x) && std_normal_cdf(x) <= real_of_num(1)
+      #|  \226\136\128 x : Real, std_normal_density(x) <= inv(sqrt(real_of_num(2) * pi))
+      #|  {(x : Real)}
+      #|  (UNIV : (Real) -> Bool)
+      #|  {(t : Real) | t <= (y : Real)} == UNION({(t : Real) | t <= (x : Real)}, real_interval([(x, y)]))
+      #|  has_real_integral(std_normal_density, real_integral({(t : Real) | t <= (x : Real)}, std_normal_density) + real_integral(real_interval([(x, (y : Real))]), std_normal_density), {(t : Real) | t <= y})
+      #|  has_real_integral(std_normal_density, real_integral({(t : Real) | t <= (y : Real)}, std_normal_density), {(t : Real) | t <= y})
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 std_normal_cdf(y) == std_normal_cdf(x) + real_integral(real_interval([(x, y)]), std_normal_density)
+      #|  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+      #|  !(sqrt(real_of_num(2) * pi) == real_of_num(0))
+      #|  inv(sqrt(real_of_num(2) * pi)) * ((e : Real) * sqrt(real_of_num(2) * pi)) == e
+      #|  (x' : Real)
+      #|  (x' : Real)
+      #|  (UNIV : (Real) -> Bool)
       #|  std_normal_density
-      #|  inv(sqrt(&2 * pi)) * abs(y - x) =\n                   inv(sqrt(&2 * pi)) * (x - y)
-      #|  x:real
-      #|  y:real
-      #|  abs(std_normal_cdf y - std_normal_cdf x) =\n      abs(real_integral (real_interval[y,x]) std_normal_density)
-      #|  x':real
-      #|  x':real
-      #|  (:real)
+      #|  inv(sqrt(real_of_num(2) * pi)) * abs((y : Real) - (x : Real)) == inv(sqrt(real_of_num(2) * pi)) * (x - y)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  abs(std_normal_cdf((y : Real)) - std_normal_cdf((x : Real))) == abs(real_integral(real_interval([(y, x)]), std_normal_density))
+      #|  (x' : Real)
+      #|  (x' : Real)
+      #|  (UNIV : (Real) -> Bool)
       #|  std_normal_density
-      #|  inv(sqrt(&2 * pi)) * abs(y - x) =\n                   inv(sqrt(&2 * pi)) * (y - x)
-      #|  y:real
-      #|  x:real
-      #|  abs(std_normal_cdf y - std_normal_cdf x) =\n      abs(real_integral (real_interval[x,y]) std_normal_density)
-      #|  x <= y \\/ y <= x:real
-      #|  inv(sqrt(&2 * pi)) * abs(y - x)
-      #|  y:real
-      #|  e * sqrt(&2 * pi)
-      #|  &0 < inv(sqrt(&2 * pi))
-      #|  &0 < sqrt(&2 * pi)
-      #|  e:real
-      #|  forall x. std_normal_cdf real_continuous atreal x
-      #|  forall x. std_normal_density(--x) = std_normal_density x
-      #|  {t:real | &0 <= t}
-      #|  (:real)
+      #|  inv(sqrt(real_of_num(2) * pi)) * abs((y : Real) - (x : Real)) == inv(sqrt(real_of_num(2) * pi)) * (y - x)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  abs(std_normal_cdf((y : Real)) - std_normal_cdf((x : Real))) == abs(real_integral(real_interval([(x, y)]), std_normal_density))
+      #|  (x : Real) <= (y : Real) || y <= x
+      #|  inv(sqrt(real_of_num(2) * pi)) * abs((y : Real) - (x : Real))
+      #|  (y : Real)
+      #|  (e : Real) * sqrt(real_of_num(2) * pi)
+      #|  real_of_num(0) < inv(sqrt(real_of_num(2) * pi))
+      #|  real_of_num(0) < sqrt(real_of_num(2) * pi)
+      #|  (e : Real)
+      #|  \226\136\128 x : Real, real_continuous(std_normal_cdf, atreal(x))
+      #|  \226\136\128 x : Real, std_normal_density(-x) == std_normal_density(x)
+      #|  {(t : Real) | real_of_num(0) <= t}
+      #|  (UNIV : (Real) -> Bool)
       #|  std_normal_density
-      #|  std_normal_density real_integrable_on {t | &0 <= t}
-      #|  a = b ==> a + b = &1 ==> a = &1 / &2
-      #|  (:real)
+      #|  real_integrable_on(std_normal_density, {(t : Real) | real_of_num(0) <= t})
+      #|  (a : Real) == (b : Real) \226\134\146 a + b == real_of_num(1) \226\134\146 a == real_of_num(1) / real_of_num(2)
+      #|  (UNIV : (Real) -> Bool)
       #|  std_normal_density
-      #|  {t:real | t <= &0} UNION {t | &0 <= t} = (:real)
-      #|  {t:real | t <= &0} INTER {t | &0 <= t} = {&0}
-      #|  (:real)
-      #|  (std_normal_density has_real_integral\n     (real_integral {t:real | t <= &0} std_normal_density +\n      real_integral {t:real | &0 <= t} std_normal_density))\n     ({t:real | t <= &0} UNION {t | &0 <= t})
-      #|  real_integral {t:real | t <= &0} std_normal_density +\n     real_integral {t:real | &0 <= t} std_normal_density = &1
-      #|  (:real)
-      #|  {t:real | t <= &0}
+      #|  UNION({(t : Real) | t <= real_of_num(0)}, {(t : Real) | real_of_num(0) <= t}) == UNIV
+      #|  INTER({(t : Real) | t <= real_of_num(0)}, {(t : Real) | real_of_num(0) <= t}) == {real_of_num(0)}
+      #|  (UNIV : (Real) -> Bool)
+      #|  has_real_integral(std_normal_density, real_integral({(t : Real) | t <= real_of_num(0)}, std_normal_density) + real_integral({(t : Real) | real_of_num(0) <= t}, std_normal_density), UNION({(t : Real) | t <= real_of_num(0)}, {(t : Real) | real_of_num(0) <= t}))
+      #|  real_integral({(t : Real) | t <= real_of_num(0)}, std_normal_density) + real_integral({(t : Real) | real_of_num(0) <= t}, std_normal_density) == real_of_num(1)
+      #|  (UNIV : (Real) -> Bool)
+      #|  {(t : Real) | t <= real_of_num(0)}
       #|  std_normal_density
-      #|  (\\x. std_normal_density(--x)) = std_normal_density
-      #|  --x:real
-      #|  IMAGE ((--):real->real) {t | &0 <= t} = {t:real | t <= &0}
-      #|  {t:real | &0 <= t}
-      #|  real_integral {t:real | &0 <= t} std_normal_density
+      #|  ((x : Real) => std_normal_density(-x)) == std_normal_density
+      #|  -(x : Real)
+      #|  IMAGE(op_minus_minus, {(t : Real) | real_of_num(0) <= t}) == {(t : Real) | t <= real_of_num(0)}
+      #|  {(t : Real) | real_of_num(0) <= t}
+      #|  real_integral({(t : Real) | real_of_num(0) <= t}, std_normal_density)
       #|  std_normal_density
-      #|  (std_normal_density has_real_integral\n     real_integral {t:real | &0 <= t} std_normal_density)\n     {t:real | t <= &0}
-      #|  real_integral {t:real | t <= &0} std_normal_density =\n     real_integral {t:real | &0 <= t} std_normal_density
-      #|  std_normal_cdf(&0) = &1 / &2
-      #|  &0 < x ==> ~(x = &0)
-      #|  inv(sqrt(&2 * pi)) * sqrt(&2 * pi) = &1
-      #|  forall x:real. inv(sqrt(&2 * pi)) * sqrt(&2 * pi) * x = x
-      #|  t:real
-      #|  &1
-      #|  &2 * &1:real = &2
-      #|  (a * b) * c:real = a * (b * c)
-      #|  forall t. ((\\x. std_normal_density x * cos(t * x)) has_real_integral\n        exp(--(t pow 2 / &2))) (:real)
-      #|  inv(sqrt(&2 * pi))
-      #|  t:real
-      #|  &1
-      #|  (a * b) * c:real = a * (b * c)
-      #|  forall t. ((\\x. std_normal_density x * sin(t * x)) has_real_integral\n        &0) (:real)
-      #|  inv(sqrt(&2 * pi))
-      #|  &0 <= (x / &2 - &1) pow 2 /\\ &0 <= (x / &2 + &1) pow 2
-      #|  &1 + x pow 2 / &4
-      #|  forall x:real. abs(x) <= exp(x pow 2 / &4)
-      #|  exp(--(x pow 2 / &4)) =\n                exp(x pow 2 / &4) * exp(--(x pow 2 / &2))
-      #|  abs(exp(--(x pow 2 / &2))) = exp(--(x pow 2 / &2))
-      #|  forall x:real. abs(x * exp(--(x pow 2 / &2))) <= exp(--(x pow 2 / &4))
-      #|  &1 / &2 * t pow 2 / &2 = t pow 2 / &4
-      #|  &1 / &2
-      #|  sqrt(&2 * pi / (&1 / &2))
-      #|  (\\t. exp(--(t pow 2 / &4))) real_integrable_on (:real)
-      #|  \\t. exp(--(t pow 2 / &4))
-      #|  (\\x. x * exp(--(x pow 2 / &2))) real_integrable_on (:real)
-      #|  --x:real
-      #|  IMAGE (--) (:real) = (:real)
-      #|  (:real)
-      #|  \\x:real. --(x * std_normal_density x)
-      #|  k:real = --k
-      #|  k:real = &0
-      #|  ((\\x. --(x * std_normal_density x)) has_real_integral (--k)) (:real)
-      #|  (:real)
-      #|  k:real
-      #|  \\x:real. x * std_normal_density x
-      #|  (\\x. --(x * std_normal_density x)) =\n     (\\x. (--x) * std_normal_density(--x))
-      #|  ((\\x. --(x * std_normal_density x)) has_real_integral k) (:real)
-      #|  k = real_integral (:real) (\\x. x * std_normal_density x)
-      #|  (\\x. x * std_normal_density x) =\n    (\\x. inv(sqrt(&2 * pi)) * (x * exp(--(x pow 2 / &2))))
-      #|  (\\x. x * std_normal_density x) real_integrable_on (:real)
-      #|  ((\\x. x * std_normal_density x) has_real_integral &0) (:real)
-      #|  real_integral (:real) (\\x. x * std_normal_density x) = &0
-      #|  forall x. ((\\x. --x * exp(--(x pow 2 / &2))) has_real_derivative\n        ((x pow 2 - &1) * exp(--(x pow 2 / &2)))) (atreal x)
-      #|  a pow 2 / &4
-      #|  a:real
-      #|  &2 * exp(--(a pow 2 / &4)) < e
-      #|  --a * x:real = --(a * x)
-      #|  exp(--(a pow 2 / &4))
-      #|  b pow 2 / &4
-      #|  b:real
-      #|  &2 * exp(--(b pow 2 / &4)) < e
-      #|  --b * x:real = --(b * x)
-      #|  exp(--(b pow 2 / &4))
-      #|  abs fb < e / &2 /\\ abs fa < e / &2\n     ==> abs(fb - fa) < e
-      #|  real_integral (real_interval[a,b])\n       (\\x. (x pow 2 - &1) * exp(--(x pow 2 / &2))) =\n     (--b * exp(--(b pow 2 / &2))) - (--a * exp(--(a pow 2 / &2)))
-      #|  a <= b:real
-      #|  a <= --B /\\ B <= b
-      #|  b:real
-      #|  a:real
-      #|  B:real
-      #|  B:real
-      #|  &1 / &2 * t pow 2 / &2 = t pow 2 / &4
-      #|  e:real
-      #|  &1 / &2
-      #|  e:real
-      #|  ((\\x. (x pow 2 - &1) * exp(--(x pow 2 / &2))) has_real_integral &0)\n   (:real)
-      #|  &1
-      #|  sqrt(&2 * pi) = &0 + sqrt(&2 * pi)
-      #|  (\\x. x pow 2 * exp(--(x pow 2 / &2))) =\n     (\\x. (x pow 2 - &1) * exp(--(x pow 2 / &2)) +\n          exp(--(x pow 2 / &2)))
-      #|  ((\\x. x pow 2 * exp(--(x pow 2 / &2))) has_real_integral sqrt(&2 * pi))\n   (:real)
-      #|  &0 < x ==> ~(x = &0)
-      #|  &1 = inv(sqrt(&2 * pi)) * sqrt(&2 * pi)
-      #|  (\\x. x pow 2 * std_normal_density x) =\n     (\\x. inv(sqrt(&2 * pi)) * (x pow 2 * exp(--(x pow 2 / &2))))
-      #|  ((\\x. x pow 2 * std_normal_density x) has_real_integral &1) (:real)
-      #|  real_integral (:real) (\\x. x pow 2 * std_normal_density x) = &1
-      #|  M = abs(M:real)
-      #|  forall x M. &0 <= M ==> (abs(x) >= M <=> x pow 2 >= M pow 2)
-      #|  a:A
-      #|  simple_rv (p:A prob_space) (\\a:A. (X:A->real) a pow 2)
-      #|  a:A
-      #|  {a:A | a IN prob_carrier p /\\ abs((X:A->real) a) >= M} =\n     {a | a IN prob_carrier p /\\ (\\a. X a pow 2) a >= M pow 2}
-      #|  forall p:A prob_space (X:A->real) M.\n     simple_rv p X /\\ &0 < M\n     ==> prob p {a | a IN prob_carrier p /\\ abs(X a) >= M} <=\n         simple_expectation p (\\x. X x pow 2) / M pow 2
-      #|  simple_expectation (p:A prob_space) (\\x. (X:num->A->real) n x pow 2) / (M:real) pow 2
-      #|  (C:real) / (M:real) pow 2
-      #|  simple_expectation (p:A prob_space) (\\x. (X:num->A->real) n x pow 2) /\n     (M:real) pow 2 <= (C:real) / (M:real) pow 2
-      #|  M:real
-      #|  (X:num->A->real) n
-      #|  p:A prob_space
-      #|  prob (p:A prob_space) {a | a IN prob_carrier p /\\\n       abs((X:num->A->real) n a) >= M} <=\n     simple_expectation p (\\x. X n x pow 2) / (M:real) pow 2
-      #|  n:num
-      #|  (e:real) * (C / e)
-      #|  (C:real) / (M:real) pow 2 < e
-      #|  &0 < (M:real) pow 2
-      #|  sqrt(C / e) pow 2
-      #|  C / e < (M:real) pow 2
-      #|  &0 < M
-      #|  &0 <= sqrt(C / e)
-      #|  M:real
-      #|  M = sqrt(C / e) + &1
-      #|  e:real
-      #|  forall p:A prob_space (X:num->A->real) C.\n     (forall n. simple_rv p (X n)) /\\\n     &0 < C /\\\n     (forall n. simple_expectation p (\\x. (X:num->A->real) n x pow 2) <= C)\n     ==>\n     forall e. &0 < e ==>\n       ?M. &0 < M /\\\n       forall n:num.\n         prob (p:A prob_space) {a | a IN prob_carrier p /\\\n                                     abs((X:num->A->real) n a) >= M} < e
-      #|  inv(&k + &1)
-      #|  nn:num
-      #|  nn:num
-      #|  mm:num
-      #|  mm:num
-      #|  k:num
-      #|  k:num
-      #|  e:real
-      #|  e:real
-      #|  mm:num
-      #|  mm:num
+      #|  has_real_integral(std_normal_density, real_integral({(t : Real) | real_of_num(0) <= t}, std_normal_density), {(t : Real) | t <= real_of_num(0)})
+      #|  real_integral({(t : Real) | t <= real_of_num(0)}, std_normal_density) == real_integral({(t : Real) | real_of_num(0) <= t}, std_normal_density)
+      #|  std_normal_cdf(real_of_num(0)) == real_of_num(1) / real_of_num(2)
+      #|  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+      #|  inv(sqrt(real_of_num(2) * pi)) * sqrt(real_of_num(2) * pi) == real_of_num(1)
+      #|  \226\136\128 x : Real, inv(sqrt(real_of_num(2) * pi)) * (sqrt(real_of_num(2) * pi) * x) == x
+      #|  (t : Real)
+      #|  real_of_num(1)
+      #|  real_of_num(2) * real_of_num(1) == real_of_num(2)
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  \226\136\128 t : Real, has_real_integral((x : Real) => std_normal_density(x) * cos(t * x), exp(-(pow(t, 2) / real_of_num(2))), UNIV)
+      #|  inv(sqrt(real_of_num(2) * pi))
+      #|  (t : Real)
+      #|  real_of_num(1)
+      #|  (a : Real) * (b : Real) * (c : Real) == a * (b * c)
+      #|  \226\136\128 t : Real, has_real_integral((x : Real) => std_normal_density(x) * sin(t * x), real_of_num(0), UNIV)
+      #|  inv(sqrt(real_of_num(2) * pi))
+      #|  real_of_num(0) <= pow((x : Real) / real_of_num(2) - real_of_num(1), 2) && real_of_num(0) <= pow(x / real_of_num(2) + real_of_num(1), 2)
+      #|  real_of_num(1) + pow((x : Real), 2) / real_of_num(4)
+      #|  \226\136\128 x : Real, abs(x) <= exp(pow(x, 2) / real_of_num(4))
+      #|  exp(-(pow((x : Real), 2) / real_of_num(4))) == exp(pow(x, 2) / real_of_num(4)) * exp(-(pow(x, 2) / real_of_num(2)))
+      #|  abs(exp(-(pow((x : Real), 2) / real_of_num(2)))) == exp(-(pow(x, 2) / real_of_num(2)))
+      #|  \226\136\128 x : Real, abs(x * exp(-(pow(x, 2) / real_of_num(2)))) <= exp(-(pow(x, 2) / real_of_num(4)))
+      #|  real_of_num(1) / real_of_num(2) * (pow((t : Real), 2) / real_of_num(2)) == pow(t, 2) / real_of_num(4)
+      #|  real_of_num(1) / real_of_num(2)
+      #|  sqrt(real_of_num(2) * (pi / (real_of_num(1) / real_of_num(2))))
+      #|  real_integrable_on((t : Real) => exp(-(pow(t, 2) / real_of_num(4))), UNIV)
+      #|  (t : Real) => exp(-(pow(t, 2) / real_of_num(4)))
+      #|  real_integrable_on((x : Real) => x * exp(-(pow(x, 2) / real_of_num(2))), UNIV)
+      #|  -(x : Real)
+      #|  (IMAGE : ((Real) -> Real, (Real) -> Bool, Real) -> Bool)(op_minus_minus, (UNIV : (Real) -> Bool)) == (UNIV : (Real) -> Bool)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (x : Real) => -(x * std_normal_density(x))
+      #|  (k : Real) == -k
+      #|  (k : Real) == real_of_num(0)
+      #|  has_real_integral((x : Real) => -(x * std_normal_density(x)), -(k : Real), UNIV)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (k : Real)
+      #|  (x : Real) => x * std_normal_density(x)
+      #|  ((x : Real) => -(x * std_normal_density(x))) == ((x : Real) => -x * std_normal_density(-x))
+      #|  has_real_integral((x : Real) => -(x * std_normal_density(x)), (k : Real), UNIV)
+      #|  (k : Real) == real_integral(UNIV, (x : Real) => x * std_normal_density(x))
+      #|  ((x : Real) => x * std_normal_density(x)) == ((x : Real) => inv(sqrt(real_of_num(2) * pi)) * (x * exp(-(pow(x, 2) / real_of_num(2)))))
+      #|  real_integrable_on((x : Real) => x * std_normal_density(x), UNIV)
+      #|  has_real_integral((x : Real) => x * std_normal_density(x), real_of_num(0), UNIV)
+      #|  real_integral(UNIV, (x : Real) => x * std_normal_density(x)) == real_of_num(0)
+      #|  \226\136\128 x : Real, has_real_derivative((x : Real) => -x * exp(-(pow(x, 2) / real_of_num(2))), (pow(x, 2) - real_of_num(1)) * exp(-(pow(x, 2) / real_of_num(2))), atreal(x))
+      #|  pow((a : Real), 2) / real_of_num(4)
+      #|  (a : Real)
+      #|  real_of_num(2) * exp(-(pow((a : Real), 2) / real_of_num(4))) < (e : Real)
+      #|  -(a : Real) * (x : Real) == -(a * x)
+      #|  exp(-(pow((a : Real), 2) / real_of_num(4)))
+      #|  pow((b : Real), 2) / real_of_num(4)
+      #|  (b : Real)
+      #|  real_of_num(2) * exp(-(pow((b : Real), 2) / real_of_num(4))) < (e : Real)
+      #|  -(b : Real) * (x : Real) == -(b * x)
+      #|  exp(-(pow((b : Real), 2) / real_of_num(4)))
+      #|  abs((fb : Real)) < (e : Real) / real_of_num(2) && abs((fa : Real)) < e / real_of_num(2) \226\134\146 abs(fb - fa) < e
+      #|  real_integral(real_interval([((a : Real), (b : Real))]), (x : Real) => (pow(x, 2) - real_of_num(1)) * exp(-(pow(x, 2) / real_of_num(2)))) == -b * exp(-(pow(b, 2) / real_of_num(2))) - -a * exp(-(pow(a, 2) / real_of_num(2)))
+      #|  (a : Real) <= (b : Real)
+      #|  (a : Real) <= -(B : Real) && B <= (b : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (B : Real)
+      #|  (B : Real)
+      #|  real_of_num(1) / real_of_num(2) * (pow((t : Real), 2) / real_of_num(2)) == pow(t, 2) / real_of_num(4)
+      #|  (e : Real)
+      #|  real_of_num(1) / real_of_num(2)
+      #|  (e : Real)
+      #|  has_real_integral((x : Real) => (pow(x, 2) - real_of_num(1)) * exp(-(pow(x, 2) / real_of_num(2))), real_of_num(0), UNIV)
+      #|  real_of_num(1)
+      #|  sqrt(real_of_num(2) * pi) == real_of_num(0) + sqrt(real_of_num(2) * pi)
+      #|  ((x : Real) => pow(x, 2) * exp(-(pow(x, 2) / real_of_num(2)))) == ((x : Real) => (pow(x, 2) - real_of_num(1)) * exp(-(pow(x, 2) / real_of_num(2))) + exp(-(pow(x, 2) / real_of_num(2))))
+      #|  has_real_integral((x : Real) => pow(x, 2) * exp(-(pow(x, 2) / real_of_num(2))), sqrt(real_of_num(2) * pi), UNIV)
+      #|  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+      #|  real_of_num(1) == inv(sqrt(real_of_num(2) * pi)) * sqrt(real_of_num(2) * pi)
+      #|  ((x : Real) => pow(x, 2) * std_normal_density(x)) == ((x : Real) => inv(sqrt(real_of_num(2) * pi)) * (pow(x, 2) * exp(-(pow(x, 2) / real_of_num(2)))))
+      #|  has_real_integral((x : Real) => pow(x, 2) * std_normal_density(x), real_of_num(1), UNIV)
+      #|  real_integral(UNIV, (x : Real) => pow(x, 2) * std_normal_density(x)) == real_of_num(1)
+      #|  (M : Real) == abs(M)
+      #|  \226\136\128 x : Real, \226\136\128 M : Real, real_of_num(0) <= M \226\134\146 (abs(x) >= M) == (pow(x, 2) >= pow(M, 2))
+      #|  (a : A)
+      #|  simple_rv((p : Prob_space[A]), (a : A) => pow((X : (A) -> Real)(a), 2))
+      #|  (a : A)
+      #|  {(a : A) | IN(a, prob_carrier((p : Prob_space[A]))) && abs((X : (A) -> Real)(a)) >= (M : Real)} == {(a : A) | IN(a, prob_carrier(p)) && ((a : A) => pow(X(a), 2))(a) >= pow(M, 2)}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 M : Real, simple_rv(p, X) && real_of_num(0) < M \226\134\146 prob(p, {(a : A) | IN(a, prob_carrier(p)) && abs(X(a)) >= M}) <= simple_expectation(p, (x : A) => pow(X(x), 2)) / pow(M, 2)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => pow((X : (Num, A) -> Real)((n : Num), x), 2)) / pow((M : Real), 2)
+      #|  (C : Real) / pow((M : Real), 2)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => pow((X : (Num, A) -> Real)((n : Num), x), 2)) / pow((M : Real), 2) <= (C : Real) / pow(M, 2)
+      #|  (M : Real)
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  prob((p : Prob_space[A]), {(a : A) | IN(a, prob_carrier(p)) && abs((X : (Num, A) -> Real)((n : Num), a)) >= (M : Real)}) <= simple_expectation(p, (x : A) => pow(X(n, x), 2)) / pow(M, 2)
+      #|  (n : Num)
+      #|  (e : Real) * ((C : Real) / e)
+      #|  (C : Real) / pow((M : Real), 2) < (e : Real)
+      #|  real_of_num(0) < pow((M : Real), 2)
+      #|  pow(sqrt((C : Real) / (e : Real)), 2)
+      #|  (C : Real) / (e : Real) < pow((M : Real), 2)
+      #|  real_of_num(0) < (M : Real)
+      #|  real_of_num(0) <= sqrt((C : Real) / (e : Real))
+      #|  (M : Real)
+      #|  (M : Real) == sqrt((C : Real) / (e : Real)) + real_of_num(1)
+      #|  (e : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 C : Real, (\226\136\128 n : Num, simple_rv(p, X(n))) && real_of_num(0) < C && (\226\136\128 n : Num, simple_expectation(p, (x : A) => pow(X(n, x), 2)) <= C) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 M : Real, real_of_num(0) < M && (\226\136\128 n : Num, prob(p, {(a : A) | IN(a, prob_carrier(p)) && abs(X(n, a)) >= M}) < e)))
+      #|  inv(real_of_num((k : Num)) + real_of_num(1))
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  (mm : Num)
+      #|  (mm : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (mm : Num)
+      #|  (mm : Num)
       #|  0
-      #|  (w:A) IN prob_carrier (p:A prob_space)
-      #|  nn:num
-      #|  nn:num
-      #|  N:num
-      #|  N:num
-      #|  inv(&k + &1)
-      #|  ((\\n. (X:num->A->real) n (w:A)) ---> (L:A->real) w) sequentially
-      #|  k:num
-      #|  w:A
+      #|  IN((w : A), prob_carrier((p : Prob_space[A])))
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  inv(real_of_num((k : Num)) + real_of_num(1))
+      #|  op_minus_minus_minus_gt((n : Num) => (X : (Num, A) -> Real)(n, (w : A)), (L : (A) -> Real)(w), sequentially)
+      #|  (k : Num)
+      #|  (w : A)
       #|  {x:A | x IN prob_carrier p /\\\n       ((\\n. (X:num->A->real) n x) ---> (L:A->real) x) sequentially} =\n     INTERS {liminf_events\n       (\\n. {x:A | x IN prob_carrier p /\\\n         abs (X n x - L x) < inv(&k + &1)}) | k IN (:num)}
-      #|  {x:A | x IN prob_carrier p /\\\n       abs ((X:num->A->real) n x - (L:A->real) x) < inv(&k + &1)} =\n      {x | x IN prob_carrier p /\\\n       --(inv(&k + &1)) < X n x - L x /\\ X n x - L x < inv(&k + &1)}
-      #|  forall n:num k:num.\n    {x:A | x IN prob_carrier p /\\\n      abs ((X:num->A->real) n x - (L:A->real) x) < inv(&k + &1)}\n    IN prob_events (p:A prob_space)
-      #|  forall p:A prob_space (X:num->A->real) (L:A->real).\n     (forall n. random_variable p (X n)) /\\ random_variable p L\n     ==> {x | x IN prob_carrier p /\\\n              ((\\n. X n x) ---> L x) sequentially} IN prob_events p
-      #|  p:A prob_space
-      #|  B:num->A->bool
-      #|  x:A
-      #|  r:num->num
-      #|  L:A->real
-      #|  X:num->A->real
-      #|  x:A
-      #|  prob p (prob_carrier p DIFF limsup_events (B:num->A->bool))
-      #|  &1 <= q /\\ q <= &1 ==> q = &1
-      #|  L:A->real
-      #|  \\k:num. \\x:A. (X:num->A->real) (r k) x
-      #|  p:A prob_space
-      #|  &0 <= q /\\ q < b ==> abs q <= b
-      #|  k:num
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs((X : (Num, A) -> Real)((n : Num), x) - (L : (A) -> Real)(x)) < inv(real_of_num((k : Num)) + real_of_num(1))} == {(x : A) | IN(x, prob_carrier(p)) && -inv(real_of_num(k) + real_of_num(1)) < X(n, x) - L(x) && X(n, x) - L(x) < inv(real_of_num(k) + real_of_num(1))}
+      #|  \226\136\128 n : Num, \226\136\128 k : Num, IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs((X : (Num, A) -> Real)(n, x) - (L : (A) -> Real)(x)) < inv(real_of_num(k) + real_of_num(1))}, prob_events(p))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 L : (A) -> Real, (\226\136\128 n : Num, random_variable(p, X(n))) && random_variable(p, L) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && op_minus_minus_minus_gt((n : Num) => X(n, x), L(x), sequentially)}, prob_events(p))
+      #|  (p : Prob_space[A])
+      #|  (B : (Num, A) -> Bool)
+      #|  (x : A)
+      #|  (r : (Num) -> Num)
+      #|  (L : (A) -> Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (x : A)
+      #|  prob((p : Prob_space[A]), DIFF(prob_carrier(p), limsup_events((B : (Num, A) -> Bool))))
+      #|  real_of_num(1) <= (q : Real) && q <= real_of_num(1) \226\134\146 q == real_of_num(1)
+      #|  (L : (A) -> Real)
+      #|  (k : Num) => (x : A) => (X : (Num, A) -> Real)((r : (Num) -> Num)(k), x)
+      #|  (p : Prob_space[A])
+      #|  real_of_num(0) <= (q : Real) && q < (b : Real) \226\134\146 abs(q) <= b
+      #|  (k : Num)
       #|  0
-      #|  \\k:num. inv(&2 pow k)
-      #|  prob p (limsup_events (B:num->A->bool)) = &0
-      #|  forall k. (B:num->A->bool) k IN prob_events p
-      #|  B = \\k. {x:A | x IN prob_carrier p /\\ abs((X:num->A->real) (r(SUC k)) x - L x) >= inv(&2 pow k)}
-      #|  forall p:A prob_space X L (r:num->num).\n     (forall n. random_variable p (X n)) /\\ random_variable p L /\\\n     (forall k. r k < r(SUC k)) /\\\n     (forall k. prob p {x:A | x IN prob_carrier p /\\\n                        abs(X (r(SUC k)) x - L x) >= inv(&2 pow k)} < inv(&2 pow k))\n     ==> converges_as p (\\k x. X (r k) x) L
-      #|  r:num->num
-      #|  r:num->num
-      #|  &0 <= q ==> abs(q - &0) < e ==> q < e
-      #|  NN <= NN + m + 1
-      #|  NN + m + 1
-      #|  NN + m + 1
-      #|  NN:num
-      #|  inv(&2 pow k)
-      #|  inv(&2 pow k)
-      #|  m:num
-      #|  k:num
-      #|  \\k n. prob p {x:A | x IN prob_carrier p /\\ abs((X:num->A->real) n x - L x) >= inv(&2 pow k)} < inv(&2 pow k)
-      #|  forall p:A prob_space X L.\n     (forall n. random_variable p (X n)) /\\ random_variable p L /\\\n     converges_in_prob p X L\n     ==> ?r:num->num. (forall k. r k < r(SUC k)) /\\\n                       converges_as p (\\k x. X (r k) x) L
-      #|  m >= N:num
-      #|  m:num
-      #|  m:num
-      #|  t:A->bool
-      #|  N:num
+      #|  (k : Num) => inv(pow(real_of_num(2), k))
+      #|  prob((p : Prob_space[A]), limsup_events((B : (Num, A) -> Bool))) == real_of_num(0)
+      #|  \226\136\128 k : Num, IN((B : (Num, A) -> Bool)(k), prob_events((p : Prob_space[A])))
+      #|  (B : (Num, A) -> Bool) == ((k : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs((X : (Num, A) -> Real)((r : (Num) -> Num)(SUC(k)), x) - (L : (A) -> Real)(x)) >= inv(pow(real_of_num(2), k))})
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 L : (A) -> Real, \226\136\128 r : (Num) -> Num, (\226\136\128 n : Num, random_variable(p, X(n))) && random_variable(p, L) && (\226\136\128 k : Num, r(k) < r(SUC(k))) && (\226\136\128 k : Num, prob(p, {(x : A) | IN(x, prob_carrier(p)) && abs(X(r(SUC(k)), x) - L(x)) >= inv(pow(real_of_num(2), k))}) < inv(pow(real_of_num(2), k))) \226\134\146 converges_as(p, (k : Num) => (x : A) => X(r(k), x), L)
+      #|  (r : (Num) -> Num)
+      #|  (r : (Num) -> Num)
+      #|  real_of_num(0) <= (q : Real) \226\134\146 abs(q - real_of_num(0)) < (e : Real) \226\134\146 q < e
+      #|  (NN : Num) <= NN + ((m : Num) + 1)
+      #|  (NN : Num) + ((m : Num) + 1)
+      #|  (NN : Num) + ((m : Num) + 1)
+      #|  (NN : Num)
+      #|  inv(pow(real_of_num(2), (k : Num)))
+      #|  inv(pow(real_of_num(2), (k : Num)))
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (k : Num) => (n : Num) => prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && abs((X : (Num, A) -> Real)(n, x) - (L : (A) -> Real)(x)) >= inv(pow(real_of_num(2), k))}) < inv(pow(real_of_num(2), k))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 L : (A) -> Real, (\226\136\128 n : Num, random_variable(p, X(n))) && random_variable(p, L) && converges_in_prob(p, X, L) \226\134\146 (\226\136\131 r : (Num) -> Num, (\226\136\128 k : Num, r(k) < r(SUC(k))) && converges_as(p, (k : Num) => (x : A) => X(r(k), x), L))
+      #|  (m : Num) >= (N : Num)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (t : (A) -> Bool)
+      #|  (N : Num)
       #|  UNIONS {{x:A | x IN prob_carrier (p:A prob_space) /\\\n       abs ((X:num->A->real) n' x - (L:A->real) x) >= e} | n' >= N}
-      #|  N:num
-      #|  e:real
-      #|  k:num
-      #|  t:A->bool
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (k : Num)
+      #|  (t : (A) -> Bool)
       #|  0
       #|  UNIONS {{x:A | x IN prob_carrier (p:A prob_space) /\\\n      abs ((X:num->A->real) n' x - (L:A->real) x) >= e} | n' >= 0}
-      #|  w:A
+      #|  (w : A)
       #|  forall p:A prob_space (X:num->A->real) (L:A->real) (e:real).\n     &0 < e /\\\n     (forall n. {x:A | x IN prob_carrier p /\\\n       abs (X n x - L x) >= e} IN prob_events p)\n     ==>\n     INTERS {UNIONS {{x:A | x IN prob_carrier p /\\\n       abs (X n' x - L x) >= e} | n' >= n} | n IN (:num)}\n     SUBSET\n     prob_carrier p DIFF\n       {x:A | x IN prob_carrier p /\\\n         ((\\n. X n x) ---> L x) sequentially}
-      #|  r:num->num
-      #|  l:real
-      #|  l:real
-      #|  b:real
-      #|  \\k:num. (f:num->real)(r k)
-      #|  r:num->num
-      #|  l:real
-      #|  l:real
-      #|  b:real
-      #|  \\k:num. (f:num->real)(r k)
-      #|  r:num->num
-      #|  f:num->real
-      #|  forall f:num->real b.\n     (forall n. abs(f n) <= b)\n     ==> ?l r. (forall m n. m < n ==> r m < r n) /\\\n               ((\\k. f(r k)) ---> l) sequentially
-      #|  forall k:num. (r:num->num) k < r(SUC k)
-      #|  r:num->num
-      #|  r:num->num
-      #|  \\(prev:num) (k:num). @n:num. prev < n /\\ P n
-      #|  @n:num. 0 < n /\\ P n
-      #|  w:num
-      #|  \\n:num. m < n /\\ (P:num->bool) n
-      #|  w:num
-      #|  m:num
-      #|  forall m:num. m < (@n. m < n /\\ (P:num->bool) n) /\\ P(@n. m < n /\\ P n)
-      #|  n:num
-      #|  n:num
-      #|  m + 1
-      #|  forall m:num. ?n. m < n /\\ (P:num->bool) n
-      #|  forall P:num->bool. (forall N:num. ?n. N <= n /\\ P n)\n     ==> ?r:num->num. (forall m n. m < n ==> r m < r n) /\\ (forall k. P (r k))
-      #|  M:num
-      #|  M:num
-      #|  e:real
-      #|  ((\\k:num. (f:num->real)((r1:num->num)((s1:num->num) k))) ---> (L:real)) sequentially
-      #|  s1:num->num
-      #|  r1:num->num
-      #|  \\n:num. ~(abs((f:num->real) n - L) < e)
-      #|  ?r1:num->num. (forall m n:num. m < n ==> r1 m < r1 n) /\\\n                   (forall k:num. ~(abs((f:num->real)(r1 k) - L) < e))
-      #|  forall N:num. ?n. N <= n /\\ ~(abs((f:num->real) n - L) < e)
-      #|  ?N:num. forall n. N <= n ==> abs((f:num->real) n - L) < e
-      #|  e:real
-      #|  forall f:num->real L b.\n     (forall n. abs(f n) <= b) /\\\n     (forall r:num->num. (forall m n. m < n ==> r m < r n)\n          ==> ?s:num->num. (forall m n. m < n ==> s m < s n) /\\\n                  ((\\k. f(r(s k))) ---> L) sequentially)\n     ==> (f ---> L) sequentially
-      #|  d / &2
-      #|  x + d / &2
-      #|  d:real
-      #|  l - (f:real->real) x
-      #|  (f:real->real) real_continuous (atreal x)
-      #|  d / &2
-      #|  x - d / &2
-      #|  d:real
-      #|  (f:real->real) x - l
-      #|  (f:real->real) real_continuous (atreal x)
-      #|  a <= l /\\ l <= a ==> l = a
-      #|  forall f x l. f real_continuous (atreal x) /\\\n           (forall h. &0 < h ==> f(x - h) <= l /\\ l <= f(x + h))\n           ==> l = f x
-      #|  SUC k
-      #|  k:num
-      #|  forall(r:num->num). (forall m n. m < n ==> r m < r n) ==> forall k. k <= r k
-      #|  k:num
-      #|  r:num->num
-      #|  k:num
-      #|  N:num
-      #|  N:num
-      #|  e:real
-      #|  e:real
-      #|  forall(f:num->real) l (r:num->num).\n     (f ---> l) sequentially /\\ (forall m n. m < n ==> r m < r n)\n     ==> ((\\k. f(r k)) ---> l) sequentially
-      #|  r:num->num
-      #|  &0
-      #|  \\n. prob p {x:A | x IN prob_carrier p /\\ abs((X:num->A->real) n x - L x) >= e}
-      #|  e:real
-      #|  e:real
-      #|  forall p:A prob_space X L (r:num->num).\n     converges_in_prob p X L /\\ (forall m n. m < n ==> r m < r n)\n     ==> converges_in_prob p (\\k x. X (r k) x) L
-      #|  s:num->num
-      #|  s:num->num
-      #|  L:A->real
-      #|  \\k:num. \\x:A. (X:num->A->real) (r k) x
-      #|  p:A prob_space
-      #|  forall p:A prob_space X L (r:num->num).\n     (forall n. random_variable p (X n)) /\\ random_variable p L /\\\n     converges_in_prob p X L /\\ (forall m n. m < n ==> r m < r n)\n     ==> ?s:num->num. (forall m n. m < n ==> s m < s n) /\\\n                      converges_as p (\\k x. X (r(s k)) x) L
-      #|  x:real
-      #|  a:A
-      #|  simple_expectation (p:A prob_space) (\\a:A. if (X:A->real) a <= x then &1 else &0) =\n     simple_expectation p (indicator_fn {a | a IN prob_carrier p /\\ X a <= x})
-      #|  forall p:A prob_space (X:A->real) x.\n     simple_rv p X\n     ==> simple_cdf p X x =\n         simple_expectation p (\\a. if X a <= x then &1 else &0)
-      #|  &0
-      #|  (X:A->real) a <= x
-      #|  a:A
-      #|  \\y:real. if y <= x then &1 else &0
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  \\a:A. if (X:A->real) a <= x then &1 else &0
-      #|  \\a:A. (g:real->real) ((X:A->real) a)
-      #|  p:A prob_space
-      #|  forall p:A prob_space (X:A->real) (g:real->real) x.\n     simple_rv p X /\\\n     (forall y. y <= x ==> g y <= &1) /\\\n     (forall y. y > x ==> g y <= &0)\n     ==> simple_expectation p (\\a. g(X a)) <= simple_cdf p X x
-      #|  x:real
-      #|  (X:A->real) a <= x
-      #|  a:A
-      #|  \\y:real. if y <= x then &1 else &0
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  \\a:A. (g:real->real) ((X:A->real) a)
-      #|  \\a:A. if (X:A->real) a <= x then &1 else &0
-      #|  p:A prob_space
-      #|  forall p:A prob_space (X:A->real) (g:real->real) x.\n     simple_rv p X /\\\n     (forall y. y <= x ==> &1 <= g y) /\\\n     (forall y. y > x ==> &0 <= g y)\n     ==> simple_cdf p X x <= simple_expectation p (\\a. g(X a))
-      #|  x:real
-      #|  x:real
+      #|  (r : (Num) -> Num)
+      #|  (l : Real)
+      #|  (l : Real)
+      #|  (b : Real)
+      #|  (k : Num) => (f : (Num) -> Real)((r : (Num) -> Num)(k))
+      #|  (r : (Num) -> Num)
+      #|  (l : Real)
+      #|  (l : Real)
+      #|  (b : Real)
+      #|  (k : Num) => (f : (Num) -> Real)((r : (Num) -> Num)(k))
+      #|  (r : (Num) -> Num)
+      #|  (f : (Num) -> Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 b : Real, (\226\136\128 n : Num, abs(f(n)) <= b) \226\134\146 (\226\136\131 l : Real, \226\136\131 r : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && op_minus_minus_minus_gt((k : Num) => f(r(k)), l, sequentially))
+      #|  \226\136\128 k : Num, (r : (Num) -> Num)(k) < r(SUC(k))
+      #|  (r : (Num) -> Num)
+      #|  (r : (Num) -> Num)
+      #|  (prev : Num) => (k : Num) => select((n : Num) => prev < n && (P : (Num) -> Bool)(n))
+      #|  select((n : Num) => 0 < n && (P : (Num) -> Bool)(n))
+      #|  (w : Num)
+      #|  (n : Num) => (m : Num) < n && (P : (Num) -> Bool)(n)
+      #|  (w : Num)
+      #|  (m : Num)
+      #|  \226\136\128 m : Num, m < select((n : Num) => m < n && (P : (Num) -> Bool)(n)) && P(select((n : Num) => m < n && P(n)))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (m : Num) + 1
+      #|  \226\136\128 m : Num, \226\136\131 n : Num, m < n && (P : (Num) -> Bool)(n)
+      #|  \226\136\128 P : (Num) -> Bool, (\226\136\128 N : Num, \226\136\131 n : Num, N <= n && P(n)) \226\134\146 (\226\136\131 r : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && (\226\136\128 k : Num, P(r(k))))
+      #|  (M : Num)
+      #|  (M : Num)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((k : Num) => (f : (Num) -> Real)((r1 : (Num) -> Num)((s1 : (Num) -> Num)(k))), (L : Real), sequentially)
+      #|  (s1 : (Num) -> Num)
+      #|  (r1 : (Num) -> Num)
+      #|  (n : Num) => !(abs((f : (Num) -> Real)(n) - (L : Real)) < (e : Real))
+      #|  \226\136\131 r1 : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r1(m) < r1(n)) && (\226\136\128 k : Num, !(abs((f : (Num) -> Real)(r1(k)) - (L : Real)) < (e : Real)))
+      #|  \226\136\128 N : Num, \226\136\131 n : Num, N <= n && !(abs((f : (Num) -> Real)(n) - (L : Real)) < (e : Real))
+      #|  \226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 abs((f : (Num) -> Real)(n) - (L : Real)) < (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 L : Real, \226\136\128 b : Real, (\226\136\128 n : Num, abs(f(n)) <= b) && (\226\136\128 r : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) \226\134\146 (\226\136\131 s : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 s(m) < s(n)) && op_minus_minus_minus_gt((k : Num) => f(r(s(k))), L, sequentially))) \226\134\146 op_minus_minus_minus_gt(f, L, sequentially)
+      #|  (d : Real) / real_of_num(2)
+      #|  (x : Real) + (d : Real) / real_of_num(2)
+      #|  (d : Real)
+      #|  (l : Real) - (f : (Real) -> Real)((x : Real))
+      #|  real_continuous((f : (Real) -> Real), atreal((x : Real)))
+      #|  (d : Real) / real_of_num(2)
+      #|  (x : Real) - (d : Real) / real_of_num(2)
+      #|  (d : Real)
+      #|  (f : (Real) -> Real)((x : Real)) - (l : Real)
+      #|  real_continuous((f : (Real) -> Real), atreal((x : Real)))
+      #|  (a : Real) <= (l : Real) && l <= a \226\134\146 l == a
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, \226\136\128 l : Real, real_continuous(f, atreal(x)) && (\226\136\128 h : Real, real_of_num(0) < h \226\134\146 f(x - h) <= l && l <= f(x + h)) \226\134\146 l == f(x)
+      #|  SUC((k : Num))
+      #|  (k : Num)
+      #|  \226\136\128 r : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) \226\134\146 (\226\136\128 k : Num, k <= r(k))
+      #|  (k : Num)
+      #|  (r : (Num) -> Num)
+      #|  (k : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, \226\136\128 r : (Num) -> Num, op_minus_minus_minus_gt(f, l, sequentially) && (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) \226\134\146 op_minus_minus_minus_gt((k : Num) => f(r(k)), l, sequentially)
+      #|  (r : (Num) -> Num)
+      #|  real_of_num(0)
+      #|  (n : Num) => prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && abs((X : (Num, A) -> Real)(n, x) - (L : (A) -> Real)(x)) >= (e : Real)})
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 L : (A) -> Real, \226\136\128 r : (Num) -> Num, converges_in_prob(p, X, L) && (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) \226\134\146 converges_in_prob(p, (k : Num) => (x : A) => X(r(k), x), L)
+      #|  (s : (Num) -> Num)
+      #|  (s : (Num) -> Num)
+      #|  (L : (A) -> Real)
+      #|  (k : Num) => (x : A) => (X : (Num, A) -> Real)((r : (Num) -> Num)(k), x)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 L : (A) -> Real, \226\136\128 r : (Num) -> Num, (\226\136\128 n : Num, random_variable(p, X(n))) && random_variable(p, L) && converges_in_prob(p, X, L) && (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) \226\134\146 (\226\136\131 s : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 s(m) < s(n)) && converges_as(p, (k : Num) => (x : A) => X(r(s(k)), x), L))
+      #|  (x : Real)
+      #|  (a : A)
+      #|  simple_expectation((p : Prob_space[A]), (a : A) => if (X : (A) -> Real)(a) <= (x : Real) { real_of_num(1) } else { real_of_num(0) }) == simple_expectation(p, indicator_fn({(a : A) | IN(a, prob_carrier(p)) && X(a) <= x}))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 x : Real, simple_rv(p, X) \226\134\146 simple_cdf(p, X, x) == simple_expectation(p, (a : A) => if X(a) <= x { real_of_num(1) } else { real_of_num(0) })
+      #|  real_of_num(0)
+      #|  (X : (A) -> Real)((a : A)) <= (x : Real)
+      #|  (a : A)
+      #|  (y : Real) => if y <= (x : Real) { real_of_num(1) } else { real_of_num(0) }
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (a : A) => if (X : (A) -> Real)(a) <= (x : Real) { real_of_num(1) } else { real_of_num(0) }
+      #|  (a : A) => (g : (Real) -> Real)((X : (A) -> Real)(a))
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 x : Real, simple_rv(p, X) && (\226\136\128 y : Real, y <= x \226\134\146 g(y) <= real_of_num(1)) && (\226\136\128 y : Real, y > x \226\134\146 g(y) <= real_of_num(0)) \226\134\146 simple_expectation(p, (a : A) => g(X(a))) <= simple_cdf(p, X, x)
+      #|  (x : Real)
+      #|  (X : (A) -> Real)((a : A)) <= (x : Real)
+      #|  (a : A)
+      #|  (y : Real) => if y <= (x : Real) { real_of_num(1) } else { real_of_num(0) }
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (a : A) => (g : (Real) -> Real)((X : (A) -> Real)(a))
+      #|  (a : A) => if (X : (A) -> Real)(a) <= (x : Real) { real_of_num(1) } else { real_of_num(0) }
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 x : Real, simple_rv(p, X) && (\226\136\128 y : Real, y <= x \226\134\146 real_of_num(1) <= g(y)) && (\226\136\128 y : Real, y > x \226\134\146 real_of_num(0) <= g(y)) \226\134\146 simple_cdf(p, X, x) <= simple_expectation(p, (a : A) => g(X(a)))
+      #|  (x : Real)
+      #|  (x : Real)
       #|  exp
-      #|  \\x:real. --(x pow 2 / &2)
-      #|  std_normal_density =\n    (\\x. inv(sqrt(&2 * pi)) * exp(--(x pow 2 / &2)))
-      #|  forall x. std_normal_density real_continuous atreal x
-      #|  abs(std_normal_density x) = std_normal_density x
-      #|  \\y:real. B * std_normal_density y
-      #|  B:real
-      #|  forall g:real->real.\n    (forall y. g real_continuous atreal y) /\\\n    (?B. forall y. abs(g y) <= B)\n    ==> (\\y. g y * std_normal_density y) real_integrable_on (:real)
-      #|  forall y. std_normal_density(--y) = std_normal_density y
-      #|  --x:real
-      #|  IMAGE (--) (:real) = (:real)
-      #|  &1
-      #|  y:real
+      #|  (x : Real) => -(pow(x, 2) / real_of_num(2))
+      #|  std_normal_density == ((x : Real) => inv(sqrt(real_of_num(2) * pi)) * exp(-(pow(x, 2) / real_of_num(2))))
+      #|  \226\136\128 x : Real, real_continuous(std_normal_density, atreal(x))
+      #|  abs(std_normal_density((x : Real))) == std_normal_density(x)
+      #|  (y : Real) => (B : Real) * std_normal_density(y)
+      #|  (B : Real)
+      #|  \226\136\128 g : (Real) -> Real, (\226\136\128 y : Real, real_continuous(g, atreal(y))) && (\226\136\131 B : Real, \226\136\128 y : Real, abs(g(y)) <= B) \226\134\146 real_integrable_on((y : Real) => g(y) * std_normal_density(y), UNIV)
+      #|  \226\136\128 y : Real, std_normal_density(-y) == std_normal_density(y)
+      #|  -(x : Real)
+      #|  (IMAGE : ((Real) -> Real, (Real) -> Bool, Real) -> Bool)(op_minus_minus, (UNIV : (Real) -> Bool)) == (UNIV : (Real) -> Bool)
+      #|  real_of_num(1)
+      #|  (y : Real)
       #|  sin
-      #|  \\y:real. t * y
-      #|  forall t. (\\y. sin(t * y) * std_normal_density y) real_integrable_on (:real)
-      #|  &2 * (k + &1) * p = &2 * k * p + &2 * p
-      #|  forall k:num. forall x. sin(x + &2 * &k * pi) = sin(x)
-      #|  &2 * (k + &1) * p = &2 * k * p + &2 * p
-      #|  forall k:num. forall x. cos(x + &2 * &k * pi) = cos(x)
-      #|  (y:real) - &2 * &m0 * pi < pi
-      #|  1 <= m ==> m - 1 < m
-      #|  m0 - 1
-      #|  1 <= m0
-      #|  --pi <= (y:real) - &2 * &m0 * pi
-      #|  (y:real) < pi
-      #|  &0 < (y:real)
-      #|  (y:real) - &2 * &m0 * pi < pi
-      #|  (y:real) < pi
-      #|  m0 = 0
-      #|  (y:real) - &2 * &m0 * pi
-      #|  m0:num
+      #|  (y : Real) => (t : Real) * y
+      #|  \226\136\128 t : Real, real_integrable_on((y : Real) => sin(t * y) * std_normal_density(y), UNIV)
+      #|  real_of_num(2) * (((k : Real) + real_of_num(1)) * (p : Real)) == real_of_num(2) * (k * p) + real_of_num(2) * p
+      #|  \226\136\128 k : Num, \226\136\128 x : Real, sin(x + real_of_num(2) * (real_of_num(k) * pi)) == sin(x)
+      #|  real_of_num(2) * (((k : Real) + real_of_num(1)) * (p : Real)) == real_of_num(2) * (k * p) + real_of_num(2) * p
+      #|  \226\136\128 k : Num, \226\136\128 x : Real, cos(x + real_of_num(2) * (real_of_num(k) * pi)) == cos(x)
+      #|  (y : Real) - real_of_num(2) * (real_of_num((m0 : Num)) * pi) < pi
+      #|  1 <= (m : Num) \226\134\146 m - 1 < m
+      #|  (m0 : Num) - 1
+      #|  1 <= (m0 : Num)
+      #|  -pi <= (y : Real) - real_of_num(2) * (real_of_num((m0 : Num)) * pi)
+      #|  (y : Real) < pi
+      #|  real_of_num(0) < (y : Real)
+      #|  (y : Real) - real_of_num(2) * (real_of_num((m0 : Num)) * pi) < pi
+      #|  (y : Real) < pi
+      #|  (m0 : Num) == 0
+      #|  (y : Real) - real_of_num(2) * (real_of_num((m0 : Num)) * pi)
+      #|  (m0 : Num)
       #|  forall x:real. (fn:real->real)(x + &2 * pi) = fn x
-      #|  &2 * (k + &1) * p = &2 * k * p + &2 * p
+      #|  real_of_num(2) * (((k : Real) + real_of_num(1)) * (p : Real)) == real_of_num(2) * (k * p) + real_of_num(2) * p
       #|  forall n:num. forall z:real. (fn:real->real)(z) = fn(z + &2 * &n * pi)
       #|  (fn:real->real) y = fn(y - &2 * &m0 * pi)
-      #|  x:real
-      #|  N:num
+      #|  (x : Real)
+      #|  (N : Num)
       #|  forall x:real. (fn:real->real)(x + &2 * pi) = fn x
-      #|  &2 * (k + &1) * p = &2 * k * p + &2 * p
+      #|  real_of_num(2) * (((k : Real) + real_of_num(1)) * (p : Real)) == real_of_num(2) * (k * p) + real_of_num(2) * p
       #|  forall n:num. forall z:real. (fn:real->real)(z) = fn(z + &2 * &n * pi)
       #|  (fn:real->real) x = fn y
-      #|  m0:num
-      #|  (y:real) - pi < &K * (&2 * pi)
-      #|  K:num
-      #|  \\m:num. (y:real) - &2 * &m * pi < pi
-      #|  K:num
-      #|  &0 < &2 * pi
-      #|  &2 * pi
-      #|  (y:real) - pi
-      #|  --(x:real) < &N * (&2 * pi)
-      #|  &0 < (y:real)
-      #|  y = x + &2 * &N * pi
-      #|  N:num
-      #|  &0 < &2 * pi
-      #|  &2 * pi
-      #|  --(x:real)
-      #|  &0 < &2 * pi
+      #|  (m0 : Num)
+      #|  (y : Real) - pi < real_of_num((K : Num)) * (real_of_num(2) * pi)
+      #|  (K : Num)
+      #|  (m : Num) => (y : Real) - real_of_num(2) * (real_of_num(m) * pi) < pi
+      #|  (K : Num)
+      #|  real_of_num(0) < real_of_num(2) * pi
+      #|  real_of_num(2) * pi
+      #|  (y : Real) - pi
+      #|  -(x : Real) < real_of_num((N : Num)) * (real_of_num(2) * pi)
+      #|  real_of_num(0) < (y : Real)
+      #|  (y : Real) == (x : Real) + real_of_num(2) * (real_of_num((N : Num)) * pi)
+      #|  (N : Num)
+      #|  real_of_num(0) < real_of_num(2) * pi
+      #|  real_of_num(2) * pi
+      #|  -(x : Real)
+      #|  real_of_num(0) < real_of_num(2) * pi
       #|  forall(fn:real->real) (B:real). (forall x. fn(x + &2 * pi) = fn x) /\\\n         (forall x. x IN real_interval[--pi,pi] ==> abs(fn x) <= B)\n         ==> forall x. abs(fn x) <= B
-      #|  abs(&1 - c) = &1 - c
-      #|  abs((h:real) - s) + abs((&1 - c) * s)
-      #|  (h:real) - c * s = (h - s) + (&1 - c) * s
-      #|  forall h s c e2.\n    abs(h - s) < e2 /\\ (&1 - c) * abs(s) <= e2 /\\ &0 <= &1 - c\n    ==> abs(h - c * s) < e2 + e2
-      #|  c * (B + e / &2)
-      #|  abs c = c
-      #|  y:real
-      #|  (&1 - c) * x = x - c * x
-      #|  (&1 - c) * (B + e / &2) = e / &2
-      #|  (&1 - c) * (B + e / &2)
-      #|  x < e / &2 + e / &2 ==> x < (e:real)
-      #|  (g:real->real) y = h(pi * y / L)
-      #|  &0 < M ==> &0 < M + &1
-      #|  p * M / L < p <=> &0 < p * (&1 - M / L)
-      #|  pi * M / L < pi
-      #|  abs L = L
-      #|  abs pi = pi
-      #|  abs(pi * y / L) <= pi * M / L
-      #|  pi * y / L IN real_interval[--pi,pi]
-      #|  y:real
-      #|  forall y. sum(0..N) (\\k. (c * bw k) * cos ((&k * pi / L) * y) +\n                        (c * aw k) * sin ((&k * pi / L) * y)) =\n        c * sum(0..N) (\\k. aw k * sin(&k * (pi * y / L)) +\n                            bw k * cos(&k * (pi * y / L)))
-      #|  \\k:num. &k * pi / (L:real)
-      #|  \\k:num. (c:real) * (aw:num->real) k
-      #|  \\k:num. (c:real) * (bw:num->real) k
-      #|  N:num
-      #|  c * (B + e / &2) = B
-      #|  c < &1
-      #|  &0 < c
-      #|  ~(B + e / &2 = &0)
-      #|  &0 < B + e / &2
-      #|  c = B / (B + e / &2)
-      #|  u:real
-      #|  forall x. abs(sum(0..N) (\\k. aw k * sin(&k * x) +\n                             bw k * cos(&k * x))) <= B + e / &2
-      #|  k * (x + &2 * p) = k * x + &2 * k * p
-      #|  forall x. sum(0..N) (\\k. aw k * sin(&k * (x + &2 * pi)) +\n                         bw k * cos(&k * (x + &2 * pi))) =\n        sum(0..N) (\\k. aw k * sin(&k * x) + bw k * cos(&k * x))
-      #|  abs(h x - sum(0..N) (\\k. aw k * sin(&k * x) +\n                                bw k * cos(&k * x))) < e / &2
-      #|  abs((h:real->real) x) <= B
-      #|  x:real
-      #|  forall x. x IN real_interval[--pi,pi]\n        ==> abs(sum(0..N) (\\k. aw k * sin(&k * x) +\n                                bw k * cos(&k * x))) < B + e / &2
-      #|  bw:num->real
-      #|  aw:num->real
-      #|  N:num
-      #|  e / &2
-      #|  h:real->real
-      #|  min (&1) (L - abs y) = &1
-      #|  &1 <= L - abs y
-      #|  ~(p = &0) /\\ ~(q = &0) ==> q * (p * (&1 - y / q)) / p = q - y
-      #|  pi - pi * abs y / L = pi * (&1 - abs y / L)
-      #|  L * (pi - pi * abs y / L) / pi = L - abs y
-      #|  abs L = L
-      #|  abs pi = pi
-      #|  abs(pi * y / L) = pi * abs y / L
-      #|  &0 < p /\\ &0 < L ==> L * (p * y / L) / p = y
-      #|  L * (pi * y / L) / pi = y
-      #|  y:real
-      #|  forall y. abs y <= M ==> h(pi * y / L) = (g:real->real) y
-      #|  B * &1
-      #|  t:real
-      #|  forall t. t IN real_interval[--pi,pi] ==> abs(h t) <= B
-      #|  &0 / pi = &0
-      #|  abs(pi) = pi /\\ abs(--pi) = pi
-      #|  (h:real->real)(--pi) = h(pi)
-      #|  (\\t:real. L * (pi - abs t) / pi) =\n                  (\\t. (L / pi) * (pi - abs t))
-      #|  (:real)
-      #|  (\\t:real. L * t / pi) = (\\t. (L / pi) * t)
-      #|  (h:real->real) real_continuous_on real_interval[--pi, pi]
-      #|  h = \\t. (g:real->real)(L * t / pi) *\n            max (&0) (min (&1) (L * (pi - abs t) / pi))
-      #|  ~(pi = &0)
-      #|  &0 < L /\\ ~(L = &0)
-      #|  L = M + &1
-      #|  forall g:real->real B M e.\n    (forall y. g real_continuous atreal y) /\\ (forall y. abs(g y) <= B) /\\\n    &0 < B /\\ &0 < M /\\ &0 < e\n    ==> ?n:num a b f.\n      (forall y. abs(y) <= M\n           ==> abs(g y - sum(0..n) (\\k. a k * cos(f k * y) +\n                                         b k * sin(f k * y))) < e) /\\\n      (forall y. abs(sum(0..n) (\\k. a k * cos(f k * y) +\n                               b k * sin(f k * y))) <= B)
-      #|  b:real
-      #|  \\x:A. sin(t * (Y:A->real) x)
-      #|  p:A prob_space
-      #|  a:real
-      #|  \\x:A. cos(t * (Y:A->real) x)
-      #|  p:A prob_space
-      #|  b:real
-      #|  \\x:A. sin(t * (Y:A->real) x)
-      #|  p:A prob_space
-      #|  a:real
-      #|  \\x:A. cos(t * (Y:A->real) x)
-      #|  p:A prob_space
-      #|  \\x:A. b * sin(t * (Y:A->real) x)
-      #|  \\x:A. a * cos(t * (Y:A->real) x)
-      #|  p:A prob_space
-      #|  \\y:real. sin(t * y)
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. sin(t * (Y:A->real) x))
-      #|  \\y:real. cos(t * y)
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\x:A. cos(t * (Y:A->real) x))
-      #|  forall p:A prob_space (Y:A->real) a b t.\n     simple_rv p Y\n     ==> simple_expectation p (\\x. a * cos(t * Y x) + b * sin(t * Y x)) =\n         a * simple_char_fn_re p Y t + b * simple_char_fn_im p Y t
-      #|  (a:num->real) k * exp (--((freq:num->real) k pow 2 / &2)) =\n    a k * exp (--(freq k pow 2 / &2)) + (b:num->real) k * &0
-      #|  k:num
+      #|  abs(real_of_num(1) - (c : Real)) == real_of_num(1) - c
+      #|  abs((h : Real) - (s : Real)) + abs((real_of_num(1) - (c : Real)) * s)
+      #|  (h : Real) - (c : Real) * (s : Real) == h - s + (real_of_num(1) - c) * s
+      #|  \226\136\128 h : Real, \226\136\128 s : Real, \226\136\128 c : Real, \226\136\128 e2 : Real, abs(h - s) < e2 && (real_of_num(1) - c) * abs(s) <= e2 && real_of_num(0) <= real_of_num(1) - c \226\134\146 abs(h - c * s) < e2 + e2
+      #|  (c : Real) * ((B : Real) + (e : Real) / real_of_num(2))
+      #|  abs((c : Real)) == c
+      #|  (y : Real)
+      #|  (real_of_num(1) - (c : Real)) * (x : Real) == x - c * x
+      #|  (real_of_num(1) - (c : Real)) * ((B : Real) + (e : Real) / real_of_num(2)) == e / real_of_num(2)
+      #|  (real_of_num(1) - (c : Real)) * ((B : Real) + (e : Real) / real_of_num(2))
+      #|  (x : Real) < (e : Real) / real_of_num(2) + e / real_of_num(2) \226\134\146 x < e
+      #|  (g : (Real) -> Real)((y : Real)) == (h : (Real) -> Real)(pi * (y / (L : Real)))
+      #|  real_of_num(0) < (M : Real) \226\134\146 real_of_num(0) < M + real_of_num(1)
+      #|  ((p : Real) * ((M : Real) / (L : Real)) < p) == (real_of_num(0) < p * (real_of_num(1) - M / L))
+      #|  pi * ((M : Real) / (L : Real)) < pi
+      #|  abs((L : Real)) == L
+      #|  abs(pi) == pi
+      #|  abs(pi * ((y : Real) / (L : Real))) <= pi * ((M : Real) / L)
+      #|  IN(pi * ((y : Real) / (L : Real)), real_interval([(-pi, pi)]))
+      #|  (y : Real)
+      #|  \226\136\128 y : Real, sum(op_dot_dot(0, (N : Num)), (k : Num) => (c : Real) * (bw : (Num) -> Real)(k) * cos(real_of_num(k) * (pi / (L : Real)) * y) + c * (aw : (Num) -> Real)(k) * sin(real_of_num(k) * (pi / L) * y)) == c * sum(op_dot_dot(0, N), (k : Num) => aw(k) * sin(real_of_num(k) * (pi * (y / L))) + bw(k) * cos(real_of_num(k) * (pi * (y / L))))
+      #|  (k : Num) => real_of_num(k) * (pi / (L : Real))
+      #|  (k : Num) => (c : Real) * (aw : (Num) -> Real)(k)
+      #|  (k : Num) => (c : Real) * (bw : (Num) -> Real)(k)
+      #|  (N : Num)
+      #|  (c : Real) * ((B : Real) + (e : Real) / real_of_num(2)) == B
+      #|  (c : Real) < real_of_num(1)
+      #|  real_of_num(0) < (c : Real)
+      #|  !((B : Real) + (e : Real) / real_of_num(2) == real_of_num(0))
+      #|  real_of_num(0) < (B : Real) + (e : Real) / real_of_num(2)
+      #|  (c : Real) == (B : Real) / (B + (e : Real) / real_of_num(2))
+      #|  (u : Real)
+      #|  \226\136\128 x : Real, abs(sum(op_dot_dot(0, (N : Num)), (k : Num) => (aw : (Num) -> Real)(k) * sin(real_of_num(k) * x) + (bw : (Num) -> Real)(k) * cos(real_of_num(k) * x))) <= (B : Real) + (e : Real) / real_of_num(2)
+      #|  (k : Real) * ((x : Real) + real_of_num(2) * (p : Real)) == k * x + real_of_num(2) * (k * p)
+      #|  \226\136\128 x : Real, sum(op_dot_dot(0, (N : Num)), (k : Num) => (aw : (Num) -> Real)(k) * sin(real_of_num(k) * (x + real_of_num(2) * pi)) + (bw : (Num) -> Real)(k) * cos(real_of_num(k) * (x + real_of_num(2) * pi))) == sum(op_dot_dot(0, N), (k : Num) => aw(k) * sin(real_of_num(k) * x) + bw(k) * cos(real_of_num(k) * x))
+      #|  abs((h : (Real) -> Real)((x : Real)) - sum(op_dot_dot(0, (N : Num)), (k : Num) => (aw : (Num) -> Real)(k) * sin(real_of_num(k) * x) + (bw : (Num) -> Real)(k) * cos(real_of_num(k) * x))) < (e : Real) / real_of_num(2)
+      #|  abs((h : (Real) -> Real)((x : Real))) <= (B : Real)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, IN(x, real_interval([(-pi, pi)])) \226\134\146 abs(sum(op_dot_dot(0, (N : Num)), (k : Num) => (aw : (Num) -> Real)(k) * sin(real_of_num(k) * x) + (bw : (Num) -> Real)(k) * cos(real_of_num(k) * x))) < (B : Real) + (e : Real) / real_of_num(2)
+      #|  (bw : (Num) -> Real)
+      #|  (aw : (Num) -> Real)
+      #|  (N : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  (h : (Real) -> Real)
+      #|  min(real_of_num(1), (L : Real) - abs((y : Real))) == real_of_num(1)
+      #|  real_of_num(1) <= (L : Real) - abs((y : Real))
+      #|  !((p : Real) == real_of_num(0)) && !((q : Real) == real_of_num(0)) \226\134\146 q * (p * (real_of_num(1) - (y : Real) / q) / p) == q - y
+      #|  pi - pi * (abs((y : Real)) / (L : Real)) == pi * (real_of_num(1) - abs(y) / L)
+      #|  (L : Real) * ((pi - pi * (abs((y : Real)) / L)) / pi) == L - abs(y)
+      #|  abs((L : Real)) == L
+      #|  abs(pi) == pi
+      #|  abs(pi * ((y : Real) / (L : Real))) == pi * (abs(y) / L)
+      #|  real_of_num(0) < (p : Real) && real_of_num(0) < (L : Real) \226\134\146 L * (p * ((y : Real) / L) / p) == y
+      #|  (L : Real) * (pi * ((y : Real) / L) / pi) == y
+      #|  (y : Real)
+      #|  \226\136\128 y : Real, abs(y) <= (M : Real) \226\134\146 (h : (Real) -> Real)(pi * (y / (L : Real))) == (g : (Real) -> Real)(y)
+      #|  (B : Real) * real_of_num(1)
+      #|  (t : Real)
+      #|  \226\136\128 t : Real, IN(t, real_interval([(-pi, pi)])) \226\134\146 abs((h : (Real) -> Real)(t)) <= (B : Real)
+      #|  real_of_num(0) / pi == real_of_num(0)
+      #|  abs(pi) == pi && abs(-pi) == pi
+      #|  (h : (Real) -> Real)(-pi) == h(pi)
+      #|  ((t : Real) => (L : Real) * ((pi - abs(t)) / pi)) == ((t : Real) => L / pi * (pi - abs(t)))
+      #|  (UNIV : (Real) -> Bool)
+      #|  ((t : Real) => (L : Real) * (t / pi)) == ((t : Real) => L / pi * t)
+      #|  real_continuous_on((h : (Real) -> Real), real_interval([(-pi, pi)]))
+      #|  (h : (Real) -> Real) == ((t : Real) => (g : (Real) -> Real)((L : Real) * (t / pi)) * max(real_of_num(0), min(real_of_num(1), L * ((pi - abs(t)) / pi))))
+      #|  !(pi == real_of_num(0))
+      #|  real_of_num(0) < (L : Real) && !(L == real_of_num(0))
+      #|  (L : Real) == (M : Real) + real_of_num(1)
+      #|  \226\136\128 g : (Real) -> Real, \226\136\128 B : Real, \226\136\128 M : Real, \226\136\128 e : Real, (\226\136\128 y : Real, real_continuous(g, atreal(y))) && (\226\136\128 y : Real, abs(g(y)) <= B) && real_of_num(0) < B && real_of_num(0) < M && real_of_num(0) < e \226\134\146 (\226\136\131 n : Num, \226\136\131 a : (Num) -> Real, \226\136\131 b : (Num) -> Real, \226\136\131 f : (Num) -> Real, (\226\136\128 y : Real, abs(y) <= M \226\134\146 abs(g(y) - sum(op_dot_dot(0, n), (k : Num) => a(k) * cos(f(k) * y) + b(k) * sin(f(k) * y))) < e) && (\226\136\128 y : Real, abs(sum(op_dot_dot(0, n), (k : Num) => a(k) * cos(f(k) * y) + b(k) * sin(f(k) * y))) <= B))
+      #|  (b : Real)
+      #|  (x : A) => sin((t : Real) * (Y : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  (a : Real)
+      #|  (x : A) => cos((t : Real) * (Y : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  (b : Real)
+      #|  (x : A) => sin((t : Real) * (Y : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  (a : Real)
+      #|  (x : A) => cos((t : Real) * (Y : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  (x : A) => (b : Real) * sin((t : Real) * (Y : (A) -> Real)(x))
+      #|  (x : A) => (a : Real) * cos((t : Real) * (Y : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  (y : Real) => sin((t : Real) * y)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => sin((t : Real) * (Y : (A) -> Real)(x)))
+      #|  (y : Real) => cos((t : Real) * y)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (x : A) => cos((t : Real) * (Y : (A) -> Real)(x)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 t : Real, simple_rv(p, Y) \226\134\146 simple_expectation(p, (x : A) => a * cos(t * Y(x)) + b * sin(t * Y(x))) == a * simple_char_fn_re(p, Y, t) + b * simple_char_fn_im(p, Y, t)
+      #|  (a : (Num) -> Real)((k : Num)) * exp(-(pow((freq : (Num) -> Real)(k), 2) / real_of_num(2))) == a(k) * exp(-(pow(freq(k), 2) / real_of_num(2))) + (b : (Num) -> Real)(k) * real_of_num(0)
+      #|  (k : Num)
       #|  0
-      #|  \\n:num. sum(0..m) (\\k. (a:num->real) k * simple_char_fn_re (p:A prob_space) ((X:num->A->real) n) ((freq:num->real) k) +\n                                       (b:num->real) k * simple_char_fn_im p (X n) (freq k))
-      #|  (freq:num->real) k
-      #|  (b:num->real) k
-      #|  (a:num->real) k
-      #|  (X:num->A->real) n
-      #|  p:A prob_space
-      #|  k:num
-      #|  \\x:A. (b:num->real) i * sin((freq:num->real) i * (X:num->A->real) n x)
-      #|  \\x:A. (a:num->real) i * cos((freq:num->real) i * (X:num->A->real) n x)
-      #|  p:A prob_space
-      #|  (b:num->real) i
-      #|  \\x:A. sin((freq:num->real) i * (X:num->A->real) n x)
-      #|  p:A prob_space
-      #|  (a:num->real) i
-      #|  \\x:A. cos((freq:num->real) i * (X:num->A->real) n x)
-      #|  p:A prob_space
-      #|  \\y:real. sin((freq:num->real) i * y)
-      #|  (X:num->A->real) n
-      #|  p:A prob_space
-      #|  \\y:real. cos((freq:num->real) i * y)
-      #|  (X:num->A->real) n
-      #|  p:A prob_space
-      #|  i:num
-      #|  m:num
-      #|  \\k:num. \\x:A. (a:num->real) k * cos((freq:num->real) k * (X:num->A->real) n x) +\n                                    (b:num->real) k * sin(freq k * X n x)
-      #|  p:A prob_space
-      #|  forall n:num. simple_expectation (p:A prob_space)\n       (\\x:A. sum(0..m) (\\k. (a:num->real) k * cos((freq:num->real) k * (X:num->A->real) n x) +\n                               (b:num->real) k * sin(freq k * X n x))) =\n     sum(0..m) (\\k. a k * simple_char_fn_re p (X n) (freq k) +\n                     b k * simple_char_fn_im p (X n) (freq k))
-      #|  forall p:A prob_space (X:num->A->real) m (a:num->real) (b:num->real) (freq:num->real).\n     (forall n. simple_rv p (X n)) /\\\n     (forall t. ((\\n. simple_char_fn_re p (X n) t) ---> exp(--(t pow 2 / &2)))\n          sequentially) /\\\n     (forall t. ((\\n. simple_char_fn_im p (X n) t) ---> &0) sequentially)\n     ==> ((\\n. simple_expectation p\n                (\\x. sum(0..m) (\\k. a k * cos(freq k * X n x) +\n                                     b k * sin(freq k * X n x)))) --->\n          sum(0..m) (\\k. a k * exp(--(freq k pow 2 / &2))))\n         sequentially
-      #|  (:real)
-      #|  (b:real) * &0
-      #|  (a:real) * exp(--((t:real) pow 2 / &2))
-      #|  \\y:real. (b:real) * (std_normal_density y * sin((t:real) * y))
-      #|  \\y:real. (a:real) * (std_normal_density y * cos((t:real) * y))
-      #|  b:real
-      #|  (:real)
-      #|  &0
-      #|  \\y:real. std_normal_density y * sin((t:real) * y)
-      #|  ((\\y:real. (b:real) * (std_normal_density y * sin((t:real) * y)))\n      has_real_integral (b * &0)) (:real)
-      #|  a:real
-      #|  (:real)
-      #|  exp(--((t:real) pow 2 / &2))
-      #|  \\y:real. std_normal_density y * cos((t:real) * y)
-      #|  ((\\y:real. (a:real) * (std_normal_density y * cos((t:real) * y)))\n      has_real_integral (a * exp(--(t pow 2 / &2)))) (:real)
-      #|  (a:real) * exp(--((t:real) pow 2 / &2)) =\n     a * exp(--(t pow 2 / &2)) + (b:real) * &0
-      #|  (\\y:real. ((a:real) * cos((t:real) * y) + (b:real) * sin(t * y)) *\n          std_normal_density y) =\n     (\\y. a * (std_normal_density y * cos(t * y)) +\n          b * (std_normal_density y * sin(t * y)))
-      #|  forall a b t.\n    ((\\y. (a * cos(t * y) + b * sin(t * y)) *\n          std_normal_density y) has_real_integral\n     (a * exp(--(t pow 2 / &2))))\n    (:real)
-      #|  0..m
-      #|  (:real)
-      #|  \\k:num. \\y:real. ((a:num->real) k * cos((freq:num->real) k * y) +\n                           (b:num->real) k * sin(freq k * y)) *\n                          std_normal_density y
-      #|  i:num->real
-      #|  \\k:num. (a:num->real) k * exp(--((freq:num->real) k pow 2 / &2))
-      #|  (\\y:real. sum(0..m) (\\k. (a:num->real) k * cos((freq:num->real) k * y) +\n                          (b:num->real) k * sin(freq k * y)) *\n          std_normal_density y) =\n     (\\y. sum(0..m) (\\k. (a k * cos(freq k * y) +\n                           b k * sin(freq k * y)) *\n                          std_normal_density y))
-      #|  forall m:num (a:num->real) (b:num->real) (freq:num->real).\n    ((\\y. sum(0..m) (\\k. a k * cos(freq k * y) +\n                          b k * sin(freq k * y)) *\n          std_normal_density y) has_real_integral\n     sum(0..m) (\\k. a k * exp(--(freq k pow 2 / &2))))\n    (:real)
-      #|  &0 < BB
-      #|  x <= y ==> a + x <= a + y
-      #|  \\a:A. &2 * BB * inv(M pow 2) * (X:num->A->real) n a pow 2
-      #|  \\a:A. e * inv(&6)
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space)\n     (\\a:A. &2 * BB * inv(M pow 2) * (X:num->A->real) n a pow 2)
-      #|  simple_rv (p:A prob_space)\n     (\\a:A. BB * inv(M pow 2) * (X:num->A->real) n a pow 2)
-      #|  simple_rv (p:A prob_space)\n     (\\a:A. inv(M pow 2) * (X:num->A->real) n a pow 2)
-      #|  (\\a:A. e * inv(&6) + &2 * BB * (X:num->A->real) n a pow 2 * inv(M pow 2)) =\n                 (\\a. e * inv(&6) + &2 * BB * (inv(M pow 2) * X n a pow 2))
-      #|  simple_expectation (p:A prob_space)\n      (\\a:A. e / &6 + &2 * BB * (X:num->A->real) n a pow 2 / M pow 2) =\n     e / &6 + &2 * BB * simple_expectation p (\\a. X n a pow 2) / M pow 2
-      #|  &0 < e
-      #|  &0 < M
-      #|  ~(abs((X:num->A->real) n (a:A)) <= M)
-      #|  &0 < BB
-      #|  abs x <= B /\\ abs y <= B ==> abs(x - y) <= &2 * B
-      #|  &2 * BB
-      #|  &2 * BB * (X:num->A->real) n (a:A) pow 2 / M pow 2
-      #|  &0 < BB
-      #|  x < ep /\\ &0 <= r ==> x <= ep + r
-      #|  abs((X:num->A->real) n (a:A)) <= M
-      #|  a:A
-      #|  \\y:real. BB * y pow 2 / M pow 2
-      #|  (X:num->A->real) n
-      #|  p:A prob_space
-      #|  (\\a:A. BB * (X:num->A->real) n a pow 2 / M pow 2) =\n                  (\\a. (\\y:real. BB * y pow 2 / M pow 2) (X n a))
-      #|  simple_expectation (p:A prob_space)\n    (\\a:A. e / &6 + &2 * BB * (X:num->A->real) n a pow 2 / M pow 2)
-      #|  simple_expectation (p:A prob_space)\n    (\\a:A. abs((g:real->real)((X:num->A->real) n a) - (T':real->real)(X n a)))
-      #|  simple_expectation (p:A prob_space) (\\a:A. (g:real->real)((X:num->A->real) n a)) -\n     simple_expectation p (\\a. (T':real->real)(X n a)) =\n     simple_expectation p (\\a. g(X n a) - T'(X n a))
-      #|  \\y:real. y pow 2
-      #|  (X:num->A->real) n
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\a:A. (X:num->A->real) n a pow 2)
-      #|  T':real->real
-      #|  (X:num->A->real) n
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\a:A. (T':real->real)((X:num->A->real) n a))
-      #|  g:real->real
-      #|  (X:num->A->real) n
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\a:A. (g:real->real)((X:num->A->real) n a))
-      #|  n:num
-      #|  forall p:A prob_space (X:num->A->real) (g:real->real) (T':real->real) BB CC e M.\n     (forall n. simple_rv p (X n)) /\\\n     &0 < CC /\\\n     (forall n. simple_expectation p (\\x. X n x pow 2) <= CC) /\\\n     (forall y. abs(g y) <= BB) /\\\n     (forall y. abs(T' y) <= BB) /\\\n     &0 < BB /\\ &0 < e /\\ &0 < M /\\\n     (forall y. abs y <= M ==> abs(g y - T' y) < e / &6)\n     ==> forall n:num. abs(simple_expectation p (\\a. g(X n a)) -\n              simple_expectation p (\\a. T'(X n a))) <=\n         e / &6 + &2 * BB * CC / M pow 2
-      #|  e / &6 + &2 * BB / M pow 2 =\n                e / &6 * &1 + &2 * BB / M pow 2 * &1
-      #|  (\\y:real. (e / &6 + &2 * BB * y pow 2 / M pow 2) *\n              std_normal_density y) =\n     (\\y. e / &6 * std_normal_density y +\n          &2 * BB / M pow 2 * (y pow 2 * std_normal_density y))
-      #|  ((\\y:real. (e / &6 + &2 * BB * y pow 2 / M pow 2) *\n               std_normal_density y)\n      has_real_integral (e / &6 + &2 * BB / M pow 2)) (:real)
-      #|  &0 < e
-      #|  &0 < M
-      #|  ~(abs(y:real) <= M)
-      #|  &0 < BB
-      #|  abs x <= B /\\ abs y <= B ==> abs(x - y) <= &2 * B
-      #|  &2 * BB
-      #|  &2 * BB * y pow 2 / M pow 2
-      #|  &0 < BB
-      #|  x < ep /\\ &0 <= r ==> x <= ep + r
-      #|  abs(y:real) <= M
-      #|  &0 <= x ==> abs x = x
-      #|  abs(std_normal_density y) = std_normal_density y
-      #|  y:real
-      #|  &1
-      #|  &1
-      #|  (\\y:real. (e / &6 + &2 * BB * y pow 2 / M pow 2) *\n                 std_normal_density y) =\n       (\\y. e / &6 * std_normal_density y +\n            &2 * BB / M pow 2 * (y pow 2 * std_normal_density y))
-      #|  (\\y:real. ((T':real->real) y - (g:real->real) y) *\n                 std_normal_density y) =\n       (\\y. T' y * std_normal_density y - g y * std_normal_density y)
-      #|  real_integral (:real)\n    (\\y. (e / &6 + &2 * BB * y pow 2 / M pow 2) *\n         std_normal_density y)
-      #|  (\\y:real. (T':real->real) y * std_normal_density y -\n               (g:real->real) y * std_normal_density y) =\n     (\\y. (T' y - g y) * std_normal_density y)
-      #|  real_integral (:real) (\\y. (T':real->real) y * std_normal_density y) -\n     real_integral (:real) (\\y. (g:real->real) y * std_normal_density y) =\n     real_integral (:real) (\\y. T' y * std_normal_density y -\n                                g y * std_normal_density y)
-      #|  L:real
-      #|  (\\y. (T':real->real) y * std_normal_density y)\n    real_integrable_on (:real)
-      #|  L = real_integral (:real)\n    (\\y. (T':real->real) y * std_normal_density y)
-      #|  &1
-      #|  &0 <= x ==> abs x = x
-      #|  (\\x:real. abs(std_normal_density x)) = std_normal_density
-      #|  &1
-      #|  BB:real
-      #|  (\\y. (g:real->real) y * std_normal_density y) real_integrable_on (:real)
-      #|  forall g:real->real (T':real->real) BB e M L.\n     (forall y. g real_continuous atreal y) /\\\n     (forall y. abs(g y) <= BB) /\\\n     (forall y. abs(T' y) <= BB) /\\\n     &0 < BB /\\ &0 < e /\\ &0 < M /\\\n     (forall y. abs y <= M ==> abs(g y - T' y) < e / &6) /\\\n     ((\\y. T' y * std_normal_density y) has_real_integral L) (:real)\n     ==> abs(L - real_integral (:real) (\\y. g y * std_normal_density y)) <=\n         e / &6 + &2 * BB / M pow 2
-      #|  ig = real_integral (:real)\n    (\\y. (g:real->real) y * std_normal_density y)
-      #|  et = simple_expectation (p:A prob_space)\n    (\\a:A. sum(0..nn)\n      (\\k. (aa:num->real) k * cos((ff:num->real) k * (X:num->A->real) n a) +\n           (bb:num->real) k * sin(ff k * X n a)))
-      #|  eg = simple_expectation (p:A prob_space)\n    (\\a:A. (g:real->real)((X:num->A->real) n a))
-      #|  &0 < CC
-      #|  &0 < BB
-      #|  &2 * BB * (CC + &1) / M pow 2
-      #|  x < e / &6 ==> e / &6 + x < e / &3
-      #|  e / &6 + &2 * BB / M pow 2
-      #|  abs(L - real_integral (:real)\n    (\\y. (g:real->real) y * std_normal_density y)) < e / &3
-      #|  n:num
-      #|  abs(simple_expectation (p:A prob_space)\n    (\\a:A. sum(0..nn)\n      (\\k. (aa:num->real) k * cos((ff:num->real) k * (X:num->A->real) n a) +\n           (bb:num->real) k * sin(ff k * X n a))) -\n    L) < e / &3
-      #|  &0 < BB
-      #|  &2 * BB * (CC + &1) / M pow 2
-      #|  x < e / &6 ==> e / &6 + x < e / &3
-      #|  e / &6 + &2 * BB * CC / M pow 2
-      #|  abs(simple_expectation (p:A prob_space)\n    (\\a:A. (g:real->real)((X:num->A->real) n a)) -\n    simple_expectation p\n    (\\a:A. sum(0..nn)\n      (\\k. (aa:num->real) k * cos((ff:num->real) k * X n a) +\n           (bb:num->real) k * sin(ff k * X n a)))) < e / &3
-      #|  n:num
-      #|  N:num
-      #|  N:num
-      #|  e / &3
-      #|  L:real
-      #|  M:real
-      #|  e:real
-      #|  BB:real
-      #|  \\y:real. sum(0..nn)\n        (\\k. (aa:num->real) k * cos((ff:num->real) k * y) +\n             (bb:num->real) k * sin(ff k * y))
-      #|  g:real->real
-      #|  abs(L - real_integral (:real)\n      (\\y. (g:real->real) y * std_normal_density y)) <=\n      e / &6 + &2 * BB / M pow 2
-      #|  M:real
-      #|  e:real
-      #|  CC:real
-      #|  BB:real
-      #|  \\y:real. sum(0..nn)\n        (\\k. (aa:num->real) k * cos((ff:num->real) k * y) +\n             (bb:num->real) k * sin(ff k * y))
-      #|  g:real->real
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  forall n:num. abs(simple_expectation (p:A prob_space)\n       (\\a:A. (g:real->real)((X:num->A->real) n a)) -\n      simple_expectation p\n       (\\a:A. sum(0..nn)\n         (\\k. (aa:num->real) k * cos((ff:num->real) k * X n a) +\n              (bb:num->real) k * sin(ff k * X n a)))) <=\n      e / &6 + &2 * BB * CC / M pow 2
-      #|  L = real_integral (:real)\n      (\\y. sum(0..nn)\n        (\\k. (aa:num->real) k * cos((ff:num->real) k * y) +\n             (bb:num->real) k * sin(ff k * y)) *\n        std_normal_density y)
-      #|  ((\\n. simple_expectation (p:A prob_space)\n       (\\x:A. sum(0..nn)\n         (\\k. (aa:num->real) k * cos((ff:num->real) k * (X:num->A->real) n x) +\n              (bb:num->real) k * sin(ff k * X n x)))) --->\n      L) sequentially
-      #|  L = sum(0..nn)\n    (\\k. (aa:num->real) k * exp(--((ff:num->real) k pow 2 / &2)))
-      #|  &0 < CC ==> &0 < CC + &1
-      #|  ~(CC + &1 = &0)
-      #|  ~(BB = &0)
-      #|  ~(e = &0)
-      #|  e * inv(&6) = &2 * BB * (CC + &1) * inv(&12 * BB * (CC + &1) * inv e)
-      #|  &0 <= sqrt(&12 * BB * (CC + &1) / e)
-      #|  sqrt (&12 * BB * (CC + &1) / e) + &1 = M
-      #|  &0 < &12 * BB * (CC + &1) / e
-      #|  &0 <= sqrt(&12 * BB * (CC + &1) / e)
-      #|  sqrt(&12 * BB * (CC + &1) / e) pow 2 =\n                   &12 * BB * (CC + &1) / e
-      #|  &0 < &12 * BB * (CC + &1) / e
-      #|  &0 <= &12 * BB * (CC + &1) / e
-      #|  &12 * BB * (CC + &1) / e < M pow 2
-      #|  &0 < CC
-      #|  &0 < BB
-      #|  &0 < &12 * BB * (CC + &1) / e
-      #|  &0 < CC
-      #|  &0 < BB
-      #|  &0 < e
-      #|  ~(e = &0) /\\ ~(BB = &0) /\\ ~(CC + &1 = &0)
-      #|  &2 * BB * (CC + &1) / M pow 2 < e / &6
-      #|  ff:num->real
-      #|  bb:num->real
-      #|  aa:num->real
-      #|  nn:num
-      #|  e / &6
-      #|  M:real
-      #|  BB:real
-      #|  g:real->real
-      #|  &0 < e
-      #|  &0 < CC
-      #|  &0 < BB
-      #|  &0 <= x ==> &0 < x + &1
-      #|  &0 < M
-      #|  M = sqrt(&12 * BB * (CC + &1) / e) + &1
-      #|  e:real
-      #|  BB:real
-      #|  CC:real
-      #|  forall p:A prob_space (X:num->A->real) (g:real->real).\n     (forall n. simple_rv p (X n)) /\\\n     (?C. &0 < C /\\ forall n. simple_expectation p (\\x. X n x pow 2) <= C) /\\\n     (forall t. ((\\n. simple_char_fn_re p (X n) t) ---> exp(--(t pow 2 / &2)))\n          sequentially) /\\\n     (forall t. ((\\n. simple_char_fn_im p (X n) t) ---> &0) sequentially) /\\\n     (forall y. g real_continuous atreal y) /\\\n     (?B. &0 < B /\\ forall y. abs(g y) <= B)\n     ==> ((\\n. simple_expectation p (\\a:A. g(X n a))) --->\n          real_integral (:real) (\\y. g y * std_normal_density y))\n         sequentially
-      #|  nn:num
-      #|  nn:num
-      #|  nn:num
-      #|  nn:num
-      #|  forall y:real. y > b ==> g y = &0
-      #|  (g:real->real) x = &0
-      #|  x:real
-      #|  forall y:real. &0 <= g y /\\ g y <= &1
-      #|  &1 * std_normal_density x
-      #|  x <= b
-      #|  real_integral (:real) (\\y:real. if y IN {t | t <= b} then std_normal_density y else &0)
-      #|  real_integral (:real) (\\y:real. g y * std_normal_density y)
-      #|  (:real)
-      #|  \\y:real. if y IN {t | t <= b} then std_normal_density y else &0
-      #|  \\y:real. g y * std_normal_density y
-      #|  y:real
-      #|  forall y:real. &0 <= g y /\\ g y <= &1
-      #|  &1
-      #|  (\\y:real. g y * std_normal_density y) real_integrable_on (:real)
-      #|  forall(g:real->real) b.\n     (forall y. &0 <= g y /\\ g y <= &1) /\\ (forall y. y > b ==> g y = &0) /\\\n     (forall y. g real_continuous atreal y)\n     ==> real_integral (:real) (\\y. g y * std_normal_density y) <= std_normal_cdf b
-      #|  x:real
-      #|  forall y:real. &0 <= g y /\\ g y <= &1
-      #|  x:real
-      #|  forall y:real. y <= a ==> g y = &1
-      #|  x <= a
-      #|  real_integral (:real) (\\y:real. g y * std_normal_density y)
-      #|  real_integral (:real) (\\y:real. if y IN {t | t <= a} then std_normal_density y else &0)
-      #|  (:real)
-      #|  \\y:real. g y * std_normal_density y
-      #|  \\y:real. if y IN {t | t <= a} then std_normal_density y else &0
-      #|  y:real
-      #|  forall y:real. &0 <= g y /\\ g y <= &1
-      #|  &1
-      #|  (\\y:real. g y * std_normal_density y) real_integrable_on (:real)
-      #|  forall(g:real->real) a.\n     (forall y. &0 <= g y /\\ g y <= &1) /\\ (forall y. y <= a ==> g y = &1) /\\\n     (forall y. g real_continuous atreal y)\n     ==> std_normal_cdf a <= real_integral (:real) (\\y. g y * std_normal_density y)
-      #|  (x + h - y) / h < &0
-      #|  y:real
-      #|  &1 <= (x + h - y) / h
-      #|  y:real
-      #|  n:num
+      #|  (n : Num) => sum(op_dot_dot(0, (m : Num)), (k : Num) => (a : (Num) -> Real)(k) * simple_char_fn_re((p : Prob_space[A]), (X : (Num, A) -> Real)(n), (freq : (Num) -> Real)(k)) + (b : (Num) -> Real)(k) * simple_char_fn_im(p, X(n), freq(k)))
+      #|  (freq : (Num) -> Real)((k : Num))
+      #|  (b : (Num) -> Real)((k : Num))
+      #|  (a : (Num) -> Real)((k : Num))
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  (k : Num)
+      #|  (x : A) => (b : (Num) -> Real)((i : Num)) * sin((freq : (Num) -> Real)(i) * (X : (Num, A) -> Real)((n : Num), x))
+      #|  (x : A) => (a : (Num) -> Real)((i : Num)) * cos((freq : (Num) -> Real)(i) * (X : (Num, A) -> Real)((n : Num), x))
+      #|  (p : Prob_space[A])
+      #|  (b : (Num) -> Real)((i : Num))
+      #|  (x : A) => sin((freq : (Num) -> Real)((i : Num)) * (X : (Num, A) -> Real)((n : Num), x))
+      #|  (p : Prob_space[A])
+      #|  (a : (Num) -> Real)((i : Num))
+      #|  (x : A) => cos((freq : (Num) -> Real)((i : Num)) * (X : (Num, A) -> Real)((n : Num), x))
+      #|  (p : Prob_space[A])
+      #|  (y : Real) => sin((freq : (Num) -> Real)((i : Num)) * y)
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  (y : Real) => cos((freq : (Num) -> Real)((i : Num)) * y)
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  (i : Num)
+      #|  (m : Num)
+      #|  (k : Num) => (x : A) => (a : (Num) -> Real)(k) * cos((freq : (Num) -> Real)(k) * (X : (Num, A) -> Real)((n : Num), x)) + (b : (Num) -> Real)(k) * sin(freq(k) * X(n, x))
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, simple_expectation((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (m : Num)), (k : Num) => (a : (Num) -> Real)(k) * cos((freq : (Num) -> Real)(k) * (X : (Num, A) -> Real)(n, x)) + (b : (Num) -> Real)(k) * sin(freq(k) * X(n, x)))) == sum(op_dot_dot(0, m), (k : Num) => a(k) * simple_char_fn_re(p, X(n), freq(k)) + b(k) * simple_char_fn_im(p, X(n), freq(k)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 m : Num, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 freq : (Num) -> Real, (\226\136\128 n : Num, simple_rv(p, X(n))) && (\226\136\128 t : Real, op_minus_minus_minus_gt((n : Num) => simple_char_fn_re(p, X(n), t), exp(-(pow(t, 2) / real_of_num(2))), sequentially)) && (\226\136\128 t : Real, op_minus_minus_minus_gt((n : Num) => simple_char_fn_im(p, X(n), t), real_of_num(0), sequentially)) \226\134\146 op_minus_minus_minus_gt((n : Num) => simple_expectation(p, (x : A) => sum(op_dot_dot(0, m), (k : Num) => a(k) * cos(freq(k) * X(n, x)) + b(k) * sin(freq(k) * X(n, x)))), sum(op_dot_dot(0, m), (k : Num) => a(k) * exp(-(pow(freq(k), 2) / real_of_num(2)))), sequentially)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (b : Real) * real_of_num(0)
+      #|  (a : Real) * exp(-(pow((t : Real), 2) / real_of_num(2)))
+      #|  (y : Real) => (b : Real) * (std_normal_density(y) * sin((t : Real) * y))
+      #|  (y : Real) => (a : Real) * (std_normal_density(y) * cos((t : Real) * y))
+      #|  (b : Real)
+      #|  (UNIV : (Real) -> Bool)
+      #|  real_of_num(0)
+      #|  (y : Real) => std_normal_density(y) * sin((t : Real) * y)
+      #|  has_real_integral((y : Real) => (b : Real) * (std_normal_density(y) * sin((t : Real) * y)), b * real_of_num(0), UNIV)
+      #|  (a : Real)
+      #|  (UNIV : (Real) -> Bool)
+      #|  exp(-(pow((t : Real), 2) / real_of_num(2)))
+      #|  (y : Real) => std_normal_density(y) * cos((t : Real) * y)
+      #|  has_real_integral((y : Real) => (a : Real) * (std_normal_density(y) * cos((t : Real) * y)), a * exp(-(pow(t, 2) / real_of_num(2))), UNIV)
+      #|  (a : Real) * exp(-(pow((t : Real), 2) / real_of_num(2))) == a * exp(-(pow(t, 2) / real_of_num(2))) + (b : Real) * real_of_num(0)
+      #|  ((y : Real) => ((a : Real) * cos((t : Real) * y) + (b : Real) * sin(t * y)) * std_normal_density(y)) == ((y : Real) => a * (std_normal_density(y) * cos(t * y)) + b * (std_normal_density(y) * sin(t * y)))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 t : Real, has_real_integral((y : Real) => (a * cos(t * y) + b * sin(t * y)) * std_normal_density(y), a * exp(-(pow(t, 2) / real_of_num(2))), UNIV)
+      #|  op_dot_dot(0, (m : Num))
+      #|  (UNIV : (Real) -> Bool)
+      #|  (k : Num) => (y : Real) => ((a : (Num) -> Real)(k) * cos((freq : (Num) -> Real)(k) * y) + (b : (Num) -> Real)(k) * sin(freq(k) * y)) * std_normal_density(y)
+      #|  (i : (Num) -> Real)
+      #|  (k : Num) => (a : (Num) -> Real)(k) * exp(-(pow((freq : (Num) -> Real)(k), 2) / real_of_num(2)))
+      #|  ((y : Real) => sum(op_dot_dot(0, (m : Num)), (k : Num) => (a : (Num) -> Real)(k) * cos((freq : (Num) -> Real)(k) * y) + (b : (Num) -> Real)(k) * sin(freq(k) * y)) * std_normal_density(y)) == ((y : Real) => sum(op_dot_dot(0, m), (k : Num) => (a(k) * cos(freq(k) * y) + b(k) * sin(freq(k) * y)) * std_normal_density(y)))
+      #|  \226\136\128 m : Num, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 freq : (Num) -> Real, has_real_integral((y : Real) => sum(op_dot_dot(0, m), (k : Num) => a(k) * cos(freq(k) * y) + b(k) * sin(freq(k) * y)) * std_normal_density(y), sum(op_dot_dot(0, m), (k : Num) => a(k) * exp(-(pow(freq(k), 2) / real_of_num(2)))), UNIV)
+      #|  real_of_num(0) < (BB : Real)
+      #|  (x : Real) <= (y : Real) \226\134\146 (a : Real) + x <= a + y
+      #|  (a : A) => real_of_num(2) * ((BB : Real) * (inv(pow((M : Real), 2)) * pow((X : (Num, A) -> Real)((n : Num), a), 2)))
+      #|  (a : A) => (e : Real) * inv(real_of_num(6))
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (a : A) => real_of_num(2) * ((BB : Real) * (inv(pow((M : Real), 2)) * pow((X : (Num, A) -> Real)((n : Num), a), 2))))
+      #|  simple_rv((p : Prob_space[A]), (a : A) => (BB : Real) * (inv(pow((M : Real), 2)) * pow((X : (Num, A) -> Real)((n : Num), a), 2)))
+      #|  simple_rv((p : Prob_space[A]), (a : A) => inv(pow((M : Real), 2)) * pow((X : (Num, A) -> Real)((n : Num), a), 2))
+      #|  ((a : A) => (e : Real) * inv(real_of_num(6)) + real_of_num(2) * ((BB : Real) * (pow((X : (Num, A) -> Real)((n : Num), a), 2) * inv(pow((M : Real), 2))))) == ((a : A) => e * inv(real_of_num(6)) + real_of_num(2) * (BB * (inv(pow(M, 2)) * pow(X(n, a), 2))))
+      #|  simple_expectation((p : Prob_space[A]), (a : A) => (e : Real) / real_of_num(6) + real_of_num(2) * ((BB : Real) * (pow((X : (Num, A) -> Real)((n : Num), a), 2) / pow((M : Real), 2)))) == e / real_of_num(6) + real_of_num(2) * (BB * (simple_expectation(p, (a : A) => pow(X(n, a), 2)) / pow(M, 2)))
+      #|  real_of_num(0) < (e : Real)
+      #|  real_of_num(0) < (M : Real)
+      #|  !(abs((X : (Num, A) -> Real)((n : Num), (a : A))) <= (M : Real))
+      #|  real_of_num(0) < (BB : Real)
+      #|  abs((x : Real)) <= (B : Real) && abs((y : Real)) <= B \226\134\146 abs(x - y) <= real_of_num(2) * B
+      #|  real_of_num(2) * (BB : Real)
+      #|  real_of_num(2) * ((BB : Real) * (pow((X : (Num, A) -> Real)((n : Num), (a : A)), 2) / pow((M : Real), 2)))
+      #|  real_of_num(0) < (BB : Real)
+      #|  (x : Real) < (ep : Real) && real_of_num(0) <= (r : Real) \226\134\146 x <= ep + r
+      #|  abs((X : (Num, A) -> Real)((n : Num), (a : A))) <= (M : Real)
+      #|  (a : A)
+      #|  (y : Real) => (BB : Real) * (pow(y, 2) / pow((M : Real), 2))
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  ((a : A) => (BB : Real) * (pow((X : (Num, A) -> Real)((n : Num), a), 2) / pow((M : Real), 2))) == ((a : A) => ((y : Real) => BB * (pow(y, 2) / pow(M, 2)))(X(n, a)))
+      #|  simple_expectation((p : Prob_space[A]), (a : A) => (e : Real) / real_of_num(6) + real_of_num(2) * ((BB : Real) * (pow((X : (Num, A) -> Real)((n : Num), a), 2) / pow((M : Real), 2))))
+      #|  simple_expectation((p : Prob_space[A]), (a : A) => abs((g : (Real) -> Real)((X : (Num, A) -> Real)((n : Num), a)) - (T' : (Real) -> Real)(X(n, a))))
+      #|  simple_expectation((p : Prob_space[A]), (a : A) => (g : (Real) -> Real)((X : (Num, A) -> Real)((n : Num), a))) - simple_expectation(p, (a : A) => (T' : (Real) -> Real)(X(n, a))) == simple_expectation(p, (a : A) => g(X(n, a)) - T'(X(n, a)))
+      #|  (y : Real) => pow(y, 2)
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (a : A) => pow((X : (Num, A) -> Real)((n : Num), a), 2))
+      #|  (T' : (Real) -> Real)
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (a : A) => (T' : (Real) -> Real)((X : (Num, A) -> Real)((n : Num), a)))
+      #|  (g : (Real) -> Real)
+      #|  (X : (Num, A) -> Real)((n : Num))
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (a : A) => (g : (Real) -> Real)((X : (Num, A) -> Real)((n : Num), a)))
+      #|  (n : Num)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 T' : (Real) -> Real, \226\136\128 BB : Real, \226\136\128 CC : Real, \226\136\128 e : Real, \226\136\128 M : Real, (\226\136\128 n : Num, simple_rv(p, X(n))) && real_of_num(0) < CC && (\226\136\128 n : Num, simple_expectation(p, (x : A) => pow(X(n, x), 2)) <= CC) && (\226\136\128 y : Real, abs(g(y)) <= BB) && (\226\136\128 y : Real, abs(T'(y)) <= BB) && real_of_num(0) < BB && real_of_num(0) < e && real_of_num(0) < M && (\226\136\128 y : Real, abs(y) <= M \226\134\146 abs(g(y) - T'(y)) < e / real_of_num(6)) \226\134\146 (\226\136\128 n : Num, abs(simple_expectation(p, (a : A) => g(X(n, a))) - simple_expectation(p, (a : A) => T'(X(n, a)))) <= e / real_of_num(6) + real_of_num(2) * (BB * (CC / pow(M, 2))))
+      #|  (e : Real) / real_of_num(6) + real_of_num(2) * ((BB : Real) / pow((M : Real), 2)) == e / real_of_num(6) * real_of_num(1) + real_of_num(2) * (BB / pow(M, 2) * real_of_num(1))
+      #|  ((y : Real) => ((e : Real) / real_of_num(6) + real_of_num(2) * ((BB : Real) * (pow(y, 2) / pow((M : Real), 2)))) * std_normal_density(y)) == ((y : Real) => e / real_of_num(6) * std_normal_density(y) + real_of_num(2) * (BB / pow(M, 2) * (pow(y, 2) * std_normal_density(y))))
+      #|  has_real_integral((y : Real) => ((e : Real) / real_of_num(6) + real_of_num(2) * ((BB : Real) * (pow(y, 2) / pow((M : Real), 2)))) * std_normal_density(y), e / real_of_num(6) + real_of_num(2) * (BB / pow(M, 2)), UNIV)
+      #|  real_of_num(0) < (e : Real)
+      #|  real_of_num(0) < (M : Real)
+      #|  !(abs((y : Real)) <= (M : Real))
+      #|  real_of_num(0) < (BB : Real)
+      #|  abs((x : Real)) <= (B : Real) && abs((y : Real)) <= B \226\134\146 abs(x - y) <= real_of_num(2) * B
+      #|  real_of_num(2) * (BB : Real)
+      #|  real_of_num(2) * ((BB : Real) * (pow((y : Real), 2) / pow((M : Real), 2)))
+      #|  real_of_num(0) < (BB : Real)
+      #|  (x : Real) < (ep : Real) && real_of_num(0) <= (r : Real) \226\134\146 x <= ep + r
+      #|  abs((y : Real)) <= (M : Real)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+      #|  abs(std_normal_density((y : Real))) == std_normal_density(y)
+      #|  (y : Real)
+      #|  real_of_num(1)
+      #|  real_of_num(1)
+      #|  ((y : Real) => ((e : Real) / real_of_num(6) + real_of_num(2) * ((BB : Real) * (pow(y, 2) / pow((M : Real), 2)))) * std_normal_density(y)) == ((y : Real) => e / real_of_num(6) * std_normal_density(y) + real_of_num(2) * (BB / pow(M, 2) * (pow(y, 2) * std_normal_density(y))))
+      #|  ((y : Real) => ((T' : (Real) -> Real)(y) - (g : (Real) -> Real)(y)) * std_normal_density(y)) == ((y : Real) => T'(y) * std_normal_density(y) - g(y) * std_normal_density(y))
+      #|  real_integral(UNIV, (y : Real) => ((e : Real) / real_of_num(6) + real_of_num(2) * ((BB : Real) * (pow(y, 2) / pow((M : Real), 2)))) * std_normal_density(y))
+      #|  ((y : Real) => (T' : (Real) -> Real)(y) * std_normal_density(y) - (g : (Real) -> Real)(y) * std_normal_density(y)) == ((y : Real) => (T'(y) - g(y)) * std_normal_density(y))
+      #|  real_integral(UNIV, (y : Real) => (T' : (Real) -> Real)(y) * std_normal_density(y)) - real_integral(UNIV, (y : Real) => (g : (Real) -> Real)(y) * std_normal_density(y)) == real_integral(UNIV, (y : Real) => T'(y) * std_normal_density(y) - g(y) * std_normal_density(y))
+      #|  (L : Real)
+      #|  real_integrable_on((y : Real) => (T' : (Real) -> Real)(y) * std_normal_density(y), UNIV)
+      #|  (L : Real) == real_integral(UNIV, (y : Real) => (T' : (Real) -> Real)(y) * std_normal_density(y))
+      #|  real_of_num(1)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+      #|  ((x : Real) => abs(std_normal_density(x))) == std_normal_density
+      #|  real_of_num(1)
+      #|  (BB : Real)
+      #|  real_integrable_on((y : Real) => (g : (Real) -> Real)(y) * std_normal_density(y), UNIV)
+      #|  \226\136\128 g : (Real) -> Real, \226\136\128 T' : (Real) -> Real, \226\136\128 BB : Real, \226\136\128 e : Real, \226\136\128 M : Real, \226\136\128 L : Real, (\226\136\128 y : Real, real_continuous(g, atreal(y))) && (\226\136\128 y : Real, abs(g(y)) <= BB) && (\226\136\128 y : Real, abs(T'(y)) <= BB) && real_of_num(0) < BB && real_of_num(0) < e && real_of_num(0) < M && (\226\136\128 y : Real, abs(y) <= M \226\134\146 abs(g(y) - T'(y)) < e / real_of_num(6)) && has_real_integral((y : Real) => T'(y) * std_normal_density(y), L, UNIV) \226\134\146 abs(L - real_integral(UNIV, (y : Real) => g(y) * std_normal_density(y))) <= e / real_of_num(6) + real_of_num(2) * (BB / pow(M, 2))
+      #|  (ig : Real) == real_integral(UNIV, (y : Real) => (g : (Real) -> Real)(y) * std_normal_density(y))
+      #|  (et : Real) == simple_expectation((p : Prob_space[A]), (a : A) => sum(op_dot_dot(0, (nn : Num)), (k : Num) => (aa : (Num) -> Real)(k) * cos((ff : (Num) -> Real)(k) * (X : (Num, A) -> Real)((n : Num), a)) + (bb : (Num) -> Real)(k) * sin(ff(k) * X(n, a))))
+      #|  (eg : Real) == simple_expectation((p : Prob_space[A]), (a : A) => (g : (Real) -> Real)((X : (Num, A) -> Real)((n : Num), a)))
+      #|  real_of_num(0) < (CC : Real)
+      #|  real_of_num(0) < (BB : Real)
+      #|  real_of_num(2) * ((BB : Real) * (((CC : Real) + real_of_num(1)) / pow((M : Real), 2)))
+      #|  (x : Real) < (e : Real) / real_of_num(6) \226\134\146 e / real_of_num(6) + x < e / real_of_num(3)
+      #|  (e : Real) / real_of_num(6) + real_of_num(2) * ((BB : Real) / pow((M : Real), 2))
+      #|  abs((L : Real) - real_integral(UNIV, (y : Real) => (g : (Real) -> Real)(y) * std_normal_density(y))) < (e : Real) / real_of_num(3)
+      #|  (n : Num)
+      #|  abs(simple_expectation((p : Prob_space[A]), (a : A) => sum(op_dot_dot(0, (nn : Num)), (k : Num) => (aa : (Num) -> Real)(k) * cos((ff : (Num) -> Real)(k) * (X : (Num, A) -> Real)((n : Num), a)) + (bb : (Num) -> Real)(k) * sin(ff(k) * X(n, a)))) - (L : Real)) < (e : Real) / real_of_num(3)
+      #|  real_of_num(0) < (BB : Real)
+      #|  real_of_num(2) * ((BB : Real) * (((CC : Real) + real_of_num(1)) / pow((M : Real), 2)))
+      #|  (x : Real) < (e : Real) / real_of_num(6) \226\134\146 e / real_of_num(6) + x < e / real_of_num(3)
+      #|  (e : Real) / real_of_num(6) + real_of_num(2) * ((BB : Real) * ((CC : Real) / pow((M : Real), 2)))
+      #|  abs(simple_expectation((p : Prob_space[A]), (a : A) => (g : (Real) -> Real)((X : (Num, A) -> Real)((n : Num), a))) - simple_expectation(p, (a : A) => sum(op_dot_dot(0, (nn : Num)), (k : Num) => (aa : (Num) -> Real)(k) * cos((ff : (Num) -> Real)(k) * X(n, a)) + (bb : (Num) -> Real)(k) * sin(ff(k) * X(n, a))))) < (e : Real) / real_of_num(3)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (e : Real) / real_of_num(3)
+      #|  (L : Real)
+      #|  (M : Real)
+      #|  (e : Real)
+      #|  (BB : Real)
+      #|  (y : Real) => sum(op_dot_dot(0, (nn : Num)), (k : Num) => (aa : (Num) -> Real)(k) * cos((ff : (Num) -> Real)(k) * y) + (bb : (Num) -> Real)(k) * sin(ff(k) * y))
+      #|  (g : (Real) -> Real)
+      #|  abs((L : Real) - real_integral(UNIV, (y : Real) => (g : (Real) -> Real)(y) * std_normal_density(y))) <= (e : Real) / real_of_num(6) + real_of_num(2) * ((BB : Real) / pow((M : Real), 2))
+      #|  (M : Real)
+      #|  (e : Real)
+      #|  (CC : Real)
+      #|  (BB : Real)
+      #|  (y : Real) => sum(op_dot_dot(0, (nn : Num)), (k : Num) => (aa : (Num) -> Real)(k) * cos((ff : (Num) -> Real)(k) * y) + (bb : (Num) -> Real)(k) * sin(ff(k) * y))
+      #|  (g : (Real) -> Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 n : Num, abs(simple_expectation((p : Prob_space[A]), (a : A) => (g : (Real) -> Real)((X : (Num, A) -> Real)(n, a))) - simple_expectation(p, (a : A) => sum(op_dot_dot(0, (nn : Num)), (k : Num) => (aa : (Num) -> Real)(k) * cos((ff : (Num) -> Real)(k) * X(n, a)) + (bb : (Num) -> Real)(k) * sin(ff(k) * X(n, a))))) <= (e : Real) / real_of_num(6) + real_of_num(2) * ((BB : Real) * ((CC : Real) / pow((M : Real), 2)))
+      #|  (L : Real) == real_integral(UNIV, (y : Real) => sum(op_dot_dot(0, (nn : Num)), (k : Num) => (aa : (Num) -> Real)(k) * cos((ff : (Num) -> Real)(k) * y) + (bb : (Num) -> Real)(k) * sin(ff(k) * y)) * std_normal_density(y))
+      #|  op_minus_minus_minus_gt((n : Num) => simple_expectation((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (nn : Num)), (k : Num) => (aa : (Num) -> Real)(k) * cos((ff : (Num) -> Real)(k) * (X : (Num, A) -> Real)(n, x)) + (bb : (Num) -> Real)(k) * sin(ff(k) * X(n, x)))), (L : Real), sequentially)
+      #|  (L : Real) == sum(op_dot_dot(0, (nn : Num)), (k : Num) => (aa : (Num) -> Real)(k) * exp(-(pow((ff : (Num) -> Real)(k), 2) / real_of_num(2))))
+      #|  real_of_num(0) < (CC : Real) \226\134\146 real_of_num(0) < CC + real_of_num(1)
+      #|  !((CC : Real) + real_of_num(1) == real_of_num(0))
+      #|  !((BB : Real) == real_of_num(0))
+      #|  !((e : Real) == real_of_num(0))
+      #|  (e : Real) * inv(real_of_num(6)) == real_of_num(2) * ((BB : Real) * (((CC : Real) + real_of_num(1)) * inv(real_of_num(12) * (BB * ((CC + real_of_num(1)) * inv(e))))))
+      #|  real_of_num(0) <= sqrt(real_of_num(12) * ((BB : Real) * (((CC : Real) + real_of_num(1)) / (e : Real))))
+      #|  sqrt(real_of_num(12) * ((BB : Real) * (((CC : Real) + real_of_num(1)) / (e : Real)))) + real_of_num(1) == (M : Real)
+      #|  real_of_num(0) < real_of_num(12) * ((BB : Real) * (((CC : Real) + real_of_num(1)) / (e : Real)))
+      #|  real_of_num(0) <= sqrt(real_of_num(12) * ((BB : Real) * (((CC : Real) + real_of_num(1)) / (e : Real))))
+      #|  pow(sqrt(real_of_num(12) * ((BB : Real) * (((CC : Real) + real_of_num(1)) / (e : Real)))), 2) == real_of_num(12) * (BB * ((CC + real_of_num(1)) / e))
+      #|  real_of_num(0) < real_of_num(12) * ((BB : Real) * (((CC : Real) + real_of_num(1)) / (e : Real)))
+      #|  real_of_num(0) <= real_of_num(12) * ((BB : Real) * (((CC : Real) + real_of_num(1)) / (e : Real)))
+      #|  real_of_num(12) * ((BB : Real) * (((CC : Real) + real_of_num(1)) / (e : Real))) < pow((M : Real), 2)
+      #|  real_of_num(0) < (CC : Real)
+      #|  real_of_num(0) < (BB : Real)
+      #|  real_of_num(0) < real_of_num(12) * ((BB : Real) * (((CC : Real) + real_of_num(1)) / (e : Real)))
+      #|  real_of_num(0) < (CC : Real)
+      #|  real_of_num(0) < (BB : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  !((e : Real) == real_of_num(0)) && !((BB : Real) == real_of_num(0)) && !((CC : Real) + real_of_num(1) == real_of_num(0))
+      #|  real_of_num(2) * ((BB : Real) * (((CC : Real) + real_of_num(1)) / pow((M : Real), 2))) < (e : Real) / real_of_num(6)
+      #|  (ff : (Num) -> Real)
+      #|  (bb : (Num) -> Real)
+      #|  (aa : (Num) -> Real)
+      #|  (nn : Num)
+      #|  (e : Real) / real_of_num(6)
+      #|  (M : Real)
+      #|  (BB : Real)
+      #|  (g : (Real) -> Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  real_of_num(0) < (CC : Real)
+      #|  real_of_num(0) < (BB : Real)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) < x + real_of_num(1)
+      #|  real_of_num(0) < (M : Real)
+      #|  (M : Real) == sqrt(real_of_num(12) * ((BB : Real) * (((CC : Real) + real_of_num(1)) / (e : Real)))) + real_of_num(1)
+      #|  (e : Real)
+      #|  (BB : Real)
+      #|  (CC : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 g : (Real) -> Real, (\226\136\128 n : Num, simple_rv(p, X(n))) && (\226\136\131 C : Real, real_of_num(0) < C && (\226\136\128 n : Num, simple_expectation(p, (x : A) => pow(X(n, x), 2)) <= C)) && (\226\136\128 t : Real, op_minus_minus_minus_gt((n : Num) => simple_char_fn_re(p, X(n), t), exp(-(pow(t, 2) / real_of_num(2))), sequentially)) && (\226\136\128 t : Real, op_minus_minus_minus_gt((n : Num) => simple_char_fn_im(p, X(n), t), real_of_num(0), sequentially)) && (\226\136\128 y : Real, real_continuous(g, atreal(y))) && (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 y : Real, abs(g(y)) <= B)) \226\134\146 op_minus_minus_minus_gt((n : Num) => simple_expectation(p, (a : A) => g(X(n, a))), real_integral(UNIV, (y : Real) => g(y) * std_normal_density(y)), sequentially)
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  \226\136\128 y : Real, y > (b : Real) \226\134\146 (g : (Real) -> Real)(y) == real_of_num(0)
+      #|  (g : (Real) -> Real)((x : Real)) == real_of_num(0)
+      #|  (x : Real)
+      #|  \226\136\128 y : Real, real_of_num(0) <= (g : (Real) -> Real)(y) && g(y) <= real_of_num(1)
+      #|  real_of_num(1) * std_normal_density((x : Real))
+      #|  (x : Real) <= (b : Real)
+      #|  real_integral(UNIV, (y : Real) => if IN(y, {(t : Real) | t <= (b : Real)}) { std_normal_density(y) } else { real_of_num(0) })
+      #|  real_integral(UNIV, (y : Real) => (g : (Real) -> Real)(y) * std_normal_density(y))
+      #|  (UNIV : (Real) -> Bool)
+      #|  (y : Real) => if IN(y, {(t : Real) | t <= (b : Real)}) { std_normal_density(y) } else { real_of_num(0) }
+      #|  (y : Real) => (g : (Real) -> Real)(y) * std_normal_density(y)
+      #|  (y : Real)
+      #|  \226\136\128 y : Real, real_of_num(0) <= (g : (Real) -> Real)(y) && g(y) <= real_of_num(1)
+      #|  real_of_num(1)
+      #|  real_integrable_on((y : Real) => (g : (Real) -> Real)(y) * std_normal_density(y), UNIV)
+      #|  \226\136\128 g : (Real) -> Real, \226\136\128 b : Real, (\226\136\128 y : Real, real_of_num(0) <= g(y) && g(y) <= real_of_num(1)) && (\226\136\128 y : Real, y > b \226\134\146 g(y) == real_of_num(0)) && (\226\136\128 y : Real, real_continuous(g, atreal(y))) \226\134\146 real_integral(UNIV, (y : Real) => g(y) * std_normal_density(y)) <= std_normal_cdf(b)
+      #|  (x : Real)
+      #|  \226\136\128 y : Real, real_of_num(0) <= (g : (Real) -> Real)(y) && g(y) <= real_of_num(1)
+      #|  (x : Real)
+      #|  \226\136\128 y : Real, y <= (a : Real) \226\134\146 (g : (Real) -> Real)(y) == real_of_num(1)
+      #|  (x : Real) <= (a : Real)
+      #|  real_integral(UNIV, (y : Real) => (g : (Real) -> Real)(y) * std_normal_density(y))
+      #|  real_integral(UNIV, (y : Real) => if IN(y, {(t : Real) | t <= (a : Real)}) { std_normal_density(y) } else { real_of_num(0) })
+      #|  (UNIV : (Real) -> Bool)
+      #|  (y : Real) => (g : (Real) -> Real)(y) * std_normal_density(y)
+      #|  (y : Real) => if IN(y, {(t : Real) | t <= (a : Real)}) { std_normal_density(y) } else { real_of_num(0) }
+      #|  (y : Real)
+      #|  \226\136\128 y : Real, real_of_num(0) <= (g : (Real) -> Real)(y) && g(y) <= real_of_num(1)
+      #|  real_of_num(1)
+      #|  real_integrable_on((y : Real) => (g : (Real) -> Real)(y) * std_normal_density(y), UNIV)
+      #|  \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, (\226\136\128 y : Real, real_of_num(0) <= g(y) && g(y) <= real_of_num(1)) && (\226\136\128 y : Real, y <= a \226\134\146 g(y) == real_of_num(1)) && (\226\136\128 y : Real, real_continuous(g, atreal(y))) \226\134\146 std_normal_cdf(a) <= real_integral(UNIV, (y : Real) => g(y) * std_normal_density(y))
+      #|  ((x : Real) + ((h : Real) - (y : Real))) / h < real_of_num(0)
+      #|  (y : Real)
+      #|  real_of_num(1) <= ((x : Real) + ((h : Real) - (y : Real))) / h
+      #|  (y : Real)
+      #|  (n : Num)
       #|  0
-      #|  &1
-      #|  C:real
-      #|  real_integral (:real)\n          (\\y:real. (g_up:real->real) y * std_normal_density y)
-      #|  l:real
-      #|  \\n:num. simple_expectation (p:A prob_space)\n                  (\\a:A. (g_up:real->real) ((X:num->A->real) n a))
-      #|  \\n:num. simple_cdf (p:A prob_space) ((X:num->A->real) n) x
+      #|  real_of_num(1)
+      #|  (C : Real)
+      #|  real_integral(UNIV, (y : Real) => (g_up : (Real) -> Real)(y) * std_normal_density(y))
+      #|  (l : Real)
+      #|  (n : Num) => simple_expectation((p : Prob_space[A]), (a : A) => (g_up : (Real) -> Real)((X : (Num, A) -> Real)(n, a)))
+      #|  (n : Num) => simple_cdf((p : Prob_space[A]), (X : (Num, A) -> Real)(n), (x : Real))
       #|  sequentially
-      #|  real_integral (:real)\n        (\\y:real. g_up y * std_normal_density y)
-      #|  g_up = \\y:real. max (&0) (min (&1) ((x + h - y) / h))
-      #|  &1 < (y - (x - h)) / h
-      #|  &1 - (y - (x - h)) / h < &0
-      #|  y:real
-      #|  n:num
+      #|  real_integral(UNIV, (y : Real) => (g_up : (Real) -> Real)(y) * std_normal_density(y))
+      #|  (g_up : (Real) -> Real) == ((y : Real) => max(real_of_num(0), min(real_of_num(1), ((x : Real) + ((h : Real) - y)) / h)))
+      #|  real_of_num(1) < ((y : Real) - ((x : Real) - (h : Real))) / h
+      #|  real_of_num(1) - ((y : Real) - ((x : Real) - (h : Real))) / h < real_of_num(0)
+      #|  (y : Real)
+      #|  (n : Num)
       #|  0
-      #|  &1
-      #|  C:real
-      #|  l:real
-      #|  real_integral (:real)\n         (\\y:real. (g_low:real->real) y * std_normal_density y)
-      #|  \\n:num. simple_cdf (p:A prob_space) ((X:num->A->real) n) x
-      #|  \\n:num. simple_expectation (p:A prob_space)\n                 (\\a:A. (g_low:real->real) ((X:num->A->real) n a))
+      #|  real_of_num(1)
+      #|  (C : Real)
+      #|  (l : Real)
+      #|  real_integral(UNIV, (y : Real) => (g_low : (Real) -> Real)(y) * std_normal_density(y))
+      #|  (n : Num) => simple_cdf((p : Prob_space[A]), (X : (Num, A) -> Real)(n), (x : Real))
+      #|  (n : Num) => simple_expectation((p : Prob_space[A]), (a : A) => (g_low : (Real) -> Real)((X : (Num, A) -> Real)(n, a)))
       #|  sequentially
-      #|  &1 <= &1 - z <=> z <= &0
-      #|  &1 <= &1 - (y - (x - h)) / h
-      #|  y:real
-      #|  real_integral (:real)\n        (\\y:real. g_low y * std_normal_density y)
-      #|  g_low = \\y:real. max (&0) (min (&1) (&1 - (y - (x - h)) / h))
-      #|  h:real
+      #|  (real_of_num(1) <= real_of_num(1) - (z : Real)) == (z <= real_of_num(0))
+      #|  real_of_num(1) <= real_of_num(1) - ((y : Real) - ((x : Real) - (h : Real))) / h
+      #|  (y : Real)
+      #|  real_integral(UNIV, (y : Real) => (g_low : (Real) -> Real)(y) * std_normal_density(y))
+      #|  (g_low : (Real) -> Real) == ((y : Real) => max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (y - ((x : Real) - (h : Real))) / h)))
+      #|  (h : Real)
       #|  forall p:A prob_space (X:num->A->real) x l.\n     (forall n. simple_rv p (X n)) /\\\n     (?C. &0 < C /\\ forall n. simple_expectation p (\\x. X n x pow 2) <= C) /\\\n     (forall t. ((\\n. simple_char_fn_re p (X n) t) ---> exp(--(t pow 2 / &2)))\n          sequentially) /\\\n     (forall t. ((\\n. simple_char_fn_im p (X n) t) ---> &0) sequentially) /\\\n     ((\\n. simple_cdf p (X n) x) ---> l) sequentially\n     ==> l = std_normal_cdf x
-      #|  \\k:num. (r:num->num) ((s:num->num) k)
-      #|  &0
-      #|  \\n:num. simple_char_fn_im (p:A prob_space) ((X:num->A->real) n) t
-      #|  t:real
-      #|  \\k:num. (r:num->num) ((s:num->num) k)
-      #|  exp(--(t pow 2 / &2))
-      #|  \\n:num. simple_char_fn_re (p:A prob_space) ((X:num->A->real) n) t
-      #|  t:real
-      #|  C:real
-      #|  l:real
-      #|  x:real
-      #|  \\k:num. (X:num->A->real) ((r:num->num) ((s:num->num) k))
-      #|  p:A prob_space
-      #|  l:real = std_normal_cdf x
-      #|  s:num->num
-      #|  s:num->num
-      #|  l:real
-      #|  &0 <= a /\\ a <= &1 ==> abs a <= &1
-      #|  &1
-      #|  \\k:num. simple_cdf (p:A prob_space) ((X:num->A->real) ((r:num->num) k)) x
-      #|  r:num->num
-      #|  &0 <= a /\\ a <= &1 ==> abs a <= &1
-      #|  &1
-      #|  std_normal_cdf x
-      #|  \\n:num. simple_cdf (p:A prob_space) ((X:num->A->real) n) x
+      #|  (k : Num) => (r : (Num) -> Num)((s : (Num) -> Num)(k))
+      #|  real_of_num(0)
+      #|  (n : Num) => simple_char_fn_im((p : Prob_space[A]), (X : (Num, A) -> Real)(n), (t : Real))
+      #|  (t : Real)
+      #|  (k : Num) => (r : (Num) -> Num)((s : (Num) -> Num)(k))
+      #|  exp(-(pow((t : Real), 2) / real_of_num(2)))
+      #|  (n : Num) => simple_char_fn_re((p : Prob_space[A]), (X : (Num, A) -> Real)(n), (t : Real))
+      #|  (t : Real)
+      #|  (C : Real)
+      #|  (l : Real)
+      #|  (x : Real)
+      #|  (k : Num) => (X : (Num, A) -> Real)((r : (Num) -> Num)((s : (Num) -> Num)(k)))
+      #|  (p : Prob_space[A])
+      #|  (l : Real) == std_normal_cdf((x : Real))
+      #|  (s : (Num) -> Num)
+      #|  (s : (Num) -> Num)
+      #|  (l : Real)
+      #|  real_of_num(0) <= (a : Real) && a <= real_of_num(1) \226\134\146 abs(a) <= real_of_num(1)
+      #|  real_of_num(1)
+      #|  (k : Num) => simple_cdf((p : Prob_space[A]), (X : (Num, A) -> Real)((r : (Num) -> Num)(k)), (x : Real))
+      #|  (r : (Num) -> Num)
+      #|  real_of_num(0) <= (a : Real) && a <= real_of_num(1) \226\134\146 abs(a) <= real_of_num(1)
+      #|  real_of_num(1)
+      #|  std_normal_cdf((x : Real))
+      #|  (n : Num) => simple_cdf((p : Prob_space[A]), (X : (Num, A) -> Real)(n), (x : Real))
       #|  0
-      #|  M:real
-      #|  e:real
-      #|  C:real
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  e:real
-      #|  forall e. &0 < e ==>\n     ?M. &0 < M /\\\n     ?N:num. forall n. N <= n ==>\n       prob (p:A prob_space) {a | a IN prob_carrier p /\\\n                                   abs((X:num->A->real) n a) >= M} < e
-      #|  x:real
-      #|  forall p:A prob_space (X:num->A->real).\n    (forall n. simple_rv p (X n)) /\\\n    (?C. &0 < C /\\\n         forall n. simple_expectation p (\\x. (X:num->A->real) n x pow 2) <= C) /\\\n    (forall t. ((\\n. simple_char_fn_re p (X n) t) ---> exp(--(t pow 2 / &2)))\n         sequentially) /\\\n    (forall t. ((\\n. simple_char_fn_im p (X n) t) ---> &0) sequentially)\n    ==> forall x. ((\\n. simple_cdf p (X n) x) ---> std_normal_cdf x) sequentially
-      #|  forall p:A prob_space (X:A->real) c t.\n     simple_char_fn_re p (\\x. X x / c) t = simple_char_fn_re p X (t / c)
-      #|  forall p:A prob_space (X:A->real) c t.\n     simple_char_fn_im p (\\x. X x / c) t = simple_char_fn_im p X (t / c)
-      #|  (\\x:A. (X:A->real) x / c) = (\\x. inv(c) * X x)
-      #|  forall p:A prob_space X c.\n     simple_rv p X ==> simple_rv p (\\x. X x / c)
-      #|  forall p:A prob_space (X:num->A->real) n c.\n     (forall k. simple_rv p (X k))\n     ==> simple_rv p (\\a. sum(0..n) (\\i. X i a) / c)
-      #|  t:real
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  t:real
-      #|  t:real
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  t:real
-      #|  &0 <= x ==> x <= &2 * x
-      #|  &(SUC n) * sigma2 = sigma2 * &(SUC n)
-      #|  &0 < sigma2 * &(SUC n)
-      #|  sqrt (&(SUC n)) pow 2 = &(SUC n)
-      #|  sqrt sigma2 pow 2 = sigma2
-      #|  (sqrt sigma2 * sqrt (&(SUC n))) pow 2 = sigma2 * &(SUC n)
-      #|  simple_variance (p:A prob_space)\n         (\\a:A. sum(0..n) (\\i. (X:num->A->real) i a)) = &(SUC n) * sigma2
-      #|  simple_expectation (p:A prob_space)\n         (\\x:A. (sum(0..n) (\\i. (X:num->A->real) i x)) pow 2) =\n       simple_variance p (\\a. sum(0..n) (\\i. X i a))
-      #|  n:num
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n         (\\a:A. sum(0..n) (\\i. (X:num->A->real) i a)) = &0
-      #|  sqrt sigma2 * sqrt(&(SUC n))
-      #|  \\a:A. sum(0..n) (\\i. (X:num->A->real) i a)
-      #|  p:A prob_space
-      #|  simple_rv (p:A prob_space) (\\a:A. sum(0..n) (\\i. (X:num->A->real) i a))
-      #|  &0 < x ==> ~(x = &0)
-      #|  ~(sqrt sigma2 * sqrt(&(SUC n)) = &0)
-      #|  &0 < sqrt(&(SUC n))
-      #|  &0 < sqrt sigma2
-      #|  &0 < sigma2
-      #|  n:num
-      #|  &2
-      #|  sigma2 = simple_variance (p:A prob_space) ((X:num->A->real) 0)
-      #|  \\n:num. \\a:A. sum(0..n) (\\i. (X:num->A->real) i a) /\n                    (sqrt(simple_variance p (X 0)) * sqrt(&(SUC n)))
-      #|  p:A prob_space
-      #|  forall p:A prob_space (X:num->A->real).\n    (forall n. simple_rv p (X n)) /\\\n    (forall i. simple_expectation p (X i) = &0) /\\\n    &0 < simple_variance p (X 0) /\\\n    (forall i. simple_variance p (X i) = simple_variance p (X 0)) /\\\n    (forall i j. ~(i = j) ==> indep_rv p (X i) (X j)) /\\\n    (forall i t. simple_char_fn_re p (X i) t = simple_char_fn_re p (X 0) t /\\\n           simple_char_fn_im p (X i) t = simple_char_fn_im p (X 0) t) /\\\n    (forall n k. k < n ==> indep_rv p (\\x. sum(0..k) (\\i. X i x)) (X (SUC k)))\n    ==> forall x. ((\\n. simple_cdf p\n                (\\a. sum(0..n) (\\i. X i a) /\n                     (sqrt(simple_variance p (X 0)) * sqrt(&(SUC n)))) x)\n             ---> std_normal_cdf x) sequentially
-      #|  forall p:A prob_space X x. cdf p X x = simple_cdf p X x
-      #|  forall p:A prob_space X t. simple_rv p X ==> char_fn_re p X t = simple_char_fn_re p X t
-      #|  forall p:A prob_space X t. simple_rv p X ==> char_fn_im p X t = simple_char_fn_im p X t
-      #|  forall i:num t:real.\n    simple_char_fn_re (p:A prob_space) ((X:num->A->real) i) t =\n      char_fn_re p (X i) t /\\\n    simple_char_fn_im p (X i) t = char_fn_im p (X i) t
-      #|  forall i:num. simple_variance (p:A prob_space)\n    ((X:num->A->real) i) = variance p (X i)
-      #|  forall i:num. simple_expectation (p:A prob_space)\n    ((X:num->A->real) i) = expectation p (X i)
-      #|  variance (p:A prob_space) ((X:num->A->real) 0) =\n                simple_variance p (X 0)
-      #|  forall p:A prob_space (X:num->A->real).\n    (forall n. simple_rv p (X n)) /\\\n    (forall i. expectation p (X i) = &0) /\\\n    &0 < variance p (X 0) /\\\n    (forall i. variance p (X i) = variance p (X 0)) /\\\n    (forall i j. ~(i = j) ==> indep_rv p (X i) (X j)) /\\\n    (forall i t. char_fn_re p (X i) t = char_fn_re p (X 0) t /\\\n           char_fn_im p (X i) t = char_fn_im p (X 0) t) /\\\n    (forall n k. k < n ==> indep_rv p (\\x. sum(0..k) (\\i. X i x)) (X (SUC k)))\n    ==> forall x. ((\\n. cdf p\n                (\\a. sum(0..n) (\\i. X i a) /\n                     (sqrt(variance p (X 0)) * sqrt(&(SUC n)))) x)\n             ---> std_normal_cdf x) sequentially
-      #|  z:A
-      #|  (X:A->real) z
-      #|  z:A
-      #|  forall p:A prob_space X a.\n     simple_rv p X\n     ==> {x | x IN prob_carrier p /\\ X x <= a} =\n         UNIONS (IMAGE (\\v. {x | x IN prob_carrier p /\\ X x = v})\n                       {v | v IN IMAGE X (prob_carrier p) /\\ v <= a})
-      #|  simple_rv p (X:A->real)
-      #|  simple_rv p (X:A->real)
-      #|  IMAGE ((X:A->real)) (prob_carrier p)
-      #|  forall p:A prob_space X a.\n     simple_rv p X\n     ==> prob p {x | x IN prob_carrier p /\\ X x <= a} =\n         sum {v | v IN IMAGE X (prob_carrier p) /\\ v <= a}\n             (\\v. prob p {x | x IN prob_carrier p /\\ X x = v})
-      #|  w:real
-      #|  simple_rv p (Y:A->real)
-      #|  IMAGE ((Y:A->real)) (prob_carrier p)
-      #|  z:A
-      #|  (Y:A->real) z
-      #|  z:A
-      #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x = v /\\ (Y:A->real) x <= b} =\n     UNIONS (IMAGE (\\w. {x | x IN prob_carrier p /\\ X x = v /\\ Y x = w})\n       {w | w IN IMAGE Y (prob_carrier p) /\\ w <= b})
-      #|  v:real
-      #|  b:real
-      #|  simple_rv p (Y:A->real)
-      #|  simple_rv p (X:A->real)
-      #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x = v /\\\n        (Y:A->real) x <= b} =\n       {x | x IN prob_carrier p /\\ X x = v} INTER\n       {x | x IN prob_carrier p /\\ Y x <= b}
-      #|  v:real
-      #|  simple_rv p (X:A->real)
-      #|  IMAGE ((X:A->real)) (prob_carrier p)
-      #|  prob p (UNIONS (IMAGE (\\v. {x:A | x IN prob_carrier p /\\\n       (X:A->real) x = v /\\ (Y:A->real) x <= b})\n       {v | v IN IMAGE X (prob_carrier p) /\\ v <= a})) =\n     sum {v | v IN IMAGE X (prob_carrier p) /\\ v <= a}\n       (\\v. prob p {x | x IN prob_carrier p /\\ X x = v /\\ Y x <= b})
-      #|  z:A
-      #|  (X:A->real) z
-      #|  z:A
-      #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x <= a /\\ (Y:A->real) x <= b} =\n     UNIONS (IMAGE (\\v. {x | x IN prob_carrier p /\\ X x = v /\\ Y x <= b})\n       {v | v IN IMAGE X (prob_carrier p) /\\ v <= a})
-      #|  forall p:A prob_space X Y a b.\n     simple_rv p X /\\ simple_rv p Y\n     ==> prob p {x | x IN prob_carrier p /\\ X x <= a /\\ Y x <= b} =\n         sum {v | v IN IMAGE X (prob_carrier p) /\\ v <= a}\n           (\\v. sum {w | w IN IMAGE Y (prob_carrier p) /\\ w <= b}\n             (\\w. prob p {x | x IN prob_carrier p /\\ X x = v /\\ Y x = w}))
-      #|  \\m:num. if m = i then v else w:real
-      #|  {i:num,j}
-      #|  forall v w. prob p {x:A | x IN prob_carrier p /\\\n      (X:num->A->real) i x = v /\\ X j x = w} =\n      prob p {x | x IN prob_carrier p /\\ X i x = v} *\n      prob p {x | x IN prob_carrier p /\\ X j x = w}
-      #|  simple_rv p ((X:num->A->real) i) /\\\n                simple_rv p ((X:num->A->real) j)
-      #|  simple_rv p ((X:num->A->real) j)
-      #|  simple_rv p ((X:num->A->real) i)
-      #|  simple_rv p ((X:num->A->real) j)
-      #|  random_variable p ((X:num->A->real) j)
-      #|  simple_rv p ((X:num->A->real) i)
-      #|  random_variable p ((X:num->A->real) i)
-      #|  forall p:A prob_space X n i j.\n     mutually_indep_rv p X n /\\\n     simple_rv p (X i) /\\ simple_rv p (X j) /\\\n     i <= n /\\ j <= n /\\ ~(i = j)\n     ==> indep_rv p (X i) (X j)
+      #|  (M : Real)
+      #|  (e : Real)
+      #|  (C : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (e : Real)
+      #|  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 M : Real, real_of_num(0) < M && (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 prob((p : Prob_space[A]), {(a : A) | IN(a, prob_carrier(p)) && abs((X : (Num, A) -> Real)(n, a)) >= M}) < e))
+      #|  (x : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, (\226\136\128 n : Num, simple_rv(p, X(n))) && (\226\136\131 C : Real, real_of_num(0) < C && (\226\136\128 n : Num, simple_expectation(p, (x : A) => pow(X(n, x), 2)) <= C)) && (\226\136\128 t : Real, op_minus_minus_minus_gt((n : Num) => simple_char_fn_re(p, X(n), t), exp(-(pow(t, 2) / real_of_num(2))), sequentially)) && (\226\136\128 t : Real, op_minus_minus_minus_gt((n : Num) => simple_char_fn_im(p, X(n), t), real_of_num(0), sequentially)) \226\134\146 (\226\136\128 x : Real, op_minus_minus_minus_gt((n : Num) => simple_cdf(p, X(n), x), std_normal_cdf(x), sequentially))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 c : Real, \226\136\128 t : Real, simple_char_fn_re(p, (x : A) => X(x) / c, t) == simple_char_fn_re(p, X, t / c)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 c : Real, \226\136\128 t : Real, simple_char_fn_im(p, (x : A) => X(x) / c, t) == simple_char_fn_im(p, X, t / c)
+      #|  ((x : A) => (X : (A) -> Real)(x) / (c : Real)) == ((x : A) => inv(c) * X(x))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 c : Real, simple_rv(p, X) \226\134\146 simple_rv(p, (x : A) => X(x) / c)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 c : Real, (\226\136\128 k : Num, simple_rv(p, X(k))) \226\134\146 simple_rv(p, (a : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, a)) / c)
+      #|  (t : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (t : Real)
+      #|  (t : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (t : Real)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 x <= real_of_num(2) * x
+      #|  real_of_num(SUC((n : Num))) * (sigma2 : Real) == sigma2 * real_of_num(SUC(n))
+      #|  real_of_num(0) < (sigma2 : Real) * real_of_num(SUC((n : Num)))
+      #|  pow(sqrt(real_of_num(SUC((n : Num)))), 2) == real_of_num(SUC(n))
+      #|  pow(sqrt((sigma2 : Real)), 2) == sigma2
+      #|  pow(sqrt((sigma2 : Real)) * sqrt(real_of_num(SUC((n : Num)))), 2) == sigma2 * real_of_num(SUC(n))
+      #|  simple_variance((p : Prob_space[A]), (a : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, a))) == real_of_num(SUC(n)) * (sigma2 : Real)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => pow(sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)), 2)) == simple_variance(p, (a : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, a)))
+      #|  (n : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (a : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, a))) == real_of_num(0)
+      #|  sqrt((sigma2 : Real)) * sqrt(real_of_num(SUC((n : Num))))
+      #|  (a : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, a))
+      #|  (p : Prob_space[A])
+      #|  simple_rv((p : Prob_space[A]), (a : A) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, a)))
+      #|  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+      #|  !(sqrt((sigma2 : Real)) * sqrt(real_of_num(SUC((n : Num)))) == real_of_num(0))
+      #|  real_of_num(0) < sqrt(real_of_num(SUC((n : Num))))
+      #|  real_of_num(0) < sqrt((sigma2 : Real))
+      #|  real_of_num(0) < (sigma2 : Real)
+      #|  (n : Num)
+      #|  real_of_num(2)
+      #|  (sigma2 : Real) == simple_variance((p : Prob_space[A]), (X : (Num, A) -> Real)(0))
+      #|  (n : Num) => (a : A) => sum(op_dot_dot(0, n), (i : Num) => (X : (Num, A) -> Real)(i, a)) / (sqrt(simple_variance((p : Prob_space[A]), X(0))) * sqrt(real_of_num(SUC(n))))
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, (\226\136\128 n : Num, simple_rv(p, X(n))) && (\226\136\128 i : Num, simple_expectation(p, X(i)) == real_of_num(0)) && real_of_num(0) < simple_variance(p, X(0)) && (\226\136\128 i : Num, simple_variance(p, X(i)) == simple_variance(p, X(0))) && (\226\136\128 i : Num, \226\136\128 j : Num, !(i == j) \226\134\146 indep_rv(p, X(i), X(j))) && (\226\136\128 i : Num, \226\136\128 t : Real, simple_char_fn_re(p, X(i), t) == simple_char_fn_re(p, X(0), t) && simple_char_fn_im(p, X(i), t) == simple_char_fn_im(p, X(0), t)) && (\226\136\128 n : Num, \226\136\128 k : Num, k < n \226\134\146 indep_rv(p, (x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)), X(SUC(k)))) \226\134\146 (\226\136\128 x : Real, op_minus_minus_minus_gt((n : Num) => simple_cdf(p, (a : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, a)) / (sqrt(simple_variance(p, X(0))) * sqrt(real_of_num(SUC(n)))), x), std_normal_cdf(x), sequentially))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 x : Real, cdf(p, X, x) == simple_cdf(p, X, x)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 t : Real, simple_rv(p, X) \226\134\146 char_fn_re(p, X, t) == simple_char_fn_re(p, X, t)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 t : Real, simple_rv(p, X) \226\134\146 char_fn_im(p, X, t) == simple_char_fn_im(p, X, t)
+      #|  \226\136\128 i : Num, \226\136\128 t : Real, simple_char_fn_re((p : Prob_space[A]), (X : (Num, A) -> Real)(i), t) == char_fn_re(p, X(i), t) && simple_char_fn_im(p, X(i), t) == char_fn_im(p, X(i), t)
+      #|  \226\136\128 i : Num, simple_variance((p : Prob_space[A]), (X : (Num, A) -> Real)(i)) == variance(p, X(i))
+      #|  \226\136\128 i : Num, simple_expectation((p : Prob_space[A]), (X : (Num, A) -> Real)(i)) == expectation(p, X(i))
+      #|  variance((p : Prob_space[A]), (X : (Num, A) -> Real)(0)) == simple_variance(p, X(0))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, (\226\136\128 n : Num, simple_rv(p, X(n))) && (\226\136\128 i : Num, expectation(p, X(i)) == real_of_num(0)) && real_of_num(0) < variance(p, X(0)) && (\226\136\128 i : Num, variance(p, X(i)) == variance(p, X(0))) && (\226\136\128 i : Num, \226\136\128 j : Num, !(i == j) \226\134\146 indep_rv(p, X(i), X(j))) && (\226\136\128 i : Num, \226\136\128 t : Real, char_fn_re(p, X(i), t) == char_fn_re(p, X(0), t) && char_fn_im(p, X(i), t) == char_fn_im(p, X(0), t)) && (\226\136\128 n : Num, \226\136\128 k : Num, k < n \226\134\146 indep_rv(p, (x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)), X(SUC(k)))) \226\134\146 (\226\136\128 x : Real, op_minus_minus_minus_gt((n : Num) => cdf(p, (a : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, a)) / (sqrt(variance(p, X(0))) * sqrt(real_of_num(SUC(n)))), x), std_normal_cdf(x), sequentially))
+      #|  (z : A)
+      #|  (X : (A) -> Real)((z : A))
+      #|  (z : A)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, simple_rv(p, X) \226\134\146 {(x : A) | IN(x, prob_carrier(p)) && X(x) <= a} == UNIONS(IMAGE((v : Real) => {(x : A) | IN(x, prob_carrier(p)) && X(x) == v}, {(v : Real) | IN(v, IMAGE(X, prob_carrier(p))) && v <= a}))
+      #|  simple_rv((p : Prob_space[A]), (X : (A) -> Real))
+      #|  simple_rv((p : Prob_space[A]), (X : (A) -> Real))
+      #|  IMAGE((X : (A) -> Real), prob_carrier((p : Prob_space[A])))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, simple_rv(p, X) \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= a}) == sum({(v : Real) | IN(v, IMAGE(X, prob_carrier(p))) && v <= a}, (v : Real) => prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) == v}))
+      #|  (w : Real)
+      #|  simple_rv((p : Prob_space[A]), (Y : (A) -> Real))
+      #|  IMAGE((Y : (A) -> Real), prob_carrier((p : Prob_space[A])))
+      #|  (z : A)
+      #|  (Y : (A) -> Real)((z : A))
+      #|  (z : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) == (v : Real) && (Y : (A) -> Real)(x) <= (b : Real)} == UNIONS(IMAGE((w : Real) => {(x : A) | IN(x, prob_carrier(p)) && X(x) == v && Y(x) == w}, {(w : Real) | IN(w, IMAGE(Y, prob_carrier(p))) && w <= b}))
+      #|  (v : Real)
+      #|  (b : Real)
+      #|  simple_rv((p : Prob_space[A]), (Y : (A) -> Real))
+      #|  simple_rv((p : Prob_space[A]), (X : (A) -> Real))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) == (v : Real) && (Y : (A) -> Real)(x) <= (b : Real)} == INTER({(x : A) | IN(x, prob_carrier(p)) && X(x) == v}, {(x : A) | IN(x, prob_carrier(p)) && Y(x) <= b})
+      #|  (v : Real)
+      #|  simple_rv((p : Prob_space[A]), (X : (A) -> Real))
+      #|  IMAGE((X : (A) -> Real), prob_carrier((p : Prob_space[A])))
+      #|  prob((p : Prob_space[A]), UNIONS(IMAGE((v : Real) => {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) == v && (Y : (A) -> Real)(x) <= (b : Real)}, {(v : Real) | IN(v, IMAGE(X, prob_carrier(p))) && v <= (a : Real)}))) == sum({(v : Real) | IN(v, IMAGE(X, prob_carrier(p))) && v <= a}, (v : Real) => prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) == v && Y(x) <= b}))
+      #|  (z : A)
+      #|  (X : (A) -> Real)((z : A))
+      #|  (z : A)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (a : Real) && (Y : (A) -> Real)(x) <= (b : Real)} == UNIONS(IMAGE((v : Real) => {(x : A) | IN(x, prob_carrier(p)) && X(x) == v && Y(x) <= b}, {(v : Real) | IN(v, IMAGE(X, prob_carrier(p))) && v <= a}))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, simple_rv(p, X) && simple_rv(p, Y) \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= a && Y(x) <= b}) == sum({(v : Real) | IN(v, IMAGE(X, prob_carrier(p))) && v <= a}, (v : Real) => sum({(w : Real) | IN(w, IMAGE(Y, prob_carrier(p))) && w <= b}, (w : Real) => prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) == v && Y(x) == w})))
+      #|  (m : Num) => if m == (i : Num) { (v : Real) } else { (w : Real) }
+      #|  {(i : Num), (j : Num)}
+      #|  \226\136\128 v : Real, \226\136\128 w : Real, prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (X : (Num, A) -> Real)((i : Num), x) == v && X((j : Num), x) == w}) == prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(i, x) == v}) * prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(j, x) == w})
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)((i : Num))) && simple_rv(p, X((j : Num)))
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)((j : Num)))
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)((i : Num)))
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)((j : Num)))
+      #|  random_variable((p : Prob_space[A]), (X : (Num, A) -> Real)((j : Num)))
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)((i : Num)))
+      #|  random_variable((p : Prob_space[A]), (X : (Num, A) -> Real)((i : Num)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 i : Num, \226\136\128 j : Num, mutually_indep_rv(p, X, n) && simple_rv(p, X(i)) && simple_rv(p, X(j)) && i <= n && j <= n && !(i == j) \226\134\146 indep_rv(p, X(i), X(j))
       #|  0
-      #|  g:num->real
-      #|  {m:num | m < SUC k}
-      #|  INTERS (IMAGE (\\m. {y:A | y IN prob_carrier p /\\\n       (X:num->A->real) m y = X m x}) {m | m < SUC k}) =\n     INTERS (IMAGE (\\m. {y | y IN prob_carrier p /\\ X m y = g m})\n                   {m | m < SUC k})
-      #|  ~(SUC k IN {m:num | m < SUC k})
-      #|  {m:num | m <= SUC k} = (SUC k) INSERT {m | m < SUC k}
+      #|  (g : (Num) -> Real)
+      #|  {(m : Num) | m < SUC((k : Num))}
+      #|  INTERS(IMAGE((m : Num) => {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(m, y) == X(m, (x : A))}, {(m : Num) | m < SUC((k : Num))})) == INTERS(IMAGE((m : Num) => {(y : A) | IN(y, prob_carrier(p)) && X(m, y) == (g : (Num) -> Real)(m)}, {(m : Num) | m < SUC(k)}))
+      #|  !IN(SUC((k : Num)), {(m : Num) | m < SUC(k)})
+      #|  {(m : Num) | m <= SUC((k : Num))} == INSERT(SUC(k), {(m : Num) | m < SUC(k)})
       #|  0
-      #|  g:num->real
-      #|  {m:num | m <= SUC k}
-      #|  prob p (INTERS (IMAGE (\\m. {y:A | y IN prob_carrier p /\\\n       (X:num->A->real) m y = g m}) {m | m <= SUC k})) =\n     product {m | m <= SUC k}\n       (\\m. prob p {y | y IN prob_carrier p /\\ X m y = g m})
-      #|  {m:num | m <= SUC k} SUBSET 0..n
-      #|  rv_sigma_atom p (X:num->A->real) (SUC k) x INTER\n     {y:A | y IN prob_carrier p /\\ X (SUC k) y = w} =\n     INTERS (IMAGE (\\m. {y | y IN prob_carrier p /\\ X m y = g m})\n                   {m | m <= SUC k})
-      #|  m:num
-      #|  m:num
-      #|  s:A->bool
-      #|  IMAGE (\\m. {y:A | y IN prob_carrier p /\\ (X:num->A->real) m y = g m})\n           {m | m < SUC k} =\n     IMAGE (\\m. {y | y IN prob_carrier p /\\ X m y = X m x})\n           {m | m < SUC k}
-      #|  forall m:num. m < SUC k ==>\n       {y:A | y IN prob_carrier p /\\ (X:num->A->real) m y = g m} =\n       {y | y IN prob_carrier p /\\ X m y = X m x}
-      #|  INTERS (IMAGE (\\m. {y:A | y IN prob_carrier p /\\\n       (X:num->A->real) m y = g m}) {SUC k:num}) =\n     {y | y IN prob_carrier p /\\ X (SUC k) y = w}
-      #|  INTERS (IMAGE (\\m. {y:A | y IN prob_carrier p /\\\n       (X:num->A->real) m y = g m}) {m | m <= SUC k}) =\n     INTERS (IMAGE (\\m. {y | y IN prob_carrier p /\\ X m y = g m})\n                   {m | m < SUC k}) INTER\n     INTERS (IMAGE (\\m. {y | y IN prob_carrier p /\\ X m y = g m})\n                   {SUC k:num})
-      #|  IMAGE (\\m. {y:A | y IN prob_carrier p /\\ (X:num->A->real) m y = g m})\n           {SUC k:num} =\n     {{y | y IN prob_carrier p /\\ X (SUC k) y = g (SUC k)}}
-      #|  IMAGE (\\m. {y:A | y IN prob_carrier p /\\ (X:num->A->real) m y = g m})\n           {m | m <= SUC k} =\n     IMAGE (\\m. {y | y IN prob_carrier p /\\ X m y = g m}) {m | m < SUC k} UNION\n     IMAGE (\\m. {y | y IN prob_carrier p /\\ X m y = g m}) {SUC k:num}
-      #|  {m:num | m <= SUC k} = {m | m < SUC k} UNION {SUC k}
-      #|  (g:num->real) (SUC k) = w
-      #|  forall m:num. m < SUC k ==> (g:num->real) m = (X:num->A->real) m x
-      #|  g = \\m:num. if m < SUC k then (X:num->A->real) m x else w
-      #|  m:num
-      #|  {y:A | y IN prob_carrier p /\\ (X:num->A->real) m y = X m x}
-      #|  m:num
+      #|  (g : (Num) -> Real)
+      #|  {(m : Num) | m <= SUC((k : Num))}
+      #|  prob((p : Prob_space[A]), INTERS(IMAGE((m : Num) => {(y : A) | IN(y, prob_carrier(p)) && (X : (Num, A) -> Real)(m, y) == (g : (Num) -> Real)(m)}, {(m : Num) | m <= SUC((k : Num))}))) == product({(m : Num) | m <= SUC(k)}, (m : Num) => prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(m, y) == g(m)}))
+      #|  SUBSET({(m : Num) | m <= SUC((k : Num))}, op_dot_dot(0, (n : Num)))
+      #|  INTER(rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), SUC((k : Num)), (x : A)), {(y : A) | IN(y, prob_carrier(p)) && X(SUC(k), y) == (w : Real)}) == INTERS(IMAGE((m : Num) => {(y : A) | IN(y, prob_carrier(p)) && X(m, y) == (g : (Num) -> Real)(m)}, {(m : Num) | m <= SUC(k)}))
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (s : (A) -> Bool)
+      #|  IMAGE((m : Num) => {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(m, y) == (g : (Num) -> Real)(m)}, {(m : Num) | m < SUC((k : Num))}) == IMAGE((m : Num) => {(y : A) | IN(y, prob_carrier(p)) && X(m, y) == X(m, (x : A))}, {(m : Num) | m < SUC(k)})
+      #|  \226\136\128 m : Num, m < SUC((k : Num)) \226\134\146 {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(m, y) == (g : (Num) -> Real)(m)} == {(y : A) | IN(y, prob_carrier(p)) && X(m, y) == X(m, (x : A))}
+      #|  INTERS(IMAGE((m : Num) => {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(m, y) == (g : (Num) -> Real)(m)}, {SUC((k : Num))})) == {(y : A) | IN(y, prob_carrier(p)) && X(SUC(k), y) == (w : Real)}
+      #|  INTERS(IMAGE((m : Num) => {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(m, y) == (g : (Num) -> Real)(m)}, {(m : Num) | m <= SUC((k : Num))})) == INTER(INTERS(IMAGE((m : Num) => {(y : A) | IN(y, prob_carrier(p)) && X(m, y) == g(m)}, {(m : Num) | m < SUC(k)})), INTERS(IMAGE((m : Num) => {(y : A) | IN(y, prob_carrier(p)) && X(m, y) == g(m)}, {SUC(k)})))
+      #|  IMAGE((m : Num) => {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(m, y) == (g : (Num) -> Real)(m)}, {SUC((k : Num))}) == {{(y : A) | IN(y, prob_carrier(p)) && X(SUC(k), y) == g(SUC(k))}}
+      #|  IMAGE((m : Num) => {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(m, y) == (g : (Num) -> Real)(m)}, {(m : Num) | m <= SUC((k : Num))}) == UNION(IMAGE((m : Num) => {(y : A) | IN(y, prob_carrier(p)) && X(m, y) == g(m)}, {(m : Num) | m < SUC(k)}), IMAGE((m : Num) => {(y : A) | IN(y, prob_carrier(p)) && X(m, y) == g(m)}, {SUC(k)}))
+      #|  {(m : Num) | m <= SUC((k : Num))} == UNION({(m : Num) | m < SUC(k)}, {SUC(k)})
+      #|  (g : (Num) -> Real)(SUC((k : Num))) == (w : Real)
+      #|  \226\136\128 m : Num, m < SUC((k : Num)) \226\134\146 (g : (Num) -> Real)(m) == (X : (Num, A) -> Real)(m, (x : A))
+      #|  (g : (Num) -> Real) == ((m : Num) => if m < SUC((k : Num)) { (X : (Num, A) -> Real)(m, (x : A)) } else { (w : Real) })
+      #|  (m : Num)
+      #|  {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((m : Num), y) == X(m, (x : A))}
+      #|  (m : Num)
       #|  0
-      #|  {y:A | y IN prob_carrier p /\\ (X:num->A->real) 0 y = X 0 x}
-      #|  s:A->bool
-      #|  z:A
-      #|  rv_sigma_atom p (X:num->A->real) (SUC k) x =\n    INTERS (IMAGE (\\m. {y:A | y IN prob_carrier p /\\ X m y = X m x})\n                  {m | m < SUC k})
-      #|  forall p:A prob_space X n k x w.\n     mutually_indep_rv p X n /\\\n     (forall m. m <= n ==> simple_rv p (X m)) /\\\n     SUC k <= n /\\ x IN prob_carrier p\n     ==> prob p (rv_sigma_atom p X (SUC k) x INTER\n                 {y | y IN prob_carrier p /\\ X (SUC k) y = w}) =\n         prob p (rv_sigma_atom p X (SUC k) x) *\n         prob p {y | y IN prob_carrier p /\\ X (SUC k) y = w}
-      #|  n:num
-      #|  forall v:real. prob p (rv_sigma_atom p (X:num->A->real) (SUC k) x INTER\n       {y:A | y IN prob_carrier p /\\ X (SUC k) y = v}) =\n     prob p (rv_sigma_atom p X (SUC k) x) *\n     prob p {y | y IN prob_carrier p /\\ X (SUC k) y = v}
-      #|  v:real
-      #|  (X:num->A->real) (SUC k)
-      #|  p:A prob_space
-      #|  v:real
-      #|  prob p (UNIONS (IMAGE (\\v. rv_sigma_atom p (X:num->A->real) (SUC k) x INTER\n       {y:A | y IN prob_carrier p /\\ X (SUC k) y = v}) R)) =\n     sum R (\\v. prob p (rv_sigma_atom p X (SUC k) x INTER\n       {y | y IN prob_carrier p /\\ X (SUC k) y = v}))
-      #|  IMAGE ((X:num->A->real) (SUC k)) (prob_carrier p)
-      #|  FINITE (R:real->bool)
-      #|  rv_sigma_atom p (X:num->A->real) (SUC k) x INTER\n     {y:A | y IN prob_carrier p /\\ X (SUC k) y <= b} =\n     UNIONS (IMAGE (\\v. rv_sigma_atom p X (SUC k) x INTER\n       {y | y IN prob_carrier p /\\ X (SUC k) y = v}) R)
-      #|  R = {v:real | v IN IMAGE ((X:num->A->real) (SUC k))\n    (prob_carrier p) /\\ v <= b}
-      #|  {y:A | y IN prob_carrier p /\\ (X:num->A->real) (SUC k) y <= b} =\n     UNIONS (IMAGE (\\v. {y:A | y IN prob_carrier p /\\\n       (X:num->A->real) (SUC k) y = v})\n       {v | v IN IMAGE (X (SUC k)) (prob_carrier p) /\\ v <= b})
-      #|  simple_rv p ((X:num->A->real) (SUC k))
-      #|  forall p:A prob_space X n k x b.\n     mutually_indep_rv p X n /\\\n     (forall m. m <= n ==> simple_rv p (X m)) /\\\n     SUC k <= n /\\ x IN prob_carrier p\n     ==> prob p (rv_sigma_atom p X (SUC k) x INTER\n                 {y | y IN prob_carrier p /\\ X (SUC k) y <= b}) =\n         prob p (rv_sigma_atom p X (SUC k) x) *\n         prob p {y | y IN prob_carrier p /\\ X (SUC k) y <= b}
-      #|  pairwise DISJOINT (atoms:(A->bool)->bool)
-      #|  (s:A->bool) IN atoms
-      #|  s:A->bool
-      #|  UNIONS (atoms:(A->bool)->bool) = UNIONS (IMAGE (\\s:A->bool. s) atoms)
-      #|  sum atoms (\\s:A->bool. prob p (s INTER B)) =\n    sum atoms (\\s. prob p s * prob p B)
-      #|  (z:A) IN A
-      #|  n:num
-      #|  z:A
-      #|  (s:A->bool) IN atoms
-      #|  s:A->bool
-      #|  forall s:A->bool. s IN atoms ==>\n    prob p (s INTER B) = prob p s * prob p B
-      #|  s2:A->bool
-      #|  s1:A->bool
-      #|  s2:A->bool
-      #|  s1:A->bool
-      #|  b:real
-      #|  random_variable p ((X:num->A->real) (SUC k))
-      #|  (s:A->bool) IN atoms
-      #|  s:A->bool
-      #|  prob p (UNIONS (IMAGE (\\s:A->bool. s INTER B) atoms)) =\n     sum atoms (\\s. prob p (s INTER B))
-      #|  {s INTER (B:A->bool) | s | s IN atoms} =\n     IMAGE (\\s:A->bool. s INTER B) atoms
-      #|  (A:A->bool) = UNIONS atoms
-      #|  a:real
-      #|  random_variable p (\\x:A. sum (0..k)\n     (\\i. (X:num->A->real) i x))
-      #|  (A:A->bool) IN prob_events p
-      #|  forall z:A. z IN A ==>\n    rv_sigma_atom p (X:num->A->real) (SUC k) z IN prob_events p
-      #|  pairwise DISJOINT (atoms:(A->bool)->bool)
-      #|  {rv_sigma_atom p (X:num->A->real) (SUC k) x |\n     x | x IN prob_carrier p}
-      #|  FINITE (atoms:(A->bool)->bool)
-      #|  atoms = {rv_sigma_atom p (X:num->A->real) (SUC k) z |\n    z | z IN (A:A->bool)}
-      #|  (A:A->bool) = UNIONS {rv_sigma_atom p (X:num->A->real) (SUC k) x |\n      x | x IN A}
-      #|  B = {x:A | x IN prob_carrier p /\\\n    (X:num->A->real) (SUC k) x <= b}
-      #|  {x:A | x IN prob_carrier p /\\ sum (0..k) (\\i. (X:num->A->real) i x) <= a\n      /\\ X (SUC k) x <= b} =\n     A INTER {x | x IN prob_carrier p /\\ X (SUC k) x <= b}
-      #|  A = {x:A | x IN prob_carrier p /\\ sum (0..k)\n    (\\i. (X:num->A->real) i x) <= a}
-      #|  i:num
-      #|  i:num
-      #|  {x:A | x IN prob_carrier p /\\ sum (0..k)\n      (\\i. (X:num->A->real) i x) <= a} IN rv_sigma p X (SUC k)
-      #|  random_variable p ((X:num->A->real) (SUC k))
-      #|  random_variable p (\\x:A. sum (0..k)\n    (\\i. (X:num->A->real) i x))
-      #|  SUC k <= n
-      #|  forall p:A prob_space X n k.\n     mutually_indep_rv p X n /\\\n     (forall m. m <= n ==> simple_rv p (X m)) /\\\n     k < n\n     ==> indep_rv p (\\x. sum (0..k) (\\i. X i x)) (X (SUC k))
-      #|  n:num
-      #|  i <= MAX i j /\\ j <= MAX i j
-      #|  MAX i j
-      #|  forall p:A prob_space (X:num->A->real).\n    (forall n. simple_rv p (X n)) /\\\n    (forall i. expectation p (X i) = &0) /\\\n    &0 < variance p (X 0) /\\\n    (forall i. variance p (X i) = variance p (X 0)) /\\\n    (forall n. mutually_indep_rv p X n) /\\\n    (forall i t. char_fn_re p (X i) t = char_fn_re p (X 0) t /\\\n           char_fn_im p (X i) t = char_fn_im p (X 0) t)\n    ==> forall x. ((\\n. cdf p\n                (\\a. sum(0..n) (\\i. X i a) /\n                     (sqrt(variance p (X 0)) * sqrt(&(SUC n)))) x)\n             ---> std_normal_cdf x) sequentially
-      #|  1 <= m
+      #|  {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(0, y) == X(0, (x : A))}
+      #|  (s : (A) -> Bool)
+      #|  (z : A)
+      #|  rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), SUC((k : Num)), (x : A)) == INTERS(IMAGE((m : Num) => {(y : A) | IN(y, prob_carrier(p)) && X(m, y) == X(m, x)}, {(m : Num) | m < SUC(k)}))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 k : Num, \226\136\128 x : A, \226\136\128 w : Real, mutually_indep_rv(p, X, n) && (\226\136\128 m : Num, m <= n \226\134\146 simple_rv(p, X(m))) && SUC(k) <= n && IN(x, prob_carrier(p)) \226\134\146 prob(p, INTER(rv_sigma_atom(p, X, SUC(k), x), {(y : A) | IN(y, prob_carrier(p)) && X(SUC(k), y) == w})) == prob(p, rv_sigma_atom(p, X, SUC(k), x)) * prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(SUC(k), y) == w})
+      #|  (n : Num)
+      #|  \226\136\128 v : Real, prob((p : Prob_space[A]), INTER(rv_sigma_atom(p, (X : (Num, A) -> Real), SUC((k : Num)), (x : A)), {(y : A) | IN(y, prob_carrier(p)) && X(SUC(k), y) == v})) == prob(p, rv_sigma_atom(p, X, SUC(k), x)) * prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(SUC(k), y) == v})
+      #|  (v : Real)
+      #|  (X : (Num, A) -> Real)(SUC((k : Num)))
+      #|  (p : Prob_space[A])
+      #|  (v : Real)
+      #|  prob((p : Prob_space[A]), UNIONS(IMAGE((v : Real) => INTER(rv_sigma_atom(p, (X : (Num, A) -> Real), SUC((k : Num)), (x : A)), {(y : A) | IN(y, prob_carrier(p)) && X(SUC(k), y) == v}), (R : (Real) -> Bool)))) == sum(R, (v : Real) => prob(p, INTER(rv_sigma_atom(p, X, SUC(k), x), {(y : A) | IN(y, prob_carrier(p)) && X(SUC(k), y) == v})))
+      #|  IMAGE((X : (Num, A) -> Real)(SUC((k : Num))), prob_carrier((p : Prob_space[A])))
+      #|  FINITE((R : (Real) -> Bool))
+      #|  INTER(rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), SUC((k : Num)), (x : A)), {(y : A) | IN(y, prob_carrier(p)) && X(SUC(k), y) <= (b : Real)}) == UNIONS(IMAGE((v : Real) => INTER(rv_sigma_atom(p, X, SUC(k), x), {(y : A) | IN(y, prob_carrier(p)) && X(SUC(k), y) == v}), (R : (Real) -> Bool)))
+      #|  (R : (Real) -> Bool) == {(v : Real) | IN(v, IMAGE((X : (Num, A) -> Real)(SUC((k : Num))), prob_carrier((p : Prob_space[A])))) && v <= (b : Real)}
+      #|  {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(SUC((k : Num)), y) <= (b : Real)} == UNIONS(IMAGE((v : Real) => {(y : A) | IN(y, prob_carrier(p)) && X(SUC(k), y) == v}, {(v : Real) | IN(v, IMAGE(X(SUC(k)), prob_carrier(p))) && v <= b}))
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(SUC((k : Num))))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 k : Num, \226\136\128 x : A, \226\136\128 b : Real, mutually_indep_rv(p, X, n) && (\226\136\128 m : Num, m <= n \226\134\146 simple_rv(p, X(m))) && SUC(k) <= n && IN(x, prob_carrier(p)) \226\134\146 prob(p, INTER(rv_sigma_atom(p, X, SUC(k), x), {(y : A) | IN(y, prob_carrier(p)) && X(SUC(k), y) <= b})) == prob(p, rv_sigma_atom(p, X, SUC(k), x)) * prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(SUC(k), y) <= b})
+      #|  pairwise(DISJOINT, (atoms : ((A) -> Bool) -> Bool))
+      #|  IN((s : (A) -> Bool), (atoms : ((A) -> Bool) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  UNIONS((atoms : ((A) -> Bool) -> Bool)) == UNIONS(IMAGE((s : (A) -> Bool) => s, atoms))
+      #|  sum((atoms : ((A) -> Bool) -> Bool), (s : (A) -> Bool) => prob((p : Prob_space[A]), INTER(s, (B : (A) -> Bool)))) == sum(atoms, (s : (A) -> Bool) => prob(p, s) * prob(p, B))
+      #|  IN((z : A), (A : (A) -> Bool))
+      #|  (n : Num)
+      #|  (z : A)
+      #|  IN((s : (A) -> Bool), (atoms : ((A) -> Bool) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 s : (A) -> Bool, IN(s, (atoms : ((A) -> Bool) -> Bool)) \226\134\146 prob((p : Prob_space[A]), INTER(s, (B : (A) -> Bool))) == prob(p, s) * prob(p, B)
+      #|  (s2 : (A) -> Bool)
+      #|  (s1 : (A) -> Bool)
+      #|  (s2 : (A) -> Bool)
+      #|  (s1 : (A) -> Bool)
+      #|  (b : Real)
+      #|  random_variable((p : Prob_space[A]), (X : (Num, A) -> Real)(SUC((k : Num))))
+      #|  IN((s : (A) -> Bool), (atoms : ((A) -> Bool) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  prob((p : Prob_space[A]), UNIONS(IMAGE((s : (A) -> Bool) => INTER(s, (B : (A) -> Bool)), (atoms : ((A) -> Bool) -> Bool)))) == sum(atoms, (s : (A) -> Bool) => prob(p, INTER(s, B)))
+      #|  {INTER((s : (A) -> Bool), (B : (A) -> Bool)) | IN(s, (atoms : ((A) -> Bool) -> Bool))} == IMAGE((s : (A) -> Bool) => INTER(s, B), atoms)
+      #|  (A : (A) -> Bool) == UNIONS((atoms : ((A) -> Bool) -> Bool))
+      #|  (a : Real)
+      #|  random_variable((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (k : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)))
+      #|  IN((A : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  \226\136\128 z : A, IN(z, (A : (A) -> Bool)) \226\134\146 IN(rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), SUC((k : Num)), z), prob_events(p))
+      #|  pairwise(DISJOINT, (atoms : ((A) -> Bool) -> Bool))
+      #|  {rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), SUC((k : Num)), x) | x : A | IN(x, prob_carrier(p))}
+      #|  FINITE((atoms : ((A) -> Bool) -> Bool))
+      #|  (atoms : ((A) -> Bool) -> Bool) == {rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), SUC((k : Num)), (z : A)) | IN(z, (A : (A) -> Bool))}
+      #|  (A : (A) -> Bool) == UNIONS({rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), SUC((k : Num)), (x : A)) | IN(x, A)})
+      #|  (B : (A) -> Bool) == {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(SUC((k : Num)), x) <= (b : Real)}
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && sum(op_dot_dot(0, (k : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)) <= (a : Real) && X(SUC(k), x) <= (b : Real)} == INTER((A : (A) -> Bool), {(x : A) | IN(x, prob_carrier(p)) && X(SUC(k), x) <= b})
+      #|  (A : (A) -> Bool) == {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && sum(op_dot_dot(0, (k : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)) <= (a : Real)}
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && sum(op_dot_dot(0, (k : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)) <= (a : Real)}, rv_sigma(p, X, SUC(k)))
+      #|  random_variable((p : Prob_space[A]), (X : (Num, A) -> Real)(SUC((k : Num))))
+      #|  random_variable((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (k : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)))
+      #|  SUC((k : Num)) <= (n : Num)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 k : Num, mutually_indep_rv(p, X, n) && (\226\136\128 m : Num, m <= n \226\134\146 simple_rv(p, X(m))) && k < n \226\134\146 indep_rv(p, (x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)), X(SUC(k)))
+      #|  (n : Num)
+      #|  (i : Num) <= MAX(i, (j : Num)) && j <= MAX(i, j)
+      #|  MAX((i : Num), (j : Num))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, (\226\136\128 n : Num, simple_rv(p, X(n))) && (\226\136\128 i : Num, expectation(p, X(i)) == real_of_num(0)) && real_of_num(0) < variance(p, X(0)) && (\226\136\128 i : Num, variance(p, X(i)) == variance(p, X(0))) && (\226\136\128 n : Num, mutually_indep_rv(p, X, n)) && (\226\136\128 i : Num, \226\136\128 t : Real, char_fn_re(p, X(i), t) == char_fn_re(p, X(0), t) && char_fn_im(p, X(i), t) == char_fn_im(p, X(0), t)) \226\134\146 (\226\136\128 x : Real, op_minus_minus_minus_gt((n : Num) => cdf(p, (a : A) => sum(op_dot_dot(0, n), (i : Num) => X(i, a)) / (sqrt(variance(p, X(0))) * sqrt(real_of_num(SUC(n)))), x), std_normal_cdf(x), sequentially))
+      #|  1 <= (m : Num)
       #|  0
-      #|  \\k:num. (X:num->A->real) k x
-      #|  {k:num | k < m}
-      #|  k:num
-      #|  {y:A | y IN prob_carrier p /\\ (X:num->A->real) k y = X k x}
-      #|  k:num
-      #|  1 <= m
+      #|  (k : Num) => (X : (Num, A) -> Real)(k, (x : A))
+      #|  {(k : Num) | k < (m : Num)}
+      #|  (k : Num)
+      #|  {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((k : Num), y) == X(k, (x : A))}
+      #|  (k : Num)
+      #|  1 <= (m : Num)
       #|  0
-      #|  {y:A | y IN prob_carrier p /\\ (X:num->A->real) 0 y = X 0 x}
-      #|  s:A->bool
-      #|  z:A
-      #|  rv_sigma_atom p (X:num->A->real) m x =\n    INTERS (IMAGE (\\k. {y:A | y IN prob_carrier p /\\ X k y = X k x})\n                  {k | k < m})
-      #|  k:num
-      #|  product {k:num | k < m}\n       (\\k. prob p {y:A | y IN prob_carrier p /\\ (X:num->A->real) k y = g k}) =\n     product {k | k < m}\n       (\\k. prob p {y | y IN prob_carrier p /\\ X k y = X k x})
-      #|  {j:num}
-      #|  {k:num | k < m}
-      #|  \\k:num. prob p {y:A | y IN prob_carrier p /\\ (X:num->A->real) k y = g k}
-      #|  1 <= m
+      #|  {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(0, y) == X(0, (x : A))}
+      #|  (s : (A) -> Bool)
+      #|  (z : A)
+      #|  rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (m : Num), (x : A)) == INTERS(IMAGE((k : Num) => {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == X(k, x)}, {(k : Num) | k < m}))
+      #|  (k : Num)
+      #|  product({(k : Num) | k < (m : Num)}, (k : Num) => prob((p : Prob_space[A]), {(y : A) | IN(y, prob_carrier(p)) && (X : (Num, A) -> Real)(k, y) == (g : (Num) -> Real)(k)})) == product({(k : Num) | k < m}, (k : Num) => prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == X(k, (x : A))}))
+      #|  {(j : Num)}
+      #|  {(k : Num) | k < (m : Num)}
+      #|  (k : Num) => prob((p : Prob_space[A]), {(y : A) | IN(y, prob_carrier(p)) && (X : (Num, A) -> Real)(k, y) == (g : (Num) -> Real)(k)})
+      #|  1 <= (m : Num)
       #|  0
-      #|  g:num->real
-      #|  {k:num | k < m} UNION {j}
-      #|  prob p (INTERS (IMAGE (\\k. {y:A | y IN prob_carrier p /\\\n       (X:num->A->real) k y = g k}) ({k:num | k < m} UNION {j}))) =\n     product ({k | k < m} UNION {j})\n       (\\k. prob p {y | y IN prob_carrier p /\\ X k y = g k})
-      #|  k:num
-      #|  {y:A | y IN prob_carrier p /\\ (X:num->A->real) k y = X k x}
-      #|  k:num
-      #|  1 <= m
+      #|  (g : (Num) -> Real)
+      #|  UNION({(k : Num) | k < (m : Num)}, {(j : Num)})
+      #|  prob((p : Prob_space[A]), INTERS(IMAGE((k : Num) => {(y : A) | IN(y, prob_carrier(p)) && (X : (Num, A) -> Real)(k, y) == (g : (Num) -> Real)(k)}, UNION({(k : Num) | k < (m : Num)}, {(j : Num)})))) == product(UNION({(k : Num) | k < m}, {j}), (k : Num) => prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == g(k)}))
+      #|  (k : Num)
+      #|  {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((k : Num), y) == X(k, (x : A))}
+      #|  (k : Num)
+      #|  1 <= (m : Num)
       #|  0
-      #|  {y:A | y IN prob_carrier p /\\ (X:num->A->real) 0 y = X 0 x}
-      #|  s:A->bool
-      #|  z:A
-      #|  rv_sigma_atom p (X:num->A->real) m x INTER\n     {y:A | y IN prob_carrier p /\\ X j y = w} =\n     INTERS (IMAGE (\\k. {y | y IN prob_carrier p /\\ X k y = g k})\n                   ({k:num | k < m} UNION {j}))
-      #|  k:num
-      #|  k:num
-      #|  s:A->bool
-      #|  IMAGE (\\k. {y:A | y IN prob_carrier p /\\\n    (X:num->A->real) k y = g k}) {k | k < m} =\n    IMAGE (\\k. {y | y IN prob_carrier p /\\ X k y = X k x})\n    {k | k < m}
-      #|  (g:num->real) j = w
-      #|  ~((j:num) < m)
-      #|  forall k:num. k < m ==> (g:num->real) k = (X:num->A->real) k x
-      #|  g = \\k:num. if k < m then (X:num->A->real) k x else w
-      #|  forall p:A prob_space X n m j x w.\n     mutually_indep_rv p X n /\\\n     (forall k. k <= n ==> simple_rv p (X k)) /\\\n     1 <= m /\\ m <= j /\\ j <= n /\\ x IN prob_carrier p\n     ==> prob p (rv_sigma_atom p X m x INTER\n                 {y | y IN prob_carrier p /\\ X j y = w}) =\n         prob p (rv_sigma_atom p X m x) *\n         prob p {y | y IN prob_carrier p /\\ X j y = w}
-      #|  pairwise DISJOINT (atoms:(A->bool)->bool)
-      #|  (s:A->bool) IN atoms
-      #|  s:A->bool
-      #|  UNIONS (atoms:(A->bool)->bool) = UNIONS (IMAGE (\\s:A->bool. s) atoms)
-      #|  sum atoms (\\s:A->bool. prob p (s INTER B)) =\n    sum atoms (\\s. prob p s * prob p B)
-      #|  n:num
-      #|  z:A
-      #|  (s:A->bool) IN atoms
-      #|  s:A->bool
-      #|  forall s:A->bool. s IN atoms ==>\n    prob p (s INTER B) = prob p s * prob p B
-      #|  s2:A->bool
-      #|  s1:A->bool
-      #|  s2:A->bool
-      #|  s1:A->bool
-      #|  (s:A->bool) IN atoms
-      #|  s:A->bool
-      #|  prob p (UNIONS (IMAGE (\\s:A->bool. s INTER B) atoms)) =\n     sum atoms (\\s. prob p (s INTER B))
-      #|  j:num
-      #|  w:real
-      #|  (X:num->A->real) j
-      #|  p:A prob_space
-      #|  B:A->bool IN prob_events p
-      #|  {s INTER (B:A->bool) | s | s IN atoms} =\n     IMAGE (\\s:A->bool. s INTER B) atoms
-      #|  (A:A->bool) = UNIONS atoms
-      #|  B = {y:A | y IN prob_carrier p /\\\n    (X:num->A->real) j y = w}
-      #|  forall z:A. z IN A ==>\n    rv_sigma_atom p (X:num->A->real) m z IN prob_events p
-      #|  pairwise DISJOINT (atoms:(A->bool)->bool)
-      #|  {rv_sigma_atom p (X:num->A->real) m z |\n     z | z IN prob_carrier p}
-      #|  FINITE (atoms:(A->bool)->bool)
-      #|  (A:A->bool) = UNIONS atoms
-      #|  atoms = {rv_sigma_atom p (X:num->A->real) m z |\n    z | z IN (A:A->bool)}
-      #|  A IN rv_sigma (p:A prob_space) (X:num->A->real) m
-      #|  (A:A->bool) SUBSET prob_carrier p
-      #|  forall p:A prob_space X n m j w.\n     mutually_indep_rv p X n /\\\n     (forall k. k <= n ==> simple_rv p (X k)) /\\\n     1 <= m /\\ m <= j /\\ j <= n /\\\n     A IN rv_sigma p X m\n     ==> prob p (A INTER {y | y IN prob_carrier p /\\ X j y = w}) =\n         prob p A * prob p {y | y IN prob_carrier p /\\ X j y = w}
-      #|  m:num
-      #|  n:num
-      #|  forall v:real. prob p ((A:A->bool) INTER\n       {y:A | y IN prob_carrier p /\\ (X:num->A->real) j y = v}) =\n     prob p A * prob p {y | y IN prob_carrier p /\\ X j y = v}
-      #|  v:real
-      #|  (X:num->A->real) j
-      #|  p:A prob_space
-      #|  v:real
-      #|  prob p (UNIONS (IMAGE (\\v. (A:A->bool) INTER\n       {y:A | y IN prob_carrier p /\\ (X:num->A->real) j y = v}) R)) =\n     sum R (\\v. prob p (A INTER {y | y IN prob_carrier p /\\ X j y = v}))
-      #|  random_variable p ((X:num->A->real) j)
-      #|  m:num
-      #|  (X:num->A->real)
-      #|  (A:A->bool) IN prob_events p
-      #|  A INTER {y:A | y IN prob_carrier p /\\ (X:num->A->real) j y <= b} =\n     UNIONS (IMAGE (\\v. A INTER {y | y IN prob_carrier p /\\ X j y = v}) R)
-      #|  IMAGE ((X:num->A->real) j) (prob_carrier p)
-      #|  FINITE (R:real->bool)
-      #|  R = {v:real | v IN IMAGE ((X:num->A->real) j)\n    (prob_carrier p) /\\ v <= b}
-      #|  {y:A | y IN prob_carrier p /\\ (X:num->A->real) j y <= b} =\n     UNIONS (IMAGE (\\v. {y | y IN prob_carrier p /\\ X j y = v})\n       {v | v IN IMAGE (X j) (prob_carrier p) /\\ v <= b})
-      #|  simple_rv p ((X:num->A->real) j)
-      #|  forall p:A prob_space X n m j b.\n    mutually_indep_rv p X n /\\\n    (forall k. k <= n ==> simple_rv p (X k)) /\\\n    1 <= m /\\ m <= j /\\ j <= n /\\\n    A IN rv_sigma p X m\n    ==> prob p (A INTER {y | y IN prob_carrier p /\\ X j y <= b}) =\n        prob p A * prob p {y | y IN prob_carrier p /\\ X j y <= b}
-      #|  m:num
-      #|  n:num
-      #|  {x:A | x IN prob_carrier p /\\ (f:A->real) x <= a /\\\n       (X:num->A->real) j x <= b} =\n     {x | x IN prob_carrier p /\\ f x <= a} INTER\n     {x | x IN prob_carrier p /\\ X j x <= b}
-      #|  (f:A->real) x = f y
-      #|  {x:A | x IN prob_carrier p /\\ (f:A->real) x <= a} IN\n    rv_sigma p X m
-      #|  random_variable p ((X:num->A->real) j)
-      #|  random_variable p (f:A->real)
-      #|  forall p:A prob_space X n m j f.\n    mutually_indep_rv p X n /\\\n    (forall k. k <= n ==> simple_rv p (X k)) /\\\n    simple_rv p f /\\\n    (forall x y. x IN prob_carrier p /\\ y IN prob_carrier p /\\\n      (forall k. k < m ==> X k x = X k y) ==> f x = f y) /\\\n    1 <= m /\\ m <= j /\\ j <= n\n    ==> indep_rv p f (X j)
-      #|  simple_expectation p ((X:num->A->real) j) =\n    expectation p (X j)
-      #|  simple_expectation p ((X:num->A->real) j) = &0
-      #|  simple_expectation p (\\x:A. (Y:A->real) x *\n    (X:num->A->real) j x) =\n    simple_expectation p Y * simple_expectation p (X j)
-      #|  1 <= SUC k
-      #|  SUC k
-      #|  n:num
-      #|  indep_rv p (Y:A->real) ((X:num->A->real) j)
-      #|  j:num
-      #|  SUC k..n
-      #|  \\i:num. \\x:A. (Y:A->real) x * (X:num->A->real) i x
-      #|  p:A prob_space
-      #|  simple_expectation p (\\x:A. sum(SUC k..n)\n      (\\i. (Y:A->real) x * (X:num->A->real) i x)) =\n     sum(SUC k..n) (\\i. simple_expectation p (\\x. Y x * X i x))
-      #|  expectation p (\\x:A. sum(SUC k..n)\n      (\\i. (Y:A->real) x * (X:num->A->real) i x)) =\n     simple_expectation p (\\x. sum(SUC k..n) (\\i. Y x * X i x))
-      #|  simple_rv p (\\x:A. sum(SUC k..n)\n    (\\i. (Y:A->real) x * (X:num->A->real) i x))
-      #|  (X:num->A->real) i
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  i:num
-      #|  forall i. i IN (SUC k..n) ==>\n    simple_rv p (\\x:A. (Y:A->real) x * (X:num->A->real) i x)
-      #|  sum(0..j') (\\i. (X:num->A->real) i x) =\n       sum(0..j') (\\i. X i y')
-      #|  j':num
-      #|  j':num
-      #|  (forall j'. j' < k ==>\n      abs(sum(0..j') (\\i. (X:num->A->real) i x)) < t) <=>\n      (forall j'. j' < k ==>\n      abs(sum(0..j') (\\i. X i y')) < t)
-      #|  (x:A) IN S <=> y' IN S
-      #|  i:num
-      #|  i:num
-      #|  forall jj. jj <= k ==> sum(0..jj) (\\i. (X:num->A->real) i x) =\n     sum(0..jj) (\\i. X i y')
-      #|  forall x y':A. x IN prob_carrier p /\\ y' IN prob_carrier p /\\\n      (forall i. i < SUC k ==> (X:num->A->real) i x = X i y')\n      ==> (Y:A->real) x = Y y'
-      #|  x:A
-      #|  (\\x:A. (Y:A->real) x * sum(SUC k..n) (\\i. (X:num->A->real) i x)) =\n     (\\x. sum(SUC k..n) (\\i. Y x * X i x))
-      #|  x:A
-      #|  (\\x:A. sum(0..k) (\\i. (X:num->A->real) i x) *\n       sum(SUC k..n) (\\i. X i x) * indicator_fn S x) =\n     (\\x. Y x * sum(SUC k..n) (\\i. X i x))
-      #|  Y = \\x:A. sum(0..k) (\\i. (X:num->A->real) i x) *\n    indicator_fn S x
-      #|  indicator_fn (S:A->bool)
-      #|  \\x:A. sum(0..k) (\\i. (X:num->A->real) i x)
-      #|  p:A prob_space
-      #|  n:num
-      #|  (S:A->bool) IN prob_events p
-      #|  SUC k <= n
-      #|  S = {y:A | y IN prob_carrier p /\\\n    (forall j. j < k ==> abs(sum(0..j) (\\i. (X:num->A->real) i y)) < t) /\\\n    abs(sum(0..k) (\\i. X i y)) >= t}
-      #|  forall p:A prob_space X n k t.\n    mutually_indep_rv p X n /\\\n    (forall i. i <= n ==> simple_rv p (X i)) /\\\n    (forall i. i <= n ==> expectation p (X i) = &0) /\\\n    k < n /\\ &0 < t\n    ==> expectation p (\\x. sum(0..k) (\\i. X i x) *\n          sum(SUC k..n) (\\i. X i x) *\n          indicator_fn {y:A | y IN prob_carrier p /\\\n            (forall j. j < k ==> abs(sum(0..j) (\\i. X i y)) < t) /\\\n            abs(sum(0..k) (\\i. X i y)) >= t} x) = &0
-      #|  mutually_indep_rv (p:A prob_space) X (MAX i j)
-      #|  i <= MAX i j /\\ j <= MAX i j
-      #|  MAX i j
-      #|  forall p:A prob_space X n t.\n    mutually_indep_rv p X n /\\\n    (forall i. i <= n ==> simple_rv p (X i)) /\\\n    (forall i. i <= n ==> expectation p (X i) = &0) /\\\n    &0 < t\n    ==> prob p {x | x IN prob_carrier p /\\\n          ?k. k <= n /\\ abs(sum(0..k) (\\i. X i x)) >= t}\n        <= sum(0..n) (\\i. variance p (X i)) / t pow 2
-      #|  forall(r:num->num) (s:num->num).\n     (forall m n. m < n ==> r m < r n) /\\ (forall m n. m < n ==> s m < s n)\n     ==> forall m n. m < n ==> r(s m) < r(s n)
-      #|  n:num
-      #|  t:num->num
-      #|  (R:num->(num->num)) n n = R i ((t:num->num) n)
-      #|  t:num->num
-      #|  n:num
-      #|  i:num
-      #|  i:num <= n
-      #|  MAX i N
-      #|  N:num
-      #|  e:real
-      #|  e:real
-      #|  L:real
-      #|  L:real
-      #|  i:num
-      #|  i:num
-      #|  m:num
-      #|  m:num
-      #|  n < (t:num->num) n
-      #|  (t:num->num) n = n
-      #|  n:num
-      #|  t:num->num
-      #|  n:num <= (t:num->num) n
-      #|  forall k. (R:num->(num->num)) n k = R (SUC m) ((t:num->num) k)
-      #|  t:num->num
-      #|  n:num
-      #|  SUC m
-      #|  SUC m <= n
-      #|  (R:num->(num->num)) (SUC m) n
-      #|  n:num = SUC m
-      #|  n:num
-      #|  m:num
-      #|  n:num
-      #|  m:num
-      #|  (R:num->(num->num)) m m < R (SUC m) n
-      #|  \\k:num. (R:num->(num->num)) k k
-      #|  j:num
-      #|  \\k:num. (t0:num->num)\n     ((SEL:(num->num)->num->(num->num)) ((R:num->(num->num)) j) j k)
-      #|  t0:num->num
-      #|  i:num <= j
-      #|  \\k:num. k
-      #|  i = SUC j
-      #|  \\k:num. k
-      #|  i = 0
-      #|  forall i j:num. i <= j ==>\n       ?t:num->num. (forall m n. m < n ==> t m < t n) /\\\n                    (forall k. (R:num->(num->num)) j k = R i (t k))
-      #|  j:num
-      #|  (SEL:(num->num)->num->(num->num)) ((R:num->(num->num)) j) j
-      #|  l:real
-      #|  \\n:num. (f:num->num->real) i ((R:num->(num->num)) j n)
-      #|  l:real
-      #|  l:real
-      #|  i:num <= j
-      #|  SUC j
-      #|  i = SUC j
+      #|  {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(0, y) == X(0, (x : A))}
+      #|  (s : (A) -> Bool)
+      #|  (z : A)
+      #|  INTER(rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (m : Num), (x : A)), {(y : A) | IN(y, prob_carrier(p)) && X((j : Num), y) == (w : Real)}) == INTERS(IMAGE((k : Num) => {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == (g : (Num) -> Real)(k)}, UNION({(k : Num) | k < m}, {j})))
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (s : (A) -> Bool)
+      #|  IMAGE((k : Num) => {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(k, y) == (g : (Num) -> Real)(k)}, {(k : Num) | k < (m : Num)}) == IMAGE((k : Num) => {(y : A) | IN(y, prob_carrier(p)) && X(k, y) == X(k, (x : A))}, {(k : Num) | k < m})
+      #|  (g : (Num) -> Real)((j : Num)) == (w : Real)
+      #|  !((j : Num) < (m : Num))
+      #|  \226\136\128 k : Num, k < (m : Num) \226\134\146 (g : (Num) -> Real)(k) == (X : (Num, A) -> Real)(k, (x : A))
+      #|  (g : (Num) -> Real) == ((k : Num) => if k < (m : Num) { (X : (Num, A) -> Real)(k, (x : A)) } else { (w : Real) })
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 j : Num, \226\136\128 x : A, \226\136\128 w : Real, mutually_indep_rv(p, X, n) && (\226\136\128 k : Num, k <= n \226\134\146 simple_rv(p, X(k))) && 1 <= m && m <= j && j <= n && IN(x, prob_carrier(p)) \226\134\146 prob(p, INTER(rv_sigma_atom(p, X, m, x), {(y : A) | IN(y, prob_carrier(p)) && X(j, y) == w})) == prob(p, rv_sigma_atom(p, X, m, x)) * prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(j, y) == w})
+      #|  pairwise(DISJOINT, (atoms : ((A) -> Bool) -> Bool))
+      #|  IN((s : (A) -> Bool), (atoms : ((A) -> Bool) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  UNIONS((atoms : ((A) -> Bool) -> Bool)) == UNIONS(IMAGE((s : (A) -> Bool) => s, atoms))
+      #|  sum((atoms : ((A) -> Bool) -> Bool), (s : (A) -> Bool) => prob((p : Prob_space[A]), INTER(s, (B : (A) -> Bool)))) == sum(atoms, (s : (A) -> Bool) => prob(p, s) * prob(p, B))
+      #|  (n : Num)
+      #|  (z : A)
+      #|  IN((s : (A) -> Bool), (atoms : ((A) -> Bool) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 s : (A) -> Bool, IN(s, (atoms : ((A) -> Bool) -> Bool)) \226\134\146 prob((p : Prob_space[A]), INTER(s, (B : (A) -> Bool))) == prob(p, s) * prob(p, B)
+      #|  (s2 : (A) -> Bool)
+      #|  (s1 : (A) -> Bool)
+      #|  (s2 : (A) -> Bool)
+      #|  (s1 : (A) -> Bool)
+      #|  IN((s : (A) -> Bool), (atoms : ((A) -> Bool) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  prob((p : Prob_space[A]), UNIONS(IMAGE((s : (A) -> Bool) => INTER(s, (B : (A) -> Bool)), (atoms : ((A) -> Bool) -> Bool)))) == sum(atoms, (s : (A) -> Bool) => prob(p, INTER(s, B)))
+      #|  (j : Num)
+      #|  (w : Real)
+      #|  (X : (Num, A) -> Real)((j : Num))
+      #|  (p : Prob_space[A])
+      #|  IN((B : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  {INTER((s : (A) -> Bool), (B : (A) -> Bool)) | IN(s, (atoms : ((A) -> Bool) -> Bool))} == IMAGE((s : (A) -> Bool) => INTER(s, B), atoms)
+      #|  (A : (A) -> Bool) == UNIONS((atoms : ((A) -> Bool) -> Bool))
+      #|  (B : (A) -> Bool) == {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((j : Num), y) == (w : Real)}
+      #|  \226\136\128 z : A, IN(z, (A : (A) -> Bool)) \226\134\146 IN(rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (m : Num), z), prob_events(p))
+      #|  pairwise(DISJOINT, (atoms : ((A) -> Bool) -> Bool))
+      #|  {rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (m : Num), z) | z : A | IN(z, prob_carrier(p))}
+      #|  FINITE((atoms : ((A) -> Bool) -> Bool))
+      #|  (A : (A) -> Bool) == UNIONS((atoms : ((A) -> Bool) -> Bool))
+      #|  (atoms : ((A) -> Bool) -> Bool) == {rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (m : Num), (z : A)) | IN(z, (A : (A) -> Bool))}
+      #|  IN((A : (A) -> Bool), rv_sigma((p : Prob_space[A]), (X : (Num, A) -> Real), (m : Num)))
+      #|  SUBSET((A : (A) -> Bool), prob_carrier((p : Prob_space[A])))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 j : Num, \226\136\128 w : Real, mutually_indep_rv(p, X, n) && (\226\136\128 k : Num, k <= n \226\134\146 simple_rv(p, X(k))) && 1 <= m && m <= j && j <= n && IN((A : (A) -> Bool), rv_sigma(p, X, m)) \226\134\146 prob(p, INTER(A, {(y : A) | IN(y, prob_carrier(p)) && X(j, y) == w})) == prob(p, A) * prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(j, y) == w})
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  \226\136\128 v : Real, prob((p : Prob_space[A]), INTER((A : (A) -> Bool), {(y : A) | IN(y, prob_carrier(p)) && (X : (Num, A) -> Real)((j : Num), y) == v})) == prob(p, A) * prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(j, y) == v})
+      #|  (v : Real)
+      #|  (X : (Num, A) -> Real)((j : Num))
+      #|  (p : Prob_space[A])
+      #|  (v : Real)
+      #|  prob((p : Prob_space[A]), UNIONS(IMAGE((v : Real) => INTER((A : (A) -> Bool), {(y : A) | IN(y, prob_carrier(p)) && (X : (Num, A) -> Real)((j : Num), y) == v}), (R : (Real) -> Bool)))) == sum(R, (v : Real) => prob(p, INTER(A, {(y : A) | IN(y, prob_carrier(p)) && X(j, y) == v})))
+      #|  random_variable((p : Prob_space[A]), (X : (Num, A) -> Real)((j : Num)))
+      #|  (m : Num)
+      #|  (X : (Num, A) -> Real)
+      #|  IN((A : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  INTER((A : (A) -> Bool), {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((j : Num), y) <= (b : Real)}) == UNIONS(IMAGE((v : Real) => INTER(A, {(y : A) | IN(y, prob_carrier(p)) && X(j, y) == v}), (R : (Real) -> Bool)))
+      #|  IMAGE((X : (Num, A) -> Real)((j : Num)), prob_carrier((p : Prob_space[A])))
+      #|  FINITE((R : (Real) -> Bool))
+      #|  (R : (Real) -> Bool) == {(v : Real) | IN(v, IMAGE((X : (Num, A) -> Real)((j : Num)), prob_carrier((p : Prob_space[A])))) && v <= (b : Real)}
+      #|  {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((j : Num), y) <= (b : Real)} == UNIONS(IMAGE((v : Real) => {(y : A) | IN(y, prob_carrier(p)) && X(j, y) == v}, {(v : Real) | IN(v, IMAGE(X(j), prob_carrier(p))) && v <= b}))
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)((j : Num)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 j : Num, \226\136\128 b : Real, mutually_indep_rv(p, X, n) && (\226\136\128 k : Num, k <= n \226\134\146 simple_rv(p, X(k))) && 1 <= m && m <= j && j <= n && IN((A : (A) -> Bool), rv_sigma(p, X, m)) \226\134\146 prob(p, INTER(A, {(y : A) | IN(y, prob_carrier(p)) && X(j, y) <= b})) == prob(p, A) * prob(p, {(y : A) | IN(y, prob_carrier(p)) && X(j, y) <= b})
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) <= (a : Real) && (X : (Num, A) -> Real)((j : Num), x) <= (b : Real)} == INTER({(x : A) | IN(x, prob_carrier(p)) && f(x) <= a}, {(x : A) | IN(x, prob_carrier(p)) && X(j, x) <= b})
+      #|  (f : (A) -> Real)((x : A)) == f((y : A))
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (f : (A) -> Real)(x) <= (a : Real)}, rv_sigma(p, (X : (Num, A) -> Real), (m : Num)))
+      #|  random_variable((p : Prob_space[A]), (X : (Num, A) -> Real)((j : Num)))
+      #|  random_variable((p : Prob_space[A]), (f : (A) -> Real))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 j : Num, \226\136\128 f : (A) -> Real, mutually_indep_rv(p, X, n) && (\226\136\128 k : Num, k <= n \226\134\146 simple_rv(p, X(k))) && simple_rv(p, f) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, prob_carrier(p)) && IN(y, prob_carrier(p)) && (\226\136\128 k : Num, k < m \226\134\146 X(k, x) == X(k, y)) \226\134\146 f(x) == f(y)) && 1 <= m && m <= j && j <= n \226\134\146 indep_rv(p, f, X(j))
+      #|  simple_expectation((p : Prob_space[A]), (X : (Num, A) -> Real)((j : Num))) == expectation(p, X(j))
+      #|  simple_expectation((p : Prob_space[A]), (X : (Num, A) -> Real)((j : Num))) == real_of_num(0)
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (Y : (A) -> Real)(x) * (X : (Num, A) -> Real)((j : Num), x)) == simple_expectation(p, Y) * simple_expectation(p, X(j))
+      #|  1 <= SUC((k : Num))
+      #|  SUC((k : Num))
+      #|  (n : Num)
+      #|  indep_rv((p : Prob_space[A]), (Y : (A) -> Real), (X : (Num, A) -> Real)((j : Num)))
+      #|  (j : Num)
+      #|  op_dot_dot(SUC((k : Num)), (n : Num))
+      #|  (i : Num) => (x : A) => (Y : (A) -> Real)(x) * (X : (Num, A) -> Real)(i, x)
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => sum(op_dot_dot(SUC((k : Num)), (n : Num)), (i : Num) => (Y : (A) -> Real)(x) * (X : (Num, A) -> Real)(i, x))) == sum(op_dot_dot(SUC(k), n), (i : Num) => simple_expectation(p, (x : A) => Y(x) * X(i, x)))
+      #|  expectation((p : Prob_space[A]), (x : A) => sum(op_dot_dot(SUC((k : Num)), (n : Num)), (i : Num) => (Y : (A) -> Real)(x) * (X : (Num, A) -> Real)(i, x))) == simple_expectation(p, (x : A) => sum(op_dot_dot(SUC(k), n), (i : Num) => Y(x) * X(i, x)))
+      #|  simple_rv((p : Prob_space[A]), (x : A) => sum(op_dot_dot(SUC((k : Num)), (n : Num)), (i : Num) => (Y : (A) -> Real)(x) * (X : (Num, A) -> Real)(i, x)))
+      #|  (X : (Num, A) -> Real)((i : Num))
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(SUC((k : Num)), (n : Num))) \226\134\146 simple_rv((p : Prob_space[A]), (x : A) => (Y : (A) -> Real)(x) * (X : (Num, A) -> Real)(i, x))
+      #|  sum(op_dot_dot(0, (j' : Num)), (i : Num) => (X : (Num, A) -> Real)(i, (x : A))) == sum(op_dot_dot(0, j'), (i : Num) => X(i, (y' : A)))
+      #|  (j' : Num)
+      #|  (j' : Num)
+      #|  (\226\136\128 j' : Num, j' < (k : Num) \226\134\146 abs(sum(op_dot_dot(0, j'), (i : Num) => (X : (Num, A) -> Real)(i, (x : A)))) < (t : Real)) == (\226\136\128 j' : Num, j' < k \226\134\146 abs(sum(op_dot_dot(0, j'), (i : Num) => X(i, (y' : A)))) < t)
+      #|  IN((x : A), (S : (A) -> Bool)) == IN((y' : A), S)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  \226\136\128 jj : Num, jj <= (k : Num) \226\134\146 sum(op_dot_dot(0, jj), (i : Num) => (X : (Num, A) -> Real)(i, (x : A))) == sum(op_dot_dot(0, jj), (i : Num) => X(i, (y' : A)))
+      #|  \226\136\128 x : A, \226\136\128 y' : A, IN(x, prob_carrier((p : Prob_space[A]))) && IN(y', prob_carrier(p)) && (\226\136\128 i : Num, i < SUC((k : Num)) \226\134\146 (X : (Num, A) -> Real)(i, x) == X(i, y')) \226\134\146 (Y : (A) -> Real)(x) == Y(y')
+      #|  (x : A)
+      #|  ((x : A) => (Y : (A) -> Real)(x) * sum(op_dot_dot(SUC((k : Num)), (n : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x))) == ((x : A) => sum(op_dot_dot(SUC(k), n), (i : Num) => Y(x) * X(i, x)))
+      #|  (x : A)
+      #|  ((x : A) => sum(op_dot_dot(0, (k : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)) * (sum(op_dot_dot(SUC(k), (n : Num)), (i : Num) => X(i, x)) * indicator_fn((S : (A) -> Bool), x))) == ((x : A) => (Y : (A) -> Real)(x) * sum(op_dot_dot(SUC(k), n), (i : Num) => X(i, x)))
+      #|  (Y : (A) -> Real) == ((x : A) => sum(op_dot_dot(0, (k : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x)) * indicator_fn((S : (A) -> Bool), x))
+      #|  indicator_fn((S : (A) -> Bool))
+      #|  (x : A) => sum(op_dot_dot(0, (k : Num)), (i : Num) => (X : (Num, A) -> Real)(i, x))
+      #|  (p : Prob_space[A])
+      #|  (n : Num)
+      #|  IN((S : (A) -> Bool), prob_events((p : Prob_space[A])))
+      #|  SUC((k : Num)) <= (n : Num)
+      #|  (S : (A) -> Bool) == {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (\226\136\128 j : Num, j < (k : Num) \226\134\146 abs(sum(op_dot_dot(0, j), (i : Num) => (X : (Num, A) -> Real)(i, y))) < (t : Real)) && abs(sum(op_dot_dot(0, k), (i : Num) => X(i, y))) >= t}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 k : Num, \226\136\128 t : Real, mutually_indep_rv(p, X, n) && (\226\136\128 i : Num, i <= n \226\134\146 simple_rv(p, X(i))) && (\226\136\128 i : Num, i <= n \226\134\146 expectation(p, X(i)) == real_of_num(0)) && k < n && real_of_num(0) < t \226\134\146 expectation(p, (x : A) => sum(op_dot_dot(0, k), (i : Num) => X(i, x)) * (sum(op_dot_dot(SUC(k), n), (i : Num) => X(i, x)) * indicator_fn({(y : A) | IN(y, prob_carrier(p)) && (\226\136\128 j : Num, j < k \226\134\146 abs(sum(op_dot_dot(0, j), (i : Num) => X(i, y))) < t) && abs(sum(op_dot_dot(0, k), (i : Num) => X(i, y))) >= t}, x))) == real_of_num(0)
+      #|  mutually_indep_rv((p : Prob_space[A]), (X : (Num, A) -> Real), MAX((i : Num), (j : Num)))
+      #|  (i : Num) <= MAX(i, (j : Num)) && j <= MAX(i, j)
+      #|  MAX((i : Num), (j : Num))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 t : Real, mutually_indep_rv(p, X, n) && (\226\136\128 i : Num, i <= n \226\134\146 simple_rv(p, X(i))) && (\226\136\128 i : Num, i <= n \226\134\146 expectation(p, X(i)) == real_of_num(0)) && real_of_num(0) < t \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && (\226\136\131 k : Num, k <= n && abs(sum(op_dot_dot(0, k), (i : Num) => X(i, x))) >= t)}) <= sum(op_dot_dot(0, n), (i : Num) => variance(p, X(i))) / pow(t, 2)
+      #|  \226\136\128 r : (Num) -> Num, \226\136\128 s : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 s(m) < s(n)) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(s(m)) < r(s(n)))
+      #|  (n : Num)
+      #|  (t : (Num) -> Num)
+      #|  (R : (Num, Num) -> Num)((n : Num), n) == R((i : Num), (t : (Num) -> Num)(n))
+      #|  (t : (Num) -> Num)
+      #|  (n : Num)
+      #|  (i : Num)
+      #|  (i : Num) <= (n : Num)
+      #|  MAX((i : Num), (N : Num))
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (L : Real)
+      #|  (L : Real)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (n : Num) < (t : (Num) -> Num)(n)
+      #|  (t : (Num) -> Num)((n : Num)) == n
+      #|  (n : Num)
+      #|  (t : (Num) -> Num)
+      #|  (n : Num) <= (t : (Num) -> Num)(n)
+      #|  \226\136\128 k : Num, (R : (Num, Num) -> Num)((n : Num), k) == R(SUC((m : Num)), (t : (Num) -> Num)(k))
+      #|  (t : (Num) -> Num)
+      #|  (n : Num)
+      #|  SUC((m : Num))
+      #|  SUC((m : Num)) <= (n : Num)
+      #|  (R : (Num, Num) -> Num)(SUC((m : Num)), (n : Num))
+      #|  (n : Num) == SUC((m : Num))
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (R : (Num, Num) -> Num)((m : Num), m) < R(SUC(m), (n : Num))
+      #|  (k : Num) => (R : (Num, Num) -> Num)(k, k)
+      #|  (j : Num)
+      #|  (k : Num) => (t0 : (Num) -> Num)((SEL : ((Num) -> Num, Num, Num) -> Num)((R : (Num, Num) -> Num)((j : Num)), j, k))
+      #|  (t0 : (Num) -> Num)
+      #|  (i : Num) <= (j : Num)
+      #|  (k : Num) => k
+      #|  (i : Num) == SUC((j : Num))
+      #|  (k : Num) => k
+      #|  (i : Num) == 0
+      #|  \226\136\128 i : Num, \226\136\128 j : Num, i <= j \226\134\146 (\226\136\131 t : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 t(m) < t(n)) && (\226\136\128 k : Num, (R : (Num, Num) -> Num)(j, k) == R(i, t(k))))
+      #|  (j : Num)
+      #|  (SEL : ((Num) -> Num, Num, Num) -> Num)((R : (Num, Num) -> Num)((j : Num)), j)
+      #|  (l : Real)
+      #|  (n : Num) => (f : (Num, Num) -> Real)((i : Num), (R : (Num, Num) -> Num)((j : Num), n))
+      #|  (l : Real)
+      #|  (l : Real)
+      #|  (i : Num) <= (j : Num)
+      #|  SUC((j : Num))
+      #|  (i : Num) == SUC((j : Num))
       #|  0
-      #|  i = 0
-      #|  forall i j:num. i <= j ==> ?l. ((\\k. (f:num->num->real) i ((R:num->(num->num)) j k))\n                                ---> l) sequentially
-      #|  l0:real
-      #|  forall j:num. ?l. ((\\k. (f:num->num->real) j ((R:num->(num->num)) j k)) ---> l)\n                 sequentially
-      #|  j:num
-      #|  forall j k:num. k <= (SEL:(num->num)->num->(num->num))\n    ((R:num->(num->num)) j) j k
-      #|  forall j:num. forall m n. m < n ==>\n    (SEL:(num->num)->num->(num->num)) ((R:num->(num->num)) j) j m <\n    SEL (R j) j n
-      #|  forall j k:num. (R:num->(num->num)) (SUC j) k =\n    R j ((SEL:(num->num)->num->(num->num)) (R j) j k)
-      #|  l:real
-      #|  hj:num->num
-      #|  \\s:num->num. (forall m n. m < n ==> s m < s n) /\\\n        (?l. ((\\k. (f:num->num->real) (SUC(SUC j))\n          ((R:num->(num->num)) (SUC j) (s k))) ---> l) sequentially) /\\\n        (forall i n. abs(f i (R (SUC j) (s n))) <= B)
-      #|  (forall m n. m < n ==>\n       (SEL:(num->num)->num->(num->num)) ((R:num->(num->num)) (SUC j)) (SUC j) m <\n       SEL (R (SUC j)) (SUC j) n) /\\\n      (?l. ((\\k. (f:num->num->real) (SUC(SUC j))\n        ((R:num->(num->num)) (SUC j) (SEL (R (SUC j)) (SUC j) k))) ---> l)\n        sequentially) /\\\n      (forall i n. abs(f i (R (SUC j) (SEL (R (SUC j)) (SUC j) n))) <= B)
-      #|  hj:num->num
-      #|  SUC(SUC j)
-      #|  (R:num->(num->num)) (SUC j)
-      #|  forall i n. abs((f:num->num->real) i ((R:num->(num->num)) (SUC j) n)) <= B
-      #|  forall m n. m < n ==> (R:num->(num->num)) (SUC j) m < R (SUC j) n
-      #|  forall k. (R:num->(num->num)) (SUC j) k =\n     R j ((SEL:(num->num)->num->(num->num)) (R j) j k)
-      #|  l:real
-      #|  h0:num->num
-      #|  \\s:num->num. (forall m n. m < n ==> s m < s n) /\\\n         (?l. ((\\k. (f:num->num->real) (SUC 0) ((r0:num->num)(s k))) ---> l)\n              sequentially) /\\\n         (forall i n. abs(f i (r0(s n))) <= B)
-      #|  (forall m n. m < n ==>\n         (SEL:(num->num)->num->(num->num)) r0 0 m < SEL r0 0 n) /\\\n       (?l. ((\\k. (f:num->num->real) (SUC 0) ((r0:num->num)(SEL r0 0 k))) ---> l)\n            sequentially) /\\\n       (forall i n. abs(f i (r0(SEL r0 0 n))) <= B)
-      #|  h0:num->num
-      #|  SUC 0
-      #|  r0:num->num
-      #|  forall j:num. (forall m n. m < n ==> (R:num->(num->num)) j m < R j n) /\\\n             (forall i n. abs((f:num->num->real) i (R j n)) <= B) /\\\n             (forall m n. m < n ==>\n                (SEL:(num->num)->num->(num->num)) (R j) j m <\n                SEL (R j) j n) /\\\n             (?l. ((\\k. (f:num->num->real) (SUC j) (R j (SEL (R j) j k))) ---> l)\n                  sequentially) /\\\n             (forall i n. abs((f:num->num->real) i (R j (SEL (R j) j n))) <= B)
-      #|  R:num->(num->num)
-      #|  \\(prev:num->num) (j:num). prev o (SEL:(num->num)->num->(num->num)) prev j
-      #|  r0:num->num
-      #|  SEL = \\(prev:num->num) (j:num).\n       @s:num->num. (forall m n. m < n ==> s m < s n) /\\\n         (?l. ((\\k. (f:num->num->real) (SUC j) (prev(s k))) ---> l) sequentially) /\\\n         (forall i n. abs(f i (prev(s n))) <= B)
-      #|  l:real
-      #|  s:num->num
-      #|  s:num->num
-      #|  l:real
-      #|  B:real
-      #|  \\n:num. (f:num->num->real) i ((g:num->num) n)
-      #|  forall g:num->num i:num. (forall m n. m < n ==> g m < g n) /\\\n       (forall j n. abs((f:num->num->real) j (g n)) <= B)\n     ==> ?h:num->num. (forall m n. m < n ==> h m < h n) /\\\n           (?l. ((\\k. f i (g(h k))) ---> l) sequentially) /\\\n           (forall j n. abs(f j (g(h n))) <= B)
-      #|  r0:num->num
-      #|  l0:real
-      #|  B:real
-      #|  (f:num->num->real) 0
-      #|  forall f:num->num->real B.\n     (forall i n. abs(f i n) <= B)\n     ==> ?r:num->num. (forall m n. m < n ==> r m < r n) /\\\n         (forall i. ?l. ((\\k. f i (r k)) ---> l) sequentially)
-      #|  j:num
-      #|  SEL:(num->num)->num->(num->num)
-      #|  SEL:(num->num)->num->(num->num)
-      #|  j:num
-      #|  dist_fn_seq (f:num->real->real) <=>\n     (forall n x y. x <= y ==> f n x <= f n y) /\\\n     (forall n x. &0 <= f n x /\\ f n x <= &1)
+      #|  (i : Num) == 0
+      #|  \226\136\128 i : Num, \226\136\128 j : Num, i <= j \226\134\146 (\226\136\131 l : Real, op_minus_minus_minus_gt((k : Num) => (f : (Num, Num) -> Real)(i, (R : (Num, Num) -> Num)(j, k)), l, sequentially))
+      #|  (l0 : Real)
+      #|  \226\136\128 j : Num, \226\136\131 l : Real, op_minus_minus_minus_gt((k : Num) => (f : (Num, Num) -> Real)(j, (R : (Num, Num) -> Num)(j, k)), l, sequentially)
+      #|  (j : Num)
+      #|  \226\136\128 j : Num, \226\136\128 k : Num, k <= (SEL : ((Num) -> Num, Num, Num) -> Num)((R : (Num, Num) -> Num)(j), j, k)
+      #|  \226\136\128 j : Num, \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 (SEL : ((Num) -> Num, Num, Num) -> Num)((R : (Num, Num) -> Num)(j), j, m) < SEL(R(j), j, n)
+      #|  \226\136\128 j : Num, \226\136\128 k : Num, (R : (Num, Num) -> Num)(SUC(j), k) == R(j, (SEL : ((Num) -> Num, Num, Num) -> Num)(R(j), j, k))
+      #|  (l : Real)
+      #|  (hj : (Num) -> Num)
+      #|  (s : (Num) -> Num) => (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 s(m) < s(n)) && (\226\136\131 l : Real, op_minus_minus_minus_gt((k : Num) => (f : (Num, Num) -> Real)(SUC(SUC((j : Num))), (R : (Num, Num) -> Num)(SUC(j), s(k))), l, sequentially)) && (\226\136\128 i : Num, \226\136\128 n : Num, abs(f(i, R(SUC(j), s(n)))) <= (B : Real))
+      #|  (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 (SEL : ((Num) -> Num, Num, Num) -> Num)((R : (Num, Num) -> Num)(SUC((j : Num))), SUC(j), m) < SEL(R(SUC(j)), SUC(j), n)) && (\226\136\131 l : Real, op_minus_minus_minus_gt((k : Num) => (f : (Num, Num) -> Real)(SUC(SUC(j)), R(SUC(j), SEL(R(SUC(j)), SUC(j), k))), l, sequentially)) && (\226\136\128 i : Num, \226\136\128 n : Num, abs(f(i, R(SUC(j), SEL(R(SUC(j)), SUC(j), n)))) <= (B : Real))
+      #|  (hj : (Num) -> Num)
+      #|  SUC(SUC((j : Num)))
+      #|  (R : (Num, Num) -> Num)(SUC((j : Num)))
+      #|  \226\136\128 i : Num, \226\136\128 n : Num, abs((f : (Num, Num) -> Real)(i, (R : (Num, Num) -> Num)(SUC((j : Num)), n))) <= (B : Real)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 (R : (Num, Num) -> Num)(SUC((j : Num)), m) < R(SUC(j), n)
+      #|  \226\136\128 k : Num, (R : (Num, Num) -> Num)(SUC((j : Num)), k) == R(j, (SEL : ((Num) -> Num, Num, Num) -> Num)(R(j), j, k))
+      #|  (l : Real)
+      #|  (h0 : (Num) -> Num)
+      #|  (s : (Num) -> Num) => (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 s(m) < s(n)) && (\226\136\131 l : Real, op_minus_minus_minus_gt((k : Num) => (f : (Num, Num) -> Real)(SUC(0), (r0 : (Num) -> Num)(s(k))), l, sequentially)) && (\226\136\128 i : Num, \226\136\128 n : Num, abs(f(i, r0(s(n)))) <= (B : Real))
+      #|  (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 (SEL : ((Num) -> Num, Num, Num) -> Num)((r0 : (Num) -> Num), 0, m) < SEL(r0, 0, n)) && (\226\136\131 l : Real, op_minus_minus_minus_gt((k : Num) => (f : (Num, Num) -> Real)(SUC(0), r0(SEL(r0, 0, k))), l, sequentially)) && (\226\136\128 i : Num, \226\136\128 n : Num, abs(f(i, r0(SEL(r0, 0, n)))) <= (B : Real))
+      #|  (h0 : (Num) -> Num)
+      #|  SUC(0)
+      #|  (r0 : (Num) -> Num)
+      #|  \226\136\128 j : Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 (R : (Num, Num) -> Num)(j, m) < R(j, n)) && (\226\136\128 i : Num, \226\136\128 n : Num, abs((f : (Num, Num) -> Real)(i, R(j, n))) <= (B : Real)) && (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 (SEL : ((Num) -> Num, Num, Num) -> Num)(R(j), j, m) < SEL(R(j), j, n)) && (\226\136\131 l : Real, op_minus_minus_minus_gt((k : Num) => f(SUC(j), R(j, SEL(R(j), j, k))), l, sequentially)) && (\226\136\128 i : Num, \226\136\128 n : Num, abs(f(i, R(j, SEL(R(j), j, n)))) <= B)
+      #|  (R : (Num, Num) -> Num)
+      #|  (prev : (Num) -> Num) => (j : Num) => o(prev, (SEL : ((Num) -> Num, Num, Num) -> Num)(prev, j))
+      #|  (r0 : (Num) -> Num)
+      #|  (SEL : ((Num) -> Num, Num, Num) -> Num) == ((prev : (Num) -> Num) => (j : Num) => select((s : (Num) -> Num) => (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 s(m) < s(n)) && (\226\136\131 l : Real, op_minus_minus_minus_gt((k : Num) => (f : (Num, Num) -> Real)(SUC(j), prev(s(k))), l, sequentially)) && (\226\136\128 i : Num, \226\136\128 n : Num, abs(f(i, prev(s(n)))) <= (B : Real))))
+      #|  (l : Real)
+      #|  (s : (Num) -> Num)
+      #|  (s : (Num) -> Num)
+      #|  (l : Real)
+      #|  (B : Real)
+      #|  (n : Num) => (f : (Num, Num) -> Real)((i : Num), (g : (Num) -> Num)(n))
+      #|  \226\136\128 g : (Num) -> Num, \226\136\128 i : Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 g(m) < g(n)) && (\226\136\128 j : Num, \226\136\128 n : Num, abs((f : (Num, Num) -> Real)(j, g(n))) <= (B : Real)) \226\134\146 (\226\136\131 h : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 h(m) < h(n)) && (\226\136\131 l : Real, op_minus_minus_minus_gt((k : Num) => f(i, g(h(k))), l, sequentially)) && (\226\136\128 j : Num, \226\136\128 n : Num, abs(f(j, g(h(n)))) <= B))
+      #|  (r0 : (Num) -> Num)
+      #|  (l0 : Real)
+      #|  (B : Real)
+      #|  (f : (Num, Num) -> Real)(0)
+      #|  \226\136\128 f : (Num, Num) -> Real, \226\136\128 B : Real, (\226\136\128 i : Num, \226\136\128 n : Num, abs(f(i, n)) <= B) \226\134\146 (\226\136\131 r : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && (\226\136\128 i : Num, \226\136\131 l : Real, op_minus_minus_minus_gt((k : Num) => f(i, r(k)), l, sequentially)))
+      #|  (j : Num)
+      #|  (SEL : ((Num) -> Num, Num, Num) -> Num)
+      #|  (SEL : ((Num) -> Num, Num, Num) -> Num)
+      #|  (j : Num)
+      #|  (dist_fn_seq : ((Num, Real) -> Real) -> Bool)((f : (Num, Real) -> Real)) == ((\226\136\128 n : Num, \226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 f(n, x) <= f(n, y)) && (\226\136\128 n : Num, \226\136\128 x : Real, real_of_num(0) <= f(n, x) && f(n, x) <= real_of_num(1)))
       #|  0
-      #|  \\k. (f:num->real->real) ((r:num->num) k) q2
-      #|  \\k. (f:num->real->real) ((r:num->num) k) q1
+      #|  (k : Num) => (f : (Num, Real) -> Real)((r : (Num) -> Num)(k), (q2 : Real))
+      #|  (k : Num) => (f : (Num, Real) -> Real)((r : (Num) -> Num)(k), (q1 : Real))
       #|  sequentially
       #|  0
-      #|  \\k. (f:num->real->real) ((r:num->num) k) q
+      #|  (k : Num) => (f : (Num, Real) -> Real)((r : (Num) -> Num)(k), (q : Real))
       #|  sequentially
       #|  0
-      #|  \\k. (f:num->real->real) ((r:num->num) k) q
+      #|  (k : Num) => (f : (Num, Real) -> Real)((r : (Num) -> Num)(k), (q : Real))
       #|  sequentially
-      #|  q:real
-      #|  q:real
-      #|  forall q:real. IMAGE (g:num->real) (:num) q <=> rational q
-      #|  \\k. (f:num->real->real) ((r:num->num) k) ((g:num->real) i)
+      #|  (q : Real)
+      #|  (q : Real)
+      #|  \226\136\128 q : Real, IMAGE((g : (Num) -> Real), UNIV, q) == rational(q)
+      #|  (k : Num) => (f : (Num, Real) -> Real)((r : (Num) -> Num)(k), (g : (Num) -> Real)((i : Num)))
       #|  sequentially
-      #|  l':real
-      #|  (@l. ((\\k. (f:num->real->real) ((r:num->num) k)\n               ((g:num->real) i)) ---> l) sequentially) = l
-      #|  l:real
-      #|  i:num
-      #|  i:num
-      #|  q IN IMAGE (g:num->real) (:num)
-      #|  q:real
-      #|  forall q:real. rational q\n         ==> ((\\k. (f:num->real->real) ((r:num->num) k) q) --->\n              (@l. ((\\k. f (r k) q) ---> l) sequentially)) sequentially
-      #|  \\q. if rational q\n                  then @l. ((\\k. (f:num->real->real) ((r:num->num) k) q) ---> l) sequentially\n                  else &0
-      #|  r:num->num
-      #|  r:num->num
-      #|  &0 <= x /\\ x <= &1 ==> abs x <= &1
-      #|  &1
-      #|  \\i n. (f:num->real->real) n ((g:num->real) i)
-      #|  g:num->real
-      #|  forall f:num->real->real. dist_fn_seq f\n     ==> ?r G. (forall m n. m < n ==> r m < r n) /\\\n         (forall q. rational q ==> ((\\k. f (r k) q) ---> G q) sequentially) /\\\n         (forall q. rational q ==> &0 <= G q /\\ G q <= &1) /\\\n         (forall q1 q2. rational q1 /\\ rational q2 /\\ q1 <= q2\n                  ==> G q1 <= G q2)
-      #|  helly_limit (G:real->real) x = inf {G q | rational q /\\ x < q}
-      #|  &0
-      #|  q:real
-      #|  (G:real->real) q
-      #|  q:real
-      #|  x < x + &1
-      #|  x + &1
-      #|  x:real
-      #|  forall G x. (forall q. rational q ==> &0 <= G q)\n         ==> ~({G q | rational q /\\ x < q} = {}) /\\\n             (?b. forall y. y IN {G q | rational q /\\ x < q} ==> b <= y)
-      #|  x:real
-      #|  G:real->real
-      #|  forall q:real. rational q ==> &0 <= (G:real->real) q
-      #|  forall G x. (forall q. rational q ==> &0 <= G q /\\ G q <= &1)\n         ==> &0 <= helly_limit G x /\\ helly_limit G x <= &1
-      #|  &0
-      #|  q:real
-      #|  y:real
-      #|  G:real->real
-      #|  forall G x y. (forall q. rational q ==> &0 <= G q) /\\\n           (forall q1 q2. rational q1 /\\ rational q2 /\\ q1 <= q2\n                    ==> G q1 <= G q2) /\\\n           x <= y\n           ==> helly_limit G x <= helly_limit G y
-      #|  y = (G:real->real) q
-      #|  q:real
-      #|  q:real
-      #|  y:real
-      #|  &0
-      #|  x < x + e <=> &0 < e
-      #|  inf {(G:real->real) q | rational q /\\ x < q} + e
-      #|  {(G:real->real) q | rational q /\\ x < q}
-      #|  x:real
-      #|  G:real->real
-      #|  forall G x e. (forall q. rational q ==> &0 <= G q) /\\ &0 < e\n           ==> ?r. rational r /\\ x < r /\\ G r < helly_limit G x + e
-      #|  q:real
-      #|  (G:real->real) q
-      #|  (G:real->real) q
-      #|  &0
-      #|  {(G:real->real) r | rational r /\\ x < r}
-      #|  x:real
-      #|  G:real->real
-      #|  forall G x q. (forall r. rational r ==> &0 <= G r) /\\\n           rational q /\\ x < q\n           ==> helly_limit G x <= G q
-      #|  abs ((f:num->real->real) ((r:num->num) n) q2 - G q2) < e / &3
-      #|  abs ((f:num->real->real) ((r:num->num) n) q1 - G q1) < e / &3
-      #|  (f:num->real->real) ((r:num->num) n) x <= f (r n) q2
-      #|  (f:num->real->real) ((r:num->num) n) q1 <= f (r n) x
-      #|  forall n:num x y. x <= y ==> (f:num->real->real) n x <= f n y
-      #|  MAX N1 N2
-      #|  N1:num
-      #|  e / &3
-      #|  N2:num
-      #|  e / &3
-      #|  forall q:real. rational q\n       ==> ((\\k. (f:num->real->real) ((r:num->num) k) q) ---> G q)\n           sequentially
-      #|  x - d / &2
-      #|  helly_limit (G:real->real) x - e / &3 < helly_limit G (x - d / &2)
-      #|  helly_limit (G:real->real) (x - d / &2) <= G q1
-      #|  q1:real
-      #|  x - d / &2 < x
-      #|  q2:real
-      #|  e / &3
-      #|  x:real
-      #|  G:real->real
-      #|  d:real
-      #|  e / &3
-      #|  e:real
-      #|  x:real
-      #|  helly_limit (G:real->real)
-      #|  r:num->num
-      #|  G:real->real
-      #|  r:num->num
-      #|  forall f:num->real->real. dist_fn_seq f\n     ==> ?r H. (forall m n. m < n ==> r m < r n) /\\\n         (forall x. &0 <= H x /\\ H x <= &1) /\\\n         (forall x y. x <= y ==> H x <= H y) /\\\n         (forall x. H real_continuous (atreal x)\n              ==> ((\\k. f (r k) x) ---> H x) sequentially)
-      #|  q2:real
-      #|  q1:real
-      #|  tight_sequence (f:num->real->real) <=>\n     dist_fn_seq f /\\\n     forall e. &0 < e ==>\n       ?M. &0 < M /\\ forall n. f n (--M) < e /\\ &1 - e < f n M
-      #|  q:real
-      #|  b:real
-      #|  q:real
-      #|  (G:real->real) q
-      #|  M + &2
-      #|  M + &1
-      #|  s:real->bool
-      #|  {(G:real->real) q | rational q /\\ M + &1 < q}
-      #|  &1 - e / &2
-      #|  &1 - e / &2
-      #|  q:real
-      #|  M:real
-      #|  (r:num->num) n
-      #|  forall n. (f:num->real->real) n (--M) < e / &2 /\\\n             &1 - e / &2 < f n M
-      #|  (r:num->num) n
-      #|  (f:num->real->real) ((r:num->num) n) M
+      #|  (l' : Real)
+      #|  select((l : Real) => op_minus_minus_minus_gt((k : Num) => (f : (Num, Real) -> Real)((r : (Num) -> Num)(k), (g : (Num) -> Real)((i : Num))), l, sequentially)) == (l : Real)
+      #|  (l : Real)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  IN((q : Real), IMAGE((g : (Num) -> Real), UNIV))
+      #|  (q : Real)
+      #|  \226\136\128 q : Real, rational(q) \226\134\146 op_minus_minus_minus_gt((k : Num) => (f : (Num, Real) -> Real)((r : (Num) -> Num)(k), q), select((l : Real) => op_minus_minus_minus_gt((k : Num) => f(r(k), q), l, sequentially)), sequentially)
+      #|  (q : Real) => if rational(q) { select((l : Real) => op_minus_minus_minus_gt((k : Num) => (f : (Num, Real) -> Real)((r : (Num) -> Num)(k), q), l, sequentially)) } else { real_of_num(0) }
+      #|  (r : (Num) -> Num)
+      #|  (r : (Num) -> Num)
+      #|  real_of_num(0) <= (x : Real) && x <= real_of_num(1) \226\134\146 abs(x) <= real_of_num(1)
+      #|  real_of_num(1)
+      #|  (i : Num) => (n : Num) => (f : (Num, Real) -> Real)(n, (g : (Num) -> Real)(i))
+      #|  (g : (Num) -> Real)
+      #|  \226\136\128 f : (Num, Real) -> Real, dist_fn_seq(f) \226\134\146 (\226\136\131 r : (Num) -> Num, \226\136\131 G : (Real) -> Real, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && (\226\136\128 q : Real, rational(q) \226\134\146 op_minus_minus_minus_gt((k : Num) => f(r(k), q), G(q), sequentially)) && (\226\136\128 q : Real, rational(q) \226\134\146 real_of_num(0) <= G(q) && G(q) <= real_of_num(1)) && (\226\136\128 q1 : Real, \226\136\128 q2 : Real, rational(q1) && rational(q2) && q1 <= q2 \226\134\146 G(q1) <= G(q2)))
+      #|  (helly_limit : ((Real) -> Real, Real) -> Real)((G : (Real) -> Real), (x : Real)) == inf({G((q : Real)) | rational(q) && x < q})
+      #|  real_of_num(0)
+      #|  (q : Real)
+      #|  (G : (Real) -> Real)((q : Real))
+      #|  (q : Real)
+      #|  (x : Real) < x + real_of_num(1)
+      #|  (x : Real) + real_of_num(1)
+      #|  (x : Real)
+      #|  \226\136\128 G : (Real) -> Real, \226\136\128 x : Real, (\226\136\128 q : Real, rational(q) \226\134\146 real_of_num(0) <= G(q)) \226\134\146 !({G((q : Real)) | rational(q) && x < q} == {}) && (\226\136\131 b : Real, \226\136\128 y : Real, IN(y, {G((q : Real)) | rational(q) && x < q}) \226\134\146 b <= y)
+      #|  (x : Real)
+      #|  (G : (Real) -> Real)
+      #|  \226\136\128 q : Real, rational(q) \226\134\146 real_of_num(0) <= (G : (Real) -> Real)(q)
+      #|  \226\136\128 G : (Real) -> Real, \226\136\128 x : Real, (\226\136\128 q : Real, rational(q) \226\134\146 real_of_num(0) <= G(q) && G(q) <= real_of_num(1)) \226\134\146 real_of_num(0) <= helly_limit(G, x) && helly_limit(G, x) <= real_of_num(1)
+      #|  real_of_num(0)
+      #|  (q : Real)
+      #|  (y : Real)
+      #|  (G : (Real) -> Real)
+      #|  \226\136\128 G : (Real) -> Real, \226\136\128 x : Real, \226\136\128 y : Real, (\226\136\128 q : Real, rational(q) \226\134\146 real_of_num(0) <= G(q)) && (\226\136\128 q1 : Real, \226\136\128 q2 : Real, rational(q1) && rational(q2) && q1 <= q2 \226\134\146 G(q1) <= G(q2)) && x <= y \226\134\146 helly_limit(G, x) <= helly_limit(G, y)
+      #|  (y : Real) == (G : (Real) -> Real)((q : Real))
+      #|  (q : Real)
+      #|  (q : Real)
+      #|  (y : Real)
+      #|  real_of_num(0)
+      #|  ((x : Real) < x + (e : Real)) == (real_of_num(0) < e)
+      #|  inf({(G : (Real) -> Real)((q : Real)) | rational(q) && (x : Real) < q}) + (e : Real)
+      #|  {(G : (Real) -> Real)((q : Real)) | rational(q) && (x : Real) < q}
+      #|  (x : Real)
+      #|  (G : (Real) -> Real)
+      #|  \226\136\128 G : (Real) -> Real, \226\136\128 x : Real, \226\136\128 e : Real, (\226\136\128 q : Real, rational(q) \226\134\146 real_of_num(0) <= G(q)) && real_of_num(0) < e \226\134\146 (\226\136\131 r : Real, rational(r) && x < r && G(r) < helly_limit(G, x) + e)
+      #|  (q : Real)
+      #|  (G : (Real) -> Real)((q : Real))
+      #|  (G : (Real) -> Real)((q : Real))
+      #|  real_of_num(0)
+      #|  {(G : (Real) -> Real)((r : Real)) | rational(r) && (x : Real) < r}
+      #|  (x : Real)
+      #|  (G : (Real) -> Real)
+      #|  \226\136\128 G : (Real) -> Real, \226\136\128 x : Real, \226\136\128 q : Real, (\226\136\128 r : Real, rational(r) \226\134\146 real_of_num(0) <= G(r)) && rational(q) && x < q \226\134\146 helly_limit(G, x) <= G(q)
+      #|  abs((f : (Num, Real) -> Real)((r : (Num) -> Num)((n : Num)), (q2 : Real)) - (G : (Real) -> Real)(q2)) < (e : Real) / real_of_num(3)
+      #|  abs((f : (Num, Real) -> Real)((r : (Num) -> Num)((n : Num)), (q1 : Real)) - (G : (Real) -> Real)(q1)) < (e : Real) / real_of_num(3)
+      #|  (f : (Num, Real) -> Real)((r : (Num) -> Num)((n : Num)), (x : Real)) <= f(r(n), (q2 : Real))
+      #|  (f : (Num, Real) -> Real)((r : (Num) -> Num)((n : Num)), (q1 : Real)) <= f(r(n), (x : Real))
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 (f : (Num, Real) -> Real)(n, x) <= f(n, y)
+      #|  MAX((N1 : Num), (N2 : Num))
+      #|  (N1 : Num)
+      #|  (e : Real) / real_of_num(3)
+      #|  (N2 : Num)
+      #|  (e : Real) / real_of_num(3)
+      #|  \226\136\128 q : Real, rational(q) \226\134\146 op_minus_minus_minus_gt((k : Num) => (f : (Num, Real) -> Real)((r : (Num) -> Num)(k), q), (G : (Real) -> Real)(q), sequentially)
+      #|  (x : Real) - (d : Real) / real_of_num(2)
+      #|  helly_limit((G : (Real) -> Real), (x : Real)) - (e : Real) / real_of_num(3) < helly_limit(G, x - (d : Real) / real_of_num(2))
+      #|  helly_limit((G : (Real) -> Real), (x : Real) - (d : Real) / real_of_num(2)) <= G((q1 : Real))
+      #|  (q1 : Real)
+      #|  (x : Real) - (d : Real) / real_of_num(2) < x
+      #|  (q2 : Real)
+      #|  (e : Real) / real_of_num(3)
+      #|  (x : Real)
+      #|  (G : (Real) -> Real)
+      #|  (d : Real)
+      #|  (e : Real) / real_of_num(3)
+      #|  (e : Real)
+      #|  (x : Real)
+      #|  helly_limit((G : (Real) -> Real))
+      #|  (r : (Num) -> Num)
+      #|  (G : (Real) -> Real)
+      #|  (r : (Num) -> Num)
+      #|  \226\136\128 f : (Num, Real) -> Real, dist_fn_seq(f) \226\134\146 (\226\136\131 r : (Num) -> Num, \226\136\131 H : (Real) -> Real, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && (\226\136\128 x : Real, real_of_num(0) <= H(x) && H(x) <= real_of_num(1)) && (\226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 H(x) <= H(y)) && (\226\136\128 x : Real, real_continuous(H, atreal(x)) \226\134\146 op_minus_minus_minus_gt((k : Num) => f(r(k), x), H(x), sequentially)))
+      #|  (q2 : Real)
+      #|  (q1 : Real)
+      #|  (tight_sequence : ((Num, Real) -> Real) -> Bool)((f : (Num, Real) -> Real)) == (dist_fn_seq(f) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 M : Real, real_of_num(0) < M && (\226\136\128 n : Num, f(n, -M) < e && real_of_num(1) - e < f(n, M)))))
+      #|  (q : Real)
+      #|  (b : Real)
+      #|  (q : Real)
+      #|  (G : (Real) -> Real)((q : Real))
+      #|  (M : Real) + real_of_num(2)
+      #|  (M : Real) + real_of_num(1)
+      #|  (s : (Real) -> Bool)
+      #|  {(G : (Real) -> Real)((q : Real)) | rational(q) && (M : Real) + real_of_num(1) < q}
+      #|  real_of_num(1) - (e : Real) / real_of_num(2)
+      #|  real_of_num(1) - (e : Real) / real_of_num(2)
+      #|  (q : Real)
+      #|  (M : Real)
+      #|  (r : (Num) -> Num)((n : Num))
+      #|  \226\136\128 n : Num, (f : (Num, Real) -> Real)(n, -(M : Real)) < (e : Real) / real_of_num(2) && real_of_num(1) - e / real_of_num(2) < f(n, M)
+      #|  (r : (Num) -> Num)((n : Num))
+      #|  (f : (Num, Real) -> Real)((r : (Num) -> Num)((n : Num)), (M : Real))
       #|  0
-      #|  \\k. (f:num->real->real) ((r:num->num) k) q
+      #|  (k : Num) => (f : (Num, Real) -> Real)((r : (Num) -> Num)(k), (q : Real))
       #|  sequentially
-      #|  q:real
-      #|  forall q. rational q /\\ M < q ==> &1 - e / &2 <= (G:real->real) q
-      #|  (G:real->real) q0
-      #|  forall n. (f:num->real->real) n (--M) < e / &2 /\\\n             &1 - e / &2 < f n M
-      #|  (r:num->num) n
-      #|  --M:real
-      #|  q0:real
-      #|  (r:num->num) n
-      #|  (f:num->real->real) ((r:num->num) n) (--M)
+      #|  (q : Real)
+      #|  \226\136\128 q : Real, rational(q) && (M : Real) < q \226\134\146 real_of_num(1) - (e : Real) / real_of_num(2) <= (G : (Real) -> Real)(q)
+      #|  (G : (Real) -> Real)((q0 : Real))
+      #|  \226\136\128 n : Num, (f : (Num, Real) -> Real)(n, -(M : Real)) < (e : Real) / real_of_num(2) && real_of_num(1) - e / real_of_num(2) < f(n, M)
+      #|  (r : (Num) -> Num)((n : Num))
+      #|  -(M : Real)
+      #|  (q0 : Real)
+      #|  (r : (Num) -> Num)((n : Num))
+      #|  (f : (Num, Real) -> Real)((r : (Num) -> Num)((n : Num)), -(M : Real))
       #|  0
-      #|  \\k. (f:num->real->real) ((r:num->num) k) q0
+      #|  (k : Num) => (f : (Num, Real) -> Real)((r : (Num) -> Num)(k), (q0 : Real))
       #|  sequentially
-      #|  (G:real->real) q0 <= e / &2
-      #|  q0:real
-      #|  --(M + &1) < --M
-      #|  M + &1
-      #|  M:real
-      #|  e / &2
-      #|  forall e. &0 < e\n     ==> (?M. &0 < M /\\\n          (forall n:num. (f:num->real->real) n (--M) < e /\\ &1 - e < f n M))
-      #|  e:real
-      #|  abs ((f:num->real->real) ((r:num->num) n) q2 - G q2) < e / &3
-      #|  abs ((f:num->real->real) ((r:num->num) n) q1 - G q1) < e / &3
-      #|  (f:num->real->real) ((r:num->num) n) x <= f (r n) q2
-      #|  (f:num->real->real) ((r:num->num) n) q1 <= f (r n) x
-      #|  forall n:num x y. x <= y ==> (f:num->real->real) n x <= f n y
-      #|  MAX N1 N2
-      #|  N1:num
-      #|  e / &3
-      #|  N2:num
-      #|  e / &3
-      #|  forall q:real. rational q\n        ==> ((\\k. (f:num->real->real) ((r:num->num) k) q) ---> G q)\n            sequentially
-      #|  x - d / &2
-      #|  helly_limit (G:real->real) x - e / &3 < helly_limit G (x - d / &2)
-      #|  helly_limit (G:real->real) (x - d / &2) <= G q1
-      #|  q1:real
-      #|  x - d / &2 < x
-      #|  q2:real
-      #|  e / &3
-      #|  x:real
-      #|  G:real->real
-      #|  d:real
-      #|  e / &3
-      #|  e:real
-      #|  x:real
-      #|  helly_limit (G:real->real)
-      #|  r:num->num
-      #|  G:real->real
-      #|  r:num->num
-      #|  forall f:num->real->real. tight_sequence f\n     ==> ?r H. (forall m n. m < n ==> r m < r n) /\\\n         (forall x. &0 <= H x /\\ H x <= &1) /\\\n         (forall x y. x <= y ==> H x <= H y) /\\\n         (forall x. H real_continuous (atreal x)\n              ==> ((\\k. f (r k) x) ---> H x) sequentially) /\\\n         (forall e. &0 < e ==> ?M. &0 < M /\\ H(--M) < e /\\ &1 - e < H M)
-      #|  q2:real
-      #|  q1:real
-      #|  prob (p:A prob_space)\n     {a | a IN prob_carrier p /\\ abs((X:A->real) a) >= M}
-      #|  &1 - prob (p:A prob_space)\n     {x | x IN prob_carrier p /\\ (X:A->real) x <= M} =\n     prob p (prob_carrier p DIFF {x | x IN prob_carrier p /\\ X x <= M})
-      #|  &1 - x < e ==> &1 - e < x
-      #|  prob (p:A prob_space)\n     {a | a IN prob_carrier p /\\ abs((X:A->real) a) >= M}
-      #|  forall p:A prob_space (X:A->real) M e.\n     random_variable p X /\\\n     {a | a IN prob_carrier p /\\ abs(X a) >= M} IN prob_events p /\\\n     prob p {a | a IN prob_carrier p /\\ abs(X a) >= M} < e\n     ==> distribution_fn p X (--M) < e /\\ &1 - e < distribution_fn p X M
-      #|  forall x M:real. abs x >= M <=> x >= M \\/ x <= --M
-      #|  {a:A | a IN prob_carrier p /\\ abs((X:A->real) a) >= M} =\n     {a | a IN prob_carrier p /\\ X a >= M} UNION\n     {a | a IN prob_carrier p /\\ X a <= --M}
-      #|  forall p:A prob_space (X:A->real) M.\n     random_variable p X\n     ==> {a | a IN prob_carrier p /\\ abs(X a) >= M} IN prob_events p
-      #|  n:num
-      #|  M:real
-      #|  M:real
-      #|  e:real
-      #|  C:real
-      #|  X:num->A->real
-      #|  p:A prob_space
-      #|  e:real
-      #|  simple_rv (p:A prob_space) ((X:num->A->real) n)
-      #|  forall n:num. random_variable (p:A prob_space) ((X:num->A->real) n)
-      #|  forall p:A prob_space (X:num->A->real) C.\n     (forall n. simple_rv p (X n)) /\\\n     &0 < C /\\\n     (forall n. simple_expectation p (\\x. (X n x) pow 2) <= C)\n     ==> ?r H. (forall m n. m < n ==> r m < r n) /\\\n         (forall x. &0 <= H x /\\ H x <= &1) /\\\n         (forall x y. x <= y ==> H x <= H y) /\\\n         (forall x. H real_continuous (atreal x)\n              ==> ((\\k. distribution_fn p (X (r k)) x) ---> H x)\n                  sequentially) /\\\n         (forall e. &0 < e ==> ?M. &0 < M /\\ H(--M) < e /\\ &1 - e < H M)
-      #|  1 <= n
-      #|  SUC n
+      #|  (G : (Real) -> Real)((q0 : Real)) <= (e : Real) / real_of_num(2)
+      #|  (q0 : Real)
+      #|  -((M : Real) + real_of_num(1)) < -M
+      #|  (M : Real) + real_of_num(1)
+      #|  (M : Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 M : Real, real_of_num(0) < M && (\226\136\128 n : Num, (f : (Num, Real) -> Real)(n, -M) < e && real_of_num(1) - e < f(n, M)))
+      #|  (e : Real)
+      #|  abs((f : (Num, Real) -> Real)((r : (Num) -> Num)((n : Num)), (q2 : Real)) - (G : (Real) -> Real)(q2)) < (e : Real) / real_of_num(3)
+      #|  abs((f : (Num, Real) -> Real)((r : (Num) -> Num)((n : Num)), (q1 : Real)) - (G : (Real) -> Real)(q1)) < (e : Real) / real_of_num(3)
+      #|  (f : (Num, Real) -> Real)((r : (Num) -> Num)((n : Num)), (x : Real)) <= f(r(n), (q2 : Real))
+      #|  (f : (Num, Real) -> Real)((r : (Num) -> Num)((n : Num)), (q1 : Real)) <= f(r(n), (x : Real))
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 (f : (Num, Real) -> Real)(n, x) <= f(n, y)
+      #|  MAX((N1 : Num), (N2 : Num))
+      #|  (N1 : Num)
+      #|  (e : Real) / real_of_num(3)
+      #|  (N2 : Num)
+      #|  (e : Real) / real_of_num(3)
+      #|  \226\136\128 q : Real, rational(q) \226\134\146 op_minus_minus_minus_gt((k : Num) => (f : (Num, Real) -> Real)((r : (Num) -> Num)(k), q), (G : (Real) -> Real)(q), sequentially)
+      #|  (x : Real) - (d : Real) / real_of_num(2)
+      #|  helly_limit((G : (Real) -> Real), (x : Real)) - (e : Real) / real_of_num(3) < helly_limit(G, x - (d : Real) / real_of_num(2))
+      #|  helly_limit((G : (Real) -> Real), (x : Real) - (d : Real) / real_of_num(2)) <= G((q1 : Real))
+      #|  (q1 : Real)
+      #|  (x : Real) - (d : Real) / real_of_num(2) < x
+      #|  (q2 : Real)
+      #|  (e : Real) / real_of_num(3)
+      #|  (x : Real)
+      #|  (G : (Real) -> Real)
+      #|  (d : Real)
+      #|  (e : Real) / real_of_num(3)
+      #|  (e : Real)
+      #|  (x : Real)
+      #|  helly_limit((G : (Real) -> Real))
+      #|  (r : (Num) -> Num)
+      #|  (G : (Real) -> Real)
+      #|  (r : (Num) -> Num)
+      #|  \226\136\128 f : (Num, Real) -> Real, tight_sequence(f) \226\134\146 (\226\136\131 r : (Num) -> Num, \226\136\131 H : (Real) -> Real, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && (\226\136\128 x : Real, real_of_num(0) <= H(x) && H(x) <= real_of_num(1)) && (\226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 H(x) <= H(y)) && (\226\136\128 x : Real, real_continuous(H, atreal(x)) \226\134\146 op_minus_minus_minus_gt((k : Num) => f(r(k), x), H(x), sequentially)) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 M : Real, real_of_num(0) < M && H(-M) < e && real_of_num(1) - e < H(M))))
+      #|  (q2 : Real)
+      #|  (q1 : Real)
+      #|  prob((p : Prob_space[A]), {(a : A) | IN(a, prob_carrier(p)) && abs((X : (A) -> Real)(a)) >= (M : Real)})
+      #|  real_of_num(1) - prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) <= (M : Real)}) == prob(p, DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && X(x) <= M}))
+      #|  real_of_num(1) - (x : Real) < (e : Real) \226\134\146 real_of_num(1) - e < x
+      #|  prob((p : Prob_space[A]), {(a : A) | IN(a, prob_carrier(p)) && abs((X : (A) -> Real)(a)) >= (M : Real)})
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 M : Real, \226\136\128 e : Real, random_variable(p, X) && IN({(a : A) | IN(a, prob_carrier(p)) && abs(X(a)) >= M}, prob_events(p)) && prob(p, {(a : A) | IN(a, prob_carrier(p)) && abs(X(a)) >= M}) < e \226\134\146 distribution_fn(p, X, -M) < e && real_of_num(1) - e < distribution_fn(p, X, M)
+      #|  \226\136\128 x : Real, \226\136\128 M : Real, (abs(x) >= M) == (x >= M || x <= -M)
+      #|  {(a : A) | IN(a, prob_carrier((p : Prob_space[A]))) && abs((X : (A) -> Real)(a)) >= (M : Real)} == UNION({(a : A) | IN(a, prob_carrier(p)) && X(a) >= M}, {(a : A) | IN(a, prob_carrier(p)) && X(a) <= -M})
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 M : Real, random_variable(p, X) \226\134\146 IN({(a : A) | IN(a, prob_carrier(p)) && abs(X(a)) >= M}, prob_events(p))
+      #|  (n : Num)
+      #|  (M : Real)
+      #|  (M : Real)
+      #|  (e : Real)
+      #|  (C : Real)
+      #|  (X : (Num, A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (e : Real)
+      #|  simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)((n : Num)))
+      #|  \226\136\128 n : Num, random_variable((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 C : Real, (\226\136\128 n : Num, simple_rv(p, X(n))) && real_of_num(0) < C && (\226\136\128 n : Num, simple_expectation(p, (x : A) => pow(X(n, x), 2)) <= C) \226\134\146 (\226\136\131 r : (Num) -> Num, \226\136\131 H : (Real) -> Real, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && (\226\136\128 x : Real, real_of_num(0) <= H(x) && H(x) <= real_of_num(1)) && (\226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 H(x) <= H(y)) && (\226\136\128 x : Real, real_continuous(H, atreal(x)) \226\134\146 op_minus_minus_minus_gt((k : Num) => distribution_fn(p, X(r(k)), x), H(x), sequentially)) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 M : Real, real_of_num(0) < M && H(-M) < e && real_of_num(1) - e < H(M))))
+      #|  1 <= (n : Num)
+      #|  SUC((n : Num))
       #|  1
-      #|  \\k:num. (f:num->real) k - f(k - 1)
-      #|  SUC 0 = 1
-      #|  n = 0
-      #|  ~(1 <= 0)
-      #|  forall(f:num->real) n. 1 <= n\n      ==> sum(1..n) (\\k. f k - f(k - 1)) = f n - f 0
-      #|  inv(&N)
-      #|  (f:real->real)(p0 + &k * (q0 - p0) / &N - (q0 - p0) / (&N * &4)) <=\n       f(p0 + &k * (q0 - p0) / &N)
-      #|  (f:real->real)(p0 + &(k - 1) * (q0 - p0) / &N) <=\n       f(p0 + &(k - 1) * (q0 - p0) / &N + (q0 - p0) / (&N * &4))
-      #|  (f:real->real)(p0 + &k * (q0 - p0) / &N) -\n               f(p0 + &(k - 1) * (q0 - p0) / &N)
-      #|  d:real
-      #|  (q0 - p0) / &N
-      #|  &0 < (q0 - p0) / &N
-      #|  ~(&N = &0)
-      #|  (q0 - p0) / (&N * &4) = (q0 - p0) / &N / &4
-      #|  k:num
+      #|  (k : Num) => (f : (Num) -> Real)(k) - f(k - 1)
+      #|  SUC(0) == 1
+      #|  (n : Num) == 0
+      #|  !(1 <= 0)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 n : Num, 1 <= n \226\134\146 sum(op_dot_dot(1, n), (k : Num) => f(k) - f(k - 1)) == f(n) - f(0)
+      #|  inv(real_of_num((N : Num)))
+      #|  (f : (Real) -> Real)((p0 : Real) + (real_of_num((k : Num)) * (((q0 : Real) - p0) / real_of_num((N : Num))) - (q0 - p0) / (real_of_num(N) * real_of_num(4)))) <= f(p0 + real_of_num(k) * ((q0 - p0) / real_of_num(N)))
+      #|  (f : (Real) -> Real)((p0 : Real) + real_of_num((k : Num) - 1) * (((q0 : Real) - p0) / real_of_num((N : Num)))) <= f(p0 + (real_of_num(k - 1) * ((q0 - p0) / real_of_num(N)) + (q0 - p0) / (real_of_num(N) * real_of_num(4))))
+      #|  (f : (Real) -> Real)((p0 : Real) + real_of_num((k : Num)) * (((q0 : Real) - p0) / real_of_num((N : Num)))) - f(p0 + real_of_num(k - 1) * ((q0 - p0) / real_of_num(N)))
+      #|  (d : Real)
+      #|  ((q0 : Real) - (p0 : Real)) / real_of_num((N : Num))
+      #|  real_of_num(0) < ((q0 : Real) - (p0 : Real)) / real_of_num((N : Num))
+      #|  !(real_of_num((N : Num)) == real_of_num(0))
+      #|  ((q0 : Real) - (p0 : Real)) / (real_of_num((N : Num)) * real_of_num(4)) == (q0 - p0) / real_of_num(N) / real_of_num(4)
+      #|  (k : Num)
       #|  1
-      #|  ~(&N = &0)
-      #|  &N * (q0 - p0) / &N = q0 - p0
-      #|  &k * (q0 - p0) / &N <= &N * (q0 - p0) / &N
-      #|  &k * (q0 - p0) / &N - (q0 - p0) / (&N * &4) <\n                 &k * (q0 - p0) / &N
-      #|  &0 <= x /\\ &0 < y ==> a < a + x + y
-      #|  &0 < (q0 - p0) / (&N * &4)
-      #|  &0 < (q0 - p0) / &N
-      #|  p0 + &k * (q0 - p0) / &N - (q0 - p0) / (&N * &4)
-      #|  p0 + &(k - 1) * (q0 - p0) / &N + (q0 - p0) / (&N * &4)
-      #|  k:num
-      #|  k:num
-      #|  k:num
-      #|  j:num
-      #|  1 <= N ==> ~(N = 0)
-      #|  &1 = sum(1..N) (\\k:num. inv(&N))
-      #|  &1 < sum(1..N)\n      (\\k. (f:real->real)(p0 + &k * (q0 - p0) / &N) -\n           f(p0 + &(k - 1) * (q0 - p0) / &N))
-      #|  forall k. k IN 1..N ==> inv(&N) <\n      (f:real->real)(p0 + &k * (q0 - p0) / &N) -\n      f(p0 + &(k - 1) * (q0 - p0) / &N)
-      #|  ?k. k IN 1..N /\\\n    (f:real->real)(p0 + &k * (q0 - p0) / &N) -\n    f(p0 + &(k - 1) * (q0 - p0) / &N) <= inv(&N)
-      #|  a + (b - a):real = b
-      #|  ~(&N = &0)
-      #|  &N * (q0 - p0) / &N = q0 - p0
-      #|  N:num
-      #|  \\j:num. (f:real->real)(p0 + &j * (q0 - p0) / &N)
-      #|  sum(1..N) (\\k. (f:real->real)(p0 + &k * (q0 - p0) / &N) -\n                      f(p0 + &(k - 1) * (q0 - p0) / &N)) =\n      f(p0 + &N * (q0 - p0) / &N) - f(p0 + &0 * (q0 - p0) / &N)
-      #|  sum(1..N) (\\k. (f:real->real)(p0 + &k * (q0 - p0) / &N) -\n                     f(p0 + &(k-1) * (q0 - p0) / &N)) = f q0 - f p0
-      #|  1 <= N
-      #|  &0 < &N
-      #|  ~(&N = &0)
-      #|  N = n + 2
-      #|  forall f p0 q0 n.\n     (forall x y:real. x <= y ==> f x <= f y) /\\\n     (forall x. &0 <= f x /\\ f x <= &1) /\\\n     p0 < q0\n     ==> ?p q. p0 < p /\\ q < q0 /\\ p < q /\\\n               (f:real->real) q - f p < inv(&(SUC n))
-      #|  q0:real
-      #|  q0:real
-      #|  q0:real
-      #|  q0:real
-      #|  q0:real
-      #|  q0:real
-      #|  q0:real
-      #|  q0:real
-      #|  p0:real
-      #|  inv(&(SUC N))
-      #|  inv(&N)
-      #|  (f:real->real)((Q:num->real) N) - f((P:num->real) N) < e
-      #|  (f:real->real)((P:num->real) N) <= f x' /\\ f x' <= f((Q:num->real) N) /\\\n     f((P:num->real) N) <= f c /\\ f c <= f((Q:num->real) N)
-      #|  abs(x' - c) < min (c - (P:num->real) N) (Q N - c)
-      #|  forall n. c < (Q:num->real) n
-      #|  N:num
-      #|  forall n. (P:num->real) n < c
-      #|  N:num
-      #|  (P:num->real) N <= x' /\\ x' <= (Q:num->real) N
-      #|  x':real
-      #|  forall n. c < (Q:num->real) n
-      #|  N:num
-      #|  forall n. (P:num->real) n < c
-      #|  N:num
-      #|  min (c - (P:num->real) N) ((Q:num->real) N - c)
-      #|  N:num
-      #|  e:real
-      #|  e:real
-      #|  (Q:num->real) 0
-      #|  b':real
-      #|  (P:num->real) 0
-      #|  a':real
-      #|  a < c /\\ c < b
-      #|  c <= (Q:num->real)(SUC n)
-      #|  forall n. c < (Q:num->real) n
-      #|  (P:num->real)(SUC n) <= c
-      #|  forall n. (P:num->real) n < c
-      #|  (Q:num->real) k
-      #|  k:num
-      #|  n:num
-      #|  P:num->real
+      #|  !(real_of_num((N : Num)) == real_of_num(0))
+      #|  real_of_num((N : Num)) * (((q0 : Real) - (p0 : Real)) / real_of_num(N)) == q0 - p0
+      #|  real_of_num((k : Num)) * (((q0 : Real) - (p0 : Real)) / real_of_num((N : Num))) <= real_of_num(N) * ((q0 - p0) / real_of_num(N))
+      #|  real_of_num((k : Num)) * (((q0 : Real) - (p0 : Real)) / real_of_num((N : Num))) - (q0 - p0) / (real_of_num(N) * real_of_num(4)) < real_of_num(k) * ((q0 - p0) / real_of_num(N))
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) < (y : Real) \226\134\146 (a : Real) < a + (x + y)
+      #|  real_of_num(0) < ((q0 : Real) - (p0 : Real)) / (real_of_num((N : Num)) * real_of_num(4))
+      #|  real_of_num(0) < ((q0 : Real) - (p0 : Real)) / real_of_num((N : Num))
+      #|  (p0 : Real) + (real_of_num((k : Num)) * (((q0 : Real) - p0) / real_of_num((N : Num))) - (q0 - p0) / (real_of_num(N) * real_of_num(4)))
+      #|  (p0 : Real) + (real_of_num((k : Num) - 1) * (((q0 : Real) - p0) / real_of_num((N : Num))) + (q0 - p0) / (real_of_num(N) * real_of_num(4)))
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (j : Num)
+      #|  1 <= (N : Num) \226\134\146 !(N == 0)
+      #|  real_of_num(1) == sum(op_dot_dot(1, (N : Num)), (k : Num) => inv(real_of_num(N)))
+      #|  real_of_num(1) < sum(op_dot_dot(1, (N : Num)), (k : Num) => (f : (Real) -> Real)((p0 : Real) + real_of_num(k) * (((q0 : Real) - p0) / real_of_num(N))) - f(p0 + real_of_num(k - 1) * ((q0 - p0) / real_of_num(N))))
+      #|  \226\136\128 k : Num, IN(k, op_dot_dot(1, (N : Num))) \226\134\146 inv(real_of_num(N)) < (f : (Real) -> Real)((p0 : Real) + real_of_num(k) * (((q0 : Real) - p0) / real_of_num(N))) - f(p0 + real_of_num(k - 1) * ((q0 - p0) / real_of_num(N)))
+      #|  \226\136\131 k : Num, IN(k, op_dot_dot(1, (N : Num))) && (f : (Real) -> Real)((p0 : Real) + real_of_num(k) * (((q0 : Real) - p0) / real_of_num(N))) - f(p0 + real_of_num(k - 1) * ((q0 - p0) / real_of_num(N))) <= inv(real_of_num(N))
+      #|  (a : Real) + ((b : Real) - a) == b
+      #|  !(real_of_num((N : Num)) == real_of_num(0))
+      #|  real_of_num((N : Num)) * (((q0 : Real) - (p0 : Real)) / real_of_num(N)) == q0 - p0
+      #|  (N : Num)
+      #|  (j : Num) => (f : (Real) -> Real)((p0 : Real) + real_of_num(j) * (((q0 : Real) - p0) / real_of_num((N : Num))))
+      #|  sum(op_dot_dot(1, (N : Num)), (k : Num) => (f : (Real) -> Real)((p0 : Real) + real_of_num(k) * (((q0 : Real) - p0) / real_of_num(N))) - f(p0 + real_of_num(k - 1) * ((q0 - p0) / real_of_num(N)))) == f(p0 + real_of_num(N) * ((q0 - p0) / real_of_num(N))) - f(p0 + real_of_num(0) * ((q0 - p0) / real_of_num(N)))
+      #|  sum(op_dot_dot(1, (N : Num)), (k : Num) => (f : (Real) -> Real)((p0 : Real) + real_of_num(k) * (((q0 : Real) - p0) / real_of_num(N))) - f(p0 + real_of_num(k - 1) * ((q0 - p0) / real_of_num(N)))) == f(q0) - f(p0)
+      #|  1 <= (N : Num)
+      #|  real_of_num(0) < real_of_num((N : Num))
+      #|  !(real_of_num((N : Num)) == real_of_num(0))
+      #|  (N : Num) == (n : Num) + 2
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 p0 : Real, \226\136\128 q0 : Real, \226\136\128 n : Num, (\226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 f(x) <= f(y)) && (\226\136\128 x : Real, real_of_num(0) <= f(x) && f(x) <= real_of_num(1)) && p0 < q0 \226\134\146 (\226\136\131 p : Real, \226\136\131 q : Real, p0 < p && q < q0 && p < q && f(q) - f(p) < inv(real_of_num(SUC(n))))
+      #|  (q0 : Real)
+      #|  (q0 : Real)
+      #|  (q0 : Real)
+      #|  (q0 : Real)
+      #|  (q0 : Real)
+      #|  (q0 : Real)
+      #|  (q0 : Real)
+      #|  (q0 : Real)
+      #|  (p0 : Real)
+      #|  inv(real_of_num(SUC((N : Num))))
+      #|  inv(real_of_num((N : Num)))
+      #|  (f : (Real) -> Real)((Q : (Num) -> Real)((N : Num))) - f((P : (Num) -> Real)(N)) < (e : Real)
+      #|  (f : (Real) -> Real)((P : (Num) -> Real)((N : Num))) <= f((x' : Real)) && f(x') <= f((Q : (Num) -> Real)(N)) && f(P(N)) <= f((c : Real)) && f(c) <= f(Q(N))
+      #|  abs((x' : Real) - (c : Real)) < min(c - (P : (Num) -> Real)((N : Num)), (Q : (Num) -> Real)(N) - c)
+      #|  \226\136\128 n : Num, (c : Real) < (Q : (Num) -> Real)(n)
+      #|  (N : Num)
+      #|  \226\136\128 n : Num, (P : (Num) -> Real)(n) < (c : Real)
+      #|  (N : Num)
+      #|  (P : (Num) -> Real)((N : Num)) <= (x' : Real) && x' <= (Q : (Num) -> Real)(N)
+      #|  (x' : Real)
+      #|  \226\136\128 n : Num, (c : Real) < (Q : (Num) -> Real)(n)
+      #|  (N : Num)
+      #|  \226\136\128 n : Num, (P : (Num) -> Real)(n) < (c : Real)
+      #|  (N : Num)
+      #|  min((c : Real) - (P : (Num) -> Real)((N : Num)), (Q : (Num) -> Real)(N) - c)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  (e : Real)
+      #|  (Q : (Num) -> Real)(0)
+      #|  (b' : Real)
+      #|  (P : (Num) -> Real)(0)
+      #|  (a' : Real)
+      #|  (a : Real) < (c : Real) && c < (b : Real)
+      #|  (c : Real) <= (Q : (Num) -> Real)(SUC((n : Num)))
+      #|  \226\136\128 n : Num, (c : Real) < (Q : (Num) -> Real)(n)
+      #|  (P : (Num) -> Real)(SUC((n : Num))) <= (c : Real)
+      #|  \226\136\128 n : Num, (P : (Num) -> Real)(n) < (c : Real)
+      #|  (Q : (Num) -> Real)((k : Num))
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  (P : (Num) -> Real)
       #|  sequentially
-      #|  forall n. c <= (Q:num->real) n
-      #|  \\m n. (Q:num->real) n <= Q m
-      #|  forall m n. m <= n ==> (Q:num->real) n <= Q m
+      #|  \226\136\128 n : Num, (c : Real) <= (Q : (Num) -> Real)(n)
+      #|  (m : Num) => (n : Num) => (Q : (Num) -> Real)(n) <= Q(m)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 (Q : (Num) -> Real)(n) <= Q(m)
       #|  0
-      #|  (\\k. (P:num->real)(n + k)) = (\\k. P(k + n))
-      #|  \\k:num. (P:num->real)(n + k)
+      #|  ((k : Num) => (P : (Num) -> Real)((n : Num) + k)) == ((k : Num) => P(k + n))
+      #|  (k : Num) => (P : (Num) -> Real)((n : Num) + k)
       #|  sequentially
-      #|  forall n. (P:num->real) n <= c
-      #|  \\m n. (P:num->real) m <= P n
-      #|  forall m n. m <= n ==> (P:num->real) m <= P n
-      #|  c:real
-      #|  c:real
-      #|  forall n. a' < (P:num->real) n /\\ (Q:num->real) n < b' /\\\n                    P n < Q n /\\ (f:real->real)(Q n) - f(P n) < inv(&(SUC n))
-      #|  x:num
-      #|  a' < x /\\ x < b' ==> abs(x) <= abs(a') + abs(b') + &1
-      #|  abs(a') + abs(b') + &1
-      #|  P:num->real
-      #|  (p:real,q:real)
-      #|  q:real
-      #|  p:real
-      #|  SUC n
-      #|  SND((G:num->real#real) n)
-      #|  FST((G:num->real#real) n)
-      #|  f:real->real
-      #|  ?v:real#real. FST((G:num->real#real) n) < FST v /\\\n                       SND v < SND(G n) /\\ FST v < SND v /\\\n                       (f:real->real)(SND v) - f(FST v) <\n                         inv(&(SUC(SUC n)))
-      #|  FST((G:num->real#real) n) < FST(G(SUC n)) /\\\n        SND(G(SUC n)) < SND(G n) /\\\n        FST(G(SUC n)) < SND(G(SUC n)) /\\\n        (f:real->real)(SND(G(SUC n))) - f(FST(G(SUC n))) <\n          inv(&(SUC(SUC n)))
-      #|  (p:real,q:real)
-      #|  q:real
-      #|  p:real
+      #|  \226\136\128 n : Num, (P : (Num) -> Real)(n) <= (c : Real)
+      #|  (m : Num) => (n : Num) => (P : (Num) -> Real)(m) <= P(n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 (P : (Num) -> Real)(m) <= P(n)
+      #|  (c : Real)
+      #|  (c : Real)
+      #|  \226\136\128 n : Num, (a' : Real) < (P : (Num) -> Real)(n) && (Q : (Num) -> Real)(n) < (b' : Real) && P(n) < Q(n) && (f : (Real) -> Real)(Q(n)) - f(P(n)) < inv(real_of_num(SUC(n)))
+      #|  (x : Num)
+      #|  (a' : Real) < (x : Real) && x < (b' : Real) \226\134\146 abs(x) <= abs(a') + (abs(b') + real_of_num(1))
+      #|  abs((a' : Real)) + (abs((b' : Real)) + real_of_num(1))
+      #|  (P : (Num) -> Real)
+      #|  ((p : Real), (q : Real))
+      #|  (q : Real)
+      #|  (p : Real)
+      #|  SUC((n : Num))
+      #|  SND((G : (Num) -> (Real, Real))((n : Num)))
+      #|  FST((G : (Num) -> (Real, Real))((n : Num)))
+      #|  (f : (Real) -> Real)
+      #|  \226\136\131 v : (Real, Real), FST((G : (Num) -> (Real, Real))((n : Num))) < FST(v) && SND(v) < SND(G(n)) && FST(v) < SND(v) && (f : (Real) -> Real)(SND(v)) - f(FST(v)) < inv(real_of_num(SUC(SUC(n))))
+      #|  FST((G : (Num) -> (Real, Real))((n : Num))) < FST(G(SUC(n))) && SND(G(SUC(n))) < SND(G(n)) && FST(G(SUC(n))) < SND(G(SUC(n))) && (f : (Real) -> Real)(SND(G(SUC(n)))) - f(FST(G(SUC(n)))) < inv(real_of_num(SUC(SUC(n))))
+      #|  ((p : Real), (q : Real))
+      #|  (q : Real)
+      #|  (p : Real)
       #|  0
-      #|  b':real
-      #|  a':real
-      #|  f:real->real
-      #|  ?w:real#real. a' < FST w /\\ SND w < b' /\\ FST w < SND w /\\\n                       (f:real->real)(SND w) - f(FST w) < inv(&(SUC 0))
-      #|  a' < FST((G:num->real#real) 0) /\\ SND(G 0) < b' /\\\n        FST(G 0) < SND(G 0) /\\\n        (f:real->real)(SND(G 0)) - f(FST(G 0)) < inv(&(SUC 0))
-      #|  forall n. a' < (P:num->real) n /\\ (Q:num->real) n < b' /\\\n          P n < Q n /\\ (f:real->real)(Q n) - f(P n) < inv(&(SUC n)) /\\\n          (0 < n ==> P(n - 1) < P n /\\ Q n < Q(n - 1))
-      #|  (forall n. a' < (P:num->real) n /\\ (Q:num->real) n < b' /\\\n          P n < Q n /\\ (f:real->real)(Q n) - f(P n) < inv(&(SUC n))) /\\\n     (forall n. (P:num->real) n < P(SUC n) /\\ (Q:num->real)(SUC n) < Q n)
-      #|  Q = \\n:num. SND((G:num->real#real) n)
-      #|  P = \\n:num. FST((G:num->real#real) n)
-      #|  G:num->real#real
-      #|  \\w:real#real m:num.\n       @v:real#real. FST w < FST v /\\ SND v < SND w /\\\n                     FST v < SND v /\\\n                     (f:real->real)(SND v) - f(FST v) < inv(&(SUC(SUC m)))
-      #|  @w:real#real. a' < FST w /\\ SND w < b' /\\ FST w < SND w /\\\n                   (f:real->real)(SND w) - f(FST w) < inv(&(SUC 0))
-      #|  a < a' /\\ a' < b' /\\ b' < b
-      #|  b' = (a + &2 * b) / &3
-      #|  a' = (&2 * a + b) / &3
-      #|  forall f a b. (forall x y:real. x <= y ==> f x <= f y) /\\\n           (forall x. &0 <= f x /\\ f x <= &1) /\\\n           a < b\n           ==> ?c. a < c /\\ c < b /\\ f real_continuous atreal c
-      #|  SUC n
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  converges_in_distribution (p:A prob_space) (X:num->A->real) (H:real->real) <=>\n  (forall x. H real_continuous atreal x\n       ==> ((\\n. cdf p (X n) x) ---> H x) sequentially)
-      #|  x:real
-      #|  abs(a:real)
-      #|  (\\t. sin t / t)
-      #|  ~(x = &0)
-      #|  x:real
-      #|  d:real
-      #|  e:real
-      #|  a = &0
-      #|  a:real
-      #|  forall s. (\\t. if t = &0 then &1 else sin t / t) real_continuous_on s
-      #|  &0 < abs t
-      #|  forall t. abs(if t = &0 then &1 else sin t / t) <= &1
-      #|  (:real)
-      #|  forall u. &0 <= u ==>\n      (\\t. if t = &0 then &1 else sin t / t)\n        real_integrable_on real_interval[&0, u]
-      #|  x:real
-      #|  log u = log u - log(&1)
-      #|  forall u. &1 <= u ==>\n    ((\\t. inv t) has_real_integral (log u)) (real_interval[&1, u])
-      #|  real_integral (real_interval[&1,u]) (\\t. inv t) = log u
-      #|  t:real
-      #|  abs t = t
-      #|  ~(t = &0)
-      #|  t:real
-      #|  real_integral (real_interval[&1,u]) (\\t. inv t)
-      #|  real_integral (real_interval[&0,&1]) (\\t:real. &1)
-      #|  real_integral (real_interval[&0,u]) sinc =\n    real_integral (real_interval[&0,&1]) sinc +\n    real_integral (real_interval[&1,u]) sinc
-      #|  sinc real_integrable_on real_interval[&0,u]
-      #|  sinc real_continuous_on (:real)
-      #|  sinc = \\t. abs(if t = &0 then &1 else sin t / t)
-      #|  forall u. &1 <= u ==>\n    real_integral (real_interval[&0, u])\n      (\\t. abs(if t = &0 then &1 else sin t / t)) <= &1 + log u
-      #|  real_integral (:real)\n       (\\y:real. sum(0..m) (\\k. (a:num->real) k *\n                  cos((freq:num->real) k * y) +\n                  (b:num->real) k * sin(freq k * y)) *\n                 std_normal_density y) =\n     sum(0..m) (\\k. a k * exp(--((freq k) pow 2 / &2)))
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  i:num
-      #|  \\y:real. sin((freq:num->real) i * y)
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  \\y:real. cos((freq:num->real) i * y)
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  i:num
-      #|  m:num
-      #|  \\i:num. \\x:A. (a:num->real) i * cos((freq:num->real) i *\n                      (Y:A->real) x) +\n                      (b:num->real) i * sin(freq i * Y x)
-      #|  p:A prob_space
-      #|  simple_expectation (p:A prob_space)\n       (\\x:A. sum(0..m) (\\k. (a:num->real) k * cos((freq:num->real) k *\n                (Y:A->real) x) +\n                               (b:num->real) k * sin(freq k * Y x))) =\n     sum(0..m) (\\k. a k * simple_char_fn_re p Y (freq k) +\n                     b k * simple_char_fn_im p Y (freq k))
-      #|  forall p:A prob_space Y (a:num->real) (b:num->real) (freq:num->real) m.\n    simple_rv p Y\n    ==> simple_expectation p\n          (\\x. sum(0..m) (\\k. a k * cos(freq k * Y x) +\n                                b k * sin(freq k * Y x))) -\n        real_integral (:real)\n          (\\y. sum(0..m) (\\k. a k * cos(freq k * y) +\n                                b k * sin(freq k * y)) *\n               std_normal_density y) =\n        sum(0..m)\n          (\\k. a k * (simple_char_fn_re p Y (freq k) -\n                       exp(--(freq k pow 2 / &2))) +\n               b k * simple_char_fn_im p Y (freq k))
-      #|  abs((a:num->real) i *\n     (simple_char_fn_re (p:A prob_space) (Y:A->real)\n        ((freq:num->real) i) -\n      exp(--((freq i) pow 2 / &2)))) +\n     abs((b:num->real) i * simple_char_fn_im p Y (freq i))
-      #|  sum(0..m)\n    (\\k. abs((a:num->real) k *\n             (simple_char_fn_re (p:A prob_space) (Y:A->real)\n                ((freq:num->real) k) -\n              exp(--((freq k) pow 2 / &2))) +\n             (b:num->real) k * simple_char_fn_im p Y (freq k)))
-      #|  forall p:A prob_space Y (a:num->real) (b:num->real) (freq:num->real) m.\n    simple_rv p Y\n    ==> abs(simple_expectation p\n          (\\x. sum(0..m) (\\k. a k * cos(freq k * Y x) +\n                                b k * sin(freq k * Y x))) -\n        real_integral (:real)\n          (\\y. sum(0..m) (\\k. a k * cos(freq k * y) +\n                                b k * sin(freq k * y)) *\n               std_normal_density y))\n        <= sum(0..m)\n             (\\k. abs(a k) *\n                  abs(simple_char_fn_re p Y (freq k) -\n                      exp(--(freq k pow 2 / &2))) +\n                  abs(b k) * abs(simple_char_fn_im p Y (freq k)))
-      #|  forall a b:real.\n    abs(max (&0) (min (&1) a) - max (&0) (min (&1) b)) <= abs(a - b)
-      #|  abs(z - y:real) * inv h
-      #|  abs(inv h) = inv h
-      #|  (&1 - a) - (&1 - b) = b - a
-      #|  &1 - (y - x) / h
-      #|  &1 - (z - x) / h
-      #|  abs((&1 - (z - x) / h) - (&1 - (y - x) / h))
-      #|  z:real
-      #|  e * h:real
-      #|  e:real
-      #|  forall x h y:real. &0 < h ==>\n    (\\y. max (&0) (min (&1) (&1 - (y - x) / h)))\n    real_continuous atreal y
-      #|  &1 <= &1 - (y - x) / h
-      #|  a * b <= &0 <=> &0 <= (--a) * b
-      #|  (y - x) / h <= &0
-      #|  y:real
-      #|  forall p:A prob_space Y x h.\n    simple_rv p Y /\\ &0 < h\n    ==> simple_cdf p Y x <=\n        simple_expectation p\n          (\\a. max (&0) (min (&1) (&1 - (Y a - x) / h)))
-      #|  &1 < (y - x) / h
-      #|  y:real
-      #|  &1 <= &1 - (y - x) / h
-      #|  a * b <= &0 <=> &0 <= (--a) * b
-      #|  (y - x) / h <= &0
-      #|  y:real
-      #|  forall x h. &0 < h\n    ==> std_normal_cdf x <=\n        real_integral (:real)\n          (\\y. max (&0) (min (&1) (&1 - (y - x) / h)) *\n               std_normal_density y) /\\\n        real_integral (:real)\n          (\\y. max (&0) (min (&1) (&1 - (y - x) / h)) *\n               std_normal_density y) <=\n        std_normal_cdf (x + h)
-      #|  x':real
-      #|  x':real
-      #|  (:real)
-      #|  inv(sqrt(&2 * pi))
-      #|  real_integral (real_interval [x,y]) std_normal_density
-      #|  y:real
-      #|  x:real
+      #|  (b' : Real)
+      #|  (a' : Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\131 w : (Real, Real), (a' : Real) < FST(w) && SND(w) < (b' : Real) && FST(w) < SND(w) && (f : (Real) -> Real)(SND(w)) - f(FST(w)) < inv(real_of_num(SUC(0)))
+      #|  (a' : Real) < FST((G : (Num) -> (Real, Real))(0)) && SND(G(0)) < (b' : Real) && FST(G(0)) < SND(G(0)) && (f : (Real) -> Real)(SND(G(0))) - f(FST(G(0))) < inv(real_of_num(SUC(0)))
+      #|  \226\136\128 n : Num, (a' : Real) < (P : (Num) -> Real)(n) && (Q : (Num) -> Real)(n) < (b' : Real) && P(n) < Q(n) && (f : (Real) -> Real)(Q(n)) - f(P(n)) < inv(real_of_num(SUC(n))) && (0 < n \226\134\146 P(n - 1) < P(n) && Q(n) < Q(n - 1))
+      #|  (\226\136\128 n : Num, (a' : Real) < (P : (Num) -> Real)(n) && (Q : (Num) -> Real)(n) < (b' : Real) && P(n) < Q(n) && (f : (Real) -> Real)(Q(n)) - f(P(n)) < inv(real_of_num(SUC(n)))) && (\226\136\128 n : Num, P(n) < P(SUC(n)) && Q(SUC(n)) < Q(n))
+      #|  (Q : (Num) -> Real) == ((n : Num) => SND((G : (Num) -> (Real, Real))(n)))
+      #|  (P : (Num) -> Real) == ((n : Num) => FST((G : (Num) -> (Real, Real))(n)))
+      #|  (G : (Num) -> (Real, Real))
+      #|  (w : (Real, Real)) => (m : Num) => select((v : (Real, Real)) => FST(w) < FST(v) && SND(v) < SND(w) && FST(v) < SND(v) && (f : (Real) -> Real)(SND(v)) - f(FST(v)) < inv(real_of_num(SUC(SUC(m)))))
+      #|  select((w : (Real, Real)) => (a' : Real) < FST(w) && SND(w) < (b' : Real) && FST(w) < SND(w) && (f : (Real) -> Real)(SND(w)) - f(FST(w)) < inv(real_of_num(SUC(0))))
+      #|  (a : Real) < (a' : Real) && a' < (b' : Real) && b' < (b : Real)
+      #|  (b' : Real) == ((a : Real) + real_of_num(2) * (b : Real)) / real_of_num(3)
+      #|  (a' : Real) == (real_of_num(2) * (a : Real) + (b : Real)) / real_of_num(3)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 f(x) <= f(y)) && (\226\136\128 x : Real, real_of_num(0) <= f(x) && f(x) <= real_of_num(1)) && a < b \226\134\146 (\226\136\131 c : Real, a < c && c < b && real_continuous(f, atreal(c)))
+      #|  SUC((n : Num))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (converges_in_distribution : (Prob_space[A], (Num, A) -> Real, (Real) -> Real) -> Bool)((p : Prob_space[A]), (X : (Num, A) -> Real), (H : (Real) -> Real)) == (\226\136\128 x : Real, real_continuous(H, atreal(x)) \226\134\146 op_minus_minus_minus_gt((n : Num) => cdf(p, X(n), x), H(x), sequentially))
+      #|  (x : Real)
+      #|  abs((a : Real))
+      #|  (t : Real) => sin(t) / t
+      #|  !((x : Real) == real_of_num(0))
+      #|  (x : Real)
+      #|  (d : Real)
+      #|  (e : Real)
+      #|  (a : Real) == real_of_num(0)
+      #|  (a : Real)
+      #|  \226\136\128 s : (Real) -> Bool, real_continuous_on((t : Real) => if t == real_of_num(0) { real_of_num(1) } else { sin(t) / t }, s)
+      #|  real_of_num(0) < abs((t : Real))
+      #|  \226\136\128 t : Real, abs(if t == real_of_num(0) { real_of_num(1) } else { sin(t) / t }) <= real_of_num(1)
+      #|  (UNIV : (Real) -> Bool)
+      #|  \226\136\128 u : Real, real_of_num(0) <= u \226\134\146 real_integrable_on((t : Real) => if t == real_of_num(0) { real_of_num(1) } else { sin(t) / t }, real_interval([(real_of_num(0), u)]))
+      #|  (x : Real)
+      #|  log((u : Real)) == log(u) - log(real_of_num(1))
+      #|  \226\136\128 u : Real, real_of_num(1) <= u \226\134\146 has_real_integral((t : Real) => inv(t), log(u), real_interval([(real_of_num(1), u)]))
+      #|  real_integral(real_interval([(real_of_num(1), (u : Real))]), (t : Real) => inv(t)) == log(u)
+      #|  (t : Real)
+      #|  abs((t : Real)) == t
+      #|  !((t : Real) == real_of_num(0))
+      #|  (t : Real)
+      #|  real_integral(real_interval([(real_of_num(1), (u : Real))]), (t : Real) => inv(t))
+      #|  real_integral(real_interval([(real_of_num(0), real_of_num(1))]), (t : Real) => real_of_num(1))
+      #|  real_integral(real_interval([(real_of_num(0), (u : Real))]), (sinc : (Real) -> Real)) == real_integral(real_interval([(real_of_num(0), real_of_num(1))]), sinc) + real_integral(real_interval([(real_of_num(1), u)]), sinc)
+      #|  real_integrable_on((sinc : (Real) -> Real), real_interval([(real_of_num(0), (u : Real))]))
+      #|  real_continuous_on((sinc : (Real) -> Real), UNIV)
+      #|  (sinc : (Real) -> Real) == ((t : Real) => abs(if t == real_of_num(0) { real_of_num(1) } else { sin(t) / t }))
+      #|  \226\136\128 u : Real, real_of_num(1) <= u \226\134\146 real_integral(real_interval([(real_of_num(0), u)]), (t : Real) => abs(if t == real_of_num(0) { real_of_num(1) } else { sin(t) / t })) <= real_of_num(1) + log(u)
+      #|  real_integral(UNIV, (y : Real) => sum(op_dot_dot(0, (m : Num)), (k : Num) => (a : (Num) -> Real)(k) * cos((freq : (Num) -> Real)(k) * y) + (b : (Num) -> Real)(k) * sin(freq(k) * y)) * std_normal_density(y)) == sum(op_dot_dot(0, m), (k : Num) => a(k) * exp(-(pow(freq(k), 2) / real_of_num(2))))
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (i : Num)
+      #|  (y : Real) => sin((freq : (Num) -> Real)((i : Num)) * y)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (y : Real) => cos((freq : (Num) -> Real)((i : Num)) * y)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (i : Num)
+      #|  (m : Num)
+      #|  (i : Num) => (x : A) => (a : (Num) -> Real)(i) * cos((freq : (Num) -> Real)(i) * (Y : (A) -> Real)(x)) + (b : (Num) -> Real)(i) * sin(freq(i) * Y(x))
+      #|  (p : Prob_space[A])
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => sum(op_dot_dot(0, (m : Num)), (k : Num) => (a : (Num) -> Real)(k) * cos((freq : (Num) -> Real)(k) * (Y : (A) -> Real)(x)) + (b : (Num) -> Real)(k) * sin(freq(k) * Y(x)))) == sum(op_dot_dot(0, m), (k : Num) => a(k) * simple_char_fn_re(p, Y, freq(k)) + b(k) * simple_char_fn_im(p, Y, freq(k)))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 freq : (Num) -> Real, \226\136\128 m : Num, simple_rv(p, Y) \226\134\146 simple_expectation(p, (x : A) => sum(op_dot_dot(0, m), (k : Num) => a(k) * cos(freq(k) * Y(x)) + b(k) * sin(freq(k) * Y(x)))) - real_integral(UNIV, (y : Real) => sum(op_dot_dot(0, m), (k : Num) => a(k) * cos(freq(k) * y) + b(k) * sin(freq(k) * y)) * std_normal_density(y)) == sum(op_dot_dot(0, m), (k : Num) => a(k) * (simple_char_fn_re(p, Y, freq(k)) - exp(-(pow(freq(k), 2) / real_of_num(2)))) + b(k) * simple_char_fn_im(p, Y, freq(k)))
+      #|  abs((a : (Num) -> Real)((i : Num)) * (simple_char_fn_re((p : Prob_space[A]), (Y : (A) -> Real), (freq : (Num) -> Real)(i)) - exp(-(pow(freq(i), 2) / real_of_num(2))))) + abs((b : (Num) -> Real)(i) * simple_char_fn_im(p, Y, freq(i)))
+      #|  sum(op_dot_dot(0, (m : Num)), (k : Num) => abs((a : (Num) -> Real)(k) * (simple_char_fn_re((p : Prob_space[A]), (Y : (A) -> Real), (freq : (Num) -> Real)(k)) - exp(-(pow(freq(k), 2) / real_of_num(2)))) + (b : (Num) -> Real)(k) * simple_char_fn_im(p, Y, freq(k))))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 freq : (Num) -> Real, \226\136\128 m : Num, simple_rv(p, Y) \226\134\146 abs(simple_expectation(p, (x : A) => sum(op_dot_dot(0, m), (k : Num) => a(k) * cos(freq(k) * Y(x)) + b(k) * sin(freq(k) * Y(x)))) - real_integral(UNIV, (y : Real) => sum(op_dot_dot(0, m), (k : Num) => a(k) * cos(freq(k) * y) + b(k) * sin(freq(k) * y)) * std_normal_density(y))) <= sum(op_dot_dot(0, m), (k : Num) => abs(a(k)) * abs(simple_char_fn_re(p, Y, freq(k)) - exp(-(pow(freq(k), 2) / real_of_num(2)))) + abs(b(k)) * abs(simple_char_fn_im(p, Y, freq(k))))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, abs(max(real_of_num(0), min(real_of_num(1), a)) - max(real_of_num(0), min(real_of_num(1), b))) <= abs(a - b)
+      #|  abs((z : Real) - (y : Real)) * inv((h : Real))
+      #|  abs(inv((h : Real))) == inv(h)
+      #|  real_of_num(1) - (a : Real) - (real_of_num(1) - (b : Real)) == b - a
+      #|  real_of_num(1) - ((y : Real) - (x : Real)) / (h : Real)
+      #|  real_of_num(1) - ((z : Real) - (x : Real)) / (h : Real)
+      #|  abs(real_of_num(1) - ((z : Real) - (x : Real)) / (h : Real) - (real_of_num(1) - ((y : Real) - x) / h))
+      #|  (z : Real)
+      #|  (e : Real) * (h : Real)
+      #|  (e : Real)
+      #|  \226\136\128 x : Real, \226\136\128 h : Real, \226\136\128 y : Real, real_of_num(0) < h \226\134\146 real_continuous((y : Real) => max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (y - x) / h)), atreal(y))
+      #|  real_of_num(1) <= real_of_num(1) - ((y : Real) - (x : Real)) / (h : Real)
+      #|  ((a : Real) * (b : Real) <= real_of_num(0)) == (real_of_num(0) <= -a * b)
+      #|  ((y : Real) - (x : Real)) / (h : Real) <= real_of_num(0)
+      #|  (y : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, \226\136\128 x : Real, \226\136\128 h : Real, simple_rv(p, Y) && real_of_num(0) < h \226\134\146 simple_cdf(p, Y, x) <= simple_expectation(p, (a : A) => max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (Y(a) - x) / h)))
+      #|  real_of_num(1) < ((y : Real) - (x : Real)) / (h : Real)
+      #|  (y : Real)
+      #|  real_of_num(1) <= real_of_num(1) - ((y : Real) - (x : Real)) / (h : Real)
+      #|  ((a : Real) * (b : Real) <= real_of_num(0)) == (real_of_num(0) <= -a * b)
+      #|  ((y : Real) - (x : Real)) / (h : Real) <= real_of_num(0)
+      #|  (y : Real)
+      #|  \226\136\128 x : Real, \226\136\128 h : Real, real_of_num(0) < h \226\134\146 std_normal_cdf(x) <= real_integral(UNIV, (y : Real) => max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (y - x) / h)) * std_normal_density(y)) && real_integral(UNIV, (y : Real) => max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (y - x) / h)) * std_normal_density(y)) <= std_normal_cdf(x + h)
+      #|  (x' : Real)
+      #|  (x' : Real)
+      #|  (UNIV : (Real) -> Bool)
+      #|  inv(sqrt(real_of_num(2) * pi))
+      #|  real_integral(real_interval([((x : Real), (y : Real))]), std_normal_density)
+      #|  (y : Real)
+      #|  (x : Real)
       #|  std_normal_density
-      #|  abs(real_integral (real_interval [x,y]) std_normal_density)
-      #|  &0 < inv(sqrt(&2 * pi))
-      #|  (std_normal_cdf x +\n      real_integral (real_interval [x,y]) std_normal_density) -\n     std_normal_cdf x =\n     real_integral (real_interval [x,y]) std_normal_density
-      #|  y:real
-      #|  x:real
-      #|  forall x y. x <= y\n    ==> std_normal_cdf y - std_normal_cdf x <=\n        inv(sqrt(&2 * pi)) * (y - x)
-      #|  x + h:real
-      #|  x:real
-      #|  std_normal_cdf(x + h) - std_normal_cdf x
-      #|  h:real
-      #|  x:real
-      #|  (\\y. (g_up:real->real) y * std_normal_density y) =\n      (\\y. max (&0) (min (&1) (&1 - (y - x) / h)) * std_normal_density y)
-      #|  real_integral (:real) (\\y. (g_up:real->real) y * std_normal_density y) -\n     std_normal_cdf x <= inv(sqrt(&2 * pi)) * h
-      #|  sum(0..nn) (\\k. (a:num->real) k *\n       exp(--((freq:num->real) k pow 2 / &2)))
-      #|  y:real
-      #|  real_integral (:real) (\\y:real. (T':real->real) y *\n       std_normal_density y)
-      #|  M:real
-      #|  e:real
-      #|  BB:real
-      #|  T':real->real
-      #|  g_up:real->real
-      #|  abs(real_integral (:real) (\\y. (T':real->real) y * std_normal_density y) -\n      real_integral (:real) (\\y. (g_up:real->real) y * std_normal_density y)) <=\n     e / &6 + &2 * BB / M pow 2
-      #|  abs(simple_expectation (p:A prob_space) (\\a:A. (T':real->real)\n      ((Y:A->real) a)) -\n      real_integral (:real) (\\y. T' y * std_normal_density y)) <=\n     sum(0..nn)\n       (\\k. abs((a:num->real) k) *\n            abs(simple_char_fn_re p Y ((freq:num->real) k) -\n                exp(--((freq k) pow 2 / &2))) +\n            abs((b:num->real) k) * abs(simple_char_fn_im p Y (freq k)))
+      #|  abs(real_integral(real_interval([((x : Real), (y : Real))]), std_normal_density))
+      #|  real_of_num(0) < inv(sqrt(real_of_num(2) * pi))
+      #|  std_normal_cdf((x : Real)) + real_integral(real_interval([(x, (y : Real))]), std_normal_density) - std_normal_cdf(x) == real_integral(real_interval([(x, y)]), std_normal_density)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 std_normal_cdf(y) - std_normal_cdf(x) <= inv(sqrt(real_of_num(2) * pi)) * (y - x)
+      #|  (x : Real) + (h : Real)
+      #|  (x : Real)
+      #|  std_normal_cdf((x : Real) + (h : Real)) - std_normal_cdf(x)
+      #|  (h : Real)
+      #|  (x : Real)
+      #|  ((y : Real) => (g_up : (Real) -> Real)(y) * std_normal_density(y)) == ((y : Real) => max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (y - (x : Real)) / (h : Real))) * std_normal_density(y))
+      #|  real_integral(UNIV, (y : Real) => (g_up : (Real) -> Real)(y) * std_normal_density(y)) - std_normal_cdf((x : Real)) <= inv(sqrt(real_of_num(2) * pi)) * (h : Real)
+      #|  sum(op_dot_dot(0, (nn : Num)), (k : Num) => (a : (Num) -> Real)(k) * exp(-(pow((freq : (Num) -> Real)(k), 2) / real_of_num(2))))
+      #|  (y : Real)
+      #|  real_integral(UNIV, (y : Real) => (T' : (Real) -> Real)(y) * std_normal_density(y))
+      #|  (M : Real)
+      #|  (e : Real)
+      #|  (BB : Real)
+      #|  (T' : (Real) -> Real)
+      #|  (g_up : (Real) -> Real)
+      #|  abs(real_integral(UNIV, (y : Real) => (T' : (Real) -> Real)(y) * std_normal_density(y)) - real_integral(UNIV, (y : Real) => (g_up : (Real) -> Real)(y) * std_normal_density(y))) <= (e : Real) / real_of_num(6) + real_of_num(2) * ((BB : Real) / pow((M : Real), 2))
+      #|  abs(simple_expectation((p : Prob_space[A]), (a : A) => (T' : (Real) -> Real)((Y : (A) -> Real)(a))) - real_integral(UNIV, (y : Real) => T'(y) * std_normal_density(y))) <= sum(op_dot_dot(0, (nn : Num)), (k : Num) => abs((a : (Num) -> Real)(k)) * abs(simple_char_fn_re(p, Y, (freq : (Num) -> Real)(k)) - exp(-(pow(freq(k), 2) / real_of_num(2)))) + abs((b : (Num) -> Real)(k)) * abs(simple_char_fn_im(p, Y, freq(k))))
       #|  0
-      #|  y:real
-      #|  M:real
-      #|  e:real
-      #|  CC:real
-      #|  BB:real
-      #|  T':real->real
-      #|  g_up:real->real
-      #|  \\n:num. (Y:A->real)
-      #|  p:A prob_space
-      #|  abs(simple_expectation (p:A prob_space) (\\a:A. (g_up:real->real)\n      ((Y:A->real) a)) -\n      simple_expectation p (\\a. (T':real->real) (Y a))) <=\n     e / &6 + &2 * BB * CC / M pow 2
-      #|  abs(simple_expectation (p:A prob_space) (\\a:A. (g_up:real->real)\n       ((Y:A->real) a)) -\n         simple_expectation p (\\a. (T':real->real) (Y a))) +\n     abs(simple_expectation p (\\a. T' (Y a)) -\n         real_integral (:real) (\\y. T' y * std_normal_density y)) +\n     abs(real_integral (:real) (\\y. T' y * std_normal_density y) -\n         real_integral (:real) (\\y. g_up y * std_normal_density y)) +\n     (real_integral (:real) (\\y. g_up y * std_normal_density y) -\n      std_normal_cdf x)
-      #|  a <= b ==> a - c <= b - c
-      #|  simple_expectation (p:A prob_space)\n    (\\a:A. (g_up:real->real) ((Y:A->real) a)) - std_normal_cdf x
-      #|  T' = \\y:real. sum(0..nn) (\\k. (a:num->real) k *\n    cos((freq:num->real) k * y) + (b:num->real) k * sin(freq k * y))
-      #|  g_up = \\y:real. max (&0) (min (&1) (&1 - (y - x) / h))
-      #|  forall p:A prob_space Y x h M CC BB e\n    (nn:num) (a:num->real) (b:num->real) (freq:num->real).\n    simple_rv p Y /\\ &0 < h /\\ &0 < M /\\ &0 < CC /\\ &0 < BB /\\ &0 < e /\\\n    simple_expectation p (\\z. Y z pow 2) <= CC /\\\n    (forall y:real. abs(sum(0..nn) (\\k. a k * cos(freq k * y) +\n                                    b k * sin(freq k * y))) <= BB) /\\\n    (forall y:real. abs(max (&0) (min (&1) (&1 - (y - x) / h))) <= BB) /\\\n    (forall y:real. abs y <= M ==>\n      abs(max (&0) (min (&1) (&1 - (y - x) / h)) -\n          sum(0..nn) (\\k. a k * cos(freq k * y) +\n                           b k * sin(freq k * y))) < e / &6)\n    ==> simple_cdf p Y x - std_normal_cdf x <=\n        sum(0..nn)\n          (\\k. abs(a k) *\n               abs(simple_char_fn_re p Y (freq k) -\n                   exp(--(freq k pow 2 / &2))) +\n               abs(b k) * abs(simple_char_fn_im p Y (freq k))) +\n        (e / &6 + &2 * BB * CC / M pow 2) +\n        (e / &6 + &2 * BB / M pow 2) +\n        inv(sqrt(&2 * pi)) * h
-      #|  abs(y - w:real) = abs(w - y)
-      #|  abs(inv h) = inv h
-      #|  (x - w) - (x - y:real) = y - w
-      #|  (x - y:real) / h
-      #|  (x - w:real) / h
-      #|  abs((x - w:real) / h - (x - y) / h)
-      #|  w:real
-      #|  e * (h:real)
-      #|  e:real
-      #|  forall x h y:real. &0 < h\n    ==> (\\y. max (&0) (min (&1) ((x - y) / h))) real_continuous atreal y
-      #|  y:real
-      #|  &0 <= a ==> &0 <= min (&1) a
-      #|  &0 <= a /\\ a <= &1 ==> max (&0) a <= &1
-      #|  y:real
-      #|  forall p:A prob_space Y x h.\n    simple_rv p Y /\\ &0 < h\n    ==> simple_expectation p (\\a. max (&0) (min (&1) ((x - Y a) / h)))\n        <= simple_cdf p Y x
-      #|  (x - y) / h < &0
-      #|  y:real
-      #|  &1 <= (x - y) / h
-      #|  y:real
-      #|  forall x h. &0 < h\n    ==> std_normal_cdf(x - h) <=\n        real_integral (:real)\n          (\\y. max (&0) (min (&1) ((x - y) / h)) * std_normal_density y) /\\\n        real_integral (:real)\n          (\\y. max (&0) (min (&1) ((x - y) / h)) * std_normal_density y) <=\n        std_normal_cdf x
-      #|  x:real
-      #|  x - h:real
-      #|  std_normal_cdf x - std_normal_cdf(x - h)
-      #|  h:real
-      #|  x:real
-      #|  (\\y. (g_low:real->real) y * std_normal_density y) =\n      (\\y. max (&0) (min (&1) ((x - y) / h)) * std_normal_density y)
-      #|  std_normal_cdf x -\n     real_integral (:real) (\\y. (g_low:real->real) y * std_normal_density y) <=\n     inv(sqrt(&2 * pi)) * h
-      #|  sum(0..nn) (\\k. (a:num->real) k *\n       exp(--((freq:num->real) k pow 2 / &2)))
-      #|  y:real
-      #|  real_integral (:real) (\\y:real. (T':real->real) y *\n       std_normal_density y)
-      #|  M:real
-      #|  e:real
-      #|  BB:real
-      #|  T':real->real
-      #|  g_low:real->real
-      #|  abs(real_integral (:real) (\\y. (T':real->real) y * std_normal_density y) -\n      real_integral (:real) (\\y. (g_low:real->real) y * std_normal_density y)) <=\n     e / &6 + &2 * BB / M pow 2
-      #|  abs(simple_expectation (p:A prob_space) (\\a:A. (T':real->real)\n      ((Y:A->real) a)) -\n      real_integral (:real) (\\y. T' y * std_normal_density y)) <=\n     sum(0..nn)\n       (\\k. abs((a:num->real) k) *\n            abs(simple_char_fn_re p Y ((freq:num->real) k) -\n                exp(--((freq k) pow 2 / &2))) +\n            abs((b:num->real) k) * abs(simple_char_fn_im p Y (freq k)))
+      #|  (y : Real)
+      #|  (M : Real)
+      #|  (e : Real)
+      #|  (CC : Real)
+      #|  (BB : Real)
+      #|  (T' : (Real) -> Real)
+      #|  (g_up : (Real) -> Real)
+      #|  (n : Num) => (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  abs(simple_expectation((p : Prob_space[A]), (a : A) => (g_up : (Real) -> Real)((Y : (A) -> Real)(a))) - simple_expectation(p, (a : A) => (T' : (Real) -> Real)(Y(a)))) <= (e : Real) / real_of_num(6) + real_of_num(2) * ((BB : Real) * ((CC : Real) / pow((M : Real), 2)))
+      #|  abs(simple_expectation((p : Prob_space[A]), (a : A) => (g_up : (Real) -> Real)((Y : (A) -> Real)(a))) - simple_expectation(p, (a : A) => (T' : (Real) -> Real)(Y(a)))) + (abs(simple_expectation(p, (a : A) => T'(Y(a))) - real_integral(UNIV, (y : Real) => T'(y) * std_normal_density(y))) + (abs(real_integral(UNIV, (y : Real) => T'(y) * std_normal_density(y)) - real_integral(UNIV, (y : Real) => g_up(y) * std_normal_density(y))) + (real_integral(UNIV, (y : Real) => g_up(y) * std_normal_density(y)) - std_normal_cdf((x : Real)))))
+      #|  (a : Real) <= (b : Real) \226\134\146 a - (c : Real) <= b - c
+      #|  simple_expectation((p : Prob_space[A]), (a : A) => (g_up : (Real) -> Real)((Y : (A) -> Real)(a))) - std_normal_cdf((x : Real))
+      #|  (T' : (Real) -> Real) == ((y : Real) => sum(op_dot_dot(0, (nn : Num)), (k : Num) => (a : (Num) -> Real)(k) * cos((freq : (Num) -> Real)(k) * y) + (b : (Num) -> Real)(k) * sin(freq(k) * y)))
+      #|  (g_up : (Real) -> Real) == ((y : Real) => max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (y - (x : Real)) / (h : Real))))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, \226\136\128 x : Real, \226\136\128 h : Real, \226\136\128 M : Real, \226\136\128 CC : Real, \226\136\128 BB : Real, \226\136\128 e : Real, \226\136\128 nn : Num, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 freq : (Num) -> Real, simple_rv(p, Y) && real_of_num(0) < h && real_of_num(0) < M && real_of_num(0) < CC && real_of_num(0) < BB && real_of_num(0) < e && simple_expectation(p, (z : A) => pow(Y(z), 2)) <= CC && (\226\136\128 y : Real, abs(sum(op_dot_dot(0, nn), (k : Num) => a(k) * cos(freq(k) * y) + b(k) * sin(freq(k) * y))) <= BB) && (\226\136\128 y : Real, abs(max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (y - x) / h))) <= BB) && (\226\136\128 y : Real, abs(y) <= M \226\134\146 abs(max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (y - x) / h)) - sum(op_dot_dot(0, nn), (k : Num) => a(k) * cos(freq(k) * y) + b(k) * sin(freq(k) * y))) < e / real_of_num(6)) \226\134\146 simple_cdf(p, Y, x) - std_normal_cdf(x) <= sum(op_dot_dot(0, nn), (k : Num) => abs(a(k)) * abs(simple_char_fn_re(p, Y, freq(k)) - exp(-(pow(freq(k), 2) / real_of_num(2)))) + abs(b(k)) * abs(simple_char_fn_im(p, Y, freq(k)))) + (e / real_of_num(6) + real_of_num(2) * (BB * (CC / pow(M, 2))) + (e / real_of_num(6) + real_of_num(2) * (BB / pow(M, 2)) + inv(sqrt(real_of_num(2) * pi)) * h))
+      #|  abs((y : Real) - (w : Real)) == abs(w - y)
+      #|  abs(inv((h : Real))) == inv(h)
+      #|  (x : Real) - (w : Real) - (x - (y : Real)) == y - w
+      #|  ((x : Real) - (y : Real)) / (h : Real)
+      #|  ((x : Real) - (w : Real)) / (h : Real)
+      #|  abs(((x : Real) - (w : Real)) / (h : Real) - (x - (y : Real)) / h)
+      #|  (w : Real)
+      #|  (e : Real) * (h : Real)
+      #|  (e : Real)
+      #|  \226\136\128 x : Real, \226\136\128 h : Real, \226\136\128 y : Real, real_of_num(0) < h \226\134\146 real_continuous((y : Real) => max(real_of_num(0), min(real_of_num(1), (x - y) / h)), atreal(y))
+      #|  (y : Real)
+      #|  real_of_num(0) <= (a : Real) \226\134\146 real_of_num(0) <= min(real_of_num(1), a)
+      #|  real_of_num(0) <= (a : Real) && a <= real_of_num(1) \226\134\146 max(real_of_num(0), a) <= real_of_num(1)
+      #|  (y : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, \226\136\128 x : Real, \226\136\128 h : Real, simple_rv(p, Y) && real_of_num(0) < h \226\134\146 simple_expectation(p, (a : A) => max(real_of_num(0), min(real_of_num(1), (x - Y(a)) / h))) <= simple_cdf(p, Y, x)
+      #|  ((x : Real) - (y : Real)) / (h : Real) < real_of_num(0)
+      #|  (y : Real)
+      #|  real_of_num(1) <= ((x : Real) - (y : Real)) / (h : Real)
+      #|  (y : Real)
+      #|  \226\136\128 x : Real, \226\136\128 h : Real, real_of_num(0) < h \226\134\146 std_normal_cdf(x - h) <= real_integral(UNIV, (y : Real) => max(real_of_num(0), min(real_of_num(1), (x - y) / h)) * std_normal_density(y)) && real_integral(UNIV, (y : Real) => max(real_of_num(0), min(real_of_num(1), (x - y) / h)) * std_normal_density(y)) <= std_normal_cdf(x)
+      #|  (x : Real)
+      #|  (x : Real) - (h : Real)
+      #|  std_normal_cdf((x : Real)) - std_normal_cdf(x - (h : Real))
+      #|  (h : Real)
+      #|  (x : Real)
+      #|  ((y : Real) => (g_low : (Real) -> Real)(y) * std_normal_density(y)) == ((y : Real) => max(real_of_num(0), min(real_of_num(1), ((x : Real) - y) / (h : Real))) * std_normal_density(y))
+      #|  std_normal_cdf((x : Real)) - real_integral(UNIV, (y : Real) => (g_low : (Real) -> Real)(y) * std_normal_density(y)) <= inv(sqrt(real_of_num(2) * pi)) * (h : Real)
+      #|  sum(op_dot_dot(0, (nn : Num)), (k : Num) => (a : (Num) -> Real)(k) * exp(-(pow((freq : (Num) -> Real)(k), 2) / real_of_num(2))))
+      #|  (y : Real)
+      #|  real_integral(UNIV, (y : Real) => (T' : (Real) -> Real)(y) * std_normal_density(y))
+      #|  (M : Real)
+      #|  (e : Real)
+      #|  (BB : Real)
+      #|  (T' : (Real) -> Real)
+      #|  (g_low : (Real) -> Real)
+      #|  abs(real_integral(UNIV, (y : Real) => (T' : (Real) -> Real)(y) * std_normal_density(y)) - real_integral(UNIV, (y : Real) => (g_low : (Real) -> Real)(y) * std_normal_density(y))) <= (e : Real) / real_of_num(6) + real_of_num(2) * ((BB : Real) / pow((M : Real), 2))
+      #|  abs(simple_expectation((p : Prob_space[A]), (a : A) => (T' : (Real) -> Real)((Y : (A) -> Real)(a))) - real_integral(UNIV, (y : Real) => T'(y) * std_normal_density(y))) <= sum(op_dot_dot(0, (nn : Num)), (k : Num) => abs((a : (Num) -> Real)(k)) * abs(simple_char_fn_re(p, Y, (freq : (Num) -> Real)(k)) - exp(-(pow(freq(k), 2) / real_of_num(2)))) + abs((b : (Num) -> Real)(k)) * abs(simple_char_fn_im(p, Y, freq(k))))
       #|  0
-      #|  y:real
-      #|  M:real
-      #|  e:real
-      #|  CC:real
-      #|  BB:real
-      #|  T':real->real
-      #|  g_low:real->real
-      #|  \\n:num. (Y:A->real)
-      #|  p:A prob_space
-      #|  abs(simple_expectation (p:A prob_space) (\\a:A. (g_low:real->real)\n      ((Y:A->real) a)) -\n      simple_expectation p (\\a. (T':real->real) (Y a))) <=\n     e / &6 + &2 * BB * CC / M pow 2
-      #|  abs(simple_expectation (p:A prob_space) (\\a:A. (g_low:real->real)\n       ((Y:A->real) a)) -\n         simple_expectation p (\\a. (T':real->real) (Y a))) +\n     abs(simple_expectation p (\\a. T' (Y a)) -\n         real_integral (:real) (\\y. T' y * std_normal_density y)) +\n     abs(real_integral (:real) (\\y. T' y * std_normal_density y) -\n         real_integral (:real) (\\y. g_low y * std_normal_density y)) +\n     (std_normal_cdf x -\n      real_integral (:real) (\\y. g_low y * std_normal_density y))
-      #|  a <= b ==> c - b <= c - a
-      #|  std_normal_cdf x -\n    simple_expectation (p:A prob_space)\n      (\\a:A. (g_low:real->real) ((Y:A->real) a))
-      #|  T' = \\y:real. sum(0..nn) (\\k. (a:num->real) k *\n    cos((freq:num->real) k * y) + (b:num->real) k * sin(freq k * y))
-      #|  g_low = \\y:real. max (&0) (min (&1) ((x - y) / h))
-      #|  forall p:A prob_space Y x h M CC BB e\n    (nn:num) (a:num->real) (b:num->real) (freq:num->real).\n    simple_rv p Y /\\ &0 < h /\\ &0 < M /\\ &0 < CC /\\ &0 < BB /\\ &0 < e /\\\n    simple_expectation p (\\z. Y z pow 2) <= CC /\\\n    (forall y:real. abs(sum(0..nn) (\\k. a k * cos(freq k * y) +\n                                    b k * sin(freq k * y))) <= BB) /\\\n    (forall y:real. abs(max (&0) (min (&1) ((x - y) / h))) <= BB) /\\\n    (forall y:real. abs y <= M ==>\n      abs(max (&0) (min (&1) ((x - y) / h)) -\n          sum(0..nn) (\\k. a k * cos(freq k * y) +\n                           b k * sin(freq k * y))) < e / &6)\n    ==> std_normal_cdf x - simple_cdf p Y x <=\n        sum(0..nn)\n          (\\k. abs(a k) *\n               abs(simple_char_fn_re p Y (freq k) -\n                   exp(--(freq k pow 2 / &2))) +\n               abs(b k) * abs(simple_char_fn_im p Y (freq k))) +\n        (e / &6 + &2 * BB * CC / M pow 2) +\n        (e / &6 + &2 * BB / M pow 2) +\n        inv(sqrt(&2 * pi)) * h
-      #|  ~(&1 + v pow 2 = &0)
-      #|  (&1 - exp(--v * TT) * (cos TT + v * sin TT)) / (&1 + v pow 2) =\n     exp(--v * TT) * (--v * sin TT - cos TT) * inv(&1 + v pow 2) -\n     exp(--v * &0) * (--v * sin(&0) - cos(&0)) * inv(&1 + v pow 2)
-      #|  &0 < x ==> ~(x = &0)
-      #|  ~(&1 + v pow 2 = &0)
-      #|  forall v TT. &0 < v /\\ &0 <= TT ==>\n   ((\\t. sin(t) * exp(--v * t)) has_real_integral\n    (&1 - exp(--v * TT) * (cos TT + v * sin TT)) / (&1 + v pow 2))\n   (real_interval[&0, TT])
-      #|  ~(t = &0) ==> --inv t * (--t * e) = e
-      #|  exp(--x * t) = --inv(t) * (--t * exp(--x * t))
-      #|  ~(t = &0) ==>\n     --inv t * e - --inv t * &1 = (&1 - e) / t
-      #|  (&1 - exp(--s * t)) / t =\n     (--inv(t)) * exp(--s * t) - (--inv(t)) * exp(--(&0) * t)
-      #|  ~(t = &0)
-      #|  forall s t. &0 <= s /\\ &0 < t ==>\n   ((\\u. exp(--u * t)) has_real_integral ((&1 - exp(--s * t)) / t))\n   (real_interval[&0, s])
-      #|  atn(s) = atn(s) - atn(&0)
-      #|  forall s. &0 <= s ==>\n   ((\\u. inv(&1 + u pow 2)) has_real_integral atn(s))\n   (real_interval[&0, s])
-      #|  (:real^1)
-      #|  (\\z:real^(1,1)finite_sum.\n         lift(--drop(sndcart z) * drop(fstcart z))) =\n       (\\z. --(lift((sndcart z:real^1) dot (fstcart z:real^1))))
-      #|  (\\z:real^(1,1)finite_sum.\n        lift(exp(--drop(sndcart z) * drop(fstcart z)))) =\n      (lift o exp o drop) o\n      (\\z:real^(1,1)finite_sum.\n        lift(--drop(sndcart z) * drop(fstcart z)))
-      #|  (:real^1)
-      #|  (\\z:real^(1,1)finite_sum. lift(sin(drop(fstcart z)))) =\n      (lift o sin o drop) o (fstcart:real^(1,1)finite_sum->real^1)
-      #|  (\\z:real^(1,1)finite_sum. lift(sin(drop(fstcart z)) *\n       exp(--drop(sndcart z) * drop(fstcart z)))) =\n     (\\z. lift(((lift(sin(drop(fstcart z))):real^1) dot\n                (lift(exp(--drop(sndcart z) * drop(fstcart z))):real^1))))
-      #|  (\\z. lift(sin(drop(fstcart z)) * exp(--drop(sndcart z) * drop(fstcart z))))\n     continuous_on (:real^(1,1)finite_sum)
-      #|  (:real^(1,1)finite_sum)
-      #|  lift s:real^1
-      #|  lift(&0):real^1
-      #|  lift TT:real^1
-      #|  lift(&0):real^1
-      #|  \\t u:real^1. lift(sin(drop t) * exp(--drop u * drop t))
-      #|  forall s TT. &0 <= s /\\ &0 <= TT ==>\n    integral (interval [lift (&0),lift TT])\n      (\\t. integral (interval [lift (&0),lift s])\n             (\\u. lift (sin (drop t) * exp (--drop u * drop t)))) =\n    integral (interval [lift (&0),lift s])\n      (\\u. integral (interval [lift (&0),lift TT])\n             (\\t. lift (sin (drop t) * exp (--drop u * drop t))))
-      #|  forall f a b y. (f has_real_integral y) (real_interval[a,b]) ==>\n    integral (interval[lift a, lift b]) (\\x. lift(f(drop x))) = lift y
-      #|  t:real
-      #|  s:real
-      #|  lift((&1 - exp(--s * t)) / t)
-      #|  (\\u:real^1. lift(exp(--drop u * t))) integrable_on interval[lift(&0), lift s]
-      #|  integral (interval[lift(&0), lift s]) (\\u:real^1. lift(exp(--drop u * t)))\n     = lift((&1 - exp(--s * t)) / t)
-      #|  (\\u:real^1. lift (sin t * exp (--drop u * t))) =\n     (\\u. sin(t) % lift(exp(--drop u * t)))
-      #|  &0 < t
-      #|  t = &0
-      #|  forall s t. &0 <= s /\\ &0 <= t ==>\n    integral (interval [lift (&0),lift s])\n      (\\u. lift (sin t * exp (--drop u * t))) =\n    lift (sin t * (&1 - exp (--s * t)) / t)
-      #|  &0 < u
-      #|  &1 - cos TT = --cos TT - --cos(&0)
-      #|  u = &0
-      #|  forall u TT. &0 <= u /\\ &0 <= TT ==>\n    integral (interval [lift (&0),lift TT])\n      (\\t. lift (sin (drop t) * exp (--u * drop t))) =\n    lift ((&1 - exp (--u * TT) * (cos TT + u * sin TT)) / (&1 + u pow 2))
-      #|  forall s t. sin(t) * (&1 - exp(--(s * t))) * inv(t) =\n         (if t = &0 then &1 else sin(t) * inv(t)) * (&1 - exp(--(s * t)))
-      #|  \\t. (if t = &0 then &1 else sin t * inv t) *\n                   (&1 - exp(--(s * t)))
-      #|  forall s TT. &0 <= s /\\ &0 <= TT ==>\n    (\\t. sin t * (&1 - exp(--(s * t))) * inv t)\n      real_integrable_on real_interval[&0,TT]
-      #|  u:real
-      #|  (--) = (\\x:real. --x)
-      #|  forall s TT. &0 <= s /\\ &0 <= TT ==>\n    (\\u. (&1 - exp(--u * TT) * (cos TT + u * sin TT)) / (&1 + u pow 2))\n      real_integrable_on real_interval[&0,s]
-      #|  u IN interval [lift (&0),lift s]
-      #|  &0 <= drop u
-      #|  TT:real
-      #|  drop(u:real^1)
-      #|  u:real^1
-      #|  TT:real
-      #|  s:real
-      #|  integral (interval [lift (&0),lift TT])\n       (\\t. integral (interval [lift (&0),lift s])\n              (\\u. lift (sin (drop t) * exp (--drop u * drop t)))) =\n     integral (interval [lift (&0),lift s])\n       (\\u. integral (interval [lift (&0),lift TT])\n              (\\t. lift (sin (drop t) * exp (--drop u * drop t))))
-      #|  t IN interval [lift (&0),lift TT]
-      #|  &0 <= s /\\ &0 <= drop t
-      #|  drop(t:real^1)
-      #|  s:real
-      #|  t:real^1
-      #|  integral (interval [lift (&0),lift TT])\n       (\\x. lift (sin (drop x) * (&1 - exp (--(s * drop x))) * inv (drop x))) =\n     integral (interval [lift (&0),lift TT])\n       (\\t. integral (interval [lift (&0),lift s])\n              (\\u. lift (sin (drop t) * exp (--drop u * drop t))))
-      #|  (\\u. (&1 - exp(--u * TT) * (cos TT + u * sin TT)) /\n    (&1 + u pow 2)) real_integrable_on real_interval[&0,s]
-      #|  (\\t. sin t * (&1 - exp(--(s * t))) * inv t)\n    real_integrable_on real_interval[&0,TT]
-      #|  &0 <= TT
-      #|  forall s TT. &0 <= s /\\ &0 < TT ==>\n    real_integral (real_interval[&0,TT])\n      (\\t. sin t * (&1 - exp(--(s * t))) * inv t) =\n    real_integral (real_interval[&0,s])\n      (\\u. (&1 - exp(--u * TT) * (cos TT + u * sin TT)) / (&1 + u pow 2))
-      #|  &0 < &1 + u pow 2
-      #|  --(&2 * u) / (&1 + u pow 2) pow 2
-      #|  u:real
-      #|  (\\u:real. inv (&1 + u pow 2)) =\n       (\\u. inv((\\u. &1 + u pow 2) u))
-      #|  (--) = (\\x:real. --x)
-      #|  (\\u. exp(--u * TT) * (cos TT + u * sin TT) / (&1 + u pow 2))\n       real_integrable_on real_interval[&0,s]
-      #|  atn(s)
-      #|  (\\u. inv(&1 + u pow 2)) real_integrable_on\n    real_interval[&0,s]
-      #|  forall u. (&1 - exp(--u * TT) * (cos TT + u * sin TT)) / (&1 + u pow 2) =\n         inv(&1 + u pow 2) -\n         exp(--u * TT) * (cos TT + u * sin TT) / (&1 + u pow 2)
-      #|  forall s TT. &0 <= s /\\ &0 <= TT ==>\n    real_integral (real_interval[&0,s])\n      (\\u. (&1 - exp(--u * TT) * (cos TT + u * sin TT)) / (&1 + u pow 2)) =\n    atn(s) -\n    real_integral (real_interval[&0,s])\n      (\\u. exp(--u * TT) * (cos TT + u * sin TT) / (&1 + u pow 2))
-      #|  t:real
-      #|  real_interval[&0,TT]
-      #|  {&0:real}
-      #|  \\t:real. sin t * inv t
-      #|  \\t:real. if t = &0 then &1 else sin t / t
-      #|  forall TT. &0 < TT ==>\n   (\\t. sin t * inv t) real_integrable_on real_interval[&0,TT]
-      #|  t:real
-      #|  real_interval[&0,TT]
-      #|  {&0:real}
-      #|  \\t:real. sin t * exp(--(TT * t)) * inv t
-      #|  \\t:real. (if t = &0 then &1 else sin t / t) *\n                 exp(--(TT * t))
-      #|  forall TT. &0 < TT ==>\n   (\\t. sin t * exp(--(TT * t)) * inv t) real_integrable_on\n   real_interval[&0,TT]
-      #|  t:real
-      #|  (\\t. sin t * (&1 - exp(--(TT * t))) * inv t) =\n       (\\t. sin t * inv t - sin t * exp(--(TT * t)) * inv t)
-      #|  t:real
-      #|  (\\t. sin t * inv t) =\n     (\\t. (sin t * (&1 - exp(--(TT * t))) * inv t) +\n          (sin t * exp(--(TT * t)) * inv t))
-      #|  forall TT. &0 < TT ==>\n   real_integral (real_interval[&0,TT]) (\\t. sin t * inv t) =\n   real_integral (real_interval[&0,TT])\n     (\\t. sin t * (&1 - exp(--(TT * t))) * inv t) +\n   real_integral (real_interval[&0,TT])\n     (\\t. sin t * exp(--(TT * t)) * inv t)
-      #|  inv TT * TT = &1
-      #|  x:real
-      #|  \\x:real. inv TT * (TT * exp(--(TT * x)))
-      #|  --a - --(&1) = &1 - a
-      #|  TT:real
-      #|  &0
-      #|  \\x:real. TT * exp(--(TT * x))
-      #|  \\x:real. --exp(--(TT * x))
-      #|  ((\\x. TT * exp(--(TT * x))) has_real_integral\n      (&1 - exp(--(TT * TT)))) (real_interval[&0,TT])
-      #|  forall TT. &0 < TT ==>\n   ((\\t. exp(--(TT * t))) has_real_integral\n    inv TT * (&1 - exp(--(TT * TT)))) (real_interval[&0,TT])
-      #|  (--(TT * TT)):real
-      #|  real_integral (real_interval[&0,TT]) (\\t. exp(--(TT * t))) =\n      inv TT * (&1 - exp(--(TT * TT)))
-      #|  x:real
-      #|  x = &0
-      #|  sin x * exp(--(TT * x)) * inv x =\n                  (sin x * inv x) * exp(--(TT * x))
-      #|  x:real
-      #|  real_integral (real_interval[&0,TT])\n    (\\t. exp(--(TT * t)))
-      #|  forall TT. &0 < TT ==>\n   abs(real_integral (real_interval[&0,TT])\n       (\\t. sin t * exp(--(TT * t)) * inv t)) <= inv TT
-      #|  abs TT = TT
-      #|  abs(inv TT)
-      #|  atn TT - pi / &2 = --(atn(inv TT))
-      #|  TT:real
-      #|  forall TT. &0 < TT ==> abs(atn TT - pi / &2) <= inv TT
-      #|  (--(TT * TT)):real
-      #|  real_integral (real_interval[&0,TT]) (\\t. exp(--(TT * t))) =\n      inv TT * (&1 - exp(--(TT * TT)))
-      #|  (\\t. exp(--(TT * t))) real_integrable_on real_interval[&0,TT]
-      #|  u - &1 / &3
-      #|  &0 < &2
-      #|  &3 / &2 * (&1 + u pow 2) = &3 * (&1 + u pow 2) / &2
-      #|  u:real
-      #|  &0 < &1 + u pow 2
-      #|  TT:real
-      #|  &0 <= u ==> abs u = u
-      #|  TT:real
-      #|  abs(cos TT) + abs(u * sin TT)
-      #|  (&1 + u) * inv(&1 + u pow 2)
-      #|  abs(inv(&1 + u pow 2)) = inv(&1 + u pow 2)
-      #|  u:real
-      #|  &0 < &1 + u pow 2
-      #|  x * y = y * x:real
-      #|  u:real
-      #|  u:real
-      #|  u:real
-      #|  (--) = (\\x:real. --x)
-      #|  (\\u. exp(--u * TT) * (cos TT + u * sin TT) / (&1 + u pow 2))\n      real_integrable_on real_interval[&0,TT]
-      #|  real_integral (real_interval[&0,TT])\n    (\\u. &3 / &2 * exp(--(TT * u)))
-      #|  forall TT. &0 < TT ==>\n   abs(real_integral (real_interval[&0,TT])\n       (\\u. exp(--u * TT) * (cos TT + u * sin TT) / (&1 + u pow 2)))\n   <= &3 / &2 * inv TT
-      #|  &0 <= inv TT
-      #|  inv TT + &3 / &2 * inv TT + inv TT
-      #|  abs(atn TT - pi / &2) +\n   abs(real_integral (real_interval[&0,TT])\n       (\\u. exp(--u * TT) * (cos TT + u * sin TT) / (&1 + u pow 2))) +\n   abs(real_integral (real_interval[&0,TT])\n       (\\t. sin t * exp(--(TT * t)) * inv t))
-      #|  TT:real
-      #|  TT:real
-      #|  TT:real
-      #|  TT:real
-      #|  TT:real
-      #|  forall TT. &0 < TT ==>\n   abs(real_integral (real_interval[&0,TT]) (\\t. sin t * inv t) - pi / &2)\n   <= &4 * inv TT
-      #|  &4 * inv TT = &4 / TT
-      #|  e * inv e = &1
-      #|  e * (&4 * inv e + &1) = &4 + e
-      #|  e * (&4 * inv e + &1)
-      #|  &4 < e * TT
-      #|  &4 * inv TT
-      #|  &0 + &1
-      #|  &4 * inv e + &1
-      #|  &0 < TT
-      #|  TT:real
-      #|  &4 * inv e + &1
-      #|  e:real
-      #|  ((\\TT. real_integral (real_interval[&0,TT]) (\\t. sin t * inv t))\n   ---> pi / &2) at_posinfinity
-      #|  &4 * inv B <= &4 * inv TT
-      #|  &4 * inv B + &4 * inv TT
-      #|  abs(real_integral (real_interval[&0,B]) (\\t. sin t * inv t) -\n                  pi / &2) +\n              abs(real_integral (real_interval[&0,TT]) (\\t. sin t * inv t) -\n                  pi / &2)
-      #|  a + b:real = c ==> c - a = b
-      #|  real_integral (real_interval[TT,B]) (\\t. sin t * inv t) =\n     real_integral (real_interval[&0,B]) (\\t. sin t * inv t) -\n     real_integral (real_interval[&0,TT]) (\\t. sin t * inv t)
-      #|  (\\t:real. sin t * inv t) real_integrable_on\n    real_interval[&0,B]
-      #|  &0 < B
-      #|  forall TT B. &0 < TT /\\ TT <= B ==>\n   abs(real_integral (real_interval[TT,B]) (\\t. sin t * inv t)) <=\n   &8 * inv TT
-      #|  (\\x:real. --inv x * sin(&2 * x)) = (\\x. --((\\x. sin(&2 * x) * inv x) x))
-      #|  --inv b * sin b pow 2 - --inv a * sin a pow 2 -\n      (sin a pow 2 * inv a - sin b pow 2 * inv b +\n       real_integral (real_interval [a,b]) (\\x. sin (&2 * x) * inv x)) =\n      --(real_integral (real_interval [a,b]) (\\x. sin (&2 * x) * inv x))
-      #|  2 - 1 = 1
+      #|  (y : Real)
+      #|  (M : Real)
+      #|  (e : Real)
+      #|  (CC : Real)
+      #|  (BB : Real)
+      #|  (T' : (Real) -> Real)
+      #|  (g_low : (Real) -> Real)
+      #|  (n : Num) => (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  abs(simple_expectation((p : Prob_space[A]), (a : A) => (g_low : (Real) -> Real)((Y : (A) -> Real)(a))) - simple_expectation(p, (a : A) => (T' : (Real) -> Real)(Y(a)))) <= (e : Real) / real_of_num(6) + real_of_num(2) * ((BB : Real) * ((CC : Real) / pow((M : Real), 2)))
+      #|  abs(simple_expectation((p : Prob_space[A]), (a : A) => (g_low : (Real) -> Real)((Y : (A) -> Real)(a))) - simple_expectation(p, (a : A) => (T' : (Real) -> Real)(Y(a)))) + (abs(simple_expectation(p, (a : A) => T'(Y(a))) - real_integral(UNIV, (y : Real) => T'(y) * std_normal_density(y))) + (abs(real_integral(UNIV, (y : Real) => T'(y) * std_normal_density(y)) - real_integral(UNIV, (y : Real) => g_low(y) * std_normal_density(y))) + (std_normal_cdf((x : Real)) - real_integral(UNIV, (y : Real) => g_low(y) * std_normal_density(y)))))
+      #|  (a : Real) <= (b : Real) \226\134\146 (c : Real) - b <= c - a
+      #|  std_normal_cdf((x : Real)) - simple_expectation((p : Prob_space[A]), (a : A) => (g_low : (Real) -> Real)((Y : (A) -> Real)(a)))
+      #|  (T' : (Real) -> Real) == ((y : Real) => sum(op_dot_dot(0, (nn : Num)), (k : Num) => (a : (Num) -> Real)(k) * cos((freq : (Num) -> Real)(k) * y) + (b : (Num) -> Real)(k) * sin(freq(k) * y)))
+      #|  (g_low : (Real) -> Real) == ((y : Real) => max(real_of_num(0), min(real_of_num(1), ((x : Real) - y) / (h : Real))))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, \226\136\128 x : Real, \226\136\128 h : Real, \226\136\128 M : Real, \226\136\128 CC : Real, \226\136\128 BB : Real, \226\136\128 e : Real, \226\136\128 nn : Num, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 freq : (Num) -> Real, simple_rv(p, Y) && real_of_num(0) < h && real_of_num(0) < M && real_of_num(0) < CC && real_of_num(0) < BB && real_of_num(0) < e && simple_expectation(p, (z : A) => pow(Y(z), 2)) <= CC && (\226\136\128 y : Real, abs(sum(op_dot_dot(0, nn), (k : Num) => a(k) * cos(freq(k) * y) + b(k) * sin(freq(k) * y))) <= BB) && (\226\136\128 y : Real, abs(max(real_of_num(0), min(real_of_num(1), (x - y) / h))) <= BB) && (\226\136\128 y : Real, abs(y) <= M \226\134\146 abs(max(real_of_num(0), min(real_of_num(1), (x - y) / h)) - sum(op_dot_dot(0, nn), (k : Num) => a(k) * cos(freq(k) * y) + b(k) * sin(freq(k) * y))) < e / real_of_num(6)) \226\134\146 std_normal_cdf(x) - simple_cdf(p, Y, x) <= sum(op_dot_dot(0, nn), (k : Num) => abs(a(k)) * abs(simple_char_fn_re(p, Y, freq(k)) - exp(-(pow(freq(k), 2) / real_of_num(2)))) + abs(b(k)) * abs(simple_char_fn_im(p, Y, freq(k)))) + (e / real_of_num(6) + real_of_num(2) * (BB * (CC / pow(M, 2))) + (e / real_of_num(6) + real_of_num(2) * (BB / pow(M, 2)) + inv(sqrt(real_of_num(2) * pi)) * h))
+      #|  !(real_of_num(1) + pow((v : Real), 2) == real_of_num(0))
+      #|  (real_of_num(1) - exp(-(v : Real) * (TT : Real)) * (cos(TT) + v * sin(TT))) / (real_of_num(1) + pow(v, 2)) == exp(-v * TT) * ((-v * sin(TT) - cos(TT)) * inv(real_of_num(1) + pow(v, 2))) - exp(-v * real_of_num(0)) * ((-v * sin(real_of_num(0)) - cos(real_of_num(0))) * inv(real_of_num(1) + pow(v, 2)))
+      #|  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+      #|  !(real_of_num(1) + pow((v : Real), 2) == real_of_num(0))
+      #|  \226\136\128 v : Real, \226\136\128 TT : Real, real_of_num(0) < v && real_of_num(0) <= TT \226\134\146 has_real_integral((t : Real) => sin(t) * exp(-v * t), (real_of_num(1) - exp(-v * TT) * (cos(TT) + v * sin(TT))) / (real_of_num(1) + pow(v, 2)), real_interval([(real_of_num(0), TT)]))
+      #|  !((t : Real) == real_of_num(0)) \226\134\146 -inv(t) * (-t * (e : Real)) == e
+      #|  exp(-(x : Real) * (t : Real)) == -inv(t) * (-t * exp(-x * t))
+      #|  !((t : Real) == real_of_num(0)) \226\134\146 -inv(t) * (e : Real) - -inv(t) * real_of_num(1) == (real_of_num(1) - e) / t
+      #|  (real_of_num(1) - exp(-(s : Real) * (t : Real))) / t == -inv(t) * exp(-s * t) - -inv(t) * exp(-real_of_num(0) * t)
+      #|  !((t : Real) == real_of_num(0))
+      #|  \226\136\128 s : Real, \226\136\128 t : Real, real_of_num(0) <= s && real_of_num(0) < t \226\134\146 has_real_integral((u : Real) => exp(-u * t), (real_of_num(1) - exp(-s * t)) / t, real_interval([(real_of_num(0), s)]))
+      #|  atn((s : Real)) == atn(s) - atn(real_of_num(0))
+      #|  \226\136\128 s : Real, real_of_num(0) <= s \226\134\146 has_real_integral((u : Real) => inv(real_of_num(1) + pow(u, 2)), atn(s), real_interval([(real_of_num(0), s)]))
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  ((z : Cart[Real, Finite_sum[Unit, Unit]]) => lift(-drop(sndcart(z)) * drop(fstcart(z)))) == ((z : Cart[Real, Finite_sum[Unit, Unit]]) => -lift(dot(sndcart(z), fstcart(z))))
+      #|  ((z : Cart[Real, Finite_sum[Unit, Unit]]) => lift(exp(-drop(sndcart(z)) * drop(fstcart(z))))) == o(o(lift, o(exp, drop)), (z : Cart[Real, Finite_sum[Unit, Unit]]) => lift(-drop(sndcart(z)) * drop(fstcart(z))))
+      #|  (UNIV : (Cart[Real, Unit]) -> Bool)
+      #|  ((z : Cart[Real, Finite_sum[Unit, Unit]]) => lift(sin(drop(fstcart(z))))) == o(o(lift, o(sin, drop)), fstcart)
+      #|  ((z : Cart[Real, Finite_sum[Unit, Unit]]) => lift(sin(drop(fstcart(z))) * exp(-drop(sndcart(z)) * drop(fstcart(z))))) == ((z : Cart[Real, Finite_sum[Unit, Unit]]) => lift(dot(lift(sin(drop(fstcart(z)))), lift(exp(-drop(sndcart(z)) * drop(fstcart(z)))))))
+      #|  continuous_on((z : Cart[Real, Finite_sum[Unit, Unit]]) => lift(sin(drop(fstcart(z))) * exp(-drop(sndcart(z)) * drop(fstcart(z)))), UNIV)
+      #|  (UNIV : (Cart[Real, Finite_sum[Unit, Unit]]) -> Bool)
+      #|  lift((s : Real))
+      #|  lift(real_of_num(0))
+      #|  lift((TT : Real))
+      #|  lift(real_of_num(0))
+      #|  (t : Cart[Real, Unit]) => (u : Cart[Real, Unit]) => lift(sin(drop(t)) * exp(-drop(u) * drop(t)))
+      #|  \226\136\128 s : Real, \226\136\128 TT : Real, real_of_num(0) <= s && real_of_num(0) <= TT \226\134\146 integral(interval([(lift(real_of_num(0)), lift(TT))]), (t : Cart[Real, Unit]) => integral(interval([(lift(real_of_num(0)), lift(s))]), (u : Cart[Real, Unit]) => lift(sin(drop(t)) * exp(-drop(u) * drop(t))))) == integral(interval([(lift(real_of_num(0)), lift(s))]), (u : Cart[Real, Unit]) => integral(interval([(lift(real_of_num(0)), lift(TT))]), (t : Cart[Real, Unit]) => lift(sin(drop(t)) * exp(-drop(u) * drop(t)))))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 y : Real, has_real_integral(f, y, real_interval([(a, b)])) \226\134\146 integral(interval([(lift(a), lift(b))]), (x : Cart[Real, Unit]) => lift(f(drop(x)))) == lift(y)
+      #|  (t : Real)
+      #|  (s : Real)
+      #|  lift((real_of_num(1) - exp(-(s : Real) * (t : Real))) / t)
+      #|  integrable_on((u : Cart[Real, Unit]) => lift(exp(-drop(u) * (t : Real))), interval([(lift(real_of_num(0)), lift((s : Real)))]))
+      #|  integral(interval([(lift(real_of_num(0)), lift((s : Real)))]), (u : Cart[Real, Unit]) => lift(exp(-drop(u) * (t : Real)))) == lift((real_of_num(1) - exp(-s * t)) / t)
+      #|  ((u : Cart[Real, Unit]) => lift(sin((t : Real)) * exp(-drop(u) * t))) == ((u : Cart[Real, Unit]) => op_pct(sin(t), lift(exp(-drop(u) * t))))
+      #|  real_of_num(0) < (t : Real)
+      #|  (t : Real) == real_of_num(0)
+      #|  \226\136\128 s : Real, \226\136\128 t : Real, real_of_num(0) <= s && real_of_num(0) <= t \226\134\146 integral(interval([(lift(real_of_num(0)), lift(s))]), (u : Cart[Real, Unit]) => lift(sin(t) * exp(-drop(u) * t))) == lift(sin(t) * ((real_of_num(1) - exp(-s * t)) / t))
+      #|  real_of_num(0) < (u : Real)
+      #|  real_of_num(1) - cos((TT : Real)) == -cos(TT) - -cos(real_of_num(0))
+      #|  (u : Real) == real_of_num(0)
+      #|  \226\136\128 u : Real, \226\136\128 TT : Real, real_of_num(0) <= u && real_of_num(0) <= TT \226\134\146 integral(interval([(lift(real_of_num(0)), lift(TT))]), (t : Cart[Real, Unit]) => lift(sin(drop(t)) * exp(-u * drop(t)))) == lift((real_of_num(1) - exp(-u * TT) * (cos(TT) + u * sin(TT))) / (real_of_num(1) + pow(u, 2)))
+      #|  \226\136\128 s : Real, \226\136\128 t : Real, sin(t) * ((real_of_num(1) - exp(-(s * t))) * inv(t)) == (if t == real_of_num(0) { real_of_num(1) } else { sin(t) * inv(t) }) * (real_of_num(1) - exp(-(s * t)))
+      #|  (t : Real) => (if t == real_of_num(0) { real_of_num(1) } else { sin(t) * inv(t) }) * (real_of_num(1) - exp(-((s : Real) * t)))
+      #|  \226\136\128 s : Real, \226\136\128 TT : Real, real_of_num(0) <= s && real_of_num(0) <= TT \226\134\146 real_integrable_on((t : Real) => sin(t) * ((real_of_num(1) - exp(-(s * t))) * inv(t)), real_interval([(real_of_num(0), TT)]))
+      #|  (u : Real)
+      #|  op_minus_minus == ((x : Real) => -x)
+      #|  \226\136\128 s : Real, \226\136\128 TT : Real, real_of_num(0) <= s && real_of_num(0) <= TT \226\134\146 real_integrable_on((u : Real) => (real_of_num(1) - exp(-u * TT) * (cos(TT) + u * sin(TT))) / (real_of_num(1) + pow(u, 2)), real_interval([(real_of_num(0), s)]))
+      #|  IN((u : Cart[Real, Unit]), interval([(lift(real_of_num(0)), lift((s : Real)))]))
+      #|  real_of_num(0) <= drop((u : Cart[Real, Unit]))
+      #|  (TT : Real)
+      #|  drop((u : Cart[Real, Unit]))
+      #|  (u : Cart[Real, Unit])
+      #|  (TT : Real)
+      #|  (s : Real)
+      #|  integral(interval([(lift(real_of_num(0)), lift((TT : Real)))]), (t : Cart[Real, Unit]) => integral(interval([(lift(real_of_num(0)), lift((s : Real)))]), (u : Cart[Real, Unit]) => lift(sin(drop(t)) * exp(-drop(u) * drop(t))))) == integral(interval([(lift(real_of_num(0)), lift(s))]), (u : Cart[Real, Unit]) => integral(interval([(lift(real_of_num(0)), lift(TT))]), (t : Cart[Real, Unit]) => lift(sin(drop(t)) * exp(-drop(u) * drop(t)))))
+      #|  IN((t : Cart[Real, Unit]), interval([(lift(real_of_num(0)), lift((TT : Real)))]))
+      #|  real_of_num(0) <= (s : Real) && real_of_num(0) <= drop((t : Cart[Real, Unit]))
+      #|  drop((t : Cart[Real, Unit]))
+      #|  (s : Real)
+      #|  (t : Cart[Real, Unit])
+      #|  integral(interval([(lift(real_of_num(0)), lift((TT : Real)))]), (x : Cart[Real, Unit]) => lift(sin(drop(x)) * ((real_of_num(1) - exp(-((s : Real) * drop(x)))) * inv(drop(x))))) == integral(interval([(lift(real_of_num(0)), lift(TT))]), (t : Cart[Real, Unit]) => integral(interval([(lift(real_of_num(0)), lift(s))]), (u : Cart[Real, Unit]) => lift(sin(drop(t)) * exp(-drop(u) * drop(t)))))
+      #|  real_integrable_on((u : Real) => (real_of_num(1) - exp(-u * (TT : Real)) * (cos(TT) + u * sin(TT))) / (real_of_num(1) + pow(u, 2)), real_interval([(real_of_num(0), (s : Real))]))
+      #|  real_integrable_on((t : Real) => sin(t) * ((real_of_num(1) - exp(-((s : Real) * t))) * inv(t)), real_interval([(real_of_num(0), (TT : Real))]))
+      #|  real_of_num(0) <= (TT : Real)
+      #|  \226\136\128 s : Real, \226\136\128 TT : Real, real_of_num(0) <= s && real_of_num(0) < TT \226\134\146 real_integral(real_interval([(real_of_num(0), TT)]), (t : Real) => sin(t) * ((real_of_num(1) - exp(-(s * t))) * inv(t))) == real_integral(real_interval([(real_of_num(0), s)]), (u : Real) => (real_of_num(1) - exp(-u * TT) * (cos(TT) + u * sin(TT))) / (real_of_num(1) + pow(u, 2)))
+      #|  real_of_num(0) < real_of_num(1) + pow((u : Real), 2)
+      #|  -(real_of_num(2) * (u : Real)) / pow(real_of_num(1) + pow(u, 2), 2)
+      #|  (u : Real)
+      #|  ((u : Real) => inv(real_of_num(1) + pow(u, 2))) == ((u : Real) => inv(((u : Real) => real_of_num(1) + pow(u, 2))(u)))
+      #|  op_minus_minus == ((x : Real) => -x)
+      #|  real_integrable_on((u : Real) => exp(-u * (TT : Real)) * ((cos(TT) + u * sin(TT)) / (real_of_num(1) + pow(u, 2))), real_interval([(real_of_num(0), (s : Real))]))
+      #|  atn((s : Real))
+      #|  real_integrable_on((u : Real) => inv(real_of_num(1) + pow(u, 2)), real_interval([(real_of_num(0), (s : Real))]))
+      #|  \226\136\128 u : Real, (real_of_num(1) - exp(-u * (TT : Real)) * (cos(TT) + u * sin(TT))) / (real_of_num(1) + pow(u, 2)) == inv(real_of_num(1) + pow(u, 2)) - exp(-u * TT) * ((cos(TT) + u * sin(TT)) / (real_of_num(1) + pow(u, 2)))
+      #|  \226\136\128 s : Real, \226\136\128 TT : Real, real_of_num(0) <= s && real_of_num(0) <= TT \226\134\146 real_integral(real_interval([(real_of_num(0), s)]), (u : Real) => (real_of_num(1) - exp(-u * TT) * (cos(TT) + u * sin(TT))) / (real_of_num(1) + pow(u, 2))) == atn(s) - real_integral(real_interval([(real_of_num(0), s)]), (u : Real) => exp(-u * TT) * ((cos(TT) + u * sin(TT)) / (real_of_num(1) + pow(u, 2))))
+      #|  (t : Real)
+      #|  real_interval([(real_of_num(0), (TT : Real))])
+      #|  {real_of_num(0)}
+      #|  (t : Real) => sin(t) * inv(t)
+      #|  (t : Real) => if t == real_of_num(0) { real_of_num(1) } else { sin(t) / t }
+      #|  \226\136\128 TT : Real, real_of_num(0) < TT \226\134\146 real_integrable_on((t : Real) => sin(t) * inv(t), real_interval([(real_of_num(0), TT)]))
+      #|  (t : Real)
+      #|  real_interval([(real_of_num(0), (TT : Real))])
+      #|  {real_of_num(0)}
+      #|  (t : Real) => sin(t) * (exp(-((TT : Real) * t)) * inv(t))
+      #|  (t : Real) => (if t == real_of_num(0) { real_of_num(1) } else { sin(t) / t }) * exp(-((TT : Real) * t))
+      #|  \226\136\128 TT : Real, real_of_num(0) < TT \226\134\146 real_integrable_on((t : Real) => sin(t) * (exp(-(TT * t)) * inv(t)), real_interval([(real_of_num(0), TT)]))
+      #|  (t : Real)
+      #|  ((t : Real) => sin(t) * ((real_of_num(1) - exp(-((TT : Real) * t))) * inv(t))) == ((t : Real) => sin(t) * inv(t) - sin(t) * (exp(-(TT * t)) * inv(t)))
+      #|  (t : Real)
+      #|  ((t : Real) => sin(t) * inv(t)) == ((t : Real) => sin(t) * ((real_of_num(1) - exp(-((TT : Real) * t))) * inv(t)) + sin(t) * (exp(-(TT * t)) * inv(t)))
+      #|  \226\136\128 TT : Real, real_of_num(0) < TT \226\134\146 real_integral(real_interval([(real_of_num(0), TT)]), (t : Real) => sin(t) * inv(t)) == real_integral(real_interval([(real_of_num(0), TT)]), (t : Real) => sin(t) * ((real_of_num(1) - exp(-(TT * t))) * inv(t))) + real_integral(real_interval([(real_of_num(0), TT)]), (t : Real) => sin(t) * (exp(-(TT * t)) * inv(t)))
+      #|  inv((TT : Real)) * TT == real_of_num(1)
+      #|  (x : Real)
+      #|  (x : Real) => inv((TT : Real)) * (TT * exp(-(TT * x)))
+      #|  -(a : Real) - -real_of_num(1) == real_of_num(1) - a
+      #|  (TT : Real)
+      #|  real_of_num(0)
+      #|  (x : Real) => (TT : Real) * exp(-(TT * x))
+      #|  (x : Real) => -exp(-((TT : Real) * x))
+      #|  has_real_integral((x : Real) => (TT : Real) * exp(-(TT * x)), real_of_num(1) - exp(-(TT * TT)), real_interval([(real_of_num(0), TT)]))
+      #|  \226\136\128 TT : Real, real_of_num(0) < TT \226\134\146 has_real_integral((t : Real) => exp(-(TT * t)), inv(TT) * (real_of_num(1) - exp(-(TT * TT))), real_interval([(real_of_num(0), TT)]))
+      #|  -((TT : Real) * TT)
+      #|  real_integral(real_interval([(real_of_num(0), (TT : Real))]), (t : Real) => exp(-(TT * t))) == inv(TT) * (real_of_num(1) - exp(-(TT * TT)))
+      #|  (x : Real)
+      #|  (x : Real) == real_of_num(0)
+      #|  sin((x : Real)) * (exp(-((TT : Real) * x)) * inv(x)) == sin(x) * inv(x) * exp(-(TT * x))
+      #|  (x : Real)
+      #|  real_integral(real_interval([(real_of_num(0), (TT : Real))]), (t : Real) => exp(-(TT * t)))
+      #|  \226\136\128 TT : Real, real_of_num(0) < TT \226\134\146 abs(real_integral(real_interval([(real_of_num(0), TT)]), (t : Real) => sin(t) * (exp(-(TT * t)) * inv(t)))) <= inv(TT)
+      #|  abs((TT : Real)) == TT
+      #|  abs(inv((TT : Real)))
+      #|  atn((TT : Real)) - pi / real_of_num(2) == -atn(inv(TT))
+      #|  (TT : Real)
+      #|  \226\136\128 TT : Real, real_of_num(0) < TT \226\134\146 abs(atn(TT) - pi / real_of_num(2)) <= inv(TT)
+      #|  -((TT : Real) * TT)
+      #|  real_integral(real_interval([(real_of_num(0), (TT : Real))]), (t : Real) => exp(-(TT * t))) == inv(TT) * (real_of_num(1) - exp(-(TT * TT)))
+      #|  real_integrable_on((t : Real) => exp(-((TT : Real) * t)), real_interval([(real_of_num(0), TT)]))
+      #|  (u : Real) - real_of_num(1) / real_of_num(3)
+      #|  real_of_num(0) < real_of_num(2)
+      #|  real_of_num(3) / real_of_num(2) * (real_of_num(1) + pow((u : Real), 2)) == real_of_num(3) * ((real_of_num(1) + pow(u, 2)) / real_of_num(2))
+      #|  (u : Real)
+      #|  real_of_num(0) < real_of_num(1) + pow((u : Real), 2)
+      #|  (TT : Real)
+      #|  real_of_num(0) <= (u : Real) \226\134\146 abs(u) == u
+      #|  (TT : Real)
+      #|  abs(cos((TT : Real))) + abs((u : Real) * sin(TT))
+      #|  (real_of_num(1) + (u : Real)) * inv(real_of_num(1) + pow(u, 2))
+      #|  abs(inv(real_of_num(1) + pow((u : Real), 2))) == inv(real_of_num(1) + pow(u, 2))
+      #|  (u : Real)
+      #|  real_of_num(0) < real_of_num(1) + pow((u : Real), 2)
+      #|  (x : Real) * (y : Real) == y * x
+      #|  (u : Real)
+      #|  (u : Real)
+      #|  (u : Real)
+      #|  op_minus_minus == ((x : Real) => -x)
+      #|  real_integrable_on((u : Real) => exp(-u * (TT : Real)) * ((cos(TT) + u * sin(TT)) / (real_of_num(1) + pow(u, 2))), real_interval([(real_of_num(0), TT)]))
+      #|  real_integral(real_interval([(real_of_num(0), (TT : Real))]), (u : Real) => real_of_num(3) / real_of_num(2) * exp(-(TT * u)))
+      #|  \226\136\128 TT : Real, real_of_num(0) < TT \226\134\146 abs(real_integral(real_interval([(real_of_num(0), TT)]), (u : Real) => exp(-u * TT) * ((cos(TT) + u * sin(TT)) / (real_of_num(1) + pow(u, 2))))) <= real_of_num(3) / real_of_num(2) * inv(TT)
+      #|  real_of_num(0) <= inv((TT : Real))
+      #|  inv((TT : Real)) + (real_of_num(3) / real_of_num(2) * inv(TT) + inv(TT))
+      #|  abs(atn((TT : Real)) - pi / real_of_num(2)) + (abs(real_integral(real_interval([(real_of_num(0), TT)]), (u : Real) => exp(-u * TT) * ((cos(TT) + u * sin(TT)) / (real_of_num(1) + pow(u, 2))))) + abs(real_integral(real_interval([(real_of_num(0), TT)]), (t : Real) => sin(t) * (exp(-(TT * t)) * inv(t)))))
+      #|  (TT : Real)
+      #|  (TT : Real)
+      #|  (TT : Real)
+      #|  (TT : Real)
+      #|  (TT : Real)
+      #|  \226\136\128 TT : Real, real_of_num(0) < TT \226\134\146 abs(real_integral(real_interval([(real_of_num(0), TT)]), (t : Real) => sin(t) * inv(t)) - pi / real_of_num(2)) <= real_of_num(4) * inv(TT)
+      #|  real_of_num(4) * inv((TT : Real)) == real_of_num(4) / TT
+      #|  (e : Real) * inv(e) == real_of_num(1)
+      #|  (e : Real) * (real_of_num(4) * inv(e) + real_of_num(1)) == real_of_num(4) + e
+      #|  (e : Real) * (real_of_num(4) * inv(e) + real_of_num(1))
+      #|  real_of_num(4) < (e : Real) * (TT : Real)
+      #|  real_of_num(4) * inv((TT : Real))
+      #|  real_of_num(0) + real_of_num(1)
+      #|  real_of_num(4) * inv((e : Real)) + real_of_num(1)
+      #|  real_of_num(0) < (TT : Real)
+      #|  (TT : Real)
+      #|  real_of_num(4) * inv((e : Real)) + real_of_num(1)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((TT : Real) => real_integral(real_interval([(real_of_num(0), TT)]), (t : Real) => sin(t) * inv(t)), pi / real_of_num(2), at_posinfinity)
+      #|  real_of_num(4) * inv((B : Real)) <= real_of_num(4) * inv((TT : Real))
+      #|  real_of_num(4) * inv((B : Real)) + real_of_num(4) * inv((TT : Real))
+      #|  abs(real_integral(real_interval([(real_of_num(0), (B : Real))]), (t : Real) => sin(t) * inv(t)) - pi / real_of_num(2)) + abs(real_integral(real_interval([(real_of_num(0), (TT : Real))]), (t : Real) => sin(t) * inv(t)) - pi / real_of_num(2))
+      #|  (a : Real) + (b : Real) == (c : Real) \226\134\146 c - a == b
+      #|  real_integral(real_interval([((TT : Real), (B : Real))]), (t : Real) => sin(t) * inv(t)) == real_integral(real_interval([(real_of_num(0), B)]), (t : Real) => sin(t) * inv(t)) - real_integral(real_interval([(real_of_num(0), TT)]), (t : Real) => sin(t) * inv(t))
+      #|  real_integrable_on((t : Real) => sin(t) * inv(t), real_interval([(real_of_num(0), (B : Real))]))
+      #|  real_of_num(0) < (B : Real)
+      #|  \226\136\128 TT : Real, \226\136\128 B : Real, real_of_num(0) < TT && TT <= B \226\134\146 abs(real_integral(real_interval([(TT, B)]), (t : Real) => sin(t) * inv(t))) <= real_of_num(8) * inv(TT)
+      #|  ((x : Real) => -inv(x) * sin(real_of_num(2) * x)) == ((x : Real) => -((x : Real) => sin(real_of_num(2) * x) * inv(x))(x))
+      #|  -inv((b : Real)) * pow(sin(b), 2) - -inv((a : Real)) * pow(sin(a), 2) - (pow(sin(a), 2) * inv(a) - pow(sin(b), 2) * inv(b) + real_integral(real_interval([(a, b)]), (x : Real) => sin(real_of_num(2) * x) * inv(x))) == -real_integral(real_interval([(a, b)]), (x : Real) => sin(real_of_num(2) * x) * inv(x))
+      #|  2 - 1 == 1
       #|  2
-      #|  x:real
-      #|  cos x
+      #|  (x : Real)
+      #|  cos((x : Real))
       #|  sin
-      #|  sin(&2 * x) = &2 * sin x pow 1 * cos x
-      #|  x:real
-      #|  x:real
-      #|  \\x:real. sin(&2 * x)
-      #|  \\x:real. --(inv x)
-      #|  (\\x:real. sin x pow 2 * inv(x pow 2)) = (\\x. inv(x pow 2) * sin x pow 2)
-      #|  (inv:real->real) = (\\x. inv((\\x. x) x))
-      #|  (\\x:real. sin(&2 * x)) = sin o (\\x. &2 * x)
-      #|  (\\x:real. sin(&2 * x) * inv x) real_integrable_on real_interval[a,b]
-      #|  forall a b. &0 < a /\\ a <= b ==>\n   ((\\x. sin(x) pow 2 * inv(x pow 2)) has_real_integral\n    (sin(a) pow 2 * inv(a) - sin(b) pow 2 * inv(b) +\n     real_integral (real_interval[a,b]) (\\x. sin(&2 * x) * inv(x))))\n   (real_interval[a,b])
-      #|  (\\x:real. (sin(&2 * x) * inv(&2 * x)) * &2) =\n     (\\x. &2 * (sin(&2 * x) * inv(&2 * x)))
-      #|  real_integral (real_interval [&2 * a,&2 * b]) (\\t:real. sin t * inv t) =\n     &2 * (inv(&2) * real_integral (real_interval [&2 * a,&2 * b])\n            (\\t. sin t * inv t))
-      #|  F
-      #|  inv(&2) * (&2 * a) + &0 = a /\\\n                   inv(&2) * (&2 * b) + &0 = b
-      #|  F
-      #|  (\\x:real. inv(&2) * x) = (\\x. inv(&2) * x + &0)
-      #|  IMAGE (\\x. inv (&2) * x) (real_interval [&2 * a, &2 * b]) =\n     real_interval[a, b]
-      #|  &0
-      #|  &2
-      #|  &2 * b
-      #|  &2 * a
-      #|  real_integral (real_interval [&2 * a, &2 * b]) (\\t:real. sin t * inv t)
-      #|  \\t:real. sin t * inv t
-      #|  ~(x = &0) ==> inv(&2 * x) * &2 = inv x
-      #|  inv(&2 * x) * &2 = inv x
-      #|  x = &0
-      #|  x:real
-      #|  forall x:real. sin(&2 * x) * inv x = (sin(&2 * x) * inv(&2 * x)) * &2
-      #|  (inv:real->real) = (\\x. inv((\\x. x) x))
-      #|  (\\t:real. sin t * inv t) real_integrable_on\n                real_interval[&2*a, &2*b]
-      #|  forall a b. &0 < a /\\ a <= b ==>\n   ((\\x. sin(&2 * x) * inv x) has_real_integral\n    real_integral (real_interval[&2 * a, &2 * b]) (\\t. sin t * inv t))\n   (real_interval[a,b])
-      #|  x = &0
-      #|  x:real
-      #|  (\\x:real. (if x = &0 then &1 else sin x / x) *\n               (if x = &0 then &1 else sin x / x))\n     real_continuous_on s
-      #|  forall s. (\\x. if x = &0 then &1 else sin x pow 2 * inv(x pow 2))\n       real_continuous_on s
-      #|  ~(x = &0) ==> &0 < abs x
-      #|  abs(sin x) pow 2 * inv(abs x pow 2) =\n                 (abs(sin x) * inv(abs x)) pow 2
-      #|  x = &0
-      #|  forall x. abs(sin x pow 2 * inv(x pow 2)) <= &1
-      #|  ~(t = &0) ==> &0 < abs t
-      #|  t = &0
-      #|  forall t. abs(sin t * inv t) <= &1
-      #|  a pow 2 = abs a pow 2
-      #|  sin a pow 2 = abs(sin a) pow 2
-      #|  abs(sin a pow 2 * inv a) = sin a pow 2 * inv a
-      #|  forall a. &0 < a ==> abs(sin a pow 2 * inv a) <= a
-      #|  (:real)
-      #|  (\\t:real. if t = &0 then &1 else sin t * inv t) =\n                (\\t. if t = &0 then &1 else sin t / t)
-      #|  real_interval[&0,TT]
-      #|  {&0:real}
-      #|  (\\t:real. sin t * inv t)
-      #|  (\\t. if t = &0 then &1 else sin t * inv t)
-      #|  forall TT. &0 <= TT ==>\n   (\\t. sin t * inv t) real_integrable_on real_interval[&0,TT]
-      #|  (:real)
-      #|  real_interval[&0,TT]
-      #|  {&0:real}
-      #|  (\\x. sin x pow 2 * inv(x pow 2))
-      #|  (\\x. if x = &0 then &1 else sin x pow 2 * inv(x pow 2))
-      #|  real_interval[&0,TT] = {}
-      #|  TT < &0
-      #|  forall TT. (\\x. sin(x) pow 2 * inv(x pow 2)) real_integrable_on\n        real_interval[&0,TT]
-      #|  &0 < a ==> &0 <= &2 * a
-      #|  &1
-      #|  real_integral (real_interval[&0,&2*a]) (\\t. sin t * inv t)
-      #|  &2 * a
-      #|  &0
-      #|  \\t:real. sin t * inv t
-      #|  &1 * (&2 * a - &0)
-      #|  &1
-      #|  real_integral (real_interval[&0,a]) (\\x. sin x pow 2 * inv(x pow 2))
-      #|  a:real
-      #|  &0
-      #|  \\x:real. sin x pow 2 * inv(x pow 2)
-      #|  &1 * (a - &0)
-      #|  abs x <= a /\\ abs y <= a /\\ abs z <= &2 * a\n     ==> abs(x + y - z) <= &4 * a
-      #|  real_integral (real_interval [&0,a]) (\\x. sin x pow 2 * inv(x pow 2)) +\n     sin a pow 2 * inv a +\n     real_integral (real_interval [&2*a,&2*TT]) (\\t. sin t * inv t) -\n     (real_integral (real_interval [&0,&2*a]) (\\t. sin t * inv t) +\n      real_integral (real_interval [&2*a,&2*TT]) (\\t. sin t * inv t)) =\n     real_integral (real_interval [&0,a]) (\\x. sin x pow 2 * inv(x pow 2)) +\n     sin a pow 2 * inv a -\n     real_integral (real_interval [&0,&2*a]) (\\t. sin t * inv t)
-      #|  real_integral (real_interval[&0, &2 * TT]) (\\t. sin t * inv t) =\n     real_integral (real_interval[&0, &2 * a]) (\\t. sin t * inv t) +\n     real_integral (real_interval[&2 * a, &2 * TT]) (\\t. sin t * inv t)
-      #|  (\\t:real. sin t * inv t) real_integrable_on real_interval[&0, &2 * TT]
-      #|  (real_integral (real_interval [&0,a]) (\\x. sin x pow 2 * inv(x pow 2)) +\n      sin a pow 2 * inv a - sin TT pow 2 * inv TT +\n      real_integral (real_interval [&2*a,&2*TT]) (\\t. sin t * inv t)) -\n     (--(sin TT pow 2 * inv TT) +\n      real_integral (real_interval [&0,&2*TT]) (\\t. sin t * inv t)) =\n     real_integral (real_interval [&0,a]) (\\x. sin x pow 2 * inv(x pow 2)) +\n     sin a pow 2 * inv a +\n     real_integral (real_interval [&2*a,&2*TT]) (\\t. sin t * inv t) -\n     real_integral (real_interval [&0,&2*TT]) (\\t. sin t * inv t)
-      #|  real_integral (real_interval[a,TT]) (\\x. sin(&2 * x) * inv x) =\n     real_integral (real_interval[&2 * a, &2 * TT]) (\\t. sin t * inv t)
-      #|  real_integral (real_interval[a,TT]) (\\x. sin x pow 2 * inv(x pow 2)) =\n     sin(a) pow 2 * inv(a) - sin(TT) pow 2 * inv(TT) +\n     real_integral (real_interval[a,TT]) (\\x. sin(&2 * x) * inv(x))
-      #|  real_integral (real_interval[&0,TT]) (\\x. sin x pow 2 * inv(x pow 2)) =\n     real_integral (real_interval[&0,a]) (\\x. sin x pow 2 * inv(x pow 2)) +\n     real_integral (real_interval[a,TT]) (\\x. sin x pow 2 * inv(x pow 2))
-      #|  &4 * a
-      #|  &0 < a /\\ a < TT /\\ a <= TT /\\ &4 * a < e
-      #|  a = min (e / &5) (TT / &2)
-      #|  e:real
-      #|  abs(x:real) / &2
-      #|  (forall e. &0 < e ==> abs(x:real) <= e) ==> abs x <= &0
-      #|  abs x <= &0 ==> abs x = &0
-      #|  abs(a - b) = &0 ==> a = b
-      #|  forall TT. &0 < TT ==>\n   real_integral (real_interval[&0,TT])\n     (\\x. sin(x) pow 2 * inv(x pow 2)) =\n   --(sin(TT) pow 2 * inv(TT)) +\n   real_integral (real_interval[&0, &2 * TT]) (\\t. sin t * inv t)
-      #|  &0 <= x ==> &4 * (inv(&2) * x) <= &6 * x
-      #|  b <= c ==> a <= b ==> a <= c
-      #|  &2 * TT
-      #|  abs TT = TT
+      #|  sin(real_of_num(2) * (x : Real)) == real_of_num(2) * (pow(sin(x), 1) * cos(x))
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (x : Real) => sin(real_of_num(2) * x)
+      #|  (x : Real) => -inv(x)
+      #|  ((x : Real) => pow(sin(x), 2) * inv(pow(x, 2))) == ((x : Real) => inv(pow(x, 2)) * pow(sin(x), 2))
+      #|  inv == ((x : Real) => inv(((x : Real) => x)(x)))
+      #|  ((x : Real) => sin(real_of_num(2) * x)) == o(sin, (x : Real) => real_of_num(2) * x)
+      #|  real_integrable_on((x : Real) => sin(real_of_num(2) * x) * inv(x), real_interval([((a : Real), (b : Real))]))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < a && a <= b \226\134\146 has_real_integral((x : Real) => pow(sin(x), 2) * inv(pow(x, 2)), pow(sin(a), 2) * inv(a) - pow(sin(b), 2) * inv(b) + real_integral(real_interval([(a, b)]), (x : Real) => sin(real_of_num(2) * x) * inv(x)), real_interval([(a, b)]))
+      #|  ((x : Real) => sin(real_of_num(2) * x) * inv(real_of_num(2) * x) * real_of_num(2)) == ((x : Real) => real_of_num(2) * (sin(real_of_num(2) * x) * inv(real_of_num(2) * x)))
+      #|  real_integral(real_interval([(real_of_num(2) * (a : Real), real_of_num(2) * (b : Real))]), (t : Real) => sin(t) * inv(t)) == real_of_num(2) * (inv(real_of_num(2)) * real_integral(real_interval([(real_of_num(2) * a, real_of_num(2) * b)]), (t : Real) => sin(t) * inv(t)))
+      #|  false
+      #|  inv(real_of_num(2)) * (real_of_num(2) * (a : Real)) + real_of_num(0) == a && inv(real_of_num(2)) * (real_of_num(2) * (b : Real)) + real_of_num(0) == b
+      #|  false
+      #|  ((x : Real) => inv(real_of_num(2)) * x) == ((x : Real) => inv(real_of_num(2)) * x + real_of_num(0))
+      #|  IMAGE((x : Real) => inv(real_of_num(2)) * x, real_interval([(real_of_num(2) * (a : Real), real_of_num(2) * (b : Real))])) == real_interval([(a, b)])
+      #|  real_of_num(0)
+      #|  real_of_num(2)
+      #|  real_of_num(2) * (b : Real)
+      #|  real_of_num(2) * (a : Real)
+      #|  real_integral(real_interval([(real_of_num(2) * (a : Real), real_of_num(2) * (b : Real))]), (t : Real) => sin(t) * inv(t))
+      #|  (t : Real) => sin(t) * inv(t)
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 inv(real_of_num(2) * x) * real_of_num(2) == inv(x)
+      #|  inv(real_of_num(2) * (x : Real)) * real_of_num(2) == inv(x)
+      #|  (x : Real) == real_of_num(0)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, sin(real_of_num(2) * x) * inv(x) == sin(real_of_num(2) * x) * inv(real_of_num(2) * x) * real_of_num(2)
+      #|  inv == ((x : Real) => inv(((x : Real) => x)(x)))
+      #|  real_integrable_on((t : Real) => sin(t) * inv(t), real_interval([(real_of_num(2) * (a : Real), real_of_num(2) * (b : Real))]))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < a && a <= b \226\134\146 has_real_integral((x : Real) => sin(real_of_num(2) * x) * inv(x), real_integral(real_interval([(real_of_num(2) * a, real_of_num(2) * b)]), (t : Real) => sin(t) * inv(t)), real_interval([(a, b)]))
+      #|  (x : Real) == real_of_num(0)
+      #|  (x : Real)
+      #|  real_continuous_on((x : Real) => (if x == real_of_num(0) { real_of_num(1) } else { sin(x) / x }) * (if x == real_of_num(0) { real_of_num(1) } else { sin(x) / x }), (s : (Real) -> Bool))
+      #|  \226\136\128 s : (Real) -> Bool, real_continuous_on((x : Real) => if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) }, s)
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 real_of_num(0) < abs(x)
+      #|  pow(abs(sin((x : Real))), 2) * inv(pow(abs(x), 2)) == pow(abs(sin(x)) * inv(abs(x)), 2)
+      #|  (x : Real) == real_of_num(0)
+      #|  \226\136\128 x : Real, abs(pow(sin(x), 2) * inv(pow(x, 2))) <= real_of_num(1)
+      #|  !((t : Real) == real_of_num(0)) \226\134\146 real_of_num(0) < abs(t)
+      #|  (t : Real) == real_of_num(0)
+      #|  \226\136\128 t : Real, abs(sin(t) * inv(t)) <= real_of_num(1)
+      #|  pow((a : Real), 2) == pow(abs(a), 2)
+      #|  pow(sin((a : Real)), 2) == pow(abs(sin(a)), 2)
+      #|  abs(pow(sin((a : Real)), 2) * inv(a)) == pow(sin(a), 2) * inv(a)
+      #|  \226\136\128 a : Real, real_of_num(0) < a \226\134\146 abs(pow(sin(a), 2) * inv(a)) <= a
+      #|  (UNIV : (Real) -> Bool)
+      #|  ((t : Real) => if t == real_of_num(0) { real_of_num(1) } else { sin(t) * inv(t) }) == ((t : Real) => if t == real_of_num(0) { real_of_num(1) } else { sin(t) / t })
+      #|  real_interval([(real_of_num(0), (TT : Real))])
+      #|  {real_of_num(0)}
+      #|  (t : Real) => sin(t) * inv(t)
+      #|  (t : Real) => if t == real_of_num(0) { real_of_num(1) } else { sin(t) * inv(t) }
+      #|  \226\136\128 TT : Real, real_of_num(0) <= TT \226\134\146 real_integrable_on((t : Real) => sin(t) * inv(t), real_interval([(real_of_num(0), TT)]))
+      #|  (UNIV : (Real) -> Bool)
+      #|  real_interval([(real_of_num(0), (TT : Real))])
+      #|  {real_of_num(0)}
+      #|  (x : Real) => pow(sin(x), 2) * inv(pow(x, 2))
+      #|  (x : Real) => if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) }
+      #|  real_interval([(real_of_num(0), (TT : Real))]) == {}
+      #|  (TT : Real) < real_of_num(0)
+      #|  \226\136\128 TT : Real, real_integrable_on((x : Real) => pow(sin(x), 2) * inv(pow(x, 2)), real_interval([(real_of_num(0), TT)]))
+      #|  real_of_num(0) < (a : Real) \226\134\146 real_of_num(0) <= real_of_num(2) * a
+      #|  real_of_num(1)
+      #|  real_integral(real_interval([(real_of_num(0), real_of_num(2) * (a : Real))]), (t : Real) => sin(t) * inv(t))
+      #|  real_of_num(2) * (a : Real)
+      #|  real_of_num(0)
+      #|  (t : Real) => sin(t) * inv(t)
+      #|  real_of_num(1) * (real_of_num(2) * (a : Real) - real_of_num(0))
+      #|  real_of_num(1)
+      #|  real_integral(real_interval([(real_of_num(0), (a : Real))]), (x : Real) => pow(sin(x), 2) * inv(pow(x, 2)))
+      #|  (a : Real)
+      #|  real_of_num(0)
+      #|  (x : Real) => pow(sin(x), 2) * inv(pow(x, 2))
+      #|  real_of_num(1) * ((a : Real) - real_of_num(0))
+      #|  abs((x : Real)) <= (a : Real) && abs((y : Real)) <= a && abs((z : Real)) <= real_of_num(2) * a \226\134\146 abs(x + (y - z)) <= real_of_num(4) * a
+      #|  real_integral(real_interval([(real_of_num(0), (a : Real))]), (x : Real) => pow(sin(x), 2) * inv(pow(x, 2))) + (pow(sin(a), 2) * inv(a) + (real_integral(real_interval([(real_of_num(2) * a, real_of_num(2) * (TT : Real))]), (t : Real) => sin(t) * inv(t)) - (real_integral(real_interval([(real_of_num(0), real_of_num(2) * a)]), (t : Real) => sin(t) * inv(t)) + real_integral(real_interval([(real_of_num(2) * a, real_of_num(2) * TT)]), (t : Real) => sin(t) * inv(t))))) == real_integral(real_interval([(real_of_num(0), a)]), (x : Real) => pow(sin(x), 2) * inv(pow(x, 2))) + (pow(sin(a), 2) * inv(a) - real_integral(real_interval([(real_of_num(0), real_of_num(2) * a)]), (t : Real) => sin(t) * inv(t)))
+      #|  real_integral(real_interval([(real_of_num(0), real_of_num(2) * (TT : Real))]), (t : Real) => sin(t) * inv(t)) == real_integral(real_interval([(real_of_num(0), real_of_num(2) * (a : Real))]), (t : Real) => sin(t) * inv(t)) + real_integral(real_interval([(real_of_num(2) * a, real_of_num(2) * TT)]), (t : Real) => sin(t) * inv(t))
+      #|  real_integrable_on((t : Real) => sin(t) * inv(t), real_interval([(real_of_num(0), real_of_num(2) * (TT : Real))]))
+      #|  real_integral(real_interval([(real_of_num(0), (a : Real))]), (x : Real) => pow(sin(x), 2) * inv(pow(x, 2))) + (pow(sin(a), 2) * inv(a) - pow(sin((TT : Real)), 2) * inv(TT) + real_integral(real_interval([(real_of_num(2) * a, real_of_num(2) * TT)]), (t : Real) => sin(t) * inv(t))) - (-(pow(sin(TT), 2) * inv(TT)) + real_integral(real_interval([(real_of_num(0), real_of_num(2) * TT)]), (t : Real) => sin(t) * inv(t))) == real_integral(real_interval([(real_of_num(0), a)]), (x : Real) => pow(sin(x), 2) * inv(pow(x, 2))) + (pow(sin(a), 2) * inv(a) + (real_integral(real_interval([(real_of_num(2) * a, real_of_num(2) * TT)]), (t : Real) => sin(t) * inv(t)) - real_integral(real_interval([(real_of_num(0), real_of_num(2) * TT)]), (t : Real) => sin(t) * inv(t))))
+      #|  real_integral(real_interval([((a : Real), (TT : Real))]), (x : Real) => sin(real_of_num(2) * x) * inv(x)) == real_integral(real_interval([(real_of_num(2) * a, real_of_num(2) * TT)]), (t : Real) => sin(t) * inv(t))
+      #|  real_integral(real_interval([((a : Real), (TT : Real))]), (x : Real) => pow(sin(x), 2) * inv(pow(x, 2))) == pow(sin(a), 2) * inv(a) - pow(sin(TT), 2) * inv(TT) + real_integral(real_interval([(a, TT)]), (x : Real) => sin(real_of_num(2) * x) * inv(x))
+      #|  real_integral(real_interval([(real_of_num(0), (TT : Real))]), (x : Real) => pow(sin(x), 2) * inv(pow(x, 2))) == real_integral(real_interval([(real_of_num(0), (a : Real))]), (x : Real) => pow(sin(x), 2) * inv(pow(x, 2))) + real_integral(real_interval([(a, TT)]), (x : Real) => pow(sin(x), 2) * inv(pow(x, 2)))
+      #|  real_of_num(4) * (a : Real)
+      #|  real_of_num(0) < (a : Real) && a < (TT : Real) && a <= TT && real_of_num(4) * a < (e : Real)
+      #|  (a : Real) == min((e : Real) / real_of_num(5), (TT : Real) / real_of_num(2))
+      #|  (e : Real)
+      #|  abs((x : Real)) / real_of_num(2)
+      #|  (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 abs((x : Real)) <= e) \226\134\146 abs(x) <= real_of_num(0)
+      #|  abs((x : Real)) <= real_of_num(0) \226\134\146 abs(x) == real_of_num(0)
+      #|  abs((a : Real) - (b : Real)) == real_of_num(0) \226\134\146 a == b
+      #|  \226\136\128 TT : Real, real_of_num(0) < TT \226\134\146 real_integral(real_interval([(real_of_num(0), TT)]), (x : Real) => pow(sin(x), 2) * inv(pow(x, 2))) == -(pow(sin(TT), 2) * inv(TT)) + real_integral(real_interval([(real_of_num(0), real_of_num(2) * TT)]), (t : Real) => sin(t) * inv(t))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(4) * (inv(real_of_num(2)) * x) <= real_of_num(6) * x
+      #|  (b : Real) <= (c : Real) \226\134\146 (a : Real) <= b \226\134\146 a <= c
+      #|  real_of_num(2) * (TT : Real)
+      #|  abs((TT : Real)) == TT
       #|  2
-      #|  sin TT
-      #|  &1 * inv(abs TT)
-      #|  &1 * inv TT + &6 * inv TT
-      #|  abs(sin TT pow 2 * inv TT) +\n              abs(real_integral (real_interval[&0,&2 * TT])\n                  (\\t. sin t * inv t) - pi / &2)
-      #|  TT:real
-      #|  forall TT. &0 < TT ==>\n   abs(real_integral (real_interval[&0,TT])\n       (\\x. sin(x) pow 2 * inv(x pow 2)) - pi / &2)\n   <= &7 * inv TT
-      #|  &7 * inv TT = &7 / TT
-      #|  e * inv e = &1
-      #|  e * (&7 * inv e + &1) = &7 + e
-      #|  e * (&7 * inv e + &1)
-      #|  &7 < e * TT
-      #|  &7 * inv TT
-      #|  &0 <= a ==> &0 < a + &1
-      #|  &7 * inv e + &1
-      #|  &0 < TT
-      #|  TT:real
-      #|  &7 * inv e + &1
-      #|  e:real
-      #|  ((\\TT. real_integral (real_interval[&0,TT])\n          (\\x. sin(x) pow 2 * inv(x pow 2))) ---> pi / &2) at_posinfinity
-      #|  fejer_kernel_real TT x =\n     if x = &0 then TT / (&2 * pi)\n     else &2 * sin(TT * x / &2) pow 2 / (pi * TT * x pow 2)
-      #|  forall TT x. &0 < TT ==> &0 <= fejer_kernel_real TT x
-      #|  sin(TT * x * inv(&2)) pow 2 =\n                 abs(sin(TT * x * inv(&2))) pow 2
-      #|  forall TT x. &0 < TT /\\ ~(x = &0) ==>\n   fejer_kernel_real TT x <= &2 / (pi * TT * x pow 2)
-      #|  pi = pi / &2 + pi / &2
-      #|  &7 * inv(&14 * inv e + &1)
-      #|  &7 * inv b
-      #|  abs(real_integral (real_interval[&0,b])\n       (\\x. if x = &0 then &1 else sin x pow 2 * inv(x pow 2)) -\n     pi / &2) < e / &2
-      #|  &7 * inv(&14 * inv e + &1)
-      #|  &7 * inv(--a)
-      #|  &0 < --a
-      #|  abs(real_integral (real_interval[&0,--a])\n       (\\x. if x = &0 then &1 else sin x pow 2 * inv(x pow 2)) -\n     pi / &2) < e / &2
-      #|  ~(e = &0)
-      #|  &7 * inv(&14 * inv e) = e / &2
-      #|  &7 * inv(&14 * inv e)
-      #|  &7 * inv(&14 * inv e + &1) < e / &2
-      #|  {&0:real}
-      #|  forall TT. &0 < TT ==>\n     real_integral (real_interval[&0,TT])\n       (\\x. if x = &0 then &1 else sin x pow 2 * inv(x pow 2)) =\n     real_integral (real_interval[&0,TT])\n       (\\x. sin x pow 2 * inv(x pow 2))
-      #|  --y:real
-      #|  y:real
-      #|  IMAGE (--) (real_interval[&0,--a]) = real_interval[a,&0]
-      #|  (--x = &0) <=> (x = &0)
-      #|  (forall x:real. (if --x = &0 then &1 else sin(--x) pow 2 * inv((--x) pow 2)) =\n                (if x = &0 then &1 else sin x pow 2 * inv(x pow 2)))
-      #|  real_interval[&0,--a]
-      #|  \\x:real. if x = &0 then &1 else sin x pow 2 * inv(x pow 2)
-      #|  real_integral (real_interval[a,&0])\n       (\\x. if x = &0 then &1 else sin x pow 2 * inv(x pow 2)) =\n     real_integral (real_interval[&0,--a])\n       (\\x. if x = &0 then &1 else sin x pow 2 * inv(x pow 2))
-      #|  (:real)
-      #|  real_integral (real_interval[a,b])\n       (\\x. if x = &0 then &1 else sin x pow 2 * inv(x pow 2)) =\n     real_integral (real_interval[a,&0])\n       (\\x. if x = &0 then &1 else sin x pow 2 * inv(x pow 2)) +\n     real_integral (real_interval[&0,b])\n       (\\x. if x = &0 then &1 else sin x pow 2 * inv(x pow 2))
-      #|  a <= b:real
-      #|  a < &0
-      #|  &0 < b
-      #|  a <= --(&14 * inv e + &1) /\\ &14 * inv e + &1 <= b
-      #|  &0 <= a ==> &0 < a + &1
-      #|  &0 < &14 * inv e + &1
-      #|  b:real
-      #|  a:real
-      #|  &0 <= a ==> &0 < a + &1
-      #|  &14 * inv e + &1
-      #|  e:real
-      #|  (:real)
-      #|  ((\\x. if x = &0 then &1 else sin x pow 2 * inv(x pow 2))\n    has_real_integral pi) (:real)
-      #|  x + x = y ==> x = y / &2
-      #|  real_integral {t | &0 <= t} f = pi / &2
-      #|  (:real)
-      #|  f:real->real
-      #|  real_integral {t | &0 <= t} f + real_integral {t | &0 <= t} f = pi
-      #|  {t:real | &0 <= t} UNION {t | t <= &0} = (:real)
-      #|  {t:real | &0 <= t} INTER {t | t <= &0} = {&0}
-      #|  (f has_real_integral (real_integral {t | &0 <= t} f +\n                           real_integral {t | &0 <= t} f))\n     ({t:real | &0 <= t} UNION {t | t <= &0})
-      #|  (\\x. (f:real->real)(--x)) = f
-      #|  --x:real
-      #|  IMAGE ((--):real->real) {t | &0 <= t} = {t:real | t <= &0}
-      #|  {t:real | &0 <= t}
-      #|  real_integral {t:real | &0 <= t} (f:real->real)
-      #|  f:real->real
-      #|  (f has_real_integral real_integral {t | &0 <= t} f)\n                {t:real | t <= &0}
-      #|  (:real)
-      #|  f real_integrable_on {t:real | t <= &0}
-      #|  (:real)
-      #|  f real_integrable_on {t | &0 <= t}
-      #|  f real_integrable_on (:real)
-      #|  ~(--t = &0)
-      #|  t = &0
-      #|  forall t:real. (f:real->real)(--t) = f t
-      #|  (f has_real_integral pi) (:real)
-      #|  f = \\x:real. if x = &0 then &1 else sin x pow 2 * inv(x pow 2)
-      #|  ((\\x. if x = &0 then &1 else sin x pow 2 * inv(x pow 2))\n    has_real_integral (pi / &2)) {t | &0 <= t}
-      #|  inv(inv(&2)) * pi / &2 = pi
-      #|  x:real
-      #|  (\\x. (\\x. (h:real->real) (&2 * x)) (inv (&2) * x)) = h
-      #|  inv(&2)
-      #|  pi / &2
-      #|  \\x:real. (h:real->real)(&2 * x)
-      #|  pi / &2 = inv(&2) * pi
-      #|  ((\\x. h(&2 * x)) has_real_integral (pi / &2)) (:real)
-      #|  ~(x = &0)
-      #|  x:real
-      #|  ~(&2 * x = &0)
-      #|  x = &0
-      #|  x:real
-      #|  (\\x. h(&2 * x)) = (\\x. inv(&2) * (f:real->real) x)
-      #|  (f has_real_integral pi) (:real)
-      #|  f = \\x:real. if x = &0 then &1\n                            else sin x pow 2 * inv(x pow 2)
-      #|  h = \\t:real. if t = &0 then &1 / &2\n                            else (&1 - cos t) * inv(t pow 2)
-      #|  ((\\t. if t = &0 then &1 / &2 else (&1 - cos t) * inv(t pow 2))\n    has_real_integral pi) (:real)
-      #|  x + x = y ==> x = y / &2
-      #|  real_integral {t | &0 <= t} h = pi / &2
-      #|  (:real)
-      #|  h:real->real
-      #|  real_integral {t | &0 <= t} h + real_integral {t | &0 <= t} h = pi
-      #|  {t:real | &0 <= t} UNION {t | t <= &0} = (:real)
-      #|  {t:real | &0 <= t} INTER {t | t <= &0} = {&0}
-      #|  (h has_real_integral (real_integral {t | &0 <= t} h +\n                           real_integral {t | &0 <= t} h))\n     ({t:real | &0 <= t} UNION {t | t <= &0})
-      #|  (\\x. (h:real->real)(--x)) = h
-      #|  --x:real
-      #|  IMAGE ((--):real->real) {t | &0 <= t} = {t:real | t <= &0}
-      #|  {t:real | &0 <= t}
-      #|  real_integral {t:real | &0 <= t} (h:real->real)
-      #|  h:real->real
-      #|  (h has_real_integral real_integral {t | &0 <= t} h)\n                {t:real | t <= &0}
-      #|  (:real)
-      #|  h real_integrable_on {t:real | t <= &0}
-      #|  (:real)
-      #|  h real_integrable_on {t | &0 <= t}
-      #|  h real_integrable_on (:real)
-      #|  ~(--t = &0)
-      #|  t = &0
-      #|  forall t:real. (h:real->real)(--t) = h t
-      #|  (h has_real_integral pi) (:real)
-      #|  h = \\t:real. if t = &0 then &1 / &2\n                            else (&1 - cos t) * inv(t pow 2)
-      #|  ((\\t. if t = &0 then &1 / &2 else (&1 - cos t) * inv(t pow 2))\n    has_real_integral (pi / &2)) {t | &0 <= t}
-      #|  J + J = c * pi
-      #|  J = real_integral {t | &0 <= t} (f:real->real)
-      #|  real_integral {t | &0 <= t} (f:real->real) = c * pi / &2
-      #|  pi * c / &2 = c * pi / &2
-      #|  {t:real | &0 <= t} UNION {t | t <= &0} = (:real)
-      #|  (:real)
-      #|  f:real->real
-      #|  real_integral {t | &0 <= t} f + real_integral {t | &0 <= t} f = c * pi
-      #|  {t:real | &0 <= t} INTER {t | t <= &0} = {&0}
-      #|  (f has_real_integral (real_integral {t | &0 <= t} f +\n                           real_integral {t | &0 <= t} f))\n     ({t:real | &0 <= t} UNION {t | t <= &0})
-      #|  (\\x. (f:real->real)(--x)) = f
-      #|  --x:real
-      #|  IMAGE ((--):real->real) {t | &0 <= t} = {t:real | t <= &0}
-      #|  {t:real | &0 <= t}
-      #|  real_integral {t:real | &0 <= t} (f:real->real)
-      #|  f:real->real
-      #|  (f has_real_integral real_integral {t | &0 <= t} f)\n                {t:real | t <= &0}
-      #|  (:real)
-      #|  f real_integrable_on {t:real | t <= &0}
-      #|  (:real)
-      #|  f real_integrable_on {t | &0 <= t}
-      #|  f real_integrable_on (:real)
-      #|  ~(--t = &0)
-      #|  t = &0
-      #|  forall t:real. (f:real->real)(--t) = f t
-      #|  (f has_real_integral (c * pi)) (:real)
-      #|  &0 < c
-      #|  c pow 2 * inv c * pi = c * pi
-      #|  ~(c = &0) /\\ ~(t = &0) ==>\n        (&1 - cos(c * t)) * inv(t pow 2) =\n        c pow 2 * ((&1 - cos(c * t)) * (inv(c pow 2) * inv(t pow 2)))
-      #|  t = &0
-      #|  t:real
-      #|  (f:real->real) = (\\t. c pow 2 * (if t = &0 then &1 / &2\n                      else (&1 - cos(c * t)) * inv((c * t) pow 2)))
-      #|  (f has_real_integral (c pow 2 * (inv c * pi))) (:real)
-      #|  f = \\t:real. if t = &0 then c pow 2 / &2\n                            else (&1 - cos(c * t)) * inv(t pow 2)
-      #|  ~(c * x = &0)
-      #|  x = &0
-      #|  (\\x. (\\t. if t = &0 then &1 / &2\n    else (&1 - cos t) * inv(t pow 2)) (c * x))\n    = (\\x. if x = &0 then &1 / &2\n            else (&1 - cos(c * x)) * inv((c * x) pow 2))
-      #|  c:real
-      #|  pi:real
-      #|  \\t:real. if t = &0 then &1 / &2\n                            else (&1 - cos t) * inv(t pow 2)
-      #|  forall c. &0 < c ==>\n   ((\\t. if t = &0 then c pow 2 / &2 else (&1 - cos(c * t)) * inv(t pow 2))\n    has_real_integral (pi * c / &2)) {t | &0 <= t}
-      #|  pi * (b - a) / &2 = pi * b / &2 - pi * a / &2
-      #|  t = &0
-      #|  t:real
-      #|  (\\t. if t = &0 then (b pow 2 - a pow 2) / &2\n          else (cos(a * t) - cos(b * t)) * inv(t pow 2)) =\n     (\\t. (if t = &0 then b pow 2 / &2 else (&1 - cos(b * t)) * inv(t pow 2)) -\n          (if t = &0 then a pow 2 / &2 else (&1 - cos(a * t)) * inv(t pow 2)))
-      #|  forall a b. &0 < a /\\ &0 < b ==>\n   ((\\t. if t = &0 then (b pow 2 - a pow 2) / &2\n         else (cos(a * t) - cos(b * t)) * inv(t pow 2))\n    has_real_integral (pi * (b - a) / &2)) {t | &0 <= t}
-      #|  abs x = x
-      #|  cos(alpha * x) = cos(abs alpha * x) /\\\n                 cos(beta * x) = cos(abs beta * x)
-      #|  &0 < x
-      #|  x:real
-      #|  {}:real->bool
-      #|  \\t. if t = &0 then (abs beta pow 2 - abs alpha pow 2) / &2\n                  else (cos(abs alpha * t) - cos(abs beta * t)) * inv(t pow 2)
-      #|  forall alpha beta. ~(alpha = &0) /\\ ~(beta = &0) ==>\n   ((\\t. if t = &0 then (beta pow 2 - alpha pow 2) / &2\n         else (cos(alpha * t) - cos(beta * t)) * inv(t pow 2))\n    has_real_integral (pi * (abs beta - abs alpha) / &2)) {t | &0 <= t}
-      #|  pi * (&0 - --a) / &2 = --(pi * (--a) / &2)
-      #|  t:real
-      #|  {&0}
-      #|  \\t. --((if t = &0 then (--a) pow 2 / &2\n                       else (&1 - cos((--a) * t)) * inv(t pow 2)))
-      #|  &0 < --a
-      #|  abs a = --a
-      #|  a < &0
-      #|  b = &0
-      #|  abs b = b
-      #|  &0 < b
-      #|  a = &0
-      #|  forall a b. a < b ==>\n   ((\\t. if t = &0 then (b pow 2 - a pow 2) / &2\n         else (cos(a * t) - cos(b * t)) * inv(t pow 2))\n    has_real_integral (pi * (abs b - abs a) / &2)) {t | &0 <= t}
-      #|  &0 < h ==> ((y - x - h) - (y - x)) / (&2 * h) = -- &1 / &2
-      #|  max (&0) (&1 - (y - x) / h) = &0
-      #|  min (&1) (&1 - (y - x) / h) = &1 - (y - x) / h
-      #|  &1 < (y - x) / h
-      #|  abs(x - y) = y - x
-      #|  abs(x + h - y) = y - x - h
-      #|  &0 < h ==> ((x + h - y) - (y - x)) / (&2 * h) = &1 - (y - x) / h - &1 / &2
-      #|  max (&0) (&1 - (y - x) / h) = &1 - (y - x) / h
-      #|  min (&1) (&1 - (y - x) / h) = &1 - (y - x) / h
-      #|  &0 <= (y - x) / h
-      #|  (y - x) / h <= &1
-      #|  abs(x - y) = y - x
-      #|  abs(x + h - y) = x + h - y
-      #|  y <= x + h
-      #|  &0 < h ==> (x + h - y - (x - y)) / (&2 * h) = &1 / &2
-      #|  max (&0) (&1) = &1
-      #|  min (&1) (&1 - (y - x) / h) = &1
-      #|  (y - x) / h <= &0
-      #|  abs(x - y) = x - y
-      #|  abs(x + h - y) = x + h - y
-      #|  y <= x
-      #|  forall x h y. &0 < h ==>\n   max (&0) (min (&1) (&1 - (y - x) / h)) =\n   &1 / &2 + (abs(x + h - y) - abs(x - y)) / (&2 * h)
-      #|  (inv pi * inv h) * pi * (abs(x + h - y) - abs(x - y)) * inv(&2) =\n                 (inv pi * pi) * (abs(x + h - y) - abs(x - y)) * inv(&2) * inv h
-      #|  inv(pi * h) * pi * (abs(x + h - y) - abs(x - y)) / &2 =\n                (abs(x + h - y) - abs(x - y)) / (&2 * h)
-      #|  ~(pi = &0) /\\ ~(h = &0)
-      #|  real_integral {t | &0 <= t}\n     (\\t. if t = &0 then ((x + h - y) pow 2 - (x - y) pow 2) / &2\n          else (cos((x - y) * t) - cos((x + h - y) * t)) * inv(t pow 2)) =\n     pi * (abs(x + h - y) - abs(x - y)) / &2
-      #|  ((\\t. if t = &0 then ((x + h - y) pow 2 - (x - y) pow 2) / &2\n           else (cos((x - y) * t) - cos((x + h - y) * t)) * inv(t pow 2))\n     has_real_integral (pi * (abs(x + h - y) - abs(x - y)) / &2)) {t | &0 <= t}
-      #|  forall x h y. &0 < h ==>\n   max (&0) (min (&1) (&1 - (y - x) / h)) =\n   &1 / &2 + inv(pi * h) *\n   real_integral {t | &0 <= t}\n     (\\t. if t = &0 then ((x + h - y) pow 2 - (x - y) pow 2) / &2\n          else (cos((x - y) * t) - cos((x + h - y) * t)) * inv(t pow 2))
-      #|  forall x h u t:real. (x + h - u) * t = t * (x + h) - t * u
-      #|  forall x u t:real. (x - u) * t = t * x - t * u
-      #|  forall x h u t:real.\n   cos((x - u) * t) - cos((x + h - u) * t) =\n   cos(t * u) * (cos(t * x) - cos(t * (x + h))) -\n   sin(t * u) * (sin(t * (x + h)) - sin(t * x))
-      #|  S:real->bool
-      #|  \\u:real. ((pp:real->real) u * sin(t * u)) * b1 * c1
-      #|  \\u:real. ((pp:real->real) u * cos(t * u)) * a1 * c1
-      #|  forall u:real. (pp:real->real) u * (cos(t * u) * a1 - sin(t * u) * b1) * c1 =\n    (pp u * cos(t * u)) * (a1 * c1) - (pp u * sin(t * u)) * (b1 * c1)
-      #|  forall S:real->bool. FINITE S ==>\n   forall(pp:real->real) a1 b1 c1 t:real.\n   sum S (\\u. pp u * (cos(t * u) * a1 - sin(t * u) * b1) * c1) =\n   (sum S (\\u. pp u * cos(t * u)) * a1 - sum S (\\u. pp u * sin(t * u)) * b1) * c1
-      #|  x + h - u:real
-      #|  x - u:real
-      #|  t:real
-      #|  {&0}
-      #|  (\\t. pp u * (if t = &0\n     then ((x + h - u) pow 2 - (x - u) pow 2) / &2\n     else (cos((x - u) * t) - cos((x + h - u) * t)) * inv(t pow 2))):real->real
-      #|  u:real
-      #|  \\y:real. sin(t * y)
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  \\y:real. cos(t * y)
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  S:real->bool
-      #|  t:real
-      #|  u':real
-      #|  h:real
-      #|  x:real
-      #|  cos((x - u') * t) - cos((x + h - u') * t) =\n       cos(t * u') * (cos(t * x) - cos(t * (x + h))) -\n       sin(t * u') * (sin(t * (x + h)) - sin(t * x))
-      #|  forall u':real. pp u' * (cos((x - u') * t) - cos((x + h - u') * t)) *\n     inv(t pow 2) =\n     pp u' * (cos(t * u') * (cos(t * x) - cos(t * (x + h))) -\n             sin(t * u') * (sin(t * (x + h)) - sin(t * x))) * inv(t pow 2)
-      #|  t:real
-      #|  {&0}
-      #|  (\\t. sum S (\\u:real. pp u * (cos((x - u) * t) - cos((x + h - u) * t)) *\n   inv(t pow 2)))
-      #|  x + h - u:real
-      #|  x - u:real
-      #|  u:real
-      #|  sum S (\\x':real. pp x' * real_integral {t | &0 <= t}\n     (\\t. if t = &0 then ((x + h - x') pow 2 - (x - x') pow 2) / &2\n          else (cos((x - x') * t) - cos((x + h - x') * t)) * inv(t pow 2))) = V
-      #|  V = sum S (\\u:real. pp u * pi * (abs(x + h - u) - abs(x - u)) / &2)
-      #|  forall u:real. pp u * (inv (pi * h) *\n     real_integral {t | &0 <= t}\n       (\\t. if t = &0 then ((x + h - u) pow 2 - (x - u) pow 2) / &2\n            else (cos ((x - u) * t) - cos ((x + h - u) * t)) * inv (t pow 2))) =\n     inv(pi * h) * (pp u * real_integral {t | &0 <= t}\n       (\\t. if t = &0 then ((x + h - u) pow 2 - (x - u) pow 2) / &2\n            else (cos ((x - u) * t) - cos ((x + h - u) * t)) * inv (t pow 2)))
-      #|  &1 * &1 / &2 = &1 / &2
-      #|  forall u:real. pp u * (&1 / &2 + inv(pi * h) * real_integral {t | &0 <= t}\n     (\\t. if t = &0 then ((x + h - u) pow 2 - (x - u) pow 2) / &2\n          else (cos((x - u) * t) - cos((x + h - u) * t)) * inv(t pow 2))) =\n     pp u * &1 / &2 + pp u * (inv(pi * h) * real_integral {t | &0 <= t}\n     (\\t. if t = &0 then ((x + h - u) pow 2 - (x - u) pow 2) / &2\n          else (cos((x - u) * t) - cos((x + h - u) * t)) * inv(t pow 2)))
-      #|  u:real
-      #|  h:real
-      #|  x:real
-      #|  forall u:real. u IN S ==> max (&0) (min (&1) (&1 - (u - x) / h)) =\n     &1 / &2 + inv(pi * h) * real_integral {t | &0 <= t}\n       (\\t. if t = &0 then ((x + h - u) pow 2 - (x - u) pow 2) / &2\n            else (cos((x - u) * t) - cos((x + h - u) * t)) * inv(t pow 2))
-      #|  (\\u:real. max (&0) (min (&1) (&1 - (u - x) / h)) *\n    prob p {a:A | a IN prob_carrier p /\\ Y a = u}) =\n   (\\u. pp u * max (&0) (min (&1) (&1 - (u - x) / h)))
-      #|  (\\y. max (&0) (min (&1) (&1 - (y - x) / h))):real->real
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  sum S (pp:real->real) = &1
-      #|  FINITE (S:real->bool)
-      #|  pp = (\\u:real. prob p {a:A | a IN prob_carrier p /\\ Y a = u})
-      #|  S = IMAGE (Y:A->real) (prob_carrier p)
-      #|  forall p:A prob_space Y x h.\n    simple_rv p Y /\\ &0 < h\n    ==> simple_expectation p\n          (\\a. max (&0) (min (&1) (&1 - (Y a - x) / h))) =\n        &1 / &2 +\n        inv (pi * h) *\n        real_integral {t | &0 <= t}\n          (\\t. (simple_char_fn_re p Y t * (cos(t * x) - cos(t * (x + h))) -\n                simple_char_fn_im p Y t * (sin(t * (x + h)) - sin(t * x))) *\n               inv (t pow 2))
-      #|  ~(pi = &0) /\\ ~(TT = &0) /\\ ~(x = &0)
-      #|  TT * x / &2 = (TT / &2) * x
-      #|  ~(pi = &0)
-      #|  ((TT / &2) * x = &0) <=> (x = &0)
-      #|  ~(TT / &2 = &0)
-      #|  forall TT x. &0 < TT ==>\n   fejer_kernel_real TT x =\n   inv(pi) * (TT / &2) *\n   (if (TT / &2) * x = &0 then &1\n    else sin((TT / &2) * x) pow 2 * inv(((TT / &2) * x) pow 2))
-      #|  ~(pi = &0) /\\ ~(m = &0)
-      #|  (inv(pi) * m) * (inv m * pi) = &1
-      #|  x:real
-      #|  \\x:real. inv(pi) * m *\n    (if m * x = &0 then &1\n     else sin(m * x) pow 2 * inv((m * x) pow 2))
-      #|  &0 < m
-      #|  m = TT / &2
-      #|  &0 < TT / &2
-      #|  forall TT. &0 < TT ==>\n   ((\\x. fejer_kernel_real TT x) has_real_integral &1) (:real)
-      #|  &0 < m
-      #|  inv(pi) * m
-      #|  ((\\t. sin(t * x) * inv x) has_real_derivative f) (atreal t)
-      #|  t:real
-      #|  u:real
-      #|  ~(x = &0) ==> c = ((&1 * x) * c) * inv x
-      #|  cos(u * x) =\n    ((&1 * x) * cos(u * x)) * inv x
-      #|  u:real
-      #|  sin(TT * x) * inv x =\n   (sin(TT * x) * inv x) - (sin(&0 * x) * inv x)
-      #|  forall TT x. &0 < TT /\\ ~(x = &0) ==>\n   ((\\t. cos(t * x)) has_real_integral (sin(TT * x) * inv x))\n   (real_interval[&0, TT])
-      #|  ((\\t. t * sin(t * x) * inv x + cos(t * x) * inv(x pow 2))\n         has_real_derivative f) (atreal t)
-      #|  t:real
-      #|  u:real
-      #|  ~(x = &0) ==>\n     u * c = ((u * ((&1 * x) * c) * inv x + &1 * s * inv x) +\n              ((&1 * x) * --s) * inv(x * x))
-      #|  u * cos(u * x) =\n    ((u * ((&1 * x) * cos(u * x)) * inv x + &1 * sin(u * x) * inv x) +\n     ((&1 * x) * --sin(u * x)) * inv(x pow 2))
-      #|  u:real
-      #|  TT * sin(TT * x) * inv x + cos(TT * x) * inv(x pow 2) - inv(x pow 2) =\n     (TT * sin(TT * x) * inv x + cos(TT * x) * inv(x pow 2)) -\n     (&0 * sin(&0 * x) * inv x + cos(&0 * x) * inv(x pow 2))
-      #|  forall TT x. &0 < TT /\\ ~(x = &0) ==>\n   ((\\t. t * cos(t * x)) has_real_integral\n    (TT * sin(TT * x) * inv x + cos(TT * x) * inv(x pow 2) - inv(x pow 2)))\n   (real_interval[&0, TT])
-      #|  ~(pi = &0)
-      #|  &2 * (TT * x / &2) = TT * x
-      #|  TT * x / &2
-      #|  &1 - cos(TT * x) = &2 * sin(TT * x / &2) pow 2
-      #|  ~(TT = &0) /\\ ~(x = &0)
-      #|  sin (TT * x) * inv x -\n     inv TT * (TT * sin (TT * x) * inv x + cos (TT * x) * inv (x pow 2) -\n               inv (x pow 2)) =\n     (&1 - cos(TT * x)) * inv(TT * x pow 2)
-      #|  real_integral (real_interval [&0,TT]) (\\t. t * cos (t * x)) =\n     TT * sin(TT * x) * inv x + cos(TT * x) * inv(x pow 2) - inv(x pow 2)
-      #|  real_integral (real_interval [&0,TT]) (\\t. cos (t * x)) =\n     sin(TT * x) * inv x
-      #|  x:real
-      #|  TT:real
-      #|  x:real
-      #|  TT:real
-      #|  (\\t. cos(t * x)) real_integrable_on real_interval[&0,TT] /\\\n                  (\\t. t * cos(t * x)) real_integrable_on real_interval[&0,TT]
-      #|  (\\t:real. (&1 - t / TT) * cos(t * x)) =\n     (\\t. cos(t * x) - inv TT * (t * cos(t * x)))
-      #|  real_integral (real_interval[&0,TT]) (\\t. (&1 - t / TT) * cos(t * x)) =\n      real_integral (real_interval[&0,TT]) (\\t. cos(t * x)) -\n      inv TT * real_integral (real_interval[&0,TT]) (\\t. t * cos(t * x))
-      #|  ~(TT = &0)
-      #|  ~(TT = &0)
-      #|  &1 - (&2 * u) / (&2 * TT) = &1 - u / TT
-      #|  ((\\t. t - t pow 2 / (&2 * TT)) has_real_derivative f) (atreal t)
-      #|  t:real
-      #|  u:real
-      #|  u:real
-      #|  ~(TT = &0)
-      #|  TT / &2 = (\\t:real. t - t pow 2 / (&2 * TT)) TT -\n                              (\\t:real. t - t pow 2 / (&2 * TT)) (&0)
-      #|  real_integral (real_interval[&0,TT]) (\\t:real. &1 - t / TT) =\n                 TT / &2
-      #|  x = &0
-      #|  forall TT x. &0 < TT ==>\n   fejer_kernel_real TT x =\n   inv pi * real_integral (real_interval[&0,TT])\n     (\\t. (&1 - t / TT) * cos(t * x))
-      #|  u:real
-      #|  \\y:real. cos(t * y)
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  forall t:real. simple_expectation (p:A prob_space)\n    (\\x:A. cos(t * (Y:A->real) x)) =\n    sum (IMAGE Y (prob_carrier p))\n      (\\u. cos(t * u) * prob p {x | x IN prob_carrier p /\\ Y x = u})
-      #|  forall p:A prob_space Y:A->real.\n    simple_rv p Y ==>\n    (\\t. simple_char_fn_re p Y t) real_continuous_on (:real)
-      #|  u:real
-      #|  \\y:real. sin(t * y)
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  forall t:real. simple_expectation (p:A prob_space)\n    (\\x:A. sin(t * (Y:A->real) x)) =\n    sum (IMAGE Y (prob_carrier p))\n      (\\u. sin(t * u) * prob p {x | x IN prob_carrier p /\\ Y x = u})
-      #|  forall p:A prob_space Y:A->real.\n    simple_rv p Y ==>\n    (\\t. simple_char_fn_im p Y t) real_continuous_on (:real)
-      #|  {x:real | x = &0} = {&0}
-      #|  (:real)
-      #|  (\\t:real. simple_char_fn_im (p:A prob_space) (Y:A->real) (t / D)) =\n        (\\t. simple_char_fn_im p Y t) o (\\t. t * inv D)
-      #|  (:real)
-      #|  (:real)
-      #|  (\\t:real. simple_char_fn_re (p:A prob_space) (Y:A->real) (t / D)) =\n         (\\t. simple_char_fn_re p Y t) o (\\t. t * inv D)
-      #|  (:real)
-      #|  forall p:A prob_space Y:A->real D:real a b.\n    simple_rv p Y /\\ &0 < D ==>\n    (\\t. (abs(simple_char_fn_re p Y (t / D) - exp(--(t pow 2 / &2))) +\n          abs(simple_char_fn_im p Y (t / D))) / t)\n    real_measurable_on real_interval[a,b]
-      #|  &0 <= x ==> &0 <= x + &1
-      #|  (TT * (M pow 2 + &1) / &2 + M) * t =\n      t * (TT * (M pow 2 + &1) / &2 + M)
-      #|  t pow 2 * (M pow 2 + &1) / &2 + t * M =\n      t * (t * (M pow 2 + &1) / &2 + M)
-      #|  t pow 2 * M pow 2 / &2 + t pow 2 / &2 =\n      t pow 2 * (M pow 2 + &1) / &2
-      #|  (t pow 2 * M pow 2 / &2 + t pow 2 / &2) + t * M
-      #|  exp(--(t pow 2 / &2)) <= &1
-      #|  &1 - t pow 2 / &2 <= exp(--(t pow 2 / &2))
-      #|  simple_char_fn_re (p:A prob_space) (Y:A->real) t <= &1
-      #|  &1 - t pow 2 * M pow 2 / &2 <=\n      simple_char_fn_re (p:A prob_space) (Y:A->real) t
-      #|  abs(simple_char_fn_re (p:A prob_space) (Y:A->real) t -\n     exp(--(t pow 2 / &2))) <= t pow 2 * M pow 2 / &2 + t pow 2 / &2
-      #|  &0 <= t pow 2 / &2
-      #|  t pow 2 / &2
-      #|  &1 - t pow 2 / &2 <= exp(--(t pow 2 / &2))
-      #|  &0 <= x ==> --x <= &0
-      #|  exp(--(t pow 2 / &2)) <= &1
-      #|  a <= b ==> c <= a ==> c <= b
-      #|  abs t = t
-      #|  t * (Y:A->real) x
-      #|  x:A
-      #|  (\\x:A. abs(sin(t * (Y:A->real) x))) =\n        (\\x. (\\y:real. abs(sin(t * y))) (Y x))
-      #|  simple_expectation (p:A prob_space) (\\x:A. t * M)
-      #|  simple_expectation (p:A prob_space)\n      (\\x:A. abs(sin(t * (Y:A->real) x)))
-      #|  abs(simple_char_fn_im (p:A prob_space) (Y:A->real) t)\n     <= t * M
-      #|  t * (Y:A->real) x
-      #|  (\\x:A. &1 - (t * (Y:A->real) x) pow 2 / &2) =\n       (\\x. (\\y:real. &1 - (t * y) pow 2 / &2) (Y x))
-      #|  (t * (Y:A->real) x) pow 2 <= t pow 2 * M pow 2
-      #|  x:A
-      #|  (\\x:A. &1 - (t * (Y:A->real) x) pow 2 / &2) =\n        (\\x. (\\y:real. &1 - (t * y) pow 2 / &2) (Y x))
-      #|  &1 - t pow 2 * M pow 2 / &2 =\n       simple_expectation (p:A prob_space)\n         (\\x:A. &1 - t pow 2 * M pow 2 / &2)
-      #|  simple_expectation (p:A prob_space)\n      (\\x:A. &1 - (t * (Y:A->real) x) pow 2 / &2)
-      #|  &1 - t pow 2 * M pow 2 / &2 <=\n     simple_char_fn_re (p:A prob_space) (Y:A->real) t
-      #|  t * (Y:A->real) x
-      #|  &1 = simple_expectation (p:A prob_space) (\\x:A. &1)
-      #|  simple_char_fn_re (p:A prob_space) (Y:A->real) t <= &1
-      #|  &0 <= a /\\ &0 <= b ==> &0 <= a + b
-      #|  abs((abs (simple_char_fn_re (p:A prob_space) (Y:A->real) t -\n     exp (--(t pow 2 / &2))) +\n     abs (simple_char_fn_im p Y t)) / t) =\n     (abs (simple_char_fn_re p Y t - exp (--(t pow 2 / &2))) +\n     abs (simple_char_fn_im p Y t)) / t
-      #|  &0 < t
-      #|  t:real
-      #|  TT:real
-      #|  &0
-      #|  &1
-      #|  Y:A->real
-      #|  p:A prob_space
-      #|  {&0:real}
-      #|  (\\t:real. TT * (M pow 2 + &1) / &2 + M):real->real
-      #|  \\x:A. abs((Y:A->real) x)
-      #|  p:A prob_space
-      #|  ?M:real. forall x:A. x IN prob_carrier p ==> abs((Y:A->real) x) <= M
-      #|  forall p:A prob_space Y TT.\n    simple_rv p Y /\\ &0 < TT\n    ==> (\\t. (abs(simple_char_fn_re p Y t - exp(--(t pow 2 / &2))) +\n              abs(simple_char_fn_im p Y t)) / t)\n        real_integrable_on real_interval[&0, TT]
-      #|  &2 * &1 * abs((a - b) / &2)
-      #|  cos a - cos b = -- &2 * sin((a + b) / &2) * sin((a - b) / &2)
-      #|  (a + b) / &2 + (a - b) / &2 = a /\\\n                (a + b) / &2 - (a - b) / &2 = b
-      #|  (a - b) / &2
-      #|  (a + b) / &2
-      #|  (a - b) / &2
-      #|  (a + b) / &2
-      #|  forall a b. abs(cos a - cos b) <= abs(a - b)
-      #|  &2 * &1 * abs((a - b) / &2)
-      #|  sin a - sin b = &2 * cos((a + b) / &2) * sin((a - b) / &2)
-      #|  (a + b) / &2 + (a - b) / &2 = a /\\\n                (a + b) / &2 - (a - b) / &2 = b
-      #|  (a - b) / &2
-      #|  (a + b) / &2
-      #|  (a - b) / &2
-      #|  (a + b) / &2
-      #|  forall a b. abs(sin a - sin b) <= abs(a - b)
+      #|  sin((TT : Real))
+      #|  real_of_num(1) * inv(abs((TT : Real)))
+      #|  real_of_num(1) * inv((TT : Real)) + real_of_num(6) * inv(TT)
+      #|  abs(pow(sin((TT : Real)), 2) * inv(TT)) + abs(real_integral(real_interval([(real_of_num(0), real_of_num(2) * TT)]), (t : Real) => sin(t) * inv(t)) - pi / real_of_num(2))
+      #|  (TT : Real)
+      #|  \226\136\128 TT : Real, real_of_num(0) < TT \226\134\146 abs(real_integral(real_interval([(real_of_num(0), TT)]), (x : Real) => pow(sin(x), 2) * inv(pow(x, 2))) - pi / real_of_num(2)) <= real_of_num(7) * inv(TT)
+      #|  real_of_num(7) * inv((TT : Real)) == real_of_num(7) / TT
+      #|  (e : Real) * inv(e) == real_of_num(1)
+      #|  (e : Real) * (real_of_num(7) * inv(e) + real_of_num(1)) == real_of_num(7) + e
+      #|  (e : Real) * (real_of_num(7) * inv(e) + real_of_num(1))
+      #|  real_of_num(7) < (e : Real) * (TT : Real)
+      #|  real_of_num(7) * inv((TT : Real))
+      #|  real_of_num(0) <= (a : Real) \226\134\146 real_of_num(0) < a + real_of_num(1)
+      #|  real_of_num(7) * inv((e : Real)) + real_of_num(1)
+      #|  real_of_num(0) < (TT : Real)
+      #|  (TT : Real)
+      #|  real_of_num(7) * inv((e : Real)) + real_of_num(1)
+      #|  (e : Real)
+      #|  op_minus_minus_minus_gt((TT : Real) => real_integral(real_interval([(real_of_num(0), TT)]), (x : Real) => pow(sin(x), 2) * inv(pow(x, 2))), pi / real_of_num(2), at_posinfinity)
+      #|  (fejer_kernel_real : (Real, Real) -> Real)((TT : Real), (x : Real)) == (if x == real_of_num(0) { TT / (real_of_num(2) * pi) } else { real_of_num(2) * (pow(sin(TT * (x / real_of_num(2))), 2) / (pi * (TT * pow(x, 2)))) })
+      #|  \226\136\128 TT : Real, \226\136\128 x : Real, real_of_num(0) < TT \226\134\146 real_of_num(0) <= fejer_kernel_real(TT, x)
+      #|  pow(sin((TT : Real) * ((x : Real) * inv(real_of_num(2)))), 2) == pow(abs(sin(TT * (x * inv(real_of_num(2))))), 2)
+      #|  \226\136\128 TT : Real, \226\136\128 x : Real, real_of_num(0) < TT && !(x == real_of_num(0)) \226\134\146 fejer_kernel_real(TT, x) <= real_of_num(2) / (pi * (TT * pow(x, 2)))
+      #|  pi == pi / real_of_num(2) + pi / real_of_num(2)
+      #|  real_of_num(7) * inv(real_of_num(14) * inv((e : Real)) + real_of_num(1))
+      #|  real_of_num(7) * inv((b : Real))
+      #|  abs(real_integral(real_interval([(real_of_num(0), (b : Real))]), (x : Real) => if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) }) - pi / real_of_num(2)) < (e : Real) / real_of_num(2)
+      #|  real_of_num(7) * inv(real_of_num(14) * inv((e : Real)) + real_of_num(1))
+      #|  real_of_num(7) * inv(-(a : Real))
+      #|  real_of_num(0) < -(a : Real)
+      #|  abs(real_integral(real_interval([(real_of_num(0), -(a : Real))]), (x : Real) => if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) }) - pi / real_of_num(2)) < (e : Real) / real_of_num(2)
+      #|  !((e : Real) == real_of_num(0))
+      #|  real_of_num(7) * inv(real_of_num(14) * inv((e : Real))) == e / real_of_num(2)
+      #|  real_of_num(7) * inv(real_of_num(14) * inv((e : Real)))
+      #|  real_of_num(7) * inv(real_of_num(14) * inv((e : Real)) + real_of_num(1)) < e / real_of_num(2)
+      #|  {real_of_num(0)}
+      #|  \226\136\128 TT : Real, real_of_num(0) < TT \226\134\146 real_integral(real_interval([(real_of_num(0), TT)]), (x : Real) => if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) }) == real_integral(real_interval([(real_of_num(0), TT)]), (x : Real) => pow(sin(x), 2) * inv(pow(x, 2)))
+      #|  -(y : Real)
+      #|  (y : Real)
+      #|  IMAGE(op_minus_minus, real_interval([(real_of_num(0), -(a : Real))])) == real_interval([(a, real_of_num(0))])
+      #|  (-(x : Real) == real_of_num(0)) == (x == real_of_num(0))
+      #|  \226\136\128 x : Real, (if -x == real_of_num(0) { real_of_num(1) } else { pow(sin(-x), 2) * inv(pow(-x, 2)) }) == (if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) })
+      #|  real_interval([(real_of_num(0), -(a : Real))])
+      #|  (x : Real) => if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) }
+      #|  real_integral(real_interval([((a : Real), real_of_num(0))]), (x : Real) => if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) }) == real_integral(real_interval([(real_of_num(0), -a)]), (x : Real) => if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) })
+      #|  (UNIV : (Real) -> Bool)
+      #|  real_integral(real_interval([((a : Real), (b : Real))]), (x : Real) => if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) }) == real_integral(real_interval([(a, real_of_num(0))]), (x : Real) => if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) }) + real_integral(real_interval([(real_of_num(0), b)]), (x : Real) => if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) })
+      #|  (a : Real) <= (b : Real)
+      #|  (a : Real) < real_of_num(0)
+      #|  real_of_num(0) < (b : Real)
+      #|  (a : Real) <= -(real_of_num(14) * inv((e : Real)) + real_of_num(1)) && real_of_num(14) * inv(e) + real_of_num(1) <= (b : Real)
+      #|  real_of_num(0) <= (a : Real) \226\134\146 real_of_num(0) < a + real_of_num(1)
+      #|  real_of_num(0) < real_of_num(14) * inv((e : Real)) + real_of_num(1)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  real_of_num(0) <= (a : Real) \226\134\146 real_of_num(0) < a + real_of_num(1)
+      #|  real_of_num(14) * inv((e : Real)) + real_of_num(1)
+      #|  (e : Real)
+      #|  (UNIV : (Real) -> Bool)
+      #|  has_real_integral((x : Real) => if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) }, pi, UNIV)
+      #|  (x : Real) + x == (y : Real) \226\134\146 x == y / real_of_num(2)
+      #|  real_integral({(t : Real) | real_of_num(0) <= t}, (f : (Real) -> Real)) == pi / real_of_num(2)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
+      #|  real_integral({(t : Real) | real_of_num(0) <= t}, (f : (Real) -> Real)) + real_integral({(t : Real) | real_of_num(0) <= t}, f) == pi
+      #|  UNION({(t : Real) | real_of_num(0) <= t}, {(t : Real) | t <= real_of_num(0)}) == UNIV
+      #|  INTER({(t : Real) | real_of_num(0) <= t}, {(t : Real) | t <= real_of_num(0)}) == {real_of_num(0)}
+      #|  has_real_integral((f : (Real) -> Real), real_integral({(t : Real) | real_of_num(0) <= t}, f) + real_integral({(t : Real) | real_of_num(0) <= t}, f), UNION({(t : Real) | real_of_num(0) <= t}, {(t : Real) | t <= real_of_num(0)}))
+      #|  ((x : Real) => (f : (Real) -> Real)(-x)) == f
+      #|  -(x : Real)
+      #|  IMAGE(op_minus_minus, {(t : Real) | real_of_num(0) <= t}) == {(t : Real) | t <= real_of_num(0)}
+      #|  {(t : Real) | real_of_num(0) <= t}
+      #|  real_integral({(t : Real) | real_of_num(0) <= t}, (f : (Real) -> Real))
+      #|  (f : (Real) -> Real)
+      #|  has_real_integral((f : (Real) -> Real), real_integral({(t : Real) | real_of_num(0) <= t}, f), {(t : Real) | t <= real_of_num(0)})
+      #|  (UNIV : (Real) -> Bool)
+      #|  real_integrable_on((f : (Real) -> Real), {(t : Real) | t <= real_of_num(0)})
+      #|  (UNIV : (Real) -> Bool)
+      #|  real_integrable_on((f : (Real) -> Real), {(t : Real) | real_of_num(0) <= t})
+      #|  real_integrable_on((f : (Real) -> Real), UNIV)
+      #|  !(-(t : Real) == real_of_num(0))
+      #|  (t : Real) == real_of_num(0)
+      #|  \226\136\128 t : Real, (f : (Real) -> Real)(-t) == f(t)
+      #|  has_real_integral((f : (Real) -> Real), pi, UNIV)
+      #|  (f : (Real) -> Real) == ((x : Real) => if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) })
+      #|  has_real_integral((x : Real) => if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) }, pi / real_of_num(2), {(t : Real) | real_of_num(0) <= t})
+      #|  inv(inv(real_of_num(2))) * (pi / real_of_num(2)) == pi
+      #|  (x : Real)
+      #|  ((x : Real) => ((x : Real) => (h : (Real) -> Real)(real_of_num(2) * x))(inv(real_of_num(2)) * x)) == h
+      #|  inv(real_of_num(2))
+      #|  pi / real_of_num(2)
+      #|  (x : Real) => (h : (Real) -> Real)(real_of_num(2) * x)
+      #|  pi / real_of_num(2) == inv(real_of_num(2)) * pi
+      #|  has_real_integral((x : Real) => (h : (Real) -> Real)(real_of_num(2) * x), pi / real_of_num(2), UNIV)
+      #|  !((x : Real) == real_of_num(0))
+      #|  (x : Real)
+      #|  !(real_of_num(2) * (x : Real) == real_of_num(0))
+      #|  (x : Real) == real_of_num(0)
+      #|  (x : Real)
+      #|  ((x : Real) => (h : (Real) -> Real)(real_of_num(2) * x)) == ((x : Real) => inv(real_of_num(2)) * (f : (Real) -> Real)(x))
+      #|  has_real_integral((f : (Real) -> Real), pi, UNIV)
+      #|  (f : (Real) -> Real) == ((x : Real) => if x == real_of_num(0) { real_of_num(1) } else { pow(sin(x), 2) * inv(pow(x, 2)) })
+      #|  (h : (Real) -> Real) == ((t : Real) => if t == real_of_num(0) { real_of_num(1) / real_of_num(2) } else { (real_of_num(1) - cos(t)) * inv(pow(t, 2)) })
+      #|  has_real_integral((t : Real) => if t == real_of_num(0) { real_of_num(1) / real_of_num(2) } else { (real_of_num(1) - cos(t)) * inv(pow(t, 2)) }, pi, UNIV)
+      #|  (x : Real) + x == (y : Real) \226\134\146 x == y / real_of_num(2)
+      #|  real_integral({(t : Real) | real_of_num(0) <= t}, (h : (Real) -> Real)) == pi / real_of_num(2)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (h : (Real) -> Real)
+      #|  real_integral({(t : Real) | real_of_num(0) <= t}, (h : (Real) -> Real)) + real_integral({(t : Real) | real_of_num(0) <= t}, h) == pi
+      #|  UNION({(t : Real) | real_of_num(0) <= t}, {(t : Real) | t <= real_of_num(0)}) == UNIV
+      #|  INTER({(t : Real) | real_of_num(0) <= t}, {(t : Real) | t <= real_of_num(0)}) == {real_of_num(0)}
+      #|  has_real_integral((h : (Real) -> Real), real_integral({(t : Real) | real_of_num(0) <= t}, h) + real_integral({(t : Real) | real_of_num(0) <= t}, h), UNION({(t : Real) | real_of_num(0) <= t}, {(t : Real) | t <= real_of_num(0)}))
+      #|  ((x : Real) => (h : (Real) -> Real)(-x)) == h
+      #|  -(x : Real)
+      #|  IMAGE(op_minus_minus, {(t : Real) | real_of_num(0) <= t}) == {(t : Real) | t <= real_of_num(0)}
+      #|  {(t : Real) | real_of_num(0) <= t}
+      #|  real_integral({(t : Real) | real_of_num(0) <= t}, (h : (Real) -> Real))
+      #|  (h : (Real) -> Real)
+      #|  has_real_integral((h : (Real) -> Real), real_integral({(t : Real) | real_of_num(0) <= t}, h), {(t : Real) | t <= real_of_num(0)})
+      #|  (UNIV : (Real) -> Bool)
+      #|  real_integrable_on((h : (Real) -> Real), {(t : Real) | t <= real_of_num(0)})
+      #|  (UNIV : (Real) -> Bool)
+      #|  real_integrable_on((h : (Real) -> Real), {(t : Real) | real_of_num(0) <= t})
+      #|  real_integrable_on((h : (Real) -> Real), UNIV)
+      #|  !(-(t : Real) == real_of_num(0))
+      #|  (t : Real) == real_of_num(0)
+      #|  \226\136\128 t : Real, (h : (Real) -> Real)(-t) == h(t)
+      #|  has_real_integral((h : (Real) -> Real), pi, UNIV)
+      #|  (h : (Real) -> Real) == ((t : Real) => if t == real_of_num(0) { real_of_num(1) / real_of_num(2) } else { (real_of_num(1) - cos(t)) * inv(pow(t, 2)) })
+      #|  has_real_integral((t : Real) => if t == real_of_num(0) { real_of_num(1) / real_of_num(2) } else { (real_of_num(1) - cos(t)) * inv(pow(t, 2)) }, pi / real_of_num(2), {(t : Real) | real_of_num(0) <= t})
+      #|  (J : Real) + J == (c : Real) * pi
+      #|  (J : Real) == real_integral({(t : Real) | real_of_num(0) <= t}, (f : (Real) -> Real))
+      #|  real_integral({(t : Real) | real_of_num(0) <= t}, (f : (Real) -> Real)) == (c : Real) * (pi / real_of_num(2))
+      #|  pi * ((c : Real) / real_of_num(2)) == c * (pi / real_of_num(2))
+      #|  UNION({(t : Real) | real_of_num(0) <= t}, {(t : Real) | t <= real_of_num(0)}) == UNIV
+      #|  (UNIV : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
+      #|  real_integral({(t : Real) | real_of_num(0) <= t}, (f : (Real) -> Real)) + real_integral({(t : Real) | real_of_num(0) <= t}, f) == (c : Real) * pi
+      #|  INTER({(t : Real) | real_of_num(0) <= t}, {(t : Real) | t <= real_of_num(0)}) == {real_of_num(0)}
+      #|  has_real_integral((f : (Real) -> Real), real_integral({(t : Real) | real_of_num(0) <= t}, f) + real_integral({(t : Real) | real_of_num(0) <= t}, f), UNION({(t : Real) | real_of_num(0) <= t}, {(t : Real) | t <= real_of_num(0)}))
+      #|  ((x : Real) => (f : (Real) -> Real)(-x)) == f
+      #|  -(x : Real)
+      #|  IMAGE(op_minus_minus, {(t : Real) | real_of_num(0) <= t}) == {(t : Real) | t <= real_of_num(0)}
+      #|  {(t : Real) | real_of_num(0) <= t}
+      #|  real_integral({(t : Real) | real_of_num(0) <= t}, (f : (Real) -> Real))
+      #|  (f : (Real) -> Real)
+      #|  has_real_integral((f : (Real) -> Real), real_integral({(t : Real) | real_of_num(0) <= t}, f), {(t : Real) | t <= real_of_num(0)})
+      #|  (UNIV : (Real) -> Bool)
+      #|  real_integrable_on((f : (Real) -> Real), {(t : Real) | t <= real_of_num(0)})
+      #|  (UNIV : (Real) -> Bool)
+      #|  real_integrable_on((f : (Real) -> Real), {(t : Real) | real_of_num(0) <= t})
+      #|  real_integrable_on((f : (Real) -> Real), UNIV)
+      #|  !(-(t : Real) == real_of_num(0))
+      #|  (t : Real) == real_of_num(0)
+      #|  \226\136\128 t : Real, (f : (Real) -> Real)(-t) == f(t)
+      #|  has_real_integral((f : (Real) -> Real), (c : Real) * pi, UNIV)
+      #|  real_of_num(0) < (c : Real)
+      #|  pow((c : Real), 2) * (inv(c) * pi) == c * pi
+      #|  !((c : Real) == real_of_num(0)) && !((t : Real) == real_of_num(0)) \226\134\146 (real_of_num(1) - cos(c * t)) * inv(pow(t, 2)) == pow(c, 2) * ((real_of_num(1) - cos(c * t)) * (inv(pow(c, 2)) * inv(pow(t, 2))))
+      #|  (t : Real) == real_of_num(0)
+      #|  (t : Real)
+      #|  (f : (Real) -> Real) == ((t : Real) => pow((c : Real), 2) * (if t == real_of_num(0) { real_of_num(1) / real_of_num(2) } else { (real_of_num(1) - cos(c * t)) * inv(pow(c * t, 2)) }))
+      #|  has_real_integral((f : (Real) -> Real), pow((c : Real), 2) * (inv(c) * pi), UNIV)
+      #|  (f : (Real) -> Real) == ((t : Real) => if t == real_of_num(0) { pow((c : Real), 2) / real_of_num(2) } else { (real_of_num(1) - cos(c * t)) * inv(pow(t, 2)) })
+      #|  !((c : Real) * (x : Real) == real_of_num(0))
+      #|  (x : Real) == real_of_num(0)
+      #|  ((x : Real) => ((t : Real) => if t == real_of_num(0) { real_of_num(1) / real_of_num(2) } else { (real_of_num(1) - cos(t)) * inv(pow(t, 2)) })((c : Real) * x)) == ((x : Real) => if x == real_of_num(0) { real_of_num(1) / real_of_num(2) } else { (real_of_num(1) - cos(c * x)) * inv(pow(c * x, 2)) })
+      #|  (c : Real)
+      #|  pi
+      #|  (t : Real) => if t == real_of_num(0) { real_of_num(1) / real_of_num(2) } else { (real_of_num(1) - cos(t)) * inv(pow(t, 2)) }
+      #|  \226\136\128 c : Real, real_of_num(0) < c \226\134\146 has_real_integral((t : Real) => if t == real_of_num(0) { pow(c, 2) / real_of_num(2) } else { (real_of_num(1) - cos(c * t)) * inv(pow(t, 2)) }, pi * (c / real_of_num(2)), {(t : Real) | real_of_num(0) <= t})
+      #|  pi * (((b : Real) - (a : Real)) / real_of_num(2)) == pi * (b / real_of_num(2)) - pi * (a / real_of_num(2))
+      #|  (t : Real) == real_of_num(0)
+      #|  (t : Real)
+      #|  ((t : Real) => if t == real_of_num(0) { (pow((b : Real), 2) - pow((a : Real), 2)) / real_of_num(2) } else { (cos(a * t) - cos(b * t)) * inv(pow(t, 2)) }) == ((t : Real) => (if t == real_of_num(0) { pow(b, 2) / real_of_num(2) } else { (real_of_num(1) - cos(b * t)) * inv(pow(t, 2)) }) - (if t == real_of_num(0) { pow(a, 2) / real_of_num(2) } else { (real_of_num(1) - cos(a * t)) * inv(pow(t, 2)) }))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < a && real_of_num(0) < b \226\134\146 has_real_integral((t : Real) => if t == real_of_num(0) { (pow(b, 2) - pow(a, 2)) / real_of_num(2) } else { (cos(a * t) - cos(b * t)) * inv(pow(t, 2)) }, pi * ((b - a) / real_of_num(2)), {(t : Real) | real_of_num(0) <= t})
+      #|  abs((x : Real)) == x
+      #|  cos((alpha : Real) * (x : Real)) == cos(abs(alpha) * x) && cos((beta : Real) * x) == cos(abs(beta) * x)
+      #|  real_of_num(0) < (x : Real)
+      #|  (x : Real)
+      #|  ({} : (Real) -> Bool)
+      #|  (t : Real) => if t == real_of_num(0) { (pow(abs((beta : Real)), 2) - pow(abs((alpha : Real)), 2)) / real_of_num(2) } else { (cos(abs(alpha) * t) - cos(abs(beta) * t)) * inv(pow(t, 2)) }
+      #|  \226\136\128 alpha : Real, \226\136\128 beta : Real, !(alpha == real_of_num(0)) && !(beta == real_of_num(0)) \226\134\146 has_real_integral((t : Real) => if t == real_of_num(0) { (pow(beta, 2) - pow(alpha, 2)) / real_of_num(2) } else { (cos(alpha * t) - cos(beta * t)) * inv(pow(t, 2)) }, pi * ((abs(beta) - abs(alpha)) / real_of_num(2)), {(t : Real) | real_of_num(0) <= t})
+      #|  pi * ((real_of_num(0) - -(a : Real)) / real_of_num(2)) == -(pi * (-a / real_of_num(2)))
+      #|  (t : Real)
+      #|  {real_of_num(0)}
+      #|  (t : Real) => -(if t == real_of_num(0) { pow(-(a : Real), 2) / real_of_num(2) } else { (real_of_num(1) - cos(-a * t)) * inv(pow(t, 2)) })
+      #|  real_of_num(0) < -(a : Real)
+      #|  abs((a : Real)) == -a
+      #|  (a : Real) < real_of_num(0)
+      #|  (b : Real) == real_of_num(0)
+      #|  abs((b : Real)) == b
+      #|  real_of_num(0) < (b : Real)
+      #|  (a : Real) == real_of_num(0)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, a < b \226\134\146 has_real_integral((t : Real) => if t == real_of_num(0) { (pow(b, 2) - pow(a, 2)) / real_of_num(2) } else { (cos(a * t) - cos(b * t)) * inv(pow(t, 2)) }, pi * ((abs(b) - abs(a)) / real_of_num(2)), {(t : Real) | real_of_num(0) <= t})
+      #|  real_of_num(0) < (h : Real) \226\134\146 ((y : Real) - (x : Real) - h - (y - x)) / (real_of_num(2) * h) == -real_of_num(1) / real_of_num(2)
+      #|  max(real_of_num(0), real_of_num(1) - ((y : Real) - (x : Real)) / (h : Real)) == real_of_num(0)
+      #|  min(real_of_num(1), real_of_num(1) - ((y : Real) - (x : Real)) / (h : Real)) == real_of_num(1) - (y - x) / h
+      #|  real_of_num(1) < ((y : Real) - (x : Real)) / (h : Real)
+      #|  abs((x : Real) - (y : Real)) == y - x
+      #|  abs((x : Real) + ((h : Real) - (y : Real))) == y - x - h
+      #|  real_of_num(0) < (h : Real) \226\134\146 ((x : Real) + (h - (y : Real)) - (y - x)) / (real_of_num(2) * h) == real_of_num(1) - (y - x) / h - real_of_num(1) / real_of_num(2)
+      #|  max(real_of_num(0), real_of_num(1) - ((y : Real) - (x : Real)) / (h : Real)) == real_of_num(1) - (y - x) / h
+      #|  min(real_of_num(1), real_of_num(1) - ((y : Real) - (x : Real)) / (h : Real)) == real_of_num(1) - (y - x) / h
+      #|  real_of_num(0) <= ((y : Real) - (x : Real)) / (h : Real)
+      #|  ((y : Real) - (x : Real)) / (h : Real) <= real_of_num(1)
+      #|  abs((x : Real) - (y : Real)) == y - x
+      #|  abs((x : Real) + ((h : Real) - (y : Real))) == x + (h - y)
+      #|  (y : Real) <= (x : Real) + (h : Real)
+      #|  real_of_num(0) < (h : Real) \226\134\146 ((x : Real) + (h - (y : Real) - (x - y))) / (real_of_num(2) * h) == real_of_num(1) / real_of_num(2)
+      #|  max(real_of_num(0), real_of_num(1)) == real_of_num(1)
+      #|  min(real_of_num(1), real_of_num(1) - ((y : Real) - (x : Real)) / (h : Real)) == real_of_num(1)
+      #|  ((y : Real) - (x : Real)) / (h : Real) <= real_of_num(0)
+      #|  abs((x : Real) - (y : Real)) == x - y
+      #|  abs((x : Real) + ((h : Real) - (y : Real))) == x + (h - y)
+      #|  (y : Real) <= (x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 h : Real, \226\136\128 y : Real, real_of_num(0) < h \226\134\146 max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (y - x) / h)) == real_of_num(1) / real_of_num(2) + (abs(x + (h - y)) - abs(x - y)) / (real_of_num(2) * h)
+      #|  inv(pi) * inv((h : Real)) * (pi * ((abs((x : Real) + (h - (y : Real))) - abs(x - y)) * inv(real_of_num(2)))) == inv(pi) * pi * ((abs(x + (h - y)) - abs(x - y)) * (inv(real_of_num(2)) * inv(h)))
+      #|  inv(pi * (h : Real)) * (pi * ((abs((x : Real) + (h - (y : Real))) - abs(x - y)) / real_of_num(2))) == (abs(x + (h - y)) - abs(x - y)) / (real_of_num(2) * h)
+      #|  !(pi == real_of_num(0)) && !((h : Real) == real_of_num(0))
+      #|  real_integral({(t : Real) | real_of_num(0) <= t}, (t : Real) => if t == real_of_num(0) { (pow((x : Real) + ((h : Real) - (y : Real)), 2) - pow(x - y, 2)) / real_of_num(2) } else { (cos((x - y) * t) - cos((x + (h - y)) * t)) * inv(pow(t, 2)) }) == pi * ((abs(x + (h - y)) - abs(x - y)) / real_of_num(2))
+      #|  has_real_integral((t : Real) => if t == real_of_num(0) { (pow((x : Real) + ((h : Real) - (y : Real)), 2) - pow(x - y, 2)) / real_of_num(2) } else { (cos((x - y) * t) - cos((x + (h - y)) * t)) * inv(pow(t, 2)) }, pi * ((abs(x + (h - y)) - abs(x - y)) / real_of_num(2)), {(t : Real) | real_of_num(0) <= t})
+      #|  \226\136\128 x : Real, \226\136\128 h : Real, \226\136\128 y : Real, real_of_num(0) < h \226\134\146 max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (y - x) / h)) == real_of_num(1) / real_of_num(2) + inv(pi * h) * real_integral({(t : Real) | real_of_num(0) <= t}, (t : Real) => if t == real_of_num(0) { (pow(x + (h - y), 2) - pow(x - y, 2)) / real_of_num(2) } else { (cos((x - y) * t) - cos((x + (h - y)) * t)) * inv(pow(t, 2)) })
+      #|  \226\136\128 x : Real, \226\136\128 h : Real, \226\136\128 u : Real, \226\136\128 t : Real, (x + (h - u)) * t == t * (x + h) - t * u
+      #|  \226\136\128 x : Real, \226\136\128 u : Real, \226\136\128 t : Real, (x - u) * t == t * x - t * u
+      #|  \226\136\128 x : Real, \226\136\128 h : Real, \226\136\128 u : Real, \226\136\128 t : Real, cos((x - u) * t) - cos((x + (h - u)) * t) == cos(t * u) * (cos(t * x) - cos(t * (x + h))) - sin(t * u) * (sin(t * (x + h)) - sin(t * x))
+      #|  (S : (Real) -> Bool)
+      #|  (u : Real) => (pp : (Real) -> Real)(u) * sin((t : Real) * u) * ((b1 : Real) * (c1 : Real))
+      #|  (u : Real) => (pp : (Real) -> Real)(u) * cos((t : Real) * u) * ((a1 : Real) * (c1 : Real))
+      #|  \226\136\128 u : Real, (pp : (Real) -> Real)(u) * ((cos((t : Real) * u) * (a1 : Real) - sin(t * u) * (b1 : Real)) * (c1 : Real)) == pp(u) * cos(t * u) * (a1 * c1) - pp(u) * sin(t * u) * (b1 * c1)
+      #|  \226\136\128 S : (Real) -> Bool, FINITE(S) \226\134\146 (\226\136\128 pp : (Real) -> Real, \226\136\128 a1 : Real, \226\136\128 b1 : Real, \226\136\128 c1 : Real, \226\136\128 t : Real, sum(S, (u : Real) => pp(u) * ((cos(t * u) * a1 - sin(t * u) * b1) * c1)) == (sum(S, (u : Real) => pp(u) * cos(t * u)) * a1 - sum(S, (u : Real) => pp(u) * sin(t * u)) * b1) * c1)
+      #|  (x : Real) + ((h : Real) - (u : Real))
+      #|  (x : Real) - (u : Real)
+      #|  (t : Real)
+      #|  {real_of_num(0)}
+      #|  (t : Real) => (pp : (Real) -> Real)((u : Real)) * (if t == real_of_num(0) { (pow((x : Real) + ((h : Real) - u), 2) - pow(x - u, 2)) / real_of_num(2) } else { (cos((x - u) * t) - cos((x + (h - u)) * t)) * inv(pow(t, 2)) })
+      #|  (u : Real)
+      #|  (y : Real) => sin((t : Real) * y)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (y : Real) => cos((t : Real) * y)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  (S : (Real) -> Bool)
+      #|  (t : Real)
+      #|  (u' : Real)
+      #|  (h : Real)
+      #|  (x : Real)
+      #|  cos(((x : Real) - (u' : Real)) * (t : Real)) - cos((x + ((h : Real) - u')) * t) == cos(t * u') * (cos(t * x) - cos(t * (x + h))) - sin(t * u') * (sin(t * (x + h)) - sin(t * x))
+      #|  \226\136\128 u' : Real, (pp : (Real) -> Real)(u') * ((cos(((x : Real) - u') * (t : Real)) - cos((x + ((h : Real) - u')) * t)) * inv(pow(t, 2))) == pp(u') * ((cos(t * u') * (cos(t * x) - cos(t * (x + h))) - sin(t * u') * (sin(t * (x + h)) - sin(t * x))) * inv(pow(t, 2)))
+      #|  (t : Real)
+      #|  {real_of_num(0)}
+      #|  (t : Real) => sum((S : (Real) -> Bool), (u : Real) => (pp : (Real) -> Real)(u) * ((cos(((x : Real) - u) * t) - cos((x + ((h : Real) - u)) * t)) * inv(pow(t, 2))))
+      #|  (x : Real) + ((h : Real) - (u : Real))
+      #|  (x : Real) - (u : Real)
+      #|  (u : Real)
+      #|  sum((S : (Real) -> Bool), (x' : Real) => (pp : (Real) -> Real)(x') * real_integral({(t : Real) | real_of_num(0) <= t}, (t : Real) => if t == real_of_num(0) { (pow((x : Real) + ((h : Real) - x'), 2) - pow(x - x', 2)) / real_of_num(2) } else { (cos((x - x') * t) - cos((x + (h - x')) * t)) * inv(pow(t, 2)) })) == (V : Real)
+      #|  (V : Real) == sum((S : (Real) -> Bool), (u : Real) => (pp : (Real) -> Real)(u) * (pi * ((abs((x : Real) + ((h : Real) - u)) - abs(x - u)) / real_of_num(2))))
+      #|  \226\136\128 u : Real, (pp : (Real) -> Real)(u) * (inv(pi * (h : Real)) * real_integral({(t : Real) | real_of_num(0) <= t}, (t : Real) => if t == real_of_num(0) { (pow((x : Real) + (h - u), 2) - pow(x - u, 2)) / real_of_num(2) } else { (cos((x - u) * t) - cos((x + (h - u)) * t)) * inv(pow(t, 2)) })) == inv(pi * h) * (pp(u) * real_integral({(t : Real) | real_of_num(0) <= t}, (t : Real) => if t == real_of_num(0) { (pow(x + (h - u), 2) - pow(x - u, 2)) / real_of_num(2) } else { (cos((x - u) * t) - cos((x + (h - u)) * t)) * inv(pow(t, 2)) }))
+      #|  real_of_num(1) * (real_of_num(1) / real_of_num(2)) == real_of_num(1) / real_of_num(2)
+      #|  \226\136\128 u : Real, (pp : (Real) -> Real)(u) * (real_of_num(1) / real_of_num(2) + inv(pi * (h : Real)) * real_integral({(t : Real) | real_of_num(0) <= t}, (t : Real) => if t == real_of_num(0) { (pow((x : Real) + (h - u), 2) - pow(x - u, 2)) / real_of_num(2) } else { (cos((x - u) * t) - cos((x + (h - u)) * t)) * inv(pow(t, 2)) })) == pp(u) * (real_of_num(1) / real_of_num(2)) + pp(u) * (inv(pi * h) * real_integral({(t : Real) | real_of_num(0) <= t}, (t : Real) => if t == real_of_num(0) { (pow(x + (h - u), 2) - pow(x - u, 2)) / real_of_num(2) } else { (cos((x - u) * t) - cos((x + (h - u)) * t)) * inv(pow(t, 2)) }))
+      #|  (u : Real)
+      #|  (h : Real)
+      #|  (x : Real)
+      #|  \226\136\128 u : Real, IN(u, (S : (Real) -> Bool)) \226\134\146 max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (u - (x : Real)) / (h : Real))) == real_of_num(1) / real_of_num(2) + inv(pi * h) * real_integral({(t : Real) | real_of_num(0) <= t}, (t : Real) => if t == real_of_num(0) { (pow(x + (h - u), 2) - pow(x - u, 2)) / real_of_num(2) } else { (cos((x - u) * t) - cos((x + (h - u)) * t)) * inv(pow(t, 2)) })
+      #|  ((u : Real) => max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (u - (x : Real)) / (h : Real))) * prob((p : Prob_space[A]), {(a : A) | IN(a, prob_carrier(p)) && (Y : (A) -> Real)(a) == u})) == ((u : Real) => (pp : (Real) -> Real)(u) * max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (u - x) / h)))
+      #|  (y : Real) => max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (y - (x : Real)) / (h : Real)))
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  sum((S : (Real) -> Bool), (pp : (Real) -> Real)) == real_of_num(1)
+      #|  FINITE((S : (Real) -> Bool))
+      #|  (pp : (Real) -> Real) == ((u : Real) => prob((p : Prob_space[A]), {(a : A) | IN(a, prob_carrier(p)) && (Y : (A) -> Real)(a) == u}))
+      #|  (S : (Real) -> Bool) == IMAGE((Y : (A) -> Real), prob_carrier((p : Prob_space[A])))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, \226\136\128 x : Real, \226\136\128 h : Real, simple_rv(p, Y) && real_of_num(0) < h \226\134\146 simple_expectation(p, (a : A) => max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (Y(a) - x) / h))) == real_of_num(1) / real_of_num(2) + inv(pi * h) * real_integral({(t : Real) | real_of_num(0) <= t}, (t : Real) => (simple_char_fn_re(p, Y, t) * (cos(t * x) - cos(t * (x + h))) - simple_char_fn_im(p, Y, t) * (sin(t * (x + h)) - sin(t * x))) * inv(pow(t, 2)))
+      #|  !(pi == real_of_num(0)) && !((TT : Real) == real_of_num(0)) && !((x : Real) == real_of_num(0))
+      #|  (TT : Real) * ((x : Real) / real_of_num(2)) == TT / real_of_num(2) * x
+      #|  !(pi == real_of_num(0))
+      #|  ((TT : Real) / real_of_num(2) * (x : Real) == real_of_num(0)) == (x == real_of_num(0))
+      #|  !((TT : Real) / real_of_num(2) == real_of_num(0))
+      #|  \226\136\128 TT : Real, \226\136\128 x : Real, real_of_num(0) < TT \226\134\146 fejer_kernel_real(TT, x) == inv(pi) * (TT / real_of_num(2) * (if TT / real_of_num(2) * x == real_of_num(0) { real_of_num(1) } else { pow(sin(TT / real_of_num(2) * x), 2) * inv(pow(TT / real_of_num(2) * x, 2)) }))
+      #|  !(pi == real_of_num(0)) && !((m : Real) == real_of_num(0))
+      #|  inv(pi) * (m : Real) * (inv(m) * pi) == real_of_num(1)
+      #|  (x : Real)
+      #|  (x : Real) => inv(pi) * ((m : Real) * (if m * x == real_of_num(0) { real_of_num(1) } else { pow(sin(m * x), 2) * inv(pow(m * x, 2)) }))
+      #|  real_of_num(0) < (m : Real)
+      #|  (m : Real) == (TT : Real) / real_of_num(2)
+      #|  real_of_num(0) < (TT : Real) / real_of_num(2)
+      #|  \226\136\128 TT : Real, real_of_num(0) < TT \226\134\146 has_real_integral((x : Real) => fejer_kernel_real(TT, x), real_of_num(1), UNIV)
+      #|  real_of_num(0) < (m : Real)
+      #|  inv(pi) * (m : Real)
+      #|  has_real_derivative((t : Real) => sin(t * (x : Real)) * inv(x), (f : Real), atreal((t : Real)))
+      #|  (t : Real)
+      #|  (u : Real)
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 (c : Real) == real_of_num(1) * x * c * inv(x)
+      #|  cos((u : Real) * (x : Real)) == real_of_num(1) * x * cos(u * x) * inv(x)
+      #|  (u : Real)
+      #|  sin((TT : Real) * (x : Real)) * inv(x) == sin(TT * x) * inv(x) - sin(real_of_num(0) * x) * inv(x)
+      #|  \226\136\128 TT : Real, \226\136\128 x : Real, real_of_num(0) < TT && !(x == real_of_num(0)) \226\134\146 has_real_integral((t : Real) => cos(t * x), sin(TT * x) * inv(x), real_interval([(real_of_num(0), TT)]))
+      #|  has_real_derivative((t : Real) => t * (sin(t * (x : Real)) * inv(x)) + cos(t * x) * inv(pow(x, 2)), (f : Real), atreal((t : Real)))
+      #|  (t : Real)
+      #|  (u : Real)
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 (u : Real) * (c : Real) == u * (real_of_num(1) * x * c * inv(x)) + real_of_num(1) * ((s : Real) * inv(x)) + real_of_num(1) * x * -s * inv(x * x)
+      #|  (u : Real) * cos(u * (x : Real)) == u * (real_of_num(1) * x * cos(u * x) * inv(x)) + real_of_num(1) * (sin(u * x) * inv(x)) + real_of_num(1) * x * -sin(u * x) * inv(pow(x, 2))
+      #|  (u : Real)
+      #|  (TT : Real) * (sin(TT * (x : Real)) * inv(x)) + (cos(TT * x) * inv(pow(x, 2)) - inv(pow(x, 2))) == TT * (sin(TT * x) * inv(x)) + cos(TT * x) * inv(pow(x, 2)) - (real_of_num(0) * (sin(real_of_num(0) * x) * inv(x)) + cos(real_of_num(0) * x) * inv(pow(x, 2)))
+      #|  \226\136\128 TT : Real, \226\136\128 x : Real, real_of_num(0) < TT && !(x == real_of_num(0)) \226\134\146 has_real_integral((t : Real) => t * cos(t * x), TT * (sin(TT * x) * inv(x)) + (cos(TT * x) * inv(pow(x, 2)) - inv(pow(x, 2))), real_interval([(real_of_num(0), TT)]))
+      #|  !(pi == real_of_num(0))
+      #|  real_of_num(2) * ((TT : Real) * ((x : Real) / real_of_num(2))) == TT * x
+      #|  (TT : Real) * ((x : Real) / real_of_num(2))
+      #|  real_of_num(1) - cos((TT : Real) * (x : Real)) == real_of_num(2) * pow(sin(TT * (x / real_of_num(2))), 2)
+      #|  !((TT : Real) == real_of_num(0)) && !((x : Real) == real_of_num(0))
+      #|  sin((TT : Real) * (x : Real)) * inv(x) - inv(TT) * (TT * (sin(TT * x) * inv(x)) + (cos(TT * x) * inv(pow(x, 2)) - inv(pow(x, 2)))) == (real_of_num(1) - cos(TT * x)) * inv(TT * pow(x, 2))
+      #|  real_integral(real_interval([(real_of_num(0), (TT : Real))]), (t : Real) => t * cos(t * (x : Real))) == TT * (sin(TT * x) * inv(x)) + (cos(TT * x) * inv(pow(x, 2)) - inv(pow(x, 2)))
+      #|  real_integral(real_interval([(real_of_num(0), (TT : Real))]), (t : Real) => cos(t * (x : Real))) == sin(TT * x) * inv(x)
+      #|  (x : Real)
+      #|  (TT : Real)
+      #|  (x : Real)
+      #|  (TT : Real)
+      #|  real_integrable_on((t : Real) => cos(t * (x : Real)), real_interval([(real_of_num(0), (TT : Real))])) && real_integrable_on((t : Real) => t * cos(t * x), real_interval([(real_of_num(0), TT)]))
+      #|  ((t : Real) => (real_of_num(1) - t / (TT : Real)) * cos(t * (x : Real))) == ((t : Real) => cos(t * x) - inv(TT) * (t * cos(t * x)))
+      #|  real_integral(real_interval([(real_of_num(0), (TT : Real))]), (t : Real) => (real_of_num(1) - t / TT) * cos(t * (x : Real))) == real_integral(real_interval([(real_of_num(0), TT)]), (t : Real) => cos(t * x)) - inv(TT) * real_integral(real_interval([(real_of_num(0), TT)]), (t : Real) => t * cos(t * x))
+      #|  !((TT : Real) == real_of_num(0))
+      #|  !((TT : Real) == real_of_num(0))
+      #|  real_of_num(1) - real_of_num(2) * (u : Real) / (real_of_num(2) * (TT : Real)) == real_of_num(1) - u / TT
+      #|  has_real_derivative((t : Real) => t - pow(t, 2) / (real_of_num(2) * (TT : Real)), (f : Real), atreal((t : Real)))
+      #|  (t : Real)
+      #|  (u : Real)
+      #|  (u : Real)
+      #|  !((TT : Real) == real_of_num(0))
+      #|  (TT : Real) / real_of_num(2) == ((t : Real) => t - pow(t, 2) / (real_of_num(2) * TT))(TT) - ((t : Real) => t - pow(t, 2) / (real_of_num(2) * TT))(real_of_num(0))
+      #|  real_integral(real_interval([(real_of_num(0), (TT : Real))]), (t : Real) => real_of_num(1) - t / TT) == TT / real_of_num(2)
+      #|  (x : Real) == real_of_num(0)
+      #|  \226\136\128 TT : Real, \226\136\128 x : Real, real_of_num(0) < TT \226\134\146 fejer_kernel_real(TT, x) == inv(pi) * real_integral(real_interval([(real_of_num(0), TT)]), (t : Real) => (real_of_num(1) - t / TT) * cos(t * x))
+      #|  (u : Real)
+      #|  (y : Real) => cos((t : Real) * y)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 t : Real, simple_expectation((p : Prob_space[A]), (x : A) => cos(t * (Y : (A) -> Real)(x))) == sum(IMAGE(Y, prob_carrier(p)), (u : Real) => cos(t * u) * prob(p, {(x : A) | IN(x, prob_carrier(p)) && Y(x) == u}))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, simple_rv(p, Y) \226\134\146 real_continuous_on((t : Real) => simple_char_fn_re(p, Y, t), UNIV)
+      #|  (u : Real)
+      #|  (y : Real) => sin((t : Real) * y)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 t : Real, simple_expectation((p : Prob_space[A]), (x : A) => sin(t * (Y : (A) -> Real)(x))) == sum(IMAGE(Y, prob_carrier(p)), (u : Real) => sin(t * u) * prob(p, {(x : A) | IN(x, prob_carrier(p)) && Y(x) == u}))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, simple_rv(p, Y) \226\134\146 real_continuous_on((t : Real) => simple_char_fn_im(p, Y, t), UNIV)
+      #|  {(x : Real) | x == real_of_num(0)} == {real_of_num(0)}
+      #|  (UNIV : (Real) -> Bool)
+      #|  ((t : Real) => simple_char_fn_im((p : Prob_space[A]), (Y : (A) -> Real), t / (D : Real))) == o((t : Real) => simple_char_fn_im(p, Y, t), (t : Real) => t * inv(D))
+      #|  (UNIV : (Real) -> Bool)
+      #|  (UNIV : (Real) -> Bool)
+      #|  ((t : Real) => simple_char_fn_re((p : Prob_space[A]), (Y : (A) -> Real), t / (D : Real))) == o((t : Real) => simple_char_fn_re(p, Y, t), (t : Real) => t * inv(D))
+      #|  (UNIV : (Real) -> Bool)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, \226\136\128 D : Real, \226\136\128 a : Real, \226\136\128 b : Real, simple_rv(p, Y) && real_of_num(0) < D \226\134\146 real_measurable_on((t : Real) => (abs(simple_char_fn_re(p, Y, t / D) - exp(-(pow(t, 2) / real_of_num(2)))) + abs(simple_char_fn_im(p, Y, t / D))) / t, real_interval([(a, b)]))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) <= x + real_of_num(1)
+      #|  ((TT : Real) * ((pow((M : Real), 2) + real_of_num(1)) / real_of_num(2)) + M) * (t : Real) == t * (TT * ((pow(M, 2) + real_of_num(1)) / real_of_num(2)) + M)
+      #|  pow((t : Real), 2) * ((pow((M : Real), 2) + real_of_num(1)) / real_of_num(2)) + t * M == t * (t * ((pow(M, 2) + real_of_num(1)) / real_of_num(2)) + M)
+      #|  pow((t : Real), 2) * (pow((M : Real), 2) / real_of_num(2)) + pow(t, 2) / real_of_num(2) == pow(t, 2) * ((pow(M, 2) + real_of_num(1)) / real_of_num(2))
+      #|  pow((t : Real), 2) * (pow((M : Real), 2) / real_of_num(2)) + pow(t, 2) / real_of_num(2) + t * M
+      #|  exp(-(pow((t : Real), 2) / real_of_num(2))) <= real_of_num(1)
+      #|  real_of_num(1) - pow((t : Real), 2) / real_of_num(2) <= exp(-(pow(t, 2) / real_of_num(2)))
+      #|  simple_char_fn_re((p : Prob_space[A]), (Y : (A) -> Real), (t : Real)) <= real_of_num(1)
+      #|  real_of_num(1) - pow((t : Real), 2) * (pow((M : Real), 2) / real_of_num(2)) <= simple_char_fn_re((p : Prob_space[A]), (Y : (A) -> Real), t)
+      #|  abs(simple_char_fn_re((p : Prob_space[A]), (Y : (A) -> Real), (t : Real)) - exp(-(pow(t, 2) / real_of_num(2)))) <= pow(t, 2) * (pow((M : Real), 2) / real_of_num(2)) + pow(t, 2) / real_of_num(2)
+      #|  real_of_num(0) <= pow((t : Real), 2) / real_of_num(2)
+      #|  pow((t : Real), 2) / real_of_num(2)
+      #|  real_of_num(1) - pow((t : Real), 2) / real_of_num(2) <= exp(-(pow(t, 2) / real_of_num(2)))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 -x <= real_of_num(0)
+      #|  exp(-(pow((t : Real), 2) / real_of_num(2))) <= real_of_num(1)
+      #|  (a : Real) <= (b : Real) \226\134\146 (c : Real) <= a \226\134\146 c <= b
+      #|  abs((t : Real)) == t
+      #|  (t : Real) * (Y : (A) -> Real)((x : A))
+      #|  (x : A)
+      #|  ((x : A) => abs(sin((t : Real) * (Y : (A) -> Real)(x)))) == ((x : A) => ((y : Real) => abs(sin(t * y)))(Y(x)))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => (t : Real) * (M : Real))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => abs(sin((t : Real) * (Y : (A) -> Real)(x))))
+      #|  abs(simple_char_fn_im((p : Prob_space[A]), (Y : (A) -> Real), (t : Real))) <= t * (M : Real)
+      #|  (t : Real) * (Y : (A) -> Real)((x : A))
+      #|  ((x : A) => real_of_num(1) - pow((t : Real) * (Y : (A) -> Real)(x), 2) / real_of_num(2)) == ((x : A) => ((y : Real) => real_of_num(1) - pow(t * y, 2) / real_of_num(2))(Y(x)))
+      #|  pow((t : Real) * (Y : (A) -> Real)((x : A)), 2) <= pow(t, 2) * pow((M : Real), 2)
+      #|  (x : A)
+      #|  ((x : A) => real_of_num(1) - pow((t : Real) * (Y : (A) -> Real)(x), 2) / real_of_num(2)) == ((x : A) => ((y : Real) => real_of_num(1) - pow(t * y, 2) / real_of_num(2))(Y(x)))
+      #|  real_of_num(1) - pow((t : Real), 2) * (pow((M : Real), 2) / real_of_num(2)) == simple_expectation((p : Prob_space[A]), (x : A) => real_of_num(1) - pow(t, 2) * (pow(M, 2) / real_of_num(2)))
+      #|  simple_expectation((p : Prob_space[A]), (x : A) => real_of_num(1) - pow((t : Real) * (Y : (A) -> Real)(x), 2) / real_of_num(2))
+      #|  real_of_num(1) - pow((t : Real), 2) * (pow((M : Real), 2) / real_of_num(2)) <= simple_char_fn_re((p : Prob_space[A]), (Y : (A) -> Real), t)
+      #|  (t : Real) * (Y : (A) -> Real)((x : A))
+      #|  real_of_num(1) == simple_expectation((p : Prob_space[A]), (x : A) => real_of_num(1))
+      #|  simple_char_fn_re((p : Prob_space[A]), (Y : (A) -> Real), (t : Real)) <= real_of_num(1)
+      #|  real_of_num(0) <= (a : Real) && real_of_num(0) <= (b : Real) \226\134\146 real_of_num(0) <= a + b
+      #|  abs((abs(simple_char_fn_re((p : Prob_space[A]), (Y : (A) -> Real), (t : Real)) - exp(-(pow(t, 2) / real_of_num(2)))) + abs(simple_char_fn_im(p, Y, t))) / t) == (abs(simple_char_fn_re(p, Y, t) - exp(-(pow(t, 2) / real_of_num(2)))) + abs(simple_char_fn_im(p, Y, t))) / t
+      #|  real_of_num(0) < (t : Real)
+      #|  (t : Real)
+      #|  (TT : Real)
+      #|  real_of_num(0)
+      #|  real_of_num(1)
+      #|  (Y : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  {real_of_num(0)}
+      #|  (t : Real) => (TT : Real) * ((pow((M : Real), 2) + real_of_num(1)) / real_of_num(2)) + M
+      #|  (x : A) => abs((Y : (A) -> Real)(x))
+      #|  (p : Prob_space[A])
+      #|  \226\136\131 M : Real, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 abs((Y : (A) -> Real)(x)) <= M
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Y : (A) -> Real, \226\136\128 TT : Real, simple_rv(p, Y) && real_of_num(0) < TT \226\134\146 real_integrable_on((t : Real) => (abs(simple_char_fn_re(p, Y, t) - exp(-(pow(t, 2) / real_of_num(2)))) + abs(simple_char_fn_im(p, Y, t))) / t, real_interval([(real_of_num(0), TT)]))
+      #|  real_of_num(2) * (real_of_num(1) * abs(((a : Real) - (b : Real)) / real_of_num(2)))
+      #|  cos((a : Real)) - cos((b : Real)) == -real_of_num(2) * (sin((a + b) / real_of_num(2)) * sin((a - b) / real_of_num(2)))
+      #|  ((a : Real) + (b : Real)) / real_of_num(2) + (a - b) / real_of_num(2) == a && (a + b) / real_of_num(2) - (a - b) / real_of_num(2) == b
+      #|  ((a : Real) - (b : Real)) / real_of_num(2)
+      #|  ((a : Real) + (b : Real)) / real_of_num(2)
+      #|  ((a : Real) - (b : Real)) / real_of_num(2)
+      #|  ((a : Real) + (b : Real)) / real_of_num(2)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, abs(cos(a) - cos(b)) <= abs(a - b)
+      #|  real_of_num(2) * (real_of_num(1) * abs(((a : Real) - (b : Real)) / real_of_num(2)))
+      #|  sin((a : Real)) - sin((b : Real)) == real_of_num(2) * (cos((a + b) / real_of_num(2)) * sin((a - b) / real_of_num(2)))
+      #|  ((a : Real) + (b : Real)) / real_of_num(2) + (a - b) / real_of_num(2) == a && (a + b) / real_of_num(2) - (a - b) / real_of_num(2) == b
+      #|  ((a : Real) - (b : Real)) / real_of_num(2)
+      #|  ((a : Real) + (b : Real)) / real_of_num(2)
+      #|  ((a : Real) - (b : Real)) / real_of_num(2)
+      #|  ((a : Real) + (b : Real)) / real_of_num(2)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, abs(sin(a) - sin(b)) <= abs(a - b)
       #|simple_cdf =  |- (#forall:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#forall:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) (((#simple_cdf:fun(prob_space('A),fun(fun('A,real),fun(real,real))) p:prob_space('A)) X:fun('A,real)) x:real)) ((#prob:fun(prob_space('A),fun(fun('A,bool),real)) p:prob_space('A)) (#GSPEC:fun(fun('A,bool),fun('A,bool)) (\GEN%PVAR%1:'A. (#?:fun(fun('A,bool),bool) (\a:'A. (((#SETSPEC:fun('A,fun(bool,fun('A,bool))) GEN%PVAR%1:'A) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) a:'A) (#prob_carrier:fun(prob_space('A),fun('A,bool)) p:prob_space('A)))) ((#real_le:fun(real,fun(real,bool)) (X:fun('A,real) a:'A)) x:real))) a:'A)))))))))))))
       #|simple_char_fn_re =  |- (#forall:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#forall:fun(fun(real,bool),bool) (\t:real. (#forall:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). ((#=:fun(real,fun(real,bool)) (((#simple_char_fn_re:fun(prob_space('A),fun(fun('A,real),fun(real,real))) p:prob_space('A)) X:fun('A,real)) t:real)) ((#simple_expectation:fun(prob_space('A),fun(fun('A,real),real)) p:prob_space('A)) (\x:'A. (#cos:fun(real,real) ((#real_mul:fun(real,fun(real,real)) t:real) (X:fun('A,real) x:'A))))))))))))
       #|simple_char_fn_im =  |- (#forall:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#forall:fun(fun(real,bool),bool) (\t:real. (#forall:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). ((#=:fun(real,fun(real,bool)) (((#simple_char_fn_im:fun(prob_space('A),fun(fun('A,real),fun(real,real))) p:prob_space('A)) X:fun('A,real)) t:real)) ((#simple_expectation:fun(prob_space('A),fun(fun('A,real),real)) p:prob_space('A)) (\x:'A. (#sin:fun(real,real) ((#real_mul:fun(real,fun(real,real)) t:real) (X:fun('A,real) x:'A))))))))))))
