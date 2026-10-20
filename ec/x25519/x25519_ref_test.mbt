@@ -78493,12 +78493,12 @@ test "EC/x25519 matches EC/x25519.ml" {
       #|  forall f:A ring.\n        field f /\\ ring_char f = p_25519\n        ==> montgomery_nonsingular(curve25519x f)
       #|  forall f:A ring.\n          field f /\\\n          A IN ring_carrier f /\\\n          x IN ring_carrier f /\\\n          y IN ring_carrier f /\\\n          ~(ring_pow f (ring_add f (ring_mul f (ring_of_num f 2) x) A) 2 =\n            ring_sub f (ring_pow f A 2) (ring_of_num f 4))\n          ==> ring_mul f (ring_1 f) (ring_pow f y 2) =\n              ring_add f (ring_pow f x 3)\n              (ring_add f (ring_mul f A (ring_pow f x 2)) x)\n          ==> (y = ring_0 f <=> x = ring_0 f)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  (z EXP 2 == a) (mod p) ==> ?x:num. (x EXP 2 == a) (mod p)
       #|  forall f X y:A.\n        field f /\\ ring_char f = p_25519 /\\\n        montgomery_curve (curve25519x f) (SOME(ring_of_num f X,y))\n        ==> (y = ring_0 f <=> ring_of_num f X = ring_0 f)
       #|  curve25519x_group (f:A ring) = montgomery_group(curve25519x f)
@@ -78523,20 +78523,20 @@ test "EC/x25519 matches EC/x25519.ml" {
       #|  x:A
       #|  forall(r:A ring) a.\n        field r /\\\n        (forall d. d IN ring_carrier r ==> ~(ring_pow r d 2 = ring_of_num r a))\n        ==> field(quadratic_extension r a)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  sqintmod_field = quadratic_extension (integer_mod_ring p_25519) 2
       #|  p ==> ~q <=> ~(p /\\ q)
       #|  field sqintmod_field
