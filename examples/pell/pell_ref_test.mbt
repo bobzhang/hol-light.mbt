@@ -13021,7 +13021,7 @@ test "Examples/pell matches Examples/pell.ml" {
       #|  (b : Num)
       #|  (a : Num)
       #|  (c : Num)
-      #|  pow
+      #|  real_pow
       #|  2
       #|  (a : Real) * a == (b : Real) * b + real_of_num(1) \226\134\146 (a + b) * (a - b) == real_of_num(1)
       #|  (a : Num) - (b : Num) == 1 \226\134\146 a == b + 1
@@ -13042,7 +13042,7 @@ test "Examples/pell matches Examples/pell.ml" {
       #|  (u : Num)
       #|  (p : Num)
       #|  2 <= (a : Num) \226\134\146 1 <= a
-      #|  pow
+      #|  real_pow
       #|  2
       #|  ((a : Real) + (b : Real) == (c : Real) + (d : Real)) == (a - c == d - b)
       #|  \226\136\128 a : Num, \226\136\128 u : Num, \226\136\128 v : Num, \226\136\128 x : Num, \226\136\128 y : Num, 2 <= a \226\134\146 (real_of_num(u) + real_of_num(v) * sqrt(pow(real_of_num(a), 2) - real_of_num(1)) == real_of_num(x) + real_of_num(y) * sqrt(pow(real_of_num(a), 2) - real_of_num(1))) == (u == x && v == y)
@@ -13122,7 +13122,7 @@ test "Examples/pell matches Examples/pell.ml" {
       #|  (n : Num)
       #|  (n : Num)
       #|  \226\136\128 a : Num, \226\136\128 n : Num, !(a == 0) \226\134\146 EXP(X(a, n), 2) == (EXP(a, 2) - 1) * EXP(Y(a, n), 2) + 1
-      #|  op_star
+      #|  real_mul
       #|  \226\136\128 n : Num, X(1, n) == 1
       #|  \226\136\128 n : Num, Y(1, n) == n
       #|  real_of_num(1) < (x : Real) \226\134\146 real_of_num(0) < x
@@ -13166,7 +13166,7 @@ test "Examples/pell matches Examples/pell.ml" {
       #|  !((a : Num) == 0) \226\134\146 1 <= a
       #|  ((a : Real) - (b : Real)) * (a + b) == a * a - b * b
       #|  !((a : Num) == 0) \226\134\146 1 <= a
-      #|  pow
+      #|  real_pow
       #|  2
       #|  !((a : Real) == -(b : Real)) \226\134\146 !(a + b == real_of_num(0))
       #|  real_of_num((a : Num)) + sqrt(pow(real_of_num(a), 2) - real_of_num(1))
@@ -13178,7 +13178,7 @@ test "Examples/pell matches Examples/pell.ml" {
       #|  !((a : Num) == 0) \226\134\146 1 <= a
       #|  ((a : Real) + (b : Real)) * (a - b) == a * a - b * b
       #|  !((a : Num) == 0) \226\134\146 1 <= a
-      #|  pow
+      #|  real_pow
       #|  2
       #|  real_of_num((a : Num)) - sqrt(pow(real_of_num(a), 2) - real_of_num(1))
       #|  (d : Bool) && (d \226\134\146 (a : Bool) && (b : Bool) && (c : Bool)) \226\134\146 a && b && c && d
@@ -13192,7 +13192,7 @@ test "Examples/pell matches Examples/pell.ml" {
       #|  (a : Num) * (y : Num) - (x : Num)
       #|  (a : Num) * (x : Num) - (EXP(a, 2) - 1) * (y : Num)
       #|  \226\136\128 a : Num, \226\136\128 x : Num, \226\136\128 y : Num, !(a == 0) && !(a == 1) && !(y == 0) && EXP(x, 2) == (EXP(a, 2) - 1) * EXP(y, 2) + 1 \226\134\146 (\226\136\131 x' : Num, \226\136\131 y' : Num, x' < x && y' < y && EXP(x', 2) == (EXP(a, 2) - 1) * EXP(y', 2) + 1 && real_of_num(x) + real_of_num(y) * sqrt(pow(real_of_num(a), 2) - real_of_num(1)) == (real_of_num(x') + real_of_num(y') * sqrt(pow(real_of_num(a), 2) - real_of_num(1))) * (real_of_num(a) + sqrt(pow(real_of_num(a), 2) - real_of_num(1))))
-      #|  op_star
+      #|  real_mul
       #|  !((a : Num) == 0) && !(a == 1) \226\134\146 2 <= a
       #|  (n : Num)
       #|  SUC((n : Num))
