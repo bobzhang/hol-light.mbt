@@ -6003,261 +6003,261 @@ test "Library/floor matches Library/floor.ml" {
       #|1 basis elements and 0 critical pairs
       #|Translating certificate to HOL inferences
       #|Library/floor quotations (256):
-      #|  integer x <=> (?n. x = &n) \\/ (?n. x = -- &n)
-      #|  (x = &0) <=> (abs(x) = &0)
-      #|  forall x. integer(x) /\\ ~(x = &0) ==> &1 <= abs(x)
-      #|  (a + --b = c) <=> (b + c = a)
-      #|  (--a + b = c) <=> (a + c = b)
+      #|  integer((x : Real)) == ((\226\136\131 n : Num, x == real_of_num(n)) || (\226\136\131 n : Num, x == -real_of_num(n)))
+      #|  ((x : Real) == real_of_num(0)) == (abs(x) == real_of_num(0))
+      #|  \226\136\128 x : Real, integer(x) && !(x == real_of_num(0)) \226\134\146 real_of_num(1) <= abs(x)
+      #|  ((a : Real) + -(b : Real) == (c : Real)) == (b + c == a)
+      #|  (-(a : Real) + (b : Real) == (c : Real)) == (a + c == b)
       #|  &0 <= a ==> ((abs(x) = a) <=> (x = a) \\/ (x = --a))
       #|  g /\\ h /\\ x /\\ c /\\ d /\\ e /\\ f /\\ (a /\\ e ==> b) /\\ a\n    ==> x /\\ a /\\ b /\\ c /\\ d /\\ e /\\ f /\\ g /\\ h
       #|  (forall n. integer(&n)) /\\\n   (forall x y. integer(x) /\\ integer(y) ==> integer(x + y)) /\\\n   (forall x y. integer(x) /\\ integer(y) ==> integer(x - y)) /\\\n   (forall x y. integer(x) /\\ integer(y) ==> integer(x * y)) /\\\n   (forall x r. integer(x) ==> integer(x pow r)) /\\\n   (forall x. integer(x) ==> integer(--x)) /\\\n   (forall x. integer(x) ==> integer(abs x)) /\\\n   (forall x y. integer(x) /\\ integer(y) ==> integer(max x y)) /\\\n   (forall x y. integer(x) /\\ integer(y) ==> integer(min x y))
-      #|  forall x y. integer(x) /\\ integer(y) ==> integer(x + y)
-      #|  forall x y. integer(x) /\\ integer(y) ==> integer(x - y)
-      #|  forall x y. integer(x) /\\ integer(y) ==> integer(x * y)
-      #|  forall x n. integer(x) ==> integer(x pow n)
-      #|  y - x
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, integer(x) && integer(y) \226\134\146 integer(x + y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, integer(x) && integer(y) \226\134\146 integer(x - y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, integer(x) && integer(y) \226\134\146 integer(x * y)
+      #|  \226\136\128 x : Real, \226\136\128 n : Num, integer(x) \226\134\146 integer(pow(x, n))
+      #|  (y : Real) - (x : Real)
       #|  forall x y. integer(x) /\\ integer(y) ==> (x <= y <=> (x = y) \\/ x + &1 <= y)
-      #|  y - x
+      #|  (y : Real) - (x : Real)
       #|  forall x y. integer(x) /\\ integer(y) ==> x <= y \\/ y + &1 <= x
       #|  forall x y. integer(x) /\\ integer(y) /\\ ~(y + &1 <= x) ==> x <= y
-      #|  x + &1 <= y ==> x < y
+      #|  (x : Real) + real_of_num(1) <= (y : Real) \226\134\146 x < y
       #|  forall x y. integer(x) /\\ integer(y) ==> (x < y <=> x + &1 <= y)
-      #|  x = y <=> ~(x < y \\/ y < x)
+      #|  ((x : Real) == (y : Real)) == !(x < y || y < x)
       #|  forall x y. integer x /\\ integer y ==> (x = y <=> abs(x - y) < &1)
       #|  forall x y. integer x /\\ integer y /\\ abs(x - y) < &1 ==> x = y
-      #|  forall x. integer(--x) <=> integer(x)
-      #|  forall x. integer(abs x) <=> integer(x)
-      #|  forall x. &0 <= x ==> (integer(x) <=> ?n. x = &n)
-      #|  forall x. integer x /\\ &0 <= x <=> ?n. x = &n
-      #|  a + b = &0 <=> a = --b
-      #|  forall x. integer x /\\ x <= &0 <=> ?n. x = -- &n
-      #|  forall x. integer x /\\ x <= &0 <=> ?n. x + &n = &0
+      #|  \226\136\128 x : Real, integer(-x) == integer(x)
+      #|  \226\136\128 x : Real, integer(abs(x)) == integer(x)
+      #|  \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 integer(x) == (\226\136\131 n : Num, x == real_of_num(n))
+      #|  \226\136\128 x : Real, (integer(x) && real_of_num(0) <= x) == (\226\136\131 n : Num, x == real_of_num(n))
+      #|  ((a : Real) + (b : Real) == real_of_num(0)) == (a == -b)
+      #|  \226\136\128 x : Real, (integer(x) && x <= real_of_num(0)) == (\226\136\131 n : Num, x == -real_of_num(n))
+      #|  \226\136\128 x : Real, (integer(x) && x <= real_of_num(0)) == (\226\136\131 n : Num, x + real_of_num(n) == real_of_num(0))
       #|  (forall x y. integer(x) ==> (integer(x + y) <=> integer(y))) /\\\n   (forall x y. integer(y) ==> (integer(x + y) <=> integer(x)))
       #|  (forall x y. integer(x) ==> (integer(x - y) <=> integer(y))) /\\\n   (forall x y. integer(y) ==> (integer(x - y) <=> integer(x)))
       #|  forall P. (forall n. P(&n)) /\\ (forall x. P x ==> P(--x)) ==> forall x. integer x ==> P x
       #|  forall f:A->real s. (forall x. x IN s ==> integer(f x)) ==> integer(sum s f)
       #|  forall x y. integer x /\\ integer y\n         ==> (abs(x * y) = &1 <=> abs x = &1 /\\ abs y = &1)
-      #|  ~(n = &0) ==> (x / n = y <=> x = n * y)
-      #|  n = 0
-      #|  forall m n. integer(&m / &n) <=> n = 0 \\/ n divides m
+      #|  !((n : Real) == real_of_num(0)) \226\134\146 ((x : Real) / n == (y : Real)) == (x == n * y)
+      #|  (n : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, integer(real_of_num(m) / real_of_num(n)) == (n == 0 || divides(n, m))
       #|  rational x <=> ?m n. integer m /\\ integer n /\\ ~(n = &0) /\\ x = m / n
-      #|  &1
-      #|  x:real
-      #|  forall x. integer x ==> rational x
-      #|  forall n. rational(&n)
-      #|  n:real
-      #|  --m:real
-      #|  n:real
-      #|  m:real
-      #|  x:real
-      #|  forall x. rational(x) ==> rational(--x)
-      #|  forall x. rational(x) ==> rational(abs x)
-      #|  m:real
-      #|  n:real
-      #|  n:real
-      #|  m:real
-      #|  x = &0
-      #|  forall x. rational(x) ==> rational(inv x)
-      #|  n1 * n2:real
-      #|  m1 * n2 + m2 * n1:real
-      #|  n2:real
-      #|  m2:real
-      #|  n1:real
-      #|  m1:real
+      #|  real_of_num(1)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, integer(x) \226\134\146 rational(x)
+      #|  \226\136\128 n : Num, rational(real_of_num(n))
+      #|  (n : Real)
+      #|  -(m : Real)
+      #|  (n : Real)
+      #|  (m : Real)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, rational(x) \226\134\146 rational(-x)
+      #|  \226\136\128 x : Real, rational(x) \226\134\146 rational(abs(x))
+      #|  (m : Real)
+      #|  (n : Real)
+      #|  (n : Real)
+      #|  (m : Real)
+      #|  (x : Real) == real_of_num(0)
+      #|  \226\136\128 x : Real, rational(x) \226\134\146 rational(inv(x))
+      #|  (n1 : Real) * (n2 : Real)
+      #|  (m1 : Real) * (n2 : Real) + (m2 : Real) * (n1 : Real)
+      #|  (n2 : Real)
+      #|  (m2 : Real)
+      #|  (n1 : Real)
+      #|  (m1 : Real)
       #|  forall x y. rational(x) /\\ rational(y) ==> rational(x + y)
       #|  forall x y. rational(x) /\\ rational(y) ==> rational(x - y)
-      #|  n1 * n2:real
-      #|  m1 * m2:real
-      #|  n2:real
-      #|  m2:real
-      #|  n1:real
-      #|  m1:real
+      #|  (n1 : Real) * (n2 : Real)
+      #|  (m1 : Real) * (m2 : Real)
+      #|  (n2 : Real)
+      #|  (m2 : Real)
+      #|  (n1 : Real)
+      #|  (m1 : Real)
       #|  forall x y. rational(x) /\\ rational(y) ==> rational(x * y)
       #|  forall x y. rational(x) /\\ rational(y) ==> rational(x / y)
-      #|  forall x n. rational(x) ==> rational(x pow n)
+      #|  \226\136\128 x : Real, \226\136\128 n : Num, rational(x) \226\134\146 rational(pow(x, n))
       #|  (forall n. rational(&n)) /\\\n   (forall x. integer x ==> rational x) /\\\n   (forall x y. rational(x) /\\ rational(y) ==> rational(x + y)) /\\\n   (forall x y. rational(x) /\\ rational(y) ==> rational(x - y)) /\\\n   (forall x y. rational(x) /\\ rational(y) ==> rational(x * y)) /\\\n   (forall x y. rational(x) /\\ rational(y) ==> rational(x / y)) /\\\n   (forall x r. rational(x) ==> rational(x pow r)) /\\\n   (forall x. rational(x) ==> rational(--x)) /\\\n   (forall x. rational(x) ==> rational(inv x)) /\\\n   (forall x. rational(x) ==> rational(abs x))
-      #|  forall x. rational(--x) <=> rational x
-      #|  forall x. rational(abs x) <=> rational x
-      #|  forall x. rational(inv x) <=> rational x
+      #|  \226\136\128 x : Real, rational(-x) == rational(x)
+      #|  \226\136\128 x : Real, rational(abs(x)) == rational(x)
+      #|  \226\136\128 x : Real, rational(inv(x)) == rational(x)
       #|  forall s x. (forall i. i IN s ==> rational(x i)) ==> rational(sum s x)
-      #|  abs(x:real) = a ==> x = a \\/ x = --a
+      #|  abs((x : Real)) == (a : Real) \226\134\146 x == a || x == -a
       #|  forall x. rational(x) <=> ?p q. ~(q = 0) /\\ abs x = &p / &q
-      #|  x - &(SUC n)
-      #|  SUC n
-      #|  x - &n
-      #|  n:num
-      #|  n:num
-      #|  &0
+      #|  (x : Real) - real_of_num(SUC((n : Num)))
+      #|  SUC((n : Num))
+      #|  (x : Real) - real_of_num((n : Num))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  real_of_num(0)
       #|  0
-      #|  x:real
+      #|  (x : Real)
       #|  forall x. &0 <= x ==> ?n r. &0 <= r /\\ r < &1 /\\ (x = &n + r)
-      #|  (a + b = c + d) <=> (a = (c - b) + d)
-      #|  n:num
-      #|  --a <= b <=> &0 <= a + b
-      #|  --x
-      #|  &0
-      #|  x:real
+      #|  ((a : Real) + (b : Real) == (c : Real) + (d : Real)) == (a == c - b + d)
+      #|  (n : Num)
+      #|  (-(a : Real) <= (b : Real)) == (real_of_num(0) <= a + b)
+      #|  -(x : Real)
+      #|  real_of_num(0)
+      #|  (x : Real)
       #|  forall x. ?n r. integer(n) /\\ &0 <= r /\\ r < &1 /\\ (x = n + r)
-      #|  x:real
-      #|  abs(floor x - a) < &1
-      #|  x:real
+      #|  (x : Real)
+      #|  abs(floor((x : Real)) - (a : Real)) < real_of_num(1)
+      #|  (x : Real)
       #|  forall x a. integer(a) /\\ a <= x /\\ x < a + &1 <=> (floor x = a)
-      #|  forall x. (floor x = &0) <=> &0 <= x /\\ x < &1
-      #|  x:real
+      #|  \226\136\128 x : Real, (floor(x) == real_of_num(0)) == (real_of_num(0) <= x && x < real_of_num(1))
+      #|  (x : Real)
       #|  forall x. integer(floor x) /\\ floor(x) <= x /\\ x < floor(x) + &1
-      #|  &2 * u
-      #|  u:real
+      #|  real_of_num(2) * (u : Real)
+      #|  (u : Real)
       #|  forall u. &2 * floor(u) <= floor(&2 * u) /\\ floor(&2 * u) <= &2 * floor(u) + &1
-      #|  forall x. frac(x) = x - floor(x)
-      #|  forall n. floor(&n) = &n
-      #|  x:real
-      #|  forall x n. integer(n) ==> (n <= floor x <=> n <= x)
-      #|  (p <=> q) <=> (~p <=> ~q)
-      #|  x <= y <=> x + &1 <= y + &1
-      #|  forall x n. integer n ==> (floor x <= n <=> x - &1 < n)
-      #|  forall x n. integer n ==> (floor x < n <=> x < n)
-      #|  forall x n. integer n ==> (n < floor x <=> n <= x - &1)
-      #|  x:real
-      #|  forall x. &0 <= x ==> ?n. floor(x) = &n
-      #|  n:num
-      #|  forall m n. ~(m = 0) ==> floor(&n / &m) = &(n DIV m)
-      #|  y:real
-      #|  x:real
-      #|  forall x y. x <= y ==> floor x <= floor y
-      #|  x < x + &1
-      #|  forall x. floor x = x <=> integer x
-      #|  forall x. floor x < x <=> ~(integer x)
-      #|  forall x. frac x = &0 <=> integer x
-      #|  forall x. &0 < frac x <=> ~(integer x)
-      #|  forall n. frac(&n) = &0
-      #|  forall x. integer x ==> floor x = x
-      #|  forall x. integer x ==> frac x = &0
-      #|  x + y:real
-      #|  y:real
-      #|  x:real
+      #|  \226\136\128 x : Real, frac(x) == x - floor(x)
+      #|  \226\136\128 n : Num, floor(real_of_num(n)) == real_of_num(n)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 n : Real, integer(n) \226\134\146 (n <= floor(x)) == (n <= x)
+      #|  ((p : Bool) == (q : Bool)) == (!p == !q)
+      #|  ((x : Real) <= (y : Real)) == (x + real_of_num(1) <= y + real_of_num(1))
+      #|  \226\136\128 x : Real, \226\136\128 n : Real, integer(n) \226\134\146 (floor(x) <= n) == (x - real_of_num(1) < n)
+      #|  \226\136\128 x : Real, \226\136\128 n : Real, integer(n) \226\134\146 (floor(x) < n) == (x < n)
+      #|  \226\136\128 x : Real, \226\136\128 n : Real, integer(n) \226\134\146 (n < floor(x)) == (n <= x - real_of_num(1))
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 (\226\136\131 n : Num, floor(x) == real_of_num(n))
+      #|  (n : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, !(m == 0) \226\134\146 floor(real_of_num(n) / real_of_num(m)) == real_of_num(DIV(n, m))
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 floor(x) <= floor(y)
+      #|  (x : Real) < x + real_of_num(1)
+      #|  \226\136\128 x : Real, (floor(x) == x) == integer(x)
+      #|  \226\136\128 x : Real, (floor(x) < x) == !integer(x)
+      #|  \226\136\128 x : Real, (frac(x) == real_of_num(0)) == integer(x)
+      #|  \226\136\128 x : Real, (real_of_num(0) < frac(x)) == !integer(x)
+      #|  \226\136\128 n : Num, frac(real_of_num(n)) == real_of_num(0)
+      #|  \226\136\128 x : Real, integer(x) \226\134\146 floor(x) == x
+      #|  \226\136\128 x : Real, integer(x) \226\134\146 frac(x) == real_of_num(0)
+      #|  (x : Real) + (y : Real)
+      #|  (y : Real)
+      #|  (x : Real)
       #|  forall x y. floor(x + y) = if frac x + frac y < &1 then floor(x) + floor(y)\n                        else (floor(x) + floor(y)) + &1
       #|  forall x y. floor(x) + floor(y) <= floor(x + y) /\\\n         floor(x + y) <= (floor x + floor y) + &1
-      #|  x:real
-      #|  x:real
+      #|  (x : Real)
+      #|  (x : Real)
       #|  forall x. floor(--x) = if integer x then --x else --(floor x + &1)
       #|  forall x y. frac(x + y) = if frac x + frac y < &1 then frac(x) + frac(y)\n                       else (frac(x) + frac(y)) - &1
-      #|  forall x. &0 <= floor x <=> &0 <= x
-      #|  x - f:real = a <=> f = x - a
+      #|  \226\136\128 x : Real, (real_of_num(0) <= floor(x)) == (real_of_num(0) <= x)
+      #|  ((x : Real) - (f : Real) == (a : Real)) == (f == x - a)
       #|  forall x a. integer(x - a) /\\ &0 <= a /\\ a < &1 <=> frac x = a
-      #|  forall x. frac x = x <=> &0 <= x /\\ x < &1
-      #|  x:real
-      #|  floor x
-      #|  forall a. P a \\/ P(a + &1) ==> ?x. P x
-      #|  forall x. ?n. integer n /\\ abs(x - n) <= &1 / &2
-      #|  ~(n:real = &0) ==> (x * n) / n = x
-      #|  n:num
-      #|  m:num
-      #|  x / a - y / a:real = (x - y) / a
-      #|  forall m n. ~(n = 0) ==> frac(&m / &n) = &(m MOD n) / &n
+      #|  \226\136\128 x : Real, (frac(x) == x) == (real_of_num(0) <= x && x < real_of_num(1))
+      #|  (x : Real)
+      #|  floor((x : Real))
+      #|  \226\136\128 a : Real, (P : (Real) -> Bool)(a) || P(a + real_of_num(1)) \226\134\146 (\226\136\131 x : Real, P(x))
+      #|  \226\136\128 x : Real, \226\136\131 n : Real, integer(n) && abs(x - n) <= real_of_num(1) / real_of_num(2)
+      #|  !((n : Real) == real_of_num(0)) \226\134\146 (x : Real) * n / n == x
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (x : Real) / (a : Real) - (y : Real) / a == (x - y) / a
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, !(n == 0) \226\134\146 frac(real_of_num(m) / real_of_num(n)) == real_of_num(MOD(m, n)) / real_of_num(n)
       #|  forall x. frac(--x) = if integer x then &0 else &1 - frac x
-      #|  n = 0
-      #|  forall x n. floor(floor x / &n) = floor(x / &n)
-      #|  y:real
-      #|  floor y
+      #|  (n : Num) == 0
+      #|  \226\136\128 x : Real, \226\136\128 n : Num, floor(floor(x) / real_of_num(n)) == floor(x / real_of_num(n))
+      #|  (y : Real)
+      #|  floor((y : Real))
       #|  forall x y. x + &1 <= y ==> ?n. integer n /\\ x < n /\\ n <= y
-      #|  y - &1:real
-      #|  integer y
+      #|  (y : Real) - real_of_num(1)
+      #|  integer((y : Real))
       #|  forall x y. x + &1 < y ==> ?n. integer n /\\ x < n /\\ n < y
-      #|  y - &1:real
-      #|  integer y
+      #|  (y : Real) - real_of_num(1)
+      #|  integer((y : Real))
       #|  forall x y. x + &1 <= y ==> ?n. integer n /\\ x <= n /\\ n < y
-      #|  y:real
-      #|  x:real
-      #|  x:real
-      #|  y:real
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (y : Real)
       #|  forall x y. &1 <= abs(x - y)\n         ==> ?n. integer n /\\ (x <= n /\\ n < y \\/ y <= n /\\ n < x)
-      #|  y:real
-      #|  x:real
-      #|  x:real
-      #|  y:real
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (y : Real)
       #|  forall x y. &1 < abs(x - y)\n         ==> ?n. integer n /\\ (x < n /\\ n < y \\/ y < n /\\ n < x)
-      #|  forall x. integer(x) ==> real_of_int(int_of_real x) = x
-      #|  IMAGE real_of_int (:int) = integer
-      #|  &n <= x ==> &0 <= x
-      #|  ?k. x = &k
-      #|  x:real
+      #|  \226\136\128 x : Real, integer(x) \226\134\146 real_of_int(int_of_real(x)) == x
+      #|  IMAGE(real_of_int, UNIV) == integer
+      #|  real_of_num((n : Num)) <= (x : Real) \226\134\146 real_of_num(0) <= x
+      #|  \226\136\131 k : Num, (x : Real) == real_of_num(k)
+      #|  (x : Real)
       #|  {x | integer(x) /\\ &m <= x /\\ x <= &n} =\n                IMAGE real_of_num (m..n)
       #|  forall m n. {x | integer(x) /\\ &m <= x /\\ x <= &n} HAS_SIZE ((n + 1) - m)
       #|  IMAGE (\\x. &x) (0..n) UNION IMAGE (\\x. --(&x)) (0..n)
-      #|  {x | integer(x) /\\ abs(x) <= &n}
-      #|  n:num
-      #|  max (abs a) (abs b)
-      #|  forall a b. FINITE {x | integer(x) /\\ a <= x /\\ x <= b}
-      #|  ?m. b - a = &m
-      #|  b < a ==> ~(&n <= b - a)
-      #|  a + x:real = y <=> y - a = x
-      #|  c:real
+      #|  {(x : Real) | integer(x) && abs(x) <= real_of_num((n : Num))}
+      #|  (n : Num)
+      #|  max(abs((a : Real)), abs((b : Real)))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, FINITE({(x : Real) | integer(x) && a <= x && x <= b})
+      #|  \226\136\131 m : Num, (b : Real) - (a : Real) == real_of_num(m)
+      #|  (b : Real) < (a : Real) \226\134\146 !(real_of_num((n : Num)) <= b - a)
+      #|  ((a : Real) + (x : Real) == (y : Real)) == (y - a == x)
+      #|  (c : Real)
       #|  {x | integer(x) /\\ a <= x /\\ x <= b} =\n    IMAGE (\\n. a + &n) {n | &n <= b - a}
       #|  forall a b. integer a /\\ integer b\n         ==> {x | integer(x) /\\ a <= x /\\ x <= b} HAS_SIZE\n             if b < a then 0 else num_of_int(int_of_real(b - a + &1))
       #|  forall a b. integer a /\\ integer b\n         ==> CARD {x | integer(x) /\\ a <= x /\\ x <= b} =\n             if b < a then 0 else num_of_int(int_of_real(b - a + &1))
       #|  forall a b. integer a /\\ integer b\n         ==> &(CARD {x | integer(x) /\\ a <= x /\\ x <= b}) =\n             if b < a then &0 else b - a + &1
-      #|  INFINITE(IMAGE real_of_num (:num))
-      #|  INFINITE integer
-      #|  INFINITE rational
-      #|  p pow n * x:real
-      #|  &1 < p ==> abs p = p
-      #|  &1 < p ==> &0 < p
-      #|  abs((x - &1) / p - (x + &1) / p) = abs(&2 / p)
-      #|  floor(p pow n * x) + &1
-      #|  floor(p pow n * x) - &1
-      #|  &1 < p ==> &0 < p
-      #|  n:num
-      #|  &2 / e:real
-      #|  p:real
+      #|  INFINITE(IMAGE(real_of_num, UNIV))
+      #|  INFINITE(integer)
+      #|  INFINITE(rational)
+      #|  pow((p : Real), (n : Num)) * (x : Real)
+      #|  real_of_num(1) < (p : Real) \226\134\146 abs(p) == p
+      #|  real_of_num(1) < (p : Real) \226\134\146 real_of_num(0) < p
+      #|  abs(((x : Real) - real_of_num(1)) / (p : Real) - (x + real_of_num(1)) / p) == abs(real_of_num(2) / p)
+      #|  floor(pow((p : Real), (n : Num)) * (x : Real)) + real_of_num(1)
+      #|  floor(pow((p : Real), (n : Num)) * (x : Real)) - real_of_num(1)
+      #|  real_of_num(1) < (p : Real) \226\134\146 real_of_num(0) < p
+      #|  (n : Num)
+      #|  real_of_num(2) / (e : Real)
+      #|  (p : Real)
       #|  forall p x e. &0 < e /\\ &1 < p\n           ==> ?n q r. integer q /\\ integer r /\\\n                       q / p pow n < x /\\ x < r / p pow n /\\\n                       abs(q / p pow n - r / p pow n) < e
       #|  abs(q - r) < e ==> &0 < --q /\\ z = &0 /\\ &0 < r\n    ==> abs(z - r) < e
-      #|  max q (&0) = if &0 <= q then q else &0
-      #|  &0 < r ==> abs r = r
-      #|  a < r ==> &0 <= a ==> &0 < r
-      #|  &0 < r
-      #|  abs(max q (&0)) = max q (&0)
-      #|  b:num
-      #|  a:num
-      #|  max q (&0)
-      #|  r:real
-      #|  r:real
-      #|  q:real
-      #|  n:num
-      #|  e:real
-      #|  x:real
-      #|  p:real
+      #|  max((q : Real), real_of_num(0)) == (if real_of_num(0) <= q { q } else { real_of_num(0) })
+      #|  real_of_num(0) < (r : Real) \226\134\146 abs(r) == r
+      #|  (a : Real) < (r : Real) \226\134\146 real_of_num(0) <= a \226\134\146 real_of_num(0) < r
+      #|  real_of_num(0) < (r : Real)
+      #|  abs(max((q : Real), real_of_num(0))) == max(q, real_of_num(0))
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  max((q : Real), real_of_num(0))
+      #|  (r : Real)
+      #|  (r : Real)
+      #|  (q : Real)
+      #|  (n : Num)
+      #|  (e : Real)
+      #|  (x : Real)
+      #|  (p : Real)
       #|  &0 < p /\\ &0 <= p
       #|  (forall p x e. &0 < e /\\ &1 < p /\\ &0 < x\n            ==> ?n q r. &q / p pow n < x /\\ x < &r / p pow n /\\\n                        abs(&q / p pow n - &r / p pow n) < e) /\\\n   (forall p x e. &0 < e /\\ &1 < p /\\ &0 <= x\n           ==> ?n q r. &q / p pow n <= x /\\ x < &r / p pow n /\\\n                       abs(&q / p pow n - &r / p pow n) < e)
-      #|  q / &2 pow n
-      #|  r:real
-      #|  q:real
-      #|  n:num
-      #|  e:real
-      #|  x:real
-      #|  &2:real
-      #|  forall x e. &0 < e ==> ?r. rational r /\\ abs(r - x) < e
-      #|  (b - a) / &4
-      #|  (a + b) / &2
-      #|  forall a b. a < b ==> ?q. rational q /\\ a < q /\\ q < b
-      #|  forall a b. (?q. rational q /\\ a < q /\\ q < b) <=> a < b
-      #|  e / &4
-      #|  x + e / &4
-      #|  e / &4
-      #|  x - e / &4
+      #|  (q : Real) / pow(real_of_num(2), (n : Num))
+      #|  (r : Real)
+      #|  (q : Real)
+      #|  (n : Num)
+      #|  (e : Real)
+      #|  (x : Real)
+      #|  real_of_num(2)
+      #|  \226\136\128 x : Real, \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 r : Real, rational(r) && abs(r - x) < e)
+      #|  ((b : Real) - (a : Real)) / real_of_num(4)
+      #|  ((a : Real) + (b : Real)) / real_of_num(2)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, a < b \226\134\146 (\226\136\131 q : Real, rational(q) && a < q && q < b)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, (\226\136\131 q : Real, rational(q) && a < q && q < b) == (a < b)
+      #|  (e : Real) / real_of_num(4)
+      #|  (x : Real) + (e : Real) / real_of_num(4)
+      #|  (e : Real) / real_of_num(4)
+      #|  (x : Real) - (e : Real) / real_of_num(4)
       #|  forall x e. &0 < e\n         ==> ?a b. rational a /\\ rational b /\\\n                   a < x /\\ x < b /\\ abs(b - a) < e
-      #|  e:real
-      #|  x:real
+      #|  (e : Real)
+      #|  (x : Real)
       #|  forall x e. &0 < e ==> ?q. rational q /\\ x < q /\\ q < x + e
-      #|  e:real
-      #|  x:real
+      #|  (e : Real)
+      #|  (x : Real)
       #|  forall x e. &0 < e ==> ?q. rational q /\\ x - e < q /\\ q < x
-      #|  forall m n. m < n ==> (q:num->real) n < q m
-      #|  IMAGE (q:num->real) (:num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 (q : (Num) -> Real)(n) < q(m)
+      #|  IMAGE((q : (Num) -> Real), UNIV)
       #|  ?q. (forall n. rational(q n) /\\ a < q n /\\ q n < b) /\\ (forall n. q(SUC n) < q n)
       #|  forall a b. a < b ==> INFINITE {q | rational q /\\ a < q /\\ q < b}
-      #|  ~(n:real = &0) ==> (x / n = y <=> n * y = x)
+      #|  !((n : Real) == real_of_num(0)) \226\134\146 ((x : Real) / n == (y : Real)) == (n * y == x)
       #|  forall a b n. (a == b) (mod n) <=>\n           if n = 0 then &a:real = &b\n           else integer((&a - &b) / &n)
-      #|  ~(n:real = &0) ==> (x / n = y <=> n * y = x)
+      #|  !((n : Real) == real_of_num(0)) \226\134\146 ((x : Real) / n == (y : Real)) == (n * y == x)
       #|  forall a b n. (a == b) (mod n) <=>\n           if n = &0 then real_of_int a = real_of_int b\n           else integer((real_of_int a - real_of_int b) / real_of_int n)
       #|INTEGER_CASES =  |- ((#=:fun(bool,fun(bool,bool)) (#integer:fun(real,bool) x:real)) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\n:num. ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) n:num))))) (#?:fun(fun(num,bool),bool) (\n:num. ((#=:fun(real,fun(real,bool)) x:real) (#real_neg:fun(real,real) (#real_of_num:fun(num,real) n:num)))))))
       #|REAL_ABS_INTEGER_LEMMA =  |- (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#integer:fun(real,bool) x:real)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_abs:fun(real,real) x:real)))))
