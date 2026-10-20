@@ -13353,31 +13353,31 @@ Arithmetic/arithprov quotations (126):
   \226\136\128 x : Num, \226\136\128 y : Num, RTC(PROV1(IMAGE(gform, (A : (Form) -> Bool))), x, y) \226\134\146 ALLN(isaprove(A), x) \226\134\146 ALLN(isaprove(A), y)
   \226\136\128 A : (Form) -> Bool, \226\136\128 n : Num, PROV(IMAGE(gform, A), n) == (\226\136\131 p : Form, op_bar_minus_minus(A, p) && gform(p) == n)
   \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, PROV(IMAGE(gform, A), gform(p)) == op_bar_minus_minus(A, p)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
   \226\136\128 s : Term, \226\136\128 t : Term, FV(arith_term1(s, t)) == UNION(FVT(s), FVT(t))
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
   \226\136\128 t : Term, FV(arith_term(t)) == FVT(t)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
   \226\136\128 s : Term, \226\136\128 t : Term, FV(arith_form1(s, t)) == UNION(FVT(s), FVT(t))
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
   \226\136\128 t : Term, FV(arith_form(t)) == FVT(t)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
   \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, FV(arith_freeterm1(s, t, u)) == UNION(FVT(s), UNION(FVT(t), FVT(u)))
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
   \226\136\128 s : Term, \226\136\128 t : Term, FV(arith_freeterm(s, t)) == UNION(FVT(s), FVT(t))
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
   \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, FV(arith_freeform1(s, t, u)) == UNION(FVT(s), UNION(FVT(t), FVT(u)))
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
   \226\136\128 s : Term, \226\136\128 t : Term, FV(arith_freeform(s, t)) == UNION(FVT(s), FVT(t))
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
   \226\136\128 t : Term, FV(arith_axiom(t)) == FVT(t)
   \226\136\128 v : (Num) -> Num, \226\136\128 n : Term, holds(v, (A : (Term) -> Form)(n)) == (Ax : (Num) -> Bool)(termval(v, n))
   (\226\136\128 v : (Num) -> Num, \226\136\128 t : Term, holds(v, (A : (Term) -> Form)(t)) == (Ax : (Num) -> Bool)(termval(v, t))) \226\134\146 (\226\136\128 v : (Num) -> Num, \226\136\128 s : Term, \226\136\128 t : Term, holds(v, arith_prov1(A, s, t)) == PROV1(Ax, termval(v, s), termval(v, t)))
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
   (\226\136\128 t : Term, FV((A : (Term) -> Form)(t)) == FVT(t)) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, FV(arith_prov1(A, s, t)) == UNION(FVT(s), FVT(t)))
   (arith_prov : ((Term) -> Form, Term) -> Form)((A : (Term) -> Form), (n : Term)) == formsubst(op_bar_minus_gt(0, n, V), arith_rtc(arith_prov1(A), numeral(0), arith_pair(V(0), numeral(0))))
   \226\136\128 Ax : (Num) -> Bool, \226\136\128 A : (Term) -> Form, (\226\136\128 v : (Num) -> Num, \226\136\128 t : Term, holds(v, A(t)) == Ax(termval(v, t))) \226\134\146 (\226\136\128 v : (Num) -> Num, \226\136\128 n : Term, holds(v, arith_prov(A, n)) == PROV(Ax, termval(v, n)))
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
   (\226\136\128 t : Term, FV((A : (Term) -> Form)(t)) == FVT(t)) \226\134\146 (\226\136\128 t : Term, FV(arith_prov(A, t)) == FVT(t))
   arith_prov((t : Term) => formsubst(op_bar_minus_gt((x : Num), t, V), (A : Form)), V(x))
   (t : Term) => formsubst(op_bar_minus_gt((x : Num), t, V), (A : Form))
