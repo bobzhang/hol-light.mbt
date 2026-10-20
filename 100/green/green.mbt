@@ -331,16 +331,16 @@ fn step_13() -> Unit raise {
     })(((x125 : @kernel.Thm) => @bool.spec(t124, x125))(x126))
   })
   let t120 = @simp.rewrite_tac(@list.List([@class.not_exists_thm(), @class.de_morgan_thm(), @iterate.in_support(), @sets.in_univ(), @vectors.neutral_vector_add(), @realarith.real_not_lt()]))
-  let t119 = @tactics.undisch_tac(@term_syntax.parse_term("!(∃ y : Cart[Real, Tybit0[Unit]], IN(y, support(op_plus, (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), UNIV)) && dist(((z : Cart[Real, Tybit0[Unit]]), y)) < (e : Real))"))
+  let t119 = @tactics.undisch_tac(@term_syntax.parse_term("!(∃ y : Cart[Real, Tybit0[Unit]], IN(y, support(op_plus, (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), UNIV)) && distance(((z : Cart[Real, Tybit0[Unit]]), y)) < (e : Real))"))
   let t129 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(y : Cart[Real, Tybit0[Unit]])")), @tactics.disch_tac), t119), t120), t127), t128), @tactics.all_tac])
-  let t118 = @tactics.subgoal_then(@term_syntax.parse_term("∀ y : Cart[Real, Tybit0[Unit]], dist((y, (z : Cart[Real, Tybit0[Unit]]))) < (e : Real) → (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(y) == vec(0)"), fn(x115 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t118 = @tactics.subgoal_then(@term_syntax.parse_term("∀ y : Cart[Real, Tybit0[Unit]], distance((y, (z : Cart[Real, Tybit0[Unit]]))) < (e : Real) → (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(y) == vec(0)"), fn(x115 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s116 = @tactics.assume_tac(x115)
     fn(x117 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s116(x117)
     }
   })
   let t114 = @list.List([@meson.asm_meson_tac(@list.List([@vectors.dist_sym()])), @tactics.all_tac])
-  let t113 = @class.asm_cases_tac(@term_syntax.parse_term("∃ y : Cart[Real, Tybit0[Unit]], IN(y, support(op_plus, (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), UNIV)) && dist(((z : Cart[Real, Tybit0[Unit]]), y)) < (e : Real)"))
+  let t113 = @class.asm_cases_tac(@term_syntax.parse_term("∃ y : Cart[Real, Tybit0[Unit]], IN(y, support(op_plus, (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), UNIV)) && distance(((z : Cart[Real, Tybit0[Unit]]), y)) < (e : Real)"))
   let t112 = @tactics.x_gen_tac(@term_syntax.parse_term("(e : Real)"))
   let t111 = @simp.rewrite_tac(@list.List([@topology.closure_approachable()]))
   let t110 = @simp.rewrite_tac(@list.List([@iterate.in_support(), @sets.in_univ(), @vectors.neutral_vector_add()]))
