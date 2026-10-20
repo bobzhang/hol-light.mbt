@@ -22164,83 +22164,83 @@ test "Examples/zolotarev matches Examples/zolotarev.ml" {
       #|0..0..1..2..8..18..55..113..295..566..solved at 987
       #|0..0..0..0..solved at 4
       #|Examples/zolotarev quotations (77):
-      #|  zolotarev(a,n) = \\m. if m < n then (a * m) MOD n else m
-      #|  coprime(a:num,n) /\\ (a * x == a * y) (mod n) ==> (x == y) (mod n)
-      #|  n:num
-      #|  forall a n. coprime(a,n) ==> (zolotarev(a,n)) permutes {m | m < n}
-      #|  ~(0 < m) <=> m = 0
-      #|  m:num
-      #|  {m:num | m < n}
-      #|  forall a n. coprime(a,n) ==> (zolotarev(a,n)) permutes {m | 0 < m /\\ m < n}
-      #|  {m:num | m < n}
-      #|  forall a n. coprime(a,n) ==> permutation (zolotarev(a,n))
-      #|  forall a n. zolotarev(a MOD n,n) = zolotarev(a,n)
-      #|  forall a b n. (a == b) (mod n) ==> zolotarev(a,n) = zolotarev(b,n)
-      #|  zolotarevu(a,n) = \\m. if coprime(m,n) /\\ m < n then (a * m) MOD n else m
-      #|  coprime(a:num,n) /\\ (a * x == a * y) (mod n) ==> (x == y) (mod n)
-      #|  n:num
-      #|  {x | P x /\\ Q x} = {x | x IN {y | Q y} /\\ P x}
-      #|  forall a n. coprime(a,n)\n         ==> (zolotarevu(a,n)) permutes {m | coprime(m,n) /\\ m < n}
-      #|  {m:num | m IN {m | m < n} /\\ coprime(m,n)}
-      #|  forall a n. coprime(a,n) ==> permutation (zolotarevu(a,n))
-      #|  forall a n. zolotarevu(a MOD n,n) = zolotarevu(a,n)
-      #|  {i | i < phi n}
-      #|  \\i. (g EXP i) MOD n
-      #|  evenperm(\\i. if i < phi n then (i + k) MOD phi n else i)
-      #|  coprime(n:num,g)
-      #|  k:num
-      #|  a:num
-      #|  g:num
-      #|  n:num
-      #|  n = 0
-      #|  forall a n. 3 <= n /\\ coprime(a,n) /\\ (?g. order n g = phi n)\n         ==> (evenperm(zolotarevu(a,n)) <=> ?x. (x EXP 2 == a) (mod n))
-      #|  n:num < p
-      #|  n:num
-      #|  forall a p. prime p ==> zolotarev(a,p) = zolotarevu(a,p)
-      #|  m < 1 <=> m = 0
-      #|  forall a. zolotarev(a,1) = I
-      #|  p ==> ~p ==> q
-      #|  j:num
-      #|  i:num
-      #|  {i | i < p EXP k}
-      #|  \\x:num. p * x
-      #|  1 <= SUC k
-      #|  p EXP 1
-      #|  SUC k
-      #|  a:num
-      #|  p:num
-      #|  (p <=> q) <=> (~p <=> ~q)
-      #|  m:num
-      #|  i < p EXP (SUC k)
-      #|  (p:num) divides i
-      #|  i:num
-      #|  zolotarev (a,p EXP SUC k) =\n    zolotarevu(a,p EXP SUC k) o\n    (\\i. if p divides i then zolotarev(a,p EXP SUC k) i else i)
-      #|  k:num
-      #|  p = 0
-      #|  forall a p k.\n        prime p /\\ ODD p /\\ coprime(a,p)\n        ==> real_of_int(jacobi(a,p EXP k)) = sign(zolotarev(a,p EXP k))
-      #|  j:num
-      #|  i:num
-      #|  n:num
-      #|  m:num
-      #|  p ==> ~p ==> q
-      #|  i:num < m /\\ j:num < n
-      #|  j:num
-      #|  i:num
-      #|  i:num
-      #|  m * n:num
-      #|  j:num
-      #|  i:num
-      #|  {i:num | i < m * n}
-      #|  \\i. i MOD m,i MOD n
-      #|  sign(\\(i,j). if i IN {i | i < m} /\\ j IN {j | j < n}\n                 then zolotarev(a,m) i,zolotarev(a,n) j else i,j)
-      #|  n = 0
-      #|  m = 0
-      #|  n:num
-      #|  m:num
-      #|  k = 0
-      #|  k:num
-      #|  p:num
-      #|  forall a n. ODD n /\\ coprime(a,n)\n         ==> real_of_int(jacobi(a,n)) = sign(zolotarev(a,n))
+      #|  (zolotarev : ((Num, Num), Num) -> Num)(((a : Num), (n : Num))) == ((m : Num) => if m < n { MOD(a * m, n) } else { m })
+      #|  coprime(((a : Num), (n : Num))) && op_eq_eq(a * (x : Num), a * (y : Num), mod(n)) \226\134\146 op_eq_eq(x, y, mod(n))
+      #|  (n : Num)
+      #|  \226\136\128 a : Num, \226\136\128 n : Num, coprime((a, n)) \226\134\146 permutes(zolotarev((a, n)), {(m : Num) | m < n})
+      #|  !(0 < (m : Num)) == (m == 0)
+      #|  (m : Num)
+      #|  {(m : Num) | m < (n : Num)}
+      #|  \226\136\128 a : Num, \226\136\128 n : Num, coprime((a, n)) \226\134\146 permutes(zolotarev((a, n)), {(m : Num) | 0 < m && m < n})
+      #|  {(m : Num) | m < (n : Num)}
+      #|  \226\136\128 a : Num, \226\136\128 n : Num, coprime((a, n)) \226\134\146 permutation(zolotarev((a, n)))
+      #|  \226\136\128 a : Num, \226\136\128 n : Num, zolotarev((MOD(a, n), n)) == zolotarev((a, n))
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 n : Num, op_eq_eq(a, b, mod(n)) \226\134\146 zolotarev((a, n)) == zolotarev((b, n))
+      #|  (zolotarevu : ((Num, Num), Num) -> Num)(((a : Num), (n : Num))) == ((m : Num) => if coprime((m, n)) && m < n { MOD(a * m, n) } else { m })
+      #|  coprime(((a : Num), (n : Num))) && op_eq_eq(a * (x : Num), a * (y : Num), mod(n)) \226\134\146 op_eq_eq(x, y, mod(n))
+      #|  (n : Num)
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == {(x : _) | IN(x, {(y : _) | Q(y)}) && P(x)}
+      #|  \226\136\128 a : Num, \226\136\128 n : Num, coprime((a, n)) \226\134\146 permutes(zolotarevu((a, n)), {(m : Num) | coprime((m, n)) && m < n})
+      #|  {(m : Num) | IN(m, {(m : Num) | m < (n : Num)}) && coprime((m, n))}
+      #|  \226\136\128 a : Num, \226\136\128 n : Num, coprime((a, n)) \226\134\146 permutation(zolotarevu((a, n)))
+      #|  \226\136\128 a : Num, \226\136\128 n : Num, zolotarevu((MOD(a, n), n)) == zolotarevu((a, n))
+      #|  {(i : Num) | i < phi((n : Num))}
+      #|  (i : Num) => MOD(EXP((g : Num), i), (n : Num))
+      #|  evenperm((i : Num) => if i < phi((n : Num)) { MOD(i + (k : Num), phi(n)) } else { i })
+      #|  coprime(((n : Num), (g : Num)))
+      #|  (k : Num)
+      #|  (a : Num)
+      #|  (g : Num)
+      #|  (n : Num)
+      #|  (n : Num) == 0
+      #|  \226\136\128 a : Num, \226\136\128 n : Num, 3 <= n && coprime((a, n)) && (\226\136\131 g : Num, order(n, g) == phi(n)) \226\134\146 evenperm(zolotarevu((a, n))) == (\226\136\131 x : Num, op_eq_eq(EXP(x, 2), a, mod(n)))
+      #|  (n : Num) < (p : Num)
+      #|  (n : Num)
+      #|  \226\136\128 a : Num, \226\136\128 p : Num, prime(p) \226\134\146 zolotarev((a, p)) == zolotarevu((a, p))
+      #|  ((m : Num) < 1) == (m == 0)
+      #|  \226\136\128 a : Num, zolotarev((a, 1)) == I
+      #|  (p : Bool) \226\134\146 !p \226\134\146 (q : Bool)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  {(i : Num) | i < EXP((p : Num), (k : Num))}
+      #|  (x : Num) => (p : Num) * x
+      #|  1 <= SUC((k : Num))
+      #|  EXP((p : Num), 1)
+      #|  SUC((k : Num))
+      #|  (a : Num)
+      #|  (p : Num)
+      #|  ((p : Bool) == (q : Bool)) == (!p == !q)
+      #|  (m : Num)
+      #|  (i : Num) < EXP((p : Num), SUC((k : Num)))
+      #|  divides((p : Num), (i : Num))
+      #|  (i : Num)
+      #|  zolotarev(((a : Num), EXP((p : Num), SUC((k : Num))))) == o(zolotarevu((a, EXP(p, SUC(k)))), (i : Num) => if divides(p, i) { zolotarev((a, EXP(p, SUC(k))), i) } else { i })
+      #|  (k : Num)
+      #|  (p : Num) == 0
+      #|  \226\136\128 a : Num, \226\136\128 p : Num, \226\136\128 k : Num, prime(p) && ODD(p) && coprime((a, p)) \226\134\146 real_of_int(jacobi((a, EXP(p, k)))) == sign(zolotarev((a, EXP(p, k))))
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (p : Bool) \226\134\146 !p \226\134\146 (q : Bool)
+      #|  (i : Num) < (m : Num) && (j : Num) < (n : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (m : Num) * (n : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  {(i : Num) | i < (m : Num) * (n : Num)}
+      #|  (i : Num) => (MOD(i, (m : Num)), MOD(i, (n : Num)))
+      #|  sign(GABS((f : ((Num, Num)) -> (Num, Num)) => \226\136\128 i : Num, \226\136\128 j : Num, GEQ(f((i, j)), if IN(i, {(i : Num) | i < (m : Num)}) && IN(j, {(j : Num) | j < (n : Num)}) { (zolotarev(((a : Num), m), i), zolotarev((a, n), j)) } else { (i, j) })))
+      #|  (n : Num) == 0
+      #|  (m : Num) == 0
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (k : Num) == 0
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  \226\136\128 a : Num, \226\136\128 n : Num, ODD(n) && coprime((a, n)) \226\134\146 real_of_int(jacobi((a, n))) == sign(zolotarev((a, n)))
       #|zolotarev =  |- (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(fun(num,num),fun(fun(num,num),bool)) (#zolotarev:fun(prod(num,num),fun(num,num)) ((#,:fun(num,fun(num,prod(num,num))) a:num) n:num))) (\m:num. (((#COND:fun(bool,fun(num,fun(num,num))) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) a:num) m:num)) n:num)) m:num)))))))
       #|PERMUTES_ZOLOTAREV =  |- (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#num_coprime:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) a:num) n:num))) ((#permutes:fun(fun(num,num),fun(fun(num,bool),bool)) (#zolotarev:fun(prod(num,num),fun(num,num)) ((#,:fun(num,fun(num,prod(num,num))) a:num) n:num))) (#GSPEC:fun(fun(num,bool),fun(num,bool)) (\GEN%PVAR%1:num. (#?:fun(fun(num,bool),bool) (\m:num. (((#SETSPEC:fun(num,fun(bool,fun(num,bool))) GEN%PVAR%1:num) ((#<:fun(num,fun(num,bool)) m:num) n:num)) m:num)))))))))))
       #|PERMUTES_ZOLOTAREV_ALT =  |- (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#num_coprime:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) a:num) n:num))) ((#permutes:fun(fun(num,num),fun(fun(num,bool),bool)) (#zolotarev:fun(prod(num,num),fun(num,num)) ((#,:fun(num,fun(num,prod(num,num))) a:num) n:num))) (#GSPEC:fun(fun(num,bool),fun(num,bool)) (\GEN%PVAR%2:num. (#?:fun(fun(num,bool),bool) (\m:num. (((#SETSPEC:fun(num,fun(bool,fun(num,bool))) GEN%PVAR%2:num) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num))) m:num)))))))))))
