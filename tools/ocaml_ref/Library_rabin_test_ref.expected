@@ -26150,478 +26150,478 @@ Warning: inventing type variables
 0..0..solved at 3
 0..0..8..solved at 21
 Library/rabin_test quotations (473):
-  ring_sub r (ring_pow r (x:A) (m EXP k)) x
+  ring_sub((r : Ring[A]), ring_pow(r, (x : A), EXP((m : Num), (k : Num))), x)
   ring_sub r (ring_pow r (ring_pow r (x:A) (m EXP k)) m) x = ring_add r\n       (ring_sub r (ring_pow r (ring_pow r x (m EXP k)) m) (ring_pow r x m))\n       (ring_sub r (ring_pow r x m) x)
   ring_pow r (x:A) (m EXP (SUC k)) =\n                ring_pow r (ring_pow r x (m EXP k)) m
-  ring_pow r (x:A) (m EXP k) IN ring_carrier r
+  IN(ring_pow((r : Ring[A]), (x : A), EXP((m : Num), (k : Num))), ring_carrier(r))
   ring_divides r (p:A) (ring_sub r (ring_pow r x (m EXP k)) x)
-  k = 0
+  (k : Num) == 0
   forall r (p:A) x m k. integral_domain r /\\\n     p IN ring_carrier r /\\ x IN ring_carrier r /\\\n     ring_divides r p (ring_sub r (ring_pow r x m) x) /\\ ~(k = 0) /\\ 1 <= m\n     ==> ring_divides r p (ring_sub r (ring_pow r x (m EXP k)) x)
-  1 <= d <=> ~(d = 0)
+  (1 <= (d : Num)) == !(d == 0)
   forall f:A ring p (s:V->bool).\n     field f /\\\n     p IN ring_carrier(poly_ring f s) /\\\n     ~(p = ring_0(poly_ring f s)) /\\\n     ~(ring_unit (poly_ring f s) p)\n     ==> 1 <= poly_deg f p
   ring_sub r (ring_sub r (a:A) b) (ring_sub r a c) = ring_sub r c b
   ring_sub r (ring_sub r (ring_pow r (u:A) m) x)\n                (ring_sub r (ring_pow r u m) (ring_pow r x m)) =\n     ring_sub r (ring_pow r x m) x
   ring_divides r (p:A)\n    (ring_sub r (ring_sub r (ring_pow r u m) x)\n                (ring_sub r (ring_pow r u m) (ring_pow r x m)))
-  ring_sub r (u:A) x
+  ring_sub((r : Ring[A]), (u : A), (x : A))
   ring_divides r (p:A)\n    (ring_sub r (ring_pow r u m) (ring_pow r x m))
-  (p:A) IN ring_carrier r
+  IN((p : A), ring_carrier((r : Ring[A])))
   forall r (p:A) u x m.\n    u IN ring_carrier r /\\ x IN ring_carrier r /\\\n    ring_divides r p (ring_sub r u x) /\\\n    ring_divides r p (ring_sub r (ring_pow r u m) x) /\\ ~(m = 0)\n    ==> ring_divides r p (ring_sub r (ring_pow r x m) x)
-  y:A
+  (y : A)
   ring_inv f (x:A) IN ring_carrier f /\\\n                ~(ring_inv f x = ring_0 f)
-  \\y:A. ring_mul f (ring_inv f x) y
-  \\y:A. ring_mul f x y
+  (y : A) => ring_mul((f : Ring[A]), ring_inv(f, (x : A)), y)
+  (y : A) => ring_mul((f : Ring[A]), (x : A), y)
   forall f:A ring x. field f /\\ FINITE(ring_carrier f) /\\\n    x IN ring_carrier f /\\ ~(x = ring_0 f)\n    ==> ring_product f (ring_carrier f DELETE ring_0 f) (\\y. ring_mul f x y) =\n        ring_product f (ring_carrier f DELETE ring_0 f) (\\y. y)
-  ring_1 (f:A ring)
-  ring_pow f (x:A) (CARD(s:A->bool))
-  ring_product f s (\\y:A. y)
-  f:A ring
-  ring_pow f x (CARD(s:A->bool)) = ring_1 (f:A ring)
+  ring_1((f : Ring[A]))
+  ring_pow((f : Ring[A]), (x : A), CARD((s : (A) -> Bool)))
+  ring_product((f : Ring[A]), (s : (A) -> Bool), (y : A) => y)
+  (f : Ring[A])
+  ring_pow((f : Ring[A]), (x : A), CARD((s : (A) -> Bool))) == ring_1(f)
   ring_product f s (\\y:A. ring_mul f x y) =\n     ring_mul f (ring_pow f x (CARD(s:A->bool)))\n               (ring_product f s (\\y:A. y))
   ring_product f s (\\y:A. ring_mul f x y) =\n     ring_product f s (\\y:A. y)
-  ~(ring_product f s (\\y:A. y) = ring_0 f)
+  !(ring_product((f : Ring[A]), (s : (A) -> Bool), (y : A) => y) == ring_0(f))
   forall y:A. y IN s ==> y IN ring_carrier f /\\ ~(y = ring_0 f)
-  (x:A) IN s
+  IN((x : A), (s : (A) -> Bool))
   FINITE (s:A->bool) /\\ CARD s = CARD(ring_carrier(f:A ring)) - 1
-  s = ring_carrier f DELETE (ring_0 (f:A ring))
+  (s : (A) -> Bool) == DELETE(ring_carrier((f : Ring[A])), ring_0(f))
   ring_pow f x (CARD(ring_carrier(f:A ring)) - 1) = ring_1 f
-  ~(n = 0) ==> n = (n - 1) + 1
+  !((n : Num) == 0) \226\134\146 n == n - 1 + 1
   CARD(ring_carrier(f:A ring)) =\n                (CARD(ring_carrier f) - 1) + 1
-  x:A = ring_0 f
+  (x : A) == ring_0((f : Ring[A]))
   forall f:A ring. field f /\\ FINITE(ring_carrier f) ==> forall x. x IN ring_carrier f\n       ==> ring_pow f x (CARD(ring_carrier f)) = x
   poly_mul (f:A ring) (p:(1->num)->A)\n        (ring_0 (R:((1->num)->A)ring)) =\n        ring_mul R p (ring_0 R)
   ring_mul (R:((1->num)->A)ring) (p:(1->num)->A)\n        (ring_0 R) = ring_0 R
-  ~p /\\ ~q ==> (p <=> q)
-  poly_0 (f:A ring) = ring_0 (R:((1->num)->A)ring)
+  !(p : Bool) && !(q : Bool) \226\134\146 p == q
+  poly_0((f : Ring[A])) == ring_0((R : Ring[((Unit) -> Num) -> A]))
   (q:(1->num)->A) = poly_mul (f:A ring) p s
   poly_deg (f:A ring) (q:(1->num)->A) =\n      poly_deg f (p:(1->num)->A) + poly_deg f (s:(1->num)->A)
-  s:(1->num)->A
-  poly_deg (f:A ring) (q:(1->num)->A)
-  q:(1->num)->A
-  p:(1->num)->A
-  R:((1->num)->A)ring
-  ring_divides R (p:(1->num)->A) q
+  (s : ((Unit) -> Num) -> A)
+  poly_deg((f : Ring[A]), (q : ((Unit) -> Num) -> A))
+  (q : ((Unit) -> Num) -> A)
+  (p : ((Unit) -> Num) -> A)
+  (R : Ring[((Unit) -> Num) -> A])
+  ring_divides((R : Ring[((Unit) -> Num) -> A]), (p : ((Unit) -> Num) -> A), (q : ((Unit) -> Num) -> A))
   ring_kernel(R,K) (ring_coset R (J:((1->num)->A)->bool)) = J
-  (q:(1->num)->A) IN J
+  IN((q : ((Unit) -> Num) -> A), (J : (((Unit) -> Num) -> A) -> Bool))
   ring_coset R (J:((1->num)->A)->bool) (q:(1->num)->A) =\n     ring_0 (K:(((1->num)->A)->bool)ring)
-  (q:(1->num)->A) IN ring_carrier R
-  q:(1->num)->A
-  CARD (b:(((1->num)->A)->bool)->bool)
-  b:(((1->num)->A)->bool)->bool
-  a:((1->num)->A)->bool
-  K:(((1->num)->A)->bool)ring
-  f:A ring
-  h:A->((1->num)->A)->bool
+  IN((q : ((Unit) -> Num) -> A), ring_carrier((R : Ring[((Unit) -> Num) -> A])))
+  (q : ((Unit) -> Num) -> A)
+  CARD((b : ((((Unit) -> Num) -> A) -> Bool) -> Bool))
+  (b : ((((Unit) -> Num) -> A) -> Bool) -> Bool)
+  (a : (((Unit) -> Num) -> A) -> Bool)
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool])
+  (f : Ring[A])
+  (h : (A, ((Unit) -> Num) -> A) -> Bool)
   (b:(((1->num)->A)->bool)->bool) SUBSET\n     ring_carrier (K:(((1->num)->A)->bool)ring)
   ring_span (f:A ring,K:(((1->num)->A)->bool)ring)\n     (h:A->((1->num)->A)->bool) (b:(((1->num)->A)->bool)->bool) =\n     ring_carrier K
-  CARD {n:num | n < d}
-  b <= c ==> a <= b ==> a <= c
+  CARD({(n : Num) | n < (d : Num)})
+  (b : Num) <= (c : Num) \226\134\146 (a : Num) <= b \226\134\146 a <= c
   ring_span (f:A ring,K:(((1->num)->A)->bool)ring)\n        (h:A->((1->num)->A)->bool)\n        {ring_pow K (a:((1->num)->A)->bool) n | n < d} =\n       ring_carrier (K:(((1->num)->A)->bool)ring)
-  n:num
+  (n : Num)
   {ring_pow (K:(((1->num)->A)->bool)ring)\n                (a:((1->num)->A)->bool) n | n < d}
-  b:(((1->num)->A)->bool)->bool
-  K:(((1->num)->A)->bool)ring
-  f:A ring
-  h:A->((1->num)->A)->bool
-  a:((1->num)->A)->bool
-  p:(1->num)->A
-  K:(((1->num)->A)->bool)ring
-  f:A ring
-  h:A->((1->num)->A)->bool
+  (b : ((((Unit) -> Num) -> A) -> Bool) -> Bool)
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool])
+  (f : Ring[A])
+  (h : (A, ((Unit) -> Num) -> A) -> Bool)
+  (a : (((Unit) -> Num) -> A) -> Bool)
+  (p : ((Unit) -> Num) -> A)
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool])
+  (f : Ring[A])
+  (h : (A, ((Unit) -> Num) -> A) -> Bool)
   (b:(((1->num)->A)->bool)->bool) SUBSET\n     ring_carrier (K:(((1->num)->A)->bool)ring)
   ring_independent (f:A ring,K:(((1->num)->A)->bool)ring)\n     (h:A->((1->num)->A)->bool) (b:(((1->num)->A)->bool)->bool)
   poly_extend (f:A ring,K:(((1->num)->A)->bool)ring)\n     h (\\v:1. a) (p:(1->num)->A) = ring_coset R J p
   poly_extend (f:A ring,K:(((1->num)->A)->bool)ring)\n     h (\\v:1. a) p = ring_0 K
   ~(p:(1->num)->A = ring_0 R)
-  d = poly_deg (f:A ring) (p:(1->num)->A)
+  (d : Num) == poly_deg((f : Ring[A]), (p : ((Unit) -> Num) -> A))
   CARD (b:(((1->num)->A)->bool)->bool) =\n                poly_deg (f:A ring) (p:(1->num)->A)
-  b:(((1->num)->A)->bool)->bool
-  K:(((1->num)->A)->bool)ring
-  f:A ring
-  h:A->((1->num)->A)->bool
-  b:(((1->num)->A)->bool)->bool
-  a:((1->num)->A)->bool
-  K:(((1->num)->A)->bool)ring
-  f:A ring
-  h:A->((1->num)->A)->bool
+  (b : ((((Unit) -> Num) -> A) -> Bool) -> Bool)
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool])
+  (f : Ring[A])
+  (h : (A, ((Unit) -> Num) -> A) -> Bool)
+  (b : ((((Unit) -> Num) -> A) -> Bool) -> Bool)
+  (a : (((Unit) -> Num) -> A) -> Bool)
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool])
+  (f : Ring[A])
+  (h : (A, ((Unit) -> Num) -> A) -> Bool)
   finite_extension (f:A ring, K:(((1->num)->A)->bool)ring)\n    (h:A->((1->num)->A)->bool)
-  g:(1->num)->A
-  g:(1->num)->A
+  (g : ((Unit) -> Num) -> A)
+  (g : ((Unit) -> Num) -> A)
   ring_carrier(K:(((1->num)->A)->bool)ring) =\n      {ring_coset R (J:((1->num)->A)->bool) x |x| x IN ring_carrier R}
-  a:((1->num)->A)->bool
-  K:(((1->num)->A)->bool)ring
-  f:A ring
-  h:A->((1->num)->A)->bool
+  (a : (((Unit) -> Num) -> A) -> Bool)
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool])
+  (f : Ring[A])
+  (h : (A, ((Unit) -> Num) -> A) -> Bool)
   subring_generated K ((a:((1->num)->A)->bool) INSERT\n        IMAGE (h:A->((1->num)->A)->bool) (ring_carrier f)) = K
   poly_extend (f:A ring,K:(((1->num)->A)->bool)ring)\n       h (\\v:1. a) p = ring_coset R (J:((1->num)->A)->bool) p
-  p:(1->num)->A
+  (p : ((Unit) -> Num) -> A)
   algebraic_over (f:A ring,K:(((1->num)->A)->bool)ring)\n      (h:A->((1->num)->A)->bool) (a:((1->num)->A)->bool)
   ring_coset R (J:((1->num)->A)->bool) (p:(1->num)->A) =\n     ring_0 (K:(((1->num)->A)->bool)ring)
-  p:(1->num)->A IN J
-  i:1 = one
-  i:1
-  c:A
-  g:(1->num)->A
-  ring_coset R (J:((1->num)->A)->bool)
-  (\\v:1. a:((1->num)->A)->bool)
-  h:A->((1->num)->A)->bool
-  (:1)
-  K:(((1->num)->A)->bool)ring
-  f:A ring
-  g:(1->num)->A
+  IN((p : ((Unit) -> Num) -> A), (J : (((Unit) -> Num) -> A) -> Bool))
+  (i : Unit) == one
+  (i : Unit)
+  (c : A)
+  (g : ((Unit) -> Num) -> A)
+  ring_coset((R : Ring[((Unit) -> Num) -> A]), (J : (((Unit) -> Num) -> A) -> Bool))
+  (v : Unit) => (a : (((Unit) -> Num) -> A) -> Bool)
+  (h : (A, ((Unit) -> Num) -> A) -> Bool)
+  (UNIV : (Unit) -> Bool)
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool])
+  (f : Ring[A])
+  (g : ((Unit) -> Num) -> A)
   forall g. g IN ring_carrier R\n         ==> poly_extend (f:A ring,K:(((1->num)->A)->bool)ring) h (\\v:1. a) g =\n             ring_coset R (J:((1->num)->A)->bool) g
-  poly_var (f:A ring) one IN ring_carrier R
-  (a:((1->num)->A)->bool) IN ring_carrier K
+  IN(poly_var((f : Ring[A]), one), ring_carrier((R : Ring[((Unit) -> Num) -> A])))
+  IN((a : (((Unit) -> Num) -> A) -> Bool), ring_carrier((K : Ring[(((Unit) -> Num) -> A) -> Bool])))
   ring_homomorphism (f:A ring, K:(((1->num)->A)->bool)ring)\n    (h:A->((1->num)->A)->bool)
   ring_homomorphism\n    (R:((1->num)->A)ring, K:(((1->num)->A)->bool)ring)\n    (ring_coset R (J:((1->num)->A)->bool))
   field_extension (f:A ring, K:(((1->num)->A)->bool)ring)\n    (h:A->((1->num)->A)->bool)
-  field (K:(((1->num)->A)->bool)ring)
+  field((K : Ring[(((Unit) -> Num) -> A) -> Bool]))
   maximal_ideal R (J:((1->num)->A)->bool) /\\\n                ring_ideal R (J:((1->num)->A)->bool)
-  PID (R:((1->num)->A)ring)
+  PID((R : Ring[((Unit) -> Num) -> A]))
   a:((1->num)->A)->bool =\n    ring_coset R J (poly_var (f:A ring) one)
   h:A->((1->num)->A)->bool =\n    ring_coset R J o poly_const (f:A ring)
-  K = quotient_ring R (J:((1->num)->A)->bool)
-  J = ideal_generated R {p:(1->num)->A}
-  R = poly_ring (f:A ring) (:1)
-  (p:(1->num)->A) IN ring_carrier(poly_ring f (:1))
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool]) == quotient_ring((R : Ring[((Unit) -> Num) -> A]), (J : (((Unit) -> Num) -> A) -> Bool))
+  (J : (((Unit) -> Num) -> A) -> Bool) == ideal_generated((R : Ring[((Unit) -> Num) -> A]), {(p : ((Unit) -> Num) -> A)})
+  (R : Ring[((Unit) -> Num) -> A]) == poly_ring((f : Ring[A]), UNIV)
+  IN((p : ((Unit) -> Num) -> A), ring_carrier(poly_ring((f : Ring[A]), UNIV)))
   forall f:A ring p. field f /\\ FINITE(ring_carrier f) /\\\n   ring_irreducible (poly_ring f (:1)) p\n   ==> field(quotient_ring (poly_ring f (:1))\n              (ideal_generated (poly_ring f (:1)) {p})) /\\\n       FINITE(ring_carrier(quotient_ring (poly_ring f (:1))\n              (ideal_generated (poly_ring f (:1)) {p}))) /\\\n       CARD(ring_carrier(quotient_ring (poly_ring f (:1))\n              (ideal_generated (poly_ring f (:1)) {p}))) =\n       CARD(ring_carrier f) EXP (poly_deg f p)
-  q:(1->num)->A
-  q:(1->num)->A
-  q:(1->num)->A
-  q:(1->num)->A
-  q:(1->num)->A
-  q:(1->num)->A
-  q:(1->num)->A
-  q:(1->num)->A
-  q:(1->num)->A
-  q:(1->num)->A
-  q:(1->num)->A
-  q:(1->num)->A
-  q:(1->num)->A
-  q:(1->num)->A
-  q:(1->num)->A
-  q:(1->num)->A
-  1 <= n <=> ~(n = 0)
-  ring_carrier(f:A ring)
-  {ring_0 f, ring_1 (f:A ring)}
-  f:A ring
-  ~(ring_1 (f:A ring) = ring_0 f)
-  2 <= CARD(ring_carrier(f:A ring))
-  k:num
+  (q : ((Unit) -> Num) -> A)
+  (q : ((Unit) -> Num) -> A)
+  (q : ((Unit) -> Num) -> A)
+  (q : ((Unit) -> Num) -> A)
+  (q : ((Unit) -> Num) -> A)
+  (q : ((Unit) -> Num) -> A)
+  (q : ((Unit) -> Num) -> A)
+  (q : ((Unit) -> Num) -> A)
+  (q : ((Unit) -> Num) -> A)
+  (q : ((Unit) -> Num) -> A)
+  (q : ((Unit) -> Num) -> A)
+  (q : ((Unit) -> Num) -> A)
+  (q : ((Unit) -> Num) -> A)
+  (q : ((Unit) -> Num) -> A)
+  (q : ((Unit) -> Num) -> A)
+  (q : ((Unit) -> Num) -> A)
+  (1 <= (n : Num)) == !(n == 0)
+  ring_carrier((f : Ring[A]))
+  {ring_0((f : Ring[A])), ring_1(f)}
+  (f : Ring[A])
+  !(ring_1((f : Ring[A])) == ring_0(f))
+  2 <= CARD(ring_carrier((f : Ring[A])))
+  (k : Num)
   CARD(ring_carrier(f:A ring)) EXP poly_deg f (p:(1->num)->A)
-  poly_var (f:A ring) one
-  p:(1->num)->A
-  R:((1->num)->A)ring
+  poly_var((f : Ring[A]), one)
+  (p : ((Unit) -> Num) -> A)
+  (R : Ring[((Unit) -> Num) -> A])
   CARD(ring_carrier(f:A ring)) EXP n =\n     (CARD(ring_carrier f) EXP (poly_deg f (p:(1->num)->A))) EXP k
   ring_sub R (ring_pow R (poly_var (f:A ring) one) 1)\n        (poly_var f one) = ring_0 R
-  n = 0
-  k = 0
-  k:num
+  (n : Num) == 0
+  (k : Num) == 0
+  (k : Num)
   ring_sub R (ring_pow R (poly_var f one) (CARD(ring_carrier(f:A ring)) EXP\n           (poly_deg f (p:(1->num)->A))))\n       (poly_var (f:A ring) one)
-  p:(1->num)->A
-  R:((1->num)->A)ring
+  (p : ((Unit) -> Num) -> A)
+  (R : Ring[((Unit) -> Num) -> A])
   ring_divides R (p:(1->num)->A) (ring_sub R (ring_pow R (poly_var f one)\n             (CARD(ring_carrier(f:A ring)) EXP (poly_deg f (p:(1->num)->A))))\n          (poly_var f one))
   ring_kernel(R,K) (ring_coset R (J:((1->num)->A)->bool)) = J
   ring_sub R (ring_pow R (poly_var f one) (CARD(ring_carrier(f:A ring)) EXP\n           (poly_deg f (p:(1->num)->A))))\n       (poly_var (f:A ring) one) IN J
   ring_coset R (J:((1->num)->A)->bool) (ring_sub R\n          (ring_pow R (poly_var f one) (CARD(ring_carrier(f:A ring)) EXP\n              (poly_deg f (p:(1->num)->A)))) (poly_var f one)) =\n     ring_0 (K:(((1->num)->A)->bool) ring)
   ring_coset R (J:((1->num)->A)->bool) (poly_var (f:A ring) one)
-  K:(((1->num)->A)->bool) ring
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool])
   CARD(ring_carrier(f:A ring)) EXP (poly_deg f (p:(1->num)->A)) =\n      CARD(ring_carrier(K:(((1->num)->A)->bool) ring))
   ring_pow K\n       (ring_coset R (J:((1->num)->A)->bool) (poly_var (f:A ring) one))\n       (CARD(ring_carrier(f:A ring)) EXP (poly_deg f (p:(1->num)->A))) =\n     ring_coset R J (poly_var f one)
   ring_coset R (J:((1->num)->A)->bool)\n       (poly_var (f:A ring) one) IN ring_carrier K
-  poly_var f one IN ring_carrier(R:((1->num)->A)ring)
+  IN(poly_var((f : Ring[A]), one), ring_carrier((R : Ring[((Unit) -> Num) -> A])))
   ring_homomorphism(R,K)\n                  (ring_coset R (J:((1->num)->A)->bool))
-  p:(1->num)->A
-  f:A ring
+  (p : ((Unit) -> Num) -> A)
+  (f : Ring[A])
   field (K:(((1->num)->A)->bool) ring) /\\ FINITE(ring_carrier K) /\\\n     CARD(ring_carrier K) =\n     CARD(ring_carrier(f:A ring)) EXP (poly_deg f (p:(1->num)->A))
   maximal_ideal R (J:((1->num)->A)->bool) /\\\n                ring_ideal R (J:((1->num)->A)->bool)
-  PID (R:((1->num)->A)ring)
-  K = quotient_ring R (J:((1->num)->A)->bool)
-  J = ideal_generated R {p:(1->num)->A}
-  R = poly_ring (f:A ring) (:1)
-  (p:(1->num)->A) IN ring_carrier(poly_ring f (:1))
+  PID((R : Ring[((Unit) -> Num) -> A]))
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool]) == quotient_ring((R : Ring[((Unit) -> Num) -> A]), (J : (((Unit) -> Num) -> A) -> Bool))
+  (J : (((Unit) -> Num) -> A) -> Bool) == ideal_generated((R : Ring[((Unit) -> Num) -> A]), {(p : ((Unit) -> Num) -> A)})
+  (R : Ring[((Unit) -> Num) -> A]) == poly_ring((f : Ring[A]), UNIV)
+  IN((p : ((Unit) -> Num) -> A), ring_carrier(poly_ring((f : Ring[A]), UNIV)))
   forall f:A ring p n. field f /\\ FINITE(ring_carrier f) /\\\n   ring_irreducible (poly_ring f (:1)) p /\\ (poly_deg f p) divides n\n   ==> ring_divides (poly_ring f (:1)) p (ring_sub (poly_ring f (:1))\n            (ring_pow (poly_ring f (:1)) (poly_var f one)\n                      (CARD(ring_carrier f) EXP n))\n            (poly_var f one))
-  poly_var (f:A ring) one
+  poly_var((f : Ring[A]), one)
   ring_pow R (poly_var f one)\n        (CARD(ring_carrier(f:A ring)) EXP\n         (poly_deg f (p:(1->num)->A)))
   CARD(ring_carrier(f:A ring)) EXP\n        (poly_deg f (p:(1->num)->A))
-  poly_var (f:A ring) one
-  poly_deg f (p:(1->num)->A)
-  p:(1->num)->A
-  f:A ring
+  poly_var((f : Ring[A]), one)
+  poly_deg((f : Ring[A]), (p : ((Unit) -> Num) -> A))
+  (p : ((Unit) -> Num) -> A)
+  (f : Ring[A])
   forall f:A ring p. field f /\\ FINITE(ring_carrier f) /\\\n   ring_irreducible (poly_ring f (:1)) p\n   ==> ring_divides (poly_ring f (:1)) p (ring_sub (poly_ring f (:1))\n            (ring_pow (poly_ring f (:1)) (poly_var f one)\n                      (CARD(ring_carrier f) EXP (poly_deg f p)))\n            (poly_var f one))
   forall f:A ring x r. field f /\\ FINITE(ring_carrier f) /\\ x IN ring_carrier f\n     ==> ring_pow f x (CARD(ring_carrier f) EXP r) = x
-  x:A
-  \\x:A. ring_pow r x (ring_char r EXP (SUC k))
+  (x : A)
+  (x : A) => ring_pow((r : Ring[A]), x, EXP(ring_char(r), SUC((k : Num))))
   (\\x:A. ring_pow r x (ring_char r)) o\n      (\\x. ring_pow r x (ring_char r EXP k))
-  r:A ring
-  r:A ring
+  (r : Ring[A])
+  (r : Ring[A])
   ring_endomorphism (r:A ring) ((\\x. ring_pow r x (ring_char r)) o\n        (\\x. ring_pow r x (ring_char r EXP k)))
-  \\x:A. ring_pow r x 1
-  \\x:A. x
-  r:A ring
+  (x : A) => ring_pow((r : Ring[A]), x, 1)
+  (x : A) => x
+  (r : Ring[A])
   forall r:A ring k. prime(ring_char r)\n     ==> ring_endomorphism r (\\x. ring_pow r x (ring_char r EXP k))
   {x:A | x IN ring_carrier r /\\ poly_eval r g x = ring_0 r}
-  ring_carrier r:A->bool
-  g:(1->num)->A
-  r:A ring
-  a:A
+  ring_carrier((r : Ring[A]))
+  (g : ((Unit) -> Num) -> A)
+  (r : Ring[A])
+  (a : A)
   ring_carrier r SUBSET\n    {x:A | x IN ring_carrier r /\\ poly_eval r g x = ring_0 r}
-  poly_var (r:A ring) one
+  poly_var((r : Ring[A]), one)
   ring_pow (poly_ring r (:1))\n     (poly_var r one:(1->num)->A) n
-  r:A ring
-  poly_deg r (g:(1->num)->A) <= n
-  poly_deg (r:A ring):((1->num)->A)->num
+  (r : Ring[A])
+  poly_deg((r : Ring[A]), (g : ((Unit) -> Num) -> A)) <= (n : Num)
+  (poly_deg : (Ring[A], ((Unit) -> Num) -> A) -> Num)((r : Ring[A]))
   ring_sub P (ring_pow P (poly_var r one:(1->num)->A) n)\n                    (poly_var r one) = ring_0 P
   ring_pow P (poly_var r one:(1->num)->A) n =\n                  poly_var r one
-  ~(g:(1->num)->A = ring_0 P)
-  (g:(1->num)->A) IN ring_carrier P
+  !((g : ((Unit) -> Num) -> A) == ring_0((P : Ring[((Unit) -> Num) -> A])))
+  IN((g : ((Unit) -> Num) -> A), ring_carrier((P : Ring[((Unit) -> Num) -> A])))
   g = ring_sub P\n    (ring_pow P (poly_var r one) n) (poly_var (r:A ring) one)
-  P = poly_ring (r:A ring) (:1)
-  ~(ring_1 r:A = ring_0 r)
+  (P : Ring[((Unit) -> Num) -> A]) == poly_ring((r : Ring[A]), UNIV)
+  !(ring_1((r : Ring[A])) == ring_0(r))
   forall r:A ring n. field r /\\ FINITE(ring_carrier r) /\\ 2 <= n /\\\n     (forall a. a IN ring_carrier r ==> ring_pow r a n = a)\n     ==> CARD(ring_carrier r) <= n
-  f:A ring
-  (pp:num) = ring_char(f:A ring)
-  ee:num
-  ee:num
-  pp:num
-  f:A ring
-  prime(ring_char(f:A ring))
+  (f : Ring[A])
+  (pp : Num) == ring_char((f : Ring[A]))
+  (ee : Num)
+  (ee : Num)
+  (pp : Num)
+  (f : Ring[A])
+  prime(ring_char((f : Ring[A])))
   forall f:A ring. field f /\\ FINITE(ring_carrier f)\n   ==> ?e. ~(e = 0) /\\ CARD(ring_carrier f) = ring_char f EXP e
-  prime(ring_char(f:A ring))
-  q EXP d <= q EXP n
-  q EXP n
-  K:(((1->num)->A)->bool) ring
+  prime(ring_char((f : Ring[A])))
+  EXP((q : Num), (d : Num)) <= EXP(q, (n : Num))
+  EXP((q : Num), (n : Num))
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool])
   CARD(ring_carrier(K:(((1->num)->A)->bool) ring)) <= q EXP n
-  q EXP 1
-  2 <= q EXP n
-  q = ring_char(f:A ring) EXP e
-  ring_char(f:A ring) EXP 1
-  2 <= ring_char(f:A ring)
-  2 <= q
+  EXP((q : Num), 1)
+  2 <= EXP((q : Num), (n : Num))
+  (q : Num) == EXP(ring_char((f : Ring[A])), (e : Num))
+  EXP(ring_char((f : Ring[A])), 1)
+  2 <= ring_char((f : Ring[A]))
+  2 <= (q : Num)
   ring_pow K ((proj:((1->num)->A) -> ((1->num)->A)->bool) (x:(1->num)->A))\n        (q EXP n) =\n      ((frob:(((1->num)->A)->bool) -> ((1->num)->A)->bool) o proj) x
   ring_epimorphism (R:((1->num)->A)ring,\n      K:(((1->num)->A)->bool) ring)\n      (proj:((1->num)->A) -> ((1->num)->A)->bool)
   ?x:(1->num)->A. x IN ring_carrier R /\\\n     (proj:((1->num)->A) -> ((1->num)->A)->bool) x = y
-  y:(((1->num)->A)->bool)
+  (y : (((Unit) -> Num) -> A) -> Bool)
   forall y:(((1->num)->A)->bool). y IN ring_carrier K\n     ==> ring_pow K y (q EXP n) = y
-  poly_ring (f:A ring) (:1) = R
-  K:(((1->num)->A)->bool) ring
-  (:1)
-  f:A ring
-  proj:((1->num)->A) -> ((1->num)->A)->bool
+  poly_ring((f : Ring[A]), UNIV) == (R : Ring[((Unit) -> Num) -> A])
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool])
+  (UNIV : (Unit) -> Bool)
+  (f : Ring[A])
+  (proj : (((Unit) -> Num) -> A, ((Unit) -> Num) -> A) -> Bool)
   (frob:(((1->num)->A)->bool) -> ((1->num)->A)->bool) o\n     (proj:((1->num)->A) -> ((1->num)->A)->bool)
-  poly_var (f:A ring) one
+  poly_var((f : Ring[A]), one)
   ring_pow (R:((1->num)->A)ring) (poly_var (f:A ring) one) (q EXP n)
-  J:((1->num)->A)->bool
-  R:((1->num)->A)ring
+  (J : (((Unit) -> Num) -> A) -> Bool)
+  (R : Ring[((Unit) -> Num) -> A])
   poly_var (f:A ring) one IN ring_carrier (R:((1->num)->A)ring)
   poly_var (f:A ring) one IN ring_carrier (R:((1->num)->A)ring)
   (frob:(((1->num)->A)->bool) -> ((1->num)->A)->bool)\n        ((proj:((1->num)->A) -> ((1->num)->A)->bool) (poly_var (f:A ring) one)) =\n      ring_pow K (proj (poly_var f one)) (q EXP n)
   ((frob:(((1->num)->A)->bool) -> ((1->num)->A)->bool) o\n     (proj:((1->num)->A) -> ((1->num)->A)->bool))\n      (poly_var (f:A ring) one) = proj (poly_var f one)
-  CARD(ring_carrier(f:A ring)) = q
-  (c:A) IN ring_carrier (f:A ring)
-  (:1)
-  f:A ring
+  CARD(ring_carrier((f : Ring[A]))) == (q : Num)
+  IN((c : A), ring_carrier((f : Ring[A])))
+  (UNIV : (Unit) -> Bool)
+  (f : Ring[A])
   poly_const (f:A ring) c IN ring_carrier (R:((1->num)->A)ring)
   poly_const (f:A ring) c IN ring_carrier (R:((1->num)->A)ring)
   (frob:(((1->num)->A)->bool) -> ((1->num)->A)->bool)\n        ((proj:((1->num)->A) -> ((1->num)->A)->bool) (poly_const (f:A ring) c)) =\n      ring_pow K (proj (poly_const f c)) (q EXP n)
-  c:A
+  (c : A)
   forall c:A. c IN ring_carrier f\n     ==> ((frob:(((1->num)->A)->bool) -> ((1->num)->A)->bool) o\n          (proj:((1->num)->A) -> ((1->num)->A)->bool)) (poly_const f c) =\n          proj (poly_const f c)
   ring_homomorphism(R,K)\n    (proj:((1->num)->A) -> ((1->num)->A)->bool)
-  K:(((1->num)->A)->bool) ring
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool])
   ring_homomorphism(R,K)\n    ((frob:(((1->num)->A)->bool) -> ((1->num)->A)->bool) o\n     (proj:((1->num)->A) -> ((1->num)->A)->bool))
   ring_epimorphism(R,K)\n    (proj:((1->num)->A) -> ((1->num)->A)->bool)
-  proj = ring_coset R (J:((1->num)->A)->bool)
+  (proj : (((Unit) -> Num) -> A, ((Unit) -> Num) -> A) -> Bool) == ring_coset((R : Ring[((Unit) -> Num) -> A]), (J : (((Unit) -> Num) -> A) -> Bool))
   q EXP n = ring_char(K:(((1->num)->A)->bool) ring) EXP (e * n)
   frob = (\\y:(((1->num)->A)->bool).\n     ring_pow K y (ring_char K EXP (e * n)))
-  ring_endomorphism (K:(((1->num)->A)->bool) ring) frob
+  ring_endomorphism((K : Ring[(((Unit) -> Num) -> A) -> Bool]), (frob : ((((Unit) -> Num) -> A) -> Bool, ((Unit) -> Num) -> A) -> Bool))
   frob = \\y:(((1->num)->A)->bool). ring_pow K y (q EXP n)
   q EXP n = ring_char(K:(((1->num)->A)->bool) ring) EXP (e * n)
-  f:A ring
-  ?e. ~(e = 0) /\\ q = ring_char(f:A ring) EXP e
-  ring_char(f:A ring)
-  K:(((1->num)->A)->bool) ring
-  ring_coset R (J:((1->num)->A)->bool)
-  K:(((1->num)->A)->bool) ring
-  R:((1->num)->A)ring
+  (f : Ring[A])
+  \226\136\131 e : Num, !(e == 0) && (q : Num) == EXP(ring_char((f : Ring[A])), e)
+  ring_char((f : Ring[A]))
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool])
+  ring_coset((R : Ring[((Unit) -> Num) -> A]), (J : (((Unit) -> Num) -> A) -> Bool))
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool])
+  (R : Ring[((Unit) -> Num) -> A])
   ring_char(K:(((1->num)->A)->bool) ring) =\n                ring_char(f:A ring)
-  (:1)
-  f:A ring
-  ring_char(R:((1->num)->A)ring) = ring_char(f:A ring)
+  (UNIV : (Unit) -> Bool)
+  (f : Ring[A])
+  ring_char((R : Ring[((Unit) -> Num) -> A])) == ring_char((f : Ring[A]))
   ring_homomorphism(R,K)\n                  (ring_coset R (J:((1->num)->A)->bool))
-  prime(ring_char(f:A ring))
+  prime(ring_char((f : Ring[A])))
   CARD(ring_carrier(K:(((1->num)->A)->bool) ring)) = q EXP d
-  p:(1->num)->A
-  f:A ring
+  (p : ((Unit) -> Num) -> A)
+  (f : Ring[A])
   field (K:(((1->num)->A)->bool) ring) /\\ FINITE(ring_carrier K) /\\\n     CARD(ring_carrier K) =\n     CARD(ring_carrier(f:A ring)) EXP (poly_deg f (p:(1->num)->A))
   maximal_ideal R (J:((1->num)->A)->bool) /\\\n                ring_ideal R (J:((1->num)->A)->bool)
-  PID (R:((1->num)->A)ring)
-  K = quotient_ring R (J:((1->num)->A)->bool)
-  J = ideal_generated R {p:(1->num)->A}
-  d = poly_deg f (p:(1->num)->A)
-  q = CARD(ring_carrier(f:A ring))
-  R = poly_ring (f:A ring) (:1)
-  (p:(1->num)->A) IN ring_carrier(poly_ring f (:1))
+  PID((R : Ring[((Unit) -> Num) -> A]))
+  (K : Ring[(((Unit) -> Num) -> A) -> Bool]) == quotient_ring((R : Ring[((Unit) -> Num) -> A]), (J : (((Unit) -> Num) -> A) -> Bool))
+  (J : (((Unit) -> Num) -> A) -> Bool) == ideal_generated((R : Ring[((Unit) -> Num) -> A]), {(p : ((Unit) -> Num) -> A)})
+  (d : Num) == poly_deg((f : Ring[A]), (p : ((Unit) -> Num) -> A))
+  (q : Num) == CARD(ring_carrier((f : Ring[A])))
+  (R : Ring[((Unit) -> Num) -> A]) == poly_ring((f : Ring[A]), UNIV)
+  IN((p : ((Unit) -> Num) -> A), ring_carrier(poly_ring((f : Ring[A]), UNIV)))
   forall f:A ring p n. field f /\\ FINITE(ring_carrier f) /\\\n   ring_irreducible (poly_ring f (:1)) p /\\ ring_divides (poly_ring f (:1)) p\n     (ring_sub (poly_ring f (:1)) (ring_pow (poly_ring f (:1)) (poly_var f one)\n                  (CARD(ring_carrier f) EXP n)) (poly_var f one)) /\\\n   1 <= n ==> poly_deg f p <= n
-  q EXP n
-  (poly_const (f:A ring) c):(1->num)->A
-  q EXP n
-  c:A
-  q EXP n
-  poly_var (f:A ring) one
-  r:num
-  p:(1->num)->A
-  f:A ring
-  k:num
-  r = 0
-  q EXP r
-  x:(1->num)->A
-  u:(1->num)->A
-  p:(1->num)->A
-  R:((1->num)->A)ring
+  EXP((q : Num), (n : Num))
+  (poly_const : (Ring[A], A, (Unit) -> Num) -> A)((f : Ring[A]), (c : A))
+  EXP((q : Num), (n : Num))
+  (c : A)
+  EXP((q : Num), (n : Num))
+  poly_var((f : Ring[A]), one)
+  (r : Num)
+  (p : ((Unit) -> Num) -> A)
+  (f : Ring[A])
+  (k : Num)
+  (r : Num) == 0
+  EXP((q : Num), (r : Num))
+  (x : ((Unit) -> Num) -> A)
+  (u : ((Unit) -> Num) -> A)
+  (p : ((Unit) -> Num) -> A)
+  (R : Ring[((Unit) -> Num) -> A])
   ring_divides R (p:(1->num)->A)\n     (ring_sub R (ring_pow R x (q EXP r)) x)
-  ~(q EXP r = 0)
-  q EXP r
-  q EXP (k * d)
-  x:(1->num)->A
-  R:((1->num)->A)ring
+  !(EXP((q : Num), (r : Num)) == 0)
+  EXP((q : Num), (r : Num))
+  EXP((q : Num), (k : Num) * (d : Num))
+  (x : ((Unit) -> Num) -> A)
+  (R : Ring[((Unit) -> Num) -> A])
   ring_pow R (u:(1->num)->A) (q EXP r) =\n                 ring_pow R x (q EXP n)
   ring_divides R (p:(1->num)->A)\n     (ring_sub R (ring_pow R u (q EXP r)) x)
-  (u:(1->num)->A) IN ring_carrier R
-  u = ring_pow R (x:(1->num)->A) (q EXP (k * d))
-  k:num
-  k * d
-  p:(1->num)->A
-  f:A ring
+  IN((u : ((Unit) -> Num) -> A), ring_carrier((R : Ring[((Unit) -> Num) -> A])))
+  (u : ((Unit) -> Num) -> A) == ring_pow((R : Ring[((Unit) -> Num) -> A]), (x : ((Unit) -> Num) -> A), EXP((q : Num), (k : Num) * (d : Num)))
+  (k : Num)
+  (k : Num) * (d : Num)
+  (p : ((Unit) -> Num) -> A)
+  (f : Ring[A])
   ring_divides R (p:(1->num)->A)\n     (ring_sub R (ring_pow R x (q EXP (k * d))) x)
-  r < d
-  n = k * d + r
-  r = n MOD d
-  k = n DIV d
-  p:(1->num)->A
-  f:A ring
+  (r : Num) < (d : Num)
+  (n : Num) == (k : Num) * (d : Num) + (r : Num)
+  (r : Num) == MOD((n : Num), (d : Num))
+  (k : Num) == DIV((n : Num), (d : Num))
+  (p : ((Unit) -> Num) -> A)
+  (f : Ring[A])
   ring_divides R (p:(1->num)->A)\n     (ring_sub R (ring_pow R x (q EXP d)) x)
-  ~(q = 0)
-  integral_domain (R:((1->num)->A)ring)
-  (x:(1->num)->A) IN ring_carrier R
-  (:1)
-  p:(1->num)->A
-  f:A ring
-  1 <= d
-  n = 0
-  x = poly_var (f:A ring) one
-  d = poly_deg (f:A ring) (p:(1->num)->A)
-  q = CARD(ring_carrier(f:A ring))
-  R = poly_ring (f:A ring) (:1)
-  (p:(1->num)->A) IN ring_carrier(poly_ring f (:1))
+  !((q : Num) == 0)
+  integral_domain((R : Ring[((Unit) -> Num) -> A]))
+  IN((x : ((Unit) -> Num) -> A), ring_carrier((R : Ring[((Unit) -> Num) -> A])))
+  (UNIV : (Unit) -> Bool)
+  (p : ((Unit) -> Num) -> A)
+  (f : Ring[A])
+  1 <= (d : Num)
+  (n : Num) == 0
+  (x : ((Unit) -> Num) -> A) == poly_var((f : Ring[A]), one)
+  (d : Num) == poly_deg((f : Ring[A]), (p : ((Unit) -> Num) -> A))
+  (q : Num) == CARD(ring_carrier((f : Ring[A])))
+  (R : Ring[((Unit) -> Num) -> A]) == poly_ring((f : Ring[A]), UNIV)
+  IN((p : ((Unit) -> Num) -> A), ring_carrier(poly_ring((f : Ring[A]), UNIV)))
   forall f:A ring p n. field f /\\ FINITE(ring_carrier f) /\\\n   ring_irreducible (poly_ring f (:1)) p /\\ ring_divides (poly_ring f (:1)) p\n     (ring_sub (poly_ring f (:1)) (ring_pow (poly_ring f (:1)) (poly_var f one)\n                  (CARD(ring_carrier f) EXP n)) (poly_var f one))\n   ==> (poly_deg f p) divides n
-  q:num
-  k:num
-  n = (n DIV q) * q
-  n * (k * q) = n * 1
-  k:num
-  n = (n DIV q) * q
-  q:num
-  2 <= q /\\ ~(q = 0)
+  (q : Num)
+  (k : Num)
+  (n : Num) == DIV(n, (q : Num)) * q
+  (n : Num) * ((k : Num) * (q : Num)) == n * 1
+  (k : Num)
+  (n : Num) == DIV(n, (q : Num)) * q
+  (q : Num)
+  2 <= (q : Num) && !(q == 0)
   forall n q. prime q /\\ q divides n /\\ ~(n = 0) /\\ n divides (n DIV q) ==> F
-  q':num
-  n:num
-  n DIV q'
-  p:(1->num)->A
-  f:A ring
+  (q' : Num)
+  (n : Num)
+  DIV((n : Num), (q' : Num))
+  (p : ((Unit) -> Num) -> A)
+  (f : Ring[A])
   ring_sub (poly_ring (f:A ring) (:1))\n                     (ring_pow (poly_ring (f:A ring) (:1))\n                               (poly_var f one)\n                               (CARD(ring_carrier f) EXP (n DIV q')))\n                     (poly_var (f:A ring) one)
-  p:(1->num)->A
-  poly_ring (f:A ring) (:1)
-  q':num
-  p:(1->num)->A
-  f:A ring
+  (p : ((Unit) -> Num) -> A)
+  (poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((f : Ring[A]), (UNIV : (Unit) -> Bool))
+  (q' : Num)
+  (p : ((Unit) -> Num) -> A)
+  (f : Ring[A])
   forall f:A ring p n.\n   field f /\\ FINITE(ring_carrier f) /\\\n   p IN ring_carrier(poly_ring f (:1)) /\\\n   poly_deg f p = n /\\ ~(n = 0) /\\\n   ring_irreducible (poly_ring f (:1)) p\n   ==> ring_divides (poly_ring f (:1)) p\n         (ring_sub (poly_ring f (:1))\n            (ring_pow (poly_ring f (:1)) (poly_var f one)\n                      (CARD(ring_carrier f) EXP n))\n            (poly_var f one)) /\\\n       forall q. prime q /\\ q divides n\n           ==> ring_coprime (poly_ring f (:1))\n                 (p, ring_sub (poly_ring f (:1))\n                       (ring_pow (poly_ring f (:1)) (poly_var f one)\n                                 (CARD(ring_carrier f) EXP (n DIV q)))\n                       (poly_var f one))
-  d:num
-  r:num
-  n:num
-  r divides n
-  (d * r) divides n
-  r:num
-  r:num
-  n:num
-  d:num
-  n DIV d
-  n:num
-  d:num
-  ~(n DIV d = 1)
+  (d : Num)
+  (r : Num)
+  (n : Num)
+  divides((r : Num), (n : Num))
+  divides((d : Num) * (r : Num), (n : Num))
+  (r : Num)
+  (r : Num)
+  (n : Num)
+  (d : Num)
+  DIV((n : Num), (d : Num))
+  (n : Num)
+  (d : Num)
+  !(DIV((n : Num), (d : Num)) == 1)
   forall d n. d divides n /\\ 1 <= d /\\ d < n\n           ==> ?q. prime q /\\ q divides n /\\ d divides (n DIV q)
-  g:(1->num)->A
-  l:num
-  ring_unit R (g:(1->num)->A)
-  n DIV l
-  g:(1->num)->A
-  f:A ring
+  (g : ((Unit) -> Num) -> A)
+  (l : Num)
+  ring_unit((R : Ring[((Unit) -> Num) -> A]), (g : ((Unit) -> Num) -> A))
+  DIV((n : Num), (l : Num))
+  (g : ((Unit) -> Num) -> A)
+  (f : Ring[A])
   ring_divides R (g:(1->num)->A)\n     (ring_sub R (ring_pow R (poly_var f one)\n                  (CARD(ring_carrier f) EXP (n DIV l))) (poly_var f one))
-  l:num
-  n:num
-  poly_deg f (g:(1->num)->A)
-  poly_deg f (g:(1->num)->A) < n
-  ring_0 (R:((1->num)->A)ring) = poly_0 (f:A ring)
-  h:(1->num)->A IN ring_carrier R
-  g:(1->num)->A IN ring_carrier R
+  (l : Num)
+  (n : Num)
+  poly_deg((f : Ring[A]), (g : ((Unit) -> Num) -> A))
+  poly_deg((f : Ring[A]), (g : ((Unit) -> Num) -> A)) < (n : Num)
+  ring_0((R : Ring[((Unit) -> Num) -> A])) == poly_0((f : Ring[A]))
+  IN((h : ((Unit) -> Num) -> A), ring_carrier((R : Ring[((Unit) -> Num) -> A])))
+  IN((g : ((Unit) -> Num) -> A), ring_carrier((R : Ring[((Unit) -> Num) -> A])))
   poly_deg f (a:(1->num)->A) =\n                  poly_deg f (poly_mul f (g:(1->num)->A) (h:(1->num)->A))
   poly_deg f (a:(1->num)->A) =\n                 poly_deg f (g:(1->num)->A) + poly_deg f (h:(1->num)->A)
-  ~(h:(1->num)->A = ring_0 R)
-  h:(1->num)->A
+  !((h : ((Unit) -> Num) -> A) == ring_0((R : Ring[((Unit) -> Num) -> A])))
+  (h : ((Unit) -> Num) -> A)
   ring_divides R (g:(1->num)->A) (a:(1->num)->A)
   poly_deg f (g:(1->num)->A) <= poly_deg f (a:(1->num)->A)
-  (:1)
-  g:(1->num)->A
-  f:A ring
-  1 <= poly_deg f (g:(1->num)->A)
-  n:num
-  g:(1->num)->A
-  f:A ring
-  (poly_deg f (g:(1->num)->A)) divides n
-  g:(1->num)->A IN ring_carrier R
-  p:(1->num)->A
+  (UNIV : (Unit) -> Bool)
+  (g : ((Unit) -> Num) -> A)
+  (f : Ring[A])
+  1 <= poly_deg((f : Ring[A]), (g : ((Unit) -> Num) -> A))
+  (n : Num)
+  (g : ((Unit) -> Num) -> A)
+  (f : Ring[A])
+  divides(poly_deg((f : Ring[A]), (g : ((Unit) -> Num) -> A)), (n : Num))
+  IN((g : ((Unit) -> Num) -> A), ring_carrier((R : Ring[((Unit) -> Num) -> A])))
+  (p : ((Unit) -> Num) -> A)
   ring_divides R (g:(1->num)->A)\n     (ring_sub R (ring_pow R (poly_var f one)\n                  (CARD(ring_carrier f) EXP n)) (poly_var f one))
-  b:(1->num)->A
-  a:(1->num)->A
-  ring_divides R (g:(1->num)->A) p
-  g:(1->num)->A
-  a:(1->num)->A
-  R:((1->num)->A)ring
-  UFD (R:((1->num)->A)ring)
-  poly_deg f (a:(1->num)->A) < n
-  (:1)
-  b:(1->num)->A
-  f:A ring
-  (:1)
-  a:(1->num)->A
-  f:A ring
+  (b : ((Unit) -> Num) -> A)
+  (a : ((Unit) -> Num) -> A)
+  ring_divides((R : Ring[((Unit) -> Num) -> A]), (g : ((Unit) -> Num) -> A), (p : ((Unit) -> Num) -> A))
+  (g : ((Unit) -> Num) -> A)
+  (a : ((Unit) -> Num) -> A)
+  (R : Ring[((Unit) -> Num) -> A])
+  UFD((R : Ring[((Unit) -> Num) -> A]))
+  poly_deg((f : Ring[A]), (a : ((Unit) -> Num) -> A)) < (n : Num)
+  (UNIV : (Unit) -> Bool)
+  (b : ((Unit) -> Num) -> A)
+  (f : Ring[A])
+  (UNIV : (Unit) -> Bool)
+  (a : ((Unit) -> Num) -> A)
+  (f : Ring[A])
   1 <= poly_deg f (a:(1->num)->A) /\\\n                1 <= poly_deg f (b:(1->num)->A)
   poly_mul f (a:(1->num)->A) (b:(1->num)->A) = p:(1->num)->A
   poly_deg f (a:(1->num)->A) + poly_deg f (b:(1->num)->A) = n
-  ring_0 (R:((1->num)->A)ring) = poly_0 (f:A ring)
+  ring_0((R : Ring[((Unit) -> Num) -> A])) == poly_0((f : Ring[A]))
   poly_deg f (poly_mul f (a:(1->num)->A) (b:(1->num)->A)) =\n                poly_deg f a + poly_deg f b
-  b:(1->num)->A IN ring_carrier R
-  a:(1->num)->A IN ring_carrier R
+  IN((b : ((Unit) -> Num) -> A), ring_carrier((R : Ring[((Unit) -> Num) -> A])))
+  IN((a : ((Unit) -> Num) -> A), ring_carrier((R : Ring[((Unit) -> Num) -> A])))
   ring_polynomial f (a:(1->num)->A) /\\\n                ring_polynomial f (b:(1->num)->A)
   ~(a:(1->num)->A = ring_0 R) /\\ ~(b:(1->num)->A = ring_0 R)
-  b:(1->num)->A
-  a:(1->num)->A
-  ~(a \\/ b) <=> ~a /\\ ~b
-  ~ring_irreducible R (p:(1->num)->A)
+  (b : ((Unit) -> Num) -> A)
+  (a : ((Unit) -> Num) -> A)
+  !((a : Bool) || (b : Bool)) == (!a && !b)
+  !ring_irreducible((R : Ring[((Unit) -> Num) -> A]), (p : ((Unit) -> Num) -> A))
   ?a b:(1->num)->A.\n       a IN ring_carrier R /\\ b IN ring_carrier R /\\\n       ring_mul R a b = p /\\\n       ~(ring_unit R a) /\\ ~(ring_unit R b)
-  (~p ==> F) ==> p
-  c:A
-  p:(1->num)->A
-  (:1)
-  f:A ring
-  ~(ring_unit R (p:(1->num)->A))
-  integral_domain (R:((1->num)->A)ring)
-  R = poly_ring (f:A ring) (:1)
+  (!(p : Bool) \226\134\146 false) \226\134\146 p
+  (c : A)
+  (p : ((Unit) -> Num) -> A)
+  (UNIV : (Unit) -> Bool)
+  (f : Ring[A])
+  !ring_unit((R : Ring[((Unit) -> Num) -> A]), (p : ((Unit) -> Num) -> A))
+  integral_domain((R : Ring[((Unit) -> Num) -> A]))
+  (R : Ring[((Unit) -> Num) -> A]) == poly_ring((f : Ring[A]), UNIV)
   forall f:A ring p n.\n   field f /\\ FINITE(ring_carrier f) /\\\n   p IN ring_carrier(poly_ring f (:1)) /\\\n   ~(p = ring_0(poly_ring f (:1))) /\\\n   poly_deg f p = n /\\ ~(n = 0) /\\\n   ring_divides (poly_ring f (:1)) p\n     (ring_sub (poly_ring f (:1))\n        (ring_pow (poly_ring f (:1)) (poly_var f one)\n                  (CARD(ring_carrier f) EXP n))\n        (poly_var f one)) /\\\n   (forall q. prime q /\\ q divides n\n        ==> ring_coprime (poly_ring f (:1))\n              (p, ring_sub (poly_ring f (:1))\n                    (ring_pow (poly_ring f (:1)) (poly_var f one)\n                              (CARD(ring_carrier f) EXP (n DIV q)))\n                    (poly_var f one)))\n   ==> ring_irreducible (poly_ring f (:1)) p
-  n:num
-  p:(1->num)->A
-  f:A ring
-  n:num
-  p:(1->num)->A
-  f:A ring
+  (n : Num)
+  (p : ((Unit) -> Num) -> A)
+  (f : Ring[A])
+  (n : Num)
+  (p : ((Unit) -> Num) -> A)
+  (f : Ring[A])
   forall f:A ring p n.\n   field f /\\ FINITE(ring_carrier f) /\\\n   p IN ring_carrier(poly_ring f (:1)) /\\\n   ~(p = ring_0(poly_ring f (:1))) /\\\n   ~(ring_unit (poly_ring f (:1)) p) /\\\n   poly_deg f p = n /\\ ~(n = 0)\n   ==> (ring_irreducible (poly_ring f (:1)) p <=>\n        ring_divides (poly_ring f (:1)) p\n          (ring_sub (poly_ring f (:1))\n             (ring_pow (poly_ring f (:1)) (poly_var f one)\n                       (CARD(ring_carrier f) EXP n))\n             (poly_var f one)) /\\\n        forall q. prime q /\\ q divides n\n            ==> ring_coprime (poly_ring f (:1))\n                  (p, ring_sub (poly_ring f (:1))\n                        (ring_pow (poly_ring f (:1)) (poly_var f one)\n                                  (CARD(ring_carrier f) EXP (n DIV q)))\n                        (poly_var f one)))
 RING_DIVIDES_POW_ITERATE =  |- (#forall:fun(fun(ring('A),bool),bool) (\r:ring('A). (#forall:fun(fun('A,bool),bool) (\p:'A. (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\k:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#integral_domain:fun(ring('A),bool) r:ring('A))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) p:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) r:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) r:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) (((#ring_divides:fun(ring('A),fun('A,fun('A,bool))) r:ring('A)) p:'A) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) r:ring('A)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) r:ring('A)) x:'A) m:num)) x:'A))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) k:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) m:num))))))) (((#ring_divides:fun(ring('A),fun('A,fun('A,bool))) r:ring('A)) p:'A) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) r:ring('A)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) r:ring('A)) x:'A) ((#EXP:fun(num,fun(num,num)) m:num) k:num))) x:'A)))))))))))))
 POLY_NONUNIT_DEGREE_GE_1 =  |- (#forall:fun(fun(ring('A),bool),bool) (\f:ring('A). (#forall:fun(fun(fun(fun('V,num),'A),bool),bool) (\p:fun(fun('V,num),'A). (#forall:fun(fun(fun('V,bool),bool),bool) (\s:fun('V,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#field:fun(ring('A),bool) f:ring('A))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(fun(fun('V,num),'A),fun(fun(fun(fun('V,num),'A),bool),bool)) p:fun(fun('V,num),'A)) (#ring_carrier:fun(ring(fun(fun('V,num),'A)),fun(fun(fun('V,num),'A),bool)) ((#poly_ring:fun(ring('A),fun(fun('V,bool),ring(fun(fun('V,num),'A)))) f:ring('A)) s:fun('V,bool))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(fun(fun('V,num),'A),fun(fun(fun('V,num),'A),bool)) p:fun(fun('V,num),'A)) (#ring_0:fun(ring(fun(fun('V,num),'A)),fun(fun('V,num),'A)) ((#poly_ring:fun(ring('A),fun(fun('V,bool),ring(fun(fun('V,num),'A)))) f:ring('A)) s:fun('V,bool)))))) (#~:fun(bool,bool) ((#ring_unit:fun(ring(fun(fun('V,num),'A)),fun(fun(fun('V,num),'A),bool)) ((#poly_ring:fun(ring('A),fun(fun('V,bool),ring(fun(fun('V,num),'A)))) f:ring('A)) s:fun('V,bool))) p:fun(fun('V,num),'A))))))) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#poly_deg:fun(ring('A),fun(fun(fun('V,num),'A),num)) f:ring('A)) p:fun(fun('V,num),'A))))))))))
