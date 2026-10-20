@@ -6272,7 +6272,7 @@ test "Library/analysis matches Library/analysis.ml" {
       #|  \226\136\128 x : Real, \226\136\128 y : Real, x - y + y == x
       #|  \226\136\128 x : Real, \226\136\128 y : Real, y + (x - y) == x
       #|  \226\136\128 x : Real, x - x == real_of_num(0)
-      #|  op_plus
+      #|  real_add
       #|  (y : Real)
       #|  \226\136\128 x : Real, \226\136\128 y : Real, (x - y == real_of_num(0)) == (x == y)
       #|  \226\136\128 x : Real, (real_of_num(0) <= x + x) == (real_of_num(0) <= x)
@@ -6303,7 +6303,7 @@ test "Library/analysis matches Library/analysis.ml" {
       #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x - y) * z == x * z - y * z
       #|  \226\136\128 x : Real, \226\136\128 y : Real, (-x == y) == (x == -y)
       #|  \226\136\128 x : Real, -x == -real_of_num(1) * x
-      #|  op_star
+      #|  real_mul
       #|  (x : Real)
       #|  \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 !(inv(x) == real_of_num(0))
       #|  inv((x : Real))
@@ -6694,10 +6694,10 @@ test "Library/analysis matches Library/analysis.ml" {
       #|  forall m n p.\n      n <= p /\\ (forall r. m + n <= r /\\ r < m + p ==> (f(r) = &0))\n      ==> (sum(m,p) f = sum(m,n) f)
       #|  ((a : Real) - (b : Real) == (c : Real) - (d : Real)) == (a - c == b - d)
       #|  forall m n p.\n      n <= p /\\ (forall r. m + n <= r /\\ r < m + p ==> (f(r) = g(r)))\n      ==> (sum(m,p) f - sum(m,n) f = sum(m,p) g - sum(m,n) g)
-      #|  sum
+      #|  psum
       #|  1
       #|  sum((0, 1), (f : (Num) -> Real)) == f(0)
-      #|  sum
+      #|  psum
       #|  1
       #|  sum((0, 1), (f : (Num) -> Real)) == f(0)
       #|  (re_Union : (((A) -> Bool) -> Bool, A) -> Bool)((S : ((A) -> Bool) -> Bool)) == ((x : A) => \226\136\131 s : (A) -> Bool, S(s) && s(x))
@@ -6926,7 +6926,7 @@ test "Library/analysis matches Library/analysis.ml" {
       #|  real_of_num(0) < abs((x : (A) -> Real)((n : A)))
       #|  (x : (A) -> Real)((n : A))
       #|  (x0 : Real)
-      #|  abs
+      #|  real_abs
       #|  abs((x0 : Real) - (x : (A) -> Real)((n : A))) + abs(x(n))
       #|  abs((x : (A) -> Real)((n : A)))
       #|  abs((x0 : Real)) / real_of_num(2)
@@ -7737,7 +7737,7 @@ test "Library/analysis matches Library/analysis.ml" {
       #|  (h : Real)
       #|  inv((x : Real) + (h : Real)) * inv(x)
       #|  (h : Real)
-      #|  op_minus_minus
+      #|  real_neg
       #|  !((x : Real) == real_of_num(0))
       #|  (a : Real) * (b : Real) * ((c : Real) * (d : Real)) == a * d * (c * b)
       #|  !((x : Real) + (h : Real) == real_of_num(0))
