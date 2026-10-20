@@ -915,9 +915,9 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
-      #|  derivative f = \\y. @d. (f has_real_derivative d) (atreal y)
-      #|  nth_derivative n f = iter n derivative f
-      #|  (nth_differentiable 0 f x <=> f real_continuous atreal x) /\\\n\t(nth_differentiable (SUC n) f x <=> nth_differentiable n f x /\\ \n\t\t\tnth_derivative n f real_differentiable atreal x)
+      #|  (derivative : ((Real) -> Real, Real) -> Real)((f : (Real) -> Real)) == ((y : Real) => select((d : Real) => has_real_derivative(f, d, atreal(y))))
+      #|  (nth_derivative : (Num, (Real) -> Real, Real) -> Real)((n : Num), (f : (Real) -> Real)) == iter(n, derivative, f)
+      #|  (nth_differentiable : (Num, (Real) -> Real, Real) -> Bool)(0, (f : (Real) -> Real), (x : Real)) == real_continuous(f, atreal(x)) && nth_differentiable(SUC((n : Num)), f, x) == (nth_differentiable(n, f, x) && real_differentiable(nth_derivative(n, f), atreal(x)))
       #|  :P
       #|  :P
       #|  :P
@@ -926,237 +926,237 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  nth_differentiable_on n s f <=>\n\tforall x. x IN s ==> nth_differentiable n f x
-      #|  nth_differentiable_on_int n int f <=>\n\tforall x. interval_arith x int ==> nth_differentiable n f x
+      #|  (nth_differentiable_on : (Num, (Real) -> Bool, (Real) -> Real) -> Bool)((n : Num), (s : (Real) -> Bool), (f : (Real) -> Real)) == (\226\136\128 x : Real, IN(x, s) \226\134\146 nth_differentiable(n, f, x))
+      #|  (nth_differentiable_on_int : (Num, (Real, Real), (Real) -> Real) -> Bool)((n : Num), (int : (Real, Real)), (f : (Real) -> Real)) == (\226\136\128 x : Real, interval_arith(x, int) \226\134\146 nth_differentiable(n, f, x))
       #|  nth_diff_weak n f x <=> f real_continuous atreal x /\\ \n\t?F. F 0 = f /\\ forall i. i < n ==> (F i has_real_derivative F (SUC i) x) (atreal x)
-      #|  nth_diff_strong n f x <=> \n\t?s. real_open s /\\ x IN s /\\ nth_differentiable_on n s f
-      #|  nth_diff_strong_int n int f <=>\n\tforall x. interval_arith x int ==> nth_diff_strong n f x
-      #|  derivative = real_derivative
-      #|  derivative f x = d
-      #|  (?d. (f has_real_derivative d) (atreal x)) ==>\n\t(f has_real_derivative (derivative f x)) (atreal x)
-      #|  f real_differentiable atreal x ==>\n\t(f has_real_derivative (derivative f x)) (atreal x)
-      #|  (f has_real_derivative f') (atreal x) ==> derivative f x = f'
-      #|  (forall x. x IN s ==> (f has_real_derivative f' x) (atreal x)) ==>\n\t(forall x. x IN s ==> f' x = derivative f x)
-      #|  f' x
-      #|  f real_differentiable atreal x /\\\n\tderivative f x = f' ==>\n\t(f has_real_derivative f') (atreal x)
-      #|  nth_derivative 0 f = f
-      #|  nth_derivative (SUC n) f = derivative (nth_derivative n f)
-      #|  nth_derivative (SUC n) f = nth_derivative n (derivative f)
-      #|  nth_derivative 1 f = derivative f
-      #|  2 = SUC(SUC 0)
-      #|  nth_derivative 2 f = derivative (derivative f)
-      #|  nth_derivative n (nth_derivative m f) = nth_derivative (n + m) f
-      #|  nth_differentiable n f x ==>\n\tf real_continuous atreal x
-      #|  nth_differentiable n f x ==>\n   forall i. i < n ==> (nth_derivative i f has_real_derivative (nth_derivative (SUC i) f x)) (atreal x)
-      #|  nth_differentiable_on n s f ==>\n forall x. x IN s ==> \n  forall i. i < n ==> (nth_derivative i f has_real_derivative (nth_derivative (SUC i) f x)) (atreal x)
-      #|  nth_derivative (SUC n) f x
-      #|  nth_differentiable n f x <=>\n  f real_continuous atreal x /\\\n  forall i. i < n ==> (nth_derivative i f has_real_derivative (nth_derivative (SUC i) f x)) (atreal x)
-      #|  2 = SUC 1
-      #|  nth_derivative 2 f
-      #|  derivative f
-      #|  nth_differentiable_on_int 2 int f ==>\n\t?f' f''. f' = derivative f /\\ f'' = nth_derivative 2 f /\\\n\t\tforall x. interval_arith x int ==> (f has_real_derivative f' x) (atreal x) /\\\n\t\t\t\t\t(f' has_real_derivative f'' x) (atreal x)
+      #|  (nth_diff_strong : (Num, (Real) -> Real, Real) -> Bool)((n : Num), (f : (Real) -> Real), (x : Real)) == (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && nth_differentiable_on(n, s, f))
+      #|  (nth_diff_strong_int : (Num, (Real, Real), (Real) -> Real) -> Bool)((n : Num), (int : (Real, Real)), (f : (Real) -> Real)) == (\226\136\128 x : Real, interval_arith(x, int) \226\134\146 nth_diff_strong(n, f, x))
+      #|  derivative == real_derivative
+      #|  derivative((f : (Real) -> Real), (x : Real)) == (d : Real)
+      #|  (\226\136\131 d : Real, has_real_derivative((f : (Real) -> Real), d, atreal((x : Real)))) \226\134\146 has_real_derivative(f, derivative(f, x), atreal(x))
+      #|  real_differentiable((f : (Real) -> Real), atreal((x : Real))) \226\134\146 has_real_derivative(f, derivative(f, x), atreal(x))
+      #|  has_real_derivative((f : (Real) -> Real), (f' : Real), atreal((x : Real))) \226\134\146 derivative(f, x) == f'
+      #|  (\226\136\128 x : Real, IN(x, (s : (Real) -> Bool)) \226\134\146 has_real_derivative((f : (Real) -> Real), (f' : (Real) -> Real)(x), atreal(x))) \226\134\146 (\226\136\128 x : Real, IN(x, s) \226\134\146 f'(x) == derivative(f, x))
+      #|  (f' : (_) -> _)((x : _))
+      #|  real_differentiable((f : (Real) -> Real), atreal((x : Real))) && derivative(f, x) == (f' : Real) \226\134\146 has_real_derivative(f, f', atreal(x))
+      #|  nth_derivative(0, (f : (Real) -> Real)) == f
+      #|  nth_derivative(SUC((n : Num)), (f : (Real) -> Real)) == derivative(nth_derivative(n, f))
+      #|  nth_derivative(SUC((n : Num)), (f : (Real) -> Real)) == nth_derivative(n, derivative(f))
+      #|  nth_derivative(1, (f : (Real) -> Real)) == derivative(f)
+      #|  2 == SUC(SUC(0))
+      #|  nth_derivative(2, (f : (Real) -> Real)) == derivative(derivative(f))
+      #|  nth_derivative((n : Num), nth_derivative((m : Num), (f : (Real) -> Real))) == nth_derivative(n + m, f)
+      #|  nth_differentiable((n : Num), (f : (Real) -> Real), (x : Real)) \226\134\146 real_continuous(f, atreal(x))
+      #|  nth_differentiable((n : Num), (f : (Real) -> Real), (x : Real)) \226\134\146 (\226\136\128 i : Num, i < n \226\134\146 has_real_derivative(nth_derivative(i, f), nth_derivative(SUC(i), f, x), atreal(x)))
+      #|  nth_differentiable_on((n : Num), (s : (Real) -> Bool), (f : (Real) -> Real)) \226\134\146 (\226\136\128 x : Real, IN(x, s) \226\134\146 (\226\136\128 i : Num, i < n \226\134\146 has_real_derivative(nth_derivative(i, f), nth_derivative(SUC(i), f, x), atreal(x))))
+      #|  nth_derivative(SUC((n : Num)), (f : (Real) -> Real), (x : Real))
+      #|  nth_differentiable((n : Num), (f : (Real) -> Real), (x : Real)) == (real_continuous(f, atreal(x)) && (\226\136\128 i : Num, i < n \226\134\146 has_real_derivative(nth_derivative(i, f), nth_derivative(SUC(i), f, x), atreal(x))))
+      #|  2 == SUC(1)
+      #|  nth_derivative(2, (f : (Real) -> Real))
+      #|  derivative((f : (Real) -> Real))
+      #|  nth_differentiable_on_int(2, (int : (Real, Real)), (f : (Real) -> Real)) \226\134\146 (\226\136\131 f' : (Real) -> Real, \226\136\131 f'' : (Real) -> Real, f' == derivative(f) && f'' == nth_derivative(2, f) && (\226\136\128 x : Real, interval_arith(x, int) \226\134\146 has_real_derivative(f, f'(x), atreal(x)) && has_real_derivative(f', f''(x), atreal(x))))
       #|  2
       #|  2
       #|  2
       #|  2
       #|  2
-      #|  n <= m ==> nth_differentiable m f x ==> nth_differentiable n f x
-      #|  nth_differentiable 1 f x <=> f real_differentiable atreal x
-      #|  0 < n ==> nth_differentiable n f x ==>\n\tf real_differentiable atreal x
-      #|  nth_derivative (SUC i) f x
-      #|  nth_differentiable n f x ==> i < n ==>\n\tnth_derivative i f real_continuous atreal x
-      #|  nth_differentiable n f x ==> i < n ==>\n\tnth_differentiable (n - i) (nth_derivative i f) x
-      #|  nth_diff_strong n f x ==>\tnth_differentiable n f x
-      #|  \\x. x
-      #|  &0 < x ==> (abs has_real_derivative &1) (atreal x)
-      #|  --x
-      #|  \\x. --x
-      #|  x < &0 ==> (abs has_real_derivative (-- &1)) (atreal x)
-      #|  derivative (\\x. x) = (\\x. &1)
-      #|  derivative (\\x. c) = (\\x. &0)
-      #|  &0 < x ==> derivative abs x = &1
-      #|  x < &0 ==> derivative abs x = -- &1
-      #|  x pow (n - 1)
-      #|  derivative (\\x. x pow n) = (\\x. &n * x pow (n - 1))
-      #|  2 - 1 = 1
-      #|  derivative (\\x. x pow 2) = (\\x. &2 * x)
-      #|  3 - 1 = 2
-      #|  derivative (\\x. x pow 3) = (\\x. &3 * x pow 2)
-      #|  ~(x = &0) ==> derivative inv x = -- inv (x * x)
-      #|  derivative atn = (\\x. inv (&1 + x * x))
-      #|  derivative exp = exp
-      #|  &0 < x ==> derivative log x = inv x
-      #|  derivative sin = cos
-      #|  derivative cos = (\\x. --sin x)
-      #|  abs x < &1 ==> derivative asn x = inv(sqrt(&1 - x * x))
-      #|  abs x < &1 ==> derivative acs x = --inv(sqrt(&1 - x * x))
-      #|  &0 < x ==> derivative sqrt x = inv (&2 * sqrt x)
-      #|  derivative matan x = dmatan x
-      #|  inv _1 - _2
-      #|  -- &1 < x ==> matan real_differentiable atreal x
-      #|  x < &1
-      #|  derivative f x
-      #|  f real_differentiable atreal x ==>\n\tg real_differentiable atreal (f x) ==>\n\tderivative (\\x. g (f x)) x = derivative f x * derivative g (f x)
-      #|  derivative g
-      #|  \\y. y = f x
-      #|  ~(x = &0) ==> inv real_differentiable atreal x
-      #|  (\\x. x:real)
+      #|  (n : Num) <= (m : Num) \226\134\146 nth_differentiable(m, (f : (Real) -> Real), (x : Real)) \226\134\146 nth_differentiable(n, f, x)
+      #|  nth_differentiable(1, (f : (Real) -> Real), (x : Real)) == real_differentiable(f, atreal(x))
+      #|  0 < (n : Num) \226\134\146 nth_differentiable(n, (f : (Real) -> Real), (x : Real)) \226\134\146 real_differentiable(f, atreal(x))
+      #|  nth_derivative(SUC((i : Num)), (f : (Real) -> Real), (x : Real))
+      #|  nth_differentiable((n : Num), (f : (Real) -> Real), (x : Real)) \226\134\146 (i : Num) < n \226\134\146 real_continuous(nth_derivative(i, f), atreal(x))
+      #|  nth_differentiable((n : Num), (f : (Real) -> Real), (x : Real)) \226\134\146 (i : Num) < n \226\134\146 nth_differentiable(n - i, nth_derivative(i, f), x)
+      #|  nth_diff_strong((n : Num), (f : (Real) -> Real), (x : Real)) \226\134\146 nth_differentiable(n, f, x)
+      #|  (x : _) => x
+      #|  real_of_num(0) < (x : Real) \226\134\146 has_real_derivative(abs, real_of_num(1), atreal(x))
+      #|  -(x : Real)
+      #|  (x : Real) => -x
+      #|  (x : Real) < real_of_num(0) \226\134\146 has_real_derivative(abs, -real_of_num(1), atreal(x))
+      #|  derivative((x : Real) => x) == ((x : Real) => real_of_num(1))
+      #|  derivative((x : Real) => (c : Real)) == ((x : Real) => real_of_num(0))
+      #|  real_of_num(0) < (x : Real) \226\134\146 derivative(abs, x) == real_of_num(1)
+      #|  (x : Real) < real_of_num(0) \226\134\146 derivative(abs, x) == -real_of_num(1)
+      #|  pow((x : Real), (n : Num) - 1)
+      #|  derivative((x : Real) => pow(x, (n : Num))) == ((x : Real) => real_of_num(n) * pow(x, n - 1))
+      #|  2 - 1 == 1
+      #|  derivative((x : Real) => pow(x, 2)) == ((x : Real) => real_of_num(2) * x)
+      #|  3 - 1 == 2
+      #|  derivative((x : Real) => pow(x, 3)) == ((x : Real) => real_of_num(3) * pow(x, 2))
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 derivative(inv, x) == -inv(x * x)
+      #|  derivative(atn) == ((x : Real) => inv(real_of_num(1) + x * x))
+      #|  derivative(exp) == exp
+      #|  real_of_num(0) < (x : Real) \226\134\146 derivative(log, x) == inv(x)
+      #|  derivative(sin) == cos
+      #|  derivative(cos) == ((x : Real) => -sin(x))
+      #|  abs((x : Real)) < real_of_num(1) \226\134\146 derivative(asn, x) == inv(sqrt(real_of_num(1) - x * x))
+      #|  abs((x : Real)) < real_of_num(1) \226\134\146 derivative(acs, x) == -inv(sqrt(real_of_num(1) - x * x))
+      #|  real_of_num(0) < (x : Real) \226\134\146 derivative(sqrt, x) == inv(real_of_num(2) * sqrt(x))
+      #|  derivative(matan, (x : Real)) == dmatan(x)
+      #|  inv((_1 : Real)) - (_2 : Real)
+      #|  -real_of_num(1) < (x : Real) \226\134\146 real_differentiable(matan, atreal(x))
+      #|  (x : Real) < real_of_num(1)
+      #|  derivative((f : (Real) -> Real), (x : Real))
+      #|  real_differentiable((f : (Real) -> Real), atreal((x : Real))) \226\134\146 real_differentiable((g : (Real) -> Real), atreal(f(x))) \226\134\146 derivative((x : Real) => g(f(x)), x) == derivative(f, x) * derivative(g, f(x))
+      #|  derivative((g : (Real) -> Real))
+      #|  (y : _) => y == (f : (_) -> _)((x : _))
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 real_differentiable(inv, atreal(x))
+      #|  (x : Real) => x
       #|  ~P <=> (P <=> F)
-      #|  &1
-      #|  &0 < x ==> abs real_differentiable atreal x
-      #|  -- &1
-      #|  x < &0 ==> abs real_differentiable atreal x
+      #|  real_of_num(1)
+      #|  real_of_num(0) < (x : Real) \226\134\146 real_differentiable(abs, atreal(x))
+      #|  -real_of_num(1)
+      #|  (x : Real) < real_of_num(0) \226\134\146 real_differentiable(abs, atreal(x))
       #|  :real->real
       #|  :real
-      #|  f real_differentiable atreal x
-      #|  &0 < f x ==> (\\x. abs (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. abs (f x)) x = derivative f x
+      #|  real_differentiable((f : (Real) -> Real), atreal((x : Real)))
+      #|  real_of_num(0) < (f : (Real) -> Real)((x : Real)) \226\134\146 real_differentiable((x : Real) => abs(f(x)), atreal(x)) && derivative((x : Real) => abs(f(x)), x) == derivative(f, x)
       #|  abs
-      #|  f x < &0 ==> (\\x. abs (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. abs (f x)) x = --derivative f x
+      #|  (f : (Real) -> Real)((x : Real)) < real_of_num(0) \226\134\146 real_differentiable((x : Real) => abs(f(x)), atreal(x)) && derivative((x : Real) => abs(f(x)), x) == -derivative(f, x)
       #|  abs
-      #|  (\\x. (f x) pow n) real_differentiable atreal x /\\\n\tderivative (\\x. (f x) pow n) x = &n * (f x) pow (n - 1) * derivative f x
-      #|  2 - 1 = 1
-      #|  (\\x. (f x) pow 2) real_differentiable atreal x /\\\n\tderivative (\\x. (f x) pow 2) x = &2 * f x * derivative f x
-      #|  3 - 1 = 2
-      #|  (\\x. (f x) pow 3) real_differentiable atreal x /\\\n\tderivative (\\x. (f x) pow 3) x = &3 * (f x pow 2) * derivative f x
-      #|  (\\x. atn (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. atn (f x)) x = derivative f x / (&1 + f x * f x)
+      #|  real_differentiable((x : Real) => pow((f : (Real) -> Real)(x), (n : Num)), atreal((x : Real))) && derivative((x : Real) => pow(f(x), n), x) == real_of_num(n) * (pow(f(x), n - 1) * derivative(f, x))
+      #|  2 - 1 == 1
+      #|  real_differentiable((x : Real) => pow((f : (Real) -> Real)(x), 2), atreal((x : Real))) && derivative((x : Real) => pow(f(x), 2), x) == real_of_num(2) * (f(x) * derivative(f, x))
+      #|  3 - 1 == 2
+      #|  real_differentiable((x : Real) => pow((f : (Real) -> Real)(x), 3), atreal((x : Real))) && derivative((x : Real) => pow(f(x), 3), x) == real_of_num(3) * (pow(f(x), 2) * derivative(f, x))
+      #|  real_differentiable((x : Real) => atn((f : (Real) -> Real)(x)), atreal((x : Real))) && derivative((x : Real) => atn(f(x)), x) == derivative(f, x) / (real_of_num(1) + f(x) * f(x))
       #|  atn
-      #|  (\\x. exp (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. exp (f x)) x = exp (f x) * derivative f x
+      #|  real_differentiable((x : Real) => exp((f : (Real) -> Real)(x)), atreal((x : Real))) && derivative((x : Real) => exp(f(x)), x) == exp(f(x)) * derivative(f, x)
       #|  exp
-      #|  &0 < f x ==> (\\x. log (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. log (f x)) x = derivative f x / f x
+      #|  real_of_num(0) < (f : (Real) -> Real)((x : Real)) \226\134\146 real_differentiable((x : Real) => log(f(x)), atreal(x)) && derivative((x : Real) => log(f(x)), x) == derivative(f, x) / f(x)
       #|  log
-      #|  (\\x. cos (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. cos (f x)) x = --(sin (f x) * derivative f x)
+      #|  real_differentiable((x : Real) => cos((f : (Real) -> Real)(x)), atreal((x : Real))) && derivative((x : Real) => cos(f(x)), x) == -(sin(f(x)) * derivative(f, x))
       #|  cos
-      #|  (\\x. sin (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. sin (f x)) x = cos (f x) * derivative f x
+      #|  real_differentiable((x : Real) => sin((f : (Real) -> Real)(x)), atreal((x : Real))) && derivative((x : Real) => sin(f(x)), x) == cos(f(x)) * derivative(f, x)
       #|  sin
-      #|  ~(f x = &0) ==>\n\t(\\x. inv (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. inv (f x)) x = -- inv (f x * f x) * derivative f x
-      #|  &0 < f x ==>\n\t(\\x. sqrt (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. sqrt (f x)) x = derivative f x / (&2 * sqrt (f x))
+      #|  !((f : (Real) -> Real)((x : Real)) == real_of_num(0)) \226\134\146 real_differentiable((x : Real) => inv(f(x)), atreal(x)) && derivative((x : Real) => inv(f(x)), x) == -inv(f(x) * f(x)) * derivative(f, x)
+      #|  real_of_num(0) < (f : (Real) -> Real)((x : Real)) \226\134\146 real_differentiable((x : Real) => sqrt(f(x)), atreal(x)) && derivative((x : Real) => sqrt(f(x)), x) == derivative(f, x) / (real_of_num(2) * sqrt(f(x)))
       #|  sqrt
-      #|  abs (f x) < &1 ==>\n\t(\\x. acs (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. acs (f x)) x = -- (derivative f x / sqrt (&1 - f x * f x))
+      #|  abs((f : (Real) -> Real)((x : Real))) < real_of_num(1) \226\134\146 real_differentiable((x : Real) => acs(f(x)), atreal(x)) && derivative((x : Real) => acs(f(x)), x) == -(derivative(f, x) / sqrt(real_of_num(1) - f(x) * f(x)))
       #|  acs
-      #|  abs (f x) < &1 ==>\n\t(\\x. asn (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. asn (f x)) x = derivative f x / sqrt (&1 - f x * f x)
+      #|  abs((f : (Real) -> Real)((x : Real))) < real_of_num(1) \226\134\146 real_differentiable((x : Real) => asn(f(x)), atreal(x)) && derivative((x : Real) => asn(f(x)), x) == derivative(f, x) / sqrt(real_of_num(1) - f(x) * f(x))
       #|  asn
-      #|  -- &1 < f x ==>\n\t(\\x. matan (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. matan (f x)) x = dmatan (f x) * derivative f x
+      #|  -real_of_num(1) < (f : (Real) -> Real)((x : Real)) \226\134\146 real_differentiable((x : Real) => matan(f(x)), atreal(x)) && derivative((x : Real) => matan(f(x)), x) == dmatan(f(x)) * derivative(f, x)
       #|  matan
       #|  :real -> real
       #|  :real -> real
       #|  :real
       #|  :real
-      #|  f real_differentiable atreal x
-      #|  derivative (\\x. c * f x) x = c * derivative f x
-      #|  derivative (\\x. -- f x) x = -- derivative f x
-      #|  derivative (\\x. f x pow n) x = &n * f x pow (n - 1) * derivative f x
-      #|  g real_differentiable atreal x
-      #|  derivative (\\x. f x + g x) x = derivative f x + derivative g x
-      #|  derivative (\\x. f x * g x) x = f x * derivative g x + derivative f x * g x
-      #|  derivative (\\x. f x - g x) x = derivative f x - derivative g x
-      #|  ~(g x = &0) ==> \n  derivative (\\x. f x / g x) x = (derivative f x * g x - f x * derivative g x) / (g x * g x)
-      #|  (forall i. i IN n..m ==> G i real_differentiable atreal x) ==>\n\t(\\x. sum (n..m) (\\i. G i x)) real_differentiable atreal x
-      #|  n = 0
-      #|  n <= SUC m
-      #|  n = 0
-      #|  (forall i. i IN n..m ==> G i real_differentiable atreal x) ==>\n\tderivative (\\x. sum (n..m) (\\i. G i x)) x = sum (n..m) (\\i. derivative (G i) x)
-      #|  n <= SUC m
-      #|  &1
-      #|  (g has_real_derivative g') (atreal x) /\\\n\t(?s. real_open s /\\ x IN s /\\ (forall y. y IN s ==> f y = g y))\n\t==> (f has_real_derivative g') (atreal x)
+      #|  real_differentiable((f : (Real) -> Real), atreal((x : Real)))
+      #|  derivative((x : Real) => (c : Real) * (f : (Real) -> Real)(x), (x : Real)) == c * derivative(f, x)
+      #|  derivative((x : Real) => -(f : (Real) -> Real)(x), (x : Real)) == -derivative(f, x)
+      #|  derivative((x : Real) => pow((f : (Real) -> Real)(x), (n : Num)), (x : Real)) == real_of_num(n) * (pow(f(x), n - 1) * derivative(f, x))
+      #|  real_differentiable((g : (Real) -> Real), atreal((x : Real)))
+      #|  derivative((x : Real) => (f : (Real) -> Real)(x) + (g : (Real) -> Real)(x), (x : Real)) == derivative(f, x) + derivative(g, x)
+      #|  derivative((x : Real) => (f : (Real) -> Real)(x) * (g : (Real) -> Real)(x), (x : Real)) == f(x) * derivative(g, x) + derivative(f, x) * g(x)
+      #|  derivative((x : Real) => (f : (Real) -> Real)(x) - (g : (Real) -> Real)(x), (x : Real)) == derivative(f, x) - derivative(g, x)
+      #|  !((g : (Real) -> Real)((x : Real)) == real_of_num(0)) \226\134\146 derivative((x : Real) => (f : (Real) -> Real)(x) / g(x), x) == (derivative(f, x) * g(x) - f(x) * derivative(g, x)) / (g(x) * g(x))
+      #|  (\226\136\128 i : Num, IN(i, op_dot_dot((n : Num), (m : Num))) \226\134\146 real_differentiable((G : (Num, Real) -> Real)(i), atreal((x : Real)))) \226\134\146 real_differentiable((x : Real) => sum(op_dot_dot(n, m), (i : Num) => G(i, x)), atreal(x))
+      #|  (n : Num) == 0
+      #|  (n : Num) <= SUC((m : Num))
+      #|  (n : Num) == 0
+      #|  (\226\136\128 i : Num, IN(i, op_dot_dot((n : Num), (m : Num))) \226\134\146 real_differentiable((G : (Num, Real) -> Real)(i), atreal((x : Real)))) \226\134\146 derivative((x : Real) => sum(op_dot_dot(n, m), (i : Num) => G(i, x)), x) == sum(op_dot_dot(n, m), (i : Num) => derivative(G(i), x))
+      #|  (n : Num) <= SUC((m : Num))
+      #|  real_of_num(1)
+      #|  has_real_derivative((g : (Real) -> Real), (g' : Real), atreal((x : Real))) && (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 (f : (Real) -> Real)(y) == g(y))) \226\134\146 has_real_derivative(f, g', atreal(x))
       #|  T
       #|  T
       #|  T
       #|  T
       #|  T
       #|  T
-      #|  g real_differentiable atreal x /\\ real_open s /\\ x IN s /\\\n\t(forall y. y IN s ==> f y = g y) ==> f real_differentiable atreal x
+      #|  real_differentiable((g : (Real) -> Real), atreal((x : Real))) && real_open((s : (Real) -> Bool)) && IN(x, s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 (f : (Real) -> Real)(y) == g(y)) \226\134\146 real_differentiable(f, atreal(x))
       #|  :real->real
       #|  :real->real
       #|  :real#real
       #|  :num
-      #|  nth_diff_strong_int n int f
-      #|  s INTER t
-      #|  \\y. c * nth_derivative i f y
-      #|  s INTER t
-      #|  interval_arith x int ==> i <= n ==>\n\t?s. real_open s /\\ x IN s /\\ \n\tforall y. y IN s ==> nth_derivative i (\\y. c * f y) y = c * nth_derivative i f y
-      #|  INTERS (IMAGE (\\i. (@) (P i)) (0..n))
-      #|  forall i. i <= n:num ==> P i ((@) (P i))
-      #|  \\i s. real_open s /\\ x IN s /\\ \n\t(forall y. y IN s ==> nth_derivative i (\\y. c * f y) y = c * nth_derivative i f y)
-      #|  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\tforall i y. i <= n /\\ y IN s ==> nth_derivative i (\\y. c * f y) y = c * nth_derivative i f y
-      #|  (@) (P i)
-      #|  interval_arith x int ==> i <= n ==>\n\tnth_derivative i (\\x. c * f x) x = c * nth_derivative i f x
-      #|  (\\y. c * nth_derivative i f y)
-      #|  s INTER t
-      #|  nth_diff_strong_int n int (\\x. c * f x)
-      #|  nth_diff_strong_int n int g
-      #|  sf INTER sg INTER t
-      #|  (\\y. nth_derivative i f y + nth_derivative i g y)
-      #|  sf INTER sg INTER t
-      #|  interval_arith x int ==> i <= n ==>\n   ?s. real_open s /\\ x IN s /\\ \n      forall y. y IN s ==> nth_derivative i (\\y. f y + g y) y = nth_derivative i f y + nth_derivative i g y
-      #|  INTERS (IMAGE (\\i. (@) (P i)) (0..n))
-      #|  forall i. i <= n:num ==> P i ((@) (P i))
-      #|  \\i s. real_open s /\\ x IN s /\\ \n   (forall y. y IN s ==> nth_derivative i (\\y. f y + g y) y = nth_derivative i f y + nth_derivative i g y)
-      #|  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\tforall i y. i <= n /\\ y IN s ==> \n\t\tnth_derivative i (\\y. f y + g y) y = nth_derivative i f y + nth_derivative i g y
-      #|  (@) (P i)
-      #|  interval_arith x int ==> i <= n ==>\n\tnth_derivative i (\\x. f x + g x) x = nth_derivative i f x + nth_derivative i g x
-      #|  (\\y. nth_derivative i f y + nth_derivative i g y)
-      #|  s INTER tf INTER tg
-      #|  nth_diff_strong_int n int (\\x. f x + g x)
-      #|  sf INTER sg INTER t
-      #|  (\\y. nth_derivative i f y - nth_derivative i g y)
-      #|  sf INTER sg INTER t
-      #|  interval_arith x int ==> i <= n ==>\n   ?s. real_open s /\\ x IN s /\\ \n      forall y. y IN s ==> nth_derivative i (\\y. f y - g y) y = nth_derivative i f y - nth_derivative i g y
-      #|  INTERS (IMAGE (\\i. (@) (P i)) (0..n))
-      #|  forall i. i <= n:num ==> P i ((@) (P i))
-      #|  \\i s. real_open s /\\ x IN s /\\ \n   (forall y. y IN s ==> nth_derivative i (\\y. f y - g y) y = nth_derivative i f y - nth_derivative i g y)
-      #|  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\tforall i y. i <= n /\\ y IN s ==> \n\t\tnth_derivative i (\\y. f y - g y) y = nth_derivative i f y - nth_derivative i g y
-      #|  (@) (P i)
-      #|  interval_arith x int ==> i <= n ==>\n\tnth_derivative i (\\x. f x - g x) x = nth_derivative i f x - nth_derivative i g x
-      #|  (\\y. nth_derivative i f y - nth_derivative i g y)
-      #|  s INTER tf INTER tg
-      #|  nth_diff_strong_int n int (\\x. f x - g x)
-      #|  SUC (i - k) = SUC i - k
-      #|  binom(i, SUC i) = 0
-      #|  0 <= SUC i
-      #|  lhs = sum1 + sum2
-      #|  sum (0..i + 1) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (SUC i - k) g y)
-      #|  sum (0 + 1..i + 1) (\\k. &(binom (i, k - 1)) * nth_derivative k f y * nth_derivative (SUC i - k) g y)
+      #|  nth_diff_strong_int((n : Num), (int : (Real, Real)), (f : (Real) -> Real))
+      #|  INTER((s : (_) -> Bool), (t : (_) -> Bool))
+      #|  (y : Real) => (c : Real) * nth_derivative((i : Num), (f : (Real) -> Real), y)
+      #|  INTER((s : (_) -> Bool), (t : (_) -> Bool))
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 (i : Num) <= (n : Num) \226\134\146 (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 nth_derivative(i, (y : Real) => (c : Real) * (f : (Real) -> Real)(y), y) == c * nth_derivative(i, f, y)))
+      #|  INTERS(IMAGE((i : Num) => select((P : (Num, (_) -> Bool) -> Bool)(i)), op_dot_dot(0, (n : Num))))
+      #|  \226\136\128 i : Num, i <= (n : Num) \226\134\146 (P : (Num, _) -> Bool)(i, select(P(i)))
+      #|  (i : Num) => (s : (Real) -> Bool) => real_open(s) && IN((x : Real), s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 nth_derivative(i, (y : Real) => (c : Real) * (f : (Real) -> Real)(y), y) == c * nth_derivative(i, f, y))
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && (\226\136\128 i : Num, \226\136\128 y : Real, i <= (n : Num) && IN(y, s) \226\134\146 nth_derivative(i, (y : Real) => (c : Real) * (f : (Real) -> Real)(y), y) == c * nth_derivative(i, f, y)))
+      #|  select((P : (_, _) -> Bool)((i : _)))
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 (i : Num) <= (n : Num) \226\134\146 nth_derivative(i, (x : Real) => (c : Real) * (f : (Real) -> Real)(x), x) == c * nth_derivative(i, f, x)
+      #|  (y : Real) => (c : Real) * nth_derivative((i : Num), (f : (Real) -> Real), y)
+      #|  INTER((s : (_) -> Bool), (t : (_) -> Bool))
+      #|  nth_diff_strong_int((n : Num), (int : (Real, Real)), (x : Real) => (c : Real) * (f : (Real) -> Real)(x))
+      #|  nth_diff_strong_int((n : Num), (int : (Real, Real)), (g : (Real) -> Real))
+      #|  INTER((sf : (_) -> Bool), INTER((sg : (_) -> Bool), (t : (_) -> Bool)))
+      #|  (y : Real) => nth_derivative((i : Num), (f : (Real) -> Real), y) + nth_derivative(i, (g : (Real) -> Real), y)
+      #|  INTER((sf : (_) -> Bool), INTER((sg : (_) -> Bool), (t : (_) -> Bool)))
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 (i : Num) <= (n : Num) \226\134\146 (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 nth_derivative(i, (y : Real) => (f : (Real) -> Real)(y) + (g : (Real) -> Real)(y), y) == nth_derivative(i, f, y) + nth_derivative(i, g, y)))
+      #|  INTERS(IMAGE((i : Num) => select((P : (Num, (_) -> Bool) -> Bool)(i)), op_dot_dot(0, (n : Num))))
+      #|  \226\136\128 i : Num, i <= (n : Num) \226\134\146 (P : (Num, _) -> Bool)(i, select(P(i)))
+      #|  (i : Num) => (s : (Real) -> Bool) => real_open(s) && IN((x : Real), s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 nth_derivative(i, (y : Real) => (f : (Real) -> Real)(y) + (g : (Real) -> Real)(y), y) == nth_derivative(i, f, y) + nth_derivative(i, g, y))
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && (\226\136\128 i : Num, \226\136\128 y : Real, i <= (n : Num) && IN(y, s) \226\134\146 nth_derivative(i, (y : Real) => (f : (Real) -> Real)(y) + (g : (Real) -> Real)(y), y) == nth_derivative(i, f, y) + nth_derivative(i, g, y)))
+      #|  select((P : (_, _) -> Bool)((i : _)))
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 (i : Num) <= (n : Num) \226\134\146 nth_derivative(i, (x : Real) => (f : (Real) -> Real)(x) + (g : (Real) -> Real)(x), x) == nth_derivative(i, f, x) + nth_derivative(i, g, x)
+      #|  (y : Real) => nth_derivative((i : Num), (f : (Real) -> Real), y) + nth_derivative(i, (g : (Real) -> Real), y)
+      #|  INTER((s : (_) -> Bool), INTER((tf : (_) -> Bool), (tg : (_) -> Bool)))
+      #|  nth_diff_strong_int((n : Num), (int : (Real, Real)), (x : Real) => (f : (Real) -> Real)(x) + (g : (Real) -> Real)(x))
+      #|  INTER((sf : (_) -> Bool), INTER((sg : (_) -> Bool), (t : (_) -> Bool)))
+      #|  (y : Real) => nth_derivative((i : Num), (f : (Real) -> Real), y) - nth_derivative(i, (g : (Real) -> Real), y)
+      #|  INTER((sf : (_) -> Bool), INTER((sg : (_) -> Bool), (t : (_) -> Bool)))
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 (i : Num) <= (n : Num) \226\134\146 (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 nth_derivative(i, (y : Real) => (f : (Real) -> Real)(y) - (g : (Real) -> Real)(y), y) == nth_derivative(i, f, y) - nth_derivative(i, g, y)))
+      #|  INTERS(IMAGE((i : Num) => select((P : (Num, (_) -> Bool) -> Bool)(i)), op_dot_dot(0, (n : Num))))
+      #|  \226\136\128 i : Num, i <= (n : Num) \226\134\146 (P : (Num, _) -> Bool)(i, select(P(i)))
+      #|  (i : Num) => (s : (Real) -> Bool) => real_open(s) && IN((x : Real), s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 nth_derivative(i, (y : Real) => (f : (Real) -> Real)(y) - (g : (Real) -> Real)(y), y) == nth_derivative(i, f, y) - nth_derivative(i, g, y))
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && (\226\136\128 i : Num, \226\136\128 y : Real, i <= (n : Num) && IN(y, s) \226\134\146 nth_derivative(i, (y : Real) => (f : (Real) -> Real)(y) - (g : (Real) -> Real)(y), y) == nth_derivative(i, f, y) - nth_derivative(i, g, y)))
+      #|  select((P : (_, _) -> Bool)((i : _)))
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 (i : Num) <= (n : Num) \226\134\146 nth_derivative(i, (x : Real) => (f : (Real) -> Real)(x) - (g : (Real) -> Real)(x), x) == nth_derivative(i, f, x) - nth_derivative(i, g, x)
+      #|  (y : Real) => nth_derivative((i : Num), (f : (Real) -> Real), y) - nth_derivative(i, (g : (Real) -> Real), y)
+      #|  INTER((s : (_) -> Bool), INTER((tf : (_) -> Bool), (tg : (_) -> Bool)))
+      #|  nth_diff_strong_int((n : Num), (int : (Real, Real)), (x : Real) => (f : (Real) -> Real)(x) - (g : (Real) -> Real)(x))
+      #|  SUC((i : Num) - (k : Num)) == SUC(i) - k
+      #|  binom(((i : Num), SUC(i))) == 0
+      #|  0 <= SUC((i : Num))
+      #|  (lhs : Real) == (sum1 : Real) + (sum2 : Real)
+      #|  sum(op_dot_dot(0, (i : Num) + 1), (k : Num) => real_of_num(binom((i, k))) * (nth_derivative(k, (f : (Real) -> Real), (y : Real)) * nth_derivative(SUC(i) - k, (g : (Real) -> Real), y)))
+      #|  sum(op_dot_dot(0 + 1, (i : Num) + 1), (k : Num) => real_of_num(binom((i, k - 1))) * (nth_derivative(k, (f : (Real) -> Real), (y : Real)) * nth_derivative(SUC(i) - k, (g : (Real) -> Real), y)))
       #|  sum (0..i) _
-      #|  forall k. k IN 0..i ==> \n\t(\\y. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y)\n\t\treal_differentiable atreal y
-      #|  nth_derivative (SUC (i - k)) g y
-      #|  nth_derivative (SUC k) f y
-      #|  forall k. k IN 0..i ==>\n\tnth_derivative k f real_differentiable atreal y /\\\n\tnth_derivative (i - k) g real_differentiable atreal y
-      #|  sf INTER sg INTER t
-      #|  \\y. sum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y)
-      #|  sf INTER sg INTER t
-      #|  interval_arith x int ==> i <= n ==>\n   ?s. real_open s /\\ x IN s /\\ \n      forall y. y IN s ==> nth_derivative i (\\y. f y * g y) y = \n\tsum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y)
-      #|  INTERS (IMAGE (\\i. (@) (P i)) (0..n))
-      #|  forall i. i <= n:num ==> P i ((@) (P i))
-      #|  \\i s. real_open s /\\ x IN s /\\ \n   (forall y. y IN s ==> nth_derivative i (\\y. f y * g y) y = \n\tsum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y))
-      #|  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\tforall i y. i <= n /\\ y IN s ==> \n\t  nth_derivative i (\\y. f y * g y) y = \n\t\tsum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y)
-      #|  (@) (P i)
-      #|  interval_arith x int ==> i <= n ==>\n\tnth_derivative i (\\x. f x * g x) x = \n  \t  sum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f x * nth_derivative (i - k) g x)
-      #|  nth_derivative (SUC (i - k)) g y
-      #|  nth_derivative (SUC k) f y
-      #|  \\y. sum (0..i) (\\k. &(binom(i, k)) * nth_derivative k f y * nth_derivative (i - k) g y)
-      #|  s INTER tf INTER tg
-      #|  nth_diff_strong_int n int (\\x. f x * g x)
-      #|  lin_approx f x f_bounds df_bounds <=> \n\tinterval_arith (f x) f_bounds /\\\n\t(?f'. (f has_real_derivative f') (atreal x) /\\ interval_arith f' df_bounds)
-      #|  has_bounded_second_derivative f int dd_bounds <=>\n\tnth_diff_strong_int 2 int f /\\ \n\tbounded_on_int (nth_derivative 2 f) int dd_bounds
-      #|  taylor_interval f x y z w f_bounds df_bounds ddf_bounds <=>\n\tx <= y /\\ y <= z /\\ y - x <= w /\\ z - y <= w /\\\n\tlin_approx f y f_bounds df_bounds /\\\n\thas_bounded_second_derivative f (x, z) ddf_bounds
-      #|  nth_diff_strong_int n int f ==>\n\tnth_differentiable_on_int n int f
-      #|  has_bounded_second_derivative f int dd_bounds ==>\n\t?f' f''. (forall x. interval_arith x int ==> (f has_real_derivative f' x) (atreal x) /\\\n       \t\t(f' has_real_derivative f'' x) (atreal x) /\\\tinterval_arith (f'' x) dd_bounds)
-      #|  (?x. P x /\\ Q x) ==> (?x. P x)
-      #|  (a - b) / &2
-      #|  (forall e. &0 < e ==> a <= b + e) <=> (a <= b)
-      #|  a + min (b - a) d / &2
-      #|  (?b. a < b /\\ forall x. x IN real_interval (a, b) ==> f x <= c) /\\\n\tf real_continuous atreal a ==> f a <= c
-      #|  f real_continuous atreal x <=>\n\t(\\x. f (--x)) real_continuous atreal (--x)
-      #|  --y
-      #|  --a
-      #|  forall x. f x = g (--x)
-      #|  \\x. f (--x)
-      #|  forall a b. a <= b <=> (a = b \\/ a < b)
-      #|  a < b ==> f real_continuous atreal a ==> f real_continuous atreal b ==>\n\t(forall x. x IN real_interval (a, b) ==> f x <= c) ==>\n\t(forall x. x IN real_interval [a, b] ==> f x <= c)
-      #|  --y
-      #|  p = (FST p, SND p)
-      #|  interval_arith a (lo, hi) ==> iabs (lo, hi) = max (abs lo) (abs hi)
-      #|  interval_arith a (lo, hi) ==> &0 <= iabs (lo, hi)
+      #|  \226\136\128 k : Num, IN(k, op_dot_dot(0, (i : Num))) \226\134\146 real_differentiable((y : Real) => real_of_num(binom((i, k))) * (nth_derivative(k, (f : (Real) -> Real), y) * nth_derivative(i - k, (g : (Real) -> Real), y)), atreal((y : Real)))
+      #|  nth_derivative(SUC((i : Num) - (k : Num)), (g : (Real) -> Real), (y : Real))
+      #|  nth_derivative(SUC((k : Num)), (f : (Real) -> Real), (y : Real))
+      #|  \226\136\128 k : Num, IN(k, op_dot_dot(0, (i : Num))) \226\134\146 real_differentiable(nth_derivative(k, (f : (Real) -> Real)), atreal((y : Real))) && real_differentiable(nth_derivative(i - k, (g : (Real) -> Real)), atreal(y))
+      #|  INTER((sf : (_) -> Bool), INTER((sg : (_) -> Bool), (t : (_) -> Bool)))
+      #|  (y : Real) => sum(op_dot_dot(0, (i : Num)), (k : Num) => real_of_num(binom((i, k))) * (nth_derivative(k, (f : (Real) -> Real), y) * nth_derivative(i - k, (g : (Real) -> Real), y)))
+      #|  INTER((sf : (_) -> Bool), INTER((sg : (_) -> Bool), (t : (_) -> Bool)))
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 (i : Num) <= (n : Num) \226\134\146 (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 nth_derivative(i, (y : Real) => (f : (Real) -> Real)(y) * (g : (Real) -> Real)(y), y) == sum(op_dot_dot(0, i), (k : Num) => real_of_num(binom((i, k))) * (nth_derivative(k, f, y) * nth_derivative(i - k, g, y)))))
+      #|  INTERS(IMAGE((i : Num) => select((P : (Num, (_) -> Bool) -> Bool)(i)), op_dot_dot(0, (n : Num))))
+      #|  \226\136\128 i : Num, i <= (n : Num) \226\134\146 (P : (Num, _) -> Bool)(i, select(P(i)))
+      #|  (i : Num) => (s : (Real) -> Bool) => real_open(s) && IN((x : Real), s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 nth_derivative(i, (y : Real) => (f : (Real) -> Real)(y) * (g : (Real) -> Real)(y), y) == sum(op_dot_dot(0, i), (k : Num) => real_of_num(binom((i, k))) * (nth_derivative(k, f, y) * nth_derivative(i - k, g, y))))
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && (\226\136\128 i : Num, \226\136\128 y : Real, i <= (n : Num) && IN(y, s) \226\134\146 nth_derivative(i, (y : Real) => (f : (Real) -> Real)(y) * (g : (Real) -> Real)(y), y) == sum(op_dot_dot(0, i), (k : Num) => real_of_num(binom((i, k))) * (nth_derivative(k, f, y) * nth_derivative(i - k, g, y)))))
+      #|  select((P : (_, _) -> Bool)((i : _)))
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 (i : Num) <= (n : Num) \226\134\146 nth_derivative(i, (x : Real) => (f : (Real) -> Real)(x) * (g : (Real) -> Real)(x), x) == sum(op_dot_dot(0, i), (k : Num) => real_of_num(binom((i, k))) * (nth_derivative(k, f, x) * nth_derivative(i - k, g, x)))
+      #|  nth_derivative(SUC((i : Num) - (k : Num)), (g : (Real) -> Real), (y : Real))
+      #|  nth_derivative(SUC((k : Num)), (f : (Real) -> Real), (y : Real))
+      #|  (y : Real) => sum(op_dot_dot(0, (i : Num)), (k : Num) => real_of_num(binom((i, k))) * (nth_derivative(k, (f : (Real) -> Real), y) * nth_derivative(i - k, (g : (Real) -> Real), y)))
+      #|  INTER((s : (_) -> Bool), INTER((tf : (_) -> Bool), (tg : (_) -> Bool)))
+      #|  nth_diff_strong_int((n : Num), (int : (Real, Real)), (x : Real) => (f : (Real) -> Real)(x) * (g : (Real) -> Real)(x))
+      #|  (lin_approx : ((Real) -> Real, Real, (Real, Real), (Real, Real)) -> Bool)((f : (Real) -> Real), (x : Real), (f_bounds : (Real, Real)), (df_bounds : (Real, Real))) == (interval_arith(f(x), f_bounds) && (\226\136\131 f' : Real, has_real_derivative(f, f', atreal(x)) && interval_arith(f', df_bounds)))
+      #|  (has_bounded_second_derivative : ((Real) -> Real, (Real, Real), (Real, Real)) -> Bool)((f : (Real) -> Real), (int : (Real, Real)), (dd_bounds : (Real, Real))) == (nth_diff_strong_int(2, int, f) && bounded_on_int(nth_derivative(2, f), int, dd_bounds))
+      #|  (taylor_interval : ((Real) -> Real, Real, Real, Real, Real, (Real, Real), (Real, Real), (Real, Real)) -> Bool)((f : (Real) -> Real), (x : Real), (y : Real), (z : Real), (w : Real), (f_bounds : (Real, Real)), (df_bounds : (Real, Real)), (ddf_bounds : (Real, Real))) == (x <= y && y <= z && y - x <= w && z - y <= w && lin_approx(f, y, f_bounds, df_bounds) && has_bounded_second_derivative(f, (x, z), ddf_bounds))
+      #|  nth_diff_strong_int((n : Num), (int : (Real, Real)), (f : (Real) -> Real)) \226\134\146 nth_differentiable_on_int(n, int, f)
+      #|  has_bounded_second_derivative((f : (Real) -> Real), (int : (Real, Real)), (dd_bounds : (Real, Real))) \226\134\146 (\226\136\131 f' : (Real) -> Real, \226\136\131 f'' : (Real) -> Real, \226\136\128 x : Real, interval_arith(x, int) \226\134\146 has_real_derivative(f, f'(x), atreal(x)) && has_real_derivative(f', f''(x), atreal(x)) && interval_arith(f''(x), dd_bounds))
+      #|  (\226\136\131 x : _, (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)) \226\134\146 (\226\136\131 x : _, P(x))
+      #|  ((a : Real) - (b : Real)) / real_of_num(2)
+      #|  (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (a : Real) <= (b : Real) + e) == (a <= b)
+      #|  (a : Real) + min((b : Real) - a, (d : Real)) / real_of_num(2)
+      #|  (\226\136\131 b : Real, (a : Real) < b && (\226\136\128 x : Real, IN(x, real_interval((a, b))) \226\134\146 (f : (Real) -> Real)(x) <= (c : Real))) && real_continuous(f, atreal(a)) \226\134\146 f(a) <= c
+      #|  real_continuous((f : (Real) -> Real), atreal((x : Real))) == real_continuous((x : Real) => f(-x), atreal(-x))
+      #|  -(y : Real)
+      #|  -(a : Real)
+      #|  \226\136\128 x : Real, (f : (Real) -> _)(x) == (g : (Real) -> _)(-x)
+      #|  (x : Real) => (f : (Real) -> _)(-x)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, (a <= b) == (a == b || a < b)
+      #|  (a : Real) < (b : Real) \226\134\146 real_continuous((f : (Real) -> Real), atreal(a)) \226\134\146 real_continuous(f, atreal(b)) \226\134\146 (\226\136\128 x : Real, IN(x, real_interval((a, b))) \226\134\146 f(x) <= (c : Real)) \226\134\146 (\226\136\128 x : Real, IN(x, real_interval([(a, b)])) \226\134\146 f(x) <= c)
+      #|  -(y : Real)
+      #|  (p : (_, _)) == (FST(p), SND(p))
+      #|  interval_arith((a : Real), ((lo : Real), (hi : Real))) \226\134\146 iabs((lo, hi)) == max(abs(lo), abs(hi))
+      #|  interval_arith((a : Real), ((lo : Real), (hi : Real))) \226\134\146 real_of_num(0) <= iabs((lo, hi))
       #|  :real -> real
       #|  :real
       #|  :real
@@ -1166,28 +1166,28 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  :real#real
       #|  :real#real
       #|  :real
-      #|  dd_bound = iabs ddf_bounds
-      #|  taylor_interval f x y z w f_bounds df_bounds ddf_bounds
-      #|  f' t
-      #|  forall t. t IN real_interval [x, z] ==> f real_continuous atreal t
-      #|  FACT 1 = 1 /\\ FACT (1 + 1) = 2
-      #|  0 <= 1 /\\ ~(1 = 0)
-      #|  i <= 1 <=> i = 0 \\/ i = 1
-      #|  0 + 1 = 1 /\\ ~(1 = 0) /\\ 1 + 1 = 2 /\\ \n\t~(2 = 1) /\\ ~(2 = 1) /\\ ~(2 = 0)
-      #|  \\i. if i = 0 then f else if i = 1 then f' else if i = 2 then f'' else I
-      #|  1 + 1 = 2
-      #|  ff = f' y
-      #|  forall a b. a - b = (a - (b + b1)) + b1
-      #|  abs (f t - (f y + b1)) + abs b1
+      #|  (dd_bound : Real) == iabs((ddf_bounds : (Real, Real)))
+      #|  taylor_interval((f : (Real) -> Real), (x : Real), (y : Real), (z : Real), (w : Real), (f_bounds : (Real, Real)), (df_bounds : (Real, Real)), (ddf_bounds : (Real, Real)))
+      #|  (f' : (_) -> _)((t : _))
+      #|  \226\136\128 t : Real, IN(t, real_interval([((x : Real), (z : Real))])) \226\134\146 real_continuous((f : (Real) -> Real), atreal(t))
+      #|  FACT(1) == 1 && FACT(1 + 1) == 2
+      #|  0 <= 1 && !(1 == 0)
+      #|  ((i : Num) <= 1) == (i == 0 || i == 1)
+      #|  0 + 1 == 1 && !(1 == 0) && 1 + 1 == 2 && !(2 == 1) && !(2 == 1) && !(2 == 0)
+      #|  (i : Num) => if i == 0 { (f : (_) -> _) } else { if i == 1 { (f' : (_) -> _) } else { if i == 2 { (f'' : (_) -> _) } else { I } } }
+      #|  1 + 1 == 2
+      #|  (ff : _) == (f' : (_) -> _)((y : _))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, a - b == a - (b + (b1 : Real)) + b1
+      #|  abs((f : (_) -> Real)((t : _)) - (f((y : _)) + (b1 : Real))) + abs(b1)
       #|  dd_bound * _
       #|  f' y * _
-      #|  abs (f t - (f y + f' y * (t - y) pow 1)) <= dd_bound * abs (t - y) pow (1 + 1) / &2
-      #|  &0 <= dd_bound /\\ forall p. p IN real_interval [x, z] ==> abs (f'' p) <= dd_bound
-      #|  interval_arith y (x, z)
-      #|  abs (t - y) <= w
-      #|  x <= t /\\ t <= z ==> \n\tabs (f t - f y) <= w * iabs df_bounds + w * w * dd_bound / &2
+      #|  abs((f : (Real) -> Real)((t : Real)) - (f((y : Real)) + (f' : (Real) -> Real)(y) * pow(t - y, 1))) <= (dd_bound : Real) * (pow(abs(t - y), 1 + 1) / real_of_num(2))
+      #|  real_of_num(0) <= (dd_bound : Real) && (\226\136\128 p : Real, IN(p, real_interval([((x : Real), (z : Real))])) \226\134\146 abs((f'' : (Real) -> Real)(p)) <= dd_bound)
+      #|  interval_arith((y : Real), ((x : Real), (z : Real)))
+      #|  abs((t : Real) - (y : Real)) <= (w : Real)
+      #|  (x : Real) <= (t : Real) && t <= (z : Real) \226\134\146 abs((f : (Real) -> Real)(t) - f((y : Real))) <= (w : Real) * iabs((df_bounds : (Real, Real))) + w * (w * ((dd_bound : Real) / real_of_num(2)))
       #|  1
-      #|  real_interval [x, z]
+      #|  real_interval([((x : Real), (z : Real))])
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
@@ -1239,19 +1239,19 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
-      #|  forall t. x <= t /\\ t <= z ==>\n\tf t <= SND f_bounds + (w * iabs df_bounds + w * w * dd_bound / &2)
-      #|  forall t. x <= t /\\ t <= z ==>\n\tFST f_bounds - (w * iabs df_bounds + w * w * dd_bound / &2) <= f t
-      #|  dd_bound * abs (t - y)
-      #|  FACT 1 = 1
-      #|  i <= 0 <=> i = 0
-      #|  0 + 1 = 1 /\\ ~(1 = 0) /\\ 1 + 1 = 2 /\\ \n\t~(2 = 1) /\\ ~(2 = 1) /\\ ~(2 = 0)
-      #|  \\i. if i = 0 then f' else if i = 1 then f'' else I
-      #|  &0 <= dd_bound /\\ forall p. p IN real_interval [x, z] ==> abs (f'' p) <= dd_bound
-      #|  forall p. x <= p /\\ p <= z ==> derivative f p = f' p
-      #|  abs (t - y) <= w
-      #|  forall t. x <= t /\\ t <= z ==> \n\tabs (derivative f t - derivative f y) <= w * dd_bound
+      #|  \226\136\128 t : Real, (x : Real) <= t && t <= (z : Real) \226\134\146 (f : (Real) -> Real)(t) <= SND((f_bounds : (_, Real))) + ((w : Real) * iabs((df_bounds : (Real, Real))) + w * (w * ((dd_bound : Real) / real_of_num(2))))
+      #|  \226\136\128 t : Real, (x : Real) <= t && t <= (z : Real) \226\134\146 FST((f_bounds : (Real, _))) - ((w : Real) * iabs((df_bounds : (Real, Real))) + w * (w * ((dd_bound : Real) / real_of_num(2)))) <= (f : (Real) -> Real)(t)
+      #|  (dd_bound : Real) * abs((t : Real) - (y : Real))
+      #|  FACT(1) == 1
+      #|  ((i : Num) <= 0) == (i == 0)
+      #|  0 + 1 == 1 && !(1 == 0) && 1 + 1 == 2 && !(2 == 1) && !(2 == 1) && !(2 == 0)
+      #|  (i : Num) => if i == 0 { (f' : (_) -> _) } else { if i == 1 { (f'' : (_) -> _) } else { I } }
+      #|  real_of_num(0) <= (dd_bound : Real) && (\226\136\128 p : Real, IN(p, real_interval([((x : Real), (z : Real))])) \226\134\146 abs((f'' : (Real) -> Real)(p)) <= dd_bound)
+      #|  \226\136\128 p : Real, (x : Real) <= p && p <= (z : Real) \226\134\146 derivative((f : (Real) -> Real), p) == (f' : (Real) -> Real)(p)
+      #|  abs((t : Real) - (y : Real)) <= (w : Real)
+      #|  \226\136\128 t : Real, (x : Real) <= t && t <= (z : Real) \226\134\146 abs(derivative((f : (Real) -> Real), t) - derivative(f, (y : Real))) <= (w : Real) * (dd_bound : Real)
       #|  0
-      #|  real_interval [x, z]
+      #|  real_interval([((x : Real), (z : Real))])
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
@@ -1284,19 +1284,19 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
-      #|  derivative f y = g
-      #|  FST df_bounds <= derivative f y /\\ derivative f y <= SND df_bounds
-      #|  forall t. x <= t /\\ t <= z ==>\n\tderivative f t <= SND df_bounds + w * dd_bound
-      #|  forall t. x <= t /\\ t <= z ==>\n\tFST df_bounds - w * dd_bound <= derivative f t
+      #|  derivative((f : (Real) -> Real), (y : Real)) == (g : Real)
+      #|  FST((df_bounds : (Real, Real))) <= derivative((f : (Real) -> Real), (y : Real)) && derivative(f, y) <= SND(df_bounds)
+      #|  \226\136\128 t : Real, (x : Real) <= t && t <= (z : Real) \226\134\146 derivative((f : (Real) -> Real), t) <= SND((df_bounds : (_, Real))) + (w : Real) * (dd_bound : Real)
+      #|  \226\136\128 t : Real, (x : Real) <= t && t <= (z : Real) \226\134\146 FST((df_bounds : (Real, _))) - (w : Real) * (dd_bound : Real) <= derivative((f : (Real) -> Real), t)
       #|  :real->real
       #|  :real#real
       #|  :real#real
       #|  :real
-      #|  lin_approx f x f_bounds df_bounds <=>\n\t(f real_differentiable atreal x /\\ interval_arith (f x) f_bounds /\\\n\tinterval_arith (derivative f x) df_bounds)
-      #|  lin_approx f x f_bounds df_bounds
-      #|  interval_arith (f x) f_bounds
-      #|  interval_arith (derivative f x) df_bounds
-      #|  f real_differentiable atreal x
+      #|  lin_approx((f : (Real) -> Real), (x : Real), (f_bounds : (Real, Real)), (df_bounds : (Real, Real))) == (real_differentiable(f, atreal(x)) && interval_arith(f(x), f_bounds) && interval_arith(derivative(f, x), df_bounds))
+      #|  lin_approx((f : (Real) -> Real), (x : Real), (f_bounds : (Real, Real)), (df_bounds : (Real, Real)))
+      #|  interval_arith((f : (_) -> Real)((x : _)), (f_bounds : (Real, Real)))
+      #|  interval_arith(derivative((f : (Real) -> Real), (x : Real)), (df_bounds : (Real, Real)))
+      #|  real_differentiable((f : (Real) -> Real), atreal((x : Real)))
       #|  :real->real
       #|  :real->real
       #|  :real
@@ -1304,35 +1304,35 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  :real#real
       #|  :real#real
       #|  :real#real
-      #|  interval_arith x int ==> interval_not_zero int ==>\n\t~(x = &0)
-      #|  interval_arith x int ==> interval_pos int ==> &0 < x
-      #|  interval_arith x int ==> interval_neg int ==> x < &0
-      #|  interval_arith x int ==> iabs int < y ==> abs x < y
-      #|  lin_approx (\\x. x) x (x, x) (&1, &1)
-      #|  lin_approx (\\x. c) x (c, c) (&0, &0)
-      #|  lin_approx f x f_bounds df_bounds
-      #|  (\\x. atn (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. atn (f x)) x = derivative f x / (&1 + f x * f x)
-      #|  (\\x. exp (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. exp (f x)) x = exp (f x) * derivative f x
-      #|  &0 < f x
-      #|  interval_pos f_bounds ==>\n\t(\\x. log (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. log (f x)) x = derivative f x / f x
-      #|  (\\x. cos (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. cos (f x)) x = --(sin (f x) * derivative f x)
-      #|  (\\x. sin (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. sin (f x)) x = cos (f x) * derivative f x
-      #|  ~(f x = &0)
-      #|  interval_not_zero f_bounds ==>\n\t(\\x. inv (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. inv (f x)) x = -- inv (f x * f x) * derivative f x
-      #|  &0 < f x
-      #|  interval_pos f_bounds ==>\n\t(\\x. sqrt (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. sqrt (f x)) x = derivative f x / (&2 * sqrt (f x))
-      #|  abs (f x) < &1
-      #|  iabs f_bounds < &1 ==>\n\t(\\x. acs (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. acs (f x)) x = -- (derivative f x / sqrt (&1 - f x * f x))
-      #|  abs (f x) < &1
-      #|  iabs f_bounds < &1 ==>\n\t(\\x. asn (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. asn (f x)) x = derivative f x / sqrt (&1 - f x * f x)
-      #|  -- &1 < f x
-      #|  interval_gt (-- &1) f_bounds ==>\n\t(\\x. matan (f x)) real_differentiable atreal x /\\\n\tderivative (\\x. matan (f x)) x = dmatan (f x) * derivative f x
-      #|  lin_approx f x f_bounds df_bounds
-      #|  lin_approx g x g_bounds dg_bounds
-      #|  (\\x. f x + g x) real_differentiable atreal x
-      #|  (\\x. f x - g x) real_differentiable atreal x
-      #|  (\\x. f x * g x) real_differentiable atreal x
-      #|  interval_not_zero g_bounds ==> (\\x. f x / g x) real_differentiable atreal x
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 interval_not_zero(int) \226\134\146 !(x == real_of_num(0))
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 interval_pos(int) \226\134\146 real_of_num(0) < x
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 interval_neg(int) \226\134\146 x < real_of_num(0)
+      #|  interval_arith((x : Real), (int : (Real, Real))) \226\134\146 iabs(int) < (y : Real) \226\134\146 abs(x) < y
+      #|  lin_approx((x : Real) => x, (x : Real), (x, x), (real_of_num(1), real_of_num(1)))
+      #|  lin_approx((x : Real) => (c : Real), (x : Real), (c, c), (real_of_num(0), real_of_num(0)))
+      #|  lin_approx((f : (Real) -> Real), (x : Real), (f_bounds : (Real, Real)), (df_bounds : (Real, Real)))
+      #|  real_differentiable((x : Real) => atn((f : (Real) -> Real)(x)), atreal((x : Real))) && derivative((x : Real) => atn(f(x)), x) == derivative(f, x) / (real_of_num(1) + f(x) * f(x))
+      #|  real_differentiable((x : Real) => exp((f : (Real) -> Real)(x)), atreal((x : Real))) && derivative((x : Real) => exp(f(x)), x) == exp(f(x)) * derivative(f, x)
+      #|  real_of_num(0) < (f : (_) -> Real)((x : _))
+      #|  interval_pos((f_bounds : (Real, _))) \226\134\146 real_differentiable((x : Real) => log((f : (Real) -> Real)(x)), atreal((x : Real))) && derivative((x : Real) => log(f(x)), x) == derivative(f, x) / f(x)
+      #|  real_differentiable((x : Real) => cos((f : (Real) -> Real)(x)), atreal((x : Real))) && derivative((x : Real) => cos(f(x)), x) == -(sin(f(x)) * derivative(f, x))
+      #|  real_differentiable((x : Real) => sin((f : (Real) -> Real)(x)), atreal((x : Real))) && derivative((x : Real) => sin(f(x)), x) == cos(f(x)) * derivative(f, x)
+      #|  !((f : (_) -> Real)((x : _)) == real_of_num(0))
+      #|  interval_not_zero((f_bounds : (Real, Real))) \226\134\146 real_differentiable((x : Real) => inv((f : (Real) -> Real)(x)), atreal((x : Real))) && derivative((x : Real) => inv(f(x)), x) == -inv(f(x) * f(x)) * derivative(f, x)
+      #|  real_of_num(0) < (f : (_) -> Real)((x : _))
+      #|  interval_pos((f_bounds : (Real, _))) \226\134\146 real_differentiable((x : Real) => sqrt((f : (Real) -> Real)(x)), atreal((x : Real))) && derivative((x : Real) => sqrt(f(x)), x) == derivative(f, x) / (real_of_num(2) * sqrt(f(x)))
+      #|  abs((f : (_) -> Real)((x : _))) < real_of_num(1)
+      #|  iabs((f_bounds : (Real, Real))) < real_of_num(1) \226\134\146 real_differentiable((x : Real) => acs((f : (Real) -> Real)(x)), atreal((x : Real))) && derivative((x : Real) => acs(f(x)), x) == -(derivative(f, x) / sqrt(real_of_num(1) - f(x) * f(x)))
+      #|  abs((f : (_) -> Real)((x : _))) < real_of_num(1)
+      #|  iabs((f_bounds : (Real, Real))) < real_of_num(1) \226\134\146 real_differentiable((x : Real) => asn((f : (Real) -> Real)(x)), atreal((x : Real))) && derivative((x : Real) => asn(f(x)), x) == derivative(f, x) / sqrt(real_of_num(1) - f(x) * f(x))
+      #|  -real_of_num(1) < (f : (_) -> Real)((x : _))
+      #|  interval_gt(-real_of_num(1), (f_bounds : (Real, _))) \226\134\146 real_differentiable((x : Real) => matan((f : (Real) -> Real)(x)), atreal((x : Real))) && derivative((x : Real) => matan(f(x)), x) == dmatan(f(x)) * derivative(f, x)
+      #|  lin_approx((f : (Real) -> Real), (x : Real), (f_bounds : (Real, Real)), (df_bounds : (Real, Real)))
+      #|  lin_approx((g : (Real) -> Real), (x : Real), (g_bounds : (Real, Real)), (dg_bounds : (Real, Real)))
+      #|  real_differentiable((x : Real) => (f : (Real) -> Real)(x) + (g : (Real) -> Real)(x), atreal((x : Real)))
+      #|  real_differentiable((x : Real) => (f : (Real) -> Real)(x) - (g : (Real) -> Real)(x), atreal((x : Real)))
+      #|  real_differentiable((x : Real) => (f : (Real) -> Real)(x) * (g : (Real) -> Real)(x), atreal((x : Real)))
+      #|  interval_not_zero((g_bounds : (Real, Real))) \226\134\146 real_differentiable((x : Real) => (f : (Real) -> Real)(x) / (g : (Real) -> Real)(x), atreal((x : Real)))
       #|  :real->real
       #|  :real->real
       #|  :real#real
@@ -1345,328 +1345,328 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  :real
       #|  :real
       #|  :real
-      #|  lin_approx f1 x f1_bounds (df1_lo, df1_hi)
-      #|  c * df1_hi
-      #|  c * df1_lo
-      #|  c * f1'
-      #|  &0 <= c ==> interval_arith (c * f1 x) f_bounds /\\\n\tdf_lo <= c * df1_lo /\\ c * df1_hi <= df_hi ==>\n\tlin_approx (\\x. c * f1 x) x f_bounds (df_lo, df_hi)
-      #|  lin_approx f2 x f2_bounds (df2_lo, df2_hi)
-      #|  f1' + f2':real
-      #|  interval_arith (f1 x + f2 x) f_bounds /\\\n\tdf_lo <= df1_lo + df2_lo /\\ df1_hi + df2_hi <= df_hi ==>\n\tlin_approx (\\x. f1 x + f2 x) x f_bounds (df_lo, df_hi)
+      #|  lin_approx((f1 : (Real) -> Real), (x : Real), (f1_bounds : (Real, Real)), ((df1_lo : Real), (df1_hi : Real)))
+      #|  (c : Real) * (df1_hi : Real)
+      #|  (c : Real) * (df1_lo : Real)
+      #|  (c : Real) * (f1' : Real)
+      #|  real_of_num(0) <= (c : Real) \226\134\146 interval_arith(c * (f1 : (Real) -> Real)((x : Real)), (f_bounds : (Real, Real))) && (df_lo : Real) <= c * (df1_lo : Real) && c * (df1_hi : Real) <= (df_hi : Real) \226\134\146 lin_approx((x : Real) => c * f1(x), x, f_bounds, (df_lo, df_hi))
+      #|  lin_approx((f2 : (Real) -> Real), (x : Real), (f2_bounds : (Real, Real)), ((df2_lo : Real), (df2_hi : Real)))
+      #|  (f1' : Real) + (f2' : Real)
+      #|  interval_arith((f1 : (Real) -> Real)((x : Real)) + (f2 : (Real) -> Real)(x), (f_bounds : (Real, Real))) && (df_lo : Real) <= (df1_lo : Real) + (df2_lo : Real) && (df1_hi : Real) + (df2_hi : Real) <= (df_hi : Real) \226\134\146 lin_approx((x : Real) => f1(x) + f2(x), x, f_bounds, (df_lo, df_hi))
       #|  :real->real
       #|  :real->real
       #|  :real#real
       #|  :real#real
       #|  :real#real
-      #|  derivative f y
-      #|  i < 2 <=> i = 0 \\/ i = 1
-      #|  nth_diff_strong 2 f x <=> ?s. real_open s /\\ x IN s /\\\n\tforall y. y IN s ==> (f has_real_derivative derivative f y) (atreal y) /\\\n\t(derivative f has_real_derivative nth_derivative 2 f y) (atreal y)
+      #|  derivative((f : (Real) -> Real), (y : Real))
+      #|  ((i : Num) < 2) == (i == 0 || i == 1)
+      #|  nth_diff_strong(2, (f : (Real) -> Real), (x : Real)) == (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 has_real_derivative(f, derivative(f, y), atreal(y)) && has_real_derivative(derivative(f), nth_derivative(2, f, y), atreal(y))))
       #|  1
       #|  0
-      #|  nth_diff_strong 2 f x <=> ?s. real_open s /\\ x IN s /\\\n\tforall y. y IN s ==> f real_differentiable atreal y /\\ derivative f real_differentiable atreal y
-      #|  f real_differentiable atreal (g y)
-      #|  nth_diff_strong_int 2 g_bounds f ==>\n\t  g real_differentiable atreal y ==>\n\t  interval_arith (g y) g_bounds ==>\n\t  bounded_on_int f g_bounds f_bounds ==>\n\t  interval_arith (derivative g y * derivative f (g y)) d_bounds ==>\n\t  lin_approx (\\x. f (g x)) y f_bounds d_bounds
-      #|  \\x. &1
-      #|  &0 < x ==> nth_derivative 2 abs x = &0
-      #|  --x
-      #|  \\x. -- &1
-      #|  x < &0 ==> nth_derivative 2 abs x = &0
-      #|  real_interval (y - abs y, y + abs y)
-      #|  \\x. &1
-      #|  real_interval (x - abs x, x + abs x)
-      #|  &0 < x ==> nth_diff_strong 2 abs x
-      #|  real_interval (y - abs y, y + abs y)
-      #|  \\x. -- &1
-      #|  real_interval (x - abs x, x + abs x)
-      #|  x < &0 ==> nth_diff_strong 2 abs x
-      #|  x pow (n - 1)
-      #|  ((\\x. x pow n) has_real_derivative &n * x pow (n - 1)) (atreal x)
-      #|  n - 2 = (n - 1) - 1
-      #|  derivative (derivative (\\x. x pow n)) = (\\x. &(n * (n - 1)) * x pow (n - 2))
-      #|  n - 2 = (n - 1) - 1
-      #|  (:real)
-      #|  nth_diff_strong 2 (\\x. x pow n) x
-      #|  2 * (2 - 1) = 2
-      #|  derivative (derivative (\\x. x pow 2)) = (\\x. &2)
-      #|  3 * (3 - 1) = 6 /\\ 3 - 2 = 1
-      #|  derivative (derivative (\\x. x pow 3)) = (\\x. &6 * x)
-      #|  &2 * x = x * &1 + &1 * x
-      #|  ((\\x. inv (&1 + x pow 2)) has_real_derivative \n\t(-- &2 * x) * inv (&1 + x pow 2) pow 2) (atreal x)
-      #|  &2 * x
+      #|  nth_diff_strong(2, (f : (Real) -> Real), (x : Real)) == (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 real_differentiable(f, atreal(y)) && real_differentiable(derivative(f), atreal(y))))
+      #|  real_differentiable((f : (Real) -> Real), atreal((g : (_) -> Real)((y : _))))
+      #|  nth_diff_strong_int(2, (g_bounds : (Real, Real)), (f : (Real) -> Real)) \226\134\146 real_differentiable((g : (Real) -> Real), atreal((y : Real))) \226\134\146 interval_arith(g(y), g_bounds) \226\134\146 bounded_on_int(f, g_bounds, (f_bounds : (Real, Real))) \226\134\146 interval_arith(derivative(g, y) * derivative(f, g(y)), (d_bounds : (Real, Real))) \226\134\146 lin_approx((x : Real) => f(g(x)), y, f_bounds, d_bounds)
+      #|  (x : _) => real_of_num(1)
+      #|  real_of_num(0) < (x : Real) \226\134\146 nth_derivative(2, abs, x) == real_of_num(0)
+      #|  -(x : Real)
+      #|  (x : _) => -real_of_num(1)
+      #|  (x : Real) < real_of_num(0) \226\134\146 nth_derivative(2, abs, x) == real_of_num(0)
+      #|  real_interval(((y : Real) - abs(y), y + abs(y)))
+      #|  (x : _) => real_of_num(1)
+      #|  real_interval(((x : Real) - abs(x), x + abs(x)))
+      #|  real_of_num(0) < (x : Real) \226\134\146 nth_diff_strong(2, abs, x)
+      #|  real_interval(((y : Real) - abs(y), y + abs(y)))
+      #|  (x : _) => -real_of_num(1)
+      #|  real_interval(((x : Real) - abs(x), x + abs(x)))
+      #|  (x : Real) < real_of_num(0) \226\134\146 nth_diff_strong(2, abs, x)
+      #|  pow((x : Real), (n : Num) - 1)
+      #|  has_real_derivative((x : Real) => pow(x, (n : Num)), real_of_num(n) * pow((x : Real), n - 1), atreal(x))
+      #|  (n : Num) - 2 == n - 1 - 1
+      #|  derivative(derivative((x : Real) => pow(x, (n : Num)))) == ((x : Real) => real_of_num(n * (n - 1)) * pow(x, n - 2))
+      #|  (n : Num) - 2 == n - 1 - 1
+      #|  (UNIV : (Real) -> Bool)
+      #|  nth_diff_strong(2, (x : Real) => pow(x, (n : Num)), (x : Real))
+      #|  2 * (2 - 1) == 2
+      #|  derivative(derivative((x : Real) => pow(x, 2))) == ((x : Real) => real_of_num(2))
+      #|  3 * (3 - 1) == 6 && 3 - 2 == 1
+      #|  derivative(derivative((x : Real) => pow(x, 3))) == ((x : Real) => real_of_num(6) * x)
+      #|  real_of_num(2) * (x : Real) == x * real_of_num(1) + real_of_num(1) * x
+      #|  has_real_derivative((x : Real) => inv(real_of_num(1) + pow(x, 2)), -real_of_num(2) * (x : Real) * pow(inv(real_of_num(1) + pow(x, 2)), 2), atreal(x))
+      #|  real_of_num(2) * (x : Real)
       #|  ~P <=> (P <=> F)
-      #|  derivative (derivative atn) = (\\x. (-- &2 * x) * inv (&1 + x pow 2) pow 2)
-      #|  (:real)
-      #|  nth_diff_strong 2 atn x
-      #|  nth_derivative 2 cos = (\\x. --cos x)
-      #|  (:real)
-      #|  nth_diff_strong 2 cos x
-      #|  nth_derivative 2 sin = (\\x. --sin x)
-      #|  (:real)
-      #|  nth_diff_strong 2 sin x
-      #|  nth_derivative 2 exp = exp
-      #|  (:real)
-      #|  nth_diff_strong 2 exp x
-      #|  real_interval (x - abs x, x + abs x)
-      #|  forall a. -- &1 * a = --a
-      #|  &0 < x ==> ~(x = &0)
-      #|  ((\\x. inv x) has_real_derivative f) (atreal x)
-      #|  (\\x. inv x)
-      #|  &0 < x ==> nth_derivative 2 log x = --inv (x pow 2)
+      #|  derivative(derivative(atn)) == ((x : Real) => -real_of_num(2) * x * pow(inv(real_of_num(1) + pow(x, 2)), 2))
+      #|  (UNIV : (Real) -> Bool)
+      #|  nth_diff_strong(2, atn, (x : Real))
+      #|  nth_derivative(2, cos) == ((x : Real) => -cos(x))
+      #|  (UNIV : (Real) -> Bool)
+      #|  nth_diff_strong(2, cos, (x : Real))
+      #|  nth_derivative(2, sin) == ((x : Real) => -sin(x))
+      #|  (UNIV : (Real) -> Bool)
+      #|  nth_diff_strong(2, sin, (x : Real))
+      #|  nth_derivative(2, exp) == exp
+      #|  (UNIV : (Real) -> Bool)
+      #|  nth_diff_strong(2, exp, (x : Real))
+      #|  real_interval(((x : Real) - abs(x), x + abs(x)))
+      #|  \226\136\128 a : Real, -real_of_num(1) * a == -a
+      #|  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+      #|  has_real_derivative((x : Real) => inv(x), (f : Real), atreal((x : Real)))
+      #|  (x : Real) => inv(x)
+      #|  real_of_num(0) < (x : Real) \226\134\146 nth_derivative(2, log, x) == -inv(pow(x, 2))
       #|  ~P <=> (P <=> F)
-      #|  real_interval (y - abs y, y + abs y)
-      #|  \\x. inv x
-      #|  real_interval (x - abs x, x + abs x)
-      #|  &0 < x ==> nth_diff_strong 2 log x
-      #|  real_interval (x - abs x, x + abs x)
-      #|  forall a. (&2 * x) * inv x * a = &2 * (x * inv x) * a
-      #|  (x * x) pow 2 = x * x pow 3
-      #|  ((\\x. -- inv(x * x)) has_real_derivative f) (atreal x)
-      #|  (\\x. -- inv (x * x))
-      #|  ~(x = &0) ==> nth_derivative 2 inv x = &2 * inv (x pow 3)
+      #|  real_interval(((y : Real) - abs(y), y + abs(y)))
+      #|  (x : Real) => inv(x)
+      #|  real_interval(((x : Real) - abs(x), x + abs(x)))
+      #|  real_of_num(0) < (x : Real) \226\134\146 nth_diff_strong(2, log, x)
+      #|  real_interval(((x : Real) - abs(x), x + abs(x)))
+      #|  \226\136\128 a : Real, real_of_num(2) * (x : Real) * (inv(x) * a) == real_of_num(2) * (x * inv(x) * a)
+      #|  pow((x : Real) * x, 2) == x * pow(x, 3)
+      #|  has_real_derivative((x : Real) => -inv(x * x), (f : Real), atreal((x : Real)))
+      #|  (x : Real) => -inv(x * x)
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 nth_derivative(2, inv, x) == real_of_num(2) * inv(pow(x, 3))
       #|  ~P <=> (P <=> F)
-      #|  real_interval (y - abs y, y + abs y)
-      #|  \\x. --inv (x * x)
-      #|  real_interval (x - abs x, x + abs x)
-      #|  ~(x = &0) ==> nth_diff_strong 2 inv x
-      #|  sqrt x pow n = sqrt (x pow n)
-      #|  real_interval (&0, x + &1)
-      #|  SUC 2 = 3
-      #|  &2 pow 2 = &4
-      #|  ~(&2 * sqrt x = &0)
-      #|  ((\\x. inv(&2 * sqrt x)) has_real_derivative f) (atreal x)
-      #|  (\\x. inv (&2 * sqrt x))
-      #|  &0 < x ==> nth_derivative 2 sqrt x = -- inv(&4 * sqrt (x pow 3))
+      #|  real_interval(((y : Real) - abs(y), y + abs(y)))
+      #|  (x : Real) => -inv(x * x)
+      #|  real_interval(((x : Real) - abs(x), x + abs(x)))
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 nth_diff_strong(2, inv, x)
+      #|  pow(sqrt((x : Real)), (n : Num)) == sqrt(pow(x, n))
+      #|  real_interval((real_of_num(0), (x : Real) + real_of_num(1)))
+      #|  SUC(2) == 3
+      #|  pow(real_of_num(2), 2) == real_of_num(4)
+      #|  !(real_of_num(2) * sqrt((x : Real)) == real_of_num(0))
+      #|  has_real_derivative((x : Real) => inv(real_of_num(2) * sqrt(x)), (f : Real), atreal((x : Real)))
+      #|  (x : Real) => inv(real_of_num(2) * sqrt(x))
+      #|  real_of_num(0) < (x : Real) \226\134\146 nth_derivative(2, sqrt, x) == -inv(real_of_num(4) * sqrt(pow(x, 3)))
       #|  ~P <=> (P <=> F)
-      #|  real_interval (&0, y + &1)
-      #|  \\x. inv (&2 * sqrt x)
-      #|  real_interval (&0, x + &1)
-      #|  &0 < x ==> nth_diff_strong 2 sqrt x
-      #|  x pow (SUC n) = x * x pow n
-      #|  real_interval (x - e, x + e)
-      #|  &1 - abs x
-      #|  SUC 2 = 3
-      #|  forall a. (&2 * x) * inv (&2) * a = (&2 * inv (&2)) * x * a
-      #|  &1 - x * x = (&1 - x) * (&1 + x)
-      #|  &0 < &1 - x * x
-      #|  &0 < &1 - x * x /\\ ~(sqrt(&1 - x * x) = &0)
-      #|  ((\\x. --inv (sqrt (&1 - x * x))) has_real_derivative f) (atreal x)
-      #|  \\x. --inv (sqrt (&1 - x * x))
-      #|  abs x < &1 ==> \n\tnth_derivative 2 acs x = --(x / sqrt ((&1 - x * x) pow 3))
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  (\\x. sqrt (&1 - x * x)) = sqrt o (\\x. &1 - x * x)
-      #|  &1 - y * y = (&1 - y) * (&1 + y)
-      #|  &0 < &1 - y * y
-      #|  real_interval (y - e2, y + e2)
-      #|  \\x. --inv (sqrt (&1 - x * x))
-      #|  &1 - abs y
-      #|  real_interval (x - e, x + e)
-      #|  &1 - abs x
-      #|  abs x < &1 ==> nth_diff_strong 2 acs x
-      #|  ~P <=> (P <=> F)
-      #|  real_interval (x - e, x + e)
-      #|  &1 - abs x
-      #|  SUC 2 = 3
-      #|  forall a. (&2 * x) * inv (&2) * a = (&2 * inv (&2)) * x * a
-      #|  &1 - x * x = (&1 - x) * (&1 + x)
-      #|  &0 < &1 - x * x
-      #|  &0 < &1 - x * x /\\ ~(sqrt(&1 - x * x) = &0)
-      #|  ((\\x. inv (sqrt (&1 - x * x))) has_real_derivative f) (atreal x)
-      #|  \\x. inv (sqrt (&1 - x * x))
-      #|  abs x < &1 ==> \n\tnth_derivative 2 asn x = x / sqrt ((&1 - x * x) pow 3)
+      #|  real_interval((real_of_num(0), (y : Real) + real_of_num(1)))
+      #|  (x : Real) => inv(real_of_num(2) * sqrt(x))
+      #|  real_interval((real_of_num(0), (x : Real) + real_of_num(1)))
+      #|  real_of_num(0) < (x : Real) \226\134\146 nth_diff_strong(2, sqrt, x)
+      #|  pow((x : Real), SUC((n : Num))) == x * pow(x, n)
+      #|  real_interval(((x : Real) - (e : Real), x + e))
+      #|  real_of_num(1) - abs((x : Real))
+      #|  SUC(2) == 3
+      #|  \226\136\128 a : Real, real_of_num(2) * (x : Real) * (inv(real_of_num(2)) * a) == real_of_num(2) * inv(real_of_num(2)) * (x * a)
+      #|  real_of_num(1) - (x : Real) * x == (real_of_num(1) - x) * (real_of_num(1) + x)
+      #|  real_of_num(0) < real_of_num(1) - (x : Real) * x
+      #|  real_of_num(0) < real_of_num(1) - (x : Real) * x && !(sqrt(real_of_num(1) - x * x) == real_of_num(0))
+      #|  has_real_derivative((x : Real) => -inv(sqrt(real_of_num(1) - x * x)), (f : Real), atreal((x : Real)))
+      #|  (x : Real) => -inv(sqrt(real_of_num(1) - x * x))
+      #|  abs((x : Real)) < real_of_num(1) \226\134\146 nth_derivative(2, acs, x) == -(x / sqrt(pow(real_of_num(1) - x * x, 3)))
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
-      #|  (\\x. sqrt (&1 - x * x)) = sqrt o (\\x. &1 - x * x)
-      #|  &1 - y * y = (&1 - y) * (&1 + y)
-      #|  &0 < &1 - y * y
-      #|  real_interval (y - e2, y + e2)
-      #|  \\x. inv (sqrt (&1 - x * x))
-      #|  &1 - abs y
-      #|  real_interval (x - e, x + e)
-      #|  &1 - abs x
-      #|  abs x < &1 ==> nth_diff_strong 2 asn x
+      #|  ((x : Real) => sqrt(real_of_num(1) - x * x)) == o(sqrt, (x : Real) => real_of_num(1) - x * x)
+      #|  real_of_num(1) - (y : Real) * y == (real_of_num(1) - y) * (real_of_num(1) + y)
+      #|  real_of_num(0) < real_of_num(1) - (y : Real) * y
+      #|  real_interval(((y : Real) - (e2 : Real), y + e2))
+      #|  (x : Real) => -inv(sqrt(real_of_num(1) - x * x))
+      #|  real_of_num(1) - abs((y : Real))
+      #|  real_interval(((x : Real) - (e : Real), x + e))
+      #|  real_of_num(1) - abs((x : Real))
+      #|  abs((x : Real)) < real_of_num(1) \226\134\146 nth_diff_strong(2, acs, x)
       #|  ~P <=> (P <=> F)
-      #|  nth_derivative 2 matan x = ddmatan x
-      #|  _1 - _2
-      #|  real_interval (y - &1, y + &1)
-      #|  \\x. inv (&2 * x * (x + &1)) - atn (sqrt x) / (&2 * x * sqrt x)
-      #|  real_interval (-- &1, y + &1)
+      #|  real_interval(((x : Real) - (e : Real), x + e))
+      #|  real_of_num(1) - abs((x : Real))
+      #|  SUC(2) == 3
+      #|  \226\136\128 a : Real, real_of_num(2) * (x : Real) * (inv(real_of_num(2)) * a) == real_of_num(2) * inv(real_of_num(2)) * (x * a)
+      #|  real_of_num(1) - (x : Real) * x == (real_of_num(1) - x) * (real_of_num(1) + x)
+      #|  real_of_num(0) < real_of_num(1) - (x : Real) * x
+      #|  real_of_num(0) < real_of_num(1) - (x : Real) * x && !(sqrt(real_of_num(1) - x * x) == real_of_num(0))
+      #|  has_real_derivative((x : Real) => inv(sqrt(real_of_num(1) - x * x)), (f : Real), atreal((x : Real)))
+      #|  (x : Real) => inv(sqrt(real_of_num(1) - x * x))
+      #|  abs((x : Real)) < real_of_num(1) \226\134\146 nth_derivative(2, asn, x) == x / sqrt(pow(real_of_num(1) - x * x, 3))
+      #|  ~P <=> (P <=> F)
+      #|  ~P <=> (P <=> F)
+      #|  ~P <=> (P <=> F)
+      #|  ((x : Real) => sqrt(real_of_num(1) - x * x)) == o(sqrt, (x : Real) => real_of_num(1) - x * x)
+      #|  real_of_num(1) - (y : Real) * y == (real_of_num(1) - y) * (real_of_num(1) + y)
+      #|  real_of_num(0) < real_of_num(1) - (y : Real) * y
+      #|  real_interval(((y : Real) - (e2 : Real), y + e2))
+      #|  (x : Real) => inv(sqrt(real_of_num(1) - x * x))
+      #|  real_of_num(1) - abs((y : Real))
+      #|  real_interval(((x : Real) - (e : Real), x + e))
+      #|  real_of_num(1) - abs((x : Real))
+      #|  abs((x : Real)) < real_of_num(1) \226\134\146 nth_diff_strong(2, asn, x)
+      #|  ~P <=> (P <=> F)
+      #|  nth_derivative(2, matan, (x : Real)) == ddmatan(x)
+      #|  (_1 : Real) - (_2 : Real)
+      #|  real_interval(((y : Real) - real_of_num(1), y + real_of_num(1)))
+      #|  (x : Real) => inv(real_of_num(2) * (x * (x + real_of_num(1)))) - atn(sqrt(x)) / (real_of_num(2) * (x * sqrt(x)))
+      #|  real_interval((-real_of_num(1), (y : Real) + real_of_num(1)))
       #|  dmatan
-      #|  real_interval (-- &1, x + &1)
-      #|  -- &1 < x ==> nth_diff_strong 2 matan x
-      #|  y < &1
-      #|  drop x
-      #|  lift x
-      #|  IMAGE lift {x | x IN s /\\ f x IN t} = \n\t{x | x IN (IMAGE lift s) /\\ (lift o f o drop) x IN (IMAGE lift t)}
-      #|  f real_continuous_on s ==> real_open s ==> real_open t ==>\n\treal_open {x | x IN s /\\ f x IN t}
-      #|  t INTER s'
-      #|  real_open s'
-      #|  {z | z IN t /\\ g z IN s}
-      #|  \\x. derivative f (g x) * derivative g x
-      #|  nth_diff_strong 2 g x ==> nth_diff_strong 2 f (g x) ==>\n\tnth_derivative 2 (\\x. f (g x)) x = \n\tnth_derivative 2 f (g x) * (derivative g x) pow 2 + derivative f (g x) * nth_derivative 2 g x
-      #|  derivative f
-      #|  s INTER s'
-      #|  \\x. derivative g x * derivative f (g x)
-      #|  s INTER s'
-      #|  real_open s'
-      #|  {z | z IN s /\\ g z IN t}
-      #|  nth_diff_strong 2 g x ==> nth_diff_strong 2 f (g x) ==>\n\tnth_diff_strong 2 (\\x. f (g x)) x
-      #|  derivative f
-      #|  real_interval (x - d, x + d)
-      #|  ~(f x = &0) ==> f real_continuous atreal x ==>\n\t?s. real_open s /\\ x IN s /\\ forall y. y IN s ==> ~(f y = &0)
-      #|  abs (f x)
-      #|  real_interval (x - d, x + d)
-      #|  a < f x ==> f real_continuous atreal x ==>\n\t?s. real_open s /\\ x IN s /\\ forall y. y IN s ==> a < f y
-      #|  f x - a
-      #|  real_interval (x - d, x + d)
-      #|  f x < a ==> f real_continuous atreal x ==>\n\t?s. real_open s /\\ x IN s /\\ forall y. y IN s ==> f y < a
-      #|  a - f x
+      #|  real_interval((-real_of_num(1), (x : Real) + real_of_num(1)))
+      #|  -real_of_num(1) < (x : Real) \226\134\146 nth_diff_strong(2, matan, x)
+      #|  (y : Real) < real_of_num(1)
+      #|  drop((x : Cart[Real, Unit]))
+      #|  lift((x : Real))
+      #|  IMAGE(lift, {(x : Real) | IN(x, (s : (Real) -> Bool)) && IN((f : (Real) -> Real)(x), (t : (Real) -> Bool))}) == {(x : Cart[Real, Unit]) | IN(x, IMAGE(lift, s)) && IN(o(lift, o(f, drop), x), IMAGE(lift, t))}
+      #|  real_continuous_on((f : (Real) -> Real), (s : (Real) -> Bool)) \226\134\146 real_open(s) \226\134\146 real_open((t : (Real) -> Bool)) \226\134\146 real_open({(x : Real) | IN(x, s) && IN(f(x), t)})
+      #|  INTER((t : (_) -> Bool), (s' : (_) -> Bool))
+      #|  real_open((s' : (Real) -> Bool))
+      #|  {(z : _) | IN(z, (t : (_) -> Bool)) && IN((g : (_) -> _)(z), (s : (_) -> Bool))}
+      #|  (x : Real) => derivative((f : (Real) -> Real), (g : (Real) -> Real)(x)) * derivative(g, x)
+      #|  nth_diff_strong(2, (g : (Real) -> Real), (x : Real)) \226\134\146 nth_diff_strong(2, (f : (Real) -> Real), g(x)) \226\134\146 nth_derivative(2, (x : Real) => f(g(x)), x) == nth_derivative(2, f, g(x)) * pow(derivative(g, x), 2) + derivative(f, g(x)) * nth_derivative(2, g, x)
+      #|  derivative((f : (Real) -> Real))
+      #|  INTER((s : (_) -> Bool), (s' : (_) -> Bool))
+      #|  (x : Real) => derivative((g : (Real) -> Real), x) * derivative((f : (Real) -> Real), g(x))
+      #|  INTER((s : (_) -> Bool), (s' : (_) -> Bool))
+      #|  real_open((s' : (Real) -> Bool))
+      #|  {(z : _) | IN(z, (s : (_) -> Bool)) && IN((g : (_) -> _)(z), (t : (_) -> Bool))}
+      #|  nth_diff_strong(2, (g : (Real) -> Real), (x : Real)) \226\134\146 nth_diff_strong(2, (f : (Real) -> Real), g(x)) \226\134\146 nth_diff_strong(2, (x : Real) => f(g(x)), x)
+      #|  derivative((f : (Real) -> Real))
+      #|  real_interval(((x : Real) - (d : Real), x + d))
+      #|  !((f : (Real) -> Real)((x : Real)) == real_of_num(0)) \226\134\146 real_continuous(f, atreal(x)) \226\134\146 (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 !(f(y) == real_of_num(0))))
+      #|  abs((f : (_) -> Real)((x : _)))
+      #|  real_interval(((x : Real) - (d : Real), x + d))
+      #|  (a : Real) < (f : (Real) -> Real)((x : Real)) \226\134\146 real_continuous(f, atreal(x)) \226\134\146 (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 a < f(y)))
+      #|  (f : (_) -> Real)((x : _)) - (a : Real)
+      #|  real_interval(((x : Real) - (d : Real), x + d))
+      #|  (f : (Real) -> Real)((x : Real)) < (a : Real) \226\134\146 real_continuous(f, atreal(x)) \226\134\146 (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 f(y) < a))
+      #|  (a : Real) - (f : (_) -> Real)((x : _))
       #|  :real->real
       #|  :real
-      #|  nth_diff_strong 2 f x
-      #|  &0 < f x ==>\n\tnth_derivative 2 (\\x. abs (f x)) x = nth_derivative 2 f x
-      #|  f x < &0 ==>\n\tnth_derivative 2 (\\x. abs (f x)) x = --nth_derivative 2 f x
-      #|  (\\x. f x pow n) = (\\x. g (f x))
-      #|  \\x. x pow n
-      #|  nth_derivative 2 (\\x. f x pow n) x =\n\t\t &n * (nth_derivative 2 f x * f x pow (n - 1) \n\t   \t + &(n - 1) * f x pow (n - 2) * derivative f x pow 2)
-      #|  2 - 1 = 1
-      #|  nth_derivative 2 (\\x. f x pow 2) x =\n\t\t &2 * (nth_derivative 2 f x * f x + derivative f x pow 2)
-      #|  3 - 1 = 2 /\\ 3 - 2 = 1
-      #|  nth_derivative 2 (\\x. f x pow 3) x =\n\t\t &3 * (nth_derivative 2 f x * f x pow 2 + &2 * f x * derivative f x pow 2)
-      #|  forall a b c d. a * b * c * d = a * (b * c) * d
-      #|  _1 * _2 pow 2
-      #|  lhs1 = rhs1 /\\ lhs2 = rhs2 ==> lhs1 - lhs2 = rhs1 - rhs2
-      #|  _1 * _2
-      #|  _1 * _2
-      #|  _1 * _2
-      #|  _1 * _2
-      #|  nth_derivative 2 (\\x. atn (f x)) x = \n\t(nth_derivative 2 f x * (&1 + f x * f x) - &2 * f x * derivative f x pow 2) / (&1 + f x * f x) pow 2
-      #|  f x
-      #|  nth_derivative 2 (\\x. cos (f x)) x = \n\t--(nth_derivative 2 f x * sin (f x) + cos (f x) * derivative f x pow 2)
-      #|  nth_derivative 2 (\\x. sin (f x)) x = \n\tnth_derivative 2 f x * cos (f x) - sin (f x) * derivative f x pow 2
-      #|  nth_derivative 2 (\\x. exp (f x)) x = \n\tnth_derivative 2 f x * exp (f x) + exp (f x) * derivative f x pow 2
-      #|  &0 < f x ==>\n\tnth_derivative 2 (\\x. log (f x)) x =\n\tnth_derivative 2 f x / f x - (derivative f x / f x) pow 2
-      #|  forall a b c d. (a * b) * c * d = a * (b * c) * d
-      #|  3 = SUC 2
-      #|  forall a b c d. a = c /\\ b = d ==> a - b = c - d
-      #|  ~(f x = &0) ==>\n\tnth_derivative 2 (\\x. inv (f x)) x =\n\t(&2 * derivative f x pow 2 - nth_derivative 2 f x * f x) / (f x pow 3)
-      #|  forall a b c d. (&2 * a * b) * inv (&4) * c * d = (inv (&2) * c) * a * (b * d)
-      #|  3 = SUC 2
-      #|  sqrt (f x pow 3) = sqrt (f x) * f x
-      #|  forall a b c d. a = c /\\ b = d ==> a - b = c - d
-      #|  &0 < f x ==>\n\tnth_derivative 2 (\\x. sqrt (f x)) x =\n\t(&2 * nth_derivative 2 f x * f x - derivative f x pow 2) / (&4 * sqrt (f x pow 3))
+      #|  nth_diff_strong(2, (f : (Real) -> Real), (x : Real))
+      #|  real_of_num(0) < (f : (Real) -> Real)((x : Real)) \226\134\146 nth_derivative(2, (x : Real) => abs(f(x)), x) == nth_derivative(2, f, x)
+      #|  (f : (Real) -> Real)((x : Real)) < real_of_num(0) \226\134\146 nth_derivative(2, (x : Real) => abs(f(x)), x) == -nth_derivative(2, f, x)
+      #|  ((x : _) => pow((f : (_) -> Real)(x), (n : Num))) == ((x : _) => (g : (Real) -> Real)(f(x)))
+      #|  (x : Real) => pow(x, (n : Num))
+      #|  nth_derivative(2, (x : Real) => pow((f : (Real) -> Real)(x), (n : Num)), (x : Real)) == real_of_num(n) * (nth_derivative(2, f, x) * pow(f(x), n - 1) + real_of_num(n - 1) * (pow(f(x), n - 2) * pow(derivative(f, x), 2)))
+      #|  2 - 1 == 1
+      #|  nth_derivative(2, (x : Real) => pow((f : (Real) -> Real)(x), 2), (x : Real)) == real_of_num(2) * (nth_derivative(2, f, x) * f(x) + pow(derivative(f, x), 2))
+      #|  3 - 1 == 2 && 3 - 2 == 1
+      #|  nth_derivative(2, (x : Real) => pow((f : (Real) -> Real)(x), 3), (x : Real)) == real_of_num(3) * (nth_derivative(2, f, x) * pow(f(x), 2) + real_of_num(2) * (f(x) * pow(derivative(f, x), 2)))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, a * (b * (c * d)) == a * (b * c * d)
+      #|  (_1 : Real) * pow((_2 : Real), 2)
+      #|  (lhs1 : Real) == (rhs1 : Real) && (lhs2 : Real) == (rhs2 : Real) \226\134\146 lhs1 - lhs2 == rhs1 - rhs2
+      #|  (_1 : Real) * (_2 : Real)
+      #|  (_1 : Real) * (_2 : Real)
+      #|  (_1 : Real) * (_2 : Real)
+      #|  (_1 : Real) * (_2 : Real)
+      #|  nth_derivative(2, (x : Real) => atn((f : (Real) -> Real)(x)), (x : Real)) == (nth_derivative(2, f, x) * (real_of_num(1) + f(x) * f(x)) - real_of_num(2) * (f(x) * pow(derivative(f, x), 2))) / pow(real_of_num(1) + f(x) * f(x), 2)
+      #|  (f : (_) -> _)((x : _))
+      #|  nth_derivative(2, (x : Real) => cos((f : (Real) -> Real)(x)), (x : Real)) == -(nth_derivative(2, f, x) * sin(f(x)) + cos(f(x)) * pow(derivative(f, x), 2))
+      #|  nth_derivative(2, (x : Real) => sin((f : (Real) -> Real)(x)), (x : Real)) == nth_derivative(2, f, x) * cos(f(x)) - sin(f(x)) * pow(derivative(f, x), 2)
+      #|  nth_derivative(2, (x : Real) => exp((f : (Real) -> Real)(x)), (x : Real)) == nth_derivative(2, f, x) * exp(f(x)) + exp(f(x)) * pow(derivative(f, x), 2)
+      #|  real_of_num(0) < (f : (Real) -> Real)((x : Real)) \226\134\146 nth_derivative(2, (x : Real) => log(f(x)), x) == nth_derivative(2, f, x) / f(x) - pow(derivative(f, x) / f(x), 2)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, a * b * (c * d) == a * (b * c * d)
+      #|  3 == SUC(2)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, a == c && b == d \226\134\146 a - b == c - d
+      #|  !((f : (Real) -> Real)((x : Real)) == real_of_num(0)) \226\134\146 nth_derivative(2, (x : Real) => inv(f(x)), x) == (real_of_num(2) * pow(derivative(f, x), 2) - nth_derivative(2, f, x) * f(x)) / pow(f(x), 3)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, real_of_num(2) * (a * b) * (inv(real_of_num(4)) * (c * d)) == inv(real_of_num(2)) * c * (a * (b * d))
+      #|  3 == SUC(2)
+      #|  sqrt(pow((f : (_) -> Real)((x : _)), 3)) == sqrt(f(x)) * f(x)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, a == c && b == d \226\134\146 a - b == c - d
+      #|  real_of_num(0) < (f : (Real) -> Real)((x : Real)) \226\134\146 nth_derivative(2, (x : Real) => sqrt(f(x)), x) == (real_of_num(2) * (nth_derivative(2, f, x) * f(x)) - pow(derivative(f, x), 2)) / (real_of_num(4) * sqrt(pow(f(x), 3)))
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
-      #|  forall a b c d. (a * b) * c * d = c * a * (b * d)
-      #|  3 = SUC 2
-      #|  sqrt (y pow 3) = sqrt y * y
-      #|  forall a. &1 - a * a = (&1 - a) * (&1 + a)
-      #|  &0 <= y /\\ &0 < y /\\ ~(y = &0)
-      #|  &1 - f x * f x
-      #|  forall a b c d. a = c /\\ b = d ==> a + b = c + d
-      #|  abs (f x) < &1 ==>\n\tnth_derivative 2 (\\x. acs (f x)) x =\n\t-- ((nth_derivative 2 f x * (&1 - f x * f x) + f x * derivative f x pow 2) / \n\tsqrt ((&1 - f x * f x) pow 3))
-      #|  forall a b c d. (a * b) * c * d = c * a * (b * d)
-      #|  3 = SUC 2
-      #|  sqrt (y pow 3) = sqrt y * y
-      #|  forall a. &1 - a * a = (&1 - a) * (&1 + a)
-      #|  &0 <= y /\\ &0 < y /\\ ~(y = &0)
-      #|  &1 - f x * f x
-      #|  forall a b c d. a = c /\\ b = d ==> a + b = c + d
-      #|  abs (f x) < &1 ==>\n\tnth_derivative 2 (\\x. asn (f x)) x =\n\t((nth_derivative 2 f x * (&1 - f x * f x) + f x * derivative f x pow 2) / \n\tsqrt ((&1 - f x * f x) pow 3))
-      #|  -- &1 < f x ==>\n\tnth_derivative 2 (\\x. matan (f x)) x =\n\tnth_derivative 2 f x * dmatan (f x) + derivative f x pow 2 * ddmatan (f x)
-      #|  &0 < f x ==> nth_diff_strong 2 (\\x. abs (f x)) x
-      #|  f x < &0 ==> nth_diff_strong 2 (\\x. abs (f x)) x
-      #|  (\\x. f x pow n) = (\\x. g (f x))
-      #|  \\x. x pow n
-      #|  nth_diff_strong 2 (\\x. f x pow n) x
-      #|  nth_diff_strong 2 (\\x. atn (f x)) x
-      #|  nth_diff_strong 2 (\\x. cos (f x)) x
-      #|  nth_diff_strong 2 (\\x. sin (f x)) x
-      #|  nth_diff_strong 2 (\\x. exp (f x)) x
-      #|  &0 < f x ==> nth_diff_strong 2 (\\x. log (f x)) x
-      #|  ~(f x = &0) ==> nth_diff_strong 2 (\\x. inv (f x)) x
-      #|  &0 < f x ==> nth_diff_strong 2 (\\x. sqrt (f x)) x
-      #|  abs (f x) < &1 ==> nth_diff_strong 2 (\\x. acs (f x)) x
-      #|  abs (f x) < &1 ==> nth_diff_strong 2 (\\x. asn (f x)) x
-      #|  -- &1 < f x ==> nth_diff_strong 2 (\\x. matan (f x)) x
-      #|  2 - 1 = 1
-      #|  forall n. 0 <= SUC n
-      #|  interval_arith x int /\\ nth_diff_strong_int 2 int f /\\ nth_diff_strong_int 2 int g
-      #|  (x,x)
-      #|  nth_diff_strong 2 f x ==>\n  nth_diff_strong 2 g x ==>\n  nth_derivative 2 (\\x. f x * g x) x =\n  f x * nth_derivative 2 g x + &2 * derivative f x * derivative g x + nth_derivative 2 f x * g x
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, a * b * (c * d) == c * (a * (b * d))
+      #|  3 == SUC(2)
+      #|  sqrt(pow((y : Real), 3)) == sqrt(y) * y
+      #|  \226\136\128 a : Real, real_of_num(1) - a * a == (real_of_num(1) - a) * (real_of_num(1) + a)
+      #|  real_of_num(0) <= (y : Real) && real_of_num(0) < y && !(y == real_of_num(0))
+      #|  real_of_num(1) - (f : (_) -> Real)((x : _)) * f(x)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, a == c && b == d \226\134\146 a + b == c + d
+      #|  abs((f : (Real) -> Real)((x : Real))) < real_of_num(1) \226\134\146 nth_derivative(2, (x : Real) => acs(f(x)), x) == -((nth_derivative(2, f, x) * (real_of_num(1) - f(x) * f(x)) + f(x) * pow(derivative(f, x), 2)) / sqrt(pow(real_of_num(1) - f(x) * f(x), 3)))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, a * b * (c * d) == c * (a * (b * d))
+      #|  3 == SUC(2)
+      #|  sqrt(pow((y : Real), 3)) == sqrt(y) * y
+      #|  \226\136\128 a : Real, real_of_num(1) - a * a == (real_of_num(1) - a) * (real_of_num(1) + a)
+      #|  real_of_num(0) <= (y : Real) && real_of_num(0) < y && !(y == real_of_num(0))
+      #|  real_of_num(1) - (f : (_) -> Real)((x : _)) * f(x)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, a == c && b == d \226\134\146 a + b == c + d
+      #|  abs((f : (Real) -> Real)((x : Real))) < real_of_num(1) \226\134\146 nth_derivative(2, (x : Real) => asn(f(x)), x) == (nth_derivative(2, f, x) * (real_of_num(1) - f(x) * f(x)) + f(x) * pow(derivative(f, x), 2)) / sqrt(pow(real_of_num(1) - f(x) * f(x), 3))
+      #|  -real_of_num(1) < (f : (Real) -> Real)((x : Real)) \226\134\146 nth_derivative(2, (x : Real) => matan(f(x)), x) == nth_derivative(2, f, x) * dmatan(f(x)) + pow(derivative(f, x), 2) * ddmatan(f(x))
+      #|  real_of_num(0) < (f : (Real) -> Real)((x : Real)) \226\134\146 nth_diff_strong(2, (x : Real) => abs(f(x)), x)
+      #|  (f : (Real) -> Real)((x : Real)) < real_of_num(0) \226\134\146 nth_diff_strong(2, (x : Real) => abs(f(x)), x)
+      #|  ((x : _) => pow((f : (_) -> Real)(x), (n : Num))) == ((x : _) => (g : (Real) -> Real)(f(x)))
+      #|  (x : Real) => pow(x, (n : Num))
+      #|  nth_diff_strong(2, (x : Real) => pow((f : (Real) -> Real)(x), (n : Num)), (x : Real))
+      #|  nth_diff_strong(2, (x : Real) => atn((f : (Real) -> Real)(x)), (x : Real))
+      #|  nth_diff_strong(2, (x : Real) => cos((f : (Real) -> Real)(x)), (x : Real))
+      #|  nth_diff_strong(2, (x : Real) => sin((f : (Real) -> Real)(x)), (x : Real))
+      #|  nth_diff_strong(2, (x : Real) => exp((f : (Real) -> Real)(x)), (x : Real))
+      #|  real_of_num(0) < (f : (Real) -> Real)((x : Real)) \226\134\146 nth_diff_strong(2, (x : Real) => log(f(x)), x)
+      #|  !((f : (Real) -> Real)((x : Real)) == real_of_num(0)) \226\134\146 nth_diff_strong(2, (x : Real) => inv(f(x)), x)
+      #|  real_of_num(0) < (f : (Real) -> Real)((x : Real)) \226\134\146 nth_diff_strong(2, (x : Real) => sqrt(f(x)), x)
+      #|  abs((f : (Real) -> Real)((x : Real))) < real_of_num(1) \226\134\146 nth_diff_strong(2, (x : Real) => acs(f(x)), x)
+      #|  abs((f : (Real) -> Real)((x : Real))) < real_of_num(1) \226\134\146 nth_diff_strong(2, (x : Real) => asn(f(x)), x)
+      #|  -real_of_num(1) < (f : (Real) -> Real)((x : Real)) \226\134\146 nth_diff_strong(2, (x : Real) => matan(f(x)), x)
+      #|  2 - 1 == 1
+      #|  \226\136\128 n : Num, 0 <= SUC(n)
+      #|  interval_arith((x : Real), (int : (Real, Real))) && nth_diff_strong_int(2, int, (f : (Real) -> Real)) && nth_diff_strong_int(2, int, (g : (Real) -> Real))
+      #|  ((x : _), x)
+      #|  nth_diff_strong(2, (f : (Real) -> Real), (x : Real)) \226\134\146 nth_diff_strong(2, (g : (Real) -> Real), x) \226\134\146 nth_derivative(2, (x : Real) => f(x) * g(x), x) == f(x) * nth_derivative(2, g, x) + (real_of_num(2) * (derivative(f, x) * derivative(g, x)) + nth_derivative(2, f, x) * g(x))
       #|  2
-      #|  g x * inv (g x pow 2) = inv (g x)
-      #|  3 = SUC 2
-      #|  g x * inv (g x pow 3) = inv (g x pow 2)
-      #|  forall f g x. ((ddf * g x - f x * ddg) * g x - &2 * dg * (df * g x - f x * dg)) * \n\t\t\t\t\t\tinv (g x pow 3) =\n\t\t\tf x * (&2 * dg pow 2 - ddg * g x) * inv (g x pow 3) +\n\t\t\t&2 * df * --(g x * inv (g x pow 3)) * dg +\n\t\t\tddf * (g x * g x * inv (g x pow 3))
-      #|  _1 + _2
-      #|  nth_derivative 2 f x
-      #|  nth_derivative 2 g x
-      #|  derivative f x
-      #|  derivative g x
-      #|  ~(g x = &0) ==>\n\tnth_diff_strong 2 f x ==>\n\tnth_diff_strong 2 g x ==>\n\tnth_derivative 2 (\\x. f x / g x) x = \n\t((nth_derivative 2 f x * g x - f x * nth_derivative 2 g x) * g x -\n\t&2 * derivative g x * (derivative f x * g x - f x * derivative g x)) / (g x pow 3)
-      #|  g x
-      #|  interval_arith x int /\\ nth_diff_strong_int 2 int f /\\ nth_diff_strong_int 2 int g
-      #|  (x,x)
-      #|  ~(g x = &0) ==> nth_diff_strong 2 f x ==> nth_diff_strong 2 g x ==>\n\tnth_diff_strong 2 (\\x. f x / g x) x
+      #|  (g : (_) -> Real)((x : _)) * inv(pow(g(x), 2)) == inv(g(x))
+      #|  3 == SUC(2)
+      #|  (g : (_) -> Real)((x : _)) * inv(pow(g(x), 3)) == inv(pow(g(x), 2))
+      #|  \226\136\128 f : (_) -> Real, \226\136\128 g : (_) -> Real, \226\136\128 x : _, (((ddf : Real) * g(x) - f(x) * (ddg : Real)) * g(x) - real_of_num(2) * ((dg : Real) * ((df : Real) * g(x) - f(x) * dg))) * inv(pow(g(x), 3)) == f(x) * ((real_of_num(2) * pow(dg, 2) - ddg * g(x)) * inv(pow(g(x), 3))) + (real_of_num(2) * (df * (-(g(x) * inv(pow(g(x), 3))) * dg)) + ddf * (g(x) * (g(x) * inv(pow(g(x), 3)))))
+      #|  (_1 : Real) + (_2 : Real)
+      #|  nth_derivative(2, (f : (Real) -> Real), (x : Real))
+      #|  nth_derivative(2, (g : (Real) -> Real), (x : Real))
+      #|  derivative((f : (Real) -> Real), (x : Real))
+      #|  derivative((g : (Real) -> Real), (x : Real))
+      #|  !((g : (Real) -> Real)((x : Real)) == real_of_num(0)) \226\134\146 nth_diff_strong(2, (f : (Real) -> Real), x) \226\134\146 nth_diff_strong(2, g, x) \226\134\146 nth_derivative(2, (x : Real) => f(x) / g(x), x) == ((nth_derivative(2, f, x) * g(x) - f(x) * nth_derivative(2, g, x)) * g(x) - real_of_num(2) * (derivative(g, x) * (derivative(f, x) * g(x) - f(x) * derivative(g, x)))) / pow(g(x), 3)
+      #|  (g : (_) -> _)((x : _))
+      #|  interval_arith((x : Real), (int : (Real, Real))) && nth_diff_strong_int(2, int, (f : (Real) -> Real)) && nth_diff_strong_int(2, int, (g : (Real) -> Real))
+      #|  ((x : _), x)
+      #|  !((g : (Real) -> Real)((x : Real)) == real_of_num(0)) \226\134\146 nth_diff_strong(2, (f : (Real) -> Real), x) \226\134\146 nth_diff_strong(2, g, x) \226\134\146 nth_diff_strong(2, (x : Real) => f(x) / g(x), x)
       #|  2
-      #|  \\x. inv (g x)
-      #|  interval_arith x int /\\ nth_diff_strong_int 2 int f
-      #|  (x,x)
-      #|  nth_diff_strong 2 f x ==>\n\tnth_derivative 2 (\\x. c * f x) x = c * nth_derivative 2 f x
+      #|  (x : _) => inv((g : (_) -> Real)(x))
+      #|  interval_arith((x : Real), (int : (Real, Real))) && nth_diff_strong_int(2, int, (f : (Real) -> Real))
+      #|  ((x : _), x)
+      #|  nth_diff_strong(2, (f : (Real) -> Real), (x : Real)) \226\134\146 nth_derivative(2, (x : Real) => (c : Real) * f(x), x) == c * nth_derivative(2, f, x)
       #|  2
-      #|  interval_arith x int /\\ nth_diff_strong_int 2 int f /\\ nth_diff_strong_int 2 int g
-      #|  (x,x)
-      #|  nth_diff_strong 2 f x ==>\n\tnth_diff_strong 2 g x ==>\n\tnth_derivative 2 (\\x. f x + g x) x = nth_derivative 2 f x + nth_derivative 2 g x
+      #|  interval_arith((x : Real), (int : (Real, Real))) && nth_diff_strong_int(2, int, (f : (Real) -> Real)) && nth_diff_strong_int(2, int, (g : (Real) -> Real))
+      #|  ((x : _), x)
+      #|  nth_diff_strong(2, (f : (Real) -> Real), (x : Real)) \226\134\146 nth_diff_strong(2, (g : (Real) -> Real), x) \226\134\146 nth_derivative(2, (x : Real) => f(x) + g(x), x) == nth_derivative(2, f, x) + nth_derivative(2, g, x)
       #|  2
-      #|  interval_arith x int /\\ nth_diff_strong_int 2 int f /\\ nth_diff_strong_int 2 int g
-      #|  (x,x)
-      #|  nth_diff_strong 2 f x ==>\n\tnth_diff_strong 2 g x ==>\n\tnth_derivative 2 (\\x. f x - g x) x = nth_derivative 2 f x - nth_derivative 2 g x
+      #|  interval_arith((x : Real), (int : (Real, Real))) && nth_diff_strong_int(2, int, (f : (Real) -> Real)) && nth_diff_strong_int(2, int, (g : (Real) -> Real))
+      #|  ((x : _), x)
+      #|  nth_diff_strong(2, (f : (Real) -> Real), (x : Real)) \226\134\146 nth_diff_strong(2, (g : (Real) -> Real), x) \226\134\146 nth_derivative(2, (x : Real) => f(x) - g(x), x) == nth_derivative(2, f, x) - nth_derivative(2, g, x)
       #|  2
-      #|  nth_diff_strong_int 2 int g ==>\n\tbounded_on_int g int g_bounds ==>\n\tnth_diff_strong_int 2 g_bounds f ==>\n\tbounded_on_int (\\x. nth_derivative 2 f (g x) * derivative g x pow 2 + \n\t\t\tderivative f (g x) * nth_derivative 2 g x) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. f (g x)) int dd_bounds
-      #|  interval_pos int ==>\n\tbounded_on_int (\\x. &0) int dd_bounds ==>\n\thas_bounded_second_derivative abs int dd_bounds
-      #|  interval_neg int ==>\n\tbounded_on_int (\\x. &0) int dd_bounds ==>\n\thas_bounded_second_derivative abs int dd_bounds
-      #|  forall x. interval_arith x int ==> &0 < f x
-      #|  bounded_on_int f int f_bounds ==> interval_pos f_bounds ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. nth_derivative 2 f x) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. abs (f x)) int dd_bounds
-      #|  f x
-      #|  forall x. interval_arith x int ==> f x < &0
-      #|  bounded_on_int f int f_bounds ==> interval_neg f_bounds ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. --nth_derivative 2 f x) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. abs (f x)) int dd_bounds
-      #|  f x
-      #|  bounded_on_int (\\x. &(n * (n - 1)) * x pow (n - 2)) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. x pow n) int dd_bounds
-      #|  nth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. &n * (nth_derivative 2 f x * f x pow (n - 1) +\n\t\t\t&(n - 1) * f x pow (n - 2) * derivative f x pow 2)) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. f x pow n) int dd_bounds
-      #|  2 * (2 - 1) = 2
-      #|  bounded_on_int (\\x. &2) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. x pow 2) int dd_bounds
-      #|  2 - 1 = 1
-      #|  nth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. &2 * (nth_derivative 2 f x * f x +\n\t\t\t\tderivative f x pow 2)) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. f x pow 2) int dd_bounds
-      #|  3 * (3 - 1) = 6 /\\ 3 - 2 = 1
-      #|  bounded_on_int (\\x. &6 * x) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. x pow 3) int dd_bounds
-      #|  3 - 1 = 2 /\\ 3 - 2 = 1
-      #|  nth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. &3 * (nth_derivative 2 f x * f x pow 2 +\n\t\t\t\t&2 * f x * derivative f x pow 2)) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. f x pow 3) int dd_bounds
-      #|  bounded_on_int (\\x. (-- &2 * x) * inv(&1 + x pow 2) pow 2) int dd_bounds ==>\n\thas_bounded_second_derivative atn int dd_bounds
-      #|  nth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. (nth_derivative 2 f x * (&1 + f x * f x) - &2 * f x * derivative f x pow 2) /\n\t\t\t(&1 + f x * f x) pow 2) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. atn (f x)) int dd_bounds
-      #|  bounded_on_int (\\x. -- cos x) int dd_bounds ==>\n\thas_bounded_second_derivative cos int dd_bounds
-      #|  nth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. --(nth_derivative 2 f x * sin (f x) \n\t\t+ cos (f x) * derivative f x pow 2)) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. cos (f x)) int dd_bounds
-      #|  bounded_on_int (\\x. -- sin x) int dd_bounds ==>\n\thas_bounded_second_derivative sin int dd_bounds
-      #|  nth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. nth_derivative 2 f x * cos (f x) \n\t\t- sin (f x) * derivative f x pow 2) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. sin (f x)) int dd_bounds
-      #|  bounded_on_int exp int dd_bounds ==>\n\thas_bounded_second_derivative exp int dd_bounds
-      #|  nth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. nth_derivative 2 f x * exp (f x) \n\t\t+ exp (f x) * derivative f x pow 2) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. exp (f x)) int dd_bounds
-      #|  interval_pos int ==>\n\tbounded_on_int (\\x. --inv (x pow 2)) int dd_bounds ==>\n\thas_bounded_second_derivative log int dd_bounds
-      #|  forall x. interval_arith x int ==> &0 < f x
-      #|  bounded_on_int f int f_bounds ==> interval_pos f_bounds ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. nth_derivative 2 f x / f x - (derivative f x / f x) pow 2)\n\t\t\tint dd_bounds ==>\n\thas_bounded_second_derivative (\\x. log (f x)) int dd_bounds
-      #|  f x
-      #|  interval_not_zero int ==>\n\tbounded_on_int (\\x. &2 * inv (x pow 3)) int dd_bounds ==>\n\thas_bounded_second_derivative inv int dd_bounds
+      #|  nth_diff_strong_int(2, (int : (Real, Real)), (g : (Real) -> Real)) \226\134\146 bounded_on_int(g, int, (g_bounds : (Real, Real))) \226\134\146 nth_diff_strong_int(2, g_bounds, (f : (Real) -> Real)) \226\134\146 bounded_on_int((x : Real) => nth_derivative(2, f, g(x)) * pow(derivative(g, x), 2) + derivative(f, g(x)) * nth_derivative(2, g, x), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => f(g(x)), int, dd_bounds)
+      #|  interval_pos((int : (Real, Real))) \226\134\146 bounded_on_int((x : Real) => real_of_num(0), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative(abs, int, dd_bounds)
+      #|  interval_neg((int : (Real, Real))) \226\134\146 bounded_on_int((x : Real) => real_of_num(0), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative(abs, int, dd_bounds)
+      #|  \226\136\128 x : Real, interval_arith(x, (int : (Real, Real))) \226\134\146 real_of_num(0) < (f : (Real) -> Real)(x)
+      #|  bounded_on_int((f : (Real) -> Real), (int : (Real, Real)), (f_bounds : (Real, Real))) \226\134\146 interval_pos(f_bounds) \226\134\146 nth_diff_strong_int(2, int, f) \226\134\146 bounded_on_int((x : Real) => nth_derivative(2, f, x), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => abs(f(x)), int, dd_bounds)
+      #|  (f : (_) -> _)((x : _))
+      #|  \226\136\128 x : Real, interval_arith(x, (int : (Real, Real))) \226\134\146 (f : (Real) -> Real)(x) < real_of_num(0)
+      #|  bounded_on_int((f : (Real) -> Real), (int : (Real, Real)), (f_bounds : (Real, Real))) \226\134\146 interval_neg(f_bounds) \226\134\146 nth_diff_strong_int(2, int, f) \226\134\146 bounded_on_int((x : Real) => -nth_derivative(2, f, x), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => abs(f(x)), int, dd_bounds)
+      #|  (f : (_) -> _)((x : _))
+      #|  bounded_on_int((x : Real) => real_of_num((n : Num) * (n - 1)) * pow(x, n - 2), (int : (Real, Real)), (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => pow(x, n), int, dd_bounds)
+      #|  nth_diff_strong_int(2, (int : (Real, Real)), (f : (Real) -> Real)) \226\134\146 bounded_on_int((x : Real) => real_of_num((n : Num)) * (nth_derivative(2, f, x) * pow(f(x), n - 1) + real_of_num(n - 1) * (pow(f(x), n - 2) * pow(derivative(f, x), 2))), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => pow(f(x), n), int, dd_bounds)
+      #|  2 * (2 - 1) == 2
+      #|  bounded_on_int((x : Real) => real_of_num(2), (int : (Real, Real)), (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => pow(x, 2), int, dd_bounds)
+      #|  2 - 1 == 1
+      #|  nth_diff_strong_int(2, (int : (Real, Real)), (f : (Real) -> Real)) \226\134\146 bounded_on_int((x : Real) => real_of_num(2) * (nth_derivative(2, f, x) * f(x) + pow(derivative(f, x), 2)), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => pow(f(x), 2), int, dd_bounds)
+      #|  3 * (3 - 1) == 6 && 3 - 2 == 1
+      #|  bounded_on_int((x : Real) => real_of_num(6) * x, (int : (Real, Real)), (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => pow(x, 3), int, dd_bounds)
+      #|  3 - 1 == 2 && 3 - 2 == 1
+      #|  nth_diff_strong_int(2, (int : (Real, Real)), (f : (Real) -> Real)) \226\134\146 bounded_on_int((x : Real) => real_of_num(3) * (nth_derivative(2, f, x) * pow(f(x), 2) + real_of_num(2) * (f(x) * pow(derivative(f, x), 2))), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => pow(f(x), 3), int, dd_bounds)
+      #|  bounded_on_int((x : Real) => -real_of_num(2) * x * pow(inv(real_of_num(1) + pow(x, 2)), 2), (int : (Real, Real)), (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative(atn, int, dd_bounds)
+      #|  nth_diff_strong_int(2, (int : (Real, Real)), (f : (Real) -> Real)) \226\134\146 bounded_on_int((x : Real) => (nth_derivative(2, f, x) * (real_of_num(1) + f(x) * f(x)) - real_of_num(2) * (f(x) * pow(derivative(f, x), 2))) / pow(real_of_num(1) + f(x) * f(x), 2), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => atn(f(x)), int, dd_bounds)
+      #|  bounded_on_int((x : Real) => -cos(x), (int : (Real, Real)), (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative(cos, int, dd_bounds)
+      #|  nth_diff_strong_int(2, (int : (Real, Real)), (f : (Real) -> Real)) \226\134\146 bounded_on_int((x : Real) => -(nth_derivative(2, f, x) * sin(f(x)) + cos(f(x)) * pow(derivative(f, x), 2)), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => cos(f(x)), int, dd_bounds)
+      #|  bounded_on_int((x : Real) => -sin(x), (int : (Real, Real)), (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative(sin, int, dd_bounds)
+      #|  nth_diff_strong_int(2, (int : (Real, Real)), (f : (Real) -> Real)) \226\134\146 bounded_on_int((x : Real) => nth_derivative(2, f, x) * cos(f(x)) - sin(f(x)) * pow(derivative(f, x), 2), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => sin(f(x)), int, dd_bounds)
+      #|  bounded_on_int(exp, (int : (Real, Real)), (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative(exp, int, dd_bounds)
+      #|  nth_diff_strong_int(2, (int : (Real, Real)), (f : (Real) -> Real)) \226\134\146 bounded_on_int((x : Real) => nth_derivative(2, f, x) * exp(f(x)) + exp(f(x)) * pow(derivative(f, x), 2), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => exp(f(x)), int, dd_bounds)
+      #|  interval_pos((int : (Real, Real))) \226\134\146 bounded_on_int((x : Real) => -inv(pow(x, 2)), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative(log, int, dd_bounds)
+      #|  \226\136\128 x : Real, interval_arith(x, (int : (Real, Real))) \226\134\146 real_of_num(0) < (f : (Real) -> Real)(x)
+      #|  bounded_on_int((f : (Real) -> Real), (int : (Real, Real)), (f_bounds : (Real, Real))) \226\134\146 interval_pos(f_bounds) \226\134\146 nth_diff_strong_int(2, int, f) \226\134\146 bounded_on_int((x : Real) => nth_derivative(2, f, x) / f(x) - pow(derivative(f, x) / f(x), 2), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => log(f(x)), int, dd_bounds)
+      #|  (f : (_) -> _)((x : _))
+      #|  interval_not_zero((int : (Real, Real))) \226\134\146 bounded_on_int((x : Real) => real_of_num(2) * inv(pow(x, 3)), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative(inv, int, dd_bounds)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
-      #|  forall x. interval_arith x int ==> ~(f x = &0)
-      #|  bounded_on_int f int f_bounds ==> interval_not_zero f_bounds ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. (&2 * derivative f x pow 2 - nth_derivative 2 f x * f x) / f x pow 3) \n\t\t\tint dd_bounds ==>\n\thas_bounded_second_derivative (\\x. inv (f x)) int dd_bounds
-      #|  f x
+      #|  \226\136\128 x : Real, interval_arith(x, (int : (Real, Real))) \226\134\146 !((f : (Real) -> Real)(x) == real_of_num(0))
+      #|  bounded_on_int((f : (Real) -> Real), (int : (Real, Real)), (f_bounds : (Real, Real))) \226\134\146 interval_not_zero(f_bounds) \226\134\146 nth_diff_strong_int(2, int, f) \226\134\146 bounded_on_int((x : Real) => (real_of_num(2) * pow(derivative(f, x), 2) - nth_derivative(2, f, x) * f(x)) / pow(f(x), 3), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => inv(f(x)), int, dd_bounds)
+      #|  (f : (_) -> _)((x : _))
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
@@ -1674,42 +1674,42 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
-      #|  interval_pos int ==>\n\tbounded_on_int (\\x. --inv (&4 * sqrt (x pow 3))) int dd_bounds ==>\n\thas_bounded_second_derivative sqrt int dd_bounds
-      #|  forall x. interval_arith x int ==> &0 < f x
-      #|  bounded_on_int f int f_bounds ==> interval_pos f_bounds ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. (&2 * nth_derivative 2 f x * f x - derivative f x pow 2) /\n\t\t\t(&4 * sqrt (f x pow 3))) \n\t\t\tint dd_bounds ==>\n\thas_bounded_second_derivative (\\x. sqrt (f x)) int dd_bounds
-      #|  f x
-      #|  iabs int < &1 ==>\n\tbounded_on_int (\\x. --(x / sqrt ((&1 - x * x) pow 3))) int dd_bounds ==>\n\thas_bounded_second_derivative acs int dd_bounds
-      #|  forall x. interval_arith x int ==> abs (f x) < &1
-      #|  bounded_on_int f int f_bounds ==> iabs f_bounds < &1 ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. --((nth_derivative 2 f x * (&1 - f x * f x) + f x * derivative f x pow 2) /\n\t\t\t\tsqrt ((&1 - f x * f x) pow 3))) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. acs (f x)) int dd_bounds
-      #|  f x
-      #|  iabs int < &1 ==>\n\tbounded_on_int (\\x. x / sqrt ((&1 - x * x) pow 3)) int dd_bounds ==>\n\thas_bounded_second_derivative asn int dd_bounds
-      #|  forall x. interval_arith x int ==> abs (f x) < &1
-      #|  bounded_on_int f int f_bounds ==> iabs f_bounds < &1 ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. (nth_derivative 2 f x * (&1 - f x * f x) + f x * derivative f x pow 2) /\n\t\t\t\tsqrt ((&1 - f x * f x) pow 3)) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. asn (f x)) int dd_bounds
-      #|  f x
-      #|  interval_arith x int /\\ interval_gt f int ==> f < x
-      #|  interval_gt (-- &1) int ==>\n\tbounded_on_int ddmatan int dd_bounds ==>\n\thas_bounded_second_derivative matan int dd_bounds
-      #|  forall x. interval_arith x int ==> -- &1 < f x
-      #|  bounded_on_int f int f_bounds ==> interval_gt (-- &1) f_bounds ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. nth_derivative 2 f x * dmatan (f x) + derivative f x pow 2 * ddmatan (f x))\n\t\t\tint dd_bounds ==>\n\thas_bounded_second_derivative (\\x. matan (f x)) int dd_bounds
-      #|  f x
-      #|  nth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. c * nth_derivative 2 f x) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. c * f x) int dd_bounds
-      #|  nth_diff_strong_int 2 int f ==>\n\tnth_diff_strong_int 2 int g ==>\n\tbounded_on_int (\\x. nth_derivative 2 f x + nth_derivative 2 g x) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. f x + g x) int dd_bounds
-      #|  nth_diff_strong_int 2 int f ==>\n\tnth_diff_strong_int 2 int g ==>\n\tbounded_on_int (\\x. nth_derivative 2 f x - nth_derivative 2 g x) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. f x - g x) int dd_bounds
-      #|  nth_diff_strong_int 2 int f ==>\n\tnth_diff_strong_int 2 int g ==>\n\tbounded_on_int (\\x. f x * nth_derivative 2 g x + &2 * derivative f x * derivative g x +\n\t\t\tnth_derivative 2 f x * g x) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. f x * g x) int dd_bounds
-      #|  g_bounds
-      #|  forall x. interval_arith x int ==> ~(g x = &0)
-      #|  bounded_on_int g int g_bounds ==> interval_not_zero g_bounds ==>\n\tnth_diff_strong_int 2 int f ==>\n\tnth_diff_strong_int 2 int g ==>\n\tbounded_on_int (\\x. ((nth_derivative 2 f x * g x - f x * nth_derivative 2 g x) * g x -\n\t  &2 * derivative g x * (derivative f x * g x - f x * derivative g x)) / g x pow 3) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. f x / g x) int dd_bounds
+      #|  interval_pos((int : (Real, Real))) \226\134\146 bounded_on_int((x : Real) => -inv(real_of_num(4) * sqrt(pow(x, 3))), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative(sqrt, int, dd_bounds)
+      #|  \226\136\128 x : Real, interval_arith(x, (int : (Real, Real))) \226\134\146 real_of_num(0) < (f : (Real) -> Real)(x)
+      #|  bounded_on_int((f : (Real) -> Real), (int : (Real, Real)), (f_bounds : (Real, Real))) \226\134\146 interval_pos(f_bounds) \226\134\146 nth_diff_strong_int(2, int, f) \226\134\146 bounded_on_int((x : Real) => (real_of_num(2) * (nth_derivative(2, f, x) * f(x)) - pow(derivative(f, x), 2)) / (real_of_num(4) * sqrt(pow(f(x), 3))), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => sqrt(f(x)), int, dd_bounds)
+      #|  (f : (_) -> _)((x : _))
+      #|  iabs((int : (Real, Real))) < real_of_num(1) \226\134\146 bounded_on_int((x : Real) => -(x / sqrt(pow(real_of_num(1) - x * x, 3))), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative(acs, int, dd_bounds)
+      #|  \226\136\128 x : Real, interval_arith(x, (int : (Real, Real))) \226\134\146 abs((f : (Real) -> Real)(x)) < real_of_num(1)
+      #|  bounded_on_int((f : (Real) -> Real), (int : (Real, Real)), (f_bounds : (Real, Real))) \226\134\146 iabs(f_bounds) < real_of_num(1) \226\134\146 nth_diff_strong_int(2, int, f) \226\134\146 bounded_on_int((x : Real) => -((nth_derivative(2, f, x) * (real_of_num(1) - f(x) * f(x)) + f(x) * pow(derivative(f, x), 2)) / sqrt(pow(real_of_num(1) - f(x) * f(x), 3))), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => acs(f(x)), int, dd_bounds)
+      #|  (f : (_) -> _)((x : _))
+      #|  iabs((int : (Real, Real))) < real_of_num(1) \226\134\146 bounded_on_int((x : Real) => x / sqrt(pow(real_of_num(1) - x * x, 3)), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative(asn, int, dd_bounds)
+      #|  \226\136\128 x : Real, interval_arith(x, (int : (Real, Real))) \226\134\146 abs((f : (Real) -> Real)(x)) < real_of_num(1)
+      #|  bounded_on_int((f : (Real) -> Real), (int : (Real, Real)), (f_bounds : (Real, Real))) \226\134\146 iabs(f_bounds) < real_of_num(1) \226\134\146 nth_diff_strong_int(2, int, f) \226\134\146 bounded_on_int((x : Real) => (nth_derivative(2, f, x) * (real_of_num(1) - f(x) * f(x)) + f(x) * pow(derivative(f, x), 2)) / sqrt(pow(real_of_num(1) - f(x) * f(x), 3)), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => asn(f(x)), int, dd_bounds)
+      #|  (f : (_) -> _)((x : _))
+      #|  interval_arith((x : Real), (int : (Real, Real))) && interval_gt((f : Real), int) \226\134\146 f < x
+      #|  interval_gt(-real_of_num(1), (int : (Real, Real))) \226\134\146 bounded_on_int(ddmatan, int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative(matan, int, dd_bounds)
+      #|  \226\136\128 x : Real, interval_arith(x, (int : (Real, Real))) \226\134\146 -real_of_num(1) < (f : (Real) -> Real)(x)
+      #|  bounded_on_int((f : (Real) -> Real), (int : (Real, Real)), (f_bounds : (Real, Real))) \226\134\146 interval_gt(-real_of_num(1), f_bounds) \226\134\146 nth_diff_strong_int(2, int, f) \226\134\146 bounded_on_int((x : Real) => nth_derivative(2, f, x) * dmatan(f(x)) + pow(derivative(f, x), 2) * ddmatan(f(x)), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => matan(f(x)), int, dd_bounds)
+      #|  (f : (_) -> _)((x : _))
+      #|  nth_diff_strong_int(2, (int : (Real, Real)), (f : (Real) -> Real)) \226\134\146 bounded_on_int((x : Real) => (c : Real) * nth_derivative(2, f, x), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => c * f(x), int, dd_bounds)
+      #|  nth_diff_strong_int(2, (int : (Real, Real)), (f : (Real) -> Real)) \226\134\146 nth_diff_strong_int(2, int, (g : (Real) -> Real)) \226\134\146 bounded_on_int((x : Real) => nth_derivative(2, f, x) + nth_derivative(2, g, x), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => f(x) + g(x), int, dd_bounds)
+      #|  nth_diff_strong_int(2, (int : (Real, Real)), (f : (Real) -> Real)) \226\134\146 nth_diff_strong_int(2, int, (g : (Real) -> Real)) \226\134\146 bounded_on_int((x : Real) => nth_derivative(2, f, x) - nth_derivative(2, g, x), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => f(x) - g(x), int, dd_bounds)
+      #|  nth_diff_strong_int(2, (int : (Real, Real)), (f : (Real) -> Real)) \226\134\146 nth_diff_strong_int(2, int, (g : (Real) -> Real)) \226\134\146 bounded_on_int((x : Real) => f(x) * nth_derivative(2, g, x) + (real_of_num(2) * (derivative(f, x) * derivative(g, x)) + nth_derivative(2, f, x) * g(x)), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => f(x) * g(x), int, dd_bounds)
+      #|  (g_bounds : _)
+      #|  \226\136\128 x : Real, interval_arith(x, (int : (Real, Real))) \226\134\146 !((g : (Real) -> Real)(x) == real_of_num(0))
+      #|  bounded_on_int((g : (Real) -> Real), (int : (Real, Real)), (g_bounds : (Real, Real))) \226\134\146 interval_not_zero(g_bounds) \226\134\146 nth_diff_strong_int(2, int, (f : (Real) -> Real)) \226\134\146 nth_diff_strong_int(2, int, g) \226\134\146 bounded_on_int((x : Real) => ((nth_derivative(2, f, x) * g(x) - f(x) * nth_derivative(2, g, x)) * g(x) - real_of_num(2) * (derivative(g, x) * (derivative(f, x) * g(x) - f(x) * derivative(g, x)))) / pow(g(x), 3), int, (dd_bounds : (Real, Real))) \226\134\146 has_bounded_second_derivative((x : Real) => f(x) / g(x), int, dd_bounds)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
-      #|  cell_domain x y z w <=> \n\tx <= y /\\ y <= z /\\ y - x <= w /\\ z - y <= w
-      #|  i < 2 <=> i = 0 \\/ i = 1
-      #|  (:real)
-      #|  cell_domain x y z w ==>\n\ttaylor_interval (\\x. x) x y z w (y, y) (&1, &1) (&0, &0)
-      #|  i < 2 <=> i = 0 \\/ i = 1
-      #|  (:real)
-      #|  cell_domain x y z w ==>\n\ttaylor_interval (\\x. c) x y z w (c, c) (&0, &0) (&0, &0)
+      #|  (cell_domain : (Real, Real, Real, Real) -> Bool)((x : Real), (y : Real), (z : Real), (w : Real)) == (x <= y && y <= z && y - x <= w && z - y <= w)
+      #|  ((i : Num) < 2) == (i == 0 || i == 1)
+      #|  (UNIV : (Real) -> Bool)
+      #|  cell_domain((x : Real), (y : Real), (z : Real), (w : Real)) \226\134\146 taylor_interval((x : Real) => x, x, y, z, w, (y, y), (real_of_num(1), real_of_num(1)), (real_of_num(0), real_of_num(0)))
+      #|  ((i : Num) < 2) == (i == 0 || i == 1)
+      #|  (UNIV : (Real) -> Bool)
+      #|  cell_domain((x : Real), (y : Real), (z : Real), (w : Real)) \226\134\146 taylor_interval((x : Real) => (c : Real), x, y, z, w, (c, c), (real_of_num(0), real_of_num(0)), (real_of_num(0), real_of_num(0)))
       #|  :real->real
       #|  :real
       #|  :real
@@ -1722,11 +1722,11 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  :real
       #|  :real
       #|  :real
-      #|  taylor_interval f x y z w (f_lo, f_hi) df_bounds dd_bounds ==>\n\tiabs df_bounds = df ==>\n\tiabs dd_bounds = dd ==>\n\tw * (df + w * dd * inv(&2)) <= t ==>\n\tf_hi + t <= hi ==> lo <= f_lo - t ==>\n\tbounded_on_int f (x, z) (lo, hi)
-      #|  taylor_interval f x y z w f_bounds (df_lo, df_hi) dd_bounds ==>\n\tiabs dd_bounds = dd ==>\n\tdf_hi + w * dd <= hi ==>\n\tlo <= df_lo - w * dd ==>\n\tbounded_on_int (derivative f) (x, z) (lo, hi)
-      #|  bounded_on_int g int g_bounds ==>\n\tbounded_on_int f g_bounds f_bounds ==>\n\tbounded_on_int (\\x. f (g x)) int f_bounds
-      #|  bounded_on_int f int f_bounds ==>\n\tinterval_arith y int ==> interval_arith (f y) f_bounds
-      #|  taylor_interval f x y z w f_bounds df_bounds dd_bounds ==>\n\tcell_domain x0 y z0 w0 ==>\n\tx <= x0 ==> z0 <= z ==>\n\ttaylor_interval f x0 y z0 w0 f_bounds df_bounds dd_bounds
+      #|  taylor_interval((f : (Real) -> Real), (x : Real), (y : Real), (z : Real), (w : Real), ((f_lo : Real), (f_hi : Real)), (df_bounds : (Real, Real)), (dd_bounds : (Real, Real))) \226\134\146 iabs(df_bounds) == (df : Real) \226\134\146 iabs(dd_bounds) == (dd : Real) \226\134\146 w * (df + w * (dd * inv(real_of_num(2)))) <= (t : Real) \226\134\146 f_hi + t <= (hi : Real) \226\134\146 (lo : Real) <= f_lo - t \226\134\146 bounded_on_int(f, (x, z), (lo, hi))
+      #|  taylor_interval((f : (Real) -> Real), (x : Real), (y : Real), (z : Real), (w : Real), (f_bounds : (Real, Real)), ((df_lo : Real), (df_hi : Real)), (dd_bounds : (Real, Real))) \226\134\146 iabs(dd_bounds) == (dd : Real) \226\134\146 df_hi + w * dd <= (hi : Real) \226\134\146 (lo : Real) <= df_lo - w * dd \226\134\146 bounded_on_int(derivative(f), (x, z), (lo, hi))
+      #|  bounded_on_int((g : (Real) -> Real), (int : (Real, Real)), (g_bounds : (Real, Real))) \226\134\146 bounded_on_int((f : (Real) -> Real), g_bounds, (f_bounds : (Real, Real))) \226\134\146 bounded_on_int((x : Real) => f(g(x)), int, f_bounds)
+      #|  bounded_on_int((f : (Real) -> Real), (int : (Real, Real)), (f_bounds : (Real, Real))) \226\134\146 interval_arith((y : Real), int) \226\134\146 interval_arith(f(y), f_bounds)
+      #|  taylor_interval((f : (Real) -> Real), (x : Real), (y : Real), (z : Real), (w : Real), (f_bounds : (Real, Real)), (df_bounds : (Real, Real)), (dd_bounds : (Real, Real))) \226\134\146 cell_domain((x0 : Real), y, (z0 : Real), (w0 : Real)) \226\134\146 x <= x0 \226\134\146 z0 <= z \226\134\146 taylor_interval(f, x0, y, z0, w0, f_bounds, df_bounds, dd_bounds)
       #|Taylor_interval.derivative =  |- (#forall:fun(fun(fun(real,real),bool),bool) (\f:fun(real,real). ((#=:fun(fun(real,real),fun(fun(real,real),bool)) (#derivative:fun(fun(real,real),fun(real,real)) f:fun(real,real))) (\y:real. (#@:fun(fun(real,bool),real) (\d:real. (((#has_real_derivative:fun(fun(real,real),fun(real,fun(net(real),bool))) f:fun(real,real)) d:real) (#atreal:fun(real,net(real)) y:real))))))))
       #|Taylor_interval.nth_derivative =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(fun(real,real),bool),bool) (\f:fun(real,real). ((#=:fun(fun(real,real),fun(fun(real,real),bool)) ((#nth_derivative:fun(num,fun(fun(real,real),fun(real,real))) n:num) f:fun(real,real))) (((#iter:fun(num,fun(fun(fun(real,real),fun(real,real)),fun(fun(real,real),fun(real,real)))) n:num) #derivative:fun(fun(real,real),fun(real,real))) f:fun(real,real)))))))
       #|Taylor_interval.nth_differentiable =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (((#nth_differentiable:fun(num,fun(fun(real,real),fun(real,bool))) (#NUMERAL:fun(num,num) #_0:num)) f:fun(real,real)) x:real)) ((#real_continuous:fun(fun(real,real),fun(net(real),bool)) f:fun(real,real)) (#atreal:fun(real,net(real)) x:real)))) ((#=:fun(bool,fun(bool,bool)) (((#nth_differentiable:fun(num,fun(fun(real,real),fun(real,bool))) (#SUC:fun(num,num) n:num)) f:fun(real,real)) x:real)) ((#/\:fun(bool,fun(bool,bool)) (((#nth_differentiable:fun(num,fun(fun(real,real),fun(real,bool))) n:num) f:fun(real,real)) x:real)) ((#real_differentiable:fun(fun(real,real),fun(net(real),bool)) ((#nth_derivative:fun(num,fun(fun(real,real),fun(real,real))) n:num) f:fun(real,real))) (#atreal:fun(real,net(real)) x:real)))))
