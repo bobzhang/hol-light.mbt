@@ -63465,8 +63465,8 @@ Multivariate/derivatives quotations (1746):
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], has_derivative(f, f', (net : Net[Cart[Real, M]])) \226\134\146 has_derivative((x : Cart[Real, M]) => lift(dot((v : Cart[Real, N]), f(x))), (t : Cart[Real, M]) => lift(dot(v, f'(t))), net)
   (d : Real)
   ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (a && b \226\134\146 c \226\134\146 d)
-  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 f' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, _], IN(x', s) && dist((x', x)) < d \226\134\146 f(x') == g(x')) && has_derivative(f, f', within(at(x), s)) \226\134\146 has_derivative(g, f', within(at(x), s))
-  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 f' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, _], dist((x', x)) < d \226\134\146 f(x') == g(x')) && has_derivative(f, f', at(x)) \226\134\146 has_derivative(g, f', at(x))
+  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 f' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, _], IN(x', s) && distance((x', x)) < d \226\134\146 f(x') == g(x')) && has_derivative(f, f', within(at(x), s)) \226\134\146 has_derivative(g, f', within(at(x), s))
+  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 f' : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, _], distance((x', x)) < d \226\134\146 f(x') == g(x')) && has_derivative(f, f', at(x)) \226\134\146 has_derivative(g, f', at(x))
   (s : (Cart[Real, M]) -> Bool)
   ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) \226\134\146 (e : Bool)) == (a && b && c \226\134\146 d \226\134\146 e)
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 x : Cart[Real, M], open(s) && IN(x, s) && (\226\136\128 y : Cart[Real, M], IN(y, s) \226\134\146 f(y) == g(y)) && has_derivative(f, (f' : (Cart[Real, M]) -> Cart[Real, N]), at(x)) \226\134\146 has_derivative(g, f', at(x))
@@ -63477,8 +63477,8 @@ Multivariate/derivatives quotations (1746):
   \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, IN(a, s) && open(s) \226\134\146 differentiable(f, within(at(a), s)) == differentiable(f, at(a))
   \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, (\226\136\128 x : Cart[Real, _], IN(x, s) \226\134\146 differentiable(f, at(x))) \226\134\146 differentiable_on(f, s)
   \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, open(s) \226\134\146 differentiable_on(f, s) == (\226\136\128 x : Cart[Real, _], IN(x, s) \226\134\146 differentiable(f, at(x)))
-  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, _], IN(x', s) && dist((x', x)) < d \226\134\146 f(x') == g(x')) && differentiable(f, within(at(x), s)) \226\134\146 differentiable(g, within(at(x), s))
-  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, _], dist((x', x)) < d \226\134\146 f(x') == g(x')) && differentiable(f, at(x)) \226\134\146 differentiable(g, at(x))
+  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, _], IN(x', s) && distance((x', x)) < d \226\134\146 f(x') == g(x')) && differentiable(f, within(at(x), s)) \226\134\146 differentiable(g, within(at(x), s))
+  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, _], distance((x', x)) < d \226\134\146 f(x') == g(x')) && differentiable(f, at(x)) \226\134\146 differentiable(g, at(x))
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 f(x) == g(x)) && differentiable_on(f, s) \226\134\146 differentiable_on(g, s)
   (frechet_derivative : ((Cart[Real, _]) -> Cart[Real, _], Net[Cart[Real, _]], Cart[Real, _]) -> Cart[Real, _])((f : (Cart[Real, _]) -> Cart[Real, _]), (net : Net[Cart[Real, _]])) == select((f' : (Cart[Real, _]) -> Cart[Real, _]) => has_derivative(f, f', net))
   \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 net : Net[Cart[Real, _]], differentiable(f, net) == has_derivative(f, frechet_derivative(f, net), net)
@@ -63642,7 +63642,7 @@ Multivariate/derivatives quotations (1746):
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f'' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], IN(x, interval((a, b))) && has_derivative(f, f', within(at(x), interval((a, b)))) && has_derivative(f, f'', within(at(x), interval((a, b)))) \226\134\146 f' == f''
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], has_derivative(f, f', at(x)) \226\134\146 f' == frechet_derivative(f, at(x))
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, M], Num) -> Real)(a, i) < (op_dollar : (Cart[Real, M], Num) -> Real)(b, i)) && (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) && (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, f', (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)]))) \226\134\146 (frechet_derivative : ((Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]], Cart[Real, M]) -> Cart[Real, N])(f, (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)]))) == f'
-  dist(((x : Cart[Real, M]), x + (e : Cart[Real, M]))) == norm(e)
+  distance(((x : Cart[Real, M]), x + (e : Cart[Real, M]))) == norm(e)
   :real
   :real
   ((x : Real) * (y : Real) < real_of_num(0)) == (real_of_num(0) < x * -y)
@@ -63683,7 +63683,7 @@ Multivariate/derivatives quotations (1746):
   (-(x : Real) <= real_of_num(0) && x <= real_of_num(0)) == (x == real_of_num(0))
   (real_of_num(0) <= -(x : Real) && real_of_num(0) <= x) == (x == real_of_num(0))
   (x : Cart[Real, N]) - (e : Cart[Real, N]) - x == -e && x + e - x == e
-  dist(((x : Cart[Real, N]), x - (e : Cart[Real, N]))) == norm(e) && dist((x, x + e)) == norm(e)
+  distance(((x : Cart[Real, N]), x - (e : Cart[Real, N]))) == norm(e) && distance((x, x + e)) == norm(e)
   :real
   :real
   :real
@@ -63749,8 +63749,8 @@ Multivariate/derivatives quotations (1746):
   (x : Cart[Real, Unit]) => o((f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, Unit])(op_pct(real_of_num(1) - drop(x), (a : Cart[Real, N])) + op_pct(drop(x), (b : Cart[Real, N]))), (x : Cart[Real, Unit]) => op_pct(drop(x), b - a))
   o((f : (Cart[Real, N]) -> Cart[Real, Unit]), (x : Cart[Real, Unit]) => op_pct(real_of_num(1) - drop(x), (a : Cart[Real, N])) + op_pct(drop(x), (b : Cart[Real, N])))
   \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Unit], \226\136\128 f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, Unit], \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], !(a == b) && continuous_on(f, segment([(a, b)])) && (\226\136\128 x : Cart[Real, N], IN(x, segment((a, b))) \226\134\146 has_derivative(f, f'(x), within(at(x), segment((a, b))))) \226\134\146 (\226\136\131 c : Cart[Real, N], IN(c, segment((a, b))) && f(b) - f(a) == f'(c, b - a))
-  min(dist(((x : Cart[Real, N]), (a : Cart[Real, N]))), dist((x, (b : Cart[Real, N]))))
-  dist(((a : Cart[Real, N]), (b : Cart[Real, N])))
+  min(distance(((x : Cart[Real, N]), (a : Cart[Real, N]))), distance((x, (b : Cart[Real, N]))))
+  distance(((a : Cart[Real, N]), (b : Cart[Real, N])))
   (x : Cart[Real, N]) == (a : Cart[Real, N]) || x == (b : Cart[Real, N])
   (x : Cart[Real, N])
   (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, Unit])((x : Cart[Real, N]))
@@ -64152,7 +64152,7 @@ Multivariate/derivatives quotations (1746):
   real_of_num(1) < real_of_num((n : Num)) + real_of_num(2)
   real_of_num(0) <= (x : Real) && x * inv((n : Real)) < x * real_of_num(1) \226\134\146 !(x <= abs(x) / n)
   abs(real_of_num((n : Num)) + real_of_num(2)) == real_of_num(n) + real_of_num(2)
-  dist(((x : Cart[Real, N]), x + (y : Cart[Real, N]))) == norm(y)
+  distance(((x : Cart[Real, N]), x + (y : Cart[Real, N]))) == norm(y)
   :real
   :real
   (x : Cart[Real, M])
@@ -64243,12 +64243,12 @@ Multivariate/derivatives quotations (1746):
   real_of_num(0) < (t : Real) \226\134\146 abs(t) == t
   (n : Real) <= (e : Real) && (x : Real) * n < real_of_num(1) * n \226\134\146 x * n < e
   (b : Cart[Real, N]) - (a : Cart[Real, N]) - op_pct((t : Real), b - a) == op_pct(real_of_num(1) - t, b - a)
-  dist(((b : Cart[Real, N]), (a : Cart[Real, N]) + (x : Cart[Real, N]))) == norm(b - a - x)
+  distance(((b : Cart[Real, N]), (a : Cart[Real, N]) + (x : Cart[Real, N]))) == norm(b - a - x)
   :real
   :real
   (t : Real)
   min(real_of_num(1), (dd : Real) * (q : Real) / norm((b : Cart[Real, N]) - (f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N]))))
-  dist(((a : Cart[Real, N]), a + (x : Cart[Real, N]))) == norm(x)
+  distance(((a : Cart[Real, N]), a + (x : Cart[Real, N]))) == norm(x)
   :real
   :real
   (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
@@ -64380,7 +64380,7 @@ Multivariate/derivatives quotations (1746):
   SUBSET((k : (Cart[Real, N]) -> Bool), ball(((x : Cart[Real, N]), (r : Real))))
   (f : (Cart[Real, N]) -> Cart[Real, N])((z1 : Cart[Real, N])) == (b : Cart[Real, N])
   (f : (Cart[Real, N]) -> Cart[Real, N])((z1 : Cart[Real, N]))
-  \226\136\128 fz1 : Cart[Real, N], (e : Real) <= real_of_num(2) / real_of_num(3) * (dr : Real) && norm((fz : Cart[Real, N]) - fz1) <= e && dist(((fx : Cart[Real, N]), fz1)) < dr / real_of_num(3) \226\134\146 norm(fz - fx) < dr
+  \226\136\128 fz1 : Cart[Real, N], (e : Real) <= real_of_num(2) / real_of_num(3) * (dr : Real) && norm((fz : Cart[Real, N]) - fz1) <= e && distance(((fx : Cart[Real, N]), fz1)) < dr / real_of_num(3) \226\134\146 norm(fz - fx) < dr
   :real
   :real
   (d : Real) * (r : Real) <= norm((f : (Cart[Real, N]) -> Cart[Real, N])((z : Cart[Real, N])) - (w : Cart[Real, N]))
@@ -64411,9 +64411,9 @@ Multivariate/derivatives quotations (1746):
   !((k : (Cart[Real, N]) -> Bool) == {})
   IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (c : (Cart[Real, N]) -> Bool))
   IMAGE((f : (Cart[Real, N]) -> Cart[Real, N]), (k : (Num, Cart[Real, N]) -> Bool)((q : (Num) -> Num)((n : Num))))
-  (\226\136\131 z : _, IN(z, (c : (_) -> Bool)) && dist(((x : Cart[Real, N]), (f : (_) -> Cart[Real, N])(z))) < (a : Real)) == (\226\136\131 z : Cart[Real, N], IN(z, IMAGE(f, c)) && dist((x, z)) < a)
-  (\226\136\131 z : _, IN(z, (c : (_) -> Bool)) && dist(((x : Cart[Real, N]), (f : (_) -> Cart[Real, N])(z))) < (a : Real)) \226\134\146 (\226\136\131 z : _, IN(z, c) && norm((b : Cart[Real, N]) + x) - norm(b + f(z)) <= a)
-  dist(((x : Cart[Real, N]), (y : Cart[Real, N]))) < (a : Real) \226\134\146 norm((b : Cart[Real, N]) + x) - norm(b + y) <= a
+  (\226\136\131 z : _, IN(z, (c : (_) -> Bool)) && distance(((x : Cart[Real, N]), (f : (_) -> Cart[Real, N])(z))) < (a : Real)) == (\226\136\131 z : Cart[Real, N], IN(z, IMAGE(f, c)) && distance((x, z)) < a)
+  (\226\136\131 z : _, IN(z, (c : (_) -> Bool)) && distance(((x : Cart[Real, N]), (f : (_) -> Cart[Real, N])(z))) < (a : Real)) \226\134\146 (\226\136\131 z : _, IN(z, c) && norm((b : Cart[Real, N]) + x) - norm(b + f(z)) <= a)
+  distance(((x : Cart[Real, N]), (y : Cart[Real, N]))) < (a : Real) \226\134\146 norm((b : Cart[Real, N]) + x) - norm(b + y) <= a
   :real
   :real
   ((x : Real) - (y : Real) <= (z : Real)) == (x - z <= y)
@@ -64434,7 +64434,7 @@ Multivariate/derivatives quotations (1746):
   (e : Real)
   (de : Real)
   real_of_num(0) < (de : Real)
-  eventually((n : Num) => inv(real_of_num(n) + real_of_num(1)) < (a : Real) / real_of_num(2) && dist((lift(hausdist(((k : (Num, Cart[Real, N]) -> Bool)((q : (Num) -> Num)(n)), (c : (Cart[Real, N]) -> Bool)))), vec(0))) < (de : Real), sequentially)
+  eventually((n : Num) => inv(real_of_num(n) + real_of_num(1)) < (a : Real) / real_of_num(2) && distance((lift(hausdist(((k : (Num, Cart[Real, N]) -> Bool)((q : (Num) -> Num)(n)), (c : (Cart[Real, N]) -> Bool)))), vec(0))) < (de : Real), sequentially)
   (de : Real)
   (a : Real) / real_of_num(2)
   uniformly_continuous_on((f : (Cart[Real, N]) -> Cart[Real, N]), cball(((x : Cart[Real, N]), (r : Real))))
@@ -64619,7 +64619,7 @@ Multivariate/derivatives quotations (1746):
   real_of_num(0) < norm((h : Cart[Real, N])) + real_of_num(1)
   :real
   real_of_num(0) < (x : Real) \226\134\146 abs(x) == x
-  dist(((a : Cart[Real, N]) - (x : Cart[Real, N]), a)) == norm(x)
+  distance(((a : Cart[Real, N]) - (x : Cart[Real, N]), a)) == norm(x)
   :real
   :real
   real_of_num(0) < norm((h : Cart[Real, N])) + real_of_num(1)
@@ -64750,12 +64750,12 @@ Multivariate/derivatives quotations (1746):
   ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
   real_of_num(2) * pow((t : Real), 3) - real_of_num(3) * pow(t, 2) + real_of_num(1) == pow(real_of_num(1) - t, 2) + real_of_num(2) * (t * pow(real_of_num(1) - t, 2))
   (y : Real) <= (x : Real) && real_of_num(0) <= y - x + real_of_num(1) \226\134\146 abs(x - y) <= real_of_num(1)
-  dist(((a : Cart[Real, N]), (b : Cart[Real, N]))) == real_of_num(1) * norm(b - a)
+  distance(((a : Cart[Real, N]), (b : Cart[Real, N]))) == real_of_num(1) * norm(b - a)
   :real
   :real
-  dist(((a : Cart[Real, N]), (b : Cart[Real, N])))
+  distance(((a : Cart[Real, N]), (b : Cart[Real, N])))
   real_of_num(0) < (r : Real) \226\134\146 ((x : Real) * abs(r) < r) == (x * r < real_of_num(1) * r)
-  norm((x : Cart[Real, N])) <= (r : Real) && norm((y : Cart[Real, N])) < r \226\134\146 dist(((a : Cart[Real, N]), a + x + y)) < real_of_num(2) * r && dist((a, a + x)) < real_of_num(2) * r
+  norm((x : Cart[Real, N])) <= (r : Real) && norm((y : Cart[Real, N])) < r \226\134\146 distance(((a : Cart[Real, N]), a + x + y)) < real_of_num(2) * r && distance((a, a + x)) < real_of_num(2) * r
   :real
   :real
   :real
@@ -64803,7 +64803,7 @@ Multivariate/derivatives quotations (1746):
   \226\136\131 d : Real, real_of_num(0) < d && SUBSET(ball(((a : Cart[Real, M]), d)), (s : (Cart[Real, M]) -> Bool)) && (\226\136\128 x : Cart[Real, M], IN(x, ball((a, d))) \226\134\146 onorm((v : Cart[Real, M]) => (f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])(x, v) - f'(a, v)) < (k : Real))
   (k : Real) == real_of_num(1) / onorm((g' : (Cart[Real, N]) -> Cart[Real, M])) / real_of_num(2)
   real_of_num(0) < onorm((g' : (Cart[Real, N]) -> Cart[Real, M]))
-  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 a : Cart[Real, M], IN(a, s) && open(s) && linear(g') && o(g', f'(a)) == I && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 has_derivative(f, f'(x), at(x))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, M], dist((a, x)) < d \226\134\146 onorm((v : Cart[Real, M]) => f'(x, v) - f'(a, v)) < e))) \226\134\146 (\226\136\131 t : (Cart[Real, M]) -> Bool, IN(a, t) && open(t) && (\226\136\128 x : Cart[Real, M], \226\136\128 x' : Cart[Real, M], IN(x, t) && IN(x', t) && f(x') == f(x) \226\134\146 x' == x))
+  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], \226\136\128 g' : (Cart[Real, N]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 a : Cart[Real, M], IN(a, s) && open(s) && linear(g') && o(g', f'(a)) == I && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 has_derivative(f, f'(x), at(x))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, M], distance((a, x)) < d \226\134\146 onorm((v : Cart[Real, M]) => f'(x, v) - f'(a, v)) < e))) \226\134\146 (\226\136\131 t : (Cart[Real, M]) -> Bool, IN(a, t) && open(t) && (\226\136\128 x : Cart[Real, M], \226\136\128 x' : Cart[Real, M], IN(x, t) && IN(x', t) && f(x') == f(x) \226\134\146 x' == x))
   (y : Cart[Real, N])
   (t : (Cart[Real, N]) -> Bool)
   op_minus_minus_gt((x : (_) -> Cart[Real, _]), (l : Cart[Real, _]), (net : Net[_])) \226\134\146 (m : Cart[Real, _]) == l && (op_minus_minus_gt(x, l, net) \226\134\146 op_minus_minus_gt((y : (_) -> Cart[Real, _]), l, net)) \226\134\146 op_minus_minus_gt(y, m, net)
@@ -65045,8 +65045,8 @@ Multivariate/derivatives quotations (1746):
   \226\136\128 h : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P], \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : Cart[Real, M], \226\136\128 g' : Cart[Real, N], \226\136\128 x : Cart[Real, Unit], \226\136\128 s : (Cart[Real, Unit]) -> Bool, has_vector_derivative(f, f', within(at(x), s)) && has_vector_derivative(g, g', within(at(x), s)) && bilinear(h) \226\134\146 has_vector_derivative((x : Cart[Real, Unit]) => h(f(x), g(x)), h(f(x), g') + h(f', g(x)), within(at(x), s))
   \226\136\128 h : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P], \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : Cart[Real, M], \226\136\128 g' : Cart[Real, N], \226\136\128 x : Cart[Real, Unit], has_vector_derivative(f, f', at(x)) && has_vector_derivative(g, g', at(x)) && bilinear(h) \226\134\146 has_vector_derivative((x : Cart[Real, Unit]) => h(f(x), g(x)), h(f(x), g') + h(f', g(x)), at(x))
   \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 x : Cart[Real, Unit], \226\136\128 s : (Cart[Real, Unit]) -> Bool, has_vector_derivative(f, (f' : Cart[Real, _]), at(x)) \226\134\146 has_vector_derivative(f, f', within(at(x), s))
-  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 x : Cart[Real, Unit], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, Unit], IN(x', s) && dist((x', x)) < d \226\134\146 f(x') == g(x')) && has_vector_derivative(f, f', within(at(x), s)) \226\134\146 has_vector_derivative(g, f', within(at(x), s))
-  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 x : Cart[Real, Unit], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, Unit], dist((x', x)) < d \226\134\146 f(x') == g(x')) && has_vector_derivative(f, f', at(x)) \226\134\146 has_vector_derivative(g, f', at(x))
+  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 x : Cart[Real, Unit], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, Unit], IN(x', s) && distance((x', x)) < d \226\134\146 f(x') == g(x')) && has_vector_derivative(f, f', within(at(x), s)) \226\134\146 has_vector_derivative(g, f', within(at(x), s))
+  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 x : Cart[Real, Unit], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, Unit], distance((x', x)) < d \226\134\146 f(x') == g(x')) && has_vector_derivative(f, f', at(x)) \226\134\146 has_vector_derivative(g, f', at(x))
   \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 x : Cart[Real, Unit], open(s) && IN(x, s) && (\226\136\128 y : Cart[Real, Unit], IN(y, s) \226\134\146 f(y) == g(y)) && has_vector_derivative(f, (f' : Cart[Real, _]), at(x)) \226\134\146 has_vector_derivative(g, f', at(x))
   \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, Unit], \226\136\128 g' : Cart[Real, _], \226\136\128 x : Cart[Real, Unit], has_vector_derivative(f, f', at(x)) && has_vector_derivative(g, g', at(f(x))) \226\134\146 has_vector_derivative(o(g, f), op_pct(drop(f'), g'), at(x))
   \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 f' : Cart[Real, Unit], \226\136\128 g' : Cart[Real, _], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 x : Cart[Real, Unit], has_vector_derivative(f, f', within(at(x), s)) && has_vector_derivative(g, g', within(at(f(x)), IMAGE(f, s))) \226\134\146 has_vector_derivative(o(g, f), op_pct(drop(f'), g'), within(at(x), s))
