@@ -6462,289 +6462,289 @@ test "Complex/cpoly matches Complex/cpoly.ml" {
       #|0..0..0..solved at 4
       #|0..0..0..solved at 3
       #|Complex/cpoly quotations (283):
-      #|  poly_diff:complex list->complex list
-      #|  poly_exp:complex list -> num -> complex list
-      #|  poly_divides:complex list->complex list->bool
-      #|  poly_neg:complex list->complex list
-      #|  poly_cmul:complex->complex list->complex list
-      #|  poly_mul:complex list->complex list->complex list
-      #|  poly_add:complex list->complex list->complex list
-      #|  (poly [] x = Cx(&0)) /\\\n   (poly (CONS h t) x = h + x * poly t x)
-      #|  ([] ++ l2 = l2) /\\\n   ((CONS h t) ++ l2 =\n        (if l2 = [] then CONS h t\n                    else CONS (h + HD l2) (t ++ TL l2)))
-      #|  (c ## [] = []) /\\\n   (c ## (CONS h t) = CONS (c * h) (c ## t))
-      #|  neg = (##) (--(Cx(&1)))
-      #|  ([] ** l2 = []) /\\\n   ((CONS h t) ** l2 =\n        if t = [] then h ## l2\n        else (h ## l2) ++ CONS (Cx(&0)) (t ** l2))
-      #|  (p exp 0 = [Cx(&1)]) /\\\n   (p exp (SUC n) = p ** p exp n)
-      #|  p1:complex list
-      #|  p1:complex list
-      #|  ([] ++ p2 = p2) /\\\n   (p1 ++ [] = p1) /\\\n   ((CONS h1 t1) ++ (CONS h2 t2) = CONS (h1 + h2) (t1 ++ t2))
-      #|  (c ## [] = []) /\\\n   (c ## (CONS h t) = CONS (c * h) (c ## t))
-      #|  (neg [] = []) /\\\n   (neg (CONS h t) = CONS (--h) (neg t))
-      #|  ([] ** p2 = []) /\\\n   ([h1] ** p2 = h1 ## p2) /\\\n   ((CONS h1 (CONS k1 t1)) ** p2 =\n        h1 ## p2 ++ CONS (Cx(&0)) (CONS k1 t1 ** p2))
-      #|  forall p1 p2 x. poly (p1 ++ p2) x = poly p1 x + poly p2 x
-      #|  forall p c x. poly (c ## p) x = c * poly p x
-      #|  forall p x. poly (neg p) x = --(poly p x)
-      #|  t:complex list
-      #|  t:complex list
-      #|  h:complex
-      #|  h:complex
-      #|  forall x p1 p2. poly (p1 ** p2) x = poly p1 x * poly p2 x
-      #|  forall p n x. poly (p exp n) x = (poly p x) pow n
-      #|  forall p. poly (p ++ []) = poly p
-      #|  forall p q r. poly (p ** (q ** r)) = poly ((p ** q) ** r)
-      #|  forall d n p. poly(p exp (n + d)) = poly(p exp n ** p exp d)
-      #|  q:complex list
-      #|  q:complex list
-      #|  r * a + k
-      #|  CONS (r:complex) q
-      #|  h:complex
-      #|  k:complex
-      #|  h:complex
-      #|  []:complex list
-      #|  forall t h. ?q r. CONS h t = [r] ++ [--a; Cx(&1)] ** q
-      #|  q:complex list
-      #|  q:complex list
-      #|  poly (CONS h t) a = Cx(&0)
-      #|  r = Cx(&0)
-      #|  q:complex list
-      #|  forall a p. (poly p a = Cx(&0)) <=> (p = []) \\/ ?q. p = [--a; Cx(&1)] ** q
-      #|  forall p h k a. LENGTH (k ## p ++ CONS h (a ## p)) = SUC(LENGTH p)
-      #|  forall q. LENGTH([--a; Cx(&1)] ** q) = SUC(LENGTH q)
-      #|  ~(?a. poly p a = Cx(&0))
-      #|  m:num <= n
-      #|  m:num
-      #|  m:num
-      #|  x:complex
-      #|  \\m. if m = SUC n then a:complex else i m
-      #|  i:num->complex
-      #|  q:complex list
-      #|  poly q = poly []
-      #|  ~(poly ([-- a; Cx(&1)] ** q) = poly [])
-      #|  q:complex list
-      #|  ?a. poly p a = Cx(&0)
-      #|  ?a. poly p a = Cx(&0)
-      #|  forall n. forall p. ~(poly p = poly []) /\\ (LENGTH p = n)\n           ==> ?i. forall x. (poly p x = Cx(&0)) ==> ?m. m <= n /\\ (x = i m)
-      #|  SUC n
-      #|  forall p. ~(poly p = poly [])\n       ==> ?i. forall x. (poly p(x) = Cx(&0)) ==> ?n. n <= LENGTH p /\\ (x = i n)
-      #|  forall p. ~(poly p = poly [])\n       ==> ?N i. forall x. (poly p(x) = Cx(&0)) ==> ?n:num. n < N /\\ (x = i n)
-      #|  y:complex
-      #|  (forall x. norm(x) < abs(a) + norm(x) + &1) /\\\n                (forall x y. norm(x) < a ==> norm(x) < abs(a) + norm(y) + &1)
-      #|  abs(a) + norm(i(N:num)) + &1
-      #|  a:real
-      #|  \\z. P z /\\ ~(z = (i:num->complex) N)
-      #|  P:complex->bool
-      #|  forall i N P. (forall x. P x ==> ?n:num. n < N /\\ (x = i n))\n           ==> ?a. forall x. P x ==> norm(x) < a
-      #|  ~(abs(x) < x)
-      #|  \\x. poly p x = Cx(&0)
-      #|  N:num
-      #|  i:num->complex
-      #|  N:num
-      #|  i:num->complex
-      #|  forall p. ~(poly p = poly []) <=>\n       ?N i. forall x. (poly p(x) = Cx(&0)) ==> ?n:num. n < N /\\ (x = i n)
-      #|  ~(m + n < m:num)
-      #|  N1 + n:num
-      #|  n:num
-      #|  n:num
-      #|  x:complex
-      #|  \\n:num. if n < N1 then i1(n):complex else i2(n - N1)
-      #|  N1 + N2:num
-      #|  i1:num->complex
-      #|  N1:num
-      #|  i2:num->complex
-      #|  N2:num
-      #|  forall p q. ~(poly p = poly []) /\\ ~(poly q = poly [])\n         ==> ~(poly (p ** q) = poly [])
-      #|  forall p q. (poly (p ** q) = poly []) <=>\n         (poly p = poly []) \\/ (poly q = poly [])
-      #|  (p + --q = Cx(&0)) <=> (p = q)
-      #|  forall p q. (poly (p ++ neg q) = poly []) <=> (poly p = poly q)
-      #|  forall p q r. poly (p ** q ++ neg(p ** r)) = poly (p ** (q ++ neg(r)))
-      #|  forall p q r. (poly (p ** q) = poly (p ** r)) <=>\n           (poly p = poly []) \\/ (poly q = poly r)
-      #|  n:num
-      #|  n:num
-      #|  forall p n. (poly (p exp n) = poly []) <=> (poly p = poly []) /\\ ~(n = 0)
-      #|  Cx(&1) - a
-      #|  forall a. ~(poly [a ; Cx(&1)] = poly [])
-      #|  forall a n. ~(poly ([a ; Cx(&1)] exp n) = poly [])
-      #|  forall x. (poly t x = Cx(&0)) ==> norm(x) < a
-      #|  Cx(abs(a) + &1)
-      #|  a:real
-      #|  \\x. poly t x = Cx(&0)
-      #|  N:num
-      #|  i:num->complex
-      #|  i:num->complex
-      #|  N:num
-      #|  Cx(&0)
-      #|  h = Cx(&0)
-      #|  forall h t. (poly (CONS h t) = poly []) ==> (h = Cx(&0)) /\\ (poly t = poly [])
-      #|  forall p. (poly p = poly []) <=> ALL (\\c. c = Cx(&0)) p
-      #|  p1 divides p2 <=> ?q. poly p2 = poly (p1 ** q)
-      #|  p ** s
-      #|  s ** q
-      #|  s:complex list
-      #|  s:complex list
-      #|  []:complex list
-      #|  s:complex list
-      #|  --a
-      #|  r:complex list
-      #|  forall a p q. [a; Cx(&1)] divides (p ** q) <=>\n           [a; Cx(&1)] divides p \\/ [a; Cx(&1)] divides q
-      #|  [Cx(&1)]
-      #|  forall p. p divides p
-      #|  t ** s
-      #|  t:complex list
-      #|  s:complex list
-      #|  forall p q r. p divides q /\\ q divides r ==> p divides r
-      #|  p:complex list
-      #|  p exp (m + d)
-      #|  d:num
-      #|  d:num
-      #|  d:num
-      #|  forall p m n. m <= n ==> (p exp m) divides (p exp n)
-      #|  forall p q m n. (p exp n) divides q /\\ m <= n ==> (p exp m) divides q
-      #|  t ++ s
-      #|  t:complex list
-      #|  s:complex list
-      #|  forall p q r. p divides q /\\ p divides r ==> p divides (q ++ r)
-      #|  s ++ neg(t)
-      #|  t:complex list
-      #|  s:complex list
-      #|  forall p q r. p divides q /\\ p divides (q ++ r) ==> p divides r
-      #|  x:complex
-      #|  x:complex
-      #|  s:complex list
-      #|  s:complex list
-      #|  p divides (q ++ r)
-      #|  r:complex list
-      #|  forall p q r. p divides r /\\ p divides (q ++ r) ==> p divides q
-      #|  []:complex list
-      #|  forall p q. (poly p = poly []) ==> q divides p
-      #|  a + Cx(&1)
-      #|  ~(poly s a = Cx(&0))
-      #|  n:num
-      #|  n:num
-      #|  r:complex list
-      #|  n:num
-      #|  n:num
-      #|  s:complex list
-      #|  n:num
-      #|  s:complex list
-      #|  n:num
-      #|  p:complex list
+      #|  (poly_diff : (List[Complex]) -> List[Complex])
+      #|  (poly_exp : (List[Complex], Num) -> List[Complex])
+      #|  (poly_divides : (List[Complex], List[Complex]) -> Bool)
+      #|  (poly_neg : (List[Complex]) -> List[Complex])
+      #|  (poly_cmul : (Complex, List[Complex]) -> List[Complex])
+      #|  (poly_mul : (List[Complex], List[Complex]) -> List[Complex])
+      #|  (poly_add : (List[Complex], List[Complex]) -> List[Complex])
+      #|  (poly : (List[Complex], Complex) -> Complex)(NIL, (x : Complex)) == Cx(real_of_num(0)) && poly(CONS((h : Complex), (t : List[Complex])), x) == h + x * poly(t, x)
+      #|  (poly_add : (List[Complex], List[Complex]) -> List[Complex])(NIL, (l2 : List[Complex])) == l2 && poly_add(CONS((h : Complex), (t : List[Complex])), l2) == (if l2 == NIL { CONS(h, t) } else { CONS(h + HD(l2), poly_add(t, TL(l2))) })
+      #|  (poly_cmul : (Complex, List[Complex]) -> List[Complex])((c : Complex), NIL) == NIL && poly_cmul(c, CONS((h : Complex), (t : List[Complex]))) == CONS(c * h, poly_cmul(c, t))
+      #|  (poly_neg : (List[Complex]) -> List[Complex]) == poly_cmul(-Cx(real_of_num(1)))
+      #|  (poly_mul : (List[Complex], List[Complex]) -> List[Complex])(NIL, (l2 : List[Complex])) == NIL && poly_mul(CONS((h : Complex), (t : List[Complex])), l2) == (if t == NIL { poly_cmul(h, l2) } else { poly_add(poly_cmul(h, l2), CONS(Cx(real_of_num(0)), poly_mul(t, l2))) })
+      #|  (poly_exp : (List[Complex], Num) -> List[Complex])((p : List[Complex]), 0) == [Cx(real_of_num(1))] && poly_exp(p, SUC((n : Num))) == poly_mul(p, poly_exp(p, n))
+      #|  (p1 : List[Complex])
+      #|  (p1 : List[Complex])
+      #|  poly_add(NIL, (p2 : List[Complex])) == p2 && poly_add((p1 : List[Complex]), NIL) == p1 && poly_add(CONS((h1 : Complex), (t1 : List[Complex])), CONS((h2 : Complex), (t2 : List[Complex]))) == CONS(h1 + h2, poly_add(t1, t2))
+      #|  poly_cmul((c : Complex), NIL) == NIL && poly_cmul(c, CONS((h : Complex), (t : List[Complex]))) == CONS(c * h, poly_cmul(c, t))
+      #|  neg(NIL) == NIL && neg(CONS((h : Complex), (t : List[Complex]))) == CONS(-h, neg(t))
+      #|  poly_mul(NIL, (p2 : List[Complex])) == NIL && poly_mul([(h1 : Complex)], p2) == poly_cmul(h1, p2) && poly_mul(CONS(h1, CONS((k1 : Complex), (t1 : List[Complex]))), p2) == poly_add(poly_cmul(h1, p2), CONS(Cx(real_of_num(0)), poly_mul(CONS(k1, t1), p2)))
+      #|  \226\136\128 p1 : List[Complex], \226\136\128 p2 : List[Complex], \226\136\128 x : Complex, poly(poly_add(p1, p2), x) == poly(p1, x) + poly(p2, x)
+      #|  \226\136\128 p : List[Complex], \226\136\128 c : Complex, \226\136\128 x : Complex, poly(poly_cmul(c, p), x) == c * poly(p, x)
+      #|  \226\136\128 p : List[Complex], \226\136\128 x : Complex, poly(neg(p), x) == -poly(p, x)
+      #|  (t : List[Complex])
+      #|  (t : List[Complex])
+      #|  (h : Complex)
+      #|  (h : Complex)
+      #|  \226\136\128 x : Complex, \226\136\128 p1 : List[Complex], \226\136\128 p2 : List[Complex], poly(poly_mul(p1, p2), x) == poly(p1, x) * poly(p2, x)
+      #|  \226\136\128 p : List[Complex], \226\136\128 n : Num, \226\136\128 x : Complex, poly(exp(p, n), x) == pow(poly(p, x), n)
+      #|  \226\136\128 p : List[Complex], poly(poly_add(p, NIL)) == poly(p)
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], \226\136\128 r : List[Complex], poly(poly_mul(p, poly_mul(q, r))) == poly(poly_mul(poly_mul(p, q), r))
+      #|  \226\136\128 d : Num, \226\136\128 n : Num, \226\136\128 p : List[Complex], poly(exp(p, n + d)) == poly(poly_mul(exp(p, n), exp(p, d)))
+      #|  (q : List[Complex])
+      #|  (q : List[Complex])
+      #|  (r : Complex) * (a : Complex) + (k : Complex)
+      #|  CONS((r : Complex), (q : List[Complex]))
+      #|  (h : Complex)
+      #|  (k : Complex)
+      #|  (h : Complex)
+      #|  (NIL : List[Complex])
+      #|  \226\136\128 t : List[Complex], \226\136\128 h : Complex, \226\136\131 q : List[Complex], \226\136\131 r : Complex, CONS(h, t) == poly_add([r], poly_mul([-(a : Complex), Cx(real_of_num(1))], q))
+      #|  (q : List[Complex])
+      #|  (q : List[Complex])
+      #|  poly(CONS((h : Complex), (t : List[Complex])), (a : Complex)) == Cx(real_of_num(0))
+      #|  (r : Complex) == Cx(real_of_num(0))
+      #|  (q : List[Complex])
+      #|  \226\136\128 a : Complex, \226\136\128 p : List[Complex], (poly(p, a) == Cx(real_of_num(0))) == (p == NIL || (\226\136\131 q : List[Complex], p == poly_mul([-a, Cx(real_of_num(1))], q)))
+      #|  \226\136\128 p : List[Complex], \226\136\128 h : Complex, \226\136\128 k : Complex, \226\136\128 a : Complex, LENGTH(poly_add(poly_cmul(k, p), CONS(h, poly_cmul(a, p)))) == SUC(LENGTH(p))
+      #|  \226\136\128 q : List[Complex], LENGTH(poly_mul([-(a : Complex), Cx(real_of_num(1))], q)) == SUC(LENGTH(q))
+      #|  !(\226\136\131 a : Complex, poly((p : List[Complex]), a) == Cx(real_of_num(0)))
+      #|  (m : Num) <= (n : Num)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (x : Complex)
+      #|  (m : Num) => if m == SUC((n : Num)) { (a : Complex) } else { (i : (Num) -> Complex)(m) }
+      #|  (i : (Num) -> Complex)
+      #|  (q : List[Complex])
+      #|  poly((q : List[Complex])) == poly(NIL)
+      #|  !(poly(poly_mul([-(a : Complex), Cx(real_of_num(1))], (q : List[Complex]))) == poly(NIL))
+      #|  (q : List[Complex])
+      #|  \226\136\131 a : Complex, poly((p : List[Complex]), a) == Cx(real_of_num(0))
+      #|  \226\136\131 a : Complex, poly((p : List[Complex]), a) == Cx(real_of_num(0))
+      #|  \226\136\128 n : Num, \226\136\128 p : List[Complex], !(poly(p) == poly(NIL)) && LENGTH(p) == n \226\134\146 (\226\136\131 i : (Num) -> Complex, \226\136\128 x : Complex, poly(p, x) == Cx(real_of_num(0)) \226\134\146 (\226\136\131 m : Num, m <= n && x == i(m)))
+      #|  SUC((n : Num))
+      #|  \226\136\128 p : List[Complex], !(poly(p) == poly(NIL)) \226\134\146 (\226\136\131 i : (Num) -> Complex, \226\136\128 x : Complex, poly(p, x) == Cx(real_of_num(0)) \226\134\146 (\226\136\131 n : Num, n <= LENGTH(p) && x == i(n)))
+      #|  \226\136\128 p : List[Complex], !(poly(p) == poly(NIL)) \226\134\146 (\226\136\131 N : Num, \226\136\131 i : (Num) -> Complex, \226\136\128 x : Complex, poly(p, x) == Cx(real_of_num(0)) \226\134\146 (\226\136\131 n : Num, n < N && x == i(n)))
+      #|  (y : Complex)
+      #|  (\226\136\128 x : Complex, norm(x) < abs((a : Real)) + (norm(x) + real_of_num(1))) && (\226\136\128 x : Complex, \226\136\128 y : Complex, norm(x) < a \226\134\146 norm(x) < abs(a) + (norm(y) + real_of_num(1)))
+      #|  abs((a : Real)) + (norm((i : (Num) -> Complex)((N : Num))) + real_of_num(1))
+      #|  (a : Real)
+      #|  (z : Complex) => (P : (Complex) -> Bool)(z) && !(z == (i : (Num) -> Complex)((N : Num)))
+      #|  (P : (Complex) -> Bool)
+      #|  \226\136\128 i : (Num) -> Complex, \226\136\128 N : Num, \226\136\128 P : (Complex) -> Bool, (\226\136\128 x : Complex, P(x) \226\134\146 (\226\136\131 n : Num, n < N && x == i(n))) \226\134\146 (\226\136\131 a : Real, \226\136\128 x : Complex, P(x) \226\134\146 norm(x) < a)
+      #|  !(abs((x : Real)) < x)
+      #|  (x : Complex) => poly((p : List[Complex]), x) == Cx(real_of_num(0))
+      #|  (N : Num)
+      #|  (i : (Num) -> Complex)
+      #|  (N : Num)
+      #|  (i : (Num) -> Complex)
+      #|  \226\136\128 p : List[Complex], !(poly(p) == poly(NIL)) == (\226\136\131 N : Num, \226\136\131 i : (Num) -> Complex, \226\136\128 x : Complex, poly(p, x) == Cx(real_of_num(0)) \226\134\146 (\226\136\131 n : Num, n < N && x == i(n)))
+      #|  !((m : Num) + (n : Num) < m)
+      #|  (N1 : Num) + (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (x : Complex)
+      #|  (n : Num) => if n < (N1 : Num) { (i1 : (Num) -> Complex)(n) } else { (i2 : (Num) -> Complex)(n - N1) }
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (i1 : (Num) -> Complex)
+      #|  (N1 : Num)
+      #|  (i2 : (Num) -> Complex)
+      #|  (N2 : Num)
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], !(poly(p) == poly(NIL)) && !(poly(q) == poly(NIL)) \226\134\146 !(poly(poly_mul(p, q)) == poly(NIL))
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], (poly(poly_mul(p, q)) == poly(NIL)) == (poly(p) == poly(NIL) || poly(q) == poly(NIL))
+      #|  ((p : Complex) + -(q : Complex) == Cx(real_of_num(0))) == (p == q)
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], (poly(poly_add(p, neg(q))) == poly(NIL)) == (poly(p) == poly(q))
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], \226\136\128 r : List[Complex], poly(poly_add(poly_mul(p, q), neg(poly_mul(p, r)))) == poly(poly_mul(p, poly_add(q, neg(r))))
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], \226\136\128 r : List[Complex], (poly(poly_mul(p, q)) == poly(poly_mul(p, r))) == (poly(p) == poly(NIL) || poly(q) == poly(r))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 p : List[Complex], \226\136\128 n : Num, (poly(exp(p, n)) == poly(NIL)) == (poly(p) == poly(NIL) && !(n == 0))
+      #|  Cx(real_of_num(1)) - (a : Complex)
+      #|  \226\136\128 a : Complex, !(poly([a, Cx(real_of_num(1))]) == poly(NIL))
+      #|  \226\136\128 a : Complex, \226\136\128 n : Num, !(poly(exp([a, Cx(real_of_num(1))], n)) == poly(NIL))
+      #|  \226\136\128 x : Complex, poly((t : List[Complex]), x) == Cx(real_of_num(0)) \226\134\146 norm(x) < (a : Real)
+      #|  Cx(abs((a : Real)) + real_of_num(1))
+      #|  (a : Real)
+      #|  (x : Complex) => poly((t : List[Complex]), x) == Cx(real_of_num(0))
+      #|  (N : Num)
+      #|  (i : (Num) -> Complex)
+      #|  (i : (Num) -> Complex)
+      #|  (N : Num)
+      #|  Cx(real_of_num(0))
+      #|  (h : Complex) == Cx(real_of_num(0))
+      #|  \226\136\128 h : Complex, \226\136\128 t : List[Complex], poly(CONS(h, t)) == poly(NIL) \226\134\146 h == Cx(real_of_num(0)) && poly(t) == poly(NIL)
+      #|  \226\136\128 p : List[Complex], (poly(p) == poly(NIL)) == ALL((c : Complex) => c == Cx(real_of_num(0)), p)
+      #|  (poly_divides : (List[Complex], List[Complex]) -> Bool)((p1 : List[Complex]), (p2 : List[Complex])) == (\226\136\131 q : List[Complex], poly(p2) == poly(poly_mul(p1, q)))
+      #|  poly_mul((p : List[Complex]), (s : List[Complex]))
+      #|  poly_mul((s : List[Complex]), (q : List[Complex]))
+      #|  (s : List[Complex])
+      #|  (s : List[Complex])
+      #|  (NIL : List[Complex])
+      #|  (s : List[Complex])
+      #|  -(a : Complex)
+      #|  (r : List[Complex])
+      #|  \226\136\128 a : Complex, \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], divides([a, Cx(real_of_num(1))], poly_mul(p, q)) == (divides([a, Cx(real_of_num(1))], p) || divides([a, Cx(real_of_num(1))], q))
+      #|  [Cx(real_of_num(1))]
+      #|  \226\136\128 p : List[Complex], divides(p, p)
+      #|  poly_mul((t : List[Complex]), (s : List[Complex]))
+      #|  (t : List[Complex])
+      #|  (s : List[Complex])
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], \226\136\128 r : List[Complex], divides(p, q) && divides(q, r) \226\134\146 divides(p, r)
+      #|  (p : List[Complex])
+      #|  exp((p : List[Complex]), (m : Num) + (d : Num))
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  \226\136\128 p : List[Complex], \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 divides(exp(p, m), exp(p, n))
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], \226\136\128 m : Num, \226\136\128 n : Num, divides(exp(p, n), q) && m <= n \226\134\146 divides(exp(p, m), q)
+      #|  poly_add((t : List[Complex]), (s : List[Complex]))
+      #|  (t : List[Complex])
+      #|  (s : List[Complex])
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], \226\136\128 r : List[Complex], divides(p, q) && divides(p, r) \226\134\146 divides(p, poly_add(q, r))
+      #|  poly_add((s : List[Complex]), neg((t : List[Complex])))
+      #|  (t : List[Complex])
+      #|  (s : List[Complex])
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], \226\136\128 r : List[Complex], divides(p, q) && divides(p, poly_add(q, r)) \226\134\146 divides(p, r)
+      #|  (x : Complex)
+      #|  (x : Complex)
+      #|  (s : List[Complex])
+      #|  (s : List[Complex])
+      #|  divides((p : List[Complex]), poly_add((q : List[Complex]), (r : List[Complex])))
+      #|  (r : List[Complex])
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], \226\136\128 r : List[Complex], divides(p, r) && divides(p, poly_add(q, r)) \226\134\146 divides(p, q)
+      #|  (NIL : List[Complex])
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], poly(p) == poly(NIL) \226\134\146 divides(q, p)
+      #|  (a : Complex) + Cx(real_of_num(1))
+      #|  !(poly((s : List[Complex]), (a : Complex)) == Cx(real_of_num(0)))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (r : List[Complex])
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (s : List[Complex])
+      #|  (n : Num)
+      #|  (s : List[Complex])
+      #|  (n : Num)
+      #|  (p : List[Complex])
       #|  0
-      #|  s:complex list
-      #|  SUC n
-      #|  s:complex list
-      #|  n:num
-      #|  q:complex list
-      #|  forall p. (LENGTH p = d) /\\ ~(poly p = poly [])\n            ==> ?n q. (p = mulexp (n:num) [--a; Cx(&1)] q) /\\\n                      ~(poly q a = Cx(&0))
-      #|  q:complex list
-      #|  poly p a = Cx(&0)
-      #|  poly p a = Cx(&0)
-      #|  p:complex list
-      #|  forall d. forall p. (LENGTH p = d) /\\ ~(poly p = poly [])\n           ==> ?n q. (p = mulexp (n:num) [--a; Cx(&1)] q) /\\\n                     ~(poly q a = Cx(&0))
-      #|  (forall p q. mulexp 0 p q = q) /\\\n     (forall p q n. mulexp (SUC n) p q = p ** (mulexp n p q))
-      #|  forall a d. forall p. (LENGTH p = d) /\\ ~(poly p = poly [])\n             ==> ?n. ([--a; Cx(&1)] exp n) divides p /\\\n                     ~(([--a; Cx(&1)] exp (SUC n)) divides p)
-      #|  forall p a. ~(poly p = poly [])\n         ==> ?!n. ([--a; Cx(&1)] exp n) divides p /\\\n                      ~(([--a; Cx(&1)] exp (SUC n)) divides p)
-      #|  order a p = @n. ([--a; Cx(&1)] exp n) divides p /\\\n                   ~(([--a; Cx(&1)] exp (SUC n)) divides p)
-      #|  []:complex list
-      #|  ~(poly p = poly [])
-      #|  forall p a n. ([--a; Cx(&1)] exp n) divides p /\\\n           ~(([--a; Cx(&1)] exp (SUC n)) divides p) <=>\n           (n = order a p) /\\\n           ~(poly p = poly [])
-      #|  forall p a. ~(poly p = poly [])\n         ==> ([--a; Cx(&1)] exp (order a p)) divides p /\\\n             ~(([--a; Cx(&1)] exp (SUC(order a p))) divides p)
-      #|  forall p a n. ~(poly p = poly []) /\\\n           ([--a; Cx(&1)] exp n) divides p /\\\n           ~(([--a; Cx(&1)] exp (SUC n)) divides p)\n           ==> (n = order a p)
-      #|  forall p q a. (poly p = poly q) ==> (order a p = order a q)
-      #|  s:complex list
-      #|  n:num
-      #|  order a p
-      #|  ~(order a p = 0)
-      #|  a:complex
-      #|  q:complex list
-      #|  a:complex
-      #|  q:complex list
-      #|  p:complex list = []
-      #|  poly p = poly []
-      #|  forall p a. (poly p a = Cx(&0)) <=> (poly p = poly []) \\/ ~(order a p = 0)
-      #|  []:complex list
-      #|  poly p = poly []
-      #|  forall p a n. ([--a; Cx(&1)] exp n) divides p <=>\n           (poly p = poly []) \\/ n <= order a p
-      #|  r:complex list
-      #|  ~([-- a; Cx(&1)] exp SUC (order a p) divides p)
-      #|  r: complex list
-      #|  q:complex list
-      #|  q:complex list
-      #|  a:complex
-      #|  forall p a. ~(poly p = poly [])\n         ==> ?q. (poly p = poly (([--a; Cx(&1)] exp (order a p)) ** q)) /\\\n                 ~([--a; Cx(&1)] divides q)
-      #|  poly ([-- a; Cx(&1)] exp (order a q) **\n                        [-- a; Cx(&1)] exp (order a p) ** r ** s) =\n                  poly ([-- a; Cx(&1)] exp (order a q) **\n                        [-- a; Cx(&1)] exp (order a p) **\n                        [-- a; Cx(&1)] ** t)
-      #|  poly ([-- a; Cx(&1)] exp (order a p) ** r ** s) =\n                  poly ([-- a; Cx(&1)] exp (order a p) **\n                       ([-- a; Cx(&1)] ** t))
-      #|  t:complex list
-      #|  [--a; Cx(&1)] divides (r ** s)
-      #|  t:complex list
-      #|  ~(poly q = poly [])
-      #|  a:complex
-      #|  s: complex list
-      #|  ~(poly p = poly [])
-      #|  a:complex
-      #|  r: complex list
-      #|  s ** r
-      #|  s: complex list
-      #|  ~(poly q = poly [])
-      #|  a:complex
-      #|  r: complex list
-      #|  ~(poly p = poly [])
-      #|  a:complex
-      #|  (order a p + order a q = order a (p ** q)) /\\\n                ~(poly (p ** q) = poly [])
-      #|  forall a p q. ~(poly (p ** q) = poly []) ==>\n           (order a (p ** q) = order a p + order a q)
-      #|  (normalize [] = []) /\\\n   (normalize (CONS h t) =\n        if normalize t = [] then if h = Cx(&0) then [] else [h]\n        else CONS h (normalize t))
-      #|  poly (normalize t) = poly t
-      #|  h = Cx(&0)
-      #|  forall p. poly (normalize p) = poly p
-      #|  forall p. LENGTH(normalize p) <= LENGTH p
-      #|  degree p = PRE(LENGTH(normalize p))
-      #|  normalize t = []
-      #|  p:complex list
-      #|  p:complex list
-      #|  normalize p = []
-      #|  forall p. (poly p = poly []) ==> (degree p = 0)
-      #|  poly (CONS h1 t1 ++ neg(CONS h2 t2)) = poly []
-      #|  (a = b) <=> (a + --b = Cx(&0))
-      #|  (poly (CONS h1 t1) = poly (CONS h2 t2)) <=>\n   (h1 = h2) /\\ (poly t1 = poly t2)
-      #|  normalize t = []
-      #|  forall p. (poly p = poly []) <=> (normalize p = [])
-      #|  t':complex list
-      #|  forall p q. (poly p = poly q) ==> (normalize p = normalize q)
-      #|  forall p q. (poly p = poly q) <=> (normalize p = normalize q)
-      #|  forall p q. (poly p = poly q) ==> (degree p = degree q)
-      #|  forall p. ~(LAST p = Cx(&0)) ==> (normalize p = p)
-      #|  forall p. ~(LAST p = Cx(&0)) ==> (degree p = LENGTH p - 1)
-      #|  t:complex list
-      #|  t:complex list
-      #|  ~(a ## t ++ CONS (b * h) (b ## t) = [])
-      #|  forall p a b x.\n     LAST(a ## p ++ CONS x (b ## p)) = if p = [] then x else b * LAST(p)
-      #|  forall p. ~(p = []) ==> (LAST([a; Cx(&1)] ** p) = LAST p)
-      #|  normalize t = []
-      #|  forall p. ~(normalize p = []) ==> ~(LAST(normalize p) = Cx(&0))
-      #|  p:complex list
-      #|  normalize p
-      #|  ~(normalize p = [])
-      #|  a:complex
-      #|  degree([a; Cx(&1)] ** normalize p) = degree(normalize p) + 1
-      #|  forall p a. ~(poly p = poly []) ==> (degree([a; Cx(&1)] ** p) = degree(p) + 1)
-      #|  ~(poly [a; Cx (&1)] = poly [])
-      #|  poly p = poly []
-      #|  degree([a; Cx (&1)] exp n ** ([a; Cx (&1)] ** p))
-      #|  degree []
-      #|  degree(p)
-      #|  forall n a p. degree([a; Cx(&1)] exp n ** p) =\n                if poly p = poly [] then 0 else degree p + n
-      #|  ~(poly p = poly [])
-      #|  q:complex list
-      #|  a:complex
-      #|  forall a p. ~(poly p = poly []) ==> order a p <= degree p
-      #|  {x:complex | ?n. n < SUC N /\\ (x = i n)} =\n                    (i N) INSERT {x:complex | ?n. n < N /\\ (x = i n)}
-      #|  {x:complex | ?n. n < 0 /\\ (x = i n)} = {}
-      #|  N:num
-      #|  N:num
-      #|  {x:complex | ?n:num. n < N /\\ (x = i n)}
-      #|  i:num->complex
-      #|  N:num
-      #|  forall p. ~(poly p = poly []) ==> FINITE { x | poly p x = Cx(&0)}
-      #|  normalize (CONS h t) =\n      (\\n. if n = [] then if h = Cx(&0) then [] else [h] else CONS h n)\n      (normalize t)
+      #|  (s : List[Complex])
+      #|  SUC((n : Num))
+      #|  (s : List[Complex])
+      #|  (n : Num)
+      #|  (q : List[Complex])
+      #|  \226\136\128 p : List[Complex], LENGTH(p) == (d : Num) && !(poly(p) == poly(NIL)) \226\134\146 (\226\136\131 n : Num, \226\136\131 q : List[Complex], p == (mulexp : (Num, List[Complex], List[Complex]) -> List[Complex])(n, [-(a : Complex), Cx(real_of_num(1))], q) && !(poly(q, a) == Cx(real_of_num(0))))
+      #|  (q : List[Complex])
+      #|  poly((p : List[Complex]), (a : Complex)) == Cx(real_of_num(0))
+      #|  poly((p : List[Complex]), (a : Complex)) == Cx(real_of_num(0))
+      #|  (p : List[Complex])
+      #|  \226\136\128 d : Num, \226\136\128 p : List[Complex], LENGTH(p) == d && !(poly(p) == poly(NIL)) \226\134\146 (\226\136\131 n : Num, \226\136\131 q : List[Complex], p == (mulexp : (Num, List[Complex], List[Complex]) -> List[Complex])(n, [-(a : Complex), Cx(real_of_num(1))], q) && !(poly(q, a) == Cx(real_of_num(0))))
+      #|  (\226\136\128 p : List[Complex], \226\136\128 q : List[Complex], (mulexp : (Num, List[Complex], List[Complex]) -> List[Complex])(0, p, q) == q) && (\226\136\128 p : List[Complex], \226\136\128 q : List[Complex], \226\136\128 n : Num, mulexp(SUC(n), p, q) == poly_mul(p, mulexp(n, p, q)))
+      #|  \226\136\128 a : Complex, \226\136\128 d : Num, \226\136\128 p : List[Complex], LENGTH(p) == d && !(poly(p) == poly(NIL)) \226\134\146 (\226\136\131 n : Num, divides(exp([-a, Cx(real_of_num(1))], n), p) && !divides(exp([-a, Cx(real_of_num(1))], SUC(n)), p))
+      #|  \226\136\128 p : List[Complex], \226\136\128 a : Complex, !(poly(p) == poly(NIL)) \226\134\146 existsunique((n : Num) => divides(exp([-a, Cx(real_of_num(1))], n), p) && !divides(exp([-a, Cx(real_of_num(1))], SUC(n)), p))
+      #|  (order : (Complex, List[Complex]) -> Num)((a : Complex), (p : List[Complex])) == select((n : Num) => divides(exp([-a, Cx(real_of_num(1))], n), p) && !divides(exp([-a, Cx(real_of_num(1))], SUC(n)), p))
+      #|  (NIL : List[Complex])
+      #|  !(poly((p : List[Complex])) == poly(NIL))
+      #|  \226\136\128 p : List[Complex], \226\136\128 a : Complex, \226\136\128 n : Num, (divides(exp([-a, Cx(real_of_num(1))], n), p) && !divides(exp([-a, Cx(real_of_num(1))], SUC(n)), p)) == (n == order(a, p) && !(poly(p) == poly(NIL)))
+      #|  \226\136\128 p : List[Complex], \226\136\128 a : Complex, !(poly(p) == poly(NIL)) \226\134\146 divides(exp([-a, Cx(real_of_num(1))], order(a, p)), p) && !divides(exp([-a, Cx(real_of_num(1))], SUC(order(a, p))), p)
+      #|  \226\136\128 p : List[Complex], \226\136\128 a : Complex, \226\136\128 n : Num, !(poly(p) == poly(NIL)) && divides(exp([-a, Cx(real_of_num(1))], n), p) && !divides(exp([-a, Cx(real_of_num(1))], SUC(n)), p) \226\134\146 n == order(a, p)
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], \226\136\128 a : Complex, poly(p) == poly(q) \226\134\146 order(a, p) == order(a, q)
+      #|  (s : List[Complex])
+      #|  (n : Num)
+      #|  order((a : Complex), (p : List[Complex]))
+      #|  !(order((a : Complex), (p : List[Complex])) == 0)
+      #|  (a : Complex)
+      #|  (q : List[Complex])
+      #|  (a : Complex)
+      #|  (q : List[Complex])
+      #|  (p : List[Complex]) == NIL
+      #|  poly((p : List[Complex])) == poly(NIL)
+      #|  \226\136\128 p : List[Complex], \226\136\128 a : Complex, (poly(p, a) == Cx(real_of_num(0))) == (poly(p) == poly(NIL) || !(order(a, p) == 0))
+      #|  (NIL : List[Complex])
+      #|  poly((p : List[Complex])) == poly(NIL)
+      #|  \226\136\128 p : List[Complex], \226\136\128 a : Complex, \226\136\128 n : Num, divides(exp([-a, Cx(real_of_num(1))], n), p) == (poly(p) == poly(NIL) || n <= order(a, p))
+      #|  (r : List[Complex])
+      #|  !divides(exp([-(a : Complex), Cx(real_of_num(1))], SUC(order(a, (p : List[Complex])))), p)
+      #|  (r : List[Complex])
+      #|  (q : List[Complex])
+      #|  (q : List[Complex])
+      #|  (a : Complex)
+      #|  \226\136\128 p : List[Complex], \226\136\128 a : Complex, !(poly(p) == poly(NIL)) \226\134\146 (\226\136\131 q : List[Complex], poly(p) == poly(poly_mul(exp([-a, Cx(real_of_num(1))], order(a, p)), q)) && !divides([-a, Cx(real_of_num(1))], q))
+      #|  poly(poly_mul(exp([-(a : Complex), Cx(real_of_num(1))], order(a, (q : List[Complex]))), poly_mul(exp([-a, Cx(real_of_num(1))], order(a, (p : List[Complex]))), poly_mul((r : List[Complex]), (s : List[Complex]))))) == poly(poly_mul(exp([-a, Cx(real_of_num(1))], order(a, q)), poly_mul(exp([-a, Cx(real_of_num(1))], order(a, p)), poly_mul([-a, Cx(real_of_num(1))], (t : List[Complex])))))
+      #|  poly(poly_mul(exp([-(a : Complex), Cx(real_of_num(1))], order(a, (p : List[Complex]))), poly_mul((r : List[Complex]), (s : List[Complex])))) == poly(poly_mul(exp([-a, Cx(real_of_num(1))], order(a, p)), poly_mul([-a, Cx(real_of_num(1))], (t : List[Complex]))))
+      #|  (t : List[Complex])
+      #|  divides([-(a : Complex), Cx(real_of_num(1))], poly_mul((r : List[Complex]), (s : List[Complex])))
+      #|  (t : List[Complex])
+      #|  !(poly((q : List[Complex])) == poly(NIL))
+      #|  (a : Complex)
+      #|  (s : List[Complex])
+      #|  !(poly((p : List[Complex])) == poly(NIL))
+      #|  (a : Complex)
+      #|  (r : List[Complex])
+      #|  poly_mul((s : List[Complex]), (r : List[Complex]))
+      #|  (s : List[Complex])
+      #|  !(poly((q : List[Complex])) == poly(NIL))
+      #|  (a : Complex)
+      #|  (r : List[Complex])
+      #|  !(poly((p : List[Complex])) == poly(NIL))
+      #|  (a : Complex)
+      #|  order((a : Complex), (p : List[Complex])) + order(a, (q : List[Complex])) == order(a, poly_mul(p, q)) && !(poly(poly_mul(p, q)) == poly(NIL))
+      #|  \226\136\128 a : Complex, \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], !(poly(poly_mul(p, q)) == poly(NIL)) \226\134\146 order(a, poly_mul(p, q)) == order(a, p) + order(a, q)
+      #|  (normalize : (List[Complex]) -> List[Complex])(NIL) == NIL && normalize(CONS((h : Complex), (t : List[Complex]))) == (if normalize(t) == NIL { if h == Cx(real_of_num(0)) { NIL } else { [h] } } else { CONS(h, normalize(t)) })
+      #|  poly(normalize((t : List[Complex]))) == poly(t)
+      #|  (h : Complex) == Cx(real_of_num(0))
+      #|  \226\136\128 p : List[Complex], poly(normalize(p)) == poly(p)
+      #|  \226\136\128 p : List[Complex], LENGTH(normalize(p)) <= LENGTH(p)
+      #|  (degree : (List[Complex]) -> Num)((p : List[Complex])) == PRE(LENGTH(normalize(p)))
+      #|  normalize((t : List[Complex])) == NIL
+      #|  (p : List[Complex])
+      #|  (p : List[Complex])
+      #|  normalize((p : List[Complex])) == NIL
+      #|  \226\136\128 p : List[Complex], poly(p) == poly(NIL) \226\134\146 degree(p) == 0
+      #|  poly(poly_add(CONS((h1 : Complex), (t1 : List[Complex])), neg(CONS((h2 : Complex), (t2 : List[Complex]))))) == poly(NIL)
+      #|  ((a : Complex) == (b : Complex)) == (a + -b == Cx(real_of_num(0)))
+      #|  (poly(CONS((h1 : Complex), (t1 : List[Complex]))) == poly(CONS((h2 : Complex), (t2 : List[Complex])))) == (h1 == h2 && poly(t1) == poly(t2))
+      #|  normalize((t : List[Complex])) == NIL
+      #|  \226\136\128 p : List[Complex], (poly(p) == poly(NIL)) == (normalize(p) == NIL)
+      #|  (t' : List[Complex])
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], poly(p) == poly(q) \226\134\146 normalize(p) == normalize(q)
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], (poly(p) == poly(q)) == (normalize(p) == normalize(q))
+      #|  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], poly(p) == poly(q) \226\134\146 degree(p) == degree(q)
+      #|  \226\136\128 p : List[Complex], !(LAST(p) == Cx(real_of_num(0))) \226\134\146 normalize(p) == p
+      #|  \226\136\128 p : List[Complex], !(LAST(p) == Cx(real_of_num(0))) \226\134\146 degree(p) == LENGTH(p) - 1
+      #|  (t : List[Complex])
+      #|  (t : List[Complex])
+      #|  !(poly_add(poly_cmul((a : Complex), (t : List[Complex])), CONS((b : Complex) * (h : Complex), poly_cmul(b, t))) == NIL)
+      #|  \226\136\128 p : List[Complex], \226\136\128 a : Complex, \226\136\128 b : Complex, \226\136\128 x : Complex, LAST(poly_add(poly_cmul(a, p), CONS(x, poly_cmul(b, p)))) == (if p == NIL { x } else { b * LAST(p) })
+      #|  \226\136\128 p : List[Complex], !(p == NIL) \226\134\146 LAST(poly_mul([(a : Complex), Cx(real_of_num(1))], p)) == LAST(p)
+      #|  normalize((t : List[Complex])) == NIL
+      #|  \226\136\128 p : List[Complex], !(normalize(p) == NIL) \226\134\146 !(LAST(normalize(p)) == Cx(real_of_num(0)))
+      #|  (p : List[Complex])
+      #|  normalize((p : List[Complex]))
+      #|  !(normalize((p : List[Complex])) == NIL)
+      #|  (a : Complex)
+      #|  degree(poly_mul([(a : Complex), Cx(real_of_num(1))], normalize((p : List[Complex])))) == degree(normalize(p)) + 1
+      #|  \226\136\128 p : List[Complex], \226\136\128 a : Complex, !(poly(p) == poly(NIL)) \226\134\146 degree(poly_mul([a, Cx(real_of_num(1))], p)) == degree(p) + 1
+      #|  !(poly([(a : Complex), Cx(real_of_num(1))]) == poly(NIL))
+      #|  poly((p : List[Complex])) == poly(NIL)
+      #|  degree(poly_mul(exp([(a : Complex), Cx(real_of_num(1))], (n : Num)), poly_mul([a, Cx(real_of_num(1))], (p : List[Complex]))))
+      #|  degree(NIL)
+      #|  degree((p : List[Complex]))
+      #|  \226\136\128 n : Num, \226\136\128 a : Complex, \226\136\128 p : List[Complex], degree(poly_mul(exp([a, Cx(real_of_num(1))], n), p)) == (if poly(p) == poly(NIL) { 0 } else { degree(p) + n })
+      #|  !(poly((p : List[Complex])) == poly(NIL))
+      #|  (q : List[Complex])
+      #|  (a : Complex)
+      #|  \226\136\128 a : Complex, \226\136\128 p : List[Complex], !(poly(p) == poly(NIL)) \226\134\146 order(a, p) <= degree(p)
+      #|  {(x : Complex) | \226\136\131 n : Num, n < SUC((N : Num)) && x == (i : (Num) -> Complex)(n)} == INSERT(i(N), {(x : Complex) | \226\136\131 n : Num, n < N && x == i(n)})
+      #|  {(x : Complex) | \226\136\131 n : Num, n < 0 && x == (i : (Num) -> Complex)(n)} == {}
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  {(x : Complex) | \226\136\131 n : Num, n < (N : Num) && x == (i : (Num) -> Complex)(n)}
+      #|  (i : (Num) -> Complex)
+      #|  (N : Num)
+      #|  \226\136\128 p : List[Complex], !(poly(p) == poly(NIL)) \226\134\146 FINITE({(x : Complex) | poly(p, x) == Cx(real_of_num(0))})
+      #|  normalize(CONS((h : Complex), (t : List[Complex]))) == ((n : List[Complex]) => if n == NIL { if h == Cx(real_of_num(0)) { NIL } else { [h] } } else { CONS(h, n) })(normalize(t))
       #|poly =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(complex,fun(complex,bool)) ((#poly:fun(list(complex),fun(complex,complex)) #NIL:list(complex)) x:complex)) (#Cx:fun(real,complex) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(complex,fun(complex,bool)) ((#poly:fun(list(complex),fun(complex,complex)) ((#CONS:fun(complex,fun(list(complex),list(complex))) h:complex) t:list(complex))) x:complex)) ((#complex_add:fun(complex,fun(complex,complex)) h:complex) ((#complex_mul:fun(complex,fun(complex,complex)) x:complex) ((#poly:fun(list(complex),fun(complex,complex)) t:list(complex)) x:complex)))))
       #|poly_add =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list(complex),fun(list(complex),bool)) ((#poly_add:fun(list(complex),fun(list(complex),list(complex))) #NIL:list(complex)) l2:list(complex))) l2:list(complex))) ((#=:fun(list(complex),fun(list(complex),bool)) ((#poly_add:fun(list(complex),fun(list(complex),list(complex))) ((#CONS:fun(complex,fun(list(complex),list(complex))) h:complex) t:list(complex))) l2:list(complex))) (((#COND:fun(bool,fun(list(complex),fun(list(complex),list(complex)))) ((#=:fun(list(complex),fun(list(complex),bool)) l2:list(complex)) #NIL:list(complex))) ((#CONS:fun(complex,fun(list(complex),list(complex))) h:complex) t:list(complex))) ((#CONS:fun(complex,fun(list(complex),list(complex))) ((#complex_add:fun(complex,fun(complex,complex)) h:complex) (#HD:fun(list(complex),complex) l2:list(complex)))) ((#poly_add:fun(list(complex),fun(list(complex),list(complex))) t:list(complex)) (#TL:fun(list(complex),list(complex)) l2:list(complex)))))))
       #|poly_cmul =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list(complex),fun(list(complex),bool)) ((#poly_cmul:fun(complex,fun(list(complex),list(complex))) c:complex) #NIL:list(complex))) #NIL:list(complex))) ((#=:fun(list(complex),fun(list(complex),bool)) ((#poly_cmul:fun(complex,fun(list(complex),list(complex))) c:complex) ((#CONS:fun(complex,fun(list(complex),list(complex))) h:complex) t:list(complex)))) ((#CONS:fun(complex,fun(list(complex),list(complex))) ((#complex_mul:fun(complex,fun(complex,complex)) c:complex) h:complex)) ((#poly_cmul:fun(complex,fun(list(complex),list(complex))) c:complex) t:list(complex)))))
