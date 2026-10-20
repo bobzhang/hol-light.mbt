@@ -5654,127 +5654,127 @@ test "Examples/doomsday matches Examples/doomsday.ml" {
       #|Translating certificate to HOL inferences
       #|0..0..1..3..solved at 7
       #|Examples/doomsday quotations (121):
-      #|  leap_year y <=> (4 divides y /\\ ~(100 divides y)) \\/ 400 divides y
-      #|  forall y. leap_year y <=>\n       y MOD 4 = 0 /\\ ~(y MOD 100 = 0) \\/ y MOD 400 = 0
-      #|  days_in_month y m =\n    if m = 1 then 31\n    else if m = 2 then (if leap_year y then 29 else 28)\n    else if m = 3 then 31\n    else if m = 4 then 30\n    else if m = 5 then 31\n    else if m = 6 then 30\n    else if m = 7 then 31\n    else if m = 8 then 31\n    else if m = 9 then 30\n    else if m = 10 then 31\n    else if m = 11 then 30\n    else if m = 12 then 31\n    else 0
-      #|  days_in_year y = if leap_year y then 366 else 365
-      #|  valid_date (y,m,d) <=>\n    1 <= m /\\ m <= 12 /\\ 1 <= d /\\ d <= days_in_month y m
-      #|  leap_year 2000
-      #|  ~(leap_year 1900)
-      #|  leap_year 2024
-      #|  ~(leap_year 2023)
-      #|  ~(leap_year 2100)
-      #|  leap_year 2400
-      #|  n <= 12 <=> n < 13
-      #|  forall y m. 1 <= m /\\ m <= 12 ==> 1 <= days_in_month y m
-      #|  forall y m. days_in_month y m <= 31
-      #|  cumdays_before y m =\n    if m <= 1 then 0\n    else if m = 2 then 31\n    else if m = 3 then (if leap_year y then 60 else 59)\n    else if m = 4 then (if leap_year y then 91 else 90)\n    else if m = 5 then (if leap_year y then 121 else 120)\n    else if m = 6 then (if leap_year y then 152 else 151)\n    else if m = 7 then (if leap_year y then 182 else 181)\n    else if m = 8 then (if leap_year y then 213 else 212)\n    else if m = 9 then (if leap_year y then 244 else 243)\n    else if m = 10 then (if leap_year y then 274 else 273)\n    else if m = 11 then (if leap_year y then 305 else 304)\n    else if m = 12 then (if leap_year y then 335 else 334)\n    else (if leap_year y then 366 else 365)
-      #|  day_of_year y m d = cumdays_before y m + d
-      #|  forall y m. 1 <= m /\\ m <= 12 ==>\n         cumdays_before y (m + 1) = cumdays_before y m + days_in_month y m
-      #|  forall y. days_in_year y = cumdays_before y 13
-      #|  cumulative_days 0 = 0 /\\\n  cumulative_days (SUC y) = cumulative_days y + days_in_year y
+      #|  (leap_year : (Num) -> Bool)((y : Num)) == (divides(4, y) && !divides(100, y) || divides(400, y))
+      #|  \226\136\128 y : Num, leap_year(y) == (MOD(y, 4) == 0 && !(MOD(y, 100) == 0) || MOD(y, 400) == 0)
+      #|  (days_in_month : (Num, Num) -> Num)((y : Num), (m : Num)) == (if m == 1 { 31 } else { if m == 2 { if leap_year(y) { 29 } else { 28 } } else { if m == 3 { 31 } else { if m == 4 { 30 } else { if m == 5 { 31 } else { if m == 6 { 30 } else { if m == 7 { 31 } else { if m == 8 { 31 } else { if m == 9 { 30 } else { if m == 10 { 31 } else { if m == 11 { 30 } else { if m == 12 { 31 } else { 0 } } } } } } } } } } } })
+      #|  (days_in_year : (Num) -> Num)((y : Num)) == (if leap_year(y) { 366 } else { 365 })
+      #|  (valid_date : ((Num, Num, Num)) -> Bool)(((y : Num), (m : Num), (d : Num))) == (1 <= m && m <= 12 && 1 <= d && d <= days_in_month(y, m))
+      #|  leap_year(2000)
+      #|  !leap_year(1900)
+      #|  leap_year(2024)
+      #|  !leap_year(2023)
+      #|  !leap_year(2100)
+      #|  leap_year(2400)
+      #|  ((n : Num) <= 12) == (n < 13)
+      #|  \226\136\128 y : Num, \226\136\128 m : Num, 1 <= m && m <= 12 \226\134\146 1 <= days_in_month(y, m)
+      #|  \226\136\128 y : Num, \226\136\128 m : Num, days_in_month(y, m) <= 31
+      #|  (cumdays_before : (Num, Num) -> Num)((y : Num), (m : Num)) == (if m <= 1 { 0 } else { if m == 2 { 31 } else { if m == 3 { if leap_year(y) { 60 } else { 59 } } else { if m == 4 { if leap_year(y) { 91 } else { 90 } } else { if m == 5 { if leap_year(y) { 121 } else { 120 } } else { if m == 6 { if leap_year(y) { 152 } else { 151 } } else { if m == 7 { if leap_year(y) { 182 } else { 181 } } else { if m == 8 { if leap_year(y) { 213 } else { 212 } } else { if m == 9 { if leap_year(y) { 244 } else { 243 } } else { if m == 10 { if leap_year(y) { 274 } else { 273 } } else { if m == 11 { if leap_year(y) { 305 } else { 304 } } else { if m == 12 { if leap_year(y) { 335 } else { 334 } } else { if leap_year(y) { 366 } else { 365 } } } } } } } } } } } } })
+      #|  (day_of_year : (Num, Num, Num) -> Num)((y : Num), (m : Num), (d : Num)) == cumdays_before(y, m) + d
+      #|  \226\136\128 y : Num, \226\136\128 m : Num, 1 <= m && m <= 12 \226\134\146 cumdays_before(y, m + 1) == cumdays_before(y, m) + days_in_month(y, m)
+      #|  \226\136\128 y : Num, days_in_year(y) == cumdays_before(y, 13)
+      #|  (cumulative_days : (Num) -> Num)(0) == 0 && cumulative_days(SUC((y : Num))) == cumulative_days(y) + days_in_year(y)
       #|  \\n. n + 1
-      #|  day_number y m d = cumulative_days y + day_of_year y m d
-      #|  day_of_week y m d = (day_number y m d + 5) MOD 7
-      #|  doomsday_date y m =\n    if m = 1 then (if leap_year y then 4 else 3)\n    else if m = 2 then (if leap_year y then 29 else 28)\n    else if m = 3 then 7\n    else if m = 4 then 4\n    else if m = 5 then 9\n    else if m = 6 then 6\n    else if m = 7 then 11\n    else if m = 8 then 8\n    else if m = 9 then 5\n    else if m = 10 then 10\n    else if m = 11 then 7\n    else 12
-      #|  century_anchor c = (5 * (c MOD 4) + 2) MOD 7
-      #|  doomsday y =\n    (century_anchor (y DIV 100) + y MOD 100 + (y MOD 100) DIV 4) MOD 7
-      #|  forall y m. 1 <= m /\\ m <= 12 ==> valid_date(y, m, doomsday_date y m)
-      #|  forall a b c n. a MOD n = b MOD n ==> (c + a) MOD n = (c + b) MOD n
-      #|  year_doomsday y = (cumulative_days y + (if leap_year y then 2 else 1)) MOD 7
-      #|  forall y m. 1 <= m /\\ m <= 12 ==>\n         day_of_week y m (doomsday_date y m) = year_doomsday y
-      #|  forall y m1 m2. 1 <= m1 /\\ m1 <= 12 /\\ 1 <= m2 /\\ m2 <= 12 ==>\n             day_of_week y m1 (doomsday_date y m1) =\n             day_of_week y m2 (doomsday_date y m2)
-      #|  forall y. cumulative_days (SUC y) = cumulative_days y + days_in_year y
-      #|  f divides fh /\\ f divides h ==> fh divides h * c + t ==> f divides t
-      #|  (p \\/ q <=> p) <=> q ==> p
-      #|  100 * c = 4 * (25 * c)
-      #|  forall c t. 0 < t /\\ t < 100 ==> (leap_year (100 * c + t) <=> t MOD 4 = 0)
-      #|  forall y. year_doomsday(SUC y) =\n       (year_doomsday y + (if leap_year(SUC y) then 2 else 1)) MOD 7
-      #|  ~(100 = 0)
-      #|  SUC t < 100 /\\ t < 100
-      #|  forall c t. t < 99 ==>\n         doomsday(100 * c + SUC t) =\n         (doomsday(100 * c + t) + (if SUC t MOD 4 = 0 then 2 else 1)) MOD 7
-      #|  SUC t
-      #|  c:num
-      #|  t < 99
-      #|  SUC(100 * c + t) = 100 * c + SUC t
-      #|  100 * c + SUC t = SUC(100 * c + t)
-      #|  year_doomsday(100 * c + t) = doomsday(100 * c + t)
-      #|  forall c. year_doomsday(100 * c) = doomsday(100 * c) ==>\n       forall t. t < 100 ==> year_doomsday(100 * c + t) = doomsday(100 * c + t)
-      #|  year_doomsday 0 = 2
-      #|  doomsday 0 = 2
-      #|  doomsday 100 = 0
-      #|  doomsday 200 = 5
-      #|  doomsday 300 = 3
-      #|  4 * 100 = 400 * 1
-      #|  y + 400 = y + 4 * 100
-      #|  forall y. leap_year(y + 400) <=> leap_year y
-      #|  4 + y = 4 * 1 + y
-      #|  ~(100 = 0)
-      #|  y + 400 = 100 * 4 + y
-      #|  forall y. doomsday(y + 400) = doomsday y
-      #|  SUC(y + 400) = SUC y + 400
-      #|  leap_year(SUC(y + 400)) <=> leap_year(SUC y)
-      #|  SUC y + 400 = SUC(y + 400)
-      #|  forall y. year_doomsday(y + 400) = year_doomsday y
-      #|  400 * SUC q + x = (400 * q + x) + 400
-      #|  q:num
-      #|  q:num
-      #|  r:num
-      #|  r:num
-      #|  r < 4
-      #|  100 * c = 400 * q + 100 * r
-      #|  r = c MOD 4
-      #|  q = c DIV 4
+      #|  (day_number : (Num, Num, Num) -> Num)((y : Num), (m : Num), (d : Num)) == cumulative_days(y) + day_of_year(y, m, d)
+      #|  (day_of_week : (Num, Num, Num) -> Num)((y : Num), (m : Num), (d : Num)) == MOD(day_number(y, m, d) + 5, 7)
+      #|  (doomsday_date : (Num, Num) -> Num)((y : Num), (m : Num)) == (if m == 1 { if leap_year(y) { 4 } else { 3 } } else { if m == 2 { if leap_year(y) { 29 } else { 28 } } else { if m == 3 { 7 } else { if m == 4 { 4 } else { if m == 5 { 9 } else { if m == 6 { 6 } else { if m == 7 { 11 } else { if m == 8 { 8 } else { if m == 9 { 5 } else { if m == 10 { 10 } else { if m == 11 { 7 } else { 12 } } } } } } } } } } })
+      #|  (century_anchor : (Num) -> Num)((c : Num)) == MOD(5 * MOD(c, 4) + 2, 7)
+      #|  (doomsday : (Num) -> Num)((y : Num)) == MOD(century_anchor(DIV(y, 100)) + (MOD(y, 100) + DIV(MOD(y, 100), 4)), 7)
+      #|  \226\136\128 y : Num, \226\136\128 m : Num, 1 <= m && m <= 12 \226\134\146 valid_date((y, m, doomsday_date(y, m)))
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 c : Num, \226\136\128 n : Num, MOD(a, n) == MOD(b, n) \226\134\146 MOD(c + a, n) == MOD(c + b, n)
+      #|  (year_doomsday : (Num) -> Num)((y : Num)) == MOD(cumulative_days(y) + (if leap_year(y) { 2 } else { 1 }), 7)
+      #|  \226\136\128 y : Num, \226\136\128 m : Num, 1 <= m && m <= 12 \226\134\146 day_of_week(y, m, doomsday_date(y, m)) == year_doomsday(y)
+      #|  \226\136\128 y : Num, \226\136\128 m1 : Num, \226\136\128 m2 : Num, 1 <= m1 && m1 <= 12 && 1 <= m2 && m2 <= 12 \226\134\146 day_of_week(y, m1, doomsday_date(y, m1)) == day_of_week(y, m2, doomsday_date(y, m2))
+      #|  \226\136\128 y : Num, cumulative_days(SUC(y)) == cumulative_days(y) + days_in_year(y)
+      #|  divides((f : Num), (fh : Num)) && divides(f, (h : Num)) \226\134\146 divides(fh, h * (c : Num) + (t : Num)) \226\134\146 divides(f, t)
+      #|  (((p : Bool) || (q : Bool)) == p) == (q \226\134\146 p)
+      #|  100 * (c : Num) == 4 * (25 * c)
+      #|  \226\136\128 c : Num, \226\136\128 t : Num, 0 < t && t < 100 \226\134\146 leap_year(100 * c + t) == (MOD(t, 4) == 0)
+      #|  \226\136\128 y : Num, year_doomsday(SUC(y)) == MOD(year_doomsday(y) + (if leap_year(SUC(y)) { 2 } else { 1 }), 7)
+      #|  !(100 == 0)
+      #|  SUC((t : Num)) < 100 && t < 100
+      #|  \226\136\128 c : Num, \226\136\128 t : Num, t < 99 \226\134\146 doomsday(100 * c + SUC(t)) == MOD(doomsday(100 * c + t) + (if MOD(SUC(t), 4) == 0 { 2 } else { 1 }), 7)
+      #|  SUC((t : Num))
+      #|  (c : Num)
+      #|  (t : Num) < 99
+      #|  SUC(100 * (c : Num) + (t : Num)) == 100 * c + SUC(t)
+      #|  100 * (c : Num) + SUC((t : Num)) == SUC(100 * c + t)
+      #|  year_doomsday(100 * (c : Num) + (t : Num)) == doomsday(100 * c + t)
+      #|  \226\136\128 c : Num, year_doomsday(100 * c) == doomsday(100 * c) \226\134\146 (\226\136\128 t : Num, t < 100 \226\134\146 year_doomsday(100 * c + t) == doomsday(100 * c + t))
+      #|  year_doomsday(0) == 2
+      #|  doomsday(0) == 2
+      #|  doomsday(100) == 0
+      #|  doomsday(200) == 5
+      #|  doomsday(300) == 3
+      #|  4 * 100 == 400 * 1
+      #|  (y : Num) + 400 == y + 4 * 100
+      #|  \226\136\128 y : Num, leap_year(y + 400) == leap_year(y)
+      #|  4 + (y : Num) == 4 * 1 + y
+      #|  !(100 == 0)
+      #|  (y : Num) + 400 == 100 * 4 + y
+      #|  \226\136\128 y : Num, doomsday(y + 400) == doomsday(y)
+      #|  SUC((y : Num) + 400) == SUC(y) + 400
+      #|  leap_year(SUC((y : Num) + 400)) == leap_year(SUC(y))
+      #|  SUC((y : Num)) + 400 == SUC(y + 400)
+      #|  \226\136\128 y : Num, year_doomsday(y + 400) == year_doomsday(y)
+      #|  400 * SUC((q : Num)) + (x : Num) == 400 * q + x + 400
+      #|  (q : Num)
+      #|  (q : Num)
+      #|  (r : Num)
+      #|  (r : Num)
+      #|  (r : Num) < 4
+      #|  100 * (c : Num) == 400 * (q : Num) + 100 * (r : Num)
+      #|  (r : Num) == MOD((c : Num), 4)
+      #|  (q : Num) == DIV((c : Num), 4)
       #|  4
-      #|  c:num
-      #|  forall c. year_doomsday(100 * c) = doomsday(100 * c)
-      #|  t:num
-      #|  c:num
-      #|  y = 100 * c + t
-      #|  t = y MOD 100
-      #|  c = y DIV 100
+      #|  (c : Num)
+      #|  \226\136\128 c : Num, year_doomsday(100 * c) == doomsday(100 * c)
+      #|  (t : Num)
+      #|  (c : Num)
+      #|  (y : Num) == 100 * (c : Num) + (t : Num)
+      #|  (t : Num) == MOD((y : Num), 100)
+      #|  (c : Num) == DIV((y : Num), 100)
       #|  100
-      #|  y:num
-      #|  forall y. year_doomsday y = doomsday y
-      #|  c:num
-      #|  m:num
-      #|  y:num
-      #|  forall y m. 1 <= m /\\ m <= 12 ==>\n         day_of_week y m (doomsday_date y m) = doomsday y
-      #|  forall y m d1 d2. day_of_week y m (d1 + d2) = (day_of_week y m d1 + d2) MOD 7
-      #|  d = doomsday_date y m + (d - doomsday_date y m)
-      #|  forall y m d. 1 <= m /\\ m <= 12 /\\ doomsday_date y m <= d ==>\n           day_of_week y m d = (doomsday y + d - doomsday_date y m) MOD 7
-      #|  leap_year(y + 400) <=> leap_year y
-      #|  SUC y + 400 = SUC(y + 400)
-      #|  forall y. cumulative_days(y + 400) MOD 7 = cumulative_days y MOD 7
-      #|  cumdays_before (y + 400) m = cumdays_before y m
-      #|  forall y m d. day_of_week (y + 400) m d = day_of_week y m d
-      #|  c + b + d + 7 * k = 7 * k + (c + b + d)
-      #|  forall y m d k. day_of_week y m (d + 7 * k) = day_of_week y m d
-      #|  forall y m. 1 <= m /\\ m <= 12 ==>\n         1 <= doomsday_date y m /\\ doomsday_date y m <= 29
-      #|  doomsday_algorithm y m d =\n    (doomsday y + d + 35 - doomsday_date y m) MOD 7
-      #|  m:num
-      #|  y:num
-      #|  m:num
-      #|  y:num
-      #|  d + 35
-      #|  m:num
-      #|  y:num
-      #|  d + 35 = d + 7 * 5
-      #|  day_of_week y m d = day_of_week y m (d + 35)
-      #|  forall y m d. valid_date(y,m,d) ==>\n           doomsday_algorithm y m d = day_of_week y m d
-      #|  dayname n = if n = 0 then Sunday\n              else if n = 1 then Monday\n              else if n = 2 then Tuesday\n              else if n = 3 then Wednesday\n              else if n = 4 then Thursday\n              else if n = 5 then Friday\n              else Saturday
-      #|  doomsday_day y m d = dayname(doomsday_algorithm y m d)
-      #|  forall y m d. valid_date(y,m,d)\n           ==> doomsday_day y m d = dayname(day_of_week y m d)
+      #|  (y : Num)
+      #|  \226\136\128 y : Num, year_doomsday(y) == doomsday(y)
+      #|  (c : Num)
+      #|  (m : Num)
+      #|  (y : Num)
+      #|  \226\136\128 y : Num, \226\136\128 m : Num, 1 <= m && m <= 12 \226\134\146 day_of_week(y, m, doomsday_date(y, m)) == doomsday(y)
+      #|  \226\136\128 y : Num, \226\136\128 m : Num, \226\136\128 d1 : Num, \226\136\128 d2 : Num, day_of_week(y, m, d1 + d2) == MOD(day_of_week(y, m, d1) + d2, 7)
+      #|  (d : Num) == doomsday_date((y : Num), (m : Num)) + (d - doomsday_date(y, m))
+      #|  \226\136\128 y : Num, \226\136\128 m : Num, \226\136\128 d : Num, 1 <= m && m <= 12 && doomsday_date(y, m) <= d \226\134\146 day_of_week(y, m, d) == MOD(doomsday(y) + (d - doomsday_date(y, m)), 7)
+      #|  leap_year((y : Num) + 400) == leap_year(y)
+      #|  SUC((y : Num)) + 400 == SUC(y + 400)
+      #|  \226\136\128 y : Num, MOD(cumulative_days(y + 400), 7) == MOD(cumulative_days(y), 7)
+      #|  cumdays_before((y : Num) + 400, (m : Num)) == cumdays_before(y, m)
+      #|  \226\136\128 y : Num, \226\136\128 m : Num, \226\136\128 d : Num, day_of_week(y + 400, m, d) == day_of_week(y, m, d)
+      #|  (c : Num) + ((b : Num) + ((d : Num) + 7 * (k : Num))) == 7 * k + (c + (b + d))
+      #|  \226\136\128 y : Num, \226\136\128 m : Num, \226\136\128 d : Num, \226\136\128 k : Num, day_of_week(y, m, d + 7 * k) == day_of_week(y, m, d)
+      #|  \226\136\128 y : Num, \226\136\128 m : Num, 1 <= m && m <= 12 \226\134\146 1 <= doomsday_date(y, m) && doomsday_date(y, m) <= 29
+      #|  (doomsday_algorithm : (Num, Num, Num) -> Num)((y : Num), (m : Num), (d : Num)) == MOD(doomsday(y) + (d + (35 - doomsday_date(y, m))), 7)
+      #|  (m : Num)
+      #|  (y : Num)
+      #|  (m : Num)
+      #|  (y : Num)
+      #|  (d : Num) + 35
+      #|  (m : Num)
+      #|  (y : Num)
+      #|  (d : Num) + 35 == d + 7 * 5
+      #|  day_of_week((y : Num), (m : Num), (d : Num)) == day_of_week(y, m, d + 35)
+      #|  \226\136\128 y : Num, \226\136\128 m : Num, \226\136\128 d : Num, valid_date((y, m, d)) \226\134\146 doomsday_algorithm(y, m, d) == day_of_week(y, m, d)
+      #|  (dayname : (Num) -> Day)((n : Num)) == (if n == 0 { Sunday } else { if n == 1 { Monday } else { if n == 2 { Tuesday } else { if n == 3 { Wednesday } else { if n == 4 { Thursday } else { if n == 5 { Friday } else { Saturday } } } } } })
+      #|  (doomsday_day : (Num, Num, Num) -> Day)((y : Num), (m : Num), (d : Num)) == dayname(doomsday_algorithm(y, m, d))
+      #|  \226\136\128 y : Num, \226\136\128 m : Num, \226\136\128 d : Num, valid_date((y, m, d)) \226\134\146 doomsday_day(y, m, d) == dayname(day_of_week(y, m, d))
       #|  COND: bool -> A -> A -> A
-      #|  COND:bool->num->num->num
-      #|  COND:bool->day->day->day
-      #|  doomsday_day 1776 7 4 = Thursday
-      #|  doomsday_day 1969 7 20 = Sunday
-      #|  doomsday_day 1989 11 9 = Thursday
-      #|  doomsday_day 2000 1 1 = Saturday
-      #|  doomsday_day 2026 3 26 = Thursday
-      #|  doomsday_day 1966 12 14 = Wednesday
-      #|  doomsday_day 2005 03 25 = Friday
+      #|  (COND : (Bool, Num, Num) -> Num)
+      #|  (COND : (Bool, Day, Day) -> Day)
+      #|  doomsday_day(1776, 7, 4) == Thursday
+      #|  doomsday_day(1969, 7, 20) == Sunday
+      #|  doomsday_day(1989, 11, 9) == Thursday
+      #|  doomsday_day(2000, 1, 1) == Saturday
+      #|  doomsday_day(2026, 3, 26) == Thursday
+      #|  doomsday_day(1966, 12, 14) == Wednesday
+      #|  doomsday_day(2005, 3, 25) == Friday
       #|leap_year =  |- (#forall:fun(fun(num,bool),bool) (\y:num. ((#=:fun(bool,fun(bool,bool)) (#leap_year:fun(num,bool) y:num)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#num_divides:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) y:num)) (#~:fun(bool,bool) ((#num_divides:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))) y:num)))) ((#num_divides:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))) y:num)))))
       #|LEAP_YEAR_MOD =  |- (#forall:fun(fun(num,bool),bool) (\y:num. ((#=:fun(bool,fun(bool,bool)) (#leap_year:fun(num,bool) y:num)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) y:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#NUMERAL:fun(num,num) #_0:num))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) y:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) y:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))) (#NUMERAL:fun(num,num) #_0:num))))))
       #|days_in_month =  |- (#forall:fun(fun(num,bool),bool) (\y:num. (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#days_in_month:fun(num,fun(num,num)) y:num) m:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (((#COND:fun(bool,fun(num,fun(num,num))) (#leap_year:fun(num,bool) y:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#NUMERAL:fun(num,num) #_0:num))))))))))))))))))
