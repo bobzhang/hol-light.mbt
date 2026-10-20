@@ -4,7 +4,7 @@
 /// EMPTY_IS_FINITE
 fn step_1() -> Unit raise {
   let t1 = @simp.simp_tac(@list.List([@sets.finite_rules()]))
-  empty_is_finite_c.set(@tactics.prove(@parser.parse_term("forall s. (s = EMPTY) ==> FINITE s"), t1))
+  empty_is_finite_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (_) -> Bool, s == {} → FINITE(s)"), t1))
 }
 
 ///|
@@ -20,7 +20,7 @@ pub fn empty_is_finite() -> @kernel.Thm {
 /// SING_IS_FINITE
 fn step_2() -> Unit raise {
   let t2 = @simp.simp_tac(@list.List([@sets.finite_insert(), @sets.finite_rules()]))
-  sing_is_finite_c.set(@tactics.prove(@parser.parse_term("forall s a. (s = {a}) ==> FINITE s"), t2))
+  sing_is_finite_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (_) -> Bool, ∀ a : _, s == {a} → FINITE(s)"), t2))
 }
 
 ///|
@@ -36,7 +36,7 @@ pub fn sing_is_finite() -> @kernel.Thm {
 /// UNION_NONZERO
 fn step_3() -> Unit raise {
   let t3 = @simp.rewrite_tac(@list.List([@arith.add_eq_0(), @sets.extension(), @sets.in_union(), @sets.in_elim_thm(), @class.de_morgan_thm()]))
-  union_nonzero_c.set(@tactics.prove(@parser.parse_term("{a | ~(f a + g a = 0)} = {a | ~(f a = 0)} UNION {a | ~(g a = 0)}"), t3))
+  union_nonzero_c.set(@tactics.prove(@term_syntax.parse_term("{(a : _) | !((f : (_) -> Num)(a) + (g : (_) -> Num)(a) == 0)} == UNION({(a : _) | !(f(a) == 0)}, {(a : _) | !(g(a) == 0)})"), t3))
 }
 
 ///|
@@ -70,8 +70,8 @@ fn step_6() -> Unit raise {
 /// multiset_tybij_th
 fn step_7() -> Unit raise {
   let t4 = @simp.simp_tac(@list.List([empty_is_finite(), @sets.extension(), @sets.in_elim_thm(), @sets.not_in_empty()]))
-  let t5 = @tactics.then_tac(@tactics.exists_tac(@parser.parse_term("\\a:A. 0")), t4)
-  multiset_tybij_th_c.set(@tactics.prove(@parser.parse_term("?f. FINITE {a:A | ~(f a = 0)}"), t5))
+  let t5 = @tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("(a : A) => 0")), t4)
+  multiset_tybij_th_c.set(@tactics.prove(@term_syntax.parse_term("∃ f : (A) -> Num, FINITE({(a : A) | !(f(a) == 0)})"), t5))
 }
 
 ///|
@@ -101,7 +101,7 @@ pub fn multiset_tybij() -> @kernel.Thm {
 ///|
 /// mempty
 fn step_9() -> Unit raise {
-  mempty_c.set(@pair.new_definition(@parser.parse_term("mempty = multiset (\\b. 0)")))
+  mempty_c.set(@pair.new_definition(@term_syntax.parse_term("(mempty : Multiset[_]) == multiset((b : _) => 0)")))
 }
 
 ///|
@@ -116,7 +116,7 @@ pub fn mempty() -> @kernel.Thm {
 ///|
 /// mmember
 fn step_10() -> Unit raise {
-  mmember_c.set(@pair.new_definition(@parser.parse_term("a mmember M <=> ~(multiplicity M a = 0)")))
+  mmember_c.set(@pair.new_definition(@term_syntax.parse_term("(mmember : (_, Multiset[_]) -> Bool)((a : _), (M : Multiset[_])) == !(multiplicity(M, a) == 0)")))
 }
 
 ///|
@@ -131,7 +131,7 @@ pub fn mmember() -> @kernel.Thm {
 ///|
 /// msing
 fn step_11() -> Unit raise {
-  msing_c.set(@pair.new_definition(@parser.parse_term("msing a = multiset (\\b. if b = a then 1 else 0)")))
+  msing_c.set(@pair.new_definition(@term_syntax.parse_term("(msing : (_) -> Multiset[_])((a : _)) == multiset((b : _) => if b == a { 1 } else { 0 })")))
 }
 
 ///|
@@ -146,7 +146,7 @@ pub fn msing() -> @kernel.Thm {
 ///|
 /// munion
 fn step_12() -> Unit raise {
-  munion_c.set(@pair.new_definition(@parser.parse_term("M munion N = multiset(\\b. multiplicity M b + multiplicity N b)")))
+  munion_c.set(@pair.new_definition(@term_syntax.parse_term("(munion : (Multiset[_], Multiset[_]) -> Multiset[_])((M : Multiset[_]), (N : Multiset[_])) == multiset((b : _) => multiplicity(M, b) + multiplicity(N, b))")))
 }
 
 ///|
@@ -161,7 +161,7 @@ pub fn munion() -> @kernel.Thm {
 ///|
 /// mdiff
 fn step_13() -> Unit raise {
-  mdiff_c.set(@pair.new_definition(@parser.parse_term("M mdiff N = multiset(\\b. multiplicity M b - multiplicity N b)")))
+  mdiff_c.set(@pair.new_definition(@term_syntax.parse_term("(mdiff : (Multiset[_], Multiset[_]) -> Multiset[_])((M : Multiset[_]), (N : Multiset[_])) == multiset((b : _) => multiplicity(M, b) - multiplicity(N, b))")))
 }
 
 ///|
@@ -179,7 +179,7 @@ fn step_14() -> Unit raise {
   let t7 = @meson.meson_tac(@list.List([multiset_tybij()]))
   let t6 = @tactics.conv_tac(@equal.once_depth_conv(@class.eta_conv))
   let t8 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@class.fun_eq_thm())])), t6), t7)
-  mextension_c.set(@tactics.prove(@parser.parse_term("(M = N) = forall a. multiplicity M a = multiplicity N a"), t8))
+  mextension_c.set(@tactics.prove(@term_syntax.parse_term("((M : Multiset[_]) == (N : Multiset[_])) == (∀ a : _, multiplicity(M, a) == multiplicity(N, a))"), t8))
 }
 
 ///|
@@ -195,7 +195,7 @@ pub fn mextension() -> @kernel.Thm {
 /// MULTIPLICITY_MULTISET
 fn step_15() -> Unit raise {
   let t9 = @simp.simp_tac(@list.List([multiset_tybij()]))
-  multiplicity_multiset_c.set(@tactics.prove(@parser.parse_term("FINITE {a | ~(f a = 0)} /\\ (f a = y) ==> (multiplicity(multiset f) a = y)"), t9))
+  multiplicity_multiset_c.set(@tactics.prove(@term_syntax.parse_term("FINITE({(a : _) | !((f : (_) -> Num)(a) == 0)}) && f((a : _)) == (y : Num) → multiplicity(multiset(f), a) == y"), t9))
 }
 
 ///|
@@ -213,7 +213,7 @@ fn step_16() -> Unit raise {
   let t11 = @simp.simp_tac(@list.List([empty_is_finite(), @sets.extension(), @sets.in_elim_thm(), @sets.not_in_empty()]))
   let t10 = @tactics.match_mp_tac(multiplicity_multiset())
   let t12 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([mempty()])), t10), t11)
-  mempty_v1_c.set(@tactics.prove(@parser.parse_term("multiplicity mempty a = 0"), t12))
+  mempty_v1_c.set(@tactics.prove(@term_syntax.parse_term("multiplicity(mempty, (a : _)) == 0"), t12))
 }
 
 ///|
@@ -230,12 +230,12 @@ pub fn mempty_v1() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   let t18 = @simp.rewrite_tac(@list.List([@calc_num.arith_eq()]))
   let t17 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_thm(), @sets.in_insert(), @sets.not_in_empty()]))
-  let t16 = @tactics.exists_tac(@parser.parse_term("a:A"))
+  let t16 = @tactics.exists_tac(@term_syntax.parse_term("(a : A)"))
   let t15 = @tactics.match_mp_tac(sing_is_finite())
   let t14 = @simp.rewrite_tac(@list.List([]))
   let t13 = @tactics.match_mp_tac(multiplicity_multiset())
   let t19 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([msing()])), t13), t14), t15), t16), t17), @tactics.gen_tac), @class.cond_cases_tac), t18)
-  msing_v1_c.set(@tactics.prove(@parser.parse_term("multiplicity (msing (a:A)) b = if b = a then 1 else 0"), t19))
+  msing_v1_c.set(@tactics.prove(@term_syntax.parse_term("multiplicity(msing((a : A)), (b : A)) == (if b == a { 1 } else { 0 })"), t19))
 }
 
 ///|
@@ -256,7 +256,7 @@ fn step_18() -> Unit raise {
   let t21 = @simp.rewrite_tac(@list.List([union_nonzero(), @sets.finite_union()]))
   let t20 = @tactics.match_mp_tac(multiplicity_multiset())
   let t25 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([munion()])), t20), t21), t22), t23), t24)
-  munion_v1_c.set(@tactics.prove(@parser.parse_term("multiplicity (M munion N) a = multiplicity M a + multiplicity N a"), t25))
+  munion_v1_c.set(@tactics.prove(@term_syntax.parse_term("multiplicity(munion((M : Multiset[_]), (N : Multiset[_])), (a : _)) == multiplicity(M, a) + multiplicity(N, a)"), t25))
 }
 
 ///|
@@ -274,12 +274,12 @@ fn step_19() -> Unit raise {
   let t32 = @simp.rewrite_tac(@list.List([multiset_tybij()]))
   let t31 = @tactics.conv_tac(@equal.once_depth_conv(@class.eta_conv))
   let t30 = @simp.simp_tac(@list.List([@sets.subset(), @sets.in_elim_thm(), multiset_tybij()]))
-  let t29 = @tactics.exists_tac(@parser.parse_term("{a:A | ~(multiplicity M a = 0)}"))
+  let t29 = @tactics.exists_tac(@term_syntax.parse_term("{(a : A) | !(multiplicity((M : Multiset[A]), a) == 0)}"))
   let t28 = @tactics.match_mp_tac(@sets.finite_subset())
   let t27 = @simp.rewrite_tac(@list.List([]))
   let t26 = @tactics.match_mp_tac(multiplicity_multiset())
   let t33 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([mdiff()])), t26), t27), t28), t29), t30), t31), t32), @int.arith_tac)
-  mdiff_v1_c.set(@tactics.prove(@parser.parse_term("multiplicity (M mdiff N) (a:A) = multiplicity M a - multiplicity N a"), t33))
+  mdiff_v1_c.set(@tactics.prove(@term_syntax.parse_term("multiplicity(mdiff((M : Multiset[A]), (N : Multiset[A])), (a : A)) == multiplicity(M, a) - multiplicity(N, a)"), t33))
 }
 
 ///|
@@ -295,7 +295,7 @@ pub fn mdiff_v1() -> @kernel.Thm {
 /// MUNION_MEMPTY
 fn step_20() -> Unit raise {
   let t41 = @simp.rewrite_tac(@list.List([@arith.add_eq_0(), @calc_num.arith_eq()]))
-  let t37 = @parser.parse_term("a:A")
+  let t37 = @term_syntax.parse_term("(a : A)")
   let t40 = @tactics.disch_then(fn(x39 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x34 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s35 = @tactics.mp_tac(x34)
@@ -305,7 +305,7 @@ fn step_20() -> Unit raise {
     })(((x38 : @kernel.Thm) => @bool.spec(t37, x38))(x39))
   })
   let t42 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([mextension(), mempty_v1(), msing_v1(), munion_v1()])), t40), t41)
-  munion_mempty_c.set(@tactics.prove(@parser.parse_term("~(M munion (msing(a:A)) = mempty)"), t42))
+  munion_mempty_c.set(@tactics.prove(@term_syntax.parse_term("!(munion((M : Multiset[A]), msing((a : A))) == mempty)"), t42))
 }
 
 ///|
@@ -321,7 +321,7 @@ pub fn munion_mempty() -> @kernel.Thm {
 /// MMEMBER_MUNION
 fn step_21() -> Unit raise {
   let t43 = @simp.rewrite_tac(@list.List([mmember(), munion_v1(), @arith.add_eq_0(), @class.de_morgan_thm()]))
-  mmember_munion_c.set(@tactics.prove(@parser.parse_term("x mmember (M munion N) <=> x mmember M \\/ x mmember N"), t43))
+  mmember_munion_c.set(@tactics.prove(@term_syntax.parse_term("mmember((x : _), munion((M : Multiset[_]), (N : Multiset[_]))) == (mmember(x, M) || mmember(x, N))"), t43))
 }
 
 ///|
@@ -338,7 +338,7 @@ pub fn mmember_munion() -> @kernel.Thm {
 fn step_22() -> Unit raise {
   let t44 = @simp.rewrite_tac(@list.List([@calc_num.arith_eq()]))
   let t45 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([mmember(), msing_v1()])), @class.cond_cases_tac), t44)
-  mmember_msing_c.set(@tactics.prove(@parser.parse_term("x mmember (msing a) <=> (x = a)"), t45))
+  mmember_msing_c.set(@tactics.prove(@term_syntax.parse_term("mmember((x : _), msing((a : _))) == (x == a)"), t45))
 }
 
 ///|
@@ -354,7 +354,7 @@ pub fn mmember_msing() -> @kernel.Thm {
 /// MUNION_EMPTY
 fn step_23() -> Unit raise {
   let t46 = @simp.rewrite_tac(@list.List([mextension(), munion_v1(), mempty_v1(), @arith.add_clauses()]))
-  munion_empty_c.set(@tactics.prove(@parser.parse_term("M munion mempty = M"), t46))
+  munion_empty_c.set(@tactics.prove(@term_syntax.parse_term("munion((M : Multiset[_]), mempty) == M"), t46))
 }
 
 ///|
@@ -370,7 +370,7 @@ pub fn munion_empty() -> @kernel.Thm {
 /// MUNION_ASSOC
 fn step_24() -> Unit raise {
   let t47 = @simp.rewrite_tac(@list.List([mextension(), munion_v1(), @arith.add_assoc()]))
-  munion_assoc_c.set(@tactics.prove(@parser.parse_term("M1 munion (M2 munion M3) = (M1 munion M2) munion M3"), t47))
+  munion_assoc_c.set(@tactics.prove(@term_syntax.parse_term("munion((M1 : Multiset[_]), munion((M2 : Multiset[_]), (M3 : Multiset[_]))) == munion(munion(M1, M2), M3)"), t47))
 }
 
 ///|
@@ -386,7 +386,7 @@ pub fn munion_assoc() -> @kernel.Thm {
 /// MUNION_AC
 fn step_25() -> Unit raise {
   let t48 = @simp.rewrite_tac(@list.List([mextension(), munion_v1(), @arith.add_ac()]))
-  munion_ac_c.set(@tactics.prove(@parser.parse_term("(M1 munion M2 = M2 munion M1) /\\\n   ((M1 munion M2) munion M3 = M1 munion M2 munion M3) /\\\n   (M1 munion M2 munion M3 = M2 munion M1 munion M3)"), t48))
+  munion_ac_c.set(@tactics.prove(@term_syntax.parse_term("munion((M1 : Multiset[_]), (M2 : Multiset[_])) == munion(M2, M1) && munion(munion(M1, M2), (M3 : Multiset[_])) == munion(M1, munion(M2, M3)) && munion(M1, munion(M2, M3)) == munion(M2, munion(M1, M3))"), t48))
 }
 
 ///|
@@ -402,7 +402,7 @@ pub fn munion_ac() -> @kernel.Thm {
 /// MUNION_11
 fn step_26() -> Unit raise {
   let t49 = @simp.rewrite_tac(@list.List([mextension(), munion_v1(), @arith.eq_add_rcancel()]))
-  munion_11_c.set(@tactics.prove(@parser.parse_term("(M1 munion N = M2 munion N) <=> (M1 = M2)"), t49))
+  munion_11_c.set(@tactics.prove(@term_syntax.parse_term("(munion((M1 : Multiset[_]), (N : Multiset[_])) == munion((M2 : Multiset[_]), N)) == (M1 == M2)"), t49))
 }
 
 ///|
@@ -419,7 +419,7 @@ pub fn munion_11() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   let t50 = @simp.asm_rewrite_tac(@list.List([@calc_num.arith_eq()]))
   let t51 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([mmember(), munion_v1(), msing_v1(), @arith.add_eq_0()])), @class.cond_cases_tac), t50)
-  munion_inunion_c.set(@tactics.prove(@parser.parse_term("a mmember (M munion (msing b)) /\\ ~(b = a) ==> a mmember M"), t51))
+  munion_inunion_c.set(@tactics.prove(@term_syntax.parse_term("mmember((a : _), munion((M : Multiset[_]), msing((b : _)))) && !(b == a) → mmember(a, M)"), t51))
 }
 
 ///|
@@ -434,11 +434,11 @@ pub fn munion_inunion() -> @kernel.Thm {
 ///|
 /// MMEMBER_MDIFF
 fn step_28() -> Unit raise {
-  let t54 = @tactics.undisch_tac(@parser.parse_term("~(multiplicity M (a:A) = 0)"))
+  let t54 = @tactics.undisch_tac(@term_syntax.parse_term("!(multiplicity((M : Multiset[A]), (a : A)) == 0)"))
   let t53 = @simp.asm_rewrite_tac(@list.List([]))
   let t52 = @tactics.repeat_tac(@tactics.strip_tac)
   let t55 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([mmember(), mextension(), munion_v1(), mdiff_v1(), msing_v1()])), t52), @class.cond_cases_tac), t53), t54), @int.arith_tac)
-  mmember_mdiff_c.set(@tactics.prove(@parser.parse_term("(a:A) mmember M ==> (M = (M mdiff (msing a)) munion (msing a))"), t55))
+  mmember_mdiff_c.set(@tactics.prove(@term_syntax.parse_term("mmember((a : A), (M : Multiset[A])) → M == munion(mdiff(M, msing(a)), msing(a))"), t55))
 }
 
 ///|
@@ -454,16 +454,16 @@ pub fn mmember_mdiff() -> @kernel.Thm {
 /// MULTISET_INDUCT_LEMMA1
 fn step_29() -> Unit raise {
   let t71 = @simp.asm_simp_tac(@list.List([@sets.subset(), @sets.in_elim_thm(), @class.contrapos_thm(), @arith.sub_0()]))
-  let t70 = @tactics.exists_tac(@parser.parse_term("{a:A | ~(multiplicity M a = 0)}"))
+  let t70 = @tactics.exists_tac(@term_syntax.parse_term("{(a : A) | !(multiplicity((M : Multiset[A]), a) == 0)}"))
   let t69 = @tactics.match_mp_tac(@sets.subset_trans())
-  let t68 = @simp.asm_rewrite_tac(@list.List([mdiff_v1(), msing_v1(), @int.arith_rule(@parser.parse_term("SUC n - 1 = n"))]))
-  let t66 = @parser.parse_term("forall M. (multiplicity M a = n) /\\\n           {a:A | ~(multiplicity M a = 0)} SUBSET (a INSERT s)\n           ==> P M")
+  let t68 = @simp.asm_rewrite_tac(@list.List([mdiff_v1(), msing_v1(), @int.arith_rule(@term_syntax.parse_term("SUC((n : Num)) - 1 == n"))]))
+  let t66 = @term_syntax.parse_term("∀ M : Multiset[A], multiplicity(M, (a : A)) == (n : Num) && SUBSET({(a : A) | !(multiplicity(M, a) == 0)}, INSERT(a, (s : (A) -> Bool))) → (P : (Multiset[A]) -> Bool)(M)")
   let t67 = @tactics.map_every(fn(x65 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.match_mp_tac(@kernel.assume_rule(x65))
-  }, @list.List([@parser.parse_term("forall a:A M. P M ==> P (M munion msing a)"), t66]))
+  }, @list.List([@term_syntax.parse_term("∀ a : A, ∀ M : Multiset[A], (P : (Multiset[A]) -> Bool)(M) → P(munion(M, msing(a)))"), t66]))
   let t63 = @simp.asm_rewrite_tac(@list.List([mmember(), @nums.not_suc()]))
   let t64 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(mmember_mdiff()), t63), @tactics.all_tac])
-  let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("M = (M mdiff (msing(a:A))) munion (msing a)"), fn(x60 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@term_syntax.parse_term("(M : Multiset[A]) == munion(mdiff(M, msing((a : A))), msing(a))"), fn(x60 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s61 = @tactics.subst1_tac(x60)
     fn(x62 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s61(x62)
@@ -471,11 +471,11 @@ fn step_29() -> Unit raise {
   }), t64), t67), t68), t69), t70), t71)
   let t59 = @meson.asm_meson_tac(@list.List([]))
   let t58 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm(), @sets.in_insert()]))
-  let t57 = @tactics.undisch_tac(@parser.parse_term("{a:A | ~(multiplicity M a = 0)} SUBSET (a INSERT s)"))
+  let t57 = @tactics.undisch_tac(@term_syntax.parse_term("SUBSET({(a : A) | !(multiplicity((M : Multiset[A]), a) == 0)}, INSERT((a : A), (s : (A) -> Bool)))"))
   let t73 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.first_x_assum(@tactics.match_mp_tac), t57), t58), t59), t72])
   let t56 = @tactics.repeat_tac(@tactics.strip_tac)
   let t74 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @nums.induct_tac), t56), t73)
-  multiset_induct_lemma1_c.set(@tactics.prove(@parser.parse_term("(forall M. ({a | ~(multiplicity M a = 0)} SUBSET s) ==> P M) /\\\n   (forall a:A M. P M ==> P (M munion (msing a)))\n   ==> forall n M. (multiplicity M a = n) /\\\n             {a:A | ~(multiplicity M a = 0)} SUBSET (a INSERT s)\n             ==> P M"), t74))
+  multiset_induct_lemma1_c.set(@tactics.prove(@term_syntax.parse_term("(∀ M : Multiset[A], SUBSET({(a : A) | !(multiplicity(M, a) == 0)}, (s : (A) -> Bool)) → (P : (Multiset[A]) -> Bool)(M)) && (∀ a : A, ∀ M : Multiset[A], P(M) → P(munion(M, msing(a)))) → (∀ n : Num, ∀ M : Multiset[A], multiplicity(M, (a : A)) == n && SUBSET({(a : A) | !(multiplicity(M, a) == 0)}, INSERT(a, s)) → P(M))"), t74))
 }
 
 ///|
@@ -495,16 +495,16 @@ fn step_30() -> Unit raise {
   let t84 = @simp.asm_rewrite_tac(@list.List([]))
   let t83 = @tactics.mp_tac(multiset_induct_lemma1())
   let t82 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t80 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
+  let t80 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
   let t79 = @simp.asm_rewrite_tac(@list.List([mextension(), mempty_v1()]))
-  let t78 = @tactics.subgoal_then(@parser.parse_term("M:(A)multiset = mempty"), fn(x76 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t78 = @tactics.subgoal_then(@term_syntax.parse_term("(M : Multiset[A]) == mempty"), fn(x76 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x76
     @simp.asm_rewrite_tac(@list.List([th]))
   })
   let t75 = @tactics.repeat_tac(@tactics.strip_tac)
   let t81 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm(), @sets.not_in_empty()])), t75), t78), t79), t80])
   let t87 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @tactics.match_mp_tac(@sets.finite_induct())), @tactics.conj_tac), t81), t82), t83), t84), t85), t86)
-  multiset_induct_lemma2_c.set(@tactics.prove(@parser.parse_term("P mempty /\\\n   (forall a:A M. P M ==> P (M munion (msing a)))\n   ==> forall s. FINITE s ==> forall M. {a:A | ~(multiplicity M a = 0)} SUBSET s ==> P M"), t87))
+  multiset_induct_lemma2_c.set(@tactics.prove(@term_syntax.parse_term("(P : (Multiset[A]) -> Bool)(mempty) && (∀ a : A, ∀ M : Multiset[A], P(M) → P(munion(M, msing(a)))) → (∀ s : (A) -> Bool, FINITE(s) → (∀ M : Multiset[A], SUBSET({(a : A) | !(multiplicity(M, a) == 0)}, s) → P(M)))"), t87))
 }
 
 ///|
@@ -522,7 +522,7 @@ fn step_31() -> Unit raise {
   let t99 = @simp.rewrite_tac(@list.List([multiset_tybij()]))
   let t98 = @tactics.conv_tac(@equal.once_depth_conv(@class.eta_conv))
   let t97 = @simp.rewrite_tac(@list.List([@sets.subset_refl(), multiset_tybij()]))
-  let t96 = @tactics.exists_tac(@parser.parse_term("{a:A | ~(multiplicity M a = 0)}"))
+  let t96 = @tactics.exists_tac(@term_syntax.parse_term("{(a : A) | !(multiplicity((M : Multiset[A]), a) == 0)}"))
   let t95 = @tactics.disch_then(@tactics.match_mp_tac)
   let t94 = @simp.rewrite_tac(@list.List([@theorems.imp_imp()]))
   let t93 = @simp.rewrite_tac(@list.List([@theorems.right_imp_forall_thm()]))
@@ -535,7 +535,7 @@ fn step_31() -> Unit raise {
       }
     })(t91(x92))
   }), t93), t94), @tactics.gen_tac), t95), t96), t97), t98), t99)
-  multiset_induct_c.set(@tactics.prove(@parser.parse_term("P mempty /\\\n   (forall a:A M. P M ==> P (M munion (msing a)))\n   ==> forall M. P M"), t100))
+  multiset_induct_c.set(@tactics.prove(@term_syntax.parse_term("(P : (Multiset[A]) -> Bool)(mempty) && (∀ a : A, ∀ M : Multiset[A], P(M) → P(munion(M, msing(a)))) → (∀ M : Multiset[A], P(M))"), t100))
 }
 
 ///|
@@ -583,7 +583,7 @@ pub fn wfp_cases() -> @kernel.Thm {
 ///|
 /// WFP_RULES, WFP_INDUCT, WFP_CASES
 fn step_33() -> Unit raise {
-  let (wfp_rules, wfp_induct, wfp_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("forall x. (forall y. y << x ==> WFP(<<) y) ==> WFP(<<) x"))
+  let (wfp_rules, wfp_induct, wfp_cases) = @ind_defs.new_inductive_definition(@term_syntax.parse_term("∀ x : _, (∀ y : _, (op_lt_lt : (_, _) -> Bool)(y, x) → (WFP : ((_, _) -> Bool, _) -> Bool)(op_lt_lt, y)) → WFP(op_lt_lt, x)"))
   wfp_rules_c.set(wfp_rules)
   wfp_induct_c.set(wfp_induct)
   wfp_cases_c.set(wfp_cases)
@@ -594,9 +594,9 @@ fn step_33() -> Unit raise {
 fn step_34() -> Unit raise {
   let t103 = @meson.asm_meson_tac(@list.List([wfp_rules()]))
   let t102 = @tactics.match_mp_tac(wfp_induct())
-  let t101 = @simp.once_rewrite_tac(@list.List([@class.taut(@parser.parse_term("a ==> b <=> a ==> a /\\ b"))]))
+  let t101 = @simp.once_rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("((a : Bool) → (b : Bool)) == (a → a && b)"))]))
   let t104 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@sets.in_()]))), @tactics.strip_tac), t101), t102), t103)
-  wfp_part_induct_c.set(@tactics.prove(@parser.parse_term("forall P. (forall x. x IN WFP(<<) /\\ (forall y. y << x ==> P(y)) ==> P(x))\n       ==> forall x:A. x IN WFP(<<) ==> P(x)"), t104))
+  wfp_part_induct_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (A) -> Bool, (∀ x : A, IN(x, WFP((op_lt_lt : (A, A) -> Bool))) && (∀ y : A, op_lt_lt(y, x) → P(y)) → P(x)) → (∀ x : A, IN(x, WFP(op_lt_lt)) → P(x))"), t104))
 }
 
 ///|
@@ -615,7 +615,7 @@ fn step_35() -> Unit raise {
   let t107 = @tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.mp_tac(wfp_part_induct())), t106)
   let t105 = @meson.meson_tac(@list.List([wfp_rules()]))
   let t108 = @tactics.thenl(@tactics.eq_tac, @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@wf.wf_ind(), @sets.extension(), @sets.in_(), @sets.univ()])), t105), t107]))
-  wfp_wf_c.set(@tactics.prove(@parser.parse_term("WF(<<) <=> (WFP(<<) = UNIV:A->bool)"), t108))
+  wfp_wf_c.set(@tactics.prove(@term_syntax.parse_term("WF((op_lt_lt : (A, A) -> Bool)) == (WFP(op_lt_lt) == UNIV)"), t108))
 }
 
 ///|
@@ -646,15 +646,15 @@ fn step_36() -> Unit raise {
   }, @list.List([wfp_cases()]))
   let t136 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([]))])
   let t135 = @simp.asm_rewrite_tac(@list.List([]))
-  let t132 = @parser.parse_term("a:A")
-  let t133 = @parser.parse_term("\\(n:num) x y. ((<<):A->A->bool) y x")
-  let t134 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("\\(n:num) (x:A). ~WFP(<<) x"), t133, t132]), @arith.dependent_choice_fixed()))
+  let t132 = @term_syntax.parse_term("(a : A)")
+  let t133 = @term_syntax.parse_term("(n : Num) => (x : A) => (y : A) => (op_lt_lt : (A, A) -> Bool)(y, x)")
+  let t134 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(n : Num) => (x : A) => !WFP((op_lt_lt : (A, A) -> Bool), x)"), t133, t132]), @arith.dependent_choice_fixed()))
   let t131 = @simp.gen_rewrite_tac(fn(x130 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x130
   }, @list.List([@equal.gsym(@class.contrapos_thm())]))
-  let t146 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("a:A")), t131), @tactics.disch_tac), t134), t135), @tactics.ants_tac), t136), @tactics.gen_tac), t144), t145)
+  let t146 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(a : A)")), t131), @tactics.disch_tac), t134), t135), @tactics.ants_tac), t136), @tactics.gen_tac), t144), t145)
   let t129 = @simp.asm_rewrite_tac(@list.List([@trivia.o_thm()]))
-  let t125 = @parser.parse_term("(x:num->A) o SUC")
+  let t125 = @term_syntax.parse_term("o((x : (Num) -> A), SUC)")
   let t128 = @tactics.disch_then(fn(x127 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x122 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s123 = @tactics.mp_tac(x122)
@@ -665,7 +665,7 @@ fn step_36() -> Unit raise {
   })
   let t121 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t120 = @simp.rewrite_tac(@list.List([@class.not_imp()]))
-  let t116 = @parser.parse_term("(x:num->A) (SUC 0)")
+  let t116 = @term_syntax.parse_term("(x : (Num) -> A)(SUC(0))")
   let t119 = @tactics.first_x_assum(fn(x118 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x113 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s114 = @tactics.mp_tac(x113)
@@ -674,8 +674,8 @@ fn step_36() -> Unit raise {
       }
     })(((x117 : @kernel.Thm) => @bool.spec(t116, x117))(x118))
   })
-  let t112 = @tactics.x_gen_tac(@parser.parse_term("x:num->A"))
-  let t111 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
+  let t112 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : (Num) -> A)"))
+  let t111 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
   let t147 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(wfp_induct()), t111), @tactics.disch_tac), t112), @tactics.disch_tac), @tactics.disch_tac), t119), t120), @tactics.conj_tac), t121), t128), t129), t146])
   let t110 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t109 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm()]))
@@ -695,7 +695,7 @@ pub fn wfp_dchain() -> @kernel.Thm {
 ///|
 /// morder
 fn step_37() -> Unit raise {
-  morder_c.set(@pair.new_definition(@parser.parse_term("morder(<<) N M <=> ?M0 a K. (M = M0 munion (msing a)) /\\\n                               (N = M0 munion K) /\\\n                               (forall b. b mmember K ==> b << a)")))
+  morder_c.set(@pair.new_definition(@term_syntax.parse_term("(morder : ((_, _) -> Bool, Multiset[_], Multiset[_]) -> Bool)((op_lt_lt : (_, _) -> Bool), (N : Multiset[_]), (M : Multiset[_])) == (∃ M0 : Multiset[_], ∃ a : _, ∃ K : Multiset[_], M == munion(M0, msing(a)) && N == munion(M0, K) && (∀ b : _, mmember(b, K) → op_lt_lt(b, a)))")))
 }
 
 ///|
@@ -712,20 +712,20 @@ pub fn morder() -> @kernel.Thm {
 fn step_38() -> Unit raise {
   let t193 = @meson.meson_tac(@list.List([munion_ac(), munion_11()]))
   let t192 = @simp.asm_rewrite_tac(@list.List([munion_ac()]))
-  let t191 = @tactics.undisch_tac(@parser.parse_term("M0 munion msing (a:A) = M1 munion msing b"))
-  let t188 = @parser.parse_term("K:(A)multiset")
-  let t189 = @parser.parse_term("b:A")
+  let t191 = @tactics.undisch_tac(@term_syntax.parse_term("munion((M0 : Multiset[A]), msing((a : A))) == munion((M1 : Multiset[A]), msing((b : A)))"))
+  let t188 = @term_syntax.parse_term("(K : Multiset[A])")
+  let t189 = @term_syntax.parse_term("(b : A)")
   let t190 = @tactics.map_every(fn(x185 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s186 = @tactics.exists_tac(x185)
     fn(x187 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s186(x187)
     }
-  }, @list.List([@parser.parse_term("M2:(A)multiset"), t189, t188]))
+  }, @list.List([@term_syntax.parse_term("(M2 : Multiset[A])"), t189, t188]))
   let t184 = @simp.rewrite_tac(@list.List([morder()]))
   let t183 = @simp.asm_rewrite_tac(@list.List([munion_ac()]))
-  let t182 = @tactics.exists_tac(@parser.parse_term("M2 munion K:(A)multiset"))
+  let t182 = @tactics.exists_tac(@term_syntax.parse_term("munion((M2 : Multiset[A]), (K : Multiset[A]))"))
   let t180 = @simp.asm_rewrite_tac(@list.List([]))
-  let t176 = @parser.parse_term("a:A")
+  let t176 = @term_syntax.parse_term("(a : A)")
   let t179 = @tactics.disch_then(fn(x178 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x173 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s174 = @tactics.mp_tac(x173)
@@ -735,21 +735,21 @@ fn step_38() -> Unit raise {
     })(((x177 : @kernel.Thm) => @bool.spec(t176, x177))(x178))
   })
   let t172 = @simp.asm_rewrite_tac(@list.List([mextension(), munion_v1(), msing_v1(), mmember()]))
-  let t171 = @tactics.undisch_tac(@parser.parse_term("M0 munion (msing a) = M1 munion (msing(b:A))"))
+  let t171 = @tactics.undisch_tac(@term_syntax.parse_term("munion((M0 : Multiset[A]), msing((a : A))) == munion((M1 : Multiset[A]), msing((b : A)))"))
   let t170 = @tactics.map_every(@tactics.match_mp_tac, @list.List([mmember_mdiff(), munion_inunion()]))
-  let t181 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("M1 mdiff (msing(a:A))")), t170), t171), t172), t179), t180), @int.arith_tac), @tactics.all_tac])
-  let t169 = @tactics.subgoal_then(@parser.parse_term("?M2. M1 = M2 munion (msing(a:A))"), @tactics.strip_assume_tac)
+  let t181 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("mdiff((M1 : Multiset[A]), msing((a : A)))")), t170), t171), t172), t179), t180), @int.arith_tac), @tactics.all_tac])
+  let t169 = @tactics.subgoal_then(@term_syntax.parse_term("∃ M2 : Multiset[A], (M1 : Multiset[A]) == munion(M2, msing((a : A)))"), @tactics.strip_assume_tac)
   let t167 = @meson.asm_meson_tac(@list.List([munion_11()]))
-  let t166 = @tactics.exists_tac(@parser.parse_term("K:(A)multiset"))
-  let t168 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disj2_tac, @tactics.undisch_then(@parser.parse_term("b:A = a"), fn(x163 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t166 = @tactics.exists_tac(@term_syntax.parse_term("(K : Multiset[A])"))
+  let t168 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disj2_tac, @tactics.undisch_then(@term_syntax.parse_term("(b : A) == (a : A)"), fn(x163 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s164 = @tactics.subst_all_tac(x163)
     fn(x165 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s164(x165)
     }
   })), t166), t167), @tactics.disj1_tac])
-  let t162 = @class.asm_cases_tac(@parser.parse_term("b:A = a"))
-  let t159 = @parser.parse_term("K:(A)multiset")
-  let t160 = @parser.parse_term("b:A")
+  let t162 = @class.asm_cases_tac(@term_syntax.parse_term("(b : A) == (a : A)"))
+  let t159 = @term_syntax.parse_term("(K : Multiset[A])")
+  let t160 = @term_syntax.parse_term("(b : A)")
   let t161 = @tactics.disch_then(@tactics.every_tcl(@lib.map(fn(x152 : @kernel.Term) -> (((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> ((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise) raise {
     let s153 = @tactics.x_choose_then(x152)
     fn(x154 : (@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> ((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
@@ -761,14 +761,14 @@ fn step_38() -> Unit raise {
         }
       }
     }
-  }, @list.List([@parser.parse_term("M1:(A)multiset"), t160, t159])))(@tactics.strip_assume_tac))
+  }, @list.List([@term_syntax.parse_term("(M1 : Multiset[A])"), t160, t159])))(@tactics.strip_assume_tac))
   let t194 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.gen_rewrite_tac(fn(x149 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s150 = @equal.land_conv(x149)
     fn(x151 : @kernel.Term) -> @kernel.Thm raise {
       s150(x151)
     }
   }, @list.List([morder()])), t161), t162), t168), t169), t181), t182), t183), t184), t190), t191), t192), t193)
-  lemma_2_0_c.set(@tactics.prove(@parser.parse_term("morder(<<) N (M0 munion (msing a))\n   ==> (?M. morder(<<) M M0 /\\ (N = M munion (msing a))) \\/\n       (?K. (N = M0 munion K) /\\ (forall b:A. b mmember K ==> b << a))"), t194))
+  lemma_2_0_c.set(@tactics.prove(@term_syntax.parse_term("morder((op_lt_lt : (A, A) -> Bool), (N : Multiset[A]), munion((M0 : Multiset[A]), msing((a : A)))) → (∃ M : Multiset[A], morder(op_lt_lt, M, M0) && N == munion(M, msing(a))) || (∃ K : Multiset[A], N == munion(M0, K) && (∀ b : A, mmember(b, K) → op_lt_lt(b, a)))"), t194))
 }
 
 ///|
@@ -788,8 +788,8 @@ fn step_39() -> Unit raise {
   let t210 = @tactics.repeat_tac(@tactics.strip_tac)
   let t209 = @tactics.match_mp_tac(multiset_induct())
   let t208 = @simp.once_rewrite_tac(@list.List([@theorems.swap_forall_thm()]))
-  let t206 = @parser.parse_term("N:(A)multiset")
-  let t207 = @tactics.spec_tac(@parser.parse_term("N:(A)multiset"), t206)
+  let t206 = @term_syntax.parse_term("(N : Multiset[A])")
+  let t207 = @tactics.spec_tac(@term_syntax.parse_term("(N : Multiset[A])"), t206)
   let t204 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
   let t205 = @list.List([@meson.asm_meson_tac(@list.List([@sets.in_()])), t204])
   let t200 = @drule.match_mp(lemma_2_0())
@@ -802,10 +802,10 @@ fn step_39() -> Unit raise {
   let t203 = @tactics.disch_then(fn(x202 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     t201(t200(x202))
   })
-  let t196 = @tactics.x_gen_tac(@parser.parse_term("N:(A)multiset"))
+  let t196 = @tactics.x_gen_tac(@term_syntax.parse_term("(N : Multiset[A])"))
   let t195 = @tactics.match_mp_tac(wfp_rules())
   let t213 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @simp.rewrite_tac(@list.List([@sets.in_()]))), t195), t196), t203), t205), t207), t208), t209), t210), t211), t212)
-  lemma_2_1_c.set(@tactics.prove(@parser.parse_term("(forall M b:A. b << a /\\ M IN WFP(morder(<<))\n            ==> (M munion (msing b)) IN WFP(morder(<<))) /\\\n   M0 IN WFP(morder(<<)) /\\\n   (forall M. morder(<<) M M0 ==> (M munion (msing a)) IN WFP(morder(<<)))\n   ==> (M0 munion (msing a)) IN WFP(morder(<<))"), t213))
+  lemma_2_1_c.set(@tactics.prove(@term_syntax.parse_term("(∀ M : Multiset[A], ∀ b : A, (op_lt_lt : (A, A) -> Bool)(b, (a : A)) && IN(M, WFP(morder(op_lt_lt))) → IN(munion(M, msing(b)), WFP(morder(op_lt_lt)))) && IN((M0 : Multiset[A]), WFP(morder(op_lt_lt))) && (∀ M : Multiset[A], morder(op_lt_lt, M, M0) → IN(munion(M, msing(a)), WFP(morder(op_lt_lt)))) → IN(munion(M0, msing(a)), WFP(morder(op_lt_lt)))"), t213))
 }
 
 ///|
@@ -824,7 +824,7 @@ fn step_40() -> Unit raise {
   let t215 = @tactics.match_mp_tac(lemma_2_1())
   let t214 = @tactics.repeat_tac(@tactics.strip_tac)
   let t217 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @tactics.match_mp_tac(wfp_part_induct())), t214), t215), t216)
-  lemma_2_2_c.set(@tactics.prove(@parser.parse_term("(forall M b. b << a /\\ M IN WFP(morder(<<))\n          ==> (M munion (msing b)) IN WFP(morder(<<)))\n   ==> forall M. M IN WFP(morder(<<)) ==> (M munion (msing a)) IN WFP(morder(<<))"), t217))
+  lemma_2_2_c.set(@tactics.prove(@term_syntax.parse_term("(∀ M : Multiset[_], ∀ b : _, (op_lt_lt : (_, _) -> Bool)(b, (a : _)) && IN(M, WFP(morder(op_lt_lt))) → IN(munion(M, msing(b)), WFP(morder(op_lt_lt)))) → (∀ M : Multiset[_], IN(M, WFP(morder(op_lt_lt))) → IN(munion(M, msing(a)), WFP(morder(op_lt_lt))))"), t217))
 }
 
 ///|
@@ -842,7 +842,7 @@ fn step_41() -> Unit raise {
   let t219 = @meson.meson_tac(@list.List([lemma_2_2()]))
   let t218 = @tactics.disch_then(@tactics.match_mp_tac)
   let t220 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@wf.wf_ind()])), t218), t219)
-  lemma_2_3_c.set(@tactics.prove(@parser.parse_term("WF(<<)\n   ==> forall a M. M IN WFP(morder(<<)) ==> (M munion (msing a)) IN WFP(morder(<<))"), t220))
+  lemma_2_3_c.set(@tactics.prove(@term_syntax.parse_term("WF((op_lt_lt : (_, _) -> Bool)) → (∀ a : _, ∀ M : Multiset[_], IN(M, WFP(morder(op_lt_lt))) → IN(munion(M, msing(a)), WFP(morder(op_lt_lt))))"), t220))
 }
 
 ///|
@@ -862,7 +862,7 @@ fn step_42() -> Unit raise {
   let t221 = @tactics.match_mp_tac(wfp_rules())
   let t224 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_()])), t221), t222), t223])
   let t225 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.match_mp_tac(multiset_induct())), @tactics.conj_tac), t224)
-  lemma_2_4_c.set(@tactics.prove(@parser.parse_term("WF(<<) ==> forall M. M IN WFP(morder(<<))"), t225))
+  lemma_2_4_c.set(@tactics.prove(@term_syntax.parse_term("WF((op_lt_lt : (_, _) -> Bool)) → (∀ M : Multiset[_], IN(M, WFP(morder(op_lt_lt))))"), t225))
 }
 
 ///|
@@ -878,7 +878,7 @@ pub fn lemma_2_4() -> @kernel.Thm {
 /// MORDER_WF
 fn step_43() -> Unit raise {
   let t226 = @simp.simp_tac(@list.List([wfp_wf(), @sets.extension(), @sets.in_univ(), lemma_2_4()]))
-  morder_wf_c.set(@tactics.prove(@parser.parse_term("WF(<<) ==> WF(morder(<<))"), t226))
+  morder_wf_c.set(@tactics.prove(@term_syntax.parse_term("WF((op_lt_lt : (_, _) -> Bool)) → WF(morder(op_lt_lt))"), t226))
 }
 
 ///|
