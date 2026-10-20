@@ -20,6 +20,8 @@ pub fn new_type_var() -> Pretype
 
 pub fn overload_interface(String, @kernel.Term) -> Unit raise
 
+pub let overload_registry : @ref.Ref[@list.List[(String, (String, @kernel.HolType))]]
+
 pub fn override_interface(String, @kernel.Term) -> Unit raise
 
 pub fn preterm_of_term(@kernel.Term) -> Preterm

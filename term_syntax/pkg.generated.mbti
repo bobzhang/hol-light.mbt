@@ -5,10 +5,13 @@ import {
   "bobzhang/hol_light/kernel",
   "bobzhang/hol_light/preterm",
   "moonbitlang/core/debug",
+  "moonbitlang/core/ref",
 }
 
 // Values
 pub fn check_spelling(String, String) -> Unit raise Unprintable
+
+pub let fixed_resolution : @ref.Ref[Bool]
 
 pub fn parse_preterm(String) -> @preterm.Preterm raise
 

@@ -667,13 +667,20 @@ fn print_term_with(t : @kernel.Term, sets~ : Bool) -> String raise Unprintable {
   let fixed = vars
     .map(v => @kernel.tyvars(@kernel.type_of(v)))
     .fold(init=@list.List([]), (acc, l) => acc.concat(l))
+  // names chosen through the view the term syntax reads them with; the
+  // readings are checked outside it (reads_as), under both resolutions
   fn print(overloads : Bool, all_constants : Bool) -> String raise Unprintable {
     let names = vars.map(v => if v is Var(n, _) { n } else { "" })
-    { typed_free: [], fixed, all_constants, overloads, names, sets, untyped: [] }.term(
-      t,
-      EXPR,
-      @list.List([]),
-    )
+    with_fixed_interface(() => {
+      { typed_free: [], fixed, all_constants, overloads, names, sets, untyped: [] }.term(
+        t,
+        EXPR,
+        @list.List([]),
+      )
+    }) catch {
+      Unprintable(_) as e => raise e
+      e => raise Unprintable("term: " + e.to_string())
+    }
   }
   // The most readable spelling that reads back as `t`: overloaded names
   // where they resolve to the same constants, and types only where the
@@ -776,6 +783,19 @@ pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintab
 /// differ in name; one invented before (which the environment may share)
 /// must be the same.
 pub fn check_spelling(old : String, s : String) -> Unit raise Unprintable {
+  // under the live interface and the fixed view alike (resolution.mbt)
+  with_resolution(false, () => check_spelling_once(old, s)) catch {
+    Unprintable(_) as e => raise e
+    _ => raise Unprintable("term")
+  }
+  with_resolution(true, () => check_spelling_once(old, s)) catch {
+    Unprintable(m) => raise Unprintable(m + " (names read context-free)")
+    _ => raise Unprintable("term")
+  }
+}
+
+///|
+fn check_spelling_once(old : String, s : String) -> Unit raise Unprintable {
   let from = @preterm.type_var_counter()
   let (a, na) = @parser.reread_term(old) catch {
     _ => raise Unprintable("quotation that does not read back")
@@ -806,7 +826,9 @@ fn reread(s : String) -> (@kernel.Term, Int) raise {
 
 ///|
 fn reads_as(s : String, t : @kernel.Term) -> Bool {
-  try same_term(reread(s).0, t) catch {
+  // under the live interface and the fixed view alike (resolution.mbt)
+  try same_term(with_resolution(false, () => reread(s).0), t) &&
+    same_term(with_resolution(true, () => reread(s).0), t) catch {
     _ => false
   }
 }

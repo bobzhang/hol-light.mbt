@@ -66,8 +66,25 @@ pub fn reduce_interface(sym : String, tm : Term) -> Unit raise {
 }
 
 ///|
+/// Every entry the interface was given (override_interface,
+/// overload_interface), kept when it is later replaced, removed or
+/// reordered: the term syntax reads overloaded names through it, so that
+/// they mean the same whenever they are read.
+pub let overload_registry : Ref[@list.List[(String, (String, HolType))]] = Ref::{
+  val: @list.List([]),
+}
+
+///|
+fn register_overload(sym : String, namty : (String, HolType)) -> Unit {
+  if !overload_registry.val.iter().any(e => e == (sym, namty)) {
+    overload_registry.val = overload_registry.val.prepend((sym, namty))
+  }
+}
+
+///|
 pub fn override_interface(sym : String, tm : Term) -> Unit raise {
   let namty = dest_const_or_var(tm)
+  register_overload(sym, namty)
   let interface = @lib.filter(
     (e : (String, (String, HolType))) => e.0 != sym,
     @printer.the_interface.val,
@@ -82,6 +99,7 @@ pub fn overload_interface(sym : String, tm : Term) -> Unit raise {
     e => raise e
   }
   let namty = dest_const_or_var(tm)
+  register_overload(sym, namty)
   if !@lib.can(t => @basics.type_match(gty, t, @list.List([])), namty.1) {
     raise Failure("Not an instance of type skeleton")
   }
