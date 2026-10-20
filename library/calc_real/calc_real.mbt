@@ -15303,19 +15303,19 @@ fn step_58() -> Unit raise {
   let b_tm = @term_syntax.parse_term("(b : Real)")
   let e_tm = @term_syntax.parse_term("(e : Num)")
   let c_tm = @term_syntax.parse_term("(c : Real)")
-  let neg_tm = @term_syntax.parse_term("op_minus_minus")
-  let abs_tm = @term_syntax.parse_term("abs")
+  let neg_tm = @term_syntax.parse_term("real_neg")
+  let abs_tm = @term_syntax.parse_term("real_abs")
   let inv_tm = @term_syntax.parse_term("inv")
   let sqrt_tm = @term_syntax.parse_term("sqrt")
-  let add_tm = @term_syntax.parse_term("op_plus")
-  let mul_tm = @term_syntax.parse_term("op_star")
-  let sub_tm = @term_syntax.parse_term("op_minus")
+  let add_tm = @term_syntax.parse_term("real_add")
+  let mul_tm = @term_syntax.parse_term("real_mul")
+  let sub_tm = @term_syntax.parse_term("real_sub")
   let exp_tm = @term_syntax.parse_term("exp")
   let ln_tm = @term_syntax.parse_term("ln")
   let add1_tm = @term_syntax.parse_term("op_plus(real_of_num(1))")
   let pow2_tm = @term_syntax.parse_term("pow(real_of_num(2))")
   let one_tm = @term_syntax.parse_term("real_of_num(1)")
-  let lt_tm = @term_syntax.parse_term("op_lt")
+  let lt_tm = @term_syntax.parse_term("real_lt")
   let t2083 = @simp.rewrite_conv(
     @list.List([
       @real.real_eq_neg2(),
@@ -17122,26 +17122,26 @@ fn step_64() -> Unit raise {
     },
   )
   let t2340 = (
-    @term_syntax.parse_term("op_gt_eq"),
+    @term_syntax.parse_term("real_ge"),
     fn(x2335 : @num.Num) -> ((@num.Num) -> Bool raise) raise {
       fn(x2336 : @num.Num) -> Bool raise { @num.ge_num(x2335, x2336) }
     },
   )
   let t2341 = (
-    @term_syntax.parse_term("op_gt"),
+    @term_syntax.parse_term("real_gt"),
     fn(x2333 : @num.Num) -> ((@num.Num) -> Bool raise) raise {
       fn(x2334 : @num.Num) -> Bool raise { @num.gt_num(x2333, x2334) }
     },
   )
   let t2342 = (
-    @term_syntax.parse_term("op_lt_eq"),
+    @term_syntax.parse_term("real_le"),
     fn(x2331 : @num.Num) -> ((@num.Num) -> Bool raise) raise {
       fn(x2332 : @num.Num) -> Bool raise { @num.le_num(x2331, x2332) }
     },
   )
   let pops = @list.List([
     (
-      @term_syntax.parse_term("op_lt"),
+      @term_syntax.parse_term("real_lt"),
       fn(x2329 : @num.Num) -> ((@num.Num) -> Bool raise) raise {
         fn(x2330 : @num.Num) -> Bool raise { @num.lt_num(x2329, x2330) }
       },
@@ -17207,11 +17207,11 @@ pub fn realcalc_rel_conv(x : @kernel.Term) -> Bool raise {
 /// REALCALC_REL_CONV
 fn step_65() -> Unit raise {
   let t2350 = (@term_syntax.parse_term("(op_eq : (Real, Real) -> Bool)"), realcalc_eq())
-  let t2351 = (@term_syntax.parse_term("op_gt_eq"), realcalc_ge())
-  let t2352 = (@term_syntax.parse_term("op_gt"), realcalc_gt())
-  let t2353 = (@term_syntax.parse_term("op_lt_eq"), realcalc_le())
+  let t2351 = (@term_syntax.parse_term("real_ge"), realcalc_ge())
+  let t2352 = (@term_syntax.parse_term("real_gt"), realcalc_gt())
+  let t2353 = (@term_syntax.parse_term("real_le"), realcalc_le())
   let pths = @list.List([
-    (@term_syntax.parse_term("op_lt"), realcalc_lt()),
+    (@term_syntax.parse_term("real_lt"), realcalc_lt()),
     t2353,
     t2352,
     t2351,
