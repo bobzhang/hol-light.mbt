@@ -519,7 +519,14 @@ async fn record(
       $|
     ),
   )
-  let has_load = sources.iter().any(p => declares_load(p.1))
+  // whether the package loads in load() (else in init): from its files,
+  // whatever sources are being recorded
+  let mut has_load = false
+  for f in mbt_files(pkg).filter(f => !f.has_suffix("_test.mbt")) {
+    if declares_load(read(f)) {
+      has_load = true
+    }
+  }
   let load_call = if has_load { "  @" + pkg_alias + ".load()\n" } else { "" }
   @fs.write_file(
     test_file,
@@ -575,6 +582,55 @@ async fn record(
 }
 
 ///|
+/// `line` with its counters (?n, GEN%PVAR%n) masked: goldens renumber them
+/// by first appearance in the whole output (testkit.normalize_counters), so
+/// a trace line is compared with this run's up to them.
+fn masked(line : String) -> String {
+  let cs = line.to_array()
+  let out = StringBuilder()
+  let pvar = "GEN%PVAR%".to_array()
+  let mut i = 0
+  while i < cs.length() {
+    let plen = if cs[i] == '?' {
+      1
+    } else if i + pvar.length() <= cs.length() && cs[i:i + pvar.length()] == pvar[:] {
+      pvar.length()
+    } else {
+      0
+    }
+    let j = i + plen
+    if plen > 0 && j < cs.length() && cs[j] is ('0'..='9') {
+      out.write_string(String::from_array(cs[i:j]) + "#")
+      let mut k = j
+      while k < cs.length() && cs[k] is ('0'..='9') {
+        k += 1
+      }
+      i = k
+    } else {
+      out.write_char(cs[i])
+      i += 1
+    }
+  }
+  out.to_string()
+}
+
+///|
+/// Whether the golden's lines `a` are this run's `b` up to one one-to-one
+/// renaming of counters across the whole block.
+fn same_block(a : Array[String], b : Array[String]) -> Bool {
+  if a.length() != b.length() {
+    return false
+  }
+  let renaming = { there: Map::new(), back: Map::new() }
+  for k in 0..<a.length() {
+    if !renaming.same(a[k], b[k]) {
+      return false
+    }
+  }
+  true
+}
+
+///|
 /// The lines testkit's show_theory_trace prints for `t` (a quotation parsed
 /// 10000 times or more in a row is shown once, with the count).
 fn render(t : Array[String]) -> Array[String] {
@@ -621,8 +677,15 @@ async fn rewrite_trace(
   while i < lines.length() {
     out.push(lines[i])
     if lines[i] == header && i + old_lines.length() < lines.length() &&
-      lines[i + 1:i + 1 + old_lines.length()] == old_lines[:] {
-      out.append(new_lines)
+      same_block(lines[i + 1:i + 1 + old_lines.length()].to_array(), old_lines) {
+      if old_lines.length() == new_lines.length() {
+        // a line that does not change keeps the golden's numbering
+        for k in 0..<new_lines.length() {
+          out.push(if new_lines[k] == old_lines[k] { lines[i + 1 + k] } else { new_lines[k] })
+        }
+      } else {
+        out.append(new_lines)
+      }
       i += 1 + old_lines.length()
       found += 1
     } else {
@@ -1172,10 +1235,198 @@ async fn respell(pkg : String, rev : String) -> Unit {
 }
 
 ///|
+/// The counters (?n, GEN%PVAR%n) of `line`, in order.
+fn counters(line : String) -> Array[String] {
+  let cs = line.to_array()
+  let out = []
+  let pvar = "GEN%PVAR%".to_array()
+  let mut i = 0
+  while i < cs.length() {
+    let plen = if cs[i] == '?' {
+      1
+    } else if i + pvar.length() <= cs.length() && cs[i:i + pvar.length()] == pvar[:] {
+      pvar.length()
+    } else {
+      0
+    }
+    let j = i + plen
+    if plen > 0 && j < cs.length() && cs[j] is ('0'..='9') {
+      let mut k = j
+      while k < cs.length() && cs[k] is ('0'..='9') {
+        k += 1
+      }
+      out.push(String::from_array(cs[i:k]))
+      i = k
+    } else {
+      i += 1
+    }
+  }
+  out
+}
+
+///|
+/// One renaming of counters, which must stay one to one across a block (the
+/// goldens renumber them by first appearance, keeping them distinct).
+struct Renaming {
+  there : Map[String, String]
+  back : Map[String, String]
+}
+
+///|
+/// Whether `a` (the golden's) and `b` (this run's) are the same line up to
+/// the renaming, extended to their counters if they are.
+fn Renaming::same(self : Renaming, a : String, b : String) -> Bool {
+  if masked(a) != masked(b) {
+    return false
+  }
+  let ca = counters(a)
+  let cb = counters(b)
+  // check every pair first (also against the line's own earlier ones),
+  // then extend the renaming
+  let there : Map[String, String] = Map::new()
+  let back : Map[String, String] = Map::new()
+  for k in 0..<ca.length() {
+    let x = match there.get(ca[k]) {
+      Some(v) => Some(v)
+      None => self.there.get(ca[k])
+    }
+    let y = match back.get(cb[k]) {
+      Some(v) => Some(v)
+      None => self.back.get(cb[k])
+    }
+    if x is Some(x) && x != cb[k] || y is Some(y) && y != ca[k] {
+      return false
+    }
+    there[ca[k]] = cb[k]
+    back[cb[k]] = ca[k]
+  }
+  for x, y in there {
+    self.there[x] = y
+  }
+  for y, x in back {
+    self.back[y] = x
+  }
+  true
+}
+
+///|
+/// `--sync-trace <package dir> <pairs>`: a theory's trace records the
+/// quotations that its dependencies' functions parse while it loads, so
+/// migrating them changes its golden too. `pairs` lists every migration
+/// (old literal, new literal, tab-separated, one a line) merged or to be
+/// merged. Each line of the theory's trace that differs from the golden's
+/// (up to a one-to-one renaming of counters) must be a quotation and its
+/// migration from `pairs`; the golden's and .expected's traces must agree;
+/// those lines are rewritten in both, and the reference test runs.
+async fn sync_trace(pkg : String, pairs_file : String) -> Unit {
+  let (_, status) = sh("git", ["status", "--porcelain", "--untracked-files=all"])
+  if status.trim() != "" {
+    fail("the working tree is not clean; commit or stash first:\n" + status)
+  }
+  // the migrations, as trace lines print them
+  // indexed by the old line up to counters
+  let migrations : Map[String, Array[(String, String)]] = Map::new()
+  for line in read(pairs_file).split("\n") {
+    guard line.find("\t") is Some(t) else { continue }
+    let old = "  " + ocaml_escaped(unquote(line[:t].to_owned()))
+    let new = "  " + ocaml_escaped(unquote(line[t + 1:].to_owned()))
+    let key = masked(old)
+    match migrations.get(key) {
+      Some(a) => a.push((old, new))
+      None => migrations[key] = [(old, new)]
+    }
+  }
+  let theory = theory_of(pkg)
+  let rec = record(pkg, theory, [])
+  let now = render(rec.trace)
+  let tests = golden_tests(pkg)
+  let keep = [pkg + "/"]
+  let mut changed = 0
+  for t in tests {
+    guard expected_file(read(t)) is Some(e) && @fs.exists(e) else {
+      fail("\{t} names no tools/ocaml_ref/<name>_ref.expected file")
+    }
+    keep.push(t)
+    keep.push(e)
+    // the two blocks, which must agree
+    let header = theory + " quotations (\{rec.trace.length()}):"
+    let blocks = []
+    for path in [t, e] {
+      let prefix = if path.has_suffix(".mbt") { "      #|" } else { "" }
+      let lines = read(path).split("\n").map(l => l.to_owned()).to_array()
+      let at = lines.search(prefix + header)
+      guard at is Some(at) && at + now.length() < lines.length() else {
+        fail("\{path} has no trace of \{theory} with \{rec.trace.length()} quotations")
+      }
+      blocks.push((path, prefix, lines, at))
+    }
+    let (_, p0, l0, a0) = blocks[0]
+    let (_, p1, l1, a1) = blocks[1]
+    for k in 0..<now.length() {
+      if l0[a0 + 1 + k][p0.length():] != l1[a1 + 1 + k][p1.length():] {
+        fail("\{t} and its .expected differ in the trace of \{theory} (line \{k})")
+      }
+    }
+    let renaming = { there: Map::new(), back: Map::new() }
+    let replace = []
+    for k in 0..<now.length() {
+      let g = l0[a0 + 1 + k][p0.length():].to_owned()
+      if renaming.same(g, now[k]) {
+        continue
+      }
+      // a migration: the golden has the old quotation, this run its new
+      // spelling
+      let ok = migrations
+        .get(masked(g))
+        .unwrap_or([])
+        .iter()
+        .any(m => m.1 == now[k] && renaming.same(g, m.0))
+      if !ok {
+        fail("\{t}: trace line \{k} differs and is not a migration:\n  golden: \{g[:min(160, g.length())]}\n  now:    \{now[k][:min(160, now[k].length())]}")
+      }
+      replace.push(k)
+    }
+    for b in blocks {
+      let (path, prefix, lines, at) = b
+      for k in replace {
+        lines[at + 1 + k] = prefix + now[k]
+      }
+      @fs.write_file(path, lines.join("\n"))
+    }
+    changed += replace.length()
+  }
+  println("\{pkg}: \{changed} trace lines are migrations")
+  if changed == 0 {
+    println("test: skipped (nothing changes)")
+    return
+  }
+  let failures = match tests {
+    [] => run_tests(pkg, None)
+    tests => {
+      let tdir = tests[0].split("/").map(p => p.to_owned()).to_array()
+      run_tests(tdir[:tdir.length() - 1].join("/"), Some(tests))
+    }
+  }
+  restore_others(keep)
+  if failures.is_empty() {
+    println("test: pass")
+  } else {
+    println("test: FAILED")
+    for m in failures {
+      println(m[:min(3000, m.length())].to_owned())
+    }
+    fail("the reference test fails")
+  }
+}
+
+///|
 async fn main {
   let args = @env.args()
   guard args.length() >= 2 else {
     fail("usage: moon run tools/migrate.mbtx -- [--retrace] <package dir>")
+  }
+  if args[1] == "--sync-trace" && args.length() >= 4 {
+    return sync_trace(args[2].trim_end(chars="/").to_owned(), args[3])
   }
   if args[1] == "--respell" && args.length() >= 4 {
     return respell(args[2].trim_end(chars="/").to_owned(), args[3])
