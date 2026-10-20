@@ -6536,369 +6536,350 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|0..0..1..2..5..solved at 11
       #|priority is now real
       #|Jordan/misc_defs_and_lemmas quotations (605):
-      #|  dirac_delta (i:num) =\n     (\\j. if (i=j) then (&.1) else (&.0))
-      #|  min_num (X:num->bool) = @m. (m IN X) /\\ (forall n. (n IN X) ==> (m <= n))
-      #|  ~(n' < n) ==> (n <=| n') 
-      #|  r = @m. (X:num->bool) m /\\ (forall n. X n ==> m <=| n)
-      #|  n:num
-      #|  \\m. (X:num->bool) m /\\ (forall n. X n ==> m <=| n)
-      #|  X:num->bool
-      #|  ?n. (X:num->bool) n /\\ (forall m. m <| n ==> ~X m)
-      #|  forall(X:num->bool) c. (X c) ==> (X (min_num X) /\\ (min_num X <=| c))
-      #|  max_real x y =\n        if (y <. x) then x else y
-      #|  min_real x y =\n        if (x <. y) then x else y
-      #|  deriv f x = @d. (f diffl d)(x)
-      #|  deriv2 f = (deriv (deriv f))
-      #|  &.0 <=. (&.0 -. (&.0))
-      #|  (&.0 <= y) /\\ (&.0 <=. x) /\\ (y+x <= (&.0)) ==> ((x= &.0) /\\ (y= &.0))
-      #|  x * (&.0) = (&.0)
-      #|  (y+x):real
-      #|  &.0 < (y+x) \\/ (y+x <=. (&.0))
-      #|  (a <=. b) <=> (&.0 <= (b - a))
-      #|  ( *. )
-      #|  forall x y. (&.0 <=. x) /\\ (&.0 <=. y) /\\ (x*.x <=. y*.y) ==> (x <=. y)
-      #|  x <=| M ==> (x <=| M+ u)
-      #|  (i:num) = n
-      #|  (M:num) + (t:num->num) n
-      #|  (n <=| m) /\\ (~(m = n)) ==> (SUC n <=| m)
-      #|  m = (n:num)
-      #|  forall m. (n<=|m) ==> (b m =0)
-      #|  ((b:num->num) (n) = 0) /\\ (forall m. ~(m=n) ==> (b m = t m))
-      #|  b = \\m. (if (m=n) then 0 else (t (m:num)) )
-      #|  (a=0) ==> (a <=|0)
+      #|  (dirac_delta : (Num, Num) -> Real)((i : Num)) == ((j : Num) => if i == j { real_of_num(1) } else { real_of_num(0) })
+      #|  (min_num : ((Num) -> Bool) -> Num)((X : (Num) -> Bool)) == select((m : Num) => IN(m, X) && (\226\136\128 n : Num, IN(n, X) \226\134\146 m <= n))
+      #|  !((n' : Num) < (n : Num)) \226\134\146 n <= n'
+      #|  (r : Num) == select((m : Num) => (X : (Num) -> Bool)(m) && (\226\136\128 n : Num, X(n) \226\134\146 m <= n))
+      #|  (n : Num)
+      #|  (m : Num) => (X : (Num) -> Bool)(m) && (\226\136\128 n : Num, X(n) \226\134\146 m <= n)
+      #|  (X : (Num) -> Bool)
+      #|  \226\136\131 n : Num, (X : (Num) -> Bool)(n) && (\226\136\128 m : Num, m < n \226\134\146 !X(m))
+      #|  \226\136\128 X : (Num) -> Bool, \226\136\128 c : Num, X(c) \226\134\146 X(min_num(X)) && min_num(X) <= c
+      #|  (max_real : (Real, Real) -> Real)((x : Real), (y : Real)) == (if y < x { x } else { y })
+      #|  (min_real : (Real, Real) -> Real)((x : Real), (y : Real)) == (if x < y { x } else { y })
+      #|  (deriv : ((Real) -> Real, Real) -> Real)((f : (Real) -> Real), (x : Real)) == select((d : Real) => diffl(f, d, x))
+      #|  (deriv2 : ((Real) -> Real, Real) -> Real)((f : (Real) -> Real)) == deriv(deriv(f))
+      #|  real_of_num(0) <= real_of_num(0) - real_of_num(0)
+      #|  real_of_num(0) <= (y : Real) && real_of_num(0) <= (x : Real) && y + x <= real_of_num(0) \226\134\146 x == real_of_num(0) && y == real_of_num(0)
+      #|  (x : Real) * real_of_num(0) == real_of_num(0)
+      #|  (y : Real) + (x : Real)
+      #|  real_of_num(0) < (y : Real) + (x : Real) || y + x <= real_of_num(0)
+      #|  ((a : Real) <= (b : Real)) == (real_of_num(0) <= b - a)
+      #|  op_star
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && real_of_num(0) <= y && x * x <= y * y \226\134\146 x <= y
+      #|  (x : Num) <= (M : Num) \226\134\146 x <= M + (u : Num)
+      #|  (i : Num) == (n : Num)
+      #|  (M : Num) + (t : (Num) -> Num)((n : Num))
+      #|  (n : Num) <= (m : Num) && !(m == n) \226\134\146 SUC(n) <= m
+      #|  (m : Num) == (n : Num)
+      #|  \226\136\128 m : Num, (n : Num) <= m \226\134\146 (b : (Num) -> Num)(m) == 0
+      #|  (b : (Num) -> Num)((n : Num)) == 0 && (\226\136\128 m : Num, !(m == n) \226\134\146 b(m) == (t : (Num) -> Num)(m))
+      #|  (b : (Num) -> Num) == ((m : Num) => if m == (n : Num) { 0 } else { (t : (Num) -> Num)(m) })
+      #|  (a : Num) == 0 \226\134\146 a <= 0
       #|  0
-      #|  0<=|m
-      #|  n:num
-      #|  n:num
-      #|  t:num->num
-      #|  t:num->num
-      #|  forall(t:num->num). (?n. forall m. (n <=| m) ==> (t m = 0)) ==>\n      (?M. forall i. (t i <=| M))
-      #|  b:num->num
-      #|  b:num->num
-      #|  b:num->num
-      #|  b:num->num
-      #|  b:num->num
-      #|  b:num->num
-      #|  b:num->num
-      #|  b:num->num
-      #|  b:num->num
-      #|  inv x * y = y* inv x
-      #|  forall x y z. (&.0 <. x) ==> ((inv(x)*y < z) <=> (y <. x*z))
-      #|  (x <. &.0) ==> (x <=. &.0)
-      #|  ((x <. &.0) ==> ~(&.0 <=. x))
-      #|  --. (y:real)
-      #|  --. (x:real)
-      #|  (x <. &.0) ==> (x <=. &.0)
-      #|  ((x <. &.0) ==> ~(&.0 <=. x))
-      #|  (&.0 < x) \\/ (x = &.0) \\/ (x < &.0)
-      #|  (&.0 <. x) ==> ~(x <=. &.0)
-      #|  ((&.0 <. x) ==> (&.0 <=. x))
-      #|  forall x y. ((&.0 < x) ==> ((&.0 <= x*y) <=> ((&.0 <= x /\\ (&.0 <=. y)) \\/ ((x <= &.0) /\\ (y <= &.0) ))))
-      #|  forall x y. (&.0 <= x*y) <=>\n    ((&.0 <= x /\\ (&.0 <=. y)) \\/ ((x <= &.0) /\\ (y <= &.0) ))
-      #|  (b:real) = (abs t)
-      #|  t:real
-      #|  t:real
-      #|  forall t u. abs(t) <. u ==> t*t <. u*u
-      #|  (b:real) = (abs t)
-      #|  t:real
-      #|  t:real
-      #|  forall t u. abs(t) <=. u ==> t*t <=. u*u
-      #|  n:num
-      #|  R/e
-      #|  forall n. &.0 < &.2 pow n
-      #|  forall R e. ?n. (&.0 <. R)/\\ (&.0 <. e) ==> R*(twopow(--: (&:n))) <. e
+      #|  0 <= (m : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (t : (Num) -> Num)
+      #|  (t : (Num) -> Num)
+      #|  \226\136\128 t : (Num) -> Num, (\226\136\131 n : Num, \226\136\128 m : Num, n <= m \226\134\146 t(m) == 0) \226\134\146 (\226\136\131 M : Num, \226\136\128 i : Num, t(i) <= M)
+      #|  (b : (Num) -> Num)
+      #|  (b : (Num) -> Num)
+      #|  (b : (Num) -> Num)
+      #|  (b : (Num) -> Num)
+      #|  (b : (Num) -> Num)
+      #|  (b : (Num) -> Num)
+      #|  (b : (Num) -> Num)
+      #|  (b : (Num) -> Num)
+      #|  (b : (Num) -> Num)
+      #|  inv((x : Real)) * (y : Real) == y * inv(x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, real_of_num(0) < x \226\134\146 (inv(x) * y < z) == (y < x * z)
+      #|  (x : Real) < real_of_num(0) \226\134\146 x <= real_of_num(0)
+      #|  (x : Real) < real_of_num(0) \226\134\146 !(real_of_num(0) <= x)
+      #|  -(y : Real)
+      #|  -(x : Real)
+      #|  (x : Real) < real_of_num(0) \226\134\146 x <= real_of_num(0)
+      #|  (x : Real) < real_of_num(0) \226\134\146 !(real_of_num(0) <= x)
+      #|  real_of_num(0) < (x : Real) || x == real_of_num(0) || x < real_of_num(0)
+      #|  real_of_num(0) < (x : Real) \226\134\146 !(x <= real_of_num(0))
+      #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) <= x
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) < x \226\134\146 (real_of_num(0) <= x * y) == (real_of_num(0) <= x && real_of_num(0) <= y || x <= real_of_num(0) && y <= real_of_num(0))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (real_of_num(0) <= x * y) == (real_of_num(0) <= x && real_of_num(0) <= y || x <= real_of_num(0) && y <= real_of_num(0))
+      #|  (b : Real) == abs((t : Real))
+      #|  (t : Real)
+      #|  (t : Real)
+      #|  \226\136\128 t : Real, \226\136\128 u : Real, abs(t) < u \226\134\146 t * t < u * u
+      #|  (b : Real) == abs((t : Real))
+      #|  (t : Real)
+      #|  (t : Real)
+      #|  \226\136\128 t : Real, \226\136\128 u : Real, abs(t) <= u \226\134\146 t * t <= u * u
+      #|  (n : Num)
+      #|  (R : Real) / (e : Real)
+      #|  \226\136\128 n : Num, real_of_num(0) < pow(real_of_num(2), n)
+      #|  \226\136\128 R : Real, \226\136\128 e : Real, \226\136\131 n : Num, real_of_num(0) < R && real_of_num(0) < e \226\134\146 R * twopow(-int_of_num(n)) < e
       #|  TAGB
       #|  \\(n,m) f. (sm:num->num->(num->real)->real) n m f
-      #|  (forall f n. sm n 0 f = &1) /\\ (forall f m n. sm  n (SUC m) f = sm n m f * f(n + m))
-      #|  ?prod. (forall f n.  prod(n,0) f = &1) /\\\n         (forall f m n. prod(n,SUC m) f = prod(n,m) f * f(n + m))
-      #|  forall n m. (prod(n,0) f = &1) /\\\n   (prod(n,SUC m) f = prod(n,m) f * f(n + m))
-      #|  0+|n = n
-      #|  n+| (SUC p) = (SUC (n+|p))
-      #|  forall f n p. prod(0,n) f * prod(n,p) f = prod(0,n + p) f
-      #|  forall f m n. abs(prod(m,n) f) = prod(m,n) (\\n. abs(f n))
-      #|  r <| (n+| m) ==> (r <| (SUC n +| m))
-      #|  (m<=| (m+|n))/\\ (m +| n <| (SUC n +| m))
-      #|  forall f g m n. (forall r. m <= r /\\ r < (n + m) ==> (f(r) = g(r)))\n        ==> (prod(m,n) f = prod(m,n) g)
-      #|  m+|n
-      #|  forall f. (forall n. &0 <= f(n)) ==> forall m n. &0 <= prod(m,n) f
-      #|  m <=| (m +| n)
-      #|  n:num
-      #|  n:num
-      #|  forall f m n.\n     (forall n. m <= n ==> &0 <= f(n))\n     ==> &0 <= prod(m,n) f
-      #|  ||. (||. x) = (||. x)
-      #|  forall f m n. abs(prod(m,n) (\\m. abs(f m))) = prod(m,n) (\\m. abs(f m))
-      #|  (x = (&.0)) ==> (y *. x = (&.0))
-      #|  (x = (&.0)) ==> (x *. y = (&.0))
-      #|  p <| (n+| m)
-      #|  forall f m n. (?p. (m <= p /\\ (p < (n+| m)) /\\ (f p = (&.0)))) ==>\n         (prod(m,n) f = &0)
-      #|  (~(p <| (n+|m)) ==> ((p <| ((SUC n) +| m)) ==> (p = ((m +| n)))))
-      #|  forall f g m n. prod(m,n) (\\n. f(n) * g(n)) = prod(m,n) f * prod(m,n) g
-      #|  forall f c m n. prod(m,n) (\\n. c * f(n)) = (c **. n) * prod(m,n) f
-      #|  forall(f:A->B) a b. SURJ f a b ==> (b = (IMAGE f a))
-      #|  forall a b (f:A->B). FINITE a /\\ (SURJ f a b) ==> FINITE b
-      #|  u:B->A
-      #|  forall y. ?u. ((y IN b) ==> ((u IN a) /\\ ((f:A->B) u = y)))
-      #|  forall a b (f:A->B). (SURJ f a b) ==> (?(g:B->A). (INJ g b a))
-      #|  x:A->bool
-      #|  (?)
-      #|  (IN)
-      #|  c:A
-      #|  t:A->bool
-      #|  (X DIFF t):A->bool
-      #|  (?)
-      #|  c:A
-      #|  forall(X:A->bool)  V.\n     (X DIFF (INTERS V) = UNIONS (IMAGE ((DIFF) X) V))
-      #|  forall X (A:A->bool).  (A IN X) ==> (INTERS X SUBSET A)
-      #|  X:A->bool
-      #|  forall X (U:(A->bool)->bool). (U X) ==> (X SUBSET (UNIONS U))
-      #|  forall(f:A->B) a. SURJ f a (IMAGE f a)
-      #|  (SUBSET)
-      #|  y:B
-      #|  {x | (x IN (X:A->bool))/\\ (f x IN (Y:B->bool)) }
-      #|  forall(f:A->B) X Y. (Y SUBSET (IMAGE f X)) ==>\n    (?Z. (Z SUBSET X) /\\ (Y = IMAGE f Z))
-      #|  y:B
-      #|  A INTER (u:A->bool)
-      #|  (?)
-      #|  y:A
-      #|  y:A
-      #|  ((C SUBSET (B:A->bool)) /\\ (C SUBSET A) /\\ ((A INTER B) SUBSET C)) ==> ((B INTER A) = C)
-      #|  forall(U:(A->bool)->bool) A. (((UNIONS U) INTER A) =\n       (UNIONS (IMAGE ((INTER) A) U)))
-      #|  forall U (X:A->bool). (forall A. (A IN U) ==> (A SUBSET X))  ==> (UNIONS U SUBSET X)
-      #|  forall X A (B:A->bool). (X SUBSET (A INTER B)) <=> (X SUBSET A) /\\ (X SUBSET B)
-      #|  forall X. ~(X = {}) <=> (? (u:A). (u IN X))
-      #|  forall A B. (A SUBSET B) ==>(UNIONS (A:(A->bool)->bool) SUBSET (UNIONS B))
-      #|  x':(A->bool)->bool
-      #|  t':(A->bool)
-      #|  (x:A) IN t
-      #|  (t':(A->bool)->bool)
-      #|  UNIONS (t':(A->bool)->bool)
-      #|  forall(X:((A->bool)->bool)->bool).\n    UNIONS (UNIONS X) = (UNIONS (IMAGE UNIONS X))
-      #|  forall X A. (?(x:A->bool). (A x /\\ (x SUBSET X))) ==> ((INTERS A) SUBSET X)
-      #|  INTERS EMPTY = (UNIV:A->bool)
-      #|  preimage dom (f:A->B)\n  Z = {x | (x IN dom) /\\ (f x IN Z)}
-      #|  forall f x Z dom. x IN (preimage dom (f:A->B) Z) <=> (x IN dom) /\\ (f x IN Z)
-      #|  supp (f:A->B) = \\ x.  ~(f x = (CHOICE (UNIV:B ->bool)) )
-      #|  func a b = (\\ (f:A->B). ((forall x. (x IN a) ==> (f x IN b)) /\\\n              ((supp f) SUBSET a))) 
-      #|  reflexive (f:A->A->bool) <=> (forall x. f x x)
-      #|  symmetric (f:A->A->bool) <=> (forall x y. f x y ==> f y x)
-      #|  transitive (f:A->A->bool) <=> (forall x y z. f x y /\\ f y z ==> f x z)
-      #|  equivalence_relation (f:A->A->bool) <=>\n    (reflexive f) /\\ (symmetric f) /\\ (transitive f)
-      #|  partition (A:A->bool) SA <=> (UNIONS SA = A) /\\\n   (forall a b. ((a IN SA) /\\ (b IN SA) /\\ (~(a = b)) ==> ({} = (a INTER b))))
-      #|  forall X (A:A->bool). (A SUBSET X) ==> ((X DIFF (X DIFF A)) = A)
-      #|  forall P (x:A). (?y. P y /\\ (x = y)) <=> P x
-      #|  \\x:A. x
-      #|  forall s:A->bool. s >=_c s
-      #|  n:num < N
-      #|  n:num
-      #|  n:num
-      #|  N:num
-      #|  y:A
-      #|  \\n:num. if n = N then x:A else f n
-      #|  f:num->A
-      #|  SUC N
-      #|  N:num
+      #|  (\226\136\128 f : (Num) -> Real, \226\136\128 n : Num, (sm : (Num, Num, (Num) -> Real) -> Real)(n, 0, f) == real_of_num(1)) && (\226\136\128 f : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, sm(n, SUC(m), f) == sm(n, m, f) * f(n + m))
+      #|  \226\136\131 prod : ((Num, Num), (Num) -> Real) -> Real, (\226\136\128 f : (Num) -> Real, \226\136\128 n : Num, prod((n, 0), f) == real_of_num(1)) && (\226\136\128 f : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, prod((n, SUC(m)), f) == prod((n, m), f) * f(n + m))
+      #|  \226\136\128 n : Num, \226\136\128 m : Num, prod((n, 0), (f : (Num) -> Real)) == real_of_num(1) && prod((n, SUC(m)), f) == prod((n, m), f) * f(n + m)
+      #|  0 + (n : Num) == n
+      #|  (n : Num) + SUC((p : Num)) == SUC(n + p)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 n : Num, \226\136\128 p : Num, prod((0, n), f) * prod((n, p), f) == prod((0, n + p), f)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, abs(prod((m, n), f)) == prod((m, n), (n : Num) => abs(f(n)))
+      #|  (r : Num) < (n : Num) + (m : Num) \226\134\146 r < SUC(n) + m
+      #|  (m : Num) <= m + (n : Num) && m + n < SUC(n) + m
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, (\226\136\128 r : Num, m <= r && r < n + m \226\134\146 f(r) == g(r)) \226\134\146 prod((m, n), f) == prod((m, n), g)
+      #|  (m : Num) + (n : Num)
+      #|  \226\136\128 f : (Num) -> Real, (\226\136\128 n : Num, real_of_num(0) <= f(n)) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, real_of_num(0) <= prod((m, n), f))
+      #|  (m : Num) <= m + (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, (\226\136\128 n : Num, m <= n \226\134\146 real_of_num(0) <= f(n)) \226\134\146 real_of_num(0) <= prod((m, n), f)
+      #|  abs(abs((x : Real))) == abs(x)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, abs(prod((m, n), (m : Num) => abs(f(m)))) == prod((m, n), (m : Num) => abs(f(m)))
+      #|  (x : Real) == real_of_num(0) \226\134\146 (y : Real) * x == real_of_num(0)
+      #|  (x : Real) == real_of_num(0) \226\134\146 x * (y : Real) == real_of_num(0)
+      #|  (p : Num) < (n : Num) + (m : Num)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, (\226\136\131 p : Num, m <= p && p < n + m && f(p) == real_of_num(0)) \226\134\146 prod((m, n), f) == real_of_num(0)
+      #|  !((p : Num) < (n : Num) + (m : Num)) \226\134\146 p < SUC(n) + m \226\134\146 p == m + n
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, prod((m, n), (n : Num) => f(n) * g(n)) == prod((m, n), f) * prod((m, n), g)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 c : Real, \226\136\128 m : Num, \226\136\128 n : Num, prod((m, n), (n : Num) => c * f(n)) == pow(c, n) * prod((m, n), f)
+      #|  \226\136\128 f : (A) -> B, \226\136\128 a : (A) -> Bool, \226\136\128 b : (B) -> Bool, SURJ(f, a, b) \226\134\146 b == IMAGE(f, a)
+      #|  \226\136\128 a : (A) -> Bool, \226\136\128 b : (B) -> Bool, \226\136\128 f : (A) -> B, FINITE(a) && SURJ(f, a, b) \226\134\146 FINITE(b)
+      #|  (u : (B) -> A)
+      #|  \226\136\128 y : B, \226\136\131 u : A, IN(y, (b : (B) -> Bool)) \226\134\146 IN(u, (a : (A) -> Bool)) && (f : (A) -> B)(u) == y
+      #|  \226\136\128 a : (A) -> Bool, \226\136\128 b : (B) -> Bool, \226\136\128 f : (A) -> B, SURJ(f, a, b) \226\134\146 (\226\136\131 g : (B) -> A, INJ(g, b, a))
+      #|  (x : (A) -> Bool)
+      #|  (exists : ((_) -> Bool) -> Bool)
+      #|  (IN : (_, (_) -> Bool) -> Bool)
+      #|  (c : A)
+      #|  (t : (A) -> Bool)
+      #|  DIFF((X : (A) -> Bool), (t : (A) -> Bool))
+      #|  (exists : ((_) -> Bool) -> Bool)
+      #|  (c : A)
+      #|  \226\136\128 X : (A) -> Bool, \226\136\128 V : ((A) -> Bool) -> Bool, DIFF(X, INTERS(V)) == UNIONS(IMAGE(DIFF(X), V))
+      #|  \226\136\128 X : ((A) -> Bool) -> Bool, \226\136\128 A : (A) -> Bool, IN(A, X) \226\134\146 SUBSET(INTERS(X), A)
+      #|  (X : (A) -> Bool)
+      #|  \226\136\128 X : (A) -> Bool, \226\136\128 U : ((A) -> Bool) -> Bool, U(X) \226\134\146 SUBSET(X, UNIONS(U))
+      #|  \226\136\128 f : (A) -> B, \226\136\128 a : (A) -> Bool, SURJ(f, a, IMAGE(f, a))
+      #|  (SUBSET : ((_) -> Bool, (_) -> Bool) -> Bool)
+      #|  (y : B)
+      #|  {(x : A) | IN(x, (X : (A) -> Bool)) && IN((f : (A) -> B)(x), (Y : (B) -> Bool))}
+      #|  \226\136\128 f : (A) -> B, \226\136\128 X : (A) -> Bool, \226\136\128 Y : (B) -> Bool, SUBSET(Y, IMAGE(f, X)) \226\134\146 (\226\136\131 Z : (A) -> Bool, SUBSET(Z, X) && Y == IMAGE(f, Z))
+      #|  (y : B)
+      #|  INTER((A : (A) -> Bool), (u : (A) -> Bool))
+      #|  (exists : ((_) -> Bool) -> Bool)
+      #|  (y : A)
+      #|  (y : A)
+      #|  SUBSET((C : (A) -> Bool), (B : (A) -> Bool)) && SUBSET(C, (A : (A) -> Bool)) && SUBSET(INTER(A, B), C) \226\134\146 INTER(B, A) == C
+      #|  \226\136\128 U : ((A) -> Bool) -> Bool, \226\136\128 A : (A) -> Bool, INTER(UNIONS(U), A) == UNIONS(IMAGE(INTER(A), U))
+      #|  \226\136\128 U : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Bool, (\226\136\128 A : (A) -> Bool, IN(A, U) \226\134\146 SUBSET(A, X)) \226\134\146 SUBSET(UNIONS(U), X)
+      #|  \226\136\128 X : (A) -> Bool, \226\136\128 A : (A) -> Bool, \226\136\128 B : (A) -> Bool, SUBSET(X, INTER(A, B)) == (SUBSET(X, A) && SUBSET(X, B))
+      #|  \226\136\128 X : (A) -> Bool, !(X == {}) == (\226\136\131 u : A, IN(u, X))
+      #|  \226\136\128 A : ((A) -> Bool) -> Bool, \226\136\128 B : ((A) -> Bool) -> Bool, SUBSET(A, B) \226\134\146 SUBSET(UNIONS(A), UNIONS(B))
+      #|  (x' : ((A) -> Bool) -> Bool)
+      #|  (t' : (A) -> Bool)
+      #|  IN((x : A), (t : (A) -> Bool))
+      #|  (t' : ((A) -> Bool) -> Bool)
+      #|  UNIONS((t' : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 X : (((A) -> Bool) -> Bool) -> Bool, UNIONS(UNIONS(X)) == UNIONS(IMAGE(UNIONS, X))
+      #|  \226\136\128 X : (A) -> Bool, \226\136\128 A : ((A) -> Bool) -> Bool, (\226\136\131 x : (A) -> Bool, A(x) && SUBSET(x, X)) \226\134\146 SUBSET(INTERS(A), X)
+      #|  (INTERS : (((A) -> Bool) -> Bool, A) -> Bool)(({} : ((A) -> Bool) -> Bool)) == (UNIV : (A) -> Bool)
+      #|  (preimage : ((A) -> Bool, (A) -> B, (B) -> Bool, A) -> Bool)((dom : (A) -> Bool), (f : (A) -> B), (Z : (B) -> Bool)) == {(x : A) | IN(x, dom) && IN(f(x), Z)}
+      #|  \226\136\128 f : (A) -> B, \226\136\128 x : A, \226\136\128 Z : (B) -> Bool, \226\136\128 dom : (A) -> Bool, IN(x, preimage(dom, f, Z)) == (IN(x, dom) && IN(f(x), Z))
+      #|  (supp : ((A) -> B, A) -> Bool)((f : (A) -> B)) == ((x : A) => !(f(x) == CHOICE(UNIV)))
+      #|  (func : ((A) -> Bool, (B) -> Bool, (A) -> B) -> Bool)((a : (A) -> Bool), (b : (B) -> Bool)) == ((f : (A) -> B) => (\226\136\128 x : A, IN(x, a) \226\134\146 IN(f(x), b)) && SUBSET(supp(f), a))
+      #|  (reflexive : ((A, A) -> Bool) -> Bool)((f : (A, A) -> Bool)) == (\226\136\128 x : A, f(x, x))
+      #|  (symmetric : ((A, A) -> Bool) -> Bool)((f : (A, A) -> Bool)) == (\226\136\128 x : A, \226\136\128 y : A, f(x, y) \226\134\146 f(y, x))
+      #|  (transitive : ((A, A) -> Bool) -> Bool)((f : (A, A) -> Bool)) == (\226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : A, f(x, y) && f(y, z) \226\134\146 f(x, z))
+      #|  (equivalence_relation : ((A, A) -> Bool) -> Bool)((f : (A, A) -> Bool)) == (reflexive(f) && symmetric(f) && transitive(f))
+      #|  (partition : ((A) -> Bool, ((A) -> Bool) -> Bool) -> Bool)((A : (A) -> Bool), (SA : ((A) -> Bool) -> Bool)) == (UNIONS(SA) == A && (\226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, SA) && IN(b, SA) && !(a == b) \226\134\146 {} == INTER(a, b)))
+      #|  \226\136\128 X : (A) -> Bool, \226\136\128 A : (A) -> Bool, SUBSET(A, X) \226\134\146 DIFF(X, DIFF(X, A)) == A
+      #|  \226\136\128 P : (A) -> Bool, \226\136\128 x : A, (\226\136\131 y : A, P(y) && x == y) == P(x)
+      #|  (x : A) => x
+      #|  \226\136\128 s : (A) -> Bool, op_gt_eq_us_c(s, s)
+      #|  (n : Num) < (N : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (y : A)
+      #|  (n : Num) => if n == (N : Num) { (x : A) } else { (f : (Num) -> A)(n) }
+      #|  (f : (Num) -> A)
+      #|  SUC((N : Num))
+      #|  (N : Num)
       #|  0
-      #|  forall s:A->bool. FINITE s ==> ?n:num. {x | x < n} >=_c s
-      #|  COUNTABLE (UNIV:num->bool)
-      #|  SUC a = a+| 1
-      #|  n:num
-      #|  SUC n
-      #|  n:num
-      #|  SUC a +| b = a +| SUC b
-      #|  SUC b
-      #|  t'  = SUC t
-      #|  SUC t = t+|1
-      #|  SUC n
-      #|  n:num
-      #|  n:num
-      #|  t:num
+      #|  \226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 (\226\136\131 n : Num, op_gt_eq_us_c({(x : Num) | x < n}, s))
+      #|  (COUNTABLE : ((Num) -> Bool) -> Bool)((UNIV : (Num) -> Bool))
+      #|  SUC((a : Num)) == a + 1
+      #|  (n : Num)
+      #|  SUC((n : Num))
+      #|  (n : Num)
+      #|  SUC((a : Num)) + (b : Num) == a + SUC(b)
+      #|  SUC((b : Num))
+      #|  (t' : Num) == SUC((t : Num))
+      #|  SUC((t : Num)) == t + 1
+      #|  SUC((n : Num))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (t : Num)
       #|  0
       #|  0
-      #|  b:num
-      #|  y':num
-      #|  a:num
-      #|  x:num
-      #|  ?t. t = x+|y'
-      #|  p:num#num
+      #|  (b : Num)
+      #|  (y' : Num)
+      #|  (a : Num)
+      #|  (x : Num)
+      #|  \226\136\131 t : Num, t == (x : Num) + (y' : Num)
+      #|  (p : (Num, Num))
       #|  fn:num -> (num#num)
-      #|  (\\ (a:num,b:num) (n:num) . if (b=0) then (0,a+b+1) else (a+1,b-1))
-      #|  (0,0)
-      #|  COUNTABLE {((x:num),(y:num)) | T}
+      #|  GABS((f : ((Num, Num), Num) -> (Num, Num)) => \226\136\128 a : Num, \226\136\128 b : Num, GEQ(f((a, b)), (n : Num) => if b == 0 { (0, a + (b + 1)) } else { (a + 1, b - 1) }))
+      #|  (0, 0)
+      #|  COUNTABLE({((x : Num), (y : Num)) | true})
       #|  TAGB
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  x':num
-      #|  ?x' y'. (u:num,v:num) = (x',y')
-      #|  (u:num,v:num)
-      #|  y:A
-      #|  t:A->bool
-      #|  (\\p. (g:(A->bool)->num->A) ((f:num->(A->bool)) (FST ((h:num->(num#num)) p))) (SND (h p)))
-      #|  h:num->(num#num)
-      #|  (x:(A->bool)->num) a
-      #|  a:A->bool
-      #|  a:A->bool
-      #|  forall a y. (a IN (A:(A->bool)->bool)) /\\ (y IN a) ==> (? (u:num) (v:num). ( a = f u) /\\ (y = g a v))
-      #|  g:(A->bool)->num->A
-      #|  forall A:(A->bool)->bool. (COUNTABLE A) /\\\n      (forall a. (a IN A) ==> (COUNTABLE a)) ==> (COUNTABLE (UNIONS A))
+      #|  (x' : Num)
+      #|  \226\136\131 x' : Num, \226\136\131 y' : Num, ((u : Num), (v : Num)) == (x', y')
+      #|  ((u : Num), (v : Num))
+      #|  (y : A)
+      #|  (t : (A) -> Bool)
+      #|  (p : Num) => (g : ((A) -> Bool, Num) -> A)((f : (Num, A) -> Bool)(FST((h : (Num) -> (Num, Num))(p))), SND(h(p)))
+      #|  (h : (Num) -> (Num, Num))
+      #|  (x : ((A) -> Bool) -> Num)((a : (A) -> Bool))
+      #|  (a : (A) -> Bool)
+      #|  (a : (A) -> Bool)
+      #|  \226\136\128 a : (A) -> Bool, \226\136\128 y : A, IN(a, (A : ((A) -> Bool) -> Bool)) && IN(y, a) \226\134\146 (\226\136\131 u : Num, \226\136\131 v : Num, a == (f : (Num, A) -> Bool)(u) && y == (g : ((A) -> Bool, Num) -> A)(a, v))
+      #|  (g : ((A) -> Bool, Num) -> A)
+      #|  \226\136\128 A : ((A) -> Bool) -> Bool, COUNTABLE(A) && (\226\136\128 a : (A) -> Bool, IN(a, A) \226\134\146 COUNTABLE(a)) \226\134\146 COUNTABLE(UNIONS(A))
       #|  TAGB
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  x':A
-      #|  y:B
-      #|  (f':A->B) o (f:num->A)
-      #|  forall(A:A->bool) (B:B->bool) . (COUNTABLE A) /\\ (?f. (B SUBSET IMAGE f A)) ==>\n        (COUNTABLE B)
-      #|  f:A->B
-      #|  A:A->bool
-      #|  forall(A:A->bool) (B:B->bool). (COUNTABLE A) /\\ (A >=_c B) ==>\n     (COUNTABLE B)
-      #|  I:num->num
-      #|  forall n. COUNTABLE {x | x <| n}
-      #|  n:num
-      #|  forall(A:A->bool). (FINITE A) ==> (COUNTABLE A)
-      #|  ~ (FINITE (UNIV:num->bool))
-      #|  ({u | i <| u} UNION {m | m <=| i}) = UNIV
-      #|  forall i. ({u | i <| u} UNION {m | m <=| i}) = UNIV
-      #|  ({u | i <| u} UNION {m | m <=| i}) = UNIV
-      #|  i:num
-      #|  forall i. ~ (FINITE {u | i <| u})
-      #|  s INTER t SUBSET (s:A->bool)
-      #|  forall s (t:A->bool). (FINITE s ==> FINITE(s INTER t)) /\\ (FINITE t ==> FINITE (s INTER t))
+      #|  (x' : A)
+      #|  (y : B)
+      #|  o((f' : (A) -> B), (f : (Num) -> A))
+      #|  \226\136\128 A : (A) -> Bool, \226\136\128 B : (B) -> Bool, COUNTABLE(A) && (\226\136\131 f : (A) -> B, SUBSET(B, IMAGE(f, A))) \226\134\146 COUNTABLE(B)
+      #|  (f : (A) -> B)
+      #|  (A : (A) -> Bool)
+      #|  \226\136\128 A : (A) -> Bool, \226\136\128 B : (B) -> Bool, COUNTABLE(A) && op_gt_eq_us_c(A, B) \226\134\146 COUNTABLE(B)
+      #|  (I : (Num) -> Num)
+      #|  \226\136\128 n : Num, COUNTABLE({(x : Num) | x < n})
+      #|  (n : Num)
+      #|  \226\136\128 A : (A) -> Bool, FINITE(A) \226\134\146 COUNTABLE(A)
+      #|  !(FINITE : ((Num) -> Bool) -> Bool)((UNIV : (Num) -> Bool))
+      #|  UNION({(u : Num) | (i : Num) < u}, {(m : Num) | m <= i}) == UNIV
+      #|  \226\136\128 i : Num, UNION({(u : Num) | i < u}, {(m : Num) | m <= i}) == UNIV
+      #|  UNION({(u : Num) | (i : Num) < u}, {(m : Num) | m <= i}) == UNIV
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, !FINITE({(u : Num) | i < u})
+      #|  SUBSET(INTER((s : (A) -> Bool), (t : (A) -> Bool)), s)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, (FINITE(s) \226\134\146 FINITE(INTER(s, t))) && (FINITE(t) \226\134\146 FINITE(INTER(s, t)))
       #|  TAGB
       #|  TAGB
-      #|  i:num
-      #|  J = (J INTER {u | (i <| u)}) UNION (J INTER {m | m <=| i})
-      #|  forall i J. (FINITE (J INTER {u | (i <| u)})) ==> (FINITE J)
-      #|  (SUC n = j -| i) ==> (0 < j -| i)
-      #|  (i<=| j')
-      #|  (n = j'-|i)
-      #|  i:num
-      #|  j':num
-      #|  j':num
-      #|  j:num
-      #|  ?j'. j = SUC j'
-      #|  j:num
-      #|  j:num
-      #|  i:num
-      #|  i:num
-      #|  ?n. n = j -| i
-      #|  forall(f:num->A->bool). (forall i. f i SUBSET f (SUC i)) ==> (forall i j. ( i <=| j) ==> (f i SUBSET f j))
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  (SUC n = j -| i) ==> (0 < j -| i)
-      #|  (i<=| j')
-      #|  (n = j'-|i)
-      #|  i:num
-      #|  j':num
-      #|  j':num
-      #|  j:num
-      #|  ?j'. j = SUC j'
-      #|  j:num
-      #|  j:num
-      #|  i:num
-      #|  i:num
-      #|  ?n. n = j -| i
-      #|  forall(f:num->A->bool). (forall i. f (SUC i) SUBSET (f i)) ==> (forall i j. ( i <=| j) ==> (f j SUBSET f i))
+      #|  (i : Num)
+      #|  (J : (Num) -> Bool) == UNION(INTER(J, {(u : Num) | (i : Num) < u}), INTER(J, {(m : Num) | m <= i}))
+      #|  \226\136\128 i : Num, \226\136\128 J : (Num) -> Bool, FINITE(INTER(J, {(u : Num) | i < u})) \226\134\146 FINITE(J)
+      #|  SUC((n : Num)) == (j : Num) - (i : Num) \226\134\146 0 < j - i
+      #|  (i : Num) <= (j' : Num)
+      #|  (n : Num) == (j' : Num) - (i : Num)
+      #|  (i : Num)
+      #|  (j' : Num)
+      #|  (j' : Num)
+      #|  (j : Num)
+      #|  \226\136\131 j' : Num, (j : Num) == SUC(j')
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  \226\136\131 n : Num, n == (j : Num) - (i : Num)
+      #|  \226\136\128 f : (Num, A) -> Bool, (\226\136\128 i : Num, SUBSET(f(i), f(SUC(i)))) \226\134\146 (\226\136\128 i : Num, \226\136\128 j : Num, i <= j \226\134\146 SUBSET(f(i), f(j)))
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  r = {i | I' i /\\ (C INTER b) ((f:A->B) i)}
-      #|  b:B->bool
-      #|  b:B->bool
-      #|  FINITE (IMAGE (\\b. {i | I' i /\\ (C INTER b) ((f:A->B) i)}) B)
-      #|  {i' | I' i' /\\ (C INTER u) ((f:A->B) i')}
-      #|  u:B->bool
-      #|  (f:A->B) j
-      #|  j = (x:A)
-      #|  {i | I' i /\\ (C ((f:A->B) i))} = UNIONS (IMAGE (\\b. {i | I' i /\\ ((C INTER b) (f i))}) B)
-      #|  P ==> (~P ==> F)
+      #|  SUC((n : Num)) == (j : Num) - (i : Num) \226\134\146 0 < j - i
+      #|  (i : Num) <= (j' : Num)
+      #|  (n : Num) == (j' : Num) - (i : Num)
+      #|  (i : Num)
+      #|  (j' : Num)
+      #|  (j' : Num)
+      #|  (j : Num)
+      #|  \226\136\131 j' : Num, (j : Num) == SUC(j')
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  \226\136\131 n : Num, n == (j : Num) - (i : Num)
+      #|  \226\136\128 f : (Num, A) -> Bool, (\226\136\128 i : Num, SUBSET(f(SUC(i)), f(i))) \226\134\146 (\226\136\128 i : Num, \226\136\128 j : Num, i <= j \226\134\146 SUBSET(f(j), f(i)))
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  (r : (A) -> Bool) == {(i : A) | (I' : (A) -> Bool)(i) && INTER((C : (B) -> Bool), (b : (B) -> Bool), (f : (A) -> B)(i))}
+      #|  (b : (B) -> Bool)
+      #|  (b : (B) -> Bool)
+      #|  FINITE(IMAGE((b : (B) -> Bool) => {(i : A) | (I' : (A) -> Bool)(i) && INTER((C : (B) -> Bool), b, (f : (A) -> B)(i))}, (B : ((B) -> Bool) -> Bool)))
+      #|  {(i' : A) | (I' : (A) -> Bool)(i') && INTER((C : (B) -> Bool), (u : (B) -> Bool), (f : (A) -> B)(i'))}
+      #|  (u : (B) -> Bool)
+      #|  (f : (A) -> B)((j : A))
+      #|  (j : A) == (x : A)
+      #|  {(i : A) | (I' : (A) -> Bool)(i) && (C : (B) -> Bool)((f : (A) -> B)(i))} == UNIONS(IMAGE((b : (B) -> Bool) => {(i : A) | I'(i) && INTER(C, b, f(i))}, (B : ((B) -> Bool) -> Bool)))
+      #|  (P : Bool) \226\134\146 !P \226\134\146 false
       #|  forall I (f:A->B) B C. (~(FINITE {i | (I i) /\\ (C (f i))})) /\\ (FINITE B) /\\\n    (C SUBSET (UNIONS B)) ==>\n    (?b. (B b) /\\ ~(FINITE {i | (I i) /\\ (C INTER b) (f i) }))
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  a<=b ==> ((x <= a) ==> (x <=. b))
-      #|  x:real
-      #|  (n:real->num) x
-      #|  x:real
-      #|  &.a
-      #|  IMAGE (n:real->num) s
-      #|  FINITE (IMAGE (n:real->num) s)
-      #|  forall(s:real->bool). FINITE s ==> (?a. forall x. x IN s ==> (x <=. a))
+      #|  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+      #|  (x : Real)
+      #|  (n : (Real) -> Num)((x : Real))
+      #|  (x : Real)
+      #|  real_of_num((a : Num))
+      #|  IMAGE((n : (Real) -> Num), (s : (Real) -> Bool))
+      #|  FINITE(IMAGE((n : (Real) -> Num), (s : (Real) -> Bool)))
+      #|  \226\136\128 s : (Real) -> Bool, FINITE(s) \226\134\146 (\226\136\131 a : Real, \226\136\128 x : Real, IN(x, s) \226\134\146 x <= a)
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  forall s. (UNIONS (s:(A->bool)->bool)) = (UNIONS (s DELETE (EMPTY)))
-      #|  SUPP (f:A->B) = \\ x.  ~(f x = (CHOICE (UNIV:B ->bool)) )
-      #|  FUN a b = (\\ (f:A->B). ((forall x. (x IN a) ==> (f x IN b)) /\\\n              ((SUPP f) SUBSET a))) 
-      #|  compose f g = \\x. (f (g x))
-      #|  forall(f:num ->num) (g:num->num) (h:num->num).\n      (compose f (compose g h)) = (compose (compose f g) h)
-      #|  forall(f:A->B) (g:B->C) s t u.\n      INJ f s t /\\ (INJ g t u) ==>\n  (INJ (compose g f) s u)
-      #|  forall(f:A->B) (g:B->C) s t u.\n   SURJ f s t /\\ (SURJ g t u) ==> (SURJ (compose g f) s u)
-      #|  forall(f:A->B) s t (g:B->C) u.\n    BIJ f s t /\\ (BIJ g t u) ==> (BIJ (compose g f) s u)
-      #|  u:B->A
-      #|  ?u. forall y. ((y IN b)==> ((u y IN a) /\\ ((f:A->B) (u y) = y)))
-      #|  forall A B. (A ==> (?x. (B x))) ==> (?(x:B->A). (A ==> (B x)))
-      #|  ?INV. (forall (f:A->B) a b. (SURJ f a b) ==> ((INJ (INV f a b) b a) /\\\n       (forall(x:B). (x IN b) ==> (f ((INV f a b) x) = x))))
-      #|  f:A->B
-      #|  f:A->B
-      #|  f:A->B
-      #|  INV (f:A->B) a b (f x) IN a
-      #|  (f:A->B) (INV f a b (f x)) = (f x)
-      #|  ((f:A->B) x) IN b
-      #|  (f:A->B) x
-      #|  forall(f:A->B) a b. (BIJ f a b) ==> ((BIJ (INV f a b) b a))
-      #|  x:A
-      #|  INV (f:A->B) a b (f x)
-      #|  x:A
-      #|  INV (f:A->B) a b (f x)
-      #|  forall(f:A->B) a b x y. (BIJ f a b) /\\ (x IN a) /\\ (y IN b) ==> ((INV f a b y = x) <=> (f x = y))
-      #|  forall a b (f:A->B). FINITE a /\\ (BIJ f a b) ==> (FINITE b)
-      #|  ({x | (x IN a) /\\ ((f:A->B) x IN b)})
+      #|  \226\136\128 s : ((A) -> Bool) -> Bool, UNIONS(s) == UNIONS(DELETE(s, {}))
+      #|  (SUPP : ((A) -> B, A) -> Bool)((f : (A) -> B)) == ((x : A) => !(f(x) == CHOICE(UNIV)))
+      #|  (FUN : ((A) -> Bool, (B) -> Bool, (A) -> B) -> Bool)((a : (A) -> Bool), (b : (B) -> Bool)) == ((f : (A) -> B) => (\226\136\128 x : A, IN(x, a) \226\134\146 IN(f(x), b)) && SUBSET(SUPP(f), a))
+      #|  (compose : ((_) -> _, (_) -> _, _) -> _)((f : (_) -> _), (g : (_) -> _)) == ((x : _) => f(g(x)))
+      #|  \226\136\128 f : (Num) -> Num, \226\136\128 g : (Num) -> Num, \226\136\128 h : (Num) -> Num, compose(f, compose(g, h)) == compose(compose(f, g), h)
+      #|  \226\136\128 f : (A) -> B, \226\136\128 g : (B) -> C, \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, \226\136\128 u : (C) -> Bool, INJ(f, s, t) && INJ(g, t, u) \226\134\146 INJ(compose(g, f), s, u)
+      #|  \226\136\128 f : (A) -> B, \226\136\128 g : (B) -> C, \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, \226\136\128 u : (C) -> Bool, SURJ(f, s, t) && SURJ(g, t, u) \226\134\146 SURJ(compose(g, f), s, u)
+      #|  \226\136\128 f : (A) -> B, \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, \226\136\128 g : (B) -> C, \226\136\128 u : (C) -> Bool, BIJ(f, s, t) && BIJ(g, t, u) \226\134\146 BIJ(compose(g, f), s, u)
+      #|  (u : (B) -> A)
+      #|  \226\136\131 u : (B) -> A, \226\136\128 y : B, IN(y, (b : (B) -> Bool)) \226\134\146 IN(u(y), (a : (A) -> Bool)) && (f : (A) -> B)(u(y)) == y
+      #|  \226\136\128 A : Bool, \226\136\128 B : ((B) -> A) -> Bool, (A \226\134\146 (\226\136\131 x : (B) -> A, B(x))) \226\134\146 (\226\136\131 x : (B) -> A, A \226\134\146 B(x))
+      #|  \226\136\131 INV : ((A) -> B, (A) -> Bool, (B) -> Bool, B) -> A, \226\136\128 f : (A) -> B, \226\136\128 a : (A) -> Bool, \226\136\128 b : (B) -> Bool, SURJ(f, a, b) \226\134\146 INJ(INV(f, a, b), b, a) && (\226\136\128 x : B, IN(x, b) \226\134\146 f(INV(f, a, b, x)) == x)
+      #|  (f : (A) -> B)
+      #|  (f : (A) -> B)
+      #|  (f : (A) -> B)
+      #|  IN(INV((f : (A) -> B), (a : (A) -> Bool), (b : (B) -> Bool), f((x : A))), a)
+      #|  (f : (A) -> B)(INV(f, (a : (A) -> Bool), (b : (B) -> Bool), f((x : A)))) == f(x)
+      #|  IN((f : (A) -> B)((x : A)), (b : (B) -> Bool))
+      #|  (f : (A) -> B)((x : A))
+      #|  \226\136\128 f : (A) -> B, \226\136\128 a : (A) -> Bool, \226\136\128 b : (B) -> Bool, BIJ(f, a, b) \226\134\146 BIJ(INV(f, a, b), b, a)
+      #|  (x : A)
+      #|  INV((f : (A) -> B), (a : (A) -> Bool), (b : (B) -> Bool), f((x : A)))
+      #|  (x : A)
+      #|  INV((f : (A) -> B), (a : (A) -> Bool), (b : (B) -> Bool), f((x : A)))
+      #|  \226\136\128 f : (A) -> B, \226\136\128 a : (A) -> Bool, \226\136\128 b : (B) -> Bool, \226\136\128 x : A, \226\136\128 y : B, BIJ(f, a, b) && IN(x, a) && IN(y, b) \226\134\146 (INV(f, a, b, y) == x) == (f(x) == y)
+      #|  \226\136\128 a : (A) -> Bool, \226\136\128 b : (B) -> Bool, \226\136\128 f : (A) -> B, FINITE(a) && BIJ(f, a, b) \226\134\146 FINITE(b)
+      #|  {(x : A) | IN(x, (a : (A) -> Bool)) && IN((f : (A) -> B)(x), (b : (B) -> Bool))}
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
-      #|  (a:A->bool) SUBSET ({x | (x IN a) /\\ ((f:A->B) x IN b)})
-      #|  a:A->bool
-      #|  b:B->bool
-      #|  f:A->B
-      #|  forall a b (f:A->B). FINITE b /\\ (INJ f a b) ==> (FINITE a)
-      #|  forall a b (f:A->B). FINITE b /\\ (BIJ f a b) ==> (FINITE a)
-      #|  forall a b (f:A->B). FINITE a /\\ (BIJ f a b) ==> (CARD a = (CARD b))
-      #|  forall(x:num#num) i j. ((FST x = i) /\\ (SND x = j)) <=> (x = (i,j))
-      #|  SUC 0
-      #|  forall(u:A->bool). (SING u ) ==> (CARD u = 1)
-      #|  forall(x:A). FINITE ({x})
-      #|  g:A
-      #|  (f:A->num) (g:A)
-      #|  forall f P.((forall(n:num). forall(g:A). (f g = n) ==> (P g)) ==> (forall g. (P g)))
-      #|  f:A->B
-      #|  forall b. FUN (EMPTY:A->bool) b = { (\\ (u:A). (CHOICE (UNIV:B->bool))) }
-      #|  (((t:A)=s) <=> T) \\/ ((t=s) <=> F)
-      #|  t:A
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  ~((t:A)=s) ==> ((t=s)=F)
+      #|  SUBSET((a : (A) -> Bool), {(x : A) | IN(x, a) && IN((f : (A) -> B)(x), (b : (B) -> Bool))})
+      #|  (a : (A) -> Bool)
+      #|  (b : (B) -> Bool)
+      #|  (f : (A) -> B)
+      #|  \226\136\128 a : (A) -> Bool, \226\136\128 b : (B) -> Bool, \226\136\128 f : (A) -> B, FINITE(b) && INJ(f, a, b) \226\134\146 FINITE(a)
+      #|  \226\136\128 a : (A) -> Bool, \226\136\128 b : (B) -> Bool, \226\136\128 f : (A) -> B, FINITE(b) && BIJ(f, a, b) \226\134\146 FINITE(a)
+      #|  \226\136\128 a : (A) -> Bool, \226\136\128 b : (B) -> Bool, \226\136\128 f : (A) -> B, FINITE(a) && BIJ(f, a, b) \226\134\146 CARD(a) == CARD(b)
+      #|  \226\136\128 x : (Num, Num), \226\136\128 i : Num, \226\136\128 j : Num, (FST(x) == i && SND(x) == j) == (x == (i, j))
+      #|  SUC(0)
+      #|  \226\136\128 u : (A) -> Bool, SING(u) \226\134\146 CARD(u) == 1
+      #|  \226\136\128 x : A, FINITE({x})
+      #|  (g : A)
+      #|  (f : (A) -> Num)((g : A))
+      #|  \226\136\128 f : (A) -> Num, \226\136\128 P : (A) -> Bool, (\226\136\128 n : Num, \226\136\128 g : A, f(g) == n \226\134\146 P(g)) \226\134\146 (\226\136\128 g : A, P(g))
+      #|  (f : (A) -> B)
+      #|  \226\136\128 b : (B) -> Bool, FUN({}, b) == {(u : A) => CHOICE(UNIV)}
+      #|  ((t : A) == (s : A)) == true || (t == s) == false
+      #|  (t : A)
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  (t:A) = s
-      #|  t:A
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  t:A
-      #|  \\ (x:A). if (x = s) then (v:B) else (u x)
-      #|  p:(A->B)#B
+      #|  !((t : A) == (s : A)) \226\134\146 (t == s) == false
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
@@ -6909,26 +6890,45 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
+      #|  (t : A) == (s : A)
+      #|  (t : A)
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
-      #|  (x:A) = s
-      #|  f2:A->B
-      #|  f1:A->B
-      #|  (x:A) = s
-      #|  (f:A->B) s
-      #|  g:A->B
-      #|  g = \\ x. (if (x=(s:A)) then (CHOICE (UNIV:B->bool)) else (f x)) 
-      #|  (f:A->B)
-      #|  (A /\\ (A ==> B) /\\ (A ==>C))  ==> ((A/\\ B) /\\ (A /\\ C))
-      #|  \\ f. ((\\ x. (if (x=(s:A)) then (CHOICE (UNIV:B->bool)) else (f x))),(f s))
+      #|  B ==> (A==>B)
+      #|  B ==> (A==>B)
+      #|  (t : A)
+      #|  (x : A) => if x == (s : A) { (v : B) } else { (u : (A) -> B)(x) }
+      #|  (p : ((A) -> B, B))
+      #|  B ==> (A==>B)
+      #|  B ==> (A==>B)
+      #|  B ==> (A==>B)
+      #|  B ==> (A==>B)
+      #|  B ==> (A==>B)
+      #|  B ==> (A==>B)
+      #|  B ==> (A==>B)
+      #|  B ==> (A==>B)
+      #|  B ==> (A==>B)
+      #|  B ==> (A==>B)
+      #|  B ==> (A==>B)
+      #|  B ==> (A==>B)
+      #|  (x : A) == (s : A)
+      #|  (f2 : (A) -> B)
+      #|  (f1 : (A) -> B)
+      #|  (x : A) == (s : A)
+      #|  (f : (A) -> B)((s : A))
+      #|  (g : (A) -> B)
+      #|  (g : (A) -> B) == ((x : A) => if x == (s : A) { CHOICE(UNIV) } else { (f : (A) -> B)(x) })
+      #|  (f : (A) -> B)
+      #|  (A : Bool) && (A \226\134\146 (B : Bool)) && (A \226\134\146 (C : Bool)) \226\134\146 (A && B) && A && C
+      #|  (f : (A) -> B) => ((x : A) => if x == (s : A) { CHOICE(UNIV) } else { f(x) }, f(s))
       #|  forall a b s. (~((s:A) IN a) ==>\n      (?F.   (BIJ F (FUN (s INSERT a) b)\n           { (u,v) | (u IN (FUN a b)) /\\ ((v:B) IN b) }\n           )))
-      #|  FST:((A->B)#B)->(A->B)
-      #|  FST:((A->B)#B)->(A->B)
-      #|  x:A
-      #|  t:A
-      #|  t:A
-      #|  ~(x=0) ==> (SUC (x -| 1) = x)
-      #|  forall(a:(A->bool)). ((FINITE a) /\\ (~(a=EMPTY))) ==>\n   (SUC (CARD (a DELETE (CHOICE a))) = (CARD a))
+      #|  (FST : (((A) -> B, B), A) -> B)
+      #|  (FST : (((A) -> B, B), A) -> B)
+      #|  (x : A)
+      #|  (t : A)
+      #|  (t : A)
+      #|  !((x : Num) == 0) \226\134\146 SUC(x - 1) == x
+      #|  \226\136\128 a : (A) -> Bool, FINITE(a) && !(a == {}) \226\134\146 SUC(CARD(DELETE(a, CHOICE(a)))) == CARD(a)
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
@@ -6936,123 +6936,123 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
-      #|  (FUN ((a:A->bool) DELETE CHOICE a) (b:B->bool)) HAS_SIZE (CARD b **| (CARD (a DELETE CHOICE a)))
-      #|  FINITE (a DELETE CHOICE (a:A->bool))
-      #|  F':(A->B)->((A->B)#B)
-      #|  CARD (FUN (a:A->bool) (b:B->bool)) = (CARD {u,v | (u:A->B) IN FUN (a DELETE CHOICE a) b /\\ (v:B) IN b})
-      #|  F':(A->B)->((A->B)#B)
-      #|  {u,v | (u:A->B) IN FUN (a DELETE CHOICE a) b /\\ (v:B) IN b}
+      #|  HAS_SIZE(FUN(DELETE((a : (A) -> Bool), CHOICE(a)), (b : (B) -> Bool)), EXP(CARD(b), CARD(DELETE(a, CHOICE(a)))))
+      #|  FINITE(DELETE((a : (A) -> Bool), CHOICE(a)))
+      #|  (F' : ((A) -> B) -> ((A) -> B, B))
+      #|  CARD(FUN((a : (A) -> Bool), (b : (B) -> Bool))) == CARD({((u : (A) -> B), (v : B)) | IN(u, FUN(DELETE(a, CHOICE(a)), b)) && IN(v, b)})
+      #|  (F' : ((A) -> B) -> ((A) -> B, B))
+      #|  {((u : (A) -> B), (v : B)) | IN(u, FUN(DELETE((a : (A) -> Bool), CHOICE(a)), (b : (B) -> Bool))) && IN(v, b)}
       #|  :B
       #|  :(A->B)#B
       #|  :A
       #|  :A->B
-      #|  FUN (a:A->bool) (b:B->bool)
-      #|  FINITE (FUN (a:A->bool) (b:B->bool))
-      #|  forall x. (x = (SUC n)) ==> (~(x = 0))
-      #|  ~((a:A->bool) = EMPTY)
-      #|  (CHOICE (a:A->bool))
-      #|  b:B->bool
-      #|  ((a:A->bool) DELETE (CHOICE a))
-      #|  FUN ((a:A->bool) DELETE CHOICE a) (b:B->bool) HAS_SIZE CARD b **| CARD (a DELETE CHOICE a)
-      #|  forall n. (SUC n -| 1) = n
-      #|  forall x. (x = (SUC n)) ==> (~(x = 0))
-      #|  CHOICE (a:A->bool) IN a
-      #|  CARD ((a:A->bool) DELETE (CHOICE a)) = n
-      #|  (a:A->bool) = EMPTY
+      #|  FUN((a : (A) -> Bool), (b : (B) -> Bool))
+      #|  FINITE(FUN((a : (A) -> Bool), (b : (B) -> Bool)))
+      #|  \226\136\128 x : Num, x == SUC((n : Num)) \226\134\146 !(x == 0)
+      #|  !((a : (A) -> Bool) == {})
+      #|  CHOICE((a : (A) -> Bool))
+      #|  (b : (B) -> Bool)
+      #|  DELETE((a : (A) -> Bool), CHOICE(a))
+      #|  HAS_SIZE(FUN(DELETE((a : (A) -> Bool), CHOICE(a)), (b : (B) -> Bool)), EXP(CARD(b), CARD(DELETE(a, CHOICE(a)))))
+      #|  \226\136\128 n : Num, SUC(n) - 1 == n
+      #|  \226\136\128 x : Num, x == SUC((n : Num)) \226\134\146 !(x == 0)
+      #|  IN(CHOICE((a : (A) -> Bool)), a)
+      #|  CARD(DELETE((a : (A) -> Bool), CHOICE(a))) == (n : Num)
+      #|  (a : (A) -> Bool) == {}
       #|  :A
       #|  :A->bool
-      #|  CARD:(A->bool)->num
-      #|  forall b a. (FINITE (a:A->bool)) /\\ (FINITE (b:B->bool))\n          ==> ((FUN a b) HAS_SIZE ((CARD b) EXP (CARD a)))
-      #|  (a:A->bool) DELETE (CHOICE a)
-      #|  drop0 (u:A#B) = SND u
-      #|  drop1 (u:A#B#C) = SND (SND u)
-      #|  drop2 (u:A#B#C#D) = SND (SND (SND u))
-      #|  drop3 (u:A#B#C#D#E) = SND (SND (SND (SND u)))
-      #|  part0 (u:A#B) = FST u
-      #|  part1 (u:A#B#C) = FST (drop0 u)
-      #|  part2 (u:A#B#C#D) = FST (drop1 u)
-      #|  part3 (u:A#B#C#D#E) = FST (drop2 u)
-      #|  part4 (u:A#B#C#D#E#F) = FST (drop3 u)
-      #|  part5 (u:A#B#C#D#E#F#G) =\n   FST (SND (SND (SND (SND (SND u)))))
-      #|  part6 (u:A#B#C#D#E#F#G#H) =\n   FST (SND (SND (SND (SND (SND (SND u))))))
-      #|  part7 (u:A#B#C#D#E#F#G#H#I) =\n   FST (SND (SND (SND (SND (SND (SND (SND u)))))))
+      #|  (CARD : ((A) -> Bool) -> Num)
+      #|  \226\136\128 b : (B) -> Bool, \226\136\128 a : (A) -> Bool, FINITE(a) && FINITE(b) \226\134\146 HAS_SIZE(FUN(a, b), EXP(CARD(b), CARD(a)))
+      #|  DELETE((a : (A) -> Bool), CHOICE(a))
+      #|  (drop0 : ((A, B)) -> B)((u : (A, B))) == SND(u)
+      #|  (drop1 : ((A, B, C)) -> C)((u : (A, B, C))) == SND(SND(u))
+      #|  (drop2 : ((A, B, C, D)) -> D)((u : (A, B, C, D))) == SND(SND(SND(u)))
+      #|  (drop3 : ((A, B, C, D, E)) -> E)((u : (A, B, C, D, E))) == SND(SND(SND(SND(u))))
+      #|  (part0 : ((A, B)) -> A)((u : (A, B))) == FST(u)
+      #|  (part1 : ((A, B, C)) -> B)((u : (A, B, C))) == FST(drop0(u))
+      #|  (part2 : ((A, B, C, D)) -> C)((u : (A, B, C, D))) == FST(drop1(u))
+      #|  (part3 : ((A, B, C, D, E)) -> D)((u : (A, B, C, D, E))) == FST(drop2(u))
+      #|  (part4 : ((A, B, C, D, E, F)) -> E)((u : (A, B, C, D, E, F))) == FST(drop3(u))
+      #|  (part5 : ((A, B, C, D, E, F, G)) -> F)((u : (A, B, C, D, E, F, G))) == FST(SND(SND(SND(SND(SND(u))))))
+      #|  (part6 : ((A, B, C, D, E, F, G, H)) -> G)((u : (A, B, C, D, E, F, G, H))) == FST(SND(SND(SND(SND(SND(SND(u)))))))
+      #|  (part7 : ((A, B, C, D, E, F, G, H, I)) -> H)((u : (A, B, C, D, E, F, G, H, I))) == FST(SND(SND(SND(SND(SND(SND(SND(u))))))))
       #|  euclid'euclid_plus:(num->real)->(num->real)->(num->real)
       #|  :A -> B -> B
-      #|  euclid_scale t f = \\ (i:num). (t*. (f i))
-      #|  euclid'euclid_scale
-      #|  euclid_neg f = \\ (i:num). (--. (f i))
-      #|  euclid'euclid_neg
+      #|  (euclid_scale : (Real, (Num) -> Real, Num) -> Real)((t : Real), (f : (Num) -> Real)) == ((i : Num) => t * f(i))
+      #|  euclid_scale
+      #|  (euclid_neg : ((Num) -> Real, Num) -> Real)((f : (Num) -> Real)) == ((i : Num) => -f(i))
+      #|  euclid_neg
       #|  euclid'euclid_minus:(num->real)->(num->real)->(num->real)
-      #|  euclid_plus f g = \\ (i:num). (f i) +. (g i)
-      #|  euclid n v <=> forall m. (n <=| m) ==> (v m = &.0)
-      #|  euclidean v <=> ?n. euclid n v
-      #|  euclid_minus f g = \\(i:num). (f i) -. (g i)
-      #|  euclid0 = \\(i:num). &.0
-      #|  coord i (f:num->real) = f i
-      #|  dot f g =\n  let (n = (min_num (\\m. (euclid m f) /\\ (euclid m g)))) in\n  sum (0,n) (\\i. (f i)*(g i))
-      #|  norm f = sqrt(dot f f)
-      #|  d_euclid f g = norm (f - g)
+      #|  (euclid_plus : ((Num) -> Real, (Num) -> Real, Num) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == ((i : Num) => f(i) + g(i))
+      #|  (euclid : (Num, (Num) -> Real) -> Bool)((n : Num), (v : (Num) -> Real)) == (\226\136\128 m : Num, n <= m \226\134\146 v(m) == real_of_num(0))
+      #|  (euclidean : ((Num) -> Real) -> Bool)((v : (Num) -> Real)) == (\226\136\131 n : Num, euclid(n, v))
+      #|  (euclid_minus : ((Num) -> Real, (Num) -> Real, Num) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == ((i : Num) => f(i) - g(i))
+      #|  (euclid0 : (Num) -> Real) == ((i : Num) => real_of_num(0))
+      #|  (coord : (Num, (Num) -> Real) -> Real)((i : Num), (f : (Num) -> Real)) == f(i)
+      #|  (dot : ((Num) -> Real, (Num) -> Real) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == LET((n : Num) => LET_END(sum((0, n), (i : Num) => f(i) * g(i))), min_num((m : Num) => euclid(m, f) && euclid(m, g)))
+      #|  (norm : ((Num) -> Real) -> Real)((f : (Num) -> Real)) == sqrt(dot(f, f))
+      #|  (d_euclid : ((Num) -> Real, (Num) -> Real) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == norm(euclid_minus(f, g))
       #|  \\(n,m) f. (sm:num->num->(num->(num->real))->(num->real)) n m f
-      #|  (forall f n. sm n 0 f = (\\n. &0)) /\\ (forall f m n. sm  n (SUC m) f = sm n m f + f(n + m))
-      #|  ?sum_vector. (forall f n. sum_vector(n,0) f = (\\n. &.0)) /\\\n    (forall f m n. sum_vector(n,SUC m) f = sum_vector(n,m) f + f(n + m))
-      #|  mk_segment x y = { u | ?a. (&.0 <=. a) /\\ (a <=. &.1) /\\\n        (u = a *# x + (&.1 - a) *# y) }
-      #|  mk_open_segment x y = { u | ?a. (&.0 <. a) /\\ (a <. &.1) /\\\n        (u = a *# x + (&.1 - a) *# y) }
-      #|  convex S <=> forall x y. (S x) /\\ (S y) ==> (mk_segment x y SUBSET S)
-      #|  convex_hull S = { u | ?f alpha m. (forall n. (n< m) ==> (S (f n))) /\\\n    (sum(0,m) alpha = &.1) /\\ (forall n. (n< m) ==> (&.0 <=. (alpha n))) /\\\n    (u = sum_vector(0,m) (\\n. (alpha n) *# (f n)))}
-      #|  affine_hull S = { u | ?f alpha m. (forall n. (n< m) ==> (S (f n))) /\\\n    (sum(0,m) alpha = &.1) /\\\n    (u = sum_vector(0,m) (\\n. (alpha n) *# (f n)))}
-      #|  mk_line x y =\n   {z| ?t. (z = (t *# x) + ((&.1 - t) *# y)) }
-      #|  affine S <=> forall x y. (S x ) /\\ (S y) ==> (mk_line x y SUBSET S)
+      #|  (\226\136\128 f : (Num, Num) -> Real, \226\136\128 n : Num, (sm : (Num, Num, (Num, Num) -> Real, Num) -> Real)(n, 0, f) == ((n : Num) => real_of_num(0))) && (\226\136\128 f : (Num, Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, sm(n, SUC(m), f) == euclid_plus(sm(n, m, f), f(n + m)))
+      #|  \226\136\131 sum_vector : ((Num, Num), (Num, Num) -> Real, Num) -> Real, (\226\136\128 f : (Num, Num) -> Real, \226\136\128 n : Num, sum_vector((n, 0), f) == ((n : Num) => real_of_num(0))) && (\226\136\128 f : (Num, Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, sum_vector((n, SUC(m)), f) == euclid_plus(sum_vector((n, m), f), f(n + m)))
+      #|  (mk_segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(u : (Num) -> Real) | \226\136\131 a : Real, real_of_num(0) <= a && a <= real_of_num(1) && u == euclid_plus(euclid_scale(a, x), euclid_scale(real_of_num(1) - a, y))}
+      #|  (mk_open_segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(u : (Num) -> Real) | \226\136\131 a : Real, real_of_num(0) < a && a < real_of_num(1) && u == euclid_plus(euclid_scale(a, x), euclid_scale(real_of_num(1) - a, y))}
+      #|  (convex : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, S(x) && S(y) \226\134\146 SUBSET(mk_segment(x, y), S))
+      #|  (convex_hull : (((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | \226\136\131 f : (Num, Num) -> Real, \226\136\131 alpha : (Num) -> Real, \226\136\131 m : Num, (\226\136\128 n : Num, n < m \226\134\146 S(f(n))) && sum((0, m), alpha) == real_of_num(1) && (\226\136\128 n : Num, n < m \226\134\146 real_of_num(0) <= alpha(n)) && u == sum_vector((0, m), (n : Num) => euclid_scale(alpha(n), f(n)))}
+      #|  (affine_hull : (((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | \226\136\131 f : (Num, Num) -> Real, \226\136\131 alpha : (Num) -> Real, \226\136\131 m : Num, (\226\136\128 n : Num, n < m \226\134\146 S(f(n))) && sum((0, m), alpha) == real_of_num(1) && u == sum_vector((0, m), (n : Num) => euclid_scale(alpha(n), f(n)))}
+      #|  (mk_line : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(z : (Num) -> Real) | \226\136\131 t : Real, z == euclid_plus(euclid_scale(t, x), euclid_scale(real_of_num(1) - t, y))}
+      #|  (affine : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, S(x) && S(y) \226\134\146 SUBSET(mk_line(x, y), S))
       #|  affine_dim n S <=>\n    (?T. (T HAS_SIZE (SUC n)) /\\ (affine_hull T = affine_hull S)) /\\\n    (forall T m. (T HAS_SIZE (SUC m)) /\\ (m < n) ==> ~(affine_hull T = affine_hull S))
-      #|  collinear S <=> (?n. affine_dim n S /\\ (n < 2))
-      #|  coplanar S <=> (?n. affine_dim n S /\\ (n < 3))
-      #|  line L <=> (affine L) /\\ (affine_dim 1 L)
-      #|  plane P <=> (affine P) /\\ (affine_dim 2 P)
-      #|  space R <=> (affine R) /\\ (affine_dim 3 R)
-      #|  mk_open_half_set L S  =\n   { u | ?t v c. (L v) /\\ (S c) /\\ (&.0 < t) /\\\n      (u = (t *# (c - v) + (&.1 - t) *# v)) }
-      #|  mk_half_set L S  =\n   { u | ?t v c. (L v) /\\ (S c) /\\ (&.0 <=. t) /\\\n      (u = (t *# (c - v) + (&.1 - t) *# v)) }
-      #|  mk_angle x y z =\n   (mk_half_set {x} {y}) UNION (mk_half_set {x} {z})
-      #|  mk_signed_angle x y z =\n   (mk_half_set {x} {y} , mk_half_set {x} {z})
-      #|  mk_convex_cone v (S:(num->real)->bool) =\n    mk_half_set {v} (convex_hull S)
-      #|  packing (S:(num->real)->bool) <=>\n        forall x y. ( ((S x) /\\ (S y) /\\ ((d_euclid x y) < (&.2))) ==>\n                (x = y))
-      #|  saturated_packing S <=>\n        (( packing S) /\\\n        (forall z. (affine_hull S z)  ==>\n               (?x. ((S x) /\\ ((d_euclid x z) < (&.2))))))
-      #|  cross_product3 v1 v2 =\n        let (x1 = v1 0) and (x2 = v1 1) and (x3 = v1 2) in\n        let (y1 = v2 0) and (y2 = v2 1) and (y3 = v2 2) in\n        (\\k.\n                (if (k=0) then (x2*y3-x3*y2)\n                else if (k=1) then (x3*y1-x1*y3)\n                else if (k=2) then (x1*y2-x2*y1)\n                else (&0)))
-      #|  triple_product v1 v2 v3 =\n        dot v1 (cross_product3 v2 v3)
-      #|  mk_triangle v1 v2 v3 =\n  (mk_segment v1 v2) UNION (mk_segment v2 v3) UNION (mk_segment v3 v1)
-      #|  mk_interior_triangle v1 v2 v3 =\n     mk_open_half_set (mk_line v1 v2) {v3} INTER\n       (mk_open_half_set (mk_line v2 v3) {v1}) INTER\n       (mk_open_half_set (mk_line v3 v1) {v2})
-      #|  mk_triangular_region v1 v2 v3 =\n    (mk_triangle v1 v2 v3) UNION (mk_interior_triangle v1 v2 v3)
-      #|  forall L S. convex (mk_half_set L S)
-      #|  forall L S . convex (mk_open_half_set L S )
-      #|  forall S. (affine_dim 0 S) = (SING S)
-      #|  forall S. (convex (convex_hull S))
+      #|  (collinear : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\131 n : Num, affine_dim(n, S) && n < 2)
+      #|  (coplanar : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\131 n : Num, affine_dim(n, S) && n < 3)
+      #|  (line : (((Num) -> Real) -> Bool) -> Bool)((L : ((Num) -> Real) -> Bool)) == (affine(L) && affine_dim(1, L))
+      #|  (plane : (((Num) -> Real) -> Bool) -> Bool)((P : ((Num) -> Real) -> Bool)) == (affine(P) && affine_dim(2, P))
+      #|  (space : (((Num) -> Real) -> Bool) -> Bool)((R : ((Num) -> Real) -> Bool)) == (affine(R) && affine_dim(3, R))
+      #|  (mk_open_half_set : (((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((L : ((Num) -> Real) -> Bool), (S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | \226\136\131 t : Real, \226\136\131 v : (Num) -> Real, \226\136\131 c : (Num) -> Real, L(v) && S(c) && real_of_num(0) < t && u == euclid_plus(euclid_scale(t, euclid_minus(c, v)), euclid_scale(real_of_num(1) - t, v))}
+      #|  (mk_half_set : (((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((L : ((Num) -> Real) -> Bool), (S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | \226\136\131 t : Real, \226\136\131 v : (Num) -> Real, \226\136\131 c : (Num) -> Real, L(v) && S(c) && real_of_num(0) <= t && u == euclid_plus(euclid_scale(t, euclid_minus(c, v)), euclid_scale(real_of_num(1) - t, v))}
+      #|  (mk_angle : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real), (z : (Num) -> Real)) == UNION(mk_half_set({x}, {y}), mk_half_set({x}, {z}))
+      #|  (mk_signed_angle : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> (((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool))((x : (Num) -> Real), (y : (Num) -> Real), (z : (Num) -> Real)) == (mk_half_set({x}, {y}), mk_half_set({x}, {z}))
+      #|  (mk_convex_cone : ((Num) -> Real, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((v : (Num) -> Real), (S : ((Num) -> Real) -> Bool)) == mk_half_set({v}, convex_hull(S))
+      #|  (packing : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, S(x) && S(y) && d_euclid(x, y) < real_of_num(2) \226\134\146 x == y)
+      #|  (saturated_packing : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (packing(S) && (\226\136\128 z : (Num) -> Real, affine_hull(S, z) \226\134\146 (\226\136\131 x : (Num) -> Real, S(x) && d_euclid(x, z) < real_of_num(2))))
+      #|  (cross_product3 : ((Num) -> Real, (Num) -> Real, Num) -> Real)((v1 : (Num) -> Real), (v2 : (Num) -> Real)) == LET((x1 : Real) => (x2 : Real) => (x3 : Real) => LET_END(LET((y1 : Real) => (y2 : Real) => (y3 : Real) => LET_END((k : Num) => if k == 0 { x2 * y3 - x3 * y2 } else { if k == 1 { x3 * y1 - x1 * y3 } else { if k == 2 { x1 * y2 - x2 * y1 } else { real_of_num(0) } } }), v2(0), v2(1), v2(2))), v1(0), v1(1), v1(2))
+      #|  (triple_product : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Real)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == dot(v1, cross_product3(v2, v3))
+      #|  (mk_triangle : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == UNION(mk_segment(v1, v2), UNION(mk_segment(v2, v3), mk_segment(v3, v1)))
+      #|  (mk_interior_triangle : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == INTER(mk_open_half_set(mk_line(v1, v2), {v3}), INTER(mk_open_half_set(mk_line(v2, v3), {v1}), mk_open_half_set(mk_line(v3, v1), {v2})))
+      #|  (mk_triangular_region : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == UNION(mk_triangle(v1, v2, v3), mk_interior_triangle(v1, v2, v3))
+      #|  \226\136\128 L : ((Num) -> Real) -> Bool, \226\136\128 S : ((Num) -> Real) -> Bool, convex(mk_half_set(L, S))
+      #|  \226\136\128 L : ((Num) -> Real) -> Bool, \226\136\128 S : ((Num) -> Real) -> Bool, convex(mk_open_half_set(L, S))
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, affine_dim(0, S) == SING(S)
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, convex(convex_hull(S))
       #|  forall S T. (convex T) /\\ (S SUBSET T) ==>\n     (convex_hull S) SUBSET T
-      #|  forall S. (affine (affine_hull S))
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, affine(affine_hull(S))
       #|  forall S T. (affine T) /\\ (S SUBSET T) ==>\n     (affine_hull S) SUBSET T
-      #|  forall x y. ~(x = y) ==> affine_dim 1 (mk_line x y)
-      #|  forall S. (affine_hull S) = (affine_hull (convex_hull S))
-      #|  forall S. (convex_hull S) = (convex_hull (convex_hull S))
-      #|  forall n. affine_dim n (euclid n)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, !(x == y) \226\134\146 affine_dim(1, mk_line(x, y))
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, affine_hull(S) == affine_hull(convex_hull(S))
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, convex_hull(S) == convex_hull(convex_hull(S))
+      #|  \226\136\128 n : Num, affine_dim(n, euclid(n))
       #|  forall m n T S.\n  (affine_dim m T) /\\ (affine_dim n S) /\\ (T SUBSET S) ==> (m <= n)
-      #|  forall x y. ~(x = y) ==>\n   (?!L. (L x) /\\ (L y) /\\ (line L))
-      #|  forall L. (line L) ==>\n  (?f. (BIJ f L UNIV) /\\\n  (forall x y. (L x /\\ L y ==> (d_euclid x y = abs(f x -. f y)))))
-      #|  forall n. (affine_dim n P) ==> (?S.\n  (S SUBSET P) /\\ (S HAS_SIZE n) /\\ (affine_dim n S))
-      #|  forall P x y. (plane P) /\\ (P x) /\\ (P y) ==>\n  (mk_line x y SUBSET P)
-      #|  forall S. (S HAS_SIZE 3) ==> (?P. (plane P) /\\\n   (S SUBSET P))
-      #|  forall S. (S HAS_SIZE 3) ==> (collinear S) \\/\n  (?! P. (plane P) /\\ (S SUBSET P))
-      #|  forall P Q. (plane P) /\\ (plane Q) ==>\n  (P INTER Q = EMPTY) \\/ (line (P INTER Q)) \\/ (P = Q)
-      #|  forall P L. (plane P) /\\ (line L) /\\ (L SUBSET P) ==>\n  (?A B. (A INTER B = EMPTY) /\\ (A INTER L = EMPTY) /\\\n    (B INTER L = EMPTY) /\\ (L UNION A UNION B = P) /\\\n   (forall c u. (P c) /\\ (u = mk_open_half_set L {c}) ==>\n      (u = A) \\/ (u = B) \\/ (u = L)) /\\\n   (forall a b. (A a) /\\ (B b) ==> ~(segment a b INTER L = EMPTY)))
-      #|  forall R P. (space R) /\\ (plane P) /\\ (P SUBSET R) ==>\n  (?A B. (A INTER B = EMRTY) /\\ (A INTER P = EMRTY) /\\\n    (B INTER P = EMRTY) /\\ (P UNION A UNION B = R) /\\\n   (forall c u. (R c) /\\ (u = mk_open_half_set P {c}) ==>\n      (u = A) \\/ (u = B) \\/ (u = P)) /\\\n     (forall a b. (A a) /\\ (B b) ==> ~(segment a b INTER L = EMPTY)))
-      #|  metric_space (X:A->bool,d:A->A->real)\n   <=>\n   forall x y z.\n      (X x) /\\ (X y) /\\ (X z) ==>\n         (((&.0) <=. (d x y)) /\\\n          ((&.0 = d x y) = (x = y)) /\\\n          (d x y = d y x) /\\\n          (d x z <=. d x y + d y z))
-      #|  set_translate v X = { z | ?x. (X x) /\\ (z = v + x) }
-      #|  set_scale r X = { z | ?x. (X x) /\\ (z = r *# x) }
-      #|  mk_rectangle a b = { z | forall(i:num). (a i <=. z i) /\\ (z i <. b i) }
-      #|  one_vec n = (\\i. if (i<| n) then (&.1) else (&.0))
-      #|  mk_cube n k v =\n    let (r = twopow (--: (&: k))) in\n    let (vv = (\\i. (real_of_int (v i)))) in\n     mk_rectangle (r *# vv) (r *# (vv + (one_vec n)))
-      #|  inner_cube n k A =\n    { v | (mk_cube n k v SUBSET A) /\\\n      (forall i. (n <| i) ==> (&:0 = v i)) }
-      #|  outer_cube n k A =\n    { v | ~((mk_cube n k v) INTER A = EMPTY) /\\\n      (forall i. (n <| i) ==> (&:0 = v i)) }
-      #|  inner_vol n k A =\n    (&. (CARD (inner_cube n k A)))*(twopow (--: (&: (n*k))))
-      #|  outer_vol n k A =\n    (&. (CARD (outer_cube n k A)))*(twopow (--: (&: (n*k))))
-      #|  euclid_bounded A = (?R. forall(x:num->real) i. (A x) ==> (x i <. R))
-      #|  vol n A = lim (\\k. outer_vol n k A)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, !(x == y) \226\134\146 existsunique((L : ((Num) -> Real) -> Bool) => L(x) && L(y) && line(L))
+      #|  \226\136\128 L : ((Num) -> Real) -> Bool, line(L) \226\134\146 (\226\136\131 f : ((Num) -> Real) -> Real, BIJ(f, L, UNIV) && (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, L(x) && L(y) \226\134\146 d_euclid(x, y) == abs(f(x) - f(y))))
+      #|  \226\136\128 n : Num, affine_dim(n, (P : ((Num) -> Real) -> Bool)) \226\134\146 (\226\136\131 S : ((Num) -> Real) -> Bool, SUBSET(S, P) && HAS_SIZE(S, n) && affine_dim(n, S))
+      #|  \226\136\128 P : ((Num) -> Real) -> Bool, \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, plane(P) && P(x) && P(y) \226\134\146 SUBSET(mk_line(x, y), P)
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, HAS_SIZE(S, 3) \226\134\146 (\226\136\131 P : ((Num) -> Real) -> Bool, plane(P) && SUBSET(S, P))
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, HAS_SIZE(S, 3) \226\134\146 collinear(S) || existsunique((P : ((Num) -> Real) -> Bool) => plane(P) && SUBSET(S, P))
+      #|  \226\136\128 P : ((Num) -> Real) -> Bool, \226\136\128 Q : ((Num) -> Real) -> Bool, plane(P) && plane(Q) \226\134\146 INTER(P, Q) == {} || line(INTER(P, Q)) || P == Q
+      #|  \226\136\128 P : ((Num) -> Real) -> Bool, \226\136\128 L : ((Num) -> Real) -> Bool, plane(P) && line(L) && SUBSET(L, P) \226\134\146 (\226\136\131 A : ((Num) -> Real) -> Bool, \226\136\131 B : ((Num) -> Real) -> Bool, INTER(A, B) == {} && INTER(A, L) == {} && INTER(B, L) == {} && UNION(L, UNION(A, B)) == P && (\226\136\128 c : (Num) -> Real, \226\136\128 u : ((Num) -> Real) -> Bool, P(c) && u == mk_open_half_set(L, {c}) \226\134\146 u == A || u == B || u == L) && (\226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, A(a) && B(b) \226\134\146 !(INTER((segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)(a, b), L) == {})))
+      #|  \226\136\128 R : ((Num) -> Real) -> Bool, \226\136\128 P : ((Num) -> Real) -> Bool, space(R) && plane(P) && SUBSET(P, R) \226\134\146 (\226\136\131 A : ((Num) -> Real) -> Bool, \226\136\131 B : ((Num) -> Real) -> Bool, INTER(A, B) == (EMRTY : ((Num) -> Real) -> Bool) && INTER(A, P) == EMRTY && INTER(B, P) == EMRTY && UNION(P, UNION(A, B)) == R && (\226\136\128 c : (Num) -> Real, \226\136\128 u : ((Num) -> Real) -> Bool, R(c) && u == mk_open_half_set(P, {c}) \226\134\146 u == A || u == B || u == P) && (\226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, A(a) && B(b) \226\134\146 !(INTER((segment : ((Num) -> Real, (Num) -> Real, _) -> Bool)(a, b), (L : (_) -> Bool)) == {})))
+      #|  (metric_space : (((A) -> Bool, (A, A) -> Real)) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == (\226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : A, X(x) && X(y) && X(z) \226\134\146 real_of_num(0) <= d(x, y) && (real_of_num(0) == d(x, y)) == (x == y) && d(x, y) == d(y, x) && d(x, z) <= d(x, y) + d(y, z))
+      #|  (set_translate : ((Num) -> Real, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((v : (Num) -> Real), (X : ((Num) -> Real) -> Bool)) == {(z : (Num) -> Real) | \226\136\131 x : (Num) -> Real, X(x) && z == euclid_plus(v, x)}
+      #|  (set_scale : (Real, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((r : Real), (X : ((Num) -> Real) -> Bool)) == {(z : (Num) -> Real) | \226\136\131 x : (Num) -> Real, X(x) && z == euclid_scale(r, x)}
+      #|  (mk_rectangle : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((a : (Num) -> Real), (b : (Num) -> Real)) == {(z : (Num) -> Real) | \226\136\128 i : Num, a(i) <= z(i) && z(i) < b(i)}
+      #|  (one_vec : (Num, Num) -> Real)((n : Num)) == ((i : Num) => if i < n { real_of_num(1) } else { real_of_num(0) })
+      #|  (mk_cube : (Num, Num, (Num) -> Int, (Num) -> Real) -> Bool)((n : Num), (k : Num), (v : (Num) -> Int)) == LET((r : Real) => LET_END(LET((vv : (Num) -> Real) => LET_END(mk_rectangle(euclid_scale(r, vv), euclid_scale(r, euclid_plus(vv, one_vec(n))))), (i : Num) => real_of_int(v(i)))), twopow(-int_of_num(k)))
+      #|  (inner_cube : (Num, Num, ((Num) -> Real) -> Bool, (Num) -> Int) -> Bool)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == {(v : (Num) -> Int) | SUBSET(mk_cube(n, k, v), A) && (\226\136\128 i : Num, n < i \226\134\146 int_of_num(0) == v(i))}
+      #|  (outer_cube : (Num, Num, ((Num) -> Real) -> Bool, (Num) -> Int) -> Bool)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == {(v : (Num) -> Int) | !(INTER(mk_cube(n, k, v), A) == {}) && (\226\136\128 i : Num, n < i \226\134\146 int_of_num(0) == v(i))}
+      #|  (inner_vol : (Num, Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == real_of_num(CARD(inner_cube(n, k, A))) * twopow(-int_of_num(n * k))
+      #|  (outer_vol : (Num, Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == real_of_num(CARD(outer_cube(n, k, A))) * twopow(-int_of_num(n * k))
+      #|  (euclid_bounded : (((Num) -> Real) -> Bool) -> Bool)((A : ((Num) -> Real) -> Bool)) == (\226\136\131 R : Real, \226\136\128 x : (Num) -> Real, \226\136\128 i : Num, A(x) \226\134\146 x(i) < R)
+      #|  (vol : (Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (A : ((Num) -> Real) -> Bool)) == lim((k : Num) => outer_vol(n, k, A))
       #|  (+):num->(num->num)
       #|  (-):num->(num->num)
       #|  ( * ):num->(num->num)
@@ -7098,49 +7098,49 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  real_inv:real->real
       #|  real_abs:real->real
       #|  real_of_num:num->real
-      #|  summable (\\n. (f (n+k))) /\\ (suminf (\\n. (f (n+k))) <=. (suminf (\\n. (g (n+k)))))
-      #|  (\\n. (f (n+ k))) sums (s - (sum(0,k) f))
-      #|  forall s f g.  (f sums s) /\\ (summable g) ==>\n    (forall k. ((forall n. (||. (f (n+k)) <=. (g (n+k)))) ==>\n    ( (s - (sum(0,k) f)) <=. (suminf (\\n. (g (n +| k)))))))
-      #|  k:num
-      #|  k:num
-      #|  k:num
-      #|  (--. s -. (--. u) <=. x) ==> (--. x <=. (s -. u))
-      #|  (forall k. ((forall n. (||. ((\\p. (--. (f p))) (n+k))) <=. (g (n+k)))) ==> ((--.s) - (sum(0,k) (\\p. (--. (f p)))) <=. (suminf (\\n. (g (n +k))))))
-      #|  forall s f g.  (f sums s) /\\ (forall n. (||. (f n) <=. (g n))) /\\\n       (summable g) ==>\n    (forall k. (abs (s - (sum(0,k) f)) <=. (suminf (\\n. (g (n +| k))))))
-      #|  ((&.0 <. (&.n)) /\\ (&.n <=. a)) ==> (inv(a)<=. (inv(&.n)))
-      #|  ||.(&.n) = (&.n)
-      #|  (a<=.b) ==> (&.n*a <=. (&.n)*b)
-      #|  1 <=| n ==> (0 < n)
-      #|  (abs((&.4)*.u)<=. (&.4)/(&.9)) /\\ (abs((&.2)*.v)<=. (&.2)/(&.12)) /\\ (abs((&.1)*w) <=. (&.1)/(&.13)) /\\ (abs((&.1)*x) <=. (&.1)/(&.14)) ==> (abs((&.4)*u -(&.2)*v - (&.1)*w - (&.1)*x) <= (&.4/(&.9) +(&.2/(&.12)) + (&.1/(&.13))+ (&.1/(&.14))))
-      #|  (&.4/(&.9) +(&.2/(&.12)) + (&.1/(&.13))+ (&.1/(&.14)))
-      #|  forall n. (1 <=| n) ==> (abs(&4 / &(8 * n + 1) -\n            &2 / &(8 * n + 4) -\n            &1 / &(8 * n + 5) -\n            &1 / &(8 * n + 6)) <= &.622/(&.819))
-      #|  pi_fun n = inv (&.16 **. n) *.\n          (&.4 / &.(8 *| n +| 1) -.\n           &.2 / &.(8 *| n +| 4) -.\n           &.1 / &.(8 *| n +| 5) -.\n           &.1 / &.(8 *| n +| 6))
-      #|  pi_bound_fun n = if (n=0) then (&.8) else\n    (((&.15)/(&.16))*(inv(&.16 **. n))) 
-      #|  &.0 < (&.16)
-      #|  ~(k=0) ==> (1<=| k)
-      #|  (&.622)/(&.819) <=. (&.15)/(&.16)
-      #|  forall x y z. (&.0 <. z /\\ (y <=. x) ==> (z*y <=. (z*x)))
-      #|  ||.(&.n) = (&.n)
-      #|  a*b = b*.a
-      #|  forall k. abs(pi_fun k) <=. (pi_bound_fun k)
-      #|  abs (&.1 / (&. 16)) <. (&.1)
-      #|  forall k. (\\n. inv (&16 pow k) * inv (&16 pow n)) sums\n         inv (&16 pow k) * &16 / &15
-      #|  (b*(a*c) = (b*(&.1))) ==> ((a*b)*c = b)
-      #|  (x=y) ==> ((a sums x) ==> (a sums y))
-      #|  k:num
-      #|  (\\n. (&.15/(&.16)) *. ((inv(&.16)**. k)*. inv(&.16 **. n))) sums ((&.15/(&.16)) *.(inv(&.16**. k)*. ((&.16)/(&.15))))
-      #|  0<| k ==> (~(n+k = 0))
-      #|  n:num
-      #|  (\\n. pi_bound_fun (n+k)) = (\\n. ((&.15/(&.16))* (inv(&.16)**. k) *. inv(&.16 **. n)))
-      #|  forall k. (0<|k) ==> (\\n. (pi_bound_fun (n+k))) sums (inv(&.16 **. k))
-      #|  suminf (\\n. pi_bound_fun (n + k)) = inv (&.16 **. k)
+      #|  summable((n : Num) => (f : (Num) -> Real)(n + (k : Num))) && suminf((n : Num) => f(n + k)) <= suminf((n : Num) => (g : (Num) -> Real)(n + k))
+      #|  sums((n : Num) => (f : (Num) -> Real)(n + (k : Num)), (s : Real) - sum((0, k), f))
+      #|  \226\136\128 s : Real, \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, sums(f, s) && summable(g) \226\134\146 (\226\136\128 k : Num, (\226\136\128 n : Num, abs(f(n + k)) <= g(n + k)) \226\134\146 s - sum((0, k), f) <= suminf((n : Num) => g(n + k)))
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  -(s : Real) - -(u : Real) <= (x : Real) \226\134\146 -x <= s - u
+      #|  \226\136\128 k : Num, (\226\136\128 n : Num, abs(((p : Num) => -(f : (Num) -> Real)(p))(n + k)) <= (g : (Num) -> Real)(n + k)) \226\134\146 -(s : Real) - sum((0, k), (p : Num) => -f(p)) <= suminf((n : Num) => g(n + k))
+      #|  \226\136\128 s : Real, \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, sums(f, s) && (\226\136\128 n : Num, abs(f(n)) <= g(n)) && summable(g) \226\134\146 (\226\136\128 k : Num, abs(s - sum((0, k), f)) <= suminf((n : Num) => g(n + k)))
+      #|  real_of_num(0) < real_of_num((n : Num)) && real_of_num(n) <= (a : Real) \226\134\146 inv(a) <= inv(real_of_num(n))
+      #|  abs(real_of_num((n : Num))) == real_of_num(n)
+      #|  (a : Real) <= (b : Real) \226\134\146 real_of_num((n : Num)) * a <= real_of_num(n) * b
+      #|  1 <= (n : Num) \226\134\146 0 < n
+      #|  abs(real_of_num(4) * (u : Real)) <= real_of_num(4) / real_of_num(9) && abs(real_of_num(2) * (v : Real)) <= real_of_num(2) / real_of_num(12) && abs(real_of_num(1) * (w : Real)) <= real_of_num(1) / real_of_num(13) && abs(real_of_num(1) * (x : Real)) <= real_of_num(1) / real_of_num(14) \226\134\146 abs(real_of_num(4) * u - real_of_num(2) * v - real_of_num(1) * w - real_of_num(1) * x) <= real_of_num(4) / real_of_num(9) + (real_of_num(2) / real_of_num(12) + (real_of_num(1) / real_of_num(13) + real_of_num(1) / real_of_num(14)))
+      #|  real_of_num(4) / real_of_num(9) + (real_of_num(2) / real_of_num(12) + (real_of_num(1) / real_of_num(13) + real_of_num(1) / real_of_num(14)))
+      #|  \226\136\128 n : Num, 1 <= n \226\134\146 abs(real_of_num(4) / real_of_num(8 * n + 1) - real_of_num(2) / real_of_num(8 * n + 4) - real_of_num(1) / real_of_num(8 * n + 5) - real_of_num(1) / real_of_num(8 * n + 6)) <= real_of_num(622) / real_of_num(819)
+      #|  (pi_fun : (Num) -> Real)((n : Num)) == inv(pow(real_of_num(16), n)) * (real_of_num(4) / real_of_num(8 * n + 1) - real_of_num(2) / real_of_num(8 * n + 4) - real_of_num(1) / real_of_num(8 * n + 5) - real_of_num(1) / real_of_num(8 * n + 6))
+      #|  (pi_bound_fun : (Num) -> Real)((n : Num)) == (if n == 0 { real_of_num(8) } else { real_of_num(15) / real_of_num(16) * inv(pow(real_of_num(16), n)) })
+      #|  real_of_num(0) < real_of_num(16)
+      #|  !((k : Num) == 0) \226\134\146 1 <= k
+      #|  real_of_num(622) / real_of_num(819) <= real_of_num(15) / real_of_num(16)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, real_of_num(0) < z && y <= x \226\134\146 z * y <= z * x
+      #|  abs(real_of_num((n : Num))) == real_of_num(n)
+      #|  (a : Real) * (b : Real) == b * a
+      #|  \226\136\128 k : Num, abs(pi_fun(k)) <= pi_bound_fun(k)
+      #|  abs(real_of_num(1) / real_of_num(16)) < real_of_num(1)
+      #|  \226\136\128 k : Num, sums((n : Num) => inv(pow(real_of_num(16), k)) * inv(pow(real_of_num(16), n)), inv(pow(real_of_num(16), k)) * (real_of_num(16) / real_of_num(15)))
+      #|  (b : Real) * ((a : Real) * (c : Real)) == b * real_of_num(1) \226\134\146 a * b * c == b
+      #|  (x : Real) == (y : Real) \226\134\146 sums((a : (Num) -> Real), x) \226\134\146 sums(a, y)
+      #|  (k : Num)
+      #|  sums((n : Num) => real_of_num(15) / real_of_num(16) * (pow(inv(real_of_num(16)), (k : Num)) * inv(pow(real_of_num(16), n))), real_of_num(15) / real_of_num(16) * (inv(pow(real_of_num(16), k)) * (real_of_num(16) / real_of_num(15))))
+      #|  0 < (k : Num) \226\134\146 !((n : Num) + k == 0)
+      #|  (n : Num)
+      #|  ((n : Num) => pi_bound_fun(n + (k : Num))) == ((n : Num) => real_of_num(15) / real_of_num(16) * (pow(inv(real_of_num(16)), k) * inv(pow(real_of_num(16), n))))
+      #|  \226\136\128 k : Num, 0 < k \226\134\146 sums((n : Num) => pi_bound_fun(n + k), inv(pow(real_of_num(16), k)))
+      #|  suminf((n : Num) => pi_bound_fun(n + (k : Num))) == inv(pow(real_of_num(16), k))
       #|  pi_bound_fun
       #|  pi_fun
       #|  pi
-      #|  forall k. (0<|k) ==> (abs(pi - (sum(0,k) pi_fun)) <=. (inv(&.16 **. (k))))
-      #|  k:num
-      #|  2 EXP 4
-      #|  forall n. inv (&.16 **. n) = (twopow (--: (&:(4*n)))) 
+      #|  \226\136\128 k : Num, 0 < k \226\134\146 abs(pi - sum((0, k), pi_fun)) <= inv(pow(real_of_num(16), k))
+      #|  (k : Num)
+      #|  EXP(2, 4)
+      #|  \226\136\128 n : Num, inv(pow(real_of_num(16), n)) == twopow(-int_of_num(4 * n))
       #|dirac_delta =  |- (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun(fun(num,real),fun(fun(num,real),bool)) (#dirac_delta:fun(num,fun(num,real)) i:num)) (\j:num. (((#COND:fun(bool,fun(real,fun(real,real))) ((#=:fun(num,fun(num,bool)) i:num) j:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))
       #|min_num =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\X:fun(num,bool). ((#=:fun(num,fun(num,bool)) (#min_num:fun(fun(num,bool),num) X:fun(num,bool))) (#@:fun(fun(num,bool),num) (\m:num. ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) m:num) X:fun(num,bool))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) n:num) X:fun(num,bool))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))))))
       #|min_least =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\X:fun(num,bool). (#forall:fun(fun(num,bool),bool) (\c:num. ((#==>:fun(bool,fun(bool,bool)) (X:fun(num,bool) c:num)) ((#/\:fun(bool,fun(bool,bool)) (X:fun(num,bool) (#min_num:fun(fun(num,bool),num) X:fun(num,bool)))) ((#<=:fun(num,fun(num,bool)) (#min_num:fun(fun(num,bool),num) X:fun(num,bool))) c:num)))))))
