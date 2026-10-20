@@ -80,9 +80,10 @@ test "spellings that would read back as something else" {
     round(@kernel.mk_comb(@kernel.mk_const("NUMERAL", @list.List([])), bit0)),
     content="NUMERAL(BIT0(_0))",
   )
-  // binders named like an interface name or a keyword are renamed
+  // a binder named like a keyword is renamed; one named like an interface
+  // alias (exists) is not, since the term syntax does not read aliases
   let ex = @kernel.mk_var("exists", num)
-  inspect(round(@kernel.mk_abs(ex, ex)), content="(exists' : Num) => exists'")
+  inspect(round(@kernel.mk_abs(ex, ex)), content="(exists : Num) => exists")
   let kw = @kernel.mk_var("let", num)
   inspect(round(@kernel.mk_abs(kw, kw)), content="(v : Num) => v")
 }
@@ -295,4 +296,45 @@ test "op_ names decode only in their own spelling" {
       #|(op_minus_minus_gt : Bool) => op_minus_minus_gt
     ),
   )
+}
+
+///|
+test "names are read the same under any overload priority" {
+  let real = @kernel.mk_type("real", @list.List([]))
+  let num = @kernel.mk_type("num", @list.List([]))
+  let saved = @term_syntax.fixed_resolution.val
+  @term_syntax.fixed_resolution.val = true
+  defer {
+    @term_syntax.fixed_resolution.val = saved
+  }
+  @preterm.with_interface_restored(() => {
+    @preterm.prioritize_overload(real)
+    // the quotation syntax follows the priority...
+    assert_eq(@kernel.type_of(@parser.parse_term("x + y")), real)
+    // ...the term syntax does not: types decide, else the fixed order
+    assert_eq(@kernel.type_of(@term_syntax.parse_term("x + y")), num)
+    assert_eq(
+      @kernel.type_of(@term_syntax.parse_term("(x : Real) + y")),
+      real,
+    )
+  })
+  @preterm.with_interface_restored(() => {
+    @preterm.prioritize_overload(num)
+    assert_eq(@kernel.type_of(@term_syntax.parse_term("x + y")), num)
+  })
+}
+
+///|
+test "replacing an overload does not change a context-free reading" {
+  let saved = @term_syntax.fixed_resolution.val
+  @term_syntax.fixed_resolution.val = true
+  defer {
+    @term_syntax.fixed_resolution.val = saved
+  }
+  let before = @kernel.type_of(@term_syntax.parse_term("op_amp(0)"))
+  @preterm.with_interface_restored(() => {
+    // as Jordan's prioritize_real does: & now means only real_of_num
+    @preterm.override_interface("&", @kernel.mk_const("real_of_num", @list.List([])))
+    assert_eq(@kernel.type_of(@term_syntax.parse_term("op_amp(0)")), before)
+  })
 }

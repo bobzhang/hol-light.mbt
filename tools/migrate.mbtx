@@ -439,6 +439,7 @@ async fn record(
   theory : String,
   sources : Array[(String, String)],
   given? : Map[Int, String] = Map::new(),
+  respell? : Bool = false,
 ) -> Recording {
   let pkg_alias = pkg.split("/").last().unwrap().to_owned()
   let pkg_file = pkg + "/moon.pkg"
@@ -451,7 +452,11 @@ async fn record(
   let given_src = "Map::from_array([" +
     given.to_array().map(p => "(\{p.0}, \"" + quote(p.1) + "\")").join(", ") +
     "])"
-  let spell = if given.is_empty() {
+  let spell = if respell {
+    // keep a spelling that still reads as the quotation (=), else spell it
+    // anew (~)
+    "(match given.get(site) { Some(s) => Some(try { @term_syntax.check_spelling(old, s); \"=\" + s } catch { _ => \"~\" + @term_syntax.spell_quotation(old, tm) }); None => None })"
+  } else if given.is_empty() {
     "Some(@term_syntax.spell_quotation(old, tm))"
   } else {
     "(match given.get(site) { Some(s) => { @term_syntax.check_spelling(old, s); Some(s) }; None => None })"
@@ -917,10 +922,266 @@ async fn retrace(pkg : String) -> Unit {
 }
 
 ///|
+/// `--reverify <package dir> <rev>`: check each quotation migrated since
+/// `rev` (the package before its migration) where it runs, as the tool
+/// checks its own spellings, against the quotation it replaced; report,
+/// change nothing.
+async fn reverify(pkg : String, rev : String) -> Unit {
+  let theory = theory_of(pkg)
+  let olds = []
+  let news = []
+  let given : Map[Int, String] = Map::new()
+  let mut site = 0
+  for f in mbt_files(pkg).filter(f => !f.has_suffix("_test.mbt")) {
+    let (code, old) = sh("git", ["show", rev + ":" + f])
+    if code != 0 {
+      continue
+    }
+    let new = read(f)
+    let ocs = old.to_array()
+    let ncs = new.to_array()
+    let oq = quotations(ocs)
+    let nq = quotations(ncs)
+    if without_quotations(ocs) != without_quotations(ncs) || oq.length() != nq.length() {
+      fail("--reverify: \{f} changed outside quotation calls since \{rev}")
+    }
+    for k in 0..<oq.length() {
+      if oq[k].3 && !nq[k].3 {
+        given[site] = unquote(nq[k].2)
+      } else if oq[k].3 != nq[k].3 || oq[k].2 != nq[k].2 {
+        // anything else is as it was, so that the check runs in the
+        // environment the package runs in now
+        fail("--reverify: \{f}: a quotation changed other than by its migration since \{rev}")
+      }
+      if oq[k].3 {
+        site += 1
+      }
+    }
+    olds.push((f, old))
+    news.push((f, new))
+  }
+  for p in olds {
+    @fs.write_file(p.0, p.1)
+  }
+  let rec = record(pkg, theory, olds, given~) catch {
+    e => {
+      for p in news {
+        @fs.write_file(p.0, p.1)
+      }
+      raise e
+    }
+  }
+  for p in news {
+    @fs.write_file(p.0, p.1)
+  }
+  let mut ok = 0
+  let mut later = 0
+  let differ = []
+  for s, new in given {
+    match rec.runs.get(s) {
+      None => later += 1
+      Some(runs) =>
+        match runs.iter().find_first(r => r.1.has_prefix(unprintable)) {
+          Some(r) => differ.push(new + "  [" + r.1[unprintable.length():].to_owned() + "]")
+          None => ok += 1
+        }
+    }
+  }
+  println("\{pkg}: \{given.length()} migrated, \{ok} read as before, \{differ.length()} differ, \{later} not run")
+  for d in differ[:min(30, differ.length())] {
+    println("  differs: " + d[:min(220, d.length())].to_owned())
+  }
+}
+
+///|
+/// `--respell <package dir> <rev>`: the quotations migrated since `rev` (the
+/// package before its migration), each checked where it runs against the
+/// quotation it replaced; a spelling that no longer reads as it is spelt
+/// anew, or, when none does, the quotation goes back to the quotation
+/// syntax. Rewrites the source, the trace in the golden and .expected, and
+/// runs the reference test.
+async fn respell(pkg : String, rev : String) -> Unit {
+  let (_, status) = sh("git", ["status", "--porcelain", "--untracked-files=all"])
+  if status.trim() != "" {
+    fail("the working tree is not clean; commit or stash first:\n" + status)
+  }
+  let theory = theory_of(pkg)
+  let olds = []
+  let currents = []
+  // per file: for each quotation call of the current source, its site in
+  // the old one (its @parser call), or -1
+  let site_of : Array[Array[Int]] = []
+  let given : Map[Int, String] = Map::new()
+  let old_text : Map[Int, String] = Map::new()
+  let mut site = 0
+  for f in mbt_files(pkg).filter(f => !f.has_suffix("_test.mbt")) {
+    let (code, old) = sh("git", ["show", rev + ":" + f])
+    if code != 0 {
+      continue
+    }
+    let cur = read(f)
+    let ocs = old.to_array()
+    let ccs = cur.to_array()
+    let oq = quotations(ocs)
+    let cq = quotations(ccs)
+    if without_quotations(ocs) != without_quotations(ccs) || oq.length() != cq.length() {
+      fail("--respell: \{f} changed outside quotation calls since \{rev}")
+    }
+    let sites = []
+    for k in 0..<oq.length() {
+      if oq[k].3 == cq[k].3 && oq[k].2 != cq[k].2 || !oq[k].3 && cq[k].3 {
+        // anything else is as it was, so that the check runs in the
+        // environment the package runs in now
+        fail("--respell: \{f}: a quotation changed other than by its migration since \{rev}")
+      }
+      if oq[k].3 {
+        if !cq[k].3 {
+          given[site] = unquote(cq[k].2)
+        }
+        old_text[site] = oq[k].2
+        sites.push(site)
+        site += 1
+      } else {
+        sites.push(-1)
+      }
+    }
+    site_of.push(sites)
+    olds.push((f, old))
+    currents.push((f, cur))
+  }
+  if given.is_empty() {
+    println("\{pkg}: nothing migrated since \{rev}")
+    return
+  }
+  // recording runs the old sources and restores them; the current ones go
+  // back after it, whatever happens
+  let rec = record(pkg, theory, olds, given~, respell=true) catch {
+    e => {
+      for p in currents {
+        @fs.write_file(p.0, p.1)
+      }
+      raise e
+    }
+  }
+  for p in currents {
+    @fs.write_file(p.0, p.1)
+  }
+  // what each migrated site becomes: kept, spelt anew, or the quotation
+  let final_ : Map[Int, String?] = Map::new()
+  let mut kept = 0
+  let mut respelt = 0
+  let reverted = []
+  for s, cur in given {
+    match rec.runs.get(s) {
+      // a site that did not run cannot be checked: it goes back
+      None => {
+        final_[s] = None
+        reverted.push(cur + "  [not run]")
+      }
+      Some(runs) =>
+        if runs.iter().all(r => r.1 == "=" + cur) {
+          kept += 1
+          final_[s] = Some(cur)
+        } else if runs.iter().all(r => r.1.has_prefix("~") && r.1 == runs[0].1) {
+          respelt += 1
+          final_[s] = Some(runs[0].1[1:].to_owned())
+        } else {
+          final_[s] = None
+          let why = runs.iter().find_first(r => !r.1.has_prefix("=")).map(r => r.1).unwrap_or("")
+          reverted.push(cur + "  [" + why.replace(old=unprintable, new="") + "]")
+        }
+    }
+  }
+  println("\{pkg}: \{given.length()} migrated, \{kept} kept, \{respelt} spelt anew, \{reverted.length()} back to the quotation syntax")
+  for r in reverted[:min(20, reverted.length())] {
+    println("  back: " + r[:min(200, r.length())].to_owned())
+  }
+  if respelt == 0 && reverted.is_empty() {
+    println("test: skipped (nothing changes)")
+    return
+  }
+  // the sources
+  for fi, p in currents {
+    let sites = site_of[fi]
+    let ccs = p.1.to_array()
+    let cq = quotations(ccs)
+    let out = StringBuilder()
+    let mut last = 0
+    for k, q in cq {
+      let s = sites[k]
+      if s < 0 || !given.contains(s) {
+        continue
+      }
+      let replacement = match final_.get(s) {
+        Some(Some(new)) if new == given[s] => None
+        Some(Some(new)) => Some("@term_syntax.parse_term(\"" + quote(new) + "\")")
+        _ => Some(call_prefix + old_text[s] + "\")")
+      }
+      if replacement is Some(r) {
+        out.write_string(String::from_array(ccs[last:q.0]))
+        out.write_string(r)
+        last = q.1
+      }
+    }
+    out.write_string(String::from_array(ccs[last:]))
+    @fs.write_file(p.0, out.to_string())
+  }
+  // the traces: as the golden has them now (the current spellings), and
+  // after
+  let now_trace = rec.trace.copy()
+  let new_trace = rec.trace.copy()
+  for s, cur in given {
+    for r in rec.runs.get(s).unwrap_or([]) {
+      if r.0 >= 0 {
+        now_trace[r.0] = cur
+        match final_.get(s) {
+          Some(Some(new)) => new_trace[r.0] = new
+          _ => ()
+        }
+      }
+    }
+  }
+  let keep = [pkg + "/"]
+  let tests = golden_tests(pkg)
+  for t in tests {
+    keep.push(t)
+    rewrite_trace(t, theory, now_trace, new_trace)
+    guard expected_file(read(t)) is Some(e) && @fs.exists(e) else {
+      fail("\{t} names no tools/ocaml_ref/<name>_ref.expected file")
+    }
+    keep.push(e)
+    rewrite_trace(e, theory, now_trace, new_trace)
+  }
+  let failures = match tests {
+    [] => run_tests(pkg, None)
+    tests => {
+      let tdir = tests[0].split("/").map(p => p.to_owned()).to_array()
+      run_tests(tdir[:tdir.length() - 1].join("/"), Some(tests))
+    }
+  }
+  restore_others(keep)
+  if failures.is_empty() {
+    println("test: pass")
+  } else {
+    println("test: FAILED")
+    for m in failures {
+      println(m[:min(3000, m.length())].to_owned())
+    }
+    fail("the reference test fails")
+  }
+}
+
+///|
 async fn main {
   let args = @env.args()
   guard args.length() >= 2 else {
     fail("usage: moon run tools/migrate.mbtx -- [--retrace] <package dir>")
+  }
+  if args[1] == "--respell" && args.length() >= 4 {
+    return respell(args[2].trim_end(chars="/").to_owned(), args[3])
+  }
+  if args[1] == "--reverify" && args.length() >= 4 {
+    return reverify(args[2].trim_end(chars="/").to_owned(), args[3])
   }
   if args[1] == "--retrace" && args.length() >= 3 {
     return retrace(args[2].trim_end(chars="/").to_owned())

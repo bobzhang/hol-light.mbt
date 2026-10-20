@@ -182,9 +182,18 @@ pub fn parse_term(s : String) -> @kernel.Term raise {
 ///|
 /// The term `s` denotes, without recording it as a quotation.
 fn elaborate(s : String) -> @kernel.Term raise {
-  @preterm.term_of_preterm(
-    @preterm.retypecheck(@list.List([]), parse_preterm(s)),
-  )
+  // names are read through the fixed view of the interface when it is on
+  // (resolution.mbt)
+  fn go() -> @kernel.Term raise {
+    @preterm.term_of_preterm(
+      @preterm.retypecheck(@list.List([]), parse_preterm(s)),
+    )
+  }
+  if fixed_resolution.val {
+    with_fixed_interface(go)
+  } else {
+    go()
+  }
 }
 
 ///|
