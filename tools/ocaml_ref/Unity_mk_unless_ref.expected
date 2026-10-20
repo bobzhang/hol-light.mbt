@@ -5676,8 +5676,8 @@ Unity/mk_unless quotations (298):
   r:'a->bool
   P:num->'a->bool
   forall p q ps qs p' q' p's q's.\n        (p /\\ ~q ==> ps \\/ qs) ==> (p' /\\ ~q' ==> p's \\/ q's) ==>\n          (p /\\ p' /\\ (~p \\/ ~q') /\\ (~p' \\/ ~q) /\\ (~q \\/ ~q') ==>\n                ps /\\ p's \\/ ps /\\ q's \\/ p's /\\ qs \\/ qs /\\ q's)
-  forall t1 t2 t3. t1 \\/ t2 \\/ t3 <=> ~(~t1 /\\ ~t2) \\/ t3
-  forall p p' q q'.\n     ((p \\/ p') /\\ (p \\/ ~q') /\\ (p' \\/ ~q) /\\ (~q \\/ ~q')) =\n     ((p /\\ ~q) \\/ (p' /\\ ~q'))
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, \226\136\128 t3 : Bool, (t1 || t2 || t3) == (!(!t1 && !t2) || t3)
+  \226\136\128 p : Bool, \226\136\128 p' : Bool, \226\136\128 q : Bool, \226\136\128 q' : Bool, ((p || p') && (p || !q') && (p' || !q) && (!q || !q')) == (p && !q || p' && !q')
   (\\s:'a. p s /\\ ~(p s) ==> p (st s))s
   forall p st (s:'a). (p UNLESS_STMT p)st s
   forall s:'a. q s ==> r s
@@ -5706,12 +5706,12 @@ Unity/mk_unless quotations (298):
   (forall s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s)) /\\\n           (forall s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))
   forall p q p' q' (st:'a->'a).\n     ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (p' UNLESS_STMT q') st s)) ==>\n      (forall s. ((p /\\* p') UNLESS_STMT\n           (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))) st s)
   forall p q p' q' (st:'a->'a).\n     ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (p' UNLESS_STMT q') st s)) ==>\n      (forall s. ((p \\/* p') UNLESS_STMT\n            ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q')))\n           st s)
-  forall p q r. (p ==> q) ==> (p \\/ r ==> q \\/ r)
-  n:num
-  n:num
-  n:num
+  \226\136\128 p : Bool, \226\136\128 q : Bool, \226\136\128 r : Bool, (p \226\134\146 q) \226\134\146 p || r \226\134\146 q || r
+  (n : Num)
+  (n : Num)
+  (n : Num)
   forall(P:num->('a->bool)) q s. ((?n. P n s) \\/ q s) = (?n. P n s \\/ q s)
-  n:num
+  (n : Num)
   forall(P:num->('a->bool)) q st.\n          (forall m. (forall s. ((P m) UNLESS_STMT q)st s)) ==>\n               (forall s. ((\\s. ?n. P n s) UNLESS_STMT q)st s)
   forall(p:'a->bool) q r (st:'a->'a).\n      (forall s. (p UNLESS_STMT q) st s) ==>\n         (forall s. ((p \\/* r) UNLESS_STMT (q \\/* r)) st s)
   forall(p:'a->bool) Pr. (p UNLESS p) Pr
@@ -5918,9 +5918,9 @@ Unity/mk_unless quotations (298):
   Not (q:'a->bool)
   p:'a->bool
   forall(p:'a->bool) q Pr. (p UNLESS (Not q)) Pr /\\ q STABLE Pr ==>\n                               (p UNLESS (p /\\* (Not q))) Pr
-  forall p q. p /\\ (~p \\/ ~q) <=> p /\\ ~q
-  forall p q. p \\/ (p /\\ q) <=> p
-  forall P Q. (forall(i:num). (P i) /\\ (Q i)) <=> ((forall i. P i) /\\ (forall i. Q i))
+  \226\136\128 p : Bool, \226\136\128 q : Bool, (p && (!p || !q)) == (p && !q)
+  \226\136\128 p : Bool, \226\136\128 q : Bool, (p || p && q) == p
+  \226\136\128 P : (Num) -> Bool, \226\136\128 Q : (Num) -> Bool, (\226\136\128 i : Num, P(i) && Q(i)) == ((\226\136\128 i : Num, P(i)) && (\226\136\128 i : Num, Q(i)))
   forall(P:num->('a->bool)) Q st.\n            (forall i s. (P i UNLESS_STMT P i /\\* Q i) st s) ==>\n               (forall s. ((!*) P UNLESS_STMT (!*) P /\\* (?*) Q) st s)
   forall i:num. (forall s:'a. (P i UNLESS_STMT P i /\\* Q i) h s) /\\\n                  (P i UNLESS P i /\\* Q i) t
   forall(P:num->('a->bool)) Q Pr.\n       (forall i. ((P i) UNLESS ((P i) /\\* (Q i))) Pr) ==>\n           (((!*) P) UNLESS (((!*) P) /\\* ((?*) Q))) Pr
@@ -5930,7 +5930,7 @@ Unity/mk_unless quotations (298):
   \\<=/* (Q:num->('a->bool)) i
   /<=\\* (P:num->('a->bool)) i
   forall i. (((P:num->('a->bool)) i) UNLESS (Q i))Pr
-  SUC i
+  SUC((i : Num))
   forall(P:num->('a->bool)) Q Pr.\n    (forall i. ((P i) UNLESS (Q i))Pr) ==>\n      (forall i. ((/<=\\* P i) UNLESS (\\<=/* Q i))Pr)
   Pr:('a->'a)list
   q:'a->bool
@@ -5938,7 +5938,7 @@ Unity/mk_unless quotations (298):
   q:'a->bool
   /<=\\* (P:num->('a->bool)) i
   forall i. (((P:num->('a->bool)) i) UNLESS q)Pr
-  SUC i
+  SUC((i : Num))
   forall(P:num->('a->bool)) q Pr.\n       (forall i. ((P i) UNLESS q)Pr) ==> (forall i. ((/<=\\* P i) UNLESS q)Pr)
   forall(P:num->('a->bool)) Q st.\n         (forall i s. ((P i) UNLESS_STMT q) st s) ==>\n            (forall s. (((?*) P) UNLESS_STMT q) st s)
   forall m:num. (forall s:'a. (P m UNLESS_STMT q) h s) /\\ (P m UNLESS q) t
