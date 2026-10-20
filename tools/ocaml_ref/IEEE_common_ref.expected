@@ -5522,202 +5522,202 @@ Generating HOL version of proof
 2 basis elements and 0 critical pairs
 Generating HOL version of proof
 IEEE/common quotations (196):
-  ipow (x:real) (e:int) =\n  (if (&0 <= e)\n   then (x pow (num_of_int e))\n   else (inv (x pow (num_of_int (--e)))))
-  &0 <= --(i:int)
-  &0 <= (i:int)
-  forall(r:real) (i:int). &0 < r ==> &0 < r ipow i
-  ~(&0 <= (i:int))
-  ~(&0 <= (i:int)) ==> (&0 <= --i <=> T)
-  &0 <= (i:int)
-  -- -- (x:int) = x
-  -- (&0:int) = (&0:int)
-  &0 <= --(i:int)
-  &0 <= (i:int)
-  &0 <= (i:int) /\\ &0 <= --i ==> i = &0
-  &0 <= --(i:int)
-  &0 <= (i:int)
-  forall(x:real) (i:int). ~(x = &0) ==> x ipow i = inv(x ipow -- i)
-  --((u:int) + (v:int)) = --u + --v
-  &0 <= (v:int)
-  (a:int) + (b:int) = b + a
-  (a:real) * b = b * a
-  &0 <= (v:int)
-  &0 <= (u:int)
-  (a:real) * b = b * a
-  --((u:int) + (&m:int)) = -- u - &m
-  ~(&0 <= (u:int) + (v:int))
-  (a:real) * b = b * a
-  (u:int) + (&m:int) = &m - (--u)
-  &0 <= (u:int) + (v:int)
-  &0 <= (u:int) + (v:int)
-  forall(x:real) (u:int) (v:int).\n\t              ~(x = &0) /\\ u < &0 /\\ &0 <= v ==>\n                      (x ipow u) * (x ipow v) = (x ipow (u + v))
-  forall(x:real) (u:int) (v:int).\n\t  ~(x = &0) /\\ &0 <= u /\\ &0 <= v ==>\n\t  (x ipow u) * (x ipow v) = (x ipow (u + v))
-  forall(x:real) (u:int) (v:int). ~(x = &0) ==>\n\t  (x ipow u) * (x ipow v) = (x ipow (u + v))
-  &0 <= (u:int) /\\ &0 <= (v:int) ==> &0 <= u + v
-  n:num
-  m:num
-  (u:int) < &0 ==> ~(&0 <= u)
-  (x:int) < &0 ==> &0 <= --x
-  n:num
-  m:num
-  &0 <= (u:int) + (v:int) ==> --u <= v
-  ~(&0 <= (u:int) + (v:int)) ==> v < --u
-  m < n ==> m <= n
-  num_of_int(i)
-  forall(r:num) (i:int). &0 <= i ==> ?(m:num). m = num_of_int(i) /\\\n\t    &r ipow i = &(r EXP m)
-  forall(r:num) (p:num). 0 < p ==> &r ipow (&p - &1) = &(r EXP (p - 1))
-  0 < p ==> 0 <= p - 1
-  r:num
-  0 < x <=> 1 <= x
-  (a:real) * b = b * a
-  (x ipow e)
-  (z:num) <= y + 1
-  (a:real) * b = b * a
-  (x ipow e)
-  (y:num) <= z
-  forall(x:real) (y:num) (z:num) (e:int).\n\t  &0 < x /\\ &y * x ipow e <= &z * x ipow e /\\\n\t  &z * x ipow e <= (&y + &1) * x ipow e ==>\n\t  z = y \\/ z = y + 1
-  &0 <= (&1:int) <=> T
-  forall(x:real). x ipow &1 = x
-  &0 <= (&0:int) <=> T
-  forall(x:real). x ipow &0 = &1
-  forall(x:real) (e:int). &1 <= x /\\ &0 <= e ==> &1 <= x ipow e
-  n:num
-  &0 < (e:int)
-  &0 < (e:int) ==> ((&0 <= e) <=> T)
-  forall(x:real) (e:int). &1 < x /\\ &0 < e ==> &1 < x ipow e
-  &0 < (e:int) ==> &0 <= e
-  &0 < (x:real) ==> &0 <= x
-  (a:real) * b = b * a
-  x <= (y:real) /\\ z <= w ==> x + z <= y + w
-  &2 * x = x + (x:real)
-  &2 * &r ipow e
-  &r ipow (e + &1) = &r ipow e * &r ipow &1
-  e + (&1:int)
-  &0 < (x:real) ==> &0 <= x
-  &0 <= (&0:int) <=> T
-  (&0):int
-  forall(r:num) (n:num). 2 <= r ==> ?(e:int). &0 <= e /\\ &n <= &r ipow e
-  2 <= r ==> (?e. &0 <= e /\\ &n <= &r ipow e)
-  e:int
-  forall(r:num) (n:num). 2 <= r ==> ?(e:int). &n <= &r ipow e
-  n:num
-  e:int
-  z:real
-  forall(r:num) (z:real). 2 <= r ==> ?(e:int). z <= &r ipow e
-  n:num
-  (x:real) = &1 * x
-  -- -- (e:int) = e
-  -- (e:int)
-  forall(r:num) (z:real). &0 < z /\\ 2 <= r ==> ?(e:int). &r ipow e <= z
-  &1 / (z:real)
-  &2 <= &r ==> ~(&r = &0)
-  e1 <= (e2:int) <=> e2' <= (e1':int)
-  -- e2:int
-  ?e2':int. &0 <= e2' /\\ --e2 = e2'
-  -- e1:int
-  ?e1':int. &0 <= e1' /\\ --e1 = e1'
-  &x ipow -- e2 <= &x ipow -- e1
-  &x ipow e2 = inv (&x ipow -- e2)
-  &x ipow e1 = inv (&x ipow -- e1)
-  (&0):int
-  &0 <= (e2:int)
-  (&1:real) = (inv (&1:real))
-  &1:real
-  forall y. (x:real) < y /\\ y <= z ==> x < z
-  inv (&x ipow e2') < &x ipow e1
-  -- e2:int
-  ?e2':int. &0 < e2' /\\ --e2 = e2'
-  &x ipow e2 = inv (&x ipow -- e2)
-  &0 <= (e2:int)
-  &0 <= (e1:int)
-  &0 <= (e2:int)
-  &0 <= (e1:int)
-  forall(x:num) (e1:int) (e2:int). 2 <= x /\\ &x ipow e1 <= &x ipow e2 ==>\n             e1 <= e2
-  2 <= x ==> ((x = 0) <=> F)
-  2 <= x ==> ((x = 0) <=> F)
-  -- e2:int
-  ?(e2':int). &0 <= e2' /\\ -- e2 = e2'
-  -- e1:int
-  ?(e1':int). &0 <= e1' /\\ -- e1 = e1'
-  &1 <= (x:real)
-  &1 <= (x:real) ==> ~(x = &0)
-  -- e1:int
-  ?(e1':int). &0 <= e1' /\\ -- e1 = e1'
-  &1 <= (x:real)
-  &1 <= (x:real) ==> ~(x = &0)
-  &1:real
-  &0 <= (e2:int)
-  &0 <= (e2:int)
-  &0 <= (e1:int)
-  &0 <= (e2:int)
-  &0 <= (e1:int)
-  forall(x:real) (e1:int) (e2:int). &1 <= x /\\ e1 <= e2 ==>\n                      x ipow e1 <= x ipow e2
-  &1 <= (x:real) ==> &0 < x
-  x:real
-  &0 < z ==> ~(z = &0)
-  x * y = y * (x:real)
-  ~(x = &0)
-  forall(x:real) (i:int). &0 < x ==> x ipow i * x ipow (-- i) = &1
-  rerror (a:real) (b:real) = abs((b - a) / a)
-  closer (x:real) (y:real) (z:real) = (abs(x - z) < abs(y - z))
-  forall(n:num). ODD(2 * n) <=> F
-  2 * SUC(d) - 1 = SUC(2 *d)
-  forall(f:num). 0 < f ==> ODD(2 * f - 1)
-  z = x * y /\\ ~(z = &0) ==> ~(x = &0) /\\ ~(y = &0)
-  1 = x EXP 0
-  forall(x:num) (n:num). ~(x = 0) ==> 1 <= x EXP n
-  b = 0 \\/ 1 <= b
-  b = 0 \\/ 1 <= b
-  a = 0 \\/ 1 <= a
-  forall(a:num) (b:num). 1 <= a * b ==> 1 <= a
-  is_sup_num (s:num->bool) (n:num) = (n IN s /\\ forall n'. n' IN s ==> n' <= n)
-  is_sup_int (s:int->bool) (e:int) = (e IN s /\\ forall e'. e' IN s ==> e' <= e)
-  sup_num (s:num->bool) = (@(n:num). is_sup_num s n)
-  sup_int (s:int->bool) = (@(e:int). is_sup_int s e)
-  forall x. x = SUC b ==> ~(x IN s)
-  ~(n = SUC b) /\\ n <= (SUC b) ==> n <= b
-  forall n. n IN s ==> n <= (b:num)
-  SUC b <= x
-  x <= SUC b
-  forall x. is_sup_num s x ==> x = SUC b
-  is_sup_num s (SUC b)
-  SUC(b)
-  SUC(b) IN s
-  x <= 0 ==> x = 0
-  forall x. is_sup_num s x ==> x = 0
-  x = 0
-  x <= 0 ==> x = 0
-  x = 0
-  is_sup_num s 0
-  0:num
-  forall(s:num->bool) (b:num). ~(s = {}) /\\ (forall n. n IN s ==> n <= b) ==>\n\t  ?(n':num). sup_num s = n' /\\ is_sup_num s n'
-  (x:num) IN s
-  SUC b IN s
-  (n:num) IN s
-  ~(s = {}) /\\ (forall n. n IN s ==> n <= b)\n                       ==> (?n'. sup_num s = n' /\\ is_sup_num s n')
-  e':int
-  &0 <= (e':int) - e
-  (z:int) <= y <=> z - e <= y - e
-  e' < (e:int)
-  (e:int) - e' + e' = e
-  &0 <= e'' - (e:int)
-  e'':int
-  ?(e'':int). e'' IN s /\\ e <= e'' /\\\n                 (int_of_num n') = e'' - e
-  (int_of_num (\n  sup_num {n | ?(e'':int). n = num_of_int(e'' - e) /\\ e'' IN s /\\ e <= e''}))\n                           + e
-  &0 <= b - (e:int)
-  &0 <= e'' - (e:int)
-  num_of_int(b - e)
-  ?(bn:num). forall n. n IN\n                     {n | ?(e'':int). n = num_of_int(e'' - e) /\\\n                             e'' IN s /\\ e <= e''} ==> n <= bn
-  e - (e:int) = &0
-  e:int
-  0:num
-  ~({n | ?(e'':int). n = num_of_int(e'' - e) /\\\n                             e'' IN s /\\ e <= e''} = {})
-  CHOICE (s:int->bool)
-  ?e. (e:int) IN s
-  forall(s:int->bool) (b:int). ~(s = {}) /\\ (forall e. e IN s ==> e <= b) ==>\n\t    ?(e':int). is_sup_int s e'
-  b:int
-  sup_int s
-  forall(s:int->bool) (b:int). ~(s = {}) /\\ (forall e. e IN s ==> e <= b) ==>\n\t  ?(e':int). sup_int s = e' /\\ is_sup_int s e'
+  (ipow : (Real, Int) -> Real)((x : Real), (e : Int)) == (if int_of_num(0) <= e { pow(x, num_of_int(e)) } else { inv(pow(x, num_of_int(-e))) })
+  int_of_num(0) <= -(i : Int)
+  int_of_num(0) <= (i : Int)
+  \226\136\128 r : Real, \226\136\128 i : Int, real_of_num(0) < r \226\134\146 real_of_num(0) < ipow(r, i)
+  !(int_of_num(0) <= (i : Int))
+  !(int_of_num(0) <= (i : Int)) \226\134\146 (int_of_num(0) <= -i) == true
+  int_of_num(0) <= (i : Int)
+  --(x : Int) == x
+  -int_of_num(0) == int_of_num(0)
+  int_of_num(0) <= -(i : Int)
+  int_of_num(0) <= (i : Int)
+  int_of_num(0) <= (i : Int) && int_of_num(0) <= -i \226\134\146 i == int_of_num(0)
+  int_of_num(0) <= -(i : Int)
+  int_of_num(0) <= (i : Int)
+  \226\136\128 x : Real, \226\136\128 i : Int, !(x == real_of_num(0)) \226\134\146 ipow(x, i) == inv(ipow(x, -i))
+  -((u : Int) + (v : Int)) == -u + -v
+  int_of_num(0) <= (v : Int)
+  (a : Int) + (b : Int) == b + a
+  (a : Real) * (b : Real) == b * a
+  int_of_num(0) <= (v : Int)
+  int_of_num(0) <= (u : Int)
+  (a : Real) * (b : Real) == b * a
+  -((u : Int) + int_of_num((m : Num))) == -u - int_of_num(m)
+  !(int_of_num(0) <= (u : Int) + (v : Int))
+  (a : Real) * (b : Real) == b * a
+  (u : Int) + int_of_num((m : Num)) == int_of_num(m) - -u
+  int_of_num(0) <= (u : Int) + (v : Int)
+  int_of_num(0) <= (u : Int) + (v : Int)
+  \226\136\128 x : Real, \226\136\128 u : Int, \226\136\128 v : Int, !(x == real_of_num(0)) && u < int_of_num(0) && int_of_num(0) <= v \226\134\146 ipow(x, u) * ipow(x, v) == ipow(x, u + v)
+  \226\136\128 x : Real, \226\136\128 u : Int, \226\136\128 v : Int, !(x == real_of_num(0)) && int_of_num(0) <= u && int_of_num(0) <= v \226\134\146 ipow(x, u) * ipow(x, v) == ipow(x, u + v)
+  \226\136\128 x : Real, \226\136\128 u : Int, \226\136\128 v : Int, !(x == real_of_num(0)) \226\134\146 ipow(x, u) * ipow(x, v) == ipow(x, u + v)
+  int_of_num(0) <= (u : Int) && int_of_num(0) <= (v : Int) \226\134\146 int_of_num(0) <= u + v
+  (n : Num)
+  (m : Num)
+  (u : Int) < int_of_num(0) \226\134\146 !(int_of_num(0) <= u)
+  (x : Int) < int_of_num(0) \226\134\146 int_of_num(0) <= -x
+  (n : Num)
+  (m : Num)
+  int_of_num(0) <= (u : Int) + (v : Int) \226\134\146 -u <= v
+  !(int_of_num(0) <= (u : Int) + (v : Int)) \226\134\146 v < -u
+  (m : Num) < (n : Num) \226\134\146 m <= n
+  num_of_int((i : Int))
+  \226\136\128 r : Num, \226\136\128 i : Int, int_of_num(0) <= i \226\134\146 (\226\136\131 m : Num, m == num_of_int(i) && ipow(real_of_num(r), i) == real_of_num(EXP(r, m)))
+  \226\136\128 r : Num, \226\136\128 p : Num, 0 < p \226\134\146 ipow(real_of_num(r), int_of_num(p) - int_of_num(1)) == real_of_num(EXP(r, p - 1))
+  0 < (p : Num) \226\134\146 0 <= p - 1
+  (r : Num)
+  (0 < (x : Num)) == (1 <= x)
+  (a : Real) * (b : Real) == b * a
+  ipow((x : Real), (e : Int))
+  (z : Num) <= (y : Num) + 1
+  (a : Real) * (b : Real) == b * a
+  ipow((x : Real), (e : Int))
+  (y : Num) <= (z : Num)
+  \226\136\128 x : Real, \226\136\128 y : Num, \226\136\128 z : Num, \226\136\128 e : Int, real_of_num(0) < x && real_of_num(y) * ipow(x, e) <= real_of_num(z) * ipow(x, e) && real_of_num(z) * ipow(x, e) <= (real_of_num(y) + real_of_num(1)) * ipow(x, e) \226\134\146 z == y || z == y + 1
+  (int_of_num(0) <= int_of_num(1)) == true
+  \226\136\128 x : Real, ipow(x, int_of_num(1)) == x
+  (int_of_num(0) <= int_of_num(0)) == true
+  \226\136\128 x : Real, ipow(x, int_of_num(0)) == real_of_num(1)
+  \226\136\128 x : Real, \226\136\128 e : Int, real_of_num(1) <= x && int_of_num(0) <= e \226\134\146 real_of_num(1) <= ipow(x, e)
+  (n : Num)
+  int_of_num(0) < (e : Int)
+  int_of_num(0) < (e : Int) \226\134\146 (int_of_num(0) <= e) == true
+  \226\136\128 x : Real, \226\136\128 e : Int, real_of_num(1) < x && int_of_num(0) < e \226\134\146 real_of_num(1) < ipow(x, e)
+  int_of_num(0) < (e : Int) \226\134\146 int_of_num(0) <= e
+  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) <= x
+  (a : Real) * (b : Real) == b * a
+  (x : Real) <= (y : Real) && (z : Real) <= (w : Real) \226\134\146 x + z <= y + w
+  real_of_num(2) * (x : Real) == x + x
+  real_of_num(2) * ipow(real_of_num((r : Num)), (e : Int))
+  ipow(real_of_num((r : Num)), (e : Int) + int_of_num(1)) == ipow(real_of_num(r), e) * ipow(real_of_num(r), int_of_num(1))
+  (e : Int) + int_of_num(1)
+  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) <= x
+  (int_of_num(0) <= int_of_num(0)) == true
+  int_of_num(0)
+  \226\136\128 r : Num, \226\136\128 n : Num, 2 <= r \226\134\146 (\226\136\131 e : Int, int_of_num(0) <= e && real_of_num(n) <= ipow(real_of_num(r), e))
+  2 <= (r : Num) \226\134\146 (\226\136\131 e : Int, int_of_num(0) <= e && real_of_num((n : Num)) <= ipow(real_of_num(r), e))
+  (e : Int)
+  \226\136\128 r : Num, \226\136\128 n : Num, 2 <= r \226\134\146 (\226\136\131 e : Int, real_of_num(n) <= ipow(real_of_num(r), e))
+  (n : Num)
+  (e : Int)
+  (z : Real)
+  \226\136\128 r : Num, \226\136\128 z : Real, 2 <= r \226\134\146 (\226\136\131 e : Int, z <= ipow(real_of_num(r), e))
+  (n : Num)
+  (x : Real) == real_of_num(1) * x
+  --(e : Int) == e
+  -(e : Int)
+  \226\136\128 r : Num, \226\136\128 z : Real, real_of_num(0) < z && 2 <= r \226\134\146 (\226\136\131 e : Int, ipow(real_of_num(r), e) <= z)
+  real_of_num(1) / (z : Real)
+  real_of_num(2) <= real_of_num((r : Num)) \226\134\146 !(real_of_num(r) == real_of_num(0))
+  ((e1 : Int) <= (e2 : Int)) == ((e2' : Int) <= (e1' : Int))
+  -(e2 : Int)
+  \226\136\131 e2' : Int, int_of_num(0) <= e2' && -(e2 : Int) == e2'
+  -(e1 : Int)
+  \226\136\131 e1' : Int, int_of_num(0) <= e1' && -(e1 : Int) == e1'
+  ipow(real_of_num((x : Num)), -(e2 : Int)) <= ipow(real_of_num(x), -(e1 : Int))
+  ipow(real_of_num((x : Num)), (e2 : Int)) == inv(ipow(real_of_num(x), -e2))
+  ipow(real_of_num((x : Num)), (e1 : Int)) == inv(ipow(real_of_num(x), -e1))
+  int_of_num(0)
+  int_of_num(0) <= (e2 : Int)
+  real_of_num(1) == inv(real_of_num(1))
+  real_of_num(1)
+  \226\136\128 y : Real, (x : Real) < y && y <= (z : Real) \226\134\146 x < z
+  inv(ipow(real_of_num((x : Num)), (e2' : Int))) < ipow(real_of_num(x), (e1 : Int))
+  -(e2 : Int)
+  \226\136\131 e2' : Int, int_of_num(0) < e2' && -(e2 : Int) == e2'
+  ipow(real_of_num((x : Num)), (e2 : Int)) == inv(ipow(real_of_num(x), -e2))
+  int_of_num(0) <= (e2 : Int)
+  int_of_num(0) <= (e1 : Int)
+  int_of_num(0) <= (e2 : Int)
+  int_of_num(0) <= (e1 : Int)
+  \226\136\128 x : Num, \226\136\128 e1 : Int, \226\136\128 e2 : Int, 2 <= x && ipow(real_of_num(x), e1) <= ipow(real_of_num(x), e2) \226\134\146 e1 <= e2
+  2 <= (x : Num) \226\134\146 (x == 0) == false
+  2 <= (x : Num) \226\134\146 (x == 0) == false
+  -(e2 : Int)
+  \226\136\131 e2' : Int, int_of_num(0) <= e2' && -(e2 : Int) == e2'
+  -(e1 : Int)
+  \226\136\131 e1' : Int, int_of_num(0) <= e1' && -(e1 : Int) == e1'
+  real_of_num(1) <= (x : Real)
+  real_of_num(1) <= (x : Real) \226\134\146 !(x == real_of_num(0))
+  -(e1 : Int)
+  \226\136\131 e1' : Int, int_of_num(0) <= e1' && -(e1 : Int) == e1'
+  real_of_num(1) <= (x : Real)
+  real_of_num(1) <= (x : Real) \226\134\146 !(x == real_of_num(0))
+  real_of_num(1)
+  int_of_num(0) <= (e2 : Int)
+  int_of_num(0) <= (e2 : Int)
+  int_of_num(0) <= (e1 : Int)
+  int_of_num(0) <= (e2 : Int)
+  int_of_num(0) <= (e1 : Int)
+  \226\136\128 x : Real, \226\136\128 e1 : Int, \226\136\128 e2 : Int, real_of_num(1) <= x && e1 <= e2 \226\134\146 ipow(x, e1) <= ipow(x, e2)
+  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(0) < x
+  (x : Real)
+  real_of_num(0) < (z : Real) \226\134\146 !(z == real_of_num(0))
+  (x : Real) * (y : Real) == y * x
+  !((x : Real) == real_of_num(0))
+  \226\136\128 x : Real, \226\136\128 i : Int, real_of_num(0) < x \226\134\146 ipow(x, i) * ipow(x, -i) == real_of_num(1)
+  (rerror : (Real, Real) -> Real)((a : Real), (b : Real)) == abs((b - a) / a)
+  (closer : (Real, Real, Real) -> Bool)((x : Real), (y : Real), (z : Real)) == (abs(x - z) < abs(y - z))
+  \226\136\128 n : Num, ODD(2 * n) == false
+  2 * SUC((d : Num)) - 1 == SUC(2 * d)
+  \226\136\128 f : Num, 0 < f \226\134\146 ODD(2 * f - 1)
+  (z : Real) == (x : Real) * (y : Real) && !(z == real_of_num(0)) \226\134\146 !(x == real_of_num(0)) && !(y == real_of_num(0))
+  1 == EXP((x : Num), 0)
+  \226\136\128 x : Num, \226\136\128 n : Num, !(x == 0) \226\134\146 1 <= EXP(x, n)
+  (b : Num) == 0 || 1 <= b
+  (b : Num) == 0 || 1 <= b
+  (a : Num) == 0 || 1 <= a
+  \226\136\128 a : Num, \226\136\128 b : Num, 1 <= a * b \226\134\146 1 <= a
+  (is_sup_num : ((Num) -> Bool, Num) -> Bool)((s : (Num) -> Bool), (n : Num)) == (IN(n, s) && (\226\136\128 n' : Num, IN(n', s) \226\134\146 n' <= n))
+  (is_sup_int : ((Int) -> Bool, Int) -> Bool)((s : (Int) -> Bool), (e : Int)) == (IN(e, s) && (\226\136\128 e' : Int, IN(e', s) \226\134\146 e' <= e))
+  (sup_num : ((Num) -> Bool) -> Num)((s : (Num) -> Bool)) == select((n : Num) => is_sup_num(s, n))
+  (sup_int : ((Int) -> Bool) -> Int)((s : (Int) -> Bool)) == select((e : Int) => is_sup_int(s, e))
+  \226\136\128 x : Num, x == SUC((b : Num)) \226\134\146 !IN(x, (s : (Num) -> Bool))
+  !((n : Num) == SUC((b : Num))) && n <= SUC(b) \226\134\146 n <= b
+  \226\136\128 n : Num, IN(n, (s : (Num) -> Bool)) \226\134\146 n <= (b : Num)
+  SUC((b : Num)) <= (x : Num)
+  (x : Num) <= SUC((b : Num))
+  \226\136\128 x : Num, is_sup_num((s : (Num) -> Bool), x) \226\134\146 x == SUC((b : Num))
+  is_sup_num((s : (Num) -> Bool), SUC((b : Num)))
+  SUC((b : Num))
+  IN(SUC((b : Num)), (s : (Num) -> Bool))
+  (x : Num) <= 0 \226\134\146 x == 0
+  \226\136\128 x : Num, is_sup_num((s : (Num) -> Bool), x) \226\134\146 x == 0
+  (x : Num) == 0
+  (x : Num) <= 0 \226\134\146 x == 0
+  (x : Num) == 0
+  is_sup_num((s : (Num) -> Bool), 0)
+  0
+  \226\136\128 s : (Num) -> Bool, \226\136\128 b : Num, !(s == {}) && (\226\136\128 n : Num, IN(n, s) \226\134\146 n <= b) \226\134\146 (\226\136\131 n' : Num, sup_num(s) == n' && is_sup_num(s, n'))
+  IN((x : Num), (s : (Num) -> Bool))
+  IN(SUC((b : Num)), (s : (Num) -> Bool))
+  IN((n : Num), (s : (Num) -> Bool))
+  !((s : (Num) -> Bool) == {}) && (\226\136\128 n : Num, IN(n, s) \226\134\146 n <= (b : Num)) \226\134\146 (\226\136\131 n' : Num, sup_num(s) == n' && is_sup_num(s, n'))
+  (e' : Int)
+  int_of_num(0) <= (e' : Int) - (e : Int)
+  ((z : Int) <= (y : Int)) == (z - (e : Int) <= y - e)
+  (e' : Int) < (e : Int)
+  (e : Int) - (e' : Int) + e' == e
+  int_of_num(0) <= (e'' : Int) - (e : Int)
+  (e'' : Int)
+  \226\136\131 e'' : Int, IN(e'', (s : (Int) -> Bool)) && (e : Int) <= e'' && int_of_num((n' : Num)) == e'' - e
+  int_of_num(sup_num({(n : Num) | \226\136\131 e'' : Int, n == num_of_int(e'' - (e : Int)) && IN(e'', (s : (Int) -> Bool)) && e <= e''})) + e
+  int_of_num(0) <= (b : Int) - (e : Int)
+  int_of_num(0) <= (e'' : Int) - (e : Int)
+  num_of_int((b : Int) - (e : Int))
+  \226\136\131 bn : Num, \226\136\128 n : Num, IN(n, {(n : Num) | \226\136\131 e'' : Int, n == num_of_int(e'' - (e : Int)) && IN(e'', (s : (Int) -> Bool)) && e <= e''}) \226\134\146 n <= bn
+  (e : Int) - e == int_of_num(0)
+  (e : Int)
+  0
+  !({(n : Num) | \226\136\131 e'' : Int, n == num_of_int(e'' - (e : Int)) && IN(e'', (s : (Int) -> Bool)) && e <= e''} == {})
+  CHOICE((s : (Int) -> Bool))
+  \226\136\131 e : Int, IN(e, (s : (Int) -> Bool))
+  \226\136\128 s : (Int) -> Bool, \226\136\128 b : Int, !(s == {}) && (\226\136\128 e : Int, IN(e, s) \226\134\146 e <= b) \226\134\146 (\226\136\131 e' : Int, is_sup_int(s, e'))
+  (b : Int)
+  sup_int((s : (Int) -> Bool))
+  \226\136\128 s : (Int) -> Bool, \226\136\128 b : Int, !(s == {}) && (\226\136\128 e : Int, IN(e, s) \226\134\146 e <= b) \226\134\146 (\226\136\131 e' : Int, sup_int(s) == e' && is_sup_int(s, e'))
 ipow =  |- ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) x:real) e:int)) (((#COND:fun(bool,fun(real,fun(real,real))) ((#int_le:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) e:int)) ((#real_pow:fun(real,fun(num,real)) x:real) (#num_of_int:fun(int,num) e:int))) (#real_inv:fun(real,real) ((#real_pow:fun(real,fun(num,real)) x:real) (#num_of_int:fun(int,num) (#int_neg:fun(int,int) e:int))))))
 IPOW_LT_0 =  |- (#forall:fun(fun(real,bool),bool) (\r:real. (#forall:fun(fun(int,bool),bool) (\i:int. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) r:real)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#ipow:fun(real,fun(int,real)) r:real) i:int)))))))
 IPOW_INV_NEG =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(int,bool),bool) (\i:int. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) x:real) i:int)) (#real_inv:fun(real,real) ((#ipow:fun(real,fun(int,real)) x:real) (#int_neg:fun(int,int) i:int)))))))))
