@@ -16,7 +16,7 @@
 /// Whether the term syntax reads names through the fixed view. Off while
 /// the quotations already migrated are checked against it (spellings must
 /// read the same both ways); on once they all do.
-pub let fixed_resolution : Ref[Bool] = Ref::{ val: false }
+pub let fixed_resolution : Ref[Bool] = Ref::{ val: true }
 
 ///|
 /// Run `f` with names read through the fixed view or the live interface.
