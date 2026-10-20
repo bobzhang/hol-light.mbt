@@ -5906,7 +5906,7 @@ test "Unity/mk_state_logic matches Unity/mk_state_logic.ml" {
       #|  p:'a->bool
       #|  q:'a->bool
       #|  r:'a->bool
-      #|  i:num
+      #|  (i : Num)
       #|  P:num->('a->bool)
       #|  forall p q p' q' (s:'a).\n         ( (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q')) s ) ==> ((q \\/* q') s)
       #|  forall p q p' q' (s:'a).\n         ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q'))s\n       ==>\n         (q \\/* q')s
@@ -5982,13 +5982,13 @@ test "Unity/mk_state_logic matches Unity/mk_state_logic.ml" {
       #|  forall p:'a->bool. p \\/* False = p
       #|  forall p:'a->bool. p \\/* (Not p) = True
       #|  forall p:'a->bool. p /\\* (Not p) = False
-      #|  forall p q. p /\\ ~q \\/ p /\\ q ==> p
-      #|  forall p q. p ==> p /\\ ~q \\/ p /\\ q
-      #|  forall p q. p /\\ ~q \\/ p /\\ q <=> p
+      #|  \226\136\128 p : Bool, \226\136\128 q : Bool, p && !q || p && q \226\134\146 p
+      #|  \226\136\128 p : Bool, \226\136\128 q : Bool, p \226\134\146 p && !q || p && q
+      #|  \226\136\128 p : Bool, \226\136\128 q : Bool, (p && !q || p && q) == p
       #|  forall(p:'a->bool) q. ((p /\\* (Not q)) \\/* (p /\\* q)) = p
-      #|  forall p q. (p \\/ q) /\\ ~q ==> p /\\ ~q
-      #|  forall p q. p /\\ ~q ==> (p \\/ q) /\\ ~q
-      #|  forall p q. (p \\/ q) /\\ ~q <=> p /\\ ~q
+      #|  \226\136\128 p : Bool, \226\136\128 q : Bool, (p || q) && !q \226\134\146 p && !q
+      #|  \226\136\128 p : Bool, \226\136\128 q : Bool, p && !q \226\134\146 (p || q) && !q
+      #|  \226\136\128 p : Bool, \226\136\128 q : Bool, ((p || q) && !q) == (p && !q)
       #|  forall(p:'a->bool) q. ((p \\/* q) /\\* (Not q)) = p /\\* (Not q)
       #|  forall(p:'a->bool) q s. (p s /\\ q s) \\/ q s ==> q s
       #|  forall(p:'a->bool) q s. q s ==> (p s /\\ q s) \\/ q s
@@ -6027,16 +6027,16 @@ test "Unity/mk_state_logic matches Unity/mk_state_logic.ml" {
       #|  forall(p:'a->bool) q. (forall s. p s) ==> (forall s. (p \\/* q) s)
       #|  forall(p:'a->bool) q s. p s ==> (p \\/* q) s
       #|  forall(P:num->('a->bool)) i s. (forall i. P i s) <=> (P i s /\\ (forall i. P i s))
-      #|  i:num
-      #|  i:num
-      #|  i':num
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (i' : Num)
       #|  forall(P:num->('a->bool)) i s. (?i. P i s) <=> (P i s \\/ (?i. P i s))
       #|  forall(P:num->('a->bool)) i. (((?*) P) = ((P i) \\/* ((?*) P)))
-      #|  SUC i
+      #|  SUC((i : Num))
       #|  0
       #|  (P (i:num) (s:'a)):bool
-      #|  SUC i
-      #|  i':num
+      #|  SUC((i : Num))
+      #|  (i' : Num)
       #|  0
       #|  \\<=/* (P:num->('a->bool)) i s
       #|  forall P (s:'a). (?i. \\<=/* P i s) = (?i. P i s)
