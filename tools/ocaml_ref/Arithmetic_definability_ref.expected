@@ -13043,175 +13043,175 @@ Warning: inventing type variables
 0..0..0..solved at 3
 0..0..0..0..solved at 4
 Arithmetic/definability quotations (169):
-  NPAIR x y = (x + y) EXP 2 + x + 1
-  forall x y. ~(NPAIR x y = 0)
-  SUC(x1 + y1) * SUC(x1 + y1)
-  x + y + 1 < u + v + 1 <=> x + y < u + v
-  x1 + y1 < x2 + y2 ==> NPAIR x1 y1 < NPAIR x2 y2
-  x' + y' = x + y
-  NPAIR x y = NPAIR x' y'
-  x' + y' = x + y
-  (NPAIR x y = NPAIR x' y') <=> (x = x') /\\ (y = y')
-  (x + y) + x + 1
-  x < a + x + 1
-  forall x y. x < NPAIR x y /\\ y < NPAIR x y
-  primepow p x <=> prime(p) /\\ ?n. x = p EXP n
-  ~(m = 0) ==> 1 <= m
-  m = 0
-  m divides n <=> ?x. x <= n /\\ n = m * x
-  p = 1
-  p = 0
-  prime(p) <=> 2 <= p /\\ forall n. n < p ==> n divides p ==> n = 1
-  x = 0
-  prime(p)
-  primepow p x <=>\n        prime(p) /\\ ~(x = 0) /\\\n        forall z. z <= x ==> z divides x ==> z = 1 \\/ p divides z
-  (PSEQ p f m 0 = 0) /\\\n   (PSEQ p f m (SUC n) = f m + p * PSEQ p f (SUC m) n)
-  forall f p n m r.\n        PSEQ p f m (n + r) = PSEQ p f m n + p EXP n * PSEQ p f (m + n) r
+  (NPAIR : (Num, Num) -> Num)((x : Num), (y : Num)) == EXP(x + y, 2) + (x + 1)
+  \226\136\128 x : Num, \226\136\128 y : Num, !(NPAIR(x, y) == 0)
+  SUC((x1 : Num) + (y1 : Num)) * SUC(x1 + y1)
+  ((x : Num) + ((y : Num) + 1) < (u : Num) + ((v : Num) + 1)) == (x + y < u + v)
+  (x1 : Num) + (y1 : Num) < (x2 : Num) + (y2 : Num) \226\134\146 NPAIR(x1, y1) < NPAIR(x2, y2)
+  (x' : Num) + (y' : Num) == (x : Num) + (y : Num)
+  NPAIR((x : Num), (y : Num)) == NPAIR((x' : Num), (y' : Num))
+  (x' : Num) + (y' : Num) == (x : Num) + (y : Num)
+  (NPAIR((x : Num), (y : Num)) == NPAIR((x' : Num), (y' : Num))) == (x == x' && y == y')
+  (x : Num) + (y : Num) + (x + 1)
+  (x : Num) < (a : Num) + (x + 1)
+  \226\136\128 x : Num, \226\136\128 y : Num, x < NPAIR(x, y) && y < NPAIR(x, y)
+  (primepow : (Num, Num) -> Bool)((p : Num), (x : Num)) == (prime(p) && (\226\136\131 n : Num, x == EXP(p, n)))
+  !((m : Num) == 0) \226\134\146 1 <= m
+  (m : Num) == 0
+  divides((m : Num), (n : Num)) == (\226\136\131 x : Num, x <= n && n == m * x)
+  (p : Num) == 1
+  (p : Num) == 0
+  prime((p : Num)) == (2 <= p && (\226\136\128 n : Num, n < p \226\134\146 divides(n, p) \226\134\146 n == 1))
+  (x : Num) == 0
+  prime((p : Num))
+  primepow((p : Num), (x : Num)) == (prime(p) && !(x == 0) && (\226\136\128 z : Num, z <= x \226\134\146 divides(z, x) \226\134\146 z == 1 || divides(p, z)))
+  (PSEQ : (Num, (Num) -> Num, Num, Num) -> Num)((p : Num), (f : (Num) -> Num), (m : Num), 0) == 0 && PSEQ(p, f, m, SUC((n : Num))) == f(m) + p * PSEQ(p, f, SUC(m), n)
+  \226\136\128 f : (Num) -> Num, \226\136\128 p : Num, \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 r : Num, PSEQ(p, f, m, n + r) == PSEQ(p, f, m, n) + EXP(p, n) * PSEQ(p, f, m + n, r)
   1
-  PSEQ p f m 1 = f m
-  x < p ==> x + 1 <= p
-  p + p * q = p * (q + 1)
-  i < n ==> i < SUC n
-  p EXP n + p EXP n * PSEQ p f n 1
-  1
-  0
-  n:num
-  p:num
-  f:num->num
-  p = 0
-  forall n. ~(p = 0) /\\ (forall i. i < n ==> f i < p) ==> PSEQ p f 0 n < p EXP n
-  1 <= x <=> ~(x = 0)
-  1 * a <= c ==> a <= b + c
-  i < n ==> i + 1 <= n
-  PSEQ p f (i + 1) 1
-  i < n ==> (1 + n - i - 1 = n - i)
-  n - i - 1
-  i + 1
-  1
-  p:num
-  f:num->num
-  PSEQ p f i 1
-  i < n ==> (1 + n - i = SUC n - i)
-  n - i
-  i:num
-  1
-  p:num
-  f:num->num
-  PSEQ p f 0 i
-  i < n ==> (i + SUC n - i = SUC n)
-  SUC n - i
-  0
-  i:num
-  p:num
-  f:num->num
-  i:num
-  a ==> b ==> c <=> b ==> a ==> c
-  PSEQ p f 0 n
+  PSEQ((p : Num), (f : (Num) -> Num), (m : Num), 1) == f(m)
+  (x : Num) < (p : Num) \226\134\146 x + 1 <= p
+  (p : Num) + p * (q : Num) == p * (q + 1)
+  (i : Num) < (n : Num) \226\134\146 i < SUC(n)
+  EXP((p : Num), (n : Num)) + EXP(p, n) * PSEQ(p, (f : (Num) -> Num), n, 1)
   1
   0
-  n:num
-  p:num
-  f:num->num
-  PSEQ p f 0 (SUC n)
-  forall i. i <= n ==> f i < p
-  ~(p = 0)
-  ibig:num
-  p:num
-  p:num
-  (f:num->num) ibig
-  ibig:num
-  SUC n
-  j <= n ==> j <= SUC n
-  j:num
-  f(SUC n) <= f(j) \\/ f(j) <= f(SUC n)
-  j:num
-  n:num
-  n:num
-  ?j. j <= n /\\ forall i. i <= n ==> f i <= f j
-  (f 0 = x) /\\\n   (f n = y) /\\\n   (forall i. i < n ==> R (f i) (f(SUC i)))\n   ==> ?p. (?i. i <= n /\\ p <= SUC(FACT(f i))) /\\\n           prime p /\\\n           (?m. m < p EXP (SUC n) /\\\n                x < p /\\ y < p /\\\n                (?qx. m = x + p * qx) /\\\n                (?ry. ry < p EXP n /\\ (m = ry + p EXP n * y)) /\\\n                forall q. q < p EXP n\n                    ==> primepow p q\n                        ==> ?r. r < q /\\\n                                ?a. a < p /\\\n                                    ?b. b < p /\\\n                                        R a b /\\\n                                        ?s. s <= m /\\\n                                            (m =\n                                             r + q * (a + p * (b + p * s))))
-  a < p
-  p + q * p = (q + 1) * p
-  p EXP i + a * p EXP i
-  r + a * p EXP i
-  s:num
-  r:num
-  b + p * s
-  (b <=> a) ==> a ==> b
-  (R:num->num->bool) a b
-  p EXP i
-  i:num
-  m = ry + p EXP n * y
-  ry:num
-  y < p
+  (n : Num)
+  (p : Num)
+  (f : (Num) -> Num)
+  (p : Num) == 0
+  \226\136\128 n : Num, !((p : Num) == 0) && (\226\136\128 i : Num, i < n \226\134\146 (f : (Num) -> Num)(i) < p) \226\134\146 PSEQ(p, f, 0, n) < EXP(p, n)
+  (1 <= (x : Num)) == !(x == 0)
+  1 * (a : Num) <= (c : Num) \226\134\146 a <= (b : Num) + c
+  (i : Num) < (n : Num) \226\134\146 i + 1 <= n
+  PSEQ((p : Num), (f : (Num) -> Num), (i : Num) + 1, 1)
+  (i : Num) < (n : Num) \226\134\146 1 + (n - i - 1) == n - i
+  (n : Num) - (i : Num) - 1
+  (i : Num) + 1
+  1
+  (p : Num)
+  (f : (Num) -> Num)
+  PSEQ((p : Num), (f : (Num) -> Num), (i : Num), 1)
+  (i : Num) < (n : Num) \226\134\146 1 + (n - i) == SUC(n) - i
+  (n : Num) - (i : Num)
+  (i : Num)
+  1
+  (p : Num)
+  (f : (Num) -> Num)
+  PSEQ((p : Num), (f : (Num) -> Num), 0, (i : Num))
+  (i : Num) < (n : Num) \226\134\146 i + (SUC(n) - i) == SUC(n)
+  SUC((n : Num)) - (i : Num)
   0
-  qx:num
-  ~(p = 0)
-  \\i. (m DIV (p EXP i)) MOD p
-  prime p /\\ x < p /\\ y < p /\\\n   (?qx. m = x + p * qx) /\\\n   (?ry. ry < p EXP n /\\ (m = ry + p EXP n * y)) /\\\n   (forall q. q < p EXP n\n        ==> primepow p q\n            ==> ?r a b s. (m = r + q * (a + p * (b + p * s))) /\\\n                          r < q /\\ a < p /\\ b < p /\\ R a b)\n   ==> RELPOW n R x y
-  RELPOW n R x y <=>\n        ?m p. prime p /\\ x < p /\\ y < p /\\\n              (?qx. m = x + p * qx) /\\\n              (?ry. ry < p EXP n /\\ (m = ry + p EXP n * y)) /\\\n              forall q. q < p EXP n\n                  ==> primepow p q\n                      ==> ?r a b s. (m = r + q * (a + p * (b + p * s))) /\\\n                                    r < q /\\ a < p /\\ b < p /\\ R a b
-  (a /\\ b) /\\ c <=> b /\\ a /\\ c
-  p EXP n
-  n:num
-  RTC R x y <=>\n        ?m p Q. primepow p Q /\\ x < p /\\ y < p /\\\n                (?s. m = x + p * s) /\\\n                (?r. r < Q /\\ (m = r + Q * y)) /\\\n                forall q. q < Q\n                    ==> primepow p q\n                        ==> ?r a b s. (m = r + q * (a + p * (b + p * s))) /\\\n                                      r < q /\\ a < p /\\ b < p /\\ R a b
-  arith_pair s t = (s ++ t) ** (s ++ t) ++ s ++ Suc Z
-  forall s t v. termval v (arith_pair s t) = NPAIR (termval v s) (termval v t)
-  FVT(arith_pair s t) = FVT(s) UNION FVT(t)
-  (+):num->num->num
-  (*):num->num->num
-  (<=):num->num->bool
-  (<):num->num->bool
+  (i : Num)
+  (p : Num)
+  (f : (Num) -> Num)
+  (i : Num)
+  ((a : Bool) \226\134\146 (b : Bool) \226\134\146 (c : Bool)) == (b \226\134\146 a \226\134\146 c)
+  PSEQ((p : Num), (f : (Num) -> Num), 0, (n : Num))
+  1
+  0
+  (n : Num)
+  (p : Num)
+  (f : (Num) -> Num)
+  PSEQ((p : Num), (f : (Num) -> Num), 0, SUC((n : Num)))
+  \226\136\128 i : Num, i <= (n : Num) \226\134\146 (f : (Num) -> Num)(i) < (p : Num)
+  !((p : Num) == 0)
+  (ibig : Num)
+  (p : Num)
+  (p : Num)
+  (f : (Num) -> Num)((ibig : Num))
+  (ibig : Num)
+  SUC((n : Num))
+  (j : Num) <= (n : Num) \226\134\146 j <= SUC(n)
+  (j : Num)
+  (f : (Num) -> Num)(SUC((n : Num))) <= f((j : Num)) || f(j) <= f(SUC(n))
+  (j : Num)
+  (n : Num)
+  (n : Num)
+  \226\136\131 j : Num, j <= (n : Num) && (\226\136\128 i : Num, i <= n \226\134\146 (f : (Num) -> Num)(i) <= f(j))
+  (f : (Num) -> Num)(0) == (x : Num) && f((n : Num)) == (y : Num) && (\226\136\128 i : Num, i < n \226\134\146 (R : (Num, Num) -> Bool)(f(i), f(SUC(i)))) \226\134\146 (\226\136\131 p : Num, (\226\136\131 i : Num, i <= n && p <= SUC(FACT(f(i)))) && prime(p) && (\226\136\131 m : Num, m < EXP(p, SUC(n)) && x < p && y < p && (\226\136\131 qx : Num, m == x + p * qx) && (\226\136\131 ry : Num, ry < EXP(p, n) && m == ry + EXP(p, n) * y) && (\226\136\128 q : Num, q < EXP(p, n) \226\134\146 primepow(p, q) \226\134\146 (\226\136\131 r : Num, r < q && (\226\136\131 a : Num, a < p && (\226\136\131 b : Num, b < p && R(a, b) && (\226\136\131 s : Num, s <= m && m == r + q * (a + p * (b + p * s)))))))))
+  (a : Num) < (p : Num)
+  (p : Num) + (q : Num) * p == (q + 1) * p
+  EXP((p : Num), (i : Num)) + (a : Num) * EXP(p, i)
+  (r : Num) + (a : Num) * EXP((p : Num), (i : Num))
+  (s : Num)
+  (r : Num)
+  (b : Num) + (p : Num) * (s : Num)
+  (b : Bool) == (a : Bool) \226\134\146 a \226\134\146 b
+  (R : (Num, Num) -> Bool)((a : Num), (b : Num))
+  EXP((p : Num), (i : Num))
+  (i : Num)
+  (m : Num) == (ry : Num) + EXP((p : Num), (n : Num)) * (y : Num)
+  (ry : Num)
+  (y : Num) < (p : Num)
+  0
+  (qx : Num)
+  !((p : Num) == 0)
+  (i : Num) => MOD(DIV((m : Num), EXP((p : Num), i)), p)
+  prime((p : Num)) && (x : Num) < p && (y : Num) < p && (\226\136\131 qx : Num, (m : Num) == x + p * qx) && (\226\136\131 ry : Num, ry < EXP(p, (n : Num)) && m == ry + EXP(p, n) * y) && (\226\136\128 q : Num, q < EXP(p, n) \226\134\146 primepow(p, q) \226\134\146 (\226\136\131 r : Num, \226\136\131 a : Num, \226\136\131 b : Num, \226\136\131 s : Num, m == r + q * (a + p * (b + p * s)) && r < q && a < p && b < p && (R : (Num, Num) -> Bool)(a, b))) \226\134\146 RELPOW(n, R, x, y)
+  RELPOW((n : Num), (R : (Num, Num) -> Bool), (x : Num), (y : Num)) == (\226\136\131 m : Num, \226\136\131 p : Num, prime(p) && x < p && y < p && (\226\136\131 qx : Num, m == x + p * qx) && (\226\136\131 ry : Num, ry < EXP(p, n) && m == ry + EXP(p, n) * y) && (\226\136\128 q : Num, q < EXP(p, n) \226\134\146 primepow(p, q) \226\134\146 (\226\136\131 r : Num, \226\136\131 a : Num, \226\136\131 b : Num, \226\136\131 s : Num, m == r + q * (a + p * (b + p * s)) && r < q && a < p && b < p && R(a, b))))
+  (((a : Bool) && (b : Bool)) && (c : Bool)) == (b && a && c)
+  EXP((p : Num), (n : Num))
+  (n : Num)
+  RTC((R : (Num, Num) -> Bool), (x : Num), (y : Num)) == (\226\136\131 m : Num, \226\136\131 p : Num, \226\136\131 Q : Num, primepow(p, Q) && x < p && y < p && (\226\136\131 s : Num, m == x + p * s) && (\226\136\131 r : Num, r < Q && m == r + Q * y) && (\226\136\128 q : Num, q < Q \226\134\146 primepow(p, q) \226\134\146 (\226\136\131 r : Num, \226\136\131 a : Num, \226\136\131 b : Num, \226\136\131 s : Num, m == r + q * (a + p * (b + p * s)) && r < q && a < p && b < p && R(a, b))))
+  (arith_pair : (Term, Term) -> Term)((s : Term), (t : Term)) == op_plus_plus(op_star_star(op_plus_plus(s, t), op_plus_plus(s, t)), op_plus_plus(s, Suc(Z)))
+  \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 v : (Num) -> Num, termval(v, arith_pair(s, t)) == NPAIR(termval(v, s), termval(v, t))
+  FVT(arith_pair((s : Term), (t : Term))) == UNION(FVT(s), FVT(t))
+  op_plus
+  op_star
+  op_lt_eq
+  op_lt
   0
   SUC
   Suc
   Z
   V
-  (++)
-  (**)
-  (===)
-  (<<=)
-  (<<)
-  (<->)
-  (-->)
-  (&&)
-  (||)
+  op_plus_plus
+  op_star_star
+  op_eq_eq_eq
+  op_lt_lt_eq
+  op_lt_lt
+  op_lt_minus_gt
+  op_minus_minus_gt
+  op_amp_amp
+  op_bar_bar
   Not
-  !!
-  ??
+  op_bang_bang
+  op_q_q
   numeral
-  (|->):num->term->(num->term)->(num->term)
+  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
   :term
   :form
   :num
   formsubst
-  holds v
-  v:num->num
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  forall s t. FV(arith_divides s t) = FVT(s) UNION FVT(t)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  forall t. FV(arith_prime t) = FVT(t)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  forall s t. FV(arith_primepow s t) = FVT(s) UNION FVT(t)
-  forall v s t. holds v (R s t) <=> r (termval v s) (termval v t)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  forall R. (forall s t. FV(R s t) = FVT(s) UNION FVT(t))\n       ==> forall s t. FV(arith_rtc R s t) = FVT(s) UNION FVT(t)
-  (forall v x y. holds v (f x y) <=> f' (termval v x) (termval v y))\n     ==> forall g. (forall n. g n = formsubst ((0 |-> n) V)\n                                  (arith_rtc f (numeral 0)\n                                               (arith_pair (V 0) (numeral 0))))\n             ==> forall v n. holds v (g n) <=> RTC f' 0 (NPAIR (termval v n) 0)
-  RTCP R m x y <=> RTC (R m) x y
-  R:num->num->bool
-  (R:num->num->num->bool) m
-  forall v m s t. holds v (R m s t) <=>\n                   r (termval v m) (termval v s) (termval v t)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  forall R. (forall s t u. FV(R s t u) = FVT(s) UNION FVT(t) UNION FVT(u))\n       ==> forall s t u. FV(arith_rtcp R s t u) = FVT(s) UNION FVT(t) UNION FVT(u)
-  (forall v m x y. holds v (f m x y) <=>\n                f' (termval v m) (termval v x) (termval v y))\n     ==> forall g. (forall m n. g m n = formsubst ((1 |-> m) ((0 |-> n) V))\n                                  (arith_rtcp f (V 1) (numeral 0)\n                                               (arith_pair (V 0) (numeral 0))))\n             ==> forall v m n. holds v (g m n) <=>\n                          RTC (f' (termval v m)) 0 (NPAIR (termval v n) 0)
-  a /\\ b /\\ c <=> b /\\ a /\\ c
+  holds((v : (Num) -> Num))
+  (v : (Num) -> Num)
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  \226\136\128 s : Term, \226\136\128 t : Term, FV(arith_divides(s, t)) == UNION(FVT(s), FVT(t))
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  \226\136\128 t : Term, FV(arith_prime(t)) == FVT(t)
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  \226\136\128 s : Term, \226\136\128 t : Term, FV(arith_primepow(s, t)) == UNION(FVT(s), FVT(t))
+  \226\136\128 v : (Num) -> Num, \226\136\128 s : Term, \226\136\128 t : Term, holds(v, (R : (Term, Term) -> Form)(s, t)) == (r : (Num, Num) -> Bool)(termval(v, s), termval(v, t))
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  \226\136\128 R : (Term, Term) -> Form, (\226\136\128 s : Term, \226\136\128 t : Term, FV(R(s, t)) == UNION(FVT(s), FVT(t))) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, FV(arith_rtc(R, s, t)) == UNION(FVT(s), FVT(t)))
+  (\226\136\128 v : (Num) -> Num, \226\136\128 x : Term, \226\136\128 y : Term, holds(v, (f : (Term, Term) -> Form)(x, y)) == (f' : (Num, Num) -> Bool)(termval(v, x), termval(v, y))) \226\134\146 (\226\136\128 g : (Term) -> Form, (\226\136\128 n : Term, g(n) == formsubst(op_bar_minus_gt(0, n, V), arith_rtc(f, numeral(0), arith_pair(V(0), numeral(0))))) \226\134\146 (\226\136\128 v : (Num) -> Num, \226\136\128 n : Term, holds(v, g(n)) == RTC(f', 0, NPAIR(termval(v, n), 0))))
+  (RTCP : ((_, _, _) -> Bool, _, _, _) -> Bool)((R : (_, _, _) -> Bool), (m : _), (x : _), (y : _)) == RTC(R(m), x, y)
+  (R : (Num, Num) -> Bool)
+  (R : (Num, Num, Num) -> Bool)((m : Num))
+  \226\136\128 v : (Num) -> Num, \226\136\128 m : Term, \226\136\128 s : Term, \226\136\128 t : Term, holds(v, (R : (Term, Term, Term) -> Form)(m, s, t)) == (r : (Num, Num, Num) -> Bool)(termval(v, m), termval(v, s), termval(v, t))
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  \226\136\128 R : (Term, Term, Term) -> Form, (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, FV(R(s, t, u)) == UNION(FVT(s), UNION(FVT(t), FVT(u)))) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, FV(arith_rtcp(R, s, t, u)) == UNION(FVT(s), UNION(FVT(t), FVT(u))))
+  (\226\136\128 v : (Num) -> Num, \226\136\128 m : Term, \226\136\128 x : Term, \226\136\128 y : Term, holds(v, (f : (Term, Term, Term) -> Form)(m, x, y)) == (f' : (Num, Num, Num) -> Bool)(termval(v, m), termval(v, x), termval(v, y))) \226\134\146 (\226\136\128 g : (Term, Term) -> Form, (\226\136\128 m : Term, \226\136\128 n : Term, g(m, n) == formsubst(op_bar_minus_gt(1, m, op_bar_minus_gt(0, n, V)), arith_rtcp(f, V(1), numeral(0), arith_pair(V(0), numeral(0))))) \226\134\146 (\226\136\128 v : (Num) -> Num, \226\136\128 m : Term, \226\136\128 n : Term, holds(v, g(m, n)) == RTC(f'(termval(v, m)), 0, NPAIR(termval(v, n), 0))))
+  ((a : Bool) && (b : Bool) && (c : Bool)) == (b && a && c)
   (fn 0 = e) /\\\n   (forall n. fn (SUC n) = f (fn n) n)\n   ==> forall x y. RTC (\\x y. ?n r. (x = NPAIR n r) /\\ (y = NPAIR (SUC n) (f r n)))\n                 (NPAIR 0 e) (NPAIR x y) <=>\n             (fn(x) = y)
-  arith_primrecstep R s t =\n        (formsubst ((0 |-> s) ((1 |-> t) V))\n                  (?? 2 (?? 3 (?? 4\n                  (V 0 === arith_pair (V 2) (V 3) &&\n                   V 1 === arith_pair (Suc(V 2)) (V 4) &&\n                   R (V 3) (V 2) (V 4))))))
-  (forall v x y z. holds v (R x y z) <=>\n              (f (termval v x) (termval v y) = termval v z))\n    ==> forall v s t. holds v (arith_primrecstep R s t) <=>\n                ?n r. (termval v s = NPAIR n r) /\\\n                      (termval v t = NPAIR (SUC n) (f r n))
-  ~a ==> (a \\/ b <=> b)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  forall R. (forall s t u. FV(R s t u) SUBSET (FVT(s) UNION FVT(t) UNION FVT(u)))\n       ==> forall s t. FV(arith_primrecstep R s t) = FVT(s) UNION FVT(t)
-  arith_primrec R c s t =\n        arith_rtc (arith_primrecstep R)\n            (arith_pair Z c) (arith_pair s t)
+  (arith_primrecstep : ((Term, Term, Term) -> Form, Term, Term) -> Form)((R : (Term, Term, Term) -> Form), (s : Term), (t : Term)) == formsubst(op_bar_minus_gt(0, s, op_bar_minus_gt(1, t, V)), op_q_q(2, op_q_q(3, op_q_q(4, op_amp_amp(op_eq_eq_eq(V(0), arith_pair(V(2), V(3))), op_amp_amp(op_eq_eq_eq(V(1), arith_pair(Suc(V(2)), V(4))), R(V(3), V(2), V(4))))))))
+  (\226\136\128 v : (Num) -> Num, \226\136\128 x : Term, \226\136\128 y : Term, \226\136\128 z : Term, holds(v, (R : (Term, Term, Term) -> Form)(x, y, z)) == ((f : (Num, Num) -> Num)(termval(v, x), termval(v, y)) == termval(v, z))) \226\134\146 (\226\136\128 v : (Num) -> Num, \226\136\128 s : Term, \226\136\128 t : Term, holds(v, arith_primrecstep(R, s, t)) == (\226\136\131 n : Num, \226\136\131 r : Num, termval(v, s) == NPAIR(n, r) && termval(v, t) == NPAIR(SUC(n), f(r, n))))
+  !(a : Bool) \226\134\146 (a || (b : Bool)) == b
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  \226\136\128 R : (Term, Term, Term) -> Form, (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, SUBSET(FV(R(s, t, u)), UNION(FVT(s), UNION(FVT(t), FVT(u))))) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, FV(arith_primrecstep(R, s, t)) == UNION(FVT(s), FVT(t)))
+  (arith_primrec : ((Term, Term, Term) -> Form, Term, Term, Term) -> Form)((R : (Term, Term, Term) -> Form), (c : Term), (s : Term), (t : Term)) == arith_rtc(arith_primrecstep(R), arith_pair(Z, c), arith_pair(s, t))
   forall fn e f R c.\n        (fn 0 = e) /\\ (forall n. fn (SUC n) = f (fn n) n) /\\\n        (forall v. termval v c = e) /\\\n                  (forall v x y z. holds v (R x y z) <=>\n                             (f (termval v x) (termval v y) = termval v z))\n                  ==> forall v s t. holds v (arith_primrec R c s t) <=>\n                               (fn(termval v s) = termval v t)
-  forall R c. (FVT c = {}) /\\\n         (forall s t u. FV(R s t u) SUBSET (FVT(s) UNION FVT(t) UNION FVT(u)))\n         ==> forall s t. FV(arith_primrec R c s t) = FVT(s) UNION FVT(t)
+  \226\136\128 R : (Term, Term, Term) -> Form, \226\136\128 c : Term, FVT(c) == {} && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, SUBSET(FV(R(s, t, u)), UNION(FVT(s), UNION(FVT(t), FVT(u))))) \226\134\146 (\226\136\128 s : Term, \226\136\128 t : Term, FV(arith_primrec(R, c, s, t)) == UNION(FVT(s), FVT(t)))
 NPAIR =  |- (#forall:fun(fun(num,bool),bool) (\y:num. (#forall:fun(fun(num,bool),bool) (\x:num. ((#=:fun(num,fun(num,bool)) ((#NPAIR:fun(num,fun(num,num)) x:num) y:num)) ((#+:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) x:num) y:num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#+:fun(num,fun(num,num)) x:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
 NPAIR_NONZERO =  |- (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) ((#NPAIR:fun(num,fun(num,num)) x:num) y:num)) (#NUMERAL:fun(num,num) #_0:num)))))))
 NPAIR_INJ_LEMMA =  |- ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) x1:num) y1:num)) ((#+:fun(num,fun(num,num)) x2:num) y2:num))) ((#<:fun(num,fun(num,bool)) ((#NPAIR:fun(num,fun(num,num)) x1:num) y1:num)) ((#NPAIR:fun(num,fun(num,num)) x2:num) y2:num)))
