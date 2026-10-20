@@ -6795,609 +6795,609 @@ test "Rqe/asym matches Rqe/asym.ml" {
       #|0..0..1..solved at 4
       #|0..0..1..solved at 4
       #|Rqe/asym quotations (603):
-      #|  (tends_num_real)
-      #|  &1 < &2
-      #|  e * &n <= e * &n'
-      #|  &2 <= e * &n
-      #|  ~(&n' = &0)
-      #|  &0 < &n'
-      #|  &0 < &n
-      #|  &0 < &2
-      #|  &0 < &2 / e
-      #|  n
-      #|  &2 / e
-      #|  (\\n. &1 / &n) --> &0
-      #|  &0 = c * &0
-      #|  c / &n = c * &1 / &n
-      #|  forall c. (\\n. c / &n) --> &0
-      #|  &0 = &0 * &0
-      #|  (\\n. c / &n pow k) --> &0
-      #|  k = 0
-      #|  ~(0 < 0)
-      #|  forall c k. 0 < k ==> (\\n. c / &n pow k) --> &0
-      #|  &0 = (&1 / d) * &0
-      #|  forall c d k. 0 < k ==> (\\n. c / (d * &n pow k)) --> &0
-      #|  &0 < &1
-      #|  ~(&n = &0)
+      #|  tends_num_real
+      #|  real_of_num(1) < real_of_num(2)
+      #|  (e : Real) * real_of_num((n : Num)) <= e * real_of_num((n' : Num))
+      #|  real_of_num(2) <= (e : Real) * real_of_num((n : Num))
+      #|  !(real_of_num((n' : Num)) == real_of_num(0))
+      #|  real_of_num(0) < real_of_num((n' : Num))
+      #|  real_of_num(0) < real_of_num((n : Num))
+      #|  real_of_num(0) < real_of_num(2)
+      #|  real_of_num(0) < real_of_num(2) / (e : Real)
+      #|  (n : _)
+      #|  real_of_num(2) / (e : Real)
+      #|  tends_num_real((n : Num) => real_of_num(1) / real_of_num(n), real_of_num(0))
+      #|  real_of_num(0) == (c : Real) * real_of_num(0)
+      #|  (c : Real) / real_of_num((n : Num)) == c * (real_of_num(1) / real_of_num(n))
+      #|  \226\136\128 c : Real, tends_num_real((n : Num) => c / real_of_num(n), real_of_num(0))
+      #|  real_of_num(0) == real_of_num(0) * real_of_num(0)
+      #|  tends_num_real((n : Num) => (c : Real) / pow(real_of_num(n), (k : Num)), real_of_num(0))
+      #|  (k : Num) == 0
+      #|  !(0 < 0)
+      #|  \226\136\128 c : Real, \226\136\128 k : Num, 0 < k \226\134\146 tends_num_real((n : Num) => c / pow(real_of_num(n), k), real_of_num(0))
+      #|  real_of_num(0) == real_of_num(1) / (d : Real) * real_of_num(0)
+      #|  \226\136\128 c : Real, \226\136\128 d : Real, \226\136\128 k : Num, 0 < k \226\134\146 tends_num_real((n : Num) => c / (d * pow(real_of_num(n), k)), real_of_num(0))
+      #|  real_of_num(0) < real_of_num(1)
+      #|  !(real_of_num((n : Num)) == real_of_num(0))
       #|  1
-      #|  (\\n. &n / &n) --> &1
-      #|  &1 = &1 * &1
-      #|  ~(k = &0) ==> (\\n. (k * &n) / (k * &n)) --> &1
-      #|  &0 = &1 * &0
-      #|  a * b * c = b * a * c
-      #|  (b = SUC(PRE b))
-      #|  forall c d a b. ~(d = &0) /\\ a < b ==> (\\n. (c * &n pow a) / (d * &n pow b)) --> &0
-      #|  &0 = &1 * &0
-      #|  k = SUC (PRE k)
-      #|  n pow k = &1 * n pow k
-      #|  &0 = &0 + &0
-      #|  LENGTH t <= PRE k
-      #|  ~(k = 0)
-      #|  forall p k. LENGTH p <= k ==> (\\n. poly p (&n) / &n pow k) --> &0
-      #|  &1 = &1 * &1
-      #|  a * b * c = b * a * c
-      #|  (LENGTH t = SUC (PRE (LENGTH t)))
-      #|  ~(LENGTH t = 0)
-      #|  &1 = &0 + &1
-      #|  LAST (CONS h t) = LAST t
-      #|  &1 = &1 * &1
-      #|  ~(h = &0)
-      #|  t = []
-      #|  forall p. (0 < LENGTH p /\\ ~(LAST p = &0)) ==>\n     (\\n. poly p (&n) / (LAST p * &n pow PRE (LENGTH p))) --> &1
-      #|  mono_inc (f:num -> real) = forall(m:num) n. m <= n ==> f m <= f n
-      #|  mono_dec (f:num -> real) = forall(m:num) n. m <= n ==> f n <= f m
-      #|  forall f. mono f <=> mono_inc f \\/ mono_dec f
-      #|  forall k. mono_inc (\\n. &n pow k)
-      #|  forall k c. &0 < c ==> mono_inc (\\n. c * &n pow k)
-      #|  mono_unbounded_above (f:num -> real) = forall c. ?N. forall n. N <= n ==> c < f n
-      #|  mono_unbounded_below (f:num -> real) = forall c. ?N. forall n. N <= n ==> f n < c
-      #|  N
-      #|  c:real
-      #|  abs c
-      #|  mono_unbounded_above (f:num -> real) = forall c. &0 <= c ==> ?N. forall n. N <= n ==> c < f n
-      #|  N
-      #|  c:real
-      #|  -- (abs c)
-      #|  mono_unbounded_below (f:num -> real) = forall c. c <= &0 ==> ?N. forall n. N <= n ==> f n < c
-      #|  &2 * d < &2 * f n
-      #|  k * inv k = &1
-      #|  (a * b) * c = b * (a * c)
-      #|  g n
-      #|  inv k
-      #|  &2 * d < k * g n
-      #|  g n * inv (g n) = &1
-      #|  a * (b * c) * d = c * b * (d * a)
-      #|  inv(g n)
-      #|  inv(&2) * &2 = &1
-      #|  inv(&2)
-      #|  &2 * d * inv k
-      #|  &0 < g n
-      #|  k * g n < &2 * f n
-      #|  k * inv(&2) < f n * inv (g n)
-      #|  abs (f n * inv (g n) - k) = k - (f n * inv (g n))
-      #|  f n * inv (g n) - k < &0
-      #|  g n * inv (g n) = &1
-      #|  &0 < g n
-      #|  &0 < inv k
-      #|  &0 < inv (g n)
-      #|  inv (g n)
-      #|  k * inv k = &1
-      #|  k * &2 * d * inv k = (k * inv k) * &2 * d
-      #|  d <= &2 * d /\\ &2 * d < k * (g n) /\\ k * (g n) <= f n ==> d < f n
-      #|  k <= f n * inv (g n)
-      #|  M <= n /\\ K <= (n:num)
-      #|  nmax M K
-      #|  K:num
-      #|  &0 <= &2 * d / k
-      #|  d:real
-      #|  M:num
-      #|  &0 < k / &2
-      #|  forall k f g. &0 < k /\\ (\\n. f n / g n) --> k /\\ mono_unbounded_above g\n    ==> mono_unbounded_above f
-      #|  k / &2
-      #|  -- (-- x) = x
-      #|  x < y ==> --y < -- x
-      #|  forall f. mono_unbounded_above f = mono_unbounded_below (\\n. -- (f n))
-      #|  -- (-- x) = x
-      #|  x < y ==> --y < -- x
-      #|  forall f. mono_unbounded_below f = mono_unbounded_above (\\n. -- (f n))
-      #|  N
-      #|  e:real
-      #|  \\n. -- g n
-      #|  k
-      #|  forall k f g. &0 < k /\\ (\\n. f n / g n) --> k /\\ mono_unbounded_below g\n    ==> mono_unbounded_below f
-      #|  normal p <=> ((normalize p = p) /\\ ~(p = []))
-      #|  nonconstant p <=> normal p /\\ (forall x. ~(p = [x]))
-      #|  forall x. (normalize [x] = [x]) <=> ~(x = &0)
-      #|  y = &0
-      #|  forall x y. ~(y = &0) <=> (normalize [x; y] = [x; y])
-      #|  poly (normalize t) = poly t
-      #|  h = &0
-      #|  forall p. poly (normalize p) = poly p
-      #|  forall h t. normal t ==> normal (CONS h t)
-      #|  normalize t = []
-      #|  forall h t. ~(t = []) /\\ normal (CONS h t) ==> normal t
-      #|  t = []
-      #|  forall p. normal p ==> ~(LAST p = &0)
-      #|  ~(n = 0) <=> 0 < n
-      #|  forall p. normal p ==> 0 < LENGTH p
-      #|  ~(n = 0) <=> 0 < n
-      #|  t = []
-      #|  forall p. 0 < LENGTH p /\\ ~(LAST p = &0) ==> normal p
-      #|  forall p. normal p <=> 0 < LENGTH p /\\ ~(LAST p = &0)
-      #|  normalize p = p
-      #|  forall p. normal p ==> (\\n. poly p (&n) / (LAST p * &n pow (degree p))) --> &1
-      #|  &n
-      #|  max (&1) c
-      #|  x = x pow 1
-      #|  &n'
-      #|  max (&1) c
-      #|  &n
-      #|  n
-      #|  max (&1) c
-      #|  forall k. 0 < k ==> mono_unbounded_above (\\n. (&n) pow k)
-      #|  inv a
-      #|  inv a * a = &1
-      #|  N
-      #|  inv a * c
-      #|  forall k a. 0 < k /\\ &0 < a ==> mono_unbounded_above (\\n. a * (&n) pow k)
-      #|  --(x * y) = -- x * y
-      #|  forall k a. 0 < k /\\ a < &0 ==> mono_unbounded_below (\\n. a * (&n) pow k)
-      #|  forall x y. poly [x] y = x
-      #|  ~(x < y /\\ y < x)
-      #|  &1 + &(nmax N n)
-      #|  1 + nmax N n
-      #|  X:real
-      #|  &0
-      #|  (\\n. LAST p * &n pow degree p)
-      #|  &1
-      #|  mono_unbounded_below (\\n. poly p (&n))
-      #|  ~(LENGTH p = 0)
-      #|  normalize p = p
-      #|  mono_unbounded_below (\\n. LAST p * &n pow degree p)
-      #|  LAST (p:real list)
-      #|  &0
-      #|  X + &1
-      #|  LENGTH p = 1
-      #|  forall p. normal p /\\ (?X. forall x. X < x ==> &0 < poly p x) ==> &0 < LAST p
-      #|  ~(x < y /\\ y < x)
-      #|  &1 + &(nmax N n)
-      #|  1 + nmax N n
-      #|  X:real
-      #|  &0
-      #|  (\\n. LAST p * &n pow degree p)
-      #|  &1
-      #|  mono_unbounded_above (\\n. poly p (&n))
-      #|  ~(LENGTH p = 0)
-      #|  normalize p = p
-      #|  mono_unbounded_above (\\n. LAST p * &n pow degree p)
-      #|  LAST (p:real list)
-      #|  &0
-      #|  X + &1
-      #|  LENGTH p = 1
-      #|  forall p. normal p /\\ (?X. forall x. X < x ==> poly p x < &0) ==> LAST p < &0
-      #|  forall l. LENGTH (normalize l) <= LENGTH l
-      #|  normalize [x] = [x]
-      #|  x = &0
-      #|  forall x. (degree [x] = 0)
-      #|  ~(LENGTH t = 0)
-      #|  normal (CONS h t)
-      #|  forall h t. normal t ==> (degree (CONS h t) = 1 + degree t)
-      #|  t = []
-      #|  forall p n. ~(p = []) ==> (LENGTH(poly_diff_aux n p) = LENGTH p)
-      #|  t = []
-      #|  forall p. LENGTH (poly_diff p) = PRE (LENGTH p)
-      #|  LENGTH p = 2
-      #|  SUC 0 = 1
-      #|  PRE (LENGTH p) = 1
-      #|  LENGTH:((real) list) -> num
-      #|  forall n. (n = 0) \\/ (n = 1) \\/ (n = 2) \\/ 2 < n
-      #|  LENGTH (p:real list)
-      #|  forall p h. (poly_diff p = [h]) <=> ?x. p = [x; h]
-      #|  ~(LENGTH t = 0)
-      #|  ((SUC 0) - 1) + n = n
-      #|  t = []
-      #|  forall p n. ~(p = []) ==> (LAST (poly_diff_aux n p) = LAST p * &(PRE(LENGTH p) + n))
-      #|  (x = 0) \\/ (x = 1) \\/ 1 < x
-      #|  forall p. nonconstant p ==> 1 < LENGTH p
-      #|  0 < LENGTH (poly_diff p)
-      #|  1 < LENGTH p
-      #|  forall p. nonconstant p ==> ~(poly_diff p = [])
-      #|  1 < LENGTH p
-      #|  normalize p = p
-      #|  forall p. nonconstant p ==> 0 < degree p
-      #|  ~(LENGTH p = 1)
-      #|  ~(LENGTH p = 0)
-      #|  normalize p = p
-      #|  LAST (TL p) = LAST p
+      #|  tends_num_real((n : Num) => real_of_num(n) / real_of_num(n), real_of_num(1))
+      #|  real_of_num(1) == real_of_num(1) * real_of_num(1)
+      #|  !((k : Real) == real_of_num(0)) \226\134\146 tends_num_real((n : Num) => k * real_of_num(n) / (k * real_of_num(n)), real_of_num(1))
+      #|  real_of_num(0) == real_of_num(1) * real_of_num(0)
+      #|  (a : Real) * ((b : Real) * (c : Real)) == b * (a * c)
+      #|  (b : Num) == SUC(PRE(b))
+      #|  \226\136\128 c : Real, \226\136\128 d : Real, \226\136\128 a : Num, \226\136\128 b : Num, !(d == real_of_num(0)) && a < b \226\134\146 tends_num_real((n : Num) => c * pow(real_of_num(n), a) / (d * pow(real_of_num(n), b)), real_of_num(0))
+      #|  real_of_num(0) == real_of_num(1) * real_of_num(0)
+      #|  (k : Num) == SUC(PRE(k))
+      #|  pow((n : Real), (k : Num)) == real_of_num(1) * pow(n, k)
+      #|  real_of_num(0) == real_of_num(0) + real_of_num(0)
+      #|  LENGTH((t : List[_])) <= PRE((k : Num))
+      #|  !((k : Num) == 0)
+      #|  \226\136\128 p : List[Real], \226\136\128 k : Num, LENGTH(p) <= k \226\134\146 tends_num_real((n : Num) => poly(p, real_of_num(n)) / pow(real_of_num(n), k), real_of_num(0))
+      #|  real_of_num(1) == real_of_num(1) * real_of_num(1)
+      #|  (a : Real) * ((b : Real) * (c : Real)) == b * (a * c)
+      #|  LENGTH((t : List[_])) == SUC(PRE(LENGTH(t)))
+      #|  !(LENGTH((t : List[_])) == 0)
+      #|  real_of_num(1) == real_of_num(0) + real_of_num(1)
+      #|  LAST(CONS((h : _), (t : List[_]))) == LAST(t)
+      #|  real_of_num(1) == real_of_num(1) * real_of_num(1)
+      #|  !((h : Real) == real_of_num(0))
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 p : List[Real], 0 < LENGTH(p) && !(LAST(p) == real_of_num(0)) \226\134\146 tends_num_real((n : Num) => poly(p, real_of_num(n)) / (LAST(p) * pow(real_of_num(n), PRE(LENGTH(p)))), real_of_num(1))
+      #|  (mono_inc : ((Num) -> Real) -> Bool)((f : (Num) -> Real)) == (\226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 f(m) <= f(n))
+      #|  (mono_dec : ((Num) -> Real) -> Bool)((f : (Num) -> Real)) == (\226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 f(n) <= f(m))
+      #|  \226\136\128 f : (Num) -> Real, mono(f) == (mono_inc(f) || mono_dec(f))
+      #|  \226\136\128 k : Num, mono_inc((n : Num) => pow(real_of_num(n), k))
+      #|  \226\136\128 k : Num, \226\136\128 c : Real, real_of_num(0) < c \226\134\146 mono_inc((n : Num) => c * pow(real_of_num(n), k))
+      #|  (mono_unbounded_above : ((Num) -> Real) -> Bool)((f : (Num) -> Real)) == (\226\136\128 c : Real, \226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 c < f(n))
+      #|  (mono_unbounded_below : ((Num) -> Real) -> Bool)((f : (Num) -> Real)) == (\226\136\128 c : Real, \226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 f(n) < c)
+      #|  (N : _)
+      #|  (c : Real)
+      #|  abs((c : Real))
+      #|  mono_unbounded_above((f : (Num) -> Real)) == (\226\136\128 c : Real, real_of_num(0) <= c \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 c < f(n)))
+      #|  (N : _)
+      #|  (c : Real)
+      #|  -abs((c : Real))
+      #|  mono_unbounded_below((f : (Num) -> Real)) == (\226\136\128 c : Real, c <= real_of_num(0) \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 f(n) < c))
+      #|  real_of_num(2) * (d : Real) < real_of_num(2) * (f : (_) -> Real)((n : _))
+      #|  (k : Real) * inv(k) == real_of_num(1)
+      #|  (a : Real) * (b : Real) * (c : Real) == b * (a * c)
+      #|  (g : (_) -> _)((n : _))
+      #|  inv((k : Real))
+      #|  real_of_num(2) * (d : Real) < (k : Real) * (g : (_) -> Real)((n : _))
+      #|  (g : (_) -> Real)((n : _)) * inv(g(n)) == real_of_num(1)
+      #|  (a : Real) * ((b : Real) * (c : Real) * (d : Real)) == c * (b * (d * a))
+      #|  inv((g : (_) -> Real)((n : _)))
+      #|  inv(real_of_num(2)) * real_of_num(2) == real_of_num(1)
+      #|  inv(real_of_num(2))
+      #|  real_of_num(2) * ((d : Real) * inv((k : Real)))
+      #|  real_of_num(0) < (g : (_) -> Real)((n : _))
+      #|  (k : Real) * (g : (_) -> Real)((n : _)) < real_of_num(2) * (f : (_) -> Real)(n)
+      #|  (k : Real) * inv(real_of_num(2)) < (f : (_) -> Real)((n : _)) * inv((g : (_) -> Real)(n))
+      #|  abs((f : (_) -> Real)((n : _)) * inv((g : (_) -> Real)(n)) - (k : Real)) == k - f(n) * inv(g(n))
+      #|  (f : (_) -> Real)((n : _)) * inv((g : (_) -> Real)(n)) - (k : Real) < real_of_num(0)
+      #|  (g : (_) -> Real)((n : _)) * inv(g(n)) == real_of_num(1)
+      #|  real_of_num(0) < (g : (_) -> Real)((n : _))
+      #|  real_of_num(0) < inv((k : Real))
+      #|  real_of_num(0) < inv((g : (_) -> Real)((n : _)))
+      #|  inv((g : (_) -> Real)((n : _)))
+      #|  (k : Real) * inv(k) == real_of_num(1)
+      #|  (k : Real) * (real_of_num(2) * ((d : Real) * inv(k))) == k * inv(k) * (real_of_num(2) * d)
+      #|  (d : Real) <= real_of_num(2) * d && real_of_num(2) * d < (k : Real) * (g : (_) -> Real)((n : _)) && k * g(n) <= (f : (_) -> Real)(n) \226\134\146 d < f(n)
+      #|  (k : Real) <= (f : (_) -> Real)((n : _)) * inv((g : (_) -> Real)(n))
+      #|  (M : Num) <= (n : Num) && (K : Num) <= n
+      #|  nmax((M : Num), (K : Num))
+      #|  (K : Num)
+      #|  real_of_num(0) <= real_of_num(2) * ((d : Real) / (k : Real))
+      #|  (d : Real)
+      #|  (M : Num)
+      #|  real_of_num(0) < (k : Real) / real_of_num(2)
+      #|  \226\136\128 k : Real, \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, real_of_num(0) < k && tends_num_real((n : Num) => f(n) / g(n), k) && mono_unbounded_above(g) \226\134\146 mono_unbounded_above(f)
+      #|  (k : Real) / real_of_num(2)
+      #|  --(x : Real) == x
+      #|  (x : Real) < (y : Real) \226\134\146 -y < -x
+      #|  \226\136\128 f : (Num) -> Real, mono_unbounded_above(f) == mono_unbounded_below((n : Num) => -f(n))
+      #|  --(x : Real) == x
+      #|  (x : Real) < (y : Real) \226\134\146 -y < -x
+      #|  \226\136\128 f : (Num) -> Real, mono_unbounded_below(f) == mono_unbounded_above((n : Num) => -f(n))
+      #|  (N : _)
+      #|  (e : Real)
+      #|  (n : _) => -(g : (_) -> Real)(n)
+      #|  (k : _)
+      #|  \226\136\128 k : Real, \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, real_of_num(0) < k && tends_num_real((n : Num) => f(n) / g(n), k) && mono_unbounded_below(g) \226\134\146 mono_unbounded_below(f)
+      #|  (normal : (List[Real]) -> Bool)((p : List[Real])) == (normalize(p) == p && !(p == NIL))
+      #|  (nonconstant : (List[Real]) -> Bool)((p : List[Real])) == (normal(p) && (\226\136\128 x : Real, !(p == [x])))
+      #|  \226\136\128 x : Real, (normalize([x]) == [x]) == !(x == real_of_num(0))
+      #|  (y : Real) == real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, !(y == real_of_num(0)) == (normalize([x, y]) == [x, y])
+      #|  poly(normalize((t : List[Real]))) == poly(t)
+      #|  (h : Real) == real_of_num(0)
+      #|  \226\136\128 p : List[Real], poly(normalize(p)) == poly(p)
+      #|  \226\136\128 h : Real, \226\136\128 t : List[Real], normal(t) \226\134\146 normal(CONS(h, t))
+      #|  normalize((t : List[Real])) == NIL
+      #|  \226\136\128 h : Real, \226\136\128 t : List[Real], !(t == NIL) && normal(CONS(h, t)) \226\134\146 normal(t)
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 p : List[Real], normal(p) \226\134\146 !(LAST(p) == real_of_num(0))
+      #|  !((n : Num) == 0) == (0 < n)
+      #|  \226\136\128 p : List[Real], normal(p) \226\134\146 0 < LENGTH(p)
+      #|  !((n : Num) == 0) == (0 < n)
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 p : List[Real], 0 < LENGTH(p) && !(LAST(p) == real_of_num(0)) \226\134\146 normal(p)
+      #|  \226\136\128 p : List[Real], normal(p) == (0 < LENGTH(p) && !(LAST(p) == real_of_num(0)))
+      #|  normalize((p : List[Real])) == p
+      #|  \226\136\128 p : List[Real], normal(p) \226\134\146 tends_num_real((n : Num) => poly(p, real_of_num(n)) / (LAST(p) * pow(real_of_num(n), degree(p))), real_of_num(1))
+      #|  real_of_num((n : Num))
+      #|  max(real_of_num(1), (c : Real))
+      #|  (x : Real) == pow(x, 1)
+      #|  real_of_num((n' : Num))
+      #|  max(real_of_num(1), (c : Real))
+      #|  real_of_num((n : Num))
+      #|  (n : _)
+      #|  max(real_of_num(1), (c : Real))
+      #|  \226\136\128 k : Num, 0 < k \226\134\146 mono_unbounded_above((n : Num) => pow(real_of_num(n), k))
+      #|  inv((a : Real))
+      #|  inv((a : Real)) * a == real_of_num(1)
+      #|  (N : _)
+      #|  inv((a : Real)) * (c : Real)
+      #|  \226\136\128 k : Num, \226\136\128 a : Real, 0 < k && real_of_num(0) < a \226\134\146 mono_unbounded_above((n : Num) => a * pow(real_of_num(n), k))
+      #|  -((x : Real) * (y : Real)) == -x * y
+      #|  \226\136\128 k : Num, \226\136\128 a : Real, 0 < k && a < real_of_num(0) \226\134\146 mono_unbounded_below((n : Num) => a * pow(real_of_num(n), k))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, poly([x], y) == x
+      #|  !((x : Real) < (y : Real) && y < x)
+      #|  real_of_num(1) + real_of_num(nmax((N : Num), (n : Num)))
+      #|  1 + nmax((N : Num), (n : Num))
+      #|  (X : Real)
+      #|  real_of_num(0)
+      #|  (n : Num) => LAST((p : List[Real])) * pow(real_of_num(n), degree(p))
+      #|  real_of_num(1)
+      #|  mono_unbounded_below((n : Num) => poly((p : List[Real]), real_of_num(n)))
+      #|  !(LENGTH((p : List[_])) == 0)
+      #|  normalize((p : List[Real])) == p
+      #|  mono_unbounded_below((n : Num) => LAST((p : List[Real])) * pow(real_of_num(n), degree(p)))
+      #|  LAST((p : List[Real]))
+      #|  real_of_num(0)
+      #|  (X : Real) + real_of_num(1)
+      #|  LENGTH((p : List[_])) == 1
+      #|  \226\136\128 p : List[Real], normal(p) && (\226\136\131 X : Real, \226\136\128 x : Real, X < x \226\134\146 real_of_num(0) < poly(p, x)) \226\134\146 real_of_num(0) < LAST(p)
+      #|  !((x : Real) < (y : Real) && y < x)
+      #|  real_of_num(1) + real_of_num(nmax((N : Num), (n : Num)))
+      #|  1 + nmax((N : Num), (n : Num))
+      #|  (X : Real)
+      #|  real_of_num(0)
+      #|  (n : Num) => LAST((p : List[Real])) * pow(real_of_num(n), degree(p))
+      #|  real_of_num(1)
+      #|  mono_unbounded_above((n : Num) => poly((p : List[Real]), real_of_num(n)))
+      #|  !(LENGTH((p : List[_])) == 0)
+      #|  normalize((p : List[Real])) == p
+      #|  mono_unbounded_above((n : Num) => LAST((p : List[Real])) * pow(real_of_num(n), degree(p)))
+      #|  LAST((p : List[Real]))
+      #|  real_of_num(0)
+      #|  (X : Real) + real_of_num(1)
+      #|  LENGTH((p : List[_])) == 1
+      #|  \226\136\128 p : List[Real], normal(p) && (\226\136\131 X : Real, \226\136\128 x : Real, X < x \226\134\146 poly(p, x) < real_of_num(0)) \226\134\146 LAST(p) < real_of_num(0)
+      #|  \226\136\128 l : List[Real], LENGTH(normalize(l)) <= LENGTH(l)
+      #|  normalize([(x : Real)]) == [x]
+      #|  (x : Real) == real_of_num(0)
+      #|  \226\136\128 x : Real, degree([x]) == 0
+      #|  !(LENGTH((t : List[_])) == 0)
+      #|  normal(CONS((h : Real), (t : List[Real])))
+      #|  \226\136\128 h : Real, \226\136\128 t : List[Real], normal(t) \226\134\146 degree(CONS(h, t)) == 1 + degree(t)
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 p : List[Real], \226\136\128 n : Num, !(p == NIL) \226\134\146 LENGTH(poly_diff_aux(n, p)) == LENGTH(p)
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 p : List[Real], LENGTH(poly_diff(p)) == PRE(LENGTH(p))
+      #|  LENGTH((p : List[_])) == 2
+      #|  SUC(0) == 1
+      #|  PRE(LENGTH((p : List[_]))) == 1
+      #|  (LENGTH : (List[Real]) -> Num)
+      #|  \226\136\128 n : Num, n == 0 || n == 1 || n == 2 || 2 < n
+      #|  LENGTH((p : List[Real]))
+      #|  \226\136\128 p : List[Real], \226\136\128 h : Real, (poly_diff(p) == [h]) == (\226\136\131 x : Real, p == [x, h])
+      #|  !(LENGTH((t : List[_])) == 0)
+      #|  SUC(0) - 1 + (n : Num) == n
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 p : List[Real], \226\136\128 n : Num, !(p == NIL) \226\134\146 LAST(poly_diff_aux(n, p)) == LAST(p) * real_of_num(PRE(LENGTH(p)) + n)
+      #|  (x : Num) == 0 || x == 1 || 1 < x
+      #|  \226\136\128 p : List[Real], nonconstant(p) \226\134\146 1 < LENGTH(p)
+      #|  0 < LENGTH(poly_diff((p : List[Real])))
+      #|  1 < LENGTH((p : List[_]))
+      #|  \226\136\128 p : List[Real], nonconstant(p) \226\134\146 !(poly_diff(p) == NIL)
+      #|  1 < LENGTH((p : List[_]))
+      #|  normalize((p : List[Real])) == p
+      #|  \226\136\128 p : List[Real], nonconstant(p) \226\134\146 0 < degree(p)
+      #|  !(LENGTH((p : List[_])) == 1)
+      #|  !(LENGTH((p : List[_])) == 0)
+      #|  normalize((p : List[Real])) == p
+      #|  LAST(TL((p : List[_]))) == LAST(p)
       #|  1
-      #|  ~(TL p = [])
-      #|  forall p. nonconstant p ==> (LAST (poly_diff p) = LAST p * &(degree p))
-      #|  degree p = 0
-      #|  t:real list
-      #|  h:real
-      #|  normal t
-      #|  ?h t. p = CONS h t
-      #|  (LAST p = &0) \\/ (&(degree p) = &0)
-      #|  LAST p * &(degree p) = &0
-      #|  ~(LAST p = &0)
-      #|  ~(p = [])
-      #|  forall p. nonconstant p ==> ~(poly_diff p = [&0])
-      #|  &0 < &(degree p)
-      #|  0 < degree p
-      #|  &0 <= &(degree p)
-      #|  forall p. nonconstant p ==> (LAST (poly_diff p) < &0 <=> LAST p < &0)
-      #|  &0 = &0 * &0
-      #|  &0 < &(degree p)
-      #|  forall p. nonconstant p ==> (&0 < LAST (poly_diff p) <=> &0 < LAST p)
-      #|  &0 < LAST (poly_diff p)
-      #|  LAST (poly_diff p) < &0
-      #|  LAST p < &0
-      #|  LENGTH (poly_diff p) = PRE (LENGTH p)
-      #|  1 < LENGTH p
-      #|  forall p. nonconstant p ==> normal (poly_diff p)
-      #|  &0 < LAST (poly_diff p)
-      #|  forall p. nonconstant p /\\ (?X. forall x. X < x ==> &0 < poly (poly_diff p) x) ==> &0 < LAST p
-      #|  (\\n. (LAST p) * (&n) pow (degree p))
-      #|  &1
-      #|  forall p. nonconstant p /\\ &0 < LAST p ==> mono_unbounded_above (\\n. poly p (&n))
-      #|  &0 = &0 * &0
-      #|  &0 < (y - &K) * poly (poly_diff p) x
-      #|  &0 < poly (poly_diff p) x
-      #|  &0 < y - &K
-      #|  N:num < K
-      #|  &N < &K
-      #|  x <= &0 /\\ &0 < y ==> x - y <= &0
-      #|  poly p y - poly p (&K) <= &0
-      #|  y:real
-      #|  &K
-      #|  p:real list
-      #|  &N < y /\\ X < y
-      #|  &K
-      #|  ?K. max X (&N) < &K
-      #|  &0
-      #|  mono_unbounded_above (\\n. poly p (&n))
-      #|  nonconstant p /\\ (?X. forall x. X < x ==> &0 < poly (poly_diff p) x) ==>\n   (?Y. forall y. Y < y ==> &0 < poly p y)
-      #|  LAST (poly_diff p) < &0
-      #|  forall p. nonconstant p /\\ (?X. forall x. X < x ==> poly (poly_diff p) x < &0) ==> LAST p < &0
-      #|  (\\n. (LAST p) * (&n) pow (degree p))
-      #|  &1
-      #|  forall p. nonconstant p /\\ LAST p < &0 ==> mono_unbounded_below (\\n. poly p (&n))
-      #|  (y - &K) * poly (poly_diff p) x < &0
-      #|  poly (poly_diff p) x < &0
-      #|  &0 < y - &K
-      #|  N:num < K
-      #|  &N < &K
-      #|  &0 <= x /\\ y < &0 ==> &0 <= x - y
-      #|  &0 <= poly p y - poly p (&K)
-      #|  y:real
-      #|  &K
-      #|  p:real list
-      #|  &N < y /\\ X < y
-      #|  &K
-      #|  ?K. max X (&N) < &K
-      #|  &0
-      #|  mono_unbounded_below (\\n. poly p (&n))
-      #|  nonconstant p /\\ (?X. forall x. X < x ==> poly (poly_diff p) x < &0) ==>\n   (?Y. forall y. Y < y ==> poly p y < &0)
-      #|  forall k. 0 < k /\\ EVEN k ==> mono_unbounded_above (\\n. (-- &n) pow k)
-      #|  forall k. 0 < k /\\ ODD k ==> mono_unbounded_below (\\n. (-- &n) pow k)
-      #|  forall t h. ODD (LENGTH (CONS h t)) = EVEN (LENGTH t)
-      #|  forall t h. EVEN (LENGTH (CONS h t)) = ODD (LENGTH t)
-      #|  ~(e = &0)
-      #|  inv e
-      #|  inv (b + &1) * (b + &1) = &1
-      #|  b + k
-      #|  abs a / e
-      #|  &0 < b + k
-      #|  k = &1
-      #|  ~(abs a = &0)
-      #|  b + a - b = a
-      #|  k = abs a / e - b
-      #|  &1 <= abs a / e - b
-      #|  abs a / e <= b + k
-      #|  &0 < abs a / e
-      #|  (abs a / e - b) <= k
-      #|  abs (b + p n) = b + p n
-      #|  &0 < abs a / e
-      #|  (abs a / e - b) <= k
-      #|  k
-      #|  -- b < p n
-      #|  &0 < abs a / e
-      #|  (abs a / e - b) <= k
-      #|  abs a / (b + k)
-      #|  N
-      #|  k:real
-      #|  k = (max (&1) (abs a / e - b))
-      #|  a = &0
-      #|  forall a b p. mono_unbounded_above (\\n. p n) ==> (\\n. a / (b + p n)) --> &0
-      #|  N
-      #|  N
-      #|  forall p. (\\n. p n) --> &0 <=> (\\n. -- p n) --> &0
-      #|  -- y + -- z = --(y + z)
-      #|  --(x * y) = x * -- y
-      #|  forall x y z. --(x / (y + z)) = x / (-- y + -- z)
-      #|  forall a b p. mono_unbounded_below (\\n. p n) ==> (\\n. a / (b + p n)) --> &0
-      #|  mono_unbounded p <=> mono_unbounded_above p \\/ mono_unbounded_below p
-      #|  forall a b p. mono_unbounded p ==> (\\n. a / (b + p n)) --> &0
-      #|  N <= n /\\ N' <= (n:num)
-      #|  max c (&1) * max c (&1)
-      #|  max c (&1)
-      #|  nmax N N'
-      #|  &0 <= max c (&1)
-      #|  forall p q. mono_unbounded_above (\\n. p n) /\\ mono_unbounded_above (\\n. q n) ==>\n           mono_unbounded_above (\\n. p n * q n)
-      #|  --(x * y) = x * -- y
-      #|  forall p q. mono_unbounded_above (\\n. p n) /\\ mono_unbounded_below (\\n. q n) ==>\n           mono_unbounded_below (\\n. p n * q n)
-      #|  --(x * y) = -- x * y
-      #|  forall p q. mono_unbounded_below (\\n. p n) /\\ mono_unbounded_above (\\n. q n) ==>\n           mono_unbounded_below (\\n. p n * q n)
-      #|  (x * y) = -- x * -- y
-      #|  forall p q. mono_unbounded_below (\\n. p n) /\\ mono_unbounded_below (\\n. q n) ==>\n           mono_unbounded_above (\\n. p n * q n)
-      #|  forall p q. mono_unbounded (\\n. p n) /\\ mono_unbounded (\\n. q n) ==> mono_unbounded (\\n. p n * q n)
-      #|  \\n. -- g n
-      #|  k
-      #|  forall k f g. &0 < k /\\ (\\n. f n / g n) --> k /\\ mono_unbounded_below g\n    ==> mono_unbounded_below f
-      #|  (\\n. LAST p * &n pow degree p)
-      #|  &1
-      #|  (\\n. LAST p * &n pow degree p)
-      #|  &1
-      #|  LAST p < &0
-      #|  forall p. nonconstant p ==> mono_unbounded (\\n. poly p (&n))
-      #|  (pneg_aux n [] = []) /\\\n  (pneg_aux n (CONS h t) = CONS (--(&1) pow n * h) (pneg_aux (SUC n) t))
-      #|  (pneg [] = []) /\\\n  (pneg (CONS h t) = pneg_aux 0 (CONS h t))
-      #|  forall t n. pneg_aux (SUC (SUC n)) t = pneg_aux n t
-      #|  forall p. poly_neg (poly_neg p) = p
-      #|  forall p n. poly_neg (pneg_aux (SUC n) p) = pneg_aux n p
-      #|  -- &1 pow n = &1
-      #|  forall k p n. EVEN n ==> (poly p (-- k) = poly (pneg_aux n p) k)
-      #|  poly (pneg_aux 0 (CONS h t)) x = poly (CONS h t) (--x)
-      #|  forall p x. poly p (-- x) = poly (pneg p) x
-      #|  degree [] = 0 
-      #|  forall x. EVEN (SUC x) = ODD x
-      #|  forall x. ODD (SUC x) = EVEN x
-      #|  t = []
-      #|  forall p. pneg (CONS h t) = CONS h (neg (pneg t))
-      #|  forall p. (pneg p = []) <=> (p = [])
-      #|  forall p n. (pneg_aux n p = []) <=> (p = [])
-      #|  forall p. (c ## p = []) <=> (p = [])
-      #|  forall p. (poly_neg p = []) <=> (p = [])
-      #|  ~(-- &1 ## t = [])
-      #|  t = []
-      #|  forall p. ~(p = []) ==> (LAST (neg p) = -- LAST p)
-      #|  ~(neg (pneg t) = [])
-      #|  EVEN (degree t)
-      #|  normal t
-      #|  ~(neg (pneg t) = [])
-      #|  ODD (degree t)
-      #|  normal t
-      #|  t = []
-      #|  forall p. normal p ==>\n      (EVEN (degree p) ==> (LAST p = LAST (pneg p))) /\\\n      (ODD (degree p) ==> (LAST p = -- LAST (pneg p)))
-      #|  forall p n. LENGTH (pneg_aux n p) = LENGTH p
-      #|  forall p. LENGTH (pneg p) = LENGTH p
-      #|  ~(pneg_aux (SUC n) t = [])
-      #|  ~(-- &1 = &0)
-      #|  n:num
-      #|  -- &1
-      #|  t = []
-      #|  forall p n. ~(p = []) ==> ((LAST p = &0) <=> (LAST (pneg_aux n p) = &0))
-      #|  forall p n. ~(p = []) ==> ((LAST p = &0) = (LAST (pneg p) = &0))
-      #|  LENGTH p = 0
-      #|  degree p
-      #|  p:real list
-      #|  normal p
-      #|  forall p. ~(p = []) ==> (LAST (pneg p) = LAST p) \\/ (LAST (pneg p) = -- LAST p)
-      #|  ~(p = [])
-      #|  p:real list
-      #|  ~(p = [])
-      #|  p:real list
-      #|  forall p. normal p = normal (pneg p)
-      #|  ~(-- &1 pow n = &0)
-      #|  ~(-- &1 pow n = &0)
-      #|  forall p n. LENGTH (normalize (pneg_aux n p)) = LENGTH (normalize p)
-      #|  forall p n. LENGTH (normalize (pneg p)) = LENGTH (normalize p)
-      #|  forall p. degree (pneg p) = degree p
-      #|  forall p. (pneg p = [x]) <=> (p = [x])
-      #|  forall p. nonconstant (pneg p) = nonconstant p
-      #|  forall p. nonconstant p /\\ EVEN (degree p) /\\ LAST p < &0 ==>\n       mono_unbounded_below (\\n. poly p (-- &n))
-      #|  (--x = y) <=> (x = -- y)
-      #|  forall p. normal p\n         ==> (EVEN (degree p) ==> (LAST (pneg p) = LAST p)) /\\\n             (ODD (degree p) ==> (LAST (pneg p) = -- LAST p))
-      #|  LAST (pneg p) = -- LAST p
-      #|  forall p. nonconstant p /\\ ODD (degree p) /\\ LAST p < &0 ==>\n       mono_unbounded_above (\\n. poly p (-- &n))
-      #|  forall p. nonconstant p /\\ EVEN (degree p) /\\ &0 < LAST p ==>\n       mono_unbounded_above (\\n. poly p (-- &n))
-      #|  LAST (pneg p) = -- LAST p
-      #|  forall p. nonconstant p /\\ ODD (degree p) /\\ &0 < LAST p ==>\n       mono_unbounded_below (\\n. poly p (-- &n))
-      #|  forall p n. LENGTH (normalize (pneg p)) = LENGTH (normalize p)
-      #|  &n * h
-      #|  ~(SUC n = 0)
-      #|  ~(SUC x = 0)
-      #|  normal t
-      #|  ~(&n * h = &0)
-      #|  ~(h = &0)
-      #|  t = []
-      #|  forall p n. ~(n = 0) ==> (normal p = normal (poly_diff_aux n p))
-      #|  ~(1 = 0)
-      #|  h:real
-      #|  normal t
-      #|  ~(1 = 0)
-      #|  forall p. nonconstant p ==> normal (poly_diff p)
-      #|  forall p n. ~(n = 0) ==> (normal (poly_diff_aux n p) <=> normal p)
-      #|  h:real
-      #|  normal (poly_diff_aux (SUC m) t)
-      #|  h:real
-      #|  normal (poly_diff_aux (SUC n) t)
-      #|  t = []
-      #|  forall p m n. ~(n = 0) /\\ ~(m = 0) /\\ normal p ==>\n    (degree (poly_diff_aux n p) = degree (poly_diff_aux m p))
-      #|  nonconstant t
-      #|  degree [&n * h; &(SUC n) * x] = 1
-      #|  ~(SUC n = 0)
-      #|  ~(&(SUC n) * x = &0)
-      #|  normal [h; x]
-      #|  LENGTH [h; x] = 2
-      #|  normalize [h; x] = [h; x]
-      #|  degree [h; x] = 1
-      #|  ~(x = &0)
-      #|  ?x. t = [x]
-      #|  normal (poly_diff_aux (SUC n) t)
-      #|  normal t
-      #|  t = []
-      #|  forall p n. nonconstant p ==>\n  (EVEN (degree p) = EVEN (degree (poly_diff_aux n p))) /\\\n  (ODD (degree p) = ODD (degree (poly_diff_aux n p)))
-      #|  normal (poly_diff_aux 1 t')
-      #|  normal (poly_diff_aux (SUC 1) t')
-      #|  normal t'
-      #|  ?h' t'. t = CONS h' t'
-      #|  nonconstant t
-      #|  1 + x = SUC x
-      #|  ~(&1 = &0)
-      #|  ~(&1 * x = &0)
-      #|  ~(x = &0)
-      #|  ?x. t = [x]
-      #|  normal t
-      #|  ~(1 = 0)
-      #|  forall p n. nonconstant p ==>\n  (EVEN (degree p) = ODD (degree (poly_diff p))) /\\\n  (ODD (degree p) = EVEN (degree (poly_diff p)))
-      #|  forall p n. nonconstant p ==>\n  (ODD (degree (poly_diff p)) = EVEN (degree p)) /\\\n  (EVEN (degree (poly_diff p)) = ODD (degree p))
-      #|  forall p. normal p /\\ 0 < degree p ==> nonconstant p
-      #|  forall n m. n <= nmax n m /\\ m <= nmax n m
-      #|  (-- &k - y) * poly (poly_diff p) x < &0
-      #|  &0 < poly p (-- &k) - poly p y
-      #|  &0 < poly p (-- &k)
-      #|  N <= k:num
-      #|  -- &M
-      #|  -- &k
-      #|  poly (poly_diff p) x < &0
-      #|  &0 < (-- &k) - y
-      #|  -- &k
-      #|  y:real
-      #|  p:real list
-      #|  x < y <=> ~(y <= x)
-      #|  -- &k
-      #|  k = nmax N M
-      #|  M:num
-      #|  -- (X - &1)
-      #|  &0
-      #|  ~(x < &0 /\\ &0 < x)
-      #|  -- &M
-      #|  -- &(nmax M N) < X
-      #|  N <= nmax M N
-      #|  nmax M N
-      #|  -- &M <= X - &1
-      #|  M:num
-      #|  -- (X - &1)
-      #|  &0
-      #|  mono_unbounded_above (\\n. poly (poly_diff p) (-- (&n)))
-      #|  x < y <=> ~(y < x) /\\ ~(y = x)
-      #|  EVEN (degree (poly_diff p))
-      #|  nonconstant (poly_diff p)
-      #|  X - &1
-      #|  ?x. poly_diff p = [x]
-      #|  ~(x < &0 /\\ &0 < x)
-      #|  -- &M
-      #|  -- &(nmax M N) < X
-      #|  N <= nmax M N
-      #|  nmax M N
-      #|  -- &M <= X - &1
-      #|  M:num
-      #|  -- (X - &1)
-      #|  &0
-      #|  mono_unbounded_above (\\n. poly (poly_diff p) (-- &n))
-      #|  nonconstant (poly_diff p)
-      #|  ODD (degree (poly_diff p))
-      #|  x < y <=> ~(x = y) /\\ ~(y < x)
-      #|  LAST (pneg p) = LAST p
-      #|  ~(LENGTH p = 1)
-      #|  ~(LENGTH p = 0)
-      #|  normalize p = p
-      #|  (\\n. LAST (pneg p) * &n pow degree (pneg p))
-      #|  &1
-      #|  degree p
-      #|  mono_unbounded_above (\\n. poly p (-- &n))
-      #|  forall p. nonconstant p /\\ (?X. forall x. x < X ==> poly (poly_diff p) x < &0) ==>\n   (?Y. forall y. y < Y ==> &0 < poly p y)
-      #|  &0 < (-- &k - y) * poly (poly_diff p) x
-      #|  poly p (-- &k) - poly p y < &0
-      #|  poly p (-- &k) < &0
-      #|  N <= k:num
-      #|  -- &M
-      #|  -- &k
-      #|  &0 < poly (poly_diff p) x
-      #|  &0 < (-- &k) - y
-      #|  -- &k
-      #|  y:real
-      #|  p:real list
-      #|  x < y <=> ~(y <= x)
-      #|  -- &k
-      #|  k = nmax N M
-      #|  M:num
-      #|  -- (X - &1)
-      #|  &0
-      #|  ~(x < &0 /\\ &0 < x)
-      #|  -- &M
-      #|  -- &(nmax M N) < X
-      #|  N <= nmax M N
-      #|  nmax M N
-      #|  -- &M <= X - &1
-      #|  M:num
-      #|  -- (X - &1)
-      #|  &0
-      #|  mono_unbounded_below (\\n. poly (poly_diff p) (-- (&n)))
-      #|  x < y <=> ~(y < x) /\\ ~(y = x)
-      #|  EVEN (degree (poly_diff p))
-      #|  nonconstant (poly_diff p)
-      #|  X - &1
-      #|  ?x. poly_diff p = [x]
-      #|  ~(x < &0 /\\ &0 < x)
-      #|  -- &M
-      #|  -- &(nmax M N) < X
-      #|  N <= nmax M N
-      #|  nmax M N
-      #|  -- &M <= X - &1
-      #|  M:num
-      #|  -- (X - &1)
-      #|  &0
-      #|  mono_unbounded_below (\\n. poly (poly_diff p) (-- &n))
-      #|  nonconstant (poly_diff p)
-      #|  ODD (degree (poly_diff p))
-      #|  x < y <=> ~(x = y) /\\ ~(y < x)
-      #|  LAST (pneg p) = LAST p
-      #|  ~(LENGTH p = 1)
-      #|  ~(LENGTH p = 0)
-      #|  normalize p = p
-      #|  (\\n. LAST (pneg p) * &n pow degree (pneg p))
-      #|  &1
-      #|  degree p
-      #|  mono_unbounded_below (\\n. poly p (-- &n))
-      #|  forall p. nonconstant p /\\ (?X. forall x. x < X ==> &0 < poly (poly_diff p) x) ==>\n   (?Y. forall y. y < Y ==> poly p y < &0)
-      #|  min X Y - &1
-      #|  p:real list
-      #|  forall p X. nonconstant p /\\ (forall x. x < X ==> &0 < poly (poly_diff p) x) ==>\n   (?Y. Y < X /\\ (forall y. y < Y ==> poly p y < &0))
-      #|  min X Y - &1
-      #|  p:real list
-      #|  forall p X. nonconstant p /\\ (forall x. x < X ==> poly (poly_diff p) x < &0) ==>\n   (?Y. Y < X /\\ (forall y. y < Y ==> &0 < poly p y))
-      #|  min X Y - &1
-      #|  p:real list
-      #|  forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (forall x. x < X ==> &0 < poly p' x) ==>\n     (?Y. Y < X /\\ (forall y. y < Y ==> poly p y < &0))
-      #|  min X Y - &1
-      #|  p:real list
-      #|  forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (forall x. x < X ==> poly p' x < &0) ==>\n     (?Y. Y < X /\\ (forall y. y < Y ==> &0 < poly p y))
-      #|  Y - &1
-      #|  X:real
-      #|  p':real list
-      #|  p:real list
-      #|  forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (forall x. x < X ==> &0 < poly p' x) ==>\n     (?Y. Y < X /\\ (forall y. y <= Y ==> poly p y < &0))
-      #|  Y - &1
-      #|  X:real
-      #|  p':real list
-      #|  p:real list
-      #|  forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (forall x. x < X ==> poly p' x < &0) ==>\n     (?Y. Y < X /\\ (forall y. y <= Y ==> &0 < poly p y))
-      #|  forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (forall x. x < X ==> poly p' x > &0) ==>\n     (?Y. Y < X /\\ (forall y. y <= Y ==> poly p y < &0))
-      #|  forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (forall x. x < X ==> poly p' x < &0) ==>\n     (?Y. Y < X /\\ (forall y. y <= Y ==> poly p y > &0))
-      #|  t = []
-      #|  ~(1 = 0)
-      #|  forall p. normal (poly_diff p) ==> nonconstant p
-      #|  forall p. nonconstant p = normal (poly_diff p)
-      #|  (max X Y) + &1
-      #|  p:real list
-      #|  forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n     (forall x. X < x ==> &0 < poly p' x) ==>\n     (?Y. X < Y /\\ (forall y. Y <= y ==> &0 < poly p y))
-      #|  (max X Y) + &1
-      #|  p:real list
-      #|  forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n     (forall x. X < x ==> poly p' x < &0) ==>\n     (?Y. X < Y /\\ (forall y. Y <= y ==> poly p y < &0))
-      #|  forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n     (forall x. X < x ==> poly p' x > &0) ==>\n     (?Y. X < Y /\\ (forall y. Y <= y ==> poly p y > &0))
-      #|  forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n     (forall x. X < x ==> poly p' x < &0) ==>\n     (?Y. X < Y /\\ (forall y. Y <= y ==> poly p y < &0))
+      #|  !(TL((p : List[_])) == NIL)
+      #|  \226\136\128 p : List[Real], nonconstant(p) \226\134\146 LAST(poly_diff(p)) == LAST(p) * real_of_num(degree(p))
+      #|  degree((p : List[Real])) == 0
+      #|  (t : List[Real])
+      #|  (h : Real)
+      #|  normal((t : List[Real]))
+      #|  \226\136\131 h : _, \226\136\131 t : List[_], (p : List[_]) == CONS(h, t)
+      #|  LAST((p : List[Real])) == real_of_num(0) || real_of_num(degree(p)) == real_of_num(0)
+      #|  LAST((p : List[Real])) * real_of_num(degree(p)) == real_of_num(0)
+      #|  !(LAST((p : List[Real])) == real_of_num(0))
+      #|  !((p : List[_]) == NIL)
+      #|  \226\136\128 p : List[Real], nonconstant(p) \226\134\146 !(poly_diff(p) == [real_of_num(0)])
+      #|  real_of_num(0) < real_of_num(degree((p : List[Real])))
+      #|  0 < degree((p : List[Real]))
+      #|  real_of_num(0) <= real_of_num(degree((p : List[Real])))
+      #|  \226\136\128 p : List[Real], nonconstant(p) \226\134\146 (LAST(poly_diff(p)) < real_of_num(0)) == (LAST(p) < real_of_num(0))
+      #|  real_of_num(0) == real_of_num(0) * real_of_num(0)
+      #|  real_of_num(0) < real_of_num(degree((p : List[Real])))
+      #|  \226\136\128 p : List[Real], nonconstant(p) \226\134\146 (real_of_num(0) < LAST(poly_diff(p))) == (real_of_num(0) < LAST(p))
+      #|  real_of_num(0) < LAST(poly_diff((p : List[Real])))
+      #|  LAST(poly_diff((p : List[Real]))) < real_of_num(0)
+      #|  LAST((p : List[Real])) < real_of_num(0)
+      #|  LENGTH(poly_diff((p : List[Real]))) == PRE(LENGTH(p))
+      #|  1 < LENGTH((p : List[_]))
+      #|  \226\136\128 p : List[Real], nonconstant(p) \226\134\146 normal(poly_diff(p))
+      #|  real_of_num(0) < LAST(poly_diff((p : List[Real])))
+      #|  \226\136\128 p : List[Real], nonconstant(p) && (\226\136\131 X : Real, \226\136\128 x : Real, X < x \226\134\146 real_of_num(0) < poly(poly_diff(p), x)) \226\134\146 real_of_num(0) < LAST(p)
+      #|  (n : Num) => LAST((p : List[Real])) * pow(real_of_num(n), degree(p))
+      #|  real_of_num(1)
+      #|  \226\136\128 p : List[Real], nonconstant(p) && real_of_num(0) < LAST(p) \226\134\146 mono_unbounded_above((n : Num) => poly(p, real_of_num(n)))
+      #|  real_of_num(0) == real_of_num(0) * real_of_num(0)
+      #|  real_of_num(0) < ((y : Real) - real_of_num((K : Num))) * poly(poly_diff((p : List[Real])), (x : Real))
+      #|  real_of_num(0) < poly(poly_diff((p : List[Real])), (x : Real))
+      #|  real_of_num(0) < (y : Real) - real_of_num((K : Num))
+      #|  (N : Num) < (K : Num)
+      #|  real_of_num((N : Num)) < real_of_num((K : Num))
+      #|  (x : Real) <= real_of_num(0) && real_of_num(0) < (y : Real) \226\134\146 x - y <= real_of_num(0)
+      #|  poly((p : List[Real]), (y : Real)) - poly(p, real_of_num((K : Num))) <= real_of_num(0)
+      #|  (y : Real)
+      #|  real_of_num((K : Num))
+      #|  (p : List[Real])
+      #|  real_of_num((N : Num)) < (y : Real) && (X : Real) < y
+      #|  real_of_num((K : Num))
+      #|  \226\136\131 K : Num, max((X : Real), real_of_num((N : Num))) < real_of_num(K)
+      #|  real_of_num(0)
+      #|  mono_unbounded_above((n : Num) => poly((p : List[Real]), real_of_num(n)))
+      #|  nonconstant((p : List[Real])) && (\226\136\131 X : Real, \226\136\128 x : Real, X < x \226\134\146 real_of_num(0) < poly(poly_diff(p), x)) \226\134\146 (\226\136\131 Y : Real, \226\136\128 y : Real, Y < y \226\134\146 real_of_num(0) < poly(p, y))
+      #|  LAST(poly_diff((p : List[Real]))) < real_of_num(0)
+      #|  \226\136\128 p : List[Real], nonconstant(p) && (\226\136\131 X : Real, \226\136\128 x : Real, X < x \226\134\146 poly(poly_diff(p), x) < real_of_num(0)) \226\134\146 LAST(p) < real_of_num(0)
+      #|  (n : Num) => LAST((p : List[Real])) * pow(real_of_num(n), degree(p))
+      #|  real_of_num(1)
+      #|  \226\136\128 p : List[Real], nonconstant(p) && LAST(p) < real_of_num(0) \226\134\146 mono_unbounded_below((n : Num) => poly(p, real_of_num(n)))
+      #|  ((y : Real) - real_of_num((K : Num))) * poly(poly_diff((p : List[Real])), (x : Real)) < real_of_num(0)
+      #|  poly(poly_diff((p : List[Real])), (x : Real)) < real_of_num(0)
+      #|  real_of_num(0) < (y : Real) - real_of_num((K : Num))
+      #|  (N : Num) < (K : Num)
+      #|  real_of_num((N : Num)) < real_of_num((K : Num))
+      #|  real_of_num(0) <= (x : Real) && (y : Real) < real_of_num(0) \226\134\146 real_of_num(0) <= x - y
+      #|  real_of_num(0) <= poly((p : List[Real]), (y : Real)) - poly(p, real_of_num((K : Num)))
+      #|  (y : Real)
+      #|  real_of_num((K : Num))
+      #|  (p : List[Real])
+      #|  real_of_num((N : Num)) < (y : Real) && (X : Real) < y
+      #|  real_of_num((K : Num))
+      #|  \226\136\131 K : Num, max((X : Real), real_of_num((N : Num))) < real_of_num(K)
+      #|  real_of_num(0)
+      #|  mono_unbounded_below((n : Num) => poly((p : List[Real]), real_of_num(n)))
+      #|  nonconstant((p : List[Real])) && (\226\136\131 X : Real, \226\136\128 x : Real, X < x \226\134\146 poly(poly_diff(p), x) < real_of_num(0)) \226\134\146 (\226\136\131 Y : Real, \226\136\128 y : Real, Y < y \226\134\146 poly(p, y) < real_of_num(0))
+      #|  \226\136\128 k : Num, 0 < k && EVEN(k) \226\134\146 mono_unbounded_above((n : Num) => pow(-real_of_num(n), k))
+      #|  \226\136\128 k : Num, 0 < k && ODD(k) \226\134\146 mono_unbounded_below((n : Num) => pow(-real_of_num(n), k))
+      #|  \226\136\128 t : List[_], \226\136\128 h : _, ODD(LENGTH(CONS(h, t))) == EVEN(LENGTH(t))
+      #|  \226\136\128 t : List[_], \226\136\128 h : _, EVEN(LENGTH(CONS(h, t))) == ODD(LENGTH(t))
+      #|  !((e : Real) == real_of_num(0))
+      #|  inv((e : Real))
+      #|  inv((b : Real) + real_of_num(1)) * (b + real_of_num(1)) == real_of_num(1)
+      #|  (b : Real) + (k : Real)
+      #|  abs((a : Real)) / (e : Real)
+      #|  real_of_num(0) < (b : Real) + (k : Real)
+      #|  (k : Real) == real_of_num(1)
+      #|  !(abs((a : Real)) == real_of_num(0))
+      #|  (b : Real) + ((a : Real) - b) == a
+      #|  (k : Real) == abs((a : Real)) / (e : Real) - (b : Real)
+      #|  real_of_num(1) <= abs((a : Real)) / (e : Real) - (b : Real)
+      #|  abs((a : Real)) / (e : Real) <= (b : Real) + (k : Real)
+      #|  real_of_num(0) < abs((a : Real)) / (e : Real)
+      #|  abs((a : Real)) / (e : Real) - (b : Real) <= (k : Real)
+      #|  abs((b : Real) + (p : (_) -> Real)((n : _))) == b + p(n)
+      #|  real_of_num(0) < abs((a : Real)) / (e : Real)
+      #|  abs((a : Real)) / (e : Real) - (b : Real) <= (k : Real)
+      #|  (k : _)
+      #|  -(b : Real) < (p : (_) -> Real)((n : _))
+      #|  real_of_num(0) < abs((a : Real)) / (e : Real)
+      #|  abs((a : Real)) / (e : Real) - (b : Real) <= (k : Real)
+      #|  abs((a : Real)) / ((b : Real) + (k : Real))
+      #|  (N : _)
+      #|  (k : Real)
+      #|  (k : Real) == max(real_of_num(1), abs((a : Real)) / (e : Real) - (b : Real))
+      #|  (a : Real) == real_of_num(0)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 p : (Num) -> Real, mono_unbounded_above((n : Num) => p(n)) \226\134\146 tends_num_real((n : Num) => a / (b + p(n)), real_of_num(0))
+      #|  (N : _)
+      #|  (N : _)
+      #|  \226\136\128 p : (Num) -> Real, tends_num_real((n : Num) => p(n), real_of_num(0)) == tends_num_real((n : Num) => -p(n), real_of_num(0))
+      #|  -(y : Real) + -(z : Real) == -(y + z)
+      #|  -((x : Real) * (y : Real)) == x * -y
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, -(x / (y + z)) == x / (-y + -z)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 p : (Num) -> Real, mono_unbounded_below((n : Num) => p(n)) \226\134\146 tends_num_real((n : Num) => a / (b + p(n)), real_of_num(0))
+      #|  (mono_unbounded : ((Num) -> Real) -> Bool)((p : (Num) -> Real)) == (mono_unbounded_above(p) || mono_unbounded_below(p))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 p : (Num) -> Real, mono_unbounded(p) \226\134\146 tends_num_real((n : Num) => a / (b + p(n)), real_of_num(0))
+      #|  (N : Num) <= (n : Num) && (N' : Num) <= n
+      #|  max((c : Real), real_of_num(1)) * max(c, real_of_num(1))
+      #|  max((c : Real), real_of_num(1))
+      #|  nmax((N : Num), (N' : Num))
+      #|  real_of_num(0) <= max((c : Real), real_of_num(1))
+      #|  \226\136\128 p : (Num) -> Real, \226\136\128 q : (Num) -> Real, mono_unbounded_above((n : Num) => p(n)) && mono_unbounded_above((n : Num) => q(n)) \226\134\146 mono_unbounded_above((n : Num) => p(n) * q(n))
+      #|  -((x : Real) * (y : Real)) == x * -y
+      #|  \226\136\128 p : (Num) -> Real, \226\136\128 q : (Num) -> Real, mono_unbounded_above((n : Num) => p(n)) && mono_unbounded_below((n : Num) => q(n)) \226\134\146 mono_unbounded_below((n : Num) => p(n) * q(n))
+      #|  -((x : Real) * (y : Real)) == -x * y
+      #|  \226\136\128 p : (Num) -> Real, \226\136\128 q : (Num) -> Real, mono_unbounded_below((n : Num) => p(n)) && mono_unbounded_above((n : Num) => q(n)) \226\134\146 mono_unbounded_below((n : Num) => p(n) * q(n))
+      #|  (x : Real) * (y : Real) == -x * -y
+      #|  \226\136\128 p : (Num) -> Real, \226\136\128 q : (Num) -> Real, mono_unbounded_below((n : Num) => p(n)) && mono_unbounded_below((n : Num) => q(n)) \226\134\146 mono_unbounded_above((n : Num) => p(n) * q(n))
+      #|  \226\136\128 p : (Num) -> Real, \226\136\128 q : (Num) -> Real, mono_unbounded((n : Num) => p(n)) && mono_unbounded((n : Num) => q(n)) \226\134\146 mono_unbounded((n : Num) => p(n) * q(n))
+      #|  (n : _) => -(g : (_) -> Real)(n)
+      #|  (k : _)
+      #|  \226\136\128 k : Real, \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, real_of_num(0) < k && tends_num_real((n : Num) => f(n) / g(n), k) && mono_unbounded_below(g) \226\134\146 mono_unbounded_below(f)
+      #|  (n : Num) => LAST((p : List[Real])) * pow(real_of_num(n), degree(p))
+      #|  real_of_num(1)
+      #|  (n : Num) => LAST((p : List[Real])) * pow(real_of_num(n), degree(p))
+      #|  real_of_num(1)
+      #|  LAST((p : List[Real])) < real_of_num(0)
+      #|  \226\136\128 p : List[Real], nonconstant(p) \226\134\146 mono_unbounded((n : Num) => poly(p, real_of_num(n)))
+      #|  (pneg_aux : (Num, List[Real]) -> List[Real])((n : Num), NIL) == NIL && pneg_aux(n, CONS((h : Real), (t : List[Real]))) == CONS(pow(-real_of_num(1), n) * h, pneg_aux(SUC(n), t))
+      #|  (pneg : (List[Real]) -> List[Real])(NIL) == NIL && pneg(CONS((h : Real), (t : List[Real]))) == pneg_aux(0, CONS(h, t))
+      #|  \226\136\128 t : List[Real], \226\136\128 n : Num, pneg_aux(SUC(SUC(n)), t) == pneg_aux(n, t)
+      #|  \226\136\128 p : List[Real], neg(neg(p)) == p
+      #|  \226\136\128 p : List[Real], \226\136\128 n : Num, neg(pneg_aux(SUC(n), p)) == pneg_aux(n, p)
+      #|  pow(-real_of_num(1), (n : Num)) == real_of_num(1)
+      #|  \226\136\128 k : Real, \226\136\128 p : List[Real], \226\136\128 n : Num, EVEN(n) \226\134\146 poly(p, -k) == poly(pneg_aux(n, p), k)
+      #|  poly(pneg_aux(0, CONS((h : Real), (t : List[Real]))), (x : Real)) == poly(CONS(h, t), -x)
+      #|  \226\136\128 p : List[Real], \226\136\128 x : Real, poly(p, -x) == poly(pneg(p), x)
+      #|  degree(NIL) == 0
+      #|  \226\136\128 x : Num, EVEN(SUC(x)) == ODD(x)
+      #|  \226\136\128 x : Num, ODD(SUC(x)) == EVEN(x)
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 p : _, pneg(CONS((h : Real), (t : List[Real]))) == CONS(h, neg(pneg(t)))
+      #|  \226\136\128 p : List[Real], (pneg(p) == NIL) == (p == NIL)
+      #|  \226\136\128 p : List[Real], \226\136\128 n : Num, (pneg_aux(n, p) == NIL) == (p == NIL)
+      #|  \226\136\128 p : List[Real], (poly_cmul((c : Real), p) == NIL) == (p == NIL)
+      #|  \226\136\128 p : List[Real], (neg(p) == NIL) == (p == NIL)
+      #|  !(poly_cmul(-real_of_num(1), (t : List[Real])) == NIL)
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 p : List[Real], !(p == NIL) \226\134\146 LAST(neg(p)) == -LAST(p)
+      #|  !(neg(pneg((t : List[Real]))) == NIL)
+      #|  EVEN(degree((t : List[Real])))
+      #|  normal((t : List[Real]))
+      #|  !(neg(pneg((t : List[Real]))) == NIL)
+      #|  ODD(degree((t : List[Real])))
+      #|  normal((t : List[Real]))
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 p : List[Real], normal(p) \226\134\146 (EVEN(degree(p)) \226\134\146 LAST(p) == LAST(pneg(p))) && (ODD(degree(p)) \226\134\146 LAST(p) == -LAST(pneg(p)))
+      #|  \226\136\128 p : List[Real], \226\136\128 n : Num, LENGTH(pneg_aux(n, p)) == LENGTH(p)
+      #|  \226\136\128 p : List[Real], LENGTH(pneg(p)) == LENGTH(p)
+      #|  !(pneg_aux(SUC((n : Num)), (t : List[Real])) == NIL)
+      #|  !(-real_of_num(1) == real_of_num(0))
+      #|  (n : Num)
+      #|  -real_of_num(1)
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 p : List[Real], \226\136\128 n : Num, !(p == NIL) \226\134\146 (LAST(p) == real_of_num(0)) == (LAST(pneg_aux(n, p)) == real_of_num(0))
+      #|  \226\136\128 p : List[Real], \226\136\128 n : _, !(p == NIL) \226\134\146 (LAST(p) == real_of_num(0)) == (LAST(pneg(p)) == real_of_num(0))
+      #|  LENGTH((p : List[_])) == 0
+      #|  degree((p : List[Real]))
+      #|  (p : List[Real])
+      #|  normal((p : List[Real]))
+      #|  \226\136\128 p : List[Real], !(p == NIL) \226\134\146 LAST(pneg(p)) == LAST(p) || LAST(pneg(p)) == -LAST(p)
+      #|  !((p : List[_]) == NIL)
+      #|  (p : List[Real])
+      #|  !((p : List[_]) == NIL)
+      #|  (p : List[Real])
+      #|  \226\136\128 p : List[Real], normal(p) == normal(pneg(p))
+      #|  !(pow(-real_of_num(1), (n : Num)) == real_of_num(0))
+      #|  !(pow(-real_of_num(1), (n : Num)) == real_of_num(0))
+      #|  \226\136\128 p : List[Real], \226\136\128 n : Num, LENGTH(normalize(pneg_aux(n, p))) == LENGTH(normalize(p))
+      #|  \226\136\128 p : List[Real], \226\136\128 n : _, LENGTH(normalize(pneg(p))) == LENGTH(normalize(p))
+      #|  \226\136\128 p : List[Real], degree(pneg(p)) == degree(p)
+      #|  \226\136\128 p : List[Real], (pneg(p) == [(x : Real)]) == (p == [x])
+      #|  \226\136\128 p : List[Real], nonconstant(pneg(p)) == nonconstant(p)
+      #|  \226\136\128 p : List[Real], nonconstant(p) && EVEN(degree(p)) && LAST(p) < real_of_num(0) \226\134\146 mono_unbounded_below((n : Num) => poly(p, -real_of_num(n)))
+      #|  (-(x : Real) == (y : Real)) == (x == -y)
+      #|  \226\136\128 p : List[Real], normal(p) \226\134\146 (EVEN(degree(p)) \226\134\146 LAST(pneg(p)) == LAST(p)) && (ODD(degree(p)) \226\134\146 LAST(pneg(p)) == -LAST(p))
+      #|  LAST(pneg((p : List[Real]))) == -LAST(p)
+      #|  \226\136\128 p : List[Real], nonconstant(p) && ODD(degree(p)) && LAST(p) < real_of_num(0) \226\134\146 mono_unbounded_above((n : Num) => poly(p, -real_of_num(n)))
+      #|  \226\136\128 p : List[Real], nonconstant(p) && EVEN(degree(p)) && real_of_num(0) < LAST(p) \226\134\146 mono_unbounded_above((n : Num) => poly(p, -real_of_num(n)))
+      #|  LAST(pneg((p : List[Real]))) == -LAST(p)
+      #|  \226\136\128 p : List[Real], nonconstant(p) && ODD(degree(p)) && real_of_num(0) < LAST(p) \226\134\146 mono_unbounded_below((n : Num) => poly(p, -real_of_num(n)))
+      #|  \226\136\128 p : List[Real], \226\136\128 n : _, LENGTH(normalize(pneg(p))) == LENGTH(normalize(p))
+      #|  real_of_num((n : Num)) * (h : Real)
+      #|  !(SUC((n : Num)) == 0)
+      #|  !(SUC((x : Num)) == 0)
+      #|  normal((t : List[Real]))
+      #|  !(real_of_num((n : Num)) * (h : Real) == real_of_num(0))
+      #|  !((h : Real) == real_of_num(0))
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 p : List[Real], \226\136\128 n : Num, !(n == 0) \226\134\146 normal(p) == normal(poly_diff_aux(n, p))
+      #|  !(1 == 0)
+      #|  (h : Real)
+      #|  normal((t : List[Real]))
+      #|  !(1 == 0)
+      #|  \226\136\128 p : List[Real], nonconstant(p) \226\134\146 normal(poly_diff(p))
+      #|  \226\136\128 p : List[Real], \226\136\128 n : Num, !(n == 0) \226\134\146 normal(poly_diff_aux(n, p)) == normal(p)
+      #|  (h : Real)
+      #|  normal(poly_diff_aux(SUC((m : Num)), (t : List[Real])))
+      #|  (h : Real)
+      #|  normal(poly_diff_aux(SUC((n : Num)), (t : List[Real])))
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 p : List[Real], \226\136\128 m : Num, \226\136\128 n : Num, !(n == 0) && !(m == 0) && normal(p) \226\134\146 degree(poly_diff_aux(n, p)) == degree(poly_diff_aux(m, p))
+      #|  nonconstant((t : List[Real]))
+      #|  degree([real_of_num((n : Num)) * (h : Real), real_of_num(SUC(n)) * (x : Real)]) == 1
+      #|  !(SUC((n : Num)) == 0)
+      #|  !(real_of_num(SUC((n : Num))) * (x : Real) == real_of_num(0))
+      #|  normal([(h : Real), (x : Real)])
+      #|  LENGTH([(h : _), (x : _)]) == 2
+      #|  normalize([(h : Real), (x : Real)]) == [h, x]
+      #|  degree([(h : Real), (x : Real)]) == 1
+      #|  !((x : Real) == real_of_num(0))
+      #|  \226\136\131 x : _, (t : List[_]) == [x]
+      #|  normal(poly_diff_aux(SUC((n : Num)), (t : List[Real])))
+      #|  normal((t : List[Real]))
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 p : List[Real], \226\136\128 n : Num, nonconstant(p) \226\134\146 EVEN(degree(p)) == EVEN(degree(poly_diff_aux(n, p))) && ODD(degree(p)) == ODD(degree(poly_diff_aux(n, p)))
+      #|  normal(poly_diff_aux(1, (t' : List[Real])))
+      #|  normal(poly_diff_aux(SUC(1), (t' : List[Real])))
+      #|  normal((t' : List[Real]))
+      #|  \226\136\131 h' : _, \226\136\131 t' : List[_], (t : List[_]) == CONS(h', t')
+      #|  nonconstant((t : List[Real]))
+      #|  1 + (x : Num) == SUC(x)
+      #|  !(real_of_num(1) == real_of_num(0))
+      #|  !(real_of_num(1) * (x : Real) == real_of_num(0))
+      #|  !((x : Real) == real_of_num(0))
+      #|  \226\136\131 x : _, (t : List[_]) == [x]
+      #|  normal((t : List[Real]))
+      #|  !(1 == 0)
+      #|  \226\136\128 p : List[Real], \226\136\128 n : _, nonconstant(p) \226\134\146 EVEN(degree(p)) == ODD(degree(poly_diff(p))) && ODD(degree(p)) == EVEN(degree(poly_diff(p)))
+      #|  \226\136\128 p : List[Real], \226\136\128 n : _, nonconstant(p) \226\134\146 ODD(degree(poly_diff(p))) == EVEN(degree(p)) && EVEN(degree(poly_diff(p))) == ODD(degree(p))
+      #|  \226\136\128 p : List[Real], normal(p) && 0 < degree(p) \226\134\146 nonconstant(p)
+      #|  \226\136\128 n : Num, \226\136\128 m : Num, n <= nmax(n, m) && m <= nmax(n, m)
+      #|  (-real_of_num((k : Num)) - (y : Real)) * poly(poly_diff((p : List[Real])), (x : Real)) < real_of_num(0)
+      #|  real_of_num(0) < poly((p : List[Real]), -real_of_num((k : Num))) - poly(p, (y : Real))
+      #|  real_of_num(0) < poly((p : List[Real]), -real_of_num((k : Num)))
+      #|  (N : Num) <= (k : Num)
+      #|  -real_of_num((M : Num))
+      #|  -real_of_num((k : Num))
+      #|  poly(poly_diff((p : List[Real])), (x : Real)) < real_of_num(0)
+      #|  real_of_num(0) < -real_of_num((k : Num)) - (y : Real)
+      #|  -real_of_num((k : Num))
+      #|  (y : Real)
+      #|  (p : List[Real])
+      #|  ((x : Real) < (y : Real)) == !(y <= x)
+      #|  -real_of_num((k : Num))
+      #|  (k : Num) == nmax((N : Num), (M : Num))
+      #|  (M : Num)
+      #|  -((X : Real) - real_of_num(1))
+      #|  real_of_num(0)
+      #|  !((x : Real) < real_of_num(0) && real_of_num(0) < x)
+      #|  -real_of_num((M : Num))
+      #|  -real_of_num(nmax((M : Num), (N : Num))) < (X : Real)
+      #|  (N : Num) <= nmax((M : Num), N)
+      #|  nmax((M : Num), (N : Num))
+      #|  -real_of_num((M : Num)) <= (X : Real) - real_of_num(1)
+      #|  (M : Num)
+      #|  -((X : Real) - real_of_num(1))
+      #|  real_of_num(0)
+      #|  mono_unbounded_above((n : Num) => poly(poly_diff((p : List[Real])), -real_of_num(n)))
+      #|  ((x : Real) < (y : Real)) == (!(y < x) && !(y == x))
+      #|  EVEN(degree(poly_diff((p : List[Real]))))
+      #|  nonconstant(poly_diff((p : List[Real])))
+      #|  (X : Real) - real_of_num(1)
+      #|  \226\136\131 x : Real, poly_diff((p : List[Real])) == [x]
+      #|  !((x : Real) < real_of_num(0) && real_of_num(0) < x)
+      #|  -real_of_num((M : Num))
+      #|  -real_of_num(nmax((M : Num), (N : Num))) < (X : Real)
+      #|  (N : Num) <= nmax((M : Num), N)
+      #|  nmax((M : Num), (N : Num))
+      #|  -real_of_num((M : Num)) <= (X : Real) - real_of_num(1)
+      #|  (M : Num)
+      #|  -((X : Real) - real_of_num(1))
+      #|  real_of_num(0)
+      #|  mono_unbounded_above((n : Num) => poly(poly_diff((p : List[Real])), -real_of_num(n)))
+      #|  nonconstant(poly_diff((p : List[Real])))
+      #|  ODD(degree(poly_diff((p : List[Real]))))
+      #|  ((x : Real) < (y : Real)) == (!(x == y) && !(y < x))
+      #|  LAST(pneg((p : List[Real]))) == LAST(p)
+      #|  !(LENGTH((p : List[_])) == 1)
+      #|  !(LENGTH((p : List[_])) == 0)
+      #|  normalize((p : List[Real])) == p
+      #|  (n : Num) => LAST(pneg((p : List[Real]))) * pow(real_of_num(n), degree(pneg(p)))
+      #|  real_of_num(1)
+      #|  degree((p : List[Real]))
+      #|  mono_unbounded_above((n : Num) => poly((p : List[Real]), -real_of_num(n)))
+      #|  \226\136\128 p : List[Real], nonconstant(p) && (\226\136\131 X : Real, \226\136\128 x : Real, x < X \226\134\146 poly(poly_diff(p), x) < real_of_num(0)) \226\134\146 (\226\136\131 Y : Real, \226\136\128 y : Real, y < Y \226\134\146 real_of_num(0) < poly(p, y))
+      #|  real_of_num(0) < (-real_of_num((k : Num)) - (y : Real)) * poly(poly_diff((p : List[Real])), (x : Real))
+      #|  poly((p : List[Real]), -real_of_num((k : Num))) - poly(p, (y : Real)) < real_of_num(0)
+      #|  poly((p : List[Real]), -real_of_num((k : Num))) < real_of_num(0)
+      #|  (N : Num) <= (k : Num)
+      #|  -real_of_num((M : Num))
+      #|  -real_of_num((k : Num))
+      #|  real_of_num(0) < poly(poly_diff((p : List[Real])), (x : Real))
+      #|  real_of_num(0) < -real_of_num((k : Num)) - (y : Real)
+      #|  -real_of_num((k : Num))
+      #|  (y : Real)
+      #|  (p : List[Real])
+      #|  ((x : Real) < (y : Real)) == !(y <= x)
+      #|  -real_of_num((k : Num))
+      #|  (k : Num) == nmax((N : Num), (M : Num))
+      #|  (M : Num)
+      #|  -((X : Real) - real_of_num(1))
+      #|  real_of_num(0)
+      #|  !((x : Real) < real_of_num(0) && real_of_num(0) < x)
+      #|  -real_of_num((M : Num))
+      #|  -real_of_num(nmax((M : Num), (N : Num))) < (X : Real)
+      #|  (N : Num) <= nmax((M : Num), N)
+      #|  nmax((M : Num), (N : Num))
+      #|  -real_of_num((M : Num)) <= (X : Real) - real_of_num(1)
+      #|  (M : Num)
+      #|  -((X : Real) - real_of_num(1))
+      #|  real_of_num(0)
+      #|  mono_unbounded_below((n : Num) => poly(poly_diff((p : List[Real])), -real_of_num(n)))
+      #|  ((x : Real) < (y : Real)) == (!(y < x) && !(y == x))
+      #|  EVEN(degree(poly_diff((p : List[Real]))))
+      #|  nonconstant(poly_diff((p : List[Real])))
+      #|  (X : Real) - real_of_num(1)
+      #|  \226\136\131 x : Real, poly_diff((p : List[Real])) == [x]
+      #|  !((x : Real) < real_of_num(0) && real_of_num(0) < x)
+      #|  -real_of_num((M : Num))
+      #|  -real_of_num(nmax((M : Num), (N : Num))) < (X : Real)
+      #|  (N : Num) <= nmax((M : Num), N)
+      #|  nmax((M : Num), (N : Num))
+      #|  -real_of_num((M : Num)) <= (X : Real) - real_of_num(1)
+      #|  (M : Num)
+      #|  -((X : Real) - real_of_num(1))
+      #|  real_of_num(0)
+      #|  mono_unbounded_below((n : Num) => poly(poly_diff((p : List[Real])), -real_of_num(n)))
+      #|  nonconstant(poly_diff((p : List[Real])))
+      #|  ODD(degree(poly_diff((p : List[Real]))))
+      #|  ((x : Real) < (y : Real)) == (!(x == y) && !(y < x))
+      #|  LAST(pneg((p : List[Real]))) == LAST(p)
+      #|  !(LENGTH((p : List[_])) == 1)
+      #|  !(LENGTH((p : List[_])) == 0)
+      #|  normalize((p : List[Real])) == p
+      #|  (n : Num) => LAST(pneg((p : List[Real]))) * pow(real_of_num(n), degree(pneg(p)))
+      #|  real_of_num(1)
+      #|  degree((p : List[Real]))
+      #|  mono_unbounded_below((n : Num) => poly((p : List[Real]), -real_of_num(n)))
+      #|  \226\136\128 p : List[Real], nonconstant(p) && (\226\136\131 X : Real, \226\136\128 x : Real, x < X \226\134\146 real_of_num(0) < poly(poly_diff(p), x)) \226\134\146 (\226\136\131 Y : Real, \226\136\128 y : Real, y < Y \226\134\146 poly(p, y) < real_of_num(0))
+      #|  min((X : Real), (Y : Real)) - real_of_num(1)
+      #|  (p : List[Real])
+      #|  \226\136\128 p : List[Real], \226\136\128 X : Real, nonconstant(p) && (\226\136\128 x : Real, x < X \226\134\146 real_of_num(0) < poly(poly_diff(p), x)) \226\134\146 (\226\136\131 Y : Real, Y < X && (\226\136\128 y : Real, y < Y \226\134\146 poly(p, y) < real_of_num(0)))
+      #|  min((X : Real), (Y : Real)) - real_of_num(1)
+      #|  (p : List[Real])
+      #|  \226\136\128 p : List[Real], \226\136\128 X : Real, nonconstant(p) && (\226\136\128 x : Real, x < X \226\134\146 poly(poly_diff(p), x) < real_of_num(0)) \226\134\146 (\226\136\131 Y : Real, Y < X && (\226\136\128 y : Real, y < Y \226\134\146 real_of_num(0) < poly(p, y)))
+      #|  min((X : Real), (Y : Real)) - real_of_num(1)
+      #|  (p : List[Real])
+      #|  \226\136\128 p : List[Real], \226\136\128 p' : List[Real], \226\136\128 X : Real, nonconstant(p) \226\134\146 poly_diff(p) == p' \226\134\146 (\226\136\128 x : Real, x < X \226\134\146 real_of_num(0) < poly(p', x)) \226\134\146 (\226\136\131 Y : Real, Y < X && (\226\136\128 y : Real, y < Y \226\134\146 poly(p, y) < real_of_num(0)))
+      #|  min((X : Real), (Y : Real)) - real_of_num(1)
+      #|  (p : List[Real])
+      #|  \226\136\128 p : List[Real], \226\136\128 p' : List[Real], \226\136\128 X : Real, nonconstant(p) \226\134\146 poly_diff(p) == p' \226\134\146 (\226\136\128 x : Real, x < X \226\134\146 poly(p', x) < real_of_num(0)) \226\134\146 (\226\136\131 Y : Real, Y < X && (\226\136\128 y : Real, y < Y \226\134\146 real_of_num(0) < poly(p, y)))
+      #|  (Y : Real) - real_of_num(1)
+      #|  (X : Real)
+      #|  (p' : List[Real])
+      #|  (p : List[Real])
+      #|  \226\136\128 p : List[Real], \226\136\128 p' : List[Real], \226\136\128 X : Real, nonconstant(p) \226\134\146 poly_diff(p) == p' \226\134\146 (\226\136\128 x : Real, x < X \226\134\146 real_of_num(0) < poly(p', x)) \226\134\146 (\226\136\131 Y : Real, Y < X && (\226\136\128 y : Real, y <= Y \226\134\146 poly(p, y) < real_of_num(0)))
+      #|  (Y : Real) - real_of_num(1)
+      #|  (X : Real)
+      #|  (p' : List[Real])
+      #|  (p : List[Real])
+      #|  \226\136\128 p : List[Real], \226\136\128 p' : List[Real], \226\136\128 X : Real, nonconstant(p) \226\134\146 poly_diff(p) == p' \226\134\146 (\226\136\128 x : Real, x < X \226\134\146 poly(p', x) < real_of_num(0)) \226\134\146 (\226\136\131 Y : Real, Y < X && (\226\136\128 y : Real, y <= Y \226\134\146 real_of_num(0) < poly(p, y)))
+      #|  \226\136\128 p : List[Real], \226\136\128 p' : List[Real], \226\136\128 X : Real, nonconstant(p) \226\134\146 poly_diff(p) == p' \226\134\146 (\226\136\128 x : Real, x < X \226\134\146 poly(p', x) > real_of_num(0)) \226\134\146 (\226\136\131 Y : Real, Y < X && (\226\136\128 y : Real, y <= Y \226\134\146 poly(p, y) < real_of_num(0)))
+      #|  \226\136\128 p : List[Real], \226\136\128 p' : List[Real], \226\136\128 X : Real, nonconstant(p) \226\134\146 poly_diff(p) == p' \226\134\146 (\226\136\128 x : Real, x < X \226\134\146 poly(p', x) < real_of_num(0)) \226\134\146 (\226\136\131 Y : Real, Y < X && (\226\136\128 y : Real, y <= Y \226\134\146 poly(p, y) > real_of_num(0)))
+      #|  (t : List[_]) == NIL
+      #|  !(1 == 0)
+      #|  \226\136\128 p : List[Real], normal(poly_diff(p)) \226\134\146 nonconstant(p)
+      #|  \226\136\128 p : List[Real], nonconstant(p) == normal(poly_diff(p))
+      #|  max((X : Real), (Y : Real)) + real_of_num(1)
+      #|  (p : List[Real])
+      #|  \226\136\128 p : List[Real], \226\136\128 p' : List[Real], \226\136\128 X : Real, nonconstant(p) \226\134\146 poly_diff(p) == p' \226\134\146 (\226\136\128 x : Real, X < x \226\134\146 real_of_num(0) < poly(p', x)) \226\134\146 (\226\136\131 Y : Real, X < Y && (\226\136\128 y : Real, Y <= y \226\134\146 real_of_num(0) < poly(p, y)))
+      #|  max((X : Real), (Y : Real)) + real_of_num(1)
+      #|  (p : List[Real])
+      #|  \226\136\128 p : List[Real], \226\136\128 p' : List[Real], \226\136\128 X : Real, nonconstant(p) \226\134\146 poly_diff(p) == p' \226\134\146 (\226\136\128 x : Real, X < x \226\134\146 poly(p', x) < real_of_num(0)) \226\134\146 (\226\136\131 Y : Real, X < Y && (\226\136\128 y : Real, Y <= y \226\134\146 poly(p, y) < real_of_num(0)))
+      #|  \226\136\128 p : List[Real], \226\136\128 p' : List[Real], \226\136\128 X : Real, nonconstant(p) \226\134\146 poly_diff(p) == p' \226\134\146 (\226\136\128 x : Real, X < x \226\134\146 poly(p', x) > real_of_num(0)) \226\134\146 (\226\136\131 Y : Real, X < Y && (\226\136\128 y : Real, Y <= y \226\134\146 poly(p, y) > real_of_num(0)))
+      #|  \226\136\128 p : List[Real], \226\136\128 p' : List[Real], \226\136\128 X : Real, nonconstant(p) \226\134\146 poly_diff(p) == p' \226\134\146 (\226\136\128 x : Real, X < x \226\134\146 poly(p', x) < real_of_num(0)) \226\134\146 (\226\136\131 Y : Real, X < Y && (\226\136\128 y : Real, Y <= y \226\134\146 poly(p, y) < real_of_num(0)))
       #|LIM_INV_1N =  |- ((#tends_num_real:fun(fun(num,real),fun(real,bool)) (\n:num. ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) n:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))
       #|LIM_INV_CONST =  |- (#forall:fun(fun(real,bool),bool) (\c:real. ((#tends_num_real:fun(fun(num,real),fun(real,bool)) (\n:num. ((#real_div:fun(real,fun(real,real)) c:real) (#real_of_num:fun(num,real) n:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))
       #|LIM_INV_1NP =  |- (#forall:fun(fun(real,bool),bool) (\c:real. (#forall:fun(fun(num,bool),bool) (\k:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) k:num)) ((#tends_num_real:fun(fun(num,real),fun(real,bool)) (\n:num. ((#real_div:fun(real,fun(real,real)) c:real) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) n:num)) k:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))
