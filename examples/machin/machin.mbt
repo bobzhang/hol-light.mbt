@@ -207,7 +207,7 @@ fn step_6() -> Unit raise {
     let t57 = @tactics.match_mp_tac(th2)
     @tactics.orelse_tac(@tactics.match_mp_tac(th1), t57)
   }
-  let le_tm = @term_syntax.parse_term("op_lt_eq")
+  let le_tm = @term_syntax.parse_term("real_le")
   bound_sumprod_tac_c.set(fn(x58 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     let (asl, w) as gl = x58
     let (l, r) = @kernel.dest_comb(w)
@@ -923,7 +923,7 @@ fn step_15() -> Unit raise {
   let n_tm = @term_syntax.parse_term("(n : Num)")
   let k_tm = @term_syntax.parse_term("(k : Num)")
   let inv_tm = @term_syntax.parse_term("inv")
-  let le_tm = @term_syntax.parse_term("op_lt_eq")
+  let le_tm = @term_syntax.parse_term("real_le")
   let pow2_tm = @term_syntax.parse_term("pow(real_of_num(2))")
   let pth = @bool.specl(@list.List([x_tm, n_tm, k_tm]), mclaurin_atn_approx())
   let clean_rule : (@kernel.Thm) -> @kernel.Thm raise = @simp.rewrite_rule(@list.List([@realax.real_pow()]))
@@ -1828,13 +1828,13 @@ fn step_40() -> Unit raise {
   let eighth = @num.div_num(@num.num_of_int64(1L), t720)
   let atn_tm = @term_syntax.parse_term("atn")
   let eighth_tm = @term_syntax.parse_term("real_of_num(1) / real_of_num(8)")
-  let t721 = @term_syntax.parse_term("op_star")
+  let t721 = @term_syntax.parse_term("real_mul")
   let mk_mul : (@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise = fn(x724 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
     fn(x725 : @kernel.Term) -> @kernel.Term raise {
       ((x722 : @kernel.Term, x723 : @kernel.Term) => @basics.mk_binop(t721, x722, x723))(x724, x725)
     }
   }
-  let t726 = @term_syntax.parse_term("op_plus")
+  let t726 = @term_syntax.parse_term("real_add")
   let mk_add : (@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise = fn(x729 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
     fn(x730 : @kernel.Term) -> @kernel.Term raise {
       ((x727 : @kernel.Term, x728 : @kernel.Term) => @basics.mk_binop(t726, x727, x728))(x729, x730)
