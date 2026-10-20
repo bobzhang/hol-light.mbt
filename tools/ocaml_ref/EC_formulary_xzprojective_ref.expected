@@ -80762,73 +80762,73 @@ EC/formulary_xzprojective quotations (236):
   mladd_1987_m (f:A ring,a:A,b:A) a24 X1 (X2,Z2) (X3,Z3) =\n        let A = ring_add f X2 Z2 in\n        let AA = ring_pow f A 2 in\n        let B = ring_sub f X2 Z2 in\n        let BB = ring_pow f B 2 in\n        let E = ring_sub f AA BB in\n        let C = ring_add f X3 Z3 in\n        let D = ring_sub f X3 Z3 in\n        let DA = ring_mul f D A in\n        let CB = ring_mul f C B in\n        let t0 = ring_add f DA CB in\n        let X5 = ring_pow f t0 2 in\n        let t1 = ring_sub f DA CB in\n        let t2 = ring_pow f t1 2 in\n        let Z5 = ring_mul f X1 t2 in\n        let X4 = ring_mul f AA BB in\n        let t3 = ring_mul f a24 E in\n        let t4 = ring_add f BB t3 in\n        let Z4 = ring_mul f E t4 in\n        (X4,Z4),(X5,Z5)
   forall f (a:A) b a24 X1 X2 Z2 X3 Z3.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        a24 IN ring_carrier f /\\ X1 IN ring_carrier f /\\\n        X2 IN ring_carrier f /\\ Z2 IN ring_carrier f /\\\n        X3 IN ring_carrier f /\\ Z3 IN ring_carrier f /\\\n        ring_mul f (ring_of_num f 4) a24 = ring_add f a (ring_of_num f 2)\n        ==> mladd_1987_m (f,a,b) a24 X1 (X2,Z2) (X3,Z3) =\n                (montgomery_xzdouble (f,a,b) (X2,Z2),\n                 montgomery_xzdiffadd (f,a,b) (X1,ring_1 f) (X2,Z2) (X3,Z3))
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   okeya_sakurai_1 (f:A ring,a:A,b:A) (x,y) (X1,Z1) (X2,Z2) =\n        let a2 = ring_add f a a\n        and b2 = ring_add f b b in\n        let t1 = ring_mul f x Z1 in\n        let t2 = ring_add f X1 t1 in\n        let t3 = ring_sub f X1 t1 in\n        let t3 = ring_mul f t3 t3 in\n        let t3 = ring_mul f t3 X2 in\n        let t1 = ring_mul f a2 Z1 in\n        let t2 = ring_add f t2 t1 in\n        let t4 = ring_mul f x X1 in\n        let t4 = ring_add f t4 Z1 in\n        let t2 = ring_mul f t2 t4 in\n        let t1 = ring_mul f t1 Z1 in\n        let t2 = ring_sub f t2 t1 in\n        let t2 = ring_mul f t2 Z2 in\n        let y' = ring_sub f t2 t3 in\n        let t1 = ring_mul f b2 y in\n        let t1 = ring_mul f t1 Z1 in\n        let t1 = ring_mul f t1 Z2 in\n        let x' = ring_mul f t1 X1 in\n        let z' = ring_mul f t1 Z1 in\n        (x',y',z')
   ~(ring_sub f x1 x:A = ring_0 f)
   ~(ring_of_num f 2:A = ring_0 f)
@@ -80849,152 +80849,152 @@ EC/formulary_xzprojective quotations (236):
   f:A ring
   forall f (a:A) b x y p X1 Z1 X2 Z2.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        montgomery_curve (f,a,b) (SOME(x,y)) /\\ ~(y = ring_0 f) /\\\n        montgomery_curve (f,a,b) p /\\\n        montgomery_xz f p (X1,Z1) /\\\n        montgomery_xz f (montgomery_add(f,a,b) (SOME(x,y)) p) (X2,Z2)\n        ==> let x',y',z' = okeya_sakurai_1 (f,a,b) (x,y) (X1,Z1) (X2,Z2) in\n            p = if z' = ring_0 f then\n                 (if Z1 = ring_0 f then NONE else SOME(x,ring_neg f y))\n                else SOME(ring_div f x' z',ring_div f y' z')
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
 mladd_1987_m =  |- (#forall:fun(fun('A,bool),bool) (\a:'A. (#forall:fun(fun('A,bool),bool) (\b:'A. (#forall:fun(fun('A,bool),bool) (\a24:'A. (#forall:fun(fun('A,bool),bool) (\X1:'A. (#forall:fun(fun('A,bool),bool) (\X3:'A. (#forall:fun(fun('A,bool),bool) (\Z3:'A. (#forall:fun(fun(ring('A),bool),bool) (\f:ring('A). (#forall:fun(fun('A,bool),bool) (\X2:'A. (#forall:fun(fun('A,bool),bool) (\Z2:'A. ((#=:fun(prod(prod('A,'A),prod('A,'A)),fun(prod(prod('A,'A),prod('A,'A)),bool)) (((((#mladd_1987_m:fun(prod(ring('A),prod('A,'A)),fun('A,fun('A,fun(prod('A,'A),fun(prod('A,'A),prod(prod('A,'A),prod('A,'A))))))) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) b:'A))) a24:'A) X1:'A) ((#,:fun('A,fun('A,prod('A,'A))) X2:'A) Z2:'A)) ((#,:fun('A,fun('A,prod('A,'A))) X3:'A) Z3:'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\A:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\AA:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\B:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\BB:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\E:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\C:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\D:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\DA:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\CB:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\t0:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\X5:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\t1:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\t2:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\Z5:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\X4:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\t3:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\t4:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#LET:fun(fun('A,prod(prod('A,'A),prod('A,'A))),fun('A,prod(prod('A,'A),prod('A,'A)))) (\Z4:'A. (#LET_END:fun(prod(prod('A,'A),prod('A,'A)),prod(prod('A,'A),prod('A,'A))) ((#,:fun(prod('A,'A),fun(prod('A,'A),prod(prod('A,'A),prod('A,'A)))) ((#,:fun('A,fun('A,prod('A,'A))) X4:'A) Z4:'A)) ((#,:fun('A,fun('A,prod('A,'A))) X5:'A) Z5:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) E:'A) t4:'A))))) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) BB:'A) t3:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) a24:'A) E:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) AA:'A) BB:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) X1:'A) t2:'A))))) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) t1:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) DA:'A) CB:'A))))) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) t0:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) DA:'A) CB:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) C:'A) B:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) D:'A) A:'A))))) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) X3:'A) Z3:'A))))) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) X3:'A) Z3:'A))))) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) AA:'A) BB:'A))))) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) B:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) X2:'A) Z2:'A))))) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) A:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) X2:'A) Z2:'A)))))))))))))))))))))
 MLADD_1987_M =  |- (#forall:fun(fun(ring('A),bool),bool) (\f:ring('A). (#forall:fun(fun('A,bool),bool) (\a:'A. (#forall:fun(fun('A,bool),bool) (\b:'A. (#forall:fun(fun('A,bool),bool) (\a24:'A. (#forall:fun(fun('A,bool),bool) (\X1:'A. (#forall:fun(fun('A,bool),bool) (\X2:'A. (#forall:fun(fun('A,bool),bool) (\Z2:'A. (#forall:fun(fun('A,bool),bool) (\X3:'A. (#forall:fun(fun('A,bool),bool) (\Z3:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#field:fun(ring('A),bool) f:ring('A))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (#ring_char:fun(ring('A),num) f:ring('A))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) a:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) b:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) a24:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) X1:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) X2:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) Z2:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) X3:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) Z3:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#=:fun('A,fun('A,bool)) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) ((#ring_of_num:fun(ring('A),fun(num,'A)) f:ring('A)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) a24:'A)) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) a:'A) ((#ring_of_num:fun(ring('A),fun(num,'A)) f:ring('A)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))))))))) ((#=:fun(prod(prod('A,'A),prod('A,'A)),fun(prod(prod('A,'A),prod('A,'A)),bool)) (((((#mladd_1987_m:fun(prod(ring('A),prod('A,'A)),fun('A,fun('A,fun(prod('A,'A),fun(prod('A,'A),prod(prod('A,'A),prod('A,'A))))))) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) b:'A))) a24:'A) X1:'A) ((#,:fun('A,fun('A,prod('A,'A))) X2:'A) Z2:'A)) ((#,:fun('A,fun('A,prod('A,'A))) X3:'A) Z3:'A))) ((#,:fun(prod('A,'A),fun(prod('A,'A),prod(prod('A,'A),prod('A,'A)))) ((#montgomery_xzdouble:fun(prod(ring('A),prod('A,'A)),fun(prod('A,'A),prod('A,'A))) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) b:'A))) ((#,:fun('A,fun('A,prod('A,'A))) X2:'A) Z2:'A))) ((((#montgomery_xzdiffadd:fun(prod(ring('A),prod('A,'A)),fun(prod('A,'A),fun(prod('A,'A),fun(prod('A,'A),prod('A,'A))))) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) b:'A))) ((#,:fun('A,fun('A,prod('A,'A))) X1:'A) (#ring_1:fun(ring('A),'A) f:ring('A)))) ((#,:fun('A,fun('A,prod('A,'A))) X2:'A) Z2:'A)) ((#,:fun('A,fun('A,prod('A,'A))) X3:'A) Z3:'A)))))))))))))))))))))))
 okeya_sakurai_1 =  |- (#forall:fun(fun('A,bool),bool) (\y:'A. (#forall:fun(fun('A,bool),bool) (\Z2:'A. (#forall:fun(fun('A,bool),bool) (\X2:'A. (#forall:fun(fun('A,bool),bool) (\X1:'A. (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\Z1:'A. (#forall:fun(fun('A,bool),bool) (\a:'A. (#forall:fun(fun(ring('A),bool),bool) (\f:ring('A). (#forall:fun(fun('A,bool),bool) (\b:'A. ((#=:fun(prod('A,prod('A,'A)),fun(prod('A,prod('A,'A)),bool)) ((((#okeya_sakurai_1:fun(prod(ring('A),prod('A,'A)),fun(prod('A,'A),fun(prod('A,'A),fun(prod('A,'A),prod('A,prod('A,'A)))))) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) b:'A))) ((#,:fun('A,fun('A,prod('A,'A))) x:'A) y:'A)) ((#,:fun('A,fun('A,prod('A,'A))) X1:'A) Z1:'A)) ((#,:fun('A,fun('A,prod('A,'A))) X2:'A) Z2:'A))) (((#LET:fun(fun('A,fun('A,prod('A,prod('A,'A)))),fun('A,fun('A,prod('A,prod('A,'A))))) (\a2:'A. (\b2:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t1:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t2:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t3:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t3:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t3:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t1:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t2:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t4:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t4:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t2:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t1:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t2:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t2:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\y':'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t1:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t1:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\t1:'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\x':'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#LET:fun(fun('A,prod('A,prod('A,'A))),fun('A,prod('A,prod('A,'A)))) (\z':'A. (#LET_END:fun(prod('A,prod('A,'A)),prod('A,prod('A,'A))) ((#,:fun('A,fun(prod('A,'A),prod('A,prod('A,'A)))) x':'A) ((#,:fun('A,fun('A,prod('A,'A))) y':'A) z':'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) t1:'A) Z1:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) t1:'A) X1:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) t1:'A) Z2:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) t1:'A) Z1:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) b2:'A) y:'A))))) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) t2:'A) t3:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) t2:'A) Z2:'A))))) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) t2:'A) t1:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) t1:'A) Z1:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) t2:'A) t4:'A))))) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) t4:'A) Z1:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) x:'A) X1:'A))))) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) t2:'A) t1:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) a2:'A) Z1:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) t3:'A) X2:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) t3:'A) t3:'A))))) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) X1:'A) t1:'A))))) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) X1:'A) t1:'A))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) x:'A) Z1:'A)))))) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) a:'A) a:'A)) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) b:'A) b:'A)))))))))))))))))))))
