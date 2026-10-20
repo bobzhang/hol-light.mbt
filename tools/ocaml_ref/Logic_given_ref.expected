@@ -8700,616 +8700,616 @@ Warning: inventing type variables
 0..0..1..3..solved at 8
 0..0..2..4..solved at 8
 Logic/given quotations (610):
-  (FIRSTN 0 l = []) /\\\n   (FIRSTN (SUC n) l = if l = [] then [] else CONS (HD l) (FIRSTN n (TL l)))
-  SUC x <= y ==> x <= y
-  forall n l. LENGTH l <= n ==> (FIRSTN n l = l)
-  forall n. FIRSTN n [] = []
-  forall x n l. MEM x (FIRSTN n l) ==> MEM x l
-  forall x n l. MEM x (FIRSTN (SUC n) l)\n           ==> MEM x (APPEND (FIRSTN n l) [EL n l])
-  x <= n ==> x <= SUC n
-  forall n l. LENGTH l <= n ==> (FIRSTN (SUC n) l = FIRSTN n l)
-  tautologous cl <=> ?p. p IN cl /\\ ~~p IN cl
-  cl subsumes cl' <=> ?i. IMAGE (formsubst i) cl SUBSET cl'
+  (FIRSTN : (Num, List[_]) -> List[_])(0, (l : List[_])) == NIL && FIRSTN(SUC((n : Num)), l) == (if l == NIL { NIL } else { CONS(HD(l), FIRSTN(n, TL(l))) })
+  SUC((x : Num)) <= (y : Num) \226\134\146 x <= y
+  \226\136\128 n : Num, \226\136\128 l : List[_], LENGTH(l) <= n \226\134\146 FIRSTN(n, l) == l
+  \226\136\128 n : Num, (FIRSTN : (Num, List[_]) -> List[_])(n, (NIL : List[_])) == (NIL : List[_])
+  \226\136\128 x : _, \226\136\128 n : Num, \226\136\128 l : List[_], MEM(x, FIRSTN(n, l)) \226\134\146 MEM(x, l)
+  \226\136\128 x : _, \226\136\128 n : Num, \226\136\128 l : List[_], MEM(x, FIRSTN(SUC(n), l)) \226\134\146 MEM(x, APPEND(FIRSTN(n, l), [EL(n, l)]))
+  (x : Num) <= (n : Num) \226\134\146 x <= SUC(n)
+  \226\136\128 n : Num, \226\136\128 l : List[_], LENGTH(l) <= n \226\134\146 FIRSTN(SUC(n), l) == FIRSTN(n, l)
+  (tautologous : ((Form) -> Bool) -> Bool)((cl : (Form) -> Bool)) == (\226\136\131 p : Form, IN(p, cl) && IN(op_tilde_tilde(p), cl))
+  (subsumes : ((Form) -> Bool, (Form) -> Bool) -> Bool)((cl : (Form) -> Bool), (cl' : (Form) -> Bool)) == (\226\136\131 i : (Num) -> Term, SUBSET(IMAGE(formsubst(i), cl), cl'))
   V
-  forall cl. cl subsumes cl
-  forall p. qfree(p)\n        ==> (formsubst (termsubst j o i) p = formsubst j (formsubst i p))
-  forall p. p IN cl1\n        ==> (formsubst (termsubst j o i) p = formsubst j (formsubst i p))
-  IMAGE (formsubst j) cl2 SUBSET cl3
-  IMAGE (formsubst i) cl1 SUBSET cl2
-  termsubst j o (i:num->term)
-  j:num->term
-  i:num->term
-  forall cl1 cl2 cl3. clause cl1 /\\ cl1 subsumes cl2 /\\ cl2 subsumes cl3\n                 ==> cl1 subsumes cl3
-  s SUBSUMES s' <=> forall cl'. cl' IN s' ==> ?cl. cl IN s /\\ cl subsumes cl'
-  forall s. s SUBSUMES s
-  s SUBSUMES s' /\\ t SUBSUMES t' ==> (s UNION t) SUBSUMES (s' UNION t')
-  forall s t u. (forall c. c IN s ==> clause c) /\\ s SUBSUMES t /\\ t SUBSUMES u\n           ==> s SUBSUMES u
-  forall s t u. s SUBSUMES t /\\ s SUBSET u ==> u SUBSUMES t
-  (forall s. s SUBSUMES {}) /\\\n   (forall s. s SUBSUMES (x INSERT t) <=> s SUBSUMES {x} /\\ s SUBSUMES t)
-  forall s t. s SUBSET t ==> t SUBSUMES s
-  allresolvents s1 s2 =\n        {c | ?c1 c2. c1 IN s1 /\\ c2 IN s2 /\\ isaresolvent c (c1,c2)}
-  allntresolvents s1 s2 =\n        {r | r IN allresolvents s1 s2 /\\ ~(tautologous r)}
-  termsubst (termsubst j o i) = termsubst j o termsubst i
-  p:form
-  p:form
-  forall p i j. qfree(p)\n           ==> (formsubst j (formsubst i p) = formsubst (termsubst j o i) p)
-  q:form
-  q:form
-  qfree q
-  formsubst s2 q
-  ~a ==> ~b <=> b ==> a
-  r:form
-  r:form
-  qfree r
-  formsubst s2 (formsubst r2 r) = r
-  r:form
-  (a ==> a') /\\ (b ==> b') ==> a /\\ b ==> a' /\\ b'
-  q IN c2' DIFF IMAGE (formsubst r2) ps2
-  a ==> ~(a /\\ b) ==> ~b
-  x:num
-  FVS c2' INTER FVS c1 = {}
-  ~(x IN FVS(c1))
-  x:num
-  q IN c2' DIFF IMAGE (formsubst r2) ps2
-  qfree q
-  formsubst s2 q
-  forall p. qfree p ==> (formsubst s1 (formsubst r1 p) = p)
-  (formsubst s1 (formsubst r1 q) = q) /\\\n                  (formsubst s1 (formsubst r1 r) = r)
-  formsubst s1
-  r:form
-  q:form IN c1 DIFF ps0
-  x IN FVS(c1)
-  x:num
-  qfree q
-  formsubst r1 q
-  q:form
-  p:form
-  p:form IN c2'
-  forall p. p IN (c1 DIFF ps0 UNION c2' DIFF IMAGE (formsubst r2) ps2)\n          ==> qfree p
-  IMAGE (formsubst k o formsubst i)\n          (c1 DIFF ps0 UNION c2' DIFF IMAGE (formsubst r2) ps2) =\n    IMAGE (formsubst k)\n          (c1 DIFF ps0 UNION c2' DIFF IMAGE (formsubst r2) ps2)
-  k:num->term
-  k = \\x. if x IN FVS(c1) then termsubst j (r1 x)\n                      else termsubst j (s2 x)
-  q:form
-  q:form
-  qfree q
-  ps2 SUBSET c2:form->bool
-  q:form IN ps2
-  x IN FV (formsubst r2 q)
-  a ==> ~(a /\\ b) ==> ~b
-  x:num
-  FVS c2' INTER FVS c1 = {}
-  ~(x IN FVS(c1))
-  x:num
-  formsubst (termsubst j o s2) (formsubst r2 q)
-  formsubst j q = P
-  q:form
-  p:form
-  rrr:form
-  ~~(~~(formsubst j (formsubst r1 p))) =\n                    formsubst j (formsubst r1 p)
-  P = ~~(formsubst j (formsubst r1 p))
-  x IN FVS(c1)
-  x:num
-  formsubst (termsubst j o r1) p
-  p:form
-  ~~P
-  p:form
-  formsubst r1 p
-  p:form
-  p:form
-  ~~p
-  p:form
-  (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-  P:form
-  Unifies j (ps2 UNION {~~ p | p IN IMAGE (formsubst r1) ps0})
-  \\x. if x IN FVS(c1) then termsubst j (r1 x)\n         else termsubst j (s2 x)
-  forall i'. Unifies i' (ps0 UNION {~~ p | p IN IMAGE (formsubst r2) ps2})\n            ==> (forall p. qfree p\n                     ==> (formsubst i' p = formsubst i' (formsubst i p)))
-  {~~ p | p IN IMAGE (formsubst r1) ps0} =\n                    IMAGE (~~) (IMAGE (formsubst r1) ps0)
-  ps2 UNION {~~ p | p IN IMAGE (formsubst r1) ps0}
-  {~~ p | p IN IMAGE (formsubst r2) ps2} =\n                    IMAGE (~~) (IMAGE (formsubst r2) ps2)
-  ps0 UNION {~~p | p IN IMAGE (formsubst r2) ps2}
-  j = mgu (ps2 UNION {~~p | p IN IMAGE (formsubst r1) ps0})
-  i = mgu (ps0 UNION {~~p | p IN IMAGE (formsubst r2) ps2})
-  forall p. qfree p ==> (formsubst s1 (formsubst r1 p) = p)
-  forall p. p IN ps0 ==> (formsubst s1 (formsubst r1 p) = p)
-  p:form
-  IMAGE (formsubst s1 o formsubst r1) ps0 = ps0
-  ps0:form->bool
-  ps1 SUBSET c1':form->bool
-  ~(ps1:form->bool = {})
-  {p | p IN c1 /\\ (formsubst r1 p) IN ps1}
-  ?ps0. ps0 SUBSET c1 /\\ ~(ps0 = {}) /\\\n                      (ps1 = IMAGE (formsubst r1) ps0)
-  q:form
-  q:form
-  formsubst i q = P
-  qfree q
-  forall p. qfree(p) ==> (formsubst s1 (formsubst r1 p) = p)
-  forall p. p IN c1 ==> (formsubst s1 (formsubst r1 p) = p)
-  ps1 SUBSET c1':form->bool
-  (a ==> a') /\\ (b ==> b') ==> a ==> ~(a' /\\ b') ==> ~b
-  x IN FV(formsubst r2 q)
-  x:num
-  FVS c2' INTER FVS c1 = {}
-  ~(x IN FVS(IMAGE (formsubst s1) ps1))
-  x:num
-  formsubst (\\x. termsubst i (s2 x)) (formsubst r2 q)
-  q:form
-  p:form
-  rrr:form
-  q:form
-  q:form
-  q:form
-  p:form
-  ps1 SUBSET c1':form->bool
-  p:form
-  ps1 SUBSET c1':form->bool
-  literal p
-  P = formsubst i (~~p)
-  x IN FVS(IMAGE (formsubst s1) ps1)
-  x:num
-  formsubst (\\x. termsubst i (r1 x)) (formsubst s1 p)
-  p:form
-  rrr:form
-  ~~P
-  \\x. if x IN FVS(IMAGE (formsubst s1) ps1)\n                      then termsubst i (r1 x)\n                      else termsubst i (s2 x)
-  p:form
-  ~~p
-  p:form
-  P:form
-  (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-  i:num->term
-  ~(ps2:form->bool = {})
-  ~(ps1:form->bool = {})
-  ps2 SUBSET c2:form->bool
-  forall p. qfree p\n            ==> (formsubst V p = formsubst s1 (formsubst r1 p))
-  forall p. p IN c1 ==> (formsubst s1 (formsubst r1 p) = p)
-  ps1 SUBSET c1':form->bool
-  (a /\\ b /\\ c /\\ d /\\ e) /\\ (e ==> f)\n                     ==> (a /\\ b /\\ c /\\ d /\\ e) /\\ f
-  IMAGE (formsubst r2) ps2
-  IMAGE (formsubst s1) ps1
-  s2:num->term
-  FVS c1
-  c2:form->bool
-  s1:num->term
-  FVS c2
-  c1:form->bool
-  c2' = IMAGE (formsubst r2) c2
-  r2 = rename c2 (FVS c1)
-  ps1:form->bool
-  ps2:form->bool
-  c1' = IMAGE (formsubst r1) c1
-  r1 = rename c1 (FVS c2)
-  isaresolvent cl (c2,c1)
-  forall c1 c2 cl.\n        clause c1 /\\ clause c2 /\\ isaresolvent cl (c2,c1)\n        ==> ?cl'. isaresolvent cl' (c1,c2) /\\ cl' subsumes cl
-  c2:form->bool
-  c1:form->bool
-  c1:form->bool
-  c2:form->bool
-  cl:form->bool
-  (forall c. c IN A ==> clause c) /\\ (forall c. c IN B ==> clause c)\n   ==> (allresolvents A B) SUBSUMES (allresolvents B A)
-  (allresolvents (A UNION B) C =\n        (allresolvents A C) UNION (allresolvents B C)) /\\\n   (allresolvents A (B UNION C) =\n        (allresolvents A B) UNION (allresolvents A C))
-  A UNION B = (A UNION A) UNION B
-  a UNION b UNION c UNION d UNION e UNION f =\n    a UNION b UNION d UNION (c UNION e) UNION f
-  (forall c. c IN B ==> clause(c)) /\\\n   (forall c. c IN C ==> clause(c))\n   ==> ((allresolvents B (A UNION B)) UNION\n        (allresolvents C (A UNION B UNION C)))\n       SUBSUMES (allresolvents(B UNION C) (A UNION B UNION C))
-  resolvents cl cls = list_of_set(allresolvents {cl} (set_of_list cls))
-  forall c1 c2. clause(c1 UNION c2) <=> clause(c1) /\\ clause(c2)
-  forall c1 c2. clause c2 /\\ c1 SUBSET c2 ==> clause c1
-  forall c1 c2. clause c1 ==> clause (c1 DIFF c2)
-  forall p q r. clause p /\\ clause q /\\ isaresolvent r (p,q) ==> clause r
-  (forall c. c IN s ==> clause c) /\\ (forall c. c IN t ==> clause c)\n   ==> forall c. c IN allresolvents s t ==> clause c
-  ps1:form->bool,ps2:form->bool
-  ps2:form->bool
-  ps1:form->bool
-  c:form->bool
-  IMAGE (\\pss. let i = mgu (FST(pss) UNION {~~ p | p IN SND(pss)}) in\n                     IMAGE (formsubst i)\n                           (c1 DIFF (FST pss) UNION cl2' DIFF (SND pss)))\n          {ps1,ps2 | ps1 IN {ps1 | ps1 SUBSET c1} /\\\n                     ps2 IN {ps2 | ps2 SUBSET cl2'}}
-  clause cl2'
-  forall c1 c2. clause(c1) /\\ clause(c2)\n           ==> FINITE {c | isaresolvent c (c1,c2)}
-  u:(form->bool)->bool
-  {c | isaresolvent c (c1,c2)}
-  c:form->bool
-  allresolvents s t =\n        UNIONS (IMAGE (\\cs. {c | isaresolvent c cs})\n                      {c1,c2 | c1 IN s /\\ c2 IN t})
-  forall s t. FINITE(s) /\\ FINITE(t) /\\\n         (forall c. c IN s ==> clause c) /\\\n         (forall c. c IN t ==> clause c)\n         ==> FINITE(allresolvents s t)
-  (replace cl [] = [cl]) /\\\n   (replace cl (CONS c cls) =\n        if cl subsumes c then CONS cl cls else CONS c (replace cl cls))
-  set_of_list(replace cl t) SUBSUMES set_of_list(CONS cl t)
-  set_of_list(replace cl t) SUBSUMES\n                    set_of_list(CONS cl t)
-  (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-  forall cl lis. (forall c. MEM c lis ==> clause c) /\\ clause cl\n            ==> (forall c. MEM c (replace cl lis) ==> clause c) /\\\n                set_of_list(replace cl lis) SUBSUMES set_of_list(CONS cl lis)
-  incorporate gcl cl current =\n        if tautologous cl \\/ EX (\\c. c subsumes cl) (CONS gcl current)\n        then current else replace cl current
-  set_of_list(replace cl current) SUBSUMES\n               set_of_list (CONS cl current)
-  current:(form->bool)list
-  cl:form->bool
-  set_of_list(t:(form->bool)list)
-  {h:form->bool}
-  l:(form->bool)list
-  CONS (gcl:form->bool) current
-  EX (\\c. c subsumes cl) (CONS gcl current)
-  set_of_list(current:(form->bool)list)
-  EX (\\c. c subsumes cl) (CONS gcl current)
-  tautologous cl
-  forall gcl cl current.\n        (forall c. MEM c current ==> clause c) /\\ clause gcl /\\ clause cl\n        ==> (forall c. MEM c (incorporate gcl cl current) ==> clause c) /\\\n            set_of_list(incorporate gcl cl current)\n                SUBSUMES set_of_list(current) /\\\n            (tautologous cl \\/\n             (gcl INSERT set_of_list(incorporate gcl cl current))\n                SUBSUMES set_of_list(CONS cl current))
-  insert x l = if MEM x l then l else CONS x l
-  step (used,unused) =\n        if unused = [] then (used,unused) else\n        let new = resolvents (HD unused) (CONS (HD unused) used) in\n        (insert (HD unused) used,\n         ITLIST (incorporate (HD unused)) new (TL unused))
-  (step(used,[]) = (used,[])) /\\\n   (step(used,CONS cl cls) =\n        let new = resolvents cl (CONS cl used) in\n        insert cl used,ITLIST (incorporate cl) new cls)
-  (given 0 p = p) /\\\n   (given (SUC n) p = step(given n p))
-  Used init n = set_of_list(FST(given n init))
-  Unused init n = set_of_list(SND(given n init))
-  (Sub init 0 = {}) /\\\n   (Sub init (SUC n) = if SND(given n init) = [] then Sub init n\n                       else HD(SND(given n init)) INSERT (Sub init n))
-  forall i cl. tautologous cl ==> tautologous (IMAGE (formsubst i) cl)
-  cl subsumes cl' /\\ ~(tautologous cl') ==> ~(tautologous cl)
-  (forall c. c IN B ==> clause(c)) /\\\n   (forall c. c IN C ==> clause(c))\n   ==> ((allntresolvents B (A UNION B)) UNION\n        (allntresolvents C (A UNION B UNION C)))\n       SUBSUMES (allntresolvents(B UNION C) (A UNION B UNION C))
-  (allntresolvents (A UNION B) C =\n        (allntresolvents A C) UNION (allntresolvents B C)) /\\\n   (allntresolvents A (B UNION C) =\n        (allntresolvents A B) UNION (allntresolvents A C))
-  forall x s. set_of_list(insert x s) = x INSERT set_of_list(s)
-  forall P l. set_of_list(FILTER P l) = {x | x IN set_of_list l /\\ P x}
-  ppp:(form->bool)list#(form->bool)list
-  ppp = given n (used,unused)
-  forall used unused n.\n        Used(used,unused) n = set_of_list(used) UNION Sub(used,unused) n
-  x INSERT s = s UNION {x}
-  (x INSERT s) UNION t = (s UNION (t UNION {x})) UNION (t UNION {x})
-  s UNION t = (s UNION t) UNION t
-  s UNION {x} = (x INSERT s) UNION {x}
-  (h INSERT s) UNION t = (s UNION t) UNION {h}
-  set_of_list(CONS h (ITLIST (incorporate cl) t cls)) UNION {cl}
-  ITLIST (incorporate cl) t cls
-  h:form->bool
-  cl:form->bool
-  set_of_list (ITLIST (incorporate cl) t cls) UNION {cl}
-  ITLIST (incorporate cl) t cls
-  h:form->bool
-  cl:form->bool
-  tautologous h
-  forall c. c IN set_of_list (CONS cl cls) ==> clause c
-  added:(form->bool)list
-  new:(form->bool)list
-  (b ==> a /\\ c) ==> a ==> b ==> c
-  forall c. c IN set_of_list (ITLIST (incorporate cl) new cls)\n                     ==> clause c
-  forall c. MEM c new ==> clause c
-  set_of_list(list_of_set\n                        (allresolvents {cl}\n                                       (set_of_list(CONS cl used0)))) =\n                  allresolvents {cl} (set_of_list(CONS cl used0))
-  allntresolvents {cl} (set_of_list used0 UNION {cl}) =\n    set_of_list(FILTER (\\c. ~(tautologous c)) new)
-  set_of_list(used:(form->bool)list) UNION sub0 =\n                set_of_list(used0)
-  set_of_list(ITLIST (incorporate cl) t cls)
-  ITLIST (incorporate cl) t cls
-  h:form->bool
-  cl:form->bool
-  forall c. c IN set_of_list (CONS cl cls) ==> clause c
-  added:(form->bool)list
-  new:(form->bool)list
-  (b ==> a /\\ c) ==> a ==> b ==> c
-  forall c. c IN set_of_list (ITLIST (incorporate cl) new cls)\n                     ==> clause c
-  forall c. MEM c new ==> clause c
-  sub0 UNION set_of_list(CONS (cl:form->bool) cls)
-  allntresolvents sub0 (set_of_list(used) UNION sub0) UNION\n    allntresolvents {cl} (set_of_list(used) UNION sub0 UNION {cl})
-  forall c. c IN set_of_list (CONS cl cls) ==> clause c
-  more:(form->bool)list
-  new:(form->bool)list
-  forall c. MEM c new ==> clause c
-  a /\\ (a ==> b) ==> a /\\ b
-  forall c. MEM c (list_of_set (allresolvents {cl}\n                                (cl INSERT set_of_list used0))) <=>\n                      c IN (allresolvents {cl} (cl INSERT set_of_list used0))
-  forall c. MEM c new ==> clause c
-  b /\\ a /\\ c ==> a /\\ b /\\ c
-  forall c. c IN set_of_list (CONS cl cls) ==> clause c
-  clause cl
-  cls:(form->bool)list
-  cl:form->bool
-  unused0:(form->bool)list
-  sub0 = Sub (used,unused) n
-  unused0 = SND(ppp:(form->bool)list#(form->bool)list)
-  used0 = FST(ppp:(form->bool)list#(form->bool)list)
-  ppp:(form->bool)list#(form->bool)list
-  ppp = given n (used,unused)
-  allntresolvents {} (set_of_list used)
-  allresolvents {} (set_of_list used) = {}
-  allresolvents {} (Used (used,unused) 0)
-  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall n. (forall c. c IN Used(used,unused) n ==> clause c) /\\\n                (forall c. c IN Unused(used,unused) n ==> clause c) /\\\n                (forall c. c IN Sub(used,unused) n ==> clause c) /\\\n                (Sub(used,unused) n UNION Unused(used,unused) n) SUBSUMES\n                allntresolvents\n                        (Sub(used,unused) n)\n                        (set_of_list(used) UNION Sub(used,unused) n)
-  d:num
-  d:num
-  d:num
-  forall init m n. m <= n ==> (Sub init m) SUBSET (Sub init n)
-  forall init m n. m <= n ==> (Sub init n) SUBSUMES (Sub init m)
-  forall cl current. LENGTH current <= LENGTH(replace cl current)
-  forall gcl cl current. LENGTH current <= LENGTH(incorporate gcl cl current)
-  k:(form->bool)list
-  (resolvents (HD (CONS h t))\n                (CONS (HD (CONS h t)) (FST (given (m + n) (used,unused)))))
-  x <= y ==> SUC x + n <= SUC(y + n)
-  l:(form->bool)list
-  SND (given (m + n) (used,unused))
-  ~(SND (given (m + n) (used,unused)) = [])
-  LENGTH (SND (given (m + n) (used,unused))) + n
-  m <= n ==> m <= SUC n
-  given (m + n) (used,unused)
-  unused:(form->bool)list
-  used:(form->bool)list
-  forall init m n.\n        LENGTH(SND(given m init)) <= LENGTH (SND(given (m + n) init)) + n
-  given (m + n) (used,unused)
-  forall used unused m n.\n        (SND (given m (used,unused)) = [])\n        ==> (SND (given (m + n) (used,unused)) = [])
-  forall cl current n.\n        n < LENGTH current\n        ==> (EL n (replace cl current)) subsumes (EL n current)
-  forall gcl cl current n.\n        n < LENGTH current\n        ==> (EL n (incorporate gcl cl current)) subsumes (EL n current)
-  forall cl current.\n        (forall c. MEM c current ==> clause c) /\\ clause cl\n        ==> forall c. MEM c (replace cl current) ==> clause c
-  (forall c. MEM c current ==> clause c) /\\ clause cl\n   ==> forall c. MEM c (incorporate gcl cl current) ==> clause c
-  (forall c. MEM c current ==> clause c) /\\ clause cl /\\ p < LENGTH current\n   ==> clause (EL p (incorporate gcl cl current))
-  forall current gcl new.\n        (forall c. MEM c current ==> clause c) /\\\n        (forall c. MEM c new ==> clause c)\n        ==> forall c. MEM c (ITLIST (incorporate gcl) new current)\n                ==> clause c
-  forall gcl current lis.\n        LENGTH(current) <= LENGTH(ITLIST (incorporate gcl) lis current)
-  k:(form->bool)list
-  t':(form->bool)list
-  p < LENGTH(t:(form->bool)list)
-  a /\\ b /\\ c ==> d <=> a /\\ b ==> c ==> d
-  p:num
-  p:num
-  new:(form->bool)list
-  new:(form->bool)list
-  p:num
-  n + k:num
-  forall c. MEM c new ==> clause c
-  l:(form->bool)list
-  SND(given m (used,unused))
-  ~(SND (given m (used,unused)) = [])
-  l:(form->bool)list
-  SND(given m (used,unused))
-  ~(SND(given m (used,unused)) = [])
-  gcl IN Unused(used,unused) m
-  clause gcl
-  forall c. MEM c (list_of_set (allresolvents {gcl}\n                          (gcl INSERT Used (used,unused) m))) <=>\n                      c IN (allresolvents {gcl}\n                           (gcl INSERT Used (used,unused) m))
-  gcl = HD (SND (given m (used,unused)))
-  forall c. MEM c new ==> clause c
-  forall c. MEM c (SND (given m (used,unused))) ==> clause c
-  SUC (n + k) < LENGTH (SND (given m (used,unused)))
-  SUC (n + k) < LENGTH (SND (given m (used,unused)))
-  given m (used,unused)
-  SUC (n + k) < LENGTH (SND (given m (used,unused)))
-  SUC k
-  m:num
-  (used:(form->bool)list,unused:(form->bool)list)
-  (EL n (SND (given (SUC (m + k)) (used,unused)))) IN\n                  Unused(used,unused) (SUC(m + k))
-  a /\\ b /\\ c ==> d <=> a /\\ c ==> b ==> d
-  SUC x < lm ==> lm <= lm1 + 1 ==> x < lm1
+  \226\136\128 cl : (Form) -> Bool, subsumes(cl, cl)
+  \226\136\128 p : Form, qfree(p) \226\134\146 formsubst(o(termsubst((j : (Num) -> Term)), (i : (Num) -> Term)), p) == formsubst(j, formsubst(i, p))
+  \226\136\128 p : Form, IN(p, (cl1 : (Form) -> Bool)) \226\134\146 formsubst(o(termsubst((j : (Num) -> Term)), (i : (Num) -> Term)), p) == formsubst(j, formsubst(i, p))
+  SUBSET(IMAGE(formsubst((j : (Num) -> Term)), (cl2 : (Form) -> Bool)), (cl3 : (Form) -> Bool))
+  SUBSET(IMAGE(formsubst((i : (Num) -> Term)), (cl1 : (Form) -> Bool)), (cl2 : (Form) -> Bool))
+  o(termsubst((j : (Num) -> Term)), (i : (Num) -> Term))
+  (j : (Num) -> Term)
+  (i : (Num) -> Term)
+  \226\136\128 cl1 : (Form) -> Bool, \226\136\128 cl2 : (Form) -> Bool, \226\136\128 cl3 : (Form) -> Bool, clause(cl1) && subsumes(cl1, cl2) && subsumes(cl2, cl3) \226\134\146 subsumes(cl1, cl3)
+  (SUBSUMES : (((Form) -> Bool) -> Bool, ((Form) -> Bool) -> Bool) -> Bool)((s : ((Form) -> Bool) -> Bool), (s' : ((Form) -> Bool) -> Bool)) == (\226\136\128 cl' : (Form) -> Bool, IN(cl', s') \226\134\146 (\226\136\131 cl : (Form) -> Bool, IN(cl, s) && subsumes(cl, cl')))
+  \226\136\128 s : ((Form) -> Bool) -> Bool, SUBSUMES(s, s)
+  SUBSUMES((s : ((Form) -> Bool) -> Bool), (s' : ((Form) -> Bool) -> Bool)) && SUBSUMES((t : ((Form) -> Bool) -> Bool), (t' : ((Form) -> Bool) -> Bool)) \226\134\146 SUBSUMES(UNION(s, t), UNION(s', t'))
+  \226\136\128 s : ((Form) -> Bool) -> Bool, \226\136\128 t : ((Form) -> Bool) -> Bool, \226\136\128 u : ((Form) -> Bool) -> Bool, (\226\136\128 c : (Form) -> Bool, IN(c, s) \226\134\146 clause(c)) && SUBSUMES(s, t) && SUBSUMES(t, u) \226\134\146 SUBSUMES(s, u)
+  \226\136\128 s : ((Form) -> Bool) -> Bool, \226\136\128 t : ((Form) -> Bool) -> Bool, \226\136\128 u : ((Form) -> Bool) -> Bool, SUBSUMES(s, t) && SUBSET(s, u) \226\134\146 SUBSUMES(u, t)
+  (\226\136\128 s : ((Form) -> Bool) -> Bool, SUBSUMES(s, {})) && (\226\136\128 s : ((Form) -> Bool) -> Bool, SUBSUMES(s, INSERT((x : (Form) -> Bool), (t : ((Form) -> Bool) -> Bool))) == (SUBSUMES(s, {x}) && SUBSUMES(s, t)))
+  \226\136\128 s : ((Form) -> Bool) -> Bool, \226\136\128 t : ((Form) -> Bool) -> Bool, SUBSET(s, t) \226\134\146 SUBSUMES(t, s)
+  (allresolvents : (((Form) -> Bool) -> Bool, ((Form) -> Bool) -> Bool, (Form) -> Bool) -> Bool)((s1 : ((Form) -> Bool) -> Bool), (s2 : ((Form) -> Bool) -> Bool)) == {(c : (Form) -> Bool) | \226\136\131 c1 : (Form) -> Bool, \226\136\131 c2 : (Form) -> Bool, IN(c1, s1) && IN(c2, s2) && isaresolvent(c, (c1, c2))}
+  (allntresolvents : (((Form) -> Bool) -> Bool, ((Form) -> Bool) -> Bool, (Form) -> Bool) -> Bool)((s1 : ((Form) -> Bool) -> Bool), (s2 : ((Form) -> Bool) -> Bool)) == {(r : (Form) -> Bool) | IN(r, allresolvents(s1, s2)) && !tautologous(r)}
+  termsubst(o(termsubst((j : (Num) -> Term)), (i : (Num) -> Term))) == o(termsubst(j), termsubst(i))
+  (p : Form)
+  (p : Form)
+  \226\136\128 p : Form, \226\136\128 i : (Num) -> Term, \226\136\128 j : (Num) -> Term, qfree(p) \226\134\146 formsubst(j, formsubst(i, p)) == formsubst(o(termsubst(j), i), p)
+  (q : Form)
+  (q : Form)
+  qfree((q : Form))
+  formsubst((s2 : (Num) -> Term), (q : Form))
+  (!(a : Bool) \226\134\146 !(b : Bool)) == (b \226\134\146 a)
+  (r : Form)
+  (r : Form)
+  qfree((r : Form))
+  formsubst((s2 : (Num) -> Term), formsubst((r2 : (Num) -> Term), (r : Form))) == r
+  (r : Form)
+  ((a : Bool) \226\134\146 (a' : Bool)) && ((b : Bool) \226\134\146 (b' : Bool)) \226\134\146 a && b \226\134\146 a' && b'
+  IN((q : Form), DIFF((c2' : (Form) -> Bool), IMAGE(formsubst((r2 : (Num) -> Term)), (ps2 : (Form) -> Bool))))
+  (a : Bool) \226\134\146 !(a && (b : Bool)) \226\134\146 !b
+  (x : Num)
+  INTER(FVS((c2' : (Form) -> Bool)), FVS((c1 : (Form) -> Bool))) == {}
+  !IN((x : Num), FVS((c1 : (Form) -> Bool)))
+  (x : Num)
+  IN((q : Form), DIFF((c2' : (Form) -> Bool), IMAGE(formsubst((r2 : (Num) -> Term)), (ps2 : (Form) -> Bool))))
+  qfree((q : Form))
+  formsubst((s2 : (Num) -> Term), (q : Form))
+  \226\136\128 p : Form, qfree(p) \226\134\146 formsubst((s1 : (Num) -> Term), formsubst((r1 : (Num) -> Term), p)) == p
+  formsubst((s1 : (Num) -> Term), formsubst((r1 : (Num) -> Term), (q : Form))) == q && formsubst(s1, formsubst(r1, (r : Form))) == r
+  formsubst((s1 : (Num) -> Term))
+  (r : Form)
+  IN((q : Form), DIFF((c1 : (Form) -> Bool), (ps0 : (Form) -> Bool)))
+  IN((x : Num), FVS((c1 : (Form) -> Bool)))
+  (x : Num)
+  qfree((q : Form))
+  formsubst((r1 : (Num) -> Term), (q : Form))
+  (q : Form)
+  (p : Form)
+  IN((p : Form), (c2' : (Form) -> Bool))
+  \226\136\128 p : Form, IN(p, UNION(DIFF((c1 : (Form) -> Bool), (ps0 : (Form) -> Bool)), DIFF((c2' : (Form) -> Bool), IMAGE(formsubst((r2 : (Num) -> Term)), (ps2 : (Form) -> Bool))))) \226\134\146 qfree(p)
+  IMAGE(o(formsubst((k : (Num) -> Term)), formsubst((i : (Num) -> Term))), UNION(DIFF((c1 : (Form) -> Bool), (ps0 : (Form) -> Bool)), DIFF((c2' : (Form) -> Bool), IMAGE(formsubst((r2 : (Num) -> Term)), (ps2 : (Form) -> Bool))))) == IMAGE(formsubst(k), UNION(DIFF(c1, ps0), DIFF(c2', IMAGE(formsubst(r2), ps2))))
+  (k : (Num) -> Term)
+  (k : (Num) -> Term) == ((x : Num) => if IN(x, FVS((c1 : (Form) -> Bool))) { termsubst((j : (Num) -> Term), (r1 : (Num) -> Term)(x)) } else { termsubst(j, (s2 : (Num) -> Term)(x)) })
+  (q : Form)
+  (q : Form)
+  qfree((q : Form))
+  SUBSET((ps2 : (Form) -> Bool), (c2 : (Form) -> Bool))
+  IN((q : Form), (ps2 : (Form) -> Bool))
+  IN((x : Num), FV(formsubst((r2 : (Num) -> Term), (q : Form))))
+  (a : Bool) \226\134\146 !(a && (b : Bool)) \226\134\146 !b
+  (x : Num)
+  INTER(FVS((c2' : (Form) -> Bool)), FVS((c1 : (Form) -> Bool))) == {}
+  !IN((x : Num), FVS((c1 : (Form) -> Bool)))
+  (x : Num)
+  formsubst(o(termsubst((j : (Num) -> Term)), (s2 : (Num) -> Term)), formsubst((r2 : (Num) -> Term), (q : Form)))
+  formsubst((j : (Num) -> Term), (q : Form)) == (P : Form)
+  (q : Form)
+  (p : Form)
+  (rrr : Form)
+  op_tilde_tilde(op_tilde_tilde(formsubst((j : (Num) -> Term), formsubst((r1 : (Num) -> Term), (p : Form))))) == formsubst(j, formsubst(r1, p))
+  (P : Form) == op_tilde_tilde(formsubst((j : (Num) -> Term), formsubst((r1 : (Num) -> Term), (p : Form))))
+  IN((x : Num), FVS((c1 : (Form) -> Bool)))
+  (x : Num)
+  formsubst(o(termsubst((j : (Num) -> Term)), (r1 : (Num) -> Term)), (p : Form))
+  (p : Form)
+  op_tilde_tilde((P : Form))
+  (p : Form)
+  formsubst((r1 : (Num) -> Term), (p : Form))
+  (p : Form)
+  (p : Form)
+  op_tilde_tilde((p : Form))
+  (p : Form)
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  (P : Form)
+  Unifies((j : (Num) -> Term), UNION((ps2 : (Form) -> Bool), {op_tilde_tilde((p : Form)) | IN(p, IMAGE(formsubst((r1 : (Num) -> Term)), (ps0 : (Form) -> Bool)))}))
+  (x : Num) => if IN(x, FVS((c1 : (Form) -> Bool))) { termsubst((j : (Num) -> Term), (r1 : (Num) -> Term)(x)) } else { termsubst(j, (s2 : (Num) -> Term)(x)) }
+  \226\136\128 i' : (Num) -> Term, Unifies(i', UNION((ps0 : (Form) -> Bool), {op_tilde_tilde((p : Form)) | IN(p, IMAGE(formsubst((r2 : (Num) -> Term)), (ps2 : (Form) -> Bool)))})) \226\134\146 (\226\136\128 p : Form, qfree(p) \226\134\146 formsubst(i', p) == formsubst(i', formsubst((i : (Num) -> Term), p)))
+  {op_tilde_tilde((p : Form)) | IN(p, IMAGE(formsubst((r1 : (Num) -> Term)), (ps0 : (Form) -> Bool)))} == IMAGE(op_tilde_tilde, IMAGE(formsubst(r1), ps0))
+  UNION((ps2 : (Form) -> Bool), {op_tilde_tilde((p : Form)) | IN(p, IMAGE(formsubst((r1 : (Num) -> Term)), (ps0 : (Form) -> Bool)))})
+  {op_tilde_tilde((p : Form)) | IN(p, IMAGE(formsubst((r2 : (Num) -> Term)), (ps2 : (Form) -> Bool)))} == IMAGE(op_tilde_tilde, IMAGE(formsubst(r2), ps2))
+  UNION((ps0 : (Form) -> Bool), {op_tilde_tilde((p : Form)) | IN(p, IMAGE(formsubst((r2 : (Num) -> Term)), (ps2 : (Form) -> Bool)))})
+  (j : (Num) -> Term) == mgu(UNION((ps2 : (Form) -> Bool), {op_tilde_tilde((p : Form)) | IN(p, IMAGE(formsubst((r1 : (Num) -> Term)), (ps0 : (Form) -> Bool)))}))
+  (i : (Num) -> Term) == mgu(UNION((ps0 : (Form) -> Bool), {op_tilde_tilde((p : Form)) | IN(p, IMAGE(formsubst((r2 : (Num) -> Term)), (ps2 : (Form) -> Bool)))}))
+  \226\136\128 p : Form, qfree(p) \226\134\146 formsubst((s1 : (Num) -> Term), formsubst((r1 : (Num) -> Term), p)) == p
+  \226\136\128 p : Form, IN(p, (ps0 : (Form) -> Bool)) \226\134\146 formsubst((s1 : (Num) -> Term), formsubst((r1 : (Num) -> Term), p)) == p
+  (p : Form)
+  IMAGE(o(formsubst((s1 : (Num) -> Term)), formsubst((r1 : (Num) -> Term))), (ps0 : (Form) -> Bool)) == ps0
+  (ps0 : (Form) -> Bool)
+  SUBSET((ps1 : (Form) -> Bool), (c1' : (Form) -> Bool))
+  !((ps1 : (Form) -> Bool) == {})
+  {(p : Form) | IN(p, (c1 : (Form) -> Bool)) && IN(formsubst((r1 : (Num) -> Term), p), (ps1 : (Form) -> Bool))}
+  \226\136\131 ps0 : (Form) -> Bool, SUBSET(ps0, (c1 : (Form) -> Bool)) && !(ps0 == {}) && (ps1 : (Form) -> Bool) == IMAGE(formsubst((r1 : (Num) -> Term)), ps0)
+  (q : Form)
+  (q : Form)
+  formsubst((i : (Num) -> Term), (q : Form)) == (P : Form)
+  qfree((q : Form))
+  \226\136\128 p : Form, qfree(p) \226\134\146 formsubst((s1 : (Num) -> Term), formsubst((r1 : (Num) -> Term), p)) == p
+  \226\136\128 p : Form, IN(p, (c1 : (Form) -> Bool)) \226\134\146 formsubst((s1 : (Num) -> Term), formsubst((r1 : (Num) -> Term), p)) == p
+  SUBSET((ps1 : (Form) -> Bool), (c1' : (Form) -> Bool))
+  ((a : Bool) \226\134\146 (a' : Bool)) && ((b : Bool) \226\134\146 (b' : Bool)) \226\134\146 a \226\134\146 !(a' && b') \226\134\146 !b
+  IN((x : Num), FV(formsubst((r2 : (Num) -> Term), (q : Form))))
+  (x : Num)
+  INTER(FVS((c2' : (Form) -> Bool)), FVS((c1 : (Form) -> Bool))) == {}
+  !IN((x : Num), FVS(IMAGE(formsubst((s1 : (Num) -> Term)), (ps1 : (Form) -> Bool))))
+  (x : Num)
+  formsubst((x : Num) => termsubst((i : (Num) -> Term), (s2 : (Num) -> Term)(x)), formsubst((r2 : (Num) -> Term), (q : Form)))
+  (q : Form)
+  (p : Form)
+  (rrr : Form)
+  (q : Form)
+  (q : Form)
+  (q : Form)
+  (p : Form)
+  SUBSET((ps1 : (Form) -> Bool), (c1' : (Form) -> Bool))
+  (p : Form)
+  SUBSET((ps1 : (Form) -> Bool), (c1' : (Form) -> Bool))
+  literal((p : Form))
+  (P : Form) == formsubst((i : (Num) -> Term), op_tilde_tilde((p : Form)))
+  IN((x : Num), FVS(IMAGE(formsubst((s1 : (Num) -> Term)), (ps1 : (Form) -> Bool))))
+  (x : Num)
+  formsubst((x : Num) => termsubst((i : (Num) -> Term), (r1 : (Num) -> Term)(x)), formsubst((s1 : (Num) -> Term), (p : Form)))
+  (p : Form)
+  (rrr : Form)
+  op_tilde_tilde((P : Form))
+  (x : Num) => if IN(x, FVS(IMAGE(formsubst((s1 : (Num) -> Term)), (ps1 : (Form) -> Bool)))) { termsubst((i : (Num) -> Term), (r1 : (Num) -> Term)(x)) } else { termsubst(i, (s2 : (Num) -> Term)(x)) }
+  (p : Form)
+  op_tilde_tilde((p : Form))
+  (p : Form)
+  (P : Form)
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  (i : (Num) -> Term)
+  !((ps2 : (Form) -> Bool) == {})
+  !((ps1 : (Form) -> Bool) == {})
+  SUBSET((ps2 : (Form) -> Bool), (c2 : (Form) -> Bool))
+  \226\136\128 p : Form, qfree(p) \226\134\146 formsubst(V, p) == formsubst((s1 : (Num) -> Term), formsubst((r1 : (Num) -> Term), p))
+  \226\136\128 p : Form, IN(p, (c1 : (Form) -> Bool)) \226\134\146 formsubst((s1 : (Num) -> Term), formsubst((r1 : (Num) -> Term), p)) == p
+  SUBSET((ps1 : (Form) -> Bool), (c1' : (Form) -> Bool))
+  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) && (e : Bool)) && (e \226\134\146 (f : Bool)) \226\134\146 (a && b && c && d && e) && f
+  IMAGE(formsubst((r2 : (Num) -> Term)), (ps2 : (Form) -> Bool))
+  IMAGE(formsubst((s1 : (Num) -> Term)), (ps1 : (Form) -> Bool))
+  (s2 : (Num) -> Term)
+  FVS((c1 : (Form) -> Bool))
+  (c2 : (Form) -> Bool)
+  (s1 : (Num) -> Term)
+  FVS((c2 : (Form) -> Bool))
+  (c1 : (Form) -> Bool)
+  (c2' : (Form) -> Bool) == IMAGE(formsubst((r2 : (Num) -> Term)), (c2 : (Form) -> Bool))
+  (r2 : (Num) -> Term) == rename((c2 : (Form) -> Bool), FVS((c1 : (Form) -> Bool)))
+  (ps1 : (Form) -> Bool)
+  (ps2 : (Form) -> Bool)
+  (c1' : (Form) -> Bool) == IMAGE(formsubst((r1 : (Num) -> Term)), (c1 : (Form) -> Bool))
+  (r1 : (Num) -> Term) == rename((c1 : (Form) -> Bool), FVS((c2 : (Form) -> Bool)))
+  isaresolvent((cl : (Form) -> Bool), ((c2 : (Form) -> Bool), (c1 : (Form) -> Bool)))
+  \226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, \226\136\128 cl : (Form) -> Bool, clause(c1) && clause(c2) && isaresolvent(cl, (c2, c1)) \226\134\146 (\226\136\131 cl' : (Form) -> Bool, isaresolvent(cl', (c1, c2)) && subsumes(cl', cl))
+  (c2 : (Form) -> Bool)
+  (c1 : (Form) -> Bool)
+  (c1 : (Form) -> Bool)
+  (c2 : (Form) -> Bool)
+  (cl : (Form) -> Bool)
+  (\226\136\128 c : (Form) -> Bool, IN(c, (A : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, (B : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) \226\134\146 SUBSUMES(allresolvents(A, B), allresolvents(B, A))
+  allresolvents(UNION((A : ((Form) -> Bool) -> Bool), (B : ((Form) -> Bool) -> Bool)), (C : ((Form) -> Bool) -> Bool)) == UNION(allresolvents(A, C), allresolvents(B, C)) && allresolvents(A, UNION(B, C)) == UNION(allresolvents(A, B), allresolvents(A, C))
+  UNION((A : (_) -> Bool), (B : (_) -> Bool)) == UNION(UNION(A, A), B)
+  UNION((a : (_) -> Bool), UNION((b : (_) -> Bool), UNION((c : (_) -> Bool), UNION((d : (_) -> Bool), UNION((e : (_) -> Bool), (f : (_) -> Bool)))))) == UNION(a, UNION(b, UNION(d, UNION(UNION(c, e), f))))
+  (\226\136\128 c : (Form) -> Bool, IN(c, (B : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, (C : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) \226\134\146 SUBSUMES(UNION(allresolvents(B, UNION((A : ((Form) -> Bool) -> Bool), B)), allresolvents(C, UNION(A, UNION(B, C)))), allresolvents(UNION(B, C), UNION(A, UNION(B, C))))
+  (resolvents : ((Form) -> Bool, List[(Form) -> Bool]) -> List[(Form) -> Bool])((cl : (Form) -> Bool), (cls : List[(Form) -> Bool])) == list_of_set(allresolvents({cl}, set_of_list(cls)))
+  \226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, clause(UNION(c1, c2)) == (clause(c1) && clause(c2))
+  \226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, clause(c2) && SUBSET(c1, c2) \226\134\146 clause(c1)
+  \226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, clause(c1) \226\134\146 clause(DIFF(c1, c2))
+  \226\136\128 p : (Form) -> Bool, \226\136\128 q : (Form) -> Bool, \226\136\128 r : (Form) -> Bool, clause(p) && clause(q) && isaresolvent(r, (p, q)) \226\134\146 clause(r)
+  (\226\136\128 c : (Form) -> Bool, IN(c, (s : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, (t : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) \226\134\146 (\226\136\128 c : (Form) -> Bool, IN(c, allresolvents(s, t)) \226\134\146 clause(c))
+  ((ps1 : (Form) -> Bool), (ps2 : (Form) -> Bool))
+  (ps2 : (Form) -> Bool)
+  (ps1 : (Form) -> Bool)
+  (c : (Form) -> Bool)
+  IMAGE((pss : ((Form) -> Bool, (Form) -> Bool)) => LET((i : (Num) -> Term) => LET_END(IMAGE(formsubst(i), UNION(DIFF((c1 : (Form) -> Bool), FST(pss)), DIFF((cl2' : (Form) -> Bool), SND(pss))))), mgu(UNION(FST(pss), {op_tilde_tilde((p : Form)) | IN(p, SND(pss))}))), {((ps1 : (Form) -> Bool), (ps2 : (Form) -> Bool)) | IN(ps1, {(ps1 : (Form) -> Bool) | SUBSET(ps1, c1)}) && IN(ps2, {(ps2 : (Form) -> Bool) | SUBSET(ps2, cl2')})})
+  clause((cl2' : (Form) -> Bool))
+  \226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, clause(c1) && clause(c2) \226\134\146 FINITE({(c : (Form) -> Bool) | isaresolvent(c, (c1, c2))})
+  (u : ((Form) -> Bool) -> Bool)
+  {(c : (Form) -> Bool) | isaresolvent(c, ((c1 : (Form) -> Bool), (c2 : (Form) -> Bool)))}
+  (c : (Form) -> Bool)
+  allresolvents((s : ((Form) -> Bool) -> Bool), (t : ((Form) -> Bool) -> Bool)) == UNIONS(IMAGE((cs : ((Form) -> Bool, (Form) -> Bool)) => {(c : (Form) -> Bool) | isaresolvent(c, cs)}, {((c1 : (Form) -> Bool), (c2 : (Form) -> Bool)) | IN(c1, s) && IN(c2, t)}))
+  \226\136\128 s : ((Form) -> Bool) -> Bool, \226\136\128 t : ((Form) -> Bool) -> Bool, FINITE(s) && FINITE(t) && (\226\136\128 c : (Form) -> Bool, IN(c, s) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, t) \226\134\146 clause(c)) \226\134\146 FINITE(allresolvents(s, t))
+  (replace : ((Form) -> Bool, List[(Form) -> Bool]) -> List[(Form) -> Bool])((cl : (Form) -> Bool), NIL) == [cl] && replace(cl, CONS((c : (Form) -> Bool), (cls : List[(Form) -> Bool]))) == (if subsumes(cl, c) { CONS(cl, cls) } else { CONS(c, replace(cl, cls)) })
+  SUBSUMES(set_of_list(replace((cl : (Form) -> Bool), (t : List[(Form) -> Bool]))), set_of_list(CONS(cl, t)))
+  SUBSUMES(set_of_list(replace((cl : (Form) -> Bool), (t : List[(Form) -> Bool]))), set_of_list(CONS(cl, t)))
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  \226\136\128 cl : (Form) -> Bool, \226\136\128 lis : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, lis) \226\134\146 clause(c)) && clause(cl) \226\134\146 (\226\136\128 c : (Form) -> Bool, MEM(c, replace(cl, lis)) \226\134\146 clause(c)) && SUBSUMES(set_of_list(replace(cl, lis)), set_of_list(CONS(cl, lis)))
+  (incorporate : ((Form) -> Bool, (Form) -> Bool, List[(Form) -> Bool]) -> List[(Form) -> Bool])((gcl : (Form) -> Bool), (cl : (Form) -> Bool), (current : List[(Form) -> Bool])) == (if tautologous(cl) || EX((c : (Form) -> Bool) => subsumes(c, cl), CONS(gcl, current)) { current } else { replace(cl, current) })
+  SUBSUMES(set_of_list(replace((cl : (Form) -> Bool), (current : List[(Form) -> Bool]))), set_of_list(CONS(cl, current)))
+  (current : List[(Form) -> Bool])
+  (cl : (Form) -> Bool)
+  set_of_list((t : List[(Form) -> Bool]))
+  {(h : (Form) -> Bool)}
+  (l : List[(Form) -> Bool])
+  CONS((gcl : (Form) -> Bool), (current : List[(Form) -> Bool]))
+  EX((c : (Form) -> Bool) => subsumes(c, (cl : (Form) -> Bool)), CONS((gcl : (Form) -> Bool), (current : List[(Form) -> Bool])))
+  set_of_list((current : List[(Form) -> Bool]))
+  EX((c : (Form) -> Bool) => subsumes(c, (cl : (Form) -> Bool)), CONS((gcl : (Form) -> Bool), (current : List[(Form) -> Bool])))
+  tautologous((cl : (Form) -> Bool))
+  \226\136\128 gcl : (Form) -> Bool, \226\136\128 cl : (Form) -> Bool, \226\136\128 current : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, current) \226\134\146 clause(c)) && clause(gcl) && clause(cl) \226\134\146 (\226\136\128 c : (Form) -> Bool, MEM(c, incorporate(gcl, cl, current)) \226\134\146 clause(c)) && SUBSUMES(set_of_list(incorporate(gcl, cl, current)), set_of_list(current)) && (tautologous(cl) || SUBSUMES(INSERT(gcl, set_of_list(incorporate(gcl, cl, current))), set_of_list(CONS(cl, current))))
+  (insert : (_, List[_]) -> List[_])((x : _), (l : List[_])) == (if MEM(x, l) { l } else { CONS(x, l) })
+  (step : ((List[(Form) -> Bool], List[(Form) -> Bool])) -> (List[(Form) -> Bool], List[(Form) -> Bool]))(((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))) == (if unused == NIL { (used, unused) } else { LET((new : List[(Form) -> Bool]) => LET_END((insert(HD(unused), used), ITLIST(incorporate(HD(unused)), new, TL(unused)))), resolvents(HD(unused), CONS(HD(unused), used))) })
+  step(((used : List[(Form) -> Bool]), NIL)) == (used, NIL) && step((used, CONS((cl : (Form) -> Bool), (cls : List[(Form) -> Bool])))) == LET((new : List[(Form) -> Bool]) => LET_END((insert(cl, used), ITLIST(incorporate(cl), new, cls))), resolvents(cl, CONS(cl, used)))
+  (given : (Num, (List[(Form) -> Bool], List[(Form) -> Bool])) -> (List[(Form) -> Bool], List[(Form) -> Bool]))(0, (p : (List[(Form) -> Bool], List[(Form) -> Bool]))) == p && given(SUC((n : Num)), p) == step(given(n, p))
+  (Used : ((List[(Form) -> Bool], List[(Form) -> Bool]), Num, (Form) -> Bool) -> Bool)((init : (List[(Form) -> Bool], List[(Form) -> Bool])), (n : Num)) == set_of_list(FST(given(n, init)))
+  (Unused : ((List[(Form) -> Bool], List[(Form) -> Bool]), Num, (Form) -> Bool) -> Bool)((init : (List[(Form) -> Bool], List[(Form) -> Bool])), (n : Num)) == set_of_list(SND(given(n, init)))
+  (Sub : ((List[(Form) -> Bool], List[(Form) -> Bool]), Num, (Form) -> Bool) -> Bool)((init : (List[(Form) -> Bool], List[(Form) -> Bool])), 0) == {} && Sub(init, SUC((n : Num))) == (if SND(given(n, init)) == NIL { Sub(init, n) } else { INSERT(HD(SND(given(n, init))), Sub(init, n)) })
+  \226\136\128 i : (Num) -> Term, \226\136\128 cl : (Form) -> Bool, tautologous(cl) \226\134\146 tautologous(IMAGE(formsubst(i), cl))
+  subsumes((cl : (Form) -> Bool), (cl' : (Form) -> Bool)) && !tautologous(cl') \226\134\146 !tautologous(cl)
+  (\226\136\128 c : (Form) -> Bool, IN(c, (B : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, (C : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) \226\134\146 SUBSUMES(UNION(allntresolvents(B, UNION((A : ((Form) -> Bool) -> Bool), B)), allntresolvents(C, UNION(A, UNION(B, C)))), allntresolvents(UNION(B, C), UNION(A, UNION(B, C))))
+  allntresolvents(UNION((A : ((Form) -> Bool) -> Bool), (B : ((Form) -> Bool) -> Bool)), (C : ((Form) -> Bool) -> Bool)) == UNION(allntresolvents(A, C), allntresolvents(B, C)) && allntresolvents(A, UNION(B, C)) == UNION(allntresolvents(A, B), allntresolvents(A, C))
+  \226\136\128 x : _, \226\136\128 s : List[_], set_of_list(insert(x, s)) == INSERT(x, set_of_list(s))
+  \226\136\128 P : (_) -> Bool, \226\136\128 l : List[_], set_of_list(FILTER(P, l)) == {(x : _) | IN(x, set_of_list(l)) && P(x)}
+  (ppp : (List[(Form) -> Bool], List[(Form) -> Bool]))
+  (ppp : (List[(Form) -> Bool], List[(Form) -> Bool])) == given((n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))
+  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], \226\136\128 n : Num, Used((used, unused), n) == UNION(set_of_list(used), Sub((used, unused), n))
+  INSERT((x : _), (s : (_) -> Bool)) == UNION(s, {x})
+  UNION(INSERT((x : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == UNION(UNION(s, UNION(t, {x})), UNION(t, {x}))
+  UNION((s : (_) -> Bool), (t : (_) -> Bool)) == UNION(UNION(s, t), t)
+  UNION((s : (_) -> Bool), {(x : _)}) == UNION(INSERT(x, s), {x})
+  UNION(INSERT((h : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == UNION(UNION(s, t), {h})
+  UNION(set_of_list(CONS((h : (Form) -> Bool), ITLIST(incorporate((cl : (Form) -> Bool)), (t : List[(Form) -> Bool]), (cls : List[(Form) -> Bool])))), {cl})
+  ITLIST(incorporate((cl : (Form) -> Bool)), (t : List[(Form) -> Bool]), (cls : List[(Form) -> Bool]))
+  (h : (Form) -> Bool)
+  (cl : (Form) -> Bool)
+  UNION(set_of_list(ITLIST(incorporate((cl : (Form) -> Bool)), (t : List[(Form) -> Bool]), (cls : List[(Form) -> Bool]))), {cl})
+  ITLIST(incorporate((cl : (Form) -> Bool)), (t : List[(Form) -> Bool]), (cls : List[(Form) -> Bool]))
+  (h : (Form) -> Bool)
+  (cl : (Form) -> Bool)
+  tautologous((h : (Form) -> Bool))
+  \226\136\128 c : (Form) -> Bool, IN(c, set_of_list(CONS((cl : (Form) -> Bool), (cls : List[(Form) -> Bool])))) \226\134\146 clause(c)
+  (added : List[(Form) -> Bool])
+  (new : List[(Form) -> Bool])
+  ((b : Bool) \226\134\146 (a : Bool) && (c : Bool)) \226\134\146 a \226\134\146 b \226\134\146 c
+  \226\136\128 c : (Form) -> Bool, IN(c, set_of_list(ITLIST(incorporate((cl : (Form) -> Bool)), (new : List[(Form) -> Bool]), (cls : List[(Form) -> Bool])))) \226\134\146 clause(c)
+  \226\136\128 c : (Form) -> Bool, MEM(c, (new : List[(Form) -> Bool])) \226\134\146 clause(c)
+  set_of_list(list_of_set(allresolvents({(cl : (Form) -> Bool)}, set_of_list(CONS(cl, (used0 : List[(Form) -> Bool])))))) == allresolvents({cl}, set_of_list(CONS(cl, used0)))
+  allntresolvents({(cl : (Form) -> Bool)}, UNION(set_of_list((used0 : List[(Form) -> Bool])), {cl})) == set_of_list(FILTER((c : (Form) -> Bool) => !tautologous(c), (new : List[(Form) -> Bool])))
+  UNION(set_of_list((used : List[(Form) -> Bool])), (sub0 : ((Form) -> Bool) -> Bool)) == set_of_list((used0 : List[(Form) -> Bool]))
+  set_of_list(ITLIST(incorporate((cl : (Form) -> Bool)), (t : List[(Form) -> Bool]), (cls : List[(Form) -> Bool])))
+  ITLIST(incorporate((cl : (Form) -> Bool)), (t : List[(Form) -> Bool]), (cls : List[(Form) -> Bool]))
+  (h : (Form) -> Bool)
+  (cl : (Form) -> Bool)
+  \226\136\128 c : (Form) -> Bool, IN(c, set_of_list(CONS((cl : (Form) -> Bool), (cls : List[(Form) -> Bool])))) \226\134\146 clause(c)
+  (added : List[(Form) -> Bool])
+  (new : List[(Form) -> Bool])
+  ((b : Bool) \226\134\146 (a : Bool) && (c : Bool)) \226\134\146 a \226\134\146 b \226\134\146 c
+  \226\136\128 c : (Form) -> Bool, IN(c, set_of_list(ITLIST(incorporate((cl : (Form) -> Bool)), (new : List[(Form) -> Bool]), (cls : List[(Form) -> Bool])))) \226\134\146 clause(c)
+  \226\136\128 c : (Form) -> Bool, MEM(c, (new : List[(Form) -> Bool])) \226\134\146 clause(c)
+  UNION((sub0 : ((Form) -> Bool) -> Bool), set_of_list(CONS((cl : (Form) -> Bool), (cls : List[(Form) -> Bool]))))
+  UNION(allntresolvents((sub0 : ((Form) -> Bool) -> Bool), UNION(set_of_list((used : List[(Form) -> Bool])), sub0)), allntresolvents({(cl : (Form) -> Bool)}, UNION(set_of_list(used), UNION(sub0, {cl}))))
+  \226\136\128 c : (Form) -> Bool, IN(c, set_of_list(CONS((cl : (Form) -> Bool), (cls : List[(Form) -> Bool])))) \226\134\146 clause(c)
+  (more : List[(Form) -> Bool])
+  (new : List[(Form) -> Bool])
+  \226\136\128 c : (Form) -> Bool, MEM(c, (new : List[(Form) -> Bool])) \226\134\146 clause(c)
+  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+  \226\136\128 c : (Form) -> Bool, MEM(c, list_of_set(allresolvents({(cl : (Form) -> Bool)}, INSERT(cl, set_of_list((used0 : List[(Form) -> Bool])))))) == IN(c, allresolvents({cl}, INSERT(cl, set_of_list(used0))))
+  \226\136\128 c : (Form) -> Bool, MEM(c, (new : List[(Form) -> Bool])) \226\134\146 clause(c)
+  (b : Bool) && (a : Bool) && (c : Bool) \226\134\146 a && b && c
+  \226\136\128 c : (Form) -> Bool, IN(c, set_of_list(CONS((cl : (Form) -> Bool), (cls : List[(Form) -> Bool])))) \226\134\146 clause(c)
+  clause((cl : (Form) -> Bool))
+  (cls : List[(Form) -> Bool])
+  (cl : (Form) -> Bool)
+  (unused0 : List[(Form) -> Bool])
+  (sub0 : ((Form) -> Bool) -> Bool) == Sub(((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])), (n : Num))
+  (unused0 : List[(Form) -> Bool]) == SND((ppp : (List[(Form) -> Bool], List[(Form) -> Bool])))
+  (used0 : List[(Form) -> Bool]) == FST((ppp : (List[(Form) -> Bool], List[(Form) -> Bool])))
+  (ppp : (List[(Form) -> Bool], List[(Form) -> Bool]))
+  (ppp : (List[(Form) -> Bool], List[(Form) -> Bool])) == given((n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))
+  allntresolvents({}, set_of_list((used : List[(Form) -> Bool])))
+  allresolvents({}, set_of_list((used : List[(Form) -> Bool]))) == {}
+  allresolvents({}, Used(((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])), 0))
+  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, used) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, unused) \226\134\146 clause(c)) \226\134\146 (\226\136\128 n : Num, (\226\136\128 c : (Form) -> Bool, IN(c, Used((used, unused), n)) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, Unused((used, unused), n)) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, Sub((used, unused), n)) \226\134\146 clause(c)) && SUBSUMES(UNION(Sub((used, unused), n), Unused((used, unused), n)), allntresolvents(Sub((used, unused), n), UNION(set_of_list(used), Sub((used, unused), n)))))
+  (d : Num)
+  (d : Num)
+  (d : Num)
+  \226\136\128 init : (List[(Form) -> Bool], List[(Form) -> Bool]), \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSET(Sub(init, m), Sub(init, n))
+  \226\136\128 init : (List[(Form) -> Bool], List[(Form) -> Bool]), \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSUMES(Sub(init, n), Sub(init, m))
+  \226\136\128 cl : (Form) -> Bool, \226\136\128 current : List[(Form) -> Bool], LENGTH(current) <= LENGTH(replace(cl, current))
+  \226\136\128 gcl : (Form) -> Bool, \226\136\128 cl : (Form) -> Bool, \226\136\128 current : List[(Form) -> Bool], LENGTH(current) <= LENGTH(incorporate(gcl, cl, current))
+  (k : List[(Form) -> Bool])
+  resolvents(HD(CONS((h : (Form) -> Bool), (t : List[(Form) -> Bool]))), CONS(HD(CONS(h, t)), FST(given((m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))))
+  (x : Num) <= (y : Num) \226\134\146 SUC(x) + (n : Num) <= SUC(y + n)
+  (l : List[(Form) -> Bool])
+  SND(given((m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+  !(SND(given((m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+  LENGTH(SND(given((m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))) + n
+  (m : Num) <= (n : Num) \226\134\146 m <= SUC(n)
+  given((m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))
+  (unused : List[(Form) -> Bool])
+  (used : List[(Form) -> Bool])
+  \226\136\128 init : (List[(Form) -> Bool], List[(Form) -> Bool]), \226\136\128 m : Num, \226\136\128 n : Num, LENGTH(SND(given(m, init))) <= LENGTH(SND(given(m + n, init))) + n
+  given((m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))
+  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], \226\136\128 m : Num, \226\136\128 n : Num, SND(given(m, (used, unused))) == NIL \226\134\146 SND(given(m + n, (used, unused))) == NIL
+  \226\136\128 cl : (Form) -> Bool, \226\136\128 current : List[(Form) -> Bool], \226\136\128 n : Num, n < LENGTH(current) \226\134\146 subsumes(EL(n, replace(cl, current)), EL(n, current))
+  \226\136\128 gcl : (Form) -> Bool, \226\136\128 cl : (Form) -> Bool, \226\136\128 current : List[(Form) -> Bool], \226\136\128 n : Num, n < LENGTH(current) \226\134\146 subsumes(EL(n, incorporate(gcl, cl, current)), EL(n, current))
+  \226\136\128 cl : (Form) -> Bool, \226\136\128 current : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, current) \226\134\146 clause(c)) && clause(cl) \226\134\146 (\226\136\128 c : (Form) -> Bool, MEM(c, replace(cl, current)) \226\134\146 clause(c))
+  (\226\136\128 c : (Form) -> Bool, MEM(c, (current : List[(Form) -> Bool])) \226\134\146 clause(c)) && clause((cl : (Form) -> Bool)) \226\134\146 (\226\136\128 c : (Form) -> Bool, MEM(c, incorporate((gcl : (Form) -> Bool), cl, current)) \226\134\146 clause(c))
+  (\226\136\128 c : (Form) -> Bool, MEM(c, (current : List[(Form) -> Bool])) \226\134\146 clause(c)) && clause((cl : (Form) -> Bool)) && (p : Num) < LENGTH(current) \226\134\146 clause(EL(p, incorporate((gcl : (Form) -> Bool), cl, current)))
+  \226\136\128 current : List[(Form) -> Bool], \226\136\128 gcl : (Form) -> Bool, \226\136\128 new : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, current) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, new) \226\134\146 clause(c)) \226\134\146 (\226\136\128 c : (Form) -> Bool, MEM(c, ITLIST(incorporate(gcl), new, current)) \226\134\146 clause(c))
+  \226\136\128 gcl : (Form) -> Bool, \226\136\128 current : List[(Form) -> Bool], \226\136\128 lis : List[(Form) -> Bool], LENGTH(current) <= LENGTH(ITLIST(incorporate(gcl), lis, current))
+  (k : List[(Form) -> Bool])
+  (t' : List[(Form) -> Bool])
+  (p : Num) < LENGTH((t : List[(Form) -> Bool]))
+  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (a && b \226\134\146 c \226\134\146 d)
+  (p : Num)
+  (p : Num)
+  (new : List[(Form) -> Bool])
+  (new : List[(Form) -> Bool])
+  (p : Num)
+  (n : Num) + (k : Num)
+  \226\136\128 c : (Form) -> Bool, MEM(c, (new : List[(Form) -> Bool])) \226\134\146 clause(c)
+  (l : List[(Form) -> Bool])
+  SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+  !(SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+  (l : List[(Form) -> Bool])
+  SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+  !(SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+  IN((gcl : (Form) -> Bool), Unused(((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])), (m : Num)))
+  clause((gcl : (Form) -> Bool))
+  \226\136\128 c : (Form) -> Bool, MEM(c, list_of_set(allresolvents({(gcl : (Form) -> Bool)}, INSERT(gcl, Used(((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])), (m : Num)))))) == IN(c, allresolvents({gcl}, INSERT(gcl, Used((used, unused), m))))
+  (gcl : (Form) -> Bool) == HD(SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))
+  \226\136\128 c : (Form) -> Bool, MEM(c, (new : List[(Form) -> Bool])) \226\134\146 clause(c)
+  \226\136\128 c : (Form) -> Bool, MEM(c, SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))) \226\134\146 clause(c)
+  SUC((n : Num) + (k : Num)) < LENGTH(SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))
+  SUC((n : Num) + (k : Num)) < LENGTH(SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))
+  given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))
+  SUC((n : Num) + (k : Num)) < LENGTH(SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))
+  SUC((k : Num))
+  (m : Num)
+  ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))
+  IN(EL((n : Num), SND(given(SUC((m : Num) + (k : Num)), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))), Unused((used, unused), SUC(m + k)))
+  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (a && c \226\134\146 b \226\134\146 d)
+  SUC((x : Num)) < (lm : Num) \226\134\146 lm <= (lm1 : Num) + 1 \226\134\146 x < lm1
   1
-  m:num
-  (used:(form->bool)list,unused:(form->bool)list)
-  n:num
-  SUC m
-  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall k m n. n + k < LENGTH(SND(given m (used,unused)))\n                    ==> (EL n (SND(given (m + k) (used,unused))))\n                    subsumes (EL (n + k) (SND(given m (used,unused))))
-  x INSERT s = {x} UNION s
-  ~(LENGTH (SND (given m (used,unused))) <= n)
-  unused:(form->bool)list
-  used:(form->bool)list
-  n = 0 + n
-  HD(SND(given (m + n) (used,unused))) subsumes\n    (EL n (SND (given m (used,unused))))
-  SND (given m (used,unused))
-  n:num
-  x:form->bool
-  x:form->bool
-  set_of_list (FIRSTN (SUC n) (SND (given m (used,unused))))
-  l:(form->bool)list
-  SND (given (m + n) (used,unused))
-  ~(SND (given (m + n) (used,unused)) = [])
-  (HD(SND (given (m + n) (used,unused)))) IN\n      Unused(used,unused) (m + n)
-  c:form->bool
-  set_of_list(FIRSTN n (SND (given m (used,unused)))) UNION\n    {(EL n (SND (given m (used,unused))))}
-  set_of_list(FIRSTN n (SND (given m (used,unused))))
-  LENGTH(SND (given m (used,unused))) <= n
-  ~(SND (given m (used,unused)) = [])
-  {(HD (SND (given m (used,unused))))} UNION\n    set_of_list(FIRSTN n (TL (SND (given m (used,unused))))) =\n    set_of_list(FIRSTN (SUC n) (SND (given m (used,unused))))
-  s UNION t UNION u = t UNION u UNION s
-  l:(form->bool)list
-  SND(given(m + n) (used,unused))
-  ~(SND(given (m + n) (used,unused)) = [])
-  HD(SND(given (m + n) (used,unused))) IN Unused (used,unused) (m + n)
-  HD(SND (given (m + n) (used,unused))) INSERT\n    (Sub (used,unused) m UNION\n     set_of_list (FIRSTN n (SND (given m (used,unused)))))
-  LENGTH(SND (given (m + n) (used,unused))) + n
-  LENGTH(SND (given m (used,unused))) <= n
-  FIRSTN (SUC n) (SND(given m (used,unused))) =\n                  FIRSTN n (SND(given m (used,unused)))
-  forall m n. Sub(used,unused) (m + n) SUBSUMES\n          Sub(used,unused) m UNION\n          set_of_list(FIRSTN n (SND(given m (used,unused))))
-  (forall c. MEM c used ==> clause c) /\\\n   (forall c. MEM c unused ==> clause c)\n   ==> forall n. Sub(used,unused)\n              (n + LENGTH(SND(given n (used,unused))))\n           SUBSUMES (Sub (used,unused) n UNION Unused(used,unused) n)
-  x <= n ==> x <= SUC n
+  (m : Num)
+  ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))
+  (n : Num)
+  SUC((m : Num))
+  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, used) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, unused) \226\134\146 clause(c)) \226\134\146 (\226\136\128 k : Num, \226\136\128 m : Num, \226\136\128 n : Num, n + k < LENGTH(SND(given(m, (used, unused)))) \226\134\146 subsumes(EL(n, SND(given(m + k, (used, unused)))), EL(n + k, SND(given(m, (used, unused))))))
+  INSERT((x : _), (s : (_) -> Bool)) == UNION({x}, s)
+  !(LENGTH(SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))) <= (n : Num))
+  (unused : List[(Form) -> Bool])
+  (used : List[(Form) -> Bool])
+  (n : Num) == 0 + n
+  subsumes(HD(SND(given((m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))), EL(n, SND(given(m, (used, unused)))))
+  SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+  (n : Num)
+  (x : (Form) -> Bool)
+  (x : (Form) -> Bool)
+  set_of_list(FIRSTN(SUC((n : Num)), SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))))
+  (l : List[(Form) -> Bool])
+  SND(given((m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+  !(SND(given((m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+  IN(HD(SND(given((m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))), Unused((used, unused), m + n))
+  (c : (Form) -> Bool)
+  UNION(set_of_list(FIRSTN((n : Num), SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))), {EL(n, SND(given(m, (used, unused))))})
+  set_of_list(FIRSTN((n : Num), SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))))
+  LENGTH(SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))) <= (n : Num)
+  !(SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+  UNION({HD(SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))}, set_of_list(FIRSTN((n : Num), TL(SND(given(m, (used, unused))))))) == set_of_list(FIRSTN(SUC(n), SND(given(m, (used, unused)))))
+  UNION((s : (_) -> Bool), UNION((t : (_) -> Bool), (u : (_) -> Bool))) == UNION(t, UNION(u, s))
+  (l : List[(Form) -> Bool])
+  SND(given((m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+  !(SND(given((m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+  IN(HD(SND(given((m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))), Unused((used, unused), m + n))
+  INSERT(HD(SND(given((m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))), UNION(Sub((used, unused), m), set_of_list(FIRSTN(n, SND(given(m, (used, unused)))))))
+  LENGTH(SND(given((m : Num) + (n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))) + n
+  LENGTH(SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))) <= (n : Num)
+  FIRSTN(SUC((n : Num)), SND(given((m : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))) == FIRSTN(n, SND(given(m, (used, unused))))
+  \226\136\128 m : Num, \226\136\128 n : Num, SUBSUMES(Sub(((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])), m + n), UNION(Sub((used, unused), m), set_of_list(FIRSTN(n, SND(given(m, (used, unused)))))))
+  (\226\136\128 c : (Form) -> Bool, MEM(c, (used : List[(Form) -> Bool])) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, (unused : List[(Form) -> Bool])) \226\134\146 clause(c)) \226\134\146 (\226\136\128 n : Num, SUBSUMES(Sub((used, unused), n + LENGTH(SND(given(n, (used, unused))))), UNION(Sub((used, unused), n), Unused((used, unused), n))))
+  (x : Num) <= (n : Num) \226\134\146 x <= SUC(n)
   (break init 0 = LENGTH(SND(given 0 init))) /\\\n   (break init (SUC n) =\n        break init n + LENGTH(SND(given (break init n) init)))
-  level init n = Sub init (break init n)
+  (level : ((List[(Form) -> Bool], List[(Form) -> Bool]), Num, (Form) -> Bool) -> Bool)((init : (List[(Form) -> Bool], List[(Form) -> Bool])), (n : Num)) == Sub(init, op_break(init, n))
   0
-  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> level(used,unused) 0 SUBSUMES set_of_list(unused)
-  Sub(used,unused) (break(used,unused) n) UNION\n              Unused(used,unused) (break(used,unused) n)
-  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall n. level(used,unused) (SUC n) SUBSUMES\n                allntresolvents (level(used,unused) (n))\n                                (set_of_list(used) UNION\n                                 level(used,unused) (n))
-  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall n c. c IN (level(used,unused) n) ==> clause c
-  forall init m d. break init m <= break init (m + d)
-  forall init m n. m <= n ==> break init m <= break init n
-  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall m n. m <= n\n                  ==> level(used,unused) m SUBSET level(used,unused) n
-  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall m n. m <= n\n                  ==> level(used,unused) n SUBSUMES level(used,unused) m
-  clause p /\\ (forall q. qfree(q) ==> (f q = g q))\n   ==> (IMAGE f p = IMAGE g p)
-  Atom p [t]
-  t:term
-  (forall p. qfree(p) ==> (formsubst i p = formsubst j p)) <=>\n   (termsubst i = termsubst j)
-  a SUBSET a' /\\ b SUBSET b' ==> (a UNION b) SUBSET (a' UNION b')
-  w:form
-  w:form
-  qfree w
-  formsubst ri w
-  b /\\ (c ==> a) ==> ~a ==> b /\\ ~c
-  w:form
-  w:form
-  qfree w
-  formsubst si' (formsubst si w) = formsubst V w
-  w:form
-  v:form
-  u:form
-  (forall q. qfree q ==> (formsubst (termsubst i o termsubst ri o si') q =\n                        (formsubst i o formsubst ri o formsubst si') q)) /\\\n      (forall q. q IN (q'' DIFF q1'') ==> qfree q)
-  IMAGE (formsubst (termsubst i o termsubst ri o si')) (q'' DIFF q1'') =\n    IMAGE (formsubst i o formsubst ri o formsubst si') (q'' DIFF q1'')
-  z IN FVS q''
-  z:num
-  x:form
-  forall x. x IN q''\n          ==> (formsubst i' x = formsubst (termsubst i o termsubst ri o si') x)
-  IMAGE (formsubst i') (q'' DIFF q1'') =\n    IMAGE (formsubst (termsubst i o termsubst ri o si')) (q'' DIFF q1'')
-  IMAGE (formsubst j) p' SUBSET p
-  IMAGE (formsubst (termsubst i o j)) (p' DIFF p1') =\n                  IMAGE (formsubst i o formsubst j) (p' DIFF p1')
-  b ==> ~(a /\\ b) ==> ~a
-  z:num
-  FVS q'' INTER FVS p' = {}
-  ~(z IN FVS q'')
-  z:num
-  x:form
-  forall x. x IN p' ==> (formsubst i' x = formsubst (termsubst i o j) x)
-  IMAGE (formsubst i') (p' DIFF p1') =\n                  IMAGE (formsubst (termsubst i o j)) (p' DIFF p1')
-  forall x. x IN (p' DIFF p1' UNION q'' DIFF q1'') ==> qfree x
-  i':num->term
-  IMAGE (formsubst i') (p' DIFF p1' UNION q'' DIFF q1'')
-  i':num->term
-  i':num->term
-  ~(q1':form->bool = {})
-  q1'':form->bool
-  p1':form->bool
-  IMAGE (formsubst k) ((p' DIFF p1') UNION (q'' DIFF q1''))
-  k = mgu (p1' UNION {~~p | p IN q1''})
-  p1':form->bool SUBSET p'
-  {~~p | p IN q1''} = IMAGE (~~) q1''
-  i':num->term
-  p1' UNION {~~p | p IN q1''}
-  x:form
-  x:form
-  qfree x
-  formsubst ri' (formsubst ri x) = formsubst V x
-  x:form
-  u:form IN q'
-  formsubst ri' u
-  (formsubst si (formsubst ri' u)) IN q''
-  z IN FVS q''
-  z:num
-  u:form
-  u:form
-  qfree u
-  formsubst (termsubst i o termsubst ri o si')\n                          (formsubst si (formsubst ri' u))
-  qfree u
-  formsubst i (~~u) = P
-  u:form
-  y:form
-  x:form
-  b ==> ~(a /\\ b) ==> ~a
-  z:num
-  FVS q'' INTER FVS p' = {}
-  ~(z IN FVS q'')
-  z:num
-  qfree x
-  formsubst (termsubst i o j) x
-  x:form
-  (a ==> a') /\\ (b ==> b') ==> a /\\ b ==> a' /\\ b'
-  (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-  P:form
-  {~~p | p IN q1'} = IMAGE (~~) q1'
-  p1 UNION {~~ p | p IN q1'}
-  (\\x. if x IN FVS q''\n            then termsubst i (termsubst ri (si' x))\n            else termsubst i (j x)) =\n       i'
-  Unifies i' (p1' UNION {~~p | p IN q1''})
-  i' = \\x. if x IN FVS(q'')\n                       then termsubst i (termsubst ri (si' x))\n                       else termsubst i (j x)
-  formsubst si o formsubst ri'
-  q1':form->bool SUBSET q'
-  (q1'':form->bool) SUBSET q''
-  q1'' = IMAGE (formsubst si o formsubst ri') q1'
-  si':num->term
-  FVS(p')
-  q:form->bool
-  ri':num->term
-  FVS(p)
-  q:form->bool
-  q'' = IMAGE (formsubst si) q
-  si = rename q (FVS p')
-  ~(IMAGE (formsubst j) p' INTER p1 = {})
-  IMAGE (formsubst j) p' SUBSET p
-  ~(p1:form->bool = {})
-  (IMAGE (formsubst j) p1') SUBSET p1 /\\ ~(p1' = {})
-  p1' = {x | x IN p' /\\ (formsubst j x IN p1)}
-  IMAGE (formsubst j) p' INTER p1 = {}
-  IMAGE (formsubst j) p' SUBSET p
-  (p:form->bool) DIFF p1
-  IMAGE (formsubst (termsubst i o j)) p' =\n      IMAGE (formsubst i o formsubst j) p'
-  termsubst i o (j:num->term)
-  (IMAGE (formsubst j) p') INTER p1 = {}
-  j:num->term
-  p' subsumes p
-  ri = rename q (FVS p)
-  q1':form->bool
-  p1:form->bool
-  q' = IMAGE (formsubst (rename q (FVS p))) q
-  isaresolvent r (p,q)
-  forall p p' q r.\n        clause p /\\ clause p' /\\ clause q /\\\n        p' subsumes p /\\ isaresolvent r (p,q)\n        ==> p' subsumes r \\/ ?r'. isaresolvent r' (p',q) /\\ r' subsumes r
-  r'':form->bool
-  q':form->bool
-  p:form->bool
-  r'':form->bool
-  r':form->bool
-  r':form->bool
-  p:form->bool
-  q':form->bool
-  q:form->bool
-  r':form->bool
-  r:form->bool
-  p:form->bool
-  q:form->bool
-  forall p q q' r.\n        clause p /\\ clause q /\\ clause q' /\\\n        q' subsumes q /\\ isaresolvent r (p,q)\n        ==> q' subsumes r \\/ ?r'. isaresolvent r' (p,q') /\\ r' subsumes r
-  r':form->bool
-  q':form->bool
-  p':form->bool
-  p:form->bool
-  r':form->bool
-  r:form->bool
-  q':form->bool
-  q:form->bool
-  p:form->bool
-  forall p p' q q' r.\n        clause p /\\ clause p' /\\ clause q /\\ clause q' /\\\n        p' subsumes p /\\ q' subsumes q /\\ isaresolvent r (p,q)\n        ==> p' subsumes r \\/ q' subsumes r \\/\n            ?r'. isaresolvent r' (p',q') /\\ r' subsumes r
-  forall s t u.\n      (forall c. c IN s ==> clause c) /\\\n      (forall c. c IN t ==> clause c) /\\\n      (forall c. c IN u ==> clause c) /\\\n      s SUBSUMES t\n      ==> (s UNION (allresolvents s u)) SUBSUMES (allresolvents t u)
-  forall s t u.\n      (forall c. c IN s ==> clause c) /\\\n      (forall c. c IN t ==> clause c) /\\\n      (forall c. c IN u ==> clause c) /\\\n      t SUBSUMES u\n      ==> (t UNION (allresolvents s t)) SUBSUMES (allresolvents s u)
-  s UNION (allresolvents s t')
-  forall s t s' t'.\n      (forall c. c IN s ==> clause c) /\\\n      (forall c. c IN s' ==> clause c) /\\\n      (forall c. c IN t ==> clause c) /\\\n      (forall c. c IN t' ==> clause c) /\\\n      s SUBSUMES s' /\\ t SUBSUMES t'\n      ==> (s UNION t UNION (allresolvents s t)) SUBSUMES\n          (allresolvents s' t')
-  {~~p | p IN s} = IMAGE (~~) s
-  literal x /\\ literal y
-  (~~)
-  y:form
-  forall y. y IN q1' ==> (formsubst i (~~y) = formsubst i (~~x))
-  forall y. y IN q1' ==> (formsubst i y = formsubst i x)
-  IMAGE(formsubst (termsubst i o k)) q =\n    IMAGE (formsubst i o formsubst k) q
-  forall y. y IN q1' ==> (formsubst i (~~y) = formsubst i (~~x))
-  ~~x IN p1
-  p1 UNION {~~p | p IN q1'}
-  termsubst i o (k:num->term)
-  ~~x IN p1
-  (~~)
-  y:form
-  forall y. y IN q1' ==> (formsubst i (~~ y) = formsubst i x)
-  forall y. y IN q1' ==> (formsubst i y = formsubst i (~~x))
-  IMAGE(formsubst (termsubst i o k)) q =\n      IMAGE (formsubst i o formsubst k) q
-  forall y. y IN q1' ==> (formsubst i (~~y) = formsubst i x)
-  x:form IN p1
-  p1 UNION {~~p | p IN q1'}
-  termsubst i o (k:num->term)
-  x:form IN p1
-  k = rename q (FVS p)
-  formsubst i x
-  x IN (p DIFF p1) /\\ ~~x IN (p DIFF p1)
-  q1':form->bool
-  p1:form->bool
-  q' = IMAGE (formsubst (rename q (FVS p))) q
-  x:form
-  forall p q r.\n      clause p /\\ clause q /\\\n      tautologous(p) /\\ isaresolvent r (p,q)\n      ==> tautologous(r) \\/ q subsumes r
-  ~~x
-  x:form
-  x:form
-  ~~x
-  forall p q. p subsumes q /\\ tautologous(p) ==> tautologous(q)
-  forall p q r.\n      clause p /\\ clause q /\\\n      tautologous(p) /\\ isaresolvent r (q,p)\n      ==> tautologous(r) \\/ q subsumes r
-  forall cl lis c. MEM c (replace cl lis) ==> MEM c lis \\/ (c = cl)
-  forall gcl cl lis c.\n        MEM c (incorporate gcl cl lis) ==> MEM c lis \\/ (c = cl)
-  forall gcl lis new c.\n        MEM c (ITLIST (incorporate gcl) new lis)\n        ==> MEM c new \\/ MEM c lis
-  x < n ==> x < SUC n
-  l:(form->bool)list
-  SND (given n (used,unused))
-  ~(SND (given n (used,unused)) = [])
-  MEM c (TL (SND (given n (used,unused))))
-  MEM c (SND (given n (used,unused)))
-  x < n ==> x < SUC n
-  given n (used,unused)
-  forall used unused c n.\n        MEM c (SND(given n (used,unused)))\n        ==> MEM c unused \\/\n            ?m. m < n /\\\n                MEM c (resolvents\n                         (HD(SND(given m (used,unused))))\n                         (CONS (HD(SND(given m (used,unused))))\n                               (FST(given m (used,unused)))))
-  forall l. ~(l = []) ==> MEM (HD l) l
-  l:(form->bool)list
-  SND (given n (used,unused))
-  ~(SND (given n (used,unused)) = [])
-  x < n ==> x < SUC n
-  MEM c (SND(given n (used,unused)))
-  x < n ==> x < SUC n
-  x < n ==> x < SUC n
-  forall used unused c n.\n        c IN Sub(used,unused) n\n        ==> MEM c unused \\/\n            ?m. m < n /\\\n                MEM c (resolvents\n                         (HD(SND(given m (used,unused))))\n                         (CONS (HD(SND(given m (used,unused))))\n                               (FST(given m (used,unused)))))
-  forall used unused c n.\n        c IN level(used,unused) n\n        ==> MEM c unused \\/\n            ?m. MEM c (resolvents\n                         (HD(SND(given m (used,unused))))\n                         (CONS (HD(SND(given m (used,unused))))\n                               (FST(given m (used,unused)))))
+  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, used) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, unused) \226\134\146 clause(c)) \226\134\146 SUBSUMES(level((used, unused), 0), set_of_list(unused))
+  UNION(Sub(((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])), op_break((used, unused), (n : Num))), Unused((used, unused), op_break((used, unused), n)))
+  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, used) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, unused) \226\134\146 clause(c)) \226\134\146 (\226\136\128 n : Num, SUBSUMES(level((used, unused), SUC(n)), allntresolvents(level((used, unused), n), UNION(set_of_list(used), level((used, unused), n)))))
+  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, used) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, unused) \226\134\146 clause(c)) \226\134\146 (\226\136\128 n : Num, \226\136\128 c : (Form) -> Bool, IN(c, level((used, unused), n)) \226\134\146 clause(c))
+  \226\136\128 init : (List[(Form) -> Bool], List[(Form) -> Bool]), \226\136\128 m : Num, \226\136\128 d : Num, op_break(init, m) <= op_break(init, m + d)
+  \226\136\128 init : (List[(Form) -> Bool], List[(Form) -> Bool]), \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 op_break(init, m) <= op_break(init, n)
+  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, used) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, unused) \226\134\146 clause(c)) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSET(level((used, unused), m), level((used, unused), n)))
+  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], (\226\136\128 c : (Form) -> Bool, MEM(c, used) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, MEM(c, unused) \226\134\146 clause(c)) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSUMES(level((used, unused), n), level((used, unused), m)))
+  clause((p : (Form) -> Bool)) && (\226\136\128 q : Form, qfree(q) \226\134\146 (f : (Form) -> _)(q) == (g : (Form) -> _)(q)) \226\134\146 IMAGE(f, p) == IMAGE(g, p)
+  Atom((p : Num), [(t : Term)])
+  (t : Term)
+  (\226\136\128 p : Form, qfree(p) \226\134\146 formsubst((i : (Num) -> Term), p) == formsubst((j : (Num) -> Term), p)) == (termsubst(i) == termsubst(j))
+  SUBSET((a : (_) -> Bool), (a' : (_) -> Bool)) && SUBSET((b : (_) -> Bool), (b' : (_) -> Bool)) \226\134\146 SUBSET(UNION(a, b), UNION(a', b'))
+  (w : Form)
+  (w : Form)
+  qfree((w : Form))
+  formsubst((ri : (Num) -> Term), (w : Form))
+  (b : Bool) && ((c : Bool) \226\134\146 (a : Bool)) \226\134\146 !a \226\134\146 b && !c
+  (w : Form)
+  (w : Form)
+  qfree((w : Form))
+  formsubst((si' : (Num) -> Term), formsubst((si : (Num) -> Term), (w : Form))) == formsubst(V, w)
+  (w : Form)
+  (v : Form)
+  (u : Form)
+  (\226\136\128 q : Form, qfree(q) \226\134\146 formsubst(o(termsubst((i : (Num) -> Term)), o(termsubst((ri : (Num) -> Term)), (si' : (Num) -> Term))), q) == o(formsubst(i), o(formsubst(ri), formsubst(si')), q)) && (\226\136\128 q : Form, IN(q, DIFF((q'' : (Form) -> Bool), (q1'' : (Form) -> Bool))) \226\134\146 qfree(q))
+  IMAGE(formsubst(o(termsubst((i : (Num) -> Term)), o(termsubst((ri : (Num) -> Term)), (si' : (Num) -> Term)))), DIFF((q'' : (Form) -> Bool), (q1'' : (Form) -> Bool))) == IMAGE(o(formsubst(i), o(formsubst(ri), formsubst(si'))), DIFF(q'', q1''))
+  IN((z : Num), FVS((q'' : (Form) -> Bool)))
+  (z : Num)
+  (x : Form)
+  \226\136\128 x : Form, IN(x, (q'' : (Form) -> Bool)) \226\134\146 formsubst((i' : (Num) -> Term), x) == formsubst(o(termsubst((i : (Num) -> Term)), o(termsubst((ri : (Num) -> Term)), (si' : (Num) -> Term))), x)
+  IMAGE(formsubst((i' : (Num) -> Term)), DIFF((q'' : (Form) -> Bool), (q1'' : (Form) -> Bool))) == IMAGE(formsubst(o(termsubst((i : (Num) -> Term)), o(termsubst((ri : (Num) -> Term)), (si' : (Num) -> Term)))), DIFF(q'', q1''))
+  SUBSET(IMAGE(formsubst((j : (Num) -> Term)), (p' : (Form) -> Bool)), (p : (Form) -> Bool))
+  IMAGE(formsubst(o(termsubst((i : (Num) -> Term)), (j : (Num) -> Term))), DIFF((p' : (Form) -> Bool), (p1' : (Form) -> Bool))) == IMAGE(o(formsubst(i), formsubst(j)), DIFF(p', p1'))
+  (b : Bool) \226\134\146 !((a : Bool) && b) \226\134\146 !a
+  (z : Num)
+  INTER(FVS((q'' : (Form) -> Bool)), FVS((p' : (Form) -> Bool))) == {}
+  !IN((z : Num), FVS((q'' : (Form) -> Bool)))
+  (z : Num)
+  (x : Form)
+  \226\136\128 x : Form, IN(x, (p' : (Form) -> Bool)) \226\134\146 formsubst((i' : (Num) -> Term), x) == formsubst(o(termsubst((i : (Num) -> Term)), (j : (Num) -> Term)), x)
+  IMAGE(formsubst((i' : (Num) -> Term)), DIFF((p' : (Form) -> Bool), (p1' : (Form) -> Bool))) == IMAGE(formsubst(o(termsubst((i : (Num) -> Term)), (j : (Num) -> Term))), DIFF(p', p1'))
+  \226\136\128 x : Form, IN(x, UNION(DIFF((p' : (Form) -> Bool), (p1' : (Form) -> Bool)), DIFF((q'' : (Form) -> Bool), (q1'' : (Form) -> Bool)))) \226\134\146 qfree(x)
+  (i' : (Num) -> Term)
+  IMAGE(formsubst((i' : (Num) -> Term)), UNION(DIFF((p' : (Form) -> Bool), (p1' : (Form) -> Bool)), DIFF((q'' : (Form) -> Bool), (q1'' : (Form) -> Bool))))
+  (i' : (Num) -> Term)
+  (i' : (Num) -> Term)
+  !((q1' : (Form) -> Bool) == {})
+  (q1'' : (Form) -> Bool)
+  (p1' : (Form) -> Bool)
+  IMAGE(formsubst((k : (Num) -> Term)), UNION(DIFF((p' : (Form) -> Bool), (p1' : (Form) -> Bool)), DIFF((q'' : (Form) -> Bool), (q1'' : (Form) -> Bool))))
+  (k : (Num) -> Term) == mgu(UNION((p1' : (Form) -> Bool), {op_tilde_tilde((p : Form)) | IN(p, (q1'' : (Form) -> Bool))}))
+  SUBSET((p1' : (Form) -> Bool), (p' : (Form) -> Bool))
+  {op_tilde_tilde((p : Form)) | IN(p, (q1'' : (Form) -> Bool))} == IMAGE(op_tilde_tilde, q1'')
+  (i' : (Num) -> Term)
+  UNION((p1' : (Form) -> Bool), {op_tilde_tilde((p : Form)) | IN(p, (q1'' : (Form) -> Bool))})
+  (x : Form)
+  (x : Form)
+  qfree((x : Form))
+  formsubst((ri' : (Num) -> Term), formsubst((ri : (Num) -> Term), (x : Form))) == formsubst(V, x)
+  (x : Form)
+  IN((u : Form), (q' : (Form) -> Bool))
+  formsubst((ri' : (Num) -> Term), (u : Form))
+  IN(formsubst((si : (Num) -> Term), formsubst((ri' : (Num) -> Term), (u : Form))), (q'' : (Form) -> Bool))
+  IN((z : Num), FVS((q'' : (Form) -> Bool)))
+  (z : Num)
+  (u : Form)
+  (u : Form)
+  qfree((u : Form))
+  formsubst(o(termsubst((i : (Num) -> Term)), o(termsubst((ri : (Num) -> Term)), (si' : (Num) -> Term))), formsubst((si : (Num) -> Term), formsubst((ri' : (Num) -> Term), (u : Form))))
+  qfree((u : Form))
+  formsubst((i : (Num) -> Term), op_tilde_tilde((u : Form))) == (P : Form)
+  (u : Form)
+  (y : Form)
+  (x : Form)
+  (b : Bool) \226\134\146 !((a : Bool) && b) \226\134\146 !a
+  (z : Num)
+  INTER(FVS((q'' : (Form) -> Bool)), FVS((p' : (Form) -> Bool))) == {}
+  !IN((z : Num), FVS((q'' : (Form) -> Bool)))
+  (z : Num)
+  qfree((x : Form))
+  formsubst(o(termsubst((i : (Num) -> Term)), (j : (Num) -> Term)), (x : Form))
+  (x : Form)
+  ((a : Bool) \226\134\146 (a' : Bool)) && ((b : Bool) \226\134\146 (b' : Bool)) \226\134\146 a && b \226\134\146 a' && b'
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  (P : Form)
+  {op_tilde_tilde((p : Form)) | IN(p, (q1' : (Form) -> Bool))} == IMAGE(op_tilde_tilde, q1')
+  UNION((p1 : (Form) -> Bool), {op_tilde_tilde((p : Form)) | IN(p, (q1' : (Form) -> Bool))})
+  ((x : Num) => if IN(x, FVS((q'' : (Form) -> Bool))) { termsubst((i : (Num) -> Term), termsubst((ri : (Num) -> Term), (si' : (Num) -> Term)(x))) } else { termsubst(i, (j : (Num) -> Term)(x)) }) == (i' : (Num) -> Term)
+  Unifies((i' : (Num) -> Term), UNION((p1' : (Form) -> Bool), {op_tilde_tilde((p : Form)) | IN(p, (q1'' : (Form) -> Bool))}))
+  (i' : (Num) -> Term) == ((x : Num) => if IN(x, FVS((q'' : (Form) -> Bool))) { termsubst((i : (Num) -> Term), termsubst((ri : (Num) -> Term), (si' : (Num) -> Term)(x))) } else { termsubst(i, (j : (Num) -> Term)(x)) })
+  o(formsubst((si : (Num) -> Term)), formsubst((ri' : (Num) -> Term)))
+  SUBSET((q1' : (Form) -> Bool), (q' : (Form) -> Bool))
+  SUBSET((q1'' : (Form) -> Bool), (q'' : (Form) -> Bool))
+  (q1'' : (Form) -> Bool) == IMAGE(o(formsubst((si : (Num) -> Term)), formsubst((ri' : (Num) -> Term))), (q1' : (Form) -> Bool))
+  (si' : (Num) -> Term)
+  FVS((p' : (Form) -> Bool))
+  (q : (Form) -> Bool)
+  (ri' : (Num) -> Term)
+  FVS((p : (Form) -> Bool))
+  (q : (Form) -> Bool)
+  (q'' : (Form) -> Bool) == IMAGE(formsubst((si : (Num) -> Term)), (q : (Form) -> Bool))
+  (si : (Num) -> Term) == rename((q : (Form) -> Bool), FVS((p' : (Form) -> Bool)))
+  !(INTER(IMAGE(formsubst((j : (Num) -> Term)), (p' : (Form) -> Bool)), (p1 : (Form) -> Bool)) == {})
+  SUBSET(IMAGE(formsubst((j : (Num) -> Term)), (p' : (Form) -> Bool)), (p : (Form) -> Bool))
+  !((p1 : (Form) -> Bool) == {})
+  SUBSET(IMAGE(formsubst((j : (Num) -> Term)), (p1' : (Form) -> Bool)), (p1 : (Form) -> Bool)) && !(p1' == {})
+  (p1' : (Form) -> Bool) == {(x : Form) | IN(x, (p' : (Form) -> Bool)) && IN(formsubst((j : (Num) -> Term), x), (p1 : (Form) -> Bool))}
+  INTER(IMAGE(formsubst((j : (Num) -> Term)), (p' : (Form) -> Bool)), (p1 : (Form) -> Bool)) == {}
+  SUBSET(IMAGE(formsubst((j : (Num) -> Term)), (p' : (Form) -> Bool)), (p : (Form) -> Bool))
+  DIFF((p : (Form) -> Bool), (p1 : (Form) -> Bool))
+  IMAGE(formsubst(o(termsubst((i : (Num) -> Term)), (j : (Num) -> Term))), (p' : (Form) -> Bool)) == IMAGE(o(formsubst(i), formsubst(j)), p')
+  o(termsubst((i : (Num) -> Term)), (j : (Num) -> Term))
+  INTER(IMAGE(formsubst((j : (Num) -> Term)), (p' : (Form) -> Bool)), (p1 : (Form) -> Bool)) == {}
+  (j : (Num) -> Term)
+  subsumes((p' : (Form) -> Bool), (p : (Form) -> Bool))
+  (ri : (Num) -> Term) == rename((q : (Form) -> Bool), FVS((p : (Form) -> Bool)))
+  (q1' : (Form) -> Bool)
+  (p1 : (Form) -> Bool)
+  (q' : (Form) -> Bool) == IMAGE(formsubst(rename((q : (Form) -> Bool), FVS((p : (Form) -> Bool)))), q)
+  isaresolvent((r : (Form) -> Bool), ((p : (Form) -> Bool), (q : (Form) -> Bool)))
+  \226\136\128 p : (Form) -> Bool, \226\136\128 p' : (Form) -> Bool, \226\136\128 q : (Form) -> Bool, \226\136\128 r : (Form) -> Bool, clause(p) && clause(p') && clause(q) && subsumes(p', p) && isaresolvent(r, (p, q)) \226\134\146 subsumes(p', r) || (\226\136\131 r' : (Form) -> Bool, isaresolvent(r', (p', q)) && subsumes(r', r))
+  (r'' : (Form) -> Bool)
+  (q' : (Form) -> Bool)
+  (p : (Form) -> Bool)
+  (r'' : (Form) -> Bool)
+  (r' : (Form) -> Bool)
+  (r' : (Form) -> Bool)
+  (p : (Form) -> Bool)
+  (q' : (Form) -> Bool)
+  (q : (Form) -> Bool)
+  (r' : (Form) -> Bool)
+  (r : (Form) -> Bool)
+  (p : (Form) -> Bool)
+  (q : (Form) -> Bool)
+  \226\136\128 p : (Form) -> Bool, \226\136\128 q : (Form) -> Bool, \226\136\128 q' : (Form) -> Bool, \226\136\128 r : (Form) -> Bool, clause(p) && clause(q) && clause(q') && subsumes(q', q) && isaresolvent(r, (p, q)) \226\134\146 subsumes(q', r) || (\226\136\131 r' : (Form) -> Bool, isaresolvent(r', (p, q')) && subsumes(r', r))
+  (r' : (Form) -> Bool)
+  (q' : (Form) -> Bool)
+  (p' : (Form) -> Bool)
+  (p : (Form) -> Bool)
+  (r' : (Form) -> Bool)
+  (r : (Form) -> Bool)
+  (q' : (Form) -> Bool)
+  (q : (Form) -> Bool)
+  (p : (Form) -> Bool)
+  \226\136\128 p : (Form) -> Bool, \226\136\128 p' : (Form) -> Bool, \226\136\128 q : (Form) -> Bool, \226\136\128 q' : (Form) -> Bool, \226\136\128 r : (Form) -> Bool, clause(p) && clause(p') && clause(q) && clause(q') && subsumes(p', p) && subsumes(q', q) && isaresolvent(r, (p, q)) \226\134\146 subsumes(p', r) || subsumes(q', r) || (\226\136\131 r' : (Form) -> Bool, isaresolvent(r', (p', q')) && subsumes(r', r))
+  \226\136\128 s : ((Form) -> Bool) -> Bool, \226\136\128 t : ((Form) -> Bool) -> Bool, \226\136\128 u : ((Form) -> Bool) -> Bool, (\226\136\128 c : (Form) -> Bool, IN(c, s) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, t) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, u) \226\134\146 clause(c)) && SUBSUMES(s, t) \226\134\146 SUBSUMES(UNION(s, allresolvents(s, u)), allresolvents(t, u))
+  \226\136\128 s : ((Form) -> Bool) -> Bool, \226\136\128 t : ((Form) -> Bool) -> Bool, \226\136\128 u : ((Form) -> Bool) -> Bool, (\226\136\128 c : (Form) -> Bool, IN(c, s) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, t) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, u) \226\134\146 clause(c)) && SUBSUMES(t, u) \226\134\146 SUBSUMES(UNION(t, allresolvents(s, t)), allresolvents(s, u))
+  UNION((s : ((Form) -> Bool) -> Bool), allresolvents(s, (t' : ((Form) -> Bool) -> Bool)))
+  \226\136\128 s : ((Form) -> Bool) -> Bool, \226\136\128 t : ((Form) -> Bool) -> Bool, \226\136\128 s' : ((Form) -> Bool) -> Bool, \226\136\128 t' : ((Form) -> Bool) -> Bool, (\226\136\128 c : (Form) -> Bool, IN(c, s) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, s') \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, t) \226\134\146 clause(c)) && (\226\136\128 c : (Form) -> Bool, IN(c, t') \226\134\146 clause(c)) && SUBSUMES(s, s') && SUBSUMES(t, t') \226\134\146 SUBSUMES(UNION(s, UNION(t, allresolvents(s, t))), allresolvents(s', t'))
+  {op_tilde_tilde((p : Form)) | IN(p, (s : (Form) -> Bool))} == IMAGE(op_tilde_tilde, s)
+  literal((x : Form)) && literal((y : Form))
+  op_tilde_tilde
+  (y : Form)
+  \226\136\128 y : Form, IN(y, (q1' : (Form) -> Bool)) \226\134\146 formsubst((i : (Num) -> Term), op_tilde_tilde(y)) == formsubst(i, op_tilde_tilde((x : Form)))
+  \226\136\128 y : Form, IN(y, (q1' : (Form) -> Bool)) \226\134\146 formsubst((i : (Num) -> Term), y) == formsubst(i, (x : Form))
+  IMAGE(formsubst(o(termsubst((i : (Num) -> Term)), (k : (Num) -> Term))), (q : (Form) -> Bool)) == IMAGE(o(formsubst(i), formsubst(k)), q)
+  \226\136\128 y : Form, IN(y, (q1' : (Form) -> Bool)) \226\134\146 formsubst((i : (Num) -> Term), op_tilde_tilde(y)) == formsubst(i, op_tilde_tilde((x : Form)))
+  IN(op_tilde_tilde((x : Form)), (p1 : (Form) -> Bool))
+  UNION((p1 : (Form) -> Bool), {op_tilde_tilde((p : Form)) | IN(p, (q1' : (Form) -> Bool))})
+  o(termsubst((i : (Num) -> Term)), (k : (Num) -> Term))
+  IN(op_tilde_tilde((x : Form)), (p1 : (Form) -> Bool))
+  op_tilde_tilde
+  (y : Form)
+  \226\136\128 y : Form, IN(y, (q1' : (Form) -> Bool)) \226\134\146 formsubst((i : (Num) -> Term), op_tilde_tilde(y)) == formsubst(i, (x : Form))
+  \226\136\128 y : Form, IN(y, (q1' : (Form) -> Bool)) \226\134\146 formsubst((i : (Num) -> Term), y) == formsubst(i, op_tilde_tilde((x : Form)))
+  IMAGE(formsubst(o(termsubst((i : (Num) -> Term)), (k : (Num) -> Term))), (q : (Form) -> Bool)) == IMAGE(o(formsubst(i), formsubst(k)), q)
+  \226\136\128 y : Form, IN(y, (q1' : (Form) -> Bool)) \226\134\146 formsubst((i : (Num) -> Term), op_tilde_tilde(y)) == formsubst(i, (x : Form))
+  IN((x : Form), (p1 : (Form) -> Bool))
+  UNION((p1 : (Form) -> Bool), {op_tilde_tilde((p : Form)) | IN(p, (q1' : (Form) -> Bool))})
+  o(termsubst((i : (Num) -> Term)), (k : (Num) -> Term))
+  IN((x : Form), (p1 : (Form) -> Bool))
+  (k : (Num) -> Term) == rename((q : (Form) -> Bool), FVS((p : (Form) -> Bool)))
+  formsubst((i : (Num) -> Term), (x : Form))
+  IN((x : Form), DIFF((p : (Form) -> Bool), (p1 : (Form) -> Bool))) && IN(op_tilde_tilde(x), DIFF(p, p1))
+  (q1' : (Form) -> Bool)
+  (p1 : (Form) -> Bool)
+  (q' : (Form) -> Bool) == IMAGE(formsubst(rename((q : (Form) -> Bool), FVS((p : (Form) -> Bool)))), q)
+  (x : Form)
+  \226\136\128 p : (Form) -> Bool, \226\136\128 q : (Form) -> Bool, \226\136\128 r : (Form) -> Bool, clause(p) && clause(q) && tautologous(p) && isaresolvent(r, (p, q)) \226\134\146 tautologous(r) || subsumes(q, r)
+  op_tilde_tilde((x : Form))
+  (x : Form)
+  (x : Form)
+  op_tilde_tilde((x : Form))
+  \226\136\128 p : (Form) -> Bool, \226\136\128 q : (Form) -> Bool, subsumes(p, q) && tautologous(p) \226\134\146 tautologous(q)
+  \226\136\128 p : (Form) -> Bool, \226\136\128 q : (Form) -> Bool, \226\136\128 r : (Form) -> Bool, clause(p) && clause(q) && tautologous(p) && isaresolvent(r, (q, p)) \226\134\146 tautologous(r) || subsumes(q, r)
+  \226\136\128 cl : (Form) -> Bool, \226\136\128 lis : List[(Form) -> Bool], \226\136\128 c : (Form) -> Bool, MEM(c, replace(cl, lis)) \226\134\146 MEM(c, lis) || c == cl
+  \226\136\128 gcl : (Form) -> Bool, \226\136\128 cl : (Form) -> Bool, \226\136\128 lis : List[(Form) -> Bool], \226\136\128 c : (Form) -> Bool, MEM(c, incorporate(gcl, cl, lis)) \226\134\146 MEM(c, lis) || c == cl
+  \226\136\128 gcl : (Form) -> Bool, \226\136\128 lis : List[(Form) -> Bool], \226\136\128 new : List[(Form) -> Bool], \226\136\128 c : (Form) -> Bool, MEM(c, ITLIST(incorporate(gcl), new, lis)) \226\134\146 MEM(c, new) || MEM(c, lis)
+  (x : Num) < (n : Num) \226\134\146 x < SUC(n)
+  (l : List[(Form) -> Bool])
+  SND(given((n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+  !(SND(given((n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+  MEM((c : (Form) -> Bool), TL(SND(given((n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))))
+  MEM((c : (Form) -> Bool), SND(given((n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))
+  (x : Num) < (n : Num) \226\134\146 x < SUC(n)
+  given((n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))
+  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], \226\136\128 c : (Form) -> Bool, \226\136\128 n : Num, MEM(c, SND(given(n, (used, unused)))) \226\134\146 MEM(c, unused) || (\226\136\131 m : Num, m < n && MEM(c, resolvents(HD(SND(given(m, (used, unused)))), CONS(HD(SND(given(m, (used, unused)))), FST(given(m, (used, unused)))))))
+  \226\136\128 l : List[_], !(l == NIL) \226\134\146 MEM(HD(l), l)
+  (l : List[(Form) -> Bool])
+  SND(given((n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool]))))
+  !(SND(given((n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))) == NIL)
+  (x : Num) < (n : Num) \226\134\146 x < SUC(n)
+  MEM((c : (Form) -> Bool), SND(given((n : Num), ((used : List[(Form) -> Bool]), (unused : List[(Form) -> Bool])))))
+  (x : Num) < (n : Num) \226\134\146 x < SUC(n)
+  (x : Num) < (n : Num) \226\134\146 x < SUC(n)
+  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], \226\136\128 c : (Form) -> Bool, \226\136\128 n : Num, IN(c, Sub((used, unused), n)) \226\134\146 MEM(c, unused) || (\226\136\131 m : Num, m < n && MEM(c, resolvents(HD(SND(given(m, (used, unused)))), CONS(HD(SND(given(m, (used, unused)))), FST(given(m, (used, unused)))))))
+  \226\136\128 used : List[(Form) -> Bool], \226\136\128 unused : List[(Form) -> Bool], \226\136\128 c : (Form) -> Bool, \226\136\128 n : Num, IN(c, level((used, unused), n)) \226\134\146 MEM(c, unused) || (\226\136\131 m : Num, MEM(c, resolvents(HD(SND(given(m, (used, unused)))), CONS(HD(SND(given(m, (used, unused)))), FST(given(m, (used, unused)))))))
 FIRSTN =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list('?1),fun(list('?1),bool)) ((#FIRSTN:fun(num,fun(list('?1),list('?1))) (#NUMERAL:fun(num,num) #_0:num)) l:list('?1))) #NIL:list('?1))) ((#=:fun(list('?1),fun(list('?1),bool)) ((#FIRSTN:fun(num,fun(list('?1),list('?1))) (#SUC:fun(num,num) n:num)) l:list('?1))) (((#COND:fun(bool,fun(list('?1),fun(list('?1),list('?1)))) ((#=:fun(list('?1),fun(list('?1),bool)) l:list('?1)) #NIL:list('?1))) #NIL:list('?1)) ((#CONS:fun('?1,fun(list('?1),list('?1))) (#HD:fun(list('?1),'?1) l:list('?1))) ((#FIRSTN:fun(num,fun(list('?1),list('?1))) n:num) (#TL:fun(list('?1),list('?1)) l:list('?1)))))))
 FIRSTN_TRIVIAL =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(list('?2),bool),bool) (\l:list('?2). ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#LENGTH:fun(list('?2),num) l:list('?2))) n:num)) ((#=:fun(list('?2),fun(list('?2),bool)) ((#FIRSTN:fun(num,fun(list('?2),list('?2))) n:num) l:list('?2))) l:list('?2)))))))
 FIRSTN_EMPTY =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(list('?3),fun(list('?3),bool)) ((#FIRSTN:fun(num,fun(list('?3),list('?3))) n:num) #NIL:list('?3))) #NIL:list('?3))))
