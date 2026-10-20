@@ -7065,216 +7065,216 @@ Warning: inventing type variables
 0..0..2..4..8..solved at 13
 0..0..2..5..13..solved at 19
 Logic/fol quotations (210):
-  (LIST_UNION [] = {}) /\\\n   (LIST_UNION (CONS h t) = h UNION (LIST_UNION t))
-  forall l. ALL FINITE l ==> FINITE(LIST_UNION l)
-  forall x l. x IN (LIST_UNION l) <=> EX (\\s. x IN s) l
-  forall l1 l2. LIST_UNION(APPEND l1 l2) = (LIST_UNION l1) UNION (LIST_UNION l2)
-  ALL(P:term->bool)
-  P:term->bool
-  forall P. (forall v. P(V v)) /\\ (forall s l. ALL P l ==> P(Fn s l)) ==> forall t. P t
-  l:term list
-  l:term list
-  l:term list
+  (LIST_UNION : (List[(_) -> Bool], _) -> Bool)(NIL) == {} && LIST_UNION(CONS((h : (_) -> Bool), (t : List[(_) -> Bool]))) == UNION(h, LIST_UNION(t))
+  \226\136\128 l : List[(_) -> Bool], ALL(FINITE, l) \226\134\146 FINITE(LIST_UNION(l))
+  \226\136\128 x : _, \226\136\128 l : List[(_) -> Bool], IN(x, LIST_UNION(l)) == EX((s : (_) -> Bool) => IN(x, s), l)
+  \226\136\128 l1 : List[(_) -> Bool], \226\136\128 l2 : List[(_) -> Bool], LIST_UNION(APPEND(l1, l2)) == UNION(LIST_UNION(l1), LIST_UNION(l2))
+  ALL((P : (Term) -> Bool))
+  (P : (Term) -> Bool)
+  \226\136\128 P : (Term) -> Bool, (\226\136\128 v : Num, P(V(v))) && (\226\136\128 s : Num, \226\136\128 l : List[Term], ALL(P, l) \226\134\146 P(Fn(s, l))) \226\134\146 (\226\136\128 t : Term, P(t))
+  (l : List[Term])
+  (l : List[Term])
+  (l : List[Term])
   fn:term ->Z
   fn:term ->Z
-  mf:(term)list->(Z)list
-  \\(x:term) (y:term list) (z:Z) (w:Z list).\n                                CONS z w
-  []:(Z)list
-  h:num->(term)list->(Z)list->Z
-  f:num->Z
+  (mf : (List[Term]) -> List[Z])
+  (x : Term) => (y : List[Term]) => (z : Z) => (w : List[Z]) => CONS(z, w)
+  (NIL : List[Z])
+  (h : (Num, List[Term], List[Z]) -> Z)
+  (f : (Num) -> Z)
   forall f h. ?fn:term->Z.\n        (forall v. fn(V v) = f v) /\\\n        (forall s l. fn(Fn s l) = h s l (MAP fn l))
-  Not p = p --> False
-  True = Not False
-  p || q = (p --> q) --> q
-  p && q = Not (Not p || Not q)
-  (p <-> q) = (p --> q) && (q --> p)
-  ?? x p = Not(!!x (Not p))
-  (forall v. functions_term (V v) = {}) /\\\n   (forall f l. functions_term (Fn f l) =\n        (f,LENGTH l) INSERT (LIST_UNION (MAP functions_term l)))
-  (functions_form False = {}) /\\\n   (functions_form (Atom a l) = LIST_UNION (MAP functions_term l)) /\\\n   (functions_form (p --> q) = (functions_form p) UNION (functions_form q)) /\\\n   (functions_form (!! x p) = functions_form p)
-  (predicates_form False = {}) /\\\n   (predicates_form (Atom a l) = {(a,LENGTH l)}) /\\\n   (predicates_form (p --> q) =\n        (predicates_form p) UNION (predicates_form q)) /\\\n   (predicates_form (!! x p) = predicates_form p)
-  functions fms = UNIONS {functions_form f | f IN fms}
-  predicates fms = UNIONS {predicates_form f | f IN fms}
-  language fms = functions fms, predicates fms
-  functions {p} = functions_form p
-  language {p} = functions_form p,predicates_form p
-  Dom (D:A->bool,Funs:num->(A list)->A,Preds:num->(A list)->bool) = D
-  Fun (D:A->bool,Funs:num->(A list)->A,Preds:num->(A list)->bool) = Funs
-  Pred (D:A->bool,Funs:num->(A list)->A,Preds:num->(A list)->bool) = Preds
-  p = FST(p),FST(SND p),SND(SND p)
-  (M = M') <=> (Dom M = Dom M') /\\ (Fun M = Fun M') /\\ (Pred M = Pred M')
-  M = Dom M,Fun M,Pred M
-  (forall x. FVT (V x) = {x}) /\\\n   (forall f l. FVT (Fn f l) = LIST_UNION (MAP FVT l))
-  (FV False = {}) /\\\n   (forall a l. FV (Atom a l) = LIST_UNION (MAP FVT l)) /\\\n   (forall p q. FV (p --> q) = FV p UNION FV q) /\\\n   (forall x p. FV (!! x p) = FV p DELETE x)
-  (BV False = {}) /\\\n   (forall a l. BV (Atom a l) = {}) /\\\n   (forall p q. BV (p --> q) = BV p UNION BV q) /\\\n   (forall x p. BV (!! x p) = x INSERT BV p)
-  forall t. FINITE(FVT t)
-  forall p. FINITE(FV p)
-  forall p. FINITE(BV p)
-  FV(??x p) = FV(p) DELETE x
-  valmod (x,a) v = \\y. if y = x then a else v y
-  (forall v a k. valmod (k,a) v k = a) /\\\n   (forall v a k x. ~(x = k) ==> (valmod (k,a) v x = v x))
-  forall v x. valmod (x,v x) v = v
-  forall v a x b. valmod (x,a) (valmod (x,b) v) = valmod (x,a) v
-  valuation(M) v <=> forall x:num. v(x) IN Dom(M)
-  forall M a v. valuation(M) v /\\ a IN Dom(M) ==> valuation(M) (valmod (x,a) v)
-  forall v x. valmod(x,v x) v = v
-  (forall x. termval M v (V x) = v(x)) /\\\n   (forall f l. termval M v (Fn f l) = Fun(M) f (MAP (termval M v) l))
-  (holds M v False <=> F) /\\\n   (forall a l. holds M v (Atom a l) <=> Pred(M) a (MAP (termval M v) l)) /\\\n   (forall p q. holds M v (p --> q) <=> holds M v p ==> holds M v q) /\\\n   (forall x p. holds M v (!! x p) <=>\n                forall a. a IN Dom(M) ==> holds M (valmod (x,a) v) p)
-  hold M v fms <=> forall p. p IN fms ==> holds M v p
-  M satisfies fms <=> forall v p. valuation(M) v /\\ p IN fms ==> holds M v p
-  M satisfies {p} <=> forall v. valuation(M) v ==> holds M v p
-  (holds M v False <=> F) /\\\n   (holds M v True <=> T) /\\\n   (forall a l. holds M v (Atom a l) <=> Pred(M) a (MAP (termval M v) l)) /\\\n   (forall p. holds M v (Not p) <=> ~(holds M v p)) /\\\n   (forall p q. holds M v (p || q) <=> holds M v p \\/ holds M v q) /\\\n   (forall p q. holds M v (p && q) <=> holds M v p /\\ holds M v q) /\\\n   (forall p q. holds M v (p --> q) <=> holds M v p ==> holds M v q) /\\\n   (forall p q. holds M v (p <-> q) <=> (holds M v p = holds M v q)) /\\\n   (forall x p. holds M v (!! x p) <=>\n                forall a. a IN Dom(M) ==> holds M (valmod (x,a) v) p) /\\\n   (forall x p. holds M v (?? x p) <=>\n                ?a. a IN Dom(M) /\\ holds M (valmod (x,a) v) p)
-  forall l t x. x IN FVT t /\\ MEM t l\n             ==>  x IN LIST_UNION (MAP FVT l)
-  \\t. forall(v:num->A) v'.\n                (forall x. x IN FVT t ==> (v' x = v x))\n                ==> (termval M v' t :A = termval M v t)
-  forall M t (v:num->A) v'.\n        (forall x. x IN (FVT t) ==> (v'(x) = v(x)))\n             ==> (termval M v' t = termval M v t)
-  x:num = p
-  x:num
-  p:num
-  l:term list
-  l:term list
-  l:term list
-  forall M p (v:num->A) v'.\n      (forall x. x IN (FV p) ==> (v'(x) = v(x)))\n             ==> (holds M v' p <=> holds M v p)
-  satisfiable (U:A->bool) fms <=>\n   ?M:(A->bool)#(num->A list->A)#(num->A list->bool).\n        ~(Dom M = {}) /\\ M satisfies fms
-  valid (U:A->bool) fms <=>\n   forall M:(A->bool)#(num->A list->A)#(num->A list->bool).\n        M satisfies fms
-  entails (U:A->bool) A p <=>\n   forall(M:(A->bool)#(num->A list->A)#(num->A list->bool)) v.\n        hold M v A ==> holds M v p
-  equivalent (U:A->bool) p q <=>\n   forall(M:(A->bool)#(num->A list->A)#(num->A list->bool)) v.\n        holds M v p <=> holds M v q
-  interpretation (fns:(num#num)->bool,preds:(num#num)->bool) M <=>\n     forall f l. (f,LENGTH l) IN fns /\\ ALL (\\x. x IN Dom(M)) l\n           ==> (Fun(M) f l) IN Dom(M)
-  l:term list
-  l:term list
-  MEM (x:term) l
-  forall any:num#num->bool M v t.\n        interpretation (functions_term t,any) M /\\\n        valuation(M) v\n        ==> termval M v t IN Dom(M)
-  forall M funs1 funs2 preds1 preds2.\n        funs2 SUBSET funs1\n        ==> interpretation (funs1,preds1) M\n            ==> interpretation (funs2,preds2) M
-  (forall x. termsubst v (V x) = v(x)) /\\\n  (forall f l. termsubst v (Fn f l) = Fn f (MAP (termsubst v) l))
-  forall M. (Fun(M) = Fn) ==> forall v t. termsubst v t = termval M v t
-  forall M. (Fun(M) = Fn) ==> forall t. termval M V t = t
-  forall M v i t. termval M v (termsubst i t) = termval M (termval M v o i) t
-  forall i j t. termsubst j (termsubst i t) = termsubst (termsubst j o i) t
-  forall t. termsubst V t = t
-  Dom(a,Fn,b),Fn,Pred(a,Fn,b)
-  forall t v v'. (forall x. x IN (FVT t) ==> (v'(x) = v(x)))\n            ==> (termsubst v' t = termsubst v t)
-  {x | ?y. y IN (s UNION t) /\\ P x y} =\n     {x | ?y. y IN s /\\ P x y} UNION {x | ?y. y IN t /\\ P x y}
-  i:num->term
-  i:num->term
-  i:num->term
-  forall t i. FVT(termsubst i t) = {x | ?y. y IN FVT(t) /\\ x IN FVT(i y)}
-  forall x y. MAX x y = MAX y x
-  forall x y z. MAX x (MAX y z) = MAX (MAX x y) z
-  SETMAX s = ITSET MAX s 0
-  VARIANT s = SETMAX s + 1
-  y <= x
-  x:num <= y
-  y:num <= s
-  x:num <= s
-  (SETMAX {} = 0) /\\\n   (forall x s. FINITE s ==>\n           (SETMAX (x INSERT s) = if x IN s then SETMAX s\n                                  else MAX x (SETMAX s)))
-  forall s. FINITE s ==> forall x. x IN s ==> x <= SETMAX s
-  (SETMAX {} = 0) /\\\n   (forall x s. FINITE s ==>\n           (SETMAX (x INSERT s) = MAX x (SETMAX s)))
-  (x INSERT s) UNION t = x INSERT (s UNION t)
-  forall t. FINITE(t) ==> forall s. FINITE(s) ==>\n                        (SETMAX(s UNION t) = MAX (SETMAX s) (SETMAX t))
-  forall s t. FINITE(s UNION t)\n         ==> (SETMAX(s UNION t) = MAX (SETMAX s) (SETMAX t))
-  ~(x + 1 <= x)
-  forall s:num->bool. FINITE(s) ==> ~(VARIANT(s) IN s)
-  forall p. ~(VARIANT(FV p) IN FV(p))
-  (formsubst v False = False) /\\\n   (formsubst v (Atom p l) = Atom p (MAP (termsubst v) l)) /\\\n   (formsubst v (q --> r) = (formsubst v q --> formsubst v r)) /\\\n   (formsubst v (!!x q) =\n        let v' = valmod (x,V x) v in\n        let z = if ?y. y IN FV(!!x q) /\\ x IN FVT(v'(y))\n                then VARIANT(FV(formsubst v' q)) else x in\n        !!z (formsubst (valmod (x,V(z)) v) q))
-  ~(~p /\\ p)
-  forall p. formsubst V p = p
-  y:num
-  x:num
-  (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
-  (?y. (y IN FV a1 /\\ ~(y = p)) /\\ p IN FVT (valmod (p,V p) v' y)) <=>\n      (?y. (y IN FV a1 /\\ ~(y = p)) /\\ p IN FVT (valmod (p,V p) v y))
-  p:num
-  l:term list
-  l:term list
-  l:term list
-  forall p v v'. (forall x. x IN (FV p) ==> (v'(x) = v(x)))\n            ==> (formsubst v' p = formsubst v p)
-  {x | ?y. y IN (s UNION t) /\\ P x y} =\n     {x | ?y. y IN s /\\ P x y} UNION {x | ?y. y IN t /\\ P x y}
-  y:num
-  a0' = VARIANT (FV (formsubst (valmod (a0,V a0) i) a1))
-  formsubst (valmod (a0,V a0) i) a1
-  forall p i. FV(formsubst i p) = {x | ?y. y IN FV(p) /\\ x IN FVT(i y)}
-  x:num
-  x:num
-  ~(y IN FV(formsubst (valmod (a0,V a0) i) a1))
-  y:num
-  x:num
-  (a ==> (b <=> c)) ==> (a ==> b <=> a ==> c)
-  forall p i v. holds M (v:num->A) (formsubst i p) <=>\n           holds M (termval M v o i) p
-  y:num
-  forall x t p v. holds M (v:num->A) (formsubst (valmod (x,t) V) p) <=>\n             holds M (valmod (x,termval M v t) v) p
-  forall x y p v. holds M (v:num->A) (formsubst (valmod (x,V y) V) p) <=>\n             holds M (valmod (x,v(y)) v) p
-  forall x y p v. ~(y IN FV(!!x p))\n             ==> (holds M v (!!y (formsubst (valmod (x,V y) V) p)) <=>\n                  holds M (v:num->A) (!!x p))
-  forall x y p v. ~(y IN FV(??x p))\n              ==> (holds M v (??y (formsubst (valmod (x,V y) V) p)) <=>\n                   holds M (v:num->A) (??x p))
-  forall p x y. FV(formsubst (valmod (x,V y) V) p) DELETE y =\n           (FV(p) DELETE x) DELETE y
-  {x | ?y. y IN (s UNION t) /\\ P x y} =\n     {x | ?y. y IN s /\\ P x y} UNION {x | ?y. y IN t /\\ P x y}
-  (s = a UNION c) /\\ (t = b UNION d)\n     ==> (s UNION t = (a UNION b) UNION (c UNION d))
-  i:num->term
-  i:num->term
-  i:num->term
-  forall l.\n     ALL\n     (\\t. forall i. functions_term (termsubst i t) =\n              functions_term t UNION\n              {x | ?y. y IN FVT t /\\ x IN functions_term (i y)}) l\n     ==> (forall i. LIST_UNION (MAP functions_term (MAP (termsubst i) l)) =\n              LIST_UNION (MAP functions_term l) UNION\n              {x | ?y. y IN LIST_UNION (MAP FVT l) /\\\n                       x IN functions_term (i y)})
-  forall t i. functions_term(termsubst i t) =\n         functions_term t UNION\n         {x | ?y. y IN FVT(t) /\\ x IN functions_term(i y)}
-  {x | ?y. y IN (s UNION t) /\\ P x y} =\n     {x | ?y. y IN s /\\ P x y} UNION {x | ?y. y IN t /\\ P x y}
-  (a UNION b) UNION (c UNION d) = (a UNION c) UNION (b UNION d)
-  y:num = a0
-  i:num->term
-  forall p i. functions_form(formsubst i p) =\n         functions_form p UNION\n         {x | ?y. y IN FV(p) /\\ x IN functions_term(i y)}
-  forall x t p. x IN FV(p)\n           ==> (functions_form(formsubst (valmod (x,t) V) p) =\n                functions_form p UNION functions_term t)
-  forall p i. predicates_form(formsubst i p) = predicates_form p
-  ~p /\\ p <=> F
-  language {(formsubst (valmod (x,V y) V) p)} = language {p}
-  l:term list
-  l:term list
-  MEM (x:term) l
-  MAP (termval M (v:num->A)) l =\n                 MAP (termval M' v) l
-  forall M t. (forall f zs. (f,LENGTH zs) IN functions_term t\n                 ==> (Fun(M) f zs = Fun(M') f zs))\n         ==> forall v:num->A. termval M v t = termval M' v t
-  v:num->A
-  v:num->A
-  v:num->A
-  valmod (a0,a) (v:num->A)
-  v:num->A
-  v:num->A
-  v:num->A
-  v:num->A
-  a1:term list
-  a1:term list
-  forall f zs.\n           f,LENGTH zs IN functions_form (Atom a0 a1)\n           ==> (Fun M f zs :A = Fun M' f zs)
-  forall M M' p. (Dom(M) = Dom(M')) /\\\n            (forall P zs. Pred(M) P zs = Pred(M') P zs) /\\\n            (forall f zs. (f,LENGTH zs) IN functions_form p\n                    ==> (Fun(M) f zs = Fun(M') f zs))\n            ==> forall v:num->A. holds M v p <=> holds M' v p
-  v:num->A
-  valmod (a0,a) (v:num->A)
-  v:num->A
-  v:num->A
-  forall x. termval M' (v:num->A) x = termval M (v:num->A) x
-  MAP (termval M' (v:num->A)) a1 = MAP (termval M (v:num->A)) a1
-  forall M M' p. (Dom(M) = Dom(M')) /\\\n            (forall f zs. Fun(M) f zs = Fun(M') f zs) /\\\n            (forall P zs. (P,LENGTH zs) IN predicates_form p\n                    ==> (Pred(M) P zs = Pred(M') P zs))\n            ==> forall v:num->A. holds M v p <=> holds M' v p
-  Dom(M):A->bool = EMPTY
-  forall M x p. (forall v:num->A. valuation(M) v ==> holds M v (!!x p)) <=>\n           (Dom M = EMPTY) \\/ forall v. valuation(M) v ==> holds M v p
-  v:num->A = i o v
-  v:num->A
-  functions s SUBSET fns
-  functions_form p SUBSET fns
-  p:form IN s
-  p:form
-  s:form->bool
-  forall x:A. x IN Dom(M) ==> (i x = x)
-  forall a. i o valmod (x,a) (v:num->A) = valmod (x,i(a)) ((i:A->A) o v)
-  v:num->A
-  p:form
-  x:num
-  forall p. functions_form p SUBSET fns\n        ==> forall v:num->A. holds M' v p <=> holds M ((i:A->A) o v) p
-  Fun M P (MAP ((i:A->A) o termval M' (v:num->A)) args) IN\n                    Dom(M)
-  Fun M P (MAP ((i:A->A) o termval M' (v:num->A)) args)
-  v:num->A
-  forall t. MEM t args\n          ==> forall v:num->A. (i:A->A) (termval M' v t) = termval M (i o v) t
-  forall t. MEM t args ==> functions_term t SUBSET fns
-  (P:num,LENGTH(args:term list)) IN fns
-  args:term list
-  P:num
-  forall t. functions_term t SUBSET fns\n        ==> forall v:num->A. (i:A->A) (termval M' v t) = termval M (i o v) t
-  ALL (\\x:A. x IN D) l
-  b /\\ (b ==> a /\\ c) ==> a /\\ b /\\ c
-  ~(Dom(M) = ({}:A->bool))
-  x:A
-  forall x. (i:A->A) x IN Dom(M)
-  M' = (D:A->bool,\n                   (\\f args. Fun(M) f (MAP (i:A->A) args)),\n                   (\\P args. Pred(M) P (MAP i args)))
-  i = \\x. if x IN Dom(M) then x else @z:A. z IN Dom(M)
-  forall M fns preds D.\n        interpretation(fns,preds) M /\\\n        (Dom(M) SUBSET D) /\\\n        ~(Dom(M):A->bool = {})\n        ==> ?M'. interpretation(fns,preds) M' /\\\n                 (Dom(M') = D) /\\\n                 forall s. functions s SUBSET fns /\\\n                     predicates s SUBSET preds\n                     ==> (M' satisfies s <=> M satisfies s)
+  (Not : (Form) -> Form)((p : Form)) == op_minus_minus_gt(p, False)
+  (True : Form) == Not(False)
+  (op_bar_bar : (Form, Form) -> Form)((p : Form), (q : Form)) == op_minus_minus_gt(op_minus_minus_gt(p, q), q)
+  (op_amp_amp : (Form, Form) -> Form)((p : Form), (q : Form)) == Not(op_bar_bar(Not(p), Not(q)))
+  (op_lt_minus_gt : (Form, Form) -> Form)((p : Form), (q : Form)) == op_amp_amp(op_minus_minus_gt(p, q), op_minus_minus_gt(q, p))
+  (op_q_q : (Num, Form) -> Form)((x : Num), (p : Form)) == Not(op_bang_bang(x, Not(p)))
+  (\226\136\128 v : Num, (functions_term : (Term, (Num, Num)) -> Bool)(V(v)) == {}) && (\226\136\128 f : Num, \226\136\128 l : List[Term], functions_term(Fn(f, l)) == INSERT((f, LENGTH(l)), LIST_UNION(MAP(functions_term, l))))
+  (functions_form : (Form, (Num, Num)) -> Bool)(False) == {} && functions_form(Atom((a : Num), (l : List[Term]))) == LIST_UNION(MAP(functions_term, l)) && functions_form(op_minus_minus_gt((p : Form), (q : Form))) == UNION(functions_form(p), functions_form(q)) && functions_form(op_bang_bang((x : Num), p)) == functions_form(p)
+  (predicates_form : (Form, (Num, Num)) -> Bool)(False) == {} && predicates_form(Atom((a : Num), (l : List[Term]))) == {(a, LENGTH(l))} && predicates_form(op_minus_minus_gt((p : Form), (q : Form))) == UNION(predicates_form(p), predicates_form(q)) && predicates_form(op_bang_bang((x : Num), p)) == predicates_form(p)
+  (functions : ((Form) -> Bool, (Num, Num)) -> Bool)((fms : (Form) -> Bool)) == UNIONS({functions_form((f : Form)) | IN(f, fms)})
+  (predicates : ((Form) -> Bool, (Num, Num)) -> Bool)((fms : (Form) -> Bool)) == UNIONS({predicates_form((f : Form)) | IN(f, fms)})
+  (language : ((Form) -> Bool) -> (((Num, Num)) -> Bool, ((Num, Num)) -> Bool))((fms : (Form) -> Bool)) == (functions(fms), predicates(fms))
+  functions({(p : Form)}) == functions_form(p)
+  language({(p : Form)}) == (functions_form(p), predicates_form(p))
+  (Dom : (((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), A) -> Bool)(((D : (A) -> Bool), (Funs : (Num, List[A]) -> A), (Preds : (Num, List[A]) -> Bool))) == D
+  (Fun : (((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), Num, List[A]) -> A)(((D : (A) -> Bool), (Funs : (Num, List[A]) -> A), (Preds : (Num, List[A]) -> Bool))) == Funs
+  (Pred : (((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), Num, List[A]) -> Bool)(((D : (A) -> Bool), (Funs : (Num, List[A]) -> A), (Preds : (Num, List[A]) -> Bool))) == Preds
+  (p : (_, _, _)) == (FST(p), FST(SND(p)), SND(SND(p)))
+  ((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)) == (M' : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool))) == (Dom(M) == Dom(M') && Fun(M) == Fun(M') && Pred(M) == Pred(M'))
+  (M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)) == (Dom(M), Fun(M), Pred(M))
+  (\226\136\128 x : Num, (FVT : (Term, Num) -> Bool)(V(x)) == {x}) && (\226\136\128 f : Num, \226\136\128 l : List[Term], FVT(Fn(f, l)) == LIST_UNION(MAP(FVT, l)))
+  (FV : (Form, Num) -> Bool)(False) == {} && (\226\136\128 a : Num, \226\136\128 l : List[Term], FV(Atom(a, l)) == LIST_UNION(MAP(FVT, l))) && (\226\136\128 p : Form, \226\136\128 q : Form, FV(op_minus_minus_gt(p, q)) == UNION(FV(p), FV(q))) && (\226\136\128 x : Num, \226\136\128 p : Form, FV(op_bang_bang(x, p)) == DELETE(FV(p), x))
+  (BV : (Form, Num) -> Bool)(False) == {} && (\226\136\128 a : Num, \226\136\128 l : List[Term], BV(Atom(a, l)) == {}) && (\226\136\128 p : Form, \226\136\128 q : Form, BV(op_minus_minus_gt(p, q)) == UNION(BV(p), BV(q))) && (\226\136\128 x : Num, \226\136\128 p : Form, BV(op_bang_bang(x, p)) == INSERT(x, BV(p)))
+  \226\136\128 t : Term, FINITE(FVT(t))
+  \226\136\128 p : Form, FINITE(FV(p))
+  \226\136\128 p : Form, FINITE(BV(p))
+  FV(op_q_q((x : Num), (p : Form))) == DELETE(FV(p), x)
+  (valmod : ((_, _), (_) -> _, _) -> _)(((x : _), (a : _)), (v : (_) -> _)) == ((y : _) => if y == x { a } else { v(y) })
+  (\226\136\128 v : (_) -> _, \226\136\128 a : _, \226\136\128 k : _, valmod((k, a), v, k) == a) && (\226\136\128 v : (_) -> _, \226\136\128 a : _, \226\136\128 k : _, \226\136\128 x : _, !(x == k) \226\134\146 valmod((k, a), v, x) == v(x))
+  \226\136\128 v : (_) -> _, \226\136\128 x : _, valmod((x, v(x)), v) == v
+  \226\136\128 v : (_) -> _, \226\136\128 a : _, \226\136\128 x : _, \226\136\128 b : _, valmod((x, a), valmod((x, b), v)) == valmod((x, a), v)
+  (valuation : (((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), (Num) -> _) -> Bool)((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)), (v : (Num) -> _)) == (\226\136\128 x : Num, IN(v(x), Dom(M)))
+  \226\136\128 M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), \226\136\128 a : _, \226\136\128 v : (Num) -> _, valuation(M, v) && IN(a, Dom(M)) \226\134\146 valuation(M, valmod(((x : Num), a), v))
+  \226\136\128 v : (_) -> _, \226\136\128 x : _, valmod((x, v(x)), v) == v
+  (\226\136\128 x : Num, (termval : (((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), (Num) -> _, Term) -> _)((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)), (v : (Num) -> _), V(x)) == v(x)) && (\226\136\128 f : Num, \226\136\128 l : List[Term], termval(M, v, Fn(f, l)) == Fun(M, f, MAP(termval(M, v), l)))
+  (holds : (((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), (Num) -> _, Form) -> Bool)((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)), (v : (Num) -> _), False) == false && (\226\136\128 a : Num, \226\136\128 l : List[Term], holds(M, v, Atom(a, l)) == Pred(M, a, MAP(termval(M, v), l))) && (\226\136\128 p : Form, \226\136\128 q : Form, holds(M, v, op_minus_minus_gt(p, q)) == (holds(M, v, p) \226\134\146 holds(M, v, q))) && (\226\136\128 x : Num, \226\136\128 p : Form, holds(M, v, op_bang_bang(x, p)) == (\226\136\128 a : _, IN(a, Dom(M)) \226\134\146 holds(M, valmod((x, a), v), p)))
+  (hold : (((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), (Num) -> _, (Form) -> Bool) -> Bool)((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)), (v : (Num) -> _), (fms : (Form) -> Bool)) == (\226\136\128 p : Form, IN(p, fms) \226\134\146 holds(M, v, p))
+  (satisfies : (((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), (Form) -> Bool) -> Bool)((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)), (fms : (Form) -> Bool)) == (\226\136\128 v : (Num) -> _, \226\136\128 p : Form, valuation(M, v) && IN(p, fms) \226\134\146 holds(M, v, p))
+  satisfies((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)), {(p : Form)}) == (\226\136\128 v : (Num) -> _, valuation(M, v) \226\134\146 holds(M, v, p))
+  holds((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)), (v : (Num) -> _), False) == false && holds(M, v, True) == true && (\226\136\128 a : Num, \226\136\128 l : List[Term], holds(M, v, Atom(a, l)) == Pred(M, a, MAP(termval(M, v), l))) && (\226\136\128 p : Form, holds(M, v, Not(p)) == !holds(M, v, p)) && (\226\136\128 p : Form, \226\136\128 q : Form, holds(M, v, op_bar_bar(p, q)) == (holds(M, v, p) || holds(M, v, q))) && (\226\136\128 p : Form, \226\136\128 q : Form, holds(M, v, op_amp_amp(p, q)) == (holds(M, v, p) && holds(M, v, q))) && (\226\136\128 p : Form, \226\136\128 q : Form, holds(M, v, op_minus_minus_gt(p, q)) == (holds(M, v, p) \226\134\146 holds(M, v, q))) && (\226\136\128 p : Form, \226\136\128 q : Form, holds(M, v, op_lt_minus_gt(p, q)) == (holds(M, v, p) == holds(M, v, q))) && (\226\136\128 x : Num, \226\136\128 p : Form, holds(M, v, op_bang_bang(x, p)) == (\226\136\128 a : _, IN(a, Dom(M)) \226\134\146 holds(M, valmod((x, a), v), p))) && (\226\136\128 x : Num, \226\136\128 p : Form, holds(M, v, op_q_q(x, p)) == (\226\136\131 a : _, IN(a, Dom(M)) && holds(M, valmod((x, a), v), p)))
+  \226\136\128 l : List[Term], \226\136\128 t : Term, \226\136\128 x : Num, IN(x, FVT(t)) && MEM(t, l) \226\134\146 IN(x, LIST_UNION(MAP(FVT, l)))
+  (t : Term) => \226\136\128 v : (Num) -> A, \226\136\128 v' : (Num) -> A, (\226\136\128 x : Num, IN(x, FVT(t)) \226\134\146 v'(x) == v(x)) \226\134\146 termval((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v', t) == termval(M, v, t)
+  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 t : Term, \226\136\128 v : (Num) -> A, \226\136\128 v' : (Num) -> A, (\226\136\128 x : Num, IN(x, FVT(t)) \226\134\146 v'(x) == v(x)) \226\134\146 termval(M, v', t) == termval(M, v, t)
+  (x : Num) == (p : Num)
+  (x : Num)
+  (p : Num)
+  (l : List[Term])
+  (l : List[Term])
+  (l : List[Term])
+  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 p : Form, \226\136\128 v : (Num) -> A, \226\136\128 v' : (Num) -> A, (\226\136\128 x : Num, IN(x, FV(p)) \226\134\146 v'(x) == v(x)) \226\134\146 holds(M, v', p) == holds(M, v, p)
+  (satisfiable : ((A) -> Bool, (Form) -> Bool) -> Bool)((U : (A) -> Bool), (fms : (Form) -> Bool)) == (\226\136\131 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), !(Dom(M) == {}) && satisfies(M, fms))
+  (valid : ((A) -> Bool, (Form) -> Bool) -> Bool)((U : (A) -> Bool), (fms : (Form) -> Bool)) == (\226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), satisfies(M, fms))
+  (entails : ((A) -> Bool, (Form) -> Bool, Form) -> Bool)((U : (A) -> Bool), (A : (Form) -> Bool), (p : Form)) == (\226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 v : (Num) -> A, hold(M, v, A) \226\134\146 holds(M, v, p))
+  (equivalent : ((A) -> Bool, Form, Form) -> Bool)((U : (A) -> Bool), (p : Form), (q : Form)) == (\226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 v : (Num) -> A, holds(M, v, p) == holds(M, v, q))
+  (interpretation : ((((Num, Num)) -> Bool, ((Num, Num)) -> Bool), ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)) -> Bool)(((fns : ((Num, Num)) -> Bool), (preds : ((Num, Num)) -> Bool)), (M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool))) == (\226\136\128 f : Num, \226\136\128 l : List[_], IN((f, LENGTH(l)), fns) && ALL((x : _) => IN(x, Dom(M)), l) \226\134\146 IN(Fun(M, f, l), Dom(M)))
+  (l : List[Term])
+  (l : List[Term])
+  MEM((x : Term), (l : List[Term]))
+  \226\136\128 any : ((Num, Num)) -> Bool, \226\136\128 M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), \226\136\128 v : (Num) -> _, \226\136\128 t : Term, interpretation((functions_term(t), any), M) && valuation(M, v) \226\134\146 IN(termval(M, v, t), Dom(M))
+  \226\136\128 M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), \226\136\128 funs1 : ((Num, Num)) -> Bool, \226\136\128 funs2 : ((Num, Num)) -> Bool, \226\136\128 preds1 : ((Num, Num)) -> Bool, \226\136\128 preds2 : ((Num, Num)) -> Bool, SUBSET(funs2, funs1) \226\134\146 interpretation((funs1, preds1), M) \226\134\146 interpretation((funs2, preds2), M)
+  (\226\136\128 x : Num, (termsubst : ((Num) -> Term, Term) -> Term)((v : (Num) -> Term), V(x)) == v(x)) && (\226\136\128 f : Num, \226\136\128 l : List[Term], termsubst(v, Fn(f, l)) == Fn(f, MAP(termsubst(v), l)))
+  \226\136\128 M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), Fun(M) == Fn \226\134\146 (\226\136\128 v : (Num) -> Term, \226\136\128 t : Term, termsubst(v, t) == termval(M, v, t))
+  \226\136\128 M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), Fun(M) == Fn \226\134\146 (\226\136\128 t : Term, termval(M, V, t) == t)
+  \226\136\128 M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), \226\136\128 v : (Num) -> _, \226\136\128 i : (Num) -> Term, \226\136\128 t : Term, termval(M, v, termsubst(i, t)) == termval(M, o(termval(M, v), i), t)
+  \226\136\128 i : (Num) -> Term, \226\136\128 j : (Num) -> Term, \226\136\128 t : Term, termsubst(j, termsubst(i, t)) == termsubst(o(termsubst(j), i), t)
+  \226\136\128 t : Term, termsubst(V, t) == t
+  (Dom(((a : (Term) -> Bool), Fn, (b : (Num, List[Term]) -> Bool))), Fn, Pred((a, Fn, b)))
+  \226\136\128 t : Term, \226\136\128 v : (Num) -> Term, \226\136\128 v' : (Num) -> Term, (\226\136\128 x : Num, IN(x, FVT(t)) \226\134\146 v'(x) == v(x)) \226\134\146 termsubst(v', t) == termsubst(v, t)
+  {(x : _) | \226\136\131 y : _, IN(y, UNION((s : (_) -> Bool), (t : (_) -> Bool))) && (P : (_, _) -> Bool)(x, y)} == UNION({(x : _) | \226\136\131 y : _, IN(y, s) && P(x, y)}, {(x : _) | \226\136\131 y : _, IN(y, t) && P(x, y)})
+  (i : (Num) -> Term)
+  (i : (Num) -> Term)
+  (i : (Num) -> Term)
+  \226\136\128 t : Term, \226\136\128 i : (Num) -> Term, FVT(termsubst(i, t)) == {(x : Num) | \226\136\131 y : Num, IN(y, FVT(t)) && IN(x, FVT(i(y)))}
+  \226\136\128 x : Num, \226\136\128 y : Num, MAX(x, y) == MAX(y, x)
+  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 z : Num, MAX(x, MAX(y, z)) == MAX(MAX(x, y), z)
+  (SETMAX : ((Num) -> Bool) -> Num)((s : (Num) -> Bool)) == ITSET(MAX, s, 0)
+  (VARIANT : ((Num) -> Bool) -> Num)((s : (Num) -> Bool)) == SETMAX(s) + 1
+  (y : Num) <= (x : Num)
+  (x : Num) <= (y : Num)
+  (y : Num) <= (s : Num)
+  (x : Num) <= (s : Num)
+  SETMAX({}) == 0 && (\226\136\128 x : Num, \226\136\128 s : (Num) -> Bool, FINITE(s) \226\134\146 SETMAX(INSERT(x, s)) == (if IN(x, s) { SETMAX(s) } else { MAX(x, SETMAX(s)) }))
+  \226\136\128 s : (Num) -> Bool, FINITE(s) \226\134\146 (\226\136\128 x : Num, IN(x, s) \226\134\146 x <= SETMAX(s))
+  SETMAX({}) == 0 && (\226\136\128 x : Num, \226\136\128 s : (Num) -> Bool, FINITE(s) \226\134\146 SETMAX(INSERT(x, s)) == MAX(x, SETMAX(s)))
+  UNION(INSERT((x : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(x, UNION(s, t))
+  \226\136\128 t : (Num) -> Bool, FINITE(t) \226\134\146 (\226\136\128 s : (Num) -> Bool, FINITE(s) \226\134\146 SETMAX(UNION(s, t)) == MAX(SETMAX(s), SETMAX(t)))
+  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, FINITE(UNION(s, t)) \226\134\146 SETMAX(UNION(s, t)) == MAX(SETMAX(s), SETMAX(t))
+  !((x : Num) + 1 <= x)
+  \226\136\128 s : (Num) -> Bool, FINITE(s) \226\134\146 !IN(VARIANT(s), s)
+  \226\136\128 p : Form, !IN(VARIANT(FV(p)), FV(p))
+  (formsubst : ((Num) -> Term, Form) -> Form)((v : (Num) -> Term), False) == False && formsubst(v, Atom((p : Num), (l : List[Term]))) == Atom(p, MAP(termsubst(v), l)) && formsubst(v, op_minus_minus_gt((q : Form), (r : Form))) == op_minus_minus_gt(formsubst(v, q), formsubst(v, r)) && formsubst(v, op_bang_bang((x : Num), q)) == LET((v' : (Num) -> Term) => LET_END(LET((z : Num) => LET_END(op_bang_bang(z, formsubst(valmod((x, V(z)), v), q))), if (\226\136\131 y : Num, IN(y, FV(op_bang_bang(x, q))) && IN(x, FVT(v'(y)))) { VARIANT(FV(formsubst(v', q))) } else { x })), valmod((x, V(x)), v))
+  !(!(p : Bool) && p)
+  \226\136\128 p : Form, formsubst(V, p) == p
+  (y : Num)
+  (x : Num)
+  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a && b) == (a && c)
+  (\226\136\131 y : Num, (IN(y, FV((a1 : Form))) && !(y == (p : Num))) && IN(p, FVT(valmod((p, V(p)), (v' : (Num) -> Term), y)))) == (\226\136\131 y : Num, (IN(y, FV(a1)) && !(y == p)) && IN(p, FVT(valmod((p, V(p)), (v : (Num) -> Term), y))))
+  (p : Num)
+  (l : List[Term])
+  (l : List[Term])
+  (l : List[Term])
+  \226\136\128 p : Form, \226\136\128 v : (Num) -> Term, \226\136\128 v' : (Num) -> Term, (\226\136\128 x : Num, IN(x, FV(p)) \226\134\146 v'(x) == v(x)) \226\134\146 formsubst(v', p) == formsubst(v, p)
+  {(x : _) | \226\136\131 y : _, IN(y, UNION((s : (_) -> Bool), (t : (_) -> Bool))) && (P : (_, _) -> Bool)(x, y)} == UNION({(x : _) | \226\136\131 y : _, IN(y, s) && P(x, y)}, {(x : _) | \226\136\131 y : _, IN(y, t) && P(x, y)})
+  (y : Num)
+  (a0' : Num) == VARIANT(FV(formsubst(valmod(((a0 : Num), V(a0)), (i : (Num) -> Term)), (a1 : Form))))
+  formsubst(valmod(((a0 : Num), V(a0)), (i : (Num) -> Term)), (a1 : Form))
+  \226\136\128 p : Form, \226\136\128 i : (Num) -> Term, FV(formsubst(i, p)) == {(x : Num) | \226\136\131 y : Num, IN(y, FV(p)) && IN(x, FVT(i(y)))}
+  (x : Num)
+  (x : Num)
+  !IN((y : Num), FV(formsubst(valmod(((a0 : Num), V(a0)), (i : (Num) -> Term)), (a1 : Form))))
+  (y : Num)
+  (x : Num)
+  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a \226\134\146 b) == (a \226\134\146 c)
+  \226\136\128 p : Form, \226\136\128 i : (Num) -> Term, \226\136\128 v : (Num) -> A, holds((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v, formsubst(i, p)) == holds(M, o(termval(M, v), i), p)
+  (y : Num)
+  \226\136\128 x : Num, \226\136\128 t : Term, \226\136\128 p : Form, \226\136\128 v : (Num) -> A, holds((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v, formsubst(valmod((x, t), V), p)) == holds(M, valmod((x, termval(M, v, t)), v), p)
+  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 p : Form, \226\136\128 v : (Num) -> A, holds((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v, formsubst(valmod((x, V(y)), V), p)) == holds(M, valmod((x, v(y)), v), p)
+  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 p : Form, \226\136\128 v : (Num) -> A, !IN(y, FV(op_bang_bang(x, p))) \226\134\146 holds((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v, op_bang_bang(y, formsubst(valmod((x, V(y)), V), p))) == holds(M, v, op_bang_bang(x, p))
+  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 p : Form, \226\136\128 v : (Num) -> A, !IN(y, FV(op_q_q(x, p))) \226\134\146 holds((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v, op_q_q(y, formsubst(valmod((x, V(y)), V), p))) == holds(M, v, op_q_q(x, p))
+  \226\136\128 p : Form, \226\136\128 x : Num, \226\136\128 y : Num, DELETE(FV(formsubst(valmod((x, V(y)), V), p)), y) == DELETE(DELETE(FV(p), x), y)
+  {(x : _) | \226\136\131 y : _, IN(y, UNION((s : (_) -> Bool), (t : (_) -> Bool))) && (P : (_, _) -> Bool)(x, y)} == UNION({(x : _) | \226\136\131 y : _, IN(y, s) && P(x, y)}, {(x : _) | \226\136\131 y : _, IN(y, t) && P(x, y)})
+  (s : (_) -> Bool) == UNION((a : (_) -> Bool), (c : (_) -> Bool)) && (t : (_) -> Bool) == UNION((b : (_) -> Bool), (d : (_) -> Bool)) \226\134\146 UNION(s, t) == UNION(UNION(a, b), UNION(c, d))
+  (i : (Num) -> Term)
+  (i : (Num) -> Term)
+  (i : (Num) -> Term)
+  \226\136\128 l : List[Term], ALL((t : Term) => \226\136\128 i : (Num) -> Term, functions_term(termsubst(i, t)) == UNION(functions_term(t), {(x : (Num, Num)) | \226\136\131 y : Num, IN(y, FVT(t)) && IN(x, functions_term(i(y)))}), l) \226\134\146 (\226\136\128 i : (Num) -> Term, LIST_UNION(MAP(functions_term, MAP(termsubst(i), l))) == UNION(LIST_UNION(MAP(functions_term, l)), {(x : (Num, Num)) | \226\136\131 y : Num, IN(y, LIST_UNION(MAP(FVT, l))) && IN(x, functions_term(i(y)))}))
+  \226\136\128 t : Term, \226\136\128 i : (Num) -> Term, functions_term(termsubst(i, t)) == UNION(functions_term(t), {(x : (Num, Num)) | \226\136\131 y : Num, IN(y, FVT(t)) && IN(x, functions_term(i(y)))})
+  {(x : _) | \226\136\131 y : _, IN(y, UNION((s : (_) -> Bool), (t : (_) -> Bool))) && (P : (_, _) -> Bool)(x, y)} == UNION({(x : _) | \226\136\131 y : _, IN(y, s) && P(x, y)}, {(x : _) | \226\136\131 y : _, IN(y, t) && P(x, y)})
+  UNION(UNION((a : (_) -> Bool), (b : (_) -> Bool)), UNION((c : (_) -> Bool), (d : (_) -> Bool))) == UNION(UNION(a, c), UNION(b, d))
+  (y : Num) == (a0 : Num)
+  (i : (Num) -> Term)
+  \226\136\128 p : Form, \226\136\128 i : (Num) -> Term, functions_form(formsubst(i, p)) == UNION(functions_form(p), {(x : (Num, Num)) | \226\136\131 y : Num, IN(y, FV(p)) && IN(x, functions_term(i(y)))})
+  \226\136\128 x : Num, \226\136\128 t : Term, \226\136\128 p : Form, IN(x, FV(p)) \226\134\146 functions_form(formsubst(valmod((x, t), V), p)) == UNION(functions_form(p), functions_term(t))
+  \226\136\128 p : Form, \226\136\128 i : (Num) -> Term, predicates_form(formsubst(i, p)) == predicates_form(p)
+  (!(p : Bool) && p) == false
+  language({formsubst(valmod(((x : Num), V((y : Num))), V), (p : Form))}) == language({p})
+  (l : List[Term])
+  (l : List[Term])
+  MEM((x : Term), (l : List[Term]))
+  MAP(termval((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A)), (l : List[Term])) == MAP(termval((M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v), l)
+  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 t : Term, (\226\136\128 f : Num, \226\136\128 zs : List[A], IN((f, LENGTH(zs)), functions_term(t)) \226\134\146 Fun(M, f, zs) == Fun((M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), f, zs)) \226\134\146 (\226\136\128 v : (Num) -> A, termval(M, v, t) == termval(M', v, t))
+  (v : (Num) -> A)
+  (v : (Num) -> A)
+  (v : (Num) -> A)
+  valmod(((a0 : Num), (a : A)), (v : (Num) -> A))
+  (v : (Num) -> A)
+  (v : (Num) -> A)
+  (v : (Num) -> A)
+  (v : (Num) -> A)
+  (a1 : List[Term])
+  (a1 : List[Term])
+  \226\136\128 f : Num, \226\136\128 zs : List[A], IN((f, LENGTH(zs)), functions_form(Atom((a0 : Num), (a1 : List[Term])))) \226\134\146 Fun((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), f, zs) == Fun((M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), f, zs)
+  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 p : Form, Dom(M) == Dom(M') && (\226\136\128 P : Num, \226\136\128 zs : List[A], Pred(M, P, zs) == Pred(M', P, zs)) && (\226\136\128 f : Num, \226\136\128 zs : List[A], IN((f, LENGTH(zs)), functions_form(p)) \226\134\146 Fun(M, f, zs) == Fun(M', f, zs)) \226\134\146 (\226\136\128 v : (Num) -> A, holds(M, v, p) == holds(M', v, p))
+  (v : (Num) -> A)
+  valmod(((a0 : Num), (a : A)), (v : (Num) -> A))
+  (v : (Num) -> A)
+  (v : (Num) -> A)
+  \226\136\128 x : Term, termval((M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A), x) == termval((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v, x)
+  MAP(termval((M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A)), (a1 : List[Term])) == MAP(termval((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v), a1)
+  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 p : Form, Dom(M) == Dom(M') && (\226\136\128 f : Num, \226\136\128 zs : List[A], Fun(M, f, zs) == Fun(M', f, zs)) && (\226\136\128 P : Num, \226\136\128 zs : List[A], IN((P, LENGTH(zs)), predicates_form(p)) \226\134\146 Pred(M, P, zs) == Pred(M', P, zs)) \226\134\146 (\226\136\128 v : (Num) -> A, holds(M, v, p) == holds(M', v, p))
+  Dom((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))) == {}
+  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 x : Num, \226\136\128 p : Form, (\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, op_bang_bang(x, p))) == (Dom(M) == {} || (\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, p)))
+  (v : (Num) -> A) == o((i : (A) -> A), v)
+  (v : (Num) -> A)
+  SUBSET(functions((s : (Form) -> Bool)), (fns : ((Num, Num)) -> Bool))
+  SUBSET(functions_form((p : Form)), (fns : ((Num, Num)) -> Bool))
+  IN((p : Form), (s : (Form) -> Bool))
+  (p : Form)
+  (s : (Form) -> Bool)
+  \226\136\128 x : A, IN(x, Dom((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)))) \226\134\146 (i : (A) -> A)(x) == x
+  \226\136\128 a : A, o((i : (A) -> A), valmod(((x : Num), a), (v : (Num) -> A))) == valmod((x, i(a)), o(i, v))
+  (v : (Num) -> A)
+  (p : Form)
+  (x : Num)
+  \226\136\128 p : Form, SUBSET(functions_form(p), (fns : ((Num, Num)) -> Bool)) \226\134\146 (\226\136\128 v : (Num) -> A, holds((M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v, p) == holds((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), o((i : (A) -> A), v), p))
+  IN(Fun((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (P : Num), MAP(o((i : (A) -> A), termval((M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A))), (args : List[Term]))), Dom(M))
+  Fun((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (P : Num), MAP(o((i : (A) -> A), termval((M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A))), (args : List[Term])))
+  (v : (Num) -> A)
+  \226\136\128 t : Term, MEM(t, (args : List[Term])) \226\134\146 (\226\136\128 v : (Num) -> A, (i : (A) -> A)(termval((M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v, t)) == termval((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), o(i, v), t))
+  \226\136\128 t : Term, MEM(t, (args : List[Term])) \226\134\146 SUBSET(functions_term(t), (fns : ((Num, Num)) -> Bool))
+  IN(((P : Num), LENGTH((args : List[Term]))), (fns : ((Num, Num)) -> Bool))
+  (args : List[Term])
+  (P : Num)
+  \226\136\128 t : Term, SUBSET(functions_term(t), (fns : ((Num, Num)) -> Bool)) \226\134\146 (\226\136\128 v : (Num) -> A, (i : (A) -> A)(termval((M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v, t)) == termval((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), o(i, v), t))
+  ALL((x : A) => IN(x, (D : (A) -> Bool)), (l : List[A]))
+  (b : Bool) && (b \226\134\146 (a : Bool) && (c : Bool)) \226\134\146 a && b && c
+  !(Dom((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))) == {})
+  (x : A)
+  \226\136\128 x : A, IN((i : (A) -> A)(x), Dom((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))))
+  (M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)) == ((D : (A) -> Bool), (f : Num) => (args : List[A]) => Fun((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), f, MAP((i : (A) -> A), args)), (P : Num) => (args : List[A]) => Pred(M, P, MAP(i, args)))
+  (i : (A) -> A) == ((x : A) => if IN(x, Dom((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)))) { x } else { select((z : A) => IN(z, Dom(M))) })
+  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 fns : ((Num, Num)) -> Bool, \226\136\128 preds : ((Num, Num)) -> Bool, \226\136\128 D : (A) -> Bool, interpretation((fns, preds), M) && SUBSET(Dom(M), D) && !(Dom(M) == {}) \226\134\146 (\226\136\131 M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), interpretation((fns, preds), M') && Dom(M') == D && (\226\136\128 s : (Form) -> Bool, SUBSET(functions(s), fns) && SUBSET(predicates(s), preds) \226\134\146 satisfies(M', s) == satisfies(M, s)))
 LIST_UNION =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun('?1,bool),fun(fun('?1,bool),bool)) (#LIST_UNION:fun(list(fun('?1,bool)),fun('?1,bool)) #NIL:list(fun('?1,bool)))) #EMPTY:fun('?1,bool))) ((#=:fun(fun('?1,bool),fun(fun('?1,bool),bool)) (#LIST_UNION:fun(list(fun('?1,bool)),fun('?1,bool)) ((#CONS:fun(fun('?1,bool),fun(list(fun('?1,bool)),list(fun('?1,bool)))) h:fun('?1,bool)) t:list(fun('?1,bool))))) ((#UNION:fun(fun('?1,bool),fun(fun('?1,bool),fun('?1,bool))) h:fun('?1,bool)) (#LIST_UNION:fun(list(fun('?1,bool)),fun('?1,bool)) t:list(fun('?1,bool))))))
 LIST_UNION_FINITE =  |- (#forall:fun(fun(list(fun('?2,bool)),bool),bool) (\l:list(fun('?2,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#ALL:fun(fun(fun('?2,bool),bool),fun(list(fun('?2,bool)),bool)) #FINITE:fun(fun('?2,bool),bool)) l:list(fun('?2,bool)))) (#FINITE:fun(fun('?2,bool),bool) (#LIST_UNION:fun(list(fun('?2,bool)),fun('?2,bool)) l:list(fun('?2,bool)))))))
 IN_LIST_UNION =  |- (#forall:fun(fun('?3,bool),bool) (\x:'?3. (#forall:fun(fun(list(fun('?3,bool)),bool),bool) (\l:list(fun('?3,bool)). ((#=:fun(bool,fun(bool,bool)) ((#IN:fun('?3,fun(fun('?3,bool),bool)) x:'?3) (#LIST_UNION:fun(list(fun('?3,bool)),fun('?3,bool)) l:list(fun('?3,bool))))) ((#EX:fun(fun(fun('?3,bool),bool),fun(list(fun('?3,bool)),bool)) (\s:fun('?3,bool). ((#IN:fun('?3,fun(fun('?3,bool),bool)) x:'?3) s:fun('?3,bool)))) l:list(fun('?3,bool))))))))
