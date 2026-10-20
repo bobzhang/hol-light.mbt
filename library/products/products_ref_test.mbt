@@ -5908,18 +5908,18 @@ test "Library/products matches Library/products.ml" {
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|Library/products quotations (197):
-      #|  forall f s. nproduct (support ( * ) f s) f = nproduct s f
+      #|  \226\136\128 f : (_) -> Num, \226\136\128 s : (_) -> Bool, nproduct(support(op_star, f, s), f) == nproduct(s, f)
       #|  forall f s t. FINITE s /\\ FINITE t /\\ DISJOINT s t\n           ==> (nproduct (s UNION t) f = nproduct s f * nproduct t f)
       #|  forall f g s. (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n           ==> (nproduct (IMAGE f s) g = nproduct s (g o f))
       #|  forall f p s. FINITE s /\\\n           (forall x. x IN s ==> p x IN s) /\\\n           (forall x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n           ==> nproduct s (f o p) = nproduct s f
-      #|  x < x + 1
+      #|  (x : Num) < x + 1
       #|  forall f m n p.\n        m <= n + 1\n        ==> (nproduct (m..(n+p)) f = nproduct(m..n) f * nproduct(n+1..n+p) f)
       #|  forall f s. FINITE s /\\ (forall x. x IN s ==> 0 < f x) ==> 0 < nproduct s f
       #|  forall f m n. (forall x. m <= x /\\ x <= n ==> 0 < f x) ==> 0 < nproduct(m..n) f
       #|  forall f m p. nproduct(m+p..n+p) f = nproduct(m..n) (\\i. f(i + p))
-      #|  forall f x. nproduct {x} f = f(x)
-      #|  forall f n. nproduct(n..n) f = f(n)
-      #|  ~(SUC n <= n)
+      #|  \226\136\128 f : (_) -> Num, \226\136\128 x : _, nproduct({x}, f) == f(x)
+      #|  \226\136\128 f : (Num) -> Num, \226\136\128 n : Num, nproduct(op_dot_dot(n, n), f) == f(n)
+      #|  !(SUC((n : Num)) <= n)
       #|  (forall m. nproduct(m..0) f = if m = 0 then f(0) else 1) /\\\n   (forall m n. nproduct(m..SUC n) f = if m <= SUC n then nproduct(m..n) f * f(SUC n)\n                                else nproduct(m..n) f)
       #|  forall f g s. (forall x. x IN s ==> (f x = g x)) ==> nproduct s f = nproduct s g
       #|  forall f g m n. (forall i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (nproduct(m..n) f = nproduct(m..n) g)
@@ -5936,20 +5936,20 @@ test "Library/products matches Library/products.ml" {
       #|  forall f g m n.\n     nproduct(m..n) (\\x. f x * g x) = nproduct(m..n) f * nproduct(m..n) g
       #|  forall c s. FINITE s ==> nproduct s (\\x. c) = c EXP (CARD s)
       #|  forall c m n. nproduct (m..n) (\\x. c) = c EXP ((n + 1) - m)
-      #|  forall c n. nproduct(1..n) (\\x. c) = c EXP n
-      #|  forall s. nproduct s (\\n. 1) = 1
-      #|  P:num->bool
+      #|  \226\136\128 c : Num, \226\136\128 n : Num, nproduct(op_dot_dot(1, n), (x : Num) => c) == EXP(c, n)
+      #|  \226\136\128 s : (_) -> Bool, nproduct(s, (n : _) => 1) == 1
+      #|  (P : (Num) -> Bool)
       #|  forall P f:A->num s.\n        P(1) /\\ (forall x y. P x /\\ P y ==> P(x * y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(nproduct s f)
-      #|  R:num->num->bool
+      #|  (R : (Num, Num) -> Bool)
       #|  forall R (f:A->num) g s.\n        R 1 1 /\\\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ (forall i. i IN s ==> R (f i) (g i))\n        ==> R (nproduct s f) (nproduct s g)
-      #|  P:num->bool
+      #|  (P : (Num) -> Bool)
       #|  forall P f:A->num s.\n        FINITE s /\\ ~(s = {}) /\\\n        (forall x y. P x /\\ P y ==> P(x * y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(nproduct s f)
-      #|  R:num->num->bool
+      #|  (R : (Num, Num) -> Bool)
       #|  forall R (f:A->num) g s.\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (forall i. i IN s ==> R (f i) (g i))\n        ==> R (nproduct s f) (nproduct s g)
-      #|  s:A->bool
-      #|  g:A->num
-      #|  f:A->num
-      #|  \\x y:num. (x == y) (mod n)
+      #|  (s : (A) -> Bool)
+      #|  (g : (A) -> Num)
+      #|  (f : (A) -> Num)
+      #|  (x : Num) => (y : Num) => op_eq_eq(x, y, mod((n : Num)))
       #|  forall n f g s:A->bool.\n         FINITE s /\\ (forall x. x IN s ==> (f x == g x) (mod n))\n         ==> (nproduct s f == nproduct s g) (mod n)
       #|  forall f m n. m <= n ==> nproduct(m..n) f = f(m) * nproduct(m+1..n) f
       #|  forall f m n. 0 < n /\\ m <= n ==> nproduct(m..n) f = nproduct(m..n-1) f * f(n)
@@ -5958,51 +5958,51 @@ test "Library/products matches Library/products.ml" {
       #|  forall f m n. nproduct(2*m..2*n+1) f = nproduct(m..n) (\\i. f(2*i) * f(2*i+1))
       #|  forall x m n. nproduct(m..n) x =\n           if n < m then 1 else nproduct(0..n-m) (\\i. x(n - i))
       #|  forall f s a. FINITE s /\\ a IN s\n           ==> f(a) * nproduct(s DELETE a) f = nproduct s f
-      #|  1 <= SUC n
-      #|  forall n. nproduct(1..n) (\\m. m) = FACT n
+      #|  1 <= SUC((n : Num))
+      #|  \226\136\128 n : Num, nproduct(op_dot_dot(1, n), (m : Num) => m) == FACT(n)
       #|  forall s a. nproduct s (\\x. if x = a then b else 1) =\n         (if a IN s then b else 1)
       #|  forall m n s:A->bool.\n        FINITE s ==> m EXP (nsum s n) = nproduct s (\\i. m EXP n i)
-      #|  1 <= SUC n
-      #|  (n:num) < i
-      #|  i:num
-      #|  i:num
-      #|  1 <= SUC n
-      #|  SUC n
-      #|  w:A^N
-      #|  b:A
-      #|  v:A^N
-      #|  a:A
-      #|  n < i /\\ ~(i = SUC n) ==> SUC n < i
-      #|  1 <= SUC n
-      #|  i <= n ==> ~(i = SUC n)
-      #|  (lambda i. if i = SUC n then @x. F else (v:A^N)$i):A^N
-      #|  (v:A^N)$(SUC n)
-      #|  v:A^N
+      #|  1 <= SUC((n : Num))
+      #|  (n : Num) < (i : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  1 <= SUC((n : Num))
+      #|  SUC((n : Num))
+      #|  (w : Cart[A, N])
+      #|  (b : A)
+      #|  (v : Cart[A, N])
+      #|  (a : A)
+      #|  (n : Num) < (i : Num) && !(i == SUC(n)) \226\134\146 SUC(n) < i
+      #|  1 <= SUC((n : Num))
+      #|  (i : Num) <= (n : Num) \226\134\146 !(i == SUC(n))
+      #|  (lambda : ((Num) -> A) -> Cart[A, N])((i : Num) => if i == SUC((n : Num)) { (select : ((A) -> Bool) -> A)((x : A) => false) } else { (op_dollar : (Cart[A, N], Num) -> A)((v : Cart[A, N]), i) })
+      #|  op_dollar((v : Cart[A, N]), SUC((n : Num)))
+      #|  (v : Cart[A, N])
       #|  IMAGE (\\(x:A,v:A^N). (lambda i. if i = SUC n then x else v$i):A^N)\n          {x,v | x IN {x:A | P (SUC n) x} /\\\n                 v IN {v:A^N | (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ i <= n\n                                ==> P i (v$i)) /\\\n                           (forall i. 1 <= i /\\ i <= dimindex (:N) /\\ n < i\n                                ==> v$i = (@x. F))}}
-      #|  forall t. t = s /\\ t HAS_SIZE n ==> s HAS_SIZE n
+      #|  \226\136\128 t : (_) -> Bool, t == (s : (_) -> Bool) && HAS_SIZE(t, (n : Num)) \226\134\146 HAS_SIZE(s, n)
       #|  {v | forall i. 1 <= i /\\ i <= dimindex (:N) ==> v$i = (@x. F)} =\n      {(lambda i. @x. F):A^N}
-      #|  1 <= i /\\ i <= n /\\ 0 < i <=> 1 <= i /\\ i <= n
-      #|  1 <= i /\\ i <= n /\\ i <= 0 <=> F
-      #|  dimindex(:N)
+      #|  (1 <= (i : Num) && i <= (n : Num) && 0 < i) == (1 <= i && i <= n)
+      #|  (1 <= (i : Num) && i <= (n : Num) && i <= 0) == false
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
       #|  forall n. n <= dimindex(:N)\n        ==> {v:A^N | (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ i <= n\n                          ==> P i (v$i)) /\\\n                     (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ n < i\n                          ==> v$i = @x. F)}\n            HAS_SIZE nproduct(1..n) m
       #|  forall P m. (forall i. 1 <= i /\\ i <= dimindex(:N) ==> {x | P i x} HAS_SIZE m i)\n         ==> {v:A^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> P i (v$i)}\n             HAS_SIZE nproduct (1..dimindex(:N)) m
-      #|  s HAS_SIZE n ==> CARD s = n
+      #|  HAS_SIZE((s : (_) -> Bool), (n : Num)) \226\134\146 CARD(s) == n
       #|  forall P. (forall i. 1 <= i /\\ i <= dimindex(:N) ==> FINITE {x | P i x})\n       ==> CARD {v:A^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> P i (v$i)} =\n           nproduct (1..dimindex(:N)) (\\i. CARD {x | P i x})
       #|  (forall f g s.   (forall x. x IN s ==> f(x) = g(x))\n                ==> nproduct s (\\i. f(i)) = nproduct s g) /\\\n     (forall f g a b. (forall i. a <= i /\\ i <= b ==> f(i) = g(i))\n                ==> nproduct(a..b) (\\i. f(i)) = nproduct(a..b) g) /\\\n     (forall f g p.   (forall x. p x ==> f x = g x)\n                ==> nproduct {y | p y} (\\i. f(i)) = nproduct {y | p y} g)
-      #|  forall f s. iproduct (support ( * ) f s) f = iproduct s f
+      #|  \226\136\128 f : (_) -> Int, \226\136\128 s : (_) -> Bool, iproduct(support(op_star, f, s), f) == iproduct(s, f)
       #|  forall f s t. FINITE s /\\ FINITE t /\\ DISJOINT s t\n           ==> (iproduct (s UNION t) f = iproduct s f * iproduct t f)
       #|  forall f g s. (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n           ==> (iproduct (IMAGE f s) g = iproduct s (g o f))
       #|  forall f p s. FINITE s /\\\n           (forall x. x IN s ==> p x IN s) /\\\n           (forall x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n           ==> iproduct s (f o p) = iproduct s f
-      #|  x < x + 1
+      #|  (x : Num) < x + 1
       #|  forall f m n p.\n        m <= n + 1\n        ==> (iproduct (m..(n+p)) f = iproduct(m..n) f * iproduct(n+1..n+p) f)
       #|  forall f s. FINITE s /\\ (forall x. x IN s ==> &0 <= f x) ==> &0 <= iproduct s f
       #|  forall f m n. (forall x. m <= x /\\ x <= n ==> &0 <= f x) ==> &0 <= iproduct(m..n) f
       #|  forall f s. FINITE s /\\ (forall x. x IN s ==> &0 < f x) ==> &0 < iproduct s f
       #|  forall f m n. (forall x. m <= x /\\ x <= n ==> &0 < f x) ==> &0 < iproduct(m..n) f
       #|  forall f m p. iproduct(m+p..n+p) f = iproduct(m..n) (\\i. f(i + p))
-      #|  forall f x. iproduct {x} f = f(x)
-      #|  forall f n. iproduct(n..n) f = f(n)
-      #|  ~(SUC n <= n)
+      #|  \226\136\128 f : (_) -> Int, \226\136\128 x : _, iproduct({x}, f) == f(x)
+      #|  \226\136\128 f : (Num) -> Int, \226\136\128 n : Num, iproduct(op_dot_dot(n, n), f) == f(n)
+      #|  !(SUC((n : Num)) <= n)
       #|  (forall m. iproduct(m..0) f = if m = 0 then f(0) else &1) /\\\n   (forall m n. iproduct(m..SUC n) f = if m <= SUC n then iproduct(m..n) f * f(SUC n)\n                                else iproduct(m..n) f)
       #|  forall f g s. (forall x. x IN s ==> (f x = g x)) ==> iproduct s f = iproduct s g
       #|  forall f g m n. (forall i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (iproduct(m..n) f = iproduct(m..n) g)
@@ -6019,20 +6019,20 @@ test "Library/products matches Library/products.ml" {
       #|  forall f g m n.\n     iproduct(m..n) (\\x. f x * g x) = iproduct(m..n) f * iproduct(m..n) g
       #|  forall c s. FINITE s ==> iproduct s (\\x. c) = c pow (CARD s)
       #|  forall c m n. iproduct (m..n) (\\x. c) = c pow ((n + 1) - m)
-      #|  forall c n. iproduct(1..n) (\\x. c) = c pow n
+      #|  \226\136\128 c : Int, \226\136\128 n : Num, iproduct(op_dot_dot(1, n), (x : Num) => c) == pow(c, n)
       #|  forall f s:A->bool.\n     FINITE s\n     ==> iproduct s (\\i. --(f i)) = --(&1) pow (CARD s) * iproduct s f
       #|  forall f m n. iproduct(m..n) (\\i. --(f i)) =\n           --(&1) pow ((n + 1) - m) * iproduct(m..n) f
       #|  forall f n. iproduct(1..n) (\\i. --(f i)) = --(&1) pow n * iproduct(1..n) f
-      #|  forall s. iproduct s (\\n. &1) = &1
+      #|  \226\136\128 s : (_) -> Bool, iproduct(s, (n : _) => int_of_num(1)) == int_of_num(1)
       #|  forall f s. FINITE s /\\ (forall x. x IN s ==> &0 <= f x /\\ f x <= &1)\n         ==> iproduct s f <= &1
       #|  forall f s. FINITE s ==> iproduct s (\\x. abs(f x)) = abs(iproduct s f)
-      #|  P:int->bool
+      #|  (P : (Int) -> Bool)
       #|  forall P f:A->int s.\n        P(&1) /\\ (forall x y. P x /\\ P y ==> P(x * y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(iproduct s f)
-      #|  R:int->int->bool
+      #|  (R : (Int, Int) -> Bool)
       #|  forall R (f:A->int) g s.\n        R (&1) (&1) /\\\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ (forall i. i IN s ==> R (f i) (g i))\n        ==> R (iproduct s f) (iproduct s g)
-      #|  P:int->bool
+      #|  (P : (Int) -> Bool)
       #|  forall P f:A->int s.\n        FINITE s /\\ ~(s = {}) /\\\n        (forall x y. P x /\\ P y ==> P(x * y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(iproduct s f)
-      #|  R:int->int->bool
+      #|  (R : (Int, Int) -> Bool)
       #|  forall R (f:A->int) g s.\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (forall i. i IN s ==> R (f i) (g i))\n        ==> R (iproduct s f) (iproduct s g)
       #|  forall f m n. m <= n ==> iproduct(m..n) f = f(m) * iproduct(m+1..n) f
       #|  forall f m n. 0 < n /\\ m <= n ==> iproduct(m..n) f = iproduct(m..n-1) f * f(n)
@@ -6045,20 +6045,20 @@ test "Library/products matches Library/products.ml" {
       #|  forall s a. iproduct s (\\x. if x = a then b else &1) =\n         (if a IN s then b else &1)
       #|  forall x n s:A->bool.\n        FINITE s ==> x pow (nsum s n) = iproduct s (\\i. x pow n i)
       #|  (forall f g s.   (forall x. x IN s ==> f(x) = g(x))\n                ==> iproduct s (\\i. f(i)) = iproduct s g) /\\\n     (forall f g a b. (forall i. a <= i /\\ i <= b ==> f(i) = g(i))\n                ==> iproduct(a..b) (\\i. f(i)) = iproduct(a..b) g) /\\\n     (forall f g p.   (forall x. p x ==> f x = g x)\n                ==> iproduct {y | p y} (\\i. f(i)) = iproduct {y | p y} g)
-      #|  forall f s. product (support ( * ) f s) f = product s f
+      #|  \226\136\128 f : (_) -> Real, \226\136\128 s : (_) -> Bool, product(support(op_star, f, s), f) == product(s, f)
       #|  forall f s t. FINITE s /\\ FINITE t /\\ DISJOINT s t\n           ==> (product (s UNION t) f = product s f * product t f)
       #|  forall f g s. (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n           ==> (product (IMAGE f s) g = product s (g o f))
       #|  forall f p s. FINITE s /\\\n           (forall x. x IN s ==> p x IN s) /\\\n           (forall x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n           ==> product s (f o p) = product s f
-      #|  x < x + 1
+      #|  (x : Num) < x + 1
       #|  forall f m n p.\n        m <= n + 1\n        ==> (product (m..(n+p)) f = product(m..n) f * product(n+1..n+p) f)
       #|  forall f s. FINITE s /\\ (forall x. x IN s ==> &0 <= f x) ==> &0 <= product s f
       #|  forall f m n. (forall x. m <= x /\\ x <= n ==> &0 <= f x) ==> &0 <= product(m..n) f
       #|  forall f s. FINITE s /\\ (forall x. x IN s ==> &0 < f x) ==> &0 < product s f
       #|  forall f m n. (forall x. m <= x /\\ x <= n ==> &0 < f x) ==> &0 < product(m..n) f
       #|  forall f m p. product(m+p..n+p) f = product(m..n) (\\i. f(i + p))
-      #|  forall f x. product {x} f = f(x)
-      #|  forall f n. product(n..n) f = f(n)
-      #|  ~(SUC n <= n)
+      #|  \226\136\128 f : (_) -> Real, \226\136\128 x : _, product({x}, f) == f(x)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 n : Num, product(op_dot_dot(n, n), f) == f(n)
+      #|  !(SUC((n : Num)) <= n)
       #|  (forall m. product(m..0) f = if m = 0 then f(0) else &1) /\\\n   (forall m n. product(m..SUC n) f = if m <= SUC n then product(m..n) f * f(SUC n)\n                                else product(m..n) f)
       #|  forall f g s. (forall x. x IN s ==> (f x = g x)) ==> product s f = product s g
       #|  forall f g m n. (forall i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (product(m..n) f = product(m..n) g)
@@ -6075,23 +6075,23 @@ test "Library/products matches Library/products.ml" {
       #|  forall f g m n.\n     product(m..n) (\\x. f x * g x) = product(m..n) f * product(m..n) g
       #|  forall c s. FINITE s ==> product s (\\x. c) = c pow (CARD s)
       #|  forall c m n. product (m..n) (\\x. c) = c pow ((n + 1) - m)
-      #|  forall c n. product(1..n) (\\x. c) = c pow n
+      #|  \226\136\128 c : Real, \226\136\128 n : Num, product(op_dot_dot(1, n), (x : Num) => c) == pow(c, n)
       #|  forall f s:A->bool.\n     FINITE s ==> product s (\\i. --(f i)) = --(&1) pow (CARD s) * product s f
       #|  forall f m n. product(m..n) (\\i. --(f i)) =\n           --(&1) pow ((n + 1) - m) * product(m..n) f
       #|  forall f n. product(1..n) (\\i. --(f i)) = --(&1) pow n * product(1..n) f
       #|  forall f s. FINITE s ==> product s (\\x. inv(f x)) = inv(product s f)
       #|  forall f g s. FINITE s ==> product s (\\x. f x / g x) = product s f / product s g
       #|  forall f g m n.\n         product(m..n) (\\x. f x / g x) = product(m..n) f / product(m..n) g
-      #|  forall s. product s (\\n. &1) = &1
+      #|  \226\136\128 s : (_) -> Bool, product(s, (n : _) => real_of_num(1)) == real_of_num(1)
       #|  forall f s. FINITE s /\\ (forall x. x IN s ==> &0 <= f x /\\ f x <= &1)\n         ==> product s f <= &1
       #|  forall f s. FINITE s ==> product s (\\x. abs(f x)) = abs(product s f)
-      #|  P:real->bool
+      #|  (P : (Real) -> Bool)
       #|  forall P f:A->real s.\n        P(&1) /\\ (forall x y. P x /\\ P y ==> P(x * y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(product s f)
-      #|  R:real->real->bool
+      #|  (R : (Real, Real) -> Bool)
       #|  forall R (f:A->real) g s.\n        R (&1) (&1) /\\\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ (forall i. i IN s ==> R (f i) (g i))\n        ==> R (product s f) (product s g)
-      #|  P:real->bool
+      #|  (P : (Real) -> Bool)
       #|  forall P f:A->real s.\n        FINITE s /\\ ~(s = {}) /\\\n        (forall x y. P x /\\ P y ==> P(x * y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(product s f)
-      #|  R:real->real->bool
+      #|  (R : (Real, Real) -> Bool)
       #|  forall R (f:A->real) g s.\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (forall i. i IN s ==> R (f i) (g i))\n        ==> R (product s f) (product s g)
       #|  forall f m n. m <= n ==> product(m..n) f = f(m) * product(m+1..n) f
       #|  forall f m n. 0 < n /\\ m <= n ==> product(m..n) f = product(m..n-1) f * f(n)
