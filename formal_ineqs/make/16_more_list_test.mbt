@@ -55,49 +55,49 @@ test "Formal_ineqs/list/more_list matches Formal_ineqs/list/more_list.ml" {
     content=(
       #|Warning: inventing type variables
       #|Formal_ineqs/list/more_list quotations (43):
-      #|  (REVERSE_TABLE (f:num->A) 0 = []) /\\\n   (REVERSE_TABLE f (SUC i) = CONS (f i)  ( REVERSE_TABLE f i))
+      #|  (REVERSE_TABLE : ((Num) -> A, Num) -> List[A])((f : (Num) -> A), 0) == NIL && REVERSE_TABLE(f, SUC((i : Num))) == CONS(f(i), REVERSE_TABLE(f, i))
       #|  :P
       #|  :P
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  forall(f:num->A) k. TABLE f k = REVERSE (REVERSE_TABLE f k)
-      #|  l_seq n m = TABLE (\\i. n + i) ((m + 1) - n)
-      #|  forall(f:num->A) n. LENGTH (REVERSE_TABLE f n) = n
-      #|  forall(l:(A)list). LENGTH (REVERSE l) = LENGTH l
-      #|  forall(f:num->A) n. LENGTH (TABLE f n) = n
-      #|  n - n = 0
-      #|  i = n:num
-      #|  n:num
-      #|  n:num
-      #|  forall(f:num->A) n i. i < n ==> EL i (TABLE f n) = f i
-      #|  forall(f:num->A). TABLE f 0 = []
-      #|  forall(f:num->A) n. TABLE f (SUC n) = APPEND (TABLE f n) [f n]
-      #|  0 < SUC a
+      #|  \226\136\128 f : (Num) -> A, \226\136\128 k : Num, (TABLE : ((Num) -> A, Num) -> List[A])(f, k) == REVERSE(REVERSE_TABLE(f, k))
+      #|  (l_seq : (Num, Num) -> List[Num])((n : Num), (m : Num)) == TABLE((i : Num) => n + i, m + 1 - n)
+      #|  \226\136\128 f : (Num) -> A, \226\136\128 n : Num, LENGTH(REVERSE_TABLE(f, n)) == n
+      #|  \226\136\128 l : List[A], LENGTH(REVERSE(l)) == LENGTH(l)
+      #|  \226\136\128 f : (Num) -> A, \226\136\128 n : Num, LENGTH(TABLE(f, n)) == n
+      #|  (n : Num) - n == 0
+      #|  (i : Num) == (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 f : (Num) -> A, \226\136\128 n : Num, \226\136\128 i : Num, i < n \226\134\146 EL(i, TABLE(f, n)) == f(i)
+      #|  \226\136\128 f : (Num) -> A, TABLE(f, 0) == NIL
+      #|  \226\136\128 f : (Num) -> A, \226\136\128 n : Num, TABLE(f, SUC(n)) == APPEND(TABLE(f, n), [f(n)])
+      #|  0 < SUC((a : Num))
       #|  0
-      #|  SUC a < SUC b <=> a < b
-      #|  SUC j
-      #|  t':(A)list
-      #|  SUC a = SUC b <=> a = b
-      #|  ~(0 = SUC a)
-      #|  ul:(A)list
-      #|  ul:(A)list
-      #|  vl:(A)list
-      #|  vl:(A)list
-      #|  forall ul vl:(A)list. ul = vl <=> \n               (LENGTH ul = LENGTH vl /\\ (forall j. j < LENGTH ul ==> EL j ul = EL j vl))
-      #|  LENGTH (l_seq n m) = (m + 1) - n
-      #|  forall i m n. i < (m + 1) - n ==> EL i (l_seq n m) = n + i
-      #|  forall n m. l_seq n m = [] <=> (m < n)
-      #|  (n + 1) - n = 1
-      #|  forall n. l_seq n n = [n]
-      #|  n + 1
-      #|  m:num
-      #|  j:num
-      #|  forall n m. n <= m ==> l_seq n m = CONS n (l_seq (n + 1) m)
-      #|  forall l. LENGTH (BUTLAST l) = LENGTH l - 1
-      #|  i - 1
-      #|  i < SUC (LENGTH (a1:(A)list)) - 1
-      #|  forall(l:(A)list) i. i < LENGTH l - 1 ==> EL i (BUTLAST l) = EL i l
+      #|  (SUC((a : Num)) < SUC((b : Num))) == (a < b)
+      #|  SUC((j : Num))
+      #|  (t' : List[A])
+      #|  (SUC((a : Num)) == SUC((b : Num))) == (a == b)
+      #|  !(0 == SUC((a : Num)))
+      #|  (ul : List[A])
+      #|  (ul : List[A])
+      #|  (vl : List[A])
+      #|  (vl : List[A])
+      #|  \226\136\128 ul : List[A], \226\136\128 vl : List[A], (ul == vl) == (LENGTH(ul) == LENGTH(vl) && (\226\136\128 j : Num, j < LENGTH(ul) \226\134\146 EL(j, ul) == EL(j, vl)))
+      #|  LENGTH(l_seq((n : Num), (m : Num))) == m + 1 - n
+      #|  \226\136\128 i : Num, \226\136\128 m : Num, \226\136\128 n : Num, i < m + 1 - n \226\134\146 EL(i, l_seq(n, m)) == n + i
+      #|  \226\136\128 n : Num, \226\136\128 m : Num, (l_seq(n, m) == NIL) == (m < n)
+      #|  (n : Num) + 1 - n == 1
+      #|  \226\136\128 n : Num, l_seq(n, n) == [n]
+      #|  (n : Num) + 1
+      #|  (m : Num)
+      #|  (j : Num)
+      #|  \226\136\128 n : Num, \226\136\128 m : Num, n <= m \226\134\146 l_seq(n, m) == CONS(n, l_seq(n + 1, m))
+      #|  \226\136\128 l : List[_], LENGTH(BUTLAST(l)) == LENGTH(l) - 1
+      #|  (i : Num) - 1
+      #|  (i : Num) < SUC(LENGTH((a1 : List[A]))) - 1
+      #|  \226\136\128 l : List[A], \226\136\128 i : Num, i < LENGTH(l) - 1 \226\134\146 EL(i, BUTLAST(l)) == EL(i, l)
       #|More_list.REVERSE_TABLE =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list('A),fun(list('A),bool)) ((#REVERSE_TABLE:fun(fun(num,'A),fun(num,list('A))) f:fun(num,'A)) (#NUMERAL:fun(num,num) #_0:num))) #NIL:list('A))) ((#=:fun(list('A),fun(list('A),bool)) ((#REVERSE_TABLE:fun(fun(num,'A),fun(num,list('A))) f:fun(num,'A)) (#SUC:fun(num,num) i:num))) ((#CONS:fun('A,fun(list('A),list('A))) (f:fun(num,'A) i:num)) ((#REVERSE_TABLE:fun(fun(num,'A),fun(num,list('A))) f:fun(num,'A)) i:num))))
       #|More_list.TABLE =  |- (#forall:fun(fun(fun(num,'A),bool),bool) (\f:fun(num,'A). (#forall:fun(fun(num,bool),bool) (\k:num. ((#=:fun(list('A),fun(list('A),bool)) ((#TABLE:fun(fun(num,'A),fun(num,list('A))) f:fun(num,'A)) k:num)) (#REVERSE:fun(list('A),list('A)) ((#REVERSE_TABLE:fun(fun(num,'A),fun(num,list('A))) f:fun(num,'A)) k:num)))))))
       #|More_list.l_seq =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(list(num),fun(list(num),bool)) ((#l_seq:fun(num,fun(num,list(num))) n:num) m:num)) ((#TABLE:fun(fun(num,num),fun(num,list(num))) (\i:num. ((#+:fun(num,fun(num,num)) n:num) i:num))) ((#-:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)))))))
