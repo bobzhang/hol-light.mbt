@@ -80877,7 +80877,7 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, (\226\136\128 y' : Real, integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y') * Cx(drop(x))))) * f(drop(x)), UNIV)) && integrable_on((x : Cart[Real, Unit]) => lift(norm(f(drop(x)))), UNIV) \226\134\146 (\226\136\128 yy : (Num) -> Real, op_minus_minus_minus_gt(yy, y, sequentially) \226\134\146 op_minus_minus_gt((k : Num) => fourier(f, yy(k)), fourier(f, y), sequentially))
       #|  !(ii * Cx((b : Real)) == Cx(real_of_num(0)))
       #|  \226\136\128 b : Real, \226\136\128 y : Cart[Real, Unit], !(b == real_of_num(0)) \226\134\146 has_vector_derivative((y : Cart[Real, Unit]) => cexp(ii * (Cx(b) * Cx(drop(y)))) / (ii * Cx(b)), cexp(ii * (Cx(b) * Cx(drop(y)))), at(y))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  ii * (Cx(real_of_num(2)) * ((Q : Cart[Real, Tybit0[Unit]]) * inv(ii))) == Cx(real_of_num(2)) * Q
       #|  (P : Cart[Real, Tybit0[Unit]]) + ii * (Q : Cart[Real, Tybit0[Unit]]) - (P + ii * -Q) == ii * (Cx(real_of_num(2)) * Q)
       #|  \226\136\128 P : Cart[Real, Tybit0[Unit]], \226\136\128 Q : Cart[Real, Tybit0[Unit]], \226\136\128 w : Cart[Real, Tybit0[Unit]], !(w == Cx(real_of_num(0))) \226\134\146 (P + ii * Q) / (ii * w) - (P + ii * -Q) / (ii * w) == Cx(real_of_num(2)) * (Q / w)
@@ -81171,7 +81171,7 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|  (UNIV : (Cart[Real, Unit]) -> Bool)
       #|  (y : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(y))
       #|  (y : Cart[Real, Unit]) => cexp(-(ii * (Cx((d : Real)) * Cx(drop(y)))))
-      #|  op_star
+      #|  complex_mul
       #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 d : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 absolutely_integrable_on((y : Cart[Real, Unit]) => cexp(-(ii * (Cx(d) * Cx(drop(y))))) * f(drop(y)), UNIV)
       #|  IN(drop((x0 : Cart[Real, Unit])), real_interval([(-(a : Real), a)]))
       #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 x0 : Cart[Real, Unit], absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) \226\134\146 absolutely_integrable_on((y : Cart[Real, Unit]) => if IN(drop(fstcart(pastecart(x0, y))), real_interval([(-a, a)])) { cexp(ii * (Cx(x) * Cx(drop(fstcart(pastecart(x0, y)))))) * (cexp(-(ii * (Cx(drop(fstcart(pastecart(x0, y)))) * Cx(drop(sndcart(pastecart(x0, y))))))) * f(drop(sndcart(pastecart(x0, y))))) } else { vec(0) }, UNIV)
@@ -81231,7 +81231,7 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|  (UNIV : (Cart[Real, Unit]) -> Bool)
       #|  (u : Cart[Real, Unit]) => (H : (Real) -> Cart[Real, Tybit0[Unit]])(drop(u))
       #|  (u : Cart[Real, Unit]) => Cx(sin((a : Real) * drop(u)))
-      #|  op_star
+      #|  complex_mul
       #|  \226\136\128 H : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => H(drop(z)), UNIV) \226\134\146 integrable_on((u : Cart[Real, Unit]) => Cx(sin(a * drop(u))) * H(drop(u)), UNIV)
       #|  \226\136\128 H : (Real) -> Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => H(drop(z)), UNIV) \226\134\146 absolutely_real_integrable_on((u : Real) => Re(H(u)), UNIV)
       #|  \226\136\128 H : (Real) -> Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => H(drop(z)), UNIV) \226\134\146 absolutely_real_integrable_on((u : Real) => Im(H(u)), UNIV)
@@ -81455,7 +81455,7 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|  !(real_of_num(0) < (n : Real)) && real_of_num(0) <= n \226\134\146 n == real_of_num(0)
       #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 L : Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) && op_minus_minus_gt(f, L, at_posinfinity) \226\134\146 L == vec(0)
       #|  \226\136\128 y : Real, \226\136\128 a : Cart[Real, Unit], has_vector_derivative((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))), -(ii * Cx(y)) * cexp(-(ii * (Cx(y) * Cx(drop(a))))), at(a))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  drop((x : Cart[Real, Unit]))
       #|  (ffp : (Real) -> Cart[Real, Tybit0[Unit]])(drop((x : Cart[Real, Unit])))
       #|  (x : Cart[Real, Unit])
@@ -81481,7 +81481,7 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|  (z : Cart[Real, Unit]) => -(ii * Cx((y : Real))) * cexp(-(ii * (Cx(y) * Cx(drop(z)))))
       #|  (z : Cart[Real, Unit]) => (ff : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
       #|  (z : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(z)))))
-      #|  op_star
+      #|  complex_mul
       #|  \226\136\128 ff : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 ffp : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, \226\136\128 a : Real, real_of_num(0) <= a && (\226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => ff(drop(z)), ffp(x), at(lift(x)))) && integrable_on((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ffp(drop(z)), interval([(lift(-a), lift(a))])) \226\134\146 integral(interval([(lift(-a), lift(a))]), (z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ffp(drop(z))) == cexp(-(ii * (Cx(y) * Cx(a)))) * ff(a) - cexp(-(ii * (Cx(y) * Cx(-a)))) * ff(-a) + ii * Cx(y) * integral(interval([(lift(-a), lift(a))]), (z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ff(drop(z)))
       #|  real_of_num(1)
       #|  \226\136\128 ff : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, op_minus_minus_gt(ff, vec(0), at_posinfinity) \226\134\146 op_minus_minus_gt((a : Real) => cexp(-(ii * (Cx(y) * Cx(a)))) * ff(a), vec(0), at_posinfinity)
@@ -81699,7 +81699,7 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|  (UNIV : (Cart[Real, Unit]) -> Bool)
       #|  (z : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
       #|  (z : Cart[Real, Unit]) => fourier((g : (Real) -> Cart[Real, Tybit0[Unit]]), drop(z))
-      #|  op_star
+      #|  complex_mul
       #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) && absolutely_integrable_on((z : Cart[Real, Unit]) => g(drop(z)), UNIV) \226\134\146 absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)) * fourier(g, drop(z)), UNIV)
       #|  (f : Cart[Real, Tybit0[Unit]]) * (s : Cart[Real, Tybit0[Unit]]) * (gh : Cart[Real, Tybit0[Unit]]) == s * (f * gh)
       #|  :N
@@ -81885,7 +81885,7 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|  (z : Cart[Real, Unit])
       #|  DELETE({(z : Cart[Real, Unit]) | real_of_num(0) <= drop(z)}, lift(real_of_num(0))) == IMAGE(lift, {(x : Real) | real_of_num(0) < x})
       #|  real_of_num(0) < drop((x' : Cart[Real, Unit]))
-      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 Q : (Real) -> Real, \226\136\128 x' : Cart[Real, Unit], (\226\136\128 x : Real, real_of_num(0) < x \226\134\146 f(x) == Cx(Q(inv(x)) * exp(-inv(x)))) && IN(x', {(z : Cart[Real, Unit]) | real_of_num(0) <= drop(z)}) && real_of_num(0) < dist((x', lift(real_of_num(0)))) && dist((x', lift(real_of_num(0)))) < real_of_num(1) \226\134\146 Cx(inv(drop(x')) * (Q(inv(drop(x'))) * exp(-inv(drop(x'))))) == op_pct(inv(drop(x' - lift(real_of_num(0)))), f(drop(x')))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 Q : (Real) -> Real, \226\136\128 x' : Cart[Real, Unit], (\226\136\128 x : Real, real_of_num(0) < x \226\134\146 f(x) == Cx(Q(inv(x)) * exp(-inv(x)))) && IN(x', {(z : Cart[Real, Unit]) | real_of_num(0) <= drop(z)}) && real_of_num(0) < distance((x', lift(real_of_num(0)))) && distance((x', lift(real_of_num(0)))) < real_of_num(1) \226\134\146 Cx(inv(drop(x')) * (Q(inv(drop(x'))) * exp(-inv(drop(x'))))) == op_pct(inv(drop(x' - lift(real_of_num(0)))), f(drop(x')))
       #|  (u : Real) => u * (Q : (Real) -> Real)(u)
       #|  \226\136\128 Q : (Real) -> Real, real_polynomial_function((z : Cart[Real, Unit]) => Q(drop(z))) \226\134\146 op_minus_minus_gt((y : Cart[Real, Unit]) => Cx(inv(drop(y)) * (Q(inv(drop(y))) * exp(-inv(drop(y))))), Cx(real_of_num(0)), within(at(lift(real_of_num(0))), {(z : Cart[Real, Unit]) | real_of_num(0) <= drop(z)}))
       #|  real_of_num(1)
@@ -81935,7 +81935,7 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|  (a' : Cart[Real, Tybit0[Unit]])
       #|  (z : Cart[Real, Unit]) => (b : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
       #|  (z : Cart[Real, Unit]) => (a : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
-      #|  op_star
+      #|  complex_mul
       #|  \226\136\128 a : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 b : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a' : Cart[Real, Tybit0[Unit]], \226\136\128 b' : Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => a(drop(z)), a', at(lift(x))) && has_vector_derivative((z : Cart[Real, Unit]) => b(drop(z)), b', at(lift(x))) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => a(drop(z)) * b(drop(z)), a(x) * b' + a' * b(x), at(lift(x)))
       #|  (x : Cart[Real, Unit])
       #|  (f' : (Num) -> Cart[Real, Tybit0[Unit]])
@@ -82069,7 +82069,7 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|  (yy : (Num) -> Cart[Real, Unit])
       #|  \226\136\128 ff : (Real, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 gg : (Real, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 dm : (Real) -> Real, \226\136\128 y0 : Real, (\226\136\128 y : Real, \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => ff(drop(z), x), gg(y, x), at(lift(y)))) && (\226\136\128 y : Real, absolutely_integrable_on((x : Cart[Real, Unit]) => ff(y, drop(x)), UNIV)) && absolutely_integrable_on((x : Cart[Real, Unit]) => gg(y0, drop(x)), UNIV) && (\226\136\128 y : Real, \226\136\128 x : Real, norm(gg(y, x)) <= dm(x)) && absolutely_integrable_on((x : Cart[Real, Unit]) => lift(dm(drop(x))), UNIV) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => integral(UNIV, (x : Cart[Real, Unit]) => ff(drop(z), drop(x))), integral(UNIV, (x : Cart[Real, Unit]) => gg(y0, drop(x))), at(lift(y0)))
       #|  \226\136\128 x : Real, \226\136\128 a : Cart[Real, Unit], has_vector_derivative((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(drop(z)) * Cx(x)))), -(ii * Cx(x)) * cexp(-(ii * (Cx(drop(a)) * Cx(x)))), at(a))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  lift((y : Real))
       #|  (x : Real)
       #|  lift((y : Real))
@@ -82077,7 +82077,7 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|  -(ii * Cx((x : Real))) * cexp(-(ii * (Cx((y : Real)) * Cx(x))))
       #|  (z : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real))
       #|  (z : Cart[Real, Unit]) => cexp(-(ii * (Cx(drop(z)) * Cx((x : Real)))))
-      #|  op_star
+      #|  complex_mul
       #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 y : Real, has_vector_derivative((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(drop(z)) * Cx(x)))) * f(x), -(ii * Cx(x)) * (cexp(-(ii * (Cx(y) * Cx(x)))) * f(x)), at(lift(y)))
       #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, \226\136\128 y : Real, norm(-(ii * Cx(x)) * (cexp(-(ii * (Cx(y) * Cx(x)))) * f(x))) <= norm(Cx(x) * f(x))
       #|  (f : (Cart[Real, _]) -> Cart[Real, _]) == (g : (Cart[Real, _]) -> Cart[Real, _]) \226\134\146 absolutely_integrable_on(f, (s : (Cart[Real, _]) -> Bool)) \226\134\146 absolutely_integrable_on(g, s)
@@ -82473,7 +82473,7 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|  Cx(real_of_num(1))
       #|  (z : Cart[Real, Unit]) => (a : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
       #|  (z : Cart[Real, Unit]) => Cx(drop(z))
-      #|  op_star
+      #|  complex_mul
       #|  \226\136\128 a : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 a' : Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => a(drop(z)), a', at(lift(x))) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => Cx(drop(z)) * a(drop(z)), a(x) + Cx(x) * a', at(lift(x)))
       #|  (d : (Num, Real) -> Cart[Real, Tybit0[Unit]])((m : Num)) == d(SUC(m - 1))
       #|  \226\136\128 d : (Num, Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 x : Real, !(m == 0) && (\226\136\128 n : Num, \226\136\128 x : Real, has_vector_derivative((z : Cart[Real, Unit]) => d(n, drop(z)), d(SUC(n), x), at(lift(x)))) \226\134\146 has_vector_derivative((z : Cart[Real, Unit]) => Cx(real_of_num(m)) * d(m - 1, drop(z)), Cx(real_of_num(m)) * d(m, x), at(lift(x)))
@@ -82780,7 +82780,7 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|  (UNIV : (Cart[Real, Unit]) -> Bool)
       #|  (t : Cart[Real, Unit]) => (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(t))
       #|  (t : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real) - drop(t))
-      #|  op_star
+      #|  complex_mul
       #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, schwartz(f) && schwartz(g) \226\134\146 absolutely_integrable_on((t : Cart[Real, Unit]) => f(x - drop(t)) * g(drop(t)), UNIV)
       #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, schwartz(f) && schwartz(g) \226\134\146 integrable_on((t : Cart[Real, Unit]) => f(x - drop(t)) * g(drop(t)), UNIV)
       #|  (t : Cart[Real, Unit])
@@ -82806,7 +82806,7 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 w : Real, \226\136\128 x : Cart[Real, Unit], schwartz(f) && schwartz(g) \226\134\146 integral(UNIV, (y : Cart[Real, Unit]) => ((u : Cart[Real, Unit]) => cexp(-(ii * (Cx(w) * Cx(drop(u))))) * f(drop(u)))(x - y) * ((u : Cart[Real, Unit]) => cexp(-(ii * (Cx(w) * Cx(drop(u))))) * g(drop(u)))(y)) == cexp(-(ii * (Cx(w) * Cx(drop(x))))) * convol(f, g, drop(x))
       #|  (u : Cart[Real, Unit]) => cexp(-(ii * (Cx((w : Real)) * Cx(drop(u))))) * (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(u))
       #|  (u : Cart[Real, Unit]) => cexp(-(ii * (Cx((w : Real)) * Cx(drop(u))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(u))
-      #|  op_star
+      #|  complex_mul
       #|  (x : Cart[Real, Unit])
       #|  integral(UNIV, (x : Cart[Real, Unit]) => cexp(-(ii * (Cx((w : Real)) * Cx(drop(x))))) * convol((f : (Real) -> Cart[Real, Tybit0[Unit]]), (g : (Real) -> Cart[Real, Tybit0[Unit]]), drop(x))) == integral(UNIV, (x : Cart[Real, Unit]) => integral(UNIV, (y : Cart[Real, Unit]) => ((u : Cart[Real, Unit]) => cexp(-(ii * (Cx(w) * Cx(drop(u))))) * f(drop(u)))(x - y) * ((u : Cart[Real, Unit]) => cexp(-(ii * (Cx(w) * Cx(drop(u))))) * g(drop(u)))(y)))
       #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 w : Real, schwartz(f) && schwartz(g) \226\134\146 fourier(convol(f, g), w) == Cx(sqrt(real_of_num(2) * pi)) * (fourier(f, w) * fourier(g, w))

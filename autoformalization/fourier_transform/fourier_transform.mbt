@@ -2574,7 +2574,7 @@ fn step_74() -> Unit raise {
   let t1216 = @term_syntax.parse_term("(UNIV : (Cart[Real, Unit]) -> Bool)")
   let t1217 = @term_syntax.parse_term("(y : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(y))")
   let t1218 = @term_syntax.parse_term("(y : Cart[Real, Unit]) => cexp(-(ii * (Cx((d : Real)) * Cx(drop(y)))))")
-  let t1219 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("op_star"), t1218, t1217, t1216]), @measure.absolutely_integrable_bounded_measurable_product()))
+  let t1219 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("complex_mul"), t1218, t1217, t1216]), @measure.absolutely_integrable_bounded_measurable_product()))
   let t1244 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1219), t1220), t1221), @tactics.conj_tac), t1243)
   fourier_modulation_absint_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Cart[Real, Tybit0[Unit]], ∀ d : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) → absolutely_integrable_on((y : Cart[Real, Unit]) => cexp(-(ii * (Cx(d) * Cx(drop(y))))) * f(drop(y)), UNIV)"), t1244))
 }
@@ -3035,7 +3035,7 @@ fn step_90() -> Unit raise {
   let t1426 = @term_syntax.parse_term("(UNIV : (Cart[Real, Unit]) -> Bool)")
   let t1427 = @term_syntax.parse_term("(u : Cart[Real, Unit]) => (H : (Real) -> Cart[Real, Tybit0[Unit]])(drop(u))")
   let t1428 = @term_syntax.parse_term("(u : Cart[Real, Unit]) => Cx(sin((a : Real) * drop(u)))")
-  let t1429 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("op_star"), t1428, t1427, t1426]), @measure.absolutely_integrable_bounded_measurable_product()))
+  let t1429 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("complex_mul"), t1428, t1427, t1426]), @measure.absolutely_integrable_bounded_measurable_product()))
   let t1425 = @tactics.match_mp_tac(@integration.absolutely_integrable_imp_integrable())
   let t1438 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1425), t1429), t1430), t1431), @tactics.conj_tac), t1437)
   cx_sin_h_integrable_c.set(@tactics.prove(@term_syntax.parse_term("∀ H : (Real) -> Cart[Real, Tybit0[Unit]], ∀ a : Real, absolutely_integrable_on((z : Cart[Real, Unit]) => H(drop(z)), UNIV) → integrable_on((u : Cart[Real, Unit]) => Cx(sin(a * drop(u))) * H(drop(u)), UNIV)"), t1438))
@@ -4761,7 +4761,7 @@ fn step_141() -> Unit raise {
   let t2219 = @term_syntax.parse_term("(z : Cart[Real, Unit]) => -(ii * Cx((y : Real))) * cexp(-(ii * (Cx(y) * Cx(drop(z)))))")
   let t2220 = @term_syntax.parse_term("(z : Cart[Real, Unit]) => (ff : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))")
   let t2221 = @term_syntax.parse_term("(z : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(z)))))")
-  let t2222 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("op_star"), t2221, t2220, t2219, t2218, t2217, t2216, t2215]), @integration.integration_by_parts_simple()))
+  let t2222 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("complex_mul"), t2221, t2220, t2219, t2218, t2217, t2216, t2215]), @integration.integration_by_parts_simple()))
   let t2261 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2222), t2223), @tactics.ants_tac), t2238), t2248), t2252), @tactics.ants_tac), t2253), @tactics.disch_tac), t2259), t2260)
   fourier_ibp_finite_c.set(@tactics.prove(@term_syntax.parse_term("∀ ff : (Real) -> Cart[Real, Tybit0[Unit]], ∀ ffp : (Real) -> Cart[Real, Tybit0[Unit]], ∀ y : Real, ∀ a : Real, real_of_num(0) <= a && (∀ x : Real, has_vector_derivative((z : Cart[Real, Unit]) => ff(drop(z)), ffp(x), at(lift(x)))) && integrable_on((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ffp(drop(z)), interval([(lift(-a), lift(a))])) → integral(interval([(lift(-a), lift(a))]), (z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ffp(drop(z))) == cexp(-(ii * (Cx(y) * Cx(a)))) * ff(a) - cexp(-(ii * (Cx(y) * Cx(-a)))) * ff(-a) + ii * Cx(y) * integral(interval([(lift(-a), lift(a))]), (z : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(z))))) * ff(drop(z)))"), t2261))
 }
@@ -5936,7 +5936,7 @@ fn step_168() -> Unit raise {
   let t2908 = @term_syntax.parse_term("(UNIV : (Cart[Real, Unit]) -> Bool)")
   let t2909 = @term_syntax.parse_term("(z : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))")
   let t2910 = @term_syntax.parse_term("(z : Cart[Real, Unit]) => fourier((g : (Real) -> Cart[Real, Tybit0[Unit]]), drop(z))")
-  let t2911 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("op_star"), t2910, t2909, t2908]), @measure.absolutely_integrable_bounded_measurable_product()))
+  let t2911 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("complex_mul"), t2910, t2909, t2908]), @measure.absolutely_integrable_bounded_measurable_product()))
   let t2926 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2911), t2912), t2913), @tactics.ants_tac), t2925)
   fhat_times_l1_absint_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Cart[Real, Tybit0[Unit]], ∀ g : (Real) -> Cart[Real, Tybit0[Unit]], absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), UNIV) && absolutely_integrable_on((z : Cart[Real, Unit]) => g(drop(z)), UNIV) → absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)) * fourier(g, drop(z)), UNIV)"), t2926))
 }
@@ -7069,7 +7069,7 @@ fn step_201() -> Unit raise {
   })
   let t3462 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3470 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_elim_thm(), @vectors.dist_real(), @equal.gsym(@vectors.drop_()), @vectors.lift_drop(), @vectors.drop_vec()])), t3462), t3466), @list.List([@calc_rat.asm_real_arith_tac, @tactics.all_tac])), t3467), t3468), t3469)
-  junction_right_agree_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Cart[Real, Tybit0[Unit]], ∀ Q : (Real) -> Real, ∀ x' : Cart[Real, Unit], (∀ x : Real, real_of_num(0) < x → f(x) == Cx(Q(inv(x)) * exp(-inv(x)))) && IN(x', {(z : Cart[Real, Unit]) | real_of_num(0) <= drop(z)}) && real_of_num(0) < dist((x', lift(real_of_num(0)))) && dist((x', lift(real_of_num(0)))) < real_of_num(1) → Cx(inv(drop(x')) * (Q(inv(drop(x'))) * exp(-inv(drop(x'))))) == op_pct(inv(drop(x' - lift(real_of_num(0)))), f(drop(x')))"), t3470))
+  junction_right_agree_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Cart[Real, Tybit0[Unit]], ∀ Q : (Real) -> Real, ∀ x' : Cart[Real, Unit], (∀ x : Real, real_of_num(0) < x → f(x) == Cx(Q(inv(x)) * exp(-inv(x)))) && IN(x', {(z : Cart[Real, Unit]) | real_of_num(0) <= drop(z)}) && real_of_num(0) < distance((x', lift(real_of_num(0)))) && distance((x', lift(real_of_num(0)))) < real_of_num(1) → Cx(inv(drop(x')) * (Q(inv(drop(x'))) * exp(-inv(drop(x'))))) == op_pct(inv(drop(x' - lift(real_of_num(0)))), f(drop(x')))"), t3470))
 }
 
 ///|
@@ -7424,7 +7424,7 @@ fn step_212() -> Unit raise {
   let t3637 = @term_syntax.parse_term("(a' : Cart[Real, Tybit0[Unit]])")
   let t3638 = @term_syntax.parse_term("(z : Cart[Real, Unit]) => (b : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))")
   let t3639 = @term_syntax.parse_term("(z : Cart[Real, Unit]) => (a : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))")
-  let t3640 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("op_star"), t3639, t3638, t3637, t3636, t3635]), @derivatives.has_vector_derivative_bilinear_at()))
+  let t3640 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("complex_mul"), t3639, t3638, t3637, t3636, t3635]), @derivatives.has_vector_derivative_bilinear_at()))
   let t3643 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3640), t3641), t3642)
   cmul_deriv_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : (Real) -> Cart[Real, Tybit0[Unit]], ∀ b : (Real) -> Cart[Real, Tybit0[Unit]], ∀ a' : Cart[Real, Tybit0[Unit]], ∀ b' : Cart[Real, Tybit0[Unit]], ∀ x : Real, has_vector_derivative((z : Cart[Real, Unit]) => a(drop(z)), a', at(lift(x))) && has_vector_derivative((z : Cart[Real, Unit]) => b(drop(z)), b', at(lift(x))) → has_vector_derivative((z : Cart[Real, Unit]) => a(drop(z)) * b(drop(z)), a(x) * b' + a' * b(x), at(lift(x)))"), t3643))
 }
@@ -8219,7 +8219,7 @@ fn step_237() -> Unit raise {
   let t4005 = @term_syntax.parse_term("-(ii * Cx((x : Real))) * cexp(-(ii * (Cx((y : Real)) * Cx(x))))")
   let t4006 = @term_syntax.parse_term("(z : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real))")
   let t4007 = @term_syntax.parse_term("(z : Cart[Real, Unit]) => cexp(-(ii * (Cx(drop(z)) * Cx((x : Real)))))")
-  let t4008 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("op_star"), t4007, t4006, t4005, t4004, t4003]), @derivatives.has_vector_derivative_bilinear_at()))
+  let t4008 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("complex_mul"), t4007, t4006, t4005, t4004, t4003]), @derivatives.has_vector_derivative_bilinear_at()))
   let t4016 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4008), t4009), @tactics.ants_tac), t4015)
   ffy_deriv_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Cart[Real, Tybit0[Unit]], ∀ x : Real, ∀ y : Real, has_vector_derivative((z : Cart[Real, Unit]) => cexp(-(ii * (Cx(drop(z)) * Cx(x)))) * f(x), -(ii * Cx(x)) * (cexp(-(ii * (Cx(y) * Cx(x)))) * f(x)), at(lift(y)))"), t4016))
 }
@@ -10816,7 +10816,7 @@ fn step_306() -> Unit raise {
   let t5317 = @term_syntax.parse_term("Cx(real_of_num(1))")
   let t5318 = @term_syntax.parse_term("(z : Cart[Real, Unit]) => (a : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))")
   let t5319 = @term_syntax.parse_term("(z : Cart[Real, Unit]) => Cx(drop(z))")
-  let t5320 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("op_star"), t5319, t5318, t5317, t5316, t5315]), @derivatives.has_vector_derivative_bilinear_at()))
+  let t5320 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("complex_mul"), t5319, t5318, t5317, t5316, t5315]), @derivatives.has_vector_derivative_bilinear_at()))
   let t5330 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t5320), t5321), @tactics.ants_tac), t5329)
   mulx_deriv_step_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : (Real) -> Cart[Real, Tybit0[Unit]], ∀ a' : Cart[Real, Tybit0[Unit]], ∀ x : Real, has_vector_derivative((z : Cart[Real, Unit]) => a(drop(z)), a', at(lift(x))) → has_vector_derivative((z : Cart[Real, Unit]) => Cx(drop(z)) * a(drop(z)), a(x) + Cx(x) * a', at(lift(x)))"), t5330))
 }
@@ -12327,7 +12327,7 @@ fn step_339() -> Unit raise {
   let t6193 = @term_syntax.parse_term("(UNIV : (Cart[Real, Unit]) -> Bool)")
   let t6194 = @term_syntax.parse_term("(t : Cart[Real, Unit]) => (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(t))")
   let t6195 = @term_syntax.parse_term("(t : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])((x : Real) - drop(t))")
-  let t6196 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("op_star"), t6195, t6194, t6193]), @measure.absolutely_integrable_bounded_measurable_product()))
+  let t6196 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("complex_mul"), t6195, t6194, t6193]), @measure.absolutely_integrable_bounded_measurable_product()))
   let t6231 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t6196), t6197), t6198), t6199), t6230)
   convol_integrand_absint_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Cart[Real, Tybit0[Unit]], ∀ g : (Real) -> Cart[Real, Tybit0[Unit]], ∀ x : Real, schwartz(f) && schwartz(g) → absolutely_integrable_on((t : Cart[Real, Unit]) => f(x - drop(t)) * g(drop(t)), UNIV)"), t6231))
 }
@@ -12547,7 +12547,7 @@ fn step_347() -> Unit raise {
   let t6313 = @simp.rewrite_tac(@list.List([@complexes.bilinear_complex_mul()]))
   let t6310 = @term_syntax.parse_term("(u : Cart[Real, Unit]) => cexp(-(ii * (Cx((w : Real)) * Cx(drop(u))))) * (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(u))")
   let t6311 = @term_syntax.parse_term("(u : Cart[Real, Unit]) => cexp(-(ii * (Cx((w : Real)) * Cx(drop(u))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(u))")
-  let t6312 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("op_star"), t6311, t6310]), @measure.double_integral_convolution()))
+  let t6312 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("complex_mul"), t6311, t6310]), @measure.double_integral_convolution()))
   let t6308 = @simp.asm_simp_tac(@list.List([conv283m_inner()]))
   let t6307 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : Cart[Real, Unit])"))
   let t6309 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@integration.integral_eq()), t6307), @tactics.disch_tac), t6308), @tactics.all_tac])
