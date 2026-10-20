@@ -6310,19 +6310,19 @@ test "Library/calc_real matches Library/calc_real.ml" {
       #|  (b : Real)
       #|  (e : Num)
       #|  (c : Real)
-      #|  op_minus_minus
-      #|  abs
+      #|  real_neg
+      #|  real_abs
       #|  inv
       #|  sqrt
-      #|  op_plus
-      #|  op_star
-      #|  op_minus
+      #|  real_add
+      #|  real_mul
+      #|  real_sub
       #|  exp
       #|  ln
       #|  op_plus(real_of_num(1))
       #|  pow(real_of_num(2))
       #|  real_of_num(1)
-      #|  op_lt
+      #|  real_lt
       #|  SUC
       #|  (+):num->num->num
       #|  (t : (Num) -> Real)
@@ -6364,15 +6364,15 @@ test "Library/calc_real matches Library/calc_real.ml" {
       #|  (x : Real) == (y : Real)
       #|  abs(a - &2 pow n * x) < &1 /\\ abs(b - &2 pow n * y) < &1\n   ==> &2 <= abs(a - b) ==> ((x = y) <=> F)
       #|  (op_eq : (Real, Real) -> Bool)
-      #|  op_gt_eq
-      #|  op_gt
-      #|  op_lt_eq
-      #|  op_lt
+      #|  real_ge
+      #|  real_gt
+      #|  real_le
+      #|  real_lt
       #|  (op_eq : (Real, Real) -> Bool)
-      #|  op_gt_eq
-      #|  op_gt
-      #|  op_lt_eq
-      #|  op_lt
+      #|  real_ge
+      #|  real_gt
+      #|  real_le
+      #|  real_lt
       #|REAL_SUB_SUM0 =  |- (#forall:fun(fun(fun(num,real),bool),bool) (\x:fun(num,real). (#forall:fun(fun(fun(num,real),bool),bool) (\y:fun(num,real). (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(real,fun(real,bool)) ((#real_sub:fun(real,fun(real,real)) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) (#NUMERAL:fun(num,num) #_0:num)) m:num)) x:fun(num,real))) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) (#NUMERAL:fun(num,num) #_0:num)) m:num)) y:fun(num,real)))) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) (#NUMERAL:fun(num,num) #_0:num)) m:num)) (\i:num. ((#real_sub:fun(real,fun(real,real)) (x:fun(num,real) i:num)) (y:fun(num,real) i:num)))))))))))
       #|REAL_MUL_RSUM0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(real,bool),bool) (\c:real. (#forall:fun(fun(fun(num,real),bool),bool) (\x:fun(num,real). ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) c:real) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) (#NUMERAL:fun(num,num) #_0:num)) m:num)) x:fun(num,real)))) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) (#NUMERAL:fun(num,num) #_0:num)) m:num)) (\i:num. ((#real_mul:fun(real,fun(real,real)) c:real) (x:fun(num,real) i:num)))))))))))
       #|REAL_ABS_LEMMA =  |- (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(real,bool),bool) (\b:real. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) a:num)) n:num)) (#real_abs:fun(real,real) b:real))) (#real_abs:fun(real,real) ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) a:num)) n:num)) b:real)))))))))
