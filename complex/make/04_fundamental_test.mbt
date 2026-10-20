@@ -6449,317 +6449,317 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|0..0..4..11..26..48..86..143..205..289..402..552..753..1023..solved at 1173
       #|0..0..2..5..12..24..42..69..101..141..193..282..386..531..solved at 556
       #|Complex/fundamental quotations (311):
-      #|  forall x y. sqrt(x pow 2 + y pow 2) < &1 <=> x pow 2 + y pow 2 < &1
-      #|  forall x y. (sqrt(x pow 2 + y pow 2) = &1) <=> (x pow 2 + y pow 2 = &1)
-      #|  (&2 * r) * (&2 * r) <= &1 /\\ (&2 * i) * (&2 * i) <= &1\n    ==> ~(r * r + i * i = &1)
-      #|  Re z * Re z + Im z * Im z = &1
-      #|  ~(abs(a) <= &1 /\\ abs(b) <= &1)\n     ==> &0 < --a + --(&1) \\/ &0 < a + --(&1) \\/\n         &0 < --b + --(&1) \\/ &0 < b + --(&1)
-      #|  &1 + x < &1 <=> &0 < --x
-      #|  (b + c) * (b + c) + a * a =\n                       (b * b + a * a) + (&2 * b * c + c * c)
-      #|  a * a + (b + c) * (b + c) =\n                       (a * a + b * b) + (&2 * b * c + c * c)
-      #|  forall z. (norm(z) = &1)\n       ==> norm(z + Cx(&1)) < &1 \\/\n           norm(z - Cx(&1)) < &1 \\/\n           norm(z + ii) < &1 \\/\n           norm(z - ii) < &1
-      #|  (m * b') * b * p * m' = (m * m') * (b * b') * p
-      #|  norm(Cx(norm b) / b) = &1
-      #|  norm(Cx(norm b) / b)
-      #|  n:num
-      #|  n:num
-      #|  ~(EVEN n)
-      #|  root n (norm b) pow n = norm b
-      #|  v / Cx(root(n) (norm b))
-      #|  v:complex
-      #|  m:num
-      #|  (Cx(&1) pow n = Cx(&1)) /\\\n                  (--Cx(&1) pow n = --Cx(&1)) /\\\n                  (((ii pow n = ii) /\\ (--ii pow n = --ii)) \\/\n                   ((ii pow n = --ii) /\\ (--ii pow n = ii)))
-      #|  ?v. norm(Cx(norm b) / b + v pow n) < &1
-      #|  Cx(norm b) / b
-      #|  csqrt w
-      #|  w:complex
-      #|  ~(2 * m = 0) ==> m < 2 * m /\\ ~(m = 0)
-      #|  m:num
-      #|  m:num
-      #|  EVEN(n)
-      #|  forall b n. ~(b = Cx(&0)) /\\ ~(n = 0)\n         ==> ?z. norm(Cx(&1) + b * z pow n) < &1
-      #|  forall p c x. poly (MAP (( * ) c) p) x = c * poly p x
-      #|  forall p x. ALL (\\b. b = Cx(&0)) p ==> (poly p x = Cx(&0))
-      #|  y <= z ==> x + y <= &1 + x + abs(z)
-      #|  norm(h) + norm(z * poly t z)
-      #|  z:complex
-      #|  &0 <= x /\\ &0 <= y ==> &0 < &1 + x + y
-      #|  &1 + norm(h) + abs(r * m)
-      #|  m:real
-      #|  &1
-      #|  forall p r. ?m. &0 < m /\\ forall z. norm(z) <= r ==> norm(poly p z) <= m
-      #|  ( * ) x
-      #|  x:complex
-      #|  x:complex 
-      #|  CONS (b + h) q
-      #|  a * h
-      #|  []:complex list
-      #|  Cx(&0)
-      #|  forall a p. ?b q. (LENGTH q = LENGTH p) /\\\n               forall x. poly (CONS b q) x = (a + x) * poly p x
-      #|  CONS (h + b) r
-      #|  r: complex list
-      #|  b:complex
-      #|  p:complex list
-      #|  a:complex
-      #|  p:complex list
-      #|  []:complex list
-      #|  forall a p. ?q. (LENGTH q = LENGTH p) /\\ forall x. poly q x = poly p (a + x)
-      #|  a + b <= abs a + abs b + &2 * abs c
-      #|  (a + b) * (a + b) = a * a + b * b + &2 * a * b
-      #|  a <= abs(abs x + abs y) ==> a <= abs x + abs y
-      #|  forall x y. norm(x - y) <= abs(Re(x) - Re(y)) + abs(Im(x) - Im(y))
-      #|  a < c /\\ b < c ==> x <= a + b ==> x < &2 * c
-      #|  &2 * e / &2
-      #|  n:num
-      #|  N1 + N2:num
-      #|  N1:num
-      #|  N2:num
-      #|  e / &2
-      #|  e / &2
-      #|  forall e. &0 < e\n        ==> (?N. forall n. N <= n ==> abs(Re(s ((f:num->num) n)) - x) < e)
-      #|  e:real
-      #|  subseq g
-      #|  subseq f
-      #|  complex(x,y)
-      #|  y:real
-      #|  x:real
-      #|  a <= b ==> b <= r ==> a < r + &1
-      #|  n:num
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (sqrt(pow(x, 2) + pow(y, 2)) < real_of_num(1)) == (pow(x, 2) + pow(y, 2) < real_of_num(1))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (sqrt(pow(x, 2) + pow(y, 2)) == real_of_num(1)) == (pow(x, 2) + pow(y, 2) == real_of_num(1))
+      #|  real_of_num(2) * (r : Real) * (real_of_num(2) * r) <= real_of_num(1) && real_of_num(2) * (i : Real) * (real_of_num(2) * i) <= real_of_num(1) \226\134\146 !(r * r + i * i == real_of_num(1))
+      #|  Re((z : Complex)) * Re(z) + Im(z) * Im(z) == real_of_num(1)
+      #|  !(abs((a : Real)) <= real_of_num(1) && abs((b : Real)) <= real_of_num(1)) \226\134\146 real_of_num(0) < -a + -real_of_num(1) || real_of_num(0) < a + -real_of_num(1) || real_of_num(0) < -b + -real_of_num(1) || real_of_num(0) < b + -real_of_num(1)
+      #|  (real_of_num(1) + (x : Real) < real_of_num(1)) == (real_of_num(0) < -x)
+      #|  ((b : Real) + (c : Real)) * (b + c) + (a : Real) * a == b * b + a * a + (real_of_num(2) * (b * c) + c * c)
+      #|  (a : Real) * a + ((b : Real) + (c : Real)) * (b + c) == a * a + b * b + (real_of_num(2) * (b * c) + c * c)
+      #|  \226\136\128 z : Complex, norm(z) == real_of_num(1) \226\134\146 norm(z + Cx(real_of_num(1))) < real_of_num(1) || norm(z - Cx(real_of_num(1))) < real_of_num(1) || norm(z + ii) < real_of_num(1) || norm(z - ii) < real_of_num(1)
+      #|  (m : Complex) * (b' : Complex) * ((b : Complex) * ((p : Complex) * (m' : Complex))) == m * m' * (b * b' * p)
+      #|  norm(Cx(norm((b : Complex))) / b) == real_of_num(1)
+      #|  norm(Cx(norm((b : Complex))) / b)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  !EVEN((n : Num))
+      #|  pow(root((n : Num), norm((b : Complex))), n) == norm(b)
+      #|  (v : Complex) / Cx(root((n : Num), norm((b : Complex))))
+      #|  (v : Complex)
+      #|  (m : Num)
+      #|  pow(Cx(real_of_num(1)), (n : Num)) == Cx(real_of_num(1)) && pow(-Cx(real_of_num(1)), n) == -Cx(real_of_num(1)) && (pow(ii, n) == ii && pow(-ii, n) == -ii || pow(ii, n) == -ii && pow(-ii, n) == ii)
+      #|  \226\136\131 v : Complex, norm(Cx(norm((b : Complex))) / b + pow(v, (n : Num))) < real_of_num(1)
+      #|  Cx(norm((b : Complex))) / b
+      #|  csqrt((w : Complex))
+      #|  (w : Complex)
+      #|  !(2 * (m : Num) == 0) \226\134\146 m < 2 * m && !(m == 0)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  EVEN((n : Num))
+      #|  \226\136\128 b : Complex, \226\136\128 n : Num, !(b == Cx(real_of_num(0))) && !(n == 0) \226\134\146 (\226\136\131 z : Complex, norm(Cx(real_of_num(1)) + b * pow(z, n)) < real_of_num(1))
+      #|  \226\136\128 p : List[Complex], \226\136\128 c : Complex, \226\136\128 x : Complex, poly(MAP(op_star(c), p), x) == c * poly(p, x)
+      #|  \226\136\128 p : List[Complex], \226\136\128 x : Complex, ALL((b : Complex) => b == Cx(real_of_num(0)), p) \226\134\146 poly(p, x) == Cx(real_of_num(0))
+      #|  (y : Real) <= (z : Real) \226\134\146 (x : Real) + y <= real_of_num(1) + (x + abs(z))
+      #|  norm((h : Complex)) + norm((z : Complex) * poly((t : List[Complex]), z))
+      #|  (z : Complex)
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 real_of_num(0) < real_of_num(1) + (x + y)
+      #|  real_of_num(1) + (norm((h : Complex)) + abs((r : Real) * (m : Real)))
+      #|  (m : Real)
+      #|  real_of_num(1)
+      #|  \226\136\128 p : List[Complex], \226\136\128 r : Real, \226\136\131 m : Real, real_of_num(0) < m && (\226\136\128 z : Complex, norm(z) <= r \226\134\146 norm(poly(p, z)) <= m)
+      #|  op_star((x : Complex))
+      #|  (x : Complex)
+      #|  (x : Complex)
+      #|  CONS((b : Complex) + (h : Complex), (q : List[Complex]))
+      #|  (a : Complex) * (h : Complex)
+      #|  (NIL : List[Complex])
+      #|  Cx(real_of_num(0))
+      #|  \226\136\128 a : Complex, \226\136\128 p : List[Complex], \226\136\131 b : Complex, \226\136\131 q : List[Complex], LENGTH(q) == LENGTH(p) && (\226\136\128 x : Complex, poly(CONS(b, q), x) == (a + x) * poly(p, x))
+      #|  CONS((h : Complex) + (b : Complex), (r : List[Complex]))
+      #|  (r : List[Complex])
+      #|  (b : Complex)
+      #|  (p : List[Complex])
+      #|  (a : Complex)
+      #|  (p : List[Complex])
+      #|  (NIL : List[Complex])
+      #|  \226\136\128 a : Complex, \226\136\128 p : List[Complex], \226\136\131 q : List[Complex], LENGTH(q) == LENGTH(p) && (\226\136\128 x : Complex, poly(q, x) == poly(p, a + x))
+      #|  (a : Real) + (b : Real) <= abs(a) + (abs(b) + real_of_num(2) * abs((c : Real)))
+      #|  ((a : Real) + (b : Real)) * (a + b) == a * a + (b * b + real_of_num(2) * (a * b))
+      #|  (a : Real) <= abs(abs((x : Real)) + abs((y : Real))) \226\134\146 a <= abs(x) + abs(y)
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, norm(x - y) <= abs(Re(x) - Re(y)) + abs(Im(x) - Im(y))
+      #|  (a : Real) < (c : Real) && (b : Real) < c \226\134\146 (x : Real) <= a + b \226\134\146 x < real_of_num(2) * c
+      #|  real_of_num(2) * ((e : Real) / real_of_num(2))
+      #|  (n : Num)
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (N1 : Num)
+      #|  (N2 : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  (e : Real) / real_of_num(2)
+      #|  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 abs(Re((s : (Num) -> Complex)((f : (Num) -> Num)(n))) - (x : Real)) < e)
+      #|  (e : Real)
+      #|  subseq((g : (Num) -> Num))
+      #|  subseq((f : (Num) -> Num))
+      #|  complex(((x : Real), (y : Real)))
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (a : Real) <= (b : Real) \226\134\146 b <= (r : Real) \226\134\146 a < r + real_of_num(1)
+      #|  (n : Num)
       #|  0
-      #|  &0
-      #|  r + &1
-      #|  convergent (\\n. Re(s(f n :num))) /\\\n                convergent (\\n. Im(s((f:num->num)(g n))))
-      #|  (f:num->num) o (g:num->num)
-      #|  g:num->num
-      #|  Im o (s:num->complex) o (f:num->num)
-      #|  f:num->num
-      #|  Re o (s:num->complex)
-      #|  forall s r. (forall n. norm(s n) <= r)\n         ==> ?f z. subseq f /\\\n                   forall e. &0 < e ==> ?N. forall n. n >= N ==> norm(s(f n) - z) < e
-      #|  d * m:real
-      #|  w:complex
-      #|  d:real
-      #|  e / m:real
-      #|  &1
-      #|  m:real
-      #|  &1
-      #|  t:complex list
-      #|  e:real
-      #|  p:complex list
-      #|  q:complex list
-      #|  w - z
-      #|  w:complex
-      #|  q:complex list
-      #|  p:complex list
-      #|  z:complex
-      #|  forall p z e. &0 < e\n           ==> ?d. &0 < d /\\ forall w. &0 < norm(w - z) /\\ norm(w - z) < d\n                   ==> norm(poly p w - poly p z) < e
-      #|  P /\\ (m = --x) /\\ --x < y <=> (--x = m) /\\ P /\\ m < y
-      #|  abs(norm(psfn) - norm(pz)) <= norm(psfn - pz)\n    ==> abs(norm(pz) - m) <= abs(norm(psfn) - m) + norm(psfn - pz)
-      #|  &N2
-      #|  m + inv(&(SUC(f(N1 + N2:num))))
-      #|  m <= x /\\ x < m + e ==> abs(x - m:real) < e
-      #|  inv(&(SUC(N1 + N2)))
-      #|  m:real
-      #|  forall m. abs(norm(psfn) - m) < e2 /\\\n        &2 * e2 <= abs(norm(psfn) - m) + norm(psfn - pz)\n        ==> norm(psfn - pz) < e2 ==> F
-      #|  norm(poly p (s((f:num->num) (N1 + N2))) - poly p z) < e / &2
-      #|  N2:num
-      #|  &2 / e
-      #|  N1:num
-      #|  d:real
-      #|  u = z:complex
-      #|  u:complex
-      #|  forall w. norm(w - z) < d ==> norm(poly p w - poly p z) < e / &2
-      #|  d:real
-      #|  e / &2
-      #|  z:complex
-      #|  p:complex list
-      #|  e = abs(norm(poly p z) - m)
-      #|  ~(&0 < abs(a - b)) ==> (a = b)
-      #|  norm(poly p z) = m
-      #|  w:complex
-      #|  z:complex
-      #|  z:complex
-      #|  f:num->num
-      #|  r:real
-      #|  s:num->complex
-      #|  s:num->complex
-      #|  m + inv(&(SUC n))
-      #|  n:num
-      #|  ~(a /\\ b) <=> a ==> ~b
-      #|  (--a = b) <=> (a = --b:real)
-      #|  --y:real
-      #|  y:real
-      #|  m = --s:real
-      #|  a < b <=> --b < --a:real
-      #|  s:real
-      #|  &0 <= x ==> --(&1) < x
-      #|  x < &1 <=>  --(&1) < --x
-      #|  (a = --b) <=> (--b = a:real)
-      #|  &1
-      #|  Cx(&0)
-      #|  --norm(poly p (Cx(&0)))
-      #|  \\x. ?z. norm(z) <= r /\\ (norm(poly p z) = --x)
-      #|  &0 <= r
-      #|  forall p r. ?z. forall w. norm(w) <= r ==> norm(poly p z) <= norm(poly p w)
-      #|  m:real
-      #|  mzh <= mazh + ma ==> abs(d) + ma <= mzh ==> d <= mazh
-      #|  z:complex
-      #|  (abs(d) + norm(a)) / norm(h)
-      #|  d:real
-      #|  &1 + abs(r) <= x ==> &1 <= x
-      #|  &1 + abs(r) <= x ==> r <= x
-      #|  &1 * norm(poly (CONS h t) z)
-      #|  norm(z * poly (CONS h t) z) - norm(a)
-      #|  z:complex
-      #|  &1 + abs(r)
-      #|  d + norm(a)
-      #|  r:real
-      #|  h:complex
-      #|  d:real
-      #|  EX (\\b. ~(b = Cx(&0))) t
-      #|  a:complex
-      #|  forall p a. EX (\\b. ~(b = Cx(&0))) p\n         ==> forall d. ?r. forall z. r <= norm(z) ==> d <= norm(poly (CONS a p) z)
-      #|  r <= z \\/ z <= abs(r)
-      #|  abs(r)
-      #|  CONS (h:complex) t
-      #|  r:real
-      #|  norm(poly (CONS h t) (Cx(&0)))
-      #|  h:complex
-      #|  EX (\\b. ~(b = Cx(&0))) t
-      #|  forall p. ?z. forall w. norm(poly p z) <= norm(poly p w)
-      #|  constant f = forall w z. f(w) = f(z)
-      #|  ~a ==> ~b <=> b ==> a
-      #|  2 <= SUC n <=> ~(n = 0)
-      #|  forall p. ~constant(poly p) ==> 2 <= LENGTH p
-      #|  t:complex list
-      #|  h:complex
+      #|  real_of_num(0)
+      #|  (r : Real) + real_of_num(1)
+      #|  convergent((n : Num) => Re((s : (Num) -> Complex)((f : (Num) -> Num)(n)))) && convergent((n : Num) => Im(s(f((g : (Num) -> Num)(n)))))
+      #|  o((f : (Num) -> Num), (g : (Num) -> Num))
+      #|  (g : (Num) -> Num)
+      #|  o(Im, o((s : (Num) -> Complex), (f : (Num) -> Num)))
+      #|  (f : (Num) -> Num)
+      #|  o(Re, (s : (Num) -> Complex))
+      #|  \226\136\128 s : (Num) -> Complex, \226\136\128 r : Real, (\226\136\128 n : Num, norm(s(n)) <= r) \226\134\146 (\226\136\131 f : (Num) -> Num, \226\136\131 z : Complex, subseq(f) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, n >= N \226\134\146 norm(s(f(n)) - z) < e)))
+      #|  (d : Real) * (m : Real)
+      #|  (w : Complex)
+      #|  (d : Real)
+      #|  (e : Real) / (m : Real)
+      #|  real_of_num(1)
+      #|  (m : Real)
+      #|  real_of_num(1)
+      #|  (t : List[Complex])
+      #|  (e : Real)
+      #|  (p : List[Complex])
+      #|  (q : List[Complex])
+      #|  (w : Complex) - (z : Complex)
+      #|  (w : Complex)
+      #|  (q : List[Complex])
+      #|  (p : List[Complex])
+      #|  (z : Complex)
+      #|  \226\136\128 p : List[Complex], \226\136\128 z : Complex, \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 w : Complex, real_of_num(0) < norm(w - z) && norm(w - z) < d \226\134\146 norm(poly(p, w) - poly(p, z)) < e))
+      #|  ((P : Bool) && (m : Real) == -(x : Real) && -x < (y : Real)) == (-x == m && P && m < y)
+      #|  abs(norm((psfn : Complex)) - norm((pz : Complex))) <= norm(psfn - pz) \226\134\146 abs(norm(pz) - (m : Real)) <= abs(norm(psfn) - m) + norm(psfn - pz)
+      #|  real_of_num((N2 : Num))
+      #|  (m : Real) + inv(real_of_num(SUC((f : (Num) -> Num)((N1 : Num) + (N2 : Num)))))
+      #|  (m : Real) <= (x : Real) && x < m + (e : Real) \226\134\146 abs(x - m) < e
+      #|  inv(real_of_num(SUC((N1 : Num) + (N2 : Num))))
+      #|  (m : Real)
+      #|  \226\136\128 m : Real, abs(norm((psfn : Complex)) - m) < (e2 : Real) && real_of_num(2) * e2 <= abs(norm(psfn) - m) + norm(psfn - (pz : Complex)) \226\134\146 norm(psfn - pz) < e2 \226\134\146 false
+      #|  norm(poly((p : List[Complex]), (s : (Num) -> Complex)((f : (Num) -> Num)((N1 : Num) + (N2 : Num)))) - poly(p, (z : Complex))) < (e : Real) / real_of_num(2)
+      #|  (N2 : Num)
+      #|  real_of_num(2) / (e : Real)
+      #|  (N1 : Num)
+      #|  (d : Real)
+      #|  (u : Complex) == (z : Complex)
+      #|  (u : Complex)
+      #|  \226\136\128 w : Complex, norm(w - (z : Complex)) < (d : Real) \226\134\146 norm(poly((p : List[Complex]), w) - poly(p, z)) < (e : Real) / real_of_num(2)
+      #|  (d : Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  (z : Complex)
+      #|  (p : List[Complex])
+      #|  (e : Real) == abs(norm(poly((p : List[Complex]), (z : Complex))) - (m : Real))
+      #|  !(real_of_num(0) < abs((a : Real) - (b : Real))) \226\134\146 a == b
+      #|  norm(poly((p : List[Complex]), (z : Complex))) == (m : Real)
+      #|  (w : Complex)
+      #|  (z : Complex)
+      #|  (z : Complex)
+      #|  (f : (Num) -> Num)
+      #|  (r : Real)
+      #|  (s : (Num) -> Complex)
+      #|  (s : (Num) -> Complex)
+      #|  (m : Real) + inv(real_of_num(SUC((n : Num))))
+      #|  (n : Num)
+      #|  !((a : Bool) && (b : Bool)) == (a \226\134\146 !b)
+      #|  (-(a : Real) == (b : Real)) == (a == -b)
+      #|  -(y : Real)
+      #|  (y : Real)
+      #|  (m : Real) == -(s : Real)
+      #|  ((a : Real) < (b : Real)) == (-b < -a)
+      #|  (s : Real)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 -real_of_num(1) < x
+      #|  ((x : Real) < real_of_num(1)) == (-real_of_num(1) < -x)
+      #|  ((a : Real) == -(b : Real)) == (-b == a)
+      #|  real_of_num(1)
+      #|  Cx(real_of_num(0))
+      #|  -norm(poly((p : List[Complex]), Cx(real_of_num(0))))
+      #|  (x : Real) => \226\136\131 z : Complex, norm(z) <= (r : Real) && norm(poly((p : List[Complex]), z)) == -x
+      #|  real_of_num(0) <= (r : Real)
+      #|  \226\136\128 p : List[Complex], \226\136\128 r : Real, \226\136\131 z : Complex, \226\136\128 w : Complex, norm(w) <= r \226\134\146 norm(poly(p, z)) <= norm(poly(p, w))
+      #|  (m : Real)
+      #|  (mzh : Real) <= (mazh : Real) + (ma : Real) \226\134\146 abs((d : Real)) + ma <= mzh \226\134\146 d <= mazh
+      #|  (z : Complex)
+      #|  (abs((d : Real)) + norm((a : Complex))) / norm((h : Complex))
+      #|  (d : Real)
+      #|  real_of_num(1) + abs((r : Real)) <= (x : Real) \226\134\146 real_of_num(1) <= x
+      #|  real_of_num(1) + abs((r : Real)) <= (x : Real) \226\134\146 r <= x
+      #|  real_of_num(1) * norm(poly(CONS((h : Complex), (t : List[Complex])), (z : Complex)))
+      #|  norm((z : Complex) * poly(CONS((h : Complex), (t : List[Complex])), z)) - norm((a : Complex))
+      #|  (z : Complex)
+      #|  real_of_num(1) + abs((r : Real))
+      #|  (d : Real) + norm((a : Complex))
+      #|  (r : Real)
+      #|  (h : Complex)
+      #|  (d : Real)
+      #|  EX((b : Complex) => !(b == Cx(real_of_num(0))), (t : List[Complex]))
+      #|  (a : Complex)
+      #|  \226\136\128 p : List[Complex], \226\136\128 a : Complex, EX((b : Complex) => !(b == Cx(real_of_num(0))), p) \226\134\146 (\226\136\128 d : Real, \226\136\131 r : Real, \226\136\128 z : Complex, r <= norm(z) \226\134\146 d <= norm(poly(CONS(a, p), z)))
+      #|  (r : Real) <= (z : Real) || z <= abs(r)
+      #|  abs((r : Real))
+      #|  CONS((h : Complex), (t : List[Complex]))
+      #|  (r : Real)
+      #|  norm(poly(CONS((h : Complex), (t : List[Complex])), Cx(real_of_num(0))))
+      #|  (h : Complex)
+      #|  EX((b : Complex) => !(b == Cx(real_of_num(0))), (t : List[Complex]))
+      #|  \226\136\128 p : List[Complex], \226\136\131 z : Complex, \226\136\128 w : Complex, norm(poly(p, z)) <= norm(poly(p, w))
+      #|  (constant : ((_) -> _) -> Bool)((f : (_) -> _)) == (\226\136\128 w : _, \226\136\128 z : _, f(w) == f(z))
+      #|  (!(a : Bool) \226\134\146 !(b : Bool)) == (b \226\134\146 a)
+      #|  (2 <= SUC((n : Num))) == !(n == 0)
+      #|  \226\136\128 p : List[Complex], !constant(poly(p)) \226\134\146 2 <= LENGTH(p)
+      #|  (t : List[Complex])
+      #|  (h : Complex)
       #|  0
-      #|  q:complex list
-      #|  a:complex
-      #|  k + 1
-      #|  q:complex list
-      #|  a:complex
-      #|  k:num
-      #|  h = Cx(&0)
-      #|  forall p. ~(forall z. ~(z = Cx(&0)) ==> (poly p z = Cx(&0)))\n       ==> ?k a q. ~(a = Cx(&0)) /\\\n                   (SUC(LENGTH q + k) = LENGTH p) /\\\n                   forall z. poly p z = z pow k * poly (CONS a q) z
-      #|  q:complex list
-      #|  a:complex
-      #|  SUC k
-      #|  q:complex list
-      #|  a:complex
-      #|  k:num
-      #|  ~a ==> b <=> a \\/ b
-      #|  ~b ==> ~a <=> a ==> b
-      #|  t:complex list
-      #|  forall p. ~constant(poly p)\n       ==> ?k a q. ~(a = Cx(&0)) /\\ ~(k = 0) /\\\n                   (LENGTH q + k + 1 = LENGTH p) /\\\n                   forall z. poly p z = poly p (Cx(&0)) +\n                                  z pow k * poly (CONS a q) z
-      #|  forall n p x. poly (APPEND (REPLICATE n (Cx(&0))) p) x = x pow n * poly p x
-      #|  &0 < t /\\ t < x ==> abs(t) < x
-      #|  &0 < t /\\ t < &1 ==> abs(t) <= &1
-      #|  abs t * norm(w pow (k + 1)) * m
-      #|  a * b * c * d = b * (c * a) * d
-      #|  &0 <= x /\\ x < t /\\ t <= &1 ==> abs(&1 + t * --(&1)) + x < &1
-      #|  norm(Cx(&1 + t pow k * -- &1)) +\n              norm(Cx(t pow k) * w pow k * Cx t * w * poly s (Cx t * w))
-      #|  (a + w = Cx(&0)) ==> (w = --a)
-      #|  Cx(t) * w
-      #|  t:real
-      #|  inv(norm(w) pow (k + 1) * m)
-      #|  &1
-      #|  k:num
-      #|  k:num
-      #|  ~(k = 0)
-      #|  a ==> ~b <=> b ==> ~a
-      #|  Cx(&1) + w pow k * a = Cx(&0)
-      #|  ~(w = Cx(&0))
-      #|  m:real
-      #|  norm(w)
-      #|  s:complex list
-      #|  w:complex
-      #|  ~(k = 0) ==> (SUC(k - 1) = k)
-      #|  a * b * c = (a * b) * c
-      #|  (a = a + b) <=> (b = Cx(&0))
-      #|  Cx(&1)
-      #|  Cx(&0)
-      #|  ~(k = 0)
-      #|  CONS (Cx(&1)) (APPEND (REPLICATE (k - 1) (Cx(&0))) [a])
-      #|  LENGTH(s:complex list) + k + 1 = n
-      #|  ~(k + 1 = n)
-      #|  k + 1
-      #|  2 <= n
-      #|  k + 1 = n
-      #|  (s + m = m) <=> (s = 0)
-      #|  LENGTH(s:complex list) + k + 1 = n
-      #|  k + 1 = n
-      #|  s:complex list
-      #|  a:complex
-      #|  k:num
-      #|  Cx(&0)
-      #|  poly r (Cx(&0)) = Cx(&1)
-      #|  ~constant(poly q)
-      #|  ~(constant(poly r))
-      #|  LENGTH(q:complex list) = LENGTH(r:complex list)
-      #|  r = MAP (( * ) (inv(a0))) q
-      #|  (a * b) * c = b * c * a
-      #|  forall z. poly q z = poly (MAP (( * ) (inv(a0))) q) z * a0
-      #|  a0 = poly q (Cx(&0))
-      #|  ~a ==> a ==> b
-      #|  forall w. norm(poly q (Cx(&0))) <= norm(poly q w)
-      #|  poly p c = poly q (Cx(&0))
-      #|  a + (x - a) = x
-      #|  forall z. poly q (z - c) = poly p z
-      #|  ~(constant(poly p))
-      #|  ~constant(poly q)
-      #|  q:complex list
-      #|  p:complex list
-      #|  c:complex
-      #|  poly p c = Cx(&0)
-      #|  p:complex list
-      #|  c:complex
-      #|  p:complex list
-      #|  n:num
-      #|  forall n p. (LENGTH p = n) /\\ ~constant(poly p) ==> ?z. poly p z = Cx(&0)
-      #|  forall p. ~constant(poly p) ==> ?z. poly p z = Cx(&0)
-      #|  p:complex list
-      #|  p:complex list
-      #|  p:complex list
-      #|  p:complex list
-      #|  p:complex list
-      #|  p:complex list
-      #|  p:complex list
-      #|  p:complex list
-      #|  q:complex list
-      #|  q:complex list
-      #|  q:complex list
-      #|  q:complex list
-      #|  q:complex list
-      #|  q:complex list
-      #|  q:complex list
-      #|  q:complex list
-      #|  q:complex list
-      #|  q:complex list
-      #|  &0 < x /\\ x < &1 ==> abs(x) <= &1
-      #|  &0 < x /\\ x < a ==> abs(x) < a
-      #|  abs(x) * m
-      #|  norm(h) / m * m
-      #|  abs(a) < abs(b) ==> ~(a = b)
+      #|  (q : List[Complex])
+      #|  (a : Complex)
+      #|  (k : Num) + 1
+      #|  (q : List[Complex])
+      #|  (a : Complex)
+      #|  (k : Num)
+      #|  (h : Complex) == Cx(real_of_num(0))
+      #|  \226\136\128 p : List[Complex], !(\226\136\128 z : Complex, !(z == Cx(real_of_num(0))) \226\134\146 poly(p, z) == Cx(real_of_num(0))) \226\134\146 (\226\136\131 k : Num, \226\136\131 a : Complex, \226\136\131 q : List[Complex], !(a == Cx(real_of_num(0))) && SUC(LENGTH(q) + k) == LENGTH(p) && (\226\136\128 z : Complex, poly(p, z) == pow(z, k) * poly(CONS(a, q), z)))
+      #|  (q : List[Complex])
+      #|  (a : Complex)
+      #|  SUC((k : Num))
+      #|  (q : List[Complex])
+      #|  (a : Complex)
+      #|  (k : Num)
+      #|  (!(a : Bool) \226\134\146 (b : Bool)) == (a || b)
+      #|  (!(b : Bool) \226\134\146 !(a : Bool)) == (a \226\134\146 b)
+      #|  (t : List[Complex])
+      #|  \226\136\128 p : List[Complex], !constant(poly(p)) \226\134\146 (\226\136\131 k : Num, \226\136\131 a : Complex, \226\136\131 q : List[Complex], !(a == Cx(real_of_num(0))) && !(k == 0) && LENGTH(q) + (k + 1) == LENGTH(p) && (\226\136\128 z : Complex, poly(p, z) == poly(p, Cx(real_of_num(0))) + pow(z, k) * poly(CONS(a, q), z)))
+      #|  \226\136\128 n : Num, \226\136\128 p : List[Complex], \226\136\128 x : Complex, poly(APPEND(REPLICATE(n, Cx(real_of_num(0))), p), x) == pow(x, n) * poly(p, x)
+      #|  real_of_num(0) < (t : Real) && t < (x : Real) \226\134\146 abs(t) < x
+      #|  real_of_num(0) < (t : Real) && t < real_of_num(1) \226\134\146 abs(t) <= real_of_num(1)
+      #|  abs((t : Real)) * (norm(pow((w : Complex), (k : Num) + 1)) * (m : Real))
+      #|  (a : Complex) * ((b : Complex) * ((c : Complex) * (d : Complex))) == b * (c * a * d)
+      #|  real_of_num(0) <= (x : Real) && x < (t : Real) && t <= real_of_num(1) \226\134\146 abs(real_of_num(1) + t * -real_of_num(1)) + x < real_of_num(1)
+      #|  norm(Cx(real_of_num(1) + pow((t : Real), (k : Num)) * -real_of_num(1))) + norm(Cx(pow(t, k)) * (pow((w : Complex), k) * (Cx(t) * (w * poly((s : List[Complex]), Cx(t) * w)))))
+      #|  (a : Complex) + (w : Complex) == Cx(real_of_num(0)) \226\134\146 w == -a
+      #|  Cx((t : Real)) * (w : Complex)
+      #|  (t : Real)
+      #|  inv(pow(norm((w : Complex)), (k : Num) + 1) * (m : Real))
+      #|  real_of_num(1)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  !((k : Num) == 0)
+      #|  ((a : Bool) \226\134\146 !(b : Bool)) == (b \226\134\146 !a)
+      #|  Cx(real_of_num(1)) + pow((w : Complex), (k : Num)) * (a : Complex) == Cx(real_of_num(0))
+      #|  !((w : Complex) == Cx(real_of_num(0)))
+      #|  (m : Real)
+      #|  norm((w : Complex))
+      #|  (s : List[Complex])
+      #|  (w : Complex)
+      #|  !((k : Num) == 0) \226\134\146 SUC(k - 1) == k
+      #|  (a : Complex) * ((b : Complex) * (c : Complex)) == a * b * c
+      #|  ((a : Complex) == a + (b : Complex)) == (b == Cx(real_of_num(0)))
+      #|  Cx(real_of_num(1))
+      #|  Cx(real_of_num(0))
+      #|  !((k : Num) == 0)
+      #|  CONS(Cx(real_of_num(1)), APPEND(REPLICATE((k : Num) - 1, Cx(real_of_num(0))), [(a : Complex)]))
+      #|  LENGTH((s : List[Complex])) + ((k : Num) + 1) == (n : Num)
+      #|  !((k : Num) + 1 == (n : Num))
+      #|  (k : Num) + 1
+      #|  2 <= (n : Num)
+      #|  (k : Num) + 1 == (n : Num)
+      #|  ((s : Num) + (m : Num) == m) == (s == 0)
+      #|  LENGTH((s : List[Complex])) + ((k : Num) + 1) == (n : Num)
+      #|  (k : Num) + 1 == (n : Num)
+      #|  (s : List[Complex])
+      #|  (a : Complex)
+      #|  (k : Num)
+      #|  Cx(real_of_num(0))
+      #|  poly((r : List[Complex]), Cx(real_of_num(0))) == Cx(real_of_num(1))
+      #|  !constant(poly((q : List[Complex])))
+      #|  !constant(poly((r : List[Complex])))
+      #|  LENGTH((q : List[Complex])) == LENGTH((r : List[Complex]))
+      #|  (r : List[Complex]) == MAP(op_star(inv((a0 : Complex))), (q : List[Complex]))
+      #|  (a : Complex) * (b : Complex) * (c : Complex) == b * (c * a)
+      #|  \226\136\128 z : Complex, poly((q : List[Complex]), z) == poly(MAP(op_star(inv((a0 : Complex))), q), z) * a0
+      #|  (a0 : Complex) == poly((q : List[Complex]), Cx(real_of_num(0)))
+      #|  !(a : Bool) \226\134\146 a \226\134\146 (b : Bool)
+      #|  \226\136\128 w : Complex, norm(poly((q : List[Complex]), Cx(real_of_num(0)))) <= norm(poly(q, w))
+      #|  poly((p : List[Complex]), (c : Complex)) == poly((q : List[Complex]), Cx(real_of_num(0)))
+      #|  (a : Complex) + ((x : Complex) - a) == x
+      #|  \226\136\128 z : Complex, poly((q : List[Complex]), z - (c : Complex)) == poly((p : List[Complex]), z)
+      #|  !constant(poly((p : List[Complex])))
+      #|  !constant(poly((q : List[Complex])))
+      #|  (q : List[Complex])
+      #|  (p : List[Complex])
+      #|  (c : Complex)
+      #|  poly((p : List[Complex]), (c : Complex)) == Cx(real_of_num(0))
+      #|  (p : List[Complex])
+      #|  (c : Complex)
+      #|  (p : List[Complex])
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 p : List[Complex], LENGTH(p) == n && !constant(poly(p)) \226\134\146 (\226\136\131 z : Complex, poly(p, z) == Cx(real_of_num(0)))
+      #|  \226\136\128 p : List[Complex], !constant(poly(p)) \226\134\146 (\226\136\131 z : Complex, poly(p, z) == Cx(real_of_num(0)))
+      #|  (p : List[Complex])
+      #|  (p : List[Complex])
+      #|  (p : List[Complex])
+      #|  (p : List[Complex])
+      #|  (p : List[Complex])
+      #|  (p : List[Complex])
+      #|  (p : List[Complex])
+      #|  (p : List[Complex])
+      #|  (q : List[Complex])
+      #|  (q : List[Complex])
+      #|  (q : List[Complex])
+      #|  (q : List[Complex])
+      #|  (q : List[Complex])
+      #|  (q : List[Complex])
+      #|  (q : List[Complex])
+      #|  (q : List[Complex])
+      #|  (q : List[Complex])
+      #|  (q : List[Complex])
+      #|  real_of_num(0) < (x : Real) && x < real_of_num(1) \226\134\146 abs(x) <= real_of_num(1)
+      #|  real_of_num(0) < (x : Real) && x < (a : Real) \226\134\146 abs(x) < a
+      #|  abs((x : Real)) * (m : Real)
+      #|  norm((h : Complex)) / (m : Real) * m
+      #|  abs((a : Real)) < abs((b : Real)) \226\134\146 !(a == b)
       #|  norm
-      #|  (x + y = Cx(&0)) <=> (y = --x)
-      #|  Cx(x)
-      #|  x:real
-      #|  &1
-      #|  norm(h) / m
-      #|  m:real
-      #|  &1
-      #|  t:complex list
-      #|  h = Cx(&0)
-      #|  p:complex list
-      #|  t:complex list
-      #|  a \\/ b <=> ~a ==> b
-      #|  Cx(&0)
-      #|  ~b ==> ~a <=> a ==> b
-      #|  ~ALL (\\b. b = Cx (&0)) t
-      #|  Cx(&0)
-      #|  h = Cx(&0)
-      #|  a /\\ b /\\ c /\\ d <=> c /\\ d /\\ a /\\ b
-      #|  forall p. ~(?a l. ~(a = Cx(&0)) /\\ ALL (\\b. b = Cx(&0)) l /\\ (p = CONS a l))\n       ==> ?z. poly p z = Cx(&0)
+      #|  ((x : Complex) + (y : Complex) == Cx(real_of_num(0))) == (y == -x)
+      #|  Cx((x : Real))
+      #|  (x : Real)
+      #|  real_of_num(1)
+      #|  norm((h : Complex)) / (m : Real)
+      #|  (m : Real)
+      #|  real_of_num(1)
+      #|  (t : List[Complex])
+      #|  (h : Complex) == Cx(real_of_num(0))
+      #|  (p : List[Complex])
+      #|  (t : List[Complex])
+      #|  ((a : Bool) || (b : Bool)) == (!a \226\134\146 b)
+      #|  Cx(real_of_num(0))
+      #|  (!(b : Bool) \226\134\146 !(a : Bool)) == (a \226\134\146 b)
+      #|  !ALL((b : Complex) => b == Cx(real_of_num(0)), (t : List[Complex]))
+      #|  Cx(real_of_num(0))
+      #|  (h : Complex) == Cx(real_of_num(0))
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool)) == (c && d && a && b)
+      #|  \226\136\128 p : List[Complex], !(\226\136\131 a : Complex, \226\136\131 l : List[Complex], !(a == Cx(real_of_num(0))) && ALL((b : Complex) => b == Cx(real_of_num(0)), l) && p == CONS(a, l)) \226\134\146 (\226\136\131 z : Complex, poly(p, z) == Cx(real_of_num(0)))
       #|SQRT_SOS_LT_1 =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#sqrt:fun(real,real) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_pow:fun(real,fun(num,real)) y:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_lt:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_pow:fun(real,fun(num,real)) y:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
       #|SQRT_SOS_EQ_1 =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#sqrt:fun(real,real) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_pow:fun(real,fun(num,real)) y:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_pow:fun(real,fun(num,real)) y:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
       #|UNIMODULAR_REDUCE_NORM =  |- (#forall:fun(fun(complex,bool),bool) (\z:complex. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#complex_norm:fun(complex,real) z:complex)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#\/:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#complex_norm:fun(complex,real) ((#complex_add:fun(complex,fun(complex,complex)) z:complex) (#Cx:fun(real,complex) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#\/:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#complex_norm:fun(complex,real) ((#complex_sub:fun(complex,fun(complex,complex)) z:complex) (#Cx:fun(real,complex) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#\/:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#complex_norm:fun(complex,real) ((#complex_add:fun(complex,fun(complex,complex)) z:complex) #ii:complex))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_lt:fun(real,fun(real,bool)) (#complex_norm:fun(complex,real) ((#complex_sub:fun(complex,fun(complex,complex)) z:complex) #ii:complex))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))
