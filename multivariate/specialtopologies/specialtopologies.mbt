@@ -3,7 +3,7 @@
 ///|
 /// indiscrete_topology
 fn step_1() -> Unit raise {
-  indiscrete_topology_c.set(@pair.new_definition(@parser.parse_term("indiscrete_topology (u:A->bool) = topology {{},u}")))
+  indiscrete_topology_c.set(@pair.new_definition(@term_syntax.parse_term("(indiscrete_topology : ((A) -> Bool) -> Topology[A])((u : (A) -> Bool)) == topology({{}, u})")))
 }
 
 ///|
@@ -62,7 +62,7 @@ fn step_2() -> Unit raise {
       })(x14))
     })(x15)(x15)
   }), @tactics.ants_tac), t27)
-  open_in_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        open_in (indiscrete_topology u) s <=> s = {} \\/ s = u"), t28))
+  open_in_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, open_in(indiscrete_topology(u), s) == (s == {} || s == u)"), t28))
 }
 
 ///|
@@ -79,7 +79,7 @@ pub fn open_in_indiscrete_topology() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   let t29 = @sets.set_tac(@list.List([]))
   let t30 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.topspace(), open_in_indiscrete_topology()])), t29)
-  topspace_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. topspace(indiscrete_topology u) = u"), t30))
+  topspace_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, topspace(indiscrete_topology(u)) == u"), t30))
 }
 
 ///|
@@ -96,7 +96,7 @@ pub fn topspace_indiscrete_topology() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   let t31 = @sets.set_tac(@list.List([]))
   let t32 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.closed_in(), open_in_indiscrete_topology(), topspace_indiscrete_topology()])), t31)
-  closed_in_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        closed_in (indiscrete_topology u) s <=> s = {} \\/ s = u"), t32))
+  closed_in_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, closed_in(indiscrete_topology(u), s) == (s == {} || s == u)"), t32))
 }
 
 ///|
@@ -113,12 +113,12 @@ pub fn closed_in_indiscrete_topology() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t38 = @simp.rewrite_tac(@list.List([@sets.inter_comm()]))
   let t37 = @simp.rewrite_tac(@list.List([@sets.simple_image(), @sets.image_clauses(), @sets.inter_empty()]))
-  let t36 = @simp.once_rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("x = a \\/ x = b <=> x IN {a,b}"))]))
+  let t36 = @simp.once_rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("((x : _) == (a : _) || x == (b : _)) == IN(x, {a, b})"))]))
   let t35 = @simp.rewrite_tac(@list.List([open_in_indiscrete_topology()]))
   let t34 = @simp.rewrite_tac(@list.List([@metric.open_in_subtopology_alt()]))
   let t33 = @simp.rewrite_tac(@list.List([@metric.topology_eq()]))
   let t39 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t33), @tactics.gen_tac), t34), t35), t36), t37), t38)
-  subtopology_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        subtopology (indiscrete_topology u) s =\n        indiscrete_topology (u INTER s)"), t39))
+  subtopology_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, subtopology(indiscrete_topology(u), s) == indiscrete_topology(INTER(u, s))"), t39))
 }
 
 ///|
@@ -138,13 +138,13 @@ fn step_6() -> Unit raise {
     x46
   }, @list.List([@sets.subset()]))
   let t45 = @simp.rewrite_tac(@list.List([@sets.finite_insert(), @sets.finite_empty()]))
-  let t44 = @tactics.exists_tac(@parser.parse_term("{{},(u:A->bool)}"))
+  let t44 = @tactics.exists_tac(@term_syntax.parse_term("{{}, (u : (A) -> Bool)}"))
   let t43 = @tactics.match_mp_tac(@sets.finite_subset())
   let t42 = @simp.asm_rewrite_tac(@list.List([@sets.subset_refl()]))
-  let t41 = @tactics.exists_tac(@parser.parse_term("U:(A->bool)->bool"))
-  let t40 = @tactics.x_gen_tac(@parser.parse_term("U:(A->bool)->bool"))
+  let t41 = @tactics.exists_tac(@term_syntax.parse_term("(U : ((A) -> Bool) -> Bool)"))
+  let t40 = @tactics.x_gen_tac(@term_syntax.parse_term("(U : ((A) -> Bool) -> Bool)"))
   let t49 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@metric.compact_space_v1(), open_in_indiscrete_topology()]))), t40), @tactics.strip_tac), t41), t42), t43), t44), t45), t47), t48)
-  compact_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. compact_space (indiscrete_topology u)"), t49))
+  compact_space_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, compact_space(indiscrete_topology(u))"), t49))
 }
 
 ///|
@@ -161,7 +161,7 @@ pub fn compact_space_indiscrete_topology() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t50 = @simp.rewrite_tac(@list.List([subtopology_indiscrete_topology(), compact_space_indiscrete_topology()]))
   let t51 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.compact_in_subspace(), topspace_indiscrete_topology()])), t50)
-  compact_in_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        compact_in (indiscrete_topology u) s <=> s SUBSET u"), t51))
+  compact_in_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, compact_in(indiscrete_topology(u), s) == SUBSET(s, u)"), t51))
 }
 
 ///|
@@ -177,7 +177,7 @@ pub fn compact_in_indiscrete_topology() -> @kernel.Thm {
 /// LOCALLY_COMPACT_SPACE_INDISCRETE_TOPOLOGY
 fn step_8() -> Unit raise {
   let t52 = @simp.simp_tac(@list.List([@metric.compact_imp_locally_compact_space(), compact_space_indiscrete_topology()]))
-  locally_compact_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. locally_compact_space (indiscrete_topology u)"), t52))
+  locally_compact_space_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, locally_compact_space(indiscrete_topology(u))"), t52))
 }
 
 ///|
@@ -194,13 +194,13 @@ pub fn locally_compact_space_indiscrete_topology() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t59 = @simp.rewrite_tac(@list.List([@metric.topspace_euclideanreal_subtopology(), @misc.ends_in_unit_real_interval()]))
   let t58 = @simp.rewrite_tac(@list.List([@metric.continuous_map_const(), @sets.not_in_empty()]))
-  let t57 = @tactics.exists_tac(@parser.parse_term("(\\x. &0):A->real"))
-  let t55 = @parser.parse_term("x:A")
-  let t56 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("u:A->bool"), t55]))
+  let t57 = @tactics.exists_tac(@term_syntax.parse_term("(x : A) => real_of_num(0)"))
+  let t55 = @term_syntax.parse_term("(x : A)")
+  let t56 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(u : (A) -> Bool)"), t55]))
   let t54 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm(), @theorems.forall_unwind_thm2()]))
-  let t53 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("(s = {} \\/ s = u) /\\ x IN u DIFF s <=> s = {} /\\ x IN u"))]))
+  let t53 = @simp.rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("(((s : (_) -> Bool) == {} || s == (u : (_) -> Bool)) && IN((x : _), DIFF(u, s))) == (s == {} && IN(x, u))"))]))
   let t60 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.completely_regular_space(), closed_in_indiscrete_topology(), topspace_indiscrete_topology()])), t53), t54), t56), @tactics.disch_tac), t57), t58), t59)
-  completely_regular_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. completely_regular_space(indiscrete_topology u)"), t60))
+  completely_regular_space_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, completely_regular_space(indiscrete_topology(u))"), t60))
 }
 
 ///|
@@ -216,7 +216,7 @@ pub fn completely_regular_space_indiscrete_topology() -> @kernel.Thm {
 /// REGULAR_SPACE_INDISCRETE_TOPOLOGY
 fn step_10() -> Unit raise {
   let t61 = @simp.simp_tac(@list.List([@metric.completely_regular_imp_regular_space(), completely_regular_space_indiscrete_topology()]))
-  regular_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. regular_space(indiscrete_topology u)"), t61))
+  regular_space_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, regular_space(indiscrete_topology(u))"), t61))
 }
 
 ///|
@@ -233,7 +233,7 @@ pub fn regular_space_indiscrete_topology() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t62 = @sets.set_tac(@list.List([]))
   let t63 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.t1_space_closed_in_sing(), topspace_indiscrete_topology(), closed_in_indiscrete_topology()])), t62)
-  t1_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. t1_space(indiscrete_topology u) <=> ?a. u SUBSET {a}"), t63))
+  t1_space_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, t1_space(indiscrete_topology(u)) == (∃ a : A, SUBSET(u, {a}))"), t63))
 }
 
 ///|
@@ -252,7 +252,7 @@ fn step_12() -> Unit raise {
   let t65 = @simp.simp_tac(@list.List([@theorems.exists_or_thm(), @theorems.unwind_thm2(), @sets.not_in_empty()]))
   let t64 = @simp.rewrite_tac(@list.List([topspace_indiscrete_topology(), @theorems.right_or_distrib()]))
   let t67 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@metric.t0_space(), open_in_indiscrete_topology()]))), t64), t65), t66)
-  t0_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. t0_space(indiscrete_topology u) <=> ?a. u SUBSET {a}"), t67))
+  t0_space_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, t0_space(indiscrete_topology(u)) == (∃ a : A, SUBSET(u, {a}))"), t67))
 }
 
 ///|
@@ -268,7 +268,7 @@ pub fn t0_space_indiscrete_topology() -> @kernel.Thm {
 /// HAUSDORFF_SPACE_INDISCRETE_TOPOLOGY
 fn step_13() -> Unit raise {
   let t68 = @meson.meson_tac(@list.List([@metric.regular_t1_eq_hausdorff_space(), regular_space_indiscrete_topology(), t1_space_indiscrete_topology()]))
-  hausdorff_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. hausdorff_space(indiscrete_topology u) <=> ?a. u SUBSET {a}"), t68))
+  hausdorff_space_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, hausdorff_space(indiscrete_topology(u)) == (∃ a : A, SUBSET(u, {a}))"), t68))
 }
 
 ///|
@@ -288,7 +288,7 @@ fn step_14() -> Unit raise {
   let t70 = @simp.rewrite_tac(@list.List([@theorems.exists_or_thm(), @equal.gsym(@theorems.conj_assoc()), @theorems.right_exists_and_thm()]))
   let t69 = @simp.rewrite_tac(@list.List([open_in_indiscrete_topology(), @theorems.right_or_distrib()]))
   let t73 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@metric.normal_space(), closed_in_indiscrete_topology()]))), t69), t70), t71), t72)
-  normal_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. normal_space(indiscrete_topology u)"), t73))
+  normal_space_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, normal_space(indiscrete_topology(u))"), t73))
 }
 
 ///|
@@ -305,24 +305,24 @@ pub fn normal_space_indiscrete_topology() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t91 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t90 = @simp.asm_rewrite_tac(@list.List([@sets.not_in_empty(), @sets.in_diff()]))
-  let t89 = @class.asm_cases_tac(@parser.parse_term("(x:A) IN u"))
+  let t89 = @class.asm_cases_tac(@term_syntax.parse_term("IN((x : A), (u : (A) -> Bool))"))
   let t88 = @list.List([@tactics.all_tac, @tactics.asm_tac(@sets.set_tac)(@list.List([]))])
-  let t87 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t87 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t86 = @simp.simp_tac(@list.List([@sets.not_in_empty(), @theorems.forall_unwind_thm2()]))
-  let t85 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("p /\\ (q \\/ r) ==> s <=> (q ==> p ==> s) /\\ (r ==> p ==> s)"))]))
+  let t85 = @simp.rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("((p : Bool) && ((q : Bool) || (r : Bool)) → (s : Bool)) == ((q → p → s) && (r → p → s))"))]))
   let t84 = @simp.rewrite_tac(@list.List([open_in_indiscrete_topology(), topspace_indiscrete_topology()]))
   let t83 = @simp.rewrite_tac(@list.List([@metric.derived_set_of(), @sets.extension(), @sets.in_elim_thm(), @sets.in_inter()]))
   let t82 = @simp.asm_rewrite_tac(@list.List([@metric.derived_set_of_empty(), @sets.inter_empty(), @sets.empty_subset()]))
-  let t81 = @class.asm_cases_tac(@parser.parse_term("s:A->bool = {}"))
-  let t80 = @tactics.x_gen_tac(@parser.parse_term("s:A->bool"))
-  let t78 = @parser.parse_term("t:A->bool")
-  let t79 = @tactics.spec_tac(@parser.parse_term("u INTER s:A->bool"), t78)
+  let t81 = @class.asm_cases_tac(@term_syntax.parse_term("(s : (A) -> Bool) == {}"))
+  let t80 = @tactics.x_gen_tac(@term_syntax.parse_term("(s : (A) -> Bool)"))
+  let t78 = @term_syntax.parse_term("(t : (A) -> Bool)")
+  let t79 = @tactics.spec_tac(@term_syntax.parse_term("INTER((u : (A) -> Bool), (s : (A) -> Bool))"), t78)
   let t77 = @simp.rewrite_tac(@list.List([@metric.topspace_subtopology(), topspace_indiscrete_topology()]))
-  let t76 = @tactics.mp_tac(@sets.set_rule(@parser.parse_term("(u INTER s:A->bool) SUBSET u")))
-  let t75 = @simp.once_rewrite_tac(@list.List([@sets.disjoint(), @sets.set_rule(@parser.parse_term("u DIFF s = u DIFF (u INTER s)"))]))
+  let t76 = @tactics.mp_tac(@sets.set_rule(@term_syntax.parse_term("SUBSET(INTER((u : (A) -> Bool), (s : (A) -> Bool)), u)")))
+  let t75 = @simp.once_rewrite_tac(@list.List([@sets.disjoint(), @sets.set_rule(@term_syntax.parse_term("DIFF((u : (_) -> Bool), (s : (_) -> Bool)) == DIFF(u, INTER(u, s))"))]))
   let t74 = @simp.once_rewrite_tac(@list.List([@metric.derived_set_of_restrict()]))
   let t92 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t74), t75), t76), t77), t79), t80), @tactics.strip_tac), t81), t82), t83), t84), t85), t86), t87), @class.cond_cases_tac), t88), t89), t90), t91)
-  derived_set_of_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        (indiscrete_topology u) derived_set_of s =\n        if ?a. u INTER s SUBSET {a} then if DISJOINT u s then {} else u DIFF s\n        else u"), t92))
+  derived_set_of_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, derived_set_of(indiscrete_topology(u), s) == (if (∃ a : A, SUBSET(INTER(u, s), {a})) { if DISJOINT(u, s) { {} } else { DIFF(u, s) } } else { u })"), t92))
 }
 
 ///|
@@ -340,7 +340,7 @@ fn step_16() -> Unit raise {
   let t94 = @simp.rewrite_tac(@list.List([@sets.diff_eq_empty(), @class.cond_id()]))
   let t93 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.disjoint_empty_refl()), @sets.inter_idempot()]))
   let t95 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([derived_set_of_indiscrete_topology()]))), t93), t94)
-  derived_set_of_topspace_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool.\n        (indiscrete_topology u) derived_set_of u =\n        if ?a. u SUBSET {a} then {} else u"), t95))
+  derived_set_of_topspace_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, derived_set_of(indiscrete_topology(u), u) == (if (∃ a : A, SUBSET(u, {a})) { {} } else { u })"), t95))
 }
 
 ///|
@@ -365,12 +365,12 @@ fn step_17() -> Unit raise {
     }
   })
   let t100 = @list.List([@tactics.all_tac, @tactics.asm_tac(@sets.set_tac)(@list.List([]))])
-  let t99 = @class.asm_cases_tac(@parser.parse_term("s:A->bool = u"))
+  let t99 = @class.asm_cases_tac(@term_syntax.parse_term("(s : (A) -> Bool) == (u : (A) -> Bool)"))
   let t98 = @simp.rewrite_tac(@list.List([derived_set_of_indiscrete_topology()]))
   let t97 = @simp.asm_rewrite_tac(@list.List([@metric.derived_set_of_empty()]))
-  let t96 = @class.asm_cases_tac(@parser.parse_term("s:A->bool = {}"))
+  let t96 = @class.asm_cases_tac(@term_syntax.parse_term("(s : (A) -> Bool) == {}"))
   let t108 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t96), t97), t98), t99), t100), t104), t105), @class.cond_cases_tac), t106), t107)
-  perfect_set_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        (indiscrete_topology u) derived_set_of s = s <=>\n        s = {} \\/ s = u /\\ ~(?a.  u SUBSET {a})"), t108))
+  perfect_set_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, (derived_set_of(indiscrete_topology(u), s) == s) == (s == {} || s == u && !(∃ a : A, SUBSET(u, {a})))"), t108))
 }
 
 ///|
@@ -386,15 +386,15 @@ pub fn perfect_set_indiscrete_topology() -> @kernel.Thm {
 /// CONTINUOUS_MAP_INTO_INDISCRETE_TOPOLOGY
 fn step_18() -> Unit raise {
   let t116 = @simp.rewrite_tac(@list.List([@sets.in_gspec(), @metric.open_in_topspace()]))
-  let t115 = @simp.simp_tac(@list.List([@class.taut(@parser.parse_term("p /\\ q <=> ~(p ==> ~q)"))]))
-  let t114 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("(p /\\ q <=> p) <=> p ==> q"))]))
+  let t115 = @simp.simp_tac(@list.List([@class.taut(@term_syntax.parse_term("((p : Bool) && (q : Bool)) == !(p → !q)"))]))
+  let t114 = @simp.rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("(((p : Bool) && (q : Bool)) == p) == (p → q)"))]))
   let t113 = @simp.rewrite_tac(@list.List([topspace_indiscrete_topology()]))
   let t112 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.forall_in_image(), @theorems.forall_unwind_thm2()]))
   let t111 = @simp.simp_tac(@list.List([@sets.not_in_empty(), @sets.empty_gspec(), @metric.open_in_empty()]))
-  let t110 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("p \\/ q ==> r <=> (p ==> r) /\\ (q ==> r)"))]))
+  let t110 = @simp.rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("((p : Bool) || (q : Bool) → (r : Bool)) == ((p → r) && (q → r))"))]))
   let t109 = @simp.rewrite_tac(@list.List([@metric.continuous_map(), open_in_indiscrete_topology()]))
   let t117 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t109), t110), t111), t112), t113), t114), t115), t116)
-  continuous_map_into_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall(f:A->B) top u.\n        continuous_map (top,indiscrete_topology u) f <=>\n        IMAGE f (topspace top) SUBSET u"), t117))
+  continuous_map_into_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (A) -> B, ∀ top : Topology[A], ∀ u : (B) -> Bool, continuous_map((top, indiscrete_topology(u)), f) == SUBSET(IMAGE(f, topspace(top)), u)"), t117))
 }
 
 ///|
@@ -413,19 +413,19 @@ fn step_19() -> Unit raise {
   let t130 = @simp.asm_simp_tac(@list.List([]))
   let t129 = @tactics.first_x_assum(fn(x126 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x126
-    let t128 = @tactics.mp_tac(@bool.spec(@parser.parse_term("{(f:A->B) a}"), th))
-    @tactics.then_tac(@tactics.mp_tac(@bool.spec(@parser.parse_term("{(f:A->B) b}"), th)), t128)
+    let t128 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("{(f : (A) -> B)((a : A))}"), th))
+    @tactics.then_tac(@tactics.mp_tac(@bool.spec(@term_syntax.parse_term("{(f : (A) -> B)((b : A))}"), th)), t128)
   })
-  let t124 = @parser.parse_term("b:A")
-  let t125 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("a:A"), t124]))
+  let t124 = @term_syntax.parse_term("(b : A)")
+  let t125 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(a : A)"), t124]))
   let t123 = @simp.asm_rewrite_tac(@list.List([]))
-  let t122 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("~(u = {}) /\\\n    (forall x. x IN u ==> f x IN v) /\\\n    (forall x y. x IN u /\\ y IN u ==> f x = f y)\n    ==> ?a. a IN v /\\ (forall x. x IN u ==> f x = a)")))
+  let t122 = @tactics.match_mp_tac(@sets.set_rule(@term_syntax.parse_term("!((u : (_) -> Bool) == {}) && (∀ x : _, IN(x, u) → IN((f : (_) -> _)(x), (v : (_) -> Bool))) && (∀ x : _, ∀ y : _, IN(x, u) && IN(y, u) → f(x) == f(y)) → (∃ a : _, IN(a, v) && (∀ x : _, IN(x, u) → f(x) == a))")))
   let t121 = @list.List([@tactics.all_tac, @tactics.asm_tac(@sets.set_tac)(@list.List([]))])
   let t120 = @simp.asm_rewrite_tac(@list.List([@metric.continuous_map_closed_in(), topspace_indiscrete_topology(), closed_in_indiscrete_topology(), @sets.not_in_empty(), @sets.empty_gspec()]))
-  let t119 = @class.asm_cases_tac(@parser.parse_term("u:A->bool = {}"))
+  let t119 = @class.asm_cases_tac(@term_syntax.parse_term("(u : (A) -> Bool) == {}"))
   let t118 = @tactics.repeat_tac(@tactics.strip_tac)
   let t132 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.t1_space_closed_in_sing()])), t118), t119), t120), @tactics.eq_tac), t121), @tactics.strip_tac), t122), t123), t125), @tactics.strip_tac), t129), t130), t131)
-  continuous_map_from_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall top u (f:A->B).\n        t1_space top\n        ==> (continuous_map(indiscrete_topology u,top) f <=>\n             u = {} \\/ ?a. a IN topspace top /\\ forall x. x IN u ==> f x = a)"), t132))
+  continuous_map_from_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ top : Topology[B], ∀ u : (A) -> Bool, ∀ f : (A) -> B, t1_space(top) → continuous_map((indiscrete_topology(u), top), f) == (u == {} || (∃ a : B, IN(a, topspace(top)) && (∀ x : A, IN(x, u) → f(x) == a)))"), t132))
 }
 
 ///|
@@ -443,15 +443,15 @@ fn step_20() -> Unit raise {
   let t142 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t141 = @tactics.conv_tac(@calc_rat.real_rat_reduce_conv)
   let t140 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.forall_in_image()]))
-  let t139 = @tactics.exists_tac(@parser.parse_term("(\\i. if i = &0 then x else y):real->A"))
-  let t137 = @parser.parse_term("y:A")
-  let t138 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:A"), t137]))
+  let t139 = @tactics.exists_tac(@term_syntax.parse_term("(i : Real) => if i == real_of_num(0) { (x : A) } else { (y : A) }"))
+  let t137 = @term_syntax.parse_term("(y : A)")
+  let t138 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : A)"), t137]))
   let t136 = @simp.rewrite_tac(@list.List([@metric.topspace_euclideanreal_subtopology()]))
   let t135 = @simp.rewrite_tac(@list.List([topspace_indiscrete_topology()]))
   let t134 = @simp.rewrite_tac(@list.List([@metric.path_in(), continuous_map_into_indiscrete_topology()]))
   let t133 = @simp.rewrite_tac(@list.List([@metric.path_connected_space()]))
   let t143 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t133), t134), t135), t136), t138), @tactics.strip_tac), t139), t140), t141), t142)
-  path_connected_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. path_connected_space(indiscrete_topology u)"), t143))
+  path_connected_space_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, path_connected_space(indiscrete_topology(u))"), t143))
 }
 
 ///|
@@ -467,7 +467,7 @@ pub fn path_connected_space_indiscrete_topology() -> @kernel.Thm {
 /// PATH_CONNECTED_IN_INDISCRETE_TOPOLOGY
 fn step_21() -> Unit raise {
   let t144 = @simp.rewrite_tac(@list.List([@metric.path_connected_in(), path_connected_space_indiscrete_topology(), subtopology_indiscrete_topology(), topspace_indiscrete_topology()]))
-  path_connected_in_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        path_connected_in (indiscrete_topology u) s <=> s SUBSET u"), t144))
+  path_connected_in_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, path_connected_in(indiscrete_topology(u), s) == SUBSET(s, u)"), t144))
 }
 
 ///|
@@ -484,14 +484,14 @@ pub fn path_connected_in_indiscrete_topology() -> @kernel.Thm {
 fn step_22() -> Unit raise {
   let t152 = @sets.set_tac(@list.List([]))
   let t151 = @simp.simp_tac(@list.List([@theorems.unwind_thm1()]))
-  let t150 = @simp.once_rewrite_tac(@list.List([@class.taut(@parser.parse_term("p /\\ q /\\ r <=> r /\\ p /\\ q"))]))
+  let t150 = @simp.once_rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("((p : Bool) && (q : Bool) && (r : Bool)) == (r && p && q)"))]))
   let t149 = @simp.rewrite_tac(@list.List([@sets.not_in_empty(), @sets.subset_antisym_eq()]))
   let t148 = @simp.rewrite_tac(@list.List([@theorems.exists_or_thm(), @theorems.right_exists_and_thm(), @theorems.unwind_thm2()]))
   let t147 = @simp.rewrite_tac(@list.List([@theorems.forall_unwind_thm2(), @theorems.right_or_distrib()]))
   let t146 = @simp.simp_tac(@list.List([@sets.in_elim_thm(), @theorems.right_forall_imp_thm(), @sets.not_in_empty()]))
-  let t145 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("(p \\/ q) /\\ r ==> s <=> (p ==> r ==> s) /\\ (q ==> r ==> s)"))]))
+  let t145 = @simp.rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("(((p : Bool) || (q : Bool)) && (r : Bool) → (s : Bool)) == ((p → r → s) && (q → r → s))"))]))
   let t153 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.neighbourhood_base_of_v1(), open_in_indiscrete_topology()])), t145), t146), t147), t148), t149), t150), t151), t152)
-  neighbourhood_base_of_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall P u:A->bool.\n        neighbourhood_base_of P (indiscrete_topology u) <=>\n        u = {} \\/ P u"), t153))
+  neighbourhood_base_of_indiscrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : ((A) -> Bool) -> Bool, ∀ u : (A) -> Bool, neighbourhood_base_of(P, indiscrete_topology(u)) == (u == {} || P(u))"), t153))
 }
 
 ///|
@@ -506,7 +506,7 @@ pub fn neighbourhood_base_of_indiscrete_topology() -> @kernel.Thm {
 ///|
 /// cofinite_topology
 fn step_23() -> Unit raise {
-  cofinite_topology_c.set(@pair.new_definition(@parser.parse_term("cofinite_topology (u:A->bool) =\n        topology ({} INSERT {s | s SUBSET u /\\ FINITE(u DIFF s)})")))
+  cofinite_topology_c.set(@pair.new_definition(@term_syntax.parse_term("(cofinite_topology : ((A) -> Bool) -> Topology[A])((u : (A) -> Bool)) == topology(INSERT({}, {(s : (A) -> Bool) | SUBSET(s, u) && FINITE(DIFF(u, s))}))")))
 }
 
 ///|
@@ -523,10 +523,10 @@ pub fn cofinite_topology() -> @kernel.Thm {
 fn step_24() -> Unit raise {
   let t214 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t213 = @simp.asm_simp_tac(@list.List([]))
-  let t212 = @tactics.exists_tac(@parser.parse_term("u DIFF s:A->bool"))
+  let t212 = @tactics.exists_tac(@term_syntax.parse_term("DIFF((u : (A) -> Bool), (s : (A) -> Bool))"))
   let t211 = @tactics.match_mp_tac(@sets.finite_subset())
   let t208 = @simp.rewrite_rule(@list.List([@equal.gsym(@sets.member_not_empty())]))
-  let t206 = @parser.parse_term("s:A->bool")
+  let t206 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t210 = @tactics.first_x_assum(fn(x209 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     ((x207 : @kernel.Thm) => @tactics.x_choose_tac(t206, x207))(t208(x209))
   })
@@ -544,10 +544,10 @@ fn step_24() -> Unit raise {
       }
     })(x203))
   }, @list.List([@sets.subset()]))
-  let t195 = @parser.parse_term("v:(A->bool)->bool")
-  let t196 = @tactics.spec_tac(@parser.parse_term("(k DELETE {}):(A->bool)->bool"), t195)
+  let t195 = @term_syntax.parse_term("(v : ((A) -> Bool) -> Bool)")
+  let t196 = @tactics.spec_tac(@term_syntax.parse_term("DELETE((k : ((A) -> Bool) -> Bool), {})"), t195)
   let t194 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@sets.unions_delete_empty())]))
-  let t191 = @drule.match_mp(@sets.set_rule(@parser.parse_term("k SUBSET a INSERT s /\\ ~(forall x. x IN k ==> x = a)\n      ==> k DELETE a SUBSET s /\\ ~(k DELETE a = {})")))
+  let t191 = @drule.match_mp(@sets.set_rule(@term_syntax.parse_term("SUBSET((k : (_) -> Bool), INSERT((a : _), (s : (_) -> Bool))) && !(∀ x : _, IN(x, k) → x == a) → SUBSET(DELETE(k, a), s) && !(DELETE(k, a) == {})")))
   let t193 = @tactics.disch_then(fn(x192 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x188 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s189 = @tactics.mp_tac(x188)
@@ -556,14 +556,14 @@ fn step_24() -> Unit raise {
       }
     })(t191(x192))
   })
-  let t187 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("p ==> q \\/ r <=> p /\\ ~q ==> r"))]))
+  let t187 = @simp.rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("((p : Bool) → (q : Bool) || (r : Bool)) == (p && !q → r)"))]))
   let t186 = @simp.rewrite_tac(@list.List([@sets.empty_unions()]))
-  let t215 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("k:(A->bool)->bool")), t186), t187), t193), t194), t196), @tactics.gen_tac), t204), t205), @tactics.strip_tac), t210), t211), t212), t213), t214)
+  let t215 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(k : ((A) -> Bool) -> Bool)")), t186), t187), t193), t194), t196), @tactics.gen_tac), t204), t205), @tactics.strip_tac), t210), t211), t212), t213), t214)
   let t185 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t184 = @simp.asm_simp_tac(@list.List([@sets.finite_union()]))
-  let t183 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("u DIFF s INTER t = (u DIFF s) UNION (u DIFF t)"))]))
-  let t182 = @tactics.x_gen_tac(@parser.parse_term("t:A->bool"))
-  let t181 = @tactics.x_gen_tac(@parser.parse_term("s:A->bool"))
+  let t183 = @simp.rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("DIFF((u : (_) -> Bool), INTER((s : (_) -> Bool), (t : (_) -> Bool))) == UNION(DIFF(u, s), DIFF(u, t))"))]))
+  let t182 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : (A) -> Bool)"))
+  let t181 = @tactics.x_gen_tac(@term_syntax.parse_term("(s : (A) -> Bool)"))
   let t216 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_elim_thm()])), t181), @tactics.strip_tac), t182), @tactics.strip_tac), @tactics.disj2_tac), t183), t184), t185), t215])
   let t180 = @simp.rewrite_tac(@list.List([@sets.in_insert(), @sets.inter_empty()]))
   let t179 = @simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm(), @theorems.imp_conj(), @sets.forall_in_insert()]))
@@ -609,7 +609,7 @@ fn step_24() -> Unit raise {
       })(x167))
     })(x168)(x168)
   }), @tactics.ants_tac), t178), t179), t180), @tactics.conj_tac), t216)
-  open_in_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        open_in (cofinite_topology u) s <=>\n        s = {} \\/ s SUBSET u /\\ FINITE(u DIFF s)"), t217))
+  open_in_cofinite_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, open_in(cofinite_topology(u), s) == (s == {} || SUBSET(s, u) && FINITE(DIFF(u, s)))"), t217))
 }
 
 ///|
@@ -626,9 +626,9 @@ pub fn open_in_cofinite_topology() -> @kernel.Thm {
 fn step_25() -> Unit raise {
   let t220 = @sets.set_tac(@list.List([]))
   let t219 = @simp.rewrite_tac(@list.List([@sets.diff_eq_empty(), @sets.finite_empty()]))
-  let t218 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall s. P s ==> s SUBSET u) /\\ P u ==> UNIONS {s | P s} = u")))
+  let t218 = @tactics.match_mp_tac(@sets.set_rule(@term_syntax.parse_term("(∀ s : (_) -> Bool, (P : ((_) -> Bool) -> Bool)(s) → SUBSET(s, (u : (_) -> Bool))) && P(u) → UNIONS({(s : (_) -> Bool) | P(s)}) == u")))
   let t221 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@metric.topspace(), open_in_cofinite_topology()]))), t218), t219), t220)
-  topspace_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. topspace(cofinite_topology u) = u"), t221))
+  topspace_cofinite_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, topspace(cofinite_topology(u)) == u"), t221))
 }
 
 ///|
@@ -644,11 +644,11 @@ pub fn topspace_cofinite_topology() -> @kernel.Thm {
 /// CLOSED_IN_COFINITE_TOPOLOGY
 fn step_26() -> Unit raise {
   let t225 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t224 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@parser.parse_term("s SUBSET u ==> u DIFF (u DIFF s) = s"))]))
-  let t223 = @class.asm_cases_tac(@parser.parse_term("(s:A->bool) SUBSET u"))
+  let t224 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) → DIFF(u, DIFF(u, s)) == s"))]))
+  let t223 = @class.asm_cases_tac(@term_syntax.parse_term("SUBSET((s : (A) -> Bool), (u : (A) -> Bool))"))
   let t222 = @tactics.repeat_tac(@tactics.gen_tac)
   let t226 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.closed_in(), open_in_cofinite_topology(), topspace_cofinite_topology()])), t222), t223), t224), t225)
-  closed_in_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        closed_in (cofinite_topology u) s <=>\n        s = u \\/ s SUBSET u /\\ FINITE s"), t226))
+  closed_in_cofinite_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, closed_in(cofinite_topology(u), s) == (s == u || SUBSET(s, u) && FINITE(s))"), t226))
 }
 
 ///|
@@ -665,7 +665,7 @@ pub fn closed_in_cofinite_topology() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   let t227 = @simp.simp_tac(@list.List([@sets.finite_sing(), @sets.sing_subset(), topspace_cofinite_topology()]))
   let t228 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.t1_space_closed_in_sing(), closed_in_cofinite_topology()])), t227)
-  t1_space_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. t1_space(cofinite_topology u)"), t228))
+  t1_space_cofinite_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, t1_space(cofinite_topology(u))"), t228))
 }
 
 ///|
@@ -682,7 +682,7 @@ pub fn t1_space_cofinite_topology() -> @kernel.Thm {
 fn step_28() -> Unit raise {
   let t229 = @meson.meson_tac(@list.List([@metric.t1_space_closed_in_finite(), @metric.closed_in_topspace()]))
   let t230 = @tactics.then_tac(@simp.rewrite_tac(@list.List([closed_in_cofinite_topology()])), t229)
-  t1_space_cofinite_topology_minimal_c.set(@tactics.prove(@parser.parse_term("forall top s:A->bool.\n        t1_space top /\\ closed_in (cofinite_topology(topspace top)) s\n        ==> closed_in top s"), t230))
+  t1_space_cofinite_topology_minimal_c.set(@tactics.prove(@term_syntax.parse_term("∀ top : Topology[A], ∀ s : (A) -> Bool, t1_space(top) && closed_in(cofinite_topology(topspace(top)), s) → closed_in(top, s)"), t230))
 }
 
 ///|
@@ -699,7 +699,7 @@ pub fn t1_space_cofinite_topology_minimal() -> @kernel.Thm {
 fn step_29() -> Unit raise {
   let t231 = @sets.set_tac(@list.List([]))
   let t232 = @tactics.then_tac(@simp.simp_tac(@list.List([@metric.topology_eq(), @metric.open_in_discrete_topology(), open_in_cofinite_topology(), @sets.finite_diff()])), t231)
-  cofinite_eq_discrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. FINITE u ==> cofinite_topology u = discrete_topology u"), t232))
+  cofinite_eq_discrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, FINITE(u) → cofinite_topology(u) == discrete_topology(u)"), t232))
 }
 
 ///|
@@ -721,7 +721,7 @@ fn step_30() -> Unit raise {
   let t234 = @tactics.repeat_tac(@tactics.strip_tac)
   let t233 = @simp.simp_tac(@list.List([topspace_cofinite_topology()]))
   let t239 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.connected_in_closed_in(), closed_in_cofinite_topology()])), t233), t234), t238)
-  connected_in_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        INFINITE s /\\ s SUBSET u ==> connected_in (cofinite_topology u) s"), t239))
+  connected_in_cofinite_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, INFINITE(s) && SUBSET(s, u) → connected_in(cofinite_topology(u), s)"), t239))
 }
 
 ///|
@@ -741,8 +741,8 @@ fn step_31() -> Unit raise {
   let t242 = @simp.rewrite_tac(@list.List([@equal.gsym(@metric.connected_in_topspace())]))
   let t241 = @simp.rewrite_tac(@list.List([@metric.connected_space_discrete_topology()]))
   let t240 = @simp.asm_simp_tac(@list.List([@sets.infinite(), cofinite_eq_discrete_topology()]))
-  let t245 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("FINITE(u:A->bool)"))), t240), t241), t242), t243), t244)
-  connected_space_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool.\n        connected_space(cofinite_topology u) <=>\n        (?a. u SUBSET {a}) \\/ INFINITE u"), t245))
+  let t245 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@term_syntax.parse_term("FINITE((u : (A) -> Bool))"))), t240), t241), t242), t243), t244)
+  connected_space_cofinite_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, connected_space(cofinite_topology(u)) == ((∃ a : A, SUBSET(u, {a})) || INFINITE(u))"), t245))
 }
 
 ///|
@@ -757,15 +757,15 @@ pub fn connected_space_cofinite_topology() -> @kernel.Thm {
 ///|
 /// COMPACT_IN_COFINITE_TOPOLOGY
 fn step_32() -> Unit raise {
-  let t301 = @simp.rewrite_tac(@list.List([@sets.simple_image(), @sets.set_rule(@parser.parse_term("k INTER k INTER s = k INTER s"))]))
-  let t300 = @simp.asm_rewrite_tac(@list.List([@sets.image_eq_empty(), @sets.set_rule(@parser.parse_term("{g y | y IN IMAGE f s} = {g(f x) | x IN s}"))]))
+  let t301 = @simp.rewrite_tac(@list.List([@sets.simple_image(), @sets.set_rule(@term_syntax.parse_term("INTER((k : (_) -> Bool), INTER(k, (s : (_) -> Bool))) == INTER(k, s)"))]))
+  let t300 = @simp.asm_rewrite_tac(@list.List([@sets.image_eq_empty(), @sets.set_rule(@term_syntax.parse_term("{(g : (_) -> _)((y : _)) | IN(y, IMAGE((f : (_) -> _), (s : (_) -> Bool)))} == {g(f((x : _))) | IN(x, s)}"))]))
   let t299 = @simp.rewrite_tac(@list.List([@sets.inter_idempot(), @sets.inter_inters(), @sets.inters_insert()]))
   let t297 = @simp.asm_rewrite_tac(@list.List([]))
   let t298 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t297])
   let t296 = @list.List([@meson.asm_meson_tac(@list.List([@sets.finite_empty(), @sets.finite_delete()])), @tactics.strip_tac])
   let t295 = @simp.asm_rewrite_tac(@list.List([@sets.image_clauses(), @sets.image_eq_empty()]))
-  let t294 = @class.asm_cases_tac(@parser.parse_term("V:(A->bool)->bool = {}"))
-  let t293 = @tactics.x_gen_tac(@parser.parse_term("V:(A->bool)->bool"))
+  let t294 = @class.asm_cases_tac(@term_syntax.parse_term("(V : ((A) -> Bool) -> Bool) == {}"))
+  let t293 = @tactics.x_gen_tac(@term_syntax.parse_term("(V : ((A) -> Bool) -> Bool)"))
   let t292 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t291 = @simp.gen_rewrite_tac(fn(x288 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s289 = @equal.land_conv(x288)
@@ -780,9 +780,9 @@ fn step_32() -> Unit raise {
     x284
   }, @list.List([@sets.subset()]))
   let t283 = @simp.asm_simp_tac(@list.List([@sets.finite_powerset()]))
-  let t282 = @tactics.exists_tac(@parser.parse_term("{l:A->bool | l SUBSET k}"))
+  let t282 = @tactics.exists_tac(@term_syntax.parse_term("{(l : (A) -> Bool) | SUBSET(l, (k : (A) -> Bool))}"))
   let t303 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.finite_subset()), t282), t283), t285), t286), t287), t302])
-  let t281 = @tactics.subgoal_then(@parser.parse_term("FINITE {k INTER t:A->bool | t | t IN U DELETE k}"), fn(x278 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t281 = @tactics.subgoal_then(@term_syntax.parse_term("FINITE({INTER((k : (A) -> Bool), t) | t : (A) -> Bool | IN(t, DELETE((U : ((A) -> Bool) -> Bool), k))})"), fn(x278 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s279 = @tactics.mp_tac(x278)
     fn(x280 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s279(x280)
@@ -790,20 +790,20 @@ fn step_32() -> Unit raise {
   })
   let t277 = @simp.rewrite_tac(@list.List([@sets.inter_inters(), @sets.finite_insert(), @sets.not_insert_empty()]))
   let t276 = @simp.once_rewrite_tac(@list.List([@sets.inters_insert()]))
-  let t275 = @tactics.exists_tac(@parser.parse_term("k:A->bool"))
-  let t274 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("forall k. (?s. P(k INSERT k INSERT s)) ==> (?s. P s)")))
+  let t275 = @tactics.exists_tac(@term_syntax.parse_term("(k : (A) -> Bool)"))
+  let t274 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @term_syntax.parse_term("∀ k : _, (∃ s : (_) -> Bool, (P : ((_) -> Bool) -> Bool)(INSERT(k, INSERT(k, s)))) → (∃ s : (_) -> Bool, P(s))")))
   let t273 = @list.List([@meson.asm_meson_tac(@list.List([@sets.finite_sing()])), @tactics.all_tac])
-  let t272 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@parser.parse_term("a IN s ==> (s DELETE a = {} <=> s = {a})"))]))
+  let t272 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("IN((a : _), (s : (_) -> Bool)) → (DELETE(s, a) == {}) == (s == {a})"))]))
   let t270 = @simp.rewrite_tac(@list.List([@sets.inter_inters(), @sets.inters_insert()]))
   let t271 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t270])
-  let t269 = @tactics.subgoal_then(@parser.parse_term("U = k INSERT (U DELETE (k:A->bool))"), fn(x266 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t269 = @tactics.subgoal_then(@term_syntax.parse_term("(U : ((A) -> Bool) -> Bool) == INSERT((k : (A) -> Bool), DELETE(U, k))"), fn(x266 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s267 = @tactics.subst1_tac(x266)
     fn(x268 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s267(x268)
     }
   })
   let t265 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([]))])
-  let t264 = @tactics.subgoal_then(@parser.parse_term("?V. V SUBSET U /\\ FINITE V /\\ INTERS U :A->bool = INTERS V"), fn(x261 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t264 = @tactics.subgoal_then(@term_syntax.parse_term("∃ V : ((A) -> Bool) -> Bool, SUBSET(V, (U : ((A) -> Bool) -> Bool)) && FINITE(V) && INTERS(U) == INTERS(V)"), fn(x261 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s262 = @tactics.mp_tac(x261)
     fn(x263 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s262(x263)
@@ -812,22 +812,22 @@ fn step_32() -> Unit raise {
   let t257 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t258 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_sing()])), t257)
   let t259 = @list.List([@meson.asm_meson_tac(@list.List([@sets.finite_subset(), @sets.finite_sing()])), t258])
-  let t260 = @list.List([@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("~((U:(A->bool)->bool) SUBSET {u})"), fn(x254 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t260 = @list.List([@tactics.thenl(@tactics.subgoal_then(@term_syntax.parse_term("!SUBSET((U : ((A) -> Bool) -> Bool), {(u : (A) -> Bool)})"), fn(x254 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s255 = @tactics.mp_tac(x254)
     fn(x256 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s255(x256)
     }
   }), t259), @tactics.all_tac])
-  let t253 = @tactics.subgoal_then(@parser.parse_term("?k:A->bool. k IN U /\\ k SUBSET u /\\ FINITE k"), @tactics.strip_assume_tac)
+  let t253 = @tactics.subgoal_then(@term_syntax.parse_term("∃ k : (A) -> Bool, IN(k, (U : ((A) -> Bool) -> Bool)) && SUBSET(k, (u : (A) -> Bool)) && FINITE(k)"), @tactics.strip_assume_tac)
   let t252 = @simp.asm_simp_tac(@list.List([@sets.subset_refl()]))
-  let t251 = @class.asm_cases_tac(@parser.parse_term("FINITE(U:(A->bool)->bool)"))
-  let t250 = @tactics.x_gen_tac(@parser.parse_term("U:(A->bool)->bool"))
+  let t251 = @class.asm_cases_tac(@term_syntax.parse_term("FINITE((U : ((A) -> Bool) -> Bool))"))
+  let t250 = @tactics.x_gen_tac(@term_syntax.parse_term("(U : ((A) -> Bool) -> Bool)"))
   let t249 = @simp.asm_rewrite_tac(@list.List([]))
-  let t248 = @class.asm_cases_tac(@parser.parse_term("(s:A->bool) SUBSET u"))
+  let t248 = @class.asm_cases_tac(@term_syntax.parse_term("SUBSET((s : (A) -> Bool), (u : (A) -> Bool))"))
   let t247 = @simp.rewrite_tac(@list.List([topspace_cofinite_topology()]))
   let t246 = @simp.rewrite_tac(@list.List([@metric.compact_in_fip(), closed_in_cofinite_topology()]))
   let t304 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t246), t247), t248), t249), t250), @tactics.strip_tac), t251), t252), t253), t260), t264), t265), t269), t271), t272), @class.cond_cases_tac), t273), t274), t275), t276), t277), t281), t303)
-  compact_in_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool. compact_in(cofinite_topology u) s <=> s SUBSET u"), t304))
+  compact_in_cofinite_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, compact_in(cofinite_topology(u), s) == SUBSET(s, u)"), t304))
 }
 
 ///|
@@ -844,7 +844,7 @@ pub fn compact_in_cofinite_topology() -> @kernel.Thm {
 fn step_33() -> Unit raise {
   let t305 = @simp.rewrite_tac(@list.List([topspace_cofinite_topology(), @sets.subset_refl()]))
   let t306 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.compact_space(), compact_in_cofinite_topology()])), t305)
-  compact_space_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. compact_space(cofinite_topology u)"), t306))
+  compact_space_cofinite_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, compact_space(cofinite_topology(u))"), t306))
 }
 
 ///|
@@ -861,27 +861,27 @@ pub fn compact_space_cofinite_topology() -> @kernel.Thm {
 fn step_34() -> Unit raise {
   let t359 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t358 = @simp.asm_rewrite_tac(@list.List([]))
-  let t356 = @tactics.exists_tac(@parser.parse_term("s:A->bool"))
+  let t356 = @tactics.exists_tac(@term_syntax.parse_term("(s : (A) -> Bool)"))
   let t357 = @tactics.try_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.finite_subset()), t356))
   let t355 = @tactics.repeat_tac(@tactics.conj_tac)
   let t354 = @simp.rewrite_tac(@list.List([@sets.not_insert_empty()]))
-  let t353 = @tactics.exists_tac(@parser.parse_term("(y:A) INSERT (u DIFF s)"))
-  let t352 = @tactics.exists_tac(@parser.parse_term("(x:A) INSERT (u DIFF s)"))
+  let t353 = @tactics.exists_tac(@term_syntax.parse_term("INSERT((y : A), DIFF((u : (A) -> Bool), (s : (A) -> Bool)))"))
+  let t352 = @tactics.exists_tac(@term_syntax.parse_term("INSERT((x : A), DIFF((u : (A) -> Bool), (s : (A) -> Bool)))"))
   let t351 = @simp.rewrite_tac(@list.List([@theorems.right_and_exists_thm()]))
   let t350 = @simp.rewrite_tac(@list.List([@sets.exists_in_gspec(), open_in_cofinite_topology()]))
   let t349 = @simp.rewrite_tac(@list.List([@theorems.right_exists_and_thm(), @metric.open_in_subtopology_alt()]))
-  let t347 = @parser.parse_term("y:A")
-  let t348 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:A"), t347]))
+  let t347 = @term_syntax.parse_term("(y : A)")
+  let t348 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : A)"), t347]))
   let t360 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([@metric.hausdorff_space(), @metric.topspace_subtopology_subset(), topspace_cofinite_topology()])), t348), @tactics.strip_tac), t349), t350), t351), t352), t353), t354), t355), t357), t358), t359)
   let t346 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t345 = @simp.asm_rewrite_tac(@list.List([@sets.finite_union()]))
-  let t344 = @tactics.exists_tac(@parser.parse_term("(u DIFF t) UNION (u DIFF t'):A->bool"))
+  let t344 = @tactics.exists_tac(@term_syntax.parse_term("UNION(DIFF((u : (A) -> Bool), (t : (A) -> Bool)), DIFF(u, (t' : (A) -> Bool)))"))
   let t343 = @tactics.match_mp_tac(@sets.finite_subset())
   let t342 = @tactics.repeat_tac(@tactics.strip_tac)
   let t341 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), @tactics.all_tac])
-  let t340 = @tactics.x_gen_tac(@parser.parse_term("t':A->bool"))
+  let t340 = @tactics.x_gen_tac(@term_syntax.parse_term("(t' : (A) -> Bool)"))
   let t339 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), @tactics.all_tac])
-  let t338 = @tactics.x_gen_tac(@parser.parse_term("t:A->bool"))
+  let t338 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : (A) -> Bool)"))
   let t337 = @simp.rewrite_tac(@list.List([@sets.in_inter(), open_in_cofinite_topology()]))
   let t336 = @simp.rewrite_tac(@list.List([@metric.open_in_subtopology_alt(), @sets.forall_in_gspec()]))
   let t335 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm(), @theorems.right_forall_imp_thm(), @theorems.imp_conj()]))
@@ -889,8 +889,8 @@ fn step_34() -> Unit raise {
   let t331 = @simp.gen_rewrite_rule(fn(x330 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x330
   }, @list.List([@metric.hausdorff_space()]))
-  let t326 = @parser.parse_term("b:A")
-  let t327 = @list.List([@parser.parse_term("a:A"), t326])
+  let t326 = @term_syntax.parse_term("(b : A)")
+  let t327 = @list.List([@term_syntax.parse_term("(a : A)"), t326])
   let t333 = @tactics.first_x_assum(fn(x332 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x329 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       (fn(x323 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -901,10 +901,10 @@ fn step_34() -> Unit raise {
       })(((x328 : @kernel.Thm) => @bool.specl(t327, x328))(x329))
     })(t331(x332))
   })
-  let t321 = @parser.parse_term("b:A")
-  let t322 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("a:A"), t321]))
+  let t321 = @term_syntax.parse_term("(b : A)")
+  let t322 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(a : A)"), t321]))
   let t320 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
-  let t317 = @drule.match_mp(@sets.set_rule(@parser.parse_term("~(?a. s SUBSET {a}) ==> ?a b. a IN s /\\ b IN s /\\ ~(a = b)")))
+  let t317 = @drule.match_mp(@sets.set_rule(@term_syntax.parse_term("!(∃ a : _, SUBSET((s : (_) -> Bool), {a})) → (∃ a : _, ∃ b : _, IN(a, s) && IN(b, s) && !(a == b))")))
   let t319 = @tactics.first_x_assum(fn(x318 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x314 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s315 = @tactics.mp_tac(x314)
@@ -914,15 +914,15 @@ fn step_34() -> Unit raise {
     })(t317(x318))
   })
   let t313 = @list.List([@meson.asm_meson_tac(@list.List([@sets.finite_subset(), @sets.finite_sing()])), @tactics.all_tac])
-  let t361 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@class.asm_cases_tac(@parser.parse_term("?a:A. s SUBSET {a}")), t313), t319), t320), t322), @tactics.strip_tac), t333), t334), t335), t336), t337), t338), @tactics.strip_tac), t339), t340), @tactics.strip_tac), t341), t342), t343), t344), t345), t346), t360])
+  let t361 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@class.asm_cases_tac(@term_syntax.parse_term("∃ a : A, SUBSET((s : (A) -> Bool), {a})")), t313), t319), t320), t322), @tactics.strip_tac), t333), t334), t335), t336), t337), t338), @tactics.strip_tac), t339), t340), @tactics.strip_tac), t341), t342), t343), t344), t345), t346), t360])
   let t312 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t310 = @parser.parse_term("s:A->bool")
-  let t311 = @tactics.spec_tac(@parser.parse_term("u INTER (s:A->bool)"), t310)
-  let t309 = @tactics.mp_tac(@sets.set_rule(@parser.parse_term("u INTER (s:A->bool) SUBSET u")))
+  let t310 = @term_syntax.parse_term("(s : (A) -> Bool)")
+  let t311 = @tactics.spec_tac(@term_syntax.parse_term("INTER((u : (A) -> Bool), (s : (A) -> Bool))"), t310)
+  let t309 = @tactics.mp_tac(@sets.set_rule(@term_syntax.parse_term("SUBSET(INTER((u : (A) -> Bool), (s : (A) -> Bool)), u)")))
   let t308 = @simp.rewrite_tac(@list.List([topspace_cofinite_topology()]))
   let t307 = @simp.once_rewrite_tac(@list.List([@metric.subtopology_restrict()]))
   let t362 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t307), t308), t309), t311), t312), @tactics.eq_tac), @tactics.disch_tac), t361)
-  hausdorff_space_subtopology_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        hausdorff_space (subtopology (cofinite_topology u) s) <=>\n        FINITE(u INTER s)"), t362))
+  hausdorff_space_subtopology_cofinite_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, hausdorff_space(subtopology(cofinite_topology(u), s)) == FINITE(INTER(u, s))"), t362))
 }
 
 ///|
@@ -940,7 +940,7 @@ fn step_35() -> Unit raise {
   let t364 = @simp.rewrite_tac(@list.List([topspace_cofinite_topology(), @sets.inter_idempot()]))
   let t363 = @simp.rewrite_tac(@list.List([hausdorff_space_subtopology_cofinite_topology()]))
   let t365 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.once_rewrite_tac(@list.List([@equal.gsym(@metric.subtopology_topspace())]))), t363), t364)
-  hausdorff_space_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. hausdorff_space(cofinite_topology u) <=> FINITE u"), t365))
+  hausdorff_space_cofinite_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, hausdorff_space(cofinite_topology(u)) == FINITE(u)"), t365))
 }
 
 ///|
@@ -955,7 +955,7 @@ pub fn hausdorff_space_cofinite_topology() -> @kernel.Thm {
 ///|
 /// cocountable_topology
 fn step_36() -> Unit raise {
-  cocountable_topology_c.set(@pair.new_definition(@parser.parse_term("cocountable_topology (u:A->bool) =\n        topology ({} INSERT {s | s SUBSET u /\\ COUNTABLE(u DIFF s)})")))
+  cocountable_topology_c.set(@pair.new_definition(@term_syntax.parse_term("(cocountable_topology : ((A) -> Bool) -> Topology[A])((u : (A) -> Bool)) == topology(INSERT({}, {(s : (A) -> Bool) | SUBSET(s, u) && COUNTABLE(DIFF(u, s))}))")))
 }
 
 ///|
@@ -972,10 +972,10 @@ pub fn cocountable_topology() -> @kernel.Thm {
 fn step_37() -> Unit raise {
   let t426 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t425 = @simp.asm_simp_tac(@list.List([]))
-  let t424 = @tactics.exists_tac(@parser.parse_term("u DIFF s:A->bool"))
+  let t424 = @tactics.exists_tac(@term_syntax.parse_term("DIFF((u : (A) -> Bool), (s : (A) -> Bool))"))
   let t423 = @tactics.match_mp_tac(@card.countable_subset())
   let t420 = @simp.rewrite_rule(@list.List([@equal.gsym(@sets.member_not_empty())]))
-  let t418 = @parser.parse_term("s:A->bool")
+  let t418 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t422 = @tactics.first_x_assum(fn(x421 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     ((x419 : @kernel.Thm) => @tactics.x_choose_tac(t418, x419))(t420(x421))
   })
@@ -993,10 +993,10 @@ fn step_37() -> Unit raise {
       }
     })(x415))
   }, @list.List([@sets.subset()]))
-  let t407 = @parser.parse_term("v:(A->bool)->bool")
-  let t408 = @tactics.spec_tac(@parser.parse_term("(k DELETE {}):(A->bool)->bool"), t407)
+  let t407 = @term_syntax.parse_term("(v : ((A) -> Bool) -> Bool)")
+  let t408 = @tactics.spec_tac(@term_syntax.parse_term("DELETE((k : ((A) -> Bool) -> Bool), {})"), t407)
   let t406 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@sets.unions_delete_empty())]))
-  let t403 = @drule.match_mp(@sets.set_rule(@parser.parse_term("k SUBSET a INSERT s /\\ ~(forall x. x IN k ==> x = a)\n      ==> k DELETE a SUBSET s /\\ ~(k DELETE a = {})")))
+  let t403 = @drule.match_mp(@sets.set_rule(@term_syntax.parse_term("SUBSET((k : (_) -> Bool), INSERT((a : _), (s : (_) -> Bool))) && !(∀ x : _, IN(x, k) → x == a) → SUBSET(DELETE(k, a), s) && !(DELETE(k, a) == {})")))
   let t405 = @tactics.disch_then(fn(x404 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x400 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s401 = @tactics.mp_tac(x400)
@@ -1005,14 +1005,14 @@ fn step_37() -> Unit raise {
       }
     })(t403(x404))
   })
-  let t399 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("p ==> q \\/ r <=> p /\\ ~q ==> r"))]))
+  let t399 = @simp.rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("((p : Bool) → (q : Bool) || (r : Bool)) == (p && !q → r)"))]))
   let t398 = @simp.rewrite_tac(@list.List([@sets.empty_unions()]))
-  let t427 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("k:(A->bool)->bool")), t398), t399), t405), t406), t408), @tactics.gen_tac), t416), t417), @tactics.strip_tac), t422), t423), t424), t425), t426)
+  let t427 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(k : ((A) -> Bool) -> Bool)")), t398), t399), t405), t406), t408), @tactics.gen_tac), t416), t417), @tactics.strip_tac), t422), t423), t424), t425), t426)
   let t397 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t396 = @simp.asm_simp_tac(@list.List([@card.countable_union()]))
-  let t395 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("u DIFF s INTER t = (u DIFF s) UNION (u DIFF t)"))]))
-  let t394 = @tactics.x_gen_tac(@parser.parse_term("t:A->bool"))
-  let t393 = @tactics.x_gen_tac(@parser.parse_term("s:A->bool"))
+  let t395 = @simp.rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("DIFF((u : (_) -> Bool), INTER((s : (_) -> Bool), (t : (_) -> Bool))) == UNION(DIFF(u, s), DIFF(u, t))"))]))
+  let t394 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : (A) -> Bool)"))
+  let t393 = @tactics.x_gen_tac(@term_syntax.parse_term("(s : (A) -> Bool)"))
   let t428 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_elim_thm()])), t393), @tactics.strip_tac), t394), @tactics.strip_tac), @tactics.disj2_tac), t395), t396), t397), t427])
   let t392 = @simp.rewrite_tac(@list.List([@sets.in_insert(), @sets.inter_empty()]))
   let t391 = @simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm(), @theorems.imp_conj(), @sets.forall_in_insert()]))
@@ -1058,7 +1058,7 @@ fn step_37() -> Unit raise {
       })(x379))
     })(x380)(x380)
   }), @tactics.ants_tac), t390), t391), t392), @tactics.conj_tac), t428)
-  open_in_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        open_in (cocountable_topology u) s <=>\n        s = {} \\/ s SUBSET u /\\ COUNTABLE(u DIFF s)"), t429))
+  open_in_cocountable_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, open_in(cocountable_topology(u), s) == (s == {} || SUBSET(s, u) && COUNTABLE(DIFF(u, s)))"), t429))
 }
 
 ///|
@@ -1075,9 +1075,9 @@ pub fn open_in_cocountable_topology() -> @kernel.Thm {
 fn step_38() -> Unit raise {
   let t432 = @sets.set_tac(@list.List([]))
   let t431 = @simp.rewrite_tac(@list.List([@sets.diff_eq_empty(), @card.countable_empty()]))
-  let t430 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall s. P s ==> s SUBSET u) /\\ P u ==> UNIONS {s | P s} = u")))
+  let t430 = @tactics.match_mp_tac(@sets.set_rule(@term_syntax.parse_term("(∀ s : (_) -> Bool, (P : ((_) -> Bool) -> Bool)(s) → SUBSET(s, (u : (_) -> Bool))) && P(u) → UNIONS({(s : (_) -> Bool) | P(s)}) == u")))
   let t433 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@metric.topspace(), open_in_cocountable_topology()]))), t430), t431), t432)
-  topspace_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. topspace(cocountable_topology u) = u"), t433))
+  topspace_cocountable_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, topspace(cocountable_topology(u)) == u"), t433))
 }
 
 ///|
@@ -1093,11 +1093,11 @@ pub fn topspace_cocountable_topology() -> @kernel.Thm {
 /// CLOSED_IN_COCOUNTABLE_TOPOLOGY
 fn step_39() -> Unit raise {
   let t437 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t436 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@parser.parse_term("s SUBSET u ==> u DIFF (u DIFF s) = s"))]))
-  let t435 = @class.asm_cases_tac(@parser.parse_term("(s:A->bool) SUBSET u"))
+  let t436 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) → DIFF(u, DIFF(u, s)) == s"))]))
+  let t435 = @class.asm_cases_tac(@term_syntax.parse_term("SUBSET((s : (A) -> Bool), (u : (A) -> Bool))"))
   let t434 = @tactics.repeat_tac(@tactics.gen_tac)
   let t438 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.closed_in(), open_in_cocountable_topology(), topspace_cocountable_topology()])), t434), t435), t436), t437)
-  closed_in_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        closed_in (cocountable_topology u) s <=>\n        s = u \\/ s SUBSET u /\\ COUNTABLE s"), t438))
+  closed_in_cocountable_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, closed_in(cocountable_topology(u), s) == (s == u || SUBSET(s, u) && COUNTABLE(s))"), t438))
 }
 
 ///|
@@ -1114,7 +1114,7 @@ pub fn closed_in_cocountable_topology() -> @kernel.Thm {
 fn step_40() -> Unit raise {
   let t439 = @simp.simp_tac(@list.List([@card.countable_sing(), @sets.sing_subset(), topspace_cocountable_topology()]))
   let t440 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.t1_space_closed_in_sing(), closed_in_cocountable_topology()])), t439)
-  t1_space_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. t1_space(cocountable_topology u)"), t440))
+  t1_space_cocountable_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, t1_space(cocountable_topology(u))"), t440))
 }
 
 ///|
@@ -1131,7 +1131,7 @@ pub fn t1_space_cocountable_topology() -> @kernel.Thm {
 fn step_41() -> Unit raise {
   let t441 = @sets.set_tac(@list.List([]))
   let t442 = @tactics.then_tac(@simp.simp_tac(@list.List([@metric.topology_eq(), @metric.open_in_discrete_topology(), open_in_cocountable_topology(), @card.countable_diff()])), t441)
-  cocountable_eq_discrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. COUNTABLE u ==> cocountable_topology u = discrete_topology u"), t442))
+  cocountable_eq_discrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, COUNTABLE(u) → cocountable_topology(u) == discrete_topology(u)"), t442))
 }
 
 ///|
@@ -1153,7 +1153,7 @@ fn step_42() -> Unit raise {
   let t444 = @tactics.repeat_tac(@tactics.strip_tac)
   let t443 = @simp.simp_tac(@list.List([topspace_cocountable_topology()]))
   let t449 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.connected_in_closed_in(), closed_in_cocountable_topology()])), t443), t444), t448)
-  connected_in_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        ~COUNTABLE s /\\ s SUBSET u\n        ==> connected_in (cocountable_topology u) s"), t449))
+  connected_in_cocountable_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, !COUNTABLE(s) && SUBSET(s, u) → connected_in(cocountable_topology(u), s)"), t449))
 }
 
 ///|
@@ -1173,8 +1173,8 @@ fn step_43() -> Unit raise {
   let t452 = @simp.rewrite_tac(@list.List([@equal.gsym(@metric.connected_in_topspace())]))
   let t451 = @simp.rewrite_tac(@list.List([@metric.connected_space_discrete_topology()]))
   let t450 = @simp.asm_simp_tac(@list.List([cocountable_eq_discrete_topology()]))
-  let t455 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("COUNTABLE(u:A->bool)"))), t450), t451), t452), t453), t454)
-  connected_space_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool.\n        connected_space(cocountable_topology u) <=>\n        (?a. u SUBSET {a}) \\/ ~COUNTABLE u"), t455))
+  let t455 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@term_syntax.parse_term("COUNTABLE((u : (A) -> Bool))"))), t450), t451), t452), t453), t454)
+  connected_space_cocountable_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, connected_space(cocountable_topology(u)) == ((∃ a : A, SUBSET(u, {a})) || !COUNTABLE(u))"), t455))
 }
 
 ///|
@@ -1190,27 +1190,27 @@ pub fn connected_space_cocountable_topology() -> @kernel.Thm {
 /// COMPACT_IN_COCOUNTABLE_TOPOLOGY
 fn step_44() -> Unit raise {
   let t500 = @meson.asm_meson_tac(@list.List([]))
-  let t499 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@parser.parse_term("v SUBSET t ==> (t DIFF v = {} <=> t = v)"))]))
+  let t499 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("SUBSET((v : (_) -> Bool), (t : (_) -> Bool)) → (DIFF(t, v) == {}) == (t == v)"))]))
   let t498 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.simple_image()), @sets.unions_sings()]))
   let t497 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.diff_unions())]))
-  let t496 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("IMAGE (\\x. t DIFF {x}) v = {t DIFF u | u IN IMAGE (\\x. {x}) v}"))]))
-  let t493 = @drule.match_mp(@sets.set_rule(@parser.parse_term("t SUBSET s ==> ~(t INTER u = {}) ==> ~(s INTER u = {})")))
+  let t496 = @simp.rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("IMAGE((x : _) => DIFF((t : (_) -> Bool), {x}), (v : (_) -> Bool)) == {DIFF(t, (u : (_) -> Bool)) | IN(u, IMAGE((x : _) => {x}, v))}"))]))
+  let t493 = @drule.match_mp(@sets.set_rule(@term_syntax.parse_term("SUBSET((t : (_) -> Bool), (s : (_) -> Bool)) → !(INTER(t, (u : (_) -> Bool)) == {}) → !(INTER(s, u) == {})")))
   let t495 = @tactics.first_x_assum(fn(x494 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.match_mp_tac(t493(x494))
   })
-  let t492 = @tactics.x_gen_tac(@parser.parse_term("v:A->bool"))
+  let t492 = @tactics.x_gen_tac(@term_syntax.parse_term("(v : (A) -> Bool)"))
   let t491 = @simp.rewrite_tac(@list.List([@sets.forall_finite_subset_image(), @sets.simple_image()]))
   let t488 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t489 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.inters_gspec()])), t488)
   let t487 = @meson.asm_meson_tac(@list.List([@card.card_eq_sym(), @card.card_eq_imp_le()]))
   let t486 = @simp.rewrite_tac(@list.List([@sets.subset_diff(), @sets.countable(), @sets.ge_c()]))
-  let t485 = @tactics.exists_tac(@parser.parse_term("t:A->bool"))
+  let t485 = @tactics.exists_tac(@term_syntax.parse_term("(t : (A) -> Bool)"))
   let t484 = @tactics.match_mp_tac(@card.countable_subset())
   let t483 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), @tactics.all_tac])
-  let t490 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("a:A")), @tactics.disch_tac), @tactics.disj2_tac), @tactics.conj_tac), t483), t484), t485), t486), t487), @tactics.all_tac, t489])
+  let t490 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(a : A)")), @tactics.disch_tac), @tactics.disj2_tac), @tactics.conj_tac), t483), t484), t485), t486), t487), @tactics.all_tac, t489])
   let t482 = @tactics.repeat_tac(@tactics.conj_tac)
   let t481 = @simp.rewrite_tac(@list.List([@class.not_imp(), @sets.forall_in_gspec()]))
-  let t477 = @parser.parse_term("{t DIFF {x:A} | x | x IN t}")
+  let t477 = @term_syntax.parse_term("{DIFF((t : (A) -> Bool), {x}) | x : A | IN(x, t)}")
   let t480 = @tactics.disch_then(fn(x479 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x474 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s475 = @tactics.mp_tac(x474)
@@ -1222,7 +1222,7 @@ fn step_44() -> Unit raise {
   let t473 = @simp.asm_rewrite_tac(@list.List([topspace_cocountable_topology()]))
   let t472 = @simp.rewrite_tac(@list.List([@metric.compact_in_fip(), closed_in_cocountable_topology()]))
   let t471 = @simp.asm_rewrite_tac(@list.List([@sets.finite_empty()]))
-  let t470 = @class.asm_cases_tac(@parser.parse_term("t:A->bool = {}"))
+  let t470 = @class.asm_cases_tac(@term_syntax.parse_term("(t : (A) -> Bool) == {}"))
   let t469 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@sets.infinite()]))(@sets.num_infinite())]))
   let t466 = @drule.match_mp(@card.card_finite_cong())
   let t468 = @tactics.first_assum(fn(x467 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1233,16 +1233,16 @@ fn step_44() -> Unit raise {
       }
     })(t466(x467))
   })
-  let t462 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("t:A->bool"))(@tactics.strip_assume_tac))
+  let t462 = @tactics.disch_then(@tactics.x_choose_then(@term_syntax.parse_term("(t : (A) -> Bool)"))(@tactics.strip_assume_tac))
   let t461 = @simp.rewrite_tac(@list.List([@card.finite_card_lt(), @card.card_not_lt(), @card.card_le_eq_subset()]))
   let t460 = @simp.gen_rewrite_tac(fn(x459 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x459
   }, @list.List([@equal.gsym(@class.contrapos_thm())]))
   let t457 = @meson.asm_meson_tac(@list.List([@metric.compact_in_subset_topspace(), topspace_cocountable_topology()]))
   let t458 = @list.List([@tactics.then_tac(@tactics.eq_tac, @simp.asm_simp_tac(@list.List([@metric.finite_imp_compact_in(), topspace_cocountable_topology()]))), t457])
-  let t456 = @class.asm_cases_tac(@parser.parse_term("(s:A->bool) SUBSET u"))
+  let t456 = @class.asm_cases_tac(@term_syntax.parse_term("SUBSET((s : (A) -> Bool), (u : (A) -> Bool))"))
   let t501 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t456), t458), t460), t461), t462), t468), t469), t470), t471), @tactics.disch_tac), t472), t473), t480), t481), t482), t490), t491), t492), @tactics.strip_tac), t495), t496), t497), t498), t499), t500)
-  compact_in_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool. compact_in(cocountable_topology u) s <=>\n                 s SUBSET u /\\ FINITE s"), t501))
+  compact_in_cocountable_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, compact_in(cocountable_topology(u), s) == (SUBSET(s, u) && FINITE(s))"), t501))
 }
 
 ///|
@@ -1259,7 +1259,7 @@ pub fn compact_in_cocountable_topology() -> @kernel.Thm {
 fn step_45() -> Unit raise {
   let t502 = @simp.rewrite_tac(@list.List([topspace_cocountable_topology(), @sets.subset_refl()]))
   let t503 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.compact_space(), compact_in_cocountable_topology()])), t502)
-  compact_space_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. compact_space(cocountable_topology u) <=> FINITE u"), t503))
+  compact_space_cocountable_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, compact_space(cocountable_topology(u)) == FINITE(u)"), t503))
 }
 
 ///|
@@ -1276,27 +1276,27 @@ pub fn compact_space_cocountable_topology() -> @kernel.Thm {
 fn step_46() -> Unit raise {
   let t556 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t555 = @simp.asm_rewrite_tac(@list.List([]))
-  let t553 = @tactics.exists_tac(@parser.parse_term("s:A->bool"))
+  let t553 = @tactics.exists_tac(@term_syntax.parse_term("(s : (A) -> Bool)"))
   let t554 = @tactics.try_tac(@tactics.then_tac(@tactics.match_mp_tac(@card.countable_subset()), t553))
   let t552 = @tactics.repeat_tac(@tactics.conj_tac)
   let t551 = @simp.rewrite_tac(@list.List([@sets.not_insert_empty()]))
-  let t550 = @tactics.exists_tac(@parser.parse_term("(y:A) INSERT (u DIFF s)"))
-  let t549 = @tactics.exists_tac(@parser.parse_term("(x:A) INSERT (u DIFF s)"))
+  let t550 = @tactics.exists_tac(@term_syntax.parse_term("INSERT((y : A), DIFF((u : (A) -> Bool), (s : (A) -> Bool)))"))
+  let t549 = @tactics.exists_tac(@term_syntax.parse_term("INSERT((x : A), DIFF((u : (A) -> Bool), (s : (A) -> Bool)))"))
   let t548 = @simp.rewrite_tac(@list.List([@theorems.right_and_exists_thm()]))
   let t547 = @simp.rewrite_tac(@list.List([@sets.exists_in_gspec(), open_in_cocountable_topology()]))
   let t546 = @simp.rewrite_tac(@list.List([@theorems.right_exists_and_thm(), @metric.open_in_subtopology_alt()]))
-  let t544 = @parser.parse_term("y:A")
-  let t545 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:A"), t544]))
+  let t544 = @term_syntax.parse_term("(y : A)")
+  let t545 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : A)"), t544]))
   let t557 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([@metric.hausdorff_space(), @metric.topspace_subtopology_subset(), topspace_cocountable_topology()])), t545), @tactics.strip_tac), t546), t547), t548), t549), t550), t551), t552), t554), t555), t556)
   let t543 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t542 = @simp.asm_rewrite_tac(@list.List([@card.countable_union()]))
-  let t541 = @tactics.exists_tac(@parser.parse_term("(u DIFF t) UNION (u DIFF t'):A->bool"))
+  let t541 = @tactics.exists_tac(@term_syntax.parse_term("UNION(DIFF((u : (A) -> Bool), (t : (A) -> Bool)), DIFF(u, (t' : (A) -> Bool)))"))
   let t540 = @tactics.match_mp_tac(@card.countable_subset())
   let t539 = @tactics.repeat_tac(@tactics.strip_tac)
   let t538 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), @tactics.all_tac])
-  let t537 = @tactics.x_gen_tac(@parser.parse_term("t':A->bool"))
+  let t537 = @tactics.x_gen_tac(@term_syntax.parse_term("(t' : (A) -> Bool)"))
   let t536 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), @tactics.all_tac])
-  let t535 = @tactics.x_gen_tac(@parser.parse_term("t:A->bool"))
+  let t535 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : (A) -> Bool)"))
   let t534 = @simp.rewrite_tac(@list.List([@sets.in_inter(), open_in_cocountable_topology()]))
   let t533 = @simp.rewrite_tac(@list.List([@metric.open_in_subtopology_alt(), @sets.forall_in_gspec()]))
   let t532 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm(), @theorems.right_forall_imp_thm(), @theorems.imp_conj()]))
@@ -1304,8 +1304,8 @@ fn step_46() -> Unit raise {
   let t528 = @simp.gen_rewrite_rule(fn(x527 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x527
   }, @list.List([@metric.hausdorff_space()]))
-  let t523 = @parser.parse_term("b:A")
-  let t524 = @list.List([@parser.parse_term("a:A"), t523])
+  let t523 = @term_syntax.parse_term("(b : A)")
+  let t524 = @list.List([@term_syntax.parse_term("(a : A)"), t523])
   let t530 = @tactics.first_x_assum(fn(x529 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x526 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       (fn(x520 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1316,10 +1316,10 @@ fn step_46() -> Unit raise {
       })(((x525 : @kernel.Thm) => @bool.specl(t524, x525))(x526))
     })(t528(x529))
   })
-  let t518 = @parser.parse_term("b:A")
-  let t519 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("a:A"), t518]))
+  let t518 = @term_syntax.parse_term("(b : A)")
+  let t519 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(a : A)"), t518]))
   let t517 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
-  let t514 = @drule.match_mp(@sets.set_rule(@parser.parse_term("~(?a. s SUBSET {a}) ==> ?a b. a IN s /\\ b IN s /\\ ~(a = b)")))
+  let t514 = @drule.match_mp(@sets.set_rule(@term_syntax.parse_term("!(∃ a : _, SUBSET((s : (_) -> Bool), {a})) → (∃ a : _, ∃ b : _, IN(a, s) && IN(b, s) && !(a == b))")))
   let t516 = @tactics.first_x_assum(fn(x515 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x511 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s512 = @tactics.mp_tac(x511)
@@ -1329,15 +1329,15 @@ fn step_46() -> Unit raise {
     })(t514(x515))
   })
   let t510 = @list.List([@meson.asm_meson_tac(@list.List([@card.countable_subset(), @card.countable_sing()])), @tactics.all_tac])
-  let t558 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@class.asm_cases_tac(@parser.parse_term("?a:A. s SUBSET {a}")), t510), t516), t517), t519), @tactics.strip_tac), t530), t531), t532), t533), t534), t535), @tactics.strip_tac), t536), t537), @tactics.strip_tac), t538), t539), t540), t541), t542), t543), t557])
+  let t558 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@class.asm_cases_tac(@term_syntax.parse_term("∃ a : A, SUBSET((s : (A) -> Bool), {a})")), t510), t516), t517), t519), @tactics.strip_tac), t530), t531), t532), t533), t534), t535), @tactics.strip_tac), t536), t537), @tactics.strip_tac), t538), t539), t540), t541), t542), t543), t557])
   let t509 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t507 = @parser.parse_term("s:A->bool")
-  let t508 = @tactics.spec_tac(@parser.parse_term("u INTER (s:A->bool)"), t507)
-  let t506 = @tactics.mp_tac(@sets.set_rule(@parser.parse_term("u INTER (s:A->bool) SUBSET u")))
+  let t507 = @term_syntax.parse_term("(s : (A) -> Bool)")
+  let t508 = @tactics.spec_tac(@term_syntax.parse_term("INTER((u : (A) -> Bool), (s : (A) -> Bool))"), t507)
+  let t506 = @tactics.mp_tac(@sets.set_rule(@term_syntax.parse_term("SUBSET(INTER((u : (A) -> Bool), (s : (A) -> Bool)), u)")))
   let t505 = @simp.rewrite_tac(@list.List([topspace_cocountable_topology()]))
   let t504 = @simp.once_rewrite_tac(@list.List([@metric.subtopology_restrict()]))
   let t559 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t504), t505), t506), t508), t509), @tactics.eq_tac), @tactics.disch_tac), t558)
-  hausdorff_space_subtopology_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        hausdorff_space (subtopology (cocountable_topology u) s) <=>\n        COUNTABLE(u INTER s)"), t559))
+  hausdorff_space_subtopology_cocountable_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, hausdorff_space(subtopology(cocountable_topology(u), s)) == COUNTABLE(INTER(u, s))"), t559))
 }
 
 ///|
@@ -1355,7 +1355,7 @@ fn step_47() -> Unit raise {
   let t561 = @simp.rewrite_tac(@list.List([topspace_cocountable_topology(), @sets.inter_idempot()]))
   let t560 = @simp.rewrite_tac(@list.List([hausdorff_space_subtopology_cocountable_topology()]))
   let t562 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.once_rewrite_tac(@list.List([@equal.gsym(@metric.subtopology_topspace())]))), t560), t561)
-  hausdorff_space_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. hausdorff_space(cocountable_topology u) <=> COUNTABLE u"), t562))
+  hausdorff_space_cocountable_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, hausdorff_space(cocountable_topology(u)) == COUNTABLE(u)"), t562))
 }
 
 ///|
@@ -1372,7 +1372,7 @@ pub fn hausdorff_space_cocountable_topology() -> @kernel.Thm {
 fn step_48() -> Unit raise {
   let t563 = @simp.simp_tac(@list.List([@card.finite_imp_countable()]))
   let t564 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.kc_space(), closed_in_cocountable_topology(), compact_in_cocountable_topology()])), t563)
-  kc_space_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. kc_space(cocountable_topology u)"), t564))
+  kc_space_cocountable_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, kc_space(cocountable_topology(u))"), t564))
 }
 
 ///|

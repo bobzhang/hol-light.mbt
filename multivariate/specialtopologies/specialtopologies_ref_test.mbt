@@ -21096,177 +21096,177 @@ test "Multivariate/specialtopologies matches Multivariate/specialtopologies.ml" 
       #|0..0..solved at 2
       #|0..0..solved at 2
       #|Multivariate/specialtopologies quotations (171):
-      #|  indiscrete_topology (u:A->bool) = topology {{},u}
-      #|  forall u s:A->bool.\n        open_in (indiscrete_topology u) s <=> s = {} \\/ s = u
-      #|  forall u:A->bool. topspace(indiscrete_topology u) = u
-      #|  forall u s:A->bool.\n        closed_in (indiscrete_topology u) s <=> s = {} \\/ s = u
-      #|  x = a \\/ x = b <=> x IN {a,b}
-      #|  forall u s:A->bool.\n        subtopology (indiscrete_topology u) s =\n        indiscrete_topology (u INTER s)
-      #|  {{},(u:A->bool)}
-      #|  U:(A->bool)->bool
-      #|  U:(A->bool)->bool
-      #|  forall u:A->bool. compact_space (indiscrete_topology u)
-      #|  forall u s:A->bool.\n        compact_in (indiscrete_topology u) s <=> s SUBSET u
-      #|  forall u:A->bool. locally_compact_space (indiscrete_topology u)
-      #|  (\\x. &0):A->real
-      #|  x:A
-      #|  u:A->bool
-      #|  (s = {} \\/ s = u) /\\ x IN u DIFF s <=> s = {} /\\ x IN u
-      #|  forall u:A->bool. completely_regular_space(indiscrete_topology u)
-      #|  forall u:A->bool. regular_space(indiscrete_topology u)
-      #|  forall u:A->bool. t1_space(indiscrete_topology u) <=> ?a. u SUBSET {a}
-      #|  forall u:A->bool. t0_space(indiscrete_topology u) <=> ?a. u SUBSET {a}
-      #|  forall u:A->bool. hausdorff_space(indiscrete_topology u) <=> ?a. u SUBSET {a}
-      #|  forall u:A->bool. normal_space(indiscrete_topology u)
-      #|  (x:A) IN u
-      #|  x:A
-      #|  p /\\ (q \\/ r) ==> s <=> (q ==> p ==> s) /\\ (r ==> p ==> s)
-      #|  s:A->bool = {}
-      #|  s:A->bool
-      #|  t:A->bool
-      #|  u INTER s:A->bool
-      #|  (u INTER s:A->bool) SUBSET u
-      #|  u DIFF s = u DIFF (u INTER s)
-      #|  forall u s:A->bool.\n        (indiscrete_topology u) derived_set_of s =\n        if ?a. u INTER s SUBSET {a} then if DISJOINT u s then {} else u DIFF s\n        else u
-      #|  forall u:A->bool.\n        (indiscrete_topology u) derived_set_of u =\n        if ?a. u SUBSET {a} then {} else u
-      #|  s:A->bool = u
-      #|  s:A->bool = {}
-      #|  forall u s:A->bool.\n        (indiscrete_topology u) derived_set_of s = s <=>\n        s = {} \\/ s = u /\\ ~(?a.  u SUBSET {a})
-      #|  p /\\ q <=> ~(p ==> ~q)
-      #|  (p /\\ q <=> p) <=> p ==> q
-      #|  p \\/ q ==> r <=> (p ==> r) /\\ (q ==> r)
-      #|  forall(f:A->B) top u.\n        continuous_map (top,indiscrete_topology u) f <=>\n        IMAGE f (topspace top) SUBSET u
-      #|  b:A
-      #|  a:A
-      #|  ~(u = {}) /\\\n    (forall x. x IN u ==> f x IN v) /\\\n    (forall x y. x IN u /\\ y IN u ==> f x = f y)\n    ==> ?a. a IN v /\\ (forall x. x IN u ==> f x = a)
-      #|  u:A->bool = {}
-      #|  forall top u (f:A->B).\n        t1_space top\n        ==> (continuous_map(indiscrete_topology u,top) f <=>\n             u = {} \\/ ?a. a IN topspace top /\\ forall x. x IN u ==> f x = a)
-      #|  {(f:A->B) a}
-      #|  {(f:A->B) a}
-      #|  {(f:A->B) a}
-      #|  {(f:A->B) b}
-      #|  (\\i. if i = &0 then x else y):real->A
-      #|  y:A
-      #|  x:A
-      #|  forall u:A->bool. path_connected_space(indiscrete_topology u)
-      #|  forall u s:A->bool.\n        path_connected_in (indiscrete_topology u) s <=> s SUBSET u
-      #|  p /\\ q /\\ r <=> r /\\ p /\\ q
-      #|  (p \\/ q) /\\ r ==> s <=> (p ==> r ==> s) /\\ (q ==> r ==> s)
-      #|  forall P u:A->bool.\n        neighbourhood_base_of P (indiscrete_topology u) <=>\n        u = {} \\/ P u
-      #|  cofinite_topology (u:A->bool) =\n        topology ({} INSERT {s | s SUBSET u /\\ FINITE(u DIFF s)})
-      #|  u DIFF s:A->bool
-      #|  s:A->bool
-      #|  v:(A->bool)->bool
-      #|  (k DELETE {}):(A->bool)->bool
-      #|  k SUBSET a INSERT s /\\ ~(forall x. x IN k ==> x = a)\n      ==> k DELETE a SUBSET s /\\ ~(k DELETE a = {})
-      #|  p ==> q \\/ r <=> p /\\ ~q ==> r
-      #|  k:(A->bool)->bool
-      #|  u DIFF s INTER t = (u DIFF s) UNION (u DIFF t)
-      #|  t:A->bool
-      #|  s:A->bool
-      #|  forall u s:A->bool.\n        open_in (cofinite_topology u) s <=>\n        s = {} \\/ s SUBSET u /\\ FINITE(u DIFF s)
-      #|  (forall s. P s ==> s SUBSET u) /\\ P u ==> UNIONS {s | P s} = u
-      #|  forall u:A->bool. topspace(cofinite_topology u) = u
-      #|  s SUBSET u ==> u DIFF (u DIFF s) = s
-      #|  (s:A->bool) SUBSET u
-      #|  forall u s:A->bool.\n        closed_in (cofinite_topology u) s <=>\n        s = u \\/ s SUBSET u /\\ FINITE s
-      #|  forall u:A->bool. t1_space(cofinite_topology u)
-      #|  forall top s:A->bool.\n        t1_space top /\\ closed_in (cofinite_topology(topspace top)) s\n        ==> closed_in top s
-      #|  forall u:A->bool. FINITE u ==> cofinite_topology u = discrete_topology u
-      #|  forall u s:A->bool.\n        INFINITE s /\\ s SUBSET u ==> connected_in (cofinite_topology u) s
-      #|  FINITE(u:A->bool)
-      #|  forall u:A->bool.\n        connected_space(cofinite_topology u) <=>\n        (?a. u SUBSET {a}) \\/ INFINITE u
-      #|  k INTER k INTER s = k INTER s
-      #|  {g y | y IN IMAGE f s} = {g(f x) | x IN s}
-      #|  V:(A->bool)->bool = {}
-      #|  V:(A->bool)->bool
-      #|  {l:A->bool | l SUBSET k}
-      #|  FINITE {k INTER t:A->bool | t | t IN U DELETE k}
-      #|  k:A->bool
-      #|  forall k. (?s. P(k INSERT k INSERT s)) ==> (?s. P s)
-      #|  a IN s ==> (s DELETE a = {} <=> s = {a})
-      #|  U = k INSERT (U DELETE (k:A->bool))
-      #|  ?V. V SUBSET U /\\ FINITE V /\\ INTERS U :A->bool = INTERS V
-      #|  ~((U:(A->bool)->bool) SUBSET {u})
-      #|  ?k:A->bool. k IN U /\\ k SUBSET u /\\ FINITE k
-      #|  FINITE(U:(A->bool)->bool)
-      #|  U:(A->bool)->bool
-      #|  (s:A->bool) SUBSET u
-      #|  forall u s:A->bool. compact_in(cofinite_topology u) s <=> s SUBSET u
-      #|  forall u:A->bool. compact_space(cofinite_topology u)
-      #|  s:A->bool
-      #|  (y:A) INSERT (u DIFF s)
-      #|  (x:A) INSERT (u DIFF s)
-      #|  y:A
-      #|  x:A
-      #|  (u DIFF t) UNION (u DIFF t'):A->bool
-      #|  t':A->bool
-      #|  t:A->bool
-      #|  b:A
-      #|  a:A
-      #|  b:A
-      #|  a:A
-      #|  ~(?a. s SUBSET {a}) ==> ?a b. a IN s /\\ b IN s /\\ ~(a = b)
-      #|  ?a:A. s SUBSET {a}
-      #|  s:A->bool
-      #|  u INTER (s:A->bool)
-      #|  u INTER (s:A->bool) SUBSET u
-      #|  forall u s:A->bool.\n        hausdorff_space (subtopology (cofinite_topology u) s) <=>\n        FINITE(u INTER s)
-      #|  forall u:A->bool. hausdorff_space(cofinite_topology u) <=> FINITE u
-      #|  cocountable_topology (u:A->bool) =\n        topology ({} INSERT {s | s SUBSET u /\\ COUNTABLE(u DIFF s)})
-      #|  u DIFF s:A->bool
-      #|  s:A->bool
-      #|  v:(A->bool)->bool
-      #|  (k DELETE {}):(A->bool)->bool
-      #|  k SUBSET a INSERT s /\\ ~(forall x. x IN k ==> x = a)\n      ==> k DELETE a SUBSET s /\\ ~(k DELETE a = {})
-      #|  p ==> q \\/ r <=> p /\\ ~q ==> r
-      #|  k:(A->bool)->bool
-      #|  u DIFF s INTER t = (u DIFF s) UNION (u DIFF t)
-      #|  t:A->bool
-      #|  s:A->bool
-      #|  forall u s:A->bool.\n        open_in (cocountable_topology u) s <=>\n        s = {} \\/ s SUBSET u /\\ COUNTABLE(u DIFF s)
-      #|  (forall s. P s ==> s SUBSET u) /\\ P u ==> UNIONS {s | P s} = u
-      #|  forall u:A->bool. topspace(cocountable_topology u) = u
-      #|  s SUBSET u ==> u DIFF (u DIFF s) = s
-      #|  (s:A->bool) SUBSET u
-      #|  forall u s:A->bool.\n        closed_in (cocountable_topology u) s <=>\n        s = u \\/ s SUBSET u /\\ COUNTABLE s
-      #|  forall u:A->bool. t1_space(cocountable_topology u)
-      #|  forall u:A->bool. COUNTABLE u ==> cocountable_topology u = discrete_topology u
-      #|  forall u s:A->bool.\n        ~COUNTABLE s /\\ s SUBSET u\n        ==> connected_in (cocountable_topology u) s
-      #|  COUNTABLE(u:A->bool)
-      #|  forall u:A->bool.\n        connected_space(cocountable_topology u) <=>\n        (?a. u SUBSET {a}) \\/ ~COUNTABLE u
-      #|  v SUBSET t ==> (t DIFF v = {} <=> t = v)
-      #|  IMAGE (\\x. t DIFF {x}) v = {t DIFF u | u IN IMAGE (\\x. {x}) v}
-      #|  t SUBSET s ==> ~(t INTER u = {}) ==> ~(s INTER u = {})
-      #|  v:A->bool
-      #|  t:A->bool
-      #|  a:A
-      #|  {t DIFF {x:A} | x | x IN t}
-      #|  t:A->bool = {}
-      #|  t:A->bool
-      #|  (s:A->bool) SUBSET u
-      #|  forall u s:A->bool. compact_in(cocountable_topology u) s <=>\n                 s SUBSET u /\\ FINITE s
-      #|  forall u:A->bool. compact_space(cocountable_topology u) <=> FINITE u
-      #|  s:A->bool
-      #|  (y:A) INSERT (u DIFF s)
-      #|  (x:A) INSERT (u DIFF s)
-      #|  y:A
-      #|  x:A
-      #|  (u DIFF t) UNION (u DIFF t'):A->bool
-      #|  t':A->bool
-      #|  t:A->bool
-      #|  b:A
-      #|  a:A
-      #|  b:A
-      #|  a:A
-      #|  ~(?a. s SUBSET {a}) ==> ?a b. a IN s /\\ b IN s /\\ ~(a = b)
-      #|  ?a:A. s SUBSET {a}
-      #|  s:A->bool
-      #|  u INTER (s:A->bool)
-      #|  u INTER (s:A->bool) SUBSET u
-      #|  forall u s:A->bool.\n        hausdorff_space (subtopology (cocountable_topology u) s) <=>\n        COUNTABLE(u INTER s)
-      #|  forall u:A->bool. hausdorff_space(cocountable_topology u) <=> COUNTABLE u
-      #|  forall u:A->bool. kc_space(cocountable_topology u)
+      #|  (indiscrete_topology : ((A) -> Bool) -> Topology[A])((u : (A) -> Bool)) == topology({{}, u})
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, open_in(indiscrete_topology(u), s) == (s == {} || s == u)
+      #|  \226\136\128 u : (A) -> Bool, topspace(indiscrete_topology(u)) == u
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, closed_in(indiscrete_topology(u), s) == (s == {} || s == u)
+      #|  ((x : _) == (a : _) || x == (b : _)) == IN(x, {a, b})
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, subtopology(indiscrete_topology(u), s) == indiscrete_topology(INTER(u, s))
+      #|  {{}, (u : (A) -> Bool)}
+      #|  (U : ((A) -> Bool) -> Bool)
+      #|  (U : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 u : (A) -> Bool, compact_space(indiscrete_topology(u))
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, compact_in(indiscrete_topology(u), s) == SUBSET(s, u)
+      #|  \226\136\128 u : (A) -> Bool, locally_compact_space(indiscrete_topology(u))
+      #|  (x : A) => real_of_num(0)
+      #|  (x : A)
+      #|  (u : (A) -> Bool)
+      #|  (((s : (_) -> Bool) == {} || s == (u : (_) -> Bool)) && IN((x : _), DIFF(u, s))) == (s == {} && IN(x, u))
+      #|  \226\136\128 u : (A) -> Bool, completely_regular_space(indiscrete_topology(u))
+      #|  \226\136\128 u : (A) -> Bool, regular_space(indiscrete_topology(u))
+      #|  \226\136\128 u : (A) -> Bool, t1_space(indiscrete_topology(u)) == (\226\136\131 a : A, SUBSET(u, {a}))
+      #|  \226\136\128 u : (A) -> Bool, t0_space(indiscrete_topology(u)) == (\226\136\131 a : A, SUBSET(u, {a}))
+      #|  \226\136\128 u : (A) -> Bool, hausdorff_space(indiscrete_topology(u)) == (\226\136\131 a : A, SUBSET(u, {a}))
+      #|  \226\136\128 u : (A) -> Bool, normal_space(indiscrete_topology(u))
+      #|  IN((x : A), (u : (A) -> Bool))
+      #|  (x : A)
+      #|  ((p : Bool) && ((q : Bool) || (r : Bool)) \226\134\146 (s : Bool)) == ((q \226\134\146 p \226\134\146 s) && (r \226\134\146 p \226\134\146 s))
+      #|  (s : (A) -> Bool) == {}
+      #|  (s : (A) -> Bool)
+      #|  (t : (A) -> Bool)
+      #|  INTER((u : (A) -> Bool), (s : (A) -> Bool))
+      #|  SUBSET(INTER((u : (A) -> Bool), (s : (A) -> Bool)), u)
+      #|  DIFF((u : (_) -> Bool), (s : (_) -> Bool)) == DIFF(u, INTER(u, s))
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, derived_set_of(indiscrete_topology(u), s) == (if (\226\136\131 a : A, SUBSET(INTER(u, s), {a})) { if DISJOINT(u, s) { {} } else { DIFF(u, s) } } else { u })
+      #|  \226\136\128 u : (A) -> Bool, derived_set_of(indiscrete_topology(u), u) == (if (\226\136\131 a : A, SUBSET(u, {a})) { {} } else { u })
+      #|  (s : (A) -> Bool) == (u : (A) -> Bool)
+      #|  (s : (A) -> Bool) == {}
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, (derived_set_of(indiscrete_topology(u), s) == s) == (s == {} || s == u && !(\226\136\131 a : A, SUBSET(u, {a})))
+      #|  ((p : Bool) && (q : Bool)) == !(p \226\134\146 !q)
+      #|  (((p : Bool) && (q : Bool)) == p) == (p \226\134\146 q)
+      #|  ((p : Bool) || (q : Bool) \226\134\146 (r : Bool)) == ((p \226\134\146 r) && (q \226\134\146 r))
+      #|  \226\136\128 f : (A) -> B, \226\136\128 top : Topology[A], \226\136\128 u : (B) -> Bool, continuous_map((top, indiscrete_topology(u)), f) == SUBSET(IMAGE(f, topspace(top)), u)
+      #|  (b : A)
+      #|  (a : A)
+      #|  !((u : (_) -> Bool) == {}) && (\226\136\128 x : _, IN(x, u) \226\134\146 IN((f : (_) -> _)(x), (v : (_) -> Bool))) && (\226\136\128 x : _, \226\136\128 y : _, IN(x, u) && IN(y, u) \226\134\146 f(x) == f(y)) \226\134\146 (\226\136\131 a : _, IN(a, v) && (\226\136\128 x : _, IN(x, u) \226\134\146 f(x) == a))
+      #|  (u : (A) -> Bool) == {}
+      #|  \226\136\128 top : Topology[B], \226\136\128 u : (A) -> Bool, \226\136\128 f : (A) -> B, t1_space(top) \226\134\146 continuous_map((indiscrete_topology(u), top), f) == (u == {} || (\226\136\131 a : B, IN(a, topspace(top)) && (\226\136\128 x : A, IN(x, u) \226\134\146 f(x) == a)))
+      #|  {(f : (A) -> B)((a : A))}
+      #|  {(f : (A) -> B)((a : A))}
+      #|  {(f : (A) -> B)((a : A))}
+      #|  {(f : (A) -> B)((b : A))}
+      #|  (i : Real) => if i == real_of_num(0) { (x : A) } else { (y : A) }
+      #|  (y : A)
+      #|  (x : A)
+      #|  \226\136\128 u : (A) -> Bool, path_connected_space(indiscrete_topology(u))
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, path_connected_in(indiscrete_topology(u), s) == SUBSET(s, u)
+      #|  ((p : Bool) && (q : Bool) && (r : Bool)) == (r && p && q)
+      #|  (((p : Bool) || (q : Bool)) && (r : Bool) \226\134\146 (s : Bool)) == ((p \226\134\146 r \226\134\146 s) && (q \226\134\146 r \226\134\146 s))
+      #|  \226\136\128 P : ((A) -> Bool) -> Bool, \226\136\128 u : (A) -> Bool, neighbourhood_base_of(P, indiscrete_topology(u)) == (u == {} || P(u))
+      #|  (cofinite_topology : ((A) -> Bool) -> Topology[A])((u : (A) -> Bool)) == topology(INSERT({}, {(s : (A) -> Bool) | SUBSET(s, u) && FINITE(DIFF(u, s))}))
+      #|  DIFF((u : (A) -> Bool), (s : (A) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  (v : ((A) -> Bool) -> Bool)
+      #|  DELETE((k : ((A) -> Bool) -> Bool), {})
+      #|  SUBSET((k : (_) -> Bool), INSERT((a : _), (s : (_) -> Bool))) && !(\226\136\128 x : _, IN(x, k) \226\134\146 x == a) \226\134\146 SUBSET(DELETE(k, a), s) && !(DELETE(k, a) == {})
+      #|  ((p : Bool) \226\134\146 (q : Bool) || (r : Bool)) == (p && !q \226\134\146 r)
+      #|  (k : ((A) -> Bool) -> Bool)
+      #|  DIFF((u : (_) -> Bool), INTER((s : (_) -> Bool), (t : (_) -> Bool))) == UNION(DIFF(u, s), DIFF(u, t))
+      #|  (t : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, open_in(cofinite_topology(u), s) == (s == {} || SUBSET(s, u) && FINITE(DIFF(u, s)))
+      #|  (\226\136\128 s : (_) -> Bool, (P : ((_) -> Bool) -> Bool)(s) \226\134\146 SUBSET(s, (u : (_) -> Bool))) && P(u) \226\134\146 UNIONS({(s : (_) -> Bool) | P(s)}) == u
+      #|  \226\136\128 u : (A) -> Bool, topspace(cofinite_topology(u)) == u
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 DIFF(u, DIFF(u, s)) == s
+      #|  SUBSET((s : (A) -> Bool), (u : (A) -> Bool))
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, closed_in(cofinite_topology(u), s) == (s == u || SUBSET(s, u) && FINITE(s))
+      #|  \226\136\128 u : (A) -> Bool, t1_space(cofinite_topology(u))
+      #|  \226\136\128 top : Topology[A], \226\136\128 s : (A) -> Bool, t1_space(top) && closed_in(cofinite_topology(topspace(top)), s) \226\134\146 closed_in(top, s)
+      #|  \226\136\128 u : (A) -> Bool, FINITE(u) \226\134\146 cofinite_topology(u) == discrete_topology(u)
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, INFINITE(s) && SUBSET(s, u) \226\134\146 connected_in(cofinite_topology(u), s)
+      #|  FINITE((u : (A) -> Bool))
+      #|  \226\136\128 u : (A) -> Bool, connected_space(cofinite_topology(u)) == ((\226\136\131 a : A, SUBSET(u, {a})) || INFINITE(u))
+      #|  INTER((k : (_) -> Bool), INTER(k, (s : (_) -> Bool))) == INTER(k, s)
+      #|  {(g : (_) -> _)((y : _)) | IN(y, IMAGE((f : (_) -> _), (s : (_) -> Bool)))} == {g(f((x : _))) | IN(x, s)}
+      #|  (V : ((A) -> Bool) -> Bool) == {}
+      #|  (V : ((A) -> Bool) -> Bool)
+      #|  {(l : (A) -> Bool) | SUBSET(l, (k : (A) -> Bool))}
+      #|  FINITE({INTER((k : (A) -> Bool), t) | t : (A) -> Bool | IN(t, DELETE((U : ((A) -> Bool) -> Bool), k))})
+      #|  (k : (A) -> Bool)
+      #|  \226\136\128 k : _, (\226\136\131 s : (_) -> Bool, (P : ((_) -> Bool) -> Bool)(INSERT(k, INSERT(k, s)))) \226\134\146 (\226\136\131 s : (_) -> Bool, P(s))
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 (DELETE(s, a) == {}) == (s == {a})
+      #|  (U : ((A) -> Bool) -> Bool) == INSERT((k : (A) -> Bool), DELETE(U, k))
+      #|  \226\136\131 V : ((A) -> Bool) -> Bool, SUBSET(V, (U : ((A) -> Bool) -> Bool)) && FINITE(V) && INTERS(U) == INTERS(V)
+      #|  !SUBSET((U : ((A) -> Bool) -> Bool), {(u : (A) -> Bool)})
+      #|  \226\136\131 k : (A) -> Bool, IN(k, (U : ((A) -> Bool) -> Bool)) && SUBSET(k, (u : (A) -> Bool)) && FINITE(k)
+      #|  FINITE((U : ((A) -> Bool) -> Bool))
+      #|  (U : ((A) -> Bool) -> Bool)
+      #|  SUBSET((s : (A) -> Bool), (u : (A) -> Bool))
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, compact_in(cofinite_topology(u), s) == SUBSET(s, u)
+      #|  \226\136\128 u : (A) -> Bool, compact_space(cofinite_topology(u))
+      #|  (s : (A) -> Bool)
+      #|  INSERT((y : A), DIFF((u : (A) -> Bool), (s : (A) -> Bool)))
+      #|  INSERT((x : A), DIFF((u : (A) -> Bool), (s : (A) -> Bool)))
+      #|  (y : A)
+      #|  (x : A)
+      #|  UNION(DIFF((u : (A) -> Bool), (t : (A) -> Bool)), DIFF(u, (t' : (A) -> Bool)))
+      #|  (t' : (A) -> Bool)
+      #|  (t : (A) -> Bool)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  !(\226\136\131 a : _, SUBSET((s : (_) -> Bool), {a})) \226\134\146 (\226\136\131 a : _, \226\136\131 b : _, IN(a, s) && IN(b, s) && !(a == b))
+      #|  \226\136\131 a : A, SUBSET((s : (A) -> Bool), {a})
+      #|  (s : (A) -> Bool)
+      #|  INTER((u : (A) -> Bool), (s : (A) -> Bool))
+      #|  SUBSET(INTER((u : (A) -> Bool), (s : (A) -> Bool)), u)
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, hausdorff_space(subtopology(cofinite_topology(u), s)) == FINITE(INTER(u, s))
+      #|  \226\136\128 u : (A) -> Bool, hausdorff_space(cofinite_topology(u)) == FINITE(u)
+      #|  (cocountable_topology : ((A) -> Bool) -> Topology[A])((u : (A) -> Bool)) == topology(INSERT({}, {(s : (A) -> Bool) | SUBSET(s, u) && COUNTABLE(DIFF(u, s))}))
+      #|  DIFF((u : (A) -> Bool), (s : (A) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  (v : ((A) -> Bool) -> Bool)
+      #|  DELETE((k : ((A) -> Bool) -> Bool), {})
+      #|  SUBSET((k : (_) -> Bool), INSERT((a : _), (s : (_) -> Bool))) && !(\226\136\128 x : _, IN(x, k) \226\134\146 x == a) \226\134\146 SUBSET(DELETE(k, a), s) && !(DELETE(k, a) == {})
+      #|  ((p : Bool) \226\134\146 (q : Bool) || (r : Bool)) == (p && !q \226\134\146 r)
+      #|  (k : ((A) -> Bool) -> Bool)
+      #|  DIFF((u : (_) -> Bool), INTER((s : (_) -> Bool), (t : (_) -> Bool))) == UNION(DIFF(u, s), DIFF(u, t))
+      #|  (t : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, open_in(cocountable_topology(u), s) == (s == {} || SUBSET(s, u) && COUNTABLE(DIFF(u, s)))
+      #|  (\226\136\128 s : (_) -> Bool, (P : ((_) -> Bool) -> Bool)(s) \226\134\146 SUBSET(s, (u : (_) -> Bool))) && P(u) \226\134\146 UNIONS({(s : (_) -> Bool) | P(s)}) == u
+      #|  \226\136\128 u : (A) -> Bool, topspace(cocountable_topology(u)) == u
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 DIFF(u, DIFF(u, s)) == s
+      #|  SUBSET((s : (A) -> Bool), (u : (A) -> Bool))
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, closed_in(cocountable_topology(u), s) == (s == u || SUBSET(s, u) && COUNTABLE(s))
+      #|  \226\136\128 u : (A) -> Bool, t1_space(cocountable_topology(u))
+      #|  \226\136\128 u : (A) -> Bool, COUNTABLE(u) \226\134\146 cocountable_topology(u) == discrete_topology(u)
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, !COUNTABLE(s) && SUBSET(s, u) \226\134\146 connected_in(cocountable_topology(u), s)
+      #|  COUNTABLE((u : (A) -> Bool))
+      #|  \226\136\128 u : (A) -> Bool, connected_space(cocountable_topology(u)) == ((\226\136\131 a : A, SUBSET(u, {a})) || !COUNTABLE(u))
+      #|  SUBSET((v : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 (DIFF(t, v) == {}) == (t == v)
+      #|  IMAGE((x : _) => DIFF((t : (_) -> Bool), {x}), (v : (_) -> Bool)) == {DIFF(t, (u : (_) -> Bool)) | IN(u, IMAGE((x : _) => {x}, v))}
+      #|  SUBSET((t : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 !(INTER(t, (u : (_) -> Bool)) == {}) \226\134\146 !(INTER(s, u) == {})
+      #|  (v : (A) -> Bool)
+      #|  (t : (A) -> Bool)
+      #|  (a : A)
+      #|  {DIFF((t : (A) -> Bool), {x}) | x : A | IN(x, t)}
+      #|  (t : (A) -> Bool) == {}
+      #|  (t : (A) -> Bool)
+      #|  SUBSET((s : (A) -> Bool), (u : (A) -> Bool))
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, compact_in(cocountable_topology(u), s) == (SUBSET(s, u) && FINITE(s))
+      #|  \226\136\128 u : (A) -> Bool, compact_space(cocountable_topology(u)) == FINITE(u)
+      #|  (s : (A) -> Bool)
+      #|  INSERT((y : A), DIFF((u : (A) -> Bool), (s : (A) -> Bool)))
+      #|  INSERT((x : A), DIFF((u : (A) -> Bool), (s : (A) -> Bool)))
+      #|  (y : A)
+      #|  (x : A)
+      #|  UNION(DIFF((u : (A) -> Bool), (t : (A) -> Bool)), DIFF(u, (t' : (A) -> Bool)))
+      #|  (t' : (A) -> Bool)
+      #|  (t : (A) -> Bool)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  !(\226\136\131 a : _, SUBSET((s : (_) -> Bool), {a})) \226\134\146 (\226\136\131 a : _, \226\136\131 b : _, IN(a, s) && IN(b, s) && !(a == b))
+      #|  \226\136\131 a : A, SUBSET((s : (A) -> Bool), {a})
+      #|  (s : (A) -> Bool)
+      #|  INTER((u : (A) -> Bool), (s : (A) -> Bool))
+      #|  SUBSET(INTER((u : (A) -> Bool), (s : (A) -> Bool)), u)
+      #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, hausdorff_space(subtopology(cocountable_topology(u), s)) == COUNTABLE(INTER(u, s))
+      #|  \226\136\128 u : (A) -> Bool, hausdorff_space(cocountable_topology(u)) == COUNTABLE(u)
+      #|  \226\136\128 u : (A) -> Bool, kc_space(cocountable_topology(u))
       #|indiscrete_topology =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\u:fun('A,bool). ((#=:fun(topology('A),fun(topology('A),bool)) (#indiscrete_topology:fun(fun('A,bool),topology('A)) u:fun('A,bool))) (#topology:fun(fun(fun('A,bool),bool),topology('A)) ((#INSERT:fun(fun('A,bool),fun(fun(fun('A,bool),bool),fun(fun('A,bool),bool))) #EMPTY:fun('A,bool)) ((#INSERT:fun(fun('A,bool),fun(fun(fun('A,bool),bool),fun(fun('A,bool),bool))) u:fun('A,bool)) #EMPTY:fun(fun('A,bool),bool)))))))
       #|OPEN_IN_INDISCRETE_TOPOLOGY =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\u:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) ((#open_in:fun(topology('A),fun(fun('A,bool),bool)) (#indiscrete_topology:fun(fun('A,bool),topology('A)) u:fun('A,bool))) s:fun('A,bool))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) #EMPTY:fun('A,bool))) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) u:fun('A,bool))))))))
       #|TOPSPACE_INDISCRETE_TOPOLOGY =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\u:fun('A,bool). ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (#topspace:fun(topology('A),fun('A,bool)) (#indiscrete_topology:fun(fun('A,bool),topology('A)) u:fun('A,bool)))) u:fun('A,bool))))
