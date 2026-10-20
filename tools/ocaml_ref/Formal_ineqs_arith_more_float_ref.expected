@@ -3,37 +3,37 @@ Formal_ineqs/arith/more_float quotations (34):
   3
   2
   1
-  float_num F
-  interval_arith x (lo, hi) ==> (hi < &0 <=> T) ==> x < &0
-  e2:num
-  n2:num
-  e1:num
-  n1:num
-  iabs (float_num F n1 e1, float_num F n2 e2) = float_num F n2 e2
-  e2:num
-  n2:num
-  e1:num
-  n1:num
-  iabs (float_num T n1 e1, float_num T n2 e2) = float_num F n1 e1
-  (&0 < lo <=> T) ==> interval_not_zero (lo, hi)
-  (hi < &0 <=> T) ==> interval_not_zero (lo, hi)
-  (&0 < lo <=> T) ==> interval_pos (lo, hi:real)
-  (hi < &0 <=> T) ==> interval_neg (lo:real, hi:real)
-  (y < lo <=> T) ==> interval_gt y (lo, hi:real)
-  &1 / x <= hi ==> inv x <= hi
-  lo <= &1 / x ==> lo <= inv x
-  &1 / x = inv x
-  interval_arith (&2 * x) (&1, &1) ==> inv (&2) = x
-  (forall x. interval_arith x int ==> \n\t\t\t\t\t       interval_arith (f x) f_bounds) \n\t\t\t   ==> bounded_on_int f int f_bounds
-  bounded_on_int f int f_bounds ==>\n\t\t\t(forall x. interval_arith x int ==> interval_arith (f x) f_bounds)
-  x1 <= y1 /\\ x2 <= y2 /\\ y1 + y2 <= y ==> x1 + x2 <= y
-  x1 <= y1 /\\ x2 <= y2 /\\ x <= x1 + x2 ==> x <= y1 + y2
-  x1 <= y1 /\\ y2 <= x2 /\\ y1 - y2 <= y ==> x1 - x2 <= y
-  x1 <= y1 /\\ y2 <= x2 /\\ x <= x1 - x2 ==> x <= y1 - y2
-  y1 * y2
-  &0 <= x1 /\\ &0 <= x2 /\\ x1 <= y1 /\\ x2 <= y2 /\\ y1 * y2 <= y ==> x1 * x2 <= y
-  x * y2
-  (&0 <= x <=> T) ==> y1 <= y2 ==> x * y2 <= z ==> x * y1 <= z
+  float_num(false)
+  interval_arith((x : Real), ((lo : Real), (hi : Real))) \226\134\146 (hi < real_of_num(0)) == true \226\134\146 x < real_of_num(0)
+  (e2 : Num)
+  (n2 : Num)
+  (e1 : Num)
+  (n1 : Num)
+  iabs((float_num(false, (n1 : Num), (e1 : Num)), float_num(false, (n2 : Num), (e2 : Num)))) == float_num(false, n2, e2)
+  (e2 : Num)
+  (n2 : Num)
+  (e1 : Num)
+  (n1 : Num)
+  iabs((float_num(true, (n1 : Num), (e1 : Num)), float_num(true, (n2 : Num), (e2 : Num)))) == float_num(false, n1, e1)
+  (real_of_num(0) < (lo : Real)) == true \226\134\146 interval_not_zero((lo, (hi : Real)))
+  ((hi : Real) < real_of_num(0)) == true \226\134\146 interval_not_zero(((lo : Real), hi))
+  (real_of_num(0) < (lo : Real)) == true \226\134\146 interval_pos((lo, (hi : Real)))
+  ((hi : Real) < real_of_num(0)) == true \226\134\146 interval_neg(((lo : Real), hi))
+  ((y : Real) < (lo : Real)) == true \226\134\146 interval_gt(y, (lo, (hi : Real)))
+  real_of_num(1) / (x : Real) <= (hi : Real) \226\134\146 inv(x) <= hi
+  (lo : Real) <= real_of_num(1) / (x : Real) \226\134\146 lo <= inv(x)
+  real_of_num(1) / (x : Real) == inv(x)
+  interval_arith(real_of_num(2) * (x : Real), (real_of_num(1), real_of_num(1))) \226\134\146 inv(real_of_num(2)) == x
+  (\226\136\128 x : Real, interval_arith(x, (int : (Real, Real))) \226\134\146 interval_arith((f : (Real) -> Real)(x), (f_bounds : (Real, Real)))) \226\134\146 bounded_on_int(f, int, f_bounds)
+  bounded_on_int((f : (Real) -> Real), (int : (Real, Real)), (f_bounds : (Real, Real))) \226\134\146 (\226\136\128 x : Real, interval_arith(x, int) \226\134\146 interval_arith(f(x), f_bounds))
+  (x1 : Real) <= (y1 : Real) && (x2 : Real) <= (y2 : Real) && y1 + y2 <= (y : Real) \226\134\146 x1 + x2 <= y
+  (x1 : Real) <= (y1 : Real) && (x2 : Real) <= (y2 : Real) && (x : Real) <= x1 + x2 \226\134\146 x <= y1 + y2
+  (x1 : Real) <= (y1 : Real) && (y2 : Real) <= (x2 : Real) && y1 - y2 <= (y : Real) \226\134\146 x1 - x2 <= y
+  (x1 : Real) <= (y1 : Real) && (y2 : Real) <= (x2 : Real) && (x : Real) <= x1 - x2 \226\134\146 x <= y1 - y2
+  (y1 : Real) * (y2 : Real)
+  real_of_num(0) <= (x1 : Real) && real_of_num(0) <= (x2 : Real) && x1 <= (y1 : Real) && x2 <= (y2 : Real) && y1 * y2 <= (y : Real) \226\134\146 x1 * x2 <= y
+  (x : Real) * (y2 : Real)
+  (real_of_num(0) <= (x : Real)) == true \226\134\146 (y1 : Real) <= (y2 : Real) \226\134\146 x * y2 <= (z : Real) \226\134\146 x * y1 <= z
 More_float.float0_eq =  |- ((#=:fun(real,fun(real,bool)) (((#float_num:fun(bool,fun(num,fun(num,real))) #F:bool) #_0:num) (#D50:fun(num,num) #_0:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))
 More_float.float1_eq =  |- ((#=:fun(real,fun(real,bool)) (((#float_num:fun(bool,fun(num,fun(num,real))) #F:bool) (#D1:fun(num,num) #_0:num)) (#D50:fun(num,num) #_0:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))
 More_float.float2_eq =  |- ((#=:fun(real,fun(real,bool)) (((#float_num:fun(bool,fun(num,fun(num,real))) #F:bool) (#D2:fun(num,num) #_0:num)) (#D50:fun(num,num) #_0:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))

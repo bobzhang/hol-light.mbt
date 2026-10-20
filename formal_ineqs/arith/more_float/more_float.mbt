@@ -296,9 +296,9 @@ fn step_10() -> Unit raise {
       @equal.sym(t34(x35))
     })(@arith_nat.numeral_to_num_conv(x36))
   }
-  let t37 = conv(@parser.parse_term("3"))
-  let t38 = conv(@parser.parse_term("2"))
-  let (num1_eq, num2_eq, num3_eq) = (conv(@parser.parse_term("1")), t38, t37)
+  let t37 = conv(@term_syntax.parse_term("3"))
+  let t38 = conv(@term_syntax.parse_term("2"))
+  let (num1_eq, num2_eq, num3_eq) = (conv(@term_syntax.parse_term("1")), t38, t37)
   num1_eq_c.set(num1_eq)
   num2_eq_c.set(num2_eq)
   num3_eq_c.set(num3_eq)
@@ -307,7 +307,7 @@ fn step_10() -> Unit raise {
 ///|
 /// float_F_const
 fn step_11() -> Unit raise {
-  float_f_const_c.set(@parser.parse_term("float_num F"))
+  float_f_const_c.set(@term_syntax.parse_term("float_num(false)"))
 }
 
 ///|
@@ -457,7 +457,7 @@ pub fn float_interval_scale(x49 : Int64, x50 : @kernel.Term, x51 : @kernel.Thm) 
 /// FLOAT_INTERVAL_LT0'
 fn step_18() -> Unit raise {
   let t53 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@interval_arith.interval_arith()])), @calc_rat.real_arith_tac)
-  let t54 = (@parser.parse_term("interval_arith x (lo, hi) ==> (hi < &0 <=> T) ==> x < &0"), t53)
+  let t54 = (@term_syntax.parse_term("interval_arith((x : Real), ((lo : Real), (hi : Real))) → (hi < real_of_num(0)) == true → x < real_of_num(0)"), t53)
   float_interval_lt0_p_c.set(@bool.undisch_all((fn(x52 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x52.0, x52.1)
   })(t54)))
@@ -587,12 +587,12 @@ pub fn float_iabs(x61 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// FLOAT_IABS_FF
 fn step_23() -> Unit raise {
-  let t67 = @parser.parse_term("e2:num")
-  let t68 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("n2:num"), t67]), @float_theory.float_f_pos()))
-  let t65 = @parser.parse_term("e1:num")
-  let t66 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("n1:num"), t65]), @float_theory.float_f_pos()))
+  let t67 = @term_syntax.parse_term("(e2 : Num)")
+  let t68 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(n2 : Num)"), t67]), @float_theory.float_f_pos()))
+  let t65 = @term_syntax.parse_term("(e1 : Num)")
+  let t66 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(n1 : Num)"), t65]), @float_theory.float_f_pos()))
   let t69 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@interval_arith.iabs()])), t66), t68), @calc_rat.real_arith_tac)
-  float_iabs_ff_c.set(@tactics.prove(@parser.parse_term("iabs (float_num F n1 e1, float_num F n2 e2) = float_num F n2 e2"), t69))
+  float_iabs_ff_c.set(@tactics.prove(@term_syntax.parse_term("iabs((float_num(false, (n1 : Num), (e1 : Num)), float_num(false, (n2 : Num), (e2 : Num)))) == float_num(false, n2, e2)"), t69))
 }
 
 ///|
@@ -607,12 +607,12 @@ pub fn float_iabs_ff() -> @kernel.Thm {
 ///|
 /// FLOAT_IABS_TT
 fn step_24() -> Unit raise {
-  let t72 = @parser.parse_term("e2:num")
-  let t73 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("n2:num"), t72]), @float_theory.float_t_neg()))
-  let t70 = @parser.parse_term("e1:num")
-  let t71 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("n1:num"), t70]), @float_theory.float_f_pos()))
+  let t72 = @term_syntax.parse_term("(e2 : Num)")
+  let t73 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(n2 : Num)"), t72]), @float_theory.float_t_neg()))
+  let t70 = @term_syntax.parse_term("(e1 : Num)")
+  let t71 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(n1 : Num)"), t70]), @float_theory.float_f_pos()))
   let t74 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@interval_arith.iabs(), @equal.gsym(@float_theory.float_neg_f())])), t71), t73), @calc_rat.real_arith_tac)
-  float_iabs_tt_c.set(@tactics.prove(@parser.parse_term("iabs (float_num T n1 e1, float_num T n2 e2) = float_num F n1 e1"), t74))
+  float_iabs_tt_c.set(@tactics.prove(@term_syntax.parse_term("iabs((float_num(true, (n1 : Num), (e1 : Num)), float_num(true, (n2 : Num), (e2 : Num)))) == float_num(false, n1, e1)"), t74))
 }
 
 ///|
@@ -628,7 +628,7 @@ pub fn float_iabs_tt() -> @kernel.Thm {
 /// INTERVAL_NOT_ZERO1'
 fn step_25() -> Unit raise {
   let t76 = @simp.simp_tac(@list.List([@interval_arith.interval_not_zero()]))
-  let t77 = (@parser.parse_term("(&0 < lo <=> T) ==> interval_not_zero (lo, hi)"), t76)
+  let t77 = (@term_syntax.parse_term("(real_of_num(0) < (lo : Real)) == true → interval_not_zero((lo, (hi : Real)))"), t76)
   interval_not_zero1_p_c.set(@bool.undisch_all((fn(x75 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x75.0, x75.1)
   })(t77)))
@@ -647,7 +647,7 @@ pub fn interval_not_zero1_p() -> @kernel.Thm {
 /// INTERVAL_NOT_ZERO2'
 fn step_26() -> Unit raise {
   let t79 = @simp.simp_tac(@list.List([@interval_arith.interval_not_zero()]))
-  let t80 = (@parser.parse_term("(hi < &0 <=> T) ==> interval_not_zero (lo, hi)"), t79)
+  let t80 = (@term_syntax.parse_term("((hi : Real) < real_of_num(0)) == true → interval_not_zero(((lo : Real), hi))"), t79)
   interval_not_zero2_p_c.set(@bool.undisch_all((fn(x78 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x78.0, x78.1)
   })(t80)))
@@ -706,7 +706,7 @@ pub fn check_interval_not_zero(x81 : @kernel.Term) -> @kernel.Thm raise {
 /// INTERVAL_POS'
 fn step_27() -> Unit raise {
   let t94 = @simp.simp_tac(@list.List([@interval_arith.interval_pos()]))
-  let t95 = (@parser.parse_term("(&0 < lo <=> T) ==> interval_pos (lo, hi:real)"), t94)
+  let t95 = (@term_syntax.parse_term("(real_of_num(0) < (lo : Real)) == true → interval_pos((lo, (hi : Real)))"), t94)
   interval_pos_p_c.set(@bool.undisch_all((fn(x93 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x93.0, x93.1)
   })(t95)))
@@ -746,7 +746,7 @@ pub fn check_interval_pos(x96 : @kernel.Term) -> @kernel.Thm raise {
 /// INTERVAL_NEG'
 fn step_28() -> Unit raise {
   let t104 = @simp.simp_tac(@list.List([@interval_arith.interval_neg()]))
-  let t105 = (@parser.parse_term("(hi < &0 <=> T) ==> interval_neg (lo:real, hi:real)"), t104)
+  let t105 = (@term_syntax.parse_term("((hi : Real) < real_of_num(0)) == true → interval_neg(((lo : Real), hi))"), t104)
   interval_neg_p_c.set(@bool.undisch_all((fn(x103 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x103.0, x103.1)
   })(t105)))
@@ -786,7 +786,7 @@ pub fn check_interval_neg(x106 : @kernel.Term) -> @kernel.Thm raise {
 /// check_interval_gt
 fn step_29() -> Unit raise {
   let t114 = @simp.rewrite_tac(@list.List([@interval_arith.interval_gt()]))
-  let t115 = (@parser.parse_term("(y < lo <=> T) ==> interval_gt y (lo, hi:real)"), t114)
+  let t115 = (@term_syntax.parse_term("((y : Real) < (lo : Real)) == true → interval_gt(y, (lo, (hi : Real)))"), t114)
   let gt_th0 = @bool.undisch_all((fn(x113 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x113.0, x113.1)
   })(t115))
@@ -849,7 +849,7 @@ pub fn check_interval_iabs(x124 : @kernel.Term, x125 : @kernel.Term) -> @kernel.
 /// float_inv_hi
 fn step_30() -> Unit raise {
   let t131 = @simp.rewrite_tac(@list.List([@realax.real_div(), @realax.real_mul_lid()]))
-  let t132 = (@parser.parse_term("&1 / x <= hi ==> inv x <= hi"), t131)
+  let t132 = (@term_syntax.parse_term("real_of_num(1) / (x : Real) <= (hi : Real) → inv(x) <= hi"), t131)
   let div_lemma = rule((fn(x130 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x130.0, x130.1)
   })(t132))
@@ -878,7 +878,7 @@ pub fn float_inv_hi(x : Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
 /// float_inv_lo
 fn step_31() -> Unit raise {
   let t136 = @simp.rewrite_tac(@list.List([@realax.real_div(), @realax.real_mul_lid()]))
-  let t137 = (@parser.parse_term("lo <= &1 / x ==> lo <= inv x"), t136)
+  let t137 = (@term_syntax.parse_term("(lo : Real) <= real_of_num(1) / (x : Real) → lo <= inv(x)"), t136)
   let div_lemma = rule((fn(x135 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x135.0, x135.1)
   })(t137))
@@ -907,7 +907,7 @@ pub fn float_inv_lo(x : Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
 /// float_interval_inv
 fn step_32() -> Unit raise {
   let t140 = @simp.rewrite_tac(@list.List([@realax.real_div(), @realax.real_mul_lid()]))
-  let inv_eq_div_lemma = @tactics.prove(@parser.parse_term("&1 / x = inv x"), t140)
+  let inv_eq_div_lemma = @tactics.prove(@term_syntax.parse_term("real_of_num(1) / (x : Real) == inv(x)"), t140)
   float_interval_inv_c.set(fn(x141 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     let pp = x141
     fn(x142 : @kernel.Thm) -> @kernel.Thm raise {
@@ -941,7 +941,7 @@ fn step_33() -> Unit raise {
   let one_float_eq_one = @arith_float.float_to_num_conv(one_float())
   let t145 = @tactics.conv_tac(@calc_rat.real_field)
   let t146 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@interval_arith.interval_arith()])), t145)
-  let inv2_eq_lemma = @tactics.prove(@parser.parse_term("interval_arith (&2 * x) (&1, &1) ==> inv (&2) = x"), t146)
+  let inv2_eq_lemma = @tactics.prove(@term_syntax.parse_term("interval_arith(real_of_num(2) * (x : Real), (real_of_num(1), real_of_num(1))) → inv(real_of_num(2)) == x"), t146)
   let t151 = float_interval_inv(1L)(two_interval())
   let half_tm = (fn(x149 : @kernel.Term) -> @kernel.Term raise {
     (fn(x148 : @kernel.Term) -> @kernel.Term raise {
@@ -1061,7 +1061,7 @@ pub fn norm_lin_approx(x164 : @kernel.Thm, x165 : @kernel.Thm) -> @kernel.Thm ra
 /// BOUNDED_ON_INT
 fn step_36() -> Unit raise {
   let t167 = @simp.rewrite_tac(@list.List([@interval_arith.bounded_on_int(), @interval_arith.interval_arith()]))
-  let t168 = (@parser.parse_term("(forall x. interval_arith x int ==> \n\t\t\t\t\t       interval_arith (f x) f_bounds) \n\t\t\t   ==> bounded_on_int f int f_bounds"), t167)
+  let t168 = (@term_syntax.parse_term("(∀ x : Real, interval_arith(x, (int : (Real, Real))) → interval_arith((f : (Real) -> Real)(x), (f_bounds : (Real, Real)))) → bounded_on_int(f, int, f_bounds)"), t167)
   bounded_on_int_c.set(@bool.undisch_all((fn(x166 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x166.0, x166.1)
   })(t168)))
@@ -1080,7 +1080,7 @@ pub fn bounded_on_int() -> @kernel.Thm {
 /// BOUNDED_ON_INT_DEST
 fn step_37() -> Unit raise {
   let t170 = @simp.rewrite_tac(@list.List([@interval_arith.bounded_on_int(), @interval_arith.interval_arith()]))
-  let t171 = (@parser.parse_term("bounded_on_int f int f_bounds ==>\n\t\t\t(forall x. interval_arith x int ==> interval_arith (f x) f_bounds)"), t170)
+  let t171 = (@term_syntax.parse_term("bounded_on_int((f : (Real) -> Real), (int : (Real, Real)), (f_bounds : (Real, Real))) → (∀ x : Real, interval_arith(x, int) → interval_arith(f(x), f_bounds))"), t170)
   bounded_on_int_dest_c.set(@bool.undisch_all((fn(x169 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x169.0, x169.1)
   })(t171)))
@@ -1244,7 +1244,7 @@ pub fn bounded_on_int_div(x203 : Int64, x204 : @kernel.Thm, x205 : @kernel.Thm) 
 ///|
 /// ADD_INEQ_HI
 fn step_38() -> Unit raise {
-  let t207 = @parser.parse_term("x1 <= y1 /\\ x2 <= y2 /\\ y1 + y2 <= y ==> x1 + x2 <= y")
+  let t207 = @term_syntax.parse_term("(x1 : Real) <= (y1 : Real) && (x2 : Real) <= (y2 : Real) && y1 + y2 <= (y : Real) → x1 + x2 <= y")
   add_ineq_hi_c.set(rule(@calc_rat.real_arith(t207)))
 }
 
@@ -1260,7 +1260,7 @@ pub fn add_ineq_hi() -> @kernel.Thm {
 ///|
 /// ADD_INEQ_LO
 fn step_39() -> Unit raise {
-  let t208 = @parser.parse_term("x1 <= y1 /\\ x2 <= y2 /\\ x <= x1 + x2 ==> x <= y1 + y2")
+  let t208 = @term_syntax.parse_term("(x1 : Real) <= (y1 : Real) && (x2 : Real) <= (y2 : Real) && (x : Real) <= x1 + x2 → x <= y1 + y2")
   add_ineq_lo_c.set(rule(@calc_rat.real_arith(t208)))
 }
 
@@ -1276,7 +1276,7 @@ pub fn add_ineq_lo() -> @kernel.Thm {
 ///|
 /// SUB_INEQ_HI
 fn step_40() -> Unit raise {
-  let t209 = @parser.parse_term("x1 <= y1 /\\ y2 <= x2 /\\ y1 - y2 <= y ==> x1 - x2 <= y")
+  let t209 = @term_syntax.parse_term("(x1 : Real) <= (y1 : Real) && (y2 : Real) <= (x2 : Real) && y1 - y2 <= (y : Real) → x1 - x2 <= y")
   sub_ineq_hi_c.set(rule(@calc_rat.real_arith(t209)))
 }
 
@@ -1292,7 +1292,7 @@ pub fn sub_ineq_hi() -> @kernel.Thm {
 ///|
 /// SUB_INEQ_LO
 fn step_41() -> Unit raise {
-  let t210 = @parser.parse_term("x1 <= y1 /\\ y2 <= x2 /\\ x <= x1 - x2 ==> x <= y1 - y2")
+  let t210 = @term_syntax.parse_term("(x1 : Real) <= (y1 : Real) && (y2 : Real) <= (x2 : Real) && (x : Real) <= x1 - x2 → x <= y1 - y2")
   sub_ineq_lo_c.set(rule(@calc_rat.real_arith(t210)))
 }
 
@@ -1311,9 +1311,9 @@ fn step_42() -> Unit raise {
   let t217 = @simp.asm_rewrite_tac(@list.List([]))
   let t216 = @tactics.match_mp_tac(@real.real_le_mul2())
   let t215 = @simp.asm_rewrite_tac(@list.List([]))
-  let t214 = @tactics.exists_tac(@parser.parse_term("y1 * y2"))
+  let t214 = @tactics.exists_tac(@term_syntax.parse_term("(y1 : Real) * (y2 : Real)"))
   let t218 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.match_mp_tac(@realax.real_le_trans())), t214), t215), t216), t217)
-  let t219 = (@parser.parse_term("&0 <= x1 /\\ &0 <= x2 /\\ x1 <= y1 /\\ x2 <= y2 /\\ y1 * y2 <= y ==> x1 * x2 <= y"), t218)
+  let t219 = (@term_syntax.parse_term("real_of_num(0) <= (x1 : Real) && real_of_num(0) <= (x2 : Real) && x1 <= (y1 : Real) && x2 <= (y2 : Real) && y1 * y2 <= (y : Real) → x1 * x2 <= y"), t218)
   let t211 = @simp.rewrite_rule(@list.List([@equal.gsym(@theorems.imp_imp())]))
   mul_ineq_hi_c.set((fn(x212 : @kernel.Thm) -> @kernel.Thm raise {
     @bool.undisch_all(t211(x212))
@@ -1337,10 +1337,10 @@ fn step_43() -> Unit raise {
   let t225 = @simp.asm_rewrite_tac(@list.List([]))
   let t224 = @tactics.match_mp_tac(@real.real_le_lmul())
   let t223 = @simp.asm_rewrite_tac(@list.List([]))
-  let t222 = @tactics.exists_tac(@parser.parse_term("x * y2"))
+  let t222 = @tactics.exists_tac(@term_syntax.parse_term("(x : Real) * (y2 : Real)"))
   let t221 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t226 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t221), t222), t223), t224), t225)
-  let t227 = (@parser.parse_term("(&0 <= x <=> T) ==> y1 <= y2 ==> x * y2 <= z ==> x * y1 <= z"), t226)
+  let t227 = (@term_syntax.parse_term("(real_of_num(0) <= (x : Real)) == true → (y1 : Real) <= (y2 : Real) → x * y2 <= (z : Real) → x * y1 <= z"), t226)
   mul_ineq_pos_const_hi_c.set(@bool.undisch_all((fn(x220 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x220.0, x220.1)
   })(t227)))
