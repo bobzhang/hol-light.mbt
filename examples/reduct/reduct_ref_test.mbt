@@ -5913,98 +5913,98 @@ test "Examples/reduct matches Examples/reduct.ml" {
       #|0..0..0..3..8..33..66..135..216..425..656..1135..1662..3355..5214..solved at 7668
       #|0..0..0..2..5..16..31..54..83..120..157..224..305..406..539..solved at 710
       #|Examples/reduct quotations (92):
-      #|  fld(R) = {x | ?y. R x y \\/ R y x}
-      #|  NORMAL(R:A->A->bool) x <=> ~(?y. R x y)
-      #|  CR(R:A->A->bool) <=> forall x y1 y2. R x y1 /\\ R x y2 ==> ?z. R y1 z /\\ R y2 z
-      #|  WCR(R:A->A->bool) <=>\n   forall x y1 y2. R x y1 /\\ R x y2 ==> ?z. RTC R y1 z /\\ RTC R y2 z
-      #|  WN(R:A->A->bool) <=> forall x. ?y. RTC R x y /\\ NORMAL(R) y
-      #|  SN(R:A->A->bool) <=> ~(?seq. forall n. R (seq n) (seq (SUC n)))
-      #|  TREE(R:A->A->bool) <=>\n        (forall y. ~(TC R y y)) /\\\n        ?a. a IN fld(R) /\\\n            forall y. y IN fld(R) ==> (y = a) \\/ TC R a y /\\ ?!x. R x y
-      #|  LF(R:A->A->bool) <=> forall x. FINITE {y | R x y}
-      #|  forall R:A->A->bool. SN(R) <=> WF(INV R)
-      #|  forall R:A->A->bool. SN(R) <=> forall P. (forall x. P x ==> ?y. P y /\\ R x y) ==> ~(?x. P x)
-      #|  forall R:A->A->bool. SN(R) <=> forall P. (forall x. (forall y. R x y ==> P y) ==> P x) ==> forall x. P x
-      #|  forall R:A->A->bool. NORMAL(TC R) x <=> NORMAL(R) x
-      #|  forall R:A->A->bool. NORMAL(R) x ==> forall y. RTC R x y <=> (x = y)
-      #|  forall R:A->A->bool. WN(TC R) <=> WN R
-      #|  forall R:A->A->bool. SN(TC R) <=> SN R
-      #|  \\y:A. RTC R a y
-      #|  a:A
-      #|  forall R:A->A->bool. SN(R) ==> WN(R)
-      #|  forall R:A->A->bool. CR(R) ==> CR(RC R)
-      #|  a /\\ b ==> c <=> a ==> (b ==> c)
-      #|  forall R S. (forall x y1 y2.    R x y1 /\\ S x y2 ==> ?z:A. S y1 z /\\    R y2 z) ==>\n         (forall x y1 y2. TC R x y1 /\\ S x y2 ==> ?z:A. S y1 z /\\ TC R y2 z)
-      #|  forall R:A->A->bool. CR(R) ==> CR(TC R)
-      #|  forall R:A->A->bool. CR(R) ==> CR(RTC R)
-      #|  forall R:A->A->bool. CR(RTC R) <=>\n        forall x y. RSTC R x y ==> ?z:A. RTC R x z /\\ RTC R y z
-      #|  forall R:A->A->bool. WN(R) ==>\n     (CR(RTC R) <=> (forall x y1 y2. RTC R x y1 /\\ NORMAL(R) y1 /\\\n                               RTC R x y2 /\\ NORMAL(R) y2 ==> (y1 = y2)))
-      #|  (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
-      #|  forall R:A->A->bool. WN(R) /\\ CR(RTC R) <=> forall x. ?!y. RTC R x y /\\ NORMAL(R) y
-      #|  z1:A
-      #|  z2:A
-      #|  RTC R (x:A) y2
-      #|  RTC R (x:A) y1
-      #|  x:A
-      #|  forall R:A->A->bool. SN(R) /\\ WCR(R) ==> CR(RTC R)
-      #|  {z | (R:A->A->bool) x z}
-      #|  \\z:A. {y | TC R z y}
-      #|  {y:A | TC(R) x y} = {y | R x y} UNION\n                         (UNIONS { s | ?z. R x z /\\ (s = {y | TC(R) z y})})
-      #|  forall R. LF(R) /\\ SN(R) ==> forall x:A. FINITE {y | TC(R) x y}
-      #|  \\x:A. x = z
-      #|  R:A->A->bool
-      #|  TC(R:A->A->bool)
-      #|  forall R:A->A->bool. SN(R) ==> forall z. ~(TC(R) z z)
-      #|  forall R:A->A->bool. forall n x y. RELPOW n R x y ==> RTC(R) x y
-      #|  forall R x:A. {y:A | RTC(R) x y} = x INSERT {y:A | TC(R) x y}
-      #|  forall s:A->bool t m n. s HAS_SIZE m /\\ t HAS_SIZE n /\\ s SUBSET t ==> m <= n
-      #|  SUC (q + SUC (SUC d)) <= m
-      #|  (f:num->A)(q + SUC d)
-      #|  SUC (SUC q) <= m
-      #|  d:num
-      #|  d:num
-      #|  d:num
-      #|  q < p
-      #|  SUC p <= m
-      #|  TC(R) ((f:num->A) q) (f p)
-      #|  q:num
-      #|  f p IN {z:A | ?i:num. i < p /\\ (z = f i)}
-      #|  SUC p <= m
-      #|  {z:A | ?i. i < p /\\ (z = f i)} HAS_SIZE p
-      #|  {z:A | ?i. i < SUC p /\\ (z = f i)} =\n                f(p) INSERT {z | ?i. i < p /\\ (z = f i)}
-      #|  {y:A | RTC(R) x y}
-      #|  {z:A | ?i. i < m /\\ (z = f i)}
-      #|  forall p. p <= m ==> {z:A | ?i. i < p /\\ (z = f i)} HAS_SIZE p
-      #|  {z:A | ?i:num. i < m /\\ (z = f i)} SUBSET {y | RTC R x y}
-      #|  forall i. i <= m ==> RELPOW i R (x:A) (f i)
-      #|  f:num->A
-      #|  forall R. (forall z. ~(TC R z z))\n       ==> forall n. {y:A | RTC(R) x y} HAS_SIZE n\n               ==> forall m y. RELPOW m R x y ==> m <= n
-      #|  m:num
-      #|  CARD {y:A | RTC(R) x y}
-      #|  forall R (x:A). FINITE {y | RTC(R) x y} /\\\n             (forall z. ~(TC R z z))\n             ==> ?N. forall n y. RELPOW n R x y ==> n <= N
-      #|  forall n. RELPOW n R (f 0 :A) (f n)
-      #|  f(SUC N):A
-      #|  SUC N
-      #|  N:num
-      #|  (f:num->A) 0
-      #|  f:num->A
-      #|  forall R. (forall x:A. ?N. forall n y. RELPOW n R x y ==> n <= N) ==> SN(R)
-      #|  x:A
-      #|  x:A
-      #|  forall R. LF(R) ==> (SN(R) <=> forall x:A. ?N. forall n y. RELPOW n R x y ==> n <= N)
-      #|  x:A
-      #|  a:A
-      #|  a:A
-      #|  forall R. TREE(R) ==> ?a:A. fld(R) = {y | RTC(R) a y}
-      #|  a:A
-      #|  a:A
-      #|  a:A
-      #|  forall R:A->A->bool. TREE(R) /\\ LF(R) /\\ SN(R) ==> FINITE (fld R)
-      #|  JOINABLE R s t <=> ?u. RTC R s u /\\ RTC R t u
-      #|  forall R t. JOINABLE R t t
-      #|  forall R s t. JOINABLE R s t <=> JOINABLE R t s
-      #|  forall R s t u. R s t /\\ JOINABLE R t u ==> JOINABLE R s u
-      #|  forall R. CR(RTC R) ==> forall x:A y. RSTC(R) x y <=> JOINABLE(R) x y
-      #|  forall R. CR(RTC R) <=>\n       forall x y z. JOINABLE(R) x y /\\ JOINABLE(R) y z ==> JOINABLE(R) x z
+      #|  (fld : ((_, _) -> Bool, _) -> Bool)((R : (_, _) -> Bool)) == {(x : _) | \226\136\131 y : _, R(x, y) || R(y, x)}
+      #|  (NORMAL : ((A, A) -> Bool, A) -> Bool)((R : (A, A) -> Bool), (x : A)) == !(\226\136\131 y : A, R(x, y))
+      #|  (CR : ((A, A) -> Bool) -> Bool)((R : (A, A) -> Bool)) == (\226\136\128 x : A, \226\136\128 y1 : A, \226\136\128 y2 : A, R(x, y1) && R(x, y2) \226\134\146 (\226\136\131 z : A, R(y1, z) && R(y2, z)))
+      #|  (WCR : ((A, A) -> Bool) -> Bool)((R : (A, A) -> Bool)) == (\226\136\128 x : A, \226\136\128 y1 : A, \226\136\128 y2 : A, R(x, y1) && R(x, y2) \226\134\146 (\226\136\131 z : A, RTC(R, y1, z) && RTC(R, y2, z)))
+      #|  (WN : ((A, A) -> Bool) -> Bool)((R : (A, A) -> Bool)) == (\226\136\128 x : A, \226\136\131 y : A, RTC(R, x, y) && NORMAL(R, y))
+      #|  (SN : ((A, A) -> Bool) -> Bool)((R : (A, A) -> Bool)) == !(\226\136\131 seq : (Num) -> A, \226\136\128 n : Num, R(seq(n), seq(SUC(n))))
+      #|  (TREE : ((A, A) -> Bool) -> Bool)((R : (A, A) -> Bool)) == ((\226\136\128 y : A, !TC(R, y, y)) && (\226\136\131 a : A, IN(a, fld(R)) && (\226\136\128 y : A, IN(y, fld(R)) \226\134\146 y == a || TC(R, a, y) && existsunique((x : A) => R(x, y)))))
+      #|  (LF : ((A, A) -> Bool) -> Bool)((R : (A, A) -> Bool)) == (\226\136\128 x : A, FINITE({(y : A) | R(x, y)}))
+      #|  \226\136\128 R : (A, A) -> Bool, SN(R) == WF(INV(R))
+      #|  \226\136\128 R : (A, A) -> Bool, SN(R) == (\226\136\128 P : (A) -> Bool, (\226\136\128 x : A, P(x) \226\134\146 (\226\136\131 y : A, P(y) && R(x, y))) \226\134\146 !(\226\136\131 x : A, P(x)))
+      #|  \226\136\128 R : (A, A) -> Bool, SN(R) == (\226\136\128 P : (A) -> Bool, (\226\136\128 x : A, (\226\136\128 y : A, R(x, y) \226\134\146 P(y)) \226\134\146 P(x)) \226\134\146 (\226\136\128 x : A, P(x)))
+      #|  \226\136\128 R : (A, A) -> Bool, NORMAL(TC(R), (x : A)) == NORMAL(R, x)
+      #|  \226\136\128 R : (A, A) -> Bool, NORMAL(R, (x : A)) \226\134\146 (\226\136\128 y : A, RTC(R, x, y) == (x == y))
+      #|  \226\136\128 R : (A, A) -> Bool, WN(TC(R)) == WN(R)
+      #|  \226\136\128 R : (A, A) -> Bool, SN(TC(R)) == SN(R)
+      #|  (y : A) => RTC((R : (A, A) -> Bool), (a : A), y)
+      #|  (a : A)
+      #|  \226\136\128 R : (A, A) -> Bool, SN(R) \226\134\146 WN(R)
+      #|  \226\136\128 R : (A, A) -> Bool, CR(R) \226\134\146 CR(RC(R))
+      #|  ((a : Bool) && (b : Bool) \226\134\146 (c : Bool)) == (a \226\134\146 b \226\134\146 c)
+      #|  \226\136\128 R : (A, A) -> Bool, \226\136\128 S : (A, A) -> Bool, (\226\136\128 x : A, \226\136\128 y1 : A, \226\136\128 y2 : A, R(x, y1) && S(x, y2) \226\134\146 (\226\136\131 z : A, S(y1, z) && R(y2, z))) \226\134\146 (\226\136\128 x : A, \226\136\128 y1 : A, \226\136\128 y2 : A, TC(R, x, y1) && S(x, y2) \226\134\146 (\226\136\131 z : A, S(y1, z) && TC(R, y2, z)))
+      #|  \226\136\128 R : (A, A) -> Bool, CR(R) \226\134\146 CR(TC(R))
+      #|  \226\136\128 R : (A, A) -> Bool, CR(R) \226\134\146 CR(RTC(R))
+      #|  \226\136\128 R : (A, A) -> Bool, CR(RTC(R)) == (\226\136\128 x : A, \226\136\128 y : A, RSTC(R, x, y) \226\134\146 (\226\136\131 z : A, RTC(R, x, z) && RTC(R, y, z)))
+      #|  \226\136\128 R : (A, A) -> Bool, WN(R) \226\134\146 CR(RTC(R)) == (\226\136\128 x : A, \226\136\128 y1 : A, \226\136\128 y2 : A, RTC(R, x, y1) && NORMAL(R, y1) && RTC(R, x, y2) && NORMAL(R, y2) \226\134\146 y1 == y2)
+      #|  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a && b) == (a && c)
+      #|  \226\136\128 R : (A, A) -> Bool, (WN(R) && CR(RTC(R))) == (\226\136\128 x : A, existsunique((y : A) => RTC(R, x, y) && NORMAL(R, y)))
+      #|  (z1 : A)
+      #|  (z2 : A)
+      #|  RTC((R : (A, A) -> Bool), (x : A), (y2 : A))
+      #|  RTC((R : (A, A) -> Bool), (x : A), (y1 : A))
+      #|  (x : A)
+      #|  \226\136\128 R : (A, A) -> Bool, SN(R) && WCR(R) \226\134\146 CR(RTC(R))
+      #|  {(z : A) | (R : (A, A) -> Bool)((x : A), z)}
+      #|  (z : A) => {(y : A) | TC((R : (A, A) -> Bool), z, y)}
+      #|  {(y : A) | TC((R : (A, A) -> Bool), (x : A), y)} == UNION({(y : A) | R(x, y)}, UNIONS({(s : (A) -> Bool) | \226\136\131 z : A, R(x, z) && s == {(y : A) | TC(R, z, y)}}))
+      #|  \226\136\128 R : (A, A) -> Bool, LF(R) && SN(R) \226\134\146 (\226\136\128 x : A, FINITE({(y : A) | TC(R, x, y)}))
+      #|  (x : A) => x == (z : A)
+      #|  (R : (A, A) -> Bool)
+      #|  TC((R : (A, A) -> Bool))
+      #|  \226\136\128 R : (A, A) -> Bool, SN(R) \226\134\146 (\226\136\128 z : A, !TC(R, z, z))
+      #|  \226\136\128 R : (A, A) -> Bool, \226\136\128 n : Num, \226\136\128 x : A, \226\136\128 y : A, RELPOW(n, R, x, y) \226\134\146 RTC(R, x, y)
+      #|  \226\136\128 R : (A, A) -> Bool, \226\136\128 x : A, {(y : A) | RTC(R, x, y)} == INSERT(x, {(y : A) | TC(R, x, y)})
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, HAS_SIZE(s, m) && HAS_SIZE(t, n) && SUBSET(s, t) \226\134\146 m <= n
+      #|  SUC((q : Num) + SUC(SUC((d : Num)))) <= (m : Num)
+      #|  (f : (Num) -> A)((q : Num) + SUC((d : Num)))
+      #|  SUC(SUC((q : Num))) <= (m : Num)
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  (q : Num) < (p : Num)
+      #|  SUC((p : Num)) <= (m : Num)
+      #|  TC((R : (A, A) -> Bool), (f : (Num) -> A)((q : Num)), f((p : Num)))
+      #|  (q : Num)
+      #|  IN((f : (Num) -> A)((p : Num)), {(z : A) | \226\136\131 i : Num, i < p && z == f(i)})
+      #|  SUC((p : Num)) <= (m : Num)
+      #|  HAS_SIZE({(z : A) | \226\136\131 i : Num, i < (p : Num) && z == (f : (Num) -> A)(i)}, p)
+      #|  {(z : A) | \226\136\131 i : Num, i < SUC((p : Num)) && z == (f : (Num) -> A)(i)} == INSERT(f(p), {(z : A) | \226\136\131 i : Num, i < p && z == f(i)})
+      #|  {(y : A) | RTC((R : (A, A) -> Bool), (x : A), y)}
+      #|  {(z : A) | \226\136\131 i : Num, i < (m : Num) && z == (f : (Num) -> A)(i)}
+      #|  \226\136\128 p : Num, p <= (m : Num) \226\134\146 HAS_SIZE({(z : A) | \226\136\131 i : Num, i < p && z == (f : (Num) -> A)(i)}, p)
+      #|  SUBSET({(z : A) | \226\136\131 i : Num, i < (m : Num) && z == (f : (Num) -> A)(i)}, {(y : A) | RTC((R : (A, A) -> Bool), (x : A), y)})
+      #|  \226\136\128 i : Num, i <= (m : Num) \226\134\146 RELPOW(i, (R : (A, A) -> Bool), (x : A), (f : (Num) -> A)(i))
+      #|  (f : (Num) -> A)
+      #|  \226\136\128 R : (A, A) -> Bool, (\226\136\128 z : A, !TC(R, z, z)) \226\134\146 (\226\136\128 n : Num, HAS_SIZE({(y : A) | RTC(R, (x : A), y)}, n) \226\134\146 (\226\136\128 m : Num, \226\136\128 y : A, RELPOW(m, R, x, y) \226\134\146 m <= n))
+      #|  (m : Num)
+      #|  CARD({(y : A) | RTC((R : (A, A) -> Bool), (x : A), y)})
+      #|  \226\136\128 R : (A, A) -> Bool, \226\136\128 x : A, FINITE({(y : A) | RTC(R, x, y)}) && (\226\136\128 z : A, !TC(R, z, z)) \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 y : A, RELPOW(n, R, x, y) \226\134\146 n <= N)
+      #|  \226\136\128 n : Num, RELPOW(n, (R : (A, A) -> Bool), (f : (Num) -> A)(0), f(n))
+      #|  (f : (Num) -> A)(SUC((N : Num)))
+      #|  SUC((N : Num))
+      #|  (N : Num)
+      #|  (f : (Num) -> A)(0)
+      #|  (f : (Num) -> A)
+      #|  \226\136\128 R : (A, A) -> Bool, (\226\136\128 x : A, \226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 y : A, RELPOW(n, R, x, y) \226\134\146 n <= N) \226\134\146 SN(R)
+      #|  (x : A)
+      #|  (x : A)
+      #|  \226\136\128 R : (A, A) -> Bool, LF(R) \226\134\146 SN(R) == (\226\136\128 x : A, \226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 y : A, RELPOW(n, R, x, y) \226\134\146 n <= N)
+      #|  (x : A)
+      #|  (a : A)
+      #|  (a : A)
+      #|  \226\136\128 R : (A, A) -> Bool, TREE(R) \226\134\146 (\226\136\131 a : A, fld(R) == {(y : A) | RTC(R, a, y)})
+      #|  (a : A)
+      #|  (a : A)
+      #|  (a : A)
+      #|  \226\136\128 R : (A, A) -> Bool, TREE(R) && LF(R) && SN(R) \226\134\146 FINITE(fld(R))
+      #|  (JOINABLE : ((_, _) -> Bool, _, _) -> Bool)((R : (_, _) -> Bool), (s : _), (t : _)) == (\226\136\131 u : _, RTC(R, s, u) && RTC(R, t, u))
+      #|  \226\136\128 R : (_, _) -> Bool, \226\136\128 t : _, JOINABLE(R, t, t)
+      #|  \226\136\128 R : (_, _) -> Bool, \226\136\128 s : _, \226\136\128 t : _, JOINABLE(R, s, t) == JOINABLE(R, t, s)
+      #|  \226\136\128 R : (_, _) -> Bool, \226\136\128 s : _, \226\136\128 t : _, \226\136\128 u : _, R(s, t) && JOINABLE(R, t, u) \226\134\146 JOINABLE(R, s, u)
+      #|  \226\136\128 R : (A, A) -> Bool, CR(RTC(R)) \226\134\146 (\226\136\128 x : A, \226\136\128 y : A, RSTC(R, x, y) == JOINABLE(R, x, y))
+      #|  \226\136\128 R : (_, _) -> Bool, CR(RTC(R)) == (\226\136\128 x : _, \226\136\128 y : _, \226\136\128 z : _, JOINABLE(R, x, y) && JOINABLE(R, y, z) \226\134\146 JOINABLE(R, x, z))
       #|fld =  |- (#forall:fun(fun(fun('?1,fun('?1,bool)),bool),bool) (\R:fun('?1,fun('?1,bool)). ((#=:fun(fun('?1,bool),fun(fun('?1,bool),bool)) (#fld:fun(fun('?1,fun('?1,bool)),fun('?1,bool)) R:fun('?1,fun('?1,bool)))) (#GSPEC:fun(fun('?1,bool),fun('?1,bool)) (\GEN%PVAR%1:'?1. (#?:fun(fun('?1,bool),bool) (\x:'?1. (((#SETSPEC:fun('?1,fun(bool,fun('?1,bool))) GEN%PVAR%1:'?1) (#?:fun(fun('?1,bool),bool) (\y:'?1. ((#\/:fun(bool,fun(bool,bool)) ((R:fun('?1,fun('?1,bool)) x:'?1) y:'?1)) ((R:fun('?1,fun('?1,bool)) y:'?1) x:'?1))))) x:'?1))))))))
       #|NORMAL =  |- (#forall:fun(fun(fun('A,fun('A,bool)),bool),bool) (\R:fun('A,fun('A,bool)). (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun(bool,fun(bool,bool)) ((#NORMAL:fun(fun('A,fun('A,bool)),fun('A,bool)) R:fun('A,fun('A,bool))) x:'A)) (#~:fun(bool,bool) (#?:fun(fun('A,bool),bool) (\y:'A. ((R:fun('A,fun('A,bool)) x:'A) y:'A)))))))))
       #|CR =  |- (#forall:fun(fun(fun('A,fun('A,bool)),bool),bool) (\R:fun('A,fun('A,bool)). ((#=:fun(bool,fun(bool,bool)) (#CR:fun(fun('A,fun('A,bool)),bool) R:fun('A,fun('A,bool)))) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y1:'A. (#forall:fun(fun('A,bool),bool) (\y2:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y1:'A)) ((R:fun('A,fun('A,bool)) x:'A) y2:'A))) (#?:fun(fun('A,bool),bool) (\z:'A. ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) y1:'A) z:'A)) ((R:fun('A,fun('A,bool)) y2:'A) z:'A))))))))))))))
