@@ -12841,348 +12841,348 @@ Warning: inventing type variables
 0..0..1..2..7..15..31..77..solved at 85
 0..0..solved at 2
 100/four_squares quotations (342):
-  involution f s = forall x. x IN s ==> f(x) IN s /\\ (f(f(x)) = x)
-  forall f s. involution f s ==> (IMAGE f s = s)
-  involution f s /\\ a IN s /\\ (f a = a) ==> involution f (s DELETE a)
-  involution f s /\\ a IN s ==> involution f (s DIFF {a, (f a)})
-  involution f s ==> involution f {x | x IN s /\\ ~(f x = x)}
-  forall f s t. involution f s /\\ (forall x. x IN t ==> f(x) IN t) /\\ t SUBSET s\n           ==> involution f t
-  forall s. FINITE(s) /\\ involution f s /\\ (forall x:A. x IN s ==> ~(f x = x))\n       ==> EVEN(CARD s)
-  s = (a:A) INSERT (s DELETE a)
-  FINITE(s) /\\ involution f s /\\ (?!a:A. a IN s /\\ (f a = a))\n   ==> ODD(CARD s)
-  forall n s. FINITE(s) /\\ involution f s /\\ ODD(CARD s)\n         ==> ?a. a IN s /\\ (f a = a)
-  forall f g s. FINITE(s) /\\ involution f s /\\ involution g s /\\\n           (?!x. x IN s /\\ (f x = x)) ==> ?x. x IN s /\\ (g x = x)
-  zset(a) = {(x,y,z) | x EXP 2 + 4 * y * z = a}
-  zag(x,y,z) =\n        if x + z < y then (x + 2 * z,z,y - (x + z))\n        else if x < 2 * y then (2 * y - x, y, (x + z) - y)\n        else (x - 2 * y,(x + z) - y, y)
-  tag((x,y,z):num#num#num) = (x,z,y)
-  0 < x /\\ 0 < y /\\ 0 < z ==> (zag(zag(x,y,z)) = (x,y,z))
-  (a,b,c) IN {(x,y,z) | P x y z} <=> P a b c
-  n = n * 1
-  n:num
-  n = 1
-  n = 0
-  forall n. ~prime(n * n)
-  n = 0
+  (involution : ((_) -> _, (_) -> Bool) -> Bool)((f : (_) -> _), (s : (_) -> Bool)) == (\226\136\128 x : _, IN(x, s) \226\134\146 IN(f(x), s) && f(f(x)) == x)
+  \226\136\128 f : (_) -> _, \226\136\128 s : (_) -> Bool, involution(f, s) \226\134\146 IMAGE(f, s) == s
+  involution((f : (_) -> _), (s : (_) -> Bool)) && IN((a : _), s) && f(a) == a \226\134\146 involution(f, DELETE(s, a))
+  involution((f : (_) -> _), (s : (_) -> Bool)) && IN((a : _), s) \226\134\146 involution(f, DIFF(s, {a, f(a)}))
+  involution((f : (_) -> _), (s : (_) -> Bool)) \226\134\146 involution(f, {(x : _) | IN(x, s) && !(f(x) == x)})
+  \226\136\128 f : (_) -> _, \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, involution(f, s) && (\226\136\128 x : _, IN(x, t) \226\134\146 IN(f(x), t)) && SUBSET(t, s) \226\134\146 involution(f, t)
+  \226\136\128 s : (A) -> Bool, FINITE(s) && involution((f : (A) -> A), s) && (\226\136\128 x : A, IN(x, s) \226\134\146 !(f(x) == x)) \226\134\146 EVEN(CARD(s))
+  (s : (A) -> Bool) == INSERT((a : A), DELETE(s, a))
+  FINITE((s : (A) -> Bool)) && involution((f : (A) -> A), s) && existsunique((a : A) => IN(a, s) && f(a) == a) \226\134\146 ODD(CARD(s))
+  \226\136\128 n : _, \226\136\128 s : (_) -> Bool, FINITE(s) && involution((f : (_) -> _), s) && ODD(CARD(s)) \226\134\146 (\226\136\131 a : _, IN(a, s) && f(a) == a)
+  \226\136\128 f : (_) -> _, \226\136\128 g : (_) -> _, \226\136\128 s : (_) -> Bool, FINITE(s) && involution(f, s) && involution(g, s) && existsunique((x : _) => IN(x, s) && f(x) == x) \226\134\146 (\226\136\131 x : _, IN(x, s) && g(x) == x)
+  (zset : (Num, (Num, Num, Num)) -> Bool)((a : Num)) == {((x : Num), (y : Num), (z : Num)) | EXP(x, 2) + 4 * (y * z) == a}
+  (zag : ((Num, Num, Num)) -> (Num, Num, Num))(((x : Num), (y : Num), (z : Num))) == (if x + z < y { (x + 2 * z, z, y - (x + z)) } else { if x < 2 * y { (2 * y - x, y, x + z - y) } else { (x - 2 * y, x + z - y, y) } })
+  (tag : ((Num, Num, Num)) -> (Num, Num, Num))(((x : Num), (y : Num), (z : Num))) == (x, z, y)
+  0 < (x : Num) && 0 < (y : Num) && 0 < (z : Num) \226\134\146 zag(zag((x, y, z))) == (x, y, z)
+  IN(((a : _), (b : _), (c : _)), {((x : _), (y : _), (z : _)) | (P : (_, _, _) -> Bool)(x, y, z)}) == P(a, b, c)
+  (n : Num) == n * 1
+  (n : Num)
+  (n : Num) == 1
+  (n : Num) == 0
+  \226\136\128 n : Num, !prime(n * n)
+  (n : Num) == 0
   2 * 2
   2
-  forall n. ~prime(4 * n)
-  ~(0 < x) = (x = 0)
-  prime(x EXP 2 + 4 * y * z) ==> 0 < x /\\ 0 < y /\\ 0 < z
-  z:num
-  y:num
-  x:num
-  forall p. prime(p) ==> involution zag (zset(p))
-  forall a. involution tag (zset a)
-  (zag(x,y,z) = (x,y,z)) ==> (y = x)
-  0 < a ==> 1 <= 4 * a
-  y <= 4 * a * y <=> 1 * y <= (4 * a) * y
-  y <= z ==> y <= x + z
-  (a <= b ==> a <= b + c)
-  0 < y /\\ 0 < z /\\ (x EXP 2 + 4 * y * z = p)\n   ==> x <= p /\\ y <= p /\\ z <= p
-  z:num
-  y:num
-  z:num
-  y:num
-  x:num
-  x < p + 1 <=> x <= p
-  z:num
-  y:num
-  x:num
-  a /\\ b ==> c <=> b ==> a ==> c
-  p + 1
-  forall p. prime(p) ==> FINITE(zset p)
-  x = 1
-  4 * k + 1 = x * (4 * z + x)
-  ~(z = 0)
-  z = 0
-  4 * z + x = 1
-  4 * k + 1 = x * (4 * z + x)
-  (a = a * b) = (a * b = a * 1)
-  4 * k + 1 = 1 * (4 * z + 1)
-  x:num
-  prime p
-  x * x + 4 * x * z = x * (4 * z + x)
-  x EXP 2 + 4 * x * z = 4 * k + 1
-  ~(1 + k < 1)
-  z:num
-  y:num
-  x:num
-  1,1,k:num
+  \226\136\128 n : Num, !prime(4 * n)
+  !(0 < (x : Num)) == (x == 0)
+  prime(EXP((x : Num), 2) + 4 * ((y : Num) * (z : Num))) \226\134\146 0 < x && 0 < y && 0 < z
+  (z : Num)
+  (y : Num)
+  (x : Num)
+  \226\136\128 p : Num, prime(p) \226\134\146 involution(zag, zset(p))
+  \226\136\128 a : Num, involution(tag, zset(a))
+  zag(((x : Num), (y : Num), (z : Num))) == (x, y, z) \226\134\146 y == x
+  0 < (a : Num) \226\134\146 1 <= 4 * a
+  ((y : Num) <= 4 * ((a : Num) * y)) == (1 * y <= 4 * a * y)
+  (y : Num) <= (z : Num) \226\134\146 y <= (x : Num) + z
+  (a : Num) <= (b : Num) \226\134\146 a <= b + (c : Num)
+  0 < (y : Num) && 0 < (z : Num) && EXP((x : Num), 2) + 4 * (y * z) == (p : Num) \226\134\146 x <= p && y <= p && z <= p
+  (z : Num)
+  (y : Num)
+  (z : Num)
+  (y : Num)
+  (x : Num)
+  ((x : Num) < (p : Num) + 1) == (x <= p)
+  (z : Num)
+  (y : Num)
+  (x : Num)
+  ((a : Bool) && (b : Bool) \226\134\146 (c : Bool)) == (b \226\134\146 a \226\134\146 c)
+  (p : Num) + 1
+  \226\136\128 p : Num, prime(p) \226\134\146 FINITE(zset(p))
+  (x : Num) == 1
+  4 * (k : Num) + 1 == (x : Num) * (4 * (z : Num) + x)
+  !((z : Num) == 0)
+  (z : Num) == 0
+  4 * (z : Num) + (x : Num) == 1
+  4 * (k : Num) + 1 == (x : Num) * (4 * (z : Num) + x)
+  ((a : Num) == a * (b : Num)) == (a * b == a * 1)
+  4 * (k : Num) + 1 == 1 * (4 * (z : Num) + 1)
+  (x : Num)
+  prime((p : Num))
+  (x : Num) * x + 4 * (x * (z : Num)) == x * (4 * z + x)
+  EXP((x : Num), 2) + 4 * (x * (z : Num)) == 4 * (k : Num) + 1
+  !(1 + (k : Num) < 1)
+  (z : Num)
+  (y : Num)
+  (x : Num)
+  (1, 1, (k : Num))
   zag
-  4 * x * y = (2 * x) * (2 * y)
-  ?t. t IN zset(p) /\\ (tag(t) = t)
-  forall p k. prime(p) /\\ (p = 4 * k + 1) ==> ?x y. p = x EXP 2 + y EXP 2
-  CARD(t:B->bool)
-  forall t. t < 2 * s /\\ p <= t ==> ~(p = s + s)
-  (~a ==> c) /\\ ~b ==> (a ==> b) ==> c
-  (CARD(IMAGE (f:A->B) s) = CARD s) /\\\n                (CARD(IMAGE (g:A->B) s) = CARD s)
-  IMAGE (g:A->B) s
-  IMAGE (f:A->B) s
-  forall f:A->B g s t.\n        FINITE(s) /\\ FINITE(t) /\\\n        (forall x. x IN s ==> f(x) IN t) /\\\n        (forall x y. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y)) /\\\n        (forall x. x IN s ==> g(x) IN t) /\\\n        (forall x y. x IN s /\\ y IN s /\\ (g x = g y) ==> (x = y)) /\\\n        CARD(t) < 2 * CARD(s)\n        ==> ?x y. x IN s /\\ y IN s /\\ (f x = g y)
-  2 * k + 1 < 2 * (k + 1)
-  2 * x < 2 * k + 1 <=> x < k + 1
-  {x:num | x < 2 * k + 1}
-  {x:num | 2 * x < 2 * k + 1}
-  g:num->num
-  f:num->num
-  k:num
-  forall f g p.\n        ODD(p) /\\\n        (forall x. 2 * x < p ==> f(x) < p) /\\\n        (forall x y. 2 * x < p /\\ 2 * y < p /\\ (f x = f y) ==> (x = y)) /\\\n        (forall x. 2 * x < p ==> g(x) < p) /\\\n        (forall x y. 2 * x < p /\\ 2 * y < p /\\ (g x = g y) ==> (x = y))\n        ==> ?x y. 2 * x < p /\\ 2 * y < p /\\ (f x = g y)
-  2 * (x + d) < p
-  x * x:num
-  forall a:num. (a + b + d = a + c) ==> (b = c - d)
-  n - m:num
-  p divides d \\/ p divides (2 * x + d)
-  forall p x d. prime(p) /\\ 2 * (x + d) < p /\\\n           ((x + d) * (x + d) + m * p = x * x + n * p)\n           ==> (d = 0)
-  (x + d = x) = (d = 0)
-  d:num
-  y:num
-  x:num
-  (x2 + a = xp + b:num) /\\ (y2 + a = yp + b)\n    ==> (x2 + yp = y2 + xp)
-  (x EXP 2 + a = (x EXP 2 + a) DIV p * p + (x EXP 2 + a) MOD p) /\\\n    (y EXP 2 + a = (y EXP 2 + a) DIV p * p + (y EXP 2 + a) MOD p)
-  x < a ==> ~(a = 0)
-  forall p. prime(p)\n   ==> (forall x. 2 * x < p ==> (x EXP 2 + a) MOD p < p) /\\\n       (forall x y. 2 * x < p /\\ 2 * y < p /\\\n              ((x EXP 2 + a) MOD p = (y EXP 2 + a) MOD p)\n              ==> (x = y))
-  x < p /\\ y < p /\\ (p - 1 - x = p - 1 - y) ==> (x = y)
-  2 * x < p ==> p - 1 - y < p
-  (forall x. 2 * x < p ==> f(x) < p) /\\\n   (forall x y. 2 * x < p /\\ 2 * y < p /\\ (f x = f y) ==> (x = y))\n   ==> (forall x. 2 * x < p ==> p - 1 - f(x) < p) /\\\n       (forall x y. 2 * x < p /\\ 2 * y < p /\\ (p - 1 - f(x) = p - 1 - f(y))\n              ==> (x = y))
-  x EXP 2 + y EXP 2 + a + 1
-  y:num
-  x:num
-  (x EXP 2 + y EXP 2 + a + 1) DIV p
-  ~(p = 0)
+  4 * ((x : Num) * (y : Num)) == 2 * x * (2 * y)
+  \226\136\131 t : (Num, Num, Num), IN(t, zset((p : Num))) && tag(t) == t
+  \226\136\128 p : Num, \226\136\128 k : Num, prime(p) && p == 4 * k + 1 \226\134\146 (\226\136\131 x : Num, \226\136\131 y : Num, p == EXP(x, 2) + EXP(y, 2))
+  CARD((t : (B) -> Bool))
+  \226\136\128 t : Num, t < 2 * (s : Num) && (p : Num) <= t \226\134\146 !(p == s + s)
+  (!(a : Bool) \226\134\146 (c : Bool)) && !(b : Bool) \226\134\146 (a \226\134\146 b) \226\134\146 c
+  CARD(IMAGE((f : (A) -> B), (s : (A) -> Bool))) == CARD(s) && CARD(IMAGE((g : (A) -> B), s)) == CARD(s)
+  IMAGE((g : (A) -> B), (s : (A) -> Bool))
+  IMAGE((f : (A) -> B), (s : (A) -> Bool))
+  \226\136\128 f : (A) -> B, \226\136\128 g : (A) -> B, \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, FINITE(s) && FINITE(t) && (\226\136\128 x : A, IN(x, s) \226\134\146 IN(f(x), t)) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && f(x) == f(y) \226\134\146 x == y) && (\226\136\128 x : A, IN(x, s) \226\134\146 IN(g(x), t)) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && g(x) == g(y) \226\134\146 x == y) && CARD(t) < 2 * CARD(s) \226\134\146 (\226\136\131 x : A, \226\136\131 y : A, IN(x, s) && IN(y, s) && f(x) == g(y))
+  2 * (k : Num) + 1 < 2 * (k + 1)
+  (2 * (x : Num) < 2 * (k : Num) + 1) == (x < k + 1)
+  {(x : Num) | x < 2 * (k : Num) + 1}
+  {(x : Num) | 2 * x < 2 * (k : Num) + 1}
+  (g : (Num) -> Num)
+  (f : (Num) -> Num)
+  (k : Num)
+  \226\136\128 f : (Num) -> Num, \226\136\128 g : (Num) -> Num, \226\136\128 p : Num, ODD(p) && (\226\136\128 x : Num, 2 * x < p \226\134\146 f(x) < p) && (\226\136\128 x : Num, \226\136\128 y : Num, 2 * x < p && 2 * y < p && f(x) == f(y) \226\134\146 x == y) && (\226\136\128 x : Num, 2 * x < p \226\134\146 g(x) < p) && (\226\136\128 x : Num, \226\136\128 y : Num, 2 * x < p && 2 * y < p && g(x) == g(y) \226\134\146 x == y) \226\134\146 (\226\136\131 x : Num, \226\136\131 y : Num, 2 * x < p && 2 * y < p && f(x) == g(y))
+  2 * ((x : Num) + (d : Num)) < (p : Num)
+  (x : Num) * x
+  \226\136\128 a : Num, a + ((b : Num) + (d : Num)) == a + (c : Num) \226\134\146 b == c - d
+  (n : Num) - (m : Num)
+  divides((p : Num), (d : Num)) || divides(p, 2 * (x : Num) + d)
+  \226\136\128 p : Num, \226\136\128 x : Num, \226\136\128 d : Num, prime(p) && 2 * (x + d) < p && (x + d) * (x + d) + (m : Num) * p == x * x + (n : Num) * p \226\134\146 d == 0
+  ((x : Num) + (d : Num) == x) == (d == 0)
+  (d : Num)
+  (y : Num)
+  (x : Num)
+  (x2 : Num) + (a : Num) == (xp : Num) + (b : Num) && (y2 : Num) + a == (yp : Num) + b \226\134\146 x2 + yp == y2 + xp
+  EXP((x : Num), 2) + (a : Num) == DIV(EXP(x, 2) + a, (p : Num)) * p + MOD(EXP(x, 2) + a, p) && EXP((y : Num), 2) + a == DIV(EXP(y, 2) + a, p) * p + MOD(EXP(y, 2) + a, p)
+  (x : Num) < (a : Num) \226\134\146 !(a == 0)
+  \226\136\128 p : Num, prime(p) \226\134\146 (\226\136\128 x : Num, 2 * x < p \226\134\146 MOD(EXP(x, 2) + (a : Num), p) < p) && (\226\136\128 x : Num, \226\136\128 y : Num, 2 * x < p && 2 * y < p && MOD(EXP(x, 2) + a, p) == MOD(EXP(y, 2) + a, p) \226\134\146 x == y)
+  (x : Num) < (p : Num) && (y : Num) < p && p - 1 - x == p - 1 - y \226\134\146 x == y
+  2 * (x : Num) < (p : Num) \226\134\146 p - 1 - (y : Num) < p
+  (\226\136\128 x : Num, 2 * x < (p : Num) \226\134\146 (f : (Num) -> Num)(x) < p) && (\226\136\128 x : Num, \226\136\128 y : Num, 2 * x < p && 2 * y < p && f(x) == f(y) \226\134\146 x == y) \226\134\146 (\226\136\128 x : Num, 2 * x < p \226\134\146 p - 1 - f(x) < p) && (\226\136\128 x : Num, \226\136\128 y : Num, 2 * x < p && 2 * y < p && p - 1 - f(x) == p - 1 - f(y) \226\134\146 x == y)
+  EXP((x : Num), 2) + (EXP((y : Num), 2) + ((a : Num) + 1))
+  (y : Num)
+  (x : Num)
+  DIV(EXP((x : Num), 2) + (EXP((y : Num), 2) + ((a : Num) + 1)), (p : Num))
+  !((p : Num) == 0)
   1
-  p MOD p = 0
-  (x2 + a = xd * p + xm) /\\ (y2 = yd * p + ym)\n       ==> (x2 + y2 + a + 1 = (xm + ym + 1) + (xd + yd) * p)
-  (x EXP 2 + a) DIV p + (y EXP 2) DIV p
-  ((x EXP 2 + a) MOD p + (y EXP 2 + 0) MOD p + 1) MOD p =\n    (x EXP 2 + y EXP 2 + a + 1) MOD p
-  (MOD)
-  p:num
-  (x = p - 1 - y) ==> y < p ==> (x + y + 1 = p)
-  (a /\\ b) /\\ (c /\\ d) ==> a /\\ b /\\ c /\\ d
-  p:num
-  \\x. p - 1 - (x EXP 2 + 0) MOD p
-  \\x. (x EXP 2 + a) MOD p
-  ~(p = 0)
-  forall a p. prime(p) /\\ ODD(p)\n         ==> ?n x y. 2 * x < p /\\ 2 * y < p /\\\n                     (n * p = x EXP 2 + y EXP 2 + a + 1)
-  p:num
-  a - 1
-  ~(a = 0) ==> (a = (a - 1) + 1)
+  MOD((p : Num), p) == 0
+  (x2 : Num) + (a : Num) == (xd : Num) * (p : Num) + (xm : Num) && (y2 : Num) == (yd : Num) * p + (ym : Num) \226\134\146 x2 + (y2 + (a + 1)) == xm + (ym + 1) + (xd + yd) * p
+  DIV(EXP((x : Num), 2) + (a : Num), (p : Num)) + DIV(EXP((y : Num), 2), p)
+  MOD(MOD(EXP((x : Num), 2) + (a : Num), (p : Num)) + (MOD(EXP((y : Num), 2) + 0, p) + 1), p) == MOD(EXP(x, 2) + (EXP(y, 2) + (a + 1)), p)
+  MOD
+  (p : Num)
+  (x : Num) == (p : Num) - 1 - (y : Num) \226\134\146 y < p \226\134\146 x + (y + 1) == p
+  ((a : Bool) && (b : Bool)) && (c : Bool) && (d : Bool) \226\134\146 a && b && c && d
+  (p : Num)
+  (x : Num) => (p : Num) - 1 - MOD(EXP(x, 2) + 0, p)
+  (x : Num) => MOD(EXP(x, 2) + (a : Num), (p : Num))
+  !((p : Num) == 0)
+  \226\136\128 a : Num, \226\136\128 p : Num, prime(p) && ODD(p) \226\134\146 (\226\136\131 n : Num, \226\136\131 x : Num, \226\136\131 y : Num, 2 * x < p && 2 * y < p && n * p == EXP(x, 2) + (EXP(y, 2) + (a + 1)))
+  (p : Num)
+  (a : Num) - 1
+  !((a : Num) == 0) \226\134\146 a == a - 1 + 1
   0
   0
   0
-  a = 0
+  (a : Num) == 0
   0
   1
-  k + 1
-  k:num
-  ~(EVEN(a))
+  (k : Num) + 1
+  (k : Num)
+  !EVEN((a : Num))
   0
   0
-  k:num
-  k:num
-  EVEN a
-  EVEN(a)
+  (k : Num)
+  (k : Num)
+  EVEN((a : Num))
+  EVEN((a : Num))
   2
-  EVEN(p)
-  forall a p. prime(p)\n         ==> ?n x y. 2 * x <= p /\\ 2 * y <= p /\\\n                     (n * p = x EXP 2 + y EXP 2 + a)
-  (a + --b = c) <=> (b + c = a)
-  (--a + b = c) <=> (a + c = b)
-  &0 <= a ==> ((abs(x) = a) <=> (x = a) \\/ (x = --a))
-  x /\\ c /\\ d /\\ e /\\ f /\\ (a /\\ e ==> b) /\\ a\n    ==> x /\\ a /\\ b /\\ c /\\ d /\\ e /\\ f
-  (forall n. ?p. abs(&n) = &p) /\\\n   (forall x y. (?m. abs(x) = &m) /\\ (?n. abs(y) = &n) ==> ?p. abs(x + y) = &p) /\\\n   (forall x y. (?m. abs(x) = &m) /\\ (?n. abs(y) = &n) ==> ?p. abs(x - y) = &p) /\\\n   (forall x y. (?m. abs(x) = &m) /\\ (?n. abs(y) = &n) ==> ?p. abs(x * y) = &p) /\\\n   (forall x r. (?n. abs(x) = &n) ==> ?p. abs(x pow r) = &p) /\\\n   (forall x. (?n. abs(x) = &n) ==> ?p. abs(--x) = &p) /\\\n   (forall x. (?n. abs(x) = &n) ==> ?p. abs(abs x) = &p)
-  a <= x /\\ x < a + &1\n     ==> abs(x - a) * &2 <= &1 \\/ abs(x - (a + &1)) * &2 <= &1
-  forall x. &0 <= x ==> ?n. abs(x - &n) <= &1 / &2
-  n - &1 + a = n - (&1 - a)
-  &0 <= &1 / &2
-  (n = 0) \\/ 1 <= n
-  n:num
+  EVEN((p : Num))
+  \226\136\128 a : Num, \226\136\128 p : Num, prime(p) \226\134\146 (\226\136\131 n : Num, \226\136\131 x : Num, \226\136\131 y : Num, 2 * x <= p && 2 * y <= p && n * p == EXP(x, 2) + (EXP(y, 2) + a))
+  ((a : Real) + -(b : Real) == (c : Real)) == (b + c == a)
+  (-(a : Real) + (b : Real) == (c : Real)) == (a + c == b)
+  real_of_num(0) <= (a : Real) \226\134\146 (abs((x : Real)) == a) == (x == a || x == -a)
+  (x : Bool) && (c : Bool) && (d : Bool) && (e : Bool) && (f : Bool) && ((a : Bool) && e \226\134\146 (b : Bool)) && a \226\134\146 x && a && b && c && d && e && f
+  (\226\136\128 n : Num, \226\136\131 p : Num, abs(real_of_num(n)) == real_of_num(p)) && (\226\136\128 x : Real, \226\136\128 y : Real, (\226\136\131 m : Num, abs(x) == real_of_num(m)) && (\226\136\131 n : Num, abs(y) == real_of_num(n)) \226\134\146 (\226\136\131 p : Num, abs(x + y) == real_of_num(p))) && (\226\136\128 x : Real, \226\136\128 y : Real, (\226\136\131 m : Num, abs(x) == real_of_num(m)) && (\226\136\131 n : Num, abs(y) == real_of_num(n)) \226\134\146 (\226\136\131 p : Num, abs(x - y) == real_of_num(p))) && (\226\136\128 x : Real, \226\136\128 y : Real, (\226\136\131 m : Num, abs(x) == real_of_num(m)) && (\226\136\131 n : Num, abs(y) == real_of_num(n)) \226\134\146 (\226\136\131 p : Num, abs(x * y) == real_of_num(p))) && (\226\136\128 x : Real, \226\136\128 r : Num, (\226\136\131 n : Num, abs(x) == real_of_num(n)) \226\134\146 (\226\136\131 p : Num, abs(pow(x, r)) == real_of_num(p))) && (\226\136\128 x : Real, (\226\136\131 n : Num, abs(x) == real_of_num(n)) \226\134\146 (\226\136\131 p : Num, abs(-x) == real_of_num(p))) && (\226\136\128 x : Real, (\226\136\131 n : Num, abs(x) == real_of_num(n)) \226\134\146 (\226\136\131 p : Num, abs(abs(x)) == real_of_num(p)))
+  (a : Real) <= (x : Real) && x < a + real_of_num(1) \226\134\146 abs(x - a) * real_of_num(2) <= real_of_num(1) || abs(x - (a + real_of_num(1))) * real_of_num(2) <= real_of_num(1)
+  \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 (\226\136\131 n : Num, abs(x - real_of_num(n)) <= real_of_num(1) / real_of_num(2))
+  (n : Real) - real_of_num(1) + (a : Real) == n - (real_of_num(1) - a)
+  real_of_num(0) <= real_of_num(1) / real_of_num(2)
+  (n : Num) == 0 || 1 <= n
+  (n : Num)
   1
-  forall x n. &0 <= x /\\ (abs(x - &n) = &1 / &2)\n         ==> (x = &(n - 1) + &1 / &2) \\/ (x = &n + &1 / &2)
-  forall m n p. (abs(&m / &p - &n) = &1 / &2)\n         ==> (&m / &p = &(n - 1) + &1 / &2) \\/ (&m / &p = &n + &1 / &2)
-  d:num
-  c:num
-  b:num
-  a:num
-  ?n. abs ((&N' - &N) / &2) = &n
-  ?a b c d. (abs(&n' + s * (&N' - &N) / &2) = &a) /\\\n               (abs(&p' + t * (&N' - &N) / &2) = &b) /\\\n               (abs(&q' + u * (&N' - &N) / &2) = &c) /\\\n               (abs(&r' + v * (&N' - &N) / &2) = &d)
+  \226\136\128 x : Real, \226\136\128 n : Num, real_of_num(0) <= x && abs(x - real_of_num(n)) == real_of_num(1) / real_of_num(2) \226\134\146 x == real_of_num(n - 1) + real_of_num(1) / real_of_num(2) || x == real_of_num(n) + real_of_num(1) / real_of_num(2)
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, abs(real_of_num(m) / real_of_num(p) - real_of_num(n)) == real_of_num(1) / real_of_num(2) \226\134\146 real_of_num(m) / real_of_num(p) == real_of_num(n - 1) + real_of_num(1) / real_of_num(2) || real_of_num(m) / real_of_num(p) == real_of_num(n) + real_of_num(1) / real_of_num(2)
+  (d : Num)
+  (c : Num)
+  (b : Num)
+  (a : Num)
+  \226\136\131 n : Num, abs((real_of_num((N' : Num)) - real_of_num((N : Num))) / real_of_num(2)) == real_of_num(n)
+  \226\136\131 a : Num, \226\136\131 b : Num, \226\136\131 c : Num, \226\136\131 d : Num, abs(real_of_num((n' : Num)) + (s : Real) * ((real_of_num((N' : Num)) - real_of_num((N : Num))) / real_of_num(2))) == real_of_num(a) && abs(real_of_num((p' : Num)) + (t : Real) * ((real_of_num(N') - real_of_num(N)) / real_of_num(2))) == real_of_num(b) && abs(real_of_num((q' : Num)) + (u : Real) * ((real_of_num(N') - real_of_num(N)) / real_of_num(2))) == real_of_num(c) && abs(real_of_num((r' : Num)) + (v : Real) * ((real_of_num(N') - real_of_num(N)) / real_of_num(2))) == real_of_num(d)
   1
-  (&2 * x + &1) - (&2 * y + &1) = &2 * (x - y)
-  EVEN(N) \\/ ~EVEN(N)
-  EVEN(n' EXP 2 + p' EXP 2 + q' EXP 2 + r' EXP 2) =\n                  EVEN N
-  &n' pow 2 + &p' pow 2 + &q' pow 2 + &r' pow 2 = &N'
-  ?n. abs((&N' - &N) / &2) = &n
-  d:num
-  c:num
-  b:num
-  a:num
-  ?a b c d. (abs(&n' * &m' + s * (&N' - &N)) = &a) /\\\n                (abs(&p' * &m' + t * (&N' - &N)) = &b) /\\\n                (abs(&q' * &m' + u * (&N' - &N)) = &c) /\\\n                (abs(&r' * &m' + v * (&N' - &N)) = &d)
-  m':num
-  (&N' - &N) / &m'
-  (a + b + c + d = e) <=> (a + b + c + d - e = &0)
-  w pow 2 + x pow 2 + y pow 2 + z pow 2 = &N
-  z = &r' + v * (&N' - &N) / &m'
-  y = &q' + u * (&N' - &N) / &m'
-  x = &p' + t * (&N' - &N) / &m'
-  w = &n' + s * (&N' - &N) / &m'
-  (&N + &N') * &m - &M = &m'
-  a * z * b - c * z = (a * b - c) * z
-  (a + n' - n = b - (n - n')) <=> (a = b)
-  (m * z - &1) * (m' * z + nn) = m * m' * z * z +\n                                        (m * z * nn - m' * z) - nn
-  &2 * (&n * &n' + &p * &p' + &q * &q' + &r * &r') = &M
-  &n' pow 2 + &p' pow 2 + &q' pow 2 + &r' pow 2 = &N'
-  (a = c) /\\ (b = d) ==> (a + b + n - m = c + d + n - m)
-  (n + s * z) * (n + s * z) + (p + t * z) * (p + t * z) +\n        (q + u * z) * (q + u * z) + (r + v * z) * (r + v * z) - N =\n        (s * s + t * t + u * u + v * v) * (z * z) +\n        (&2 * (n * s + p * t + q * u + r * v)) * z +\n        ((n * n + p * p + q * q + r * r) - N)
-  &m * &m' * z pow 2 + (&M - &2 * &m * &N') * z + &N' - &N
-  forall z. (&n' + s * z) pow 2 + (&p' + t * z) pow 2 +\n        (&q' + u * z) pow 2 + (&r' + v * z) pow 2 - &N =\n        (&m * z - &1) * (&m' * z + &N - &N')
-  b < a ==> ~(a - b = &0)
-  (&N + &N') * &m - &M = &m'
-  ~(m' = 0)
-  (&N + &N') * &m - &M = &m'
-  m':num = (N + N') * m - M
-  0 < a <=> ~(a = 0)
-  (&N + &N') - &M / &m =\n               (s pow 2 + t pow 2 + u pow 2 + v pow 2) / &m pow 2
-  ((a - &1) * m = M) <=> (a * m - M = m)
-  (a - &1) * m < M <=> a * m - M < m
-  ~(m = 0)
-  0 < n <=> ~(n = 0)
-  &0 < a - b <=> b < a
-  ((a + b) - c = &1) <=> ((a + b) - &1 = c)
-  (a + b) - c < &1 <=> (a + b) - &1 < c
-  ~(m = 0)
-  ~(m = 0)
-  &2 * (&n * &n' + &p * &p' + &q * &q' + &r * &r') = &M
-  &n' pow 2 + &p' pow 2 + &q' pow 2 + &r' pow 2 = &N'
-  (&n / &m) pow 2 + (&p / &m) pow 2 +\n                             (&q / &m) pow 2 + (&r / &m) pow 2 = &N
-  &m pow 2
-  (&n / &m - &n') pow 2 + (&p / &m - &p') pow 2 +\n                (&q / &m - &q') pow 2 + (&r / &m - &r') pow 2 =\n                (&N + &N') - &M / &m
-  &m pow 2
-  (&n / &m - &n') pow 2 + (&p / &m - &p') pow 2 +\n    (&q / &m - &q') pow 2 + (&r / &m - &r') pow 2 =\n    (s pow 2 + t pow 2 + u pow 2 + v pow 2) / &m pow 2
-  &0 <= w /\\ &0 <= x /\\ &0 <= y /\\ &0 <= z /\\\n      ~((w = &0) /\\ (x = &0) /\\ (y = &0) /\\ (z = &0))\n      ==> &0 < w + x + y + z
-  &0 < (&n / &m - &n') pow 2 + (&p / &m - &p') pow 2 +\n                     (&q / &m - &q') pow 2 + (&r / &m - &r') pow 2
-  (&n / &m) pow 2 + (&p / &m) pow 2 +\n         (&q / &m) pow 2 + (&r / &m) pow 2 = &N
-  ~(m = 1)
-  ~(m = 0)
-  r':num
-  q':num
-  p':num
-  n':num
+  real_of_num(2) * (x : Real) + real_of_num(1) - (real_of_num(2) * (y : Real) + real_of_num(1)) == real_of_num(2) * (x - y)
+  EVEN((N : Num)) || !EVEN(N)
+  EVEN(EXP((n' : Num), 2) + (EXP((p' : Num), 2) + (EXP((q' : Num), 2) + EXP((r' : Num), 2)))) == EVEN((N : Num))
+  pow(real_of_num((n' : Num)), 2) + (pow(real_of_num((p' : Num)), 2) + (pow(real_of_num((q' : Num)), 2) + pow(real_of_num((r' : Num)), 2))) == real_of_num((N' : Num))
+  \226\136\131 n : Num, abs((real_of_num((N' : Num)) - real_of_num((N : Num))) / real_of_num(2)) == real_of_num(n)
+  (d : Num)
+  (c : Num)
+  (b : Num)
+  (a : Num)
+  \226\136\131 a : Num, \226\136\131 b : Num, \226\136\131 c : Num, \226\136\131 d : Num, abs(real_of_num((n' : Num)) * real_of_num((m' : Num)) + (s : Real) * (real_of_num((N' : Num)) - real_of_num((N : Num)))) == real_of_num(a) && abs(real_of_num((p' : Num)) * real_of_num(m') + (t : Real) * (real_of_num(N') - real_of_num(N))) == real_of_num(b) && abs(real_of_num((q' : Num)) * real_of_num(m') + (u : Real) * (real_of_num(N') - real_of_num(N))) == real_of_num(c) && abs(real_of_num((r' : Num)) * real_of_num(m') + (v : Real) * (real_of_num(N') - real_of_num(N))) == real_of_num(d)
+  (m' : Num)
+  (real_of_num((N' : Num)) - real_of_num((N : Num))) / real_of_num((m' : Num))
+  ((a : Real) + ((b : Real) + ((c : Real) + (d : Real))) == (e : Real)) == (a + (b + (c + (d - e))) == real_of_num(0))
+  pow((w : Real), 2) + (pow((x : Real), 2) + (pow((y : Real), 2) + pow((z : Real), 2))) == real_of_num((N : Num))
+  (z : Real) == real_of_num((r' : Num)) + (v : Real) * ((real_of_num((N' : Num)) - real_of_num((N : Num))) / real_of_num((m' : Num)))
+  (y : Real) == real_of_num((q' : Num)) + (u : Real) * ((real_of_num((N' : Num)) - real_of_num((N : Num))) / real_of_num((m' : Num)))
+  (x : Real) == real_of_num((p' : Num)) + (t : Real) * ((real_of_num((N' : Num)) - real_of_num((N : Num))) / real_of_num((m' : Num)))
+  (w : Real) == real_of_num((n' : Num)) + (s : Real) * ((real_of_num((N' : Num)) - real_of_num((N : Num))) / real_of_num((m' : Num)))
+  (real_of_num((N : Num)) + real_of_num((N' : Num))) * real_of_num((m : Num)) - real_of_num((M : Num)) == real_of_num((m' : Num))
+  (a : Real) * ((z : Real) * (b : Real)) - (c : Real) * z == (a * b - c) * z
+  ((a : Real) + ((n' : Real) - (n : Real)) == (b : Real) - (n - n')) == (a == b)
+  ((m : Real) * (z : Real) - real_of_num(1)) * ((m' : Real) * z + (nn : Real)) == m * (m' * (z * z)) + (m * (z * nn) - m' * z - nn)
+  real_of_num(2) * (real_of_num((n : Num)) * real_of_num((n' : Num)) + (real_of_num((p : Num)) * real_of_num((p' : Num)) + (real_of_num((q : Num)) * real_of_num((q' : Num)) + real_of_num((r : Num)) * real_of_num((r' : Num))))) == real_of_num((M : Num))
+  pow(real_of_num((n' : Num)), 2) + (pow(real_of_num((p' : Num)), 2) + (pow(real_of_num((q' : Num)), 2) + pow(real_of_num((r' : Num)), 2))) == real_of_num((N' : Num))
+  (a : Real) == (c : Real) && (b : Real) == (d : Real) \226\134\146 a + (b + ((n : Real) - (m : Real))) == c + (d + (n - m))
+  ((n : Real) + (s : Real) * (z : Real)) * (n + s * z) + (((p : Real) + (t : Real) * z) * (p + t * z) + (((q : Real) + (u : Real) * z) * (q + u * z) + (((r : Real) + (v : Real) * z) * (r + v * z) - (N : Real)))) == (s * s + (t * t + (u * u + v * v))) * (z * z) + (real_of_num(2) * (n * s + (p * t + (q * u + r * v))) * z + (n * n + (p * p + (q * q + r * r)) - N))
+  real_of_num((m : Num)) * (real_of_num((m' : Num)) * pow((z : Real), 2)) + ((real_of_num((M : Num)) - real_of_num(2) * (real_of_num(m) * real_of_num((N' : Num)))) * z + (real_of_num(N') - real_of_num((N : Num))))
+  \226\136\128 z : Real, pow(real_of_num((n' : Num)) + (s : Real) * z, 2) + (pow(real_of_num((p' : Num)) + (t : Real) * z, 2) + (pow(real_of_num((q' : Num)) + (u : Real) * z, 2) + (pow(real_of_num((r' : Num)) + (v : Real) * z, 2) - real_of_num((N : Num))))) == (real_of_num((m : Num)) * z - real_of_num(1)) * (real_of_num((m' : Num)) * z + (real_of_num(N) - real_of_num((N' : Num))))
+  (b : Real) < (a : Real) \226\134\146 !(a - b == real_of_num(0))
+  (real_of_num((N : Num)) + real_of_num((N' : Num))) * real_of_num((m : Num)) - real_of_num((M : Num)) == real_of_num((m' : Num))
+  !((m' : Num) == 0)
+  (real_of_num((N : Num)) + real_of_num((N' : Num))) * real_of_num((m : Num)) - real_of_num((M : Num)) == real_of_num((m' : Num))
+  (m' : Num) == ((N : Num) + (N' : Num)) * (m : Num) - (M : Num)
+  (0 < (a : Num)) == !(a == 0)
+  real_of_num((N : Num)) + real_of_num((N' : Num)) - real_of_num((M : Num)) / real_of_num((m : Num)) == (pow((s : Real), 2) + (pow((t : Real), 2) + (pow((u : Real), 2) + pow((v : Real), 2)))) / pow(real_of_num(m), 2)
+  (((a : Real) - real_of_num(1)) * (m : Real) == (M : Real)) == (a * m - M == m)
+  (((a : Real) - real_of_num(1)) * (m : Real) < (M : Real)) == (a * m - M < m)
+  !((m : Num) == 0)
+  (0 < (n : Num)) == !(n == 0)
+  (real_of_num(0) < (a : Real) - (b : Real)) == (b < a)
+  ((a : Real) + (b : Real) - (c : Real) == real_of_num(1)) == (a + b - real_of_num(1) == c)
+  ((a : Real) + (b : Real) - (c : Real) < real_of_num(1)) == (a + b - real_of_num(1) < c)
+  !((m : Num) == 0)
+  !((m : Num) == 0)
+  real_of_num(2) * (real_of_num((n : Num)) * real_of_num((n' : Num)) + (real_of_num((p : Num)) * real_of_num((p' : Num)) + (real_of_num((q : Num)) * real_of_num((q' : Num)) + real_of_num((r : Num)) * real_of_num((r' : Num))))) == real_of_num((M : Num))
+  pow(real_of_num((n' : Num)), 2) + (pow(real_of_num((p' : Num)), 2) + (pow(real_of_num((q' : Num)), 2) + pow(real_of_num((r' : Num)), 2))) == real_of_num((N' : Num))
+  pow(real_of_num((n : Num)) / real_of_num((m : Num)), 2) + (pow(real_of_num((p : Num)) / real_of_num(m), 2) + (pow(real_of_num((q : Num)) / real_of_num(m), 2) + pow(real_of_num((r : Num)) / real_of_num(m), 2))) == real_of_num((N : Num))
+  pow(real_of_num((m : Num)), 2)
+  pow(real_of_num((n : Num)) / real_of_num((m : Num)) - real_of_num((n' : Num)), 2) + (pow(real_of_num((p : Num)) / real_of_num(m) - real_of_num((p' : Num)), 2) + (pow(real_of_num((q : Num)) / real_of_num(m) - real_of_num((q' : Num)), 2) + pow(real_of_num((r : Num)) / real_of_num(m) - real_of_num((r' : Num)), 2))) == real_of_num((N : Num)) + real_of_num((N' : Num)) - real_of_num((M : Num)) / real_of_num(m)
+  pow(real_of_num((m : Num)), 2)
+  pow(real_of_num((n : Num)) / real_of_num((m : Num)) - real_of_num((n' : Num)), 2) + (pow(real_of_num((p : Num)) / real_of_num(m) - real_of_num((p' : Num)), 2) + (pow(real_of_num((q : Num)) / real_of_num(m) - real_of_num((q' : Num)), 2) + pow(real_of_num((r : Num)) / real_of_num(m) - real_of_num((r' : Num)), 2))) == (pow((s : Real), 2) + (pow((t : Real), 2) + (pow((u : Real), 2) + pow((v : Real), 2)))) / pow(real_of_num(m), 2)
+  real_of_num(0) <= (w : Real) && real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) && real_of_num(0) <= (z : Real) && !(w == real_of_num(0) && x == real_of_num(0) && y == real_of_num(0) && z == real_of_num(0)) \226\134\146 real_of_num(0) < w + (x + (y + z))
+  real_of_num(0) < pow(real_of_num((n : Num)) / real_of_num((m : Num)) - real_of_num((n' : Num)), 2) + (pow(real_of_num((p : Num)) / real_of_num(m) - real_of_num((p' : Num)), 2) + (pow(real_of_num((q : Num)) / real_of_num(m) - real_of_num((q' : Num)), 2) + pow(real_of_num((r : Num)) / real_of_num(m) - real_of_num((r' : Num)), 2)))
+  pow(real_of_num((n : Num)) / real_of_num((m : Num)), 2) + (pow(real_of_num((p : Num)) / real_of_num(m), 2) + (pow(real_of_num((q : Num)) / real_of_num(m), 2) + pow(real_of_num((r : Num)) / real_of_num(m), 2))) == real_of_num((N : Num))
+  !((m : Num) == 1)
+  !((m : Num) == 0)
+  (r' : Num)
+  (q' : Num)
+  (p' : Num)
+  (n' : Num)
   1
-  (&n / &m = &n') /\\ (&p / &m = &p') /\\\n                 (&q / &m = &q') /\\ (&r / &m = &r')
-  2 * (n * n' + p * p' + q * q' + r * r') = M
-  M = 2 * (n * n' + p * p' + q * q' + r * r')
-  n' EXP 2 + p' EXP 2 + q' EXP 2 + r' EXP 2 = N'
-  N' = n' EXP 2 + p' EXP 2 + q' EXP 2 + r' EXP 2
-  v = &r - &m * &r'
-  u = &q - &m * &q'
-  t = &p - &m * &p'
-  s = &n - &m * &n'
-  r':num
-  q':num
-  p':num
-  n':num
-  ~b ==> ~a <=> a ==> b
-  &0 <= x /\\ &0 < y ==> ~(x + y = &0)
-  (a * a = b * b) <=> ((a + b) * (a - b) = &0)
-  a - b
-  (&1 / &2) pow 2
-  forall m. a <= m /\\ b <= m /\\ c <= m /\\ d <= m /\\\n          ~((a = m) /\\ (b = m) /\\ (c = m) /\\ (d = m)) /\\\n          &4 * m <= &1\n          ==> a + b + c + d < &1
-  r':num
-  q':num
-  p':num
-  n':num
-  n':num
-  p':num
-  q':num
-  r':num
-  &r / &m
-  &q / &m
-  &p / &m
-  &n / &m
-  (a + b) - (a + c) = b - c
-  (a + b) - a = b
-  r' + 1
-  (a + b) - a = b
-  r':num
-  (EVEN(n' + p' + q' + r') <=> EVEN(N)) \\/\n                    (EVEN(n' + p' + q' + r' + 1) <=> EVEN(N))
-  2 * r' + 1
-  2 * q' + 1
-  2 * p' + 1
-  2 * n' + 1
+  real_of_num((n : Num)) / real_of_num((m : Num)) == real_of_num((n' : Num)) && real_of_num((p : Num)) / real_of_num(m) == real_of_num((p' : Num)) && real_of_num((q : Num)) / real_of_num(m) == real_of_num((q' : Num)) && real_of_num((r : Num)) / real_of_num(m) == real_of_num((r' : Num))
+  2 * ((n : Num) * (n' : Num) + ((p : Num) * (p' : Num) + ((q : Num) * (q' : Num) + (r : Num) * (r' : Num)))) == (M : Num)
+  (M : Num) == 2 * ((n : Num) * (n' : Num) + ((p : Num) * (p' : Num) + ((q : Num) * (q' : Num) + (r : Num) * (r' : Num))))
+  EXP((n' : Num), 2) + (EXP((p' : Num), 2) + (EXP((q' : Num), 2) + EXP((r' : Num), 2))) == (N' : Num)
+  (N' : Num) == EXP((n' : Num), 2) + (EXP((p' : Num), 2) + (EXP((q' : Num), 2) + EXP((r' : Num), 2)))
+  (v : Real) == real_of_num((r : Num)) - real_of_num((m : Num)) * real_of_num((r' : Num))
+  (u : Real) == real_of_num((q : Num)) - real_of_num((m : Num)) * real_of_num((q' : Num))
+  (t : Real) == real_of_num((p : Num)) - real_of_num((m : Num)) * real_of_num((p' : Num))
+  (s : Real) == real_of_num((n : Num)) - real_of_num((m : Num)) * real_of_num((n' : Num))
+  (r' : Num)
+  (q' : Num)
+  (p' : Num)
+  (n' : Num)
+  (!(b : Bool) \226\134\146 !(a : Bool)) == (a \226\134\146 b)
+  real_of_num(0) <= (x : Real) && real_of_num(0) < (y : Real) \226\134\146 !(x + y == real_of_num(0))
+  ((a : Real) * a == (b : Real) * b) == ((a + b) * (a - b) == real_of_num(0))
+  (a : Real) - (b : Real)
+  pow(real_of_num(1) / real_of_num(2), 2)
+  \226\136\128 m : Real, (a : Real) <= m && (b : Real) <= m && (c : Real) <= m && (d : Real) <= m && !(a == m && b == m && c == m && d == m) && real_of_num(4) * m <= real_of_num(1) \226\134\146 a + (b + (c + d)) < real_of_num(1)
+  (r' : Num)
+  (q' : Num)
+  (p' : Num)
+  (n' : Num)
+  (n' : Num)
+  (p' : Num)
+  (q' : Num)
+  (r' : Num)
+  real_of_num((r : Num)) / real_of_num((m : Num))
+  real_of_num((q : Num)) / real_of_num((m : Num))
+  real_of_num((p : Num)) / real_of_num((m : Num))
+  real_of_num((n : Num)) / real_of_num((m : Num))
+  (a : Real) + (b : Real) - (a + (c : Real)) == b - c
+  (a : Real) + (b : Real) - a == b
+  (r' : Num) + 1
+  (a : Real) + (b : Real) - a == b
+  (r' : Num)
+  EVEN((n' : Num) + ((p' : Num) + ((q' : Num) + (r' : Num)))) == EVEN((N : Num)) || EVEN(n' + (p' + (q' + (r' + 1)))) == EVEN(N)
+  2 * (r' : Num) + 1
+  2 * (q' : Num) + 1
+  2 * (p' : Num) + 1
+  2 * (n' : Num) + 1
   2
-  m = 2
-  q':num
-  p':num
-  n':num
-  ?n' p' q' r'. (&n / &m = &n' + &1 / &2) /\\\n                    (&p / &m = &p' + &1 / &2) /\\\n                    (&q / &m = &q' + &1 / &2) /\\\n                    (&r / &m = &r' + &1 / &2)
-  ?n' p' q' r'.\n        (&n / &m - &n') pow 2 + (&p / &m - &p') pow 2 +\n        (&q / &m - &q') pow 2 + (&r / &m - &r') pow 2 < &1 \\/\n        (((&n / &m - &n') pow 2 + (&p / &m - &p') pow 2 +\n          (&q / &m - &q') pow 2 + (&r / &m - &r') pow 2 = &1) /\\\n         (m = 2) /\\ (EVEN(n' + p' + q' + r') = EVEN(N)))
-  (~p ==> p) ==> p
-  forall m n p q r.\n        ~(m = 0) /\\ ~(m = 1) /\\\n        ((&n / &m) pow 2 + (&p / &m) pow 2 +\n         (&q / &m) pow 2 + (&r / &m) pow 2 = &N)\n        ==> ?m' n' p' q' r'.\n               ~(m' = 0) /\\ m' < m /\\\n               ((&n' / &m') pow 2 + (&p' / &m') pow 2 +\n                (&q' / &m') pow 2 + (&r' / &m') pow 2 = &N)
-  m:num
-  m = 1
-  m:num
-  (?q. ~(q = 0) /\\\n       ?a b c d.\n            (&a / &q) pow 2 + (&b / &q) pow 2 +\n            (&c / &q) pow 2 + (&d / &q) pow 2 = &N)\n   ==> ?a b c d. &a pow 2 + &b pow 2 + &c pow 2 + &d pow 2 = &N
-  (w1 pow 2 + x1 pow 2 + y1 pow 2 + z1 pow 2) *\n   (w2 pow 2 + x2 pow 2 + y2 pow 2 + z2 pow 2) =\n   (w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2) pow 2 +\n   (w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2) pow 2 +\n   (w1 * y2 - x1 * z2 + y1 * w2 + z1 * x2) pow 2 +\n   (w1 * z2 + x1 * y2 - y1 * x2 + z1 * w2) pow 2
-  (?a. abs(w) = &a) /\\ (?b. abs(x) = &b) /\\\n     (?c. abs(y) = &c) /\\ (?d. abs(z) = &d)\n     ==> ?a b c d. w pow 2 + x pow 2 + y pow 2 + z pow 2 =\n                   &a pow 2 + &b pow 2 + &c pow 2 + &d pow 2
-  ~(q = 0)
-  ~(q = 0)
-  q:num
-  &q = &a pow 2 + &b pow 2 + &c pow 2 + &d pow 2
-  ~(q = 0)
-  &p = &q * &(q * p) / &q pow 2
-  0 * p = x EXP 2 + y EXP 2 + 1 EXP 2 + 0 EXP 2
-  ~(q = 0)
-  d:num
-  c:num
-  b:num
-  a:num
-  q:num
-  ~(p = 1)
-  ~(p = 0)
-  (2 * x) * (2 * x) <= p * p /\\ (2 * y) * (2 * y) <= p * p /\\\n      2 * 2 <= p * p\n      ==> x * x + y * y + 1 < p * p
-  q * p < p EXP 2
-  y:num
-  x:num
-  q:num
-  1 EXP 2 + 0 EXP 2
-  m = 1
-  z2:num
-  y2:num
-  x2:num
-  w2:num
-  z1:num
-  y1:num
-  x1:num
-  w1:num
-  1 < x <=> ~(x = 0) /\\ ~(x = 1)
-  ~(p = 1)
-  m = 0
-  p = 0
-  ~(p * m = 0)
-  p < p * m <=> p * 1 < p * m
-  m < p * m <=> 1 * m < p * m
-  m = 1
-  m:num
-  p divides n
-  p:num
+  (m : Num) == 2
+  (q' : Num)
+  (p' : Num)
+  (n' : Num)
+  \226\136\131 n' : Num, \226\136\131 p' : Num, \226\136\131 q' : Num, \226\136\131 r' : Num, real_of_num((n : Num)) / real_of_num((m : Num)) == real_of_num(n') + real_of_num(1) / real_of_num(2) && real_of_num((p : Num)) / real_of_num(m) == real_of_num(p') + real_of_num(1) / real_of_num(2) && real_of_num((q : Num)) / real_of_num(m) == real_of_num(q') + real_of_num(1) / real_of_num(2) && real_of_num((r : Num)) / real_of_num(m) == real_of_num(r') + real_of_num(1) / real_of_num(2)
+  \226\136\131 n' : Num, \226\136\131 p' : Num, \226\136\131 q' : Num, \226\136\131 r' : Num, pow(real_of_num((n : Num)) / real_of_num((m : Num)) - real_of_num(n'), 2) + (pow(real_of_num((p : Num)) / real_of_num(m) - real_of_num(p'), 2) + (pow(real_of_num((q : Num)) / real_of_num(m) - real_of_num(q'), 2) + pow(real_of_num((r : Num)) / real_of_num(m) - real_of_num(r'), 2))) < real_of_num(1) || pow(real_of_num(n) / real_of_num(m) - real_of_num(n'), 2) + (pow(real_of_num(p) / real_of_num(m) - real_of_num(p'), 2) + (pow(real_of_num(q) / real_of_num(m) - real_of_num(q'), 2) + pow(real_of_num(r) / real_of_num(m) - real_of_num(r'), 2))) == real_of_num(1) && m == 2 && EVEN(n' + (p' + (q' + r'))) == EVEN((N : Num))
+  (!(p : Bool) \226\134\146 p) \226\134\146 p
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, \226\136\128 q : Num, \226\136\128 r : Num, !(m == 0) && !(m == 1) && pow(real_of_num(n) / real_of_num(m), 2) + (pow(real_of_num(p) / real_of_num(m), 2) + (pow(real_of_num(q) / real_of_num(m), 2) + pow(real_of_num(r) / real_of_num(m), 2))) == real_of_num((N : Num)) \226\134\146 (\226\136\131 m' : Num, \226\136\131 n' : Num, \226\136\131 p' : Num, \226\136\131 q' : Num, \226\136\131 r' : Num, !(m' == 0) && m' < m && pow(real_of_num(n') / real_of_num(m'), 2) + (pow(real_of_num(p') / real_of_num(m'), 2) + (pow(real_of_num(q') / real_of_num(m'), 2) + pow(real_of_num(r') / real_of_num(m'), 2))) == real_of_num(N))
+  (m : Num)
+  (m : Num) == 1
+  (m : Num)
+  (\226\136\131 q : Num, !(q == 0) && (\226\136\131 a : Num, \226\136\131 b : Num, \226\136\131 c : Num, \226\136\131 d : Num, pow(real_of_num(a) / real_of_num(q), 2) + (pow(real_of_num(b) / real_of_num(q), 2) + (pow(real_of_num(c) / real_of_num(q), 2) + pow(real_of_num(d) / real_of_num(q), 2))) == real_of_num((N : Num)))) \226\134\146 (\226\136\131 a : Num, \226\136\131 b : Num, \226\136\131 c : Num, \226\136\131 d : Num, pow(real_of_num(a), 2) + (pow(real_of_num(b), 2) + (pow(real_of_num(c), 2) + pow(real_of_num(d), 2))) == real_of_num(N))
+  (pow((w1 : Real), 2) + (pow((x1 : Real), 2) + (pow((y1 : Real), 2) + pow((z1 : Real), 2)))) * (pow((w2 : Real), 2) + (pow((x2 : Real), 2) + (pow((y2 : Real), 2) + pow((z2 : Real), 2)))) == pow(w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2, 2) + (pow(w1 * x2 + (x1 * w2 + (y1 * z2 - z1 * y2)), 2) + (pow(w1 * y2 - x1 * z2 + (y1 * w2 + z1 * x2), 2) + pow(w1 * z2 + (x1 * y2 - y1 * x2 + z1 * w2), 2)))
+  (\226\136\131 a : Num, abs((w : Real)) == real_of_num(a)) && (\226\136\131 b : Num, abs((x : Real)) == real_of_num(b)) && (\226\136\131 c : Num, abs((y : Real)) == real_of_num(c)) && (\226\136\131 d : Num, abs((z : Real)) == real_of_num(d)) \226\134\146 (\226\136\131 a : Num, \226\136\131 b : Num, \226\136\131 c : Num, \226\136\131 d : Num, pow(w, 2) + (pow(x, 2) + (pow(y, 2) + pow(z, 2))) == pow(real_of_num(a), 2) + (pow(real_of_num(b), 2) + (pow(real_of_num(c), 2) + pow(real_of_num(d), 2))))
+  !((q : Num) == 0)
+  !((q : Num) == 0)
+  (q : Num)
+  real_of_num((q : Num)) == pow(real_of_num((a : Num)), 2) + (pow(real_of_num((b : Num)), 2) + (pow(real_of_num((c : Num)), 2) + pow(real_of_num((d : Num)), 2)))
+  !((q : Num) == 0)
+  real_of_num((p : Num)) == real_of_num((q : Num)) * (real_of_num(q * p) / pow(real_of_num(q), 2))
+  0 * (p : Num) == EXP((x : Num), 2) + (EXP((y : Num), 2) + (EXP(1, 2) + EXP(0, 2)))
+  !((q : Num) == 0)
+  (d : Num)
+  (c : Num)
+  (b : Num)
+  (a : Num)
+  (q : Num)
+  !((p : Num) == 1)
+  !((p : Num) == 0)
+  2 * (x : Num) * (2 * x) <= (p : Num) * p && 2 * (y : Num) * (2 * y) <= p * p && 2 * 2 <= p * p \226\134\146 x * x + (y * y + 1) < p * p
+  (q : Num) * (p : Num) < EXP(p, 2)
+  (y : Num)
+  (x : Num)
+  (q : Num)
+  EXP(1, 2) + EXP(0, 2)
+  (m : Num) == 1
+  (z2 : Num)
+  (y2 : Num)
+  (x2 : Num)
+  (w2 : Num)
+  (z1 : Num)
+  (y1 : Num)
+  (x1 : Num)
+  (w1 : Num)
+  (1 < (x : Num)) == (!(x == 0) && !(x == 1))
+  !((p : Num) == 1)
+  (m : Num) == 0
+  (p : Num) == 0
+  !((p : Num) * (m : Num) == 0)
+  ((p : Num) < p * (m : Num)) == (p * 1 < p * m)
+  ((m : Num) < (p : Num) * m) == (1 * m < p * m)
+  (m : Num) == 1
+  (m : Num)
+  divides((p : Num), (n : Num))
+  (p : Num)
   0
   1
-  n = 1
+  (n : Num) == 1
   0
-  n = 0
-  n:num
-  forall n. ?w x y z. &n = &w pow 2 + &x pow 2 + &y pow 2 + &z pow 2
-  m:num
-  m:num
-  m:num
-  m:num
-  m:num
-  p:num
-  n:num
-  forall n. ?w x y z. n = w EXP 2 + x EXP 2 + y EXP 2 + z EXP 2
-  n:num
-  n:num
-  a:int
-  a:int
-  forall a. &0 <= a <=> ?w x y z. a = w pow 2 + x pow 2 + y pow 2 + z pow 2
+  (n : Num) == 0
+  (n : Num)
+  \226\136\128 n : Num, \226\136\131 w : Num, \226\136\131 x : Num, \226\136\131 y : Num, \226\136\131 z : Num, real_of_num(n) == pow(real_of_num(w), 2) + (pow(real_of_num(x), 2) + (pow(real_of_num(y), 2) + pow(real_of_num(z), 2)))
+  (m : Num)
+  (m : Num)
+  (m : Num)
+  (m : Num)
+  (m : Num)
+  (p : Num)
+  (n : Num)
+  \226\136\128 n : Num, \226\136\131 w : Num, \226\136\131 x : Num, \226\136\131 y : Num, \226\136\131 z : Num, n == EXP(w, 2) + (EXP(x, 2) + (EXP(y, 2) + EXP(z, 2)))
+  (n : Num)
+  (n : Num)
+  (a : Int)
+  (a : Int)
+  \226\136\128 a : Int, (int_of_num(0) <= a) == (\226\136\131 w : Int, \226\136\131 x : Int, \226\136\131 y : Int, \226\136\131 z : Int, a == pow(w, 2) + (pow(x, 2) + (pow(y, 2) + pow(z, 2))))
 involution =  |- (#forall:fun(fun(fun('?1,bool),bool),bool) (\s:fun('?1,bool). (#forall:fun(fun(fun('?1,'?1),bool),bool) (\f:fun('?1,'?1). ((#=:fun(bool,fun(bool,bool)) ((#involution:fun(fun('?1,'?1),fun(fun('?1,bool),bool)) f:fun('?1,'?1)) s:fun('?1,bool))) (#forall:fun(fun('?1,bool),bool) (\x:'?1. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('?1,fun(fun('?1,bool),bool)) x:'?1) s:fun('?1,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?1,fun(fun('?1,bool),bool)) (f:fun('?1,'?1) x:'?1)) s:fun('?1,bool))) ((#=:fun('?1,fun('?1,bool)) (f:fun('?1,'?1) (f:fun('?1,'?1) x:'?1))) x:'?1))))))))))
 INVOLUTION_IMAGE =  |- (#forall:fun(fun(fun('?2,'?2),bool),bool) (\f:fun('?2,'?2). (#forall:fun(fun(fun('?2,bool),bool),bool) (\s:fun('?2,bool). ((#==>:fun(bool,fun(bool,bool)) ((#involution:fun(fun('?2,'?2),fun(fun('?2,bool),bool)) f:fun('?2,'?2)) s:fun('?2,bool))) ((#=:fun(fun('?2,bool),fun(fun('?2,bool),bool)) ((#IMAGE:fun(fun('?2,'?2),fun(fun('?2,bool),fun('?2,bool))) f:fun('?2,'?2)) s:fun('?2,bool))) s:fun('?2,bool)))))))
 INVOLUTION_DELETE =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#involution:fun(fun('?3,'?3),fun(fun('?3,bool),bool)) f:fun('?3,'?3)) s:fun('?3,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?3,fun(fun('?3,bool),bool)) a:'?3) s:fun('?3,bool))) ((#=:fun('?3,fun('?3,bool)) (f:fun('?3,'?3) a:'?3)) a:'?3)))) ((#involution:fun(fun('?3,'?3),fun(fun('?3,bool),bool)) f:fun('?3,'?3)) ((#DELETE:fun(fun('?3,bool),fun('?3,fun('?3,bool))) s:fun('?3,bool)) a:'?3)))
