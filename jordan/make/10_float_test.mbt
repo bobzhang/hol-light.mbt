@@ -6059,7 +6059,7 @@ test "Jordan/float matches Jordan/float.ml" {
       #|  DECIMAL
       #|  -DECIMAL(3, 1)
       #|  DECIMAL
-      #|  op_minus_minus
+      #|  real_neg
       #|  DECIMAL(34, 10)
       #|  DECIMAL
       #|  -DECIMAL(34, 10)
@@ -6178,13 +6178,13 @@ test "Jordan/float matches Jordan/float.ml" {
       #|  ((A : Bool) \226\134\146 (B : Bool) \226\134\146 (C : Bool)) \226\134\146 A && B \226\134\146 C
       #|  \226\136\128 x : Real, \226\136\128 f : Real, \226\136\128 ex : Real, \226\136\128 y : Real, \226\136\128 g : Real, \226\136\128 ey : Real, interval(x, f, ex) && interval(y, g, ey) \226\134\146 interval(x + y, f + g, ex + ey)
       #|  :real
-      #|  op_lt_eq
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_le
+      #|  real_le
+      #|  real_le
       #|  :real
-      #|  op_lt_eq
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_le
+      #|  real_le
+      #|  real_le
       #|  \226\136\128 x : Real, \226\136\128 y : Real, -x - -y == -(x - y)
       #|  \226\136\128 x : Real, \226\136\128 f : Real, \226\136\128 ex : Real, interval(x, f, ex) == interval(-x, -f, ex)
       #|  \226\136\128 x : Real, \226\136\128 y : Real, -x - y == -(x - -y)
@@ -6214,37 +6214,37 @@ test "Jordan/float matches Jordan/float.ml" {
       #|  (x : Real) * (y : Real) - (f : Real) * (g : Real) == f * (y - g) + ((x - f) * g + (x - f) * (y - g))
       #|  \226\136\128 x : Real, \226\136\128 f : Real, \226\136\128 ex : Real, \226\136\128 y : Real, \226\136\128 g : Real, \226\136\128 ey : Real, interval(x, f, ex) && interval(y, g, ey) \226\134\146 interval(x * y, f * g, abs(f) * ey + (ex * abs(g) + ex * ey))
       #|  :real
-      #|  op_lt_eq
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_le
+      #|  real_le
+      #|  real_le
       #|  :real
-      #|  op_lt_eq
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_le
+      #|  real_le
+      #|  real_le
       #|  :real
-      #|  op_lt_eq
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_le
+      #|  real_le
+      #|  real_le
       #|  :real
-      #|  op_lt_eq
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_le
+      #|  real_le
+      #|  real_le
       #|  :real
-      #|  op_lt_eq
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_le
+      #|  real_le
+      #|  real_le
       #|  \226\136\128 n : Num, interval(real_of_num(n), float(int_of_num(n), int_of_num(0)), float(int_of_num(0), int_of_num(0)))
       #|  abs((x : Real) - (g : Real)) <= abs((f : Real) - g) + abs(x - f)
       #|  \226\136\128 x : Real, \226\136\128 f : Real, \226\136\128 ex : Real, \226\136\128 g : Real, interval(x, f, ex) \226\134\146 interval(x, g, abs(f - g) + ex)
       #|  :real
-      #|  op_lt_eq
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_le
+      #|  real_le
+      #|  real_le
       #|  \226\136\128 x : Real, \226\136\128 f : Real, \226\136\128 ex : Real, \226\136\128 ex' : Real, ex <= ex' \226\134\146 interval(x, f, ex) \226\134\146 interval(x, f, ex')
       #|  :real
-      #|  op_lt_eq
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_le
+      #|  real_le
+      #|  real_le
       #|  \226\136\128 x : Real, \226\136\128 f : Real, \226\136\128 ex : Real, interval(x, f, ex) \226\134\146 x <= f + ex
       #|  \226\136\128 x : Real, \226\136\128 f : Real, \226\136\128 ex : Real, interval(x, f, ex) \226\134\146 f - ex <= x
       #|  \226\136\128 x : Real, \226\136\128 f : Real, \226\136\128 ex : Real, interval(x, f, ex) \226\134\146 abs(f) - ex <= abs(x)
@@ -6288,21 +6288,21 @@ test "Jordan/float matches Jordan/float.ml" {
       #|  !((y : Real) == real_of_num(0))
       #|  \226\136\128 x : Real, \226\136\128 f : Real, \226\136\128 ex : Real, \226\136\128 y : Real, \226\136\128 g : Real, \226\136\128 ey : Real, \226\136\128 h : Real, \226\136\128 ez : Real, interval(x, f, ex) && interval(y, g, ey) && ey < abs(g) && ex + (abs(f - h * g) + abs(h) * ey) <= ez * (abs(g) - ey) \226\134\146 interval(x / y, h, ez)
       #|  :real
-      #|  op_lt_eq
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_le
+      #|  real_le
+      #|  real_le
       #|  :real
-      #|  op_lt_eq
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_le
+      #|  real_le
+      #|  real_le
       #|  :real
-      #|  op_lt_eq
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_le
+      #|  real_le
+      #|  real_le
       #|  :real
-      #|  op_lt_eq
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_le
+      #|  real_le
+      #|  real_le
       #|  (f : Real)
       #|  (x : Real)
       #|  \226\136\128 x : Real, \226\136\128 f : Real, \226\136\128 ex : Real, interval(x, f, ex) \226\134\146 interval(abs(x), abs(f), ex)
@@ -6347,7 +6347,7 @@ test "Jordan/float matches Jordan/float.ml" {
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
-      #|  abs
+      #|  real_abs
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
       #|  B ==> (A==>B)
@@ -6430,7 +6430,7 @@ test "Jordan/float matches Jordan/float.ml" {
       #|  real_of_num
       #|  interval(-real_of_num(3 + 4), float(-int_of_num(7), int_of_num(0)), float(int_of_num(0), int_of_num(0)))
       #|  -real_of_num(3 + 4)
-      #|  op_minus_minus
+      #|  real_neg
       #|  real_of_num
       #|  (NUMERAL m) MOD (NUMERAL n)
       #|  (NUMERAL m) DIV (NUMERAL n)
@@ -6454,7 +6454,7 @@ test "Jordan/float matches Jordan/float.ml" {
       #|  interval
       #|  interval
       #|  \226\136\128 f : Real, \226\136\128 g : Real, \226\136\128 ex : Real, \226\136\128 ey : Real, real_of_num(0) < g - (ey + (ex + f))
-      #|  op_lt
+      #|  real_lt
       #|  DECIMAL(1, 10) < DECIMAL(7, 1)
       #|  real_of_num(8)
       #|  (NUMERAL m) MOD (NUMERAL n)
@@ -6495,7 +6495,7 @@ test "Jordan/float matches Jordan/float.ml" {
       #|  interval
       #|  interval
       #|  \226\136\128 f : Real, \226\136\128 g : Real, \226\136\128 ex : Real, \226\136\128 ey : Real, real_of_num(0) < g - (ey + (ex + f))
-      #|  op_lt
+      #|  real_lt
       #|  real_of_num(3) < real_of_num(8)
       #|  \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 p : Num, (real_of_num(p) / real_of_num(m) <= real_of_num(n)) == (real_of_num(p) / real_of_num(m) <= real_of_num(n) / real_of_num(1))
       #|  \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 p : Num, (real_of_num(p) <= real_of_num(n) / real_of_num(m)) == (real_of_num(p) / real_of_num(1) <= real_of_num(n) / real_of_num(m))
@@ -6534,10 +6534,10 @@ test "Jordan/float matches Jordan/float.ml" {
       #|  int_neg
       #|  int_of_num
       #|  float
-      #|  op_plus
-      #|  op_minus
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_add
+      #|  real_sub
+      #|  real_le
+      #|  real_le
       #|  interval
       #|  interval
       #|  DECIMAL(361, 10)
@@ -6550,10 +6550,10 @@ test "Jordan/float matches Jordan/float.ml" {
       #|  int_neg
       #|  int_of_num
       #|  float
-      #|  op_plus
-      #|  op_minus
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_add
+      #|  real_sub
+      #|  real_le
+      #|  real_le
       #|  interval
       #|  DECIMAL(3333, 100)
       #|  DECIMAL
@@ -6564,15 +6564,15 @@ test "Jordan/float matches Jordan/float.ml" {
       #|  int_neg
       #|  int_of_num
       #|  float
-      #|  op_plus
-      #|  op_minus
-      #|  op_lt_eq
-      #|  op_lt_eq
+      #|  real_add
+      #|  real_sub
+      #|  real_le
+      #|  real_le
       #|  interval
       #|  interval
       #|  interval
       #|  \226\136\128 f : Real, \226\136\128 g : Real, \226\136\128 ex : Real, \226\136\128 ey : Real, real_of_num(0) < g - (ey + (ex + f))
-      #|  op_lt
+      #|  real_lt
       #|  \226\136\128 n : Int, interval(twopow(n), float(int_of_num(1), n), float(int_of_num(0), int_of_num(0)))
       #|twopow =  |- (#forall:fun(fun(int,bool),bool) (\x:int. ((#=:fun(real,fun(real,bool)) (#twopow:fun(int,real) x:int)) (((#COND:fun(bool,fun(real,fun(real,real))) (#?:fun(fun(num,bool),bool) (\n:num. ((#=:fun(int,fun(int,bool)) x:int) (#int_of_num:fun(num,int) n:num))))) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#nabs:fun(int,num) x:int))) (#real_inv:fun(real,real) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#nabs:fun(int,num) x:int)))))))
       #|float =  |- (#forall:fun(fun(int,bool),bool) (\x:int. (#forall:fun(fun(int,bool),bool) (\n:int. ((#=:fun(real,fun(real,bool)) ((#float:fun(int,fun(int,real)) x:int) n:int)) ((#real_mul:fun(real,fun(real,real)) (#real_of_int:fun(int,real) x:int)) (#twopow:fun(int,real) n:int)))))))
