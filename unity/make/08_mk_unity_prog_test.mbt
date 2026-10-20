@@ -5913,7 +5913,7 @@ test "Unity/mk_unity_prog matches Unity/mk_unity_prog.ml" {
       #|  ID_PAR (s0:stype) (s:stype) = s
       #|  (ITER_PAR0 (low:num) 0 (f:num->bool)\n       (fi:num->stype->stype->stype) = ID_PAR) /\\\n   (ITER_PAR0 low (SUC n) f fi =\n       (if (f low) then PAR_PAR (fi low) (ITER_PAR0 (SUC low) n f fi)\n                   else (ITER_PAR0 (SUC low) n f fi)))
       #|  ITER_PAR low high (f:num->bool)\n                      (fi:num->stype->stype->stype) =\n      (ITER_PAR0 low ((1+high)-low) f fi)
-      #|  K x y = x
+      #|  (K : (_, _) -> _)((x : _), (y : _)) == x
       #|  ASG_ACT (par:stype->stype->stype)\n            (pc:'loc) (mk:num->'val) (ds:'val->num) (l0:num) =\n          PAR_ATOM\n           (WHEN_PAR (LIST_PAR [par; LOC_ASG pc mk (K (SUC l0))])\n                     (LOC_EXP pc ds =* (K l0)))
       #|  TST_ACT (g:stype->bool)\n            (l:num) (pc:'loc) (mk:num->'val) (ds:'val->num) (l0:num) =\n     (PAR_ATOM (WHEN_PAR (LOC_ASG pc mk ((g =>* K(SUC l0)) (K l)))\n                    (LOC_EXP pc ds =* K l0)))
       #|  GTO_ACT (l:num) (pc:'loc) (mk:num->'val) (ds:'val->num) (l0:num) =\n        PAR_ATOM (WHEN_PAR (LOC_ASG pc mk (K l))\n                           (LOC_EXP pc ds =* K l0))
@@ -5957,17 +5957,17 @@ test "Unity/mk_unity_prog matches Unity/mk_unity_prog.ml" {
       #|  RESTRICTED_LEADSTO (v:'state->bool) p q Pr =\n        (((p /\\* v) LEADSTO q) Pr)
       #|  VALID (p:'state->bool) = forall s. p s
       #|  (TRIPLE (p:'state->bool) q [] = T) /\\\n   (TRIPLE p q (CONS (st:'state->'state) Pr) =\n     ((forall s. p s ==> q(st s)) /\\ TRIPLE p q Pr))
-      #|  (SUMMA0 lwb 0 f b = 0) /\\\n   (SUMMA0 lwb (SUC n) f b =\n          ((if (f lwb) then (b lwb) else 0) + (SUMMA0 (SUC lwb) n f b)))
-      #|  SUMMA lwb upb f b = SUMMA0 lwb ((1 + upb)-lwb) f b
+      #|  (SUMMA0 : (Num, Num, (Num) -> Bool, (Num) -> Num) -> Num)((lwb : Num), 0, (f : (Num) -> Bool), (b : (Num) -> Num)) == 0 && SUMMA0(lwb, SUC((n : Num)), f, b) == (if f(lwb) { b(lwb) } else { 0 }) + SUMMA0(SUC(lwb), n, f, b)
+      #|  (SUMMA : (Num, Num, (Num) -> Bool, (Num) -> Num) -> Num)((lwb : Num), (upb : Num), (f : (Num) -> Bool), (b : (Num) -> Num)) == SUMMA0(lwb, 1 + upb - lwb, f, b)
       #|  SUMMA_S lwb upb f b (s:'state) =\n          SUMMA (lwb s) (upb s) (\\i. f i s) (\\i. b i s)
-      #|  (MULTA0 lwb 0 f b = 1) /\\\n   (MULTA0 lwb (SUC n) f b =\n      ((if (f lwb) then (b lwb) else 1) * (MULTA0 (SUC lwb) n f b)))
-      #|  MULTA lwb upb f b = MULTA0 lwb ((1 + upb)-lwb) f b
+      #|  (MULTA0 : (Num, Num, (Num) -> Bool, (Num) -> Num) -> Num)((lwb : Num), 0, (f : (Num) -> Bool), (b : (Num) -> Num)) == 1 && MULTA0(lwb, SUC((n : Num)), f, b) == (if f(lwb) { b(lwb) } else { 1 }) * MULTA0(SUC(lwb), n, f, b)
+      #|  (MULTA : (Num, Num, (Num) -> Bool, (Num) -> Num) -> Num)((lwb : Num), (upb : Num), (f : (Num) -> Bool), (b : (Num) -> Num)) == MULTA0(lwb, 1 + upb - lwb, f, b)
       #|  MULTA_S lwb upb f b (s:'state) =\n          MULTA (lwb s) (upb s) (\\i. f i s) (\\i. b i s)
-      #|  (CONJA0 lwb 0 f b = T) /\\\n   (CONJA0 lwb (SUC n) f b =\n     ((if (f lwb) then (b lwb) else T) /\\ (CONJA0 (SUC lwb) n f b)))
-      #|  CONJA lwb upb f b = CONJA0 lwb ((1 + upb)-lwb) f b
+      #|  (CONJA0 : (Num, Num, (Num) -> Bool, (Num) -> Bool) -> Bool)((lwb : Num), 0, (f : (Num) -> Bool), (b : (Num) -> Bool)) == true && CONJA0(lwb, SUC((n : Num)), f, b) == ((if f(lwb) { b(lwb) } else { true }) && CONJA0(SUC(lwb), n, f, b))
+      #|  (CONJA : (Num, Num, (Num) -> Bool, (Num) -> Bool) -> Bool)((lwb : Num), (upb : Num), (f : (Num) -> Bool), (b : (Num) -> Bool)) == CONJA0(lwb, 1 + upb - lwb, f, b)
       #|  CONJA_S lwb upb f b (s:'state) =\n          CONJA (lwb s) (upb s) (\\i. f i s) (\\i. b i s)
-      #|  (DISJA0 lwb 0 f b = F) /\\\n   (DISJA0 lwb (SUC n) f b =\n      ((if (f lwb) then (b lwb) else F) \\/ (DISJA0 (SUC lwb) n f b)))
-      #|  DISJA lwb upb f b = DISJA0 lwb ((1 + upb)-lwb) f b
+      #|  (DISJA0 : (Num, Num, (Num) -> Bool, (Num) -> Bool) -> Bool)((lwb : Num), 0, (f : (Num) -> Bool), (b : (Num) -> Bool)) == false && DISJA0(lwb, SUC((n : Num)), f, b) == ((if f(lwb) { b(lwb) } else { false }) || DISJA0(SUC(lwb), n, f, b))
+      #|  (DISJA : (Num, Num, (Num) -> Bool, (Num) -> Bool) -> Bool)((lwb : Num), (upb : Num), (f : (Num) -> Bool), (b : (Num) -> Bool)) == DISJA0(lwb, 1 + upb - lwb, f, b)
       #|  DISJA_S lwb upb f b (s:'state) =\n          DISJA (lwb s) (upb s) (\\i. f i s) (\\i. b i s)
       #|  (MEMBER (x:'a) []    = F) /\\\n   (MEMBER x (CONS h t) = ((x=h) \\/ (MEMBER x t)))
       #|  (UNIQUE []              = T) /\\\n   (UNIQUE (CONS (h:'a) t) = ((~(MEMBER h t)) /\\ UNIQUE t))

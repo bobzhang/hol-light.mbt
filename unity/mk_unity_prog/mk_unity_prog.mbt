@@ -814,7 +814,7 @@ pub fn iter_par() -> @kernel.Thm {
 ///|
 /// K_DEF
 fn step_54() -> Unit raise {
-  k_def_c.set(@pair.new_definition(@parser.parse_term("K x y = x")))
+  k_def_c.set(@pair.new_definition(@term_syntax.parse_term("(K : (_, _) -> _)((x : _), (y : _)) == x")))
 }
 
 ///|
@@ -1594,7 +1594,7 @@ pub fn restricted_triple() -> @kernel.Thm {
 ///|
 /// SUMMA0_term
 fn step_106() -> Unit raise {
-  summa0_term_c.set(@parser.parse_term("(SUMMA0 lwb 0 f b = 0) /\\\n   (SUMMA0 lwb (SUC n) f b =\n          ((if (f lwb) then (b lwb) else 0) + (SUMMA0 (SUC lwb) n f b)))"))
+  summa0_term_c.set(@term_syntax.parse_term("(SUMMA0 : (Num, Num, (Num) -> Bool, (Num) -> Num) -> Num)((lwb : Num), 0, (f : (Num) -> Bool), (b : (Num) -> Num)) == 0 && SUMMA0(lwb, SUC((n : Num)), f, b) == (if f(lwb) { b(lwb) } else { 0 }) + SUMMA0(SUC(lwb), n, f, b)"))
 }
 
 ///|
@@ -1624,7 +1624,7 @@ pub fn summa0() -> @kernel.Thm {
 ///|
 /// SUMMA
 fn step_108() -> Unit raise {
-  summa_c.set(@pair.new_definition(@parser.parse_term("SUMMA lwb upb f b = SUMMA0 lwb ((1 + upb)-lwb) f b")))
+  summa_c.set(@pair.new_definition(@term_syntax.parse_term("(SUMMA : (Num, Num, (Num) -> Bool, (Num) -> Num) -> Num)((lwb : Num), (upb : Num), (f : (Num) -> Bool), (b : (Num) -> Num)) == SUMMA0(lwb, 1 + upb - lwb, f, b)")))
 }
 
 ///|
@@ -1654,7 +1654,7 @@ pub fn summa_s() -> @kernel.Thm {
 ///|
 /// MULTA0_term
 fn step_110() -> Unit raise {
-  multa0_term_c.set(@parser.parse_term("(MULTA0 lwb 0 f b = 1) /\\\n   (MULTA0 lwb (SUC n) f b =\n      ((if (f lwb) then (b lwb) else 1) * (MULTA0 (SUC lwb) n f b)))"))
+  multa0_term_c.set(@term_syntax.parse_term("(MULTA0 : (Num, Num, (Num) -> Bool, (Num) -> Num) -> Num)((lwb : Num), 0, (f : (Num) -> Bool), (b : (Num) -> Num)) == 1 && MULTA0(lwb, SUC((n : Num)), f, b) == (if f(lwb) { b(lwb) } else { 1 }) * MULTA0(SUC(lwb), n, f, b)"))
 }
 
 ///|
@@ -1684,7 +1684,7 @@ pub fn multa0() -> @kernel.Thm {
 ///|
 /// MULTA
 fn step_112() -> Unit raise {
-  multa_c.set(@pair.new_definition(@parser.parse_term("MULTA lwb upb f b = MULTA0 lwb ((1 + upb)-lwb) f b")))
+  multa_c.set(@pair.new_definition(@term_syntax.parse_term("(MULTA : (Num, Num, (Num) -> Bool, (Num) -> Num) -> Num)((lwb : Num), (upb : Num), (f : (Num) -> Bool), (b : (Num) -> Num)) == MULTA0(lwb, 1 + upb - lwb, f, b)")))
 }
 
 ///|
@@ -1714,7 +1714,7 @@ pub fn multa_s() -> @kernel.Thm {
 ///|
 /// CONJA0_term
 fn step_114() -> Unit raise {
-  conja0_term_c.set(@parser.parse_term("(CONJA0 lwb 0 f b = T) /\\\n   (CONJA0 lwb (SUC n) f b =\n     ((if (f lwb) then (b lwb) else T) /\\ (CONJA0 (SUC lwb) n f b)))"))
+  conja0_term_c.set(@term_syntax.parse_term("(CONJA0 : (Num, Num, (Num) -> Bool, (Num) -> Bool) -> Bool)((lwb : Num), 0, (f : (Num) -> Bool), (b : (Num) -> Bool)) == true && CONJA0(lwb, SUC((n : Num)), f, b) == ((if f(lwb) { b(lwb) } else { true }) && CONJA0(SUC(lwb), n, f, b))"))
 }
 
 ///|
@@ -1744,7 +1744,7 @@ pub fn conja0() -> @kernel.Thm {
 ///|
 /// CONJA
 fn step_116() -> Unit raise {
-  conja_c.set(@pair.new_definition(@parser.parse_term("CONJA lwb upb f b = CONJA0 lwb ((1 + upb)-lwb) f b")))
+  conja_c.set(@pair.new_definition(@term_syntax.parse_term("(CONJA : (Num, Num, (Num) -> Bool, (Num) -> Bool) -> Bool)((lwb : Num), (upb : Num), (f : (Num) -> Bool), (b : (Num) -> Bool)) == CONJA0(lwb, 1 + upb - lwb, f, b)")))
 }
 
 ///|
@@ -1774,7 +1774,7 @@ pub fn conja_s() -> @kernel.Thm {
 ///|
 /// DISJA0_term
 fn step_118() -> Unit raise {
-  disja0_term_c.set(@parser.parse_term("(DISJA0 lwb 0 f b = F) /\\\n   (DISJA0 lwb (SUC n) f b =\n      ((if (f lwb) then (b lwb) else F) \\/ (DISJA0 (SUC lwb) n f b)))"))
+  disja0_term_c.set(@term_syntax.parse_term("(DISJA0 : (Num, Num, (Num) -> Bool, (Num) -> Bool) -> Bool)((lwb : Num), 0, (f : (Num) -> Bool), (b : (Num) -> Bool)) == false && DISJA0(lwb, SUC((n : Num)), f, b) == ((if f(lwb) { b(lwb) } else { false }) || DISJA0(SUC(lwb), n, f, b))"))
 }
 
 ///|
@@ -1804,7 +1804,7 @@ pub fn disja0() -> @kernel.Thm {
 ///|
 /// DISJA
 fn step_120() -> Unit raise {
-  disja_c.set(@pair.new_definition(@parser.parse_term("DISJA lwb upb f b = DISJA0 lwb ((1 + upb)-lwb) f b")))
+  disja_c.set(@pair.new_definition(@term_syntax.parse_term("(DISJA : (Num, Num, (Num) -> Bool, (Num) -> Bool) -> Bool)((lwb : Num), (upb : Num), (f : (Num) -> Bool), (b : (Num) -> Bool)) == DISJA0(lwb, 1 + upb - lwb, f, b)")))
 }
 
 ///|
