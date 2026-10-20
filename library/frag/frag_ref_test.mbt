@@ -5672,112 +5672,112 @@ test "Library/frag matches Library/frag.ml" {
       #|1 basis elements and 0 critical pairs
       #|Translating certificate to HOL inferences
       #|Library/frag quotations (109):
-      #|  (\\x. &0):A->int
-      #|  ?f:A->int. FINITE {x | ~(f x = &0)}
+      #|  (x : A) => int_of_num(0)
+      #|  \226\136\131 f : (A) -> Int, FINITE({(x : A) | !(f(x) == int_of_num(0))})
       #|  frag_support (x:A frag) = {a | ~(dest_frag x a = &0)}
-      #|  frag_0:A frag = mk_frag (\\x. &0)
+      #|  (frag_0 : Frag[A]) == mk_frag((x : A) => int_of_num(0))
       #|  frag_of (c:A) = mk_frag (\\a. if a = c then &1 else &0)
       #|  frag_neg (x:A frag) = mk_frag (\\a. --(dest_frag x a))
       #|  frag_cmul c (x:A frag) = mk_frag (\\a. c * dest_frag x a)
       #|  frag_add (x:A frag) y = mk_frag (\\a. dest_frag x a + dest_frag y a)
       #|  frag_sub (x:A frag) y = mk_frag (\\a. dest_frag x a - dest_frag y a)
       #|  forall c1 c2:A frag. c1 = c2 <=> dest_frag c1 = dest_frag c2
-      #|  dest_frag(frag_0:A frag) = \\x. &0
-      #|  ~(if p then F else T) <=> p
+      #|  dest_frag(frag_0) == ((x : A) => int_of_num(0))
+      #|  !(if (p : Bool) { false } else { true }) == p
       #|  forall c:A. dest_frag(frag_of c) = \\a. if a = c then &1 else &0
       #|  forall x:A frag. dest_frag(frag_neg x) = \\a. --(dest_frag x a)
-      #|  {a:A | ~(dest_frag x a = &0)}
+      #|  {(a : A) | !(dest_frag((x : Frag[A]), a) == int_of_num(0))}
       #|  forall c x:A frag. dest_frag(frag_cmul c x) = \\a. c * dest_frag x a
       #|  {a:A | ~(dest_frag x a = &0)} UNION {a | ~(dest_frag y a = &0)}
       #|  forall x y:A frag. dest_frag(frag_add x y) = \\a. dest_frag x a + dest_frag y a
       #|  {a:A | ~(dest_frag x a = &0)} UNION {a | ~(dest_frag y a = &0)}
       #|  forall x y:A frag. dest_frag(frag_sub x y) = \\a. dest_frag x a - dest_frag y a
-      #|  c = d ==> forall a:A. dest_frag c a = dest_frag d a
-      #|  a:A
-      #|  forall a:A. ~(frag_of a = frag_0)
+      #|  (c : Frag[A]) == (d : Frag[A]) \226\134\146 (\226\136\128 a : A, dest_frag(c, a) == dest_frag(d, a))
+      #|  (a : A)
+      #|  \226\136\128 a : A, !(frag_of(a) == frag_0)
       #|  forall x y:A frag. x = y <=> forall a. dest_frag x a = dest_frag y a
-      #|  forall x:A frag. FINITE(frag_support (x:A frag))
-      #|  frag_support frag_0 = {}
-      #|  ~(if p then F else T) <=> p
-      #|  forall a:A. frag_support(frag_of a) = {a}
-      #|  forall x:A frag. frag_support(frag_neg x) = frag_support x
+      #|  \226\136\128 x : Frag[A], FINITE(frag_support(x))
+      #|  (frag_support : (Frag[_], _) -> Bool)((frag_0 : Frag[_])) == ({} : (_) -> Bool)
+      #|  !(if (p : Bool) { false } else { true }) == p
+      #|  \226\136\128 a : A, frag_support(frag_of(a)) == {a}
+      #|  \226\136\128 x : Frag[A], frag_support(frag_neg(x)) == frag_support(x)
       #|  forall a x:A frag. frag_support(frag_cmul a x) SUBSET frag_support x
       #|  forall x y:A frag. frag_support(frag_add x y) SUBSET\n                frag_support x UNION frag_support y
       #|  forall x y:A frag. frag_support(frag_sub x y) SUBSET\n                frag_support x UNION frag_support y
-      #|  c = d <=> dest_frag c = dest_frag d
-      #|  forall c:A frag. frag_support c = {} <=> c = frag_0
-      #|  {x} = {y} <=> x = y
-      #|  forall x y:A. frag_of x = frag_of y <=> x = y
+      #|  ((c : Frag[_]) == (d : Frag[_])) == (dest_frag(c) == dest_frag(d))
+      #|  \226\136\128 c : Frag[A], (frag_support(c) == {}) == (c == frag_0)
+      #|  ({(x : _)} == {(y : _)}) == (x == y)
+      #|  \226\136\128 x : A, \226\136\128 y : A, (frag_of(x) == frag_of(y)) == (x == y)
       #|  ~(~(x:int = &0) /\\ ~(y = &0)) ==> x + y = &0 ==> x = &0 /\\ y = &0
       #|  forall c1 c2:A frag.\n        DISJOINT (frag_support c1) (frag_support c2) /\\\n        frag_add c1 c2 = frag_0\n        ==> c1 = frag_0 /\\ c2 = frag_0
       #|  (frag_add x y = y <=> x = frag_0) /\\\n    (frag_add y x = y <=> x = frag_0)
-      #|  neutral frag_add :A frag = frag_0
-      #|  monoidal frag_add
+      #|  (neutral : ((Frag[A], Frag[A]) -> Frag[A]) -> Frag[A])((frag_add : (Frag[A], Frag[A]) -> Frag[A])) == (frag_0 : Frag[A])
+      #|  (monoidal : ((Frag[_], Frag[_]) -> Frag[_]) -> Bool)((frag_add : (Frag[_], Frag[_]) -> Frag[_]))
       #|  frag_cmul a (frag_add x y) =\n    frag_add (frag_cmul a x) (frag_cmul a y)
-      #|  frag_cmul a frag_0 = frag_0
-      #|  k:B->bool
-      #|  {x | x IN k /\\ ~((f:B->A frag) x = frag_0)}
-      #|  FINITE {x | x IN k /\\ ~((f:B->A frag) x = frag_0)}
-      #|  frag_cmul a frag_0 = frag_0
-      #|  frag_cmul a c = frag_0 <=> a = &0 \\/ c = frag_0
-      #|  frag_cmul (&0) x = frag_0
-      #|  a:int = &0
+      #|  (frag_cmul : (Int, Frag[_]) -> Frag[_])((a : Int), (frag_0 : Frag[_])) == (frag_0 : Frag[_])
+      #|  (k : (B) -> Bool)
+      #|  {(x : B) | IN(x, (k : (B) -> Bool)) && !((f : (B) -> Frag[A])(x) == frag_0)}
+      #|  FINITE({(x : B) | IN(x, (k : (B) -> Bool)) && !((f : (B) -> Frag[A])(x) == frag_0)})
+      #|  (frag_cmul : (Int, Frag[_]) -> Frag[_])((a : Int), (frag_0 : Frag[_])) == (frag_0 : Frag[_])
+      #|  (frag_cmul((a : Int), (c : Frag[_])) == frag_0) == (a == int_of_num(0) || c == frag_0)
+      #|  frag_cmul(int_of_num(0), (x : Frag[_])) == frag_0
+      #|  (a : Int) == int_of_num(0)
       #|  forall f:B->A frag k a.\n        frag_cmul a (iterate frag_add k f) =\n        iterate frag_add k (\\b. frag_cmul a (f b))
-      #|  k:B->bool
-      #|  support frag_add (f:B->A frag) k
+      #|  (k : (B) -> Bool)
+      #|  support(frag_add, (f : (B) -> Frag[A]), (k : (B) -> Bool))
       #|  UNIONS {frag_support (f i) |i| i IN support frag_add (f:B->A frag) k}
       #|  forall f:B->A frag k.\n        frag_support(iterate frag_add k f) SUBSET\n        UNIONS {frag_support(f i) | i IN k}
       #|  frag_extend (f:A->B frag) x =\n        iterate frag_add (frag_support x)\n            (\\a. frag_cmul (dest_frag x a) (f a))
       #|  forall f:A->B frag x.\n        frag_extend f x =\n        iterate frag_add UNIV (\\a. frag_cmul (dest_frag x a) (f a))
-      #|  forall f:A->B frag. frag_extend f frag_0 = frag_0
-      #|  forall f:A->B frag a. frag_extend f (frag_of a) = f a
-      #|  frag_cmul (a * b) c = frag_cmul a (frag_cmul b c)
-      #|  frag_cmul (&0) x = frag_0
-      #|  c:int = &0
+      #|  \226\136\128 f : (A) -> Frag[B], frag_extend(f, frag_0) == frag_0
+      #|  \226\136\128 f : (A) -> Frag[B], \226\136\128 a : A, frag_extend(f, frag_of(a)) == f(a)
+      #|  frag_cmul((a : Int) * (b : Int), (c : Frag[_])) == frag_cmul(a, frag_cmul(b, c))
+      #|  frag_cmul(int_of_num(0), (x : Frag[_])) == frag_0
+      #|  (c : Int) == int_of_num(0)
       #|  forall f:A->B frag c x.\n        frag_extend f (frag_cmul c x) = frag_cmul c (frag_extend f x)
-      #|  frag_neg x = frag_cmul (-- &1) x
+      #|  frag_neg((x : Frag[_])) == frag_cmul(-int_of_num(1), x)
       #|  forall f:A->B frag x.\n        frag_extend f (frag_neg x) = frag_neg(frag_extend f x)
-      #|  frag_support (y:A frag)
-      #|  frag_support (x:A frag)
+      #|  frag_support((y : Frag[A]))
+      #|  frag_support((x : Frag[A]))
       #|  forall f:A->B frag x y.\n        frag_extend f (frag_add x y) =\n        frag_add (frag_extend f x) (frag_extend f y)
-      #|  frag_sub x y = frag_add x (frag_cmul (-- &1) y)
+      #|  frag_sub((x : Frag[_]), (y : Frag[_])) == frag_add(x, frag_cmul(-int_of_num(1), y))
       #|  forall f:A->B frag x y.\n        frag_extend f (frag_sub x y) =\n        frag_sub (frag_extend f x) (frag_extend f y)
       #|  forall f:A->B frag g k:C->bool.\n        FINITE k\n        ==> frag_extend f (iterate frag_add k g) =\n            iterate frag_add k (frag_extend f o g)
       #|  forall(g:A->B frag) h c.\n        (forall f. f IN frag_support c ==> g f = h f)\n        ==> frag_extend g c = frag_extend h c
       #|  forall(f:A->B frag) c.\n        (forall a. a IN frag_support c ==> f a = frag_0)\n        ==> frag_extend f c = frag_0
       #|  forall f:A->B frag c.\n        frag_support(frag_extend f c) SUBSET\n        UNIONS {frag_support(f a) | a IN frag_support c}
-      #|  b:A = a
-      #|  k:A->bool
-      #|  a:A
+      #|  (b : A) == (a : A)
+      #|  (k : (A) -> Bool)
+      #|  (a : A)
       #|  forall k. FINITE k\n        ==> dest_frag(iterate frag_add k\n                        (\\a:A. frag_cmul (dest_frag x a) (frag_of a))) b =\n            if b IN k then dest_frag x b else &0
-      #|  b:A
-      #|  dest_frag x = dest_frag y ==> x = y
-      #|  forall x:A frag. x = frag_extend frag_of x
-      #|  a:int
-      #|  --a:int
-      #|  &0:int <= --a
-      #|  frag_sub x y = frag_sub x z <=> y = z
+      #|  (b : A)
+      #|  dest_frag((x : Frag[_])) == dest_frag((y : Frag[_])) \226\134\146 x == y
+      #|  \226\136\128 x : Frag[A], x == frag_extend(frag_of, x)
+      #|  (a : Int)
+      #|  -(a : Int)
+      #|  int_of_num(0) <= -(a : Int)
+      #|  (frag_sub((x : Frag[_]), (y : Frag[_])) == frag_sub(x, (z : Frag[_]))) == (y == z)
       #|  frag_cmul a x = frag_sub frag_0 (frag_cmul (--a) x)
-      #|  a:int
-      #|  a:int
-      #|  &0:int <= a
-      #|  &0:int <= a \\/ &0 <= --a
-      #|  a:int
-      #|  frag_cmul (&0) x = frag_0
+      #|  (a : Int)
+      #|  (a : Int)
+      #|  int_of_num(0) <= (a : Int)
+      #|  int_of_num(0) <= (a : Int) || int_of_num(0) <= -a
+      #|  (a : Int)
+      #|  frag_cmul(int_of_num(0), (x : Frag[_])) == frag_0
       #|  frag_cmul (a + &1) x = frag_sub (frag_cmul a x) (frag_sub frag_0 x)
-      #|  forall n. (P:(A frag)->bool) (frag_cmul (&n) c)
+      #|  \226\136\128 n : Num, (P : (Frag[A]) -> Bool)(frag_cmul(int_of_num(n), (c : Frag[A])))
       #|  forall P:A frag->bool.\n        P frag_0 /\\\n        (forall c1 c2. P c1 /\\ P c2 ==> P(frag_sub c1 c2))\n        ==> forall a c. P c ==> P(frag_cmul a c)
-      #|  frag_add x y = frag_sub x (frag_sub frag_0 y)
-      #|  k:A->bool
-      #|  frag_support(c:A frag)
-      #|  c:A frag
-      #|  c:A frag
-      #|  P:A frag->bool
+      #|  frag_add((x : Frag[_]), (y : Frag[_])) == frag_sub(x, frag_sub(frag_0, y))
+      #|  (k : (A) -> Bool)
+      #|  frag_support((c : Frag[A]))
+      #|  (c : Frag[A])
+      #|  (c : Frag[A])
+      #|  (P : (Frag[A]) -> Bool)
       #|  forall P:A frag->bool s.\n        P frag_0 /\\\n        (forall a. a IN s ==> P(frag_of a)) /\\\n        (forall c1 c2. P c1 /\\ P c2 ==> P(frag_sub c1 c2))\n        ==> forall c. frag_support c SUBSET s ==> P c
       #|  (forall c. frag_support c SUBSET UNIV ==> P c) ==> (forall c. P c)
       #|  forall(f:B->C frag) (g:A->B) c.\n        frag_extend f (frag_extend (frag_of o g) c) = frag_extend (f o g) c
-      #|  c:A frag
-      #|  c:A frag
+      #|  (c : Frag[A])
+      #|  (c : Frag[A])
       #|  frag_extend (\\f. if f IN s then frag_0 else frag_of f) c:A frag
       #|  frag_extend (\\f. if f IN s then frag_of f else frag_0) c:A frag
       #|  forall c s t:A->bool.\n        frag_support c SUBSET s UNION t\n        ==> ?d e. frag_support d SUBSET s /\\ frag_support e SUBSET t /\\\n                  frag_add d e = c
