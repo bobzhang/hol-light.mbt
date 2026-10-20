@@ -10292,263 +10292,263 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|0..0..1..2..3..8..17..26..43..60..77..94..111..128..157..186..215..268..321..374..467..560..653..754..855..956..1121..1286..1451..solved at 1491
       #|0..0..1..2..3..6..15..24..39..solved at 49
       #|Logic/prolog quotations (257):
-      #|  M satisfies (IMAGE f s) <=>\n   forall x v. valuation(M) v /\\ x IN s ==> holds M v (f x)
-      #|  definite(cl) <=> clause(cl) /\\ (CARD {p | p IN cl /\\ positive p} = 1)
-      #|  horn(cl) <=> clause(cl) /\\ CARD {p | p IN cl /\\ positive p} <= 1
-      #|  forall cl. definite(cl) ==> horn(cl)
-      #|  falsify ff cl = if definite(cl) then cl else ff INSERT cl
-      #|  FINITE(cl) ==> FINITE(falsify ff cl)
-      #|  x <= 1 /\\ ~(x = 1) ==> (x = 0)
-      #|  {p | p IN cl /\\ positive p} = {}
-      #|  Atom P args IN {p | p IN cl /\\ positive p}
-      #|  x <= 1 /\\ ~(x = 1) ==> (SUC x = 1)
-      #|  cl:form->bool
-      #|  FINITE {p | p IN cl /\\ positive p}
-      #|  positive(Atom P args)
-      #|  {p | p IN Atom P args INSERT cl /\\ positive p} =\n                (Atom P args) INSERT {p | p IN cl /\\ positive p}
-      #|  clause cl
-      #|  ~(definite cl)
-      #|  horn(cl) ==> definite(falsify (Atom P args) cl)
-      #|  FINITE(cl) /\\ holds M v (interp cl)\n   ==> holds M v (interp(falsify ff cl))
-      #|  p:form IN cl
-      #|  literal p
-      #|  ~a /\\ ~b ==> ~c <=> c ==> a \\/ b
-      #|  ~(Not(Atom ff []) IN UNIONS s)
-      #|  ~((Atom ff []) IN UNIONS s)
-      #|  ~((Atom ff []) IN cl) /\\ ~(Not(Atom ff []) IN cl)
-      #|  ~a ==> a ==> b
-      #|  zs:(A)list
-      #|  r:num
-      #|  v:num->A
-      #|  v:num->A
-      #|  holds M (v:num->A) p
-      #|  p:form
-      #|  p:form
-      #|  FINITE (cl:form->bool)
-      #|  v:num->A
-      #|  cl:form->bool
-      #|  valuation(Dom M,Fun M,\n         (\\p args. if (p = ff) /\\ (args = []) then F else Pred M p args)) v =\n    valuation M (v:num->A)
-      #|  v:num->A
-      #|  cl:form->bool
-      #|  ((Dom M):A->bool),Fun M,\n    (\\p args. if (p = ff) /\\ (args = []) then F else Pred M p args)
-      #|  ~(holds M (v:num->A) (interp cl))
-      #|  FINITE (cl:form->bool)
-      #|  holds M (v:num->A) (interp (Atom ff [] INSERT cl)) <=>\n                  holds M v (Atom ff []) \\/ holds M v (interp cl)
-      #|  v:num->A
-      #|  cl:form->bool
-      #|  v:num->A
-      #|  cl:form->bool
-      #|  (Dom M):A->bool = {}
-      #|  (forall c. c IN s ==> clause c) /\\\n   ~((Atom ff []) IN UNIONS s) /\\ ~(Not(Atom ff []) IN UNIONS s)\n   ==> (~(satisfiable (U:A->bool) (IMAGE interp s)) <=>\n        forall M. ~(Dom M = {}) /\\\n            M satisfies (IMAGE interp (IMAGE (falsify (Atom ff [])) s))\n            ==> forall v:num->A. valuation(M) v ==> holds M v (Atom ff []))
-      #|  minmodel s =\n     herbase(functions s),\n     Fn,\n     (\\p zs. forall H. (Dom(H) = herbase(functions s)) /\\\n                 (Fun(H) = Fn) /\\\n                 H satisfies s\n                 ==> Pred(H) p zs)
-      #|  v:num->term
-      #|  v:num->term
-      #|  t:term
-      #|  v:num->term
-      #|  termval\n    (herbase (functions s),\n     Fn,\n     (\\p zs.\n          forall H. (Dom H = herbase (functions s)) /\\ (Fun H = Fn) /\\ H satisfies s\n              ==> Pred H p zs)) =\n    termval H
-      #|  (a ==> (b <=> c)) ==> ((a ==> b) <=> (a ==> c))
-      #|  H:(term->bool)#((num->((term)list->term))#(num->((term)list->bool)))
-      #|  args:term list
-      #|  p:num
-      #|  forall p v s.\n        atom p\n        ==> (holds (minmodel s) v p <=>\n             forall H. (Dom(H) = herbase(functions s)) /\\\n                 (Fun(H) = Fn) /\\ H satisfies s\n                 ==> holds H v p)
-      #|  forall M v asm c.\n        holds M v (ITLIST (-->) asm c) <=>\n        (?p. MEM p asm /\\ ~(holds M v p)) \\/ holds M v c
-      #|  breakhorn(cl) =\n        if definite cl then\n          let p = @p. p IN cl /\\ positive p in\n          MAP (~~) (list_of_set(cl DELETE p)),p\n        else MAP (~~) (list_of_set cl),False
-      #|  hypotheses cl = FST(breakhorn cl)
-      #|  conclusion cl = SND(breakhorn cl)
-      #|  positive p
-      #|  literal p
-      #|  literal (Not q)
-      #|  q:form
-      #|  r:form
-      #|  forall q. q IN (cl DELETE p) ==> literal q /\\ ~(positive q)
-      #|  ALL (\\p. literal p /\\ negative p)\n                      (list_of_set(cl DELETE p))
-      #|  p:form
-      #|  ~({p | p IN cl /\\ positive p} = {})
-      #|  p IN cl /\\ positive p
-      #|  {p | p IN cl /\\ positive p} HAS_SIZE (SUC 0)
-      #|  cl:form->bool
-      #|  FINITE {p | p IN cl /\\ positive p}
-      #|  l:form list
-      #|  list_of_set(cl:form->bool)
-      #|  literal (Not q)
-      #|  q:form
-      #|  p:form
-      #|  cl:form->bool
-      #|  {p | p IN cl /\\ positive p} = {}
-      #|  ALL (\\p. literal p /\\ negative p) (list_of_set cl)
-      #|  x <= 1 ==> (x = 0) \\/ (x = 1)
-      #|  forall cl. horn(cl)\n        ==> ALL atom (hypotheses cl) /\\\n            (if definite(cl) then atom(conclusion cl)\n             else (conclusion cl = False)) /\\\n            forall M (v:num->A).\n                holds M v (interp cl) <=>\n                holds M v (ITLIST (-->) (hypotheses cl) (conclusion cl))
-      #|  valuation (minmodel (IMAGE interp s)) v
-      #|  holds H (v:num->term) (ITLIST (-->) asm c)
-      #|  H:(term->bool)#((num->((term)list->term))#(num->((term)list->bool)))
-      #|  holds (minmodel (IMAGE interp s)) v
-      #|  ALL (\\c. forall H. (Dom H = herbase (functions (IMAGE interp s))) /\\\n                 (Fun H = Fn) /\\\n                 H satisfies IMAGE interp s\n                 ==> holds H v c) asm
-      #|  ~(a /\\ ~b) <=> a ==> b
-      #|  a \\/ b <=> ~a ==> b
-      #|  v:num->term
-      #|  c = conclusion cl
-      #|  asm = hypotheses cl
+      #|  satisfies((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)), IMAGE((f : (_) -> Form), (s : (_) -> Bool))) == (\226\136\128 x : _, \226\136\128 v : (Num) -> _, valuation(M, v) && IN(x, s) \226\134\146 holds(M, v, f(x)))
+      #|  (definite : ((Form) -> Bool) -> Bool)((cl : (Form) -> Bool)) == (clause(cl) && CARD({(p : Form) | IN(p, cl) && positive(p)}) == 1)
+      #|  (horn : ((Form) -> Bool) -> Bool)((cl : (Form) -> Bool)) == (clause(cl) && CARD({(p : Form) | IN(p, cl) && positive(p)}) <= 1)
+      #|  \226\136\128 cl : (Form) -> Bool, definite(cl) \226\134\146 horn(cl)
+      #|  (falsify : (Form, (Form) -> Bool, Form) -> Bool)((ff : Form), (cl : (Form) -> Bool)) == (if definite(cl) { cl } else { INSERT(ff, cl) })
+      #|  FINITE((cl : (Form) -> Bool)) \226\134\146 FINITE(falsify((ff : Form), cl))
+      #|  (x : Num) <= 1 && !(x == 1) \226\134\146 x == 0
+      #|  {(p : Form) | IN(p, (cl : (Form) -> Bool)) && positive(p)} == {}
+      #|  IN(Atom((P : Num), (args : List[Term])), {(p : Form) | IN(p, (cl : (Form) -> Bool)) && positive(p)})
+      #|  (x : Num) <= 1 && !(x == 1) \226\134\146 SUC(x) == 1
+      #|  (cl : (Form) -> Bool)
+      #|  FINITE({(p : Form) | IN(p, (cl : (Form) -> Bool)) && positive(p)})
+      #|  positive(Atom((P : Num), (args : List[Term])))
+      #|  {(p : Form) | IN(p, INSERT(Atom((P : Num), (args : List[Term])), (cl : (Form) -> Bool))) && positive(p)} == INSERT(Atom(P, args), {(p : Form) | IN(p, cl) && positive(p)})
+      #|  clause((cl : (Form) -> Bool))
+      #|  !definite((cl : (Form) -> Bool))
+      #|  horn((cl : (Form) -> Bool)) \226\134\146 definite(falsify(Atom((P : Num), (args : List[Term])), cl))
+      #|  FINITE((cl : (Form) -> Bool)) && holds((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)), (v : (Num) -> _), interp(cl)) \226\134\146 holds(M, v, interp(falsify((ff : Form), cl)))
+      #|  IN((p : Form), (cl : (Form) -> Bool))
+      #|  literal((p : Form))
+      #|  (!(a : Bool) && !(b : Bool) \226\134\146 !(c : Bool)) == (c \226\134\146 a || b)
+      #|  !IN(Not(Atom((ff : Num), NIL)), UNIONS((s : ((Form) -> Bool) -> Bool)))
+      #|  !IN(Atom((ff : Num), NIL), UNIONS((s : ((Form) -> Bool) -> Bool)))
+      #|  !IN(Atom((ff : Num), NIL), (cl : (Form) -> Bool)) && !IN(Not(Atom(ff, NIL)), cl)
+      #|  !(a : Bool) \226\134\146 a \226\134\146 (b : Bool)
+      #|  (zs : List[A])
+      #|  (r : Num)
+      #|  (v : (Num) -> A)
+      #|  (v : (Num) -> A)
+      #|  holds((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A), (p : Form))
+      #|  (p : Form)
+      #|  (p : Form)
+      #|  FINITE((cl : (Form) -> Bool))
+      #|  (v : (Num) -> A)
+      #|  (cl : (Form) -> Bool)
+      #|  valuation((Dom((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))), Fun(M), (p : Num) => (args : List[A]) => if p == (ff : Num) && args == NIL { false } else { Pred(M, p, args) }), (v : (Num) -> A)) == valuation(M, v)
+      #|  (v : (Num) -> A)
+      #|  (cl : (Form) -> Bool)
+      #|  (Dom((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))), Fun(M), (p : Num) => (args : List[A]) => if p == (ff : Num) && args == NIL { false } else { Pred(M, p, args) })
+      #|  !holds((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A), interp((cl : (Form) -> Bool)))
+      #|  FINITE((cl : (Form) -> Bool))
+      #|  holds((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A), interp(INSERT(Atom((ff : Num), NIL), (cl : (Form) -> Bool)))) == (holds(M, v, Atom(ff, NIL)) || holds(M, v, interp(cl)))
+      #|  (v : (Num) -> A)
+      #|  (cl : (Form) -> Bool)
+      #|  (v : (Num) -> A)
+      #|  (cl : (Form) -> Bool)
+      #|  Dom((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))) == {}
+      #|  (\226\136\128 c : (Form) -> Bool, IN(c, (s : ((Form) -> Bool) -> Bool)) \226\134\146 clause(c)) && !IN(Atom((ff : Num), NIL), UNIONS(s)) && !IN(Not(Atom(ff, NIL)), UNIONS(s)) \226\134\146 !satisfiable((U : (A) -> Bool), IMAGE(interp, s)) == (\226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), !(Dom(M) == {}) && satisfies(M, IMAGE(interp, IMAGE(falsify(Atom(ff, NIL)), s))) \226\134\146 (\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, Atom(ff, NIL))))
+      #|  (minmodel : ((Form) -> Bool) -> ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))((s : (Form) -> Bool)) == (herbase(functions(s)), Fn, (p : Num) => (zs : List[Term]) => \226\136\128 H : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), Dom(H) == herbase(functions(s)) && Fun(H) == Fn && satisfies(H, s) \226\134\146 Pred(H, p, zs))
+      #|  (v : (Num) -> Term)
+      #|  (v : (Num) -> Term)
+      #|  (t : Term)
+      #|  (v : (Num) -> Term)
+      #|  termval((herbase(functions((s : (Form) -> Bool))), Fn, (p : Num) => (zs : List[Term]) => \226\136\128 H : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), Dom(H) == herbase(functions(s)) && Fun(H) == Fn && satisfies(H, s) \226\134\146 Pred(H, p, zs))) == termval((H : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)))
+      #|  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a \226\134\146 b) == (a \226\134\146 c)
+      #|  (H : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))
+      #|  (args : List[Term])
+      #|  (p : Num)
+      #|  \226\136\128 p : Form, \226\136\128 v : (Num) -> Term, \226\136\128 s : (Form) -> Bool, atom(p) \226\134\146 holds(minmodel(s), v, p) == (\226\136\128 H : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), Dom(H) == herbase(functions(s)) && Fun(H) == Fn && satisfies(H, s) \226\134\146 holds(H, v, p))
+      #|  \226\136\128 M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), \226\136\128 v : (Num) -> _, \226\136\128 asm : List[Form], \226\136\128 c : Form, holds(M, v, ITLIST(op_minus_minus_gt, asm, c)) == ((\226\136\131 p : Form, MEM(p, asm) && !holds(M, v, p)) || holds(M, v, c))
+      #|  (breakhorn : ((Form) -> Bool) -> (List[Form], Form))((cl : (Form) -> Bool)) == (if definite(cl) { LET((p : Form) => LET_END((MAP(op_tilde_tilde, list_of_set(DELETE(cl, p))), p)), select((p : Form) => IN(p, cl) && positive(p))) } else { (MAP(op_tilde_tilde, list_of_set(cl)), False) })
+      #|  (hypotheses : ((Form) -> Bool) -> List[Form])((cl : (Form) -> Bool)) == FST(breakhorn(cl))
+      #|  (conclusion : ((Form) -> Bool) -> Form)((cl : (Form) -> Bool)) == SND(breakhorn(cl))
+      #|  positive((p : Form))
+      #|  literal((p : Form))
+      #|  literal(Not((q : Form)))
+      #|  (q : Form)
+      #|  (r : Form)
+      #|  \226\136\128 q : Form, IN(q, DELETE((cl : (Form) -> Bool), (p : Form))) \226\134\146 literal(q) && !positive(q)
+      #|  ALL((p : Form) => literal(p) && negative(p), list_of_set(DELETE((cl : (Form) -> Bool), (p : Form))))
+      #|  (p : Form)
+      #|  !({(p : Form) | IN(p, (cl : (Form) -> Bool)) && positive(p)} == {})
+      #|  IN((p : Form), (cl : (Form) -> Bool)) && positive(p)
+      #|  HAS_SIZE({(p : Form) | IN(p, (cl : (Form) -> Bool)) && positive(p)}, SUC(0))
+      #|  (cl : (Form) -> Bool)
+      #|  FINITE({(p : Form) | IN(p, (cl : (Form) -> Bool)) && positive(p)})
+      #|  (l : List[Form])
+      #|  list_of_set((cl : (Form) -> Bool))
+      #|  literal(Not((q : Form)))
+      #|  (q : Form)
+      #|  (p : Form)
+      #|  (cl : (Form) -> Bool)
+      #|  {(p : Form) | IN(p, (cl : (Form) -> Bool)) && positive(p)} == {}
+      #|  ALL((p : Form) => literal(p) && negative(p), list_of_set((cl : (Form) -> Bool)))
+      #|  (x : Num) <= 1 \226\134\146 x == 0 || x == 1
+      #|  \226\136\128 cl : (Form) -> Bool, horn(cl) \226\134\146 ALL(atom, hypotheses(cl)) && (if definite(cl) { atom(conclusion(cl)) } else { conclusion(cl) == False }) && (\226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 v : (Num) -> A, holds(M, v, interp(cl)) == holds(M, v, ITLIST(op_minus_minus_gt, hypotheses(cl), conclusion(cl))))
+      #|  valuation(minmodel(IMAGE(interp, (s : ((Form) -> Bool) -> Bool))), (v : (Num) -> Term))
+      #|  holds((H : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)), (v : (Num) -> Term), ITLIST(op_minus_minus_gt, (asm : List[Form]), (c : Form)))
+      #|  (H : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))
+      #|  holds(minmodel(IMAGE(interp, (s : ((Form) -> Bool) -> Bool))), (v : (Num) -> Term))
+      #|  ALL((c : Form) => \226\136\128 H : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), Dom(H) == herbase(functions(IMAGE(interp, (s : ((Form) -> Bool) -> Bool)))) && Fun(H) == Fn && satisfies(H, IMAGE(interp, s)) \226\134\146 holds(H, (v : (Num) -> Term), c), (asm : List[Form]))
+      #|  !((a : Bool) && !(b : Bool)) == (a \226\134\146 b)
+      #|  ((a : Bool) || (b : Bool)) == (!a \226\134\146 b)
+      #|  (v : (Num) -> Term)
+      #|  (c : Form) == conclusion((cl : (Form) -> Bool))
+      #|  (asm : List[Form]) == hypotheses((cl : (Form) -> Bool))
       #|  :A
       #|  :term
-      #|  horn cl
-      #|  definite cl
-      #|  cl:form->bool
-      #|  (forall cl. cl IN s ==> definite(cl))\n   ==> minmodel(IMAGE interp s) satisfies (IMAGE interp s)
-      #|  cl:form->bool
-      #|  CARD {p, (q:form)}
-      #|  2 <= a ==> ~(a = 1)
-      #|  a ==> b <=> ~b ==> ~a
-      #|  definite cl
-      #|  q:form
-      #|  forall cl p. definite cl /\\ p IN cl /\\ positive p\n          ==> (conclusion cl = p)
-      #|  {p | p IN cl /\\ positive p} = {p}
-      #|  forall cl p. clause cl /\\ p IN cl /\\ positive p /\\\n          (forall q. q IN cl /\\ ~(q = p) ==> negative q)\n          ==> (conclusion cl = p)
-      #|  forall cl. definite cl\n        ==> (set_of_list(hypotheses cl) =\n             IMAGE (~~) (cl DELETE (conclusion cl)))
-      #|  forall cl i ns. cl IN s /\\\n               (forall x. i(x) IN herbase(functions(IMAGE interp s))) /\\\n               ALL2 (gbackchain s) ns (MAP (formsubst i) (hypotheses cl))\n               ==> gbackchain s (ITLIST (+) ns 1)\n                                (formsubst i (conclusion cl))
-      #|  forall l1 l2. ALL2 (\\n. P) l1 l2 <=> (LENGTH l1 = LENGTH l2) /\\ ALL P l2
-      #|  interpretation (functions(IMAGE interp s),predicates(IMAGE interp s))\n                   (minmodel (IMAGE interp s))
-      #|  t:term
-      #|  (i:num->term) x
-      #|  i(x:num) IN herbase (functions (IMAGE interp s))
-      #|  x:num
-      #|  ALL (holds (minmodel (IMAGE interp s)) v)\n                     (MAP (formsubst i) (hypotheses cl))
+      #|  horn((cl : (Form) -> Bool))
+      #|  definite((cl : (Form) -> Bool))
+      #|  (cl : (Form) -> Bool)
+      #|  (\226\136\128 cl : (Form) -> Bool, IN(cl, (s : ((Form) -> Bool) -> Bool)) \226\134\146 definite(cl)) \226\134\146 satisfies(minmodel(IMAGE(interp, s)), IMAGE(interp, s))
+      #|  (cl : (Form) -> Bool)
+      #|  CARD({(p : Form), (q : Form)})
+      #|  2 <= (a : Num) \226\134\146 !(a == 1)
+      #|  ((a : Bool) \226\134\146 (b : Bool)) == (!b \226\134\146 !a)
+      #|  definite((cl : (Form) -> Bool))
+      #|  (q : Form)
+      #|  \226\136\128 cl : (Form) -> Bool, \226\136\128 p : Form, definite(cl) && IN(p, cl) && positive(p) \226\134\146 conclusion(cl) == p
+      #|  {(p : Form) | IN(p, (cl : (Form) -> Bool)) && positive(p)} == {(p : Form)}
+      #|  \226\136\128 cl : (Form) -> Bool, \226\136\128 p : Form, clause(cl) && IN(p, cl) && positive(p) && (\226\136\128 q : Form, IN(q, cl) && !(q == p) \226\134\146 negative(q)) \226\134\146 conclusion(cl) == p
+      #|  \226\136\128 cl : (Form) -> Bool, definite(cl) \226\134\146 set_of_list(hypotheses(cl)) == IMAGE(op_tilde_tilde, DELETE(cl, conclusion(cl)))
+      #|  \226\136\128 cl : (Form) -> Bool, \226\136\128 i : (Num) -> Term, \226\136\128 ns : List[Num], IN(cl, (s : ((Form) -> Bool) -> Bool)) && (\226\136\128 x : Num, IN(i(x), herbase(functions(IMAGE(interp, s))))) && ALL2((gbackchain : (((Form) -> Bool) -> Bool, Num, Form) -> Bool)(s), ns, MAP(formsubst(i), hypotheses(cl))) \226\134\146 gbackchain(s, ITLIST(op_plus, ns, 1), formsubst(i, conclusion(cl)))
+      #|  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], ALL2((n : _) => (P : (_) -> Bool), l1, l2) == (LENGTH(l1) == LENGTH(l2) && ALL(P, l2))
+      #|  interpretation((functions(IMAGE(interp, (s : ((Form) -> Bool) -> Bool))), predicates(IMAGE(interp, s))), minmodel(IMAGE(interp, s)))
+      #|  (t : Term)
+      #|  (i : (Num) -> Term)((x : Num))
+      #|  IN((i : (Num) -> Term)((x : Num)), herbase(functions(IMAGE(interp, (s : ((Form) -> Bool) -> Bool)))))
+      #|  (x : Num)
+      #|  ALL(holds(minmodel(IMAGE(interp, (s : ((Form) -> Bool) -> Bool))), (v : (Num) -> Term)), MAP(formsubst((i : (Num) -> Term)), hypotheses((cl : (Form) -> Bool))))
       #|  :A
       #|  :term
-      #|  horn cl
-      #|  interp cl
-      #|  termval (minmodel (IMAGE interp s)) (v:num->term) o (i:num->term)
-      #|  ns:num list
-      #|  i:num->term
-      #|  cl:form->bool
-      #|  (forall cl. cl IN s ==> definite(cl)) /\\ valuation (minmodel (IMAGE interp s)) v\n   ==> forall n p. gbackchain s n p ==> holds (minmodel(IMAGE interp s)) v p
-      #|  ITLIST (+) ns 1
-      #|  ns:num list
-      #|  CONS (n:num) ns
-      #|  ns:num list
-      #|  n:num
-      #|  []:num list
-      #|  l:form list
-      #|  hypotheses cl
-      #|  ?ns. ALL2 (gbackchain s) ns (MAP (formsubst v) (hypotheses cl))
-      #|  forall b. (a ==> b) /\\ (b ==> c) ==> a ==> c
-      #|  ALL atom (hypotheses cl)
-      #|  ALL (holds gbmod v) (hypotheses cl) <=>\n    ALL (\\p. ?n. gbackchain s n (formsubst v p)) (hypotheses cl)
-      #|  holds gbmod v (conclusion cl) <=>\n    ?n. gbackchain s n (formsubst v (conclusion cl))
-      #|  v:num->term
-      #|  v:num->term
-      #|  t:term
-      #|  t:term
-      #|  t:term
-      #|  forall p. atom p ==> (holds gbmod v p <=>\n                    ?n. gbackchain s n (formsubst v p))
-      #|  gbmod = herbase (functions (IMAGE interp s)),\n                      Fn,\n                      (\\p tms. ?n. gbackchain s n (Atom p tms))
-      #|  ~(a /\\ ~b) <=> a ==> b
-      #|  a \\/ b <=> ~a ==> b
+      #|  horn((cl : (Form) -> Bool))
+      #|  interp((cl : (Form) -> Bool))
+      #|  o(termval(minmodel(IMAGE(interp, (s : ((Form) -> Bool) -> Bool))), (v : (Num) -> Term)), (i : (Num) -> Term))
+      #|  (ns : List[Num])
+      #|  (i : (Num) -> Term)
+      #|  (cl : (Form) -> Bool)
+      #|  (\226\136\128 cl : (Form) -> Bool, IN(cl, (s : ((Form) -> Bool) -> Bool)) \226\134\146 definite(cl)) && valuation(minmodel(IMAGE(interp, s)), (v : (Num) -> Term)) \226\134\146 (\226\136\128 n : Num, \226\136\128 p : Form, gbackchain(s, n, p) \226\134\146 holds(minmodel(IMAGE(interp, s)), v, p))
+      #|  ITLIST(op_plus, (ns : List[Num]), 1)
+      #|  (ns : List[Num])
+      #|  CONS((n : Num), (ns : List[Num]))
+      #|  (ns : List[Num])
+      #|  (n : Num)
+      #|  (NIL : List[Num])
+      #|  (l : List[Form])
+      #|  hypotheses((cl : (Form) -> Bool))
+      #|  \226\136\131 ns : List[Num], ALL2(gbackchain((s : ((Form) -> Bool) -> Bool)), ns, MAP(formsubst((v : (Num) -> Term)), hypotheses((cl : (Form) -> Bool))))
+      #|  \226\136\128 b : Bool, ((a : Bool) \226\134\146 b) && (b \226\134\146 (c : Bool)) \226\134\146 a \226\134\146 c
+      #|  ALL(atom, hypotheses((cl : (Form) -> Bool)))
+      #|  ALL(holds((gbmod : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)), (v : (Num) -> Term)), hypotheses((cl : (Form) -> Bool))) == ALL((p : Form) => \226\136\131 n : Num, gbackchain((s : ((Form) -> Bool) -> Bool), n, formsubst(v, p)), hypotheses(cl))
+      #|  holds((gbmod : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)), (v : (Num) -> Term), conclusion((cl : (Form) -> Bool))) == (\226\136\131 n : Num, gbackchain((s : ((Form) -> Bool) -> Bool), n, formsubst(v, conclusion(cl))))
+      #|  (v : (Num) -> Term)
+      #|  (v : (Num) -> Term)
+      #|  (t : Term)
+      #|  (t : Term)
+      #|  (t : Term)
+      #|  \226\136\128 p : Form, atom(p) \226\134\146 holds((gbmod : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)), (v : (Num) -> Term), p) == (\226\136\131 n : Num, gbackchain((s : ((Form) -> Bool) -> Bool), n, formsubst(v, p)))
+      #|  (gbmod : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)) == (herbase(functions(IMAGE(interp, (s : ((Form) -> Bool) -> Bool)))), Fn, (p : Num) => (tms : List[Term]) => \226\136\131 n : Num, gbackchain(s, n, Atom(p, tms)))
+      #|  !((a : Bool) && !(b : Bool)) == (a \226\134\146 b)
+      #|  ((a : Bool) || (b : Bool)) == (!a \226\134\146 b)
       #|  :A
       #|  :term
-      #|  horn cl
-      #|  cl:form->bool
-      #|  t:term
-      #|  t:term
-      #|  termval(herbase (functions (IMAGE interp s)),\n                        Fn,(\\p tms. ?n. gbackchain s n (Atom p tms))) V t
-      #|  t:term
-      #|  FV(Atom P tms) = {}
-      #|  (b <=> c) /\\ a ==> (a ==> b) ==> c
-      #|  tms:term list
-      #|  P:num
-      #|  herbase(functions(IMAGE interp s)),Fn,\n    (\\p tms. ?n. gbackchain s n (Atom p tms))
-      #|  v:num->term
-      #|  (forall cl. cl IN s ==> definite(cl)) /\\\n   atom(p) /\\ (FV p = {}) /\\ (forall v. holds (minmodel (IMAGE interp s)) v p)\n   ==> ?n. gbackchain s n p
-      #|  p:form
-      #|  p:form
-      #|  ?n. gbackchain s n p
-      #|  holds (minmodel (IMAGE interp s)) w p
-      #|  functions(IMAGE interp s),predicates summat
-      #|  w:num->term
-      #|  ?w. valuation (minmodel (IMAGE interp s)) w
-      #|  forall s p. (forall cl. cl IN s ==> definite cl) /\\ atom p /\\ (FV p = {})\n         ==> forall v. holds (minmodel (IMAGE interp s)) v p <=> ?n. gbackchain s n p
+      #|  horn((cl : (Form) -> Bool))
+      #|  (cl : (Form) -> Bool)
+      #|  (t : Term)
+      #|  (t : Term)
+      #|  termval((herbase(functions(IMAGE(interp, (s : ((Form) -> Bool) -> Bool)))), Fn, (p : Num) => (tms : List[Term]) => \226\136\131 n : Num, gbackchain(s, n, Atom(p, tms))), V, (t : Term))
+      #|  (t : Term)
+      #|  FV(Atom((P : Num), (tms : List[Term]))) == {}
+      #|  (b : Bool) == (c : Bool) && (a : Bool) \226\134\146 (a \226\134\146 b) \226\134\146 c
+      #|  (tms : List[Term])
+      #|  (P : Num)
+      #|  (herbase(functions(IMAGE(interp, (s : ((Form) -> Bool) -> Bool)))), Fn, (p : Num) => (tms : List[Term]) => \226\136\131 n : Num, gbackchain(s, n, Atom(p, tms)))
+      #|  (v : (Num) -> Term)
+      #|  (\226\136\128 cl : (Form) -> Bool, IN(cl, (s : ((Form) -> Bool) -> Bool)) \226\134\146 definite(cl)) && atom((p : Form)) && FV(p) == {} && (\226\136\128 v : (Num) -> Term, holds(minmodel(IMAGE(interp, s)), v, p)) \226\134\146 (\226\136\131 n : Num, gbackchain(s, n, p))
+      #|  (p : Form)
+      #|  (p : Form)
+      #|  \226\136\131 n : Num, gbackchain((s : ((Form) -> Bool) -> Bool), n, (p : Form))
+      #|  holds(minmodel(IMAGE(interp, (s : ((Form) -> Bool) -> Bool))), (w : (Num) -> Term), (p : Form))
+      #|  (functions(IMAGE(interp, (s : ((Form) -> Bool) -> Bool))), predicates((summat : (Form) -> Bool)))
+      #|  (w : (Num) -> Term)
+      #|  \226\136\131 w : (Num) -> Term, valuation(minmodel(IMAGE(interp, (s : ((Form) -> Bool) -> Bool))), w)
+      #|  \226\136\128 s : ((Form) -> Bool) -> Bool, \226\136\128 p : Form, (\226\136\128 cl : (Form) -> Bool, IN(cl, s) \226\134\146 definite(cl)) && atom(p) && FV(p) == {} \226\134\146 (\226\136\128 v : (Num) -> Term, holds(minmodel(IMAGE(interp, s)), v, p) == (\226\136\131 n : Num, gbackchain(s, n, p)))
       #|  iminmodel s =\n     terms(functions s),\n     Fn,\n     (\\p zs. forall C. (Dom(C) = terms(functions s)) /\\\n                 (Fun(C) = Fn) /\\\n                 (forall v p. p IN s /\\ valuation C v ==> holds C v p)\n                 ==> Pred(C) p zs)
-      #|  w:num->term
-      #|  w:num->term
-      #|  t:term
-      #|  w:num->term
+      #|  (w : (Num) -> Term)
+      #|  (w : (Num) -> Term)
+      #|  (t : Term)
+      #|  (w : (Num) -> Term)
       #|  termval\n    (terms (functions s),\n     Fn,\n     (\\p zs.\n          forall C. (Dom C = terms (functions s)) /\\ (Fun C = Fn) /\\\n              (forall v p. p IN s /\\ valuation C v ==> holds C v p)\n              ==> Pred C p zs)) =\n    termval C
-      #|  (a ==> (b <=> c)) ==> ((a ==> b) <=> (a ==> c))
-      #|  C:(term->bool)#((num->((term)list->term))#(num->((term)list->bool)))
-      #|  args:term list
-      #|  p:num
-      #|  forall p v s.\n      atom p\n      ==> (holds (iminmodel s) v p <=>\n           forall C. (Dom(C) = terms(functions s)) /\\\n               (Fun(C) = Fn) /\\\n               (forall v q. q IN s /\\ valuation C v ==> holds C v q)\n               ==> holds C v p)
-      #|  holds C (v:num->term) (ITLIST (-->) asm c)
-      #|  C:(term->bool)#((num->((term)list->term))#(num->((term)list->bool)))
-      #|  atom p
-      #|  p:form
-      #|  holds (iminmodel (IMAGE interp s)) v
-      #|  ALL (\\c. forall C. (Dom C = terms (functions (IMAGE interp s))) /\\\n                 (Fun C = Fn) /\\\n                 (forall v p. p IN (IMAGE interp s) /\\ valuation C v ==> holds C v p)\n                 ==> holds C v c) asm
-      #|  ~(a /\\ ~b) <=> a ==> b
-      #|  a \\/ b <=> ~a ==> b
-      #|  v:num->term
-      #|  c = conclusion cl
-      #|  asm = hypotheses cl
+      #|  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a \226\134\146 b) == (a \226\134\146 c)
+      #|  (C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))
+      #|  (args : List[Term])
+      #|  (p : Num)
+      #|  \226\136\128 p : Form, \226\136\128 v : (Num) -> Term, \226\136\128 s : (Form) -> Bool, atom(p) \226\134\146 holds(iminmodel(s), v, p) == (\226\136\128 C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), Dom(C) == terms(functions(s)) && Fun(C) == Fn && (\226\136\128 v : (Num) -> Term, \226\136\128 q : Form, IN(q, s) && valuation(C, v) \226\134\146 holds(C, v, q)) \226\134\146 holds(C, v, p))
+      #|  holds((C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)), (v : (Num) -> Term), ITLIST(op_minus_minus_gt, (asm : List[Form]), (c : Form)))
+      #|  (C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))
+      #|  atom((p : Form))
+      #|  (p : Form)
+      #|  holds(iminmodel(IMAGE(interp, (s : ((Form) -> Bool) -> Bool))), (v : (Num) -> Term))
+      #|  ALL((c : Form) => \226\136\128 C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), Dom(C) == terms(functions(IMAGE(interp, (s : ((Form) -> Bool) -> Bool)))) && Fun(C) == Fn && (\226\136\128 v : (Num) -> Term, \226\136\128 p : Form, IN(p, IMAGE(interp, s)) && valuation(C, v) \226\134\146 holds(C, v, p)) \226\134\146 holds(C, (v : (Num) -> Term), c), (asm : List[Form]))
+      #|  !((a : Bool) && !(b : Bool)) == (a \226\134\146 b)
+      #|  ((a : Bool) || (b : Bool)) == (!a \226\134\146 b)
+      #|  (v : (Num) -> Term)
+      #|  (c : Form) == conclusion((cl : (Form) -> Bool))
+      #|  (asm : List[Form]) == hypotheses((cl : (Form) -> Bool))
       #|  :A
       #|  :term
-      #|  horn cl
-      #|  definite cl
-      #|  cl:form->bool
-      #|  (forall cl. cl IN s ==> definite(cl))\n   ==> forall v p. p IN s /\\ (forall x. v(x) IN terms(functions(IMAGE interp s)))\n             ==> holds (iminmodel(IMAGE interp s)) v (interp p)
-      #|  forall s. interpretation(language s) (iminmodel s)
-      #|  forall cl i ns. cl IN s /\\ (forall x. i(x) IN terms(functions(IMAGE interp s))) /\\\n               ALL2 (ibackchain s) ns (MAP (formsubst i) (hypotheses cl))\n               ==> ibackchain s (ITLIST (+) ns 1)\n                                (formsubst i (conclusion cl))
-      #|  ALL\n       (\\p. (forall x. v x IN terms (functions (IMAGE interp s)))\n            ==> holds (iminmodel (IMAGE interp s)) v p)\n       (MAP (formsubst i) (hypotheses cl))
-      #|  i(x:num) IN terms(FST(language(IMAGE interp s)))
-      #|  IMAGE interp s
-      #|  {}:(num#num)->bool
-      #|  termval(iminmodel (IMAGE interp s)) v (i(x:num)) IN\n                  Dom(iminmodel (IMAGE interp s))
-      #|  x:num
-      #|  a /\\ ~b ==> ((a ==> b \\/ c) ==> c)
+      #|  horn((cl : (Form) -> Bool))
+      #|  definite((cl : (Form) -> Bool))
+      #|  (cl : (Form) -> Bool)
+      #|  (\226\136\128 cl : (Form) -> Bool, IN(cl, (s : ((Form) -> Bool) -> Bool)) \226\134\146 definite(cl)) \226\134\146 (\226\136\128 v : (Num) -> Term, \226\136\128 p : (Form) -> Bool, IN(p, s) && (\226\136\128 x : Num, IN(v(x), terms(functions(IMAGE(interp, s))))) \226\134\146 holds(iminmodel(IMAGE(interp, s)), v, interp(p)))
+      #|  \226\136\128 s : (Form) -> Bool, interpretation(language(s), iminmodel(s))
+      #|  \226\136\128 cl : (Form) -> Bool, \226\136\128 i : (Num) -> Term, \226\136\128 ns : List[Num], IN(cl, (s : ((Form) -> Bool) -> Bool)) && (\226\136\128 x : Num, IN(i(x), terms(functions(IMAGE(interp, s))))) && ALL2((ibackchain : (((Form) -> Bool) -> Bool, Num, Form) -> Bool)(s), ns, MAP(formsubst(i), hypotheses(cl))) \226\134\146 ibackchain(s, ITLIST(op_plus, ns, 1), formsubst(i, conclusion(cl)))
+      #|  ALL((p : Form) => (\226\136\128 x : Num, IN((v : (Num) -> Term)(x), terms(functions(IMAGE(interp, (s : ((Form) -> Bool) -> Bool)))))) \226\134\146 holds(iminmodel(IMAGE(interp, s)), v, p), MAP(formsubst((i : (Num) -> Term)), hypotheses((cl : (Form) -> Bool))))
+      #|  IN((i : (Num) -> Term)((x : Num)), terms(FST(language(IMAGE(interp, (s : ((Form) -> Bool) -> Bool))))))
+      #|  IMAGE(interp, (s : ((Form) -> Bool) -> Bool))
+      #|  ({} : ((Num, Num)) -> Bool)
+      #|  IN(termval(iminmodel(IMAGE(interp, (s : ((Form) -> Bool) -> Bool))), (v : (Num) -> Term), (i : (Num) -> Term)((x : Num))), Dom(iminmodel(IMAGE(interp, s))))
+      #|  (x : Num)
+      #|  (a : Bool) && !(b : Bool) \226\134\146 (a \226\134\146 b || (c : Bool)) \226\134\146 c
       #|  :A
       #|  :term
-      #|  horn cl
-      #|  cl:form->bool
-      #|  termval (iminmodel (IMAGE interp s)) (v:num->term) o (i:num->term)
-      #|  ns:num list
-      #|  i:num->term
-      #|  cl:form->bool
-      #|  (forall cl. cl IN s ==> definite(cl))\n   ==> forall v n p. ibackchain s n p /\\\n               (forall x. v(x) IN terms(functions(IMAGE interp s)))\n               ==> holds (iminmodel(IMAGE interp s)) v p
-      #|  valuation gbmod (v:num->term)
-      #|  ITLIST (+) ns 1
-      #|  ns:num list
-      #|  CONS (n:num) ns
-      #|  ns:num list
-      #|  n:num
-      #|  []:num list
-      #|  l:form list
-      #|  hypotheses cl
-      #|  ?ns. ALL2 (ibackchain s) ns (MAP (formsubst v) (hypotheses cl))
-      #|  forall b. (a ==> b) /\\ (b ==> c) ==> a ==> c
-      #|  ALL atom (hypotheses cl)
-      #|  ALL (holds gbmod v) (hypotheses cl) <=>\n    ALL (\\p. ?n. ibackchain s n (formsubst v p)) (hypotheses cl)
-      #|  holds gbmod v (conclusion cl) <=>\n    ?n. ibackchain s n (formsubst v (conclusion cl))
-      #|  v:num->term
-      #|  v:num->term
-      #|  t:term
-      #|  t:term
-      #|  t:term
-      #|  forall p. atom p ==> (holds gbmod v p <=>\n                    ?n. ibackchain s n (formsubst v p))
-      #|  gbmod = terms (functions (IMAGE interp s)),\n                      Fn,\n                      (\\p tms. ?n. ibackchain s n (Atom p tms))
-      #|  ~(a /\\ ~b) <=> a ==> b
-      #|  a \\/ b <=> ~a ==> b
+      #|  horn((cl : (Form) -> Bool))
+      #|  (cl : (Form) -> Bool)
+      #|  o(termval(iminmodel(IMAGE(interp, (s : ((Form) -> Bool) -> Bool))), (v : (Num) -> Term)), (i : (Num) -> Term))
+      #|  (ns : List[Num])
+      #|  (i : (Num) -> Term)
+      #|  (cl : (Form) -> Bool)
+      #|  (\226\136\128 cl : (Form) -> Bool, IN(cl, (s : ((Form) -> Bool) -> Bool)) \226\134\146 definite(cl)) \226\134\146 (\226\136\128 v : (Num) -> Term, \226\136\128 n : Num, \226\136\128 p : Form, ibackchain(s, n, p) && (\226\136\128 x : Num, IN(v(x), terms(functions(IMAGE(interp, s))))) \226\134\146 holds(iminmodel(IMAGE(interp, s)), v, p))
+      #|  valuation((gbmod : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)), (v : (Num) -> Term))
+      #|  ITLIST(op_plus, (ns : List[Num]), 1)
+      #|  (ns : List[Num])
+      #|  CONS((n : Num), (ns : List[Num]))
+      #|  (ns : List[Num])
+      #|  (n : Num)
+      #|  (NIL : List[Num])
+      #|  (l : List[Form])
+      #|  hypotheses((cl : (Form) -> Bool))
+      #|  \226\136\131 ns : List[Num], ALL2(ibackchain((s : ((Form) -> Bool) -> Bool)), ns, MAP(formsubst((v : (Num) -> Term)), hypotheses((cl : (Form) -> Bool))))
+      #|  \226\136\128 b : Bool, ((a : Bool) \226\134\146 b) && (b \226\134\146 (c : Bool)) \226\134\146 a \226\134\146 c
+      #|  ALL(atom, hypotheses((cl : (Form) -> Bool)))
+      #|  ALL(holds((gbmod : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)), (v : (Num) -> Term)), hypotheses((cl : (Form) -> Bool))) == ALL((p : Form) => \226\136\131 n : Num, ibackchain((s : ((Form) -> Bool) -> Bool), n, formsubst(v, p)), hypotheses(cl))
+      #|  holds((gbmod : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)), (v : (Num) -> Term), conclusion((cl : (Form) -> Bool))) == (\226\136\131 n : Num, ibackchain((s : ((Form) -> Bool) -> Bool), n, formsubst(v, conclusion(cl))))
+      #|  (v : (Num) -> Term)
+      #|  (v : (Num) -> Term)
+      #|  (t : Term)
+      #|  (t : Term)
+      #|  (t : Term)
+      #|  \226\136\128 p : Form, atom(p) \226\134\146 holds((gbmod : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)), (v : (Num) -> Term), p) == (\226\136\131 n : Num, ibackchain((s : ((Form) -> Bool) -> Bool), n, formsubst(v, p)))
+      #|  (gbmod : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)) == (terms(functions(IMAGE(interp, (s : ((Form) -> Bool) -> Bool)))), Fn, (p : Num) => (tms : List[Term]) => \226\136\131 n : Num, ibackchain(s, n, Atom(p, tms)))
+      #|  !((a : Bool) && !(b : Bool)) == (a \226\134\146 b)
+      #|  ((a : Bool) || (b : Bool)) == (!a \226\134\146 b)
       #|  :A
       #|  :term
-      #|  horn cl
-      #|  cl:form->bool
-      #|  t:term
-      #|  t:term
-      #|  t:term
-      #|  (b <=> c) /\\ a ==> (a ==> b) ==> c
-      #|  tms:term list
-      #|  P:num
-      #|  terms(functions(IMAGE interp s)),Fn,\n    (\\p tms. ?n. ibackchain s n (Atom p tms))
+      #|  horn((cl : (Form) -> Bool))
+      #|  (cl : (Form) -> Bool)
+      #|  (t : Term)
+      #|  (t : Term)
+      #|  (t : Term)
+      #|  (b : Bool) == (c : Bool) && (a : Bool) \226\134\146 (a \226\134\146 b) \226\134\146 c
+      #|  (tms : List[Term])
+      #|  (P : Num)
+      #|  (terms(functions(IMAGE(interp, (s : ((Form) -> Bool) -> Bool)))), Fn, (p : Num) => (tms : List[Term]) => \226\136\131 n : Num, ibackchain(s, n, Atom(p, tms)))
       #|  V
-      #|  (forall cl. cl IN s ==> definite(cl)) /\\\n   atom(p) /\\\n   (forall v. (forall x. v(x) IN terms(functions(IMAGE interp s)))\n        ==> holds (iminmodel (IMAGE interp s)) v p)\n   ==> ?n. ibackchain s n p
-      #|  forall s p. (forall cl. cl IN s ==> definite cl) /\\ atom p\n         ==> ((forall v. (forall x. v(x) IN terms(functions(IMAGE interp s)))\n                   ==> holds (iminmodel(IMAGE interp s)) v p) <=>\n              ?n. ibackchain s n p)
+      #|  (\226\136\128 cl : (Form) -> Bool, IN(cl, (s : ((Form) -> Bool) -> Bool)) \226\134\146 definite(cl)) && atom((p : Form)) && (\226\136\128 v : (Num) -> Term, (\226\136\128 x : Num, IN(v(x), terms(functions(IMAGE(interp, s))))) \226\134\146 holds(iminmodel(IMAGE(interp, s)), v, p)) \226\134\146 (\226\136\131 n : Num, ibackchain(s, n, p))
+      #|  \226\136\128 s : ((Form) -> Bool) -> Bool, \226\136\128 p : Form, (\226\136\128 cl : (Form) -> Bool, IN(cl, s) \226\134\146 definite(cl)) && atom(p) \226\134\146 (\226\136\128 v : (Num) -> Term, (\226\136\128 x : Num, IN(v(x), terms(functions(IMAGE(interp, s))))) \226\134\146 holds(iminmodel(IMAGE(interp, s)), v, p)) == (\226\136\131 n : Num, ibackchain(s, n, p))
       #|SATISFIES_IMAGE =  |- ((#=:fun(bool,fun(bool,bool)) ((#satisfies:fun(prod(fun('?1,bool),prod(fun(num,fun(list('?1),'?1)),fun(num,fun(list('?1),bool)))),fun(fun(form,bool),bool)) M:prod(fun('?1,bool),prod(fun(num,fun(list('?1),'?1)),fun(num,fun(list('?1),bool))))) ((#IMAGE:fun(fun('?2,form),fun(fun('?2,bool),fun(form,bool))) f:fun('?2,form)) s:fun('?2,bool)))) (#forall:fun(fun('?2,bool),bool) (\x:'?2. (#forall:fun(fun(fun(num,'?1),bool),bool) (\v:fun(num,'?1). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#valuation:fun(prod(fun('?1,bool),prod(fun(num,fun(list('?1),'?1)),fun(num,fun(list('?1),bool)))),fun(fun(num,'?1),bool)) M:prod(fun('?1,bool),prod(fun(num,fun(list('?1),'?1)),fun(num,fun(list('?1),bool))))) v:fun(num,'?1))) ((#IN:fun('?2,fun(fun('?2,bool),bool)) x:'?2) s:fun('?2,bool)))) (((#holds:fun(prod(fun('?1,bool),prod(fun(num,fun(list('?1),'?1)),fun(num,fun(list('?1),bool)))),fun(fun(num,'?1),fun(form,bool))) M:prod(fun('?1,bool),prod(fun(num,fun(list('?1),'?1)),fun(num,fun(list('?1),bool))))) v:fun(num,'?1)) (f:fun('?2,form) x:'?2))))))))
       #|definite =  |- (#forall:fun(fun(fun(form,bool),bool),bool) (\cl:fun(form,bool). ((#=:fun(bool,fun(bool,bool)) (#definite:fun(fun(form,bool),bool) cl:fun(form,bool))) ((#/\:fun(bool,fun(bool,bool)) (#clause:fun(fun(form,bool),bool) cl:fun(form,bool))) ((#=:fun(num,fun(num,bool)) (#CARD:fun(fun(form,bool),num) (#GSPEC:fun(fun(form,bool),fun(form,bool)) (\GEN%PVAR%1:form. (#?:fun(fun(form,bool),bool) (\p:form. (((#SETSPEC:fun(form,fun(bool,fun(form,bool))) GEN%PVAR%1:form) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(form,fun(fun(form,bool),bool)) p:form) cl:fun(form,bool))) (#positive:fun(form,bool) p:form))) p:form))))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
       #|horn =  |- (#forall:fun(fun(fun(form,bool),bool),bool) (\cl:fun(form,bool). ((#=:fun(bool,fun(bool,bool)) (#horn:fun(fun(form,bool),bool) cl:fun(form,bool))) ((#/\:fun(bool,fun(bool,bool)) (#clause:fun(fun(form,bool),bool) cl:fun(form,bool))) ((#<=:fun(num,fun(num,bool)) (#CARD:fun(fun(form,bool),num) (#GSPEC:fun(fun(form,bool),fun(form,bool)) (\GEN%PVAR%2:form. (#?:fun(fun(form,bool),bool) (\p:form. (((#SETSPEC:fun(form,fun(bool,fun(form,bool))) GEN%PVAR%2:form) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(form,fun(fun(form,bool),bool)) p:form) cl:fun(form,bool))) (#positive:fun(form,bool) p:form))) p:form))))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
