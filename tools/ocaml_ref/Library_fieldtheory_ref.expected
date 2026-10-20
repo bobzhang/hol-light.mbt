@@ -26304,12 +26304,12 @@ Library/fieldtheory quotations (2166):
   forall r s d:A->bool.\n        field r /\\\n        FINITE d /\\\n        d SUBSET ring_carrier(subfield_generated r s)\n        ==> ?c. c IN ring_carrier(subring_generated r s) /\\\n                ~(c = ring_0 r) /\\\n                forall x. x IN d\n                    ==> ring_mul r c x IN ring_carrier(subring_generated r s)
   forall r s d:A->bool.\n      field(subfield_generated r s) /\\\n      FINITE d /\\\n      d SUBSET ring_carrier(subfield_generated r s)\n      ==> ?c. c IN ring_carrier(subring_generated r s) /\\\n              ~(c = ring_0 r) /\\\n              forall x. x IN d\n                  ==> ring_mul r c x IN ring_carrier(subring_generated r s)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   (d : A)
   forall m. ring_mul r d ((p:(V->num)->A) m) = ring_0 r <=> p m = ring_0 r
   (p : ((V) -> Num) -> A)
@@ -27503,15 +27503,15 @@ Library/fieldtheory quotations (2166):
   (p : ((Unit) -> Num) -> A)
   (q : ((Unit) -> Num) -> A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   UNION({(a : _)}, UNION((s : (_) -> Bool), (b : (_) -> Bool))) == UNION(s, INSERT(a, b))
   INSERT((a : _), (s : (_) -> Bool)) == UNION({a}, s)
   IMAGE((f : (A) -> B), ring_carrier((k : Ring[A])))
