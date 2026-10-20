@@ -185,9 +185,9 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   :real
   real_differentiable((f : (Real) -> Real), atreal((x : Real)))
   real_of_num(0) < (f : (Real) -> Real)((x : Real)) \226\134\146 real_differentiable((x : Real) => abs(f(x)), atreal(x)) && derivative((x : Real) => abs(f(x)), x) == derivative(f, x)
-  abs
+  real_abs
   (f : (Real) -> Real)((x : Real)) < real_of_num(0) \226\134\146 real_differentiable((x : Real) => abs(f(x)), atreal(x)) && derivative((x : Real) => abs(f(x)), x) == -derivative(f, x)
-  abs
+  real_abs
   real_differentiable((x : Real) => pow((f : (Real) -> Real)(x), (n : Num)), atreal((x : Real))) && derivative((x : Real) => pow(f(x), n), x) == real_of_num(n) * (pow(f(x), n - 1) * derivative(f, x))
   2 - 1 == 1
   real_differentiable((x : Real) => pow((f : (Real) -> Real)(x), 2), atreal((x : Real))) && derivative((x : Real) => pow(f(x), 2), x) == real_of_num(2) * (f(x) * derivative(f, x))
