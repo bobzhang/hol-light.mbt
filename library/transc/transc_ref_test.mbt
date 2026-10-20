@@ -6525,7 +6525,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  \226\136\128 x : Real, exp(x) * exp(-x) == real_of_num(1)
       #|  \226\136\128 x : Real, exp(-x) * exp(x) == real_of_num(1)
       #|  \226\136\128 x : Real, exp(-x) == inv(exp(x))
-      #|  op_star
+      #|  real_mul
       #|  exp((x : Real))
       #|  (y : Real)
       #|  (x : Real)
@@ -6778,7 +6778,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  cos(pi / real_of_num(2)) == real_of_num(0)
       #|  real_of_num(0) < pi / real_of_num(2) && pi / real_of_num(2) < real_of_num(2)
       #|  real_of_num(0) < pi
-      #|  op_minus_minus
+      #|  real_neg
       #|  pi / real_of_num(2)
       #|  sin(pi / real_of_num(2)) == real_of_num(1)
       #|  pi / real_of_num(2)
