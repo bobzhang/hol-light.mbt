@@ -63845,7 +63845,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  (x : Cart[Real, N])
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  \226\136\131 x : Cart[Real, N], IN(x, cball((vec(0), (e : Real)))) && o((f : (Cart[Real, N]) -> Cart[Real, N]), closest_point((s : (Cart[Real, N]) -> Bool)), x) == x
-      #|  dist((vec(0), (x : Cart[Real, _]))) == norm(x)
+      #|  distance((vec(0), (x : Cart[Real, _]))) == norm(x)
       #|  :real
       #|  :real
       #|  \226\136\131 e : Real, real_of_num(0) < e && SUBSET((s : (Cart[Real, N]) -> Bool), cball((vec(0), e)))
@@ -63995,7 +63995,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - 1
       #|  (dimension : ((Cart[Real, N]) -> Bool) -> Int)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 rational((op_dollar : (Cart[Real, N], Num) -> Real)(x, i))})) == int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) - int_of_num(1)
       #|  (i : Num)
-      #|  dist(((y : Cart[Real, N]), (x : Cart[Real, N])))
+      #|  distance(((y : Cart[Real, N]), (x : Cart[Real, N])))
       #|  (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (n : Num))) { (op_dollar : (Cart[Real, N], Num) -> Real)((y : Cart[Real, N]), i) } else { real_of_num(0) })
       #|  (y : Cart[Real, N])
       #|  real_of_num(0) < (e : Real)
@@ -65489,11 +65489,11 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, homeomorphic(s, t) \226\134\146 (\226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], continuous_on(f, s) && SUBSET(IMAGE(f, s), s) \226\134\146 (\226\136\131 x : Cart[Real, _], IN(x, s) && f(x) == x)) == (\226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], continuous_on(g, t) && SUBSET(IMAGE(g, t), t) \226\134\146 (\226\136\131 y : Cart[Real, _], IN(y, t) && g(y) == y))
       #|  (x : Cart[Real, N]) => x
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, retract_of(t, s) && (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], continuous_on(f, s) && SUBSET(IMAGE(f, s), s) \226\134\146 (\226\136\131 x : Cart[Real, N], IN(x, s) && f(x) == x)) \226\134\146 (\226\136\128 g : (Cart[Real, N]) -> Cart[Real, N], continuous_on(g, t) && SUBSET(IMAGE(g, t), t) \226\134\146 (\226\136\131 y : Cart[Real, N], IN(y, t) && g(y) == y))
-      #|  norm((x : Cart[Real, _]) - (a : Cart[Real, _])) == dist((a, x))
+      #|  norm((x : Cart[Real, _]) - (a : Cart[Real, _])) == distance((a, x))
       #|  :real
       #|  :real
       #|  (x : Cart[Real, N])
-      #|  dist(((a : Cart[Real, _]), a + (b : Cart[Real, _]))) == norm(b)
+      #|  distance(((a : Cart[Real, _]), a + (b : Cart[Real, _]))) == norm(b)
       #|  :real
       #|  :real
       #|  ((x : Cart[Real, N]) => lift(norm(x - (a : Cart[Real, N])))) == o(o(lift, norm), (x : Cart[Real, N]) => x - a)
@@ -65889,11 +65889,11 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  (l : Cart[Real, N])
       #|  !(INTER(closure((c : (Cart[Real, N]) -> Bool)), cball(((p : Cart[Real, N]), (a : Real)))) == {})
       #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
-      #|  dist(((x : Cart[Real, N]), (r : (Cart[Real, N]) -> Cart[Real, N])(x))) <= (e : Real) / real_of_num(4) && norm((g : (Cart[Real, N]) -> Cart[Real, N])(x)) <= e / real_of_num(4) \226\134\146 dist((x, r(x) - g(x))) <= e / real_of_num(2)
+      #|  distance(((x : Cart[Real, N]), (r : (Cart[Real, N]) -> Cart[Real, N])(x))) <= (e : Real) / real_of_num(4) && norm((g : (Cart[Real, N]) -> Cart[Real, N])(x)) <= e / real_of_num(4) \226\134\146 distance((x, r(x) - g(x))) <= e / real_of_num(2)
       #|  :real
       #|  :real
       #|  (x : Cart[Real, N])
-      #|  \226\136\128 x : Cart[Real, N], IN(x, closure((c : (Cart[Real, N]) -> Bool))) \226\134\146 dist((x, (f : (Cart[Real, N]) -> Cart[Real, N])(x))) <= ((b : Real) - (a : Real)) / real_of_num(2)
+      #|  \226\136\128 x : Cart[Real, N], IN(x, closure((c : (Cart[Real, N]) -> Bool))) \226\134\146 distance((x, (f : (Cart[Real, N]) -> Cart[Real, N])(x))) <= ((b : Real) - (a : Real)) / real_of_num(2)
       #|  \226\136\128 x : Cart[Real, N], IN(x, INTER(closure((c : (Cart[Real, N]) -> Bool)), (h : (Cart[Real, N]) -> Bool))) \226\134\146 (f : (Cart[Real, N]) -> Cart[Real, N])(x) == (r : (Cart[Real, N]) -> Cart[Real, N])(x)
       #|  \226\136\128 x : Cart[Real, N], IN(x, frontier((c : (Cart[Real, N]) -> Bool))) \226\134\146 (f : (Cart[Real, N]) -> Cart[Real, N])(x) == x
       #|  (f : (Cart[Real, N]) -> Cart[Real, N]) == ((x : Cart[Real, N]) => (r : (Cart[Real, N]) -> Cart[Real, N])(x) - (g' : (Cart[Real, N]) -> Cart[Real, N])(x))
@@ -65927,9 +65927,9 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  (vec : (Num) -> Cart[Real, N])(0)
       #|  (y : Cart[Real, N])
       #|  (x : Cart[Real, N])
-      #|  real_of_num(0) < (e : Real) && norm((y : Cart[Real, N])) <= e / real_of_num(2) \226\134\146 dist(((x : Cart[Real, N]), x + y)) < e
+      #|  real_of_num(0) < (e : Real) && norm((y : Cart[Real, N])) <= e / real_of_num(2) \226\134\146 distance(((x : Cart[Real, N]), x + y)) < e
       #|  :real
-      #|  dist(((r : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])), r(x + (y : Cart[Real, N])))) < (e : Real) / real_of_num(8) && norm(y) <= e / real_of_num(8) && r(x) == x \226\134\146 dist((x + y, r(x + y))) <= e / real_of_num(4)
+      #|  distance(((r : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N])), r(x + (y : Cart[Real, N])))) < (e : Real) / real_of_num(8) && norm(y) <= e / real_of_num(8) && r(x) == x \226\134\146 distance((x + y, r(x + y))) <= e / real_of_num(4)
       #|  :real
       #|  :real
       #|  :real
@@ -65939,7 +65939,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  (e : Real)
       #|  ((b : Real) - (a : Real)) / real_of_num(8)
       #|  uniformly_continuous_on((r : (Cart[Real, N]) -> Cart[Real, N]), {(x : Cart[Real, N]) + (e : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(e, cball((vec(0), (d : Real))))})
-      #|  norm((e : Cart[Real, N])) == dist(((x : Cart[Real, N]), x + e))
+      #|  norm((e : Cart[Real, N])) == distance(((x : Cart[Real, N]), x + e))
       #|  :real
       #|  :real
       #|  real_of_num(0) < (s : Real) && s <= (e : Real) \226\134\146 !(e <= s / real_of_num(2))
@@ -65951,7 +65951,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  SUBSET({(f : (_, _) -> _)((x : _), (y : _)) | IN(x, {}) && (P : (_) -> Bool)(y)}, (u : (_) -> Bool))
       #|  (s : (Cart[Real, N]) -> Bool) == {}
       #|  \226\136\131 d : Real, real_of_num(0) < d && SUBSET({(x : Cart[Real, N]) + (e : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(e, cball((vec(0), d)))}, (u : (Cart[Real, N]) -> Bool))
-      #|  \226\136\131 d : Real, real_of_num(0) < d && SUBSET({(x : Cart[Real, N]) + (e : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(e, cball((vec(0), d)))}, (u : (Cart[Real, N]) -> Bool)) && (\226\136\128 w : Cart[Real, N], IN(w, {(x : Cart[Real, N]) + (e : Cart[Real, N]) | IN(x, s) && IN(e, cball((vec(0), d)))}) \226\134\146 dist((w, (r : (Cart[Real, N]) -> Cart[Real, N])(w))) <= ((b : Real) - (a : Real)) / real_of_num(4))
+      #|  \226\136\131 d : Real, real_of_num(0) < d && SUBSET({(x : Cart[Real, N]) + (e : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(e, cball((vec(0), d)))}, (u : (Cart[Real, N]) -> Bool)) && (\226\136\128 w : Cart[Real, N], IN(w, {(x : Cart[Real, N]) + (e : Cart[Real, N]) | IN(x, s) && IN(e, cball((vec(0), d)))}) \226\134\146 distance((w, (r : (Cart[Real, N]) -> Cart[Real, N])(w))) <= ((b : Real) - (a : Real)) / real_of_num(4))
       #|  (r : (Cart[Real, N]) -> Cart[Real, N])
       #|  (u : (Cart[Real, N]) -> Bool)
       #|  (UNIV : (Cart[Real, N]) -> Bool)
