@@ -87933,189 +87933,186 @@ test "100/independence matches 100/independence.ml" {
       #|0..0..3..9..21..49..112..205..360..603..931..solved at 1059
       #|0..0..3..11..27..58..solved at 68
       #|100/independence quotations (225):
-      #|  ddist(x:real^N,y:real^N) =\n    if norm(x) < &1 /\\ norm(y) < &1 then\n     (&1 - x dot y) pow 2 / ((&1 - norm(x) pow 2) * (&1 - norm(y) pow 2)) - &1\n    else dist(x,y)
-      #|  (&1 - (a + x * b)) pow 2 * (&1 - (a + &2 * b + c)) <\n    (&1 - (a + b)) pow 2 * (&1 - (a + &2 * x * b + x * x * c)) <=>\n    &0 < (&1 - a - b * x) * ((&1 - a) * c + b pow 2) * (&1 - x) +\n         (&1 - a - b) * ((&1 - a) * c + b pow 2) * (&1 - x) * x
-      #|  (a + b:real^N) dot (a + b) = a dot a + &2 * a dot b + b dot b
-      #|  a + c:real^N = a <=> c = vec 0
-      #|  b:real^N = a + c
-      #|  c:real^N = b - a
-      #|  (&1 - u) % a + u % b:real^N = a + u % (b - a)
-      #|  (&1 - &1) % a + &1 % b:real^N = b
-      #|  u = &1
-      #|  u:real
-      #|  norm(x) * norm(y) < &1 ==> (x:real^N) dot y < &1
-      #|  (a:real^N) dot b < &1 /\\ (a:real^N) dot x < &1
-      #|  (a * inv b) * c:real = (a * c) / b
-      #|  a * inv x * inv b - &1 < c * inv x * d - &1 <=>\n                          (a / b) / x < (c * d) / x
-      #|  norm(a:real^N) pow 2 < &1 /\\ norm(b:real^N) pow 2 < &1 /\\\n    norm(x:real^N) pow 2 < &1
-      #|  b:real^N = a
-      #|  forall a b x:real^N.\n      norm a < &1 /\\ norm b < &1 /\\ norm x < &1 /\\ between x (a,b) /\\ ~(x = b)\n      ==> ddist(a,x) < ddist(a,b)
-      #|  forall x:real^N. ddist(x,x) = &0
-      #|  forall x y:real^N. ddist(x,y) = ddist(y,x)
-      #|  norm(x:real^N) < &1 /\\ norm(y:real^N) < &1
-      #|  forall x y:real^N. ~(x = y) ==> &0 < ddist(x,y)
-      #|  x:real^N = y
-      #|  forall x y:real^N. &0 <= ddist(x,y)
-      #|  forall x y:real^N. ddist(x,y) = &0 <=> x = y
-      #|  forall a b x:real^N.\n        norm(a) < &1 /\\ norm(b) < &1 /\\ norm(x) < &1\n        ==> (between x (a,b) <=>\n             collinear {a, x, b} /\\\n             ddist(x,a) <= ddist (a,b) /\\ ddist(x,b) <= ddist(a,b))
-      #|  x < &1 * &1 ==> ~(&1 - x = &0)
-      #|  dist(y,x) < &1 - norm x ==> norm y < &1
+      #|  (ddist : ((Cart[Real, N], Cart[Real, N])) -> Real)(((x : Cart[Real, N]), (y : Cart[Real, N]))) == (if norm(x) < real_of_num(1) && norm(y) < real_of_num(1) { pow(real_of_num(1) - dot(x, y), 2) / ((real_of_num(1) - pow(norm(x), 2)) * (real_of_num(1) - pow(norm(y), 2))) - real_of_num(1) } else { dist((x, y)) })
+      #|  (pow(real_of_num(1) - ((a : Real) + (x : Real) * (b : Real)), 2) * (real_of_num(1) - (a + (real_of_num(2) * b + (c : Real)))) < pow(real_of_num(1) - (a + b), 2) * (real_of_num(1) - (a + (real_of_num(2) * (x * b) + x * (x * c))))) == (real_of_num(0) < (real_of_num(1) - a - b * x) * (((real_of_num(1) - a) * c + pow(b, 2)) * (real_of_num(1) - x)) + (real_of_num(1) - a - b) * (((real_of_num(1) - a) * c + pow(b, 2)) * ((real_of_num(1) - x) * x)))
+      #|  dot((a : Cart[Real, N]) + (b : Cart[Real, N]), a + b) == dot(a, a) + (real_of_num(2) * dot(a, b) + dot(b, b))
+      #|  ((a : Cart[Real, N]) + (c : Cart[Real, N]) == a) == (c == vec(0))
+      #|  (b : Cart[Real, N]) == (a : Cart[Real, N]) + (c : Cart[Real, N])
+      #|  (c : Cart[Real, N]) == (b : Cart[Real, N]) - (a : Cart[Real, N])
+      #|  op_pct(real_of_num(1) - (u : Real), (a : Cart[Real, N])) + op_pct(u, (b : Cart[Real, N])) == a + op_pct(u, b - a)
+      #|  op_pct(real_of_num(1) - real_of_num(1), (a : Cart[Real, N])) + op_pct(real_of_num(1), (b : Cart[Real, N])) == b
+      #|  (u : Real) == real_of_num(1)
+      #|  (u : Real)
+      #|  norm((x : Cart[Real, N])) * norm((y : Cart[Real, N])) < real_of_num(1) \226\134\146 dot(x, y) < real_of_num(1)
+      #|  dot((a : Cart[Real, N]), (b : Cart[Real, N])) < real_of_num(1) && dot(a, (x : Cart[Real, N])) < real_of_num(1)
+      #|  (a : Real) * inv((b : Real)) * (c : Real) == a * c / b
+      #|  ((a : Real) * (inv((x : Real)) * inv((b : Real))) - real_of_num(1) < (c : Real) * (inv(x) * (d : Real)) - real_of_num(1)) == (a / b / x < c * d / x)
+      #|  pow(norm((a : Cart[Real, N])), 2) < real_of_num(1) && pow(norm((b : Cart[Real, N])), 2) < real_of_num(1) && pow(norm((x : Cart[Real, N])), 2) < real_of_num(1)
+      #|  (b : Cart[Real, N]) == (a : Cart[Real, N])
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 x : Cart[Real, N], norm(a) < real_of_num(1) && norm(b) < real_of_num(1) && norm(x) < real_of_num(1) && between(x, (a, b)) && !(x == b) \226\134\146 ddist((a, x)) < ddist((a, b))
+      #|  \226\136\128 x : Cart[Real, N], ddist((x, x)) == real_of_num(0)
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], ddist((x, y)) == ddist((y, x))
+      #|  norm((x : Cart[Real, N])) < real_of_num(1) && norm((y : Cart[Real, N])) < real_of_num(1)
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], !(x == y) \226\134\146 real_of_num(0) < ddist((x, y))
+      #|  (x : Cart[Real, N]) == (y : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], real_of_num(0) <= ddist((x, y))
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], (ddist((x, y)) == real_of_num(0)) == (x == y)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 x : Cart[Real, N], norm(a) < real_of_num(1) && norm(b) < real_of_num(1) && norm(x) < real_of_num(1) \226\134\146 between(x, (a, b)) == (collinear({a, x, b}) && ddist((x, a)) <= ddist((a, b)) && ddist((x, b)) <= ddist((a, b)))
+      #|  (x : Real) < real_of_num(1) * real_of_num(1) \226\134\146 !(real_of_num(1) - x == real_of_num(0))
+      #|  dist(((y : Cart[Real, _]), (x : Cart[Real, _]))) < real_of_num(1) - norm(x) \226\134\146 norm(y) < real_of_num(1)
       #|  :real
       #|  :real
-      #|  y:real^N
-      #|  &1 - norm(x:real^N)
-      #|  \\x:real^N. lift((&1 - a dot x) pow 2 /\n                    ((&1 - norm a pow 2) * (&1 - norm x pow 2)) - &1)
-      #|  forall a x:real^N.\n      norm(a) < &1 /\\ norm(x) < &1 ==> (\\x. lift(ddist(a,x))) continuous at x
-      #|  &0 - x <= &0 <=> &0 <= x
-      #|  lift(&0)
-      #|  b:real^N
-      #|  a:real^N
-      #|  segment[a:real^N,b]
-      #|  \\x:real^N. lift(ddist(x,a) - ddist(x,b))
-      #|  forall a b:real^N.\n        norm a < &1 /\\ norm b < &1\n        ==> ?x. between x (a,b) /\\ ddist(x,a) = ddist(x,b)
-      #|  &1 - x = &1 - y <=> x = y
-      #|  x - &1 = y - &1 <=> x = y
-      #|  forall x:real^N y:real^N.\n        norm x < &1 /\\ norm y < &1\n        ==> (ddist(vec 0,x) = ddist(vec 0,y) <=> norm x = norm y)
-      #|  norm x < &1 /\\ norm y < &1 ==> x dot y < &1
-      #|  x * a * b - &1 = y * a * b - &1 <=> x = y \\/ a = &0 \\/ b = &0
-      #|  (a /\\ b ==> (x <=> y)) ==> (a /\\ x /\\ b <=> a /\\ y /\\ b)
-      #|  forall a b:real^N a' b':real^N.\n        norm a < &1 /\\ norm b < &1 /\\ norm a' < &1 /\\ norm b' < &1\n        ==> (ddist(vec 0,a) = ddist(vec 0,a') /\\ ddist(a,b) = ddist(a',b') /\\\n             ddist(b,vec 0) = ddist(b',vec 0) <=>\n             dist(vec 0,a) = dist(vec 0,a') /\\ dist(a,b) = dist(a',b') /\\\n             dist(b,vec 0) = dist(b',vec 0))
-      #|  kleinify z = Cx(&2 / (&1 + norm(z) pow 2)) * z
-      #|  poincarify x = Cx((&1 - sqrt(&1 - norm(x) pow 2)) / norm(x) pow 2) * x
-      #|  kleinify (Cx(&0)) = Cx(&0) /\\ poincarify (Cx(&0)) = Cx(&0)
-      #|  &0 <= x ==> abs(&1 + x) = &1 + x
-      #|  forall z. norm(kleinify z) = (&2 * norm(z)) / (&1 + norm(z) pow 2)
-      #|  &2 * z < (&1 + z pow 2) <=> &0 < (z - &1) pow 2
-      #|  &0 <= x ==> &0 < &1 + x
-      #|  forall z. norm(kleinify z) < &1 <=> ~(norm z = &1)
-      #|  &1 - x <= &1 <=> &0 <= x
-      #|  (&1 - x) pow 2 <= &1 - x <=> &0 <= x * (&1 - x)
-      #|  s <= &1 /\\ &1 - x <= s ==> abs(&1 - s) <= x
-      #|  x:real^2 = vec 0
-      #|  x * y <= &1 * y /\\ y < &1 ==> x * y < &1
-      #|  forall x. norm(x) < &1 ==> norm(poincarify x) < &1
-      #|  sqrt(&1 - norm(x:real^2) pow 2) pow 2 = &1 - norm x pow 2
-      #|  &1 - x < &1 pow 2 <=> &0 < x
-      #|  &0 < y /\\ &2 * y = x ==> &2 * inv(x) * y = &1
-      #|  ~(y = &0) ==> (&2 * x * y pow 2) * z * inv(y pow 2) = &2 * x * z
-      #|  ~(y = &0)\n    ==> (&1 + (a / y pow 2 * y) pow 2) = (y pow 2 + a pow 2) / y pow 2
-      #|  (~(x = Cx(&0)) ==> w * z = Cx(&1)) ==> w * z * x = x
-      #|  forall x. norm(x) < &1 ==> kleinify(poincarify x) = x
-      #|  abs(x) < &1 ==> ~(&1 + x = &0)
-      #|  ~(&1 + norm(x:complex) pow 2 = &0)
-      #|  &2 * x <= &1 * (&1 + x) <=> x <= &1
-      #|  &0 <= x ==> &0 < &1 + x
-      #|  &0 <= &1 - &2 * x / y <=> (&2 * x) / y <= &1
-      #|  x = &1 - y ==> &1 - x = y
-      #|  ~(x = &0) /\\ abs x < &1 /\\ a = &2 * x / (&1 + x)\n    ==> a * (&1 + x) pow 2 = &2 * x * (&1 + x)
-      #|  &0 <= x ==> abs(&1 + x) = &1 + x
-      #|  ~(c = &0) /\\ abs d < &1 /\\ a * b = &2 * c pow 2 * (&1 + d)\n    ==> a * inv(&2) pow 2 * b * inv(c) pow 2 * &2 * inv(&1 + d) = &1
-      #|  (~(x = Cx(&0)) ==> w * z = Cx(&1)) ==> w * z * x = x
-      #|  forall x. norm(x) < &1 ==> poincarify(kleinify x) = x
-      #|  &1 - x = &0 <=> x = &1
-      #|  (~(y = &0) /\\ ~(y' = &0)) /\\ a - y * y' = b\n          ==> a = (b / (y * y') + &1) * y * y'
-      #|  (&1 + x) pow 2 - &4 * x = (&1 - x) pow 2
-      #|  ~(abs x = &1) ==> ~(&1 + x = &0)
-      #|  (~(y' = &0) /\\ ~(y = &0)) /\\\n        (y * y' - &4 * d) pow 2 =\n        b * (y pow 2 - &4 * x pow 2) * (y' pow 2 - &4 * x' pow 2)\n        ==> (&1 - &2 / y * &2 / y' * d) pow 2 =\n            b * (&1 - (&2 / y * x) pow 2) * (&1 - (&2 / y' * x') pow 2)
-      #|  &0 <= x ==> abs(&1 + x) = &1 + x
-      #|  x < &1 ==> ~(&1 - x = &0)
-      #|  ~(y = &0) /\\ z = (w + &1) * y ==> z / y - &1 = w
-      #|  (&4 * norm(w - z:real^2) pow 2 *\n     ((&1 - norm w pow 2) * (&1 - norm z pow 2) + norm(w - z) pow 2)) /\n    ((&1 - norm w pow 2) pow 2 * (&1 - norm z pow 2) pow 2)
-      #|  forall w z. ~(norm w = &1) /\\ ~(norm z = &1)\n         ==> ddist(kleinify w,kleinify z) =\n             &4 * (&1 / &2 + norm(w - z) pow 2 /\n                             ((&1 - norm w pow 2) * (&1 - norm z pow 2))) pow 2\n             - &1
-      #|  forall w z w' z'.\n      ~(norm w = &1) /\\ ~(norm z = &1) /\\ ~(norm w' = &1) /\\ ~(norm z' = &1) /\\\n      norm(w - z) pow 2 * (&1 - norm w' pow 2) * (&1 - norm z' pow 2) =\n      norm(w' - z') pow 2 * (&1 - norm w pow 2) * (&1 - norm z pow 2)\n      ==> ddist(kleinify w,kleinify z) = ddist(kleinify w',kleinify z')
-      #|  forall w x. norm w < &1 /\\ norm x < &1\n         ==> norm(kleinify(moebius_function (&0) w x)) < &1
-      #|  x * y:real = w * z ==> (x * i) * y = w * z * i
-      #|  ~(y = &0) /\\ ~(y' = &0)\n      ==> (&1 - (x / y) pow 2) * (&1 - (x' / y') pow 2) =\n          ((y pow 2 - x pow 2) * (y' pow 2 - x' pow 2)) / (y * y') pow 2
-      #|  ~(Cx(&1) - cnj w * x = Cx(&0)) /\\ ~(Cx(&1) - cnj w * y = Cx(&0))\n      ==> (x - w) / (Cx (&1) - cnj w * x) - (y - w) / (Cx (&1) - cnj w * y) =\n          ((Cx(&1) - w * cnj w) * (x - y)) /\n          ((Cx (&1) - cnj w * x) * (Cx (&1) - cnj w * y))
-      #|  norm(x) < norm(y) ==> ~(y = x)
-      #|  ~(Cx(&1) - cnj w * x = Cx(&0)) /\\ ~(Cx(&1) - cnj w * y = Cx(&0))
-      #|  forall w x y. norm w < &1 /\\ norm x < &1 /\\ norm y < &1\n           ==> ddist(kleinify(moebius_function (&0) w x),\n                     kleinify(moebius_function (&0) w y)) =\n               ddist(kleinify x,kleinify y)
-      #|  &0 < &1 - x - y <=> x + y < &1
-      #|  &0 < x /\\ &0 <= y ==> ~(x + y = &0)
-      #|  x + y < &1 ==> ~(--(x + y - &1) = &0)
-      #|  &0 <= x + y ==> ~(x + y + &1 = &0)
-      #|  --(Re w pow 2 + Im w pow 2 - &1) pow 3 *\n              ((&1 - Re(x) pow 2 - Im(x) pow 2) *\n               (&1 - Re(w) pow 2 - Im(w) pow 2) +\n               &2 * (Re w - Re x) pow 2 + &2 * (Im w - Im x) pow 2)
-      #|  Re x pow 2 + Im x pow 2 + &1
-      #|  forall a b. a * lhs = b * rhs /\\ ~(a = &0) /\\ ~(b = &0)\n          ==> (lhs = &0 <=> rhs = &0)
-      #|  ~(nx = &0) /\\ ~(ny = &0) /\\ ~(nz = &0)\n    ==>(((&1 + (nxw / nx) pow 2) * rz / nz pow 2 -\n         (&1 + (nzw / nz) pow 2) * rx / nx pow 2) *\n        ((&1 + (nxw / nx) pow 2) * iy / ny pow 2 -\n         (&1 + (nyw / ny) pow 2) * ix / nx pow 2) =\n        ((&1 + (nxw / nx) pow 2) * ry / ny pow 2 -\n         (&1 + (nyw / ny) pow 2) * rx / nx pow 2) *\n        ((&1 + (nxw / nx) pow 2) * iz / nz pow 2 -\n         (&1 + (nzw / nz) pow 2) * ix / nx pow 2) <=>\n        ((nx pow 2 + nxw pow 2) * rz - (nz pow 2 + nzw pow 2) * rx) *\n        ((nx pow 2 + nxw pow 2) * iy - (ny pow 2 + nyw pow 2) * ix) =\n        ((nx pow 2 + nxw pow 2) * ry - (ny pow 2 + nyw pow 2) * rx) *\n        ((nx pow 2 + nxw pow 2) * iz - (nz pow 2 + nzw pow 2) * ix))
-      #|  abs(&1) = &1 * &1
-      #|  norm x < norm y ==> ~(y = x)
-      #|  ~(Cx (&1) - cnj w * x = Cx(&0)) /\\ ~(Cx (&1) - cnj w * y = Cx(&0)) /\\\n    ~(Cx (&1) - cnj w * z = Cx(&0))
-      #|  ~(nx = &0) /\\ ~(ny = &0) /\\ ~(nz = &0)\n      ==> ((&2 / nz * rz - &2 / nx * rx) * (&2 / ny * iy - &2 / nx * ix) =\n           (&2 / ny * ry - &2 / nx * rx) * (&2 / nz * iz - &2 / nx * ix) <=>\n           (nx * rz - nz * rx) * (nx * iy - ny * ix) =\n           (nx * ry - ny * rx) * (nx * iz - nz * ix))
-      #|  &0 <= x ==> ~(&1 + x = &0)
-      #|  forall w x y z. norm w < &1 /\\ norm x < &1 /\\ norm y < &1 /\\ norm z < &1\n             ==> (collinear {kleinify(moebius_function (&0) w x),\n                             kleinify(moebius_function (&0) w y),\n                             kleinify(moebius_function (&0) w z)} <=>\n                  collinear {kleinify x,kleinify y,kleinify z})
-      #|  forall w x y z. norm w < &1 /\\ norm x < &1 /\\ norm y < &1 /\\ norm z < &1\n             ==> (between (kleinify(moebius_function (&0) w x))\n                          (kleinify(moebius_function (&0) w y),\n                           kleinify(moebius_function (&0) w z)) <=>\n                  between (kleinify x) (kleinify y,kleinify z))
-      #|  hyperbolic_isometry (f:real^2->real^2) <=>\n    (forall x. norm x < &1 ==> norm(f x) < &1) /\\\n    (forall x y. norm x < &1 /\\ norm y < &1 ==> ddist(f x,f y) = ddist(x,y)) /\\\n    (forall x y z. norm x < &1 /\\ norm y < &1 /\\ norm z < &1\n             ==> (between (f x) (f y,f z) <=> between x (y,z)))
-      #|  \\x. kleinify(moebius_function(&0) (--(poincarify w)) (poincarify x))
-      #|  \\x. kleinify(moebius_function(&0) (poincarify w) (poincarify x))
-      #|  forall w. norm w < &1\n       ==> ?f:real^2->real^2 g:real^2->real^2.\n                hyperbolic_isometry f /\\ hyperbolic_isometry g /\\\n                f(w) = vec 0 /\\ g(vec 0) = w /\\\n                (forall x. norm x < &1 ==> f(g x) = x) /\\\n                (forall x. norm x < &1 ==> g(f x) = x)
-      #|  vec 0:real^2
-      #|  ?x:real^2. norm x < &1
-      #|  pbetween y (x,z) <=> between (dest_plane y) (dest_plane x,dest_plane z)
-      #|  pdist(x,y) = ddist(dest_plane x,dest_plane y)
-      #|  forall x. norm(dest_plane x) < &1
-      #|  forall x y. dest_plane x = dest_plane y <=> x = y
-      #|  forall P. (forall x. P(dest_plane x)) <=> (forall x. norm x < &1 ==> P x)
-      #|  forall P. (?x. P(dest_plane x)) <=> (?x. norm x < &1 /\\ P x)
-      #|  forall a b. pdist(a,b) = pdist(b,a)
-      #|  forall a b p q r s.\n        pdist(a,b) = pdist(p,q) /\\ pdist(a,b) = pdist(r,s)\n        ==> pdist(p,q) = pdist(r,s)
-      #|  forall a b c. pdist(a,b) = pdist(c,c) ==> a = b
-      #|  (g:real^2->real^2) x
-      #|  x:real^2
-      #|  d:real^2
-      #|  (f:real^2->real^2) q
-      #|  g:real^2->real^2
-      #|  f:real^2->real^2
-      #|  a:real^2
-      #|  vec 0:real^2
-      #|  P(vec 0) /\\ (P(vec 0) ==> forall x. P x) ==> forall x. P x
-      #|  a:real^2
-      #|  q:real^2
-      #|  d:real^2
-      #|  norm(a:real^2) < &1 /\\ norm(q:real^2) < &1 /\\ norm(d:real^2) < &1
-      #|  b:real^2
-      #|  ?d:real^2. norm d < &1 /\\ ddist(b:real^2,c) = ddist(vec 0,d)
-      #|  forall a q b c. ?x. pbetween a (q,x) /\\ pdist(a,x) = pdist(b,c)
-      #|  ddist((f:real^2->real^2) b,f x) = ddist((g:real^2->real^2) b',g x')
-      #|  (g:real^2->real^2) x'
-      #|  (g:real^2->real^2) c'
-      #|  (g:real^2->real^2) b'
-      #|  (g:real^2->real^2) a'
-      #|  (f:real^2->real^2) x
-      #|  (f:real^2->real^2) c
-      #|  (f:real^2->real^2) b
-      #|  (f:real^2->real^2) a
-      #|  (g:complex->complex) b' = vec 0
-      #|  (f:complex->complex) b = vec 0
-      #|  p /\\ (q ==> r) ==> (p <=> q) ==> r
-      #|  (g:real^2->real^2) c'
-      #|  (g:real^2->real^2) a'
-      #|  (f:real^2->real^2) c
-      #|  (f:real^2->real^2) a
-      #|  (p ==> r) /\\ q ==> (p <=> q) ==> r
-      #|  (g:real^2->real^2) c'
-      #|  (g:real^2->real^2) x'
-      #|  (f:real^2->real^2) c
-      #|  (f:real^2->real^2) x
-      #|  g':real^2->real^2
-      #|  g:real^2->real^2
-      #|  f':real^2->real^2
-      #|  f:real^2->real^2
-      #|  b:real^2
-      #|  b':real^2
-      #|  forall a b c x a' b' c' x'.\n        ~(a = b) /\\\n        pdist(a,b) = pdist(a',b') /\\\n        pdist(a,c) = pdist(a',c') /\\\n        pdist(b,c) = pdist(b',c') /\\\n        pbetween b (a,x) /\\ pbetween b' (a',x') /\\ pdist(b,x) = pdist(b',x')\n        ==> pdist(c,x) = pdist(c',x')
-      #|  forall a b. pbetween b (a,a) ==> a = b
-      #|  forall a b c p q.\n    pbetween p (a,c) /\\ pbetween q (b,c)\n    ==> ?x. pbetween x (p,b) /\\ pbetween x (q,a)
-      #|  (&1 / &2) % basis 2:real^2
-      #|  (&1 / &2) % basis 1:real^2
-      #|  vec 0:real^2
-      #|  ?a b c. ~pbetween b (a,c) /\\ ~pbetween c (b,a) /\\ ~pbetween a (c,b)
-      #|  --x:real^N = x <=> x = vec 0
-      #|  &0 < x /\\ &0 < y\n      ==> (a * inv x * inv y - &1 = b * inv x * inv y - &1 <=> a = b)
-      #|  norm(a:real^N) = norm b <=> dist(a,vec 0) = dist(vec 0,b)
-      #|  :real
-      #|  :real
-      #|  :real
+      #|  (y : Cart[Real, N])
+      #|  real_of_num(1) - norm((x : Cart[Real, N]))
+      #|  (x : Cart[Real, N]) => lift(pow(real_of_num(1) - dot((a : Cart[Real, N]), x), 2) / ((real_of_num(1) - pow(norm(a), 2)) * (real_of_num(1) - pow(norm(x), 2))) - real_of_num(1))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 x : Cart[Real, N], norm(a) < real_of_num(1) && norm(x) < real_of_num(1) \226\134\146 continuous((x : Cart[Real, N]) => lift(ddist((a, x))), at(x))
+      #|  (real_of_num(0) - (x : Real) <= real_of_num(0)) == (real_of_num(0) <= x)
+      #|  lift(real_of_num(0))
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  segment([((a : Cart[Real, N]), (b : Cart[Real, N]))])
+      #|  (x : Cart[Real, N]) => lift(ddist((x, (a : Cart[Real, N]))) - ddist((x, (b : Cart[Real, N]))))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], norm(a) < real_of_num(1) && norm(b) < real_of_num(1) \226\134\146 (\226\136\131 x : Cart[Real, N], between(x, (a, b)) && ddist((x, a)) == ddist((x, b)))
+      #|  (real_of_num(1) - (x : Real) == real_of_num(1) - (y : Real)) == (x == y)
+      #|  ((x : Real) - real_of_num(1) == (y : Real) - real_of_num(1)) == (x == y)
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], norm(x) < real_of_num(1) && norm(y) < real_of_num(1) \226\134\146 (ddist((vec(0), x)) == ddist((vec(0), y))) == (norm(x) == norm(y))
+      #|  norm((x : Cart[Real, _])) < real_of_num(1) && norm((y : Cart[Real, _])) < real_of_num(1) \226\134\146 dot(x, y) < real_of_num(1)
+      #|  ((x : Real) * ((a : Real) * (b : Real)) - real_of_num(1) == (y : Real) * (a * b) - real_of_num(1)) == (x == y || a == real_of_num(0) || b == real_of_num(0))
+      #|  ((a : Bool) && (b : Bool) \226\134\146 (x : Bool) == (y : Bool)) \226\134\146 (a && x && b) == (a && y && b)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 a' : Cart[Real, N], \226\136\128 b' : Cart[Real, N], norm(a) < real_of_num(1) && norm(b) < real_of_num(1) && norm(a') < real_of_num(1) && norm(b') < real_of_num(1) \226\134\146 (ddist((vec(0), a)) == ddist((vec(0), a')) && ddist((a, b)) == ddist((a', b')) && ddist((b, vec(0))) == ddist((b', vec(0)))) == (dist((vec(0), a)) == dist((vec(0), a')) && dist((a, b)) == dist((a', b')) && dist((b, vec(0))) == dist((b', vec(0))))
+      #|  (kleinify : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z : Cart[Real, Tybit0[Unit]])) == Cx(real_of_num(2) / (real_of_num(1) + pow(norm(z), 2))) * z
+      #|  (poincarify : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, Tybit0[Unit]])) == Cx((real_of_num(1) - sqrt(real_of_num(1) - pow(norm(x), 2))) / pow(norm(x), 2)) * x
+      #|  kleinify(Cx(real_of_num(0))) == Cx(real_of_num(0)) && poincarify(Cx(real_of_num(0))) == Cx(real_of_num(0))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(real_of_num(1) + x) == real_of_num(1) + x
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(kleinify(z)) == real_of_num(2) * norm(z) / (real_of_num(1) + pow(norm(z), 2))
+      #|  (real_of_num(2) * (z : Real) < real_of_num(1) + pow(z, 2)) == (real_of_num(0) < pow(z - real_of_num(1), 2))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) < real_of_num(1) + x
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], (norm(kleinify(z)) < real_of_num(1)) == !(norm(z) == real_of_num(1))
+      #|  (real_of_num(1) - (x : Real) <= real_of_num(1)) == (real_of_num(0) <= x)
+      #|  (pow(real_of_num(1) - (x : Real), 2) <= real_of_num(1) - x) == (real_of_num(0) <= x * (real_of_num(1) - x))
+      #|  (s : Real) <= real_of_num(1) && real_of_num(1) - (x : Real) <= s \226\134\146 abs(real_of_num(1) - s) <= x
+      #|  (x : Cart[Real, Tybit0[Unit]]) == vec(0)
+      #|  (x : Real) * (y : Real) <= real_of_num(1) * y && y < real_of_num(1) \226\134\146 x * y < real_of_num(1)
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], norm(x) < real_of_num(1) \226\134\146 norm(poincarify(x)) < real_of_num(1)
+      #|  pow(sqrt(real_of_num(1) - pow(norm((x : Cart[Real, Tybit0[Unit]])), 2)), 2) == real_of_num(1) - pow(norm(x), 2)
+      #|  (real_of_num(1) - (x : Real) < pow(real_of_num(1), 2)) == (real_of_num(0) < x)
+      #|  real_of_num(0) < (y : Real) && real_of_num(2) * y == (x : Real) \226\134\146 real_of_num(2) * (inv(x) * y) == real_of_num(1)
+      #|  !((y : Real) == real_of_num(0)) \226\134\146 real_of_num(2) * ((x : Real) * pow(y, 2)) * ((z : Real) * inv(pow(y, 2))) == real_of_num(2) * (x * z)
+      #|  !((y : Real) == real_of_num(0)) \226\134\146 real_of_num(1) + pow((a : Real) / pow(y, 2) * y, 2) == (pow(y, 2) + pow(a, 2)) / pow(y, 2)
+      #|  (!((x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 (w : Cart[Real, Tybit0[Unit]]) * (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1))) \226\134\146 w * (z * x) == x
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], norm(x) < real_of_num(1) \226\134\146 kleinify(poincarify(x)) == x
+      #|  abs((x : Real)) < real_of_num(1) \226\134\146 !(real_of_num(1) + x == real_of_num(0))
+      #|  !(real_of_num(1) + pow(norm((x : Cart[Real, Tybit0[Unit]])), 2) == real_of_num(0))
+      #|  (real_of_num(2) * (x : Real) <= real_of_num(1) * (real_of_num(1) + x)) == (x <= real_of_num(1))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) < real_of_num(1) + x
+      #|  (real_of_num(0) <= real_of_num(1) - real_of_num(2) * ((x : Real) / (y : Real))) == (real_of_num(2) * x / y <= real_of_num(1))
+      #|  (x : Real) == real_of_num(1) - (y : Real) \226\134\146 real_of_num(1) - x == y
+      #|  !((x : Real) == real_of_num(0)) && abs(x) < real_of_num(1) && (a : Real) == real_of_num(2) * (x / (real_of_num(1) + x)) \226\134\146 a * pow(real_of_num(1) + x, 2) == real_of_num(2) * (x * (real_of_num(1) + x))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(real_of_num(1) + x) == real_of_num(1) + x
+      #|  !((c : Real) == real_of_num(0)) && abs((d : Real)) < real_of_num(1) && (a : Real) * (b : Real) == real_of_num(2) * (pow(c, 2) * (real_of_num(1) + d)) \226\134\146 a * (pow(inv(real_of_num(2)), 2) * (b * (pow(inv(c), 2) * (real_of_num(2) * inv(real_of_num(1) + d))))) == real_of_num(1)
+      #|  (!((x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 (w : Cart[Real, Tybit0[Unit]]) * (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1))) \226\134\146 w * (z * x) == x
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], norm(x) < real_of_num(1) \226\134\146 poincarify(kleinify(x)) == x
+      #|  (real_of_num(1) - (x : Real) == real_of_num(0)) == (x == real_of_num(1))
+      #|  (!((y : Real) == real_of_num(0)) && !((y' : Real) == real_of_num(0))) && (a : Real) - y * y' == (b : Real) \226\134\146 a == (b / (y * y') + real_of_num(1)) * (y * y')
+      #|  pow(real_of_num(1) + (x : Real), 2) - real_of_num(4) * x == pow(real_of_num(1) - x, 2)
+      #|  !(abs((x : Real)) == real_of_num(1)) \226\134\146 !(real_of_num(1) + x == real_of_num(0))
+      #|  (!((y' : Real) == real_of_num(0)) && !((y : Real) == real_of_num(0))) && pow(y * y' - real_of_num(4) * (d : Real), 2) == (b : Real) * ((pow(y, 2) - real_of_num(4) * pow((x : Real), 2)) * (pow(y', 2) - real_of_num(4) * pow((x' : Real), 2))) \226\134\146 pow(real_of_num(1) - real_of_num(2) / y * (real_of_num(2) / y' * d), 2) == b * ((real_of_num(1) - pow(real_of_num(2) / y * x, 2)) * (real_of_num(1) - pow(real_of_num(2) / y' * x', 2)))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(real_of_num(1) + x) == real_of_num(1) + x
+      #|  (x : Real) < real_of_num(1) \226\134\146 !(real_of_num(1) - x == real_of_num(0))
+      #|  !((y : Real) == real_of_num(0)) && (z : Real) == ((w : Real) + real_of_num(1)) * y \226\134\146 z / y - real_of_num(1) == w
+      #|  real_of_num(4) * (pow(norm((w : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])), 2) * ((real_of_num(1) - pow(norm(w), 2)) * (real_of_num(1) - pow(norm(z), 2)) + pow(norm(w - z), 2))) / (pow(real_of_num(1) - pow(norm(w), 2), 2) * pow(real_of_num(1) - pow(norm(z), 2), 2))
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], !(norm(w) == real_of_num(1)) && !(norm(z) == real_of_num(1)) \226\134\146 ddist((kleinify(w), kleinify(z))) == real_of_num(4) * pow(real_of_num(1) / real_of_num(2) + pow(norm(w - z), 2) / ((real_of_num(1) - pow(norm(w), 2)) * (real_of_num(1) - pow(norm(z), 2))), 2) - real_of_num(1)
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 w' : Cart[Real, Tybit0[Unit]], \226\136\128 z' : Cart[Real, Tybit0[Unit]], !(norm(w) == real_of_num(1)) && !(norm(z) == real_of_num(1)) && !(norm(w') == real_of_num(1)) && !(norm(z') == real_of_num(1)) && pow(norm(w - z), 2) * ((real_of_num(1) - pow(norm(w'), 2)) * (real_of_num(1) - pow(norm(z'), 2))) == pow(norm(w' - z'), 2) * ((real_of_num(1) - pow(norm(w), 2)) * (real_of_num(1) - pow(norm(z), 2))) \226\134\146 ddist((kleinify(w), kleinify(z))) == ddist((kleinify(w'), kleinify(z')))
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], norm(w) < real_of_num(1) && norm(x) < real_of_num(1) \226\134\146 norm(kleinify(moebius_function(real_of_num(0), w, x))) < real_of_num(1)
+      #|  (x : Real) * (y : Real) == (w : Real) * (z : Real) \226\134\146 x * (i : Real) * y == w * (z * i)
+      #|  !((y : Real) == real_of_num(0)) && !((y' : Real) == real_of_num(0)) \226\134\146 (real_of_num(1) - pow((x : Real) / y, 2)) * (real_of_num(1) - pow((x' : Real) / y', 2)) == (pow(y, 2) - pow(x, 2)) * (pow(y', 2) - pow(x', 2)) / pow(y * y', 2)
+      #|  !(Cx(real_of_num(1)) - cnj((w : Cart[Real, Tybit0[Unit]])) * (x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) && !(Cx(real_of_num(1)) - cnj(w) * (y : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 (x - w) / (Cx(real_of_num(1)) - cnj(w) * x) - (y - w) / (Cx(real_of_num(1)) - cnj(w) * y) == (Cx(real_of_num(1)) - w * cnj(w)) * (x - y) / ((Cx(real_of_num(1)) - cnj(w) * x) * (Cx(real_of_num(1)) - cnj(w) * y))
+      #|  norm((x : Cart[Real, _])) < norm((y : Cart[Real, _])) \226\134\146 !(y == x)
+      #|  !(Cx(real_of_num(1)) - cnj((w : Cart[Real, Tybit0[Unit]])) * (x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) && !(Cx(real_of_num(1)) - cnj(w) * (y : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], norm(w) < real_of_num(1) && norm(x) < real_of_num(1) && norm(y) < real_of_num(1) \226\134\146 ddist((kleinify(moebius_function(real_of_num(0), w, x)), kleinify(moebius_function(real_of_num(0), w, y)))) == ddist((kleinify(x), kleinify(y)))
+      #|  (real_of_num(0) < real_of_num(1) - (x : Real) - (y : Real)) == (x + y < real_of_num(1))
+      #|  real_of_num(0) < (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 !(x + y == real_of_num(0))
+      #|  (x : Real) + (y : Real) < real_of_num(1) \226\134\146 !(-(x + (y - real_of_num(1))) == real_of_num(0))
+      #|  real_of_num(0) <= (x : Real) + (y : Real) \226\134\146 !(x + (y + real_of_num(1)) == real_of_num(0))
+      #|  pow(-(pow(Re((w : Cart[Real, Tybit0[Unit]])), 2) + (pow(Im(w), 2) - real_of_num(1))), 3) * ((real_of_num(1) - pow(Re((x : Cart[Real, Tybit0[Unit]])), 2) - pow(Im(x), 2)) * (real_of_num(1) - pow(Re(w), 2) - pow(Im(w), 2)) + (real_of_num(2) * pow(Re(w) - Re(x), 2) + real_of_num(2) * pow(Im(w) - Im(x), 2)))
+      #|  pow(Re((x : Cart[Real, Tybit0[Unit]])), 2) + (pow(Im(x), 2) + real_of_num(1))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, a * (lhs : Real) == b * (rhs : Real) && !(a == real_of_num(0)) && !(b == real_of_num(0)) \226\134\146 (lhs == real_of_num(0)) == (rhs == real_of_num(0))
+      #|  !((nx : Real) == real_of_num(0)) && !((ny : Real) == real_of_num(0)) && !((nz : Real) == real_of_num(0)) \226\134\146 (((real_of_num(1) + pow((nxw : Real) / nx, 2)) * ((rz : Real) / pow(nz, 2)) - (real_of_num(1) + pow((nzw : Real) / nz, 2)) * ((rx : Real) / pow(nx, 2))) * ((real_of_num(1) + pow(nxw / nx, 2)) * ((iy : Real) / pow(ny, 2)) - (real_of_num(1) + pow((nyw : Real) / ny, 2)) * ((ix : Real) / pow(nx, 2))) == ((real_of_num(1) + pow(nxw / nx, 2)) * ((ry : Real) / pow(ny, 2)) - (real_of_num(1) + pow(nyw / ny, 2)) * (rx / pow(nx, 2))) * ((real_of_num(1) + pow(nxw / nx, 2)) * ((iz : Real) / pow(nz, 2)) - (real_of_num(1) + pow(nzw / nz, 2)) * (ix / pow(nx, 2)))) == (((pow(nx, 2) + pow(nxw, 2)) * rz - (pow(nz, 2) + pow(nzw, 2)) * rx) * ((pow(nx, 2) + pow(nxw, 2)) * iy - (pow(ny, 2) + pow(nyw, 2)) * ix) == ((pow(nx, 2) + pow(nxw, 2)) * ry - (pow(ny, 2) + pow(nyw, 2)) * rx) * ((pow(nx, 2) + pow(nxw, 2)) * iz - (pow(nz, 2) + pow(nzw, 2)) * ix))
+      #|  abs(real_of_num(1)) == real_of_num(1) * real_of_num(1)
+      #|  norm((x : Cart[Real, _])) < norm((y : Cart[Real, _])) \226\134\146 !(y == x)
+      #|  !(Cx(real_of_num(1)) - cnj((w : Cart[Real, Tybit0[Unit]])) * (x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) && !(Cx(real_of_num(1)) - cnj(w) * (y : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) && !(Cx(real_of_num(1)) - cnj(w) * (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  !((nx : Real) == real_of_num(0)) && !((ny : Real) == real_of_num(0)) && !((nz : Real) == real_of_num(0)) \226\134\146 ((real_of_num(2) / nz * (rz : Real) - real_of_num(2) / nx * (rx : Real)) * (real_of_num(2) / ny * (iy : Real) - real_of_num(2) / nx * (ix : Real)) == (real_of_num(2) / ny * (ry : Real) - real_of_num(2) / nx * rx) * (real_of_num(2) / nz * (iz : Real) - real_of_num(2) / nx * ix)) == ((nx * rz - nz * rx) * (nx * iy - ny * ix) == (nx * ry - ny * rx) * (nx * iz - nz * ix))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 !(real_of_num(1) + x == real_of_num(0))
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(w) < real_of_num(1) && norm(x) < real_of_num(1) && norm(y) < real_of_num(1) && norm(z) < real_of_num(1) \226\134\146 collinear({kleinify(moebius_function(real_of_num(0), w, x)), kleinify(moebius_function(real_of_num(0), w, y)), kleinify(moebius_function(real_of_num(0), w, z))}) == collinear({kleinify(x), kleinify(y), kleinify(z)})
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(w) < real_of_num(1) && norm(x) < real_of_num(1) && norm(y) < real_of_num(1) && norm(z) < real_of_num(1) \226\134\146 between(kleinify(moebius_function(real_of_num(0), w, x)), (kleinify(moebius_function(real_of_num(0), w, y)), kleinify(moebius_function(real_of_num(0), w, z)))) == between(kleinify(x), (kleinify(y), kleinify(z)))
+      #|  (hyperbolic_isometry : ((Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) -> Bool)((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])) == ((\226\136\128 x : Cart[Real, Tybit0[Unit]], norm(x) < real_of_num(1) \226\134\146 norm(f(x)) < real_of_num(1)) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], norm(x) < real_of_num(1) && norm(y) < real_of_num(1) \226\134\146 ddist((f(x), f(y))) == ddist((x, y))) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(x) < real_of_num(1) && norm(y) < real_of_num(1) && norm(z) < real_of_num(1) \226\134\146 between(f(x), (f(y), f(z))) == between(x, (y, z))))
+      #|  (x : Cart[Real, Tybit0[Unit]]) => kleinify(moebius_function(real_of_num(0), -poincarify((w : Cart[Real, Tybit0[Unit]])), poincarify(x)))
+      #|  (x : Cart[Real, Tybit0[Unit]]) => kleinify(moebius_function(real_of_num(0), poincarify((w : Cart[Real, Tybit0[Unit]])), poincarify(x)))
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], norm(w) < real_of_num(1) \226\134\146 (\226\136\131 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\131 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], hyperbolic_isometry(f) && hyperbolic_isometry(g) && f(w) == vec(0) && g(vec(0)) == w && (\226\136\128 x : Cart[Real, Tybit0[Unit]], norm(x) < real_of_num(1) \226\134\146 f(g(x)) == x) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], norm(x) < real_of_num(1) \226\134\146 g(f(x)) == x))
+      #|  (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0)
+      #|  \226\136\131 x : Cart[Real, Tybit0[Unit]], norm(x) < real_of_num(1)
+      #|  (pbetween : (Plane, (Plane, Plane)) -> Bool)((y : Plane), ((x : Plane), (z : Plane))) == between(dest_plane(y), (dest_plane(x), dest_plane(z)))
+      #|  (pdist : ((Plane, Plane)) -> Real)(((x : Plane), (y : Plane))) == ddist((dest_plane(x), dest_plane(y)))
+      #|  \226\136\128 x : Plane, norm(dest_plane(x)) < real_of_num(1)
+      #|  \226\136\128 x : Plane, \226\136\128 y : Plane, (dest_plane(x) == dest_plane(y)) == (x == y)
+      #|  \226\136\128 P : (Cart[Real, Tybit0[Unit]]) -> Bool, (\226\136\128 x : Plane, P(dest_plane(x))) == (\226\136\128 x : Cart[Real, Tybit0[Unit]], norm(x) < real_of_num(1) \226\134\146 P(x))
+      #|  \226\136\128 P : (Cart[Real, Tybit0[Unit]]) -> Bool, (\226\136\131 x : Plane, P(dest_plane(x))) == (\226\136\131 x : Cart[Real, Tybit0[Unit]], norm(x) < real_of_num(1) && P(x))
+      #|  \226\136\128 a : Plane, \226\136\128 b : Plane, pdist((a, b)) == pdist((b, a))
+      #|  \226\136\128 a : Plane, \226\136\128 b : Plane, \226\136\128 p : Plane, \226\136\128 q : Plane, \226\136\128 r : Plane, \226\136\128 s : Plane, pdist((a, b)) == pdist((p, q)) && pdist((a, b)) == pdist((r, s)) \226\134\146 pdist((p, q)) == pdist((r, s))
+      #|  \226\136\128 a : Plane, \226\136\128 b : Plane, \226\136\128 c : Plane, pdist((a, b)) == pdist((c, c)) \226\134\146 a == b
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, Tybit0[Unit]]))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((q : Cart[Real, Tybit0[Unit]]))
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0)
+      #|  (P : (Cart[Real, _]) -> Bool)(vec(0)) && (P(vec(0)) \226\134\146 (\226\136\128 x : Cart[Real, _], P(x))) \226\134\146 (\226\136\128 x : Cart[Real, _], P(x))
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (q : Cart[Real, Tybit0[Unit]])
+      #|  (d : Cart[Real, Tybit0[Unit]])
+      #|  norm((a : Cart[Real, Tybit0[Unit]])) < real_of_num(1) && norm((q : Cart[Real, Tybit0[Unit]])) < real_of_num(1) && norm((d : Cart[Real, Tybit0[Unit]])) < real_of_num(1)
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\131 d : Cart[Real, Tybit0[Unit]], norm(d) < real_of_num(1) && ddist(((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))) == ddist((vec(0), d))
+      #|  \226\136\128 a : Plane, \226\136\128 q : Plane, \226\136\128 b : Plane, \226\136\128 c : Plane, \226\136\131 x : Plane, pbetween(a, (q, x)) && pdist((a, x)) == pdist((b, c))
+      #|  ddist(((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Tybit0[Unit]])), f((x : Cart[Real, Tybit0[Unit]])))) == ddist(((g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((b' : Cart[Real, Tybit0[Unit]])), g((x' : Cart[Real, Tybit0[Unit]]))))
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((x' : Cart[Real, Tybit0[Unit]]))
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((c' : Cart[Real, Tybit0[Unit]]))
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((b' : Cart[Real, Tybit0[Unit]]))
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((a' : Cart[Real, Tybit0[Unit]]))
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, Tybit0[Unit]]))
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((c : Cart[Real, Tybit0[Unit]]))
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Tybit0[Unit]]))
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Tybit0[Unit]]))
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((b' : Cart[Real, Tybit0[Unit]])) == vec(0)
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Tybit0[Unit]])) == vec(0)
+      #|  (p : Bool) && ((q : Bool) \226\134\146 (r : Bool)) \226\134\146 p == q \226\134\146 r
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((c' : Cart[Real, Tybit0[Unit]]))
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((a' : Cart[Real, Tybit0[Unit]]))
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((c : Cart[Real, Tybit0[Unit]]))
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Tybit0[Unit]]))
+      #|  ((p : Bool) \226\134\146 (r : Bool)) && (q : Bool) \226\134\146 p == q \226\134\146 r
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((c' : Cart[Real, Tybit0[Unit]]))
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((x' : Cart[Real, Tybit0[Unit]]))
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((c : Cart[Real, Tybit0[Unit]]))
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, Tybit0[Unit]]))
+      #|  (g' : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (f' : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (b' : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 a : Plane, \226\136\128 b : Plane, \226\136\128 c : Plane, \226\136\128 x : Plane, \226\136\128 a' : Plane, \226\136\128 b' : Plane, \226\136\128 c' : Plane, \226\136\128 x' : Plane, !(a == b) && pdist((a, b)) == pdist((a', b')) && pdist((a, c)) == pdist((a', c')) && pdist((b, c)) == pdist((b', c')) && pbetween(b, (a, x)) && pbetween(b', (a', x')) && pdist((b, x)) == pdist((b', x')) \226\134\146 pdist((c, x)) == pdist((c', x'))
+      #|  \226\136\128 a : Plane, \226\136\128 b : Plane, pbetween(b, (a, a)) \226\134\146 a == b
+      #|  \226\136\128 a : Plane, \226\136\128 b : Plane, \226\136\128 c : Plane, \226\136\128 p : Plane, \226\136\128 q : Plane, pbetween(p, (a, c)) && pbetween(q, (b, c)) \226\134\146 (\226\136\131 x : Plane, pbetween(x, (p, b)) && pbetween(x, (q, a)))
+      #|  (op_pct : (Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(real_of_num(1) / real_of_num(2), (basis : (Num) -> Cart[Real, Tybit0[Unit]])(2))
+      #|  (op_pct : (Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(real_of_num(1) / real_of_num(2), (basis : (Num) -> Cart[Real, Tybit0[Unit]])(1))
+      #|  (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0)
+      #|  \226\136\131 a : Plane, \226\136\131 b : Plane, \226\136\131 c : Plane, !pbetween(b, (a, c)) && !pbetween(c, (b, a)) && !pbetween(a, (c, b))
+      #|  (-(x : Cart[Real, N]) == x) == (x == vec(0))
+      #|  real_of_num(0) < (x : Real) && real_of_num(0) < (y : Real) \226\134\146 ((a : Real) * (inv(x) * inv(y)) - real_of_num(1) == (b : Real) * (inv(x) * inv(y)) - real_of_num(1)) == (a == b)
+      #|  (norm((a : Cart[Real, N])) == norm((b : Cart[Real, _]))) == (dist((a, vec(0))) == dist((vec(0), b)))
       #|  :real
       #|  :real
       #|  :real
@@ -88125,39 +88122,42 @@ test "100/independence matches 100/independence.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  between ((f:real^2->real^2) x) (f p,f q) /\\\n                  ddist(f x,f p) = ddist(f x,f q)
-      #|  (f:real^2->real^2) q = --(f p)
-      #|  ddist(f a,f p) = ddist(f a,f q) /\\\n                ddist(f b,f p) = ddist(f b,f q) /\\\n                ddist(f c,f p) = ddist(f c,f q) /\\\n                ~((f:real^2->real^2) q = f p)
-      #|  collinear{(f:real^2->real^2) b,f c,f a}
-      #|  norm(x:real^2) < &1
-      #|  x:real^2
-      #|  x:real^2
-      #|  q:real^2
-      #|  p:real^2
-      #|  forall p q a b c.\n        ~(p = q) /\\\n        pdist(a,p) = pdist(a,q) /\\ pdist(b,p) = pdist(b,q) /\\\n        pdist(c,p) = pdist(c,q)\n        ==> pbetween b (a,c) \\/ pbetween c (b,a) \\/ pbetween a (c,b)
-      #|  &1 / &2
-      #|  &5 / &12
-      #|  a * &0 + y = x + b * &0 ==> abs x + abs y <= (&1 - u) * &1 + u * &1\n         ==> abs x <= abs(&1 / &2) /\\ abs y <= abs(&1 / &2)
-      #|  (&3 / &5 % basis 1 + &3 / &5 % basis 2:real^2)$2 =\n                    (&3 / &5 % basis 1 + &3 / &5 % basis 2:real^2)$1
-      #|  norm(&3 / &5 % basis 1 + &3 / &5 % basis 2:real^2) pow 2 <= &1 / &2
+      #|  :real
+      #|  :real
+      #|  :real
+      #|  between((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, Tybit0[Unit]])), (f((p : Cart[Real, Tybit0[Unit]])), f((q : Cart[Real, Tybit0[Unit]])))) && ddist((f(x), f(p))) == ddist((f(x), f(q)))
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((q : Cart[Real, Tybit0[Unit]])) == -f((p : Cart[Real, Tybit0[Unit]]))
+      #|  ddist(((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Tybit0[Unit]])), f((p : Cart[Real, Tybit0[Unit]])))) == ddist((f(a), f((q : Cart[Real, Tybit0[Unit]])))) && ddist((f((b : Cart[Real, Tybit0[Unit]])), f(p))) == ddist((f(b), f(q))) && ddist((f((c : Cart[Real, Tybit0[Unit]])), f(p))) == ddist((f(c), f(q))) && !(f(q) == f(p))
+      #|  collinear({(f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Tybit0[Unit]])), f((c : Cart[Real, Tybit0[Unit]])), f((a : Cart[Real, Tybit0[Unit]]))})
+      #|  norm((x : Cart[Real, Tybit0[Unit]])) < real_of_num(1)
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (q : Cart[Real, Tybit0[Unit]])
+      #|  (p : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 p : Plane, \226\136\128 q : Plane, \226\136\128 a : Plane, \226\136\128 b : Plane, \226\136\128 c : Plane, !(p == q) && pdist((a, p)) == pdist((a, q)) && pdist((b, p)) == pdist((b, q)) && pdist((c, p)) == pdist((c, q)) \226\134\146 pbetween(b, (a, c)) || pbetween(c, (b, a)) || pbetween(a, (c, b))
+      #|  real_of_num(1) / real_of_num(2)
+      #|  real_of_num(5) / real_of_num(12)
+      #|  (a : Real) * real_of_num(0) + (y : Real) == (x : Real) + (b : Real) * real_of_num(0) \226\134\146 abs(x) + abs(y) <= (real_of_num(1) - (u : Real)) * real_of_num(1) + u * real_of_num(1) \226\134\146 abs(x) <= abs(real_of_num(1) / real_of_num(2)) && abs(y) <= abs(real_of_num(1) / real_of_num(2))
+      #|  op_dollar(op_pct(real_of_num(3) / real_of_num(5), basis(1)) + op_pct(real_of_num(3) / real_of_num(5), basis(2)), 2) == op_dollar(op_pct(real_of_num(3) / real_of_num(5), basis(1)) + op_pct(real_of_num(3) / real_of_num(5), basis(2)), 1)
+      #|  pow(norm(op_pct(real_of_num(3) / real_of_num(5), basis(1)) + op_pct(real_of_num(3) / real_of_num(5), basis(2))), 2) <= real_of_num(1) / real_of_num(2)
       #|  2
-      #|  y:real^2
+      #|  (y : Cart[Real, Tybit0[Unit]])
       #|  1
-      #|  x:real^2
-      #|  &0 = &1 / &2 * x <=> x = &0
-      #|  ~(p /\\ q) <=> p ==> ~q
-      #|  &3 / &5 % basis 1 + &3 / &5 % basis 2:real^2
-      #|  &1 / &4 % basis 1 + &1 / &4 % basis 2:real^2
-      #|  &1 / &2 % basis 2:real^2
-      #|  &1 / &2 % basis 1:real^2
-      #|  vec 0:real^2
-      #|  ~(forall a b c d t.\n      pbetween d (a,t) /\\ pbetween d (b,c) /\\ ~(a = d)\n      ==> ?x y. pbetween b (a,x) /\\ pbetween c (a,y) /\\ pbetween t (x,y))
-      #|  IMAGE dest_plane Y
-      #|  IMAGE dest_plane X
-      #|  a:real^2
-      #|  Y:plane->bool = {}
-      #|  X:plane->bool = {}
-      #|  forall X Y. (?a. forall x y. x IN X /\\ y IN Y ==> pbetween x (a,y))\n         ==> (?b. forall x y. x IN X /\\ y IN Y ==> pbetween b (x,y))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (real_of_num(0) == real_of_num(1) / real_of_num(2) * (x : Real)) == (x == real_of_num(0))
+      #|  !((p : Bool) && (q : Bool)) == (p \226\134\146 !q)
+      #|  op_pct(real_of_num(3) / real_of_num(5), basis(1)) + op_pct(real_of_num(3) / real_of_num(5), basis(2))
+      #|  op_pct(real_of_num(1) / real_of_num(4), basis(1)) + op_pct(real_of_num(1) / real_of_num(4), basis(2))
+      #|  (op_pct : (Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(real_of_num(1) / real_of_num(2), (basis : (Num) -> Cart[Real, Tybit0[Unit]])(2))
+      #|  (op_pct : (Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(real_of_num(1) / real_of_num(2), (basis : (Num) -> Cart[Real, Tybit0[Unit]])(1))
+      #|  (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0)
+      #|  !(\226\136\128 a : Plane, \226\136\128 b : Plane, \226\136\128 c : Plane, \226\136\128 d : Plane, \226\136\128 t : Plane, pbetween(d, (a, t)) && pbetween(d, (b, c)) && !(a == d) \226\134\146 (\226\136\131 x : Plane, \226\136\131 y : Plane, pbetween(b, (a, x)) && pbetween(c, (a, y)) && pbetween(t, (x, y))))
+      #|  IMAGE(dest_plane, (Y : (Plane) -> Bool))
+      #|  IMAGE(dest_plane, (X : (Plane) -> Bool))
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (Y : (Plane) -> Bool) == {}
+      #|  (X : (Plane) -> Bool) == {}
+      #|  \226\136\128 X : (Plane) -> Bool, \226\136\128 Y : (Plane) -> Bool, (\226\136\131 a : Plane, \226\136\128 x : Plane, \226\136\128 y : Plane, IN(x, X) && IN(y, Y) \226\134\146 pbetween(x, (a, y))) \226\134\146 (\226\136\131 b : Plane, \226\136\128 x : Plane, \226\136\128 y : Plane, IN(x, X) && IN(y, Y) \226\134\146 pbetween(b, (x, y)))
       #|ddist =  |- (#forall:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#=:fun(real,fun(real,bool)) (#ddist:fun(prod(cart(real,'N),cart(real,'N)),real) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) y:cart(real,'N)))) (((#COND:fun(bool,fun(real,fun(real,real))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,'N),real) x:cart(real,'N))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_lt:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,'N),real) y:cart(real,'N))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_sub:fun(real,fun(real,real)) ((#real_div:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#dot:fun(cart(real,'N),fun(cart(real,'N),real)) x:cart(real,'N)) y:cart(real,'N)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_mul:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_pow:fun(real,fun(num,real)) (#vector_norm:fun(cart(real,'N),real) x:cart(real,'N))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_pow:fun(real,fun(num,real)) (#vector_norm:fun(cart(real,'N),real) y:cart(real,'N))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#distance:fun(prod(cart(real,'N),cart(real,'N)),real) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) y:cart(real,'N)))))))))
       #|DDIST_INCREASES_ONLINE =  |- (#forall:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\b:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,'N),real) a:cart(real,'N))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,'N),real) b:cart(real,'N))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,'N),real) x:cart(real,'N))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#between:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),bool)) x:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) b:cart(real,'N)))) (#~:fun(bool,bool) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) x:cart(real,'N)) b:cart(real,'N)))))))) ((#real_lt:fun(real,fun(real,bool)) (#ddist:fun(prod(cart(real,'N),cart(real,'N)),real) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) x:cart(real,'N)))) (#ddist:fun(prod(cart(real,'N),cart(real,'N)),real) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) b:cart(real,'N)))))))))))
       #|DDIST_REFL =  |- (#forall:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#=:fun(real,fun(real,bool)) (#ddist:fun(prod(cart(real,'N),cart(real,'N)),real) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) x:cart(real,'N)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))
