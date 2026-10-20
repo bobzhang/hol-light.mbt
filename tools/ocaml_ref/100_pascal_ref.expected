@@ -321843,125 +321843,125 @@ Generating HOL version of proof
 104 basis elements and 0 critical pairs
 Generating HOL version of proof
 100/pascal quotations (119):
-  CARD {u:real^3,v}
-  {u:real^3,v}
-  forall u v:real^3. ?w. ~(w = vec 0) /\\ orthogonal u w /\\ orthogonal v w
-  ?x:real^3. ~(x = vec 0)
+  CARD({(u : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]])})
+  {(u : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]])}
+  \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\131 w : Cart[Real, Tybit1[Unit]], !(w == vec(0)) && orthogonal(u, w) && orthogonal(v, w)
+  \226\136\131 x : Cart[Real, Tybit1[Unit]], !(x == vec(0))
   x _|_ y <=> orthogonal (dest_dir x) (dest_dir y)
   x || y <=> (dest_dir x) cross (dest_dir y) = vec 0
-  ((forall x. P(dest_dir x)) <=> (forall x. ~(x = vec 0) ==> P x)) /\\\n   ((?x. P(dest_dir x)) <=> (?x. ~(x = vec 0) /\\ P x))
-  (forall x. x || x) /\\\n   (forall x y. x || y <=> y || x) /\\\n   (forall x y z. x || y /\\ y || z ==> x || z)
-  forall x y. ((||) x = (||) y) <=> x || y
-  p':real^3
-  p:real^3
-  forall p p'. ~(p || p') ==> ?l. p _|_ l /\\ p' _|_ l /\\\n                             forall l'. p _|_ l' /\\ p' _|_ l' ==> l' || l
-  forall l l'. ?p. p _|_ l /\\ p _|_ l'
-  basis 3 :real^3
-  basis 2 : real^3
-  basis 1 :real^3
-  ?p p' p''.\n        ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n        ~(?l. p _|_ l /\\ p' _|_ l /\\ p'' _|_ l)
-  orthogonal (l cross basis 1) l /\\ orthogonal (l cross basis 2) l /\\\n    ~((l cross basis 1) cross (l cross basis 2) = vec 0) \\/\n    orthogonal (l cross basis 1) l /\\ orthogonal (l cross basis 3) l /\\\n    ~((l cross basis 1) cross (l cross basis 3) = vec 0) \\/\n    orthogonal (l cross basis 2) l /\\ orthogonal (l cross basis 3) l /\\\n    ~((l cross basis 2) cross (l cross basis 3) = vec 0)
-  forall l. ?p p'. ~(p || p') /\\ p _|_ l /\\ p' _|_ l
-  a + b:real^3
-  forall x a b. a _|_ x /\\ b _|_ x /\\ ~(a || b)\n           ==> ?c. c _|_ x /\\ ~(a || c) /\\ ~(b || c)
-  forall l. ?p p' p''. ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n                  p _|_ l /\\ p' _|_ l /\\ p'' _|_ l
-  (||)
-  forall x y x' y'. x || x' /\\ y || y' ==> (x _|_ y <=> x' _|_ y')
-  ?x:line. T
-  p on l <=> perpl (dest_point p) l
-  ((p = p') <=> (dest_point p = dest_point p')) /\\\n   ((forall p. P (dest_point p)) <=> (forall l. P l)) /\\\n   ((?p. P (dest_point p)) <=> (?l. P l))
-  forall p p'. ~(p = p') ==> ?l. p on l /\\ p' on l /\\\n          forall l'. p on l' /\\ p' on l' ==> (l' = l)
-  forall l l'. ?p. p on l /\\ p on l'
-  ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    ~(?l. p on l /\\ p' on l /\\ p'' on l)
-  forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    p on l /\\ p' on l /\\ p'' on l
-  projl x = mk_line((||) (mk_dir x))
-  projp x = mk_point(projl x)
-  dest_dir d
-  ?d. l = mk_line((||) d)
-  forall l. ?x. ~(x = vec 0) /\\ l = projl x
-  forall p. ?x. ~(x = vec 0) /\\ p = projp x
-  homop p = homol(dest_point p)
-  p = mk_point l <=> dest_point p = l
-  forall p. ~(homop p = vec 0) /\\ p = projp(homop p)
-  parallel x y <=> x cross y = vec 0
-  forall p l. p on l <=> orthogonal (homop p) (homol l)
-  mk_line((||) l) = mk_line((||) l') <=> (||) l = (||) l'
-  forall l l'. l = l' <=> parallel (homol l) (homol l')
-  forall p p'. p = p' <=> parallel (homop p) (homop p')
-  dest_line(mk_line((||) l)) = (||) l
+  (\226\136\128 x : Direction, (P : (Cart[Real, Tybit1[Unit]]) -> Bool)(dest_dir(x))) == (\226\136\128 x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) \226\134\146 P(x)) && (\226\136\131 x : Direction, P(dest_dir(x))) == (\226\136\131 x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) && P(x))
+  (\226\136\128 x : Direction, op_bar_bar(x, x)) && (\226\136\128 x : Direction, \226\136\128 y : Direction, op_bar_bar(x, y) == op_bar_bar(y, x)) && (\226\136\128 x : Direction, \226\136\128 y : Direction, \226\136\128 z : Direction, op_bar_bar(x, y) && op_bar_bar(y, z) \226\134\146 op_bar_bar(x, z))
+  \226\136\128 x : Direction, \226\136\128 y : Direction, (op_bar_bar(x) == op_bar_bar(y)) == op_bar_bar(x, y)
+  (p' : Cart[Real, Tybit1[Unit]])
+  (p : Cart[Real, Tybit1[Unit]])
+  \226\136\128 p : Direction, \226\136\128 p' : Direction, !op_bar_bar(p, p') \226\134\146 (\226\136\131 l : Direction, op_us_bar_us(p, l) && op_us_bar_us(p', l) && (\226\136\128 l' : Direction, op_us_bar_us(p, l') && op_us_bar_us(p', l') \226\134\146 op_bar_bar(l', l)))
+  \226\136\128 l : Direction, \226\136\128 l' : Direction, \226\136\131 p : Direction, op_us_bar_us(p, l) && op_us_bar_us(p, l')
+  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)
+  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(2)
+  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(1)
+  \226\136\131 p : Direction, \226\136\131 p' : Direction, \226\136\131 p'' : Direction, !op_bar_bar(p, p') && !op_bar_bar(p', p'') && !op_bar_bar(p, p'') && !(\226\136\131 l : Direction, op_us_bar_us(p, l) && op_us_bar_us(p', l) && op_us_bar_us(p'', l))
+  orthogonal(cross((l : Cart[Real, Tybit1[Unit]]), basis(1)), l) && orthogonal(cross(l, basis(2)), l) && !(cross(cross(l, basis(1)), cross(l, basis(2))) == vec(0)) || orthogonal(cross(l, basis(1)), l) && orthogonal(cross(l, basis(3)), l) && !(cross(cross(l, basis(1)), cross(l, basis(3))) == vec(0)) || orthogonal(cross(l, basis(2)), l) && orthogonal(cross(l, basis(3)), l) && !(cross(cross(l, basis(2)), cross(l, basis(3))) == vec(0))
+  \226\136\128 l : Direction, \226\136\131 p : Direction, \226\136\131 p' : Direction, !op_bar_bar(p, p') && op_us_bar_us(p, l) && op_us_bar_us(p', l)
+  (a : Cart[Real, Tybit1[Unit]]) + (b : Cart[Real, Tybit1[Unit]])
+  \226\136\128 x : Direction, \226\136\128 a : Direction, \226\136\128 b : Direction, op_us_bar_us(a, x) && op_us_bar_us(b, x) && !op_bar_bar(a, b) \226\134\146 (\226\136\131 c : Direction, op_us_bar_us(c, x) && !op_bar_bar(a, c) && !op_bar_bar(b, c))
+  \226\136\128 l : Direction, \226\136\131 p : Direction, \226\136\131 p' : Direction, \226\136\131 p'' : Direction, !op_bar_bar(p, p') && !op_bar_bar(p', p'') && !op_bar_bar(p, p'') && op_us_bar_us(p, l) && op_us_bar_us(p', l) && op_us_bar_us(p'', l)
+  op_bar_bar
+  \226\136\128 x : Direction, \226\136\128 y : Direction, \226\136\128 x' : Direction, \226\136\128 y' : Direction, op_bar_bar(x, x') && op_bar_bar(y, y') \226\134\146 op_us_bar_us(x, y) == op_us_bar_us(x', y')
+  \226\136\131 x : Line, true
+  (on : (Point, Line) -> Bool)((p : Point), (l : Line)) == perpl(dest_point(p), l)
+  ((p : Point) == (p' : Point)) == (dest_point(p) == dest_point(p')) && (\226\136\128 p : Point, (P : (Line) -> Bool)(dest_point(p))) == (\226\136\128 l : Line, P(l)) && (\226\136\131 p : Point, P(dest_point(p))) == (\226\136\131 l : Line, P(l))
+  \226\136\128 p : Point, \226\136\128 p' : Point, !(p == p') \226\134\146 (\226\136\131 l : Line, on(p, l) && on(p', l) && (\226\136\128 l' : Line, on(p, l') && on(p', l') \226\134\146 l' == l))
+  \226\136\128 l : Line, \226\136\128 l' : Line, \226\136\131 p : Point, on(p, l) && on(p, l')
+  \226\136\131 p : Point, \226\136\131 p' : Point, \226\136\131 p'' : Point, !(p == p') && !(p' == p'') && !(p == p'') && !(\226\136\131 l : Line, on(p, l) && on(p', l) && on(p'', l))
+  \226\136\128 l : Line, \226\136\131 p : Point, \226\136\131 p' : Point, \226\136\131 p'' : Point, !(p == p') && !(p' == p'') && !(p == p'') && on(p, l) && on(p', l) && on(p'', l)
+  (projl : (Cart[Real, Tybit1[Unit]]) -> Line)((x : Cart[Real, Tybit1[Unit]])) == mk_line(op_bar_bar(mk_dir(x)))
+  (projp : (Cart[Real, Tybit1[Unit]]) -> Point)((x : Cart[Real, Tybit1[Unit]])) == mk_point(projl(x))
+  dest_dir((d : Direction))
+  \226\136\131 d : Direction, (l : Line) == mk_line(op_bar_bar(d))
+  \226\136\128 l : Line, \226\136\131 x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) && l == projl(x)
+  \226\136\128 p : Point, \226\136\131 x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) && p == projp(x)
+  (homop : (Point) -> Cart[Real, Tybit1[Unit]])((p : Point)) == homol(dest_point(p))
+  ((p : Point) == mk_point((l : Line))) == (dest_point(p) == l)
+  \226\136\128 p : Point, !(homop(p) == vec(0)) && p == projp(homop(p))
+  (parallel : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Bool)((x : Cart[Real, Tybit1[Unit]]), (y : Cart[Real, Tybit1[Unit]])) == (cross(x, y) == vec(0))
+  \226\136\128 p : Point, \226\136\128 l : Line, on(p, l) == orthogonal(homop(p), homol(l))
+  (mk_line(op_bar_bar((l : Direction))) == mk_line(op_bar_bar((l' : Direction)))) == (op_bar_bar(l) == op_bar_bar(l'))
+  \226\136\128 l : Line, \226\136\128 l' : Line, (l == l') == parallel(homol(l), homol(l'))
+  \226\136\128 p : Point, \226\136\128 p' : Point, (p == p') == parallel(homop(p), homop(p'))
+  dest_line(mk_line(op_bar_bar((l : Direction)))) == op_bar_bar(l)
   dest_line
-  projl x
-  x:real^3 = vec 0
-  forall x. parallel x (homol(projl x))
-  forall x. parallel x (homop(projp x))
-  c = &0
-  c:real
-  x:real^3 = vec 0
-  forall x. ~(x = vec 0) ==> ?a. ~(a = &0) /\\ homop(projp x) = a % x
-  bracket[a;b;c] = det(vector[homop a;homop b;homop c])
-  COLLINEAR s <=> ?l. forall p. p IN s ==> p on l
-  forall a. COLLINEAR {a}
-  a:point = b
-  forall a b. COLLINEAR{a,b}
-  forall a b c. COLLINEAR{a,b,c} <=> ?l. a on l /\\ b on l /\\ c on l
-  forall a b c x y.\n          x cross y = vec 0 /\\ ~(x = vec 0) /\\\n          orthogonal a x /\\ orthogonal b x /\\ orthogonal c x\n          ==> orthogonal a y /\\ orthogonal b y /\\ orthogonal c y
-  homop p1 cross homop p2
-  mk_line((||) (mk_dir(homop p1 cross homop p2)))
-  p1:point = p2
-  forall p1 p2 p3. COLLINEAR {p1,p2,p3} <=> bracket[p1;p2;p3] = &0
-  homogeneous_conic con <=>\n    ?a b c d e f.\n       ~(a = &0 /\\ b = &0 /\\ c = &0 /\\ d = &0 /\\ e = &0 /\\ f = &0) /\\\n       con = {x:real^3 | a * x$1 pow 2 + b * x$2 pow 2 + c * x$3 pow 2 +\n                         d * x$1 * x$2 + e * x$1 * x$3 + f * x$2 * x$3 = &0}
-  projective_conic con <=>\n        ?c. homogeneous_conic c /\\ con = {p | (homop p) IN c}
-  forall con x1 x2 x3 x4 x5 x6.\n        homogeneous_conic con /\\\n        x1 IN con /\\ x2 IN con /\\ x3 IN con /\\\n        x4 IN con /\\ x5 IN con /\\ x6 IN con\n        ==> det(vector[x6;x1;x4]) * det(vector[x6;x2;x3]) *\n            det(vector[x5;x1;x3]) * det(vector[x5;x2;x4]) =\n            det(vector[x6;x1;x3]) * det(vector[x6;x2;x4]) *\n            det(vector[x5;x1;x4]) * det(vector[x5;x2;x3])
-  forall con p1 p2 p3 p4 p5 p6.\n        projective_conic con /\\\n        p1 IN con /\\ p2 IN con /\\ p3 IN con /\\\n        p4 IN con /\\ p5 IN con /\\ p6 IN con\n        ==> bracket[p6;p1;p4] * bracket[p6;p2;p3] *\n            bracket[p5;p1;p3] * bracket[p5;p2;p4] =\n            bracket[p6;p1;p3] * bracket[p6;p2;p4] *\n            bracket[p5;p1;p4] * bracket[p5;p2;p3]
-  a = b /\\ x:real = y ==> a * x = b * y
-  bracket[x1;x2;x5] * bracket[x1;x3;x6] *\n    bracket[x2;x4;x6] * bracket[x3;x4;x5] =\n    bracket[x1;x2;x6] * bracket[x1;x3;x5] *\n    bracket[x2;x4;x5] * bracket[x3;x4;x6] /\\\n    bracket[x1;x5;x7] * bracket[x2;x5;x9] =\n    --bracket[x1;x2;x5] * bracket[x5;x9;x7] /\\\n    bracket[x1;x2;x6] * bracket[x3;x6;x8] =\n    bracket[x1;x3;x6] * bracket[x2;x6;x8] /\\\n    bracket[x2;x4;x5] * bracket[x2;x9;x7] =\n    --bracket[x2;x4;x7] * bracket[x2;x5;x9] /\\\n    bracket[x2;x4;x7] * bracket[x2;x6;x8] =\n    --bracket[x2;x4;x6] * bracket[x2;x8;x7] /\\\n    bracket[x3;x4;x6] * bracket[x3;x5;x8] =\n    bracket[x3;x4;x5] * bracket[x3;x6;x8] /\\\n    bracket[x1;x3;x5] * bracket[x5;x8;x7] =\n    --bracket[x1;x5;x7] * bracket[x3;x5;x8]
-  forall q. (p ==> q) /\\ (q ==> r) ==> p ==> r
-  a /\\ b /\\ c /\\ d /\\ e /\\ f /\\ g /\\ h ==> p <=>\n                    a /\\ b /\\ c /\\ d /\\ e /\\ f /\\ g ==> h ==> p
+  projl((x : Cart[Real, Tybit1[Unit]]))
+  (x : Cart[Real, Tybit1[Unit]]) == vec(0)
+  \226\136\128 x : Cart[Real, Tybit1[Unit]], parallel(x, homol(projl(x)))
+  \226\136\128 x : Cart[Real, Tybit1[Unit]], parallel(x, homop(projp(x)))
+  (c : Real) == real_of_num(0)
+  (c : Real)
+  (x : Cart[Real, Tybit1[Unit]]) == vec(0)
+  \226\136\128 x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) \226\134\146 (\226\136\131 a : Real, !(a == real_of_num(0)) && homop(projp(x)) == op_pct(a, x))
+  (bracket : (List[Point]) -> Real)([(a : Point), (b : Point), (c : Point)]) == det(vector([homop(a), homop(b), homop(c)]))
+  (COLLINEAR : ((Point) -> Bool) -> Bool)((s : (Point) -> Bool)) == (\226\136\131 l : Line, \226\136\128 p : Point, IN(p, s) \226\134\146 on(p, l))
+  \226\136\128 a : Point, COLLINEAR({a})
+  (a : Point) == (b : Point)
+  \226\136\128 a : Point, \226\136\128 b : Point, COLLINEAR({a, b})
+  \226\136\128 a : Point, \226\136\128 b : Point, \226\136\128 c : Point, COLLINEAR({a, b, c}) == (\226\136\131 l : Line, on(a, l) && on(b, l) && on(c, l))
+  \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 b : Cart[Real, Tybit1[Unit]], \226\136\128 c : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], cross(x, y) == vec(0) && !(x == vec(0)) && orthogonal(a, x) && orthogonal(b, x) && orthogonal(c, x) \226\134\146 orthogonal(a, y) && orthogonal(b, y) && orthogonal(c, y)
+  cross(homop((p1 : Point)), homop((p2 : Point)))
+  mk_line(op_bar_bar(mk_dir(cross(homop((p1 : Point)), homop((p2 : Point))))))
+  (p1 : Point) == (p2 : Point)
+  \226\136\128 p1 : Point, \226\136\128 p2 : Point, \226\136\128 p3 : Point, COLLINEAR({p1, p2, p3}) == (bracket([p1, p2, p3]) == real_of_num(0))
+  (homogeneous_conic : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)((con : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (\226\136\131 a : Real, \226\136\131 b : Real, \226\136\131 c : Real, \226\136\131 d : Real, \226\136\131 e : Real, \226\136\131 f : Real, !(a == real_of_num(0) && b == real_of_num(0) && c == real_of_num(0) && d == real_of_num(0) && e == real_of_num(0) && f == real_of_num(0)) && con == {(x : Cart[Real, Tybit1[Unit]]) | a * pow(op_dollar(x, 1), 2) + (b * pow(op_dollar(x, 2), 2) + (c * pow(op_dollar(x, 3), 2) + (d * (op_dollar(x, 1) * op_dollar(x, 2)) + (e * (op_dollar(x, 1) * op_dollar(x, 3)) + f * (op_dollar(x, 2) * op_dollar(x, 3)))))) == real_of_num(0)})
+  (projective_conic : ((Point) -> Bool) -> Bool)((con : (Point) -> Bool)) == (\226\136\131 c : (Cart[Real, Tybit1[Unit]]) -> Bool, homogeneous_conic(c) && con == {(p : Point) | IN(homop(p), c)})
+  \226\136\128 con : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 x1 : Cart[Real, Tybit1[Unit]], \226\136\128 x2 : Cart[Real, Tybit1[Unit]], \226\136\128 x3 : Cart[Real, Tybit1[Unit]], \226\136\128 x4 : Cart[Real, Tybit1[Unit]], \226\136\128 x5 : Cart[Real, Tybit1[Unit]], \226\136\128 x6 : Cart[Real, Tybit1[Unit]], homogeneous_conic(con) && IN(x1, con) && IN(x2, con) && IN(x3, con) && IN(x4, con) && IN(x5, con) && IN(x6, con) \226\134\146 det(vector([x6, x1, x4])) * (det(vector([x6, x2, x3])) * (det(vector([x5, x1, x3])) * det(vector([x5, x2, x4])))) == det(vector([x6, x1, x3])) * (det(vector([x6, x2, x4])) * (det(vector([x5, x1, x4])) * det(vector([x5, x2, x3]))))
+  \226\136\128 con : (Point) -> Bool, \226\136\128 p1 : Point, \226\136\128 p2 : Point, \226\136\128 p3 : Point, \226\136\128 p4 : Point, \226\136\128 p5 : Point, \226\136\128 p6 : Point, projective_conic(con) && IN(p1, con) && IN(p2, con) && IN(p3, con) && IN(p4, con) && IN(p5, con) && IN(p6, con) \226\134\146 bracket([p6, p1, p4]) * (bracket([p6, p2, p3]) * (bracket([p5, p1, p3]) * bracket([p5, p2, p4]))) == bracket([p6, p1, p3]) * (bracket([p6, p2, p4]) * (bracket([p5, p1, p4]) * bracket([p5, p2, p3])))
+  (a : Real) == (b : Real) && (x : Real) == (y : Real) \226\134\146 a * x == b * y
+  bracket([(x1 : Point), (x2 : Point), (x5 : Point)]) * (bracket([x1, (x3 : Point), (x6 : Point)]) * (bracket([x2, (x4 : Point), x6]) * bracket([x3, x4, x5]))) == bracket([x1, x2, x6]) * (bracket([x1, x3, x5]) * (bracket([x2, x4, x5]) * bracket([x3, x4, x6]))) && bracket([x1, x5, (x7 : Point)]) * bracket([x2, x5, (x9 : Point)]) == -bracket([x1, x2, x5]) * bracket([x5, x9, x7]) && bracket([x1, x2, x6]) * bracket([x3, x6, (x8 : Point)]) == bracket([x1, x3, x6]) * bracket([x2, x6, x8]) && bracket([x2, x4, x5]) * bracket([x2, x9, x7]) == -bracket([x2, x4, x7]) * bracket([x2, x5, x9]) && bracket([x2, x4, x7]) * bracket([x2, x6, x8]) == -bracket([x2, x4, x6]) * bracket([x2, x8, x7]) && bracket([x3, x4, x6]) * bracket([x3, x5, x8]) == bracket([x3, x4, x5]) * bracket([x3, x6, x8]) && bracket([x1, x3, x5]) * bracket([x5, x8, x7]) == -bracket([x1, x5, x7]) * bracket([x3, x5, x8])
+  \226\136\128 q : Bool, ((p : Bool) \226\134\146 q) && (q \226\134\146 (r : Bool)) \226\134\146 p \226\134\146 r
+  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) && (e : Bool) && (f : Bool) && (g : Bool) && (h : Bool) \226\134\146 (p : Bool)) == (a && b && c && d && e && f && g \226\134\146 h \226\134\146 p)
   forall con x1 x2 x3 x4 x5 x6 x6 x8 x9.\n        ~COLLINEAR {x2,x5,x7} /\\\n        ~COLLINEAR {x1,x2,x5} /\\\n        ~COLLINEAR {x1,x3,x6} /\\\n        ~COLLINEAR {x2,x4,x6} /\\\n        ~COLLINEAR {x3,x4,x5} /\\\n        ~COLLINEAR {x1,x5,x7} /\\\n        ~COLLINEAR {x2,x5,x9} /\\\n        ~COLLINEAR {x1,x2,x6} /\\\n        ~COLLINEAR {x3,x6,x8} /\\\n        ~COLLINEAR {x2,x4,x5} /\\\n        ~COLLINEAR {x2,x4,x7} /\\\n        ~COLLINEAR {x2,x6,x8} /\\\n        ~COLLINEAR {x3,x4,x6} /\\\n        ~COLLINEAR {x3,x5,x8} /\\\n        ~COLLINEAR {x1,x3,x5}\n        ==> projective_conic con /\\\n            x1 IN con /\\ x2 IN con /\\ x3 IN con /\\\n            x4 IN con /\\ x5 IN con /\\ x6 IN con /\\\n            COLLINEAR {x1,x9,x5} /\\\n            COLLINEAR {x1,x8,x6} /\\\n            COLLINEAR {x2,x9,x4} /\\\n            COLLINEAR {x2,x7,x6} /\\\n            COLLINEAR {x3,x8,x4} /\\\n            COLLINEAR {x3,x7,x5}\n            ==> COLLINEAR {x7,x8,x9}
   forall con x1 x2 x3 x4 x5 x6 x6 x8 x9.\n        ~COLLINEAR {x1,x2,x4} /\\\n        ~COLLINEAR {x1,x2,x5} /\\\n        ~COLLINEAR {x1,x2,x6} /\\\n        ~COLLINEAR {x1,x3,x4} /\\\n        ~COLLINEAR {x1,x3,x5} /\\\n        ~COLLINEAR {x1,x3,x6} /\\\n        ~COLLINEAR {x2,x3,x4} /\\\n        ~COLLINEAR {x2,x3,x5} /\\\n        ~COLLINEAR {x2,x3,x6} /\\\n        ~COLLINEAR {x4,x5,x1} /\\\n        ~COLLINEAR {x4,x5,x2} /\\\n        ~COLLINEAR {x4,x5,x3} /\\\n        ~COLLINEAR {x4,x6,x1} /\\\n        ~COLLINEAR {x4,x6,x2} /\\\n        ~COLLINEAR {x4,x6,x3} /\\\n        ~COLLINEAR {x5,x6,x1} /\\\n        ~COLLINEAR {x5,x6,x2} /\\\n        ~COLLINEAR {x5,x6,x3}\n        ==> projective_conic con /\\\n            x1 IN con /\\ x2 IN con /\\ x3 IN con /\\\n            x4 IN con /\\ x5 IN con /\\ x6 IN con /\\\n            COLLINEAR {x1,x9,x5} /\\\n            COLLINEAR {x1,x8,x6} /\\\n            COLLINEAR {x2,x9,x4} /\\\n            COLLINEAR {x2,x7,x6} /\\\n            COLLINEAR {x3,x8,x4} /\\\n            COLLINEAR {x3,x7,x5}\n            ==> COLLINEAR {x7,x8,x9}
-  (~p ==> p) ==> p
-  (homogenize:real^2->real^3) x = vector[x$1; x$2; &1]
-  projectivize = projp o homogenize
-  forall x. ~(homogenize x = vec 0)
-  affine_conic con <=>\n    ?a b c d e f.\n       ~(a = &0 /\\ b = &0 /\\ c = &0 /\\ d = &0 /\\ e = &0 /\\ f = &0) /\\\n       con = {x:real^2 | a * x$1 pow 2 + b * x$2 pow 2 + c * x$1 * x$2 +\n                         d * x$1 + e * x$2 + f = &0}
-  projp(homogenize c)
-  projp(homogenize b)
-  projp(homogenize a)
-  c:real^2
-  b:real^2
-  a:real^2
-  homogenize c
-  homogenize b
-  homogenize a
-  det(vector[homogenize a; homogenize b; homogenize c]) = &0
-  forall a b c. collinear{a,b,c} <=>\n           COLLINEAR{projectivize a,projectivize b,projectivize c}
-  ~(k = &0)
-  k:real
-  x:real^2
-  x:real^2
+  (!(p : Bool) \226\134\146 p) \226\134\146 p
+  (homogenize : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit1[Unit]])((x : Cart[Real, Tybit0[Unit]])) == vector([op_dollar(x, 1), op_dollar(x, 2), real_of_num(1)])
+  (projectivize : (Cart[Real, Tybit0[Unit]]) -> Point) == o(projp, homogenize)
+  \226\136\128 x : Cart[Real, Tybit0[Unit]], !(homogenize(x) == vec(0))
+  (affine_conic : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)((con : (Cart[Real, Tybit0[Unit]]) -> Bool)) == (\226\136\131 a : Real, \226\136\131 b : Real, \226\136\131 c : Real, \226\136\131 d : Real, \226\136\131 e : Real, \226\136\131 f : Real, !(a == real_of_num(0) && b == real_of_num(0) && c == real_of_num(0) && d == real_of_num(0) && e == real_of_num(0) && f == real_of_num(0)) && con == {(x : Cart[Real, Tybit0[Unit]]) | a * pow(op_dollar(x, 1), 2) + (b * pow(op_dollar(x, 2), 2) + (c * (op_dollar(x, 1) * op_dollar(x, 2)) + (d * op_dollar(x, 1) + (e * op_dollar(x, 2) + f)))) == real_of_num(0)})
+  projp(homogenize((c : Cart[Real, Tybit0[Unit]])))
+  projp(homogenize((b : Cart[Real, Tybit0[Unit]])))
+  projp(homogenize((a : Cart[Real, Tybit0[Unit]])))
+  (c : Cart[Real, Tybit0[Unit]])
+  (b : Cart[Real, Tybit0[Unit]])
+  (a : Cart[Real, Tybit0[Unit]])
+  homogenize((c : Cart[Real, Tybit0[Unit]]))
+  homogenize((b : Cart[Real, Tybit0[Unit]]))
+  homogenize((a : Cart[Real, Tybit0[Unit]]))
+  det(vector([homogenize((a : Cart[Real, Tybit0[Unit]])), homogenize((b : Cart[Real, Tybit0[Unit]])), homogenize((c : Cart[Real, Tybit0[Unit]]))])) == real_of_num(0)
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], collinear({a, b, c}) == COLLINEAR({projectivize(a), projectivize(b), projectivize(c)})
+  !((k : Real) == real_of_num(0))
+  (k : Real)
+  (x : Cart[Real, Tybit0[Unit]])
+  (x : Cart[Real, Tybit0[Unit]])
   :real
   :real
   :real
   :real
   :real
   :real
-  (?con' con a b c d e f. P con' con a b c d e f) <=>\n    (?a b d e f c con' con. P con' con a b c d e f)
-  forall con. affine_conic con <=> ?con'. projective_conic con' /\\\n                                     con = {x | projectivize x IN con'}
-  forall con x1 x2 x3 x4 x5 x6 x7 x8 x9:real^2.\n        ~collinear {x1,x2,x4} /\\\n        ~collinear {x1,x2,x5} /\\\n        ~collinear {x1,x2,x6} /\\\n        ~collinear {x1,x3,x4} /\\\n        ~collinear {x1,x3,x5} /\\\n        ~collinear {x1,x3,x6} /\\\n        ~collinear {x2,x3,x4} /\\\n        ~collinear {x2,x3,x5} /\\\n        ~collinear {x2,x3,x6} /\\\n        ~collinear {x4,x5,x1} /\\\n        ~collinear {x4,x5,x2} /\\\n        ~collinear {x4,x5,x3} /\\\n        ~collinear {x4,x6,x1} /\\\n        ~collinear {x4,x6,x2} /\\\n        ~collinear {x4,x6,x3} /\\\n        ~collinear {x5,x6,x1} /\\\n        ~collinear {x5,x6,x2} /\\\n        ~collinear {x5,x6,x3}\n        ==> affine_conic con /\\\n            x1 IN con /\\ x2 IN con /\\ x3 IN con /\\\n            x4 IN con /\\ x5 IN con /\\ x6 IN con /\\\n            collinear {x1,x9,x5} /\\\n            collinear {x1,x8,x6} /\\\n            collinear {x2,x9,x4} /\\\n            collinear {x2,x7,x6} /\\\n            collinear {x3,x8,x4} /\\\n            collinear {x3,x7,x5}\n            ==> collinear {x7,x8,x9}
-  forall r c x y z:real^2.\n        dist(c,x) = r /\\ dist(c,y) = r /\\ dist(c,z) = r /\\\n        ~(x = y) /\\ ~(x = z) /\\ ~(y = z)\n        ==> ~collinear {x,y,z}
-  &1
-  &0
-  (c:real^2)$1 pow 2 + (c:real^2)$2 pow 2 - r pow 2
-  -- &2 * (c:real^2)$2
-  -- &2 * (c:real^2)$1
-  &0
-  &1
-  &1
-  &0 <= r
-  c:real^2
-  r:real
-  {x:real^2 | dist(c,x) = r}
-  forall c r x1 x2 x3 x4 x5 x6 x7 x8 x9:real^2.\n        PAIRWISE (\\x y. ~(x = y)) [x1;x2;x3;x4;x5;x6] /\\\n        dist(c,x1) = r /\\ dist(c,x2) = r /\\ dist(c,x3) = r /\\\n        dist(c,x4) = r /\\ dist(c,x5) = r /\\ dist(c,x6) = r /\\\n        collinear {x1,x9,x5} /\\\n        collinear {x1,x8,x6} /\\\n        collinear {x2,x9,x4} /\\\n        collinear {x2,x7,x6} /\\\n        collinear {x3,x8,x4} /\\\n        collinear {x3,x7,x5}\n        ==> collinear {x7,x8,x9}
+  (\226\136\131 con' : _, \226\136\131 con : _, \226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, \226\136\131 d : _, \226\136\131 e : _, \226\136\131 f : _, (P : (_, _, _, _, _, _, _, _) -> Bool)(con', con, a, b, c, d, e, f)) == (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 d : _, \226\136\131 e : _, \226\136\131 f : _, \226\136\131 c : _, \226\136\131 con' : _, \226\136\131 con : _, P(con', con, a, b, c, d, e, f))
+  \226\136\128 con : (Cart[Real, Tybit0[Unit]]) -> Bool, affine_conic(con) == (\226\136\131 con' : (Point) -> Bool, projective_conic(con') && con == {(x : Cart[Real, Tybit0[Unit]]) | IN(projectivize(x), con')})
+  \226\136\128 con : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 x1 : Cart[Real, Tybit0[Unit]], \226\136\128 x2 : Cart[Real, Tybit0[Unit]], \226\136\128 x3 : Cart[Real, Tybit0[Unit]], \226\136\128 x4 : Cart[Real, Tybit0[Unit]], \226\136\128 x5 : Cart[Real, Tybit0[Unit]], \226\136\128 x6 : Cart[Real, Tybit0[Unit]], \226\136\128 x7 : Cart[Real, Tybit0[Unit]], \226\136\128 x8 : Cart[Real, Tybit0[Unit]], \226\136\128 x9 : Cart[Real, Tybit0[Unit]], !collinear({x1, x2, x4}) && !collinear({x1, x2, x5}) && !collinear({x1, x2, x6}) && !collinear({x1, x3, x4}) && !collinear({x1, x3, x5}) && !collinear({x1, x3, x6}) && !collinear({x2, x3, x4}) && !collinear({x2, x3, x5}) && !collinear({x2, x3, x6}) && !collinear({x4, x5, x1}) && !collinear({x4, x5, x2}) && !collinear({x4, x5, x3}) && !collinear({x4, x6, x1}) && !collinear({x4, x6, x2}) && !collinear({x4, x6, x3}) && !collinear({x5, x6, x1}) && !collinear({x5, x6, x2}) && !collinear({x5, x6, x3}) \226\134\146 affine_conic(con) && IN(x1, con) && IN(x2, con) && IN(x3, con) && IN(x4, con) && IN(x5, con) && IN(x6, con) && collinear({x1, x9, x5}) && collinear({x1, x8, x6}) && collinear({x2, x9, x4}) && collinear({x2, x7, x6}) && collinear({x3, x8, x4}) && collinear({x3, x7, x5}) \226\134\146 collinear({x7, x8, x9})
+  \226\136\128 r : Real, \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], dist((c, x)) == r && dist((c, y)) == r && dist((c, z)) == r && !(x == y) && !(x == z) && !(y == z) \226\134\146 !collinear({x, y, z})
+  real_of_num(1)
+  real_of_num(0)
+  pow(op_dollar((c : Cart[Real, Tybit0[Unit]]), 1), 2) + (pow(op_dollar(c, 2), 2) - pow((r : Real), 2))
+  -real_of_num(2) * op_dollar((c : Cart[Real, Tybit0[Unit]]), 2)
+  -real_of_num(2) * op_dollar((c : Cart[Real, Tybit0[Unit]]), 1)
+  real_of_num(0)
+  real_of_num(1)
+  real_of_num(1)
+  real_of_num(0) <= (r : Real)
+  (c : Cart[Real, Tybit0[Unit]])
+  (r : Real)
+  {(x : Cart[Real, Tybit0[Unit]]) | dist(((c : Cart[Real, Tybit0[Unit]]), x)) == (r : Real)}
+  \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 x1 : Cart[Real, Tybit0[Unit]], \226\136\128 x2 : Cart[Real, Tybit0[Unit]], \226\136\128 x3 : Cart[Real, Tybit0[Unit]], \226\136\128 x4 : Cart[Real, Tybit0[Unit]], \226\136\128 x5 : Cart[Real, Tybit0[Unit]], \226\136\128 x6 : Cart[Real, Tybit0[Unit]], \226\136\128 x7 : Cart[Real, Tybit0[Unit]], \226\136\128 x8 : Cart[Real, Tybit0[Unit]], \226\136\128 x9 : Cart[Real, Tybit0[Unit]], PAIRWISE((x : Cart[Real, Tybit0[Unit]]) => (y : Cart[Real, Tybit0[Unit]]) => !(x == y), [x1, x2, x3, x4, x5, x6]) && dist((c, x1)) == r && dist((c, x2)) == r && dist((c, x3)) == r && dist((c, x4)) == r && dist((c, x5)) == r && dist((c, x6)) == r && collinear({x1, x9, x5}) && collinear({x1, x8, x6}) && collinear({x2, x9, x4}) && collinear({x2, x7, x6}) && collinear({x3, x8, x4}) && collinear({x3, x7, x5}) \226\134\146 collinear({x7, x8, x9})
 NORMAL_EXISTS =  |- (#forall:fun(fun(cart(real,tybit1(1)),bool),bool) (\u:cart(real,tybit1(1)). (#forall:fun(fun(cart(real,tybit1(1)),bool),bool) (\v:cart(real,tybit1(1)). (#?:fun(fun(cart(real,tybit1(1)),bool),bool) (\w:cart(real,tybit1(1)). ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) w:cart(real,tybit1(1))) (#vec:fun(num,cart(real,tybit1(1))) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#orthogonal:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) u:cart(real,tybit1(1))) w:cart(real,tybit1(1)))) ((#orthogonal:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) v:cart(real,tybit1(1))) w:cart(real,tybit1(1)))))))))))
 direction_tybij =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(direction,bool),bool) (\a:direction. ((#=:fun(direction,fun(direction,bool)) (#mk_dir:fun(cart(real,tybit1(1)),direction) (#dest_dir:fun(direction,cart(real,tybit1(1))) a:direction))) a:direction)))) (#forall:fun(fun(cart(real,tybit1(1)),bool),bool) (\r:cart(real,tybit1(1)). ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) r:cart(real,tybit1(1))) (#vec:fun(num,cart(real,tybit1(1))) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) (#dest_dir:fun(direction,cart(real,tybit1(1))) (#mk_dir:fun(cart(real,tybit1(1)),direction) r:cart(real,tybit1(1))))) r:cart(real,tybit1(1)))))))
 perpdir =  |- (#forall:fun(fun(direction,bool),bool) (\x:direction. (#forall:fun(fun(direction,bool),bool) (\y:direction. ((#=:fun(bool,fun(bool,bool)) ((#_|_:fun(direction,fun(direction,bool)) x:direction) y:direction)) ((#orthogonal:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) (#dest_dir:fun(direction,cart(real,tybit1(1))) x:direction)) (#dest_dir:fun(direction,cart(real,tybit1(1))) y:direction)))))))
