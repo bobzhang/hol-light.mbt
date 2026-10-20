@@ -51771,7 +51771,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 x : Cart[Real, M], linear(f) && IN(x, hull(affine, s)) \226\134\146 IN(f(x), hull(affine, IMAGE(f, s)))
       #|  dot((x : Cart[Real, N]) + (y : Cart[Real, N]), x + y) == dot(x, x) + dot(y, y) + real_of_num(2) * dot(x, y)
       #|  op_pct(real_of_num(1) - (u : Real), (x : Cart[Real, N])) + op_pct(u, (y : Cart[Real, N])) - (a : Cart[Real, N]) == op_pct(real_of_num(1) - u, x - a) + op_pct(u, y - a)
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dist((x, a)) == dist((x, b))) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, hull(affine, s)) \226\134\146 dist((x, a)) == dist((x, b)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 distance((x, a)) == distance((x, b))) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, hull(affine, s)) \226\134\146 distance((x, a)) == distance((x, b)))
       #|  {x | forall y. y IN k ==> P x y} = INTERS {{x | P x y} | y IN k}
       #|  \226\136\128 f : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, N], bilinear(f) && IN(x, hull(affine, s)) && IN(y, hull(affine, t)) \226\134\146 IN(f(x, y), hull(affine, {f((a : Cart[Real, M]), (b : Cart[Real, N])) | IN(a, s) && IN(b, t)}))
       #|  (a : Cart[Real, N]) + op_pct((d : Real), (x : Cart[Real, N])) == op_pct(real_of_num(1) - d, a) + op_pct(d, a + x)
@@ -52201,8 +52201,8 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  SUBSET(INTER((c : (_) -> Bool), (d : (_) -> Bool)), {(a : _)}) \226\134\146 !IN(a, (s : (_) -> Bool)) \226\134\146 INTER(INTER(c, s), d) == {}
       #|  (d : (Cart[Real, N]) -> Bool)
       #|  INTER((c : (Cart[Real, N]) -> Bool), sphere((vec(0), real_of_num(1))))
-      #|  \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 d : (Cart[Real, N]) -> Bool, conic(c) && closed(c) && conic(d) && closed(d) && SUBSET(INTER(c, d), {vec(0)}) \226\134\146 (\226\136\131 e : Real, real_of_num(0) < e && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, c) && IN(y, d) \226\134\146 dist((x, y)) >= e * norm(x)))
-      #|  \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 d : (Cart[Real, N]) -> Bool, conic(c) && closed(c) && conic(d) && closed(d) && SUBSET(INTER(c, d), {vec(0)}) \226\134\146 (\226\136\131 e : Real, real_of_num(0) < e && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, c) && IN(y, d) \226\134\146 dist((x, y)) >= e * max(norm(x), norm(y))))
+      #|  \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 d : (Cart[Real, N]) -> Bool, conic(c) && closed(c) && conic(d) && closed(d) && SUBSET(INTER(c, d), {vec(0)}) \226\134\146 (\226\136\131 e : Real, real_of_num(0) < e && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, c) && IN(y, d) \226\134\146 distance((x, y)) >= e * norm(x)))
+      #|  \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 d : (Cart[Real, N]) -> Bool, conic(c) && closed(c) && conic(d) && closed(d) && SUBSET(INTER(c, d), {vec(0)}) \226\134\146 (\226\136\131 e : Real, real_of_num(0) < e && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, c) && IN(y, d) \226\134\146 distance((x, y)) >= e * max(norm(x), norm(y))))
       #|  (c : (Cart[Real, N]) -> Bool)
       #|  (d : (Cart[Real, N]) -> Bool)
       #|  (c : (Cart[Real, N]) -> Bool)
@@ -52418,7 +52418,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], convex_on(f, s) && IN(x, s) && (\226\136\128 z : Cart[Real, N], IN(z, s) && !(z == x) \226\134\146 (\226\136\131 y : Cart[Real, N], IN(y, segment([(x, z)])) && IN(y, s) && !(y == x) && f(x) <= f(y))) \226\134\146 (\226\136\128 z : Cart[Real, N], IN(z, s) \226\134\146 f(x) <= f(z))
       #|  real_of_num(0) < (x : Real) / (y : Real) \226\134\146 real_of_num(0) < x / real_of_num(2) / y && x / real_of_num(2) / y < x / y
       #|  real_of_num(0) < (x : Real) && x < (d : Real) \226\134\146 abs(min(real_of_num(1), x)) < d
-      #|  dist(((x : Cart[Real, N]) + (a : Cart[Real, N]), x)) == norm(a)
+      #|  distance(((x : Cart[Real, N]) + (a : Cart[Real, N]), x)) == norm(a)
       #|  :real
       #|  :real
       #|  real_of_num(0) < (x : Real) \226\134\146 !(min(real_of_num(1), x) == real_of_num(0))
@@ -52441,7 +52441,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (t : (Cart[Real, N]) -> Bool)
       #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], convex_on(f, s) && IN(x, t) && open(t) && SUBSET(t, s) && (\226\136\128 y : Cart[Real, N], IN(y, t) \226\134\146 f(x) <= f(y)) \226\134\146 (\226\136\128 y : Cart[Real, N], IN(y, s) \226\134\146 f(x) <= f(y))
       #|  op_pct((u : Real) + (v : Real), (z : Cart[Real, _])) - (op_pct(u, (x : Cart[Real, _])) + op_pct(v, (y : Cart[Real, _]))) == op_pct(u, z - x) + op_pct(v, z - y)
-      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 a : Cart[Real, _], convex_on((x : Cart[Real, _]) => dist((a, x)), s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 a : Cart[Real, _], convex_on((x : Cart[Real, _]) => distance((a, x)), s)
       #|  (vec : (Num) -> Cart[Real, N])(0)
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex_on(norm, s)
@@ -53380,7 +53380,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  IN((z : Cart[Real, N]), hull(affine, {(a : Cart[Real, N]), z, (b : Cart[Real, N])})) && IN(z, hull(affine, {(c : Cart[Real, N]), z, (d : Cart[Real, N])}))
       #|  aff_dim(UNION(hull(affine, {(a : Cart[Real, N]), (z : Cart[Real, N]), (b : Cart[Real, N])}), hull(affine, {(c : Cart[Real, N]), z, (d : Cart[Real, N])})))
       #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], \226\136\128 d : Cart[Real, N], \226\136\128 z : Cart[Real, N], collinear({a, z, b}) && collinear({c, z, d}) \226\134\146 coplanar({z, a, b, c, d})
-      #|  dist(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == dist((x, y))
+      #|  distance(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == distance((x, y))
       #|  :real
       #|  :real
       #|  ((a : Cart[Real, N]) + (x : Cart[Real, N]) == a + (y : Cart[Real, N])) == (x == y)
@@ -53400,7 +53400,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (t : (Cart[Real, N]) -> Bool)
       #|  (s : (Cart[Real, M]) -> Bool) == {}
       #|  (t : (Cart[Real, N]) -> Bool) == {}
-      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, affine(s) && affine(t) && aff_dim(s) == aff_dim(t) \226\134\146 (\226\136\131 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\131 g : (Cart[Real, N]) -> Cart[Real, M], homeomorphism((s, t), (f, g)) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], IN(x, s) && IN(y, s) \226\134\146 dist((f(x), f(y))) == dist((x, y))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, t) && IN(y, t) \226\134\146 dist((g(x), g(y))) == dist((x, y))))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, affine(s) && affine(t) && aff_dim(s) == aff_dim(t) \226\134\146 (\226\136\131 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\131 g : (Cart[Real, N]) -> Cart[Real, M], homeomorphism((s, t), (f, g)) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], IN(x, s) && IN(y, s) \226\134\146 distance((f(x), f(y))) == distance((x, y))) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, t) && IN(y, t) \226\134\146 distance((g(x), g(y))) == distance((x, y))))
       #|  (j : Num)
       #|  (i : Num)
       #|  \226\136\128 M : Cart[Cart[Real, M], N], M == matrix_mul(M, matrix_mul((P : Cart[Cart[Real, M], M]), transp(P)))
@@ -53421,17 +53421,17 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  matrix_mul(transp((X : Cart[Cart[Real, M], N])), X) == matrix_mul(transp((Y : Cart[Cart[Real, M], N])), Y)
       #|  (Y : Cart[Cart[Real, M], N]) == lambda((i : Num) => lambda((j : Num) => op_dollar(op_dollar((y : Cart[Cart[Real, N], M]), j), i) - op_dollar(op_dollar(y, 1), i)))
       #|  (X : Cart[Cart[Real, M], N]) == lambda((i : Num) => lambda((j : Num) => op_dollar(op_dollar((x : Cart[Cart[Real, N], M]), j), i) - op_dollar(op_dollar(x, 1), i)))
-      #|  \226\136\128 x : Cart[Cart[Real, N], M], \226\136\128 y : Cart[Cart[Real, N], M], (\226\136\128 i : Num, \226\136\128 j : Num, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) && 1 <= j && j <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 (dist : ((Cart[Real, N], Cart[Real, N])) -> Real)(((op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(x, i), (op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(x, j))) == (dist : ((Cart[Real, N], Cart[Real, N])) -> Real)(((op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(y, i), (op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(y, j)))) \226\134\146 (\226\136\131 a : Cart[Real, N], \226\136\131 f : (Cart[Real, N]) -> Cart[Real, N], (orthogonal_transformation : ((Cart[Real, N]) -> Cart[Real, N]) -> Bool)(f) && (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 (op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(y, i) == a + f((op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(x, i))))
-      #|  ((a : Cart[Real, N]) == (b : Cart[Real, N])) == (dist((a, a)) == dist((a, b)))
+      #|  \226\136\128 x : Cart[Cart[Real, N], M], \226\136\128 y : Cart[Cart[Real, N], M], (\226\136\128 i : Num, \226\136\128 j : Num, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) && 1 <= j && j <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 (distance : ((Cart[Real, N], Cart[Real, N])) -> Real)(((op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(x, i), (op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(x, j))) == (distance : ((Cart[Real, N], Cart[Real, N])) -> Real)(((op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(y, i), (op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(y, j)))) \226\134\146 (\226\136\131 a : Cart[Real, N], \226\136\131 f : (Cart[Real, N]) -> Cart[Real, N], (orthogonal_transformation : ((Cart[Real, N]) -> Cart[Real, N]) -> Bool)(f) && (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 (op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(y, i) == a + f((op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(x, i))))
+      #|  ((a : Cart[Real, N]) == (b : Cart[Real, N])) == (distance((a, a)) == distance((a, b)))
       #|  :real
       #|  :real
       #|  :real
       #|  :real
       #|  :real
       #|  (a : Cart[Real, N]) + (x : Cart[Real, N]) - (a + (y : Cart[Real, N])) == x - y
-      #|  dist(((x : (A) -> Cart[Real, N])((r : (Num) -> A)((j : Num))), x((k : A))))
+      #|  distance(((x : (A) -> Cart[Real, N])((r : (Num) -> A)((j : Num))), x((k : A))))
       #|  (j : Num)
-      #|  \226\136\128 z : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(z, (hull : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((affine : ((Cart[Real, N]) -> Bool) -> Bool), (IMAGE : ((Num) -> Cart[Real, N], (Num) -> Bool, Cart[Real, N]) -> Bool)((o : ((A) -> Cart[Real, N], (Num) -> A, Num) -> Cart[Real, N])((y : (A) -> Cart[Real, N]), (r : (Num) -> A)), op_dot_dot(1, (dimindex : ((Finite_sum[N, Unit]) -> Bool) -> Num)((UNIV : (Finite_sum[N, Unit]) -> Bool)))))) \226\134\146 (dist : ((Cart[Real, N], Cart[Real, N])) -> Real)((z, y((k : A)))) == (dist : ((Cart[Real, N], Cart[Real, N])) -> Real)((z, (a : Cart[Real, N]) + (f : (Cart[Real, N]) -> Cart[Real, N])((x : (A) -> Cart[Real, N])(k))))
+      #|  \226\136\128 z : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(z, (hull : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((affine : ((Cart[Real, N]) -> Bool) -> Bool), (IMAGE : ((Num) -> Cart[Real, N], (Num) -> Bool, Cart[Real, N]) -> Bool)((o : ((A) -> Cart[Real, N], (Num) -> A, Num) -> Cart[Real, N])((y : (A) -> Cart[Real, N]), (r : (Num) -> A)), op_dot_dot(1, (dimindex : ((Finite_sum[N, Unit]) -> Bool) -> Num)((UNIV : (Finite_sum[N, Unit]) -> Bool)))))) \226\134\146 (distance : ((Cart[Real, N], Cart[Real, N])) -> Real)((z, y((k : A)))) == (distance : ((Cart[Real, N], Cart[Real, N])) -> Real)((z, (a : Cart[Real, N]) + (f : (Cart[Real, N]) -> Cart[Real, N])((x : (A) -> Cart[Real, N])(k))))
       #|  (k : A)
       #|  (f : (Cart[Real, N]) -> Cart[Real, N])
       #|  (a : Cart[Real, N])
@@ -53454,37 +53454,37 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (x : Cart[Real, N]) => x
       #|  (vec : (Num) -> Cart[Real, N])(0)
       #|  (s : (A) -> Bool) == {}
-      #|  \226\136\128 x : (A) -> Cart[Real, N], \226\136\128 y : (A) -> Cart[Real, N], \226\136\128 s : (A) -> Bool, (\226\136\128 i : A, \226\136\128 j : A, IN(i, s) && IN(j, s) \226\134\146 dist((x(i), x(j))) == dist((y(i), y(j)))) \226\134\146 (\226\136\131 a : Cart[Real, N], \226\136\131 f : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(f) && (\226\136\128 i : A, IN(i, s) \226\134\146 y(i) == a + f(x(i))))
-      #|  ((a : Cart[Real, N]) == (b : Cart[Real, N])) == (dist((a, a)) == dist((a, b)))
+      #|  \226\136\128 x : (A) -> Cart[Real, N], \226\136\128 y : (A) -> Cart[Real, N], \226\136\128 s : (A) -> Bool, (\226\136\128 i : A, \226\136\128 j : A, IN(i, s) && IN(j, s) \226\134\146 distance((x(i), x(j))) == distance((y(i), y(j)))) \226\134\146 (\226\136\131 a : Cart[Real, N], \226\136\131 f : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(f) && (\226\136\128 i : A, IN(i, s) \226\134\146 y(i) == a + f(x(i))))
+      #|  ((a : Cart[Real, N]) == (b : Cart[Real, N])) == (distance((a, a)) == distance((a, b)))
       #|  :real
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  dist(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == dist((x, y))
+      #|  distance(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == distance((x, y))
       #|  :real
       #|  :real
-      #|  dist(((a : Cart[Real, N]) + (f : (Cart[Real, N]) -> Cart[Real, N])((x : (A) -> Cart[Real, N])((j : A))), a + f(x((i : A)))))
+      #|  distance(((a : Cart[Real, N]) + (f : (Cart[Real, N]) -> Cart[Real, N])((x : (A) -> Cart[Real, N])((j : A))), a + f(x((i : A)))))
       #|  (j : A)
-      #|  \226\136\128 z : Cart[Real, N], IN(z, hull(affine, IMAGE((y : (A) -> Cart[Real, N]), (t : (A) -> Bool)))) \226\134\146 dist((z, y((i : A)))) == dist((z, (a : Cart[Real, N]) + (f : (Cart[Real, N]) -> Cart[Real, N])((x : (A) -> Cart[Real, N])(i))))
+      #|  \226\136\128 z : Cart[Real, N], IN(z, hull(affine, IMAGE((y : (A) -> Cart[Real, N]), (t : (A) -> Bool)))) \226\134\146 distance((z, y((i : A)))) == distance((z, (a : Cart[Real, N]) + (f : (Cart[Real, N]) -> Cart[Real, N])((x : (A) -> Cart[Real, N])(i))))
       #|  (i : A)
       #|  (f : (Cart[Real, N]) -> Cart[Real, N])
       #|  (a : Cart[Real, N])
       #|  (t : (A) -> Bool)
       #|  (y : (A) -> Cart[Real, N])
       #|  (x : (A) -> Cart[Real, N])
-      #|  \226\136\128 x : (A) -> Cart[Real, N], \226\136\128 y : (A) -> Cart[Real, N], \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, SUBSET(t, s) && hull(affine, IMAGE(y, t)) == hull(affine, IMAGE(y, s)) && (\226\136\128 i : A, \226\136\128 j : A, IN(i, s) && IN(j, t) \226\134\146 dist((x(i), x(j))) == dist((y(i), y(j)))) \226\134\146 (\226\136\131 a : Cart[Real, N], \226\136\131 f : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(f) && (\226\136\128 i : A, IN(i, s) \226\134\146 y(i) == a + f(x(i))))
+      #|  \226\136\128 x : (A) -> Cart[Real, N], \226\136\128 y : (A) -> Cart[Real, N], \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, SUBSET(t, s) && hull(affine, IMAGE(y, t)) == hull(affine, IMAGE(y, s)) && (\226\136\128 i : A, \226\136\128 j : A, IN(i, s) && IN(j, t) \226\134\146 distance((x(i), x(j))) == distance((y(i), y(j)))) \226\134\146 (\226\136\131 a : Cart[Real, N], \226\136\131 f : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(f) && (\226\136\128 i : A, IN(i, s) \226\134\146 y(i) == a + f(x(i))))
       #|  {((a : Cart[Real, N]), (a' : Cart[Real, N])), ((b : Cart[Real, N]), (b' : Cart[Real, N])), ((c : Cart[Real, N]), (c' : Cart[Real, N]))}
       #|  (SND : ((Cart[Real, N], Cart[Real, N])) -> Cart[Real, N])
       #|  (FST : ((Cart[Real, N], Cart[Real, N])) -> Cart[Real, N])
-      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], \226\136\128 a' : Cart[Real, N], \226\136\128 b' : Cart[Real, N], \226\136\128 c' : Cart[Real, N], dist((a, b)) == dist((a', b')) && dist((b, c)) == dist((b', c')) && dist((c, a)) == dist((c', a')) \226\134\146 (\226\136\131 k : Cart[Real, N], \226\136\131 f : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(f) && a' == k + f(a) && b' == k + f(b) && c' == k + f(c))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], \226\136\128 a' : Cart[Real, N], \226\136\128 b' : Cart[Real, N], \226\136\128 c' : Cart[Real, N], distance((a, b)) == distance((a', b')) && distance((b, c)) == distance((b', c')) && distance((c, a)) == distance((c', a')) \226\134\146 (\226\136\131 k : Cart[Real, N], \226\136\131 f : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(f) && a' == k + f(a) && b' == k + f(b) && c' == k + f(c))
       #|  (a' : Cart[Real, N])
       #|  (b' : Cart[Real, N])
       #|  (a' : Cart[Real, N])
       #|  (a : Cart[Real, N])
       #|  (b : Cart[Real, N])
       #|  (a : Cart[Real, N])
-      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 a' : Cart[Real, N], \226\136\128 b' : Cart[Real, N], dist((a, b)) == dist((a', b')) \226\134\146 (\226\136\131 k : Cart[Real, N], \226\136\131 f : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(f) && a' == k + f(a) && b' == k + f(b))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 a' : Cart[Real, N], \226\136\128 b' : Cart[Real, N], distance((a, b)) == distance((a', b')) \226\134\146 (\226\136\131 k : Cart[Real, N], \226\136\131 f : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(f) && a' == k + f(a) && b' == k + f(b))
       #|  (v : Cart[Real, N]) => (u : (Cart[Real, N]) -> Real)(v) + (t : Real) * (w : (Cart[Real, N]) -> Real)(v)
       #|  DELETE((s : (Cart[Real, N]) -> Bool), (a : Cart[Real, N]))
       #|  (w : (Cart[Real, N]) -> Real)((a : Cart[Real, N])) < real_of_num(0)
@@ -53930,7 +53930,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (t : (Cart[Real, N]) -> Bool)
       #|  ((\226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 (P : ((_) -> Bool) -> Bool)(s)) \226\134\146 (\226\136\128 s : (_) -> Bool, P(s))) && (\226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 P(s)) \226\134\146 (\226\136\128 s : (_) -> Bool, P(s))
       #|  \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], IN(x, hull(convex, s)) && !IN(x, s) \226\134\146 (\226\136\131 y : Cart[Real, N], IN(y, hull(convex, s)) && norm(x - a) < norm(y - a))
-      #|  norm((y : Cart[Real, N]) - (a : Cart[Real, N])) == dist((a, y))
+      #|  norm((y : Cart[Real, N]) - (a : Cart[Real, N])) == distance((a, y))
       #|  :real
       #|  :real
       #|  !((p : Bool) && (q : Bool)) == (p \226\134\146 !q)
@@ -53952,26 +53952,26 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  min((u : Real), real_of_num(1))
       #|  (u : Real)
       #|  dot((y : Cart[Real, _]) - ((x : Cart[Real, _]) + (z : Cart[Real, _])), y - (x + z)) == dot(z - (y - x), z - (y - x))
-      #|  \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], \226\136\128 z : Cart[Real, _], dot(y - x, z - x) > real_of_num(0) \226\134\146 (\226\136\131 u : Real, real_of_num(0) < u && u <= real_of_num(1) && dist((x + op_pct(u, z - x), y)) < dist((x, y)))
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], \226\136\128 z : Cart[Real, _], dot(y - x, z - x) > real_of_num(0) \226\134\146 (\226\136\131 u : Real, real_of_num(0) < u && u <= real_of_num(1) && distance((x + op_pct(u, z - x), y)) < distance((x, y)))
       #|  (x : Cart[Real, _]) + op_pct((u : Real), (y : Cart[Real, _]) - x) == op_pct(real_of_num(1) - u, x) + op_pct(u, y)
       #|  (u : Real)
       #|  ((x : Real) <= real_of_num(0)) == !(x > real_of_num(0))
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], convex(s) && closed(s) && IN(x, s) && IN(y, s) && (\226\136\128 z : Cart[Real, N], IN(z, s) \226\134\146 dist((a, x)) <= dist((a, z))) \226\134\146 dot(a - x, y - x) <= real_of_num(0)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], convex(s) && closed(s) && IN(x, s) && IN(y, s) && (\226\136\128 z : Cart[Real, N], IN(z, s) \226\134\146 distance((a, x)) <= distance((a, z))) \226\134\146 dot(a - x, y - x) <= real_of_num(0)
       #|  dot((a : Cart[Real, N]) - (x : Cart[Real, N]), (y : Cart[Real, N]) - x) <= real_of_num(0) && dot(a - y, x - y) <= real_of_num(0)
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], convex(s) && closed(s) && IN(x, s) && IN(y, s) && (\226\136\128 z : Cart[Real, N], IN(z, s) \226\134\146 dist((a, x)) <= dist((a, z))) && (\226\136\128 z : Cart[Real, N], IN(z, s) \226\134\146 dist((a, y)) <= dist((a, z))) \226\134\146 x == y
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], convex(s) && closed(s) && IN(x, s) && IN(y, s) && (\226\136\128 z : Cart[Real, N], IN(z, s) \226\134\146 distance((a, x)) <= distance((a, z))) && (\226\136\128 z : Cart[Real, N], IN(z, s) \226\134\146 distance((a, y)) <= distance((a, z))) \226\134\146 x == y
       #|  (a : Cart[Real, N])
       #|  (s : (Cart[Real, N]) -> Bool)
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 x : Cart[Real, N], convex(s) && closed(s) && IN(x, s) && (\226\136\128 z : Cart[Real, N], IN(z, s) \226\134\146 dist((a, x)) <= dist((a, z))) \226\134\146 x == closest_point(s, a)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 x : Cart[Real, N], convex(s) && closed(s) && IN(x, s) && (\226\136\128 z : Cart[Real, N], IN(z, s) \226\134\146 distance((a, x)) <= distance((a, z))) \226\134\146 x == closest_point(s, a)
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 x : Cart[Real, N], convex(s) && closed(s) && IN(x, s) \226\134\146 dot(a - closest_point(s, a), x - closest_point(s, a)) <= real_of_num(0)
-      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 a : Cart[Real, _], \226\136\128 x : Cart[Real, _], convex(s) && closed(s) && IN(x, s) && !(x == closest_point(s, a)) \226\134\146 dist((a, closest_point(s, a))) < dist((a, x))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 a : Cart[Real, _], \226\136\128 x : Cart[Real, _], convex(s) && closed(s) && IN(x, s) && !(x == closest_point(s, a)) \226\134\146 distance((a, closest_point(s, a))) < distance((a, x))
       #|  (x : Cart[Real, N]) - closest_point((s : (Cart[Real, N]) -> Bool), x) - ((y : Cart[Real, N]) - closest_point(s, y))
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  dot((x : Cart[Real, N]) - closest_point((s : (Cart[Real, N]) -> Bool), x), closest_point(s, (y : Cart[Real, N])) - closest_point(s, x)) <= real_of_num(0) && dot(y - closest_point(s, y), closest_point(s, x) - closest_point(s, y)) <= real_of_num(0)
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], convex(s) && closed(s) && !(s == {}) \226\134\146 dist((closest_point(s, x), closest_point(s, y))) <= dist((x, y))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], convex(s) && closed(s) && !(s == {}) \226\134\146 distance((closest_point(s, x), closest_point(s, y))) <= distance((x, y))
       #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 x : Cart[Real, _], convex(s) && closed(s) && !(s == {}) \226\134\146 continuous(closest_point(s), at(x))
       #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, convex(s) && closed(s) && !(s == {}) \226\134\146 continuous_on(closest_point(s), t)
-      #|  dist(((x : Cart[Real, N]), closest_point((s : (Cart[Real, N]) -> Bool), x))) <= dist((x, (y : Cart[Real, N])))
+      #|  distance(((x : Cart[Real, N]), closest_point((s : (Cart[Real, N]) -> Bool), x))) <= distance((x, (y : Cart[Real, N])))
       #|  closest_point((s : (Cart[Real, N]) -> Bool), (x : Cart[Real, N]))
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], convex(s) && closed(s) && !(s == {}) \226\134\146 closest_point(IMAGE((x : Cart[Real, N]) => a + x, s), a + (x : Cart[Real, N])) == a + closest_point(s, x)
       #|  :real
@@ -53981,14 +53981,14 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (x : Cart[Real, N]) == vec(0)
       #|  ((a : Real) <= a - (y : Real) - (y - (x : Real))) == (real_of_num(2) * y <= x)
       #|  (b : Cart[Real, N])
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], affine(s) && IN(b, s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dist((a, b)) <= dist((a, x))) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 orthogonal(x - b, a - b))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], affine(s) && IN(b, s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 distance((a, b)) <= distance((a, x))) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 orthogonal(x - b, a - b))
       #|  vec(0) + op_pct(dot((a : Cart[Real, N]), (x : Cart[Real, N])) / dot(x, x), x - vec(0))
       #|  vec(0) + op_pct(dot((a : Cart[Real, N]), (x : Cart[Real, N])) / dot(x, x), x - vec(0))
       #|  vec(0) + op_pct(dot((a : Cart[Real, N]), (x : Cart[Real, N])) / dot(x, x), x - vec(0))
       #|  vec(0) + op_pct(-(dot((a : Cart[Real, N]), (x : Cart[Real, N])) / dot(x, x)), x - vec(0))
       #|  ((a : Real) <= a - real_of_num(0) - (real_of_num(0) - (x : Real))) == (real_of_num(0) <= x)
       #|  (b : Cart[Real, N])
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], IN(b, s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 orthogonal(x - b, a - b)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dist((a, b)) <= dist((a, x)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], IN(b, s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 orthogonal(x - b, a - b)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 distance((a, b)) <= distance((a, x)))
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 x : Cart[Real, N], affine(s) && !(s == {}) && IN(x, s) \226\134\146 orthogonal(x - closest_point(s, a), a - closest_point(s, a))
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], affine(s) && IN(b, s) \226\134\146 (closest_point(s, a) == b) == (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 orthogonal(x - b, a - b))
       #|  (x : Cart[Real, N]) - (b : Cart[Real, N])
@@ -54020,7 +54020,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (d : Cart[Real, N]) == (u : Cart[Real, N]) - (v : Cart[Real, N])
       #|  (vec : (Num) -> Cart[Real, N])(0)
       #|  {(x : Cart[Real, N]) - (y : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, (t : (Cart[Real, N]) -> Bool))}
-      #|  \226\136\131 u : Cart[Real, N], \226\136\131 v : Cart[Real, N], IN(u, (s : (Cart[Real, N]) -> Bool)) && IN(v, (t : (Cart[Real, N]) -> Bool)) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, t) \226\134\146 dist((u, v)) <= dist((x, y)))
+      #|  \226\136\131 u : Cart[Real, N], \226\136\131 v : Cart[Real, N], IN(u, (s : (Cart[Real, N]) -> Bool)) && IN(v, (t : (Cart[Real, N]) -> Bool)) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, t) \226\134\146 distance((u, v)) <= distance((x, y)))
       #|  -(c : Real)
       #|  -(b : Real)
       #|  -(a : Cart[Real, N])
@@ -54050,7 +54050,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (y : Cart[Real, _]) + op_pct((u : Real), (x : Cart[Real, _]) - y) == op_pct(real_of_num(1) - u, y) + op_pct(u, x)
       #|  dot((a : Cart[Real, _]) - (b : Cart[Real, _]), (x : Cart[Real, _])) - dot(a - b, (y : Cart[Real, _])) == dot(b - a, y - x)
       #|  ((x : Real) < (y : Real)) == (y - x > real_of_num(0))
-      #|  \226\136\128 u : Real, real_of_num(0) <= u && u <= real_of_num(1) \226\134\146 dist(((z : Cart[Real, N]), (y : Cart[Real, N]))) <= dist((z, op_pct(real_of_num(1) - u, y) + op_pct(u, (x : Cart[Real, N]))))
+      #|  \226\136\128 u : Real, real_of_num(0) <= u && u <= real_of_num(1) \226\134\146 distance(((z : Cart[Real, N]), (y : Cart[Real, N]))) <= distance((z, op_pct(real_of_num(1) - u, y) + op_pct(u, (x : Cart[Real, N]))))
       #|  (x : Cart[Real, N])
       #|  (y : Cart[Real, N])
       #|  dot((y : Cart[Real, N]) - (z : Cart[Real, N]), y)
@@ -54265,7 +54265,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  norm((a : Cart[Real, N]) - (a' : Cart[Real, N])) + norm((b : Cart[Real, N]) - (b' : Cart[Real, N])) <= (r : Real) \226\134\146 norm(a + b - (a' + b')) <= r
       #|  :real
       #|  :real
-      #|  dist((op_pct((u : Real), (x : Cart[Real, N])) + op_pct((v : Real), (y : Cart[Real, N])), op_pct(u, (x' : Cart[Real, N])) + op_pct(v, (y' : Cart[Real, N]))))
+      #|  distance((op_pct((u : Real), (x : Cart[Real, N])) + op_pct((v : Real), (y : Cart[Real, N])), op_pct(u, (x' : Cart[Real, N])) + op_pct(v, (y' : Cart[Real, N]))))
       #|  (x' : Cart[Real, N])
       #|  (y' : Cart[Real, N])
       #|  (t : (Cart[Real, N]) -> Bool)
@@ -54650,21 +54650,21 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (a : Cart[Real, N])
       #|  (N1 : Num) + (N2 : Num) <= (r : (Num) -> Num)(N1 + N2) \226\134\146 N2 <= r(N1 + N2) + 1
       #|  inv(real_of_num((N2 : Num)))
-      #|  inv(real_of_num((r : (Num) -> Num)((N1 : Num) + (N2 : Num))) + real_of_num(1)) < (dist(((a : Cart[Real, N]), (x : Cart[Real, N]))) - (d : Real)) / real_of_num(2)
+      #|  inv(real_of_num((r : (Num) -> Num)((N1 : Num) + (N2 : Num))) + real_of_num(1)) < (distance(((a : Cart[Real, N]), (x : Cart[Real, N]))) - (d : Real)) / real_of_num(2)
       #|  (N1 : Num) + (N2 : Num)
       #|  (x : Cart[Real, N])
       #|  (r : (Num) -> Num)((N1 : Num) + (N2 : Num))
       #|  (N2 : Num)
       #|  (N1 : Num)
-      #|  (dist(((a : Cart[Real, N]), (x : Cart[Real, N]))) - (d : Real)) / real_of_num(2)
-      #|  (dist(((a : Cart[Real, N]), (x : Cart[Real, N]))) - (d : Real)) / real_of_num(2)
+      #|  (distance(((a : Cart[Real, N]), (x : Cart[Real, N]))) - (d : Real)) / real_of_num(2)
+      #|  (distance(((a : Cart[Real, N]), (x : Cart[Real, N]))) - (d : Real)) / real_of_num(2)
       #|  (x : Cart[Real, N])
       #|  (r : (Num) -> Num)
       #|  (a : Cart[Real, N])
       #|  (aa : (Num) -> Cart[Real, N])
       #|  (t : (Cart[Real, N]) -> Bool)
       #|  (d : Real) + inv(real_of_num((n : Num)) + real_of_num(1))
-      #|  (\226\136\131 x : Cart[Real, N], norm(x) <= (B : Real) && dist(((a : Cart[Real, N]), x)) <= (d : Real)) \226\134\146 norm(a) <= B + d
+      #|  (\226\136\131 x : Cart[Real, N], norm(x) <= (B : Real) && distance(((a : Cart[Real, N]), x)) <= (d : Real)) \226\134\146 norm(a) <= B + d
       #|  :real
       #|  :real
       #|  (n : Num)
@@ -54745,7 +54745,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (r : Cart[Real, Unit])
       #|  (a : Cart[Real, N])
       #|  ((x : Real) - (a : Real) < x) == (real_of_num(0) < a)
-      #|  sqrt(pow((c : Real), 2) - pow(dist(((y : Cart[Real, N]), (z : Cart[Real, N]))), 2) / pow((B : Real), 2) / real_of_num(4))
+      #|  sqrt(pow((c : Real), 2) - pow(distance(((y : Cart[Real, N]), (z : Cart[Real, N]))), 2) / pow((B : Real), 2) / real_of_num(4))
       #|  midpoint(((y : Cart[Real, N]), (z : Cart[Real, N])))
       #|  \226\136\128 t : Real, t < (c : Real) \226\134\146 (Y : (Real, Cart[Real, N]) -> Bool)(t) == {}
       #|  (B : Real)
@@ -54881,7 +54881,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (s : (Cart[Real, M]) -> Bool)
       #|  (f : (Cart[Real, M]) -> Cart[Real, N])
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, (\226\136\131 B : Real, \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], IN(x, s) && IN(y, s) \226\134\146 norm(f(x) - f(y)) <= B * norm(x - y)) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], (\226\136\131 B : Real, \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], norm(g(x) - g(y)) <= B * norm(x - y)) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 g(x) == f(x)))
-      #|  dist(((a : Cart[Real, M]), (v : Cart[Real, M]))) < (d : Real) / real_of_num(6) \226\134\146 dist((a, (a' : Cart[Real, M]))) <= real_of_num(6) * dist((a, v)) \226\134\146 dist((a', a)) < d
+      #|  distance(((a : Cart[Real, M]), (v : Cart[Real, M]))) < (d : Real) / real_of_num(6) \226\134\146 distance((a, (a' : Cart[Real, M]))) <= real_of_num(6) * distance((a, v)) \226\134\146 distance((a', a)) < d
       #|  :real
       #|  :real
       #|  IN((x : Cart[Real, M]), (t : (Cart[Real, M]) -> Bool))
@@ -54920,7 +54920,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (t : (Cart[Real, M]) -> Bool)
       #|  (v : Cart[Real, M])
       #|  (t : (Cart[Real, M]) -> Bool)
-      #|  \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 v : Cart[Real, M], \226\136\128 a : Cart[Real, M], IN(t, (c : ((Cart[Real, M]) -> Bool) -> Bool)) && IN(v, t) && IN(a, (s : (Cart[Real, M]) -> Bool)) \226\134\146 dist((a, (aa : ((Cart[Real, M]) -> Bool) -> Cart[Real, M])(t))) <= real_of_num(6) * dist((a, v))
+      #|  \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 v : Cart[Real, M], \226\136\128 a : Cart[Real, M], IN(t, (c : ((Cart[Real, M]) -> Bool) -> Bool)) && IN(v, t) && IN(a, (s : (Cart[Real, M]) -> Bool)) \226\134\146 distance((a, (aa : ((Cart[Real, M]) -> Bool) -> Cart[Real, M])(t))) <= real_of_num(6) * distance((a, v))
       #|  (v : Cart[Real, M])
       #|  (vv : ((Cart[Real, M]) -> Bool) -> Cart[Real, M])((t : (Cart[Real, M]) -> Bool))
       #|  (s : (Cart[Real, M]) -> Bool)
@@ -54936,7 +54936,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (v : Cart[Real, M])
       #|  (t : (Cart[Real, M]) -> Bool)
       #|  (t : (Cart[Real, M]) -> Bool)
-      #|  \226\136\128 t : (Cart[Real, M]) -> Bool, IN(t, (c : ((Cart[Real, M]) -> Bool) -> Bool)) \226\134\146 (\226\136\131 v : Cart[Real, M], \226\136\131 a : Cart[Real, M], IN(v, (u : (Cart[Real, M]) -> Bool)) && !IN(v, (s : (Cart[Real, M]) -> Bool)) && IN(a, s) && SUBSET(t, ball((v, setdist(({v}, s)) / real_of_num(2)))) && dist((v, a)) <= real_of_num(2) * setdist(({v}, s)))
+      #|  \226\136\128 t : (Cart[Real, M]) -> Bool, IN(t, (c : ((Cart[Real, M]) -> Bool) -> Bool)) \226\134\146 (\226\136\131 v : Cart[Real, M], \226\136\131 a : Cart[Real, M], IN(v, (u : (Cart[Real, M]) -> Bool)) && !IN(v, (s : (Cart[Real, M]) -> Bool)) && IN(a, s) && SUBSET(t, ball((v, setdist(({v}, s)) / real_of_num(2)))) && distance((v, a)) <= real_of_num(2) * setdist(({v}, s)))
       #|  (c : ((Cart[Real, M]) -> Bool) -> Bool)
       #|  real_of_num(0) <= (x : Real) && !(x == real_of_num(0)) \226\134\146 real_of_num(0) < x / real_of_num(2)
       #|  (x : Cart[Real, M])
@@ -55083,10 +55083,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (k : Num)
       #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 b : Real, convex_on(f, hull(convex, s)) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 f(x) <= b) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, hull(convex, s)) \226\134\146 f(x) <= b)
       #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 b : Real, convex_on(f, hull(convex, s)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, hull(convex, s)) \226\134\146 f(x) <= b) == (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 f(x) <= b)
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 d : Real, (\226\136\128 x : Cart[Real, N], IN(x, hull(convex, s)) \226\134\146 dist((a, x)) <= d) == (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dist((a, x)) <= d)
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 d : Real, (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, hull(convex, s)) && IN(y, hull(convex, s)) \226\134\146 dist((x, y)) <= d) == (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) \226\134\146 dist((x, y)) <= d)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 d : Real, (\226\136\128 x : Cart[Real, N], IN(x, hull(convex, s)) \226\134\146 distance((a, x)) <= d) == (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 distance((a, x)) <= d)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 d : Real, (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, hull(convex, s)) && IN(y, hull(convex, s)) \226\134\146 distance((x, y)) <= d) == (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) \226\134\146 distance((x, y)) <= d)
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, diameter(hull(convex, s)) == diameter(s)
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, !(s == {}) \226\134\146 diameter(hull(convex, s)) == sup({dist(((x : Cart[Real, N]), (y : Cart[Real, N]))) | IN(x, s) && IN(y, s)})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, !(s == {}) \226\134\146 diameter(hull(convex, s)) == sup({distance(((x : Cart[Real, N]), (y : Cart[Real, N]))) | IN(x, s) && IN(y, s)})
       #|  (x : Num) == x + 1 - 1
       #|  op_dot_dot(1, (n : Num))
       #|  FINITE({(i : Num) | 1 <= i && i <= (n : Num) && (P : (Num) -> Bool)(i)}) && CARD({(i : Num) | 1 <= i && i <= n && P(i)}) <= n
@@ -55227,9 +55227,9 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (s : (Cart[Real, M]) -> Bool) == {}
       #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, starlike(PCROSS(s, t)) == (starlike(s) && starlike(t))
       #|  SUBSET(hull(convex, {(a : Cart[Real, N]), (b : Cart[Real, N])}), ball(((c : Cart[Real, N]), (r : Real))))
-      #|  \226\136\128 r : Real, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], dist((c, a)) < r && dist((c, b)) < r && between((x : Cart[Real, N]), (a, b)) \226\134\146 dist((c, x)) < r
+      #|  \226\136\128 r : Real, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], distance((c, a)) < r && distance((c, b)) < r && between((x : Cart[Real, N]), (a, b)) \226\134\146 distance((c, x)) < r
       #|  SUBSET(hull(convex, {(a : Cart[Real, N]), (b : Cart[Real, N])}), cball(((c : Cart[Real, N]), (r : Real))))
-      #|  \226\136\128 r : Real, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], dist((c, a)) <= r && dist((c, b)) <= r && between((x : Cart[Real, N]), (a, b)) \226\134\146 dist((c, x)) <= r
+      #|  \226\136\128 r : Real, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], distance((c, a)) <= r && distance((c, b)) <= r && between((x : Cart[Real, N]), (a, b)) \226\134\146 distance((c, x)) <= r
       #|  \226\136\128 r : Real, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 x : Cart[Real, N], norm(a) < r && norm(b) < r && between(x, (a, b)) \226\134\146 norm(x) < r
       #|  \226\136\128 r : Real, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 x : Cart[Real, N], norm(a) <= r && norm(b) <= r && between(x, (a, b)) \226\134\146 norm(x) <= r
       #|  (c : Cart[Real, N]) == (a : Cart[Real, N])
@@ -55242,7 +55242,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (b : Cart[Real, N])
       #|  (a : Cart[Real, N])
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex({(a : Cart[Real, N]) | IN(a, s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 SUBSET(segment([(a, x)]), s))})
-      #|  dist(((c : Cart[Real, N]), (d : Cart[Real, N]))) <= (m : Real) \226\134\146 dist((c, (x : Cart[Real, N]))) <= dist((c, d)) && m < (e : Real) \226\134\146 dist((c, x)) < e
+      #|  distance(((c : Cart[Real, N]), (d : Cart[Real, N]))) <= (m : Real) \226\134\146 distance((c, (x : Cart[Real, N]))) <= distance((c, d)) && m < (e : Real) \226\134\146 distance((c, x)) < e
       #|  (d : Cart[Real, N])
       #|  (c : Cart[Real, N])
       #|  (IN((x : Cart[Real, _]), segment([((a : Cart[Real, _]), (b : Cart[Real, _]))])) \226\134\146 (P : (Cart[Real, _], Cart[Real, _]) -> Bool)(a, b)) \226\134\146 IN(x, segment([(a, b)])) \226\134\146 (\226\136\131 c : Cart[Real, _], \226\136\131 d : Cart[Real, _], P(c, d))
@@ -55252,10 +55252,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (d : Cart[Real, N])
       #|  (c : Cart[Real, N])
       #|  (N : Num)
-      #|  \226\136\128 n : Num, \226\136\131 c : Cart[Real, N], \226\136\131 d : Cart[Real, N], IN(c, (s : (Cart[Real, N]) -> Bool)) && IN(d, s) && IN((x : Cart[Real, N]), segment([(c, d)])) && dist((c, d)) <= dist(((a : Cart[Real, N]), (b : Cart[Real, N]))) / pow(real_of_num(2), n)
+      #|  \226\136\128 n : Num, \226\136\131 c : Cart[Real, N], \226\136\131 d : Cart[Real, N], IN(c, (s : (Cart[Real, N]) -> Bool)) && IN(d, s) && IN((x : Cart[Real, N]), segment([(c, d)])) && distance((c, d)) <= distance(((a : Cart[Real, N]), (b : Cart[Real, N]))) / pow(real_of_num(2), n)
       #|  (d : Cart[Real, N])
       #|  (c : Cart[Real, N])
-      #|  dist(((c : Cart[Real, N]), c + ((x : Cart[Real, N]) - (y : Cart[Real, N])))) == dist((y, x))
+      #|  distance(((c : Cart[Real, N]), c + ((x : Cart[Real, N]) - (y : Cart[Real, N])))) == distance((y, x))
       #|  :real
       #|  :real
       #|  SUBSET(ball(((d : Cart[Real, N]), (e : Real))), (s : (Cart[Real, N]) -> Bool))
@@ -55271,9 +55271,9 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (d : Cart[Real, N])
       #|  (c : Cart[Real, N])
       #|  (N : Num)
-      #|  \226\136\128 n : Num, \226\136\131 c : Cart[Real, N], \226\136\131 d : Cart[Real, N], SUBSET(ball((c, (e : Real))), (s : (Cart[Real, N]) -> Bool)) && SUBSET(ball((d, e)), s) && IN((x : Cart[Real, N]), segment([(c, d)])) && dist((c, d)) <= dist(((a : Cart[Real, N]), (b : Cart[Real, N]))) / pow(real_of_num(2), n)
+      #|  \226\136\128 n : Num, \226\136\131 c : Cart[Real, N], \226\136\131 d : Cart[Real, N], SUBSET(ball((c, (e : Real))), (s : (Cart[Real, N]) -> Bool)) && SUBSET(ball((d, e)), s) && IN((x : Cart[Real, N]), segment([(c, d)])) && distance((c, d)) <= distance(((a : Cart[Real, N]), (b : Cart[Real, N]))) / pow(real_of_num(2), n)
       #|  (N : Num)
-      #|  (e : Real) / dist(((a : Cart[Real, N]), (b : Cart[Real, N])))
+      #|  (e : Real) / distance(((a : Cart[Real, N]), (b : Cart[Real, N])))
       #|  inv(real_of_num(2))
       #|  (e : Real)
       #|  min((d : Real), (e : Real))
@@ -55410,7 +55410,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 relative_interior(IMAGE(f, s)) == IMAGE(f, relative_interior(s))
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 relative_frontier(IMAGE(f, s)) == IMAGE(f, relative_frontier(s))
       #|  (z : Cart[Real, N])
-      #|  (e : Real) - dist(((x : Cart[Real, N]), (y : Cart[Real, N])))
+      #|  (e : Real) - distance(((x : Cart[Real, N]), (y : Cart[Real, N])))
       #|  (y : Cart[Real, N])
       #|  SUBSET((a' : (_) -> Bool), (a : (_) -> Bool)) && (SUBSET(INTER((b : (_) -> Bool), a), (s : (_) -> Bool)) \226\134\146 SUBSET(INTER(b, a), (i : (_) -> Bool))) \226\134\146 SUBSET(INTER(b, a), s) \226\134\146 SUBSET(INTER(b, a'), i)
       #|  real_of_num(0) < (e : Real)
@@ -55482,16 +55482,16 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (x : Cart[Real, N]) - op_pct((e : Real), x - (c : Cart[Real, N])) == op_pct(real_of_num(1) - e, x) + op_pct(e, c)
       #|  (d : Real)
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 e : Real, \226\136\128 x : Cart[Real, N], \226\136\128 c : Cart[Real, N], convex(s) && IN(c, relative_interior(s)) && IN(x, s) && real_of_num(0) < e && e <= real_of_num(1) \226\134\146 IN(x - op_pct(e, x - c), relative_interior(s))
-      #|  dist(((c : Cart[Real, N]), (z : Cart[Real, N]))) < (d : Real)
-      #|  (d : Real) - dist(((c : Cart[Real, N]), (z : Cart[Real, N])))
+      #|  distance(((c : Cart[Real, N]), (z : Cart[Real, N]))) < (d : Real)
+      #|  (d : Real) - distance(((c : Cart[Real, N]), (z : Cart[Real, N])))
       #|  closure(hull(affine, (s : (Cart[Real, N]) -> Bool)))
       #|  \226\136\128 t : (_) -> Bool, IN((x : _), t) && t == (s : (_) -> Bool) \226\134\146 IN(x, s)
       #|  IN((z : Cart[Real, N]), hull(affine, (s : (Cart[Real, N]) -> Bool)))
       #|  (a : Real) / (b : Real) * (c : Real) == c * a / b
-      #|  dist(((c : Cart[Real, N]), c + (x : Cart[Real, N]))) == norm(x)
+      #|  distance(((c : Cart[Real, N]), c + (x : Cart[Real, N]))) == norm(x)
       #|  :real
       #|  :real
-      #|  dist(((c : Cart[Real, N]), (z : Cart[Real, N]))) < (d : Real)
+      #|  distance(((c : Cart[Real, N]), (z : Cart[Real, N]))) < (d : Real)
       #|  (x : Cart[Real, N]) - op_pct((e : Real), x - (c : Cart[Real, N])) == (y : Cart[Real, N]) - op_pct(e, y - (z : Cart[Real, N]))
       #|  (z : Cart[Real, N]) == (c : Cart[Real, N]) + op_pct((real_of_num(1) - (e : Real)) / e, (x : Cart[Real, N]) - (y : Cart[Real, N]))
       #|  (e : Real) * (d : Real) / (real_of_num(1) - e)
@@ -55614,7 +55614,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (a : Cart[Real, N])
       #|  !(relative_interior((s : (Cart[Real, N]) -> Bool)) == {})
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, convex(s) && !(s == {}) && SUBSET(relative_interior(s), t) && SUBSET(t, closure(s)) \226\134\146 starlike(t)
-      #|  dist(((x : Cart[Real, N]), x + (y : Cart[Real, N]))) == norm(y)
+      #|  distance(((x : Cart[Real, N]), x + (y : Cart[Real, N]))) == norm(y)
       #|  :real
       #|  :real
       #|  (y : Cart[Real, N]) + op_pct(real_of_num(1) + (e : Real), (x : Cart[Real, N]) - y) == x + op_pct(e, x - y)
@@ -55642,7 +55642,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  relative_interior((s : (Cart[Real, _]) -> Bool)) == closure(s) \226\134\146 SUBSET(relative_interior(s), s) && SUBSET(s, closure(s)) \226\134\146 relative_interior(s) == s && closure(s) == s
       #|  (s : (Cart[Real, N]) -> Bool) == {}
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (relative_interior(s) == closure(s)) == affine(s)
-      #|  dist(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == norm(x - y)
+      #|  distance(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == norm(x - y)
       #|  :real
       #|  :real
       #|  (x : Real) < (d : Real)
@@ -55654,7 +55654,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  ((x : Real) / real_of_num(2) / (y : Real) < x / y) == (real_of_num(0) < x / y)
       #|  real_of_num(0) < (x : Real) && x < (y : Real) && real_of_num(0) < (d : Real) \226\134\146 abs(d - min(d, x) - d) < y
-      #|  dist(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == norm(x - y)
+      #|  distance(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == norm(x - y)
       #|  :real
       #|  :real
       #|  real_of_num(0) < (x : Real) && real_of_num(0) < (d : Real) \226\134\146 d - min(d, x) < d
@@ -55665,13 +55665,13 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (k : Real)
       #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
       #|  (d : Real)
-      #|  dist(((a : Cart[Real, N]), a + (x : Cart[Real, N]))) == norm(x)
+      #|  distance(((a : Cart[Real, N]), a + (x : Cart[Real, N]))) == norm(x)
       #|  :real
       #|  :real
       #|  (B : Real) / norm((l : Cart[Real, N]))
       #|  (B : Real)
       #|  (a : Cart[Real, N])
-      #|  dist(((a : Cart[Real, N]) + (x : Cart[Real, N]), a)) == norm(x)
+      #|  distance(((a : Cart[Real, N]) + (x : Cart[Real, N]), a)) == norm(x)
       #|  :real
       #|  :real
       #|  (x : Real)
@@ -55815,7 +55815,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (y : Cart[Real, N])
       #|  (x : Cart[Real, N]) + op_pct((e : Real) / norm(x - (y : Cart[Real, N])), x - y)
       #|  (s : (Cart[Real, N]) -> Bool)
-      #|  dist(((x : Cart[Real, M]), x + (y : Cart[Real, M]))) == norm(y)
+      #|  distance(((x : Cart[Real, M]), x + (y : Cart[Real, M]))) == norm(y)
       #|  :real
       #|  :real
       #|  (x : Cart[Real, N]) + op_pct((e : Real) / norm(x - (y : Cart[Real, N])), x - y)
@@ -55847,7 +55847,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  real_of_num(0) < (e : Real) && e <= real_of_num(1) \226\134\146 real_of_num(0) < real_of_num(1) - abs(real_of_num(1) - e)
       #|  !((n : Real) <= (a : Real) * n) == (real_of_num(0) < (real_of_num(1) - a) * n)
       #|  real_of_num(0) <= (a : Real) \226\134\146 abs(min(real_of_num(1), a)) <= a
-      #|  dist(((a : Cart[Real, N]), a - (x : Cart[Real, N]))) == norm(x)
+      #|  distance(((a : Cart[Real, N]), a - (x : Cart[Real, N]))) == norm(x)
       #|  :real
       #|  :real
       #|  (x : Cart[Real, N]) - ((y : Cart[Real, N]) - op_pct((e : Real), y - x)) == op_pct(real_of_num(1) - e, x - y)
@@ -55865,7 +55865,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  real_of_num(0) < (d : Real) \226\134\146 (real_of_num(1) - (u : Real) * (real_of_num(1) + d) == real_of_num(0)) == (u == inv(real_of_num(1) + d))
       #|  ((x : Cart[Real, N]) == op_pct(real_of_num(1) - (u : Real), (a : Cart[Real, N])) + op_pct(u, x + op_pct((v : Real), x - a))) == (op_pct(real_of_num(1) - u * (real_of_num(1) + v), x - a) == vec(0))
       #|  ((a : Cart[Real, N]) == a + (x : Cart[Real, N])) == (x == vec(0))
-      #|  dist(((x : Cart[Real, N]), x + (y : Cart[Real, N]))) == norm(y)
+      #|  distance(((x : Cart[Real, N]), x + (y : Cart[Real, N]))) == norm(y)
       #|  :real
       #|  :real
       #|  (x : Cart[Real, N]) + op_pct((d : Real) / norm(x - (a : Cart[Real, N])), x - a)
@@ -55940,7 +55940,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (r : Real) == real_of_num(1) + (r - real_of_num(1))
       #|  (a : Real) * ((r : Real) - real_of_num(1))
       #|  (a : Real)
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 r : Real, convex(s) && IN(vec(0), relative_interior(s)) && real_of_num(1) < r \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, hull(affine, s)) && dist((x, y)) <= d \226\134\146 IN(y, IMAGE((x : Cart[Real, N]) => op_pct(r, x), s))))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 r : Real, convex(s) && IN(vec(0), relative_interior(s)) && real_of_num(1) < r \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, hull(affine, s)) && distance((x, y)) <= d \226\134\146 IN(y, IMAGE((x : Cart[Real, N]) => op_pct(r, x), s))))
       #|  real_of_num(1) < (x : Real) \226\134\146 real_of_num(0) < real_of_num(2) * x
       #|  real_of_num(0) < (x : Real) && x < real_of_num(1) \226\134\146 real_of_num(0) < real_of_num(1) - x && real_of_num(1) - x <= real_of_num(1)
       #|  op_pct((a : Real), (x : Cart[Real, N])) == x - op_pct(real_of_num(1) - a, x - vec(0))
@@ -55955,7 +55955,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (d : Real)
       #|  ((r : Real) + real_of_num(1)) / real_of_num(2)
       #|  (s : (Cart[Real, N]) -> Bool)
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 r : Real, convex(s) && IN(vec(0), relative_interior(s)) && real_of_num(1) < r \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, hull(affine, s)) && dist((x, y)) <= d \226\134\146 IN(y, IMAGE((x : Cart[Real, N]) => op_pct(r, x), relative_interior(s)))))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 r : Real, convex(s) && IN(vec(0), relative_interior(s)) && real_of_num(1) < r \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, hull(affine, s)) && distance((x, y)) <= d \226\134\146 IN(y, IMAGE((x : Cart[Real, N]) => op_pct(r, x), relative_interior(s)))))
       #|  (z : Cart[Real, N])
       #|  op_pct(inv((r : Real)), (x : Cart[Real, N]))
       #|  op_pct(inv((r : Real)), (y : Cart[Real, N]))
@@ -55965,9 +55965,9 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (d : Real)
       #|  inv((r : Real))
       #|  (s : (Cart[Real, N]) -> Bool)
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 r : Real, convex(s) && IN(vec(0), relative_interior(s)) && real_of_num(0) < r && r < real_of_num(1) \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, relative_frontier(s)) && dist((x, y)) <= d \226\134\146 !IN(y, IMAGE((x : Cart[Real, N]) => op_pct(r, x), s))))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 r : Real, convex(s) && IN(vec(0), relative_interior(s)) && real_of_num(0) < r && r < real_of_num(1) \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, relative_frontier(s)) && distance((x, y)) <= d \226\134\146 !IN(y, IMAGE((x : Cart[Real, N]) => op_pct(r, x), s))))
       #|  (a : Cart[Real, N]) + (b : Cart[Real, N]) == a + op_pct(real_of_num(1), b)
-      #|  dist(((x : Cart[Real, N]), (y : Cart[Real, N]))) <= min((d : Real), (e : Real))
+      #|  distance(((x : Cart[Real, N]), (y : Cart[Real, N]))) <= min((d : Real), (e : Real))
       #|  SUBSET(INTER(cball(((b : Cart[Real, N]), (e : Real))), hull(affine, (s : (Cart[Real, N]) -> Bool))), s)
       #|  SUBSET(INTER(cball(((a : Cart[Real, N]), (d : Real))), hull(affine, (s : (Cart[Real, N]) -> Bool))), s)
       #|  ((y : Real) <= (b : Real) + (y - (x : Real))) == (x <= b)
@@ -56141,26 +56141,26 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, bounded(s) && bounded(t) && convex(s) && convex(t) && bounded(u) && !(s == {}) && !(t == {}) && !(u == {}) \226\134\146 hausdist(({(x : Cart[Real, N]) + (e : Cart[Real, N]) | IN(x, s) && IN(e, u)}, {(y : Cart[Real, N]) + (e : Cart[Real, N]) | IN(y, t) && IN(e, u)})) == hausdist((s, t))
       #|  INTER((s : (_) -> Bool), (t : (_) -> Bool)) == {} \226\134\146 (\226\136\128 w : _, IN(w, t) \226\134\146 !IN(w, s))
       #|  (w : Cart[Real, N])
-      #|  dist(((x : Cart[Real, N]), x + (y : Cart[Real, N]))) == norm(y)
+      #|  distance(((x : Cart[Real, N]), x + (y : Cart[Real, N]))) == norm(y)
       #|  :real
       #|  :real
-      #|  norm((a : Cart[Real, N]) - (b : Cart[Real, N])) == dist((b, a))
+      #|  norm((a : Cart[Real, N]) - (b : Cart[Real, N])) == distance((b, a))
       #|  :real
       #|  :real
-      #|  norm((a : Cart[Real, N])) * dist(((x : Cart[Real, N]), x + op_pct((l : Real), -a)))
+      #|  norm((a : Cart[Real, N])) * distance(((x : Cart[Real, N]), x + op_pct((l : Real), -a)))
       #|  (d : Real) < (l : Real) * (a : Real) && (x : Real) <= (y : Real) \226\134\146 abs((v : Real) - (x + l * -a)) <= d \226\134\146 !(v >= y)
       #|  (v : Cart[Real, N]) - ((x : Cart[Real, N]) + op_pct((l : Real), -(a : Cart[Real, N])))
       #|  (a : Cart[Real, N])
       #|  (v : Cart[Real, N])
       #|  (\226\136\128 y : _, IN(y, (t : (_) -> Bool)) \226\134\146 (P : (_) -> Bool)(y)) \226\134\146 (\226\136\128 x : _, IN(x, (u : (_) -> Bool)) \226\134\146 !P(x)) \226\134\146 INTER(u, t) == {}
-      #|  INTER(ball(((x : Cart[Real, N]) + op_pct((l : Real), -(a : Cart[Real, N])), dist((x, x + op_pct(l, -a))))), closure((s : (Cart[Real, N]) -> Bool))) == {}
-      #|  dist(((y : Cart[Real, N]), (z : Cart[Real, N]))) < (d : Real) - dist(((x : Cart[Real, N]), z)) \226\134\146 dist((x, y)) < d
+      #|  INTER(ball(((x : Cart[Real, N]) + op_pct((l : Real), -(a : Cart[Real, N])), distance((x, x + op_pct(l, -a))))), closure((s : (Cart[Real, N]) -> Bool))) == {}
+      #|  distance(((y : Cart[Real, N]), (z : Cart[Real, N]))) < (d : Real) - distance(((x : Cart[Real, N]), z)) \226\134\146 distance((x, y)) < d
       #|  :real
       #|  :real
-      #|  (d : Real) - dist(((x : Cart[Real, N]), x + op_pct((l : Real), -(a : Cart[Real, N]))))
+      #|  (d : Real) - distance(((x : Cart[Real, N]), x + op_pct((l : Real), -(a : Cart[Real, N]))))
       #|  IN((x : Cart[Real, N]) + op_pct((l : Real), -(a : Cart[Real, N])), frontier(DIFF(UNIV, (t : (Cart[Real, N]) -> Bool))))
       #|  closure((t : (Cart[Real, N]) -> Bool))
-      #|  \226\136\131 w : Cart[Real, N], IN(w, (s : (Cart[Real, N]) -> Bool)) && dist(((x : Cart[Real, N]) + op_pct((l : Real), -(a : Cart[Real, N])), w)) < (d : Real)
+      #|  \226\136\131 w : Cart[Real, N], IN(w, (s : (Cart[Real, N]) -> Bool)) && distance(((x : Cart[Real, N]) + op_pct((l : Real), -(a : Cart[Real, N])), w)) < (d : Real)
       #|  (l : Real)
       #|  -(a : Cart[Real, N])
       #|  (x : Cart[Real, N])
@@ -56171,7 +56171,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (a : Cart[Real, N])
       #|  (x : Cart[Real, N])
       #|  (s : (Cart[Real, N]) -> Bool)
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 d : Real, \226\136\128 x : Cart[Real, N], convex(s) && bounded(s) && !(s == {}) && bounded(t) && !IN(x, s) && hausdist((s, t)) < d \226\134\146 (\226\136\131 y : Cart[Real, N], !IN(y, t) && dist((x, y)) < d)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 d : Real, \226\136\128 x : Cart[Real, N], convex(s) && bounded(s) && !(s == {}) && bounded(t) && !IN(x, s) && hausdist((s, t)) < d \226\134\146 (\226\136\131 y : Cart[Real, N], !IN(y, t) && distance((x, y)) < d)
       #|  (y : Cart[Real, N])
       #|  (x : Cart[Real, N])
       #|  (d : Real)
@@ -56208,7 +56208,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \226\136\128 f : (Num, Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, bounded(c) && (\226\136\128 n : Num, convex(f(n)) && !(f(n) == {}) && SUBSET(f(n), c)) \226\134\146 (\226\136\131 r : (Num) -> Num, \226\136\131 s : (Cart[Real, N]) -> Bool, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && compact(s) && convex(s) && !(s == {}) && op_minus_minus_gt((n : Num) => lift(hausdist((f(r(n)), s))), vec(0), sequentially))
       #|  real_of_num(0) < (x : Real) \226\134\146 abs(min(x, real_of_num(1))) <= x
       #|  (e : Real) / real_of_num(2) / norm((b : Cart[Real, N]) - (a : Cart[Real, N])) * norm(b - a)
-      #|  dist(((b : Cart[Real, N]) - (x : Cart[Real, N]), b)) == norm(x)
+      #|  distance(((b : Cart[Real, N]) - (x : Cart[Real, N]), b)) == norm(x)
       #|  :real
       #|  :real
       #|  real_of_num(0) < (x : Real) \226\134\146 !(min(x, real_of_num(1)) == real_of_num(0))
@@ -56236,7 +56236,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ((b : Cart[Real, _]) == b + op_pct((e : Real), b - (a : Cart[Real, _])) - op_pct((d : Real), b + op_pct(e, b - a) - a)) == (op_pct(e - d * (real_of_num(1) + e), b - a) == vec(0))
       #|  (b : Cart[Real, N]) == b + op_pct((e : Real) / norm(b - (a : Cart[Real, N])), b - a) - op_pct(e / norm(b - a) / (real_of_num(1) + e / norm(b - a)), b + op_pct(e / norm(b - a), b - a) - a)
       #|  real_of_num(0) < (e : Real) \226\134\146 abs(e) <= e
-      #|  dist(((b : Cart[Real, N]), b + (e : Cart[Real, N]))) == norm(e)
+      #|  distance(((b : Cart[Real, N]), b + (e : Cart[Real, N]))) == norm(e)
       #|  :real
       #|  :real
       #|  (b : Cart[Real, N]) + op_pct((e : Real) / norm(b - (a : Cart[Real, N])), b - a)
@@ -56255,7 +56255,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) \226\134\146 frontier(closure(s)) == frontier(s)
       #|  real_of_num(0) < (x : Real) \226\134\146 abs(min(x, real_of_num(1))) <= x
       #|  (e : Real) / real_of_num(2) / norm((b : Cart[Real, N]) - (a : Cart[Real, N])) * norm(b - a)
-      #|  dist(((b : Cart[Real, N]) - (x : Cart[Real, N]), b)) == norm(x)
+      #|  distance(((b : Cart[Real, N]) - (x : Cart[Real, N]), b)) == norm(x)
       #|  :real
       #|  :real
       #|  real_of_num(0) < (x : Real) \226\134\146 !(min(x, real_of_num(1)) == real_of_num(0))
@@ -56283,7 +56283,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ((b : Cart[Real, _]) == b + op_pct((e : Real), b - (a : Cart[Real, _])) - op_pct((d : Real), b + op_pct(e, b - a) - a)) == (op_pct(e - d * (real_of_num(1) + e), b - a) == vec(0))
       #|  (b : Cart[Real, N]) == b + op_pct((e : Real) / norm(b - (a : Cart[Real, N])), b - a) - op_pct(e / norm(b - a) / (real_of_num(1) + e / norm(b - a)), b + op_pct(e / norm(b - a), b - a) - a)
       #|  real_of_num(0) < (e : Real) \226\134\146 abs(e) <= e
-      #|  dist(((b : Cart[Real, N]), b + (e : Cart[Real, N]))) == norm(e)
+      #|  distance(((b : Cart[Real, N]), b + (e : Cart[Real, N]))) == norm(e)
       #|  :real
       #|  :real
       #|  (b : Cart[Real, N]) + op_pct((e : Real) / norm(b - (a : Cart[Real, N])), b - a)
@@ -56340,7 +56340,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \226\136\128 x : Cart[Real, _], IN(x, relative_interior((s : (Cart[Real, _]) -> Bool))) \226\134\146 IN(x, s)
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  real_of_num(0) < (a : Real) && real_of_num(0) < (x : Real) && x < (y : Real) \226\134\146 abs(min(a, x)) < y
-      #|  dist(((b : Cart[Real, N]) - (a : Cart[Real, N]), b)) == norm(a)
+      #|  distance(((b : Cart[Real, N]) - (a : Cart[Real, N]), b)) == norm(a)
       #|  :real
       #|  :real
       #|  (b : Cart[Real, N]) - op_pct(min(real_of_num(1) / real_of_num(2), (e : Real) / real_of_num(2) / norm(b - (a : Cart[Real, N]))), b - a)
@@ -56363,7 +56363,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (convex : ((Cart[Real, N]) -> Bool) -> Bool)(s) && !((interior : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s) == ({} : (Cart[Real, N]) -> Bool)) \226\134\146 (closure : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, {(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 rational((op_dollar : (Cart[Real, N], Num) -> Real)(x, i))})) == (closure : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s)
       #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(1) < real_of_num(1) + x && real_of_num(0) < real_of_num(1) + x && !(real_of_num(1) + x == real_of_num(0))
       #|  inv(real_of_num(1) + (e : Real) / norm((x : Cart[Real, N])))
-      #|  dist(((a : Cart[Real, N]), a + (x : Cart[Real, N]))) == norm(x)
+      #|  distance(((a : Cart[Real, N]), a + (x : Cart[Real, N]))) == norm(x)
       #|  :real
       #|  :real
       #|  op_pct(real_of_num(1) + (e : Real) / norm((x : Cart[Real, N])), x)
@@ -56439,7 +56439,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (y' : Cart[Real, Unit])
       #|  (x' : Cart[Real, Unit])
       #|  (real_of_num(0) < (x : Real) / real_of_num(4)) == (real_of_num(0) < x)
-      #|  dist(((x : Cart[Real, Unit]), (y : Cart[Real, Unit]))) / real_of_num(4)
+      #|  distance(((x : Cart[Real, Unit]), (y : Cart[Real, Unit]))) / real_of_num(4)
       #|  closure((s : (Cart[Real, Unit]) -> Bool)) == UNIV
       #|  (y : Cart[Real, Unit])
       #|  (x : Cart[Real, Unit])
@@ -56618,7 +56618,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \226\136\128 a : Real, \226\136\128 k : Num, closure({(x : Cart[Real, N]) | abs(op_dollar(x, k)) < a}) == (if a == real_of_num(0) { {} } else { {(x : Cart[Real, N]) | abs(op_dollar(x, k)) <= a} })
       #|  \226\136\128 a : Real, \226\136\128 k : Num, frontier({(x : Cart[Real, N]) | abs(op_dollar(x, k)) <= a}) == {(x : Cart[Real, N]) | abs(op_dollar(x, k)) == a}
       #|  \226\136\128 a : Real, \226\136\128 k : Num, frontier({(x : Cart[Real, N]) | abs(op_dollar(x, k)) < a}) == (if a == real_of_num(0) { {} } else { {(x : Cart[Real, N]) | abs(op_dollar(x, k)) == a} })
-      #|  dist(((x : Cart[Real, N]) + (a : Cart[Real, N]), x)) == norm(a)
+      #|  distance(((x : Cart[Real, N]) + (a : Cart[Real, N]), x)) == norm(a)
       #|  :real
       #|  :real
       #|  (x : Cart[Real, N]) + (a : Cart[Real, N]) + op_pct(-real_of_num(1), x) == a
@@ -56812,18 +56812,18 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  op_pct(inv(norm((x : Cart[Real, N]))), x)
       #|  norm((y : Cart[Real, N]))
       #|  norm((x : Cart[Real, N]))
-      #|  \226\136\128 r : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], convex(s) && real_of_num(0) < r && IN(vec(0), s) && SUBSET(INTER(ball((vec(0), r)), hull(affine, s)), relative_interior(s)) && IN(x, relative_frontier(s)) && IN(y, relative_frontier(s)) \226\134\146 dist((op_pct(inv(norm(x)), x), op_pct(inv(norm(y)), y))) <= inv(r) * dist((x, y))
+      #|  \226\136\128 r : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], convex(s) && real_of_num(0) < r && IN(vec(0), s) && SUBSET(INTER(ball((vec(0), r)), hull(affine, s)), relative_interior(s)) && IN(x, relative_frontier(s)) && IN(y, relative_frontier(s)) \226\134\146 distance((op_pct(inv(norm(x)), x), op_pct(inv(norm(y)), y))) <= inv(r) * distance((x, y))
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  inv((r : Real))
       #|  (r : Real)
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && IN(vec(0), relative_interior(s)) \226\134\146 (\226\136\131 B : Real, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, relative_frontier(s)) && IN(y, relative_frontier(s)) \226\134\146 dist((op_pct(inv(norm(x)), x), op_pct(inv(norm(y)), y))) <= B * dist((x, y)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && IN(vec(0), relative_interior(s)) \226\134\146 (\226\136\131 B : Real, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, relative_frontier(s)) && IN(y, relative_frontier(s)) \226\134\146 distance((op_pct(inv(norm(x)), x), op_pct(inv(norm(y)), y))) <= B * distance((x, y)))
       #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], orthogonal(x, y) \226\134\146 norm(x) <= norm(x + y)
       #|  ((a : Real) * real_of_num(2) <= real_of_num(2) * (x : Real) * (y : Real)) == (a <= x * y)
       #|  dot((x : Cart[Real, N]) - (y : Cart[Real, N]), x - y) == dot(x, x) + (dot(y, y) + real_of_num(2) * -dot(x, y))
-      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], real_of_num(0) <= a && real_of_num(0) <= b && dot(x, y) <= real_of_num(0) \226\134\146 dist((op_pct(a, x), op_pct(b, y))) >= min(a, b) * dist((x, y))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], real_of_num(0) <= a && real_of_num(0) <= b && dot(x, y) <= real_of_num(0) \226\134\146 distance((op_pct(a, x), op_pct(b, y))) >= min(a, b) * distance((x, y))
       #|  (x : Cart[Real, N]) - (op_pct(real_of_num(1) - (u : Real), x) + op_pct(u, (y : Cart[Real, N]))) == op_pct(u, x - y) && y - (op_pct(real_of_num(1) - u, x) + op_pct(u, y)) == op_pct(u - real_of_num(1), x - y)
       #|  op_pct((a : Real), (x : Cart[Real, N])) - op_pct((b : Real), (y : Cart[Real, N])) == op_pct(a, x - (w : Cart[Real, N])) - op_pct(b, y - w) + op_pct(a - b, w)
-      #|  dist(((x : Cart[Real, N]) - (w : Cart[Real, N]), (y : Cart[Real, N]) - w)) == dist((x, y))
+      #|  distance(((x : Cart[Real, N]) - (w : Cart[Real, N]), (y : Cart[Real, N]) - w)) == distance((x, y))
       #|  :real
       #|  :real
       #|  (((u : Real) - real_of_num(1)) * (x : Real) <= real_of_num(0)) == (real_of_num(0) <= (real_of_num(1) - u) * x)
@@ -56832,11 +56832,11 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (x : Cart[Real, N]) - (w : Cart[Real, N])
       #|  (b : Real)
       #|  (a : Real)
-      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 w : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], real_of_num(0) <= a && real_of_num(0) <= b && between(w, (x, y)) && orthogonal(w, x - y) \226\134\146 dist((op_pct(a, x), op_pct(b, y))) >= min(a, b) * dist((x, y))
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 w : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], real_of_num(0) <= a && real_of_num(0) <= b && between(w, (x, y)) && orthogonal(w, x - y) \226\134\146 distance((op_pct(a, x), op_pct(b, y))) >= min(a, b) * distance((x, y))
       #|  ((x : Real) == real_of_num(0)) == (pow(x, 2) == real_of_num(0))
       #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) && abs(x) == abs(y) \226\134\146 x == y
       #|  (x : Cart[Real, Tybit0[Unit]])
-      #|  collinear({(z : Cart[Real, Tybit0[Unit]]), (x : Cart[Real, Tybit0[Unit]]), (x' : Cart[Real, Tybit0[Unit]])}) && collinear({(w : Cart[Real, Tybit0[Unit]]), x, (y : Cart[Real, Tybit0[Unit]])}) && orthogonal(z - w, x - y) && orthogonal(y - x', z - x') && !(x' == z) && !(y == w) \226\134\146 dist((z, w)) * dist((x, y)) == dist((y, x')) * dist((z, x))
+      #|  collinear({(z : Cart[Real, Tybit0[Unit]]), (x : Cart[Real, Tybit0[Unit]]), (x' : Cart[Real, Tybit0[Unit]])}) && collinear({(w : Cart[Real, Tybit0[Unit]]), x, (y : Cart[Real, Tybit0[Unit]])}) && orthogonal(z - w, x - y) && orthogonal(y - x', z - x') && !(x' == z) && !(y == w) \226\134\146 distance((z, w)) * distance((x, y)) == distance((y, x')) * distance((z, x))
       #|  {} == IMAGE((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, N]), {})
       #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, N])
       #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, N])(x) == f(y) \226\134\146 x == y
@@ -56848,7 +56848,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (z : Cart[Real, N])
       #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) <= (dimindex : ((Tybit0[Unit]) -> Bool) -> Num)((UNIV : (Tybit0[Unit]) -> Bool))
       #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) <= (dimindex : ((Tybit0[Unit]) -> Bool) -> Num)((UNIV : (Tybit0[Unit]) -> Bool))
-      #|  collinear({(z : Cart[Real, N]), (x : Cart[Real, N]), (x' : Cart[Real, N])}) && collinear({(w : Cart[Real, N]), x, (y : Cart[Real, N])}) && orthogonal(z - w, x - y) && orthogonal(y - x', z - x') && !(x' == z) && !(y == w) \226\134\146 dist((z, w)) * dist((x, y)) == dist((y, x')) * dist((z, x))
+      #|  collinear({(z : Cart[Real, N]), (x : Cart[Real, N]), (x' : Cart[Real, N])}) && collinear({(w : Cart[Real, N]), x, (y : Cart[Real, N])}) && orthogonal(z - w, x - y) && orthogonal(y - x', z - x') && !(x' == z) && !(y == w) \226\134\146 distance((z, w)) * distance((x, y)) == distance((y, x')) * distance((z, x))
       #|  inv((R : Real))
       #|  (y : Cart[Real, N])
       #|  (x : Cart[Real, N])
@@ -56856,24 +56856,24 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  inv(norm((y : Cart[Real, N])))
       #|  inv(norm((x : Cart[Real, N])))
       #|  real_of_num(0) < dot((x : Cart[Real, _]), (y : Cart[Real, _])) \226\134\146 dot(x, y) == real_of_num(0) \226\134\146 false
-      #|  norm((w : Cart[Real, N])) == dist((vec(0), w))
+      #|  norm((w : Cart[Real, N])) == distance((vec(0), w))
       #|  :real
       #|  :real
       #|  SUBSET((s : (Cart[Real, N]) -> Bool), cball((vec(0), (R : Real))))
-      #|  dist(((y : Cart[Real, N]), (x' : Cart[Real, N]))) * norm((x : Cart[Real, N]))
+      #|  distance(((y : Cart[Real, N]), (x' : Cart[Real, N]))) * norm((x : Cart[Real, N]))
       #|  (y : Cart[Real, N])
       #|  (w : Cart[Real, N])
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  IN((x : Cart[Real, N]), relative_frontier((s : (Cart[Real, N]) -> Bool)))
       #|  IN((w : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(w, t)
       #|  SUBSET(INTER((b : (_) -> Bool), (a : (_) -> Bool)), (r : (_) -> Bool)) \226\134\146 IN((w : _), a) && !IN(w, r) \226\134\146 !IN(w, b)
-      #|  norm((w : Cart[Real, N])) * dist(((x : Cart[Real, N]), (y : Cart[Real, N])))
+      #|  norm((w : Cart[Real, N])) * distance(((x : Cart[Real, N]), (y : Cart[Real, N])))
       #|  (r : Real) / (R : Real) * (x : Real) == r * x / R
       #|  real_of_num(0) < (R : Real)
       #|  (R : Real) == real_of_num(0)
       #|  ((u : Real) + (v : Real) == real_of_num(1)) == (u == real_of_num(1) - v)
       #|  norm((y : Cart[Real, N])) * inv(norm((x : Cart[Real, N])))
-      #|  dist(((y : Cart[Real, N]), (x' : Cart[Real, N])))
+      #|  distance(((y : Cart[Real, N]), (x' : Cart[Real, N])))
       #|  (y : Cart[Real, N])
       #|  hull(affine, {vec(0), (x : Cart[Real, N])})
       #|  (v : Cart[Real, N])
@@ -56884,8 +56884,8 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  SUBSET((s : (Cart[Real, N]) -> Bool), cball((vec(0), (R : Real))))
       #|  (r : Real) * pow(inv((R : Real)), 2) * (d : Real) == inv(R) * (r / R * d)
       #|  !((x : Real) == real_of_num(0)) && !((y : Real) == real_of_num(0)) \226\134\146 inv(y) * (y / x) == inv(x)
-      #|  abs(inv(norm((y : Cart[Real, N])))) * dist((op_pct(norm(y) / norm((x : Cart[Real, N])), x), y))
-      #|  (r : Real) / pow((R : Real), 2) * dist(((x : Cart[Real, N]), (y : Cart[Real, N])))
+      #|  abs(inv(norm((y : Cart[Real, N])))) * distance((op_pct(norm(y) / norm((x : Cart[Real, N])), x), y))
+      #|  (r : Real) / pow((R : Real), 2) * distance(((x : Cart[Real, N]), (y : Cart[Real, N])))
       #|  (w : Cart[Real, N]) == (y : Cart[Real, N])
       #|  (w : Cart[Real, N]) == (x : Cart[Real, N])
       #|  orthogonal((x : Cart[Real, N]) - (y : Cart[Real, N]), (w : Cart[Real, N])) == orthogonal(y - x, w)
@@ -56918,12 +56918,12 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  SUBSET(INTER((s : (_) -> Bool), (t : (_) -> Bool)), (u : (_) -> Bool)) \226\134\146 IN((z : _), s) && IN(z, t) && !IN((x : _), u) \226\134\146 !(x == z)
       #|  !((x : Cart[Real, N]) == vec(0)) && !((y : Cart[Real, N]) == vec(0))
       #|  (R : Real) < real_of_num(0)
-      #|  \226\136\128 r : Real, \226\136\128 R : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], convex(s) && real_of_num(0) < r && IN(vec(0), s) && SUBSET(INTER(ball((vec(0), r)), hull(affine, s)), relative_interior(s)) && SUBSET(s, cball((vec(0), R))) && IN(x, relative_frontier(s)) && IN(y, relative_frontier(s)) \226\134\146 dist((op_pct(inv(norm(x)), x), op_pct(inv(norm(y)), y))) >= r / pow(R, 2) * dist((x, y))
+      #|  \226\136\128 r : Real, \226\136\128 R : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], convex(s) && real_of_num(0) < r && IN(vec(0), s) && SUBSET(INTER(ball((vec(0), r)), hull(affine, s)), relative_interior(s)) && SUBSET(s, cball((vec(0), R))) && IN(x, relative_frontier(s)) && IN(y, relative_frontier(s)) \226\134\146 distance((op_pct(inv(norm(x)), x), op_pct(inv(norm(y)), y))) >= r / pow(R, 2) * distance((x, y))
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  (r : Real) / pow((R : Real), 2)
       #|  (r : Real)
       #|  (R : Real)
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && bounded(s) && IN(vec(0), relative_interior(s)) \226\134\146 (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, relative_frontier(s)) && IN(y, relative_frontier(s)) \226\134\146 dist((op_pct(inv(norm(x)), x), op_pct(inv(norm(y)), y))) >= B * dist((x, y))))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && bounded(s) && IN(vec(0), relative_interior(s)) \226\134\146 (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, relative_frontier(s)) && IN(y, relative_frontier(s)) \226\134\146 distance((op_pct(inv(norm(x)), x), op_pct(inv(norm(y)), y))) >= B * distance((x, y))))
       #|  IMAGE((x : Cart[Real, N]) => op_pct(inv(norm(x)), x), relative_frontier((s : (Cart[Real, N]) -> Bool))) == INTER(sphere((vec(0), real_of_num(1))), hull(affine, s))
       #|  inv((b : Real))
       #|  (g : (Cart[Real, N]) -> Cart[Real, N])
@@ -57204,7 +57204,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (y : Cart[Real, N]) + op_pct(-((e : Real) / norm((a : Cart[Real, N]))), a)
       #|  \226\136\128 y : Cart[Real, N], IN(y, (s : (Cart[Real, N]) -> Bool)) \226\134\146 dot((a : Cart[Real, N]), (x : Cart[Real, N])) <= dot(a, y)
       #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
-      #|  dist(((y : Cart[Real, N]), y + (e : Cart[Real, N]))) == norm(e)
+      #|  distance(((y : Cart[Real, N]), y + (e : Cart[Real, N]))) == norm(e)
       #|  :real
       #|  :real
       #|  (y : Cart[Real, N]) + op_pct(-((e : Real) / norm((a : Cart[Real, N]))), (x : Cart[Real, N]) + a - x)
@@ -57315,7 +57315,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 d : Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, convex(s) && SUBSET({a, b, c}, relative_frontier(s)) && !(a == b) && !(a == c) && !(b == c) && dot(d, a) == e && dot(d, b) == e && dot(d, c) == e \226\134\146 SUBSET(s, {(x : Cart[Real, Tybit0[Unit]]) | dot(d, x) <= e}) || SUBSET(s, {(x : Cart[Real, Tybit0[Unit]]) | dot(d, x) >= e})
       #|  (x : Cart[Real, N])
       #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) < real_of_num(1) + x
-      #|  dist(((z : Cart[Real, N]), (y : Cart[Real, N]))) < (k : Real) \226\134\146 k <= (d : Real) \226\134\146 norm(z - y) < d
+      #|  distance(((z : Cart[Real, N]), (y : Cart[Real, N]))) < (k : Real) \226\134\146 k <= (d : Real) \226\134\146 norm(z - y) < d
       #|  :real
       #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) < real_of_num(1) + x
       #|  real_of_num(0) <= (x : Real) && x * (real_of_num(1) + (e : Real)) < (d : Real) \226\134\146 x * e < d
@@ -57370,7 +57370,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  !affine_dependent((s : (Cart[Real, N]) -> Bool))
       #|  (v : (Cart[Real, N]) -> Real)
       #|  (u : (Cart[Real, N]) -> Real)
-      #|  dist(((a : Cart[Real, N]), a - (b : Cart[Real, N]))) == norm(b)
+      #|  distance(((a : Cart[Real, N]), a - (b : Cart[Real, N]))) == norm(b)
       #|  :real
       #|  :real
       #|  (y : Cart[Real, N]) - op_pct((d : Real), (a : Cart[Real, N]) - (b : Cart[Real, N]))
@@ -57490,14 +57490,14 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (((a : Bool) && (b : Bool)) && (c : Bool)) == !(a && b \226\134\146 !c)
       #|  (x : Real) < (y : Real) \226\134\146 y <= real_of_num(1) \226\134\146 !(x == real_of_num(1))
       #|  real_of_num(0) < (e : Real) \226\134\146 abs(e / real_of_num(2)) * real_of_num(1) < e
-      #|  dist(((x : Cart[Real, _]), x + (e : Cart[Real, _]))) == norm(e)
+      #|  distance(((x : Cart[Real, _]), x + (e : Cart[Real, _]))) == norm(e)
       #|  :real
       #|  :real
       #|  (x : Cart[Real, N]) + op_pct((e : Real) / real_of_num(2), basis(1))
       #|  real_of_num(0) < (e : Real)
       #|  (k : Num)
       #|  real_of_num(0) < (e : Real) \226\134\146 abs(e / real_of_num(2)) * real_of_num(1) < e
-      #|  dist(((x : Cart[Real, _]), x - (e : Cart[Real, _]))) == norm(e)
+      #|  distance(((x : Cart[Real, _]), x - (e : Cart[Real, _]))) == norm(e)
       #|  :real
       #|  :real
       #|  (x : Cart[Real, N]) - op_pct((e : Real) / real_of_num(2), basis((k : Num)))
@@ -57529,7 +57529,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (x : Real) - real_of_num(2) * real_of_num(0) + (y : Real) == x + y
       #|  dot((x : Cart[Real, N]) - (y : Cart[Real, N]), x - y) == dot(x, x) - real_of_num(2) * dot(x, y) + dot(y, y)
       #|  sum((s : (Cart[Real, N]) -> Bool), (y : Cart[Real, N]) => if y == (x : Cart[Real, N]) { real_of_num(0) } else { pow((r : Real), 2) })
-      #|  \226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 sum(s, (y : Cart[Real, N]) => pow(dist((x, y)), 2)) == (real_of_num((n : Num)) - real_of_num(1)) * pow((r : Real), 2)
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 sum(s, (y : Cart[Real, N]) => pow(distance((x, y)), 2)) == (real_of_num((n : Num)) - real_of_num(1)) * pow((r : Real), 2)
       #|  (n : Num) == 0
       #|  ((a : Cart[Real, N]) + (x : Cart[Real, N]) == a + (y : Cart[Real, N])) == (x == y)
       #|  (s : (Cart[Real, N]) -> Bool) == {}
@@ -57537,15 +57537,15 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (z : Cart[Real, N])
       #|  (z : Cart[Real, N]) == barycentre((s : (Cart[Real, N]) -> Bool))
       #|  \226\136\131 a : Cart[Real, N], (s : (Cart[Real, N]) -> Bool) == {a}
-      #|  !(real_of_num(0) <= (r : Real)) \226\134\146 !(dist(((x : Cart[Real, _]), (y : Cart[Real, _]))) == r)
+      #|  !(real_of_num(0) <= (r : Real)) \226\134\146 !(distance(((x : Cart[Real, _]), (y : Cart[Real, _]))) == r)
       #|  :real
       #|  real_of_num(0) <= (r : Real)
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 n : Num, \226\136\128 r : Real, HAS_SIZE(s, n) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) && !(x == y) \226\134\146 dist((x, y)) == r) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dist((barycentre(s), x)) == sqrt((real_of_num(n) - real_of_num(1)) / (real_of_num(2) * real_of_num(n))) * r)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 n : Num, \226\136\128 r : Real, HAS_SIZE(s, n) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, s) && IN(y, s) && !(x == y) \226\134\146 distance((x, y)) == r) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 distance((barycentre(s), x)) == sqrt((real_of_num(n) - real_of_num(1)) / (real_of_num(2) * real_of_num(n))) * r)
       #|  !((n : Num) == 0)
       #|  -(c : Cart[Real, N])
       #|  (b : Cart[Real, N])
       #|  (c : Cart[Real, N])
-      #|  (dist(((b : Cart[Real, N]), (y : Cart[Real, N]))) == (r : Real) && dist((y, b)) == r) == (dist((b, y)) == r)
+      #|  (distance(((b : Cart[Real, N]), (y : Cart[Real, N]))) == (r : Real) && distance((y, b)) == r) == (distance((b, y)) == r)
       #|  :real
       #|  :real
       #|  :real
@@ -57585,9 +57585,9 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  int_of_num((n : Num)) + int_of_num(1) <= aff_dim((s : (Cart[Real, N]) -> Bool)) + int_of_num(1)
       #|  (n : Num) == 0
       #|  (k : (Cart[Real, N]) -> Bool)
-      #|  \226\136\128 r : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 n : Num, int_of_num(n) <= aff_dim(s) + int_of_num(1) && real_of_num(0) < r \226\134\146 (\226\136\131 k : (Cart[Real, N]) -> Bool, HAS_SIZE(k, n) && !affine_dependent(k) && SUBSET(k, hull(affine, s)) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, k) && IN(y, k) && !(x == y) \226\134\146 dist((x, y)) == r))
+      #|  \226\136\128 r : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 n : Num, int_of_num(n) <= aff_dim(s) + int_of_num(1) && real_of_num(0) < r \226\134\146 (\226\136\131 k : (Cart[Real, N]) -> Bool, HAS_SIZE(k, n) && !affine_dependent(k) && SUBSET(k, hull(affine, s)) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, k) && IN(y, k) && !(x == y) \226\134\146 distance((x, y)) == r))
       #|  (x : Cart[Real, N]) - (y : Cart[Real, N]) == op_pct(real_of_num(1), x - y)
-      #|  dist(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == dist((x, y))
+      #|  distance(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == distance((x, y))
       #|  :real
       #|  :real
       #|  ((a : Cart[Real, N]) + (x : Cart[Real, N]) == a + (y : Cart[Real, N])) == (x == y)
@@ -57600,16 +57600,16 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (n : Num)
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  (r : Real)
-      #|  \226\136\128 r : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 n : Num, int_of_num(n) <= aff_dim(s) + int_of_num(1) && real_of_num(0) < r && IN(a, hull(affine, s)) && !(n == 0) \226\134\146 (\226\136\131 k : (Cart[Real, N]) -> Bool, HAS_SIZE(k, n) && !affine_dependent(k) && SUBSET(k, hull(affine, s)) && barycentre(k) == a && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, k) && IN(y, k) && !(x == y) \226\134\146 dist((x, y)) == r) && (\226\136\128 x : Cart[Real, N], IN(x, k) \226\134\146 dist((a, x)) == sqrt((real_of_num(n) - real_of_num(1)) / (real_of_num(2) * real_of_num(n))) * r))
+      #|  \226\136\128 r : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 n : Num, int_of_num(n) <= aff_dim(s) + int_of_num(1) && real_of_num(0) < r && IN(a, hull(affine, s)) && !(n == 0) \226\134\146 (\226\136\131 k : (Cart[Real, N]) -> Bool, HAS_SIZE(k, n) && !affine_dependent(k) && SUBSET(k, hull(affine, s)) && barycentre(k) == a && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, k) && IN(y, k) && !(x == y) \226\134\146 distance((x, y)) == r) && (\226\136\128 x : Cart[Real, N], IN(x, k) \226\134\146 distance((a, x)) == sqrt((real_of_num(n) - real_of_num(1)) / (real_of_num(2) * real_of_num(n))) * r))
       #|  (x : Real) == real_of_num(1) \226\134\146 sqrt(x) == real_of_num(1)
       #|  (a : Real) * (b : Real) == real_of_num(1) \226\134\146 a * (b * (y : Real)) == y
       #|  (n : Num)
       #|  (a : Cart[Real, N])
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  sqrt(real_of_num(2) * real_of_num((n : Num)) / (real_of_num(n) - real_of_num(1))) * (r : Real)
-      #|  \226\136\128 r : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 n : Num, int_of_num(n) <= aff_dim(s) + int_of_num(1) && real_of_num(0) < r && IN(a, hull(affine, s)) && 1 < n \226\134\146 (\226\136\131 k : (Cart[Real, N]) -> Bool, HAS_SIZE(k, n) && !affine_dependent(k) && SUBSET(k, hull(affine, s)) && barycentre(k) == a && (\226\136\128 x : Cart[Real, N], IN(x, k) \226\134\146 dist((a, x)) == r) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, k) && IN(y, k) && !(x == y) \226\134\146 dist((x, y)) == sqrt(real_of_num(2) * real_of_num(n) / (real_of_num(n) - real_of_num(1))) * r))
+      #|  \226\136\128 r : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 n : Num, int_of_num(n) <= aff_dim(s) + int_of_num(1) && real_of_num(0) < r && IN(a, hull(affine, s)) && 1 < n \226\134\146 (\226\136\131 k : (Cart[Real, N]) -> Bool, HAS_SIZE(k, n) && !affine_dependent(k) && SUBSET(k, hull(affine, s)) && barycentre(k) == a && (\226\136\128 x : Cart[Real, N], IN(x, k) \226\134\146 distance((a, x)) == r) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, k) && IN(y, k) && !(x == y) \226\134\146 distance((x, y)) == sqrt(real_of_num(2) * real_of_num(n) / (real_of_num(n) - real_of_num(1))) * r))
       #|  op_pct(real_of_num(2), (a : Cart[Real, N])) - (x : Cart[Real, N]) == op_pct(real_of_num(1), a - x) + a
-      #|  dist(((a : Cart[Real, N]), op_pct(real_of_num(2), a) - (x : Cart[Real, N]))) == dist((a, x))
+      #|  distance(((a : Cart[Real, N]), op_pct(real_of_num(2), a) - (x : Cart[Real, N]))) == distance((a, x))
       #|  :real
       #|  :real
       #|  IN(op_pct(real_of_num(2), (a : Cart[Real, N])) - (x : Cart[Real, N]), cball((a, (d : Real)))) && IN(op_pct(real_of_num(2), a) - x, hull(affine, (s : (Cart[Real, N]) -> Bool)))
@@ -57656,7 +57656,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  real_of_num(4) * ((B : Real) / (e : Real)) * (e / real_of_num(2))
       #|  (a : Real) * (b : Real) / (c : Real) == a / c * b
       #|  (z : Cart[Real, N]) == (x : Cart[Real, N])
-      #|  dist(((a : Cart[Real, N]), (z : Cart[Real, N]))) == (e : Real) \226\134\146 dist((a, (x : Cart[Real, N]))) <= e / real_of_num(2) \226\134\146 e / real_of_num(2) <= norm(z - x)
+      #|  distance(((a : Cart[Real, N]), (z : Cart[Real, N]))) == (e : Real) \226\134\146 distance((a, (x : Cart[Real, N]))) <= e / real_of_num(2) \226\134\146 e / real_of_num(2) <= norm(z - x)
       #|  :real
       #|  :real
       #|  :real
@@ -57677,7 +57677,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (y : Cart[Real, N]) - (x : Cart[Real, N])
       #|  (x : Cart[Real, N])
       #|  cball(((a : Cart[Real, N]), (e : Real)))
-      #|  \226\136\131 z : Cart[Real, N], dist(((a : Cart[Real, N]), z)) == (e : Real) && IN(z, hull(affine, (s : (Cart[Real, N]) -> Bool))) && IN((y : Cart[Real, N]), segment([((x : Cart[Real, N]), z)]))
+      #|  \226\136\131 z : Cart[Real, N], distance(((a : Cart[Real, N]), z)) == (e : Real) && IN(z, hull(affine, (s : (Cart[Real, N]) -> Bool))) && IN((y : Cart[Real, N]), segment([((x : Cart[Real, N]), z)]))
       #|  (y : Cart[Real, N]) == (x : Cart[Real, N])
       #|  (x : Real) <= (y : Real) \226\134\146 abs(x - y) == y - x
       #|  (x : Cart[Real, N]) => (y : Cart[Real, N]) => (f : (Cart[Real, N]) -> Real)(x) <= f(y)
@@ -57694,7 +57694,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  (f : (Cart[Real, N]) -> Real)
       #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], convex_on(f, s) && IN(a, relative_interior(s)) \226\134\146 (\226\136\131 e : Real, \226\136\131 B : Real, real_of_num(0) < e && real_of_num(0) < B && SUBSET(INTER(cball((a, e)), hull(affine, s)), s) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, INTER(cball((a, e)), hull(affine, s))) && IN(y, INTER(cball((a, e)), hull(affine, s))) \226\134\146 abs(f(x) - f(y)) <= B * norm(x - y)))
-      #|  norm((a : Cart[Real, N]) - (b : Cart[Real, N])) == dist((b, a))
+      #|  norm((a : Cart[Real, N]) - (b : Cart[Real, N])) == distance((b, a))
       #|  :real
       #|  :real
       #|  (d : Real) < (e : Real) \226\134\146 abs((a : Real) - (b : Real)) <= d \226\134\146 abs(b - a) < e
